@@ -2,7 +2,7 @@ pipeline {
     agent {
         kubernetes {
             label 'builder'
-            cloud 'openshift'
+            cloud 'kubernetes'
             defaultContainer 'jnlp'
             yaml """
 apiVersion: v1
