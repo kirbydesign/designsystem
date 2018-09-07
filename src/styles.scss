@@ -2,3 +2,17 @@
 
 // Import common styles
 @import 'app-common';
+
+@font-face {
+    font-family: Effra;
+    src:
+    // TODO JEO: Add woff2, woff fallbacks:
+    //   url(/assets/fonts/Effra.woff2) format('woff2'),
+    //   url(/assets/fonts/Effra.woff) format('woff'),
+    url(/assets/fonts/Effra.ttf) format('truetype');
+}
+  
+  :root{
+    --ion-font-family:"Effra";
+    font-family: var(--ion-font-family);
+  }
