@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { CardComponent } from './card/card.component';
+import { ButtonComponent } from './button/button.component';
 
 
 @NgModule({
@@ -12,6 +13,7 @@ import { CardComponent } from './card/card.component';
     AppComponent,
     HomeComponent,
     CardComponent,
+    ButtonComponent,
   ],
   imports: [
     BrowserModule,

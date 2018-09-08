@@ -14,6 +14,23 @@ spec:
       command:
         - cat
       tty: true
+    - name: kaniko
+      image: gcr.io/kaniko-project/executor:latest
+      command:
+        - /busybox/cat
+      tty: true
+      volumeMounts:
+        - name: jenkins-docker-cfg
+          mountPath: /root
+    volumes:
+        - name: jenkins-docker-cfg
+            projected:
+            sources:
+                - secret:
+                    name: regcred
+                    items:
+                        - key: .dockerconfigjson
+                          path: .docker/config.json
 """
         }
     }
@@ -44,6 +61,15 @@ spec:
             steps {
                 container('node') {
                     sh './node_modules/.bin/ng build --base-href ./ --prod --aot --progress false'
+                    stash(name: 'distribution', includes: 'dist/**')
+                }
+            }
+        }
+        stage('Container Image') {
+            steps {
+                container('kaniko') {
+                    unstash(name: 'distribution')
+                    sh '/kaniko/executor -f `pwd`/Dockerfile -c `pwd` --insecure-skip-tls-verify --destination=drbreg.azurecr.io/kirby/design'
                 }
             }
         }
