@@ -8,29 +8,29 @@ pipeline {
 apiVersion: v1
 kind: Pod
 spec:
-  containers:
+    containers:
     - name: node
       image: node:8
       command:
-        - cat
+      - cat
       tty: true
     - name: kaniko
-      image: gcr.io/kaniko-project/executor:latest
+      image: gcr.io/kaniko-project/executor:debug
       command:
-        - /busybox/cat
+      - /busybox/cat
       tty: true
       volumeMounts:
-        - name: jenkins-docker-cfg
-          mountPath: /root
+      - name: jenkins-docker-cfg
+        mountPath: /root
     volumes:
-        - name: jenkins-docker-cfg
-            projected:
-            sources:
-                - secret:
-                    name: regcred
-                    items:
-                        - key: .dockerconfigjson
-                          path: .docker/config.json
+    - name: jenkins-docker-cfg
+      projected:
+        sources:
+        - secret:
+          name: regcred
+          items:
+          - key: .dockerconfigjson
+            path: .docker/config.json
 """
         }
     }
