@@ -15,14 +15,13 @@ spec:
         - cat
       tty: true
     - name: kaniko
-        image: gcr.io/kaniko-project/executor:debug
-        imagePullPolicy: Always
-        command:
+      image: gcr.io/kaniko-project/executor:latest
+      command:
         - /busybox/cat
-        tty: true
-        volumeMounts:
+      tty: true
+      volumeMounts:
         - name: jenkins-docker-cfg
-            mountPath: /root
+          mountPath: /root
     volumes:
         - name: jenkins-docker-cfg
             projected:
