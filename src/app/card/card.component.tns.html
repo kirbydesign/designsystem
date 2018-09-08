@@ -1,1 +1,6 @@
-<Button text="card works!" class="btn btn-primary"></Button>
+<FlexboxLayout orientation="vertical" >
+    <label class="h2" [text]="title" ></label>
+    <label class="h4" [text]="subtitle" ></label>
+    <ng-content></ng-content>
+    <StackLayout class="footer" ></StackLayout>
+</FlexboxLayout>
