@@ -22,7 +22,7 @@ matrix:
     before_install:
     - npm install
     script:
-    - echo n | tns build ios --device --bundle
+    - echo n | tns build ios --for-device --bundle
 
 android:
   licenses:
