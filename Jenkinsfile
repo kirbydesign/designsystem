@@ -64,14 +64,14 @@ spec:
                 container('node') {
                     //sh './node_modules/.bin/ng build --base-href ./ --prod --aot --progress false'
                     sh './node_modules/.bin/ng build --base-href ./ --progress false'
-                    stash(name: 'distribution', includes: 'dist/**')
+                    //stash(name: 'distribution', includes: 'dist/**')
                 }
             }
         }
         stage('Container Image') {
             steps {
                 container('kaniko') {
-                    unstash(name: 'distribution')
+                    //unstash(name: 'distribution')
                     sh '/kaniko/executor -f `pwd`/Dockerfile -c `pwd` --insecure-skip-tls-verify --destination=drbreg.azurecr.io/kirby/design'
                 }
             }
