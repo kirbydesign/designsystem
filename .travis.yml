@@ -21,16 +21,9 @@ matrix:
     jdk: oraclejdk8
     before_install:
     - npm install
+    - cd ..
     script:
     - npm build ios
-  - language: android
-    node_js: "8"
-    os: linux
-    env:
-    - Build="Android"
-    jdk: oraclejdk8
-    script:
-    - npm build android
 
 android:
   licenses:
@@ -46,9 +39,9 @@ cache:
   - $HOME/.gradle/wrapper/
 
 install:
-- nvm install $NODE_VERSION
-- npm install -g typings
-- wget -O ./nativescript.tgz "https://s3.amazonaws.com/nativescript-ci/build_result/nativescript.tgz"
-- npm install -g nativescript.tgz --ignore-scripts
-- tns usage-reporting disable
-- tns error-reporting disable
+#- nvm install $NODE_VERSION
+#- npm install -g typings
+#- wget -O ./nativescript.tgz "https://s3.amazonaws.com/nativescript-ci/build_result/nativescript.tgz"
+#- npm install -g nativescript.tgz --ignore-scripts
+#- tns usage-reporting disable
+#- tns error-reporting disable
