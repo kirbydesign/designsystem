@@ -1,0 +1,8 @@
+
+<div class="progress">
+  <svg width="120" height="120" viewBox="0 0 120 120" class="progress__circle">
+    <circle [attr.r]="radius" cx="60" cy="60" stroke-width="12" class="progress__meter" />
+    <circle [style.strokeDasharray]="circumference" [style.strokeDashoffset]="dashoffset" [attr.r]="radius" cx="60" cy="60" stroke-width="12" class="progress__value" />
+  </svg>
+  <div class="progress__text">{{value}}%</div>
+</div>

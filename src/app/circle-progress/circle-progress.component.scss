@@ -1,0 +1,29 @@
+  .progress__circle {
+    transform: rotate(-90deg);
+  }
+  
+  .progress__meter,
+  .progress__value {
+    fill: none;
+  }
+  
+  .progress__meter {
+    stroke: #ccc;
+  }
+  
+  .progress__value {
+    stroke: lightskyblue;
+    transition: all 100ms;
+  }
+
+  .progress__text {
+    position: absolute;
+    top: 48px;
+    left: 45px;
+    stroke: lightskyblue; 
+    font-size: 20px;   
+  }
+
+  .progress {
+      position: relative;
+  }

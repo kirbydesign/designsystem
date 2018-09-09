@@ -7,6 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { CardComponent } from './card/card.component';
 import { ButtonComponent } from './button/button.component';
 import { BulletListComponent } from './bullet-list/bullet-list.component';
+import { CircleProgressComponent } from './circle-progress/circle-progress.component';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { BulletListComponent } from './bullet-list/bullet-list.component';
     CardComponent,
     ButtonComponent,
     BulletListComponent,
+    CircleProgressComponent,
   ],
   imports: [
     BrowserModule,
