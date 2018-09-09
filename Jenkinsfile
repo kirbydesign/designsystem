@@ -72,7 +72,11 @@ spec:
             steps {
                 container('kaniko') {
                     //unstash(name: 'distribution')
-                    sh '/kaniko/executor -f `pwd`/Dockerfile -c `pwd` --insecure-skip-tls-verify --destination=drbreg.azurecr.io/kirby/design'
+                    withEnv(['PATH+EXTRA=/busybox']) {
+                        sh '''#!/busybox/sh
+/kaniko/executor -f `pwd`/Dockerfile -c `pwd` --insecure-skip-tls-verify --destination=drbreg.azurecr.io/kirby/design
+                        '''
+                    }
                 }
             }
         }
