@@ -49,6 +49,8 @@ spec:
             port: web
           initialDelaySeconds: 30
           timeoutSeconds: 5
+      imagePullSecrets:
+        - name: regcred
       volumes:
         - name: config-volume
           configMap:
