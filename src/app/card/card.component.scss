@@ -4,3 +4,29 @@
     border-radius: 0.5em;
     padding: 1em;
 }
+
+FlexboxLayout {
+    border-width: 1;
+    border-color: lightskyblue;
+    flex-direction: column;
+    border-radius: 8;
+    padding: 10;
+    width: 70%;
+    height: 50%;
+    align-items: stretch;
+    justify-content: space-around;
+    label {
+        text-align: center;
+        width: 100%;
+        .h2 {
+            align-self: flex-start;
+            font-size: 22;
+        }
+        .h4 {
+            font-size: 18;
+        }
+    }
+    .footer {
+
+    }
+}
