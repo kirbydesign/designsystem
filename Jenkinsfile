@@ -8,6 +8,9 @@ pipeline {
 apiVersion: v1
 kind: Pod
 spec:
+    securityContext:
+      runAsUser: 0
+      fsGroup: 0
     containers:
     - name: node
       image: node:8
@@ -22,15 +25,18 @@ spec:
       volumeMounts:
       - name: jenkins-docker-cfg
         mountPath: /root
+    - name: helm
+      image: gcr.io/kubernetes-helm/tiller:v2.10.0
+      command:
+      - cat
+      tty: true
     volumes:
     - name: jenkins-docker-cfg
-      projected:
-        sources:
-        - secret:
-          name: regcred
-          items:
-          - key: .dockerconfigjson
-            path: .docker/config.json
+      secret:
+        secretName: regcred
+        items:
+        - key: .dockerconfigjson
+          path: .docker/config.json
 """
         }
     }
@@ -64,15 +70,34 @@ spec:
                 container('node') {
                     //sh './node_modules/.bin/ng build --base-href ./ --prod --aot --progress false'
                     sh './node_modules/.bin/ng build --base-href ./ --progress false'
-                    stash(name: 'distribution', includes: 'dist/**')
+                    //stash(name: 'distribution', includes: 'dist/**')
                 }
             }
         }
         stage('Container Image') {
+            environment {
+                PATH = "/busybox:$PATH"
+            }
             steps {
-                container('kaniko') {
-                    unstash(name: 'distribution')
-                    sh '/kaniko/executor -f `pwd`/Dockerfile -c `pwd` --insecure-skip-tls-verify --destination=drbreg.azurecr.io/kirby/design'
+                container(name: 'kaniko', shell: '/busybox/sh') {
+                    //unstash(name: 'distribution')
+                    ansiColor('xterm') {
+                        sh '''#!/busybox/sh
+/kaniko/executor -f `pwd`/Dockerfile -c `pwd` --destination=drbreg.azurecr.io/kirby/design
+                        '''
+                    }
+                }
+            }
+        }
+        stage('Deploy') {
+            when {
+                branch 'master'
+            }
+            steps {
+                container('helm') {
+                    ansiColor('xterm') {
+                        sh '/helm upgrade -i kirby config/chart -f config/helm/staging.yaml'
+                    }
                 }
             }
         }
