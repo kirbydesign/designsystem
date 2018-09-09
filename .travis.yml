@@ -22,7 +22,7 @@ matrix:
     before_install:
     - npm install
     script:
-    - echo n | tns build ios --bundle
+    - echo n | tns build ios --device --bundle
 
 android:
   licenses:
@@ -32,6 +32,17 @@ install:
   - echo no | npm install -g nativescript
   - tns usage-reporting disable
   - tns error-reporting disable
+
+deploy:
+  provider: releases
+  file: "designsystem/platforms/ios/build/device/designsystem.ipa"
+  file_glob: "true"
+  skip_cleanup: true
+  overwrite: true
+  on:
+    branch: master
+    repo: kirbydesign/designsystem
+    tags: true
 
 #install:
 #- nvm install $NODE_VERSION
