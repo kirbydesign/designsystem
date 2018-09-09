@@ -1,0 +1,4 @@
+# Default values for generic spa
+
+replicaCount: 2
+configPath: "/usr/share/nginx/html/config"

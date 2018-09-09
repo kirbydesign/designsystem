@@ -22,6 +22,11 @@ spec:
       volumeMounts:
       - name: jenkins-docker-cfg
         mountPath: /root
+    - name: helm
+      image: gcr.io/kubernetes-helm/tiller:v2.10.0
+      command:
+      - cat
+      tty: true
     volumes:
     - name: jenkins-docker-cfg
       secret:
@@ -73,9 +78,20 @@ spec:
             steps {
                 container(name: 'kaniko', shell: '/busybox/sh') {
                     //unstash(name: 'distribution')
-                    sh '''#!/busybox/sh
+                    ansiColor('xterm') {
+                        sh '''#!/busybox/sh
 /kaniko/executor -f `pwd`/Dockerfile -c `pwd` --destination=drbreg.azurecr.io/kirby/design
-                    '''
+                        '''
+                    }
+                }
+            }
+        }
+        stage('Deploy') {
+            steps {
+                container('helm') {
+                    ansiColor('xterm') {
+                        sh '/helm upgrade -i kirby config/chart -f config/helm/staging.yaml'
+                    }
                 }
             }
         }
