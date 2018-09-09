@@ -10,4 +10,13 @@
 <p></p>
 <kirby-bullet-list></kirby-bullet-list>
 <p></p>
-<kirby-circle-progress [value]="67"></kirby-circle-progress>
+<table>
+  <tr>
+    <td>
+        <kirby-circle-progress [value]="67"></kirby-circle-progress>
+    </td>
+    <td>
+        <kirby-circle-progress [value]="progress | async"></kirby-circle-progress>
+    </td>
+  </tr>
+</table>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'kirby-home',
@@ -7,9 +8,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
   title = 'designsystem';
+  readonly progress: Observable<number>;
 
-  constructor() { }
+  constructor() {
+    this.progress = this.mockCircleProgress();
+  }
 
   ngOnInit() {
+  }
+
+  mockCircleProgress() {
+    return new Observable<number>(observer => {
+      let value = 0;
+      const interval = setInterval(() => {
+        if (value < 100) {
+          value++;
+        } else {
+          value = 0;
+        }
+
+        observer.next(value);
+      }, 100);
+
+      return () => {
+        clearInterval(interval);
+      };
+    });
   }
 }
