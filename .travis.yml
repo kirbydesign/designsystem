@@ -1,13 +1,13 @@
-env:
-  global:
-  - NODE_VERSION=8
-  - EMULATOR_API_LEVEL=25
-  - ANDROID_VERSION=25
-  - ANDROID_BUILD_TOOLS_VERSION=27.0.3
-  - ANDROID_ABI=armeabi-v7a
-  - APPIUM_VERSION=1.7.0
-  - EMULATOR_NAME=test
-  - ANDROID_TAG=google_apis
+#env:
+#  global:
+#  - NODE_VERSION=10
+#  - EMULATOR_API_LEVEL=25
+#  - ANDROID_VERSION=25
+#  - ANDROID_BUILD_TOOLS_VERSION=27.0.3
+#  - ANDROID_ABI=armeabi-v7a
+#  - APPIUM_VERSION=1.7.0
+#  - EMULATOR_NAME=test
+#  - ANDROID_TAG=google_apis
 
 matrix:
   include:
@@ -17,27 +17,23 @@ matrix:
     - Build="iOS"
     osx_image: xcode9.3
     language: node_js
-    node_js: "8"
+    node_js: "10"
     jdk: oraclejdk8
     before_install:
     - npm install
     script:
-    - tns build ios --bundle
+    - echo n | tns build ios --bundle
 
 android:
   licenses:
   - ".+"
 
-before_cache:
-- rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
-
-cache:
-  directories:
-  - .nvm
-  - $HOME/.gradle/caches/
-  - $HOME/.gradle/wrapper/
-
 install:
+  - echo no | npm install -g nativescript
+  - tns usage-reporting disable
+  - tns error-reporting disable
+
+#install:
 #- nvm install $NODE_VERSION
 #- npm install -g typings
 #- wget -O ./nativescript.tgz "https://s3.amazonaws.com/nativescript-ci/build_result/nativescript.tgz"
