@@ -62,7 +62,8 @@ spec:
         stage('Build') {
             steps {
                 container('node') {
-                    sh './node_modules/.bin/ng build --base-href ./ --prod --aot --progress false'
+                    //sh './node_modules/.bin/ng build --base-href ./ --prod --aot --progress false'
+                    sh './node_modules/.bin/ng build --base-href ./ --aot --progress false'
                     stash(name: 'distribution', includes: 'dist/**')
                 }
             }
