@@ -69,14 +69,15 @@ spec:
             }
         }
         stage('Container Image') {
+            environment {
+                PATH = "/busybox:$PATH"
+            }
             steps {
-                container('kaniko') {
+                container(name: 'kaniko', shell: '/busybox/sh') {
                     //unstash(name: 'distribution')
-                    withEnv(['PATH+EXTRA=/busybox']) {
-                        sh '''#!/busybox/sh
+                    sh '''#!/busybox/sh
 /kaniko/executor -f `pwd`/Dockerfile -c `pwd` --insecure-skip-tls-verify --destination=drbreg.azurecr.io/kirby/design
-                        '''
-                    }
+                    '''
                 }
             }
         }
