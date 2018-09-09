@@ -90,6 +90,9 @@ spec:
             }
         }
         stage('Deploy') {
+            when {
+                branch 'master'
+            }
             steps {
                 container('helm') {
                     ansiColor('xterm') {
