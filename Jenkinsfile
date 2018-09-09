@@ -24,13 +24,11 @@ spec:
         mountPath: /root
     volumes:
     - name: jenkins-docker-cfg
-      projected:
-        sources:
-        - secret:
-          name: regcred
-          items:
-          - key: .dockerconfigjson
-            path: .docker/config.json
+      secret:
+        secretName: regcred
+        items:
+        - key: .dockerconfigjson
+          path: .docker/config.json
 """
         }
     }
