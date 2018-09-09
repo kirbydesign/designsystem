@@ -20,7 +20,7 @@ items:
         chart: {{ $chartName }}-{{ $chartVersion }}
         app: {{ $app }}
       annotations:
-        kubernetes.io/ingress.class: "external"
+        kubernetes.io/ingress.class: 'addon-http-application-routing'
         nginx.ingress.kubernetes.io/rewrite-target: {{ default "/" .rewriteTarget }}
         nginx.ingress.kubernetes.io/configuration-snippet: |
           more_set_headers "Strict-Transport-Security: max-age=31536000";
