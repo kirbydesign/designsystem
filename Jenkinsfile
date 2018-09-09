@@ -50,6 +50,7 @@ spec:
                 }
             }
         }
+        /*
         stage('Run tests') {
             steps {
                 container('node') {
@@ -57,6 +58,7 @@ spec:
                 }
             }
         }
+        */
         stage('Build') {
             steps {
                 container('node') {
