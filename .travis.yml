@@ -21,9 +21,8 @@ matrix:
     jdk: oraclejdk8
     before_install:
     - npm install
-    - cd ..
     script:
-    - npm build ios
+    - tns build ios --bundle
 
 android:
   licenses:
