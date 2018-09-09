@@ -1,0 +1,48 @@
+{{- $app := include "spa.name" . -}}
+{{- $releaseName := .Release.Name -}}
+{{- $chartName := .Chart.Name -}}
+{{- $chartVersion := .Chart.Version -}}
+{{- $releaseService := .Release.Service -}}
+{{- $rootScope := . -}}
+{{- if .Values.ingress }}
+apiVersion: v1
+kind: List
+items:
+{{- range .Values.ingress }}
+  - apiVersion: extensions/v1beta1
+    kind: Ingress
+    metadata:
+      {{- $name := default "default" .name }}
+      name: {{ printf "%s-%s" $releaseName $name | trunc 63 | trimSuffix "-" }}
+      labels:
+        heritage: {{ $releaseService }}
+        release: {{ $releaseName }}
+        chart: {{ $chartName }}-{{ $chartVersion }}
+        app: {{ $app }}
+      annotations:
+        kubernetes.io/ingress.class: 'addon-http-application-routing'
+        nginx.ingress.kubernetes.io/rewrite-target: {{ default "/" .rewriteTarget }}
+        nginx.ingress.kubernetes.io/configuration-snippet: |
+          more_set_headers "Strict-Transport-Security: max-age=31536000";
+          more_set_headers "Access-Control-Allow-Origin: *";
+        {{- range $rootScope.Values.frameOptionsHeader }}
+          more_set_headers "X-Frame-Options: {{ . }}";
+        {{- end }}
+        {{- if $rootScope.htpasswdString }}
+        nginx.ingress.kubernetes.io/auth-type: basic
+        nginx.ingress.kubernetes.io/auth-secret: {{ template "spa.fullname" $rootScope }}
+        nginx.ingress.kubernetes.io/auth-realm: "Authentication Required"
+        {{- end }}
+    spec:
+      rules:
+      - host: {{ .domain }}
+        http:
+          paths:
+          {{- range .paths }}
+          - backend:
+              serviceName: {{ template "spa.fullname" $rootScope }}
+              servicePort: web
+            path: {{ . }}
+          {{- end }}
+{{- end }}
+{{- end }}
