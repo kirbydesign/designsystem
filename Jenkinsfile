@@ -76,7 +76,7 @@ spec:
                 container(name: 'kaniko', shell: '/busybox/sh') {
                     //unstash(name: 'distribution')
                     sh '''#!/busybox/sh
-/kaniko/executor -f `pwd`/Dockerfile -c `pwd` --insecure-skip-tls-verify --destination=drbreg.azurecr.io/kirby/design
+/kaniko/executor -f `pwd`/Dockerfile -c `pwd` --destination=drbreg.azurecr.io/kirby/design
                     '''
                 }
             }
