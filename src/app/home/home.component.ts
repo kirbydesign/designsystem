@@ -9,15 +9,17 @@ import { Observable } from 'rxjs';
 export class HomeComponent implements OnInit {
   title = 'designsystem';
   readonly progress: Observable<number>;
+  readonly progressSlow: Observable<number>;
 
   constructor() {
-    this.progress = this.mockCircleProgress();
+    this.progress = this.mockCircleProgressFast();
+    this.progressSlow = this.mockCircleProgressSlow();
   }
 
   ngOnInit() {
   }
 
-  mockCircleProgress() {
+  mockCircleProgressFast() {
     return new Observable<number>(observer => {
       let value = 0;
       const interval = setInterval(() => {
@@ -29,6 +31,25 @@ export class HomeComponent implements OnInit {
 
         observer.next(value);
       }, 100);
+
+      return () => {
+        clearInterval(interval);
+      };
+    });
+  }
+
+  mockCircleProgressSlow() {
+    return new Observable<number>(observer => {
+      let value = 0;
+      const interval = setInterval(() => {
+        if (value < 100) {
+          value++;
+        } else {
+          value = 0;
+        }
+
+        observer.next(value);
+      }, 500);
 
       return () => {
         clearInterval(interval);
