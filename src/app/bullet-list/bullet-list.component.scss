@@ -1,0 +1,10 @@
+ul {
+    border: solid 1px;
+    border-color: lightskyblue;
+    font-size: 14px;
+    width: 125px;
+    list-style: none;
+}
+
+li::before {content: "•"; color: lightskyblue;
+    display: inline-block; width: 1em; margin-left: -1em}
