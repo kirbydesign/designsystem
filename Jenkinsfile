@@ -68,9 +68,7 @@ spec:
         stage('Build') {
             steps {
                 container('node') {
-                    //sh './node_modules/.bin/ng build --base-href ./ --prod --aot --progress false'
-                    sh './node_modules/.bin/ng build --base-href ./ --progress false'
-                    //stash(name: 'distribution', includes: 'dist/**')
+                    sh './node_modules/.bin/ng build --base-href ./ --prod --aot --progress false'
                 }
             }
         }
@@ -80,7 +78,6 @@ spec:
             }
             steps {
                 container(name: 'kaniko', shell: '/busybox/sh') {
-                    //unstash(name: 'distribution')
                     ansiColor('xterm') {
                         sh '''#!/busybox/sh
 /kaniko/executor -f `pwd`/Dockerfile -c `pwd` --destination=drbreg.azurecr.io/kirby/design
