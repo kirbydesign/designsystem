@@ -42,9 +42,6 @@ spec:
     }
 
     stages {
-        stage('Commit hash') {
-
-        }
         stage('Install npm dependencies') {
             steps {
                 container('node') {
