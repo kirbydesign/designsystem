@@ -1,3 +1,6 @@
+env.registry = 'drbreg.azurecr.io'
+env.image = [repository: 'kirby/design', tag: "git${env.GIT_COMMIT}"]
+
 pipeline {
     agent {
         kubernetes {
@@ -80,7 +83,7 @@ spec:
                 container(name: 'kaniko', shell: '/busybox/sh') {
                     ansiColor('xterm') {
                         sh """#!/busybox/sh
-/kaniko/executor -f `pwd`/Dockerfile -c `pwd` --destination=drbreg.azurecr.io/kirby/design:git${env.GIT_COMMIT}
+/kaniko/executor -f `pwd`/Dockerfile -c `pwd` --destination=${env.registry}/${env.image.repository}:${env.image.tag}
                         """
                     }
                 }
@@ -93,7 +96,7 @@ spec:
             steps {
                 container('helm') {
                     ansiColor('xterm') {
-                        sh "/helm upgrade -i kirby config/chart --set image.tag=git${env.GIT_COMMIT} -f config/helm/staging.yaml"
+                        sh "/helm upgrade -i kirby config/chart --set image.repository=${env.registry}/${env.image.repository} --set image.tag=${env.image.tag} -f config/helm/staging.yaml"
                     }
                 }
             }
