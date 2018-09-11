@@ -1,9 +1,5 @@
 # Values for customer-onboarding-app staging
 
-image:
-  repository: "drbreg.azurecr.io/kirby/design"
-  tag: "latest"
-
 replicaCount: 1
 
 ingress:
