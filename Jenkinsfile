@@ -42,6 +42,9 @@ spec:
     }
 
     stages {
+        stage('Commit hash') {
+
+        }
         stage('Install npm dependencies') {
             steps {
                 container('node') {
@@ -80,7 +83,7 @@ spec:
                 container(name: 'kaniko', shell: '/busybox/sh') {
                     ansiColor('xterm') {
                         sh '''#!/busybox/sh
-/kaniko/executor -f `pwd`/Dockerfile -c `pwd` --destination=drbreg.azurecr.io/kirby/design
+/kaniko/executor -f `pwd`/Dockerfile -c `pwd` --destination=drbreg.azurecr.io/kirby/design:git${env.GIT_COMMIT}
                         '''
                     }
                 }
@@ -93,7 +96,7 @@ spec:
             steps {
                 container('helm') {
                     ansiColor('xterm') {
-                        sh '/helm upgrade -i kirby config/chart -f config/helm/staging.yaml'
+                        sh '/helm upgrade -i kirby config/chart --set image.tag=git${env.GIT_COMMIT} -f config/helm/staging.yaml'
                     }
                 }
             }
