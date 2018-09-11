@@ -44,7 +44,7 @@ items:
               servicePort: web
             path: {{ . }}
           {{- end }}
-{{- if .Capabilities.APIVersions.Has "certmanager.k8s.io/v1alpha1" }}
+{{- if $rootScope.Capabilities.APIVersions.Has "certmanager.k8s.io/v1alpha1" }}
 {{- if $rootScope.Values.tls }}
       tls:
       - hosts:
