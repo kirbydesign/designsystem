@@ -54,7 +54,7 @@ items:
       tls:
       - hosts:
         - {{ .domain }}
-        secretName: {{ template "spa.fullname" $rootScope }}-secret
+        secretName: {{ template "spa.fullname" $rootScope }}
 {{- end }}
 {{- end }}
 {{- end }}
