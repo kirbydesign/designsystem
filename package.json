@@ -1,7 +1,7 @@
 {
   "name": "designsystem",
   "nativescript": {
-    "id": "org.nativescript.designsystem",
+    "id": "dk.kirby.design.system",
     "tns-ios": {
       "version": "4.2.0"
     }
