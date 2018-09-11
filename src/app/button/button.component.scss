@@ -1,7 +1,35 @@
+:host {
+    --kirby-button-background: white;
+    --kirby-button-color: lightskyblue;
+    --kirby-button-border-color: var(--kirby-button-color);
+    --kirby-button-text-color: var(--kirby-button-color);
+    --kirby-button-border-radius: 0.5em;
+    display: inline-block;
+    margin: 0.25em 0.25em;
+    
+    &.block {
+        display: block;
+    }
+
+    &.rounded {
+        --kirby-button-border-radius: 2em;
+    }
+
+}
+
 button {
-    border: solid 1px;
-    border-color: lightskyblue;
-    padding: 8px 10px;
-    background: white;
-    font-size: 20px;
+    outline: none;
+
+    width: 100%;
+    border: solid 1px var(--kirby-button-border-color);
+    border-radius: var(--kirby-button-border-radius);
+    padding: 0.7em 0.75em;
+    background-color: var(--kirby-button-background);
+    font-size: 1em;
+    color: var(--kirby-button-text-color);
+    transition: background-color 200ms linear;
+
+    &:hover {
+        background-color: rgba(lightskyblue, 0.1);
+    }
 }

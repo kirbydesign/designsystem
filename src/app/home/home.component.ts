@@ -7,7 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
   title = 'Kirby Design System';
-
+  public showCardBackground = true;
+  public dimCardBackground = false;
+  public hideCardForeground = false;
   constructor() { }
 
   ngOnInit() {

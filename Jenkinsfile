@@ -45,14 +45,18 @@ spec:
         stage('Install npm dependencies') {
             steps {
                 container('node') {
-                    sh 'npm install'
+                    ansiColor('xterm') {
+                        sh 'npm install'
+                    }
                 }
             }
         }
         stage('Linting') {
             steps {
                 container('node') {
-                    sh './node_modules/.bin/ng lint'
+                    ansiColor('xterm') {
+                        sh './node_modules/.bin/ng lint'
+                    }
                 }
             }
         }
@@ -68,7 +72,9 @@ spec:
         stage('Build') {
             steps {
                 container('node') {
-                    sh './node_modules/.bin/ng build --base-href ./ --prod --aot --progress false'
+                    ansiColor('xterm') {
+                        sh './node_modules/.bin/ng build --base-href ./ --prod --aot --progress false'
+                    }
                 }
             }
         }
@@ -79,9 +85,9 @@ spec:
             steps {
                 container(name: 'kaniko', shell: '/busybox/sh') {
                     ansiColor('xterm') {
-                        sh '''#!/busybox/sh
-/kaniko/executor -f `pwd`/Dockerfile -c `pwd` --destination=drbreg.azurecr.io/kirby/design
-                        '''
+                        sh """#!/busybox/sh
+/kaniko/executor -f `pwd`/Dockerfile -c `pwd` --destination=drbreg.azurecr.io/kirby/design:git${env.GIT_COMMIT}
+                        """
                     }
                 }
             }
@@ -93,7 +99,7 @@ spec:
             steps {
                 container('helm') {
                     ansiColor('xterm') {
-                        sh '/helm upgrade -i kirby config/chart -f config/helm/staging.yaml'
+                        sh "/helm upgrade -i kirby config/chart --set image.repository=drbreg.azurecr.io/kirby/design --set image.tag=git${env.GIT_COMMIT} -f config/helm/staging.yaml"
                     }
                 }
             }

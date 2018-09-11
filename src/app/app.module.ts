@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { CardComponent } from './card/card.component';
 import { ButtonComponent } from './button/button.component';
+import { ListComponent } from './list/list.component';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { ButtonComponent } from './button/button.component';
     HomeComponent,
     CardComponent,
     ButtonComponent,
+    ListComponent,
   ],
   imports: [
     BrowserModule,
