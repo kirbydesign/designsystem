@@ -42,7 +42,7 @@ matrix:
     - mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
     - cp "$TRAVIS_BUILD_DIR/scripts/profile/dkkirbydesignsystem.mobileprovision" ~/Library/MobileDevice/Provisioning\ Profiles/
     script:
-    - echo n | tns build ios --for-device --bundle
+    - echo n | tns build ios --provision dk.kirby.design.system --for-device --bundle
 
 android:
   licenses:
