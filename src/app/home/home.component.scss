@@ -1,0 +1,69 @@
+.kirby-card-config {
+    display: flex;
+    flex-direction: row;
+}
+
+kirby-card {
+    display: inline-block;
+    --kirby-card-background-image: url('/assets/kirby/backgrounds/kirby-card.png');
+    &.show-background {
+        --kirby-wireframe-color: rgba(255, 0, 0, 0.5);
+        footer kirby-button { --kirby-button-color: var(--kirby-wireframe-color); }
+        background-image: var(--kirby-card-background-image);
+        background-position: -1px -1px;
+        background-repeat: no-repeat;
+        background-size: 257px;
+        &.dim-background {
+            --kirby-wireframe-color: red;
+            background-image: 
+            linear-gradient(
+                rgba(255, 255, 255, 0.5), 
+                rgba(255, 255, 255, 0.5)
+            ),
+            var(--kirby-card-background-image);
+
+            footer kirby-button { --kirby-button-color: red; }
+        }
+
+        &.hide-foreground {
+            --kirby-wireframe-color: transparent;
+            footer kirby-button { --kirby-button-color: transparent; }
+   
+            * { visibility: hidden; }
+        }
+    
+    }
+
+    footer {
+        text-align: center;
+        padding-top: 0.5em;
+
+        kirby-button {
+            --kirby-button-background: transparent;
+            margin: 0 1.5em;
+        }
+    }
+}
+
+.card-settings {
+    user-select: none;
+    display: inline-block;
+    font-size: 0.8em;
+    border: 1px dotted grey;
+    border-radius: 0.5em;
+    margin: 0.5em;
+
+    header {
+        border-bottom: 1px dotted grey;
+        padding: 0.5em;
+        font-weight: bold;
+    }
+
+    main {
+        padding: 1em;
+
+        .disabled label {
+            color: grey;
+        }
+    }
+}
