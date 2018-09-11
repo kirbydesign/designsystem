@@ -21,8 +21,13 @@ matrix:
     jdk: oraclejdk8
     before_install:
     - npm install
+    before_script:
+    - openssl aes-256-cbc -k "$SECURITY_PASSWORD" -in designsystem/scripts/profile/dkkirbydesignsystem.mobileprovision.enc -d -a -out designsystem/scripts/profile/dkkirbydesignsystem.mobileprovision
+    - openssl aes-256-cbc -k "$SECURITY_PASSWORD" -in designsystem/scripts/certs/dkkirbydesignsystem.cer.enc -d -a -out designsystem/scripts/certs/dkkirbydesignsystem.cer
+    - openssl aes-256-cbc -k "$SECURITY_PASSWORD" -in designsystem/scripts/certs/dkkirbydesignsystem.p12.enc -d -a -out designsystem/scripts/certs/dkkirbydesignsystem.p12
+    - scripts/aad-key.sh
     script:
-    - echo n | tns build ios --for-device --bundle
+    - echo n | tns build ios --provision 'dkkirbydesignsystem.mobileprovision' --for-device --bundle
 
 android:
   licenses:
