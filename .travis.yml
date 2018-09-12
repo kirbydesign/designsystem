@@ -9,6 +9,8 @@
 #  - EMULATOR_NAME=test
 #  - ANDROID_TAG=google_apis
 
+sudo: true
+
 matrix:
   include:
   - stage: "Build"
