@@ -101,7 +101,10 @@ spec:
             steps {
                 container('helm') {
                     ansiColor('xterm') {
-                        sh "/helm upgrade -i kirby config/chart --set image.repository=drbreg.azurecr.io/kirby/design --set image.tag=git${env.GIT_COMMIT} --set ingress.host=kirby-${env.BRANCH_NAME}.79e7f2f3549145978da6.northeurope.aksapp.io -f config/helm/branch.yaml"
+                        script {
+                            def name = env.BRANCH_NAME.replaceAll("[^-a-z0-9]+", "-")
+                            sh "/helm upgrade -i kirby-${name} config/chart --set image.repository=drbreg.azurecr.io/kirby/design --set image.tag=git${env.GIT_COMMIT} --set ingress.host=kirby-${name}.79e7f2f3549145978da6.northeurope.aksapp.io -f config/helm/branch.yaml"
+                        }
                     }
                 }
             }
