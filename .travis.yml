@@ -45,7 +45,7 @@ matrix:
     - cp "$TRAVIS_BUILD_DIR/scripts/profile/dkkirbydesignsystem.mobileprovision" ~/Library/MobileDevice/Provisioning\ Profiles/
     - pip install six
     script:
-    - echo n | tns build ios --provision dk.kirby.design.system --for-device --bundle
+    - echo n | tns build ios --for-device --bundle --provision dk.kirby.design.system --release
 
 #android:
 #  licenses:
