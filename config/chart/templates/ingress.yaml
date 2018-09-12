@@ -21,6 +21,11 @@ items:
         app: {{ $app }}
       annotations:
         kubernetes.io/ingress.class: 'addon-http-application-routing'
+{{- if $rootScope.Capabilities.APIVersions.Has "certmanager.k8s.io/v1alpha1" }}
+{{- if $rootScope.Values.tls }}
+        certmanager.k8s.io/cluster-issuer: letsencrypt-prod
+{{- end }}
+{{- end }}
         nginx.ingress.kubernetes.io/rewrite-target: {{ default "/" .rewriteTarget }}
         nginx.ingress.kubernetes.io/configuration-snippet: |
           more_set_headers "Strict-Transport-Security: max-age=31536000";
@@ -44,5 +49,13 @@ items:
               servicePort: web
             path: {{ . }}
           {{- end }}
+{{- if $rootScope.Capabilities.APIVersions.Has "certmanager.k8s.io/v1alpha1" }}
+{{- if $rootScope.Values.tls }}
+      tls:
+      - hosts:
+        - {{ .domain }}
+        secretName: {{ template "spa.fullname" $rootScope }}
+{{- end }}
+{{- end }}
 {{- end }}
 {{- end }}
