@@ -15,10 +15,10 @@ matrix:
     os: osx
     env:
     - Build="iOS"
-    osx_image: xcode9.3
+    osx_image: xcode9.4
     language: node_js
-    node_js: "10"
-    jdk: oraclejdk8
+    node_js: "10.5"
+    #jdk: oraclejdk8
     before_install:
     - npm install
     before_script:
@@ -44,9 +44,9 @@ matrix:
     script:
     - echo n | tns build ios --provision dk.kirby.design.system --for-device --bundle
 
-android:
-  licenses:
-  - ".+"
+#android:
+#  licenses:
+#  - ".+"
 
 install:
   - echo no | npm install -g nativescript
@@ -57,7 +57,7 @@ deploy:
   provider: releases
   file: $TRAVIS_BUILD_DIR/platforms/ios/build/device/designsystem.ipa
   file_glob: "true"
-  skip_cleanup: true
+  skip_cleanup: false
   overwrite: true
   on:
     branch: master
