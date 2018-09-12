@@ -7,6 +7,9 @@ import { HomeComponent } from './home/home.component';
 import { CardComponent } from './card/card.component';
 import { ButtonComponent } from './button/button.component';
 import { ListComponent } from './list/list.component';
+import { CardExampleComponent } from './examples/card-example/card-example.component';
+import { CardDesignerComponent } from './design/card-designer/card-designer.component';
+import { ButtonExampleComponent } from './examples/button-example/button-example.component';
 
 
 @NgModule({
@@ -16,6 +19,9 @@ import { ListComponent } from './list/list.component';
     CardComponent,
     ButtonComponent,
     ListComponent,
+    CardExampleComponent,
+    CardDesignerComponent,
+    ButtonExampleComponent,
   ],
   imports: [
     BrowserModule,

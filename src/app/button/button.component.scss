@@ -1,5 +1,5 @@
 :host {
-    --kirby-button-background: white;
+    --kirby-button-background-color: white;
     --kirby-button-color: lightskyblue;
     --kirby-button-border-color: var(--kirby-button-color);
     --kirby-button-text-color: var(--kirby-button-color);
@@ -24,7 +24,7 @@ button {
     border: solid 1px var(--kirby-button-border-color);
     border-radius: var(--kirby-button-border-radius);
     padding: 0.7em 0.75em;
-    background-color: var(--kirby-button-background);
+    background-color: var(--kirby-button-background-color);
     font-size: 1em;
     color: var(--kirby-button-text-color);
     transition: background-color 200ms linear;

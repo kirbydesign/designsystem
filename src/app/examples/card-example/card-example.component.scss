@@ -1,0 +1,20 @@
+:host {
+    --kirby-example-wireframe-color: lightskyblue;
+}
+
+kirby-card {
+    --kirby-wireframe-color: var(--kirby-example-wireframe-color);
+
+    footer {
+        text-align: center;
+        padding-top: 0.5em;
+
+        kirby-button {
+            margin: 0 1.5em;
+            --kirby-button-color: var(--kirby-wireframe-color);
+            --kirby-button-background-color: var(--kirby-example-button-background-color);   
+        }
+    }
+
+
+}
