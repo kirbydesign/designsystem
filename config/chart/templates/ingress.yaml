@@ -13,7 +13,7 @@ metadata:
 {{- end }}
 spec:
   rules:
-  - host: {{ .Values.hostname | quote }}
+  - host: {{ .Values.ingress.host | quote }}
     http:
       paths:
       - backend:
@@ -22,6 +22,6 @@ spec:
 {{- if .Values.ingress.tls }}
   tls:
   - hosts:
-    - {{ .Values.hostname | quote }}
+    - {{ .Values.ingress.host | quote }}
     secretName: {{ template "spa.fullname" . }}
 {{- end }}
