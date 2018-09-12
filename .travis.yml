@@ -47,6 +47,7 @@ matrix:
     - sudo gem install cocoapods
     - pod setup
     - pip install six
+    - tns doctor
     script:
     - echo n | tns build ios --bundle --for-device --provision dk.kirby.design.system --release
 
