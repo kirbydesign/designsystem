@@ -43,9 +43,12 @@ matrix:
     # Put the provisioning profile in place
     - mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
     - cp "$TRAVIS_BUILD_DIR/scripts/profile/dkkirbydesignsystem.mobileprovision" ~/Library/MobileDevice/Provisioning\ Profiles/
+    - sudo gem install xcodeproj
+    - sudo gem install cocoapods
+    - pod setup
     - pip install six
     script:
-    - echo n | tns build ios --bundle #--for-device --provision dk.kirby.design.system --release
+    - echo n | tns build ios --bundle --for-device --provision dk.kirby.design.system --release
 
 #android:
 #  licenses:
