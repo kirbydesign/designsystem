@@ -17,8 +17,6 @@ $page-max-width: 1280px;
 /* Breakpoints
 --------------------------------------------------------------------------------*/
 $breakpoints: (
-  scale-medium: 24em,
-  scale-large: 42em,
   small: 30em, 
   medium: 38em, 
   large: 52em, 
@@ -26,12 +24,10 @@ $breakpoints: (
   xxlarge: 80em 
 );
 
-
 /* Colors (Avoid using these directly in other scss files)
 --------------------------------------------------------------------------------*/
 $sårt: #1C1C1C;
 $hvii: #F4F1E8;
-
 
 /*
  * Specific module coloring and sizing follows
