@@ -1,4 +1,51 @@
 @import '.././../../app-variables';
 :host {
-  padding: 0 $page-gutter;
+  padding: 2rem $page-gutter;
+}
+
+.side-nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  &--sub {
+    margin-left: 1rem;
+    //height: 0;
+    overflow: hidden;
+    font-size: 0.85rem;
+    transition: 0.15s transform ease-in-out;
+    //transform: scaleY(0);
+    transform-origin: 0 0;
+    will-change: height, transform;    
+
+    &.is-selected {
+      height: auto;
+      transform: scaleY(1);
+    }
+  }
+
+  &__item {
+    text-decoration: none;
+    color: $semi-dark-grey;
+    font-weight: 200;
+    padding: 0.75rem 0 0.75rem 0.75rem;
+    margin-left: -0.75rem;
+    display: block;
+    font-size: 1.2em;
+    display: flex;
+    align-items: center;
+    //border-top: 1px solid red;
+    &:hover,&:focus {
+      background-color: #EBEBEB;
+      color: $dark-grey;
+    }
+  }
+}
+
+.icon {
+  width: 2rem;
+  height: 2rem;
+  margin-right: 1rem;
+  color: currentColor;
+  fill: currentColor;
 }

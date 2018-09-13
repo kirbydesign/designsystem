@@ -10,7 +10,7 @@
 
 /* Page layout
 --------------------------------------------------------------------------------*/
-$page-side-nav-width: 12.625rem;
+$page-side-nav-width: 16.625rem;
 $page-wrapper-netbank-padding-top: 3em;
 $page-max-width: 1280px;
 
@@ -24,10 +24,12 @@ $breakpoints: (
   xxlarge: 80em 
 );
 
-/* Colors (Avoid using these directly in other scss files)
+/* Colors (Maybe we should avoid using these directly in other scss files)
 --------------------------------------------------------------------------------*/
 $sårt: #1C1C1C;
 $hvii: #F4F1E8;
+$dark-grey: #353535;
+$semi-dark-grey: #838383;
 
 /*
  * Specific module coloring and sizing follows
