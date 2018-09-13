@@ -7,7 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  items:string[] = ['Design', 'Components'];
+  items = [
+    {name: 'Design', selected: false}, 
+    {name: 'Components', selected: true}
+  ];
 
   constructor() { }
 

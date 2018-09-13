@@ -8,7 +8,7 @@
   <nav>
     <ul class="header-nav">
       <li class="header-nav__item" *ngFor="let item of items">
-        <a href="#" class="header-nav__item-link">{{item}}</a>
+        <a href="javascript:void(0)" class="header-nav__item-link" [ngClass]="{'is-selected': item.selected}">{{item.name}}</a>
       </li>
     </ul>
   </nav>
