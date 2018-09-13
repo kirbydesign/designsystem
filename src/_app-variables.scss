@@ -6,3 +6,22 @@
 
 // Place any custom variables here. For example:
 // $page-content-placeholder-font-size: 20;
+
+/* Page layout
+--------------------------------------------------------------------------------*/
+$page-side-nav-width: 15.625rem;
+$page-wrapper-netbank-padding-top: 3em;
+
+
+/* Colors (Avoid using these directly in other scss files)
+--------------------------------------------------------------------------------*/
+$sårt: #1C1C1C;
+$hvii: #F4F1E8;
+
+/*
+ *
+ *
+ * Specific module coloring and sizing follows
+--------------------------------------------------------------------------------*/
+$page-header-bg: $sårt;
+$page-header-color: $hvii;
