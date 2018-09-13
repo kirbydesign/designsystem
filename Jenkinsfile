@@ -103,7 +103,8 @@ spec:
                     ansiColor('xterm') {
                         script {
                             def name = env.BRANCH_NAME.replaceAll("[^-a-z0-9]+", "-")
-                            sh "/helm upgrade -i kirby-${name} config/chart --set image.repository=drbreg.azurecr.io/kirby/design --set image.tag=git${env.GIT_COMMIT} --set ingress.host=kirby-${name}.79e7f2f3549145978da6.northeurope.aksapp.io -f config/helm/branch.yaml"
+                            def dnsName = generateDNS("kirby-${name}", '79e7f2f3549145978da6.northeurope.aksapp.io')
+                            sh "/helm upgrade -i kirby-${name} config/chart --set image.repository=drbreg.azurecr.io/kirby/design --set image.tag=git${env.GIT_COMMIT} --set ingress.host=${dnsName} -f config/helm/branch.yaml"
                         }
                     }
                 }
@@ -122,4 +123,31 @@ spec:
             }
         }
     }
+}
+
+@NoCPS
+def generateDNS(name, domain) {
+    def length = 64 - domain.length
+    if (length < 5) {
+        error "Less than 5 characters to DNS name please find a more appropriate subdomain"
+    }
+    def host = name
+    while (host.length > length) {
+        host = shortenHost(host)
+    }
+    return "${host}.${domain}"
+}
+
+@NoCPS
+def shortenHost(name) {
+    def magicWords = ['feature']
+    def shortened = name
+    magicWords.each { w -> 
+        shortened = shortened.replace(w, "")
+    }
+    if (shortened.length < name.label) {
+        return shortened
+    }
+    // no quick wins - further shorten...
+    return name
 }
