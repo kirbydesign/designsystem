@@ -1,3 +1,5 @@
+import com.cloudbees.groovy.cps.NonCPS
+
 pipeline {
     agent {
         kubernetes {
@@ -149,6 +151,6 @@ def shortenHost(name) {
     if (shortened.length < name.label) {
         return shortened
     }
-    
+
     return name.substring(0, name.length - 2)
 }
