@@ -20,7 +20,7 @@ matrix:
     osx_image: xcode9.4
     language: node_js
     node_js: "10.5"
-    #jdk: oraclejdk8
+    jdk: oraclejdk8
     before_install:
     - npm install
     before_script:
@@ -47,6 +47,8 @@ matrix:
     - sudo gem install cocoapods
     - pod setup
     - pip install six
+    - tns cloud setup
+    - tns doctor
     script:
     - echo n | tns build ios --bundle --for-device --provision dk.kirby.design.system --release
 
@@ -55,6 +57,9 @@ matrix:
 #  - ".+"
 
 install:
+  - brew cask install android-sdk
+  - export ANDROID_HOME=/usr/local/share/android-sdk
+  - $ANDROID_HOME/tools/bin/sdkmanager "tools" "emulator" "platform-tools" "platforms;android-25" "build-tools;27.0.3" "extras;android;m2repository" "extras;google;m2repository"
   - echo no | npm install -g nativescript
   - tns usage-reporting disable
   - tns error-reporting disable
