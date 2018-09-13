@@ -10,6 +10,8 @@ import { ListComponent } from './list/list.component';
 import { CardExampleComponent } from './examples/card-example/card-example.component';
 import { CardDesignerComponent } from './design/card-designer/card-designer.component';
 import { ButtonExampleComponent } from './examples/button-example/button-example.component';
+import { SideMenuComponent } from './side-menu/side-menu.component';
+import { IntroComponent } from './intro/intro.component';
 
 
 @NgModule({
@@ -22,6 +24,8 @@ import { ButtonExampleComponent } from './examples/button-example/button-example
     CardExampleComponent,
     CardDesignerComponent,
     ButtonExampleComponent,
+    SideMenuComponent,
+    IntroComponent,
   ],
   imports: [
     BrowserModule,
