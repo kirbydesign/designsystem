@@ -1,18 +1,49 @@
+@import '../../../app-variables';
+
 $sårt: #1C1C1C;
 $hvii: #F4F1E8;
+$pink: #DF0067;
 
 :host {
   background-color: $sårt;
   display: block;
-  height: 7rem;
+}
+
+header {
   display: flex;
+  justify-content: space-between;
   align-items: center;
+  height: $page-header-height;
+  margin: 0 auto;
+  max-width: $page-max-width;
+  padding: 0 $page-gutter;
+  color: $hvii;
+}
+
+.header-nav {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  &__item-link {
+    margin-left: 1rem;
+    padding: 0.5rem;
+    border: 2px solid $hvii;
+    border-radius: 10px;
+    font-size: 1.4rem;
+    font-weight: 200;
+    text-decoration: none;
+    color: currentColor;
+    &:hover {
+      border-color: $pink;
+    }
+  }
 }
 
 .title {
   font-size: 1.5em;
   font-weight: 200;
-  color: $hvii; 
   margin-top: auto;
   grid-column-start: span 2;
   font-family: courier new;
@@ -46,7 +77,6 @@ $hvii: #F4F1E8;
 .block-container {
   max-width: 5rem;
   height: 5rem;
-  padding: 1rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 35% 1fr;

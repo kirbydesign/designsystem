@@ -3,14 +3,28 @@
 // other than “light”, switch the path to the alternative scheme,
 // for example '~nativescript-theme-core/scss/dark'.
 @import '~nativescript-theme-core/scss/light';
+@import './scss/plugins/include-media';
 
 // Place any custom variables here. For example:
 // $page-content-placeholder-font-size: 20;
 
 /* Page layout
 --------------------------------------------------------------------------------*/
-$page-side-nav-width: 15.625rem;
+$page-side-nav-width: 12.625rem;
 $page-wrapper-netbank-padding-top: 3em;
+$page-max-width: 1280px;
+
+/* Breakpoints
+--------------------------------------------------------------------------------*/
+$breakpoints: (
+  scale-medium: 24em,
+  scale-large: 42em,
+  small: 30em, 
+  medium: 38em, 
+  large: 52em, 
+  xlarge: 64.0625em, 
+  xxlarge: 80em 
+);
 
 
 /* Colors (Avoid using these directly in other scss files)
@@ -18,10 +32,11 @@ $page-wrapper-netbank-padding-top: 3em;
 $sårt: #1C1C1C;
 $hvii: #F4F1E8;
 
+
 /*
- *
- *
  * Specific module coloring and sizing follows
 --------------------------------------------------------------------------------*/
 $page-header-bg: $sårt;
 $page-header-color: $hvii;
+$page-header-height: 7rem;
+$page-gutter: 1rem;
