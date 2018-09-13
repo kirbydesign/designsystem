@@ -145,9 +145,10 @@ def shortenHost(name) {
     magicWords.each { w -> 
         shortened = shortened.replace(w, "")
     }
+    shortened = shortened.replace("--", "-")
     if (shortened.length < name.label) {
         return shortened
     }
-    // no quick wins - further shorten...
-    return name
+    
+    return name.substring(0, name.length - 2)
 }
