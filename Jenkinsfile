@@ -127,7 +127,7 @@ spec:
     }
 }
 
-@NoCPS
+@NonCPS
 def generateDNS(name, domain) {
     def length = 64 - domain.length
     if (length < 5) {
@@ -140,7 +140,7 @@ def generateDNS(name, domain) {
     return "${host}.${domain}"
 }
 
-@NoCPS
+@NonCPS
 def shortenHost(name) {
     def magicWords = ['feature']
     def shortened = name
