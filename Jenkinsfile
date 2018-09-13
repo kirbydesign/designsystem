@@ -129,12 +129,12 @@ spec:
 
 @NonCPS
 def generateDNS(name, domain) {
-    def length = 64 - domain.length
+    def length = 64 - domain.length()
     if (length < 5) {
         error "Less than 5 characters to DNS name please find a more appropriate subdomain"
     }
     def host = name
-    while (host.length > length) {
+    while (host.length() > length) {
         host = shortenHost(host)
     }
     return "${host}.${domain}"
@@ -148,9 +148,9 @@ def shortenHost(name) {
         shortened = shortened.replace(w, "")
     }
     shortened = shortened.replace("--", "-")
-    if (shortened.length < name.label) {
+    if (shortened.length() < name.length()) {
         return shortened
     }
 
-    return name.substring(0, name.length - 2)
+    return name.substring(0, name.length() - 2)
 }
