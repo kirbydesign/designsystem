@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 
 import { HomeComponent } from './home/home.component';
-import { CardDesignerComponent } from '~/app/design/card-designer/card-designer.component';
+import { CardDesignerComponent } from './design/card-designer/card-designer.component';
 
 export const routes: Routes = [
   {
