@@ -2,6 +2,8 @@
 
 // Import common styles
 @import 'app-common';
+@import "~prismjs/plugins/toolbar/prism-toolbar.css";
+@import "~prismjs/themes/prism-okaidia";
 
 @font-face {
     font-family: Effra;
@@ -12,7 +14,7 @@
     url(/assets/fonts/Effra.ttf) format('truetype');
 }
   
-  :root{
-    --ion-font-family:"Effra";
-    font-family: var(--ion-font-family);
-  }
+:root{
+  --ion-font-family:"Effra";
+  font-family: var(--ion-font-family);
+}
