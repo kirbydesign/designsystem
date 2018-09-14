@@ -4,6 +4,7 @@ import {ButtonExampleComponent} from '~/app/examples/button-example/button-examp
 import {IntroComponent} from '~/app/intro/intro.component';
 import {CardExampleComponent} from '~/app/examples/card-example/card-example.component';
 import {HomeComponent} from '~/app/home/home.component';
+import {CardShowcaseComponent} from '~/app/showcase/card-showcase/card-showcase.component';
 
 export const routes: Routes = [
     {
@@ -25,7 +26,7 @@ export const routes: Routes = [
             },
             {
                 path: 'cards',
-                component: CardExampleComponent
+                component: CardShowcaseComponent
             }
         ]
     },
