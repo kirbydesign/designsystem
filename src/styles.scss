@@ -6,15 +6,49 @@
 @import "~prismjs/themes/prism-okaidia";
 
 @font-face {
-    font-family: Effra;
-    src:
-    // TODO JEO: Add woff2, woff fallbacks:
-    //   url(/assets/fonts/Effra.woff2) format('woff2'),
-    //   url(/assets/fonts/Effra.woff) format('woff'),
-    url(/assets/fonts/Effra.ttf) format('truetype');
+  font-family: "Effra";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src:
+    url("/assets/fonts/effraregular-webfont.woff2") format("woff2"),
+    url("/assets/fonts/effraregular-webfont.woff") format("woff");
 }
-  
+
+@font-face {
+  font-family: "Effra";
+  font-style: normal;
+  font-weight: 200;
+  font-display: swap;
+  src:
+    url("/assets/fonts/effralight-webfont.woff2") format("woff2"),
+    url("/assets/fonts/effralight-webfont.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Effra";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src:
+    url("/assets/fonts/effrabold-webfont.woff2") format("woff2"),
+    url("/assets/fonts/effrabold-webfont.woff") format("woff");
+}
+
 :root{
   --ion-font-family:"Effra";
   font-family: var(--ion-font-family);
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  background-color: #F2F2F2;
+  box-sizing: border-box;
+}
+
+*, 
+*:before, 
+*:after {
+  box-sizing: inherit; 
 }
