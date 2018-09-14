@@ -9,7 +9,7 @@
         <ul class="header-nav">
             <li class="header-nav__item" *ngFor="let item of items">
                 <a href="javascript:void(0)" class="header-nav__item-link" [routerLink]="[item.path]"
-                   routerLinkActive="is-selected" [ngClass]="{'is-selected': item.selected, 'routerLink': item.path}">{{item.name}}</a>
+                   routerLinkActive="is-selected" [ngClass]="{'is-selected': item.selected}">{{item.name}}</a>
             </li>
         </ul>
     </nav>
