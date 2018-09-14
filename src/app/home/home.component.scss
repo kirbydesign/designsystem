@@ -1,0 +1,30 @@
+@import '../../app-variables';
+
+:host {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  width: 100%;
+  max-width: $page-max-width;
+  margin: 0 auto;
+  padding-right: $page-gutter;
+}
+
+kirby-side-nav {
+  flex: 0 0 $page-side-nav-width;
+  height: calc(100vh - $page-header-height);
+}
+
+section {
+  flex-grow: 1;
+  background-color: #fff;
+  margin: 2rem 0;
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
