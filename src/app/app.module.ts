@@ -11,6 +11,7 @@ import { CardExampleComponent } from './examples/card-example/card-example.compo
 import { CardDesignerComponent } from './design/card-designer/card-designer.component';
 import { ButtonExampleComponent } from './examples/button-example/button-example.component';
 import { CardShowcaseComponent } from './showcase/card-showcase/card-showcase.component';
+import { ComponentTemplateViewerComponent } from './shared/component-template-viewer/component-template-viewer.component';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { CardShowcaseComponent } from './showcase/card-showcase/card-showcase.co
     CardDesignerComponent,
     ButtonExampleComponent,
     CardShowcaseComponent,
+    ComponentTemplateViewerComponent,
   ],
   imports: [
     BrowserModule,
