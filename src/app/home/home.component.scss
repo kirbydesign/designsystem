@@ -6,7 +6,7 @@
   flex-direction: column;
   min-height: 100vh;
 }
- 
+
 main {
   display: flex;
   flex-direction: row;
@@ -20,7 +20,7 @@ main {
 kirby-side-nav {
   flex: 0 0 $page-side-nav-width;
   height: calc(100vh - $page-header-height);
-} 
+}
 
 section {
   flex-grow: 1;
