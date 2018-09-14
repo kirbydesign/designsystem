@@ -12,6 +12,7 @@ import { CardDesignerComponent } from './design/card-designer/card-designer.comp
 import { ButtonExampleComponent } from './examples/button-example/button-example.component';
 import { SideNavComponent } from './page/side-nav/side-nav.component';
 import { HeaderComponent } from './page/header/header.component';
+import { CardShowcaseComponent } from './showcase/card-showcase/card-showcase.component';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { HeaderComponent } from './page/header/header.component';
     ButtonExampleComponent,
     SideNavComponent,
     HeaderComponent,
+    CardShowcaseComponent,
   ],
   imports: [
     BrowserModule,
