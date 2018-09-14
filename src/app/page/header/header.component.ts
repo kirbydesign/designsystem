@@ -8,8 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
 
   items = [
-    {name: 'Design', selected: false},
-    {name: 'Components', selected: true}
+    {name: 'Design', selected: false, path: '/designer'},
+    {name: 'Components', selected: true, path: '/home'}
   ];
 
   constructor() { }
