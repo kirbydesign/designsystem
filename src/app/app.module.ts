@@ -15,6 +15,7 @@ import {HeaderComponent} from './page/header/header.component';
 import {CardShowcaseComponent} from './showcase/card-showcase/card-showcase.component';
 import {ComponentTemplateViewerComponent} from './shared/component-template-viewer/component-template-viewer.component';
 import {IntroComponent} from './intro/intro.component';
+import { ButtonShowcaseComponent } from './showcase/button-showcase/button-showcase.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import {IntroComponent} from './intro/intro.component';
         HeaderComponent,
         CardShowcaseComponent,
         ComponentTemplateViewerComponent,
-        IntroComponent
+        IntroComponent,
+        ButtonShowcaseComponent
     ],
     imports: [
         BrowserModule,
