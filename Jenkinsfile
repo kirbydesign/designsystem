@@ -100,7 +100,7 @@ spec:
                     branch 'master'
                 }
                 not {
-                    changeRequest
+                    changeRequest()
                 }
             }
             steps {
