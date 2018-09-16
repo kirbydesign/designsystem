@@ -58,7 +58,7 @@ script:
   #- tns build ios --bundle --for-device --provision dk.kirby.design.system
 
 deploy:
-  provider: debug
+  provider: releases
   on:
     branch: travis-playground
     repo: kirbydesign/designsystem
