@@ -62,7 +62,7 @@ deploy:
   on:
     branch: travis-playground
     repo: kirbydesign/designsystem
-    tags: true
+    tags: false
   file: $TRAVIS_BUILD_DIR/platforms/android/app/build/outputs/apk/debug/app-debug.apk
   overwrite: true
-  skip_cleanup: true
+  skip_cleanup: false
