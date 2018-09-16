@@ -9,7 +9,7 @@ jdk: oraclejdk8
 install:
   - sudo gem install xcodeproj
   - sudo gem install cocoapods
-  - brew install android-sdk
+  - brew cask install android-sdk
   - export ANDROID_HOME=/usr/local/opt/android-sdk
   - pod setup
   - pip install six
