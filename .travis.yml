@@ -22,7 +22,7 @@ install:
   - yes | sdkmanager "tools"
   - yes | sdkmanager "platforms;android-26"
   - yes | sdkmanager "extras;android;m2repository"
-  - pod setup
+  - sudo pod setup
   - pip install six
   - npm install
   - echo no | npm install -g nativescript
@@ -54,4 +54,4 @@ before_script:
   - cp "$TRAVIS_BUILD_DIR/scripts/profile/dkkirbydesignsystem.mobileprovision" ~/Library/MobileDevice/Provisioning\ Profiles/
 
 script:
-  - tns build ios --bundle --for-device --provision dk.kirby.design.system --release
+  - sudo tns build ios --bundle --for-device --provision dk.kirby.design.system --release
