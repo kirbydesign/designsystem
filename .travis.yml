@@ -7,7 +7,6 @@ node_js: "10.5"
 jdk: oraclejdk8
 
 install:
-  - sudo su
   - sudo gem install xcodeproj
   - sudo gem install cocoapods
   - sudo brew install android-sdk
