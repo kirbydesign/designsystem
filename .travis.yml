@@ -16,7 +16,7 @@ install:
   - tns usage-reporting disable
   - tns error-reporting disable
   - tns cloud setup
-  - tns doctor
+  #- tns doctor
 
 before_script:
   - openssl aes-256-cbc -k "$SECURITY_PASSWORD" -in $TRAVIS_BUILD_DIR/scripts/profile/dkkirbydesignsystem.mobileprovision.enc -d -a -out $TRAVIS_BUILD_DIR/scripts/profile/dkkirbydesignsystem.mobileprovision
