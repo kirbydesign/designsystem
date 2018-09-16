@@ -17,10 +17,10 @@ install:
   - echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"
   - echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license"
   - export JAVA_OPTS='-XX:+IgnoreUnrecognizedVMOptions --add-modules java.se.ee'
-  - yes | sdkmanager "build-tools;26.0.2"
+  - yes | sdkmanager "build-tools;27.0.3"
   - yes | sdkmanager "platform-tools"
   - yes | sdkmanager "tools"
-  - yes | sdkmanager "platforms;android-26"
+  - yes | sdkmanager "platforms;android-27"
   - yes | sdkmanager "extras;android;m2repository"
   - pod setup
   - pip install six
@@ -55,4 +55,14 @@ before_script:
 
 script:
   - tns build android --for-device --bundle
-  - tns build ios --bundle --for-device --provision dk.kirby.design.system
+  #- tns build ios --bundle --for-device --provision dk.kirby.design.system
+
+deploy:
+  provider: debug
+  on:
+    branch: travis-playground
+    repo: kirbydesign/designsystem
+    tags: true
+  file: $TRAVIS_BUILD_DIR/platforms/android/app/build/outputs/apk/debug/app-debug.apk
+  overwrite: true
+  skip_cleanup: true
