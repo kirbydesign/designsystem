@@ -1,7 +1,7 @@
 .example {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
 }
 kirby-card-example {
     margin-right: 2em;
@@ -9,6 +9,6 @@ kirby-card-example {
 
 .code-example{
     h4 {
-        margin-bottom: 0;
+        margin: 0;
     }
 }
