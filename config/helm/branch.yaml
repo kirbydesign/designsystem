@@ -1,13 +1,12 @@
-# Values for kirby design staging (production??)
+# Values for kirby design branch
 
 replicaCount: 1
 
 ingress:
   annotations:
     kubernetes.io/ingress.class: 'addon-http-application-routing'
-    certmanager.k8s.io/cluster-issuer: letsencrypt-prod
+    certmanager.k8s.io/cluster-issuer: letsencrypt-staging
     nginx.ingress.kubernetes.io/configuration-snippet: |
       more_set_headers "Strict-Transport-Security: max-age=31536000";
       more_set_headers "Access-Control-Allow-Origin: *";
   tls: true
-  host: kirby.79e7f2f3549145978da6.northeurope.aksapp.io
