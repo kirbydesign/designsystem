@@ -123,7 +123,7 @@ spec:
                         script {
                             def name = env.BRANCH_NAME.replaceAll("[^a-zA-Z0-9]+", "-").toLowerCase()
                             def dnsName = generateDNS("${dns}-${name}", domain)
-                            sh "/helm upgrade -i ${gitRepo}-${name} config/chart --set image.repository=${repository} --set image.tag=git${env.GIT_COMMIT} --set ingress.host=${dnsName} -f config/helm/branch.yaml"
+                            sh "/helm upgrade --kubeconfig /root/.kube/config -i ${gitRepo}-${name} config/chart --set image.repository=${repository} --set image.tag=git${env.GIT_COMMIT} --set ingress.host=${dnsName} -f config/helm/branch.yaml"
                             addBadge icon: "info.gif", text: "https://${dnsName}", link: "https://${dnsName}"
                         }
                     }
@@ -137,7 +137,7 @@ spec:
             steps {
                 container('helm') {
                     ansiColor('xterm') {
-                        sh "/helm upgrade -i ${gitRepo} config/chart --set image.repository=${repository} --set image.tag=git${env.GIT_COMMIT} --set ingress.host=${dns}.${domain} -f config/helm/staging.yaml"
+                        sh "/helm upgrade --kubeconfig /root/.kube/config -i ${gitRepo} config/chart --set image.repository=${repository} --set image.tag=git${env.GIT_COMMIT} --set ingress.host=${dns}.${domain} -f config/helm/staging.yaml"
                     }
                 }
             }
