@@ -113,9 +113,6 @@ spec:
                 not {
                     branch 'master'
                 }
-                not {
-                    changeRequest()
-                }
             }
             steps {
                 container('helm') {
