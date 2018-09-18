@@ -2,6 +2,9 @@
 
 replicaCount: 1
 
+image:
+  pullSecret: regcred
+
 ingress:
   annotations:
     kubernetes.io/ingress.class: 'addon-http-application-routing'
@@ -9,5 +12,6 @@ ingress:
     nginx.ingress.kubernetes.io/configuration-snippet: |
       more_set_headers "Strict-Transport-Security: max-age=31536000";
       more_set_headers "Access-Control-Allow-Origin: *";
-  tls: true
-  host: kirby.79e7f2f3549145978da6.northeurope.aksapp.io
+  tls:
+    enable: true
+    secret: branch-tls-secret
