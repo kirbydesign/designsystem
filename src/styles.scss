@@ -2,7 +2,9 @@
 
 // Import common styles
 @import 'app-common';
- 
+@import "~prismjs/plugins/toolbar/prism-toolbar.css";
+@import "~prismjs/themes/prism-okaidia";
+
 @font-face {
   font-family: "Effra";
   font-style: normal;
@@ -48,5 +50,5 @@ body, html {
 *, 
 *:before, 
 *:after {
-  box-sizing: inherit;
+  box-sizing: inherit; 
 }

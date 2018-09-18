@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
 
   items = [
-    {name: 'Design', selected: false}, 
+    {name: 'Design', selected: false},
     {name: 'Components', selected: true}
   ];
 

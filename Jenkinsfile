@@ -1,3 +1,5 @@
+import com.cloudbees.groovy.cps.NonCPS
+
 pipeline {
     agent {
         kubernetes {
@@ -92,7 +94,29 @@ spec:
                 }
             }
         }
-        stage('Deploy') {
+        stage('Deploy branch') {
+            when {
+                not {
+                    branch 'master'
+                }
+                not {
+                    changeRequest()
+                }
+            }
+            steps {
+                container('helm') {
+                    ansiColor('xterm') {
+                        script {
+                            def name = env.BRANCH_NAME.replaceAll("[^-a-z0-9]+", "-")
+                            def dnsName = generateDNS("kirby-${name}", '79e7f2f3549145978da6.northeurope.aksapp.io')
+                            sh "/helm upgrade -i kirby-${name} config/chart --set image.repository=drbreg.azurecr.io/kirby/design --set image.tag=git${env.GIT_COMMIT} --set ingress.host=${dnsName} -f config/helm/branch.yaml"
+                            addBadge icon: "info.gif", text: "https://${dnsName}", link: "https://${dnsName}"
+                        }
+                    }
+                }
+            }
+        }
+        stage('Deploy master') {
             when {
                 branch 'master'
             }
@@ -105,4 +129,32 @@ spec:
             }
         }
     }
+}
+
+@NonCPS
+def generateDNS(name, domain) {
+    def length = 64 - domain.length()
+    if (length < 5) {
+        error "Less than 5 characters to DNS name please find a more appropriate subdomain"
+    }
+    def host = name
+    while (host.length() > length) {
+        host = shortenHost(host)
+    }
+    return "${host}.${domain}"
+}
+
+@NonCPS
+def shortenHost(name) {
+    def magicWords = ['feature']
+    def shortened = name
+    magicWords.each { w -> 
+        shortened = shortened.replace(w, "")
+    }
+    shortened = shortened.replace("--", "-")
+    if (shortened.length() < name.length()) {
+        return shortened
+    }
+
+    return name.substring(0, name.length() - 2)
 }
