@@ -57,7 +57,7 @@ script:
   - tns build android --for-device --bundle
   - tns prepare ios --bundle --for-device --provision dk.kirby.design.system
   - xcodebuild -project $TRAVIS_BUILD_DIR/platforms/ios/designsystem.xcodeproj -sdk iphoneos -configuration Release CODE_SIGN_IDENTITY="iPhone Developer: Anders Bloch (ZLABCCT4Y2)" PROVISIONING_PROFILE="dkkirbydesignsystem.mobileprovision" OTHER_CODE_SIGN_FLAGS="--keychain ~/Library/Keychains/ios-build.keychain" archive -archivePath $TRAVIS_BUILD_DIR/platforms/ios/build/designsystem.xcarchive -scheme designsystem
-  - xcodebuild -exportArchive -exportFormat IPA -archivePath $TRAVIS_BUILD_DIR/platforms/ios/build/designsystem.xcarchive -exportOptionsPlist $TRAVIS_BUILD_DIR/App_Resources/ios/ExportOptions.plist -exportPath $TRAVIS_BUILD_DIR/platforms/ios/build
+  - xcodebuild -exportArchive -archivePath $TRAVIS_BUILD_DIR/platforms/ios/build/designsystem.xcarchive -exportOptionsPlist $TRAVIS_BUILD_DIR/App_Resources/ios/ExportOptions.plist -exportPath $TRAVIS_BUILD_DIR/platforms/ios/build
 
 deploy:
   provider: releases
