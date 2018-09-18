@@ -7,7 +7,7 @@ declare var require: any;
   styleUrls: ['./button-showcase.component.scss']
 })
 export class ButtonShowcaseComponent implements OnInit {
-  exampleHtml: string = require('../../examples/card-example/card-example.component.html');
+  exampleHtml: string = require('../../examples/button-example/button-example.component.html');
 
   constructor() { }
 
