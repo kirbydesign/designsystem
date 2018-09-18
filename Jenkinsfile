@@ -38,7 +38,7 @@ spec:
       - cat
       tty: true
       volumeMounts:
-      - name: kube-config-development
+      - name: kube-config
         mountPath: /root
     volumes:
     - name: jenkins-docker-cfg
