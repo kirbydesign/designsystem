@@ -2,6 +2,9 @@
 
 replicaCount: 1
 
+image:
+  pullSecret: regcred
+
 ingress:
   annotations:
     kubernetes.io/ingress.class: 'addon-http-application-routing'

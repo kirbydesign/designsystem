@@ -4,6 +4,7 @@ def repository = 'drbstaging.azurecr.io/kirbydesign/designsystem'
 def dns = 'kirby'
 def gitRepo = 'designsystem'
 def domain = '650b277bd9a54e5cbadc.westeurope.aksapp.io'
+def chart = 'spa'
 
 pipeline {
     agent {
@@ -116,11 +117,19 @@ spec:
             }
             steps {
                 container('helm') {
+                    checkout poll: false, scm: [
+                        $class: 'GitSCM',
+                        branches: [[name: '*/master']],
+                        extensions: [
+                                [$class: 'RelativeTargetDirectory', relativeTargetDir: 'chart'],
+                                [$class: 'SparseCheckoutPaths', sparseCheckoutPaths: [[path: "${chart}/*"]]]
+                        ],
+                        userRemoteConfigs: [[credentialsId: 'github', url: 'https://github.com/Bankdata/charts.git']]]
                     ansiColor('xterm') {
                         script {
                             def name = env.BRANCH_NAME.replaceAll("[^a-zA-Z0-9]+", "-").toLowerCase()
                             def dnsName = generateDNS("${dns}-${name}", domain)
-                            sh "/helm upgrade --kubeconfig /root/.kube/config -i ${gitRepo}-${name} config/chart --set image.repository=${repository} --set image.tag=git${env.GIT_COMMIT} --set ingress.host=${dnsName} -f config/helm/branch.yaml"
+                            sh "/helm upgrade --kubeconfig /root/.kube/config -i ${gitRepo}-${name} chart/${chart} --set image.repository=${repository} --set image.tag=git${env.GIT_COMMIT} --set ingress.host=${dnsName} -f config/helm/branch.yaml"
                             addBadge icon: "info.gif", text: "https://${dnsName}", link: "https://${dnsName}"
                         }
                     }
