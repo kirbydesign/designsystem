@@ -1,5 +1,10 @@
 import com.cloudbees.groovy.cps.NonCPS
 
+def repository = 'drbstaging.azurecr.io/kirbydesign/designsystem'
+def dns = 'kirby'
+def gitRepo = 'designsystem'
+def domain = '650b277bd9a54e5cbadc.westeurope.aksapp.io'
+
 pipeline {
     agent {
         kubernetes {
@@ -32,6 +37,9 @@ spec:
       command:
       - cat
       tty: true
+      volumeMounts:
+      - name: kube-config-development
+        mountPath: /root
     volumes:
     - name: jenkins-docker-cfg
       secret:
@@ -39,6 +47,12 @@ spec:
         items:
         - key: .dockerconfigjson
           path: .docker/config.json
+    - name: kube-config
+      secret:
+        secretName: kube-config-development
+        items:
+        - key: kube.config
+          path: .kube/config
 """
         }
     }
@@ -88,7 +102,7 @@ spec:
                 container(name: 'kaniko', shell: '/busybox/sh') {
                     ansiColor('xterm') {
                         sh """#!/busybox/sh
-/kaniko/executor -f `pwd`/Dockerfile -c `pwd` --destination=drbreg.azurecr.io/kirby/design:git${env.GIT_COMMIT}
+/kaniko/executor -f `pwd`/Dockerfile -c `pwd` --destination=${repository}:git${env.GIT_COMMIT}
                         """
                     }
                 }
@@ -107,9 +121,9 @@ spec:
                 container('helm') {
                     ansiColor('xterm') {
                         script {
-                            def name = env.BRANCH_NAME.replaceAll("[^-a-z0-9]+", "-")
-                            def dnsName = generateDNS("kirby-${name}", '79e7f2f3549145978da6.northeurope.aksapp.io')
-                            sh "/helm upgrade -i kirby-${name} config/chart --set image.repository=drbreg.azurecr.io/kirby/design --set image.tag=git${env.GIT_COMMIT} --set ingress.host=${dnsName} -f config/helm/branch.yaml"
+                            def name = env.BRANCH_NAME.replaceAll("[^a-zA-Z0-9]+", "-").toLowerCase()
+                            def dnsName = generateDNS("${dns}-${name}", domain)
+                            sh "/helm upgrade -i ${gitRepo}-${name} config/chart --set image.repository=${repository} --set image.tag=git${env.GIT_COMMIT} --set ingress.host=${dnsName} -f config/helm/branch.yaml"
                             addBadge icon: "info.gif", text: "https://${dnsName}", link: "https://${dnsName}"
                         }
                     }
@@ -123,7 +137,7 @@ spec:
             steps {
                 container('helm') {
                     ansiColor('xterm') {
-                        sh "/helm upgrade -i kirby config/chart --set image.repository=drbreg.azurecr.io/kirby/design --set image.tag=git${env.GIT_COMMIT} -f config/helm/staging.yaml"
+                        sh "/helm upgrade -i ${gitRepo} config/chart --set image.repository=${repository} --set image.tag=git${env.GIT_COMMIT} --set ingress.host=${dns}.${domain} -f config/helm/staging.yaml"
                     }
                 }
             }
