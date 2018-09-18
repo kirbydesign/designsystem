@@ -19,9 +19,13 @@ spec:
       - backend:
           serviceName: {{ template "spa.fullname" . }}
           servicePort: web
-{{- if .Values.ingress.tls }}
+{{- if .Values.ingress.tls.enable }}
   tls:
   - hosts:
     - {{ .Values.ingress.host | quote }}
+{{- if .Values.ingress.tls.secret }}
+    secretName: {{ .Values.ingress.tls.secret }}
+{{ else }}
     secretName: {{ template "spa.fullname" . }}
+{{- end }}
 {{- end }}
