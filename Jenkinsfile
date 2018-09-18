@@ -151,7 +151,10 @@ spec:
                         ],
                         userRemoteConfigs: [[credentialsId: 'github', url: 'https://github.com/Bankdata/charts.git']]]
                     ansiColor('xterm') {
-                        sh "/helm upgrade --kubeconfig /root/.kube/config -i ${gitRepo} chart/${chart} --set image.repository=${repository} --set image.tag=git${env.GIT_COMMIT} --set ingress.host=${dns}.${domain} -f config/helm/staging.yaml"
+                        script {
+                            sh "/helm upgrade --kubeconfig /root/.kube/config -i ${gitRepo} chart/${chart} --set image.repository=${repository} --set image.tag=git${env.GIT_COMMIT} --set ingress.host=${dns}.${domain} -f config/helm/staging.yaml"
+                            addBadge icon: "info.gif", text: "https://${dns}.${domain}", link: "https://${dns}.${domain}"
+                        }
                     }
                 }
             }

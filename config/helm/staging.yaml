@@ -14,4 +14,3 @@ ingress:
       more_set_headers "Access-Control-Allow-Origin: *";
   tls:
     enable: true
-    secret: branch-tls-secret
