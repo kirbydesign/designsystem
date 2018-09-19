@@ -62,6 +62,12 @@ script:
   #- "xcodebuild -project $TRAVIS_BUILD_DIR/platforms/ios/designsystem.xcodeproj -sdk iphoneos -configuration Release CODE_SIGN_IDENTITY='iPhone Developer: Anders Bloch (ZLABCCT4Y2)' PROVISIONING_PROFILE=dkkirbydesignsystem.mobileprovision OTHER_CODE_SIGN_FLAGS='--keychain ~/Library/Keychains/ios-build.keychain' archive -archivePath $TRAVIS_BUILD_DIR/platforms/ios/build/designsystem.xcarchive -scheme designsystem"
   #- "xcodebuild -exportArchive -archivePath $TRAVIS_BUILD_DIR/platforms/ios/build/designsystem.xcarchive -exportOptionsPlist $TRAVIS_BUILD_DIR/App_Resources/ios/ExportOptions.plist -exportPath $TRAVIS_BUILD_DIR/platforms/ios/build"
 
+before_deploy:
+  # Set up git user name and tag this commit
+  - git config --local user.name "Anders Bloch"
+  - git config --local user.email "anders.bloch@jyskebank.dk"
+  - git tag "$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
+
 deploy:
   provider: releases
   api_key:
@@ -74,4 +80,4 @@ deploy:
   on:
     repo: kirbydesign/designsystem
     branch: travis-playground
-    tags: false
+    tags: true
