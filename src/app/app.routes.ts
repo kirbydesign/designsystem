@@ -24,8 +24,8 @@ export const routes: Routes = [
         ]
     },
     {
-        path: 'showcase',
-        loadChildren: './showcase/showcase.module#ShowcaseModule'
+        path: 'examples',
+        loadChildren: './examples/examples-routing.module#ExamplesRoutingModule'
     },
     {
         path: 'designer',
