@@ -24,11 +24,15 @@ export const routes: Routes = [
         ]
     },
     {
-        path: 'showcase',
-        loadChildren: './showcase/showcase.module#ShowcaseModule'
+        path: 'examples',
+        loadChildren: './examples/examples-routing.module#ExamplesRoutingModule'
     },
     {
         path: 'designer',
         loadChildren: './designer/designer.module#DesignerModule'
+    },
+    {
+        path: 'app',
+        loadChildren: './app-shell/app-shell.module#AppShellModule'
     },
 ];

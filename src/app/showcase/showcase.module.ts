@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import {ExamplesModule} from '~/app/examples/examples.module';
 import {ShowcaseRoutingModule} from './showcase-routing.module';
-
+import {ShowcaseComponent} from './showcase.component';
 import {ButtonShowcaseComponent} from './button-showcase/button-showcase.component';
 import {CardShowcaseComponent} from './card-showcase/card-showcase.component';
 import {ComponentTemplateViewerComponent} from '~/app/shared/component-template-viewer/component-template-viewer.component';
@@ -16,6 +16,7 @@ const exportedComponents = [
 
 const declarations = [
   ...exportedComponents,
+  ShowcaseComponent,
   HtmlViewerComponent,
   ComponentTemplateViewerComponent,
 ];
