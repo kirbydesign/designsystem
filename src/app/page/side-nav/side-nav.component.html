@@ -1,44 +1,55 @@
 <ul class="side-nav">
-  <li>
-    <a href="#" class="side-nav__item is-selected">
-      <svg class="icon"><use xlink:href="../../assets/icons/icon-sprite.svg#icon-point-down"></use></svg>
-      Actions
-    </a>
-    <ul class="side-nav side-nav--sub">
-      <li><a href="#" class="side-nav__item">Component</a></li>
-      <li><a href="#" class="side-nav__item">Component</a></li>
-      <li><a href="#" class="side-nav__item is-selected">Component</a></li>
-      <li><a href="#" class="side-nav__item">Component</a></li>
-    </ul>
-  </li>
-  <li>
-    <a href="#" class="side-nav__item">
-      <svg class="icon"><use xlink:href="../../assets/icons/icon-sprite.svg#icon-insert-template"></use></svg>  
-      Structure
-    </a>
-    <ul class="side-nav side-nav--sub">
-      <li><a href="#" class="side-nav__item">Component</a></li>
-      <li><a href="#" class="side-nav__item">Component</a></li>
-      <li><a href="#" class="side-nav__item">Component</a></li>
-      <li><a href="#" class="side-nav__item">Component</a></li>
-    </ul>  
-  </li>
-  <li>
-    <a href="#" class="side-nav__item">
-      <svg class="icon"><use xlink:href="../../assets/icons/icon-sprite.svg#icon-font-size"></use></svg>
-      Typography
-    </a>
-    <ul class="side-nav side-nav--sub">
-      <li><a href="#" class="side-nav__item">Component</a></li>
-      <li><a href="#" class="side-nav__item">Component</a></li>
-      <li><a href="#" class="side-nav__item">Component</a></li>
-      <li><a href="#" class="side-nav__item">Component</a></li>
-    </ul>  
-  </li>
-  <li>
-    <a href="#" class="side-nav__item">
-      <svg class="icon"><use xlink:href="../../assets/icons/icon-sprite.svg#icon-sleepy"></use></svg>
-      What else, icons perhabs?
-    </a>
-  </li>
+    <li>
+        <a routerLink="" [routerLinkActive]="'is-selected'" class="side-nav__item">Intro</a>
+    </li>
+    <li>
+        <a href="#" class="side-nav__item is-selected">
+            <svg class="icon">
+                <use xlink:href="../../assets/icons/icon-sprite.svg#icon-point-down"></use>
+            </svg>
+            Actions
+        </a>
+        <ul class="side-nav side-nav--sub">
+            <li><a routerLink="showcase/buttons" [routerLinkActive]="'is-selected'" class="side-nav__item">Buttons</a></li>
+            <li><a routerLink="showcase/cards" [routerLinkActive]="'is-selected'" class="side-nav__item">Cards</a></li>
+            <li><a href="#" class="side-nav__item">Component</a></li>
+            <li><a href="#" class="side-nav__item">Component</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="#" class="side-nav__item">
+            <svg class="icon">
+                <use xlink:href="../../assets/icons/icon-sprite.svg#icon-insert-template"></use>
+            </svg>
+            Structure
+        </a>
+        <ul class="side-nav side-nav--sub">
+            <li><a href="#" class="side-nav__item">Component</a></li>
+            <li><a href="#" class="side-nav__item">Component</a></li>
+            <li><a href="#" class="side-nav__item">Component</a></li>
+            <li><a href="#" class="side-nav__item">Component</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="#" class="side-nav__item">
+            <svg class="icon">
+                <use xlink:href="../../assets/icons/icon-sprite.svg#icon-font-size"></use>
+            </svg>
+            Typography
+        </a>
+        <ul class="side-nav side-nav--sub">
+            <li><a href="#" class="side-nav__item">Component</a></li>
+            <li><a href="#" class="side-nav__item">Component</a></li>
+            <li><a href="#" class="side-nav__item">Component</a></li>
+            <li><a href="#" class="side-nav__item">Component</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="#" class="side-nav__item">
+            <svg class="icon">
+                <use xlink:href="../../assets/icons/icon-sprite.svg#icon-sleepy"></use>
+            </svg>
+            What else, icons perhabs?
+        </a>
+    </li>
 </ul>

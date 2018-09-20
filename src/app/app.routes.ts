@@ -1,20 +1,38 @@
-import { Routes } from '@angular/router';
+import {Routes} from '@angular/router';
 
-import { HomeComponent } from './home/home.component';
-import { CardDesignerComponent } from './design/card-designer/card-designer.component';
+import {IntroComponent} from '~/app/intro/intro.component';
+import {HomeComponent} from '~/app/home/home.component';
 
 export const routes: Routes = [
-  {
-      path: '',
-      redirectTo: '/home',
-      pathMatch: 'full',
-  },
-  {
-      path: 'home',
-      component: HomeComponent,
-  },
-  {
-      path: 'designer',
-      component: CardDesignerComponent,
-  },
+    {
+        path: '',
+        redirectTo: '/home',
+        pathMatch: 'full',
+    },
+    {
+        path: 'home',
+        component: HomeComponent,
+        children: [
+            {
+                path: '',
+                component: IntroComponent
+            },
+            {
+                path: 'showcase',
+                loadChildren: './showcase/showcase.module#ShowcaseModule'
+            }
+        ]
+    },
+    {
+        path: 'examples',
+        loadChildren: './examples/examples-routing.module#ExamplesRoutingModule'
+    },
+    {
+        path: 'designer',
+        loadChildren: './designer/designer.module#DesignerModule'
+    },
+    {
+        path: 'app',
+        loadChildren: './app-shell/app-shell.module#AppShellModule'
+    },
 ];

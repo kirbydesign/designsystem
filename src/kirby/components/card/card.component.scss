@@ -1,0 +1,59 @@
+:host {
+    --kirby-wireframe-color: lightskyblue;
+    --kirby-wireframe-border-color: var(--kirby-wireframe-color);
+    --kirby-wireframe-border: 1px solid var(--kirby-wireframe-border-color);
+    --kirby-wireframe-text-color: var(--kirby-wireframe-color);
+    color: var(--kirby-wireframe-text-color);
+}
+
+header {
+    text-align: center;
+    border-bottom: var(--kirby-wireframe-border);
+    
+    h2 {
+        margin: 0;
+        margin-top: 0.8em;
+        font-size: 1em;
+        font-weight: normal;
+    }
+
+    h4 {
+        margin: 0;
+        margin-bottom: 0.5em;
+        font-size: 2em;
+        font-weight: bold;
+    }
+}
+
+.card-wrapper {
+    border: var(--kirby-wireframe-border);
+    border-radius: 0.5em;
+    width: 254px;
+    height: 360px;
+}
+
+FlexboxLayout {
+    border-width: 1;
+    border-color: lightskyblue;
+    flex-direction: column;
+    border-radius: 8;
+    padding: 10;
+    width: 70%;
+    height: 50%;
+    align-items: stretch;
+    justify-content: space-around;
+    label {
+        text-align: center;
+        width: 100%;
+        .h2 {
+            align-self: flex-start;
+            font-size: 22;
+        }
+        .h4 {
+            font-size: 18;
+        }
+    }
+    .footer {
+
+    }
+}
