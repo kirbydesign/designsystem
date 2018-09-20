@@ -79,5 +79,5 @@ deploy:
   skip_cleanup: true
   on:
     repo: kirbydesign/designsystem
-    branch: travis-playground
-    tags: true
+    branch: master
+    tags: false
