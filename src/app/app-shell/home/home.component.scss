@@ -1,0 +1,104 @@
+@import '.././../../app-variables';
+
+$page-max-width: 1280px;
+$prototype-color: rgb(0, 198, 224);
+$prototype-color-bg: rgb(232, 246, 255) ;
+
+// TODO Global wrappers?
+.wrapper--app {
+  max-width: $page-max-width;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.app-content {
+  display: flex;
+  flex-direction: column;
+
+  @include media(">=xlarge") {
+    flex-direction: row;
+  }
+}
+
+aside {
+  background-color: $prototype-color-bg;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+  margin-bottom: 2rem;
+  @include media(">=xlarge") {
+    flex-basis: 14rem;
+    margin: 0;
+  }
+}
+
+nav {
+  width: 100%;
+  height: 3.5rem;
+  padding: 1rem 0;
+  color: $prototype-color;
+  background-color: $prototype-color-bg;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  @include media(">=xlarge")  {
+    min-height: 100vh;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+}
+
+.menu-button {
+  color: $prototype-color;
+  text-decoration: none;
+  appearance: none;
+  border: none;
+  background: none;
+  font-size: 1rem;
+  margin: 0;
+  padding: 1rem;
+  cursor: pointer;
+  @include media(">=xlarge") {
+    min-width: 15rem;
+    &--only-mobile {
+      display: none;
+    }
+  }
+}
+
+.menu {
+  display: none;
+  padding: 4rem 0 0;
+  margin: 0;
+  list-style: none;
+  min-width: 15rem;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: darkcyan;
+  color: white;
+  box-shadow: -2px 0 12px rgba(0,0,0,0.4);
+  transform: translateZ(0); // Promotes element layer - needed because of position: fixed
+
+  @include media(">=xlarge") {
+    display: block;
+    position: static;
+    box-shadow: none;  
+    padding-top: 0;
+    transform: none; //Remove layer promotions  
+  }
+
+  &.is-open {
+    display: block;
+  }
+
+  &__item-link {
+    display: block;
+    margin: 0;
+    padding: 1rem;  
+    text-decoration: none;
+    color: currentColor;
+  }
+}
+

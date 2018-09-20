@@ -24,6 +24,12 @@ $breakpoints: (
   xxlarge: 80em 
 );
 
+/* Z-index
+--------------------------------------------------------------------------------*/
+$z-layers: (
+  default: 1,
+);
+
 /* Colors (Maybe we should avoid using these directly in other scss files)
 --------------------------------------------------------------------------------*/
 $sårt: #1C1C1C;
@@ -39,3 +45,9 @@ $page-header-bg: $sårt;
 $page-header-color: $hvii;
 $page-header-height: 7rem;
 $page-gutter: 1rem;
+
+
+// TODO Move to a functions/utils scss file
+@function z($key) {
+  @return _get-map-prop($z-layers, $key);
+}
