@@ -2,6 +2,9 @@
   "name": "designsystem",
   "nativescript": {
     "id": "dk.kirby.design.system",
+    "tns-android": {
+      "version": "4.2.0"
+    },
     "tns-ios": {
       "version": "4.2.0"
     }
