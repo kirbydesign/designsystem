@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-//TODO TRM - Where should IconComponent be imported?
+// TODO TRM - Where should IconComponent be imported?
 import { IconComponent } from '~/kirby/components/icon/icon.component';
 
 
