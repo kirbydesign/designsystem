@@ -1,7 +1,7 @@
 import {Routes} from '@angular/router';
 
-import {IntroComponent} from '~/app/intro/intro.component';
-import {HomeComponent} from '~/app/home/home.component';
+import {IntroComponent} from './intro/intro.component';
+import {HomeComponent} from './home/home.component';
 
 export const routes: Routes = [
     {
@@ -31,8 +31,8 @@ export const routes: Routes = [
         path: 'designer',
         loadChildren: './designer/designer.module#DesignerModule'
     },
-    {
-        path: 'app',
-        loadChildren: './app-shell/app-shell.module#AppShellModule'
-    },
+    // {
+    //     path: 'app',
+    //     loadChildren: './app-shell/app-shell.module#AppShellModule'
+    // },
 ];

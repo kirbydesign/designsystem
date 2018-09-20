@@ -1,7 +1,8 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from '~/app/app-shell/home/home.component';
+import { HomeComponent } from './home/home.component';
 
 export const COMPONENT_DECLARATIONS: any[] = [
+    HomeComponent
 ];
 
 export const PROVIDERS_DECLARATIONS: any[] = [

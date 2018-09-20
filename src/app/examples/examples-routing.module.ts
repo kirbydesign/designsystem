@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { routes } from './examples.routes';
-import { ExamplesModule } from '~/app/examples/examples.module';
+import { ExamplesModule } from './examples.module';
 
 @NgModule({
   imports: [RouterModule.forChild(routes), ExamplesModule],
