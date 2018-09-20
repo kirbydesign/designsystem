@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  isMenuOpen = false;
+  isMenuOpen = false; 
 
   constructor() { }
 

@@ -58,13 +58,22 @@ nav {
   margin: 0;
   padding: 1rem;
   cursor: pointer;
+  &--close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: white;
+    margin: 0.3rem;
+  }
   @include media(">=xlarge") {
     min-width: 15rem;
     &--only-mobile {
       display: none;
     }
   }
+
 }
+
 
 .menu {
   display: none;

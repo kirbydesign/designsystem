@@ -8,6 +8,9 @@
           <a href="#" class="menu-button">2 - ITEM</a>
           <button class="menu-button menu-button--only-mobile" (click)="onToggleMenu()">3 - ITEM</button>
           <ul class="menu" [ngClass]="{'is-open': isMenuOpen}">
+            <button class="menu-button menu-button--close menu-button--only-mobile" (click)="onToggleMenu()">
+              <kirby-icon name="cross"></kirby-icon>
+            </button>
             <li class="menu__item"><a href="#" class="menu__item-link">MENU ITEM 1</a></li>
             <li class="menu__item"><a href="#" class="menu__item-link">MENU ITEM 2</a></li>
             <li class="menu__item"><a href="#" class="menu__item-link">MENU ITEM 3</a></li>
@@ -15,7 +18,7 @@
             <li class="menu__item"><a href="#" class="menu__item-link">MENU ITEM 5</a></li>
           </ul>
         </nav>
-      </aside>
+      </aside> 
       <section style="min-height: 200vh; flex: 1 0 auto;background-color: darkslategray; color: white; padding: 2rem; text-transform: uppercase">
         <h1>Awesome content here...</h1>
         <router-outlet name="main"></router-outlet>
