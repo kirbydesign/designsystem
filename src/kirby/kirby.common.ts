@@ -6,6 +6,6 @@ import { IconComponent } from './components/icon/icon.component';
 export const declarations = [
   CardComponent,
   ButtonComponent,
-  IconComponent,
   ListComponent,
+  IconComponent
 ];

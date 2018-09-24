@@ -23,7 +23,6 @@ $prototype-color-bg: rgb(232, 246, 255) ;
 aside {
   background-color: $prototype-color-bg;
   box-shadow: 0 2px 4px rgba(0,0,0,0.4);
-  margin-bottom: 2rem;
   @include media(">=xlarge") {
     flex-basis: 14rem;
     margin: 0;
@@ -54,60 +53,43 @@ nav {
   appearance: none;
   border: none;
   background: none;
-  font-size: 1rem;
+  font-size: 0.7rem;
   margin: 0;
   padding: 1rem;
   cursor: pointer;
-  &--close {
-    position: absolute;
-    top: 0;
-    right: 0;
-    color: white;
-    margin: 0.3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  &--align-right { 
+    align-items: flex-end;
   }
+
+  &--align-center {
+    align-items: center;
+  }
+
+  & kirby-icon {
+    margin: 0 0 0.2rem;
+  }
+
   @include media(">=xlarge") {
     min-width: 15rem;
+    flex-direction: row;
+    align-items: center;
+    font-size: 1rem;
+
+    &--align-left,
+    &--align-right {
+      align-items: center;
+    }
+
     &--only-mobile {
       display: none;
     }
-  }
-
-}
-
-
-.menu {
-  display: none;
-  padding: 4rem 0 0;
-  margin: 0;
-  list-style: none;
-  min-width: 15rem;
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  background-color: darkcyan;
-  color: white;
-  box-shadow: -2px 0 12px rgba(0,0,0,0.4);
-  transform: translateZ(0); // Promotes element layer - needed because of position: fixed
-
-  @include media(">=xlarge") {
-    display: block;
-    position: static;
-    box-shadow: none;  
-    padding-top: 0;
-    transform: none; //Remove layer promotions  
-  }
-
-  &.is-open {
-    display: block;
-  }
-
-  &__item-link {
-    display: block;
-    margin: 0;
-    padding: 1rem;  
-    text-decoration: none;
-    color: currentColor;
+    & kirby-icon {
+      margin: 0 0.5rem 0;
+    }
   }
 }
 

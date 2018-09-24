@@ -7,14 +7,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  isMenuOpen = false;
+  homeIsMenuOpen = false;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  onClickMenu() {
+    this.homeIsMenuOpen = !this.homeIsMenuOpen;
+    console.log('onClickMenu kaldt: ' + this.homeIsMenuOpen);
   }
 
-  onToggleMenu() {
-    this.isMenuOpen = !this.isMenuOpen;
+  onMenuToggle(isOpen) {
+    console.log('Toggled kaldt...i home component');
+    this.homeIsMenuOpen = isOpen;
   }
 }

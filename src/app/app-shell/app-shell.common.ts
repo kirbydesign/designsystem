@@ -1,12 +1,10 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-// TODO TRM - Where should IconComponent be imported?
-import { IconComponent } from '~/kirby/components/icon/icon.component';
-
+import { AppMenuComponent } from './app-menu/app-menu.component';
 
 export const COMPONENT_DECLARATIONS: any[] = [
     HomeComponent,
-    IconComponent,
+    AppMenuComponent
 ];
 
 export const PROVIDERS_DECLARATIONS: any[] = [
