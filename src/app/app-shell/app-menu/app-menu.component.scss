@@ -8,7 +8,7 @@
 }
 
 .menu {
-  display: none;
+  visibility: hidden;
   padding: 4rem 0 0;
   margin: 0;
   list-style: none;
@@ -20,7 +20,9 @@
   background-color: darkcyan;
   color: white;
   box-shadow: -2px 0 12px rgba(0, 0, 0, 0.4);
-  transform: translateZ(0); // Promotes element layer - needed because of position: fixed
+  transform: translateX(100%) translateZ(0); // Promotes element layer - needed because of position: fixed
+  transition: 0.13s visibility ease-in-out, transform 0.13s cubic-bezier(0,0,0.3,1);
+  will-change: visibility;
 
   @include media(">=xlarge") {
     display: block;
@@ -31,8 +33,9 @@
   }
 
   &.is-open {
-    display: block;
-    animation: slide-in 0.2s ease-in-out forwards;
+    visibility: visible;
+    transition: 0.33s visibility ease-in-out, transform 0.33s cubic-bezier(0,0,0.3,1);
+    transform: translateX(0%) translateZ(0);
   }
 
   &__item-link {
@@ -55,24 +58,5 @@
     @include media(">=xlarge") {
       display: none;
     }
-  }
-}
-
-@keyframes slide-in {
-  0% {
-    transform: translateX(100%);
-  }
-  100% {
-    transform: translateX(0);
-  }
-}
-
-@keyframes slide-out {
-  0% {
-    display: block;
-  }
-  100% {
-    transform: translateX(100%);
-    display: none;
   }
 }
