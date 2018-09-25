@@ -1,8 +1,10 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { AppMenuComponent } from './app-menu/app-menu.component';
 
 export const COMPONENT_DECLARATIONS: any[] = [
-    HomeComponent
+    HomeComponent,
+    AppMenuComponent
 ];
 
 export const PROVIDERS_DECLARATIONS: any[] = [

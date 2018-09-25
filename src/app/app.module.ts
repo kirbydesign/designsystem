@@ -1,12 +1,14 @@
-import {NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
 
-import {AppRoutingModule} from './app-routing.module';
-import {AppComponent} from './app.component';
-import {HomeComponent} from './home/home.component';
-import {SideNavComponent} from './page/side-nav/side-nav.component';
-import {HeaderComponent} from './page/header/header.component';
-import {IntroComponent} from './intro/intro.component';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { HomeComponent } from './home/home.component';
+import { SideNavComponent } from './page/side-nav/side-nav.component';
+import { HeaderComponent } from './page/header/header.component';
+import { IntroComponent } from './intro/intro.component';
+import { KirbyModule } from '~/kirby/kirby.module';
 
 @NgModule({
     declarations: [
@@ -14,12 +16,15 @@ import {IntroComponent} from './intro/intro.component';
         HomeComponent,
         SideNavComponent,
         HeaderComponent,
-        IntroComponent
+        IntroComponent,
     ],
     imports: [
         BrowserModule,
         AppRoutingModule,
+        HttpClientModule,
+        KirbyModule,
     ],
+
     providers: [],
     bootstrap: [AppComponent]
 })
