@@ -1,3 +1,8 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <ActionBar [title]="title"></ActionBar>
-<kirby-card title="Kirby Card" ></kirby-card>
+<StackLayout>
+    <button text="Examples" [nsRouterLink]="'/examples'"></button>
+    <button text="Showcase" [nsRouterLink]="'showcase'"></button>
+    <button text="App" [nsRouterLink]="'/app'"></button>
+    <router-outlet></router-outlet>
+</StackLayout>

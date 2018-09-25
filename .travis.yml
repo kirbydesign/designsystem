@@ -1,83 +1,119 @@
-os: osx
-sudo: required
-osx_image: xcode9.4
-language: node_js
-node_js: "10.5"
+env:
+  global:
+  - ANDROID_PACKAGE='designsystem.apk'
+  - ANDROID_PACKAGE_FOLDER=$TRAVIS_BUILD_DIR/platforms/android/app/build/outputs/apk/debug/
+  #- ANDROID_SAUCE_STORAGE="https://saucelabs.com/rest/v1/storage/$SAUCE_USER/$ANDROID_PACKAGE?overwrite=true"
+  - IOS_PACKAGE='designsystem.zip'
+  - IOS_APP_NAME='designsystem.app'
+  - IOS_PACKAGE_FOLDER=$TRAVIS_BUILD_DIR/platforms/ios/build/emulator
+  #- IOS_SAUCE_STORAGE="https://saucelabs.com/rest/v1/storage/$SAUCE_USER/$IOS_PACKAGE?overwrite=true"
+branches:
+  only:
+  - master
 
-jdk: oraclejdk8
+matrix:
+  include:
+  - stage: "Build"
+    os: osx
+    env:
+    - BuildiOS="11"
+    - Xcode="9.4"
+    osx_image: xcode9.4
+    language: node_js
+    node_js: "10.5"
+    jdk: oraclejdk8
+    script:
+    - tns build ios --env.aot --env.uglify
+    #- cd $IOS_PACKAGE_FOLDER && zip -r $IOS_PACKAGE $IOS_APP_NAME
+    #- "curl -u $SAUCE_USER:$SAUCE_KEY -X POST -H 'Content-Type: application/octet-stream' $IOS_SAUCE_STORAGE --data-binary @$IOS_PACKAGE_FOLDER/$IOS_PACKAGE"
+  - language: android
+    env:
+    - BuildAndroid="26"
+    os: linux
+    jdk: oraclejdk8
+    before_install: nvm install 8.9.1
+    script:
+    - tns build android --env.aot --env.uglify --env.snapshot
+    #- "curl -u $SAUCE_USER:$SAUCE_KEY -X POST -H 'Content-Type: application/octet-stream' $ANDROID_SAUCE_STORAGE --data-binary @$ANDROID_PACKAGE_FOLDER/app-debug.apk"
+
+  #matrix:
+  #  include:
+    #  - stage: "Build"
+    #os: osx
+    #env:
+    #- Build="iOS"
+    #osx_image: xcode9.4
+    #language: node_js
+    #node_js: "10.5"
+    #jdk: oraclejdk8
+    #before_install:
+    #- npm install
+    #before_script:
+    #- openssl aes-256-cbc -k "$SECURITY_PASSWORD" -in $TRAVIS_BUILD_DIR/scripts/profile/dkkirbydesignsystem.mobileprovision.enc -d -a -out $TRAVIS_BUILD_DIR/scripts/profile/dkkirbydesignsystem.mobileprovision
+    #- openssl aes-256-cbc -k "$SECURITY_PASSWORD" -in $TRAVIS_BUILD_DIR/scripts/certs/dkkirbydesignsystem.cer.enc -d -a -out $TRAVIS_BUILD_DIR/scripts/certs/dkkirbydesignsystem.cer
+    #- openssl aes-256-cbc -k "$SECURITY_PASSWORD" -in $TRAVIS_BUILD_DIR/scripts/certs/dkkirbydesignsystem-key.p12.enc -d -a -out $TRAVIS_BUILD_DIR/scripts/certs/dkkirbydesignsystem-key.p12
+    # Create a custom keychain
+    #- security create-keychain -p travis ios-build.keychain
+    # Make the custom keychain default, so xcodebuild will use it for signing
+    #- security default-keychain -s ios-build.keychain
+    # Unlock the keychain
+    #- security unlock-keychain -p travis ios-build.keychain
+    # Set keychain timeout to 1 hour for long builds
+    # see http://www.egeek.me/2013/02/23/jenkins-and-xcode-user-interaction-is-not-allowed/
+    #- security set-keychain-settings -t 3600 -l ~/Library/Keychains/ios-build.keychain
+    # Add certificates to keychain and allow codesign to access them
+    #- security import $TRAVIS_BUILD_DIR/scripts/certs/AppleWWDRCA.cer -k ~/Library/Keychains/ios-build.keychain -T /usr/bin/codesign
+    #- security import $TRAVIS_BUILD_DIR/scripts/certs/dkkirbydesignsystem.cer -k ~/Library/Keychains/ios-build.keychain -T /usr/bin/codesign
+    #- security import $TRAVIS_BUILD_DIR/scripts/certs/dkkirbydesignsystem-key.p12 -k ~/Library/Keychains/ios-build.keychain -P $KEY_PASSWORD -T /usr/bin/codesign
+    # Put the provisioning profile in place
+    #- mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+    #- cp "$TRAVIS_BUILD_DIR/scripts/profile/dkkirbydesignsystem.mobileprovision" ~/Library/MobileDevice/Provisioning\ Profiles/
+    #- sudo gem install xcodeproj
+    #- sudo gem install cocoapods
+    #- pod setup
+    #- pip install six
+#    - tns cloud setup
+#    - tns doctor
+#    script:
+#    - echo n | tns build ios --bundle --for-device --provision dk.kirby.design.system --release
+
+#android:
+#  licenses:
+#  - ".+"
 
 install:
-  - sudo gem install xcodeproj
-  - sudo gem install cocoapods
-  - export HOMEBREW_NO_AUTO_UPDATE=1
   - brew cask install android-sdk
-  - export ANDROID_SDK_ROOT=/usr/local/share/android-sdk
   - export ANDROID_HOME=/usr/local/share/android-sdk
-  - mkdir "$ANDROID_HOME/licenses" || true
-  - echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"
-  - echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license"
-  - export JAVA_OPTS='-XX:+IgnoreUnrecognizedVMOptions --add-modules java.se.ee'
-  - yes | sdkmanager "build-tools;27.0.3"
-  - yes | sdkmanager "platform-tools"
-  - yes | sdkmanager "tools"
-  - yes | sdkmanager "platforms;android-27"
-  - yes | sdkmanager "extras;android;m2repository"
-  - pod setup
-  - pip install six
-  - npm install
+  - $ANDROID_HOME/tools/bin/sdkmanager "tools" "emulator" "platform-tools" "platforms;android-25" "build-tools;27.0.3" "extras;android;m2repository" "extras;google;m2repository"
   - echo no | npm install -g nativescript
   - tns usage-reporting disable
   - tns error-reporting disable
-  #- sudo tns setup
-  - sudo tns cloud setup
-  - tns doctor
-
-before_script:
-  - openssl aes-256-cbc -k "$SECURITY_PASSWORD" -in $TRAVIS_BUILD_DIR/scripts/profile/dkkirbydesignsystem.mobileprovision.enc -d -a -out $TRAVIS_BUILD_DIR/scripts/profile/dkkirbydesignsystem.mobileprovision
-  - openssl aes-256-cbc -k "$SECURITY_PASSWORD" -in $TRAVIS_BUILD_DIR/scripts/certs/dkkirbydesignsystem.cer.enc -d -a -out $TRAVIS_BUILD_DIR/scripts/certs/dkkirbydesignsystem.cer
-  - openssl aes-256-cbc -k "$SECURITY_PASSWORD" -in $TRAVIS_BUILD_DIR/scripts/certs/dkkirbydesignsystem-key.p12.enc -d -a -out $TRAVIS_BUILD_DIR/scripts/certs/dkkirbydesignsystem-key.p12
-  # Create a custom keychain
-  - security create-keychain -p travis ios-build.keychain
-  # Make the custom keychain default, so xcodebuild will use it for signing
-  - security default-keychain -s ios-build.keychain
-  # Unlock the keychain
-  - security unlock-keychain -p travis ios-build.keychain
-  # Set keychain timeout to 1 hour for long builds
-  # see http://www.egeek.me/2013/02/23/jenkins-and-xcode-user-interaction-is-not-allowed/
-  - security set-keychain-settings -t 3600 -l ~/Library/Keychains/ios-build.keychain
-  # Add certificates to keychain and allow codesign to access them
-  - security import $TRAVIS_BUILD_DIR/scripts/certs/AppleWWDRCA.cer -k ~/Library/Keychains/ios-build.keychain -T /usr/bin/codesign
-  - security import $TRAVIS_BUILD_DIR/scripts/certs/dkkirbydesignsystem.cer -k ~/Library/Keychains/ios-build.keychain -T /usr/bin/codesign
-  - security import $TRAVIS_BUILD_DIR/scripts/certs/dkkirbydesignsystem-key.p12 -k ~/Library/Keychains/ios-build.keychain -P $KEY_PASSWORD -T /usr/bin/codesign
-  - "security set-key-partition-list -S apple-tool:,apple: -s -k travis ios-build.keychain"
-  # Put the provisioning profile in place
-  - mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-  - cp "$TRAVIS_BUILD_DIR/scripts/profile/dkkirbydesignsystem.mobileprovision" ~/Library/MobileDevice/Provisioning\ Profiles/
-
-script:
-  - tns build android --for-device --bundle
-  - tns build ios --bundle --for-device --provision dk.kirby.design.system
-  #- tns prepare ios --bundle --for-device --provision dk.kirby.design.system
-  #- "xcodebuild -project $TRAVIS_BUILD_DIR/platforms/ios/designsystem.xcodeproj -sdk iphoneos -configuration Release CODE_SIGN_IDENTITY='iPhone Developer: Anders Bloch (ZLABCCT4Y2)' PROVISIONING_PROFILE=dkkirbydesignsystem.mobileprovision OTHER_CODE_SIGN_FLAGS='--keychain ~/Library/Keychains/ios-build.keychain' archive -archivePath $TRAVIS_BUILD_DIR/platforms/ios/build/designsystem.xcarchive -scheme designsystem"
-  #- "xcodebuild -exportArchive -archivePath $TRAVIS_BUILD_DIR/platforms/ios/build/designsystem.xcarchive -exportOptionsPlist $TRAVIS_BUILD_DIR/App_Resources/ios/ExportOptions.plist -exportPath $TRAVIS_BUILD_DIR/platforms/ios/build"
-
-before_deploy:
-  # Set up git user name and tag this commit
-  - git config --local user.name "Anders Bloch"
-  - git config --local user.email "anders.bloch@jyskebank.dk"
-  - git tag "$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
 
 deploy:
   provider: releases
-  prerelease: true
-  api_key:
-    secure: JwRIou+CTO+vxc8G3bMdUoiLKavTLHUhKR8dmtupablYd++UHuDnnb9xepxRgkgfv0n9rPraEzSZpzH3qnwAKkvQmCtHb2ykeTqIJjgRZ2UIgkp31RA79Hlvc5oQqR22wglygPn+qYJhhPAzCDpOy8slEiLMuB7hAIDjk13TbWe1XZy4cQc6m47wM5dMZho+WrhoUhC2i6QNCrnfytxWCQOAnTy1h7OdOf6u42hSLX4DTg6fgAncSZkH0bAk5bWKDCk/PoemYgi5UZIB+n9yPz59bkrsv1Ax3IY3+alPuTh2wH47kcZbSUFrYoi5lAvF6AwUWjkpnhZZ+ejRptPky+Vq2udQ86PKSLFr6hXqn2T2brEKZWOxs5seJmm1rsi3YEVSTkxouyVRjpPu6W2hImyIJZX3W5UCr3GtXOajIl7PUFqV/viwx67PnNmgfvHngTSA9TGL2bMA370KZtuh2a7fFcFQ0UFhERp62l2t79BCcrCkRm1z7k2Wjys83Cec88eQ8Bjw/2DHBzz07nBpE1TBq8zjDovWRXMtkWBAlCCNOAxMfDR0HWEDDcBP4bsH7SAYhfQ3PwzR5A95soTNqsQpXaVy5DH/rQ5FnN7wVz9/wjPryW4xEsH5fnzDRvXJQMJfrI4pPjx/MmU2TmFwtMN8sVVCArZzcJqXiotXaiI=
-  file:
-    - $TRAVIS_BUILD_DIR/platforms/android/app/build/outputs/apk/debug/app-debug.apk
-    - $TRAVIS_BUILD_DIR/platforms/ios/build/device/designsystem.ipa
+  file: $TRAVIS_BUILD_DIR/platforms/ios/build/device/designsystem.ipa
+  file_glob: "true"
+  skip_cleanup: false
   overwrite: true
-  skip_cleanup: true
   on:
-    repo: kirbydesign/designsystem
     branch: master
-    tags: false
+    repo: kirbydesign/designsystem
+    tags: true
+
+android:
+  components:
+  - tools
+  - platform-tools
+  - build-tools-27.0.3
+  - android-26
+  - android-23
+  - extra-android-m2repository
+
+before_cache:
+- rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+
+cache:
+  directories:
+  - .nvm
+  - $HOME/.gradle/caches/
+  - $HOME/.gradle/wrapper/

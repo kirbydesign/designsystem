@@ -3,8 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { KirbyModule } from '../../kirby/kirby.module';
 
-import { ROUTES } from './app-shell.common';
-import { COMPONENT_DECLARATIONS } from './app-shell.common';
+import { ROUTES, COMPONENT_DECLARATIONS } from './app-shell.common';
 
 @NgModule({
   imports: [
