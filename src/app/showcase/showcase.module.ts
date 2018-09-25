@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import {COMPONENT_IMPORTS, COMPONENT_EXPORTS, COMPONENT_DECLARATIONS} from './showcase.common';
-import {ComponentTemplateViewerComponent} from '../shared/component-template-viewer/component-template-viewer.component';
 import {HtmlViewerComponent} from '../shared/html-viewer/html-viewer.component';
 
 @NgModule({
@@ -12,8 +11,7 @@ import {HtmlViewerComponent} from '../shared/html-viewer/html-viewer.component';
   ],
   declarations: [
     ...COMPONENT_DECLARATIONS,
-    HtmlViewerComponent,
-    ComponentTemplateViewerComponent
+    HtmlViewerComponent
   ],
   exports: COMPONENT_EXPORTS
 })
