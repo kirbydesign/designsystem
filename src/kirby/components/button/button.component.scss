@@ -7,17 +7,16 @@
     display: inline-block;
     margin: 0.25em 0.25em;
     
-    &.block {
+    &[expand="block"] {
         display: block;
     }
-
-    &.rounded {
-        --kirby-button-border-radius: 2em;
-    }
-
 }
 
 button {
+    &.round {
+        --kirby-button-border-radius: 10em;
+    }
+
     outline: none;
 
     width: 100%;
