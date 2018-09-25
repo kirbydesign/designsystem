@@ -9,11 +9,9 @@
   margin: 0;
 
   &--sub {
-    //height: 0;
     overflow: hidden;
     font-size: 0.85rem;
     transition: 0.15s transform ease-in-out;
-    //transform: scaleY(0);
     transform-origin: 0 0;
     will-change: height, transform; 
     margin-left: -1rem;   

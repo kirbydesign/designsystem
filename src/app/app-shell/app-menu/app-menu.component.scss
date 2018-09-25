@@ -17,10 +17,10 @@
   top: 0;
   right: 0;
   bottom: 0;
-  background-color: darkcyan;
+  background-color: #008b8b;
   color: white;
   box-shadow: -2px 0 12px rgba(0, 0, 0, 0.4);
-  transform: translateX(100%) translateZ(0); // Promotes element layer - needed because of position: fixed
+  transform: translateX(100%) translateZ(0); // translateZ(0) Promotes element layer - needed because of position: fixed
   transition: 0.13s visibility ease-in-out, transform 0.13s cubic-bezier(0,0,0.3,1);
   will-change: visibility;
 
