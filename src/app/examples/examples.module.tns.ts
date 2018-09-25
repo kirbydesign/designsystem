@@ -10,6 +10,7 @@ import {COMPONENT_DECLARATIONS} from './examples.common';
     KirbyModule
   ],
   declarations: COMPONENT_DECLARATIONS,
+  exports: COMPONENT_DECLARATIONS,
   schemas: [NO_ERRORS_SCHEMA]
 })
 export class ExamplesModule { }
