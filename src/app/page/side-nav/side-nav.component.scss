@@ -9,13 +9,12 @@
   margin: 0;
 
   &--sub {
-    //height: 0;
     overflow: hidden;
     font-size: 0.85rem;
     transition: 0.15s transform ease-in-out;
-    //transform: scaleY(0);
     transform-origin: 0 0;
-    will-change: height, transform;    
+    will-change: height, transform; 
+    margin-left: -1rem;   
 
     &.is-selected {
       height: auto;
@@ -28,7 +27,7 @@
     color: $semi-dark-grey;
     font-weight: 200;
     padding: 0.75rem 0 0.75rem 0.75rem;
-    margin-left: -0.75rem;
+    margin-left: -1rem;
     display: block;
     font-size: 1.2em;
     display: flex;
@@ -45,7 +44,7 @@
   }
 
   &--sub &__item {
-    padding-left: 3.25rem; //Magic... :)
+    padding-left: 4.25rem; //Magic... :)
   }
 }
 
