@@ -1,3 +1,5 @@
+require( 'nativescript-orientation' );
+var platformCss = require('nativescript-platform-css');
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { NativeScriptModule } from 'nativescript-angular/nativescript.module';
 
@@ -30,4 +32,9 @@ import {IntroComponent} from './intro/intro.component';
   bootstrap: [AppComponent],
   schemas: [NO_ERRORS_SCHEMA]
 })
-export class AppModule { }
+export class AppModule {
+  constructor() {
+    platformCss.sizeGroupings(true);
+    platformCss.sizeGroupings([9999,740,320]);
+}
+}

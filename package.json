@@ -33,6 +33,8 @@
     "@angular/router": "~6.1.0",
     "core-js": "^2.5.4",
     "nativescript-angular": "~6.1.0",
+    "nativescript-orientation": "^2.2.1",
+    "nativescript-platform-css": "^1.6.6",
     "nativescript-theme-core": "~1.0.4",
     "prismjs": "^1.15.0",
     "reflect-metadata": "~0.1.8",
