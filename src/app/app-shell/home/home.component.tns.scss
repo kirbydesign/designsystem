@@ -2,11 +2,11 @@ $prototype-color: rgb(0, 198, 224);
 $prototype-color-bg: rgb(232, 246, 255) ;
 
 .main-container {
-  flex-direction: column-reverse;
+  flex-direction: column;
 }
 
 .landscape.android740 :host .main-container {
-  flex-direction: row;
+  flex-direction: row-reverse;
 }
 
 .menu-container {
