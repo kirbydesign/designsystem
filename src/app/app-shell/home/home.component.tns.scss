@@ -13,7 +13,7 @@ $prototype-color-bg: rgb(232, 246, 255) ;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  height: 120 dp;
+  height: 120;
   background-color: $prototype-color-bg;
 }
 
@@ -21,7 +21,7 @@ $prototype-color-bg: rgb(232, 246, 255) ;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  width: 120 dp;
+  width: 120;
   background-color: $prototype-color-bg;
 }
 
@@ -34,15 +34,15 @@ $prototype-color-bg: rgb(232, 246, 255) ;
 }
 
 .menu-icon {
-  width: 32dp;
-  height: 32dp;
-  margin-left: 16dp;
-  margin-right: 16dp;
+  width: 32;
+  height: 32;
+  margin-left: 16;
+  margin-right: 16;
 }
 
 .landscape.android740 :host .menu-icon {
-  width: 32dp;
-  height: 32dp;
-  margin-top: 16dp;
-  margin-bottom: 16dp;
+  width: 32;
+  height: 32;
+  margin-top: 16;
+  margin-bottom: 16;
 }
