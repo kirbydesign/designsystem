@@ -42,3 +42,6 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+scripts/manifest.plist
+scripts/install-ipa.html

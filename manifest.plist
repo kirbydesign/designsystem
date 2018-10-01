@@ -15,14 +15,14 @@
           <string>software-package</string>
           <!-- required. the URL of the file to download. -->
           <key>url</key>
-       <string>https://github.com/kirbydesign/designsystem/releases/download/20180926082306-f19a6b4/designsystem.ipa</string>          
+          <string>https://github.com/kirbydesign/designsystem/releases/download/20180926082306-f19a6b4/designsystem.ipa</string>
         </dict>
         <!-- display-image: the icon to display during download.-->
         <dict>
          <key>kind</key>
          <string>display-image</string>
          <key>url</key>
-         <string>https://lh3.googleusercontent.com/k0k3j8SIf4tnEDYVdUEorXUFUbwkgvs6OlUG2g_eqF5cWpb_4awKZ69wYDK9IzwEAKA=s180-rw</string>
+         <string>https://www.jyskemunnypot.dk/media/1018/jyske_new_logo.svg</string>
         </dict>
         <!-- full-size-image: the large 512x512 icon used by iTunes. -->
         <dict>
@@ -31,7 +31,7 @@
          <key>needs-shine</key>
          <true/>
          <key>url</key>
-         <string>https://lh3.googleusercontent.com/k0k3j8SIf4tnEDYVdUEorXUFUbwkgvs6OlUG2g_eqF5cWpb_4awKZ69wYDK9IzwEAKA=s180-rw</string>
+         <string>https://www.jyskemunnypot.dk/media/1018/jyske_new_logo.svg</string>
         </dict>
       </array><key>metadata</key>
       <dict>
