@@ -80,4 +80,4 @@ deploy:
   on:
     repo: kirbydesign/designsystem
     branch: master
-    tags: true
+    tags: false
