@@ -76,8 +76,8 @@ deploy:
   file:
     - $TRAVIS_BUILD_DIR/platforms/android/app/build/outputs/apk/debug/app-debug.apk
     - $TRAVIS_BUILD_DIR/platforms/ios/build/device/designsystem.ipa
-    - $TRAVIS_BUILD_DIR/scripts/mainfest.plist
-    - $TRAVIS_BUILD_DIR/scripts/install-ipa.html
+    - $TRAVIS_BUILD_DIR/mainfest.plist
+    - $TRAVIS_BUILD_DIR/install-ipa.html
   overwrite: true
   skip_cleanup: true
   on:
