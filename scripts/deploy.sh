@@ -63,4 +63,4 @@ echo "<html>
           <h5>Enterprise In-House App distribution.</h5>
               <a href=\"itms-services://?action=download-manifest&url=https://github.com/kirbydesign/designsystem/releases/download/$1/manifest.plist\">Download Your App</a>
           </body>
-      </html>" >> /scripts/html/index.html
+      </html>" >> ./scripts/html/index.html
