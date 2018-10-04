@@ -1,0 +1,6 @@
+/* General imports for components */
+$native: false;
+@import './plugins/web-include-media';
+@import './common-functions'; 
+@import './web-variables';
+@import './themes/common-themes';

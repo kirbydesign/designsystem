@@ -1,0 +1,12 @@
+@function _get-map-prop($map, $key) {
+  @if map-has-key($map, $key) {
+    @return map-get($map, $key);
+  } 
+
+  @warn "Unknown key `#{$key}`.";
+  @return null;
+}
+
+@function z($key) {
+  @return _get-map-prop($z-layers, $key);
+}
