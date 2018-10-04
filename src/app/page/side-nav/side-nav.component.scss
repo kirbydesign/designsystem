@@ -1,4 +1,5 @@
-@import '.././../../app-variables';
+@import '../../../scss/web-imports';
+
 :host {
   padding: 2rem $page-gutter;
 }

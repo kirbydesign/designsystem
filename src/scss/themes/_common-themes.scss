@@ -1,0 +1,76 @@
+/* Notes: 
+
+.domain--jb {
+  .theme--cake {
+    --surface: rgb(64, 64, 64);
+    --on-surface: rgba(255, 255, 255, 0.87);
+  }
+}
+
+.domain--jb {
+  color: #fff;
+  
+}
+
+Color naming convention from Material design:
+https://material.io/design/color/the-color-system.html#color-theme-creation
+
+HIERARCHY: 
+  .domain--name {
+    .theme--name { (e.g. dark (Maybe bad), light (Maybe bad), cake, lollipop, 'some other neutral nonsense name') 
+      --background 
+      --on-background
+      --surface
+      --on-surface
+      --primary
+      --on-primary
+      --primary-variant (Optional - a darker/lighter version of primary)
+      --on-primary-variant (Optional)
+      --secondary
+      --on-secondary
+      --tertiary (Optional...not sure if its even necessary yet)
+      --ontertiary (Optional)
+      --error
+      --on-error
+      --warning
+      --on-warning
+    }
+  }
+
+Use opacity for text importance
+  - 87% Opacity for High Emphasis
+  - 60% Opacity for Medium Emphasis / Helper texts
+  - 35% Opacity for DISABLED
+  - 100% for Error texts
+
+*/
+
+$themes: (
+  'cake': (
+    surface: false, //Insert color values here..
+  ),
+  'lollipop': (
+    surface: false,
+  )
+);
+
+@if $native {
+  @debug "$native is #{$native}"
+}
+
+// TODO TRM get-color should return either css variable or something else to native...
+@function get-color($map, $variant) {
+  $value: map-get($map, $variant);
+  @if $value != null {
+    @return $value;
+  }
+  @return null;
+}
+
+// @each $themeName, $theme in $themes {
+//   .theme--#{$themeName} {
+//     color: get-color($theme, text);
+//     background-color: get-color($theme, theme);
+//     border-color: get-color($theme, border);
+//   }
+// }

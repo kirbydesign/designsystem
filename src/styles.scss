@@ -1,7 +1,12 @@
-/* You can add global styles to this file, and also import other style files */
+/* 
+  You can add global styles to this file, and also import other style files 
+
+  ******
+  NOTE: THIS FILE DOES NOT APPLY STYLES TO NATIVESCRIPT
+  ******
+*/
 
 // Import common styles
-@import 'app-common';
 @import "~prismjs/themes/prism";
 
 @font-face {

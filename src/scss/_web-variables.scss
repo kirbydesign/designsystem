@@ -1,13 +1,3 @@
- 
-// Import the theme’s variables. If you’re using a color scheme
-// other than “light”, switch the path to the alternative scheme,
-// for example '~nativescript-theme-core/scss/dark'.
-@import '~nativescript-theme-core/scss/light';
-@import './scss/plugins/include-media';
-
-// Place any custom variables here. For example:
-// $page-content-placeholder-font-size: 20;
-
 /* Page layout
 --------------------------------------------------------------------------------*/
 $page-side-nav-width: 16.625rem;
@@ -20,7 +10,7 @@ $breakpoints: (
   small: 30em, 
   medium: 38em, 
   large: 52em, 
-  xlarge: 64.0625em, 
+  xlarge: 60em, 
   xxlarge: 80em 
 );
 
@@ -28,6 +18,8 @@ $breakpoints: (
 --------------------------------------------------------------------------------*/
 $z-layers: (
   default: 1,
+  modal-overlay: 900,
+  modal: 901
 );
 
 /* Colors (Maybe we should avoid using these directly in other scss files)
@@ -46,8 +38,3 @@ $page-header-color: $hvii;
 $page-header-height: 7rem;
 $page-gutter: 1rem;
 
-
-// TODO Move to a functions/utils scss file
-@function z($key) {
-  @return _get-map-prop($z-layers, $key);
-}
