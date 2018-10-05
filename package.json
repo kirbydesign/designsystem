@@ -16,6 +16,8 @@
     "e2e": "ng e2e",
     "android": "tns run android --bundle",
     "ios": "tns run ios --bundle --device 'iPhone X'",
+    "pack-bump-patch": "cd src/kirby && npm version patch",
+    "pack-bump-minor": "cd src/kirby && npm version minor",
     "pack-copy-to-dist-folder": "cpx \"src\\kirby\\**\\!(*.spec.ts)\" dist-lib",
     "pack-build": "npm run pack-copy-to-dist-folder",
     "pack-publish": "npm publish dist-lib",
