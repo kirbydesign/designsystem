@@ -20,9 +20,5 @@
   "space-before-closing-brace": "\n",
   "strip-spaces": true,
   "tab-size": true,
-  "vendor-prefix-align": true,
-  "syntax": {
-    ".css": "scss",
-    ".lss": "less"
-  }
+  "vendor-prefix-align": true
 }
