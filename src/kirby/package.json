@@ -1,0 +1,26 @@
+{
+    "name": "@kirbydesign/designsystem",
+    "version": "0.0.1",
+    "description": "Kirby Design Components",
+    "main": "index",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/kirbydesign/designsystem"
+    },
+    "keywords": [
+      "Angular",
+      "Angular2",
+      "Library",
+      "Kirby"
+    ],
+    "author": "bdyjeo@bankdata.dk",
+    "license": "MIT",
+    "bugs": {
+      "url": "https://github.com/kirbydesign/designsystem/issues"
+    },
+    "homepage": "https://github.com/kirbydesign/designsystem#readme",
+    "types": "index.d.ts"
+  }
