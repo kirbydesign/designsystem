@@ -4,6 +4,9 @@
     "id": "dk.kirby.design.system",
     "tns-ios": {
       "version": "4.2.0"
+    },
+    "tns-android": {
+      "version": "4.2.0"
     }
   },
   "version": "0.0.0",
