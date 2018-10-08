@@ -1,13 +1,18 @@
-Button.round {
-    border-radius: 100%;
+@import '../../../scss/app-imports';
+
+button.round {
+  border-radius: 100%;
 }
 
-Button {
-    border-color: lightskyblue;
-    border-width: 1;
-    border-radius: 5;
-    // padding: 0.7em 0.75em;
-    background-color: white;
-    color: lightskyblue;
-    margin: 10 10;
+button {
+  background-color: white;
+  border-color: lightskyblue;
+  border-radius: 5;
+  border-width: 1;
+  color: lightskyblue;
+  margin: 10 10;
+  padding: 12 20;
+  @include get-theme-style('background-color', 'primary');
+  @include get-theme-style('border-color', 'primary');
+  @include get-theme-style('color', 'on-primary');
 }

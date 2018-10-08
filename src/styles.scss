@@ -8,6 +8,8 @@
 
 // Import common styles
 @import "~prismjs/themes/prism";
+@import "./scss/web-imports";
+@import "./scss/themes/common-themes";
 
 @font-face {
   font-family: "Effra";
@@ -39,8 +41,8 @@
     url("/assets/fonts/effrabold-webfont.woff") format("woff");
 }
 
-:root{
-  --ion-font-family:"Effra";
+:root { 
+  --ion-font-family: "Effra";
   font-family: var(--ion-font-family);
 }
 
@@ -52,7 +54,14 @@ body, html {
 }
 
 *, 
-*:before, 
-*:after {
+*:before, *:after {
   box-sizing: inherit; 
+}
+
+// Generates all the theme variables 
+@each $themeName, $theme in $themes {
+  .theme--#{$themeName} {
+    --primary: #{get-color($theme, 'primary')};
+    --on-primary: #{get-color($theme, 'on-primary')};
+  }
 }

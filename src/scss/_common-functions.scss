@@ -10,3 +10,13 @@
 @function z($key) {
   @return _get-map-prop($z-layers, $key);
 }
+
+@function rems2dp($size) {
+  // TODO TRM - Can we somehow convert rem or pixels to DP here?
+  $dp: ($size / 1rem) * 1; //strip rem unit, add dp unit
+  @return $dp;
+}
+
+@function font-size($key: "n") {
+  @return _get-map-prop($font-sizes, $key);
+}

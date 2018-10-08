@@ -1,34 +1,33 @@
+@import '../../../scss/web-imports';
+
 :host {
-    --kirby-button-background-color: white;
-    --kirby-button-color: lightskyblue;
-    --kirby-button-border-color: var(--kirby-button-color);
-    --kirby-button-text-color: var(--kirby-button-color);
-    --kirby-button-border-radius: 0.5em;
-    display: inline-block;
-    margin: 0.25em 0.25em;
-    
-    &[expand="block"] {
-        display: block;
-    }
+  display: inline-block;
+  margin: 0.25em 0.25em;
+  --kirby-button-border-radius: 0.2rem;
+  &[expand='block'] {
+    display: block;
+  }
 }
 
 button {
-    &.round {
-        --kirby-button-border-radius: 10em;
-    }
+  background-color: var(--primary);
+  border-color: var(--primary);
+  border-radius: var(--kirby-button-border-radius);
+  border: 1px solid;
+  color: var(--on-primary);
+  cursor: pointer;
+  font-size: font-size('n');
+  padding: 0.7rem 0.75rem;
+  transition: opacity 200ms linear;
+  width: 100%;
 
-    outline: none;
+  &.round {
+    --kirby-button-border-radius: 2rem;
+  }
 
-    width: 100%;
-    border: solid 1px var(--kirby-button-border-color);
-    border-radius: var(--kirby-button-border-radius);
-    padding: 0.7em 0.75em;
-    background-color: var(--kirby-button-background-color);
-    font-size: 1em;
-    color: var(--kirby-button-text-color);
-    transition: background-color 200ms linear;
-
-    &:hover {
-        background-color: rgba(lightskyblue, 0.1);
-    }
+  &:hover,
+  &:focus {
+    opacity: 0.8;
+  }
 }
+
