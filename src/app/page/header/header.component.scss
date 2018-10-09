@@ -1,4 +1,4 @@
-@import '../../../scss/web-imports';
+@import '../../../kirby/scss/web-imports';
 
 :host {
   background-color: $dark-grey;
@@ -61,14 +61,14 @@ header {
   &--large {
     transform-origin: 0 0;
     animation: enter 1s ease-in-out 1s forwards;
-    grid-row-start: span 2; 
+    grid-row-start: span 2;
   }
-  
+
   &--medium {
     animation: enter 1s ease-in-out 1.5s forwards;
     width: 85%;
   }
-  
+
   &--small {
     width: 40%;
     align-self: flex-start;
@@ -87,11 +87,11 @@ header {
 
 @keyframes enter {
   0% {
-   opacity: 0; 
-   transform: translateY(-10%);
+    opacity: 0;
+    transform: translateY(-10%);
   }
   100% {
     transform: translateY(0%);
     opacity: 1;
-  } 
+  }
 }

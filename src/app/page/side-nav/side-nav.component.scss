@@ -1,4 +1,4 @@
-@import '../../../scss/web-imports';
+@import '../../../kirby/scss/web-imports';
 
 :host {
   padding: 2rem $page-gutter;
@@ -14,8 +14,8 @@
     font-size: 0.85rem;
     transition: 0.15s transform ease-in-out;
     transform-origin: 0 0;
-    will-change: height, transform; 
-    margin-left: -1rem;   
+    will-change: height, transform;
+    margin-left: -1rem;
 
     &.is-selected {
       height: auto;
@@ -34,8 +34,9 @@
     display: flex;
     align-items: center;
     //border-top: 1px solid red;
-    &:hover,&:focus {
-      background-color: #EBEBEB;
+    &:hover,
+    &:focus {
+      background-color: #ebebeb;
       color: $dark-grey;
     }
     &.is-selected {
