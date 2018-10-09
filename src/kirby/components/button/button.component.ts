@@ -9,6 +9,7 @@ export class ButtonComponent implements OnInit {
   @Input() label: string;
   @Input() shape?: 'round';
   @Input() expand?: 'full' | 'block';
+  @Input() color = 'primary';
   @Input() theme?: string; // TODO TRM - Skal vi have en theme model/interface, evt. global ting...
   @Output() action = new EventEmitter<number>();
   buttonCssClasses: {};
@@ -17,11 +18,12 @@ export class ButtonComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    const { expand, shape, theme } = this;
+    const { expand, shape, theme, color } = this;
     this.buttonCssClasses = {
       'round': shape === 'round',
       'block': expand === 'block',
       'full': expand === 'full',
+      ['button--' + color] : color,
       ['theme--' + theme] : theme
     };
   }
