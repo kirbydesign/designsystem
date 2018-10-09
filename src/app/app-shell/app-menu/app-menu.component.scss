@@ -1,8 +1,8 @@
-@import '../../../scss/web-imports';
+@import '../../../kirby/scss/web-imports';
 
 :host {
   position: absolute;
-  @include media(">=xlarge") {
+  @include media('>=xlarge') {
     position: static;
   }
 }
@@ -24,7 +24,7 @@
   transition: 0.13s visibility ease-in-out, transform 0.13s cubic-bezier(0,0,0.3,1);
   will-change: visibility;
 
-  @include media(">=xlarge") {
+  @include media('>=xlarge') {
     visibility: visible;
     position: static;
     box-shadow: none;
@@ -50,12 +50,12 @@
     top: 0;
     right: 0;
     color: white;
-    border: none; 
+    border: none;
     background: none;
     padding: 1rem;
     font-size: 16px;
 
-    @include media(">=xlarge") {
+    @include media('>=xlarge') {
       display: none;
     }
   }

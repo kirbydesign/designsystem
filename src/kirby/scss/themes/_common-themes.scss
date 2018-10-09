@@ -1,3 +1,4 @@
+
 $themes: (
   'cookbook': (
     'primary': rgb(51, 134, 212),
@@ -12,6 +13,11 @@ $themes: (
   )
 );
 
+@if $native {
+  @debug '$native is #{$native}'
+}
+
+// TODO TRM get-color should return either css variable or something else to native...
 @function get-color($map, $variant) {
   $value: map-get($map, $variant);
   @if $value != null {
@@ -20,7 +26,16 @@ $themes: (
   @return null;
 }
 
+
+// @each $themeName, $theme in $themes {
+//   .theme--#{$themeName} {
+//     color: get-color($theme, text);
+//     background-color: get-color($theme, theme);
+//     border-color: get-color($theme, border);
+//   }
+// }
 /* Notes: 
+
 Domain idea:
 .domain--jb {
   .theme--cake {

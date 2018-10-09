@@ -1,5 +1,4 @@
-@import '../../../scss/web-imports';
-
+@import '../../../kirby/scss/web-imports';
 $page-max-width: 1280px;
 $prototype-color: rgb(0, 198, 224);
 $prototype-color-bg: rgb(232, 246, 255) ;
@@ -15,7 +14,7 @@ $prototype-color-bg: rgb(232, 246, 255) ;
   display: flex;
   flex-direction: column;
 
-  @include media(">=xlarge") {
+  @include media('>=xlarge') {
     flex-direction: row;
   }
 }
@@ -23,7 +22,7 @@ $prototype-color-bg: rgb(232, 246, 255) ;
 aside {
   background-color: $prototype-color-bg;
   box-shadow: 0 2px 4px rgba(0,0,0,0.4);
-  @include media(">=xlarge") {
+  @include media('>=xlarge') {
     flex-basis: 14rem;
     margin: 0;
   }
@@ -39,7 +38,7 @@ nav {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  @include media(">=xlarge")  {
+  @include media('>=xlarge') {
     min-height: 100vh;
     flex-direction: column;
     justify-content: flex-start;
@@ -61,7 +60,7 @@ nav {
   flex-direction: column;
   align-items: flex-start;
 
-  &--align-right { 
+  &--align-right {
     align-items: flex-end;
   }
 
@@ -73,7 +72,7 @@ nav {
     margin: 0 0 0.2rem;
   }
 
-  @include media(">=xlarge") {
+  @include media('>=xlarge') {
     min-width: 15rem;
     flex-direction: row;
     align-items: center;
@@ -92,4 +91,3 @@ nav {
     }
   }
 }
-
