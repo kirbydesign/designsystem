@@ -9,7 +9,7 @@ export class ButtonComponent implements OnInit {
   @Input() label: string;
   @Input() shape?: 'round';
   @Input() expand?: 'full' | 'block';
-  @Input() color = 'primary';
+  @Input() colortype?: 'primary';
   @Input() theme?: string; // TODO TRM - Skal vi have en theme model/interface, evt. global ting...
   @Output() action = new EventEmitter<number>();
   buttonCssClasses: {};
@@ -18,12 +18,12 @@ export class ButtonComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    const { expand, shape, theme, color } = this;
+    const { expand, shape, theme, colortype } = this;
     this.buttonCssClasses = {
       'round': shape === 'round',
       'block': expand === 'block',
       'full': expand === 'full',
-      ['button--' + color] : color,
+      ['button--' + colortype]: colortype,
       ['theme--' + theme] : theme
     };
   }
