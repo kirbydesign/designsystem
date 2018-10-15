@@ -6,10 +6,10 @@ button.round {
 
 button {
   background-color: white;
-  border-color: red;
+  border-color: lightskyblue;
   border-radius: 5;
   border-width: 1;
-  color: red;
+  color: lightskyblue;
   margin: 10 10;
   padding: 12 20;
   @include get-theme-style('background-color', 'primary');
