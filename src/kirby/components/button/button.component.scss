@@ -10,12 +10,10 @@
 }
 
 button {
-  background-color: var(--primary);
-  border-color: var(--primary);
+  background-color: var(--kirby-primary);
   border-radius: var(--kirby-button-border-radius);
-  border-width: 1px;
-  border-style: solid;
-  color: var(--on-primary);
+  border: 1px solid var(--kirby-primary);
+  color: var(--kirby-on-primary); 
   cursor: pointer;
   font-size: font-size('n');
   padding: 0.7rem 1.75rem;
@@ -27,9 +25,9 @@ button {
   }
 
   &.button--secondary {
-    background-color: var(--secondary);
-    border-color: var(--secondary);
-    color: var(--on-secondary);
+    background-color: var(--kirby-secondary);
+    border-color: var(--kirby-secondary);
+    color: var(--kirby-on-secondary);
   }
 
   &:hover,
