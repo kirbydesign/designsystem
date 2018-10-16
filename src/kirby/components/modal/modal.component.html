@@ -1,10 +1,19 @@
-<div *ngIf="open">
+<div *ngIf="!open">
   <div class="modal">
-    <div class="modal-header"></div>
+    <div class="modal-header">
+      <div class="modal-header__title">
+        <ng-content select="[header]"></ng-content>
+      </div>
+      <button *ngIf="true" class="modal__close-btn" aria-label="close modal">
+        <kirby-icon name="cross"></kirby-icon>
+      </button>
+    </div>
     <div class="modal-content">
       <ng-content></ng-content>
     </div>
-    <div class="modal-footer"></div>
+    <div class="modal-footer">
+      <ng-content select="[footer]"></ng-content>
+    </div>
   </div>
   <div class="modal-overlay"></div>
 </div>

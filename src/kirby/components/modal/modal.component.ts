@@ -17,7 +17,8 @@ export class ModalComponent implements OnInit {
   handleKeyup(evt: KeyboardEvent) {
     // Check for ESCAPE key press
     if (evt.keyCode === 27) {
-      this.open = false;
+      this.open = !this.open;
+      console.log("Escape - Closing modal...");
     }
   }
 }

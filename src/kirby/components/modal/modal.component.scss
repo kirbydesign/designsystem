@@ -1,0 +1,109 @@
+@import '../../scss/web-imports';
+$modal-max-width: 50rem;
+$gutter: 1rem; // TODO TRM - This should be fetched from a global setting...as a SCSS variable, not CSS.
+$border-radius: 18px; // TODO TRM - This should be fetched from a global setting...as a SCSS variable, not CSS.
+
+
+:host {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  @include media('>=large') {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+.modal {
+  background-color: white;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  left: 0;
+  overflow: hidden;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100vw;
+  z-index: z('modal');
+  will-change: transform, opacity;
+  animation: fade-in 0.5s cubic-bezier(0,0,0.3,1) forwards,slide-up 0.2s cubic-bezier(0,0,0.3,1) forwards;
+
+  @include media('>=large') {
+    border-radius: $border-radius;
+    box-shadow: 0 22px 29px -13px rgba(24,24,24,0.3);
+    margin: 0 auto;
+    max-height: calc(100vh - 10rem);
+    max-width: $modal-max-width;
+    position: relative;
+  }
+
+  &-header {
+    display: flex;
+    padding: $gutter;
+
+    &__title {
+      flex: 1;
+    }
+  }
+
+  &-content {
+    overflow-x: hidden;
+    overflow-y: auto;
+    flex: 1;
+    padding: $gutter;
+  }
+
+  &-footer {
+    padding: $gutter;
+  }
+
+  &__close-btn {
+    appearance: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    flex-shrink: 0;
+    margin-left: 1rem;
+    height: 2.625rem;
+    width: 2.625rem;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.modal-overlay {
+  background-color: rgba(33, 33, 33, 0.3);
+  bottom: 0;
+  left: 0;
+  opacity: 1;
+  position: fixed;
+  right: 0;
+  top: 0;
+  will-change: opacity;
+  z-index: z('modal-overlay');
+  animation: fade-in 0.2s ease-in-out forwards;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up {
+  0% {
+    transform: translateY(5%);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
