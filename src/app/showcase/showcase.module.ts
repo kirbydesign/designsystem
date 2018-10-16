@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import {COMPONENT_IMPORTS, COMPONENT_EXPORTS, COMPONENT_DECLARATIONS} from './showcase.common';
 import {HtmlViewerComponent} from '../shared/html-viewer/html-viewer.component';
+import { ModalShowcaseComponent } from './modal-showcase/modal-showcase.component';
 
 @NgModule({
   imports: [
@@ -11,7 +12,8 @@ import {HtmlViewerComponent} from '../shared/html-viewer/html-viewer.component';
   ],
   declarations: [
     ...COMPONENT_DECLARATIONS,
-    HtmlViewerComponent
+    HtmlViewerComponent,
+    ModalShowcaseComponent
   ],
   exports: COMPONENT_EXPORTS
 })
