@@ -15,4 +15,10 @@ button {
   @include get-theme-style('background-color', 'primary');
   @include get-theme-style('border-color', 'primary');
   @include get-theme-style('color', 'on-primary');
+
+  &.button--secondary {
+    @include get-theme-style('background-color', 'secondary');
+    @include get-theme-style('border-color', 'secondary');
+    @include get-theme-style('color', 'on-secondary');
+  }
 }

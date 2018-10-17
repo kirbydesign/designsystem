@@ -61,7 +61,9 @@ body, html {
 // Generates all the theme variables 
 @each $themeName, $theme in $themes {
   .theme--#{$themeName} {
-    --primary: #{get-color($theme, 'primary')};
-    --on-primary: #{get-color($theme, 'on-primary')};
+    --kirby-primary: #{get-color($theme, 'primary')};
+    --kirby-on-primary: #{get-color($theme, 'on-primary')};
+    --kirby-secondary: #{get-color($theme, 'secondary')};
+    --kirby-on-secondary: #{get-color($theme, 'on-secondary')};
   }
 }
