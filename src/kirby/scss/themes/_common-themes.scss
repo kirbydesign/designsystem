@@ -1,6 +1,8 @@
 
 $themes: (
   'cookbook': (
+    'surface': rgb(255, 255, 255),
+    'on-surface': rgb(33, 33, 33),
     'primary': rgb(51, 134, 212),
     'on-primary': #fff,
     'secondary': rgb(255, 255, 255),
@@ -12,8 +14,13 @@ $themes: (
     'secondary': rgb(255, 255, 255),
     'on-secondary': rgb(64, 64, 64),
   ),
-  'lollipop': (
-    surface: false,
+  'dark': (
+    'surface': rgb(64, 64, 64),
+    'on-surface': rgb(255, 255, 255),
+    'primary': rgb(64, 64, 64),
+    'on-primary': rgb(252, 252, 252),
+    'secondary': rgb(255, 255, 255),
+    'on-secondary': rgb(64, 64, 64),
   )
 );
 

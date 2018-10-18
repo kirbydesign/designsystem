@@ -1,10 +1,10 @@
-<div *ngIf="!open">
-  <div class="modal">
+<div *ngIf="isOpen" class="modal-wrapper" #activeModal>
+  <div class="modal" [ngClass]="modalCssClasses">
     <div class="modal-header">
       <div class="modal-header__title">
         <ng-content select="[header]"></ng-content>
       </div>
-      <button *ngIf="true" class="modal__close-btn" aria-label="close modal">
+      <button *ngIf="true" class="modal__close-btn" aria-label="close modal" (click)='closeModal()'>
         <kirby-icon name="cross"></kirby-icon>
       </button>
     </div>
