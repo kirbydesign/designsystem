@@ -31,12 +31,20 @@ $border-radius: 18px; // TODO TRM - This should be fetched from a global setting
 }
 
 .modal {
-  height: 100%;
   position: relative;
   z-index: z('modal');
   animation: fade-in 0.2s cubic-bezier(0,0,0.3,1) forwards,scale-up 0.33s cubic-bezier(0,0,0.3,1) forwards;
   transform: scale(0.95);
   will-change: transform, opacity;
+
+  @include media('>=medium') {
+    margin: 0 auto;
+    max-height: calc(100vh - 10rem);
+    max-width: $modal-max-width;
+    &--large {
+      height: 100%;
+    }
+  }
 
   &:before {
     content: '';
@@ -53,12 +61,6 @@ $border-radius: 18px; // TODO TRM - This should be fetched from a global setting
     width: calc(100% - #{$border-radius});
     will-change: transform, opacity;
     animation: move-down 0.33s cubic-bezier(0,0,0.3,1) forwards;
-  }
-
-  @include media('>=medium') {
-    margin: 0 auto;
-    max-height: calc(100vh - 10rem);
-    max-width: $modal-max-width;
   }
 
   &-header {

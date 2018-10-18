@@ -17,6 +17,8 @@ import {  Component,
 export class ModalComponent implements OnInit, OnDestroy, AfterViewChecked {
   // State of the modal - called from another component, e.g. a button
   private _isOpen = false;
+
+  @Input() size?: 'small' | 'medium' | 'large';
   // Theme option - e.g. dark, light or whatever theme there is
   @Input() theme?: string;
   modalCssClasses: {};
@@ -35,8 +37,14 @@ export class ModalComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   ngOnInit() {
     const { theme } = this;
+    let { size } = this;
+
+    if (size === void 0) {
+      size = 'medium';
+    }
     this.modalCssClasses = {
-      ['theme--' + theme] : theme
+      ['modal--' + size]: size,
+      ['theme--' + theme] : theme,
     };
     this.keydownHandler = this.keydownHandler.bind(this);
     this.keyupHandler = this.keyupHandler.bind(this);
