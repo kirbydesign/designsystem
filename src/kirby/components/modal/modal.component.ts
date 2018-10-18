@@ -24,6 +24,7 @@ export class ModalComponent implements OnInit, OnDestroy, AfterViewChecked {
   @Output() closingModal = new EventEmitter();
   // Pointer to modal DOM element
   private activeModal: ElementRef;
+  // isFocus flag to prevent ngAfterViewChecked from running multiple times
   private isFocus: boolean;
   // Remember which element had focus before opening the modal
   private oldFocus: HTMLElement;
@@ -56,7 +57,6 @@ export class ModalComponent implements OnInit, OnDestroy, AfterViewChecked {
       }
 
       this.isFocus = true;
-      console.log('AfterViewChecked called - elm: ', this.activeModal);
     }
   }
 
@@ -83,20 +83,6 @@ export class ModalComponent implements OnInit, OnDestroy, AfterViewChecked {
     this.oldFocus.focus();
   }
 
-  trapTabKey(evt) {
-    const elm = this.activeModal.nativeElement;
-    const focusableChildren = this._getFocusableChildren(elm);
-    const focusedItemIndex = focusableChildren.indexOf(<HTMLElement>document.activeElement);
-
-    if (evt.shiftKey && focusedItemIndex === 0) {
-      (<HTMLElement>focusableChildren[focusableChildren.length - 1]).focus();
-      event.preventDefault();
-    } else if (!evt.shiftKey && focusedItemIndex === focusableChildren.length - 1) {
-      (<HTMLElement>focusableChildren[0]).focus();
-      event.preventDefault();
-    }
-  }
-
   _getFocusableChildren(elm: HTMLElement): HTMLElement[] {
     const focusableElements = [
         'a[href]',
@@ -111,7 +97,22 @@ export class ModalComponent implements OnInit, OnDestroy, AfterViewChecked {
         '[contenteditable]',
         '[tabindex]:not([tabindex^="-"])'];
     const focusElements: HTMLElement[] = Array.from(elm.querySelectorAll(focusableElements.join()));
+    // Filter out none-visible elements
     return focusElements.filter((child: HTMLElement) => !!(child.offsetWidth || child.offsetHeight || child.getClientRects().length));
+  }
+
+  _trapTabKey(evt) {
+    const elm = this.activeModal.nativeElement;
+    const focusableChildren = this._getFocusableChildren(elm);
+    const focusedItemIndex = focusableChildren.indexOf(<HTMLElement>document.activeElement);
+
+    if (evt.shiftKey && focusedItemIndex === 0) {
+      (<HTMLElement>focusableChildren[focusableChildren.length - 1]).focus();
+      event.preventDefault();
+    } else if (!evt.shiftKey && focusedItemIndex === focusableChildren.length - 1) {
+      (<HTMLElement>focusableChildren[0]).focus();
+      event.preventDefault();
+    }
   }
 
   keyupHandler(evt: KeyboardEvent) {
@@ -130,9 +131,8 @@ export class ModalComponent implements OnInit, OnDestroy, AfterViewChecked {
   keydownHandler(evt: KeyboardEvent) {
     // Check for TAB key press
     if (evt.keyCode === 9 && this._isOpen) {
-      console.log('Handle tabbing...');
       // Make sure we don't tab outside for the Modal
-      this.trapTabKey(evt);
+      this._trapTabKey(evt);
     }
   }
 }
