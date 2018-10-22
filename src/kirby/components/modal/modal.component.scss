@@ -37,6 +37,7 @@ $border-radius: 18px; // TODO TRM - This should be fetched from a global setting
   transform: scale(0.95);
   will-change: transform, opacity;
   height: 100%;
+  width: 100%;
 
   @include media('>=medium') {
     margin: 0 auto;
