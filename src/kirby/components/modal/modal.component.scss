@@ -1,0 +1,141 @@
+@import '../../scss/web-imports';
+$modal-max-width: 42rem;
+$gutter: 1rem; // TODO TRM - This should be fetched from a global setting...as a SCSS variable, not CSS.
+$border-radius: 18px; // TODO TRM - This should be fetched from a global setting...as a SCSS variable, not CSS.
+
+.modal-wrapper {
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  @include media('>=medium') {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+.modal-content-wrapper {
+  background-color: var(--kirby-surface);
+  color: var(--kirby-on-surface);  
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+
+  @include media('>=medium') {
+    border-radius: $border-radius;
+  }
+}
+
+.modal {
+  position: relative;
+  z-index: z('modal');
+  animation: fade-in 0.2s cubic-bezier(0,0,0.3,1) forwards,scale-up 0.33s cubic-bezier(0,0,0.3,1) forwards;
+  transform: scale(0.95);
+  will-change: transform, opacity;
+  height: 100%;
+  width: 100%;
+
+  @include media('>=medium') {
+    margin: 0 auto;
+    max-height: calc(100vh - 10rem);
+    max-width: $modal-max-width;
+    &--small {
+      height: auto;
+    }
+
+    &--large {
+      height: 100%;
+    }
+  }
+
+  &:before {
+    content: '';
+    background: rgb(24,24,24);
+    border-radius: $border-radius;
+    box-shadow: 0 0 30px 15px rgb(24,24,24);
+    display: block;
+    height: calc(100% - #{$border-radius});
+    left: $border-radius / 2;
+    opacity: 0.4;
+    position: absolute;
+    transform: scale(0.9);
+    top: $border-radius / 2;
+    width: calc(100% - #{$border-radius});
+    will-change: transform, opacity;
+    animation: move-down 0.33s cubic-bezier(0,0,0.3,1) forwards;
+  }
+
+  &-header {
+    display: flex;
+    padding: $gutter;
+
+    &__title {
+      flex: 1;
+    }
+  }
+
+  &-content {
+    overflow-x: hidden;
+    overflow-y: auto;
+    flex: 1;
+    padding: $gutter;
+  }
+
+  &-footer {
+    padding: $gutter;
+  }
+
+  &__close-btn {
+    appearance: none;
+    background: none;
+    border: none;
+    color: var(--kirby-on-surface);
+    cursor: pointer;
+    display: flex;
+    flex-shrink: 0;
+    height: 2.625rem;
+    justify-content: center;
+    margin-left: 1rem;
+    width: 2.625rem;
+  }
+}
+
+.modal-overlay {
+  background-color: rgba(33, 33, 33, 0.3);
+  bottom: 0;
+  left: 0;
+  opacity: 1;
+  position: fixed;
+  right: 0;
+  top: 0;
+  will-change: opacity;
+  z-index: z('modal-overlay');
+  animation: fade-in 0.2s ease-in-out forwards;
+  pointer-events: none;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes scale-up {
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes move-down {
+  100% {
+    transform: translateY($border-radius / 2);
+    opacity: 0.2;  
+  }
+}
