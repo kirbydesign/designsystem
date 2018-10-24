@@ -23,7 +23,7 @@ export class ModalComponent implements OnInit, OnDestroy, AfterViewChecked {
   @Input() theme?: string;
   modalCssClasses: {};
   // Output closing state
-  @Output() closingModal = new EventEmitter();
+  @Output() close = new EventEmitter();
   // Pointer to modal DOM element
   private activeModal: ElementRef;
   // isFocus flag to prevent ngAfterViewChecked from running multiple times
@@ -87,7 +87,7 @@ export class ModalComponent implements OnInit, OnDestroy, AfterViewChecked {
   closeModal() {
     this._isOpen = false;
     this.isFocus = false;
-    this.closingModal.emit();
+    this.close.emit();
     this.oldFocus.focus();
   }
 
@@ -116,10 +116,10 @@ export class ModalComponent implements OnInit, OnDestroy, AfterViewChecked {
 
     if (evt.shiftKey && focusedItemIndex === 0) {
       (<HTMLElement>focusableChildren[focusableChildren.length - 1]).focus();
-      event.preventDefault();
+      evt.preventDefault();
     } else if (!evt.shiftKey && focusedItemIndex === focusableChildren.length - 1) {
       (<HTMLElement>focusableChildren[0]).focus();
-      event.preventDefault();
+      evt.preventDefault();
     }
   }
 
