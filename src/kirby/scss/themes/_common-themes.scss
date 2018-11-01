@@ -1,6 +1,6 @@
 $themes: (
   'cookbook': (
-    'surface': rgb(255, 255, 255),
+    'surface': rgb(250, 250, 250),
     'on-surface': rgb(33, 33, 33),
     'primary': rgb(51, 134, 212),
     'on-primary': rgb(255, 255, 255),
@@ -32,15 +32,6 @@ $themes: (
 }
 
 /* Notes: 
-
-Domain idea:
-.domain--jb {
-  .theme--cake {
-    --surface: rgb(64, 64, 64);
-    --on-surface: rgba(255, 255, 255, 0.87);
-  }
-}
-This wouldn't require the css to be build XX number of times.
 
 Color naming convention from Material design:
 https://material.io/design/color/the-color-system.html#color-theme-creation

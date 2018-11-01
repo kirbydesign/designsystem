@@ -1,23 +1,20 @@
-:host {
-    --kirby-example-wireframe-color: lightskyblue;
+$bacon-height: 130px;
+$bacon-width: 130px;
+
+kirby-card-header {
+  color: var(--kirby-on-primary);
+  background-color: var(--kirby-primary);
+  padding-bottom: $bacon-width / 2;
+  margin-bottom: $bacon-width / 2;
+  position: relative;
 }
 
-kirby-card {
-    --kirby-wireframe-color: var(--kirby-example-wireframe-color);
-
-    footer {
-        text-align: center;
-        padding-top: 0.5em;
-
-        kirby-button {
-            margin: 0 1.5em;
-            --kirby-button-color: var(--kirby-wireframe-color);
-            --kirby-button-background-color: var(--kirby-example-button-background-color);   
-        }
-    }
-
-}
-
-kirby-card .card__header {
-    color: red;
+.img-wrapper {
+  width: $bacon-width;
+  height: $bacon-height;
+  border-radius: 50%;
+  overflow: hidden;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }

@@ -5,62 +5,77 @@ $max-card-height: 500px;
 $min-card-width: 304px;
 
 :host {
-  --kirby-wireframe-color: lightskyblue;
-  --kirby-wireframe-border-color: var(--kirby-wireframe-color);
-  --kirby-wireframe-border: 1px solid var(--kirby-wireframe-border-color);
-  --kirby-wireframe-text-color: var(--kirby-wireframe-color);
+  --kirby-card-header-background-color: var(--kirby-surface);
+  --kirby-card-header-color: var(--kirby-on-surface);
+  --kirby-card-main-background-color: var(--kirby-surface);
+  --kirby-card-main-color: var(--kirby-on-surface);
+  --kirby-card-footer-background-color: var(--kirby-surface);
+  --kirby-card-footer-color: var(--kirby-on-surface);
+
   color: var(--kirby-wireframe-text-color);
   min-width: $min-card-width;
   min-height: $min-card-height;
   max-height: $max-card-height;
-  display: block;
+  display: flex;
+  flex-direction: column;
 }
 
 .card {
   &-wrapper {
-    border: var(--kirby-wireframe-border);
     border-radius: $border-radius;
     box-shadow: 0 10px 29px -9px rgba(24, 24, 24, 0.3);
-    padding: size("gutter");
     background-color: var(--kirby-surface);
-  }
-
-  &__header {
-    text-align: center;
-  }
-
-  &__main {
-    margin-bottom: size("gutter");
-
-  }
-
-
-
-  &__footer {
+    flex: 1 0 100%;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
   }
+
+//   &__header {
+//     padding: size("gutter");
+//     text-align: center;
+//     border-top-left-radius: $border-radius;
+//     border-top-right-radius: $border-radius;
+//     background-color: var(--kirby-card-header-background-color);
+//     color: var(--kirby-card-header-color);
+//   }
+
+//   &__main {
+//     margin-bottom: size("gutter");
+//     background-color: var(--kirby-card-main-background-color);
+//     color: var(--kirby-card-main-color);
+//   }
+
+//   &__footer {
+//     display: flex;
+//     justify-content: center;
+//     background-color: var(--kirby-card-footer-background-color);
+//     color: var(--kirby-card-footer-color);   
+//     border-bottom-left-radius: $border-radius;
+//     border-bottom-right-radius: $border-radius;
+//     padding: size("gutter");
+//   }
 }
 
-FlexboxLayout {
-  border-width: 1;
-  border-color: lightskyblue;
-  flex-direction: column;
-  border-radius: 8;
-  padding: 10;
-  width: 70%;
-  height: 50%;
-  align-items: stretch;
-  justify-content: space-around;
-  label {
-    text-align: center;
-    width: 100%;
-    .h2 {
-      align-self: flex-start;
-      font-size: 22;
-    }
-    .h4 {
-      font-size: 18;
-    }
-  }
-}
+// FlexboxLayout {
+//   border-width: 1;
+//   border-color: lightskyblue;
+//   flex-direction: column;
+//   border-radius: 8;
+//   padding: 10;
+//   width: 70%;
+//   height: 50%;
+//   align-items: stretch;
+//   justify-content: space-around;
+//   label {
+//     text-align: center;
+//     width: 100%;
+//     .h2 {
+//       align-self: flex-start;
+//       font-size: 22;
+//     }
+//     .h4 {
+//       font-size: 18;
+//     }
+//   }
+// }

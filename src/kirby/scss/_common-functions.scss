@@ -24,3 +24,7 @@
 @function font-size($key: "n") {
   @return _get-map-prop($font-sizes, $key);
 }
+
+@function font-weight($key: "regular") {
+  @return _get-map-prop($font-weight, $key);
+}
