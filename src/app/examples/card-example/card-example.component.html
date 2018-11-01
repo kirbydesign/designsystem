@@ -1,11 +1,14 @@
-<kirby-card [title]="'Titel'" [subtitle]="'Subtitel'">
+<kirby-card [title]="'Titel'" [subtitle]="'Subtitel'" class="theme--dark">
+  <ng-container cardheader class="test">
+    Whatever..
+  </ng-container>
   <kirby-list [items]="[
   {title: 'Titel', amount: 'Beløb'},
   {title: 'Titel', amount: 'Beløb'},
   {title: 'Titel', amount: 'Beløb'},
   {title: 'Titel', amount: 'Beløb'}
   ]"></kirby-list>
-  <footer>
+  <ng-container card-footer>
     <kirby-button label="Tekst på knap" expand="block" shape="round" theme="cookbook"></kirby-button>
-  </footer> 
+  </ng-container> 
 </kirby-card>

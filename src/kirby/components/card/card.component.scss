@@ -1,59 +1,66 @@
+@import '../../scss/web-imports';
+
+$min-card-height: 345px;
+$max-card-height: 500px;
+$min-card-width: 304px;
+
 :host {
-    --kirby-wireframe-color: lightskyblue;
-    --kirby-wireframe-border-color: var(--kirby-wireframe-color);
-    --kirby-wireframe-border: 1px solid var(--kirby-wireframe-border-color);
-    --kirby-wireframe-text-color: var(--kirby-wireframe-color);
-    color: var(--kirby-wireframe-text-color);
+  --kirby-wireframe-color: lightskyblue;
+  --kirby-wireframe-border-color: var(--kirby-wireframe-color);
+  --kirby-wireframe-border: 1px solid var(--kirby-wireframe-border-color);
+  --kirby-wireframe-text-color: var(--kirby-wireframe-color);
+  color: var(--kirby-wireframe-text-color);
+  min-width: $min-card-width;
+  min-height: $min-card-height;
+  max-height: $max-card-height;
+  display: block;
 }
 
-header {
-    text-align: center;
-    border-bottom: var(--kirby-wireframe-border);
-    
-    h2 {
-        margin: 0;
-        margin-top: 0.8em;
-        font-size: 1em;
-        font-weight: normal;
-    }
-
-    h4 {
-        margin: 0;
-        margin-bottom: 0.5em;
-        font-size: 2em;
-        font-weight: bold;
-    }
-}
-
-.card-wrapper {
+.card {
+  &-wrapper {
     border: var(--kirby-wireframe-border);
-    border-radius: 0.5em;
-    width: 254px;
-    height: 360px;
+    border-radius: $border-radius;
+    box-shadow: 0 10px 29px -9px rgba(24, 24, 24, 0.3);
+    padding: size("gutter");
+    background-color: var(--kirby-surface);
+  }
+
+  &__header {
+    text-align: center;
+  }
+
+  &__main {
+    margin-bottom: size("gutter");
+
+  }
+
+
+
+  &__footer {
+    display: flex;
+    justify-content: center;
+  }
 }
 
 FlexboxLayout {
-    border-width: 1;
-    border-color: lightskyblue;
-    flex-direction: column;
-    border-radius: 8;
-    padding: 10;
-    width: 70%;
-    height: 50%;
-    align-items: stretch;
-    justify-content: space-around;
-    label {
-        text-align: center;
-        width: 100%;
-        .h2 {
-            align-self: flex-start;
-            font-size: 22;
-        }
-        .h4 {
-            font-size: 18;
-        }
+  border-width: 1;
+  border-color: lightskyblue;
+  flex-direction: column;
+  border-radius: 8;
+  padding: 10;
+  width: 70%;
+  height: 50%;
+  align-items: stretch;
+  justify-content: space-around;
+  label {
+    text-align: center;
+    width: 100%;
+    .h2 {
+      align-self: flex-start;
+      font-size: 22;
     }
-    .footer {
-
+    .h4 {
+      font-size: 18;
     }
+  }
 }

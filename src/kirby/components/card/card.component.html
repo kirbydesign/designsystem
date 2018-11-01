@@ -1,11 +1,17 @@
 <section class="card-wrapper">
-  <header>
-    <h2>{{title}}</h2>
-    <h4>{{subtitle}}</h4>     
-  </header>
-  <main>
+  <ng-template #cardheader>
+    <header class="card__header">
+      test
+      <h2 class="card__title" *ngIf="title" #header>{{title}}</h2>
+      <h4 class="card__subtitle" *ngIf="subtitle">{{subtitle}}</h4>
+      <ng-content select="[card-header]"></ng-content>
+    </header>
+  </ng-template>
+  <main class="card__main">
     <ng-content></ng-content>
   </main>
-  <footer>
+  <footer class="card__footer">
+    <ng-content select="[card-footer]"></ng-content>
   </footer>
 </section>
+ 
