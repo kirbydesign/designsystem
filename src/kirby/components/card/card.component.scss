@@ -4,7 +4,7 @@ $min-card-height: 345px;
 $max-card-height: 500px;
 $min-card-width: 304px;
 
-:host {
+:host{
   --kirby-card-header-background-color: var(--kirby-surface);
   --kirby-card-header-color: var(--kirby-on-surface);
   --kirby-card-main-background-color: var(--kirby-surface);
@@ -12,22 +12,15 @@ $min-card-width: 304px;
   --kirby-card-footer-background-color: var(--kirby-surface);
   --kirby-card-footer-color: var(--kirby-on-surface);
 
+  background-color: var(--kirby-surface);
+  border-radius: $border-radius;
+  box-shadow: 0 10px 29px -9px rgba(24, 24, 24, 0.3);
   color: var(--kirby-wireframe-text-color);
-  min-width: $min-card-width;
-  min-height: $min-card-height;
-  max-height: $max-card-height;
   display: flex;
   flex-direction: column;
-}
-
-.card {
-  &-wrapper {
-    border-radius: $border-radius;
-    box-shadow: 0 10px 29px -9px rgba(24, 24, 24, 0.3);
-    background-color: var(--kirby-surface);
-    flex: 1 0 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
+  flex: 1 0 100%;
+  justify-content: space-between;
+  max-height: $max-card-height;
+  min-height: $min-card-height;
+  min-width: $min-card-width;
 }
