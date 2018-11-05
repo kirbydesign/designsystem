@@ -1,27 +1,28 @@
-
 $themes: (
   'cookbook': (
+    'surface': rgb(250, 250, 250),
+    'on-surface': rgb(33, 33, 33),
     'primary': rgb(51, 134, 212),
-    'on-primary': #fff,
+    'on-primary': rgb(255, 255, 255),
     'secondary': rgb(255, 255, 255),
     'on-secondary': rgb(64, 64, 64),
   ),
   'cake': (
     'primary': rgb(199, 159, 98),
-    'on-primary': #fff,
+    'on-primary': rgb(255, 255, 255),
     'secondary': rgb(255, 255, 255),
     'on-secondary': rgb(64, 64, 64),
   ),
-  'lollipop': (
-    surface: false,
+  'dark': (
+    'surface': rgb(64, 64, 64),
+    'on-surface': rgb(255, 255, 255),
+    'primary': rgb(64, 64, 64),
+    'on-primary': rgb(252, 252, 252),
+    'secondary': rgb(255, 255, 255),
+    'on-secondary': rgb(64, 64, 64),
   )
 );
 
-@if $native {
-  @debug '$native is #{$native}'
-}
-
-// TODO TRM get-color should return either css variable or something else to native...
 @function get-color($map, $variant) {
   $value: map-get($map, $variant);
   @if $value != null {
@@ -30,24 +31,7 @@ $themes: (
   @return null;
 }
 
-
-// @each $themeName, $theme in $themes {
-//   .theme--#{$themeName} {
-//     color: get-color($theme, text);
-//     background-color: get-color($theme, theme);
-//     border-color: get-color($theme, border);
-//   }
-// }
 /* Notes: 
-
-Domain idea:
-.domain--jb {
-  .theme--cake {
-    --surface: rgb(64, 64, 64);
-    --on-surface: rgba(255, 255, 255, 0.87);
-  }
-}
-This wouldn't require the css to be build XX number of times.
 
 Color naming convention from Material design:
 https://material.io/design/color/the-color-system.html#color-theme-creation
@@ -79,5 +63,4 @@ Use opacity for text importance
   - 60% Opacity for Medium Emphasis / Helper texts
   - 35% Opacity for DISABLED
   - 100% for Error texts
-
 */

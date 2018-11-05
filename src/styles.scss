@@ -65,5 +65,8 @@ body, html {
     --kirby-on-primary: #{get-color($theme, 'on-primary')};
     --kirby-secondary: #{get-color($theme, 'secondary')};
     --kirby-on-secondary: #{get-color($theme, 'on-secondary')};
+    --kirby-surface: #{get-color($theme, 'surface')};
+    --kirby-on-surface: #{get-color($theme, 'on-surface')};
+
   }
 }

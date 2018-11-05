@@ -1,5 +1,10 @@
 @import '../../kirby/scss/web-imports';
 
+$page-header-bg: #1C1C1C;
+$page-header-color: #F4F1E8;
+$page-header-height: 7rem;
+$page-gutter: 1rem;
+
 :host {
   position: relative;
   display: flex;

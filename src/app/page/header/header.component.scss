@@ -1,5 +1,16 @@
 @import '../../../kirby/scss/web-imports';
 
+$page-header-bg: #1C1C1C;
+$page-header-color: #F4F1E8;
+$page-header-height: 7rem;
+$page-gutter: 1rem;
+
+$sårt: #1C1C1C;
+$hvii: #F4F1E8;
+$dark-grey: #353535;
+$semi-dark-grey: #838383;
+$pink: #DF0067;
+
 :host {
   background-color: $dark-grey;
   display: block;

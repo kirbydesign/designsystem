@@ -1,5 +1,10 @@
 @import '../../../kirby/scss/web-imports';
 
+$page-header-bg: #1C1C1C;
+$page-header-color: #F4F1E8;
+$page-header-height: 7rem;
+$page-gutter: 1rem;
+
 :host {
   padding: 2rem $page-gutter;
 }
@@ -25,7 +30,7 @@
 
   &__item {
     text-decoration: none;
-    color: $semi-dark-grey;
+    color: #838383;
     font-weight: 200;
     padding: 0.75rem 0 0.75rem 0.75rem;
     margin-left: -1rem;
@@ -37,10 +42,10 @@
     &:hover,
     &:focus {
       background-color: #ebebeb;
-      color: $dark-grey;
+      color: #353535;
     }
     &.is-selected {
-      color: $pink;
+      color: #DF0067;
       font-weight: bold;
     }
   }

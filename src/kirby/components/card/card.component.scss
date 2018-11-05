@@ -1,59 +1,26 @@
-:host {
-    --kirby-wireframe-color: lightskyblue;
-    --kirby-wireframe-border-color: var(--kirby-wireframe-color);
-    --kirby-wireframe-border: 1px solid var(--kirby-wireframe-border-color);
-    --kirby-wireframe-text-color: var(--kirby-wireframe-color);
-    color: var(--kirby-wireframe-text-color);
-}
+@import '../../scss/web-imports';
 
-header {
-    text-align: center;
-    border-bottom: var(--kirby-wireframe-border);
-    
-    h2 {
-        margin: 0;
-        margin-top: 0.8em;
-        font-size: 1em;
-        font-weight: normal;
-    }
+$min-card-height: 345px;
+$max-card-height: 500px;
+$min-card-width: 304px;
 
-    h4 {
-        margin: 0;
-        margin-bottom: 0.5em;
-        font-size: 2em;
-        font-weight: bold;
-    }
-}
+:host{
+  --kirby-card-header-background-color: var(--kirby-surface);
+  --kirby-card-header-color: var(--kirby-on-surface);
+  --kirby-card-main-background-color: var(--kirby-surface);
+  --kirby-card-main-color: var(--kirby-on-surface);
+  --kirby-card-footer-background-color: var(--kirby-surface);
+  --kirby-card-footer-color: var(--kirby-on-surface);
 
-.card-wrapper {
-    border: var(--kirby-wireframe-border);
-    border-radius: 0.5em;
-    width: 254px;
-    height: 360px;
-}
-
-FlexboxLayout {
-    border-width: 1;
-    border-color: lightskyblue;
-    flex-direction: column;
-    border-radius: 8;
-    padding: 10;
-    width: 70%;
-    height: 50%;
-    align-items: stretch;
-    justify-content: space-around;
-    label {
-        text-align: center;
-        width: 100%;
-        .h2 {
-            align-self: flex-start;
-            font-size: 22;
-        }
-        .h4 {
-            font-size: 18;
-        }
-    }
-    .footer {
-
-    }
+  background-color: var(--kirby-surface);
+  border-radius: $border-radius;
+  box-shadow: 0 10px 29px -9px rgba(24, 24, 24, 0.3);
+  color: var(--kirby-wireframe-text-color);
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 100%;
+  justify-content: space-between;
+  max-height: $max-card-height;
+  min-height: $min-card-height;
+  min-width: $min-card-width;
 }

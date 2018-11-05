@@ -1,15 +1,14 @@
 /* Page layout
 --------------------------------------------------------------------------------*/
 $page-side-nav-width: 16.625rem;
-$page-wrapper-netbank-padding-top: 3em;
-$page-max-width: 1280px;
+$page-max-width: 1366px;
 
 /* Breakpoints
 --------------------------------------------------------------------------------*/
 $breakpoints: (
-  small: 30em, 
-  medium: 38em, 
-  large: 52em, 
+  small: 361px, 
+  medium: 721px, 
+  large: 1025px,
   xlarge: 60em, 
   xxlarge: 80em 
 );
@@ -26,6 +25,28 @@ $font-sizes: (
   xs: .75rem  // 12px
 );
 
+/* Font-sizes
+--------------------------------------------------------------------------------*/
+$font-weight: (
+  light: 200,
+  regular: 400,
+  bold: 700
+);
+
+/* Sizes
+--------------------------------------------------------------------------------*/
+$sizes: (
+  xxxl: 4.375rem,  // 70px
+  xxl:  3.75rem,   // 60px
+  xl:   3.125rem,  // 50px
+  l:    2rem,      // 32px
+  m:    1rem,      // 16px
+  s:    .75rem,    // 12px
+  xs:   .5rem,     // 8px
+  xxs:  .25rem,    // 4px
+  gutter: 1rem,    // 16px
+);
+
 /* Z-index
 --------------------------------------------------------------------------------*/
 $z-layers: (
@@ -34,19 +55,12 @@ $z-layers: (
   modal: 901
 );
 
-/* Colors (Maybe we should avoid using these directly in other scss files)
+/* Borders 
 --------------------------------------------------------------------------------*/
-$sårt: #1C1C1C;
-$hvii: #F4F1E8;
-$dark-grey: #353535;
-$semi-dark-grey: #838383;
-$pink: #DF0067;
+$border-radius: 18px;
+$border-radius-small: 6px;
+
 
 /*
  * Specific module coloring and sizing follows
 --------------------------------------------------------------------------------*/
-$page-header-bg: $sårt;
-$page-header-color: $hvii;
-$page-header-height: 7rem;
-$page-gutter: 1rem;
-

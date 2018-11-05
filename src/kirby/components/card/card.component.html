@@ -1,11 +1,3 @@
-<section class="card-wrapper">
-  <header>
-    <h2>{{title}}</h2>
-    <h4>{{subtitle}}</h4>     
-  </header>
-  <main>
-    <ng-content></ng-content>
-  </main>
-  <footer>
-  </footer>
-</section>
+<ng-content select="kirby-card-header"></ng-content>
+<ng-content></ng-content>
+<ng-content select="kirby-card-footer"></ng-content>

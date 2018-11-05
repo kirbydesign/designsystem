@@ -7,6 +7,10 @@
   @return null;
 }
 
+@function size($key: "m", $multiplier: 1) {
+  @return _get-map-prop($sizes, $key) * $multiplier;
+}
+
 @function z($key) {
   @return _get-map-prop($z-layers, $key);
 }
@@ -19,4 +23,8 @@
 
 @function font-size($key: "n") {
   @return _get-map-prop($font-sizes, $key);
+}
+
+@function font-weight($key: "regular") {
+  @return _get-map-prop($font-weight, $key);
 }
