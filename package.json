@@ -25,7 +25,8 @@
     "pack-build": "npm run pack-copy-to-dist-folder",
     "pack-build-and-publish": "./scripts/publish.js",
     "preversion": "ng test --watch false",
-    "version": "./scripts/publish.js"
+    "version": "./scripts/publish.js",
+    "postversion": "git push && git push --tags"
   },
   "private": true,
   "dependencies": {

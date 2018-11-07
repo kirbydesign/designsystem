@@ -13,7 +13,8 @@ pkgJson.version = rootPkgJson.version;
 fs.writeFileSync('dist-lib/package.json', JSON.stringify(pkgJson, null, 2));
 
 var cp = require('child_process');
-var result = cp.spawnSync('npm', ['publish', 'dist-lib', '--dry-run']);
+var result = cp.spawnSync('npm', ['publish', 'dist-lib']);
 if (result.status != 0) {
-    console.error('Unable to publish package')
+    console.error('Unable to publish package');
+    process.exitCode = 1;
 }
