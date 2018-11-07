@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { KirbyModule } from '../../../kirby/kirby.module';
 import { AppMenuComponent } from './app-menu.component';
 
 describe('AppMenuComponent', () => {
@@ -8,6 +9,7 @@ describe('AppMenuComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [ KirbyModule ],
       declarations: [ AppMenuComponent ]
     })
     .compileComponents();

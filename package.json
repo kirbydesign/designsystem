@@ -38,6 +38,7 @@
     "@angular/platform-browser": "~6.1.0",
     "@angular/platform-browser-dynamic": "~6.1.0",
     "@angular/router": "~6.1.0",
+    "@types/prismjs": "^1.9.0",
     "core-js": "^2.5.4",
     "nativescript-angular": "~6.1.0",
     "nativescript-orientation": "^2.2.1",
