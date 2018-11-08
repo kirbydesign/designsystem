@@ -8,41 +8,34 @@ const screenScale = screen.mainScreen.scale;
 @Component({
   selector: 'kirby-card',
   templateUrl: './card.component.html',
-  styleUrls: ['./card.component.scss'],
-  // encapsulation: ViewEncapsulation.None
+  styleUrls: ['./card.component.scss']
 })
 export class CardComponent implements OnInit {
   @Input() title: string;
   @Input() subtitle: string;
 
-  someClass = '';
+  cardSizeClass = '';
 
   constructor() { }
 
   ngOnInit() {
-    console.log('We got init');
   }
 
   onViewLoaded(args: EventData) {
-    console.log('We got loaded');
     const stack = <FlexboxLayout>args.object;
 
+    // A timeout is crap, but try without, fail you will
     setTimeout(() => {
-        console.log('stack.getMeasuredHeight: ' + stack.getMeasuredHeight());
-        console.log('stack.getMeasuredWidth: ' + stack.getMeasuredWidth());
-
-        const heightDP = stack.getMeasuredHeight() / screenScale;
-        const widthDP = stack.getMeasuredWidth() / screenScale;
-        console.log('heightDP: ' + heightDP);
-        console.log('widthDP: ' + widthDP);
-
-        if (widthDP >= 400) {
-          this.someClass = 'large';
-        } else if (widthDP >= 200) {
-          this.someClass = 'medium';
-        } else {
-          this.someClass = 'small';
-        }
+      // TODO: Get breakpoints from somewhere
+      const heightDP = stack.getMeasuredHeight() / screenScale;
+      const widthDP = stack.getMeasuredWidth() / screenScale;
+      if (widthDP >= 400) {
+        this.cardSizeClass = 'card-large';
+      } else if (widthDP >= 200) {
+        this.cardSizeClass = 'card-medium';
+      } else {
+        this.cardSizeClass = 'card-small';
+      }
     }, 100);
   }
 
