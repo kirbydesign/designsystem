@@ -1,4 +1,4 @@
-<FlexboxLayout orientation="vertical" >
+<FlexboxLayout (loaded)="onViewLoaded($event)" class="background" [ngClass]="someClass">
     <label class="h2" [text]="title" ></label>
     <label class="h4" [text]="subtitle" ></label>
     <ng-content></ng-content>

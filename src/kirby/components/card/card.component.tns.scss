@@ -1,0 +1,22 @@
+$color-card-bg-small: rgb(253, 95, 95);
+$color-card-bg-medium: rgb(126, 255, 122);
+$color-card-bg-large: rgb(122, 98, 255);
+
+.background {
+    border-radius: 20;
+    flex-direction: column;
+    padding: 16;
+    width: 100%;
+}
+
+.small {
+    background-color: $color-card-bg-small;
+}
+
+.medium {
+    background-color: $color-card-bg-medium;
+}
+
+.large {
+    background-color: $color-card-bg-large;
+}

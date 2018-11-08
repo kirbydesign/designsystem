@@ -7,7 +7,7 @@ import { ListExampleComponent } from './list-example/list-example.component';
 export const routes: Routes = [
     {
         path: '',
-        redirectTo: 'buttons',
+        redirectTo: 'cards',
     },
     {
         path: 'buttons',
