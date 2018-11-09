@@ -1,5 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { ExamplesModule } from '../../examples/examples.module';
+import { HtmlViewerComponent } from '../../shared/html-viewer/html-viewer.component';
 import { CardShowcaseComponent } from './card-showcase.component';
 
 describe('CardShowcaseComponent', () => {
@@ -8,7 +10,8 @@ describe('CardShowcaseComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CardShowcaseComponent ]
+      imports: [ ExamplesModule ],
+      declarations: [ CardShowcaseComponent, HtmlViewerComponent ]
     })
     .compileComponents();
   }));
