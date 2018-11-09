@@ -1,31 +1,36 @@
+//$color-card-bg: rgb(255, 255, 255);
 $color-card-bg: rgb(255, 255, 255);
+$color-card-border: rgb(133, 133, 133);
 $color-card-bg-small: rgb(253, 95, 95);
 $color-card-bg-medium: rgb(126, 255, 122);
 $color-card-bg-large: rgb(122, 98, 255);
 
 .background {
     flex-direction: column;
-    padding: 16;
+    //padding: 16;
     width: 100%;
     height: 100%;
 }
 
 .container {
     background-color: $color-card-bg;
-    border-radius: 20;
+    border-radius: 16;
+    border: 1;
+    border-color: $color-card-border;
     flex-direction: column;
     width: 100%;
     height: 100%;
+    margin: 8;
 }
 
 .card-small {
-    background-color: $color-card-bg-small;
+    //background-color: $color-card-bg-small;
 }
 
 .card-medium {
-    background-color: $color-card-bg-medium;
+    //background-color: $color-card-bg-medium;
 }
 
 .card-large {
-    background-color: $color-card-bg-large;
+    //background-color: $color-card-bg-large;
 }
