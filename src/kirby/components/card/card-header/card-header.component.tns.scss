@@ -1,0 +1,23 @@
+@import '../../../scss/native-imports';
+
+:host {
+  display: block;
+  border-top-left-radius: $border-radius;
+  border-top-right-radius: $border-radius;
+  text-align: center;
+  padding: size("gutter");
+}
+
+.card-header {
+  &__title {
+    font-size: font-size("n");
+    font-weight: font-weight("regular");
+    margin: 0 0 size("xs");
+  }
+
+  &__subtitle {
+    font-size: font-size("s");
+    margin: 0 0 size("xs");
+    font-weight: font-weight("regular");
+  }
+}

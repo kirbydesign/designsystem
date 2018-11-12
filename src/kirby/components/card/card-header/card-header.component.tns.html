@@ -1,1 +1,5 @@
-<Button text="card-header works!" class="btn btn-primary"></Button>
+<StackLayout class="card-header">
+  <Label class="card-header__title" *ngIf="title" text="{{title}}"></Label>
+  <Label class="card-header__subtitle" *ngIf="subtitle" text="{{subtitle}}"></Label>
+  <ng-content></ng-content>
+</StackLayout>
