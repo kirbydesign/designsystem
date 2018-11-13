@@ -4,6 +4,8 @@ import { screen } from 'platform';
 import { EventData } from 'tns-core-modules/data/observable/observable';
 import { FlexboxLayout } from 'tns-core-modules/ui/layouts/flexbox-layout/flexbox-layout';
 
+import { ScssHelper } from '../../scss/scss-helper';
+
 const screenScale = screen.mainScreen.scale;
 declare const CGSizeMake: any;
 declare const android: any;
@@ -18,8 +20,6 @@ export class CardComponent implements OnInit {
   @Input() subtitle: string;
 
   cardSizeClass = '';
-  private shadowColor: Color = new Color('#1c1c1c');
-  private shadowOffset = 2.0;// TODO: Get value from common configuration
 
   constructor() { }
 
@@ -31,11 +31,10 @@ export class CardComponent implements OnInit {
 
     // A timeout is crap, but try without, fail you will
     setTimeout(() => {
-      // TODO: Get breakpoints from somewhere
       const widthDP = stack.getMeasuredWidth() / screenScale;
-      if (widthDP >= 400) {
+      if (widthDP >= ScssHelper.BREAKPOINT_CARD_L) {
         this.cardSizeClass = 'card-large';
-      } else if (widthDP >= 200) {
+      } else if (widthDP >= ScssHelper.BREAKPOINT_CARD_M) {
         this.cardSizeClass = 'card-medium';
       } else {
         this.cardSizeClass = 'card-small';
@@ -54,18 +53,18 @@ export class CardComponent implements OnInit {
           const shape = new android.graphics.drawable.GradientDrawable();
           shape.setShape(android.graphics.drawable.GradientDrawable.RECTANGLE);
           shape.setColor(android.graphics.Color.parseColor(bgColor + ''));
-          shape.setCornerRadius(16.0);// TODO: Get value from common configuration
+          shape.setCornerRadius(ScssHelper.BORDER_RADIUS);
           androidView.setBackgroundDrawable(shape);
-          androidView.setElevation(16);// TODO: Get value from common configuration
+          androidView.setElevation(ScssHelper.ELEVATION_CARD_RESTING);
           return true;
         }
       });
     } else if (tnsView.ios) {
       const iosView = tnsView.ios;
-      iosView.layer.shadowColor = this.shadowColor.ios.CGColor;
-      iosView.layer.shadowOffset = CGSizeMake(0, this.shadowOffset);
-      iosView.layer.shadowOpacity = 0.5;// TODO: Get value from common configuration
-      iosView.layer.shadowRadius = 6.0;// TODO: Get value from common configuration
+      iosView.layer.shadowColor = ScssHelper.SHADOW_COLOR.ios.CGColor;
+      iosView.layer.shadowOffset = CGSizeMake(0, ScssHelper.SHADOW_OFFSET_Y);
+      iosView.layer.shadowOpacity = ScssHelper.SHADOW_OPACITY;
+      iosView.layer.shadowRadius = ScssHelper.SHADOW_RADIUS;
       return;
     }
   }
