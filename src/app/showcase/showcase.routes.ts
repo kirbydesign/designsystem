@@ -4,6 +4,7 @@ import { ButtonShowcaseComponent } from './button-showcase/button-showcase.compo
 import { CardShowcaseComponent } from './card-showcase/card-showcase.component';
 import { ListShowcaseComponent } from './list-showcase/list-showcase.component';
 import { ShowcaseComponent } from './showcase.component';
+import { ChartShowcaseComponent } from './chart-showcase/chart-showcase.component';
 
 export const routes: Routes = [
     {
@@ -26,6 +27,10 @@ export const routes: Routes = [
             {
                 path: 'list',
                 component: ListShowcaseComponent
+            },
+            {
+                path: 'chart',
+                component: ChartShowcaseComponent
             }
         ]
     },

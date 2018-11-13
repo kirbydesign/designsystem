@@ -3,6 +3,7 @@ import {Routes} from '@angular/router';
 import { ButtonExampleComponent } from './button-example/button-example.component';
 import { CardExampleComponent } from './card-example/card-example.component';
 import { ListExampleComponent } from './list-example/list-example.component';
+import { ChartExampleComponent } from './chart-example/chart-example.component';
 
 export const routes: Routes = [
     {
@@ -20,5 +21,9 @@ export const routes: Routes = [
     {
         path: 'list',
         component: ListExampleComponent
+    },
+    {
+        path: 'chart',
+        component: ChartExampleComponent
     }
 ];

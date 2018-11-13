@@ -211,6 +211,9 @@ module.exports = env => {
                 { from: "fonts/**" },
                 { from: "**/*.jpg" },
                 { from: "**/*.png" },
+                { from: "kirby/components/chart/chart.webview.html" },
+                { from: "../node_modules/chart.js/dist/Chart.min.js" },
+                { from: "../node_modules/nativescript-webview-interface/www/nativescript-webview-interface.js" },
             ], { ignore: [`${relative(appPath, appResourcesFullPath)}/**`] }),
             // Generate a bundle starter script and activate it in package.json
             new nsWebpack.GenerateBundleStarterPlugin([
