@@ -5,6 +5,7 @@ import { EventData } from 'tns-core-modules/data/observable/observable';
 import { FlexboxLayout } from 'tns-core-modules/ui/layouts/flexbox-layout/flexbox-layout';
 
 import { ScssHelper } from '../../scss/scss-helper';
+import { View } from 'tns-core-modules/ui/core/view/view';
 
 const screenScale = screen.mainScreen.scale;
 declare const CGSizeMake: any;
@@ -27,11 +28,11 @@ export class CardComponent implements OnInit {
   }
 
   onViewLoaded(args: EventData) {
-    const stack = <FlexboxLayout>args.object;
+    const view = <View>args.object;
 
     // A timeout is crap, but try without, fail you will
     setTimeout(() => {
-      const widthDP = stack.getMeasuredWidth() / screenScale;
+      const widthDP = view.getMeasuredWidth() / screenScale;
       if (widthDP >= ScssHelper.BREAKPOINT_CARD_L) {
         this.cardSizeClass = 'card-large';
       } else if (widthDP >= ScssHelper.BREAKPOINT_CARD_M) {
@@ -40,13 +41,12 @@ export class CardComponent implements OnInit {
         this.cardSizeClass = 'card-small';
       }
     }, 100);
-    this.addShadow(args);
+    this.addShadow(view);
   }
 
-  addShadow(args: EventData) {
-    const tnsView = <any>args.object;
-    if (tnsView.android) {
-      tnsView.eachChildView((child) => {
+  addShadow(view: View) {
+    if (view.android) {
+      view.eachChildView((child) => {
         if (child instanceof FlexboxLayout) {
           const bgColor = child.style.backgroundColor;
           const androidView = child.android;
@@ -59,8 +59,8 @@ export class CardComponent implements OnInit {
           return true;
         }
       });
-    } else if (tnsView.ios) {
-      const iosView = tnsView.ios;
+    } else if (view.ios) {
+      const iosView = view.ios;
       iosView.layer.shadowColor = ScssHelper.SHADOW_COLOR.ios.CGColor;
       iosView.layer.shadowOffset = CGSizeMake(0, ScssHelper.SHADOW_OFFSET_Y);
       iosView.layer.shadowOpacity = ScssHelper.SHADOW_OPACITY;
