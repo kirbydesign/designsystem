@@ -10,9 +10,9 @@ export class ScssHelper {
   public static ELEVATION_CARD_RESTING = 16;
 
   // Breakpoints
-  public static BREAKPOINT_CARD_S = 100;
-  public static BREAKPOINT_CARD_M = 200;
-  public static BREAKPOINT_CARD_L = 400;
+  public static BREAKPOINT_CARD_S = 320;
+  public static BREAKPOINT_CARD_M = 460;
+  public static BREAKPOINT_CARD_L = 820;
 
   // iOS specific values
   public static SHADOW_OPACITY = 0.5;
