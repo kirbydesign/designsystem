@@ -1,7 +1,7 @@
 <ScrollView class="chart-example-outer">
-    <GridLayout rows="*, *, *">
+    <GridLayout rows="*, *, *, *">
         <StackLayout row="0" class="chart-example-inner">
-            <kirby-chart [labels]="['Hest', 'Ko', 'Okse']" [data]="[{data: [10, 15, 75]}]" [chartType]="'pie'"></kirby-chart>
+            <kirby-chart [labels]="['Aktier', 'ETF', 'Obligationer']" [data]="[{data: [10, 15, 75]}]" [chartType]="'doughnut'"></kirby-chart>
         </StackLayout>
         <StackLayout row="1" class="chart-example-inner">
             <kirby-chart [labels]="['Æble', 'Pære', 'Banan']" [data]="[
@@ -10,6 +10,9 @@
             </kirby-chart>
         </StackLayout>
         <StackLayout row="2" class="chart-example-inner">
+            <kirby-chart [labels]="['Aktier', 'ETF', 'Obligationer']" [data]="[{data: [12, 25, 63]}]" [chartType]="'pie'"></kirby-chart>
+        </StackLayout>
+        <StackLayout row="3" class="chart-example-inner">
             <button text="Home" [nsRouterLink]="'/home'"></button>
         </StackLayout>
     </GridLayout>
