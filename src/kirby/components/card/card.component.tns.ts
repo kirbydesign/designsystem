@@ -1,11 +1,10 @@
-import { Component, OnInit, Input, HostBinding, ViewEncapsulation } from '@angular/core';
-import { Color } from 'tns-core-modules/color';
+import { Component, Input, OnInit } from '@angular/core';
 import { screen } from 'platform';
 import { EventData } from 'tns-core-modules/data/observable/observable';
-import { FlexboxLayout } from 'tns-core-modules/ui/layouts/flexbox-layout/flexbox-layout';
-
-import { ScssHelper } from '../../scss/scss-helper';
 import { View } from 'tns-core-modules/ui/core/view/view';
+import { FlexboxLayout } from 'tns-core-modules/ui/layouts/flexbox-layout/flexbox-layout';
+import { ScssHelper } from '../../scss/scss-helper';
+
 
 const screenScale = screen.mainScreen.scale;
 declare const CGSizeMake: any;
@@ -20,12 +19,40 @@ export class CardComponent implements OnInit {
   @Input() title: string;
   @Input() subtitle: string;
 
+  // Jacob, I can not get this to work. Loke for 'iosView' and 'androidView' in
+  // the tns.html file (remove them if we do not go down this road)
+  // @ViewChild('iosView') iosView: View;
+  // @ViewChild('androidView') androidView: View;
+
   cardSizeClass = '';
 
   constructor() { }
 
   ngOnInit() {
   }
+
+  // Jacob, I can not get this to work. Loke for 'iosView' and 'androidView' in
+  // the tns.html file (remove them if we do not go down this road)
+  /*
+  ngAfterContentInit() {
+    if (isAndroid) {
+      const bgColor = this.androidView.style.backgroundColor;
+      const androidView = this.androidView.android;
+      const shape = new android.graphics.drawable.GradientDrawable();
+      shape.setShape(android.graphics.drawable.GradientDrawable.RECTANGLE);
+      shape.setColor(android.graphics.Color.parseColor(bgColor + ''));
+      shape.setCornerRadius(ScssHelper.BORDER_RADIUS);
+      androidView.setBackgroundDrawable(shape);
+      androidView.setElevation(ScssHelper.ELEVATION_CARD_RESTING);
+    } else {
+      const iosView = this.iosView.ios;
+      iosView.layer.shadowColor = ScssHelper.SHADOW_COLOR.ios.CGColor;
+      iosView.layer.shadowOffset = CGSizeMake(0, ScssHelper.SHADOW_OFFSET_Y);
+      iosView.layer.shadowOpacity = ScssHelper.SHADOW_OPACITY;
+      iosView.layer.shadowRadius = ScssHelper.SHADOW_RADIUS;
+    }
+  }
+  */
 
   onViewLoaded(args: EventData) {
     const view = <View>args.object;

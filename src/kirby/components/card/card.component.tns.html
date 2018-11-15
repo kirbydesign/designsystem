@@ -1,4 +1,4 @@
-<FlexboxLayout #iosView class="background" [ngClass]="cardSizeClass">
+<FlexboxLayout #iosView (loaded)="onViewLoaded($event)" class="background" [ngClass]="cardSizeClass">
     <FlexboxLayout #androidView class="container">
         <ng-content select="kirby-card-header"></ng-content>
         <ng-content></ng-content>
