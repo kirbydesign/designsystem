@@ -8,7 +8,6 @@
 </head>
 <body>
   <canvas id="chart" width="100" height="75"></canvas>
-  <button id="refresh">Refresh</button>
   <script src="nativescript-webview-interface.js"></script>
   <script src="Chart.min.js"></script>
   <script>
@@ -22,161 +21,15 @@
         function addNativeMsgListener() {
             oWebViewInterface.on('loadChartData', function (chartData) {
                 var ctx = document.getElementById("chart");
-                var chart = new Chart(ctx, {
-                    type: chartData.chartType,
-                    data: {
-                        labels: chartData.labels,
-                        datasets: assignColors(chartData.data, chartData.chartType)
-                    }
-                });
-                var refresh = document.getElementById("refresh");
-                refresh.onclick = function() {
-                    if (chartData.chartType === 'pie' || chartData.chartType === 'doughnut') {
-                        chart.data.labels.push('XX');
-                        chart.data.datasets[0].data.push(getRandomInt(10, 100));
-                    } else if (chartData.chartType === 'bar' || chartData.chartType === 'horizontalBar') {
-                        chart.data.datasets.push({data: [getRandomInt(10, 100), getRandomInt(10, 100), getRandomInt(10, 100)], label: 'XX'});
-                    }
-                    chart.data.datasets = assignColors(chart.data.datasets, chartData.chartType);
-                    chart.update();
-                };
+                var chart = new Chart(ctx, chartData.options);
             });
         }
-
-        function assignColors(dataset, chartType) {
-            return dataset.map(function(set, index) {
-                var newSet = Object.assign({}, set);
-                Object.assign(newSet, getColors(chartType, index, newSet.data.length), {
-                    borderWidth: 1
-                });
-                return newSet;
-            });
-        }
-
-        var defaultColors = [
-            [1, 81, 50],
-            [39, 209, 56],
-            [178, 209, 191],
-            [170, 188, 8],
-            [31, 160, 90],
-            [151, 187, 205],
-            [220, 220, 220],
-            [247, 70, 74],
-            [70, 191, 189],
-            [253, 180, 92],
-            [148, 159, 177],
-            [77, 83, 96]
-        ];
-
-        function generateColor(index) {
-            return defaultColors[index] || getRandomColor();
-        }
-
-        function generateColors(count) {
-            var colorsArr = new Array(count);
-            for (let i = 0; i < count; i++) {
-                colorsArr[i] = defaultColors[i] || getRandomColor();
-            }
-            return colorsArr;
-        }
-
-        function getRandomColor() {
-           return [getRandomInt(0, 255), getRandomInt(0, 255), getRandomInt(0, 255)];
-        }
-        
-        function getRandomInt(min, max) {
-           return Math.floor(Math.random() * (max - min + 1)) + min;
-        }
-
-        function rgba(color, alpha) {
-           return 'rgba(' + color.concat(alpha).join(',') + ')';
-        }
-
-        function formatBarColor(colors) {
-            return {
-                backgroundColor: rgba(colors, 0.6),
-                borderColor: rgba(colors, 1),
-                hoverBackgroundColor: rgba(colors, 0.8),
-                hoverBorderColor: rgba(colors, 1)
-            };
-        }
-
-        function formatPieColors(colors) {
-            return {
-                backgroundColor: colors.map(function(color) { return rgba(color, 0.6)}),
-                borderColor: colors.map(() => '#fff'),
-                pointBackgroundColor: colors.map(function(color) { return rgba(color, 1)}),
-                pointBorderColor: colors.map(() => '#fff'),
-                pointHoverBackgroundColor: colors.map(function(color) { return rgba(color, 1)}),
-                pointHoverBorderColor: colors.map(function(color) { return rgba(color, 1)})
-            };
-        }
-
-        function getColors(chartType, index, count) {
-            console.log("CHARTTYPE: " + chartType + ", COUNT: " + count);
-            if (chartType === 'pie' || chartType === 'doughnut') {
-                return formatPieColors(generateColors(count));
-            }
-
-            // if (chartType === 'polarArea') {
-            //     return formatPolarAreaColors(generateColors(count));
-            // }
-
-            // if (chartType === 'line' || chartType === 'radar') {
-            //     return formatLineColor(generateColor(index));
-            // }
-
-            if (chartType === 'bar' || chartType === 'horizontalBar') {
-                return formatBarColor(generateColor(index));
-            }
-            return generateColor(index);
-        }
-
 
         function init() {
             addNativeMsgListener();
         }
 
         init();
-
-
-        // var ctx = document.getElementById("chart");
-        // var myChart = new Chart(ctx, {
-        //     type: 'bar',
-        //     data: {
-        //         labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-        //         datasets: [{
-        //             label: '# of Votes',
-        //             data: [12, 19, 3, 5, 2, 3],
-        //             backgroundColor: [
-        //                 'rgba(255, 99, 132, 0.2)',
-        //                 'rgba(54, 162, 235, 0.2)',
-        //                 'rgba(255, 206, 86, 0.2)',
-        //                 'rgba(75, 192, 192, 0.2)',
-        //                 'rgba(153, 102, 255, 0.2)',
-        //                 'rgba(255, 159, 64, 0.2)'
-        //             ],
-        //             borderColor: [
-        //                 'rgba(255,99,132,1)',
-        //                 'rgba(54, 162, 235, 1)',
-        //                 'rgba(255, 206, 86, 1)',
-        //                 'rgba(75, 192, 192, 1)',
-        //                 'rgba(153, 102, 255, 1)',
-        //                 'rgba(255, 159, 64, 1)'
-        //             ],
-        //             borderWidth: 1
-        //         }]
-        //     },
-        //     options: {
-        //         scales: {
-        //             yAxes: [{
-        //                 ticks: {
-        //                     beginAtZero:true
-        //                 }
-        //             }]
-        //         }
-        //     }
-        // });
     })();
   </script>      
 </body>

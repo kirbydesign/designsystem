@@ -10,9 +10,7 @@ const webViewInterfaceModule = require('nativescript-webview-interface');
   styleUrls: ['./chart.component.scss']
 })
 export class ChartComponent implements OnInit, AfterViewInit {
-  @Input() chartType = 'bar';
-  @Input() labels: string[] = [];
-  @Input() data: number[] = [];
+  @Input() options = {};
 
   @ViewChild('webView') private webView: ElementRef;
   private chartWebViewInterface;
@@ -42,9 +40,7 @@ export class ChartComponent implements OnInit, AfterViewInit {
 
   private loadChartDataInWebView() {
     const data = {
-      chartType: this.chartType,
-      labels: this.labels,
-      data: this.data
+      options: this.options
     };
     this.chartWebViewInterface.emit('loadChartData', data);
   }

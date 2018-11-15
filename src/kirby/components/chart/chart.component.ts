@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Chart } from 'chart.js';
 
 @Component({
   selector: 'kirby-chart',
@@ -6,13 +7,12 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./chart.component.scss']
 })
 export class ChartComponent implements OnInit {
-  @Input() chartType = 'bar';
-  @Input() labels: string[] = ['Taco', 'Toast', 'Pizza'];
-  @Input() data: any[] = [300, 500, 100];
+  @Input() options: any = {};
 
   constructor() { }
 
   ngOnInit() {
+    const chart: Chart = new Chart('chart', this.options);
   }
 
 }

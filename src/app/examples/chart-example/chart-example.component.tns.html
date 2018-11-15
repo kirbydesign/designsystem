@@ -1,16 +1,13 @@
 <ScrollView class="chart-example-outer">
     <GridLayout rows="*, *, *, *">
         <StackLayout row="0" class="chart-example-inner">
-            <kirby-chart [labels]="['Aktier', 'ETF', 'Obligationer']" [data]="[{data: [10, 15, 75]}]" [chartType]="'doughnut'"></kirby-chart>
+            <kirby-chart [options]="options"></kirby-chart>
         </StackLayout>
         <StackLayout row="1" class="chart-example-inner">
-            <kirby-chart [labels]="['Æble', 'Pære', 'Banan']" [data]="[
-                {data: [65, 59, 80], label: 'DK'},
-                {data: [28, 48, 40], label: 'UK'}]">
-            </kirby-chart>
+            <kirby-chart [options]="options"></kirby-chart>
         </StackLayout>
         <StackLayout row="2" class="chart-example-inner">
-            <kirby-chart [labels]="['Aktier', 'ETF', 'Obligationer']" [data]="[{data: [12, 25, 63]}]" [chartType]="'pie'"></kirby-chart>
+            <kirby-chart [options]="options"></kirby-chart>
         </StackLayout>
         <StackLayout row="3" class="chart-example-inner">
             <button text="Home" [nsRouterLink]="'/home'"></button>
