@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, Input } from '@angular/core';
 import { WebView, LoadEventData } from 'ui/web-view';
-const webViewInterfaceModule = require('nativescript-webview-interface');
+import { android, ios, AndroidApplication, AndroidActivityEventData } from 'tns-core-modules/application';
 
+const webViewInterfaceModule = require('nativescript-webview-interface');
 
 @Component({
   selector: 'kirby-chart',
@@ -10,16 +11,15 @@ const webViewInterfaceModule = require('nativescript-webview-interface');
 })
 export class ChartComponent implements OnInit, AfterViewInit {
   @Input() chartType = 'bar';
-  @Input() labels: string[] = ['Taco', 'Toast', 'Pizza'];
-  @Input() data: number[] = [300, 500, 100];
+  @Input() labels: string[] = [];
+  @Input() data: number[] = [];
 
   @ViewChild('webView') private webView: ElementRef;
   private chartWebViewInterface;
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   ngAfterViewInit() {
     this.setupWebViewInterface();
@@ -33,6 +33,7 @@ export class ChartComponent implements OnInit, AfterViewInit {
     webView.on(WebView.loadFinishedEvent, (args: LoadEventData) => {
       if (!args.error) {
         this.loadChartDataInWebView();
+        this.setupWebViewForPlatforms(webView);
       }
     });
 
@@ -48,5 +49,24 @@ export class ChartComponent implements OnInit, AfterViewInit {
     this.chartWebViewInterface.emit('loadChartData', data);
   }
 
+  private setupWebViewForPlatforms(webView: WebView) {
+    const platformWebView = android ? webView.android : webView.ios;
+    if (android) {
+      platformWebView.getSettings().setBuiltInZoomControls(false);
+      platformWebView.getSettings().setDisplayZoomControls(false);
+      android.on(AndroidApplication.activityPausedEvent, (args: AndroidActivityEventData) => {
+        platformWebView.onPause();
+      });
+      android.on(AndroidApplication.activityResumedEvent, (args: AndroidActivityEventData) => {
+        platformWebView.onResume();
+      });
+    } else if (ios) {
+      platformWebView.scrollView.minimumZoomScale = 1.0;
+      platformWebView.scrollView.maximumZoomScale = 1.0;
+      platformWebView.scrollView.bounces = false;
+      platformWebView.allowsMagnification = false;
+      platformWebView.allowsBackForwardNavigationGestures = false;
+    }
+  }
 
 }
