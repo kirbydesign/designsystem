@@ -9,23 +9,25 @@
       "version": "4.2.0"
     }
   },
-  "version": "0.0.0",
+  "version": "0.0.10",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
+    "ci-test": "ng test --progress false --watch false",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "dist": "ng build --prod --aot --progress false",
     "android": "tns run android --bundle",
     "ios": "tns run ios --bundle --device 'iPhone X'",
     "pack-bump-patch": "cd src/kirby && npm version patch",
     "pack-bump-minor": "cd src/kirby && npm version minor",
-    "pack-copy-to-dist-folder": "cpx \"src\\kirby\\**\\!(*.spec.ts)\" dist-lib",
     "pack-copy-to-dist-folder-watch": "cpx \"src\\kirby\\**\\!(*.spec.ts)\" dist-lib --watch",
     "pack-build": "npm run pack-copy-to-dist-folder",
-    "pack-publish": "npm publish dist-lib",
-    "pack-build-and-publish": "npm run pack-build && npm run pack-publish"
+    "pack-build-and-publish": "./scripts/publish.js",
+    "version": "./scripts/publish.js",
+    "postversion": "git push && git push --tags"
   },
   "private": true,
   "dependencies": {
@@ -38,6 +40,7 @@
     "@angular/platform-browser": "~6.1.0",
     "@angular/platform-browser-dynamic": "~6.1.0",
     "@angular/router": "~6.1.0",
+    "@types/prismjs": "^1.9.0",
     "core-js": "^2.5.4",
     "nativescript-angular": "~6.1.0",
     "nativescript-orientation": "^2.2.1",
@@ -59,6 +62,7 @@
     "@types/node": "~8.9.4",
     "codelyzer": "~4.2.1",
     "cpx": "^1.5.0",
+    "is-docker": "^1.1.0",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~1.7.1",
@@ -66,6 +70,7 @@
     "karma-coverage-istanbul-reporter": "~2.0.0",
     "karma-jasmine": "~1.1.1",
     "karma-jasmine-html-reporter": "^0.2.2",
+    "karma-junit-reporter": "^1.2.0",
     "nativescript": "^4.2.4",
     "nativescript-dev-sass": "~1.6.0",
     "nativescript-dev-typescript": "~0.7.0",

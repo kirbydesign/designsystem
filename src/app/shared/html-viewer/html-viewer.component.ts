@@ -1,5 +1,5 @@
 import { Component, AfterViewChecked, Input } from '@angular/core';
-import Prism from 'prismjs';
+import { highlightAll } from 'prismjs';
 
 @Component({
   selector: 'kirby-html-viewer',
@@ -12,7 +12,7 @@ export class HtmlViewerComponent implements AfterViewChecked {
   constructor() { }
 
   ngAfterViewChecked() {
-    Prism.highlightAll();
+    highlightAll();
   }
 
 }

@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { KirbyModule } from '../../../kirby/kirby.module';
 import { ButtonExampleComponent } from './button-example.component';
 
 describe('ButtonExampleComponent', () => {
@@ -8,6 +9,7 @@ describe('ButtonExampleComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [ KirbyModule ],
       declarations: [ ButtonExampleComponent ]
     })
     .compileComponents();
