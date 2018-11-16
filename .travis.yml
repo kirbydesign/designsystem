@@ -5,10 +5,10 @@ sudo: required
 
 install:
   - pip install six
-  - echo no | npm install -g nativescript@next --ignore-scripts
+  - echo no | npm install -g nativescript
   - tns usage-reporting disable
   - tns error-reporting disable
-  - sudo tns cloud setup
+  - tns cloud setup
   - npm ci
 
 # Setting up the build matrix: web, iOS, Android
@@ -25,7 +25,8 @@ matrix:
         - tns build ios --bundle
 
     # Running Android build
-    - language: android
+    - os: linux
+      language: android
       jdk: oraclejdk8
       before_cache:
         - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
@@ -43,11 +44,13 @@ matrix:
           - tools
           - android-27
           - extra-andoird-m2repository
+      before_install: nvm install 10.5
       script:
         - tns build android --for-device --bundle
 
     # Running web build
-    - cache:
-      - npm
+    - os: linux
+      cache:
+        - npm
       script:
         - npm run dist
