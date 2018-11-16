@@ -16,6 +16,8 @@ matrix:
   include:
     # Running lint
     - stage: "Lint"
+      cache:
+        - npm
       script: npm run lint
 
     # Running iOS build
@@ -59,3 +61,12 @@ matrix:
         - npm
       script:
         - npm run dist
+
+    # Running jasmine tests
+    - stage: "Unittest"
+      cache:
+        - npm
+      addons:
+        chrome: stable
+      script:
+        - npm run ci-test
