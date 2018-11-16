@@ -21,6 +21,7 @@ matrix:
       cache:
         - npm
         - cocoapods
+      before_script: ./scripts/setup-provisioning-profile.sh
       script:
         - tns build ios --bundle --for-device --provision dk.kirby.design.system
 
