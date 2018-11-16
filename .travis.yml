@@ -8,7 +8,7 @@ install:
   - echo no | npm install -g nativescript@next --ignore-scripts
   - tns usage-reporting disable
   - tns error-reporting disable
-  - tns setup
+  - sudo tns cloud setup
   - npm ci
 
 # Setting up the build matrix: web, iOS, Android
@@ -25,7 +25,8 @@ matrix:
         - tns build ios --bundle
 
     # Running Android build
-    - jdk: oraclejdk8
+    - language: android
+      jdk: oraclejdk8
       before_cache:
         - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
         - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
