@@ -14,15 +14,15 @@ install:
 # Setting up the build matrix: web, iOS, Android
 matrix:
   include:
-  # Running iOS build
-    - os: osx
+    # Running iOS build
+    - stage: "Build"
+      os: osx
       osx_image: xcode9.4
       cache:
         - npm
         - cocoapods
       script:
-      #  - tns build ios --bundle --for-device --provision dk.kirby.design.system
-        - tns build ios --bundle
+        - tns build ios --bundle --for-device --provision dk.kirby.design.system
 
     # Running Android build
     - os: linux
