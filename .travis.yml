@@ -8,6 +8,7 @@ install:
   - echo no | npm install -g nativescript@next --ignore-scripts
   - tns usage-reporting disable
   - tns error-reporting disable
+  - npm ci
 
 # Setting up the build matrix: web, iOS, Android
 matrix:
