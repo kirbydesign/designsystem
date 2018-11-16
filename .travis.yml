@@ -39,10 +39,10 @@ matrix:
         - npm
       android:
         components:
-          - build-tools-27.0.3
+          - build-tools-28.0.3
           - platform-tools
           - tools
-          - android-27
+          - android-28
           - extra-andoird-m2repository
       before_install: nvm install 10.5
       script:
