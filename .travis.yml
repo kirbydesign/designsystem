@@ -20,6 +20,15 @@ matrix:
         - npm
       script: npm run lint
 
+    # Running jasmine tests
+    - stage: "Unittest"
+      cache:
+        - npm
+      addons:
+        chrome: stable
+      script:
+        - npm run ci-test
+
     # Running iOS build
     - stage: "Build"
       os: osx
@@ -61,12 +70,3 @@ matrix:
         - npm
       script:
         - npm run dist
-
-    # Running jasmine tests
-    - stage: "Unittest"
-      cache:
-        - npm
-      addons:
-        chrome: stable
-      script:
-        - npm run ci-test
