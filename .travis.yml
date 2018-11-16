@@ -8,6 +8,7 @@ install:
   - echo no | npm install -g nativescript@next --ignore-scripts
   - tns usage-reporting disable
   - tns error-reporting disable
+  - tns setup
   - npm ci
 
 # Setting up the build matrix: web, iOS, Android
@@ -20,7 +21,8 @@ matrix:
         - npm
         - cocoapods
       script:
-        - tns build ios --bundle --for-device --provision dk.kirby.design.system
+      #  - tns build ios --bundle --for-device --provision dk.kirby.design.system
+        - tns build ios --bundle
 
     # Running Android build
     - jdk: oraclejdk8
@@ -46,3 +48,5 @@ matrix:
     # Running web build
     - cache:
       - npm
+      script:
+        - npm run dist
