@@ -4,44 +4,44 @@ node_js: "10.5"
 sudo: required
 
 install:
-    - pip install six
-    - echo no | npm install -g nativescript@next --ignore-scripts
-    - tns usage-reporting disable
-    - tns error-reporting disable
+  - pip install six
+  - echo no | npm install -g nativescript@next --ignore-scripts
+  - tns usage-reporting disable
+  - tns error-reporting disable
 
 # Setting up the build matrix: web, iOS, Android
 matrix:
   include:
   # Running iOS build
-  - os: osx
-    osx_image: xcode9.4
-    cache:
-    - npm
-    - cocoapods
-    script:
-    - tns build ios --bundle --for-device --provision dk.kirby.design.system
+    - os: osx
+      osx_image: xcode9.4
+      cache:
+        - npm
+        - cocoapods
+      script:
+        - tns build ios --bundle --for-device --provision dk.kirby.design.system
 
-  # Running Android build
-  - jdk: oraclejdk8
-    before_cache:
-    - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-    - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-    cache:
-      directories:
-      - $HOME/.gradle/caches/
-      - $HOME/.gradle/wrapper/
-      - $HOME/.android/build-cache
-    - npm
-    android:
-      components:
-      - build-tools-27.0.3
-      - platform-tools
-      - tools
-      - android-27
-      - extra-andoird-m2repository
-    script:
-    - tns build android --for-device --bundle
+    # Running Android build
+    - jdk: oraclejdk8
+      before_cache:
+        - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+        - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+      cache:
+        - directories:
+            - $HOME/.gradle/caches/
+            - $HOME/.gradle/wrapper/
+            - $HOME/.android/build-cache
+        - npm
+      android:
+        components:
+          - build-tools-27.0.3
+          - platform-tools
+          - tools
+          - android-27
+          - extra-andoird-m2repository
+      script:
+        - tns build android --for-device --bundle
 
-  # Running web build
-  - cache:
-    - npm
+    # Running web build
+    - cache:
+      - npm
