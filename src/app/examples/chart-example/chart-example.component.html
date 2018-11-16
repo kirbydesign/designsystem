@@ -1,1 +1,39 @@
-<kirby-chart [options]="options"></kirby-chart>
+<kirby-card>
+    <kirby-card-header [title]="'Distribution'"></kirby-card-header>
+    <kirby-chart [height]="320" [options]="{
+        chart: {
+            type: 'pie'
+        },
+        title: {
+            text: ''
+        },
+        plotOptions: {
+            pie: {
+                innerSize: 120,
+                allowPointSelect: false,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                }
+            },
+            series: {
+                animation: false
+            }
+        },
+        series: [{
+            name: 'fordeling',
+            data: [
+                ['Aktier', 20],
+                ['ETF', 3],
+                ['Certifikater', 25],
+                ['Obligationer', 52]
+            ]
+        }],
+        credits: {
+            enabled: false
+        }
+      }"></kirby-chart>
+    <kirby-card-footer>
+        <kirby-button label="Button" expand="block" shape="round" theme="cookbook"></kirby-button>
+    </kirby-card-footer>
+</kirby-card>

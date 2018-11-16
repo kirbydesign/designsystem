@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Chart } from 'chart.js';
+import { ChartObject, Options } from 'highcharts';
+import * as Highcharts from 'highcharts';
 
 @Component({
   selector: 'kirby-chart',
@@ -7,12 +8,14 @@ import { Chart } from 'chart.js';
   styleUrls: ['./chart.component.scss']
 })
 export class ChartComponent implements OnInit {
-  @Input() options: any = {};
+  @Input() options: Options = {};
+  @Input() height = 300;
 
   constructor() { }
 
   ngOnInit() {
-    const chart: Chart = new Chart('chart', this.options);
+    this.options.chart.height = this.height;
+    const chart: ChartObject = Highcharts.chart('chart-container', this.options);
   }
 
 }

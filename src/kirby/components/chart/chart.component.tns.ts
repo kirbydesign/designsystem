@@ -11,6 +11,7 @@ const webViewInterfaceModule = require('nativescript-webview-interface');
 })
 export class ChartComponent implements OnInit, AfterViewInit {
   @Input() options = {};
+  @Input() height = 300;
 
   @ViewChild('webView') private webView: ElementRef;
   private chartWebViewInterface;
@@ -40,7 +41,8 @@ export class ChartComponent implements OnInit, AfterViewInit {
 
   private loadChartDataInWebView() {
     const data = {
-      options: this.options
+      options: this.options,
+      height: this.height
     };
     this.chartWebViewInterface.emit('loadChartData', data);
   }

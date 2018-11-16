@@ -3,25 +3,23 @@
 <head>
   <meta charset="utf-8">
   <title>Kirby Chart</title>
-
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
 </head>
 <body>
-  <canvas id="chart" width="100" height="75"></canvas>
+  <div id="chart"></div>
   <script src="nativescript-webview-interface.js"></script>
-  <script src="Chart.min.js"></script>
+  <script src="highcharts.js"></script>
   <script>
     (function () {
         var oWebViewInterface = window.nsWebViewInterface;
-        console.log(oWebViewInterface);
 
         /**
          * Registers handlers for native events.
          */
         function addNativeMsgListener() {
             oWebViewInterface.on('loadChartData', function (chartData) {
-                var ctx = document.getElementById("chart");
-                var chart = new Chart(ctx, chartData.options);
+                chartData.options.chart.height = chartData.height - 40;
+                var chart = Highcharts.chart('chart', chartData.options);
             });
         }
 

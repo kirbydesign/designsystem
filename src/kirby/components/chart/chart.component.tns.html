@@ -1,1 +1,5 @@
-<WebView #webView class="chart-webview"></WebView>
+<GridLayout rows="*">
+    <StackLayout row="0">
+        <WebView #webView [ngStyle]="{ 'height': height }"></WebView>
+    </StackLayout>
+</GridLayout>
