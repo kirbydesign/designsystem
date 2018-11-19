@@ -11,9 +11,9 @@ export class ButtonComponent implements OnInit {
   @Input() expand?: 'full' | 'block';
   @Input() colortype?: 'primary';
   @Input() theme?: string; // TODO TRM - Skal vi have en theme model/interface, evt. global ting...
-  @Output() action = new EventEmitter<number>();
+  @Input() routerLink: string;
+  @Output() action = new EventEmitter();
   buttonCssClasses: {};
-  private clickCount = 0;
 
   constructor() { }
 
@@ -29,7 +29,6 @@ export class ButtonComponent implements OnInit {
   }
 
   handleClick() {
-    this.clickCount++;
-    this.action.emit(this.clickCount);
+    this.action.emit();
   }
 }
