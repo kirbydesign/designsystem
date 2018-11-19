@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, AfterContentChecked, ViewChild, ElementRef, AfterViewInit, AfterViewChecked } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { screen } from 'platform';
 import { View } from 'tns-core-modules/ui/core/view/view';
 import { FlexboxLayout } from 'tns-core-modules/ui/layouts/flexbox-layout/flexbox-layout';
@@ -14,7 +14,7 @@ declare const android: any;
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss']
 })
-export class CardComponent implements OnInit, AfterContentChecked, AfterViewInit, AfterViewChecked {
+export class CardComponent implements OnInit, AfterViewInit {
   @Input() title: string;
   @Input() subtitle: string;
 
@@ -23,32 +23,16 @@ export class CardComponent implements OnInit, AfterContentChecked, AfterViewInit
   @ViewChild('innerView') innerView: ElementRef<FlexboxLayout>;
 
   cardSizeClass = '';
-  private isCardSizeAndShadowApplied = false;
-  private starttime = null;
 
-  constructor() {
-    this.starttime = new Date();
-  }
+  constructor() { }
 
   ngOnInit() {
   }
 
-  ngAfterViewChecked() {
-    if (this.innerView && this.innerView.nativeElement instanceof FlexboxLayout && this.innerView.nativeElement.android) {
-      console.log('ngAfterViewChecked androidNativeView ready. Elapsed: ' + (new Date().getTime() - this.starttime.getTime()));
-    }
-  }
-
   ngAfterViewInit() {
-    if (this.innerView && this.innerView.nativeElement instanceof FlexboxLayout && this.innerView.nativeElement.android) {
-      console.log('ngAfterViewInit androidNativeView ready. Elapsed: ' + (new Date().getTime() - this.starttime.getTime()));
-    }
-
     if (this.innerView && this.innerView.nativeElement instanceof FlexboxLayout) {
       this.innerView.nativeElement.addEventListener('loaded', () => {
-        console.log('onLoaded from event listener Elapsed: ' + (new Date().getTime() - this.starttime.getTime()));
         if (this.innerView.nativeElement.android) {
-          console.log('androidNativeView from controller ready. Elapsed: ' + (new Date().getTime() - this.starttime.getTime()));
           this.applyCardSizeAndShadow(this.innerView.nativeElement);
         }
       });
@@ -56,59 +40,19 @@ export class CardComponent implements OnInit, AfterContentChecked, AfterViewInit
 
     if (this.outerView && this.outerView.nativeElement instanceof FlexboxLayout) {
       this.outerView.nativeElement.addEventListener('loaded', () => {
-        console.log('onLoaded from event listener Elapsed: ' + (new Date().getTime() - this.starttime.getTime()));
         if (this.outerView.nativeElement.ios) {
-          console.log('iosNativeView from controller ready. Elapsed: ' + (new Date().getTime() - this.starttime.getTime()));
           this.applyCardSizeAndShadow(this.outerView.nativeElement);
         }
       });
     }
   }
 
-  // Søren, I can get this to work with ngAfterContentChecked ;)
-  ngAfterContentChecked() {
-    console.log('ngAfterContentChecked Elapsed: ' + (new Date().getTime() - this.starttime.getTime()));
-
-    if (this.innerView && this.innerView.nativeElement instanceof FlexboxLayout && this.innerView.nativeElement.android) {
-      const androidNativeView = this.innerView.nativeElement.android;
-      if (androidNativeView) {
-        console.log('androidNativeView ready. Elapsed: ' + (new Date().getTime() - this.starttime.getTime()));
-      } else {
-        console.log('Native Android View not initialized yet...');
-      }
-      // this.applyCardSizeAndShadow(this.innerView.nativeElement);
-    } else if (this.outerView && this.outerView.nativeElement instanceof FlexboxLayout) {
-      const iosNativeView = this.outerView.nativeElement.ios;
-      if (iosNativeView) {
-        console.log('iosNativeView ready. Elapsed: ' + (new Date().getTime() - this.starttime.getTime()));
-      } else {
-        console.log('Native iOS View not initialized yet...');
-      }
-    }
-  }
-
-  onOuterViewLoaded(nativeView: View) {
-    console.log('onOuterViewLoaded ... Elapsed: ' + (new Date().getTime() - this.starttime.getTime()));
-    if (nativeView.ios) {
-      this.applyCardSizeAndShadow(nativeView);
-    }
-  }
-
-  onInnerViewLoaded(nativeView: View) {
-    console.log('onInnerViewLoaded Elapsed: ' + (new Date().getTime() - this.starttime.getTime()));
-    if (nativeView.android) {
-      this.applyCardSizeAndShadow(nativeView);
-    }
-  }
-
   applyCardSizeAndShadow(nativeView: View) {
-    if (this.isCardSizeAndShadowApplied || !(nativeView.ios || nativeView.android)) {
+    if (!(nativeView.ios || nativeView.android)) {
       return;
     }
-    console.log('apply card size and shadow: ' + (new Date().getTime() - this.starttime.getTime()));
     this.applyCardSize(nativeView);
     this.addShadow(nativeView);
-    this.isCardSizeAndShadowApplied = true;
   }
 
   applyCardSize(nativeView: View) {
