@@ -18,7 +18,6 @@ export class CardComponent implements OnInit, AfterViewInit {
   @Input() title: string;
   @Input() subtitle: string;
 
-  // Søren, I can get this to work with ViewChild, not as View but as ElementRef<FlexboxLayout> ;)
   @ViewChild('outerView') outerView: ElementRef<FlexboxLayout>;
   @ViewChild('innerView') innerView: ElementRef<FlexboxLayout>;
 
