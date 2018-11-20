@@ -1,14 +1,4 @@
-
 // Always remember to keep this file and scss-helper.ts in sync
-
-
-// Import the theme’s variables. If you’re using a color scheme
-// other than “light”, switch the path to the alternative scheme,
-// for example '~nativescript-theme-core/scss/dark'.
-@import '~nativescript-theme-core/scss/light';
-
-// Place any custom variables here. For example:
-// $page-content-placeholder-font-size: 20;
 
 /* Page layout
 --------------------------------------------------------------------------------*/
@@ -20,40 +10,6 @@ $breakpoints: (
   small: 361,
   medium: 721,
   large: 1025
-);
-
-/* Font-sizes
---------------------------------------------------------------------------------*/
-$font-sizes: (
-  xxl: 48,  // 48px
-  xl: 32,   // 32px
-  l: 24,  // 24px
-  m: 20, // 20px
-  n: 16,    // 16px
-  s: 14, // 14px
-  xs: 12  // 12px
-);
-
-/* Font-sizes
---------------------------------------------------------------------------------*/
-$font-weight: (
-  light: 200,
-  regular: 400,
-  bold: 700
-);
-
-/* Sizes
---------------------------------------------------------------------------------*/
-$sizes: (
-  xxxl: 70,  // 70px
-  xxl:  60,   // 60px
-  xl:   50,  // 50px
-  l:    32,      // 32px
-  m:    16,      // 16px
-  s:    12,    // 12px
-  xs:   8,     // 8px
-  xxs:  4,    // 4px
-  gutter: 16,    // 16px
 );
 
 /* Z-index
@@ -68,8 +24,3 @@ $z-layers: (
 --------------------------------------------------------------------------------*/
 $border-radius: 18;
 $border-radius-small: 6;
-
-
-/*
- * Specific module coloring and sizing follows
---------------------------------------------------------------------------------*/
