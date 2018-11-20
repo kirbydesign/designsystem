@@ -11,13 +11,13 @@
 .card-header {
   &__title {
     font-size: font-size("n");
-    font-weight: font-weight("regular");
+    font-weight: font-weight("normal");
     margin: 0 0 size("xs");
   }
 
   &__subtitle {
     font-size: font-size("s");
     margin: 0 0 size("xs");
-    font-weight: font-weight("regular");
+    font-weight: font-weight("normal");
   }
 }
