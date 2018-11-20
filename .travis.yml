@@ -39,17 +39,27 @@ matrix:
       before_script: ./scripts/setup-provisioning-profile.sh
       script:
         - tns build ios --bundle --for-device --provision dk.kirby.design.system
+      before_deploy:
+        - ./scripts/deploy.sh "$TRAVIS_TAG"
       deploy:
-        provider: release
-        skip_cleanup: true
-        api_key:
-          secure: JwRIou+CTO+vxc8G3bMdUoiLKavTLHUhKR8dmtupablYd++UHuDnnb9xepxRgkgfv0n9rPraEzSZpzH3qnwAKkvQmCtHb2ykeTqIJjgRZ2UIgkp31RA79Hlvc5oQqR22wglygPn+qYJhhPAzCDpOy8slEiLMuB7hAIDjk13TbWe1XZy4cQc6m47wM5dMZho+WrhoUhC2i6QNCrnfytxWCQOAnTy1h7OdOf6u42hSLX4DTg6fgAncSZkH0bAk5bWKDCk/PoemYgi5UZIB+n9yPz59bkrsv1Ax3IY3+alPuTh2wH47kcZbSUFrYoi5lAvF6AwUWjkpnhZZ+ejRptPky+Vq2udQ86PKSLFr6hXqn2T2brEKZWOxs5seJmm1rsi3YEVSTkxouyVRjpPu6W2hImyIJZX3W5UCr3GtXOajIl7PUFqV/viwx67PnNmgfvHngTSA9TGL2bMA370KZtuh2a7fFcFQ0UFhERp62l2t79BCcrCkRm1z7k2Wjys83Cec88eQ8Bjw/2DHBzz07nBpE1TBq8zjDovWRXMtkWBAlCCNOAxMfDR0HWEDDcBP4bsH7SAYhfQ3PwzR5A95soTNqsQpXaVy5DH/rQ5FnN7wVz9/wjPryW4xEsH5fnzDRvXJQMJfrI4pPjx/MmU2TmFwtMN8sVVCArZzcJqXiotXaiI=
-        file:
-          - $TRAVIS_BUILD_DIR/platforms/ios/build/device/designsystem.ipa
-          - $TRAVIS_BUILD_DIR/manifest.plist
-        overwrite: true
-        on:
-          conditions: $TRAVIS_TAG =~ ^v[0-9]+\.[0-9]+
+        - provider: release
+          skip_cleanup: true
+          api_key:
+            secure: JwRIou+CTO+vxc8G3bMdUoiLKavTLHUhKR8dmtupablYd++UHuDnnb9xepxRgkgfv0n9rPraEzSZpzH3qnwAKkvQmCtHb2ykeTqIJjgRZ2UIgkp31RA79Hlvc5oQqR22wglygPn+qYJhhPAzCDpOy8slEiLMuB7hAIDjk13TbWe1XZy4cQc6m47wM5dMZho+WrhoUhC2i6QNCrnfytxWCQOAnTy1h7OdOf6u42hSLX4DTg6fgAncSZkH0bAk5bWKDCk/PoemYgi5UZIB+n9yPz59bkrsv1Ax3IY3+alPuTh2wH47kcZbSUFrYoi5lAvF6AwUWjkpnhZZ+ejRptPky+Vq2udQ86PKSLFr6hXqn2T2brEKZWOxs5seJmm1rsi3YEVSTkxouyVRjpPu6W2hImyIJZX3W5UCr3GtXOajIl7PUFqV/viwx67PnNmgfvHngTSA9TGL2bMA370KZtuh2a7fFcFQ0UFhERp62l2t79BCcrCkRm1z7k2Wjys83Cec88eQ8Bjw/2DHBzz07nBpE1TBq8zjDovWRXMtkWBAlCCNOAxMfDR0HWEDDcBP4bsH7SAYhfQ3PwzR5A95soTNqsQpXaVy5DH/rQ5FnN7wVz9/wjPryW4xEsH5fnzDRvXJQMJfrI4pPjx/MmU2TmFwtMN8sVVCArZzcJqXiotXaiI=
+          file:
+            - $TRAVIS_BUILD_DIR/platforms/ios/build/device/designsystem.ipa
+            - $TRAVIS_BUILD_DIR/manifest.plist
+          overwrite: true
+          on:
+            conditions: $TRAVIS_TAG =~ ^v[0-9]+\.[0-9]+
+        - provider: pages
+          skip-cleanup: true
+          github-token: 
+            secure: JwRIou+CTO+vxc8G3bMdUoiLKavTLHUhKR8dmtupablYd++UHuDnnb9xepxRgkgfv0n9rPraEzSZpzH3qnwAKkvQmCtHb2ykeTqIJjgRZ2UIgkp31RA79Hlvc5oQqR22wglygPn+qYJhhPAzCDpOy8slEiLMuB7hAIDjk13TbWe1XZy4cQc6m47wM5dMZho+WrhoUhC2i6QNCrnfytxWCQOAnTy1h7OdOf6u42hSLX4DTg6fgAncSZkH0bAk5bWKDCk/PoemYgi5UZIB+n9yPz59bkrsv1Ax3IY3+alPuTh2wH47kcZbSUFrYoi5lAvF6AwUWjkpnhZZ+ejRptPky+Vq2udQ86PKSLFr6hXqn2T2brEKZWOxs5seJmm1rsi3YEVSTkxouyVRjpPu6W2hImyIJZX3W5UCr3GtXOajIl7PUFqV/viwx67PnNmgfvHngTSA9TGL2bMA370KZtuh2a7fFcFQ0UFhERp62l2t79BCcrCkRm1z7k2Wjys83Cec88eQ8Bjw/2DHBzz07nBpE1TBq8zjDovWRXMtkWBAlCCNOAxMfDR0HWEDDcBP4bsH7SAYhfQ3PwzR5A95soTNqsQpXaVy5DH/rQ5FnN7wVz9/wjPryW4xEsH5fnzDRvXJQMJfrI4pPjx/MmU2TmFwtMN8sVVCArZzcJqXiotXaiI=
+          keep-history: true
+          local-dir: $TRAVIS_BUILD_DIR/scripts/html/
+          on:
+            conditions: $TRAVIS_TAG =~ ^v[0-9]+\.[0-9]+
 
     # Running Android build
     - os: linux
@@ -75,15 +85,15 @@ matrix:
       script:
         - tns build android --for-device --bundle
       deploy:
-        provider: release
-        skip_cleanup: true
-        api_key:
-          secure: JwRIou+CTO+vxc8G3bMdUoiLKavTLHUhKR8dmtupablYd++UHuDnnb9xepxRgkgfv0n9rPraEzSZpzH3qnwAKkvQmCtHb2ykeTqIJjgRZ2UIgkp31RA79Hlvc5oQqR22wglygPn+qYJhhPAzCDpOy8slEiLMuB7hAIDjk13TbWe1XZy4cQc6m47wM5dMZho+WrhoUhC2i6QNCrnfytxWCQOAnTy1h7OdOf6u42hSLX4DTg6fgAncSZkH0bAk5bWKDCk/PoemYgi5UZIB+n9yPz59bkrsv1Ax3IY3+alPuTh2wH47kcZbSUFrYoi5lAvF6AwUWjkpnhZZ+ejRptPky+Vq2udQ86PKSLFr6hXqn2T2brEKZWOxs5seJmm1rsi3YEVSTkxouyVRjpPu6W2hImyIJZX3W5UCr3GtXOajIl7PUFqV/viwx67PnNmgfvHngTSA9TGL2bMA370KZtuh2a7fFcFQ0UFhERp62l2t79BCcrCkRm1z7k2Wjys83Cec88eQ8Bjw/2DHBzz07nBpE1TBq8zjDovWRXMtkWBAlCCNOAxMfDR0HWEDDcBP4bsH7SAYhfQ3PwzR5A95soTNqsQpXaVy5DH/rQ5FnN7wVz9/wjPryW4xEsH5fnzDRvXJQMJfrI4pPjx/MmU2TmFwtMN8sVVCArZzcJqXiotXaiI=
-        file:
-          - $TRAVIS_BUILD_DIR/platforms/android/app/build/outputs/apk/debug/app-debug.apk
-        overwrite: true
-        on:
-          conditions: $TRAVIS_TAG =~ ^v[0-9]+\.[0-9]+
+        - provider: release
+          skip_cleanup: true
+          api_key:
+            secure: JwRIou+CTO+vxc8G3bMdUoiLKavTLHUhKR8dmtupablYd++UHuDnnb9xepxRgkgfv0n9rPraEzSZpzH3qnwAKkvQmCtHb2ykeTqIJjgRZ2UIgkp31RA79Hlvc5oQqR22wglygPn+qYJhhPAzCDpOy8slEiLMuB7hAIDjk13TbWe1XZy4cQc6m47wM5dMZho+WrhoUhC2i6QNCrnfytxWCQOAnTy1h7OdOf6u42hSLX4DTg6fgAncSZkH0bAk5bWKDCk/PoemYgi5UZIB+n9yPz59bkrsv1Ax3IY3+alPuTh2wH47kcZbSUFrYoi5lAvF6AwUWjkpnhZZ+ejRptPky+Vq2udQ86PKSLFr6hXqn2T2brEKZWOxs5seJmm1rsi3YEVSTkxouyVRjpPu6W2hImyIJZX3W5UCr3GtXOajIl7PUFqV/viwx67PnNmgfvHngTSA9TGL2bMA370KZtuh2a7fFcFQ0UFhERp62l2t79BCcrCkRm1z7k2Wjys83Cec88eQ8Bjw/2DHBzz07nBpE1TBq8zjDovWRXMtkWBAlCCNOAxMfDR0HWEDDcBP4bsH7SAYhfQ3PwzR5A95soTNqsQpXaVy5DH/rQ5FnN7wVz9/wjPryW4xEsH5fnzDRvXJQMJfrI4pPjx/MmU2TmFwtMN8sVVCArZzcJqXiotXaiI=
+          file:
+            - $TRAVIS_BUILD_DIR/platforms/android/app/build/outputs/apk/debug/app-debug.apk
+          overwrite: true
+          on:
+            conditions: $TRAVIS_TAG =~ ^v[0-9]+\.[0-9]+
 
     # Running web build
     - os: linux
