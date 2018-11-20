@@ -1,5 +1,5 @@
 <StackLayout class="header">
-  <Label class="title" *ngIf="title" text="{{title}}"></Label>
-  <Label class="subtitle" *ngIf="subtitle" text="{{subtitle}}"></Label>
+  <Label class="title" *ngIf="title" [text]="title"></Label>
+  <Label class="subtitle" *ngIf="subtitle" [text]="subtitle"></Label>
   <ng-content></ng-content>
 </StackLayout>
