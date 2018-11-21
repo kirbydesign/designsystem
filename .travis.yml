@@ -15,18 +15,13 @@ install:
 matrix:
   include:
     # Running lint
-    - stage: "Lint"
-      cache:
-        - npm
-      script: npm run lint
-
-    # Running jasmine tests
-    - stage: "Unittest"
+    - stage: "Lint and unittest"
       cache:
         - npm
       addons:
         chrome: stable
-      script:
+      script: 
+        - npm run lint
         - npm run ci-test
 
     # Running iOS build
