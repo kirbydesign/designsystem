@@ -1,5 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { ExamplesModule } from '../../examples/examples.module';
+import { HtmlViewerComponent } from '../../shared/html-viewer/html-viewer.component';
 import { ListShowcaseComponent } from './list-showcase.component';
 
 describe('ListShowcaseComponent', () => {
@@ -8,7 +10,8 @@ describe('ListShowcaseComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListShowcaseComponent ]
+      imports: [ ExamplesModule ],
+      declarations: [ ListShowcaseComponent, HtmlViewerComponent ]
     })
     .compileComponents();
   }));

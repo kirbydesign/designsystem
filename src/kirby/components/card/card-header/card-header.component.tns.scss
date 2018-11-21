@@ -1,0 +1,20 @@
+@import '../../../scss/native-imports';
+
+.header {
+  margin: 16;
+}
+
+.title {
+    font-size: font-size("n");
+    font-weight: font-weight("regular");
+    width: 100%;
+    text-align: center;
+}
+
+.subtitle {
+    font-size: font-size("s");
+    font-weight: font-weight("regular");
+    margin-top: 4;
+    width: 100%;
+    text-align: center;
+}

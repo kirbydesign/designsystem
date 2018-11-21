@@ -1,5 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
+import { KirbyModule } from '../../../kirby/kirby.module';
 import { CardExampleComponent } from './card-example.component';
 
 describe('CardExampleComponent', () => {
@@ -8,6 +10,7 @@ describe('CardExampleComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [ KirbyModule, RouterTestingModule ],
       declarations: [ CardExampleComponent ]
     })
     .compileComponents();

@@ -25,6 +25,6 @@
   @return _get-map-prop($font-sizes, $key);
 }
 
-@function font-weight($key: "regular") {
+@function font-weight($key: "normal") {
   @return _get-map-prop($font-weight, $key);
 }
