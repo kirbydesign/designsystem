@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ChartExampleComponent } from './chart-example.component';
+import { KirbyModule } from '../../../kirby/kirby.module';
 
 describe('ChartExampleComponent', () => {
   let component: ChartExampleComponent;
@@ -8,7 +8,8 @@ describe('ChartExampleComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ChartExampleComponent ]
+      imports: [ KirbyModule ],
+      declarations: [ ChartExampleComponent ],
     })
     .compileComponents();
   }));
