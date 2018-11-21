@@ -46,6 +46,7 @@ matrix:
             - $TRAVIS_BUILD_DIR/manifest.plist
           overwrite: true
           on:
+            tags: true
             condition: $TRAVIS_TAG =~ ^v[0-9]+\.[0-9]+
         - provider: pages
           skip-cleanup: true
@@ -54,6 +55,7 @@ matrix:
           keep-history: true
           local-dir: $TRAVIS_BUILD_DIR/scripts/html/
           on:
+            tags: true
             condition: $TRAVIS_TAG =~ ^v[0-9]+\.[0-9]+
 
     # Running Android build
@@ -88,6 +90,7 @@ matrix:
             - $TRAVIS_BUILD_DIR/platforms/android/app/build/outputs/apk/debug/app-debug.apk
           overwrite: true
           on:
+            tags: true
             condition: $TRAVIS_TAG =~ ^v[0-9]+\.[0-9]+
 
     # Running web build
