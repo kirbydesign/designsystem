@@ -1,6 +1,7 @@
-<FlexboxLayout orientation="vertical" >
-    <label class="h2" [text]="title" ></label>
-    <label class="h4" [text]="subtitle" ></label>
-    <ng-content></ng-content>
-    <StackLayout class="footer" ></StackLayout>
+<FlexboxLayout #outerView class="background" [ngClass]="cardSizeClass">
+    <FlexboxLayout #innerView class="container">
+        <ng-content select="kirby-card-header"></ng-content>
+        <ng-content></ng-content>
+        <ng-content select="kirby-card-footer"></ng-content>
+    </FlexboxLayout>
 </FlexboxLayout>

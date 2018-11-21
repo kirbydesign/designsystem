@@ -8,7 +8,7 @@ import { ChartExampleComponent } from './chart-example/chart-example.component';
 export const routes: Routes = [
     {
         path: '',
-        redirectTo: 'buttons',
+        redirectTo: 'cards',
     },
     {
         path: 'buttons',

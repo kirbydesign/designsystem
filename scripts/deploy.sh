@@ -1,3 +1,5 @@
+#!/bin/sh
+
 echo "<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
       <plist version=\"1.0\">
       <dict>
@@ -56,11 +58,8 @@ echo "<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.
       </dict>
       </plist>" >> manifest.plist
 echo "<html>
-        <head>
-          <title>Kirby Design Releases</title>
-        </head>
         <body>
-          <h5>Enterprise In-House App distribution.</h5>
+          <h5>Enterprise In-House App distribution - $1</h5>
               <a href=\"itms-services://?action=download-manifest&url=https://github.com/kirbydesign/designsystem/releases/download/$1/manifest.plist\">Download Your App</a>
           </body>
       </html>" >> ./scripts/html/index.html

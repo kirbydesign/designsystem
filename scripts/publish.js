@@ -16,5 +16,7 @@ var cp = require('child_process');
 var result = cp.spawnSync('npm', ['publish', 'dist-lib']);
 if (result.status != 0) {
     console.error('Unable to publish package');
+    console.error('stdout: ' + result.stdout);
+    console.error('stderr: ' + result.stderr);
     process.exitCode = 1;
 }
