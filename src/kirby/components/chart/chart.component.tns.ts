@@ -28,15 +28,13 @@ export class ChartComponent implements OnInit, AfterViewInit {
     const webView: WebView = this.webView.nativeElement;
     this.chartWebViewInterface = new webViewInterfaceModule.WebViewInterface(webView, '~/chart.webview.html');
 
-    // loading chart data, on load of webView.
+    // loading chart data, on load of webView
     webView.on(WebView.loadFinishedEvent, (args: LoadEventData) => {
       if (!args.error) {
         this.loadChartDataInWebView();
         this.setupWebViewForPlatforms(webView);
       }
     });
-
-    // this.listenForWebViewEvents();
   }
 
   private loadChartDataInWebView() {
@@ -59,11 +57,9 @@ export class ChartComponent implements OnInit, AfterViewInit {
         platformWebView.onResume();
       });
     } else if (ios) {
-      platformWebView.scrollView.minimumZoomScale = 1.0;
-      platformWebView.scrollView.maximumZoomScale = 1.0;
-      platformWebView.scrollView.bounces = false;
-      platformWebView.allowsMagnification = false;
-      platformWebView.allowsBackForwardNavigationGestures = false;
+      const sw: UIScrollView = platformWebView.scrollView;
+      sw.bounces = false;
+      sw.scrollEnabled = false;
     }
   }
 
