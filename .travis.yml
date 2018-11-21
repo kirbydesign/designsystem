@@ -1,92 +1,100 @@
-os: osx
-sudo: required
-osx_image: xcode9.4
+# Building Node based application even for native
 language: node_js
 node_js: "10.5"
-
-jdk: oraclejdk8
+sudo: required
 
 install:
-  - sudo gem install xcodeproj
-  - sudo gem install cocoapods
-  - export HOMEBREW_NO_AUTO_UPDATE=1
-  - brew cask install android-sdk
-  - export ANDROID_SDK_ROOT=/usr/local/share/android-sdk
-  - export ANDROID_HOME=/usr/local/share/android-sdk
-  - mkdir "$ANDROID_HOME/licenses" || true
-  - echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"
-  - echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license"
-  - export JAVA_OPTS='-XX:+IgnoreUnrecognizedVMOptions --add-modules java.se.ee'
-  - yes | sdkmanager "build-tools;27.0.3"
-  - yes | sdkmanager "platform-tools"
-  - yes | sdkmanager "tools"
-  - yes | sdkmanager "platforms;android-27"
-  - yes | sdkmanager "extras;android;m2repository"
-  - pod setup
   - pip install six
-  - npm install
   - echo no | npm install -g nativescript
   - tns usage-reporting disable
   - tns error-reporting disable
-  #- sudo tns setup
-  - sudo tns cloud setup
-  - tns doctor
+  - tns cloud setup
+  - npm ci
 
-before_script:
-  - openssl aes-256-cbc -k "$SECURITY_PASSWORD" -in $TRAVIS_BUILD_DIR/scripts/profile/dkkirbydesignsystem.mobileprovision.enc -d -a -out $TRAVIS_BUILD_DIR/scripts/profile/dkkirbydesignsystem.mobileprovision
-  - openssl aes-256-cbc -k "$SECURITY_PASSWORD" -in $TRAVIS_BUILD_DIR/scripts/certs/dkkirbydesignsystem.cer.enc -d -a -out $TRAVIS_BUILD_DIR/scripts/certs/dkkirbydesignsystem.cer
-  - openssl aes-256-cbc -k "$SECURITY_PASSWORD" -in $TRAVIS_BUILD_DIR/scripts/certs/dkkirbydesignsystem-key.p12.enc -d -a -out $TRAVIS_BUILD_DIR/scripts/certs/dkkirbydesignsystem-key.p12
-  # Create a custom keychain
-  - security create-keychain -p travis ios-build.keychain
-  # Make the custom keychain default, so xcodebuild will use it for signing
-  - security default-keychain -s ios-build.keychain
-  # Unlock the keychain
-  - security unlock-keychain -p travis ios-build.keychain
-  # Set keychain timeout to 1 hour for long builds
-  # see http://www.egeek.me/2013/02/23/jenkins-and-xcode-user-interaction-is-not-allowed/
-  - security set-keychain-settings -t 3600 -l ~/Library/Keychains/ios-build.keychain
-  # Add certificates to keychain and allow codesign to access them
-  - security import $TRAVIS_BUILD_DIR/scripts/certs/AppleWWDRCA.cer -k ~/Library/Keychains/ios-build.keychain -T /usr/bin/codesign
-  - security import $TRAVIS_BUILD_DIR/scripts/certs/dkkirbydesignsystem.cer -k ~/Library/Keychains/ios-build.keychain -T /usr/bin/codesign
-  - security import $TRAVIS_BUILD_DIR/scripts/certs/dkkirbydesignsystem-key.p12 -k ~/Library/Keychains/ios-build.keychain -P $SECURITY_PASSWORD -T /usr/bin/codesign
-  - "security set-key-partition-list -S apple-tool:,apple: -s -k travis ios-build.keychain"
-  # Put the provisioning profile in place
-  - mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-  - cp "$TRAVIS_BUILD_DIR/scripts/profile/dkkirbydesignsystem.mobileprovision" ~/Library/MobileDevice/Provisioning\ Profiles/
+# Setting up the build matrix: web, iOS, Android
+matrix:
+  include:
+    # Running lint
+    - stage: "Lint and unittest"
+      cache:
+        - npm
+      addons:
+        chrome: stable
+      script: 
+        - npm run lint
+        - npm run ci-test
 
-script:
-  - tns build android --for-device --bundle
-  - tns build ios --bundle --for-device --provision dk.kirby.design.system
-  #- tns prepare ios --bundle --for-device --provision dk.kirby.design.system
-  #- "xcodebuild -project $TRAVIS_BUILD_DIR/platforms/ios/designsystem.xcodeproj -sdk iphoneos -configuration Release CODE_SIGN_IDENTITY='iPhone Developer: Anders Bloch (ZLABCCT4Y2)' PROVISIONING_PROFILE=dkkirbydesignsystem.mobileprovision OTHER_CODE_SIGN_FLAGS='--keychain ~/Library/Keychains/ios-build.keychain' archive -archivePath $TRAVIS_BUILD_DIR/platforms/ios/build/designsystem.xcarchive -scheme designsystem"
-  #- "xcodebuild -exportArchive -archivePath $TRAVIS_BUILD_DIR/platforms/ios/build/designsystem.xcarchive -exportOptionsPlist $TRAVIS_BUILD_DIR/App_Resources/ios/ExportOptions.plist -exportPath $TRAVIS_BUILD_DIR/platforms/ios/build"
+    # Running iOS build
+    - stage: "Build"
+      os: osx
+      osx_image: xcode9.4
+      cache:
+        - npm
+        - cocoapods
+      before_script: ./scripts/setup-provisioning-profile.sh
+      script:
+        - tns build ios --bundle --for-device --provision dk.kirby.design.system
+      before_deploy:
+        - ./scripts/deploy.sh "$TRAVIS_TAG"
+      deploy:
+        - provider: release
+          skip_cleanup: true
+          api_key:
+            secure: JwRIou+CTO+vxc8G3bMdUoiLKavTLHUhKR8dmtupablYd++UHuDnnb9xepxRgkgfv0n9rPraEzSZpzH3qnwAKkvQmCtHb2ykeTqIJjgRZ2UIgkp31RA79Hlvc5oQqR22wglygPn+qYJhhPAzCDpOy8slEiLMuB7hAIDjk13TbWe1XZy4cQc6m47wM5dMZho+WrhoUhC2i6QNCrnfytxWCQOAnTy1h7OdOf6u42hSLX4DTg6fgAncSZkH0bAk5bWKDCk/PoemYgi5UZIB+n9yPz59bkrsv1Ax3IY3+alPuTh2wH47kcZbSUFrYoi5lAvF6AwUWjkpnhZZ+ejRptPky+Vq2udQ86PKSLFr6hXqn2T2brEKZWOxs5seJmm1rsi3YEVSTkxouyVRjpPu6W2hImyIJZX3W5UCr3GtXOajIl7PUFqV/viwx67PnNmgfvHngTSA9TGL2bMA370KZtuh2a7fFcFQ0UFhERp62l2t79BCcrCkRm1z7k2Wjys83Cec88eQ8Bjw/2DHBzz07nBpE1TBq8zjDovWRXMtkWBAlCCNOAxMfDR0HWEDDcBP4bsH7SAYhfQ3PwzR5A95soTNqsQpXaVy5DH/rQ5FnN7wVz9/wjPryW4xEsH5fnzDRvXJQMJfrI4pPjx/MmU2TmFwtMN8sVVCArZzcJqXiotXaiI=
+          file:
+            - $TRAVIS_BUILD_DIR/platforms/ios/build/device/designsystem.ipa
+            - $TRAVIS_BUILD_DIR/manifest.plist
+          overwrite: true
+          on:
+            conditions: $TRAVIS_TAG =~ ^v[0-9]+\.[0-9]+
+        - provider: pages
+          skip-cleanup: true
+          github-token: 
+            secure: JwRIou+CTO+vxc8G3bMdUoiLKavTLHUhKR8dmtupablYd++UHuDnnb9xepxRgkgfv0n9rPraEzSZpzH3qnwAKkvQmCtHb2ykeTqIJjgRZ2UIgkp31RA79Hlvc5oQqR22wglygPn+qYJhhPAzCDpOy8slEiLMuB7hAIDjk13TbWe1XZy4cQc6m47wM5dMZho+WrhoUhC2i6QNCrnfytxWCQOAnTy1h7OdOf6u42hSLX4DTg6fgAncSZkH0bAk5bWKDCk/PoemYgi5UZIB+n9yPz59bkrsv1Ax3IY3+alPuTh2wH47kcZbSUFrYoi5lAvF6AwUWjkpnhZZ+ejRptPky+Vq2udQ86PKSLFr6hXqn2T2brEKZWOxs5seJmm1rsi3YEVSTkxouyVRjpPu6W2hImyIJZX3W5UCr3GtXOajIl7PUFqV/viwx67PnNmgfvHngTSA9TGL2bMA370KZtuh2a7fFcFQ0UFhERp62l2t79BCcrCkRm1z7k2Wjys83Cec88eQ8Bjw/2DHBzz07nBpE1TBq8zjDovWRXMtkWBAlCCNOAxMfDR0HWEDDcBP4bsH7SAYhfQ3PwzR5A95soTNqsQpXaVy5DH/rQ5FnN7wVz9/wjPryW4xEsH5fnzDRvXJQMJfrI4pPjx/MmU2TmFwtMN8sVVCArZzcJqXiotXaiI=
+          keep-history: true
+          local-dir: $TRAVIS_BUILD_DIR/scripts/html/
+          on:
+            conditions: $TRAVIS_TAG =~ ^v[0-9]+\.[0-9]+
 
-before_deploy:
-  # Set up git user name and tag this commit
-  - git config --local user.name "Anders Bloch"
-  - git config --local user.email "anders.bloch@jyskebank.dk"
-  - git tag "$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
-  - bash $TRAVIS_BUILD_DIR/scripts/deploy.sh "$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
+    # Running Android build
+    - os: linux
+      language: android
+      jdk: oraclejdk8
+      before_cache:
+        - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+        - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+      cache:
+        - directories:
+            - $HOME/.gradle/caches/
+            - $HOME/.gradle/wrapper/
+            - $HOME/.android/build-cache
+        - npm
+      android:
+        components:
+          - build-tools-28.0.3
+          - platform-tools
+          - tools
+          - android-28
+          - extra-andoird-m2repository
+      before_install: nvm install 10.5
+      script:
+        - tns build android --for-device --bundle
+      deploy:
+        - provider: release
+          skip_cleanup: true
+          api_key:
+            secure: JwRIou+CTO+vxc8G3bMdUoiLKavTLHUhKR8dmtupablYd++UHuDnnb9xepxRgkgfv0n9rPraEzSZpzH3qnwAKkvQmCtHb2ykeTqIJjgRZ2UIgkp31RA79Hlvc5oQqR22wglygPn+qYJhhPAzCDpOy8slEiLMuB7hAIDjk13TbWe1XZy4cQc6m47wM5dMZho+WrhoUhC2i6QNCrnfytxWCQOAnTy1h7OdOf6u42hSLX4DTg6fgAncSZkH0bAk5bWKDCk/PoemYgi5UZIB+n9yPz59bkrsv1Ax3IY3+alPuTh2wH47kcZbSUFrYoi5lAvF6AwUWjkpnhZZ+ejRptPky+Vq2udQ86PKSLFr6hXqn2T2brEKZWOxs5seJmm1rsi3YEVSTkxouyVRjpPu6W2hImyIJZX3W5UCr3GtXOajIl7PUFqV/viwx67PnNmgfvHngTSA9TGL2bMA370KZtuh2a7fFcFQ0UFhERp62l2t79BCcrCkRm1z7k2Wjys83Cec88eQ8Bjw/2DHBzz07nBpE1TBq8zjDovWRXMtkWBAlCCNOAxMfDR0HWEDDcBP4bsH7SAYhfQ3PwzR5A95soTNqsQpXaVy5DH/rQ5FnN7wVz9/wjPryW4xEsH5fnzDRvXJQMJfrI4pPjx/MmU2TmFwtMN8sVVCArZzcJqXiotXaiI=
+          file:
+            - $TRAVIS_BUILD_DIR/platforms/android/app/build/outputs/apk/debug/app-debug.apk
+          overwrite: true
+          on:
+            conditions: $TRAVIS_TAG =~ ^v[0-9]+\.[0-9]+
 
-deploy:
-  - provider: releases
-    prerelease: false
-    api_key:
-      secure: JwRIou+CTO+vxc8G3bMdUoiLKavTLHUhKR8dmtupablYd++UHuDnnb9xepxRgkgfv0n9rPraEzSZpzH3qnwAKkvQmCtHb2ykeTqIJjgRZ2UIgkp31RA79Hlvc5oQqR22wglygPn+qYJhhPAzCDpOy8slEiLMuB7hAIDjk13TbWe1XZy4cQc6m47wM5dMZho+WrhoUhC2i6QNCrnfytxWCQOAnTy1h7OdOf6u42hSLX4DTg6fgAncSZkH0bAk5bWKDCk/PoemYgi5UZIB+n9yPz59bkrsv1Ax3IY3+alPuTh2wH47kcZbSUFrYoi5lAvF6AwUWjkpnhZZ+ejRptPky+Vq2udQ86PKSLFr6hXqn2T2brEKZWOxs5seJmm1rsi3YEVSTkxouyVRjpPu6W2hImyIJZX3W5UCr3GtXOajIl7PUFqV/viwx67PnNmgfvHngTSA9TGL2bMA370KZtuh2a7fFcFQ0UFhERp62l2t79BCcrCkRm1z7k2Wjys83Cec88eQ8Bjw/2DHBzz07nBpE1TBq8zjDovWRXMtkWBAlCCNOAxMfDR0HWEDDcBP4bsH7SAYhfQ3PwzR5A95soTNqsQpXaVy5DH/rQ5FnN7wVz9/wjPryW4xEsH5fnzDRvXJQMJfrI4pPjx/MmU2TmFwtMN8sVVCArZzcJqXiotXaiI=
-    file:
-      - $TRAVIS_BUILD_DIR/platforms/android/app/build/outputs/apk/debug/app-debug.apk
-      - $TRAVIS_BUILD_DIR/platforms/ios/build/device/designsystem.ipa
-      - $TRAVIS_BUILD_DIR/manifest.plist
-    overwrite: true
-    skip_cleanup: true
-    on:
-      repo: kirbydesign/designsystem
-      branch: master
-      tags: false
-  - provider: pages
-    skip-cleanup: true
-    github-token: JwRIou+CTO+vxc8G3bMdUoiLKavTLHUhKR8dmtupablYd++UHuDnnb9xepxRgkgfv0n9rPraEzSZpzH3qnwAKkvQmCtHb2ykeTqIJjgRZ2UIgkp31RA79Hlvc5oQqR22wglygPn+qYJhhPAzCDpOy8slEiLMuB7hAIDjk13TbWe1XZy4cQc6m47wM5dMZho+WrhoUhC2i6QNCrnfytxWCQOAnTy1h7OdOf6u42hSLX4DTg6fgAncSZkH0bAk5bWKDCk/PoemYgi5UZIB+n9yPz59bkrsv1Ax3IY3+alPuTh2wH47kcZbSUFrYoi5lAvF6AwUWjkpnhZZ+ejRptPky+Vq2udQ86PKSLFr6hXqn2T2brEKZWOxs5seJmm1rsi3YEVSTkxouyVRjpPu6W2hImyIJZX3W5UCr3GtXOajIl7PUFqV/viwx67PnNmgfvHngTSA9TGL2bMA370KZtuh2a7fFcFQ0UFhERp62l2t79BCcrCkRm1z7k2Wjys83Cec88eQ8Bjw/2DHBzz07nBpE1TBq8zjDovWRXMtkWBAlCCNOAxMfDR0HWEDDcBP4bsH7SAYhfQ3PwzR5A95soTNqsQpXaVy5DH/rQ5FnN7wVz9/wjPryW4xEsH5fnzDRvXJQMJfrI4pPjx/MmU2TmFwtMN8sVVCArZzcJqXiotXaiI=
-    keep-history: true
-    local-dir: $TRAVIS_BUILD_DIR/scripts/html/
-    on:
-      branch: master
+    # Running web build
+    - os: linux
+      cache:
+        - npm
+      script:
+        - npm run dist
+      after_success:
+        - bash <(curl -s https://copilot.blackducksoftware.com/ci/travis/scripts/upload)
