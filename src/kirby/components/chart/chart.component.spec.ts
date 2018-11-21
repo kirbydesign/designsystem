@@ -65,14 +65,14 @@ describe('ChartComponent', () => {
   });
 
   it('should have correct default chart height', () => {
-    expect(component.options.chart.height).toBe(expectedDefaultHeight);
+    expect(component.options['chart'].height).toBe(expectedDefaultHeight);
   });
 
   it('should have correct non-default chart height', () => {
     const expectedHeight = 400;
     component.height = expectedHeight;
     component.ngOnInit();
-    expect(component.options.chart.height).toBe(expectedHeight);
+    expect(component.options['chart'].height).toBe(expectedHeight);
   });
 
 });
