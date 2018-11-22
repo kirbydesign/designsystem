@@ -2,8 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { screen } from 'platform';
 import { View, EventData } from 'tns-core-modules/ui/core/view/view';
 import { FlexboxLayout } from 'tns-core-modules/ui/layouts/flexbox-layout/flexbox-layout';
-import { ScssHelper } from '../../scss/scss-helper';
 
+import { ScssHelper } from '../../scss/scss-helper';
 
 const screenScale = screen.mainScreen.scale;
 declare const CGSizeMake: any;
@@ -28,6 +28,7 @@ export class CardComponent implements OnInit {
   onViewLoaded(args: EventData) {
     const view = <View>args.object;
     // A timeout is crap, but try without, fail you will
+    // If you change this, you must test all the details on both Android and iOS including rotation, may God have mercy on your soul
     setTimeout(() => {
       const widthDP = view.getMeasuredWidth() / screenScale;
       if (widthDP >= ScssHelper.BREAKPOINT_CARD_L) {
