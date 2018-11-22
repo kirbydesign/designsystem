@@ -111,8 +111,9 @@ matrix:
             tags: true
             condition: $TRAVIS_TAG =~ ^v[0-9]+\.[0-9]+
 
-    # Running lint
+    # Release if on master and not PR
     - stage: "Release new version from master"
+      if: branch = master AND type != pull_request
       cache:
         - npm
       script: 
