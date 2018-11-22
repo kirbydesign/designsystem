@@ -7,7 +7,7 @@ if [[ $TRAVIS_COMMIT_MESSAGE =~ "Bumping version to" ]]; then
     exit 0;
 fi
 
-if [ "$TRAVIS_BRANCH" != "master" ]; then
+if [ "$TRAVIS_BRANCH" != "master" ] || [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
     echo "Not master branch - not bumping version"
     exit 0;
 fi
@@ -26,4 +26,5 @@ git remote set-url origin git@github.com:kirbydesign/designsystem.git
 echo "Bumping version and pushing tags"
 git checkout -- package.json
 git --no-pager diff
+git checkout master
 npm version patch -m "Bumping version to %s"
