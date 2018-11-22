@@ -10,6 +10,7 @@ export class ScssHelper {
   public static ELEVATION_CARD_RESTING = 16;
 
   // Breakpoints
+  public static BREAKPOINT_SCREEN_L = 688 + 32;
   public static BREAKPOINT_CARD_S = 320;
   public static BREAKPOINT_CARD_M = 460;
   public static BREAKPOINT_CARD_L = 820;

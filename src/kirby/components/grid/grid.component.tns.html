@@ -1,0 +1,18 @@
+<ScrollView>
+  <GridLayout [rows]="rows" [columns]="columns">
+    <ng-container *ngFor="let card of cards">
+      <StackLayout [row]="card.row" [col]="card.col" [colSpan]="card.colSpan">
+        <kirby-card>
+          <kirby-card-header [title]="'row: ' + card.row + ',col: ' + card.col" [subtitle]="'preferredSize: ' + card.configuration.preferredSize">
+          </kirby-card-header>
+          <StackLayout class="content">
+            <Label text="Here you can add stuff, which is cool."></Label>
+          </StackLayout>
+          <kirby-card-footer>
+            <kirby-button label="Dummy Kirby Button" expand="block" shape="round" theme="cookbook"></kirby-button>
+          </kirby-card-footer>
+        </kirby-card>
+      </StackLayout>
+    </ng-container>
+  </GridLayout>
+</ScrollView>
