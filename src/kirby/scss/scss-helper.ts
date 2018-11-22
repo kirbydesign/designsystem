@@ -5,7 +5,7 @@ export class ScssHelper {
   public static BORDER_RADIUS = 18.0;
 
   // Elevation
-  public static ELEVATION_CARD_RESTING = 16;
+  public static ELEVATION_CARD_RESTING = 8;
 
   // Breakpoints
   public static BREAKPOINT_SCREEN_L = 688 + 32;
