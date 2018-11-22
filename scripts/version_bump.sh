@@ -7,7 +7,7 @@ if [[ $TRAVIS_COMMIT_MESSAGE =~ "Bumping version to" ]]; then
     exit 0;
 fi
 
-if [ "$TRAVIS_BRANCH" != "feature/npm-publish" ]; then
+if [ "$TRAVIS_BRANCH" != "master" ]; then
     echo "Not master branch - not bumping version"
     exit 0;
 fi
