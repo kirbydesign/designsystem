@@ -113,7 +113,7 @@ matrix:
 
     # Release if on master and not PR
     - stage: "Release new version from master"
-      if: branch = master AND type != pull_request
+      if: branch = master AND type != pull_request AND commit_message !~ /Bumping version to/
       cache:
         - npm
       script: 
