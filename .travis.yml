@@ -101,3 +101,20 @@ matrix:
         - npm run dist
       after_success:
         - bash <(curl -s https://copilot.blackducksoftware.com/ci/travis/scripts/upload)
+      before_deploy:
+        - echo '//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}' > ~/.npmrc
+      deploy:
+        - provider: script
+          skip_cleanup: true
+          script: ./scripts/publish.js
+          on:
+            tags: true
+            condition: $TRAVIS_TAG =~ ^v[0-9]+\.[0-9]+
+
+    # Release if on master and not PR
+    - stage: "Release new version from master"
+      if: branch = master AND type != pull_request
+      cache:
+        - npm
+      script: 
+        - ./scripts/version_bump.sh
