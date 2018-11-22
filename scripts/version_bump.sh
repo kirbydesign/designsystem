@@ -24,4 +24,5 @@ echo "Updating git origin"
 git remote set-url origin git@github.com:kirbydesign/designsystem.git
 
 echo "Bumping version and pushing tags"
+git --no-pager diff
 npm version patch -m "Bumping version to %s"
