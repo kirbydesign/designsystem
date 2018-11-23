@@ -40,7 +40,7 @@ matrix:
         - provider: releases
           skip_cleanup: true
           api_key:
-            secure: JwRIou+CTO+vxc8G3bMdUoiLKavTLHUhKR8dmtupablYd++UHuDnnb9xepxRgkgfv0n9rPraEzSZpzH3qnwAKkvQmCtHb2ykeTqIJjgRZ2UIgkp31RA79Hlvc5oQqR22wglygPn+qYJhhPAzCDpOy8slEiLMuB7hAIDjk13TbWe1XZy4cQc6m47wM5dMZho+WrhoUhC2i6QNCrnfytxWCQOAnTy1h7OdOf6u42hSLX4DTg6fgAncSZkH0bAk5bWKDCk/PoemYgi5UZIB+n9yPz59bkrsv1Ax3IY3+alPuTh2wH47kcZbSUFrYoi5lAvF6AwUWjkpnhZZ+ejRptPky+Vq2udQ86PKSLFr6hXqn2T2brEKZWOxs5seJmm1rsi3YEVSTkxouyVRjpPu6W2hImyIJZX3W5UCr3GtXOajIl7PUFqV/viwx67PnNmgfvHngTSA9TGL2bMA370KZtuh2a7fFcFQ0UFhERp62l2t79BCcrCkRm1z7k2Wjys83Cec88eQ8Bjw/2DHBzz07nBpE1TBq8zjDovWRXMtkWBAlCCNOAxMfDR0HWEDDcBP4bsH7SAYhfQ3PwzR5A95soTNqsQpXaVy5DH/rQ5FnN7wVz9/wjPryW4xEsH5fnzDRvXJQMJfrI4pPjx/MmU2TmFwtMN8sVVCArZzcJqXiotXaiI=
+            secure: 0b53CEPSEfWkzKPzH5B8xCaqAN7BwlGCVlVSjwgey6xHoLU+SOZNA55D9Bi/co2XaGKqINeIGhpDhzOfQk/wmuWyk1y1IM1ntjxEwNmhw0ZWvf9gOkQqCLuQsCb0xYObxyhc18iqzZC6a63L0bhrrathu3Mn9Nx08WWANdROG9nG52qp8d6e6RFs3yASEyU6jhhO7TzW9aeOVgAc5XxS9765iIlaumEiweK8alVP9nRDk+qt/THnhccoURQ7GWzjYpk/gc2tzZnCdPRy6Ky08zVV+r9oKCsKT86oNimgijzIYJg+JsYOSflKRAwTntAseQi1bqtPalO0glmP3SY9MgO/f6FAd98iq6xlLo4/lO338jQKuKdGuYfqTZzWKn9OwqGN7/gnNjEspp6Cmh9GhL1jOLAoMiaUb1W9CR72qYCPcfnnQib3v2AgiO8bunaGt3mf3HU6o9ogiTrk8pItr0HHCfCYl7X38OEx3JpShm7L+rgDM5LKr7aFtdrpbleYGLD1oCQMZZNQPnQ5b94rPUj8tueRQOhASAm8wnri48xIHYaGl9/SRzCak3sweg3h+/ol/EoLiaARghMcuSVX2R66av+0VuzeYLs8y2xUWFKdBMaCB3JtOEwOcGew39Y0qNPpt+33WRqiYEfz1kYotKlI4tIIwwtfLTnoNVkqD4U=
           file:
             - $TRAVIS_BUILD_DIR/platforms/ios/build/device/designsystem.ipa
             - $TRAVIS_BUILD_DIR/manifest.plist
@@ -51,7 +51,7 @@ matrix:
         - provider: pages
           skip-cleanup: true
           github-token: 
-            secure: JwRIou+CTO+vxc8G3bMdUoiLKavTLHUhKR8dmtupablYd++UHuDnnb9xepxRgkgfv0n9rPraEzSZpzH3qnwAKkvQmCtHb2ykeTqIJjgRZ2UIgkp31RA79Hlvc5oQqR22wglygPn+qYJhhPAzCDpOy8slEiLMuB7hAIDjk13TbWe1XZy4cQc6m47wM5dMZho+WrhoUhC2i6QNCrnfytxWCQOAnTy1h7OdOf6u42hSLX4DTg6fgAncSZkH0bAk5bWKDCk/PoemYgi5UZIB+n9yPz59bkrsv1Ax3IY3+alPuTh2wH47kcZbSUFrYoi5lAvF6AwUWjkpnhZZ+ejRptPky+Vq2udQ86PKSLFr6hXqn2T2brEKZWOxs5seJmm1rsi3YEVSTkxouyVRjpPu6W2hImyIJZX3W5UCr3GtXOajIl7PUFqV/viwx67PnNmgfvHngTSA9TGL2bMA370KZtuh2a7fFcFQ0UFhERp62l2t79BCcrCkRm1z7k2Wjys83Cec88eQ8Bjw/2DHBzz07nBpE1TBq8zjDovWRXMtkWBAlCCNOAxMfDR0HWEDDcBP4bsH7SAYhfQ3PwzR5A95soTNqsQpXaVy5DH/rQ5FnN7wVz9/wjPryW4xEsH5fnzDRvXJQMJfrI4pPjx/MmU2TmFwtMN8sVVCArZzcJqXiotXaiI=
+            secure: 0b53CEPSEfWkzKPzH5B8xCaqAN7BwlGCVlVSjwgey6xHoLU+SOZNA55D9Bi/co2XaGKqINeIGhpDhzOfQk/wmuWyk1y1IM1ntjxEwNmhw0ZWvf9gOkQqCLuQsCb0xYObxyhc18iqzZC6a63L0bhrrathu3Mn9Nx08WWANdROG9nG52qp8d6e6RFs3yASEyU6jhhO7TzW9aeOVgAc5XxS9765iIlaumEiweK8alVP9nRDk+qt/THnhccoURQ7GWzjYpk/gc2tzZnCdPRy6Ky08zVV+r9oKCsKT86oNimgijzIYJg+JsYOSflKRAwTntAseQi1bqtPalO0glmP3SY9MgO/f6FAd98iq6xlLo4/lO338jQKuKdGuYfqTZzWKn9OwqGN7/gnNjEspp6Cmh9GhL1jOLAoMiaUb1W9CR72qYCPcfnnQib3v2AgiO8bunaGt3mf3HU6o9ogiTrk8pItr0HHCfCYl7X38OEx3JpShm7L+rgDM5LKr7aFtdrpbleYGLD1oCQMZZNQPnQ5b94rPUj8tueRQOhASAm8wnri48xIHYaGl9/SRzCak3sweg3h+/ol/EoLiaARghMcuSVX2R66av+0VuzeYLs8y2xUWFKdBMaCB3JtOEwOcGew39Y0qNPpt+33WRqiYEfz1kYotKlI4tIIwwtfLTnoNVkqD4U=
           keep-history: true
           local-dir: $TRAVIS_BUILD_DIR/scripts/html/
           on:
@@ -85,7 +85,7 @@ matrix:
         - provider: releases
           skip_cleanup: true
           api_key:
-            secure: JwRIou+CTO+vxc8G3bMdUoiLKavTLHUhKR8dmtupablYd++UHuDnnb9xepxRgkgfv0n9rPraEzSZpzH3qnwAKkvQmCtHb2ykeTqIJjgRZ2UIgkp31RA79Hlvc5oQqR22wglygPn+qYJhhPAzCDpOy8slEiLMuB7hAIDjk13TbWe1XZy4cQc6m47wM5dMZho+WrhoUhC2i6QNCrnfytxWCQOAnTy1h7OdOf6u42hSLX4DTg6fgAncSZkH0bAk5bWKDCk/PoemYgi5UZIB+n9yPz59bkrsv1Ax3IY3+alPuTh2wH47kcZbSUFrYoi5lAvF6AwUWjkpnhZZ+ejRptPky+Vq2udQ86PKSLFr6hXqn2T2brEKZWOxs5seJmm1rsi3YEVSTkxouyVRjpPu6W2hImyIJZX3W5UCr3GtXOajIl7PUFqV/viwx67PnNmgfvHngTSA9TGL2bMA370KZtuh2a7fFcFQ0UFhERp62l2t79BCcrCkRm1z7k2Wjys83Cec88eQ8Bjw/2DHBzz07nBpE1TBq8zjDovWRXMtkWBAlCCNOAxMfDR0HWEDDcBP4bsH7SAYhfQ3PwzR5A95soTNqsQpXaVy5DH/rQ5FnN7wVz9/wjPryW4xEsH5fnzDRvXJQMJfrI4pPjx/MmU2TmFwtMN8sVVCArZzcJqXiotXaiI=
+            secure: 0b53CEPSEfWkzKPzH5B8xCaqAN7BwlGCVlVSjwgey6xHoLU+SOZNA55D9Bi/co2XaGKqINeIGhpDhzOfQk/wmuWyk1y1IM1ntjxEwNmhw0ZWvf9gOkQqCLuQsCb0xYObxyhc18iqzZC6a63L0bhrrathu3Mn9Nx08WWANdROG9nG52qp8d6e6RFs3yASEyU6jhhO7TzW9aeOVgAc5XxS9765iIlaumEiweK8alVP9nRDk+qt/THnhccoURQ7GWzjYpk/gc2tzZnCdPRy6Ky08zVV+r9oKCsKT86oNimgijzIYJg+JsYOSflKRAwTntAseQi1bqtPalO0glmP3SY9MgO/f6FAd98iq6xlLo4/lO338jQKuKdGuYfqTZzWKn9OwqGN7/gnNjEspp6Cmh9GhL1jOLAoMiaUb1W9CR72qYCPcfnnQib3v2AgiO8bunaGt3mf3HU6o9ogiTrk8pItr0HHCfCYl7X38OEx3JpShm7L+rgDM5LKr7aFtdrpbleYGLD1oCQMZZNQPnQ5b94rPUj8tueRQOhASAm8wnri48xIHYaGl9/SRzCak3sweg3h+/ol/EoLiaARghMcuSVX2R66av+0VuzeYLs8y2xUWFKdBMaCB3JtOEwOcGew39Y0qNPpt+33WRqiYEfz1kYotKlI4tIIwwtfLTnoNVkqD4U=
           file:
             - $TRAVIS_BUILD_DIR/platforms/android/app/build/outputs/apk/debug/app-debug.apk
           overwrite: true
@@ -101,3 +101,20 @@ matrix:
         - npm run dist
       after_success:
         - bash <(curl -s https://copilot.blackducksoftware.com/ci/travis/scripts/upload)
+      before_deploy:
+        - echo '//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}' > ~/.npmrc
+      deploy:
+        - provider: script
+          skip_cleanup: true
+          script: ./scripts/publish.js
+          on:
+            tags: true
+            condition: $TRAVIS_TAG =~ ^v[0-9]+\.[0-9]+
+
+    # Release if on master and not PR
+    - stage: "Release new version from master"
+      if: branch = master AND type != pull_request AND commit_message !~ /Bumping version to/
+      cache:
+        - npm
+      script: 
+        - ./scripts/version_bump.sh
