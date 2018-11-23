@@ -2,6 +2,8 @@ import { Component, OnInit, NgZone } from '@angular/core';
 
 import { ScssHelper } from '../../scss/scss-helper';
 import { GridHelperService } from './grid-helper.service';
+import { GridCardConfiguration } from './grid-card-configuration';
+import { GridCard } from './grid-card';
 
 @Component({
   selector: 'kirby-grid',
@@ -109,26 +111,4 @@ export class GridComponent implements OnInit {
     this.gridHelper.onInit(initCallback);
   }
 
-}
-
-export class GridCardConfiguration {
-  type: string;
-  preferredSize: number;
-  constructor(type: string, preferredSize: number) {
-    this.type = type;
-    this.preferredSize = preferredSize;
-  }
-}
-
-class GridCard {
-  configuration: GridCardConfiguration;
-  row: number;
-  col: number;
-  colSpan: number;
-  constructor(configuration: GridCardConfiguration, row: number, col: number, colSpan: number) {
-    this.configuration = configuration;
-    this.row = row;
-    this.col = col;
-    this.colSpan = colSpan;
-  }
 }
