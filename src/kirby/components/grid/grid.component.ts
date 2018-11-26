@@ -3,13 +3,26 @@ import { Component, OnInit, NgZone } from '@angular/core';
 import { ScssHelper } from '../../scss/scss-helper';
 import { GridHelperService } from './grid-helper.service';
 import { GridCardConfiguration } from './grid-card-configuration';
-import { GridCard } from './grid-card';
+
+class GridCard {
+  configuration: GridCardConfiguration;
+  row: number;
+  col: number;
+  colSpan: number;
+  constructor(configuration: GridCardConfiguration, row: number, col: number, colSpan: number) {
+    this.configuration = configuration;
+    this.row = row;
+    this.col = col;
+    this.colSpan = colSpan;
+  }
+}
 
 @Component({
   selector: 'kirby-grid',
   templateUrl: './grid.component.html',
   styleUrls: ['./grid.component.scss']
 })
+
 export class GridComponent implements OnInit {
   cardConfigurations: GridCardConfiguration[];
   cards: GridCard[];
