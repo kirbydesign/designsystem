@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, Input } from '@angular/core';
 import { WebView, LoadEventData } from 'ui/web-view';
 import { android, ios, AndroidApplication, AndroidActivityEventData } from 'tns-core-modules/application';
+import { Options } from 'highcharts';
 
 const webViewInterfaceModule = require('nativescript-webview-interface');
 
@@ -10,7 +11,7 @@ const webViewInterfaceModule = require('nativescript-webview-interface');
   styleUrls: ['./chart.component.scss']
 })
 export class ChartComponent implements OnInit, AfterViewInit {
-  @Input() options = {};
+  @Input() options: Options = {};
   @Input() height = 300;
 
   @ViewChild('webView') private webView: ElementRef;
