@@ -1,8 +1,9 @@
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit, NgZone, ComponentFactoryResolver } from '@angular/core';
 
 import { ScssHelper } from '../../scss/scss-helper';
 import { GridHelperService } from './grid-helper.service';
 import { GridCardConfiguration } from './grid-card-configuration';
+import { DummyCardComponent } from './dummy-card/dummy-card.component';
 
 class GridCard {
   configuration: GridCardConfiguration;
@@ -32,15 +33,15 @@ export class GridComponent implements OnInit {
   constructor(private zone: NgZone, private gridHelper: GridHelperService) {
     // Dummy data here, please fix it mr. npx Angular maestro
     this.cardConfigurations = [
-      new GridCardConfiguration('dummy', 1),
-      new GridCardConfiguration('dummy', 2),
-      new GridCardConfiguration('dummy', 2),
-      new GridCardConfiguration('dummy', 1),
-      new GridCardConfiguration('dummy', 1),
-      new GridCardConfiguration('dummy', 2),
-      new GridCardConfiguration('dummy', 1),
-      new GridCardConfiguration('dummy', 2),
-      new GridCardConfiguration('dummy', 1)
+      new GridCardConfiguration(DummyCardComponent, 1),
+      new GridCardConfiguration(DummyCardComponent, 2),
+      new GridCardConfiguration(DummyCardComponent, 2),
+      new GridCardConfiguration(DummyCardComponent, 1),
+      new GridCardConfiguration(DummyCardComponent, 1),
+      new GridCardConfiguration(DummyCardComponent, 2),
+      new GridCardConfiguration(DummyCardComponent, 1),
+      new GridCardConfiguration(DummyCardComponent, 2),
+      new GridCardConfiguration(DummyCardComponent, 1)
     ];
 
     this.configureGrid();

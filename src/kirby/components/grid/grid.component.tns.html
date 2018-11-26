@@ -3,6 +3,8 @@
     <GridLayout [rows]="rows" [columns]="columns">
       <ng-container *ngFor="let card of cards">
         <StackLayout [row]="card.row" [col]="card.col" [colSpan]="card.colSpan">
+          <kirby-card-wrapper [cardConfig]="card.configuration"></kirby-card-wrapper>
+          <!--
           <kirby-card>
             <kirby-card-header [title]="'row: ' + card.row + ',col: ' + card.col" [subtitle]="'preferredSize: ' + card.configuration.preferredSize">
             </kirby-card-header>
@@ -13,6 +15,7 @@
               <kirby-button label="Dummy Kirby Button" expand="block" shape="round" theme="cookbook"></kirby-button>
             </kirby-card-footer>
           </kirby-card>
+          -->
         </StackLayout>
       </ng-container>
     </GridLayout>

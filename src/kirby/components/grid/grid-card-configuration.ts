@@ -1,8 +1,6 @@
+import { Type } from '@angular/core';
+
 export class GridCardConfiguration {
-  type: string;
-  preferredSize: number;
-  constructor(type: string, preferredSize: number) {
-    this.type = type;
-    this.preferredSize = preferredSize;
+  constructor(public component: Type<any>, public preferredSize: number) {
   }
 }
