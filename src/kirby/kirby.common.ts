@@ -7,7 +7,6 @@ import { CardFooterComponent } from './components/card/card-footer/card-footer.c
 import { GridComponent } from './components/grid/grid.component';
 import { GridCardDirective } from './components/grid/grid-card.directive';
 import { CardWrapperComponent } from './components/grid/card-wrapper/card-wrapper.component';
-import { DummyCardComponent } from './components/grid/dummy-card/dummy-card.component';
 
 export const declarations = [
   CardComponent,
@@ -18,6 +17,5 @@ export const declarations = [
   IconComponent,
   GridComponent,
   GridCardDirective,
-  CardWrapperComponent,
-  DummyCardComponent
+  CardWrapperComponent
 ];

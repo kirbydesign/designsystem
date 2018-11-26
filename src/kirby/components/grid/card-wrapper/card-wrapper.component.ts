@@ -18,11 +18,10 @@ export class CardWrapperComponent implements OnInit {
   }
 
   loadCard() {
-    console.log('Hawaaaaaaas: ' + this.cardHost);
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(this.cardConfig.component);
     const viewContainerRef = this.cardHost.viewContainerRef;
     viewContainerRef.clear();
-    const componentRef = viewContainerRef.createComponent(componentFactory);
+    viewContainerRef.createComponent(componentFactory);
   }
 
 }

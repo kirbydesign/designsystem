@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { GridCardConfiguration } from '../../../../kirby/components/grid/grid-card-configuration';
+import { CardExampleComponent } from '../../card-example/card-example.component';
 
 @Component({
   selector: 'kirby-grid-example',
@@ -6,8 +8,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./grid-example.component.scss']
 })
 export class GridExampleComponent implements OnInit {
+  cardConfigurations: GridCardConfiguration[];
 
-  constructor() { }
+  constructor() {
+    this.cardConfigurations = [
+      new GridCardConfiguration(CardExampleComponent, 1),
+      new GridCardConfiguration(CardExampleComponent, 2),
+      new GridCardConfiguration(CardExampleComponent, 2),
+      new GridCardConfiguration(CardExampleComponent, 1),
+      new GridCardConfiguration(CardExampleComponent, 1),
+      new GridCardConfiguration(CardExampleComponent, 2),
+      new GridCardConfiguration(CardExampleComponent, 1),
+      new GridCardConfiguration(CardExampleComponent, 2),
+      new GridCardConfiguration(CardExampleComponent, 1)
+    ];
+  }
 
   ngOnInit() {
   }

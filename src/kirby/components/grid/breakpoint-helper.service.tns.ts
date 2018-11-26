@@ -6,7 +6,7 @@ import * as app from 'application';
 @Injectable({
   providedIn: 'root'
 })
-export class GridHelperService {
+export class BreakpointHelperService {
   currentScreenWidth: number;
 
   constructor() { }

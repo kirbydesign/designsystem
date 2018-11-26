@@ -1,9 +1,8 @@
-import { Component, OnInit, NgZone, ComponentFactoryResolver } from '@angular/core';
+import { Component, OnInit, NgZone, Input } from '@angular/core';
 
 import { ScssHelper } from '../../scss/scss-helper';
-import { GridHelperService } from './grid-helper.service';
+import { BreakpointHelperService } from './breakpoint-helper.service';
 import { GridCardConfiguration } from './grid-card-configuration';
-import { DummyCardComponent } from './dummy-card/dummy-card.component';
 
 class GridCard {
   configuration: GridCardConfiguration;
@@ -25,25 +24,16 @@ class GridCard {
 })
 
 export class GridComponent implements OnInit {
-  cardConfigurations: GridCardConfiguration[];
+  cardConfigs: GridCardConfiguration[];
   cards: GridCard[];
-  rows: string;
-  columns: string;
+  rows = '';
+  columns = '';
 
-  constructor(private zone: NgZone, private gridHelper: GridHelperService) {
-    // Dummy data here, please fix it mr. npx Angular maestro
-    this.cardConfigurations = [
-      new GridCardConfiguration(DummyCardComponent, 1),
-      new GridCardConfiguration(DummyCardComponent, 2),
-      new GridCardConfiguration(DummyCardComponent, 2),
-      new GridCardConfiguration(DummyCardComponent, 1),
-      new GridCardConfiguration(DummyCardComponent, 1),
-      new GridCardConfiguration(DummyCardComponent, 2),
-      new GridCardConfiguration(DummyCardComponent, 1),
-      new GridCardConfiguration(DummyCardComponent, 2),
-      new GridCardConfiguration(DummyCardComponent, 1)
-    ];
+  constructor(private zone: NgZone, private breakpointHelper: BreakpointHelperService) { }
 
+  @Input()
+  set cardConfigurations(cardConfigurations: GridCardConfiguration[]) {
+    this.cardConfigs = cardConfigurations;
     this.configureGrid();
   }
 
@@ -52,13 +42,13 @@ export class GridComponent implements OnInit {
    * which cards will be two column and which will be only one.
    */
   configureGrid() {
-    const numberOfColumns = this.gridHelper.currentScreenWidth >= ScssHelper.BREAKPOINT_SCREEN_L ? 2 : 1;
-    this.rows = null;
+    const numberOfColumns = this.breakpointHelper.currentScreenWidth >= ScssHelper.BREAKPOINT_SCREEN_L ? 2 : 1;
+    this.rows = '';
     this.cards = null;
     let currentRow = 0;
     let currentColumn = 0;
     let onlyOneCoulmn = true;
-    this.cardConfigurations.forEach((cardConfig, idx) => {
+    this.cardConfigs.forEach((cardConfig, idx) => {
       if (numberOfColumns === 1) {
         // Simple, we only have one column always
         this.addCard(new GridCard(cardConfig, currentRow, currentColumn, 1));
@@ -71,7 +61,7 @@ export class GridComponent implements OnInit {
           this.addRowToGrid();
           currentColumn = 0;
           currentRow++;
-        } else if (this.cardConfigurations.length === idx + 1) {
+        } else if (this.cardConfigs.length === idx + 1) {
           // Last row man, take all the space
           this.addCard(new GridCard(cardConfig, currentRow, currentColumn, 2));
           this.addRowToGrid();
@@ -119,10 +109,11 @@ export class GridComponent implements OnInit {
   }
 
   ngOnInit() {
+    // The constant here is because of some scope that is outside the scope of my knowledge, so it stays here!
     const initCallback = (): void => {
       this.configureGrid();
     };
-    this.gridHelper.onInit(initCallback);
+    this.breakpointHelper.onInit(initCallback);
   }
 
 }
