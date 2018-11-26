@@ -27,7 +27,7 @@ export class ChartComponent implements OnInit, AfterViewInit {
 
   private setupWebViewInterface() {
     const webView: WebView = this.webView.nativeElement;
-    this.chartWebViewInterface = new webViewInterfaceModule.WebViewInterface(webView, '~/chart.webview.html');
+    this.chartWebViewInterface = new webViewInterfaceModule.WebViewInterface(webView, '~/chart/chart.webview.html');
 
     // loading chart data, on load of webView
     webView.on(WebView.loadFinishedEvent, (args: LoadEventData) => {
