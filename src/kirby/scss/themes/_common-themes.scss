@@ -4,7 +4,7 @@ $themes: (
     'on-surface': rgb(33, 33, 33),
     'primary': rgb(51, 134, 212),
     'on-primary': rgb(255, 255, 255),
-    'secondary': rgb(255, 255, 255),
+    'secondary': lighten(rgb(51, 134, 212), 30),
     'on-secondary': rgb(64, 64, 64),
   ),
   'cake': (
