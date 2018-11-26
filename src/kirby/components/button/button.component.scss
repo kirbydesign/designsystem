@@ -1,15 +1,8 @@
 @import '../../scss/web-imports';
 
 :host {
-  display: inline-block;
   margin: 0.25em 0.25em;
   --kirby-button-border-radius: 0.2rem;
-  &[expand='block'] {
-    display: block;
-  }
-}
-
-button {
   background-color: var(--kirby-primary);
   border-radius: var(--kirby-button-border-radius);
   border: 1px solid var(--kirby-primary);
@@ -18,13 +11,23 @@ button {
   font-size: font-size('n');
   padding: 0.7rem 1.75rem;
   transition: opacity 200ms linear;
-  width: 100%;
 
-  &.round {
+  &[expand='block'] {
+    display: block;
+    width: 100%;
+  }
+
+  &[shape='round'] {
     --kirby-button-border-radius: 2rem;
   }
 
-  &.button--secondary {
+  &[colortype='primary'] {
+    background-color: var(--kirby-primary);
+    border-color: var(--kirby-primary);
+    color: var(--kirby-on-primary);
+  }
+
+  &[colortype='secondary'] {
     background-color: var(--kirby-secondary);
     border-color: var(--kirby-secondary);
     color: var(--kirby-on-secondary);
@@ -34,5 +37,5 @@ button {
   &:focus {
     opacity: 0.8;
   }
-}
 
+}
