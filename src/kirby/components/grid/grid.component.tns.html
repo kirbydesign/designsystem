@@ -2,7 +2,7 @@
   <ScrollView>
     <GridLayout [rows]="rows" [columns]="columns">
       <StackLayout *ngFor="let card of cards" [row]="card.row" [col]="card.col" [colSpan]="card.colSpan">
-        <kirby-card-wrapper [cardConfig]="card.configuration"></kirby-card-wrapper>
+        <ng-template [kirbyLoadComponent]="card.configuration"></ng-template>
       </StackLayout>
     </GridLayout>
   </ScrollView>

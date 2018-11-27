@@ -12,15 +12,15 @@ export class GridExampleComponent implements OnInit {
 
   constructor() {
     this.cardConfigurations = [
-      new GridCardConfiguration(CardExampleComponent, 1),
-      new GridCardConfiguration(CardExampleComponent, 2),
-      new GridCardConfiguration(CardExampleComponent, 2),
-      new GridCardConfiguration(CardExampleComponent, 1),
-      new GridCardConfiguration(CardExampleComponent, 1),
-      new GridCardConfiguration(CardExampleComponent, 2),
-      new GridCardConfiguration(CardExampleComponent, 1),
-      new GridCardConfiguration(CardExampleComponent, 2),
-      new GridCardConfiguration(CardExampleComponent, 1)
+      new GridCardConfiguration(CardExampleComponent, null, 1),
+      new GridCardConfiguration(CardExampleComponent, null, 2),
+      new GridCardConfiguration(CardExampleComponent, null, 2),
+      new GridCardConfiguration(CardExampleComponent, null, 1),
+      new GridCardConfiguration(CardExampleComponent, null, 1),
+      new GridCardConfiguration(CardExampleComponent, null, 2),
+      new GridCardConfiguration(CardExampleComponent, null, 1),
+      new GridCardConfiguration(CardExampleComponent, null, 2),
+      new GridCardConfiguration(CardExampleComponent, null, 1)
     ];
   }
 
