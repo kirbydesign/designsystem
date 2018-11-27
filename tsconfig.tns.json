@@ -10,7 +10,6 @@
         "./node_modules/*"
       ]
     },
-    "experimentalDecorators": true,
   },
   "exclude": [
     "**/*.tns.ts",

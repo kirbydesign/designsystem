@@ -5,9 +5,9 @@ import { DynamicComponent } from './dynamic-component';
 @Directive({
   selector: '[kirbyLoadComponent]',
 })
-export class GridCardDirective implements OnInit {
+export class ComponentLoaderDirective implements OnInit {
   // tslint:disable-next-line:no-input-rename
-  @Input('kirbyLoadComponent') cardConfig: ComponentConfiguration;
+  @Input('kirbyLoadComponent') configuration: ComponentConfiguration;
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver, private viewContainerRef: ViewContainerRef) { }
 
@@ -16,9 +16,9 @@ export class GridCardDirective implements OnInit {
   }
 
   loadCard() {
-    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(this.cardConfig.component);
+    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(this.configuration.component);
     this.viewContainerRef.clear();
     const componentRef = this.viewContainerRef.createComponent(componentFactory);
-    (<DynamicComponent>componentRef.instance).data = this.cardConfig.data;
+    (<DynamicComponent>componentRef.instance).data = this.configuration.data;
   }
 }
