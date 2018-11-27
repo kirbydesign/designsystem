@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GridExampleComponent } from './grid-example.component';
+import { KirbyModule } from '../../../../kirby/kirby.module';
 import { GridCardConfiguration } from '../../../../kirby/components/grid/grid-card-configuration';
 
 describe('GridExampleComponent', () => {
@@ -10,7 +11,7 @@ describe('GridExampleComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ GridExampleComponent ],
-      imports: [GridCardConfiguration]
+      imports: [KirbyModule, GridCardConfiguration]
     })
     .compileComponents();
   }));
