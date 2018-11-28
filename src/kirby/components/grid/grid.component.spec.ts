@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GridComponent } from './grid.component';
+import { GridCardDirective } from '../shared/component-loader.directive';
 
 describe('GridComponent', () => {
   let component: GridComponent;
@@ -8,7 +9,7 @@ describe('GridComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GridComponent ]
+      declarations: [ GridComponent, GridCardDirective ]
     })
     .compileComponents();
   }));
