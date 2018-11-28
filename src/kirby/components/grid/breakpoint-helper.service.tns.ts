@@ -1,17 +1,21 @@
-import { Injectable, NgZone } from '@angular/core';
+import { Injectable, OnDestroy, NgZone } from '@angular/core';
 import { screen } from 'platform';
 import { OrientationChangedEventData } from 'application';
 import * as app from 'application';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class BreakpointHelperService {
+export class BreakpointHelperService implements OnDestroy {
   currentScreenWidth: number;
+  private orientationChangedSubject = new Subject<void>();
 
-  constructor(private zone: NgZone) { }
+  constructor(private zone: NgZone) {
+    this.init();
+  }
 
-  onInit(callback: () => void) {
+  private init() {
     this.currentScreenWidth = screen.mainScreen.widthDIPs;
     app.on(app.orientationChangedEvent, (args: OrientationChangedEventData) => {
       if (this.currentScreenWidth === screen.mainScreen.widthDIPs) {
@@ -19,9 +23,17 @@ export class BreakpointHelperService {
       } else {
         this.currentScreenWidth = screen.mainScreen.widthDIPs;
       }
-      // Run the last update in the zone, to make sure Angular data binding is informed of this
-      this.zone.run(callback);
+      // Run in the zone, to make sure Angular data binding is informed of this:
+      this.zone.run(() => this.orientationChangedSubject.next());
     });
+  }
+
+  observe(): Observable<void> {
+    return this.orientationChangedSubject.asObservable();
+  }
+
+  ngOnDestroy() {
+    this.orientationChangedSubject.complete();
   }
 
 }

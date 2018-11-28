@@ -1,4 +1,5 @@
-import { Component, OnInit, NgZone, Input } from '@angular/core';
+import { Component, OnInit, NgZone, Input, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 import { ScssHelper } from '../../scss/scss-helper';
 import { BreakpointHelperService } from './breakpoint-helper.service';
@@ -22,12 +23,12 @@ class GridCard {
   templateUrl: './grid.component.html',
   styleUrls: ['./grid.component.scss']
 })
-
-export class GridComponent implements OnInit {
+export class GridComponent implements OnInit, OnDestroy {
   cardConfigs: GridCardConfiguration[];
   cards: GridCard[];
   rows = '';
   columns = '';
+  private breakpointSubscription: Subscription;
 
   constructor(private breakpointHelper: BreakpointHelperService) { }
 
@@ -97,7 +98,15 @@ export class GridComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.breakpointHelper.onInit(() => this.configureGrid());
+    this.breakpointSubscription = this.breakpointHelper.observe().subscribe(
+      () => this.configureGrid()
+    );
+  }
+
+  ngOnDestroy() {
+    if (this.breakpointSubscription) {
+      this.breakpointSubscription.unsubscribe();
+    }
   }
 
 }
