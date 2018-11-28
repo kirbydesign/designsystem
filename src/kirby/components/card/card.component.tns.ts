@@ -32,8 +32,7 @@ export class CardComponent implements OnInit {
   }
 
   onViewLoaded(args: EventData) {
-    console.log('onViewLoaded');
-    this.view = <View>args.object;
+    this.view = <View>args.object; // We need a reference to the view so we can access it on orientation changes
     this.setupOnOrientationChangeListener();
     this.applySizeAndShadow();
   }
@@ -50,7 +49,6 @@ export class CardComponent implements OnInit {
       } else {
         this.cardSizeClass = 'card-small';
       }
-      console.log('onViewLoaded#3=' + this.cardSizeClass);
     }, 100);
     this.addShadow(this.view);
   }
