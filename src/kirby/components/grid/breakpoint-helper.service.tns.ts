@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { screen } from 'platform';
 import { OrientationChangedEventData } from 'application';
 import * as app from 'application';
@@ -9,7 +9,7 @@ import * as app from 'application';
 export class BreakpointHelperService {
   currentScreenWidth: number;
 
-  constructor() { }
+  constructor(private zone: NgZone) { }
 
   onInit(callback: () => void) {
     this.currentScreenWidth = screen.mainScreen.widthDIPs;
@@ -19,7 +19,9 @@ export class BreakpointHelperService {
       } else {
         this.currentScreenWidth = screen.mainScreen.widthDIPs;
       }
+      this.zone.run(() => {
       callback();
+      });
     });
   }
 
