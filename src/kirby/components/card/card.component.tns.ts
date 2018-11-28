@@ -1,5 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, NgZone } from '@angular/core';
 import { screen } from 'platform';
+import { OrientationChangedEventData } from 'application';
+import * as app from 'application';
 import { View, EventData } from 'tns-core-modules/ui/core/view/view';
 import { FlexboxLayout } from 'tns-core-modules/ui/layouts/flexbox-layout/flexbox-layout';
 
@@ -18,15 +20,21 @@ export class CardComponent implements OnInit {
   @Input() title: string;
   @Input() subtitle: string;
 
+  currentScreenWidth: number;
+
   cardSizeClass = '';
 
-  constructor() { }
+  constructor(private zone: NgZone) { }
 
   ngOnInit() {
   }
 
   onViewLoaded(args: EventData) {
     const view = <View>args.object;
+    this.applySizeAndShadow(view);
+  }
+
+  applySizeAndShadow(view: View) {
     // A timeout is crap, but try without, fail you will
     // If you change this, you must test all the details on both Android and iOS including rotation, may God have mercy on your soul
     setTimeout(() => {
@@ -40,6 +48,19 @@ export class CardComponent implements OnInit {
       }
     }, 100);
     this.addShadow(view);
+  }
+
+  setupOnOrientationChangeListener() {
+    this.currentScreenWidth = screen.mainScreen.widthDIPs;
+    app.on(app.orientationChangedEvent, (args: OrientationChangedEventData) => {
+      if (this.currentScreenWidth === screen.mainScreen.widthDIPs) {
+        this.currentScreenWidth = screen.mainScreen.heightDIPs;
+      } else {
+        this.currentScreenWidth = screen.mainScreen.widthDIPs;
+      }
+      // Run in the zone, to make sure Angular data binding is informed of this:
+      this.zone.run(() => this.applySizeAndShadow(<View>args.object));
+    });
   }
 
   addShadow(view: View) {
