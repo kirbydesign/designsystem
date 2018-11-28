@@ -19,9 +19,8 @@ export class BreakpointHelperService {
       } else {
         this.currentScreenWidth = screen.mainScreen.widthDIPs;
       }
-      this.zone.run(() => {
-      callback();
-      });
+      // Run the last update in the zone, to make sure Angular data binding is informed of this
+      this.zone.run(callback);
     });
   }
 

@@ -81,8 +81,6 @@ export class GridComponent implements OnInit {
       }
     });
 
-    // Run the last update in the zone, to make sure Angular data binding is informed of this
-    // This is really only needed for orientation changes, so yeah native, but it does not hurt web
     if (onlyOneCoulmn) {
       this.columns = '*';
     } else {
