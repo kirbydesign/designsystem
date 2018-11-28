@@ -20,6 +20,8 @@ export class CardComponent implements OnInit {
   @Input() title: string;
   @Input() subtitle: string;
 
+  view: View;
+
   currentScreenWidth: number;
 
   cardSizeClass = '';
@@ -30,15 +32,17 @@ export class CardComponent implements OnInit {
   }
 
   onViewLoaded(args: EventData) {
-    const view = <View>args.object;
-    this.applySizeAndShadow(view);
+    console.log('onViewLoaded');
+    this.view = <View>args.object;
+    this.setupOnOrientationChangeListener();
+    this.applySizeAndShadow();
   }
 
-  applySizeAndShadow(view: View) {
+  applySizeAndShadow() {
     // A timeout is crap, but try without, fail you will
     // If you change this, you must test all the details on both Android and iOS including rotation, may God have mercy on your soul
     setTimeout(() => {
-      const widthDP = view.getMeasuredWidth() / screenScale;
+      const widthDP = this.view.getMeasuredWidth() / screenScale;
       if (widthDP >= ScssHelper.BREAKPOINT_CARD_L) {
         this.cardSizeClass = 'card-large';
       } else if (widthDP >= ScssHelper.BREAKPOINT_CARD_M) {
@@ -46,8 +50,9 @@ export class CardComponent implements OnInit {
       } else {
         this.cardSizeClass = 'card-small';
       }
+      console.log('onViewLoaded#3=' + this.cardSizeClass);
     }, 100);
-    this.addShadow(view);
+    this.addShadow(this.view);
   }
 
   setupOnOrientationChangeListener() {
@@ -59,7 +64,7 @@ export class CardComponent implements OnInit {
         this.currentScreenWidth = screen.mainScreen.widthDIPs;
       }
       // Run in the zone, to make sure Angular data binding is informed of this:
-      this.zone.run(() => this.applySizeAndShadow(<View>args.object));
+      this.zone.run(() => this.applySizeAndShadow());
     });
   }
 
