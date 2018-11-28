@@ -1,0 +1,15 @@
+.test-me {
+  background-color: orange;
+}
+
+.card-large :host .test-me {
+  background-color: red;
+}
+
+.card-medium :host .test-me {
+  background-color: blue;
+}
+
+.card-small :host .test-me {
+  background-color: green;
+}
