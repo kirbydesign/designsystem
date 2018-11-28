@@ -47,7 +47,7 @@ export class GridComponent implements OnInit {
     this.cards = [];
     let currentRow = 0;
     let currentColumn = 0;
-    let onlyOneCoulmn = true;
+    let onlyOneColumn = true;
     this.cardConfigs.forEach((cardConfig, idx) => {
       if (numberOfColumns === 1) {
         // Simple, we only have one column always
@@ -75,13 +75,13 @@ export class GridComponent implements OnInit {
             // Uh, we are on column 1 and not the last card, so we honor preferredSize === 1
             this.cards.push(new GridCard(cardConfig, currentRow, currentColumn, 1));
             currentColumn++;
-            onlyOneCoulmn = false;
+            onlyOneColumn = false;
           }
         }
       }
     });
 
-    if (onlyOneCoulmn) {
+    if (onlyOneColumn) {
       this.columns = '*';
     } else {
       this.columns = '*,*';
