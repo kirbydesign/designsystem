@@ -5,6 +5,8 @@ import { ListComponent } from './components/list/list.component';
 import { IconComponent } from './components/icon/icon.component';
 import { CardFooterComponent } from './components/card/card-footer/card-footer.component';
 import { ChartComponent } from './components/chart/chart.component';
+import { GridComponent } from './components/grid/grid.component';
+import { ComponentLoaderDirective } from './components/shared/component-loader.directive';
 
 export const declarations = [
   CardComponent,
@@ -13,5 +15,7 @@ export const declarations = [
   ButtonComponent,
   ListComponent,
   IconComponent,
-  ChartComponent
+  ChartComponent,
+  GridComponent,
+  ComponentLoaderDirective,
 ];

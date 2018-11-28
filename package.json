@@ -9,7 +9,7 @@
       "version": "4.2.0"
     }
   },
-  "version": "0.0.17",
+  "version": "0.0.24",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -21,12 +21,7 @@
     "dist": "ng build --prod --aot --progress false",
     "android": "tns run android --bundle",
     "ios": "tns run ios --bundle --device 'iPhone X'",
-    "pack-bump-patch": "cd src/kirby && npm version patch",
-    "pack-bump-minor": "cd src/kirby && npm version minor",
     "pack-copy-to-dist-folder-watch": "cpx \"src\\kirby\\**\\!(*.spec.ts)\" dist-lib --watch",
-    "pack-build": "npm run pack-copy-to-dist-folder",
-    "pack-build-and-publish": "./scripts/publish.js",
-    "version": "./scripts/publish.js",
     "postversion": "git push && git push --tags"
   },
   "private": true,

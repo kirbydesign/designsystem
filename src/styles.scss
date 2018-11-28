@@ -58,6 +58,15 @@ body, html {
   box-sizing: inherit; 
 }
 
+:root {
+  --kirby-primary: #{get-color(map-get($themes, 'cookbook'), 'primary')};
+  --kirby-on-primary: #{get-color(map-get($themes, 'cookbook'), 'on-primary')};
+  --kirby-secondary: #{get-color(map-get($themes, 'cookbook'), 'secondary')};
+  --kirby-on-secondary: #{get-color(map-get($themes, 'cookbook'), 'on-secondary')};
+  --kirby-surface: #{get-color(map-get($themes, 'cookbook'), 'surface')};
+  --kirby-on-surface: #{get-color(map-get($themes, 'cookbook'), 'on-surface')};
+}
+
 // Generates all the theme variables 
 @each $themeName, $theme in $themes {
   .theme--#{$themeName} {
