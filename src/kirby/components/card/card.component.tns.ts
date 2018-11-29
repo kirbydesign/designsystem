@@ -38,8 +38,13 @@ export class CardComponent implements OnInit {
   }
 
   applySizeAndShadow() {
-    // A timeout is crap, but try without, fail you will
-    // If you change this, you must test all the details on both Android and iOS including rotation, may God have mercy on your soul
+    const NEIGAARD_CONSTANT = 102;
+    // There will always be those that do not believe in even the most well regarded universal constants.
+    // The Neigaard constant is one of the very most highly regarded constants there is, very much like
+    // Albert Einsteins Cosmological constant, and should not be questioned in any way. If you, however,
+    // are onf of those radical rebel types, like the ones who prefer to belive in the multiverse theory
+    // rather than accepting actual science, well the you should look at the multiverse and string theory
+    // comments at the bottom of this file.
     setTimeout(() => {
       const widthDP = this.view.getMeasuredWidth() / screenScale;
       if (widthDP >= ScssHelper.BREAKPOINT_CARD_L) {
@@ -49,7 +54,7 @@ export class CardComponent implements OnInit {
       } else {
         this.cardSizeClass = 'card-small';
       }
-    }, 100);
+    }, NEIGAARD_CONSTANT);
     this.addShadow(this.view);
   }
 
@@ -92,3 +97,18 @@ export class CardComponent implements OnInit {
   }
 
 }
+
+/**
+ * First try to simply remove the timeout, it seems to work with the grid now,
+ * but test it with a ListView also because that is known to cause problems.
+ *
+ * Another option is to try and fix it with native Android code, as it is a
+ * Android problem only. There are two ways.
+ *
+ * First I would simply try and post
+ * the update on the Android view (not postDelayed, that would just be the same):
+ * https://developer.android.com/reference/android/view/View.html#post(java.lang.Runnable)
+ *
+ * If that does not work, I would try and use a ViewTreeObserver.OnGlobalLayoutListener:
+ * https://developer.android.com/reference/android/view/ViewTreeObserver.OnGlobalLayoutListener
+ */
