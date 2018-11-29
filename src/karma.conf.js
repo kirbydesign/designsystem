@@ -34,7 +34,7 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['ChromeCustom'],
+    browsers: isDocker || process.env.CI === 'true' ? ['ChromeCustom'] : ['Chrome'],
     singleRun: false
   });
 };
