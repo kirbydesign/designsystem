@@ -16,7 +16,7 @@ import { KirbyModule } from '../kirby/kirby.module';
         HomeComponent,
         SideNavComponent,
         HeaderComponent,
-        IntroComponent,
+        IntroComponent
     ],
     imports: [
         BrowserModule,

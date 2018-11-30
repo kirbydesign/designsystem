@@ -1,5 +1,5 @@
-<FlexboxLayout #outerView class="background" [ngClass]="cardSizeClass">
-    <FlexboxLayout #innerView class="container">
+<FlexboxLayout (loaded)="onViewLoaded($event)" class="background" [ngClass]="cardSizeClass">
+    <FlexboxLayout class="container">
         <ng-content select="kirby-card-header"></ng-content>
         <ng-content></ng-content>
         <ng-content select="kirby-card-footer"></ng-content>
