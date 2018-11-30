@@ -22,9 +22,5 @@ export const routes: Routes = [
     {
         path: 'examples',
         loadChildren: './examples/examples-routing.module#ExamplesRoutingModule'
-    },
-    {
-        path: 'app',
-        loadChildren: './app-shell/app-shell.module#AppShellModule'
-    },
+    }
 ];

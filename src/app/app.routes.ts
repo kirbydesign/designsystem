@@ -30,9 +30,5 @@ export const routes: Routes = [
     {
         path: 'designer',
         loadChildren: './designer/designer.module#DesignerModule'
-    },
-    {
-        path: 'app',
-        loadChildren: './app-shell/app-shell.module#AppShellModule'
-    },
+    }
 ];
