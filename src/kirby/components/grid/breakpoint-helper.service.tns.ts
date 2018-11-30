@@ -18,10 +18,18 @@ export class BreakpointHelperService implements OnDestroy {
   private init() {
     this.currentScreenWidth = screen.mainScreen.widthDIPs;
     app.on(app.orientationChangedEvent, (args: OrientationChangedEventData) => {
-      if (this.currentScreenWidth === screen.mainScreen.widthDIPs) {
-        this.currentScreenWidth = screen.mainScreen.heightDIPs;
-      } else {
-        this.currentScreenWidth = screen.mainScreen.widthDIPs;
+      if (args.newValue === 'portrait') {
+        if (screen.mainScreen.heightDIPs > screen.mainScreen.widthDIPs) {
+          this.currentScreenWidth = screen.mainScreen.widthDIPs;
+        } else {
+          this.currentScreenWidth = screen.mainScreen.heightDIPs;
+        }
+      } else if (args.newValue === 'landscape') {
+        if (screen.mainScreen.heightDIPs > screen.mainScreen.widthDIPs) {
+          this.currentScreenWidth = screen.mainScreen.heightDIPs;
+        } else {
+          this.currentScreenWidth = screen.mainScreen.widthDIPs;
+        }
       }
       // Run in the zone, to make sure Angular data binding is informed of this:
       this.zone.run(() => this.orientationChangedSubject.next());
