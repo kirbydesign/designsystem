@@ -41,6 +41,7 @@
     "nativescript-orientation": "^2.2.1",
     "nativescript-platform-css": "^1.6.6",
     "nativescript-theme-core": "~1.0.4",
+    "nativescript-ui-chart": "^3.9.1",
     "prismjs": "^1.15.0",
     "reflect-metadata": "~0.1.8",
     "rxjs": "^6.0.0",
