@@ -1,0 +1,15 @@
+@import '../../scss/native-imports';
+
+$color-card-bg: rgb(255, 255, 255);
+$color-card-border: rgb(133, 133, 133);
+.background, .container {
+    flex-direction: column;
+    width: 200;
+    height: 200;
+}
+
+.container {
+    background-color: $color-card-bg;
+    border-radius: 100;
+    margin: 12;
+}

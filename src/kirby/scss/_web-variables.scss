@@ -13,41 +13,6 @@ $breakpoints: (
   xxlarge: 80em 
 );
 
-/* Font-sizes
---------------------------------------------------------------------------------*/
-$font-sizes: (
-  xxl: 3rem,  // 48px
-  xl: 2rem,   // 32px
-  l: 1.5rem,  // 24px
-  m: 1.25rem, // 20px
-  n: 1rem,    // 16px
-  s: .875rem, // 14px
-  xs: .75rem  // 12px
-);
-
-/* Font-sizes
---------------------------------------------------------------------------------*/
-$font-weight: (
-  light: 200,
-  normal: 400,
-  bold: 700
-);
-
-/* Sizes
---------------------------------------------------------------------------------*/
-$sizes: (
-  xxxl: 4.375rem,  // 70px
-  xxl:  3.75rem,   // 60px
-  xl:   3.125rem,  // 50px
-  l:    2rem,      // 32px
-  m:    1rem,      // 16px  - Same as gutter
-  s:    .75rem,    // 12px
-  xs:   .5rem,     // 8px   - Same as gutter-small
-  xxs:  .25rem,    // 4px
-  gutter: 1rem,    // 16px - helper
-  gutter-small: 0.5rem // 8px - helper
-);
-
 /* Z-index
 --------------------------------------------------------------------------------*/
 $z-layers: (
@@ -60,8 +25,3 @@ $z-layers: (
 --------------------------------------------------------------------------------*/
 $border-radius: 18px;
 $border-radius-small: 6px;
-
-
-/*
- * Specific module coloring and sizing follows
---------------------------------------------------------------------------------*/
