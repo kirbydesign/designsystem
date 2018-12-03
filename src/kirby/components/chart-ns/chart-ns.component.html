@@ -1,0 +1,14 @@
+<div *ngFor="let dist of distributions$ | async as dists">
+  <div>
+      label: {{dist.type | translate}}
+  </div>
+  <div>
+      labelPercentage: {{dist.labelPercentage}}
+  </div>
+  <div>
+      percentage: {{dist.percentage}}
+  </div>
+  <div>
+      drawingPercentage: {{dist.drawingPercentage}}
+  </div>
+</div>

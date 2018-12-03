@@ -1,0 +1,57 @@
+/* Add mobile styles for the component here.  */
+
+$color-dark-green: #005d3c;
+$color-medium-green: #24765a;
+$color-light-green: #33a87f;
+$color-mint-green: #02f5a1;
+$color-gray: #333333; 
+
+.layout-class {
+     background-color: transparent;
+     align-items: center;
+     flex-wrap: wrap;
+     justify-content: center;
+     align-content: flex-start;
+}
+.pie-chart {
+    background-color: transparent;
+    height: 205;
+    width: 205;
+}
+.card-large :host .pie-chart {
+    margin-left: 10;
+    margin-right: 20;
+}
+.card-medium :host .pie-chart {
+    margin-left: 10;
+    margin-right: 20;
+}
+.card-small :host .pie-chart {
+    margin-top: 10;
+    margin-bottom: 20;
+}
+
+%legend-shared {
+    background-color: transparent;
+}
+.legend-stack {
+    @extend %legend-shared;
+}
+.legend-label {
+    @extend %legend-shared;
+    margin: 0;
+    padding-bottom: 10;
+    text-align: left;
+    vertical-align: center;
+}
+.legend-text {
+    @extend %legend-shared;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15;
+    color: $color-gray;
+}
+.bullit {
+    @extend %legend-shared;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12;
+}
