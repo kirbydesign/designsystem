@@ -1,0 +1,26 @@
+@import '../../scss/native-imports';
+
+Button[kirby-button] {
+  background-color: white;
+  border-color: lightskyblue;
+  border-radius: 5;
+  border-width: 1;
+  color: lightskyblue;
+  margin: 10 10;
+  padding: 12 20;
+  @include get-theme-style('background-color', 'primary');
+  @include get-theme-style('border-color', 'primary');
+  @include get-theme-style('color', 'on-primary');
+
+  &.button--secondary {
+    @include get-theme-style('background-color', 'secondary');
+    @include get-theme-style('border-color', 'secondary');
+    @include get-theme-style('color', 'on-secondary');
+  }
+
+  
+  &[shape='round'] {
+    border-radius: 100;
+  }
+
+}
