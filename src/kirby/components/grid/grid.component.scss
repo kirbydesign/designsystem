@@ -19,13 +19,15 @@ $grid-max-columns: 2;
   }
 
   @include media(">=medium") {
-    grid-template-columns: repeat(2, minmax($grid-item-min-width, 1fr));
+    grid-template-columns: repeat($grid-max-columns, minmax($grid-item-min-width, 1fr));
   }
 }
 
 @for $i from 1 through $grid-max-columns {
   ::ng-deep .grid-item--col-#{$i} {
-    grid-column: span $i;
+    @include media(">=medium") {
+      grid-column: span $i;
+    }
   }
 }
     
