@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { TranslateModule } from '@ngx-translate/core';
 
 import { ChartNsComponent } from './chart-ns.component';
 
@@ -10,7 +9,7 @@ describe('ChartNsComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ ChartNsComponent ],
-      imports: [TranslateModule]
+      imports: []
     })
     .compileComponents();
   }));
