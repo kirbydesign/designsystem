@@ -146,7 +146,7 @@ export class GridComponent implements OnInit, OnDestroy {
   //     this.columns = '*';
   //   } else {
   //     this.columns = '*,*';
-  //   } 
+  //   }
   // }
 
   // addRowToGrid() {
