@@ -1,7 +1,8 @@
-/* Add mobile styles for the component here.  */
+@import '../../scss/native-imports';
+
 $color-gray: #333333; 
 
-.layout-class {
+.background {
      background-color: transparent;
      align-items: center;
      flex-wrap: wrap;
@@ -41,12 +42,11 @@ $color-gray: #333333;
 }
 .legend-text {
     @extend %legend-shared;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 15;
+    font-size: font-size("n");
     color: $color-gray;
 }
 .bullit {
     @extend %legend-shared;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 12;
+    font-family: Arial, sans-serif;
+    font-size: font-size("xs");
 }
