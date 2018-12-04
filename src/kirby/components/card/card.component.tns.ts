@@ -54,8 +54,8 @@ export class CardComponent implements OnInit {
       } else {
         this.cardSizeClass = 'card-small';
       }
+      this.addShadow(this.view);
     }, NEIGAARD_CONSTANT);
-    this.addShadow(this.view);
   }
 
   setupOnOrientationChangeListener() {
