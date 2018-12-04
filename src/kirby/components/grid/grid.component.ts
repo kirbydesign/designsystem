@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { ScssHelper } from '../../scss/scss-helper';
@@ -10,6 +10,7 @@ class GridCard {
   row: number;
   col: number;
   colSpan: number;
+
   constructor(configuration: GridCardConfiguration, row: number, col: number, colSpan: number) {
     this.configuration = configuration;
     this.row = row;
@@ -25,18 +26,74 @@ class GridCard {
 })
 export class GridComponent implements OnInit, OnDestroy {
   cardConfigs: GridCardConfiguration[];
-  cards: GridCard[];
-  rows = '';
-  columns = '';
+  cards: GridCard[] = [];
+  rows = 'auto,'; // Used in {N}'s gridlayout
+  columns = '*,'; // Used in {N}'s gridlayout
   private breakpointSubscription: Subscription;
 
-  constructor(private breakpointHelper: BreakpointHelperService) { }
+  @Input() maxColumns: number;
 
   @Input()
   set cardConfigurations(cardConfigurations: GridCardConfiguration[]) {
     this.cardConfigs = cardConfigurations;
-    this.configureGrid();
+    this.configureGrid2();
   }
+
+  constructor(private breakpointHelper: BreakpointHelperService) { }
+
+  configureGrid2() {
+    if (this.maxColumns === undefined) {
+      this.maxColumns = this.breakpointHelper.currentScreenWidth >= ScssHelper.BREAKPOINT_SCREEN_L ? 2 : 1;
+    }
+    debugger;
+    let columnCounter = 0;
+    let currentRow = 0;
+    let currentColumn = 0;
+
+    this.cardConfigs.forEach((card, index) => {
+      // Cards colspan is added to the column counter
+      columnCounter += card.preferredSize;
+
+      // If only maxColumns are set to 1, just add all cards with a colspan of 1
+      if (this.maxColumns === 1) {
+        this.cards.push(new GridCard(card, currentRow, currentColumn, 1));
+        currentRow += 1;
+        return;
+      }
+      // If we are below maxColumns, then add the card to the array
+      if (columnCounter <= this.maxColumns) {
+        this.cards.push(new GridCard(card, currentRow, currentColumn, card.preferredSize));
+        // Update currentColumn, so the next card will be placed correctly
+        currentColumn += card.preferredSize;
+      } else {
+        // The new card didn't fit - Calculate remaining columns for previous card
+        const restColumns = this.maxColumns - (columnCounter - card.preferredSize);
+        const prevCard = this.cards[index - 1];
+        // Add the restColumns to the previous cards colspan, to make it span out
+        prevCard.colSpan = restColumns + prevCard.colSpan;
+        // We are now on a new row
+        currentRow += 1;
+        currentColumn = 0;
+        this.cards.push(new GridCard(card, currentRow, currentColumn, card.preferredSize));
+        // Update currentColumn to match the size of the new card and reset columnCounter
+        currentColumn = card.preferredSize;
+        columnCounter = card.preferredSize;
+      }
+      // If we on the last card, make sure it spans all the rest of the columns
+      if (this.cardConfigs.length - 1 === index) {
+        const restColumns = this.maxColumns - columnCounter;
+        const currentCard = this.cards[index];
+        currentCard.colSpan += restColumns;
+      }
+    });
+    // Update the rows and columns string to match the calculated sizes (Only used by {N} GridLayout)
+    this.rows = this.rows.repeat(currentRow);
+    this.columns = this.columns.repeat(this.maxColumns);
+    const rows = this.rows;
+    const columns = this.columns;
+    console.log({rows, columns});
+  }
+
 
   /**
    * This is where the magic happens, a.k.a. the logic that determins
@@ -49,6 +106,7 @@ export class GridComponent implements OnInit, OnDestroy {
     let currentRow = 0;
     let currentColumn = 0;
     let onlyOneColumn = true;
+
     this.cardConfigs.forEach((cardConfig, idx) => {
       if (numberOfColumns === 1) {
         // Simple, we only have one column always

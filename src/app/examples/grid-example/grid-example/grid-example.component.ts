@@ -19,8 +19,8 @@ export class GridExampleComponent implements OnInit {
       new GridCardConfiguration(CardExampleComponent, null, 1),
       new GridCardConfiguration(CardExampleComponent, null, 2),
       new GridCardConfiguration(CardExampleComponent, null, 1),
-      new GridCardConfiguration(CardExampleComponent, null, 2),
-      new GridCardConfiguration(CardExampleComponent, null, 1)
+      new GridCardConfiguration(CardExampleComponent, null, 1),
+      new GridCardConfiguration(CardExampleComponent, null, 1),
     ];
   }
 
