@@ -2,14 +2,13 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ChartNsComponent } from './chart-ns.component';
 
-describe('ChartNsComponent', () => {
+describe('ChartComponent', () => {
   let component: ChartNsComponent;
   let fixture: ComponentFixture<ChartNsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ChartNsComponent ],
-      imports: []
+      declarations: [ ChartNsComponent ]
     })
     .compileComponents();
   }));
