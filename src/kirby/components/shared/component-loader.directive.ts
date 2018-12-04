@@ -8,6 +8,7 @@ import { DynamicComponent } from './dynamic-component';
 export class ComponentLoaderDirective implements OnInit {
   // tslint:disable-next-line:no-input-rename
   @Input('kirbyLoadComponent') configuration: ComponentConfiguration;
+  @Input() cssClass: string;
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver, private viewContainerRef: ViewContainerRef) { }
 
@@ -19,6 +20,7 @@ export class ComponentLoaderDirective implements OnInit {
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(this.configuration.component);
     this.viewContainerRef.clear();
     const componentRef = this.viewContainerRef.createComponent(componentFactory);
+    componentRef.location.nativeElement.className = this.cssClass;
     (<DynamicComponent>componentRef.instance).data = this.configuration.data;
   }
 }

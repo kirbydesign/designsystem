@@ -1,0 +1,31 @@
+@import '../../scss/web-imports';
+
+$grid-item-min-height: 172px;
+$grid-item-min-width: 304px; 
+
+:host {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-auto-rows: minmax($grid-item-min-height, auto);
+  grid-column-gap: size("gutter-small");
+  grid-row-gap: size("gutter-small");
+  max-width: $page-max-width;
+  margin: size("gutter") auto;
+  
+  @include media(">=small") {
+    grid-column-gap: size("gutter");
+    grid-row-gap: size("gutter");    
+  }
+
+  @include media(">=medium") {
+    grid-template-columns: repeat(2, minmax($grid-item-min-width, 1fr));
+  }
+}
+
+::ng-deep .grid-item--col-1 {
+  grid-column: span 1;
+}
+
+::ng-deep .grid-item--col-2 {
+  grid-column: span 2;
+}
