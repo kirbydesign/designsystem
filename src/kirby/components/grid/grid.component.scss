@@ -12,6 +12,7 @@ $grid-max-columns: 2;
   grid-row-gap: size("gutter-small");
   max-width: $page-max-width;
   margin: size("gutter") auto;
+  padding: 0 size("gutter");
   
   @include media(">=small") {
     grid-column-gap: size("gutter");

@@ -36,15 +36,14 @@ export class GridComponent implements OnInit, OnDestroy {
   @Input()
   set cardConfigurations(cardConfigurations: GridCardConfiguration[]) {
     this.cardConfigs = cardConfigurations;
-    this.configureGrid2();
   }
 
   constructor(private breakpointHelper: BreakpointHelperService) { }
 
-  configureGrid2() {
+  configureGrid() {
     let calculatedMaxColumns = 0;
     if (this.maxColumns === undefined) {
-      calculatedMaxColumns = this.breakpointHelper.currentScreenWidth >= ScssHelper.BREAKPOINT_SCREEN_L ? 3 : 1;
+      calculatedMaxColumns = this.breakpointHelper.currentScreenWidth >= ScssHelper.BREAKPOINT_SCREEN_L ? 2 : 1;
     } else {
       calculatedMaxColumns = this.maxColumns;
     }
@@ -96,70 +95,14 @@ export class GridComponent implements OnInit, OnDestroy {
     this.columns = this.columns.repeat(calculatedMaxColumns);
   }
 
-
-  // /**
-  //  * This is where the magic happens, a.k.a. the logic that determins
-  //  * which cards will be two column and which will be only one.
-  //  */
-  // configureGrid() {
-  //   const numberOfColumns = this.breakpointHelper.currentScreenWidth >= ScssHelper.BREAKPOINT_SCREEN_L ? 2 : 1;
-  //   this.rows = '';
-  //   this.cards = [];
-  //   let currentRow = 0;
-  //   let currentColumn = 0;
-  //   let onlyOneColumn = true;
-
-  //   this.cardConfigs.forEach((cardConfig, idx) => {
-  //     if (numberOfColumns === 1) {
-  //       // Simple, we only have one column always
-  //       this.cards.push(new GridCard(cardConfig, currentRow, currentColumn, 1));
-  //       this.addRowToGrid();
-  //       currentRow++;
-  //     } else {
-  //       if (currentColumn > 0) {
-  //         // We are already on column 2, so yeah just add it
-  //         this.cards.push(new GridCard(cardConfig, currentRow, currentColumn, 1));
-  //         this.addRowToGrid();
-  //         currentColumn = 0;
-  //         currentRow++;
-  //       } else if (this.cardConfigs.length === idx + 1) {
-  //         // Last row man, take all the space
-  //         this.cards.push(new GridCard(cardConfig, currentRow, currentColumn, 2));
-  //         this.addRowToGrid();
-  //       } else {
-  //         if (cardConfig.preferredSize === 2) {
-  //           // Ok, we are on column 1 and not the last card, so we honor preferredSize === 2
-  //           this.cards.push(new GridCard(cardConfig, currentRow, currentColumn, 2));
-  //           this.addRowToGrid();
-  //           currentRow++;
-  //         } else {
-  //           // Uh, we are on column 1 and not the last card, so we honor preferredSize === 1
-  //           this.cards.push(new GridCard(cardConfig, currentRow, currentColumn, 1));
-  //           currentColumn++;
-  //           onlyOneColumn = false;
-  //         }
-  //       }
-  //     }
-  //   });
-
-  //   if (onlyOneColumn) {
-  //     this.columns = '*';
-  //   } else {
-  //     this.columns = '*,*';
-  //   }
-  // }
-
-  // addRowToGrid() {
-  //   if (this.rows) {
-  //     this.rows = this.rows + ',auto';
-  //   } else {
-  //     this.rows = 'auto';
-  //   }
-  // }
-
   ngOnInit() {
+    // TODO TRM/JEO Remove this when breakpoint observe something something...
+    this.configureGrid();
+
     this.breakpointSubscription = this.breakpointHelper.observe().subscribe(
-      () => this.configureGrid2()
+      () => {
+        this.configureGrid();
+      }
     );
   }
 
@@ -168,5 +111,4 @@ export class GridComponent implements OnInit, OnDestroy {
       this.breakpointSubscription.unsubscribe();
     }
   }
-
 }

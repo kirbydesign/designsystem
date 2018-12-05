@@ -1,7 +1,7 @@
 <StackLayout><!-- This layout is only here because if root is ScrollView it will creep up under the actionbar on iOS -->
   <ScrollView>
     <GridLayout [rows]="rows" [columns]="columns">
-      <StackLayout *ngFor="let card of cards;  index as i;" [row]="card.row" [col]="card.col" [colSpan]="card.colSpan">
+      <StackLayout *ngFor="let card of cards" [row]="card.row" [col]="card.col" [colSpan]="card.colSpan">
         <ng-template [kirbyLoadComponent]="card.configuration"></ng-template>
       </StackLayout>
     </GridLayout>
