@@ -24,7 +24,7 @@ export class ComponentLoaderDirective implements OnInit {
     this.viewContainerRef.clear();
     const componentRef = this.viewContainerRef.createComponent(componentFactory);
     if (componentRef && componentRef.location && componentRef.location.nativeElement) {
-      this.renderer.addClass(componentRef.location.nativeElement, 'hest-android');
+      this.renderer.addClass(componentRef.location.nativeElement, this.cssClass);
     }
     (<DynamicComponent>componentRef.instance).data = this.configuration.data;
   }
