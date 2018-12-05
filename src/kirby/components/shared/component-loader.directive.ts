@@ -1,4 +1,4 @@
-import { Directive, ViewContainerRef, Input, ComponentFactoryResolver, OnInit } from '@angular/core';
+import { Directive, ViewContainerRef, Input, ComponentFactoryResolver, OnInit, Renderer2 } from '@angular/core';
 import { ComponentConfiguration } from './component-configuration';
 import { DynamicComponent } from './dynamic-component';
 
@@ -10,7 +10,10 @@ export class ComponentLoaderDirective implements OnInit {
   @Input('kirbyLoadComponent') configuration: ComponentConfiguration;
   @Input() cssClass: string;
 
-  constructor(private componentFactoryResolver: ComponentFactoryResolver, private viewContainerRef: ViewContainerRef) { }
+  constructor(
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private viewContainerRef: ViewContainerRef,
+    private renderer: Renderer2) { }
 
   ngOnInit() {
     this.loadCard();
@@ -20,7 +23,9 @@ export class ComponentLoaderDirective implements OnInit {
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(this.configuration.component);
     this.viewContainerRef.clear();
     const componentRef = this.viewContainerRef.createComponent(componentFactory);
-    componentRef.location.nativeElement.className = this.cssClass;
+    if (componentRef && componentRef.location && componentRef.location.nativeElement) {
+      this.renderer.addClass(componentRef.location.nativeElement, 'hest-android');
+    }
     (<DynamicComponent>componentRef.instance).data = this.configuration.data;
   }
 }
