@@ -1,8 +1,6 @@
 @import '../../scss/web-imports';
 
 $grid-item-min-height: 172px;
-$grid-item-min-width: 304px;
-$grid-max-columns: 2; 
 
 :host {
   display: grid;
@@ -20,11 +18,15 @@ $grid-max-columns: 2;
   }
 
   @include media(">=medium") {
-    grid-template-columns: repeat($grid-max-columns, minmax($grid-item-min-width, 1fr));
+    @for $i from 1 through 10 {
+      &[max-columns="#{$i}"] {
+        grid-template-columns: repeat($i, 1fr);
+      }
+    }
   }
 }
 
-@for $i from 1 through $grid-max-columns {
+@for $i from 1 through 10 {
   ::ng-deep .grid-item--col-#{$i} {
     @include media(">=medium") {
       grid-column: span $i;

@@ -22,7 +22,9 @@ class GridCard {
 @Component({
   selector: 'kirby-grid',
   templateUrl: './grid.component.html',
-  styleUrls: ['./grid.component.scss']
+  styleUrls: ['./grid.component.scss'],
+  // tslint:disable-next-line:use-host-property-decorator
+  host: { '[attr.max-columns]' : 'maxColumns'}
 })
 export class GridComponent implements OnInit, OnDestroy {
   cardConfigs: GridCardConfiguration[];
