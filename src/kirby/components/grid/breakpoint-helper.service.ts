@@ -14,7 +14,7 @@ export class BreakpointHelperService implements OnDestroy {
 
   private init() {
     // TODO JEO: Implement Angular/CDK BreakpointObserver:
-    //  this.orientationChangedSubject.next();
+    this.orientationChangedSubject.next();
   }
 
   observe(): Observable<void> {
