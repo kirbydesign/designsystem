@@ -1,15 +1,29 @@
 @import '../../scss/native-imports';
 
+$image-diameter-small: 100;
+$image-diameter-medium: 150;
+$image-diameter-large: 200;
+
 $color-card-bg: rgb(255, 255, 255);
-$color-card-border: rgb(133, 133, 133);
-.background, .container {
-    flex-direction: column;
-    width: 200;
-    height: 200;
+
+.background {
+    width: $image-diameter-small;
+    height: $image-diameter-small;
+
+    &.medium {
+      width: $image-diameter-medium;
+      height: $image-diameter-medium;
+    }
+
+    &.large {
+      width: $image-diameter-large;
+      height: $image-diameter-large;
+    }
 }
 
 .container {
-    background-color: $color-card-bg;
-    border-radius: 100;
-    margin: 12;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: $color-card-bg;
 }
