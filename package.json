@@ -3,10 +3,10 @@
   "nativescript": {
     "id": "dk.kirby.design.system",
     "tns-ios": {
-      "version": "4.2.0"
+      "version": "5.0.0"
     },
     "tns-android": {
-      "version": "4.2.0"
+      "version": "5.0.0"
     }
   },
   "version": "0.0.31",
@@ -44,7 +44,7 @@
     "prismjs": "^1.15.0",
     "reflect-metadata": "~0.1.8",
     "rxjs": "^6.0.0",
-    "tns-core-modules": "^4.2.1",
+    "tns-core-modules": "^5.0.5",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
