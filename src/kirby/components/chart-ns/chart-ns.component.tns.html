@@ -12,14 +12,13 @@
     </RadPieChart>
     <StackLayout class="legend-stack">
         <StackLayout orientation="vertical" *ngFor="let item of (chartModels$ | async)">
-            <Label nowrap="true" class="legend-label">
+            <Label nowrap="true" class="legend-label roboto">
                 <FormattedString>
-                    <!-- Yes. It's a double full block. Because Label center doesn't work. -->
-                    <Span text="&#x2588;&#x2588;" class="bullit" [style.color]=item.color></Span>
-                    <Span text="  " class="legend-text"></Span>
-                    <Span [text]="item.type" class="legend-text"></Span>
-                    <Span text=" " class="legend-text"></Span>
-                    <Span [text]="item.labelPercentage" class="legend-text"></Span>
+                    <Span text="&#x2588;" class="roboto" [style.color]=item.color></Span> 
+                    <Span text="  " class="roboto"></Span>
+                    <Span [text]="item.type" class="legend-text roboto"></Span>
+                    <Span text=" " class="roboto"></Span>
+                    <Span [text]="item.labelPercentage" class="legend-text roboto"></Span>
                 </FormattedString>
             </Label>
         </StackLayout>

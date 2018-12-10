@@ -45,8 +45,6 @@ $color-gray: #333333;
     font-size: font-size("n");
     color: $color-gray;
 }
-.bullit {
-    @extend %legend-shared;
-    font-family: Arial, sans-serif;
-    font-size: font-size("xs");
+.roboto {
+    font-family: 'Roboto';
 }

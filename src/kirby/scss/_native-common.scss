@@ -2,8 +2,6 @@
 // This is where the vast majority of your CSS code goes.
 @import '../components/button/button.component.tns.global.scss';
 
-* {
-  font-family: "Effra";
-  font-size: 26;
-  text-transform: none;
-} 
+* {   
+    font-family: 'Roboto Regular';
+}

@@ -44,6 +44,7 @@
     "nativescript-ui-chart": "^3.9.1",
     "prismjs": "^1.15.0",
     "reflect-metadata": "~0.1.8",
+    "reveal-plugin-ios": "file:../reveal-plugin-ios",
     "rxjs": "^6.0.0",
     "tns-core-modules": "^4.2.1",
     "zone.js": "^0.8.26"
