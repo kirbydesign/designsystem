@@ -12,13 +12,14 @@
     </RadPieChart>
     <StackLayout class="legend-stack">
         <StackLayout orientation="vertical" *ngFor="let item of (chartModels$ | async)">
-            <Label nowrap="true" class="legend-label roboto">
+            <Label nowrap="true" class="legend-label">
                 <FormattedString>
+                    <!-- First span seems to determine font family. -->
                     <Span text="&#x2588;" class="roboto" [style.color]=item.color></Span> 
-                    <Span text="  " class="roboto"></Span>
-                    <Span [text]="item.type" class="legend-text roboto"></Span>
-                    <Span text=" " class="roboto"></Span>
-                    <Span [text]="item.labelPercentage" class="legend-text roboto"></Span>
+                    <Span text="  "></Span>
+                    <Span [text]="item.type" class="legend-text"></Span>
+                    <Span text=" "></Span>
+                    <Span [text]="item.labelPercentage" class="legend-text"></Span>
                 </FormattedString>
             </Label>
         </StackLayout>
