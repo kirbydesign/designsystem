@@ -1,20 +1,38 @@
-$bacon-height: 130px;
-$bacon-width: 130px;
+@import '../../../kirby/scss/web-imports';
 
-kirby-card-header {
-  color: var(--kirby-on-primary);
-  background-color: var(--kirby-primary);
-  padding-bottom: $bacon-width / 2;
-  margin-bottom: $bacon-width / 2;
+kirby-card {
   position: relative;
 }
 
-.img-wrapper {
-  width: $bacon-width;
-  height: $bacon-height;
-  border-radius: 50%;
-  overflow: hidden;
+.card__content {
+  padding: size("gutter");
+}
+
+kirby-card::after {
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  content: 'no size class';
+  background-color: #a7a7a7;
+  bottom: size("m");
+  left: size("m");
+  color: white;
+  padding: 0 size("m");
+  border-radius: 5px;
+}
+
+kirby-card {
+  --cardSmallBackgroundColor: #8dabee;
+  --cardMediumBackgroundColor: #d2a2ee;
+  --cardLargeBackgroundColor: #d8b280;
+  &.card-small::after {
+    content: 'small';
+    background-color: var(--cardSmallBackgroundColor);
+  }
+  &.card-medium::after {
+    content: 'medium';
+    background-color: var(--cardMediumBackgroundColor);
+  }
+  &.card-large::after {
+    content: 'large';
+    background-color: var(--cardLargeBackgroundColor);
+  }
 }
