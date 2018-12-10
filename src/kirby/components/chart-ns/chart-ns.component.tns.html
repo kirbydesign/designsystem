@@ -14,7 +14,10 @@
         <StackLayout orientation="vertical" *ngFor="let item of (chartModels$ | async)">
             <Label nowrap="true" class="legend-label">
                 <FormattedString>
-                    <!-- First span seems to determine font family. -->
+                    <!-- 
+                        Determining the font family seems only to work with the first span. 
+                        The global font family or any other placement doesn't work.
+                    -->
                     <Span text="&#x2588;" class="roboto" [style.color]=item.color></Span> 
                     <Span text="  "></Span>
                     <Span [text]="item.type" class="legend-text"></Span>
