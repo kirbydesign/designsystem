@@ -1,18 +1,9 @@
 <kirby-card class="theme--cookbook">
-  <kirby-card-header [title]="'Card-header Titel'" [subtitle]="'Card-header Subtitel'">
-    <div class="img-wrapper">
-      <img src="https://via.placeholder.com/130" alt="Some image" />
-    </div>
+  <kirby-card-header [title]="'Titel'" [subtitle]="'Subtitel'">
   </kirby-card-header>  
-  <div>
-    <kirby-list [items]="[
-    {title: 'Titel', amount: 'Beløb'},
-    {title: 'Titel', amount: 'Beløb'},
-    {title: 'Titel', amount: 'Beløb'},
-    {title: 'Titel', amount: 'Beløb'}
-    ]"></kirby-list>        
+  <!-- Card content example: -->
+  <div class="card__content">
   </div>
-  <kirby-card-footer>
-    <button kirby-button expand="block" shape="round">Tekst på knap</button>
-  </kirby-card-footer>
+
+  <kirby-card-footer></kirby-card-footer>
 </kirby-card>
