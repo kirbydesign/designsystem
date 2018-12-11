@@ -23,7 +23,7 @@ $themes: (
   )
 );
 
-@function get-color($map, $variant) {
+@function get-color($variant, $map: map-get($themes, 'dark')) {
   $value: map-get($map, $variant);
   @if $value != null {
     @return $value;
