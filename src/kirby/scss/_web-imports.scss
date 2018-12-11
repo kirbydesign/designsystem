@@ -5,3 +5,12 @@ $native: false;
 @import './common-variables';
 @import './web-variables';
 @import './themes/common-themes';
+
+:root {
+    --kirby-primary: #{get-color('primary')};
+    --kirby-on-primary: #{get-color('on-primary')};
+    --kirby-secondary: #{get-color('secondary')};
+    --kirby-on-secondary: #{get-color('on-secondary')};
+    --kirby-surface: #{get-color('surface')};
+    --kirby-on-surface: #{get-color('on-surface')};
+}
