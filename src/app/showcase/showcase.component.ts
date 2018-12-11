@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -10,9 +10,11 @@ import { filter } from 'rxjs/operators';
 })
 export class ShowcaseComponent implements OnInit, OnDestroy {
   exampleComponentName: string;
+  exampleComponentGitUrl: string;
   private routerEventsSubscription: Subscription;
+  private gitUrl = 'https://github.com/kirbydesign/designsystem/tree/master/src/app/examples/';
 
-  constructor(private router: Router, private route: ActivatedRoute) {
+  constructor(private router: Router, private route: ActivatedRoute, private cRef: ElementRef) {
     this.subscribeToRouterEvents();
   }
 
@@ -34,6 +36,7 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
     this.exampleComponentName = urlSegments.length
                                 ? urlSegments[urlSegments.length - 1]
                                 : undefined;
+    this.exampleComponentGitUrl = this.gitUrl + urlSegments.pop() + '-example';
   }
 
 }

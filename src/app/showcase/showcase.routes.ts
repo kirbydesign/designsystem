@@ -17,11 +17,11 @@ export const routes: Routes = [
                 pathMatch: 'full',
             },
             {
-                path: 'buttons',
+                path: 'button',
                 component: ButtonShowcaseComponent
             },
             {
-                path: 'cards',
+                path: 'card',
                 component: CardShowcaseComponent
             },
             {

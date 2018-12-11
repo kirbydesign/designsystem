@@ -1,3 +1,32 @@
-.popout {
+.showcase-cta-box {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     float: right;
+    background-color: #ececec;
+    box-shadow: 0px 3px 0px 0px rgba(25, 23, 23, 0.23);
+    margin: 1rem 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+
+    &__link {
+        display: inline-flex;
+        align-items: center;
+        text-decoration: none;
+        padding: 0.3rem 0;
+        color: gray;
+        width: 100%;
+        transition: 0.15s ease-in-out background-color;
+        &:hover {
+            background-color: #e2e2e2;
+        }
+    }
+}
+
+.icon {
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.5rem;
+    color: currentColor;
+    fill: currentColor;
 }

@@ -12,11 +12,11 @@ export const routes: Routes = [
         redirectTo: 'grid',
     },
     {
-        path: 'buttons',
+        path: 'button',
         component: ButtonExampleComponent
     },
     {
-        path: 'cards',
+        path: 'card',
         component: CardExampleComponent
     },
     {
