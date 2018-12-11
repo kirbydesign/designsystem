@@ -19,8 +19,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "dist": "ng build --prod --aot --progress false",
-    "android": "tns run android --bundle",
-    "ios": "tns run ios --bundle --device 'iPhone X'",
+    "android": "tns run android --hmr",
+    "ios": "tns run ios --hmr --device 'iPhone X'",
     "pack-copy-to-dist-folder-watch": "cpx \"src\\kirby\\**\\!(*.spec.ts)\" dist-lib --watch",
     "postversion": "git push && git push --tags"
   },
