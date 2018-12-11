@@ -1,7 +1,8 @@
 /**
  * Always remember to keep this class and _native-variables.scss in sync when needed
  */
-export class ScssHelper {
+// TODO TRM/JEO Parse from scss files instead!!1!!
+ export class ScssHelper {
   public static BORDER_RADIUS = 18.0;
 
   // Elevation
@@ -9,7 +10,7 @@ export class ScssHelper {
   public static ELEVATION_IMAGE = 12;
 
   // Breakpoints
-  public static BREAKPOINT_SCREEN_L = 688 + 32;
+  public static BREAKPOINT_SCREEN_L = 720;
   public static BREAKPOINT_CARD_S = 320;
   public static BREAKPOINT_CARD_M = 460;
   public static BREAKPOINT_CARD_L = 820;
