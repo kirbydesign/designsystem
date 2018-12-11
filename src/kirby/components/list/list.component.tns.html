@@ -1,9 +1,6 @@
 <ListView [items]="items">
-        <lv:RadListView.listViewLayout>
-            <lv:ListViewLinearLayout scrollDirection="Vertical" />
-        </lv:RadListView.listViewLayout>
-        <RadListView.itemTemplate>
-            <ng-container *ngTemplateOutlet="rowTemplate;context:item">
-            </ng-container>
-        </RadListView.itemTemplate>
-    </RadListView>
+    <ng-template let-item="item">
+        <ng-container *ngTemplateOutlet="listItemTemplate; context: {$implicit: item}">
+        </ng-container>
+    </ng-template>
+</ListView>

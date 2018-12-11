@@ -1,1 +1,8 @@
-<Button text="list-example works!" class="btn btn-primary"></Button>
+<kirby-list [items]="myItems">
+    <ng-container *kirbyListItem="let item">
+        <StackLayout>
+            <Label text="{{ text }}" textWrap="true"  />
+            <Label text="{{ amount }}" />
+        </StackLayout>
+    </ng-container>
+</kirby-list>
