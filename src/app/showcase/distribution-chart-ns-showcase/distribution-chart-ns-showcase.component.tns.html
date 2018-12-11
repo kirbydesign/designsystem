@@ -1,0 +1,10 @@
+<FlexboxLayout>
+    <kirby-card>
+      <kirby-card-header [title]="title" [subtitle]="subtitle">
+      </kirby-card-header>
+        <kirby-distribution-chart-ns [chartModels$]="chartModels$"></kirby-distribution-chart-ns>
+      <kirby-card-footer>
+        <Button kirby-button [text]="buttonText" expand="block" shape="round"></Button>
+      </kirby-card-footer>
+    </kirby-card>
+</FlexboxLayout>

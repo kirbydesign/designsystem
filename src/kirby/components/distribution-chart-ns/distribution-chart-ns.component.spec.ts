@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ChartNsComponent } from './chart-ns.component';
+import { DistributionChartNsComponent } from './distribution-chart-ns.component';
 
 describe('ChartComponent', () => {
-  let component: ChartNsComponent;
-  let fixture: ComponentFixture<ChartNsComponent>;
+  let component: DistributionChartNsComponent;
+  let fixture: ComponentFixture<DistributionChartNsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ChartNsComponent ]
+      declarations: [ DistributionChartNsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ChartNsComponent);
+    fixture = TestBed.createComponent(DistributionChartNsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

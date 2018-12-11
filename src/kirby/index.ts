@@ -5,6 +5,6 @@ export { ListComponent } from './components/list/list.component';
 export { IconComponent } from './components/icon/icon.component';
 export { GridComponent } from './components/grid/grid.component';
 export { ImageComponent } from './components/image/image.component';
-export { ChartNsComponent, ChartModel } from './components/chart-ns/chart-ns.component';
+export { DistributionChartNsComponent, ChartModel } from './components/distribution-chart-ns/distribution-chart-ns.component';
 
 
