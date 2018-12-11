@@ -1,10 +1,9 @@
-import {Routes} from '@angular/router';
-
+import { Routes } from '@angular/router';
+import { AvatarExampleComponent } from './avatar-example/avatar-example.component';
 import { ButtonExampleComponent } from './button-example/button-example.component';
 import { CardExampleComponent } from './card-example/card-example.component';
-import { ListExampleComponent } from './list-example/list-example.component';
 import { GridExampleComponent } from './grid-example/grid-example.component';
-import { ImageExampleComponent } from './image-example/image-example.component';
+import { ListExampleComponent } from './list-example/list-example.component';
 
 export const routes: Routes = [
     {
@@ -28,7 +27,7 @@ export const routes: Routes = [
         component: GridExampleComponent
     },
     {
-        path: 'image',
-        component: ImageExampleComponent
+        path: 'avatar',
+        component: AvatarExampleComponent
     }
 ];
