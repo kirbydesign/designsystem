@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'kirby-image',
-  templateUrl: './image.component.html',
-  styleUrls: ['./image.component.scss']
+  selector: 'kirby-avatar',
+  templateUrl: './avatar.component.html',
+  styleUrls: ['./avatar.component.scss']
 })
-export class ImageComponent implements OnInit {
+export class AvatarComponent implements OnInit {
 
   @Input() imageSrc: string;
   @Input() altText: string;

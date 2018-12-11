@@ -4,16 +4,15 @@ import { OrientationChangedEventData } from 'application';
 import { EventData, View } from 'tns-core-modules/ui/core/view/view';
 import { ScssHelper } from '../../scss/scss-helper';
 
-
 declare const CGSizeMake: any;
 declare const android: any;
 
 @Component({
-  selector: 'kirby-image',
-  templateUrl: './image.component.html',
-  styleUrls: ['./image.component.scss']
+  selector: 'kirby-avatar',
+  templateUrl: './avatar.component.html',
+  styleUrls: ['./avatar.component.scss']
 })
-export class ImageComponent implements OnInit {
+export class AvatarComponent implements OnInit {
 
   @Input() imageSrc: string;
   @Input() altText: string;
