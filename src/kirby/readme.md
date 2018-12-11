@@ -30,6 +30,19 @@ Install through NPM:
 npm install @kirbydesign/designsystem
 ```
 
+Include the Kirby Sass variables in your app:
+
+* Web (eg. in `src/styles.scss`):
+  ```css
+  @import '~@kirbydesign/designsystem/scss/web-imports';
+  ```
+* {N} (eg. in `src/_app-variables.scss`)::
+  ```css
+  @import '~@kirbydesign/designsystem/scss/native-common';
+  ```
+
+
+
 **Please note:** To enable typescript compilation of the package in your project, you need to add the following to your `tsconfig.json`:
 
 ```json
