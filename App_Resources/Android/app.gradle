@@ -8,7 +8,6 @@
 android {  
   defaultConfig {  
     generatedDensities = []
-    applicationId = "dk.kirby.design.system"
     
     //override supported platforms
     // ndk {
