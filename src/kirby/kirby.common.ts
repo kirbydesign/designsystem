@@ -5,7 +5,7 @@ import { CardHeaderComponent } from './components/card/card-header/card-header.c
 import { CardComponent } from './components/card/card.component';
 import { GridComponent } from './components/grid/grid.component';
 import { IconComponent } from './components/icon/icon.component';
-import { ListComponent } from './components/list/list.component';
+import { ListComponent, ListItemDirective } from './components/list/list.component';
 import { ComponentLoaderDirective } from './components/shared/component-loader.directive';
 
 export const declarations = [
@@ -14,6 +14,7 @@ export const declarations = [
   CardFooterComponent,
   ButtonComponent,
   ListComponent,
+  ListItemDirective,
   IconComponent,
   GridComponent,
   ComponentLoaderDirective,

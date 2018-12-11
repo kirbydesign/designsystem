@@ -1,6 +1,8 @@
 <ul>
-  <li *ngFor="let item of items">
-    <p>{{item.title}}</p>
-    <p>{{item.amount}}</p>
-  </li>
+  <ng-container *ngIf="items">
+    <li *ngFor="let item of items">
+      <ng-container *ngTemplateOutlet="listItemTemplate; context: {$implicit: item}">
+      </ng-container>
+    </li>
+  </ng-container>
 </ul>
