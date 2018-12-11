@@ -36,7 +36,7 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
     this.exampleComponentName = urlSegments.length
                                 ? urlSegments[urlSegments.length - 1]
                                 : undefined;
-    this.exampleComponentGitUrl = this.gitUrl + urlSegments.pop() + '-example';
+    //this.exampleComponentGitUrl = this.gitUrl + urlSegments.pop() + '-example';
   }
 
 }
