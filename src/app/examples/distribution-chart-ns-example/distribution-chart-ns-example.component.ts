@@ -68,7 +68,6 @@ export class DistributionChartNsExampleComponent implements OnInit {
 
   convertToChartModel(distributions$: Observable<Distribution[]>, colors: string[]): Observable<ChartModel[]> {
     let index = 0;
-    console.log('hit');
     return distributions$.pipe(map(distributions => {
       return distributions.map(distribution => {
         const currentIndex = index;
