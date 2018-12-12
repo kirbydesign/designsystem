@@ -12,7 +12,7 @@ Button[kirby-button] {
   &[colortype='secondary'] {
     color: get-color('on-secondary');
     background-color: get-color('secondary');
-    border-color: get-color('on-secondary');
+    border-color: get-color('secondary');
   }
   
   &[shape='round'] {
