@@ -17,10 +17,25 @@
          * Registers handlers for native events.
          */
         function addNativeMsgListener() {
+            var chart;
             oWebViewInterface.on('loadChartData', function (chartData) {
-                chartData.options.chart.height = chartData.height - 40;
-                var chart = Highcharts.chart('chart', chartData.options);
+                configureChartOptions(chartData);
+                chart = Highcharts.chart('chart', chartData.options);
             });
+            
+            oWebViewInterface.on('updateChart', function (chartData) {
+                configureChartOptions(chartData);
+                chart = Highcharts.chart('chart', chartData.options);
+            });
+        }
+
+        function configureChartOptions(chartData) {
+            chartData.options.chart.height = chartData.height;
+            if (chartData.options.chart.type === 'pie') {
+                chartData.options.plotOptions.pie.point.events.legendItemClick = function(e) {
+                    return e.preventDefault();
+                }
+            }
         }
 
         function init() {

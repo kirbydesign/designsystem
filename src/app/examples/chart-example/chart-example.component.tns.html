@@ -2,39 +2,28 @@
     <kirby-card class="theme--cookbook">
         <kirby-card-header [title]="'Chart'" [subtitle]="'Example'">
         </kirby-card-header>
-        <kirby-chart [height]="320" [options]="{
-            chart: {
-                type: 'pie'
-            },
-            title: {
-                text: ''
-            },
-            plotOptions: {
-                pie: {
-                    innerSize: 120,
-                    allowPointSelect: false,
-                    cursor: 'pointer',
-                    dataLabels: {
-                        enabled: false
-                    }
-                },
-                series: {
-                    animation: false
-                }
-            },
-            series: [{
-                name: 'fordeling',
-                data: [
-                    ['Aktier', 20],
-                    ['ETF', 3],
-                    ['Certifikater', 25],
-                    ['Obligationer', 52]                    
-                ]
-            }],
-            credits: {
-                enabled: false
-            }
-        }"></kirby-chart>
+        <kirby-chart [height]="360" [type]="'donut'" [dataLabelsEnabled]="true" [description]="'Fun things'" [data]="[
+        {
+            name: 'Boomerangs 20%',
+            y: 20,
+            label: '20%'
+        },
+        {
+            name: 'Bubbles 41%',
+            y: 41,
+            label: '41%'
+        },
+        {
+            name: 'Jumping 33%',
+            y: 33,
+            label: '33%'
+        },
+        {
+            name: 'Christmas < 1%',
+            y: 1,
+            label: '< 1%'
+        }
+    ]"></kirby-chart>
         <kirby-card-footer>
             <Label text="Button goes here"></Label>
         </kirby-card-footer>
