@@ -8,7 +8,8 @@ describe('ChartComponent', () => {
 
   const options: Options = {
     chart: {
-        type: 'pie'
+        type: 'pie',
+        description: ''
     },
     title: {
         text: ''
@@ -17,10 +18,7 @@ describe('ChartComponent', () => {
         pie: {
             innerSize: 120,
             allowPointSelect: false,
-            cursor: 'pointer',
-            dataLabels: {
-                enabled: false
-            }
+            cursor: 'pointer'
         },
         series: {
             animation: false
@@ -28,12 +26,7 @@ describe('ChartComponent', () => {
     },
     series: [{
         name: 'fordeling',
-        data: [
-            ['Aktier', 20],
-            ['ETF', 3],
-            ['Certifikater', 25],
-            ['Obligationer', 52]
-        ]
+        data: []
     }],
     credits: {
         enabled: false
@@ -73,6 +66,44 @@ describe('ChartComponent', () => {
     component.height = expectedHeight;
     component.ngOnInit();
     expect(component.options['chart'].height).toBe(expectedHeight);
+  });
+
+  it('should have correct default chart type', () => {
+    expect(component.options['chart'].type).toBe('pie');
+  });
+
+  it('should have dataLabels enabled as default', () => {
+    expect(component.options['plotOptions'].pie.dataLabels.enabled).toBe(true);
+  });
+
+  it('should disable dataLabels when set', () => {
+    component.dataLabelsEnabled = false;
+    component.ngOnInit();
+    expect(component.options['plotOptions'].pie.dataLabels.enabled).toBe(false);
+  });
+
+  it('should have correct donut chart type', () => {
+    component.type = 'donut';
+    component.ngOnInit();
+    expect(component.options['chart'].type).toBe('pie'); // donut should be converted to pie
+  });
+
+  it('should have correct input data', () => {
+    component.data = [
+      {
+          name: 'Boomerangs 20%',
+          y: 20,
+          label: '20%'
+      },
+      {
+          name: 'Bubbles 41%',
+          y: 41,
+          label: '41%'
+      }
+  ];
+    component.ngOnInit();
+    expect(component.options['series'][0].data.length).toBe(2);
+    expect(component.options['series'][0].data[0]['name']).toBe('Boomerangs 20%');
   });
 
 });
