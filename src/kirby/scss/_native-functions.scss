@@ -1,7 +1,7 @@
 @mixin get-theme-style($property: 'color', $color: 'primary') {
   @each $name, $theme in $themes {
     &.theme--#{$name} {
-      #{$property}: #{get-color($theme, $color)};
+      #{$property}: #{get-color($color, $theme)};
     }
   }
 }

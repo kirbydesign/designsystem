@@ -31,7 +31,7 @@ export class DonutOptions {
             plotOptions: {
                 pie: {
                     colors: ['#015132', '#B2D1BF', '#AABC08', '#1FA05A', 'yellowgreen'],
-                    innerSize: ChartValues.INNER_SIZE_SMALL,
+                    innerSize: '50%',
                     allowPointSelect: false,
                     cursor: 'pointer',
                     showInLegend: true,
@@ -84,12 +84,6 @@ export class DonutOptions {
                             symbolWidth: 14,
                             symbolHeight: 14,
                             x: -100
-                        },
-                        plotOptions: {
-                            pie: {
-                                innerSize: ChartValues.INNER_SIZE_LARGE,
-                                allowPointSelect: false
-                            }
                         }
                     }
                 },

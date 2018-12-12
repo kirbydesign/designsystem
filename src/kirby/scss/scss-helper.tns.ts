@@ -8,6 +8,7 @@ export class ScssHelper {
 
   // Elevation
   public static ELEVATION_CARD_RESTING = 8;
+  public static ELEVATION_IMAGE = 12;
 
   // Breakpoints
   public static BREAKPOINT_SCREEN_L = 688 + 32;

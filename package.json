@@ -3,13 +3,13 @@
   "nativescript": {
     "id": "dk.kirby.design.system",
     "tns-ios": {
-      "version": "4.2.0"
+      "version": "5.0.0"
     },
     "tns-android": {
-      "version": "4.2.0"
+      "version": "5.0.0"
     }
   },
-  "version": "0.0.24",
+  "version": "0.0.36",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -19,41 +19,43 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "dist": "ng build --prod --aot --progress false",
-    "android": "tns run android --bundle",
-    "ios": "tns run ios --bundle --device 'iPhone X'",
+    "android": "tns run android --hmr",
+    "android-debug": "tns debug android --bundle",
+    "ios": "tns run ios --hmr --device 'iPhone X'",
+    "ios-debug": "tns debug ios --bundle --device 'iPhone X'",
     "pack-copy-to-dist-folder-watch": "cpx \"src\\kirby\\**\\!(*.spec.ts)\" dist-lib --watch",
     "postversion": "git push && git push --tags"
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "~6.1.0",
-    "@angular/common": "~6.1.0",
-    "@angular/compiler": "~6.1.0",
-    "@angular/core": "~6.1.0",
-    "@angular/forms": "~6.1.0",
-    "@angular/http": "~6.1.0",
-    "@angular/platform-browser": "~6.1.0",
-    "@angular/platform-browser-dynamic": "~6.1.0",
-    "@angular/router": "~6.1.0",
+    "@angular/animations": "~7.0.0",
+    "@angular/common": "~7.0.0",
+    "@angular/compiler": "~7.0.0",
+    "@angular/core": "~7.0.0",
+    "@angular/forms": "~7.0.0",
+    "@angular/http": "~7.0.0",
+    "@angular/platform-browser": "~7.0.0",
+    "@angular/platform-browser-dynamic": "~7.0.0",
+    "@angular/router": "~7.0.0",
     "@types/prismjs": "^1.9.0",
     "core-js": "^2.5.4",
     "highcharts": "^6.2.0",
-    "nativescript-angular": "~6.1.0",
+    "nativescript-angular": "^7.0.3",
     "nativescript-orientation": "^2.2.1",
     "nativescript-platform-css": "^1.6.6",
     "nativescript-theme-core": "~1.0.4",
     "nativescript-webview-interface": "^1.4.2",
     "prismjs": "^1.15.0",
     "reflect-metadata": "~0.1.8",
-    "rxjs": "^6.0.0",
-    "tns-core-modules": "^4.2.1",
+    "rxjs": "^6.3.3",
+    "tns-core-modules": "^5.0.5",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.7.0",
     "@angular/cli": "~6.1.0",
-    "@angular/compiler-cli": "~6.0.3",
-    "@nativescript/schematics": "~0.2.0",
+    "@angular/compiler-cli": "~7.0.0",
+    "@nativescript/schematics": "^0.4.0",
     "@types/highcharts": "^5.0.34",
     "@types/jasmine": "~2.8.6",
     "@types/jasminewd2": "~2.0.3",
@@ -69,14 +71,14 @@
     "karma-jasmine": "~1.1.1",
     "karma-jasmine-html-reporter": "^0.2.2",
     "karma-junit-reporter": "^1.2.0",
-    "nativescript": "^4.2.4",
+    "nativescript": "^5.0.3",
     "nativescript-dev-sass": "~1.6.0",
-    "nativescript-dev-typescript": "~0.7.0",
-    "nativescript-dev-webpack": "^0.15.0",
+    "nativescript-dev-typescript": "^0.7.8",
+    "nativescript-dev-webpack": "^0.18.2",
     "protractor": "~5.3.0",
     "tns-platform-declarations": "^5.0.3",
     "ts-node": "~5.0.1",
     "tslint": "~5.9.1",
-    "typescript": "2.7.2"
+    "typescript": "~3.1.1"
   }
 }

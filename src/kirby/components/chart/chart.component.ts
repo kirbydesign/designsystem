@@ -1,7 +1,6 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, ElementRef, ViewChild } from '@angular/core';
 import { ChartObject, Options } from 'highcharts';
 import * as Highcharts from 'highcharts';
-// import { ChartValues } from './donut/chart-values';
 import { DonutOptions } from './donut/options';
 
 @Component({
@@ -20,6 +19,8 @@ export class ChartComponent implements OnInit, OnChanges {
 
   constructor() { }
 
+  @ViewChild('chartContainer') chartContainer: ElementRef;
+
   ngOnInit() {
     const chartType = this.type === 'donut' ? 'pie' : this.type;
     if (chartType === 'pie') {
@@ -27,7 +28,7 @@ export class ChartComponent implements OnInit, OnChanges {
       this.options.chart.type = chartType;
     }
     this.setChartProperties();
-    const chart: ChartObject = Highcharts.chart('chart-container', this.options);
+    const chart: ChartObject = Highcharts.chart(this.chartContainer.nativeElement, this.options);
   }
 
   ngOnChanges() {
@@ -36,7 +37,7 @@ export class ChartComponent implements OnInit, OnChanges {
 
   updateChart() {
     this.setChartProperties();
-    const chart: ChartObject = Highcharts.chart('chart-container', this.options);
+    const chart: ChartObject = Highcharts.chart(this.chartContainer.nativeElement, this.options);
   }
 
   setChartProperties() {
@@ -47,6 +48,10 @@ export class ChartComponent implements OnInit, OnChanges {
       this.options.plotOptions.pie.dataLabels.enabled = this.dataLabelsEnabled;
       this.options.plotOptions.pie.dataLabels.format = '{point.label}';
     }
+  }
+
+  generateRandomId() {
+    return Math.random().toString(36).substr(2, 9);
   }
 
 }

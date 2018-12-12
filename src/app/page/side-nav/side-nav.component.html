@@ -24,7 +24,7 @@
             Structure
         </a>
         <ul class="side-nav side-nav--sub">
-            <li><a href="#" class="side-nav__item">Component</a></li>
+            <li><a routerLink="showcase/grid" [routerLinkActive]="'is-selected'" class="side-nav__item">Grid</a></li>
             <li><a href="#" class="side-nav__item">Component</a></li>
             <li><a href="#" class="side-nav__item">Component</a></li>
         </ul>
@@ -47,7 +47,10 @@
             <svg class="icon">
                 <use xlink:href="../../assets/icons/icon-sprite.svg#icon-sleepy"></use>
             </svg>
-            What else, icons perhabs?
+            Other
         </a>
+        <ul class="side-nav side-nav--sub">
+          <li><a routerLink="showcase/avatar" [routerLinkActive]="'is-selected'" class="side-nav__item">Avatar</a></li>
+        </ul>
     </li>
 </ul>
