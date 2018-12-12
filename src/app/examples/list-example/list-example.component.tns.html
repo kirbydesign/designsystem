@@ -1,8 +1,8 @@
 <kirby-list [items]="myItems">
     <ng-container *kirbyListItem="let item">
         <StackLayout>
-            <Label text="{{ text }}" textWrap="true"  ></Label>
-            <Label text="{{ amount }}" ></Label>
+            <Label text="{{ item.text }}" textWrap="true"  ></Label>
+            <Label text="{{ item.amount }}" ></Label>
         </StackLayout>
     </ng-container>
 </kirby-list>

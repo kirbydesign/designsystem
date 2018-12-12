@@ -1,6 +1,8 @@
 <ListView [items]="items">
     <ng-template let-item="item">
-        <ng-container *ngTemplateOutlet="listItemTemplate; context: {$implicit: item}">
-        </ng-container>
+        <StackLayout>
+            <ng-container *ngTemplateOutlet="listItemTemplate; context: {$implicit: item}">
+            </ng-container>
+        </StackLayout>
     </ng-template>
 </ListView>
