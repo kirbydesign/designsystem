@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import {of, Subscription} from 'rxjs';
 
 import { ScssHelper } from '../../scss/scss-helper';
 import { BreakpointHelperService } from './breakpoint-helper.service';
@@ -32,12 +32,20 @@ export class GridComponent implements OnInit, OnDestroy {
   rows = 'auto,'; // Used in {N}'s gridlayout
   columns = '*,'; // Used in {N}'s gridlayout
   private breakpointSubscription: Subscription;
-
+  private subscription: Subscription;
   @Input() maxColumns: number;
 
   @Input()
   set cardConfigurations(cardConfigurations: GridCardConfiguration[]) {
     this.cardConfigs = cardConfigurations;
+    this.subscription = of(this.cardConfigs).subscribe((e) => {
+      this.configureGrid();
+      this.breakpointSubscription = this.breakpointHelper.observe().subscribe(
+          () => {
+            this.configureGrid();
+          }
+      );
+    });
   }
 
   constructor(private breakpointHelper: BreakpointHelperService) { }
@@ -59,7 +67,6 @@ export class GridComponent implements OnInit, OnDestroy {
     this.cardConfigs.forEach((card, index) => {
       // Cards colspan is added to the column counter
       columnCounter += card.preferredSize;
-      console.log('Iterating cards: ', card);
       // If only maxColumns are set to 1, just add all cards with a colspan of 1
       if (calculatedMaxColumns === 1) {
         this.cards.push(new GridCard(card, currentRow, currentColumn, 1));
@@ -99,16 +106,11 @@ export class GridComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // TODO TRM/JEO Remove this when breakpoint observe something something...
-    this.configureGrid();
 
-    this.breakpointSubscription = this.breakpointHelper.observe().subscribe(
-      () => {
-        this.configureGrid();
-      }
-    );
   }
 
   ngOnDestroy() {
+    this.subscription.unsubscribe();
     if (this.breakpointSubscription) {
       this.breakpointSubscription.unsubscribe();
     }
