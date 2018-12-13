@@ -15,4 +15,4 @@ import {HtmlViewerComponent} from '../shared/html-viewer/html-viewer.component';
   ],
   exports: COMPONENT_EXPORTS
 })
-export class ShowcaseModule { } 
+export class ShowcaseModule { }

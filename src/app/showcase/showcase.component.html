@@ -1,6 +1,6 @@
 <div class="show-case">
   <h1 class="show-case__header">{{exampleComponentName}}</h1>
-  <div class="showcase-cta-box">
+  <div class="showcase-cta-box" *ngIf="isCTABoxShown">
       <a [routerLink]="['/', 'examples', exampleComponentName]" class="showcase-cta-box__link">
         <svg class="icon">
           <use xlink:href="../../assets/icons/icon-sprite.svg#icon-enlarge2"></use>

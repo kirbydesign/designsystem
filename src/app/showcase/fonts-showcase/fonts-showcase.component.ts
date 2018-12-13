@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'kirby-fonts-showcase',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./fonts-showcase.component.scss']
 })
 export class FontsShowcaseComponent implements OnInit {
+
+  @Output() isCTABoxShown = new EventEmitter();
 
   constructor() { }
 

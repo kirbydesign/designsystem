@@ -1,0 +1,54 @@
+@import '../../../kirby/scss/web-imports';
+
+.fonts {
+  &__pre {
+    padding: 0.25rem 0 0 0;
+    display: block;
+    color: gray;
+  }
+
+  &__header-1,
+  &__header-2,
+  &__header-3,
+  &__header-4 {
+    font-weight: font-weight("normal");
+    line-height: 1.16;
+    margin-top: 1rem;
+    margin-bottom: 0;
+  }
+
+  &__display,
+  &__header-1 {
+    font-size: font-size("xxl");
+    &::after {
+      content: "(#{font-size("xxl")})";
+    }
+  }
+
+  &__header-2 {
+    font-size: font-size("xl");
+    &::after {
+      content: "(#{font-size("xl")})";
+    }
+  }
+
+  &__header-3 {
+    font-size: font-size("l");
+    &::after {
+      content: "(#{font-size("l")})";
+    }
+  }
+
+  &__header-4 {
+    font-size: font-size("m");
+    &::after {
+      content: "(#{font-size("m")})";
+    }
+  }
+}
+
+[class^="fonts__"]::after {
+  color: #db4fa5;
+  font-size: font-size("s");
+  margin-left: size("m");
+}

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -13,6 +13,8 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
   exampleComponentGitUrl: string;
   private routerEventsSubscription: Subscription;
   private gitUrl = 'https://github.com/kirbydesign/designsystem/tree/master/src/app/examples/';
+
+  @Input() isCTABoxShown = true;
 
   constructor(private router: Router) {
     this.subscribeToRouterEvents();
