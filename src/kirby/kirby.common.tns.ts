@@ -6,7 +6,6 @@ import { IconComponent } from './components/icon/icon.component';
 import { CardFooterComponent } from './components/card/card-footer/card-footer.component';
 import { GridComponent } from './components/grid/grid.component';
 import { ComponentLoaderDirective } from './components/shared/component-loader.directive';
-import { ImageComponent } from './components/image/image.component';
 import { DistributionChartNsComponent } from './components/distribution-chart-ns/distribution-chart-ns.component';
 
 export const declarations = [
@@ -18,6 +17,5 @@ export const declarations = [
     IconComponent,
     GridComponent,
     ComponentLoaderDirective,
-    ImageComponent,
     DistributionChartNsComponent,
   ];

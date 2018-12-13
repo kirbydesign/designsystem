@@ -3,8 +3,6 @@ import { ButtonExampleComponent } from './button-example/button-example.componen
 import { CardExampleComponent } from './card-example/card-example.component';
 import { GridExampleComponent } from './grid-example/grid-example.component';
 import { ListExampleComponent } from './list-example/list-example.component';
-import { GridExampleComponent } from './grid-example/grid-example.component';
-import { ImageExampleComponent } from './image-example/image-example.component';
 import { DistributionChartNsExampleComponent } from './distribution-chart-ns-example/distribution-chart-ns-example.component';
 
 export const COMPONENT_DECLARATIONS: any[] = [
@@ -12,7 +10,6 @@ export const COMPONENT_DECLARATIONS: any[] = [
   CardExampleComponent,
   ListExampleComponent,
   GridExampleComponent,
-  AvatarExampleComponent
-  ImageExampleComponent,
+  AvatarExampleComponent,
   DistributionChartNsExampleComponent
 ];

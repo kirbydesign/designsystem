@@ -19,7 +19,7 @@ export const COMPONENT_EXPORTS: any[] = [
     ButtonShowcaseComponent,
     ListShowcaseComponent,
     GridShowcaseComponent,
-    AvatarShowcaseComponent
+    AvatarShowcaseComponent,
     DistributionChartNsShowcaseComponent
 ];
 
