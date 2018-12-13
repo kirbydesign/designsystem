@@ -1,7 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, delay } from 'rxjs/operators';
 import { ChartModel } from '../../../kirby/components/distribution-chart-ns/distribution-chart-ns.component';
 
 export class Distribution {
@@ -26,11 +26,11 @@ export class DistributionChartNsExampleComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this._distributions$ = of(this.getDistributionsMock());
-    this._chartModels$ = this.convertToChartModel(this._distributions$, this._paletteColors);
     this.buttonText = 'Se mere';
     this.title = 'Investeringsoverblik';
     this.subtitle = '';
+    this._distributions$ = of(this.getDistributionsMock()).pipe(delay(1000));
+    this._chartModels$ = this.convertToChartModel(this._distributions$, this._paletteColors);
   }
 
   get chartModels$() {
