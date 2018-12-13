@@ -1,20 +1,23 @@
-import { Component, OnInit, NgZone } from '@angular/core';
-import { OrientationChangedEventData } from 'application';
+import { Component, Input, NgZone, OnInit } from '@angular/core';
 import * as app from 'application';
-import { View, EventData } from 'tns-core-modules/ui/core/view/view';
-
+import { OrientationChangedEventData } from 'application';
+import { EventData, View } from 'tns-core-modules/ui/core/view/view';
 import { ScssHelper } from '../../scss/scss-helper';
-import { FlexboxLayout } from 'tns-core-modules/ui/layouts/flexbox-layout/flexbox-layout';
 
 declare const CGSizeMake: any;
 declare const android: any;
 
 @Component({
-  selector: 'kirby-image',
-  templateUrl: './image.component.html',
-  styleUrls: ['./image.component.scss']
+  selector: 'kirby-avatar',
+  templateUrl: './avatar.component.html',
+  styleUrls: ['./avatar.component.scss']
 })
-export class ImageComponent implements OnInit {
+export class AvatarComponent implements OnInit {
+
+  @Input() imageSrc: string;
+  @Input() altText: string;
+  @Input() size: string;
+
   view: View;
 
   constructor(private zone: NgZone) { }
