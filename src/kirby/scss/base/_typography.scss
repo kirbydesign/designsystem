@@ -1,12 +1,12 @@
 $base-line-height: 1.66;
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p {
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6,
+p, .p {
   font-size: 100%;
   font-weight: weight("normal");
   margin: 0;
@@ -20,7 +20,7 @@ h1,
 }
 
 h2,
-.text--large {
+.text--xlarge {
   font-size: font-size("xl");
   line-height: $base-line-height;
 }
