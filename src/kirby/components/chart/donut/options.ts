@@ -2,6 +2,7 @@ import { ChartValues } from './chart-values';
 import { Options } from 'highcharts';
 
 export class DonutOptions {
+    private MIN_WIDTH = 640;
     get options(): Options {
         return {
             accessibility: {
@@ -72,7 +73,7 @@ export class DonutOptions {
             responsive: {
                 rules: [{
                     condition: {
-                        minWidth: ChartValues.BREAKPOINT
+                        minWidth: this.MIN_WIDTH
                     },
                     chartOptions: {
                         legend: {
