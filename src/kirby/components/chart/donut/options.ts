@@ -70,6 +70,9 @@ export class DonutOptions {
             credits: {
                 enabled: false
             },
+            exporting: {
+                enabled: false
+            },
             responsive: {
                 rules: [{
                     condition: {
