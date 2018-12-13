@@ -1,16 +1,31 @@
 @import '../../../kirby/scss/web-imports';
 
+code {
+  background-color: #023643;
+  color: #aabe27;
+  padding: 0.2rem 0.5rem;
+  border-radius: 2px;
+}
+
 .fonts {
   &__pre {
     padding: 0.25rem 0 0 0;
     display: block;
     color: gray;
+    background-color: transparent;
+  }
+
+  &__pre--highlight {
+    color: black;
+    font-weight: font-weight('bold');
   }
 
   &__header-1,
   &__header-2,
   &__header-3,
-  &__header-4 {
+  &__header-4,
+  &__body,
+  &__body-small {
     font-weight: font-weight("normal");
     line-height: 1.16;
     margin-top: 1rem;
@@ -45,6 +60,21 @@
       content: "(#{font-size("m")})";
     }
   }
+
+  &__body {
+    font-size: font-size("n");
+    &::after {
+      content: "(#{font-size("n")})";
+    }    
+  }
+
+  &__body-small {
+    font-size: font-size("s");
+    &::after {
+      content: "(#{font-size("s")})";
+    }    
+  }
+
 }
 
 [class^="fonts__"]::after {
