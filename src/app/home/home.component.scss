@@ -19,12 +19,9 @@ main {
   width: 100%;
   max-width: $page-max-width;
   margin: 0 auto;
-  padding-right: $page-gutter;
-}
-
-kirby-side-nav {
-  flex: 0 0 $page-side-nav-width;
-  height: calc(100vh - $page-header-height);
+  @include media(">=large") {
+    padding-right: $page-gutter;
+  }
 }
 
 section {

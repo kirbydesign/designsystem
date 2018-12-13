@@ -1,4 +1,7 @@
-<ul class="side-nav">
+<ul class="side-nav side-menu" [ngClass]="{'is-open': isMenuOpen}">
+  <button class="side-menu__close-btn" (click)="onToggleMenu()">
+      <kirby-icon name="cross"></kirby-icon>
+  </button>
   <li>
     <a routerLink="intro" [routerLinkActive]="'is-selected'" class="side-nav__item">Intro</a>
   </li>

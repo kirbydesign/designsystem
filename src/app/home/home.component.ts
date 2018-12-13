@@ -7,9 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
   title = 'Kirby Design System';
+  isMenuOpen = false;
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onMenuClick() {
+    this.isMenuOpen = !this.isMenuOpen;
+    console.log('onClickMenu kaldt: ' + this.isMenuOpen);
+  }
+
+  onMenuToggle(isOpen: boolean) {
+    console.log('Toggled kaldt...i home component');
+    this.isMenuOpen = isOpen;
   }
 }
