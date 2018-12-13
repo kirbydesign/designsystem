@@ -1,0 +1,48 @@
+$base-line-height: 1.66;
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  font-size: 100%;
+  font-weight: weight("normal");
+  margin: 0;
+  margin-top: size("m");
+}
+
+h1,
+.text--xxlarge {
+  font-size: font-size("xxl");
+  line-height: $base-line-height;
+}
+
+h2,
+.text--large {
+  font-size: font-size("xl");
+  line-height: $base-line-height;
+}
+
+h3,
+.text--large {
+  font-size: font-size("l");
+  line-height: $base-line-height;
+}
+
+h4,
+.text--medium {
+  font-size: font-size("m");
+  line-height: $base-line-height;
+}
+
+p,
+.text--normal {
+  font-size: font-size("n");
+  line-height: $base-line-height;
+}
+
+.text--small {
+  font-size: font-size("s");
+}

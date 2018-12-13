@@ -2,7 +2,7 @@
 .show-case {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 
   &__header {
     text-transform: uppercase;
@@ -64,6 +64,7 @@
   border-spacing: 0;
   border-collapse: collapse;
   width: 100%;
+  margin-top: size("m");
   thead {
     background-color: #f6f6f6;
   }
