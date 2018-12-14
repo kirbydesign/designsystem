@@ -8,9 +8,9 @@ import { Component, OnInit } from '@angular/core';
 export class ListExampleComponent implements OnInit {
 
   myItems = [
-    {text: 'Rema1000', amount: 1002.34},
-    {text: 'Føtex', amount: 20},
-    {text: 'Brugsen', amount: 78455468.76}
+    {text: 'Rema1000', amount: 1002.34, detail: 'Peter'},
+    {text: 'Føtex', amount: 20, detail: 'Jack'},
+    {text: 'Brugsen', amount: 78455468.76, detail: 'Morten'}
   ];
 
   constructor() { }

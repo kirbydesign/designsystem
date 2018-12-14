@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Directive, TemplateRef, ContentChild, OnDestroy } from '@angular/core';
 import { Observable, isObservable, Subscription } from 'rxjs';
+import { ListItemComponent } from './list-item/list-item.component';
 
 @Directive({
   selector: '[kirbyListItem]'
