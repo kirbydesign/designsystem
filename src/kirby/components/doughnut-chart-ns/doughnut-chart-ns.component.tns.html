@@ -1,17 +1,17 @@
 <FlexboxLayout class="background">
     <RadPieChart allowAnimation="true" class="pie-chart">
         <DonutSeries tkPieSeries seriesName="pie-palette" stackMode="stack" showPercentage="true" startAngle="{{startAngle}}" endAngle="{{endAngle}}"
-            selectionMode="None" outerRadiusFactor="1.0" innerRadiusFactor="0.6" [items]="chartModels$ | async"
+            selectionMode="None" outerRadiusFactor="1.0" innerRadiusFactor="0.6" [items]="chartModels"
             valueProperty="drawingPercentage" showLabels="false" legendLabel="label">
         </DonutSeries>
         <Palette tkPiePalette seriesName="pie-palette">
-            <ng-container *ngFor="let item of (chartModels$ | async)">
+            <ng-container *ngFor="let item of chartModels">
                 <PaletteEntry tkPiePaletteEntry [fillColor]=item.color [strokeColor]=item.color></PaletteEntry>
             </ng-container>
         </Palette>
     </RadPieChart>
     <StackLayout class="legend-stack">
-        <StackLayout orientation="vertical" *ngFor="let item of (chartModels$ | async)">
+        <StackLayout orientation="vertical" *ngFor="let item of chartModels">
             <Label nowrap="true" class="legend-label">
                 <FormattedString>
                     <!-- 

@@ -20,7 +20,7 @@ export class ChartModel {
   styleUrls: ['./doughnut-chart-ns.component.tns.scss']
 })
 export class DoughnutChartNsComponent implements OnInit {
-  private _chartModels$: Observable<ChartModel[]>;
+  private _chartModels: ChartModel[];
   public showLegend: boolean;
   public headline: string;
 
@@ -31,12 +31,12 @@ export class DoughnutChartNsComponent implements OnInit {
   ngOnInit() {}
 
   @Input()
-  set chartModels$(chartModels$: Observable<ChartModel[]>) {
-    this._chartModels$ = chartModels$;
+  set chartModels(chartModels: ChartModel[]) {
+    this._chartModels = chartModels;
   }
 
-  get chartModels$(): Observable<ChartModel[]> {
-    return this._chartModels$;
+  get chartModels(): ChartModel[] {
+    return this._chartModels;
   }
 
   get startAngle(): number {
