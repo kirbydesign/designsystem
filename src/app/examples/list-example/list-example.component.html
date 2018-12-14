@@ -1,6 +1,7 @@
 <kirby-list [items]="myItems">
-  <ng-container *kirbyListItem="let item">
+  <!-- <ng-container *kirbyListItem="let item">
     <span>{{item.text}}</span>
     <span>{{item.amount}}</span>
-  </ng-container>
+  </ng-container> -->
+  <kirby-list-item *kirbyListItem="let item" [item]="item"></kirby-list-item>
 </kirby-list>

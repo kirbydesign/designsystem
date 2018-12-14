@@ -1,0 +1,14 @@
+.item-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.title-container {
+    flex: 1;
+}
+
+.details-container {
+    margin-left: auto;
+    flex: 1;
+    display: flex;
+}
