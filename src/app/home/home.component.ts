@@ -16,11 +16,9 @@ export class HomeComponent implements OnInit {
 
   onMenuClick() {
     this.isMenuOpen = !this.isMenuOpen;
-    console.log('onClickMenu kaldt: ' + this.isMenuOpen);
   }
 
   onMenuToggle(isOpen: boolean) {
-    console.log('Toggled kaldt...i home component');
     this.isMenuOpen = isOpen;
   }
 }

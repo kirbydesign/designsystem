@@ -23,7 +23,6 @@ export class HeaderComponent implements OnInit {
   onToggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
     this.menuToggled.emit(this.isMenuOpen);
-    console.log('Fra app-menu - isMenuOpen: ' + this.isMenuOpen);
   }
 
 }
