@@ -7,7 +7,7 @@ import { GridShowcaseComponent } from './grid-showcase/grid-showcase.component';
 import { ListShowcaseComponent } from './list-showcase/list-showcase.component';
 import { ShowcaseRoutingModule } from './showcase-routing.module';
 import { ShowcaseComponent } from './showcase.component';
-import { DistributionChartNsShowcaseComponent } from './distribution-chart-ns-showcase/distribution-chart-ns-showcase.component';
+import { DoughnutChartNsShowcaseComponent } from './doughnut-chart-ns-showcase/doughnut-chart-ns-showcase.component';
 
 export const COMPONENT_IMPORTS: any[] = [
     ExamplesModule,
@@ -20,7 +20,7 @@ export const COMPONENT_EXPORTS: any[] = [
     ListShowcaseComponent,
     GridShowcaseComponent,
     AvatarShowcaseComponent,
-    DistributionChartNsShowcaseComponent
+    DoughnutChartNsShowcaseComponent
 ];
 
 export const COMPONENT_DECLARATIONS: any[] = [

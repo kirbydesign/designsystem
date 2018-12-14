@@ -6,7 +6,7 @@ import { IconComponent } from './components/icon/icon.component';
 import { CardFooterComponent } from './components/card/card-footer/card-footer.component';
 import { GridComponent } from './components/grid/grid.component';
 import { ComponentLoaderDirective } from './components/shared/component-loader.directive';
-import { DistributionChartNsComponent } from './components/distribution-chart-ns/distribution-chart-ns.component';
+import { DoughnutChartNsComponent } from './components/doughnut-chart-ns/doughnut-chart-ns.component';
 
 export const declarations = [
     CardComponent,
@@ -17,5 +17,5 @@ export const declarations = [
     IconComponent,
     GridComponent,
     ComponentLoaderDirective,
-    DistributionChartNsComponent,
+    DoughnutChartNsComponent,
   ];

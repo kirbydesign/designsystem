@@ -5,7 +5,7 @@ import { ButtonExampleComponent } from './button-example/button-example.componen
 import { CardExampleComponent } from './card-example/card-example.component';
 import { GridExampleComponent } from './grid-example/grid-example.component';
 import { ListExampleComponent } from './list-example/list-example.component';
-import { DistributionChartNsExampleComponent } from './distribution-chart-ns-example/distribution-chart-ns-example.component';
+import { DoughnutChartNsExampleComponent } from './doughnut-chart-ns-example/doughnut-chart-ns-example.component';
 
 
 export const routes: Routes = [
@@ -34,7 +34,7 @@ export const routes: Routes = [
         component: AvatarExampleComponent
     },
     {
-        path: 'distribution-chart-ns',
-        component: DistributionChartNsExampleComponent
+        path: 'doughnut-chart-ns',
+        component: DoughnutChartNsExampleComponent
     }
 ];

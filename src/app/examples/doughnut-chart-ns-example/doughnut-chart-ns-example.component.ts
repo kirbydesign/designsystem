@@ -2,7 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map, delay } from 'rxjs/operators';
-import { ChartModel } from '../../../kirby/components/distribution-chart-ns/distribution-chart-ns.component';
+import { ChartModel } from '../../../kirby/components/doughnut-chart-ns/doughnut-chart-ns.component';
 
 export class Distribution {
   constructor(public type?: string, public percentage?: number, public drawingPercentage?: number, public labelPercentage?: string) {
@@ -10,12 +10,12 @@ export class Distribution {
 }
 
 @Component({
-  selector: 'kirby-distribution-chart-ns-example',
-  templateUrl: './distribution-chart-ns-example.component.html',
-  styleUrls: ['./distribution-chart-ns-example.component.scss']
+  selector: 'kirby-doughnut-chart-ns-example',
+  templateUrl: './doughnut-chart-ns-example.component.html',
+  styleUrls: ['./doughnut-chart-ns-example.component.scss']
 })
 
-export class DistributionChartNsExampleComponent implements OnInit {
+export class DoughnutChartNsExampleComponent implements OnInit {
   private _distributions$: Observable<Distribution[]>;
   private _chartModels$: Observable<ChartModel[]>;
   private _paletteColors = ['#33a87f', '#005d3c', '#02f5a1', '#24765a'];

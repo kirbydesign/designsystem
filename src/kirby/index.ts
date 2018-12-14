@@ -5,6 +5,6 @@ export { GridComponent } from './components/grid/grid.component';
 export { IconComponent } from './components/icon/icon.component';
 export { ListComponent } from './components/list/list.component';
 export { KirbyModule } from './kirby.module';
-export { DistributionChartNsComponent, ChartModel } from './components/distribution-chart-ns/distribution-chart-ns.component';
+export { DoughnutChartNsComponent, ChartModel } from './components/doughnut-chart-ns/doughnut-chart-ns.component';
 
 

@@ -15,11 +15,11 @@ export class ChartModel {
 }
 
 @Component({
-  selector: 'kirby-distribution-chart-ns',
-  templateUrl: './distribution-chart-ns.component.tns.html',
-  styleUrls: ['./distribution-chart-ns.component.tns.scss']
+  selector: 'kirby-doughnut-chart-ns',
+  templateUrl: './doughnut-chart-ns.component.tns.html',
+  styleUrls: ['./doughnut-chart-ns.component.tns.scss']
 })
-export class DistributionChartNsComponent implements OnInit {
+export class DoughnutChartNsComponent implements OnInit {
   private _chartModels$: Observable<ChartModel[]>;
   public showLegend: boolean;
   public headline: string;

@@ -11,11 +11,11 @@ export class ChartModel {
     }
 }
 @Component({
-  selector: 'kirby-distribution-chart-ns',
-  templateUrl: './distribution-chart-ns.component.html',
-  styleUrls: ['./distribution-chart-ns.component.scss'],
+  selector: 'kirby-doughnut-chart-ns',
+  templateUrl: './doughnut-chart-ns.component.html',
+  styleUrls: ['./doughnut-chart-ns.component.scss'],
 })
-export class DistributionChartNsComponent implements OnInit {
+export class DoughnutChartNsComponent implements OnInit {
 
   constructor() { }
 

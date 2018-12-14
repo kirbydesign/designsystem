@@ -6,7 +6,7 @@ import { CardShowcaseComponent } from './card-showcase/card-showcase.component';
 import { GridShowcaseComponent } from './grid-showcase/grid-showcase.component';
 import { ListShowcaseComponent } from './list-showcase/list-showcase.component';
 import { ShowcaseComponent } from './showcase.component';
-import { DistributionChartNsShowcaseComponent } from './distribution-chart-ns-showcase/distribution-chart-ns-showcase.component';
+import { DoughnutChartNsShowcaseComponent } from './doughnut-chart-ns-showcase/doughnut-chart-ns-showcase.component';
 export const routes: Routes = [
     {
         path: '',
@@ -38,8 +38,8 @@ export const routes: Routes = [
                 component: GridShowcaseComponent
             },
             {
-                path: 'distribution-chart-ns',
-                component: DistributionChartNsShowcaseComponent
+                path: 'doughnut-chart-ns',
+                component: DoughnutChartNsShowcaseComponent
             }
 
         ]

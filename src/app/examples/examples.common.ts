@@ -3,7 +3,7 @@ import { ButtonExampleComponent } from './button-example/button-example.componen
 import { CardExampleComponent } from './card-example/card-example.component';
 import { GridExampleComponent } from './grid-example/grid-example.component';
 import { ListExampleComponent } from './list-example/list-example.component';
-import { DistributionChartNsExampleComponent } from './distribution-chart-ns-example/distribution-chart-ns-example.component';
+import { DoughnutChartNsExampleComponent } from './doughnut-chart-ns-example/doughnut-chart-ns-example.component';
 
 export const COMPONENT_DECLARATIONS: any[] = [
   ButtonExampleComponent,
@@ -11,5 +11,5 @@ export const COMPONENT_DECLARATIONS: any[] = [
   ListExampleComponent,
   GridExampleComponent,
   AvatarExampleComponent,
-  DistributionChartNsExampleComponent
+  DoughnutChartNsExampleComponent
 ];
