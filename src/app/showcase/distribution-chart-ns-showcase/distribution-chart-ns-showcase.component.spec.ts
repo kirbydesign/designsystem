@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DistributionChartNsShowcaseComponent } from './distribution-chart-ns-showcase.component';
 
-describe('DistributionCardNsShowcaseComponent', () => {
+describe('DistributionChartNsShowcaseComponent', () => {
   let component: DistributionChartNsShowcaseComponent;
   let fixture: ComponentFixture<DistributionChartNsShowcaseComponent>;
 
