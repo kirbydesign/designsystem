@@ -1,4 +1,4 @@
-<kirby-list [items]="myItems">
+<kirby-list [items]="myItems" (rowClick)="onClick($event)">
   <ng-container *kirbyListItem="let item">
     <span>{{item.text}}</span>
     <span>{{item.amount}}</span>

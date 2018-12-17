@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Directive, TemplateRef, ContentChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, Directive, TemplateRef, ContentChild, EventEmitter, Output } from '@angular/core';
 import { Observable, isObservable, Subscription } from 'rxjs';
 
 @Directive({
@@ -11,27 +11,19 @@ export class ListItemDirective {}
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })
-export class ListComponent implements OnInit, OnDestroy {
+export class ListComponent implements OnInit {
 
-  @Input() items: any[] | Observable<any[]>;
+  @Input() items: any[];
   // The first element that matches ListItemDirective. As a structural directive it unfolds into a template. This is a reference to that.
   @ContentChild(ListItemDirective, {read: TemplateRef}) listItemTemplate;
-  private _itemsSubscription: Subscription;
+  @Output() rowClick = new EventEmitter<any>();
 
   constructor() { }
 
-  ngOnInit() {
-    if (isObservable(this.items)) {
-      this._itemsSubscription = (<Observable<any>>this.items).subscribe(
-        items => this.items = items
-      );
-    }
-  }
+  ngOnInit() { }
 
-  ngOnDestroy(): void {
-    if (this._itemsSubscription) {
-      this._itemsSubscription.unsubscribe();
-    }
+  onRowClick(row): void {
+    this.rowClick.emit(row);
   }
 
 }
