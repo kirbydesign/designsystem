@@ -19,8 +19,7 @@ export class Distribution {
 })
 
 export class DoughnutChartNsExampleComponent implements OnInit {
-  // private _distributions$: Observable<Distribution[]>;
-  private _chartModels$: Observable<ChartModel[]>;
+  private chartModels$: Observable<ChartModel[]>;
   private _paletteColors = ['#33a87f', '#005d3c', '#02f5a1', '#24765a'];
   buttonText = 'Se mere';
   title = 'Investeringsoverblik';
@@ -29,12 +28,7 @@ export class DoughnutChartNsExampleComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    // this._distributions$ = of(this.getDistributionsMock()).pipe(delay(1000));
-    this._chartModels$ = this.convertToChartModel(of(this.getDistributionsMock()).pipe(delay(1000)), this._paletteColors);
-  }
-
-  get chartModels$() {
-    return this._chartModels$;
+    this.chartModels$ = this.convertToChartModel(of(this.getDistributionsMock()).pipe(delay(1000)), this._paletteColors);
   }
 
   getDistributionsMock(): Distribution[] {
