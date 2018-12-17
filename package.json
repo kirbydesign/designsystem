@@ -21,7 +21,7 @@
     "dist": "ng build --prod --aot --progress false",
     "android": "tns run android --hmr",
     "android-debug": "tns debug android --bundle",
-    "ios": "tns run ios --hmr --bundle",
+    "ios": "tns run ios --hmr",
     "ios-debug": "tns debug ios --bundle --device 'iPhone X'",
     "pack-copy-to-dist-folder-watch": "cpx \"src\\kirby\\**\\!(*.spec.ts)\" dist-lib --watch",
     "postversion": "git push && git push --tags"
