@@ -22,7 +22,6 @@ export class ChartComponent implements OnInit, AfterViewInit, OnChanges {
 
   @ViewChild('webView') private webView: ElementRef;
   private chartWebViewInterface;
-  private WEBVIEW_HEIGHT_OFFSET = 40;
 
   constructor() { }
 
@@ -54,7 +53,7 @@ export class ChartComponent implements OnInit, AfterViewInit, OnChanges {
     this.setChartProperties();
     const data = {
       options: this.options,
-      height: this.height - this.WEBVIEW_HEIGHT_OFFSET
+      height: this.height
     };
     this.chartWebViewInterface.emit('loadChartData', data);
   }
@@ -69,7 +68,7 @@ export class ChartComponent implements OnInit, AfterViewInit, OnChanges {
     }
     const data = {
       options: this.options,
-      height: this.height - this.WEBVIEW_HEIGHT_OFFSET
+      height: this.height
     };
     this.chartWebViewInterface.emit('updateChart', data);
   }
