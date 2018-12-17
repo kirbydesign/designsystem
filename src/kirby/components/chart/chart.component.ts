@@ -3,6 +3,10 @@ import { ChartObject, Options } from 'highcharts';
 import * as Highcharts from 'highcharts';
 import { DonutOptions } from './donut/options';
 
+import * as exporting from 'highcharts/modules/exporting.src'; exporting(Highcharts);
+import * as exportData from 'highcharts/modules/export-data'; exportData(Highcharts);
+import * as accessibility from 'highcharts/modules/accessibility'; accessibility(Highcharts);
+
 @Component({
   selector: 'kirby-chart',
   templateUrl: './chart.component.html',
