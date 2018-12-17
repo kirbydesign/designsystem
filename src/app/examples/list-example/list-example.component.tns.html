@@ -1,5 +1,5 @@
 <kirby-list [items]="myItems">
-    <kirby-list-item *kirbyListItem="let item" [item]="item"></kirby-list-item>
+    <kirby-list-item *kirbyListItem="let item" [item]="item" (tap)="clicked(item)"></kirby-list-item>
 </kirby-list>
 
 <!-- If you wish to use your own template, just add the *kirbyListItem="let item" to element -->
