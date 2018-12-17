@@ -33,30 +33,30 @@ code {
     margin-bottom: 0;
   }
 
-  &__display,
+  &__display {
+    &::after {
+      content: "(#{font-size("display")})";
+    }
+  }
   &__header-1 {
-    font-size: font-size("xxl");
     &::after {
       content: "(#{font-size("xxl")})";
     }
   }
 
   &__header-2 {
-    font-size: font-size("xl");
     &::after {
       content: "(#{font-size("xl")})";
     }
   }
 
   &__header-3 {
-    font-size: font-size("l");
     &::after {
       content: "(#{font-size("l")})";
     }
   }
 
   &__header-4 {
-    font-size: font-size("m");
     font-weight: font-weight("medium");
 
     &::after {
@@ -65,21 +65,18 @@ code {
   }
 
   &__body {
-    font-size: font-size("n");
     &::after {
       content: "(#{font-size("n")})";
     }    
   }
 
   &__body-small {
-    font-size: font-size("s");
     &::after {
       content: "(#{font-size("s")})";
     }    
   }
 
   &__body-xsmall {
-    font-size: font-size("xs");
     &::after {
       content: "(#{font-size("xs")})";
     }    
@@ -89,6 +86,6 @@ code {
 
 [class^="fonts__"]::after {
   color: #db4fa5;
-  font-size: font-size("s");
+  font-size: font-size("xs");
   margin-left: size("m");
 }

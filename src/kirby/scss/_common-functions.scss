@@ -27,6 +27,14 @@
   }  
 }
 
+@function line-height($key: "m") {
+  @if ($native == false) {
+    @return addPX(_get-map-prop($line-height, $key));
+  } @else {
+    @return _get-map-prop($line-height, $key);
+  }    
+}
+
 @function addPX($value) {
   @return $value + unquote("px");
 }

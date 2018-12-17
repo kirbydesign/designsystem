@@ -13,41 +13,48 @@ p, .p {
   margin-top: size("m");
 }
 
+.text--display {
+  font-size: font-size("display");
+  line-height: line-height("display");
+}
+
 h1,
 .text--xxlarge {
   font-size: font-size("xxl");
-  line-height: $base-line-height;
+  line-height: line-height("xxl");
 }
 
 h2,
 .text--xlarge {
   font-size: font-size("xl");
-  line-height: $base-line-height;
+  line-height: line-height("xl");
 }
 
 h3,
 .text--large {
   font-size: font-size("l");
-  line-height: $base-line-height;
+  line-height: line-height("l");
 }
 
 h4,
 .text--medium {
   font-size: font-size("m");
-  line-height: $base-line-height;
+  line-height: line-height("m");
   font-weight: font-weight("medium");
 }
 
 p,
 .text--normal {
   font-size: font-size("n");
-  line-height: $base-line-height;
+  line-height: line-height("m");
 }
 
 .text--small {
   font-size: font-size("s");
+  line-height: line-height("s");
 }
 
 .text--xsmall {
   font-size: font-size("xs");
+  line-height: line-height("xs");
 }
