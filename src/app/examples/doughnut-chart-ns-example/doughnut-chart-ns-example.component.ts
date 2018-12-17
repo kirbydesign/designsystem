@@ -5,7 +5,10 @@ import { map, delay } from 'rxjs/operators';
 import { ChartModel } from '../../../kirby/components/doughnut-chart-ns/doughnut-chart-ns.component';
 
 export class Distribution {
-  constructor(public type?: string, public percentage?: number, public drawingPercentage?: number, public labelPercentage?: string) {
+  constructor(public type?: string,
+    public percentage?: number,
+    public drawingPercentage?: number,
+    public labelPercentage?: string) {
   }
 }
 
@@ -19,16 +22,13 @@ export class DoughnutChartNsExampleComponent implements OnInit {
   private _distributions$: Observable<Distribution[]>;
   private _chartModels$: Observable<ChartModel[]>;
   private _paletteColors = ['#33a87f', '#005d3c', '#02f5a1', '#24765a'];
-  buttonText: string;
-  title: string;
-  subtitle: string;
+  buttonText = 'Se mere';
+  title = 'Investeringsoverblik';
+  subtitle = '';
 
   constructor() { }
 
   ngOnInit() {
-    this.buttonText = 'Se mere';
-    this.title = 'Investeringsoverblik';
-    this.subtitle = '';
     this._distributions$ = of(this.getDistributionsMock()).pipe(delay(1000));
     this._chartModels$ = this.convertToChartModel(this._distributions$, this._paletteColors);
   }
