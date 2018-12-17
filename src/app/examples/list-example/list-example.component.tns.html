@@ -1,10 +1,10 @@
 <kirby-list [items]="myItems">
-    <!-- <ng-container *kirbyListItem="let item">
-        <GridLayout columns="2*, *, *">
-            <Label col="0" text="{{ item.text }}" textWrap="true"  ></Label>
-            <Label col="1" text="{{ item.amount }}" ></Label>
-            <label col="2" text="{{ item.detail }}"></label>
-        </GridLayout>
-    </ng-container> -->
     <kirby-list-item *kirbyListItem="let item" [item]="item"></kirby-list-item>
 </kirby-list>
+
+<!-- If you wish to use your own template, just add the *kirbyListItem="let item" to element -->
+<!-- <GridLayout columns="2*, *, *" *kirbyListItem="let item">
+    <Label col="0" text="template" textWrap="true"  ></Label>
+    <Label col="1" text="{{ item.amount }}" ></Label>
+    <label col="2" text="{{ item.detail }}"></label>
+</GridLayout> -->

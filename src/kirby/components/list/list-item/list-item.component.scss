@@ -5,6 +5,10 @@
 
 .title-container {
     flex: 1;
+
+    label {
+        font-weight: bold;
+    }
 }
 
 .details-container {
