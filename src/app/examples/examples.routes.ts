@@ -7,7 +7,6 @@ import { GridExampleComponent } from './grid-example/grid-example.component';
 import { ListExampleComponent } from './list-example/list-example.component';
 import { DoughnutChartNsExampleComponent } from './doughnut-chart-ns-example/doughnut-chart-ns-example.component';
 
-
 export const routes: Routes = [
     {
         path: '',
