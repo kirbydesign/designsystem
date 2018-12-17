@@ -1,7 +1,12 @@
-
-  <GridLayout columns="2*, *, *">
-    <label col="0" text="{{item.title}}" textWrap="true" class="list-item-title"></label>
-    <label col="1" text="{{item.detail}}" class="list-item-detail"></label> 
-    <label col="2" text="{{item.amount}}" class="list-item-amount"></label>
-  </GridLayout>
-
+<GridLayout columns="2*, *">
+  <StackLayout col="0">
+    <Label
+      text="{{item.title}}"
+      textWrap="true"
+      class="list-item-title"
+    ></Label>
+  </StackLayout>
+  <StackLayout col="1">
+    <Label text="{{item.amount}}" class="list-item-amount "></Label>
+  </StackLayout>
+</GridLayout>

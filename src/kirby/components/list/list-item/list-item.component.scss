@@ -1,18 +1,19 @@
-.item-container {
+:host {
+    width: 100%;
     display: flex;
-    justify-content: space-between;
 }
 
 .title-container {
     flex: 1;
-
-    label {
-        font-weight: bold;
-    }
 }
 
 .details-container {
     margin-left: auto;
     flex: 1;
     display: flex;
+    font-weight: bold;
+
+    .amount {
+        margin-left: auto;
+    }
 }
