@@ -20,15 +20,12 @@ export class ChartModel {
   styleUrls: ['./doughnut-chart-ns.component.tns.scss']
 })
 export class DoughnutChartNsComponent implements OnInit {
-  // public chartModels: ChartModel[];
-  public showLegend: boolean;
+  public showLegend = false;
   public headline: string;
 
   @Input() chartModels: ChartModel[];
 
-  constructor() {
-    this.showLegend = false;
-  }
+  constructor() {}
 
   ngOnInit() {}
 
