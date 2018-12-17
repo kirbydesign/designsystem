@@ -1,0 +1,19 @@
+:host {
+    width: 100%;
+    display: flex;
+}
+
+.title-container {
+    flex: 1;
+}
+
+.details-container {
+    margin-left: auto;
+    flex: 1;
+    display: flex;
+    font-weight: bold;
+
+    .amount {
+        margin-left: auto;
+    }
+}
