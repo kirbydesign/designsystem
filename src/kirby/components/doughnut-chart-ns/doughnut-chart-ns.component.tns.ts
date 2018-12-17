@@ -21,28 +21,13 @@ export class ChartModel {
 export class DoughnutChartNsComponent implements OnInit {
   public showLegend = false;
   public headline: string;
+  public startAngle = (platform.isIOS) ? -90 : 270;
+  public endAngle = (platform.isIOS) ? 270 : 360;
 
   @Input() chartModels: ChartModel[];
 
   constructor() {}
 
   ngOnInit() {}
-
-  get startAngle(): number {
-    if (platform.isAndroid) {
-      return 270;
-    }
-    if (platform.isIOS) {
-      return -90;
-    }
-  }
-
-  get endAngle(): number {
-    if (platform.isAndroid) {
-      return 360;
-    }
-    if (platform.isIOS) {
-      return 270;
-    }
-  }
+  
 }
