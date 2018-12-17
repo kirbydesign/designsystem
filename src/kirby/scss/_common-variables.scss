@@ -1,13 +1,13 @@
 /* Font-sizes
 --------------------------------------------------------------------------------*/
 $font-sizes: (
-  xxl:  48,  // 3rem,     
-  xl:   32,  // 2rem,     
-  l:    24,  // 1.5rem,   
+  xxl:  34,  // 3rem,     
+  xl:   28,  // 2rem,     
+  l:    22,  // 1.5rem,   
   m:    20,  // 1.25rem,  
-  n:    16,  // 1rem,     
-  s:    14,  // .875rem,  
-  xs:   12   // .75rem    
+  n:    17,  // 1rem,     
+  s:    15,  // .875rem,  
+  xs:   13   // .75rem    
 );
 
 /* Font-sizes
@@ -15,6 +15,7 @@ $font-sizes: (
 $font-weight: (
   light: 200,
   normal: 400,
+  medium: 500,
   bold: 700
 );
 

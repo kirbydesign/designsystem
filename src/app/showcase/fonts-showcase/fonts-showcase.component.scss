@@ -57,6 +57,8 @@ code {
 
   &__header-4 {
     font-size: font-size("m");
+    font-weight: font-weight("medium");
+
     &::after {
       content: "(#{font-size("m")})";
     }
@@ -73,6 +75,13 @@ code {
     font-size: font-size("s");
     &::after {
       content: "(#{font-size("s")})";
+    }    
+  }
+
+  &__body-xsmall {
+    font-size: font-size("xs");
+    &::after {
+      content: "(#{font-size("xs")})";
     }    
   }
 

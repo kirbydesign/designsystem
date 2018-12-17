@@ -35,6 +35,7 @@ h4,
 .text--medium {
   font-size: font-size("m");
   line-height: $base-line-height;
+  font-weight: font-weight("medium");
 }
 
 p,
@@ -45,4 +46,8 @@ p,
 
 .text--small {
   font-size: font-size("s");
+}
+
+.text--xsmall {
+  font-size: font-size("xs");
 }
