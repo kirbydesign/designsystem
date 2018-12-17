@@ -20,24 +20,17 @@ export class ChartModel {
   styleUrls: ['./doughnut-chart-ns.component.tns.scss']
 })
 export class DoughnutChartNsComponent implements OnInit {
-  private _chartModels: ChartModel[];
+  // public chartModels: ChartModel[];
   public showLegend: boolean;
   public headline: string;
+
+  @Input() chartModels: ChartModel[];
 
   constructor() {
     this.showLegend = false;
   }
 
   ngOnInit() {}
-
-  @Input()
-  set chartModels(chartModels: ChartModel[]) {
-    this._chartModels = chartModels;
-  }
-
-  get chartModels(): ChartModel[] {
-    return this._chartModels;
-  }
 
   get startAngle(): number {
     if (platform.isAndroid) {

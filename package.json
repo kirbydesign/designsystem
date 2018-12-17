@@ -48,7 +48,8 @@
     "reflect-metadata": "~0.1.8",
     "rxjs": "^6.3.3",
     "tns-core-modules": "^5.0.5",
-    "zone.js": "^0.8.26"
+    "zone.js": "^0.8.26",
+    "reveal-plugin-ios": "file:../reveal-plugin-ios"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.7.0",
