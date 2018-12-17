@@ -29,5 +29,5 @@ export class DoughnutChartNsComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
-  
+
 }
