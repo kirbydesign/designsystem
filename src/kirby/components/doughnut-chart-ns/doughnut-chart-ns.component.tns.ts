@@ -1,6 +1,5 @@
 
 import { Component, OnInit, Input } from '@angular/core';
-import { Observable} from 'rxjs';
 import * as platform from 'tns-core-modules/platform';
 
 export class ChartModel {
