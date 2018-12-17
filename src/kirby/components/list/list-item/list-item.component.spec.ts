@@ -16,6 +16,7 @@ describe('ListItemComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ListItemComponent);
     component = fixture.componentInstance;
+    component.item = {title: 'Føtex', amount: 20, detail: 'Jack'};
     fixture.detectChanges();
   });
 
