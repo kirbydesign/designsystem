@@ -1,4 +1,3 @@
-
 <kirby-list [items]="myItems">
   <kirby-list-item *kirbyListItem="let item" [item]="item"></kirby-list-item>
 </kirby-list>
@@ -6,9 +5,11 @@
 <hr>
 
 <!-- If you wish to use your own template, just add the *kirbyListItem="let item" to the element -->
-<kirby-list [items]="myItems">
-    <ng-container *kirbyListItem="let item">
-        <span>{{item.title}}</span>
-        <span>{{item.amount}}</span>
-    </ng-container>
+
+<kirby-list [items]="myItems" (rowClick)="onClick($event)">
+  <ng-container *kirbyListItem="let item">
+    <span>{{item.text}}</span>
+    <span>{{item.amount}}</span>
+  </ng-container>
 </kirby-list>
+

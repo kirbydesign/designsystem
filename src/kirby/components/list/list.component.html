@@ -1,6 +1,6 @@
 <ul>
-  <li *ngFor="let item of items">
-    <ng-container *ngTemplateOutlet="listItemTemplate; context: {$implicit: item}">
+  <li *ngFor="let item of items" (click)="onRowClick(item)">
+    <ng-container *ngTemplateOutlet="listItemTemplate; context: {$implicit: item}" >
     </ng-container>
   </li>
 </ul>

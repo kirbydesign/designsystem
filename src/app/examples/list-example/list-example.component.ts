@@ -18,5 +18,11 @@ export class ListExampleComponent implements OnInit {
   ngOnInit() {
   }
 
+<<<<<<< HEAD
+=======
+  onClick(row) {
+    alert(`You have clicked the row [${row.text} ${row.amount}]`);
+  }
+>>>>>>> list-simple
 
 }
