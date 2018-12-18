@@ -2,17 +2,17 @@
     <!-- First column -->
   <StackLayout class="titles-container" col="0">
     <Label
-      text="{{item.title}}"
+      text="{{title}}"
       class="list-item-title"
     ></Label>
-    <Label text="{{item.subTitle}}" class="list-item-subTitle"></Label>
+    <Label text="{{subTitle}}" class="list-item-subTitle"></Label>
   </StackLayout>
   <!-- middle column -->
   <StackLayout class="detail-container" col="1" >
-    <Label text="{{item.detail}}" class="list-item-detail" [ngClass]="{'green': item.detail > 0, 'red': item.detail < 0}"></Label>
+    <Label text="{{detail}}" class="list-item-detail" [ngClass]="{'green': detail > 0, 'red': detail < 0}"></Label>
   </StackLayout>
 <!-- Right column -->
   <StackLayout class="amount-container" col="2" >
-    <Label text="{{item.amount}}" class="list-item-amount "></Label>
+    <Label text="{{amount}}" class="list-item-amount "></Label>
   </StackLayout>
 </GridLayout>
