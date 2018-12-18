@@ -12,7 +12,7 @@
 
 <kirby-list [items]="myItems">
   <kirby-list-header *kirbyListHeader="let data"></kirby-list-header>
-  <kirby-list-item *kirbyListItem="let item" [title]="item.title" [amount]="item.amount" (click)="onClick(item)"></kirby-list-item>
+  <kirby-list-item *kirbyListItem="let item" [title]="item.title" [amount]="item.amount" [detail]="item.detail" (click)="onClick(item)"></kirby-list-item>
 </kirby-list>
   
 <hr>
