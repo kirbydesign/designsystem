@@ -1,6 +1,8 @@
-<StackLayout>
-    <ng-container *ngTemplateOutlet="headerTemplate; context: {$implicit: columns}"></ng-container>
-    <ListView [items]="items">
+<GridLayout rows="auto, *">
+    <FlexboxLayout row="0" alignItems="center" class="list-header-container">
+        <ng-container *ngTemplateOutlet="headerTemplate; context: {$implicit: columns}"></ng-container>
+    </FlexboxLayout>
+    <ListView [items]="items" row="1">
         <ng-template let-item="item">
             <FlexboxLayout alignItems="center" class="list-item-container">
                 <ng-container *ngTemplateOutlet="listItemTemplate; context: {$implicit: item}">
@@ -8,4 +10,4 @@
             </FlexboxLayout>
         </ng-template>
     </ListView>
-</StackLayout>
+</GridLayout>
