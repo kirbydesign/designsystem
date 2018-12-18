@@ -11,7 +11,7 @@
 <hr>
 
 <kirby-list [items]="myItems">
-  <kirby-list-header *kirbyListHeader="let data"></kirby-list-header>
+  <kirby-list-header *kirbyListHeader="let data" [left]="'Left'" [middle]="'Middle'" [right]="'Right'"></kirby-list-header>
   <kirby-list-item *kirbyListItem="let item" [title]="item.title" [amount]="item.amount" [detail]="item.detail" (click)="onClick(item)"></kirby-list-item>
 </kirby-list>
   
@@ -22,7 +22,6 @@
 <kirby-list [items]="myItems" (rowClick)="onClick($event)">
   <ng-container *kirbyListItem="let item">
     <span>{{item.title}}</span>
-    <span>{{item.amount}}</span>
   </ng-container>
 </kirby-list>
 
