@@ -1,3 +1,10 @@
-<kirby-list [items]="myItems">
-    <kirby-list-item *kirbyListItem="let item" [item]="item" (tap)="clicked(item)"></kirby-list-item>
-</kirby-list>
+<StackLayout>
+  <kirby-list [items]="myItems">
+    <kirby-list-header *kirbyListHeader="let columns"></kirby-list-header>
+    <kirby-list-item
+      *kirbyListItem="let item"
+      [item]="item"
+      (tap)="clicked(item)"
+    ></kirby-list-item>
+  </kirby-list>
+</StackLayout>
