@@ -5,9 +5,8 @@ import * as platform from 'tns-core-modules/platform';
 export class ChartModel {
   constructor(
     public type?: string,
-    public percentage?: number,
-    public drawingPercentage?: number,
     public labelPercentage?: string,
+    public drawingPercentage?: number,
     public color?: string
     ) {
   }

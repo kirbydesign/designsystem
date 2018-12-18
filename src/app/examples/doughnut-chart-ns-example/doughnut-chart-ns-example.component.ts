@@ -4,14 +4,6 @@ import { Observable, of } from 'rxjs';
 import { map, delay } from 'rxjs/operators';
 import { ChartModel } from '../../../kirby/components/doughnut-chart-ns/doughnut-chart-ns.component';
 
-export class Distribution {
-  constructor(public type?: string,
-    public percentage?: number,
-    public drawingPercentage?: number,
-    public labelPercentage?: string) {
-  }
-}
-
 @Component({
   selector: 'kirby-doughnut-chart-ns-example',
   templateUrl: './doughnut-chart-ns-example.component.html',
@@ -29,33 +21,33 @@ export class DoughnutChartNsExampleComponent implements OnInit {
   ngOnInit() {
     this.chartModels$ = this.convertToChartModel(this.getMockData(), this._paletteColors).pipe(delay(500));
   }
-
-  getMockData(): Distribution[] {
+  getMockData(): {type: string, labelPercentage: string, drawingPercentage: number}[] {
     return [
       {
-        'type': 'Stocks',
-        'labelPercentage': '75%',
-        'drawingPercentage': 73.41
+        type: 'Stocks',
+        labelPercentage: '75%',
+        drawingPercentage: 73.41
         },
         {
-        'type': 'Investment Funds',
-        'labelPercentage': '25%',
-        'drawingPercentage': 24.61
+        type: 'Investment Funds',
+        labelPercentage: '25%',
+        drawingPercentage: 24.61
         },
         {
-        'type': 'Certificates',
-        'labelPercentage': '< 1%',
-        'drawingPercentage': 0.98
+        type: 'Certificates',
+        labelPercentage: '< 1%',
+        drawingPercentage: 0.98
         },
         {
-        'type': 'ETFs',
-        'labelPercentage': '< 1%',
-        'drawingPercentage': 0.98
+        type: 'ETFs',
+        labelPercentage: '< 1%',
+        drawingPercentage: 0.98
         }
     ];
   }
 
-  convertToChartModel(data: Distribution[], colors: string[]): Observable<ChartModel[]> {
+  // tslint:disable-next-line:max-line-length
+  convertToChartModel(data: {type: string, labelPercentage: string, drawingPercentage: number}[], colors: string[]): Observable<ChartModel[]> {
     let index = 0;
     const distributions$ = of(data);
     return distributions$.pipe(map(distributions => {
@@ -67,9 +59,8 @@ export class DoughnutChartNsExampleComponent implements OnInit {
         }
         return new ChartModel(
           distribution.type,
-          distribution.percentage,
-          distribution.drawingPercentage,
           distribution.labelPercentage,
+          distribution.drawingPercentage,
           colors[currentIndex]
         );
       });

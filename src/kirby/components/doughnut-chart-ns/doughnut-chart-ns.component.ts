@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
 export class ChartModel {
-    constructor(
-      public type?: string,
-      public percentage?: number,
-      public drawingPercentage?: number,
-      public labelPercentage?: string,
-      public color?: string
-      ) {
-    }
+  constructor(
+    public type?: string,
+    public labelPercentage?: string,
+    public drawingPercentage?: number,
+    public color?: string
+    ) {
+  }
 }
 @Component({
   selector: 'kirby-doughnut-chart-ns',
