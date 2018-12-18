@@ -27,7 +27,7 @@ export class DoughnutChartNsExampleComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.chartModels$ = this.convertToChartModel(this.getMockData(), this._paletteColors).pipe(delay(2000));
+    this.chartModels$ = this.convertToChartModel(this.getMockData(), this._paletteColors).pipe(delay(500));
   }
 
   getMockData(): Distribution[] {
