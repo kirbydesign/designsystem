@@ -13,19 +13,10 @@
     (function () {
         var oWebViewInterface = window.nsWebViewInterface;
 
-        /**
-         * Registers handlers for native events.
-         */
         function addNativeMsgListener() {
-            var chart;
-            oWebViewInterface.on('loadChartData', function (chartData) {
-                configureChartOptions(chartData);
-                chart = Highcharts.chart('chart', chartData.options);
-            });
-            
             oWebViewInterface.on('updateChart', function (chartData) {
                 configureChartOptions(chartData);
-                chart = Highcharts.chart('chart', chartData.options);
+                var chart = Highcharts.chart('chart', chartData.options);
             });
         }
 

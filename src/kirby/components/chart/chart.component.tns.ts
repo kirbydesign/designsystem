@@ -1,8 +1,9 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input, OnChanges } from '@angular/core';
 import { WebView, LoadEventData } from 'ui/web-view';
 import { android, ios, AndroidApplication, AndroidActivityEventData } from 'tns-core-modules/application';
 import { Options } from 'highcharts';
 import { DonutOptions } from './donut/options';
+import { Page } from 'tns-core-modules/ui/page';
 
 const webViewInterfaceModule = require('nativescript-webview-interface');
 
@@ -11,7 +12,7 @@ const webViewInterfaceModule = require('nativescript-webview-interface');
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.scss']
 })
-export class ChartComponent implements OnInit, AfterViewInit, OnChanges {
+export class ChartComponent implements OnInit, OnChanges {
   @Input() data = [];
   @Input() height = 300;
   @Input() type = 'pie';
@@ -20,26 +21,26 @@ export class ChartComponent implements OnInit, AfterViewInit, OnChanges {
 
   options: Options = {};
 
-  @ViewChild('webView') private webView: ElementRef;
+  @ViewChild('webView') webViewRef: ElementRef;
   private chartWebViewInterface;
+  private pageLoaded = false;
 
-  constructor() { }
+  constructor(private page: Page) { }
 
-  ngOnInit() { }
-
-  ngAfterViewInit() {
-    this.setupWebViewInterface();
+  ngOnInit() {
+    this.page.on('loaded', (data) => {
+      this.setupWebViewInterface();
+      this.pageLoaded = true;
+    });
   }
 
   private setupWebViewInterface() {
-    const webView: WebView = this.webView.nativeElement;
+    const webView: WebView = this.webViewRef.nativeElement;
     this.chartWebViewInterface = new webViewInterfaceModule.WebViewInterface(webView, '~/chart/chart.webview.html');
-
-    // loading chart data, on load of webView
     webView.on(WebView.loadFinishedEvent, (args: LoadEventData) => {
       if (!args.error) {
-        this.loadChartDataInWebView();
         this.setupWebViewForPlatforms(webView);
+        this.loadChartDataInWebView();
       }
     });
   }
@@ -50,30 +51,16 @@ export class ChartComponent implements OnInit, AfterViewInit, OnChanges {
       this.options = new DonutOptions().options;
       this.options.chart.type = chartType;
     }
-    this.setChartProperties();
-    const data = {
-      options: this.options,
-      height: this.height
-    };
-    this.chartWebViewInterface.emit('loadChartData', data);
-  }
-
-  ngOnChanges() {
     this.updateChart();
   }
 
-  public updateChart() {
-    if (this.options.chart && this.options.chart.type === 'pie') {
-      this.setChartProperties();
+  ngOnChanges() {
+    if (this.pageLoaded) {
+      this.updateChart();
     }
-    const data = {
-      options: this.options,
-      height: this.height
-    };
-    this.chartWebViewInterface.emit('updateChart', data);
   }
 
-  setChartProperties() {
+  updateChart() {
     if (this.options.chart && this.options.chart.type === 'pie') {
       this.options.chart.height = this.height;
       this.options.series[0].data = this.data;
@@ -81,6 +68,11 @@ export class ChartComponent implements OnInit, AfterViewInit, OnChanges {
       this.options.plotOptions.pie.dataLabels.enabled = this.dataLabelsEnabled;
       this.options.plotOptions.pie.dataLabels.format = '{point.label}';
     }
+    const data = {
+      options: this.options,
+      height: this.height
+    };
+    this.chartWebViewInterface.emit('updateChart', data);
   }
 
   private setupWebViewForPlatforms(webView: WebView) {
