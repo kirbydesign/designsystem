@@ -1,3 +1,4 @@
+<ng-container *ngTemplateOutlet="headerTemplate; context: {$implicit: data}"></ng-container>
 <ul>
   <li *ngFor="let item of items" (click)="onRowClick(item)">
     <ng-container *ngTemplateOutlet="listItemTemplate; context: {$implicit: item}" >

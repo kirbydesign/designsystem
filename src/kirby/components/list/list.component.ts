@@ -7,6 +7,11 @@ import { ListItemComponent } from './list-item/list-item.component';
 })
 export class ListItemDirective {}
 
+@Directive({
+  selector: '[kirbyListHeader]'
+})
+export class ListHeaderDirective {}
+
 @Component({
   selector: 'kirby-list',
   templateUrl: './list.component.html',
@@ -17,6 +22,7 @@ export class ListComponent implements OnInit {
   @Input() items: any[];
   // The first element that matches ListItemDirective. As a structural directive it unfolds into a template. This is a reference to that.
   @ContentChild(ListItemDirective, {read: TemplateRef}) listItemTemplate;
+  @ContentChild(ListHeaderDirective, {read: TemplateRef}) headerTemplate;
   @Output() rowClick = new EventEmitter<any>();
 
   constructor() { }
