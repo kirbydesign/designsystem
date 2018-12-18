@@ -1,20 +1,39 @@
+$left-column: 1;
+$middle-column: 2;
+$right-column: 3;
+
 :host {
     width: 100%;
-    display: flex;
+    display: grid;
+    grid-template-columns: 40% 20% 40%;
     padding: 1.3em 1.8em;
 }
 
 .title-container {
-    flex: 1;
+    
+    grid-column-start: $left-column;
+    grid-column-end: $left-column;
+    text-align: left;
+
+    .title {
+        flex: 1;
+    }
+
+    .subTitle {
+        flex: 1;
+        color: #a0a0a0;
+    }
 }
 
 .details-container {
-    margin-left: auto;
-    flex: 1;
-    display: flex;
-    font-weight: bold;
+    grid-column-start: $middle-column;
+    grid-column-end: $middle-column;
+    text-align: center;
+}
 
-    .amount {
-        margin-left: auto;
-    }
+.amount-container {
+    grid-column-start: $right-column;
+    grid-column-end: $right-column;
+    text-align: right;
+    font-weight: bold;
 }
