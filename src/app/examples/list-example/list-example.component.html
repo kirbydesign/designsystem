@@ -1,11 +1,11 @@
 <kirby-list [items]="myItems">
-  <kirby-list-item *kirbyListItem="let item" [item]="item"></kirby-list-item>
+  <kirby-list-item *kirbyListItem="let item" [item]="item" (click)="onClick(item)"></kirby-list-item>
 </kirby-list>
 
 <hr>
 
 <kirby-list [items]="myItems">
-  <kirby-list-item *kirbyListItem="let item" [title]="item.title" [amount]="item.amount"></kirby-list-item>
+  <kirby-list-item *kirbyListItem="let item" [title]="item.title" [amount]="item.amount" (click)="onClick(item)"></kirby-list-item>
 </kirby-list>
 
 <hr>
