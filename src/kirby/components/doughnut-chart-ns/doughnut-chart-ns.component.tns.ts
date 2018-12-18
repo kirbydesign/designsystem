@@ -19,8 +19,8 @@ export class ChartModel {
   styleUrls: ['./doughnut-chart-ns.component.tns.scss']
 })
 export class DoughnutChartNsComponent implements OnInit {
-  public startAngle = (platform.isIOS) ? -90 : 270;
-  public endAngle = (platform.isIOS) ? 270 : 360;
+  public startAngle = platform.isIOS ? -90 : 270;
+  public endAngle = platform.isIOS ? 270 : 360;
 
   @Input() chartModels: ChartModel[];
 
