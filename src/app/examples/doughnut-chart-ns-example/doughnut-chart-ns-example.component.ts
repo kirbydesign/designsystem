@@ -19,7 +19,7 @@ export class Distribution {
 })
 
 export class DoughnutChartNsExampleComponent implements OnInit {
-  private chartModels$: Observable<ChartModel[]>;
+  public chartModels$: Observable<ChartModel[]>;
   private _paletteColors = ['#33a87f', '#005d3c', '#02f5a1', '#24765a'];
   buttonText = 'Se mere';
   title = 'Investeringsoverblik';
