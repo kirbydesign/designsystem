@@ -1,6 +1,6 @@
 <StackLayout>
   <kirby-list [items]="myItems">
-    <kirby-list-header *kirbyListHeader="let columns"></kirby-list-header>
+    <kirby-list-header *kirbyListHeader="let columns" [left]="'Navn'" [middle]="'Afkast ÅTD'" [right]="'Værdi'"></kirby-list-header>
     <kirby-list-item
       *kirbyListItem="let item"
       [item]="item"
