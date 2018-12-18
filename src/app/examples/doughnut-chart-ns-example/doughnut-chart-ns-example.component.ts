@@ -14,7 +14,7 @@ export class DoughnutChartNsExampleComponent implements OnInit {
   public chartModels$: Observable<ChartModel[]>;
   private _paletteColors = ['#33a87f', '#005d3c', '#02f5a1', '#24765a'];
   buttonText = 'View details';
-  title = 'Yours investments';
+  title = 'Your investments';
 
   constructor() { }
 
