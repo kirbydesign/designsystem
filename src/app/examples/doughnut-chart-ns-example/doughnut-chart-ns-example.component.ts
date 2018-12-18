@@ -21,46 +21,43 @@ export class Distribution {
 export class DoughnutChartNsExampleComponent implements OnInit {
   public chartModels$: Observable<ChartModel[]>;
   private _paletteColors = ['#33a87f', '#005d3c', '#02f5a1', '#24765a'];
-  buttonText = 'Se mere';
-  title = 'Investeringsoverblik';
+  buttonText = 'View details';
+  title = 'Yours investments';
 
   constructor() { }
 
   ngOnInit() {
-    this.chartModels$ = this.convertToChartModel(of(this.getDistributionsMock()).pipe(delay(1000)), this._paletteColors);
+    this.chartModels$ = this.convertToChartModel(this.getMockData(), this._paletteColors).pipe(delay(2000));
   }
 
-  getDistributionsMock(): Distribution[] {
+  getMockData(): Distribution[] {
     return [
       {
-        'type': 'Aktier',
+        'type': 'Stocks',
         'labelPercentage': '75%',
-        'percentage': 74.67617426898828,
-        'drawingPercentage': 73.41971847284807
+        'drawingPercentage': 73.41
         },
         {
-        'type': 'Investeringsforeninger',
+        'type': 'Investment Funds',
         'labelPercentage': '25%',
-        'percentage': 25.035158629414028,
-        'drawingPercentage': 24.613932308232766
+        'drawingPercentage': 24.61
         },
         {
-        'type': 'Certifikater',
+        'type': 'Certificates',
         'labelPercentage': '< 1%',
-        'percentage': 0.22769746122264,
-        'drawingPercentage': 0.9831746094595799
+        'drawingPercentage': 0.98
         },
         {
-        'type': 'ETF\'er',
+        'type': 'ETFs',
         'labelPercentage': '< 1%',
-        'percentage': 0.060969640375046326,
-        'drawingPercentage': 0.9831746094595799
+        'drawingPercentage': 0.98
         }
     ];
   }
 
-  convertToChartModel(distributions$: Observable<Distribution[]>, colors: string[]): Observable<ChartModel[]> {
+  convertToChartModel(data: Distribution[], colors: string[]): Observable<ChartModel[]> {
     let index = 0;
+    const distributions$ = of(data);
     return distributions$.pipe(map(distributions => {
       return distributions.map(distribution => {
         const currentIndex = index;
