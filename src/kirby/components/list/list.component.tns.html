@@ -1,8 +1,11 @@
-<ListView [items]="items">
-    <ng-template let-item="item">
-        <FlexboxLayout alignItems="center" class="list-item-container">
-            <ng-container *ngTemplateOutlet="listItemTemplate; context: {$implicit: item}">
-            </ng-container>
-        </FlexboxLayout>
-    </ng-template>
-</ListView>
+<StackLayout>
+    <ng-container *ngTemplateOutlet="headerTemplate; context: {$implicit: columns}"></ng-container>
+    <ListView [items]="items">
+        <ng-template let-item="item">
+            <FlexboxLayout alignItems="center" class="list-item-container">
+                <ng-container *ngTemplateOutlet="listItemTemplate; context: {$implicit: item}">
+                </ng-container>
+            </FlexboxLayout>
+        </ng-template>
+    </ListView>
+</StackLayout>
