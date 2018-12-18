@@ -23,7 +23,6 @@ export class DoughnutChartNsExampleComponent implements OnInit {
   private _paletteColors = ['#33a87f', '#005d3c', '#02f5a1', '#24765a'];
   buttonText = 'Se mere';
   title = 'Investeringsoverblik';
-  subtitle = '';
 
   constructor() { }
 
