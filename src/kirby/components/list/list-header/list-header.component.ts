@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'kirby-list-header',
@@ -6,6 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./list-header.component.scss']
 })
 export class ListHeaderComponent implements OnInit {
+
+  @Input() left = '';
+
+  @Input() middle = '';
+
+  @Input() right = '';
 
   constructor() { }
 
