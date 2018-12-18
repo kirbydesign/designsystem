@@ -15,14 +15,8 @@ ul {
     margin-block-end: 0;
     
     li {
-        
-        // padding-top: 1.6em;
-        // padding-bottom: 1.0em;
         background-color: white;
         border-bottom: var(--kirby-wireframe-border);
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
 
         p {
             margin: 0;
