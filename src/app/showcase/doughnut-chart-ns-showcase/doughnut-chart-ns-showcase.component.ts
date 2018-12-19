@@ -8,7 +8,7 @@ declare var require: any;
 })
 
 export class DoughnutChartNsShowcaseComponent implements OnInit {
-    exampleHtml: string = require('../../examples/doughnut-chart-ns-example/doughnut-chart-ns-example.component.html');
+    exampleHtml: string = require('../../examples/doughnut-chart-ns-example/doughnut-chart-ns-example.component.tns.html');
 
     constructor() { }
 
