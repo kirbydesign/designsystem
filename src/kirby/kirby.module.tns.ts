@@ -4,6 +4,9 @@ import { NativeScriptRouterModule } from 'nativescript-angular/router';
 import { NativeScriptUIChartModule } from 'nativescript-ui-chart/angular';
 
 import { declarations } from './kirby.common';
+import { DoughnutChartNsComponent } from './components/doughnut-chart-ns/doughnut-chart-ns.component.tns-only';
+
+const nativeScriptDeclarations = [...declarations, DoughnutChartNsComponent];
 
 @NgModule({
   imports: [
@@ -11,8 +14,8 @@ import { declarations } from './kirby.common';
     NativeScriptRouterModule,
     NativeScriptUIChartModule,
   ],
-  declarations: declarations,
-  exports: declarations,
+  declarations: nativeScriptDeclarations,
+  exports: nativeScriptDeclarations,
   schemas: [NO_ERRORS_SCHEMA]
 })
 export class KirbyModule { }
