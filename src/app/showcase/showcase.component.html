@@ -1,2 +1,18 @@
-<a [routerLink]="['/', 'examples', exampleComponentName]" class="popout">Pop out »</a>
+<div class="show-case">
+  <h1 class="show-case__header">{{exampleComponentName}}</h1>
+  <div class="showcase-cta-box" *ngIf="isCTABoxShown">
+      <a [routerLink]="['/', 'examples', exampleComponentName]" class="showcase-cta-box__link">
+        <svg class="icon">
+          <use xlink:href="../../assets/icons/icon-sprite.svg#icon-enlarge2"></use>
+        </svg>
+        Pop out
+      </a>    
+      <a href={{exampleComponentGitUrl}} class="showcase-cta-box__link">
+        <svg class="icon">
+            <use xlink:href="../../assets/icons/icon-sprite.svg#icon-github"></use>
+        </svg>    
+        Example on github
+      </a>      
+    </div>  
+</div>
 <router-outlet></router-outlet>

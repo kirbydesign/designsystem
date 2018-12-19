@@ -5,6 +5,7 @@ import { CardShowcaseComponent } from './card-showcase/card-showcase.component';
 import { GridShowcaseComponent } from './grid-showcase/grid-showcase.component';
 import { ListShowcaseComponent } from './list-showcase/list-showcase.component';
 import { ShowcaseComponent } from './showcase.component';
+import { FontsShowcaseComponent } from './fonts-showcase/fonts-showcase.component';
 
 export const routes: Routes = [
     {
@@ -13,11 +14,11 @@ export const routes: Routes = [
         children: [
             {
                 path: '',
-                redirectTo: 'buttons',
+                redirectTo: 'button',
                 pathMatch: 'full',
             },
             {
-                path: 'buttons',
+                path: 'button',
                 component: ButtonShowcaseComponent
             },
             {
@@ -25,7 +26,7 @@ export const routes: Routes = [
                 component: AvatarShowcaseComponent
             },
             {
-                path: 'cards',
+                path: 'card',
                 component: CardShowcaseComponent
             },
             {
@@ -35,7 +36,11 @@ export const routes: Routes = [
             {
                 path: 'grid',
                 component: GridShowcaseComponent
-            }
+            },
+            {
+                path: 'fonts',
+                component: FontsShowcaseComponent
+            },
         ]
     },
 ];

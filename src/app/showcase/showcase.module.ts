@@ -11,7 +11,7 @@ import {HtmlViewerComponent} from '../shared/html-viewer/html-viewer.component';
   ],
   declarations: [
     ...COMPONENT_DECLARATIONS,
-    HtmlViewerComponent
+    HtmlViewerComponent,
   ],
   exports: COMPONENT_EXPORTS
 })

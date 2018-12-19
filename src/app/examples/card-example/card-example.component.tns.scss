@@ -1,3 +1,13 @@
+@import '../../../kirby/scss/native-imports';
+
+kirby-card-header {
+  padding-bottom: size("s");
+}
+
+.card-content {
+  padding: 0 size("m") size("m");
+}
+
 .test-me {
   background-color: orange;
 }
