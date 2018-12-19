@@ -1,8 +1,29 @@
-<h2>Button:</h2>
 <div class="example">
     <kirby-button-example></kirby-button-example>
-    <div class="code-example">
-      <h4>HTML:</h4>
-      <kirby-html-viewer [html]="exampleHtml"></kirby-html-viewer>
-    </div>
+    <kirby-html-viewer [html]="exampleHtml"></kirby-html-viewer>
+    <h4>Properties:</h4>
+    <table class="cookbook-properties">
+      <thead>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Input values</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>shape</code></td>
+          <td>Dictates the shape of the button. </td>
+          <td><code>round</code></td>
+        </tr>
+        <tr>
+          <td><code>expand</code></td>
+          <td>If the button needs to expand to full width of its parent container, then use expand.
+          <td><code>block</code></td>
+        </tr>
+        <tr>
+          <td><code>colortype</code></td>
+          <td>Sets which color the button should use from the theme palette</td>
+          <td><code>primary, secondary</code></td>
+        </tr>  
+      </tbody>
+    </table>
 </div>

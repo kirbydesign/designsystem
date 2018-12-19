@@ -16,7 +16,7 @@ export class GridExampleComponent implements OnInit {
   ngOnInit() {
     setTimeout(() => {
       this.cardConfigurations = [
-        new GridCardConfiguration(CardExampleComponent, 'Nr. 1', 2),
+        new GridCardConfiguration(CardExampleComponent, 'Nr. 1', 1),
         new GridCardConfiguration(CardExampleComponent, 'Nr. 2', 1),
         new GridCardConfiguration(CardExampleComponent, 'Nr. 3', 2),
         new GridCardConfiguration(CardExampleComponent, 'Nr. 4', 1),

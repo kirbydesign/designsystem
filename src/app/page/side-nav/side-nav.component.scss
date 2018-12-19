@@ -5,13 +5,47 @@ $page-header-color: #F4F1E8;
 $page-header-height: 7rem;
 $page-gutter: 1rem;
 
-:host {
-  padding: 2rem $page-gutter;
-}
+.side-menu {
+  display: none;
+  width: $page-side-nav-width;
+  background-color: white;
+  box-shadow: 0 0 2px 2px rgba(0,0,0,0.2);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 900;
+  @include media(">=large") {
+    display: block;
+    position: static;
+    background-color: transparent;
+    box-shadow: none;
+  }
+  &.is-open {
+    display: block;
+  }
+
+  &__close-btn {
+    color: black;
+    text-decoration: none;
+    appearance: none;
+    border: none;
+    background: none;
+    font-size: 0.7rem;
+    margin: -1rem 0 1rem -0.5rem;
+    padding: $page-gutter;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    @include media(">=large") { 
+      display: none;
+    }
+  }
+}  
 
 .side-nav {
   list-style: none;
-  padding: 0;
+  padding: 2rem $page-gutter;
   margin: 0;
 
   &--sub {
@@ -21,6 +55,7 @@ $page-gutter: 1rem;
     transform-origin: 0 0;
     will-change: height, transform;
     margin-left: -1rem;
+    padding: 0;
 
     &.is-selected {
       height: auto;
@@ -62,3 +97,4 @@ $page-gutter: 1rem;
   color: currentColor;
   fill: currentColor;
 }
+
