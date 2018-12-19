@@ -5,7 +5,6 @@ import { ButtonExampleComponent } from './button-example/button-example.componen
 import { CardExampleComponent } from './card-example/card-example.component';
 import { GridExampleComponent } from './grid-example/grid-example.component';
 import { ListExampleComponent } from './list-example/list-example.component';
-import { DoughnutChartNsExampleComponent } from './doughnut-chart-ns-example/doughnut-chart-ns-example.component';
 
 export const routes: Routes = [
     {
@@ -32,8 +31,4 @@ export const routes: Routes = [
         path: 'avatar',
         component: AvatarExampleComponent
     },
-    {
-        path: 'doughnut-chart-ns',
-        component: DoughnutChartNsExampleComponent
-    }
 ];
