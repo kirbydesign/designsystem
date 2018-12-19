@@ -7,7 +7,7 @@ import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 })
 export class SideNavComponent implements OnInit {
 
-  @Output() menuToggled = new EventEmitter<boolean>();
+  @Output() menuToggle = new EventEmitter<boolean>();
   @Input() isMenuOpen = false;
 
   constructor() { }
@@ -17,7 +17,7 @@ export class SideNavComponent implements OnInit {
 
   onToggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
-    this.menuToggled.emit(this.isMenuOpen);
+    this.menuToggle.emit(this.isMenuOpen);
   }
 
 }

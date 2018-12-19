@@ -8,7 +8,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class HeaderComponent implements OnInit {
 
   @Input() isMenuOpen = false;
-  @Output() menuToggled = new EventEmitter<boolean>();
+  @Output() menuToggle = new EventEmitter<boolean>();
 
   items = [
     {name: 'Design', selected: false},
@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
 
   onToggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
-    this.menuToggled.emit(this.isMenuOpen);
+    this.menuToggle.emit(this.isMenuOpen);
   }
 
 }
