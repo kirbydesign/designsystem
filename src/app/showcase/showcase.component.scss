@@ -67,6 +67,7 @@
   margin-top: size("m");
   thead {
     background-color: var(--kirby-background);
+    color: var(--kirby-on-background);
   }
   th {
     font-weight: font-weight("normal");
