@@ -9,6 +9,7 @@ $color-gray: #333333;
      justify-content: center;
      align-content: flex-start;
 }
+
 .doughnut-chart {
     background-color: transparent;
     height: 205;
@@ -18,9 +19,11 @@ $color-gray: #333333;
 %legend-shared {
     background-color: transparent;
 }
+
 .legend-stack {
     @extend %legend-shared;
 }
+
 .legend-label {
     @extend %legend-shared;
     margin: 0;
@@ -28,11 +31,13 @@ $color-gray: #333333;
     text-align: left;
     vertical-align: center;
 }
+
 .legend-text {
     @extend %legend-shared;
     font-size: font-size("n");
     color: $color-gray;
 }
+
 .roboto {
     font-family: 'Roboto';
 }
