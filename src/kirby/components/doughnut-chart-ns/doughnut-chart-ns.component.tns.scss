@@ -14,18 +14,6 @@ $color-gray: #333333;
     height: 205;
     width: 205;
 }
-.card-large :host .doughnut-chart {
-    margin-left: 10;
-    margin-right: 20;
-}
-.card-medium :host .doughnut-chart {
-    margin-left: 10;
-    margin-right: 20;
-}
-.card-small :host .doughnut-chart {
-    margin-top: 10;
-    margin-bottom: 20;
-}
 
 %legend-shared {
     background-color: transparent;
