@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import * as platform from 'tns-core-modules/platform';
 
-export class ChartModel {
+export class NativeScriptChartItem {
   constructor(
     public type?: string,
     public labelPercentage?: string,
@@ -12,15 +12,15 @@ export class ChartModel {
 }
 
 @Component({
-  selector: 'kirby-doughnut-chart-ns',
-  templateUrl: './doughnut-chart-ns.component.tns.html',
-  styleUrls: ['./doughnut-chart-ns.component.tns.scss']
+  selector: 'kirby-nativescript-doughnut-chart',
+  templateUrl: './doughnut-chart.component.tns-only.html',
+  styleUrls: ['./doughnut-chart.component.tns-only.scss']
 })
-export class DoughnutChartNsComponent implements OnInit {
+export class NativeScriptDoughnutChartComponent implements OnInit {
   public startAngle = platform.isIOS ? -90 : 270;
   public endAngle = platform.isIOS ? 270 : 360;
 
-  @Input() chartModels: ChartModel[];
+  @Input() items: NativeScriptChartItem[];
 
   constructor() {}
 

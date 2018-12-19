@@ -1,8 +1,8 @@
 <FlexboxLayout>
     <kirby-card>
-      <kirby-card-header [title]="title" [subtitle]="subtitle">
+      <kirby-card-header [title]="title">
       </kirby-card-header>
-        <kirby-doughnut-chart-ns [chartModels]="chartModels$ | async"></kirby-doughnut-chart-ns>
+      <kirby-nativescript-doughnut-chart [items]="chartItems$ | async"></kirby-nativescript-doughnut-chart>
       <kirby-card-footer>
         <Button kirby-button [text]="buttonText" expand="block" shape="round"></Button>
       </kirby-card-footer>

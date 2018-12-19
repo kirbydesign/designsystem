@@ -3,9 +3,10 @@ import { NativeScriptCommonModule } from 'nativescript-angular/common';
 
 import { KirbyModule } from '../../kirby/kirby.module';
 import { COMPONENT_DECLARATIONS } from './examples.common';
-import { DoughnutChartNsExampleComponent } from './doughnut-chart-ns-example/doughnut-chart-ns-example.component.tns';
+// tslint:disable-next-line:max-line-length
+import { NativeScriptDoughnutChartExampleComponent } from './nativescript-only/doughnut-chart-example/doughnut-chart-example.component.tns-only';
 
-const nativeScriptDeclarations = [...COMPONENT_DECLARATIONS, DoughnutChartNsExampleComponent];
+const nativeScriptDeclarations = [...COMPONENT_DECLARATIONS, NativeScriptDoughnutChartExampleComponent];
 
 @NgModule({
   imports: [

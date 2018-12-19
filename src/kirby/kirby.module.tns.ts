@@ -4,9 +4,10 @@ import { NativeScriptRouterModule } from 'nativescript-angular/router';
 import { NativeScriptUIChartModule } from 'nativescript-ui-chart/angular';
 
 import { declarations } from './kirby.common';
-import { DoughnutChartNsComponent } from './components/doughnut-chart-ns/doughnut-chart-ns.component.tns-only';
+// tslint:disable-next-line:max-line-length
+import { NativeScriptDoughnutChartComponent } from './components/nativescript-only/doughnut-chart/doughnut-chart.component.tns-only';
 
-const nativeScriptDeclarations = [...declarations, DoughnutChartNsComponent];
+const nativeScriptDeclarations = [...declarations, NativeScriptDoughnutChartComponent];
 
 @NgModule({
   imports: [

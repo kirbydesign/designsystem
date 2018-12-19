@@ -2,16 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map, delay } from 'rxjs/operators';
 
-import { ChartModel } from '../../../kirby/components/doughnut-chart-ns/doughnut-chart-ns.component.tns-only';
+import { NativeScriptChartItem } from '../../../../kirby/components/nativescript-only/doughnut-chart/doughnut-chart.component.tns-only';
 
 @Component({
-  selector: 'kirby-doughnut-chart-ns-example',
-  templateUrl: './doughnut-chart-ns-example.component.html',
-  styleUrls: ['./doughnut-chart-ns-example.component.scss']
+  selector: 'kirby-nativescript-doughnut-chart-example',
+  templateUrl: './doughnut-chart-example.component.tns-only.html',
+  styleUrls: ['./doughnut-chart-example.component.tns-only.scss']
 })
 
-export class DoughnutChartNsExampleComponent implements OnInit {
-  public chartModels$: Observable<ChartModel[]>;
+export class NativeScriptDoughnutChartExampleComponent implements OnInit {
+  public chartItems$: Observable<NativeScriptChartItem[]>;
   private _paletteColors = ['#33a87f', '#005d3c', '#02f5a1', '#24765a'];
   buttonText = 'View details';
   title = 'Your investments';
@@ -19,35 +19,36 @@ export class DoughnutChartNsExampleComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.chartModels$ = this.convertToChartModel(this.getMockData(), this._paletteColors).pipe(delay(500));
+    this.chartItems$ = this.mapToChartItems(this.getMockData(), this._paletteColors).pipe(delay(500));
   }
-  getMockData(): {type: string, labelPercentage: string, drawingPercentage: number}[] {
+
+  getMockData(): { type: string, labelPercentage: string, drawingPercentage: number }[] {
     return [
       {
         type: 'Stocks',
         labelPercentage: '75%',
         drawingPercentage: 73.41
-        },
-        {
+      },
+      {
         type: 'Investment Funds',
         labelPercentage: '25%',
         drawingPercentage: 24.61
-        },
-        {
+      },
+      {
         type: 'Certificates',
         labelPercentage: '< 1%',
         drawingPercentage: 0.98
-        },
-        {
+      },
+      {
         type: 'ETFs',
         labelPercentage: '< 1%',
         drawingPercentage: 0.98
-        }
+      }
     ];
   }
 
   // tslint:disable-next-line:max-line-length
-  convertToChartModel(data: {type: string, labelPercentage: string, drawingPercentage: number}[], colors: string[]): Observable<ChartModel[]> {
+  mapToChartItems(data: { type: string, labelPercentage: string, drawingPercentage: number }[], colors: string[]): Observable<NativeScriptChartItem[]> {
     let index = 0;
     const distributions$ = of(data);
     return distributions$.pipe(map(distributions => {
@@ -57,7 +58,7 @@ export class DoughnutChartNsExampleComponent implements OnInit {
         if (index > colors.length - 1) {
           index = 0;
         }
-        return new ChartModel(
+        return new NativeScriptChartItem(
           distribution.type,
           distribution.labelPercentage,
           distribution.drawingPercentage,

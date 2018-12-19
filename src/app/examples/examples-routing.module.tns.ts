@@ -3,12 +3,18 @@ import { NativeScriptRouterModule } from 'nativescript-angular/router';
 
 import { routes } from './examples.routes';
 import { ExamplesModule } from './examples.module';
-import { DoughnutChartNsExampleComponent } from './doughnut-chart-ns-example/doughnut-chart-ns-example.component.tns';
+// tslint:disable-next-line:max-line-length
+import { NativeScriptDoughnutChartExampleComponent } from './nativescript-only/doughnut-chart-example/doughnut-chart-example.component.tns-only';
 
 const nativeScriptRoutes = [...routes,
   {
-    path: 'doughnut-chart-ns',
-    component: DoughnutChartNsExampleComponent
+    path: 'nativescript-only',
+    children: [
+      {
+        path: 'doughnut-chart',
+        component: NativeScriptDoughnutChartExampleComponent
+      }
+    ]
   }
 ];
 
