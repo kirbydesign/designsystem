@@ -4,6 +4,7 @@ import { ButtonExampleComponent } from './button-example/button-example.componen
 import { CardExampleComponent } from './card-example/card-example.component';
 import { GridExampleComponent } from './grid-example/grid-example.component';
 import { ListExampleComponent } from './list-example/list-example.component';
+import { FontsExampleComponent } from './fonts-example/fonts-example.component';
 
 export const routes: Routes = [
     {
@@ -11,11 +12,11 @@ export const routes: Routes = [
         redirectTo: 'grid',
     },
     {
-        path: 'buttons',
+        path: 'button',
         component: ButtonExampleComponent
     },
     {
-        path: 'cards',
+        path: 'card',
         component: CardExampleComponent
     },
     {
@@ -29,5 +30,10 @@ export const routes: Routes = [
     {
         path: 'avatar',
         component: AvatarExampleComponent
+    },
+    {
+        path: 'fonts',
+        component: FontsExampleComponent
     }
+
 ];

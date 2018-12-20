@@ -61,7 +61,6 @@ export class GridComponent implements OnInit, OnDestroy {
     this.cardConfigs.forEach((card, index) => {
       // Cards colspan is added to the column counter
       columnCounter += card.preferredSize;
-      console.log('Iterating cards: ', card);
       // If only maxColumns are set to 1, just add all cards with a colspan of 1
       if (calculatedMaxColumns === 1) {
         this.cards.push(new GridCard(card, currentRow, currentColumn, 1));

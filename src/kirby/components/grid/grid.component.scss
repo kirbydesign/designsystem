@@ -9,12 +9,14 @@ $grid-item-min-height: 172px;
   grid-column-gap: size("gutter-small");
   grid-row-gap: size("gutter-small");
   max-width: $page-max-width;
-  margin: size("gutter") auto;
-  padding: 0 size("gutter");
+  margin: size("gutter-small") auto;
+  padding: 0 size("gutter-small");
   
   @include media(">=small") {
     grid-column-gap: size("gutter");
-    grid-row-gap: size("gutter");    
+    grid-row-gap: size("gutter");  
+    margin: size("gutter") auto;
+    padding: 0 size("gutter");  
   }
 
   @include media(">=medium") {
