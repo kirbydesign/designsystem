@@ -23,5 +23,5 @@ export const declarations = [
   IconComponent,
   GridComponent,
   ComponentLoaderDirective,
-  AvatarComponent
+  AvatarComponent,
 ];

@@ -1,0 +1,30 @@
+<FlexboxLayout class="background">
+    <RadPieChart allowAnimation="true" class="doughnut-chart">
+        <DonutSeries tkPieSeries seriesName="pie-palette" stackMode="stack" showPercentage="true" startAngle="{{startAngle}}" endAngle="{{endAngle}}"
+            selectionMode="None" outerRadiusFactor="1.0" innerRadiusFactor="0.6" [items]="items"
+            valueProperty="drawingPercentage" showLabels="false" legendLabel="label">
+        </DonutSeries>
+        <Palette tkPiePalette seriesName="pie-palette">
+            <ng-container *ngFor="let item of items">
+                <PaletteEntry tkPiePaletteEntry [fillColor]=item.color [strokeColor]=item.color></PaletteEntry>
+            </ng-container>
+        </Palette>
+    </RadPieChart>
+    <StackLayout class="legend-stack">
+        <StackLayout orientation="vertical" *ngFor="let item of items">
+            <Label nowrap="true" class="legend-label" [automationText]="item.type + ' ' + item.labelPercentage">
+                <FormattedString>
+                    <!-- 
+                        Determining the font family seems only to work with the first span. 
+                        The global font family or any other placement doesn't work.
+                    -->
+                    <Span text="&#x2588;" class="roboto" [style.color]="item.color"></Span> 
+                    <Span text="  "></Span>
+                    <Span [text]="item.type" class="legend-text"></Span>
+                    <Span text=" "></Span>
+                    <Span [text]="item.labelPercentage" class="legend-text"></Span>
+                </FormattedString>
+            </Label>
+        </StackLayout>
+    </StackLayout>
+</FlexboxLayout>
