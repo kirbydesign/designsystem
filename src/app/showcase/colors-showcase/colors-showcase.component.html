@@ -1,3 +1,7 @@
-<p>
-  colors-showcase works!
-</p>
+<ul class="color-palette">
+  <li *ngFor="let entry of colorPalette" class="test-{{entry.name}}">
+    {{entry.name}}
+    {{entry.color}}
+  </li>
+</ul>
+
