@@ -13,8 +13,8 @@
     <div class="kirby-text-large">Native example:</div>
 <pre>
 .color-sample-example {{'{'}}
-  color: var(--kirby-{{selectedOnColor}});
-  background-color: var(--kirby-{{selectedColor}});
+  color: get-color('{{selectedOnColor}}');
+  background-color: get-color('{{selectedColor}}');
 {{'}'}}</pre>  
   </div>
   <div class="color-sample-example {{selectedColor}}">
