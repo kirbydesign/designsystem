@@ -1,0 +1,38 @@
+/* Add mobile styles for the component here.  */
+.titles-container {
+    vertical-align: center;
+}
+
+.amount-container {
+    vertical-align: center;
+}
+
+.detail-container {
+    text-align: center;
+    vertical-align: center;
+}
+
+.list-item-title {
+    
+}
+
+.list-item-subTitle {
+    color: #a0a0a0
+    
+}
+
+.list-item-detail {
+    &.green {
+        color: lightgreen;
+    }
+    
+    &.red {
+        color: red;
+    }
+}
+
+.list-item-amount {
+    font-weight: bold;
+    horizontal-align:right;
+}
+
