@@ -1,6 +1,7 @@
 @import '../../kirby/scss/web-imports';
 .show-case {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   margin-bottom: 2rem;
 
@@ -33,6 +34,7 @@
   background-color: #ececec;
   box-shadow: 0px 3px 0px 0px rgba(25, 23, 23, 0.23);
   padding: 0.5rem 1rem;
+  margin-top: size("s");
   border-radius: 10px;
   z-index: 1;
   position: relative;

@@ -11,6 +11,9 @@ const styleDerp = require('sass-extract-loader!./colors-showcase.component.scss'
 })
 export class ColorsShowcaseComponent implements OnInit {
 
+  selectedColor = 'background';
+  selectedOnColor = 'on-background';
+  activeColorType = 'bg';
   colorPalette = [];
 
   constructor() {
@@ -21,14 +24,25 @@ export class ColorsShowcaseComponent implements OnInit {
   ngOnInit() {
   }
 
+  onColorClick(sassColor: SassColor) {
+    if (this.activeColorType === 'bg') {
+      this.selectedColor = sassColor.name;
+    } else {
+      this.selectedOnColor = sassColor.name;
+    }
+  }
+
+  // TODO TRM: Make this a general method to get colors
   getThemeColors(theme: string) {
     const colors = [];
     const defaultColors = styleDerp.global['$themes'].value[theme].value;
     for (const [value, type] of Object.entries(defaultColors)) {
       const sassColor = <SassColor>type;
-      colors.push({name: value, color: sassColor.value.hex});
+      sassColor.name = value;
+      console.log(sassColor);
+      colors.push(sassColor);
     }
     return colors;
   }
-
 }
+

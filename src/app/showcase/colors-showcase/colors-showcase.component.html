@@ -1,7 +1,47 @@
+<p class="kirby-typography">
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti quasi magni, pariatur voluptate nesciunt rem dolore repudiandae natus nobis doloribus officia at ad ab vel officiis. Provident facilis at accusamus.
+</p>
+
+<div class="derp">
+  <div class="code-wrapper">
+    <div class="kirby-text-large">Web example:</div>
+    <pre>
+.color-sample-example {{'{'}}
+  color: var(--kirby-{{selectedOnColor}});
+  background-color: var(--kirby-{{selectedColor}});
+{{'}'}}</pre>
+    <div class="kirby-text-large">Native example:</div>
+<pre>
+.color-sample-example {{'{'}}
+  color: var(--kirby-{{selectedOnColor}});
+  background-color: var(--kirby-{{selectedColor}});
+{{'}'}}</pre>  
+  </div>
+  <div class="color-sample-example {{selectedColor}}">
+    <div class="color-sample-on-text {{selectedOnColor}}">
+      Text
+    </div>
+  </div>
+  <div class="color-selector">
+    <div class="kirby-text-large">First pick color to set:</div>
+    <!-- TODO TRM - D. 21/12/2018 Radio buttons are currently unstyled because we have no design of them yet. -->
+    <p>
+      <input type="radio" id="color-bg" name="color-picker" [(ngModel)]="activeColorType" value="bg">
+      <label for="color-bg"> Background color</label>
+    </p>
+    <p>
+      <input type="radio" id="color-on" name="color-picker" [(ngModel)]="activeColorType" value="text">
+      <label for="color-on"> Text color</label>
+    </p>
+  </div>
+</div>
+
+<h4>Then click a color below to set the {{activeColorType === 'bg' ? 'background' : 'text'}} color in the example box.</h4>
 <ul class="color-palette">
-  <li *ngFor="let entry of colorPalette" class="test-{{entry.name}}">
-    {{entry.name}}
-    {{entry.color}}
+  <li *ngFor="let entry of colorPalette" class="color-box" (click)="onColorClick(entry)">
+    <div class="color-name">kirby-{{entry.name}}</div>
+    <div class="color-value">{{entry.value.hex}}</div>
+    <div class="color-sample {{entry.name}}"></div>
   </li>
 </ul>
 
