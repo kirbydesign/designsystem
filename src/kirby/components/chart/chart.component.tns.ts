@@ -3,7 +3,6 @@ import { WebView, LoadEventData } from 'ui/web-view';
 import { android, ios, AndroidApplication, AndroidActivityEventData } from 'tns-core-modules/application';
 import { Options } from 'highcharts';
 import { DonutOptions } from './donut/options';
-import { Page } from 'tns-core-modules/ui/page';
 
 const webViewInterfaceModule = require('nativescript-webview-interface');
 
@@ -23,26 +22,28 @@ export class ChartComponent implements OnInit, OnChanges {
 
   @ViewChild('webView') webViewRef: ElementRef;
   private chartWebViewInterface;
-  private pageLoaded = false;
+  private webViewReady = false;
 
-  constructor(private page: Page) { }
+  constructor() { }
 
-  ngOnInit() {
-    this.page.on('loaded', (data) => {
+  ngOnInit() { }
+
+  webViewLoaded(e) {
+    setTimeout(() => {
       this.setupWebViewInterface();
-      this.pageLoaded = true;
-    });
+      this.webViewReady = true;
+    }, 0);
   }
 
   private setupWebViewInterface() {
     const webView: WebView = this.webViewRef.nativeElement;
-    this.chartWebViewInterface = new webViewInterfaceModule.WebViewInterface(webView, '~/chart/chart.webview.html');
     webView.on(WebView.loadFinishedEvent, (args: LoadEventData) => {
       if (!args.error) {
         this.setupWebViewForPlatforms(webView);
         this.loadChartDataInWebView();
       }
     });
+    this.chartWebViewInterface = new webViewInterfaceModule.WebViewInterface(webView, '~/chart/chart.webview.html');
   }
 
   private loadChartDataInWebView() {
@@ -55,7 +56,7 @@ export class ChartComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    if (this.pageLoaded) {
+    if (this.webViewReady) {
       this.updateChart();
     }
   }

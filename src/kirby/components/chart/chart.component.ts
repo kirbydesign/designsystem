@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges, ElementRef, ViewChild } from '@angular/core';
-import { ChartObject, Options } from 'highcharts';
+import { Options } from 'highcharts';
 import * as Highcharts from 'highcharts';
 import { DonutOptions } from './donut/options';
 
@@ -32,7 +32,7 @@ export class ChartComponent implements OnInit, OnChanges {
       this.options.chart.type = chartType;
     }
     this.setChartProperties();
-    const chart: ChartObject = Highcharts.chart(this.chartContainer.nativeElement, this.options);
+    Highcharts.chart(this.chartContainer.nativeElement, this.options);
   }
 
   ngOnChanges() {
@@ -41,7 +41,7 @@ export class ChartComponent implements OnInit, OnChanges {
 
   updateChart() {
     this.setChartProperties();
-    const chart: ChartObject = Highcharts.chart(this.chartContainer.nativeElement, this.options);
+    Highcharts.chart(this.chartContainer.nativeElement, this.options);
   }
 
   setChartProperties() {
