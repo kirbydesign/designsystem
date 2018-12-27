@@ -1,4 +1,3 @@
-import { ChartValues } from './chart-values';
 import { Options } from 'highcharts';
 
 export class DonutOptions {
@@ -16,7 +15,7 @@ export class DonutOptions {
                 description: ''
             },
             title: {
-                text: ''
+                text: undefined
             },
             tooltip: {
                 enabled: false,
