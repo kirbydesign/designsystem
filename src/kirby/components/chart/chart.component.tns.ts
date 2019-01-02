@@ -65,10 +65,12 @@ export class ChartComponent implements OnInit, OnChanges {
   }
 
   updateChart() {
-    this.options.chart.height = this.height;
-    this.options.series[0].data = this.data;
-    this.options.chart.description = this.description;
-    if (this.options.chart && this.options.chart.type === 'pie') {
+    if (this.options.chart) {
+      this.options.chart.height = this.height;
+      this.options.series[0].data = this.data;
+      this.options.chart.description = this.description;
+    }
+    if (this.options.chart.type === 'pie') {
       this.options.plotOptions.pie.dataLabels.enabled = this.dataLabelsEnabled;
       this.options.plotOptions.pie.dataLabels.format = '{point.label}';
     }
