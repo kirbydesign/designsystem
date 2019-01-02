@@ -2,7 +2,8 @@ import { Component, OnInit, ViewChild, ElementRef, Input, OnChanges } from '@ang
 import { WebView, LoadEventData } from 'ui/web-view';
 import { android, ios, AndroidApplication, AndroidActivityEventData } from 'tns-core-modules/application';
 import { Options } from 'highcharts';
-import { DonutOptions } from './donut/options';
+import { DonutOptions } from './options/donut';
+import { AreaSplineOptions } from './options/areaspline';
 
 const webViewInterfaceModule = require('nativescript-webview-interface');
 
@@ -50,8 +51,10 @@ export class ChartComponent implements OnInit, OnChanges {
     const chartType = this.type === 'donut' ? 'pie' : this.type;
     if (chartType === 'pie') {
       this.options = new DonutOptions().options;
-      this.options.chart.type = chartType;
+    } else if (chartType === 'areaspline') {
+      this.options = new AreaSplineOptions().options;
     }
+    this.options.chart.type = chartType;
     this.updateChart();
   }
 
@@ -62,10 +65,10 @@ export class ChartComponent implements OnInit, OnChanges {
   }
 
   updateChart() {
+    this.options.chart.height = this.height;
+    this.options.series[0].data = this.data;
+    this.options.chart.description = this.description;
     if (this.options.chart && this.options.chart.type === 'pie') {
-      this.options.chart.height = this.height;
-      this.options.series[0].data = this.data;
-      this.options.chart.description = this.description;
       this.options.plotOptions.pie.dataLabels.enabled = this.dataLabelsEnabled;
       this.options.plotOptions.pie.dataLabels.format = '{point.label}';
     }

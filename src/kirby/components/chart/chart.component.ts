@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, OnChanges, ElementRef, ViewChild } from '@angular/core';
 import { Options } from 'highcharts';
 import * as Highcharts from 'highcharts';
-import { DonutOptions } from './donut/options';
+import { DonutOptions } from './options/donut';
+import { AreaSplineOptions } from './options/areaspline';
 
 import * as exporting from 'highcharts/modules/exporting.src'; exporting(Highcharts);
 import * as exportData from 'highcharts/modules/export-data'; exportData(Highcharts);
@@ -29,8 +30,10 @@ export class ChartComponent implements OnInit, OnChanges {
     const chartType = this.type === 'donut' ? 'pie' : this.type;
     if (chartType === 'pie') {
       this.options = new DonutOptions().options;
-      this.options.chart.type = chartType;
+    } else if (chartType === 'areaspline') {
+      this.options = new AreaSplineOptions().options;
     }
+    this.options.chart.type = chartType;
     this.setChartProperties();
     Highcharts.chart(this.chartContainer.nativeElement, this.options);
   }
@@ -45,10 +48,10 @@ export class ChartComponent implements OnInit, OnChanges {
   }
 
   setChartProperties() {
+    this.options.chart.height = this.height;
+    this.options.series[0].data = this.data;
+    this.options.chart.description = this.description;
     if (this.options.chart && this.options.chart.type === 'pie') {
-      this.options.chart.height = this.height;
-      this.options.series[0].data = this.data;
-      this.options.chart.description = this.description;
       this.options.plotOptions.pie.dataLabels.enabled = this.dataLabelsEnabled;
       this.options.plotOptions.pie.dataLabels.format = '{point.label}';
     }
