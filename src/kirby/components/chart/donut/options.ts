@@ -15,7 +15,7 @@ export class DonutOptions {
                 description: ''
             },
             title: {
-                text: undefined
+                text: ''
             },
             tooltip: {
                 enabled: false,
