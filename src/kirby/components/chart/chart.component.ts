@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, OnChanges, ElementRef, ViewChild } from '@angular/core';
 import { Options } from 'highcharts';
 import * as Highcharts from 'highcharts';
-import { DonutOptions } from './donut/options';
+import { DonutOptions } from './options/donut';
 
 import * as exporting from 'highcharts/modules/exporting.src'; exporting(Highcharts);
 import * as exportData from 'highcharts/modules/export-data'; exportData(Highcharts);

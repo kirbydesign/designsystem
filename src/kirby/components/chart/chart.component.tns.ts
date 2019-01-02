@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef, Input, OnChanges } from '@ang
 import { WebView, LoadEventData } from 'ui/web-view';
 import { android, ios, AndroidApplication, AndroidActivityEventData } from 'tns-core-modules/application';
 import { Options } from 'highcharts';
-import { DonutOptions } from './donut/options';
+import { DonutOptions } from './options/donut';
 
 const webViewInterfaceModule = require('nativescript-webview-interface');
 
