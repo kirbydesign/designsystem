@@ -9,6 +9,7 @@
     "src/test.ts",
     "**/*.spec.ts",
     "**/*.tns.ts",
+    "**/*.tns-only.ts",
     "**/*.android.ts",
     "**/*.ios.ts",
     "./main.ns.aot.ts",

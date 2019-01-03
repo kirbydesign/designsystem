@@ -1,6 +1,9 @@
-kirby-list {
-    display: inline-block;
-    width: 200px;
-    border: 1px solid lightskyblue;
-    border-bottom: none;
+:host {
+    background-color: #f5f5f5;
+    padding: 2px;
+    width: 800px;
+}
+
+hr {
+    visibility: hidden;
 }

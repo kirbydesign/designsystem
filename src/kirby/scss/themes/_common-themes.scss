@@ -1,29 +1,49 @@
 $themes: (
   'cookbook': (
-    'surface': rgb(250, 250, 250),
-    'on-surface': rgb(33, 33, 33),
-    'primary': rgb(51, 134, 212),
-    'on-primary': rgb(255, 255, 255),
+    'surface': #fff,
+    'on-surface': #333,
+    'primary': #2a71b4,
+    'primary-light': #2a71b4,
+    'primary-lighter': #2a71b4,
+    'on-primary': #fff,
     'secondary': lighten(rgb(51, 134, 212), 30),
     'on-secondary': rgb(64, 64, 64),
+    'notification': #ff3b30,
+    'on-notification' : #fff,
+    'error': #ff3b30,
+    'on-error': #fff,
+    'warning': #ff9500,
+    'on-warning' : #fff,
+    'positive': #4CD964,
+    'on-positive' : #fff,
+    'disabled' : #b6b6b6,
+    'on-disabled' : #b6b6b6,
+    'text-secondary': #666,
   ),
-  'cake': (
-    'primary': rgb(199, 159, 98),
-    'on-primary': rgb(255, 255, 255),
-    'secondary': rgb(255, 255, 255),
+  'default': (
+    'surface': #fff,
+    'on-surface': #333,
+    'primary': #005C3C,
+    'primary-light': #7fad9d,
+    'primary-lighter': #bfd6ce,
+    'on-primary': #fff,
+    'secondary': lighten(rgb(51, 134, 212), 30),
     'on-secondary': rgb(64, 64, 64),
-  ),
-  'dark': (
-    'surface': rgb(64, 64, 64),
-    'on-surface': rgb(255, 255, 255),
-    'primary': rgb(64, 64, 64),
-    'on-primary': rgb(252, 252, 252),
-    'secondary': rgb(255, 255, 255),
-    'on-secondary': rgb(64, 64, 64),
+    'notification': #ff3b30,
+    'on-notification' : #fff,
+    'error': #ff3b30,
+    'on-error': #fff,
+    'warning': #ff9500,
+    'on-warning' : #fff,
+    'positive': #4CD964,
+    'on-positive' : #fff,
+    'disabled' : #b6b6b6,
+    'on-disabled' : #b6b6b6,
+    'text-secondary': #666,
   )
 );
 
-@function get-color($variant, $map: map-get($themes, 'dark')) {
+@function get-color($variant, $map: map-get($themes, 'default')) {
   $value: map-get($map, $variant);
   @if $value != null {
     @return $value;
