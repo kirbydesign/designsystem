@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 
 @Component({
   selector: 'kirby-side-nav',
@@ -7,9 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SideNavComponent implements OnInit {
 
+  @Output() menuToggle = new EventEmitter<boolean>();
+  @Input() isMenuOpen = false;
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onToggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+    this.menuToggle.emit(this.isMenuOpen);
   }
 
 }

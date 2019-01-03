@@ -5,6 +5,7 @@ $native: false;
 @import './common-variables';
 @import './web-variables';
 @import './themes/common-themes';
+@import './base/all';
 
 :root {
     --kirby-primary: #{get-color('primary')};

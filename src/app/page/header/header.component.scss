@@ -3,6 +3,7 @@
 $page-header-bg: #1C1C1C;
 $page-header-color: #F4F1E8;
 $page-header-height: 7rem;
+$page-header-height-small: 4rem;
 $page-gutter: 1rem;
 
 $sårt: #1C1C1C;
@@ -20,11 +21,43 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: $page-header-height;
+  height: $page-header-height-small;
   margin: 0 auto;
   max-width: $page-max-width;
-  padding: 0 $page-gutter;
+  padding: 0 $page-gutter 0 0;
   color: $hvii;
+  @include media (">=large") {
+    padding: 0 $page-gutter;
+    height: $page-header-height;
+  }
+}
+
+.menu-button {
+  color: $hvii;
+  text-decoration: none;
+  appearance: none;
+  border: none;
+  background: none;
+  font-size: 0.7rem;
+  margin: 0;
+  padding: $page-gutter;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  @include media(">=large") {
+    display: none;
+  } 
+
+  .icon {
+    width: 1.4rem;
+    height: 1.4rem;
+    align-self: center;
+    justify-self: center;
+    stroke: currentColor;
+    fill: currentColor;
+  }
 }
 
 .header-nav {
@@ -88,12 +121,15 @@ header {
 }
 
 .block-container {
-  max-width: 5rem;
-  height: 5rem;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 35% 1fr;
-  grid-gap: 5%;
+  display: none;
+  @include media(">=large") {
+    max-width: 5rem;
+    height: 5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 35% 1fr;
+    grid-gap: 5%;
+  }
 }
 
 @keyframes enter {

@@ -1,0 +1,20 @@
+@import '../../scss/native-imports';
+
+$list-item-height: 44;
+$list-item-padding: 16;
+$list-header-height: 38;
+
+.list-header-container {
+    padding-left: $list-item-padding;
+    padding-right: $list-item-padding;
+    height: $list-header-height;
+    border-color: #d6d6d6;
+    border-width: 0 0 1 0;
+}
+
+.list-item-container {
+    color: get-color('primary');
+    padding-left: $list-item-padding;
+    padding-right: $list-item-padding;
+    height: $list-item-height;
+}
