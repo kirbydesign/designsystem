@@ -9,7 +9,8 @@ export class DonutOptions {
             },
             chart: {
                 style: {
-                    fontFamily: 'Effra'
+                    fontFamily: 'Roboto',
+                    fontWeight: '300'
                 },
                 type: '',
                 description: ''
