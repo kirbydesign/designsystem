@@ -1,27 +1,45 @@
 <kirby-card>
     <kirby-card-header [title]="'Donut'"></kirby-card-header>
-    <kirby-chart [height]="320" [type]="'donut'" [dataLabelsEnabled]="true" [description]="'Accessibility description goes here'" [data]="[
-    {
-        name: 'Boomerangs 25%',
-        y: 25,
-        label: '25%'
-    },
-    {
-        name: 'Bubbles 41%',
-        y: 41,
-        label: '41%'
-    },
-    {
-        name: 'Jumping 33%',
-        y: 33,
-        label: '33%'
-    },
-    {
-        name: 'Christmas < 1%',
-        y: 1,
-        label: '< 1%'
-    }
-]"></kirby-chart>
+    <kirby-chart 
+        [height]="320" 
+        [type]="'donut'" 
+        [dataLabelsEnabled]="true" 
+        [description]="'Accessibility description goes here'" 
+        [data]="[
+        {
+            name: 'Boomerangs 25%',
+            y: 25,
+            label: '25%'
+        },
+        {
+            name: 'Bubbles 41%',
+            y: 41,
+            label: '41%'
+        },
+        {
+            name: 'Jumping 33%',
+            y: 33,
+            label: '33%'
+        },
+        {
+            name: 'Christmas < 1%',
+            y: 1,
+            label: '< 1%'
+        }]">
+    </kirby-chart>
+    <kirby-card-footer>
+        <button kirby-button>Button</button>
+    </kirby-card-footer>
+</kirby-card>
+
+<kirby-card>
+    <kirby-card-header [title]="'Areaspline'"></kirby-card-header>
+    <kirby-chart 
+        [height]="320" 
+        [type]="'areaspline'" 
+        [description]="'Accessibility description goes here'"
+        [data]="[160.9, 171.5, 106.4, 129.2, 144.0, 146.0, 135.6, 148.5, 180.4, 194.1, 195.6, 170.4]">
+    </kirby-chart>
     <kirby-card-footer>
         <button kirby-button>Button</button>
     </kirby-card-footer>
