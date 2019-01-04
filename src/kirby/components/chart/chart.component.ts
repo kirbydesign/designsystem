@@ -39,7 +39,9 @@ export class ChartComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    this.updateChart();
+    if (this.options.chart) {
+      this.updateChart();
+    }
   }
 
   updateChart() {

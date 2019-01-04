@@ -29,8 +29,8 @@ export class AreaSplineOptions {
             },
             yAxis: {
                 visible: false,
-                minPadding: 0,
-                maxPadding: 0
+                endOnTick: false,
+                startOnTick: false
             },
             plotOptions: {
                 areaspline: {
