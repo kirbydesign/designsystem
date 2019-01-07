@@ -1,4 +1,4 @@
-// export class Section {
-//     title: String
-//     items: any;
-// }
+export class Section {
+    title: string
+    items: any;
+}

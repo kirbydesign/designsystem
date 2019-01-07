@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Directive, TemplateRef, ContentChild, EventEm
 import { Observable, isObservable, Subscription } from 'rxjs';
 import { ListItemComponent } from './list-item/list-item.component';
 import {Section} from '~/kirby/components/list/section';
+// import {Section} from '../section';
 
 @Directive({
   selector: '[kirbyListItem]'
