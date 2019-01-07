@@ -4,7 +4,7 @@
 <p>
   <strong>Note: NativeScript and Web coloring is set differently, because NativeScript doesn't support CSS variables.</strong>
 </p>
-<div class="derp">
+<div class="color-sample-wrapper">
   <div class="code-wrapper">
     <div class="kirby-text-large">Web example:</div>
     <pre>
@@ -38,7 +38,7 @@
   </div>
 </div>
 
-<h4>Then click a color below to set the {{activeColorType === 'bg' ? 'background' : 'text'}} color in the example box.</h4>
+<p class="kirby-text-large">Then click a color below to set the {{activeColorType === 'bg' ? 'background' : 'text'}} color in the example box.</p>
 <ul class="color-palette">
   <li *ngFor="let entry of colorPalette" class="color-box" (click)="onColorClick(entry)">
     <div class="color-name">kirby-{{entry.name}}</div>
