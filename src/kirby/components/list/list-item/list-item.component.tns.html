@@ -1,0 +1,18 @@
+<GridLayout columns="2*, *, 2*">
+    <!-- First column -->
+  <StackLayout class="titles-container" col="0">
+    <Label
+      text="{{title}}"
+      class="list-item-title"
+    ></Label>
+    <Label text="{{subTitle}}" class="list-item-subTitle"></Label>
+  </StackLayout>
+  <!-- middle column -->
+  <StackLayout class="detail-container" col="1" >
+    <Label text="{{detail}}" class="list-item-detail" [ngClass]="{'green': detail > 0, 'red': detail < 0}"></Label>
+  </StackLayout>
+<!-- Right column -->
+  <StackLayout class="amount-container" col="2" >
+    <Label text="{{amount}}" class="list-item-amount "></Label>
+  </StackLayout>
+</GridLayout>

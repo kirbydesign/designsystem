@@ -9,7 +9,7 @@
       "version": "5.0.0"
     }
   },
-  "version": "0.0.38",
+  "version": "0.0.42",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -21,7 +21,7 @@
     "dist": "ng build --prod --aot --progress false",
     "android": "tns run android --hmr",
     "android-debug": "tns debug android --bundle",
-    "ios": "tns run ios --hmr --device 'iPhone X'",
+    "ios": "tns run ios --hmr",
     "ios-debug": "tns debug ios --bundle --device 'iPhone X'",
     "pack-copy-to-dist-folder-watch": "cpx \"src\\kirby\\**\\!(*.spec.ts)\" dist-lib --watch",
     "postversion": "git push && git push --tags"
@@ -43,6 +43,7 @@
     "nativescript-orientation": "^2.2.1",
     "nativescript-platform-css": "^1.6.6",
     "nativescript-theme-core": "~1.0.4",
+    "nativescript-ui-chart": "^3.9.1",
     "prismjs": "^1.15.0",
     "reflect-metadata": "~0.1.8",
     "rxjs": "^6.3.3",

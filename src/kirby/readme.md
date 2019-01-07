@@ -53,3 +53,39 @@ Include the Kirby Sass variables in your app:
   ],
 ...
 ```
+
+## NativeScript-Only Components
+
+Some Kirby components only exists as [Platform-Specific Components](https://docs.nativescript.org/angular/code-sharing/platform-specific-components), e.g. `NativeScriptDoughnutChartComponent`.
+
+To **avoid** typescript compilation of NativeScript-Only Components in your **web** project, you need to add the following to your `tsconfig.json`:
+
+```json
+...
+  "exclude": [
+    ...
+    "**/*.tns-only.ts",
+    ...
+  ],
+...
+```
+Then, make sure you **don't** exclude `tns-only.ts` files in your **{N}** specific `tsconfig.tns.json`:
+```json
+...
+  "exclude": [
+    "**/*.tns.ts",
+    "**/*.android.ts",
+    "**/*.ios.ts",
+    "**/*.spec.ts"
+  ],
+...
+```
+**Finally**, for all imports in your **{N}** specific typescript files (`*.tns.ts`) you will need to use a path that includes the **{N}** specific typings definition:
+```ts
+import { NativeScriptDoughnutChartComponent } from '@kirbydesign/designsystem/index.d.tns-only';
+```
+### Autocompletion
+To enable autocompletion (e.g. in VS Code), you need to add the following line to your `reference.d.ts`:
+```ts
+/// <reference path="./node_modules/@kirbydesign/designsystem/index.d.tns-only.ts" /> Needed for autocompletion and compilation.
+```
