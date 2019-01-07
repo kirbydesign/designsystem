@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Directive, TemplateRef, ContentChild, EventEmitter, Output } from '@angular/core';
 import { Observable, isObservable, Subscription } from 'rxjs';
 import { ListItemComponent } from './list-item/list-item.component';
+import {Section} from '~/kirby/components/list/section';
 
 @Directive({
   selector: '[kirbyListItem]'
@@ -17,6 +18,11 @@ export class ListHeaderDirective {}
 })
 export class ListSectionHeaderDirective {}
 
+// class Section {
+//   title: String
+//   items: any;
+// }
+
 @Component({
   selector: 'kirby-list',
   templateUrl: './list.component.html',
@@ -25,7 +31,7 @@ export class ListSectionHeaderDirective {}
 export class ListComponent implements OnInit {
 
   @Input() items: any[];
-  @Input() sections: any[];
+  @Input() sections: Section[];
   // The first element that matches ListItemDirective. As a structural directive it unfolds into a template. This is a reference to that.
   @ContentChild(ListItemDirective, {read: TemplateRef}) listItemTemplate;
   @ContentChild(ListHeaderDirective, {read: TemplateRef}) headerTemplate;
