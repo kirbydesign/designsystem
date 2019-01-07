@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {SassColor} from '../../../kirby/scss/scss-helper';
 
 declare var require;
-const styleDerp = require('sass-extract-loader!./colors-showcase.component.scss');
+const style = require('sass-extract-loader!./colors-showcase.component.scss');
 
 @Component({
   selector: 'kirby-colors-showcase',
@@ -17,7 +17,6 @@ export class ColorsShowcaseComponent implements OnInit {
   colorPalette = [];
 
   constructor() {
-    console.log(styleDerp);
     this.colorPalette = this.getThemeColors('default');
   }
 
@@ -35,11 +34,10 @@ export class ColorsShowcaseComponent implements OnInit {
   // TODO TRM: Make this a general method to get colors
   getThemeColors(theme: string) {
     const colors = [];
-    const defaultColors = styleDerp.global['$themes'].value[theme].value;
+    const defaultColors = style.global['$themes'].value[theme].value;
     for (const [value, type] of Object.entries(defaultColors)) {
       const sassColor = <SassColor>type;
       sassColor.name = value;
-      console.log(sassColor);
       colors.push(sassColor);
     }
     return colors;
