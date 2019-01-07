@@ -1,7 +1,13 @@
 <ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
+
 <ul>
-  <li *ngFor="let item of items" (click)="onRowClick(item)">
-    <ng-container *ngTemplateOutlet="listItemTemplate; context: {$implicit: item}" >
-    </ng-container>
-  </li>
+    <li *ngFor="let section of sections">
+        <ng-container *ngTemplateOutlet="sectionHeaderTemplate; context: {$implicit: section}"></ng-container>
+    <ul>
+        <li *ngFor="let item of items" (click)="onRowClick(item)">
+            <ng-container *ngTemplateOutlet="listItemTemplate; context: {$implicit: item}">
+            </ng-container>
+        </li>
+    </ul>
+    </li>
 </ul>

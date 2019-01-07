@@ -19,6 +19,31 @@ export class ListExampleComponent implements OnInit {
     {title: 'Novo Nordisk A/S B', subTitle: '18 stk', amount: '7560 DKK', detail: 171}
   ];
 
+  myItemsList = [
+    {title: 'Vestas Wind Systems', subTitle: '20 stk', amount: '18.309 DKK', detail: 225},
+    {title: 'A.P. Møller-Mærsk', subTitle: '2 stk', amount: '14.019 DKK', detail: -354},
+    {title: 'Novo Nordisk A/S B', subTitle: '18 stk', amount: '7560 DKK', detail: 171}
+  ];
+
+  mySections = [
+    {
+      sectionTitle: 'Fredag 2. November',
+      items: this.myItemsList,
+    }
+    ,
+    {
+      sectionTitle: 'Torsdag 1. November',
+      items: this.myItemsList,
+    }
+    ,
+    {
+      sectionTitle: 'Onsdag 31. Oktober',
+      items: this.myItemsList,
+    }
+  ];
+
+
+
   constructor() { }
 
   ngOnInit() {

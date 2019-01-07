@@ -10,9 +10,12 @@
 
 <hr>
 
-<kirby-list [items]="myItems">
-  <kirby-list-header *kirbyListHeader="let columns" [left]="'Left'" [middle]="'Middle'" [right]="'Right'"></kirby-list-header>
-  <kirby-list-item *kirbyListItem="let item" [title]="item.title" [amount]="item.amount" [detail]="item.detail" (click)="onClick(item)"></kirby-list-item>
+
+<kirby-list [items]="mySections[0].items" [sections]="mySections">
+    <kirby-list-header *kirbyListHeader="let columns" [left]="'Left'" [middle]="'Middle'" [right]="'Right'"></kirby-list-header>
+    <kirby-list-section-header *kirbyListSectionHeader="let title"></kirby-list-section-header>
+    <!--<kirby-list-section-header *kirbyListSectionHeader="let section" [title]="section.t.s"></kirby-list-section-header>-->
+    <kirby-list-item *kirbyListItem="let item" [title]="item.title" [amount]="item.amount" [detail]="item.detail" (click)="onClick(item)"></kirby-list-item>
 </kirby-list>
   
 <hr>
