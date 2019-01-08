@@ -26,6 +26,10 @@
                 chartData.options.plotOptions.pie.point.events.legendItemClick = function(e) {
                     return e.preventDefault();
                 }
+            } else if (chartData.options.chart.type === 'areaspline') {
+                chartData.options.tooltip.formatter = function(e) {
+                    return '<div style=\'margin-top: 6px;\'>' + this.y + '</div>';
+                }
             }
         }
 

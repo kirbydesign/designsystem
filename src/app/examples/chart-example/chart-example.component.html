@@ -1,10 +1,6 @@
 <kirby-card>
     <kirby-card-header [title]="'Donut'"></kirby-card-header>
-    <kirby-chart 
-        [height]="320" 
-        [type]="'donut'" 
-        [dataLabelsEnabled]="true" 
-        [description]="'Accessibility description goes here'" 
+    <kirby-chart [height]="320" [type]="'donut'" [dataLabelsEnabled]="true" [description]="'Accessibility description goes here'"
         [data]="[
         {
             name: 'Boomerangs 25%',
@@ -34,13 +30,15 @@
 
 <kirby-card>
     <kirby-card-header [title]="'Areaspline'"></kirby-card-header>
-    <kirby-chart 
-        [height]="320" 
-        [type]="'areaspline'" 
-        [description]="'Accessibility description goes here'"
-        [data]="[160.9, 171.5, 106.4, 129.2, 144.0, 146.0, 135.6, 148.5, 180.4, 194.1, 195.6, 170.4]">
+    <kirby-chart [height]="240" [type]="'areaspline'" [description]="'Accessibility description goes here'" [data]="data">
+        <!-- data = [160.9, 171.5, 106.4, 129.2, 144.0, 146.0, 135.6, 148.5, 180.4, 194.1, 195.6, 170.4] -->
     </kirby-chart>
     <kirby-card-footer>
-        <button kirby-button>Button</button>
+        <!-- example period selector -->
+        <div>
+            <span (click)="data = [200, 100, 300, 100, 200, 300, 200]">Jan </span>
+            <span (click)="data = [100, 100, 100, 400, 200, 200, 200]">Feb </span>
+            <span (click)="data = [500, 400, 300, 200, 100, 200, 300]">Mar </span>
+        </div>
     </kirby-card-footer>
 </kirby-card>

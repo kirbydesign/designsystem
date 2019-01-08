@@ -13,8 +13,18 @@ export class AreaSplineOptions {
                 enabled: false
             },
             tooltip: {
-                enabled: false,
-                animation: false
+                enabled: true,
+                animation: false,
+                shape: 'circle',
+                borderColor: '#C9E5C9',
+                backgroundColor: '#FFFFFF',
+                useHTML: true,
+                style: {
+                    fontSize: '1rem'
+                },
+                formatter: function () {
+                    return '<div style=\'margin-top: 6px;\'>' + this.y + '</div>';
+                }
             },
             chart: {
                 type: 'areaspline',
@@ -47,14 +57,15 @@ export class AreaSplineOptions {
                     lineWidth: 2
                 },
                 line: {
-                    allowPointSelect: false
+                    allowPointSelect: true
                 },
                 series: {
                     marker: {
                         enabled: false,
                         states: {
                             hover: {
-                                enabled: false
+                                enabled: true,
+                                fillColor: '#177E17'
                             }
                         }
                     }
