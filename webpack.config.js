@@ -226,6 +226,7 @@ module.exports = env => {
                 { from: { glob: "**/*.jpg" } },
                 { from: { glob: "**/*.png" } },
                 { from: "kirby/components/chart/chart.webview.html", to: "chart" },
+                { from: "kirby/components/chart/css/styles.css", to: "chart" },
                 { from: "../node_modules/highcharts/highcharts.js", to: "chart" },
                 { from: "../node_modules/nativescript-webview-interface/www/nativescript-webview-interface.js", to: "chart" },
             ], { ignore: [`${relative(appPath, appResourcesFullPath)}/**`] }),
