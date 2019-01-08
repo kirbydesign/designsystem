@@ -44,7 +44,8 @@ export class DonutOptions {
                         style: {
                             fontSize: '1rem',
                             fontWeight: '200'
-                        }
+                        },
+                        format: '{point.label}'
                     },
                     point: {
                         events: {

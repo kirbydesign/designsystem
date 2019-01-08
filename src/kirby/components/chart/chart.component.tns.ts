@@ -49,10 +49,15 @@ export class ChartComponent implements OnInit, OnChanges {
 
   private loadChartDataInWebView() {
     const chartType = this.type === 'donut' ? 'pie' : this.type;
-    if (chartType === 'pie') {
-      this.options = new DonutOptions().options;
-    } else if (chartType === 'areaspline') {
-      this.options = new AreaSplineOptions().options;
+    switch (chartType) {
+      case 'pie': {
+        this.options = new DonutOptions().options;
+        break;
+      }
+      case 'areaspline': {
+        this.options = new AreaSplineOptions().options;
+        break;
+      }
     }
     this.options.chart.type = chartType;
     this.updateChart();
@@ -72,7 +77,6 @@ export class ChartComponent implements OnInit, OnChanges {
     }
     if (this.options.chart.type === 'pie') {
       this.options.plotOptions.pie.dataLabels.enabled = this.dataLabelsEnabled;
-      this.options.plotOptions.pie.dataLabels.format = '{point.label}';
     }
     const data = {
       options: this.options,

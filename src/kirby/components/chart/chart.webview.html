@@ -23,13 +23,18 @@
 
         function configureChartOptions(chartData) {
             chartData.options.chart.height = chartData.height;
-            if (chartData.options.chart.type === 'pie') {
-                chartData.options.plotOptions.pie.point.events.legendItemClick = function(e) {
-                    return e.preventDefault();
+            switch (chartData.options.chart.type) {
+                case 'pie': {
+                    chartData.options.plotOptions.pie.point.events.legendItemClick = function(e) {
+                        return e.preventDefault();
+                    }
+                    break;
                 }
-            } else if (chartData.options.chart.type === 'areaspline') {
-                chartData.options.tooltip.formatter = function(e) {
-                    return '<div style=\'margin-top: 6px;\'>' + this.y + '</div>';
+                case 'areaspline': {
+                    chartData.options.tooltip.formatter = function() {
+                        return '<div style=\'margin-top: 6px;\'>' + this.y + '</div>';
+                    }
+                    break;
                 }
             }
         }
