@@ -9,15 +9,11 @@ import {ListSection} from '~/kirby/components/list/list-section';
 export class ListSectionHeaderComponent implements OnInit {
 
   @Input() section: ListSection;
-  // @Input() section: ListSection;
-  // @Input() title = ''
   constructor() { }
 
   get title(): String {
     return this.section.title;
   }
-
-
 
   ngOnInit() {
   }

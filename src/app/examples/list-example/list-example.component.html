@@ -1,17 +1,17 @@
-<kirby-list [items]="myItems">
+<kirby-list [sections]="mySectionListWithOneElement">
   <kirby-list-item *kirbyListItem="let item" [item]="item" (click)="onClick(item)"></kirby-list-item>
 </kirby-list>
 
 <hr>
 
-<kirby-list [items]="myItems">
+<kirby-list [sections]="mySectionListWithOneElement">
   <kirby-list-item *kirbyListItem="let item" [title]="item.title" [amount]="item.amount" (click)="onClick(item)"></kirby-list-item>
 </kirby-list>
 
 <hr>
 
 
-<kirby-list [sections]="mySections">
+<kirby-list [sections]="mySectionListWithManyElements">
     <kirby-list-section-header *kirbyListSectionHeader></kirby-list-section-header>
     <kirby-list-item *kirbyListItem="let item" [title]="item.title" [amount]="item.amount" [detail]="item.detail" (click)="onClick(item)"></kirby-list-item>
 </kirby-list>
