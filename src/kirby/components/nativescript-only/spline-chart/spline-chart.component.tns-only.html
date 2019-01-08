@@ -1,0 +1,7 @@
+<FlexboxLayout>
+    <RadCartesianChart tkExampleTitle tkToggleNavButton height="300" width="300">
+        <CategoricalAxis tkCartesianHorizontalAxis labelSize="14"lineColor="#ccc"></CategoricalAxis>
+        <LinearAxis tkCartesianVerticalAxis ></LinearAxis>
+        <SplineSeries tkCartesianSeries [items]="categoricalSource" categoryProperty="Country" valueProperty="Amount" showLabels="true"></SplineSeries>
+    </RadCartesianChart>
+</FlexboxLayout>

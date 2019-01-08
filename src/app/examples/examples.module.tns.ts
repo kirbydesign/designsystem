@@ -5,8 +5,10 @@ import { KirbyModule } from '../../kirby/kirby.module';
 import { COMPONENT_DECLARATIONS } from './examples.common';
 // tslint:disable-next-line:max-line-length
 import { NativeScriptDoughnutChartExampleComponent } from './nativescript-only/doughnut-chart-example/doughnut-chart-example.component.tns-only';
-
-const nativeScriptDeclarations = [...COMPONENT_DECLARATIONS, NativeScriptDoughnutChartExampleComponent];
+// tslint:disable-next-line:max-line-length
+import { NativeScriptSplineChartExampleComponent } from './nativescript-only/spline-chart-example/spline-chart-example.component.tns-only';
+// tslint:disable-next-line:max-line-length
+const nativeScriptDeclarations = [...COMPONENT_DECLARATIONS, NativeScriptDoughnutChartExampleComponent, NativeScriptSplineChartExampleComponent];
 
 @NgModule({
   imports: [
