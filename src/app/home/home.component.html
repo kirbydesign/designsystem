@@ -1,6 +1,6 @@
-<kirby-header (menuToggled)="onMenuToggle($event)" [isMenuOpen]="isMenuOpen"></kirby-header>
+<kirby-header (menuToggle)="onMenuToggle($event)" [isMenuOpen]="isMenuOpen"></kirby-header>
 <main>
-    <kirby-side-nav (menuToggled)="onMenuToggle($event)" [isMenuOpen]="isMenuOpen"></kirby-side-nav>
+    <kirby-side-nav (menuToggle)="onMenuToggle($event)" [isMenuOpen]="isMenuOpen"></kirby-side-nav>
     <section>
         <router-outlet></router-outlet>
     </section>

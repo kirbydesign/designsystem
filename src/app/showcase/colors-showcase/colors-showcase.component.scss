@@ -1,6 +1,5 @@
 @import '../../../kirby/scss/web-imports';
 
-$my-color: #f0f;
 @each $color, $color-name in map-get($themes, 'default') {
   .#{$color} {
     background-color: var(--kirby-#{$color});
@@ -69,7 +68,7 @@ $my-color: #f0f;
   }
 }
 
-.derp {
+.color-sample-wrapper {
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;

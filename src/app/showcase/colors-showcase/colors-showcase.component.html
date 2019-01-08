@@ -1,8 +1,10 @@
 <p class="kirby-typography">
-  Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti quasi magni, pariatur voluptate nesciunt rem dolore repudiandae natus nobis doloribus officia at ad ab vel officiis. Provident facilis at accusamus.
+ Below is the Kirby color palette. You can try out the different color combinations there and see how it can be used in the CSS in the gray code example box. All the colors are fetched from the <code>scss/themes/_common-themes.scss</code> file.
 </p>
-
-<div class="derp">
+<p>
+  <strong>Note: NativeScript and Web coloring is set differently, because NativeScript doesn't support CSS variables.</strong>
+</p>
+<div class="color-sample-wrapper">
   <div class="code-wrapper">
     <div class="kirby-text-large">Web example:</div>
     <pre>
@@ -36,7 +38,7 @@
   </div>
 </div>
 
-<h4>Then click a color below to set the {{activeColorType === 'bg' ? 'background' : 'text'}} color in the example box.</h4>
+<p class="kirby-text-large">Then click a color below to set the {{activeColorType === 'bg' ? 'background' : 'text'}} color in the example box.</p>
 <ul class="color-palette">
   <li *ngFor="let entry of colorPalette" class="color-box" (click)="onColorClick(entry)">
     <div class="color-name">kirby-{{entry.name}}</div>
