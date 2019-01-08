@@ -1,4 +1,4 @@
-export class Section {
+export class ListSection {
     title: string
     items: any;
 }
