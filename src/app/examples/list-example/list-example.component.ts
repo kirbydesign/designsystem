@@ -13,7 +13,7 @@ export class ListExampleComponent implements OnInit {
   //   {title: 'Super Brugsen', amount: -180.65, detail: 'Morten'}
   // ];
 
-  myItemsList = [
+  myItems = [
     {title: 'Vestas Wind Systems', subTitle: '20 stk', amount: '18.309 DKK', detail: 225},
     {title: 'A.P. Møller-Mærsk', subTitle: '2 stk', amount: '14.019 DKK', detail: -354},
     {title: 'Novo Nordisk A/S B', subTitle: '18 stk', amount: '7560 DKK', detail: 171}
@@ -31,10 +31,10 @@ export class ListExampleComponent implements OnInit {
     {title: '22222 Novo Nordisk A/S B', subTitle: '18 stk', amount: '7560 DKK', detail: 171}
   ];
 
-  mySectionListWithManyElements = [
+  mySections = [
     {
       sectionTitle: 'Fredag 2. November',
-      items: this.myItemsList,
+      items: this.myItems,
     }
     ,
     {
@@ -47,15 +47,6 @@ export class ListExampleComponent implements OnInit {
       items: this.myItemsList2,
     }
   ];
-
-  mySectionListWithOneElement = [
-    {
-      sectionTitle: 'Fredag 2. November',
-      items: this.myItemsList,
-    }
-  ];
-
-
 
   constructor() { }
 
