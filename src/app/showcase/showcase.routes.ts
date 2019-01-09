@@ -8,6 +8,7 @@ import { ListShowcaseComponent } from './list-showcase/list-showcase.component';
 import { ShowcaseComponent } from './showcase.component';
 import { DoughnutChartShowcaseComponent } from './doughnut-chart-showcase/doughnut-chart-showcase.component';
 import { FontsShowcaseComponent } from './fonts-showcase/fonts-showcase.component';
+import { ColorsShowcaseComponent } from './colors-showcase/colors-showcase.component';
 
 export const routes: Routes = [
     {
@@ -30,6 +31,10 @@ export const routes: Routes = [
             {
                 path: 'card',
                 component: CardShowcaseComponent
+            },
+            {
+                path: 'colors',
+                component: ColorsShowcaseComponent
             },
             {
                 path: 'list',

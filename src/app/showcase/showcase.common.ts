@@ -8,6 +8,7 @@ import { ListShowcaseComponent } from './list-showcase/list-showcase.component';
 import { ShowcaseComponent } from './showcase.component';
 import { DoughnutChartShowcaseComponent } from './doughnut-chart-showcase/doughnut-chart-showcase.component';
 import { ShowcaseRoutingModule } from './showcase-routing.module';
+import { ColorsShowcaseComponent } from './colors-showcase/colors-showcase.component';
 
 export const COMPONENT_IMPORTS: any[] = [
     ExamplesModule,
@@ -16,6 +17,7 @@ export const COMPONENT_IMPORTS: any[] = [
 
 export const COMPONENT_EXPORTS: any[] = [
     CardShowcaseComponent,
+    ColorsShowcaseComponent,
     ButtonShowcaseComponent,
     ListShowcaseComponent,
     GridShowcaseComponent,

@@ -59,12 +59,9 @@ body, html {
 }
 
 :root {
-  --kirby-primary: #{get-color('primary', map-get($themes, 'cookbook'))};
-  --kirby-on-primary: #{get-color('on-primary', map-get($themes, 'cookbook'))};
-  --kirby-secondary: #{get-color('secondary', map-get($themes, 'cookbook'))};
-  --kirby-on-secondary: #{get-color('on-secondary', map-get($themes, 'cookbook'))};
-  --kirby-surface: #{get-color('surface', map-get($themes, 'cookbook'))};
-  --kirby-on-surface: #{get-color('on-surface', map-get($themes, 'cookbook'))};
+  @each $color, $color-name in map-get($themes, 'default') {
+    --kirby-#{$color}: #{$color-name};
+  }
 }
 
 // Generates all the theme variables 
@@ -78,3 +75,4 @@ body, html {
     --kirby-on-surface: #{get-color('on-surface', $theme)};
   }
 }
+
