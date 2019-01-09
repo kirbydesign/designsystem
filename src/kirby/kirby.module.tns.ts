@@ -7,10 +7,10 @@ import { declarations } from './kirby.common';
 // tslint:disable-next-line:max-line-length
 import { NativeScriptDoughnutChartComponent } from './components/nativescript-only/doughnut-chart/doughnut-chart.component.tns-only';
 // tslint:disable-next-line:max-line-length
-export { NativeScriptSplineChartComponent, NativeScriptSplineChartItem } from './components/nativescript-only/spline-chart/spline-chart.component.tns-only';
+import { NativeScriptSplineChartComponent } from './components/nativescript-only/spline-chart/spline-chart.component.tns-only';
 
-
-const nativeScriptDeclarations = [...declarations, NativeScriptDoughnutChartComponent];
+// tslint:disable-next-line:max-line-length
+const nativeScriptDeclarations = [...declarations, NativeScriptDoughnutChartComponent, NativeScriptSplineChartComponent];
 
 @NgModule({
   imports: [

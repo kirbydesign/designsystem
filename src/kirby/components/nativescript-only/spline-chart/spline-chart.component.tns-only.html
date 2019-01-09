@@ -1,7 +1,8 @@
-<FlexboxLayout>
-    <RadCartesianChart tkExampleTitle tkToggleNavButton height="300" width="300">
-        <CategoricalAxis tkCartesianHorizontalAxis labelSize="14"lineColor="#ccc"></CategoricalAxis>
-        <LinearAxis tkCartesianVerticalAxis ></LinearAxis>
-        <SplineSeries tkCartesianSeries [items]="categoricalSource" categoryProperty="Country" valueProperty="Amount" showLabels="true"></SplineSeries>
+<FlexboxLayout class="background">
+    <RadCartesianChart tkExampleTitle tkToggleNavButton pointSelectionMode="Single" class="spline-chart">
+        <DateTimeContinuousAxis  tkCartesianHorizontalAxis dateFormat="dd-MM-yyyy" minimum="15/2/2018" maximum="18/12/2018" hidden="true"></DateTimeContinuousAxis >
+        <LinearAxis tkCartesianVerticalAxis hidden="true"></LinearAxis>
+        <Trackball tkCartesianTrackball snapMode="ClosestPoints" showIntersectionPoints="true"></Trackball>
+        <SplineAreaSeries tkCartesianSeries [items]="items" selectionMode="DataPoint" categoryProperty="category" valueProperty="amount"></SplineAreaSeries>
     </RadCartesianChart>
 </FlexboxLayout>

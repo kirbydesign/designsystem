@@ -18,28 +18,24 @@ export class NativeScriptSplineChartExampleComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    // this.chartItems$ = this.mapToChartItems(this.getMockData()).pipe(delay(500));
-    this.chartItems$ = this.mapCategoricalToChartItems(this.getCategoricalSource()).pipe(delay(500));
-  }
-
-  getCategoricalSource(): { Country: string, Amount: number, SecondVal: number, ThirdVal: number, Impact: number, Year: number }[] {
-    return [
-      { Country: 'Germany', Amount: 15, SecondVal: 14, ThirdVal: 24, Impact: 0, Year: 0 },
-      { Country: 'France', Amount: 13, SecondVal: 23, ThirdVal: 25, Impact: 0, Year: 0 },
-      { Country: 'Bulgaria', Amount: 24, SecondVal: 17, ThirdVal: 23, Impact: 0, Year: 0 },
-      { Country: 'Spain', Amount: 11, SecondVal: 19, ThirdVal: 24, Impact: 0, Year: 0 },
-      { Country: 'USA', Amount: 18, SecondVal: 8, ThirdVal: 21, Impact: 0, Year: 0 }
-    ];
+    this.chartItems$ = this.mapToChartItems(this.getMockData()).pipe(delay(500));
   }
 
   // tslint:disable-next-line:max-line-length
-  mapCategoricalToChartItems(data: { Country: string, Amount: number, SecondVal: number, ThirdVal: number, Impact: number, Year: number }[]): Observable<NativeScriptSplineChartItem[]> {
+  mapToChartItems(data: { rate: number, indexRate: number, rateDate: string, rateTime: string, sales: number }[]): Observable<NativeScriptSplineChartItem[]> {
     const distributions$ = of(data);
     return distributions$.pipe(map(distributions => {
       return distributions.map(distribution => {
+        const dt1  = parseInt(distribution.rateDate.substring(0, 2), 10);
+        const mon1  = parseInt(distribution.rateDate.substring(3, 5), 10);
+        const yr1   = parseInt(distribution.rateDate.substring(6, 10), 10);
+        const date = new Date(yr1, mon1 - 1, dt1).getTime();
+        const date1 = new Date(yr1, mon1 - 1, dt1);
+        console.log(date);
+        console.log(date1);
         return new NativeScriptSplineChartItem(
-          distribution.Country,
-          distribution.Amount
+          date,
+          distribution.rate
         );
       });
     }));
@@ -335,19 +331,6 @@ export class NativeScriptSplineChartExampleComponent implements OnInit {
         'sales': 26896
       }
     ];
-  }
-
-  // tslint:disable-next-line:max-line-length
-  mapToChartItems(data: { rate: number, indexRate: number, rateDate: string, rateTime: string, sales: number }[]): Observable<NativeScriptSplineChartItem[]> {
-    const distributions$ = of(data);
-    return distributions$.pipe(map(distributions => {
-      return distributions.map(distribution => {
-        return new NativeScriptSplineChartItem(
-          distribution.rateDate,
-          distribution.rate
-        );
-      });
-    }));
   }
 
 }
