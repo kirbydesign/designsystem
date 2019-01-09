@@ -11,17 +11,17 @@
 <hr>
 
 <kirby-list [items]="myItems">
-    <kirby-list-header *kirbyListHeader="let columns" [left]="'Left'" [middle]="'Middle'" [right]="'Right'"></kirby-list-header>
-    <kirby-list-item *kirbyListItem="let item" [title]="item.title" [amount]="item.amount" [detail]="item.detail" (click)="onClick(item)"></kirby-list-item>
+  <kirby-list-header *kirbyListHeader="let columns" [left]="'Left'" [middle]="'Middle'" [right]="'Right'"></kirby-list-header>
+  <kirby-list-item *kirbyListItem="let item" [title]="item.title" [amount]="item.amount" [detail]="item.detail" (click)="onClick(item)"></kirby-list-item>
 </kirby-list>
 
 <hr>
 
-<kirby-list [sections]="mySections">
-    <kirby-list-section-header *kirbyListSectionHeader></kirby-list-section-header>
-    <kirby-list-item *kirbyListItem="let item" [title]="item.title" [amount]="item.amount" [detail]="item.detail" (click)="onClick(item)"></kirby-list-item>
+<kirby-list [items]="myItems" [shouldRenderSectionHeader]="onShouldRenderSectionHeader">
+  <kirby-list-section-header *kirbyListSectionHeader="let item" [title]="getSectionTitle(item)"></kirby-list-section-header>
+  <kirby-list-item *kirbyListItem="let item" [item]="item" (click)="onClick(item)"></kirby-list-item>
 </kirby-list>
-  
+
 <hr>
 
 <!-- If you wish to use your own template, just add the *kirbyListItem="let item" to the element -->

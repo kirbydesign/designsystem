@@ -1,5 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ListSection} from '~/kirby/components/list/list-section';
 
 @Component({
   selector: 'kirby-list-section-header',
@@ -8,12 +7,8 @@ import {ListSection} from '~/kirby/components/list/list-section';
 })
 export class ListSectionHeaderComponent implements OnInit {
 
-  @Input() section: ListSection;
+  @Input() title: string;
   constructor() { }
-
-  get title(): String {
-    return this.section.title;
-  }
 
   ngOnInit() {
   }

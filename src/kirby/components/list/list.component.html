@@ -1,21 +1,14 @@
 <ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
 
 <ul>
-    <div *ngIf="sections; else elseBlock">
-        <li *ngFor="let section of sections">
-            <ng-container *ngTemplateOutlet="sectionHeaderTemplate; context: {$implicit: section}"></ng-container>
-            <ul>
-                <li *ngFor="let item of section.items" (click)="onRowClick(item)">
-                    <ng-container *ngTemplateOutlet="listItemTemplate; context: {$implicit: item}">
-                    </ng-container>
-                </li>
-            </ul>
-        </li>
-    </div>
-    <ng-template #elseBlock>
-        <li *ngFor="let item of items" (click)="onRowClick(item)">
-            <ng-container *ngTemplateOutlet="listItemTemplate; context: {$implicit: item}">
+        <ng-container *ngFor="let item of items; let i = index">
+            <ng-container *ngIf="shouldRenderSectionHeader && shouldRenderSectionHeader(item, items, i)">
+                <ng-container *ngTemplateOutlet="sectionHeaderTemplate; context: {$implicit: item}">
+                </ng-container>
             </ng-container>
-        </li>
-    </ng-template>
+            <li (click)="onRowClick(item)">
+                <ng-container *ngTemplateOutlet="listItemTemplate; context: {$implicit: item}">
+                </ng-container>
+            </li>
+        </ng-container>
 </ul>
