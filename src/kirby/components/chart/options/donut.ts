@@ -4,9 +4,6 @@ export class DonutOptions {
     private MIN_WIDTH = 640;
     get options(): Options {
         return {
-            accessibility: {
-                enabled: true
-            },
             chart: {
                 style: {
                     fontFamily: 'Roboto',
