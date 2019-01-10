@@ -24,6 +24,7 @@
         function configureChartOptions(chartData) {
             chartData.options.chart.height = chartData.height;
             if (chartData.options.chart.type === 'pie') {
+                // events need to be here AND in the options object to work
                 chartData.options.plotOptions.pie.point.events.legendItemClick = function(e) {
                     return e.preventDefault();
                 }

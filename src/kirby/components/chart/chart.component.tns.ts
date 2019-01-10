@@ -6,15 +6,18 @@ import { DonutOptions } from './options/donut';
 
 const webViewInterfaceModule = require('nativescript-webview-interface');
 
+type ChartType = 'pie' | 'donut';
+
 @Component({
   selector: 'kirby-chart',
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.scss']
 })
+
 export class ChartComponent implements OnInit, OnChanges {
   @Input() data = [];
   @Input() height = 300;
-  @Input() type = 'pie';
+  @Input() type: ChartType = 'pie';
   @Input() description = '';
   @Input() dataLabelsEnabled = true;
 
@@ -47,11 +50,16 @@ export class ChartComponent implements OnInit, OnChanges {
   }
 
   private loadChartDataInWebView() {
-    const chartType = this.type === 'donut' ? 'pie' : this.type;
-    if (chartType === 'pie') {
-      this.options = new DonutOptions().options;
-      this.options.chart.type = chartType;
+    let pieInnerCircleSize = '0%';
+    if (this.type === 'donut') {
+      this.type = 'pie';
+      pieInnerCircleSize = '50%';
     }
+    if (this.type === 'pie') {
+      this.options = new DonutOptions().options;
+      this.options.plotOptions.pie.innerSize = pieInnerCircleSize;
+    }
+    this.options.chart.type = this.type;
     this.updateChart();
   }
 

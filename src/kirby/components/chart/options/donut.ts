@@ -32,7 +32,6 @@ export class DonutOptions {
             plotOptions: {
                 pie: {
                     colors: ['#015132', '#B2D1BF', '#AABC08', '#1FA05A', 'yellowgreen'],
-                    innerSize: '50%',
                     allowPointSelect: false,
                     cursor: 'pointer',
                     showInLegend: true,
