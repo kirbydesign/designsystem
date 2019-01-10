@@ -37,7 +37,7 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
     this.exampleComponentName = urlSegments.length
                                 ? urlSegments[urlSegments.length - 1]
                                 : undefined;
-    if (this.exampleComponentName === 'fonts') {
+    if (this.exampleComponentName === 'colors') {
       this.isCTABoxShown = false;
     } else {
       this.isCTABoxShown = true;

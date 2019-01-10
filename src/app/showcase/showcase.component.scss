@@ -1,6 +1,7 @@
 @import '../../kirby/scss/web-imports';
 .show-case {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   margin-bottom: 2rem;
 
@@ -33,6 +34,7 @@
   background-color: #ececec;
   box-shadow: 0px 3px 0px 0px rgba(25, 23, 23, 0.23);
   padding: 0.5rem 1rem;
+  margin-top: size("s");
   border-radius: 10px;
   z-index: 1;
   position: relative;
@@ -66,7 +68,8 @@
   width: 100%;
   margin-top: size("m");
   thead {
-    background-color: #f6f6f6;
+    background-color: var(--kirby-background);
+    color: var(--kirby-on-background);
   }
   th {
     font-weight: font-weight("normal");
@@ -76,8 +79,14 @@
     border-bottom: none;
   }
   td, th {
-    border: 1px solid #e2e2e2;
+    border: 1px solid var(--kirby-disabled);
     border-width: 1px 1px 1px 1px;
     padding: 0.5rem 1rem;
   }
+}
+
+::ng-deep :not(pre) > code[class*="language-"], 
+::ng-deep pre[class*="language-"] {
+  background-color: var(--kirby-background);
+  border: 1px solid var(--kirby-disabled);
 }

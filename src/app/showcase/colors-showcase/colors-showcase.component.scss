@@ -1,0 +1,85 @@
+@import '../../../kirby/scss/web-imports';
+
+@each $color, $color-name in map-get($themes, 'default') {
+  .#{$color} {
+    background-color: var(--kirby-#{$color});
+    color: var(--kirby-#{$color});
+  }
+}
+
+.color-box {
+  background-color: #fff;
+  border: 1px solid #eee;
+  .color-sample {
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+    height: size("xl");
+    margin-top: auto;
+    border-radius: 8px;
+  }
+}
+
+.color-sample-example {
+  border-radius: 8px;
+  padding: size("xxl");
+  margin-right: size("gutter");
+  margin-bottom: size("gutter");
+  border: 1px solid #eee;
+}
+
+.color-sample-on-text {
+  background-color: transparent;
+}
+
+.color-name {
+  color: #333;
+  margin-bottom: size("xxs");
+}
+
+.color-value {
+  color: #7c7c7c;
+  margin-bottom: size("xxs");
+}
+
+.color-palette {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: size("m");
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  @include media(">=medium") {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  @include media(">=large") {
+    grid-template-columns: repeat(5, 1fr);
+  }
+  li {
+    display: flex;
+    flex-direction: column;
+    padding: size("s");
+    min-height: size("xxxl");
+    box-sizing: content-box;
+    cursor: pointer;
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+    }
+  }
+}
+
+.color-sample-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.code-wrapper {
+  flex: 1 0 100%;
+  background-color: var(--kirby-background);
+  border: 1px solid var(--kirby-disabled);  
+  padding: size("s");
+  overflow-x: auto;
+  margin-bottom: size("gutter");
+}

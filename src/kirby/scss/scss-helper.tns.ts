@@ -22,3 +22,11 @@ export class ScssHelper {
   public static SHADOW_OFFSET_Y = 2.0;
   public static SHADOW_COLOR = new Color('#1c1c1c');
 }
+
+export interface SassColor {
+  name: string;
+  type: string;
+  value: {
+    hex: string;
+  };
+}

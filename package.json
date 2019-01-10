@@ -9,7 +9,7 @@
       "version": "5.0.0"
     }
   },
-  "version": "0.0.42",
+  "version": "0.0.44",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -78,6 +78,8 @@
     "nativescript-dev-webpack": "^0.18.2",
     "protractor": "~5.3.0",
     "tns-platform-declarations": "^5.0.3",
+    "sass-extract": "^2.1.0",
+    "sass-extract-loader": "^1.1.0",
     "ts-node": "~5.0.1",
     "tslint": "~5.9.1",
     "typescript": "~3.1.1"

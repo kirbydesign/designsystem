@@ -21,3 +21,11 @@
   public static SHADOW_OFFSET_Y = null;
   public static SHADOW_COLOR = null;
 }
+
+export interface SassColor {
+  name: string;
+  type: string;
+  value: {
+    hex: string;
+  };
+}

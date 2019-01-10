@@ -1,0 +1,49 @@
+<p class="kirby-typography">
+ Below is the Kirby color palette. You can try out the different color combinations there and see how it can be used in the CSS in the gray code example box. All the colors are fetched from the <code>scss/themes/_common-themes.scss</code> file.
+</p>
+<p>
+  <strong>Note: NativeScript and Web coloring is set differently, because NativeScript doesn't support CSS variables.</strong>
+</p>
+<div class="color-sample-wrapper">
+  <div class="code-wrapper">
+    <div class="kirby-text-large">Web example:</div>
+    <pre>
+.color-sample-example {{'{'}}
+  color: var(--kirby-{{selectedOnColor}});
+  background-color: var(--kirby-{{selectedColor}});
+{{'}'}}</pre>
+    <div class="kirby-text-large">Native example:</div>
+<pre>
+.color-sample-example {{'{'}}
+  color: get-color('{{selectedOnColor}}');
+  background-color: get-color('{{selectedColor}}');
+{{'}'}}</pre>  
+  </div>
+  <div class="color-sample-example {{selectedColor}}">
+    <div class="color-sample-on-text {{selectedOnColor}}">
+      Text
+    </div>
+  </div>
+  <div class="color-selector">
+    <div class="kirby-text-large">First pick color to set:</div>
+    <!-- TODO TRM - D. 21/12/2018 Radio buttons are currently unstyled because we have no design of them yet. -->
+    <p>
+      <input type="radio" id="color-bg" name="color-picker" [(ngModel)]="activeColorType" value="bg">
+      <label for="color-bg"> Background color</label>
+    </p>
+    <p>
+      <input type="radio" id="color-on" name="color-picker" [(ngModel)]="activeColorType" value="text">
+      <label for="color-on"> Text color</label>
+    </p>
+  </div>
+</div>
+
+<p class="kirby-text-large">Then click a color below to set the {{activeColorType === 'bg' ? 'background' : 'text'}} color in the example box.</p>
+<ul class="color-palette">
+  <li *ngFor="let entry of colorPalette" class="color-box" (click)="onColorClick(entry)">
+    <div class="color-name">kirby-{{entry.name}}</div>
+    <div class="color-value">{{entry.value.hex}}</div>
+    <div class="color-sample {{entry.name}}"></div>
+  </li>
+</ul>
+
