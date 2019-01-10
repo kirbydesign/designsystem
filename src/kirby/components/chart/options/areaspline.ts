@@ -30,7 +30,7 @@ export class AreaSplineOptions {
                     fontSize: '1.25rem'
                 },
                 formatter: function () {
-                    return this.y + ' DKK';
+                    return this.y;
                 },
                 positioner: function () {
                     return { x: (this.chart.plotSizeX / 2) - (this.label.width / 2), y: 0 };

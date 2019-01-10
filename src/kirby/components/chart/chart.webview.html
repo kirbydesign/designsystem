@@ -34,7 +34,7 @@
                     }
                     case 'areaspline': {
                         chartData.options.tooltip.formatter = function () {
-                            return this.y + ' DKK';
+                            return this.y;
                         };
                         chartData.options.tooltip.positioner = function () {
                             return { x: (this.chart.plotSizeX / 2) - (this.label.width / 2), y: 0 };
