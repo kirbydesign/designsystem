@@ -82,10 +82,10 @@ describe('ChartComponent', () => {
     expect(component.options['plotOptions'].pie.dataLabels.enabled).toBe(false);
   });
 
-  it('should have correct donut chart type', () => {
+  it('should have correct donut chart type and convert it to highcharts pie type', () => {
     component.type = 'donut';
     component.ngOnInit();
-    expect(component.options['chart'].type).toBe('pie'); // donut should be converted to pie
+    expect(component.options['chart'].type).toBe('pie');
   });
 
   it('should have correct input data', () => {

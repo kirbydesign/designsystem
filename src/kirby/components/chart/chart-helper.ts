@@ -11,7 +11,6 @@ export class ChartHelper {
       options.series[0].data = data;
       options.chart.description = description;
       options.plotOptions.pie.dataLabels.enabled = dataLabelsEnabled;
-      options.plotOptions.pie.dataLabels.format = '{point.label}';
     }
     return options;
   }

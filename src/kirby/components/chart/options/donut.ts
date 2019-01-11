@@ -37,6 +37,7 @@ export class DonutOptions {
                     showInLegend: true,
                     borderColor: null,
                     dataLabels: {
+                        format: '{point.label}',
                         enabled: true,
                         connectorWidth: 0,
                         distance: 5,
