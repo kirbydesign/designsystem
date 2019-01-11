@@ -14,7 +14,13 @@
     width: 100%;
 }
 
-.label-text {
-    
+.chart-text-grid {
+    margin-left: 10;
+    margin-right: 10;
 }
+
+.chart-text-color {
+    color: get-color('on-disabled');
+}
+
 

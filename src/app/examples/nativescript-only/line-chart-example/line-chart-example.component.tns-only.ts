@@ -12,12 +12,15 @@ import { NativeScriptLineChartItem } from '../../../../kirby/components/nativesc
 
 export class NativeScriptLineChartExampleComponent implements OnInit {
   public chartItems$: Observable<NativeScriptLineChartItem[]>;
+  public currency: string;
   title = 'Min investering';
+
 
   constructor() { }
 
   ngOnInit() {
     this.chartItems$ = this.mapToChartItems(this.getMockData()).pipe(delay(500));
+    this.currency = 'DKK';
   }
 
   // tslint:disable-next-line:max-line-length

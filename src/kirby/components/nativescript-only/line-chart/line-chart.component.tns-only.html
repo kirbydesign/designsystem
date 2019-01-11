@@ -1,5 +1,5 @@
 <FlexboxLayout class="background">
-    <Label class="label" text="{{ labelText }}" textWrap="true" ></Label>
+    <Label class="kirby-text-xxlarge" text="{{ labelText }}" textWrap="true" ></Label>
     <RadCartesianChart tkExampleTitle tkToggleNavButton class="line-chart">
         <DateTimeContinuousAxis tkCartesianHorizontalAxis dateFormat="dd-MM-yyyy" minimum="15/2/2018" maximum="18/12/2018" hidden="true"></DateTimeContinuousAxis >
         <LinearAxis tkCartesianVerticalAxis [maximum]="maximum" [minimum]="minimum" hidden="true"></LinearAxis>
@@ -10,4 +10,9 @@
             <PaletteEntry tkCartesianPaletteEntry [strokeWidth]="strokeWidth" [fillColor]="fillColor" [strokeColor]="strokeColor"></PaletteEntry>
         </Palette>
     </RadCartesianChart>
+    <GridLayout rows="auto" columns="*" class="chart-text-grid">
+        <Label class="kirby-text-xsmall chart-text-color" horizontalAlignment="left" text="Dato"></Label>
+        <Label class="kirby-text-xsmall chart-text-color" horizontalAlignment="right" text="I dag"></Label>
+    </GridLayout>
+    <StackLayout class="hr-light"></StackLayout>
 </FlexboxLayout> 

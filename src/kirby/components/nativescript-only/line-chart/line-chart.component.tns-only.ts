@@ -16,12 +16,14 @@ export class NativeScriptLineChartItem {
 })
 export class NativeScriptLineChartComponent implements OnInit, OnChanges {
   @Input() items: NativeScriptLineChartItem[];
+  @Input() currency: string;
   public strokeWidth = 2;
-  public fillColor = '#CAEADC';
-  public strokeColor = '#0A4B2E';
+  public fillColor = '#bfd6ce';
+  public strokeColor = '#005c3c';
   public maximum = 0;
   public minimum = 0;
   public labelText: string;
+  public legend: string;
   private chartBorderBottom = 30;
 
   constructor() {}
@@ -35,8 +37,30 @@ export class NativeScriptLineChartComponent implements OnInit, OnChanges {
     if (changes['items']) {
       this.maximum = this.getMaximum(this.items);
       this.minimum = this.getMinimum(this.items);
-      this.labelText = '' + this.items[this.items.length - 1].amount;
+      this.labelText = this.getLabelText(this.getLastItem(this.items));
+      this.legend = new Date(this.getFirstItem(this.items).category).getUTCDate().toString();
     }
+  }
+
+  getFirstItem(items: NativeScriptLineChartItem[]) {
+    if (items == null) {
+      return null;
+    }
+    return items[0];
+  }
+
+  getLastItem(items: NativeScriptLineChartItem[]) {
+    if (items == null) {
+      return null;
+    }
+    return items[items.length - 1];
+  }
+
+  getLabelText(item: NativeScriptLineChartItem) {
+    if (item == null) {
+      return '';
+    }
+    return `${item.amount} ${this.currency}`;
   }
 
   getMinimum(items: NativeScriptLineChartItem[]) {
@@ -68,8 +92,8 @@ export class NativeScriptLineChartComponent implements OnInit, OnChanges {
 
   onTrackBallContentRequested(args: TrackballCustomContentData) {
     const selectedItem: NativeScriptLineChartItem = args.pointData;
-    args.content = '' + selectedItem.amount;
-    this.labelText = '' + selectedItem.amount;
+    args.content = this.getLabelText(selectedItem);
+    this.labelText = this.getLabelText(selectedItem);
 
   }
 
