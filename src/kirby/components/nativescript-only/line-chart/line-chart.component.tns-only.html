@@ -1,0 +1,13 @@
+<FlexboxLayout class="background">
+    <Label class="label" text="{{ labelText }}" textWrap="true" ></Label>
+    <RadCartesianChart tkExampleTitle tkToggleNavButton class="line-chart">
+        <DateTimeContinuousAxis tkCartesianHorizontalAxis dateFormat="dd-MM-yyyy" minimum="15/2/2018" maximum="18/12/2018" hidden="true"></DateTimeContinuousAxis >
+        <LinearAxis tkCartesianVerticalAxis [maximum]="maximum" [minimum]="minimum" hidden="true"></LinearAxis>
+        <Trackball tkCartesianTrackball (trackBallContentRequested)="onTrackBallContentRequested($event)" snapMode="ClosestPoint" showIntersectionPoints="true"></Trackball>
+        <AreaSeries tkCartesianSeries seriesName="Line" [items]="items" categoryProperty="category" valueProperty="amount"></AreaSeries>
+        <RadCartesianChartGrid tkCartesianGrid horizontalLinesVisible="false" verticalLinesVisible="false" horizontalStripLinesVisible="false" verticalStripLinesVisible="false"></RadCartesianChartGrid>
+        <Palette tkCartesianPalette seriesName="Line">
+            <PaletteEntry tkCartesianPaletteEntry [strokeWidth]="strokeWidth" [fillColor]="fillColor" [strokeColor]="strokeColor"></PaletteEntry>
+        </Palette>
+    </RadCartesianChart>
+</FlexboxLayout> 

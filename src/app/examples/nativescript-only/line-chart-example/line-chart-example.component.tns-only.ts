@@ -2,18 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map, delay } from 'rxjs/operators';
 
-import { NativeScriptSplineChartItem } from '../../../../kirby/components/nativescript-only/spline-chart/spline-chart.component.tns-only';
+import { NativeScriptLineChartItem } from '../../../../kirby/components/nativescript-only/line-chart/line-chart.component.tns-only';
 
 @Component({
-  selector: 'kirby-nativescript-spline-chart-example',
-  templateUrl: './spline-chart-example.component.tns-only.html',
-  styleUrls: ['./spline-chart-example.component.tns-only.scss']
+  selector: 'kirby-nativescript-line-chart-example',
+  templateUrl: './line-chart-example.component.tns-only.html',
+  styleUrls: ['./line-chart-example.component.tns-only.scss']
 })
 
-export class NativeScriptSplineChartExampleComponent implements OnInit {
-  public chartItems$: Observable<NativeScriptSplineChartItem[]>;
-  buttonText = 'View details';
-  title = 'Your investments';
+export class NativeScriptLineChartExampleComponent implements OnInit {
+  public chartItems$: Observable<NativeScriptLineChartItem[]>;
+  title = 'Min investering';
 
   constructor() { }
 
@@ -22,7 +21,7 @@ export class NativeScriptSplineChartExampleComponent implements OnInit {
   }
 
   // tslint:disable-next-line:max-line-length
-  mapToChartItems(data: { rate: number, indexRate: number, rateDate: string, rateTime: string, sales: number }[]): Observable<NativeScriptSplineChartItem[]> {
+  mapToChartItems(data: { rate: number, indexRate: number, rateDate: string, rateTime: string, sales: number }[]): Observable<NativeScriptLineChartItem[]> {
     const distributions$ = of(data);
     return distributions$.pipe(map(distributions => {
       return distributions.map(distribution => {
@@ -31,9 +30,7 @@ export class NativeScriptSplineChartExampleComponent implements OnInit {
         const yr1   = parseInt(distribution.rateDate.substring(6, 10), 10);
         const date = new Date(yr1, mon1 - 1, dt1).getTime();
         const date1 = new Date(yr1, mon1 - 1, dt1);
-        console.log(date);
-        console.log(date1);
-        return new NativeScriptSplineChartItem(
+        return new NativeScriptLineChartItem(
           date,
           distribution.rate
         );

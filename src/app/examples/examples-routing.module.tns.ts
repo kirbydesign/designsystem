@@ -6,7 +6,7 @@ import { ExamplesModule } from './examples.module';
 // tslint:disable-next-line:max-line-length
 import { NativeScriptDoughnutChartExampleComponent } from './nativescript-only/doughnut-chart-example/doughnut-chart-example.component.tns-only';
 // tslint:disable-next-line:max-line-length
-import { NativeScriptSplineChartExampleComponent } from './nativescript-only/spline-chart-example/spline-chart-example.component.tns-only';
+import { NativeScriptLineChartExampleComponent } from './nativescript-only/line-chart-example/line-chart-example.component.tns-only';
 
 const nativeScriptRoutes = [...routes,
   {
@@ -17,8 +17,8 @@ const nativeScriptRoutes = [...routes,
         component: NativeScriptDoughnutChartExampleComponent
       },
       {
-        path: 'spline-chart',
-        component: NativeScriptSplineChartExampleComponent
+        path: 'line-chart',
+        component: NativeScriptLineChartExampleComponent
       }
     ]
   }
