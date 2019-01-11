@@ -1,13 +1,12 @@
 import { Component, OnInit, Input, OnChanges, ElementRef, ViewChild } from '@angular/core';
 import { Options } from 'highcharts';
 import * as Highcharts from 'highcharts';
-import { DonutOptions } from './options/donut';
+import { ChartHelper } from './chart-helper';
+import { ChartType } from './chart-helper';
 
 import * as exporting from 'highcharts/modules/exporting.src'; exporting(Highcharts);
 import * as exportData from 'highcharts/modules/export-data'; exportData(Highcharts);
 import * as accessibility from 'highcharts/modules/accessibility'; accessibility(Highcharts);
-
-type ChartType = 'pie' | 'donut';
 
 @Component({
   selector: 'kirby-chart',
@@ -23,43 +22,28 @@ export class ChartComponent implements OnInit, OnChanges {
   @Input() dataLabelsEnabled = true;
 
   options: Options = {};
+  chartHelper: ChartHelper;
 
-  constructor() { }
+  constructor() {
+    this.chartHelper = new ChartHelper();
+  }
 
   @ViewChild('chartContainer') chartContainer: ElementRef;
 
   ngOnInit() {
-    let pieInnerCircleSize = '0%';
-    if (this.type === 'donut') {
-      this.type = 'pie';
-      pieInnerCircleSize = '50%';
-    }
-    if (this.type === 'pie') {
-      this.options = new DonutOptions().options;
-      this.options.plotOptions.pie.innerSize = pieInnerCircleSize;
-    }
-    this.options.chart.type = this.type;
-    this.setChartProperties();
+    this.options = this.chartHelper.setupChartType(this.options, this.type);
+    this.options = this.chartHelper.updateProperties(this.options, this.height, this.data, this.description, this.dataLabelsEnabled);
     Highcharts.chart(this.chartContainer.nativeElement, this.options);
   }
 
   ngOnChanges() {
-    this.updateChart();
-  }
-
-  updateChart() {
-    this.setChartProperties();
-    Highcharts.chart(this.chartContainer.nativeElement, this.options);
-  }
-
-  setChartProperties() {
-    if (this.options.chart && this.options.chart.type === 'pie') {
-      this.options.chart.height = this.height;
-      this.options.series[0].data = this.data;
-      this.options.chart.description = this.description;
-      this.options.plotOptions.pie.dataLabels.enabled = this.dataLabelsEnabled;
-      this.options.plotOptions.pie.dataLabels.format = '{point.label}';
+    if (this.options.chart) {
+      this.updateChart();
     }
   }
 
+  updateChart() {
+    this.chartHelper.updateProperties(this.options, this.height, this.data, this.description, this.dataLabelsEnabled);
+    Highcharts.chart(this.chartContainer.nativeElement, this.options);
+  }
 }

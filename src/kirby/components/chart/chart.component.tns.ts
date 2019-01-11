@@ -2,11 +2,10 @@ import { Component, OnInit, ViewChild, ElementRef, Input, OnChanges } from '@ang
 import { WebView, LoadEventData } from 'ui/web-view';
 import { android, ios, AndroidApplication, AndroidActivityEventData } from 'tns-core-modules/application';
 import { Options } from 'highcharts';
-import { DonutOptions } from './options/donut';
+import { ChartHelper } from './chart-helper';
+import { ChartType } from './chart-helper';
 
 const webViewInterfaceModule = require('nativescript-webview-interface');
-
-type ChartType = 'pie' | 'donut';
 
 @Component({
   selector: 'kirby-chart',
@@ -22,12 +21,15 @@ export class ChartComponent implements OnInit, OnChanges {
   @Input() dataLabelsEnabled = true;
 
   options: Options = {};
+  chartHelper: ChartHelper;
 
   @ViewChild('webView') webViewRef: ElementRef;
   private chartWebViewInterface;
   private webViewReady = false;
 
-  constructor() { }
+  constructor() {
+    this.chartHelper = new ChartHelper();
+  }
 
   ngOnInit() { }
 
@@ -50,16 +52,7 @@ export class ChartComponent implements OnInit, OnChanges {
   }
 
   private loadChartDataInWebView() {
-    let pieInnerCircleSize = '0%';
-    if (this.type === 'donut') {
-      this.type = 'pie';
-      pieInnerCircleSize = '50%';
-    }
-    if (this.type === 'pie') {
-      this.options = new DonutOptions().options;
-      this.options.plotOptions.pie.innerSize = pieInnerCircleSize;
-    }
-    this.options.chart.type = this.type;
+    this.options = this.chartHelper.setupChartType(this.options, this.type);
     this.updateChart();
   }
 
@@ -70,13 +63,7 @@ export class ChartComponent implements OnInit, OnChanges {
   }
 
   updateChart() {
-    if (this.options.chart && this.options.chart.type === 'pie') {
-      this.options.chart.height = this.height;
-      this.options.series[0].data = this.data;
-      this.options.chart.description = this.description;
-      this.options.plotOptions.pie.dataLabels.enabled = this.dataLabelsEnabled;
-      this.options.plotOptions.pie.dataLabels.format = '{point.label}';
-    }
+    this.options = this.chartHelper.updateProperties(this.options, this.height, this.data, this.description, this.dataLabelsEnabled);
     const data = {
       options: this.options,
       height: this.height
