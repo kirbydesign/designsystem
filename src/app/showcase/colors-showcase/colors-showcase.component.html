@@ -9,8 +9,8 @@
     <div class="kirby-text-large">Web example:</div>
     <pre>
 .color-sample-example {{'{'}}
-  color: var(--kirby-{{selectedOnColor}});
-  background-color: var(--kirby-{{selectedColor}});
+  color: var(--{{selectedOnColor}});
+  background-color: var(--{{selectedColor}});
 {{'}'}}</pre>
     <div class="kirby-text-large">Native example:</div>
 <pre>
@@ -41,7 +41,7 @@
 <p class="kirby-text-large">Then click a color below to set the {{activeColorType === 'bg' ? 'background' : 'text'}} color in the example box.</p>
 <ul class="color-palette">
   <li *ngFor="let entry of colorPalette" class="color-box" (click)="onColorClick(entry)">
-    <div class="color-name">kirby-{{entry.name}}</div>
+    <div class="color-name">{{entry.name}}</div>
     <div class="color-value">{{entry.value.hex}}</div>
     <div class="color-sample {{entry.name}}"></div>
   </li>

@@ -2,8 +2,8 @@
 
 @each $color, $color-name in map-get($themes, 'default') {
   .#{$color} {
-    background-color: var(--kirby-#{$color});
-    color: var(--kirby-#{$color});
+    background-color: var(--#{$color});
+    color: var(--#{$color});
   }
 }
 

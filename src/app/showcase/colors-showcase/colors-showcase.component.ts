@@ -11,8 +11,8 @@ const style = require('sass-extract-loader!./colors-showcase.component.scss');
 })
 export class ColorsShowcaseComponent implements OnInit {
 
-  selectedColor = 'background';
-  selectedOnColor = 'on-background';
+  selectedColor = 'kirby-background';
+  selectedOnColor = 'kirby-on-background';
   activeColorType = 'bg';
   colorPalette = [];
 
