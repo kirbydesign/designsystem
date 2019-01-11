@@ -60,7 +60,7 @@ body, html {
 
 :root {
   @each $color, $color-name in map-get($themes, 'default') {
-    --kirby-#{$color}: #{$color-name};
+    --#{$color}: #{$color-name};
   }
 }
 
