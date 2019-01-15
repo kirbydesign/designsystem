@@ -2,7 +2,9 @@
     <FlexboxLayout row="0" alignItems="center" class="list-header-container">
         <ng-container *ngTemplateOutlet="headerTemplate; context: {$implicit: columns}"></ng-container>
     </FlexboxLayout>
-    <ListView [items]="items" row="1">
+    <ListView [items]="items"
+              (itemTap)="onItemTap($event)"
+              row="1">
         <ng-template let-item="item">
             <FlexboxLayout alignItems="center" class="list-item-container">
                 <ng-container *ngTemplateOutlet="listItemTemplate; context: {$implicit: item}">

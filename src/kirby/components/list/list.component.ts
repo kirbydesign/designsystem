@@ -1,6 +1,14 @@
-import { Component, OnInit, Input, Directive, TemplateRef, ContentChild, EventEmitter, Output } from '@angular/core';
-import { Observable, isObservable, Subscription } from 'rxjs';
-import { ListItemComponent } from './list-item/list-item.component';
+import {
+  Component,
+  OnInit,
+  Input,
+  Directive,
+  TemplateRef,
+  ContentChild,
+  EventEmitter,
+  Output
+} from '@angular/core';
+import { ItemEventData } from 'tns-core-modules/ui/list-view';
 
 @Directive({
   selector: '[kirbyListItem]'
@@ -21,16 +29,20 @@ export class ListComponent implements OnInit {
 
   @Input() items: any[];
   // The first element that matches ListItemDirective. As a structural directive it unfolds into a template. This is a reference to that.
-  @ContentChild(ListItemDirective, {read: TemplateRef}) listItemTemplate;
-  @ContentChild(ListHeaderDirective, {read: TemplateRef}) headerTemplate;
-  @Output() rowClick = new EventEmitter<any>();
+  @ContentChild(ListItemDirective, {read: TemplateRef}) listItemTemplate: any;
+  @ContentChild(ListHeaderDirective, {read: TemplateRef}) headerTemplate: any;
+  @Output() itemSelect = new EventEmitter<any>();
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 
-  onRowClick(row): void {
-    this.rowClick.emit(row);
+  onItemClick(row: any): void {
+    this.itemSelect.emit(row);
   }
 
+  onItemTap(args: ItemEventData) {
+    const selectedItem = this.items[args.index];
+    this.itemSelect.emit(selectedItem);
+  }
 }
