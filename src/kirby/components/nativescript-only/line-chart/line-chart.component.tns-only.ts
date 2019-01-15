@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { TrackballCustomContentData } from 'nativescript-ui-chart';
-
+import { EventData, Observable } from 'tns-core-modules/data/observable';
+import { Label } from 'tns-core-modules/ui/label';
 export class NativeScriptLineChartItem {
   constructor(
     public category: number,
@@ -23,58 +24,46 @@ export class NativeScriptLineChartComponent implements OnInit, OnChanges {
   public maximum = 0;
   public minimum = 0;
   public labelText: string;
-  public legend: string;
+  public legend: Date;
   private chartBorderBottom = 30;
 
   constructor() {}
 
   ngOnInit() {
-    // Included to avoid a null error bug in NativeScript UI.
-    this.items = [{'category': 0, 'amount': 0}];
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['items']) {
+      // Included to avoid null errors everywhere when first loading.
+      if (this.items == null) {
+        this.items = [{'category': 0, 'amount': 0}];
+      }
       this.maximum = this.getMaximum(this.items);
       this.minimum = this.getMinimum(this.items);
       this.labelText = this.getLabelText(this.getLastItem(this.items));
-      this.legend = new Date(this.getFirstItem(this.items).category).getUTCDate().toString();
+      const firstItem = this.getFirstItem(this.items);
+      this.legend = new Date(firstItem.category);
     }
   }
 
   getFirstItem(items: NativeScriptLineChartItem[]) {
-    if (items == null) {
-      return null;
-    }
     return items[0];
   }
 
   getLastItem(items: NativeScriptLineChartItem[]) {
-    if (items == null) {
-      return null;
-    }
     return items[items.length - 1];
   }
 
   getLabelText(item: NativeScriptLineChartItem) {
-    if (item == null) {
-      return '';
-    }
     return `${item.amount} ${this.currency}`;
   }
 
   getMinimum(items: NativeScriptLineChartItem[]) {
-    if (items == null) {
-      return 0;
-    }
     const min = this.getMinY(this.items) - this.strokeWidth - this.chartBorderBottom;
     return (min < 0) ? 0 : min;
   }
 
   getMaximum(items: NativeScriptLineChartItem[]) {
-    if (items == null) {
-      return 0;
-    }
     return this.getMaxY(this.items) + this.strokeWidth;
   }
 
@@ -97,4 +86,37 @@ export class NativeScriptLineChartComponent implements OnInit, OnChanges {
 
   }
 
+  onTap(args: EventData) {
+    const label = <Label>args.object;
+    switch (label.id) {
+      case '1D': {
+        console.log('1d');
+        break;
+      }
+      case '1W': {
+        console.log('1d');
+        break;
+      }
+      case '1M': {
+        console.log('1d');
+        break;
+      }
+      case '1Y': {
+        console.log('1d');
+        break;
+      }
+      case '5Y': {
+        console.log('1d');
+        break;
+      }
+      case 'YTD': {
+        console.log('1d');
+        break;
+      }
+      default: {
+        console.log('something else');
+        break;
+      }
+    }
+  }
 }
