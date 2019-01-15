@@ -1,18 +1,18 @@
 @import '../../scss/native-imports';
 
 Button[kirby-button] {
-  color: get-color('on-primary');
-  background-color: get-color('primary');
-  border-color: get-color('primary');
+  color: get-color('kirby-on-primary');
+  background-color: get-color('kirby-primary');
+  border-color: get-color('kirby-primary');
   border-radius: 5;
   border-width: 1;
   margin: 10 10;
   padding: 12 20;
   
   &[colortype='secondary'] {
-    color: get-color('on-secondary');
-    background-color: get-color('secondary');
-    border-color: get-color('secondary');
+    color: get-color('kirby-on-secondary');
+    background-color: get-color('kirby-secondary');
+    border-color: get-color('kirby-secondary');
   }
   
   &[shape='round'] {
