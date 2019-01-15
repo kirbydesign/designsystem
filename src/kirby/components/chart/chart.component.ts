@@ -1,12 +1,8 @@
 import { Component, OnInit, Input, OnChanges, ElementRef, ViewChild } from '@angular/core';
 import { Options } from 'highcharts';
-import * as Highcharts from 'highcharts';
 import { ChartHelper } from './chart-helper';
-import { ChartType } from './chart-helper';
-
-import * as exporting from 'highcharts/modules/exporting.src'; exporting(Highcharts);
-import * as exportData from 'highcharts/modules/export-data'; exportData(Highcharts);
-import * as accessibility from 'highcharts/modules/accessibility'; accessibility(Highcharts);
+import { DonutOptions } from './options/donut';
+import { ChartTypes } from './chart-types';
 
 @Component({
   selector: 'kirby-chart',
@@ -17,7 +13,7 @@ import * as accessibility from 'highcharts/modules/accessibility'; accessibility
 export class ChartComponent implements OnInit, OnChanges {
   @Input() data = [];
   @Input() height = 300;
-  @Input() type: ChartType = 'pie';
+  @Input() type: ChartTypes = ChartTypes.PIE;
   @Input() description = '';
   @Input() dataLabelsEnabled = true;
 
@@ -31,19 +27,36 @@ export class ChartComponent implements OnInit, OnChanges {
   @ViewChild('chartContainer') chartContainer: ElementRef;
 
   ngOnInit() {
-    this.options = this.chartHelper.setupChartType(this.options, this.type);
-    this.options = this.chartHelper.updateProperties(this.options, this.height, this.data, this.description, this.dataLabelsEnabled);
-    Highcharts.chart(this.chartContainer.nativeElement, this.options);
+    this.setupChartType();
+    this.updateProperties();
+    this.chartHelper.init(this.options, this.chartContainer);
   }
 
   ngOnChanges() {
-    if (this.options.chart) {
-      this.updateChart();
+    this.updateProperties();
+    this.chartHelper.onChanges(this.options);
+  }
+
+  setupChartType() {
+    let pieInnerCircleSize = '0%';
+    if (this.type === ChartTypes.DONUT) {
+      this.type = ChartTypes.PIE;
+      pieInnerCircleSize = '50%';
+    }
+    if (this.type === ChartTypes.PIE) {
+      this.options = new DonutOptions().options;
+      this.options.plotOptions.pie.innerSize = pieInnerCircleSize;
+    }
+    this.options.chart.type = this.type;
+  }
+
+  updateProperties() {
+    if (this.options.chart && this.options.chart.type === ChartTypes.PIE) {
+      this.options.chart.height = this.height;
+      this.options.series[0].data = this.data;
+      this.options.chart.description = this.description;
+      this.options.plotOptions.pie.dataLabels.enabled = this.dataLabelsEnabled;
     }
   }
 
-  updateChart() {
-    this.chartHelper.updateProperties(this.options, this.height, this.data, this.description, this.dataLabelsEnabled);
-    Highcharts.chart(this.chartContainer.nativeElement, this.options);
-  }
 }

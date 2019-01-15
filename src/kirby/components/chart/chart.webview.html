@@ -15,17 +15,16 @@
         var oWebViewInterface = window.nsWebViewInterface;
 
         function addNativeMsgListener() {
-            oWebViewInterface.on('updateChart', function (chartData) {
-                configureChartOptions(chartData);
-                var chart = Highcharts.chart('chart', chartData.options);
+            oWebViewInterface.on('updateChart', function (options) {
+                configureChartOptions(options);
+                var chart = Highcharts.chart('chart', options);
             });
         }
 
-        function configureChartOptions(chartData) {
-            chartData.options.chart.height = chartData.height;
-            if (chartData.options.chart.type === 'pie') {
+        function configureChartOptions(options) {
+            if (options.chart.type === 'pie') {
                 // events need to be here AND in the options object to work
-                chartData.options.plotOptions.pie.point.events.legendItemClick = function(e) {
+                options.plotOptions.pie.point.events.legendItemClick = function(e) {
                     return e.preventDefault();
                 }
             }

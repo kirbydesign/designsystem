@@ -1,31 +1,29 @@
 import { Options } from 'highcharts';
-import { DonutOptions } from './options/donut';
+import * as Highcharts from 'highcharts';
+import { ElementRef } from '@angular/core';
 
-export type ChartType = 'pie' | 'donut';
+// Docs on importing accessibility: https://www.highcharts.com/docs/chart-concepts/accessibility
+// Reason for .src suffix in exporting: https://github.com/highcharts/highcharts-angular/issues/54
+import * as exporting from 'highcharts/modules/exporting.src'; exporting(Highcharts);
+import * as exportData from 'highcharts/modules/export-data'; exportData(Highcharts);
+import * as accessibility from 'highcharts/modules/accessibility'; accessibility(Highcharts);
 
 export class ChartHelper {
+  chartContainer: ElementRef;
 
-  public updateProperties(options: Options, height: number, data: any[], description: string, dataLabelsEnabled: boolean ): Options {
-    if (options.chart && options.chart.type === 'pie') {
-      options.chart.height = height;
-      options.series[0].data = data;
-      options.chart.description = description;
-      options.plotOptions.pie.dataLabels.enabled = dataLabelsEnabled;
-    }
-    return options;
+  public init(options: Options, chartContainer: ElementRef) {
+    this.chartContainer = chartContainer;
+    this.updateChart(options);
   }
 
-  public setupChartType(options: Options, type: ChartType): Options {
-    let pieInnerCircleSize = '0%';
-    if (type === 'donut') {
-      type = 'pie';
-      pieInnerCircleSize = '50%';
+  public onChanges(options: Options) {
+    if (options.chart) {
+      this.updateChart(options);
     }
-    if (type === 'pie') {
-      options = new DonutOptions().options;
-      options.plotOptions.pie.innerSize = pieInnerCircleSize;
-    }
-    options.chart.type = type;
-    return options;
   }
+
+  private updateChart(options: Options) {
+    Highcharts.chart(this.chartContainer.nativeElement, options);
+  }
+
 }
