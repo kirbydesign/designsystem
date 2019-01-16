@@ -24,11 +24,9 @@ describe('ListComponent', () => {
   });
 
   describe('item select event', () => {
-    beforeEach(() => {
-      spyOn(component.itemSelect, 'emit');
-    });
 
     it('should emit the clicked item', () => {
+      spyOn(component.itemSelect, 'emit');
       const itemToBeSelected = { value: 'this is a dummy item' };
 
       component.onItemClick(itemToBeSelected);
@@ -38,6 +36,7 @@ describe('ListComponent', () => {
     });
 
     it('should emit the tapped item', () => {
+      spyOn(component.itemSelect, 'emit');
       const itemToBeSelected = { value: 'item 2' };
       component.items = [
         { value: 'item 1' },
