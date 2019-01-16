@@ -1,66 +1,73 @@
 import { Component, OnInit, Input, OnChanges, ElementRef, ViewChild } from '@angular/core';
 import { Options } from 'highcharts';
-import * as Highcharts from 'highcharts';
+import { ChartHelper } from './chart-helper';
 import { DonutOptions } from './options/donut';
 import { AreaSplineOptions } from './options/areaspline';
-
-import * as exporting from 'highcharts/modules/exporting.src'; exporting(Highcharts);
-import * as exportData from 'highcharts/modules/export-data'; exportData(Highcharts);
-import * as accessibility from 'highcharts/modules/accessibility'; accessibility(Highcharts);
+import { ChartTypes } from './chart-types';
 
 @Component({
   selector: 'kirby-chart',
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.scss']
 })
+
 export class ChartComponent implements OnInit, OnChanges {
   @Input() data = [];
   @Input() height = 300;
-  @Input() type = 'pie';
+  @Input() type: ChartTypes = ChartTypes.PIE;
   @Input() description = '';
   @Input() dataLabelsEnabled = true;
 
   options: Options = {};
+  chartHelper: ChartHelper;
 
-  constructor() { }
+  constructor() {
+    this.chartHelper = new ChartHelper();
+  }
 
   @ViewChild('chartContainer') chartContainer: ElementRef;
 
   ngOnInit() {
-    const chartType = this.type === 'donut' ? 'pie' : this.type;
-    switch (chartType) {
-      case 'pie': {
+    this.setupChartType();
+    this.updateProperties();
+    this.chartHelper.init(this.options, this.chartContainer);
+  }
+
+  ngOnChanges() {
+    this.updateProperties();
+    this.chartHelper.onChanges(this.options);
+  }
+
+  setupChartType() {
+    let pieInnerCircleSize = '0%';
+    if (this.type === ChartTypes.DONUT) {
+      this.type = ChartTypes.PIE;
+      pieInnerCircleSize = '50%';
+    }
+    switch (this.type) {
+      case ChartTypes.PIE: {
         this.options = new DonutOptions().options;
+        this.options.plotOptions.pie.innerSize = pieInnerCircleSize;
         break;
       }
-      case 'areaspline': {
+      case ChartTypes.AREASPLINE: {
         this.options = new AreaSplineOptions().options;
         break;
       }
     }
-    this.options.chart.type = chartType;
-    this.setChartProperties();
-    Highcharts.chart(this.chartContainer.nativeElement, this.options);
+    this.options.chart.type = this.type;
   }
 
-  ngOnChanges() {
+  updateProperties() {
     if (this.options.chart) {
-      this.updateChart();
+      this.options.chart.height = this.height;
+      this.options.series[0].data = this.data;
+      this.options.chart.description = this.description;
+      if (this.options.chart.type === ChartTypes.PIE) {
+        this.options.plotOptions.pie.dataLabels.enabled = this.dataLabelsEnabled;
+      }
     }
-  }
 
-  updateChart() {
-    this.setChartProperties();
-    Highcharts.chart(this.chartContainer.nativeElement, this.options);
-  }
-
-  setChartProperties() {
-    this.options.chart.height = this.height;
-    this.options.series[0].data = this.data;
-    this.options.chart.description = this.description;
-    if (this.options.chart && this.options.chart.type === 'pie') {
-      this.options.plotOptions.pie.dataLabels.enabled = this.dataLabelsEnabled;
-    }
   }
 
 }

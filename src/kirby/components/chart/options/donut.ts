@@ -4,6 +4,9 @@ export class DonutOptions {
     private MIN_WIDTH = 640;
     get options(): Options {
         return {
+            accessibility: {
+                enabled: true
+            },
             chart: {
                 style: {
                     fontFamily: 'Roboto',
@@ -29,20 +32,19 @@ export class DonutOptions {
             plotOptions: {
                 pie: {
                     colors: ['#015132', '#B2D1BF', '#AABC08', '#1FA05A', 'yellowgreen'],
-                    innerSize: '50%',
                     allowPointSelect: false,
                     cursor: 'pointer',
                     showInLegend: true,
                     borderColor: null,
                     dataLabels: {
+                        format: '{point.label}',
                         enabled: true,
                         connectorWidth: 0,
                         distance: 5,
                         style: {
                             fontSize: '1rem',
                             fontWeight: '200'
-                        },
-                        format: '{point.label}'
+                        }
                     },
                     point: {
                         events: {

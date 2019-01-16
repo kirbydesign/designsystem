@@ -13,44 +13,40 @@
     <script src="highcharts.js"></script>
     <link rel="stylesheet" type="text/css" href="styles.css">
     <script>
-        (function () {
-            var oWebViewInterface = window.nsWebViewInterface;
-
-            function addNativeMsgListener() {
-                oWebViewInterface.on('updateChart', function (chartData) {
-                    configureChartOptions(chartData);
-                    var chart = Highcharts.chart('chart', chartData.options);
-                });
-            }
-
-            function configureChartOptions(chartData) {
-                chartData.options.chart.height = chartData.height;
-                switch (chartData.options.chart.type) {
-                    case 'pie': {
-                        chartData.options.plotOptions.pie.point.events.legendItemClick = function (e) {
-                            return e.preventDefault();
-                        };
-                        break;
-                    }
-                    case 'areaspline': {
-                        chartData.options.tooltip.formatter = function () {
-                            return this.y;
-                        };
-                        chartData.options.tooltip.positioner = function () {
-                            return { x: (this.chart.plotSizeX / 2) - (this.label.width / 2), y: 0 };
-                        };
-                        break;
+            (function () {
+                var oWebViewInterface = window.nsWebViewInterface;
+                function addNativeMsgListener() {
+                    oWebViewInterface.on('updateChart', function (options) {
+                        configureChartOptions(options);
+                        Highcharts.chart('chart', options);
+                    });
+                }
+                function configureChartOptions(options) {
+                    // these functions need to be here AND in the options objects to work
+                    switch (options.chart.type) {
+                        case 'pie': {
+                            options.plotOptions.pie.point.events.legendItemClick = function (e) {
+                                return e.preventDefault();
+                            };
+                            break;
+                        }
+                        case 'areaspline': {
+                            options.tooltip.formatter = function () {
+                                return this.y;
+                            };
+                            options.tooltip.positioner = function () {
+                                return { x: (this.chart.plotSizeX / 2) - (this.label.width / 2), y: 0 };
+                            };
+                            break;
+                        }
                     }
                 }
-            }
-
-            function init() {
-                addNativeMsgListener();
-            }
-
-            init();
-        })();
-    </script>
+                function init() {
+                    addNativeMsgListener();
+                }
+                init();
+            })();
+        </script>
 </body>
 
 </html>
