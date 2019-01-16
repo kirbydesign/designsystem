@@ -28,10 +28,10 @@ export class ListHeaderDirective {}
 export class ListComponent implements OnInit {
 
   @Input() items: any[];
+  @Output() itemSelect = new EventEmitter<any>();
   // The first element that matches ListItemDirective. As a structural directive it unfolds into a template. This is a reference to that.
   @ContentChild(ListItemDirective, {read: TemplateRef}) listItemTemplate: any;
   @ContentChild(ListHeaderDirective, {read: TemplateRef}) headerTemplate: any;
-  @Output() itemSelect = new EventEmitter<any>();
 
   constructor() {}
 

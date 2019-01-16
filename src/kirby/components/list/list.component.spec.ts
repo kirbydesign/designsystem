@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ListComponent } from './list.component';
+import { ItemEventData } from 'tns-core-modules/ui/list-view/list-view';
 
 describe('ListComponent', () => {
   let component: ListComponent;
@@ -8,9 +9,8 @@ describe('ListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListComponent ]
-    })
-    .compileComponents();
+      declarations: [ListComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -21,5 +21,34 @@ describe('ListComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  describe('item select event', () => {
+    beforeEach(() => {
+      spyOn(component.itemSelect, 'emit');
+    });
+
+    it('should emit the clicked item', () => {
+      const itemToBeSelected = { value: 'this is a dummy item' };
+
+      component.onItemClick(itemToBeSelected);
+
+      expect(component.itemSelect.emit).toHaveBeenCalledTimes(1);
+      expect(component.itemSelect.emit).toHaveBeenCalledWith(itemToBeSelected);
+    });
+
+    it('should emit the tapped item', () => {
+      const itemToBeSelected = { value: 'item 2' };
+      component.items = [
+        { value: 'item 1' },
+        itemToBeSelected,
+        { value: 'item 3' }
+      ];
+
+      component.onItemTap({ index: 1 } as ItemEventData);
+
+      expect(component.itemSelect.emit).toHaveBeenCalledTimes(1);
+      expect(component.itemSelect.emit).toHaveBeenCalledWith(itemToBeSelected);
+    });
   });
 });
