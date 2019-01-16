@@ -28,11 +28,12 @@ export class NativeScriptLineChartExampleComponent implements OnInit {
     const distributions$ = of(data);
     return distributions$.pipe(map(distributions => {
       return distributions.map(distribution => {
-        const dt1  = parseInt(distribution.rateDate.substring(0, 2), 10);
-        const mon1  = parseInt(distribution.rateDate.substring(3, 5), 10);
-        const yr1   = parseInt(distribution.rateDate.substring(6, 10), 10);
-        const date = new Date(yr1, mon1 - 1, dt1).getTime();
-        const date1 = new Date(yr1, mon1 - 1, dt1);
+        const dt  = parseInt(distribution.rateDate.substring(0, 2), 10);
+        const mon  = parseInt(distribution.rateDate.substring(3, 5), 10);
+        const yr   = parseInt(distribution.rateDate.substring(6, 10), 10);
+        // const dateString = `${dt}.${mon}.${yr}`;
+        // console.log(dateString);
+        const date = new Date(yr, mon - 1, dt).getTime();
         return new NativeScriptLineChartItem(
           date,
           distribution.rate
@@ -315,20 +316,6 @@ export class NativeScriptLineChartExampleComponent implements OnInit {
         'rateDate': '18.12.2018',
         'rateTime': '17.20.00',
         'sales': 340455.11
-      },
-      {
-        'rate': 152.8,
-        'indexRate': 126.51,
-        'rateDate': '03.01.2019',
-        'rateTime': '17.20.00',
-        'sales': 64625.8
-      },
-      {
-        'rate': 164,
-        'indexRate': 135.78,
-        'rateDate': '07.01.2019',
-        'rateTime': '21.20.00',
-        'sales': 26896
       }
     ];
   }

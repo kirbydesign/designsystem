@@ -1,8 +1,8 @@
-<FlexboxLayout class="background">
-    <Label class="kirby-text-xxlarge" text="{{ labelText }}" textWrap="true" ></Label>
+<FlexboxLayout class="background roboto">
+    <Label class="kirby-text-xxlarge roboto" text="{{ labelText }}" textWrap="true" ></Label>
     <RadCartesianChart tkExampleTitle tkToggleNavButton class="line-chart">
-        <DateTimeContinuousAxis tkCartesianHorizontalAxis dateFormat="dd-MM-yyyy" minimum="15/2/2018" maximum="18/12/2018" hidden="true"></DateTimeContinuousAxis >
-        <LinearAxis tkCartesianVerticalAxis [maximum]="maximum" [minimum]="minimum" hidden="true"></LinearAxis>
+        <DateTimeContinuousAxis tkCartesianHorizontalAxis dateFormat="dd-MM-yyyy" [minimum]="xAxisMinimum" [maximum]="xAxisMaximum" hidden="true"></DateTimeContinuousAxis >
+        <LinearAxis tkCartesianVerticalAxis [maximum]="yAxisMaximum" [minimum]="yAxisMinimum" hidden="true"></LinearAxis>
         <Trackball tkCartesianTrackball (trackBallContentRequested)="onTrackBallContentRequested($event)" snapMode="ClosestPoint" showIntersectionPoints="true"></Trackball>
         <AreaSeries tkCartesianSeries seriesName="Line" [items]="items" categoryProperty="category" valueProperty="amount"></AreaSeries>
         <RadCartesianChartGrid tkCartesianGrid horizontalLinesVisible="false" verticalLinesVisible="false" horizontalStripLinesVisible="false" verticalStripLinesVisible="false"></RadCartesianChartGrid>
@@ -11,17 +11,17 @@
         </Palette>
     </RadCartesianChart>
     <GridLayout rows="auto" columns="*" class="chart-text-grid">
-        <Label class="kirby-text-xsmall chart-text-color" horizontalAlignment="left" text="{{ legend | date:'MM.yy'}}"></Label>
-        <Label class="kirby-text-xsmall chart-text-color" horizontalAlignment="right" text="I dag"></Label>
+        <Label class="kirby-text-xsmall chart-text-color roboto" horizontalAlignment="left" text="{{ legend | date:'MM.yy'}}"></Label>
+        <Label class="kirby-text-xsmall chart-text-color roboto" horizontalAlignment="right" text="I dag"></Label>
     </GridLayout>
     <StackLayout class="hr-light m-y-5 m-x-10"></StackLayout>
     <FlexboxLayout alignItems="center" justifyContent="space-between" width="100%" class="chart-text-grid">
-            <Label class="kirby-text-xsmall chart-text-color" id="1D" text="1D" (tap)="onTap($event)"></Label>
-            <Label class="kirby-text-xsmall chart-text-color" id="1W" text="1U" (tap)="onTap($event)"></Label>
-            <Label class="kirby-text-xsmall chart-text-color" id="1M" text="1M" (tap)="onTap($event)"></Label>
-            <Label class="kirby-text-xsmall chart-text-color" id="1Y" text="1Å" (tap)="onTap($event)"></Label>
-            <Label class="kirby-text-xsmall chart-text-color" id="5Y" text="5Å" (tap)="onTap($event)"></Label>
-            <Label class="kirby-text-xsmall chart-text-color" id="YTD" text="ÅTD" (tap)="onTap($event)"></Label>
+            <Label class="kirby-text-xsmall chart-text-color roboto" id="1D" text="1D" (tap)="onTap($event)"></Label>
+            <Label class="kirby-text-xsmall chart-text-color roboto" id="1W" text="1U" (tap)="onTap($event)"></Label>
+            <Label class="kirby-text-xsmall chart-text-color roboto" id="1M" text="1M" (tap)="onTap($event)"></Label>
+            <Label class="kirby-text-xsmall chart-text-color roboto" id="1Y" text="1Å" (tap)="onTap($event)"></Label>
+            <Label class="kirby-text-xsmall chart-text-color roboto" id="5Y" text="5Å" (tap)="onTap($event)"></Label>
+            <Label class="kirby-text-xsmall chart-text-color roboto" id="YTD" text="ÅTD" (tap)="onTap($event)"></Label>
     </FlexboxLayout>
     <StackLayout class="hr-light m-y-5 m-x-10"></StackLayout>
 </FlexboxLayout> 

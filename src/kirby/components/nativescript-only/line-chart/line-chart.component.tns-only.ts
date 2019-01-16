@@ -2,6 +2,7 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/cor
 import { TrackballCustomContentData } from 'nativescript-ui-chart';
 import { EventData, Observable } from 'tns-core-modules/data/observable';
 import { Label } from 'tns-core-modules/ui/label';
+import * as platform from 'tns-core-modules/platform';
 export class NativeScriptLineChartItem {
   constructor(
     public category: number,
@@ -17,15 +18,20 @@ export class NativeScriptLineChartItem {
 })
 export class NativeScriptLineChartComponent implements OnInit, OnChanges {
   @Input() items: NativeScriptLineChartItem[];
+  private items2: NativeScriptLineChartItem[];
   @Input() currency: string;
-  public strokeWidth = 2;
+  public strokeWidth = platform.isIOS ? 2 : 10;
   public fillColor = '#bfd6ce';
   public strokeColor = '#005c3c';
-  public maximum = 0;
-  public minimum = 0;
+  public xAxisMaximum: string;
+  public xAxisMinimum: string;
+  public yAxisMaximum = 0;
+  public yAxisMinimum = 0;
   public labelText: string;
   public legend: Date;
   private chartBorderBottom = 30;
+  private oneDay = 1000 * 60 * 60 * 24;
+  private oneWeek = 1000 * 60 * 60 * 24 * 7;
 
   constructor() {}
 
@@ -36,14 +42,30 @@ export class NativeScriptLineChartComponent implements OnInit, OnChanges {
     if (changes['items']) {
       // Included to avoid null errors everywhere when first loading.
       if (this.items == null) {
-        this.items = [{'category': 0, 'amount': 0}];
+        this.items = [{'category': 0, 'amount': 0}, {'category': 1545087600000, 'amount': 0}];
       }
-      this.maximum = this.getMaximum(this.items);
-      this.minimum = this.getMinimum(this.items);
+      this.items2 = this.items;
+      /*
+      const lastDate = DateTime.fromMillis(this.getLastItem(this.items).category);
+      this.xAxisMaximum = lastDate.toJSDate();
+      const firstDate = DateTime.fromMillis(this.getFirstItem(this.items).category);
+      this.xAxisMinimum = firstDate.toJSDate();
+      */
+      this.xAxisMaximum = this.convertDateToStringFormat(new Date(this.getLastItem(this.items).category));
+      this.xAxisMinimum = this.convertDateToStringFormat(new Date(this.getFirstItem(this.items).category));
+      //
+      this.yAxisMaximum = this.getMaximum(this.items);
+      this.yAxisMinimum = this.getMinimum(this.items);
       this.labelText = this.getLabelText(this.getLastItem(this.items));
-      const firstItem = this.getFirstItem(this.items);
-      this.legend = new Date(firstItem.category);
+      this.legend = new Date(this.getFirstItem(this.items).category);
     }
+  }
+
+  convertDateToStringFormat(date: Date) {
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    return `${day}/${month}/${year}`;
   }
 
   getFirstItem(items: NativeScriptLineChartItem[]) {
@@ -87,14 +109,21 @@ export class NativeScriptLineChartComponent implements OnInit, OnChanges {
   }
 
   onTap(args: EventData) {
+    const lastDateMillisec = new Date(this.getLastItem(this.items).category).getTime();
     const label = <Label>args.object;
     switch (label.id) {
       case '1D': {
-        console.log('1d');
+        const firstDateMillisec = lastDateMillisec - this.oneDay;
+        this.xAxisMinimum = this.convertDateToStringFormat(new Date(firstDateMillisec));
+        console.log(this.xAxisMinimum.toString());
+        this.items = this.items2;
         break;
       }
       case '1W': {
-        console.log('1d');
+        const firstDateMillisec = lastDateMillisec - this.oneWeek;
+        this.xAxisMinimum = this.convertDateToStringFormat(new Date(firstDateMillisec));
+        console.log(this.xAxisMinimum.toString());
+        this.items = this.items2;
         break;
       }
       case '1M': {
