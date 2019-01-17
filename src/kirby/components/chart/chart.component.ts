@@ -2,7 +2,7 @@ import { Component, OnInit, Input, OnChanges, ElementRef, ViewChild } from '@ang
 import { Options } from 'highcharts';
 import { ChartHelper } from './chart-helper';
 import { DonutOptions } from './options/donut';
-import { ChartTypes } from './chart-types';
+import { ChartType } from './chart-type';
 
 @Component({
   selector: 'kirby-chart',
@@ -13,9 +13,9 @@ import { ChartTypes } from './chart-types';
 export class ChartComponent implements OnInit, OnChanges {
   @Input() data = [];
   @Input() height = 300;
-  @Input() type: ChartTypes = ChartTypes.PIE;
+  @Input() type: ChartType = ChartType.PIE;
   @Input() description = '';
-  @Input() dataLabelsEnabled = true;
+  @Input() showDataLabels = true;
 
   options: Options = {};
   chartHelper: ChartHelper;
@@ -34,16 +34,16 @@ export class ChartComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     this.updateProperties();
-    this.chartHelper.onChanges(this.options);
+    this.chartHelper.updateChart(this.options);
   }
 
   setupChartType() {
     let pieInnerCircleSize = '0%';
-    if (this.type === ChartTypes.DONUT) {
-      this.type = ChartTypes.PIE;
+    if (this.type === ChartType.DONUT) {
+      this.type = ChartType.PIE;
       pieInnerCircleSize = '50%';
     }
-    if (this.type === ChartTypes.PIE) {
+    if (this.type === ChartType.PIE) {
       this.options = new DonutOptions().options;
       this.options.plotOptions.pie.innerSize = pieInnerCircleSize;
     }
@@ -51,11 +51,11 @@ export class ChartComponent implements OnInit, OnChanges {
   }
 
   updateProperties() {
-    if (this.options.chart && this.options.chart.type === ChartTypes.PIE) {
+    if (this.options.chart && this.options.chart.type === ChartType.PIE) {
       this.options.chart.height = this.height;
       this.options.series[0].data = this.data;
       this.options.chart.description = this.description;
-      this.options.plotOptions.pie.dataLabels.enabled = this.dataLabelsEnabled;
+      this.options.plotOptions.pie.dataLabels.enabled = this.showDataLabels;
     }
   }
 

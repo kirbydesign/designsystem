@@ -1,47 +1,47 @@
 import { Options } from 'highcharts';
 import { ElementRef } from '@angular/core';
 import { WebView, LoadEventData } from 'tns-core-modules/ui/web-view/web-view';
-import { android, ios, AndroidApplication, AndroidActivityEventData } from 'tns-core-modules/application';
-
-const webViewInterfaceModule = require('nativescript-webview-interface');
+import { android, AndroidApplication, AndroidActivityEventData } from 'tns-core-modules/application';
+import { isAndroid, isIOS } from 'tns-core-modules/platform';
+import * as webViewInterfaceModule from 'nativescript-webview-interface';
 
 export class ChartHelper {
   chartWebViewInterface;
   webViewReady = false;
 
-  public init(options: Options, webViewRef: ElementRef) {
-    const webView = webViewRef.nativeElement as WebView;
+  public init(options: Options, chartContainer: ElementRef) {
+    const webView = chartContainer.nativeElement as WebView;
     webView.on(WebView.loadedEvent, (args: LoadEventData) => {
       setTimeout(() => {
-        this.setupWebviewInterface(webView, options);
+        this.initializeWebView(webView, options);
       }, 0);
     });
   }
 
-  private setupWebviewInterface(webView: WebView, options: Options) {
+  private initializeWebView(webView: WebView, options: Options) {
     webView.on(WebView.loadFinishedEvent, (args: LoadEventData) => {
       if (!args.error) {
-        this.setupWebViewForPlatforms(webView);
+        this.setupWebViewForPlatform(webView);
         this.webViewReady = true;
-        this.updateChart(options);
+        this.emitDataToWebView(options);
       }
     });
     this.chartWebViewInterface = new webViewInterfaceModule.WebViewInterface(webView, '~/chart/chart.webview.html');
   }
 
-  public onChanges(options: Options) {
+  public updateChart(options: Options) {
     if (this.webViewReady) {
-      this.updateChart(options);
+      this.emitDataToWebView(options);
     }
   }
 
-  private updateChart(options: Options) {
+  private emitDataToWebView(options: Options) {
     this.chartWebViewInterface.emit('updateChart', options);
   }
 
-  private setupWebViewForPlatforms(webView: WebView) {
-    const platformWebView = android ? webView.android : webView.ios;
-    if (android) {
+  private setupWebViewForPlatform(webView: WebView) {
+    if (isAndroid) {
+      const platformWebView = webView.android;
       platformWebView.getSettings().setBuiltInZoomControls(false);
       platformWebView.getSettings().setDisplayZoomControls(false);
       android.on(AndroidApplication.activityPausedEvent, (args: AndroidActivityEventData) => {
@@ -50,8 +50,8 @@ export class ChartHelper {
       android.on(AndroidApplication.activityResumedEvent, (args: AndroidActivityEventData) => {
         platformWebView.onResume();
       });
-    } else if (ios) {
-      const sw = platformWebView.scrollView;
+    } else if (isIOS) {
+      const sw = webView.ios.scrollView;
       sw.bounces = false;
       sw.scrollEnabled = false;
     }

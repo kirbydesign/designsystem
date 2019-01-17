@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ChartComponent } from './chart.component';
-import { ChartTypes } from './chart-types';
+import { ChartType } from './chart-type';
 
 describe('ChartComponent', () => {
   let component: ChartComponent;
@@ -41,14 +41,14 @@ describe('ChartComponent', () => {
   });
 
   it('should have correct default chart type', () => {
-    expect(component.options['chart'].type).toBe(ChartTypes.PIE);
+    expect(component.options['chart'].type).toBe(ChartType.PIE);
     expect(component.options.plotOptions.pie.innerSize).toBe('0%');
   });
 
   it('should convert donut chart type to highcharts pie with 50% innerSize', () => {
-    component.type = ChartTypes.DONUT;
+    component.type = ChartType.DONUT;
     component.ngOnInit();
-    expect(component.options['chart'].type).toBe(ChartTypes.PIE);
+    expect(component.options['chart'].type).toBe(ChartType.PIE);
     expect(component.options.plotOptions.pie.innerSize).toBe('50%');
   });
 
@@ -57,7 +57,7 @@ describe('ChartComponent', () => {
   });
 
   it('should disable dataLabels when false', () => {
-    component.dataLabelsEnabled = false;
+    component.showDataLabels = false;
     component.ngOnInit();
     expect(component.options['plotOptions'].pie.dataLabels.enabled).toBe(false);
   });
