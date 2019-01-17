@@ -1,13 +1,15 @@
-<GridLayout rows="auto, *">
-    <FlexboxLayout row="0" alignItems="center" class="list-header-container">
-        <ng-container *ngTemplateOutlet="headerTemplate; context: {$implicit: columns}"></ng-container>
-    </FlexboxLayout>
-    <ListView [items]="items" row="1">
-        <ng-template let-item="item">
+<StackLayout>
+    <RadListView [items]="items">
+        <ng-template tkListItemTemplate let-item="item">
             <FlexboxLayout alignItems="center" class="list-item-container">
-                <ng-container *ngTemplateOutlet="listItemTemplate; context: {$implicit: item}">
-                </ng-container>
+                    <ng-container *ngTemplateOutlet="listItemTemplate; context: {$implicit: item}">
+                    </ng-container>
             </FlexboxLayout>
         </ng-template>
-    </ListView>
-</GridLayout>
+        <ng-template tkListViewHeader>
+            <FlexboxLayout alignItems="center" class="list-header-container">
+                <ng-container *ngTemplateOutlet="headerTemplate; context: {$implicit: columns}"></ng-container>
+            </FlexboxLayout>
+        </ng-template>
+    </RadListView>
+</StackLayout>
