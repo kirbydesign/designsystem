@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map, delay } from 'rxjs/operators';
-
+import { EventData } from 'tns-core-modules/data/observable';
 import { NativeScriptLineChartItem } from '../../../../kirby/components/nativescript-only/line-chart/line-chart.component.tns-only';
 
 @Component({
@@ -12,15 +12,16 @@ import { NativeScriptLineChartItem } from '../../../../kirby/components/nativesc
 
 export class NativeScriptLineChartExampleComponent implements OnInit {
   public chartItems$: Observable<NativeScriptLineChartItem[]>;
-  public currency: string;
-  title = 'Min investering';
+  public currency = 'DKK';
+  public title = 'Min investering';
+  public selectors = ['1D', '1U', '1M', '1Å', '5Å', 'ÅTD'];
+  public legendText = 'I dag';
 
 
   constructor() { }
 
   ngOnInit() {
     this.chartItems$ = this.mapToChartItems(this.getMockData()).pipe(delay(500));
-    this.currency = 'DKK';
   }
 
   // tslint:disable-next-line:max-line-length
@@ -40,6 +41,10 @@ export class NativeScriptLineChartExampleComponent implements OnInit {
         );
       });
     }));
+  }
+
+  onSelectorChange(id: string) {
+    console.log(id);
   }
 
   getMockData(): { rate: number, indexRate: number, rateDate: string, rateTime: string, sales: number }[] {

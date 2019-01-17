@@ -1,8 +1,9 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, Output, OnChanges, SimpleChanges, EventEmitter } from '@angular/core';
 import { TrackballCustomContentData } from 'nativescript-ui-chart';
-import { EventData, Observable } from 'tns-core-modules/data/observable';
+import { EventData } from 'tns-core-modules/data/observable';
 import { Label } from 'tns-core-modules/ui/label';
 import * as platform from 'tns-core-modules/platform';
+import { SelectorsMap } from 'tns-core-modules/ui/styling/css-selector/css-selector';
 export class NativeScriptLineChartItem {
   constructor(
     public category: number,
@@ -18,20 +19,20 @@ export class NativeScriptLineChartItem {
 })
 export class NativeScriptLineChartComponent implements OnInit, OnChanges {
   @Input() items: NativeScriptLineChartItem[];
-  private items2: NativeScriptLineChartItem[];
   @Input() currency: string;
+  @Input() selectors;
+  @Input() legendText;
+  @Output() selectorChange: EventEmitter<any> = new EventEmitter();
   public strokeWidth = platform.isIOS ? 2 : 10;
   public fillColor = '#bfd6ce';
   public strokeColor = '#005c3c';
-  public xAxisMaximum: string;
-  public xAxisMinimum: string;
-  public yAxisMaximum = 0;
-  public yAxisMinimum = 0;
+  public xAxisMaximum: Date;
+  public xAxisMinimum: Date;
+  public yAxisMaximum: number;
+  public yAxisMinimum: number;
   public labelText: string;
-  public legend: Date;
+  public legendDate: Date;
   private chartBorderBottom = 30;
-  private oneDay = 1000 * 60 * 60 * 24;
-  private oneWeek = 1000 * 60 * 60 * 24 * 7;
 
   constructor() {}
 
@@ -40,32 +41,18 @@ export class NativeScriptLineChartComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['items']) {
-      // Included to avoid null errors everywhere when first loading.
-      if (this.items == null) {
-        this.items = [{'category': 0, 'amount': 0}, {'category': 1545087600000, 'amount': 0}];
+      if (this.items != null) {
+        // Set x-axis minimum and maximum to first and last item.
+        this.xAxisMaximum = new Date(this.getLastItem(this.items).category);
+        this.xAxisMinimum = new Date(this.getFirstItem(this.items).category);
+        // Set y-axis to best minimum and maximum.
+        this.yAxisMaximum = this.getMaximum(this.items);
+        this.yAxisMinimum = this.getMinimum(this.items);
+        // Set texts based on items.
+        this.labelText = this.getLabelText(this.getLastItem(this.items));
+        this.legendDate = new Date(this.getFirstItem(this.items).category);
       }
-      this.items2 = this.items;
-      /*
-      const lastDate = DateTime.fromMillis(this.getLastItem(this.items).category);
-      this.xAxisMaximum = lastDate.toJSDate();
-      const firstDate = DateTime.fromMillis(this.getFirstItem(this.items).category);
-      this.xAxisMinimum = firstDate.toJSDate();
-      */
-      this.xAxisMaximum = this.convertDateToStringFormat(new Date(this.getLastItem(this.items).category));
-      this.xAxisMinimum = this.convertDateToStringFormat(new Date(this.getFirstItem(this.items).category));
-      //
-      this.yAxisMaximum = this.getMaximum(this.items);
-      this.yAxisMinimum = this.getMinimum(this.items);
-      this.labelText = this.getLabelText(this.getLastItem(this.items));
-      this.legend = new Date(this.getFirstItem(this.items).category);
     }
-  }
-
-  convertDateToStringFormat(date: Date) {
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1;
-    const day = date.getDate();
-    return `${day}/${month}/${year}`;
   }
 
   getFirstItem(items: NativeScriptLineChartItem[]) {
@@ -109,43 +96,8 @@ export class NativeScriptLineChartComponent implements OnInit, OnChanges {
   }
 
   onTap(args: EventData) {
-    const lastDateMillisec = new Date(this.getLastItem(this.items).category).getTime();
     const label = <Label>args.object;
-    switch (label.id) {
-      case '1D': {
-        const firstDateMillisec = lastDateMillisec - this.oneDay;
-        this.xAxisMinimum = this.convertDateToStringFormat(new Date(firstDateMillisec));
-        console.log(this.xAxisMinimum.toString());
-        this.items = this.items2;
-        break;
-      }
-      case '1W': {
-        const firstDateMillisec = lastDateMillisec - this.oneWeek;
-        this.xAxisMinimum = this.convertDateToStringFormat(new Date(firstDateMillisec));
-        console.log(this.xAxisMinimum.toString());
-        this.items = this.items2;
-        break;
-      }
-      case '1M': {
-        console.log('1d');
-        break;
-      }
-      case '1Y': {
-        console.log('1d');
-        break;
-      }
-      case '5Y': {
-        console.log('1d');
-        break;
-      }
-      case 'YTD': {
-        console.log('1d');
-        break;
-      }
-      default: {
-        console.log('something else');
-        break;
-      }
-    }
+    this.selectorChange.emit(label.id);
   }
+
 }
