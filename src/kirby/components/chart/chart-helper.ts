@@ -13,16 +13,16 @@ export class ChartHelper {
 
   public init(options: Options, chartContainer: ElementRef) {
     this.chartContainer = chartContainer;
-    this.updateChart(options);
+    this.renderChart(options);
   }
 
-  public onChanges(options: Options) {
+  public updateChart(options: Options) {
     if (options.chart) {
-      this.updateChart(options);
+      this.renderChart(options);
     }
   }
 
-  private updateChart(options: Options) {
+  private renderChart(options: Options) {
     Highcharts.chart(this.chartContainer.nativeElement, options);
   }
 

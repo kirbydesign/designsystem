@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/kirbydesign/designsystem#readme",
   "types": "index.d.ts",
-  "dependencies": {
+  "peerDependencies": {
     "highcharts": "^6.2.0",
     "nativescript-webview-interface": "^1.4.2"
   }

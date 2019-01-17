@@ -3,7 +3,7 @@ import { Options } from 'highcharts';
 import { ChartHelper } from './chart-helper';
 import { DonutOptions } from './options/donut';
 import { AreaSplineOptions } from './options/areaspline';
-import { ChartTypes } from './chart-types';
+import { ChartType } from './chart-type';
 
 @Component({
   selector: 'kirby-chart',
@@ -14,9 +14,9 @@ import { ChartTypes } from './chart-types';
 export class ChartComponent implements OnInit, OnChanges {
   @Input() data = [];
   @Input() height = 300;
-  @Input() type: ChartTypes = ChartTypes.PIE;
+  @Input() type: ChartType = ChartType.PIE;
   @Input() description = '';
-  @Input() dataLabelsEnabled = true;
+  @Input() showDataLabels = true;
 
   options: Options = {};
   chartHelper: ChartHelper;
@@ -35,22 +35,22 @@ export class ChartComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     this.updateProperties();
-    this.chartHelper.onChanges(this.options);
+    this.chartHelper.updateChart(this.options);
   }
 
   setupChartType() {
     let pieInnerCircleSize = '0%';
-    if (this.type === ChartTypes.DONUT) {
-      this.type = ChartTypes.PIE;
+    if (this.type === ChartType.DONUT) {
+      this.type = ChartType.PIE;
       pieInnerCircleSize = '50%';
     }
     switch (this.type) {
-      case ChartTypes.PIE: {
+      case ChartType.PIE: {
         this.options = new DonutOptions().options;
         this.options.plotOptions.pie.innerSize = pieInnerCircleSize;
         break;
       }
-      case ChartTypes.AREASPLINE: {
+      case ChartType.AREASPLINE: {
         this.options = new AreaSplineOptions().options;
         break;
       }
@@ -63,8 +63,8 @@ export class ChartComponent implements OnInit, OnChanges {
       this.options.chart.height = this.height;
       this.options.series[0].data = this.data;
       this.options.chart.description = this.description;
-      if (this.options.chart.type === ChartTypes.PIE) {
-        this.options.plotOptions.pie.dataLabels.enabled = this.dataLabelsEnabled;
+      if (this.options.chart.type === ChartType.PIE) {
+        this.options.plotOptions.pie.dataLabels.enabled = this.showDataLabels;
       }
     }
 

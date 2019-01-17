@@ -96,10 +96,10 @@ The Kirby chart components use Highcharts. Note that this is a licensed product.
 ...
   new CopyWebpackPlugin([
   ...
-    { from: "kirby/components/chart/chart.webview.html", to: "chart" },
-    { from: "kirby/components/chart/css/styles.css", to: "chart" },
-    { from: "../node_modules/highcharts/highcharts.js", to: "chart" },
-    { from: "../node_modules/nativescript-webview-interface/www/nativescript-webview-interface.js", to: "chart" }
+    { from: "../node_modules/@kirbydesign/designsystem/components/chart/chart.webview.html", to: "chart" },
+    { from: "../node_modules/@kirbydesign/designsystem/components/chart/css/styles.css", to: "chart" },
+    { from: "../node_modules/@kirbydesign/designsystem/node_modules/highcharts/highcharts.js", to: "chart" },
+    { from: "../node_modules/@kirbydesign/designsystem/node_modules/nativescript-webview-interface/www/nativescript-webview-interface.js", to: "chart" }
   ]...
 ...
 ```
