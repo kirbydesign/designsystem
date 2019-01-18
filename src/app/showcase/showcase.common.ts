@@ -6,6 +6,7 @@ import { FontsShowcaseComponent } from './fonts-showcase/fonts-showcase.componen
 import { GridShowcaseComponent } from './grid-showcase/grid-showcase.component';
 import { ListShowcaseComponent } from './list-showcase/list-showcase.component';
 import { ShowcaseComponent } from './showcase.component';
+import { ChartShowcaseComponent } from './chart-showcase/chart-showcase.component';
 import { DoughnutChartShowcaseComponent } from './doughnut-chart-showcase/doughnut-chart-showcase.component';
 import { ShowcaseRoutingModule } from './showcase-routing.module';
 import { ColorsShowcaseComponent } from './colors-showcase/colors-showcase.component';
@@ -23,6 +24,7 @@ export const COMPONENT_EXPORTS: any[] = [
     ListShowcaseComponent,
     GridShowcaseComponent,
     AvatarShowcaseComponent,
+    ChartShowcaseComponent,
     DoughnutChartShowcaseComponent,
     FontsShowcaseComponent,
     LineChartShowcaseComponent,
