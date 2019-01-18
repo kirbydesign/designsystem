@@ -41,19 +41,19 @@ export class ChartHelper {
 
   private setupWebViewForPlatform(webView: WebView) {
     if (isAndroid) {
-      const platformWebView = webView.android;
-      platformWebView.getSettings().setBuiltInZoomControls(false);
-      platformWebView.getSettings().setDisplayZoomControls(false);
+      const androidView = webView.android;
+      androidView .getSettings().setBuiltInZoomControls(false);
+      androidView .getSettings().setDisplayZoomControls(false);
       android.on(AndroidApplication.activityPausedEvent, (args: AndroidActivityEventData) => {
-        platformWebView.onPause();
+        androidView .onPause();
       });
       android.on(AndroidApplication.activityResumedEvent, (args: AndroidActivityEventData) => {
-        platformWebView.onResume();
+        androidView .onResume();
       });
     } else if (isIOS) {
-      const sw = webView.ios.scrollView;
-      sw.bounces = false;
-      sw.scrollEnabled = false;
+      const iosScrollView = webView.ios.scrollView;
+      iosScrollView.bounces = false;
+      iosScrollView.scrollEnabled = false;
     }
   }
 
