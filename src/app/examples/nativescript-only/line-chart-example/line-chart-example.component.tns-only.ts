@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map, delay } from 'rxjs/operators';
-import { EventData } from 'tns-core-modules/data/observable';
 import { NativeScriptLineChartItem } from '../../../../kirby/components/nativescript-only/line-chart/line-chart.component.tns-only';
 
 @Component({
@@ -29,12 +28,10 @@ export class NativeScriptLineChartExampleComponent implements OnInit {
     const distributions$ = of(data);
     return distributions$.pipe(map(distributions => {
       return distributions.map(distribution => {
-        const dt  = parseInt(distribution.rateDate.substring(0, 2), 10);
-        const mon  = parseInt(distribution.rateDate.substring(3, 5), 10);
-        const yr   = parseInt(distribution.rateDate.substring(6, 10), 10);
-        // const dateString = `${dt}.${mon}.${yr}`;
-        // console.log(dateString);
-        const date = new Date(yr, mon - 1, dt).getTime();
+        const dateNo  = parseInt(distribution.rateDate.substring(0, 2), 10);
+        const monthNo  = parseInt(distribution.rateDate.substring(3, 5), 10);
+        const yearNo   = parseInt(distribution.rateDate.substring(6, 10), 10);
+        const date = new Date(yearNo, monthNo - 1, dateNo).getTime();
         return new NativeScriptLineChartItem(
           date,
           distribution.rate
