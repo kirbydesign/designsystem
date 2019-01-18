@@ -4,6 +4,7 @@ import { ButtonExampleComponent } from './button-example/button-example.componen
 import { CardExampleComponent } from './card-example/card-example.component';
 import { GridExampleComponent } from './grid-example/grid-example.component';
 import { ListExampleComponent } from './list-example/list-example.component';
+import { ChartExampleComponent } from './chart-example/chart-example.component';
 import { FontsExampleComponent } from './fonts-example/fonts-example.component';
 
 export const routes: Routes = [
@@ -22,6 +23,10 @@ export const routes: Routes = [
     {
         path: 'list',
         component: ListExampleComponent
+    },
+    {
+        path: 'chart',
+        component: ChartExampleComponent
     },
     {
         path: 'grid',
