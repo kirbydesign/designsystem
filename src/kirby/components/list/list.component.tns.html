@@ -1,5 +1,5 @@
-<StackLayout>
-    <RadListView [items]="items">
+<GridLayout rows="*">
+    <RadListView [items]="items" row="0">
         <ng-template tkListItemTemplate let-item="item">
             <FlexboxLayout alignItems="center" class="list-item-container">
                     <ng-container *ngTemplateOutlet="listItemTemplate; context: {$implicit: item}">
@@ -12,4 +12,4 @@
             </FlexboxLayout>
         </ng-template>
     </RadListView>
-</StackLayout>
+</GridLayout>
