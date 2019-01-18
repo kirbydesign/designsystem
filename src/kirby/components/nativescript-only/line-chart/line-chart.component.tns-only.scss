@@ -14,9 +14,21 @@
     width: 100%;
 }
 
-.chart-text-grid {
+.chart-selector {
     margin-left: 10;
     margin-right: 10;
+    border-top-color: get-color('kirby-disabled');
+    border-top-width: 1;
+    padding-top: 8;
+    padding-bottom: 8;
+    border-bottom-color: get-color('kirby-disabled');
+    border-bottom-width: 1;
+}
+
+.chart-legend {
+    margin-left: 10;
+    margin-right: 10;
+    padding-bottom: 8;
 }
 
 .roboto {

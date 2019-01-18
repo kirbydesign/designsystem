@@ -11,18 +11,16 @@
                 <PaletteEntry tkCartesianPaletteEntry [strokeWidth]="strokeWidth" [fillColor]="fillColor" [strokeColor]="strokeColor"></PaletteEntry>
             </Palette>
         </RadCartesianChart>
-        <GridLayout rows="auto" columns="*" class="chart-text-grid">
+        <GridLayout rows="auto" columns="*" class="chart-legend">
             <Label class="kirby-text-xsmall chart-text-color roboto" horizontalAlignment="left" text="{{ legendDate | date:'MM.yy'}}"></Label>
             <Label class="kirby-text-xsmall chart-text-color roboto" horizontalAlignment="right" [text]="legendText"></Label>
         </GridLayout>
         <ng-container *ngIf="selectors">
-            <StackLayout class="hr-light m-y-5 m-x-10"></StackLayout>
-            <FlexboxLayout alignItems="center" justifyContent="space-between" width="100%" class="chart-text-grid">
+            <FlexboxLayout alignItems="center" justifyContent="space-between" width="100%" class="chart-selector">
                 <ng-container *ngFor="let selector of selectors">
                     <Label class="kirby-text-xsmall chart-text-color roboto" [id]="selector" [text]="selector" (tap)="onTap($event)"></Label>
                 </ng-container>
             </FlexboxLayout>
-            <StackLayout class="hr-light m-y-5 m-x-10"></StackLayout>
         </ng-container>
     </ng-container>
 </FlexboxLayout> 
