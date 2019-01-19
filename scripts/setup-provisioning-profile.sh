@@ -25,7 +25,7 @@ security set-keychain-settings -t 3600 -l ~/Library/Keychains/ios-build.keychain
 # Add certificates to keychain and allow codesign to access them
 security import $TRAVIS_BUILD_DIR/scripts/certs/AppleWWDRCA.cer -k ~/Library/Keychains/ios-build.keychain -T /usr/bin/codesign
 security import $TRAVIS_BUILD_DIR/scripts/certs/dkkirbydesignsystem.cer -k ~/Library/Keychains/ios-build.keychain -T /usr/bin/codesign
-security import $TRAVIS_BUILD_DIR/scripts/certs/dkkirbydesignsystem-key.p12 -k ~/Library/Keychains/ios-build.keychain -P $SECURITY_PASSWORD -T /usr/bin/codesign
+security import $TRAVIS_BUILD_DIR/scripts/certs/dkkirbydesignsystem-key.p12 -k ~/Library/Keychains/ios-build.keychain -P P12_KEY -T /usr/bin/codesign
 security set-key-partition-list -S apple-tool:,apple: -s -k travis ios-build.keychain
 
 # Put the provisioning profile in place
