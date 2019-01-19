@@ -6,8 +6,8 @@
 
 # Open up encoded certificate files
 openssl aes-256-cbc -k "$SECURITY_PASSWORD" -in $TRAVIS_BUILD_DIR/scripts/profile/dkkirbydesignsystem.mobileprovision.enc -d -a -out $TRAVIS_BUILD_DIR/scripts/profile/dkkirbydesignsystem.mobileprovision
-openssl aes-256-cbc -k "$SECURITY_PASSWORD" -in $TRAVIS_BUILD_DIR/scripts/certs/dkkirbydesignsystem.cer.enc -d -a -out $TRAVIS_BUILD_DIR/scripts/certs/dkkirbydesignsystem.cer
-openssl aes-256-cbc -k "$SECURITY_PASSWORD" -in $TRAVIS_BUILD_DIR/scripts/certs/dkkirbydesignsystem-key.p12.enc -d -a -out $TRAVIS_BUILD_DIR/scripts/certs/dkkirbydesignsystem-key.p12
+openssl aes-256-cbc -k "$SECURITY_PASSWORD" -in $TRAVIS_BUILD_DIR/scripts/certs/ios_distribution.cer.enc -d -a -out $TRAVIS_BUILD_DIR/scripts/certs/dkkirbydesignsystem.cer
+openssl aes-256-cbc -k "$SECURITY_PASSWORD" -in $TRAVIS_BUILD_DIR/scripts/certs/762JF2TAEN.p12.enc -d -a -out $TRAVIS_BUILD_DIR/scripts/certs/dkkirbydesignsystem-key.p12
 
 # Create a custom keychain
 security create-keychain -p travis ios-build.keychain
