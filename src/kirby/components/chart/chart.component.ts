@@ -2,6 +2,7 @@ import { Component, OnInit, Input, OnChanges, ElementRef, ViewChild, Inject } fr
 import { Options } from 'highcharts';
 import { ChartHelper } from './chart-helper';
 import { DonutOptions, DONUT_OPTIONS } from './options/donut';
+import { AreaSplineOptions, AREASPLINE_OPTIONS } from './options/areaspline';
 import { ChartType } from './chart-type';
 
 @Component({
@@ -10,7 +11,8 @@ import { ChartType } from './chart-type';
   styleUrls: ['./chart.component.scss'],
   providers: [
     ChartHelper,
-    { provide: DONUT_OPTIONS, useValue: DonutOptions }
+    { provide: DONUT_OPTIONS, useValue: DonutOptions },
+    { provide: AREASPLINE_OPTIONS, useValue: AreaSplineOptions }
   ]
 })
 export class ChartComponent implements OnInit, OnChanges {
@@ -23,7 +25,10 @@ export class ChartComponent implements OnInit, OnChanges {
 
   options: Options = {};
 
-  constructor(private chartHelper: ChartHelper, @Inject(DONUT_OPTIONS) public donutOptions: Options) {
+  constructor(
+    private chartHelper: ChartHelper,
+    @Inject(DONUT_OPTIONS) public donutOptions: Options,
+    @Inject(AREASPLINE_OPTIONS) public areasplineOptions: Options) {
   }
 
   ngOnInit() {
@@ -43,20 +48,30 @@ export class ChartComponent implements OnInit, OnChanges {
       this.type = ChartType.PIE;
       pieInnerCircleSize = '50%';
     }
-    if (this.type === ChartType.PIE) {
-      this.options = this.donutOptions;
-      this.options.plotOptions.pie.innerSize = pieInnerCircleSize;
+    switch (this.type) {
+      case ChartType.PIE: {
+        this.options = this.donutOptions;
+        this.options.plotOptions.pie.innerSize = pieInnerCircleSize;
+        break;
+      }
+      case ChartType.AREASPLINE: {
+        this.options = this.areasplineOptions;
+        break;
+      }
     }
     this.options.chart.type = this.type;
   }
 
   updateProperties() {
-    if (this.options.chart && this.options.chart.type === ChartType.PIE) {
+    if (this.options.chart) {
       this.options.chart.height = this.height;
       this.options.series[0].data = this.data;
       this.options.chart.description = this.description;
-      this.options.plotOptions.pie.dataLabels.enabled = this.showDataLabels;
+      if (this.options.chart.type === ChartType.PIE) {
+        this.options.plotOptions.pie.dataLabels.enabled = this.showDataLabels;
+      }
     }
+
   }
 
 }
