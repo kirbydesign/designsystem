@@ -10,6 +10,7 @@ import { ChartShowcaseComponent } from './chart-showcase/chart-showcase.componen
 import { DoughnutChartShowcaseComponent } from './doughnut-chart-showcase/doughnut-chart-showcase.component';
 import { ShowcaseRoutingModule } from './showcase-routing.module';
 import { ColorsShowcaseComponent } from './colors-showcase/colors-showcase.component';
+import { LineChartShowcaseComponent } from './line-chart-showcase/line-chart-showcase.component';
 
 export const COMPONENT_IMPORTS: any[] = [
     ExamplesModule,
@@ -26,6 +27,7 @@ export const COMPONENT_EXPORTS: any[] = [
     ChartShowcaseComponent,
     DoughnutChartShowcaseComponent,
     FontsShowcaseComponent,
+    LineChartShowcaseComponent,
 ];
 
 export const COMPONENT_DECLARATIONS: any[] = [
