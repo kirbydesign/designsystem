@@ -1,31 +1,35 @@
-import { Component, OnInit, Input, OnChanges, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, ElementRef, ViewChild, Inject } from '@angular/core';
 import { Options } from 'highcharts';
 import { ChartHelper } from './chart-helper';
-import { DonutOptions } from './options/donut';
-import { AreaSplineOptions } from './options/areaspline';
+import { DonutOptions, DONUT_OPTIONS } from './options/donut';
+import { AreaSplineOptions, AREASPLINE_OPTIONS } from './options/areaspline';
 import { ChartType } from './chart-type';
 
 @Component({
   selector: 'kirby-chart',
   templateUrl: './chart.component.html',
-  styleUrls: ['./chart.component.scss']
+  styleUrls: ['./chart.component.scss'],
+  providers: [
+    ChartHelper,
+    { provide: DONUT_OPTIONS, useValue: DonutOptions },
+    { provide: AREASPLINE_OPTIONS, useValue: AreaSplineOptions }
+  ]
 })
-
 export class ChartComponent implements OnInit, OnChanges {
   @Input() data = [];
   @Input() height = 300;
   @Input() type: ChartType = ChartType.PIE;
   @Input() description = '';
   @Input() showDataLabels = true;
+  @ViewChild('chartContainer') chartContainer: ElementRef;
 
   options: Options = {};
-  chartHelper: ChartHelper;
 
-  constructor() {
-    this.chartHelper = new ChartHelper();
+  constructor(
+    private chartHelper: ChartHelper,
+    @Inject(DONUT_OPTIONS) public donutOptions: Options,
+    @Inject(AREASPLINE_OPTIONS) public areasplineOptions: Options) {
   }
-
-  @ViewChild('chartContainer') chartContainer: ElementRef;
 
   ngOnInit() {
     this.setupChartType();
@@ -46,12 +50,12 @@ export class ChartComponent implements OnInit, OnChanges {
     }
     switch (this.type) {
       case ChartType.PIE: {
-        this.options = new DonutOptions().options;
+        this.options = this.donutOptions;
         this.options.plotOptions.pie.innerSize = pieInnerCircleSize;
         break;
       }
       case ChartType.AREASPLINE: {
-        this.options = new AreaSplineOptions().options;
+        this.options = this.areasplineOptions;
         break;
       }
     }
