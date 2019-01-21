@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Kirby Chart</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+</head>
+<body style="margin: 0; padding: 0;">
+  <div id="chart"></div>
+  <script src="nativescript-webview-interface.js"></script>
+  <script src="highcharts.js"></script>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <script>
+    (function () {
+        var oWebViewInterface = window.nsWebViewInterface;
+
+        function addNativeMsgListener() {
+            oWebViewInterface.on('updateChart', function (options) {
+                configureChartOptions(options);
+                var chart = Highcharts.chart('chart', options);
+            });
+        }
+
+        function configureChartOptions(options) {
+            if (options.chart.type === 'pie') {
+                // events need to be here AND in the options object to work
+                options.plotOptions.pie.point.events.legendItemClick = function(e) {
+                    return e.preventDefault();
+                }
+            }
+        }
+
+        function init() {
+            addNativeMsgListener();
+        }
+
+        init();
+    })();
+  </script>      
+</body>
+</html>
