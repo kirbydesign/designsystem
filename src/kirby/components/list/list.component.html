@@ -8,7 +8,7 @@
             <ng-container *ngTemplateOutlet="sectionHeaderTemplate; context: {$implicit: section}">
             </ng-container>
           </li>        
-          <li *ngFor="let item of section.items" (click)="onRowClick(item)">
+          <li *ngFor="let item of section.items" (click)="onItemClick(item)">
             <ng-container *ngTemplateOutlet="listItemTemplate; context: {$implicit: item}">
             </ng-container>
           </li>
@@ -17,7 +17,7 @@
 
   <ng-container *ngIf="!isSectionsEnabled">
       <ng-container *ngFor="let item of items">
-        <li (click)="onRowClick(item)">
+        <li (click)="onItemClick(item)">
           <ng-container *ngTemplateOutlet="listItemTemplate; context: {$implicit: item}">
           </ng-container>
         </li>
@@ -25,3 +25,4 @@
   </ng-container>
   
 </ul>
+

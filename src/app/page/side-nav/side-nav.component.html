@@ -5,8 +5,8 @@
   <li>
     <a routerLink="/home/intro" [routerLinkActive]="'is-selected'" class="side-nav__item">Intro</a>
   </li>
-  <li>
-    <a class="side-nav__item" [routerLinkActive]="'is-selected'">
+  <li routerLinkActive="is-selected" [routerLinkActiveOptions]="{exact: false}">
+    <a class="side-nav__item side-nav-header" [routerLinkActive]="'is-selected'" [routerLinkActiveOptions]="{exact: false}">
       <svg class="icon">
         <use xlink:href="../../assets/icons/icon-sprite.svg#icon-point-down"></use>
       </svg>
@@ -16,10 +16,11 @@
       <li><a routerLink="showcase/button" [routerLinkActive]="'is-selected'" class="side-nav__item">Button</a></li>
       <li><a routerLink="showcase/card" [routerLinkActive]="'is-selected'" class="side-nav__item">Card</a></li>
       <li><a routerLink="showcase/list" [routerLinkActive]="'is-selected'" class="side-nav__item">List</a></li>
+      <li><a routerLink="showcase/chart" [routerLinkActive]="'is-selected'" class="side-nav__item">Charts</a></li>
     </ul>
   </li>
-  <li>
-    <a class="side-nav__item">
+  <li routerLinkActive="is-selected" [routerLinkActiveOptions]="{exact: false}">
+    <a class="side-nav__item side-nav-header">
       <svg class="icon">
         <use xlink:href="../../assets/icons/icon-sprite.svg#icon-insert-template"></use>
       </svg>
@@ -29,8 +30,8 @@
       <li><a routerLink="showcase/grid" [routerLinkActive]="'is-selected'" class="side-nav__item">Grid</a></li>
     </ul>
   </li>
-  <li>
-    <a class="side-nav__item">
+  <li routerLinkActive="is-selected" [routerLinkActiveOptions]="{exact: false}">
+    <a class="side-nav__item side-nav-header">
       <svg class="icon">
         <use xlink:href="../../assets/icons/icon-sprite.svg#icon-sleepy"></use>
       </svg>
@@ -38,10 +39,11 @@
     </a>
     <ul class="side-nav side-nav--sub">
       <li><a routerLink="showcase/avatar" [routerLinkActive]="'is-selected'" class="side-nav__item">Avatar</a></li>
+      <li><a routerLink="showcase/colors" [routerLinkActive]="'is-selected'" class="side-nav__item">Colors</a></li>
     </ul>
   </li>
-  <li>
-    <a class="side-nav__item">
+  <li routerLinkActive="is-selected" [routerLinkActiveOptions]="{exact: false}">
+    <a class="side-nav__item side-nav-header">
       <svg class="icon">
         <use xlink:href="../../assets/icons/icon-sprite.svg#icon-font-size"></use>
       </svg>

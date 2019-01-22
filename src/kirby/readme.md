@@ -89,3 +89,17 @@ To enable autocompletion (e.g. in VS Code), you need to add the following line t
 ```ts
 /// <reference path="./node_modules/@kirbydesign/designsystem/index.d.tns-only.ts" /> Needed for autocompletion and compilation.
 ```
+
+## Chart Components
+The Kirby chart components use Highcharts. Note that this is a licensed product. On iOS and Android the charts are rendered inside a webview. To use charts on iOS and Android devices, you must transfer some files to the device by adding this to your `webpack.config.js`:
+```json
+...
+  new CopyWebpackPlugin([
+  ...
+    { from: "../node_modules/@kirbydesign/designsystem/components/chart/chart.webview.html", to: "chart" },
+    { from: "../node_modules/@kirbydesign/designsystem/components/chart/css/styles.css", to: "chart" },
+    { from: "../node_modules/@kirbydesign/designsystem/node_modules/highcharts/highcharts.js", to: "chart" },
+    { from: "../node_modules/@kirbydesign/designsystem/node_modules/nativescript-webview-interface/www/nativescript-webview-interface.js", to: "chart" }
+  ]...
+...
+```
