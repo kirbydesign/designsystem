@@ -3,9 +3,6 @@ import { InjectionToken } from '@angular/core';
 
 export const DONUT_OPTIONS = new InjectionToken<Options>('DonutOptions');
 export const DonutOptions: Options = {
-    accessibility: {
-        enabled: true
-    },
     chart: {
         style: {
             fontFamily: 'Roboto',

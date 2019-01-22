@@ -1,0 +1,42 @@
+@import '../../../scss/native-imports';
+
+.background {
+     background-color: transparent;
+     align-items: center;
+     flex-wrap: wrap;
+     justify-content: center;
+     align-content: flex-start;
+}
+
+.line-chart {
+    background-color: transparent;
+    height: 150;
+    width: 100%;
+}
+
+.chart-selector {
+    margin-left: 10;
+    margin-right: 10;
+    border-top-color: get-color('kirby-disabled');
+    border-top-width: 1;
+    padding-top: 8;
+    padding-bottom: 8;
+    border-bottom-color: get-color('kirby-disabled');
+    border-bottom-width: 1;
+}
+
+.chart-legend {
+    margin-left: 10;
+    margin-right: 10;
+    padding-bottom: 8;
+}
+
+.roboto {
+    font-family: 'Roboto';
+}
+
+.chart-text-color {
+    color: get-color('kirby-disabled');
+}
+
+
