@@ -1,10 +1,15 @@
-import {Routes} from '@angular/router';
 
+import { Routes } from '@angular/router';
+import { AvatarShowcaseComponent } from './avatar-showcase/avatar-showcase.component';
 import { ButtonShowcaseComponent } from './button-showcase/button-showcase.component';
 import { CardShowcaseComponent } from './card-showcase/card-showcase.component';
+import { GridShowcaseComponent } from './grid-showcase/grid-showcase.component';
 import { ListShowcaseComponent } from './list-showcase/list-showcase.component';
 import { ShowcaseComponent } from './showcase.component';
-import { GridShowcaseComponent } from './grid-showcase/grid-showcase.component';
+import { ChartShowcaseComponent } from './chart-showcase/chart-showcase.component';
+import { DoughnutChartShowcaseComponent } from './doughnut-chart-showcase/doughnut-chart-showcase.component';
+import { FontsShowcaseComponent } from './fonts-showcase/fonts-showcase.component';
+import { ColorsShowcaseComponent } from './colors-showcase/colors-showcase.component';
 
 export const routes: Routes = [
     {
@@ -13,16 +18,24 @@ export const routes: Routes = [
         children: [
             {
                 path: '',
-                redirectTo: 'buttons',
+                redirectTo: 'button',
                 pathMatch: 'full',
             },
             {
-                path: 'buttons',
+                path: 'button',
                 component: ButtonShowcaseComponent
             },
             {
-                path: 'cards',
+                path: 'avatar',
+                component: AvatarShowcaseComponent
+            },
+            {
+                path: 'card',
                 component: CardShowcaseComponent
+            },
+            {
+                path: 'colors',
+                component: ColorsShowcaseComponent
             },
             {
                 path: 'list',
@@ -31,7 +44,24 @@ export const routes: Routes = [
             {
                 path: 'grid',
                 component: GridShowcaseComponent
-            }
+            },
+            {
+                path: 'chart',
+                component: ChartShowcaseComponent
+            },
+            {
+                path: 'fonts',
+                component: FontsShowcaseComponent
+            },
+            {
+                path: 'nativescript-only',
+                children: [
+                    {
+                        path: 'doughnut-chart',
+                        component: DoughnutChartShowcaseComponent
+                    }
+                ]
+            },
         ]
     },
 ];

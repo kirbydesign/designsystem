@@ -1,0 +1,104 @@
+@import '../../../kirby/scss/web-imports';
+
+code {
+  background-color: #023643;
+  color: #aabe27;
+  padding: 0.2rem 0.5rem;
+  border-radius: 2px;
+  white-space: nowrap;
+}
+
+.fonts {
+
+  display: flex;
+  flex-wrap: wrap;
+
+  kirby-html-viewer {
+    flex: 1;
+    flex-basis: 200px;
+  }
+
+  .kirby-typography {
+    margin-right: size("l");
+  }
+
+  &__pre {
+    padding: 0.25rem 0 0 0;
+    display: block;
+    color: gray;
+    background-color: transparent;
+  }
+
+  &__pre--highlight {
+    color: black;
+    font-weight: font-weight('bold');
+  }
+
+  &__header-1,
+  &__header-2,
+  &__header-3,
+  &__header-4,
+  &__body,
+  &__body-small {
+    font-weight: font-weight("normal");
+    line-height: 1.16;
+    margin-top: 1rem;
+    margin-bottom: 0;
+  }
+
+  &__display {
+    &::after {
+      content: "(#{font-size("display")})";
+    }
+  }
+  &__header-1 {
+    &::after {
+      content: "(#{font-size("xxl")})";
+    }
+  }
+
+  &__header-2 {
+    &::after {
+      content: "(#{font-size("xl")})";
+    }
+  }
+
+  &__header-3 {
+    &::after {
+      content: "(#{font-size("l")})";
+    }
+  }
+
+  &__header-4 {
+    font-weight: font-weight("medium");
+
+    &::after {
+      content: "(#{font-size("m")})";
+    }
+  }
+
+  &__body {
+    &::after {
+      content: "(#{font-size("n")})";
+    }    
+  }
+
+  &__body-small {
+    &::after {
+      content: "(#{font-size("s")})";
+    }    
+  }
+
+  &__body-xsmall {
+    &::after {
+      content: "(#{font-size("xs")})";
+    }    
+  }
+
+}
+
+[class^="fonts__"]::after {
+  color: #db4fa5;
+  font-size: font-size("xs");
+  margin-left: size("m");
+}

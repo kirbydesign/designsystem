@@ -1,0 +1,26 @@
+<FlexboxLayout class="background roboto">
+    <ng-container *ngIf="items">
+        <Label class="kirby-text-xxlarge roboto" [text]="labelText" textWrap="true" ></Label>
+        <RadCartesianChart tkExampleTitle tkToggleNavButton class="line-chart">
+            <DateTimeContinuousAxis tkCartesianHorizontalAxis dateFormat="dd-MM-yyyy" majorStep="Day" [minimum]="xAxisMinimum" [maximum]="xAxisMaximum" hidden="true"></DateTimeContinuousAxis >
+            <LinearAxis tkCartesianVerticalAxis [maximum]="yAxisMaximum" [minimum]="yAxisMinimum" hidden="true"></LinearAxis>
+            <Trackball tkCartesianTrackball (trackBallContentRequested)="onTrackBallContentRequested($event)" snapMode="ClosestPoint" showIntersectionPoints="true"></Trackball>
+            <AreaSeries tkCartesianSeries seriesName="Line" [items]="items" categoryProperty="category" valueProperty="amount"></AreaSeries>
+            <RadCartesianChartGrid tkCartesianGrid horizontalLinesVisible="false" verticalLinesVisible="false" horizontalStripLinesVisible="false" verticalStripLinesVisible="false"></RadCartesianChartGrid>
+            <Palette tkCartesianPalette seriesName="Line">
+                <PaletteEntry tkCartesianPaletteEntry [strokeWidth]="strokeWidth" [fillColor]="fillColor" [strokeColor]="strokeColor"></PaletteEntry>
+            </Palette>
+        </RadCartesianChart>
+        <GridLayout rows="auto" columns="*" class="chart-legend">
+            <Label class="kirby-text-xsmall chart-text-color roboto" horizontalAlignment="left" text="{{ legendDate | date:'MM.yy'}}"></Label>
+            <Label class="kirby-text-xsmall chart-text-color roboto" horizontalAlignment="right" [text]="legendText"></Label>
+        </GridLayout>
+        <ng-container *ngIf="selectors">
+            <FlexboxLayout alignItems="center" justifyContent="space-between" width="100%" class="chart-selector">
+                <ng-container *ngFor="let selector of selectors">
+                    <Label class="kirby-text-xsmall chart-text-color roboto" [id]="selector" [text]="selector" (tap)="onTap($event)"></Label>
+                </ng-container>
+            </FlexboxLayout>
+        </ng-container>
+    </ng-container>
+</FlexboxLayout> 

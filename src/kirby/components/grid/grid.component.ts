@@ -38,6 +38,8 @@ export class GridComponent implements OnInit, OnDestroy {
   @Input()
   set cardConfigurations(cardConfigurations: GridCardConfiguration[]) {
     this.cardConfigs = cardConfigurations;
+      // TODO TRM/JEO Remove this when breakpoint observe something something...
+      this.configureGrid();
   }
 
   constructor(private breakpointHelper: BreakpointHelperService) { }
@@ -97,9 +99,6 @@ export class GridComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    // TODO TRM/JEO Remove this when breakpoint observe something something...
-    this.configureGrid();
-
     this.breakpointSubscription = this.breakpointHelper.observe().subscribe(
       () => {
         this.configureGrid();

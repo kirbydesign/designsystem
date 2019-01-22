@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import {COMPONENT_IMPORTS, COMPONENT_EXPORTS, COMPONENT_DECLARATIONS} from './showcase.common';
 import {HtmlViewerComponent} from '../shared/html-viewer/html-viewer.component';
@@ -8,10 +9,11 @@ import {HtmlViewerComponent} from '../shared/html-viewer/html-viewer.component';
   imports: [
     ...COMPONENT_IMPORTS,
     CommonModule,
+    FormsModule
   ],
   declarations: [
     ...COMPONENT_DECLARATIONS,
-    HtmlViewerComponent
+    HtmlViewerComponent,
   ],
   exports: COMPONENT_EXPORTS
 })

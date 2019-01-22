@@ -59,23 +59,20 @@ body, html {
 }
 
 :root {
-  --kirby-primary: #{get-color(map-get($themes, 'cookbook'), 'primary')};
-  --kirby-on-primary: #{get-color(map-get($themes, 'cookbook'), 'on-primary')};
-  --kirby-secondary: #{get-color(map-get($themes, 'cookbook'), 'secondary')};
-  --kirby-on-secondary: #{get-color(map-get($themes, 'cookbook'), 'on-secondary')};
-  --kirby-surface: #{get-color(map-get($themes, 'cookbook'), 'surface')};
-  --kirby-on-surface: #{get-color(map-get($themes, 'cookbook'), 'on-surface')};
+  @each $color, $color-name in map-get($themes, 'default') {
+    --#{$color}: #{$color-name};
+  }
 }
 
 // Generates all the theme variables 
 @each $themeName, $theme in $themes {
   .theme--#{$themeName} {
-    --kirby-primary: #{get-color($theme, 'primary')};
-    --kirby-on-primary: #{get-color($theme, 'on-primary')};
-    --kirby-secondary: #{get-color($theme, 'secondary')};
-    --kirby-on-secondary: #{get-color($theme, 'on-secondary')};
-    --kirby-surface: #{get-color($theme, 'surface')};
-    --kirby-on-surface: #{get-color($theme, 'on-surface')};
-
+    --kirby-primary: #{get-color('primary', $theme)};
+    --kirby-on-primary: #{get-color('on-primary', $theme)};
+    --kirby-secondary: #{get-color('secondary', $theme)};
+    --kirby-on-secondary: #{get-color('on-secondary', $theme)};
+    --kirby-surface: #{get-color('surface', $theme)};
+    --kirby-on-surface: #{get-color('on-surface', $theme)};
   }
 }
+

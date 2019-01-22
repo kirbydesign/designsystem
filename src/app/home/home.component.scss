@@ -19,12 +19,9 @@ main {
   width: 100%;
   max-width: $page-max-width;
   margin: 0 auto;
-  padding-right: $page-gutter;
-}
-
-kirby-side-nav {
-  flex: 0 0 $page-side-nav-width;
-  height: calc(100vh - $page-header-height);
+  @include media(">=large") {
+    padding-right: $page-gutter;
+  }
 }
 
 section {
@@ -32,5 +29,6 @@ section {
   background-color: #fff;
   margin: 2rem 0;
   box-shadow: 0 0 5px rgba(0,0,0,0.2);
-  padding: 0 1rem;
+  padding: 1rem 2rem;
+  overflow: hidden;
 }

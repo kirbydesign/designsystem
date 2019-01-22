@@ -1,15 +1,15 @@
-<FlexboxLayout>
+<StackLayout>
   <kirby-card>
-    <kirby-card-header [title]="'Card-header Titel'" [subtitle]="'Card-header Subtitel'">
+    <kirby-card-header [title]="'Titel'" [subtitle]="'Subtitel'">
     </kirby-card-header>
-    <kirby-list [items]="[
-        {title: 'Titel', amount: 'Beløb'},
-        {title: 'Titel', amount: 'Beløb'},
-        {title: 'Titel', amount: 'Beløb'},
-        {title: 'Titel', amount: 'Beløb'}
-        ]"></kirby-list>
-    <kirby-card-footer>
-      <Button kirby-button text="Tekst på knap" expand="block" shape="round"></Button>
-    </kirby-card-footer>
+
+    <!-- Card content example: -->
+    <ScrollView>
+      <StackLayout class="card-content">
+        <Label text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui quas quibusdam eligendi, debitis nemo fuga quia accusamus doloremque sit reprehenderit!" textWrap="true"></Label>        
+      </StackLayout>
+    </ScrollView>
+
+    <kirby-card-footer></kirby-card-footer>
   </kirby-card>
-</FlexboxLayout>
+</StackLayout>

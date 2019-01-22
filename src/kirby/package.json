@@ -22,5 +22,9 @@
     "url": "https://github.com/kirbydesign/designsystem/issues"
   },
   "homepage": "https://github.com/kirbydesign/designsystem#readme",
-  "types": "index.d.ts"
+  "types": "index.d.ts",
+  "peerDependencies": {
+    "highcharts": "^6.2.0",
+    "nativescript-webview-interface": "^1.4.2"
+  }
 }

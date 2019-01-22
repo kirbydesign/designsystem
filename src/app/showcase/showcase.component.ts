@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -10,9 +10,12 @@ import { filter } from 'rxjs/operators';
 })
 export class ShowcaseComponent implements OnInit, OnDestroy {
   exampleComponentName: string;
+  exampleComponentGitUrl: string;
   private routerEventsSubscription: Subscription;
+  private gitUrl = 'https://github.com/kirbydesign/designsystem/tree/master/src/app/examples/';
+  isCTABoxShown = true;
 
-  constructor(private router: Router, private route: ActivatedRoute) {
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
     this.subscribeToRouterEvents();
   }
 
@@ -34,6 +37,12 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
     this.exampleComponentName = urlSegments.length
                                 ? urlSegments[urlSegments.length - 1]
                                 : undefined;
+    if (this.exampleComponentName === 'colors') {
+      this.isCTABoxShown = false;
+    } else {
+      this.isCTABoxShown = true;
+    }
+    this.exampleComponentGitUrl = this.gitUrl + urlSegments.pop() + '-example';
   }
 
 }

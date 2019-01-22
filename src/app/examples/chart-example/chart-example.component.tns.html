@@ -1,0 +1,83 @@
+<ScrollView>
+    <StackLayout>
+
+        <FlexboxLayout>
+            <kirby-card class="theme--cookbook">
+                <kirby-card-header [title]="'Donut'" [subtitle]="'Example'">
+                </kirby-card-header>
+                <kirby-chart [height]="320" [type]="'donut'" [showDataLabels]="true" [description]="'Accessibility description goes here'"
+                    [data]="[
+                    {
+                        name: 'Boomerangs 25%',
+                        y: 25,
+                        label: '25%'
+                    },
+                    {
+                        name: 'Bubbles 41%',
+                        y: 41,
+                        label: '41%'
+                    },
+                    {
+                        name: 'Jumping 33%',
+                        y: 33,
+                        label: '33%'
+                    },
+                    {
+                        name: 'Christmas < 1%',
+                        y: 1,
+                        label: '< 1%'
+                    }
+                ]"></kirby-chart>
+            </kirby-card>
+        </FlexboxLayout>
+
+        <FlexboxLayout>
+            <kirby-card class="theme--cookbook">
+                <kirby-card-header [title]="'Pie'" [subtitle]="'Example'">
+                </kirby-card-header>
+                <kirby-chart [height]="320" [type]="'pie'" [showDataLabels]="false" [description]="'Accessibility description goes here'"
+                    [data]="[
+                        {
+                            name: 'Boomerangs 25%',
+                            y: 25,
+                            label: '25%'
+                        },
+                        {
+                            name: 'Bubbles 41%',
+                            y: 41,
+                            label: '41%'
+                        },
+                        {
+                            name: 'Jumping 33%',
+                            y: 33,
+                            label: '33%'
+                        },
+                        {
+                            name: 'Christmas < 1%',
+                            y: 1,
+                            label: '< 1%'
+                        }
+                    ]"></kirby-chart>
+            </kirby-card>
+        </FlexboxLayout>
+
+        <FlexboxLayout>
+            <kirby-card class="theme--cookbook">
+                <kirby-card-header [title]="'Areaspline'" [subtitle]="'Example'">
+                </kirby-card-header>
+                <kirby-chart [height]="200" [type]="'areaspline'" [description]="'Accessibility description goes here'"
+                    [data]="data"></kirby-chart>
+                <!-- data = [1600.90, 1710.50, 1060.40, 1290.20, 1440.00, 1460.00, 1350.60, 1480.50, 1800.40, 1940.10, 1950.60, 1700.40, 1600.90, 1710.50, 1060.40, 1290.20, 1440.00, 1460.00, 1350.60, 1480.50, 1800.40, 1940.10, 1950.60, 1700.40] -->
+                <kirby-card-footer>
+                    <!-- example period selector -->
+                    <FlexboxLayout>
+                        <Label text="    Jan" (tap)="data = [200, 100, 300, 100, 200, 300, 200]"></Label>
+                        <Label text="    Feb" (tap)="data = [100, 100, 100, 400, 200, 200, 200]"></Label>
+                        <Label text="    Mar" (tap)="data = [500, 400, 300, 200, 100, 200, 300]"></Label>
+                    </FlexboxLayout>
+                </kirby-card-footer>
+            </kirby-card>
+        </FlexboxLayout>
+
+    </StackLayout>
+</ScrollView>

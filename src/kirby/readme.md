@@ -53,3 +53,53 @@ Include the Kirby Sass variables in your app:
   ],
 ...
 ```
+
+## NativeScript-Only Components
+
+Some Kirby components only exists as [Platform-Specific Components](https://docs.nativescript.org/angular/code-sharing/platform-specific-components), e.g. `NativeScriptDoughnutChartComponent`.
+
+To **avoid** typescript compilation of NativeScript-Only Components in your **web** project, you need to add the following to your `tsconfig.json`:
+
+```json
+...
+  "exclude": [
+    ...
+    "**/*.tns-only.ts",
+    ...
+  ],
+...
+```
+Then, make sure you **don't** exclude `tns-only.ts` files in your **{N}** specific `tsconfig.tns.json`:
+```json
+...
+  "exclude": [
+    "**/*.tns.ts",
+    "**/*.android.ts",
+    "**/*.ios.ts",
+    "**/*.spec.ts"
+  ],
+...
+```
+**Finally**, for all imports in your **{N}** specific typescript files (`*.tns.ts`) you will need to use a path that includes the **{N}** specific typings definition:
+```ts
+import { NativeScriptDoughnutChartComponent } from '@kirbydesign/designsystem/index.d.tns-only';
+```
+### Autocompletion
+To enable autocompletion (e.g. in VS Code), you need to add the following line to your `reference.d.ts`:
+```ts
+/// <reference path="./node_modules/@kirbydesign/designsystem/index.d.tns-only.ts" /> Needed for autocompletion and compilation.
+```
+
+## Chart Components
+The Kirby chart components use Highcharts. Note that this is a licensed product. On iOS and Android the charts are rendered inside a webview. To use charts on iOS and Android devices, you must transfer some files to the device by adding this to your `webpack.config.js`:
+```json
+...
+  new CopyWebpackPlugin([
+  ...
+    { from: "../node_modules/@kirbydesign/designsystem/components/chart/chart.webview.html", to: "chart" },
+    { from: "../node_modules/@kirbydesign/designsystem/components/chart/css/styles.css", to: "chart" },
+    { from: "../node_modules/@kirbydesign/designsystem/node_modules/highcharts/highcharts.js", to: "chart" },
+    { from: "../node_modules/@kirbydesign/designsystem/node_modules/nativescript-webview-interface/www/nativescript-webview-interface.js", to: "chart" }
+  ]...
+...
+```

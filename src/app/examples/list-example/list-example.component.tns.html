@@ -1,1 +1,9 @@
-<Button text="list-example works!" class="btn btn-primary"></Button>
+<StackLayout>
+  <kirby-list [items]="myItems" (itemSelect)="onItemSelect($event)">
+    <kirby-list-header *kirbyListHeader="let columns" [left]="'Navn'" [middle]="'Afkast ÅTD'" [right]="'Værdi'"></kirby-list-header>
+    <kirby-list-item
+      *kirbyListItem="let item"
+      [item]="item"
+    ></kirby-list-item>
+  </kirby-list>
+</StackLayout>

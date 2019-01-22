@@ -1,0 +1,29 @@
+@import '../../scss/native-imports';
+
+$image-diameter-small: 60;
+$image-diameter-medium: 100;
+$image-diameter-large: 150;
+
+$color-card-bg: rgb(255, 255, 255);
+
+.image-wrapper {
+    width: $image-diameter-small;
+    height: $image-diameter-small;
+
+    &.medium {
+      width: $image-diameter-medium;
+      height: $image-diameter-medium;
+    }
+
+    &.large {
+      width: $image-diameter-large;
+      height: $image-diameter-large;
+    }
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: $color-card-bg;
+}

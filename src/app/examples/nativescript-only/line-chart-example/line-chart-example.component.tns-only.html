@@ -1,0 +1,9 @@
+<FlexboxLayout>
+    <kirby-card>
+      <kirby-card-header [title]="title">
+      </kirby-card-header>
+        <kirby-nativescript-line-chart [items]="chartItems$ | async" [currency]="currency" [selectors]="selectors" [legendText]="legendText" (selectorChange)="onSelectorChange($event)"></kirby-nativescript-line-chart>
+      <kirby-card-footer>
+      </kirby-card-footer>
+    </kirby-card>
+</FlexboxLayout>

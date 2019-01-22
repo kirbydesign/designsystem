@@ -4,7 +4,11 @@ kirby-card {
   position: relative;
 }
 
-.card__content {
+kirby-card-header {
+  padding-bottom: 0;
+}
+
+.card-content {
   padding: size("gutter");
 }
 
