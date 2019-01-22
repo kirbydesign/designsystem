@@ -1,6 +1,8 @@
+import { SectionByPipe } from './pipes/section-by.pipe';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ListComponent } from './list.component';
+import { isRegExp } from 'util';
 
 describe('ListComponent', () => {
   let component: ListComponent;
@@ -8,7 +10,7 @@ describe('ListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListComponent ]
+      declarations: [ ListComponent, SectionByPipe ]
     })
     .compileComponents();
   }));
@@ -21,5 +23,9 @@ describe('ListComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should render a li tag for each item', () => {
+
   });
 });

@@ -15,10 +15,10 @@
   <kirby-list-item *kirbyListItem="let item" [title]="item.title" [amount]="item.amount" [detail]="item.detail" (click)="onClick(item)"></kirby-list-item>
 </kirby-list>
 
-<hr>
+<hr> 
 
-<kirby-list [items]="myItems" [shouldRenderSectionHeader]="onShouldRenderSectionHeader">
-  <kirby-list-section-header *kirbyListSectionHeader="let item" [title]="getSectionTitle(item)"></kirby-list-section-header>
+<kirby-list [items]="myItems" [getSection]="getSection">
+  <kirby-list-section-header *kirbyListSectionHeader="let section" [title]="section.name"></kirby-list-section-header>
   <kirby-list-item *kirbyListItem="let item" [item]="item" (click)="onClick(item)"></kirby-list-item>
 </kirby-list>
 

@@ -25,16 +25,22 @@ export class ListSectionHeaderDirective {}
 export class ListComponent implements OnInit {
 
   @Input() items: any[];
-  @Input() shouldRenderSectionHeader?: (current: any, items: any[], index: number) => boolean;
+  @Input() getSection?: (item: any) => any;
   // The first element that matches ListItemDirective. As a structural directive it unfolds into a template. This is a reference to that.
   @ContentChild(ListItemDirective, {read: TemplateRef}) listItemTemplate;
   @ContentChild(ListHeaderDirective, {read: TemplateRef}) headerTemplate;
   @ContentChild(ListSectionHeaderDirective, {read: TemplateRef}) sectionHeaderTemplate;
   @Output() rowClick = new EventEmitter<any>();
 
+  isSectionsEnabled: boolean;
+
   constructor() { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    if (this.getSection) {
+      this.isSectionsEnabled = true;
+    }
+  }
 
   onRowClick(row): void {
     this.rowClick.emit(row);

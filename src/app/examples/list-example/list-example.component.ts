@@ -32,7 +32,7 @@ export class ListExampleComponent implements OnInit {
     return index > 0;
   }
 
-  getSectionTitle(item: any): string {
-    return 'Your dynamic section title';
+  getSection(item: any): string {
+    return item.detail > 0 ? 'Positive' : 'Negative';
   }
 }
