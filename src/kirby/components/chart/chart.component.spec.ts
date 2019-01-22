@@ -52,6 +52,12 @@ describe('ChartComponent', () => {
     expect(component.options.plotOptions.pie.innerSize).toBe('50%');
   });
 
+  it('should set areaspline chart type', () => {
+    component.type = ChartType.AREASPLINE;
+    component.ngOnInit();
+    expect(component.options['chart'].type).toBe(ChartType.AREASPLINE);
+  });
+
   it('should have dataLabels enabled as default', () => {
     expect(component.options['plotOptions'].pie.dataLabels.enabled).toBe(true);
   });

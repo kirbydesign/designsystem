@@ -18,8 +18,8 @@ export class ListExampleComponent implements OnInit {
   ngOnInit() {
   }
 
-  onClick(row) {
-    alert(`You have clicked the row [${row.title} ${row.amount}]`);
+  onItemSelect(item: any) {
+    alert(`You have clicked the row [${item.title} ${item.amount}]`);
   }
 
 }

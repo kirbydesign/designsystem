@@ -1,10 +1,9 @@
 <StackLayout>
-  <kirby-list [items]="myItems">
+  <kirby-list [items]="myItems" (itemSelect)="onItemSelect($event)">
     <kirby-list-header *kirbyListHeader="let columns" [left]="'Navn'" [middle]="'Afkast ÅTD'" [right]="'Værdi'"></kirby-list-header>
     <kirby-list-item
       *kirbyListItem="let item"
       [item]="item"
-      (tap)="clicked(item)"
     ></kirby-list-item>
   </kirby-list>
 </StackLayout>
