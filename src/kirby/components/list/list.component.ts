@@ -52,8 +52,7 @@ export class ListComponent implements OnInit {
     this.itemSelect.emit(row);
   }
 
-  onItemTap(args: ItemEventData) {
-    const selectedItem = this.items[args.index];
+  onItemTap(selectedItem: any): void {
     this.itemSelect.emit(selectedItem);
   }
 
