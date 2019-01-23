@@ -26,7 +26,6 @@ describe('ListComponent', () => {
     expect(component).toBeTruthy();
   });
 
-
   describe('item select event', () => {
 
     it('should emit the clicked item', () => {
@@ -52,6 +51,28 @@ describe('ListComponent', () => {
 
       expect(component.itemSelect.emit).toHaveBeenCalledTimes(1);
       expect(component.itemSelect.emit).toHaveBeenCalledWith(itemToBeSelected);
+    });
+  });
+
+  describe('sections', () => {
+
+    beforeEach(() => {
+      fixture = TestBed.createComponent(ListComponent);
+      component = fixture.componentInstance;
+    });
+
+    it('should be disabled if no section callback is defined', () => {
+      fixture.detectChanges();
+
+      expect(component.isSectionsEnabled).toBeFalsy();
+    });
+
+    it('should be enabled if a section callback is defined', () => {
+      component.getSection = (item: any) => 'this is a test';
+
+      fixture.detectChanges();
+
+      expect(component.isSectionsEnabled).toBeTruthy();
     });
   });
 });
