@@ -6,7 +6,7 @@ module.exports = env => {
         mode: "production",
         entry: {
             'resize-observer-polyfill': './src/polyfills/resize-observer-polyfill.js',
-            'resize-observer-ponyfill': './src/polyfills/resize-observer-ponyfill.js',
+            'resize-observer-polyfill-loader': './src/polyfills/resize-observer-polyfill-loader',
         },
         output: {
             filename: '[name].min.js',
@@ -14,7 +14,7 @@ module.exports = env => {
         },
         plugins: [
             new CopyWebpackPlugin([
-                { from: "./src/polyfills/resize-observer-ponyfill.js" },
+                { from: "./src/polyfills/resize-observer-polyfill-loader.js" },
             ]),
         ]
     };
