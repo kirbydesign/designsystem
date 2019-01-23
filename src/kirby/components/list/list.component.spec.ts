@@ -44,7 +44,7 @@ describe('ListComponent', () => {
         { value: 'item 3' }
       ];
 
-      component.onItemTap({ index: 1 } as ItemEventData);
+      component.onItemTap(itemToBeSelected);
 
       expect(component.itemSelect.emit).toHaveBeenCalledTimes(1);
       expect(component.itemSelect.emit).toHaveBeenCalledWith(itemToBeSelected);
