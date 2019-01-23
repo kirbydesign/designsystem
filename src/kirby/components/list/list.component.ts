@@ -6,9 +6,12 @@ import {
   TemplateRef,
   ContentChild,
   EventEmitter,
-  Output
+  Output,
+  ContentChildren,
+  QueryList
 } from '@angular/core';
 import { ItemEventData } from 'tns-core-modules/ui/list-view';
+import { ListCellComponent } from './list-cell/list-cell.component';
 
 @Directive({
   selector: '[kirbyListItem]'
@@ -19,6 +22,11 @@ export class ListItemDirective {}
   selector: '[kirbyListHeader]'
 })
 export class ListHeaderDirective {}
+
+@Directive({
+  selector: '[kirbyListCell]'
+})
+export class ListCellDirective {}
 
 @Component({
   selector: 'kirby-list',
@@ -33,6 +41,9 @@ export class ListComponent implements OnInit {
   @ContentChild(ListItemDirective, {read: TemplateRef}) listItemTemplate: any;
   @ContentChild(ListHeaderDirective, {read: TemplateRef}) headerTemplate: any;
 
+  @ContentChildren(ListCellDirective, {read: TemplateRef}) listCellTemplates: QueryList<any>;
+  @ContentChildren(ListCellComponent, {read: TemplateRef}) listCellComponentTemplates: QueryList<ListCellComponent>;
+
   constructor() {}
 
   ngOnInit() {}
@@ -45,4 +56,9 @@ export class ListComponent implements OnInit {
     const selectedItem = this.items[args.index];
     this.itemSelect.emit(selectedItem);
   }
+
+//  get rowHeight(): number {
+
+//  }
+
 }

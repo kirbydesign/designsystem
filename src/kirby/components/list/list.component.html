@@ -1,7 +1,11 @@
-<ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
+<!-- <ng-container *ngTemplateOutlet="headerTemplate"></ng-container> -->
 <ul>
   <li *ngFor="let item of items" (click)="onItemClick(item)">
-    <ng-container *ngTemplateOutlet="listItemTemplate; context: {$implicit: item}" >
+    <div class="test">
+    <ng-container *ngFor="let template of listCellTemplates">
+      <ng-container *ngTemplateOutlet="template; context: {$implicit: item}">
+      </ng-container>
     </ng-container>
+  </div>
   </li>
 </ul>

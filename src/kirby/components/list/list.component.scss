@@ -17,7 +17,9 @@ ul {
     li {
         background-color: white;
         border-bottom: var(--kirby-wireframe-border);
-
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
         p {
             margin: 0;
         }
@@ -26,4 +28,10 @@ ul {
             background-color: rgba(lightskyblue, 0.1);
         }
     }
+}
+.test {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
 }

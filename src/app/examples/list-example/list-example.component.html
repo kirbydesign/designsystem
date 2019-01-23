@@ -1,4 +1,14 @@
 <kirby-list [items]="myItems" (itemSelect)="onItemSelect($event)">
+    <kirby-list-cell *kirbyListCell="let item" [lineOne]="item.title" [lineTwo]="item.detail"></kirby-list-cell>
+    <div *kirbyListCell="let item">
+      Jeg har {{ item.subTitle }}
+    </div>
+    <kirby-list-cell *kirbyListCell="let item" [lineOne]="item.amount"></kirby-list-cell>
+  </kirby-list>
+  
+
+<!-- 
+<kirby-list [items]="myItems" (itemSelect)="onItemSelect($event)">
   <kirby-list-item *kirbyListItem="let item" [item]="item"></kirby-list-item>
 </kirby-list>
 
@@ -15,13 +25,13 @@
   <kirby-list-item *kirbyListItem="let item" [title]="item.title" [amount]="item.amount" [detail]="item.detail"></kirby-list-item>
 </kirby-list>
   
-<hr>
+<hr> -->
 
 <!-- If you wish to use your own template, just add the *kirbyListItem="let item" to the element -->
 
-<kirby-list [items]="myItems" (itemSelect)="onItemSelect($event)">
+<!-- <kirby-list [items]="myItems" (itemSelect)="onItemSelect($event)">
   <ng-container *kirbyListItem="let item">
     <span>{{item.title}}</span>
   </ng-container>
-</kirby-list>
+</kirby-list> -->
 
