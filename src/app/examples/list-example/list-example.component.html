@@ -1,9 +1,9 @@
 <kirby-list [items]="myItems" (itemSelect)="onItemSelect($event)">
-    <kirby-list-cell *kirbyListCell="let item" [lineOne]="item.title" [lineTwo]="item.detail"></kirby-list-cell>
+    <kirby-list-cell *kirbyListCell="let item" [lineOne]="item.title" [lineTwo]="item.detail" [flexGrow]=1></kirby-list-cell>
     <div *kirbyListCell="let item">
       Jeg har {{ item.subTitle }}
     </div>
-    <kirby-list-cell *kirbyListCell="let item" [lineOne]="item.amount"></kirby-list-cell>
+    <kirby-list-cell *kirbyListCell="let item" [lineOne]="item.amount" [flexGrow]=1 verticalAlignment="flex-end" horisontalAlignment="flex-end"></kirby-list-cell>
   </kirby-list>
   
 

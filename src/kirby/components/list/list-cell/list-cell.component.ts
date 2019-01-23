@@ -1,21 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, HostBinding } from '@angular/core';
 
-export enum HorisontalAlignment {
-  left,
-  center,
-  right
-}
+type iconPosition = 'left' | 'right';
 
-export enum VerticalAlignment {
-  top,
-  center,
-  bottom
-}
-
-export enum IconPosition {
-  left,
-  right
-}
+type flexAlign = 'flex-start' | 'center' | 'flex-end';
 
 @Component({
   selector: 'kirby-list-cell',
@@ -26,15 +13,18 @@ export class ListCellComponent implements OnInit {
   @Input() lineOne: string | number;
   @Input() lineTwo: string | number;
   @Input() lineThree: string | number;
-  @Input() horisontalAlignment: HorisontalAlignment = HorisontalAlignment.left;
-  @Input() verticalAlignment: VerticalAlignment = VerticalAlignment.center;
+  @Input() horisontalAlignment: flexAlign = 'flex-start';
+  @Input() verticalAlignment: flexAlign = 'center';
   @Input() iconUrl: string;
-  @Input() iconPosition: IconPosition;
-  @Input() flexSize: number;
+  @Input() iconPosition: iconPosition;
+  @Input() flexGrow: string | number;
 
+  @HostBinding('style.flex-grow') flexGrowHost: string;
 
   constructor() { }
 
-  ngOnInit() {  }
+  ngOnInit() {
+    this.flexGrowHost = this.flexGrow + '';
+  }
 
 }

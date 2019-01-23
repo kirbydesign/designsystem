@@ -1,36 +1,45 @@
+.cell {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    .line-one {
+        font-size: 1.2em;
+        font-weight: 200;
+    }
+    .line-two,
+    .line-three {
+        font-size: 1.0em;
+        font-weight: 200;
+    }
+}
+
 // $left-column: 1;
 // $middle-column: 2;
 // $right-column: 3;
-
 // :host {
 //     width: 100%;
 //     display: grid;
 //     grid-template-columns: 40% 20% 40%;
 //     padding: 1.3em 1.8em;
 // }
-
 // .title-container {
-    
 //     grid-column-start: $left-column;
 //     grid-column-end: $left-column;
 //     text-align: left;
-
 //     .title {
 //         flex: 1;
 //     }
-
 //     .subTitle {
 //         flex: 1;
 //         color: #a0a0a0;
 //     }
 // }
-
 // .details-container {
 //     grid-column-start: $middle-column;
 //     grid-column-end: $middle-column;
 //     text-align: center;
 // }
-
 // .amount-container {
 //     grid-column-start: $right-column;
 //     grid-column-end: $right-column;
