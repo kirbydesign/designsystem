@@ -16,5 +16,8 @@ $list-header-height: 38;
     color: get-color('primary');
     padding-left: $list-item-padding;
     padding-right: $list-item-padding;
-    height: $list-item-height;
+    padding-top: 5;
+    padding-bottom: 5;
+    border-bottom-width: 1;
+    border-bottom-color: #e7e7e7;
 }

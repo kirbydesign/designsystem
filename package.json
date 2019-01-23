@@ -46,6 +46,7 @@
     "nativescript-theme-core": "~1.0.4",
     "nativescript-webview-interface": "^1.4.2",
     "nativescript-ui-chart": "^3.9.1",
+    "nativescript-ui-listview": "^5.0.5",
     "prismjs": "^1.15.0",
     "reflect-metadata": "~0.1.8",
     "rxjs": "^6.3.3",
