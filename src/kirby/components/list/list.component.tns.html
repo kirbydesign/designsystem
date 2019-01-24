@@ -1,18 +1,37 @@
-<GridLayout rows="auto,*">
-  <FlexboxLayout alignItems="center" class="list-header-container" row="0">
-    <ng-container *ngTemplateOutlet="headerTemplate; context: {$implicit: columns}"></ng-container>
-  </FlexboxLayout>
-  <RadListView [items]="items" row="1" [groupingFunction]="getSection" >
-    <ng-template tkListItemTemplate let-item="item">
-      <FlexboxLayout alignItems="center" class="list-item-container" (tap)="onItemTap(item)" ios:height="50">
-        <ng-container *ngTemplateOutlet="listItemTemplate; context: {$implicit: item}">
-        </ng-container>
-      </FlexboxLayout>
-    </ng-template>
-    <ng-template tkGroupTemplate let-section="category">
-      <FlexboxLayout alignItems="center" class="list-section-header-container" ios:height="50">
-        <ng-container *ngTemplateOutlet="sectionHeaderTemplate; context: {$implicit: section}"></ng-container>
-      </FlexboxLayout>
-    </ng-template>
-  </RadListView>
-</GridLayout>
+<ng-container *ngIf="headerTemplate">
+  <GridLayout rows="auto,*">
+    <FlexboxLayout alignItems="center" class="list-header-container" row="0">
+      <ng-container *ngTemplateOutlet="headerTemplate; context: {$implicit: columns}"></ng-container>
+    </FlexboxLayout>
+    <RadListView [groupingFunction]="getSection" [items]="items" row="1">
+      <ng-template let-item="item" tkListItemTemplate>
+        <FlexboxLayout (tap)="onItemTap(item)" alignItems="center" class="list-item-container" ios:height="50">
+          <ng-container *ngTemplateOutlet="listItemTemplate; context: {$implicit: item}">
+          </ng-container>
+        </FlexboxLayout>
+      </ng-template>
+      <ng-template let-section="category" tkGroupTemplate>
+        <FlexboxLayout alignItems="center" class="list-section-header-container" ios:height="50">
+          <ng-container *ngTemplateOutlet="sectionHeaderTemplate; context: {$implicit: section}"></ng-container>
+        </FlexboxLayout>
+      </ng-template>
+    </RadListView>
+  </GridLayout>
+</ng-container>
+<ng-container *ngIf="!headerTemplate">
+  <GridLayout rows="*">
+    <RadListView [groupingFunction]="getSection" [items]="items" row="1">
+      <ng-template let-item="item" tkListItemTemplate>
+        <FlexboxLayout (tap)="onItemTap(item)" alignItems="center" class="list-item-container" ios:height="50">
+          <ng-container *ngTemplateOutlet="listItemTemplate; context: {$implicit: item}">
+          </ng-container>
+        </FlexboxLayout>
+      </ng-template>
+      <ng-template let-section="category" tkGroupTemplate>
+        <FlexboxLayout alignItems="center" class="list-section-header-container" ios:height="50">
+          <ng-container *ngTemplateOutlet="sectionHeaderTemplate; context: {$implicit: section}"></ng-container>
+        </FlexboxLayout>
+      </ng-template>
+    </RadListView>
+  </GridLayout>
+</ng-container>
