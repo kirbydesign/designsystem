@@ -5,7 +5,7 @@
   <ng-container *ngIf="isSectionsEnabled; else normalList">
       <ng-container *ngFor="let section of items | sectionBy:getSection">
           <li>
-            <ng-container *ngTemplateOutlet="sectionHeaderTemplate; context: {$implicit: section}">
+            <ng-container *ngTemplateOutlet="sectionHeaderTemplate; context: {$implicit: section.name}">
             </ng-container>
           </li>        
           <li *ngFor="let item of section.items" (click)="onItemClick(item)">

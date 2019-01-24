@@ -33,7 +33,7 @@ export class ListSectionHeaderDirective {}
 export class ListComponent implements OnInit {
 
   @Input() items: any[];
-  @Input() getSection?: (item: any) => any;
+  @Input() getSection?: (item: any) => string;
   @Output() itemSelect = new EventEmitter<any>();
 
   // The first element that matches ListItemDirective. As a structural directive it unfolds into a template. This is a reference to that.

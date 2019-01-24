@@ -17,8 +17,9 @@
 
 <hr> 
 
+<!-- when using section headers, kirby-list-header is not supported on iOS, see https://github.com/telerik/nativescript-ui-feedback/issues/950 -->
 <kirby-list [items]="myItems" [getSection]="getSection">
-  <kirby-list-section-header *kirbyListSectionHeader="let section" [title]="section.name"></kirby-list-section-header>
+  <kirby-list-section-header *kirbyListSectionHeader="let section" [title]="section"></kirby-list-section-header>
   <kirby-list-item *kirbyListItem="let item" [item]="item" (click)="onClick(item)"></kirby-list-item>
 </kirby-list>
 
