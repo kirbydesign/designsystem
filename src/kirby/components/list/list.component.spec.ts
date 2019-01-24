@@ -74,5 +74,30 @@ describe('ListComponent', () => {
 
       expect(component.isSectionsEnabled).toBeTruthy();
     });
+
+    it('should render the one li element for each item, if the list is not sectioned', () => {
+      component.items = [1, 2, 3];
+
+      fixture.detectChanges();
+
+      const rootElement: HTMLElement = fixture.debugElement.nativeElement;
+      const liElements = rootElement.querySelectorAll('li');
+
+      expect(liElements.length).toEqual(component.items.length);
+    });
+
+    it('should render the one li element for each item and one for each section, if sections are enabled', () => {
+      const sections = ['section 1', 'section 2', 'section 3'];
+      component.items = [0, 1, 2];
+      component.getSection = (item: any): string => sections[item];
+
+      fixture.detectChanges();
+
+      const rootElement: HTMLElement = fixture.debugElement.nativeElement;
+      const liElements = rootElement.querySelectorAll('li');
+
+      expect(liElements.length).toEqual(component.items.length + sections.length);
+    });
+
   });
 });
