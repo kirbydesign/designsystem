@@ -1,14 +1,12 @@
-<GridLayout rows="*">
-  <RadListView [items]="items" row="0" [groupingFunction]="getSection" >
+<GridLayout rows="auto,*">
+  <FlexboxLayout alignItems="center" class="list-header-container" row="0">
+    <ng-container *ngTemplateOutlet="headerTemplate; context: {$implicit: columns}"></ng-container>
+  </FlexboxLayout>
+  <RadListView [items]="items" row="1" [groupingFunction]="getSection" >
     <ng-template tkListItemTemplate let-item="item">
       <FlexboxLayout alignItems="center" class="list-item-container" (tap)="onItemTap(item)" ios:height="50">
         <ng-container *ngTemplateOutlet="listItemTemplate; context: {$implicit: item}">
         </ng-container>
-      </FlexboxLayout>
-    </ng-template>
-    <ng-template tkListViewHeader>
-      <FlexboxLayout alignItems="center" class="list-header-container" >
-        <ng-container *ngTemplateOutlet="headerTemplate; context: {$implicit: columns}"></ng-container>
       </FlexboxLayout>
     </ng-template>
     <ng-template tkGroupTemplate let-section="category">
