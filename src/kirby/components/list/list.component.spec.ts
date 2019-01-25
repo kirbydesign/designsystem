@@ -102,37 +102,37 @@ describe('ListComponent', () => {
 
   describe('Native: HeaderTemplate presence', () => {
 
-      beforeEach(() => {
-          fixture = TestBed.createComponent(ListComponent);
-          component = fixture.componentInstance;
-      });
+    beforeEach(() => {
+      fixture = TestBed.createComponent(ListComponent);
+      component = fixture.componentInstance;
+    });
 
-      it('should create two rows in grid when there is a template', () => {
-          fixture.detectChanges();
+    it('should create two rows in grid when there is a template', () => {
+      fixture.detectChanges();
 
-          const expectedRowDefinition = '*,auto';
-          expect(component.rowDefinition({})).toEqual(expectedRowDefinition);
-      });
+      const expectedRowDefinition = '*,auto';
+      expect(component.rowDefinition({})).toEqual(expectedRowDefinition);
+    });
 
-      it('should create one row in grid when it there is no template', () => {
-          fixture.detectChanges();
+    it('should create one row in grid when it there is no template', () => {
+      fixture.detectChanges();
 
-          const expectedRowDefinition = '*,';
-          expect(component.rowDefinition(null)).toEqual(expectedRowDefinition);
-      });
+      const expectedRowDefinition = '*,';
+      expect(component.rowDefinition(null)).toEqual(expectedRowDefinition);
+    });
 
-      it('should give the listview row number 1 when there is a template', () => {
-          fixture.detectChanges();
+    it('should give the listview row number 1 when there is a template', () => {
+      fixture.detectChanges();
 
-          const expectedRowNumber = '1';
-          expect(component.rowNumberForListView({})).toEqual(expectedRowNumber);
-      });
+      const expectedRowNumber = '1';
+      expect(component.rowNumberForListView({})).toEqual(expectedRowNumber);
+    });
 
-      it('should give the listview row number 0 when there is no template', () => {
-          fixture.detectChanges();
+    it('should give the listview row number 0 when there is no template', () => {
+      fixture.detectChanges();
 
-          const expectedRowNumber = '0';
-          expect(component.rowNumberForListView(null)).toEqual(expectedRowNumber);
-      });
+      const expectedRowNumber = '0';
+      expect(component.rowNumberForListView(null)).toEqual(expectedRowNumber);
+    });
   });
 });
