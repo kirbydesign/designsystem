@@ -60,10 +60,10 @@ export class ListComponent implements OnInit {
   }
 
   rowDefinition(headerTemplate: any): string {
-    return headerTemplate ? '*' : 'auto,*';
+    return headerTemplate ? 'auto,*' : '*' ;
   }
 
   rowNumberForListView(headerTemplate: any): string {
-    return headerTemplate ? '0' : '1';
+    return headerTemplate ? '1' : '0';
   }
 }

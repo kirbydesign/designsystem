@@ -98,7 +98,7 @@ describe('ListComponent', () => {
     });
   });
 
-  describe('Native: HeaderTemplate presence', () => {
+  describe('Native: HeaderTemplate', () => {
 
     beforeEach(() => {
       fixture = TestBed.createComponent(ListComponent);
@@ -108,14 +108,14 @@ describe('ListComponent', () => {
     it('should create two rows in grid when there is a template', () => {
       fixture.detectChanges();
 
-      const expectedRowDefinition = '*,auto';
+      const expectedRowDefinition = 'auto,*';
       expect(component.rowDefinition({})).toEqual(expectedRowDefinition);
     });
 
     it('should create one row in grid when it there is no template', () => {
       fixture.detectChanges();
 
-      const expectedRowDefinition = '*,';
+      const expectedRowDefinition = '*';
       expect(component.rowDefinition(null)).toEqual(expectedRowDefinition);
     });
 
