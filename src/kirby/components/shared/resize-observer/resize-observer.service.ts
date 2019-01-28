@@ -11,17 +11,14 @@ export class ResizeObserverService implements OnDestroy {
   private observer: ResizeObserver | null;
   private observedElements = new WeakMap<Element, (entry: ResizeObserverEntry) => void>();
 
-  constructor(private _resizeObserverFactory: ResizeObserverFactory, private zone: NgZone) {}
+  constructor(private _resizeObserverFactory: ResizeObserverFactory, private zone: NgZone) {
+    this.observer = this._resizeObserverFactory.create((entries) => this.handleResize(entries));
+  }
 
-  observe(elementOrRef: Element | ElementRef<Element>, action: (entry: ResizeObserverEntry) => void): Element {
-    if (this.observer === undefined) {
-      this.observer = this._resizeObserverFactory.create((entries) => this.handleResize(entries));
-    }
-
+  observe(elementOrRef: Element | ElementRef<Element>, action: (entry: ResizeObserverEntry) => void): void {
     const element = elementOrRef instanceof ElementRef ? elementOrRef.nativeElement : elementOrRef;
     if (!this.observedElements.has(element)) {
       if (this.observer) {
-        // console.log(`Observing <${element.tagName}> through ResizeObserver...`);
         // IMPORTANT: Has to be run outside the Angular zone, for it to work with ResizeObserver polyfill:
         this.zone.runOutsideAngular(() => {
           this.observer.observe(element);
@@ -29,7 +26,6 @@ export class ResizeObserverService implements OnDestroy {
       }
       this.observedElements.set(element, action);
     }
-    return element;
   }
 
   private handleResize(entries: ResizeObserverEntry[]) {
@@ -43,8 +39,8 @@ export class ResizeObserverService implements OnDestroy {
 
   ngOnDestroy() {
     if (this.observer) {
-        // IMPORTANT: Has to be run outside the Angular zone, for it to work with ResizeObserver polyfill:
-        this.zone.runOutsideAngular(() => {
+      // IMPORTANT: Has to be run outside the Angular zone, for it to work with ResizeObserver polyfill:
+      this.zone.runOutsideAngular(() => {
         this.observer.disconnect();
       });
     }

@@ -11,7 +11,7 @@ import { ResizeObserverEntry } from '~/kirby/components/shared/resize-observer/t
 export class CardComponent implements OnInit {
   @Input() title: string;
   @Input() subtitle: string;
-  sizes = {
+  private sizes = {
     ['card-small']: 360,
     ['card-medium']: 720,
     ['card-large']: 1024
@@ -30,8 +30,8 @@ export class CardComponent implements OnInit {
   private handleResize(entry: ResizeObserverEntry) {
     Object.entries(this.sizes).forEach(([size, width]) => {
       if (entry.contentRect.width >= width) {
-          // this.renderer.setAttribute(entry.target, size, '');
-          this.renderer.addClass(entry.target, size);
+        // this.renderer.setAttribute(entry.target, size, '');
+        this.renderer.addClass(entry.target, size);
       } else {
         // this.renderer.removeAttribute(entry.target, size);
         this.renderer.removeClass(entry.target, size);
