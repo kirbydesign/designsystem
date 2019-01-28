@@ -1,6 +1,6 @@
 import { SectionByPipe } from './section-by.pipe';
 
-fdescribe('Pipe: SectionBy', () => {
+describe('Pipe: SectionBy', () => {
 
   it('create an instance', () => {
     const pipe = new SectionByPipe();

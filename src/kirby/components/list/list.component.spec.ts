@@ -2,8 +2,6 @@ import { SectionByPipe } from './pipes/section-by.pipe';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ListComponent } from './list.component';
-import { ItemEventData } from 'tns-core-modules/ui/list-view/list-view';
-
 
 describe('ListComponent', () => {
   let component: ListComponent;
