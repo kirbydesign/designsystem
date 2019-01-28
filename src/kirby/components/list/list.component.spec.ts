@@ -73,7 +73,7 @@ describe('ListComponent', () => {
       expect(component.isSectionsEnabled).toBeTruthy();
     });
 
-    it('should render the one li element for each item, if the list is not sectioned', () => {
+    it('should render one li element for each item, if the list is not sectioned', () => {
       component.items = [1, 2, 3];
 
       fixture.detectChanges();
@@ -84,7 +84,7 @@ describe('ListComponent', () => {
       expect(liElements.length).toEqual(component.items.length);
     });
 
-    it('should render the one li element for each item and one for each section, if sections are enabled', () => {
+    it('should render one li element for each item and one for each section, if sections are enabled', () => {
       const sections = ['section 1', 'section 2', 'section 3'];
       component.items = [0, 1, 2];
       component.getSection = (item: any): string => sections[item];
@@ -100,37 +100,36 @@ describe('ListComponent', () => {
 
   describe('Native: HeaderTemplate', () => {
 
-    beforeEach(() => {
-      fixture = TestBed.createComponent(ListComponent);
-      component = fixture.componentInstance;
+    it('should return the correct grid row definition, when there is a template', () => {
+      const expected = 'auto,*';
+
+      const actual = component.rowDefinition({});
+
+      expect(actual).toEqual(expected);
     });
 
-    it('should create two rows in grid when there is a template', () => {
-      fixture.detectChanges();
+    it('should return the correct grid row definition, when it there is no template', () => {
+      const expected = '*';
 
-      const expectedRowDefinition = 'auto,*';
-      expect(component.rowDefinition({})).toEqual(expectedRowDefinition);
+      const actual = component.rowDefinition(null);
+
+      expect(actual).toEqual(expected);
     });
 
-    it('should create one row in grid when it there is no template', () => {
-      fixture.detectChanges();
+    it('should return the correct row number, when there is a template', () => {
+      const expected = '1';
 
-      const expectedRowDefinition = '*';
-      expect(component.rowDefinition(null)).toEqual(expectedRowDefinition);
+      const actual = component.rowNumberForListView({});
+
+      expect(actual).toEqual(expected);
     });
 
-    it('should give the listview row number 1 when there is a template', () => {
-      fixture.detectChanges();
+    it('should return the correct row number, when there is no template', () => {
+      const expected = '0';
 
-      const expectedRowNumber = '1';
-      expect(component.rowNumberForListView({})).toEqual(expectedRowNumber);
-    });
+      const actual = component.rowNumberForListView(null);
 
-    it('should give the listview row number 0 when there is no template', () => {
-      fixture.detectChanges();
-
-      const expectedRowNumber = '0';
-      expect(component.rowNumberForListView(null)).toEqual(expectedRowNumber);
+      expect(actual).toEqual(expected);
     });
   });
 });

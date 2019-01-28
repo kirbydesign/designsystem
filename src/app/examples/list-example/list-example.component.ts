@@ -23,10 +23,6 @@ export class ListExampleComponent implements OnInit {
     alert(`You have clicked the row [${item.title} ${item.amount}]`);
   }
 
-  onShouldRenderSectionHeader(currentItem: any, items: any[], index: number): boolean {
-    return index > 0;
-  }
-
   getSection(item: any): string {
     return item.detail > 0 ? 'Positive' : 'Negative';
   }
