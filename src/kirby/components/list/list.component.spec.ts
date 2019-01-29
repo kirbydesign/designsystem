@@ -1,4 +1,4 @@
-import { SectionByPipe } from './pipes/section-by.pipe';
+import { GroupByPipe } from './pipes/group-by.pipe';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ListComponent } from './list.component';
@@ -9,7 +9,7 @@ describe('ListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListComponent, SectionByPipe ]
+      declarations: [ ListComponent, GroupByPipe ]
     })
     .compileComponents();
   }));
@@ -66,7 +66,7 @@ describe('ListComponent', () => {
     });
 
     it('should be enabled if a section callback is defined', () => {
-      component.getSection = (item: any) => 'this is a test';
+      component.getSectionName = (item: any) => 'this is a test';
 
       fixture.detectChanges();
 
@@ -87,7 +87,7 @@ describe('ListComponent', () => {
     it('should render one li element for each item and one for each section, if sections are enabled', () => {
       const sections = ['section 1', 'section 2', 'section 3'];
       component.items = [0, 1, 2];
-      component.getSection = (item: any): string => sections[item];
+      component.getSectionName = (item: any): string => sections[item];
 
       fixture.detectChanges();
 
@@ -108,7 +108,7 @@ describe('ListComponent', () => {
       expect(actual).toEqual(expected);
     });
 
-    it('should return the correct grid row definition, when it there is no template', () => {
+    it('should return the correct grid row definition, when there is no template', () => {
       const expected = '*';
 
       const actual = component.rowDefinition(null);

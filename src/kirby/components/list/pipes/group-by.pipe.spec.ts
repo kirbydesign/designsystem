@@ -1,14 +1,14 @@
-import { SectionByPipe } from './section-by.pipe';
+import { GroupByPipe } from './group-by.pipe';
 
-describe('Pipe: SectionBy', () => {
+describe('Pipe: GroupBy', () => {
 
   it('create an instance', () => {
-    const pipe = new SectionByPipe();
+    const pipe = new GroupByPipe();
     expect(pipe).toBeTruthy();
   });
 
   it('should return collection if no callback is given', () => {
-    const pipe = new SectionByPipe();
+    const pipe = new GroupByPipe();
     const collection = [1, 2, 3];
 
     const result = pipe.transform(collection);
@@ -34,7 +34,7 @@ describe('Pipe: SectionBy', () => {
           dummyValue: 3
         }
       ];
-      const pipe = new SectionByPipe();
+      const pipe = new GroupByPipe();
 
       const result = pipe.transform(collection, callback);
 

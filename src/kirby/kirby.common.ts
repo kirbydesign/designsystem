@@ -1,4 +1,4 @@
-import { SectionByPipe } from './components/list/pipes/section-by.pipe';
+import { GroupByPipe } from './components/list/pipes/group-by.pipe';
 import { AvatarComponent } from './components/avatar/avatar.component';
 import { ButtonComponent } from './components/button/button.component';
 import { CardFooterComponent } from './components/card/card-footer/card-footer.component';
@@ -30,5 +30,5 @@ export const declarations = [
   GridComponent,
   ComponentLoaderDirective,
   AvatarComponent,
-  SectionByPipe,
+  GroupByPipe,
 ];

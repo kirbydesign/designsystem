@@ -1,5 +1,5 @@
 <StackLayout>
-  <kirby-list [items]="myItems" [getSection]="getSection" (itemSelect)="onItemSelect($event)">
+  <kirby-list [items]="myItems" [getSectionName]="getSectionName" (itemSelect)="onItemSelect($event)">
     <kirby-list-header *kirbyListHeader="let columns" [left]="'Navn'" [middle]="'Afkast ÅTD'" [right]="'Værdi'"></kirby-list-header>
     <kirby-list-section-header *kirbyListSectionHeader="let section" [title]="section"></kirby-list-section-header>
     <kirby-list-item

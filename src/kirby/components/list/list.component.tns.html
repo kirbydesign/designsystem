@@ -4,7 +4,7 @@
       <ng-container *ngTemplateOutlet="headerTemplate; context: {$implicit: columns}"></ng-container>
     </FlexboxLayout>
   </ng-container>
-  <RadListView [groupingFunction]="getSection" [items]="items" row="{{ rowNumberForListView(headerTemplate) }}">
+  <RadListView [groupingFunction]="getSectionName" [items]="items" row="{{ rowNumberForListView(headerTemplate) }}">
     <ng-template let-item="item" tkListItemTemplate>
       <FlexboxLayout (tap)="onItemTap(item)" alignItems="center" class="list-item-container" ios:height="50">
         <ng-container *ngTemplateOutlet="listItemTemplate; context: {$implicit: item}">

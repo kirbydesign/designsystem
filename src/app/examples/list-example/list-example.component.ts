@@ -23,7 +23,7 @@ export class ListExampleComponent implements OnInit {
     alert(`You have clicked the row [${item.title} ${item.amount}]`);
   }
 
-  getSection(item: any): string {
+  getSectionName(item: any): string {
     return item.detail > 0 ? 'Positive' : 'Negative';
   }
 }
