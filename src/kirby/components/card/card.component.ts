@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, Renderer2, OnDestroy } from '@angular/core';
 
 import { ResizeObserverService } from '~/kirby/components/shared/resize-observer/resize-observer.service';
 import { ResizeObserverEntry } from '~/kirby/components/shared/resize-observer/types/resize-observer-entry';
@@ -8,7 +8,7 @@ import { ResizeObserverEntry } from '~/kirby/components/shared/resize-observer/t
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
 })
-export class CardComponent implements OnInit {
+export class CardComponent implements OnInit, OnDestroy {
   @Input() title: string;
   @Input() subtitle: string;
   private sizes = {
@@ -25,6 +25,10 @@ export class CardComponent implements OnInit {
 
   ngOnInit() {
     this.resizeObserverService.observe(this.elementRef, (entry) => this.handleResize(entry));
+  }
+
+  ngOnDestroy() {
+    this.resizeObserverService.unobserve(this.elementRef);
   }
 
   private handleResize(entry: ResizeObserverEntry) {
