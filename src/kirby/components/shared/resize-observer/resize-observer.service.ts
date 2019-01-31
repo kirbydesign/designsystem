@@ -28,15 +28,6 @@ export class ResizeObserverService implements OnDestroy {
     }
   }
 
-  private handleResize(entries: ResizeObserverEntry[]) {
-    entries.forEach(entry => {
-      const action = this.observedElements.get(entry.target);
-      if (action) {
-        action(entry);
-      }
-    });
-  }
-
   ngOnDestroy() {
     if (this.observer) {
       // IMPORTANT: Has to be run outside the Angular zone, for it to work with ResizeObserver polyfill:
@@ -58,6 +49,15 @@ export class ResizeObserverService implements OnDestroy {
       }
       this.observedElements.delete(element);
     }
+  }
+
+  private handleResize(entries: ResizeObserverEntry[]) {
+    entries.forEach(entry => {
+      const action = this.observedElements.get(entry.target);
+      if (action) {
+        action(entry);
+      }
+    });
   }
 
 }
