@@ -35,15 +35,15 @@ kirby-card {
   --cardSmallBackgroundColor: #8dabee;
   --cardMediumBackgroundColor: #d2a2ee;
   --cardLargeBackgroundColor: #d8b280;
-  &.card-small::before {
+  &[size="small"]::before {
     content: 'SM';
     background-color: var(--cardSmallBackgroundColor);
   }
-  &.card-medium::before {
+  &[size="medium"]::before {
     content: 'MD';
     background-color: var(--cardMediumBackgroundColor);
   }
-  &.card-large::before {
+  &[size="large"]::before {
     content: 'LG';
     background-color: var(--cardLargeBackgroundColor);
   }

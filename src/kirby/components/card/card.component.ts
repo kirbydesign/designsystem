@@ -12,9 +12,9 @@ export class CardComponent implements OnInit, OnDestroy {
   @Input() title: string;
   @Input() subtitle: string;
   private sizes = {
-    ['card-small']: 360,
-    ['card-medium']: 720,
-    ['card-large']: 1024
+    ['small']: 360,
+    ['medium']: 720,
+    ['large']: 1024
   };
 
   constructor(
@@ -32,15 +32,17 @@ export class CardComponent implements OnInit, OnDestroy {
   }
 
   private handleResize(entry: ResizeObserverEntry) {
-    Object.entries(this.sizes).forEach(([size, width]) => {
-      if (entry.contentRect.width >= width) {
-        // this.renderer.setAttribute(entry.target, size, '');
-        this.renderer.addClass(entry.target, size);
-      } else {
-        // this.renderer.removeAttribute(entry.target, size);
-        this.renderer.removeClass(entry.target, size);
-      }
-    });
+    const sizeAttributeName = 'size';
+    const smallest = this.sizes['small'];
+    if (entry.contentRect.width < smallest) {
+      this.renderer.removeAttribute(entry.target, sizeAttributeName);
+    } else {
+      Object.entries(this.sizes).forEach(([size, width]) => {
+        if (entry.contentRect.width >= width) {
+          this.renderer.setAttribute(entry.target, sizeAttributeName, size);
+        }
+      });
+    }
   }
 
 }
