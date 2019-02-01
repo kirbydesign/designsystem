@@ -8,7 +8,6 @@ import {
   EventEmitter,
   Output
 } from '@angular/core';
-import { ItemEventData } from 'tns-core-modules/ui/list-view';
 
 @Directive({
   selector: '[kirbyListItem]'
@@ -20,6 +19,11 @@ export class ListItemDirective {}
 })
 export class ListHeaderDirective {}
 
+@Directive({
+  selector: '[kirbyListSectionHeader]'
+})
+export class ListSectionHeaderDirective {}
+
 @Component({
   selector: 'kirby-list',
   templateUrl: './list.component.html',
@@ -29,13 +33,22 @@ export class ListComponent implements OnInit {
 
   @Input() items: any[];
   @Output() itemSelect = new EventEmitter<any>();
+  @Input() getSectionName?: (item: any) => string;
+
   // The first element that matches ListItemDirective. As a structural directive it unfolds into a template. This is a reference to that.
-  @ContentChild(ListItemDirective, {read: TemplateRef}) listItemTemplate: any;
-  @ContentChild(ListHeaderDirective, {read: TemplateRef}) headerTemplate: any;
+  @ContentChild(ListItemDirective, {read: TemplateRef}) listItemTemplate;
+  @ContentChild(ListHeaderDirective, {read: TemplateRef}) headerTemplate;
+  @ContentChild(ListSectionHeaderDirective, {read: TemplateRef}) sectionHeaderTemplate;
 
-  constructor() {}
+  isSectionsEnabled: boolean;
 
-  ngOnInit() {}
+  constructor() { }
+
+  ngOnInit() {
+    if (this.getSectionName) {
+      this.isSectionsEnabled = true;
+    }
+  }
 
   onItemClick(row: any): void {
     this.itemSelect.emit(row);
@@ -43,5 +56,13 @@ export class ListComponent implements OnInit {
 
   onItemTap(selectedItem: any): void {
     this.itemSelect.emit(selectedItem);
+  }
+
+  rowDefinition(headerTemplate: any): string {
+    return headerTemplate ? 'auto,*' : '*' ;
+  }
+
+  rowNumberForListView(headerTemplate: any): string {
+    return headerTemplate ? '1' : '0';
   }
 }
