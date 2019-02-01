@@ -1,7 +1,23 @@
 <ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
 <ul>
-  <li *ngFor="let item of items" (click)="onItemClick(item)">
-    <ng-container *ngTemplateOutlet="listItemTemplate; context: {$implicit: item}" >
-    </ng-container>
-  </li>
+  <ng-container *ngIf="isSectionsEnabled; else normalList">
+    <ng-container *ngFor="let section of (items | groupBy:getSectionName)">
+        <li>
+          <ng-container *ngTemplateOutlet="sectionHeaderTemplate; context: {$implicit: section.name}">
+          </ng-container>
+        </li>        
+        <li *ngFor="let item of section.items" (click)="onItemClick(item)">
+          <ng-container *ngTemplateOutlet="listItemTemplate; context: {$implicit: item}">
+          </ng-container>
+        </li>
+      </ng-container>  
+  </ng-container>
+
+  <ng-template #normalList>
+    <li *ngFor="let item of items" (click)="onItemClick(item)">
+      <ng-container *ngTemplateOutlet="listItemTemplate; context: {$implicit: item}">
+      </ng-container>
+    </li> 
+  </ng-template>
 </ul>
+
