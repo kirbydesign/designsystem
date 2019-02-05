@@ -2,6 +2,7 @@
 <StackLayout>
   <kirby-list [items]="myItems" (itemSelect)="onItemSelect($event)">
     <!-- <kirby-list-header *kirbyListHeader="let columns" [left]="'Navn'" [middle]="'Afkast ÅTD'" [right]="'Værdi'"></kirby-list-header> -->
+    <kirby-list-section-header *kirbyListSectionHeader="let section" [title]="section"></kirby-list-section-header>
     <kirby-list-cell *kirbyListCell="let item" [lineOne]="item.title" [lineTwo]="item.detail" flexGrow=1 alignVertical="center"
       alignHorisontal="flex-start"></kirby-list-cell>
     <StackLayout *kirbyListCell="let item" class="cell" flexGrow=1>

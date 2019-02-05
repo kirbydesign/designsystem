@@ -9,11 +9,12 @@
       "version": "5.0.0"
     }
   },
-  "version": "0.0.49",
+  "version": "0.0.55",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build-polyfills": "webpack --config webpack.polyfills.config.js",
     "test": "ng test",
     "ci-test": "ng test --progress false --watch false",
     "lint": "ng lint",
@@ -24,6 +25,7 @@
     "ios": "tns run ios --hmr",
     "ios-debug": "tns debug ios --bundle --device 'iPhone X'",
     "pack-copy-to-dist-folder-watch": "cpx \"src\\kirby\\**\\!(*.spec.ts)\" dist-lib --watch",
+    "postinstall": "npm run build-polyfills",
     "postversion": "git push && git push --tags"
   },
   "private": true,
@@ -78,6 +80,7 @@
     "nativescript-dev-typescript": "^0.7.8",
     "nativescript-dev-webpack": "^0.18.2",
     "protractor": "~5.3.0",
+    "resize-observer-polyfill": "^1.5.1",
     "tns-platform-declarations": "^5.0.3",
     "sass-extract": "^2.1.0",
     "sass-extract-loader": "^1.1.0",

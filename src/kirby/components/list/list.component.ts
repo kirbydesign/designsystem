@@ -10,7 +10,6 @@ import {
   ContentChildren,
   QueryList
 } from '@angular/core';
-import { ItemEventData } from 'tns-core-modules/ui/list-view';
 import { ListCellComponent } from './list-cell/list-cell.component';
 
 @Directive({
@@ -28,6 +27,11 @@ export class ListHeaderDirective { }
 })
 export class ListCellDirective { }
 
+@Directive({
+  selector: '[kirbyListSectionHeader]'
+})
+export class ListSectionHeaderDirective {}
+
 @Component({
   selector: 'kirby-list',
   templateUrl: './list.component.html',
@@ -37,16 +41,24 @@ export class ListComponent implements OnInit {
 
   @Input() items: any[];
   @Output() itemSelect = new EventEmitter<any>();
-  // The first element that matches ListItemDirective. As a structural directive it unfolds into a template. This is a reference to that.
-  @ContentChild(ListItemDirective, { read: TemplateRef }) listItemTemplate: any;
-  @ContentChild(ListHeaderDirective, { read: TemplateRef }) headerTemplate: any;
+  @Input() getSectionName?: (item: any) => string;
 
+  // The first element that matches ListItemDirective. As a structural directive it unfolds into a template. This is a reference to that.
+  @ContentChild(ListItemDirective, {read: TemplateRef}) listItemTemplate;
+  @ContentChild(ListHeaderDirective, {read: TemplateRef}) headerTemplate;
+  @ContentChild(ListSectionHeaderDirective, {read: TemplateRef}) sectionHeaderTemplate;
   @ContentChildren(ListCellDirective, { read: TemplateRef }) listCellTemplates: QueryList<any>;
   @ContentChildren(ListCellComponent, { read: TemplateRef }) listCellComponentTemplates: QueryList<ListCellComponent>;
 
+  isSectionsEnabled: boolean;
+
   constructor() { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    if (this.getSectionName) {
+      this.isSectionsEnabled = true;
+    }
+  }
 
   onItemClick(row: any): void {
     this.itemSelect.emit(row);
@@ -56,4 +68,11 @@ export class ListComponent implements OnInit {
     this.itemSelect.emit(selectedItem);
   }
 
+  rowDefinition(headerTemplate: any): string {
+    return headerTemplate ? 'auto,*' : '*' ;
+  }
+
+  rowNumberForListView(headerTemplate: any): string {
+    return headerTemplate ? '1' : '0';
+  }
 }

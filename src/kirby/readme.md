@@ -90,6 +90,35 @@ To enable autocompletion (e.g. in VS Code), you need to add the following line t
 /// <reference path="./node_modules/@kirbydesign/designsystem/index.d.tns-only.ts" /> Needed for autocompletion and compilation.
 ```
 
+## Polyfills
+Some features of Kirby requires polyfills to ensure compability across all major browsers _(e.g. the `ResizeObserverService` used by the automagic sizing feature of the `Kirby Card` component)_.
+
+To enable the polyfill, you register a _polyfill loader_ that checks whether the polyfill is needed or the feature is already supported by the browser (and can skip requesting the polyfill).  
+To use the sizing feature of Kirby Card across all major browsers, you must copy additional files from the Kirby package to your output folder.  
+Add the following to `build > options > assets` in `angular.json`:
+```json
+{
+  ...
+  "build": {
+    "options": {
+      "assets": [
+        ...
+        "../node_modules/@kirbydesign/designsystem/polyfills",
+        ...
+      ],
+    }
+  }
+}
+```
+Finally, add the following to `index.html`:
+```html
+<head>
+  ...
+  <script src="kirby/polyfills/resize-observer-polyfill-loader.min.js"></script>
+</head>
+```
+_**Please note:** If you don't want the additional http request for the polyfill loader,  you can copy the contents of `node_modules/@kirbydesign/designsystem/polyfills/resize-observer-polyfill-loader.js` into a `script` tag in `index.html` instead_
+
 ## Chart Components
 The Kirby chart components use Highcharts. Note that this is a licensed product. On iOS and Android the charts are rendered inside a webview. To use charts on iOS and Android devices, you must transfer some files to the device by adding this to your `webpack.config.js`:
 ```json

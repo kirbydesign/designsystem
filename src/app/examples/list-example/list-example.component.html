@@ -1,4 +1,5 @@
-<kirby-list [items]="myItems" (itemSelect)="onItemSelect($event)">
+<kirby-list [items]="myItems" (itemSelect)="onItemSelect($event)" [getSectionName]="getSectionName">
+    <kirby-list-section-header *kirbyListSectionHeader="let section" [title]="section"></kirby-list-section-header>
     <kirby-list-cell *kirbyListCell="let item" [lineOne]="item.title" [lineTwo]="item.detail" flexGrow=10></kirby-list-cell>
     <div *kirbyListCell="let item">
       Jeg har {{ item.subTitle }}
@@ -21,17 +22,19 @@
 <hr>
 
 <kirby-list [items]="myItems" (itemSelect)="onItemSelect($event)">
-  <kirby-list-header *kirbyListHeader="let columns" [left]="'Left'" [middle]="'Middle'" [right]="'Right'"></kirby-list-header>
+  <kirby-list-header *kirbyListHeader [left]="'Left'" [middle]="'Middle'" [right]="'Right'"></kirby-list-header>
   <kirby-list-item *kirbyListItem="let item" [title]="item.title" [amount]="item.amount" [detail]="item.detail"></kirby-list-item>
 </kirby-list>
-  
-<hr> -->
 
-<!-- If you wish to use your own template, just add the *kirbyListItem="let item" to the element -->
+<hr> 
 
-<!-- <kirby-list [items]="myItems" (itemSelect)="onItemSelect($event)">
-  <ng-container *kirbyListItem="let item">
-    <span>{{item.title}}</span>
-  </ng-container>
-</kirby-list> -->
+<kirby-list [items]="myItems" [getSectionName]="getSectionName" (itemSelect)="onItemSelect($event)">
+  <kirby-list-header *kirbyListHeader [left]="'Navn'" [middle]="'Afkast ÅTD'" [right]="'Værdi'"></kirby-list-header>
+  <kirby-list-section-header *kirbyListSectionHeader="let section" [title]="section"></kirby-list-section-header>
+  <kirby-list-item *kirbyListItem="let item" [item]="item"></kirby-list-item>
+</kirby-list>
+
+<hr>
+
+ -->
 
