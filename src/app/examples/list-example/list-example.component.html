@@ -15,7 +15,7 @@
 
 <hr>
 
-<kirby-list [items]="myItems" (itemSelect)="onItemSelect($event)" [getSectionName]="getSectionName">
+<kirby-list [items]="myItems" (itemSelect)="onItemSelect($event)" >
   <kirby-list-cell *kirbyListCell="let item" [lineOne]="item.title" [lineTwo]="item.detail" flexGrow=10></kirby-list-cell>
   <div *kirbyListCell="let item">
     Jeg har {{ item.subTitle }}
