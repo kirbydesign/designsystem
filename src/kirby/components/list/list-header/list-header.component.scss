@@ -1,19 +1,16 @@
+@import '../../../scss/web-imports';
 $left-column: 1;
 $middle-column: 2;
 $right-column: 3 ;
 
 :host {
-    --kirby-wireframe-color: #e3e3e3;
-    --kirby-wireframe-border-color: var(--kirby-wireframe-color);
-    --kirby-wireframe-border: 1px solid var(--kirby-wireframe-border-color);
-    --kirby-wireframe-text-color: var(--kirby-wireframe-color);
     display: grid;
     grid-template-columns: 40% 20% 40%;
     width: 100%;
     padding: 0.7em 1.8em;
-    background-color: white; 
-    border-bottom: var(--kirby-wireframe-border);
-    color: #a0a0a0;
+    background-color: get-color('kirby-surface'); 
+    border-bottom: 1px solid get-color('kirby-background');
+    color: get-color('kirby-on-background');
 }
 
 .left-column {
