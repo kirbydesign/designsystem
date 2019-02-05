@@ -1,40 +1,32 @@
-<kirby-list [items]="myItems" (itemSelect)="onItemSelect($event)" [getSectionName]="getSectionName">
-    <kirby-list-section-header *kirbyListSectionHeader="let section" [title]="section"></kirby-list-section-header>
-    <kirby-list-cell *kirbyListCell="let item" [lineOne]="item.title" [lineTwo]="item.detail" flexGrow=10></kirby-list-cell>
-    <div *kirbyListCell="let item">
-      Jeg har {{ item.subTitle }}
-    </div>
-    <kirby-list-cell *kirbyListCell="let item" [lineOne]="item.amount" flexGrow=1 alignVertical="flex-start" alignHorisontal="flex-end"></kirby-list-cell>
-  </kirby-list>
-  
-
-<!-- 
 <kirby-list [items]="myItems" (itemSelect)="onItemSelect($event)">
-  <kirby-list-item *kirbyListItem="let item" [item]="item"></kirby-list-item>
+  <kirby-list-cell *kirbyListCell="let item" [lineOne]="item.title" [lineTwo]="item.detail"></kirby-list-cell>
+  <kirby-list-cell *kirbyListCell="let item" [lineOne]="item.subTitle" alignHorisontal="flex-end"></kirby-list-cell>
+  <kirby-list-cell *kirbyListCell="let item" [lineOne]="item.amount" alignVertical="center" alignHorisontal="flex-end"></kirby-list-cell>
+</kirby-list>
+
+<hr>
+
+<kirby-list [items]="myItems" (itemSelect)="onItemSelect($event)" [getSectionName]="getSectionName">
+  <kirby-list-section-header *kirbyListSectionHeader="let section" [title]="section"></kirby-list-section-header>
+  <kirby-list-cell *kirbyListCell="let item" [lineOne]="item.title" [lineTwo]="item.detail" flexGrow=10></kirby-list-cell>
+  <kirby-list-cell *kirbyListCell="let item" [lineOne]="item.amount" flexGrow=1 alignVertical="flex-start"
+    alignHorisontal="flex-end"></kirby-list-cell>
+</kirby-list>
+
+<hr>
+
+<kirby-list [items]="myItems" (itemSelect)="onItemSelect($event)" [getSectionName]="getSectionName">
+  <kirby-list-cell *kirbyListCell="let item" [lineOne]="item.title" [lineTwo]="item.detail" flexGrow=10></kirby-list-cell>
+  <div *kirbyListCell="let item">
+    Jeg har {{ item.subTitle }}
+  </div>
+  <kirby-list-cell *kirbyListCell="let item" [lineOne]="item.amount" flexGrow=1 alignVertical="flex-start"
+    alignHorisontal="flex-end"></kirby-list-cell>
 </kirby-list>
 
 <hr>
 
 <kirby-list [items]="myItems" (itemSelect)="onItemSelect($event)">
+  <kirby-list-header *kirbyListHeader [left]="'Navn'" [middle]="'Afkast ÅTD'" [right]="'Værdi'"></kirby-list-header>
   <kirby-list-item *kirbyListItem="let item" [title]="item.title" [amount]="item.amount"></kirby-list-item>
 </kirby-list>
-
-<hr>
-
-<kirby-list [items]="myItems" (itemSelect)="onItemSelect($event)">
-  <kirby-list-header *kirbyListHeader [left]="'Left'" [middle]="'Middle'" [right]="'Right'"></kirby-list-header>
-  <kirby-list-item *kirbyListItem="let item" [title]="item.title" [amount]="item.amount" [detail]="item.detail"></kirby-list-item>
-</kirby-list>
-
-<hr> 
-
-<kirby-list [items]="myItems" [getSectionName]="getSectionName" (itemSelect)="onItemSelect($event)">
-  <kirby-list-header *kirbyListHeader [left]="'Navn'" [middle]="'Afkast ÅTD'" [right]="'Værdi'"></kirby-list-header>
-  <kirby-list-section-header *kirbyListSectionHeader="let section" [title]="section"></kirby-list-section-header>
-  <kirby-list-item *kirbyListItem="let item" [item]="item"></kirby-list-item>
-</kirby-list>
-
-<hr>
-
- -->
-

@@ -48,7 +48,6 @@ export class ListComponent implements OnInit {
   @ContentChild(ListHeaderDirective, {read: TemplateRef}) headerTemplate;
   @ContentChild(ListSectionHeaderDirective, {read: TemplateRef}) sectionHeaderTemplate;
   @ContentChildren(ListCellDirective, { read: TemplateRef }) listCellTemplates: QueryList<any>;
-  @ContentChildren(ListCellComponent, { read: TemplateRef }) listCellComponentTemplates: QueryList<ListCellComponent>;
 
   isSectionsEnabled: boolean;
 

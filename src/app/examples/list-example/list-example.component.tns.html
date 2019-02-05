@@ -1,13 +1,13 @@
-<!-- <kirby-list-header *kirbyListHeader="let columns" [left]="'Navn'" [middle]="'Afkast ÅTD'" [right]="'Værdi'"></kirby-list-header> -->
+<kirby-list-header *kirbyListHeader="let columns" [left]="'Navn'" [middle]="'Afkast ÅTD'" [right]="'Værdi'"></kirby-list-header>
 <StackLayout>
   <kirby-list [items]="myItems" (itemSelect)="onItemSelect($event)">
     <!-- <kirby-list-header *kirbyListHeader="let columns" [left]="'Navn'" [middle]="'Afkast ÅTD'" [right]="'Værdi'"></kirby-list-header> -->
     <kirby-list-section-header *kirbyListSectionHeader="let section" [title]="section"></kirby-list-section-header>
     <kirby-list-cell *kirbyListCell="let item" [lineOne]="item.title" [lineTwo]="item.detail" flexGrow=1 alignVertical="center"
       alignHorisontal="flex-start"></kirby-list-cell>
-    <StackLayout *kirbyListCell="let item" class="cell" flexGrow=1>
+    <!-- <StackLayout *kirbyListCell="let item" class="cell" flexGrow=1>
       <Label [text]="item.subTitle" class="line-one"></Label>
-    </StackLayout>
+    </StackLayout> -->
     <!-- <kirby-list-cell *kirbyListCell="let item" [lineOne]="item.subtitle" flexGrow=1 alignVertical="center" alignHorisontal="flex-start"></kirby-list-cell> -->
     <kirby-list-cell *kirbyListCell="let item" [lineOne]="item.amount" flexGrow="10" alignVertical="center"
       alignHorisontal="flex-end"></kirby-list-cell>
