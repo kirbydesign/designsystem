@@ -1,15 +1,17 @@
 <GridLayout rows="*">
-    <RadListView [items]="items" row="0" >
-        <ng-template tkListItemTemplate let-item="item">
-            <FlexboxLayout alignItems="center" class="list-item-container" (tap)="onItemTap(item)">
-                    <ng-container *ngTemplateOutlet="listItemTemplate; context: {$implicit: item}">
+    <RadListView [items]="items" row="0">
+        <ng-template let-item="item">
+            <FlexboxLayout class="row" (tap)="onItemTap(item)">
+                <ng-container *ngFor="let template of listCellTemplates">
+                    <ng-container *ngTemplateOutlet="template; context: {$implicit: item}">
                     </ng-container>
+                </ng-container>
             </FlexboxLayout>
         </ng-template>
-        <ng-template tkListViewHeader>
+        <!-- <ng-template tkListViewHeader>
             <FlexboxLayout alignItems="center" class="list-header-container">
                 <ng-container *ngTemplateOutlet="headerTemplate; context: {$implicit: columns}"></ng-container>
             </FlexboxLayout>
-        </ng-template>
+        </ng-template> -->
     </RadListView>
 </GridLayout>

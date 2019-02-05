@@ -1,0 +1,58 @@
+.cell {
+    padding: 0 8 0 8;
+    height: 100%;
+//    width: 100%;
+    flex-direction: column;
+    .line-one {
+        // height: 100%;
+        font-size: 17;
+        font-weight: 200;
+        
+    }
+    .line-two,
+    .line-three {
+        font-size: 13;
+        font-weight: 200;
+        
+    }
+}
+
+
+
+// .titles-container {
+//     vertical-align: center;
+// }
+
+// .amount-container {
+//     vertical-align: center;
+// }
+
+// .detail-container {
+//     text-align: center;
+//     vertical-align: center;
+// }
+
+// .list-item-title {
+    
+// }
+
+// .list-item-subTitle {
+//     color: #a0a0a0
+    
+// }
+
+// .list-item-detail {
+//     &.green {
+//         color: lightgreen;
+//     }
+    
+//     &.red {
+//         color: red;
+//     }
+// }
+
+// .list-item-amount {
+//     font-weight: bold;
+//     horizontal-align:right;
+// }
+
