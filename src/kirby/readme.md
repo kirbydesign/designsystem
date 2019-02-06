@@ -103,7 +103,11 @@ Add the following to `build > options > assets` in `angular.json`:
     "options": {
       "assets": [
         ...
-        "../node_modules/@kirbydesign/designsystem/polyfills",
+        {
+          "glob": "**/*",
+          "input": "./node_modules/@kirbydesign/designsystem/polyfills",
+          "output": "./assets"
+        },
         ...
       ],
     }
