@@ -8,8 +8,8 @@ $right-column: 3 ;
     grid-template-columns: 40% 20% 40%;
     width: 100%;
     padding: size('gutter-small') size('m');
-    background-color: get-color('kirby-surface'); 
-    border-bottom: 1px solid get-color('kirby-background');
+    background-color: var(--kirby-surface);
+    border-bottom: 1px solid var(--kirby-background);
     color: get-color('kirby-on-background');
     font-size: font-size('n');
 }
