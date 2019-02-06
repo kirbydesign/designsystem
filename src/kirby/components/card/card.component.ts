@@ -11,7 +11,7 @@ import { ResizeObserverEntry } from '~/kirby/components/shared/resize-observer/t
 export class CardComponent implements OnInit, OnDestroy {
   @Input() title: string;
   @Input() subtitle: string;
-  private _sizes = this.sortSizesByBreakpoint({
+  private sizesSortedByBreakpoint = this.sortSizesByBreakpoint({
     'small': 360,
     'medium': 720,
     'large': 1024
@@ -22,7 +22,7 @@ export class CardComponent implements OnInit, OnDestroy {
     if (typeof value === 'string') {
       console.error('Sizes property cannot be a string. Please ensure the size property is bound as an expression:\n[sizes]="{...}"');
     }
-    this._sizes = this.sortSizesByBreakpoint(value);
+    this.sizesSortedByBreakpoint = this.sortSizesByBreakpoint(value);
   }
 
   constructor(
@@ -39,7 +39,7 @@ export class CardComponent implements OnInit, OnDestroy {
     this.resizeObserverService.unobserve(this.elementRef);
   }
 
-  private sortSizesByBreakpoint(sizes: {[size: string]: number }) {
+  private sortSizesByBreakpoint(sizes: {[size: string]: number }): [string, number][] {
     return Object.entries(sizes).sort(this.compareSizesByBreakpoint);
   }
 
@@ -49,12 +49,12 @@ export class CardComponent implements OnInit, OnDestroy {
 
   private handleResize(entry: ResizeObserverEntry) {
     const sizeAttributeName = 'size';
-    const smallestSize = this._sizes[0][0];
-    const smallestWidth = this._sizes[0][1];
-    if (entry.contentRect.width < smallestWidth) {
-      this.renderer.setAttribute(entry.target, sizeAttributeName, `<${smallestSize}`);
+    const smallestBreakpointName = this.sizesSortedByBreakpoint[0][0];
+    const smallestBreakpointWidth = this.sizesSortedByBreakpoint[0][1];
+    if (entry.contentRect.width < smallestBreakpointWidth) {
+      this.renderer.setAttribute(entry.target, sizeAttributeName, `<${smallestBreakpointName}`);
     } else {
-      this._sizes.forEach(([size, width]) => {
+      this.sizesSortedByBreakpoint.forEach(([size, width]) => {
         if (entry.contentRect.width >= width) {
           this.renderer.setAttribute(entry.target, sizeAttributeName, size);
         }
