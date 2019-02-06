@@ -1,18 +1,27 @@
 <ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
 <ul>
   <ng-container *ngIf="isSectionsEnabled; else normalList">
-    <ng-container *ngFor="let section of (items | groupBy:getSectionName)">
+    <ng-container *ngFor="let section of (items | groupBy: getSectionName)">
       <li>
-        <ng-container *ngTemplateOutlet="sectionHeaderTemplate; context: {$implicit: section.name}">
+        <ng-container
+          *ngTemplateOutlet="
+            sectionHeaderTemplate;
+            context: { $implicit: section.name }
+          "
+        >
         </ng-container>
       </li>
       <li *ngFor="let item of section.items" (click)="onItemClick(item)">
         <!-- TODO remove container when the kirbyListItem is no longer in use -->
-        <ng-container *ngTemplateOutlet="listItemTemplate; context: {$implicit: item}">
+        <ng-container
+          *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }"
+        >
         </ng-container>
 
         <ng-container *ngFor="let template of listCellTemplates">
-          <ng-container *ngTemplateOutlet="template; context: {$implicit: item}">
+          <ng-container
+            *ngTemplateOutlet="template; context: { $implicit: item }"
+          >
           </ng-container>
         </ng-container>
       </li>
@@ -22,11 +31,15 @@
   <ng-template #normalList>
     <li *ngFor="let item of items" (click)="onItemClick(item)">
       <!-- TODO remove container when the kirbyListItem is no longer in use -->
-      <ng-container *ngTemplateOutlet="listItemTemplate; context: {$implicit: item}">
+      <ng-container
+        *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }"
+      >
       </ng-container>
 
       <ng-container *ngFor="let template of listCellTemplates">
-        <ng-container *ngTemplateOutlet="template; context: {$implicit: item}"></ng-container>
+        <ng-container
+          *ngTemplateOutlet="template; context: { $implicit: item }"
+        ></ng-container>
       </ng-container>
     </li>
   </ng-template>

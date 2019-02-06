@@ -17,8 +17,9 @@
 
 <kirby-list [items]="myItems" (itemSelect)="onItemSelect($event)" >
   <kirby-list-cell *kirbyListCell="let item" [lineOne]="item.title" [lineTwo]="item.detail" flexGrow=10></kirby-list-cell>
+  <!-- you can make custom cells using the kirbyListCell directive -->
   <div *kirbyListCell="let item">
-    Jeg har {{ item.subTitle }}
+    custom cell {{ item.subTitle }}
   </div>
   <kirby-list-cell *kirbyListCell="let item" [lineOne]="item.amount" flexGrow=1 alignVertical="flex-start"
     alignHorisontal="flex-end"></kirby-list-cell>

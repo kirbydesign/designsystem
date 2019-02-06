@@ -1,25 +1,11 @@
-@import '../../scss/native-imports';
-
+@import "../../scss/native-imports";
 $list-item-height: 44;
 $list-item-padding: 16;
 $list-header-height: 38;
-
-
 .row {
-    padding: 16 8 16 8;
-    justify-content: space-between;
-    flex-direction: row;
-//    height: $list-header-height;
-    border-color: #d6d6d6;
-    border-width: 0 0 1 0;
+  padding: 16 8 16 8;
+  justify-content: space-between;
+  flex-direction: row;
+  border-color: #d6d6d6;
+  border-width: 0 0 1 0;
 }
-
-// .list-item-container {
-//     color: get-color('primary');
-//     padding-left: $list-item-padding;
-//     padding-right: $list-item-padding;
-//     padding-top: 5;
-//     padding-bottom: 5;
-//     border-bottom-width: 1;
-//     border-bottom-color: #e7e7e7;
-// }
