@@ -11,6 +11,7 @@ $right-column: 3 ;
     background-color: get-color('kirby-surface'); 
     border-bottom: 1px solid get-color('kirby-background');
     color: get-color('kirby-on-background');
+    font-size: font-size('n');
 }
 
 .left-column {
