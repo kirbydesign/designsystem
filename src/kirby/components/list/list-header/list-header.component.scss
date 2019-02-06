@@ -10,7 +10,7 @@ $right-column: 3 ;
     padding: size('gutter-small') size('m');
     background-color: var(--kirby-surface);
     border-bottom: 1px solid var(--kirby-background);
-    color: get-color('kirby-on-background');
+    color: var(--kirby-on-background);
     font-size: font-size('n');
 }
 
