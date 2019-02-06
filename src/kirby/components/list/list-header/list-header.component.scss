@@ -7,7 +7,7 @@ $right-column: 3 ;
     display: grid;
     grid-template-columns: 40% 20% 40%;
     width: 100%;
-    padding: 0.7em 1.8em;
+    padding: size('gutter-small') size('m');
     background-color: get-color('kirby-surface'); 
     border-bottom: 1px solid get-color('kirby-background');
     color: get-color('kirby-on-background');
