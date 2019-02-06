@@ -57,6 +57,9 @@ export class ListComponent implements OnInit {
     if (this.getSectionName) {
       this.isSectionsEnabled = true;
     }
+    if (this.listItemTemplate) {
+      console.warn('kirbyListItem is deprecated and will be removed in future versions of Kirby');
+    }
   }
 
   onItemClick(row: any): void {

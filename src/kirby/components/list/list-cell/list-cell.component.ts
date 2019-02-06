@@ -1,10 +1,6 @@
 import { Component, OnInit, Input, HostBinding } from '@angular/core';
 
 type flexAlign = 'flex-start' | 'center' | 'flex-end';
-// type alignHorisontal = 'left' | 'center' | 'right';
-// type alignVertical = 'top' | 'center' | 'bottom';
-
-
 
 @Component({
   selector: 'kirby-list-cell',
