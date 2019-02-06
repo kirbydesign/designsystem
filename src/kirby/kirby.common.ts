@@ -6,7 +6,13 @@ import { CardHeaderComponent } from './components/card/card-header/card-header.c
 import { CardComponent } from './components/card/card.component';
 import { GridComponent } from './components/grid/grid.component';
 import { IconComponent } from './components/icon/icon.component';
-import { ListComponent, ListItemDirective, ListHeaderDirective, ListSectionHeaderDirective, ListCellDirective } from './components/list/list.component';
+import {
+  ListComponent,
+  ListItemDirective,
+  ListHeaderDirective,
+  ListSectionHeaderDirective,
+  ListCellDirective
+} from './components/list/list.component';
 import { ComponentLoaderDirective } from './components/shared/component-loader.directive';
 import { ChartComponent } from './components/chart/chart.component';
 import { ListItemComponent } from './components/list/list-item/list-item.component';
