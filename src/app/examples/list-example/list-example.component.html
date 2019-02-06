@@ -13,7 +13,7 @@
 <kirby-list [items]="myItems" (itemSelect)="onItemSelect($event)" [getSectionName]="getSectionName">
   <kirby-list-section-header *kirbyListSectionHeader="let section" [title]="section"></kirby-list-section-header>
   <kirby-list-cell *kirbyListCell="let item" [lineOne]="item.title" [lineTwo]="item.detail" flexGrow=10></kirby-list-cell>
-  <kirby-list-cell *kirbyListCell="let item" [lineOne]="item.amount" flexGrow=1 alignVertical="flex-start"
+  <kirby-list-cell *kirbyListCell="let item" [lineOne]="item.amount" flexGrow="1" alignVertical="flex-start"
     alignHorisontal="flex-end"></kirby-list-cell>
 </kirby-list>
 
