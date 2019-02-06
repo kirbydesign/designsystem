@@ -1,29 +1,23 @@
+@import '../../scss/web-imports';
 
-:host {
-    --kirby-wireframe-color: #e3e3e3;
-    --kirby-wireframe-border-color: var(--kirby-wireframe-color);
-    --kirby-wireframe-border: 1px solid var(--kirby-wireframe-border-color);
-    --kirby-wireframe-text-color: var(--kirby-wireframe-color);
-    
-}
 
 ul {   
     list-style-type: none;
     padding-left: 0;
     margin-top: 0;
-    font-size: 0.8em;
+    font-size: font-size('s');
     margin-block-end: 0;
     
     li {
-        background-color: white;
-        border-bottom: var(--kirby-wireframe-border);
+        background-color: var(--kirby-surface);
+        border-bottom: 1px solid var(--kirby-background);
 
         p {
             margin: 0;
         }
 
         &:hover {
-            background-color: rgba(lightskyblue, 0.1);
+            background-color: rgba(var(--kirby-secondary), 0.2);
         }
     }
 }
