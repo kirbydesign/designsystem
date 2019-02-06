@@ -1,16 +1,18 @@
 @import '../../scss/native-imports';
 
 .list-header-container {
+    color: get-color('kirby-text-secondary');
     padding-left: size('gutter');
     padding-right: size('gutter');
     padding-top: size('gutter-small');
     padding-bottom: size('gutter-small');;
     border-color: get-color('kirby-background');
     border-width: 0 0 1 0;
+    font-size: font-size('m');
 }
 
 .list-item-container {
-    color: get-color('primary');
+    color: get-color('kirby-on-surface');
     padding-left: size('gutter');
     padding-right: size('gutter');
     padding-top: size('gutter-small');
