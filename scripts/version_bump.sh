@@ -27,4 +27,4 @@ echo "Bumping version and pushing tags"
 git checkout -- package.json
 git --no-pager diff
 git checkout master
-npm version patch -m "Bumping version to %s"
+npm version patch -m ":bookmark: Bumping version to %s"

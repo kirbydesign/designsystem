@@ -16,7 +16,7 @@
     "build": "ng build",
     "build-polyfills": "webpack --config webpack.polyfills.config.js",
     "test": "ng test",
-    "ci-test": "ng test --progress false --watch false",
+    "ci-test": "ng test --progress false --watch false --code-coverage",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "dist": "ng build --prod --aot --progress false",
@@ -26,7 +26,8 @@
     "ios-debug": "tns debug ios --bundle --device 'iPhone X'",
     "pack-copy-to-dist-folder-watch": "cpx \"src\\kirby\\**\\!(*.spec.ts)\" dist-lib --watch",
     "postinstall": "npm run build-polyfills",
-    "postversion": "git push && git push --tags"
+    "postversion": "git push && git push --tags",
+    "coverage-report": "cat ./coverage/lcov.info | coveralls"
   },
   "private": true,
   "dependencies": {
@@ -65,6 +66,7 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
     "codelyzer": "~4.2.1",
+    "coveralls": "3.0.2",
     "cpx": "^1.5.0",
     "is-docker": "^1.1.0",
     "jasmine-core": "~2.99.1",

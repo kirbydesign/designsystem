@@ -24,6 +24,7 @@ matrix:
       script: 
         - npm run lint
         - npm run ci-test
+        - npm run coverage-report
 
     # Running iOS build
     - stage: "Build"
