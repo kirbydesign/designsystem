@@ -106,7 +106,7 @@ Add the following to `build > options > assets` in `angular.json`:
         {
           "glob": "**/*",
           "input": "./node_modules/@kirbydesign/designsystem/polyfills",
-          "output": "./assets"
+          "output": "./kirby/polyfills"
         },
         ...
       ],
@@ -121,7 +121,7 @@ Finally, add the following to `index.html`:
   <script src="kirby/polyfills/resize-observer-polyfill-loader.min.js"></script>
 </head>
 ```
-_**Please note:** If you don't want the additional http request for the polyfill loader,  you can copy the contents of `node_modules/@kirbydesign/designsystem/polyfills/resize-observer-polyfill-loader.js` into a `script` tag in `index.html` instead_
+_**Please note:** If you don't want the additional http request for the polyfill loader, you can copy the contents of `node_modules/@kirbydesign/designsystem/polyfills/resize-observer-polyfill-loader.js` into a `script` tag in `index.html` instead_
 
 ## Chart Components
 The Kirby chart components use Highcharts. Note that this is a licensed product. On iOS and Android the charts are rendered inside a webview. To use charts on iOS and Android devices, you must transfer some files to the device by adding this to your `webpack.config.js`:
