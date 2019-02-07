@@ -1,11 +1,8 @@
 @import "../../scss/native-imports";
-$list-item-height: 44;
-$list-item-padding: 16;
-$list-header-height: 38;
 .row {
   padding: 16 8 16 8;
   justify-content: space-between;
   flex-direction: row;
-  border-color: #d6d6d6;
+  border-color: #f5f5f5;
   border-width: 0 0 1 0;
 }

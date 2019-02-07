@@ -1,1 +1,8 @@
-/* Add mobile styles for the component here.  */
+.header {
+  padding: 0 16 0 16;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
