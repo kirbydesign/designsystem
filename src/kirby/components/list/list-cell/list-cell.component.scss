@@ -1,0 +1,15 @@
+.cell {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  .line-one {
+    font-size: 1.2em;
+    font-weight: 200;
+  }
+  .line-two,
+  .line-three {
+    font-size: 1.0em;
+    font-weight: 200;
+  }
+}

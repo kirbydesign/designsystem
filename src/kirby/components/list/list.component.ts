@@ -6,18 +6,26 @@ import {
   TemplateRef,
   ContentChild,
   EventEmitter,
-  Output
+  Output,
+  ContentChildren,
+  QueryList
 } from '@angular/core';
+import { ListCellComponent } from './list-cell/list-cell.component';
 
 @Directive({
   selector: '[kirbyListItem]'
 })
-export class ListItemDirective {}
+export class ListItemDirective { }
 
 @Directive({
   selector: '[kirbyListHeader]'
 })
-export class ListHeaderDirective {}
+export class ListHeaderDirective { }
+
+@Directive({
+  selector: '[kirbyListCell]'
+})
+export class ListCellDirective { }
 
 @Directive({
   selector: '[kirbyListSectionHeader]'
@@ -39,6 +47,7 @@ export class ListComponent implements OnInit {
   @ContentChild(ListItemDirective, {read: TemplateRef}) listItemTemplate;
   @ContentChild(ListHeaderDirective, {read: TemplateRef}) headerTemplate;
   @ContentChild(ListSectionHeaderDirective, {read: TemplateRef}) sectionHeaderTemplate;
+  @ContentChildren(ListCellDirective, { read: TemplateRef }) listCellTemplates: QueryList<any>;
 
   isSectionsEnabled: boolean;
 
@@ -47,6 +56,9 @@ export class ListComponent implements OnInit {
   ngOnInit() {
     if (this.getSectionName) {
       this.isSectionsEnabled = true;
+    }
+    if (this.listItemTemplate) {
+      console.warn('kirbyListItem is deprecated and will be removed in future versions of Kirby');
     }
   }
 
