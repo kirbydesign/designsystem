@@ -1,8 +1,9 @@
 @import "../../scss/native-imports";
+
 .row {
-  padding: 16 8 16 8;
+  padding: size('gutter') size('gutter-small') size('gutter') size('gutter-small');
   justify-content: space-between;
   flex-direction: row;
-  border-color: #f5f5f5;
+  border-color: get-color('kirby-background');;
   border-width: 0 0 1 0;
 }

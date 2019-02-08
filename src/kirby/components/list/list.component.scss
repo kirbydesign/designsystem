@@ -9,7 +9,7 @@ ul {
   li {
     background-color: var(--kirby-surface);
     border-bottom: 1px solid var(--kirby-background);
-    padding: 16px;
+    padding: size('m');
     display: flex;
     flex-direction: row;
     justify-content: space-between;

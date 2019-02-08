@@ -1,5 +1,7 @@
+@import "../../../scss/native-imports";
+
 .header {
-  padding: 0 16 0 16;
+  padding: 0 size('gutter') 0 size('gutter');
   height: 100%;
   width: 100%;
   flex-direction: column;
