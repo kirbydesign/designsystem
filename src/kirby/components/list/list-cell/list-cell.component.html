@@ -1,0 +1,17 @@
+<!--
+    TODO: loose the div and use the host element
+   don't use ngStyle - maybe scss instead??? 
+   Same width for all cols
+
+-->
+<div
+  class="cell"
+  [ngStyle]="{
+    'justify-content': alignVertical,
+    'align-items': alignHorisontal
+  }"
+>
+  <div class="line-one" *ngIf="lineOne">{{ lineOne }}</div>
+  <div class="line-two" *ngIf="lineTwo">{{ lineTwo }}</div>
+  <div class="line-three" *ngIf="lineThree">{{ lineThree }}</div>
+</div>

@@ -1,3 +1,4 @@
+@import '../../../scss/web-imports';
 $left-column: 1;
 $middle-column: 2;
 $right-column: 3;
@@ -6,7 +7,7 @@ $right-column: 3;
     width: 100%;
     display: grid;
     grid-template-columns: 40% 20% 40%;
-    padding: 1.3em 1.8em;
+    padding: size('gutter') size('m');
 }
 
 .title-container {

@@ -1,0 +1,14 @@
+.cell {
+  padding: 0 8 0 8;
+  height: 100%;
+  flex-direction: column;
+  .line-one {
+    font-size: 17;
+    font-weight: 200;
+  }
+  .line-two,
+  .line-three {
+    font-size: 13;
+    font-weight: 200;
+  }
+}
