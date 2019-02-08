@@ -1,20 +1,22 @@
 <kirby-list [items]="myItems" (itemSelect)="onItemSelect($event)">
   <kirby-list-cell
     *kirbyListCell="let account"
+    width="2"
     [lineOne]="account.title"
     lineTwo="{{ account.detail === 0 ? null : account.detail }}"
   >
   </kirby-list-cell>
   <kirby-list-cell
+    width="0.5"
     *kirbyListCell="let account"
     [lineOne]="account.subTitle"
-    alignHorisontal="flex-end"
+    horisontalAlignment="right"
   ></kirby-list-cell>
   <kirby-list-cell
     *kirbyListCell="let account"
     [lineOne]="account.amount"
-    alignVertical="center"
-    alignHorisontal="flex-end"
+    verticalAlignment="center"
+    horisontalAlignment="right"
   ></kirby-list-cell>
 </kirby-list>
 
@@ -39,8 +41,8 @@
     *kirbyListCell="let item"
     [lineOne]="item.amount"
     flexGrow="1"
-    alignVertical="flex-start"
-    alignHorisontal="flex-end"
+    verticalAlignment="top"
+    horisontalAlignment="right"
   ></kirby-list-cell>
 </kirby-list>
 
@@ -59,8 +61,8 @@
     *kirbyListCell="let item"
     [lineOne]="item.amount"
     flexGrow="1"
-    alignVertical="flex-start"
-    alignHorisontal="flex-end"
+    verticalAlignment="top"
+    horisontalAlignment="right"
   ></kirby-list-cell>
 </kirby-list>
 

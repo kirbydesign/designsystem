@@ -1,8 +1,11 @@
-.cell {
-  height: 100%;
-  width: 100%;
-  display: flex;
+:host {
+  flex-basis: 100%;
+  flex-grow: 0;
+  flex-shrink: 1;
   flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  display: flex;
   .line-one {
     font-size: 1.2em;
     font-weight: 200;
