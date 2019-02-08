@@ -25,7 +25,7 @@
         </ng-container>
       </FlexboxLayout>
     </ng-template>
-    <ng-template let-section="category" tkGroupTemplate>
+    <ng-template let-section="category" tkGroupTemplate *ngIf="isSectionsEnabled">
       <FlexboxLayout alignItems="center" ios:height="50">
         <ng-container
           *ngTemplateOutlet="
