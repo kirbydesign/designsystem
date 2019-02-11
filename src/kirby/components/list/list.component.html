@@ -11,7 +11,7 @@
         >
         </ng-container>
       </li>
-      <li class="row" [ngClass]="{'clickable': tabIndex == 0}" *ngFor="let item of section.items" (click)="onItemClick(item)" tabindex="{{ tabindex }}">
+      <li class="row" [ngClass]="{'clickable': clickable}" role="clickable" *ngFor="let item of section.items" (click)="onItemClick(item)" tabindex="0">
         <!-- TODO remove container when the kirbyListItem is no longer in use -->
         <ng-container
           *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }"
@@ -29,7 +29,7 @@
   </ng-container>
 
   <ng-template #normalList>
-    <li class="row" [ngClass]="{'clickable': tabIndex == 0}" *ngFor="let item of items" (click)="onItemClick(item)" [attr.tabindex]="tabindex">
+    <li class="row" [ngClass]="{'clickable': clickable}" *ngFor="let item of items" (click)="onItemClick(item)" tabindex="0">
       <!-- TODO remove container when the kirbyListItem is no longer in use -->
       <ng-container
         *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }"

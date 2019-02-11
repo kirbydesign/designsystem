@@ -50,7 +50,7 @@ export class ListComponent implements OnInit {
   @ContentChildren(ListCellDirective, { read: TemplateRef }) listCellTemplates: QueryList<any>;
 
   isSectionsEnabled: boolean;
-  tabIndex: number = -1;
+  clickable: boolean = false;
 
   constructor() { }
 
@@ -63,7 +63,7 @@ export class ListComponent implements OnInit {
     }
 
     console.log("observers: ", this.itemSelect.observers.length);
-    this.tabIndex = this.itemSelect.observers.length > 0 ? 0 : -1;
+    this.clickable = this.itemSelect.observers.length > 0;
   }
 
   onItemClick(row: any): void {
