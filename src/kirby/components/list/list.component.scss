@@ -18,9 +18,7 @@ ul {
       margin: 0;
     }
     
-    &:hover {
-      background-color: var(--kirby-secondary);
-    }
+    
 
     &.row{
       &:first-of-type {
@@ -37,5 +35,11 @@ ul {
         background-color: transparent;
       }
     }
+  }
+}
+
+.clickable {
+  &:hover {
+    background-color: var(--kirby-secondary);
   }
 }
