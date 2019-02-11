@@ -1,7 +1,7 @@
 import { Injectable, OnDestroy, NgZone } from '@angular/core';
-import { screen } from 'platform';
-import { OrientationChangedEventData } from 'application';
-import * as app from 'application';
+import { screen } from 'tns-core-modules/platform';
+import { OrientationChangedEventData } from 'tns-core-modules/application';
+import * as app from 'tns-core-modules/application';
 import { Observable, Subject } from 'rxjs';
 
 @Injectable({
