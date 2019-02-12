@@ -11,11 +11,12 @@ module.exports = function (config) {
     basePath: '',
     frameworks: ['jasmine', '@angular-devkit/build-angular'],
     plugins: [
-      require('karma-jasmine'),
       require('karma-chrome-launcher'),
-      require('karma-jasmine-html-reporter'),
       require('karma-coverage-istanbul-reporter'),
+      require('karma-jasmine'),
+      require('karma-jasmine-html-reporter'),
       require('karma-junit-reporter'),
+      require('karma-spec-reporter'),
       require('@angular-devkit/build-angular/plugins/karma')
     ],
     client: {
@@ -23,13 +24,14 @@ module.exports = function (config) {
     },
     coverageIstanbulReporter: {
       dir: require('path').join(__dirname, '../coverage'),
-      reports: ['html', 'lcovonly'],
+      reports: ['html', 'lcovonly', 'text-summary'],
+      includeAllSources: true,
       fixWebpackSourcePaths: true
     },
     junitReporter: {
       outputDir: require('path').join(__dirname, '../test-reports')
     },
-    reporters: ['progress', 'kjhtml', 'junit'],
+    reporters: ['kjhtml', 'junit', 'spec'],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
