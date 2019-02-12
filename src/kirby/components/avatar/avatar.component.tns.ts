@@ -1,6 +1,6 @@
 import { Component, Input, NgZone, OnInit } from '@angular/core';
-import * as app from 'application';
-import { OrientationChangedEventData } from 'application';
+import * as app from 'tns-core-modules/application';
+import { OrientationChangedEventData } from 'tns-core-modules/application';
 import { EventData, View } from 'tns-core-modules/ui/core/view/view';
 import { ScssHelper } from '../../scss/scss-helper';
 
