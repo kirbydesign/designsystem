@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, NgZone } from '@angular/core';
-import { screen } from 'platform';
-import { OrientationChangedEventData } from 'application';
-import * as app from 'application';
+import { screen } from 'tns-core-modules/platform';
+import { OrientationChangedEventData } from 'tns-core-modules/application';
+import * as app from 'tns-core-modules/application';
 import { View, EventData } from 'tns-core-modules/ui/core/view/view';
 import { FlexboxLayout } from 'tns-core-modules/ui/layouts/flexbox-layout/flexbox-layout';
 
