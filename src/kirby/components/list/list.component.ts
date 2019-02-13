@@ -50,7 +50,7 @@ export class ListComponent implements OnInit {
   @ContentChildren(ListCellDirective, { read: TemplateRef }) listCellTemplates: QueryList<any>;
 
   isSectionsEnabled: boolean;
-  isSelectable: boolean = false;
+  isSelectable: boolean;
 
   constructor() { }
 
@@ -61,9 +61,7 @@ export class ListComponent implements OnInit {
     if (this.listItemTemplate) {
       console.warn('kirbyListItem is deprecated and will be removed in future versions of Kirby');
     }
-
-    console.log("observers: ", this.itemSelect.observers.length);
-    this.clickable = this.itemSelect.observers.length > 0;
+    this.isSelectable = this.itemSelect.observers.length > 0;
   }
 
   onItemClick(row: any): void {
