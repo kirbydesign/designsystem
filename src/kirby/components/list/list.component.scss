@@ -35,13 +35,14 @@ ul {
         background-color: transparent;
       }
     }
+
+    &.clickable {
+
+      &:hover {
+        background-color: var(--kirby-secondary);
+      }
+    }
   }
 }
 
-&.clickable {
-...
-}
-  &:hover {
-    background-color: var(--kirby-secondary);
-  }
-}
+
