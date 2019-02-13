@@ -38,7 +38,9 @@ ul {
   }
 }
 
-.clickable {
+&.clickable {
+...
+}
   &:hover {
     background-color: var(--kirby-secondary);
   }
