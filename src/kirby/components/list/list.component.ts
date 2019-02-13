@@ -50,7 +50,7 @@ export class ListComponent implements OnInit {
   @ContentChildren(ListCellDirective, { read: TemplateRef }) listCellTemplates: QueryList<any>;
 
   isSectionsEnabled: boolean;
-  clickable: boolean = false;
+  isSelectable: boolean = false;
 
   constructor() { }
 
