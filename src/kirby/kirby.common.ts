@@ -19,6 +19,7 @@ import { ListItemComponent } from './components/list/list-item/list-item.compone
 import { ListSectionHeaderComponent } from './components/list/list-section-header/list-section-header.component';
 import { ListHeaderComponent } from './components/list/list-header/list-header.component';
 import { ListCellComponent } from './components/list/list-cell/list-cell.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 export const declarations = [
   CardComponent,
@@ -40,4 +41,5 @@ export const declarations = [
   ComponentLoaderDirective,
   AvatarComponent,
   GroupByPipe,
+  SpinnerComponent,
 ];
