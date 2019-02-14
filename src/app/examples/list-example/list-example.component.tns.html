@@ -18,19 +18,17 @@
       *kirbyListCell="let item"
       [lineOne]="item.title"
       [lineTwo]="item.detail"
-      flexGrow="1"
-      alignVertical="center"
-      alignHorisontal="flex-start"
+      verticalAlignment="center"
+      width="0.85"
     ></kirby-list-cell>
-    <StackLayout *kirbyListCell="let item" class="cell" flexGrow="1">
-      <Label [text]="item.subTitle" class="line-one"></Label>
+    <StackLayout *kirbyListCell="let item" width="70%">
+      <Label [text]="item.subTitle" horizontalAlignment="right"></Label>
     </StackLayout>
     <kirby-list-cell
       *kirbyListCell="let item"
       [lineOne]="item.amount"
-      flexGrow="10"
-      alignVertical="center"
-      alignHorisontal="flex-end"
+      verticalAlignment="center"
+      horisontalAlignment="right"
     ></kirby-list-cell>
   </kirby-list>
 </StackLayout>
