@@ -3,9 +3,6 @@ import {
   OnInit,
   Input,
   HostBinding,
-  ElementRef,
-  ViewChild,
-  AfterViewInit
 } from '@angular/core';
 
 enum verticalAlignmentEnum {
@@ -27,12 +24,17 @@ type verticalAlignment = 'top' | 'center' | 'bottom';
   styleUrls: ['./list-cell.component.scss']
 })
 export class ListCellComponent implements OnInit {
+  private readonly horisontalAlignmentDefault: horisontalAlignment = 'left';
+  private readonly verticalAlignmentDefault: verticalAlignment = 'center';
+  private readonly widthDefault = 1;
+
   @Input() lineOne: string | number;
   @Input() lineTwo: string | number;
   @Input() lineThree: string | number;
-  @Input() horisontalAlignment: horisontalAlignment = 'left';
-  @Input() verticalAlignment: verticalAlignment = 'center';
-  @Input() width = 1;
+  @Input() horisontalAlignment: horisontalAlignment = this
+    .horisontalAlignmentDefault;
+  @Input() verticalAlignment: verticalAlignment = this.verticalAlignmentDefault;
+  @Input() width = this.widthDefault;
 
   @HostBinding('style.flex-basis')
   private _flexBasisHost: string;
@@ -54,20 +56,52 @@ export class ListCellComponent implements OnInit {
   }
 
   getWidth(): string {
-    return this.width ? `${this.width * 100}%` : '100%';
+    if (
+      this.width && this.width > 0
+    ) {
+      return `${this.width * 100}%`;
+    }
+    console.warn(
+      `Invalid value ${
+        this.width
+      } for width. Valid values numbers > 0. Defaulting to '${
+        this.widthDefault
+      }'`
+    );
+    return '100%';
   }
 
   getAlignItems(): string {
-    return this.horisontalAlignment &&
+    if (
+      this.horisontalAlignment &&
       horisontalAlignmentEnum[this.horisontalAlignment]
-      ? horisontalAlignmentEnum[this.horisontalAlignment]
-      : horisontalAlignmentEnum.left;
+    ) {
+      return horisontalAlignmentEnum[this.horisontalAlignment];
+    }
+    console.warn(
+      `Invalid value ${
+        this.horisontalAlignment
+      } for horisontalAlignment. Valid values are 'left', 'center', 'right'. Defaulting to '${
+        this.horisontalAlignmentDefault
+      }'`
+    );
+    return horisontalAlignmentEnum[this.horisontalAlignmentDefault];
   }
 
   getJustifyContent(): string {
-    return this.verticalAlignment &&
+    if (
+      this.verticalAlignment &&
       verticalAlignmentEnum[this.verticalAlignment]
-      ? verticalAlignmentEnum[this.verticalAlignment]
-      : verticalAlignmentEnum.center;
+    ) {
+      return verticalAlignmentEnum[this.verticalAlignment];
+    }
+    console.warn(
+      `Invalid value ${
+        this.verticalAlignment
+      } for verticalAlignment. Valid values are 'top', 'center', 'bottom'. Defaulting to '${
+        this.verticalAlignmentDefault
+      }'`
+    );
+    return verticalAlignmentEnum[this.verticalAlignmentDefault];
   }
 }
