@@ -65,13 +65,21 @@ export class ChartComponent implements OnInit, OnChanges {
   updateProperties() {
     if (this.options.chart) {
       this.options.chart.height = this.height;
-      this.options.series[0].data = this.data;
       this.options.chart.description = this.description;
-      if (this.options.chart.type === ChartType.PIE) {
-        this.options.plotOptions.pie.dataLabels.enabled = this.showDataLabels;
+      if (this.options.chart.type === ChartType.PIE || this.options.chart.type === ChartType.DONUT) {
+        this.options.series = [{
+          type: 'pie',
+          data: this.data as Array<Highcharts.SeriesPieDataOptions>
+        }];
+        if (this.options.chart.type === ChartType.PIE) {
+          this.options.plotOptions.pie.dataLabels.enabled = this.showDataLabels;
+        }
+      } else if (this.options.chart.type === ChartType.AREASPLINE) {
+        this.options.series = [{
+          type: 'areaspline',
+          data: this.data as Array<Highcharts.SeriesAreasplineDataOptions>
+        }];
       }
     }
-
   }
-
 }
