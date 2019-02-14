@@ -80,10 +80,10 @@ describe('ChartComponent', () => {
           y: 41,
           label: '41%'
       }
-  ];
+    ];
     component.ngOnInit();
-    expect(component.options['series'][0].data.length).toBe(2);
-    expect(component.options['series'][0].data[0]['name']).toBe('Boomerangs 20%');
+    const data = (component.options.series[0] as Highcharts.SeriesAreasplineOptions).data;
+    expect(data.length).toBe(2);
+    expect(data[0]['name']).toBe('Boomerangs 20%');
   });
-
 });
