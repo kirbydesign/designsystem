@@ -1,9 +1,10 @@
-import { Options } from 'highcharts';
-import { ElementRef } from '@angular/core';
-import { WebView, LoadEventData } from 'tns-core-modules/ui/web-view/web-view';
-import { android, AndroidApplication, AndroidActivityEventData } from 'tns-core-modules/application';
-import { isAndroid, isIOS } from 'tns-core-modules/platform';
+import {Options} from 'highcharts';
+import {ElementRef} from '@angular/core';
+import {WebView, LoadEventData} from 'tns-core-modules/ui/web-view/web-view';
+import {isAndroid, isIOS} from 'tns-core-modules/platform';
+
 import * as webViewInterfaceModule from 'nativescript-webview-interface';
+import * as applicationModule from 'tns-core-modules/application';
 
 export class ChartHelper {
   chartWebViewInterface;
@@ -27,6 +28,18 @@ export class ChartHelper {
       }
     });
     this.chartWebViewInterface = new webViewInterfaceModule.WebViewInterface(webView, '~/chart/chart.webview.html');
+    this.setTransparentBackground(webView);
+  }
+
+  private setTransparentBackground(webView: WebView) {
+    if (isAndroid) {
+      webView.android.setBackgroundColor(0x00000000); // android.graphics.Color.TRANSPARENT);
+      webView.android.setLayerType(android.view.View.LAYER_TYPE_SOFTWARE, null);
+    }
+    if (isIOS) {
+      webView.ios.backgroundColor = UIColor.clearColor;
+      webView.ios.opaque = false;
+    }
   }
 
   public updateChart(options: Options) {
@@ -42,13 +55,13 @@ export class ChartHelper {
   private setupWebViewForPlatform(webView: WebView) {
     if (isAndroid) {
       const androidView = webView.android;
-      androidView .getSettings().setBuiltInZoomControls(false);
-      androidView .getSettings().setDisplayZoomControls(false);
-      android.on(AndroidApplication.activityPausedEvent, (args: AndroidActivityEventData) => {
-        androidView .onPause();
+      androidView.getSettings().setBuiltInZoomControls(false);
+      androidView.getSettings().setDisplayZoomControls(false);
+      applicationModule.android.on(applicationModule.AndroidApplication.activityPausedEvent, (args: applicationModule.AndroidActivityEventData) => {
+        androidView.onPause();
       });
-      android.on(AndroidApplication.activityResumedEvent, (args: AndroidActivityEventData) => {
-        androidView .onResume();
+      applicationModule.android.on(applicationModule.AndroidApplication.activityResumedEvent, (args: applicationModule.AndroidActivityEventData) => {
+        androidView.onResume();
       });
     } else if (isIOS) {
       const iosScrollView = webView.ios.scrollView;
