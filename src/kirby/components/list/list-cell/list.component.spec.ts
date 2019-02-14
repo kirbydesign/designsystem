@@ -56,7 +56,7 @@ describe('ListCellComponent', () => {
       expect(component.getWidth()).toBe(expected);
     });
 
-    it('should not fail when null', () => {
+    it('should not fail when negative', () => {
       component.width = -1;
       const expected = '100%';
 
