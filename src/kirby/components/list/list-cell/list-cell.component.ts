@@ -31,8 +31,7 @@ export class ListCellComponent implements OnInit {
   @Input() lineOne: string | number;
   @Input() lineTwo: string | number;
   @Input() lineThree: string | number;
-  @Input() horisontalAlignment: horisontalAlignment = this
-    .horisontalAlignmentDefault;
+  @Input() horisontalAlignment: horisontalAlignment = this.horisontalAlignmentDefault;
   @Input() verticalAlignment: verticalAlignment = this.verticalAlignmentDefault;
   @Input() width = this.widthDefault;
 
