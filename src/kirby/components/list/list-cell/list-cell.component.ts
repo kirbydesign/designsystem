@@ -1,4 +1,12 @@
-import { Component, OnInit, Input, HostBinding, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  HostBinding,
+  ElementRef,
+  ViewChild,
+  AfterViewInit
+} from '@angular/core';
 
 enum verticalAlignmentEnum {
   top = 'flex-start',
@@ -28,10 +36,10 @@ export class ListCellComponent implements OnInit {
 
   @HostBinding('style.flex-basis')
   private _flexBasisHost: string;
-  @HostBinding('style.justify-content')
-  private _flexJustifyHost: string;
   @HostBinding('style.align-items')
   private _flexAlignHost: string;
+  @HostBinding('style.justify-content')
+  private _flexJustifyHost: string;
 
   constructor() {}
 
@@ -40,26 +48,26 @@ export class ListCellComponent implements OnInit {
   }
 
   private setStyle() {
-    if (this.width) {
-      this._flexBasisHost = this.getWidth();
-    }
-    if (this.verticalAlignment) {
-      this._flexJustifyHost = this.getJustifyContent();
-    }
-    if (this.horisontalAlignment) {
-      this._flexAlignHost = this.getAlignItems();
-    }
+    this._flexBasisHost = this.getWidth();
+    this._flexAlignHost = this.getAlignItems();
+    this._flexJustifyHost = this.getJustifyContent();
   }
 
-  getWidth() {
-    return `${this.width * 100}%`;
+  getWidth(): string {
+    return this.width ? `${this.width * 100}%` : '100%';
   }
 
-  getJustifyContent() {
-    return verticalAlignmentEnum[this.verticalAlignment];
+  getAlignItems(): string {
+    return this.horisontalAlignment &&
+      horisontalAlignmentEnum[this.horisontalAlignment]
+      ? horisontalAlignmentEnum[this.horisontalAlignment]
+      : horisontalAlignmentEnum.left;
   }
 
-  getAlignItems() {
-    return horisontalAlignmentEnum[this.horisontalAlignment];
+  getJustifyContent(): string {
+    return this.verticalAlignment &&
+      verticalAlignmentEnum[this.verticalAlignment]
+      ? verticalAlignmentEnum[this.verticalAlignment]
+      : verticalAlignmentEnum.center;
   }
 }
