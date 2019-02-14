@@ -46,7 +46,7 @@
     "nativescript-angular": "^7.2.1",
     "nativescript-orientation": "^2.2.1",
     "nativescript-platform-css": "^1.6.6",
-    "nativescript-theme-core": "~1.0.4",
+    "nativescript-theme-core": "^1.0.4",
     "nativescript-ui-chart": "^3.11.1",
     "nativescript-ui-listview": "^5.1.1",
     "nativescript-webview-interface": "^1.4.2",
