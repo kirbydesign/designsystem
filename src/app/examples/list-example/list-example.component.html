@@ -1,23 +1,22 @@
 <kirby-list [items]="myItems" (itemSelect)="onItemSelect($event)">
   <kirby-list-cell
     *kirbyListCell="let account"
-    width="2"
-    [lineOne]="account.title"
-    lineTwo="{{ account.detail === 0 ? null : account.detail }}"
-  >
+    width="2">
+    <kirby-list-cell-line [primary]="true" [text]="account.title"></kirby-list-cell-line>
+    <kirby-list-cell-line [text]="account.detail === 0 ? null : account.detail"></kirby-list-cell-line>
   </kirby-list-cell>
   <kirby-list-cell
-    width="0.5"
     *kirbyListCell="let account"
-    [lineOne]="account.subTitle"
-    horisontalAlignment="right"
-  ></kirby-list-cell>
+    width="0.5"
+    horisontalAlignment="right">
+    <kirby-list-cell-line [primary]="true" [text]="account.subTitle"></kirby-list-cell-line>
+  </kirby-list-cell>
   <kirby-list-cell
     *kirbyListCell="let account"
-    [lineOne]="account.amount"
     verticalAlignment="center"
-    horisontalAlignment="right"
-  ></kirby-list-cell>
+    horisontalAlignment="right">
+    <kirby-list-cell-line [primary]="true" [text]="account.amount"></kirby-list-cell-line>
+  </kirby-list-cell>
 </kirby-list>
 
 <hr />
@@ -25,25 +24,24 @@
 <kirby-list
   [items]="myItems"
   (itemSelect)="onItemSelect($event)"
-  [getSectionName]="getSectionName"
->
+  [getSectionName]="getSectionName">
   <kirby-list-section-header
     *kirbyListSectionHeader="let section"
     [title]="section"
   ></kirby-list-section-header>
   <kirby-list-cell
     *kirbyListCell="let item"
-    [lineOne]="item.title"
-    [lineTwo]="item.detail"
-    flexGrow="10"
-  ></kirby-list-cell>
+    flexGrow="10">
+    <kirby-list-cell-line [primary]="true" [text]="item.title"></kirby-list-cell-line>
+    <kirby-list-cell-line [text]="item.detail"></kirby-list-cell-line>
+  </kirby-list-cell>
   <kirby-list-cell
     *kirbyListCell="let item"
-    [lineOne]="item.amount"
     flexGrow="1"
     verticalAlignment="top"
-    horisontalAlignment="right"
-  ></kirby-list-cell>
+    horisontalAlignment="right">
+    <kirby-list-cell-line [primary]="true" [text]="item.amount"></kirby-list-cell-line>
+  </kirby-list-cell>
 </kirby-list>
 
 <hr />
@@ -51,19 +49,19 @@
 <kirby-list [items]="myItems" (itemSelect)="onItemSelect($event)">
   <kirby-list-cell
     *kirbyListCell="let item"
-    [lineOne]="item.title"
-    [lineTwo]="item.detail"
-    flexGrow="10"
-  ></kirby-list-cell>
+    flexGrow="10">
+    <kirby-list-cell-line [primary]="true" [text]="item.title"></kirby-list-cell-line>
+    <kirby-list-cell-line [text]="item.detail"></kirby-list-cell-line>
+  </kirby-list-cell>
   <!-- you can make custom cells using the kirbyListCell directive -->
   <div *kirbyListCell="let item">custom cell {{ item.subTitle }}</div>
   <kirby-list-cell
     *kirbyListCell="let item"
-    [lineOne]="item.amount"
     flexGrow="1"
     verticalAlignment="top"
-    horisontalAlignment="right"
-  ></kirby-list-cell>
+    horisontalAlignment="right">
+    <kirby-list-cell-line [primary]="true" [text]="item.amount"></kirby-list-cell-line>
+  </kirby-list-cell>
 </kirby-list>
 
 <hr />

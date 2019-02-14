@@ -1,16 +1,15 @@
 import {
   Component,
-  OnInit,
-  Input,
-  Directive,
-  TemplateRef,
   ContentChild,
-  EventEmitter,
-  Output,
   ContentChildren,
-  QueryList
+  Directive,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  QueryList,
+  TemplateRef
 } from '@angular/core';
-import { ListCellComponent } from './list-cell/list-cell.component';
 
 @Directive({
   selector: '[kirbyListItem]'

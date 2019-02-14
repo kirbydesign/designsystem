@@ -1,0 +1,9 @@
+.primary {
+  font-size: 17;
+  font-weight: 200;
+}
+
+:not(.primary) {
+  font-size: 13;
+  font-weight: 200;
+}
