@@ -25,28 +25,41 @@ describe('ListCellComponent', () => {
   describe('width', () => {
     it('should be initialized', () => {
       const expected = 1;
+
       expect(component.width).toBe(expected);
     });
 
     it('should be transformed to percentage', () => {
-      const expected = '100%';
-      expect(component.getWidth()).toBe(expected);
+      const expected = /^\d*\.?\d*%$/; // any positive number prefixed with '%'
+
+      expect(component.getWidth()).toMatch(expected);
     });
 
-    it('should be calculated', () => {
+    it('should be doubled', () => {
       component.width = 2;
-      let expected = '200%';
-      expect(component.getWidth()).toBe(expected);
-      component.width = 0.1;
-      expected = '10%';
+      const expected = '200%';
+
       expect(component.getWidth()).toBe(expected);
     });
 
-    it('should not fail on invalid input', () => {
+    it('should be one tenth', () => {
+      component.width = 0.1;
+      const expected = '10%';
+
+      expect(component.getWidth()).toBe(expected);
+    });
+
+    it('should not fail when null', () => {
       component.width = null;
       const expected = '100%';
+
       expect(component.getWidth()).toBe(expected);
+    });
+
+    it('should not fail when null', () => {
       component.width = -1;
+      const expected = '100%';
+
       expect(component.getWidth()).toBe(expected);
     });
   });
@@ -56,21 +69,31 @@ describe('ListCellComponent', () => {
       expect(component.horisontalAlignment).toBe('left');
     });
 
-    it('should be transformed to flexbox alignment', () => {
+    it('left should be transformed to flex-start', () => {
       component.horisontalAlignment = 'left';
-      let expected = 'flex-start';
-      expect(component.getAlignItems()).toBe(expected);
-      component.horisontalAlignment = 'center';
-      expected = 'center';
-      expect(component.getAlignItems()).toBe(expected);
-      component.horisontalAlignment = 'right';
-      expected = 'flex-end';
+      const expected = 'flex-start';
+
       expect(component.getAlignItems()).toBe(expected);
     });
 
-    it('should not fail on invalid input', () => {
+    it('center should not be transformed', () => {
+      component.horisontalAlignment = 'center';
+      const expected = 'center';
+
+      expect(component.getAlignItems()).toBe(expected);
+    });
+
+    it('right should be transformed flex-end', () => {
+      component.horisontalAlignment = 'right';
+      const expected = 'flex-end';
+
+      expect(component.getAlignItems()).toBe(expected);
+    });
+
+    it('should not fail on null', () => {
       component.horisontalAlignment = null;
       const expected = 'flex-start';
+
       expect(component.getAlignItems()).toBe(expected);
     });
   });
@@ -78,25 +101,36 @@ describe('ListCellComponent', () => {
   describe('verticalAlignment', () => {
     it('should be initialized', () => {
       const expected = 'center';
+
       expect(component.verticalAlignment).toBe(expected);
     });
 
-    it('should be transformed to flexbox justfy content', () => {
+    it('top should be transformed to flex-start', () => {
       component.verticalAlignment = 'top';
-      let expected = 'flex-start';
-      expect(component.getJustifyContent()).toBe(expected);
-      component.verticalAlignment = 'center';
-      expected = 'center';
-      expect(component.getJustifyContent()).toBe(expected);
-      component.verticalAlignment = 'bottom';
-      expected = 'flex-end';
+      const expected = 'flex-start';
+
       expect(component.getJustifyContent()).toBe(expected);
     });
 
-    it('should not fail on invalid input', () => {
+    it('center should not be transformed', () => {
+      component.verticalAlignment = 'center';
+      const expected = 'center';
+
+      expect(component.getJustifyContent()).toBe(expected);
+    });
+
+    it('bottom should be transformed to flex-end', () => {
+      component.verticalAlignment = 'bottom';
+      const expected = 'flex-end';
+
+      expect(component.getJustifyContent()).toBe(expected);
+    });
+
+    it('should not fail on null', () => {
       component.verticalAlignment = null;
       const expected = 'center';
-      expect(component.getAlignItems()).toBe(expected);
+
+      expect(component.getJustifyContent()).toBe(expected);
     });
   });
 });
