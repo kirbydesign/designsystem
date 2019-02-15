@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListExampleComponent implements OnInit {
 
+  imageSrc = 'https://www.jyskebank.dk/portletcontext-employeesuggest/EmployeePictureServlet' +
+      '?large=true&employeeId=40501db73fd6677b9671ebb934f3f2e0';
+
   myItems = [
     {title: 'Vestas Wind Systems', subTitle: '20 stk', amount: '18.309 DKK', detail: 225},
     {title: 'A.P. Møller-Mærsk', subTitle: '2 stk', amount: '14.019 DKK', detail: 0},
