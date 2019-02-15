@@ -79,3 +79,34 @@
     [amount]="item.amount"
   ></kirby-list-item>
 </kirby-list>
+
+<hr />
+
+<kirby-list [items]="myItems" (itemSelect)="onItemSelect($event)">
+  <kirby-list-header
+          *kirbyListHeader
+          [left]="'Navn'"
+          [middle]="''"
+          [right]="'Værdi'"
+  ></kirby-list-header>
+
+  <!-- Cells can also take arbitrary markup (client specific) as cell-lines -->
+  <kirby-list-cell
+          *kirbyListCell="let item"
+          flexGrow="10">
+    <section style="flex-direction: row; display: flex;">
+      <kirby-avatar [imageSrc]="imageSrc" [size]="'small'"></kirby-avatar>
+      <div style="margin-left: 10px; flex-direction: column; display: flex;">
+        <kirby-list-cell-line [primary]="true" [text]="item.title"></kirby-list-cell-line>
+        <kirby-list-cell-line [text]="item.detail"></kirby-list-cell-line>
+      </div>
+    </section>
+  </kirby-list-cell>
+
+  <kirby-list-cell
+          *kirbyListCell="let item"
+          verticalAlignment="top"
+          horisontalAlignment="right">
+    <kirby-list-cell-line [primary]="true" [text]="item.amount"></kirby-list-cell-line>
+  </kirby-list-cell>
+</kirby-list>
