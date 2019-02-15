@@ -30,42 +30,45 @@ describe('ChartComponent', () => {
   });
 
   it('should set correct default chart height', () => {
-    expect(component.options['chart'].height).toBe(expectedDefaultHeight);
+    expect(component.options.chart.height).toBe(expectedDefaultHeight);
   });
 
   it('should set correct non-default chart height', () => {
     const expectedHeight = 400;
     component.height = expectedHeight;
     component.ngOnInit();
-    expect(component.options['chart'].height).toBe(expectedHeight);
+    expect(component.options.chart.height).toBe(expectedHeight);
   });
 
   it('should have correct default chart type', () => {
-    expect(component.options['chart'].type).toBe(ChartType.PIE);
+    expect(component.type = ChartType.PIE);
+    expect(component.options.chart.type).toBe(ChartType.PIE);
     expect(component.options.plotOptions.pie.innerSize).toBe('0%');
   });
 
   it('should convert donut chart type to highcharts pie with 50% innerSize', () => {
     component.type = ChartType.DONUT;
     component.ngOnInit();
-    expect(component.options['chart'].type).toBe(ChartType.PIE);
+    expect(component.type = ChartType.DONUT);
+    expect(component.options.chart.type).toBe(ChartType.PIE);
     expect(component.options.plotOptions.pie.innerSize).toBe('50%');
   });
 
   it('should set areaspline chart type', () => {
     component.type = ChartType.AREASPLINE;
     component.ngOnInit();
-    expect(component.options['chart'].type).toBe(ChartType.AREASPLINE);
+    expect(component.type = ChartType.AREASPLINE);
+    expect(component.options.chart.type).toBe(ChartType.AREASPLINE);
   });
 
   it('should have dataLabels enabled as default', () => {
-    expect(component.options['plotOptions'].pie.dataLabels.enabled).toBe(true);
+    expect(component.options.plotOptions.pie.dataLabels.enabled).toBe(true);
   });
 
   it('should disable dataLabels when false', () => {
     component.showDataLabels = false;
     component.ngOnInit();
-    expect(component.options['plotOptions'].pie.dataLabels.enabled).toBe(false);
+    expect(component.options.plotOptions.pie.dataLabels.enabled).toBe(false);
   });
 
   it('should set correct input data in chart series', () => {
