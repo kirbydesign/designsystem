@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, HostBinding } from '@angular/core';
 
 @Component({
   selector: 'kirby-list-header',
@@ -7,15 +7,22 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ListHeaderComponent implements OnInit {
 
-  @Input() left = '';
+  @Input() horisontalAlignment: string;
+  @Input() verticalAlignment: string;
+  @Input() width: string;
+  @Input() text: string;
 
-  @Input() middle = '';
-
-  @Input() right = '';
+  @HostBinding('style.flex-basis')
+  private _flexBasisHost: string;
+  @HostBinding('style.align-items')
+  private _flexAlignHost: string;
+  @HostBinding('style.justify-content')
+  private _flexJustifyHost: string;
 
   constructor() { }
 
   ngOnInit() {
+    this._flexBasisHost = this.width;
   }
 
 }

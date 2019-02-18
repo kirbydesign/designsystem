@@ -31,6 +31,7 @@ export class ListCellComponent implements OnInit {
   @Input() horisontalAlignment: horisontalAlignment = this.horisontalAlignmentDefault;
   @Input() verticalAlignment: verticalAlignment = this.verticalAlignmentDefault;
   @Input() width = this.widthDefault;
+  @Input() header: string;
 
   @HostBinding('style.flex-basis')
   private _flexBasisHost: string;

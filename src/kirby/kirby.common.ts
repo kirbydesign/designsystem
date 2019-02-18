@@ -9,7 +9,6 @@ import { IconComponent } from './components/icon/icon.component';
 import {
   ListComponent,
   ListItemDirective,
-  ListHeaderDirective,
   ListSectionHeaderDirective,
   ListCellDirective
 } from './components/list/list.component';
@@ -34,7 +33,6 @@ export const declarations = [
   ListCellLineComponent,
   ListSectionHeaderComponent,
   ListSectionHeaderDirective,
-  ListHeaderDirective,
   ListHeaderComponent,
   IconComponent,
   ChartComponent,
