@@ -44,8 +44,9 @@ export const DonutOptions: Options = {
             },
             point: {
                 events: {
-                    legendItemClick: (e) => {
-                        e.preventDefault();
+                    legendItemClick: () => {
+                        // Prevent the default behavior (toggle visibility of slices when clicking on legends)
+                        return false;
                     }
                 }
             },
@@ -61,7 +62,8 @@ export const DonutOptions: Options = {
     },
     series: [{
         name: '',
-        data: []
+        type: 'pie',
+        data: (this === undefined ? [] : this.data) as Array<Highcharts.SeriesPieDataOptions>
     }],
     credits: {
         enabled: false
