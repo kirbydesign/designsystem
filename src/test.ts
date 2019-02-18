@@ -18,9 +18,12 @@ __karma__.loaded = () => {};
 getTestBed().initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
 
 // Then we find all the files which needs test.
-const context = require.context('./app/', true, /^((?!(\.tns|\.ns)).)*.ts/);
+const appContext = require.context('./app', true, /^((?!\.tns).)*\.ts/);
+const kirbyContext = require.context('./kirby', true, /^((?!\.tns).)*\.ts/);
+
 // And load the modules.
-context.keys().map(context);
+appContext.keys().map(appContext);
+kirbyContext.keys().map(kirbyContext);
 
 // Finally, start Karma to run the tests.
 __karma__.start();
