@@ -68,7 +68,6 @@ export class ChartComponent implements OnInit, OnChanges {
     if (this.options.chart) {
       this.options.chart.height = this.height;
       this.options.chart.description = this.description;
-
       switch (this.options.chart.type) {
         case ChartType.PIE:
           this.options.plotOptions.pie.dataLabels.enabled = this.showDataLabels;
@@ -85,6 +84,7 @@ export class ChartComponent implements OnInit, OnChanges {
             type: 'areaspline',
             data: this.data as Array<Highcharts.SeriesAreasplineDataOptions>
           }];
+          break;
         }
       }
     }
