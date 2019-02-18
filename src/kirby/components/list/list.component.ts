@@ -39,8 +39,8 @@ export class ListSectionHeaderDirective {}
 export class ListComponent implements OnInit {
 
   @Input() items: any[];
-  @Output() itemSelect = new EventEmitter<any>();
   @Input() getSectionName?: (item: any) => string;
+  @Output() itemSelect = new EventEmitter<any>();
 
   // The first element that matches ListItemDirective. As a structural directive it unfolds into a template. This is a reference to that.
   @ContentChild(ListItemDirective, {read: TemplateRef}) listItemTemplate;
@@ -49,6 +49,7 @@ export class ListComponent implements OnInit {
   @ContentChildren(ListCellDirective, { read: TemplateRef }) listCellTemplates: QueryList<any>;
 
   isSectionsEnabled: boolean;
+  isSelectable: boolean;
 
   constructor() { }
 
@@ -59,6 +60,7 @@ export class ListComponent implements OnInit {
     if (this.listItemTemplate) {
       console.warn('kirbyListItem is deprecated and will be removed in future versions of Kirby');
     }
+    this.isSelectable = this.itemSelect.observers.length > 0;
   }
 
   onItemClick(row: any): void {
