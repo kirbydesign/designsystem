@@ -109,18 +109,6 @@ export class ListComponent implements OnInit, AfterContentInit {
     return headers;
   }
 
-  private getListCellElements() {
-    const listCells = [];
-    this.listCellTemplates.forEach((template, index) => {
-      const templateNodes: any[] = template._def.element.template.nodes;
-      const listCell = this.getListCellElement(templateNodes);
-      if (listCell) {
-        listCells.push(listCell);
-      }
-    });
-    return listCells;
-  }
-
   private getHeaderByIndex(
     headersData: KirbyCellHeader[],
     index: number
@@ -143,6 +131,17 @@ export class ListComponent implements OnInit, AfterContentInit {
     return listHeader;
   }
 
+  private getListCellElements() {
+    const listCells = [];
+    this.listCellTemplates.forEach((template, index) => {
+      const templateNodes: any[] = template._def.element.template.nodes;
+      const listCell = this.getListCellElement(templateNodes);
+      if (listCell) {
+        listCells.push(listCell);
+      }
+    });
+    return listCells;
+  }
   private getListCellElement(templateNodes: any[]): any {
     for (const node of templateNodes) {
       if (node.element && node.element.name === 'kirby-list-cell') {
@@ -152,7 +151,10 @@ export class ListComponent implements OnInit, AfterContentInit {
     return null;
   }
 
-  private getDataFromElement(listCellElement: any, index: number): KirbyCellHeader {
+  private getDataFromElement(
+    listCellElement: any,
+    index: number
+  ): KirbyCellHeader {
     if (listCellElement && listCellElement.element) {
       const header: KirbyCellHeader = { index: index };
       const headerAttr = this.getAttribute(
