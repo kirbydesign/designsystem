@@ -38,7 +38,7 @@ export interface KirbyCellHeader {
   width?: number;
   size?: number;
   horisontalAlignment?: horisontalAlignment;
-  index: number;
+  index?: number;
 }
 
 @Component({
@@ -83,42 +83,32 @@ export class ListComponent implements OnInit, AfterContentInit {
 
   private addColumnHeaders() {
     const headersData = this.getHeadersData();
-    if (headersData) {
-      for (let index = 0; index < this.listCellTemplates.length; index++) {
-        const headerData = this.getHeaderByIndex(headersData, index);
+    if (headersData.hasData) {
+      headersData.data.forEach((data: KirbyCellHeader) => {
         const headerComponentRef = this.createHeaderComponent();
-        headerComponentRef.instance.text = headerData.text;
-        headerComponentRef.instance.width = headerData.width;
-        headerComponentRef.instance.size = headerData.size;
+        headerComponentRef.instance.text = data.text;
+        headerComponentRef.instance.width = data.width;
+        headerComponentRef.instance.size = data.size;
         headerComponentRef.instance.horisontalAlignment =
-          headerData.horisontalAlignment;
+          data.horisontalAlignment;
         this.headerTemplate.insert(headerComponentRef.hostView);
-      }
+      });
     }
   }
 
-  private getHeadersData(): KirbyCellHeader[] {
+  private getHeadersData(): { data: KirbyCellHeader[]; hasData: boolean } {
     const headers: KirbyCellHeader[] = [];
     const listCellElements = this.getListCellElements();
+    let hasData = false;
     listCellElements.forEach((cellEl, index) => {
-      const headerData = this.getDataFromElement(cellEl, index);
-      if (headerData) {
-        headers.push(headerData);
+      const headerData: KirbyCellHeader = { index: index };
+      this.applyDataFromElement(headerData, cellEl);
+      if (headerData.text) {
+        hasData = true;
       }
+      headers.push(headerData);
     });
-    return headers;
-  }
-
-  private getHeaderByIndex(
-    headersData: KirbyCellHeader[],
-    index: number
-  ): KirbyCellHeader {
-    for (const data of headersData) {
-      if (index === data.index) {
-        return data;
-      }
-    }
-    return { index: index };
+    return { data: headers, hasData: hasData };
   }
 
   private createHeaderComponent(): ComponentRef<ListHeaderComponent> {
@@ -152,38 +142,35 @@ export class ListComponent implements OnInit, AfterContentInit {
     return null;
   }
 
-  private getDataFromElement(
-    listCellElement: any,
-    index: number
-  ): KirbyCellHeader {
+  private applyDataFromElement(header: KirbyCellHeader, listCellElement: any) {
     if (listCellElement && listCellElement.element) {
-      const header: KirbyCellHeader = { index: index };
-      const headerAttr = this.getAttribute(
-        listCellElement.element.attrs,
+      header.text = this.getAttributeValueFromElement(
+        listCellElement,
         'header'
       );
-      if (headerAttr) {
-        header.text = this.getAttributeValue(headerAttr, 'header');
-        header.index = index;
-        this.setValueOnHeader(header, listCellElement, 'width');
-        this.setValueOnHeader(header, listCellElement, 'horisontalAlignment');
-        this.setValueOnHeader(header, listCellElement, 'size');
-
-        return header;
+      if (header.text) {
+        header.horisontalAlignment = <horisontalAlignment>(
+          this.getAttributeValueFromElement(
+            listCellElement,
+            'horisontalAlignment'
+          )
+        );
+        header.width = Number(
+          this.getAttributeValueFromElement(listCellElement, 'width')
+        );
+        header.size = Number(
+          this.getAttributeValueFromElement(listCellElement, 'headerSize')
+        );
       }
     }
-    return null;
   }
 
-  private setValueOnHeader(
-    header: KirbyCellHeader,
+  private getAttributeValueFromElement(
     listCellElement: any,
-    attrName
-  ) {
+    attrName: string
+  ): string {
     const attr = this.getAttribute(listCellElement.element.attrs, attrName);
-    if (attr) {
-      header[attrName] = this.getAttributeValue(attr, attrName);
-    }
+    return this.getAttributeValue(attr, attrName);
   }
 
   private getAttribute(attrs: Array<any>, attrName: string): Array<any> {
@@ -195,11 +182,19 @@ export class ListComponent implements OnInit, AfterContentInit {
     return null;
   }
 
+  /**
+   * The attribute is an array of three elements. The first is empty, the second
+   * is the name and the third is the value.
+   * @param attr
+   * @param attrName
+   */
   private getAttributeValue(attr: Array<any>, attrName: string): string {
     if (attr) {
       const keyIndex = attr.indexOf(attrName);
       return attr.length >= keyIndex + 2 ? attr[keyIndex + 1] : '';
     }
+    return null;
+    // TODO what is this???
     this.isSelectable = this.itemSelect.observers.length > 0;
   }
 

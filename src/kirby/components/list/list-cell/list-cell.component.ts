@@ -28,9 +28,9 @@ import { widthProperty } from 'tns-core-modules/ui/page/page';
 export class ListCellComponent implements OnInit {
 
 
-  @Input() horisontalAlignment: horisontalAlignment;
-  @Input() verticalAlignment: verticalAlignment;
-  @Input() width;
+  @Input() horisontalAlignment: horisontalAlignment = 'left';
+  @Input() verticalAlignment: verticalAlignment = 'center';
+  @Input() width = 1;
   @Input() header: string;
   @Input() headerSize: number;
 
