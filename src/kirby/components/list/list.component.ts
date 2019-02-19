@@ -13,7 +13,7 @@ import {
   AfterContentInit,
   ComponentFactoryResolver,
   ViewContainerRef,
-  ComponentRef,
+  ComponentRef
 } from '@angular/core';
 import { ListHeaderComponent } from './list-header/list-header.component';
 import { horisontalAlignment } from './service/list-format.service';
@@ -80,8 +80,6 @@ export class ListComponent implements OnInit, AfterContentInit {
     this.addColumnHeaders();
   }
 
-
-
   private addColumnHeaders() {
     const headersData = this.getHeadersData();
     if (headersData) {
@@ -109,6 +107,18 @@ export class ListComponent implements OnInit, AfterContentInit {
       }
     });
     return headers;
+  }
+
+  private getListCells() {
+    const listCells = [];
+    this.listCellTemplates.forEach((template, index) => {
+      const templateNodes: any[] = template._def.element.template.nodes;
+      const listCell = this.getListCellElement(templateNodes);
+      if (listCell) {
+        listCells.push(listCell);
+      }
+    });
+    return listCells;
   }
 
   private getHeader(
