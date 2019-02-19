@@ -3,16 +3,20 @@ import * as app from 'tns-core-modules/application';
 import { OrientationChangedEventData } from 'tns-core-modules/application';
 import { EventData, View } from 'tns-core-modules/ui/core/view/view';
 import { ScssHelper } from '../../scss/scss-helper';
+import { ContentView } from 'tns-core-modules/ui/content-view';
+import { registerElement } from 'nativescript-angular';
 
 declare const CGSizeMake: any;
 declare const android: any;
 
+const AVATAR_COMPONENT_SELECTOR = 'kirby-avatar';
+
 @Component({
-  selector: 'kirby-avatar',
+  selector: AVATAR_COMPONENT_SELECTOR,
   templateUrl: './avatar.component.html',
   styleUrls: ['./avatar.component.scss']
 })
-export class AvatarComponent implements OnInit {
+export class AvatarComponent extends ContentView {
 
   @Input() imageSrc: string;
   @Input() altText: string;
@@ -20,9 +24,8 @@ export class AvatarComponent implements OnInit {
 
   view: View;
 
-  constructor(private zone: NgZone) { }
-
-  ngOnInit() {
+  constructor(private zone: NgZone) {
+    super();
   }
 
   onViewLoaded(args: EventData) {
@@ -63,5 +66,6 @@ export class AvatarComponent implements OnInit {
       }
     }, 100);
   }
-
 }
+
+registerElement(AVATAR_COMPONENT_SELECTOR, () => require('./avatar.component').AvatarComponent);

@@ -6,6 +6,8 @@ import { GridExampleComponent } from './grid-example/grid-example.component';
 import { ListExampleComponent } from './list-example/list-example.component';
 import { ChartExampleComponent } from './chart-example/chart-example.component';
 import { FontsExampleComponent } from './fonts-example/fonts-example.component';
+import { ListSectionExampleComponent } from './list-example/tns-list-examples/list-section-example/list-section-example.component';
+import { ListCustomCellLinesExampleComponent } from './list-example/tns-list-examples/list-custom-cell-lines-example/list-custom-cell-lines-example.component';
 
 export const routes: Routes = [
     {
@@ -22,7 +24,20 @@ export const routes: Routes = [
     },
     {
         path: 'list',
-        component: ListExampleComponent
+        children: [
+            {
+                path: '',
+                component: ListExampleComponent,
+            },
+            {
+                path: 'section',
+                component: ListSectionExampleComponent,
+            },
+            {
+                path: 'custom',
+                component: ListCustomCellLinesExampleComponent,
+            }
+        ]
     },
     {
         path: 'chart',

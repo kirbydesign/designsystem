@@ -55,19 +55,17 @@ export class ListCellComponent implements OnInit {
 
   /*
   getWidth(): string {
-    if (
-      this.width && this.width > 0
-    ) {
+    if (this.width && this.width > 0) {
       return `${this.width * 100}%`;
     }
     console.warn(
       `Invalid value ${
         this.width
       } for width. Valid values numbers > 0. Defaulting to '${
-        this.widthDefault
+        this.defaultWidth
       }'`
     );
-    return '100%';
+    return `${this.defaultWidth * 100}%`;
   }
 
   getAlignItems(): string {
@@ -81,10 +79,10 @@ export class ListCellComponent implements OnInit {
       `Invalid value ${
         this.horisontalAlignment
       } for horisontalAlignment. Valid values are 'left', 'center', 'right'. Defaulting to '${
-        this.horisontalAlignmentDefault
+        this.defaultHorisontalAlignment
       }'`
     );
-    return horisontalAlignmentEnum[this.horisontalAlignmentDefault];
+    return horisontalAlignmentEnum[this.defaultHorisontalAlignment];
   }
 
   getJustifyContent(): string {
@@ -98,10 +96,16 @@ export class ListCellComponent implements OnInit {
       `Invalid value ${
         this.verticalAlignment
       } for verticalAlignment. Valid values are 'top', 'center', 'bottom'. Defaulting to '${
-        this.verticalAlignmentDefault
+        this.defaultVerticalAlignment
       }'`
     );
-    return verticalAlignmentEnum[this.verticalAlignmentDefault];
+    return verticalAlignmentEnum[this.defaultVerticalAlignment];
+  }
+
+  private setStyle() {
+    this._flexBasisHost = this.getWidth();
+    this._flexAlignHost = this.getAlignItems();
+    this._flexJustifyHost = this.getJustifyContent();
   }
   */
 }

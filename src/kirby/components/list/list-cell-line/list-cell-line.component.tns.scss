@@ -1,9 +1,11 @@
+@import '../../../scss/web-imports';
+
 Label {
-  font-size: 13;
-  font-weight: 200;
+  font-size: font-size('xs');
+  font-weight: font-weight('light');
 
   &.primary {
-    font-size: 17;
-    font-weight: 200;
+    font-size: font-size('n');
+    font-weight: font-weight('light');
   }
 }

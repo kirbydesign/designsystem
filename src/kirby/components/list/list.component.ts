@@ -48,8 +48,8 @@ export interface KirbyCellHeader {
 })
 export class ListComponent implements OnInit, AfterContentInit {
   @Input() items: any[];
-  @Output() itemSelect = new EventEmitter<any>();
   @Input() getSectionName?: (item: any) => string;
+  @Output() itemSelect = new EventEmitter<any>();
 
   // The first element that matches ListItemDirective. As a structural directive it unfolds into a template. This is a reference to that.
   @ContentChild(ListItemDirective, { read: TemplateRef }) listItemTemplate;
@@ -62,6 +62,7 @@ export class ListComponent implements OnInit, AfterContentInit {
   headerTemplate: ViewContainerRef;
 
   isSectionsEnabled: boolean;
+  isSelectable: boolean;
 
   constructor(private _componentFactoryResolver: ComponentFactoryResolver) {}
 
@@ -197,6 +198,7 @@ export class ListComponent implements OnInit, AfterContentInit {
       const keyIndex = attr.indexOf(attrName);
       return attr.length >= keyIndex + 2 ? attr[keyIndex + 1] : '';
     }
+    this.isSelectable = this.itemSelect.observers.length > 0;
   }
 
   onItemClick(row: any): void {

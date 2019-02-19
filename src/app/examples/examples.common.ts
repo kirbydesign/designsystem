@@ -13,5 +13,5 @@ export const COMPONENT_DECLARATIONS: any[] = [
   GridExampleComponent,
   AvatarExampleComponent,
   ChartExampleComponent,
-  FontsExampleComponent,
+  FontsExampleComponent
 ];
