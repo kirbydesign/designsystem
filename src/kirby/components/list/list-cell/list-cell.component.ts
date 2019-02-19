@@ -1,9 +1,4 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  HostBinding,
-} from '@angular/core';
+import { Component, OnInit, Input, HostBinding } from '@angular/core';
 
 enum verticalAlignmentEnum {
   top = 'flex-start',
@@ -28,7 +23,8 @@ export class ListCellComponent implements OnInit {
   private readonly verticalAlignmentDefault: verticalAlignment = 'center';
   private readonly widthDefault = 1;
 
-  @Input() horisontalAlignment: horisontalAlignment = this.horisontalAlignmentDefault;
+  @Input() horisontalAlignment: horisontalAlignment = this
+    .horisontalAlignmentDefault;
   @Input() verticalAlignment: verticalAlignment = this.verticalAlignmentDefault;
   @Input() width = this.widthDefault;
 
@@ -52,9 +48,7 @@ export class ListCellComponent implements OnInit {
   }
 
   getWidth(): string {
-    if (
-      this.width && this.width > 0
-    ) {
+    if (this.width && this.width > 0) {
       return `${this.width * 100}%`;
     }
     console.warn(
