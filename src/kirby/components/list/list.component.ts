@@ -101,7 +101,7 @@ export class ListComponent implements OnInit, AfterContentInit {
     const headers: KirbyCellHeader[] = [];
     const listCellElements = this.getListCellElements();
     listCellElements.forEach((cellEl, index) => {
-      const headerData = this.getHeaderData(cellEl, index);
+      const headerData = this.getDataFromElement(cellEl, index);
       if (headerData) {
         headers.push(headerData);
       }
@@ -142,6 +142,7 @@ export class ListComponent implements OnInit, AfterContentInit {
     });
     return listCells;
   }
+
   private getListCellElement(templateNodes: any[]): any {
     for (const node of templateNodes) {
       if (node.element && node.element.name === 'kirby-list-cell') {
