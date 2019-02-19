@@ -13,9 +13,10 @@ import {
   AfterContentInit,
   ComponentFactoryResolver,
   ViewContainerRef,
-  ComponentRef
+  ComponentRef,
 } from '@angular/core';
 import { ListHeaderComponent } from './list-header/list-header.component';
+import { horisontalAlignment } from './service/list-format.service';
 
 @Directive({
   selector: '[kirbyListItem]'
@@ -34,9 +35,10 @@ export class ListSectionHeaderDirective {}
 
 export interface KirbyCellHeader {
   text?: string;
-  width?: string;
-  horisontalAlignment?: string;
-  verticalAlignment?: string;
+  width?: number;
+  size?: number;
+  horisontalAlignment?: horisontalAlignment;
+  index: number;
 }
 
 @Component({
@@ -78,18 +80,47 @@ export class ListComponent implements OnInit, AfterContentInit {
     this.addColumnHeaders();
   }
 
-  private addColumnHeaders() {
-    const headerComponentRef = this.createHeaderComponent();
 
-    this.listCellTemplates.forEach(template => {
-      const templateNodes: any[] = template._def.element.template.nodes;
-      const listCellElement = this.getListCellElement(templateNodes);
-      const header = this.getHeader(listCellElement);
-      if (header) {
-        headerComponentRef.instance.text = header.text;
+
+  private addColumnHeaders() {
+    const headersData = this.getHeadersData();
+    if (headersData) {
+      for (let index = 0; index < this.listCellTemplates.length; index++) {
+        const headerData = this.getHeader(headersData, index);
+        const headerComponentRef = this.createHeaderComponent();
+        headerComponentRef.instance.text = headerData.text;
+        headerComponentRef.instance.width = headerData.width;
+        headerComponentRef.instance.size = headerData.size;
+        headerComponentRef.instance.horisontalAlignment =
+          headerData.horisontalAlignment;
         this.headerTemplate.insert(headerComponentRef.hostView);
       }
+    }
+  }
+
+  private getHeadersData(): KirbyCellHeader[] {
+    const headers: KirbyCellHeader[] = [];
+    this.listCellTemplates.forEach((template, index) => {
+      const templateNodes: any[] = template._def.element.template.nodes;
+      const listCellElement = this.getListCellElement(templateNodes);
+      const headerData = this.getHeaderData(listCellElement, index);
+      if (headerData) {
+        headers.push(headerData);
+      }
     });
+    return headers;
+  }
+
+  private getHeader(
+    headersData: KirbyCellHeader[],
+    index: number
+  ): KirbyCellHeader {
+    for (const data of headersData) {
+      if (index === data.index) {
+        return data;
+      }
+    }
+    return { index: index };
   }
 
   private createHeaderComponent(): ComponentRef<ListHeaderComponent> {
@@ -111,19 +142,19 @@ export class ListComponent implements OnInit, AfterContentInit {
     return null;
   }
 
-  private getHeader(listCellElement: any): KirbyCellHeader {
+  private getHeaderData(listCellElement: any, index: number): KirbyCellHeader {
     if (listCellElement && listCellElement.element) {
-      const header: KirbyCellHeader = {};
+      const header: KirbyCellHeader = { index: index };
       const headerAttr = this.getAttribute(
         listCellElement.element.attrs,
         'header'
       );
       if (headerAttr) {
         header.text = this.getAttributeValue(headerAttr, 'header');
-
+        header.index = index;
         this.setValueOnHeader(header, listCellElement, 'width');
         this.setValueOnHeader(header, listCellElement, 'horisontalAlignment');
-        this.setValueOnHeader(header, listCellElement, 'verticalAlignment');
+        this.setValueOnHeader(header, listCellElement, 'size');
 
         return header;
       }

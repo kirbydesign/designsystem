@@ -4,19 +4,21 @@ import {
   Input,
   HostBinding,
 } from '@angular/core';
+import { ListFormatService, horisontalAlignment, verticalAlignment } from '../service/list-format.service';
+import { widthProperty } from 'tns-core-modules/ui/page/page';
 
-enum verticalAlignmentEnum {
-  top = 'flex-start',
-  center = 'center',
-  bottom = 'flex-end'
-}
-enum horisontalAlignmentEnum {
-  left = 'flex-start',
-  center = 'center',
-  right = 'flex-end'
-}
-type horisontalAlignment = 'left' | 'center' | 'right';
-type verticalAlignment = 'top' | 'center' | 'bottom';
+// enum verticalAlignmentEnum {
+//   top = 'flex-start',
+//   center = 'center',
+//   bottom = 'flex-end'
+// }
+// enum horisontalAlignmentEnum {
+//   left = 'flex-start',
+//   center = 'center',
+//   right = 'flex-end'
+// }
+// export type horisontalAlignment = 'left' | 'center' | 'right';
+// export type verticalAlignment = 'top' | 'center' | 'bottom';
 
 @Component({
   selector: 'kirby-list-cell',
@@ -24,14 +26,13 @@ type verticalAlignment = 'top' | 'center' | 'bottom';
   styleUrls: ['./list-cell.component.scss']
 })
 export class ListCellComponent implements OnInit {
-  private readonly horisontalAlignmentDefault: horisontalAlignment = 'left';
-  private readonly verticalAlignmentDefault: verticalAlignment = 'center';
-  private readonly widthDefault = 1;
 
-  @Input() horisontalAlignment: horisontalAlignment = this.horisontalAlignmentDefault;
-  @Input() verticalAlignment: verticalAlignment = this.verticalAlignmentDefault;
-  @Input() width = this.widthDefault;
+
+  @Input() horisontalAlignment: horisontalAlignment;
+  @Input() verticalAlignment: verticalAlignment;
+  @Input() width;
   @Input() header: string;
+  @Input() headerSize: number;
 
   @HostBinding('style.flex-basis')
   private _flexBasisHost: string;
@@ -40,18 +41,19 @@ export class ListCellComponent implements OnInit {
   @HostBinding('style.justify-content')
   private _flexJustifyHost: string;
 
-  constructor() {}
+  constructor(public listFormatService: ListFormatService) {}
 
   ngOnInit() {
     this.setStyle();
   }
 
   private setStyle() {
-    this._flexBasisHost = this.getWidth();
-    this._flexAlignHost = this.getAlignItems();
-    this._flexJustifyHost = this.getJustifyContent();
+    this._flexBasisHost = this.listFormatService.getWidth(this.width)  ;
+    this._flexAlignHost = this.listFormatService.getHorisontalAlignment(this.horisontalAlignment);
+    this._flexJustifyHost = this.listFormatService.getVerticalAlignment(this.verticalAlignment);
   }
 
+  /*
   getWidth(): string {
     if (
       this.width && this.width > 0
@@ -101,4 +103,5 @@ export class ListCellComponent implements OnInit {
     );
     return verticalAlignmentEnum[this.verticalAlignmentDefault];
   }
+  */
 }
