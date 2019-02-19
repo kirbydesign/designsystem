@@ -9,24 +9,21 @@ import { NativeScriptDoughnutChartExampleComponent } from './nativescript-only/d
 import { NativeScriptLineChartExampleComponent } from './nativescript-only/line-chart-example/line-chart-example.component.tns-only';
 // tslint:disable-next-line:max-line-length
 import { ListSectionExampleComponent } from '~/app/examples/list-example/tns-list-examples/list-section-example/list-section-example.component';
+// tslint:disable-next-line:max-line-length
 import { ListCustomCellLinesExampleComponent } from '~/app/examples/list-example/tns-list-examples/list-custom-cell-lines-example/list-custom-cell-lines-example.component';
 
 const nativeScriptDeclarations = [
-    ...COMPONENT_DECLARATIONS,
-    NativeScriptDoughnutChartExampleComponent,
-    NativeScriptLineChartExampleComponent,
-    ListSectionExampleComponent,
-    ListCustomCellLinesExampleComponent,
+  ...COMPONENT_DECLARATIONS,
+  NativeScriptDoughnutChartExampleComponent,
+  NativeScriptLineChartExampleComponent,
+  ListSectionExampleComponent,
+  ListCustomCellLinesExampleComponent
 ];
 
 @NgModule({
-    imports: [
-        NativeScriptCommonModule,
-        KirbyModule
-    ],
-    declarations: nativeScriptDeclarations,
-    exports: nativeScriptDeclarations,
-    schemas: [NO_ERRORS_SCHEMA]
+  imports: [NativeScriptCommonModule, KirbyModule],
+  declarations: nativeScriptDeclarations,
+  exports: nativeScriptDeclarations,
+  schemas: [NO_ERRORS_SCHEMA]
 })
-export class ExamplesModule {
-}
+export class ExamplesModule {}

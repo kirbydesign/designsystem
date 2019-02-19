@@ -23,10 +23,10 @@ describe('ListCellComponent', () => {
   });
 
   describe('width', () => {
-    it('should be initialized', () => {
-      const expected = 1;
+    it('should have initial value', () => {
+      const expected = '100%';
 
-      expect(component.width).toBe(expected);
+      expect(component.getWidth()).toBe(expected);
     });
 
     it('should be transformed to percentage', () => {
@@ -65,8 +65,10 @@ describe('ListCellComponent', () => {
   });
 
   describe('horisontalAlignment', () => {
-    it('should be initialized', () => {
-      expect(component.horisontalAlignment).toBe('left');
+    it('should have initial value', () => {
+      const expected = 'flex-start';
+
+      expect(component.getAlignItems()).toBe(expected);
     });
 
     it('left should be transformed to flex-start', () => {
@@ -102,7 +104,7 @@ describe('ListCellComponent', () => {
     it('should be initialized', () => {
       const expected = 'center';
 
-      expect(component.verticalAlignment).toBe(expected);
+      expect(component.getJustifyContent()).toBe(expected);
     });
 
     it('top should be transformed to flex-start', () => {
