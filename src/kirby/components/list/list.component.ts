@@ -75,6 +75,7 @@ export class ListComponent implements OnInit, AfterContentInit {
         'kirbyListItem is deprecated and will be removed in future versions of Kirby'
       );
     }
+    this.isSelectable = this.itemSelect.observers.length > 0;
   }
 
   ngAfterContentInit() {
@@ -194,8 +195,6 @@ export class ListComponent implements OnInit, AfterContentInit {
       return attr.length >= keyIndex + 2 ? attr[keyIndex + 1] : '';
     }
     return null;
-    // TODO what is this???
-    this.isSelectable = this.itemSelect.observers.length > 0;
   }
 
   onItemClick(row: any): void {
