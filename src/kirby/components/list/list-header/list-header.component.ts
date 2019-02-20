@@ -29,12 +29,4 @@ export class ListHeaderComponent implements OnInit {
     this._flexAlignHost = this.listFormatService.getHorisontalAlignment(this.horisontalAlignment);
   }
 
-  get headerTag() {
-    return `h${this.size}`;
-  }
-
-  get header() {
-    return `<h${this.size}>${this.text}</h${this.size}>`;
-  }
-
 }

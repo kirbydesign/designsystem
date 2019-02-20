@@ -149,15 +149,15 @@ export class ListComponent implements OnInit, AfterContentInit {
         listCellElement,
         'header'
       );
+      header.width = Number(
+        this.getAttributeValueFromElement(listCellElement, 'width')
+      );
       if (header.text) {
         header.horisontalAlignment = <horisontalAlignment>(
           this.getAttributeValueFromElement(
             listCellElement,
             'horisontalAlignment'
           )
-        );
-        header.width = Number(
-          this.getAttributeValueFromElement(listCellElement, 'width')
         );
         header.size = Number(
           this.getAttributeValueFromElement(listCellElement, 'headerSize')
