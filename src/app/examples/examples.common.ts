@@ -8,6 +8,7 @@ import { FontsExampleComponent } from './fonts-example/fonts-example.component';
 import { ListSectionExampleComponent } from './list-example/tns-list-examples/list-section-example/list-section-example.component';
 // tslint:disable-next-line:max-line-length
 import { ListCustomCellLinesExampleComponent } from './list-example/tns-list-examples/list-custom-cell-lines-example/list-custom-cell-lines-example.component';
+import { ListOriginalExampleComponent } from './list-example/tns-list-examples/list-original-example/list-original-example.component';
 
 export const COMPONENT_DECLARATIONS: any[] = [
   ButtonExampleComponent,
@@ -18,5 +19,6 @@ export const COMPONENT_DECLARATIONS: any[] = [
   ChartExampleComponent,
   FontsExampleComponent,
   ListSectionExampleComponent,
-  ListCustomCellLinesExampleComponent
+  ListCustomCellLinesExampleComponent,
+  ListOriginalExampleComponent
 ];

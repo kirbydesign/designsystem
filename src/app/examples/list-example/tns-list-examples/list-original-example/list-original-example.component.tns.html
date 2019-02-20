@@ -1,0 +1,13 @@
+<kirby-list [items]="myItems" (itemSelect)="onItemSelect($event)">
+  <kirby-list-header
+    *kirbyListHeader
+    [left]="'Navn'"
+    [middle]="'Afkast ÅTD'"
+    [right]="'Værdi'"
+  ></kirby-list-header>
+  <kirby-list-item
+    *kirbyListItem="let item"
+    [title]="item.title"
+    [amount]="item.amount"
+  ></kirby-list-item>
+</kirby-list>
