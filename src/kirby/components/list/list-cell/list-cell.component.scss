@@ -1,8 +1,8 @@
-.cell {
-  height: 100%;
-  width: 100%;
-  display: flex;
+:host {
+  flex-grow: 0;
+  flex-shrink: 1;
   flex-direction: column;
+  display: flex;
   .line-one {
     font-size: 1.2em;
     font-weight: 200;

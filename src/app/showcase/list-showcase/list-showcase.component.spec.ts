@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ExamplesModule } from '../../examples/examples.module';
 import { HtmlViewerComponent } from '../../shared/html-viewer/html-viewer.component';
 import { ListShowcaseComponent } from './list-showcase.component';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('ListShowcaseComponent', () => {
   let component: ListShowcaseComponent;
@@ -10,7 +11,7 @@ describe('ListShowcaseComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ ExamplesModule ],
+      imports: [ ExamplesModule, RouterTestingModule ],
       declarations: [ ListShowcaseComponent, HtmlViewerComponent ]
     })
     .compileComponents();
