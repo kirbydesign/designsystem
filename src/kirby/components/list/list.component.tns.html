@@ -12,7 +12,7 @@
     row="{{ rowNumberForListView(headerTemplate) }}"
   >
     <ng-template tkListItemTemplate let-item="item">
-      <FlexboxLayout class="row" (tap)="onItemTap(item)">
+      <FlexboxLayout class="row" (tap)="onItemTap(item)" [style.height]="rowHeightTNS">
         <ng-container
           *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }"
         >

@@ -41,6 +41,7 @@ export class ListComponent implements OnInit {
 
   @Input() items: any[];
   @Input() getSectionName?: (item: any) => string;
+  @Input() rowHeightTNS = 'auto';
   @Output() itemSelect = new EventEmitter<any>();
 
   // The first element that matches ListItemDirective. As a structural directive it unfolds into a template. This is a reference to that.
