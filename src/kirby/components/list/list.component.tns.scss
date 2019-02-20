@@ -1,4 +1,5 @@
 @import "../../scss/native-imports";
+$list-item-height: 44;
 
 .row {
   padding: size('gutter') size('gutter-small') size('gutter') size('gutter-small');
@@ -6,4 +7,5 @@
   flex-direction: row;
   border-color: get-color('kirby-background');;
   border-width: 0 0 1 0;
+  height: $list-item-height;
 }
