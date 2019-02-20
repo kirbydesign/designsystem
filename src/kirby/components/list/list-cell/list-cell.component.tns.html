@@ -1,10 +1,8 @@
 <FlexboxLayout
   class="cell"
-  [justifyContent]="alignVertical"
-  [alignItems]="alignHorisontal"
-  [flexGrow]="flexGrow"
+  [justifyContent]="getJustifyContent()"
+  [alignItems]="getAlignItems()"
+  [width]="getWidth()"
 >
-  <Label text="{{ lineOne }}" class="line-one" *ngIf="lineOne"></Label>
-  <Label text="{{ lineTwo }}" class="line-two" *ngIf="lineTwo"></Label>
-  <Label text="{{ lineThree }}" class="line-three" *ngIf="lineThree"></Label>
+  <ng-content></ng-content>
 </FlexboxLayout>

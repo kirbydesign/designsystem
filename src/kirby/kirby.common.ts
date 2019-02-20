@@ -20,6 +20,7 @@ import { ListSectionHeaderComponent } from './components/list/list-section-heade
 import { ListHeaderComponent } from './components/list/list-header/list-header.component';
 import { ListCellComponent } from './components/list/list-cell/list-cell.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
+import { ListCellLineComponent } from '~/kirby/components/list/list-cell-line/list-cell-line.component';
 
 export const declarations = [
   CardComponent,
@@ -31,6 +32,7 @@ export const declarations = [
   ListItemComponent,
   ListCellComponent,
   ListCellDirective,
+  ListCellLineComponent,
   ListSectionHeaderComponent,
   ListSectionHeaderDirective,
   ListHeaderDirective,
