@@ -11,6 +11,7 @@ import { DoughnutChartShowcaseComponent } from './doughnut-chart-showcase/doughn
 import { FontsShowcaseComponent } from './fonts-showcase/fonts-showcase.component';
 import { ColorsShowcaseComponent } from './colors-showcase/colors-showcase.component';
 import { ProgressBarComponent } from '~/kirby/components/progress-bar/progress-bar.component';
+import { ProgressBarShowcaseComponent } from './progress-bar-showcase/progress-bar-showcase.component';
 
 export const routes: Routes = [
     {
@@ -65,7 +66,7 @@ export const routes: Routes = [
             },
             {
                 path: 'progress-bar',
-                component: ProgressBarComponent
+                component: ProgressBarShowcaseComponent
             }
         ]
     },
