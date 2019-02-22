@@ -13,12 +13,12 @@ $bar-height: size('m');
         height: $bar-height;
         .empty-progress {
             height: $bar-height;
-            background-color: lightcyan;
+            background-color: get-color('kirby-primary-lighter');
         }
 
         .progress {
             height: $bar-height;
-            background-color: lightblue;
+            background-color: get-color('kirby-primary-light');
         }
     }
 }
