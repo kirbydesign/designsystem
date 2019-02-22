@@ -1,0 +1,24 @@
+
+@import "../../scss/native-imports";
+
+$bar-height: size('m');
+
+.bars-container {
+    width: 100%;
+    height: $bar-height;
+    margin: 0 5 0 5;
+    border-radius: 20;
+    .bar {
+        width: 100%;
+        height: $bar-height;
+        .empty-progress {
+            height: $bar-height;
+            background-color: lightcyan;
+        }
+
+        .progress {
+            height: $bar-height;
+            background-color: lightblue;
+        }
+    }
+}
