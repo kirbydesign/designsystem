@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'kirby-progress-bar',
@@ -7,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProgressBarComponent implements OnInit {
 
+  @Input() progress: number;
+
   constructor() { }
 
   ngOnInit() {
-    console.log("cols: ", this.columnNumberForProgressBar());
+    this.progress = 0;
   }
 
   columnNumberForProgressBar(): string {
