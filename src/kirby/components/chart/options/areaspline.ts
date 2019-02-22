@@ -29,8 +29,8 @@ export const AreaSplineOptions: Options = {
         style: {
             fontSize: '1.25rem'
         },
-        formatter: function () {
-            return this.y;
+        formatter: function (): string {
+            return String(this.y);
         },
         positioner: function () {
             return { x: (this.chart.plotSizeX / 2) - (this.label.width / 2), y: 0 };
@@ -85,6 +85,7 @@ export const AreaSplineOptions: Options = {
         }
     },
     series: [{
-        data: []
+        type: 'areaspline',
+        data: (this === undefined ? [] : this.data) as Array<Highcharts.SeriesAreasplineDataOptions>
     }]
 };

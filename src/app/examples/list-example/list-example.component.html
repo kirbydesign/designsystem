@@ -1,35 +1,112 @@
+<kirby-list [items]="myItems">
+  <kirby-list-cell
+    *kirbyListCell="let account"
+    width="2">
+    <kirby-list-cell-line [primary]="true" [text]="account.title"></kirby-list-cell-line>
+    <kirby-list-cell-line [text]="account.detail === 0 ? null : account.detail"></kirby-list-cell-line>
+  </kirby-list-cell>
+  <kirby-list-cell
+    *kirbyListCell="let account"
+    width="0.5"
+    horisontalAlignment="right">
+    <kirby-list-cell-line [primary]="true" [text]="account.subTitle"></kirby-list-cell-line>
+  </kirby-list-cell>
+  <kirby-list-cell
+    *kirbyListCell="let account"
+    verticalAlignment="center"
+    horisontalAlignment="right">
+    <kirby-list-cell-line [primary]="true" [text]="account.amount"></kirby-list-cell-line>
+  </kirby-list-cell>
+</kirby-list>
+
+<hr />
+
+<kirby-list
+  [items]="myItems"
+  (itemSelect)="onItemSelect($event)"
+  [getSectionName]="getSectionName">
+  <kirby-list-section-header
+    *kirbyListSectionHeader="let section"
+    [title]="section"
+  ></kirby-list-section-header>
+  <kirby-list-cell
+    *kirbyListCell="let item"
+    flexGrow="10">
+    <kirby-list-cell-line [primary]="true" [text]="item.title"></kirby-list-cell-line>
+    <kirby-list-cell-line [text]="item.detail"></kirby-list-cell-line>
+  </kirby-list-cell>
+  <kirby-list-cell
+    *kirbyListCell="let item"
+    flexGrow="1"
+    verticalAlignment="top"
+    horisontalAlignment="right">
+    <kirby-list-cell-line [primary]="true" [text]="item.amount"></kirby-list-cell-line>
+  </kirby-list-cell>
+</kirby-list>
+
+<hr />
+
 <kirby-list [items]="myItems" (itemSelect)="onItemSelect($event)">
-  <kirby-list-item *kirbyListItem="let item" [item]="item"></kirby-list-item>
+  <kirby-list-cell
+    *kirbyListCell="let item"
+    flexGrow="10">
+    <kirby-list-cell-line [primary]="true" [text]="item.title"></kirby-list-cell-line>
+    <kirby-list-cell-line [text]="item.detail"></kirby-list-cell-line>
+  </kirby-list-cell>
+  <!-- you can make custom cells using the kirbyListCell directive -->
+  <div *kirbyListCell="let item">custom cell {{ item.subTitle }}</div>
+  <kirby-list-cell
+    *kirbyListCell="let item"
+    flexGrow="1"
+    verticalAlignment="top"
+    horisontalAlignment="right">
+    <kirby-list-cell-line [primary]="true" [text]="item.amount"></kirby-list-cell-line>
+  </kirby-list-cell>
 </kirby-list>
 
-<hr>
+<hr />
 
 <kirby-list [items]="myItems" (itemSelect)="onItemSelect($event)">
-  <kirby-list-item *kirbyListItem="let item" [title]="item.title" [amount]="item.amount"></kirby-list-item>
+  <kirby-list-header
+    *kirbyListHeader
+    [left]="'Navn'"
+    [middle]="'Afkast ÅTD'"
+    [right]="'Værdi'"
+  ></kirby-list-header>
+  <kirby-list-item
+    *kirbyListItem="let item"
+    [title]="item.title"
+    [amount]="item.amount"
+  ></kirby-list-item>
 </kirby-list>
 
-<hr>
+<hr />
 
 <kirby-list [items]="myItems" (itemSelect)="onItemSelect($event)">
-  <kirby-list-header *kirbyListHeader [left]="'Left'" [middle]="'Middle'" [right]="'Right'"></kirby-list-header>
-  <kirby-list-item *kirbyListItem="let item" [title]="item.title" [amount]="item.amount" [detail]="item.detail"></kirby-list-item>
+  <kirby-list-header
+          *kirbyListHeader
+          [left]="'Navn'"
+          [middle]="''"
+          [right]="'Værdi'"
+  ></kirby-list-header>
+
+  <!-- Cells can also take arbitrary markup (client specific) as cell-lines -->
+  <kirby-list-cell
+          *kirbyListCell="let item"
+          flexGrow="10">
+    <section style="flex-direction: row; display: flex;">
+      <kirby-avatar [imageSrc]="imageSrc" [size]="'small'"></kirby-avatar>
+      <div style="margin-left: 10px; flex-direction: column; display: flex;">
+        <kirby-list-cell-line [primary]="true" [text]="item.title"></kirby-list-cell-line>
+        <kirby-list-cell-line [text]="item.detail"></kirby-list-cell-line>
+      </div>
+    </section>
+  </kirby-list-cell>
+
+  <kirby-list-cell
+          *kirbyListCell="let item"
+          verticalAlignment="top"
+          horisontalAlignment="right">
+    <kirby-list-cell-line [primary]="true" [text]="item.amount"></kirby-list-cell-line>
+  </kirby-list-cell>
 </kirby-list>
-
-<hr> 
-
-<kirby-list [items]="myItems" [getSectionName]="getSectionName" (itemSelect)="onItemSelect($event)">
-  <kirby-list-header *kirbyListHeader [left]="'Navn'" [middle]="'Afkast ÅTD'" [right]="'Værdi'"></kirby-list-header>
-  <kirby-list-section-header *kirbyListSectionHeader="let section" [title]="section"></kirby-list-section-header>
-  <kirby-list-item *kirbyListItem="let item" [item]="item"></kirby-list-item>
-</kirby-list>
-
-<hr>
-
-<!-- If you wish to use your own template, just add the *kirbyListItem="let item" to the element -->
-
-<kirby-list [items]="myItems" (itemSelect)="onItemSelect($event)">
-  <ng-container *kirbyListItem="let item">
-    <span>{{item.title}}</span>
-  </ng-container>
-</kirby-list>
-

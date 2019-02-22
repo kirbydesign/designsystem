@@ -43,35 +43,50 @@ export class ChartComponent implements OnInit, OnChanges {
   }
 
   setupChartType() {
-    let pieInnerCircleSize = '0%';
-    if (this.type === ChartType.DONUT) {
-      this.type = ChartType.PIE;
-      pieInnerCircleSize = '50%';
-    }
     switch (this.type) {
+      case ChartType.DONUT: {
+        this.options = this.donutOptions;
+        this.options.chart.type = ChartType.PIE;
+        this.options.plotOptions.pie.innerSize = '50%';
+        break;
+      }
       case ChartType.PIE: {
         this.options = this.donutOptions;
-        this.options.plotOptions.pie.innerSize = pieInnerCircleSize;
+        this.options.chart.type = this.type;
+        this.options.plotOptions.pie.innerSize = '0%';
         break;
       }
       case ChartType.AREASPLINE: {
         this.options = this.areasplineOptions;
+        this.options.chart.type = this.type;
         break;
       }
     }
-    this.options.chart.type = this.type;
   }
 
   updateProperties() {
     if (this.options.chart) {
       this.options.chart.height = this.height;
-      this.options.series[0].data = this.data;
       this.options.chart.description = this.description;
-      if (this.options.chart.type === ChartType.PIE) {
-        this.options.plotOptions.pie.dataLabels.enabled = this.showDataLabels;
+      switch (this.options.chart.type) {
+        case ChartType.PIE:
+          this.options.plotOptions.pie.dataLabels.enabled = this.showDataLabels;
+          /* falls through */
+        case ChartType.DONUT: {
+          this.options.series = [{
+            type: 'pie',
+            data: this.data as Array<Highcharts.SeriesPieDataOptions>
+          }];
+          break;
+        }
+        case ChartType.AREASPLINE: {
+          this.options.series = [{
+            type: 'areaspline',
+            data: this.data as Array<Highcharts.SeriesAreasplineDataOptions>
+          }];
+          break;
+        }
       }
     }
-
   }
-
 }

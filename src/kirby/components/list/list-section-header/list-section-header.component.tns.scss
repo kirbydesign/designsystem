@@ -1,1 +1,10 @@
-/* Add mobile styles for the component here.  */
+@import "../../../scss/native-imports";
+
+.header {
+  padding: 0 size('gutter') 0 size('gutter');
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
