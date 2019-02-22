@@ -1,8 +1,8 @@
 <AbsoluteLayout class="bars-container" backgroundColor="lightgray">
-    <GridLayout class="bar" left="0" top="0" rows="*" columns="*, *, *, *, *, *, *, *, *, *">
-        <Label class="empty-progress" row="0" col="0" colSpan="10"></Label>
+    <GridLayout class="bar" left="0" top="0" rows="*" columns="*">
+        <Label class="empty-progress" row="0" col="0"></Label>
     </GridLayout>
-    <GridLayout class="bar" left="0" top="0" rows="*" columns="*, *, *, *, *, *, *, *, *, *">
+    <GridLayout class="bar" left="0" top="0" rows="*" [columns]="columnNumberForProgressBar()">
         <Label class="progress" row="0" col="0" colSpan="3"></Label>
     </GridLayout>
 </AbsoluteLayout>

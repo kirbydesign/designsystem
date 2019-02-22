@@ -10,6 +10,15 @@ export class ProgressBarComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log("cols: ", this.columnNumberForProgressBar());
+  }
+
+  columnNumberForProgressBar(): string {
+    let number = "*";
+    for (let index = 0; index < 99; index++) {
+      number += ", *";
+    }
+    return number;
   }
 
 }
