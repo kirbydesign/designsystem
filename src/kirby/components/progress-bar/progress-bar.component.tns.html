@@ -3,6 +3,15 @@
         <Label class="empty-progress" row="0" col="0"></Label>
     </GridLayout>
     <GridLayout class="bar" *ngIf="progress !== 0" left="0" top="0" rows="*" [columns]="columnNumberForProgressBar()">
-        <Label class="progress" row="0" col="0" [colSpan]="progress"></Label>
+        <Label class="progress" [backgroundColor]="progressColour" *ngIf="progressColour else defaultProgressColour" row="0" col="0" [colSpan]="progress"></Label>
     </GridLayout>
 </AbsoluteLayout>
+
+
+<ng-template #defaultProgressColour>
+        <Label class="progress" row="0" col="0" [colSpan]="progress"></Label>
+</ng-template>
+
+<ng-template #defaultBackgroundcolour> 
+
+</ng-template>

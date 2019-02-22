@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Label } from 'tns-core-modules/ui/label/label';
 
 @Component({
   selector: 'kirby-progress-bar',
@@ -8,11 +9,14 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ProgressBarComponent implements OnInit {
 
   @Input() progress: number;
+  @Input() progressColour: string;
+  @Input() backgroundColour: string;
+
+  // @ViewChild('progress') progressLabel: Label;
 
   constructor() { }
 
   ngOnInit() {
-    this.progress = 0;
   }
 
   columnNumberForProgressBar(): string {
