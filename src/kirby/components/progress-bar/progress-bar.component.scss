@@ -1,0 +1,22 @@
+.bar-container {
+    position: relative;
+    
+    width: 300px;
+    height: 20px;
+}
+
+.bar {
+    position: absolute;
+}
+
+.green {
+    background-color: green;
+    width: 300px;
+    height: 20px;
+}
+
+.red {
+    background-color: red;
+    width: 100px;
+    height: 20px;
+}
