@@ -9,10 +9,8 @@ import { Label } from 'tns-core-modules/ui/label/label';
 export class ProgressBarComponent implements OnInit {
 
   @Input() progress: number;
-  @Input() progressColour: string;
-  @Input() backgroundColour: string;
-
-  // @ViewChild('progress') progressLabel: Label;
+  @Input() progressColor: string;
+  @Input() backgroundColor: string;
 
   constructor() { }
 
