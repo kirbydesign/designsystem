@@ -7,7 +7,7 @@
     </FlexboxLayout>
   </ng-container>
   <RadListView
-    loadOnDemandMode="{{myLoadOnDemandModeMethod()}}"
+    loadOnDemandMode="Auto"
     (loadMoreDataRequested)="onLoadMoreItemsRequested($event)"
     [groupingFunction]="getSectionName"
     [items]="items"

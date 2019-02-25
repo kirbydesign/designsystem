@@ -23,4 +23,5 @@ export class ListExampleComponent extends BaseListComponent {
   goTo(url) {
     this.router.navigateByUrl(url);
   }
+
 }

@@ -1,4 +1,4 @@
-<kirby-list [items]="myItems">
+<kirby-list [items]="myObservableItems">
   <kirby-list-cell
     *kirbyListCell="let account"
     width="2">
@@ -22,7 +22,7 @@
 <hr />
 
 <kirby-list
-  [items]="myItems"
+  [items]="myObservableItems"
   (itemSelect)="onItemSelect($event)"
   [getSectionName]="getSectionName">
   <kirby-list-section-header
@@ -46,7 +46,7 @@
 
 <hr />
 
-<kirby-list [items]="myItems" (itemSelect)="onItemSelect($event)">
+<kirby-list [items]="myObservableItems" (itemSelect)="onItemSelect($event)">
   <kirby-list-cell
     *kirbyListCell="let item"
     flexGrow="10">
@@ -66,7 +66,7 @@
 
 <hr />
 
-<kirby-list [items]="myItems" (itemSelect)="onItemSelect($event)">
+<kirby-list [items]="myObservableItems" (itemSelect)="onItemSelect($event)">
   <kirby-list-header
     *kirbyListHeader
     [left]="'Navn'"
@@ -82,7 +82,7 @@
 
 <hr />
 
-<kirby-list [items]="myItems" (itemSelect)="onItemSelect($event)">
+<kirby-list [items]="myObservableItems" (itemSelect)="onItemSelect($event)">
   <kirby-list-header
           *kirbyListHeader
           [left]="'Navn'"

@@ -11,26 +11,31 @@ import {
   TemplateRef
 } from '@angular/core';
 import { LoadOnDemandListViewEventData, RadListView } from 'nativescript-ui-listview/ui-listview.common';
+import { isObservable, Observable } from "rxjs";
 
 @Directive({
   selector: '[kirbyListItem]'
 })
-export class ListItemDirective { }
+export class ListItemDirective {
+}
 
 @Directive({
   selector: '[kirbyListHeader]'
 })
-export class ListHeaderDirective { }
+export class ListHeaderDirective {
+}
 
 @Directive({
   selector: '[kirbyListCell]'
 })
-export class ListCellDirective { }
+export class ListCellDirective {
+}
 
 @Directive({
   selector: '[kirbyListSectionHeader]'
 })
-export class ListSectionHeaderDirective {}
+export class ListSectionHeaderDirective {
+}
 
 @Component({
   selector: 'kirby-list',
@@ -39,21 +44,23 @@ export class ListSectionHeaderDirective {}
 })
 export class ListComponent implements OnInit {
 
-  @Input() myLoadOnDemandMode: string;
-  @Input() items: any[];
+  // @Input() items: any[] | Observable<any[]>;
+  @Input() items: Observable<any[]>;
   @Input() getSectionName?: (item: any) => string;
+  @Input() onLoadMoreItems?: () => void;
   @Output() itemSelect = new EventEmitter<any>();
 
   // The first element that matches ListItemDirective. As a structural directive it unfolds into a template. This is a reference to that.
   @ContentChild(ListItemDirective, {read: TemplateRef}) listItemTemplate;
   @ContentChild(ListHeaderDirective, {read: TemplateRef}) headerTemplate;
   @ContentChild(ListSectionHeaderDirective, {read: TemplateRef}) sectionHeaderTemplate;
-  @ContentChildren(ListCellDirective, { read: TemplateRef }) listCellTemplates: QueryList<any>;
+  @ContentChildren(ListCellDirective, {read: TemplateRef}) listCellTemplates: QueryList<any>;
 
   isSectionsEnabled: boolean;
   isSelectable: boolean;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
     if (this.getSectionName) {
@@ -62,8 +69,12 @@ export class ListComponent implements OnInit {
     if (this.listItemTemplate) {
       console.warn('kirbyListItem is deprecated and will be removed in future versions of Kirby');
     }
+    if (this.onLoadMoreItems) {
+      if (!isObservable(this.items)) {
+        console.warn('Load more function demands the items to be an observable');
+      }
+    }
     this.isSelectable = this.itemSelect.observers.length > 0;
-    this.myLoadOnDemandMode = 'Auto';
   }
 
   onItemClick(row: any): void {
@@ -75,33 +86,27 @@ export class ListComponent implements OnInit {
   }
 
   rowDefinition(headerTemplate: any): string {
-    return headerTemplate ? 'auto,*' : '*' ;
+    return headerTemplate ? 'auto,*' : '*';
   }
 
   rowNumberForListView(headerTemplate: any): string {
     return headerTemplate ? '1' : '0';
   }
 
-  myLoadOnDemandModeMethod(): string {
-    return this.myLoadOnDemandMode;
-  }
-
-  public addMoreItemsFromSource(chunkSize: number) {
-    const newItems = [...this.items].splice(0, chunkSize);
-    this.items.push(newItems);
-  }
-
   onLoadMoreItemsRequested(args: LoadOnDemandListViewEventData) {
-    const that = new WeakRef(this);
     const listView: RadListView = args.object;
-    if (this.items.length > 0) {
-      setTimeout(function () {
-        that.get().addMoreItemsFromSource(4);
+    if (this.onLoadMoreItems) {
+      console.log('onLoadMore');
+      setTimeout(() => {
+        this.onLoadMoreItems();
         listView.notifyLoadOnDemandFinished();
-      }, 1500);
+      }, 2);
     } else {
+      console.log('onLoadMore else');
       args.returnValue = false;
       listView.notifyLoadOnDemandFinished(true);
     }
   }
+
+
 }

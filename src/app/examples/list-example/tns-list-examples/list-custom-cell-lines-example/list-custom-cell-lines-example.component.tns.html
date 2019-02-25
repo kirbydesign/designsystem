@@ -1,6 +1,6 @@
 <kirby-list
-        [myLoadOnDemandMode]="'Manual'"
-        [items]="myItems"
+        [onLoadMoreItems]="onLoadMoreItemsCallback"
+        [items]="myObservableItems"
         (itemSelect)="onItemSelect($event)">
 
     <kirby-list-header
