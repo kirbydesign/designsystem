@@ -1,5 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { Label } from 'tns-core-modules/ui/label/label';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'kirby-progress-bar',
