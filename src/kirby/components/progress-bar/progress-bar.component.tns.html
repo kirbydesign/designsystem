@@ -3,13 +3,13 @@
         <Label class="empty-progress" [backgroundColor]="backgroundColor" *ngIf="backgroundColor else defaultBackgroundColor" row="0" col="0"></Label>
     </GridLayout>
     <GridLayout class="bar" *ngIf="progress !== 0" left="0" top="0" rows="*" [columns]="columnNumberForProgressBar()">
-        <Label class="progress" [backgroundColor]="progressColor" *ngIf="progressColor else defaultProgressColor" row="0" col="0" [colSpan]="progress"></Label>
+        <Label class="progress" [ngClass]="{'large-progress': progress > 97, 'larger-progress': progress > 98, 'full-progress': progress > 99}" [backgroundColor]="progressColor" *ngIf="progressColor else defaultProgressColor" row="0" col="0" [colSpan]="progress"></Label>
     </GridLayout>
 </AbsoluteLayout>
 
 
 <ng-template #defaultProgressColor>
-        <Label class="progress" row="0" col="0" [colSpan]="progress"></Label>
+        <Label class="progress" [ngClass]="{'large-progress': progress > 97, 'larger-progress': progress > 98, 'full-progress': progress > 99}"  row="0" col="0" [colSpan]="progress"></Label>
 </ng-template>
 
 <ng-template #defaultBackgroundColor> 
