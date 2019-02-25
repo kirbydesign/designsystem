@@ -1,38 +1,36 @@
-/* Add mobile styles for the component here.  */
+@import "../../../scss/native-imports";
+
 .titles-container {
-    vertical-align: center;
+  vertical-align: center;
 }
 
 .amount-container {
-    vertical-align: center;
+  vertical-align: center;
 }
 
 .detail-container {
-    text-align: center;
-    vertical-align: center;
-}
-
-.list-item-title {
-    
+  text-align: center;
+  vertical-align: center;
 }
 
 .list-item-subTitle {
-    color: #a0a0a0
-    
+  color: #a0a0a0
 }
 
 .list-item-detail {
-    &.green {
-        color: lightgreen;
-    }
-    
-    &.red {
-        color: red;
-    }
+  &.green {
+    color: lightgreen;
+  }
+  &.red {
+    color: red;
+  }
 }
 
 .list-item-amount {
-    font-weight: bold;
-    horizontal-align:right;
+  font-weight: bold;
+  horizontal-align: right;
 }
 
+.list-item {
+  padding: 0 size('gutter-small') 0 size('gutter-small');
+}
