@@ -5,6 +5,7 @@
     <style name="AppTheme" parent="AppThemeBase">
         <item name="android:datePickerStyle">@style/SpinnerDatePicker</item>
         <item name="android:timePickerStyle">@style/SpinnerTimePicker</item>
+        <item name="android:textAllCaps">false</item>
     </style>
 
     <!-- Default style for DatePicker - in spinner mode -->

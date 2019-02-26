@@ -30,6 +30,7 @@
     </style>
 
     <style name="AppTheme" parent="AppThemeBase">
+        <item name="android:textAllCaps">false</item>
     </style>
 
     <!-- theme for action-bar -->

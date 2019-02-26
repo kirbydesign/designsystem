@@ -33,14 +33,12 @@
     [title]="section"
   ></kirby-list-section-header>
   <kirby-list-cell
-    *kirbyListCell="let item"
-    flexGrow="10">
+    *kirbyListCell="let item">
     <kirby-list-cell-line [primary]="true" [text]="item.title"></kirby-list-cell-line>
     <kirby-list-cell-line [text]="item.detail"></kirby-list-cell-line>
   </kirby-list-cell>
   <kirby-list-cell
     *kirbyListCell="let item"
-    flexGrow="1"
     verticalAlignment="top"
     horisontalAlignment="right">
     <kirby-list-cell-line [primary]="true" [text]="item.amount"></kirby-list-cell-line>
@@ -51,8 +49,7 @@
 
 <kirby-list [items]="myItems" (itemSelect)="onItemSelect($event)">
   <kirby-list-cell
-    *kirbyListCell="let item"
-    flexGrow="10">
+    *kirbyListCell="let item">
     <kirby-list-cell-line [primary]="true" [text]="item.title"></kirby-list-cell-line>
     <kirby-list-cell-line [text]="item.detail"></kirby-list-cell-line>
   </kirby-list-cell>
@@ -60,7 +57,6 @@
   <div *kirbyListCell="let item">custom cell {{ item.subTitle }}</div>
   <kirby-list-cell
     *kirbyListCell="let item"
-    flexGrow="1"
     verticalAlignment="top"
     horisontalAlignment="right">
     <kirby-list-cell-line [primary]="true" [text]="item.amount"></kirby-list-cell-line>
@@ -83,8 +79,7 @@
 
   <!-- Cells can also take arbitrary markup (client specific) as cell-lines -->
   <kirby-list-cell
-          *kirbyListCell="let item"
-          flexGrow="10">
+          *kirbyListCell="let item">
     <section style="flex-direction: row; display: flex;">
       <kirby-avatar [imageSrc]="imageSrc" [size]="'small'"></kirby-avatar>
       <div style="margin-left: 10px; flex-direction: column; display: flex;">
