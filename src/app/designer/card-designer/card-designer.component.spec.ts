@@ -10,10 +10,9 @@ describe('CardDesignerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ ExamplesModule, RouterTestingModule ],
-      declarations: [ CardDesignerComponent ]
-    })
-    .compileComponents();
+      imports: [ExamplesModule, RouterTestingModule],
+      declarations: [CardDesignerComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

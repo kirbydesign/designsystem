@@ -1,7 +1,6 @@
 import { GroupByPipe } from './group-by.pipe';
 
 describe('Pipe: GroupBy', () => {
-
   it('create an instance', () => {
     const pipe = new GroupByPipe();
     expect(pipe).toBeTruthy();
@@ -17,31 +16,31 @@ describe('Pipe: GroupBy', () => {
   });
 
   it('should section the list correctly', () => {
-      const callback = (item: any) => {
-        return item.property;
-      };
-      const collection = [
-        {
-          property: 'section 1',
-          dummyValue: 1
-        },
-        {
-          property: 'section 2',
-          dummyValue: 2
-        },
-        {
-          property: 'section 3',
-          dummyValue: 3
-        }
-      ];
-      const pipe = new GroupByPipe();
+    const callback = (item: any) => {
+      return item.property;
+    };
+    const collection = [
+      {
+        property: 'section 1',
+        dummyValue: 1,
+      },
+      {
+        property: 'section 2',
+        dummyValue: 2,
+      },
+      {
+        property: 'section 3',
+        dummyValue: 3,
+      },
+    ];
+    const pipe = new GroupByPipe();
 
-      const result = pipe.transform(collection, callback);
+    const result = pipe.transform(collection, callback);
 
-      expect(result.length).toBe(3);
-      result.forEach((section: any, index: number) => {
-        expect(section.items.length).toBe(1);
-        expect(section.items[0]).toEqual(collection[index]);
-      });
+    expect(result.length).toBe(3);
+    result.forEach((section: any, index: number) => {
+      expect(section.items.length).toBe(1);
+      expect(section.items[0]).toEqual(collection[index]);
+    });
   });
 });

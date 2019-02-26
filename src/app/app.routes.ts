@@ -1,39 +1,39 @@
-import {Routes} from '@angular/router';
+import { Routes } from '@angular/router';
 
-import {IntroComponent} from './intro/intro.component';
-import {HomeComponent} from './home/home.component';
+import { IntroComponent } from './intro/intro.component';
+import { HomeComponent } from './home/home.component';
 
 export const routes: Routes = [
-    {
+  {
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full',
+  },
+  {
+    path: 'home',
+    component: HomeComponent,
+    children: [
+      {
         path: '',
-        redirectTo: 'home',
+        redirectTo: 'intro',
         pathMatch: 'full',
-    },
-    {
-        path: 'home',
-        component: HomeComponent,
-        children: [
-            {
-                path: '',
-                redirectTo: 'intro',
-                pathMatch: 'full',
-            },
-            {
-                path: 'intro',
-                component: IntroComponent
-            },
-            {
-                path: 'showcase',
-                loadChildren: './showcase/showcase.module#ShowcaseModule'
-            }
-        ]
-    },
-    {
-        path: 'examples',
-        loadChildren: './examples/examples-routing.module#ExamplesRoutingModule'
-    },
-    {
-        path: 'designer',
-        loadChildren: './designer/designer.module#DesignerModule'
-    }
+      },
+      {
+        path: 'intro',
+        component: IntroComponent,
+      },
+      {
+        path: 'showcase',
+        loadChildren: './showcase/showcase.module#ShowcaseModule',
+      },
+    ],
+  },
+  {
+    path: 'examples',
+    loadChildren: './examples/examples-routing.module#ExamplesRoutingModule',
+  },
+  {
+    path: 'designer',
+    loadChildren: './designer/designer.module#DesignerModule',
+  },
 ];

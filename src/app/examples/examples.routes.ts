@@ -14,51 +14,51 @@ import { ListCustomCellLinesExampleComponent } from './list-example/tns-list-exa
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'grid'
+    redirectTo: 'grid',
   },
   {
     path: 'button',
-    component: ButtonExampleComponent
+    component: ButtonExampleComponent,
   },
   {
     path: 'card',
-    component: CardExampleComponent
+    component: CardExampleComponent,
   },
   {
     path: 'list',
     children: [
       {
         path: '',
-        component: ListExampleComponent
+        component: ListExampleComponent,
       },
       {
         path: 'section',
-        component: ListSectionExampleComponent
+        component: ListSectionExampleComponent,
       },
       {
         path: 'custom',
-        component: ListCustomCellLinesExampleComponent
-      }
-    ]
+        component: ListCustomCellLinesExampleComponent,
+      },
+    ],
   },
   {
     path: 'chart',
-    component: ChartExampleComponent
+    component: ChartExampleComponent,
   },
   {
     path: 'grid',
-    component: GridExampleComponent
+    component: GridExampleComponent,
   },
   {
     path: 'avatar',
-    component: AvatarExampleComponent
+    component: AvatarExampleComponent,
   },
   {
     path: 'fonts',
-    component: FontsExampleComponent
+    component: FontsExampleComponent,
   },
   {
     path: 'spinner',
-    component: SpinnerExampleComponent
+    component: SpinnerExampleComponent,
   },
 ];

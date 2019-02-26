@@ -14,10 +14,9 @@ const AVATAR_COMPONENT_SELECTOR = 'kirby-avatar';
 @Component({
   selector: AVATAR_COMPONENT_SELECTOR,
   templateUrl: './avatar.component.html',
-  styleUrls: ['./avatar.component.scss']
+  styleUrls: ['./avatar.component.scss'],
 })
 export class AvatarComponent extends ContentView {
-
   @Input() imageSrc: string;
   @Input() altText: string;
   @Input() size: string;

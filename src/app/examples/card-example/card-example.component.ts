@@ -4,14 +4,12 @@ import { DynamicComponent } from '../../../kirby/components/shared/dynamic-compo
 @Component({
   selector: 'kirby-card-example',
   templateUrl: './card-example.component.html',
-  styleUrls: ['./card-example.component.scss']
+  styleUrls: ['./card-example.component.scss'],
 })
 export class CardExampleComponent implements DynamicComponent, OnInit {
   data: any;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

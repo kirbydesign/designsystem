@@ -20,5 +20,5 @@ export const COMPONENT_DECLARATIONS: any[] = [
   FontsExampleComponent,
   SpinnerExampleComponent,
   ListSectionExampleComponent,
-  ListCustomCellLinesExampleComponent
+  ListCustomCellLinesExampleComponent,
 ];

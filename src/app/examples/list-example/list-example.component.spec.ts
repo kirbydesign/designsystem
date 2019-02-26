@@ -10,10 +10,9 @@ describe('ListExampleComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ KirbyModule, RouterTestingModule ],
-      declarations: [ ListExampleComponent ]
-    })
-    .compileComponents();
+      imports: [KirbyModule, RouterTestingModule],
+      declarations: [ListExampleComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

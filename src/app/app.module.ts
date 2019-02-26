@@ -12,23 +12,10 @@ import { IntroComponent } from './intro/intro.component';
 import { KirbyModule } from '../kirby/kirby.module';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        HomeComponent,
-        SideNavComponent,
-        HeaderComponent,
-        IntroComponent
-    ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        FormsModule,
-        KirbyModule,
-    ],
+  declarations: [AppComponent, HomeComponent, SideNavComponent, HeaderComponent, IntroComponent],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule, KirbyModule],
 
-    providers: [],
-    bootstrap: [AppComponent]
+  providers: [],
+  bootstrap: [AppComponent],
 })
-export class AppModule {
-}
+export class AppModule {}

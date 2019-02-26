@@ -9,10 +9,9 @@ describe('AvatarExampleComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ KirbyModule, RouterTestingModule ],
-      declarations: [ AvatarExampleComponent ]
-    })
-    .compileComponents();
+      imports: [KirbyModule, RouterTestingModule],
+      declarations: [AvatarExampleComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

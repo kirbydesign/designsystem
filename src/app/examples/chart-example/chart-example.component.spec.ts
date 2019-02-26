@@ -9,10 +9,9 @@ describe('ChartExampleComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ KirbyModule, RouterTestingModule ],
-      declarations: [ ChartExampleComponent ],
-    })
-    .compileComponents();
+      imports: [KirbyModule, RouterTestingModule],
+      declarations: [ChartExampleComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

@@ -11,10 +11,9 @@ describe('ListShowcaseComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ ExamplesModule, RouterTestingModule ],
-      declarations: [ ListShowcaseComponent, HtmlViewerComponent ]
-    })
-    .compileComponents();
+      imports: [ExamplesModule, RouterTestingModule],
+      declarations: [ListShowcaseComponent, HtmlViewerComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

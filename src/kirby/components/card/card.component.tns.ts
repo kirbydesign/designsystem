@@ -14,7 +14,7 @@ declare const android: any;
 @Component({
   selector: 'kirby-card',
   templateUrl: './card.component.html',
-  styleUrls: ['./card.component.scss']
+  styleUrls: ['./card.component.scss'],
 })
 export class CardComponent implements OnInit {
   @Input() title: string;
@@ -26,10 +26,9 @@ export class CardComponent implements OnInit {
 
   cardSizeClass = '';
 
-  constructor(private zone: NgZone) { }
+  constructor(private zone: NgZone) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   onViewLoaded(args: EventData) {
     this.view = <View>args.object; // We need a reference to the view so we can access it on orientation changes
@@ -95,7 +94,6 @@ export class CardComponent implements OnInit {
       return;
     }
   }
-
 }
 
 /**

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {SassColor} from '../../../kirby/scss/scss-helper';
+import { SassColor } from '../../../kirby/scss/scss-helper';
 
 declare var require;
 const style = require('sass-extract-loader!./colors-showcase.component.scss');
@@ -7,10 +7,9 @@ const style = require('sass-extract-loader!./colors-showcase.component.scss');
 @Component({
   selector: 'kirby-colors-showcase',
   templateUrl: './colors-showcase.component.html',
-  styleUrls: ['./colors-showcase.component.scss']
+  styleUrls: ['./colors-showcase.component.scss'],
 })
 export class ColorsShowcaseComponent implements OnInit {
-
   selectedColor = 'kirby-background';
   selectedOnColor = 'kirby-on-background';
   activeColorType = 'bg';
@@ -20,8 +19,7 @@ export class ColorsShowcaseComponent implements OnInit {
     this.colorPalette = this.getThemeColors('default');
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   onColorClick(sassColor: SassColor) {
     if (this.activeColorType === 'bg') {
@@ -43,4 +41,3 @@ export class ColorsShowcaseComponent implements OnInit {
     return colors;
   }
 }
-

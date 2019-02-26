@@ -11,7 +11,7 @@ import {
   ListItemDirective,
   ListHeaderDirective,
   ListSectionHeaderDirective,
-  ListCellDirective
+  ListCellDirective,
 } from './components/list/list.component';
 import { ComponentLoaderDirective } from './components/shared/component-loader.directive';
 import { ChartComponent } from './components/chart/chart.component';

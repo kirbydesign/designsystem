@@ -10,10 +10,9 @@ describe('AvatarShowcaseComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ ExamplesModule, RouterTestingModule ],
-      declarations: [ AvatarShowcaseComponent, HtmlViewerComponent ]
-    })
-    .compileComponents();
+      imports: [ExamplesModule, RouterTestingModule],
+      declarations: [AvatarShowcaseComponent, HtmlViewerComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

@@ -10,10 +10,9 @@ describe('ChartShowcaseComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ ExamplesModule, RouterTestingModule ],
-      declarations: [ ChartShowcaseComponent, HtmlViewerComponent ]
-    })
-    .compileComponents();
+      imports: [ExamplesModule, RouterTestingModule],
+      declarations: [ChartShowcaseComponent, HtmlViewerComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

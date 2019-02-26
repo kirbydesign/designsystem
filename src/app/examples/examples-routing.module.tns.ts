@@ -8,24 +8,25 @@ import { NativeScriptDoughnutChartExampleComponent } from './nativescript-only/d
 // tslint:disable-next-line:max-line-length
 import { NativeScriptLineChartExampleComponent } from './nativescript-only/line-chart-example/line-chart-example.component.tns-only';
 
-const nativeScriptRoutes = [...routes,
+const nativeScriptRoutes = [
+  ...routes,
   {
     path: 'nativescript-only',
     children: [
       {
         path: 'doughnut-chart',
-        component: NativeScriptDoughnutChartExampleComponent
+        component: NativeScriptDoughnutChartExampleComponent,
       },
       {
         path: 'line-chart',
-        component: NativeScriptLineChartExampleComponent
-      }
-    ]
-  }
+        component: NativeScriptLineChartExampleComponent,
+      },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [NativeScriptRouterModule.forChild(nativeScriptRoutes), ExamplesModule],
-  exports: [NativeScriptRouterModule]
+  exports: [NativeScriptRouterModule],
 })
-export class ExamplesRoutingModule { }
+export class ExamplesRoutingModule {}

@@ -8,9 +8,8 @@ describe('HtmlViewerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HtmlViewerComponent ]
-    })
-    .compileComponents();
+      declarations: [HtmlViewerComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

@@ -6,6 +6,6 @@ import { ExamplesModule } from './examples.module';
 
 @NgModule({
   imports: [RouterModule.forChild(routes), ExamplesModule],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class ExamplesRoutingModule { }
+export class ExamplesRoutingModule {}
