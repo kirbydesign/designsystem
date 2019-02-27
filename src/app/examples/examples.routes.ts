@@ -23,7 +23,7 @@ export const routes: Routes = [
   },
   {
     path: 'list',
-    component: ListExampleComponent
+    component: ListExampleComponent,
   },
   {
     path: 'chart',

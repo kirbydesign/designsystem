@@ -14,41 +14,42 @@ import { ListCustomCellLinesExampleComponent } from './list-example/tns-list-exa
 // tslint:disable-next-line
 import { ListItemExampleComponent } from './list-example/tns-list-examples/list-item-example/list-item-example.component.tns';
 
-const nativeScriptRoutes = [...routes,
+const nativeScriptRoutes = [
+  ...routes,
   {
     path: 'nativescript-only',
     children: [
       {
         path: 'doughnut-chart',
-        component: NativeScriptDoughnutChartExampleComponent
+        component: NativeScriptDoughnutChartExampleComponent,
       },
       {
         path: 'line-chart',
-        component: NativeScriptLineChartExampleComponent
-      }
-    ]
+        component: NativeScriptLineChartExampleComponent,
+      },
+    ],
   },
   {
     path: 'list',
     children: [
       {
         path: 'section',
-        component: ListSectionExampleComponent
+        component: ListSectionExampleComponent,
       },
       {
         path: 'custom',
-        component: ListCustomCellLinesExampleComponent
+        component: ListCustomCellLinesExampleComponent,
       },
       {
         path: 'original',
-        component: ListItemExampleComponent
-      }
-    ]
+        component: ListItemExampleComponent,
+      },
+    ],
   },
 ];
 
 @NgModule({
   imports: [NativeScriptRouterModule.forChild(nativeScriptRoutes), ExamplesModule],
-  exports: [NativeScriptRouterModule]
+  exports: [NativeScriptRouterModule],
 })
-export class ExamplesRoutingModule { }
+export class ExamplesRoutingModule {}

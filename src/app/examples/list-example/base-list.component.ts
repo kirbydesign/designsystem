@@ -1,6 +1,11 @@
 export class BaseListComponent {
   myItems = [
-    { title: 'Vestas Wind Systems has a very long name', subTitle: '2000 stk', amount: '5.587.218.309 DKK', detail: 225 },
+    {
+      title: 'Vestas Wind Systems has a very long name',
+      subTitle: '2000 stk',
+      amount: '5.587.218.309 DKK',
+      detail: 225,
+    },
     { title: 'A.P. Møller-Mærsk', subTitle: '2 stk', amount: '14.019 DKK', detail: 0 },
     { title: 'Novo Nordisk A/S B', subTitle: '18 stk', amount: '7560 DKK', detail: 171 },
     { title: 'Danske Bank A/S', subTitle: '10 stk', amount: '1560 DKK', detail: -171 },
