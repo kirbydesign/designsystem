@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { BaseListComponent } from '../../base-list.component';
 
 @Component({
-  templateUrl: './list-custom-cell-lines-example.component.html',
-  styleUrls: ['./list-custom-cell-lines-example.component.scss'],
+  templateUrl: './list-custom-cell-lines-example.component.tns.html',
+  styleUrls: ['./list-custom-cell-lines-example.component.tns.scss'],
 })
 export class ListCustomCellLinesExampleComponent extends BaseListComponent {
   imageSrc =

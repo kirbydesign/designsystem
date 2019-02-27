@@ -7,26 +7,48 @@ import { ExamplesModule } from './examples.module';
 import { NativeScriptDoughnutChartExampleComponent } from './nativescript-only/doughnut-chart-example/doughnut-chart-example.component.tns-only';
 // tslint:disable-next-line:max-line-length
 import { NativeScriptLineChartExampleComponent } from './nativescript-only/line-chart-example/line-chart-example.component.tns-only';
+// tslint:disable-next-line
+import { ListSectionExampleComponent } from './list-example/tns-list-examples/list-section-example/list-section-example.component.tns';
+// tslint:disable-next-line
+import { ListCustomCellLinesExampleComponent } from './list-example/tns-list-examples/list-custom-cell-lines-example/list-custom-cell-lines-example.component.tns';
+// tslint:disable-next-line
+import { ListItemExampleComponent } from './list-example/tns-list-examples/list-item-example/list-item-example.component.tns';
 
-const nativeScriptRoutes = [
-  ...routes,
+const nativeScriptRoutes = [...routes,
   {
     path: 'nativescript-only',
     children: [
       {
         path: 'doughnut-chart',
-        component: NativeScriptDoughnutChartExampleComponent,
+        component: NativeScriptDoughnutChartExampleComponent
       },
       {
         path: 'line-chart',
-        component: NativeScriptLineChartExampleComponent,
+        component: NativeScriptLineChartExampleComponent
+      }
+    ]
+  },
+  {
+    path: 'list',
+    children: [
+      {
+        path: 'section',
+        component: ListSectionExampleComponent
       },
-    ],
+      {
+        path: 'custom',
+        component: ListCustomCellLinesExampleComponent
+      },
+      {
+        path: 'original',
+        component: ListItemExampleComponent
+      }
+    ]
   },
 ];
 
 @NgModule({
   imports: [NativeScriptRouterModule.forChild(nativeScriptRoutes), ExamplesModule],
-  exports: [NativeScriptRouterModule],
+  exports: [NativeScriptRouterModule]
 })
-export class ExamplesRoutingModule {}
+export class ExamplesRoutingModule { }

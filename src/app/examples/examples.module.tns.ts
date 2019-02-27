@@ -7,11 +7,20 @@ import { COMPONENT_DECLARATIONS } from './examples.common';
 import { NativeScriptDoughnutChartExampleComponent } from './nativescript-only/doughnut-chart-example/doughnut-chart-example.component.tns-only';
 // tslint:disable-next-line:max-line-length
 import { NativeScriptLineChartExampleComponent } from './nativescript-only/line-chart-example/line-chart-example.component.tns-only';
+// tslint:disable-next-line
+import { ListSectionExampleComponent } from './list-example/tns-list-examples/list-section-example/list-section-example.component.tns';
+// tslint:disable-next-line
+import { ListCustomCellLinesExampleComponent } from './list-example/tns-list-examples/list-custom-cell-lines-example/list-custom-cell-lines-example.component.tns';
+// tslint:disable-next-line
+import { ListItemExampleComponent } from './list-example/tns-list-examples/list-item-example/list-item-example.component.tns';
 
 const nativeScriptDeclarations = [
   ...COMPONENT_DECLARATIONS,
   NativeScriptDoughnutChartExampleComponent,
   NativeScriptLineChartExampleComponent,
+  ListSectionExampleComponent,
+  ListCustomCellLinesExampleComponent,
+  ListItemExampleComponent,
 ];
 
 @NgModule({
