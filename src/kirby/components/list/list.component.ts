@@ -47,7 +47,7 @@ export class ListComponent implements OnInit {
   // @Input() items: any[] | Observable<any[]>;
   @Input() items: Observable<any[]>;
   @Input() getSectionName?: (item: any) => string;
-  @Input() onLoadMoreItems?: () => void;
+  @Input() onLoadMoreItems?: () => Promise<boolean>;
   @Output() itemSelect = new EventEmitter<any>();
 
   // The first element that matches ListItemDirective. As a structural directive it unfolds into a template. This is a reference to that.
@@ -93,16 +93,12 @@ export class ListComponent implements OnInit {
     return headerTemplate ? '1' : '0';
   }
 
-  onLoadMoreItemsRequested(args: LoadOnDemandListViewEventData) {
+  async onLoadMoreItemsRequested(args: LoadOnDemandListViewEventData) {
     const listView: RadListView = args.object;
     if (this.onLoadMoreItems) {
-      console.log('onLoadMore');
-      setTimeout(() => {
-        this.onLoadMoreItems();
-        listView.notifyLoadOnDemandFinished();
-      }, 2);
+      const shouldStop = await this.onLoadMoreItems();
+      listView.notifyLoadOnDemandFinished(shouldStop);
     } else {
-      console.log('onLoadMore else');
       args.returnValue = false;
       listView.notifyLoadOnDemandFinished(true);
     }
