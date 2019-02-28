@@ -9,7 +9,7 @@ import { HomeComponent } from './home/home.component';
 import { SideNavComponent } from './page/side-nav/side-nav.component';
 import { HeaderComponent } from './page/header/header.component';
 import { IntroComponent } from './intro/intro.component';
-import { KirbyModule } from '../kirby/kirby.module';
+import { KirbyModule } from '~/kirby/kirby.module';
 
 @NgModule({
     declarations: [

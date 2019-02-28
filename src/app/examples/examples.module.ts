@@ -8,7 +8,7 @@ import { CardExampleComponent } from './card-example/card-example.component';
 @NgModule({
   imports: [
     CommonModule,
-    KirbyModule
+    KirbyModule,
   ],
   declarations: COMPONENT_DECLARATIONS,
   exports: COMPONENT_DECLARATIONS,
