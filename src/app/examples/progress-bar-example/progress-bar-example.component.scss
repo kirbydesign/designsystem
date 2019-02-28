@@ -1,0 +1,13 @@
+@import '../../../kirby/scss/web-imports';
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    * {
+        margin-bottom: 15px;    
+    }
+}
+.card-content {
+    padding: size('gutter');
+}
