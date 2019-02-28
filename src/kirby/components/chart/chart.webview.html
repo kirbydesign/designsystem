@@ -15,6 +15,7 @@
 <script src="solid-gauge.js"></script>
 <link rel="stylesheet" type="text/css" href="styles.css">
 <script>
+    alert('WHAT');
     (function () {
         var oWebViewInterface = window.nsWebViewInterface;
         function addNativeMsgListener() {
@@ -40,9 +41,6 @@
                         return { x: (this.chart.plotSizeX / 2) - (this.label.width / 2), y: 0 };
                     };
                     break;
-                }
-                case 'activitygauge': {
-                    options.chart.type = 'solidgauge';
                 }
             }
         }

@@ -96,7 +96,14 @@ export class ChartComponent implements OnInit, OnChanges {
                 }
                 case ChartType.ACTIVITYGAUGE: {
                     const data = this.data[0];
-                    this.options.title.text = data.amount;
+                    this.options.title.text = data.title;
+                    this.options.subtitle.text = data.subtitle;
+                    if (data.paneBackgroundColor) {
+                        this.options.pane.background = [{
+                            ...this.options.pane.background[0],
+                            backgroundColor: data.paneBackgroundColor
+                        }];
+                    }
                     this.options.series = [{
                         type: 'solidgauge',
                         data: data.series as Array<Highcharts.SeriesGaugeDataOptions>

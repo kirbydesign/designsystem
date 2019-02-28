@@ -5,31 +5,36 @@ export const ACTIVITYGAUGE_OPTIONS = new InjectionToken<Options>('ActivityGaugeO
 export const ActivityGaugeOptions: Options = {
     chart: {
         style: {
-            fontFamily: 'Roboto',
+            fontFamily: 'Roboto, sans-serif',
             fontWeight: '300'
         },
+        backgroundColor: 'transparent',
         type: 'solidgauge',
         description: '',
         height: '110%'
     },
     title: {
+        align: 'center',
+        verticalAlign: 'middle',
         text: '',
+        y: 0,
+        floating: false,
         style: {
-            fontSize: '24px',
+            fontSize: '30px',
+            color: '#fff',
             fontWeight: 'bold'
-        },
-        margin: -70,
-        x: 0,
-        y: 140
+        }
     },
     subtitle: {
-        text: 'Afdraget',
+        text: '',
+        align: 'center',
+        y: 25,
+        verticalAlign: 'middle',
         style: {
-            fontsize: '24px',
-            fontWeight: 'bold'
-        },
-        x: 0,
-        y: 180
+            color: '#fff',
+            fontSize: '14px',
+            fontWeight: 'normal'
+        }
     },
     credits: {
         enabled: false
@@ -42,6 +47,13 @@ export const ActivityGaugeOptions: Options = {
         startAngle: 0,
         endAngle: 360,
         background: [{
+            backgroundColor: {
+                linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
+                stops: [
+                    [1, 'rgba(255, 255, 255, 0.3)'],
+                    [0, 'rgba(255, 255, 255, 0.3)']
+                ]
+            },
             outerRadius: '112%',
             innerRadius: '88%',
             borderWidth: 0
