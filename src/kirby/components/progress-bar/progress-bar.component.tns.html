@@ -1,17 +1,14 @@
+
 <AbsoluteLayout class="bars-container" backgroundColor="lightgray">
-    <GridLayout class="bar" left="0" top="0" rows="*" columns="*">
-        <Label class="empty-progress" [backgroundColor]="backgroundColor" *ngIf="backgroundColor else defaultBackgroundColor" row="0" col="0"></Label>
-    </GridLayout>
-    <GridLayout class="bar" *ngIf="progress !== 0" left="0" top="0" rows="*" [columns]="columnNumberForProgressBar()">
-        <Label class="progress" [ngClass]="{'large-progress': progress > 97, 'larger-progress': progress > 98, 'full-progress': progress > 99}" [backgroundColor]="progressColor" *ngIf="progressColor else defaultProgressColor" row="0" col="0" [colSpan]="progress"></Label>
-    </GridLayout>
+    <Label class="bar empty-progress" *ngIf="backgroundColor else defaultBackgroundColor" left="0" top="0" [style.background-color]="backgroundColor"></Label>
+    <Label class="bar progress" *ngIf="progressColor else defaultProgressColor" left="0" top="0" [style.width.%]="progress" [style.background-color]="progressColor"></Label>
 </AbsoluteLayout>
 
+<ng-template #defaultBackgroundColor> 
+    <Label class="bar empty-progress" left="0" top="0"></Label>
+</ng-template>
 
 <ng-template #defaultProgressColor>
-        <Label class="progress" [ngClass]="{'large-progress': progress > 97, 'larger-progress': progress > 98, 'full-progress': progress > 99}"  row="0" col="0" [colSpan]="progress"></Label>
+        <Label class="bar progress" left="0" top="0" [style.width.%]="progress"></Label>
 </ng-template>
 
-<ng-template #defaultBackgroundColor> 
-        <Label class="empty-progress" row="0" col="0"></Label>
-</ng-template>

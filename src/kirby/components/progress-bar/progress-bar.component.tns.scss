@@ -11,28 +11,16 @@ $bar-height: size('m');
     .bar {
         width: 100%;
         height: $bar-height;
-        .empty-progress {
+        &.empty-progress {
             border-radius: 20 20 20 20;
             height: $bar-height;
             background-color: get-color('kirby-primary-lighter');
         }
 
-        .progress {
+        &.progress {
             border-radius: 20 0 0 20;
             height: $bar-height;
             background-color: get-color('kirby-primary');
-
-            &.large-progress {
-                border-radius: 20 5 5 20;
-            }
-
-            &.larger-progress {
-                border-radius: 20 10 10 20;
-            }
-
-            &.full-progress {
-                border-radius: 20 20 20 20;
-            }
         }
     }
 
