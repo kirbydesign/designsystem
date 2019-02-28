@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, OnChanges, ElementRef, ViewChild, Inject } from '@angular/core';
 import { Options } from 'highcharts';
+
 import { ChartHelper } from './chart-helper';
 import { DonutOptions, DONUT_OPTIONS } from './options/donut';
 import { AreaSplineOptions, AREASPLINE_OPTIONS } from './options/areaspline';

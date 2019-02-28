@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { SassColor } from '../../../kirby/scss/scss-helper';
 
 declare var require;

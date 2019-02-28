@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { DynamicComponent } from '../../../kirby/components/shared/dynamic-component';
 
 @Component({

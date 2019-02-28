@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+
 import { BaseListComponent } from '../../base-list.component';
 
 @Component({

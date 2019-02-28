@@ -1,6 +1,6 @@
-import { GroupByPipe } from './pipes/group-by.pipe';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { GroupByPipe } from './pipes/group-by.pipe';
 import { ListComponent } from './list.component';
 
 describe('ListComponent', () => {

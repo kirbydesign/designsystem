@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map, delay } from 'rxjs/operators';
+
 import { NativeScriptLineChartItem } from '../../../../kirby/components/nativescript-only/line-chart/line-chart.component.tns-only';
 
 @Component({

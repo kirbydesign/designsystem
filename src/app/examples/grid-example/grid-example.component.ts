@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { GridCardConfiguration } from '../../../kirby/components/grid/grid-card-configuration';
 import { CardExampleComponent } from '../card-example/card-example.component';
 

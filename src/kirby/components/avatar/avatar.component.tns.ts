@@ -1,10 +1,11 @@
-import { Component, Input, NgZone, OnInit } from '@angular/core';
+import { Component, Input, NgZone } from '@angular/core';
+import { registerElement } from 'nativescript-angular';
 import * as app from 'tns-core-modules/application';
 import { OrientationChangedEventData } from 'tns-core-modules/application';
 import { EventData, View } from 'tns-core-modules/ui/core/view/view';
-import { ScssHelper } from '../../scss/scss-helper';
 import { ContentView } from 'tns-core-modules/ui/content-view';
-import { registerElement } from 'nativescript-angular';
+
+import { ScssHelper } from '../../scss/scss-helper';
 
 declare const CGSizeMake: any;
 declare const android: any;

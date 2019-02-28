@@ -6,6 +6,7 @@ import {
   OnInit,
   Renderer2,
 } from '@angular/core';
+
 import { ComponentConfiguration } from './component-configuration';
 import { DynamicComponent } from './dynamic-component';
 
