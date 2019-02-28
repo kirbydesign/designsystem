@@ -98,6 +98,7 @@ export class ListComponent implements OnInit {
     if (this.onLoadMoreItems) {
       const shouldStop = await this.onLoadMoreItems();
       listView.notifyLoadOnDemandFinished(shouldStop);
+      args.returnValue = !shouldStop;
     } else {
       args.returnValue = false;
       listView.notifyLoadOnDemandFinished(true);
