@@ -13,7 +13,7 @@ export class Rule extends Rules.AbstractRule {
   };
 
   static readonly FAILURE_STRING = `Do not import from specific environment file as it's handled by Angular/webpack. Remove the suffix ('.mock' or '.prod').
-*** Please note: Environment import can be simplified as: "import { environment } from '@drb-environment';"`;
+*** Please note: Environment import can be simplified as: "import { environment } from '...';"`;
   static readonly DISALLOWED_IMPORTS = [
     'environments/environment.mock',
     'environments/environment.prod',
