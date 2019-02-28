@@ -1,22 +1,33 @@
+@import '../../scss/web-imports';
+
 .bar-container {
     position: relative;
-    
-    width: 300px;
-    height: 20px;
+    width: 100%;
+    height: 18px;
+    overflow: hidden;
+    border-radius: 20px;
+    .bar {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        // display: grid;
+        // grid-template-columns: repeat(100, 1fr);
+
+        &.empty-progress {
+            background-color: var(--kirby-primary-lighter);
+            width: 100%;
+            // grid-column-start: 1;
+            // grid-column-end: 101;
+        }
+
+        &.progress {
+            background-color: var(--kirby-primary);
+            // grid-column-start: 1;
+        }
+        
+        
+
+    }
 }
 
-.bar {
-    position: absolute;
-}
 
-.green {
-    background-color: green;
-    width: 300px;
-    height: 20px;
-}
-
-.red {
-    background-color: red;
-    width: 100px;
-    height: 20px;
-}
