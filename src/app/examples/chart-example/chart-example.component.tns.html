@@ -90,9 +90,16 @@
                              [showDataLabels]="false"
                              [description]="'Accessibility description goes here'"
                              [data]="[{
-                             amount: '1.234.567',
+                             title: '1.234.567',
+                             subtitle: 'Afdraget',
                              series: [{
-                                color: 'darkgreen',
+                                color: {
+                                    linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
+                                    stops: [
+                                        [1, '#00e89a'],
+                                        [0, '#00a76f']
+                                    ]
+                                },
                                 radius: '112%',
                                 innerRadius: '88%',
                                 y: 75
