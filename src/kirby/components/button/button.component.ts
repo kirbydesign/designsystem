@@ -4,7 +4,7 @@ import { Component, OnInit, Input } from '@angular/core';
   // tslint:disable-next-line:component-selector
   selector: 'button[kirby-button],Button[kirby-button]',
   templateUrl: './button.component.html',
-  styleUrls: ['./button.component.scss']
+  styleUrls: ['./button.component.scss'],
 })
 export class ButtonComponent implements OnInit {
   @Input() shape?: 'round';
@@ -12,9 +12,7 @@ export class ButtonComponent implements OnInit {
   // TRM / JEO Fix this - map to button-type instead of color...
   @Input() colortype?: 'primary' | 'secondary';
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

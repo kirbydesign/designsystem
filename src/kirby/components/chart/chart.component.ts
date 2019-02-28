@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, OnChanges, ElementRef, ViewChild, Inject } from '@angular/core';
 import { Options } from 'highcharts';
+
 import { ChartHelper } from './chart-helper';
 import { DonutOptions, DONUT_OPTIONS } from './options/donut';
 import { AreaSplineOptions, AREASPLINE_OPTIONS } from './options/areaspline';
@@ -12,8 +13,8 @@ import { ChartType } from './chart-type';
   providers: [
     ChartHelper,
     { provide: DONUT_OPTIONS, useValue: DonutOptions },
-    { provide: AREASPLINE_OPTIONS, useValue: AreaSplineOptions }
-  ]
+    { provide: AREASPLINE_OPTIONS, useValue: AreaSplineOptions },
+  ],
 })
 export class ChartComponent implements OnInit, OnChanges {
   @Input() data = [];
@@ -28,8 +29,8 @@ export class ChartComponent implements OnInit, OnChanges {
   constructor(
     private chartHelper: ChartHelper,
     @Inject(DONUT_OPTIONS) public donutOptions: Options,
-    @Inject(AREASPLINE_OPTIONS) public areasplineOptions: Options) {
-  }
+    @Inject(AREASPLINE_OPTIONS) public areasplineOptions: Options
+  ) {}
 
   ngOnInit() {
     this.setupChartType();
@@ -71,19 +72,23 @@ export class ChartComponent implements OnInit, OnChanges {
       switch (this.options.chart.type) {
         case ChartType.PIE:
           this.options.plotOptions.pie.dataLabels.enabled = this.showDataLabels;
-          /* falls through */
+        /* falls through */
         case ChartType.DONUT: {
-          this.options.series = [{
-            type: 'pie',
-            data: this.data as Array<Highcharts.SeriesPieDataOptions>
-          }];
+          this.options.series = [
+            {
+              type: 'pie',
+              data: this.data as Array<Highcharts.SeriesPieDataOptions>,
+            },
+          ];
           break;
         }
         case ChartType.AREASPLINE: {
-          this.options.series = [{
-            type: 'areaspline',
-            data: this.data as Array<Highcharts.SeriesAreasplineDataOptions>
-          }];
+          this.options.series = [
+            {
+              type: 'areaspline',
+              data: this.data as Array<Highcharts.SeriesAreasplineDataOptions>,
+            },
+          ];
           break;
         }
       }

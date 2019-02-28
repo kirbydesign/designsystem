@@ -24,7 +24,7 @@ class GridCard {
   templateUrl: './grid.component.html',
   styleUrls: ['./grid.component.scss'],
   // tslint:disable-next-line:use-host-property-decorator
-  host: { '[attr.max-columns]' : 'maxColumns'}
+  host: { '[attr.max-columns]': 'maxColumns' },
 })
 export class GridComponent implements OnInit, OnDestroy {
   cardConfigs: GridCardConfiguration[];
@@ -38,16 +38,17 @@ export class GridComponent implements OnInit, OnDestroy {
   @Input()
   set cardConfigurations(cardConfigurations: GridCardConfiguration[]) {
     this.cardConfigs = cardConfigurations;
-      // TODO TRM/JEO Remove this when breakpoint observe something something...
-      this.configureGrid();
+    // TODO TRM/JEO Remove this when breakpoint observe something something...
+    this.configureGrid();
   }
 
-  constructor(private breakpointHelper: BreakpointHelperService) { }
+  constructor(private breakpointHelper: BreakpointHelperService) {}
 
   configureGrid() {
     let calculatedMaxColumns = 0;
     if (this.maxColumns === undefined) {
-      calculatedMaxColumns = this.breakpointHelper.currentScreenWidth >= ScssHelper.BREAKPOINT_SCREEN_L ? 2 : 1;
+      calculatedMaxColumns =
+        this.breakpointHelper.currentScreenWidth >= ScssHelper.BREAKPOINT_SCREEN_L ? 2 : 1;
     } else {
       calculatedMaxColumns = this.maxColumns;
     }
@@ -99,11 +100,9 @@ export class GridComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.breakpointSubscription = this.breakpointHelper.observe().subscribe(
-      () => {
-        this.configureGrid();
-      }
-    );
+    this.breakpointSubscription = this.breakpointHelper.observe().subscribe(() => {
+      this.configureGrid();
+    });
   }
 
   ngOnDestroy() {

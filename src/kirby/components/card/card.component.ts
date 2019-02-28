@@ -12,15 +12,17 @@ export class CardComponent implements OnInit, OnDestroy {
   @Input() title: string;
   @Input() subtitle: string;
   private sizesSortedByBreakpoint = this.sortSizesByBreakpoint({
-    'small': 360,
-    'medium': 720,
-    'large': 1024
+    small: 360,
+    medium: 720,
+    large: 1024,
   });
 
   @Input()
-  set sizes(value: {[size: string]: number }) {
+  set sizes(value: { [size: string]: number }) {
     if (typeof value === 'string') {
-      console.error('Sizes property cannot be a string. Please ensure the size property is bound as an expression:\n[sizes]="{...}"');
+      console.error(
+        'Sizes property cannot be a string. Please ensure the size property is bound as an expression:\n[sizes]="{...}"'
+      );
     }
     this.sizesSortedByBreakpoint = this.sortSizesByBreakpoint(value);
   }
@@ -28,8 +30,8 @@ export class CardComponent implements OnInit, OnDestroy {
   constructor(
     private elementRef: ElementRef,
     private resizeObserverService: ResizeObserverService,
-    private renderer: Renderer2) {
-  }
+    private renderer: Renderer2
+  ) {}
 
   ngOnInit() {
     this.resizeObserverService.observe(this.elementRef, (entry) => this.handleResize(entry));
@@ -39,12 +41,12 @@ export class CardComponent implements OnInit, OnDestroy {
     this.resizeObserverService.unobserve(this.elementRef);
   }
 
-  private sortSizesByBreakpoint(sizes: {[size: string]: number }): [string, number][] {
+  private sortSizesByBreakpoint(sizes: { [size: string]: number }): [string, number][] {
     return Object.entries(sizes).sort(this.compareSizesByBreakpoint);
   }
 
   private compareSizesByBreakpoint(a: [string, number], b: [string, number]): number {
-    return a[1] > b[1] ? 1 : (b[1] > a[1] ? -1 : 0);
+    return a[1] > b[1] ? 1 : b[1] > a[1] ? -1 : 0;
   }
 
   private handleResize(entry: ResizeObserverEntry) {
@@ -61,5 +63,4 @@ export class CardComponent implements OnInit, OnDestroy {
       });
     }
   }
-
 }
