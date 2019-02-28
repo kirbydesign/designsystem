@@ -3,10 +3,9 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import {declarations} from './kirby.common';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
-  imports: [CommonModule, RouterModule, BrowserAnimationsModule],
+  imports: [CommonModule, RouterModule],
   declarations: declarations,
   exports: declarations
 })

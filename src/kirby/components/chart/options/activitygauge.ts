@@ -1,7 +1,5 @@
 import {Options} from 'highcharts';
 import {InjectionToken} from '@angular/core';
-import {FontWeight} from 'tns-core-modules/ui/enums';
-import bold = FontWeight.bold;
 
 export const ACTIVITYGAUGE_OPTIONS = new InjectionToken<Options>('ActivityGaugeOptions');
 export const ActivityGaugeOptions: Options = {
@@ -18,7 +16,7 @@ export const ActivityGaugeOptions: Options = {
         text: '',
         style: {
             fontSize: '24px',
-            fontWeight: bold
+            fontWeight: 'bold'
         },
         margin: -70,
         x: 0,
@@ -28,7 +26,7 @@ export const ActivityGaugeOptions: Options = {
         text: 'Afdraget',
         style: {
             fontsize: '24px',
-            fontWeight: bold
+            fontWeight: 'bold'
         },
         x: 0,
         y: 180

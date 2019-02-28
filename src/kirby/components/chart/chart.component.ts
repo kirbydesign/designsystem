@@ -23,7 +23,6 @@ export class ChartComponent implements OnInit, OnChanges {
     @Input() type: ChartType = ChartType.PIE;
     @Input() description = '';
     @Input() showDataLabels = true;
-    @Input() amount = '';
     @ViewChild('chartContainer') chartContainer: ElementRef;
 
     options: Options = {};
