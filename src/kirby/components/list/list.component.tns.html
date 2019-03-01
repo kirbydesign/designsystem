@@ -12,7 +12,9 @@
     [groupingFunction]="getSectionName"
     [items]="items"
     row="{{ rowNumberForListView(headerTemplate) }}"
+
   >
+    <!--</GridLayout>-->
     <ng-template tkListItemTemplate let-item="item">
       <FlexboxLayout class="row" (tap)="onItemTap(item)">
         <ng-container
@@ -37,5 +39,8 @@
         ></ng-container>
       </FlexboxLayout>
     </ng-template>
+    <GridLayout *tkListLoadOnDemandTemplate backgroundColor="#ff7f50">
+      <Label text="Load More" horizontalAlignment="center" verticalAlignment="center"></Label>
+    </GridLayout>
   </RadListView>
 </GridLayout>
