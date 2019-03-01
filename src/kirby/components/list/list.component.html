@@ -1,6 +1,7 @@
-<!-- <ng-container *ngTemplateOutlet="headerTemplate"></ng-container> -->
 <div class="header">
-  <ng-template #header></ng-template>
+  <ng-container *ngFor="let template of listHeaderTemplates">
+    <ng-container *ngTemplateOutlet="template"></ng-container>
+  </ng-container>
 </div>
 <ul>
   <ng-container *ngIf="isSectionsEnabled; else normalList">

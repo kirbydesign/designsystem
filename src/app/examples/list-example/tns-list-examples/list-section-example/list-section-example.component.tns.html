@@ -3,12 +3,6 @@
         [getSectionName]="getSectionName"
         (itemSelect)="onItemSelect($event)"
 >
-    <kirby-list-header
-            *kirbyListHeader="let columns"
-            [left]="'Navn'"
-            [middle]="'Afkast ÅTD'"
-            [right]="'Værdi'"
-    ></kirby-list-header>
 
     <kirby-list-section-header
             *kirbyListSectionHeader="let section"

@@ -10,13 +10,13 @@ import {
   ListComponent,
   ListItemDirective,
   ListSectionHeaderDirective,
-  ListCellDirective
+  ListCellDirective,
+  ListHeaderDirective
 } from './components/list/list.component';
 import { ComponentLoaderDirective } from './components/shared/component-loader.directive';
 import { ChartComponent } from './components/chart/chart.component';
 import { ListItemComponent } from './components/list/list-item/list-item.component';
 import { ListSectionHeaderComponent } from './components/list/list-section-header/list-section-header.component';
-import { ListHeaderComponent } from './components/list/list-header/list-header.component';
 import { ListCellComponent } from './components/list/list-cell/list-cell.component';
 import { ListCellLineComponent } from './components/list/list-cell-line/list-cell-line.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
@@ -34,7 +34,7 @@ export const declarations = [
   ListCellLineComponent,
   ListSectionHeaderComponent,
   ListSectionHeaderDirective,
-  ListHeaderComponent,
+  ListHeaderDirective,
   IconComponent,
   ChartComponent,
   GridComponent,
