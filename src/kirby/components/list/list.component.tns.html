@@ -30,7 +30,7 @@
 </ng-template>
 
     <!-- HEADER -->
-    <ng-template tkListViewHeader>
+    <ng-template tkListViewHeader *ngIf="listHeaderTemplates.length > 0">
       <FlexboxLayout class="row">
         <ng-container *ngFor="let headerTemplate of listHeaderTemplates">
             <ng-container *ngTemplateOutlet="headerTemplate"></ng-container>

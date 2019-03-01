@@ -1,6 +1,6 @@
 <kirby-list [items]="myItems">
 
-  <!-- HEADERS-->
+  <!-- HEADER-->
   <kirby-list-cell *kirbyListHeader width="2">Name</kirby-list-cell>
   <kirby-list-cell *kirbyListHeader width="0.5"></kirby-list-cell>
   <kirby-list-cell *kirbyListHeader horisontalAlignment="right">Value</kirby-list-cell>
@@ -51,14 +51,23 @@
 
 <hr />
 
+
 <kirby-list [items]="myItems" (itemSelect)="onItemSelect($event)">
+  
+  <!-- HEADER-->
+  <kirby-list-cell *kirbyListHeader>Name</kirby-list-cell>
+  <!-- you can make custom headers using the kirbyListHeader directive -->
+  <div *kirbyListHeader style="width: 150px; text-align: right">Amount</div>
+  <kirby-list-cell *kirbyListHeader horisontalAlignment="right">Value</kirby-list-cell>
+
+  <!-- BODY -->
   <kirby-list-cell
     *kirbyListCell="let item">
     <kirby-list-cell-line [primary]="true" [text]="item.title"></kirby-list-cell-line>
     <kirby-list-cell-line [text]="item.detail"></kirby-list-cell-line>
   </kirby-list-cell>
   <!-- you can make custom cells using the kirbyListCell directive -->
-  <div *kirbyListCell="let item">custom cell {{ item.subTitle }}</div>
+  <div *kirbyListCell="let item" style="width: 150px; text-align: right">{{ item.subTitle }}</div>
   <kirby-list-cell
     *kirbyListCell="let item"
     verticalAlignment="top"

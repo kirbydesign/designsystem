@@ -57,9 +57,7 @@ export class ListComponent implements OnInit {
       this.isSectionsEnabled = true;
     }
     if (this.listItemTemplate) {
-      console.warn(
-        'kirbyListItem is deprecated and will be removed in future versions of Kirby'
-      );
+      console.warn('kirbyListItem is deprecated and will be removed in future versions of Kirby');
     }
     this.isSelectable = this.itemSelect.observers.length > 0;
   }

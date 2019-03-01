@@ -1,9 +1,4 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  HostBinding,
-} from '@angular/core';
+import { Component, OnInit, Input, HostBinding } from '@angular/core';
 
 enum verticalAlignmentEnum {
   top = 'flex-start',
@@ -16,6 +11,10 @@ enum horisontalAlignmentEnum {
   right = 'flex-end',
 }
 
+const defaultHorisontalAlignment: horisontalAlignment = 'left';
+const defaultVerticalAlignment: verticalAlignment = 'center';
+const defaultWidth = 1;
+
 export type horisontalAlignment = 'left' | 'center' | 'right';
 export type verticalAlignment = 'top' | 'center' | 'bottom';
 
@@ -25,10 +24,9 @@ export type verticalAlignment = 'top' | 'center' | 'bottom';
   styleUrls: ['./list-cell.component.scss'],
 })
 export class ListCellComponent implements OnInit {
-
-  @Input() horisontalAlignment: horisontalAlignment = 'left';
-  @Input() verticalAlignment: verticalAlignment = 'center';
-  @Input() width = 1;
+  @Input() horisontalAlignment: horisontalAlignment = defaultHorisontalAlignment;
+  @Input() verticalAlignment: verticalAlignment = defaultVerticalAlignment;
+  @Input() width = defaultWidth;
 
   @HostBinding('style.flex-basis')
   private _flexBasisHost: string;
@@ -37,33 +35,22 @@ export class ListCellComponent implements OnInit {
   @HostBinding('style.justify-content')
   private _flexJustifyHost: string;
 
-  private readonly defaultHorisontalAlignment: horisontalAlignment = 'left';
-  private readonly defaultVerticalAlignment: verticalAlignment = 'center';
-  private readonly defaultWidth = 1;
-
   constructor() {}
 
   ngOnInit() {
     this.setStyle();
   }
 
-  private setStyle() {
-    this._flexBasisHost = this.getWidth()  ;
-    this._flexAlignHost = this.getHorisontalAlignment();
-    this._flexJustifyHost = this.getVerticalAlignment();
-  }
-
-
   getWidth(): string {
     if (this.width && this.width > 0) {
       return `${this.width * 100}%`;
     }
     console.warn(
-      `Invalid value ${this.width} for width. Valid values numbers > 0. Defaulting to ${
-        this.defaultWidth
-      }`
+      `Invalid value ${
+        this.width
+      } for width. Valid values numbers > 0. Defaulting to ${defaultWidth}`
     );
-    return `${this.defaultWidth * 100}%`;
+    return `${defaultWidth * 100}%`;
   }
 
   getHorisontalAlignment(): string {
@@ -71,11 +58,11 @@ export class ListCellComponent implements OnInit {
       return horisontalAlignmentEnum[this.horisontalAlignment];
     }
     console.warn(
-      `Invalid value ${this.horisontalAlignment} for horisontalAlignment. Valid values are 'left', 'center', 'right'. Defaulting to '${
-        this.defaultHorisontalAlignment
-      }'`
+      `Invalid value ${
+        this.horisontalAlignment
+      } for horisontalAlignment. Valid values are 'left', 'center', 'right'. Defaulting to '${defaultHorisontalAlignment}'`
     );
-    return horisontalAlignmentEnum[this.defaultHorisontalAlignment];
+    return horisontalAlignmentEnum[defaultHorisontalAlignment];
   }
 
   getVerticalAlignment(): string {
@@ -83,11 +70,16 @@ export class ListCellComponent implements OnInit {
       return verticalAlignmentEnum[this.verticalAlignment];
     }
     console.warn(
-      `Invalid value ${this.verticalAlignment} for verticalAlignment. Valid values are 'top', 'center', 'bottom'. Defaulting to '${
-        this.defaultVerticalAlignment
-      }'`
+      `Invalid value ${
+        this.verticalAlignment
+      } for verticalAlignment. Valid values are 'top', 'center', 'bottom'. Defaulting to '${defaultVerticalAlignment}'`
     );
-    return verticalAlignmentEnum[this.defaultVerticalAlignment];
+    return verticalAlignmentEnum[defaultVerticalAlignment];
   }
 
+  private setStyle() {
+    this._flexBasisHost = this.getWidth();
+    this._flexAlignHost = this.getHorisontalAlignment();
+    this._flexJustifyHost = this.getVerticalAlignment();
+  }
 }

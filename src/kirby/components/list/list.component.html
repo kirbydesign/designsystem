@@ -1,8 +1,10 @@
-<div class="header">
+<!-- Header-->
+<div class="header" *ngIf="listHeaderTemplates.length > 0">
   <ng-container *ngFor="let template of listHeaderTemplates">
     <ng-container *ngTemplateOutlet="template"></ng-container>
   </ng-container>
 </div>
+
 <ul>
   <ng-container *ngIf="isSectionsEnabled; else normalList">
     <ng-container *ngFor="let section of (items | groupBy: getSectionName)">

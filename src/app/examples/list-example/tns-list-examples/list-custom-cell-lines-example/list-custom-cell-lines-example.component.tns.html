@@ -3,9 +3,14 @@
         (itemSelect)="onItemSelect($event)">
 
   <!-- HEADERS-->
-  <kirby-list-cell *kirbyListHeader width="0.85"><Label text="Name"></Label></kirby-list-cell>
-  <kirby-list-cell *kirbyListHeader width="0.5" horisontalAlignment="right"><Label text="Value"></Label></kirby-list-cell>
+  <kirby-list-cell *kirbyListHeader width="0.85">
+    <Label text="Name"></Label>
+  </kirby-list-cell>
+  <kirby-list-cell *kirbyListHeader width="0.5" horisontalAlignment="right">
+    <Label text="Value"></Label>
+  </kirby-list-cell>
 
+    <!-- BODY -->
     <kirby-list-cell
             *kirbyListCell="let item"
             width=0.85>
