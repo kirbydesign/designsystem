@@ -5,7 +5,7 @@ import * as app from 'tns-core-modules/application';
 import { Observable, Subject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class BreakpointHelperService implements OnDestroy {
   currentScreenWidth: number;
@@ -43,5 +43,4 @@ export class BreakpointHelperService implements OnDestroy {
   ngOnDestroy() {
     this.orientationChangedSubject.complete();
   }
-
 }

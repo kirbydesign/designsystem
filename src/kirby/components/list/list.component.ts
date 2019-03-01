@@ -12,29 +12,29 @@ import {
 } from '@angular/core';
 
 @Directive({
-  selector: '[kirbyListItem]'
+  selector: '[kirbyListItem]',
 })
 export class ListItemDirective {}
 
 @Directive({
-  selector: '[kirbyListCell]'
-})
-export class ListCellDirective {}
-
-@Directive({
-  selector: '[kirbyListHeader]'
+  selector: '[kirbyListHeader]',
 })
 export class ListHeaderDirective {}
 
 @Directive({
-  selector: '[kirbyListSectionHeader]'
+  selector: '[kirbyListCell]',
+})
+export class ListCellDirective {}
+
+@Directive({
+  selector: '[kirbyListSectionHeader]',
 })
 export class ListSectionHeaderDirective {}
 
 @Component({
   selector: 'kirby-list',
   templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss']
+  styleUrls: ['./list.component.scss'],
 })
 export class ListComponent implements OnInit {
   @Input() items: any[];
@@ -43,12 +43,9 @@ export class ListComponent implements OnInit {
 
   // The first element that matches ListItemDirective. As a structural directive it unfolds into a template. This is a reference to that.
   @ContentChild(ListItemDirective, { read: TemplateRef }) listItemTemplate;
-  @ContentChild(ListSectionHeaderDirective, { read: TemplateRef })
-  sectionHeaderTemplate;
-  @ContentChildren(ListCellDirective, { read: TemplateRef })
-  listCellTemplates: QueryList<any>;
-  @ContentChildren(ListHeaderDirective, { read: TemplateRef })
-  listHeaderTemplates: QueryList<any>;
+  @ContentChildren(ListHeaderDirective, { read: TemplateRef }) listHeaderTemplates: QueryList<any>;
+  @ContentChild(ListSectionHeaderDirective, { read: TemplateRef }) sectionHeaderTemplate;
+  @ContentChildren(ListCellDirective, { read: TemplateRef }) listCellTemplates: QueryList<any>;
 
   isSectionsEnabled: boolean;
   isSelectable: boolean;

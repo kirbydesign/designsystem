@@ -8,12 +8,12 @@ import {
 enum verticalAlignmentEnum {
   top = 'flex-start',
   center = 'center',
-  bottom = 'flex-end'
+  bottom = 'flex-end',
 }
 enum horisontalAlignmentEnum {
   left = 'flex-start',
   center = 'center',
-  right = 'flex-end'
+  right = 'flex-end',
 }
 
 export type horisontalAlignment = 'left' | 'center' | 'right';
@@ -22,10 +22,9 @@ export type verticalAlignment = 'top' | 'center' | 'bottom';
 @Component({
   selector: 'kirby-list-cell',
   templateUrl: './list-cell.component.html',
-  styleUrls: ['./list-cell.component.scss']
+  styleUrls: ['./list-cell.component.scss'],
 })
 export class ListCellComponent implements OnInit {
-
 
   @Input() horisontalAlignment: horisontalAlignment = 'left';
   @Input() verticalAlignment: verticalAlignment = 'center';

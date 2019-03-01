@@ -7,7 +7,6 @@ import { ChartExampleComponent } from './chart-example/chart-example.component';
 import { FontsExampleComponent } from './fonts-example/fonts-example.component';
 import { SpinnerExampleComponent } from './spinner-example/spinner-example.component';
 
-
 export const COMPONENT_DECLARATIONS: any[] = [
   ButtonExampleComponent,
   CardExampleComponent,

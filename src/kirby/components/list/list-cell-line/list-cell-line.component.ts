@@ -3,10 +3,9 @@ import { Component, Input } from '@angular/core';
 @Component({
   selector: 'kirby-list-cell-line',
   templateUrl: './list-cell-line.component.html',
-  styleUrls: ['./list-cell-line.component.scss']
+  styleUrls: ['./list-cell-line.component.scss'],
 })
 export class ListCellLineComponent {
-
   @Input()
   text: string;
 
@@ -16,5 +15,4 @@ export class ListCellLineComponent {
   constructor() {
     this.primary = false;
   }
-
 }

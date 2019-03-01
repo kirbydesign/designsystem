@@ -20,12 +20,6 @@
         "paths": {
             "~/*": [
                 "src/*"
-            ],
-            // The following case should be removed when the fix has been released:
-            // https://github.com/shripalsoni04/nativescript-webview-interface/pull/44
-            "*": [
-                "./node_modules/tns-core-modules/*",
-                "./node_modules/*"
             ]
         }
     }

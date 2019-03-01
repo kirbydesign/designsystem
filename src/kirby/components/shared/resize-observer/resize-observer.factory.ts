@@ -4,9 +4,9 @@ import { ResizeObserver } from './types/resize-observer';
 import { ResizeObserverCallback } from './types/resize-observer-callback';
 
 declare var ResizeObserver: {
-    prototype: ResizeObserver;
-    new(callback: ResizeObserverCallback): ResizeObserver;
-  };
+  prototype: ResizeObserver;
+  new (callback: ResizeObserverCallback): ResizeObserver;
+};
 
 /**
  * Factory that creates a new ResizeObserver and allows us to stub it out in unit tests.
