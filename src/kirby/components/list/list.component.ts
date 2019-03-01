@@ -55,6 +55,7 @@ export class ListComponent implements OnInit {
 
   isSectionsEnabled: boolean;
   isSelectable: boolean;
+  private noMoreItemsToLoad = false;
 
   constructor() {}
 
@@ -92,14 +93,22 @@ export class ListComponent implements OnInit {
   async onLoadMoreItemsRequested(args: LoadOnDemandListViewEventData) {
     console.log('onLoadMoreItemsRequested');
     const listView: RadListView = args.object;
+    this.noMoreItemsToLoad = false;
     if (this.onLoadMoreItems) {
       console.log('onLoadMoreItemsRequested inside');
-      const shouldStop = await this.onLoadMoreItems();
-      listView.notifyLoadOnDemandFinished(shouldStop);
-      args.returnValue = !shouldStop;
+      this.noMoreItemsToLoad = await this.onLoadMoreItems();
+      listView.notifyLoadOnDemandFinished(this.noMoreItemsToLoad);
+      args.returnValue = !this.noMoreItemsToLoad;
     } else {
       args.returnValue = false;
       listView.notifyLoadOnDemandFinished(true);
     }
+  }
+
+  isShowingNoMoreItemsLabel(): boolean {
+    if (this.onLoadMoreItems) {
+      return this.noMoreItemsToLoad;
+    }
+    return false;
   }
 }

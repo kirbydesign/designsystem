@@ -38,5 +38,10 @@
         ></ng-container>
       </FlexboxLayout>
     </ng-template>
+    <ng-container *ngIf="isShowingNoMoreItemsLabel()">
+      <ng-template tkListViewFooter>
+        <Label text="No more items" class="kirby-text-large"></Label>
+      </ng-template>
+    </ng-container>
   </RadListView>
 </GridLayout>
