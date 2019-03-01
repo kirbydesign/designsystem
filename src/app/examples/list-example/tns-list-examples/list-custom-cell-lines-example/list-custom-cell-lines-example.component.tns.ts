@@ -15,13 +15,13 @@ export class ListCustomCellLinesExampleComponent extends BaseListComponent {
   // access the instance properties.
   onLoadMoreItemsCallback = this.onLoadMoreItems.bind(this);
 
-  loadsCalled = 0;
+  numbersCalled = 0;
 
   private onLoadMoreItems(): Promise<boolean> {
-    const moreToLoad = this.loadsCalled < 3;
+    const moreToLoad = this.numbersCalled < 3;
 
     if (moreToLoad) {
-      this.loadsCalled++;
+      this.numbersCalled++;
       this.myObservableItems.push([
         { title: 'new item', subTitle: '21 stk', amount: '18.309 DKK', detail: 225 },
         { title: 'new item 1', subTitle: '22 stk', amount: '18.309 DKK', detail: 225 },
