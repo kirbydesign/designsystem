@@ -1,4 +1,6 @@
+@import "../../../scss/native-imports";
+
 .cell {
-  padding: 0 8 0 8;
+  padding: 0 size('gutter-small') 0 size('gutter-small');
   flex-direction: column;
 }

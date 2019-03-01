@@ -3,12 +3,12 @@ import { Component, OnInit, Input, HostBinding } from '@angular/core';
 enum verticalAlignmentEnum {
   top = 'flex-start',
   center = 'center',
-  bottom = 'flex-end'
+  bottom = 'flex-end',
 }
 enum horisontalAlignmentEnum {
   left = 'flex-start',
   center = 'center',
-  right = 'flex-end'
+  right = 'flex-end',
 }
 type horisontalAlignment = 'left' | 'center' | 'right';
 type verticalAlignment = 'top' | 'center' | 'bottom';
@@ -16,10 +16,9 @@ type verticalAlignment = 'top' | 'center' | 'bottom';
 @Component({
   selector: 'kirby-list-cell',
   templateUrl: './list-cell.component.html',
-  styleUrls: ['./list-cell.component.scss']
+  styleUrls: ['./list-cell.component.scss'],
 })
 export class ListCellComponent implements OnInit {
-
   @Input() horisontalAlignment: horisontalAlignment;
   @Input() verticalAlignment: verticalAlignment;
   @Input() width: number;
@@ -46,9 +45,7 @@ export class ListCellComponent implements OnInit {
       return `${this.width * 100}%`;
     }
     console.warn(
-      `Invalid value ${
-        this.width
-      } for width. Valid values numbers > 0. Defaulting to '${
+      `Invalid value ${this.width} for width. Valid values numbers > 0. Defaulting to '${
         this.defaultWidth
       }'`
     );
@@ -56,10 +53,7 @@ export class ListCellComponent implements OnInit {
   }
 
   getAlignItems(): string {
-    if (
-      this.horisontalAlignment &&
-      horisontalAlignmentEnum[this.horisontalAlignment]
-    ) {
+    if (this.horisontalAlignment && horisontalAlignmentEnum[this.horisontalAlignment]) {
       return horisontalAlignmentEnum[this.horisontalAlignment];
     }
     console.warn(
@@ -73,10 +67,7 @@ export class ListCellComponent implements OnInit {
   }
 
   getJustifyContent(): string {
-    if (
-      this.verticalAlignment &&
-      verticalAlignmentEnum[this.verticalAlignment]
-    ) {
+    if (this.verticalAlignment && verticalAlignmentEnum[this.verticalAlignment]) {
       return verticalAlignmentEnum[this.verticalAlignment];
     }
     console.warn(

@@ -7,14 +7,13 @@ export class NativeScriptChartItem {
     public labelPercentage?: string,
     public drawingPercentage?: number,
     public color?: string
-    ) {
-  }
+  ) {}
 }
 
 @Component({
   selector: 'kirby-nativescript-doughnut-chart',
   templateUrl: './doughnut-chart.component.tns-only.html',
-  styleUrls: ['./doughnut-chart.component.tns-only.scss']
+  styleUrls: ['./doughnut-chart.component.tns-only.scss'],
 })
 export class NativeScriptDoughnutChartComponent implements OnInit {
   public startAngle = platform.isIOS ? -90 : 270;
@@ -25,5 +24,4 @@ export class NativeScriptDoughnutChartComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
-
 }

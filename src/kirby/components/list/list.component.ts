@@ -8,59 +8,55 @@ import {
   OnInit,
   Output,
   QueryList,
-  TemplateRef
+  TemplateRef,
 } from '@angular/core';
-import { LoadOnDemandListViewEventData, RadListView } from 'nativescript-ui-listview/ui-listview.common';
-import { isObservable, Observable } from "rxjs";
+import {
+  LoadOnDemandListViewEventData,
+  RadListView,
+} from 'nativescript-ui-listview/ui-listview.common';
+import { isObservable, Observable } from 'rxjs';
 
 @Directive({
-  selector: '[kirbyListItem]'
+  selector: '[kirbyListItem]',
 })
-export class ListItemDirective {
-}
+export class ListItemDirective {}
 
 @Directive({
-  selector: '[kirbyListHeader]'
+  selector: '[kirbyListHeader]',
 })
-export class ListHeaderDirective {
-}
+export class ListHeaderDirective {}
 
 @Directive({
-  selector: '[kirbyListCell]'
+  selector: '[kirbyListCell]',
 })
-export class ListCellDirective {
-}
+export class ListCellDirective {}
 
 @Directive({
-  selector: '[kirbyListSectionHeader]'
+  selector: '[kirbyListSectionHeader]',
 })
-export class ListSectionHeaderDirective {
-}
+export class ListSectionHeaderDirective {}
 
 @Component({
   selector: 'kirby-list',
   templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss']
+  styleUrls: ['./list.component.scss'],
 })
 export class ListComponent implements OnInit {
-
-  // @Input() items: any[] | Observable<any[]>;
-  @Input() items: Observable<any[]>;
+  @Input() items: any[];
   @Input() getSectionName?: (item: any) => string;
   @Input() onLoadMoreItems?: () => Promise<boolean>;
   @Output() itemSelect = new EventEmitter<any>();
 
   // The first element that matches ListItemDirective. As a structural directive it unfolds into a template. This is a reference to that.
-  @ContentChild(ListItemDirective, {read: TemplateRef}) listItemTemplate;
-  @ContentChild(ListHeaderDirective, {read: TemplateRef}) headerTemplate;
-  @ContentChild(ListSectionHeaderDirective, {read: TemplateRef}) sectionHeaderTemplate;
-  @ContentChildren(ListCellDirective, {read: TemplateRef}) listCellTemplates: QueryList<any>;
+  @ContentChild(ListItemDirective, { read: TemplateRef }) listItemTemplate;
+  @ContentChild(ListHeaderDirective, { read: TemplateRef }) headerTemplate;
+  @ContentChild(ListSectionHeaderDirective, { read: TemplateRef }) sectionHeaderTemplate;
+  @ContentChildren(ListCellDirective, { read: TemplateRef }) listCellTemplates: QueryList<any>;
 
   isSectionsEnabled: boolean;
   isSelectable: boolean;
 
-  constructor() {
-  }
+  constructor() {}
 
   ngOnInit() {
     if (this.getSectionName) {
@@ -94,8 +90,10 @@ export class ListComponent implements OnInit {
   }
 
   async onLoadMoreItemsRequested(args: LoadOnDemandListViewEventData) {
+    console.log('onLoadMoreItemsRequested');
     const listView: RadListView = args.object;
     if (this.onLoadMoreItems) {
+      console.log('onLoadMoreItemsRequested inside');
       const shouldStop = await this.onLoadMoreItems();
       listView.notifyLoadOnDemandFinished(shouldStop);
       args.returnValue = !shouldStop;
@@ -104,6 +102,4 @@ export class ListComponent implements OnInit {
       listView.notifyLoadOnDemandFinished(true);
     }
   }
-
-
 }

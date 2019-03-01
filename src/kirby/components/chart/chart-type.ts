@@ -1,5 +1,5 @@
 export enum ChartType {
-    PIE = 'pie',
-    DONUT = 'donut',
-    AREASPLINE = 'areaspline'
+  PIE = 'pie',
+  DONUT = 'donut',
+  AREASPLINE = 'areaspline',
 }

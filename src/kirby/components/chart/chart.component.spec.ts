@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+
 import { ChartComponent } from './chart.component';
 import { ChartType } from './chart-type';
 
@@ -10,9 +11,8 @@ describe('ChartComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ChartComponent ]
-    })
-    .compileComponents();
+      declarations: [ChartComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -41,7 +41,7 @@ describe('ChartComponent', () => {
   });
 
   it('should have correct default chart type', () => {
-    expect(component.type = ChartType.PIE);
+    expect((component.type = ChartType.PIE));
     expect(component.options.chart.type).toBe(ChartType.PIE);
     expect(component.options.plotOptions.pie.innerSize).toBe('0%');
   });
@@ -49,7 +49,7 @@ describe('ChartComponent', () => {
   it('should convert donut chart type to highcharts pie with 50% innerSize', () => {
     component.type = ChartType.DONUT;
     component.ngOnInit();
-    expect(component.type = ChartType.DONUT);
+    expect((component.type = ChartType.DONUT));
     expect(component.options.chart.type).toBe(ChartType.PIE);
     expect(component.options.plotOptions.pie.innerSize).toBe('50%');
   });
@@ -57,7 +57,7 @@ describe('ChartComponent', () => {
   it('should set areaspline chart type', () => {
     component.type = ChartType.AREASPLINE;
     component.ngOnInit();
-    expect(component.type = ChartType.AREASPLINE);
+    expect((component.type = ChartType.AREASPLINE));
     expect(component.options.chart.type).toBe(ChartType.AREASPLINE);
   });
 
@@ -74,15 +74,15 @@ describe('ChartComponent', () => {
   it('should set correct input data in chart series', () => {
     component.data = [
       {
-          name: 'Boomerangs 20%',
-          y: 20,
-          label: '20%'
+        name: 'Boomerangs 20%',
+        y: 20,
+        label: '20%',
       },
       {
-          name: 'Bubbles 41%',
-          y: 41,
-          label: '41%'
-      }
+        name: 'Bubbles 41%',
+        y: 41,
+        label: '41%',
+      },
     ];
     component.ngOnInit();
     const data = (component.options.series[0] as Highcharts.SeriesAreasplineOptions).data;
