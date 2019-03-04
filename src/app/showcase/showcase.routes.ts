@@ -61,7 +61,7 @@ export const routes: Routes = [
       },
       {
         path: 'progress-bar',
-        component: ProgressBarShowcaseComponent
+        component: ProgressBarShowcaseComponent,
       },
       {
         path: 'nativescript-only',

@@ -11,45 +11,44 @@ import { ProgressBarExampleComponent } from './progress-bar-example/progress-bar
 import { SpinnerExampleComponent } from './spinner-example/spinner-example.component';
 
 export const routes: Routes = [
-    {
-        path: '',
-        redirectTo: 'grid',
-    },
-    {
-        path: 'button',
-        component: ButtonExampleComponent
-    },
-    {
-        path: 'card',
-        component: CardExampleComponent
-    },
-    {
-        path: 'list',
-        component: ListExampleComponent
-    },
-    {
-        path: 'chart',
-        component: ChartExampleComponent
-    },
-    {
-        path: 'grid',
-        component: GridExampleComponent
-    },
-    {
-        path: 'avatar',
-        component: AvatarExampleComponent
-    },
-    {
-        path: 'fonts',
-        component: FontsExampleComponent
-    },
-    {
-        path: 'progress-bar',
-        component: ProgressBarExampleComponent
-    },
-    {
-      path: 'spinner',
-      component: SpinnerExampleComponent,
-    }
-
+  {
+    path: '',
+    redirectTo: 'grid',
+  },
+  {
+    path: 'button',
+    component: ButtonExampleComponent,
+  },
+  {
+    path: 'card',
+    component: CardExampleComponent,
+  },
+  {
+    path: 'list',
+    component: ListExampleComponent,
+  },
+  {
+    path: 'chart',
+    component: ChartExampleComponent,
+  },
+  {
+    path: 'grid',
+    component: GridExampleComponent,
+  },
+  {
+    path: 'avatar',
+    component: AvatarExampleComponent,
+  },
+  {
+    path: 'fonts',
+    component: FontsExampleComponent,
+  },
+  {
+    path: 'progress-bar',
+    component: ProgressBarExampleComponent,
+  },
+  {
+    path: 'spinner',
+    component: SpinnerExampleComponent,
+  },
 ];

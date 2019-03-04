@@ -17,5 +17,5 @@ export const COMPONENT_DECLARATIONS: any[] = [
   ChartExampleComponent,
   FontsExampleComponent,
   ProgressBarExampleComponent,
-  SpinnerExampleComponent
+  SpinnerExampleComponent,
 ];

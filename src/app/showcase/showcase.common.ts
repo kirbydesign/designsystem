@@ -17,18 +17,18 @@ import { SpinnerShowcaseComponent } from './spinner-showcase/spinner-showcase.co
 export const COMPONENT_IMPORTS: any[] = [ExamplesModule, ShowcaseRoutingModule];
 
 export const COMPONENT_EXPORTS: any[] = [
-    CardShowcaseComponent,
-    ColorsShowcaseComponent,
-    ButtonShowcaseComponent,
-    ListShowcaseComponent,
-    GridShowcaseComponent,
-    AvatarShowcaseComponent,
-    ChartShowcaseComponent,
-    DoughnutChartShowcaseComponent,
-    FontsShowcaseComponent,
-    LineChartShowcaseComponent,
-    SpinnerShowcaseComponent,
-    ProgressBarShowcaseComponent
+  CardShowcaseComponent,
+  ColorsShowcaseComponent,
+  ButtonShowcaseComponent,
+  ListShowcaseComponent,
+  GridShowcaseComponent,
+  AvatarShowcaseComponent,
+  ChartShowcaseComponent,
+  DoughnutChartShowcaseComponent,
+  FontsShowcaseComponent,
+  LineChartShowcaseComponent,
+  SpinnerShowcaseComponent,
+  ProgressBarShowcaseComponent,
 ];
 
 export const COMPONENT_DECLARATIONS: any[] = [...COMPONENT_EXPORTS, ShowcaseComponent];

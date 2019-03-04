@@ -46,5 +46,5 @@ export const declarations = [
   AvatarComponent,
   GroupByPipe,
   ProgressBarComponent,
-  SpinnerComponent
+  SpinnerComponent,
 ];

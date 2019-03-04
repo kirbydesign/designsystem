@@ -12,9 +12,8 @@ describe('ProgressBarShowcaseComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ExamplesModule],
-      declarations: [ ProgressBarShowcaseComponent, HtmlViewerComponent ]
-    })
-    .compileComponents();
+      declarations: [ProgressBarShowcaseComponent, HtmlViewerComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
