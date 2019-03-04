@@ -1,9 +1,9 @@
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
 
 import { ProgressBarShowcaseComponent } from './progress-bar-showcase.component';
+import { HtmlViewerComponent } from '../../shared/html-viewer/html-viewer.component';
+import { ExamplesModule } from '../../examples/examples.module';
 
 describe('ProgressBarShowcaseComponent', () => {
   let component: ProgressBarShowcaseComponent;
@@ -11,7 +11,8 @@ describe('ProgressBarShowcaseComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProgressBarShowcaseComponent ]
+      imports: [ExamplesModule],
+      declarations: [ ProgressBarShowcaseComponent, HtmlViewerComponent ]
     })
     .compileComponents();
   }));

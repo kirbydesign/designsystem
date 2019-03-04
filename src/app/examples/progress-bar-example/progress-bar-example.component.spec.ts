@@ -1,8 +1,6 @@
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
-
+import { KirbyModule } from '../../../kirby/kirby.module';
 import { ProgressBarExampleComponent } from './progress-bar-example.component';
 
 describe('ProgressBarExampleComponent', () => {
@@ -10,8 +8,10 @@ describe('ProgressBarExampleComponent', () => {
   let fixture: ComponentFixture<ProgressBarExampleComponent>;
 
   beforeEach(async(() => {
+  
     TestBed.configureTestingModule({
-      declarations: [ ProgressBarExampleComponent ]
+      imports: [KirbyModule],
+      declarations: [ ProgressBarExampleComponent]
     })
     .compileComponents();
   }));
