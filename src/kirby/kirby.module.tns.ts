@@ -11,17 +11,21 @@ import { NativeScriptDoughnutChartComponent } from './components/nativescript-on
 import { NativeScriptLineChartComponent } from './components/nativescript-only/line-chart/line-chart.component.tns-only';
 
 // tslint:disable-next-line:max-line-length
-const nativeScriptDeclarations = [...declarations, NativeScriptDoughnutChartComponent, NativeScriptLineChartComponent];
+const nativeScriptDeclarations = [
+  ...declarations,
+  NativeScriptDoughnutChartComponent,
+  NativeScriptLineChartComponent,
+];
 
 @NgModule({
   imports: [
     NativeScriptCommonModule,
     NativeScriptRouterModule,
     NativeScriptUIChartModule,
-    NativeScriptUIListViewModule
+    NativeScriptUIListViewModule,
   ],
   declarations: nativeScriptDeclarations,
   exports: nativeScriptDeclarations,
-  schemas: [NO_ERRORS_SCHEMA]
+  schemas: [NO_ERRORS_SCHEMA],
 })
-export class KirbyModule { }
+export class KirbyModule {}

@@ -2,7 +2,7 @@
 
 :host {
   margin: 0.25em 0.25em;
-  --kirby-button-border-radius: 0.2rem;
+  --kirby-button-border-radius: 2rem;
   background-color: var(--kirby-primary);
   border-radius: var(--kirby-button-border-radius);
   border: 1px solid var(--kirby-primary);
@@ -17,8 +17,8 @@
     width: 100%;
   }
 
-  &[shape='round'] {
-    --kirby-button-border-radius: 2rem;
+  &[shape='square'] {
+    --kirby-button-border-radius: 0.2rem;
   }
 
   &[colortype='primary'] {

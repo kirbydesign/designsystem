@@ -4,7 +4,7 @@ Button[kirby-button] {
   color: get-color('kirby-on-primary');
   background-color: get-color('kirby-primary');
   border-color: get-color('kirby-primary');
-  border-radius: 5;
+  border-radius: 100;
   border-width: 1;
   margin: 10 10;
   padding: 12 20;
@@ -15,8 +15,8 @@ Button[kirby-button] {
     border-color: get-color('kirby-secondary');
   }
   
-  &[shape='round'] {
-    border-radius: 100;
+  &[shape='square'] {
+    border-radius: 5;
   }
 
 }

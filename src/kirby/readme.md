@@ -54,6 +54,17 @@ Include the Kirby Sass variables in your app:
 ...
 ```
 
+For Webpack to resolve `.tns` files also add `["designsystem"]` to the `explicitResolve` parameter for `nsWebpack.getResolver` to your `webpack.config.js`:
+
+```js
+...
+  const ngCompilerPlugin = new AngularCompilerPlugin({
+        hostReplacementPaths: nsWebpack.getResolver([platform, "tns"], ["designsystem"]),
+        ...
+    });
+...
+```
+
 ## NativeScript-Only Components
 
 Some Kirby components only exists as [Platform-Specific Components](https://docs.nativescript.org/angular/code-sharing/platform-specific-components), e.g. `NativeScriptDoughnutChartComponent`.

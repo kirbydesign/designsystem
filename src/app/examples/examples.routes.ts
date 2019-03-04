@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+
 import { AvatarExampleComponent } from './avatar-example/avatar-example.component';
 import { ButtonExampleComponent } from './button-example/button-example.component';
 import { CardExampleComponent } from './card-example/card-example.component';
@@ -7,6 +8,7 @@ import { ListExampleComponent } from './list-example/list-example.component';
 import { ChartExampleComponent } from './chart-example/chart-example.component';
 import { FontsExampleComponent } from './fonts-example/fonts-example.component';
 import { ProgressBarExampleComponent } from './progress-bar-example/progress-bar-example.component';
+import { SpinnerExampleComponent } from './spinner-example/spinner-example.component';
 
 export const routes: Routes = [
     {
@@ -44,6 +46,10 @@ export const routes: Routes = [
     {
         path: 'progress-bar',
         component: ProgressBarExampleComponent
+    },
+    {
+      path: 'spinner',
+      component: SpinnerExampleComponent,
     }
 
 ];

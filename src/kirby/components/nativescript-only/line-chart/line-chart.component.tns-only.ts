@@ -1,21 +1,25 @@
-import { Component, OnInit, Input, Output, OnChanges, SimpleChanges, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  OnChanges,
+  SimpleChanges,
+  EventEmitter,
+} from '@angular/core';
 import { TrackballCustomContentData } from 'nativescript-ui-chart';
 import { EventData } from 'tns-core-modules/data/observable';
 import { Label } from 'tns-core-modules/ui/label';
 import * as platform from 'tns-core-modules/platform';
 import { SelectorsMap } from 'tns-core-modules/ui/styling/css-selector/css-selector';
 export class NativeScriptLineChartItem {
-  constructor(
-    public category: number,
-    public amount: number
-    ) {
-  }
+  constructor(public category: number, public amount: number) {}
 }
 
 @Component({
   selector: 'kirby-nativescript-line-chart',
   templateUrl: './line-chart.component.tns-only.html',
-  styleUrls: ['./line-chart.component.tns-only.scss']
+  styleUrls: ['./line-chart.component.tns-only.scss'],
 })
 export class NativeScriptLineChartComponent implements OnInit, OnChanges {
   @Input() items: NativeScriptLineChartItem[];
@@ -36,8 +40,7 @@ export class NativeScriptLineChartComponent implements OnInit, OnChanges {
 
   constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['items']) {
@@ -69,7 +72,7 @@ export class NativeScriptLineChartComponent implements OnInit, OnChanges {
 
   getMinimum(items: NativeScriptLineChartItem[]) {
     const min = this.getMinY(this.items) - this.strokeWidth - this.chartBorderBottom;
-    return (min < 0) ? 0 : min;
+    return min < 0 ? 0 : min;
   }
 
   getMaximum(items: NativeScriptLineChartItem[]) {
@@ -77,7 +80,7 @@ export class NativeScriptLineChartComponent implements OnInit, OnChanges {
   }
 
   getYs(items: NativeScriptLineChartItem[]) {
-    return items.map(d => d.amount);
+    return items.map((d) => d.amount);
   }
 
   getMinY(items: NativeScriptLineChartItem[]) {
@@ -92,12 +95,10 @@ export class NativeScriptLineChartComponent implements OnInit, OnChanges {
     const selectedItem: NativeScriptLineChartItem = args.pointData;
     args.content = this.getLabelText(selectedItem);
     this.labelText = this.getLabelText(selectedItem);
-
   }
 
   onTap(args: EventData) {
     const label = <Label>args.object;
     this.selectorChange.emit(label.id);
   }
-
 }

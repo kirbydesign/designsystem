@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { KirbyModule } from '../../../kirby/kirby.module';
 import { ListExampleComponent } from './list-example.component';
@@ -9,10 +10,9 @@ describe('ListExampleComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ KirbyModule ],
-      declarations: [ ListExampleComponent ]
-    })
-    .compileComponents();
+      imports: [KirbyModule, RouterTestingModule],
+      declarations: [ListExampleComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
