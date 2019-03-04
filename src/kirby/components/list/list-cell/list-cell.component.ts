@@ -4,19 +4,20 @@ enum verticalAlignmentEnum {
   top = 'flex-start',
   center = 'center',
   bottom = 'flex-end',
+  stretch = 'stretch',
+  baseline = 'baseline',
 }
 enum horisontalAlignmentEnum {
   left = 'flex-start',
   center = 'center',
   right = 'flex-end',
 }
+type horisontalAlignment = 'left' | 'center' | 'right' | 'space-between' | 'space-around';
+type verticalAlignment = 'top' | 'center' | 'bottom' | 'stretch' | 'baseline';
 
 const defaultHorisontalAlignment: horisontalAlignment = 'left';
 const defaultVerticalAlignment: verticalAlignment = 'center';
 const defaultWidth = 1;
-
-export type horisontalAlignment = 'left' | 'center' | 'right';
-export type verticalAlignment = 'top' | 'center' | 'bottom';
 
 @Component({
   selector: 'kirby-list-cell',
@@ -54,13 +55,21 @@ export class ListCellComponent implements OnInit {
   }
 
   getHorisontalAlignment(): string {
-    if (this.horisontalAlignment && horisontalAlignmentEnum[this.horisontalAlignment]) {
-      return horisontalAlignmentEnum[this.horisontalAlignment];
+    if (this.horisontalAlignment) {
+      if (horisontalAlignmentEnum[this.horisontalAlignment]) {
+        return horisontalAlignmentEnum[this.horisontalAlignment];
+      } else if (
+        // '-' not supported in enum
+        this.horisontalAlignment === 'space-between' ||
+        this.horisontalAlignment === 'space-around'
+      ) {
+        return this.horisontalAlignment;
+      }
     }
     console.warn(
       `Invalid value ${
         this.horisontalAlignment
-      } for horisontalAlignment. Valid values are 'left', 'center', 'right'. Defaulting to '${defaultHorisontalAlignment}'`
+      } for horisontalAlignment. Valid values are 'left', 'center', 'right', 'space-between', 'space-around'. Defaulting to '${defaultHorisontalAlignment}'`
     );
     return horisontalAlignmentEnum[defaultHorisontalAlignment];
   }
@@ -72,7 +81,7 @@ export class ListCellComponent implements OnInit {
     console.warn(
       `Invalid value ${
         this.verticalAlignment
-      } for verticalAlignment. Valid values are 'top', 'center', 'bottom'. Defaulting to '${defaultVerticalAlignment}'`
+      } for verticalAlignment. Valid values are 'top', 'center', 'bottom', 'stretch', 'baseline'. Defaulting to '${defaultVerticalAlignment}'`
     );
     return verticalAlignmentEnum[defaultVerticalAlignment];
   }

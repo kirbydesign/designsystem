@@ -92,6 +92,20 @@ describe('ListCellComponent', () => {
       expect(component.getHorisontalAlignment()).toBe(expected);
     });
 
+    it('space-between should not be transformed', () => {
+      component.horisontalAlignment = 'space-between';
+      const expected = 'space-between';
+
+      expect(component.getHorisontalAlignment()).toBe(expected);
+    });
+
+    it('space-around should not be transformed', () => {
+      component.horisontalAlignment = 'space-around';
+      const expected = 'space-around';
+
+      expect(component.getHorisontalAlignment()).toBe(expected);
+    });
+
     it('should not fail on null', () => {
       component.horisontalAlignment = null;
       const expected = 'flex-start';
@@ -124,6 +138,20 @@ describe('ListCellComponent', () => {
     it('bottom should be transformed to flex-end', () => {
       component.verticalAlignment = 'bottom';
       const expected = 'flex-end';
+
+      expect(component.getVerticalAlignment()).toBe(expected);
+    });
+
+    it('stretch should not be transformed', () => {
+      component.verticalAlignment = 'stretch';
+      const expected = 'stretch';
+
+      expect(component.getVerticalAlignment()).toBe(expected);
+    });
+
+    it('baseline should not be transformed', () => {
+      component.verticalAlignment = 'baseline';
+      const expected = 'baseline';
 
       expect(component.getVerticalAlignment()).toBe(expected);
     });
