@@ -53,11 +53,10 @@
 
 <hr />
 
-
 <kirby-list [items]="myItems" (itemSelect)="onItemSelect($event)">
   
   <!-- HEADER-->
-  <kirby-list-cell *kirbyListHeader>Name</kirby-list-cell>
+  <kirby-list-cell *kirbyListHeader width="0.7">Name</kirby-list-cell>
   <!-- you can make custom headers using the kirbyListHeader directive -->
   <div *kirbyListHeader style="width: 150px; text-align: right">Amount</div>
   <kirby-list-cell *kirbyListHeader horisontalAlignment="right">Value</kirby-list-cell>
