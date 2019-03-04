@@ -3,16 +3,6 @@
         [getSectionName]="getSectionName"
         (itemSelect)="onItemSelect($event)"
 >
-
-  <!-- HEADERS-->
-  <kirby-list-cell *kirbyListHeader width="0.85">
-    <Label text="Name"></Label>
-  </kirby-list-cell>
-  <!-- <Label *kirbyListHeader text="Amount"></Label> -->
-  <kirby-list-cell *kirbyListHeader horisontalAlignment="right">
-    <Label text="Value"></Label>
-  </kirby-list-cell>
-
     <kirby-list-section-header
             *kirbyListSectionHeader="let section"
             [title]="section"

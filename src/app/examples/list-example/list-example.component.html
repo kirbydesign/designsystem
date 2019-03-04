@@ -1,6 +1,7 @@
 <kirby-list [items]="myItems">
 
-  <!-- HEADER-->
+  <!-- HEADER -->
+  <!-- *kirbyListHeader is not supported in conjunction with *kirbyListSectionHeader due to a bug i RadListView on iOS -->
   <kirby-list-cell *kirbyListHeader width="2">Name</kirby-list-cell>
   <kirby-list-cell *kirbyListHeader width="0.5"></kirby-list-cell>
   <kirby-list-cell *kirbyListHeader horisontalAlignment="right">Value</kirby-list-cell>
@@ -32,6 +33,7 @@
   [items]="myItems"
   (itemSelect)="onItemSelect($event)"
   [getSectionName]="getSectionName">
+  <!-- *kirbyListHeader is not supported in conjunction with *kirbyListSectionHeader due to a bug i RadListView on iOS -->
   <kirby-list-section-header
     *kirbyListSectionHeader="let section"
     [title]="section"
