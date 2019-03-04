@@ -104,6 +104,10 @@ export class ChartComponent implements OnInit, OnChanges {
                             backgroundColor: data.paneBackgroundColor
                         }];
                     }
+                    if (data.color) {
+                        this.options.title.style.color = data.color;
+                        this.options.subtitle.style.color = data.color;
+                    }
                     this.options.series = [{
                         type: 'solidgauge',
                         data: data.series as Array<Highcharts.SeriesGaugeDataOptions>
