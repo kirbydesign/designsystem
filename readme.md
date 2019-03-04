@@ -15,6 +15,8 @@ Kirby Design System is a UX Component library implementing the Kirby Design Phil
 <!-- Read more at: https://kirby.design -->
 Kirby Components are built on top of [Angular](https://angular.io) and [NativeScript](https://www.nativescript.org/) and can be used in a standalone Angular project as well as a [Angular/NativeScript code-sharing project](https://docs.nativescript.org/code-sharing/intro).
 
+The Kirby Cookbook, containing samples, status of components etc. can be accessed from [https://cookbook.kirby.design](cookbook.kirby.design).
+
 ## Note
 **Please note:** To enable the code-sharing capabilities of Angular/NativeScript the package contains the _uncompiled_ typescript (.ts), markup (.html/.tns.html) and styling (.scss/.tns.scss) source code. See the [Installation](#installation) section below on how to enable typescript compilation of the package in your project.
 
