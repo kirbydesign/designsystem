@@ -1,5 +1,5 @@
 
-<AbsoluteLayout class="bars-container" backgroundColor="lightgray">
+<AbsoluteLayout class="bars-container">
     <Label class="bar empty-progress" *ngIf="backgroundColor else defaultBackgroundColor" left="0" top="0" [style.background-color]="backgroundColor"></Label>
     <Label class="bar progress" *ngIf="progressColor else defaultProgressColor" left="0" top="0" [style.width.%]="progress" [style.background-color]="progressColor"></Label>
 </AbsoluteLayout>
