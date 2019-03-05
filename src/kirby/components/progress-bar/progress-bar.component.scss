@@ -10,23 +10,15 @@
         height: 100%;
         width: 100%;
         position: absolute;
-        // display: grid;
-        // grid-template-columns: repeat(100, 1fr);
 
         &.empty-progress {
             background-color: var(--kirby-primary-lighter);
             width: 100%;
-            // grid-column-start: 1;
-            // grid-column-end: 101;
         }
 
         &.progress {
             background-color: var(--kirby-primary);
-            // grid-column-start: 1;
         }
-        
-        
-
     }
 }
 
