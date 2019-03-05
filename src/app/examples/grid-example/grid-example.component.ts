@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
+
 import { GridCardConfiguration } from '../../../kirby/components/grid/grid-card-configuration';
 import { CardExampleComponent } from '../card-example/card-example.component';
 
 @Component({
   selector: 'kirby-grid-example',
   templateUrl: './grid-example.component.html',
-  styleUrls: ['./grid-example.component.scss']
+  styleUrls: ['./grid-example.component.scss'],
 })
 export class GridExampleComponent implements OnInit {
   cardConfigurations: GridCardConfiguration[] = [];
 
-  constructor() {
-  }
+  constructor() {}
 
   ngOnInit() {
     setTimeout(() => {
@@ -29,5 +29,4 @@ export class GridExampleComponent implements OnInit {
       ];
     }, 300);
   }
-
 }

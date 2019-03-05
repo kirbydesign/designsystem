@@ -1,5 +1,5 @@
-
 import { Routes } from '@angular/router';
+
 import { AvatarShowcaseComponent } from './avatar-showcase/avatar-showcase.component';
 import { ButtonShowcaseComponent } from './button-showcase/button-showcase.component';
 import { CardShowcaseComponent } from './card-showcase/card-showcase.component';
@@ -13,60 +13,60 @@ import { ColorsShowcaseComponent } from './colors-showcase/colors-showcase.compo
 import { SpinnerShowcaseComponent } from './spinner-showcase/spinner-showcase.component';
 
 export const routes: Routes = [
-    {
+  {
+    path: '',
+    component: ShowcaseComponent,
+    children: [
+      {
         path: '',
-        component: ShowcaseComponent,
+        redirectTo: 'button',
+        pathMatch: 'full',
+      },
+      {
+        path: 'button',
+        component: ButtonShowcaseComponent,
+      },
+      {
+        path: 'avatar',
+        component: AvatarShowcaseComponent,
+      },
+      {
+        path: 'card',
+        component: CardShowcaseComponent,
+      },
+      {
+        path: 'colors',
+        component: ColorsShowcaseComponent,
+      },
+      {
+        path: 'list',
+        component: ListShowcaseComponent,
+      },
+      {
+        path: 'grid',
+        component: GridShowcaseComponent,
+      },
+      {
+        path: 'chart',
+        component: ChartShowcaseComponent,
+      },
+      {
+        path: 'fonts',
+        component: FontsShowcaseComponent,
+      },
+      {
+        path: 'spinner',
+        component: SpinnerShowcaseComponent,
+      },
+      {
+        path: 'nativescript-only',
         children: [
-            {
-                path: '',
-                redirectTo: 'button',
-                pathMatch: 'full',
-            },
-            {
-                path: 'button',
-                component: ButtonShowcaseComponent
-            },
-            {
-                path: 'avatar',
-                component: AvatarShowcaseComponent
-            },
-            {
-                path: 'card',
-                component: CardShowcaseComponent
-            },
-            {
-                path: 'colors',
-                component: ColorsShowcaseComponent
-            },
-            {
-                path: 'list',
-                component: ListShowcaseComponent
-            },
-            {
-                path: 'grid',
-                component: GridShowcaseComponent
-            },
-            {
-                path: 'chart',
-                component: ChartShowcaseComponent
-            },
-            {
-                path: 'fonts',
-                component: FontsShowcaseComponent
-            },
-            {
-                path: 'spinner',
-                component: SpinnerShowcaseComponent
-            },
-            {
-                path: 'nativescript-only',
-                children: [
-                    {
-                        path: 'doughnut-chart',
-                        component: DoughnutChartShowcaseComponent
-                    }
-                ]
-            },
-        ]
-    },
+          {
+            path: 'doughnut-chart',
+            component: DoughnutChartShowcaseComponent,
+          },
+        ],
+      },
+    ],
+  },
 ];

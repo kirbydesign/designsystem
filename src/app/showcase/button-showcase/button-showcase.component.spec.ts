@@ -11,10 +11,9 @@ describe('ButtonShowcaseComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ ExamplesModule, RouterTestingModule ],
-      declarations: [ ButtonShowcaseComponent, HtmlViewerComponent ]
-    })
-    .compileComponents();
+      imports: [ExamplesModule, RouterTestingModule],
+      declarations: [ButtonShowcaseComponent, HtmlViewerComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

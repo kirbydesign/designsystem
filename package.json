@@ -9,7 +9,7 @@
       "version": "5.2.0"
     }
   },
-  "version": "0.0.73",
+  "version": "0.0.76",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -17,7 +17,8 @@
     "build-polyfills": "webpack --config webpack.polyfills.config.js",
     "test": "ng test",
     "ci-test": "ng test --progress false --watch false --code-coverage",
-    "lint": "ng lint",
+    "lint": "tslint './src/**/*.ts'",
+    "lint:fix": "tslint './src/**/*.ts' --fix",
     "e2e": "ng e2e",
     "dist": "ng build --prod --aot --progress false",
     "android": "tns run android --hmr",
@@ -25,9 +26,10 @@
     "ios": "tns run ios --hmr",
     "ios-debug": "tns debug ios --bundle --device 'iPhone X'",
     "pack-copy-to-dist-folder-watch": "cpx \"src\\kirby\\**\\!(*.spec.ts)\" dist-lib --watch",
-    "postinstall": "npm run build-polyfills",
+    "postinstall": "npm run build-polyfills && npm run transpile:tools",
     "postversion": "git push && git push --tags",
-    "coverage-report": "cat ./coverage/lcov.info | coveralls"
+    "coverage-report": "cat ./coverage/lcov.info | coveralls",
+    "transpile:tools": "tsc -p tools/tslint-rules"
   },
   "private": true,
   "dependencies": {
@@ -81,6 +83,7 @@
     "nativescript-dev-sass": "^1.6.1",
     "nativescript-dev-typescript": "^0.8.0",
     "nativescript-dev-webpack": "^0.20.2",
+    "prettier": "^1.15.3",
     "protractor": "~5.3.0",
     "resize-observer-polyfill": "^1.5.1",
     "sass-extract": "^2.1.0",
@@ -88,6 +91,7 @@
     "tns-platform-declarations": "^5.0.3",
     "ts-node": "~5.0.1",
     "tslint": "~5.9.1",
+    "tslint-plugin-prettier": "^2.0.1",
     "typescript": "~3.1.1"
   }
 }

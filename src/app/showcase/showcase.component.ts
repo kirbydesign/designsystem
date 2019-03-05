@@ -6,7 +6,7 @@ import { filter } from 'rxjs/operators';
 @Component({
   selector: 'kirby-showcase',
   templateUrl: './showcase.component.html',
-  styleUrls: ['./showcase.component.scss']
+  styleUrls: ['./showcase.component.scss'],
 })
 export class ShowcaseComponent implements OnInit, OnDestroy {
   exampleComponentName: string;
@@ -19,8 +19,7 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
     this.subscribeToRouterEvents();
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   ngOnDestroy(): void {
     this.routerEventsSubscription.unsubscribe();
@@ -28,15 +27,15 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
 
   subscribeToRouterEvents() {
     this.routerEventsSubscription = this.router.events
-      .pipe(filter(event => event instanceof NavigationEnd))
+      .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => this.handleRouterEvent(event));
   }
 
   handleRouterEvent(event: NavigationEnd) {
     const urlSegments = event.url.split('/');
     this.exampleComponentName = urlSegments.length
-                                ? urlSegments[urlSegments.length - 1]
-                                : undefined;
+      ? urlSegments[urlSegments.length - 1]
+      : undefined;
     if (this.exampleComponentName === 'colors') {
       this.isCTABoxShown = false;
     } else {
@@ -44,5 +43,4 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
     }
     this.exampleComponentGitUrl = this.gitUrl + urlSegments.pop() + '-example';
   }
-
 }
