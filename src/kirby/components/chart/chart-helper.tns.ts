@@ -1,4 +1,4 @@
-import {Options} from 'highcharts';
+import { Options } from 'highcharts';
 import {ElementRef} from '@angular/core';
 import {WebView, LoadEventData} from 'tns-core-modules/ui/web-view/web-view';
 import {isAndroid, isIOS} from 'tns-core-modules/platform';
