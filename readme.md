@@ -23,7 +23,9 @@ The Kirby Cookbook, containing samples, status of components etc. can be accesse
 ## Table of Contents
 
 * [Installation](#installation)
-* [Usage](#usage)
+* [NativeScript-Only Components](#nativescript-only-components)
+* [Polyfills](#polyfills)
+* [Chart Components](#chart-components)
 
 ## Installation
 
