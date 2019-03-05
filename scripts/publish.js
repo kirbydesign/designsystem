@@ -4,6 +4,7 @@
 
 var cpx = require('cpx');
 
+cpx.copySync('readme.md', 'dist-lib');
 cpx.copySync('src/kirby/**/!(*.spec.ts)', 'dist-lib');
 
 var fs = require('fs');
