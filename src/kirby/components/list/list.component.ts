@@ -14,7 +14,6 @@ import {
   LoadOnDemandListViewEventData,
   RadListView,
 } from 'nativescript-ui-listview/ui-listview.common';
-import { isObservable, Observable } from 'rxjs';
 
 @Directive({
   selector: '[kirbyListItem]',
@@ -44,7 +43,7 @@ export class ListSectionHeaderDirective {}
 export class ListComponent implements OnInit {
   @Input() items: any[];
   @Input() getSectionName?: (item: any) => string;
-  @Input() onLoadMoreItems?: () => Promise<boolean>;
+  @Input() loadMore?: () => Promise<boolean>;
   @Input() noMoreItemsText: string;
   @Output() itemSelect = new EventEmitter<any>();
 
@@ -56,7 +55,7 @@ export class ListComponent implements OnInit {
 
   isSectionsEnabled: boolean;
   isSelectable: boolean;
-  private noMoreItemsToLoad = false;
+  isLoadMoreDone: boolean = false;
 
   constructor() {}
 
@@ -66,11 +65,6 @@ export class ListComponent implements OnInit {
     }
     if (this.listItemTemplate) {
       console.warn('kirbyListItem is deprecated and will be removed in future versions of Kirby');
-    }
-    if (this.onLoadMoreItems) {
-      if (!isObservable(this.items)) {
-        console.warn('Load more function demands the items to be an observable');
-      }
     }
     this.isSelectable = this.itemSelect.observers.length > 0;
   }
@@ -91,25 +85,18 @@ export class ListComponent implements OnInit {
     return headerTemplate ? '1' : '0';
   }
 
-  async onLoadMoreItemsRequested(args: LoadOnDemandListViewEventData) {
-    console.log('onLoadMoreItemsRequested');
+  async onLoadMoreNative(args: LoadOnDemandListViewEventData) {
+    await this.handleLoadMore();
     const listView: RadListView = args.object;
-    this.noMoreItemsToLoad = false;
-    if (this.onLoadMoreItems) {
-      console.log('onLoadMoreItemsRequested inside');
-      this.noMoreItemsToLoad = await this.onLoadMoreItems();
-      listView.notifyLoadOnDemandFinished(this.noMoreItemsToLoad);
-      args.returnValue = !this.noMoreItemsToLoad;
-    } else {
-      args.returnValue = false;
-      listView.notifyLoadOnDemandFinished(true);
-    }
+    listView.notifyLoadOnDemandFinished(this.isLoadMoreDone);
+    args.returnValue = this.isLoadMoreDone;
   }
 
-  isShowingNoMoreItemsLabel(): boolean {
-    if (this.onLoadMoreItems) {
-      return this.noMoreItemsToLoad;
+  private async handleLoadMore() {
+    if (this.loadMore) {
+      this.isLoadMoreDone = await this.loadMore();
+    } else {
+      this.isLoadMoreDone = true;
     }
-    return false;
   }
 }

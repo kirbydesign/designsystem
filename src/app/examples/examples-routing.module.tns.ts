@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { NativeScriptRouterModule } from 'nativescript-angular/router';
 
 import { routes } from './examples.routes';
+import { ListLoadMoreExampleComponent } from './list-example/tns-list-examples/list-load-more-example/list-load-more-example.component';
 import { ExamplesModule } from './examples.module';
 // tslint:disable-next-line:max-line-length
 import { NativeScriptDoughnutChartExampleComponent } from './nativescript-only/doughnut-chart-example/doughnut-chart-example.component.tns-only';
@@ -43,6 +44,10 @@ const nativeScriptRoutes = [
       {
         path: 'original',
         component: ListItemExampleComponent,
+      },
+      {
+        path: 'loadmore',
+        component: ListLoadMoreExampleComponent,
       },
     ],
   },

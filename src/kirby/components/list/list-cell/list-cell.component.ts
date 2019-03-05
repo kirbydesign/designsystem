@@ -44,11 +44,6 @@ export class ListCellComponent implements OnInit {
     if (this.width && this.width > 0) {
       return `${this.width * 100}%`;
     }
-    console.warn(
-      `Invalid value ${this.width} for width. Valid values numbers > 0. Defaulting to '${
-        this.defaultWidth
-      }'`
-    );
     return `${this.defaultWidth * 100}%`;
   }
 
@@ -56,13 +51,6 @@ export class ListCellComponent implements OnInit {
     if (this.horisontalAlignment && horisontalAlignmentEnum[this.horisontalAlignment]) {
       return horisontalAlignmentEnum[this.horisontalAlignment];
     }
-    console.warn(
-      `Invalid value ${
-        this.horisontalAlignment
-      } for horisontalAlignment. Valid values are 'left', 'center', 'right'. Defaulting to '${
-        this.defaultHorisontalAlignment
-      }'`
-    );
     return horisontalAlignmentEnum[this.defaultHorisontalAlignment];
   }
 
@@ -70,13 +58,6 @@ export class ListCellComponent implements OnInit {
     if (this.verticalAlignment && verticalAlignmentEnum[this.verticalAlignment]) {
       return verticalAlignmentEnum[this.verticalAlignment];
     }
-    console.warn(
-      `Invalid value ${
-        this.verticalAlignment
-      } for verticalAlignment. Valid values are 'top', 'center', 'bottom'. Defaulting to '${
-        this.defaultVerticalAlignment
-      }'`
-    );
     return verticalAlignmentEnum[this.defaultVerticalAlignment];
   }
 

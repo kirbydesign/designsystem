@@ -3,6 +3,7 @@ import { NativeScriptCommonModule } from 'nativescript-angular/common';
 
 import { KirbyModule } from '../../kirby/kirby.module';
 import { COMPONENT_DECLARATIONS } from './examples.common';
+import { ListLoadMoreExampleComponent } from './list-example/tns-list-examples/list-load-more-example/list-load-more-example.component';
 // tslint:disable-next-line:max-line-length
 import { NativeScriptDoughnutChartExampleComponent } from './nativescript-only/doughnut-chart-example/doughnut-chart-example.component.tns-only';
 // tslint:disable-next-line:max-line-length
@@ -21,6 +22,7 @@ const nativeScriptDeclarations = [
   ListSectionExampleComponent,
   ListCustomCellLinesExampleComponent,
   ListItemExampleComponent,
+  ListLoadMoreExampleComponent,
 ];
 
 @NgModule({
