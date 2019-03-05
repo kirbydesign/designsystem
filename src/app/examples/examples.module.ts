@@ -6,12 +6,9 @@ import { COMPONENT_DECLARATIONS } from './examples.common';
 import { CardExampleComponent } from './card-example/card-example.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    KirbyModule,
-  ],
+  imports: [CommonModule, KirbyModule],
   declarations: COMPONENT_DECLARATIONS,
   exports: COMPONENT_DECLARATIONS,
-  entryComponents: [CardExampleComponent]
+  entryComponents: [CardExampleComponent],
 })
-export class ExamplesModule { }
+export class ExamplesModule {}

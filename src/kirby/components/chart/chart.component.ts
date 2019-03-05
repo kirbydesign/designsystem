@@ -1,5 +1,6 @@
 import {Component, OnInit, Input, OnChanges, ElementRef, ViewChild, Inject} from '@angular/core';
 import {Options} from 'highcharts';
+
 import {ChartHelper} from './chart-helper';
 import {DonutOptions, DONUT_OPTIONS} from './options/donut';
 import {AreaSplineOptions, AREASPLINE_OPTIONS} from './options/areaspline';
@@ -31,7 +32,8 @@ export class ChartComponent implements OnInit, OnChanges {
         private chartHelper: ChartHelper,
         @Inject(DONUT_OPTIONS) public donutOptions: Options,
         @Inject(AREASPLINE_OPTIONS) public areasplineOptions: Options,
-        @Inject(ACTIVITYGAUGE_OPTIONS) public activitygaugeOptions: Options) {
+        @Inject(ACTIVITYGAUGE_OPTIONS) public activitygaugeOptions: Options
+    ) {
     }
 
     ngOnInit() {
@@ -81,17 +83,21 @@ export class ChartComponent implements OnInit, OnChanges {
                     this.options.plotOptions.pie.dataLabels.enabled = this.showDataLabels;
                 /* falls through */
                 case ChartType.DONUT: {
-                    this.options.series = [{
-                        type: 'pie',
-                        data: this.data as Array<Highcharts.SeriesPieDataOptions>
-                    }];
+                    this.options.series = [
+                        {
+                            type: 'pie',
+                            data: this.data as Array<Highcharts.SeriesPieDataOptions>,
+                        },
+                    ];
                     break;
                 }
                 case ChartType.AREASPLINE: {
-                    this.options.series = [{
-                        type: 'areaspline',
-                        data: this.data as Array<Highcharts.SeriesAreasplineDataOptions>
-                    }];
+                    this.options.series = [
+                        {
+                            type: 'areaspline',
+                            data: this.data as Array<Highcharts.SeriesAreasplineDataOptions>,
+                        },
+                    ];
                     break;
                 }
                 case ChartType.ACTIVITYGAUGE: {

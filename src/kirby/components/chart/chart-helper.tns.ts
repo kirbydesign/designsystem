@@ -1,7 +1,11 @@
 import { Options } from 'highcharts';
 import { ElementRef } from '@angular/core';
 import { WebView, LoadEventData } from 'tns-core-modules/ui/web-view/web-view';
-import { android, AndroidApplication, AndroidActivityEventData } from 'tns-core-modules/application';
+import {
+  android,
+  AndroidApplication,
+  AndroidActivityEventData,
+} from 'tns-core-modules/application';
 import { isAndroid, isIOS } from 'tns-core-modules/platform';
 import * as webViewInterfaceModule from 'nativescript-webview-interface';
 
@@ -26,7 +30,10 @@ export class ChartHelper {
         this.emitDataToWebView(options);
       }
     });
-    this.chartWebViewInterface = new webViewInterfaceModule.WebViewInterface(webView, '~/chart/chart.webview.html');
+    this.chartWebViewInterface = new webViewInterfaceModule.WebViewInterface(
+      webView,
+      '~/chart/chart.webview.html'
+    );
   }
 
   public updateChart(options: Options) {
@@ -42,13 +49,13 @@ export class ChartHelper {
   private setupWebViewForPlatform(webView: WebView) {
     if (isAndroid) {
       const androidView = webView.android;
-      androidView .getSettings().setBuiltInZoomControls(false);
-      androidView .getSettings().setDisplayZoomControls(false);
+      androidView.getSettings().setBuiltInZoomControls(false);
+      androidView.getSettings().setDisplayZoomControls(false);
       android.on(AndroidApplication.activityPausedEvent, (args: AndroidActivityEventData) => {
-        androidView .onPause();
+        androidView.onPause();
       });
       android.on(AndroidApplication.activityResumedEvent, (args: AndroidActivityEventData) => {
-        androidView .onResume();
+        androidView.onResume();
       });
     } else if (isIOS) {
       const iosScrollView = webView.ios.scrollView;
@@ -56,5 +63,4 @@ export class ChartHelper {
       iosScrollView.scrollEnabled = false;
     }
   }
-
 }

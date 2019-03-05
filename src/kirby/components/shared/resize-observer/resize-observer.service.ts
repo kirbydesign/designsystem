@@ -15,7 +15,10 @@ export class ResizeObserverService implements OnDestroy {
     this.observer = this._resizeObserverFactory.create((entries) => this.handleResize(entries));
   }
 
-  observe(elementOrRef: Element | ElementRef<Element>, action: (entry: ResizeObserverEntry) => void): void {
+  observe(
+    elementOrRef: Element | ElementRef<Element>,
+    action: (entry: ResizeObserverEntry) => void
+  ): void {
     const element = elementOrRef instanceof ElementRef ? elementOrRef.nativeElement : elementOrRef;
     if (!this.observedElements.has(element)) {
       if (this.observer) {
@@ -52,12 +55,11 @@ export class ResizeObserverService implements OnDestroy {
   }
 
   private handleResize(entries: ResizeObserverEntry[]) {
-    entries.forEach(entry => {
+    entries.forEach((entry) => {
       const action = this.observedElements.get(entry.target);
       if (action) {
         action(entry);
       }
     });
   }
-
 }

@@ -1,8 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { ExamplesModule } from '../../examples/examples.module';
 import { RouterTestingModule } from '@angular/router/testing';
-import { HtmlViewerComponent } from '../../shared/html-viewer/html-viewer.component';
+
 import { ChartShowcaseComponent } from './chart-showcase.component';
+import { ExamplesModule } from '../../examples/examples.module';
+import { HtmlViewerComponent } from '../../shared/html-viewer/html-viewer.component';
 
 describe('ChartShowcaseComponent', () => {
   let component: ChartShowcaseComponent;
@@ -10,10 +11,9 @@ describe('ChartShowcaseComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ ExamplesModule, RouterTestingModule ],
-      declarations: [ ChartShowcaseComponent, HtmlViewerComponent ]
-    })
-    .compileComponents();
+      imports: [ExamplesModule, RouterTestingModule],
+      declarations: [ChartShowcaseComponent, HtmlViewerComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

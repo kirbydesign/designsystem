@@ -13,26 +13,20 @@ import { ColorsShowcaseComponent } from './colors-showcase/colors-showcase.compo
 import { LineChartShowcaseComponent } from './line-chart-showcase/line-chart-showcase.component';
 import { SpinnerShowcaseComponent } from './spinner-showcase/spinner-showcase.component';
 
-export const COMPONENT_IMPORTS: any[] = [
-    ExamplesModule,
-    ShowcaseRoutingModule
-];
+export const COMPONENT_IMPORTS: any[] = [ExamplesModule, ShowcaseRoutingModule];
 
 export const COMPONENT_EXPORTS: any[] = [
-    CardShowcaseComponent,
-    ColorsShowcaseComponent,
-    ButtonShowcaseComponent,
-    ListShowcaseComponent,
-    GridShowcaseComponent,
-    AvatarShowcaseComponent,
-    ChartShowcaseComponent,
-    DoughnutChartShowcaseComponent,
-    FontsShowcaseComponent,
-    LineChartShowcaseComponent,
-    SpinnerShowcaseComponent,
+  CardShowcaseComponent,
+  ColorsShowcaseComponent,
+  ButtonShowcaseComponent,
+  ListShowcaseComponent,
+  GridShowcaseComponent,
+  AvatarShowcaseComponent,
+  ChartShowcaseComponent,
+  DoughnutChartShowcaseComponent,
+  FontsShowcaseComponent,
+  LineChartShowcaseComponent,
+  SpinnerShowcaseComponent,
 ];
 
-export const COMPONENT_DECLARATIONS: any[] = [
-  ...COMPONENT_EXPORTS,
-  ShowcaseComponent
-];
+export const COMPONENT_DECLARATIONS: any[] = [...COMPONENT_EXPORTS, ShowcaseComponent];

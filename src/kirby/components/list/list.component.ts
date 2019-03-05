@@ -8,50 +8,49 @@ import {
   OnInit,
   Output,
   QueryList,
-  TemplateRef
+  TemplateRef,
 } from '@angular/core';
 
 @Directive({
-  selector: '[kirbyListItem]'
+  selector: '[kirbyListItem]',
 })
-export class ListItemDirective { }
+export class ListItemDirective {}
 
 @Directive({
-  selector: '[kirbyListHeader]'
+  selector: '[kirbyListHeader]',
 })
-export class ListHeaderDirective { }
+export class ListHeaderDirective {}
 
 @Directive({
-  selector: '[kirbyListCell]'
+  selector: '[kirbyListCell]',
 })
-export class ListCellDirective { }
+export class ListCellDirective {}
 
 @Directive({
-  selector: '[kirbyListSectionHeader]'
+  selector: '[kirbyListSectionHeader]',
 })
 export class ListSectionHeaderDirective {}
 
 @Component({
   selector: 'kirby-list',
   templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss']
+  styleUrls: ['./list.component.scss'],
 })
 export class ListComponent implements OnInit {
-
   @Input() items: any[];
   @Input() getSectionName?: (item: any) => string;
   @Output() itemSelect = new EventEmitter<any>();
 
   // The first element that matches ListItemDirective. As a structural directive it unfolds into a template. This is a reference to that.
-  @ContentChild(ListItemDirective, {read: TemplateRef}) listItemTemplate;
-  @ContentChild(ListHeaderDirective, {read: TemplateRef}) headerTemplate;
-  @ContentChild(ListSectionHeaderDirective, {read: TemplateRef}) sectionHeaderTemplate;
+  @ContentChild(ListItemDirective, { read: TemplateRef }) listItemTemplate;
+  @ContentChild(ListHeaderDirective, { read: TemplateRef }) headerTemplate;
+  @ContentChild(ListSectionHeaderDirective, { read: TemplateRef }) sectionHeaderTemplate;
   @ContentChildren(ListCellDirective, { read: TemplateRef }) listCellTemplates: QueryList<any>;
 
   isSectionsEnabled: boolean;
   isSelectable: boolean;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
     if (this.getSectionName) {
@@ -72,7 +71,7 @@ export class ListComponent implements OnInit {
   }
 
   rowDefinition(headerTemplate: any): string {
-    return headerTemplate ? 'auto,*' : '*' ;
+    return headerTemplate ? 'auto,*' : '*';
   }
 
   rowNumberForListView(headerTemplate: any): string {

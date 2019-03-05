@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+
 import { AvatarExampleComponent } from './avatar-example/avatar-example.component';
 import { ButtonExampleComponent } from './button-example/button-example.component';
 import { CardExampleComponent } from './card-example/card-example.component';
@@ -11,38 +12,38 @@ import { SpinnerExampleComponent } from './spinner-example/spinner-example.compo
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'grid'
+    redirectTo: 'grid',
   },
   {
     path: 'button',
-    component: ButtonExampleComponent
+    component: ButtonExampleComponent,
   },
   {
     path: 'card',
-    component: CardExampleComponent
+    component: CardExampleComponent,
   },
   {
     path: 'list',
-    component: ListExampleComponent
+    component: ListExampleComponent,
   },
   {
     path: 'chart',
-    component: ChartExampleComponent
+    component: ChartExampleComponent,
   },
   {
     path: 'grid',
-    component: GridExampleComponent
+    component: GridExampleComponent,
   },
   {
     path: 'avatar',
-    component: AvatarExampleComponent
+    component: AvatarExampleComponent,
   },
   {
     path: 'fonts',
-    component: FontsExampleComponent
+    component: FontsExampleComponent,
   },
   {
     path: 'spinner',
-    component: SpinnerExampleComponent
+    component: SpinnerExampleComponent,
   },
 ];

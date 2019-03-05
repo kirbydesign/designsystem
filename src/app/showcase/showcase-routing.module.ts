@@ -5,6 +5,6 @@ import { routes } from './showcase.routes';
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class ShowcaseRoutingModule { }
+export class ShowcaseRoutingModule {}

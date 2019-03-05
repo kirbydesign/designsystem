@@ -8,15 +8,14 @@ describe('ListItemComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListItemComponent ]
-    })
-    .compileComponents();
+      declarations: [ListItemComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ListItemComponent);
     component = fixture.componentInstance;
-    component.item = {title: 'Føtex', amount: 20, detail: 'Jack'};
+    component.item = { title: 'Føtex', amount: 20, detail: 'Jack' };
     fixture.detectChanges();
   });
 

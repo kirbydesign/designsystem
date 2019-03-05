@@ -2,7 +2,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class BreakpointHelperService implements OnDestroy {
   currentScreenWidth: 800;
@@ -24,5 +24,4 @@ export class BreakpointHelperService implements OnDestroy {
   ngOnDestroy() {
     this.orientationChangedSubject.complete();
   }
-
 }
