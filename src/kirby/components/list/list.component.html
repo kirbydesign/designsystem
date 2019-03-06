@@ -1,9 +1,15 @@
 <!-- Header-->
-<div class="header" *ngIf="listHeaderTemplates.length > 0">
-  <ng-container *ngFor="let template of listHeaderTemplates">
-    <ng-container *ngTemplateOutlet="template"></ng-container>
-  </ng-container>
-</div>
+<!-- <div class="header" *ngIf="listHeaderTemplates.length > 0"> -->
+  <!-- <ng-container *ngTemplateOutlet="listHeaderTemplate">  -->
+    
+    <!-- <ng-container *ngFor="let template of listHeaderTemplates">
+      <ng-container *ngTemplateOutlet="template"></ng-container>
+    </ng-container> -->
+    <!-- </ng-container> -->
+    <!-- </div> -->
+    
+<!-- Header-->
+<ng-content select="kirby-list-header"></ng-content>
 
 <ul>
   <ng-container *ngIf="isSectionsEnabled; else normalList">
@@ -22,6 +28,7 @@
         <ng-container
           *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }"
         >
+
         </ng-container>
 
         <ng-container *ngFor="let template of listCellTemplates">

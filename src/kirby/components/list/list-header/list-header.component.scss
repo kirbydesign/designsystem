@@ -1,0 +1,8 @@
+@import '../../../scss/web-imports';
+:host {
+  background-color: var(--kirby-surface);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: size('m');
+}

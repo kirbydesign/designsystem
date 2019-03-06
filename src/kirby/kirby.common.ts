@@ -11,7 +11,8 @@ import {
   ListItemDirective,
   ListSectionHeaderDirective,
   ListCellDirective,
-  ListHeaderDirective
+  ListHeaderDirective,
+  ListHeadDirective,
 } from './components/list/list.component';
 import { ComponentLoaderDirective } from './components/shared/component-loader.directive';
 import { ChartComponent } from './components/chart/chart.component';
@@ -20,6 +21,7 @@ import { ListSectionHeaderComponent } from './components/list/list-section-heade
 import { ListCellComponent } from './components/list/list-cell/list-cell.component';
 import { ListCellLineComponent } from './components/list/list-cell-line/list-cell-line.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
+import { ListHeaderComponent } from './components/list/list-header/list-header.component';
 
 export const declarations = [
   CardComponent,
@@ -35,6 +37,8 @@ export const declarations = [
   ListSectionHeaderComponent,
   ListSectionHeaderDirective,
   ListHeaderDirective,
+  ListHeaderComponent,
+  ListHeadDirective,
   IconComponent,
   ChartComponent,
   GridComponent,

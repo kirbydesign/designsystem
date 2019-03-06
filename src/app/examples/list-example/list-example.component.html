@@ -14,10 +14,12 @@ kirby-list-cell supports the attributes:
 <kirby-list [items]="myItems">
 
   <!-- HEADER -->
-  <!-- *kirbyListHeader is not supported in conjunction with *kirbyListSectionHeader due to a bug i RadListView on iOS -->
-  <kirby-list-cell *kirbyListHeader width="2">Name</kirby-list-cell>
-  <kirby-list-cell *kirbyListHeader width="0.5"></kirby-list-cell>
-  <kirby-list-cell *kirbyListHeader horisontalAlignment="right">Value</kirby-list-cell>
+  <!-- *kirbyListHeader is not supported in conjunction with *kirbyListSectionHeader due to a bug in RadListView on iOS -->
+  <kirby-list-header>
+    <kirby-list-cell width="2">Name</kirby-list-cell>
+    <kirby-list-cell width="0.5"></kirby-list-cell>
+    <kirby-list-cell  horisontalAlignment="right">Value</kirby-list-cell>
+  </kirby-list-header>
 
   <!-- BODY -->
   <kirby-list-cell
@@ -46,7 +48,7 @@ kirby-list-cell supports the attributes:
   [items]="myItems"
   (itemSelect)="onItemSelect($event)"
   [getSectionName]="getSectionName">
-  <!-- *kirbyListHeader is not supported in conjunction with *kirbyListSectionHeader due to a bug i RadListView on iOS -->
+  <!-- *kirbyListHeader is not supported in conjunction with *kirbyListSectionHeader due to a bug in RadListView on iOS -->
   <kirby-list-section-header
     *kirbyListSectionHeader="let section"
     [title]="section"
@@ -69,11 +71,11 @@ kirby-list-cell supports the attributes:
 <kirby-list [items]="myItems" (itemSelect)="onItemSelect($event)">
   
   <!-- HEADER-->
-  <kirby-list-cell *kirbyListHeader width="0.7">Name</kirby-list-cell>
+  <!-- <kirby-list-cell *kirbyListHeader width="0.7">Name</kirby-list-cell> -->
   <!-- you can make custom headers using the kirbyListHeader directive -->
-  <div *kirbyListHeader style="width: 150px; text-align: right">Amount</div>
-  <kirby-list-cell *kirbyListHeader horisontalAlignment="right">Value</kirby-list-cell>
-
+  <!-- <div *kirbyListHeader style="width: 150px; text-align: right">Amount</div>
+  <kirby-list-cell *kirbyListHeader horisontalAlignment="right">Value</kirby-list-cell> -->
+  
   <!-- BODY -->
   <kirby-list-cell
     *kirbyListCell="let item">
