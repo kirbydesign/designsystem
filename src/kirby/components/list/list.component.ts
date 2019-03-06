@@ -11,8 +11,6 @@ import {
   TemplateRef,
 } from '@angular/core';
 
-import { ListHeaderComponent } from './list-header/list-header.component';
-
 @Directive({
   selector: '[kirbyListItem]',
 })
