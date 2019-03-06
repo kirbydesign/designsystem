@@ -1,0 +1,20 @@
+<kirby-list [items]="myItems">
+  <kirby-list-cell
+    *kirbyListCell="let account"
+    width="2">
+    <kirby-list-cell-line [primary]="true" [text]="account.title"></kirby-list-cell-line>
+    <kirby-list-cell-line [text]="account.detail === 0 ? null : account.detail"></kirby-list-cell-line>
+  </kirby-list-cell>
+  <kirby-list-cell
+    *kirbyListCell="let account"
+    width="0.5"
+    horisontalAlignment="right">
+    <kirby-list-cell-line [primary]="true" [text]="account.subTitle"></kirby-list-cell-line>
+  </kirby-list-cell>
+  <kirby-list-cell
+    *kirbyListCell="let account"
+    verticalAlignment="center"
+    horisontalAlignment="right">
+    <kirby-list-cell-line [primary]="true" [text]="account.amount"></kirby-list-cell-line>
+  </kirby-list-cell>
+</kirby-list>
