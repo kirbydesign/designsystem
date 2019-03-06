@@ -1,0 +1,14 @@
+
+<AbsoluteLayout class="bars-container">
+    <Label class="bar empty-progress" *ngIf="backgroundColor else defaultBackgroundColor" left="0" top="0" [style.background-color]="backgroundColor"></Label>
+    <Label class="bar progress" *ngIf="progressColor else defaultProgressColor" left="0" top="0" [style.width.%]="progress" [style.background-color]="progressColor"></Label>
+</AbsoluteLayout>
+
+<ng-template #defaultBackgroundColor> 
+    <Label class="bar empty-progress" left="0" top="0"></Label>
+</ng-template>
+
+<ng-template #defaultProgressColor>
+        <Label class="bar progress" left="0" top="0" [style.width.%]="progress"></Label>
+</ng-template>
+

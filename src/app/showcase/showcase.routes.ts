@@ -10,6 +10,7 @@ import { ChartShowcaseComponent } from './chart-showcase/chart-showcase.componen
 import { DoughnutChartShowcaseComponent } from './doughnut-chart-showcase/doughnut-chart-showcase.component';
 import { FontsShowcaseComponent } from './fonts-showcase/fonts-showcase.component';
 import { ColorsShowcaseComponent } from './colors-showcase/colors-showcase.component';
+import { ProgressBarShowcaseComponent } from './progress-bar-showcase/progress-bar-showcase.component';
 import { SpinnerShowcaseComponent } from './spinner-showcase/spinner-showcase.component';
 
 export const routes: Routes = [
@@ -57,6 +58,10 @@ export const routes: Routes = [
       {
         path: 'spinner',
         component: SpinnerShowcaseComponent,
+      },
+      {
+        path: 'progress-bar',
+        component: ProgressBarShowcaseComponent,
       },
       {
         path: 'nativescript-only',
