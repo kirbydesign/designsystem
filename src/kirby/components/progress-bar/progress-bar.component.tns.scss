@@ -4,24 +4,24 @@
 $bar-height: size('m');
 
 .bars-container {
+  width: 100%;
+  height: $bar-height;
+  margin: 0 5 0 5;
+  border-radius: 20 20 20 20;
+  .bar {
     width: 100%;
     height: $bar-height;
-    margin: 0 5 0 5;
-    border-radius: 20 20 20 20;
-    .bar {
-        width: 100%;
-        height: $bar-height;
-        &.empty-progress {
-            border-radius: 20 20 20 20;
-            height: $bar-height;
-            background-color: get-color('kirby-primary-lighter');
-        }
+    &.empty-progress {
+      border-radius: 20 20 20 20;
+      height: $bar-height;
+      background-color: get-color('kirby-primary-lighter');
+    }
 
-        &.progress {
-            border-radius: 20 0 0 20;
-            height: $bar-height;
-            background-color: get-color('kirby-primary');
-        }
-    }    
+    &.progress {
+      border-radius: 20 0 0 20;
+      height: $bar-height;
+      background-color: get-color('kirby-primary');
+    }
+  }               
 }
 
