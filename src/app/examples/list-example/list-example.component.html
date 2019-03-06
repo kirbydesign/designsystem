@@ -49,7 +49,7 @@ kirby-list-cell supports the attributes:
   [items]="myItems"
   (itemSelect)="onItemSelect($event)"
   [getSectionName]="getSectionName">
-  <!-- *kirbyListHeader is not supported in conjunction with *kirbyListSectionHeader due to a bug in RadListView on iOS -->
+  <!-- kirby-list-header is not supported in conjunction with *kirbyListSectionHeader due to a bug in RadListView on iOS -->
   <kirby-list-section-header
     *kirbyListSectionHeader="let section"
     [title]="section"
@@ -72,10 +72,12 @@ kirby-list-cell supports the attributes:
 <kirby-list [items]="myItems" (itemSelect)="onItemSelect($event)">
   
   <!-- HEADER-->
-  <!-- <kirby-list-cell *kirbyListHeader width="0.7">Name</kirby-list-cell> -->
-  <!-- you can make custom headers using the kirbyListHeader directive -->
-  <!-- <div *kirbyListHeader style="width: 150px; text-align: right">Amount</div>
-  <kirby-list-cell *kirbyListHeader horisontalAlignment="right">Value</kirby-list-cell> -->
+  <kirby-list-header *kirbyListHeader>
+    <kirby-list-cell>Name</kirby-list-cell>
+    <!-- Headers doesn't have to be kirby-list-cell components. -->
+    <div style="width: 150px; text-align: right">Amount</div>
+    <kirby-list-cell horisontalAlignment="right">Value</kirby-list-cell>
+  </kirby-list-header>
   
   <!-- BODY -->
   <kirby-list-cell

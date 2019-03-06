@@ -9,8 +9,6 @@ import {
   Output,
   QueryList,
   TemplateRef,
-  ViewChild,
-  AfterViewInit,
 } from '@angular/core';
 
 import { ListHeaderComponent } from './list-header/list-header.component';
@@ -47,10 +45,9 @@ export class ListComponent implements OnInit {
 
   // The first element that matches ListItemDirective. As a structural directive it unfolds into a template. This is a reference to that.
   @ContentChild(ListItemDirective, { read: TemplateRef }) listItemTemplate;
-  @ContentChildren(ListHeaderDirective, { read: TemplateRef }) listHeaderTemplates: QueryList<any>;
+  @ContentChild(ListHeaderDirective, { read: TemplateRef }) listHeaderTemplate;
   @ContentChild(ListSectionHeaderDirective, { read: TemplateRef }) sectionHeaderTemplate;
   @ContentChildren(ListCellDirective, { read: TemplateRef }) listCellTemplates: QueryList<any>;
-  @ContentChild(ListHeaderDirective, { read: TemplateRef }) listHeaderTemplate;
 
   isSectionsEnabled: boolean;
   isSelectable: boolean;
