@@ -1,5 +1,12 @@
 <!-- HEADER-->
-<ng-content select="kirby-list-header"></ng-content>
+<!-- Cannot get it to work on native without a templateRef. Made it optional on web. -->
+<ng-container *ngIf="listHeaderTemplate; else noTemplateRef"> 
+  <ng-container *ngTemplateOutlet="listHeaderTemplate" ></ng-container>
+</ng-container>
+
+<ng-template #noTemplateRef>
+    <ng-content select="kirby-list-header"></ng-content>
+</ng-template>
 
 <!-- BODY-->
 <ul>

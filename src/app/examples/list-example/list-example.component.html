@@ -14,8 +14,9 @@ kirby-list-cell supports the attributes:
 <kirby-list [items]="myItems">
 
   <!-- HEADER -->
+  <!-- The *kirbyListHeader directive is optional on web but not on Native -->
   <!-- kirby-list-header is not supported in conjunction with *kirbyListSectionHeader due to a bug in RadListView on iOS -->
-  <kirby-list-header>
+  <kirby-list-header *kirbyListHeader>
     <kirby-list-cell width="2">Name</kirby-list-cell>
     <kirby-list-cell width="0.5"></kirby-list-cell>
     <kirby-list-cell horisontalAlignment="right">Value</kirby-list-cell>
