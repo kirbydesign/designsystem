@@ -1,3 +1,7 @@
-<FlexboxLayout class="row">
+<!-- <FlexboxLayout class="row">
   <ng-content></ng-content>
-</FlexboxLayout>
+</FlexboxLayout> -->
+
+<ng-container *ngFor="let template of listHeaderTemplates">
+    <ng-container *ngTemplateOutlet="template"></ng-container>
+  </ng-container>

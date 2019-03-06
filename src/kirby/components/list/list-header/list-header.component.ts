@@ -1,4 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ContentChildren, TemplateRef, QueryList } from '@angular/core';
+
+import { ListHeaderDirective } from '../list.component';
 
 @Component({
   selector: 'kirby-list-header',
@@ -6,5 +8,6 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./list-header.component.scss'],
 })
 export class ListHeaderComponent {
+  @ContentChildren(ListHeaderDirective, { read: TemplateRef }) listHeaderTemplates: QueryList<any>;
   constructor() {}
 }
