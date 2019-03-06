@@ -26,11 +26,6 @@ export class ListItemDirective {}
 export class ListHeaderDirective {}
 
 @Directive({
-  selector: '[kirbyListHead]',
-})
-export class ListHeadDirective {}
-
-@Directive({
   selector: '[kirbyListCell]',
 })
 export class ListCellDirective {}
@@ -45,7 +40,7 @@ export class ListSectionHeaderDirective {}
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
 })
-export class ListComponent implements OnInit, AfterViewInit {
+export class ListComponent implements OnInit {
   @Input() items: any[];
   @Input() getSectionName?: (item: any) => string;
   @Output() itemSelect = new EventEmitter<any>();
@@ -70,12 +65,6 @@ export class ListComponent implements OnInit, AfterViewInit {
       console.warn('kirbyListItem is deprecated and will be removed in future versions of Kirby');
     }
     this.isSelectable = this.itemSelect.observers.length > 0;
-  }
-
-  ngAfterViewInit() {
-    // if (this.listHeaderTemplate) {
-    //   debugger;
-    // }
   }
 
   onItemClick(row: any): void {

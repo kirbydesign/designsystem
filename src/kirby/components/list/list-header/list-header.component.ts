@@ -9,5 +9,6 @@ import { ListHeaderDirective } from '../list.component';
 })
 export class ListHeaderComponent {
   @ContentChildren(ListHeaderDirective, { read: TemplateRef }) listHeaderTemplates: QueryList<any>;
+
   constructor() {}
 }

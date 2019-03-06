@@ -1,16 +1,7 @@
-<!-- Header-->
-<!-- <div class="header" *ngIf="listHeaderTemplates.length > 0"> -->
-  <ng-container *ngTemplateOutlet="listHeaderTemplate"> 
-    
-    <!-- <ng-container *ngFor="let template of listHeaderTemplates">
-      <ng-container *ngTemplateOutlet="template"></ng-container>
-    </ng-container> -->
-    </ng-container>
-    <!-- </div> -->
-    
-<!-- Header-->
-<!-- <ng-content select="kirby-list-header"></ng-content> -->
+<!-- HEADER-->
+<ng-content select="kirby-list-header"></ng-content>
 
+<!-- BODY-->
 <ul>
   <ng-container *ngIf="isSectionsEnabled; else normalList">
     <ng-container *ngFor="let section of (items | groupBy: getSectionName)">

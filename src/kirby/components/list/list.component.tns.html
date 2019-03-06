@@ -30,21 +30,10 @@
 </ng-template>
 
     <!-- HEADER -->
-    <!-- <ng-template tkListViewHeader> 
+    <ng-template tkListViewHeader *ngIf="listHeaderTemplate"> -->
       <FlexboxLayout class="row">
-            <ng-container *ngTemplateOutlet="listHeaderTemplate"></ng-container>
-      </FlexboxLayout>
-    </ng-template> -->
-    <!-- <ng-template tkListViewHeader *ngIf="listHeaderTemplates.length > 0"> --> -->
-    <ng-template tkListViewHeader>
-      <FlexboxLayout class="row">
-          <!-- <Label text="HEJSASA"></Label> -->
-          <!-- <ng-content select="kirby-list-header"></ng-content> -->
         <ng-container *ngTemplateOutlet="listHeaderTemplate"></ng-container>
-        <!-- <ng-container *ngFor="let headerTemplate of listHeaderTemplates">
-            <ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
-          </ng-container> -->
-        </FlexboxLayout>
+      </FlexboxLayout>
     </ng-template>
 
   </RadListView>
