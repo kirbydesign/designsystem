@@ -11,7 +11,6 @@ import { DoughnutChartShowcaseComponent } from './doughnut-chart-showcase/doughn
 import { ShowcaseRoutingModule } from './showcase-routing.module';
 import { ColorsShowcaseComponent } from './colors-showcase/colors-showcase.component';
 import { LineChartShowcaseComponent } from './line-chart-showcase/line-chart-showcase.component';
-import { ProgressBarShowcaseComponent } from './progress-bar-showcase/progress-bar-showcase.component';
 import { SpinnerShowcaseComponent } from './spinner-showcase/spinner-showcase.component';
 
 export const COMPONENT_IMPORTS: any[] = [ExamplesModule, ShowcaseRoutingModule];
@@ -28,7 +27,6 @@ export const COMPONENT_EXPORTS: any[] = [
   FontsShowcaseComponent,
   LineChartShowcaseComponent,
   SpinnerShowcaseComponent,
-  ProgressBarShowcaseComponent,
 ];
 
 export const COMPONENT_DECLARATIONS: any[] = [...COMPONENT_EXPORTS, ShowcaseComponent];
