@@ -1,0 +1,14 @@
+<div class="bar-container">
+  <div class="bar empty-progress" *ngIf="backgroundColor else defaultBackgroundColor" [style.background-color]="backgroundColor">
+  </div>
+  <div class="bar progress" *ngIf="progressColor else defaultProgressColor" [style.width.%]="progress" [style.background-color]="progressColor">
+  </div>
+</div>
+
+<ng-template #defaultBackgroundColor>
+  <div class=" bar empty-progress"></div>
+</ng-template>
+
+<ng-template #defaultProgressColor>
+  <div class=" bar progress" [style.width.%]="progress"></div>
+</ng-template>
