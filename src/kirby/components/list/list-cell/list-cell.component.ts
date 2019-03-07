@@ -49,7 +49,7 @@ export class ListCellComponent implements OnInit {
     console.warn(
       `Invalid value ${
         this.width
-      } for width. Valid values numbers > 0. Defaulting to ${defaultWidth}`
+      } for width. Valid values numbers > 0. Defaulting to '${defaultWidth}'`
     );
     return `${defaultWidth * 100}%`;
   }
