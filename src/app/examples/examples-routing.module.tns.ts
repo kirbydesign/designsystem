@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { NativeScriptRouterModule } from 'nativescript-angular/router';
 
 import { routes } from './examples.routes';
-import { ListLoadMoreExampleComponent } from './list-example/tns-list-examples/list-load-more-example/list-load-more-example.component';
 import { ExamplesModule } from './examples.module';
 // tslint:disable-next-line:max-line-length
 import { NativeScriptDoughnutChartExampleComponent } from './nativescript-only/doughnut-chart-example/doughnut-chart-example.component.tns-only';
@@ -14,6 +13,8 @@ import { ListSectionExampleComponent } from './list-example/tns-list-examples/li
 import { ListCustomCellLinesExampleComponent } from './list-example/tns-list-examples/list-custom-cell-lines-example/list-custom-cell-lines-example.component.tns';
 // tslint:disable-next-line
 import { ListItemExampleComponent } from './list-example/tns-list-examples/list-item-example/list-item-example.component.tns';
+// tslint:disable-next-line
+import { ListLoadMoreExampleComponent } from './list-example/tns-list-examples/list-load-more-example/list-load-more-example.component.tns';
 
 const nativeScriptRoutes = [
   ...routes,
