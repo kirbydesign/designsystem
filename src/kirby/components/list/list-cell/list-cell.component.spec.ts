@@ -85,7 +85,7 @@ describe('ListCellComponent', () => {
       expect(component.getHorisontalAlignment()).toBe(expected);
     });
 
-    it('right should be transformed flex-end', () => {
+    it('right should be transformed to flex-end', () => {
       component.horisontalAlignment = 'right';
       const expected = 'flex-end';
 
