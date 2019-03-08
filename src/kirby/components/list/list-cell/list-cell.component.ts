@@ -15,19 +15,19 @@ enum horisontalAlignmentEnum {
 type horisontalAlignment = 'left' | 'center' | 'right' | 'space-between' | 'space-around';
 type verticalAlignment = 'top' | 'center' | 'bottom' | 'stretch' | 'baseline';
 
+const defaultHorisontalAlignment: horisontalAlignment = 'left';
+const defaultVerticalAlignment: verticalAlignment = 'center';
+const defaultWidth = 1;
+
 @Component({
   selector: 'kirby-list-cell',
   templateUrl: './list-cell.component.html',
   styleUrls: ['./list-cell.component.scss'],
 })
 export class ListCellComponent implements OnInit {
-  @Input() horisontalAlignment: horisontalAlignment;
-  @Input() verticalAlignment: verticalAlignment;
-  @Input() width: number;
-
-  private readonly defaultHorisontalAlignment: horisontalAlignment = 'left';
-  private readonly defaultVerticalAlignment: verticalAlignment = 'center';
-  private readonly defaultWidth = 1;
+  @Input() horisontalAlignment: horisontalAlignment = defaultHorisontalAlignment;
+  @Input() verticalAlignment: verticalAlignment = defaultVerticalAlignment;
+  @Input() width: number = defaultWidth;
 
   @HostBinding('style.flex-basis')
   private _flexBasisHost: string;
@@ -47,11 +47,11 @@ export class ListCellComponent implements OnInit {
       return `${this.width * 100}%`;
     }
     console.warn(
-      `Invalid value ${this.width} for width. Valid values numbers > 0. Defaulting to '${
-        this.defaultWidth
-      }'`
+      `Invalid value ${
+        this.width
+      } for width. Valid values numbers > 0. Defaulting to '${defaultWidth}'`
     );
-    return `${this.defaultWidth * 100}%`;
+    return `${defaultWidth * 100}%`;
   }
 
   getHorisontalAlignment(): string {
@@ -69,11 +69,9 @@ export class ListCellComponent implements OnInit {
     console.warn(
       `Invalid value ${
         this.horisontalAlignment
-      } for horisontalAlignment. Valid values are 'left', 'center', 'right', 'space-between', 'space-around'. Defaulting to '${
-        this.defaultHorisontalAlignment
-      }'`
+      } for horisontalAlignment. Valid values are 'left', 'center', 'right', 'space-between', 'space-around'. Defaulting to '${defaultHorisontalAlignment}'`
     );
-    return horisontalAlignmentEnum[this.defaultHorisontalAlignment];
+    return horisontalAlignmentEnum[defaultHorisontalAlignment];
   }
 
   getVerticalAlignment(): string {
@@ -83,11 +81,9 @@ export class ListCellComponent implements OnInit {
     console.warn(
       `Invalid value ${
         this.verticalAlignment
-      } for verticalAlignment. Valid values are 'top', 'center', 'bottom', 'stretch', 'baseline'. Defaulting to '${
-        this.defaultVerticalAlignment
-      }'`
+      } for verticalAlignment. Valid values are 'top', 'center', 'bottom', 'stretch', 'baseline'. Defaulting to '${defaultVerticalAlignment}'`
     );
-    return verticalAlignmentEnum[this.defaultVerticalAlignment];
+    return verticalAlignmentEnum[defaultVerticalAlignment];
   }
 
   private setStyle() {
