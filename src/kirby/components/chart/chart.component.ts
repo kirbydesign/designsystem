@@ -74,7 +74,6 @@ export class ChartComponent implements OnInit, OnChanges {
 
   updateProperties() {
     if (this.options.chart) {
-     
       this.options.chart.height = this.height;
       this.options.chart.description = this.description;
       switch (this.options.chart.type) {
@@ -109,7 +108,7 @@ export class ChartComponent implements OnInit, OnChanges {
             this.options.pane.background = [
               {
                 ...this.options.pane.background[0],
-                backgroundColor:  data.paneBackgroundColor,
+                backgroundColor: data.paneBackgroundColor,
               },
             ];
           }
@@ -125,7 +124,6 @@ export class ChartComponent implements OnInit, OnChanges {
           ];
 
           break;
-
         }
       }
     }

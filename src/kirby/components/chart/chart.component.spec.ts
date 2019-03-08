@@ -1,8 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { Options } from 'highcharts';
+
 import { ChartComponent } from './chart.component';
 import { ChartType } from './chart-type';
-import { Options } from 'highcharts';
 
 describe('ChartComponent', () => {
   let component: ChartComponent;
@@ -92,19 +93,19 @@ describe('ChartComponent', () => {
     expect(data[0]['name']).toBe('Boomerangs 20%');
   });
 
-  
   describe('ActivityGauge', () => {
-    
     it('should set correct title and subtitle', () => {
       component.type = ChartType.ACTIVITYGAUGE;
-      
-      component.data = [{
-        title: '1.234.567',
-        subtitle: 'Afdraget'
-      }]
-  
+
+      component.data = [
+        {
+          title: '1.234.567',
+          subtitle: 'Afdraget',
+        },
+      ];
+
       component.ngOnInit();
-      
+
       expect(component.options.title.text).toBe('1.234.567');
       expect(component.options.subtitle.text).toBe('Afdraget');
     });
@@ -124,28 +125,33 @@ describe('ChartComponent', () => {
               borderWidth: 0,
             },
           ],
-        }
+        },
       };
 
       component.options = ActivityGaugeOptions;
 
-      component.data = [{
-        paneBackgroundColor: 'red'
-      }];
+      component.data = [
+        {
+          paneBackgroundColor: 'red',
+        },
+      ];
 
       component.ngOnInit();
 
-      expect(component.options.pane.background[0].backgroundColor).toEqual(component.data[0].paneBackgroundColor);
-      
+      expect(component.options.pane.background[0].backgroundColor).toEqual(
+        component.data[0].paneBackgroundColor
+      );
     });
 
     it('should change title and subtitle color when color-attribute is set', () => {
       component.type = ChartType.ACTIVITYGAUGE;
-      component.data = [{
-        color: 'red'
-      }];
-      const expected = component.data[0].color
-      
+      component.data = [
+        {
+          color: 'red',
+        },
+      ];
+      const expected = component.data[0].color;
+
       component.ngOnInit();
 
       expect(component.options.title.style.color).toEqual(expected);
@@ -154,25 +160,28 @@ describe('ChartComponent', () => {
 
     it('should set type to solidgauge when ACTIVITYGAUGE is chosen', () => {
       component.type = ChartType.ACTIVITYGAUGE;
-      component.data = [{
-        title: '',
-        subtitle: ''
-      }];
+      component.data = [
+        {
+          title: '',
+          subtitle: '',
+        },
+      ];
 
       component.ngOnInit();
 
       expect(component.options.series[0].type).toEqual('solidgauge');
-      
     });
 
     it('should set activitygauge chart type', () => {
-    component.type = ChartType.ACTIVITYGAUGE;
-    component.data = [{
-      title: 'test',
-      subtitle: 'test'
-    }]
-    component.ngOnInit();
-    expect(component.options.chart.type).toBe(ChartType.ACTIVITYGAUGE);
-  });
+      component.type = ChartType.ACTIVITYGAUGE;
+      component.data = [
+        {
+          title: 'test',
+          subtitle: 'test',
+        },
+      ];
+      component.ngOnInit();
+      expect(component.options.chart.type).toBe(ChartType.ACTIVITYGAUGE);
+    });
   });
 });
