@@ -74,6 +74,7 @@ export class ChartComponent implements OnInit, OnChanges {
 
   updateProperties() {
     if (this.options.chart) {
+     
       this.options.chart.height = this.height;
       this.options.chart.description = this.description;
       switch (this.options.chart.type) {
@@ -99,7 +100,9 @@ export class ChartComponent implements OnInit, OnChanges {
           break;
         }
         case ChartType.ACTIVITYGAUGE: {
+          debugger;
           const data = this.data[0];
+
           this.options.title.text = data.title;
           this.options.subtitle.text = data.subtitle;
           if (data.paneBackgroundColor) {

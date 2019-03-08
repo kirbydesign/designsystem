@@ -18,6 +18,7 @@ describe('ChartComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ChartComponent);
     component = fixture.componentInstance;
+    component.data = this.data;
     fixture.detectChanges();
   });
 
@@ -61,6 +62,17 @@ describe('ChartComponent', () => {
     expect(component.options.chart.type).toBe(ChartType.AREASPLINE);
   });
 
+  it('should set activitygauge chart type', () => {
+    component.type = ChartType.ACTIVITYGAUGE;
+    component.data = [{
+      title: 'test',
+      subtitle: 'test'
+    }]
+    component.ngOnInit();
+    expect((component.type = ChartType.ACTIVITYGAUGE));
+    expect(component.options.chart.type).toBe(ChartType.ACTIVITYGAUGE);
+  });
+
   it('should have dataLabels enabled as default', () => {
     expect(component.options.plotOptions.pie.dataLabels.enabled).toBe(true);
   });
@@ -69,6 +81,18 @@ describe('ChartComponent', () => {
     component.showDataLabels = false;
     component.ngOnInit();
     expect(component.options.plotOptions.pie.dataLabels.enabled).toBe(false);
+  });
+
+  it('should set correct input data in chart series', () => {
+    component.data = [{
+      title: '1.234.567',
+      subtitle: 'Afdraget'
+    }]
+    component.ngOnInit();
+    const data = (component.options.series[0] as Highcharts.SeriesSolidgaugeOptions).data;
+    expect(data.length).toBe(1);
+    expect(data[0]['title']).toBe('1.234.567');
+    expect(data[0]['subtitle']).toBe('Afdraget');
   });
 
   it('should set correct input data in chart series', () => {

@@ -3,5 +3,5 @@ export enum ChartType {
   DONUT = 'donut',
   AREASPLINE = 'areaspline',
   ACTIVITYGAUGE = 'activitygauge',
-  SOLIDGAUGE = 'solidgauge',
+  // SOLIDGAUGE = 'solidgauge',
 }
