@@ -100,16 +100,16 @@ export class ChartComponent implements OnInit, OnChanges {
           break;
         }
         case ChartType.ACTIVITYGAUGE: {
-          debugger;
           const data = this.data[0];
 
           this.options.title.text = data.title;
           this.options.subtitle.text = data.subtitle;
+
           if (data.paneBackgroundColor) {
             this.options.pane.background = [
               {
                 ...this.options.pane.background[0],
-                backgroundColor: data.paneBackgroundColor,
+                backgroundColor:  data.paneBackgroundColor,
               },
             ];
           }
@@ -123,7 +123,9 @@ export class ChartComponent implements OnInit, OnChanges {
               data: data.series as Array<Highcharts.SeriesGaugeDataOptions>,
             },
           ];
+
           break;
+
         }
       }
     }
