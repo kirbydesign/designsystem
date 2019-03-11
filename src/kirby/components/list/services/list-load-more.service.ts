@@ -5,7 +5,11 @@ export class ListLoadMoreService {
   async handleLoadMore(loadMoreCallback: () => Promise<boolean>) {
     let isLoadMoreDone = true;
     if (loadMoreCallback) {
-      isLoadMoreDone = await loadMoreCallback();
+      try {
+        isLoadMoreDone = await loadMoreCallback();
+      } catch {
+        return isLoadMoreDone;
+      }
     }
     return isLoadMoreDone;
   }
