@@ -33,17 +33,6 @@ describe('ListComponent', () => {
       expect(component.itemSelect.emit).toHaveBeenCalledTimes(1);
       expect(component.itemSelect.emit).toHaveBeenCalledWith(itemToBeSelected);
     });
-
-    it('should emit the tapped item', () => {
-      spyOn(component.itemSelect, 'emit');
-      const itemToBeSelected = { value: 'item 2' };
-      component.items = [{ value: 'item 1' }, itemToBeSelected, { value: 'item 3' }];
-
-      component.onItemTap(itemToBeSelected);
-
-      expect(component.itemSelect.emit).toHaveBeenCalledTimes(1);
-      expect(component.itemSelect.emit).toHaveBeenCalledWith(itemToBeSelected);
-    });
   });
 
   describe('sections', () => {
@@ -88,40 +77,6 @@ describe('ListComponent', () => {
       const liElements = rootElement.querySelectorAll('li');
 
       expect(liElements.length).toEqual(component.items.length + sections.length);
-    });
-  });
-
-  describe('Native: HeaderTemplate', () => {
-    it('should return the correct grid row definition, when there is a template', () => {
-      const expected = 'auto,*';
-
-      const actual = component.rowDefinition({});
-
-      expect(actual).toEqual(expected);
-    });
-
-    it('should return the correct grid row definition, when there is no template', () => {
-      const expected = '*';
-
-      const actual = component.rowDefinition(null);
-
-      expect(actual).toEqual(expected);
-    });
-
-    it('should return the correct row number, when there is a template', () => {
-      const expected = '1';
-
-      const actual = component.rowNumberForListView({});
-
-      expect(actual).toEqual(expected);
-    });
-
-    it('should return the correct row number, when there is no template', () => {
-      const expected = '0';
-
-      const actual = component.rowNumberForListView(null);
-
-      expect(actual).toEqual(expected);
     });
   });
 });

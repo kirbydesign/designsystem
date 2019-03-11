@@ -7,21 +7,18 @@
           *ngTemplateOutlet="
             sectionHeaderTemplate;
             context: { $implicit: section.name }
-          "
-        >
+          ">
         </ng-container>
       </li>
       <li class="row" [ngClass]="{'selectable': isSelectable}" *ngFor="let item of section.items" (click)="onItemClick(item)" tabindex="0" [attr.role]="isSelectable ? 'button' : null">
         <!-- TODO remove container when the kirbyListItem is no longer in use -->
         <ng-container
-          *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }"
-        >
+          *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }">
         </ng-container>
 
         <ng-container *ngFor="let template of listCellTemplates">
           <ng-container
-            *ngTemplateOutlet="template; context: { $implicit: item }"
-          >
+            *ngTemplateOutlet="template; context: { $implicit: item }">
           </ng-container>
         </ng-container>
       </li>
@@ -32,14 +29,12 @@
     <li class="row" [ngClass]="{'selectable': isSelectable}" *ngFor="let item of items" (click)="onItemClick(item)" tabindex="0" [attr.role]="isSelectable ? 'button' : null">
       <!-- TODO remove container when the kirbyListItem is no longer in use -->
       <ng-container
-        *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }"
-      >
+        *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }">
       </ng-container>
 
       <ng-container *ngFor="let template of listCellTemplates">
         <ng-container
-          *ngTemplateOutlet="template; context: { $implicit: item }"
-        ></ng-container>
+          *ngTemplateOutlet="template; context: { $implicit: item }"></ng-container>
       </ng-container>
     </li>
   </ng-template>

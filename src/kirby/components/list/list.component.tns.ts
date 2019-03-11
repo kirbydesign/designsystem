@@ -9,6 +9,10 @@ import {
   QueryList,
   TemplateRef,
 } from '@angular/core';
+import {
+  LoadOnDemandListViewEventData,
+  RadListView,
+} from 'nativescript-ui-listview/ui-listview.common';
 
 import {
   ListItemDirective,
@@ -16,6 +20,7 @@ import {
   ListSectionHeaderDirective,
   ListCellDirective,
 } from './list.directive';
+import { ListLoadMoreService } from './services/list-load-more.service';
 
 @Component({
   selector: 'kirby-list',
@@ -29,7 +34,6 @@ export class ListComponent implements OnInit {
   @Input() noMoreItemsText: string;
   @Output() itemSelect = new EventEmitter<any>();
 
-  // The first element that matches ListItemDirective. As a structural directive it unfolds into a template. This is a reference to that.
   @ContentChild(ListItemDirective, { read: TemplateRef }) listItemTemplate;
   @ContentChild(ListHeaderDirective, { read: TemplateRef }) headerTemplate;
   @ContentChild(ListSectionHeaderDirective, { read: TemplateRef }) sectionHeaderTemplate;
@@ -39,7 +43,7 @@ export class ListComponent implements OnInit {
   isSelectable: boolean;
   isLoadMoreDone: boolean = false;
 
-  constructor() {}
+  constructor(private listLoadMoreService: ListLoadMoreService) {}
 
   ngOnInit() {
     if (this.getSectionName) {
@@ -51,7 +55,22 @@ export class ListComponent implements OnInit {
     this.isSelectable = this.itemSelect.observers.length > 0;
   }
 
-  onItemClick(row: any): void {
-    this.itemSelect.emit(row);
+  onItemTap(selectedItem: any): void {
+    this.itemSelect.emit(selectedItem);
+  }
+
+  rowDefinition(headerTemplate: any): string {
+    return headerTemplate ? 'auto,*' : '*';
+  }
+
+  rowNumberForListView(headerTemplate: any): string {
+    return headerTemplate ? '1' : '0';
+  }
+
+  async onLoadMore(args: LoadOnDemandListViewEventData) {
+    this.isLoadMoreDone = await this.listLoadMoreService.handleLoadMore(this.loadMore);
+    const listView: RadListView = args.object;
+    listView.notifyLoadOnDemandFinished(this.isLoadMoreDone);
+    args.returnValue = this.isLoadMoreDone;
   }
 }
