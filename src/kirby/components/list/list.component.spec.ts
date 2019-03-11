@@ -1,6 +1,6 @@
-import { ListLoadMoreService } from './services/list-load-more.service';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { ListLoadMoreService } from './services/list-load-more.service';
 import { GroupByPipe } from './pipes/group-by.pipe';
 import { ListComponent } from './list.component';
 
