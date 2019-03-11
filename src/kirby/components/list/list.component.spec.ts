@@ -1,3 +1,4 @@
+import { ListLoadMoreService } from './services/list-load-more.service';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GroupByPipe } from './pipes/group-by.pipe';
@@ -10,6 +11,12 @@ describe('ListComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ListComponent, GroupByPipe],
+      providers: [
+        {
+          provide: ListLoadMoreService,
+          useValue: jasmine.createSpyObj('ListLoadMoreService', ['handleLoadMore']),
+        },
+      ],
     }).compileComponents();
   }));
 
@@ -77,6 +84,36 @@ describe('ListComponent', () => {
       const liElements = rootElement.querySelectorAll('li');
 
       expect(liElements.length).toEqual(component.items.length + sections.length);
+    });
+  });
+
+  describe('function: onLoadMore', () => {
+    let listLoadMoreService: any;
+
+    beforeEach(() => {
+      listLoadMoreService = TestBed.get(ListLoadMoreService);
+      listLoadMoreService.handleLoadMore.and.returnValue(Promise.resolve(true));
+    });
+
+    it('should call list-load-more-service if there are more items and is not loading', (done) => {
+      done();
+    });
+
+    it('should not call list-load-more-service if there are no more items', (done) => {
+      done();
+    });
+
+    it('should not call list-load-more-service if is loading', (done) => {
+      done();
+    });
+
+    it('should not call list-load-more-service if there are no more items and is loading', (done) => {
+      done();
+    });
+
+    it('should set isLoading to false, if the load more callback fails', (done) => {
+      listLoadMoreService.handleLoadMore.and.returnValue(Promise.reject());
+      done();
     });
   });
 });
