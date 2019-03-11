@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { componentStatusItems, ComponentStatusItem } from './component-status-items';
 
 @Component({
