@@ -5,7 +5,7 @@ export class BaseListComponent {
   private items: any[] = [
     {
       title: 'Vestas Wind Systems has a very long name',
-      subTitle: '2000 stk',
+      subTitle: '2000 pcs',
       amount: '5.587.218.309 DKK',
       detail: 225,
     },
