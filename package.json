@@ -17,6 +17,7 @@
     "build-polyfills": "webpack --config webpack.polyfills.config.js",
     "test": "ng test",
     "ci-test": "ng test --progress false --watch false --code-coverage",
+    "ci-coveragereport": "ng test --progress false --watch false --code-coverage && open coverage/index.html",
     "lint": "tslint './src/**/*.ts'",
     "lint:fix": "tslint './src/**/*.ts' --fix",
     "e2e": "ng e2e",
