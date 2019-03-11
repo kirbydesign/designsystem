@@ -12,12 +12,14 @@ export interface ComponentStatusItem {
 
 enum ItemCodeStatus {
   underConsideration = 'Under consideration',
+  notCurrentlyPlanned = 'Not currently planned',
   inProgress = 'In development',
   done = 'Done',
 }
 
 enum ItemUXAndDesignStatus {
   underConsideration = 'Under consideration',
+  notCurrentlyPlanned = 'Not currently planned',
   inProgress = 'In progress',
   done = 'Done',
 }
