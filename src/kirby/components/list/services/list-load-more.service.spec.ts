@@ -2,7 +2,7 @@ import { TestBed, inject } from '@angular/core/testing';
 
 import { ListLoadMoreService } from './list-load-more.service';
 
-fdescribe('Service: Test', () => {
+describe('Service: Test', () => {
   let service: ListLoadMoreService;
 
   beforeEach(() => {
