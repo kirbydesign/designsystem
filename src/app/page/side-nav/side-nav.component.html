@@ -5,6 +5,11 @@
   <li>
     <a routerLink="/home/intro" [routerLinkActive]="'is-selected'" class="side-nav__item">Intro</a>
   </li>
+  <li>
+    <a class="side-nav__item side-nav-header" routerLink="/home/component-status" [routerLinkActive]="'is-selected'" [routerLinkActiveOptions]="{exact: false}">
+      Component Status
+    </a>
+  </li>
   <li routerLinkActive="is-selected" [routerLinkActiveOptions]="{exact: false}">
     <a class="side-nav__item side-nav-header" [routerLinkActive]="'is-selected'" [routerLinkActiveOptions]="{exact: false}">
       <svg class="icon">

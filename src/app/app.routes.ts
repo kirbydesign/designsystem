@@ -23,6 +23,10 @@ export const routes: Routes = [
         component: IntroComponent,
       },
       {
+        path: 'component-status',
+        loadChildren: './component-status/component-status.module#ComponentStatusModule',
+      },
+      {
         path: 'showcase',
         loadChildren: './showcase/showcase.module#ShowcaseModule',
       },

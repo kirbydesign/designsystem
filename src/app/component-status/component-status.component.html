@@ -1,0 +1,28 @@
+<div class="hero">
+    <h1>Component Status</h1>
+</div>
+<p>The latest component updates and changes. If you have a suggestion for a new
+    component not listed here,
+    <a href="https://github.com/kirbydesign/designsystem/issues/new/choose">create an issue on GitHub</a>.</p>
+
+<table class="component-status">
+    <thead class="component-status__header">
+        <tr>
+            <th class="component-status__header__item" *ngFor="let header of headers">{{header}}</th>
+        </tr>
+    </thead>
+    <tbody class="component-status__body">
+
+        <tr class="component-status__row" *ngFor="let item of items">
+            <td class="component-status__column">{{item.component}}</td>
+            <td class="component-status__column">
+                <a [href]="item?.code?.githubIssue">{{item.code.status}}</a>
+            </td>
+            <td class="component-status__column">
+                <a [href]="item['ux & design']?.githubIssue">{{item['ux & design'].status}}</a>
+            </td>
+        </tr>
+
+    </tbody>
+</table>
+
