@@ -10,6 +10,10 @@ import {
   QueryList,
   TemplateRef,
 } from '@angular/core';
+import {
+  LoadOnDemandListViewEventData,
+  RadListView,
+} from 'nativescript-ui-listview/ui-listview.common';
 
 @Directive({
   selector: '[kirbyListItem]',
@@ -39,6 +43,8 @@ export class ListSectionHeaderDirective {}
 export class ListComponent implements OnInit {
   @Input() items: any[];
   @Input() getSectionName?: (item: any) => string;
+  @Input() loadMore?: () => Promise<boolean>;
+  @Input() noMoreItemsText: string;
   @Output() itemSelect = new EventEmitter<any>();
 
   // The first element that matches ListItemDirective. As a structural directive it unfolds into a template. This is a reference to that.
@@ -49,6 +55,7 @@ export class ListComponent implements OnInit {
 
   isSectionsEnabled: boolean;
   isSelectable: boolean;
+  isLoadMoreDone: boolean = false;
 
   constructor() {}
 
@@ -76,5 +83,20 @@ export class ListComponent implements OnInit {
 
   rowNumberForListView(headerTemplate: any): string {
     return headerTemplate ? '1' : '0';
+  }
+
+  async onLoadMoreNative(args: LoadOnDemandListViewEventData) {
+    await this.handleLoadMore();
+    const listView: RadListView = args.object;
+    listView.notifyLoadOnDemandFinished(this.isLoadMoreDone);
+    args.returnValue = this.isLoadMoreDone;
+  }
+
+  private async handleLoadMore() {
+    if (this.loadMore) {
+      this.isLoadMoreDone = await this.loadMore();
+    } else {
+      this.isLoadMoreDone = true;
+    }
   }
 }

@@ -1,4 +1,6 @@
-<kirby-list [items]="myItems">
+<button kirby-button expand="block" (click)="onLoadMore()">Load more transactions</button>
+<kirby-list 
+  [items]="items$ | async">
   <kirby-list-cell
     *kirbyListCell="let account"
     width="2">

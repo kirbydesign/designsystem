@@ -7,6 +7,8 @@
     </FlexboxLayout>
   </ng-container>
   <RadListView
+    loadOnDemandMode="Auto"
+    (loadMoreDataRequested)="onLoadMoreNative($event)"
     [groupingFunction]="getSectionName"
     [items]="items"
     row="{{ rowNumberForListView(headerTemplate) }}"
@@ -35,5 +37,10 @@
         ></ng-container>
       </FlexboxLayout>
     </ng-template>
+    <ng-container *ngIf="isLoadMoreDone && noMoreItemsText">
+      <ng-template tkListViewFooter>
+        <Label text="{{noMoreItemsText}}" class="no-more-items-text"></Label>
+      </ng-template>
+    </ng-container>
   </RadListView>
 </GridLayout>

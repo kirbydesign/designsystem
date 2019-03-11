@@ -1,5 +1,5 @@
 <kirby-list
-        [items]="myItems"
+        [items]="items$ | async"
         [getSectionName]="getSectionName"
         (itemSelect)="onItemSelect($event)"
 >
