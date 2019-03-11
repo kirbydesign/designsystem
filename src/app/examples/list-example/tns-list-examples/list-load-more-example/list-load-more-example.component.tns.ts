@@ -32,7 +32,7 @@ export class ListLoadMoreExampleComponent extends BaseListComponent {
     }
     return new Promise<boolean>((resolve) => {
       setTimeout(() => {
-        resolve(!moreToLoad);
+        resolve(moreToLoad);
       }, 2500);
     });
   }

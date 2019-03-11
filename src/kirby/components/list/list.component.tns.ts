@@ -41,7 +41,7 @@ export class ListComponent implements OnInit {
 
   isSectionsEnabled: boolean;
   isSelectable: boolean;
-  isLoadMoreDone: boolean = false;
+  hasMoreItems: boolean = true;
 
   constructor(private listLoadMoreService: ListLoadMoreService) {}
 
@@ -68,9 +68,9 @@ export class ListComponent implements OnInit {
   }
 
   async onLoadMore(args: LoadOnDemandListViewEventData) {
-    this.isLoadMoreDone = await this.listLoadMoreService.handleLoadMore(this.loadMore);
+    this.hasMoreItems = await this.listLoadMoreService.handleLoadMore(this.loadMore);
     const listView: RadListView = args.object;
-    listView.notifyLoadOnDemandFinished(this.isLoadMoreDone);
-    args.returnValue = this.isLoadMoreDone;
+    listView.notifyLoadOnDemandFinished(!this.hasMoreItems);
+    args.returnValue = !this.hasMoreItems;
   }
 }

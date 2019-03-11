@@ -1,17 +1,16 @@
 <kirby-list [items]="items$ | async">
-<!-- 
-kirby-list-cell supports the attributes:
-- width: 
-    A relative number. A width of 1.5, will be 1.5 times the width of the default width.
-    Default is 1.
-- horisontalAlignment: 
-    Supported values are 'left', 'center', 'right', 'space-between', 'space-around'.
-    Default is 'left' 
-- verticalAlignment: 
-    Supported values are 'top', 'center', 'bottom', 'stretch', 'baseline'.
-    Default is 'center' 
--->
-
+  <!-- 
+    kirby-list-cell supports the attributes:
+    - width: 
+        A relative number. A width of 1.5, will be 1.5 times the width of the default width.
+        Default is 1.
+    - horisontalAlignment: 
+        Supported values are 'left', 'center', 'right', 'space-between', 'space-around'.
+        Default is 'left' 
+    - verticalAlignment: 
+        Supported values are 'top', 'center', 'bottom', 'stretch', 'baseline'.
+        Default is 'center' 
+  -->
   <kirby-list-cell
     *kirbyListCell="let account"
     width="2">
@@ -31,7 +30,6 @@ kirby-list-cell supports the attributes:
     <kirby-list-cell-line [primary]="true" [text]="account.amount"></kirby-list-cell-line>
   </kirby-list-cell>
 </kirby-list>
-
 <hr />
 
 <kirby-list
@@ -53,7 +51,7 @@ kirby-list-cell supports the attributes:
     horisontalAlignment="right">
     <kirby-list-cell-line [primary]="true" [text]="item.amount"></kirby-list-cell-line>
   </kirby-list-cell>
-</kirby-list>
+</kirby-list> 
 
 <hr />
 
@@ -71,7 +69,7 @@ kirby-list-cell supports the attributes:
     horisontalAlignment="right">
     <kirby-list-cell-line [primary]="true" [text]="item.amount"></kirby-list-cell-line>
   </kirby-list-cell>
-</kirby-list>
+</kirby-list> 
 
 <hr />
 
@@ -100,8 +98,7 @@ kirby-list-cell supports the attributes:
   ></kirby-list-header>
 
   <!-- Cells can also take arbitrary markup (client specific) as cell-lines -->
-  <kirby-list-cell
-          *kirbyListCell="let item">
+  <kirby-list-cell *kirbyListCell="let item">
     <section style="flex-direction: row; display: flex;">
       <kirby-avatar [imageSrc]="imageSrc" [size]="'small'"></kirby-avatar>
       <div style="margin-left: 10px; flex-direction: column; display: flex;">

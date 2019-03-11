@@ -34,7 +34,7 @@
         </ng-container>
       </FlexboxLayout>
     </ng-template>
-    <ng-container *ngIf="isLoadMoreDone && noMoreItemsText">
+    <ng-container *ngIf="!hasMoreItems && noMoreItemsText">
       <ng-template tkListViewFooter>
         <Label text="{{noMoreItemsText}}" class="no-more-items-text"></Label>
       </ng-template>

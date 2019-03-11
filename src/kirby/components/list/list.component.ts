@@ -16,6 +16,7 @@ import {
   ListSectionHeaderDirective,
   ListCellDirective,
 } from './list.directive';
+import { ListLoadMoreService } from './services/list-load-more.service';
 
 @Component({
   selector: 'kirby-list',
@@ -37,9 +38,10 @@ export class ListComponent implements OnInit {
 
   isSectionsEnabled: boolean;
   isSelectable: boolean;
-  isLoadMoreDone: boolean = false;
+  hasMoreItems: boolean = true;
+  isLoading: boolean;
 
-  constructor() {}
+  constructor(private listLoadMoreService: ListLoadMoreService) {}
 
   ngOnInit() {
     if (this.getSectionName) {
@@ -53,5 +55,16 @@ export class ListComponent implements OnInit {
 
   onItemClick(row: any): void {
     this.itemSelect.emit(row);
+  }
+
+  async onLoadMore() {
+    if (this.hasMoreItems && !this.isLoading) {
+      this.isLoading = true;
+      try {
+        this.hasMoreItems = await this.listLoadMoreService.handleLoadMore(this.loadMore);
+      } finally {
+        this.isLoading = false;
+      }
+    }
   }
 }
