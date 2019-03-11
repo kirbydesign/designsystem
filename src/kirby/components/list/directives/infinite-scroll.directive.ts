@@ -7,9 +7,10 @@ import {
   Input,
   Output,
   ElementRef,
+  Inject,
 } from '@angular/core';
 import { Subject } from 'rxjs';
-import { debounceTime, takeUntil, filter, map } from 'rxjs/operators';
+import { debounceTime, takeUntil, filter } from 'rxjs/operators';
 
 import { Scroll } from './scroll.model';
 
@@ -50,7 +51,7 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
    */
   private debounce = 100;
 
-  constructor(private elementRef: ElementRef) {}
+  constructor(private elementRef: ElementRef, @Inject('Window') private window: Window) {}
 
   public ngAfterViewInit(): void {
     /**
@@ -81,7 +82,7 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
 
     const distanceToViewBottom = boundindClientRect.bottom;
     const elementHeight = boundindClientRect.height;
-    const viewHeight = window.innerHeight;
+    const viewHeight = this.window.innerHeight;
 
     this.scroll$.next({ distanceToViewBottom, elementHeight, viewHeight });
   }
