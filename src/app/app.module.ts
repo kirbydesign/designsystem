@@ -20,7 +20,6 @@ import { ComponentStatusModule } from '~/app/component-status/component-status.m
     HttpClientModule,
     FormsModule,
     KirbyModule,
-    ComponentStatusModule,
   ],
 
   providers: [],
