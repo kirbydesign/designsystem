@@ -95,16 +95,7 @@ describe('ListComponent', () => {
       listLoadMoreService = TestBed.get(ListLoadMoreService);
       listLoadMoreService.handleLoadMore.and.returnValue(Promise.resolve(true));
     });
-/*
- if (this.hasMoreItems && !this.isLoading) {
-      this.isLoading = true;
-      try {
-        this.hasMoreItems = await this.listLoadMoreService.handleLoadMore(this.loadMore);
-      } finally {
-        this.isLoading = false;
-      }
-    }
- */
+
     it('should call list-load-more-service if there are more items and is not loading', () => {
       component.hasMoreItems = true;
       component.isLoading = false;
@@ -141,7 +132,7 @@ describe('ListComponent', () => {
       });
     });
 
-    fit('should set isLoading to false, if the load more callback fails', (done) => {
+    it('should set isLoading to false, if the load more callback fails', (done) => {
       component.hasMoreItems = true;
       component.isLoading = false;
       listLoadMoreService.handleLoadMore.and.returnValue(Promise.reject(new Error('fail')));
@@ -150,6 +141,5 @@ describe('ListComponent', () => {
         done();
       });
     });
-
   });
 });
