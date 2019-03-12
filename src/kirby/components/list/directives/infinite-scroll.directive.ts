@@ -12,6 +12,7 @@ import {
 import { Subject } from 'rxjs';
 import { debounceTime, takeUntil, filter } from 'rxjs/operators';
 
+import { WindowRef } from './../../shared/window-ref/window-ref.service';
 import { Scroll } from './scroll.model';
 
 @Directive({
@@ -51,7 +52,7 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
    */
   private debounce = 100;
 
-  constructor(private elementRef: ElementRef) {}
+  constructor(private elementRef: ElementRef, private windowRef: WindowRef) {}
 
   public ngAfterViewInit(): void {
     /**
@@ -70,7 +71,9 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
           );
         })
       )
-      .subscribe(() => this.scrollEnd.emit());
+      .subscribe(() => {
+        this.scrollEnd.emit();
+      });
   }
   /**
    * On element scroll event emit next `scroll$` observable value
@@ -82,7 +85,7 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
 
     const distanceToViewBottom = boundindClientRect.bottom;
     const elementHeight = boundindClientRect.height;
-    const viewHeight = window.innerHeight;
+    const viewHeight = this.windowRef.nativeWindow.innerHeight;
 
     this.scroll$.next({ distanceToViewBottom, elementHeight, viewHeight });
   }

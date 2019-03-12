@@ -1,5 +1,5 @@
 <ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
-<ul kirbyInfiniteScroll (scrollEnd)="onLoadMore()">
+<ul kirbyInfiniteScroll (scrollEnd)="onLoadMore()" [disabled]="!hasMoreItems">
   <ng-container *ngIf="isSectionsEnabled; else normalList">
     <ng-container *ngFor="let section of (items | groupBy: getSectionName)">
       <li class="section-header">
@@ -40,9 +40,9 @@
   </ng-template>
   
   <li *ngIf="isLoading">
-    <kirby-spinner></kirby-spinner>
+      <div class="extending"><kirby-spinner></kirby-spinner></div>
   </li>
   <li *ngIf="!hasMoreItems && noMoreItemsText">
-    <span>{{noMoreItemsText}}</span>
+    <span class="extending">{{noMoreItemsText}}</span>
   </li>
 </ul>

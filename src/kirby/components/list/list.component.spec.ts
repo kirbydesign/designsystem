@@ -96,6 +96,7 @@ describe('ListComponent', () => {
     });
 
     it('should call list-load-more-service if there are more items and is not loading', (done) => {
+      //Sander is working here
       done();
     });
 
