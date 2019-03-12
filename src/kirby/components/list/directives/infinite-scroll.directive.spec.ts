@@ -4,7 +4,7 @@ import { fakeAsync, tick } from '@angular/core/testing';
 import { WindowRef } from './../../shared/window-ref/window-ref.service';
 import { InfiniteScrollDirective } from './infinite-scroll.directive';
 
-fdescribe('Directive: List', () => {
+describe('Directive: List', () => {
   const SCROLL_DEBOUNCE_TIME = 100;
 
   let nativeElement: any;
