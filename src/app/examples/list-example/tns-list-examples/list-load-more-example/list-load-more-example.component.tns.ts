@@ -9,31 +9,33 @@ import { BaseListComponent } from '../../base-list.component';
 export class ListLoadMoreExampleComponent extends BaseListComponent {
   // It is necessary to bind the callback method to this instance in order to
   // access the instance properties.
-  onLoadMoreItemsCallback = this.onLoadMoreItems.bind(this);
+  onLoadMoreItemsCallback = this.onLoadMore.bind(this);
 
-  numbersCalled = 0;
+  private itemCount = 1;
 
-  private onLoadMoreItems(): Promise<boolean> {
-    const moreToLoad = this.numbersCalled < 3;
+  private async onLoadMore(): Promise<boolean> {
+    this.addItems(this.generateItems());
 
-    if (moreToLoad) {
-      this.numbersCalled++;
+    // lets make a delay to simulate a HTTP call.
+    await new Promise((resolve) => setTimeout(resolve, 2000));
 
-      for (let i = 0; i < 10; i++) {
-        this.addItems([
-          {
-            title: `Item ${this.numbersCalled}.${i}`,
-            subTitle: `${Math.round(Math.random() * 100)} stk`,
-            amount: `${Math.round(Math.random() * 1000)} DKK`,
-            detail: Math.round(Math.random() * 100),
-          },
-        ]);
-      }
+    // We will load 100 items
+    return this.itemCount <= 100;
+  }
+
+  private generateItems(): any[] {
+    const items = [];
+    const numberOfItems = 10;
+    for (let index = 1; index < numberOfItems; index++) {
+      const transaction = {
+        title: `Item ${this.itemCount}`,
+        subTitle: `${Math.round(Math.random() * 100)} pcs`,
+        amount: `${Math.round(Math.random() * 1000)} DKK`,
+        detail: Math.round(Math.random() * 100),
+      };
+      items.push(transaction);
+      this.itemCount++;
     }
-    return new Promise<boolean>((resolve) => {
-      setTimeout(() => {
-        resolve(moreToLoad);
-      }, 2500);
-    });
+    return items;
   }
 }

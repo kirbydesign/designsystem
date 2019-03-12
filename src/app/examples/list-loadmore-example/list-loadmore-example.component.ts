@@ -8,37 +8,39 @@ import { BaseListComponent } from './../list-example/base-list.component';
   styleUrls: ['./list-loadmore-example.component.scss'],
 })
 export class ListLoadmoreExampleComponent extends BaseListComponent {
-  // We make a callback and bind it to 'this' context, so 'this' can be used in the callback.
+  // We make a callback and bind it to 'this' context, so 'this' can be used inside the callback.
   onLoadMoreCallback = this.onLoadMore.bind(this);
 
-  private transactionIdCount = 1;
+  private itemCount = 1;
 
   constructor() {
     super();
-    this.addItems(this.generateTransactions());
+    this.addItems(this.generateItems());
   }
 
   private async onLoadMore(): Promise<boolean> {
-    this.addItems(this.generateTransactions());
+    this.addItems(this.generateItems());
+
     // lets make a delay to simulate a HTTP call.
     await new Promise((resolve) => setTimeout(resolve, 2000));
 
     // We will load 100 items
-    return this.transactionIdCount <= 100;
+    return this.itemCount <= 100;
   }
 
-  private generateTransactions(): any[] {
-    const transactions = [];
-    const numberOfTransactions = 10;
-    for (let index = 1; index < numberOfTransactions; index++) {
+  private generateItems(): any[] {
+    const items = [];
+    const numberOfItems = 10;
+    for (let index = 1; index < numberOfItems; index++) {
       const transaction = {
-        title: 'Transaction ' + this.transactionIdCount,
-        subTitle: this.transactionIdCount + ' stk',
-        amount: this.transactionIdCount + ' DKK',
+        title: `Item ${this.itemCount}`,
+        subTitle: `${Math.round(Math.random() * 100)} pcs`,
+        amount: `${Math.round(Math.random() * 1000)} DKK`,
+        detail: Math.round(Math.random() * 100),
       };
-      transactions.push(transaction);
-      this.transactionIdCount++;
+      items.push(transaction);
+      this.itemCount++;
     }
-    return transactions;
+    return items;
   }
 }
