@@ -255,6 +255,8 @@ module.exports = env => {
                 { from: "kirby/components/chart/chart.webview.html", to: "chart" },
                 { from: "kirby/components/chart/css/styles.css", to: "chart" },
                 { from: "../node_modules/highcharts/highcharts.js", to: "chart" },
+                { from: "../node_modules/highcharts/highcharts-more.js", to: "chart" },
+                { from: "../node_modules/highcharts/modules/solid-gauge.js", to: "chart" },
                 { from: "../node_modules/nativescript-webview-interface/www/nativescript-webview-interface.js", to: "chart" },
             ], { ignore: [`${relative(appPath, appResourcesFullPath)}/**`] }),
             // Generate a bundle starter script and activate it in package.json
