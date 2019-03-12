@@ -1,5 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { Options } from 'highcharts';
+
 import { ChartComponent } from './chart.component';
 import { ChartType } from './chart-type';
 
@@ -18,6 +20,7 @@ describe('ChartComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ChartComponent);
     component = fixture.componentInstance;
+    component.data = this.data;
     fixture.detectChanges();
   });
 
@@ -88,5 +91,97 @@ describe('ChartComponent', () => {
     const data = (component.options.series[0] as Highcharts.SeriesAreasplineOptions).data;
     expect(data.length).toBe(2);
     expect(data[0]['name']).toBe('Boomerangs 20%');
+  });
+
+  describe('ActivityGauge', () => {
+    it('should set correct title and subtitle', () => {
+      component.type = ChartType.ACTIVITYGAUGE;
+
+      component.data = [
+        {
+          title: '1.234.567',
+          subtitle: 'Afdraget',
+        },
+      ];
+
+      component.ngOnInit();
+
+      expect(component.options.title.text).toBe('1.234.567');
+      expect(component.options.subtitle.text).toBe('Afdraget');
+    });
+
+    it('should add backgroundColor to optionsarray', () => {
+      component.type = ChartType.ACTIVITYGAUGE;
+      const ActivityGaugeOptions: Options = {
+        pane: {
+          background: [
+            {
+              backgroundColor: {
+                linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
+                stops: [[1, 'rgba(255, 255, 255, 0.3)'], [0, 'rgba(255, 255, 255, 0.3)']],
+              },
+              outerRadius: '112%',
+              innerRadius: '88%',
+              borderWidth: 0,
+            },
+          ],
+        },
+      };
+
+      component.options = ActivityGaugeOptions;
+
+      component.data = [
+        {
+          paneBackgroundColor: 'red',
+        },
+      ];
+
+      component.ngOnInit();
+
+      expect(component.options.pane.background[0].backgroundColor).toEqual(
+        component.data[0].paneBackgroundColor
+      );
+    });
+
+    it('should change title and subtitle color when color-attribute is set', () => {
+      component.type = ChartType.ACTIVITYGAUGE;
+      component.data = [
+        {
+          color: 'red',
+        },
+      ];
+      const expected = component.data[0].color;
+
+      component.ngOnInit();
+
+      expect(component.options.title.style.color).toEqual(expected);
+      expect(component.options.subtitle.style.color).toEqual(expected);
+    });
+
+    it('should set type to solidgauge when ACTIVITYGAUGE is chosen', () => {
+      component.type = ChartType.ACTIVITYGAUGE;
+      component.data = [
+        {
+          title: '',
+          subtitle: '',
+        },
+      ];
+
+      component.ngOnInit();
+
+      expect(component.options.series[0].type).toEqual('solidgauge');
+    });
+
+    it('should set activitygauge chart type', () => {
+      component.type = ChartType.ACTIVITYGAUGE;
+      component.data = [
+        {
+          title: 'test',
+          subtitle: 'test',
+        },
+      ];
+      component.ngOnInit();
+      expect(component.options.chart.type).toBe(ChartType.ACTIVITYGAUGE);
+    });
   });
 });
