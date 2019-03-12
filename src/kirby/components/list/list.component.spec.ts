@@ -1,8 +1,9 @@
-import { ListLoadMoreService } from './services/list-load-more.service';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { ListLoadMoreService } from './services/list-load-more.service';
 import { GroupByPipe } from './pipes/group-by.pipe';
 import { ListComponent } from './list.component';
+import { SpinnerComponent } from '~/kirby';
 
 describe('ListComponent', () => {
   let component: ListComponent;
@@ -10,7 +11,7 @@ describe('ListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ListComponent, GroupByPipe],
+      declarations: [ListComponent, GroupByPipe, SpinnerComponent],
       providers: [
         {
           provide: ListLoadMoreService,
@@ -94,27 +95,61 @@ describe('ListComponent', () => {
       listLoadMoreService = TestBed.get(ListLoadMoreService);
       listLoadMoreService.handleLoadMore.and.returnValue(Promise.resolve(true));
     });
-
-    it('should call list-load-more-service if there are more items and is not loading', (done) => {
-      //Sander is working here
-      done();
+/*
+ if (this.hasMoreItems && !this.isLoading) {
+      this.isLoading = true;
+      try {
+        this.hasMoreItems = await this.listLoadMoreService.handleLoadMore(this.loadMore);
+      } finally {
+        this.isLoading = false;
+      }
+    }
+ */
+    it('should call list-load-more-service if there are more items and is not loading', () => {
+      component.hasMoreItems = true;
+      component.isLoading = false;
+      component.onLoadMore();
+      expect(listLoadMoreService.handleLoadMore).toHaveBeenCalled();
     });
 
-    it('should not call list-load-more-service if there are no more items', (done) => {
-      done();
+    it('should not call list-load-more-service if there are no more items', () => {
+      component.hasMoreItems = false;
+      component.onLoadMore();
+      expect(listLoadMoreService.handleLoadMore).not.toHaveBeenCalled();
     });
 
-    it('should not call list-load-more-service if is loading', (done) => {
-      done();
+    it('should not call list-load-more-service if is loading', () => {
+      component.isLoading = true;
+      component.onLoadMore();
+      expect(listLoadMoreService.handleLoadMore).not.toHaveBeenCalled();
     });
 
-    it('should not call list-load-more-service if there are no more items and is loading', (done) => {
-      done();
+    it('should not call list-load-more-service if there are no more items and is loading', () => {
+      component.isLoading = true;
+      component.hasMoreItems = false;
+      component.onLoadMore();
+      expect(listLoadMoreService.handleLoadMore).not.toHaveBeenCalled();
     });
 
-    it('should set isLoading to false, if the load more callback fails', (done) => {
-      listLoadMoreService.handleLoadMore.and.returnValue(Promise.reject());
-      done();
+    fit('should set isLoading to true, when the load more callback succes', (done) => {
+      component.hasMoreItems = true;
+      component.isLoading = false;
+      listLoadMoreService.handleLoadMore.and.returnValue(Promise.resolve());
+      component.onLoadMore().then(() => {
+        expect(component.isLoading).toBe(false);
+        done();
+      });
     });
+
+    fit('should set isLoading to false, if the load more callback fails', (done) => {
+      component.hasMoreItems = true;
+      component.isLoading = false;
+      listLoadMoreService.handleLoadMore.and.returnValue(Promise.reject(new Error('fail')));
+      component.onLoadMore().then(() => {
+        expect(component.isLoading).toBe(false);
+        done();
+      });
+    });
+
   });
 });
