@@ -60,18 +60,13 @@ export class ListComponent implements OnInit {
   async onLoadMore() {
     if (this.hasMoreItems && !this.isLoading) {
       this.isLoading = true;
-      this.listLoadMoreService
-        .handleLoadMore(this.loadMore)
-        .then((moreItems) => {
-          this.hasMoreItems = moreItems;
-          this.isLoading = false;
-          console.log('JVH HERE OK');
-        })
-        .catch((err) => {
-          console.log(err);
-          this.isLoading = false;
-          console.log('JVH HERE ERROR');
-        });
+      try {
+        this.hasMoreItems = await this.listLoadMoreService.handleLoadMore(this.loadMore);
+      } catch {
+        // do nothing
+      } finally {
+        this.isLoading = false;
+      }
     }
   }
 }
