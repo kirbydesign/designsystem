@@ -14,13 +14,7 @@ import { ComponentStatusModule } from '~/app/component-status/component-status.m
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, SideNavComponent, HeaderComponent, IntroComponent],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule,
-    KirbyModule,
-  ],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule, KirbyModule],
 
   providers: [],
   bootstrap: [AppComponent],
