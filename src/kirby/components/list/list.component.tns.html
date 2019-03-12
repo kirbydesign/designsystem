@@ -34,10 +34,11 @@
           ">
         </ng-container>
       </FlexboxLayout>
-    </ng-template>
+    </ng-template> 
+
     <ng-container *ngIf="!hasMoreItems && noMoreItemsText">
       <ng-template tkListViewFooter>
-        <Label text="{{noMoreItemsText}}" class="no-more-items-text"></Label>
+        <Label class="lastRow" text="{{noMoreItemsText}}"></Label>
       </ng-template>
     </ng-container>
   </RadListView>
