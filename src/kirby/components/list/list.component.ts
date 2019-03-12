@@ -62,8 +62,8 @@ export class ListComponent implements OnInit {
       this.isLoading = true;
       try {
         this.hasMoreItems = await this.listLoadMoreService.handleLoadMore(this.loadMore);
-      } catch {
-        // do nothing
+      } catch (error) {
+        console.log(error);
       } finally {
         this.isLoading = false;
       }
