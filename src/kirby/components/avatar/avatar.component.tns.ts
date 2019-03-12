@@ -69,7 +69,7 @@ export class AvatarComponent extends ContentView {
         }
       }, 100);
     }
-  } 
+  }
 }
 
 registerElement(AVATAR_COMPONENT_SELECTOR, () => require('./avatar.component').AvatarComponent);
