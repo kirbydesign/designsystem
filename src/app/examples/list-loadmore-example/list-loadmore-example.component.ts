@@ -23,13 +23,13 @@ export class ListLoadmoreExampleComponent extends BaseListComponent {
     // lets make a delay to simulate a HTTP call.
     await new Promise((resolve) => setTimeout(resolve, 3000));
     this.addItems(this.generateItems());
-    // We will load 50 generated items total
+    // We will load 50 items
     return this.itemCount <= 50;
   }
 
   private generateItems(): any[] {
     const items = [];
-    const numberOfItems = 15;
+    const numberOfItems = 10;
     for (let index = 1; index < numberOfItems; index++) {
       const transaction = {
         title: `Item ${this.itemCount}`,
