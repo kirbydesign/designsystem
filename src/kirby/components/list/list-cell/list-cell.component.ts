@@ -8,6 +8,7 @@ enum verticalAlignmentEnum {
   stretch = 'stretch',
   baseline = 'baseline',
 }
+// TODO: refactor - use map instead of enum
 enum horisontalAlignmentEnum {
   left = 'flex-start',
   center = 'center',
@@ -28,7 +29,7 @@ const defaultWidth = 1;
 export class ListCellComponent implements OnInit {
   @Input() horisontalAlignment: horisontalAlignment = defaultHorisontalAlignment;
   @Input() verticalAlignment: verticalAlignment = defaultVerticalAlignment;
-  @Input() width = defaultWidth;
+  @Input() width: number = defaultWidth;
 
   @HostBinding('style.flex-basis')
   private _flexBasisHost: string;
