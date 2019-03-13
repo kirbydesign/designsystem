@@ -69,12 +69,4 @@ export class ListComponent implements OnInit {
   onItemTap(selectedItem: any): void {
     this.itemSelect.emit(selectedItem);
   }
-
-  rowDefinition(headerTemplate: any): string {
-    return headerTemplate ? 'auto,*' : '*';
-  }
-
-  rowNumberForListView(headerTemplate: any): string {
-    return headerTemplate ? '1' : '0';
-  }
 }
