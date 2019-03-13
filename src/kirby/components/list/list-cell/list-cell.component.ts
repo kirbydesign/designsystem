@@ -66,7 +66,6 @@ export class ListCellComponent implements OnInit {
         return this.horisontalAlignment;
       }
     }
-
     console.warn(
       `Invalid value ${
         this.horisontalAlignment
@@ -79,7 +78,6 @@ export class ListCellComponent implements OnInit {
     if (this.verticalAlignment && verticalAlignmentEnum[this.verticalAlignment]) {
       return verticalAlignmentEnum[this.verticalAlignment];
     }
-
     console.warn(
       `Invalid value ${
         this.verticalAlignment

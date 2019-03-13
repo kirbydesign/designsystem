@@ -44,8 +44,6 @@ export class ListComponent implements OnInit {
 
   constructor() {}
 
-  posts: any[] = [];
-
   ngOnInit() {
     if (this.getSectionName) {
       this.isSectionsEnabled = true;
@@ -54,15 +52,6 @@ export class ListComponent implements OnInit {
       console.warn('kirbyListItem is deprecated and will be removed in future versions of Kirby');
     }
     this.isSelectable = this.itemSelect.observers.length > 0;
-
-    for (let i = 0; i < 100; i++) {
-      this.posts.push({
-        title: 'Lorem Ipsum',
-        subTitle: 'Lorem ipsum dolor sit amet.',
-        amount: i,
-        detail: i,
-      });
-    }
   }
 
   onItemTap(selectedItem: any): void {
