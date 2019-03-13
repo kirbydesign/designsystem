@@ -21,6 +21,8 @@ export class AvatarComponent extends ContentView {
   @Input() imageSrc: string;
   @Input() altText: string;
   @Input() size: string;
+  @Input() shadow?: false;
+  @Input() overlay?: true;
 
   view: View;
 
@@ -42,29 +44,31 @@ export class AvatarComponent extends ContentView {
   }
 
   addShadow() {
-    setTimeout(() => {
-      if (this.view.android) {
-        this.view.eachChildView((child) => {
-          const bgColor = child.style.backgroundColor;
-          const androidView = child.android;
-          const shape = new android.graphics.drawable.GradientDrawable();
-          shape.setShape(android.graphics.drawable.GradientDrawable.RECTANGLE);
-          shape.setColor(android.graphics.Color.parseColor(bgColor + ''));
-          shape.setCornerRadius(androidView.getMeasuredWidth());
-          androidView.setBackgroundDrawable(shape);
-          androidView.setClipToOutline(true);
-          androidView.setElevation(ScssHelper.ELEVATION_IMAGE);
-          return true;
-        });
-      } else if (this.view.ios) {
-        const iosView = this.view.ios;
-        iosView.layer.shadowColor = ScssHelper.SHADOW_COLOR.ios.CGColor;
-        iosView.layer.shadowOffset = CGSizeMake(0, ScssHelper.SHADOW_OFFSET_Y);
-        iosView.layer.shadowOpacity = ScssHelper.SHADOW_OPACITY;
-        iosView.layer.shadowRadius = ScssHelper.SHADOW_RADIUS;
-        return;
-      }
-    }, 100);
+    if (this.shadow) {
+      setTimeout(() => {
+        if (this.view.android) {
+          this.view.eachChildView((child) => {
+            const bgColor = child.style.backgroundColor;
+            const androidView = child.android;
+            const shape = new android.graphics.drawable.GradientDrawable();
+            shape.setShape(android.graphics.drawable.GradientDrawable.RECTANGLE);
+            shape.setColor(android.graphics.Color.parseColor(bgColor + ''));
+            shape.setCornerRadius(androidView.getMeasuredWidth());
+            androidView.setBackgroundDrawable(shape);
+            androidView.setClipToOutline(true);
+            androidView.setElevation(ScssHelper.ELEVATION_IMAGE);
+            return true;
+          });
+        } else if (this.view.ios) {
+          const iosView = this.view.ios;
+          iosView.layer.shadowColor = ScssHelper.SHADOW_COLOR.ios.CGColor;
+          iosView.layer.shadowOffset = CGSizeMake(0, ScssHelper.SHADOW_OFFSET_Y);
+          iosView.layer.shadowOpacity = ScssHelper.SHADOW_OPACITY;
+          iosView.layer.shadowRadius = ScssHelper.SHADOW_RADIUS;
+          return;
+        }
+      }, 100);
+    }
   }
 }
 
