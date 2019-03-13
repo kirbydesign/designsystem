@@ -7,6 +7,10 @@ import * as exporting from 'highcharts/modules/exporting';
 import * as exportData from 'highcharts/modules/export-data';
 import * as accessibility from 'highcharts/modules/accessibility';
 
+declare var require: any;
+require('highcharts/highcharts-more')(Highcharts);
+require('highcharts/modules/solid-gauge')(Highcharts);
+
 export class ChartHelper {
   chartContainer: ElementRef;
 

@@ -8,45 +8,48 @@
 </head>
 
 <body style="margin: 0; padding: 0;">
-    <div id="chart"></div>
-    <script src="nativescript-webview-interface.js"></script>
-    <script src="highcharts.js"></script>
-    <link rel="stylesheet" type="text/css" href="styles.css">
-    <script>
-            (function () {
-                var oWebViewInterface = window.nsWebViewInterface;
-                function addNativeMsgListener() {
-                    oWebViewInterface.on('updateChart', function (options) {
-                        configureChartOptions(options);
-                        Highcharts.chart('chart', options);
-                    });
+<div id="chart"></div>
+<script src="nativescript-webview-interface.js"></script>
+<script src="highcharts.js"></script>
+<script src="highcharts-more.js"></script>
+<script src="solid-gauge.js"></script>
+<link rel="stylesheet" type="text/css" href="styles.css">
+<script>
+    alert('WHAT');
+    (function () {
+        var oWebViewInterface = window.nsWebViewInterface;
+        function addNativeMsgListener() {
+            oWebViewInterface.on('updateChart', function (options) {
+                configureChartOptions(options);
+                Highcharts.chart('chart', options);
+            });
+        }
+        function configureChartOptions(options) {
+            // these functions need to be here AND in the options objects to work
+            switch (options.chart.type) {
+                case 'pie': {
+                    options.plotOptions.pie.point.events.legendItemClick = function (e) {
+                        return e.preventDefault();
+                    };
+                    break;
                 }
-                function configureChartOptions(options) {
-                    // these functions need to be here AND in the options objects to work
-                    switch (options.chart.type) {
-                        case 'pie': {
-                            options.plotOptions.pie.point.events.legendItemClick = function (e) {
-                                return e.preventDefault();
-                            };
-                            break;
-                        }
-                        case 'areaspline': {
-                            options.tooltip.formatter = function () {
-                                return this.y;
-                            };
-                            options.tooltip.positioner = function () {
-                                return { x: (this.chart.plotSizeX / 2) - (this.label.width / 2), y: 0 };
-                            };
-                            break;
-                        }
-                    }
+                case 'areaspline': {
+                    options.tooltip.formatter = function () {
+                        return this.y;
+                    };
+                    options.tooltip.positioner = function () {
+                        return { x: (this.chart.plotSizeX / 2) - (this.label.width / 2), y: 0 };
+                    };
+                    break;
                 }
-                function init() {
-                    addNativeMsgListener();
-                }
-                init();
-            })();
-        </script>
+            }
+        }
+        function init() {
+            addNativeMsgListener();
+        }
+        init();
+    })();
+</script>
 </body>
 
 </html>
