@@ -8,7 +8,6 @@ import {
   Output,
   QueryList,
   TemplateRef,
-  ChangeDetectionStrategy,
 } from '@angular/core';
 import {
   LoadOnDemandListViewEventData,
@@ -21,7 +20,6 @@ import {
   ListSectionHeaderDirective,
   ListCellDirective,
 } from './list.directive';
-import { ListLoadMoreService } from './services/list-load-more.service';
 
 @Component({
   selector: 'kirby-list',
@@ -44,7 +42,7 @@ export class ListComponent implements OnInit {
   isSelectable: boolean;
   hasMoreItems: boolean = true;
 
-  constructor(private listLoadMoreService: ListLoadMoreService) {}
+  constructor() {}
 
   posts: any[] = [];
 
