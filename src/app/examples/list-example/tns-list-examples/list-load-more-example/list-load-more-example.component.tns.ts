@@ -1,4 +1,3 @@
-import { ObservableArray } from 'tns-core-modules/data/observable-array/observable-array';
 import { Component } from '@angular/core';
 
 import { BaseListComponent } from '../../base-list.component';
@@ -8,7 +7,6 @@ import { BaseListComponent } from '../../base-list.component';
   styleUrls: ['./list-load-more-example.component.tns.scss'],
 })
 export class ListLoadMoreExampleComponent extends BaseListComponent {
-  data: ObservableArray<any>;
   // It is necessary to bind the callback method to this instance in order to
   // access the instance properties.
   onLoadMoreItemsCallback = this.onLoadMore.bind(this);

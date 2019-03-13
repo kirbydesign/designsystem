@@ -7,8 +7,8 @@
     <kirby-list-cell
             *kirbyListCell="let item"
             width=0.85>
-      <kirby-list-cell-line *ngIf="item" [primary]="true" [text]="item.title"></kirby-list-cell-line>
-      <kirby-list-cell-line *ngIf="item" [text]="item.detail"></kirby-list-cell-line>
+      <kirby-list-cell-line [primary]="true" [text]="item.title"></kirby-list-cell-line>
+      <kirby-list-cell-line [text]="item.detail"></kirby-list-cell-line>
     </kirby-list-cell>
 
     <kirby-list-cell
@@ -16,6 +16,6 @@
             verticalAlignment="center"
             horisontalAlignment="right"
             width="0.5">
-        <kirby-list-cell-line *ngIf="item" [primary]="true" [text]="item.amount"></kirby-list-cell-line>
+        <kirby-list-cell-line [primary]="true" [text]="item.amount"></kirby-list-cell-line>
     </kirby-list-cell>
 </kirby-list>
