@@ -15,22 +15,21 @@ export class ListLoadmoreExampleComponent extends BaseListComponent {
 
   constructor() {
     super();
+    // add items to activate scroll
     this.addItems(this.generateItems());
   }
 
   private async onLoadMore(): Promise<boolean> {
-    this.addItems(this.generateItems());
-
     // lets make a delay to simulate a HTTP call.
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-
-    // We will load 100 items
-    return this.itemCount <= 100;
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+    this.addItems(this.generateItems());
+    // We will load 50 generated items total
+    return this.itemCount <= 50;
   }
 
   private generateItems(): any[] {
     const items = [];
-    const numberOfItems = 10;
+    const numberOfItems = 15;
     for (let index = 1; index < numberOfItems; index++) {
       const transaction = {
         title: `Item ${this.itemCount}`,
