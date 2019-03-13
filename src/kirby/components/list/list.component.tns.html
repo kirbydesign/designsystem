@@ -12,7 +12,7 @@
     [groupingFunction]="getSectionName"
     [items]="items"
     row="{{ rowNumberForListView(headerTemplate) }}">
-
+    <ListViewLinearLayout tkListViewLayout scrollDirection="Vertical" itemInsertAnimation="Default" itemDeleteAnimation="Default"></ListViewLinearLayout>
     <ng-template tkListItemTemplate let-item="item">
       <FlexboxLayout class="row" (tap)="onItemTap(item)">
         <ng-container

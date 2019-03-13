@@ -8,6 +8,7 @@ import {
   Output,
   QueryList,
   TemplateRef,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import {
   LoadOnDemandListViewEventData,
@@ -30,7 +31,7 @@ import { ListLoadMoreService } from './services/list-load-more.service';
 export class ListComponent implements OnInit {
   @Input() items: any[];
   @Input() getSectionName?: (item: any) => string;
-  @Input() loadMore?: () => Promise<boolean>;
+  @Input() loadMore?: () => Promise<any[]>;
   @Input() noMoreItemsText: string;
   @Output() itemSelect = new EventEmitter<any>();
 
@@ -45,6 +46,8 @@ export class ListComponent implements OnInit {
 
   constructor(private listLoadMoreService: ListLoadMoreService) {}
 
+  posts: any[] = [];
+
   ngOnInit() {
     if (this.getSectionName) {
       this.isSectionsEnabled = true;
@@ -53,6 +56,15 @@ export class ListComponent implements OnInit {
       console.warn('kirbyListItem is deprecated and will be removed in future versions of Kirby');
     }
     this.isSelectable = this.itemSelect.observers.length > 0;
+
+    for (let i = 0; i < 100; i++) {
+      this.posts.push({
+        title: 'Lorem Ipsum',
+        subTitle: 'Lorem ipsum dolor sit amet.',
+        amount: i,
+        detail: i,
+      });
+    }
   }
 
   onItemTap(selectedItem: any): void {
@@ -68,9 +80,13 @@ export class ListComponent implements OnInit {
   }
 
   async onLoadMore(args: LoadOnDemandListViewEventData) {
-    this.hasMoreItems = await this.listLoadMoreService.handleLoadMore(this.loadMore);
-    const listView: RadListView = args.object;
+    var listView: RadListView = args.object;
+    const newItems = await this.loadMore();
+    this.hasMoreItems = newItems && newItems.length > 0;
+    if (this.hasMoreItems) {
+      this.items.push(...newItems);
+    }
     listView.notifyLoadOnDemandFinished(!this.hasMoreItems);
-    args.returnValue = !this.hasMoreItems;
+    args.returnValue = this.hasMoreItems;
   }
 }

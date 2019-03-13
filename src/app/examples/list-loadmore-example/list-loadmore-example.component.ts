@@ -15,17 +15,18 @@ export class ListLoadmoreExampleComponent extends BaseListComponent {
 
   constructor() {
     super();
-    this.addItems(this.generateItems());
+    this.items.push(...this.generateItems());
   }
 
-  private async onLoadMore(): Promise<boolean> {
-    this.addItems(this.generateItems());
-
+  private async onLoadMore(): Promise<any[]> {
     // lets make a delay to simulate a HTTP call.
     await new Promise((resolve) => setTimeout(resolve, 2000));
 
-    // We will load 100 items
-    return this.itemCount <= 100;
+    // We will load 20 items
+    if (this.itemCount > 20) {
+      return null;
+    }
+    return this.generateItems();
   }
 
   private generateItems(): any[] {

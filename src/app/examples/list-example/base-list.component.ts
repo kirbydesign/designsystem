@@ -2,7 +2,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { take } from 'rxjs/operators';
 
 export class BaseListComponent {
-  private items: any[] = [
+  public items: any[] = [
     {
       title: 'Vestas Wind Systems has a very long name',
       subTitle: '2000 pcs',
@@ -34,20 +34,10 @@ export class BaseListComponent {
       detail: -171,
     },
   ];
-  private obsArray: BehaviorSubject<any[]> = new BehaviorSubject<any[]>(this.items);
-  items$: Observable<any[]> = this.obsArray.asObservable();
 
   constructor() {}
 
   onItemSelect(item: any) {
     alert(`You have clicked the row [${item.title} ${item.amount}]`);
-  }
-
-  protected addItems(items: any[]): void {
-    this.items$.pipe(take(1)).subscribe((val) => {
-      val = val ? val : [];
-      const newArr = [...val, ...items];
-      this.obsArray.next(newArr);
-    });
   }
 }

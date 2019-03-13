@@ -26,7 +26,7 @@ import { ListLoadMoreService } from './services/list-load-more.service';
 export class ListComponent implements OnInit {
   @Input() items: any[];
   @Input() getSectionName?: (item: any) => string;
-  @Input() loadMore?: () => Promise<boolean>;
+  @Input() loadMore?: () => Promise<any[]>;
   @Input() noMoreItemsText: string;
   @Output() itemSelect = new EventEmitter<any>();
 
@@ -61,7 +61,11 @@ export class ListComponent implements OnInit {
     if (this.hasMoreItems && !this.isLoading) {
       this.isLoading = true;
       try {
-        this.hasMoreItems = await this.listLoadMoreService.handleLoadMore(this.loadMore);
+        const newItems = await this.loadMore();
+        this.hasMoreItems = newItems && newItems.length > 0;
+        if (this.hasMoreItems) {
+          this.items.push(...newItems);
+        }
       } catch {
         // do nothing
       } finally {

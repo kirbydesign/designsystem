@@ -1,9 +1,6 @@
 <kirby-list
-        [items]="items$ | async"
+        [items]="items"
         (itemSelect)="onItemSelect($event)">
-
-
-
     <kirby-list-cell
             *kirbyListCell="let item"
             width=0.85>

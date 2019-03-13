@@ -1,4 +1,4 @@
-<kirby-list [items]="items$ | async">
+<kirby-list [items]="items">
   <!-- 
     kirby-list-cell supports the attributes:
     - width: 
@@ -33,7 +33,7 @@
 <hr />
 
 <kirby-list
-  [items]="items$ | async"
+  [items]="items"
   (itemSelect)="onItemSelect($event)"
   [getSectionName]="getSectionName">
   <kirby-list-section-header
@@ -55,7 +55,7 @@
 
 <hr />
 
-<kirby-list [items]="items$ | async" (itemSelect)="onItemSelect($event)">
+<kirby-list [items]="items" (itemSelect)="onItemSelect($event)">
   <kirby-list-cell
     *kirbyListCell="let item">
     <kirby-list-cell-line [primary]="true" [text]="item.title"></kirby-list-cell-line>
@@ -73,7 +73,7 @@
 
 <hr />
 
-<kirby-list [items]="items$ | async" (itemSelect)="onItemSelect($event)">
+<kirby-list [items]="items" (itemSelect)="onItemSelect($event)">
   <kirby-list-header
     *kirbyListHeader
     [left]="'Navn'"
@@ -89,7 +89,7 @@
 
 <hr />
 
-<kirby-list [items]="items$ | async" (itemSelect)="onItemSelect($event)">
+<kirby-list [items]="items" (itemSelect)="onItemSelect($event)">
   <kirby-list-header
           *kirbyListHeader
           [left]="'Navn'"
