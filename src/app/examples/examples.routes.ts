@@ -7,7 +7,6 @@ import { GridExampleComponent } from './grid-example/grid-example.component';
 import { ListExampleComponent } from './list-example/list-example.component';
 import { ChartExampleComponent } from './chart-example/chart-example.component';
 import { FontsExampleComponent } from './fonts-example/fonts-example.component';
-import { ProgressBarExampleComponent } from './progress-bar-example/progress-bar-example.component';
 import { SpinnerExampleComponent } from './spinner-example/spinner-example.component';
 
 export const routes: Routes = [
@@ -42,10 +41,6 @@ export const routes: Routes = [
   {
     path: 'fonts',
     component: FontsExampleComponent,
-  },
-  {
-    path: 'progress-bar',
-    component: ProgressBarExampleComponent,
   },
   {
     path: 'spinner',

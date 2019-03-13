@@ -4,6 +4,8 @@ import { OrientationChangedEventData } from 'tns-core-modules/application';
 import * as app from 'tns-core-modules/application';
 import { View, EventData } from 'tns-core-modules/ui/core/view/view';
 import { FlexboxLayout } from 'tns-core-modules/ui/layouts/flexbox-layout/flexbox-layout';
+import { registerElement } from 'nativescript-angular';
+import { ContentView } from 'tns-core-modules/ui/content-view';
 
 import { ScssHelper } from '../../scss/scss-helper';
 
@@ -11,12 +13,14 @@ const screenScale = screen.mainScreen.scale;
 declare const CGSizeMake: any;
 declare const android: any;
 
+export const KIRBY_CARD_COMPONENT_SELECTOR = 'kirby-card';
+
 @Component({
-  selector: 'kirby-card',
+  selector: KIRBY_CARD_COMPONENT_SELECTOR,
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
 })
-export class CardComponent implements OnInit {
+export class CardComponent extends ContentView implements OnInit {
   @Input() title: string;
   @Input() subtitle: string;
 
@@ -26,7 +30,9 @@ export class CardComponent implements OnInit {
 
   cardSizeClass = '';
 
-  constructor(private zone: NgZone) {}
+  constructor(private zone: NgZone) {
+    super();
+  }
 
   ngOnInit() {}
 
@@ -95,6 +101,8 @@ export class CardComponent implements OnInit {
     }
   }
 }
+
+registerElement(KIRBY_CARD_COMPONENT_SELECTOR, () => require('./card.component').CardComponent);
 
 /**
  * First try to simply remove the timeout, it seems to work with the grid now,

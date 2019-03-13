@@ -9,6 +9,8 @@ export class AvatarComponent implements OnInit {
   @Input() imageSrc: string;
   @Input() altText: string;
   @Input() size: string;
+  @Input() shadow?: false;
+  @Input() overlay?: true;
 
   constructor() {}
 

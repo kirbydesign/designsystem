@@ -1,29 +1,43 @@
 @import '../../scss/native-imports';
 
-$image-diameter-small: 60;
-$image-diameter-medium: 100;
-$image-diameter-large: 150;
+$image-diameter-small:  (40, 48);
+$image-diameter-medium: (56, 72);
+$image-diameter-large:  (64, 80);
+$image-diameter-xlarge: (100, 140);
 
 $color-card-bg: rgb(255, 255, 255);
 
 .image-wrapper {
-    width: $image-diameter-small;
-    height: $image-diameter-small;
+    width: nth($image-diameter-small, 1);
+    height: nth($image-diameter-small, 1);
 
     &.medium {
-      width: $image-diameter-medium;
-      height: $image-diameter-medium;
+      width: nth($image-diameter-medium, 1);
+      height: nth($image-diameter-medium, 1);
     }
 
     &.large {
-      width: $image-diameter-large;
-      height: $image-diameter-large;
+      width: nth($image-diameter-large, 1);
+      height: nth($image-diameter-large, 1);
     }
+
+    &.xlarge {
+      width: nth($image-diameter-xlarge, 1);
+      height: nth($image-diameter-xlarge, 1);            
+    }
+}
+
+.image-overlay {
+  background-color: #333;
+  opacity: 0.05;
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
 }
 
 .container {
   width: 100%;
   height: 100%;
-  border-radius: 50%;
+  border-radius: 100%;
   background-color: $color-card-bg;
 }
