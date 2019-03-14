@@ -1,33 +1,8 @@
 @import '../../../scss/web-imports';
-$left-column: 1;
-$middle-column: 2;
-$right-column: 3 ;
-
 :host {
-    display: grid;
-    grid-template-columns: 40% 20% 40%;
-    width: 100%;
-    padding: size('gutter-small') size('m');
-    background-color: var(--kirby-surface);
-    border-bottom: 1px solid var(--kirby-background);
-    color: var(--kirby-on-background);
-    font-size: font-size('n');
-}
-
-.left-column {
-    grid-column-start: $left-column;
-    grid-column-end: $left-column;
-    text-align: left;
-}
-
-.middle-column {
-    grid-column-start: $middle-column;
-    grid-column-end: $middle-column;
-    text-align: center;
-}
-
-.right-column {
-    grid-column-start: $right-column;
-    grid-column-end: $right-column;
-    text-align: right;
+  background-color: var(--kirby-surface);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: size('m');
 }

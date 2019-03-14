@@ -1,15 +1,8 @@
-<GridLayout [rows]="rowDefinition(headerTemplate)">
-  <ng-container *ngIf="headerTemplate">
-    <FlexboxLayout alignItems="center" class="list-header-container" row="0">
-      <ng-container
-        *ngTemplateOutlet="headerTemplate; context: { $implicit: columns }"
-      ></ng-container>
-    </FlexboxLayout>
-  </ng-container>
+<GridLayout rows="*"> <!-- GridLayout kept for backwards compatibility-->
   <RadListView
+    row="0"
     [groupingFunction]="getSectionName"
     [items]="items"
-    row="{{ rowNumberForListView(headerTemplate) }}"
   >
     <ng-template tkListItemTemplate let-item="item">
       <FlexboxLayout class="row" (tap)="onItemTap(item)">
@@ -35,5 +28,13 @@
         ></ng-container>
       </FlexboxLayout>
     </ng-template>
+
+    <!-- HEADER -->
+    <ng-template tkListViewHeader *ngIf="listHeaderTemplate"> -->
+      <FlexboxLayout class="row">
+        <ng-container *ngTemplateOutlet="listHeaderTemplate"></ng-container>
+      </FlexboxLayout>
+    </ng-template>
+
   </RadListView>
 </GridLayout>

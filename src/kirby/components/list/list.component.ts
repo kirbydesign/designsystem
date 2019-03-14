@@ -43,7 +43,7 @@ export class ListComponent implements OnInit {
 
   // The first element that matches ListItemDirective. As a structural directive it unfolds into a template. This is a reference to that.
   @ContentChild(ListItemDirective, { read: TemplateRef }) listItemTemplate;
-  @ContentChild(ListHeaderDirective, { read: TemplateRef }) headerTemplate;
+  @ContentChild(ListHeaderDirective, { read: TemplateRef }) listHeaderTemplate;
   @ContentChild(ListSectionHeaderDirective, { read: TemplateRef }) sectionHeaderTemplate;
   @ContentChildren(ListCellDirective, { read: TemplateRef }) listCellTemplates: QueryList<any>;
 
@@ -68,13 +68,5 @@ export class ListComponent implements OnInit {
 
   onItemTap(selectedItem: any): void {
     this.itemSelect.emit(selectedItem);
-  }
-
-  rowDefinition(headerTemplate: any): string {
-    return headerTemplate ? 'auto,*' : '*';
-  }
-
-  rowNumberForListView(headerTemplate: any): string {
-    return headerTemplate ? '1' : '0';
   }
 }

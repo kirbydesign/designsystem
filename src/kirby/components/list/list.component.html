@@ -1,4 +1,9 @@
-<ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
+<!-- HEADER-->
+<ng-container *ngIf="listHeaderTemplate"> 
+  <ng-container *ngTemplateOutlet="listHeaderTemplate" ></ng-container>
+</ng-container>
+
+<!-- BODY-->
 <ul>
   <ng-container *ngIf="isSectionsEnabled; else normalList">
     <ng-container *ngFor="let section of (items | groupBy: getSectionName)">
