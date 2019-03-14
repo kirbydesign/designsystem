@@ -5,8 +5,6 @@ import { RouterModule } from '@angular/router';
 import { declarations } from './kirby.common';
 import { InfiniteScrollDirective } from './components/list/directives/infinite-scroll.directive';
 
-
-
 @NgModule({
   imports: [CommonModule, RouterModule],
   declarations: [InfiniteScrollDirective, ...declarations],
