@@ -1,19 +1,17 @@
 import { Component, OnInit, Input, HostBinding } from '@angular/core';
 
-// TODO: refactor - use map instead of enum
-enum verticalAlignmentEnum {
-  top = 'flex-start',
-  center = 'center',
-  bottom = 'flex-end',
-  stretch = 'stretch',
-  baseline = 'baseline',
-}
-// TODO: refactor - use map instead of enum
-enum horisontalAlignmentEnum {
-  left = 'flex-start',
-  center = 'center',
-  right = 'flex-end',
-}
+const alignmentMap: Map<string, string> = new Map([
+  ['top', 'flex-start'],
+  ['left', 'flex-start'],
+  ['bottom', 'flex-end'],
+  ['right', 'flex-end'],
+  ['center', 'center'],
+  ['stretch', 'stretch'],
+  ['baseline', 'baseline'],
+  ['space-between', 'space-between'],
+  ['space-around', 'space-around'],
+]);
+
 type horisontalAlignment = 'left' | 'center' | 'right' | 'space-between' | 'space-around';
 type verticalAlignment = 'top' | 'center' | 'bottom' | 'stretch' | 'baseline';
 
@@ -57,35 +55,27 @@ export class ListCellComponent implements OnInit {
   }
 
   getHorisontalAlignment(): string {
-    if (this.horisontalAlignment) {
-      if (horisontalAlignmentEnum[this.horisontalAlignment]) {
-        return horisontalAlignmentEnum[this.horisontalAlignment];
-      } else if (
-        // '-' not supported in enum
-        this.horisontalAlignment === 'space-between' ||
-        this.horisontalAlignment === 'space-around'
-      ) {
-        return this.horisontalAlignment;
-      }
+    if (this.horisontalAlignment && alignmentMap.get(this.horisontalAlignment)) {
+      return alignmentMap.get(this.horisontalAlignment);
     }
     console.warn(
       `Invalid value ${
         this.horisontalAlignment
       } for horisontalAlignment. Valid values are 'left', 'center', 'right', 'space-between', 'space-around'. Defaulting to '${defaultHorisontalAlignment}'`
     );
-    return horisontalAlignmentEnum[defaultHorisontalAlignment];
+    return alignmentMap.get(defaultHorisontalAlignment);
   }
 
   getVerticalAlignment(): string {
-    if (this.verticalAlignment && verticalAlignmentEnum[this.verticalAlignment]) {
-      return verticalAlignmentEnum[this.verticalAlignment];
+    if (this.verticalAlignment && alignmentMap.get(this.verticalAlignment)) {
+      return alignmentMap.get(this.verticalAlignment);
     }
     console.warn(
       `Invalid value ${
         this.verticalAlignment
       } for verticalAlignment. Valid values are 'top', 'center', 'bottom', 'stretch', 'baseline'. Defaulting to '${defaultVerticalAlignment}'`
     );
-    return verticalAlignmentEnum[defaultVerticalAlignment];
+    return alignmentMap.get(defaultVerticalAlignment);
   }
 
   private setStyle() {
