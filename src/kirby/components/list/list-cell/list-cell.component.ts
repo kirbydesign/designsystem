@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, HostBinding } from '@angular/core';
 
+// TODO: refactor - use map instead of enum
 enum verticalAlignmentEnum {
   top = 'flex-start',
   center = 'center',
@@ -7,6 +8,7 @@ enum verticalAlignmentEnum {
   stretch = 'stretch',
   baseline = 'baseline',
 }
+// TODO: refactor - use map instead of enum
 enum horisontalAlignmentEnum {
   left = 'flex-start',
   center = 'center',

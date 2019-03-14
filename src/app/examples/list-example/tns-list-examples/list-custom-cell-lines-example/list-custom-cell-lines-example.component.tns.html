@@ -2,8 +2,17 @@
         [items]="myItems"
         (itemSelect)="onItemSelect($event)">
 
+  <!-- HEADER-->
+  <kirby-list-header *kirbyListHeader>
+    <kirby-list-cell width="0.85">
+      <Label text="Name"></Label>
+    </kirby-list-cell>
+    <kirby-list-cell width="0.5" horisontalAlignment="right">
+      <Label text="Value"></Label>
+    </kirby-list-cell>
+  </kirby-list-header>
 
-
+    <!-- BODY -->
     <kirby-list-cell
             *kirbyListCell="let item"
             width=0.85>

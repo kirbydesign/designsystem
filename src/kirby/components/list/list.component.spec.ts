@@ -90,38 +90,4 @@ describe('ListComponent', () => {
       expect(liElements.length).toEqual(component.items.length + sections.length);
     });
   });
-
-  describe('Native: HeaderTemplate', () => {
-    it('should return the correct grid row definition, when there is a template', () => {
-      const expected = 'auto,*';
-
-      const actual = component.rowDefinition({});
-
-      expect(actual).toEqual(expected);
-    });
-
-    it('should return the correct grid row definition, when there is no template', () => {
-      const expected = '*';
-
-      const actual = component.rowDefinition(null);
-
-      expect(actual).toEqual(expected);
-    });
-
-    it('should return the correct row number, when there is a template', () => {
-      const expected = '1';
-
-      const actual = component.rowNumberForListView({});
-
-      expect(actual).toEqual(expected);
-    });
-
-    it('should return the correct row number, when there is no template', () => {
-      const expected = '0';
-
-      const actual = component.rowNumberForListView(null);
-
-      expect(actual).toEqual(expected);
-    });
-  });
 });
