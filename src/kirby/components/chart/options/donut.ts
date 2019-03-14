@@ -8,6 +8,7 @@ export const DonutOptions: Options = {
       fontFamily: 'Roboto',
       fontWeight: '300',
     },
+    backgroundColor: 'transparent',
     type: '',
     description: '',
   },
