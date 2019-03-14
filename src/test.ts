@@ -19,7 +19,7 @@ getTestBed().initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDyn
 
 // Then we find all the files which needs test.
 const appContext = require.context('./app', true, /^((?!\.tns).)*\.ts/);
-const kirbyContext = require.context('./kirby', true, /^((?!\.tns).)*\.ts/);
+const kirbyContext = require.context('./kirby', true, /^((?!(\.tns|index\.d\.ts)).)*\.ts/);
 
 // And load the modules.
 appContext.keys().map(appContext);

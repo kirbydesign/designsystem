@@ -9,10 +9,9 @@ describe('ButtonComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ RouterTestingModule ],
-      declarations: [ ButtonComponent ]
-    })
-    .compileComponents();
+      imports: [RouterTestingModule],
+      declarations: [ButtonComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

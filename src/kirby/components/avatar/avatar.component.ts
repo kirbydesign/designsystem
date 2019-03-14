@@ -3,17 +3,16 @@ import { Component, Input, OnInit } from '@angular/core';
 @Component({
   selector: 'kirby-avatar',
   templateUrl: './avatar.component.html',
-  styleUrls: ['./avatar.component.scss']
+  styleUrls: ['./avatar.component.scss'],
 })
 export class AvatarComponent implements OnInit {
-
   @Input() imageSrc: string;
   @Input() altText: string;
   @Input() size: string;
+  @Input() shadow?: false;
+  @Input() overlay?: true;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

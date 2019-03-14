@@ -9,10 +9,9 @@ export class HomeComponent implements OnInit {
   title = 'Kirby Design System';
   isMenuOpen = false;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   onMenuClick() {
     this.isMenuOpen = !this.isMenuOpen;

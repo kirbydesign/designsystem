@@ -3,7 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 @Component({
   selector: 'kirby-list-item',
   templateUrl: './list-item.component.html',
-  styleUrls: ['./list-item.component.scss']
+  styleUrls: ['./list-item.component.scss'],
 })
 export class ListItemComponent implements OnInit {
   @Input() item: any = {};
@@ -44,8 +44,7 @@ export class ListItemComponent implements OnInit {
     return this.item.subTitle ? this.item.subTitle : null;
   }
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() { }
-
+  ngOnInit() {}
 }

@@ -1,3 +1,4 @@
-<FlexboxLayout (loaded)="onViewLoaded($event)" class="image-wrapper {{size}}">
+<AbsoluteLayout (loaded)="onViewLoaded($event)" class="image-wrapper {{size}}">
   <Image class="container" [src]="imageSrc" [automationText]="altText"></Image>
-</FlexboxLayout>
+  <AbsoluteLayout class="image-overlay" *ngIf="overlay"></AbsoluteLayout>
+</AbsoluteLayout>

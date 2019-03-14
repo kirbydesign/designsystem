@@ -4,14 +4,12 @@ declare var require: any;
 @Component({
   selector: 'kirby-list-showcase',
   templateUrl: './list-showcase.component.html',
-  styleUrls: ['./list-showcase.component.scss']
+  styleUrls: ['./list-showcase.component.scss'],
 })
 export class ListShowcaseComponent implements OnInit {
   exampleHtml: string = require('../../examples/list-example/list-example.component.html');
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

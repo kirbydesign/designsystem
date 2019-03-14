@@ -3,13 +3,6 @@
         [getSectionName]="getSectionName"
         (itemSelect)="onItemSelect($event)"
 >
-    <kirby-list-header
-            *kirbyListHeader="let columns"
-            [left]="'Navn'"
-            [middle]="'Afkast ÅTD'"
-            [right]="'Værdi'"
-    ></kirby-list-header>
-
     <kirby-list-section-header
             *kirbyListSectionHeader="let section"
             [title]="section"
@@ -22,7 +15,7 @@
         <kirby-list-cell-line [text]="item.detail"></kirby-list-cell-line>
     </kirby-list-cell>
     <StackLayout *kirbyListCell="let item" width="70%">
-        <Label [ ]="item.subTitle" horizontalAlignment="right"></Label>
+        <Label [text]="item.subTitle" horizontalAlignment="right"></Label>
     </StackLayout>
     <kirby-list-cell
             *kirbyListCell="let item"

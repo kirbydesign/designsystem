@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+
 import { KirbyModule } from '../../../kirby/kirby.module';
 import { AvatarExampleComponent } from './avatar-example.component';
 
@@ -9,10 +10,9 @@ describe('AvatarExampleComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ KirbyModule, RouterTestingModule ],
-      declarations: [ AvatarExampleComponent ]
-    })
-    .compileComponents();
+      imports: [KirbyModule, RouterTestingModule],
+      declarations: [AvatarExampleComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

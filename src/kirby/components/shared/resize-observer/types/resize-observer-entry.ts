@@ -2,7 +2,7 @@ export interface ResizeObserverEntry {
   /**
    * @param target The Element whose size has changed.
    */
-  new(target: Element);
+  new (target: Element);
   /**
    * The Element whose size has changed.
    */

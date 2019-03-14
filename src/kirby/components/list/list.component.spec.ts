@@ -1,6 +1,6 @@
-import { GroupByPipe } from './pipes/group-by.pipe';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { GroupByPipe } from './pipes/group-by.pipe';
 import { ListComponent } from './list.component';
 
 describe('ListComponent', () => {
@@ -9,9 +9,8 @@ describe('ListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListComponent, GroupByPipe ]
-    })
-    .compileComponents();
+      declarations: [ListComponent, GroupByPipe],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -25,7 +24,6 @@ describe('ListComponent', () => {
   });
 
   describe('item select event', () => {
-
     it('should emit the clicked item', () => {
       spyOn(component.itemSelect, 'emit');
       const itemToBeSelected = { value: 'this is a dummy item' };
@@ -39,11 +37,7 @@ describe('ListComponent', () => {
     it('should emit the tapped item', () => {
       spyOn(component.itemSelect, 'emit');
       const itemToBeSelected = { value: 'item 2' };
-      component.items = [
-        { value: 'item 1' },
-        itemToBeSelected,
-        { value: 'item 3' }
-      ];
+      component.items = [{ value: 'item 1' }, itemToBeSelected, { value: 'item 3' }];
 
       component.onItemTap(itemToBeSelected);
 
@@ -53,7 +47,6 @@ describe('ListComponent', () => {
   });
 
   describe('sections', () => {
-
     beforeEach(() => {
       fixture = TestBed.createComponent(ListComponent);
       component = fixture.componentInstance;
@@ -95,41 +88,6 @@ describe('ListComponent', () => {
       const liElements = rootElement.querySelectorAll('li');
 
       expect(liElements.length).toEqual(component.items.length + sections.length);
-    });
-  });
-
-  describe('Native: HeaderTemplate', () => {
-
-    it('should return the correct grid row definition, when there is a template', () => {
-      const expected = 'auto,*';
-
-      const actual = component.rowDefinition({});
-
-      expect(actual).toEqual(expected);
-    });
-
-    it('should return the correct grid row definition, when there is no template', () => {
-      const expected = '*';
-
-      const actual = component.rowDefinition(null);
-
-      expect(actual).toEqual(expected);
-    });
-
-    it('should return the correct row number, when there is a template', () => {
-      const expected = '1';
-
-      const actual = component.rowNumberForListView({});
-
-      expect(actual).toEqual(expected);
-    });
-
-    it('should return the correct row number, when there is no template', () => {
-      const expected = '0';
-
-      const actual = component.rowNumberForListView(null);
-
-      expect(actual).toEqual(expected);
     });
   });
 });
