@@ -29,7 +29,7 @@ const KIRBY_LIST_COMPONENT_SELECTOR = 'kirby-list';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
 })
-export class ListComponent extends ContentView implements OnInit {
+export class ListComponent implements OnInit {
   @Input() items: any[];
   @Input() getSectionName?: (item: any) => string;
   @Input() loadMore?: () => Promise<any[]>;
@@ -46,7 +46,7 @@ export class ListComponent extends ContentView implements OnInit {
   hasMoreItems: boolean = true;
 
   constructor() {
-    super();
+    // super();
   }
 
   ngOnInit() {
@@ -61,14 +61,6 @@ export class ListComponent extends ContentView implements OnInit {
 
   onItemTap(selectedItem: any): void {
     this.itemSelect.emit(selectedItem);
-  }
-
-  rowDefinition(headerTemplate: any): string {
-    return headerTemplate ? 'auto,*' : '*';
-  }
-
-  rowNumberForListView(headerTemplate: any): string {
-    return headerTemplate ? '1' : '0';
   }
 
   async onLoadMore(args: LoadOnDemandListViewEventData) {
@@ -89,4 +81,4 @@ export class ListComponent extends ContentView implements OnInit {
   }
 }
 
-registerElement(KIRBY_LIST_COMPONENT_SELECTOR, () => require('./list.component').ListComponent);
+// registerElement(KIRBY_LIST_COMPONENT_SELECTOR, () => require('./list.component').ListComponent);
