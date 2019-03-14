@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 
-import { BaseListComponent } from './../list-example/base-list.component';
+import { BaseListComponent } from '../list-example/base-list.component';
 
 @Component({
-  selector: 'kirby-list-loadmore-example',
-  templateUrl: './list-loadmore-example.component.html',
-  styleUrls: ['./list-loadmore-example.component.scss'],
+  selector: 'kirby-list-load-more-example',
+  templateUrl: './list-load-more-example.component.html',
+  styleUrls: ['./list-load-more-example.component.scss'],
 })
-export class ListLoadmoreExampleComponent extends BaseListComponent {
+export class ListLoadMoreExampleComponent extends BaseListComponent {
   // We make a callback and bind it to 'this' context, so 'this' can be used inside the callback.
   onLoadMoreCallback = this.onLoadMore.bind(this);
 
