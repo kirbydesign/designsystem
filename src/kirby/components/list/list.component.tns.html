@@ -7,7 +7,6 @@
     [groupingFunction]="getSectionName"
     [items]="items"
   >
-    <ListViewLinearLayout tkListViewLayout scrollDirection="Vertical" itemInsertAnimation="Default" itemDeleteAnimation="Default"></ListViewLinearLayout>
     <!-- ITEM -->
     <ng-template tkListItemTemplate let-item="item">
       <FlexboxLayout class="row" (tap)="onItemTap(item)">
@@ -19,13 +18,6 @@
             *ngTemplateOutlet="template; context: { $implicit: item }">
           </ng-container>
         </ng-container>
-      </FlexboxLayout>
-    </ng-template>
-
-    <!-- HEADER -->
-    <ng-template tkListViewHeader *ngIf="listHeaderTemplate"> -->
-      <FlexboxLayout class="row">
-        <ng-container *ngTemplateOutlet="listHeaderTemplate"></ng-container>
       </FlexboxLayout>
     </ng-template>
 
@@ -41,12 +33,17 @@
       </FlexboxLayout>
     </ng-template> 
 
+    <!-- HEADER -->
+    <ng-template tkListViewHeader *ngIf="listHeaderTemplate">
+      <FlexboxLayout class="row">
+        <ng-container *ngTemplateOutlet="listHeaderTemplate"></ng-container>
+      </FlexboxLayout>
+    </ng-template>
+
     <!-- FOOTER -->
-    <ng-container *ngIf="!hasMoreItems && noMoreItemsText">
-      <ng-template tkListViewFooter>
-        <Label class="lastRow" text="{{noMoreItemsText}}"></Label>
-      </ng-template>
-    </ng-container>
+    <ng-template tkListViewFooter *ngIf="!hasMoreItems && noMoreItemsText">
+      <Label class="lastRow" text="{{noMoreItemsText}}"></Label>
+    </ng-template>
 
   </RadListView>
 </GridLayout>

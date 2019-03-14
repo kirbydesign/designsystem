@@ -40,8 +40,6 @@ export class ListComponent implements OnInit {
   hasMoreItems: boolean = true;
   isLoading: boolean;
 
-  constructor() {}
-
   ngOnInit() {
     if (this.getSectionName) {
       this.isSectionsEnabled = true;
