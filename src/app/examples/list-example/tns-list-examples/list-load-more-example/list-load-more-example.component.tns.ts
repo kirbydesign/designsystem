@@ -11,7 +11,7 @@ export class ListLoadMoreExampleComponent extends BaseListComponent {
   // access the instance properties.
   onLoadMoreItemsCallback = this.onLoadMore.bind(this);
 
-  private itemCount = 1;
+  private itemCount: number = 0;
 
   private async onLoadMore(): Promise<any[]> {
     // lets make a delay to simulate a HTTP call.
@@ -27,7 +27,8 @@ export class ListLoadMoreExampleComponent extends BaseListComponent {
   private generateItems(): any[] {
     const items = [];
     const numberOfItems = 10;
-    for (let index = 1; index < numberOfItems; index++) {
+    for (let index = 0; index < numberOfItems; index++) {
+      this.itemCount++;
       const transaction = {
         title: `Item ${this.itemCount}`,
         subTitle: `${Math.round(Math.random() * 100)} pcs`,
@@ -35,7 +36,6 @@ export class ListLoadMoreExampleComponent extends BaseListComponent {
         detail: Math.round(Math.random() * 100),
       };
       items.push(transaction);
-      this.itemCount++;
     }
     return items;
   }

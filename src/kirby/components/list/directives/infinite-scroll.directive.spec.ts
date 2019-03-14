@@ -1,12 +1,9 @@
 import { ElementRef } from '@angular/core';
 import { fakeAsync, tick } from '@angular/core/testing';
 
-import { WindowRef } from './../../shared/window-ref/window-ref.service';
-import { InfiniteScrollDirective } from './infinite-scroll.directive';
+import { InfiniteScrollDirective, INFINITE_SCROLL_DEBOUNCE } from './infinite-scroll.directive';
 
-describe('Directive: List', () => {
-  const SCROLL_DEBOUNCE_TIME = 100;
-
+describe('InfiniteScrollDirective', () => {
   let nativeElement: any;
 
   beforeEach(() => {
@@ -20,14 +17,15 @@ describe('Directive: List', () => {
   });
 
   describe('event: scrollEnd', () => {
-    function createDirective(
-      clientRect: ClientRect,
-      windowInnerHeight: number
-    ): InfiniteScrollDirective {
-      nativeElement.getBoundingClientRect.and.returnValue(clientRect);
+    function createDirective(scrollPercentage: number): InfiniteScrollDirective {
+      const height = 800;
+      const bottom = height * (1 - scrollPercentage);
+      const viewHeight = 0;
+
+      nativeElement.getBoundingClientRect.and.returnValue({ height, bottom });
       const directive = new InfiniteScrollDirective(
         { nativeElement } as ElementRef,
-        { nativeWindow: { innerHeight: windowInnerHeight } } as WindowRef
+        { innerHeight: viewHeight } as Window
       );
       spyOn(directive.scrollEnd, 'emit');
       directive.ngAfterViewInit();
@@ -35,75 +33,66 @@ describe('Directive: List', () => {
       return directive;
     }
 
-    it('should emit event when more then 80% of the element has been scrolled', <any>(
-      fakeAsync(() => {
-        // the formula used is: (height*0,2) >= bottom - windownInnerHeight.
-        const clientRect = { bottom: 887, height: 800 } as ClientRect;
-        const windowInnerHeight = 728;
-        const directive = createDirective(clientRect, windowInnerHeight);
-
-        directive.onScroll();
-        // we need to wait the debounce time.
-        tick(SCROLL_DEBOUNCE_TIME);
-
-        expect(directive.scrollEnd.emit).toHaveBeenCalledTimes(1);
-      })
-    ));
-
-    it('should not emit event when less then 80% of the element has been scrolled', <any>(
-      fakeAsync(() => {
-        // the formula used is: (height*0,2) >= bottom - windownInnerHeight.
-        const clientRect = { bottom: 890, height: 800 } as ClientRect;
-        const windowInnerHeight = 728;
-        const directive = createDirective(clientRect, windowInnerHeight);
-
-        directive.onScroll();
-        // we need to wait the debounce time.
-        tick(SCROLL_DEBOUNCE_TIME);
-
-        expect(directive.scrollEnd.emit).not.toHaveBeenCalled();
-      })
-    ));
-
-    it('should not emit event when it is disabled', <any>fakeAsync(() => {
-      // the formula used is: (height*0,2) >= bottom - windownInnerHeight.
-      const clientRect = { bottom: 887, height: 800 } as ClientRect;
-      const windowInnerHeight = 728;
-      const directive = createDirective(clientRect, windowInnerHeight);
-      directive.disabled = true;
+    it('should emit event when 80% of the element has been scrolled', fakeAsync(() => {
+      const directive = createDirective(0.8);
 
       directive.onScroll();
       // we need to wait the debounce time.
-      tick(SCROLL_DEBOUNCE_TIME);
+      tick(INFINITE_SCROLL_DEBOUNCE);
+
+      expect(directive.scrollEnd.emit).toHaveBeenCalledTimes(1);
+    }));
+
+    it('should emit event when more then 80% of the element has been scrolled', fakeAsync(() => {
+      const directive = createDirective(0.81);
+
+      directive.onScroll();
+      // we need to wait the debounce time.
+      tick(INFINITE_SCROLL_DEBOUNCE);
+
+      expect(directive.scrollEnd.emit).toHaveBeenCalledTimes(1);
+    }));
+
+    it('should not emit event when less then 80% of the element has been scrolled', fakeAsync(() => {
+      const directive = createDirective(0.79);
+
+      directive.onScroll();
+      // we need to wait the debounce time.
+      tick(INFINITE_SCROLL_DEBOUNCE);
 
       expect(directive.scrollEnd.emit).not.toHaveBeenCalled();
     }));
 
-    it('should only emit event when debounce time has passed', <any>fakeAsync(() => {
-      // the formula used is: (height*0,2) >= bottom - windownInnerHeight.
-      const clientRect = { bottom: 887, height: 800 } as ClientRect;
-      const windowInnerHeight = 728;
-      const directive = createDirective(clientRect, windowInnerHeight);
+    it('should not emit event when it is disabled', fakeAsync(() => {
+      const directive = createDirective(81);
+      directive.disabled = true;
+
+      directive.onScroll();
+      // we need to wait the debounce time.
+      tick(INFINITE_SCROLL_DEBOUNCE);
+
+      expect(directive.scrollEnd.emit).not.toHaveBeenCalled();
+    }));
+
+    it('should only emit event when debounce time has passed', fakeAsync(() => {
+      const directive = createDirective(0.8);
 
       directive.onScroll();
 
       tick(1);
       expect(directive.scrollEnd.emit).not.toHaveBeenCalled();
 
-      tick(SCROLL_DEBOUNCE_TIME);
+      tick(INFINITE_SCROLL_DEBOUNCE);
       expect(directive.scrollEnd.emit).toHaveBeenCalledTimes(1);
     }));
 
-    it('should not emit event after ngDestroy', <any>fakeAsync(() => {
-      // the formula used is: (height*0,2) >= bottom - windownInnerHeight.
-      const clientRect = { bottom: 887, height: 800 } as ClientRect;
-      const windowInnerHeight = 728;
-      const directive = createDirective(clientRect, windowInnerHeight);
+    it('should not emit event after ngDestroy', fakeAsync(() => {
+      const directive = createDirective(0.8);
       directive.ngOnDestroy();
 
       directive.onScroll();
 
-      tick(SCROLL_DEBOUNCE_TIME);
+      tick(INFINITE_SCROLL_DEBOUNCE);
       expect(directive.scrollEnd.emit).not.toHaveBeenCalled();
     }));
   });

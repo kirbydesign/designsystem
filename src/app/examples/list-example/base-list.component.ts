@@ -35,8 +35,6 @@ export class BaseListComponent {
     },
   ];
 
-  constructor() {}
-
   onItemSelect(item: any) {
     alert(`You have clicked the row [${item.title} ${item.amount}]`);
   }

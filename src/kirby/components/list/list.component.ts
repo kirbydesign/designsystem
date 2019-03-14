@@ -66,7 +66,7 @@ export class ListComponent implements OnInit {
           this.items.push(...newItems);
         }
       } catch (error) {
-        console.log(error);
+        console.error('kirby list load more failed', error);
       } finally {
         this.isLoading = false;
       }

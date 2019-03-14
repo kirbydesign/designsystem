@@ -11,7 +11,7 @@ export class ListLoadmoreExampleComponent extends BaseListComponent {
   // We make a callback and bind it to 'this' context, so 'this' can be used inside the callback.
   onLoadMoreCallback = this.onLoadMore.bind(this);
 
-  private itemCount = 1;
+  private itemCount: number = 0;
 
   constructor() {
     super();
@@ -32,7 +32,8 @@ export class ListLoadmoreExampleComponent extends BaseListComponent {
   private generateItems(): any[] {
     const items = [];
     const numberOfItems = 10;
-    for (let index = 1; index < numberOfItems; index++) {
+    for (let index = 0; index < numberOfItems; index++) {
+      this.itemCount++;
       const transaction = {
         title: `Item ${this.itemCount}`,
         subTitle: `${Math.round(Math.random() * 100)} pcs`,
@@ -40,7 +41,6 @@ export class ListLoadmoreExampleComponent extends BaseListComponent {
         detail: Math.round(Math.random() * 100),
       };
       items.push(transaction);
-      this.itemCount++;
     }
     return items;
   }

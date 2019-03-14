@@ -7,33 +7,46 @@ import {
   Input,
   Output,
   ElementRef,
+  InjectionToken,
   Inject,
 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { debounceTime, takeUntil, filter } from 'rxjs/operators';
 
-import { WindowRef } from './../../shared/window-ref/window-ref.service';
 import { Scroll } from './scroll.model';
+
+const WINDOW = new InjectionToken<Window>('Window');
+
+/**
+ * Specify debounce duration in ms
+ */
+export const INFINITE_SCROLL_DEBOUNCE = 100;
 
 @Directive({
   selector: '[kirbyInfiniteScroll]',
+  providers: [
+    {
+      provide: WINDOW,
+      useValue: window,
+    },
+  ],
 })
 export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
   /**
-   * Event that will be triggered when user has scrolled to
+   * Event that will be triggered when the user has scrolled to
    * bottom of the element
    */
-  @Output() public scrollEnd = new EventEmitter<void>();
+  @Output() scrollEnd = new EventEmitter<void>();
 
   /**
-   * If true then `scrollEnd` event should NOT be emitted
+   * If true then {@link scrollEnd} event should NOT be emitted
    */
-  @Input() public disabled = false;
+  @Input() disabled = false;
 
   /**
    * Emits a new value on element scroll event
    */
-  public scroll$: Subject<Scroll> = new Subject<Scroll>();
+  scroll$: Subject<Scroll> = new Subject<Scroll>();
 
   /**
    * Completes on component destroy lifecycle event
@@ -42,27 +55,21 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
   private ngUnsubscribe$ = new Subject<void>();
 
   /**
-   * An offset from the bottom of the element to trigger
-   * `scrollEnd` event
+   * An offset from the bottom of the element to trigger {@link scrollEnd} event
    */
   private offset = 0.8;
 
-  /**
-   * Specify debounce duration in ms
-   */
-  private debounce = 100;
+  constructor(private elementRef: ElementRef, @Inject(WINDOW) private window: Window) {}
 
-  constructor(private elementRef: ElementRef, private windowRef: WindowRef) {}
-
-  public ngAfterViewInit(): void {
+  ngAfterViewInit(): void {
     /**
-     * Subscribe to `scroll$` observable and emit `scrollEnd` event
-     * when element scroll position has surpassed the offset.∏
+     * Subscribe to {@link scroll$} observable and emit {@link scrollEnd} event
+     * when element scroll position has surpassed the offset.
      */
     this.scroll$
       .pipe(
         takeUntil(this.ngUnsubscribe$),
-        debounceTime(this.debounce),
+        debounceTime(INFINITE_SCROLL_DEBOUNCE),
         filter(() => !this.disabled),
         filter((scroll) => {
           return (
@@ -75,26 +82,26 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
         this.scrollEnd.emit();
       });
   }
+
   /**
-   * On element scroll event emit next `scroll$` observable value
+   * On element scroll event emit next {@link scroll$} observable value
    */
   @HostListener('window:scroll')
-  public onScroll(): void {
+  onScroll(): void {
     const element = this.elementRef.nativeElement as HTMLElement;
     const boundindClientRect = element.getBoundingClientRect();
 
     const distanceToViewBottom = boundindClientRect.bottom;
     const elementHeight = boundindClientRect.height;
-    const viewHeight = this.windowRef.nativeWindow.innerHeight;
+    const viewHeight = this.window.innerHeight;
 
     this.scroll$.next({ distanceToViewBottom, elementHeight, viewHeight });
   }
 
   /**
-   * trigger `ngUnsubscribe` complete on
-   * component destroy lifecycle hook
+   * trigger {@link ngUnsubscribe} complete on component destroy lifecycle hook
    */
-  public ngOnDestroy(): void {
+  ngOnDestroy(): void {
     this.ngUnsubscribe$.next();
     this.ngUnsubscribe$.complete();
   }

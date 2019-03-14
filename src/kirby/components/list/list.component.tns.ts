@@ -1,3 +1,5 @@
+import { registerElement } from 'nativescript-angular';
+import { ContentView } from 'tns-core-modules/ui/content-view';
 import {
   Component,
   ContentChild,
@@ -21,12 +23,13 @@ import {
   ListCellDirective,
 } from './list.directive';
 
+const KIRBY_LIST_COMPONENT_SELECTOR = 'kirby-list';
 @Component({
-  selector: 'kirby-list',
+  selector: KIRBY_LIST_COMPONENT_SELECTOR,
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
 })
-export class ListComponent implements OnInit {
+export class ListComponent extends ContentView implements OnInit {
   @Input() items: any[];
   @Input() getSectionName?: (item: any) => string;
   @Input() loadMore?: () => Promise<any[]>;
@@ -42,7 +45,9 @@ export class ListComponent implements OnInit {
   isSelectable: boolean;
   hasMoreItems: boolean = true;
 
-  constructor() {}
+  constructor() {
+    super();
+  }
 
   ngOnInit() {
     if (this.getSectionName) {
@@ -67,13 +72,21 @@ export class ListComponent implements OnInit {
   }
 
   async onLoadMore(args: LoadOnDemandListViewEventData) {
-    var listView: RadListView = args.object;
-    const newItems = await this.loadMore();
-    this.hasMoreItems = newItems && newItems.length > 0;
-    if (this.hasMoreItems) {
-      this.items.push(...newItems);
+    const listView: RadListView = args.object;
+
+    if (this.loadMore) {
+      const newItems = await this.loadMore();
+      this.hasMoreItems = newItems && newItems.length > 0;
+      if (this.hasMoreItems) {
+        this.items.push(...newItems);
+      }
+      listView.notifyLoadOnDemandFinished(!this.hasMoreItems);
+      args.returnValue = this.hasMoreItems;
+    } else {
+      listView.notifyLoadOnDemandFinished(true);
+      args.returnValue = false;
     }
-    listView.notifyLoadOnDemandFinished(!this.hasMoreItems);
-    args.returnValue = this.hasMoreItems;
   }
 }
+
+registerElement(KIRBY_LIST_COMPONENT_SELECTOR, () => require('./list.component').ListComponent);

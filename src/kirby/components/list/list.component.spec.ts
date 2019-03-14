@@ -4,7 +4,6 @@ import { GroupByPipe } from './pipes/group-by.pipe';
 import { ListComponent } from './list.component';
 import { SpinnerComponent } from '~/kirby';
 import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
-import { WindowRef } from './../shared/window-ref/window-ref.service';
 
 describe('ListComponent', () => {
   let component: ListComponent;
@@ -13,12 +12,6 @@ describe('ListComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ListComponent, GroupByPipe, SpinnerComponent, InfiniteScrollDirective],
-      providers: [
-        {
-          provide: WindowRef,
-          useValue: {} as WindowRef,
-        },
-      ],
     }).compileComponents();
   }));
 
@@ -162,7 +155,6 @@ describe('ListComponent', () => {
       component.loadMore = () => Promise.resolve(newItems);
 
       component.onLoadMore().then(() => {
-        console.log(component.isLoading);
         expect(component.isLoading).toBeFalsy();
         done();
       });
