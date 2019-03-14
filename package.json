@@ -25,6 +25,8 @@
     "android-debug": "tns debug android --bundle",
     "ios": "tns run ios --hmr",
     "ios-debug": "tns debug ios --bundle --device 'iPhone X'",
+    "dist:ios": "tns build ios --bundle --for-device --provision dk.kirby.design.system --copy-to dist/designsystem.ipa",
+    "dist:android": "tns build android --for-device --bundle --copy-to dist/designsystem.apk",
     "pack-copy-to-dist-folder-watch": "cpx \"src\\kirby\\**\\!(*.spec.ts)\" dist-lib --watch",
     "postinstall": "npm run build-polyfills && npm run transpile:tools",
     "postversion": "git push && git push --tags",
