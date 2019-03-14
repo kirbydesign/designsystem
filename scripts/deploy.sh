@@ -56,10 +56,4 @@ echo "<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.
           </dict>
         </array>
       </dict>
-      </plist>" >> manifest.plist
-echo "<html>
-        <body>
-          <h5>Enterprise In-House App distribution - $1</h5>
-              <a href=\"itms-services://?action=download-manifest&url=https://github.com/kirbydesign/designsystem/releases/download/$1/manifest.plist\">Download Your App</a>
-          </body>
-      </html>" >> ./scripts/html/index.html
+      </plist>" > dist/manifest.plist
