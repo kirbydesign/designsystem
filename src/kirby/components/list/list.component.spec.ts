@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { KirbyListLoadMoreEvent } from './list.event';
 import { GroupByPipe } from './pipes/group-by.pipe';
 import { ListComponent } from './list.component';
 import { SpinnerComponent } from '~/kirby';
@@ -83,90 +84,109 @@ describe('ListComponent', () => {
   });
 
   describe('function: onLoadMore', () => {
-    it('should shoul add returned items to end of list, if there are more items and is not loading', (done) => {
+    let loadMoreEmitSpy: jasmine.Spy;
+    beforeEach(() => {
+      loadMoreEmitSpy = spyOn(component.loadMore, 'emit').and.callThrough();
+    });
+
+    it('should emit load more event, if there are more items and is not loading', () => {
+      component.hasMoreItems = true;
+      component.isLoading = false;
+
+      component.onLoadMore();
+
+      expect(component.loadMore.emit).toHaveBeenCalledTimes(1);
+    });
+
+    it('should not emit load more event, if is loading', () => {
+      component.isLoading = true;
+
+      component.onLoadMore();
+
+      expect(component.loadMore.emit).not.toHaveBeenCalled();
+    });
+
+    it('should not emit load more event, if there are no more items and is loading', () => {
+      component.isLoading = true;
+      component.hasMoreItems = false;
+
+      component.onLoadMore();
+
+      expect(component.loadMore.emit).not.toHaveBeenCalled();
+    });
+
+    it('should not emit load more event, if there are no more items', () => {
+      component.hasMoreItems = false;
+
+      component.onLoadMore();
+
+      expect(component.loadMore.emit).not.toHaveBeenCalled();
+    });
+
+    it('should append items given in the load more events complete callback', () => {
       const items = [1, 2];
       const newItems = [3, 4];
       const expected = [...items, ...newItems];
       component.items = items;
-      component.hasMoreItems = true;
+
+      loadMoreEmitSpy.and.callFake((event: KirbyListLoadMoreEvent) => {
+        event.complete(newItems);
+      });
+      component.items = expected;
+
+      component.onLoadMore();
+
+      expect(component.items).toEqual(expected);
+    });
+
+    it('should start loading, when before emitting an load more event', () => {
       component.isLoading = false;
-      component.loadMore = () => Promise.resolve(newItems);
+      component.hasMoreItems = true;
 
-      component.onLoadMore().then(() => {
-        expect(component.items).toEqual(expected);
-        done();
-      });
+      component.onLoadMore();
+
+      expect(component.isLoading).toBeTruthy();
     });
 
-    it('should not add any items, if there are no more items', (done) => {
-      const expected = [1, 2];
-      const newItems = [3, 4];
-      component.items = expected;
-      component.hasMoreItems = false;
-      component.loadMore = () => Promise.resolve(newItems);
-
-      component.onLoadMore().then(() => {
-        expect(component.items).toEqual(expected);
-        done();
+    it('should end loading, if the load more events complete callback is called', () => {
+      component.items = [];
+      loadMoreEmitSpy.and.callFake((event: KirbyListLoadMoreEvent) => {
+        event.complete([1, 2, 3]);
       });
+
+      component.onLoadMore();
+
+      expect(component.isLoading).toBeFalsy();
     });
 
-    it('should not add any items, if is loading', (done) => {
-      const expected = [1, 2];
-      const newItems = [3, 4];
-      component.items = expected;
-      component.isLoading = true;
-      component.loadMore = () => Promise.resolve(newItems);
-
-      component.onLoadMore().then(() => {
-        expect(component.items).toEqual(expected);
-        done();
+    it('should be marked as having no more items, if the load more events complete callback is called with an empty list', () => {
+      loadMoreEmitSpy.and.callFake((event: KirbyListLoadMoreEvent) => {
+        event.complete([]);
       });
+
+      component.onLoadMore();
+
+      expect(component.hasMoreItems).toBeFalsy();
     });
 
-    it('should not add any items, if no load more callback is not defined', (done) => {
-      const expected = [1, 2];
-      component.items = expected;
-
-      component.onLoadMore().then(() => {
-        expect(component.items).toEqual(expected);
-        done();
+    it('should be marked as having no more items, if the load more events complete callback is called with null', () => {
+      loadMoreEmitSpy.and.callFake((event: KirbyListLoadMoreEvent) => {
+        event.complete(null);
       });
+
+      component.onLoadMore();
+
+      expect(component.hasMoreItems).toBeFalsy();
     });
 
-    it('should not add any items, if there are no more items and is loading', (done) => {
-      const expected = [1, 2];
-      const newItems = [3, 4];
-      component.items = expected;
-      component.isLoading = true;
-      component.hasMoreItems = false;
-      component.loadMore = () => Promise.resolve(newItems);
-
-      component.onLoadMore().then(() => {
-        expect(component.items).toEqual(expected);
-        done();
+    it('should be marked as having no more items, if the load more events complete callback is called with undefined', () => {
+      loadMoreEmitSpy.and.callFake((event: KirbyListLoadMoreEvent) => {
+        event.complete(undefined);
       });
-    });
 
-    it('should end loading, if the load more callback succes', (done) => {
-      const expected = [1, 2];
-      const newItems = [3, 4];
-      component.items = expected;
-      component.loadMore = () => Promise.resolve(newItems);
+      component.onLoadMore();
 
-      component.onLoadMore().then(() => {
-        expect(component.isLoading).toBeFalsy();
-        done();
-      });
-    });
-
-    it('should end loading, if the load more callback fails', (done) => {
-      component.loadMore = () => Promise.reject('error');
-
-      component.onLoadMore().then(() => {
-        expect(component.isLoading).toBeFalsy();
-        done();
-      });
+      expect(component.hasMoreItems).toBeFalsy();
     });
   });
 });

@@ -1,6 +1,7 @@
 import { ElementRef } from '@angular/core';
 import { fakeAsync, tick } from '@angular/core/testing';
 
+import { WindowRef } from './../../shared/window-ref/window-ref.service';
 import { InfiniteScrollDirective, INFINITE_SCROLL_DEBOUNCE } from './infinite-scroll.directive';
 
 describe('InfiniteScrollDirective', () => {
@@ -25,7 +26,7 @@ describe('InfiniteScrollDirective', () => {
       nativeElement.getBoundingClientRect.and.returnValue({ height, bottom });
       const directive = new InfiniteScrollDirective(
         { nativeElement } as ElementRef,
-        { innerHeight: viewHeight } as Window
+        { nativeWindow: { innerHeight: viewHeight } } as WindowRef
       );
       spyOn(directive.scrollEnd, 'emit');
       directive.ngAfterViewInit();

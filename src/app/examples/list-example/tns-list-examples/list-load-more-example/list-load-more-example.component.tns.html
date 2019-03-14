@@ -1,7 +1,7 @@
 <kirby-list
         [noMoreItemsText]="'No more items'"
-        [loadMore]="onLoadMoreItemsCallback"
         [items]="items"
+        (loadMore)="onLoadMore($event)"
         (itemSelect)="onItemSelect($event)">
 
     <kirby-list-cell

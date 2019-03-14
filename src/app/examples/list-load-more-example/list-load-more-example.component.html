@@ -1,6 +1,6 @@
 <kirby-list 
   [items]="items"
-  [loadMore]="onLoadMoreCallback"
+  (loadMore)="onLoadMore($event)"
   [noMoreItemsText]="'No more items'">
   <kirby-list-cell
     *kirbyListCell="let account"

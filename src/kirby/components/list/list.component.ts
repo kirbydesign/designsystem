@@ -16,6 +16,7 @@ import {
   ListSectionHeaderDirective,
   ListCellDirective,
 } from './list.directive';
+import { KirbyListLoadMoreEvent } from './list.event';
 
 @Component({
   selector: 'kirby-list',
@@ -25,8 +26,8 @@ import {
 export class ListComponent implements OnInit {
   @Input() items: any[];
   @Input() getSectionName?: (item: any) => string;
-  @Input() loadMore?: () => Promise<any[]>;
   @Input() noMoreItemsText: string;
+  @Output() loadMore = new EventEmitter<KirbyListLoadMoreEvent>();
   @Output() itemSelect = new EventEmitter<any>();
 
   // The first element that matches ListItemDirective. As a structural directive it unfolds into a template. This is a reference to that.
@@ -55,19 +56,17 @@ export class ListComponent implements OnInit {
   }
 
   async onLoadMore() {
-    if (this.loadMore && this.hasMoreItems && !this.isLoading) {
+    if (this.hasMoreItems && !this.isLoading) {
       this.isLoading = true;
-      try {
-        const newItems = await this.loadMore();
-        this.hasMoreItems = newItems && newItems.length > 0;
-        if (this.hasMoreItems) {
-          this.items.push(...newItems);
-        }
-      } catch (error) {
-        console.error('kirby list load more failed', error);
-      } finally {
-        this.isLoading = false;
-      }
+      this.loadMore.emit({
+        complete: (newItems: any[]) => {
+          this.hasMoreItems = newItems && newItems.length > 0;
+          if (this.hasMoreItems) {
+            this.items.push(...newItems);
+          }
+          this.isLoading = false;
+        },
+      });
     }
   }
 }

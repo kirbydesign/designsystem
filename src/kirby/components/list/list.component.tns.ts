@@ -22,6 +22,7 @@ import {
   ListSectionHeaderDirective,
   ListCellDirective,
 } from './list.directive';
+import { KirbyListLoadMoreEvent } from './list.event';
 
 const KIRBY_LIST_COMPONENT_SELECTOR = 'kirby-list';
 
@@ -33,8 +34,9 @@ const KIRBY_LIST_COMPONENT_SELECTOR = 'kirby-list';
 export class ListComponent extends ContentView implements OnInit {
   @Input() items: any[];
   @Input() getSectionName?: (item: any) => string;
-  @Input() loadMore?: () => Promise<any[]>;
   @Input() noMoreItemsText: string;
+
+  @Output() loadMore = new EventEmitter<KirbyListLoadMoreEvent>();
   @Output() itemSelect = new EventEmitter<any>();
 
   @ContentChild(ListItemDirective, { read: TemplateRef }) listItemTemplate;
@@ -45,6 +47,8 @@ export class ListComponent extends ContentView implements OnInit {
   isSectionsEnabled: boolean;
   isSelectable: boolean;
   hasMoreItems: boolean = true;
+
+  private hasLoadMoreSubscribers: boolean;
 
   constructor() {
     super();
@@ -58,6 +62,7 @@ export class ListComponent extends ContentView implements OnInit {
       console.warn('kirbyListItem is deprecated and will be removed in future versions of Kirby');
     }
     this.isSelectable = this.itemSelect.observers.length > 0;
+    this.hasLoadMoreSubscribers = this.loadMore.observers.length > 0;
   }
 
   onItemTap(selectedItem: any): void {
@@ -67,14 +72,15 @@ export class ListComponent extends ContentView implements OnInit {
   async onLoadMore(args: LoadOnDemandListViewEventData) {
     const listView: RadListView = args.object;
 
-    if (this.loadMore) {
-      const newItems = await this.loadMore();
-      this.hasMoreItems = newItems && newItems.length > 0;
-      if (this.hasMoreItems) {
-        this.items.push(...newItems);
-      }
-      listView.notifyLoadOnDemandFinished(!this.hasMoreItems);
-      args.returnValue = this.hasMoreItems;
+    if (this.hasLoadMoreSubscribers && this.hasMoreItems) {
+      this.loadMore.emit({
+        complete: (newItems: any[]) => {
+          this.hasMoreItems = newItems && newItems.length > 0;
+          this.items.push(...newItems);
+          listView.notifyLoadOnDemandFinished(!this.hasMoreItems);
+          args.returnValue = this.hasMoreItems;
+        },
+      });
     } else {
       listView.notifyLoadOnDemandFinished(true);
       args.returnValue = false;
