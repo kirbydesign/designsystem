@@ -7,15 +7,13 @@ import {
   Input,
   Output,
   ElementRef,
-  InjectionToken,
   Inject,
 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { debounceTime, takeUntil, filter } from 'rxjs/operators';
 
 import { Scroll } from './scroll.model';
-
-const WINDOW = new InjectionToken<Window>('Window');
+import { WINDOW_PROVIDER, WINDOW_REF, WindowRef } from '../../shared/window-ref/window-ref.service';
 
 /**
  * Specify debounce duration in ms
@@ -24,12 +22,7 @@ export const INFINITE_SCROLL_DEBOUNCE = 100;
 
 @Directive({
   selector: '[kirbyInfiniteScroll]',
-  providers: [
-    {
-      provide: WINDOW,
-      useValue: window,
-    },
-  ],
+  providers: [WINDOW_PROVIDER],
 })
 export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
   /**
@@ -59,7 +52,7 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
    */
   private offset = 0.8;
 
-  constructor(private elementRef: ElementRef, @Inject(WINDOW) private window: Window) {}
+  constructor(private elementRef: ElementRef, @Inject(WINDOW_REF) private windowRef: WindowRef) {}
 
   ngAfterViewInit(): void {
     /**
@@ -93,7 +86,7 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
 
     const distanceToViewBottom = boundindClientRect.bottom;
     const elementHeight = boundindClientRect.height;
-    const viewHeight = this.window.innerHeight;
+    const viewHeight = this.windowRef.nativeWindow.innerHeight;
 
     this.scroll$.next({ distanceToViewBottom, elementHeight, viewHeight });
   }
