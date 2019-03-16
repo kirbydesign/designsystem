@@ -1,0 +1,53 @@
+:host {
+    width: 100%;
+    display: block;
+    overflow-x: auto;
+
+    a {
+        color: #000;
+    }
+}
+
+.component-status {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+
+    &__header {
+        text-align: left;
+
+        &__item {
+            font-weight: 500;
+            line-height: 1.6;
+            text-transform: uppercase;
+            letter-spacing: .1rem;
+            padding: 1rem;
+            font-size: 1.3rem;
+
+            &:first-of-type {
+                padding-left: 0;
+            }
+        }
+    }
+
+    .component-status__row {
+        vertical-align: middle;
+        border-bottom: .1rem solid #dfe3e8;
+    }
+
+    .component-status__column {
+        padding: 1rem;
+        &:first-of-type {
+            padding-left: 0;
+        }
+
+        &__title {
+            width: 100%;
+            display: block;
+        }
+
+        &__subtitle {
+            color: #838383;
+        }
+    }
+}
