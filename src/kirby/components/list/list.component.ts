@@ -62,8 +62,8 @@ export class ListComponent implements OnInit {
       if (this.hasMoreItems && !this.isLoading) {
         this.isLoading = true;
         this.loadMore.emit({
-          complete: (hasMoreToLoad: boolean) => {
-            this.hasMoreItems = hasMoreToLoad;
+          complete: (disableLoadMore: boolean) => {
+            this.hasMoreItems = !disableLoadMore;
             this.isLoading = false;
           },
         });

@@ -74,8 +74,8 @@ export class ListComponent extends ContentView implements OnInit {
 
     if (this.isLoadMoreEnabled && this.hasMoreItems) {
       this.loadMore.emit({
-        complete: (hasMoreToLoad: boolean) => {
-          this.hasMoreItems = hasMoreToLoad;
+        complete: (disableLoadMore: boolean) => {
+          this.hasMoreItems = !disableLoadMore;
           listView.notifyLoadOnDemandFinished(!this.hasMoreItems);
           args.returnValue = this.hasMoreItems;
         },

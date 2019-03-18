@@ -22,10 +22,10 @@ export class ListLoadMoreExampleComponent extends BaseListComponent {
       // lets make a delay to simulate a HTTP call.
       new Promise((resolve) => setTimeout(resolve, 2000)).then(() => {
         this.items.push(...this.generateItems());
-        onLoadMoreEvent.complete(true);
+        onLoadMoreEvent.complete();
       });
     } else {
-      onLoadMoreEvent.complete(false);
+      onLoadMoreEvent.complete(true);
     }
   }
 

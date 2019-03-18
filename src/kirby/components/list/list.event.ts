@@ -1,3 +1,3 @@
 export interface KirbyLoadMoreEvent {
-  complete: (hasMoreToLoad?: boolean) => void;
+  complete: (disableLoadMore?: boolean) => void;
 }
