@@ -54,7 +54,7 @@ export class ListComponent extends ContentView implements OnInit {
     super();
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     if (this.getSectionName) {
       this.isSectionsEnabled = true;
     }
@@ -69,7 +69,7 @@ export class ListComponent extends ContentView implements OnInit {
     this.itemSelect.emit(selectedItem);
   }
 
-  async onLoadMore(args: LoadOnDemandListViewEventData) {
+  onLoadMore(args: LoadOnDemandListViewEventData): void {
     const listView: RadListView = args.object;
 
     if (this.isLoadMoreEnabled && this.hasMoreItems) {

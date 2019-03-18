@@ -42,7 +42,7 @@ export class ListComponent implements OnInit {
   isLoading: boolean;
   isLoadMoreEnabled: boolean;
 
-  ngOnInit() {
+  ngOnInit(): void {
     if (this.getSectionName) {
       this.isSectionsEnabled = true;
     }
@@ -57,7 +57,7 @@ export class ListComponent implements OnInit {
     this.itemSelect.emit(row);
   }
 
-  async onLoadMore() {
+  onLoadMore(): void {
     if (this.isLoadMoreEnabled) {
       if (this.hasMoreItems && !this.isLoading) {
         this.isLoading = true;
