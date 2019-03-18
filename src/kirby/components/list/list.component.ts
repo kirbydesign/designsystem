@@ -16,7 +16,7 @@ import {
   ListSectionHeaderDirective,
   ListCellDirective,
 } from './list.directive';
-import { KirbyListLoadMoreEvent } from './list.event';
+import { KirbyLoadMoreEvent } from './list.event';
 
 @Component({
   selector: 'kirby-list',
@@ -27,7 +27,7 @@ export class ListComponent implements OnInit {
   @Input() items: any[];
   @Input() getSectionName?: (item: any) => string;
   @Input() noMoreItemsText: string;
-  @Output() loadMore = new EventEmitter<KirbyListLoadMoreEvent>();
+  @Output() loadMore = new EventEmitter<KirbyLoadMoreEvent>();
   @Output() itemSelect = new EventEmitter<any>();
 
   // The first element that matches ListItemDirective. As a structural directive it unfolds into a template. This is a reference to that.
@@ -62,11 +62,8 @@ export class ListComponent implements OnInit {
       if (this.hasMoreItems && !this.isLoading) {
         this.isLoading = true;
         this.loadMore.emit({
-          complete: (newItems: any[]) => {
-            this.hasMoreItems = newItems && newItems.length > 0;
-            if (this.hasMoreItems) {
-              this.items.push(...newItems);
-            }
+          complete: (hasMoreToLoad: boolean) => {
+            this.hasMoreItems = hasMoreToLoad;
             this.isLoading = false;
           },
         });

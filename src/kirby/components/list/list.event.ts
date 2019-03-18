@@ -1,3 +1,3 @@
-export interface KirbyListLoadMoreEvent {
-  complete: (items: any[]) => void;
+export interface KirbyLoadMoreEvent {
+  complete: (hasMoreToLoad?: boolean) => void;
 }

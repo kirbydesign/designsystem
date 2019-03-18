@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { KirbyListLoadMoreEvent } from './list.event';
+import { KirbyLoadMoreEvent } from './list.event';
 import { GroupByPipe } from './pipes/group-by.pipe';
 import { ListComponent } from './list.component';
 import { SpinnerComponent } from '~/kirby';
@@ -24,34 +24,6 @@ describe('ListComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  describe('item select event', () => {
-    it('should emit the clicked item', () => {
-      spyOn(component.itemSelect, 'emit');
-      const itemToBeSelected = { value: 'this is a dummy item' };
-
-      component.onItemClick(itemToBeSelected);
-
-      expect(component.itemSelect.emit).toHaveBeenCalledTimes(1);
-      expect(component.itemSelect.emit).toHaveBeenCalledWith(itemToBeSelected);
-    });
-  });
-
-  describe('function: ngOnInit', () => {
-    it('should enable load more, if there is a subscriber to the loadMore event emitter', () => {
-      component.loadMore.subscribe((loadMoreEvent: KirbyListLoadMoreEvent) => {});
-
-      component.ngOnInit();
-
-      expect(component.isLoadMoreEnabled).toBeTruthy();
-    });
-
-    it('should disable load more, if there is no subscriber to the loadMore event emitter', () => {
-      component.ngOnInit();
-
-      expect(component.isLoadMoreEnabled).toBeFalsy();
-    });
   });
 
   describe('sections', () => {
@@ -99,11 +71,39 @@ describe('ListComponent', () => {
     });
   });
 
+  describe('function: onItemClick', () => {
+    it('should emit the clicked item', () => {
+      spyOn(component.itemSelect, 'emit');
+      const itemToBeSelected = { value: 'this is a dummy item' };
+
+      component.onItemClick(itemToBeSelected);
+
+      expect(component.itemSelect.emit).toHaveBeenCalledTimes(1);
+      expect(component.itemSelect.emit).toHaveBeenCalledWith(itemToBeSelected);
+    });
+  });
+
+  describe('function: ngOnInit', () => {
+    it('should enable load more, if there is a subscriber to the loadMore event emitter', () => {
+      component.loadMore.subscribe((loadMoreEvent: KirbyLoadMoreEvent) => {});
+
+      component.ngOnInit();
+
+      expect(component.isLoadMoreEnabled).toBeTruthy();
+    });
+
+    it('should disable load more, if there is no subscriber to the loadMore event emitter', () => {
+      component.ngOnInit();
+
+      expect(component.isLoadMoreEnabled).toBeFalsy();
+    });
+  });
+
   describe('function: onLoadMore', () => {
     let loadMoreEmitSpy: jasmine.Spy;
     beforeEach(() => {
       loadMoreEmitSpy = spyOn(component.loadMore, 'emit').and.callThrough();
-      component.loadMore.subscribe((loadMoreEvent: KirbyListLoadMoreEvent) => {});
+      component.loadMore.subscribe((loadMoreEvent: KirbyLoadMoreEvent) => {});
       component.ngOnInit();
     });
 
@@ -149,22 +149,6 @@ describe('ListComponent', () => {
       expect(component.loadMore.emit).not.toHaveBeenCalled();
     });
 
-    it('should append items given in the load more events complete callback', () => {
-      const items = [1, 2];
-      const newItems = [3, 4];
-      const expected = [...items, ...newItems];
-      component.items = items;
-
-      loadMoreEmitSpy.and.callFake((event: KirbyListLoadMoreEvent) => {
-        event.complete(newItems);
-      });
-      component.items = expected;
-
-      component.onLoadMore();
-
-      expect(component.items).toEqual(expected);
-    });
-
     it('should start loading, when before emitting an load more event', () => {
       component.isLoading = false;
       component.hasMoreItems = true;
@@ -176,8 +160,8 @@ describe('ListComponent', () => {
 
     it('should end loading, if the load more events complete callback is called', () => {
       component.items = [];
-      loadMoreEmitSpy.and.callFake((event: KirbyListLoadMoreEvent) => {
-        event.complete([1, 2, 3]);
+      loadMoreEmitSpy.and.callFake((event: KirbyLoadMoreEvent) => {
+        event.complete();
       });
 
       component.onLoadMore();
@@ -185,9 +169,9 @@ describe('ListComponent', () => {
       expect(component.isLoading).toBeFalsy();
     });
 
-    it('should be marked as having no more items, if the load more events complete callback is called with an empty list', () => {
-      loadMoreEmitSpy.and.callFake((event: KirbyListLoadMoreEvent) => {
-        event.complete([]);
+    it('should be marked as having no more items, if the load more events complete callback is called with false', () => {
+      loadMoreEmitSpy.and.callFake((event: KirbyLoadMoreEvent) => {
+        event.complete(false);
       });
 
       component.onLoadMore();
@@ -195,24 +179,14 @@ describe('ListComponent', () => {
       expect(component.hasMoreItems).toBeFalsy();
     });
 
-    it('should be marked as having no more items, if the load more events complete callback is called with null', () => {
-      loadMoreEmitSpy.and.callFake((event: KirbyListLoadMoreEvent) => {
-        event.complete(null);
+    it('should be marked as having more items, if the load more events complete callback is called with true', () => {
+      loadMoreEmitSpy.and.callFake((event: KirbyLoadMoreEvent) => {
+        event.complete(true);
       });
 
       component.onLoadMore();
 
-      expect(component.hasMoreItems).toBeFalsy();
-    });
-
-    it('should be marked as having no more items, if the load more events complete callback is called with undefined', () => {
-      loadMoreEmitSpy.and.callFake((event: KirbyListLoadMoreEvent) => {
-        event.complete(undefined);
-      });
-
-      component.onLoadMore();
-
-      expect(component.hasMoreItems).toBeFalsy();
+      expect(component.hasMoreItems).toBeTruthy();
     });
   });
 });

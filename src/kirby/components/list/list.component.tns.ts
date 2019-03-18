@@ -22,7 +22,7 @@ import {
   ListSectionHeaderDirective,
   ListCellDirective,
 } from './list.directive';
-import { KirbyListLoadMoreEvent } from './list.event';
+import { KirbyLoadMoreEvent } from './list.event';
 
 const KIRBY_LIST_COMPONENT_SELECTOR = 'kirby-list';
 
@@ -36,7 +36,7 @@ export class ListComponent extends ContentView implements OnInit {
   @Input() getSectionName?: (item: any) => string;
   @Input() noMoreItemsText: string;
 
-  @Output() loadMore = new EventEmitter<KirbyListLoadMoreEvent>();
+  @Output() loadMore = new EventEmitter<KirbyLoadMoreEvent>();
   @Output() itemSelect = new EventEmitter<any>();
 
   @ContentChild(ListItemDirective, { read: TemplateRef }) listItemTemplate;
@@ -74,9 +74,8 @@ export class ListComponent extends ContentView implements OnInit {
 
     if (this.isLoadMoreEnabled && this.hasMoreItems) {
       this.loadMore.emit({
-        complete: (newItems: any[]) => {
-          this.hasMoreItems = newItems && newItems.length > 0;
-          this.items.push(...newItems);
+        complete: (hasMoreToLoad: boolean) => {
+          this.hasMoreItems = hasMoreToLoad;
           listView.notifyLoadOnDemandFinished(!this.hasMoreItems);
           args.returnValue = this.hasMoreItems;
         },

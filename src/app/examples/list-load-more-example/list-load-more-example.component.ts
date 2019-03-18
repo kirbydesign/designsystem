@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { BaseListComponent } from '../list-example/base-list.component';
-import { KirbyListLoadMoreEvent } from './../../../kirby/components/list/list.event';
+import { KirbyLoadMoreEvent } from './../../../kirby/components/list/list.event';
 
 @Component({
   selector: 'kirby-list-load-more-example',
@@ -16,13 +16,17 @@ export class ListLoadMoreExampleComponent extends BaseListComponent {
     this.items.push(...this.generateItems());
   }
 
-  onLoadMore(onLoadMoreEvent: KirbyListLoadMoreEvent): void {
-    // lets make a delay to simulate a HTTP call.
-    new Promise((resolve) => setTimeout(resolve, 2000)).then(() => {
-      // We end the load more event after 20 items, by sending null to the kirby list.
-      const newItems = this.itemCount > 20 ? null : this.generateItems();
-      onLoadMoreEvent.complete(newItems);
-    });
+  onLoadMore(onLoadMoreEvent: KirbyLoadMoreEvent): void {
+    // We end the load more event after 20 items, by sending null to the kirby list.
+    if (this.itemCount <= 20) {
+      // lets make a delay to simulate a HTTP call.
+      new Promise((resolve) => setTimeout(resolve, 2000)).then(() => {
+        this.items.push(...this.generateItems());
+        onLoadMoreEvent.complete(true);
+      });
+    } else {
+      onLoadMoreEvent.complete(false);
+    }
   }
 
   private generateItems(): any[] {
