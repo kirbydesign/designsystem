@@ -10,6 +10,7 @@ export interface ComponentStatusItem {
     version: number;
     status: string;
     githubIssue?: string;
+    cookbookUrl?: string;
   };
   children?: ComponentStatusItem[];
 }
@@ -32,14 +33,28 @@ enum ItemCodeStatus {
 
 export const componentStatusItems: ComponentStatusItem[] = [
   {
+    component: 'Avatar',
+    ux: {
+      version: 1.0,
+      status: ItemUXStatus.done,
+      zeplinUrl: 'https://zpl.io/2yONGDG',
+    },
+    code: {
+      version: 0.5,
+      status: ItemCodeStatus.done,
+      cookbookUrl: 'showcase/avatar',
+    },
+  },
+  {
     component: 'Badge',
     aliases: ['Beacon'],
     ux: {
       version: 1.0,
-      status: ItemUXStatus.planned,
+      status: ItemUXStatus.done,
+      zeplinUrl: 'https://zpl.io/agzl3GD',
     },
     code: {
-      version: 0.0,
+      version: 0.1,
       status: ItemCodeStatus.planned,
     },
   },
@@ -48,10 +63,12 @@ export const componentStatusItems: ComponentStatusItem[] = [
     ux: {
       version: 1.0,
       status: ItemUXStatus.done,
+      zeplinUrl: 'https://zpl.io/bPPk4ok',
     },
     code: {
       version: 0.5,
       status: ItemCodeStatus.done,
+      cookbookUrl: 'showcase/button',
     },
     children: [
       {
@@ -88,6 +105,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
     code: {
       version: 0.1,
       status: ItemCodeStatus.done,
+      cookbookUrl: 'showcase/card',
     },
   },
   {
@@ -119,6 +137,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
     ux: {
       version: 1.0,
       status: ItemUXStatus.done,
+      zeplinUrl: 'https://zpl.io/VqWoxg5',
     },
     code: {
       version: 0.1,
@@ -130,6 +149,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
     ux: {
       version: 1.0,
       status: ItemUXStatus.done,
+      zeplinUrl: 'https://zpl.io/a7OAAWR',
     },
     code: {
       version: 0.1,
@@ -145,6 +165,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
     code: {
       version: 0.5,
       status: ItemCodeStatus.done,
+      cookbookUrl: 'showcase/list',
     },
   },
   {
@@ -217,6 +238,19 @@ export const componentStatusItems: ComponentStatusItem[] = [
     ],
   },
   {
+    component: 'Spinner',
+    aliases: ['Progress Indicator'],
+    ux: {
+      version: 0.0,
+      status: ItemUXStatus.underConsideration,
+    },
+    code: {
+      version: 0.1,
+      status: ItemCodeStatus.done,
+      cookbookUrl: 'showcase/spinner',
+    },
+  },
+  {
     component: 'Radio Button',
     ux: {
       version: 1.0,
@@ -260,6 +294,19 @@ export const componentStatusItems: ComponentStatusItem[] = [
     code: {
       version: 0.0,
       status: ItemCodeStatus.notCurrentlyPlanned,
+    },
+  },
+  {
+    component: 'Segmented Control',
+    aliases: ['Segment', 'Inline Tabs', 'Button Group'],
+    ux: {
+      version: 1.0,
+      status: ItemUXStatus.done,
+      zeplinUrl: 'https://zpl.io/a7OXP4v',
+    },
+    code: {
+      version: 0.1,
+      status: ItemCodeStatus.inProgress,
     },
   },
   {

@@ -40,11 +40,15 @@
 </table>
 
 <ng-template #codeTemplate let-code>
-    <a *ngIf="code?.githubIssue" [href]="code?.githubIssue">
+    <a *ngIf="code?.cookbookUrl" routerLink="../../{{code?.cookbookUrl}}">
         {{code?.status}}
         <ng-container *ngTemplateOutlet="versionTemplate; context: {$implicit: code?.version}"></ng-container>
     </a>
-    <span *ngIf="!code?.githubIssue">
+    <a *ngIf="!code?.cookbookUrl && code?.githubIssue" [href]="code?.githubIssue">
+        {{code?.status}}
+        <ng-container *ngTemplateOutlet="versionTemplate; context: {$implicit: code?.version}"></ng-container>
+    </a>
+    <span *ngIf="!code?.cookbookUrl && !code?.githubIssue">
         {{code?.status}}
         <ng-container *ngTemplateOutlet="versionTemplate; context: {$implicit: code?.version}"></ng-container>
     </span>
