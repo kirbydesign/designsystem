@@ -4,7 +4,7 @@
 </ng-container>
 
 <!-- BODY-->
-<ul kirbyInfiniteScroll (scrollEnd)="onLoadMore()" [disabled]="!hasMoreItems">
+<ul kirbyInfiniteScroll (scrollEnd)="onLoadMore()" [disabled]="!isLoadMoreEnabled">
   <ng-container *ngIf="isSectionsEnabled; else normalList">
     <ng-container *ngFor="let section of (items | groupBy: getSectionName)">
       <li class="section-header">

@@ -38,6 +38,22 @@ describe('ListComponent', () => {
     });
   });
 
+  describe('function: ngOnInit', () => {
+    it('should enable load more, if there is a subscriber to the loadMore event emitter', () => {
+      component.loadMore.subscribe((loadMoreEvent: KirbyListLoadMoreEvent) => {});
+
+      component.ngOnInit();
+
+      expect(component.isLoadMoreEnabled).toBeTruthy();
+    });
+
+    it('should disable load more, if there is no subscriber to the loadMore event emitter', () => {
+      component.ngOnInit();
+
+      expect(component.isLoadMoreEnabled).toBeFalsy();
+    });
+  });
+
   describe('sections', () => {
     beforeEach(() => {
       fixture = TestBed.createComponent(ListComponent);
@@ -87,6 +103,8 @@ describe('ListComponent', () => {
     let loadMoreEmitSpy: jasmine.Spy;
     beforeEach(() => {
       loadMoreEmitSpy = spyOn(component.loadMore, 'emit').and.callThrough();
+      component.loadMore.subscribe((loadMoreEvent: KirbyListLoadMoreEvent) => {});
+      component.ngOnInit();
     });
 
     it('should emit load more event, if there are more items and is not loading', () => {
@@ -96,6 +114,14 @@ describe('ListComponent', () => {
       component.onLoadMore();
 
       expect(component.loadMore.emit).toHaveBeenCalledTimes(1);
+    });
+
+    it('should not emit load more event, if load more is not enabled', () => {
+      component.isLoadMoreEnabled = false;
+
+      component.onLoadMore();
+
+      expect(component.loadMore.emit).not.toHaveBeenCalled();
     });
 
     it('should not emit load more event, if is loading', () => {

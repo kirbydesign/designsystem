@@ -48,7 +48,7 @@ export class ListComponent extends ContentView implements OnInit {
   isSelectable: boolean;
   hasMoreItems: boolean = true;
 
-  private hasLoadMoreSubscribers: boolean;
+  private isLoadMoreEnabled: boolean;
 
   constructor() {
     super();
@@ -62,7 +62,7 @@ export class ListComponent extends ContentView implements OnInit {
       console.warn('kirbyListItem is deprecated and will be removed in future versions of Kirby');
     }
     this.isSelectable = this.itemSelect.observers.length > 0;
-    this.hasLoadMoreSubscribers = this.loadMore.observers.length > 0;
+    this.isLoadMoreEnabled = this.loadMore.observers.length > 0;
   }
 
   onItemTap(selectedItem: any): void {
@@ -72,7 +72,7 @@ export class ListComponent extends ContentView implements OnInit {
   async onLoadMore(args: LoadOnDemandListViewEventData) {
     const listView: RadListView = args.object;
 
-    if (this.hasLoadMoreSubscribers && this.hasMoreItems) {
+    if (this.isLoadMoreEnabled && this.hasMoreItems) {
       this.loadMore.emit({
         complete: (newItems: any[]) => {
           this.hasMoreItems = newItems && newItems.length > 0;

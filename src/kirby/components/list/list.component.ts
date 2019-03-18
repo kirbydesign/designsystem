@@ -40,6 +40,7 @@ export class ListComponent implements OnInit {
   isSelectable: boolean;
   hasMoreItems: boolean = true;
   isLoading: boolean;
+  isLoadMoreEnabled: boolean;
 
   ngOnInit() {
     if (this.getSectionName) {
@@ -49,6 +50,7 @@ export class ListComponent implements OnInit {
       console.warn('kirbyListItem is deprecated and will be removed in future versions of Kirby');
     }
     this.isSelectable = this.itemSelect.observers.length > 0;
+    this.isLoadMoreEnabled = this.loadMore.observers.length > 0;
   }
 
   onItemClick(row: any): void {
@@ -56,17 +58,19 @@ export class ListComponent implements OnInit {
   }
 
   async onLoadMore() {
-    if (this.hasMoreItems && !this.isLoading) {
-      this.isLoading = true;
-      this.loadMore.emit({
-        complete: (newItems: any[]) => {
-          this.hasMoreItems = newItems && newItems.length > 0;
-          if (this.hasMoreItems) {
-            this.items.push(...newItems);
-          }
-          this.isLoading = false;
-        },
-      });
+    if (this.isLoadMoreEnabled) {
+      if (this.hasMoreItems && !this.isLoading) {
+        this.isLoading = true;
+        this.loadMore.emit({
+          complete: (newItems: any[]) => {
+            this.hasMoreItems = newItems && newItems.length > 0;
+            if (this.hasMoreItems) {
+              this.items.push(...newItems);
+            }
+            this.isLoading = false;
+          },
+        });
+      }
     }
   }
 }
