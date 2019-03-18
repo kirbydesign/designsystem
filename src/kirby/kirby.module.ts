@@ -10,4 +10,4 @@ import { declarations } from './kirby.common';
   declarations: declarations,
   exports: declarations,
 })
-export class KirbyModule { }
+export class KirbyModule {}
