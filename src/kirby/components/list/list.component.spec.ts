@@ -169,9 +169,9 @@ describe('ListComponent', () => {
       expect(component.isLoading).toBeFalsy();
     });
 
-    it('should be marked as having no more items, if the load more events complete callback is called with false', () => {
+    it('should be marked as having no more items, if the load more events complete callback is called with true', () => {
       loadMoreEmitSpy.and.callFake((event: KirbyLoadMoreEvent) => {
-        event.complete(false);
+        event.complete(true);
       });
 
       component.onLoadMore();
@@ -179,9 +179,9 @@ describe('ListComponent', () => {
       expect(component.hasMoreItems).toBeFalsy();
     });
 
-    it('should be marked as having more items, if the load more events complete callback is called with true', () => {
+    it('should be marked as having more items, if the load more events complete callback is called with false', () => {
       loadMoreEmitSpy.and.callFake((event: KirbyLoadMoreEvent) => {
-        event.complete(true);
+        event.complete(false);
       });
 
       component.onLoadMore();
