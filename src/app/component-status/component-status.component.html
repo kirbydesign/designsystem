@@ -5,6 +5,8 @@
     component not listed here,
     <a href="https://github.com/kirbydesign/designsystem/issues/new/choose">create an issue on GitHub</a></p>
 
+    <div class="search">Search Component(s): <input autofocus type="text" (keyup)="searchTerm$.next($event.target.value)"></div>
+
 <table class="component-status">
     <thead>
         <tr>
@@ -13,7 +15,7 @@
             <th>Code</th>
         </tr>
     </thead>
-    <ng-container *ngFor="let item of items">
+    <ng-container *ngFor="let item of items$ | async as items">
         <tbody>
             <tr class="component" [class.group]="item.children?.length > 0" onclick="this.classList.toggle('expanded');">
                 <td class="component">{{item.component}}</td>
