@@ -1,358 +1,299 @@
 export interface ComponentStatusItem {
   component: string;
+  aliases?: string[];
+  ux: {
+    version: number;
+    status: string;
+    zeplinUrl?: string;
+  };
   code: {
+    version: number;
     status: string;
-    githubIssue: string;
+    githubIssue?: string;
   };
-  ['ux & design']: {
-    status: string;
-    githubIssue: string;
-  };
+  children?: ComponentStatusItem[];
+}
+
+enum ItemUXStatus {
+  underConsideration = 'Under consideration',
+  notCurrentlyPlanned = 'Not currently planned',
+  planned = 'Planned',
+  inProgress = 'In progress',
+  done = 'Done',
 }
 
 enum ItemCodeStatus {
   underConsideration = 'Under consideration',
   notCurrentlyPlanned = 'Not currently planned',
+  planned = 'Planned',
   inProgress = 'In development',
-  done = 'Done',
-}
-
-enum ItemUXAndDesignStatus {
-  underConsideration = 'Under consideration',
-  notCurrentlyPlanned = 'Not currently planned',
-  inProgress = 'In progress',
   done = 'Done',
 }
 
 export const componentStatusItems: ComponentStatusItem[] = [
   {
-    component: 'Action Sheet',
-    code: {
-      status: ItemCodeStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
-    },
-    ['ux & design']: {
-      status: ItemUXAndDesignStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
-    },
-  },
-  {
-    component: 'Alert',
-    code: {
-      status: ItemCodeStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
-    },
-    ['ux & design']: {
-      status: ItemUXAndDesignStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
-    },
-  },
-  {
     component: 'Badge',
-    code: {
-      status: ItemCodeStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
+    aliases: ['Beacon'],
+    ux: {
+      version: 1.0,
+      status: ItemUXStatus.planned,
     },
-    ['ux & design']: {
-      status: ItemUXAndDesignStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
+    code: {
+      version: 0.0,
+      status: ItemCodeStatus.planned,
     },
   },
   {
     component: 'Button',
+    ux: {
+      version: 1.0,
+      status: ItemUXStatus.done,
+    },
     code: {
-      status: ItemCodeStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
+      version: 0.5,
+      status: ItemCodeStatus.done,
     },
-    ['ux & design']: {
-      status: ItemUXAndDesignStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
-    },
+    children: [
+      {
+        component: 'Icon Button',
+        ux: {
+          version: 1.0,
+          status: ItemUXStatus.underConsideration,
+        },
+        code: {
+          version: 0.1,
+          status: ItemCodeStatus.underConsideration,
+        },
+      },
+      {
+        component: 'Outline Button',
+        ux: {
+          version: 1.0,
+          status: ItemUXStatus.underConsideration,
+        },
+        code: {
+          version: 0.1,
+          status: ItemCodeStatus.underConsideration,
+        },
+      },
+    ],
   },
   {
     component: 'Card',
-    code: {
-      status: ItemCodeStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
+    ux: {
+      version: 1.0,
+      status: ItemUXStatus.done,
+      zeplinUrl: 'https://zpl.io/2EBLPk8',
     },
-    ['ux & design']: {
-      status: ItemUXAndDesignStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
+    code: {
+      version: 0.1,
+      status: ItemCodeStatus.done,
     },
   },
   {
     component: 'Checkbox',
-    code: {
-      status: ItemCodeStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
+    ux: {
+      version: 1.0,
+      status: ItemUXStatus.planned,
     },
-    ['ux & design']: {
-      status: ItemUXAndDesignStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
+    code: {
+      version: 0.1,
+      status: ItemCodeStatus.planned,
     },
   },
   {
     component: 'Chip',
+    aliases: ['Button', 'Compact Button', 'Tag'],
+    ux: {
+      version: 1.0,
+      status: ItemUXStatus.underConsideration,
+    },
     code: {
+      version: 0.0,
       status: ItemCodeStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
-    },
-    ['ux & design']: {
-      status: ItemUXAndDesignStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
-    },
-  },
-  {
-    component: 'Content',
-    code: {
-      status: ItemCodeStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
-    },
-    ['ux & design']: {
-      status: ItemUXAndDesignStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
     },
   },
   {
     component: 'Floating Action Button',
-    code: {
-      status: ItemCodeStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
+    aliases: ['FAB'],
+    ux: {
+      version: 1.0,
+      status: ItemUXStatus.done,
     },
-    ['ux & design']: {
-      status: ItemUXAndDesignStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
+    code: {
+      version: 0.1,
+      status: ItemCodeStatus.planned,
     },
   },
   {
-    component: 'Icons',
+    component: 'Icon',
+    ux: {
+      version: 1.0,
+      status: ItemUXStatus.done,
+    },
     code: {
-      status: ItemCodeStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
-    },
-    ['ux & design']: {
-      status: ItemUXAndDesignStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
-    },
-  },
-  {
-    component: 'Input',
-    code: {
-      status: ItemCodeStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
-    },
-    ['ux & design']: {
-      status: ItemUXAndDesignStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
-    },
-  },
-  {
-    component: 'Item',
-    code: {
-      status: ItemCodeStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
-    },
-    ['ux & design']: {
-      status: ItemUXAndDesignStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
+      version: 0.1,
+      status: ItemCodeStatus.planned,
     },
   },
   {
     component: 'List',
-    code: {
-      status: ItemCodeStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
+    ux: {
+      version: 1.0,
+      status: ItemUXStatus.done,
     },
-    ['ux & design']: {
-      status: ItemUXAndDesignStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
+    code: {
+      version: 0.5,
+      status: ItemCodeStatus.done,
     },
   },
   {
-    component: 'Navigation',
-    code: {
-      status: ItemCodeStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
+    component: 'List Item',
+    ux: {
+      version: 1.0,
+      status: ItemUXStatus.done,
     },
-    ['ux & design']: {
-      status: ItemUXAndDesignStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
+    code: {
+      version: 0.5,
+      status: ItemCodeStatus.done,
     },
   },
   {
     component: 'Menu',
-    code: {
-      status: ItemCodeStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
+    ux: {
+      version: 0.0,
+      status: ItemUXStatus.notCurrentlyPlanned,
     },
-    ['ux & design']: {
-      status: ItemUXAndDesignStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
+    code: {
+      version: 0.0,
+      status: ItemCodeStatus.notCurrentlyPlanned,
     },
   },
   {
     component: 'Modal',
+    ux: {
+      version: 1.0,
+      status: ItemUXStatus.inProgress,
+    },
     code: {
-      status: ItemCodeStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
+      version: 0.0,
+      status: ItemCodeStatus.planned,
+      githubIssue: 'https://github.com/kirbydesign/designsystem/issues/111',
     },
-    ['ux & design']: {
-      status: ItemUXAndDesignStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
-    },
+    children: [
+      {
+        component: 'Full Screen Modal',
+        ux: {
+          version: 1.0,
+          status: ItemUXStatus.planned,
+        },
+        code: {
+          version: 0.0,
+          status: ItemCodeStatus.planned,
+        },
+      },
+      {
+        component: 'Popover Modal',
+        ux: {
+          version: 1.0,
+          status: ItemUXStatus.done,
+        },
+        code: {
+          version: 0.0,
+          status: ItemCodeStatus.planned,
+        },
+      },
+      {
+        component: 'Alert Modal',
+        ux: {
+          version: 1.0,
+          status: ItemUXStatus.underConsideration,
+        },
+        code: {
+          version: 0.0,
+          status: ItemCodeStatus.underConsideration,
+        },
+      },
+    ],
   },
   {
-    component: 'Popover',
+    component: 'Radio Button',
+    ux: {
+      version: 1.0,
+      status: ItemUXStatus.planned,
+    },
     code: {
-      status: ItemCodeStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
+      version: 0.1,
+      status: ItemCodeStatus.planned,
     },
-    ['ux & design']: {
-      status: ItemUXAndDesignStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
-    },
+    children: [
+      {
+        component: 'Radio Button Group',
+        ux: {
+          version: 1.0,
+          status: ItemUXStatus.underConsideration,
+        },
+        code: {
+          version: 0.0,
+          status: ItemCodeStatus.underConsideration,
+        },
+      },
+    ],
   },
   {
-    component: 'Progress Indicators',
+    component: 'Pull To Refresh',
+    ux: {
+      version: 1.0,
+      status: ItemUXStatus.underConsideration,
+    },
     code: {
+      version: 0.0,
       status: ItemCodeStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
-    },
-    ['ux & design']: {
-      status: ItemUXAndDesignStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
-    },
-  },
-  {
-    component: 'Radio',
-    code: {
-      status: ItemCodeStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
-    },
-    ['ux & design']: {
-      status: ItemUXAndDesignStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
-    },
-  },
-  {
-    component: 'Refresher',
-    code: {
-      status: ItemCodeStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
-    },
-    ['ux & design']: {
-      status: ItemUXAndDesignStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
     },
   },
   {
     component: 'Reorder',
+    ux: {
+      version: 0.0,
+      status: ItemUXStatus.notCurrentlyPlanned,
+    },
     code: {
-      status: ItemCodeStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
-    },
-    ['ux & design']: {
-      status: ItemUXAndDesignStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
-    },
-  },
-  {
-    component: 'Routing',
-    code: {
-      status: ItemCodeStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
-    },
-    ['ux & design']: {
-      status: ItemUXAndDesignStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
-    },
-  },
-  {
-    component: 'Searchbar',
-    code: {
-      status: ItemCodeStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
-    },
-    ['ux & design']: {
-      status: ItemUXAndDesignStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
-    },
-  },
-  {
-    component: 'Segment',
-    code: {
-      status: ItemCodeStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
-    },
-    ['ux & design']: {
-      status: ItemUXAndDesignStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
-    },
-  },
-  {
-    component: 'Select',
-    code: {
-      status: ItemCodeStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
-    },
-    ['ux & design']: {
-      status: ItemUXAndDesignStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
-    },
-  },
-  {
-    component: 'Slides',
-    code: {
-      status: ItemCodeStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
-    },
-    ['ux & design']: {
-      status: ItemUXAndDesignStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
+      version: 0.0,
+      status: ItemCodeStatus.notCurrentlyPlanned,
     },
   },
   {
     component: 'Tabs',
-    code: {
-      status: ItemCodeStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
+    ux: {
+      version: 1.0,
+      status: ItemUXStatus.underConsideration,
     },
-    ['ux & design']: {
-      status: ItemUXAndDesignStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
+    code: {
+      version: 0.0,
+      status: ItemCodeStatus.underConsideration,
     },
   },
   {
     component: 'Toast',
-    code: {
-      status: ItemCodeStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
+    ux: {
+      version: 0.0,
+      status: ItemUXStatus.notCurrentlyPlanned,
     },
-    ['ux & design']: {
-      status: ItemUXAndDesignStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
+    code: {
+      version: 0.0,
+      status: ItemCodeStatus.notCurrentlyPlanned,
     },
   },
   {
-    component: 'Toggle',
+    component: 'Switch',
+    aliases: ['Toggle'],
+    ux: {
+      version: 1.0,
+      status: ItemUXStatus.planned,
+    },
     code: {
-      status: ItemCodeStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
-    },
-    ['ux & design']: {
-      status: ItemUXAndDesignStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
-    },
-  },
-  {
-    component: 'Toolbar',
-    code: {
-      status: ItemCodeStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
-    },
-    ['ux & design']: {
-      status: ItemUXAndDesignStatus.underConsideration,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues',
+      version: 0.1,
+      status: ItemCodeStatus.planned,
     },
   },
 ];

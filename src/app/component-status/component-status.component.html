@@ -3,26 +3,62 @@
 </div>
 <p>The latest component updates and changes. If you have a suggestion for a new
     component not listed here,
-    <a href="https://github.com/kirbydesign/designsystem/issues/new/choose">create an issue on GitHub</a>.</p>
+    <a href="https://github.com/kirbydesign/designsystem/issues/new/choose">create an issue on GitHub</a></p>
 
 <table class="component-status">
-    <thead class="component-status__header">
+    <thead>
         <tr>
-            <th class="component-status__header__item" *ngFor="let header of headers">{{header}}</th>
+            <th>Component</th>
+            <th>UX</th>
+            <th>Code</th>
         </tr>
     </thead>
-    <tbody class="component-status__body">
-
-        <tr class="component-status__row" *ngFor="let item of items">
-            <td class="component-status__column">{{item.component}}</td>
-            <td class="component-status__column">
-                <a [href]="item?.code?.githubIssue">{{item.code.status}}</a>
-            </td>
-            <td class="component-status__column">
-                <a [href]="item['ux & design']?.githubIssue">{{item['ux & design'].status}}</a>
-            </td>
-        </tr>
-
-    </tbody>
+    <ng-container *ngFor="let item of items">
+        <tbody>
+            <tr class="component" [class.group]="item.children?.length > 0" onclick="this.classList.toggle('expanded');">
+                <td class="component">{{item.component}}</td>
+                <td [class.under-consideration]="item.ux?.status === 'Under consideration'">
+                    <ng-container *ngTemplateOutlet="uxTemplate; context: {$implicit: item.ux}"></ng-container>
+                </td>
+                <td [class.under-consideration]="item.code?.status === 'Under consideration'">
+                    <ng-container *ngTemplateOutlet="codeTemplate; context: {$implicit: item.code}"></ng-container>
+                </td>
+            </tr>
+            <tr class="subcomponent" *ngFor="let subitem of item.children">
+                <td>{{subitem.component}}</td>
+                <td [class.under-consideration]="subitem.ux?.status === 'Under consideration'">
+                    <ng-container *ngTemplateOutlet="uxTemplate; context: {$implicit: subitem.ux}"></ng-container>
+                </td>
+                <td [class.under-consideration]="subitem.code?.status === 'Under consideration'">
+                    <ng-container *ngTemplateOutlet="codeTemplate; context: {$implicit: subitem.code}"></ng-container>
+                </td>
+            </tr>
+        </tbody>
+    </ng-container>
 </table>
 
+<ng-template #codeTemplate let-code>
+    <a *ngIf="code?.githubIssue" [href]="code?.githubIssue">
+        {{code?.status}}
+        <ng-container *ngTemplateOutlet="versionTemplate; context: {$implicit: code?.version}"></ng-container>
+    </a>
+    <span *ngIf="!code?.githubIssue">
+        {{code?.status}}
+        <ng-container *ngTemplateOutlet="versionTemplate; context: {$implicit: code?.version}"></ng-container>
+    </span>
+</ng-template>
+
+<ng-template #uxTemplate let-ux>
+    <a *ngIf="ux?.zeplinUrl" [href]="ux?.zeplinUrl">
+        {{ux?.status}}
+        <ng-container *ngTemplateOutlet="versionTemplate; context: {$implicit: ux?.version}"></ng-container>
+    </a>
+    <ng-container *ngIf="!ux?.zeplinUrl">
+        {{ux?.status}}
+        <ng-container *ngTemplateOutlet="versionTemplate; context: {$implicit: ux?.version}"></ng-container>
+    </ng-container>
+</ng-template>
+
+<ng-template #versionTemplate let-version>
+    <ng-container *ngIf="version">({{version | number: '1.1-2'}})</ng-container>
+</ng-template>

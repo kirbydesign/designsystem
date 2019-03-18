@@ -1,8 +1,6 @@
-:host {
-    width: 100%;
-    display: block;
-    overflow-x: auto;
+@import '../../kirby/scss/web-imports';
 
+:host {
     a {
         color: #000;
     }
@@ -12,11 +10,12 @@
     width: 100%;
     border-collapse: collapse;
     border-spacing: 0;
+    margin-left: 1rem;
 
-    &__header {
+    thead {
         text-align: left;
 
-        &__item {
+        th {
             font-weight: 500;
             line-height: 1.6;
             text-transform: uppercase;
@@ -24,30 +23,110 @@
             padding: 1rem;
             font-size: 1.3rem;
 
-            &:first-of-type {
+            &:first-child {
                 padding-left: 0;
             }
         }
     }
 
-    .component-status__row {
-        vertical-align: middle;
-        border-bottom: .1rem solid #dfe3e8;
+    tr {
+
+        &.component {
+            vertical-align: middle;
+            border-bottom: .1rem solid #b6b6b6;
+    
+            &.group {
+    
+                .component {
+                    cursor: pointer;                
+                    
+                    &::before {
+                        content: "";
+                        width: 20px;
+                        height: 1rem;
+                        display: block;
+                        position: absolute;
+                        margin-left: -2rem;
+                        background-color: var(--kirby-primary-light);
+                        -webkit-mask: url("/assets/icons/sprites/folder-plus.svg") no-repeat left center;
+                        -webkit-mask-size: 1rem;
+                        mask: url("/assets/icons/sprites/folder-plus.svg") no-repeat left center;
+                        mask-size: 1.25em;
+                    }
+                    
+                }
+            }
+    
+            &.expanded {
+                .component {
+                    &::before {
+                        mask-image: url("/assets/icons/sprites/folder-minus.svg");
+                        -webkit-mask-image: url("/assets/icons/sprites/folder-minus.svg");
+                    }
+                }
+            }
+    
+            & ~ .subcomponent
+            {
+                display: none;
+            }
+    
+            &.expanded ~ .subcomponent
+            {
+                display: table-row;
+            }
+    
+        }
+
+        &.subcomponent {
+            vertical-align: middle;
+            border-bottom: .1rem solid #dfe3e8;
+            color: var(--kirby-text-secondary);
+            font-size: font-size("s");
+    
+            td {
+                border-top: .1rem solid #dfe3e8;
+    
+                &:first-child {
+                    padding-left: 1rem;
+                }
+            }
+    
+            a {
+                color: var(--kirby-text-secondary);
+            }
+            
+        }
     }
 
-    .component-status__column {
+    td {
         padding: 1rem;
-        &:first-of-type {
+
+        &:first-child {
             padding-left: 0;
         }
 
-        &__title {
-            width: 100%;
-            display: block;
-        }
+        &.under-consideration {
+            color: var(--kirby-text-secondary);
+            font-style: italic;
+        }   
+    }
 
-        &__subtitle {
-            color: #838383;
-        }
+}
+
+a[href^="https://"]
+{
+    &::after {
+        content: "";
+        width: 20px;
+        height: 1rem;
+        display: inline-block;
+        margin-left: 4px;
+        margin-bottom: -4px;
+        background-color: var(--kirby-on-background);
+        -webkit-mask: url("/assets/icons/sprites/new-tab.svg") no-repeat left center;
+        -webkit-mask-size: 1rem;
+        mask: url("/assets/icons/sprites/new-tab.svg") no-repeat left center;
+        mask-size: 1rem;
     }
 }
