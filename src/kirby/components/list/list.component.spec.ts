@@ -91,15 +91,15 @@ describe('ListComponent', () => {
     });
   });
 
-  describe('divideRows', () => {
+  describe('lines', () => {
     beforeEach(() => {
       fixture = TestBed.createComponent(ListComponent);
       component = fixture.componentInstance;
     });
 
-    it('should set class "divider" on all li elements when divideRows is true', () => {
+    it('should set class "divider" on all li elements when lines is true', () => {
       component.items = [1, 2, 3];
-      component.divideRows = true;
+      component.lines = true;
 
       fixture.detectChanges();
 
@@ -111,9 +111,9 @@ describe('ListComponent', () => {
       });
     });
 
-    it('should not set class "divider" on any li elements when divideRows is false', () => {
+    it('should not set class "divider" on any li elements when lines is false', () => {
       component.items = [1, 2, 3];
-      component.divideRows = false;
+      component.lines = false;
 
       fixture.detectChanges();
 
