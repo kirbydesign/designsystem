@@ -90,4 +90,39 @@ describe('ListComponent', () => {
       expect(liElements.length).toEqual(component.items.length + sections.length);
     });
   });
+
+  describe('divideRows', () => {
+    beforeEach(() => {
+      fixture = TestBed.createComponent(ListComponent);
+      component = fixture.componentInstance;
+    });
+
+    it('should set class "divider" on all li elements when divideRows is true', () => {
+      component.items = [1, 2, 3];
+      component.divideRows = true;
+
+      fixture.detectChanges();
+
+      const rootElement: HTMLElement = fixture.debugElement.nativeElement;
+      const liElements = rootElement.querySelectorAll('li');
+
+      liElements.forEach((liElement) => {
+        expect(liElement.getAttribute('class')).toContain('divider');
+      });
+    });
+
+    it('should not set class "divider" on any li elements when divideRows is false', () => {
+      component.items = [1, 2, 3];
+      component.divideRows = false;
+
+      fixture.detectChanges();
+
+      const rootElement: HTMLElement = fixture.debugElement.nativeElement;
+      const liElements = rootElement.querySelectorAll('li');
+
+      liElements.forEach((liElement) => {
+        expect(liElement.getAttribute('class')).not.toContain('divider');
+      });
+    });
+  });
 });

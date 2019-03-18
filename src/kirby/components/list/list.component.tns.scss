@@ -4,4 +4,10 @@
   padding: size('gutter') size('gutter-small') size('gutter') size('gutter-small');
   justify-content: space-between;
   flex-direction: row;
+
+  &.divider {
+    border-color: get-color('kirby-background');
+    border-width: 0 0 1 0;
+  }
+
 }

@@ -5,7 +5,7 @@
     [items]="items"
   >
     <ng-template tkListItemTemplate let-item="item">
-      <FlexboxLayout class="row" (tap)="onItemTap(item)">
+      <FlexboxLayout class="row" [ngClass]="{'divider': divideRows}" (tap)="onItemTap(item)">
         <ng-container
           *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }"
         >
@@ -30,7 +30,7 @@
     </ng-template>
 
     <!-- HEADER -->
-    <ng-template tkListViewHeader *ngIf="listHeaderTemplate"> -->
+    <ng-template tkListViewHeader *ngIf="listHeaderTemplate">
       <FlexboxLayout class="row">
         <ng-container *ngTemplateOutlet="listHeaderTemplate"></ng-container>
       </FlexboxLayout>
