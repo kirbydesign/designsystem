@@ -22,7 +22,7 @@ import {
   ListSectionHeaderDirective,
   ListCellDirective,
 } from './list.directive';
-import { KirbyLoadMoreEvent } from './list.event';
+import { LoadOnDemandEvent } from './list.event';
 
 const KIRBY_LIST_COMPONENT_SELECTOR = 'kirby-list';
 
@@ -36,7 +36,7 @@ export class ListComponent extends ContentView implements OnInit {
   @Input() getSectionName?: (item: any) => string;
   @Input() noMoreItemsText: string;
 
-  @Output() loadMore = new EventEmitter<KirbyLoadMoreEvent>();
+  @Output() loadOnDemand = new EventEmitter<LoadOnDemandEvent>();
   @Output() itemSelect = new EventEmitter<any>();
 
   @ContentChild(ListItemDirective, { read: TemplateRef }) listItemTemplate;
@@ -46,9 +46,7 @@ export class ListComponent extends ContentView implements OnInit {
 
   isSectionsEnabled: boolean;
   isSelectable: boolean;
-  hasMoreItems: boolean = true;
-
-  private isLoadMoreEnabled: boolean;
+  isLoadOnDemandEnabled: boolean;
 
   constructor() {
     super();
@@ -62,22 +60,22 @@ export class ListComponent extends ContentView implements OnInit {
       console.warn('kirbyListItem is deprecated and will be removed in future versions of Kirby');
     }
     this.isSelectable = this.itemSelect.observers.length > 0;
-    this.isLoadMoreEnabled = this.loadMore.observers.length > 0;
+    this.isLoadOnDemandEnabled = this.loadOnDemand.observers.length > 0;
   }
 
   onItemTap(selectedItem: any): void {
     this.itemSelect.emit(selectedItem);
   }
 
-  onLoadMore(args: LoadOnDemandListViewEventData): void {
+  onLoadOnDemand(args: LoadOnDemandListViewEventData): void {
     const listView: RadListView = args.object;
 
-    if (this.isLoadMoreEnabled && this.hasMoreItems) {
-      this.loadMore.emit({
-        complete: (disableLoadMore: boolean) => {
-          this.hasMoreItems = !disableLoadMore;
-          listView.notifyLoadOnDemandFinished(!this.hasMoreItems);
-          args.returnValue = this.hasMoreItems;
+    if (this.isLoadOnDemandEnabled) {
+      this.loadOnDemand.emit({
+        complete: (disableLoadOnDemand: boolean) => {
+          this.isLoadOnDemandEnabled = !disableLoadOnDemand;
+          listView.notifyLoadOnDemandFinished(disableLoadOnDemand);
+          args.returnValue = this.isLoadOnDemandEnabled;
         },
       });
     } else {

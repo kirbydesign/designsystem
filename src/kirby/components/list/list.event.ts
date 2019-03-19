@@ -1,3 +1,3 @@
-export interface KirbyLoadMoreEvent {
-  complete: (disableLoadMore?: boolean) => void;
+export interface LoadOnDemandEvent {
+  complete: (disableLoadOnDemand?: boolean) => void;
 }

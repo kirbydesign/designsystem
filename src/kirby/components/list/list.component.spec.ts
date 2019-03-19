@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { KirbyLoadMoreEvent } from './list.event';
+import { LoadOnDemandEvent } from './list.event';
 import { GroupByPipe } from './pipes/group-by.pipe';
 import { ListComponent } from './list.component';
 import { SpinnerComponent } from '~/kirby';
@@ -85,108 +85,108 @@ describe('ListComponent', () => {
 
   describe('function: ngOnInit', () => {
     it('should enable load more, if there is a subscriber to the loadMore event emitter', () => {
-      component.loadMore.subscribe((loadMoreEvent: KirbyLoadMoreEvent) => {});
+      component.loadOnDemand.subscribe((loadMoreEvent: LoadOnDemandEvent) => {});
 
       component.ngOnInit();
 
-      expect(component.isLoadMoreEnabled).toBeTruthy();
+      expect(component.isLoadOnDemandEnabled).toBeTruthy();
     });
 
     it('should disable load more, if there is no subscriber to the loadMore event emitter', () => {
       component.ngOnInit();
 
-      expect(component.isLoadMoreEnabled).toBeFalsy();
+      expect(component.isLoadOnDemandEnabled).toBeFalsy();
     });
   });
 
   describe('function: onLoadMore', () => {
     let loadMoreEmitSpy: jasmine.Spy;
     beforeEach(() => {
-      loadMoreEmitSpy = spyOn(component.loadMore, 'emit').and.callThrough();
-      component.loadMore.subscribe((loadMoreEvent: KirbyLoadMoreEvent) => {});
+      loadMoreEmitSpy = spyOn(component.loadOnDemand, 'emit').and.callThrough();
+      component.loadOnDemand.subscribe((loadMoreEvent: LoadOnDemandEvent) => {});
       component.ngOnInit();
     });
 
     it('should emit load more event, if there are more items and is not loading', () => {
-      component.hasMoreItems = true;
+      component.isLoadOnDemandEnabled = true;
       component.isLoading = false;
 
-      component.onLoadMore();
+      component.onLoadOnDemand();
 
-      expect(component.loadMore.emit).toHaveBeenCalledTimes(1);
+      expect(component.loadOnDemand.emit).toHaveBeenCalledTimes(1);
     });
 
     it('should not emit load more event, if load more is not enabled', () => {
-      component.isLoadMoreEnabled = false;
+      component.isLoadOnDemandEnabled = false;
 
-      component.onLoadMore();
+      component.onLoadOnDemand();
 
-      expect(component.loadMore.emit).not.toHaveBeenCalled();
+      expect(component.loadOnDemand.emit).not.toHaveBeenCalled();
     });
 
     it('should not emit load more event, if is loading', () => {
       component.isLoading = true;
 
-      component.onLoadMore();
+      component.onLoadOnDemand();
 
-      expect(component.loadMore.emit).not.toHaveBeenCalled();
+      expect(component.loadOnDemand.emit).not.toHaveBeenCalled();
     });
 
     it('should not emit load more event, if there are no more items and is loading', () => {
       component.isLoading = true;
-      component.hasMoreItems = false;
+      component.isLoadOnDemandEnabled = false;
 
-      component.onLoadMore();
+      component.onLoadOnDemand();
 
-      expect(component.loadMore.emit).not.toHaveBeenCalled();
+      expect(component.loadOnDemand.emit).not.toHaveBeenCalled();
     });
 
     it('should not emit load more event, if there are no more items', () => {
-      component.hasMoreItems = false;
+      component.isLoadOnDemandEnabled = false;
 
-      component.onLoadMore();
+      component.onLoadOnDemand();
 
-      expect(component.loadMore.emit).not.toHaveBeenCalled();
+      expect(component.loadOnDemand.emit).not.toHaveBeenCalled();
     });
 
     it('should start loading, when before emitting an load more event', () => {
       component.isLoading = false;
-      component.hasMoreItems = true;
+      component.isLoadOnDemandEnabled = true;
 
-      component.onLoadMore();
+      component.onLoadOnDemand();
 
       expect(component.isLoading).toBeTruthy();
     });
 
     it('should end loading, if the load more events complete callback is called', () => {
       component.items = [];
-      loadMoreEmitSpy.and.callFake((event: KirbyLoadMoreEvent) => {
+      loadMoreEmitSpy.and.callFake((event: LoadOnDemandEvent) => {
         event.complete();
       });
 
-      component.onLoadMore();
+      component.onLoadOnDemand();
 
       expect(component.isLoading).toBeFalsy();
     });
 
     it('should be marked as having no more items, if the load more events complete callback is called with true', () => {
-      loadMoreEmitSpy.and.callFake((event: KirbyLoadMoreEvent) => {
+      loadMoreEmitSpy.and.callFake((event: LoadOnDemandEvent) => {
         event.complete(true);
       });
 
-      component.onLoadMore();
+      component.onLoadOnDemand();
 
-      expect(component.hasMoreItems).toBeFalsy();
+      expect(component.isLoadOnDemandEnabled).toBeFalsy();
     });
 
     it('should be marked as having more items, if the load more events complete callback is called with false', () => {
-      loadMoreEmitSpy.and.callFake((event: KirbyLoadMoreEvent) => {
+      loadMoreEmitSpy.and.callFake((event: LoadOnDemandEvent) => {
         event.complete(false);
       });
 
-      component.onLoadMore();
+      component.onLoadOnDemand();
 
-      expect(component.hasMoreItems).toBeTruthy();
+      expect(component.isLoadOnDemandEnabled).toBeTruthy();
     });
   });
 });

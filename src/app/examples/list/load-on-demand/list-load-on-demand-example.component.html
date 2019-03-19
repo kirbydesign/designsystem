@@ -17,7 +17,7 @@
 -->
 <kirby-list 
   [items]="items"
-  (loadMore)="onLoadMore($event)"
+  (loadOnDemand)="onLoadDemand($event)"
   [noMoreItemsText]="'No more items'">
   <kirby-list-cell
     *kirbyListCell="let account"

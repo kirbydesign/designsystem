@@ -16,7 +16,7 @@ import {
   ListSectionHeaderDirective,
   ListCellDirective,
 } from './list.directive';
-import { KirbyLoadMoreEvent } from './list.event';
+import { LoadOnDemandEvent } from './list.event';
 
 @Component({
   selector: 'kirby-list',
@@ -27,7 +27,8 @@ export class ListComponent implements OnInit {
   @Input() items: any[];
   @Input() getSectionName?: (item: any) => string;
   @Input() noMoreItemsText: string;
-  @Output() loadMore = new EventEmitter<KirbyLoadMoreEvent>();
+
+  @Output() loadOnDemand = new EventEmitter<LoadOnDemandEvent>();
   @Output() itemSelect = new EventEmitter<any>();
 
   // The first element that matches ListItemDirective. As a structural directive it unfolds into a template. This is a reference to that.
@@ -38,9 +39,8 @@ export class ListComponent implements OnInit {
 
   isSectionsEnabled: boolean;
   isSelectable: boolean;
-  hasMoreItems: boolean = true;
   isLoading: boolean;
-  isLoadMoreEnabled: boolean;
+  isLoadOnDemandEnabled: boolean;
 
   ngOnInit(): void {
     if (this.getSectionName) {
@@ -50,24 +50,22 @@ export class ListComponent implements OnInit {
       console.warn('kirbyListItem is deprecated and will be removed in future versions of Kirby');
     }
     this.isSelectable = this.itemSelect.observers.length > 0;
-    this.isLoadMoreEnabled = this.loadMore.observers.length > 0;
+    this.isLoadOnDemandEnabled = this.loadOnDemand.observers.length > 0;
   }
 
   onItemClick(row: any): void {
     this.itemSelect.emit(row);
   }
 
-  onLoadMore(): void {
-    if (this.isLoadMoreEnabled) {
-      if (this.hasMoreItems && !this.isLoading) {
-        this.isLoading = true;
-        this.loadMore.emit({
-          complete: (disableLoadMore: boolean) => {
-            this.hasMoreItems = !disableLoadMore;
-            this.isLoading = false;
-          },
-        });
-      }
+  onLoadOnDemand(): void {
+    if (this.isLoadOnDemandEnabled && !this.isLoading) {
+      this.isLoading = true;
+      this.loadOnDemand.emit({
+        complete: (disableLoadOnDamand: boolean) => {
+          this.isLoadOnDemandEnabled = !disableLoadOnDamand;
+          this.isLoading = false;
+        },
+      });
     }
   }
 }

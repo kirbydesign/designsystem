@@ -3,7 +3,7 @@
   <RadListView
     row="0"
     loadOnDemandMode="Auto"
-    (loadMoreDataRequested)="onLoadMore($event)"
+    (loadMoreDataRequested)="onLoadOnDemand($event)"
     [groupingFunction]="getSectionName"
     [items]="items"
   >
@@ -41,7 +41,7 @@
     </ng-template>
 
     <!-- FOOTER -->
-    <ng-template tkListViewFooter *ngIf="!hasMoreItems && noMoreItemsText">
+    <ng-template tkListViewFooter *ngIf="!isLoadOnDemandEnabled && noMoreItemsText">
       <Label class="lastRow" text="{{noMoreItemsText}}"></Label>
     </ng-template>
 
