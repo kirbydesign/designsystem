@@ -1,49 +1,47 @@
 
   <p>
     The font sizes can be set by either using the font classes, e.g. <code>kirby-text-large</code>, or by using the
-    right tags like <code>H1, H2, H3</code> etc.
+    right tags like <code>h1, h2 & h3</code>
   </p>
   <p>Font can also be set with the font-size function directly on your own classes, e.g:</p>
 <pre>
   .my-own-class {{'{'}}
-    font-size: font-size("xxl");
+    font-size: font-size("m");
     ...
   {{'}'}}
 </pre>
 <div class="fonts">
   <div class="">
-    <h1 class="fonts__header-1 kirby-text-large">H1 - Heading 1</h1>
+    <h1 class="fonts__header-1 kirby-text-large">h1 - Heading 1</h1>
     <div class="fonts__info-box">
       <code class="fonts__pre">font-size: font-size("l");</code>
       <code class="fonts__pre">font-weight: font-weight("bold");</code>
       <code class="fonts__pre fonts__pre--highlight">CLASS: .h1 or .kirby-text-large</code>
     </div>
 
-    <h2 class="fonts__header-2 kirby-text-medium">H2 - Heading 2</h2>
+    <h2 class="fonts__header-2 kirby-text-medium">h2 - Heading 2</h2>
     <div class="fonts__info-box">
       <code class="fonts__pre">font-size: font-size("m");</code>
       <code class="fonts__pre">font-weight: font-weight("bold");</code>
       <code class="fonts__pre fonts__pre--highlight">CLASS: kirby-text-medium</code>
     </div>
 
-    <h3 class="fonts__header-3 kirby-text-normal-bold">H3 - Heading 3</h3>
+    <h3 class="fonts__header-3 kirby-text-normal-bold">h3 - Heading 3</h3>
     <div class="fonts__info-box">
       <code class="fonts__pre">font-size: font-size("n");</code>
       <code class="fonts__pre">font-weight: font-weight("bold");</code>
       <code class="fonts__pre fonts__pre--highlight">CLASS: kirby-text-normal-bold</code>
     </div>
 
-    <p class="fonts__body kirby-text-normal">P - Paragraph</p>
+    <p class="fonts__body kirby-text-normal">p - Paragraph (Default body font)</p>
     <div class="fonts__info-box">
-      <code class="fonts__pre">font-size: font-size("m");</code>
-      <code class="fonts__pre">font-weight: font-weight("normal");</code>
+      <code class="fonts__pre">font-size: font-size("n");</code>
       <code class="fonts__pre fonts__pre--highlight">CLASS: kirby-text-normal</code>
     </div>
 
     <p class="fonts__body-small kirby-text-small">Small text</p>
     <div class="fonts__info-box">
       <code class="fonts__pre">font-size: font-size("s");</code>
-      <code class="fonts__pre">font-weight: font-weight("normal");</code>
       <code class="fonts__pre fonts__pre--highlight">CLASS: .sm or kirby-text-small</code>
     </div>
 
@@ -57,14 +55,12 @@
     <p class="fonts__body-xsmall kirby-text-xsmall">x-small text</p>
     <div class="fonts__info-box">
       <code class="fonts__pre">font-size: font-size("xs");</code>
-      <code class="fonts__pre">font-weight: font-weight("normal");</code>
       <code class="fonts__pre fonts__pre--highlight">CLASS: .xs or kirby-text-xsmall</code>
     </div>
 
     <p class="fonts__body-xxsmall kirby-text-xxsmall">xx-small text</p>
     <div class="fonts__info-box">
       <code class="fonts__pre">font-size: font-size("xxs);</code>
-      <code class="fonts__pre">font-weight: font-weight("normal");</code>
       <code class="fonts__pre fonts__pre--highlight">CLASS: .xxs or kirby-text-xxsmall</code>
     </div>
 

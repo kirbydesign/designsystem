@@ -6,41 +6,38 @@ body {
   color: get-color("grey-9");
 }
 
-.kirby-typography {
-  h1, .h1,
-  h2, .h2,
-  h3, .h3,
-  h4, .h4,
-  p, .p {
-    font-weight: font-weight("normal");
-    margin: 0;
-    margin-top: size("m");
-  }
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+p, .p {
+  margin: 0;
+  margin-bottom: size("s");
 }
 
-.kirby-typography h1,
-.kirby-typography .h1,
-.kirby-text-l {
+h1,
+.h1,
+.kirby-text-large {
   font-size: font-size("l");
   font-weight: font-weight("bold");
 }
 
-.kirby-typography h2,
-.kirby-typography .h2,
+h2,
+.h2,
 .kirby-text-medium {
   font-size: font-size("m");
   font-weight: font-weight("bold");
 }
 
-.kirby-typography h3,
-.kirby-typography .h3,
-.kirby-text-body-bold {
+h3,
+.h3,
+.kirby-text-normal-bold {
   font-size: font-size("n");
   font-weight: font-weight("bold");
 }
 
-.kirby-typography p,
-.kirby-text-body {
+.p,
+.kirby-text-normal {
   font-size: font-size("n");
 }
 
