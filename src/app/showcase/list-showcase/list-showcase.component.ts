@@ -7,7 +7,7 @@ declare var require: any;
   styleUrls: ['./list-showcase.component.scss'],
 })
 export class ListShowcaseComponent implements OnInit {
-  exampleHtml: string = require('../../examples/list-example/list-example.component.html');
+  exampleHtml: string = require('../../examples/list/list-example.component.html');
 
   constructor() {}
 

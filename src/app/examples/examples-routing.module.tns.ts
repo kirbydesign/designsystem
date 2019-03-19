@@ -7,10 +7,10 @@ import { routes } from './examples.routes';
 import { ExamplesModule } from './examples.module';
 import { NativeScriptDoughnutChartExampleComponent } from './nativescript-only/doughnut-chart-example/doughnut-chart-example.component.tns-only';
 import { NativeScriptLineChartExampleComponent } from './nativescript-only/line-chart-example/line-chart-example.component.tns-only';
-import { ListSectionExampleComponent } from './list-example/tns-list-examples/list-section-example/list-section-example.component.tns';
-import { ListCustomCellLinesExampleComponent } from './list-example/tns-list-examples/list-custom-cell-lines-example/list-custom-cell-lines-example.component.tns';
-import { ListItemExampleComponent } from './list-example/tns-list-examples/list-item-example/list-item-example.component.tns';
-import { ListLoadMoreExampleComponent } from './list-example/tns-list-examples/list-load-more-example/list-load-more-example.component.tns';
+import { ListSectionExampleComponent } from './list/tns-list-examples/list-section-example/list-section-example.component.tns';
+import { ListCustomCellLinesExampleComponent } from './list/tns-list-examples/list-custom-cell-lines-example/list-custom-cell-lines-example.component.tns';
+import { ListItemExampleComponent } from './list/tns-list-examples/list-item-example/list-item-example.component.tns';
+import { ListLoadOnDemandExampleComponent } from './list/tns-list-examples/list-load-on-demand-example/list-load-on-demand-example.component.tns';
 
 const nativeScriptRoutes = [
   ...routes,
@@ -43,8 +43,8 @@ const nativeScriptRoutes = [
         component: ListItemExampleComponent,
       },
       {
-        path: 'loadmore',
-        component: ListLoadMoreExampleComponent,
+        path: 'loadondemand',
+        component: ListLoadOnDemandExampleComponent,
       },
     ],
   },
