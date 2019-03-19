@@ -71,12 +71,12 @@ describe('ListComponent', () => {
     });
   });
 
-  describe('function: onItemClick', () => {
-    it('should emit the clicked item', () => {
+  describe('function: onItemSelect', () => {
+    it('should emit the selected item', () => {
       spyOn(component.itemSelect, 'emit');
       const itemToBeSelected = { value: 'this is a dummy item' };
 
-      component.onItemClick(itemToBeSelected);
+      component.onItemSelect(itemToBeSelected);
 
       expect(component.itemSelect.emit).toHaveBeenCalledTimes(1);
       expect(component.itemSelect.emit).toHaveBeenCalledWith(itemToBeSelected);
@@ -96,97 +96,6 @@ describe('ListComponent', () => {
       component.ngOnInit();
 
       expect(component.isLoadOnDemandEnabled).toBeFalsy();
-    });
-  });
-
-  describe('function: onLoadMore', () => {
-    let loadMoreEmitSpy: jasmine.Spy;
-    beforeEach(() => {
-      loadMoreEmitSpy = spyOn(component.loadOnDemand, 'emit').and.callThrough();
-      component.loadOnDemand.subscribe((loadMoreEvent: LoadOnDemandEvent) => {});
-      component.ngOnInit();
-    });
-
-    it('should emit load more event, if there are more items and is not loading', () => {
-      component.isLoadOnDemandEnabled = true;
-      component.isLoading = false;
-
-      component.onLoadOnDemand();
-
-      expect(component.loadOnDemand.emit).toHaveBeenCalledTimes(1);
-    });
-
-    it('should not emit load more event, if load more is not enabled', () => {
-      component.isLoadOnDemandEnabled = false;
-
-      component.onLoadOnDemand();
-
-      expect(component.loadOnDemand.emit).not.toHaveBeenCalled();
-    });
-
-    it('should not emit load more event, if is loading', () => {
-      component.isLoading = true;
-
-      component.onLoadOnDemand();
-
-      expect(component.loadOnDemand.emit).not.toHaveBeenCalled();
-    });
-
-    it('should not emit load more event, if there are no more items and is loading', () => {
-      component.isLoading = true;
-      component.isLoadOnDemandEnabled = false;
-
-      component.onLoadOnDemand();
-
-      expect(component.loadOnDemand.emit).not.toHaveBeenCalled();
-    });
-
-    it('should not emit load more event, if there are no more items', () => {
-      component.isLoadOnDemandEnabled = false;
-
-      component.onLoadOnDemand();
-
-      expect(component.loadOnDemand.emit).not.toHaveBeenCalled();
-    });
-
-    it('should start loading, when before emitting an load more event', () => {
-      component.isLoading = false;
-      component.isLoadOnDemandEnabled = true;
-
-      component.onLoadOnDemand();
-
-      expect(component.isLoading).toBeTruthy();
-    });
-
-    it('should end loading, if the load more events complete callback is called', () => {
-      component.items = [];
-      loadMoreEmitSpy.and.callFake((event: LoadOnDemandEvent) => {
-        event.complete();
-      });
-
-      component.onLoadOnDemand();
-
-      expect(component.isLoading).toBeFalsy();
-    });
-
-    it('should be marked as having no more items, if the load more events complete callback is called with true', () => {
-      loadMoreEmitSpy.and.callFake((event: LoadOnDemandEvent) => {
-        event.complete(true);
-      });
-
-      component.onLoadOnDemand();
-
-      expect(component.isLoadOnDemandEnabled).toBeFalsy();
-    });
-
-    it('should be marked as having more items, if the load more events complete callback is called with false', () => {
-      loadMoreEmitSpy.and.callFake((event: LoadOnDemandEvent) => {
-        event.complete(false);
-      });
-
-      component.onLoadOnDemand();
-
-      expect(component.isLoadOnDemandEnabled).toBeTruthy();
     });
   });
 });

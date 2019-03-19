@@ -8,6 +8,8 @@ import {
   Output,
   QueryList,
   TemplateRef,
+  ElementRef,
+  ViewChild,
 } from '@angular/core';
 
 import {
@@ -16,12 +18,14 @@ import {
   ListSectionHeaderDirective,
   ListCellDirective,
 } from './list.directive';
-import { LoadOnDemandEvent } from './list.event';
+import { LoadOnDemandEvent, LoadOnDemandEventData } from './list.event';
+import { ListHelper } from './helpers/list-helper';
 
 @Component({
   selector: 'kirby-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
+  providers: [ListHelper],
 })
 export class ListComponent implements OnInit {
   @Input() items: any[];
@@ -42,6 +46,8 @@ export class ListComponent implements OnInit {
   isLoading: boolean;
   isLoadOnDemandEnabled: boolean;
 
+  constructor(private listHelper: ListHelper) {}
+
   ngOnInit(): void {
     if (this.getSectionName) {
       this.isSectionsEnabled = true;
@@ -53,19 +59,11 @@ export class ListComponent implements OnInit {
     this.isLoadOnDemandEnabled = this.loadOnDemand.observers.length > 0;
   }
 
-  onItemClick(row: any): void {
-    this.itemSelect.emit(row);
+  onItemSelect(selectedItem: any): void {
+    this.itemSelect.emit(selectedItem);
   }
 
-  onLoadOnDemand(): void {
-    if (this.isLoadOnDemandEnabled && !this.isLoading) {
-      this.isLoading = true;
-      this.loadOnDemand.emit({
-        complete: (disableLoadOnDamand: boolean) => {
-          this.isLoadOnDemandEnabled = !disableLoadOnDamand;
-          this.isLoading = false;
-        },
-      });
-    }
+  onLoadOnDemand(args: LoadOnDemandEventData): void {
+    this.listHelper.onLoadOnDemand(this, args);
   }
 }
