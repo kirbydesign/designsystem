@@ -9,7 +9,8 @@
 // Import common styles
 @import "~prismjs/themes/prism";
 @import "./kirby/scss/web-imports";
-@import "./kirby/scss/themes/common-themes";
+@import "./kirby/scss/themes/colors";
+@import "./kirby/scss/base/typography";
 
 @font-face {
   font-family: "Effra";
@@ -59,7 +60,7 @@ body, html {
 }
 
 :root {
-  @each $color, $color-name in map-get($themes, 'default') {
+  @each $color, $color-name in map-get($themes, $theme) {
     --#{$color}: #{$color-name};
   }
 }
