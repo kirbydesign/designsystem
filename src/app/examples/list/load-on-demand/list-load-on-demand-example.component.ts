@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { of } from 'rxjs';
 
 import { BaseListComponent } from '../base-list.component';
 import { KirbyLoadMoreEvent } from './../../../../kirby/components/list/list.event';
@@ -20,10 +21,10 @@ export class ListLoadOnDemandExampleComponent extends BaseListComponent {
     // We end the load more event after 20 items, by sending null to the kirby list.
     if (this.itemCount <= 20) {
       // lets make a delay to simulate a HTTP call.
-      new Promise((resolve) => setTimeout(resolve, 2000)).then(() => {
+      setTimeout(() => {
         this.items.push(...this.generateItems());
         loadMoreEvent.complete();
-      });
+      }, 2000);
     } else {
       loadMoreEvent.complete(true);
     }
