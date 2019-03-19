@@ -63,7 +63,7 @@ export class ListComponent implements OnInit {
     this.itemSelect.emit(selectedItem);
   }
 
-  onLoadOnDemand(args: LoadOnDemandEventData): void {
+  onLoadOnDemand(args?: LoadOnDemandEventData): void {
     this.listHelper.onLoadOnDemand(this, args);
   }
 }
