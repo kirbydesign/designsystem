@@ -47,7 +47,8 @@ kirby-list-cell supports the attributes:
 <kirby-list
   [items]="myItems"
   (itemSelect)="onItemSelect($event)"
-  [getSectionName]="getSectionName">
+  [getSectionName]="getSectionName"
+  shape="rounded">
   <!-- kirby-list-header is not supported in conjunction with *kirbyListSectionHeader due to a bug in RadListView on iOS -->
   <kirby-list-section-header
     *kirbyListSectionHeader="let section"

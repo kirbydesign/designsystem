@@ -8,7 +8,6 @@ ul {
 
   li {
     background-color: var(--kirby-surface);
-    border-bottom: 1px solid var(--kirby-background);
     padding: size('m');
     display: flex;
     flex-direction: row;
@@ -17,19 +16,33 @@ ul {
     p {
       margin: 0;
     }
-    
-    
 
     &.row{
-      &:first-of-type {
-        border-top: 1px solid var(--kirby-background);
+      border-color: var(--kirby-background);
+      border-style: solid;
+      border-width: 0 0 1px 0;
+
+      &.rounded {
+        border-width: 0 1px 1px 1px;
+
+        &.top {
+          border-top-width: 1px;
+          border-radius: $border-radius $border-radius 0 0;
+        }
+
+        &.bottom {
+          border-radius: 0 0 $border-radius $border-radius;
+        }
       }
     }
 
     &.section-header {
       background-color: transparent;
       border: none;
-      border-bottom: 1px solid var(--kirby-background);
+
+      &~.row:not(.rounded) {
+        border-bottom: 1px solid var(--kirby-background);
+      }
 
       &:hover {
         background-color: transparent;
