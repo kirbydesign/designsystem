@@ -5,9 +5,12 @@
   justify-content: space-between;
   flex-direction: row;
 
-  &.divider {
+  &.lines {
     border-color: get-color('kirby-background');
     border-width: 0 0 1 0;
+    
+    &.bottom {
+      border-width: 0 0 0 0;
+    }
   }
-
 }

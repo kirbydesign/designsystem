@@ -17,7 +17,7 @@ ul {
       margin: 0;
     }
 
-    &.divider:not(:last-child) {
+    &.lines:not(:last-child) {
       border-bottom: 1px solid var(--kirby-background);
     }
 

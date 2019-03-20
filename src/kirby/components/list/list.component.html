@@ -16,7 +16,7 @@
         >
         </ng-container>
       </li>
-      <li class="row" [ngClass]="{'selectable': isSelectable, 'divider': lines}" *ngFor="let item of section.items" (click)="onItemClick(item)" tabindex="0" [attr.role]="isSelectable ? 'button' : null">
+      <li class="row" [ngClass]="{'selectable': isSelectable, 'lines': lines}" *ngFor="let item of section.items" (click)="onItemClick(item)" tabindex="0" [attr.role]="isSelectable ? 'button' : null">
         <!-- TODO remove container when the kirbyListItem is no longer in use -->
         <ng-container
           *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }"
@@ -34,7 +34,7 @@
   </ng-container>
 
   <ng-template #normalList>
-    <li class="row" [ngClass]="{'selectable': isSelectable, 'divider': lines}" *ngFor="let item of items" (click)="onItemClick(item)" tabindex="0" [attr.role]="isSelectable ? 'button' : null">
+    <li class="row" [ngClass]="{'selectable': isSelectable, 'lines': lines}" *ngFor="let item of items" (click)="onItemClick(item)" tabindex="0" [attr.role]="isSelectable ? 'button' : null">
       <!-- TODO remove container when the kirbyListItem is no longer in use -->
       <ng-container
         *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }"

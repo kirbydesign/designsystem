@@ -97,7 +97,7 @@ describe('ListComponent', () => {
       component = fixture.componentInstance;
     });
 
-    it('should set class "divider" on all li elements when lines is true', () => {
+    it('should set class "lines" on all li elements when lines is true', () => {
       component.items = [1, 2, 3];
       component.lines = true;
 
@@ -107,11 +107,11 @@ describe('ListComponent', () => {
       const liElements = rootElement.querySelectorAll('li');
 
       liElements.forEach((liElement) => {
-        expect(liElement.getAttribute('class')).toContain('divider');
+        expect(liElement.getAttribute('class')).toContain('lines');
       });
     });
 
-    it('should not set class "divider" on any li elements when lines is false', () => {
+    it('should not set class "lines" on any li elements when lines is false', () => {
       component.items = [1, 2, 3];
       component.lines = false;
 
@@ -121,7 +121,7 @@ describe('ListComponent', () => {
       const liElements = rootElement.querySelectorAll('li');
 
       liElements.forEach((liElement) => {
-        expect(liElement.getAttribute('class')).not.toContain('divider');
+        expect(liElement.getAttribute('class')).not.toContain('lines');
       });
     });
   });
