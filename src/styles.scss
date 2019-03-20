@@ -47,7 +47,7 @@
 body, html {
   margin: 0;
   padding: 0;
-  background-color: #F2F2F2;
+  background-color: white;
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
 }
@@ -58,7 +58,7 @@ body, html {
 }
 
 :root {
-  @each $color, $color-name in map-get($themes, $theme) {
+  @each $color, $color-name in $colors {
     --#{$color}: #{$color-name};
   }
 }

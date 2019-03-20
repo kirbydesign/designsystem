@@ -46,7 +46,7 @@
   @return _get-map-prop($font-weight, $key);
 }
 
-@function get-color($variant, $map: map-get($themes, $theme)) {
+@function get-color($variant, $map: $colors) {
   $value: _get-map-prop($map, $variant);
   @if ($native == true) {
     @return $value;

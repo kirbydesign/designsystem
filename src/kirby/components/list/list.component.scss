@@ -7,7 +7,7 @@ ul {
   margin-block-end: 0;
 
   li {
-    background-color: var(--kirby-surface);
+    background-color: get-color('kirby-white');
     border-bottom: 1px solid var(--kirby-background);
     padding: size('m');
     display: flex;
