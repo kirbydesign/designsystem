@@ -8,7 +8,7 @@ import { ListExampleComponent } from './list-example/list-example.component';
 import { ChartExampleComponent } from './chart-example/chart-example.component';
 import { FontsExampleComponent } from './fonts-example/fonts-example.component';
 import { SpinnerExampleComponent } from './spinner-example/spinner-example.component';
-
+import { SegmentExampleComponent } from './segment-example/segment-example.component';
 export const routes: Routes = [
   {
     path: '',
@@ -45,5 +45,9 @@ export const routes: Routes = [
   {
     path: 'spinner',
     component: SpinnerExampleComponent,
+  },
+  {
+    path: 'segment',
+    component: SegmentExampleComponent,
   },
 ];
