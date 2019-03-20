@@ -23,6 +23,10 @@ The Kirby Cookbook, containing samples, status of components etc. can be accesse
 ## Table of Contents
 
 * [Installation](#installation)
+  * [Sass](#sass)
+  * [Typescript Configuration](#typescript-configuration)
+  * [NativeScript Webpack Configuration](#nativescript-webpack-configuration)
+  * [Ionic](#ionic)
 * [NativeScript-Only Components](#nativescript-only-components)
 * [Polyfills](#polyfills)
 * [Chart Components](#chart-components)
@@ -33,6 +37,8 @@ Install through NPM:
 ```bash
 npm install @kirbydesign/designsystem
 ```
+
+### Sass
 
 Include the Kirby Sass variables in your app:
 
@@ -46,6 +52,7 @@ Include the Kirby Sass variables in your app:
   ```
 
 
+### Typescript Configuration
 
 **Please note:** To enable typescript compilation of the package in your project, you need to add the following to your `tsconfig.json`:
 
@@ -57,6 +64,7 @@ Include the Kirby Sass variables in your app:
   ],
 ...
 ```
+### NativeScript Webpack Configuration
 
 For Webpack to resolve `.tns` files also add `["designsystem"]` to the `explicitResolve` parameter for `nsWebpack.getResolver` to your `webpack.config.js`:
 
@@ -67,6 +75,32 @@ For Webpack to resolve `.tns` files also add `["designsystem"]` to the `explicit
         ...
     });
 ...
+```
+
+### Ionic
+The Kirby web components are build on top of [Ionic](https://ionicframework.com/docs/components). The [`@ionic/angular`](https://www.npmjs.com/package/@ionic/angular) package should automatically be installed as a dependency of Kirby. If not, please execute the following:
+```bash
+npm install @ionic/angular
+```
+#### Ionicons
+Ionic comes bundled with [Ionicons](https://ionicons.com/). Make sure the `.svg` files used by Ionic are copied to your output folder by adding the following to `build > options > assets` in `angular.json`:
+```json
+{
+  ...
+  "build": {
+    "options": {
+      "assets": [
+        ...
+        {
+          "glob": "**/*.svg",
+          "input": "node_modules/ionicons/dist/ionicons/svg",
+          "output": "./svg"
+        }
+        ...
+      ],
+    }
+  }
+}
 ```
 
 ## NativeScript-Only Components
