@@ -26,6 +26,9 @@
   }
 }
 
+h4 {
+  margin-top: size("s");
+}
 
 .showcase-cta-box {
   display: flex;
@@ -66,7 +69,6 @@
   border-spacing: 0;
   border-collapse: collapse;
   width: 100%;
-  margin-top: size("m");
   thead {
     background-color: get-color('kirby-grey-1');
   }

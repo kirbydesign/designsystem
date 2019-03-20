@@ -4,9 +4,10 @@
     <div class="kirby-text-large">Example use:</div>
     <pre>
 .color-sample-example {{'{'}}
-  color: var(--{{selectedOnColor}});
-  background-color: var(--{{selectedColor}});
+  color: get-color("{{selectedOnColor}}");
+  background-color: get-color("{{selectedColor}}");
 {{'}'}}</pre>
+    <p>The get-color function will output CSS variables for web and output the color values directly for Nativescript.</p>
   </div>
   <div class="color-sample-example {{selectedColor}}">
     <div class="color-sample-on-text {{selectedOnColor}}">

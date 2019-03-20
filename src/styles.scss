@@ -47,7 +47,7 @@
 body, html {
   margin: 0;
   padding: 0;
-  background-color: white;
+  background-color: get-color("kirby-white");
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
 }
