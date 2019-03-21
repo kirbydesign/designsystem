@@ -1,0 +1,37 @@
+@import "../../scss/web-imports";
+
+:host {
+  font-size: font-size("xxs");
+  border-radius: size("xs");
+  background-color: var(--kirby-badge-bg, #{get-color('kirby-danger', $kirby-colors, true)});
+  color: var(--kirby-badge-bg, #{get-color('kirby-white', $kirby-colors, true)});;
+  height: size("s");
+  min-width: size("s");
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: size("xxs");
+  padding-right: size("xxs");
+  // -webkit-font-smoothing: none;
+  white-space: nowrap;
+
+  &[colortype='primary'] {
+    color: get-color('kirby-primary-contrast');
+    background-color: get-color('kirby-primary');
+  }
+
+  &[colortype='secondary'] {
+    color: get-color('kirby-secondary-contrast');
+    background-color: get-color('kirby-secondary');
+  }
+
+  &[colortype='danger'] {
+    color: get-color('kirby-white');
+    background-color: get-color('kirby-danger');
+  }
+
+  &[colortype='alert'] {
+    color: get-color('kirby-alert-contrast');
+    background-color: get-color('kirby-alert');
+  }
+}
