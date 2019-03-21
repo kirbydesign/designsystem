@@ -52,6 +52,3 @@ src/kirby/polyfills
 
 # ts-lint
 /tools/tslint-rules/dist
-
-# Custom
-**/*.css

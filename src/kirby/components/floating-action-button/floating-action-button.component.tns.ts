@@ -25,7 +25,7 @@ declare const android: any;
 // TODO: add documentation
 // TODO: create pull-request
 export class FloatingActionButtonComponent extends ContentView {
-    @Input() iconSrc?: string = '~/assets/icons/add/add.png';
+    @Input() iconSrc?: string = '~/assets/icons/add/add@3x.png';
     @Input() hasShadow?: boolean = true;
     view: View;
 
@@ -51,18 +51,23 @@ export class FloatingActionButtonComponent extends ContentView {
             return;
         }
 
+        // box-shadow: 0 10px 20px -10px rgba(0, 77, 50, 0.3);
         if (this.view.android) {
             let nativeView = this.view.android;
             var shape = new android.graphics.drawable.GradientDrawable();
             shape.setShape(android.graphics.drawable.GradientDrawable.OVAL);
-            shape.setColor(android.graphics.Color.parseColor('#30bcff'));
+            // Shadow color requested by UX/UI designer
+            // shape.setColor(android.graphics.Color.parseColor('#004d32'));
+            // shape.setAlpha(255);
+            // Shadow color that prevents darker borders around the shape
+            shape.setColor(android.graphics.Color.parseColor('#00ffa4'));
             nativeView.setBackgroundDrawable(shape);
-            nativeView.setElevation(ScssHelper.ELEVATION_IMAGE);
+            nativeView.setElevation(15);
         } else if (this.view.ios) {
             let nativeView = this.view.ios;
-            nativeView.layer.shadowColor = new Color('#888888').ios.CGColor;
+            nativeView.layer.shadowColor = new Color('#004d32').ios.CGColor;
             nativeView.layer.shadowOffset = CGSizeMake(0, 2.0);
-            nativeView.layer.shadowOpacity = 0.5;
+            nativeView.layer.shadowOpacity = 0.3;
             nativeView.layer.shadowRadius = 5.0;
         }
     }
