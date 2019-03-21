@@ -58,7 +58,7 @@ body, html {
 }
 
 :root {
-  @each $color, $color-name in $colors {
+  @each $color, $color-name in $kirby-colors {
     --#{$color}: #{$color-name};
   }
 }

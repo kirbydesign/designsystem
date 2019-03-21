@@ -32,7 +32,7 @@ export class ColorsShowcaseComponent implements OnInit {
 
   getThemeColors() {
     const colors = [];
-    const defaultColors = style.global['$colors'].value;
+    const defaultColors = style.global['$kirby-colors'].value;
     for (const [value, type] of Object.entries(defaultColors)) {
       const sassColor = <SassColor>type;
       sassColor.name = value;
