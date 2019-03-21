@@ -17,7 +17,7 @@ export class ColorsShowcaseComponent implements OnInit {
   colorPalette = [];
 
   constructor() {
-    this.colorPalette = this.getThemeColors('default');
+    this.colorPalette = this.getThemeColors('cookbook');
   }
 
   ngOnInit() {}
