@@ -17,4 +17,8 @@ export class FloatingActionButtonExampleComponent implements OnInit {
     console.log('tapped on a floating action button');
   }
 
+  public onClick(args: any) {
+    console.log('clicked on a floating action button');
+  }
+
 }

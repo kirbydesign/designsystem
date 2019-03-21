@@ -1,0 +1,14 @@
+// Ionic fab can be customized by using the css properties listed in the CSS Custom Properties section of the below docs page:
+// https://ionicframework.com/docs/api/fab-button
+
+.fab {
+    --background: #00e89a; // TODO: should be replaced with  var(--focus); once it's available
+    --box-shadow: 0 10px 20px -10px rgba(0, 77, 50, 0.3); // TODO: figure out which kirby color this is...
+    width: 64px;
+    height: 64px;
+
+    img {
+        width: 24px;
+        height: 24px;
+    }
+}
