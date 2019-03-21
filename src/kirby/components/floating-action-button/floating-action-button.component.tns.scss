@@ -1,0 +1,26 @@
+@import '../../scss/native-imports';
+
+.fab {
+    background-color: #00e89a;
+    border-radius: 32;
+    width: 64;
+    height: 64;
+    text-align: center;
+    vertical-align: middle;
+
+    Image {
+        width: 24;
+        height: 24;
+    }
+}
+  
+.fab-shadow {
+    width:64;
+    height:64;
+}
+
+.fab-wrapper {
+    width:84;
+    height:84;
+}
+
