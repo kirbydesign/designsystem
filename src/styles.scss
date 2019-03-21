@@ -50,6 +50,8 @@ body, html {
   background-color: get-color("kirby-white");
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
+  font-size: font-size("n");
+  color: get-color("kirby-grey-9");  
 }
 
 *, 
