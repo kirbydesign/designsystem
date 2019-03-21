@@ -1,8 +1,6 @@
 /* General imports for components */
 $native: true;
-@import './themes/common-themes';
-@import './common-functions';
-@import './common-variables';
-@import './native-variables';
-@import './native-functions';
-@import './base/all';
+@import './base/settings';
+@import './themes/colors';
+@import './native/native-variables'; 
+@import './base/functions';

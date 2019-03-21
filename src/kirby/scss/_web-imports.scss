@@ -1,17 +1,10 @@
-/* General imports for components */
+/*  
+    General imports for components
+    NOTICE: Must not contain anything that generates classes or else it will be generated for every component that imports this file.
+*/
 $native: false;
-@import './plugins/web-include-media';
-@import './common-functions'; 
-@import './common-variables';
-@import './web-variables';
-@import './themes/common-themes';
-@import './base/all';
-
-:root {
-    --kirby-primary: #{get-color('primary')};
-    --kirby-on-primary: #{get-color('on-primary')};
-    --kirby-secondary: #{get-color('secondary')};
-    --kirby-on-secondary: #{get-color('on-secondary')};
-    --kirby-surface: #{get-color('surface')};
-    --kirby-on-surface: #{get-color('on-surface')};
-}
+@import './web/web-variables';
+@import './web/web-include-media';
+@import './base/settings';
+@import './themes/colors';
+@import './base/functions';  
