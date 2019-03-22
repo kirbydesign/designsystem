@@ -8,7 +8,7 @@ import { ShowcaseProperty } from './showcase-property';
   styleUrls: ['./showcase-properties.component.scss'],
 })
 export class ShowcasePropertiesComponent implements OnInit {
-  @Input() properties: ShowcaseProperty;
+  @Input() properties: ShowcaseProperty[];
   constructor() {}
 
   ngOnInit() {}
