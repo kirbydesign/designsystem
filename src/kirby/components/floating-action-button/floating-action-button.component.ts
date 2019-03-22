@@ -8,10 +8,8 @@ import { Component, OnInit, Input } from '@angular/core';
 
 export class FloatingActionButtonComponent implements OnInit {
 
-  @Input() href?: string;
-  @Input() isTranslucent?: boolean = false;
-  @Input() isDisabled?: boolean = false;
-  @Input() type?: 'button' | 'reset' | 'submit' = 'button';
+  @Input() hasShadow?: boolean = true;
+  @Input() disabled?: boolean = false;
   @Input() iconSrc?: string = "/assets/icons/add/add@3x.png";
 
   constructor() { }

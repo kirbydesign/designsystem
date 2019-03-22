@@ -12,3 +12,7 @@
         height: 24px;
     }
 }
+
+.no-shadow {
+    --box-shadow: 0 !important;
+}

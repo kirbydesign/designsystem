@@ -1,4 +1,4 @@
-<GridLayout class="fab-wrapper">
+<GridLayout class="fab-wrapper {{ disabled ? 'fab-disabled' : '' }}">
     <StackLayout class="fab-shadow" (loaded)="onViewLoaded($event)">
         <StackLayout class="fab">
             <Image [src]="iconSrc"></Image>
