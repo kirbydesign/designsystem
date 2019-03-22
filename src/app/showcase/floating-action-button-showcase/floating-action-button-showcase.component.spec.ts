@@ -1,7 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { KirbyModule } from '../../../kirby/kirby.module';
+import { ExamplesModule } from '../../examples/examples.module';
+import { HtmlViewerComponent } from '../../shared/html-viewer/html-viewer.component';
+import { ShowcasePropertiesComponent } from '../../shared/showcase-properties/showcase-properties.component';
 import { FloatingActionButtonShowcaseComponent } from './floating-action-button-showcase.component';
 
 describe('FloatingActionButtonShowcaseComponent', () => {
@@ -10,8 +12,12 @@ describe('FloatingActionButtonShowcaseComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [KirbyModule, RouterTestingModule],
-      declarations: [FloatingActionButtonShowcaseComponent],
+      imports: [ExamplesModule, RouterTestingModule],
+      declarations: [
+        FloatingActionButtonShowcaseComponent,
+        HtmlViewerComponent,
+        ShowcasePropertiesComponent,
+      ],
     }).compileComponents();
   }));
 
