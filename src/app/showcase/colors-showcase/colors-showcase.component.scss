@@ -1,6 +1,6 @@
 @import '../../../kirby/scss/web-imports';
 
-@each $color, $color-name in map-get($themes, 'default') {
+@each $color, $color-name in map-get($themes, $theme) {
   .#{$color} {
     background-color: var(--#{$color});
     color: var(--#{$color});

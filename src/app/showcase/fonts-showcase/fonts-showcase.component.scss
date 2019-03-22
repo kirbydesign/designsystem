@@ -37,43 +37,30 @@ code {
   &__header-1,
   &__header-2,
   &__header-3,
-  &__header-4,
   &__body,
-  &__body-small {
-    font-weight: font-weight("normal");
-    line-height: 1.16;
+  &__body-small,
+  &__body-small-light,
+  &__body-xsmall,
+  &__body-xxsmall {
     margin-top: 1rem;
-    margin-bottom: 0;
+    margin-bottom: 1rem;
   }
 
-  &__display {
-    &::after {
-      content: "(#{font-size("display")})";
-    }
-  }
   &__header-1 {
-    &::after {
-      content: "(#{font-size("xxl")})";
-    }
-  }
-
-  &__header-2 {
-    &::after {
-      content: "(#{font-size("xl")})";
-    }
-  }
-
-  &__header-3 {
     &::after {
       content: "(#{font-size("l")})";
     }
   }
 
-  &__header-4 {
-    font-weight: font-weight("medium");
-
+  &__header-2 {
     &::after {
       content: "(#{font-size("m")})";
+    }
+  }
+
+  &__header-3 {
+    &::after {
+      content: "(#{font-size("n")})";
     }
   }
 
@@ -95,10 +82,22 @@ code {
     }    
   }
 
+  &__body-xxsmall {
+    &::after {
+      content: "(#{font-size("xxs")})";
+    }    
+  }
+
 }
 
 [class^="fonts__"]::after {
   color: #db4fa5;
   font-size: font-size("xs");
   margin-left: size("m");
+}
+
+.fonts__info-box {
+  background-color: #eee;
+  padding: 0.5rem 1rem;
+  margin-right: 1rem;
 }

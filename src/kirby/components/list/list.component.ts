@@ -2,7 +2,6 @@ import {
   Component,
   ContentChild,
   ContentChildren,
-  Directive,
   EventEmitter,
   Input,
   OnChanges,
@@ -11,27 +10,18 @@ import {
   QueryList,
   SimpleChanges,
   TemplateRef,
+  ElementRef,
+  ViewChild,
 } from '@angular/core';
 
-@Directive({
-  selector: '[kirbyListItem]',
-})
-export class ListItemDirective {}
-
-@Directive({
-  selector: '[kirbyListHeader]',
-})
-export class ListHeaderDirective {}
-
-@Directive({
-  selector: '[kirbyListCell]',
-})
-export class ListCellDirective {}
-
-@Directive({
-  selector: '[kirbyListSectionHeader]',
-})
-export class ListSectionHeaderDirective {}
+import {
+  ListItemDirective,
+  ListHeaderDirective,
+  ListSectionHeaderDirective,
+  ListCellDirective,
+} from './list.directive';
+import { LoadOnDemandEvent, LoadOnDemandEventData } from './list.event';
+import { ListHelper } from './helpers/list-helper';
 
 export type ListShape = 'square' | 'rounded';
 
@@ -39,6 +29,7 @@ export type ListShape = 'square' | 'rounded';
   selector: 'kirby-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
+  providers: [ListHelper],
 })
 export class ListComponent implements OnInit, OnChanges {
   /**
@@ -50,6 +41,9 @@ export class ListComponent implements OnInit, OnChanges {
    * Callback to determine name of section. Sections will be ordered alphabetically.
    */
   @Input() getSectionName?: (item: any) => string;
+  @Input() noMoreItemsText: string;
+
+  @Output() loadOnDemand = new EventEmitter<LoadOnDemandEvent>();
 
   /**
    * Determine outline shape of:
@@ -73,11 +67,13 @@ export class ListComponent implements OnInit, OnChanges {
 
   isSectionsEnabled: boolean;
   isSelectable: boolean;
+  isLoading: boolean;
+  isLoadOnDemandEnabled: boolean;
 
   private itemsSortedBySection: any[];
   private itemClasses: string[];
 
-  constructor() {}
+  constructor(private listHelper: ListHelper) {}
 
   ngOnInit() {
     if (this.listItemTemplate) {
@@ -89,15 +85,15 @@ export class ListComponent implements OnInit, OnChanges {
     const { items } = changes;
     this.isSectionsEnabled = !!this.getSectionName;
     this.isSelectable = this.itemSelect.observers.length > 0;
-    this.determineClasses((items && items.currentValue) || []);
+    this.isLoadOnDemandEnabled = this.loadOnDemand.observers.length > 0;
   }
 
-  onItemClick(row: any): void {
-    this.itemSelect.emit(row);
-  }
-
-  onItemTap(selectedItem: any): void {
+  onItemSelect(selectedItem: any) {
     this.itemSelect.emit(selectedItem);
+  }
+
+  onLoadOnDemand(event?: LoadOnDemandEventData) {
+    this.listHelper.onLoadOnDemand(this, event);
   }
 
   getClasses(current: any) {

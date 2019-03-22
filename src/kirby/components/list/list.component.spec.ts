@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
+import { LoadOnDemandEvent } from './list.event';
 import { GroupByPipe } from './pipes/group-by.pipe';
 import { ListComponent, ListShape } from './list.component';
 import { ListSectionHeaderComponent } from './list-section-header/list-section-header.component';
@@ -23,6 +24,9 @@ class ListHostComponent {
   items: any[];
   shape: ListShape;
 }
+import { ListComponent } from './list.component';
+import { SpinnerComponent } from '~/kirby';
+import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
 
 describe('ListComponent', () => {
   let testHost: ListHostComponent;
@@ -37,6 +41,8 @@ describe('ListComponent', () => {
         ListSectionHeaderComponent,
         ListCellComponent,
         GroupByPipe,
+          SpinnerComponent,
+          InfiniteScrollDirective
       ],
     }).compileComponents();
   }));
@@ -51,29 +57,6 @@ describe('ListComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  describe('item select event', () => {
-    it('should emit the clicked item', () => {
-      spyOn(component.itemSelect, 'emit');
-      const itemToBeSelected = { value: 'this is a dummy item' };
-
-      component.onItemClick(itemToBeSelected);
-
-      expect(component.itemSelect.emit).toHaveBeenCalledTimes(1);
-      expect(component.itemSelect.emit).toHaveBeenCalledWith(itemToBeSelected);
-    });
-
-    it('should emit the tapped item', () => {
-      spyOn(component.itemSelect, 'emit');
-      const itemToBeSelected = { value: 'item 2' };
-      component.items = [{ value: 'item 1' }, itemToBeSelected, { value: 'item 3' }];
-
-      component.onItemTap(itemToBeSelected);
-
-      expect(component.itemSelect.emit).toHaveBeenCalledTimes(1);
-      expect(component.itemSelect.emit).toHaveBeenCalledWith(itemToBeSelected);
-    });
   });
 
   describe('sections', () => {
@@ -209,6 +192,34 @@ describe('ListComponent', () => {
 
         expect(liElement.className).toContain(shape);
       });
+    });
+  });
+
+  describe('function: onItemSelect', () => {
+    it('should emit the selected item', () => {
+      spyOn(component.itemSelect, 'emit');
+      const itemToBeSelected = { value: 'this is a dummy item' };
+
+      component.onItemSelect(itemToBeSelected);
+
+      expect(component.itemSelect.emit).toHaveBeenCalledTimes(1);
+      expect(component.itemSelect.emit).toHaveBeenCalledWith(itemToBeSelected);
+    });
+  });
+
+  describe('function: ngOnInit', () => {
+    it('should enable load more, if there is a subscriber to the loadMore event emitter', () => {
+      component.loadOnDemand.subscribe((loadMoreEvent: LoadOnDemandEvent) => {});
+
+      component.ngOnInit();
+
+      expect(component.isLoadOnDemandEnabled).toBeTruthy();
+    });
+
+    it('should disable load more, if there is no subscriber to the loadMore event emitter', () => {
+      component.ngOnInit();
+
+      expect(component.isLoadOnDemandEnabled).toBeFalsy();
     });
   });
 });
