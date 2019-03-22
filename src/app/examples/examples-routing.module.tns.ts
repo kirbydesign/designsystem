@@ -10,7 +10,7 @@ import { NativeScriptLineChartExampleComponent } from './nativescript-only/line-
 import { ListSectionExampleComponent } from './list/tns-list-examples/list-section-example/list-section-example.component.tns';
 import { ListCustomCellLinesExampleComponent } from './list/tns-list-examples/list-custom-cell-lines-example/list-custom-cell-lines-example.component.tns';
 import { ListItemExampleComponent } from './list/tns-list-examples/list-item-example/list-item-example.component.tns';
-import { ListLoadOnDemandExampleComponent } from './list/tns-list-examples/list-load-on-demand-example/list-load-on-demand-example.component.tns';
+import { ListLoadOnDemandExampleComponent } from './list/load-on-demand/list-load-on-demand-example.component';
 
 const nativeScriptRoutes = [
   ...routes,
@@ -43,7 +43,7 @@ const nativeScriptRoutes = [
         component: ListItemExampleComponent,
       },
       {
-        path: 'loadondemand',
+        path: 'load-on-demand',
         component: ListLoadOnDemandExampleComponent,
       },
     ],

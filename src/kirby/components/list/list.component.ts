@@ -48,7 +48,7 @@ export class ListComponent implements OnInit {
 
   constructor(private listHelper: ListHelper) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     if (this.getSectionName) {
       this.isSectionsEnabled = true;
     }
@@ -59,11 +59,11 @@ export class ListComponent implements OnInit {
     this.isLoadOnDemandEnabled = this.loadOnDemand.observers.length > 0;
   }
 
-  onItemSelect(selectedItem: any): void {
+  onItemSelect(selectedItem: any) {
     this.itemSelect.emit(selectedItem);
   }
 
-  onLoadOnDemand(args?: LoadOnDemandEventData): void {
-    this.listHelper.onLoadOnDemand(this, args);
+  onLoadOnDemand(event?: LoadOnDemandEventData) {
+    this.listHelper.onLoadOnDemand(this, event);
   }
 }
