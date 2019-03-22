@@ -5,6 +5,7 @@ import { ButtonShowcaseComponent } from './button-showcase/button-showcase.compo
 import { CardShowcaseComponent } from './card-showcase/card-showcase.component';
 import { GridShowcaseComponent } from './grid-showcase/grid-showcase.component';
 import { ListShowcaseComponent } from './list-showcase/list-showcase.component';
+import { ListLoadOnDemandShowcaseComponent } from './list-load-on-demand-showcase/list-load-on-demand-showcase.component';
 import { ShowcaseComponent } from './showcase.component';
 import { ChartShowcaseComponent } from './chart-showcase/chart-showcase.component';
 import { DoughnutChartShowcaseComponent } from './doughnut-chart-showcase/doughnut-chart-showcase.component';
@@ -41,6 +42,10 @@ export const routes: Routes = [
       {
         path: 'list',
         component: ListShowcaseComponent,
+      },
+      {
+        path: 'list-load-on-demand',
+        component: ListLoadOnDemandShowcaseComponent,
       },
       {
         path: 'grid',

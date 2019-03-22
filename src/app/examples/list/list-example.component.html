@@ -1,17 +1,16 @@
 <!-- 
-kirby-list-cell supports the attributes:
-- width: 
-    A relative number. A width of 1.5, will be 1.5 times the width of the default width.
-    Default is 1.
-- horisontalAlignment: 
-    Supported values are 'left', 'center', 'right', 'space-between', 'space-around'.
-    Default is 'left' 
-- verticalAlignment: 
-    Supported values are 'top', 'center', 'bottom', 'stretch', 'baseline'.
-    Default is 'center' 
+  kirby-list-cell supports the attributes:
+  - width: 
+  A relative number. A width of 1.5, will be 1.5 times the width of the default width.
+  Default is 1.
+  - horisontalAlignment: 
+  Supported values are 'left', 'center', 'right', 'space-between', 'space-around'.
+  Default is 'left' 
+  - verticalAlignment: 
+  Supported values are 'top', 'center', 'bottom', 'stretch', 'baseline'.
+  Default is 'center' 
 -->
-
-<kirby-list [items]="myItems">
+<kirby-list [items]="items">
 
   <!-- HEADER -->
   <!-- *kirbyListHeader is not supported in conjunction with *kirbyListSectionHeader due to a bug in RadListView on iOS -->
@@ -41,11 +40,10 @@ kirby-list-cell supports the attributes:
     <kirby-list-cell-line [primary]="true" [text]="account.amount"></kirby-list-cell-line>
   </kirby-list-cell>
 </kirby-list>
-
 <hr />
 
 <kirby-list
-  [items]="myItems"
+  [items]="items"
   (itemSelect)="onItemSelect($event)"
   [getSectionName]="getSectionName">
   <!-- kirby-list-header is not supported in conjunction with *kirbyListSectionHeader due to a bug in RadListView on iOS -->
@@ -64,11 +62,11 @@ kirby-list-cell supports the attributes:
     horisontalAlignment="right">
     <kirby-list-cell-line [primary]="true" [text]="item.amount"></kirby-list-cell-line>
   </kirby-list-cell>
-</kirby-list>
+</kirby-list> 
 
 <hr />
 
-<kirby-list [items]="myItems" (itemSelect)="onItemSelect($event)">
+<kirby-list [items]="items" (itemSelect)="onItemSelect($event)">
   
   <!-- HEADER-->
   <kirby-list-header *kirbyListHeader>
@@ -92,11 +90,11 @@ kirby-list-cell supports the attributes:
     horisontalAlignment="right">
     <kirby-list-cell-line [primary]="true" [text]="item.amount"></kirby-list-cell-line>
   </kirby-list-cell>
-</kirby-list>
+</kirby-list> 
 
 <hr />
 
-<kirby-list [items]="myItems" (itemSelect)="onItemSelect($event)">
+<kirby-list [items]="items" (itemSelect)="onItemSelect($event)">
   <kirby-list-item
     *kirbyListItem="let item"
     [title]="item.title"
@@ -106,11 +104,9 @@ kirby-list-cell supports the attributes:
 
 <hr />
 
-<kirby-list [items]="myItems" (itemSelect)="onItemSelect($event)">
-
+<kirby-list [items]="items" (itemSelect)="onItemSelect($event)">
   <!-- Cells can also take arbitrary markup (client specific) as cell-lines -->
-  <kirby-list-cell
-          *kirbyListCell="let item">
+  <kirby-list-cell *kirbyListCell="let item">
     <section style="flex-direction: row; display: flex;">
       <kirby-avatar [imageSrc]="imageSrc" [size]="'small'"></kirby-avatar>
       <div style="margin-left: 10px; flex-direction: column; display: flex;">
