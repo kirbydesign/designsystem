@@ -6,13 +6,10 @@ import * as app from 'tns-core-modules/application';
 import { Color } from 'tns-core-modules/color';
 import { registerElement } from 'nativescript-angular';
 
-import { ScssHelper } from '~/kirby/scss/scss-helper';
-
 const FLOATING_ACTION_BUTTON_COMPONENT_SELECTOR = 'kirby-floating-action-button';
 
 declare const CGSizeMake: any;
 declare const android: any;
-
 
 @Component({
     selector: FLOATING_ACTION_BUTTON_COMPONENT_SELECTOR,
@@ -20,13 +17,15 @@ declare const android: any;
     styleUrls: ['./floating-action-button.component.scss'],
 })
 
-// TODO: add same properties as ionic floating action button, as described in the docs
 // TODO: add unit tests for everything (example/component/showcase)
-// TODO: add documentation
 // TODO: create pull-request
+
 export class FloatingActionButtonComponent extends ContentView {
+
     @Input() iconSrc?: string = '~/assets/icons/add/add@3x.png';
     @Input() hasShadow?: boolean = true;
+    @Input() disabled? : boolean = false;
+
     view: View;
 
     constructor(private zone: NgZone) {
@@ -51,7 +50,6 @@ export class FloatingActionButtonComponent extends ContentView {
             return;
         }
 
-        // box-shadow: 0 10px 20px -10px rgba(0, 77, 50, 0.3);
         if (this.view.android) {
             let nativeView = this.view.android;
             var shape = new android.graphics.drawable.GradientDrawable();
@@ -59,7 +57,7 @@ export class FloatingActionButtonComponent extends ContentView {
             // Shadow color requested by UX/UI designer
             // shape.setColor(android.graphics.Color.parseColor('#004d32'));
             // shape.setAlpha(255);
-            // Shadow color that prevents darker borders around the shape
+            // A brigther shadow color that prevents the darker borders around the shape on android
             shape.setColor(android.graphics.Color.parseColor('#00ffa4'));
             nativeView.setBackgroundDrawable(shape);
             nativeView.setElevation(15);
