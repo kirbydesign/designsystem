@@ -101,6 +101,12 @@
             }
             
         }
+
+        &.someday-maybe {
+            color: var(--kirby-text-secondary);
+            font-style: italic;
+        }   
+    
     }
 
     td {
@@ -110,10 +116,10 @@
             padding-left: 0;
         }
 
-        &.under-consideration {
+        &.someday-maybe {
             color: var(--kirby-text-secondary);
             font-style: italic;
-        }   
+        }
     }
 
 }

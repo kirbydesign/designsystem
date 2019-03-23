@@ -1,3 +1,4 @@
+
 <div class="hero">
     <h1>Component Status</h1>
 </div>
@@ -17,21 +18,23 @@
     </thead>
     <ng-container *ngFor="let item of items$ | async as items">
         <tbody>
-            <tr class="component" [class.group]="item.children?.length > 0" onclick="this.classList.toggle('expanded');">
-                <td class="component">{{item.component}}</td>
-                <td [class.under-consideration]="item.ux?.status === 'Under consideration'">
+            <tr class="component" [class.group]="item.children?.length > 0" [class.someday-maybe]="isUnderConsiderationOrNotPlanned(item)" onclick="this.classList.toggle('expanded');">
+                <td class="component">
+                    <ng-container *ngTemplateOutlet="componentTemplate; context: {$implicit: item}"></ng-container>
+                </td>
+                <td [class.someday-maybe]="item.ux?.status === uxStatusEnum.underConsideration">
                     <ng-container *ngTemplateOutlet="uxTemplate; context: {$implicit: item.ux}"></ng-container>
                 </td>
-                <td [class.under-consideration]="item.code?.status === 'Under consideration'">
+                <td [class.someday-maybe]="item.code?.status === codeStatusEnum.underConsideration">
                     <ng-container *ngTemplateOutlet="codeTemplate; context: {$implicit: item.code}"></ng-container>
                 </td>
             </tr>
             <tr class="subcomponent" *ngFor="let subitem of item.children">
                 <td>{{subitem.component}}</td>
-                <td [class.under-consideration]="subitem.ux?.status === 'Under consideration'">
+                <td [class.someday-maybe]="subitem.ux?.status === uxStatusEnum.underConsideration">
                     <ng-container *ngTemplateOutlet="uxTemplate; context: {$implicit: subitem.ux}"></ng-container>
                 </td>
-                <td [class.under-consideration]="subitem.code?.status === 'Under consideration'">
+                <td [class.someday-maybe]="subitem.code?.status === codeStatusEnum.underConsideration">
                     <ng-container *ngTemplateOutlet="codeTemplate; context: {$implicit: subitem.code}"></ng-container>
                 </td>
             </tr>
@@ -39,16 +42,22 @@
     </ng-container>
 </table>
 
+<ng-template #componentTemplate let-item>
+    <a *ngIf="item.code?.cookbookUrl" routerLink="../../{{item.code?.cookbookUrl}}">
+        {{item.component}}
+        <ng-container *ngTemplateOutlet="versionTemplate; context: {$implicit: item.code?.version}"></ng-container>
+    </a>
+    <ng-container *ngIf="!item.code?.cookbookUrl">
+        {{item.component}}
+    </ng-container>
+</ng-template>
+
 <ng-template #codeTemplate let-code>
-    <a *ngIf="code?.cookbookUrl" routerLink="../../{{code?.cookbookUrl}}">
+    <a *ngIf="code?.githubIssue" [href]="code?.githubIssue">
         {{code?.status}}
         <ng-container *ngTemplateOutlet="versionTemplate; context: {$implicit: code?.version}"></ng-container>
     </a>
-    <a *ngIf="!code?.cookbookUrl && code?.githubIssue" [href]="code?.githubIssue">
-        {{code?.status}}
-        <ng-container *ngTemplateOutlet="versionTemplate; context: {$implicit: code?.version}"></ng-container>
-    </a>
-    <span *ngIf="!code?.cookbookUrl && !code?.githubIssue">
+    <span *ngIf="!code?.githubIssue">
         {{code?.status}}
         <ng-container *ngTemplateOutlet="versionTemplate; context: {$implicit: code?.version}"></ng-container>
     </span>
@@ -68,3 +77,11 @@
 <ng-template #versionTemplate let-version>
     <ng-container *ngIf="version">({{version | number: '1.1-2'}})</ng-container>
 </ng-template>
+
+<!-- TODO... -->
+<!-- <ng-template #statusIconTemplate let-status>
+    <ion-icon name="heart-empty"></ion-icon>
+    <ion-icon name="heart-half"></ion-icon>
+    <ion-icon name="heart"></ion-icon>
+    <ion-icon name="heart-dislike"></ion-icon>
+</ng-template> -->

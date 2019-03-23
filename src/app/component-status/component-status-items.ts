@@ -1,6 +1,7 @@
 export interface ComponentStatusItem {
   component: string;
   aliases?: string[];
+  priority: number;
   ux: {
     version: number;
     status: string;
@@ -11,79 +12,84 @@ export interface ComponentStatusItem {
     status: string;
     githubIssue?: string;
     cookbookUrl?: string;
+    github?: string;
   };
   children?: ComponentStatusItem[];
 }
 
-enum ItemUXStatus {
+export enum ItemUXStatus {
   underConsideration = 'Under consideration',
   notCurrentlyPlanned = 'Not currently planned',
   planned = 'Planned',
   inProgress = 'In progress',
-  done = 'Done',
+  ready = 'Ready',
 }
 
-enum ItemCodeStatus {
+export enum ItemCodeStatus {
   underConsideration = 'Under consideration',
   notCurrentlyPlanned = 'Not currently planned',
   planned = 'Planned',
   inProgress = 'In development',
-  done = 'Done',
+  ready = 'Ready',
+}
+
+export enum ItemCodeStatusOrder {
+  'Under consideration' = 3,
+  'Not currently planned' = 4,
+  'Planned' = 1,
+  'In development' = 0,
+  'Ready' = 2,
 }
 
 export const componentStatusItems: ComponentStatusItem[] = [
   {
     component: 'Avatar',
+    priority: 27,
     ux: {
       version: 1.0,
-      status: ItemUXStatus.done,
+      status: ItemUXStatus.ready,
       zeplinUrl: 'https://zpl.io/2yONGDG',
     },
     code: {
       version: 0.5,
-      status: ItemCodeStatus.done,
+      status: ItemCodeStatus.ready,
       cookbookUrl: 'showcase/avatar',
+      github: 'https://github.com/kirbydesign/designsystem/tree/master/src/kirby/components/avatar',
     },
   },
   {
     component: 'Badge',
     aliases: ['Beacon'],
+    priority: 3,
     ux: {
       version: 1.0,
-      status: ItemUXStatus.done,
+      status: ItemUXStatus.ready,
       zeplinUrl: 'https://zpl.io/agzl3GD',
     },
     code: {
-      version: 0.1,
-      status: ItemCodeStatus.planned,
+      version: 0.9,
+      status: ItemCodeStatus.inProgress,
+      githubIssue: 'https://github.com/kirbydesign/designsystem/issues/165',
     },
   },
   {
     component: 'Button',
+    priority: 15,
     ux: {
       version: 1.0,
-      status: ItemUXStatus.done,
+      status: ItemUXStatus.ready,
       zeplinUrl: 'https://zpl.io/bPPk4ok',
     },
     code: {
       version: 0.5,
-      status: ItemCodeStatus.done,
+      status: ItemCodeStatus.ready,
       cookbookUrl: 'showcase/button',
+      github: 'https://github.com/kirbydesign/designsystem/tree/master/src/kirby/components/button',
     },
     children: [
       {
         component: 'Icon Button',
-        ux: {
-          version: 1.0,
-          status: ItemUXStatus.underConsideration,
-        },
-        code: {
-          version: 0.1,
-          status: ItemCodeStatus.underConsideration,
-        },
-      },
-      {
-        component: 'Outline Button',
+        priority: 0,
         ux: {
           version: 1.0,
           status: ItemUXStatus.underConsideration,
@@ -97,19 +103,50 @@ export const componentStatusItems: ComponentStatusItem[] = [
   },
   {
     component: 'Card',
+    priority: 0,
     ux: {
       version: 1.0,
-      status: ItemUXStatus.done,
+      status: ItemUXStatus.ready,
       zeplinUrl: 'https://zpl.io/2EBLPk8',
     },
     code: {
       version: 0.1,
-      status: ItemCodeStatus.done,
+      status: ItemCodeStatus.ready,
       cookbookUrl: 'showcase/card',
+      github: 'https://github.com/kirbydesign/designsystem/tree/master/src/kirby/components/card',
     },
   },
   {
+    component: 'Charts',
+    priority: 0,
+    ux: {
+      version: 0.0,
+      status: ItemUXStatus.underConsideration,
+    },
+    code: {
+      version: 1.0,
+      status: ItemCodeStatus.ready,
+      github: 'https://github.com/kirbydesign/designsystem/tree/master/src/kirby/components/chart',
+    },
+    children: [
+      {
+        component: 'Donut',
+        priority: 0,
+        ux: {
+          version: 0.0,
+          status: ItemUXStatus.underConsideration,
+        },
+        code: {
+          version: 1.0,
+          status: ItemCodeStatus.ready,
+          cookbookUrl: 'showcase/chart',
+        },
+      },
+    ],
+  },
+  {
     component: 'Checkbox',
+    priority: 0,
     ux: {
       version: 1.0,
       status: ItemUXStatus.planned,
@@ -122,8 +159,48 @@ export const componentStatusItems: ComponentStatusItem[] = [
   {
     component: 'Chip',
     aliases: ['Button', 'Compact Button', 'Tag'],
+    priority: 0,
     ux: {
       version: 1.0,
+      status: ItemUXStatus.inProgress,
+    },
+    code: {
+      version: 0.1,
+      status: ItemCodeStatus.inProgress,
+    },
+  },
+  {
+    component: 'Floating Action Button',
+    aliases: ['FAB'],
+    priority: 0,
+    ux: {
+      version: 1.0,
+      status: ItemUXStatus.ready,
+      zeplinUrl: 'https://zpl.io/VqWoxg5',
+    },
+    code: {
+      version: 0.5,
+      status: ItemCodeStatus.inProgress,
+    },
+  },
+  {
+    component: 'Icon',
+    priority: 0,
+    ux: {
+      version: 1.0,
+      status: ItemUXStatus.ready,
+      zeplinUrl: 'https://zpl.io/a7OAAWR',
+    },
+    code: {
+      version: 0.5,
+      status: ItemCodeStatus.planned,
+    },
+  },
+  {
+    component: 'Input',
+    priority: 0,
+    ux: {
+      version: 0.0,
       status: ItemUXStatus.underConsideration,
     },
     code: {
@@ -132,55 +209,34 @@ export const componentStatusItems: ComponentStatusItem[] = [
     },
   },
   {
-    component: 'Floating Action Button',
-    aliases: ['FAB'],
-    ux: {
-      version: 1.0,
-      status: ItemUXStatus.done,
-      zeplinUrl: 'https://zpl.io/VqWoxg5',
-    },
-    code: {
-      version: 0.1,
-      status: ItemCodeStatus.planned,
-    },
-  },
-  {
-    component: 'Icon',
-    ux: {
-      version: 1.0,
-      status: ItemUXStatus.done,
-      zeplinUrl: 'https://zpl.io/a7OAAWR',
-    },
-    code: {
-      version: 0.1,
-      status: ItemCodeStatus.planned,
-    },
-  },
-  {
     component: 'List',
+    priority: 30,
     ux: {
       version: 1.0,
-      status: ItemUXStatus.done,
+      status: ItemUXStatus.ready,
     },
     code: {
       version: 0.5,
-      status: ItemCodeStatus.done,
+      status: ItemCodeStatus.ready,
       cookbookUrl: 'showcase/list',
+      github: 'https://github.com/kirbydesign/designsystem/tree/master/src/kirby/components/list',
     },
   },
   {
     component: 'List Item',
+    priority: 40,
     ux: {
       version: 1.0,
-      status: ItemUXStatus.done,
+      status: ItemUXStatus.ready,
     },
     code: {
       version: 0.5,
-      status: ItemCodeStatus.done,
+      status: ItemCodeStatus.ready,
     },
   },
   {
     component: 'Menu',
+    priority: 0,
     ux: {
       version: 0.0,
       status: ItemUXStatus.notCurrentlyPlanned,
@@ -192,6 +248,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
   },
   {
     component: 'Modal',
+    priority: 50,
     ux: {
       version: 1.0,
       status: ItemUXStatus.inProgress,
@@ -204,6 +261,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
     children: [
       {
         component: 'Full Screen Modal',
+        priority: 0,
         ux: {
           version: 1.0,
           status: ItemUXStatus.planned,
@@ -213,45 +271,39 @@ export const componentStatusItems: ComponentStatusItem[] = [
           status: ItemCodeStatus.planned,
         },
       },
+    ],
+  },
+  {
+    component: 'Loading Indicators',
+    priority: 0,
+    ux: {
+      version: 0.0,
+      status: ItemUXStatus.notCurrentlyPlanned,
+    },
+    code: {
+      version: 0.1,
+      status: ItemCodeStatus.ready,
+      cookbookUrl: 'showcase/spinner',
+      github: 'https://github.com/kirbydesign/designsystem/tree/master/src/kirby/components/spinner',
+    },
+    children: [
       {
-        component: 'Popover Modal',
+        component: 'Loading',
+        priority: 0,
         ux: {
-          version: 1.0,
-          status: ItemUXStatus.done,
+          version: 0.0,
+          status: ItemUXStatus.notCurrentlyPlanned,
         },
         code: {
           version: 0.0,
-          status: ItemCodeStatus.planned,
-        },
-      },
-      {
-        component: 'Alert Modal',
-        ux: {
-          version: 1.0,
-          status: ItemUXStatus.underConsideration,
-        },
-        code: {
-          version: 0.0,
-          status: ItemCodeStatus.underConsideration,
+          status: ItemCodeStatus.notCurrentlyPlanned,
         },
       },
     ],
   },
   {
-    component: 'Spinner',
-    aliases: ['Progress Indicator'],
-    ux: {
-      version: 0.0,
-      status: ItemUXStatus.underConsideration,
-    },
-    code: {
-      version: 0.1,
-      status: ItemCodeStatus.done,
-      cookbookUrl: 'showcase/spinner',
-    },
-  },
-  {
     component: 'Radio Button',
+    priority: 0,
     ux: {
       version: 1.0,
       status: ItemUXStatus.planned,
@@ -263,6 +315,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
     children: [
       {
         component: 'Radio Button Group',
+        priority: 0,
         ux: {
           version: 1.0,
           status: ItemUXStatus.underConsideration,
@@ -276,6 +329,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
   },
   {
     component: 'Pull To Refresh',
+    priority: 0,
     ux: {
       version: 1.0,
       status: ItemUXStatus.underConsideration,
@@ -287,6 +341,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
   },
   {
     component: 'Reorder',
+    priority: 0,
     ux: {
       version: 0.0,
       status: ItemUXStatus.notCurrentlyPlanned,
@@ -299,18 +354,36 @@ export const componentStatusItems: ComponentStatusItem[] = [
   {
     component: 'Segmented Control',
     aliases: ['Segment', 'Inline Tabs', 'Button Group'],
+    priority: 10,
     ux: {
       version: 1.0,
-      status: ItemUXStatus.done,
-      zeplinUrl: 'https://zpl.io/a7OXP4v',
+      status: ItemUXStatus.ready,
+      zeplinUrl: 'https://zpl.io/2v7Evw5',
     },
     code: {
       version: 0.1,
       status: ItemCodeStatus.inProgress,
     },
+    children: [
+      {
+        component: 'Segmented Control',
+        priority: 11,
+        ux: {
+          version: 1.0,
+          status: ItemUXStatus.ready,
+          zeplinUrl: 'https://zpl.io/2v7Evw5',
+        },
+        code: {
+          version: 0.9,
+          status: ItemCodeStatus.inProgress,
+          githubIssue: 'https://github.com/kirbydesign/designsystem/issues/166',
+        },
+      },
+    ],
   },
   {
     component: 'Tabs',
+    priority: 0,
     ux: {
       version: 1.0,
       status: ItemUXStatus.underConsideration,
@@ -322,6 +395,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
   },
   {
     component: 'Toast',
+    priority: 0,
     ux: {
       version: 0.0,
       status: ItemUXStatus.notCurrentlyPlanned,
@@ -334,6 +408,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
   {
     component: 'Switch',
     aliases: ['Toggle'],
+    priority: 0,
     ux: {
       version: 1.0,
       status: ItemUXStatus.planned,
@@ -341,6 +416,18 @@ export const componentStatusItems: ComponentStatusItem[] = [
     code: {
       version: 0.1,
       status: ItemCodeStatus.planned,
+    },
+  },
+  {
+    component: 'Calendar',
+    priority: 0,
+    ux: {
+      version: 0.0,
+      status: ItemUXStatus.underConsideration,
+    },
+    code: {
+      version: 0.0,
+      status: ItemCodeStatus.underConsideration,
     },
   },
 ];
