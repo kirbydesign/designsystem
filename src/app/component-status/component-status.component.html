@@ -53,6 +53,7 @@
 </ng-template>
 
 <ng-template #codeTemplate let-code>
+    <ng-container *ngTemplateOutlet="codeStatusTemplate; context: {$implicit: code?.status}"></ng-container>
     <a *ngIf="code?.githubIssue" [href]="code?.githubIssue">
         {{code?.status}}
         <ng-container *ngTemplateOutlet="versionTemplate; context: {$implicit: code?.version}"></ng-container>
@@ -64,6 +65,7 @@
 </ng-template>
 
 <ng-template #uxTemplate let-ux>
+    <ng-container *ngTemplateOutlet="uxStatusTemplate; context: {$implicit: ux?.status}"></ng-container>
     <a *ngIf="ux?.zeplinUrl" [href]="ux?.zeplinUrl">
         {{ux?.status}}
         <ng-container *ngTemplateOutlet="versionTemplate; context: {$implicit: ux?.version}"></ng-container>
@@ -78,10 +80,20 @@
     <ng-container *ngIf="version">({{version | number: '1.1-2'}})</ng-container>
 </ng-template>
 
-<!-- TODO... -->
-<!-- <ng-template #statusIconTemplate let-status>
-    <ion-icon name="heart-empty"></ion-icon>
-    <ion-icon name="heart-half"></ion-icon>
-    <ion-icon name="heart"></ion-icon>
-    <ion-icon name="heart-dislike"></ion-icon>
-</ng-template> -->
+<ng-template #uxStatusTemplate let-status>
+    <!-- TODO: Replace with kirby-icon -->
+    <ion-icon *ngIf="status === uxStatusEnum.underConsideration" color="medium" name="heart-empty"></ion-icon>
+    <ion-icon *ngIf="status === uxStatusEnum.planned" color="success" name="heart-empty"></ion-icon>
+    <ion-icon *ngIf="status === uxStatusEnum.inProgress" color="success" name="heart-half"></ion-icon>
+    <ion-icon *ngIf="status === uxStatusEnum.ready" name="heart" color="success"></ion-icon>
+    <ion-icon *ngIf="status === uxStatusEnum.notCurrentlyPlanned" color="medium" name="heart-dislike"></ion-icon>
+</ng-template>
+
+<ng-template #codeStatusTemplate let-status>
+    <!-- TODO: Replace with kirby-icon -->
+    <ion-icon *ngIf="status === codeStatusEnum.underConsideration" color="medium" name="heart-empty"></ion-icon>
+    <ion-icon *ngIf="status === codeStatusEnum.planned" color="success" name="heart-empty"></ion-icon>
+    <ion-icon *ngIf="status === codeStatusEnum.inProgress" color="success" name="heart-half"></ion-icon>
+    <ion-icon *ngIf="status === codeStatusEnum.ready" name="heart" color="success"></ion-icon>
+    <ion-icon *ngIf="status === codeStatusEnum.notCurrentlyPlanned" color="medium" name="heart-dislike"></ion-icon>
+</ng-template>

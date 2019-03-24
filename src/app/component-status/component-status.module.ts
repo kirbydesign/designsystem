@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { IonicModule } from '@ionic/angular';
 
 import { ComponentStatusComponent } from './component-status.component';
 
@@ -13,6 +14,7 @@ import { ComponentStatusComponent } from './component-status.component';
         component: ComponentStatusComponent,
       },
     ]),
+    IonicModule.forRoot(),
   ],
   declarations: [ComponentStatusComponent],
   exports: [ComponentStatusComponent],
