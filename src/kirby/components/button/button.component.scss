@@ -3,10 +3,10 @@
 :host {
   margin: 0.25em 0.25em;
   --kirby-button-border-radius: 2rem;
-  background-color: var(--kirby-primary);
+  background-color: get-color('kirby-primary');
   border-radius: var(--kirby-button-border-radius);
-  border: 1px solid var(--kirby-primary);
-  color: var(--kirby-on-primary); 
+  border: 1px solid get-color('kirby-primary');
+  color: get-color('kirby-primary-contrast');
   cursor: pointer;
   font-size: font-size('n');
   padding: 0.7rem 1.75rem;
@@ -22,15 +22,15 @@
   }
 
   &[colortype='primary'] {
-    background-color: var(--kirby-primary);
-    border-color: var(--kirby-primary);
-    color: var(--kirby-on-primary);
+    background-color: get-color('kirby-primary');
+    border-color: get-color('kirby-primary');
+    color: get-color('kirby-primary-contrast');
   }
 
   &[colortype='secondary'] {
-    background-color: var(--kirby-secondary);
-    border-color: var(--kirby-on-secondary);
-    color: var(--kirby-on-secondary);
+    background-color: get-color('kirby-secondary');
+    border-color: get-color('kirby-secondary');
+    color: get-color('kirby-secondary-contrast');
   }
 
   &:hover,

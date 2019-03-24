@@ -1,0 +1,26 @@
+<kirby-list
+        [items]="items"
+        [getSectionName]="getSectionName"
+        (itemSelect)="onItemSelect($event)"
+>
+    <kirby-list-section-header
+            *kirbyListSectionHeader="let section"
+            [title]="section"
+    ></kirby-list-section-header>
+    <kirby-list-cell
+            *kirbyListCell="let item"
+            verticalAlignment="center"
+            width="0.85">
+        <kirby-list-cell-line [primary]="true" [text]="item.title"></kirby-list-cell-line>
+        <kirby-list-cell-line [text]="item.detail"></kirby-list-cell-line>
+    </kirby-list-cell>
+    <StackLayout *kirbyListCell="let item" width="70%">
+        <Label [text]="item.subTitle" horizontalAlignment="right"></Label>
+    </StackLayout>
+    <kirby-list-cell
+            *kirbyListCell="let item"
+            verticalAlignment="center"
+            horisontalAlignment="right">
+        <kirby-list-cell-line [primary]="true" [text]="item.amount"></kirby-list-cell-line>
+    </kirby-list-cell>
+</kirby-list>

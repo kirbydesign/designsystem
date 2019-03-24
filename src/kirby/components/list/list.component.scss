@@ -7,8 +7,8 @@ ul {
   margin-block-end: 0;
 
   li {
-    background-color: var(--kirby-surface);
-    border-bottom: 1px solid var(--kirby-background);
+    background-color: get-color('kirby-white');
+    border-bottom: 1px solid get-color('kirby-grey-2');
     padding: size('m');
     display: flex;
     flex-direction: row;
@@ -22,14 +22,14 @@ ul {
 
     &.row{
       &:first-of-type {
-        border-top: 1px solid var(--kirby-background);
+        border-top: 1px solid get-color('kirby-grey-2');
       }
     }
 
     &.section-header {
       background-color: transparent;
       border: none;
-      border-bottom: 1px solid var(--kirby-background);
+      border-bottom: 1px solid get-color('kirby-grey-2');
 
       &:hover {
         background-color: transparent;
@@ -39,10 +39,12 @@ ul {
     &.selectable {
 
       &:hover {
-        background-color: var(--kirby-secondary);
+        background-color: get-color('kirby-secondary');
       }
     }
   }
 }
 
-
+.extending {
+  margin: auto;
+}

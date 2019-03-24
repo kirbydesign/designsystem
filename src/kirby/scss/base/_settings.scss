@@ -1,0 +1,47 @@
+/*
+  SPACINGS
+****************************************************************************/
+$sizes: (
+  xxxl: 56,
+  xxl:  48,
+  xl:   40,
+  l:    32,
+  m:    24,
+  s:    16,
+  gutter: 16, //Deprecated, don't use!
+  gutter-small: 8, //Deprecated, don't use!
+  xs:    8,   
+  xxs:   4,
+);
+
+/*
+  FONT SETTINGS 
+****************************************************************************/
+$font-sizes: (
+  display: 32, // Deprecated
+  xxl: 48, // Not used, yet 
+  xl: 40, // Not used, yet
+  l:  32,
+  m:  22,
+  n:  16,
+  s:  14,
+  xs: 12,
+  xxs: 10
+);
+
+$line-height: (
+  display: 41,
+  xxl:  34,
+  xl:   28,
+  l:    26,
+  m:    22,
+  n:    22,
+  s:    20,
+  xs:   18 
+);
+
+$font-weight: (
+  light: 300,
+  normal: 400,
+  bold: 700
+);

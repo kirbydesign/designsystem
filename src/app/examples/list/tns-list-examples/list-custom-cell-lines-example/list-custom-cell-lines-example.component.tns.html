@@ -1,0 +1,31 @@
+<kirby-list
+        [items]="items"
+        (itemSelect)="onItemSelect($event)">
+
+  <!-- HEADER-->
+  <kirby-list-header *kirbyListHeader>
+    <kirby-list-cell width="0.85">
+      <Label text="Name"></Label>
+    </kirby-list-cell>
+    <kirby-list-cell width="0.5" horisontalAlignment="right">
+      <Label text="Value"></Label>
+    </kirby-list-cell>
+  </kirby-list-header>
+
+  <!-- BODY -->
+  <kirby-list-cell *kirbyListCell="let item" width="0.85">
+    <GridLayout columns="*, *" rows="auto, *">
+      <kirby-avatar [imageSrc]="imageSrc" col="0" row="0" rowSpan="2" size="small"></kirby-avatar>
+      <kirby-list-cell-line col="1" row="0" [primary]="true" [text]="item.title"></kirby-list-cell-line>
+      <kirby-list-cell-line col="1" row="1" [text]="item.detail"></kirby-list-cell-line>
+    </GridLayout>
+  </kirby-list-cell>
+
+  <kirby-list-cell
+          *kirbyListCell="let item"
+          verticalAlignment="center"
+          horisontalAlignment="right"
+          width="0.5">
+    <kirby-list-cell-line [primary]="true" [text]="item.amount"></kirby-list-cell-line>
+  </kirby-list-cell>
+</kirby-list>

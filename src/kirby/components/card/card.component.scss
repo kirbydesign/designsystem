@@ -4,15 +4,15 @@ $min-card-height: 170px;
 $max-card-height: 500px;
 $min-card-width: 304px;
 
-:host{
-  --kirby-card-header-background-color: var(--kirby-surface);
-  --kirby-card-header-color: var(--kirby-on-surface);
-  --kirby-card-main-background-color: var(--kirby-surface);
-  --kirby-card-main-color: var(--kirby-on-surface);
-  --kirby-card-footer-background-color: var(--kirby-surface);
-  --kirby-card-footer-color: var(--kirby-on-surface);
+:host{ 
+  --kirby-card-header-background-color:  #{get-color('kirby-white')};
+  --kirby-card-header-color: #{get-color('kirby-primary-contrast')};
+  --kirby-card-main-background-color: #{get-color('kirby-white')};
+  --kirby-card-main-color: #{get-color('kirby-primary-contrast')};
+  --kirby-card-footer-background-color: #{get-color('kirby-white')};
+  --kirby-card-footer-color: #{get-color('kirby-primary-contrast')};
 
-  background-color: var(--kirby-surface);
+  background-color: get-color('kirby-white');
   border-radius: $border-radius;
   box-shadow: 0 10px 29px -9px rgba(24, 24, 24, 0.3);
   color: var(--kirby-wireframe-text-color);

@@ -1,0 +1,56 @@
+@function _get-map-prop($map, $key) {
+  @if map-has-key($map, $key) {
+    @return map-get($map, $key);
+  } 
+
+  @warn "Unknown key `#{$key}`.";
+  @return null;
+}
+
+@function size($key: "m") {
+  @if ($native == false) {
+    @return addPX(_get-map-prop($sizes, $key));
+  } @else {
+    @return _get-map-prop($sizes, $key);
+  }    
+}
+
+@function z($key) {
+  @return _get-map-prop($z-layers, $key);
+}
+
+@function font-size($key: "n") {
+  @if ($key == 'display') {
+    @warn "Display key is deprecated";
+  }
+  @if ($native == false) {
+    @return addPX(_get-map-prop($font-sizes, $key));
+  } @else {
+    @return _get-map-prop($font-sizes, $key);
+  }  
+}
+
+@function line-height($key: "m") {
+  @if ($native == false) {
+    @return addPX(_get-map-prop($line-height, $key));
+  } @else {
+    @return _get-map-prop($line-height, $key);
+  }    
+}
+
+@function addPX($value) {
+  @return $value + unquote("px");
+}
+
+@function font-weight($key: "normal") {
+  @return _get-map-prop($font-weight, $key);
+}
+
+@function get-color($variant, $map: $kirby-colors) {
+  $value: _get-map-prop($map, $variant);
+  @if ($native == true) {
+    @return $value;
+  } @else {
+    @return unquote('var(--' + $variant+ ')');
+  }
+}

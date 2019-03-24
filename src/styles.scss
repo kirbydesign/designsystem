@@ -9,48 +9,49 @@
 // Import common styles
 @import "~prismjs/themes/prism";
 @import "./kirby/scss/web-imports";
-@import "./kirby/scss/themes/common-themes";
+@import "./kirby/scss/themes/colors";
+@import "./kirby/scss/base/typography";
 
-@font-face {
-  font-family: "Effra";
+@font-face { 
+  font-family: "Roboto";
   font-style: normal;
   font-weight: 400;
   font-display: swap;
   src:
-    url("/assets/fonts/effraregular-webfont.woff2") format("woff2"),
-    url("/assets/fonts/effraregular-webfont.woff") format("woff");
+    url("/assets/fonts/roboto-regular-webfont.woff2") format("woff2");
 }
 
 @font-face {
-  font-family: "Effra";
+  font-family: "Roboto";
   font-style: normal;
-  font-weight: 200;
+  font-weight: 300;
   font-display: swap;
   src:
-    url("/assets/fonts/effralight-webfont.woff2") format("woff2"),
-    url("/assets/fonts/effralight-webfont.woff") format("woff");
+    url("/assets/fonts/roboto-light-webfont.woff2") format("woff2");
 }
 
 @font-face {
-  font-family: "Effra";
+  font-family: "Roboto";
   font-style: normal;
   font-weight: 700;
   font-display: swap;
   src:
-    url("/assets/fonts/effrabold-webfont.woff2") format("woff2"),
-    url("/assets/fonts/effrabold-webfont.woff") format("woff");
+    url("/assets/fonts/roboto-bold-webfont.woff2") format("woff2");
 }
 
 :root { 
-  --ion-font-family: "Effra";
-  font-family: var(--ion-font-family);
+  --kirby-font-family: "Roboto";
+  font-family: var(--kirby-font-family);
 }
 
 body, html {
   margin: 0;
   padding: 0;
-  background-color: #F2F2F2;
+  background-color: get-color("kirby-white");
   box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  font-size: font-size("n");
+  color: get-color("kirby-grey-9");  
 }
 
 *, 
@@ -59,20 +60,8 @@ body, html {
 }
 
 :root {
-  @each $color, $color-name in map-get($themes, 'default') {
+  @each $color, $color-name in $kirby-colors {
     --#{$color}: #{$color-name};
-  }
-}
-
-// Generates all the theme variables 
-@each $themeName, $theme in $themes {
-  .theme--#{$themeName} {
-    --kirby-primary: #{get-color('primary', $theme)};
-    --kirby-on-primary: #{get-color('on-primary', $theme)};
-    --kirby-secondary: #{get-color('secondary', $theme)};
-    --kirby-on-secondary: #{get-color('on-secondary', $theme)};
-    --kirby-surface: #{get-color('surface', $theme)};
-    --kirby-on-surface: #{get-color('on-surface', $theme)};
   }
 }
 

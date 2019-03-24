@@ -1,7 +1,7 @@
 @import '../../scss/native-imports';
 
 Button[kirby-button] {
-  color: get-color('kirby-on-primary');
+  color: get-color('kirby-primary-contrast');
   background-color: get-color('kirby-primary');
   border-color: get-color('kirby-primary');
   border-radius: 100;
@@ -10,7 +10,7 @@ Button[kirby-button] {
   padding: 12 20;
   
   &[colortype='secondary'] {
-    color: get-color('kirby-on-secondary');
+    color: get-color('kirby-secondary-contrast');
     background-color: get-color('kirby-secondary');
     border-color: get-color('kirby-secondary');
   }
