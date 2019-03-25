@@ -10,15 +10,13 @@ import {
   QueryList,
   SimpleChanges,
   TemplateRef,
-  ElementRef,
-  ViewChild,
 } from '@angular/core';
 
 import {
-  ListItemDirective,
-  ListHeaderDirective,
-  ListSectionHeaderDirective,
   ListCellDirective,
+  ListHeaderDirective,
+  ListItemDirective,
+  ListSectionHeaderDirective,
 } from './list.directive';
 import { LoadOnDemandEvent, LoadOnDemandEventData } from './list.event';
 import { ListHelper } from './helpers/list-helper';
@@ -41,9 +39,11 @@ export class ListComponent implements OnInit, OnChanges {
    * Callback to determine name of section. Sections will be ordered alphabetically.
    */
   @Input() getSectionName?: (item: any) => string;
-  @Input() noMoreItemsText: string;
 
-  @Output() loadOnDemand = new EventEmitter<LoadOnDemandEvent>();
+  /**
+   * Text to display when no more items can be loaded (used for "on demand"-loading).
+   */
+  @Input() noMoreItemsText: string;
 
   /**
    * Determine outline shape of:
@@ -53,6 +53,11 @@ export class ListComponent implements OnInit, OnChanges {
    * `square` means **without** rounded corners, `rounded` means **with** rounded corners.
    */
   @Input() shape: ListShape = 'square';
+
+  /**
+   * Emitting event when more items are to be loaded.
+   */
+  @Output() loadOnDemand = new EventEmitter<LoadOnDemandEvent>();
 
   /**
    * Emitting event when an item is selected (tab'ed on mobile, clicked on web)
@@ -85,6 +90,7 @@ export class ListComponent implements OnInit, OnChanges {
     const { items } = changes;
     this.isSectionsEnabled = !!this.getSectionName;
     this.isSelectable = this.itemSelect.observers.length > 0;
+    this.determineClasses((items && items.currentValue) || []);
     this.isLoadOnDemandEnabled = this.loadOnDemand.observers.length > 0;
   }
 

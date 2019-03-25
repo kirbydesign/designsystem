@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component } from '@angular/core';
+import { Component, SimpleChange } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
 import { LoadOnDemandEvent } from './list.event';
@@ -7,6 +7,8 @@ import { GroupByPipe } from './pipes/group-by.pipe';
 import { ListComponent, ListShape } from './list.component';
 import { ListSectionHeaderComponent } from './list-section-header/list-section-header.component';
 import { ListCellComponent } from './list-cell/list-cell.component';
+import { SpinnerComponent } from '~/kirby';
+import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
 
 @Component({
   template: `
@@ -24,9 +26,6 @@ class ListHostComponent {
   items: any[];
   shape: ListShape;
 }
-import { ListComponent } from './list.component';
-import { SpinnerComponent } from '~/kirby';
-import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
 
 describe('ListComponent', () => {
   let testHost: ListHostComponent;
@@ -41,8 +40,8 @@ describe('ListComponent', () => {
         ListSectionHeaderComponent,
         ListCellComponent,
         GroupByPipe,
-          SpinnerComponent,
-          InfiniteScrollDirective
+        SpinnerComponent,
+        InfiniteScrollDirective,
       ],
     }).compileComponents();
   }));
@@ -183,7 +182,7 @@ describe('ListComponent', () => {
     });
 
     ['square', 'rounded'].forEach((shape: ListShape) => {
-      it(`should propogate '${shape}'-shape to "li.row"-elements`, () => {
+      it(`should propagate '${shape}'-shape to "li.row"-elements`, () => {
         testHost.shape = shape;
         fixture.detectChanges();
 
@@ -195,7 +194,7 @@ describe('ListComponent', () => {
     });
   });
 
-  describe('function: onItemSelect', () => {
+  describe('onItemSelect', () => {
     it('should emit the selected item', () => {
       spyOn(component.itemSelect, 'emit');
       const itemToBeSelected = { value: 'this is a dummy item' };
@@ -207,17 +206,17 @@ describe('ListComponent', () => {
     });
   });
 
-  describe('function: ngOnInit', () => {
+  describe('"on demand"-loading"', () => {
     it('should enable load more, if there is a subscriber to the loadMore event emitter', () => {
       component.loadOnDemand.subscribe((loadMoreEvent: LoadOnDemandEvent) => {});
 
-      component.ngOnInit();
+      component.ngOnChanges({});
 
       expect(component.isLoadOnDemandEnabled).toBeTruthy();
     });
 
     it('should disable load more, if there is no subscriber to the loadMore event emitter', () => {
-      component.ngOnInit();
+      component.ngOnChanges({});
 
       expect(component.isLoadOnDemandEnabled).toBeFalsy();
     });
