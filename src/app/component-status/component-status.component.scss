@@ -37,7 +37,6 @@
 
         &.component {
             vertical-align: middle;
-            border-bottom: .1rem solid #b6b6b6;
     
             .component {
                     
@@ -62,14 +61,19 @@
     
         }
 
+        &.component:not(.expanded),
+        &.subcomponent:last-child
+        {
+            border-bottom: .1rem solid var(--kirby-grey-4);
+        }
+
         &.subcomponent {
             vertical-align: middle;
-            border-bottom: .1rem solid #dfe3e8;
+            border-top: .1rem dashed var(--kirby-grey-4);
             color: var(--kirby-grey-7);
             font-size: font-size("s");
     
             td {
-                border-top: .1rem solid #dfe3e8;
     
                 &:first-child {
                     padding-left: 1rem;
