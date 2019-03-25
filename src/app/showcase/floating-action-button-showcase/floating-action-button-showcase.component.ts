@@ -16,16 +16,19 @@ export class FloatingActionButtonShowcaseComponent implements OnInit {
     <ShowcaseProperty>{
       name: 'hasShadow',
       description: 'Determines whether the button will have a shadow or not.',
+      defaultValue: 'true',
       inputValues: ['boolean'],
     },
     <ShowcaseProperty>{
       name: 'disabled',
       description: 'Determines whether the button will be disabled or not.',
+      defaultValue: 'false',
       inputValues: ['boolean'],
     },
     <ShowcaseProperty>{
       name: 'iconSrc',
       description: 'Points to the source of the icon, which will be used.',
+      defaultValue: `'/assets/icons/add/add@3x.png'`,
       inputValues: ['string'],
     },
   ];
