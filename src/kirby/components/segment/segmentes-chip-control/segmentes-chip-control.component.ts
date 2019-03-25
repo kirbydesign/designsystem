@@ -21,16 +21,17 @@ class SegmentedChipDirective {}
   styleUrls: ['./segmentes-chip-control.component.scss'],
 })
 class SegmentedChipControlComponent implements OnInit {
-  @Input('items') items: any[];
-  @Output('onChipSelect') onChipSelect = new EventEmitter<any>();
+  @Input() items: any[];
+  @Output() onChipSelect = new EventEmitter<any>();
   @ContentChild(SegmentedChipDirective, { read: TemplateRef }) segmentedChipTemplate;
 
   constructor() {}
   segmentedChipSelect(item: any): void {
     this.onChipSelect.emit(item);
   }
-  ngOnInit(): void {
-    console.log('::::' + this.items);
-  }
+  /**
+   * Lifecycle method:
+   */
+  ngOnInit(): void {}
 }
 export { SegmentedChipControlComponent, SegmentedChipDirective };

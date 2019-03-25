@@ -38,7 +38,6 @@ export class SegmentExampleComponent implements OnInit {
     data: 'chip-1',
   };
   chipSelected(chip: any): void {
-    console.log('chip Select:::' + chip.data);
     this.selected = chip;
   }
   ngOnInit() {}
