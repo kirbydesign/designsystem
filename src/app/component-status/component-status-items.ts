@@ -284,7 +284,8 @@ export const componentStatusItems: ComponentStatusItem[] = [
       version: 0.1,
       status: ItemCodeStatus.ready,
       cookbookUrl: 'showcase/spinner',
-      github: 'https://github.com/kirbydesign/designsystem/tree/master/src/kirby/components/spinner',
+      github:
+        'https://github.com/kirbydesign/designsystem/tree/master/src/kirby/components/spinner',
     },
     children: [
       {
