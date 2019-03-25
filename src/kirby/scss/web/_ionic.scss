@@ -16,7 +16,7 @@
     @return mix(white, $color, 10%);
 }
 
-@mixin ionic-color-map($ionic-variant, $kirby-variant) {
+@mixin ionic-color-map($ionic-variant, $kirby-variant: $ionic-variant) {
     $kirby-base: _get-kirby-color($kirby-variant);
     $kirby-contrast: _get-kirby-color($kirby-variant + '-contrast');
     --ion-color-#{$ionic-variant}: var(--kirby-#{$kirby-variant});
@@ -29,11 +29,11 @@
 }
 
 :root {
-    @include ionic-color-map('primary', 'primary');
-    @include ionic-color-map('secondary', 'secondary');
-    @include ionic-color-map('tertiary', 'tertiary');
+    @include ionic-color-map('primary');
+    @include ionic-color-map('secondary');
+    @include ionic-color-map('tertiary');
 
-    @include ionic-color-map('success', 'success');
+    @include ionic-color-map('success');
     @include ionic-color-map('warning', 'alert');
-    @include ionic-color-map('danger', 'danger');    
+    @include ionic-color-map('danger');
 }
