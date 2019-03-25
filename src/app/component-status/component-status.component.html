@@ -4,7 +4,7 @@
 </div>
 <p>The latest component updates and changes. If you have a suggestion for a new
     component not listed here,
-    <a href="https://github.com/kirbydesign/designsystem/issues/new/choose">create an issue on GitHub</a></p>
+    <a [href]="newIssueUrl">create an issue on GitHub</a></p>
 
     <div class="search">Search Component(s): <input autofocus type="text" (keyup)="searchTerm$.next($event.target.value)"></div>
 
