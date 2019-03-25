@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+import { environment } from '~/environments/environment';
+
 import {
   componentStatusItems,
   ComponentStatusItem,
@@ -48,6 +50,10 @@ export class ComponentStatusComponent implements OnInit {
       (item.code.status === ItemCodeStatus.underConsideration ||
         item.code.status === ItemCodeStatus.notCurrentlyPlanned)
     );
+  }
+
+  public getGithubIssueUrl(githubIssueNo: number) {
+    return environment.githubBaseUrl + '/issues/' + githubIssueNo;
   }
 
   private sortByStatus(a: ComponentStatusItem, b: ComponentStatusItem) {

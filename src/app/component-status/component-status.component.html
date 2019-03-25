@@ -55,11 +55,11 @@
 
 <ng-template #codeTemplate let-code>
     <ng-container *ngTemplateOutlet="codeStatusTemplate; context: {$implicit: code?.status}"></ng-container>
-    <a *ngIf="code?.githubIssue" [href]="code?.githubIssue">
+    <a *ngIf="code?.githubIssueNo" [href]="getGithubIssueUrl(code.githubIssueNo)">
         {{code?.status}}
-        <ion-icon *ngIf="code?.githubIssue" name="open"></ion-icon>
+        <ion-icon *ngIf="code?.githubIssueNo" name="open"></ion-icon>
     </a>
-    <span *ngIf="!code?.githubIssue">
+    <span *ngIf="!code?.githubIssueNo">
         {{code?.status}}
     </span>
     <ng-container *ngTemplateOutlet="versionTemplate; context: {$implicit: code?.version}"></ng-container>

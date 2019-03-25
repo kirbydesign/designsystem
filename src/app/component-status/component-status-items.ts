@@ -10,7 +10,7 @@ export interface ComponentStatusItem {
   code: {
     version: number;
     status: string;
-    githubIssue?: string;
+    githubIssueNo?: number;
     cookbookUrl?: string;
     github?: string;
   };
@@ -68,8 +68,8 @@ export const componentStatusItems: ComponentStatusItem[] = [
     },
     code: {
       version: 0.9,
-      status: ItemCodeStatus.inProgress,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues/165',
+      status: ItemCodeStatus.planned,
+      githubIssueNo: 165,
     },
   },
   {
@@ -89,6 +89,18 @@ export const componentStatusItems: ComponentStatusItem[] = [
     children: [
       {
         component: 'Icon Button',
+        priority: 0,
+        ux: {
+          version: 1.0,
+          status: ItemUXStatus.underConsideration,
+        },
+        code: {
+          version: 0.1,
+          status: ItemCodeStatus.underConsideration,
+        },
+      },
+      {
+        component: 'Outline Button',
         priority: 0,
         ux: {
           version: 1.0,
@@ -131,6 +143,45 @@ export const componentStatusItems: ComponentStatusItem[] = [
     children: [
       {
         component: 'Donut',
+        priority: 0,
+        ux: {
+          version: 0.0,
+          status: ItemUXStatus.underConsideration,
+        },
+        code: {
+          version: 1.0,
+          status: ItemCodeStatus.ready,
+          cookbookUrl: 'showcase/chart',
+        },
+      },
+      {
+        component: 'Pie',
+        priority: 0,
+        ux: {
+          version: 0.0,
+          status: ItemUXStatus.underConsideration,
+        },
+        code: {
+          version: 1.0,
+          status: ItemCodeStatus.ready,
+          cookbookUrl: 'showcase/chart',
+        },
+      },
+      {
+        component: 'Area Spline',
+        priority: 0,
+        ux: {
+          version: 0.0,
+          status: ItemUXStatus.underConsideration,
+        },
+        code: {
+          version: 1.0,
+          status: ItemCodeStatus.ready,
+          cookbookUrl: 'showcase/chart',
+        },
+      },
+      {
+        component: 'Activity Gauge',
         priority: 0,
         ux: {
           version: 0.0,
@@ -256,7 +307,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
     code: {
       version: 0.0,
       status: ItemCodeStatus.planned,
-      githubIssue: 'https://github.com/kirbydesign/designsystem/issues/111',
+      githubIssueNo: 111,
     },
     children: [
       {
@@ -269,6 +320,30 @@ export const componentStatusItems: ComponentStatusItem[] = [
         code: {
           version: 0.0,
           status: ItemCodeStatus.planned,
+        },
+      },
+      {
+        component: 'Popover Modal',
+        priority: 0,
+        ux: {
+          version: 1.0,
+          status: ItemUXStatus.ready,
+        },
+        code: {
+          version: 0.0,
+          status: ItemCodeStatus.planned,
+        },
+      },
+      {
+        component: 'Alert Modal',
+        priority: 0,
+        ux: {
+          version: 1.0,
+          status: ItemUXStatus.underConsideration,
+        },
+        code: {
+          version: 0.0,
+          status: ItemCodeStatus.underConsideration,
         },
       },
     ],
@@ -298,6 +373,43 @@ export const componentStatusItems: ComponentStatusItem[] = [
         code: {
           version: 0.0,
           status: ItemCodeStatus.notCurrentlyPlanned,
+        },
+      },
+      {
+        component: 'Progress Bar',
+        priority: 0,
+        ux: {
+          version: 0.0,
+          status: ItemUXStatus.notCurrentlyPlanned,
+        },
+        code: {
+          version: 0.0,
+          status: ItemCodeStatus.notCurrentlyPlanned,
+        },
+      },
+      {
+        component: 'Skeleton Text',
+        priority: 0,
+        ux: {
+          version: 0.0,
+          status: ItemUXStatus.notCurrentlyPlanned,
+        },
+        code: {
+          version: 0.0,
+          status: ItemCodeStatus.underConsideration,
+        },
+      },
+      {
+        component: 'Spinner',
+        priority: 0,
+        ux: {
+          version: 0.0,
+          status: ItemUXStatus.underConsideration,
+        },
+        code: {
+          version: 0.1,
+          status: ItemCodeStatus.ready,
+          cookbookUrl: 'showcase/spinner',
         },
       },
     ],
@@ -377,7 +489,20 @@ export const componentStatusItems: ComponentStatusItem[] = [
         code: {
           version: 0.9,
           status: ItemCodeStatus.inProgress,
-          githubIssue: 'https://github.com/kirbydesign/designsystem/issues/166',
+          githubIssueNo: 166,
+        },
+      },
+      {
+        component: 'Segmented Chip Control',
+        priority: 12,
+        ux: {
+          version: 0.0,
+          status: ItemUXStatus.underConsideration,
+        },
+        code: {
+          version: 0.1,
+          status: ItemCodeStatus.inProgress,
+          githubIssueNo: 144,
         },
       },
     ],

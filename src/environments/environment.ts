@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  githubBaseUrl: 'https://github.com/kirbydesign/designsystem',
 };
 
 /*
