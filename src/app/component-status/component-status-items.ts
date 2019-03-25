@@ -44,7 +44,7 @@ export enum ItemCodeStatusOrder {
 export const componentStatusItems: ComponentStatusItem[] = [
   {
     component: 'Avatar',
-    priority: 27,
+    priority: 0,
     ux: {
       version: 1.0,
       status: ItemUXStatus.ready,
@@ -60,7 +60,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
   {
     component: 'Badge',
     aliases: ['Beacon'],
-    priority: 3,
+    priority: 20,
     ux: {
       version: 1.0,
       status: ItemUXStatus.ready,
@@ -68,13 +68,13 @@ export const componentStatusItems: ComponentStatusItem[] = [
     },
     code: {
       version: 0.9,
-      status: ItemCodeStatus.planned,
+      status: ItemCodeStatus.inProgress,
       githubIssueNo: 165,
     },
   },
   {
     component: 'Button',
-    priority: 15,
+    priority: 0,
     ux: {
       version: 1.0,
       status: ItemUXStatus.ready,
@@ -91,7 +91,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
         component: 'Icon Button',
         priority: 0,
         ux: {
-          version: 1.0,
+          version: 0.0,
           status: ItemUXStatus.underConsideration,
         },
         code: {
@@ -103,7 +103,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
         component: 'Outline Button',
         priority: 0,
         ux: {
-          version: 1.0,
+          version: 0.0,
           status: ItemUXStatus.underConsideration,
         },
         code: {
@@ -210,10 +210,10 @@ export const componentStatusItems: ComponentStatusItem[] = [
   {
     component: 'Chip',
     aliases: ['Button', 'Compact Button', 'Tag'],
-    priority: 0,
+    priority: 30,
     ux: {
-      version: 1.0,
-      status: ItemUXStatus.inProgress,
+      version: 0.0,
+      status: ItemUXStatus.underConsideration,
     },
     code: {
       version: 0.1,
@@ -232,11 +232,12 @@ export const componentStatusItems: ComponentStatusItem[] = [
     code: {
       version: 0.5,
       status: ItemCodeStatus.inProgress,
+      githubIssueNo: 171,
     },
   },
   {
     component: 'Icon',
-    priority: 0,
+    priority: 40,
     ux: {
       version: 1.0,
       status: ItemUXStatus.ready,
@@ -245,11 +246,12 @@ export const componentStatusItems: ComponentStatusItem[] = [
     code: {
       version: 0.5,
       status: ItemCodeStatus.planned,
+      githubIssueNo: 170,
     },
   },
   {
     component: 'Input',
-    priority: 0,
+    priority: 80,
     ux: {
       version: 0.0,
       status: ItemUXStatus.underConsideration,
@@ -261,7 +263,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
   },
   {
     component: 'List',
-    priority: 30,
+    priority: 50,
     ux: {
       version: 1.0,
       status: ItemUXStatus.ready,
@@ -275,7 +277,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
   },
   {
     component: 'List Item',
-    priority: 40,
+    priority: 60,
     ux: {
       version: 1.0,
       status: ItemUXStatus.ready,
@@ -299,7 +301,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
   },
   {
     component: 'Modal',
-    priority: 50,
+    priority: 70,
     ux: {
       version: 1.0,
       status: ItemUXStatus.inProgress,
@@ -338,7 +340,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
         component: 'Alert Modal',
         priority: 0,
         ux: {
-          version: 1.0,
+          version: 0.0,
           status: ItemUXStatus.underConsideration,
         },
         code: {
@@ -430,7 +432,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
         component: 'Radio Button Group',
         priority: 0,
         ux: {
-          version: 1.0,
+          version: 0.0,
           status: ItemUXStatus.underConsideration,
         },
         code: {
@@ -444,7 +446,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
     component: 'Pull To Refresh',
     priority: 0,
     ux: {
-      version: 1.0,
+      version: 0.0,
       status: ItemUXStatus.underConsideration,
     },
     code: {
@@ -511,7 +513,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
     component: 'Tabs',
     priority: 0,
     ux: {
-      version: 1.0,
+      version: 0.0,
       status: ItemUXStatus.underConsideration,
     },
     code: {
