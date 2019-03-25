@@ -57,15 +57,12 @@
     <ng-container *ngTemplateOutlet="codeStatusTemplate; context: {$implicit: code?.status}"></ng-container>
     <a *ngIf="code?.githubIssueNo" [href]="getGithubIssueUrl(code.githubIssueNo)">
         {{code?.status}}
+        <ion-icon *ngIf="code?.githubIssueNo" name="open"></ion-icon>
     </a>
     <span *ngIf="!code?.githubIssueNo">
         {{code?.status}}
     </span>
     <ng-container *ngTemplateOutlet="versionTemplate; context: {$implicit: code?.version}"></ng-container>
-    <span *ngIf="code?.livestatus" title="Live status from GitHub Issue">
-        <ion-icon name="flash" color="warning"></ion-icon>
-        <ion-icon name="logo-github" color="medium"></ion-icon>
-    </span>
 </ng-template>
 
 <ng-template #uxTemplate let-ux>
