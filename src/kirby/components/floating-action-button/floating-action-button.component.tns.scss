@@ -1,7 +1,8 @@
+// @import '../../scss/web-imports';
 @import '../../scss/native-imports';
 
 .fab {
-    background-color: #00e89a;
+    background-color: get-color('kirby-primary');
     border-radius: 32;
     width: 64;
     height: 64;
