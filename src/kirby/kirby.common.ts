@@ -21,6 +21,8 @@ import { ListHeaderComponent } from './components/list/list-header/list-header.c
 import { ListCellComponent } from './components/list/list-cell/list-cell.component';
 import { ListCellLineComponent } from './components/list/list-cell-line/list-cell-line.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
+import { ChipComponent } from './components/chip/chip.component';
+import { SegmentedChipControlComponent, SegmentedChipDirective} from './components/segment/segmentes-chip-control/segmentes-chip-control.component';
 
 export const declarations = [
   CardComponent,
@@ -44,4 +46,7 @@ export const declarations = [
   AvatarComponent,
   GroupByPipe,
   SpinnerComponent,
+  ChipComponent,
+  SegmentedChipControlComponent,
+  SegmentedChipDirective
 ];

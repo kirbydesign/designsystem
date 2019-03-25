@@ -1,0 +1,15 @@
+:host {
+    /* make area with scroll hidden */
+    overflow: hidden;
+  .scrollable {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: center;
+    /* add to be able to scroll */
+    margin-bottom: -50px;
+    padding-bottom: 50px;
+    /* move it to the hidden part */
+  }
+}
+  

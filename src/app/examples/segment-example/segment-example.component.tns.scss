@@ -1,0 +1,14 @@
+.segment-example{
+  padding-top:20;
+  background: #f2f2f2;
+  .segment-data {
+      height: 300px;
+      margin-top: 20;
+      border-radius: 10;
+      background: #ffffff;
+      Label {
+          margin-top:50;
+          text-align: center;
+      }
+  }
+}

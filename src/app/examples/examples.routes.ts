@@ -9,6 +9,7 @@ import { ChartExampleComponent } from './chart-example/chart-example.component';
 import { FontsExampleComponent } from './fonts-example/fonts-example.component';
 import { SpinnerExampleComponent } from './spinner-example/spinner-example.component';
 import { SegmentExampleComponent } from './segment-example/segment-example.component';
+import { ChipExampleComponent } from './chip-example/chip-example.component';
 export const routes: Routes = [
   {
     path: '',
@@ -33,6 +34,10 @@ export const routes: Routes = [
   {
     path: 'grid',
     component: GridExampleComponent,
+  },
+  {
+    path: 'chip',
+    component: ChipExampleComponent,
   },
   {
     path: 'avatar',

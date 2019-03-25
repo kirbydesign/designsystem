@@ -1,0 +1,9 @@
+<ScrollView orientation="horizontal">
+    <WrapLayout orientation="horizontal">
+        <ng-template ngFor let-item [ngForOf]="items">
+            <StackLayout (tap)="segmentedChipSelect(item)">
+                <ng-container *ngTemplateOutlet="segmentedChipTemplate; context: { $implicit: item}"></ng-container>
+            </StackLayout>
+        </ng-template>
+    </WrapLayout>
+</ScrollView>

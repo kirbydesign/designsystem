@@ -1,3 +1,7 @@
-<div>
-    going to implement segmented chips
+<kirby-segmented-chip-control [items]="myItems" (onChipSelect)="chipSelected($event)">
+        <kirby-chip *kirbySegmentedChip="let tab" [title] = "tab.data" [isActive] ="tab.id == selected.id"></kirby-chip>
+</kirby-segmented-chip-control>
+      
+<div class="segment-data" *ngIf="selected.data">
+          Content of tab {{selected.id}} is {{selected.data}}
 </div>

@@ -1,0 +1,10 @@
+@import '../../scss/native-imports';
+.chip {
+  border-radius: 25;
+  margin-right: 10;
+  padding:5 10;
+  font-size: 14;
+  &.active {
+      background:  #cfd4d3;;
+  }
+}

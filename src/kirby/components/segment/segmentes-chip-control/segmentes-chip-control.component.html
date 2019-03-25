@@ -1,0 +1,7 @@
+   <div class="scrollable">
+        <ng-template ngFor let-item [ngForOf]="items">
+            <div (click)="segmentedChipSelect(item)">
+                <ng-container *ngTemplateOutlet="segmentedChipTemplate; context: { $implicit: item}"></ng-container>
+            </div>
+        </ng-template>
+    </div>

@@ -11,6 +11,8 @@ import { DoughnutChartShowcaseComponent } from './doughnut-chart-showcase/doughn
 import { FontsShowcaseComponent } from './fonts-showcase/fonts-showcase.component';
 import { ColorsShowcaseComponent } from './colors-showcase/colors-showcase.component';
 import { SpinnerShowcaseComponent } from './spinner-showcase/spinner-showcase.component';
+import { ChipShowcaseComponent } from './chip-showcase/chip-showcase.component';
+import { SegmentShowcaseComponent } from './segment-showcase/segment-showcase.component';
 
 export const routes: Routes = [
   {
@@ -25,6 +27,14 @@ export const routes: Routes = [
       {
         path: 'button',
         component: ButtonShowcaseComponent,
+      },
+      {
+        path: 'chip',
+        component: ChipShowcaseComponent,
+      },
+      {
+        path: 'segment',
+        component: SegmentShowcaseComponent,
       },
       {
         path: 'avatar',
