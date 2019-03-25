@@ -8,6 +8,8 @@ ul {
 
   li {
     background-color: var(--kirby-surface);
+    background-color: get-color('kirby-white');
+    border-bottom: 1px solid get-color('kirby-grey-2');
     padding: size('m');
     display: flex;
     flex-direction: row;
@@ -18,7 +20,7 @@ ul {
     }
 
     &.row{
-      border-color: var(--kirby-background);
+      border-color: get-color('kirby-grey-2');
       border-style: solid;
       border-width: 0 0 1px 0;
 
@@ -41,7 +43,7 @@ ul {
       border: none;
 
       &~.row:not(.rounded) {
-        border-bottom: 1px solid var(--kirby-background);
+        border-bottom: 1px solid get-color('kirby-grey-2');
       }
 
       &:hover {
@@ -52,7 +54,7 @@ ul {
     &.selectable {
 
       &:hover {
-        background-color: var(--kirby-secondary);
+        background-color: get-color('kirby-secondary');
       }
     }
   }
