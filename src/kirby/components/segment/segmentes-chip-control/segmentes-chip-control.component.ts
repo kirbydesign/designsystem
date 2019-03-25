@@ -1,10 +1,19 @@
-import { Component, Directive, Input, OnInit, ContentChild, TemplateRef, Output, EventEmitter, AfterContentInit } from '@angular/core';
-
+import {
+  Component,
+  Directive,
+  Input,
+  OnInit,
+  ContentChild,
+  TemplateRef,
+  Output,
+  EventEmitter,
+  AfterContentInit,
+} from '@angular/core';
 
 @Directive({
   selector: '[kirbySegmentedChip]',
 })
-class SegmentedChipDirective { }
+class SegmentedChipDirective {}
 
 @Component({
   selector: 'kirby-segmented-chip-control',
@@ -15,13 +24,13 @@ class SegmentedChipControlComponent implements OnInit {
   @Input('items') items: any[];
   @Output('onChipSelect') onChipSelect = new EventEmitter<any>();
   @ContentChild(SegmentedChipDirective, { read: TemplateRef }) segmentedChipTemplate;
-  
-  constructor() { }
+
+  constructor() {}
   segmentedChipSelect(item: any): void {
     this.onChipSelect.emit(item);
   }
   ngOnInit(): void {
-    console.log("::::" + this.items)
+    console.log('::::' + this.items);
   }
 }
-export { SegmentedChipControlComponent, SegmentedChipDirective }
+export { SegmentedChipControlComponent, SegmentedChipDirective };

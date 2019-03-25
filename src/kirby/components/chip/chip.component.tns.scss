@@ -1,10 +1,13 @@
 @import '../../scss/native-imports';
+$min-card-width: 50;
+$chip-active-color:#cfd4d3;
 .chip {
   border-radius: 25;
   margin-right: 10;
   padding:5 10;
-  font-size: 14;
+  font-size: font-size('xs');
+  min-width: $min-card-width;
   &.active {
-      background:  #cfd4d3;;
+      background: $chip-active-color;
   }
 }

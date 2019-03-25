@@ -19,5 +19,5 @@ export const COMPONENT_DECLARATIONS: any[] = [
   FontsExampleComponent,
   SpinnerExampleComponent,
   SegmentExampleComponent,
-  ChipExampleComponent
+  ChipExampleComponent,
 ];

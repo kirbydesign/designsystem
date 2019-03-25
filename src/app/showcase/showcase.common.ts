@@ -30,7 +30,7 @@ export const COMPONENT_EXPORTS: any[] = [
   LineChartShowcaseComponent,
   SpinnerShowcaseComponent,
   ChipShowcaseComponent,
-  SegmentShowcaseComponent
+  SegmentShowcaseComponent,
 ];
 
 export const COMPONENT_DECLARATIONS: any[] = [...COMPONENT_EXPORTS, ShowcaseComponent];

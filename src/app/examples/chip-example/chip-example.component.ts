@@ -6,6 +6,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./chip-example.component.scss'],
 })
 export class ChipExampleComponent implements OnInit {
-constructor() {}
+  constructor() {}
   ngOnInit() {}
 }

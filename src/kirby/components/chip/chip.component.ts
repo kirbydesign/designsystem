@@ -4,12 +4,10 @@ import { Component, ViewEncapsulation, Input } from '@angular/core';
   selector: 'kirby-chip',
   templateUrl: './chip.component.html',
   styleUrls: ['./chip.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class ChipComponent {
-  @Input('title') title: String;
-  @Input('isActive') isActive: boolean;
-  constructor() {
-    console.log("----------------->>>chip")
-   }
+  @Input() title: String;
+  @Input() isActive: boolean;
+  constructor() {}
 }
