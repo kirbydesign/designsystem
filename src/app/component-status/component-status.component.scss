@@ -65,7 +65,7 @@
         &.subcomponent {
             vertical-align: middle;
             border-bottom: .1rem solid #dfe3e8;
-            color: var(--kirby-text-secondary);
+            color: var(--kirby-grey-7);
             font-size: font-size("s");
     
             td {
@@ -77,13 +77,13 @@
             }
     
             a {
-                color: var(--kirby-text-secondary);
+                color: var(--kirby-grey-7);
             }
             
         }
 
         &.someday-maybe {
-            color: var(--kirby-text-secondary);
+            color: var(--kirby-grey-7);
             font-style: italic;
         }   
     
@@ -101,7 +101,7 @@
         }
 
         &.someday-maybe {
-            color: var(--kirby-text-secondary);
+            color: var(--kirby-grey-7);
             font-style: italic;
         }
     }
@@ -119,5 +119,6 @@
         vertical-align: sub;
         margin-left: 0.5rem;
         --background: var(--kirby-grey-5);
+        --color: var(--kirby-white);
     }
 }
