@@ -26,6 +26,10 @@ export const routes: Routes = [
         path: 'showcase',
         loadChildren: './showcase/showcase.module#ShowcaseModule',
       },
+      {
+        path: 'component-status',
+        loadChildren: './component-status/component-status.module#ComponentStatusModule',
+      },
     ],
   },
   {
