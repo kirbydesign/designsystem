@@ -18,8 +18,9 @@
     </thead>
     <ng-container *ngFor="let item of items$ | async as items">
         <tbody>
-            <tr class="component" [class.group]="item.children?.length > 0" [class.someday-maybe]="isUnderConsiderationOrNotPlanned(item)" onclick="this.classList.toggle('expanded');">
+            <tr class="component" [class.someday-maybe]="isUnderConsiderationOrNotPlanned(item)" #componentrow>
                 <td class="component">
+                    <ion-icon *ngIf="item.children?.length > 0" [name]="componentrow.classList.contains('expanded') ? 'folder-open' : 'folder'" (click)="componentrow.classList.toggle('expanded');" color="medium"></ion-icon>
                     <ng-container *ngTemplateOutlet="componentTemplate; context: {$implicit: item}"></ng-container>
                 </td>
                 <td [class.someday-maybe]="item.ux?.status === uxStatusEnum.underConsideration">
@@ -56,28 +57,28 @@
     <ng-container *ngTemplateOutlet="codeStatusTemplate; context: {$implicit: code?.status}"></ng-container>
     <a *ngIf="code?.githubIssue" [href]="code?.githubIssue">
         {{code?.status}}
-        <ng-container *ngTemplateOutlet="versionTemplate; context: {$implicit: code?.version}"></ng-container>
+        <ion-icon *ngIf="code?.githubIssue" name="open"></ion-icon>
     </a>
     <span *ngIf="!code?.githubIssue">
         {{code?.status}}
-        <ng-container *ngTemplateOutlet="versionTemplate; context: {$implicit: code?.version}"></ng-container>
     </span>
+    <ng-container *ngTemplateOutlet="versionTemplate; context: {$implicit: code?.version}"></ng-container>
 </ng-template>
 
 <ng-template #uxTemplate let-ux>
     <ng-container *ngTemplateOutlet="uxStatusTemplate; context: {$implicit: ux?.status}"></ng-container>
     <a *ngIf="ux?.zeplinUrl" [href]="ux?.zeplinUrl">
         {{ux?.status}}
-        <ng-container *ngTemplateOutlet="versionTemplate; context: {$implicit: ux?.version}"></ng-container>
+        <ion-icon *ngIf="ux?.zeplinUrl" name="open"></ion-icon>
     </a>
     <ng-container *ngIf="!ux?.zeplinUrl">
         {{ux?.status}}
-        <ng-container *ngTemplateOutlet="versionTemplate; context: {$implicit: ux?.version}"></ng-container>
     </ng-container>
+    <ng-container *ngTemplateOutlet="versionTemplate; context: {$implicit: ux?.version}"></ng-container>
 </ng-template>
 
 <ng-template #versionTemplate let-version>
-    <ng-container *ngIf="version">({{version | number: '1.1-2'}})</ng-container>
+    <ng-container *ngIf="version"><ion-badge mode="ios">{{version | number: '1.1-2'}}</ion-badge></ng-container>
 </ng-template>
 
 <ng-template #uxStatusTemplate let-status>

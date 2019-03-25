@@ -39,37 +39,17 @@
             vertical-align: middle;
             border-bottom: .1rem solid #b6b6b6;
     
-            &.group {
-    
-                .component {
-                    cursor: pointer;                
+            .component {
                     
-                    &::before {
-                        content: "";
-                        width: 20px;
-                        height: 1rem;
-                        display: block;
-                        position: absolute;
-                        margin-left: -2rem;
-                        background-color: var(--kirby-primary-light);
-                        -webkit-mask: url("/assets/icons/sprites/folder-plus.svg") no-repeat left center;
-                        -webkit-mask-size: 1rem;
-                        mask: url("/assets/icons/sprites/folder-plus.svg") no-repeat left center;
-                        mask-size: 1.25em;
-                    }
-                    
+                ion-icon {
+                    cursor: pointer;
+                    display: block;
+                    position: absolute;
+                    margin-left: -2rem;
+                    font-size: 24px;
                 }
             }
-    
-            &.expanded {
-                .component {
-                    &::before {
-                        mask-image: url("/assets/icons/sprites/folder-minus.svg");
-                        -webkit-mask-image: url("/assets/icons/sprites/folder-minus.svg");
-                    }
-                }
-            }
-    
+   
             & ~ .subcomponent
             {
                 display: none;
@@ -122,21 +102,18 @@
         }
     }
 
-}
+    a[href^="https://"] ion-icon {
+        vertical-align: sub;
+        font-size: 18px;
 
-a[href^="https://"]
-{
-    &::after {
-        content: "";
-        width: 20px;
-        height: 1rem;
-        display: inline-block;
-        margin-left: 4px;
-        margin-bottom: -4px;
-        background-color: var(--kirby-on-background);
-        -webkit-mask: url("/assets/icons/sprites/new-tab.svg") no-repeat left center;
-        -webkit-mask-size: 1rem;
-        mask: url("/assets/icons/sprites/new-tab.svg") no-repeat left center;
-        mask-size: 1rem;
+        &[name="open"] {
+            color: var(--kirby-grey-8);
+        }
+    }
+    
+    ion-badge {
+        vertical-align: sub;
+        margin-left: 0.5rem;
+        --background: var(--kirby-grey-5);
     }
 }
