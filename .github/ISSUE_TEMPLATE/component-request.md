@@ -26,8 +26,8 @@ Add any other context or screenshots about the feature request here, e.g. a link
     - [ ] Web implementation
     - [ ] {N} implementation
 - [ ] [Implement Examples and Showcase](https://cookbook.kirby.design/home/showcase/button)
+- [ ] Add link to showcase on Kirby Component Status (`component-status-items.ts => code.cookbookUrl`)
 - [ ] Push commits to GitHub
 ### Review:
 - [ ] Open a pull request and ask @kirbydesign/kirby-guild for review
-- [ ] Update Kirby Component Status
 - [ ] Merge to master
