@@ -1,39 +1,48 @@
+
 <GridLayout rows="*"> <!-- GridLayout kept for backwards compatibility-->
   <RadListView
     row="0"
+    loadOnDemandMode="Auto"
+    (loadMoreDataRequested)="onLoadOnDemand($event)"
     [groupingFunction]="getSectionName"
     [items]="items"
   >
+    <!-- ITEM -->
     <ng-template tkListItemTemplate let-item="item">
-      <FlexboxLayout class="row" (tap)="onItemTap(item)">
+      <FlexboxLayout class="row" (tap)="onItemSelect(item)">
         <ng-container
-          *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }"
-        >
+          *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }">
         </ng-container>
         <ng-container *ngFor="let template of listCellTemplates">
           <ng-container
-            *ngTemplateOutlet="template; context: { $implicit: item }"
-          >
+            *ngTemplateOutlet="template; context: { $implicit: item }">
           </ng-container>
         </ng-container>
       </FlexboxLayout>
     </ng-template>
+
+    <!-- SECTION HEADER-->
     <ng-template let-section="category" tkGroupTemplate *ngIf="isSectionsEnabled">
       <FlexboxLayout alignItems="center" ios:height="50">
         <ng-container
           *ngTemplateOutlet="
             sectionHeaderTemplate;
             context: { $implicit: section }
-          "
-        ></ng-container>
+          ">
+        </ng-container>
       </FlexboxLayout>
-    </ng-template>
+    </ng-template> 
 
     <!-- HEADER -->
-    <ng-template tkListViewHeader *ngIf="listHeaderTemplate"> -->
+    <ng-template tkListViewHeader *ngIf="listHeaderTemplate">
       <FlexboxLayout class="row">
         <ng-container *ngTemplateOutlet="listHeaderTemplate"></ng-container>
       </FlexboxLayout>
+    </ng-template>
+
+    <!-- FOOTER -->
+    <ng-template tkListViewFooter *ngIf="!isLoadOnDemandEnabled && noMoreItemsText">
+      <Label class="lastRow" text="{{noMoreItemsText}}"></Label>
     </ng-template>
 
   </RadListView>

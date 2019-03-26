@@ -9,7 +9,9 @@
 // Import common styles
 @import "~prismjs/themes/prism";
 @import "./kirby/scss/web-imports";
-@import "./kirby/scss/themes/common-themes";
+@import "./kirby/scss/themes/colors";
+@import "./kirby/scss/web/ionic";
+@import "./kirby/scss/base/typography";
 
 @font-face { 
   font-family: "Roboto";
@@ -46,9 +48,11 @@
 body, html {
   margin: 0;
   padding: 0;
-  background-color: #F2F2F2;
+  background-color: get-color("kirby-white");
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
+  font-size: font-size("n");
+  color: get-color("kirby-grey-9");  
 }
 
 *, 
@@ -57,7 +61,7 @@ body, html {
 }
 
 :root {
-  @each $color, $color-name in map-get($themes, 'default') {
+  @each $color, $color-name in $kirby-colors {
     --#{$color}: #{$color-name};
   }
 }

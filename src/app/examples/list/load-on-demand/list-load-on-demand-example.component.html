@@ -1,0 +1,40 @@
+<!--
+
+  The kirby list will emit an event `(loadMore)`, when the user has scrolled 80% of the list.
+  It is the user of the Kirby list to add more items to the bound `[items]`.
+
+  The event emitted is of type `KirbyLoadMoreEvent`:
+
+  export interface KirbyListLoadMoreEvent {
+    complete: (disableLoadMore?: boolean) => void;
+  }
+
+  The `complete` callback function should be called when the loading of the additional items are done.
+
+  If the callback function is called with the `disableLoadMore` argument set to true, no further events will be emitted. 
+  Further more, if any is given, the `noMoreItemsText` will be shown.
+
+-->
+<kirby-list 
+  [items]="items"
+  (loadOnDemand)="onLoadDemand($event)"
+  noMoreItemsText="No more items">
+  <kirby-list-cell
+    *kirbyListCell="let account"
+    width="2">
+    <kirby-list-cell-line [primary]="true" [text]="account.title"></kirby-list-cell-line>
+    <kirby-list-cell-line [text]="account.detail === 0 ? null : account.detail"></kirby-list-cell-line>
+  </kirby-list-cell>
+  <kirby-list-cell
+    *kirbyListCell="let account"
+    width="0.5"
+    horisontalAlignment="right">
+    <kirby-list-cell-line [primary]="true" [text]="account.subTitle"></kirby-list-cell-line>
+  </kirby-list-cell>
+  <kirby-list-cell
+    *kirbyListCell="let account"
+    verticalAlignment="center"
+    horisontalAlignment="right">
+    <kirby-list-cell-line [primary]="true" [text]="account.amount"></kirby-list-cell-line>
+  </kirby-list-cell>
+</kirby-list>

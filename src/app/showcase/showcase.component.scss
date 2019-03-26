@@ -8,7 +8,7 @@
   &__header {
     text-transform: uppercase;
     font-size: 24px;
-    color: #797985;
+    color: get-color('kirby-grey-6');
     font-weight: 400;
     position: relative;
     flex-grow: 1;
@@ -26,13 +26,16 @@
   }
 }
 
+h4 {
+  margin-top: size("s");
+}
 
 .showcase-cta-box {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  background-color: #ececec;
-  box-shadow: 0px 3px 0px 0px rgba(25, 23, 23, 0.23);
+  background-color: get-color('kirby-white');
+  box-shadow: 0 20px 30px -15px rgba(45, 50, 48, 0.2);
   padding: 0.5rem 1rem;
   margin-top: size("s");
   border-radius: 10px;
@@ -66,10 +69,8 @@
   border-spacing: 0;
   border-collapse: collapse;
   width: 100%;
-  margin-top: size("m");
   thead {
-    background-color: var(--kirby-background);
-    color: var(--kirby-on-background);
+    background-color: get-color('kirby-grey-1');
   }
   th {
     font-weight: font-weight("normal");
@@ -79,7 +80,7 @@
     border-bottom: none;
   }
   td, th {
-    border: 1px solid var(--kirby-disabled);
+    border: 1px solid get-color('kirby-grey-4');
     border-width: 1px 1px 1px 1px;
     padding: 0.5rem 1rem;
   }
@@ -87,6 +88,6 @@
 
 ::ng-deep :not(pre) > code[class*="language-"], 
 ::ng-deep pre[class*="language-"] {
-  background-color: var(--kirby-background);
-  border: 1px solid var(--kirby-disabled);
+  background-color: get-color('kirby-grey-1');
+  border: 1px solid get-color('kirby-grey-4');
 }
