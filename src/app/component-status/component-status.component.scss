@@ -1,0 +1,128 @@
+@import '../../kirby/scss/web-imports';
+
+:host {
+    a {
+        color: #000;
+    }
+}
+
+.search {
+    margin-bottom: 1rem;
+}
+
+.component-status {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin-left: 1rem;
+
+    thead {
+        text-align: left;
+
+        th {
+            font-weight: 500;
+            line-height: 1.6;
+            text-transform: uppercase;
+            letter-spacing: .1rem;
+            padding: 1rem;
+            font-size: 1.3rem;
+
+            &:first-child {
+                padding-left: 0;
+            }
+        }
+    }
+
+    tr {
+
+        &.component {
+            vertical-align: middle;
+    
+            .component {
+                    
+                ion-icon {
+                    cursor: pointer;
+                    display: block;
+                    position: absolute;
+                    margin-left: -2rem;
+                    font-size: 24px;
+                }
+            }
+   
+            & ~ .subcomponent
+            {
+                display: none;
+            }
+    
+            &.expanded ~ .subcomponent
+            {
+                display: table-row;
+            }
+    
+        }
+
+        &.component:not(.expanded),
+        &.subcomponent:last-child
+        {
+            border-bottom: .1rem solid var(--kirby-grey-4);
+        }
+
+        &.subcomponent {
+            vertical-align: middle;
+            border-top: .1rem dashed var(--kirby-grey-4);
+            color: var(--kirby-grey-7);
+            font-size: font-size("s");
+    
+            td {
+    
+                &:first-child {
+                    padding-left: 1rem;
+                }
+            }
+    
+            a {
+                color: var(--kirby-grey-7);
+            }
+            
+        }
+
+        &.someday-maybe {
+            color: var(--kirby-grey-7);
+            font-style: italic;
+        }   
+    
+    }
+
+    td {
+        padding: 1rem;
+
+        &:first-child {
+            padding-left: 0;
+        }
+
+        &.component {
+            font-weight: font-weight("bold");
+        }
+
+        &.someday-maybe {
+            color: var(--kirby-grey-7);
+            font-style: italic;
+        }
+    }
+
+    a[href^="https://"] ion-icon {
+        vertical-align: sub;
+        font-size: 18px;
+
+        &[name="open"] {
+            color: var(--kirby-grey-8);
+        }
+    }
+    
+    ion-badge {
+        vertical-align: sub;
+        margin-left: 0.5rem;
+        --background: var(--kirby-grey-5);
+        --color: var(--kirby-white);
+    }
+}
