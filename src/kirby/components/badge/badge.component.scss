@@ -4,7 +4,7 @@
   font-size: font-size("xxs");
   border-radius: size("xs");
   background-color: var(--kirby-badge-bg, #{get-color('kirby-danger', $kirby-colors, true)});
-  color: var(--kirby-badge-bg, #{get-color('kirby-white', $kirby-colors, true)});;
+  color: var(--kirby-badge-color, #{get-color('kirby-white', $kirby-colors, true)});;
   height: size("s");
   min-width: size("s");
   display: inline-flex;
