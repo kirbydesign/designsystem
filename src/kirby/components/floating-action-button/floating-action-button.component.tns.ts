@@ -52,7 +52,6 @@ export class FloatingActionButtonComponent extends ContentView {
       var shape = new android.graphics.drawable.GradientDrawable();
       shape.setShape(android.graphics.drawable.GradientDrawable.OVAL);
       shape.setColor(android.graphics.Color.parseColor(this.getThemeColor('kirby-primary-shade')));
-      // shape.setColor(android.graphics.Color.parseColor('#00ffa4')); // A brigther shadow color that prevents the darker borders around the shape on android
       nativeView.setBackgroundDrawable(shape);
       nativeView.setElevation(15);
     } else if (this.view.ios) {
