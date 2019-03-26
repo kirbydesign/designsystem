@@ -1,5 +1,5 @@
 <kirby-segmented-chip-control [items]="myItems" (onChipSelect)="chipSelected($event)">
-        <kirby-chip *kirbySegmentedChip="let tab" [title] = "tab.data" [isActive] ="tab.id == selected.id"></kirby-chip>
+        <kirby-chip *kirbySegmentedChip="let item" [title] = "item.title" [isActive] ="item.index == selected.index"></kirby-chip>
 </kirby-segmented-chip-control>
       
 <div class="segment-data" *ngIf="selected.data">

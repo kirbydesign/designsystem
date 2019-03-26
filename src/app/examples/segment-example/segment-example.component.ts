@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
+interface SegmentChip {
+  index: number,
+  title: string
+}
+
 @Component({
   selector: 'kirby-segment-example',
   templateUrl: './segment-example.component.html',
@@ -7,35 +12,35 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SegmentExampleComponent implements OnInit {
   constructor() {}
-  myItems: any[] = [
+  myItems: SegmentChip[] = [
     {
-      id: 1,
-      data: 'chip-1',
+      index: 1,
+      title: 'chip-1',
     },
     {
-      id: 2,
-      data: 'chip-2',
+      index: 2,
+      title: 'chip-2',
     },
     {
-      id: 3,
-      data: 'chip-3',
+      index: 3,
+      title: 'chip-3',
     },
     {
-      id: 4,
-      data: 'chip-4',
+      index: 4,
+      title: 'chip-4',
     },
     {
-      id: 5,
-      data: 'chip-5',
+      index: 5,
+      title: 'chip-5',
     },
     {
-      id: 6,
-      data: 'chip-6',
+      index: 6,
+      title: 'chip-6',
     },
   ];
-  selected: any = {
-    id: 1,
-    data: 'chip-1',
+  selected: SegmentChip = {
+    index: 1,
+    title: 'chip-1',
   };
   chipSelected(chip: any): void {
     this.selected = chip;

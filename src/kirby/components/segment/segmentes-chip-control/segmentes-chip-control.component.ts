@@ -6,9 +6,13 @@ import {
   ContentChild,
   TemplateRef,
   Output,
-  EventEmitter,
-  AfterContentInit,
+  EventEmitter
 } from '@angular/core';
+
+interface SegmentChip {
+  index: number,
+  title: string
+}
 
 @Directive({
   selector: '[kirbySegmentedChip]',
@@ -21,12 +25,12 @@ class SegmentedChipDirective {}
   styleUrls: ['./segmentes-chip-control.component.scss'],
 })
 class SegmentedChipControlComponent implements OnInit {
-  @Input() items: any[];
-  @Output() onChipSelect = new EventEmitter<any>();
+  @Input() items: SegmentChip[];
+  @Output() onChipSelect = new EventEmitter<SegmentChip>();
   @ContentChild(SegmentedChipDirective, { read: TemplateRef }) segmentedChipTemplate;
 
   constructor() {}
-  segmentedChipSelect(item: any): void {
+  segmentedChipSelect(item: SegmentChip): void {
     this.onChipSelect.emit(item);
   }
   /**
