@@ -42,7 +42,7 @@ export class SegmentExampleComponent implements OnInit {
     index: 1,
     title: 'chip-1',
   };
-  chipSelected(chip: any): void {
+  chipSelected(chip: SegmentChip): void {
     this.selected = chip;
   }
   ngOnInit() {}

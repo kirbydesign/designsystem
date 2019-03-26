@@ -1,17 +1,17 @@
 @import "../../scss/web-imports";
 $min-card-width: 80px;
-$chip-active-color:#cfd4d3;
 .chip {
   white-space:nowrap;
   padding: 0 25px;
-  height: 32px;
-  font-size: font-size('xs');
+  height: 30px;
+  font-size: font-size('s');
   line-height: line-height('xl');
   border-radius: 25px;
   margin-right: 5px;
   min-width: $min-card-width;
   cursor: pointer;
   &:hover, &.active{
-      background-color:$chip-active-color;
+      background-color:get-color('kirby-grey-4');
     }
+  
 }

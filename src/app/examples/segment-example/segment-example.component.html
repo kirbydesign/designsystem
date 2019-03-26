@@ -2,6 +2,6 @@
         <kirby-chip *kirbySegmentedChip="let item" [title] = "item.title" [isActive] ="item.index == selected.index"></kirby-chip>
 </kirby-segmented-chip-control>
       
-<div class="segment-data" *ngIf="selected.data">
-          Content of tab {{selected.id}} is {{selected.data}}
+<div class="segment-data" *ngIf="selected.title">
+          Content of tab {{selected.index}} is {{selected.title}}
 </div>
