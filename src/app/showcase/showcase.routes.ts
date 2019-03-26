@@ -11,6 +11,7 @@ import { DoughnutChartShowcaseComponent } from './doughnut-chart-showcase/doughn
 import { FontsShowcaseComponent } from './fonts-showcase/fonts-showcase.component';
 import { ColorsShowcaseComponent } from './colors-showcase/colors-showcase.component';
 import { SpinnerShowcaseComponent } from './spinner-showcase/spinner-showcase.component';
+import { BadgeShowcaseComponent } from './badge-showcase/badge-showcase.component';
 
 export const routes: Routes = [
   {
@@ -57,6 +58,10 @@ export const routes: Routes = [
       {
         path: 'spinner',
         component: SpinnerShowcaseComponent,
+      },
+      {
+        path: 'badge',
+        component: BadgeShowcaseComponent,
       },
       {
         path: 'nativescript-only',
