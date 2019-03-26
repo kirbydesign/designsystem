@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+declare var require: any;
 @Component({
   selector: 'kirby-badge-showcase',
   templateUrl: './badge-showcase.component.html',
