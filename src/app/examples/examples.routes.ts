@@ -8,6 +8,7 @@ import { ListExampleComponent } from './list/list-example.component';
 import { ChartExampleComponent } from './chart-example/chart-example.component';
 import { FontsExampleComponent } from './fonts-example/fonts-example.component';
 import { SpinnerExampleComponent } from './spinner-example/spinner-example.component';
+import { FullscreenModalExampleComponent } from './fullscreen-modal-example/fullscreen-modal-example.component';
 
 export const routes: Routes = [
   {
@@ -45,5 +46,9 @@ export const routes: Routes = [
   {
     path: 'spinner',
     component: SpinnerExampleComponent,
+  },
+  {
+    path: 'fullscreen-modal',
+    component: FullscreenModalExampleComponent,
   },
 ];
