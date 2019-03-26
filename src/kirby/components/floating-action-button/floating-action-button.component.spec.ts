@@ -1,5 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { MockComponent } from 'ng-mocks';
+import * as ionic from '@ionic/angular';
+import { By } from '@angular/platform-browser';
 
 import { FloatingActionButtonComponent } from './floating-action-button.component';
 
@@ -11,8 +13,7 @@ describe('FloatingActionButtonComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [FloatingActionButtonComponent],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      declarations: [FloatingActionButtonComponent, MockComponent(ionic.IonFabButton)],
     }).compileComponents();
   }));
 
@@ -49,6 +50,18 @@ describe('FloatingActionButtonComponent', () => {
   describe('disabled', () => {
     it('should not be disabled by default', () => {
       expect(component.disabled).not.toBeTruthy();
+    });
+
+    it('should not be rendered as disabled by default', () => {
+      var el = fixture.debugElement.query(By.directive(ionic.IonFabButton));
+      expect(el.componentInstance.disabled).not.toBeTruthy();
+    });
+
+    it('should be rendered as disabled when disabled is set to true', () => {
+      component.disabled = true;
+      fixture.detectChanges();
+      var el = fixture.debugElement.query(By.directive(ionic.IonFabButton));
+      expect(el.componentInstance.disabled).toBeTruthy();
     });
   });
 
