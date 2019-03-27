@@ -7,3 +7,10 @@
   border-color: get-color('kirby-background');;
   border-width: 0 0 1 0;
 }
+
+.lastRow {
+  font-weight: bold;
+  text-align: center;
+  padding-bottom: size('gutter');
+  padding-top: 0;
+}

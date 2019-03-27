@@ -1,8 +1,9 @@
 @import '../../scss/native-imports';
 
-$color-card-bg: rgb(255, 255, 255);
-$color-card-border: rgb(133, 133, 133);
-.background, .container {
+$color-card-bg: get-color('kirby-white');
+
+.background, 
+.container {
     flex-direction: column;
     width: 100%;
 }
@@ -10,8 +11,6 @@ $color-card-border: rgb(133, 133, 133);
 .container {
     background-color: $color-card-bg;
     border-radius: $border-radius;
-    border: 1;
-    border-color: $color-card-border;
     margin: 8;
     padding-bottom: 16;
 }

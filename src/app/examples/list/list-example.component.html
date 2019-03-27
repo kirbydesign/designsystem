@@ -1,0 +1,125 @@
+<!-- 
+  kirby-list-cell supports the attributes:
+  - width: 
+  A relative number. A width of 1.5, will be 1.5 times the width of the default width.
+  Default is 1.
+  - horisontalAlignment: 
+  Supported values are 'left', 'center', 'right', 'space-between', 'space-around'.
+  Default is 'left' 
+  - verticalAlignment: 
+  Supported values are 'top', 'center', 'bottom', 'stretch', 'baseline'.
+  Default is 'center' 
+-->
+<kirby-list [items]="items">
+
+  <!-- HEADER -->
+  <!-- *kirbyListHeader is not supported in conjunction with *kirbyListSectionHeader due to a bug in RadListView on iOS -->
+  <kirby-list-header *kirbyListHeader>
+    <kirby-list-cell width="2">Name</kirby-list-cell>
+    <kirby-list-cell width="0.5"></kirby-list-cell>
+    <kirby-list-cell horisontalAlignment="right">Value</kirby-list-cell>
+  </kirby-list-header>
+
+  <!-- BODY -->
+  <kirby-list-cell
+    *kirbyListCell="let account"
+    width="2">
+    <kirby-list-cell-line [primary]="true" [text]="account.title"></kirby-list-cell-line>
+    <kirby-list-cell-line [text]="account.detail === 0 ? null : account.detail"></kirby-list-cell-line>
+  </kirby-list-cell>
+  <kirby-list-cell
+    *kirbyListCell="let account"
+    width="0.5"
+    horisontalAlignment="right">
+    <kirby-list-cell-line [primary]="true" [text]="account.subTitle"></kirby-list-cell-line>
+  </kirby-list-cell>
+  <kirby-list-cell
+    *kirbyListCell="let account"
+    verticalAlignment="center"
+    horisontalAlignment="right">
+    <kirby-list-cell-line [primary]="true" [text]="account.amount"></kirby-list-cell-line>
+  </kirby-list-cell>
+</kirby-list>
+<hr />
+
+<kirby-list
+  [items]="items"
+  (itemSelect)="onItemSelect($event)"
+  [getSectionName]="getSectionName">
+  <!-- kirby-list-header is not supported in conjunction with *kirbyListSectionHeader due to a bug in RadListView on iOS -->
+  <kirby-list-section-header
+    *kirbyListSectionHeader="let section"
+    [title]="section"
+  ></kirby-list-section-header>
+  <kirby-list-cell
+    *kirbyListCell="let item">
+    <kirby-list-cell-line [primary]="true" [text]="item.title"></kirby-list-cell-line>
+    <kirby-list-cell-line [text]="item.detail"></kirby-list-cell-line>
+  </kirby-list-cell>
+  <kirby-list-cell
+    *kirbyListCell="let item"
+    verticalAlignment="top"
+    horisontalAlignment="right">
+    <kirby-list-cell-line [primary]="true" [text]="item.amount"></kirby-list-cell-line>
+  </kirby-list-cell>
+</kirby-list> 
+
+<hr />
+
+<kirby-list [items]="items" (itemSelect)="onItemSelect($event)">
+  
+  <!-- HEADER-->
+  <kirby-list-header *kirbyListHeader>
+    <kirby-list-cell>Name</kirby-list-cell>
+    <!-- Headers doesn't have to be kirby-list-cell components. -->
+    <div style="width: 150px; text-align: right">Amount</div>
+    <kirby-list-cell horisontalAlignment="right">Value</kirby-list-cell>
+  </kirby-list-header>
+  
+  <!-- BODY -->
+  <kirby-list-cell
+    *kirbyListCell="let item">
+    <kirby-list-cell-line [primary]="true" [text]="item.title"></kirby-list-cell-line>
+    <kirby-list-cell-line [text]="item.detail"></kirby-list-cell-line>
+  </kirby-list-cell>
+  <!-- you can make custom cells using the kirbyListCell directive -->
+  <div *kirbyListCell="let item" style="width: 150px; text-align: right">{{ item.subTitle }}</div>
+  <kirby-list-cell
+    *kirbyListCell="let item"
+    verticalAlignment="top"
+    horisontalAlignment="right">
+    <kirby-list-cell-line [primary]="true" [text]="item.amount"></kirby-list-cell-line>
+  </kirby-list-cell>
+</kirby-list> 
+
+<hr />
+
+<kirby-list [items]="items" (itemSelect)="onItemSelect($event)">
+  <kirby-list-item
+    *kirbyListItem="let item"
+    [title]="item.title"
+    [amount]="item.amount"
+  ></kirby-list-item>
+</kirby-list>
+
+<hr />
+
+<kirby-list [items]="items" (itemSelect)="onItemSelect($event)">
+  <!-- Cells can also take arbitrary markup (client specific) as cell-lines -->
+  <kirby-list-cell *kirbyListCell="let item">
+    <section style="flex-direction: row; display: flex;">
+      <kirby-avatar [imageSrc]="imageSrc" [size]="'small'"></kirby-avatar>
+      <div style="margin-left: 10px; flex-direction: column; display: flex;">
+        <kirby-list-cell-line [primary]="true" [text]="item.title"></kirby-list-cell-line>
+        <kirby-list-cell-line [text]="item.detail"></kirby-list-cell-line>
+      </div>
+    </section>
+  </kirby-list-cell>
+
+  <kirby-list-cell
+          *kirbyListCell="let item"
+          verticalAlignment="top"
+          horisontalAlignment="right">
+    <kirby-list-cell-line [primary]="true" [text]="item.amount"></kirby-list-cell-line>
+  </kirby-list-cell>
+</kirby-list>

@@ -4,6 +4,8 @@ $page-header-bg: #1C1C1C;
 $page-header-color: #F4F1E8;
 $page-header-height: 7rem;
 $page-gutter: 1rem;
+$page-side-nav-width: 16.625rem;
+$page-max-width: 1366px;
 
 .side-menu {
   display: none;
@@ -32,7 +34,9 @@ $page-gutter: 1rem;
     background: none;
     font-size: 0.7rem;
     margin: -1rem 0 1rem -0.5rem;
-    padding: $page-gutter;
+    width: 42px;
+    height: 42px;
+    padding: 0.5rem;
     cursor: pointer;
     display: flex;
     flex-direction: column;

@@ -1,6 +1,6 @@
 @import '../../../scss/web-imports';
 :host {
-  background-color: var(--kirby-surface);
+  background-color: get-color('kirby-white');
   display: flex;
   flex-direction: row;
   justify-content: space-between;

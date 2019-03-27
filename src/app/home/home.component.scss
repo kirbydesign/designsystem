@@ -4,6 +4,8 @@ $page-header-bg: #1C1C1C;
 $page-header-color: #F4F1E8;
 $page-header-height: 7rem;
 $page-gutter: 1rem;
+$page-side-nav-width: 16.625rem;
+$page-max-width: 1366px;
 
 :host {
   position: relative;
@@ -26,7 +28,7 @@ main {
 
 section {
   flex-grow: 1;
-  background-color: #fff;
+  background-color: get-color('kirby-grey-2');
   margin: 2rem 0;
   box-shadow: 0 0 5px rgba(0,0,0,0.2);
   padding: 1rem 2rem;

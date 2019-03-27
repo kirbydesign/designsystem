@@ -1,6 +1,6 @@
 @import '../../../kirby/scss/web-imports';
 
-@each $color, $color-name in map-get($themes, 'default') {
+@each $color, $color-name in $kirby-colors {
   .#{$color} {
     background-color: var(--#{$color});
     color: var(--#{$color});
@@ -77,9 +77,9 @@
 
 .code-wrapper {
   flex: 1 0 100%;
-  background-color: var(--kirby-background);
-  border: 1px solid var(--kirby-disabled);  
+  background-color: get-color("kirby-white");
+  border: 1px solid get-color("kirby-grey-4");  
   padding: size("s");
   overflow-x: auto;
-  margin-bottom: size("gutter");
+  margin-bottom: size("s");
 }
