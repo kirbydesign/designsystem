@@ -1,6 +1,5 @@
 @import '../../scss/native-imports';
 $min-card-width: 50;
-$chip-active-color:#cfd4d3;
 .chip {
   border-radius: 25;
   margin-right: 10;
@@ -8,6 +7,6 @@ $chip-active-color:#cfd4d3;
   font-size: font-size('xs');
   min-width: $min-card-width;
   &.active {
-      background: $chip-active-color;
+      background: get-color('kirby-grey-4');
   }
 }

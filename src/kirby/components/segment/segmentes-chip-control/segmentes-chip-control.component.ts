@@ -26,12 +26,12 @@ class SegmentedChipDirective {}
 })
 class SegmentedChipControlComponent implements OnInit {
   @Input() items: SegmentChip[];
-  @Output() onChipSelect = new EventEmitter<SegmentChip>();
+  @Output() chipSelect = new EventEmitter<SegmentChip>();
   @ContentChild(SegmentedChipDirective, { read: TemplateRef }) segmentedChipTemplate;
 
   constructor() {}
   segmentedChipSelect(item: SegmentChip): void {
-    this.onChipSelect.emit(item);
+    this.chipSelect.emit(item);
   }
   /**
    * Lifecycle method:
