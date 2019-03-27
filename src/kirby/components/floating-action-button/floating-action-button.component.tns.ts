@@ -20,7 +20,8 @@ const style: any = require('sass-extract-loader!./floating-action-button.compone
 })
 export class FloatingActionButtonComponent extends ContentView {
   @Input() iconSrc?: string = '~/assets/icons/add/add@3x.png';
-  @Input() hasShadow?: boolean = true;
+  // TODO: showShadow should become an "elevation" enum in the future;
+  @Input() showShadow?: boolean = true;
   @Input() disabled?: boolean = false;
 
   view: View;
@@ -44,7 +45,7 @@ export class FloatingActionButtonComponent extends ContentView {
 
   // TODO: extract a shared function; logic of adding shadow is the same as in many other components;
   addShadow(): void {
-    if (!this.hasShadow) {
+    if (!this.showShadow) {
       return;
     }
 

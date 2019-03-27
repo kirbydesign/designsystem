@@ -13,7 +13,7 @@ export class FloatingActionButtonShowcaseComponent {
 
   properties: ShowcaseProperty[] = [
     {
-      name: 'hasShadow',
+      name: 'showShadow',
       description: 'Determines whether the button will have a shadow or not.',
       defaultValue: 'true',
       inputValues: ['boolean'],

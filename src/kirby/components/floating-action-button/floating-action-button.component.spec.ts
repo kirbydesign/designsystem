@@ -29,7 +29,7 @@ describe('FloatingActionButtonComponent', () => {
 
   describe('shadows', () => {
     it('should have a shadow by default', () => {
-      expect(component.hasShadow).toBeTruthy();
+      expect(component.showShadow).toBeTruthy();
     });
 
     it('should render a shadow by default', () => {
@@ -38,8 +38,8 @@ describe('FloatingActionButtonComponent', () => {
       expect(fab.classList).not.toContain('no-shadow');
     });
 
-    it('should not render a shadow when hasShadow is set to false', () => {
-      component.hasShadow = false;
+    it('should not render a shadow when showShadow is set to false', () => {
+      component.showShadow = false;
       fixture.detectChanges();
       const rootElement: HTMLElement = fixture.debugElement.nativeElement;
       const fab = rootElement.querySelector('.fab');
