@@ -11,13 +11,13 @@ const style = require('sass-extract-loader!./colors-showcase.component.scss');
   styleUrls: ['./colors-showcase.component.scss'],
 })
 export class ColorsShowcaseComponent implements OnInit {
-  selectedColor = 'kirby-background';
-  selectedOnColor = 'kirby-on-background';
+  selectedColor = 'kirby-primary';
+  selectedOnColor = 'kirby-primary-contrast';
   activeColorType = 'bg';
   colorPalette = [];
 
   constructor() {
-    this.colorPalette = this.getThemeColors('default');
+    this.colorPalette = this.getThemeColors();
   }
 
   ngOnInit() {}
@@ -30,10 +30,9 @@ export class ColorsShowcaseComponent implements OnInit {
     }
   }
 
-  // TODO TRM: Make this a general method to get colors
-  getThemeColors(theme: string) {
+  getThemeColors() {
     const colors = [];
-    const defaultColors = style.global['$themes'].value[theme].value;
+    const defaultColors = style.global['$kirby-colors'].value;
     for (const [value, type] of Object.entries(defaultColors)) {
       const sassColor = <SassColor>type;
       sassColor.name = value;

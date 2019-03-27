@@ -2,44 +2,38 @@ import {
   Component,
   ContentChild,
   ContentChildren,
-  Directive,
   EventEmitter,
   Input,
   OnInit,
   Output,
   QueryList,
   TemplateRef,
+  ElementRef,
+  ViewChild,
 } from '@angular/core';
 
-@Directive({
-  selector: '[kirbyListItem]',
-})
-export class ListItemDirective {}
-
-@Directive({
-  selector: '[kirbyListHeader]',
-})
-export class ListHeaderDirective {}
-
-@Directive({
-  selector: '[kirbyListCell]',
-})
-export class ListCellDirective {}
-
-@Directive({
-  selector: '[kirbyListSectionHeader]',
-})
-export class ListSectionHeaderDirective {}
+import {
+  ListItemDirective,
+  ListHeaderDirective,
+  ListSectionHeaderDirective,
+  ListCellDirective,
+} from './list.directive';
+import { LoadOnDemandEvent, LoadOnDemandEventData } from './list.event';
+import { ListHelper } from './helpers/list-helper';
 
 @Component({
   selector: 'kirby-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
+  providers: [ListHelper],
 })
 export class ListComponent implements OnInit {
   @Input() items: any[];
   @Input() getSectionName?: (item: any) => string;
   @Input() lines = false;
+  @Input() noMoreItemsText: string;
+
+  @Output() loadOnDemand = new EventEmitter<LoadOnDemandEvent>();
   @Output() itemSelect = new EventEmitter<any>();
 
   // The first element that matches ListItemDirective. As a structural directive it unfolds into a template. This is a reference to that.
@@ -50,8 +44,10 @@ export class ListComponent implements OnInit {
 
   isSectionsEnabled: boolean;
   isSelectable: boolean;
+  isLoading: boolean;
+  isLoadOnDemandEnabled: boolean;
 
-  constructor() {}
+  constructor(private listHelper: ListHelper) {}
 
   ngOnInit() {
     if (this.getSectionName) {
@@ -61,13 +57,14 @@ export class ListComponent implements OnInit {
       console.warn('kirbyListItem is deprecated and will be removed in future versions of Kirby');
     }
     this.isSelectable = this.itemSelect.observers.length > 0;
+    this.isLoadOnDemandEnabled = this.loadOnDemand.observers.length > 0;
   }
 
-  onItemClick(row: any): void {
-    this.itemSelect.emit(row);
-  }
-
-  onItemTap(selectedItem: any): void {
+  onItemSelect(selectedItem: any) {
     this.itemSelect.emit(selectedItem);
+  }
+
+  onLoadOnDemand(event?: LoadOnDemandEventData) {
+    this.listHelper.onLoadOnDemand(this, event);
   }
 }

@@ -4,10 +4,11 @@ import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { declarations } from './kirby.common';
+import { InfiniteScrollDirective } from './components/list/directives/infinite-scroll.directive';
 
 @NgModule({
   imports: [CommonModule, RouterModule, IonicModule.forRoot()],
-  declarations: declarations,
-  exports: declarations,
+  declarations: [InfiniteScrollDirective, ...declarations],
+  exports: [InfiniteScrollDirective, ...declarations],
 })
 export class KirbyModule {}

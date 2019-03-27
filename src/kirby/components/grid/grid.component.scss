@@ -1,6 +1,7 @@
 @import '../../scss/web-imports';
 
 $grid-item-min-height: 172px;
+$page-max-width: 1366px;
 
 :host {
   display: grid;
