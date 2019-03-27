@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 interface SegmentChip {
-  index: number,
-  title: string
+  index: number;
+  title: string;
 }
 
 @Component({

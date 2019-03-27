@@ -6,12 +6,12 @@ import {
   ContentChild,
   TemplateRef,
   Output,
-  EventEmitter
+  EventEmitter,
 } from '@angular/core';
 
 interface SegmentChip {
-  index: number,
-  title: string
+  index: number;
+  title: string;
 }
 
 @Directive({
