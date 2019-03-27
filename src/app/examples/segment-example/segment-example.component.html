@@ -1,7 +1,15 @@
+<!-- 
+     kirby-segmented-chip-control support input attributes
+        - items, An Array of type { index:number, title:string }
+        - give selected chip on onChipSelect event
+     kirby-chip takes attributes 
+        - title
+        -isActive : default is false
+ -->
 <kirby-segmented-chip-control [items]="myItems" (onChipSelect)="chipSelected($event)">
-        <kirby-chip *kirbySegmentedChip="let item" [title] = "item.title" [isActive] ="item.index == selected.index"></kirby-chip>
+   <kirby-chip *kirbySegmentedChip="let item" [title]="item.title" [isActive]="item.index == selected.index"></kirby-chip>
 </kirby-segmented-chip-control>
-      
+
 <div class="segment-data" *ngIf="selected.title">
-          Content of tab {{selected.index}} is {{selected.title}}
+        Content of tab {{selected.index}} is {{selected.title}}
 </div>
