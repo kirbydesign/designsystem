@@ -12,7 +12,7 @@ import { DoughnutChartShowcaseComponent } from './doughnut-chart-showcase/doughn
 import { FontsShowcaseComponent } from './fonts-showcase/fonts-showcase.component';
 import { ColorsShowcaseComponent } from './colors-showcase/colors-showcase.component';
 import { SpinnerShowcaseComponent } from './spinner-showcase/spinner-showcase.component';
-import { FullscreenModalShowcaseComponent } from './fullscreen-modal-showcase/fullscreen-modal-showcase';
+import { FullscreenModalShowcaseComponent } from './fullscreen-modal-showcase/fullscreen-modal-showcase.component';
 
 export const routes: Routes = [
   {
