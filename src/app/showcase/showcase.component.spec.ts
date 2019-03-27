@@ -8,6 +8,7 @@ import { COMPONENT_IMPORTS, COMPONENT_EXPORTS, COMPONENT_DECLARATIONS } from './
 
 import { ShowcaseRoutingModule } from './showcase-routing.module';
 import { HtmlViewerComponent } from '../shared/html-viewer/html-viewer.component';
+import { ShowcasePropertiesComponent } from '../shared/showcase-properties/showcase-properties.component';
 import { ShowcaseComponent } from './showcase.component';
 
 describe('ShowcaseComponent', () => {
@@ -17,7 +18,12 @@ describe('ShowcaseComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ShowcaseRoutingModule, ExamplesModule, RouterTestingModule, FormsModule],
-      declarations: [...COMPONENT_DECLARATIONS, ShowcaseComponent, HtmlViewerComponent],
+      declarations: [
+        ...COMPONENT_DECLARATIONS,
+        ShowcaseComponent,
+        HtmlViewerComponent,
+        ShowcasePropertiesComponent,
+      ],
     }).compileComponents();
   }));
 
