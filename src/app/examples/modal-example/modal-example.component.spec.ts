@@ -2,21 +2,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { KirbyModule } from '../../../kirby/kirby.module';
-import { FullscreenModalExampleComponent } from './fullscreen-modal-example.component';
+import { ModalExampleComponent } from './modal-example.component';
 
-describe('FullscreenModalExampleComponent', () => {
-  let component: FullscreenModalExampleComponent;
-  let fixture: ComponentFixture<FullscreenModalExampleComponent>;
+describe('ModalExampleComponent', () => {
+  let component: ModalExampleComponent;
+  let fixture: ComponentFixture<ModalExampleComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [KirbyModule, RouterTestingModule],
-      declarations: [FullscreenModalExampleComponent],
+      declarations: [ModalExampleComponent],
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FullscreenModalExampleComponent);
+    fixture = TestBed.createComponent(ModalExampleComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

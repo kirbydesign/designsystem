@@ -3,21 +3,21 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { ExamplesModule } from '../../examples/examples.module';
 import { HtmlViewerComponent } from '../../shared/html-viewer/html-viewer.component';
-import { FullscreenModalShowcaseComponent } from './fullscreen-modal-showcase.component';
+import { ModalShowcaseComponent } from './modal-showcase.component';
 
-describe('FullscreenModalShowcaseComponent', () => {
-  let component: FullscreenModalShowcaseComponent;
-  let fixture: ComponentFixture<FullscreenModalShowcaseComponent>;
+describe('ModalShowcaseComponent', () => {
+  let component: ModalShowcaseComponent;
+  let fixture: ComponentFixture<ModalShowcaseComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ExamplesModule, RouterTestingModule],
-      declarations: [FullscreenModalShowcaseComponent, HtmlViewerComponent],
+      declarations: [ModalShowcaseComponent, HtmlViewerComponent],
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FullscreenModalShowcaseComponent);
+    fixture = TestBed.createComponent(ModalShowcaseComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
