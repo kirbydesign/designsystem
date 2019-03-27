@@ -1,0 +1,21 @@
+@import '../../scss/native-imports';
+
+// Ionic fab can be customized by using the css properties listed in the CSS Custom Properties section of the below docs page:
+// https://ionicframework.com/docs/api/fab-button
+
+.fab {
+    // using explicit evaluation #{} for the get-color function according to https://github.com/sass/sassc/issues/248
+    --background: #{get-color('kirby-primary')};
+    --box-shadow: 0 10px 20px -10px #{get-color('kirby-primary-shade')};
+    width: 64px;
+    height: 64px;
+
+    img {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+.no-shadow {
+    --box-shadow: 0;
+}
