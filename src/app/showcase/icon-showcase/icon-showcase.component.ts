@@ -26,7 +26,7 @@ export class IconShowcaseComponent {
       inputValues: ['small', 'large'],
     },
     {
-      name: 'iconColor',
+      name: 'colorType',
       description: 'Sets which color the icon should use from the theme palette.',
       defaultValue: 'black',
       inputValues: ['primary', 'secondary', 'tertiary'],

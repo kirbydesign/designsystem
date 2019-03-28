@@ -28,7 +28,7 @@ export class IconComponent {
     | 'person' = IconComponent.DEFAULT_ICON_NAME;
 
   @Input() size: String = 'small';
-  @Input() iconColor: String | 'primary' | 'secondary' | 'tertiary';
+  @Input() colorType: String | 'primary' | 'secondary' | 'tertiary';
 
   getIonicIconName(name: string): string {
     const icon = this.searchIcons(name);
