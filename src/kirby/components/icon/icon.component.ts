@@ -10,6 +10,7 @@ export class IconComponent {
   static DEFAULT_ICON_CODE = 0xf2cf;
 
   @Input() name:
+    | String
     | 'add'
     | 'close'
     | 'cog'
@@ -24,10 +25,10 @@ export class IconComponent {
     | 'checkbox-outline'
     | 'checkbox'
     | 'menu'
-    | 'person' = 'cog';
+    | 'person' = IconComponent.DEFAULT_ICON_NAME;
 
-  @Input() size = 'small';
-  @Input() iconColor: 'primary' | 'secondary' | 'tertiary';
+  @Input() size: String = 'small';
+  @Input() iconColor: String | 'primary' | 'secondary' | 'tertiary';
 
   getIonicIconName(name: string): string {
     const icon = this.searchIcons(name);
