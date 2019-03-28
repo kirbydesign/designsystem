@@ -17,7 +17,7 @@ export class IconShowcaseComponent {
       name: 'name',
       description: 'Name of the icon that you want to show.',
       defaultValue: 'cog',
-      inputValues: [icons.map((icon) => icon.name).toString()],
+      inputValues: icons.map((icon) => icon.name),
     },
     {
       name: 'size',

@@ -8,8 +8,6 @@ import { Component, Input } from '@angular/core';
 export class IconComponent {
   static DEFAULT_ICON_CODE = 0xf2cf;
   static DEFAULT_ICON_NAME = 'cog';
-  static DEFAULT_ICON_SIZE = 'small';
-  static DEFAULT_ICON_COLOR = 'primary';
 
   @Input() name:
     | String
@@ -29,9 +27,8 @@ export class IconComponent {
     | 'menu'
     | 'person' = IconComponent.DEFAULT_ICON_NAME;
 
-  @Input() size: String | 'small' | 'large' = IconComponent.DEFAULT_ICON_SIZE;
-  @Input() colorType: String | 'primary' | 'secondary' | 'tertiary' =
-    IconComponent.DEFAULT_ICON_COLOR;
+  @Input() size: String | 'small' | 'large' = 'small';
+  @Input() colorType: String | 'primary' | 'secondary' | 'tertiary' = 'primary';
 
   getIonicIconName(name: string): string {
     const icon = this.searchIcons(name);

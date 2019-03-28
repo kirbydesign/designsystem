@@ -27,19 +27,50 @@ describe('IconComponent', () => {
 
   describe('icons', () => {
     it('should point to the cog icon by default', () => {
-      expect(component.name).toBe(IconComponent.DEFAULT_ICON_NAME);
+      expect(component.name).toBe('cog');
     });
   });
 
   describe('size', () => {
     it('should set size to small by default', () => {
-      expect(component.size).toBe(IconComponent.DEFAULT_ICON_SIZE);
+      expect(component.size).toBe('small');
+    });
+
+    it('should be rendered as small by default', () => {
+      var el = fixture.debugElement.query(By.directive(ionic.IonIcon));
+      expect(el.componentInstance.size).toBe('small');
+    });
+
+    it('should be rendered as large when size is set to large', () => {
+      component.size = 'large';
+      fixture.detectChanges();
+      var el = fixture.debugElement.query(By.directive(ionic.IonIcon));
+      expect(el.componentInstance.size).toBe('large');
     });
   });
 
   describe('color', () => {
     it('should set icon color to primary by default', () => {
-      expect(component.colorType).toBe(IconComponent.DEFAULT_ICON_COLOR);
+      expect(component.colorType).toBe('primary');
+    });
+
+    it('should be rendered as primary color by default', () => {
+      var el = fixture.debugElement.query(By.directive(ionic.IonIcon));
+      expect(el.componentInstance.color).toBe('primary');
+    });
+
+    it('should be rendered as secondary when color is set to secondary', () => {
+      component.colorType = 'secondary';
+      fixture.detectChanges();
+      var el = fixture.debugElement.query(By.directive(ionic.IonIcon));
+      expect(el.componentInstance.color).toBe('secondary');
+    });
+
+    it('should be rendered as tertiary when color is set to tertiary', () => {
+      component.colorType = 'tertiary';
+      fixture.detectChanges();
+      var el = fixture.debugElement.query(By.directive(ionic.IonIcon));
+      expect(el.componentInstance.color).toBe('tertiary');
     });
   });
 });
