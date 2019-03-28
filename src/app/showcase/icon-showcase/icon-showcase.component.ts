@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
-// import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
+import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
+import { icons } from '~/kirby/components/icon/icon.component';
 
 declare var require: any;
 
@@ -11,26 +12,24 @@ declare var require: any;
 export class IconShowcaseComponent {
   exampleHtml: string = require('../../examples/icon-example/icon-example.component.html');
 
-  /*
   properties: ShowcaseProperty[] = [
     {
-      name: 'hasShadow',
-      description: 'Determines whether the button will have a shadow or not.',
-      defaultValue: 'true',
-      inputValues: ['boolean'],
+      name: 'name',
+      description: 'Name of the icon that you want to show.',
+      defaultValue: 'cog',
+      inputValues: [icons.map((icon) => icon.name).toString()],
     },
     {
-      name: 'disabled',
-      description: 'Determines whether the button will be disabled or not.',
-      defaultValue: 'false',
-      inputValues: ['boolean'],
+      name: 'size',
+      description: 'Determines size of the icon.',
+      defaultValue: 'small',
+      inputValues: ['small', 'large'],
     },
     {
-      name: 'iconSrc',
-      description: 'Points to the source of the icon, which will be used.',
-      defaultValue: `'/assets/icons/add/add@3x.png'`,
-      inputValues: ['string'],
+      name: 'iconColor',
+      description: 'Sets which color the icon should use from the theme palette.',
+      defaultValue: 'black',
+      inputValues: ['primary', 'secondary', 'tertiary'],
     },
   ];
-  */
 }

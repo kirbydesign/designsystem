@@ -1,12 +1,13 @@
-.ion {
-    font-family: "Ionicons", "ionicons";
+@import '../../scss/web-imports';
+ 
+.primary {
+    color: get-color('kirby-primary');
+}
 
-    &.small {
-        font-size: 16px;
-    }
+.secondary {
+    color: get-color('kirby-secondary');
+}
 
-    &.large {
-        font-size: 32px;
-    }
- }
-  
+.tertiary {
+    color: get-color('kirby-tertiary');
+}

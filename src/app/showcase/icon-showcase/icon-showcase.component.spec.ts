@@ -5,7 +5,7 @@ import { ExamplesModule } from '../../examples/examples.module';
 import { HtmlViewerComponent } from '../../shared/html-viewer/html-viewer.component';
 import { IconShowcaseComponent } from './icon-showcase.component';
 
-// import { ShowcasePropertiesComponent } from '../../shared/showcase-properties/showcase-properties.component';
+import { ShowcasePropertiesComponent } from '../../shared/showcase-properties/showcase-properties.component';
 
 describe('IconShowcaseComponent', () => {
   let component: IconShowcaseComponent;
@@ -14,7 +14,7 @@ describe('IconShowcaseComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ExamplesModule, RouterTestingModule],
-      declarations: [IconShowcaseComponent, HtmlViewerComponent], // TO-DO add ShowcasePropertiesComponent to declarations
+      declarations: [IconShowcaseComponent, HtmlViewerComponent, ShowcasePropertiesComponent],
     }).compileComponents();
   }));
 
