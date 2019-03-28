@@ -1,8 +1,7 @@
 <ion-segment (ionChange)="onSegmentClick($event)">
-  <ion-segment-button value="friends">
-    <ion-label>Friends</ion-label>
-  </ion-segment-button>
-  <ion-segment-button value="enemies">
-    <ion-label>Enemies</ion-label>
-  </ion-segment-button>
+  <ng-container *ngFor="let item of segmentItems">
+    <ion-segment-button value="{{item.value}}">
+      <ion-label>{{item.text}}</ion-label>
+    </ion-segment-button>
+  </ng-container>
 </ion-segment>

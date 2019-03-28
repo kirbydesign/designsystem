@@ -1,4 +1,6 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
+
+import { SegmentItem } from './segment-item';
 
 @Component({
   selector: 'kirby-segmented-control',
@@ -7,7 +9,7 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 })
 export class SegmentedControlComponent implements OnInit {
   @Output() segmentChanged: EventEmitter<any> = new EventEmitter();
-  items: [];
+  @Input() segmentItems: SegmentItem[];
 
   constructor() {}
 
