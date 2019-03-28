@@ -1,6 +1,7 @@
 import { GroupByPipe } from './components/list/pipes/group-by.pipe';
 import { AvatarComponent } from './components/avatar/avatar.component';
 import { ButtonComponent } from './components/button/button.component';
+import { FloatingActionButtonComponent } from './components/floating-action-button/floating-action-button.component';
 import { CardFooterComponent } from './components/card/card-footer/card-footer.component';
 import { CardHeaderComponent } from './components/card/card-header/card-header.component';
 import { CardComponent } from './components/card/card.component';
@@ -32,6 +33,7 @@ export const declarations = [
   CardHeaderComponent,
   CardFooterComponent,
   ButtonComponent,
+  FloatingActionButtonComponent,
   ListComponent,
   ListItemDirective,
   ListItemComponent,

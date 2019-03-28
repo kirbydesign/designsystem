@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 
 import { AvatarShowcaseComponent } from './avatar-showcase/avatar-showcase.component';
 import { ButtonShowcaseComponent } from './button-showcase/button-showcase.component';
+import { FloatingActionButtonShowcaseComponent } from './floating-action-button-showcase/floating-action-button-showcase.component';
 import { CardShowcaseComponent } from './card-showcase/card-showcase.component';
 import { GridShowcaseComponent } from './grid-showcase/grid-showcase.component';
 import { ListShowcaseComponent } from './list-showcase/list-showcase.component';
@@ -36,6 +37,10 @@ export const routes: Routes = [
       {
         path: 'segment',
         component: SegmentShowcaseComponent,
+      },
+      {
+        path: 'floating-action-button',
+        component: FloatingActionButtonShowcaseComponent,
       },
       {
         path: 'avatar',
