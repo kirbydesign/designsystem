@@ -1,9 +1,32 @@
 @import "../../../kirby/scss/web-imports";
 
 :host {
-  
+  display: inline-block;
 }
 
 ion-segment {
-  --color-checked: red;
+  --color-checked: #{get-color("kirby-white")};
+  --background: #{get-color("kirby-white")};
+  --background-checked: #{get-color("kirby-grey-9")};
+  --background-hover: #{get-color("kirby-white")};
+  border-radius: 20px;
+  background: get-color("kirby-white");
+}
+
+ion-segment-button {
+  min-height: size("xl");
+  height: size("xl");
+  font-weight: font-weight("normal");
+  font-size: font-size("s");
+  text-transform: none;
+  border-radius: 20px;
+
+  &.segment-button-checked:hover {
+    --background-hover: #{get-color("kirby-grey-9")};
+  }
+
+  &:focus-within {
+    outline-color: -webkit-focus-ring-color;
+    outline-style: auto;
+  }
 }

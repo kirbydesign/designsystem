@@ -8,20 +8,30 @@ import { SegmentItem } from '~/kirby/components/segmented-control/segment-item';
   styleUrls: ['./segmented-control-example.component.scss'],
 })
 export class SegmentedControlExampleComponent implements OnInit {
+  activeSegment: string;
+
   segmentItems: SegmentItem[] = [
     {
       text: 'First item',
       value: 'first',
-      badge: 0,
+      checked: true,
+      badge: {
+        content: '2',
+        type: 'danger',
+      },
     },
     {
       text: 'Second item',
+      checked: false,
       value: 'second',
-      badge: 1,
     },
   ];
 
   constructor() {}
 
   ngOnInit() {}
+
+  onSegmentClick(value) {
+    this.activeSegment = value;
+  }
 }

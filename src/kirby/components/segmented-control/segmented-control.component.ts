@@ -8,7 +8,7 @@ import { SegmentItem } from './segment-item';
   styleUrls: ['./segmented-control.component.scss'],
 })
 export class SegmentedControlComponent implements OnInit {
-  @Output() segmentChanged: EventEmitter<any> = new EventEmitter();
+  @Output() segmentClicked: EventEmitter<any> = new EventEmitter();
   @Input() segmentItems: SegmentItem[];
 
   constructor() {}
@@ -16,7 +16,6 @@ export class SegmentedControlComponent implements OnInit {
   ngOnInit() {}
 
   onSegmentClick(ev: any) {
-    console.log('Segment item clicked: ' + ev.target.value);
-    this.segmentChanged.emit(ev.target.value);
+    this.segmentClicked.emit(ev.target.value);
   }
 }

@@ -1,5 +1,9 @@
 export interface SegmentItem {
   text: string;
   value: string;
-  badge: number;
+  checked: boolean;
+  badge?: {
+    content: string;
+    type: string;
+  };
 }
