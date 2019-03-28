@@ -9,7 +9,7 @@
       "version": "5.2.0"
     }
   },
-  "version": "0.0.100",
+  "version": "0.0.102",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -86,6 +86,7 @@
     "nativescript-dev-sass": "^1.6.1",
     "nativescript-dev-typescript": "^0.8.0",
     "nativescript-dev-webpack": "^0.20.2",
+    "ng-mocks": "^7.7.0",
     "prettier": "^1.15.3",
     "protractor": "~5.3.0",
     "resize-observer-polyfill": "^1.5.1",

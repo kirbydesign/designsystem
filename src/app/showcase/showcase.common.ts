@@ -1,6 +1,7 @@
 import { ExamplesModule } from '../examples/examples.module';
 import { AvatarShowcaseComponent } from './avatar-showcase/avatar-showcase.component';
 import { ButtonShowcaseComponent } from './button-showcase/button-showcase.component';
+import { FloatingActionButtonShowcaseComponent } from './floating-action-button-showcase/floating-action-button-showcase.component';
 import { CardShowcaseComponent } from './card-showcase/card-showcase.component';
 import { FontsShowcaseComponent } from './fonts-showcase/fonts-showcase.component';
 import { GridShowcaseComponent } from './grid-showcase/grid-showcase.component';
@@ -21,6 +22,7 @@ export const COMPONENT_EXPORTS: any[] = [
   CardShowcaseComponent,
   ColorsShowcaseComponent,
   ButtonShowcaseComponent,
+  FloatingActionButtonShowcaseComponent,
   ListShowcaseComponent,
   ListLoadOnDemandShowcaseComponent,
   GridShowcaseComponent,
