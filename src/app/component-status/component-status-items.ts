@@ -232,6 +232,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
     code: {
       version: 0.5,
       status: ItemCodeStatus.inProgress,
+      cookbookUrl: 'showcase/floating-action-button',
       githubIssueNo: 171,
     },
   },
