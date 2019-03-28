@@ -1,13 +1,25 @@
-@import '../../scss/web-imports';
+@import '../../scss/native-imports';
  
-.primary {
-    color: get-color('kirby-primary');
-}
+.ion {
+    font-family: "Ionicons", "ionicons";
 
-.secondary {
-    color: get-color('kirby-secondary');
-}
+    &.small {
+        font-size: 16px;
+    }
 
-.tertiary {
-    color: get-color('kirby-tertiary');
-}
+    &.large {
+        font-size: 32px;
+    }
+
+    &.primary {
+        color: get-color('kirby-primary');
+    }
+    
+    &.secondary {
+        color: get-color('kirby-secondary');
+    }
+    
+    &.tertiary {
+        color: get-color('kirby-tertiary');
+    }
+}   
