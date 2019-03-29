@@ -71,7 +71,7 @@ describe('ListComponent', () => {
     });
   });
 
-  describe('dividers', () => {
+  describe('divider', () => {
     beforeEach(() => {
       fixture = TestBed.createComponent(ListComponent);
       component = fixture.componentInstance;
@@ -79,7 +79,7 @@ describe('ListComponent', () => {
 
     it('should set class "divider" on all li elements when showDivider is true', () => {
       component.items = [1, 2, 3];
-      component.lines = true;
+      component.showDivider = true;
 
       fixture.detectChanges();
 
@@ -93,7 +93,7 @@ describe('ListComponent', () => {
 
     it('should not set class "divider" on any li elements when showDivider is false', () => {
       component.items = [1, 2, 3];
-      component.lines = false;
+      component.showDivider = false;
 
       fixture.detectChanges();
 
