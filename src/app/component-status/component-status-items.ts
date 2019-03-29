@@ -248,7 +248,6 @@ export const componentStatusItems: ComponentStatusItem[] = [
       version: 0.5,
       status: ItemCodeStatus.ready,
       cookbookUrl: 'showcase/icon',
-      githubIssueNo: 170,
     },
   },
   {
