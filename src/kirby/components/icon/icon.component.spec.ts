@@ -50,11 +50,18 @@ describe('IconComponent', () => {
   });
 
   describe('color', () => {
-    it('should set icon color to primary by default', () => {
-      expect(component.colorType).toBe('primary');
+    it('should set icon color to undefined by default', () => {
+      expect(component.colorType).toBeUndefined();
     });
 
-    it('should be rendered as primary color by default', () => {
+    it('should be rendered with no color by default', () => {
+      var el = fixture.debugElement.query(By.directive(ionic.IonIcon));
+      expect(el.componentInstance.color).toBeUndefined();
+    });
+
+    it('should be rendered as primary when color is set to primary', () => {
+      component.colorType = 'primary';
+      fixture.detectChanges();
       var el = fixture.debugElement.query(By.directive(ionic.IonIcon));
       expect(el.componentInstance.color).toBe('primary');
     });
