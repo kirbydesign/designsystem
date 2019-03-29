@@ -30,18 +30,18 @@ export class IconComponent {
   @Input() colorType: 'primary' | 'secondary' | 'tertiary' = 'primary';
 
   getIonicIconName(name: string): string {
-    const icon = this.searchIcons(name);
+    const icon = this.findIcon(name);
     return icon !== undefined ? icon.name : IconComponent.DEFAULT_ICON_NAME;
   }
 
   getCharCode(name: string): string {
-    const icon = this.searchIcons(name);
+    const icon = this.findIcon(name);
     return icon !== undefined
       ? String.fromCharCode(icon.code)
       : String.fromCharCode(IconComponent.DEFAULT_ICON_CODE);
   }
 
-  private searchIcons(name: string): any {
+  private findIcon(name: string): any {
     return icons.find((icon) => icon.name === name);
   }
 }
