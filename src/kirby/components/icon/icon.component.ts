@@ -10,7 +10,7 @@ export class IconComponent {
   static DEFAULT_ICON_NAME = 'cog';
 
   @Input() name:
-    | String
+    | string
     | 'add'
     | 'close'
     | 'cog'
@@ -27,8 +27,8 @@ export class IconComponent {
     | 'menu'
     | 'person' = IconComponent.DEFAULT_ICON_NAME;
 
-  @Input() size: String | 'small' | 'large' = 'small';
-  @Input() colorType: String | 'primary' | 'secondary' | 'tertiary' = 'primary';
+  @Input() size: string | 'small' | 'large' = 'small';
+  @Input() colorType: string | 'primary' | 'secondary' | 'tertiary' = 'primary';
 
   getIonicIconName(name: string): string {
     const icon = this.searchIcons(name);
