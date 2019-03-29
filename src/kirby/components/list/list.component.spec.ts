@@ -77,7 +77,7 @@ describe('ListComponent', () => {
       component = fixture.componentInstance;
     });
 
-    it('should set class "lines" on all li elements when lines is true', () => {
+    it('should set class "divider" on all li elements when showDivider is true', () => {
       component.items = [1, 2, 3];
       component.lines = true;
 
