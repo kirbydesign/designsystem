@@ -41,7 +41,7 @@ export class IconComponent {
       : String.fromCharCode(IconComponent.DEFAULT_ICON_CODE);
   }
 
-  private findIcon(name: string): any {
+  private findIcon(name: string) {
     return icons.find((icon) => icon.name === name);
   }
 }
