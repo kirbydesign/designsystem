@@ -101,7 +101,7 @@ describe('ListComponent', () => {
       const liElements = rootElement.querySelectorAll('li');
 
       liElements.forEach((liElement) => {
-        expect(liElement.getAttribute('class')).not.toContain('lines');
+        expect(liElement.getAttribute('class')).not.toContain('divider');
       });
     });
   });
