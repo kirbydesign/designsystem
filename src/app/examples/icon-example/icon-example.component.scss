@@ -1,3 +1,9 @@
-kirby-icon {
-    margin-right: 20px;
+@import "../../../kirby/scss/web-imports";
+
+.icon-examples {
+  display: inline-flex;
+
+  kirby-icon {
+    margin-left: size("s");
+  }
 }
