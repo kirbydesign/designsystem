@@ -87,7 +87,7 @@ describe('ListComponent', () => {
       const liElements = rootElement.querySelectorAll('li');
 
       liElements.forEach((liElement) => {
-        expect(liElement.getAttribute('class')).toContain('lines');
+        expect(liElement.getAttribute('class')).toContain('divider');
       });
     });
 
