@@ -1,6 +1,6 @@
 <ul class="side-nav side-menu" [ngClass]="{'is-open': isMenuOpen}" (click)="onToggleMenu()">
   <button class="side-menu__close-btn" >
-      <kirby-icon name="cross"></kirby-icon>
+      <kirby-icon name="close" size="large"></kirby-icon>
   </button>
   <li>
     <a routerLink="/home/intro" [routerLinkActive]="'is-selected'" class="side-nav__item">Intro</a>
@@ -50,6 +50,7 @@
     </a>
     <ul class="side-nav side-nav--sub">
       <li><a routerLink="showcase/avatar" [routerLinkActive]="'is-selected'" class="side-nav__item">Avatar</a></li>
+      <li><a routerLink="showcase/icon" [routerLinkActive]="'is-selected'" class="side-nav__item">Icon</a></li>
       <li><a routerLink="showcase/colors" [routerLinkActive]="'is-selected'" class="side-nav__item">Colors</a></li>
     </ul>
   </li>
