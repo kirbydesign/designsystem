@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
-import { icons } from '~/kirby/components/icon/icon.component';
+import { iconsCharCodeMap } from '~/kirby/components/icon/icon.component';
 
 declare var require: any;
 
@@ -11,13 +11,20 @@ declare var require: any;
 })
 export class IconShowcaseComponent {
   exampleHtml: string = require('../../examples/icon-example/icon-example.component.html');
+  iconNames: Array<string> = new Array();
+
+  constructor() {
+    for (const key in iconsCharCodeMap) {
+      this.iconNames.push(key);
+    }
+  }
 
   properties: ShowcaseProperty[] = [
     {
       name: 'name',
       description: 'Name of the icon that you want to show.',
       defaultValue: 'cog',
-      inputValues: icons.map((icon) => icon.name),
+      inputValues: this.iconNames,
     },
     {
       name: 'size',

@@ -30,36 +30,33 @@ export class IconComponent {
   @Input() colorType: 'primary' | 'secondary' | 'tertiary' = 'primary';
 
   getIonicIconName(name: string): string {
-    const icon = this.findIcon(name);
-    return icon !== undefined ? icon.name : IconComponent.DEFAULT_ICON_NAME;
+    const icon = iconsCharCodeMap[name];
+    return icon !== undefined ? name : IconComponent.DEFAULT_ICON_NAME;
   }
 
   getCharCode(name: string): string {
-    const icon = this.findIcon(name);
+    const icon = iconsCharCodeMap[name];
     return icon !== undefined
-      ? String.fromCharCode(icon.code)
+      ? String.fromCharCode(icon)
       : String.fromCharCode(IconComponent.DEFAULT_ICON_CODE);
   }
-
-  private findIcon(name: string) {
-    return icons.find((icon) => icon.name === name);
-  }
 }
-
-export const icons = [
-  { code: 0xf102, name: 'add' },
-  { code: 0xf2c0, name: 'close' },
-  { code: 0xf2cf, name: 'cog' },
-  { code: 0xf389, name: 'swap' },
-  { code: 0xf331, name: 'move' },
-  { code: 0xf359, name: 'log-out' },
-  { code: 0xf1c9, name: 'more' },
-  { code: 0xf27d, name: 'arrow-back' },
-  { code: 0xf30b, name: 'help' },
-  { code: 0xf28e, name: 'attach' },
-  { code: 0xf375, name: 'search' },
-  { code: 0xf2b8, name: 'checkbox-outline' },
-  { code: 0xf2b9, name: 'checkbox' },
-  { code: 0xf32a, name: 'menu' },
-  { code: 0xf345, name: 'person' },
-];
+// tslint:disable:prettier
+export const iconsCharCodeMap = {
+  'add': 0xf102,
+  'close': 0xf2c0,
+  'cog': 0xf2cf,
+  'swap': 0xf389,
+  'move': 0xf331,
+  'log-out': 0xf359,
+  'more': 0xf1c9,
+  'arrow-back': 0xf27d,
+  'help': 0xf30b,
+  'attach': 0xf28e,
+  'search': 0xf375,
+  'checkbox-outline': 0xf2b8,
+  'checkbox': 0xf2b9,
+  'menu': 0xf32a,
+  'person': 0xf345,
+};
+// tslint:enable:prettier
