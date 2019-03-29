@@ -17,7 +17,7 @@ ul {
       margin: 0;
     }
 
-    &.lines:not(:last-child) {
+    &.divider:not(:last-child) {
       border-bottom: 1px solid get-color('kirby-grey-2');
     }
 
