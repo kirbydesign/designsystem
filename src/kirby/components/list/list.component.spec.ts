@@ -91,7 +91,7 @@ describe('ListComponent', () => {
       });
     });
 
-    it('should not set class "lines" on any li elements when lines is false', () => {
+    it('should not set class "divider" on any li elements when showDivider is false', () => {
       component.items = [1, 2, 3];
       component.lines = false;
 
