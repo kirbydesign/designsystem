@@ -71,7 +71,7 @@ describe('ListComponent', () => {
     });
   });
 
-  describe('lines', () => {
+  describe('dividers', () => {
     beforeEach(() => {
       fixture = TestBed.createComponent(ListComponent);
       component = fixture.componentInstance;
