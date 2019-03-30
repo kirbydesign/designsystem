@@ -1,4 +1,4 @@
-# Download Cookbook Application
+# Download Kirby Showcase Application
 
 {% for release in site.github.releases limit:10 %}
 ## Release {{release.tag_name}}
