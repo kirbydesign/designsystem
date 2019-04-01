@@ -6,7 +6,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./badge.component.scss'],
 })
 export class BadgeComponent implements OnInit {
-  @Input() colortype: string;
+  @Input() colortype: string = 'danger';
   @Input() text: string;
 
   constructor() {}
