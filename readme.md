@@ -51,6 +51,10 @@ Include the Kirby Sass variables in your app:
   @import '~@kirbydesign/designsystem/scss/native-common';
   ```
 
+As devDependencies don't get installed with the package in the target project, you also need to install `sass-extract` and `sass-extract-loader` via npm:
+```
+npm i sass-extract sass-extract-loader -D
+```
 
 ### Typescript Configuration
 
