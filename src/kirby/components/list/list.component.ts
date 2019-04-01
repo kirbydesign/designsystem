@@ -10,6 +10,7 @@ import {
   QueryList,
   SimpleChanges,
   TemplateRef,
+  HostBinding,
 } from '@angular/core';
 
 import {
@@ -70,7 +71,7 @@ export class ListComponent implements OnInit, OnChanges {
   @ContentChild(ListSectionHeaderDirective, { read: TemplateRef }) sectionHeaderTemplate;
   @ContentChildren(ListCellDirective, { read: TemplateRef }) listCellTemplates: QueryList<any>;
 
-  isSectionsEnabled: boolean;
+  @HostBinding('class.has-sections') isSectionsEnabled: boolean;
   isSelectable: boolean;
   isLoading: boolean;
   isLoadOnDemandEnabled: boolean;

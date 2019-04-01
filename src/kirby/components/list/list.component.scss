@@ -2,11 +2,10 @@
 ul {
   list-style-type: none;
   padding-left: 0;
-  margin-top: 0;
+  margin: 0;
   font-size: font-size('s');
 
   li {
-    background-color: get-color('kirby-white');
     border-bottom: 1px solid get-color('kirby-grey-2');
     padding: size('m');
     display: flex;
@@ -17,42 +16,16 @@ ul {
       margin: 0;
     }
 
-    &.row{
-      border-color: get-color('kirby-grey-2');
-      border-style: solid;
-      border-width: 0 0 1px 0;
+    &.row {
+      border: 0 solid get-color('kirby-grey-2');
+      border-bottom-width: 1px;
 
-      &.rounded {
-        border-width: 0 1px 1px 1px;
-
-        &.top {
-          border-top-width: 1px;
-          border-radius: $border-radius $border-radius 0 0;
-        }
-
-        &.bottom {
-          border-radius: 0 0 $border-radius $border-radius;
-        }
-      }
-    }
-
-    &.section-header {
-      background-color: transparent;
-      border: none;
-
-      &~.row:not(.rounded) {
-        border-bottom: 1px solid get-color('kirby-grey-2');
+      &.selectable:hover {
+        background-color: get-color('kirby-grey-3');        
       }
 
-      &:hover {
-        background-color: transparent;
-      }
-    }
-
-    &.selectable {
-
-      &:hover {
-        background-color: get-color('kirby-secondary');
+      &:last-child {
+        border-bottom-width: 0;
       }
     }
   }
@@ -60,4 +33,55 @@ ul {
 
 .extending {
   margin: auto;
+}
+
+:host {
+  display: block;
+
+  &:not(.has-sections) {
+    background-color: get-color('kirby-white');
+    border: 1px solid  get-color('kirby-grey-2');
+  }
+}
+
+:host([shape="rounded"]) {
+  &:not(.has-sections) {
+    border-radius: $border-radius;
+
+    li:first-child {
+      border-top-left-radius: $border-radius;
+      border-top-right-radius: $border-radius;
+    }
+    
+    li:last-child {
+      border-bottom-left-radius: $border-radius;
+      border-bottom-right-radius: $border-radius;
+    }
+  }
+
+  &.has-sections {
+    li.row {
+      background-color: get-color('kirby-white');
+      
+      &.selectable:hover {
+        background-color: get-color('kirby-grey-3');        
+      }
+    }
+
+    li.section-header + li.row
+    {
+      border-top-left-radius: $border-radius;
+      border-top-right-radius: $border-radius;
+    }
+
+    li.row.last-in-section {
+      border-bottom-left-radius: $border-radius;
+      border-bottom-right-radius: $border-radius;
+      border-width: 0;
+    }
+  } 
+}
+
+.list-header {
+  border-bottom: 1px solid get-color('kirby-grey-2');
 }
