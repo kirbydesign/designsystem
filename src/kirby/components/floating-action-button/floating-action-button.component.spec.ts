@@ -64,27 +64,4 @@ describe('FloatingActionButtonComponent', () => {
       expect(el.componentInstance.disabled).toBeTruthy();
     });
   });
-
-  // TO-DO make new test after icon component is implemented
-  /*
-  describe('icons', () => {
-    it('should point to the add@3x icon by default', () => {
-      expect(component.iconSrc).toBe(defaultIconPath);
-    });
-
-    it('should render the add@3x icon by default', () => {
-      const rootElement: HTMLElement = fixture.debugElement.nativeElement;
-      const fabIcon = rootElement.querySelector('.fab img');
-      expect((<HTMLImageElement>fabIcon).src).toContain(defaultIconPath);
-    });
-
-    it('should render the respective icon when iconSrc has changed', () => {
-      component.iconSrc = customIconPath;
-      fixture.detectChanges();
-      const rootElement: HTMLElement = fixture.debugElement.nativeElement;
-      const fabIcon = rootElement.querySelector('.fab img');
-      expect((<HTMLImageElement>fabIcon).src).toContain(customIconPath);
-    });
-  });
-  */
 });

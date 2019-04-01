@@ -9,13 +9,12 @@
     --box-shadow: 0 10px 20px -10px #{get-color('kirby-primary-shade')};
     width: 64px;
     height: 64px;
-
-    img {
-        width: 24px;
-        height: 24px;
-    }
 }
 
 .no-shadow {
     --box-shadow: 0;
+}
+
+.disabled {
+    --background: #{get-color('kirby-grey-4')};
 }
