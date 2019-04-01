@@ -30,6 +30,7 @@ import { ListHelper } from './helpers/list-helper';
 export class ListComponent implements OnInit {
   @Input() items: any[];
   @Input() getSectionName?: (item: any) => string;
+  @Input() showDivider = false;
   @Input() noMoreItemsText: string;
 
   @Output() loadOnDemand = new EventEmitter<LoadOnDemandEvent>();
