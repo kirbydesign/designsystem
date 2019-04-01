@@ -9,6 +9,7 @@ import { declarations } from './kirby.common';
 import { NativeScriptDoughnutChartComponent } from './components/nativescript-only/doughnut-chart/doughnut-chart.component.tns-only';
 // tslint:disable-next-line:max-line-length
 import { NativeScriptLineChartComponent } from './components/nativescript-only/line-chart/line-chart.component.tns-only';
+import { ModalComponent } from './components/modal/modal.component';
 
 // tslint:disable-next-line:max-line-length
 const nativeScriptDeclarations = [
@@ -24,6 +25,7 @@ const nativeScriptDeclarations = [
     NativeScriptUIChartModule,
     NativeScriptUIListViewModule,
   ],
+  entryComponents: [ModalComponent],
   declarations: nativeScriptDeclarations,
   exports: nativeScriptDeclarations,
   schemas: [NO_ERRORS_SCHEMA],

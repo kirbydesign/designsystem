@@ -5,10 +5,12 @@ import { IonicModule } from '@ionic/angular';
 
 import { declarations } from './kirby.common';
 import { InfiniteScrollDirective } from './components/list/directives/infinite-scroll.directive';
+import { ModalComponent } from './components/modal/modal.component';
 
 @NgModule({
   imports: [CommonModule, RouterModule, IonicModule.forRoot()],
   declarations: [InfiniteScrollDirective, ...declarations],
+  entryComponents: [ModalComponent],
   exports: [InfiniteScrollDirective, ...declarations],
 })
 export class KirbyModule {}
