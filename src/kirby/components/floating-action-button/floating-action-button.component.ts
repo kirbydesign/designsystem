@@ -9,5 +9,4 @@ export class FloatingActionButtonComponent {
   // TODO: showShadow should become an "elevation" enum in the future;
   @Input() showShadow?: boolean = true;
   @Input() disabled?: boolean = false;
-  @Input() iconSrc?: string = '/assets/icons/add/add@3x.png';
 }
