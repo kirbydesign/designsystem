@@ -24,11 +24,5 @@ export class FloatingActionButtonShowcaseComponent {
       defaultValue: 'false',
       inputValues: ['boolean'],
     },
-    {
-      name: 'iconSrc',
-      description: 'Points to the source of the icon, which will be used.',
-      defaultValue: `'/assets/icons/add/add@3x.png'`,
-      inputValues: ['string'],
-    },
   ];
 }

@@ -10,6 +10,7 @@ import { ChartExampleComponent } from './chart-example/chart-example.component';
 import { FontsExampleComponent } from './fonts-example/fonts-example.component';
 import { SpinnerExampleComponent } from './spinner-example/spinner-example.component';
 import { ModalExampleComponent } from './modal-example/modal-example.component';
+import { IconExampleComponent } from './icon-example/icon-example.component';
 
 export const routes: Routes = [
   {
@@ -55,5 +56,9 @@ export const routes: Routes = [
   {
     path: 'modal',
     component: ModalExampleComponent,
+  },
+  {
+    path: 'icon',
+    component: IconExampleComponent,
   },
 ];
