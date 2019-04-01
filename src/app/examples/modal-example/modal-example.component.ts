@@ -1,6 +1,6 @@
 import { ModalDialogService } from 'nativescript-angular/directives/dialogs';
-import { Component, OnInit, ViewContainerRef } from '@angular/core';
-import { Page } from 'tns-core-modules/ui/page';
+import { Component, ViewContainerRef } from '@angular/core';
+import { ExtendedShowModalOptions } from 'nativescript-windowed-modal/windowed-modal.common';
 
 import { ModalComponent } from '~/kirby/components/modal/modal.component';
 
@@ -9,26 +9,23 @@ import { ModalComponent } from '~/kirby/components/modal/modal.component';
   templateUrl: './modal-example.component.html',
   styleUrls: ['./modal-example.component.scss'],
 })
-export class ModalExampleComponent implements OnInit {
-  mainPage: Page;
-
+export class ModalExampleComponent {
   constructor(private modal: ModalDialogService, private vcRef: ViewContainerRef) {}
 
-  ngOnInit() {
-    // this.mainPage = <Page>args.object;
-  }
-
   openModal() {
-    this.modal
-      .showModal(ModalComponent, {
-        context: {
-          message: "I'm the context",
-        },
-        fullscreen: false,
-        viewContainerRef: this.vcRef,
-      })
-      .then((response) => {
-        console.log(response);
-      });
+    this.modal.showModal(ModalComponent, {
+      viewContainerRef: this.vcRef,
+      context: "I'm the context",
+      closeCallback: (response: string) => {
+        console.log('response: ' + response);
+      },
+      dimAmount: 0.5, // Sets the alpha of the background dim
+    } as ExtendedShowModalOptions);
   }
 }
+
+// mainPage.showModal("./modal", {
+//   context: "I'm the context",
+//   closeCallback: (response: string) => console.log("Modal response: " + response),
+//   dimAmount: 0.5 // Sets the alpha of the background dim
+// } as ExtendedShowModalOptions)

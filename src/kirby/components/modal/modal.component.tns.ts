@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { registerElement, ModalDialogParams } from 'nativescript-angular';
-import { ContentView, View, EventData, Color } from 'tns-core-modules/ui/content-view';
+import { ContentView, ShownModallyData } from 'tns-core-modules/ui/content-view';
+import { ExtendedShowModalOptions } from 'nativescript-windowed-modal/windowed-modal.common';
+import { StackLayout } from 'tns-core-modules/ui/layouts/stack-layout/stack-layout';
 
 const MODAL_COMPONENT_SELECTOR = 'kirby-modal';
 
@@ -11,63 +13,35 @@ const MODAL_COMPONENT_SELECTOR = 'kirby-modal';
   styleUrls: ['./modal.component.scss'],
 })
 export class ModalComponent extends ContentView {
-  view: View;
-  closeCallback: Function;
+  extendedParams: ExtendedShowModalOptions;
 
   constructor(private params: ModalDialogParams) {
     super();
+    this.extendedParams = params;
   }
 
-  onViewLoaded(args: EventData) {
-    this.view = <View>args.object;
-    this.showingModally();
-  }
+  showingModally(args: ShownModallyData): void {
+    const stackLayout = <StackLayout>args.object;
+    stackLayout.backgroundColor = this.extendedParams.context.dim;
+    console.log(stackLayout);
 
-  showingModally(): void {
-    // const page = args.object as Page;
-    // page.content.set('backgroundColor', args.context.dim);
-    // page.content.set('backgroundColor', 'cornflowerblue');
-
-    // this.view.backgroundColor = new Color('red');
-    if (this.view.android) {
-      this.view.animate({ translate: { x: 0, y: 500 }, duration: 0 }).then(() => {
-        this.view.animate({ translate: { x: 0, y: 0 }, duration: 200 });
-      });
+    if (stackLayout.android) {
+      stackLayout
+        .animate({
+          translate: { x: 0, y: Number(stackLayout.height) },
+          duration: 0,
+        })
+        .then(() => {
+          stackLayout.animate({
+            translate: { x: 0, y: 0 },
+            duration: 500,
+          });
+        });
     }
-    // if (this.view.android) {
-    //   let nativeView = this.view.android;
-    //   nativeView
-    //     .animate({
-    //       translate: { x: 0, y: 500 },
-    //       duration: 0,
-    //     })
-    //     .then(() => {
-    //       nativeView.animate({
-    //         translate: { x: 0, y: 50 },
-    //         duration: 500,
-    //       });
-    //     });
-    // } else {
-    //   let nativeView = this.view.ios;
-    //   console.log('page!!!!!!!!!!!!');
-    //   console.log(nativeView);
-    // }
-
-    // page
-    //   .animate({
-    //     translate: { x: 0, y: Number(page.content.page.height) },
-    //     duration: 0,
-    //   })
-    //   .then(() => {
-    //     page.animate({
-    //       translate: { x: 0, y: 50 },
-    //       duration: 500,
-    //     });
-    //   });
   }
 
   buttonTap(): void {
-    this.params.closeCallback('Return response here...');
+    // this.extendedParams.closeCallback('some response...');
   }
 }
 

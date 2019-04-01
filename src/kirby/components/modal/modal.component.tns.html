@@ -1,19 +1,5 @@
-<!-- <Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:modal="nativescript-windowed-modal" showingModally="showingModally">
-    <modal:ModalStack class="modal-container">
-        <StackLayout class="modal">
-            <Label text="Hi, I'm your modal" class="m-10 m-x-auto" textWrap="true"></Label>
-            <Button text="Close modal" class="m-10 btn btn-primary" (tap)="buttonTap()"></Button>
-        </StackLayout>
-    </modal:ModalStack>
-</Page> -->
-
-<!-- <Page class="modal-wrapper"> -->
-
-    <GridLayout (loaded)="onViewLoaded($event)">
-        <StackLayout class="modal">
-            <Label text="Hi, I'm your modal" class="m-10 m-x-auto" textWrap="true"></Label>
-            <Button text="Close modal" class="m-10 btn btn-primary" (tap)="buttonTap()"></Button>
-        </StackLayout>
-    </GridLayout>
-
-<!-- </Page> -->
+<ModalStack dismissEnabled="true" (showingModally)="showingModally($event)">
+    <StackLayout class="modal">
+        <Label text="Hi, I'm your modal" class="text-center" textWrap="true"></Label>
+    </StackLayout>
+</ModalStack>

@@ -1,20 +1,11 @@
-// .modal {
-//     margin: 20;
-//     margin-top: 35;
-//     border-radius: 8;
-//     horizontal-align: center;
-//     vertical-align: middle;
-//     background-color: white;
-// }
+@import "../../scss/web-imports";
 
-// .modal-container{
-//     padding: 25;
-//     padding-bottom: 10;
-// }
-
-// Page {
-//     background-color: red;
-//     border-top-left-radius: 50;
-//     border-top-right-radius: 50;
-//     opacity: 0.1;
-// }
+.modal {
+  margin-top: 35;
+  border-top-left-radius: $border-radius;
+  border-top-right-radius: $border-radius;
+  horizontal-align: center;
+  vertical-align: middle;
+  background-color: white;
+  width: 100%;
+}
