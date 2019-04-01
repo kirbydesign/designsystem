@@ -15,6 +15,7 @@ import { ColorsShowcaseComponent } from './colors-showcase/colors-showcase.compo
 import { SpinnerShowcaseComponent } from './spinner-showcase/spinner-showcase.component';
 import { ChipShowcaseComponent } from './chip-showcase/chip-showcase.component';
 import { SegmentShowcaseComponent } from './segment-showcase/segment-showcase.component';
+import { IconShowcaseComponent } from './icon-showcase/icon-showcase.component';
 
 export const routes: Routes = [
   {
@@ -77,6 +78,10 @@ export const routes: Routes = [
       {
         path: 'spinner',
         component: SpinnerShowcaseComponent,
+      },
+      {
+        path: 'icon',
+        component: IconShowcaseComponent,
       },
       {
         path: 'nativescript-only',
