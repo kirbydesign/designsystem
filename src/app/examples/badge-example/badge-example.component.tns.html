@@ -1,21 +1,15 @@
-<StackLayout orientation="horizontal">
-  <kirby-badge text="1"></kirby-badge>
-  <kirby-badge colortype="alert" text="99"></kirby-badge>
-  ...
+<StackLayout>
+  <GridLayout rows="auto" columns="auto, auto">
+    <Label class="h1" text="Badge" col="0" row="0" colspan="2"></Label>
+    <FlexBoxLayout col="1" row="0" flexDirection="row" alignItems="center" justifyContent="flex-end" marginRight="-10">
+      <kirby-badge colortype="danger" text="2"></kirby-badge>
+    </FlexBoxLayout>
+  </GridLayout>
+
+  <GridLayout rows="auto" columns="auto, auto">
+    <Label class="h1" text="Other Badge" col="0" row="0" colspan="2"></Label>
+    <FlexBoxLayout col="1" row="0" flexDirection="row" alignItems="center" justifyContent="flex-end" marginRight="-10">
+      <kirby-badge colortype="primary" text="Text"></kirby-badge>
+    </FlexBoxLayout>
+  </GridLayout>
 </StackLayout>
-    <AbsoluteLayout col="0">
-      <kirby-badge text="1"></kirby-badge>
-    </AbsoluteLayout>
-    <AbsoluteLayout col="1">
-      <kirby-badge colortype="alert" text="99"></kirby-badge>
-    </AbsoluteLayout>
-    <AbsoluteLayout col="2">
-      <kirby-badge colortype="primary" text="2"></kirby-badge>
-    </AbsoluteLayout>
-    <AbsoluteLayout col="3">
-      <kirby-badge colortype="secondary" text="3"></kirby-badge>
-    </AbsoluteLayout>
-    <AbsoluteLayout col="4">
-      <kirby-badge colortype="alert" text="Some text"></kirby-badge>
-    </AbsoluteLayout>
-</GridLayout>
