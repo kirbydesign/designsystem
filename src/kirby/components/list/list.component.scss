@@ -8,7 +8,6 @@ ul {
 
   li {
     background-color: get-color('kirby-white');
-    border-bottom: 1px solid get-color('kirby-grey-2');
     padding: size('m');
     display: flex;
     flex-direction: row;
@@ -17,19 +16,14 @@ ul {
     p {
       margin: 0;
     }
-    
-    
 
-    &.row{
-      &:first-of-type {
-        border-top: 1px solid get-color('kirby-grey-2');
-      }
+    &.divider:not(:last-child) {
+      border-bottom: 1px solid get-color('kirby-grey-2');
     }
 
     &.section-header {
       background-color: transparent;
       border: none;
-      border-bottom: 1px solid get-color('kirby-grey-2');
 
       &:hover {
         background-color: transparent;

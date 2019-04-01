@@ -71,6 +71,41 @@ describe('ListComponent', () => {
     });
   });
 
+  describe('divider', () => {
+    beforeEach(() => {
+      fixture = TestBed.createComponent(ListComponent);
+      component = fixture.componentInstance;
+    });
+
+    it('should set class "divider" on all li elements when showDivider is true', () => {
+      component.items = [1, 2, 3];
+      component.showDivider = true;
+
+      fixture.detectChanges();
+
+      const rootElement: HTMLElement = fixture.debugElement.nativeElement;
+      const liElements = rootElement.querySelectorAll('li');
+
+      liElements.forEach((liElement) => {
+        expect(liElement.getAttribute('class')).toContain('divider');
+      });
+    });
+
+    it('should not set class "divider" on any li elements when showDivider is false', () => {
+      component.items = [1, 2, 3];
+      component.showDivider = false;
+
+      fixture.detectChanges();
+
+      const rootElement: HTMLElement = fixture.debugElement.nativeElement;
+      const liElements = rootElement.querySelectorAll('li');
+
+      liElements.forEach((liElement) => {
+        expect(liElement.getAttribute('class')).not.toContain('divider');
+      });
+    });
+  });
+
   describe('function: onItemSelect', () => {
     it('should emit the selected item', () => {
       spyOn(component.itemSelect, 'emit');
