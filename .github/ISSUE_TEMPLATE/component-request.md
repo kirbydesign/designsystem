@@ -27,6 +27,7 @@ Add any other context or screenshots about the feature request here, e.g. a link
     - [ ] {N} implementation
 - [ ] [Implement Examples and Showcase](https://cookbook.kirby.design/home/showcase/button)
 - [ ] Add link to showcase on Kirby Component Status (`component-status-items.ts => code.cookbookUrl`)
+- [ ] Also remove `githubIssueNo` and set `status` to `ItemCodeStatus.ready`
 - [ ] Push commits to GitHub
 ### Review:
 - [ ] Open a pull request (remember to add `closes #issueno` to the description) and ask @kirbydesign/kirby-guild for review

@@ -14,6 +14,7 @@ import { FontsShowcaseComponent } from './fonts-showcase/fonts-showcase.componen
 import { ColorsShowcaseComponent } from './colors-showcase/colors-showcase.component';
 import { SpinnerShowcaseComponent } from './spinner-showcase/spinner-showcase.component';
 import { SegmentedControlShowcaseComponent } from './segmented-control-showcase/segmented-control-showcase.component';
+import { IconShowcaseComponent } from './icon-showcase/icon-showcase.component';
 
 export const routes: Routes = [
   {
@@ -68,6 +69,10 @@ export const routes: Routes = [
       {
         path: 'spinner',
         component: SpinnerShowcaseComponent,
+      },
+      {
+        path: 'icon',
+        component: IconShowcaseComponent,
       },
       {
         path: 'nativescript-only',

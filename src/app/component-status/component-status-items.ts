@@ -246,8 +246,8 @@ export const componentStatusItems: ComponentStatusItem[] = [
     },
     code: {
       version: 0.5,
-      status: ItemCodeStatus.planned,
-      githubIssueNo: 170,
+      status: ItemCodeStatus.ready,
+      cookbookUrl: 'showcase/icon',
     },
   },
   {
