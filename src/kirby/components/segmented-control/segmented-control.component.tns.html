@@ -1,6 +1,5 @@
 <StackLayout orientation="horizontal" backgroundColor="lightgray" height="40">
-    <Label text="Label 1" backgroundColor="red" ></Label>
-    <Label text="Label 2" backgroundColor="green" ></Label>
-    <Label text="Label 3" backgroundColor="blue" ></Label>
-    <Label text="Label 4" backgroundColor="yellow" ></Label>
-</StackLayout>  
+    <ng-container *ngFor="let item of segmentItems">
+        <Label text="{{item.text}}" value="{{item.value}}" checked="{{item.checked}}" (tap)="onSegmentTap(item)"></Label>
+    </ng-container>
+</StackLayout>
