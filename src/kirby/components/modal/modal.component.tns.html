@@ -1,5 +1,18 @@
-<ModalStack dismissEnabled="true" (showingModally)="showingModally($event)">
-    <StackLayout class="modal">
-        <Label text="Hi, I'm your modal" class="text-center" textWrap="true"></Label>
-    </StackLayout>
+<ModalStack dismissEnabled="true" (showingModally)="showModally($event)">
+    <GridLayout class="modal-wrapper">
+        <StackLayout class="modal" orientation="vertical" verticalAlignment="bottom">
+            <GridLayout rows="auto" columns="*" class="title-bar">
+                <Label row="0" verticalAlignment="center" horizontalAlignment="{{ context.titleHorizontalAlignment }}"
+                    text="{{ context.title }}"></Label>
+                <AbsoluteLayout row="0" verticalAlignment="center" horizontalAlignment="right">
+                    <kirby-floating-action-button [showShadow]="false" (tap)="closeModal($event)">
+                        <kirby-icon name="close"></kirby-icon>
+                    </kirby-floating-action-button>
+                </AbsoluteLayout>
+            </GridLayout>
+            <ScrollView class="content-scrollview">
+                <ng-container *ngComponentOutlet="context.component"></ng-container>
+            </ScrollView>
+        </StackLayout>
+    </GridLayout>
 </ModalStack>

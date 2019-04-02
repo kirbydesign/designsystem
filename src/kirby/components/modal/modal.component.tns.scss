@@ -1,11 +1,27 @@
 @import "../../scss/web-imports";
 
+.modal-wrapper {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  padding-top: 30;
+}
+
 .modal {
-  margin-top: 35;
+  padding: 10;
   border-top-left-radius: $border-radius;
   border-top-right-radius: $border-radius;
-  horizontal-align: center;
-  vertical-align: middle;
   background-color: white;
   width: 100%;
+}
+
+.title-bar {  
+  Label {
+    font-weight: bold;
+  }
+}
+
+.content-scrollview {
+  width: 100%;
+  height: 100%;
 }

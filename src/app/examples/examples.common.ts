@@ -9,6 +9,7 @@ import { ChartExampleComponent } from './chart-example/chart-example.component';
 import { FontsExampleComponent } from './fonts-example/fonts-example.component';
 import { SpinnerExampleComponent } from './spinner-example/spinner-example.component';
 import { ModalExampleComponent } from './modal-example/modal-example.component';
+import { PayAndTransferModalContentExampleComponent } from './modal-example/pay-and-transfer-modal-content-example/pay-and-transfer-modal-content-example.component';
 import { IconExampleComponent } from './icon-example/icon-example.component';
 
 export const COMPONENT_DECLARATIONS: any[] = [
@@ -23,5 +24,6 @@ export const COMPONENT_DECLARATIONS: any[] = [
   FontsExampleComponent,
   SpinnerExampleComponent,
   ModalExampleComponent,
+  PayAndTransferModalContentExampleComponent,
   IconExampleComponent,
 ];
