@@ -1,1 +1,28 @@
-/* Add mobile styles for the component here.  */
+@import "../../../kirby/scss/native-imports";
+
+.segment-control {
+  border-radius: 20;
+  background: get-color("kirby-white");
+  color: get-color("kirby-grey-9");
+  display: inline-block;
+  height: size("xl");
+  margin-top: size("s");
+  margin-bottom: size("s");
+}
+
+.segment-item {
+  font-weight: font-weight("normal");
+  font-size: font-size("s");
+  padding-left: size("m");
+  padding-right: size("m");
+  border-radius: 20;
+
+  &.is-checked {
+    color: get-color("kirby-white");
+    background-color: get-color("kirby-grey-9");
+  }
+
+  & + & {
+    margin-left: size("xs") * -1;
+  }
+}

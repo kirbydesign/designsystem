@@ -1,11 +1,11 @@
 <kirby-segmented-control [segmentItems]="segmentItems" (segmentClicked)="onSegmentClick($event)"></kirby-segmented-control>
 
-<ng-container *ngIf="segmentItems[0].value === activeSegment">
-  <h2>Content for {{segmentItems[0].value}} segment</h2>
+<ng-container *ngIf="segmentItems[0].id === activeSegment">
+  <h2>Content for {{segmentItems[0].id}} segment</h2>
   <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quia similique voluptas veniam ducimus? Accusantium necessitatibus similique libero, eos incidunt sed.</p>
 </ng-container>
 
-<ng-container *ngIf="segmentItems[1].value === activeSegment">
-  <h2>Content for {{segmentItems[1].value}} segment</h2>
+<ng-container *ngIf="segmentItems[1].id === activeSegment">
+  <h2>Content for {{segmentItems[1].id}} segment</h2>
   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, quia.</p>
 </ng-container>

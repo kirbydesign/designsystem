@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
+import { Component, EventEmitter, Output, Input } from '@angular/core';
 
 import { SegmentItem } from './segment-item';
 
@@ -7,16 +7,15 @@ import { SegmentItem } from './segment-item';
   templateUrl: './segmented-control.component.html',
   styleUrls: ['./segmented-control.component.scss'],
 })
-export class SegmentedControlComponent implements OnInit {
+export class SegmentedControlComponent {
   @Output() segmentClicked: EventEmitter<any> = new EventEmitter();
   @Input() segmentItems: SegmentItem[];
 
-  constructor() {}
-
-  ngOnInit() {}
+  activeSegment: string;
 
   onSegmentTap(item: SegmentItem) {
-    console.log('Button tapped - value: ' + item.value);
-    this.segmentClicked.emit(item.value);
+    this.activeSegment = item.id;
+    this.segmentItems.forEach((segment) => (segment.checked = this.activeSegment === segment.id));
+    this.segmentClicked.emit(this.activeSegment);
   }
 }

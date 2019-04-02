@@ -13,7 +13,7 @@ export class SegmentedControlExampleComponent implements OnInit {
   segmentItems: SegmentItem[] = [
     {
       text: 'First item',
-      value: 'first',
+      id: 'first',
       checked: true,
       badge: {
         content: '2',
@@ -23,15 +23,16 @@ export class SegmentedControlExampleComponent implements OnInit {
     {
       text: 'Second item',
       checked: false,
-      value: 'second',
+      id: 'second',
     },
   ];
 
-  constructor() {}
+  ngOnInit() {
+    const checkedSegment = this.segmentItems.filter((segment) => segment.checked === true);
+    this.activeSegment = checkedSegment.pop().id;
+  }
 
-  ngOnInit() {}
-
-  onSegmentClick(value) {
-    this.activeSegment = value;
+  onSegmentClick(id) {
+    this.activeSegment = id;
   }
 }

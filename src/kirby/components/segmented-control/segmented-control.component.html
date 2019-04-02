@@ -1,6 +1,6 @@
 <ion-segment (ionChange)="onSegmentClick($event)">
   <ng-container *ngFor="let item of segmentItems">
-    <ion-segment-button value="{{item.value}}" class="kirby-text-small" checked="{{item.checked}}">
+    <ion-segment-button value="{{item.id}}" class="kirby-text-small" checked="{{item.checked}}">
       {{item.text}}
     </ion-segment-button>
   </ng-container>

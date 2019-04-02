@@ -1,5 +1,6 @@
-<StackLayout orientation="horizontal" backgroundColor="lightgray" height="40">
+  <StackLayout orientation="horizontal" horizontalAlignment="left" class="segment-control">
     <ng-container *ngFor="let item of segmentItems">
-        <Label text="{{item.text}}" value="{{item.value}}" checked="{{item.checked}}" (tap)="onSegmentTap(item)"></Label>
+      <Label text="{{item.text}}" value="{{item.id}}" [ngClass]="{'is-checked': item.checked}" (tap)="onSegmentTap(item)" class="segment-item"></Label>
     </ng-container>
-</StackLayout>
+  </StackLayout>
+ 
