@@ -14,13 +14,23 @@
     --ion-color-contrast: #{get-color('kirby-secondary-contrast')};
   }
 
-  &[colortype='danger'] {
-    --ion-color-base: #{get-color('kirby-danger')};
-    --ion-color-contrast: #{get-color('kirby-white')};
+  &[colortype='tertiary'] {
+    --ion-color-base: #{get-color('kirby-tertiary')};
+    --ion-color-contrast: #{get-color('kirby-tertiary-contrast')};
   }
 
+  &[colortype='success'] {
+    --ion-color-base: #{get-color('kirby-success')};
+    --ion-color-contrast: #{get-color('kirby-success-contrast')};
+  }
+  
   &[colortype='alert'] {
     --ion-color-base: #{get-color('kirby-alert')};
     --ion-color-contrast: #{get-color('kirby-alert-contrast')};
+  }
+
+  &[colortype='danger'] {
+    --ion-color-base: #{get-color('kirby-danger')};
+    --ion-color-contrast: #{get-color('kirby-white')};
   }
 }
