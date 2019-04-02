@@ -1,6 +1,6 @@
 @import "../../scss/native-imports";
 
-Label {
+.kirby-badge Label { 
   font-size: font-size("xxs");
   border-radius: size("xs");
   background-color: get-color('kirby-danger');
@@ -11,27 +11,38 @@ Label {
   justify-content: center;
   align-items: center;
   padding-left: size("xxs");
-  padding-right: size("xxs");
+  padding-right: size("xxs"); 
   white-space: nowrap;
-}
-[colortype='primary']  {
-  color: get-color('kirby-primary-contrast');
-  background-color: get-color('kirby-primary');
-}
+  
+  &[colortype='primary']  {
+    color: get-color('kirby-primary-contrast');
+    background-color: get-color('kirby-primary');
+  }
+  
+  &[colortype='secondary'] {
+    color: get-color('kirby-secondary-contrast');
+    background-color: get-color('kirby-secondary');
+  }
 
-[colortype='secondary'] {
-  color: get-color('kirby-secondary-contrast');
-  background-color: get-color('kirby-secondary');
-}
+  &[colortype='tertiary'] {
+    color: get-color('kirby-tertiary-contrast');
+    background-color: get-color('kirby-tertiary');
+  }
 
-[colortype='danger'] {
-  color: get-color('kirby-white');
-  background-color: get-color('kirby-danger');
-}
+  &[colortype='success'] {
+    color: get-color('kirby-success-contrast');
+    background-color: get-color('kirby-success');
+  }
 
-[colortype='alert'] {
-  color: get-color('kirby-alert-contrast');
-  background-color: get-color('kirby-alert');
+  &[colortype='alert'] {
+    color: get-color('kirby-alert-contrast');
+    background-color: get-color('kirby-alert');
+  }
+  
+  &[colortype='danger'] {
+    color: get-color('kirby-white');
+    background-color: get-color('kirby-danger');
+  }
 }
 
 
