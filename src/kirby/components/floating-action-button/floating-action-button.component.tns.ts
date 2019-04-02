@@ -44,7 +44,7 @@ export class FloatingActionButtonComponent extends ContentView {
 
   // TODO: extract a shared function; logic of adding shadow is the same as in many other components;
   addShadow(): void {
-    if (!this.showShadow) {
+    if (!this.showShadow || this.disabled) {
       return;
     }
 

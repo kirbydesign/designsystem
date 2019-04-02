@@ -51,7 +51,7 @@ describe('IconComponent', () => {
 
   describe('color', () => {
     it('should set icon color to undefined by default', () => {
-      expect(component.colorType).toBeUndefined();
+      expect(component.colortype).toBeUndefined();
     });
 
     it('should be rendered with no color by default', () => {
@@ -60,24 +60,45 @@ describe('IconComponent', () => {
     });
 
     it('should be rendered as primary when color is set to primary', () => {
-      component.colorType = 'primary';
+      component.colortype = 'primary';
       fixture.detectChanges();
       var el = fixture.debugElement.query(By.directive(ionic.IonIcon));
       expect(el.componentInstance.color).toBe('primary');
     });
 
     it('should be rendered as secondary when color is set to secondary', () => {
-      component.colorType = 'secondary';
+      component.colortype = 'secondary';
       fixture.detectChanges();
       var el = fixture.debugElement.query(By.directive(ionic.IonIcon));
       expect(el.componentInstance.color).toBe('secondary');
     });
 
     it('should be rendered as tertiary when color is set to tertiary', () => {
-      component.colorType = 'tertiary';
+      component.colortype = 'tertiary';
       fixture.detectChanges();
       var el = fixture.debugElement.query(By.directive(ionic.IonIcon));
       expect(el.componentInstance.color).toBe('tertiary');
+    });
+
+    it('should be rendered as alert when color is set to alert', () => {
+      component.colortype = 'alert';
+      fixture.detectChanges();
+      var el = fixture.debugElement.query(By.directive(ionic.IonIcon));
+      expect(el.componentInstance.color).toBe('alert');
+    });
+
+    it('should be rendered as success when color is set to success', () => {
+      component.colortype = 'success';
+      fixture.detectChanges();
+      var el = fixture.debugElement.query(By.directive(ionic.IonIcon));
+      expect(el.componentInstance.color).toBe('success');
+    });
+
+    it('should be rendered as danger when color is set to danger', () => {
+      component.colortype = 'danger';
+      fixture.detectChanges();
+      var el = fixture.debugElement.query(By.directive(ionic.IonIcon));
+      expect(el.componentInstance.color).toBe('danger');
     });
   });
 });
