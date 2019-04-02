@@ -8,6 +8,7 @@ declare var require: any;
 @Component({
   selector: 'kirby-icon-showcase',
   templateUrl: './icon-showcase.component.html',
+  styleUrls: ['./icon-showcase.component.scss'],
 })
 export class IconShowcaseComponent {
   exampleHtml: string = require('../../examples/icon-example/icon-example.component.html');
@@ -33,7 +34,7 @@ export class IconShowcaseComponent {
       inputValues: ['small', 'large'],
     },
     {
-      name: 'colorType',
+      name: 'colortype',
       description: 'Sets which color the icon should use from the theme palette.',
       defaultValue: 'null',
       inputValues: ['primary', 'secondary', 'tertiary', 'alert', 'success', 'danger'],
