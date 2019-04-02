@@ -96,6 +96,20 @@ $page-max-width: 1366px;
   &--sub &__item {
     padding-left: 4.25rem; //Magic... :)
   }
+
+  &--sub &--sub {
+    list-style: none;
+    margin: 0;
+    margin-left: 1rem;
+  }
+
+  .collapsable {
+    cursor: pointer;
+
+    ion-icon {
+      margin-right: 0.5rem;
+    }
+  }
 }
 
 .icon {
