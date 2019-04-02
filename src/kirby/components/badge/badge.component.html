@@ -1,5 +1,5 @@
 <ion-badge [color]="colortype">
-  <ng-container *ngIf="text">{{text}}</ng-container>
   <ng-content *ngIf="!text"></ng-content>
+  <ng-container *ngIf="text">{{text}}</ng-container>
 </ion-badge>
 

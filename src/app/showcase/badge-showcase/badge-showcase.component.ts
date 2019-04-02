@@ -15,7 +15,7 @@ export class BadgeShowcaseComponent {
     {
       name: 'colortype',
       description: 'Sets which color the badge should use from the theme palette.',
-      defaultValue: "''",
+      defaultValue: '',
       inputValues: ["'primary'", "'secondary'", "'tertiary'", "'success'", "'danger'", "'alert'"],
     },
   ];
