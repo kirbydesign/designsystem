@@ -8,8 +8,6 @@ import { FloatingActionButtonComponent } from './floating-action-button.componen
 describe('FloatingActionButtonComponent', () => {
   let component: FloatingActionButtonComponent;
   let fixture: ComponentFixture<FloatingActionButtonComponent>;
-  const defaultIconPath: string = '/assets/icons/add/add@3x.png';
-  const customIconPath: string = '/assets/icons/edit/edit@3x.png';
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -34,16 +32,7 @@ describe('FloatingActionButtonComponent', () => {
 
     it('should render a shadow by default', () => {
       const rootElement: HTMLElement = fixture.debugElement.nativeElement;
-      const fab = rootElement.querySelector('.fab');
-      expect(fab.classList).not.toContain('no-shadow');
-    });
-
-    it('should not render a shadow when showShadow is set to false', () => {
-      component.showShadow = false;
-      fixture.detectChanges();
-      const rootElement: HTMLElement = fixture.debugElement.nativeElement;
-      const fab = rootElement.querySelector('.fab');
-      expect(fab.classList).toContain('no-shadow');
+      expect(rootElement.classList).not.toContain('no-shadow');
     });
   });
 
