@@ -13,16 +13,10 @@ export class SegmentedControlShowcaseComponent {
 
   properties: ShowcaseProperty[] = [
     {
-      name: 'showShadow',
-      description: 'Determines whether the button will have a shadow or not.',
-      defaultValue: 'true',
-      inputValues: ['boolean'],
-    },
-    {
-      name: 'disabled',
-      description: 'Determines whether the button will be disabled or not.',
-      defaultValue: 'false',
-      inputValues: ['boolean'],
+      name: 'segmentItems',
+      description: 'Array of SegmentItem',
+      defaultValue: '',
+      inputValues: ['segmentItems[]'],
     },
   ];
 }
