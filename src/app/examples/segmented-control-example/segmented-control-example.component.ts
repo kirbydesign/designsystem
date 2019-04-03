@@ -25,11 +25,6 @@ export class SegmentedControlExampleComponent implements OnInit {
       checked: false,
       id: 'second',
     },
-    // {
-    //   text: 'third item',
-    //   checked: false,
-    //   id: 'third',
-    // },
   ];
 
   ngOnInit() {

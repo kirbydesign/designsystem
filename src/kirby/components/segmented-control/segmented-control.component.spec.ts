@@ -1,26 +1,46 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import * as ionic from '@ionic/angular';
-import { By } from '@angular/platform-browser';
 
 import { MockComponent } from 'ng-mocks';
 
 import { SegmentedControlComponent } from './segmented-control.component';
+import { SegmentItem } from './segment-item';
 
 describe('SegmentedControlComponent', () => {
   let component: SegmentedControlComponent;
   let fixture: ComponentFixture<SegmentedControlComponent>;
-  const defaultIconPath: string = '/assets/icons/add/add@3x.png';
-  const customIconPath: string = '/assets/icons/edit/edit@3x.png';
+  let segmentItems: SegmentItem[] = [
+    {
+      text: 'First item',
+      id: 'first',
+      checked: true,
+      badge: {
+        content: '2',
+        type: 'danger',
+      },
+    },
+    {
+      text: 'Second item',
+      checked: false,
+      id: 'second',
+    },
+  ];
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [SegmentedControlComponent, MockComponent(ionic.IonFabButton)],
+      declarations: [
+        SegmentedControlComponent,
+        MockComponent(ionic.IonButton),
+        MockComponent(ionic.IonSegment),
+        MockComponent(ionic.IonSegmentButton),
+      ],
     }).compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(SegmentedControlComponent);
     component = fixture.componentInstance;
+    component.segmentItems = segmentItems;
     fixture.detectChanges();
   });
 
@@ -28,61 +48,7 @@ describe('SegmentedControlComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  // describe('shadows', () => {
-  //   it('should have a shadow by default', () => {
-  //     expect(component.showShadow).toBeTruthy();
-  //   });
-
-  //   it('should render a shadow by default', () => {
-  //     const rootElement: HTMLElement = fixture.debugElement.nativeElement;
-  //     const fab = rootElement.querySelector('.fab');
-  //     expect(fab.classList).not.toContain('no-shadow');
-  //   });
-
-  //   it('should not render a shadow when showShadow is set to false', () => {
-  //     component.showShadow = false;
-  //     fixture.detectChanges();
-  //     const rootElement: HTMLElement = fixture.debugElement.nativeElement;
-  //     const fab = rootElement.querySelector('.fab');
-  //     expect(fab.classList).toContain('no-shadow');
-  //   });
-  // });
-
-  // describe('disabled', () => {
-  //   it('should not be disabled by default', () => {
-  //     expect(component.disabled).not.toBeTruthy();
-  //   });
-
-  //   it('should not be rendered as disabled by default', () => {
-  //     var el = fixture.debugElement.query(By.directive(ionic.IonFabButton));
-  //     expect(el.componentInstance.disabled).not.toBeTruthy();
-  //   });
-
-  //   it('should be rendered as disabled when disabled is set to true', () => {
-  //     component.disabled = true;
-  //     fixture.detectChanges();
-  //     var el = fixture.debugElement.query(By.directive(ionic.IonFabButton));
-  //     expect(el.componentInstance.disabled).toBeTruthy();
-  //   });
-  // });
-
-  // describe('icons', () => {
-  //   it('should point to the add@3x icon by default', () => {
-  //     expect(component.iconSrc).toBe(defaultIconPath);
-  //   });
-
-  //   it('should render the add@3x icon by default', () => {
-  //     const rootElement: HTMLElement = fixture.debugElement.nativeElement;
-  //     const fabIcon = rootElement.querySelector('.fab img');
-  //     expect((<HTMLImageElement>fabIcon).src).toContain(defaultIconPath);
-  //   });
-
-  //   it('should render the respective icon when iconSrc has changed', () => {
-  //     component.iconSrc = customIconPath;
-  //     fixture.detectChanges();
-  //     const rootElement: HTMLElement = fixture.debugElement.nativeElement;
-  //     const fabIcon = rootElement.querySelector('.fab img');
-  //     expect((<HTMLImageElement>fabIcon).src).toContain(customIconPath);
-  //   });
-  // });
+  it('Should have 2 segments buttons', () => {
+    expect(fixture.nativeElement.querySelectorAll('ion-segment-button').length).toBe(2);
+  });
 });
