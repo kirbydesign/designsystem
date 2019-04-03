@@ -4,11 +4,12 @@ import { CommonModule } from '@angular/common';
 import { KirbyModule } from '../../kirby/kirby.module';
 import { COMPONENT_DECLARATIONS } from './examples.common';
 import { CardExampleComponent } from './card-example/card-example.component';
+import { PayAndTransferModalContentExampleComponent } from './modal-example/pay-and-transfer-modal-content-example/pay-and-transfer-modal-content-example.component';
 
 @NgModule({
   imports: [CommonModule, KirbyModule],
   declarations: COMPONENT_DECLARATIONS,
   exports: COMPONENT_DECLARATIONS,
-  entryComponents: [CardExampleComponent],
+  entryComponents: [CardExampleComponent, PayAndTransferModalContentExampleComponent],
 })
 export class ExamplesModule {}
