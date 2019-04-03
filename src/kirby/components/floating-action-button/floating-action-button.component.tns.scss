@@ -8,9 +8,9 @@
     text-align: center;
     vertical-align: middle;
 
-    Image {
-        width: 24;
-        height: 24;
+    &.disabled {
+        opacity: 0.6;
+        background-color: get-color('kirby-grey-4');
     }
 }
   
@@ -22,8 +22,4 @@
 .fab-wrapper {
     width:96;
     height:96;
-}
-
-.fab-disabled {
-    opacity: 0.6;
 }

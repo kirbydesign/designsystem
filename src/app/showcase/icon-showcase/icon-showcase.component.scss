@@ -1,0 +1,22 @@
+@import '../../../kirby/scss/web-imports';
+
+.performance {
+    margin-top: 20px;
+    color: get-color('kirby-grey-8');
+
+    .title {
+        display: flex;
+
+        ion-icon {
+            color: #3880ff;
+        }
+
+        h4 {
+            margin-left: 5px;
+        }
+    }
+
+    .info {
+        font-style: italic;
+    }
+}
