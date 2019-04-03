@@ -1,5 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MockComponent } from 'ng-mocks';
 import { RouterTestingModule } from '@angular/router/testing';
+import * as ionic from '@ionic/angular';
 
 import { ExamplesModule } from '../../examples/examples.module';
 import { HtmlViewerComponent } from '../../shared/html-viewer/html-viewer.component';
@@ -14,7 +16,12 @@ describe('IconShowcaseComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ExamplesModule, RouterTestingModule],
-      declarations: [IconShowcaseComponent, HtmlViewerComponent, ShowcasePropertiesComponent],
+      declarations: [
+        IconShowcaseComponent,
+        HtmlViewerComponent,
+        ShowcasePropertiesComponent,
+        MockComponent(ionic.IonIcon),
+      ],
     }).compileComponents();
   }));
 

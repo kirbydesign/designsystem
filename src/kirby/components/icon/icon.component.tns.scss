@@ -22,4 +22,16 @@ Label {
     &.tertiary {
         color: get-color('kirby-tertiary');
     }
+
+    &.alert {
+        color: get-color('kirby-alert');
+    }
+
+    &.success {
+        color: get-color('kirby-success');
+    }
+
+    &.danger {
+        color: get-color('kirby-danger');
+    }
 }   
