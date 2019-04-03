@@ -1,0 +1,3 @@
+<kirby-calendar>
+    <kirby-calendar-cell *kirbyCalendarDay="let day = context" [day]="day" [selected]="selectedKey == day.key" (click)="selectDay(day.key)"></kirby-calendar-cell>
+</kirby-calendar>

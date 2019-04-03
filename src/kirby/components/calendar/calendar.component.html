@@ -1,0 +1,19 @@
+<div>
+  <div class="days" *ngFor="let day of weekDays">
+    <div class="day name">{{ day }}</div>
+  </div>
+</div>
+
+<div>
+  <button (click)="previous()">previous</button>
+  <div class="month-name">{{ currentMonthAndYear }}</div>
+  <button (click)="next()">next</button>
+</div>
+
+<div *ngFor="let week of month">
+  <ng-container *ngFor="let day of week">
+    <ng-container [ngTemplateOutlet]="dayTemplate.template" [ngTemplateOutletContext]="day"></ng-container>
+  </ng-container>
+</div>
+
+

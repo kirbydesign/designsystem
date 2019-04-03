@@ -22,6 +22,9 @@ import { ListHeaderComponent } from './components/list/list-header/list-header.c
 import { ListCellComponent } from './components/list/list-cell/list-cell.component';
 import { ListCellLineComponent } from './components/list/list-cell-line/list-cell-line.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
+import { CalendarComponent } from './components/calendar/calendar.component';
+import { CalendarCellComponent } from './components/calendar/calendar-cell/calendar-cell.component';
+import { CalendarDayDirective } from './components/calendar/helpers/calendar-day.directive';
 
 export const declarations = [
   CardComponent,
@@ -46,4 +49,7 @@ export const declarations = [
   AvatarComponent,
   GroupByPipe,
   SpinnerComponent,
+  CalendarComponent,
+  CalendarCellComponent,
+  CalendarDayDirective,
 ];

@@ -15,6 +15,7 @@ import { ColorsShowcaseComponent } from './colors-showcase/colors-showcase.compo
 import { LineChartShowcaseComponent } from './line-chart-showcase/line-chart-showcase.component';
 import { SpinnerShowcaseComponent } from './spinner-showcase/spinner-showcase.component';
 import { IconShowcaseComponent } from './icon-showcase/icon-showcase.component';
+import { CalendarShowcaseComponent } from './calendar-showcase/calendar-showcase.component';
 
 export const COMPONENT_IMPORTS: any[] = [ExamplesModule, ShowcaseRoutingModule];
 
@@ -33,6 +34,7 @@ export const COMPONENT_EXPORTS: any[] = [
   LineChartShowcaseComponent,
   SpinnerShowcaseComponent,
   IconShowcaseComponent,
+  CalendarShowcaseComponent,
 ];
 
 export const COMPONENT_DECLARATIONS: any[] = [...COMPONENT_EXPORTS, ShowcaseComponent];

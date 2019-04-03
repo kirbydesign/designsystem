@@ -14,6 +14,7 @@ import { FontsShowcaseComponent } from './fonts-showcase/fonts-showcase.componen
 import { ColorsShowcaseComponent } from './colors-showcase/colors-showcase.component';
 import { SpinnerShowcaseComponent } from './spinner-showcase/spinner-showcase.component';
 import { IconShowcaseComponent } from './icon-showcase/icon-showcase.component';
+import { CalendarShowcaseComponent } from './calendar-showcase/calendar-showcase.component';
 
 export const routes: Routes = [
   {
@@ -72,6 +73,10 @@ export const routes: Routes = [
       {
         path: 'icon',
         component: IconShowcaseComponent,
+      },
+      {
+        path: 'calendar',
+        component: CalendarShowcaseComponent,
       },
       {
         path: 'nativescript-only',
