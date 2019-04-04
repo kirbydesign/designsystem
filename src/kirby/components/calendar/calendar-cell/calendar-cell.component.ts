@@ -11,7 +11,7 @@ export class CalendarCellComponent {
   @Input() day: CalendarDayContent;
   @Input() selected: boolean;
 
-  @HostBinding('class.current-month') get thisMonth() {
+  @HostBinding('class.current-month') get currentMonth() {
     return this.day.currentMonth;
   }
 

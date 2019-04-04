@@ -1,21 +1,6 @@
 import { Component, ContentChild, Input, OnInit, ViewChild, ElementRef } from '@angular/core';
+import * as moment from 'moment';
 import { chunk, range } from 'lodash';
-import {
-  addDays,
-  addMonths,
-  format,
-  getDay,
-  getDaysInMonth,
-  isAfter,
-  isBefore,
-  isPast,
-  isThisMonth,
-  isToday,
-  isWeekend,
-  startOfMonth,
-  subDays,
-  subMonths,
-} from 'date-fns';
 
 import { CalendarDayDirective } from './helpers/calendar-day.directive';
 import { CalendarHelper } from './helpers/calendar.helper';
@@ -29,8 +14,6 @@ import { CalendarHelper } from './helpers/calendar.helper';
 export class CalendarComponent implements OnInit {
   @ContentChild(CalendarDayDirective) dayTemplate: CalendarDayDirective;
   @ViewChild('calendarContainer') calendarContainer: ElementRef;
-  @Input() max: Date;
-  @Input() min: Date;
   month: any[][];
 
   private _displayDate: Date;
@@ -78,19 +61,20 @@ export class CalendarComponent implements OnInit {
   }
 
   refresh() {
-    const monthStart = startOfMonth(this.displayDate);
-    const weekDay = CalendarComponent.fixWeekday(getDay(monthStart));
-    const startOfWeek = subDays(monthStart, weekDay);
-    const count = CalendarComponent.fixCount(weekDay + getDaysInMonth(this.displayDate));
+    const momentDate = moment(this.displayDate);
+    const monthStart = momentDate.startOf('month').toDate();
+    const weekDay = CalendarComponent.fixWeekday(monthStart.getDay());
+    const startOfWeek = momentDate.subtract(weekDay, 'days').toDate();
+    const count = CalendarComponent.fixCount(weekDay + momentDate.daysInMonth());
+
     const days = range(0, count).map((number) => {
-      const date = addDays(startOfWeek, number);
-      const past = isPast(date);
-      const today = isToday(date);
-      const weekend = isWeekend(date);
-      const currentMonth = isThisMonth(date);
-      const disabled =
-        (this.min && isBefore(date, this.min)) || (this.max && isAfter(date, this.max));
-      const key = format(date, 'DD-MM-YYYY');
+      const date = moment(startOfWeek).add(number, 'days');
+      const past = date.isBefore();
+      const today = date.isSame(moment(), 'day');
+      const weekend = date.toDate().getDay() === 0 || date.toDate().getDay() === 6;
+      const currentMonth = date.isSame(monthStart, 'month');
+      const key = date.format('DD-MM-YYYY');
+
       return {
         content: {
           date,
@@ -98,7 +82,6 @@ export class CalendarComponent implements OnInit {
           past,
           today,
           currentMonth,
-          disabled,
           weekend,
         },
       };
@@ -112,10 +95,29 @@ export class CalendarComponent implements OnInit {
   }
 
   public next() {
-    this.displayDate = addMonths(this.displayDate, 1);
+    this.displayDate = this.addMonths(this.displayDate, 1);
   }
 
   public previous() {
-    this.displayDate = subMonths(this.displayDate, 1);
+    this.displayDate = this.subMonths(this.displayDate, 1);
+  }
+
+  addMonths(dirtyDate, dirtyAmount) {
+    var date = dirtyDate;
+    var amount = Number(dirtyAmount);
+    var desiredMonth = date.getMonth() + amount;
+    var dateWithDesiredMonth = new Date(0);
+    dateWithDesiredMonth.setFullYear(date.getFullYear(), desiredMonth, 1);
+    dateWithDesiredMonth.setHours(0, 0, 0, 0);
+    var daysInMonth = moment(dateWithDesiredMonth).daysInMonth();
+    // Set the last day of the new month
+    // if the original date was the last day of the longer month
+    date.setMonth(desiredMonth, Math.min(daysInMonth, date.getDate()));
+    return date;
+  }
+
+  subMonths(dirtyDate, dirtyAmount) {
+    var amount = Number(dirtyAmount);
+    return this.addMonths(dirtyDate, -amount);
   }
 }
