@@ -25,7 +25,7 @@
   "types": "index.d.ts",
   "dependencies": {
     "@ionic/angular": "^4.1.1",
-    "highcharts": "^7.0.3",
+    "highcharts": "7.0.3",
     "nativescript-webview-interface": "^1.4.2"
   },
   "devDependencies": {
