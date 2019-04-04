@@ -1,6 +1,6 @@
 <ul class="side-nav side-menu" [ngClass]="{'is-open': isMenuOpen}" (click)="onToggleMenu()">
   <button class="side-menu__close-btn" >
-      <kirby-icon name="cross"></kirby-icon>
+      <kirby-icon name="close" size="large"></kirby-icon>
   </button>
   <li>
     <a routerLink="/home/intro" [routerLinkActive]="'is-selected'" class="side-nav__item">Intro</a>
@@ -22,6 +22,7 @@
     </a>
     <ul class="side-nav side-nav--sub">
       <li><a routerLink="showcase/button" [routerLinkActive]="'is-selected'" class="side-nav__item">Button</a></li>
+      <li><a routerLink="showcase/floating-action-button" [routerLinkActive]="'is-selected'" class="side-nav__item">Floating Action Button</a></li>
       <li><a routerLink="showcase/card" [routerLinkActive]="'is-selected'" class="side-nav__item">Card</a></li>
       <li><a routerLink="showcase/list" [routerLinkActive]="'is-selected'" class="side-nav__item">List</a></li>
       <li><a routerLink="showcase/list-load-on-demand" [routerLinkActive]="'is-selected'" class="side-nav__item">List - load on demand</a></li>
@@ -49,6 +50,7 @@
     </a>
     <ul class="side-nav side-nav--sub">
       <li><a routerLink="showcase/avatar" [routerLinkActive]="'is-selected'" class="side-nav__item">Avatar</a></li>
+      <li><a routerLink="showcase/icon" [routerLinkActive]="'is-selected'" class="side-nav__item">Icon</a></li>
       <li><a routerLink="showcase/colors" [routerLinkActive]="'is-selected'" class="side-nav__item">Colors</a></li>
     </ul>
   </li>

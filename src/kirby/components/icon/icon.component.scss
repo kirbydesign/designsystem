@@ -1,12 +1,5 @@
 :host {
-  display: inline-flex;
-}
-
-.icon {
-  width: 100%;
-  height: 100%;
-  align-self: center;
-  justify-self: center;
-  stroke: currentColor;
-  fill: currentColor;
+	display: flex;
+    align-items: center;
+    justify-content: center;
 }

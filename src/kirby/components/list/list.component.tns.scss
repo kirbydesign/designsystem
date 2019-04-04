@@ -1,27 +1,16 @@
 @import "../../scss/native-imports";
 
-RadListView {
-  background: #F7F7F7;
-}
-
 .row {
-  margin: 0 size('gutter-small') 0 size('gutter-small');
   padding: size('gutter') size('gutter-small') size('gutter') size('gutter-small');
   justify-content: space-between;
   flex-direction: row;
-  border-color: get-color('kirby-background');
-  border-width: 0 0 1 0;
 
-  &.rounded {
-    border-width: 0 1 1 1;
-
-    &.top {
-      border-width: 1;
-      border-radius: $border-radius $border-radius 0 0;
-    }
-
+  &.divider {
+    border-color: get-color('kirby-grey-2');
+    border-bottom-width: 1;
+    
     &.bottom {
-      border-radius: 0 0 $border-radius $border-radius;
+      border-width: 0;
     }
   }
 }

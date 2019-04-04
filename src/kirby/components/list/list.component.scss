@@ -2,11 +2,12 @@
 ul {
   list-style-type: none;
   padding-left: 0;
-  margin: 0;
+  margin-top: 0;
   font-size: font-size('s');
+  margin-block-end: 0;
 
   li {
-    border-bottom: 1px solid get-color('kirby-grey-2');
+    background-color: get-color('kirby-white');
     padding: size('m');
     display: flex;
     flex-direction: row;
@@ -16,16 +17,23 @@ ul {
       margin: 0;
     }
 
-    &.row {
-      border: 0 solid get-color('kirby-grey-2');
-      border-bottom-width: 1px;
+    &.divider:not(:last-child) {
+      border-bottom: 1px solid get-color('kirby-grey-2');
+    }
 
-      &.selectable:hover {
-        background-color: get-color('kirby-grey-3');        
+    &.section-header {
+      background-color: transparent;
+      border: none;
+
+      &:hover {
+        background-color: transparent;
       }
+    }
 
-      &:last-child {
-        border-bottom-width: 0;
+    &.selectable {
+
+      &:hover {
+        background-color: get-color('kirby-secondary');
       }
     }
   }
@@ -33,55 +41,4 @@ ul {
 
 .extending {
   margin: auto;
-}
-
-:host {
-  display: block;
-
-  &:not(.has-sections) {
-    background-color: get-color('kirby-white');
-    border: 1px solid  get-color('kirby-grey-2');
-  }
-}
-
-:host([shape="rounded"]) {
-  &:not(.has-sections) {
-    border-radius: $border-radius;
-
-    li:first-child {
-      border-top-left-radius: $border-radius;
-      border-top-right-radius: $border-radius;
-    }
-    
-    li:last-child {
-      border-bottom-left-radius: $border-radius;
-      border-bottom-right-radius: $border-radius;
-    }
-  }
-
-  &.has-sections {
-    li.row {
-      background-color: get-color('kirby-white');
-      
-      &.selectable:hover {
-        background-color: get-color('kirby-grey-3');        
-      }
-    }
-
-    li.section-header + li.row
-    {
-      border-top-left-radius: $border-radius;
-      border-top-right-radius: $border-radius;
-    }
-
-    li.row.last-in-section {
-      border-bottom-left-radius: $border-radius;
-      border-bottom-right-radius: $border-radius;
-      border-width: 0;
-    }
-  } 
-}
-
-.list-header {
-  border-bottom: 1px solid get-color('kirby-grey-2');
 }

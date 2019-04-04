@@ -1,0 +1,9 @@
+@import "../../../kirby/scss/web-imports";
+
+:host {
+  display: inline-flex;
+
+  kirby-icon {
+    margin-left: size("s");
+  }
+}
