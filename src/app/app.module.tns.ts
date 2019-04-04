@@ -2,8 +2,6 @@ require('nativescript-orientation');
 const platformCss = require('nativescript-platform-css');
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { NativeScriptModule } from 'nativescript-angular/nativescript.module';
-import { registerElement } from 'nativescript-angular';
-import { overrideModalViewMethod, ModalStack } from 'nativescript-windowed-modal';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,9 +12,6 @@ import { IntroComponent } from './intro/intro.component';
 
 // Uncomment and add to NgModule imports  if you need to use the HTTP wrapper
 // import { NativeScriptHttpClientModule } from 'nativescript-angular/http-client';
-
-overrideModalViewMethod();
-registerElement('ModalStack', () => ModalStack);
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, SideNavComponent, HeaderComponent, IntroComponent],
