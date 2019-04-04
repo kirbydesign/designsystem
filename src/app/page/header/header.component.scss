@@ -35,6 +35,19 @@ header {
   }
 }
 
+.logo {
+  position: relative;
+  display: none;
+
+  @include media(">=large") {
+    display: flex;
+  }
+  .version {
+    align-self: flex-end;
+    margin-left: 2rem;
+  }
+}
+
 .menu-button {
   color: $hvii;
   text-decoration: none;
