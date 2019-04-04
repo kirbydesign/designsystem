@@ -1,1 +1,9 @@
-<h1>hello world</h1>
+<div class="modal-content">
+    <h2 [ngClass]="'text-' + config.titleHorizontalAlignment">{{ config.title }}</h2>
+    <kirby-floating-action-button class="close-button" (click)="closeModal()">
+        <kirby-icon name="close"></kirby-icon>
+    </kirby-floating-action-button>
+    <div class="inner-component">
+        <ng-container *ngComponentOutlet="config.component"></ng-container>
+    </div>
+</div>

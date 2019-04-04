@@ -1,8 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { NavParams, ModalController } from '@ionic/angular';
+
+import { ModalConfig } from './modal-config';
 
 @Component({
-  selector: 'kirby-modal',
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss'],
 })
-export class ModalComponent {}
+export class ModalComponent {
+  config: ModalConfig;
+
+  constructor(private modalController: ModalController, private params: NavParams) {
+    this.config = params.get('config');
+
+    if (!this.config.titleHorizontalAlignment) {
+      this.config.titleHorizontalAlignment = 'left';
+    }
+  }
+
+  closeModal(): void {
+    this.modalController.dismiss('any response goes here...');
+  }
+}

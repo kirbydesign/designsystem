@@ -11,11 +11,11 @@ declare var require: any;
 export class ModalShowcaseComponent {
   exampleHtml: string = require('../../examples/modal-example/modal-example.component.html');
   properties: ShowcaseProperty[] = [
-    {
-      name: 'showShadow',
-      description: 'Determines whether the button will have a shadow or not.',
-      defaultValue: 'true',
-      inputValues: ['boolean'],
-    },
+    // {
+    //   name: 'showShadow',
+    //   description: 'Determines whether the button will have a shadow or not.',
+    //   defaultValue: 'true',
+    //   inputValues: ['boolean'],
+    // },
   ];
 }

@@ -1,6 +1,4 @@
-import { Component } from '@angular/core';
-
-export interface ModalContent {
+export interface ModalConfig {
   title: string;
   titleHorizontalAlignment?: 'left' | 'center';
   closeIcon?: 'close' | 'arrow';

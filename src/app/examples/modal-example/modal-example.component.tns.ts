@@ -1,7 +1,7 @@
 import { ModalDialogService } from 'nativescript-angular/directives/dialogs';
 import { Component, ViewContainerRef } from '@angular/core';
 
-import { ModalContent } from '~/kirby/components/modal/modal-content';
+import { ModalConfig } from '~/kirby/components/modal/modal-config';
 import { ModalComponent } from '~/kirby/components/modal/modal.component';
 import { PayAndTransferModalContentExampleComponent } from './pay-and-transfer-modal-content-example/pay-and-transfer-modal-content-example.component';
 
@@ -14,7 +14,7 @@ export class ModalExampleComponent {
   constructor(private modalDialogService: ModalDialogService, private vcRef: ViewContainerRef) {}
 
   openModal() {
-    const ctx: ModalContent = {
+    const content: ModalConfig = {
       title: 'Betal & Overfør',
       titleHorizontalAlignment: 'center',
       component: PayAndTransferModalContentExampleComponent,
@@ -23,7 +23,7 @@ export class ModalExampleComponent {
     this.modalDialogService
       .showModal(ModalComponent, {
         viewContainerRef: this.vcRef,
-        context: ctx,
+        context: content,
       })
       .then((result: string) => {
         console.log('res: ' + result);
