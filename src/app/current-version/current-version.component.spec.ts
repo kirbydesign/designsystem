@@ -1,8 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { CurrentVersionComponent } from './current-version.component';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { HttpClient } from '@angular/common/http';
+
+import { CurrentVersionComponent } from './current-version.component';
 
 describe('CurrentVersionComponent', () => {
   let component: CurrentVersionComponent;
