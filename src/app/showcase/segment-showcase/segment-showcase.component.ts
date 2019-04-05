@@ -7,7 +7,7 @@ declare var require: any;
   styleUrls: ['./segment-showcase.component.scss'],
 })
 export class SegmentShowcaseComponent implements OnInit {
-  exampleHtml: string = require('../../examples/segment-example/segment-example.component.html');
+  exampleHtml: string = require('../../examples/segment-example/segmented-chip-control-example/segmented-chip-control-example.component.html');
 
   constructor() {}
 
