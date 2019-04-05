@@ -24,6 +24,7 @@ import { ListCellLineComponent } from './components/list/list-cell-line/list-cel
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { ChipComponent } from './components/chip/chip.component';
 import { SegmentedChipControlComponent } from './components/segment/segmented-chip-control/segmented-chip-control.component';
+import { BadgeComponent } from './components/badge/badge.component';
 
 export const declarations = [
   CardComponent,
@@ -50,4 +51,5 @@ export const declarations = [
   SpinnerComponent,
   ChipComponent,
   SegmentedChipControlComponent,
+  BadgeComponent,
 ];

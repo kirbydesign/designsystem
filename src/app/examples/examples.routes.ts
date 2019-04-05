@@ -11,6 +11,7 @@ import { FontsExampleComponent } from './fonts-example/fonts-example.component';
 import { SpinnerExampleComponent } from './spinner-example/spinner-example.component';
 import { SegmentExampleComponent } from './segment-example/segment-example.component';
 import { ChipExampleComponent } from './chip-example/chip-example.component';
+import { BadgeExampleComponent } from './badge-example/badge-example.component';
 import { IconExampleComponent } from './icon-example/icon-example.component';
 
 export const routes: Routes = [
@@ -61,6 +62,10 @@ export const routes: Routes = [
   {
     path: 'segment',
     component: SegmentExampleComponent,
+  },
+  {
+    path: 'badge',
+    component: BadgeExampleComponent,
   },
   {
     path: 'icon',

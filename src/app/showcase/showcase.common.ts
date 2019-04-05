@@ -16,6 +16,7 @@ import { LineChartShowcaseComponent } from './line-chart-showcase/line-chart-sho
 import { SpinnerShowcaseComponent } from './spinner-showcase/spinner-showcase.component';
 import { ChipShowcaseComponent } from './chip-showcase/chip-showcase.component';
 import { SegmentShowcaseComponent } from './segment-showcase/segment-showcase.component';
+import { BadgeShowcaseComponent } from './badge-showcase/badge-showcase.component';
 import { IconShowcaseComponent } from './icon-showcase/icon-showcase.component';
 
 export const COMPONENT_IMPORTS: any[] = [ExamplesModule, ShowcaseRoutingModule];
@@ -36,6 +37,7 @@ export const COMPONENT_EXPORTS: any[] = [
   SpinnerShowcaseComponent,
   ChipShowcaseComponent,
   SegmentShowcaseComponent,
+  BadgeShowcaseComponent,
   IconShowcaseComponent,
 ];
 
