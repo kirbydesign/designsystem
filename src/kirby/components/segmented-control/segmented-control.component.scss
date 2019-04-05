@@ -10,7 +10,6 @@ ion-segment {
   --background: #{get-color("kirby-white")};
   --background-checked: #{get-color("kirby-grey-9")};
   --background-hover: #{get-color("kirby-white")};
-  --border-style: none;
   border-radius: 20px;
   background: get-color("kirby-white");
 }
@@ -22,6 +21,9 @@ ion-segment-button {
   font-size: font-size("s");
   text-transform: none;
   border-radius: 20px;
+  --border-style: none;
+  --padding-start: #{size("m")};
+  --padding-end: #{size("m")};
 
   &.segment-button-checked:hover {
     --background-hover: #{get-color("kirby-grey-9")};
