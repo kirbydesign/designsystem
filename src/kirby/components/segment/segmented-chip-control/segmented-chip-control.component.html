@@ -1,5 +1,5 @@
 <div class="scrollable">
     <div *ngFor="let item of items" (click)="segmentedChipSelect(item)">
-        <kirby-chip [label]="item" [isSelected]="item.toLowerCase() === selectedItem.toLowerCase()"></kirby-chip>
+        <kirby-chip [text]="item" [isSelected]="item.toLowerCase() === selectedItem.toLowerCase()"></kirby-chip>
     </div>
 </div>
