@@ -1,6 +1,7 @@
 <StackLayout class="segment-example">
-        <kirby-segmented-chip-control [items]="items" (chipSelect)="onChipSelected($event)" [selectedItem]="selectedItem">
-                </kirby-segmented-chip-control>
+        <kirby-segmented-chip-control [items]="items" (chipSelect)="onChipSelected($event)"
+                [selectedItem]="selectedItem">
+        </kirby-segmented-chip-control>
         <StackLayout class="segment-data" *ngIf="selectedItem">
                 <Label text="Content of tab {{selectedItem}}" textWrap="true"></Label>
         </StackLayout>

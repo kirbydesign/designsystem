@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'kirby-segment-example',
-  templateUrl: './segment-example.component.html',
-  styleUrls: ['./segment-example.component.scss'],
+  selector: 'kirby-segmented-chip-control-example',
+  templateUrl: './segmented-chip-control-example.component.html',
+  styleUrls: ['./segmented-chip-control-example.component.scss'],
 })
 export class SegmentExampleComponent implements OnInit {
   constructor() {}
