@@ -1,12 +1,4 @@
-<!-- 
-     kirby-segmented-chip-control support input attributes
-        - items, An Array of type { index:number, title:string }
-        - give selected chip on onChipSelect event
-     kirby-chip takes attributes 
-        - title
-        -isActive : default is false
- -->
-<kirby-segmented-chip-control [items]="myItems" (chipSelect)="chipSelected($event)">
+<kirby-segmented-chip-control [items]="items" (chipSelect)="chipSelected($event)">
    <kirby-chip *kirbySegmentedChip="let item" [title]="item.title" [isActive]="item.index == selected.index"></kirby-chip>
 </kirby-segmented-chip-control>
 
