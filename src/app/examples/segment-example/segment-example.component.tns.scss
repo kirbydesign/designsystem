@@ -1,11 +1,13 @@
+@import '../../../kirby/scss/native-imports';
+
 .segment-example{
   padding-top:20;
-  background: #f2f2f2;
+  background: get-color('kirby-grey-2');
   .segment-data {
-      height: 300px;
+      height: 300;
       margin-top: 20;
       border-radius: 10;
-      background: #ffffff;
+      background: get-color("kirby-white");
       Label {
           margin-top:50;
           text-align: center;

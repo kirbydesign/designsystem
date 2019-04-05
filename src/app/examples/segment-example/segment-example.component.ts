@@ -12,7 +12,7 @@ interface SegmentChip {
 })
 export class SegmentExampleComponent implements OnInit {
   constructor() {}
-  myItems: SegmentChip[] = [
+  items: SegmentChip[] = [
     {
       index: 1,
       title: 'chip-1',
