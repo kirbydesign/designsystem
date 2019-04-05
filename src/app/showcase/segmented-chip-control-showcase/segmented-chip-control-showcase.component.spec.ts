@@ -3,21 +3,21 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { ExamplesModule } from '../../examples/examples.module';
 import { HtmlViewerComponent } from '../../shared/html-viewer/html-viewer.component';
-import { SegmentShowcaseComponent } from './segment-showcase.component';
+import { SegmentedChipControlShowcaseComponent } from './segmented-chip-control-showcase.component';
 
 describe('ChipShowcaseComponent', () => {
-  let component: SegmentShowcaseComponent;
-  let fixture: ComponentFixture<SegmentShowcaseComponent>;
+  let component: SegmentedChipControlShowcaseComponent;
+  let fixture: ComponentFixture<SegmentedChipControlShowcaseComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ExamplesModule, RouterTestingModule],
-      declarations: [SegmentShowcaseComponent, HtmlViewerComponent],
+      declarations: [SegmentedChipControlShowcaseComponent, HtmlViewerComponent],
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SegmentShowcaseComponent);
+    fixture = TestBed.createComponent(SegmentedChipControlShowcaseComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

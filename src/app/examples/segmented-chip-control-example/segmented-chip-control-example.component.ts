@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './segmented-chip-control-example.component.html',
   styleUrls: ['./segmented-chip-control-example.component.scss'],
 })
-export class SegmentExampleComponent implements OnInit {
+export class SegmentedChipControlExampleComponent implements OnInit {
   constructor() {}
   items: string[] = ['chip-1', 'chip-2', 'chip-3', 'chip-4', 'chip-5', 'chip-6'];
   selectedItem: string = 'chip-1';

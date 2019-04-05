@@ -12,7 +12,7 @@ import { SpinnerExampleComponent } from './spinner-example/spinner-example.compo
 import { ChipExampleComponent } from './chip-example/chip-example.component';
 import { BadgeExampleComponent } from './badge-example/badge-example.component';
 import { IconExampleComponent } from './icon-example/icon-example.component';
-import { SegmentExampleComponent } from './segment-example/segmented-chip-control-example/segmented-chip-control-example.component';
+import { SegmentedChipControlExampleComponent } from './segmented-chip-control-example/segmented-chip-control-example.component';
 
 export const routes: Routes = [
   {
@@ -60,8 +60,8 @@ export const routes: Routes = [
     component: SpinnerExampleComponent,
   },
   {
-    path: 'segment',
-    component: SegmentExampleComponent,
+    path: 'segmented-chip-control',
+    component: SegmentedChipControlExampleComponent,
   },
   {
     path: 'badge',

@@ -11,7 +11,7 @@ import { SpinnerExampleComponent } from './spinner-example/spinner-example.compo
 import { ChipExampleComponent } from './chip-example/chip-example.component';
 import { BadgeExampleComponent } from './badge-example/badge-example.component';
 import { IconExampleComponent } from './icon-example/icon-example.component';
-import { SegmentExampleComponent } from './segment-example/segmented-chip-control-example/segmented-chip-control-example.component';
+import { SegmentedChipControlExampleComponent } from './segmented-chip-control-example/segmented-chip-control-example.component';
 
 export const COMPONENT_DECLARATIONS: any[] = [
   ButtonExampleComponent,
@@ -24,7 +24,7 @@ export const COMPONENT_DECLARATIONS: any[] = [
   ChartExampleComponent,
   FontsExampleComponent,
   SpinnerExampleComponent,
-  SegmentExampleComponent,
+  SegmentedChipControlExampleComponent,
   ChipExampleComponent,
   BadgeExampleComponent,
   IconExampleComponent,
