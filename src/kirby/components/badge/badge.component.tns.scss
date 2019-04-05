@@ -1,17 +1,14 @@
 @import "../../scss/native-imports";
 
-.kirby-badge Label { 
+.badge { 
   font-size: font-size("xxs");
   border-radius: size("xs");
   background-color: get-color('kirby-danger');
   color: get-color('kirby-white', $kirby-colors, true);
   height: size("s");
   min-width: size("s");
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
   padding-left: size("xxs");
-  padding-right: size("xxs"); 
+  padding-right: size("xxs");    
   white-space: nowrap;
   
   &[colortype='primary']  {
@@ -44,5 +41,10 @@
     background-color: get-color('kirby-danger');
   }
 }
+
+.badge-label {
+  height: 100%; // Needed for IOS
+}
+
 
 

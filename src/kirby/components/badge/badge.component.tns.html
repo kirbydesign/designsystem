@@ -1,4 +1,4 @@
-<AbsoluteLayout class="kirby-badge">
-  <Label *ngIf="text" [text]="text" [colortype]="colortype"></Label>
+<AbsoluteLayout class="badge" [colortype]="colortype">
+  <Label *ngIf="text" [text]="text" class="badge-label"></Label>
   <ng-content *ngIf="!text"></ng-content>
 </AbsoluteLayout>
