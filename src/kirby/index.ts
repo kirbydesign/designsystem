@@ -9,3 +9,4 @@ export { SpinnerComponent } from './components/spinner/spinner.component';
 export {
   SegmentedControlComponent,
 } from './components/segmented-control/segmented-control.component';
+export { BadgeComponent } from './components/badge/badge.component';
