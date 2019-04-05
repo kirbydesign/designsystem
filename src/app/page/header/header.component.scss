@@ -36,7 +36,6 @@ header {
 }
 
 .logo {
-  position: relative;
   display: none;
 
   @include media(">=large") {
@@ -44,6 +43,7 @@ header {
   }
   .version {
     align-self: flex-end;
+    max-height: 20px;
     margin-left: 2rem;
   }
 }

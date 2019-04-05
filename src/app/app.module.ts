@@ -10,17 +10,9 @@ import { SideNavComponent } from './page/side-nav/side-nav.component';
 import { HeaderComponent } from './page/header/header.component';
 import { IntroComponent } from './intro/intro.component';
 import { KirbyModule } from '../kirby/kirby.module';
-import { CurrentVersionComponent } from './current-version/current-version.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    SideNavComponent,
-    HeaderComponent,
-    IntroComponent,
-    CurrentVersionComponent,
-  ],
+  declarations: [AppComponent, HomeComponent, SideNavComponent, HeaderComponent, IntroComponent],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule, KirbyModule],
 
   providers: [],
