@@ -4,6 +4,6 @@ export interface SegmentItem {
   checked: boolean;
   badge?: {
     content: string;
-    type: string;
+    type: 'primary' | 'secondary' | 'tertiary' | 'alert' | 'success' | 'danger';
   };
 }

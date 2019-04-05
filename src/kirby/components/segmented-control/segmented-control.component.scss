@@ -5,10 +5,12 @@
 }
 
 ion-segment {
+  --color: #{get-color("kirby-grey-9")};
   --color-checked: #{get-color("kirby-white")};
   --background: #{get-color("kirby-white")};
   --background-checked: #{get-color("kirby-grey-9")};
   --background-hover: #{get-color("kirby-white")};
+  --border-style: none;
   border-radius: 20px;
   background: get-color("kirby-white");
 }
