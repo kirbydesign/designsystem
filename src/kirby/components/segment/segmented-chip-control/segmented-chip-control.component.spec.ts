@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SegmentedChipControlComponent } from './segmentes-chip-control.component';
+import { SegmentedChipControlComponent } from './segmented-chip-control.component';
+import { ChipComponent } from '../../chip/chip.component';
 
 describe('SegmentedChipControlComponent', () => {
   let component: SegmentedChipControlComponent;
@@ -8,7 +9,7 @@ describe('SegmentedChipControlComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [SegmentedChipControlComponent],
+      declarations: [SegmentedChipControlComponent, ChipComponent],
     }).compileComponents();
   }));
 

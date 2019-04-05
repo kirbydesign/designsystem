@@ -23,7 +23,7 @@ import { ListCellComponent } from './components/list/list-cell/list-cell.compone
 import { ListCellLineComponent } from './components/list/list-cell-line/list-cell-line.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { ChipComponent } from './components/chip/chip.component';
-import { SegmentedChipControlComponent } from './components/segment/segmentes-chip-control/segmentes-chip-control.component';
+import { SegmentedChipControlComponent } from './components/segment/segmented-chip-control/segmented-chip-control.component';
 
 export const declarations = [
   CardComponent,
