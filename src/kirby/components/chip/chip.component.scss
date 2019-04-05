@@ -1,5 +1,5 @@
 @import "../../scss/web-imports";
-$min-card-width: 50px;
+$min-chip-width: 50px;
 .chip {
   white-space:nowrap;
   padding: 0 25px;
@@ -8,9 +8,9 @@ $min-card-width: 50px;
   line-height: line-height('xl');
   border-radius: 25px;
   margin-right: 5px;
-  min-width: $min-card-width;
+  min-width: $min-chip-width;
   cursor: pointer;
-  &:hover, &.active{
+  &:hover, &.selected{
       background-color:get-color('kirby-grey-4');
     }
   

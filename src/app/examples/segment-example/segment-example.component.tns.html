@@ -1,9 +1,7 @@
 <StackLayout class="segment-example">
-        <kirby-segmented-chip-control [items]="items" (chipSelect)="chipSelected($event)">
-                <kirby-chip *kirbySegmentedChip="let item" [title]="item.title"
-                        [isActive]="item.index == selected.index"></kirby-chip>
-        </kirby-segmented-chip-control>
-        <StackLayout class="segment-data" *ngIf="selected.title">
-                <Label text="Content of tab {{selected.index}} is {{selected.title}}" textWrap="true"></Label>
+        <kirby-segmented-chip-control [items]="items" (chipSelect)="onChipSelected($event)" [selectedItem]="selectedItem">
+                </kirby-segmented-chip-control>
+        <StackLayout class="segment-data" *ngIf="selectedItem">
+                <Label text="Content of tab {{selectedItem}}" textWrap="true"></Label>
         </StackLayout>
 </StackLayout>

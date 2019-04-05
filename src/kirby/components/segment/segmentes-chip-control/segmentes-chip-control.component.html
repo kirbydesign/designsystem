@@ -1,7 +1,5 @@
    <div class="scrollable">
-        <ng-template ngFor let-item [ngForOf]="items">
-            <div (click)="segmentedChipSelect(item)">
-                <ng-container *ngTemplateOutlet="segmentedChipTemplate; context: { $implicit: item}"></ng-container>
+            <div *ngFor="let item of items" (click)="segmentedChipSelect(item)">
+                <kirby-chip [label]="item" [isSelected]="item.toLowerCase() === selectedItem.toLowerCase()"></kirby-chip>
             </div>
-        </ng-template>
     </div>

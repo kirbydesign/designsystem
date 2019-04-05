@@ -7,7 +7,7 @@ import { Component, ViewEncapsulation, Input } from '@angular/core';
   encapsulation: ViewEncapsulation.None,
 })
 export class ChipComponent {
-  @Input() title: String;
-  @Input() isActive: boolean;
+  @Input() label: String;
+  @Input() isSelected: boolean;
   constructor() {}
 }
