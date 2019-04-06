@@ -1,7 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, BehaviorSubject, merge, Subscription, forkJoin } from 'rxjs';
-import { map, first } from 'rxjs/operators';
+import { Observable, BehaviorSubject, forkJoin, of } from 'rxjs';
+import { map, first, catchError } from 'rxjs/operators';
 
 import { environment } from '~/environments/environment';
 
@@ -12,12 +12,15 @@ import {
   ItemUXStatus,
   ItemCodeStatus,
 } from './component-status-items';
+import { componentStatusGhostItems } from './component-status-ghost-items';
 @Component({
   selector: 'kirby-component-status',
   templateUrl: './component-status.component.html',
   styleUrls: ['./component-status.component.scss'],
 })
 export class ComponentStatusComponent implements OnInit {
+  isLoading = true;
+  gitHubError = false;
   sortedItems: ComponentStatusItem[];
   items$: Observable<ComponentStatusItem[]>;
   searchTerm$ = new BehaviorSubject<string>('');
@@ -34,9 +37,7 @@ export class ComponentStatusComponent implements OnInit {
     this.items$ = this.searchTerm$.pipe(
       map((searchTerm) => this.filterItems(this.sortedItems, searchTerm))
     );
-    setTimeout(() => {
-      this.getCurrentGithubStatus(this.sortedItems);
-    }, 1000);
+    this.getCurrentGithubStatus(this.sortedItems);
   }
 
   public isUnderConsiderationOrNotPlanned(item: ComponentStatusItem) {
@@ -92,7 +93,9 @@ export class ComponentStatusComponent implements OnInit {
 
   private filterItems(items: ComponentStatusItem[], searchTerm: string): ComponentStatusItem[] {
     const regex = new RegExp(searchTerm, 'i');
-    return items.filter((item) => this.matchItem(item, regex));
+    return items
+      .filter((item) => this.matchItem(item, regex))
+      .concat(this.getGhostItems(searchTerm));
   }
 
   private matchItem(item: ComponentStatusItem, searchTerm: RegExp): boolean {
@@ -117,6 +120,30 @@ export class ComponentStatusComponent implements OnInit {
     return false;
   }
 
+  private getGhostItems(searchTerm: string): ComponentStatusItem[] {
+    const ghostItem = componentStatusGhostItems.find(
+      (x) => x.name.toLowerCase() === searchTerm.toLowerCase()
+    );
+    if (ghostItem) {
+      return [
+        {
+          component: ghostItem.tagline,
+          priority: 0,
+          ux: {
+            version: 999,
+            status: ItemUXStatus.ready,
+            zeplinUrl: ghostItem.url || null,
+          },
+          code: {
+            version: 999,
+            status: ItemCodeStatus.ready,
+          },
+        },
+      ];
+    }
+    return [];
+  }
+
   private getGithubIssues() {
     const options = {
       headers: new HttpHeaders({
@@ -134,7 +161,6 @@ export class ComponentStatusComponent implements OnInit {
       .pipe(first())
       .subscribe((issues) => {
         issues.forEach((issue) => {
-          // console.log('issue.number:', issue.number);
           flattenedItems
             .filter((item) => item.code.githubIssueNo === issue.number)
             .forEach((item) => {
@@ -145,6 +171,7 @@ export class ComponentStatusComponent implements OnInit {
         console.timeEnd('Get Github Status');
         this.sortedItems = this.sortItems(componentStatusItems);
         this.searchTerm$.next(this.searchTerm$.value);
+        this.isLoading = false;
       });
   }
 
@@ -163,20 +190,27 @@ export class ComponentStatusComponent implements OnInit {
     };
     const url = environment.githubApi + '/projects/columns/' + columnId + '/cards';
     return this.http.get<GithubCard[]>(url, options).pipe(
-      map((cards) => {
-        return cards.map((card) => {
-          let githubIssueNo = 0;
-          const matches = card.content_url.match(/issues\/(\d+)$/);
-          if (matches.length === 2) {
-            githubIssueNo = +matches[1];
-          }
-          return <GithubIssue>{
-            number: githubIssueNo,
-            status,
-          };
-        });
-      })
+      catchError((_) => {
+        this.gitHubError = true;
+        this.isLoading = false;
+        return of([] as GithubCard[]);
+      }),
+      map((cards) => this.mapGithubCardsToIssues(status, cards))
     );
+  }
+
+  private mapGithubCardsToIssues(status: ItemCodeStatus, cards: GithubCard[]): GithubIssue[] {
+    return cards.map((card) => {
+      let githubIssueNo = 0;
+      const matches = card.content_url.match(/issues\/(\d+)$/);
+      if (matches.length === 2) {
+        githubIssueNo = +matches[1];
+      }
+      return <GithubIssue>{
+        number: githubIssueNo,
+        status,
+      };
+    });
   }
 
   private getGithubProjectStatus() {

@@ -6,9 +6,12 @@
     component not listed here,
     <a [href]="newIssueUrl">create an issue on GitHub</a></p>
 
-    <div class="search">Search Component(s): <input autofocus type="text" (keyup)="searchTerm$.next($event.target.value)"></div>
+<div class="search">Search Component(s): <input autofocus type="text" (keyup)="searchTerm$.next($event.target.value)"></div>
 
-<table class="component-status">
+<div *ngIf="gitHubError" class="github-error">
+    <ion-icon name="alert" color="danger"></ion-icon> Couldn't fetch component status from GitHub. The status shown below might not be up-to-date.</div>
+
+<table class="component-status" *ngIf="!isLoading; else loading">
     <thead>
         <tr>
             <th>Component</th>
@@ -49,7 +52,7 @@
         <ng-container *ngTemplateOutlet="versionTemplate; context: {$implicit: item.code?.version}"></ng-container>
     </a>
     <ng-container *ngIf="!item.code?.cookbookUrl">
-        {{item.component}}
+        <span [innerHTML]="item.component"></span>
     </ng-container>
 </ng-template>
 
@@ -62,10 +65,6 @@
         {{code?.status}}
     </span>
     <ng-container *ngTemplateOutlet="versionTemplate; context: {$implicit: code?.version}"></ng-container>
-    <span *ngIf="code?.livestatus" title="Live status from GitHub Issue">
-        <ion-icon name="flash" color="warning"></ion-icon>
-        <ion-icon name="logo-github" color="medium"></ion-icon>
-    </span>
 </ng-template>
 
 <ng-template #uxTemplate let-ux>
@@ -100,4 +99,8 @@
     <ion-icon *ngIf="status === codeStatusEnum.inProgress" color="success" name="heart-half"></ion-icon>
     <ion-icon *ngIf="status === codeStatusEnum.ready" name="heart" color="success"></ion-icon>
     <ion-icon *ngIf="status === codeStatusEnum.notCurrentlyPlanned" color="medium" name="heart-dislike"></ion-icon>
+</ng-template>
+
+<ng-template #loading>
+    <kirby-spinner></kirby-spinner>
 </ng-template>
