@@ -1,6 +1,7 @@
 @import "../../scss/web-imports";
 $min-chip-width: 50px;
-.chip {
+
+:host {
   white-space:nowrap;
   padding: 0 25px;
   height: 30px;
@@ -10,8 +11,7 @@ $min-chip-width: 50px;
   margin-right: 5px;
   min-width: $min-chip-width;
   cursor: pointer;
-  &:hover, &.selected{
+  &:hover,&.isSelected {
       background-color:get-color('kirby-grey-4');
     }
-  
 }
