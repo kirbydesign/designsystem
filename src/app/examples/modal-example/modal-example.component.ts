@@ -10,15 +10,17 @@ import { ModalService } from '~/kirby/components/modal/modal-service/modal-servi
   providers: [ModalService],
 })
 export class ModalExampleComponent {
-  constructor(private modalService: ModalService, private vcRef: ViewContainerRef) { }
+  private modalId: any;
 
-  async openModal() {
+  constructor(private modalService: ModalService, private vcRef: ViewContainerRef) {}
+
+  openModal() {
     const config: ModalConfig = {
       title: 'Betal & Overfør',
       titleHorizontalAlignment: 'center',
       component: PayAndTransferModalContentExampleComponent,
     };
 
-    await this.modalService.showModal(config, this.vcRef);
+    this.modalId = this.modalService.showModal(config, this.vcRef);
   }
 }

@@ -5,14 +5,12 @@
                 <Label row="0" verticalAlignment="center" horizontalAlignment="{{ config.titleHorizontalAlignment }}"
                     text="{{ config.title }}"></Label>
                 <AbsoluteLayout row="0" verticalAlignment="center" horizontalAlignment="right">
-                    <kirby-floating-action-button [showShadow]="false" (tap)="closeModal($event)">
+                    <kirby-floating-action-button [showShadow]="false" (tap)="closeModal()">
                         <kirby-icon name="close"></kirby-icon>
                     </kirby-floating-action-button>
                 </AbsoluteLayout>
             </GridLayout>
-            <ScrollView class="content-scrollview">
-                <ng-container *ngComponentOutlet="config.component"></ng-container>
-            </ScrollView>
+            <ScrollView class="content-scrollview" #container></ScrollView>
         </StackLayout>
     </GridLayout>
 </ModalStack>

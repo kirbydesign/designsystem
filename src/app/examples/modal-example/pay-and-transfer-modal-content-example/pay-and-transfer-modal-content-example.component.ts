@@ -1,19 +1,24 @@
+import { EventData } from 'tns-core-modules/data/observable';
 import { Component } from '@angular/core';
 
 import { ModalService } from '~/kirby/components/modal/modal-service/modal-service';
+import { EmbeddedModal } from '~/kirby/components/modal/embedded-modal';
 
 @Component({
   templateUrl: './pay-and-transfer-modal-content-example.component.html',
   providers: [ModalService],
 })
-export class PayAndTransferModalContentExampleComponent {
+export class PayAndTransferModalContentExampleComponent implements EmbeddedModal {
+  uid: number;
+
   constructor(private modalService: ModalService) {}
 
-  myExampleCallback() {
-    console.log('hello from my example callback');
+  textPress(args: EventData) {
+    console.log(`UID: ${this.uid}`);
+    this.modalService.hideModal(this.uid, this.testCallback);
   }
 
-  textPress() {
-    this.modalService.hideModal(this.myExampleCallback);
+  testCallback() {
+    console.log('example of a callback');
   }
 }

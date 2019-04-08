@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavParams, ModalController } from '@ionic/angular';
 
 import { ModalConfig } from './modal-config';
@@ -10,7 +10,7 @@ import { ModalConfig } from './modal-config';
 export class ModalComponent {
   config: ModalConfig;
 
-  constructor(private modalController: ModalController, private params: NavParams) {
+  constructor(private modalController: ModalController, params: NavParams) {
     this.config = params.get('config');
 
     if (!this.config.titleHorizontalAlignment) {

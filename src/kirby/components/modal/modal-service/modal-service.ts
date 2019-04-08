@@ -9,6 +9,7 @@ export class ModalService {
   constructor(private modalController: ModalController) {}
 
   public async showModal(config: ModalConfig, _vcRef: ViewContainerRef) {
+    const uid = new Date().getTime();
     const modal = await this.modalController.create({
       component: ModalComponent,
       cssClass: 'kirby-modal',
@@ -16,9 +17,14 @@ export class ModalService {
     });
 
     await modal.present();
+    return uid;
   }
 
-  public async hideModal(callback: Function) {
+  public registerModal(uid: number, closeModal: (callback: Function) => any) {
+    // TODO: implement for ionic
+  }
+
+  public async hideModal(uid: number, callback: Function) {
     await this.modalController.dismiss();
     if (callback) {
       callback();

@@ -1,10 +1,21 @@
 import { Color } from 'tns-core-modules/color';
-import { Component } from '@angular/core';
+import {
+  Component,
+  ViewContainerRef,
+  ComponentFactoryResolver,
+  ViewChild,
+  OnInit,
+  ElementRef,
+  Renderer2,
+} from '@angular/core';
 import { ModalDialogParams } from 'nativescript-angular';
 import { ContentView, ShownModallyData } from 'tns-core-modules/ui/content-view';
 import { StackLayout } from 'tns-core-modules/ui/layouts/stack-layout/stack-layout';
+import { ModalStack } from 'nativescript-windowed-modal';
 
 import { ModalConfig } from './modal-config';
+import { ModalMapService } from './modal-service/modal-map-service';
+import { EmbeddedModal } from './embedded-modal';
 
 const style: any = require('sass-extract-loader!./modal.component.scss');
 
@@ -14,22 +25,50 @@ const style: any = require('sass-extract-loader!./modal.component.scss');
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss'],
 })
-export class ModalComponent extends ContentView {
+export class ModalComponent extends ContentView implements OnInit {
+  @ViewChild('container') viewContainer: ElementRef;
   config: ModalConfig;
+  modalStack: ModalStack;
+  uid: number;
 
-  constructor(private params: ModalDialogParams) {
+  constructor(
+    private modalMapService: ModalMapService,
+    private params: ModalDialogParams,
+    private componentFactoryResolver: ComponentFactoryResolver,
+    public vcRef: ViewContainerRef,
+    private renderer: Renderer2
+  ) {
     super();
     this.config = params.context;
+    this.uid = params.context.uid;
+    this.modalMapService.registerModalCloseRef(this.uid, params.closeCallback);
+  }
+
+  ngOnInit() {
+    this.appendComponent();
+  }
+
+  appendComponent() {
+    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(
+      this.config.component
+    );
+    const componentRef = this.vcRef.createComponent(componentFactory);
+    (<EmbeddedModal>componentRef.instance).uid = this.config.uid;
+    this.renderer.appendChild(
+      this.viewContainer.nativeElement,
+      componentRef.location.nativeElement
+    );
   }
 
   showModally(args: ShownModallyData): void {
+    this.modalStack = <ModalStack>args.object;
     const stackLayout = <StackLayout>args.object;
     this.animateModal(stackLayout);
     this.setBackgroundColor(stackLayout);
   }
 
   closeModal(): void {
-    this.params.closeCallback('any response goes here...');
+    this.params.closeCallback(() => {});
   }
 
   private setBackgroundColor(stackLayout: StackLayout): void {
