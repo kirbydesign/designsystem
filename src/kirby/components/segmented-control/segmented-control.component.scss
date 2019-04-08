@@ -21,6 +21,7 @@ ion-segment-button {
   font-size: font-size("s");
   text-transform: none;
   border-radius: 20px;
+  position: relative;
   --border-style: none;
   --padding-start: #{size("m")};
   --padding-end: #{size("m")};
@@ -33,4 +34,16 @@ ion-segment-button {
     outline-color: -webkit-focus-ring-color;
     outline-style: auto;
   }
+}
+
+.segment-btn-wrapper {
+  position: relative;
+  display: inherit;
+}
+
+kirby-badge {
+  position: absolute;
+  top: -#{size("xs")};
+  right: #{size("xs")};
+  z-index: 2;
 }

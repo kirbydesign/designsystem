@@ -16,6 +16,7 @@
   padding-left: size("m");
   padding-right: size("m");
   border-radius: 20;
+  height: 100%;
 
   &.is-checked {
     color: get-color("kirby-white");
@@ -25,4 +26,12 @@
   & + & {
     margin-left: size("xs") * -1;
   }
+}
+
+.segment-badge-wrapper {
+  margin-bottom: 30;
+  z-index: 2;
+  margin-right: size("xs");
+  margin-top: size("xs");
+  height: 100%;
 }
