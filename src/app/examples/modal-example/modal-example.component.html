@@ -1,1 +1,24 @@
+<!--
+    // To show the modal, create a ModalConfig and pass it to the ModalService.showModal:
+    const config: ModalConfig = {
+      title: 'Betal & Overfør',
+      titleHorizontalAlignment: 'center',
+      component: PayAndTransferEmbeddedModalExampleComponent,
+    };
+    this.modalService.showModal(config, this.vcRef);
+    
+    //To create a nested component, ensure:
+    // 1) the nested component must be declared (module file, or inside your @Component decorator)
+    // 2) the nested component must be listed in your entryComponents (module file) 
+    // 3) (Optional) the nested component must implement EmbeddedModal 
+    //    which allows you to obtain an uid for your modal and use it to 
+    //    closing the modal from within your nested component with a custom callback
+
+    // In order to close a modal from within your nested component, you can use: 
+    this.modalService.hideModal(this.uid, yourCallbackFunction...);
+    
+    // It is possible to nest more modals from within your nested components, 
+    // by using the same services and principles as above
+-->
+
 <button kirby-button (click)="openModal()">Open modal</button>
