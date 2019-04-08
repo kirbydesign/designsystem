@@ -22,6 +22,9 @@ import { ListHeaderComponent } from './components/list/list-header/list-header.c
 import { ListCellComponent } from './components/list/list-cell/list-cell.component';
 import { ListCellLineComponent } from './components/list/list-cell-line/list-cell-line.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
+import { ChipComponent } from './components/chip/chip.component';
+import { SegmentedChipControlComponent } from './components/segment/segmented-chip-control/segmented-chip-control.component';
+import { BadgeComponent } from './components/badge/badge.component';
 
 export const declarations = [
   CardComponent,
@@ -46,4 +49,7 @@ export const declarations = [
   AvatarComponent,
   GroupByPipe,
   SpinnerComponent,
+  ChipComponent,
+  SegmentedChipControlComponent,
+  BadgeComponent,
 ];
