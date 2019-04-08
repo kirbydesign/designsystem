@@ -5,33 +5,60 @@ import { isAndroid, isIOS } from 'tns-core-modules/platform';
 import * as webViewInterfaceModule from 'nativescript-webview-interface';
 import * as applicationModule from 'tns-core-modules/application';
 
+import { CalendarOptions } from '../calendar.component';
+
 declare const android;
 declare const UIColor;
 
 export class CalendarHelper {
   calendarWebViewInterface;
 
-  public init(calendarContainer: ElementRef) {
-    const webView = calendarContainer.nativeElement as WebView;
-    webView.on(WebView.loadedEvent, (args: LoadEventData) => {
-      setTimeout(() => {
-        this.initializeWebView(webView);
-      }, 0);
+  public init(calendarContainer: ElementRef, options: CalendarOptions) {
+    if (calendarContainer && calendarContainer.nativeElement) {
+      console.log('calendarContainer.nativeElement exists');
+      const webView = calendarContainer.nativeElement as WebView;
+      if (webView) {
+        webView.on(WebView.loadedEvent, (args: LoadEventData) => {
+          setTimeout(() => {
+            this.initializeWebView(webView, options);
+          }, 0);
+        });
+      }
+    }
+  }
+
+  private initializeWebView(webView: WebView, options: CalendarOptions) {
+    if (webView) {
+      webView.on(WebView.loadFinishedEvent, (args: LoadEventData) => {
+        if (!args.error) {
+          this.setupWebViewForPlatform(webView);
+          this.emitDataToWebView(options);
+          this.addWebViewEventListener(options.selectDate);
+        }
+      });
+
+      this.calendarWebViewInterface = new webViewInterfaceModule.WebViewInterface(
+        webView,
+        '~/calendar/calendar.webview.html'
+      );
+      this.setTransparentBackground(webView);
+    }
+  }
+
+  private emitDataToWebView(options: CalendarOptions) {
+    this.calendarWebViewInterface.emit('updateCalendar', {
+      type: 'kirbyCalendarInit',
+      weekDays: options.weekDays,
+      currentMonthAndYear: options.currentMonthAndYear,
+      month: JSON.stringify(options.month),
     });
   }
 
-  private initializeWebView(webView: WebView) {
-    webView.on(WebView.loadFinishedEvent, (args: LoadEventData) => {
-      if (!args.error) {
-        this.setupWebViewForPlatform(webView);
-      }
+  private addWebViewEventListener(selectDateCallback: (date: Date) => {}) {
+    this.calendarWebViewInterface.on('dateSelected', (selectedDate: string) => {
+      console.log('Got selected date...' + selectedDate);
+      selectDateCallback(new Date(selectedDate));
     });
-
-    this.calendarWebViewInterface = new webViewInterfaceModule.WebViewInterface(
-      webView,
-      '~/calendar/calendar.webview.html'
-    );
-    this.setTransparentBackground(webView);
   }
 
   private setTransparentBackground(webView: WebView) {

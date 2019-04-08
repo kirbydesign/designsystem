@@ -1,15 +1,220 @@
 <!doctype html>
 <html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Calender</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <style>
+            @font-face { 
+                font-family: "Roboto";
+                font-style: normal;
+                font-weight: 800;
+                font-display: swap;
+                src:
+                    url("/assets/fonts/roboto-regular-webfont.woff2") format("woff2");
+            }
 
-<head>
-    <meta charset="utf-8">
-    <title>Calender</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-</head>
+            body {
+                font-family: Roboto;
+                line-height: 150%;
+                background-color: transparent;
+            }
 
-<body style="margin: 0; padding: 0;">
-<div id="calendar"></div>
-<script src="nativescript-webview-interface.js"></script>
-    <p>Load calendar component inside this webview :-)</p>
+            table.calendar-table {
+                width: 100%;
+                border-collapse: collapse;
+                user-select: none;
+                outline: none !important;
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            .month-and-year,
+            th, td {
+                background-color: white;
+                line-height: 36px;
+            }
+
+            .month-and-year {
+                display: flex;
+                align-items: center;
+                text-align: center;
+                padding: 0.5em;
+                border-top-left-radius: 1em;
+                border-top-right-radius: 1em;
+            }
+
+            thead::after {
+                height: 2px;
+                content: "";
+                display: block;
+                background-color: transparent;
+            }
+
+            tr:last-child td:first-child {
+                border-bottom-left-radius: 1em;
+            }
+
+            tr:last-child td:last-child {
+                border-bottom-right-radius: 1em;
+            }
+
+            td.cell {
+                padding: 4px;
+            }
+            
+            th,
+            div.cell-content {
+                text-align: center;
+                padding: 6px;
+            }
+
+            div.cell-content {
+                border-radius: 50px;
+            }
+
+            div.cell-content.selectable {
+                cursor: pointer;
+            }
+
+            div.cell-content.selectable:not(.selected):hover {
+                background-color: #d2d2d2;
+            }
+
+            div.cell-content.selected {
+                background-color: #02c697;
+            }
+
+            div.cell-content:not(.current-month),
+            div.cell-content.weekend {
+                color: #ccc;
+            }
+
+        </style>
+    </head>
+
+    <body style="margin: 0; padding: 0;">
+        <div id="calendar">
+            <div class="month-and-year"></div>
+            <div class="calendar-wrapper">
+                <table class="calendar-table">
+                    <thead class="calendar-table-header">
+                        <tr></tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <script src="nativescript-webview-interface.js"></script>
+        <script>
+            (function () {
+                var oWebViewInterface = window.nsWebViewInterface;
+                var parentWindow;
+                function addNativeMsgListener() {
+                    if (oWebViewInterface) {
+                        oWebViewInterface.on('updateCalendar', updateCalendar);
+                    }
+                    window.addEventListener('message', updateCalendarFromEventMessage);
+                }
+
+                function emitSelectedDate(date) {
+                    if (parentWindow && date instanceof Date) {
+                        parentWindow.postMessage({
+                            type: 'kirbyCalendarSelectedDate',
+                            date: date
+                        }, '*');
+                    }
+                    if (oWebViewInterface && date instanceof Date) {
+                        oWebViewInterface.emit('dateSelected', date);
+                    }
+                }
+
+                var selectedDate = null;
+
+                function selectDate(event) {
+                    // console.log(event.target.offsetWidth + ' / ' + event.target.offsetHeight);
+                    if (event.target && event.target.classList.contains('selectable')) {
+                        if (selectedDate) {
+                            selectedDate.classList.remove('selected');
+                        }
+                        selectedDate = event.target;
+                        selectedDate.classList.add('selected');
+                        emitSelectedDate(new Date(selectedDate.dataset.date));
+                    }
+                }
+
+                function updateCalendarFromEventMessage(event) {
+                    if ( event.type === 'message' &&
+                         event.data &&
+                         evt.data.type === 'kirbyCalendarInit')
+                    {
+                        parentWindow = event.source;
+                        updateCalendar(event.data);
+                    }
+                }
+
+                function updateCalendar(options) {
+                    var weekDays = options.weekDays;
+                    var currentMonthAndYear = options.currentMonthAndYear;
+                    var month = JSON.parse(options.month);
+                    var calendarOutlet = document.getElementById('calendar');
+                    var monthAndYearOutlet = calendarOutlet.querySelector('.month-and-year');
+                    monthAndYearOutlet.innerText = currentMonthAndYear;
+
+                    var calenderTableWrapperOutlet = calendarOutlet.querySelector('.calendar-wrapper');
+                    var calenderTableOutlet = calenderTableWrapperOutlet.querySelector('table');
+                    var calenderTableHeaderOutlet = calenderTableOutlet.querySelector('thead');
+                    var calenderTableBodyOutlet = calenderTableOutlet.querySelector('tbody');
+                    var calenderTableHeaderRowOutlet = calenderTableHeaderOutlet.querySelector('tr');
+                    renderWeekDaysHeader(calenderTableHeaderRowOutlet, weekDays);
+                    renderMonth(calenderTableBodyOutlet, month);
+                    calenderTableBodyOutlet.onclick = selectDate;
+                }
+
+                function renderWeekDaysHeader(tableHeaderRow, weekDays) {
+                    weekDays.forEach(function(weekDay) {
+                        var th = document.createElement("th");
+                        th.appendChild(document.createTextNode(weekDay));
+                        tableHeaderRow.appendChild(th);
+                    });
+                }
+
+                function renderMonth(tableBody, month) {
+                    month.forEach(function(week) {
+                        renderWeek(tableBody, week)
+                    });
+                }
+
+                function renderWeek(tableBody, week) {
+                    var tr = document.createElement("tr");
+
+                    week.forEach(function(day) {
+                        var date = new Date(day.content.date);
+                        var cellContent = document.createElement("div");
+                        cellContent.appendChild(document.createTextNode(date.getDate()));
+                        cellContent.className = "cell-content";
+                        cellContent.dataset.date = date;
+                        if (day.content.currentMonth) {
+                            cellContent.classList.add('current-month');
+                        }
+                        if (day.content.weekend) {
+                            cellContent.classList.add('weekend');
+                        } else {
+                            cellContent.classList.add('selectable');
+                        }
+                        var td = document.createElement("td");
+                        td.className = "cell";
+                        td.appendChild(cellContent);
+                        tr.appendChild(td);
+                    });
+                    tableBody.appendChild(tr);
+                }
+
+                function init() {
+                    addNativeMsgListener();
+                }
+                init();
+            })();
+        </script>
     </body>
 </html>

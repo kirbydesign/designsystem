@@ -1,3 +1,6 @@
-<kirby-calendar>
+<kirby-calendar (dateChange)="onDateChange($event)">
   <kirby-calendar-cell *kirbyCalendarDay="let day = content" [day]="day" [selected]="selectedKey === day.key" (click)="selectDay(day.key)"></kirby-calendar-cell>
 </kirby-calendar>
+<div *ngIf="selectedDate">
+    Selected Date: {{ selectedDate | date}}
+</div>

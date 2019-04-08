@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CalendarExampleComponent {
   selectedKey: string;
+  selectedDate: Date;
 
   selectDay(key: string) {
     console.log(key);
     this.selectedKey = key;
+  }
+
+  onDateChange(selectedDate: Date) {
+    console.log('onDateChange: ' + selectedDate);
+    this.selectedDate = selectedDate;
   }
 }

@@ -1,9 +1,25 @@
-import { Component, ContentChild, Input, OnInit, ViewChild, ElementRef } from '@angular/core';
+import {
+  Component,
+  AfterViewInit,
+  ContentChild,
+  ViewChild,
+  ElementRef,
+  Input,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import * as moment from 'moment';
 import { chunk, range } from 'lodash';
 
 import { CalendarDayDirective } from './helpers/calendar-day.directive';
 import { CalendarHelper } from './helpers/calendar.helper';
+
+export interface CalendarOptions {
+  selectDate: (Date) => {};
+  weekDays: string[];
+  currentMonthAndYear: string;
+  month: any[][];
+}
 
 @Component({
   selector: 'kirby-calendar',
@@ -11,10 +27,11 @@ import { CalendarHelper } from './helpers/calendar.helper';
   styleUrls: ['./calendar.component.scss'],
   providers: [CalendarHelper],
 })
-export class CalendarComponent implements OnInit {
+export class CalendarComponent implements AfterViewInit {
   @ContentChild(CalendarDayDirective) dayTemplate: CalendarDayDirective;
   @ViewChild('calendarContainer') calendarContainer: ElementRef;
   month: any[][];
+  @Output() dateChange = new EventEmitter<Date>();
 
   private _displayDate: Date;
   public weekDays = ['M', 'T', 'O', 'T', 'F', 'L', 'S'];
@@ -89,9 +106,21 @@ export class CalendarComponent implements OnInit {
     this.month = chunk(days, 7);
   }
 
-  ngOnInit(): void {
+  ngAfterViewInit() {
     this.refresh();
-    this.calendarHelper.init(this.calendarContainer);
+    this.calendarHelper.init(this.calendarContainer, {
+      selectDate: this.selectDate.bind(this),
+      weekDays: this.weekDays,
+      currentMonthAndYear: this.currentMonthAndYear,
+      month: this.month,
+    });
+  }
+
+  public selectDate(selectedDate: Date) {
+    console.log('selectedDate:' + (selectedDate instanceof Date));
+    if (selectedDate instanceof Date) {
+      this.dateChange.emit(selectedDate);
+    }
   }
 
   public next() {
