@@ -11,7 +11,7 @@ $min-chip-width: 50px;
   margin-right: 5px;
   min-width: $min-chip-width;
   cursor: pointer;
-  &:hover,&.isSelected {
+  &:hover,&.is-selected {
       background-color:get-color('kirby-grey-4');
     }
 }

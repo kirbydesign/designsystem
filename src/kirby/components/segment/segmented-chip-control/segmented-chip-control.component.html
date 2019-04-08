@@ -1,5 +1,4 @@
 <div class="scrollable">
-    <ng-container *ngFor="let item of items">
-        <kirby-chip [text]="item" [isSelected]="item.toLowerCase() === selectedItem.toLowerCase()" (click)="segmentedChipSelect(item)"></kirby-chip>
-    </ng-container>
+    <kirby-chip [text]="item" [isSelected]="item.toLowerCase() === selectedItem.toLowerCase()"
+        (click)="segmentedChipSelect(item)" *ngFor="let item of items"></kirby-chip>
 </div>

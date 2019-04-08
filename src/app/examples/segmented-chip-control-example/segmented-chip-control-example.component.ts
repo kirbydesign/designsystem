@@ -8,8 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class SegmentedChipControlExampleComponent implements OnInit {
   constructor() {}
   items: string[] = ['chip-1', 'chip-2', 'chip-3', 'chip-4', 'chip-5', 'chip-6'];
-  selectedItem: string = 'chip-1';
-  onChipSelected(chip: string): void {
+  selectedItem: string = this.items[0];
+  onChipSelect(chip: string): void {
     this.selectedItem = chip;
   }
   ngOnInit() {}

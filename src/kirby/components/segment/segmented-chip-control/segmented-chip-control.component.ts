@@ -11,13 +11,12 @@ class SegmentedChipControlComponent implements OnInit {
   @Output() chipSelect = new EventEmitter<string>();
 
   constructor() {}
+
   segmentedChipSelect(item: string): void {
     this.selectedItem = item;
     this.chipSelect.emit(item);
   }
-  /**
-   * Lifecycle method:
-   */
+
   ngOnInit(): void {}
 }
 export { SegmentedChipControlComponent };

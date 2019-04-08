@@ -6,7 +6,7 @@ $min-chip-width: 50;
   padding:10 15;
   font-size: font-size('xs');
   min-width: $min-chip-width;
-  &.selected {
+  &.is-selected {
       background: get-color('kirby-grey-4');
   }
 }
