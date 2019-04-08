@@ -5,6 +5,7 @@ import { MockComponent } from 'ng-mocks';
 
 import { SegmentedControlComponent } from './segmented-control.component';
 import { SegmentItem } from './segment-item';
+import { BadgeComponent } from '../badge/badge.component';
 
 describe('SegmentedControlComponent', () => {
   let component: SegmentedControlComponent;
@@ -30,6 +31,8 @@ describe('SegmentedControlComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         SegmentedControlComponent,
+        MockComponent(BadgeComponent),
+        MockComponent(ionic.IonBadge),
         MockComponent(ionic.IonButton),
         MockComponent(ionic.IonSegment),
         MockComponent(ionic.IonSegmentButton),
