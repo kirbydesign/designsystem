@@ -1,8 +1,8 @@
 import { Component, ViewContainerRef } from '@angular/core';
 
-import { PayAndTransferModalContentExampleComponent } from './pay-and-transfer-modal-content-example/pay-and-transfer-modal-content-example.component';
 import { ModalConfig } from '~/kirby/components/modal/modal-config';
 import { ModalService } from '~/kirby/components/modal/modal-service/modal-service';
+import { PayAndTransferEmbeddedModalExampleComponent } from './pay-and-transfer-embedded-modal-example/pay-and-transfer-embedded-modal-example.component';
 
 @Component({
   selector: 'kirby-modal-example',
@@ -18,7 +18,7 @@ export class ModalExampleComponent {
     const config: ModalConfig = {
       title: 'Betal & Overfør',
       titleHorizontalAlignment: 'center',
-      component: PayAndTransferModalContentExampleComponent,
+      component: PayAndTransferEmbeddedModalExampleComponent,
     };
 
     this.modalId = this.modalService.showModal(config, this.vcRef);
