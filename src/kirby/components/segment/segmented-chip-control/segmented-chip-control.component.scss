@@ -1,0 +1,16 @@
+:host {
+    /* @Polyfill  
+     * This is the way to hide scrollbar
+     * Firefox, IE, Chrome
+     * */
+   overflow: hidden;
+  .scrollable {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: center;
+    margin-bottom: -50px;
+    padding-bottom: 50px;
+  }
+}
+  
