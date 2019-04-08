@@ -95,29 +95,14 @@ export class CalendarComponent implements OnInit {
   }
 
   public next() {
-    this.displayDate = this.addMonths(this.displayDate, 1);
+    this.displayDate = moment(this.displayDate)
+      .add(1, 'months')
+      .toDate();
   }
 
   public previous() {
-    this.displayDate = this.subMonths(this.displayDate, 1);
-  }
-
-  addMonths(dirtyDate, dirtyAmount) {
-    var date = dirtyDate;
-    var amount = Number(dirtyAmount);
-    var desiredMonth = date.getMonth() + amount;
-    var dateWithDesiredMonth = new Date(0);
-    dateWithDesiredMonth.setFullYear(date.getFullYear(), desiredMonth, 1);
-    dateWithDesiredMonth.setHours(0, 0, 0, 0);
-    var daysInMonth = moment(dateWithDesiredMonth).daysInMonth();
-    // Set the last day of the new month
-    // if the original date was the last day of the longer month
-    date.setMonth(desiredMonth, Math.min(daysInMonth, date.getDate()));
-    return date;
-  }
-
-  subMonths(dirtyDate, dirtyAmount) {
-    var amount = Number(dirtyAmount);
-    return this.addMonths(dirtyDate, -amount);
+    this.displayDate = moment(this.displayDate)
+      .add(-1, 'months')
+      .toDate();
   }
 }
