@@ -1,7 +1,9 @@
-<ScrollView orientation="horizontal">
-    <WrapLayout orientation="horizontal">
-        <StackLayout *ngFor="let item of items" (tap)="segmentedChipSelect(item)">
-            <kirby-chip [text]="item" [isSelected]="item === selectedItem"></kirby-chip>
+<StackLayout>
+    <ScrollView orientation="horizontal">
+        <StackLayout orientation="horizontal">
+            <StackLayout *ngFor="let item of items" (tap)="segmentedChipSelect(item)">
+                <kirby-chip [text]="item" [isSelected]="item === selectedItem"></kirby-chip>
+            </StackLayout>
         </StackLayout>
-    </WrapLayout>
-</ScrollView>
+    </ScrollView>
+</StackLayout>
