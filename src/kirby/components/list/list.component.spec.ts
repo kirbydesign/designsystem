@@ -1,105 +1,108 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { createTestComponentFactory, Spectator } from '@netbasal/spectator';
 
 import { LoadOnDemandEvent } from './list.event';
 import { GroupByPipe } from './pipes/group-by.pipe';
 import { ListComponent } from './list.component';
 import { SpinnerComponent } from '~/kirby';
 import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
+import { ListRowClassService } from '~/kirby/components/list/list-row-class.service';
+import { ListHelper } from '~/kirby/components/list/helpers/list-helper';
 
 describe('ListComponent', () => {
+  let spectator: Spectator<ListComponent>;
   let component: ListComponent;
-  let fixture: ComponentFixture<ListComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ListComponent, GroupByPipe, SpinnerComponent, InfiniteScrollDirective],
-    }).compileComponents();
-  }));
+  function runNgOnChanges() {
+    // Forces ngOnChanges to run (since that won't happen, when inputs are changed programmatically)
+    component.ngOnChanges();
+    // Detect changes, since ngOnChanges altered state of component
+    spectator.detectChanges();
+  }
+
+  const createHost = createTestComponentFactory({
+    component: ListComponent,
+    declarations: [ListComponent, GroupByPipe, SpinnerComponent, InfiniteScrollDirective],
+    providers: [ListHelper],
+    componentProviders: [
+      {
+        provide: ListRowClassService,
+        useValue: jasmine.createSpyObj('ListRowClassService', ['getCssClasses', 'update']),
+      },
+    ],
+  });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ListComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    spectator = createHost({});
+    component = spectator.component;
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(spectator.component).toBeTruthy();
   });
 
   describe('sections', () => {
-    beforeEach(() => {
-      fixture = TestBed.createComponent(ListComponent);
-      component = fixture.componentInstance;
-    });
-
     it('should be disabled if no section callback is defined', () => {
-      fixture.detectChanges();
+      spectator.setInput({
+        getSectionName: undefined,
+      });
+      runNgOnChanges();
 
-      expect(component.isSectionsEnabled).toBeFalsy();
+      expect(spectator.component.isSectionsEnabled).toBeFalsy();
     });
 
     it('should be enabled if a section callback is defined', () => {
-      component.getSectionName = (item: any) => 'this is a test';
+      spectator.setInput({
+        getSectionName: (item: any) => 'this is a test',
+      });
+      runNgOnChanges();
 
-      fixture.detectChanges();
-
-      expect(component.isSectionsEnabled).toBeTruthy();
+      expect(spectator.component.isSectionsEnabled).toBeTruthy();
     });
 
     it('should render one li element for each item, if the list is not sectioned', () => {
-      component.items = [1, 2, 3];
+      spectator.setInput({
+        items: [1, 2, 3],
+      });
+      runNgOnChanges();
 
-      fixture.detectChanges();
-
-      const rootElement: HTMLElement = fixture.debugElement.nativeElement;
-      const liElements = rootElement.querySelectorAll('li');
-
+      const liElements = spectator.queryAll('li');
       expect(liElements.length).toEqual(component.items.length);
     });
 
     it('should render one li element for each item and one for each section, if sections are enabled', () => {
-      const sections = ['section 1', 'section 2', 'section 3'];
-      component.items = [0, 1, 2];
-      component.getSectionName = (item: any): string => sections[item];
+      spectator.setInput({
+        items: [0, 1, 2],
+        getSectionName: (item: number) => (item % 2 === 0 ? 'even' : 'odd'),
+      });
+      runNgOnChanges();
 
-      fixture.detectChanges();
-
-      const rootElement: HTMLElement = fixture.debugElement.nativeElement;
-      const liElements = rootElement.querySelectorAll('li');
-
-      expect(liElements.length).toEqual(component.items.length + sections.length);
+      const liElements = spectator.queryAll('li');
+      expect(liElements.length).toEqual(component.items.length + 2);
     });
   });
 
   describe('divider', () => {
-    beforeEach(() => {
-      fixture = TestBed.createComponent(ListComponent);
-      component = fixture.componentInstance;
-    });
-
     it('should set class "divider" on all li elements when showDivider is true', () => {
-      component.items = [1, 2, 3];
-      component.showDivider = true;
+      spectator.setInput({
+        items: [1, 2, 3],
+        showDivider: true,
+      });
+      runNgOnChanges();
 
-      fixture.detectChanges();
-
-      const rootElement: HTMLElement = fixture.debugElement.nativeElement;
-      const liElements = rootElement.querySelectorAll('li');
-
+      const liElements = spectator.queryAll('li');
       liElements.forEach((liElement) => {
         expect(liElement.getAttribute('class')).toContain('divider');
       });
     });
 
     it('should not set class "divider" on any li elements when showDivider is false', () => {
-      component.items = [1, 2, 3];
-      component.showDivider = false;
+      spectator.setInput({
+        items: [1, 2, 3],
+        showDivider: false,
+      });
+      runNgOnChanges();
 
-      fixture.detectChanges();
-
-      const rootElement: HTMLElement = fixture.debugElement.nativeElement;
-      const liElements = rootElement.querySelectorAll('li');
-
+      const liElements = spectator.queryAll('li');
       liElements.forEach((liElement) => {
         expect(liElement.getAttribute('class')).not.toContain('divider');
       });
@@ -122,13 +125,13 @@ describe('ListComponent', () => {
     it('should enable load more, if there is a subscriber to the loadMore event emitter', () => {
       component.loadOnDemand.subscribe((loadMoreEvent: LoadOnDemandEvent) => {});
 
-      component.ngOnInit();
+      runNgOnChanges();
 
       expect(component.isLoadOnDemandEnabled).toBeTruthy();
     });
 
     it('should disable load more, if there is no subscriber to the loadMore event emitter', () => {
-      component.ngOnInit();
+      runNgOnChanges();
 
       expect(component.isLoadOnDemandEnabled).toBeFalsy();
     });

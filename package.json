@@ -57,6 +57,7 @@
     "nativescript-webview-interface": "^1.4.2",
     "prismjs": "^1.15.0",
     "reflect-metadata": "~0.1.8",
+    "reveal-plugin-ios": "file:../reveal-plugin-ios",
     "rxjs": "^6.3.3",
     "tns-core-modules": "^5.2.0",
     "zone.js": "^0.8.4"
@@ -66,6 +67,7 @@
     "@angular/cli": "^7.3.1",
     "@angular/compiler-cli": "^7.2.4",
     "@nativescript/schematics": "^0.5.0",
+    "@netbasal/spectator": "^3.6.1",
     "@types/jasmine": "~2.8.6",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",

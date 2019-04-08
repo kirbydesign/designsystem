@@ -1,23 +1,51 @@
 @import "../../scss/native-imports";
 
-.row {
+.row, .list-header, .section-header {
   padding: size('gutter') size('gutter-small') size('gutter') size('gutter-small');
   justify-content: space-between;
   flex-direction: row;
-
-  &.divider {
-    border-color: get-color('kirby-grey-2');
-    border-bottom-width: 1;
-    
-    &.bottom {
-      border-width: 0;
-    }
-  }
 }
 
-.lastRow {
+.row.divider {
+  border-color: get-color('kirby-grey-2');
+  border-bottom-width: 1;
+}
+
+.footer {
   font-weight: bold;
   text-align: center;
   padding-bottom: size('gutter');
   padding-top: 0;
+}
+
+.row {
+  border-color: get-color('kirby-grey-2');
+  border-left-width: 1;
+  border-right-width: 1;
+
+  &.first {
+    border-top-width: 1;
+
+    &.rounded {
+      border-top-left-radius: $border-radius;
+      border-top-right-radius: $border-radius;
+    }
+  }
+
+  &.last {
+    border-bottom-width: 1;
+
+    &.rounded {
+      border-bottom-left-radius: $border-radius;
+      border-bottom-right-radius: $border-radius;
+    }
+  }
+}
+
+.list-header.rounded {
+  border-color: get-color('kirby-grey-2');
+  border-width: 1;
+
+  border-top-left-radius: $border-radius;
+  border-top-right-radius: $border-radius;
 }
