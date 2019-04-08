@@ -13,7 +13,7 @@ export class SecondEmbeddedModalExampleComponent implements EmbeddedModal {
 
   constructor(private modalService: ModalService) {}
 
-  onHidePress(args: EventData) {
+  onHidePress(_args: EventData) {
     this.modalService.hideModal(this.uid, this.testCallback);
   }
 

@@ -12,22 +12,21 @@ import { SecondEmbeddedModalExampleComponent } from '../second-embedded-modal-ex
 })
 export class PayAndTransferEmbeddedModalExampleComponent implements EmbeddedModal {
   uid: number;
-  secondModalId: number;
 
   constructor(private modalService: ModalService, private vcRef: ViewContainerRef) {}
 
-  onHidePress(args: EventData) {
+  onHidePress(_args: EventData) {
     this.modalService.hideModal(this.uid, this.testCallback);
   }
 
-  async openSecondModal(args: EventData) {
+  async openSecondModal(_args: EventData) {
     const config: ModalConfig = {
       title: 'Second Embedded Modal',
       titleHorizontalAlignment: 'left',
       component: SecondEmbeddedModalExampleComponent,
     };
 
-    this.secondModalId = await this.modalService.showModal(config, this.vcRef);
+    await this.modalService.showModal(config, this.vcRef);
   }
 
   testCallback() {

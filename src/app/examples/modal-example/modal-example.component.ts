@@ -10,8 +10,6 @@ import { PayAndTransferEmbeddedModalExampleComponent } from './pay-and-transfer-
   providers: [ModalService],
 })
 export class ModalExampleComponent {
-  private modalId: any;
-
   constructor(private modalService: ModalService, private vcRef: ViewContainerRef) {}
 
   openModal() {
@@ -21,6 +19,6 @@ export class ModalExampleComponent {
       component: PayAndTransferEmbeddedModalExampleComponent,
     };
 
-    this.modalId = this.modalService.showModal(config, this.vcRef);
+    this.modalService.showModal(config, this.vcRef);
   }
 }

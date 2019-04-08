@@ -9,25 +9,23 @@ export class ModalService {
   constructor(private modalController: ModalController) {}
 
   public async showModal(config: ModalConfig, _vcRef: ViewContainerRef) {
-    const uid = new Date().getTime();
     const modal = await this.modalController.create({
       component: ModalComponent,
       cssClass: 'kirby-modal',
       componentProps: { config: config },
     });
 
-    await modal.present();
-    return uid;
+    modal.present();
   }
 
-  public registerModal(uid: number, closeModal: (callback: Function) => any) {
-    // TODO: implement for ionic
-  }
-
-  public async hideModal(uid: number, callback: Function) {
+  public async hideModal(_: number, callback: Function) {
     await this.modalController.dismiss();
     if (callback) {
       callback();
     }
+  }
+
+  public registerModal(_: number, __closeModal: (callback: Function) => any) {
+    throw new Error('Method not supported on web.');
   }
 }
