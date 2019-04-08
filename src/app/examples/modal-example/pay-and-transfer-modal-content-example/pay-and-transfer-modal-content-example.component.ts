@@ -14,7 +14,6 @@ export class PayAndTransferModalContentExampleComponent implements EmbeddedModal
   constructor(private modalService: ModalService) {}
 
   textPress(args: EventData) {
-    console.log(`UID: ${this.uid}`);
     this.modalService.hideModal(this.uid, this.testCallback);
   }
 
