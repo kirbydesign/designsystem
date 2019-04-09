@@ -14,8 +14,10 @@ import { FontsShowcaseComponent } from './fonts-showcase/fonts-showcase.componen
 import { ColorsShowcaseComponent } from './colors-showcase/colors-showcase.component';
 import { SpinnerShowcaseComponent } from './spinner-showcase/spinner-showcase.component';
 import { SegmentedControlShowcaseComponent } from './segmented-control-showcase/segmented-control-showcase.component';
+import { ChipShowcaseComponent } from './chip-showcase/chip-showcase.component';
 import { BadgeShowcaseComponent } from './badge-showcase/badge-showcase.component';
 import { IconShowcaseComponent } from './icon-showcase/icon-showcase.component';
+import { SegmentedChipControlShowcaseComponent } from './segmented-chip-control-showcase/segmented-chip-control-showcase.component';
 
 export const routes: Routes = [
   {
@@ -30,6 +32,14 @@ export const routes: Routes = [
       {
         path: 'button',
         component: ButtonShowcaseComponent,
+      },
+      {
+        path: 'chip',
+        component: ChipShowcaseComponent,
+      },
+      {
+        path: 'segmented-chip-control',
+        component: SegmentedChipControlShowcaseComponent,
       },
       {
         path: 'floating-action-button',

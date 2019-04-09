@@ -203,8 +203,9 @@ export const componentStatusItems: ComponentStatusItem[] = [
       status: ItemUXStatus.planned,
     },
     code: {
-      version: 0.1,
-      status: ItemCodeStatus.planned,
+      version: 0.5,
+      status: ItemCodeStatus.inProgress,
+      githubIssueNo: 203,
     },
   },
   {
@@ -217,7 +218,8 @@ export const componentStatusItems: ComponentStatusItem[] = [
     },
     code: {
       version: 0.1,
-      status: ItemCodeStatus.inProgress,
+      status: ItemCodeStatus.ready,
+      cookbookUrl: 'showcase/chip',
     },
   },
   {
@@ -231,9 +233,8 @@ export const componentStatusItems: ComponentStatusItem[] = [
     },
     code: {
       version: 0.5,
-      status: ItemCodeStatus.inProgress,
+      status: ItemCodeStatus.ready,
       cookbookUrl: 'showcase/floating-action-button',
-      githubIssueNo: 171,
     },
   },
   {
@@ -321,8 +322,9 @@ export const componentStatusItems: ComponentStatusItem[] = [
           status: ItemUXStatus.planned,
         },
         code: {
-          version: 0.0,
-          status: ItemCodeStatus.planned,
+          version: 0.5,
+          status: ItemCodeStatus.inProgress,
+          githubIssueNo: 111,
         },
       },
       {
@@ -333,8 +335,9 @@ export const componentStatusItems: ComponentStatusItem[] = [
           status: ItemUXStatus.ready,
         },
         code: {
-          version: 0.0,
-          status: ItemCodeStatus.planned,
+          version: 0.5,
+          status: ItemCodeStatus.inProgress,
+          githubIssueNo: 111,
         },
       },
       {
@@ -504,8 +507,8 @@ export const componentStatusItems: ComponentStatusItem[] = [
         },
         code: {
           version: 0.1,
-          status: ItemCodeStatus.inProgress,
-          githubIssueNo: 144,
+          status: ItemCodeStatus.ready,
+          cookbookUrl: 'showcase/segmented-chip-control',
         },
       },
     ],
@@ -551,12 +554,12 @@ export const componentStatusItems: ComponentStatusItem[] = [
     component: 'Calendar',
     priority: 0,
     ux: {
-      version: 0.0,
-      status: ItemUXStatus.underConsideration,
+      version: 0.9,
+      status: ItemUXStatus.planned,
     },
     code: {
-      version: 0.0,
-      status: ItemCodeStatus.underConsideration,
+      version: 0.5,
+      status: ItemCodeStatus.inProgress,
     },
   },
 ];

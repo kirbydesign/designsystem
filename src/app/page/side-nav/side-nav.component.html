@@ -1,12 +1,13 @@
 <ul class="side-nav side-menu" [ngClass]="{'is-open': isMenuOpen}" (click)="onToggleMenu()">
-  <button class="side-menu__close-btn" >
-      <kirby-icon name="close" size="large"></kirby-icon>
+  <button class="side-menu__close-btn">
+    <kirby-icon name="close" size="large"></kirby-icon>
   </button>
   <li>
     <a routerLink="/home/intro" [routerLinkActive]="'is-selected'" class="side-nav__item">Intro</a>
   </li>
   <li>
-    <a class="side-nav__item side-nav-header" routerLink="/home/component-status" [routerLinkActive]="'is-selected'" [routerLinkActiveOptions]="{exact: false}">
+    <a class="side-nav__item side-nav-header" routerLink="/home/component-status" [routerLinkActive]="'is-selected'"
+      [routerLinkActiveOptions]="{exact: false}">
       <svg class="icon">
         <use xlink:href="../../assets/icons/icon-sprite.svg#icon-make-group"></use>
       </svg>
@@ -14,7 +15,8 @@
     </a>
   </li>
   <li routerLinkActive="is-selected" [routerLinkActiveOptions]="{exact: false}">
-    <a class="side-nav__item side-nav-header" [routerLinkActive]="'is-selected'" [routerLinkActiveOptions]="{exact: false}">
+    <a class="side-nav__item side-nav-header" [routerLinkActive]="'is-selected'"
+      [routerLinkActiveOptions]="{exact: false}">
       <svg class="icon">
         <use xlink:href="../../assets/icons/icon-sprite.svg#icon-point-down"></use>
       </svg>
@@ -22,10 +24,14 @@
     </a>
     <ul class="side-nav side-nav--sub">
       <li><a routerLink="showcase/button" [routerLinkActive]="'is-selected'" class="side-nav__item">Button</a></li>
-      <li><a routerLink="showcase/floating-action-button" [routerLinkActive]="'is-selected'" class="side-nav__item">Floating Action Button</a></li>
+      <li><a routerLink="showcase/floating-action-button" [routerLinkActive]="'is-selected'"
+          class="side-nav__item">Floating Action Button</a></li>
       <li><a routerLink="showcase/card" [routerLinkActive]="'is-selected'" class="side-nav__item">Card</a></li>
+      <li><a routerLink="showcase/segmented-chip-control" [routerLinkActive]="'is-selected'"
+          class="side-nav__item">Segmented Chip Control</a></li>
       <li><a routerLink="showcase/list" [routerLinkActive]="'is-selected'" class="side-nav__item">List</a></li>
-      <li><a routerLink="showcase/list-load-on-demand" [routerLinkActive]="'is-selected'" class="side-nav__item">List - load on demand</a></li>
+      <li><a routerLink="showcase/list-load-on-demand" [routerLinkActive]="'is-selected'" class="side-nav__item">List -
+          load on demand</a></li>
       <li><a routerLink="showcase/chart" [routerLinkActive]="'is-selected'" class="side-nav__item">Charts</a></li>
       <li><a routerLink="showcase/segmented-control" [routerLinkActive]="'is-selected'" class="side-nav__item">SegmentedControl</a></li>
     </ul>
@@ -49,6 +55,7 @@
       Other
     </a>
     <ul class="side-nav side-nav--sub">
+      <li><a routerLink="showcase/chip" [routerLinkActive]="'is-selected'" class="side-nav__item">Chip</a></li>
       <li><a routerLink="showcase/avatar" [routerLinkActive]="'is-selected'" class="side-nav__item">Avatar</a></li>
       <li><a routerLink="showcase/badge" [routerLinkActive]="'is-selected'" class="side-nav__item">Badge</a></li>
       <li><a routerLink="showcase/icon" [routerLinkActive]="'is-selected'" class="side-nav__item">Icon</a></li>
