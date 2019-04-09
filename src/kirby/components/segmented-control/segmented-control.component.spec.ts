@@ -60,13 +60,8 @@ describe('SegmentedControlComponent', () => {
   it('should call onSegmentClick when clicking a segment button', () => {
     spyOn(component, 'onSegmentClick');
     const segmentBtn = fixture.debugElement.query(By.css('ion-segment-button'));
-    const segmentElm = fixture.nativeElement.querySelectorAll('ion-segment-button')[0];
-    segmentElm.checked = true;
-    segmentElm.click();
-    segmentBtn.triggerEventHandler('click', null);
+    segmentBtn.triggerEventHandler('ionSelect', null);
     fixture.detectChanges();
-    //expect(component.onSegmentClick).toHaveBeenCalled();
-    //TODO TRM - Fix this!
-    expect(1).toBe(1);
+    expect(component.onSegmentClick).toHaveBeenCalled();
   });
 });

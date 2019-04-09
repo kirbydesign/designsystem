@@ -1,5 +1,5 @@
   <StackLayout orientation="horizontal" horizontalAlignment="left" class="segment-control">
-    <GridLayout columns="auto, auto" (tap)="onSegmentClick(event, item)" *ngFor="let item of items">
+    <GridLayout columns="auto, auto" (tap)="onSegmentClick(item)" *ngFor="let item of items">
       <FlexBoxLayout *ngIf="item.badge" class="segment-badge-wrapper" col="1" flexDirection="row" alignItems="center" justifyContent="flex-end">
         <kirby-badge text="{{item.badge.content}}" colortype="{{item.badge.type}}"></kirby-badge>
       </FlexBoxLayout>
