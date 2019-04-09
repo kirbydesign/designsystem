@@ -1,12 +1,8 @@
 <ion-segment mode="ios" (ionChange)="onSegmentClick($event)">
-  <ng-container *ngFor="let item of segmentItems">
-    <div class="segment-btn-wrapper">
-      <ng-container *ngIf="item.badge">
-        <kirby-badge attr.colortype="{{item.badge.type}}" >{{item.badge.content}}</kirby-badge>
-      </ng-container>
-      <ion-segment-button value="{{item.id}}" class="kirby-text-small" checked="{{item.checked}}">
-        {{item.text}}
-      </ion-segment-button>
-    </div>
-  </ng-container>
-</ion-segment>
+  <div class="segment-btn-wrapper" *ngFor="let item of items">
+    <kirby-badge *ngIf="item.badge" attr.colortype="{{item.badge.type}}" >{{item.badge.content}}</kirby-badge>
+    <ion-segment-button [value]="item" class="kirby-text-small" [checked]="item.checked">
+      {{item.text}}
+    </ion-segment-button> 
+  </div>
+</ion-segment> 

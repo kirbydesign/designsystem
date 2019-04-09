@@ -45,5 +45,5 @@ kirby-badge {
   position: absolute;
   top: -#{size("xs")};
   right: #{size("xs")};
-  z-index: 2;
+  z-index: z("segmentBadge");
 }

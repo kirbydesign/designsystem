@@ -8,9 +8,9 @@ import { SegmentItem } from '~/kirby/components/segmented-control/segment-item';
   styleUrls: ['./segmented-control-example.component.scss'],
 })
 export class SegmentedControlExampleComponent implements OnInit {
-  activeSegment: string;
+  activeSegment: SegmentItem;
 
-  segmentItems: SegmentItem[] = [
+  items: SegmentItem[] = [
     {
       text: 'First item',
       id: 'first',
@@ -28,8 +28,9 @@ export class SegmentedControlExampleComponent implements OnInit {
   ];
 
   ngOnInit() {
-    const checkedSegment = this.segmentItems.filter((segment) => segment.checked === true);
-    this.activeSegment = checkedSegment.pop().id;
+    const checkedSegment = this.items.find((segment) => segment.checked === true);
+    debugger;
+    this.activeSegment = checkedSegment;
   }
 
   onSegmentClick(id) {

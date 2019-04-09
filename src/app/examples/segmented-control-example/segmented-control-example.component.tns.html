@@ -1,15 +1,15 @@
 <StackLayout backgroundColor="#f5f5f5">
-  <kirby-segmented-control [segmentItems]="segmentItems" (segmentClicked)="onSegmentClick($event)"></kirby-segmented-control>
-  <ng-container *ngIf="segmentItems[0].id === activeSegment">
+  <kirby-segmented-control [items]="items" (segmentClick)="onSegmentClick($event)"></kirby-segmented-control>
+  <ng-container *ngIf="items[0] === activeSegment">
     <StackLayout>
-      <Label class="kirby-text-medium" text="Content for {{segmentItems[0].id}} segment"></Label>
+      <Label class="kirby-text-medium" text="Content for {{items[0].id}} segment"></Label>
       <Label textWrap="true"text="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quia similique voluptas veniam ducimus? Accusantium necessitatibus similique libero, eos incidunt sed."></Label>
     </StackLayout>
   </ng-container>
       
-  <ng-container *ngIf="segmentItems[1].id === activeSegment">
+  <ng-container *ngIf="items[1] === activeSegment">
     <StackLayout>
-      <Label class="kirby-text-medium" text="Content for {{segmentItems[1].id}} segment"></Label>
+      <Label class="kirby-text-medium" text="Content for {{items[1].id}} segment"></Label>
       <Label textWrap="true"text="Lorem ipsum, dolor sit amet consectetur adipisicing elit"></Label>
     </StackLayout>
   </ng-container>

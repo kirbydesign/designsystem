@@ -10,7 +10,7 @@ import { BadgeComponent } from '../badge/badge.component';
 describe('SegmentedControlComponent', () => {
   let component: SegmentedControlComponent;
   let fixture: ComponentFixture<SegmentedControlComponent>;
-  let segmentItems: SegmentItem[] = [
+  let items: SegmentItem[] = [
     {
       text: 'First item',
       id: 'first',
@@ -43,7 +43,7 @@ describe('SegmentedControlComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SegmentedControlComponent);
     component = fixture.componentInstance;
-    component.segmentItems = segmentItems;
+    component.items = items;
     fixture.detectChanges();
   });
 
@@ -51,7 +51,7 @@ describe('SegmentedControlComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('Should have 2 segments buttons', () => {
+  it('should have 2 segments buttons', () => {
     expect(fixture.nativeElement.querySelectorAll('ion-segment-button').length).toBe(2);
   });
 });
