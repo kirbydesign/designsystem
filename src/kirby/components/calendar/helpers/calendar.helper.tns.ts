@@ -67,7 +67,7 @@ export class CalendarHelper {
       webView.android.setLayerType(android.view.View.LAYER_TYPE_SOFTWARE, null);
     }
     if (isIOS) {
-      webView.ios.backgroundColor = UIColor.yellowColor;
+      webView.ios.backgroundColor = UIColor.clearColor;
       webView.ios.opaque = false;
     }
   }
