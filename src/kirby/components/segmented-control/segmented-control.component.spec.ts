@@ -62,7 +62,7 @@ describe('SegmentedControlComponent', () => {
     });
   });
 
-  fit('should set activeSegment to second segmentItem', () => {
+  it('should set activeSegment to second segmentItem', () => {
     const segmentElm = fixture.debugElement.queryAll(By.css('ion-segment-button'))[1];
     segmentElm.triggerEventHandler('ionSelect', null);
     expect(component.activeSegment).toBe(items[1]);
