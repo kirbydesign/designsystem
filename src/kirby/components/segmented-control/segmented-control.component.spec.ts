@@ -13,7 +13,7 @@ describe('SegmentedControlComponent', () => {
     {
       text: 'First item',
       id: 'first',
-      checked: true,
+      checked: false,
       badge: {
         content: '2',
         type: 'danger',
@@ -21,7 +21,7 @@ describe('SegmentedControlComponent', () => {
     },
     {
       text: 'Second item',
-      checked: false,
+      checked: true,
       id: 'second',
     },
   ];
@@ -48,17 +48,17 @@ describe('SegmentedControlComponent', () => {
     expect(fixture.nativeElement.querySelectorAll('ion-segment-button').length).toBe(2);
   });
 
-  it('should call onSegmentClick when clicking a segment button', () => {
+  it('should call onSegmentClick when clicking a segment button', (done) => {
     spyOn(component, 'onSegmentClick');
-    spyOn(component.segmentClick, 'emit');
     const segmentBtn = fixture.debugElement.query(By.css('ion-segment-button'));
     segmentBtn.nativeElement.componentOnReady().then(() => {
+      // Wait for Ionic's shadowRoot to be available:
       setTimeout(() => {
         segmentBtn.nativeElement.shadowRoot.querySelector('button').click();
         fixture.detectChanges();
         expect(component.onSegmentClick).toHaveBeenCalled();
-        expect(component.segmentClick.emit).toHaveBeenCalled();
-      }, 500);
+        done();
+      }, 50);
     });
   });
 
