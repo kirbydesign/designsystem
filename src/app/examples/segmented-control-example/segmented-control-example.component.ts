@@ -29,7 +29,6 @@ export class SegmentedControlExampleComponent implements OnInit {
 
   ngOnInit() {
     const checkedSegment = this.items.find((segment) => segment.checked === true);
-    debugger;
     this.activeSegment = checkedSegment;
   }
 

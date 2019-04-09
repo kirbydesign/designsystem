@@ -1,4 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+
 import * as ionic from '@ionic/angular';
 
 import { MockComponent } from 'ng-mocks';
@@ -53,5 +55,16 @@ describe('SegmentedControlComponent', () => {
 
   it('should have 2 segments buttons', () => {
     expect(fixture.nativeElement.querySelectorAll('ion-segment-button').length).toBe(2);
+  });
+
+  it('should call onSegmentClick when clicking a segment button', () => {
+    spyOn(component, 'onSegmentClick');
+    const segmentBtn = fixture.debugElement.query(By.css('ion-segment-button'));
+    const segmentElm = fixture.nativeElement.querySelectorAll('ion-segment-button')[0];
+    segmentElm.checked = true;
+    segmentElm.click();
+    segmentBtn.triggerEventHandler('click', null);
+    fixture.detectChanges();
+    expect(component.onSegmentClick).toHaveBeenCalled();
   });
 });

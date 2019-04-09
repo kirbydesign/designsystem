@@ -10,14 +10,15 @@ import { SegmentItem } from './segment-item';
 export class SegmentedControlComponent {
   @Output() segmentClick: EventEmitter<SegmentItem> = new EventEmitter();
   @Input() items: SegmentItem[];
-
-  onSegmentClick(ev: any) {
-    this.segmentClick.emit(ev.target.value);
-  }
   activeSegment: SegmentItem;
 
-  onSegmentTap(item: SegmentItem) {
-    this.activeSegment = item;
+  onSegmentClick(ev: any, item = null) {
+    // Ionic calls with $event and NS calls with the item clicked.
+    if (item !== null) {
+      this.activeSegment = item;
+    } else {
+      this.activeSegment = ev.target.value;
+    }
     this.items.forEach((segment) => (segment.checked = this.activeSegment.id === segment.id));
     this.segmentClick.emit(this.activeSegment);
   }
