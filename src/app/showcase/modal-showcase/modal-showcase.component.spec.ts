@@ -4,6 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { ExamplesModule } from '../../examples/examples.module';
 import { HtmlViewerComponent } from '../../shared/html-viewer/html-viewer.component';
 import { ModalShowcaseComponent } from './modal-showcase.component';
+import { ShowcasePropertiesComponent } from '~/app/shared/showcase-properties/showcase-properties.component';
 
 describe('ModalShowcaseComponent', () => {
   let component: ModalShowcaseComponent;
@@ -12,7 +13,7 @@ describe('ModalShowcaseComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ExamplesModule, RouterTestingModule],
-      declarations: [ModalShowcaseComponent, HtmlViewerComponent],
+      declarations: [ModalShowcaseComponent, HtmlViewerComponent, ShowcasePropertiesComponent],
     }).compileComponents();
   }));
 

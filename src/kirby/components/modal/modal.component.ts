@@ -17,8 +17,4 @@ export class ModalComponent {
       this.config.titleHorizontalAlignment = 'left';
     }
   }
-
-  closeModal(): void {
-    this.modalController.dismiss('any response goes here...');
-  }
 }

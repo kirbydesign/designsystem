@@ -6,6 +6,7 @@ export class ModalMapService {
 
   closeModal(uid: number, callback: Function) {
     this.modalDismissRefs[uid](callback);
+    delete this.modalDismissRefs[uid];
   }
 
   registerModalCloseRef(uid: number, closeModal: Function) {

@@ -6,7 +6,7 @@ import { EmbeddedModal } from '~/kirby/components/modal/embedded-modal';
 
 @Component({
   templateUrl: './second-embedded-modal-example.component.html',
-  providers: [ModalService]
+  providers: [ModalService],
 })
 export class SecondEmbeddedModalExampleComponent implements EmbeddedModal {
   uid: number;
