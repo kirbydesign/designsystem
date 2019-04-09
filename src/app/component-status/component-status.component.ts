@@ -34,9 +34,7 @@ export class ComponentStatusComponent implements OnInit {
     this.items$ = this.searchTerm$.pipe(
       map((searchTerm) => this.filterItems(this.sortedItems, searchTerm))
     );
-    setTimeout(() => {
-      this.getCurrentGithubStatus(this.sortedItems);
-    }, 1000);
+    this.getCurrentGithubStatus(this.sortedItems);
   }
 
   public isUnderConsiderationOrNotPlanned(item: ComponentStatusItem) {
