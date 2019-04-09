@@ -1,9 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { IonicModule } from '@ionic/angular';
 import { By } from '@angular/platform-browser';
-
-import * as ionic from '@ionic/angular';
-
-import { MockComponent } from 'ng-mocks';
 
 import { SegmentedControlComponent } from './segmented-control.component';
 import { SegmentItem } from './segment-item';
@@ -31,14 +28,8 @@ describe('SegmentedControlComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        SegmentedControlComponent,
-        MockComponent(BadgeComponent),
-        MockComponent(ionic.IonBadge),
-        MockComponent(ionic.IonButton),
-        MockComponent(ionic.IonSegment),
-        MockComponent(ionic.IonSegmentButton),
-      ],
+      imports: [IonicModule.forRoot()],
+      declarations: [SegmentedControlComponent, BadgeComponent],
     }).compileComponents();
   }));
 
@@ -57,11 +48,16 @@ describe('SegmentedControlComponent', () => {
     expect(fixture.nativeElement.querySelectorAll('ion-segment-button').length).toBe(2);
   });
 
-  it('should call onSegmentClick when clicking a segment button', () => {
+  it('should call onSegmentClick when clicking a segment button', (done) => {
     spyOn(component, 'onSegmentClick');
     const segmentBtn = fixture.debugElement.query(By.css('ion-segment-button'));
-    segmentBtn.triggerEventHandler('ionSelect', null);
-    fixture.detectChanges();
-    expect(component.onSegmentClick).toHaveBeenCalled();
+    segmentBtn.nativeElement.componentOnReady().then(() => {
+      setTimeout(() => {
+        segmentBtn.nativeElement.shadowRoot.querySelector('button').click();
+        fixture.detectChanges();
+        expect(component.onSegmentClick).toHaveBeenCalled();
+        done();
+      }, 500);
+    });
   });
 });
