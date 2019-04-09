@@ -11,7 +11,10 @@ import { SpinnerExampleComponent } from './spinner-example/spinner-example.compo
 import { ModalExampleComponent } from './modal-example/modal-example.component';
 import { PayAndTransferEmbeddedModalExampleComponent } from './modal-example/pay-and-transfer-embedded-modal-example/pay-and-transfer-embedded-modal-example.component';
 import { SecondEmbeddedModalExampleComponent } from './modal-example/second-embedded-modal-example/second-embedded-modal-example.component';
+import { ChipExampleComponent } from './chip-example/chip-example.component';
+import { BadgeExampleComponent } from './badge-example/badge-example.component';
 import { IconExampleComponent } from './icon-example/icon-example.component';
+import { SegmentedChipControlExampleComponent } from './segmented-chip-control-example/segmented-chip-control-example.component';
 
 export const COMPONENT_DECLARATIONS: any[] = [
   ButtonExampleComponent,
@@ -27,5 +30,8 @@ export const COMPONENT_DECLARATIONS: any[] = [
   ModalExampleComponent,
   PayAndTransferEmbeddedModalExampleComponent,
   SecondEmbeddedModalExampleComponent,
+  SegmentedChipControlExampleComponent,
+  ChipExampleComponent,
+  BadgeExampleComponent,
   IconExampleComponent,
 ];

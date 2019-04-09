@@ -10,7 +10,10 @@ import { ChartExampleComponent } from './chart-example/chart-example.component';
 import { FontsExampleComponent } from './fonts-example/fonts-example.component';
 import { SpinnerExampleComponent } from './spinner-example/spinner-example.component';
 import { ModalExampleComponent } from './modal-example/modal-example.component';
+import { ChipExampleComponent } from './chip-example/chip-example.component';
+import { BadgeExampleComponent } from './badge-example/badge-example.component';
 import { IconExampleComponent } from './icon-example/icon-example.component';
+import { SegmentedChipControlExampleComponent } from './segmented-chip-control-example/segmented-chip-control-example.component';
 
 export const routes: Routes = [
   {
@@ -42,6 +45,10 @@ export const routes: Routes = [
     component: GridExampleComponent,
   },
   {
+    path: 'chip',
+    component: ChipExampleComponent,
+  },
+  {
     path: 'avatar',
     component: AvatarExampleComponent,
   },
@@ -56,6 +63,14 @@ export const routes: Routes = [
   {
     path: 'modal',
     component: ModalExampleComponent,
+  },
+  {
+    path: 'segmented-chip-control',
+    component: SegmentedChipControlExampleComponent,
+  },
+  {
+    path: 'badge',
+    component: BadgeExampleComponent,
   },
   {
     path: 'icon',

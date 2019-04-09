@@ -1,0 +1,12 @@
+@import '../../scss/native-imports';
+$min-chip-width: 50;
+.chip {
+  border-radius: 25;
+  margin-right: 10;
+  padding:10 15;
+  font-size: font-size('xs');
+  min-width: $min-chip-width;
+  &.is-selected {
+      background: get-color('kirby-grey-4');
+  }
+}

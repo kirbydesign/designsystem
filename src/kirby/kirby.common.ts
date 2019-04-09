@@ -23,6 +23,9 @@ import { ListCellComponent } from './components/list/list-cell/list-cell.compone
 import { ListCellLineComponent } from './components/list/list-cell-line/list-cell-line.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { ModalComponent } from './components/modal/modal.component';
+import { ChipComponent } from './components/chip/chip.component';
+import { SegmentedChipControlComponent } from './components/segment/segmented-chip-control/segmented-chip-control.component';
+import { BadgeComponent } from './components/badge/badge.component';
 
 export const declarations = [
   CardComponent,
@@ -48,4 +51,7 @@ export const declarations = [
   GroupByPipe,
   SpinnerComponent,
   ModalComponent,
+  ChipComponent,
+  SegmentedChipControlComponent,
+  BadgeComponent,
 ];
