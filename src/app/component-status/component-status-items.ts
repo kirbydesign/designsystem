@@ -203,8 +203,9 @@ export const componentStatusItems: ComponentStatusItem[] = [
       status: ItemUXStatus.planned,
     },
     code: {
-      version: 0.1,
-      status: ItemCodeStatus.planned,
+      version: 0.5,
+      status: ItemCodeStatus.inProgress,
+      githubIssueNo: 203,
     },
   },
   {
@@ -217,7 +218,8 @@ export const componentStatusItems: ComponentStatusItem[] = [
     },
     code: {
       version: 0.1,
-      status: ItemCodeStatus.inProgress,
+      status: ItemCodeStatus.ready,
+      cookbookUrl: 'showcase/chip',
     },
   },
   {
@@ -231,9 +233,8 @@ export const componentStatusItems: ComponentStatusItem[] = [
     },
     code: {
       version: 0.5,
-      status: ItemCodeStatus.inProgress,
+      status: ItemCodeStatus.ready,
       cookbookUrl: 'showcase/floating-action-button',
-      githubIssueNo: 171,
     },
   },
   {
@@ -504,8 +505,8 @@ export const componentStatusItems: ComponentStatusItem[] = [
         },
         code: {
           version: 0.1,
-          status: ItemCodeStatus.inProgress,
-          githubIssueNo: 144,
+          status: ItemCodeStatus.ready,
+          cookbookUrl: 'showcase/segmented-chip-control',
         },
       },
     ],
