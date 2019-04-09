@@ -322,8 +322,9 @@ export const componentStatusItems: ComponentStatusItem[] = [
           status: ItemUXStatus.planned,
         },
         code: {
-          version: 0.0,
-          status: ItemCodeStatus.planned,
+          version: 0.5,
+          status: ItemCodeStatus.inProgress,
+          githubIssueNo: 111,
         },
       },
       {
@@ -334,8 +335,9 @@ export const componentStatusItems: ComponentStatusItem[] = [
           status: ItemUXStatus.ready,
         },
         code: {
-          version: 0.0,
-          status: ItemCodeStatus.planned,
+          version: 0.5,
+          status: ItemCodeStatus.inProgress,
+          githubIssueNo: 111,
         },
       },
       {
@@ -552,12 +554,12 @@ export const componentStatusItems: ComponentStatusItem[] = [
     component: 'Calendar',
     priority: 0,
     ux: {
-      version: 0.0,
-      status: ItemUXStatus.underConsideration,
+      version: 0.9,
+      status: ItemUXStatus.planned,
     },
     code: {
-      version: 0.0,
-      status: ItemCodeStatus.underConsideration,
+      version: 0.5,
+      status: ItemCodeStatus.inProgress,
     },
   },
 ];
