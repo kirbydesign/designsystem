@@ -1,5 +1,7 @@
 @import "../../../kirby/scss/web-imports";
 
+$border-radius: 20px;
+
 :host {
   display: inline-block;
 }
@@ -10,7 +12,7 @@ ion-segment {
   --background: #{get-color("kirby-white")};
   --background-checked: #{get-color("kirby-grey-9")};
   --background-hover: #{get-color("kirby-white")};
-  border-radius: 20px;
+  border-radius: $border-radius;
   background: get-color("kirby-white");
 }
 
@@ -20,7 +22,7 @@ ion-segment-button {
   font-weight: font-weight("normal");
   font-size: font-size("s");
   text-transform: none;
-  border-radius: 20px;
+  border-radius: $border-radius;
   position: relative;
   --border-style: none;
   --padding-start: #{size("m")};

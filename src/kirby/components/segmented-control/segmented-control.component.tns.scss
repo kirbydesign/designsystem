@@ -1,7 +1,9 @@
 @import "../../../kirby/scss/native-imports";
 
+$border-radius: 20;
+
 .segment-control {
-  border-radius: 20;
+  border-radius: $border-radius;
   background: get-color("kirby-white");
   color: get-color("kirby-grey-9");
   display: inline-block;
@@ -15,7 +17,7 @@
   font-size: font-size("s");
   padding-left: size("m");
   padding-right: size("m");
-  border-radius: 20;
+  border-radius: $border-radius;
   height: 100%;
 
   &.is-checked {
