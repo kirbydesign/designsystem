@@ -48,16 +48,23 @@ describe('SegmentedControlComponent', () => {
     expect(fixture.nativeElement.querySelectorAll('ion-segment-button').length).toBe(2);
   });
 
-  it('should call onSegmentClick when clicking a segment button', (done) => {
+  it('should call onSegmentClick when clicking a segment button', () => {
     spyOn(component, 'onSegmentClick');
+    spyOn(component.segmentClick, 'emit');
     const segmentBtn = fixture.debugElement.query(By.css('ion-segment-button'));
     segmentBtn.nativeElement.componentOnReady().then(() => {
       setTimeout(() => {
         segmentBtn.nativeElement.shadowRoot.querySelector('button').click();
         fixture.detectChanges();
         expect(component.onSegmentClick).toHaveBeenCalled();
-        done();
+        expect(component.segmentClick.emit).toHaveBeenCalled();
       }, 500);
     });
+  });
+
+  fit('should set activeSegment to second segmentItem', () => {
+    const segmentElm = fixture.debugElement.queryAll(By.css('ion-segment-button'))[1];
+    segmentElm.triggerEventHandler('ionSelect', null);
+    expect(component.activeSegment).toBe(items[1]);
   });
 });
