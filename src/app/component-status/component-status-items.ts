@@ -494,8 +494,8 @@ export const componentStatusItems: ComponentStatusItem[] = [
         },
         code: {
           version: 0.9,
-          status: ItemCodeStatus.inProgress,
-          githubIssueNo: 166,
+          status: ItemCodeStatus.ready,
+          cookbookUrl: 'showcase/segmented-control',
         },
       },
       {
