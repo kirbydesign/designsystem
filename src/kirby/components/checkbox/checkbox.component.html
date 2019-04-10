@@ -1,3 +1,12 @@
-<p>
-  checkbox works!
-</p>
+<!-- Since there is a bug in Ionic when binding mode to anything else than md,
+a switch between templates is used -->
+<ng-container *ngIf="shape === 'round'; else squareBox">
+  <ion-checkbox [ngClass]="classes" mode="ios"></ion-checkbox>
+</ng-container>
+
+
+
+
+<ng-template #squareBox>
+  <ion-checkbox [ngClass]="classes" mode="md"></ion-checkbox>
+</ng-template>
