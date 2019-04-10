@@ -9,7 +9,11 @@ import { ListExampleComponent } from './list/list-example.component';
 import { ChartExampleComponent } from './chart-example/chart-example.component';
 import { FontsExampleComponent } from './fonts-example/fonts-example.component';
 import { SpinnerExampleComponent } from './spinner-example/spinner-example.component';
+import { SegmentedControlExampleComponent } from './segmented-control-example/segmented-control-example.component';
+import { ChipExampleComponent } from './chip-example/chip-example.component';
+import { BadgeExampleComponent } from './badge-example/badge-example.component';
 import { IconExampleComponent } from './icon-example/icon-example.component';
+import { SegmentedChipControlExampleComponent } from './segmented-chip-control-example/segmented-chip-control-example.component';
 
 export const routes: Routes = [
   {
@@ -41,6 +45,10 @@ export const routes: Routes = [
     component: GridExampleComponent,
   },
   {
+    path: 'chip',
+    component: ChipExampleComponent,
+  },
+  {
     path: 'avatar',
     component: AvatarExampleComponent,
   },
@@ -51,6 +59,18 @@ export const routes: Routes = [
   {
     path: 'spinner',
     component: SpinnerExampleComponent,
+  },
+  {
+    path: 'segmented-control',
+    component: SegmentedControlExampleComponent,
+  },
+  {
+    path: 'segmented-chip-control',
+    component: SegmentedChipControlExampleComponent,
+  },
+  {
+    path: 'badge',
+    component: BadgeExampleComponent,
   },
   {
     path: 'icon',
