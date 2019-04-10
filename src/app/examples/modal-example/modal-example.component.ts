@@ -19,7 +19,7 @@ export class ModalExampleComponent {
       component: FirstEmbeddedModalExampleComponent,
     };
 
-    this.modalService.showModal(config, this.vcRef, this.testCallback);
+    let modalId = this.modalService.showModal(config, this.vcRef, this.testCallback);
   }
 
   testCallback(modalData: any) {

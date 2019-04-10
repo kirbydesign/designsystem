@@ -25,7 +25,7 @@ export class ModalShowcaseComponent {
     },
     {
       name: 'closeIcon',
-      description: 'The icon that will appear on the default close modal button',
+      description: 'The name of the icon that will appear on the default close modal button',
       defaultValue: 'close',
       inputValues: ['close', 'arrow'],
     },

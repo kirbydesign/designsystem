@@ -76,7 +76,7 @@ describe('ModalComponent', () => {
 
   describe('dismiss icon', () => {
     it('should have a default value of close', () => {
-      expect(component.config.closeIcon).toEqual('close');
+      expect(component.config.closeIconName).toEqual('close');
     });
 
     it('should render as a close icon by default', () => {
@@ -85,7 +85,7 @@ describe('ModalComponent', () => {
     });
 
     it('should render arrow when config.closeIcon is set to arrow', () => {
-      component.config.closeIcon = 'arrow';
+      component.config.closeIconName = 'arrow';
       fixture.detectChanges();
       var el = fixture.debugElement.query(By.directive(IconComponent));
       expect(el.componentInstance.name).toBe('arrow');

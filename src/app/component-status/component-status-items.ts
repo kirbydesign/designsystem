@@ -310,9 +310,8 @@ export const componentStatusItems: ComponentStatusItem[] = [
     },
     code: {
       version: 0.1,
-      status: ItemCodeStatus.inProgress,
+      status: ItemCodeStatus.ready,
       cookbookUrl: 'showcase/modal',
-      githubIssueNo: 111,
     },
     children: [
       {

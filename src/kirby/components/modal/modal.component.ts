@@ -15,6 +15,7 @@ export class ModalComponent {
     this.config = ModalConfigHelper.processOptionalValues(params.get('config'));
   }
 
+  // TODO: better to call the modal-service somehow, circular dependency prevents this atm
   dismissModal(): void {
     this.modalController.dismiss();
   }

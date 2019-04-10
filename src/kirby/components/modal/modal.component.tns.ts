@@ -62,24 +62,26 @@ export class ModalComponent extends ContentView implements OnInit {
   showModally(args: ShownModallyData): void {
     this.modalStack = <ModalStack>args.object;
     const stackLayout = <StackLayout>args.object;
+    stackLayout.backgroundColor = new Color(0, 0, 0, 0);
     this.animateModal(stackLayout);
-    this.setBackgroundColor(stackLayout);
   }
 
+  // TODO: better to call the modal-service somehow, circular dependency prevents this atm
   dismissModal(): void {
     this.params.closeCallback();
   }
 
-  private setBackgroundColor(stackLayout: StackLayout): void {
-    const shadowColor = this.getThemeColor('kirby-grey-7');
-    stackLayout.backgroundColor = new Color(
-      this.getAlphaIn255Range(this.config.dim),
-      shadowColor.r,
-      shadowColor.g,
-      shadowColor.b
-    );
-    stackLayout.color = new Color(this.getThemeColor('kirby-brand-5').hex);
-  }
+  // TODO: fix animations
+  // private animateBackgroundColor(stackLayout: StackLayout): void {
+  //   const shadowColor = this.getThemeColor('kirby-grey-7');
+  //   stackLayout.backgroundColor = new Color(
+  //     this.getAlphaIn255Range(this.config.dim),
+  //     shadowColor.r,
+  //     shadowColor.g,
+  //     shadowColor.b
+  //   );
+  //   stackLayout.color = new Color(this.getThemeColor('kirby-brand-5').hex);
+  // }
 
   private animateModal(stackLayout: StackLayout): void {
     if (stackLayout.android) {
@@ -91,7 +93,7 @@ export class ModalComponent extends ContentView implements OnInit {
         .then(() => {
           stackLayout.animate({
             translate: { x: 0, y: 0 },
-            duration: 200,
+            duration: 300,
           });
         });
     }

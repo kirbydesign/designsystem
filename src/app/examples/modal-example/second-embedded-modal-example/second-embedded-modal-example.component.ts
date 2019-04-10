@@ -1,4 +1,3 @@
-import { EventData } from 'tns-core-modules/data/observable';
 import { Component } from '@angular/core';
 
 import { ModalService } from '~/kirby/components/modal/services/modal-service';
@@ -13,7 +12,7 @@ export class SecondEmbeddedModalExampleComponent implements EmbeddedModalCompone
 
   constructor(private modalService: ModalService) {}
 
-  onHidePress(_args: EventData) {
+  onHideSecond() {
     this.modalService.hideModal(this.uid);
   }
 }

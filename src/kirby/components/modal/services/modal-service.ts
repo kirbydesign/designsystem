@@ -1,37 +1,20 @@
 import { Injectable, ViewContainerRef } from '@angular/core';
-import { ModalController } from '@ionic/angular';
 
+import { ModalServiceHelper } from './modal-service-helper';
 import { ModalConfig } from '~/kirby/components/modal/config/modal-config';
-import { ModalComponent } from '~/kirby/components/modal/modal.component';
-import { ModalServiceInterface } from './modal-service-interface';
 
 @Injectable()
-export class ModalService implements ModalServiceInterface {
-  constructor(private modalController: ModalController) {}
+export class ModalService {
+  constructor(private modalServiceHelper: ModalServiceHelper) {}
 
-  public async showModal(
-    config: ModalConfig,
-    _vcRef: ViewContainerRef,
-    callback?: Function
-  ): Promise<void> {
+  public showModal(config: ModalConfig, vcRef: ViewContainerRef, callback?: Function): number {
     const uid = new Date().getTime();
     config.uid = uid;
-    const modal = await this.modalController.create({
-      component: ModalComponent,
-      cssClass: 'kirby-modal',
-      componentProps: { config: config },
-    });
-
-    modal.onDidDismiss().then((data) => {
-      if (callback) {
-        callback(data['data']);
-      }
-    });
-
-    modal.present();
+    this.modalServiceHelper.showModal(config, vcRef, callback);
+    return uid;
   }
 
-  public async hideModal(_: number, data?: any): Promise<void> {
-    await this.modalController.dismiss(data);
+  public hideModal(uid: number, data?: any): void {
+    this.modalServiceHelper.hideModal(uid, data);
   }
 }

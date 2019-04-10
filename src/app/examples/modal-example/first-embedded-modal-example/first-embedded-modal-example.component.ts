@@ -1,4 +1,3 @@
-import { EventData } from 'tns-core-modules/data/observable';
 import { Component, ViewContainerRef } from '@angular/core';
 
 import { ModalService } from '~/kirby/components/modal/services/modal-service';
@@ -15,19 +14,19 @@ export class FirstEmbeddedModalExampleComponent implements EmbeddedModalComponen
 
   constructor(private modalService: ModalService, private vcRef: ViewContainerRef) {}
 
-  async openSecondModal(_args: EventData) {
+  async openSecondModal() {
     const config: ModalConfig = {
       title: 'Second Embedded Modal',
       titleHorizontalAlignment: 'left',
-      closeIcon: 'arrow',
+      closeIconName: 'arrow',
       component: SecondEmbeddedModalExampleComponent,
     };
 
     // supposing no callback needed for the second component
-    await this.modalService.showModal(config, this.vcRef);
+    let modalId = this.modalService.showModal(config, this.vcRef);
   }
 
-  onHidePress(_args: EventData) {
+  onHideFirst() {
     let someTestData: number = Math.PI;
     this.modalService.hideModal(this.uid, someTestData);
   }

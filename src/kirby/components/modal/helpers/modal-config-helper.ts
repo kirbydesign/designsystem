@@ -6,8 +6,8 @@ export class ModalConfigHelper {
       config.titleHorizontalAlignment = 'center';
     }
 
-    if (!config.closeIcon) {
-      config.closeIcon = 'close';
+    if (!config.closeIconName) {
+      config.closeIconName = 'close';
     }
 
     if (!config.dim) {

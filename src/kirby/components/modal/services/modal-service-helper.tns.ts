@@ -1,3 +1,4 @@
+import { ExtendedShowModalOptions } from 'nativescript-windowed-modal/windowed-modal.common';
 import { Injectable } from '@angular/core';
 import { ModalDialogService } from 'nativescript-angular/directives/dialogs';
 import { ViewContainerRef } from '@angular/core';
@@ -5,10 +6,9 @@ import { ViewContainerRef } from '@angular/core';
 import { ModalComponent } from '~/kirby/components/modal/modal.component';
 import { ModalConfig } from '~/kirby/components/modal/config/modal-config';
 import { ModalCloserService } from './modal-closer-service';
-import { ModalServiceInterface } from './modal-service-interface';
 
 @Injectable()
-export class ModalService implements ModalServiceInterface {
+export class ModalServiceHelper {
   constructor(
     private modalDialogService: ModalDialogService,
     private modalCloserService: ModalCloserService
@@ -19,13 +19,13 @@ export class ModalService implements ModalServiceInterface {
     vcRef: ViewContainerRef,
     callback?: Function
   ): Promise<void> {
-    const uid = new Date().getTime();
-    config.uid = uid;
     await this.modalDialogService
       .showModal(ModalComponent, {
         viewContainerRef: vcRef,
+        closeCallback: callback,
         context: config,
-      })
+        dimAmount: 0.1,
+      } as ExtendedShowModalOptions)
       .then((data) => {
         if (callback) {
           callback(data);
