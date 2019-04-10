@@ -3,6 +3,7 @@ import { NativeScriptCommonModule } from 'nativescript-angular/common';
 import { NativeScriptRouterModule } from 'nativescript-angular/router';
 import { NativeScriptUIChartModule } from 'nativescript-ui-chart/angular';
 import { NativeScriptUIListViewModule } from 'nativescript-ui-listview/angular';
+import { TNSCheckBoxModule } from 'nativescript-checkbox/angular';
 
 import { declarations } from './kirby.common';
 // tslint:disable-next-line:max-line-length
@@ -23,9 +24,10 @@ const nativeScriptDeclarations = [
     NativeScriptRouterModule,
     NativeScriptUIChartModule,
     NativeScriptUIListViewModule,
+    TNSCheckBoxModule
   ],
   declarations: nativeScriptDeclarations,
   exports: nativeScriptDeclarations,
   schemas: [NO_ERRORS_SCHEMA],
 })
-export class KirbyModule {}
+export class KirbyModule { }
