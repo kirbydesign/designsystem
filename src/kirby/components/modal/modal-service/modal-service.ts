@@ -24,8 +24,4 @@ export class ModalService {
       callback();
     }
   }
-
-  public registerModal(_: number, __closeModal: (callback: Function) => any) {
-    throw new Error('Method not supported on web.');
-  }
 }

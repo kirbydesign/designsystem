@@ -16,11 +16,10 @@ import { ModalStack } from 'nativescript-windowed-modal';
 import { ModalConfig } from './modal-config';
 import { ModalMapService } from './modal-service/modal-map-service';
 import { EmbeddedModal } from './embedded-modal';
+import { ModalConfigHelper } from './helpers/modal-config-helper';
 
 const style: any = require('sass-extract-loader!./modal.component.scss');
 
-// Selector was removed from the Component decorator because of the following issue:
-// https://stackoverflow.com/questions/51217201/error-in-modal-after-moving-project-files
 @Component({
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss'],
@@ -39,7 +38,7 @@ export class ModalComponent extends ContentView implements OnInit {
     private renderer: Renderer2
   ) {
     super();
-    this.config = params.context;
+    this.config = ModalConfigHelper.processOptionalValues(params.context);
     this.uid = params.context.uid;
     this.modalMapService.registerModalCloseRef(this.uid, params.closeCallback);
   }
@@ -67,7 +66,7 @@ export class ModalComponent extends ContentView implements OnInit {
     this.setBackgroundColor(stackLayout);
   }
 
-  closeModal(): void {
+  dismissModal(): void {
     this.params.closeCallback(() => {});
   }
 
