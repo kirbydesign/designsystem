@@ -49,6 +49,7 @@
     "core-js": "^2.5.4",
     "highcharts": "7.0.3",
     "nativescript-angular": "^7.2.1",
+    "nativescript-checkbox": "^3.0.3",
     "nativescript-orientation": "^2.2.1",
     "nativescript-platform-css": "^1.6.6",
     "nativescript-theme-core": "^1.0.4",
