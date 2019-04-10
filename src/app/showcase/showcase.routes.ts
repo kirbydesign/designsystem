@@ -14,6 +14,7 @@ import { FontsShowcaseComponent } from './fonts-showcase/fonts-showcase.componen
 import { ColorsShowcaseComponent } from './colors-showcase/colors-showcase.component';
 import { SpinnerShowcaseComponent } from './spinner-showcase/spinner-showcase.component';
 import { ModalShowcaseComponent } from './modal-showcase/modal-showcase.component';
+import { SegmentedControlShowcaseComponent } from './segmented-control-showcase/segmented-control-showcase.component';
 import { ChipShowcaseComponent } from './chip-showcase/chip-showcase.component';
 import { BadgeShowcaseComponent } from './badge-showcase/badge-showcase.component';
 import { IconShowcaseComponent } from './icon-showcase/icon-showcase.component';
@@ -101,6 +102,10 @@ export const routes: Routes = [
             component: DoughnutChartShowcaseComponent,
           },
         ],
+      },
+      {
+        path: 'segmented-control',
+        component: SegmentedControlShowcaseComponent,
       },
     ],
   },

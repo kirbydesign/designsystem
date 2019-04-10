@@ -11,6 +11,7 @@ import { SpinnerExampleComponent } from './spinner-example/spinner-example.compo
 import { ModalExampleComponent } from './modal-example/modal-example.component';
 import { FirstEmbeddedModalExampleComponent } from './modal-example/first-embedded-modal-example/first-embedded-modal-example.component';
 import { SecondEmbeddedModalExampleComponent } from './modal-example/second-embedded-modal-example/second-embedded-modal-example.component';
+import { SegmentedControlExampleComponent } from './segmented-control-example/segmented-control-example.component';
 import { ChipExampleComponent } from './chip-example/chip-example.component';
 import { BadgeExampleComponent } from './badge-example/badge-example.component';
 import { IconExampleComponent } from './icon-example/icon-example.component';
@@ -30,6 +31,7 @@ export const COMPONENT_DECLARATIONS: any[] = [
   ModalExampleComponent,
   FirstEmbeddedModalExampleComponent,
   SecondEmbeddedModalExampleComponent,
+  SegmentedControlExampleComponent,
   SegmentedChipControlExampleComponent,
   ChipExampleComponent,
   BadgeExampleComponent,
