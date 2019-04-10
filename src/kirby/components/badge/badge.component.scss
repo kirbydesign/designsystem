@@ -2,11 +2,11 @@
 
 :host {
   --ion-color-base: #{get-color('kirby-primary')};
-  --ion-color-contrast: get-color('kirby-primary-contrast');
+  --ion-color-contrast: #{get-color('kirby-primary-contrast')};
 
   &[colortype='primary'] {
     --ion-color-base: #{get-color('kirby-primary')};
-    --ion-color-contrast: get-color('kirby-primary-contrast');
+    --ion-color-contrast: #{get-color('kirby-primary-contrast')};
   }
 
   &[colortype='secondary'] {
