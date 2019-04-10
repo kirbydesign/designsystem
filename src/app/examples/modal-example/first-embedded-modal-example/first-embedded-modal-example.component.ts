@@ -1,16 +1,16 @@
 import { EventData } from 'tns-core-modules/data/observable';
 import { Component, ViewContainerRef } from '@angular/core';
 
-import { ModalService } from '~/kirby/components/modal/modal-service/modal-service';
-import { EmbeddedModal } from '~/kirby/components/modal/embedded-modal';
-import { ModalConfig } from '~/kirby/components/modal/modal-config';
+import { ModalService } from '~/kirby/components/modal/services/modal-service';
+import { EmbeddedModalComponent } from '~/kirby/components/modal/embedded-modal.component';
+import { ModalConfig } from '~/kirby/components/modal/config/modal-config';
 import { SecondEmbeddedModalExampleComponent } from '../second-embedded-modal-example/second-embedded-modal-example.component';
 
 @Component({
-  templateUrl: './pay-and-transfer-embedded-modal-example.component.html',
+  templateUrl: './first-embedded-modal-example.component.html',
   providers: [ModalService],
 })
-export class PayAndTransferEmbeddedModalExampleComponent implements EmbeddedModal {
+export class FirstEmbeddedModalExampleComponent implements EmbeddedModalComponent {
   uid: number;
 
   constructor(private modalService: ModalService, private vcRef: ViewContainerRef) {}
@@ -23,6 +23,7 @@ export class PayAndTransferEmbeddedModalExampleComponent implements EmbeddedModa
     const config: ModalConfig = {
       title: 'Second Embedded Modal',
       titleHorizontalAlignment: 'left',
+      closeIcon: 'arrow',
       component: SecondEmbeddedModalExampleComponent,
     };
 
@@ -30,6 +31,6 @@ export class PayAndTransferEmbeddedModalExampleComponent implements EmbeddedModa
   }
 
   testCallback() {
-    console.log('callback from PayAndTransferEmbeddedModalExampleComponent');
+    console.log('callback from FirstEmbeddedModalExampleComponent');
   }
 }

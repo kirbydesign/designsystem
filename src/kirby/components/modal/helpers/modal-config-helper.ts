@@ -1,4 +1,4 @@
-import { ModalConfig } from '../modal-config';
+import { ModalConfig } from '../config/modal-config';
 
 export class ModalConfigHelper {
   static processOptionalValues(config: ModalConfig): ModalConfig {

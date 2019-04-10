@@ -12,7 +12,7 @@ import { NativeScriptDoughnutChartComponent } from './components/nativescript-on
 // tslint:disable-next-line:max-line-length
 import { NativeScriptLineChartComponent } from './components/nativescript-only/line-chart/line-chart.component.tns-only';
 import { ModalComponent } from './components/modal/modal.component';
-import { ModalMapService } from './components/modal/modal-service/modal-map-service';
+import { ModalCloserService } from './components/modal/services/modal-closer-service';
 
 overrideModalViewMethod();
 registerElement('ModalStack', () => ModalStack);
@@ -31,7 +31,7 @@ const nativeScriptDeclarations = [
     NativeScriptUIChartModule,
     NativeScriptUIListViewModule,
   ],
-  providers: [ModalMapService],
+  providers: [ModalCloserService],
   entryComponents: [ModalComponent],
   declarations: nativeScriptDeclarations,
   exports: nativeScriptDeclarations,

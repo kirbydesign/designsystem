@@ -13,9 +13,9 @@ import { ContentView, ShownModallyData } from 'tns-core-modules/ui/content-view'
 import { StackLayout } from 'tns-core-modules/ui/layouts/stack-layout/stack-layout';
 import { ModalStack } from 'nativescript-windowed-modal';
 
-import { ModalConfig } from './modal-config';
-import { ModalMapService } from './modal-service/modal-map-service';
-import { EmbeddedModal } from './embedded-modal';
+import { ModalConfig } from './config/modal-config';
+import { ModalCloserService } from './services/modal-closer-service';
+import { EmbeddedModalComponent } from './embedded-modal.component';
 import { ModalConfigHelper } from './helpers/modal-config-helper';
 
 const style: any = require('sass-extract-loader!./modal.component.scss');
@@ -31,7 +31,7 @@ export class ModalComponent extends ContentView implements OnInit {
   uid: number;
 
   constructor(
-    private modalMapService: ModalMapService,
+    private modalCloserService: ModalCloserService,
     private params: ModalDialogParams,
     private componentFactoryResolver: ComponentFactoryResolver,
     public vcRef: ViewContainerRef,
@@ -40,7 +40,7 @@ export class ModalComponent extends ContentView implements OnInit {
     super();
     this.config = ModalConfigHelper.processOptionalValues(params.context);
     this.uid = params.context.uid;
-    this.modalMapService.registerModalCloseRef(this.uid, params.closeCallback);
+    this.modalCloserService.registerModalCloseRef(this.uid, params.closeCallback);
   }
 
   ngOnInit() {
@@ -52,7 +52,7 @@ export class ModalComponent extends ContentView implements OnInit {
       this.config.component
     );
     const componentRef = this.vcRef.createComponent(componentFactory);
-    (<EmbeddedModal>componentRef.instance).uid = this.config.uid;
+    (<EmbeddedModalComponent>componentRef.instance).uid = this.config.uid;
     this.renderer.appendChild(
       this.viewContainer.nativeElement,
       componentRef.location.nativeElement

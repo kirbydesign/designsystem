@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavParams, ModalController } from '@ionic/angular';
 
-import { ModalConfig } from './modal-config';
+import { ModalConfig } from './config/modal-config';
 import { ModalConfigHelper } from './helpers/modal-config-helper';
 
 @Component({

@@ -1,8 +1,8 @@
 import { Component, ViewContainerRef } from '@angular/core';
 
-import { ModalConfig } from '~/kirby/components/modal/modal-config';
-import { ModalService } from '~/kirby/components/modal/modal-service/modal-service';
-import { PayAndTransferEmbeddedModalExampleComponent } from './pay-and-transfer-embedded-modal-example/pay-and-transfer-embedded-modal-example.component';
+import { ModalConfig } from '~/kirby/components/modal/config/modal-config';
+import { ModalService } from '~/kirby/components/modal/services/modal-service';
+import { FirstEmbeddedModalExampleComponent } from './first-embedded-modal-example/first-embedded-modal-example.component';
 
 @Component({
   selector: 'kirby-modal-example',
@@ -14,9 +14,9 @@ export class ModalExampleComponent {
 
   openModal() {
     const config: ModalConfig = {
-      title: 'Betal & Overfør',
+      title: 'First Embedded Modal',
       titleHorizontalAlignment: 'center',
-      component: PayAndTransferEmbeddedModalExampleComponent,
+      component: FirstEmbeddedModalExampleComponent,
     };
 
     this.modalService.showModal(config, this.vcRef);

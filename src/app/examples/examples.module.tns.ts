@@ -10,7 +10,7 @@ import { NativeScriptLineChartExampleComponent } from './nativescript-only/line-
 import { ListSectionExampleComponent } from './list/tns-list-examples/list-section-example/list-section-example.component.tns';
 import { ListCustomCellLinesExampleComponent } from './list/tns-list-examples/list-custom-cell-lines-example/list-custom-cell-lines-example.component.tns';
 import { ListItemExampleComponent } from './list/tns-list-examples/list-item-example/list-item-example.component.tns';
-import { PayAndTransferEmbeddedModalExampleComponent } from './modal-example/pay-and-transfer-embedded-modal-example/pay-and-transfer-embedded-modal-example.component';
+import { FirstEmbeddedModalExampleComponent } from './modal-example/first-embedded-modal-example/first-embedded-modal-example.component';
 import { SecondEmbeddedModalExampleComponent } from './modal-example/second-embedded-modal-example/second-embedded-modal-example.component';
 
 const nativeScriptDeclarations = [
@@ -25,10 +25,7 @@ const nativeScriptDeclarations = [
 @NgModule({
   imports: [NativeScriptCommonModule, KirbyModule],
   declarations: nativeScriptDeclarations,
-  entryComponents: [
-    PayAndTransferEmbeddedModalExampleComponent,
-    SecondEmbeddedModalExampleComponent,
-  ],
+  entryComponents: [FirstEmbeddedModalExampleComponent, SecondEmbeddedModalExampleComponent],
   exports: nativeScriptDeclarations,
   schemas: [NO_ERRORS_SCHEMA],
 })

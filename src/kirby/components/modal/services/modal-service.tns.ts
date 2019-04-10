@@ -3,17 +3,18 @@ import { ModalDialogService } from 'nativescript-angular/directives/dialogs';
 import { ViewContainerRef } from '@angular/core';
 
 import { ModalComponent } from '~/kirby/components/modal/modal.component';
-import { ModalConfig } from '~/kirby/components/modal/modal-config';
-import { ModalMapService } from './modal-map-service';
+import { ModalConfig } from '~/kirby/components/modal/config/modal-config';
+import { ModalCloserService } from './modal-closer-service';
+import { ModalServiceInterface } from './modal-service-interface';
 
 @Injectable()
-export class ModalService {
+export class ModalService implements ModalServiceInterface {
   constructor(
     private modalDialogService: ModalDialogService,
-    private modalMapService: ModalMapService
+    private modalCloserService: ModalCloserService
   ) {}
 
-  public async showModal(config: ModalConfig, vcRef: ViewContainerRef) {
+  public async showModal(config: ModalConfig, vcRef: ViewContainerRef): Promise<void> {
     const uid = new Date().getTime();
     config.uid = uid;
     await this.modalDialogService
@@ -26,10 +27,9 @@ export class ModalService {
           callback();
         }
       });
-    return uid;
   }
 
-  public hideModal(uid: number, callback: Function) {
-    this.modalMapService.closeModal(uid, callback);
+  public async hideModal(uid: number, callback: Function): Promise<void> {
+    this.modalCloserService.closeModal(uid, callback);
   }
 }
