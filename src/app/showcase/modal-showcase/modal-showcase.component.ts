@@ -38,7 +38,7 @@ export class ModalShowcaseComponent {
     {
       name: 'component',
       description:
-        'The component class which will be rendered inside the modal. It is recommended that your nested components implement the EmbeddedModal interface',
+        'The nested component class which will be rendered inside the modal. It is recommended that your nested components implement the EmbeddedModal interface',
       defaultValue: '',
       inputValues: ['Component'],
     },

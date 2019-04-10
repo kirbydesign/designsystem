@@ -67,7 +67,7 @@ export class ModalComponent extends ContentView implements OnInit {
   }
 
   dismissModal(): void {
-    this.params.closeCallback(() => {});
+    this.params.closeCallback();
   }
 
   private setBackgroundColor(stackLayout: StackLayout): void {
@@ -106,7 +106,7 @@ export class ModalComponent extends ContentView implements OnInit {
   private getAlphaIn255Range(alpha: number): number {
     const defaultAlpha = 0.9;
     if (!alpha) {
-      return defaultAlpha;
+      return defaultAlpha * 25500;
     }
     if (alpha <= 0) {
       return 255;

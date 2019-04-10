@@ -15,10 +15,6 @@ export class FirstEmbeddedModalExampleComponent implements EmbeddedModalComponen
 
   constructor(private modalService: ModalService, private vcRef: ViewContainerRef) {}
 
-  onHidePress(_args: EventData) {
-    this.modalService.hideModal(this.uid, this.testCallback);
-  }
-
   async openSecondModal(_args: EventData) {
     const config: ModalConfig = {
       title: 'Second Embedded Modal',
@@ -27,10 +23,12 @@ export class FirstEmbeddedModalExampleComponent implements EmbeddedModalComponen
       component: SecondEmbeddedModalExampleComponent,
     };
 
+    // supposing no callback needed for the second component
     await this.modalService.showModal(config, this.vcRef);
   }
 
-  testCallback() {
-    console.log('callback from FirstEmbeddedModalExampleComponent');
+  onHidePress(_args: EventData) {
+    let someTestData: number = Math.PI;
+    this.modalService.hideModal(this.uid, someTestData);
   }
 }

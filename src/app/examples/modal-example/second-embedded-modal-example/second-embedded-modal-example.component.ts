@@ -14,10 +14,6 @@ export class SecondEmbeddedModalExampleComponent implements EmbeddedModalCompone
   constructor(private modalService: ModalService) {}
 
   onHidePress(_args: EventData) {
-    this.modalService.hideModal(this.uid, this.testCallback);
-  }
-
-  testCallback() {
-    console.log('callback from SecondEmbeddedModalExampleComponent');
+    this.modalService.hideModal(this.uid);
   }
 }

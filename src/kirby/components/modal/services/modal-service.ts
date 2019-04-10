@@ -9,7 +9,11 @@ import { ModalServiceInterface } from './modal-service-interface';
 export class ModalService implements ModalServiceInterface {
   constructor(private modalController: ModalController) {}
 
-  public async showModal(config: ModalConfig, _vcRef: ViewContainerRef): Promise<void> {
+  public async showModal(
+    config: ModalConfig,
+    _vcRef: ViewContainerRef,
+    callback?: Function
+  ): Promise<void> {
     const uid = new Date().getTime();
     config.uid = uid;
     const modal = await this.modalController.create({
@@ -18,13 +22,16 @@ export class ModalService implements ModalServiceInterface {
       componentProps: { config: config },
     });
 
+    modal.onDidDismiss().then((data) => {
+      if (callback) {
+        callback(data['data']);
+      }
+    });
+
     modal.present();
   }
 
-  public async hideModal(_: number, callback: Function): Promise<void> {
-    await this.modalController.dismiss();
-    if (callback) {
-      callback();
-    }
+  public async hideModal(_: number, data?: any): Promise<void> {
+    await this.modalController.dismiss(data);
   }
 }

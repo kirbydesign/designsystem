@@ -14,7 +14,11 @@ export class ModalService implements ModalServiceInterface {
     private modalCloserService: ModalCloserService
   ) {}
 
-  public async showModal(config: ModalConfig, vcRef: ViewContainerRef): Promise<void> {
+  public async showModal(
+    config: ModalConfig,
+    vcRef: ViewContainerRef,
+    callback?: Function
+  ): Promise<void> {
     const uid = new Date().getTime();
     config.uid = uid;
     await this.modalDialogService
@@ -22,14 +26,14 @@ export class ModalService implements ModalServiceInterface {
         viewContainerRef: vcRef,
         context: config,
       })
-      .then((callback) => {
+      .then((data) => {
         if (callback) {
-          callback();
+          callback(data);
         }
       });
   }
 
-  public async hideModal(uid: number, callback: Function): Promise<void> {
-    this.modalCloserService.closeModal(uid, callback);
+  public async hideModal(uid: number, data?: any): Promise<void> {
+    this.modalCloserService.closeModal(uid, data);
   }
 }

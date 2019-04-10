@@ -1,4 +1,4 @@
-@import "../../scss/web-imports";
+@import "../../scss/native-imports";
 
 .modal-wrapper {
   width: 100%;
@@ -17,7 +17,7 @@
 
 .title-bar {  
   Label {
-    font-weight: bold;
+    font-weight: font-weight("bold");
   }
 }
 
