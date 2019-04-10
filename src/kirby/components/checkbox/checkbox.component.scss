@@ -1,0 +1,33 @@
+.small {
+  --size: 18px;
+}
+
+.medium {
+  --size: 24px;
+}
+
+.large {
+  --size: 34px;
+}
+
+.checkbox {
+  --border-color: #2D3230;
+}
+
+.primary {
+  --checkmark-color: #2D3230;
+  --background-checked: #00E89A;
+  --border-color-checked: #00E89A; 
+}
+
+.secondary {
+  --checkmark-color: #2D3230;
+  --background-checked: #ffffff;
+  --border-color-checked: #ffffff;
+}
+
+.tertiary {
+  --checkmark-color: #2d3230;
+  --background-checked: #ebebeb;
+  --border-color-checked: #ebebeb;
+}
