@@ -6,16 +6,30 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./calendar-example.component.scss'],
 })
 export class CalendarExampleComponent {
-  selectedKey: string;
   selectedDate: Date;
+  bankDate: Date;
+  disableDatesArray: Array<Date> = new Array();
 
-  selectDay(key: string) {
-    console.log(key);
-    this.selectedKey = key;
+  constructor() {
+    var date1 = new Date('2019-04-15');
+    var date2 = new Date('2019-05-20');
+    var date3 = new Date('2019-05-21');
+    var date4 = new Date('2019-06-25');
+
+    this.disableDatesArray.push(date1, date2, date3, date4);
   }
 
   onDateChange(selectedDate: Date) {
     console.log('onDateChange: ' + selectedDate);
     this.selectedDate = selectedDate;
+  }
+
+  nextBankDay() {
+    var date = new Date('2019-05-23');
+    this.bankDate = date;
+  }
+
+  today() {
+    this.bankDate = new Date();
   }
 }

@@ -1,14 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
+
+declare var require: any;
+
 @Component({
   selector: 'kirby-calendar-showcase',
   templateUrl: './calendar-showcase.component.html',
   styleUrls: ['./calendar-showcase.component.scss'],
 })
 export class CalendarShowcaseComponent {
-  selectedKey: string;
-
-  selectDay(key: string) {
-    this.selectedKey = key;
-  }
+  exampleHtml: string = require('../../examples/calendar-example/calendar-example.component.html');
+  properties: ShowcaseProperty[] = [
+    {
+      name: 'disableWeekends',
+      description: 'Disables selection of weekends.',
+      defaultValue: 'false',
+      inputValues: ['true | false'],
+    },
+    {
+      name: 'enablePastDates',
+      description: 'Determines if dates in the past can be selected.',
+      defaultValue: 'false',
+      inputValues: ['true | false'],
+    },
+  ];
 }

@@ -49,7 +49,7 @@ export class CalendarHelper {
     this.calendarWebViewInterface.emit('updateCalendar', {
       type: 'kirbyCalendarInit',
       weekDays: options.weekDays,
-      currentMonthAndYear: options.currentMonthAndYear,
+      displayDate: options.displayDate,
       month: JSON.stringify(options.month),
     });
   }

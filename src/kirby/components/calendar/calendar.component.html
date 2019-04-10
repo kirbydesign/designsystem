@@ -1,20 +1,33 @@
-<!-- <div>
-  <div class="days" *ngFor="let day of weekDays">
-    <div class="day name">{{ day }}</div>
+<div id="calendar">
+  <div class="month-and-year">
+    <button [ngClass]="{ 'enable-past-dates' : enablePastDatesButton }" (click)="changeMonth(-1)">
+      <kirby-icon name="arrow-back"></kirby-icon>
+    </button>
+
+    <div class="month-name"><b>{{ currentMonth }}</b> {{ displayDate | date:'y' }}</div>
+  
+    <button (click)="changeMonth(1)">
+      <kirby-icon name="arrow-forward"></kirby-icon>
+    </button>
   </div>
-</div>
 
-<div>
-  <button (click)="previous()">previous</button>
-  <div class="month-name">{{ currentMonthAndYear }}</div>
-  <button (click)="next()">next</button>
+  <table class="calendar-table">
+    <thead class="calendar-table-header">
+      <th *ngFor="let weekDay of weekDays">{{ weekDay }}</th>
+    </thead>
+      
+    <tbody>
+      <tr *ngFor="let week of month">
+        <td class="cell" *ngFor="let day of week">
+          <div *ngIf="day.currentMonth" (click)="selectCalendarDate(day)" class="cell-content" [ngClass]="{ 'current-month' : day.currentMonth, 'weekend' : day.weekend, 'today' : day.today, 'selectable' :  day.selectable , 'selected' :  day.selected, 'past' :  day.past, 'disabled' :  day.disabled }">
+            <span>{{ day.date | date:'d' }}</span>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
-
-<div *ngFor="let week of month">
-  <ng-container *ngFor="let day of week">
-    <ng-container [ngTemplateOutlet]="dayTemplate.template" [ngTemplateOutletContext]="day"></ng-container>
-  </ng-container>
-</div>
- -->
-
- <!-- <iframe src="kirby/components/calendar/calendar.webview.html" #calendarContainer style="width: 300px; height: 300px; border: 0"> -->
+  
+<br>
+<!-- <iframe src="kirby/components/calendar/calendar.webview.html" #calendarContainer style="width: 380px; height: 380px; border: 0"> -->
+    

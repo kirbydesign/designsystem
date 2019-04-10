@@ -1,52 +1,103 @@
-:host {
-    display: flex;
-    flex-direction: column;
+@import '../../scss/web-imports';
 
-    > * {
-      display: flex;
-      flex-direction: row;
-      flex: 1;
-    }
+#calendar {
+  width: 380px;
+  background-color: white;
+  border-radius: 1em;
+  padding: 0.5em;
+  overflow: hidden;
+}
 
-    .month-name {
-      flex-direction: column;
-      text-align: center;
-      width: 100%;
-      line-height: 50px;
-    }
-    
-    .days {
-      display: flex;
-      flex-direction: row;
-      flex: 1;
-      text-align: center;
-    }
-    
-    .day {
-      display: flex;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-      cursor: pointer;
-      overflow: hidden;
-      flex: 1;
-      min-height: 0;
-      flex-direction: column;
-      border-bottom: 1px solid #e9e9e9;
-      margin-left: -1px;
-      margin-top: -1px;
-      padding: 10px;
-      color: #ccc;
+table.calendar-table {
+  width: 100%;
+  border-collapse: collapse;
+  user-select: none;
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent;
+}
 
-      &.name {
-        color: #000;
-      }
-    }
+thead.calendar-table-header {
+  border-bottom: 1px solid lightgray;
+}
 
-    button {
-      border: 0;
-      outline: 0;
-      background-color: transparent;
-    }
+.month-and-year, th, td {
+  background-color: white;
+}
+
+.month-and-year {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.7em;
+}
+
+.month-name {
+  line-height: 35px;
+  user-select: none;
+}
+
+th,
+div.cell-content {
+  text-align: center;
+}
+
+thead th {
+  height: 50px;
+}
+
+div.cell-content {
+  border-radius: 20px;
+  width: 40px;
+  height: 40px;
+  margin: auto;
+}
+
+div.cell-content span {
+  text-align: center;
+  line-height: 40px;
+}
+
+button {
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.enable-past-dates {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+div.cell-content.selectable {
+  cursor: pointer;
+}
+
+div.cell-content.weekend,
+div.cell-content.disabled {
+  color: #ccc;
+}
+
+div.cell-content.today {
+  color: #242424;
+  background: get-color('kirby-grey-5');
+}
+
+div.cell-content.selected {
+  color: black;
+  background-color: get-color('kirby-primary');
+}
+
+div.cell-content.past {
+  color: #ccc;
+  opacity: 0.5;
+}
+
+div.cell-content:not(.current-month) {
+  opacity: 0;
+  pointer-events: none;
+}
+
+div.cell-content.selectable:not(.selected):hover {
+  color: black;
+  background-color: #d2d2d2;
 }

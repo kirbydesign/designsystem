@@ -1,6 +1,6 @@
-<kirby-calendar (dateChange)="onDateChange($event)">
-  <kirby-calendar-cell *kirbyCalendarDay="let day = content" [day]="day" [selected]="selectedKey === day.key" (click)="selectDay(day.key)"></kirby-calendar-cell>
-</kirby-calendar>
+<kirby-calendar [disableWeekends]="true" [enablePastDates]="false" [disableDates]="disableDatesArray" [bankDate]="bankDate" (dateChange)="onDateChange($event)"></kirby-calendar>
+<button kirby-button (click)="nextBankDay()">select date</button>
+<button kirby-button (click)="today()">straks</button>
 <div *ngIf="selectedDate">
-    Selected Date: {{ selectedDate | date}}
+    Selected Date: {{ selectedDate | date }}
 </div>
