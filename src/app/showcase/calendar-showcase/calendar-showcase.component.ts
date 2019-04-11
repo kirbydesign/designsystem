@@ -32,7 +32,7 @@ export class CalendarShowcaseComponent {
       inputValues: ['Date[]'],
     },
     {
-      name: 'nextBankDate',
+      name: 'currentDate',
       description: 'Date that you want to select inside the calendar. Date format is YYYY-MM-DD.',
       defaultValue: 'null',
       inputValues: ['Date'],

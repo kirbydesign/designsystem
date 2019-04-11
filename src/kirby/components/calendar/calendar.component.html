@@ -18,7 +18,7 @@
       
     <tbody>
       <tr *ngFor="let week of month">
-        <td class="cell" *ngFor="let day of week">
+        <td *ngFor="let day of week">
           <div *ngIf="day.currentMonth" (click)="selectCalendarDate(day)" class="cell-content" [ngClass]="{ 'current-month' : day.currentMonth, 'weekend' : day.weekend, 'today' : day.today, 'selectable' :  day.selectable , 'selected' :  day.selected, 'past' :  day.past, 'disabled' :  day.disabled }">
             <span>{{ day.date | date:'d' }}</span>
           </div>
@@ -28,6 +28,8 @@
   </table>
 </div>
   
+<!-- 
 <br>
-<!-- <iframe src="kirby/components/calendar/calendar.webview.html" #calendarContainer style="width: 380px; height: 380px; border: 0"> -->
+<iframe src="kirby/components/calendar/calendar.webview.html" #calendarContainer style="width: 380px; height: 380px; border: 0"> 
+-->
     

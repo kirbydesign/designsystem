@@ -19,6 +19,12 @@
                 background-color: transparent;
             }
             
+            #calendar {
+                background-color: white;
+                border-radius: 1em;
+                padding: 0.5em;
+                overflow: hidden;
+            }
 
             table.calendar-table {
                 width: 100%;
@@ -28,42 +34,37 @@
                 -webkit-tap-highlight-color: transparent;
             }
 
-            .month-and-year,
-            th, td {
+            thead.calendar-table-header {
+                border-bottom: 1px solid lightgray;
+            }
+
+            .month-and-year, th, td {
                 background-color: white;
             }
 
             .month-and-year {
                 display: flex;
-                align-items: center;
-                text-align: center;
-                padding: 0.5em;
-                border-top-left-radius: 1em;
-                border-top-right-radius: 1em;
+                flex-direction: row;
+                justify-content: space-between;
+                padding: 0.7em;
             }
 
-            thead::after {
-                height: 2px;
-                content: '';
-                display: block;
-                background-color: transparent;
+            .month-name {
+                line-height: 35px;
+                user-select: none;
             }
 
-            tr:last-child td:first-child {
-                border-bottom-left-radius: 1em;
-            }
-
-            tr:last-child td:last-child {
-                border-bottom-right-radius: 1em;
-            }
-
-            td.cell {
-                padding: 4px;
+            .month-name .month {
+                font-weight: bold;
             }
 
             th,
             div.cell-content {
                 text-align: center;
+            }
+
+            thead th {
+                height: 50px;
             }
 
             div.cell-content {
@@ -73,39 +74,55 @@
                 margin: auto;
             }
 
+            div.cell-content span {
+                text-align: center;
+                line-height: 40px;
+                pointer-events: none;
+            }
+
+            button {
+                outline: none;
+                border: none;
+                cursor: pointer;
+            }
+
+            .disable-past-dates {
+                opacity: 0.5;
+                pointer-events: none;
+            }
+
             div.cell-content.selectable {
                 cursor: pointer;
             }
 
-            div.cell-content.selectable:not(.selected):hover {
-                background-color: #d2d2d2;
-            }
-
-            div.cell-content.selected {
-                background-color: #00E89A;
-            }
-
-            div.cell-content:not(.current-month),
-            div.cell-content.weekend {
-            color: #ccc;
+            div.cell-content.weekend,
+            div.cell-content.disabled {
+                color: #ccc;
             }
 
             div.cell-content.today {
-            color: #242424;
-            background: #929694;
+                color: #242424;
+                background: #929694;
             }
 
-            div.cell-content.disabled {
-            opacity: 0;
-            pointer-events: none;
+            div.cell-content.selected {
+                color: black;
+                background-color: #00E89A;
             }
 
-            thead th {
-            height: 50px;
+            div.cell-content.past {
+                color: #ccc;
+                opacity: 0.5;
             }
 
-            :host.selected {
-            background: #00E89A;
+            div.cell-content:not(.current-month) {
+                opacity: 0;
+                pointer-events: none;
+            }
+
+            div.cell-content.selectable:not(.selected):hover {
+                color: black;
+                background-color: #d2d2d2;
             }
 
         </style>
@@ -113,18 +130,21 @@
 
     <body style="margin: 0; padding: 0;">
             <div id="calendar">
-                <div class="month-and-year"></div>
-                <div class="calendar-wrapper">
-                    <table class="calendar-table">
-                        <thead class="calendar-table-header">
-                            <tr></tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
+                <div class="month-and-year">
+                  <button class="previous-button">pr</button>
+                  <div class="month-name">
+                      <span class="month"></span>
+                      <span class="year"></span>
+                  </div>
+                  <button class="next-button">next</button>
                 </div>
-            </div>
-        <script src="nativescript-webview-interface.js"></script>
+              
+                <table class="calendar-table">
+                  <thead class="calendar-table-header"></thead>                    
+                  <tbody></tbody>
+                </table>
+              </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
         <script>
             (function () {
                 var oWebViewInterface = window.nsWebViewInterface;
@@ -151,14 +171,15 @@
                 var selectedDate = null;
 
                 function selectDate(event) {
-                    // console.log(event.target.offsetWidth + ' / ' + event.target.offsetHeight);
-                    if (event.target && event.target.classList.contains('selectable')) {
+                    var day = JSON.parse(event.target.dataset.day);                    
+                    
+                    if (day.selectable) {
                         if (selectedDate) {
                             selectedDate.classList.remove('selected');
                         }
                         selectedDate = event.target;
                         selectedDate.classList.add('selected');
-                        emitSelectedDate(new Date(selectedDate.dataset.date));
+                        emitSelectedDate(new Date(day.date));
                     }
                 }
 
@@ -173,22 +194,35 @@
                 }
 
                 function updateCalendar(options) {
-                    console.log('options.displayDate', options.displayDate)
-                    var weekDays = options.weekDays;
+                    var disableWeekends = options.disableWeekends;
+                    var disablePastDates = options.disablePastDates;
+                    var disableDates = options.disableDates;
+                    var currentDate = options.currentDate;
                     var displayDate = options.displayDate;
+                    var weekDays = options.weekDays;
                     var month = JSON.parse(options.month);
+                    var monthNames = options.monthNames;
+
                     var calendarOutlet = document.getElementById('calendar');
                     var monthAndYearOutlet = calendarOutlet.querySelector('.month-and-year');
-                    monthAndYearOutlet.innerText = currentMonthAndYear(displayDate);
+                    var monthNameOutlet = monthAndYearOutlet.querySelector('.month-name');
+                    var monthOutlet = monthNameOutlet.querySelector('.month');
+                    var yearOutlet = monthNameOutlet.querySelector('.year');
+                              
+                    monthOutlet.innerText = monthNames[displayDate.getMonth()];
+                    yearOutlet.innerText = displayDate.getFullYear();
 
-                    var calenderTableWrapperOutlet = calendarOutlet.querySelector('.calendar-wrapper');
-                    var calenderTableOutlet = calenderTableWrapperOutlet.querySelector('table');
+                    var calenderTableOutlet = calendarOutlet.querySelector('.calendar-table');
                     var calenderTableHeaderOutlet = calenderTableOutlet.querySelector('thead');
+                    renderWeekDaysHeader(calenderTableHeaderOutlet, weekDays);
+
                     var calenderTableBodyOutlet = calenderTableOutlet.querySelector('tbody');
-                    var calenderTableHeaderRowOutlet = calenderTableHeaderOutlet.querySelector('tr');
-                    renderWeekDaysHeader(calenderTableHeaderRowOutlet, weekDays);
                     renderMonth(calenderTableBodyOutlet, month);
-                    calenderTableBodyOutlet.onclick = selectDate;
+
+                    var previousButtonOutlet = calendarOutlet.querySelector('.previous-button');
+                    var nextButtonOutlet = calendarOutlet.querySelector('.next-button');
+                    previousButtonOutlet.onclick = previousMonth;
+                    nextButtonOutlet.onclick = nextMonth;
                 }
 
                 function renderWeekDaysHeader(tableHeaderRow, weekDays) {
@@ -205,53 +239,62 @@
                     });
                 }
 
-                function currentMonthAndYear(date) {
-                    var months = new Array();
-                    months[0] = 'January';
-                    months[1] = 'February';
-                    months[2] = 'March';
-                    months[3] = 'April';
-                    months[4] = 'May';
-                    months[5] = 'June';
-                    months[6] = 'July';
-                    months[7] = 'August';
-                    months[8] = 'September';
-                    months[9] = 'October';
-                    months[10] = 'November';
-                    months[11] = 'December';
-
-                    const month = months[date.getMonth()];
-                    const year = date.getFullYear();
-
-                    return `${month} ${year}`;
-                }
-
                 function renderWeek(tableBody, week) {
                     var tr = document.createElement("tr");
 
                     week.forEach(function(day) {
                         var date = new Date(day.date);
                         var cellContent = document.createElement("div");
-                        cellContent.appendChild(document.createTextNode(date.getDate()));
+                        var divContent = document.createElement("span");
+                        cellContent.appendChild(divContent);
+
+                        divContent.appendChild(document.createTextNode(date.getDate()));
+
                         cellContent.className = "cell-content";
-                        cellContent.dataset.date = date;
+                        cellContent.dataset.day = JSON.stringify(day);
+                        cellContent.onclick = selectDate;
+        
                         if (day.currentMonth) {
                             cellContent.classList.add('current-month');
                         }
                         if (day.weekend) {
                             cellContent.classList.add('weekend');
-                        } else {
-                            cellContent.classList.add('selectable');
-                        }
+                        } 
                         if (day.today) {
                             cellContent.classList.add('today');
                         }
+                        if (day.selectable) {
+                            cellContent.classList.add('selectable');
+                        }
+                        if (day.selected) {
+                            cellContent.classList.add('selected');
+                        }
+                        if (day.past) {
+                            cellContent.classList.add('past');
+                        }
+                        if (day.disabled) {
+                            cellContent.classList.add('disabled');
+                        }
+                        
                         var td = document.createElement("td");
-                        td.className = "cell";
                         td.appendChild(cellContent);
                         tr.appendChild(td);
                     });
                     tableBody.appendChild(tr);
+                }
+
+                function previousMonth() {
+                    changeMonth(-1);
+                }
+
+                function nextMonth() {
+                    changeMonth(1);
+                }
+
+                function changeMonth(index) {
+                    if (selectedDate) {
+                        selectedDate = moment(selectedDate).add(index, 'months').toDate();
+                    }
                 }
 
                 function init() {

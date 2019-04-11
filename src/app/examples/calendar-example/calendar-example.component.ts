@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CalendarExampleComponent {
   selectedDate: Date;
-  nextBankDate: Date;
+  currentDate: Date;
   disableDatesArray: Array<Date> = new Array();
 
   constructor() {
@@ -30,10 +30,10 @@ export class CalendarExampleComponent {
 
   nextBankDay() {
     var date = new Date('2019-05-23');
-    this.nextBankDate = date;
+    this.currentDate = date;
   }
 
   immediately() {
-    this.nextBankDate = new Date();
+    this.currentDate = new Date();
   }
 }

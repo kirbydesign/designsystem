@@ -15,9 +15,14 @@ export class CalendarHelper {
         iframe.contentWindow.postMessage(
           {
             type: 'kirbyCalendarInit',
-            weekDays: options.weekDays,
+            disableWeekends: options.disableWeekends,
+            disablePastDates: options.disablePastDates,
+            disableDates: options.disableDates,
+            currentDate: options.currentDate,
             displayDate: options.displayDate,
+            weekDays: options.weekDays,
             month: JSON.stringify(options.month),
+            monthNames: options.monthNames,
           },
           '*'
         );

@@ -13,13 +13,18 @@ import * as moment from 'moment';
 import { chunk, range } from 'lodash';
 
 import { CalendarHelper } from './helpers/calendar.helper';
-import { CalendarDay } from './helpers/calendar-day.modal';
+import { CalendarDay } from './helpers/calendar-day.model';
 
 export interface CalendarOptions {
   selectDate: (Date) => {};
+  disableWeekends: boolean;
+  disablePastDates: boolean;
+  disableDates: Date[];
+  currentDate: Date;
   displayDate: Date;
   weekDays: string[];
   month: any[][];
+  monthNames: string[];
 }
 
 @Component({
@@ -33,8 +38,8 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   @Output() dateChange = new EventEmitter<Date>();
   @Input() disableWeekends: true | false = false;
   @Input() disablePastDates: true | false = true;
-  @Input() disableDates: Array<Date>;
-  @Input() nextBankDate: Date;
+  @Input() disableDates: Date[];
+  @Input() currentDate: Date;
 
   private selectedDay: CalendarDay;
   private _displayDate: Date;
@@ -88,17 +93,22 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   ngAfterViewInit() {
     this.calendarHelper.init(this.calendarContainer, {
       selectDate: this.selectDate.bind(this),
-      weekDays: this.weekDays,
+      disableWeekends: this.disableWeekends,
+      disablePastDates: this.disablePastDates,
+      disableDates: this.disableDates,
+      currentDate: this.currentDate,
       displayDate: this.displayDate,
+      weekDays: this.weekDays,
       month: this.month,
+      monthNames: this.monthNames,
     });
   }
 
   ngOnChanges(changes: any) {
-    const bankDate = changes.nextBankDate.currentValue;
-    if (bankDate) {
-      this.displayDate = bankDate;
-      this.selectNextbankDay(bankDate);
+    const currentDate = changes.currentDate.currentValue;
+    if (currentDate) {
+      this.displayDate = currentDate;
+      this.selectCurrentDateDay(currentDate);
     }
   }
 
@@ -183,7 +193,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
     });
   }
 
-  private selectNextbankDay(date) {
+  private selectCurrentDateDay(date) {
     var self = this;
     this.month.forEach(function(week) {
       week.forEach(function(day) {
