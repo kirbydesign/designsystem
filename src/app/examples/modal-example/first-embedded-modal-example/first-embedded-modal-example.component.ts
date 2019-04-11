@@ -1,7 +1,7 @@
 import { Component, ViewContainerRef } from '@angular/core';
 
+import { ModalUidProvider } from '~/kirby/components/modal/modal-uid-provider';
 import { ModalService } from '~/kirby/components/modal/services/modal-service';
-import { EmbeddedModalComponent } from '~/kirby/components/modal/embedded-modal.component';
 import { ModalConfig } from '~/kirby/components/modal/config/modal-config';
 import { SecondEmbeddedModalExampleComponent } from '../second-embedded-modal-example/second-embedded-modal-example.component';
 
@@ -9,10 +9,12 @@ import { SecondEmbeddedModalExampleComponent } from '../second-embedded-modal-ex
   templateUrl: './first-embedded-modal-example.component.html',
   providers: [ModalService],
 })
-export class FirstEmbeddedModalExampleComponent implements EmbeddedModalComponent {
-  uid: number;
-
-  constructor(private modalService: ModalService, private vcRef: ViewContainerRef) {}
+export class FirstEmbeddedModalExampleComponent {
+  constructor(
+    private modalService: ModalService,
+    private vcRef: ViewContainerRef,
+    private modalUidProvider: ModalUidProvider
+  ) {}
 
   async openSecondModal() {
     const config: ModalConfig = {
@@ -28,6 +30,6 @@ export class FirstEmbeddedModalExampleComponent implements EmbeddedModalComponen
 
   onHideFirst() {
     let someTestData: number = Math.PI;
-    this.modalService.hideModal(this.uid, someTestData);
+    this.modalService.hideModal(this.modalUidProvider.uid, someTestData);
   }
 }

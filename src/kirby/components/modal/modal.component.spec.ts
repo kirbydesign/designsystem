@@ -7,6 +7,7 @@ import { By } from '@angular/platform-browser';
 import { FloatingActionButtonComponent } from '../floating-action-button/floating-action-button.component';
 import { IconComponent } from './../icon/icon.component';
 import { ModalComponent } from './modal.component';
+import { ModalNestedComponentHelper } from './helpers/modal-nested-component-helper';
 
 describe('ModalComponent', () => {
   let component: ModalComponent;
@@ -22,6 +23,10 @@ describe('ModalComponent', () => {
       },
     });
 
+    const modalNestedComponentHelperSpy = jasmine.createSpyObj('ModalNestedComponentHelper', [
+      'appendComponent',
+    ]);
+
     TestBed.configureTestingModule({
       declarations: [
         ModalComponent,
@@ -31,6 +36,7 @@ describe('ModalComponent', () => {
       providers: [
         { provide: ModalController, useValue: modalControllerSpy },
         { provide: NavParams, useValue: navParamsSpy },
+        { provide: ModalNestedComponentHelper, useValue: modalNestedComponentHelperSpy },
       ],
     }).compileComponents();
     TestBed.overrideModule(BrowserDynamicTestingModule, {

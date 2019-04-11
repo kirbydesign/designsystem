@@ -15,8 +15,8 @@ import { ModalStack } from 'nativescript-windowed-modal';
 
 import { ModalConfig } from './config/modal-config';
 import { ModalCloserService } from './services/modal-closer-service';
-import { EmbeddedModalComponent } from './embedded-modal.component';
 import { ModalConfigHelper } from './helpers/modal-config-helper';
+import { ModalNestedComponentHelper } from './helpers/modal-nested-component-helper';
 
 const style: any = require('sass-extract-loader!./modal.component.scss');
 
@@ -33,6 +33,7 @@ export class ModalComponent extends ContentView implements OnInit {
   constructor(
     private modalCloserService: ModalCloserService,
     private params: ModalDialogParams,
+    private modalNestedComponentHelper: ModalNestedComponentHelper,
     private componentFactoryResolver: ComponentFactoryResolver,
     public vcRef: ViewContainerRef,
     private renderer: Renderer2
@@ -44,18 +45,13 @@ export class ModalComponent extends ContentView implements OnInit {
   }
 
   ngOnInit() {
-    this.appendComponent();
-  }
-
-  appendComponent() {
-    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(
-      this.config.component
-    );
-    const componentRef = this.vcRef.createComponent(componentFactory);
-    (<EmbeddedModalComponent>componentRef.instance).uid = this.config.uid;
-    this.renderer.appendChild(
-      this.viewContainer.nativeElement,
-      componentRef.location.nativeElement
+    this.modalNestedComponentHelper.appendComponent(
+      this.viewContainer,
+      this.vcRef,
+      this.renderer,
+      this.componentFactoryResolver,
+      this.config.component,
+      this.config.uid
     );
   }
 

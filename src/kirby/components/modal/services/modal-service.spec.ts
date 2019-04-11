@@ -1,38 +1,26 @@
-import { ModalCloserService } from './modal-closer-service';
+import { ModalService } from './modal-service';
 
 describe('ModalService', () => {
-  let modalCloserService: ModalCloserService;
-  const mockModalCloseFunction: () => any = () => {};
-  const mockUid = 1;
-  const mockError = new Error(`No modal was registered with uid: ${mockUid}.`);
+  let modalService: ModalService;
+
+  const modalServiceHelperSpy = jasmine.createSpyObj('ModalServiceHelper', [
+    'showModal',
+    'hideModal',
+  ]);
+
+  const mockModalConfig = {
+    title: 'test',
+    component: undefined,
+  };
 
   beforeEach(() => {
-    modalCloserService = new ModalCloserService();
+    modalService = new ModalService(modalServiceHelperSpy);
   });
 
-  describe('ModalCloserService', () => {
-    it('should throw an error when modal id is not found', () => {
-      expect(function() {
-        modalCloserService.closeModal(mockUid);
-      }).toThrow(mockError);
-    });
-
-    it('should properly close a previously registered modal without an error', () => {
-      modalCloserService.registerModalCloseRef(mockUid, mockModalCloseFunction);
-      expect(function() {
-        modalCloserService.closeModal(mockUid);
-      }).not.toThrow(mockError);
-    });
-
-    it('should perform a cleanup after a successful close', () => {
-      modalCloserService.registerModalCloseRef(mockUid, mockModalCloseFunction);
-      expect(function() {
-        modalCloserService.closeModal(mockUid);
-      }).not.toThrow(mockError);
-      // call second time with same uid, expect an error this time
-      expect(function() {
-        modalCloserService.closeModal(mockUid);
-      }).toThrow(mockError);
+  describe('ModalService', () => {
+    it('should, upon showing a modal, return a newly created modalUid, based on the current timestamp', () => {
+      let modalUid = modalService.showModal(mockModalConfig, null, null);
+      expect(modalUid).toBeGreaterThanOrEqual(new Date().getTime());
     });
   });
 });

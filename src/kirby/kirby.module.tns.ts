@@ -14,6 +14,7 @@ import { NativeScriptLineChartComponent } from './components/nativescript-only/l
 import { ModalComponent } from './components/modal/modal.component';
 import { ModalCloserService } from './components/modal/services/modal-closer-service';
 import { ModalServiceHelper } from './components/modal/services/modal-service-helper';
+import { ModalNestedComponentHelper } from './components/modal/helpers/modal-nested-component-helper';
 
 overrideModalViewMethod();
 registerElement('ModalStack', () => ModalStack);
@@ -32,7 +33,7 @@ const nativeScriptDeclarations = [
     NativeScriptUIChartModule,
     NativeScriptUIListViewModule,
   ],
-  providers: [ModalCloserService, ModalServiceHelper],
+  providers: [ModalCloserService, ModalServiceHelper, ModalNestedComponentHelper],
   entryComponents: [ModalComponent],
   declarations: nativeScriptDeclarations,
   exports: nativeScriptDeclarations,

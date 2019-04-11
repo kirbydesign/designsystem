@@ -3,6 +3,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { KirbyModule } from '../../../../kirby/kirby.module';
 import { FirstEmbeddedModalExampleComponent } from './first-embedded-modal-example.component';
+import { ModalUidProvider } from '~/kirby/components/modal/modal-uid-provider';
 
 describe('FirstEmbeddedModalExampleComponent', () => {
   let component: FirstEmbeddedModalExampleComponent;
@@ -12,6 +13,7 @@ describe('FirstEmbeddedModalExampleComponent', () => {
     TestBed.configureTestingModule({
       imports: [KirbyModule, RouterTestingModule],
       declarations: [FirstEmbeddedModalExampleComponent],
+      providers: [{ provide: ModalUidProvider, useValue: { uid: 0 } }],
     }).compileComponents();
   }));
 

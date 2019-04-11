@@ -21,13 +21,14 @@
     //To create a nested component, ensure:
     // 1) the nested component must be declared (module file, or inside your @Component decorator)
     // 2) the nested component must be listed in your entryComponents (module file) 
-    // 3) (Optional) the nested component can implement EmbeddedModal 
+    // 3) (Optional) the nested component can inject ModalUidProvider
     //    which allows you to obtain an uid for your modal and use it to 
     //    close the modal from within your nested component
     //    Note that you cannot close the modal without the uid.
 
-    // In order to close a modal from within your nested component, you can use: 
-    this.modalService.hideModal(this.uid);
+    // In order to close a modal from within your nested component, you can then use:
+    constructor(private modalService: ModalService, private modalUidProvider: ModalUidProvider) {}
+    this.modalService.hideModal(this.modalUidProvider.uid);
 
     // (Optional) You can pass data as a 2nd parameter, which will be available in your callback  
     let anyReturnData = ...;

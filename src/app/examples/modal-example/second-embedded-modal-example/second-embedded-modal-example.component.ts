@@ -1,18 +1,16 @@
 import { Component } from '@angular/core';
 
 import { ModalService } from '~/kirby/components/modal/services/modal-service';
-import { EmbeddedModalComponent } from '~/kirby/components/modal/embedded-modal.component';
+import { ModalUidProvider } from '~/kirby/components/modal/modal-uid-provider';
 
 @Component({
   templateUrl: './second-embedded-modal-example.component.html',
   providers: [ModalService],
 })
-export class SecondEmbeddedModalExampleComponent implements EmbeddedModalComponent {
-  uid: number;
-
-  constructor(private modalService: ModalService) {}
+export class SecondEmbeddedModalExampleComponent {
+  constructor(private modalService: ModalService, private modalUidProvider: ModalUidProvider) {}
 
   onHideSecond() {
-    this.modalService.hideModal(this.uid);
+    this.modalService.hideModal(this.modalUidProvider.uid);
   }
 }
