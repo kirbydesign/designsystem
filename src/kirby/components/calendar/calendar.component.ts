@@ -1,12 +1,13 @@
 import {
   Component,
-  AfterViewInit,
   ViewChild,
   ElementRef,
   Input,
   Output,
   EventEmitter,
   OnInit,
+  AfterViewInit,
+  OnChanges,
 } from '@angular/core';
 import * as moment from 'moment';
 import { chunk, range } from 'lodash';
@@ -27,15 +28,13 @@ export interface CalendarOptions {
   styleUrls: ['./calendar.component.scss'],
   providers: [CalendarHelper],
 })
-export class CalendarComponent implements OnInit, AfterViewInit {
+export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   @ViewChild('calendarContainer') calendarContainer: ElementRef;
-  @Input() disableWeekends: true | false = false;
-  @Input() enablePastDates: true | false = false;
-  @Input() disableDates: Array<Date>;
-  @Input() set bankDate(date: Date) {
-    this.displayDate = date;
-  }
   @Output() dateChange = new EventEmitter<Date>();
+  @Input() disableWeekends: true | false = false;
+  @Input() disablePastDates: true | false = true;
+  @Input() disableDates: Array<Date>;
+  @Input() nextBankDate: Date;
 
   private selectedDay: CalendarDay;
   private _displayDate: Date;
@@ -95,6 +94,14 @@ export class CalendarComponent implements OnInit, AfterViewInit {
     });
   }
 
+  ngOnChanges(changes: any) {
+    const bankDate = changes.nextBankDate.currentValue;
+    if (bankDate) {
+      this.displayDate = bankDate;
+      this.selectNextbankDay(bankDate);
+    }
+  }
+
   refresh() {
     const momentDate = moment(this.displayDate);
     const monthStart = momentDate.startOf('month').toDate();
@@ -115,7 +122,7 @@ export class CalendarComponent implements OnInit, AfterViewInit {
       }
 
       const today = date.isSame(moment(), 'day');
-      const past = this.enablePastDates ? false : date.isBefore() && !today;
+      const past = this.disablePastDates ? date.isBefore() && !today : false;
       const weekend = date.toDate().getDay() === 0 || date.toDate().getDay() === 6;
       const currentMonth = date.isSame(monthStart, 'month');
       const selectable = currentMonth && !(weekend && this.disableWeekends) && !past && !disabled;
@@ -164,14 +171,26 @@ export class CalendarComponent implements OnInit, AfterViewInit {
       .toDate();
   }
 
-  public get enablePastDatesButton(): boolean {
-    return !this.enablePastDates && moment(this.displayDate).isSame(new Date(), 'month');
+  public get disablePastDatesButton(): boolean {
+    return this.disablePastDates && moment(this.displayDate).isSame(new Date(), 'month');
   }
 
   private resetSelectedDays() {
     this.month.forEach(function(week) {
       week.forEach(function(day) {
         day.selected = false;
+      });
+    });
+  }
+
+  private selectNextbankDay(date) {
+    var self = this;
+    this.month.forEach(function(week) {
+      week.forEach(function(day) {
+        if (moment(day.date).isSame(moment(date), 'day')) {
+          day.selected = true;
+          self.selectCalendarDate(day);
+        }
       });
     });
   }

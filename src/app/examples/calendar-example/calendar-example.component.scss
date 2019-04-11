@@ -1,0 +1,19 @@
+@import '../../../kirby/scss/web-imports';
+
+kirby-card {
+    width: 380px;
+    margin-bottom: 20px;
+
+    div {
+        display: flex;
+        border-top: 1px solid get-color('kirby-grey-2');
+        
+        button {
+            width: 100%;
+            height: 50px;
+            border-radius: 0;
+            margin: auto;
+            outline: none;
+        }
+    }
+}

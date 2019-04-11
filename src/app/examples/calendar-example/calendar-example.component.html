@@ -1,6 +1,18 @@
-<kirby-calendar [disableWeekends]="true" [enablePastDates]="false" [disableDates]="disableDatesArray" [bankDate]="bankDate" (dateChange)="onDateChange($event)"></kirby-calendar>
-<button kirby-button (click)="nextBankDay()">select date</button>
-<button kirby-button (click)="today()">straks</button>
+<kirby-card>
+    <kirby-calendar 
+        [disableWeekends]="true" 
+        [disablePastDates]="true" 
+        [disableDates]="disableDatesArray" 
+        [nextBankDate]="nextBankDate" 
+        (dateChange)="onDateChange($event)">
+    </kirby-calendar>
+    
+    <div>
+        <button kirby-button (click)="nextBankDay()">Næste bankdag</button>
+        <button kirby-button (click)="immediately()" colortype="secondary">Straks</button>
+    </div>
+</kirby-card>
+
 <div *ngIf="selectedDate">
     Selected Date: {{ selectedDate | date }}
 </div>

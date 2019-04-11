@@ -19,10 +19,23 @@ export class CalendarShowcaseComponent {
       inputValues: ['true | false'],
     },
     {
-      name: 'enablePastDates',
+      name: 'disablePastDates',
       description: 'Determines if dates in the past can be selected.',
-      defaultValue: 'false',
+      defaultValue: 'true',
       inputValues: ['true | false'],
+    },
+    {
+      name: 'disableDates',
+      description:
+        'Array of dates that you want to disable inside the calendar. Date format is YYYY-MM-DD.',
+      defaultValue: 'null',
+      inputValues: ['Date[]'],
+    },
+    {
+      name: 'nextBankDate',
+      description: 'Date that you want to select inside the calendar. Date format is YYYY-MM-DD.',
+      defaultValue: 'null',
+      inputValues: ['Date'],
     },
   ];
 }

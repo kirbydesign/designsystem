@@ -7,16 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CalendarExampleComponent {
   selectedDate: Date;
-  bankDate: Date;
+  nextBankDate: Date;
   disableDatesArray: Array<Date> = new Array();
 
   constructor() {
-    var date1 = new Date('2019-04-15');
-    var date2 = new Date('2019-05-20');
-    var date3 = new Date('2019-05-21');
-    var date4 = new Date('2019-06-25');
+    var date1 = new Date('2019-04-18');
+    var date2 = new Date('2019-04-19');
+    var date3 = new Date('2019-04-22');
+    var date4 = new Date('2019-05-01');
+    var date5 = new Date('2019-05-17');
+    var date6 = new Date('2019-05-30');
+    var date7 = new Date('2019-06-05');
+    var date8 = new Date('2019-06-10');
 
-    this.disableDatesArray.push(date1, date2, date3, date4);
+    this.disableDatesArray.push(date1, date2, date3, date4, date5, date6, date7, date8);
   }
 
   onDateChange(selectedDate: Date) {
@@ -26,10 +30,10 @@ export class CalendarExampleComponent {
 
   nextBankDay() {
     var date = new Date('2019-05-23');
-    this.bankDate = date;
+    this.nextBankDate = date;
   }
 
-  today() {
-    this.bankDate = new Date();
+  immediately() {
+    this.nextBankDate = new Date();
   }
 }
