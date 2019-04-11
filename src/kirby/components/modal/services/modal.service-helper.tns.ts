@@ -5,7 +5,7 @@ import { ViewContainerRef } from '@angular/core';
 
 import { ModalComponent } from '~/kirby/components/modal/modal.component';
 import { ModalConfig } from '~/kirby/components/modal/config/modal-config';
-import { ModalCloserService } from './modal-closer-service';
+import { ModalCloserService } from './modal-closer.service';
 import { ModalConfigHelper } from '../helpers/modal-config-helper';
 
 @Injectable()

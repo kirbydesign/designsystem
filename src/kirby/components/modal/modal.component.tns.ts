@@ -14,7 +14,7 @@ import { StackLayout } from 'tns-core-modules/ui/layouts/stack-layout/stack-layo
 import { ModalStack } from 'nativescript-windowed-modal';
 
 import { ModalConfig } from './config/modal-config';
-import { ModalCloserService } from './services/modal-closer-service';
+import { ModalCloserService } from './services/modal-closer.service';
 import { ModalNestedComponentHelper } from './helpers/modal-nested-component-helper';
 import { ModalConfigHelper } from './helpers/modal-config-helper';
 

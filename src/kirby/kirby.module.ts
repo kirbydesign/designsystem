@@ -6,7 +6,7 @@ import { IonicModule } from '@ionic/angular';
 import { declarations } from './kirby.common';
 import { InfiniteScrollDirective } from './components/list/directives/infinite-scroll.directive';
 import { ModalComponent } from './components/modal/modal.component';
-import { ModalServiceHelper } from './components/modal/services/modal-service-helper';
+import { ModalServiceHelper } from './components/modal/services/modal.service-helper';
 import { ModalNestedComponentHelper } from './components/modal/helpers/modal-nested-component-helper';
 
 @NgModule({

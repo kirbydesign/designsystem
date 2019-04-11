@@ -1,6 +1,6 @@
 import { Injectable, ViewContainerRef } from '@angular/core';
 
-import { ModalServiceHelper } from './modal-service-helper';
+import { ModalServiceHelper } from './modal.service-helper';
 import { ModalConfig } from '~/kirby/components/modal/config/modal-config';
 
 @Injectable()

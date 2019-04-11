@@ -1,10 +1,10 @@
-@import "../themes/colors";
-@import "../base/functions";
+@import '../themes/colors';
+@import '../base/functions';
 
 @function _get-kirby-color($variant) {
   $map: $kirby-colors;
-  @if map-has-key($map, "kirby-" + $variant) {
-    @return map-get($map, "kirby-" + $variant);
+  @if map-has-key($map, 'kirby-' + $variant) {
+    @return map-get($map, 'kirby-' + $variant);
   }
 }
 
@@ -18,7 +18,7 @@
 
 @mixin ionic-color-map($ionic-variant, $kirby-variant: $ionic-variant) {
   $kirby-base: _get-kirby-color($kirby-variant);
-  $kirby-contrast: _get-kirby-color($kirby-variant + "-contrast");
+  $kirby-contrast: _get-kirby-color($kirby-variant + '-contrast');
   --ion-color-#{$ionic-variant}: var(--kirby-#{$kirby-variant});
   --ion-color-#{$ionic-variant}-rgb: #{_get-rgb-values($kirby-base)};
   --ion-color-#{$ionic-variant}-contrast: var(--kirby-#{$kirby-variant}-contrast);
@@ -28,13 +28,13 @@
 }
 
 :root {
-  @include ionic-color-map("primary");
-  @include ionic-color-map("secondary");
-  @include ionic-color-map("tertiary");
+  @include ionic-color-map('primary');
+  @include ionic-color-map('secondary');
+  @include ionic-color-map('tertiary');
 
-  @include ionic-color-map("success");
-  @include ionic-color-map("warning", "alert");
-  @include ionic-color-map("danger");
+  @include ionic-color-map('success');
+  @include ionic-color-map('warning', 'alert');
+  @include ionic-color-map('danger');
 }
 
 // Kirby modal styles
@@ -44,17 +44,17 @@
   --width: 600px;
   --height: 300px;
   position: fixed;
-}
-
-.kirby-modal .modal-wrapper {
-  margin-top: 150px;
-  --overflow: visible;
-}
-
-.kirby-modal .ion-page {
-  overflow: visible;
-}
-
-.kirby-modal ion-content {
-  --ion-background-color: transparent;
+  
+  .modal-wrapper {
+    margin-top: 150px;
+    --overflow: visible;
+  }
+  
+  .ion-page {
+    overflow: visible;
+  }
+  
+  ion-content {
+    --ion-background-color: transparent;
+  }
 }

@@ -3,11 +3,11 @@
 .modal-wrapper {
   width: 100%;
   height: 100%;
-  padding-top: 30;
+  padding-top: size('l');
 }
 
 .modal {
-  padding: 10;
+  padding: size('xs');
   border-top-left-radius: $border-radius;
   border-top-right-radius: $border-radius;
   background-color: white;

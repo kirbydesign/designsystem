@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { ModalService } from '~/kirby/components/modal/services/modal-service';
+import { ModalService } from '~/kirby/components/modal/services/modal.service';
 import { ModalUidProvider } from '~/kirby/components/modal/modal-uid-provider';
 
 @Component({
