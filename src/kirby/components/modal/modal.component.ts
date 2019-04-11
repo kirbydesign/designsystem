@@ -26,7 +26,7 @@ export class ModalComponent implements OnInit {
     private params: NavParams,
     private modalNestedComponentHelper: ModalNestedComponentHelper,
     private componentFactoryResolver: ComponentFactoryResolver,
-    public vcRef: ViewContainerRef,
+    private vcRef: ViewContainerRef,
     private renderer: Renderer2
   ) {
     this.config = ModalConfigHelper.processOptionalValues(this.params.get('config'));

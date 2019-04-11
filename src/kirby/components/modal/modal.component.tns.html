@@ -1,16 +1,14 @@
-<ModalStack dismissEnabled="true" (showingModally)="showModally($event)">
-    <GridLayout class="modal-wrapper">
-        <StackLayout class="modal" orientation="vertical" verticalAlignment="bottom">
-            <GridLayout rows="auto" columns="*" class="title-bar">
-                <Label row="0" verticalAlignment="center" horizontalAlignment="{{ config.titleHorizontalAlignment }}"
-                    text="{{ config.title }}"></Label>
-                <AbsoluteLayout row="0" verticalAlignment="center" horizontalAlignment="right">
-                    <kirby-floating-action-button [showShadow]="false" (tap)="dismissModal()">
-                        <kirby-icon [name]="config.closeIconName"></kirby-icon>
-                    </kirby-floating-action-button>
-                </AbsoluteLayout>
-            </GridLayout>
-            <ScrollView class="content-scrollview" #container></ScrollView>
-        </StackLayout>
-    </GridLayout>
+<ModalStack class="modal-wrapper" dismissEnabled="true" (showingModally)="showModally($event)">
+    <StackLayout class="modal" orientation="vertical" verticalAlignment="bottom">
+        <GridLayout rows="auto" columns="*" class="title-bar">
+            <Label row="0" verticalAlignment="center" horizontalAlignment="{{ config.titleHorizontalAlignment }}"
+                text="{{ config.title }}"></Label>
+            <AbsoluteLayout row="0" verticalAlignment="center" horizontalAlignment="right">
+                <kirby-floating-action-button [showShadow]="false" (tap)="dismissModal()">
+                    <kirby-icon [name]="config.closeIconName"></kirby-icon>
+                </kirby-floating-action-button>
+            </AbsoluteLayout>
+        </GridLayout>
+        <ScrollView class="content-scrollview" #container></ScrollView>
+    </StackLayout>
 </ModalStack>

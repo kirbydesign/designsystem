@@ -15,8 +15,8 @@ import { ModalStack } from 'nativescript-windowed-modal';
 
 import { ModalConfig } from './config/modal-config';
 import { ModalCloserService } from './services/modal-closer-service';
-import { ModalConfigHelper } from './helpers/modal-config-helper';
 import { ModalNestedComponentHelper } from './helpers/modal-nested-component-helper';
+import { ModalConfigHelper } from './helpers/modal-config-helper';
 
 const style: any = require('sass-extract-loader!./modal.component.scss');
 
@@ -28,20 +28,18 @@ export class ModalComponent extends ContentView implements OnInit {
   @ViewChild('container') viewContainer: ElementRef;
   config: ModalConfig;
   modalStack: ModalStack;
-  uid: number;
 
   constructor(
     private modalCloserService: ModalCloserService,
     private params: ModalDialogParams,
     private modalNestedComponentHelper: ModalNestedComponentHelper,
     private componentFactoryResolver: ComponentFactoryResolver,
-    public vcRef: ViewContainerRef,
+    private vcRef: ViewContainerRef,
     private renderer: Renderer2
   ) {
     super();
-    this.config = ModalConfigHelper.processOptionalValues(params.context);
-    this.uid = params.context.uid;
-    this.modalCloserService.registerModalCloseRef(this.uid, params.closeCallback);
+    this.config = ModalConfigHelper.processOptionalValues(this.params.context);
+    this.modalCloserService.registerModalCloseRef(this.config.uid, this.params.closeCallback);
   }
 
   ngOnInit() {
@@ -58,7 +56,6 @@ export class ModalComponent extends ContentView implements OnInit {
   showModally(args: ShownModallyData): void {
     this.modalStack = <ModalStack>args.object;
     const stackLayout = <StackLayout>args.object;
-    stackLayout.backgroundColor = new Color(0, 0, 0, 0);
     this.animateModal(stackLayout);
   }
 
@@ -93,7 +90,7 @@ export class ModalComponent extends ContentView implements OnInit {
           });
         });
     }
-    // this is a default behaviour in iOS
+    // TODO: by default iOS slides up, however it slides together with the dimmed background, hence needs fixing
   }
 
   // TODO: move these common functions in a utility class

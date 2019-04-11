@@ -6,6 +6,7 @@ import { ViewContainerRef } from '@angular/core';
 import { ModalComponent } from '~/kirby/components/modal/modal.component';
 import { ModalConfig } from '~/kirby/components/modal/config/modal-config';
 import { ModalCloserService } from './modal-closer-service';
+import { ModalConfigHelper } from '../helpers/modal-config-helper';
 
 @Injectable()
 export class ModalServiceHelper {
@@ -24,7 +25,8 @@ export class ModalServiceHelper {
         viewContainerRef: vcRef,
         closeCallback: callback,
         context: config,
-        dimAmount: 0.1,
+        // TODO: dimAmount does not work currently, investigate on https://github.com/mukaschultze/nativescript-windowed-modal
+        dimAmount: config.dim ? config.dim : ModalConfigHelper.defaultDim,
       } as ExtendedShowModalOptions)
       .then((data) => {
         if (callback) {

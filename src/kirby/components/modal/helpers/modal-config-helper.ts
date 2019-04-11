@@ -1,17 +1,21 @@
 import { ModalConfig } from '../config/modal-config';
 
 export class ModalConfigHelper {
+  static readonly defaultTitleHorizontalAlignment = 'center';
+  static readonly defaultCloseIconName = 'close';
+  static readonly defaultDim = 0.5;
+
   static processOptionalValues(config: ModalConfig): ModalConfig {
     if (!config.titleHorizontalAlignment) {
-      config.titleHorizontalAlignment = 'center';
+      config.titleHorizontalAlignment = ModalConfigHelper.defaultTitleHorizontalAlignment;
     }
 
     if (!config.closeIconName) {
-      config.closeIconName = 'close';
+      config.closeIconName = ModalConfigHelper.defaultCloseIconName;
     }
 
     if (!config.dim) {
-      config.dim = 0.5;
+      config.dim = ModalConfigHelper.defaultDim;
     }
     return config;
   }
