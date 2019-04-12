@@ -57,7 +57,6 @@
     "nativescript-webview-interface": "^1.4.2",
     "prismjs": "^1.15.0",
     "reflect-metadata": "~0.1.8",
-    "reveal-plugin-ios": "file:../reveal-plugin-ios",
     "rxjs": "^6.3.3",
     "tns-core-modules": "^5.2.0",
     "zone.js": "^0.8.4"

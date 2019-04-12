@@ -9,12 +9,6 @@ import { BaseListComponent } from '~/app/examples/list/base-list.component';
 })
 export class ListSectionExampleComponent extends BaseListComponent {
   getSectionName(item: any): string {
-    if (item.detail > 0) {
-      return 'Positive';
-    } else if (item.detail < 0) {
-      return 'Negative';
-    } else {
-      return 'Nul';
-    }
+    return item.detail > 0 ? 'Positive' : 'Negative';
   }
 }
