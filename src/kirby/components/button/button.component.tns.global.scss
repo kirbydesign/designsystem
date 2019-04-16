@@ -19,7 +19,7 @@ Button[kirby-button] {
     border-radius: 5;
   }
 
-  &[disabled] {
+  &:disabled {
     background-color: get-color('kirby-grey-3');
     border-color: get-color('kirby-grey-3');
     pointer-events: none;

@@ -38,7 +38,7 @@
     opacity: 0.8;
   }
 
-  &[disabled] {
+  &:disabled {
     background-color: get-color('kirby-grey-3');
     border-color: get-color('kirby-grey-3');
     pointer-events: none;
