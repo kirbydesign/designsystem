@@ -1,5 +1,5 @@
-import { ModalConfigHelper } from './modal-config-helper';
-import { ModalConfig } from '../config/modal-config';
+import { ModalConfigHelper } from './modal-config.helper';
+import { ModalConfig } from './modal-config';
 
 describe('ModalConfigHelper', () => {
   let mockModalConfig: ModalConfig;

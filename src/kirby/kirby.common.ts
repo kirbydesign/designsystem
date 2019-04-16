@@ -27,6 +27,9 @@ import { SegmentedControlComponent } from './components/segmented-control/segmen
 import { ChipComponent } from './components/chip/chip.component';
 import { SegmentedChipControlComponent } from './components/segment/segmented-chip-control/segmented-chip-control.component';
 import { BadgeComponent } from './components/badge/badge.component';
+import { ModalController } from './components/modal/services/modal.controller';
+import { IModalController } from './components/modal/services/modal.controller.interface';
+import { ModalHelper } from './components/modal/services/modal.helper';
 
 export const declarations = [
   CardComponent,
@@ -56,4 +59,10 @@ export const declarations = [
   ChipComponent,
   SegmentedChipControlComponent,
   BadgeComponent,
+];
+
+export const providerDeclarations: any[] = [
+  ModalController,
+  { provide: IModalController, useExisting: ModalController },
+  ModalHelper,
 ];

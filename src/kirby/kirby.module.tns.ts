@@ -6,15 +6,12 @@ import { NativeScriptUIListViewModule } from 'nativescript-ui-listview/angular';
 import { overrideModalViewMethod, ModalStack } from 'nativescript-windowed-modal';
 import { registerElement } from 'nativescript-angular';
 
-import { declarations } from './kirby.common';
+import { declarations, providerDeclarations } from './kirby.common';
 // tslint:disable-next-line:max-line-length
 import { NativeScriptDoughnutChartComponent } from './components/nativescript-only/doughnut-chart/doughnut-chart.component.tns-only';
 // tslint:disable-next-line:max-line-length
 import { NativeScriptLineChartComponent } from './components/nativescript-only/line-chart/line-chart.component.tns-only';
 import { ModalComponent } from './components/modal/modal.component';
-import { ModalCloserService } from './components/modal/services/modal-closer.service';
-import { ModalServiceHelper } from './components/modal/services/modal.service-helper';
-import { ModalNestedComponentHelper } from './components/modal/helpers/modal-nested-component-helper';
 
 overrideModalViewMethod();
 registerElement('ModalStack', () => ModalStack);
@@ -33,7 +30,7 @@ const nativeScriptDeclarations = [
     NativeScriptUIChartModule,
     NativeScriptUIListViewModule,
   ],
-  providers: [ModalCloserService, ModalServiceHelper, ModalNestedComponentHelper],
+  providers: providerDeclarations,
   entryComponents: [ModalComponent],
   declarations: nativeScriptDeclarations,
   exports: nativeScriptDeclarations,

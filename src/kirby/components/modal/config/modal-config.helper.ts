@@ -1,4 +1,4 @@
-import { ModalConfig } from '../config/modal-config';
+import { ModalConfig } from './modal-config';
 
 export class ModalConfigHelper {
   static readonly defaultTitleHorizontalAlignment = 'center';

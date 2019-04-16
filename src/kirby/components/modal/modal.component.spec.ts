@@ -1,20 +1,24 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MockComponent } from 'ng-mocks';
-import { ModalController, NavParams } from '@ionic/angular';
+import { NavParams } from '@ionic/angular';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { By } from '@angular/platform-browser';
 
 import { FloatingActionButtonComponent } from '../floating-action-button/floating-action-button.component';
 import { IconComponent } from './../icon/icon.component';
 import { ModalComponent } from './modal.component';
-import { ModalNestedComponentHelper } from './helpers/modal-nested-component-helper';
+import { IModalController } from './services/modal.controller.interface';
 
 describe('ModalComponent', () => {
   let component: ModalComponent;
   let fixture: ComponentFixture<ModalComponent>;
 
   beforeEach(async(() => {
-    const modalControllerSpy = jasmine.createSpyObj('ModalController', ['dismiss']);
+    const modalControllerSpy = jasmine.createSpyObj('IModalController', [
+      'showModal',
+      'hideModal',
+      'registerModalCloseRef',
+    ]);
 
     const navParamsSpy = jasmine.createSpyObj('NavParams', {
       get: {
@@ -23,10 +27,6 @@ describe('ModalComponent', () => {
       },
     });
 
-    const modalNestedComponentHelperSpy = jasmine.createSpyObj('ModalNestedComponentHelper', [
-      'appendComponent',
-    ]);
-
     TestBed.configureTestingModule({
       declarations: [
         ModalComponent,
@@ -34,9 +34,8 @@ describe('ModalComponent', () => {
         MockComponent(FloatingActionButtonComponent),
       ],
       providers: [
-        { provide: ModalController, useValue: modalControllerSpy },
+        { provide: IModalController, useValue: modalControllerSpy },
         { provide: NavParams, useValue: navParamsSpy },
-        { provide: ModalNestedComponentHelper, useValue: modalNestedComponentHelperSpy },
       ],
     }).compileComponents();
     TestBed.overrideModule(BrowserDynamicTestingModule, {

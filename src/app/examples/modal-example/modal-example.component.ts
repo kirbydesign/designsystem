@@ -1,16 +1,15 @@
 import { Component, ViewContainerRef } from '@angular/core';
 
 import { ModalConfig } from '~/kirby/components/modal/config/modal-config';
-import { ModalService } from '~/kirby/components/modal/services/modal.service';
+import { ModalController } from '~/kirby/components/modal/services/modal.controller';
 import { FirstEmbeddedModalExampleComponent } from './first-embedded-modal-example/first-embedded-modal-example.component';
 
 @Component({
   selector: 'kirby-modal-example',
   templateUrl: './modal-example.component.html',
-  providers: [ModalService],
 })
 export class ModalExampleComponent {
-  constructor(private modalService: ModalService, private vcRef: ViewContainerRef) {}
+  constructor(private modalController: ModalController, private vcRef: ViewContainerRef) {}
 
   openModal() {
     const config: ModalConfig = {
@@ -19,7 +18,7 @@ export class ModalExampleComponent {
       component: FirstEmbeddedModalExampleComponent,
     };
 
-    let modalId = this.modalService.showModal(config, this.vcRef, this.testCallback);
+    this.modalController.showModal(config, this.vcRef, this.testCallback);
   }
 
   testCallback(modalData: any) {

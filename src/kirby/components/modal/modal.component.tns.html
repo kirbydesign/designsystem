@@ -9,6 +9,8 @@
                 </kirby-floating-action-button>
             </AbsoluteLayout>
         </GridLayout>
-        <ScrollView class="content-scrollview" #container></ScrollView>
+        <ScrollView class="content-scrollview">
+            <ng-container *ngComponentOutlet="config.component"></ng-container>
+        </ScrollView>
     </StackLayout>
 </ModalStack>
