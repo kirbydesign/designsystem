@@ -1,0 +1,51 @@
+@import "../../scss/web-imports";
+
+$border-radius: 20px;
+
+:host {
+  display: inline-block;
+}
+
+ion-segment {
+  --color: #{get-color("kirby-grey-9")};
+  --color-checked: #{get-color("kirby-white")};
+  --background: #{get-color("kirby-white")};
+  --background-checked: #{get-color("kirby-grey-9")};
+  --background-hover: #{get-color("kirby-white")};
+  border-radius: $border-radius;
+  background: get-color("kirby-white");
+}
+
+ion-segment-button {
+  min-height: size("xl");
+  height: size("xl");
+  font-weight: font-weight("normal");
+  font-size: font-size("s");
+  text-transform: none;
+  border-radius: $border-radius;
+  position: relative;
+  --border-style: none;
+  --padding-start: #{size("m")};
+  --padding-end: #{size("m")};
+
+  &.segment-button-checked:hover {
+    --background-hover: #{get-color("kirby-grey-9")};
+  }
+
+  &:focus-within {
+    outline-color: -webkit-focus-ring-color;
+    outline-style: auto;
+  }
+}
+
+.segment-btn-wrapper {
+  position: relative;
+  display: inherit;
+}
+
+kirby-badge {
+  position: absolute;
+  top: -#{size("xs")};
+  right: #{size("xs")};
+  z-index: z("segmentBadge");
+}

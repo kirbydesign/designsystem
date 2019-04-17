@@ -1,6 +1,7 @@
 import { ExamplesModule } from '../examples/examples.module';
 import { AvatarShowcaseComponent } from './avatar-showcase/avatar-showcase.component';
 import { ButtonShowcaseComponent } from './button-showcase/button-showcase.component';
+import { FloatingActionButtonShowcaseComponent } from './floating-action-button-showcase/floating-action-button-showcase.component';
 import { CardShowcaseComponent } from './card-showcase/card-showcase.component';
 import { FontsShowcaseComponent } from './fonts-showcase/fonts-showcase.component';
 import { GridShowcaseComponent } from './grid-showcase/grid-showcase.component';
@@ -13,6 +14,11 @@ import { ShowcaseRoutingModule } from './showcase-routing.module';
 import { ColorsShowcaseComponent } from './colors-showcase/colors-showcase.component';
 import { LineChartShowcaseComponent } from './line-chart-showcase/line-chart-showcase.component';
 import { SpinnerShowcaseComponent } from './spinner-showcase/spinner-showcase.component';
+import { SegmentedControlShowcaseComponent } from './segmented-control-showcase/segmented-control-showcase.component';
+import { ChipShowcaseComponent } from './chip-showcase/chip-showcase.component';
+import { BadgeShowcaseComponent } from './badge-showcase/badge-showcase.component';
+import { IconShowcaseComponent } from './icon-showcase/icon-showcase.component';
+import { SegmentedChipControlShowcaseComponent } from './segmented-chip-control-showcase/segmented-chip-control-showcase.component';
 
 export const COMPONENT_IMPORTS: any[] = [ExamplesModule, ShowcaseRoutingModule];
 
@@ -20,6 +26,7 @@ export const COMPONENT_EXPORTS: any[] = [
   CardShowcaseComponent,
   ColorsShowcaseComponent,
   ButtonShowcaseComponent,
+  FloatingActionButtonShowcaseComponent,
   ListShowcaseComponent,
   ListLoadOnDemandShowcaseComponent,
   GridShowcaseComponent,
@@ -29,6 +36,11 @@ export const COMPONENT_EXPORTS: any[] = [
   FontsShowcaseComponent,
   LineChartShowcaseComponent,
   SpinnerShowcaseComponent,
+  SegmentedControlShowcaseComponent,
+  ChipShowcaseComponent,
+  SegmentedChipControlShowcaseComponent,
+  BadgeShowcaseComponent,
+  IconShowcaseComponent,
 ];
 
 export const COMPONENT_DECLARATIONS: any[] = [...COMPONENT_EXPORTS, ShowcaseComponent];

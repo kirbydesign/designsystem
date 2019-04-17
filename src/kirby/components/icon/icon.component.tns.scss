@@ -1,0 +1,37 @@
+@import '../../scss/native-imports';
+ 
+Label {
+    font-family: "Ionicons", "ionicons";
+
+    &.small {
+        font-size: 16px;
+    }
+
+    &.large {
+        font-size: 32px;
+    }
+
+    &.primary {
+        color: get-color('kirby-primary');
+    }
+    
+    &.secondary {
+        color: get-color('kirby-secondary');
+    }
+    
+    &.tertiary {
+        color: get-color('kirby-tertiary');
+    }
+
+    &.alert {
+        color: get-color('kirby-alert');
+    }
+
+    &.success {
+        color: get-color('kirby-success');
+    }
+
+    &.danger {
+        color: get-color('kirby-danger');
+    }
+}   

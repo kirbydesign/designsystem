@@ -1,0 +1,9 @@
+@import "../../../kirby/scss/web-imports";
+
+.badge-examples {
+  display: inline-flex;
+  kirby-badge + kirby-badge {
+    margin-left: size("s");
+  }
+}
+

@@ -1,0 +1,18 @@
+<div class="example">
+  <kirby-icon-example></kirby-icon-example>
+  <kirby-html-viewer [html]="exampleHtml"></kirby-html-viewer>
+  <h4>Properties:</h4>
+  <kirby-showcase-properties [properties]="properties"></kirby-showcase-properties>
+
+  <div class="performance">
+    <div class="title">
+      <ion-icon name="information-circle"></ion-icon>
+      <h4>Performance:</h4>
+    </div>
+
+    <div class="info">
+      <p>A bonus with the web component is that it uses Intersection Observer to only request icons which are viewable by the users (icons above the fold). The component will dynamically load an SVG for each icon, so your app is only requesting the icons that you need.</p>
+      <p>Also note that only visible icons are loaded, and icons which are "below the fold" and hidden from the user's view do not make fetch requests for the svg resource. <a href="https://ionicons.com/usage">Read more</a></p>
+    </div>
+  <div>
+</div>

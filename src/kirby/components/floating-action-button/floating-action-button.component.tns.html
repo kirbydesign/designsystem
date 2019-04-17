@@ -1,0 +1,7 @@
+<GridLayout class="fab-wrapper">
+    <StackLayout class="fab-shadow" (loaded)="onViewLoaded($event)">
+        <StackLayout class="fab" [ngClass]="{ 'disabled' : disabled }">
+            <ng-content></ng-content>
+        </StackLayout>
+    </StackLayout>
+</GridLayout>
