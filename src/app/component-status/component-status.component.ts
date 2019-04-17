@@ -20,8 +20,12 @@ import { componentStatusGhostItems } from './component-status-ghost-items';
 })
 export class ComponentStatusComponent implements OnInit {
   isLoading = true;
+  githubStatusLoaded = false;
+  githubComponentRequestsLoaded = false;
   gitHubError = false;
-  sortedItems: ComponentStatusItem[];
+  items = componentStatusItems;
+  flattenedItems = this.flattenItems(componentStatusItems);
+  sortedItems: ComponentStatusItem[] = [];
   items$: Observable<ComponentStatusItem[]>;
   searchTerm$ = new BehaviorSubject<string>('');
   uxStatusEnum = ItemUXStatus;
@@ -33,11 +37,84 @@ export class ComponentStatusComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    this.sortedItems = this.sortItems(componentStatusItems);
     this.items$ = this.searchTerm$.pipe(
       map((searchTerm) => this.filterItems(this.sortedItems, searchTerm))
     );
-    this.getCurrentGithubStatus(this.sortedItems);
+    this.loadGithubComponentRequests();
+    this.setCurrentGithubStatus();
+  }
+
+  private initializeItems() {
+    if (this.githubStatusLoaded && this.githubComponentRequestsLoaded) {
+      this.sortedItems = this.sortItems(this.items);
+      this.isLoading = false;
+    }
+  }
+
+  private loadGithubComponentRequests() {
+    console.time('Get Github Issues');
+    this.getStatusItemsFromGithubIssues()
+      .pipe(first())
+      .subscribe((githubItems) => {
+        this.items = this.items.concat(githubItems);
+        this.githubComponentRequestsLoaded = true;
+        console.timeEnd('Get Github Issues');
+        this.initializeItems();
+      });
+  }
+
+  private getStatusItemsFromGithubIssues() {
+    return this.getGithubIssues().pipe(
+      map((issues) => {
+        return issues
+          .filter((issue) => !this.hasStatusItem(issue))
+          .filter((issue) => this.hasComponentTitleLabel(issue))
+          .map((issue) => this.mapGithubIssueToStatusItem(issue));
+      })
+    );
+  }
+
+  private mapGithubIssueToStatusItem(issue: any): ComponentStatusItem {
+    const zeplinUrl = this.getZeplinUrl(issue);
+    return {
+      component: this.getComponentTitle(issue),
+      priority: 0,
+      ux: {
+        version: 0.0,
+        status: zeplinUrl ? ItemUXStatus.inProgress : ItemUXStatus.underConsideration,
+        zeplinUrl: zeplinUrl,
+      },
+      code: {
+        version: 0.0,
+        status: ItemCodeStatus.underConsideration,
+        githubIssueNo: issue.number,
+      },
+    };
+  }
+
+  private hasStatusItem(issue: { number: number }) {
+    return !!this.flattenedItems.find((item) => item.code.githubIssueNo === issue.number);
+  }
+
+  private getComponentTitle(issue: { labels: any[] }): string {
+    const componentTitleLabel = this.getComponentTitleLabel(issue);
+    return componentTitleLabel.name.split('component:')[1];
+  }
+
+  private hasComponentTitleLabel(issue: { labels: any[] }) {
+    return !!this.getComponentTitleLabel(issue);
+  }
+
+  private getComponentTitleLabel(issue: { labels: any[] }) {
+    return issue.labels.find((label) => {
+      return label.name.indexOf('component:') > -1;
+    });
+  }
+
+  private getZeplinUrl(issue: { body: string }): string {
+    const matches = issue.body.match(/https:\/\/zpl\.io\/[a-z,0-9]{7}/i);
+    const url = matches ? matches[0] : null;
+    return url;
   }
 
   public isUnderConsiderationOrNotPlanned(item: ComponentStatusItem) {
@@ -151,27 +228,22 @@ export class ComponentStatusComponent implements OnInit {
       }),
     };
     const url = environment.githubApi + '/repos/kirbydesign/designsystem/issues?labels=component';
-    return this.http.get(url, options);
+    return this.http.get<any[]>(url, options);
   }
 
-  private getCurrentGithubStatus(items: ComponentStatusItem[]) {
-    const flattenedItems = this.flattenItems(items);
+  private setCurrentGithubStatus() {
     console.time('Get Github Status');
     this.getGithubProjectStatus()
       .pipe(first())
       .subscribe((issues) => {
         issues.forEach((issue) => {
-          flattenedItems
+          this.flattenedItems
             .filter((item) => item.code.githubIssueNo === issue.number)
-            .forEach((item) => {
-              item.code.status = issue.status;
-              item.code.livestatus = true;
-            });
+            .forEach((item) => (item.code.status = issue.status));
         });
         console.timeEnd('Get Github Status');
-        this.sortedItems = this.sortItems(componentStatusItems);
-        this.searchTerm$.next(this.searchTerm$.value);
-        this.isLoading = false;
+        this.githubStatusLoaded = true;
+        this.initializeItems();
       });
   }
 
