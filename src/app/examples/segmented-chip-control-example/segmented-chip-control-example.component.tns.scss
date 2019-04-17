@@ -2,12 +2,12 @@
 
 .segment-example{
   padding-top:20;
-  background: get-color('kirby-grey-2');
+  background: get-color('kirby-medium');
   .segment-data {
       height: 300;
       margin-top: 20;
       border-radius: 10;
-      background: get-color("kirby-white");
+      background: get-color('kirby-contrast-light');
       Label {
           margin-top:50;
           text-align: center;

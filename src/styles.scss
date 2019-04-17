@@ -48,11 +48,11 @@
 body, html {
   margin: 0;
   padding: 0;
-  background-color: get-color("kirby-white");
+  background-color: get-color('kirby-contrast-light');
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   font-size: font-size("n");
-  color: get-color("kirby-grey-9");  
+  color: get-color("kirby-contrast-dark");  
 }
 
 *, 

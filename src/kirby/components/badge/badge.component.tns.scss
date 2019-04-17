@@ -4,7 +4,7 @@
   font-size: font-size("xxs");
   border-radius: size("xs");
   background-color: get-color('kirby-danger');
-  color: get-color('kirby-white', $kirby-colors, true);
+  color: get-color('kirby-contrast-light', $kirby-colors, true);
   height: size("s");
   min-width: size("s");
   padding-left: size("xxs");
@@ -32,12 +32,12 @@
   }
 
   &[colortype='alert'] {
-    color: get-color('kirby-alert-contrast');
-    background-color: get-color('kirby-alert');
+    color: get-color('kirby-warning-contrast');
+    background-color: get-color('kirby-warning');
   }
   
   &[colortype='danger'] {
-    color: get-color('kirby-white');
+    color: get-color('kirby-contrast-light');
     background-color: get-color('kirby-danger');
   }
 }

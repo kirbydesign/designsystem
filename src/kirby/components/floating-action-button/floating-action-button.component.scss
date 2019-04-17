@@ -9,7 +9,7 @@ ion-fab-button {
     height: 64px;    
 
     &.disabled {
-        --background: #{get-color('kirby-grey-4')};
+        --background: #{get-color('kirby-step-25')};
         --box-shadow: 0;
     }
 
