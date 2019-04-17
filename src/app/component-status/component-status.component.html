@@ -11,6 +11,13 @@
 <div *ngIf="gitHubError" class="github-error">
     <ion-icon name="alert" color="danger"></ion-icon> Couldn't fetch component status from GitHub. The status shown below might not be up-to-date.</div>
 
+<div class="filter">
+    <ion-item>
+        <ion-label>Only show components in progress:</ion-label>
+        <ion-toggle [value]="[codeStatusEnum.ready,codeStatusEnum.notCurrentlyPlanned]" (ionChange)="toggleExcluded($event)"></ion-toggle>
+  </ion-item>
+</div>
+
 <table class="component-status" *ngIf="!isLoading; else loading">
     <thead>
         <tr>

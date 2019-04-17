@@ -30,6 +30,7 @@ export class ComponentStatusComponent implements OnInit {
   searchTerm$ = new BehaviorSubject<string>('');
   uxStatusEnum = ItemUXStatus;
   codeStatusEnum = ItemCodeStatus;
+  excludedStatuses: ItemCodeStatus[] = [];
   newIssueUrl =
     environment.githubBaseUrl +
     '/issues/new?labels=component&template=component-request.md&title=%5BCOMPONENT%5D+';
@@ -38,10 +39,17 @@ export class ComponentStatusComponent implements OnInit {
 
   ngOnInit() {
     this.items$ = this.searchTerm$.pipe(
-      map((searchTerm) => this.filterItems(this.sortedItems, searchTerm))
+      map((searchTerm) => this.filterItems(this.sortedItems, searchTerm, this.excludedStatuses))
     );
     this.loadGithubComponentRequests();
     this.setCurrentGithubStatus();
+  }
+
+  public toggleExcluded(event) {
+    const checked = event.detail.checked;
+    const excludedStatuses = event.detail.value as ItemCodeStatus[];
+    this.excludedStatuses = checked ? excludedStatuses : [];
+    this.searchTerm$.next(this.searchTerm$.value);
   }
 
   private initializeItems() {
@@ -134,7 +142,10 @@ export class ComponentStatusComponent implements OnInit {
     return items.sort((a: ComponentStatusItem, b: ComponentStatusItem) => {
       let order = this.sortByStatus(a, b);
       if (order === 0) {
-        order = this.sortByPriority(a, b);
+        // Don't sort by priority when ready:
+        if (a.code.status != ItemCodeStatus.ready || b.code.status != ItemCodeStatus.ready) {
+          order = this.sortByPriority(a, b);
+        }
         if (order === 0) {
           order = this.sortByComponentName(a, b);
         }
@@ -168,10 +179,19 @@ export class ComponentStatusComponent implements OnInit {
     return 0;
   }
 
-  private filterItems(items: ComponentStatusItem[], searchTerm: string): ComponentStatusItem[] {
+  private filterItems(
+    items: ComponentStatusItem[],
+    searchTerm: string,
+    excludedStatuses: ItemCodeStatus[]
+  ): ComponentStatusItem[] {
     const regex = new RegExp(searchTerm, 'i');
     return items
-      .filter((item) => this.matchItem(item, regex))
+      .filter((item) => {
+        return (
+          !excludedStatuses.find((status) => status === item.code.status) &&
+          this.matchItem(item, regex)
+        );
+      })
       .concat(this.getGhostItems(searchTerm));
   }
 
