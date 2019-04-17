@@ -6,33 +6,45 @@ import { IModalController } from './modal.controller.interface';
 
 @Injectable()
 export class ModalController implements IModalController {
-  private modalCloseRefs: Function[] = [];
+  private modals: { close: (data?: any) => {} }[] = [];
 
   constructor(private modalHelper: ModalHelper) {}
 
-  public showModal(config: ModalConfig, vcRef: ViewContainerRef, callback?: Function): void {
-    let modal: Promise<any> = this.modalHelper.showModal(config, vcRef, this);
-    modal.then((data) => {
+  public showModal(
+    config: ModalConfig,
+    vcRef: ViewContainerRef,
+    onCloseModal?: (data?: any) => any
+  ): void {
+    const registerModalWrapper: (modal: { close: (data?: any) => {} }) => void = (modal) => {
+      this.registerModal(modal);
+    };
+
+    const modalCloseEvent: Promise<any> = this.modalHelper.showModal(
+      config,
+      vcRef,
+      registerModalWrapper
+    );
+    modalCloseEvent.then((data) => {
       this.forgetTopModal();
-      if (callback) {
-        callback(data);
+      if (onCloseModal) {
+        onCloseModal(data);
       }
     });
   }
 
-  public registerModalCloseRef(closeModal: () => {}): void {
-    this.modalCloseRefs.push(closeModal);
+  public registerModal(modal: { close: (data?: any) => {} }): void {
+    this.modals.push(modal);
   }
 
   public hideModal(data?: any): void {
-    let closeFunc = this.modalCloseRefs[this.modalCloseRefs.length - 1];
-    if (!closeFunc) {
+    let modal = this.modals[this.modals.length - 1];
+    if (!modal) {
       throw new Error('No modals are currently registered');
     }
-    closeFunc(data);
+    modal.close(data);
   }
 
   private forgetTopModal(): void {
-    this.modalCloseRefs.pop();
+    this.modals.pop();
   }
 }

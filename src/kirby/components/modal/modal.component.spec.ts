@@ -9,7 +9,7 @@ import { IconComponent } from './../icon/icon.component';
 import { ModalComponent } from './modal.component';
 import { IModalController } from './services/modal.controller.interface';
 
-describe('ModalComponent', () => {
+fdescribe('ModalComponent', () => {
   let component: ModalComponent;
   let fixture: ComponentFixture<ModalComponent>;
 

@@ -6,17 +6,12 @@ import { ViewContainerRef } from '@angular/core';
 import { ModalComponent } from '../modal.component';
 import { ModalConfig } from '../config/modal-config';
 import { ModalConfigHelper } from '../config/modal-config.helper';
-import { IModalController } from './modal.controller.interface';
 
 @Injectable()
 export class ModalHelper {
   constructor(private modalDialogService: ModalDialogService) {}
 
-  public async showModal(
-    config: ModalConfig,
-    vcRef: ViewContainerRef,
-    _: IModalController
-  ): Promise<any> {
+  public async showModal(config: ModalConfig, vcRef: ViewContainerRef, _: any): Promise<any> {
     return await this.modalDialogService.showModal(ModalComponent, {
       viewContainerRef: vcRef,
       closeCallback: null,

@@ -1,7 +1,7 @@
 import { ModalConfigHelper } from './modal-config.helper';
 import { ModalConfig } from './modal-config';
 
-describe('ModalConfigHelper', () => {
+fdescribe('ModalConfigHelper', () => {
   let mockModalConfig: ModalConfig;
 
   beforeEach(() => {

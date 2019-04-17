@@ -1,6 +1,6 @@
 import { ModalController } from './modal.controller';
 
-describe('modalController', () => {
+fdescribe('modalController', () => {
   const modalHelperSpy = jasmine.createSpyObj('ModalHelper', ['showModal']);
   let modalController: ModalController;
   let expectedError = new Error('No modals are currently registered');
@@ -20,7 +20,7 @@ describe('modalController', () => {
     });
 
     it('should succesfully invoke a registered callback', () => {
-      modalController.registerModalCloseRef(mockCallback);
+      modalController.registerModal({ close: mockCallback });
       expect(() => {
         modalController.hideModal();
       }).not.toThrow();

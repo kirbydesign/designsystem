@@ -3,7 +3,6 @@ import { ModalController as IonicModalController } from '@ionic/angular';
 
 import { ModalConfig } from '../config/modal-config';
 import { ModalComponent } from '../modal.component';
-import { IModalController } from './modal.controller.interface';
 
 @Injectable()
 export class ModalHelper {
@@ -12,7 +11,7 @@ export class ModalHelper {
   public async showModal(
     config: ModalConfig,
     _vcRef: ViewContainerRef,
-    modalController: IModalController
+    registerModal: (modal: { close: (data?: any) => {} }) => void
   ): Promise<any> {
     const modal = await this.ionicModalController.create({
       component: ModalComponent,
@@ -20,7 +19,7 @@ export class ModalHelper {
       componentProps: { config: config },
     });
 
-    modalController.registerModalCloseRef(modal.dismiss);
+    registerModal({ close: modal.dismiss });
 
     modal.present();
     return modal.onDidDismiss();
