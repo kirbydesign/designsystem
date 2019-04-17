@@ -60,6 +60,7 @@
     <ng-container *ngTemplateOutlet="codeStatusTemplate; context: {$implicit: code?.status}"></ng-container>
     <a *ngIf="code?.githubIssueNo" [href]="getGithubIssueUrl(code.githubIssueNo)">
         {{code?.status}}
+        <ion-icon *ngIf="code?.githubIssueNo" name="open"></ion-icon>
     </a>
     <span *ngIf="!code?.githubIssueNo">
         {{code?.status}}
