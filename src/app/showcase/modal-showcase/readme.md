@@ -1,0 +1,1 @@
+![Modal component flow chart](./ModalComponent_flow_chart.png?raw=true "Modal component flow chart")
