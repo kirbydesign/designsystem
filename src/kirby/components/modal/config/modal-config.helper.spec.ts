@@ -1,7 +1,7 @@
 import { ModalConfigHelper } from './modal-config.helper';
 import { ModalConfig } from './modal-config';
 
-fdescribe('ModalConfigHelper', () => {
+describe('ModalConfigHelper', () => {
   let mockModalConfig: ModalConfig;
 
   beforeEach(() => {
@@ -21,7 +21,7 @@ fdescribe('ModalConfigHelper', () => {
   it('should not overwrite provided optional fields', () => {
     mockModalConfig.dim = 0.1;
     mockModalConfig.titleHorizontalAlignment = 'left';
-    mockModalConfig.closeIconName = 'arrow';
+    mockModalConfig.closeIconName = 'arrow-back';
     let updatedModalConfig = ModalConfigHelper.processOptionalValues(mockModalConfig);
     expect(updatedModalConfig.dim).not.toEqual(0.5);
     expect(updatedModalConfig.titleHorizontalAlignment).not.toEqual('center');

@@ -19,7 +19,7 @@ export class ModalShowcaseComponent {
     },
     {
       name: 'titleHorizontalAlignment',
-      description: 'Indicates the title horizontal alignment',
+      description: 'The horizontal alignment of the title',
       defaultValue: 'center',
       inputValues: ['left', 'center'],
     },
@@ -31,14 +31,14 @@ export class ModalShowcaseComponent {
     },
     {
       name: 'dim',
-      description: 'Decides the dimness of the background once the modal is open',
+      description:
+        'The transparency of the background of the modal. 0 is fully transparent, while 1 is fully visible.',
       defaultValue: '0.5',
       inputValues: ['number (0..1)'],
     },
     {
       name: 'component',
-      description:
-        'The nested component class which will be rendered inside the modal. It is recommended that your nested components implement the EmbeddedModal interface',
+      description: 'The component which will be rendered inside the modal.',
       defaultValue: '',
       inputValues: ['Component'],
     },

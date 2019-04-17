@@ -63,6 +63,7 @@ export const declarations = [
 
 export const providerDeclarations: any[] = [
   ModalController,
+  // the provider below is used to fix a cyclic reference problem inside ModalComponent.ts
   { provide: IModalController, useExisting: ModalController },
   ModalHelper,
 ];

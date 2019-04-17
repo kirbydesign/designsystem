@@ -17,11 +17,10 @@ export class ModalComponent extends ContentView {
   constructor(private modalController: IModalController, private params: ModalDialogParams) {
     super();
     this.config = ModalConfigHelper.processOptionalValues(this.params.context);
-    // this.modalController.registerModalCloseFunc(this.params.closeCallback);
     this.modalController.registerModal({ close: this.params.closeCallback });
   }
 
-  showModally(args: ShownModallyData): void {
+  onShowingModally(args: ShownModallyData): void {
     this.view = <View>args.object;
     this.animateModal();
   }

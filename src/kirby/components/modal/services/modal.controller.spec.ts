@@ -1,6 +1,6 @@
 import { ModalController } from './modal.controller';
 
-fdescribe('modalController', () => {
+describe('modalController', () => {
   const modalHelperSpy = jasmine.createSpyObj('ModalHelper', ['showModal']);
   let modalController: ModalController;
   let expectedError = new Error('No modals are currently registered');
@@ -13,7 +13,7 @@ fdescribe('modalController', () => {
   });
 
   describe('modalController', () => {
-    it('should throw an error when closing a modal, while closeFuncRefs list is empty', () => {
+    it('should throw an error when closing a modal, when no modals have been registered', () => {
       expect(() => {
         modalController.hideModal();
       }).toThrow(expectedError);

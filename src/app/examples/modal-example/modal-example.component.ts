@@ -18,10 +18,10 @@ export class ModalExampleComponent {
       component: FirstEmbeddedModalExampleComponent,
     };
 
-    this.modalController.showModal(config, this.vcRef, this.testCallback);
+    this.modalController.showModal(config, this.vcRef, this.onModalClose);
   }
 
-  testCallback(modalData: any) {
+  onModalClose(modalData: any): void {
     console.log('Callback from FirstEmbeddedModalExampleComponent:');
     console.log(`Data received: ${JSON.stringify(modalData)}`);
   }
