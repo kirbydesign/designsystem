@@ -62,13 +62,13 @@ $main-colors: (
 
 @function create-stepper() {
   $scale-count: 5;
-  $step-color: #f4f4f4;
-  $steps: ('kirby-step-5': $step-color);
-  @while $scale-count < 95  {
-    $scale-count: $scale-count + 5;
+  $step-color: #ffffff;
+  $steps: ();
+  @while $scale-count < 100  {
     $steps:  map-merge(
-      ('kirby-step-#{$scale-count}': mix($kirby-contrast-dark, $step-color, $scale-count - 5)) 
-    , $steps)
+      ('kirby-step-#{$scale-count}': mix($kirby-contrast-dark, $step-color, $scale-count)) 
+    , $steps);
+    $scale-count: $scale-count + 5;
   }
   @return $steps;
 }
