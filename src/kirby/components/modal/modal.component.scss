@@ -1,0 +1,27 @@
+@import "../../scss/web-imports";
+
+// Global modal styling can be found at scss/web/_ionic.scss
+
+.modal-content {
+  padding: 15px;
+  height: 100%;
+
+  .text-center {
+    text-align: center;
+  }
+
+  .text-left {
+    text-align: left;
+  }
+
+  .dismiss-button {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+  }
+
+  .inner-component {
+    max-height: 85%;
+    overflow: auto;
+  }
+}

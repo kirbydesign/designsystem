@@ -19,3 +19,25 @@
     @include ionic-color-map('warning');
     @include ionic-color-map('danger');
 }
+
+// Kirby modal styles
+.kirby-modal {
+  --background: whitesmoke;
+  --border-radius: 15px;
+  --width: 600px;
+  --height: 300px;
+  position: fixed;
+
+  .modal-wrapper {
+    margin-top: 150px;
+    --overflow: visible;
+  }
+
+  .ion-page {
+    overflow: visible;
+  }
+
+  ion-content {
+    --ion-background-color: transparent;
+  }
+}
