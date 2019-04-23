@@ -10,8 +10,8 @@
   }
 
   &[colortype='secondary'] {
-    --ion-color-base: #{get-color('kirby-secondary')};
-    --ion-color-contrast: #{get-color('kirby-secondary-contrast')};
+    --ion-color-base: #{get-color('kirby-contrast-light')};
+    --ion-color-contrast: #{get-color('kirby-contrast-dark')};
   }
 
   &[colortype='tertiary'] {

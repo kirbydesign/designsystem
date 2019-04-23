@@ -46,11 +46,13 @@
   @return _get-map-prop($font-weight, $key);
 }
 
-@function get-color($variant, $map: $kirby-colors, $getValueOnly: false) {
+@function get-color($variant, $getValueOnly: false, $map: $kirby-colors) {
   $value: _get-map-prop($map, $variant);
-  @if ($native == true or $getValueOnly) {
+  @if $getValueOnly == true or $native == true {
+    @debug 'REturning value...';
     @return $value;
   } @else {
+    @debug 'REturning css variables...';
     @return unquote('var(--' + $variant+ ')');
   }
 }

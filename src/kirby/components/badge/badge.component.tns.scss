@@ -4,7 +4,7 @@
   font-size: font-size("xxs");
   border-radius: size("xs");
   background-color: get-color('kirby-danger');
-  color: get-color('kirby-contrast-light', $kirby-colors, true);
+  color: get-color('kirby-contrast-light', true, $kirby-colors);
   height: size("s");
   min-width: size("s");
   padding-left: size("xxs");

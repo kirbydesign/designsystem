@@ -115,14 +115,14 @@
         font-size: 18px;
 
         &[name="open"] {
-            color: var(--kirby-step-85);
+            color: get-color('kirby-step-85');
         }
     }
     
     ion-badge {
         vertical-align: sub;
         margin-left: 0.5rem;
-        --background: var(--kirby-grey-5);
-        --color: var(--kirby-contrast-light);
+        --background: #{get-color(kirby-step-50, true)};
+        --color: #{get-color(kirby-contrast-light, true)};
     }
 }
