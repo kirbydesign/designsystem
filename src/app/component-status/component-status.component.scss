@@ -64,12 +64,12 @@
         &.component:not(.expanded),
         &.subcomponent:last-child
         {
-            border-bottom: .1rem solid var(--kirby-step-20);
+            border-bottom: .1rem solid get-color('kirby-step-20');
         }
 
         &.subcomponent {
             vertical-align: middle;
-            border-top: .1rem dashed var(--kirby-step-20);
+            border-top: .1rem dashed get-color('kirby-step-20');
             color: get-color('kirby-step-75');
             font-size: font-size("s");
     
@@ -122,7 +122,7 @@
     ion-badge {
         vertical-align: sub;
         margin-left: 0.5rem;
-        --background: #{get-color(kirby-step-50, true)};
-        --color: #{get-color(kirby-contrast-light, true)};
+        --background: #{get-color(kirby-step-50)};
+        --color: #{get-color(kirby-contrast-light)};
     }
 }
