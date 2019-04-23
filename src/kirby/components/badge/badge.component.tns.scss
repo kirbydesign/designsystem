@@ -1,0 +1,50 @@
+@import "../../scss/native-imports";
+
+.badge { 
+  font-size: font-size("xxs");
+  border-radius: size("xs");
+  background-color: get-color('kirby-danger');
+  color: get-color('kirby-white', $kirby-colors, true);
+  height: size("s");
+  min-width: size("s");
+  padding-left: size("xxs");
+  padding-right: size("xxs");    
+  white-space: nowrap;
+  
+  &[colortype='primary']  {
+    color: get-color('kirby-primary-contrast');
+    background-color: get-color('kirby-primary');
+  }
+  
+  &[colortype='secondary'] {
+    color: get-color('kirby-secondary-contrast');
+    background-color: get-color('kirby-secondary');
+  }
+
+  &[colortype='tertiary'] {
+    color: get-color('kirby-tertiary-contrast');
+    background-color: get-color('kirby-tertiary');
+  }
+
+  &[colortype='success'] {
+    color: get-color('kirby-success-contrast');
+    background-color: get-color('kirby-success');
+  }
+
+  &[colortype='alert'] {
+    color: get-color('kirby-alert-contrast');
+    background-color: get-color('kirby-alert');
+  }
+  
+  &[colortype='danger'] {
+    color: get-color('kirby-white');
+    background-color: get-color('kirby-danger');
+  }
+}
+
+.badge-label {
+  height: 100%; // Needed for IOS
+}
+
+
+

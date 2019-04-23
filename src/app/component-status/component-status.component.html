@@ -31,7 +31,9 @@
                 </td>
             </tr>
             <tr class="subcomponent" *ngFor="let subitem of item.children">
-                <td>{{subitem.component}}</td>
+                <td>
+                    <ng-container *ngTemplateOutlet="componentTemplate; context: {$implicit: subitem}"></ng-container>
+                </td>
                 <td [class.someday-maybe]="subitem.ux?.status === uxStatusEnum.underConsideration">
                     <ng-container *ngTemplateOutlet="uxTemplate; context: {$implicit: subitem.ux}"></ng-container>
                 </td>
