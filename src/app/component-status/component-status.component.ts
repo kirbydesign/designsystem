@@ -267,7 +267,7 @@ export class ComponentStatusComponent implements OnInit {
       });
   }
 
-  private flattenItems(items: ComponentStatusItem[]) {
+  private flattenItems(items: ComponentStatusItem[]): ComponentStatusItem[] {
     const concat = (x, y) => x.concat(y);
     const flatMap = (arr, f) => arr.map(f).reduce(concat, []);
     return flatMap(items, (item) => [item, ...(item.children ? item.children : [])]);
