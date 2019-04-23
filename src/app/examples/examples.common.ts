@@ -10,6 +10,7 @@ import { FontsExampleComponent } from './fonts-example/fonts-example.component';
 import { SpinnerExampleComponent } from './spinner-example/spinner-example.component';
 import { IconExampleComponent } from './icon-example/icon-example.component';
 import { CalendarExampleComponent } from './calendar-example/calendar-example.component';
+import { CalendarCardExampleComponent } from './calendar-example/calendar-card-example.component';
 
 export const COMPONENT_DECLARATIONS: any[] = [
   ButtonExampleComponent,
@@ -24,4 +25,5 @@ export const COMPONENT_DECLARATIONS: any[] = [
   SpinnerExampleComponent,
   IconExampleComponent,
   CalendarExampleComponent,
+  CalendarCardExampleComponent,
 ];

@@ -1,10 +1,8 @@
 @import '../../scss/web-imports';
 
 #calendar {
-  width: 380px;
-  background-color: white;
-  border-radius: 1em;
-  padding: 0.5em;
+  width: 320px;
+  background-color: transparent;
   overflow: hidden;
 }
 
@@ -14,21 +12,34 @@ table.calendar-table {
   user-select: none;
   outline: none !important;
   -webkit-tap-highlight-color: transparent;
+  border-spacing: 0;
+}
+
+tr, td {
+  border-style: none;
+  padding: 0;
+  line-height: 2em;
+  height: 0;
 }
 
 thead.calendar-table-header {
+  padding: 0.5em;
   border-bottom: 1px solid lightgray;
 }
 
+tbody.calendar-table-body {
+  padding: 0.5em;
+}
+
 .month-and-year, th, td {
-  background-color: white;
+  background-color: transparent;
 }
 
 .month-and-year {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 0.7em;
+  padding: 0.5em;
 }
 
 .month-name {
@@ -59,6 +70,7 @@ div.cell-content span {
 }
 
 button {
+  background-color: transparent;
   outline: none;
   border: none;
   cursor: pointer;
@@ -75,21 +87,21 @@ div.cell-content.selectable {
 
 div.cell-content.weekend,
 div.cell-content.disabled {
-  color: #ccc;
+  color: get-color('kirby-grey-5');
 }
 
 div.cell-content.today {
-  color: #242424;
-  background: get-color('kirby-grey-5');
+  color: get-color('kirby-grey-10');
+  background-color: get-color('kirby-grey-5');
 }
 
 div.cell-content.selected {
-  color: black;
+  color: get-color('kirby-grey-10');
   background-color: get-color('kirby-primary');
 }
 
 div.cell-content.past {
-  color: #ccc;
+  color: get-color('kirby-grey-5');
   opacity: 0.5;
 }
 
@@ -99,6 +111,6 @@ div.cell-content:not(.current-month) {
 }
 
 div.cell-content.selectable:not(.selected):hover {
-  color: black;
-  background-color: #d2d2d2;
+  color: get-color('kirby-grey-10');
+  background-color: get-color('kirby-grey-3');
 }

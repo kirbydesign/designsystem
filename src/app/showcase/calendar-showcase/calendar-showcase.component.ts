@@ -11,6 +11,7 @@ declare var require: any;
 })
 export class CalendarShowcaseComponent {
   exampleHtml: string = require('../../examples/calendar-example/calendar-example.component.html');
+  exampleWithCardHtml: string = require('../../examples/calendar-example/calendar-card-example.component.html');
   properties: ShowcaseProperty[] = [
     {
       name: 'disableWeekends',

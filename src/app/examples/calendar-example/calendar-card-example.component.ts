@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'kirby-calendar-example',
-  templateUrl: './calendar-example.component.html',
-  styleUrls: ['./calendar-example.component.scss'],
+  selector: 'kirby-calendar-card-example',
+  templateUrl: './calendar-card-example.component.html',
+  styleUrls: ['./calendar-card-example.component.scss'],
 })
-export class CalendarExampleComponent {
+export class CalendarCardExampleComponent {
   selectedDate: Date;
+  currentDate: Date;
   disableDatesArray: Array<Date> = new Array();
 
   constructor() {
@@ -25,5 +26,14 @@ export class CalendarExampleComponent {
   onDateChange(selectedDate: Date) {
     console.log('onDateChange: ' + selectedDate);
     this.selectedDate = selectedDate;
+  }
+
+  nextBankDay() {
+    var date = new Date('2019-05-23');
+    this.currentDate = date;
+  }
+
+  immediately() {
+    this.currentDate = new Date();
   }
 }
