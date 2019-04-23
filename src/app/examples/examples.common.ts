@@ -37,5 +37,5 @@ export const COMPONENT_DECLARATIONS: any[] = [
   ChipExampleComponent,
   BadgeExampleComponent,
   IconExampleComponent,
-  CheckboxExampleComponent
+  CheckboxExampleComponent,
 ];

@@ -4,15 +4,12 @@ declare var require: any;
 @Component({
   selector: 'kirby-checkbox-showcase',
   templateUrl: './checkbox-showcase.component.html',
-  styleUrls: ['./checkbox-showcase.component.scss']
+  styleUrls: ['./checkbox-showcase.component.scss'],
 })
 export class CheckboxShowcaseComponent implements OnInit {
-
   exampleHtml: string = require('../../examples/checkbox-example/checkbox-example.component.html');
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

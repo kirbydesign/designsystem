@@ -11,9 +11,8 @@ describe('CheckboxExampleComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CheckboxExampleComponent ]
-    })
-    .compileComponents();
+      declarations: [CheckboxExampleComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

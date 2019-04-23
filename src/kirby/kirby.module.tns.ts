@@ -30,7 +30,7 @@ const nativeScriptDeclarations = [
     NativeScriptRouterModule,
     NativeScriptUIChartModule,
     NativeScriptUIListViewModule,
-    TNSCheckBoxModule
+    TNSCheckBoxModule,
   ],
   providers: providerDeclarations,
   entryComponents: [ModalComponent],
@@ -38,4 +38,4 @@ const nativeScriptDeclarations = [
   exports: nativeScriptDeclarations,
   schemas: [NO_ERRORS_SCHEMA],
 })
-export class KirbyModule { }
+export class KirbyModule {}

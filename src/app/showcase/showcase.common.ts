@@ -44,7 +44,7 @@ export const COMPONENT_EXPORTS: any[] = [
   SegmentedChipControlShowcaseComponent,
   BadgeShowcaseComponent,
   IconShowcaseComponent,
-  CheckboxShowcaseComponent
+  CheckboxShowcaseComponent,
 ];
 
 export const COMPONENT_DECLARATIONS: any[] = [...COMPONENT_EXPORTS, ShowcaseComponent];
