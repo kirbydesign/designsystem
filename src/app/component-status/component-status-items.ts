@@ -309,9 +309,9 @@ export const componentStatusItems: ComponentStatusItem[] = [
       status: ItemUXStatus.inProgress,
     },
     code: {
-      version: 0.0,
-      status: ItemCodeStatus.planned,
-      githubIssueNo: 111,
+      version: 0.5,
+      status: ItemCodeStatus.ready,
+      cookbookUrl: 'showcase/modal',
     },
     children: [
       {
