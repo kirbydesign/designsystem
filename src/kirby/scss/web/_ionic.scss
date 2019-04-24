@@ -59,3 +59,8 @@
     --ion-background-color: transparent;
   }
 }
+
+.backdrop-no-scroll {
+  overflow: hidden;
+  scroll-margin-top: 0;
+}
