@@ -14,10 +14,12 @@
     @include ionic-color-map('primary');
     @include ionic-color-map('secondary');
     @include ionic-color-map('tertiary');
-
     @include ionic-color-map('success');
     @include ionic-color-map('warning');
     @include ionic-color-map('danger');
+    @include ionic-color-map('light');
+    @include ionic-color-map('medium');
+    @include ionic-color-map('dark');
 }
 
 // Kirby modal styles
