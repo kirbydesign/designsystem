@@ -10,6 +10,14 @@
     margin-bottom: 1rem;
 }
 
+.github-error {
+    font-style: italic;
+    ion-icon[name="alert"] {
+        font-size: 24px;
+        vertical-align: text-bottom;   
+    }
+}
+
 .component-status {
     width: 100%;
     border-collapse: collapse;
