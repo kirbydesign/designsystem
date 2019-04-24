@@ -24,7 +24,7 @@
     --ion-color-contrast: #{get-color('kirby-success-contrast')};
   }
   
-  &[colortype='alert'] {
+  &[colortype='warning'] {
     --ion-color-base: #{get-color('kirby-warning')};
     --ion-color-contrast: #{get-color('kirby-warning-contrast')};
   }
