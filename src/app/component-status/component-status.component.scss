@@ -64,13 +64,13 @@
         &.component:not(.expanded),
         &.subcomponent:last-child
         {
-            border-bottom: .1rem solid get-color('kirby-step-20');
+            border-bottom: .1rem solid get-color('kirby-medium');
         }
 
         &.subcomponent {
             vertical-align: middle;
-            border-top: .1rem dashed get-color('kirby-step-20');
-            color: get-color('kirby-step-75');
+            border-top: .1rem dashed get-color('kirby-medium');
+            color: get-color('kirby-dark-tint');
             font-size: font-size("s");
     
             td {
@@ -81,13 +81,13 @@
             }
     
             a {
-                color: get-color('kirby-step-75');
+                color: get-color('kirby-dark-tint');
             }
             
         }
 
         &.someday-maybe {
-            color: get-color('kirby-step-75');
+            color: get-color('kirby-dark-tint');
             font-style: italic;
         }   
     
@@ -105,7 +105,7 @@
         }
 
         &.someday-maybe {
-            color: get-color('kirby-step-75');
+            color: get-color('kirby-dark-tint');
             font-style: italic;
         }
     }
@@ -115,14 +115,14 @@
         font-size: 18px;
 
         &[name="open"] {
-            color: get-color('kirby-step-85');
+            color: get-color('kirby-contrast-dark');
         }
     }
     
     ion-badge {
         vertical-align: sub;
         margin-left: 0.5rem;
-        --background: #{get-color(kirby-step-50)};
+        --background: #{get-color(kirby-dark-tint)};
         --color: #{get-color(kirby-contrast-light)};
     }
 }

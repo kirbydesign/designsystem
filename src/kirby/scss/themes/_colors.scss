@@ -1,3 +1,4 @@
+$kirby-base-color: #f2f2f2;
 $kirby-contrast-light: #fff;
 $kirby-contrast-dark: #1c1c1c;
 
@@ -60,25 +61,12 @@ $main-colors: (
   @return $color-list;
 }
 
-@function create-stepper() {
-  $scale-count: 5;
-  $step-color: #ffffff;
-  $steps: ();
-  @while $scale-count < 100  {
-    $steps:  map-merge(
-      ('kirby-step-#{$scale-count}': mix($kirby-contrast-dark, $step-color, $scale-count)) 
-    , $steps);
-    $scale-count: $scale-count + 5;
-  }
-  @return $steps;
-}
-
 $kirby-colors: generate-colors();
 $kirby-colors: map-merge(
   (
+    'kirby-base-color': $kirby-base-color,
     'kirby-contrast-light': $kirby-contrast-light,
     'kirby-contrast-dark': $kirby-contrast-dark
   ),
   $kirby-colors
 );
-$kirby-colors: map-merge(create-stepper(), $kirby-colors); 

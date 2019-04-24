@@ -20,7 +20,7 @@ code {
   code {
     padding: 0.25rem 0 0 0;
     display: block;
-    color: get-color('kirby-step-70');
+    color: get-color('kirby-dark');
     background-color: transparent;
   }
 
@@ -96,5 +96,5 @@ code {
   background-color: get-color('kirby-contrast-light');
   padding: 0.5rem 1rem;
   margin-right: 1rem;
-  border: 1px solid get-color('kirby-step-15');
+  border: 1px solid get-color('kirby-medium');
 }

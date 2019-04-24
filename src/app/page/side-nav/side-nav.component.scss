@@ -80,7 +80,7 @@ $page-max-width: 1366px;
     //border-top: 1px solid red;
     &:hover,
     &:focus {
-      background-color: get-color('kirby-step-10');
+      background-color: get-color('kirby-medium');
     }
     &.is-selected {
       color: get-color('kirby-primary');

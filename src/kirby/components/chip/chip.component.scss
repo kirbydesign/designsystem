@@ -12,6 +12,6 @@ $min-chip-width: 50px;
   min-width: $min-chip-width;
   cursor: pointer;
   &:hover,&.is-selected {
-      background-color:get-color('kirby-step-25');
+      background-color:get-color('kirby-medium');
     }
 }
