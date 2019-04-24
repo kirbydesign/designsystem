@@ -31,7 +31,7 @@
     background-color: get-color('kirby-success');
   }
 
-  &[colortype='alert'] {
+  &[colortype='warning'] {
     color: get-color('kirby-warning-contrast');
     background-color: get-color('kirby-warning');
   }
