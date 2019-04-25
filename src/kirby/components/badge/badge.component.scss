@@ -24,13 +24,13 @@
     --ion-color-contrast: #{get-color('kirby-success-contrast')};
   }
   
-  &[colortype='alert'] {
-    --ion-color-base: #{get-color('kirby-alert')};
-    --ion-color-contrast: #{get-color('kirby-alert-contrast')};
+  &[colortype='warning'] {
+    --ion-color-base: #{get-color('kirby-warning')};
+    --ion-color-contrast: #{get-color('kirby-warning-contrast')};
   }
 
   &[colortype='danger'] {
     --ion-color-base: #{get-color('kirby-danger')};
-    --ion-color-contrast: #{get-color('kirby-white')};
+    --ion-color-contrast: #{get-color('kirby-contrast-light')};
   }
 }

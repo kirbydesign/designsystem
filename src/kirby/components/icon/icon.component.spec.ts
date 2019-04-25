@@ -80,11 +80,11 @@ describe('IconComponent', () => {
       expect(el.componentInstance.color).toBe('tertiary');
     });
 
-    it('should be rendered as alert when color is set to alert', () => {
-      component.colortype = 'alert';
+    it('should be rendered as warning when color is set to warning', () => {
+      component.colortype = 'warning';
       fixture.detectChanges();
       var el = fixture.debugElement.query(By.directive(ionic.IonIcon));
-      expect(el.componentInstance.color).toBe('alert');
+      expect(el.componentInstance.color).toBe('warning');
     });
 
     it('should be rendered as success when color is set to success', () => {

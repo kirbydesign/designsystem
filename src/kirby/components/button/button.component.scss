@@ -28,9 +28,9 @@
   }
 
   &[colortype='secondary'] {
-    background-color: get-color('kirby-secondary');
-    border-color: get-color('kirby-secondary');
-    color: get-color('kirby-secondary-contrast');
+    background-color: get-color('kirby-contrast-light');
+    border-color: get-color('kirby-contrast-light');
+    color: get-color('kirby-contrast-dark');
   }
 
   &:hover,
