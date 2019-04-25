@@ -24,7 +24,7 @@ tr, td {
 
 thead.calendar-table-header {
   padding: 0.5em;
-  border-bottom: 1px solid lightgray;
+  border-bottom: 1px solid get-color('kirby-grey-2');
 }
 
 tbody.calendar-table-body {

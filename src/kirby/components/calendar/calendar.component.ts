@@ -24,7 +24,6 @@ export interface CalendarOptions {
   displayDate: Date;
   weekDays: string[];
   month: any[][];
-  monthNames: string[];
 }
 
 @Component({
@@ -44,21 +43,14 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   private selectedDay: CalendarDay;
   private _displayDate: Date;
   public month: any[][];
-  public weekDays = ['M', 'T', 'O', 'T', 'F', 'L', 'S'];
-  public monthNames = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ];
+  public weekDays = [0, 1, 2, 3, 4, 5, 6].map((index) =>
+    moment()
+      .locale('da')
+      .weekday(index)
+      .format('dd')
+      .substr(0, 1)
+      .toUpperCase()
+  );
 
   constructor(private calendarHelper: CalendarHelper) {
     moment().format('YYYY-MM-DD');
@@ -66,7 +58,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
 
   set displayDate(date: Date) {
     this._displayDate = date;
-    this.refresh();
+    this.updateCalendar();
   }
 
   get displayDate(): Date {
@@ -83,11 +75,11 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   get currentMonth(): string {
-    return this.monthNames[this.displayDate.getMonth()];
+    return moment.months()[this.displayDate.getMonth()];
   }
 
   ngOnInit() {
-    this.refresh();
+    this.updateCalendar();
   }
 
   ngAfterViewInit() {
@@ -100,19 +92,22 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
       displayDate: this.displayDate,
       weekDays: this.weekDays,
       month: this.month,
-      monthNames: this.monthNames,
     });
   }
 
   ngOnChanges(changes: any) {
-    const currentDate = changes.currentDate.currentValue;
-    if (currentDate) {
-      this.displayDate = currentDate;
-      this.selectCurrentDateDay(currentDate);
+    if (this.currentDate !== undefined) {
+      const currentDate = changes.currentDate.currentValue;
+
+      if (currentDate) {
+        this.displayDate = currentDate;
+        this.selectCurrentDate(currentDate);
+        this.calendarHelper.selectCurrentDate(currentDate);
+      }
     }
   }
 
-  refresh() {
+  updateCalendar() {
     const momentDate = moment(this.displayDate);
     const monthStart = momentDate.startOf('month').toDate();
     const weekDay = CalendarComponent.fixWeekday(monthStart.getDay());
@@ -154,7 +149,6 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   public selectDate(selectedDate: Date) {
-    console.log('selectedDate:' + selectedDate + (selectedDate instanceof Date));
     if (selectedDate instanceof Date) {
       this.dateChange.emit(selectedDate);
     }
@@ -163,8 +157,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   public selectCalendarDate(day) {
     if (day.selectable) {
       this.selectedDay = day;
-      this.resetSelectedDays();
-      day.selected = true;
+      this.displayDate = day.date.toDate();
       this.dateChange.emit(day.date.toDate());
     }
   }
@@ -185,20 +178,11 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
     return this.disablePastDates && moment(this.displayDate).isSame(new Date(), 'month');
   }
 
-  private resetSelectedDays() {
-    this.month.forEach(function(week) {
-      week.forEach(function(day) {
-        day.selected = false;
-      });
-    });
-  }
-
-  private selectCurrentDateDay(date) {
+  private selectCurrentDate(date) {
     var self = this;
     this.month.forEach(function(week) {
       week.forEach(function(day) {
         if (moment(day.date).isSame(moment(date), 'day')) {
-          day.selected = true;
           self.selectCalendarDate(day);
         }
       });

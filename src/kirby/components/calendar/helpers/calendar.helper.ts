@@ -3,6 +3,7 @@ import { ElementRef } from '@angular/core';
 import { CalendarOptions } from '../calendar.component';
 
 export class CalendarHelper {
+  private iframe: HTMLIFrameElement;
   public init(calendarContainer: ElementRef, options: CalendarOptions) {
     if (
       calendarContainer &&
@@ -10,9 +11,9 @@ export class CalendarHelper {
       calendarContainer.nativeElement instanceof HTMLIFrameElement &&
       calendarContainer.nativeElement.contentWindow
     ) {
-      const iframe = <HTMLIFrameElement>calendarContainer.nativeElement;
-      iframe.onload = () => {
-        iframe.contentWindow.postMessage(
+      this.iframe = <HTMLIFrameElement>calendarContainer.nativeElement;
+      this.iframe.onload = () => {
+        this.iframe.contentWindow.postMessage(
           {
             type: 'kirbyCalendarInit',
             disableWeekends: options.disableWeekends,
@@ -22,7 +23,6 @@ export class CalendarHelper {
             displayDate: options.displayDate,
             weekDays: options.weekDays,
             month: JSON.stringify(options.month),
-            monthNames: options.monthNames,
           },
           '*'
         );
@@ -44,5 +44,17 @@ export class CalendarHelper {
       evt.data.type === 'kirbyCalendarSelectedDate' &&
       evt.data.date instanceof Date
     );
+  }
+
+  public selectCurrentDate(date: Date) {
+    if (this.iframe) {
+      this.iframe.contentWindow.postMessage(
+        {
+          type: 'kirbyCalendarSelectCurrentDate',
+          currentDate: date,
+        },
+        '*'
+      );
+    }
   }
 }

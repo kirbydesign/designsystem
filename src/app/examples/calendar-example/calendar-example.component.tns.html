@@ -1,3 +1,13 @@
 <StackLayout>
-    <kirby-calendar (dateChange)="onDateChange($event)"></kirby-calendar>
+    <kirby-calendar 
+        [disableWeekends]="true" 
+        [disablePastDates]="true" 
+        [disableDates]="disableDatesArray" 
+        [currentDate]="currentDate" 
+        (dateChange)="onDateChange($event)">
+    </kirby-calendar>
+
+    <div *ngIf="selectedDate">
+        Selected Date: {{ selectedDate | date }}
+    </div>
 </StackLayout>

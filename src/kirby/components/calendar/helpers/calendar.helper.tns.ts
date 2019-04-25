@@ -12,6 +12,7 @@ declare const UIColor;
 
 export class CalendarHelper {
   calendarWebViewInterface;
+  webViewReady = false;
 
   public init(calendarContainer: ElementRef, options: CalendarOptions) {
     if (calendarContainer && calendarContainer.nativeElement) {
@@ -27,10 +28,17 @@ export class CalendarHelper {
     }
   }
 
+  public selectCurrentDate(date: Date) {
+    if (this.webViewReady) {
+      this.calendarWebViewInterface.emit('selectCurrentDate', date);
+    }
+  }
+
   private initializeWebView(webView: WebView, options: CalendarOptions) {
     if (webView) {
       webView.on(WebView.loadFinishedEvent, (args: LoadEventData) => {
         if (!args.error) {
+          this.webViewReady = true;
           this.setupWebViewForPlatform(webView);
           this.emitDataToWebView(options);
           this.addWebViewEventListener(options.selectDate);
@@ -46,7 +54,7 @@ export class CalendarHelper {
   }
 
   private emitDataToWebView(options: CalendarOptions) {
-    this.calendarWebViewInterface.emit('updateCalendar', {
+    const calendarOptions = {
       type: 'kirbyCalendarInit',
       disableWeekends: options.disableWeekends,
       disablePastDates: options.disablePastDates,
@@ -55,13 +63,12 @@ export class CalendarHelper {
       displayDate: options.displayDate,
       weekDays: options.weekDays,
       month: JSON.stringify(options.month),
-      monthNames: options.monthNames,
-    });
+    };
+    this.calendarWebViewInterface.emit('updateCalendarOptions', calendarOptions);
   }
 
   private addWebViewEventListener(selectDateCallback: (date: Date) => {}) {
     this.calendarWebViewInterface.on('dateSelected', (selectedDate: string) => {
-      console.log('Got selected date...' + selectedDate);
       selectDateCallback(new Date(selectedDate));
     });
   }

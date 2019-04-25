@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Calender</title>
+        <title>Calendar</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <style>
             @font-face { 
@@ -10,8 +10,7 @@
                 font-style: normal;
                 font-weight: 800;
                 font-display: swap;
-                src:
-                    url("/assets/fonts/roboto-regular-webfont.woff2") format("woff2");
+                src: url("/assets/fonts/roboto-regular-webfont.woff2") format("woff2");
             }
 
             body {
@@ -20,9 +19,8 @@
             }
             
             #calendar {
-                background-color: white;
-                border-radius: 1em;
-                padding: 0.5em;
+                width: 320px;
+                background-color: transparent;
                 overflow: hidden;
             }
 
@@ -32,30 +30,39 @@
                 user-select: none;
                 outline: none !important;
                 -webkit-tap-highlight-color: transparent;
+                border-spacing: 0;
+            }
+
+            tr, td {
+                border-style: none;
+                padding: 0;
+                line-height: 2em;
+                height: 0;
             }
 
             thead.calendar-table-header {
-                border-bottom: 1px solid lightgray;
+                padding: 0.5em;
+                border-bottom: 1px solid #f2f2f2;
+            }
+
+            tbody.calendar-table-body {
+                padding: 0.5em;
             }
 
             .month-and-year, th, td {
-                background-color: white;
+                background-color: transparent;
             }
 
             .month-and-year {
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;
-                padding: 0.7em;
+                padding: 0.5em;
             }
 
             .month-name {
                 line-height: 35px;
                 user-select: none;
-            }
-
-            .month-name .month {
-                font-weight: bold;
             }
 
             th,
@@ -81,6 +88,7 @@
             }
 
             button {
+                background-color: transparent;
                 outline: none;
                 border: none;
                 cursor: pointer;
@@ -97,21 +105,21 @@
 
             div.cell-content.weekend,
             div.cell-content.disabled {
-                color: #ccc;
+                color: #929694;
             }
 
             div.cell-content.today {
-                color: #242424;
-                background: #929694;
+                color: #1f2321;
+                background-color: #929694;
             }
 
             div.cell-content.selected {
-                color: black;
+                color: #1f2321;
                 background-color: #00E89A;
             }
 
             div.cell-content.past {
-                color: #ccc;
+                color: #929694;
                 opacity: 0.5;
             }
 
@@ -121,39 +129,39 @@
             }
 
             div.cell-content.selectable:not(.selected):hover {
-                color: black;
-                background-color: #d2d2d2;
+                color: #1f2321;
+                background-color: #ebebeb;
             }
-
         </style>
-    </head>
-
-    <body style="margin: 0; padding: 0;">
-            <div id="calendar">
-                <div class="month-and-year">
-                  <button class="previous-button">pr</button>
-                  <div class="month-name">
-                      <span class="month"></span>
-                      <span class="year"></span>
-                  </div>
-                  <button class="next-button">next</button>
-                </div>
-              
-                <table class="calendar-table">
-                  <thead class="calendar-table-header"></thead>                    
-                  <tbody></tbody>
-                </table>
-              </div>
+        <script src="nativescript-webview-interface.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
         <script>
             (function () {
                 var oWebViewInterface = window.nsWebViewInterface;
                 var parentWindow;
+                var options;
+                var selectedDay
+
                 function addNativeMsgListener() {
                     if (oWebViewInterface) {
-                        oWebViewInterface.on('updateCalendar', updateCalendar);
+                        oWebViewInterface.on('updateCalendarOptions', function (calendarOptions) {
+                            options = calendarOptions;
+                            updateCalendarData();
+                        });
                     }
                     window.addEventListener('message', updateCalendarFromEventMessage);
+                }
+
+                 function updateCalendarFromEventMessage(event) {
+                    if (event.type === 'message' && event.data) {
+                        if (event.data.type === 'kirbyCalendarInit') {
+                            parentWindow = event.source;
+                            options = event.data;
+                            updateCalendarData();
+                        } else if (event.data.type === 'kirbyCalendarSelectCurrentDate') {
+                            selectCurrentDate(event.data.currentDate);
+                        }
+                    }
                 }
 
                 function emitSelectedDate(date) {
@@ -168,61 +176,90 @@
                     }
                 }
 
-                var selectedDate = null;
-
-                function selectDate(event) {
-                    var day = JSON.parse(event.target.dataset.day);                    
+                function updateCalendarData() {
+                    var momentDate = moment(options.displayDate);
+                    var monthStart = momentDate.startOf('month').toDate();
+                    var weekDay = fixWeekday(monthStart.getDay());
+                    var startOfWeek = momentDate.subtract(weekDay, 'days').toDate();
+                    var count = fixCount(weekDay + momentDate.daysInMonth());
+                    var days = new Array();
                     
-                    if (day.selectable) {
-                        if (selectedDate) {
-                            selectedDate.classList.remove('selected');
+                    for (var i = 0; i < count; i++) {
+                        var date = moment(startOfWeek).add(i, 'days');
+                        var disabled = false;
+
+                        if (options.disableDates && options.disableDates.length > 0) {
+                            options.disableDates.forEach(function(disableDate) {
+                            if (moment(disableDate).isSame(date, 'day')) {
+                                disabled = true;
+                            }
+                            });
                         }
-                        selectedDate = event.target;
-                        selectedDate.classList.add('selected');
-                        emitSelectedDate(new Date(day.date));
+
+                        var today = date.isSame(moment(), 'day');
+                        var past = options.disablePastDates ? date.isBefore() && !today : false;
+                        var weekend = date.toDate().getDay() === 0 || date.toDate().getDay() === 6;
+                        var currentMonth = date.isSame(monthStart, 'month');
+                        var selectable = currentMonth && !(weekend && options.disableWeekends) && !past && !disabled;
+                        var selected = selectedDay !== undefined ? moment(selectedDay.date).isSame(date) : false;
+
+                        var day = {
+                            date,
+                            past,
+                            today,
+                            weekend,
+                            currentMonth,
+                            selectable,
+                            selected,
+                            disabled,
+                        }
+                        days.push(day);
                     }
+                    options.month = JSON.stringify(chunk(days, 7));
+                    renderCalendar();
                 }
 
-                function updateCalendarFromEventMessage(event) {
-                    if ( event.type === 'message' &&
-                         event.data &&
-                         event.data.type === 'kirbyCalendarInit')
-                    {
-                        parentWindow = event.source;
-                        updateCalendar(event.data);
-                    }
-                }
-
-                function updateCalendar(options) {
-                    var disableWeekends = options.disableWeekends;
-                    var disablePastDates = options.disablePastDates;
-                    var disableDates = options.disableDates;
-                    var currentDate = options.currentDate;
-                    var displayDate = options.displayDate;
-                    var weekDays = options.weekDays;
-                    var month = JSON.parse(options.month);
-                    var monthNames = options.monthNames;
-
+                function renderCalendar() {
                     var calendarOutlet = document.getElementById('calendar');
+
+                    // Render month and year
                     var monthAndYearOutlet = calendarOutlet.querySelector('.month-and-year');
                     var monthNameOutlet = monthAndYearOutlet.querySelector('.month-name');
                     var monthOutlet = monthNameOutlet.querySelector('.month');
                     var yearOutlet = monthNameOutlet.querySelector('.year');
-                              
-                    monthOutlet.innerText = monthNames[displayDate.getMonth()];
-                    yearOutlet.innerText = displayDate.getFullYear();
+                             
+                    monthOutlet.innerText =  moment.months()[new Date(options.displayDate).getMonth()];
+                    yearOutlet.innerText = new Date(options.displayDate).getFullYear();
 
-                    var calenderTableOutlet = calendarOutlet.querySelector('.calendar-table');
-                    var calenderTableHeaderOutlet = calenderTableOutlet.querySelector('thead');
-                    renderWeekDaysHeader(calenderTableHeaderOutlet, weekDays);
-
-                    var calenderTableBodyOutlet = calenderTableOutlet.querySelector('tbody');
-                    renderMonth(calenderTableBodyOutlet, month);
-
+                    // Render next/previous buttons
                     var previousButtonOutlet = calendarOutlet.querySelector('.previous-button');
                     var nextButtonOutlet = calendarOutlet.querySelector('.next-button');
-                    previousButtonOutlet.onclick = previousMonth;
+                    
+                    if (disablePastDatesButton()) {
+                        previousButtonOutlet.onclick = null;
+                        previousButtonOutlet.classList.add('disable-past-dates');                        
+                    } else {
+                        previousButtonOutlet.onclick = previousMonth;
+                        previousButtonOutlet.classList.remove('disable-past-dates');  
+                    }
                     nextButtonOutlet.onclick = nextMonth;
+                    
+                    // Render weekdays only once
+                    var calenderTableOutlet = calendarOutlet.querySelector('.calendar-table');
+                    var calenderTableHeaderOutlet = calenderTableOutlet.querySelector('thead');
+                    if (calenderTableHeaderOutlet.childElementCount === 0) {
+                        renderWeekDaysHeader(calenderTableHeaderOutlet, options.weekDays);
+                    }
+                    
+                    var calenderTableBodyOutlet = calenderTableOutlet.querySelector('tbody');
+                    
+                    // Remove tbody elements
+                    while (calenderTableBodyOutlet.firstChild) {
+                        calenderTableBodyOutlet.removeChild(calenderTableBodyOutlet.firstChild);
+                    }
+                    
+                    // Render month
+                    renderMonth(calenderTableBodyOutlet, JSON.parse(options.month));
                 }
 
                 function renderWeekDaysHeader(tableHeaderRow, weekDays) {
@@ -292,9 +329,56 @@
                 }
 
                 function changeMonth(index) {
-                    if (selectedDate) {
-                        selectedDate = moment(selectedDate).add(index, 'months').toDate();
+                    options.displayDate = moment(options.displayDate).add(index, 'months').toDate();
+                    updateCalendarData();
+                }
+
+                function selectDate(event) {
+                    var day = JSON.parse(event.target.dataset.day);                    
+                    
+                    if (day.selectable) {
+                        selectedDay = day;
+                        updateCalendarData();
+                        emitSelectedDate(new Date(day.date));
                     }
+                }          
+
+                function chunk(arr, chunkSize) {
+                    var array = [];
+                    for (var i=0,len=arr.length; i<len; i+=chunkSize) {
+                        array.push(arr.slice(i,i+chunkSize));
+                    }
+                    return array;
+                }
+
+                function fixCount(count) {
+                    const x = count % 7;
+                    return x !== 0 ? count - x + 7 : count;
+                }
+
+                function fixWeekday(weekDay) {
+                    return weekDay === 0 ? 6 : weekDay - 1;
+                }
+
+                function disablePastDatesButton() {
+                    return options.disablePastDates && moment(options.displayDate).isSame(new Date(), 'month');
+                }
+
+                function selectCurrentDate(date) {
+                    options.displayDate = date;
+                    updateCalendarData();
+                    
+                    JSON.parse(options.month).forEach(function(week) {
+                        week.forEach(function(day) {
+                            if (moment(day.date).isSame(moment(date), 'day')) {
+                                if (day.selectable) {
+                                    selectedDay = day;
+                                    updateCalendarData();
+                                    emitSelectedDate(new Date(day.date));
+                                }
+                            }
+                        });
+                    });
                 }
 
                 function init() {
@@ -303,5 +387,23 @@
                 init();
             })();
         </script>
+    </head>
+
+    <body style="margin: 0; padding: 0;">
+        <div id="calendar">
+            <div class="month-and-year">
+                <button class="previous-button"><</button>
+                <div class="month-name">
+                    <span class="month"></span>
+                    <span class="year"></span>
+                </div>
+                <button class="next-button">></button>
+            </div>
+            
+            <table class="calendar-table">
+                <thead class="calendar-table-header"></thead>                    
+                <tbody></tbody>
+            </table>
+        </div>
     </body>
 </html>
