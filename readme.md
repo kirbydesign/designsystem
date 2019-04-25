@@ -107,6 +107,16 @@ Ionic comes bundled with [Ionicons](https://ionicons.com/). Make sure the `.svg`
 }
 ```
 
+As the native platforms not support `.svg` files the `ionicons.ttf` file will need to be copied your `fonts` folder on native deployment. This is done by adding the following line to your `webpack.config.js`file:
+
+```json
+new CopyWebpackPlugin([
+  ...
+  { from: '../node_modules/ionicons/dist/fonts/ionicons.ttf', to: 'fonts' },
+  ...
+],...
+```
+
 ## NativeScript-Only Components
 
 Some Kirby components only exists as [Platform-Specific Components](https://docs.nativescript.org/angular/code-sharing/platform-specific-components), e.g. `NativeScriptDoughnutChartComponent`.
