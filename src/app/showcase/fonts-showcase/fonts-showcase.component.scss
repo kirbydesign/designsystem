@@ -1,8 +1,8 @@
 @import '../../../kirby/scss/web-imports';
 
 code {
-  background-color: get-color('kirby-grey-9');
-  color: get-color('kirby-success');
+  background-color: get-color('kirby-medium');
+  color: get-color('kirby-contrast-dark');
   padding: 0.2rem 0.5rem;
   border-radius: 2px;
   white-space: nowrap;
@@ -20,12 +20,12 @@ code {
   code {
     padding: 0.25rem 0 0 0;
     display: block;
-    color: get-color('kirby-grey-6');
+    color: get-color('kirby-dark');
     background-color: transparent;
   }
 
   code.highlight {
-    color: get-color('kirby-grey-9');
+    color: get-color('kirby-contrast-dark');
     font-weight: font-weight('bold');
   }
 }
@@ -93,8 +93,8 @@ code {
 }
 
 .info-box {
-  background-color: get-color('kirby-white');
+  background-color: get-color('kirby-contrast-light');
   padding: 0.5rem 1rem;
   margin-right: 1rem;
-  border: 1px solid get-color('kirby-grey-4');
+  border: 1px solid get-color('kirby-medium');
 }
