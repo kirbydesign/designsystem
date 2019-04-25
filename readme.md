@@ -107,12 +107,12 @@ Ionic comes bundled with [Ionicons](https://ionicons.com/). Make sure the `.svg`
 }
 ```
 
-As the native platforms not support `.svg` files the `ionicons.ttf` file will need to be copied your `fonts` folder on native deployment. This is done by adding the following line to your `webpack.config.js`file:
+As the native platforms not support `.svg` files, the `ionicons.ttf` file will have to be copied to your `fonts` folder. This is done by adding the following line to your `webpack.config.js` file:
 
 ```json
 new CopyWebpackPlugin([
   ...
-  { from: '../node_modules/ionicons/dist/fonts/ionicons.ttf', to: 'fonts' },
+  { "from": "../node_modules/ionicons/dist/fonts/ionicons.ttf", "to": "fonts" },
   ...
 ],...
 ```
