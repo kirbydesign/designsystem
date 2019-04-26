@@ -17,10 +17,6 @@
     width: 100%;
   }
 
-  &[shape='square'] {
-    --kirby-button-border-radius: 0.2rem;
-  }
-
   &[colortype='primary'] {
     background-color: get-color('kirby-primary');
     border-color: get-color('kirby-primary');
