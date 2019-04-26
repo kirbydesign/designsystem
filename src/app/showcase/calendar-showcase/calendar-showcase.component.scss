@@ -2,5 +2,15 @@
 .calendar-example {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+kirby-calendar-example,
+kirby-calendar-card-example {
+    margin-right: 20px;
+}
+
+h2.custom-example {
+    margin-top: 40px;
 }
