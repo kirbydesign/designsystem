@@ -24,7 +24,7 @@ tr, td {
 
 thead.calendar-table-header {
   padding: 0.5em;
-  border-bottom: 1px solid get-color('kirby-grey-2');
+  border-bottom: 1px solid get-color('kirby-medium');
 }
 
 tbody.calendar-table-body {
@@ -87,21 +87,21 @@ div.cell-content.selectable {
 
 div.cell-content.weekend,
 div.cell-content.disabled {
-  color: get-color('kirby-grey-5');
+  color: get-color('kirby-medium-tint');
 }
 
 div.cell-content.today {
-  color: get-color('kirby-grey-10');
-  background-color: get-color('kirby-grey-5');
+  color: get-color('kirby-contrast-dark');
+  background-color: get-color('kirby-medium-shade');
 }
 
 div.cell-content.selected {
-  color: get-color('kirby-grey-10');
+  color: get-color('kirby-contrast-dark');
   background-color: get-color('kirby-primary');
 }
 
 div.cell-content.past {
-  color: get-color('kirby-grey-5');
+  color: get-color('kirby-medium-tint');
   opacity: 0.5;
 }
 
@@ -111,6 +111,6 @@ div.cell-content:not(.current-month) {
 }
 
 div.cell-content.selectable:not(.selected):hover {
-  color: get-color('kirby-grey-10');
-  background-color: get-color('kirby-grey-3');
+  color: get-color('kirby-contrast-dark');
+  background-color: get-color('kirby-light');
 }
