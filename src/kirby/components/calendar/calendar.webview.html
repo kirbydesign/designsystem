@@ -20,6 +20,10 @@
                             options = calendarOptions;
                             updateCalendarData();
                         });
+
+                        oWebViewInterface.on('selectCurrentDate', function (date) {
+                            selectCurrentDate(date);
+                        });
                     }
                     window.addEventListener('message', updateCalendarFromEventMessage);
                 }
