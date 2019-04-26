@@ -13,6 +13,7 @@
                 var parentWindow;
                 var options;
                 var selectedDay
+                var selectedDate;
 
                 function addNativeMsgListener() {
                     if (oWebViewInterface) {
@@ -180,6 +181,7 @@
                             cellContent.classList.add('selectable');
                         }
                         if (day.selected) {
+                            selectedDate = cellContent;
                             cellContent.classList.add('selected');
                         }
                         if (day.past) {
@@ -214,7 +216,12 @@
                     
                     if (day.selectable) {
                         selectedDay = day;
-                        updateCalendarData();
+
+                        if (selectedDate) {
+                            selectedDate.classList.remove('selected');
+                        }
+                        selectedDate = event.target;
+                        selectedDate.classList.add('selected');
                         emitSelectedDate(new Date(day.date));
                     }
                 }          
