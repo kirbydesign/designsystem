@@ -1,0 +1,18 @@
+@import 'calendar.component';
+
+@font-face {
+  font-family: "Roboto";
+  font-weight: 300;
+  src: url("./../fonts/Roboto-Regular.ttf") format("truetype");
+}
+
+body {
+  font-family: Roboto;
+  background-color: transparent;
+}
+
+:root {
+  @each $color, $color-name in $kirby-colors {
+    --#{$color}: #{$color-name};
+  }
+}

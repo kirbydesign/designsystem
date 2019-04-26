@@ -30,6 +30,7 @@ The Kirby Cookbook, containing samples, status of components etc. can be accesse
 * [NativeScript-Only Components](#nativescript-only-components)
 * [Polyfills](#polyfills)
 * [Chart Components](#chart-components)
+* [Calendar Component](#calendar-component)
 
 ## Installation
 
@@ -196,6 +197,19 @@ The Kirby chart components use Highcharts. Note that this is a licensed product.
     { from: "../node_modules/@kirbydesign/designsystem/components/chart/css/styles.css", to: "chart" },
     { from: "../node_modules/@kirbydesign/designsystem/node_modules/highcharts/highcharts.js", to: "chart" },
     { from: "../node_modules/@kirbydesign/designsystem/node_modules/nativescript-webview-interface/www/nativescript-webview-interface.js", to: "chart" }
+  ]...
+...
+```
+
+## Calendar Component
+On iOS and Android the calendar is rendered inside a webview. To use the calendar component on iOS and Android devices, you must transfer some files to the device by adding this to your `webpack.config.js`:
+```json
+...
+  new CopyWebpackPlugin([
+  ...
+    { from: "../node_modules/@kirbydesign/designsystem/components/calendar/calendar.webview.html", to: "calendar" },
+    { from: "../node_modules/@kirbydesign/designsystem/components/calendar/calendar.webview.css", to: "calendar" },
+    { from: "../node_modules/@kirbydesign/designsystem/node_modules/nativescript-webview-interface/www/nativescript-webview-interface.js", to: "calendar" }
   ]...
 ...
 ```

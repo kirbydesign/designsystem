@@ -28,10 +28,11 @@
     "dist:ios": "tns build ios --bundle --for-device --provision dk.kirby.design.system --copy-to dist/designsystem.ipa",
     "dist:android": "tns build android --for-device --bundle --copy-to dist/designsystem.apk",
     "pack-copy-to-dist-folder-watch": "cpx \"src\\kirby\\**\\!(*.spec.ts)\" dist-lib --watch",
-    "postinstall": "npm run build-polyfills && npm run transpile:tools",
+    "postinstall": "npm run build-polyfills && npm run transpile:tools && npm run transpile:styles",
     "postversion": "git push && git push --tags",
     "coverage-report": "cat ./coverage/lcov.info | coveralls",
-    "transpile:tools": "tsc -p tools/tslint-rules"
+    "transpile:tools": "tsc -p tools/tslint-rules",
+    "transpile:styles": "sass --style=compressed --no-source-map src/kirby/components/calendar/calendar.webview.scss src/kirby/components/calendar/calendar.webview.css"
   },
   "private": true,
   "dependencies": {
@@ -92,6 +93,7 @@
     "prettier": "^1.15.3",
     "protractor": "~5.3.0",
     "resize-observer-polyfill": "^1.5.1",
+    "sass": "^1.19.0",
     "sass-extract": "^2.1.0",
     "sass-extract-loader": "^1.1.0",
     "tns-platform-declarations": "^5.2.2",
