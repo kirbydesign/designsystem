@@ -19,4 +19,9 @@ Button[kirby-button] {
     border-radius: 5;
   }
 
+  &[isEnabled=false] {
+    background-color: get-color('kirby-light-tint');
+    border-color: get-color('kirby-light-tint');
+  }
+
 }
