@@ -6,9 +6,19 @@
     component not listed here,
     <a [href]="newIssueUrl">create an issue on GitHub</a></p>
 
-    <div class="search">Search Component(s): <input autofocus type="text" (keyup)="searchTerm$.next($event.target.value)"></div>
+<div class="search">Search Component(s): <input autofocus type="text" (keyup)="searchTerm$.next($event.target.value)"></div>
 
-<table class="component-status">
+<div *ngIf="gitHubError" class="github-error">
+    <ion-icon name="alert" color="danger"></ion-icon> Couldn't fetch component status from GitHub. The status shown below might not be up-to-date.</div>
+
+<div class="filter">
+    <ion-item>
+        <ion-label>Only show components in progress:</ion-label>
+        <ion-toggle [value]="[codeStatusEnum.ready,codeStatusEnum.notCurrentlyPlanned]" (ionChange)="toggleExcluded($event)"></ion-toggle>
+  </ion-item>
+</div>
+
+<table class="component-status" *ngIf="!isLoading; else loading">
     <thead>
         <tr>
             <th>Component</th>
@@ -31,7 +41,9 @@
                 </td>
             </tr>
             <tr class="subcomponent" *ngFor="let subitem of item.children">
-                <td>{{subitem.component}}</td>
+                <td>
+                    <ng-container *ngTemplateOutlet="componentTemplate; context: {$implicit: subitem}"></ng-container>
+                </td>
                 <td [class.someday-maybe]="subitem.ux?.status === uxStatusEnum.underConsideration">
                     <ng-container *ngTemplateOutlet="uxTemplate; context: {$implicit: subitem.ux}"></ng-container>
                 </td>
@@ -49,7 +61,7 @@
         <ng-container *ngTemplateOutlet="versionTemplate; context: {$implicit: item.code?.version}"></ng-container>
     </a>
     <ng-container *ngIf="!item.code?.cookbookUrl">
-        {{item.component}}
+        <span [innerHTML]="item.component"></span>
     </ng-container>
 </ng-template>
 
@@ -57,15 +69,12 @@
     <ng-container *ngTemplateOutlet="codeStatusTemplate; context: {$implicit: code?.status}"></ng-container>
     <a *ngIf="code?.githubIssueNo" [href]="getGithubIssueUrl(code.githubIssueNo)">
         {{code?.status}}
+        <ion-icon *ngIf="code?.githubIssueNo" name="open"></ion-icon>
     </a>
     <span *ngIf="!code?.githubIssueNo">
         {{code?.status}}
     </span>
     <ng-container *ngTemplateOutlet="versionTemplate; context: {$implicit: code?.version}"></ng-container>
-    <span *ngIf="code?.livestatus" title="Live status from GitHub Issue">
-        <ion-icon name="flash" color="warning"></ion-icon>
-        <ion-icon name="logo-github" color="medium"></ion-icon>
-    </span>
 </ng-template>
 
 <ng-template #uxTemplate let-ux>
@@ -100,4 +109,8 @@
     <ion-icon *ngIf="status === codeStatusEnum.inProgress" color="success" name="heart-half"></ion-icon>
     <ion-icon *ngIf="status === codeStatusEnum.ready" name="heart" color="success"></ion-icon>
     <ion-icon *ngIf="status === codeStatusEnum.notCurrentlyPlanned" color="medium" name="heart-dislike"></ion-icon>
+</ng-template>
+
+<ng-template #loading>
+    <kirby-spinner></kirby-spinner>
 </ng-template>

@@ -1,0 +1,38 @@
+@import "../../scss/native-imports";
+
+$border-radius: 20;
+
+.segment-control {
+  border-radius: $border-radius;
+  background: get-color('kirby-contrast-light');
+  color: get-color('kirby-contrast-dark');
+  display: inline-block;
+  height: size("xl");
+  margin-top: size("s");
+  margin-bottom: size("s");
+}
+
+.segment-item {
+  font-weight: font-weight("normal");
+  font-size: font-size("s");
+  padding-left: size("m");
+  padding-right: size("m");
+  border-radius: $border-radius;
+  height: 100%;
+
+  &.is-checked {
+    color: get-color('kirby-contrast-light');
+    background-color: get-color('kirby-contrast-dark');
+  }
+
+  & + & {
+    margin-left: size("xs") * -1;
+  }
+}
+
+.segment-badge-wrapper {
+  z-index: 2;
+  margin-right: size("xs");
+  margin-top: #{size("s") * -1};
+  height: 100%;
+}

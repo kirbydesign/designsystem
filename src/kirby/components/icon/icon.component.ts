@@ -27,7 +27,7 @@ export class IconComponent {
     | 'person' = IconComponent.DEFAULT_ICON_NAME;
 
   @Input() size: 'small' | 'large' = 'small';
-  @Input() colortype: 'primary' | 'secondary' | 'tertiary' | 'alert' | 'success' | 'danger';
+  @Input() colortype: 'primary' | 'secondary' | 'tertiary' | 'warning' | 'success' | 'danger';
 
   getIonicIconName(name: string): string {
     const icon = iconsCharCodeMap[name];

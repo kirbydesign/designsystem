@@ -28,14 +28,20 @@
   }
 
   &[colortype='secondary'] {
-    background-color: get-color('kirby-secondary');
-    border-color: get-color('kirby-secondary');
-    color: get-color('kirby-secondary-contrast');
+    background-color: get-color('kirby-contrast-light');
+    border-color: get-color('kirby-contrast-light');
+    color: get-color('kirby-contrast-dark');
   }
 
   &:hover,
   &:focus {
     opacity: 0.8;
+  }
+
+  &:disabled {
+    background-color: var(--kirby-light-tint);
+    border-color: var(--kirby-light-tint);
+    pointer-events: none;
   }
 
 }

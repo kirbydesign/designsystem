@@ -1,7 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, BehaviorSubject, merge, Subscription, forkJoin } from 'rxjs';
-import { map, first } from 'rxjs/operators';
+import { Observable, BehaviorSubject, forkJoin, of } from 'rxjs';
+import { map, first, catchError } from 'rxjs/operators';
 
 import { environment } from '~/environments/environment';
 
@@ -12,17 +12,25 @@ import {
   ItemUXStatus,
   ItemCodeStatus,
 } from './component-status-items';
+import { componentStatusGhostItems } from './component-status-ghost-items';
 @Component({
   selector: 'kirby-component-status',
   templateUrl: './component-status.component.html',
   styleUrls: ['./component-status.component.scss'],
 })
 export class ComponentStatusComponent implements OnInit {
-  sortedItems: ComponentStatusItem[];
+  isLoading = true;
+  githubStatusLoaded = false;
+  githubComponentRequestsLoaded = false;
+  gitHubError = false;
+  items = componentStatusItems;
+  flattenedItems = this.flattenItems(componentStatusItems);
+  sortedItems: ComponentStatusItem[] = [];
   items$: Observable<ComponentStatusItem[]>;
   searchTerm$ = new BehaviorSubject<string>('');
   uxStatusEnum = ItemUXStatus;
   codeStatusEnum = ItemCodeStatus;
+  excludedStatuses: ItemCodeStatus[] = [];
   newIssueUrl =
     environment.githubBaseUrl +
     '/issues/new?labels=component&template=component-request.md&title=%5BCOMPONENT%5D+';
@@ -30,13 +38,91 @@ export class ComponentStatusComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    this.sortedItems = this.sortItems(componentStatusItems);
     this.items$ = this.searchTerm$.pipe(
-      map((searchTerm) => this.filterItems(this.sortedItems, searchTerm))
+      map((searchTerm) => this.filterItems(this.sortedItems, searchTerm, this.excludedStatuses))
     );
-    setTimeout(() => {
-      this.getCurrentGithubStatus(this.sortedItems);
-    }, 1000);
+    this.loadGithubComponentRequests();
+    this.setCurrentGithubStatus();
+  }
+
+  public toggleExcluded(event) {
+    const checked = event.detail.checked;
+    const excludedStatuses = event.detail.value as ItemCodeStatus[];
+    this.excludedStatuses = checked ? excludedStatuses : [];
+    this.searchTerm$.next(this.searchTerm$.value);
+  }
+
+  private initializeItems() {
+    if (this.githubStatusLoaded && this.githubComponentRequestsLoaded) {
+      this.sortedItems = this.sortItems(this.items);
+      this.isLoading = false;
+    }
+  }
+
+  private loadGithubComponentRequests() {
+    console.time('Get Github Issues');
+    this.getStatusItemsFromGithubIssues()
+      .pipe(first())
+      .subscribe((githubItems) => {
+        this.items = this.items.concat(githubItems);
+        this.githubComponentRequestsLoaded = true;
+        console.timeEnd('Get Github Issues');
+        this.initializeItems();
+      });
+  }
+
+  private getStatusItemsFromGithubIssues() {
+    return this.getGithubIssues().pipe(
+      map((issues) => {
+        return issues
+          .filter((issue) => !this.hasStatusItem(issue))
+          .filter((issue) => this.hasComponentTitleLabel(issue))
+          .map((issue) => this.mapGithubIssueToStatusItem(issue));
+      })
+    );
+  }
+
+  private mapGithubIssueToStatusItem(issue: any): ComponentStatusItem {
+    const zeplinUrl = this.getZeplinUrl(issue);
+    return {
+      component: this.getComponentTitle(issue),
+      priority: 0,
+      ux: {
+        version: 0.0,
+        status: zeplinUrl ? ItemUXStatus.inProgress : ItemUXStatus.underConsideration,
+        zeplinUrl: zeplinUrl,
+      },
+      code: {
+        version: 0.0,
+        status: ItemCodeStatus.underConsideration,
+        githubIssueNo: issue.number,
+      },
+    };
+  }
+
+  private hasStatusItem(issue: { number: number }) {
+    return !!this.flattenedItems.find((item) => item.code.githubIssueNo === issue.number);
+  }
+
+  private getComponentTitle(issue: { labels: any[] }): string {
+    const componentTitleLabel = this.getComponentTitleLabel(issue);
+    return componentTitleLabel.name.split('component:')[1];
+  }
+
+  private hasComponentTitleLabel(issue: { labels: any[] }) {
+    return !!this.getComponentTitleLabel(issue);
+  }
+
+  private getComponentTitleLabel(issue: { labels: any[] }) {
+    return issue.labels.find((label) => {
+      return label.name.indexOf('component:') > -1;
+    });
+  }
+
+  private getZeplinUrl(issue: { body: string }): string {
+    const matches = issue.body.match(/https:\/\/zpl\.io\/[a-z,0-9]{7}/i);
+    const url = matches ? matches[0] : null;
+    return url;
   }
 
   public isUnderConsiderationOrNotPlanned(item: ComponentStatusItem) {
@@ -56,7 +142,10 @@ export class ComponentStatusComponent implements OnInit {
     return items.sort((a: ComponentStatusItem, b: ComponentStatusItem) => {
       let order = this.sortByStatus(a, b);
       if (order === 0) {
-        order = this.sortByPriority(a, b);
+        // Don't sort by priority when ready:
+        if (a.code.status != ItemCodeStatus.ready || b.code.status != ItemCodeStatus.ready) {
+          order = this.sortByPriority(a, b);
+        }
         if (order === 0) {
           order = this.sortByComponentName(a, b);
         }
@@ -90,9 +179,20 @@ export class ComponentStatusComponent implements OnInit {
     return 0;
   }
 
-  private filterItems(items: ComponentStatusItem[], searchTerm: string): ComponentStatusItem[] {
+  private filterItems(
+    items: ComponentStatusItem[],
+    searchTerm: string,
+    excludedStatuses: ItemCodeStatus[]
+  ): ComponentStatusItem[] {
     const regex = new RegExp(searchTerm, 'i');
-    return items.filter((item) => this.matchItem(item, regex));
+    return items
+      .filter((item) => {
+        return (
+          !excludedStatuses.find((status) => status === item.code.status) &&
+          this.matchItem(item, regex)
+        );
+      })
+      .concat(this.getGhostItems(searchTerm));
   }
 
   private matchItem(item: ComponentStatusItem, searchTerm: RegExp): boolean {
@@ -117,6 +217,30 @@ export class ComponentStatusComponent implements OnInit {
     return false;
   }
 
+  private getGhostItems(searchTerm: string): ComponentStatusItem[] {
+    const ghostItem = componentStatusGhostItems.find(
+      (x) => x.name.toLowerCase() === searchTerm.toLowerCase()
+    );
+    if (ghostItem) {
+      return [
+        {
+          component: ghostItem.tagline,
+          priority: 0,
+          ux: {
+            version: 999,
+            status: ItemUXStatus.ready,
+            zeplinUrl: ghostItem.url || null,
+          },
+          code: {
+            version: 999,
+            status: ItemCodeStatus.ready,
+          },
+        },
+      ];
+    }
+    return [];
+  }
+
   private getGithubIssues() {
     const options = {
       headers: new HttpHeaders({
@@ -124,31 +248,26 @@ export class ComponentStatusComponent implements OnInit {
       }),
     };
     const url = environment.githubApi + '/repos/kirbydesign/designsystem/issues?labels=component';
-    return this.http.get(url, options);
+    return this.http.get<any[]>(url, options);
   }
 
-  private getCurrentGithubStatus(items: ComponentStatusItem[]) {
-    const flattenedItems = this.flattenItems(items);
+  private setCurrentGithubStatus() {
     console.time('Get Github Status');
     this.getGithubProjectStatus()
       .pipe(first())
       .subscribe((issues) => {
         issues.forEach((issue) => {
-          // console.log('issue.number:', issue.number);
-          flattenedItems
+          this.flattenedItems
             .filter((item) => item.code.githubIssueNo === issue.number)
-            .forEach((item) => {
-              item.code.status = issue.status;
-              item.code.livestatus = true;
-            });
+            .forEach((item) => (item.code.status = issue.status));
         });
         console.timeEnd('Get Github Status');
-        this.sortedItems = this.sortItems(componentStatusItems);
-        this.searchTerm$.next(this.searchTerm$.value);
+        this.githubStatusLoaded = true;
+        this.initializeItems();
       });
   }
 
-  private flattenItems(items: ComponentStatusItem[]) {
+  private flattenItems(items: ComponentStatusItem[]): ComponentStatusItem[] {
     const concat = (x, y) => x.concat(y);
     const flatMap = (arr, f) => arr.map(f).reduce(concat, []);
     return flatMap(items, (item) => [item, ...(item.children ? item.children : [])]);
@@ -163,20 +282,27 @@ export class ComponentStatusComponent implements OnInit {
     };
     const url = environment.githubApi + '/projects/columns/' + columnId + '/cards';
     return this.http.get<GithubCard[]>(url, options).pipe(
-      map((cards) => {
-        return cards.map((card) => {
-          let githubIssueNo = 0;
-          const matches = card.content_url.match(/issues\/(\d+)$/);
-          if (matches.length === 2) {
-            githubIssueNo = +matches[1];
-          }
-          return <GithubIssue>{
-            number: githubIssueNo,
-            status,
-          };
-        });
-      })
+      catchError((_) => {
+        this.gitHubError = true;
+        this.isLoading = false;
+        return of([] as GithubCard[]);
+      }),
+      map((cards) => this.mapGithubCardsToIssues(status, cards))
     );
+  }
+
+  private mapGithubCardsToIssues(status: ItemCodeStatus, cards: GithubCard[]): GithubIssue[] {
+    return cards.map((card) => {
+      let githubIssueNo = 0;
+      const matches = card.content_url.match(/issues\/(\d+)$/);
+      if (matches.length === 2) {
+        githubIssueNo = +matches[1];
+      }
+      return <GithubIssue>{
+        number: githubIssueNo,
+        status,
+      };
+    });
   }
 
   private getGithubProjectStatus() {
