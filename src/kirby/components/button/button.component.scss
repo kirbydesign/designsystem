@@ -39,8 +39,8 @@
   }
 
   &:disabled {
-    background-color: get-color('kirby-grey-3');
-    border-color: get-color('kirby-grey-3');
+    background-color: var(--kirby-light-tint);
+    border-color: var(--kirby-light-tint);
     pointer-events: none;
   }
 
