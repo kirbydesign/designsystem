@@ -32,8 +32,6 @@ export class CalendarHelper {
           options.selectDate(evt.data.date);
         }
       });
-    } else {
-      console.warn('No calendar container available...');
     }
   }
 
