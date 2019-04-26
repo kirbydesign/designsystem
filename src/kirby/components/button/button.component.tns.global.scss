@@ -20,8 +20,8 @@ Button[kirby-button] {
   }
 
   &[isEnabled=false] {
-    background-color: var(--kirby-light-tint);
-    border-color: var(--kirby-light-tint);
+    background-color: get-color('kirby-light-tint');
+    border-color: get-color('kirby-light-tint');
   }
 
 }
