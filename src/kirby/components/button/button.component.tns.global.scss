@@ -14,10 +14,6 @@ Button[kirby-button] {
     background-color: get-color('kirby-contrast-light');
     border-color: get-color('kirby-contrast-light');
   }
-  
-  &[shape='square'] {
-    border-radius: 5;
-  }
 
   &[isEnabled=false] {
     background-color: get-color('kirby-light-tint');
