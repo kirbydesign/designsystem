@@ -1,5 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
+declare var require: any;
+const style: any = require('sass-extract-loader!./checkbox.component.scss');
+
 @Component({
   selector: 'kirby-checkbox',
   templateUrl: './checkbox.component.html',
@@ -13,8 +16,12 @@ export class CheckboxComponent implements OnInit {
 
   classes: string[] = [];
 
-  nativeColor(): string {
-    return '';
+  get nativeColor(): string {
+    if (this.color) {
+      return this.getThemeColor('kirby-' + this.color);
+    } else {
+      return this.getThemeColor('kirby-primary');
+    }
   }
 
   onChecked(event) {
@@ -22,11 +29,15 @@ export class CheckboxComponent implements OnInit {
     this.checkedChange.emit(this.checked);
   }
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
     this.classes.push('checkbox');
     this.classes.push(this.color || '');
     this.classes.push(this.shape || '');
+  }
+
+  getThemeColor(name: string) {
+    return style.global['$kirby-colors'].value[name].value.hex;
   }
 }

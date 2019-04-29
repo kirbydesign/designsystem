@@ -1,6 +1,6 @@
 <ng-container>
   <GridLayout rows="auto" columns="auto" [ngClass]="size">
-    <Checkbox [checked]="checked" fillColor="#00E89A" [boxType]="shape" (checkedChange)="onChecked($event)">
+    <Checkbox [checked]="checked" [fillColor]="nativeColor" [boxType]="shape" (checkedChange)="onChecked($event)">
     </Checkbox>
   </GridLayout>
 </ng-container>
