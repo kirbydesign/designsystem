@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'kirby-checkbox',
@@ -7,17 +7,25 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class CheckboxComponent implements OnInit {
   @Input() checked: boolean;
-  @Input() size: string;
   @Input() color: string;
   @Input() shape: string;
+  @Output() checkedChange = new EventEmitter<boolean>();
 
   classes: string[] = [];
 
-  constructor() {}
+  nativeColor(): string {
+    return '';
+  }
+
+  onChecked(event) {
+    this.checked = event.value;
+    this.checkedChange.emit(this.checked);
+  }
+
+  constructor() { }
 
   ngOnInit() {
     this.classes.push('checkbox');
-    this.classes.push(this.size || '');
     this.classes.push(this.color || '');
     this.classes.push(this.shape || '');
   }
