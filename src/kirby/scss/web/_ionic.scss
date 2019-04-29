@@ -44,23 +44,10 @@
   --border-radius: 15px;
   --width: 600px;
   --height: 300px;
+  --overflow: visible;
   position: fixed;
-
-  .modal-wrapper {
-    margin-top: 150px;
-    --overflow: visible;
-  }
-
-  .ion-page {
-    overflow: visible;
-  }
-
-  ion-content {
-    --ion-background-color: transparent;
-  }
 }
 
 .backdrop-no-scroll {
   overflow: hidden;
-  scroll-margin-top: 0;
 }

@@ -1,9 +1,15 @@
-<div class="modal-content">
-    <h2 #modalCloseButtonWrapper tabindex="-1" class="text-{{config.titleHorizontalAlignment}}">{{ config.title }}</h2>
-    <kirby-floating-action-button class="dismiss-button" (click)="dismissModal()" tabindex="1">
+<div class="modal-wrapper" #modalWrapper tabindex="-1">
+    <kirby-floating-action-button role="button" 
+            class="dismiss-button" 
+            (click)="onModalDismiss()" 
+            (keydown)="onModalDismiss($event)" 
+            tabindex="0">
         <kirby-icon [name]="config.closeIconName"></kirby-icon>
     </kirby-floating-action-button>
-    <div class="inner-component">
+    <div class="modal-header">
+        <h2 class="text-{{config.titleHorizontalAlignment}} title">{{ config.title }}</h2>
+    </div>
+    <div class="modal-content">    
         <ng-container *ngComponentOutlet="config.component"></ng-container>
     </div>
 </div>

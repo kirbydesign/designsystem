@@ -10,7 +10,7 @@ import { IModalController } from './services/modal.controller.interface';
   styleUrls: ['./modal.component.scss'],
 })
 export class ModalComponent implements AfterViewInit {
-  @ViewChild('modalCloseButtonWrapper') modalCloseButtonWrapper: ElementRef;
+  @ViewChild('modalWrapper') modalWrapper: ElementRef;
   config: ModalConfig;
 
   constructor(private params: NavParams, private modalController: IModalController) {
@@ -18,21 +18,19 @@ export class ModalComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    const el = this.modalCloseButtonWrapper.nativeElement;
+    const el = this.modalWrapper.nativeElement;
     setTimeout(() => {
       el.focus();
       el.blur();
     }, 50);
   }
 
-  dismissModal(): void {
-    this.modalController.hideModal();
-  }
-
-  keyupModal(e: any) {
-    e.preventDefault();
-    if (e.keyCode === 32 || e.keyCode === 13) {
-      this.dismissModal();
+  onModalDismiss(e: any) {
+    // Handle key press, due to:
+    // https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/button_role#Required_JavaScript_Features
+    if (e && e.keyCode !== 32 && e.keyCode !== 13) {
+      return;
     }
+    this.modalController.hideModal();
   }
 }
