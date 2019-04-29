@@ -5,8 +5,6 @@ import { CheckboxShowcaseComponent } from './checkbox-showcase.component';
 import { ExamplesModule } from '~/app/examples/examples.module';
 import { HtmlViewerComponent } from '~/app/shared/html-viewer/html-viewer.component';
 
-
-
 describe('CheckboxShowcaseComponent', () => {
   let component: CheckboxShowcaseComponent;
   let fixture: ComponentFixture<CheckboxShowcaseComponent>;

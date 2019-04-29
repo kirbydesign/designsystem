@@ -29,7 +29,7 @@ export class CheckboxComponent implements OnInit {
     this.checkedChange.emit(this.checked);
   }
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
     this.classes.push('checkbox');
