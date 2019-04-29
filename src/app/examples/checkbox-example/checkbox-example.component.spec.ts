@@ -4,6 +4,7 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { CheckboxExampleComponent } from './checkbox-example.component';
+import { KirbyModule } from '~/kirby';
 
 describe('CheckboxExampleComponent', () => {
   let component: CheckboxExampleComponent;
@@ -11,6 +12,7 @@ describe('CheckboxExampleComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [KirbyModule],
       declarations: [CheckboxExampleComponent],
     }).compileComponents();
   }));

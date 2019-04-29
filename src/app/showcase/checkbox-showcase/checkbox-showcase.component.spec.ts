@@ -1,9 +1,11 @@
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
 
 import { CheckboxShowcaseComponent } from './checkbox-showcase.component';
+import { ExamplesModule } from '~/app/examples/examples.module';
+import { HtmlViewerComponent } from '~/app/shared/html-viewer/html-viewer.component';
+
+
 
 describe('CheckboxShowcaseComponent', () => {
   let component: CheckboxShowcaseComponent;
@@ -11,7 +13,8 @@ describe('CheckboxShowcaseComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [CheckboxShowcaseComponent],
+      imports: [ExamplesModule],
+      declarations: [CheckboxShowcaseComponent, HtmlViewerComponent],
     }).compileComponents();
   }));
 

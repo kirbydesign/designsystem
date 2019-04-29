@@ -1,5 +1,8 @@
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { MockComponent } from 'ng-mocks';
+import * as ionic from '@ionic/angular';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
@@ -11,7 +14,7 @@ describe('CheckboxComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [CheckboxComponent],
+      declarations: [CheckboxComponent, MockComponent(ionic.IonCheckbox)],
     }).compileComponents();
   }));
 
