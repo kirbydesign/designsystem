@@ -27,4 +27,16 @@ describe('CheckboxComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  describe('function: onChecked', () => {
+    it('should emit true', () => {
+      spyOn(component.checkedChange, 'emit');
+      const change = { value: true };
+
+      component.onChecked(change);
+
+      expect(component.checkedChange.emit).toHaveBeenCalledTimes(1);
+      expect(component.checkedChange.emit).toHaveBeenCalledWith(true);
+    });
+  });
 });

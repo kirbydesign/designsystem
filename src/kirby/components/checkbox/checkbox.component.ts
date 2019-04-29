@@ -24,12 +24,12 @@ export class CheckboxComponent implements OnInit {
     }
   }
 
-  onChecked(event) {
+  onChecked(event): void {
     this.checked = event.value;
     this.checkedChange.emit(this.checked);
   }
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit() {
     this.classes.push('checkbox');
