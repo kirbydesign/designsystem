@@ -1,6 +1,19 @@
 @import '../../../kirby/scss/native-imports';
 
-StackLayout {
-    background-color: get-color("kirby-grey-2");
-    padding: 10;
+.calendar {
+    flex-direction: column;
+    height: 310;
+}
+
+.buttons {
+    flex-direction: row;
+  
+    Button {
+        font-size: 14;
+        height: 60;
+        width: 100%;
+        border-radius: 0;
+        outline: none;
+        margin: auto;
+    }
 }
