@@ -19,8 +19,6 @@ export class ModalComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    // TODO: need to get the height of the calling element (perhaps the vcRef could be useful)
-    // and scroll to it with e.g. Math.abs(window.scrollY)
     const el = this.modalWrapper.nativeElement;
     setTimeout(() => {
       el.focus();
