@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ElementRef, ViewChild, AfterViewInit, Renderer2 } from '@angular/core';
 import { NavParams } from '@ionic/angular';
 
 import { ModalConfig } from './config/modal-config';
@@ -11,18 +11,30 @@ import { IModalController } from './services/modal.controller.interface';
 })
 export class ModalComponent implements AfterViewInit {
   @ViewChild('modalWrapper') modalWrapper: ElementRef;
+  scrollY: number = Math.abs(window.scrollY);
   config: ModalConfig;
 
-  constructor(private params: NavParams, private modalController: IModalController) {
+  constructor(
+    private params: NavParams,
+    private modalController: IModalController,
+    private renderer: Renderer2
+  ) {
     this.config = ModalConfigHelper.processOptionalValues(this.params.get('config'));
   }
 
   ngAfterViewInit(): void {
+    // TODO: need to get the height of the calling element (perhaps the vcRef could be useful)
+    // and scroll to it with e.g. Math.abs(window.scrollY)
     const el = this.modalWrapper.nativeElement;
     setTimeout(() => {
       el.focus();
       el.blur();
     }, 50);
+  }
+
+  onFocusChange() {
+    // This fixes an undesired scroll behaviour occurring on keyboard-tabbing
+    window.scrollTo({ top: this.scrollY });
   }
 
   onModalDismiss(e: any) {
