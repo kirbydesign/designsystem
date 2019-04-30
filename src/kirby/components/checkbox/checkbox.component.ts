@@ -1,4 +1,13 @@
-import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges, OnChanges, SimpleChange } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  SimpleChanges,
+  OnChanges,
+  SimpleChange,
+} from '@angular/core';
 
 declare var require: any;
 const style: any = require('sass-extract-loader!./checkbox.component.scss');
@@ -29,9 +38,9 @@ export class CheckboxComponent implements OnInit, OnChanges {
     this.checkedChange.emit(this.checked);
   }
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   getThemeColor(name: string) {
     return style.global['$kirby-colors'].value[name].value.hex;
