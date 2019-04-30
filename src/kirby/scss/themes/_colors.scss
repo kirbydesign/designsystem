@@ -1,44 +1,72 @@
-$kirby-colors: (
-    'kirby-brand-1':              #005c3c,
-    'kirby-brand-2':              #004d32,
-    'kirby-brand-3':              #003c27,
-    'kirby-brand-4':              #002e1e,
-    'kirby-brand-5':              #001b12,
+$kirby-base-color: #f2f2f2;
+$kirby-contrast-light: #fff;
+$kirby-contrast-dark: #1c1c1c;
 
-    'kirby-primary':              #00E89A,
-    'kirby-primary-contrast':     #2D3230,      
-    'kirby-primary-shade':        #004D32,      
-    
-    'kirby-secondary':            #ffffff,      
-    'kirby-secondary-contrast':   #2d3230,
-    'kirby-secondary-shade':      #2d3230,      
-    
-    'kirby-tertiary':             #ebebeb,
-    'kirby-tertiary-contrast':    #2D3230,      
-    'kirby-tertiary-shade':       #004D32,
-    
-    'kirby-success':              #00e89a,
-    'kirby-success-contrast':     #003322,      
-    'kirby-success-shade':        #008055,
+$main-colors: (
+  'kirby-primary': #20c598,
+  'kirby-secondary': #005c3c,
+  'kirby-tertiary': #01352c,
+  'kirby-success': #00e89a,
+  'kirby-warning': #ffca3a,
+  'kirby-danger': #ff595e,
+  'kirby-light': #e8e8e8,
+  'kirby-medium': #d2d2d2,
+  'kirby-dark': #606060
+);
 
-    'kirby-alert':                #ffca3a,
-    'kirby-alert-contrast':       #45240F,      
-    'kirby-alert-shade':          #b34b05,
+@function _get-color-contrast($color, $contrast-dark: $kirby-contrast-dark, $contrast-light: $kirby-contrast-light) {
+  $red: red($color);
+  $green: green($color);
+  $blue: blue($color);
+  /*
+    Color brightness is determined by the following formula:
+    ((Red value X 299) + (Green value X 587) + (Blue value X 114)) / 1000
+  */
+  $color-brightness: (($red * 299) + ($green * 587) + ($blue * 114)) / 1000;
+  /* The range for color brightness difference is 125 */
+  $color-range: 125;
+  @if $color-brightness < $color-range {
+    @return $contrast-light;
+  } @else {
+    @return $contrast-dark;
+  }
+}
 
-    'kirby-danger':               #ff595e, 
-    'kirby-danger-contrast':      #431314,      
-    'kirby-danger-shade':         #cc474b,
+@function _get-tint-value($color, $weight: 10) {
+  @return mix(white, $color, $weight);
+}
 
-    'kirby-white':                #ffffff,
-    /* Greyscales */
-    'kirby-grey-1':                #f6f6f6, //Not used , yet
-    'kirby-grey-2':                #f2f2f2,
-    'kirby-grey-3':                #ebebeb,
-    'kirby-grey-4':                #cfd4d3,
-    'kirby-grey-5':                #929694,
-    'kirby-grey-6':                #787e7c,
-    'kirby-grey-7':                #5e6462,
-    'kirby-grey-8':                #454b49,
-    'kirby-grey-9':                rgb(45, 50, 48),
-    'kirby-grey-10':               #1f2321, 
+@function _get-shade-value($color, $weight: 12) {
+  @return mix(black, $color, $weight);
+}
+
+@function _get-rgb-values($color) {
+  @return red($color), green($color), blue($color);
+}
+
+@function generate-colors($colors: $main-colors) {
+  $color-list: ();
+  @each $color-name, $color-value in $colors {
+      $color-list: map-merge(
+      (
+        $color-name: $color-value,
+        #{$color-name}-rgb: #{_get-rgb-values($color-value)},
+        #{$color-name}-contrast: #{_get-color-contrast($color-value)},
+        #{$color-name}-contrast-rgb: #{_get-rgb-values(_get-color-contrast($color-value))},
+        #{$color-name}-shade: #{_get-shade-value($color-value)},
+        #{$color-name}-tint: #{_get-tint-value($color-value)}
+      )
+      , $color-list)
+  }
+  @return $color-list;
+}
+
+$kirby-colors: generate-colors();
+$kirby-colors: map-merge(
+  (
+    'kirby-base-color': $kirby-base-color,
+    'kirby-contrast-light': $kirby-contrast-light,
+    'kirby-contrast-dark': $kirby-contrast-dark
+  ),
+  $kirby-colors
 );

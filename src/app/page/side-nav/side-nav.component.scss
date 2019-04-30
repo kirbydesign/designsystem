@@ -69,7 +69,7 @@ $page-max-width: 1366px;
 
   &__item {
     text-decoration: none;
-    color: #838383;
+    color: get-color('kirby-contrast-dark');
     font-weight: 200;
     padding: 0.75rem 0 0.75rem 0.75rem;
     margin-left: -1rem;
@@ -80,11 +80,10 @@ $page-max-width: 1366px;
     //border-top: 1px solid red;
     &:hover,
     &:focus {
-      background-color: #ebebeb;
-      color: #353535;
+      background-color: get-color('kirby-medium');
     }
     &.is-selected {
-      color: #DF0067;
+      color: get-color('kirby-primary');
       font-weight: bold;
     }
   }
