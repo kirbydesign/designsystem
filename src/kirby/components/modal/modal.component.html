@@ -7,7 +7,7 @@
     </div>
     <kirby-floating-action-button role="button" 
             class="dismiss-button" 
-            (click)="onModalDismiss()" 
+            (click)="onModalDismiss($event)" 
             (keydown)="onModalDismiss($event)" 
             tabindex="0">
         <kirby-icon [name]="config.closeIconName"></kirby-icon>
