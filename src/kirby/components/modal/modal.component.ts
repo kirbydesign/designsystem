@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, AfterViewInit, Renderer2 } from '@angular/core';
+import { Component, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { NavParams } from '@ionic/angular';
 
 import { ModalConfig } from './config/modal-config';
@@ -14,11 +14,7 @@ export class ModalComponent implements AfterViewInit {
   scrollY: number = Math.abs(window.scrollY);
   config: ModalConfig;
 
-  constructor(
-    private params: NavParams,
-    private modalController: IModalController,
-    private renderer: Renderer2
-  ) {
+  constructor(private params: NavParams, private modalController: IModalController) {
     this.config = ModalConfigHelper.processOptionalValues(this.params.get('config'));
   }
 
