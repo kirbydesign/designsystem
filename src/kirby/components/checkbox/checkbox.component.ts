@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges, OnChanges, SimpleChange } from '@angular/core';
 
 declare var require: any;
 const style: any = require('sass-extract-loader!./checkbox.component.scss');
@@ -8,10 +8,10 @@ const style: any = require('sass-extract-loader!./checkbox.component.scss');
   templateUrl: './checkbox.component.html',
   styleUrls: ['./checkbox.component.scss'],
 })
-export class CheckboxComponent implements OnInit {
+export class CheckboxComponent implements OnInit, OnChanges {
   @Input() checked: boolean;
-  @Input() color: string;
-  @Input() shape: string;
+  @Input() color: string = 'primary';
+  @Input() shape: string = 'square';
   @Output() checkedChange = new EventEmitter<boolean>();
 
   classes: string[] = [];
@@ -29,15 +29,28 @@ export class CheckboxComponent implements OnInit {
     this.checkedChange.emit(this.checked);
   }
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit() {
-    this.classes.push('checkbox');
-    this.classes.push(this.color || '');
-    this.classes.push(this.shape || '');
-  }
+  ngOnInit() { }
 
   getThemeColor(name: string) {
     return style.global['$kirby-colors'].value[name].value.hex;
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    const shape: SimpleChange = changes.shape;
+    const color: SimpleChange = changes.color;
+
+    if (changes.shape) {
+      this.classes.push(shape.currentValue);
+    } else {
+      this.classes.push(this.shape);
+    }
+
+    if (changes.color) {
+      this.classes.push(color.currentValue);
+    } else {
+      this.classes.push(this.color);
+    }
   }
 }
