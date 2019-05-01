@@ -7,6 +7,7 @@ import {
   SimpleChanges,
   OnChanges,
   SimpleChange,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 
 declare var require: any;
@@ -16,6 +17,7 @@ const style: any = require('sass-extract-loader!./checkbox.component.scss');
   selector: 'kirby-checkbox',
   templateUrl: './checkbox.component.html',
   styleUrls: ['./checkbox.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CheckboxComponent implements OnInit, OnChanges {
   @Input() checked: boolean;
