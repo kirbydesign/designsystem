@@ -11,6 +11,8 @@ import { NativeScriptLineChartExampleComponent } from './nativescript-only/line-
 import { ListItemExampleComponent } from './list/list-item-example/list-item-example.component.tns';
 import { ListCustomCellLinesExampleComponent } from './list/list-custom-cell-lines-example/list-custom-cell-lines-example.component.tns';
 import { ListSectionExampleComponent } from './nativescript-only/list-section-example/list-section-example.component.tns';
+import { FirstEmbeddedModalExampleComponent } from './modal-example/first-embedded-modal-example/first-embedded-modal-example.component';
+import { SecondEmbeddedModalExampleComponent } from './modal-example/second-embedded-modal-example/second-embedded-modal-example.component';
 
 const nativeScriptDeclarations = [
   ...COMPONENT_DECLARATIONS,
@@ -24,6 +26,7 @@ const nativeScriptDeclarations = [
 @NgModule({
   imports: [NativeScriptCommonModule, KirbyModule, NativeScriptFormsModule],
   declarations: nativeScriptDeclarations,
+  entryComponents: [FirstEmbeddedModalExampleComponent, SecondEmbeddedModalExampleComponent],
   exports: nativeScriptDeclarations,
   schemas: [NO_ERRORS_SCHEMA],
 })

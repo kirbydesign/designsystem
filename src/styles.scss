@@ -5,13 +5,13 @@
   NOTE: THIS FILE DOES NOT APPLY STYLES TO NATIVESCRIPT
   ******
 */
-
+$native: false;
 // Import common styles
 @import "~prismjs/themes/prism";
 @import "./kirby/scss/web-imports";
 @import "./kirby/scss/themes/colors";
 @import "./kirby/scss/web/ionic";
-@import "./kirby/scss/base/typography";
+@import "./kirby/scss/base/typography"; 
 
 @font-face { 
   font-family: "Roboto";
@@ -48,11 +48,11 @@
 body, html {
   margin: 0;
   padding: 0;
-  background-color: get-color("kirby-white");
+  background-color: get-color('kirby-contrast-light');
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   font-size: font-size("n");
-  color: get-color("kirby-grey-9");  
+  color: get-color('kirby-contrast-dark');  
 }
 
 *, 

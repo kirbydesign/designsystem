@@ -22,10 +22,14 @@ import { ListHeaderComponent } from './components/list/list-header/list-header.c
 import { ListCellComponent } from './components/list/list-cell/list-cell.component';
 import { ListCellLineComponent } from './components/list/list-cell-line/list-cell-line.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
+import { ModalComponent } from './components/modal/modal.component';
 import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
 import { ChipComponent } from './components/chip/chip.component';
 import { SegmentedChipControlComponent } from './components/segment/segmented-chip-control/segmented-chip-control.component';
 import { BadgeComponent } from './components/badge/badge.component';
+import { ModalController } from './components/modal/services/modal.controller';
+import { IModalController } from './components/modal/services/modal.controller.interface';
+import { ModalHelper } from './components/modal/services/modal.helper';
 
 export const declarations = [
   CardComponent,
@@ -50,8 +54,16 @@ export const declarations = [
   AvatarComponent,
   GroupByPipe,
   SpinnerComponent,
+  ModalComponent,
   SegmentedControlComponent,
   ChipComponent,
   SegmentedChipControlComponent,
   BadgeComponent,
+];
+
+export const providerDeclarations: any[] = [
+  ModalController,
+  // the provider below is used to fix a cyclic reference problem inside ModalComponent.ts
+  { provide: IModalController, useExisting: ModalController },
+  ModalHelper,
 ];
