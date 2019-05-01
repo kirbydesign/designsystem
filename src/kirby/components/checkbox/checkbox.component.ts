@@ -26,14 +26,10 @@ export class CheckboxComponent implements OnInit, OnChanges {
   @Output() checkedChange = new EventEmitter<boolean>();
 
   classes: string[] = [];
+  nativeColor: string;
 
-  get nativeColor(): string {
-    if (this.color) {
-      return this.getThemeColor('kirby-' + this.color);
-    } else {
-      return this.getThemeColor('kirby-primary');
-    }
-  }
+  private readonly SHAPE_INDEX = 0;
+  private readonly COLOR_INDEX = 1;
 
   onChecked(event): void {
     this.checked = event.value;
@@ -51,15 +47,17 @@ export class CheckboxComponent implements OnInit, OnChanges {
     const color: SimpleChange = changes.color;
 
     if (changes.shape) {
-      this.classes.push(shape.currentValue);
+      this.classes[this.SHAPE_INDEX] = shape.currentValue;
     } else {
-      this.classes.push(this.shape);
+      this.classes[this.SHAPE_INDEX] = this.shape;
     }
 
     if (changes.color) {
-      this.classes.push(color.currentValue);
+      this.classes[this.COLOR_INDEX] = color.currentValue;
+      this.nativeColor = this.getThemeColor('kirby-' + changes.color);
     } else {
-      this.classes.push(this.color);
+      this.classes[this.COLOR_INDEX] = this.color;
+      this.nativeColor = this.getThemeColor('kirby-primary');
     }
   }
 }
