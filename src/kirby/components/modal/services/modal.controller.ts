@@ -29,6 +29,8 @@ export class ModalController implements IModalController {
     modalCloseEvent.then((data) => {
       this.forgetTopModal();
       if (onCloseModal) {
+        // Since Ionic wraps the return value in an object, which contains data as a property, we need to return data.data
+        // We don't expect this on native, hence we return just data
         onCloseModal(typeof data === 'object' && 'data' in data ? data.data : data);
       }
     });
