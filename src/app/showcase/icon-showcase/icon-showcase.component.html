@@ -6,11 +6,11 @@
   
   <br />
   <br />
-  Use 'kirbyCustomName' if you want to add custom icons font. You need to include TTF file inside your project and add 'CustomIconSettings' under your NgModule
+  Use 'customName' if you want to add custom icons font. You need to include TTF file inside your project and add 'CustomIconSettings' under your NgModule
   <br />
   <pre>
     const customIconSettings: CustomIconSettings = {{ '{' }} 
-      font: '[PATH_TO_TTF_FILE]',
+      fontfamily: "ios-font-name', 'android-font-file-name'",
       icons: [
         {{ '{' }} 
           name: 'horse',

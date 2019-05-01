@@ -3,11 +3,12 @@ import { Directive, ElementRef, OnInit, Input, Inject } from '@angular/core';
 import { CUSTOM_FONT_SETTINGS, CustomIconSettings } from './custom-icon-settings';
 
 @Directive({
-  selector: 'kirby-icon[kirbyCustomName]',
+  // tslint:disable-next-line:directive-selector
+  selector: 'kirby-icon[customName]',
 })
 export class CustomIconNameDirective implements OnInit {
   // tslint:disable-next-line:no-input-rename
-  @Input('kirbyCustomName') iconName: string;
+  @Input('customName') iconName: string;
 
   constructor(
     private element: ElementRef,
@@ -25,7 +26,7 @@ export class CustomIconNameDirective implements OnInit {
       if (icon !== undefined) {
         this.setCustomIcon(icon.svg);
       } else {
-        console.warn('Icon with name', this.iconName, 'was not found in costume font.');
+        console.warn('Icon with name', this.iconName, 'was not found in custom font.');
       }
     }
   }

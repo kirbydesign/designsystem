@@ -4,7 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { KirbyModule } from '../../../kirby/kirby.module';
 import { IconExampleComponent } from './icon-example.component';
 import { CUSTOM_FONT_SETTINGS } from '~/kirby/components/icon/custom-icon-settings';
-import { customIconSettings } from '../examples.module';
+import { customIconSettings } from '../examples.common';
 
 describe('IconExampleComponent', () => {
   let component: IconExampleComponent;

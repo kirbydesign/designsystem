@@ -40,7 +40,7 @@ export class IconShowcaseComponent {
       inputValues: ['primary', 'secondary', 'tertiary', 'warning', 'success', 'danger'],
     },
     {
-      name: 'kirbyCustomName',
+      name: 'customName',
       description: 'Used for custom icons font.',
       defaultValue: 'null',
       inputValues: ['string'],

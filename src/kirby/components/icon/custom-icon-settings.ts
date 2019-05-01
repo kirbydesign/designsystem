@@ -1,7 +1,7 @@
 import { InjectionToken } from '@angular/core';
 
 export interface CustomIconSettings {
-  font: string;
+  fontfamily: string;
   icons: Array<{ name: string; svg: string; unicode: string }>;
 }
 
