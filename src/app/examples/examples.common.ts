@@ -16,6 +16,7 @@ import { ChipExampleComponent } from './chip-example/chip-example.component';
 import { BadgeExampleComponent } from './badge-example/badge-example.component';
 import { IconExampleComponent } from './icon-example/icon-example.component';
 import { SegmentedChipControlExampleComponent } from './segmented-chip-control-example/segmented-chip-control-example.component';
+import { ActionSheetExampleComponent } from './action-sheet-example/action-sheet-example.component';
 
 export const COMPONENT_DECLARATIONS: any[] = [
   ButtonExampleComponent,
@@ -36,4 +37,5 @@ export const COMPONENT_DECLARATIONS: any[] = [
   ChipExampleComponent,
   BadgeExampleComponent,
   IconExampleComponent,
+  ActionSheetExampleComponent,
 ];

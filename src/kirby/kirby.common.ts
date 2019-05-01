@@ -30,6 +30,9 @@ import { BadgeComponent } from './components/badge/badge.component';
 import { ModalController } from './components/modal/services/modal.controller';
 import { IModalController } from './components/modal/services/modal.controller.interface';
 import { ModalHelper } from './components/modal/services/modal.helper';
+import { ActionSheetController } from './components/action-sheet/services/action-sheet.controller';
+import { ActionSheetHelper } from './components/action-sheet/services/action-sheet.helper';
+import { ActionSheetComponent } from './components/action-sheet/action-sheet.component';
 
 export const declarations = [
   CardComponent,
@@ -55,6 +58,7 @@ export const declarations = [
   GroupByPipe,
   SpinnerComponent,
   ModalComponent,
+  ActionSheetComponent,
   SegmentedControlComponent,
   ChipComponent,
   SegmentedChipControlComponent,
@@ -65,5 +69,7 @@ export const providerDeclarations: any[] = [
   ModalController,
   // the provider below is used to fix a cyclic reference problem inside ModalComponent.ts
   { provide: IModalController, useExisting: ModalController },
+  ActionSheetController,
+  ActionSheetHelper,
   ModalHelper,
 ];

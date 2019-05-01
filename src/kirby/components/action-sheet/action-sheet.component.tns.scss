@@ -1,0 +1,12 @@
+@import "../../scss/native-imports";
+
+.action-sheet-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+.action-sheet {
+  padding: size('xs');
+  background-color: white;
+  width: 100%;
+}
