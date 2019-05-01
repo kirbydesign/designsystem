@@ -1,16 +1,5 @@
 @import '../../scss/native-imports'; 
 @import '../../scss/web-imports';
-.small {
-  --size: size('s');
-}
-
-.medium {
-  --size: size('m');
-}
-
-.large {
-  --size: size('l');
-}
 
 .checkbox {
   --border-color: #{get-color('kirby-primary-contrast')};
@@ -32,4 +21,22 @@
   --checkmark-color:  #{get-color('kirby-tertiary-contrast')};
   --background-checked:  #{get-color('kirby-tertiary')};
   --border-color-checked:  #{get-color('kirby-tertiary')};
+}
+
+.warning {
+  --checkmark-color:  #{get-color('kirby-alert-contrast')};
+  --background-checked:  #{get-color('kirby-alert')};
+  --border-color-checked:  #{get-color('kirby-alert')};
+}
+
+.success {
+  --checkmark-color:  #{get-color('kirby-success-contrast')};
+  --background-checked:  #{get-color('kirby-success')};
+  --border-color-checked:  #{get-color('kirby-success')};
+}
+
+.danger {
+  --checkmark-color:  #{get-color('kirby-danger-contrast')};
+  --background-checked:  #{get-color('kirby-danger')};
+  --border-color-checked:  #{get-color('kirby-danger')};
 }
