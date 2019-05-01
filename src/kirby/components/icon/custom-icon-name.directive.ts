@@ -19,24 +19,14 @@ export class CustomIconNameDirective implements OnInit {
   }
 
   handleCustomIcon() {
-    if (!this.customIconSettings[0].icons) {
-      console.warn('Add CustomIconSettings inside your module.');
-      return;
-    }
+    if (this.iconName && this.customIconSettings[0].icons) {
+      const icon = this.getCustomIcon(this.iconName);
 
-    if (!this.iconName) {
-      console.warn(
-        'You must add an icon name to your kirby-icon. E.g: <kirby-icon kirbyCustomName="happy"></kirby-icon>'
-      );
-      return;
-    }
-
-    const icon = this.getCustomIcon(this.iconName);
-
-    if (icon !== undefined) {
-      this.setCustomIcon(icon.svg);
-    } else {
-      console.warn('Icon with name', this.iconName, 'was not found in costume font.');
+      if (icon !== undefined) {
+        this.setCustomIcon(icon.svg);
+      } else {
+        console.warn('Icon with name', this.iconName, 'was not found in costume font.');
+      }
     }
   }
 
