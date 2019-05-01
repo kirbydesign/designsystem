@@ -10,6 +10,14 @@
     margin-bottom: 1rem;
 }
 
+.github-error {
+    font-style: italic;
+    ion-icon[name="alert"] {
+        font-size: 24px;
+        vertical-align: text-bottom;   
+    }
+}
+
 .component-status {
     width: 100%;
     border-collapse: collapse;
@@ -64,13 +72,13 @@
         &.component:not(.expanded),
         &.subcomponent:last-child
         {
-            border-bottom: .1rem solid var(--kirby-grey-4);
+            border-bottom: .1rem solid get-color('kirby-medium');
         }
 
         &.subcomponent {
             vertical-align: middle;
-            border-top: .1rem dashed var(--kirby-grey-4);
-            color: var(--kirby-grey-7);
+            border-top: .1rem dashed get-color('kirby-medium');
+            color: get-color('kirby-dark-tint');
             font-size: font-size("s");
     
             td {
@@ -81,13 +89,13 @@
             }
     
             a {
-                color: var(--kirby-grey-7);
+                color: get-color('kirby-dark-tint');
             }
             
         }
 
         &.someday-maybe {
-            color: var(--kirby-grey-7);
+            color: get-color('kirby-dark-tint');
             font-style: italic;
         }   
     
@@ -105,7 +113,7 @@
         }
 
         &.someday-maybe {
-            color: var(--kirby-grey-7);
+            color: get-color('kirby-dark-tint');
             font-style: italic;
         }
     }
@@ -115,14 +123,14 @@
         font-size: 18px;
 
         &[name="open"] {
-            color: var(--kirby-grey-8);
+            color: get-color('kirby-contrast-dark');
         }
     }
     
     ion-badge {
         vertical-align: sub;
         margin-left: 0.5rem;
-        --background: var(--kirby-grey-5);
-        --color: var(--kirby-white);
+        --background: #{get-color(kirby-dark-tint)};
+        --color: #{get-color(kirby-contrast-light)};
     }
 }

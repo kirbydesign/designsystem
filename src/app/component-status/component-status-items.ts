@@ -34,11 +34,11 @@ export enum ItemCodeStatus {
 }
 
 export enum ItemCodeStatusOrder {
+  'Ready' = 0,
+  'In development' = 1,
+  'Planned' = 2,
   'Under consideration' = 3,
   'Not currently planned' = 4,
-  'Planned' = 1,
-  'In development' = 0,
-  'Ready' = 2,
 }
 
 export const componentStatusItems: ComponentStatusItem[] = [
