@@ -38,9 +38,7 @@ export class CheckboxComponent implements OnInit, OnChanges {
     this.checkedChange.emit(this.checked);
   }
 
-  constructor() {}
-
-  ngOnInit() {}
+  ngOnInit() { }
 
   getThemeColor(name: string) {
     return style.global['$kirby-colors'].value[name].value.hex;
