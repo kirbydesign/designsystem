@@ -2,26 +2,37 @@
 
 // Global modal styling can be found at scss/web/_ionic.scss
 
-.modal-content {
-  padding: 15px;
+.modal-wrapper {
+  display: flex;
+  flex-flow: column;
   height: 100%;
-
-  .text-center {
-    text-align: center;
-  }
-
-  .text-left {
-    text-align: left;
-  }
+  padding: 5px;
 
   .dismiss-button {
-    position: absolute;
-    top: 15px;
-    right: 15px;
+    position: fixed;
+    top: -70px;
+    right: 5px;
   }
 
-  .inner-component {
-    max-height: 85%;
-    overflow: auto;
+  .modal-header {
+    flex: 0 1 50px;
+
+    .title {
+      padding-top: 10px;
+    }
+
+    .text-left {
+      text-align: left;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+  }
+
+  .modal-content {
+    flex: 1 1 auto;
+    height: 100%;
+    overflow: scroll;
   }
 }
