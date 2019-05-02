@@ -56,7 +56,6 @@ export class CustomIconNameDirective implements AfterViewInit, OnChanges {
 
   setCustomIcon(unicode: string, fontFamily: string) {
     const hostElement = <LayoutBase>this.element.nativeElement;
-
     if (hostElement.getChildrenCount() > 0) {
       const label = <Label>hostElement.getChildAt(0);
       label.style.fontFamily = fontFamily;

@@ -25,14 +25,14 @@ export const customIconSettings: CustomIconSettings = {
   fontfamily: "'Ionicons', 'ionicons'",
   icons: [
     {
-      name: 'horse',
-      svg: 'assets/icons/sprites/office.svg',
-      unicode: '0xf331',
+      name: 'football',
+      svg: 'assets/icons/football.svg',
+      unicode: '0xf2f6',
     },
     {
-      name: 'happy',
-      svg: 'assets/icons/happy.svg',
-      unicode: '0xf389',
+      name: 'umbrella',
+      svg: 'assets/icons/umbrella.svg',
+      unicode: '0xf25f',
     },
   ],
 };
