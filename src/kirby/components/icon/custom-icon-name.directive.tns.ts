@@ -1,10 +1,12 @@
+import { LayoutBase } from 'tns-core-modules/ui/layouts/layout-base';
+import { Label } from 'tns-core-modules/ui/label/label';
 import { Directive, ElementRef, Input, Inject } from '@angular/core';
 
 import { CUSTOM_FONT_SETTINGS, CustomIconSettings } from './custom-icon-settings';
 
 @Directive({
   // tslint:disable-next-line:directive-selector
-  selector: 'kirby-icon[customName]',
+  selector: '[customName]',
 })
 export class CustomIconNameDirective {
   @Input() set customName(name: string) {
@@ -12,7 +14,6 @@ export class CustomIconNameDirective {
       this.handleCustomIcon(name);
     }
   }
-
   constructor(
     private element: ElementRef,
     @Inject(CUSTOM_FONT_SETTINGS) private customIconSettings: CustomIconSettings
@@ -20,12 +21,15 @@ export class CustomIconNameDirective {
 
   handleCustomIcon(name: string) {
     if (this.customIconSettings[0].icons) {
+      const fontFamily = this.customIconSettings[0].fontfamily;
       const icon = this.getCustomIcon(name);
 
-      if (icon !== undefined) {
-        this.setCustomIcon(icon.svg);
-      } else {
+      if (fontFamily === undefined) {
+        console.warn('Missing font-family.');
+      } else if (icon === undefined) {
         console.warn('Icon with name', name, 'was not found in custom font.');
+      } else {
+        this.setCustomIcon(icon.unicode, fontFamily);
       }
     }
   }
@@ -34,10 +38,13 @@ export class CustomIconNameDirective {
     return this.customIconSettings[0].icons.find((icon) => icon.name === name);
   }
 
-  setCustomIcon(svg: string) {
-    const hostElement = <HTMLElement>this.element.nativeElement;
-    if (hostElement.children.length > 0) {
-      hostElement.children[0].setAttribute('src', svg);
+  setCustomIcon(unicode: string, fontFamily: string) {
+    const hostElement = <LayoutBase>this.element.nativeElement;
+
+    if (hostElement.getChildrenCount() > 0) {
+      const label = <Label>hostElement.getChildAt(0);
+      label.style.fontFamily = fontFamily;
+      label.text = String.fromCharCode(Number(unicode));
     }
   }
 }

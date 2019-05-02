@@ -22,7 +22,7 @@ import {
 } from '~/kirby/components/icon/custom-icon-settings';
 
 export const customIconSettings: CustomIconSettings = {
-  fontfamily: "'ios-font-name', 'android-font-file-name'",
+  fontfamily: "'Ionicons', 'ionicons';",
   icons: [
     {
       name: 'horse',
