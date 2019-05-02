@@ -11,13 +11,13 @@ import {
 } from '@angular/core';
 
 import { CUSTOM_FONT_SETTINGS, CustomIconSettings } from './custom-icon-settings';
-import { StackLayout } from 'tns-core-modules/ui/layouts/stack-layout/stack-layout';
 
 @Directive({
   // tslint:disable-next-line:directive-selector
   selector: '[customName]',
 })
 export class CustomIconNameDirective implements AfterViewInit, OnChanges {
+  // tslint:disable-next-line:no-input-rename
   @Input('customName') customName: string;
 
   constructor(
