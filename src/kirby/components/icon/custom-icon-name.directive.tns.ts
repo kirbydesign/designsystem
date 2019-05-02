@@ -1,26 +1,42 @@
 import { LayoutBase } from 'tns-core-modules/ui/layouts/layout-base';
 import { Label } from 'tns-core-modules/ui/label/label';
-import { Directive, ElementRef, Input, Inject } from '@angular/core';
+import {
+  Directive,
+  ElementRef,
+  Input,
+  Inject,
+  AfterViewInit,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 
 import { CUSTOM_FONT_SETTINGS, CustomIconSettings } from './custom-icon-settings';
+import { StackLayout } from 'tns-core-modules/ui/layouts/stack-layout/stack-layout';
 
 @Directive({
   // tslint:disable-next-line:directive-selector
   selector: '[customName]',
 })
-export class CustomIconNameDirective {
-  @Input() set customName(name: string) {
-    if (name) {
-      this.handleCustomIcon(name);
-    }
-  }
+export class CustomIconNameDirective implements AfterViewInit, OnChanges {
+  @Input('customName') customName: string;
+
   constructor(
     private element: ElementRef,
     @Inject(CUSTOM_FONT_SETTINGS) private customIconSettings: CustomIconSettings
   ) {}
 
+  ngAfterViewInit(): void {
+    this.handleCustomIcon(this.customName);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.customName) {
+      this.handleCustomIcon(this.customName);
+    }
+  }
+
   handleCustomIcon(name: string) {
-    if (this.customIconSettings[0].icons) {
+    if (name && this.customIconSettings[0].icons) {
       const fontFamily = this.customIconSettings[0].fontfamily;
       const icon = this.getCustomIcon(name);
 

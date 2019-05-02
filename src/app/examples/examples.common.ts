@@ -26,8 +26,8 @@ export const customIconSettings: CustomIconSettings = {
   icons: [
     {
       name: 'horse',
-      svg: '[PATH_TO_SVG_FILE]',
-      unicode: '[UNICODE_FROM_TTF_FILE]',
+      svg: 'assets/icons/sprites/office.svg',
+      unicode: '0xf331',
     },
     {
       name: 'happy',
