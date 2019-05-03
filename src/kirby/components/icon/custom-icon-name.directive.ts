@@ -18,7 +18,9 @@ export class CustomIconNameDirective {
     @Optional() @Inject(CUSTOM_FONT_SETTINGS) private customIconSettings?: CustomIconSettings
   ) {
     if (!this.customIconSettings) {
-      console.warn('CUSTOM_FONT_SETTINGS provider in your module.ts is not set. Read documentation on how to set it up.');
+      console.warn(
+        'CUSTOM_FONT_SETTINGS provider in your module.ts is not set. Read documentation on how to set it up.'
+      );
     }
   }
 
