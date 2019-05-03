@@ -31,7 +31,8 @@
     "postinstall": "npm run build-polyfills && npm run transpile:tools",
     "postversion": "git push && git push --tags",
     "coverage-report": "cat ./coverage/lcov.info | coveralls",
-    "transpile:tools": "tsc -p tools/tslint-rules"
+    "transpile:tools": "tsc -p tools/tslint-rules",
+    "generate:icons": "node tools/webfonts-generator src=src/assets/icons/sprites dest=src/assets/fonts/icons fontname=kirby"
   },
   "private": true,
   "dependencies": {
