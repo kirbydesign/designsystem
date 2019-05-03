@@ -5,6 +5,7 @@ import {
   ElementRef,
   Input,
   Inject,
+  Optional,
   AfterViewInit,
   OnChanges,
   SimpleChanges,
@@ -22,15 +23,21 @@ export class CustomIconNameDirective implements AfterViewInit, OnChanges {
 
   constructor(
     private element: ElementRef,
-    @Inject(CUSTOM_FONT_SETTINGS) private customIconSettings: CustomIconSettings
-  ) {}
+    @Optional() @Inject(CUSTOM_FONT_SETTINGS) private customIconSettings?: CustomIconSettings
+  ) {
+    if (!this.customIconSettings) {
+      console.warn('CUSTOM_FONT_SETTINGS provider in your module.ts is not set. Read documentetion on how to set it up.');
+    }
+  }
 
   public ngAfterViewInit(): void {
-    this.handleCustomIcon(this.customName);
+    if (this.customIconSettings) {
+      this.handleCustomIcon(this.customName);
+    }
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
-    if (changes.customName) {
+    if (changes.customName && this.customIconSettings) {
       this.handleCustomIcon(this.customName);
     }
   }
