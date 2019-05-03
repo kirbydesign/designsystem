@@ -6,10 +6,11 @@ const webfontsGenerator = require('webfonts-generator');
  */
 const src = getNamedArg('src');
 const dest = getNamedArg('dest');
+const fontname = getNamedArg('fontname', true) || 'iconfont';
 
 if(src && dest) {
   const icons = locateIcons(src);
-  generateWebfont(icons, dest);
+  generateWebfont(icons, dest, fontname);
 }
 
 /*
@@ -30,10 +31,11 @@ function locateIcons(src) {
 /*
  * Generate webfont
  */
-function generateWebfont(icons, dest) {
+function generateWebfont(icons, dest, fontname) {
   webfontsGenerator({
     files: icons,
     dest,
+    fontName: fontname,
     html: true,
     htmlTemplate: `${__dirname}/html.hbs`
   }, function(error) {
