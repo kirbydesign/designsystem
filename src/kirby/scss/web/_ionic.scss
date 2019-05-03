@@ -43,3 +43,16 @@
     --ion-background-color: transparent;
   }
 }
+
+.kirby-action-sheet {
+  --background: transparent;
+  --box-shadow: none;
+  --width: auto;
+  --max-width: 100%;
+  --height: auto;
+  --max-height: 100%;
+
+  ion-backdrop {
+    opacity: 0 !important;
+  }
+}

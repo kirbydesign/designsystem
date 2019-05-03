@@ -1,0 +1,24 @@
+@import "../../scss/web-imports";
+
+.action-sheet-wrapper {
+  height: 100%;
+    // width: 50px;
+
+  .action-sheet {
+    background-color: transparent;
+    width: 100%;
+    padding-left: size("m");
+    padding-right: size("m");
+    margin-bottom: size("l");
+  }
+
+  .action-sheet-card {
+    text-align: center;
+  }
+
+  .action-sheet-card-header {
+    text-align: center;
+    line-break: auto;
+    padding: 10px;
+  }
+}
