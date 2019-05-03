@@ -40,9 +40,9 @@ export class CustomIconNameDirective implements AfterViewInit, OnChanges {
       const fontFamily = this.customIconSettings[0].fontfamily;
       const icon = this.getCustomIcon(name);
 
-      if (fontFamily === undefined) {
+      if (!fontFamily) {
         console.warn('Missing font-family.');
-      } else if (icon === undefined) {
+      } else if (!icon) {
         console.warn('Icon with name', name, 'was not found in custom font.');
       } else {
         this.setCustomIcon(icon.unicode, fontFamily);

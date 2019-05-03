@@ -22,7 +22,7 @@ export class CustomIconNameDirective {
     if (this.customIconSettings[0].icons) {
       const icon = this.getCustomIcon(name);
 
-      if (icon !== undefined) {
+      if (icon) {
         this.setCustomIcon(icon.svg);
       } else {
         console.warn('Icon with name', name, 'was not found in custom font.');
