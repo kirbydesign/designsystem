@@ -18,7 +18,7 @@ export class CustomIconNameDirective {
     @Inject(CUSTOM_FONT_SETTINGS) private customIconSettings: CustomIconSettings
   ) {}
 
-  handleCustomIcon(name: string) {
+  private handleCustomIcon(name: string) {
     if (this.customIconSettings[0].icons) {
       const icon = this.getCustomIcon(name);
 
@@ -30,11 +30,11 @@ export class CustomIconNameDirective {
     }
   }
 
-  getCustomIcon(name: string): { name: string; svg: string; unicode: string } {
+  private getCustomIcon(name: string): { name: string; svg: string; unicode: string } {
     return this.customIconSettings[0].icons.find((icon) => icon.name === name);
   }
 
-  setCustomIcon(svg: string) {
+  private setCustomIcon(svg: string) {
     const hostElement = <HTMLElement>this.element.nativeElement;
     if (hostElement.children.length > 0) {
       hostElement.children[0].setAttribute('src', svg);

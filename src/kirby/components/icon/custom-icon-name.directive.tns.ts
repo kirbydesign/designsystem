@@ -25,17 +25,17 @@ export class CustomIconNameDirective implements AfterViewInit, OnChanges {
     @Inject(CUSTOM_FONT_SETTINGS) private customIconSettings: CustomIconSettings
   ) {}
 
-  ngAfterViewInit(): void {
+  public ngAfterViewInit(): void {
     this.handleCustomIcon(this.customName);
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  public ngOnChanges(changes: SimpleChanges): void {
     if (changes.customName) {
       this.handleCustomIcon(this.customName);
     }
   }
 
-  handleCustomIcon(name: string) {
+  private handleCustomIcon(name: string) {
     if (name && this.customIconSettings[0].icons) {
       const fontFamily = this.customIconSettings[0].fontfamily;
       const icon = this.getCustomIcon(name);
@@ -50,11 +50,11 @@ export class CustomIconNameDirective implements AfterViewInit, OnChanges {
     }
   }
 
-  getCustomIcon(name: string): { name: string; svg: string; unicode: string } {
+  private getCustomIcon(name: string): { name: string; svg: string; unicode: string } {
     return this.customIconSettings[0].icons.find((icon) => icon.name === name);
   }
 
-  setCustomIcon(unicode: string, fontFamily: string) {
+  private setCustomIcon(unicode: string, fontFamily: string) {
     const hostElement = <LayoutBase>this.element.nativeElement;
     if (hostElement.getChildrenCount() > 0) {
       const label = <Label>hostElement.getChildAt(0);
