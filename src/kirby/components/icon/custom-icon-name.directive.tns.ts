@@ -43,8 +43,8 @@ export class CustomIconNameDirective implements AfterViewInit, OnChanges {
   }
 
   private handleCustomIcon(name: string) {
-    if (name && this.customIconSettings[0].icons) {
-      const fontFamily = this.customIconSettings[0].fontfamily;
+    if (name && this.customIconSettings.icons) {
+      const fontFamily = this.customIconSettings.fontfamily;
       const icon = this.getCustomIcon(name);
 
       if (!fontFamily) {
@@ -58,7 +58,7 @@ export class CustomIconNameDirective implements AfterViewInit, OnChanges {
   }
 
   private getCustomIcon(name: string): { name: string; svg: string; unicode: string } {
-    return this.customIconSettings[0].icons.find((icon) => icon.name === name);
+    return this.customIconSettings.icons.find((icon) => icon.name === name);
   }
 
   private setCustomIcon(unicode: string, fontFamily: string) {

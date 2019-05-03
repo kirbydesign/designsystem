@@ -18,12 +18,12 @@ export class CustomIconNameDirective {
     @Optional() @Inject(CUSTOM_FONT_SETTINGS) private customIconSettings?: CustomIconSettings
   ) {
     if (!this.customIconSettings) {
-      console.warn('CUSTOM_FONT_SETTINGS provider in your module.ts is not set. Read documentetion on how to set it up.');
+      console.warn('CUSTOM_FONT_SETTINGS provider in your module.ts is not set. Read documentation on how to set it up.');
     }
   }
 
   private handleCustomIcon(name: string) {
-    if (this.customIconSettings[0].icons) {
+    if (this.customIconSettings.icons) {
       const icon = this.getCustomIcon(name);
 
       if (icon) {
@@ -35,7 +35,7 @@ export class CustomIconNameDirective {
   }
 
   private getCustomIcon(name: string): { name: string; svg: string; unicode: string } {
-    return this.customIconSettings[0].icons.find((icon) => icon.name === name);
+    return this.customIconSettings.icons.find((icon) => icon.name === name);
   }
 
   private setCustomIcon(svg: string) {

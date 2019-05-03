@@ -59,5 +59,5 @@ export const COMPONENT_DECLARATIONS: any[] = [
 ];
 
 export const PROVIDER_DECLARATIONS: any[] = [
-  { provide: CUSTOM_FONT_SETTINGS, useValue: customIconSettings, multi: true },
+  { provide: CUSTOM_FONT_SETTINGS, useValue: customIconSettings },
 ];
