@@ -20,6 +20,7 @@ import { BadgeShowcaseComponent } from './badge-showcase/badge-showcase.componen
 import { IconShowcaseComponent } from './icon-showcase/icon-showcase.component';
 import { SegmentedChipControlShowcaseComponent } from './segmented-chip-control-showcase/segmented-chip-control-showcase.component';
 import { ActionSheetShowcaseComponent } from './action-sheet-showcase/action-sheet-showcase.component';
+import { FabSheetShowcaseComponent } from './fab-sheet-showcase/fab-sheet-showcase.component';
 
 export const routes: Routes = [
   {
@@ -46,6 +47,10 @@ export const routes: Routes = [
       {
         path: 'floating-action-button',
         component: FloatingActionButtonShowcaseComponent,
+      },
+      {
+        path: 'fab-sheet',
+        component: FabSheetShowcaseComponent,
       },
       {
         path: 'avatar',

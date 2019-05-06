@@ -1,0 +1,10 @@
+@import "../../scss/web-imports";
+
+:host {
+    display: inline-flex;
+    
+    kirby-floating-action-button  {
+        z-index: 30000;
+    }
+}
+

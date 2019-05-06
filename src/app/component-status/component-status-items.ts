@@ -238,6 +238,20 @@ export const componentStatusItems: ComponentStatusItem[] = [
     },
   },
   {
+    component: 'Fab Sheet',
+    aliases: ['FAB'],
+    priority: 30,
+    ux: {
+      version: 1.0,
+      status: ItemUXStatus.planned,
+    },
+    code: {
+      version: 0.5,
+      status: ItemCodeStatus.inProgress,
+      cookbookUrl: 'showcase/fab-sheet',
+    },
+  },
+  {
     component: 'Icon',
     priority: 40,
     ux: {
