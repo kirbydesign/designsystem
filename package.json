@@ -32,7 +32,7 @@
     "postversion": "git push && git push --tags",
     "coverage-report": "cat ./coverage/lcov.info | coveralls",
     "transpile:tools": "tsc -p tools/tslint-rules",
-    "generate:icons": "node tools/webfonts-generator src=src/assets/icons/sprites dest=src/assets/fonts/icons fontname=kirby"
+    "generate:icons": "node tools/webfonts-generator src=src/assets/icons dest=src/assets/fonts/icons fontname=kirby"
   },
   "private": true,
   "dependencies": {

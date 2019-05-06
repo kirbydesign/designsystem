@@ -15,8 +15,9 @@ const dest = getNamedArg('dest');
 const fontname = getNamedArg('fontname', true) || 'iconfont';
 
 if(src && dest) {
-  handlebars.registerHelper('src', () => {
-    return new handlebars.SafeString(src);
+  handlebars.registerHelper('svg', () => {
+    const svg = src.substring(src.indexOf("assets"));
+    return new handlebars.SafeString(svg);
   });
 
   handlebars.registerHelper('dest', () => {
@@ -50,10 +51,9 @@ function generateWebfont(icons, dest, fontname) {
     files: icons,
     dest,
     fontName: fontname,
-    html: true,
-    htmlTemplate: `${__dirname}/html.hbs`,
-    cssDest: path.join(dest, fontname + '.json'),
-    cssTemplate: `${__dirname}/json.hbs`
+    types: ['ttf'],
+    cssDest: path.join(dest, fontname + '.ts'),
+    cssTemplate: `${__dirname}/customIconSettings.hbs`
   }, function(error) {
     if (error) {
       console.log('Fail!', error);

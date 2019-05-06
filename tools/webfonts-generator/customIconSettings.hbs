@@ -1,0 +1,14 @@
+import { CustomIconSettings } from '~/kirby/components/icon/custom-icon-settings';
+
+export const {{fontName}}CustomIconSettings: CustomIconSettings = {
+    fontfamily: "'{{fontName}}'",
+    icons: [
+        {{#each codepoints}}
+            {
+            "name": "{{@key}}",
+            "svg": "{{svg}}/{{@key}}.svg",
+            "unicode": "0x{{this}}"
+            }{{#if @last}}{{else}},{{/if}}
+        {{/each}}
+    ]
+};
