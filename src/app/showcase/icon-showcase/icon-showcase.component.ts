@@ -39,5 +39,11 @@ export class IconShowcaseComponent {
       defaultValue: 'null',
       inputValues: ['primary', 'secondary', 'tertiary', 'warning', 'success', 'danger'],
     },
+    {
+      name: 'customName',
+      description: 'Used for custom icons font.',
+      defaultValue: 'null',
+      inputValues: ['string'],
+    },
   ];
 }
