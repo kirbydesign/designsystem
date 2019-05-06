@@ -7,62 +7,65 @@ import { By } from '@angular/platform-browser';
 import { DebugElement, SimpleChange } from '@angular/core';
 
 import { CheckboxComponent } from './checkbox.component';
+import { Spectator, createTestComponentFactory } from '@netbasal/spectator';
 
 describe('CheckboxComponent', () => {
+  const checked = true;
+  const shape = 'square';
+  const color = 'primary';
+
+  let spectator: Spectator<CheckboxComponent>;
   let component: CheckboxComponent;
   let fixture: ComponentFixture<CheckboxComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [CheckboxComponent, MockComponent(ionic.IonCheckbox)],
-    }).compileComponents();
-  }));
+  const createHost = createTestComponentFactory({
+    component: CheckboxComponent,
+    declarations: [MockComponent(ionic.IonCheckbox)]
+  });
+
+  // beforeEach(async(() => {
+  //   TestBed.configureTestingModule({
+  //     declarations: [CheckboxComponent, MockComponent(ionic.IonCheckbox)],
+  //   }).compileComponents();
+  // }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CheckboxComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    spectator = createHost({ checked, shape, color });
+    // fixture = TestBed.createComponent(CheckboxComponent);
+    // component = fixture.componentInstance;
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    // component.shape = 'square';
+    // component.ngOnChanges({
+    //   shape: new SimpleChange(null, component.shape, true),
+    // });
+    expect(spectator.component).toBeTruthy();
   });
 
   describe('function: onChecked', () => {
     it('should emit true', () => {
-      spyOn(component.checkedChange, 'emit');
+      spyOn(spectator.component.checkedChange, 'emit');
       const change = { value: true };
 
-      component.onChecked(change);
+      spectator.component.onChecked(change);
 
-      expect(component.checkedChange.emit).toHaveBeenCalledTimes(1);
-      expect(component.checkedChange.emit).toHaveBeenCalledWith(true);
+      expect(spectator.component.checkedChange.emit).toHaveBeenCalledTimes(1);
+      expect(spectator.component.checkedChange.emit).toHaveBeenCalledWith(true);
     });
   });
 
   describe('DOM: render templates', () => {
     it('should find the ion-checkbox element based on css class .square', () => {
-      component.shape = 'square';
-      component.ngOnChanges({
-        shape: new SimpleChange(null, component.shape, true),
-      });
-      fixture.detectChanges();
-      const checkboxDe: DebugElement = fixture.debugElement;
-      const ionCheckboxDe = checkboxDe.query(By.css('.square'));
-      const ionCheckbox: HTMLElement = ionCheckboxDe.nativeElement;
-      expect(ionCheckbox).not.toBe(null);
+      spectator.setInput('shape', 'square');
+
+      expect(spectator.query('ion-checkbox')).toHaveClass('square');
     });
 
     it('should find the ion-checkbox element based on css class .circle', () => {
-      component.shape = 'circle';
-      component.ngOnChanges({
-        shape: new SimpleChange(null, component.shape, true),
-      });
-      fixture.detectChanges();
-      const checkboxDe: DebugElement = fixture.debugElement;
-      const ionCheckboxDe = checkboxDe.query(By.css('.circle'));
-      const ionCheckbox: HTMLElement = ionCheckboxDe.nativeElement;
-      expect(ionCheckbox).not.toBe(null);
+      spectator.setInput('shape', 'circle');
+
+      expect(spectator.query('ion-checkbox')).toHaveClass('circle');
     });
   });
 });

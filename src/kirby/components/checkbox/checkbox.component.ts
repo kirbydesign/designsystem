@@ -10,6 +10,8 @@ import {
   ChangeDetectionStrategy,
 } from '@angular/core';
 
+import { createTestComponentFactory, Spectator } from '@netbasal/spectator';
+
 declare var require: any;
 const style: any = require('sass-extract-loader!./checkbox.component.scss');
 
@@ -39,7 +41,9 @@ export class CheckboxComponent implements OnInit, OnChanges {
   ngOnInit() { }
 
   getThemeColor(name: string) {
-    return style.global['$kirby-colors'].value[name].value.hex;
+    const globalValue = style.global['$kirby-colors'].value[name];
+    const styleVar = globalValue.value.hex;
+    return styleVar;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -54,7 +58,7 @@ export class CheckboxComponent implements OnInit, OnChanges {
 
     if (changes.color) {
       this.classes[this.COLOR_INDEX] = color.currentValue;
-      this.nativeColor = this.getThemeColor('kirby-' + changes.color);
+      this.nativeColor = this.getThemeColor('kirby-' + changes.color.currentValue);
     } else {
       this.classes[this.COLOR_INDEX] = this.color;
       this.nativeColor = this.getThemeColor('kirby-primary');
