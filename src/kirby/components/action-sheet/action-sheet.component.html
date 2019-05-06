@@ -1,4 +1,4 @@
-<div class="action-sheet-wrapper" dismissEnabled="false">
+<div class="action-sheet-wrapper" dismissEnabled="true">
     <div class="action-sheet">
         <kirby-card class="action-sheet-card">
             <div class="action-sheet-card-header">
@@ -8,8 +8,8 @@
                 </p>
             </div>
             <kirby-list [items]="items" (itemSelect)="onItemSelect($event)">
-                <kirby-list-cell *kirbyListCell="let item" horizontalAlignment="right">
-                    <kirby-list-cell-line [text]="item"></kirby-list-cell-line>
+                <kirby-list-cell *kirbyListCell="let item">
+                    <kirby-list-cell-line class="option" [text]="item"></kirby-list-cell-line>
                 </kirby-list-cell>
             </kirby-list>
         </kirby-card>

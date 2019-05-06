@@ -28,31 +28,30 @@
   --border-radius: 15px;
   --width: 600px;
   --height: 300px;
+  --overflow: visible;
   position: fixed;
+}
 
-  .modal-wrapper {
-    margin-top: 150px;
-    --overflow: visible;
-  }
-
-  .ion-page {
-    overflow: visible;
-  }
-
-  ion-content {
-    --ion-background-color: transparent;
-  }
+.backdrop-no-scroll {
+  overflow: hidden;
 }
 
 .kirby-action-sheet {
   --background: transparent;
   --box-shadow: none;
-  --width: auto;
-  --max-width: 100%;
-  --height: auto;
-  --max-height: 100%;
+  --width: 100%;
+  --height: 100%;
 
+  .selectable {
+    cursor: pointer;
+    height: 50px;
+  }
+  
   ion-backdrop {
     opacity: 0 !important;
   }
 }
+
+// .backdrop-no-scroll {
+//   overflow: hidden;
+// }

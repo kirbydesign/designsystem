@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./action-sheet.component.scss'],
 })
 export class ActionSheetComponent {
-  items: string[] = ['Option 1', 'Option 2', 'Option 3'];
+  items: string[] = ['Vis spørgsmål og svar', 'Ring os op'];
   constructor() {}
 
   onItemSelect(e: any) {

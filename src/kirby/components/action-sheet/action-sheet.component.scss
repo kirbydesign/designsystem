@@ -1,24 +1,26 @@
 @import "../../scss/web-imports";
 
 .action-sheet-wrapper {
-  height: 100%;
-    // width: 50px;
 
   .action-sheet {
     background-color: transparent;
-    width: 100%;
-    padding-left: size("m");
-    padding-right: size("m");
+    width: 250px;
     margin-bottom: size("l");
-  }
+    margin-top: 100px;
+    margin-left: 25px;
 
-  .action-sheet-card {
-    text-align: center;
-  }
+    .action-sheet-card {
+      text-align: center;
 
-  .action-sheet-card-header {
-    text-align: center;
-    line-break: auto;
-    padding: 10px;
+      .action-sheet-card-header {
+        text-align: center;
+        line-break: auto;
+        padding: 10px;
+      }
+    }
+    
+    .option {
+      width: 100%;
+    }
   }
 }
