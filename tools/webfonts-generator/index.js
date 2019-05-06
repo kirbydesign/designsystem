@@ -1,5 +1,7 @@
 const fs = require('fs');
+const path = require('path');
 const webfontsGenerator = require('webfonts-generator');
+const handlebars = require('handlebars');
 
 /*
  * Get required arguments, and init
@@ -32,12 +34,18 @@ function locateIcons(src) {
  * Generate webfont
  */
 function generateWebfont(icons, dest, fontname) {
+  handlebars.registerHelper('dest', () => {
+    return new handlebars.SafeString(dest);
+  });
+
   webfontsGenerator({
     files: icons,
     dest,
     fontName: fontname,
     html: true,
-    htmlTemplate: `${__dirname}/html.hbs`
+    htmlTemplate: `${__dirname}/html.hbs`,
+    cssDest: path.join(dest, fontname + '.json'),
+    cssTemplate: `${__dirname}/json.hbs`
   }, function(error) {
     if (error) {
       console.log('Fail!', error);
