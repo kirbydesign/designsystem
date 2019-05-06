@@ -30,6 +30,7 @@ import { BadgeComponent } from './components/badge/badge.component';
 import { ModalController } from './components/modal/services/modal.controller';
 import { IModalController } from './components/modal/services/modal.controller.interface';
 import { ModalHelper } from './components/modal/services/modal.helper';
+import { CustomIconNameDirective } from './components/icon/custom-icon-name.directive';
 
 export const declarations = [
   CardComponent,
@@ -48,6 +49,7 @@ export const declarations = [
   ListHeaderDirective,
   ListHeaderComponent,
   IconComponent,
+  CustomIconNameDirective,
   ChartComponent,
   GridComponent,
   ComponentLoaderDirective,
