@@ -15,6 +15,14 @@ const dest = getNamedArg('dest');
 const fontname = getNamedArg('fontname', true) || 'iconfont';
 
 if(src && dest) {
+  handlebars.registerHelper('src', () => {
+    return new handlebars.SafeString(src);
+  });
+
+  handlebars.registerHelper('dest', () => {
+    return new handlebars.SafeString(dest);
+  });
+
   const icons = locateIcons(src);
   generateWebfont(icons, dest, fontname);
 }
@@ -38,10 +46,6 @@ function locateIcons(src) {
  * Generate webfont
  */
 function generateWebfont(icons, dest, fontname) {
-  handlebars.registerHelper('dest', () => {
-    return new handlebars.SafeString(dest);
-  });
-
   webfontsGenerator({
     files: icons,
     dest,

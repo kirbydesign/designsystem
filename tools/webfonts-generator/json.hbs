@@ -1,11 +1,11 @@
 {
-    "fontfamily": "{{fontName}}",
+    "fontfamily": "'{{fontName}}';",
     "path": "{{dest}}",
     "icons": [
         {{#each codepoints}}
         {
             "name": "{{@key}}",
-            "svg": "{{@key}}.svg",
+            "svg": "{{src}}/{{@key}}.svg",
             "unicode": "\\{{this}}"
         }{{#if @last}}{{else}},{{/if}}
         {{/each}}
