@@ -13,16 +13,11 @@ export class ActionSheetExampleComponent {
     private vcRef: ViewContainerRef
   ) {}
 
-  openActionSheet() {
+  openActionSheet(e: any) {
     const config: ActionSheetConfig = {
-      title: 'Sample title',
-      message: 'Sample message',
-      actions: [
-        { text: 'Action 0', value: 0 },
-        { text: 'Action 1', value: 1 },
-        { text: 'Action 2', value: 2 },
-      ],
-      cancelButtonText: 'Cancel',
+      title: 'Brug for hjælp?',
+      message: 'Here is a message where we can put absolutely anything we want.',
+      actions: ['Vis spørgsmål og svar', 'Ring os op']
     };
     this.actionSheetController.showActionSheet(config, this.vcRef, this.myCallback);
   }

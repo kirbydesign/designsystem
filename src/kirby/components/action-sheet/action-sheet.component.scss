@@ -1,26 +1,20 @@
 @import "../../scss/web-imports";
 
-.action-sheet-wrapper {
+.action-sheet {
+  background-color: transparent;
+  width: 250px;
+  position: absolute;
 
-  .action-sheet {
-    background-color: transparent;
-    width: 250px;
-    margin-bottom: size("l");
-    margin-top: 100px;
-    margin-left: 25px;
+  .action-sheet-card {
+    text-align: center;
 
-    .action-sheet-card {
-      text-align: center;
-
-      .action-sheet-card-header {
-        text-align: center;
-        line-break: auto;
-        padding: 10px;
-      }
+    .action-sheet-card-header {
+      line-break: auto;
+      padding: 10px;
     }
-    
-    .option {
-      width: 100%;
-    }
+  }
+
+  .option {
+    width: 100%;
   }
 }
