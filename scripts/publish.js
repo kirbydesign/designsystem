@@ -6,6 +6,7 @@ var cpx = require('cpx');
 
 cpx.copySync('readme.md', 'dist-lib');
 cpx.copySync('src/kirby/**/!(*.spec.ts)', 'dist-lib');
+cpx.copySync('tools/webfonts-generator/**', 'dist-lib/tools/webfonts-generator');
 
 var fs = require('fs');
 var rootPkgJson = JSON.parse(fs.readFileSync('package.json', 'utf-8'));
