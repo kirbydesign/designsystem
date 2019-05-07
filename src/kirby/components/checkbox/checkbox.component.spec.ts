@@ -1,14 +1,11 @@
-/* tslint:disable:no-unused-variable */
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { Spectator, createTestComponentFactory } from '@netbasal/spectator';
+import { IonCheckbox } from '@ionic/angular';
 
 import { MockComponent } from 'ng-mocks';
 import * as ionic from '@ionic/angular';
-import { By } from '@angular/platform-browser';
-import { DebugElement, SimpleChange } from '@angular/core';
+import { SimpleChange } from '@angular/core';
 
 import { CheckboxComponent } from './checkbox.component';
-import { Spectator, createTestComponentFactory } from '@netbasal/spectator';
-import { IonCheckbox } from '@ionic/angular';
 
 describe('CheckboxComponent', () => {
   const checked = true;
@@ -16,8 +13,6 @@ describe('CheckboxComponent', () => {
   const color = 'primary';
 
   let spectator: Spectator<CheckboxComponent>;
-  let component: CheckboxComponent;
-  let fixture: ComponentFixture<CheckboxComponent>;
 
   const createHost = createTestComponentFactory({
     component: CheckboxComponent,
