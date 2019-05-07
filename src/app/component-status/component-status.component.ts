@@ -158,7 +158,9 @@ export class ComponentStatusComponent implements OnInit {
   }
 
   private getZeplinUrl(issue: { body: string }): string {
-    const matches = issue.body.match(/https:\/\/zpl\.io\/[a-z,0-9]{7}/i);
+    const matches = issue.body.match(
+      /https:\/\/(app\.zeplin|zpl)\.io\/(project\/[a-z,0-9]{24}\/screen\/[a-z,0-9]{24}|[a-z,0-9]{7})/i
+    );
     const url = matches ? matches[0] : null;
     return url;
   }
