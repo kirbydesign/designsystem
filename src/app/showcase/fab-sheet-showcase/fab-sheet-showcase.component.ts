@@ -24,13 +24,6 @@ export class FabSheetShowcaseComponent {
       inputValues: ['string'],
     },
     {
-      name: 'showShadow',
-      description:
-        'Determines whether the button will have a shadow or not. Default value is true.',
-      defaultValue: 'true',
-      inputValues: ['boolean'],
-    },
-    {
       name: 'disabled',
       description: 'Determines whether the button will be disabled or not. Default value is false.',
       defaultValue: 'false',

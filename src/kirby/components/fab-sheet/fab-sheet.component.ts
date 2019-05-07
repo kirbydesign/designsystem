@@ -13,7 +13,6 @@ export class FabSheetComponent implements OnChanges {
 
   ngOnChanges() {
     // set default values if not set from component
-    this.config.showShadow = this.config.showShadow === undefined ? true : this.config.showShadow;
     this.config.disabled = this.config.disabled === undefined ? false : this.config.disabled;
   }
 
@@ -44,14 +43,4 @@ export class FabSheetComponent implements OnChanges {
   private closeFabSheet() {
     this.isFabSheetOpen = false;
   }
-
-  private myCallback = (selection: string) => {
-    this.isFabSheetOpen = !this.isFabSheetOpen;
-    console.log('Dialog selection: ' + selection);
-    if (selection == 'Option 1') {
-      //Do action1
-    } else if (selection == 'Option 2') {
-      //Do action2
-    }
-  };
 }
