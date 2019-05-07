@@ -27,7 +27,7 @@ export class ComponentStatusComponent implements OnInit {
   searchTerm$ = new BehaviorSubject<string>('');
   uxStatusEnum = ItemUXStatus;
   codeStatusEnum = ItemCodeStatus;
-  excludedStatuses: ItemCodeStatus[] = []; // [ItemCodeStatus.ready, ItemCodeStatus.notCurrentlyPlanned]; //[];
+  excludedStatuses: ItemCodeStatus[] = [];
   newIssueUrl =
     environment.githubBaseUrl +
     '/issues/new?labels=component&template=component-request.md&title=%5BCOMPONENT%5D+';
