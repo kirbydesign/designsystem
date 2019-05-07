@@ -1,10 +1,10 @@
 import { ActionSheetController } from './action-sheet.controller';
 import { ActionSheetHelper } from './action-sheet.helper';
 
-fdescribe('ActionSheetController', () => {
+describe('ActionSheetController', () => {
   let actionSheetController: ActionSheetController;
 
   beforeEach(() => {
-    actionSheetController = new ActionSheetController(new ActionSheetHelper());
+    // actionSheetController = new ActionSheetController(new ActionSheetHelper());
   });
 });

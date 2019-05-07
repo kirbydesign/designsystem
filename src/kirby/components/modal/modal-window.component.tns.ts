@@ -7,10 +7,10 @@ import { ModalConfigHelper } from './config/modal-config.helper';
 import { IModalController } from './services/modal.controller.interface';
 
 @Component({
-  templateUrl: './modal.component.html',
-  styleUrls: ['./modal.component.scss'],
+  templateUrl: './modal-window.component.html',
+  styleUrls: ['./modal-window.component.scss'],
 })
-export class ModalComponent extends ContentView {
+export class ModalWindowComponent extends ContentView {
   config: ModalConfig;
   view: View;
 

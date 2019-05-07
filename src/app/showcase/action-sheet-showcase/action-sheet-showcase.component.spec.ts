@@ -6,7 +6,7 @@ import { HtmlViewerComponent } from '../../shared/html-viewer/html-viewer.compon
 import { ActionSheetShowcaseComponent } from './action-sheet-showcase.component';
 import { ShowcasePropertiesComponent } from '~/app/shared/showcase-properties/showcase-properties.component';
 
-fdescribe('ActionSheetShowcaseComponent', () => {
+describe('ActionSheetShowcaseComponent', () => {
   let component: ActionSheetShowcaseComponent;
   let fixture: ComponentFixture<ActionSheetShowcaseComponent>;
 

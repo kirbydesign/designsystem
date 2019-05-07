@@ -22,7 +22,7 @@ import { ListHeaderComponent } from './components/list/list-header/list-header.c
 import { ListCellComponent } from './components/list/list-cell/list-cell.component';
 import { ListCellLineComponent } from './components/list/list-cell-line/list-cell-line.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
-import { ModalComponent } from './components/modal/modal.component';
+import { ModalWindowComponent } from './components/modal/modal-window.component';
 import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
 import { ChipComponent } from './components/chip/chip.component';
 import { SegmentedChipControlComponent } from './components/segment/segmented-chip-control/segmented-chip-control.component';
@@ -57,7 +57,7 @@ export const declarations = [
   AvatarComponent,
   GroupByPipe,
   SpinnerComponent,
-  ModalComponent,
+  ModalWindowComponent,
   ActionSheetComponent,
   SegmentedControlComponent,
   ChipComponent,
@@ -67,7 +67,7 @@ export const declarations = [
 
 export const providerDeclarations: any[] = [
   ModalController,
-  // the provider below is used to fix a cyclic reference problem inside ModalComponent.ts
+  // the provider below is used to fix a cyclic reference problem inside ModalWindowComponent.ts
   { provide: IModalController, useExisting: ModalController },
   ActionSheetController,
   ActionSheetHelper,

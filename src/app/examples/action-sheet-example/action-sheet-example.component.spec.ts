@@ -4,7 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { KirbyModule } from '../../../kirby/kirby.module';
 import { ActionSheetExampleComponent } from './action-sheet-example.component';
 
-fdescribe('ActionSheetExampleComponent', () => {
+describe('ActionSheetExampleComponent', () => {
   let component: ActionSheetExampleComponent;
   let fixture: ComponentFixture<ActionSheetExampleComponent>;
 

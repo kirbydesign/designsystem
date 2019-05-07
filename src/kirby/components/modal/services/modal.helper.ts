@@ -2,7 +2,7 @@ import { Injectable, ViewContainerRef } from '@angular/core';
 import { ModalController as IonicModalController } from '@ionic/angular';
 
 import { ModalConfig } from '../config/modal-config';
-import { ModalComponent } from '../modal.component';
+import { ModalWindowComponent } from '../modal-window.component';
 
 @Injectable()
 export class ModalHelper {
@@ -14,7 +14,7 @@ export class ModalHelper {
     registerModal: (modal: { close: (data?: any) => {} }) => void
   ): Promise<any> {
     const modal = await this.ionicModalController.create({
-      component: ModalComponent,
+      component: ModalWindowComponent,
       cssClass: 'kirby-modal',
       componentProps: { config: config },
     });
