@@ -17,6 +17,26 @@ import { BadgeExampleComponent } from './badge-example/badge-example.component';
 import { IconExampleComponent } from './icon-example/icon-example.component';
 import { SegmentedChipControlExampleComponent } from './segmented-chip-control-example/segmented-chip-control-example.component';
 import { ActionSheetExampleComponent } from './action-sheet-example/action-sheet-example.component';
+import {
+  CUSTOM_FONT_SETTINGS,
+  CustomIconSettings,
+} from '~/kirby/components/icon/custom-icon-settings';
+
+export const customIconSettings: CustomIconSettings = {
+  fontfamily: "'Ionicons', 'ionicons'",
+  icons: [
+    {
+      name: 'football',
+      svg: 'assets/icons/football.svg',
+      unicode: '0xf2f6',
+    },
+    {
+      name: 'umbrella',
+      svg: 'assets/icons/umbrella.svg',
+      unicode: '0xf25f',
+    },
+  ],
+};
 
 export const COMPONENT_DECLARATIONS: any[] = [
   ButtonExampleComponent,
@@ -38,4 +58,8 @@ export const COMPONENT_DECLARATIONS: any[] = [
   BadgeExampleComponent,
   IconExampleComponent,
   ActionSheetExampleComponent,
+];
+
+export const PROVIDER_DECLARATIONS: any[] = [
+  { provide: CUSTOM_FONT_SETTINGS, useValue: customIconSettings },
 ];

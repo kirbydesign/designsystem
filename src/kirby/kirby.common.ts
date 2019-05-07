@@ -33,6 +33,7 @@ import { ModalHelper } from './components/modal/services/modal.helper';
 import { ActionSheetController } from './components/action-sheet/services/action-sheet.controller';
 import { ActionSheetHelper } from './components/action-sheet/services/action-sheet.helper';
 import { ActionSheetComponent } from './components/action-sheet/action-sheet.component';
+import { CustomIconNameDirective } from './components/icon/custom-icon-name.directive';
 
 export const declarations = [
   CardComponent,
@@ -51,6 +52,7 @@ export const declarations = [
   ListHeaderDirective,
   ListHeaderComponent,
   IconComponent,
+  CustomIconNameDirective,
   ChartComponent,
   GridComponent,
   ComponentLoaderDirective,
