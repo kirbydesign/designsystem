@@ -21,7 +21,7 @@ describe('CheckboxComponent', () => {
 
   const createHost = createTestComponentFactory({
     component: CheckboxComponent,
-    declarations: [MockComponent(ionic.IonCheckbox)]
+    declarations: [MockComponent(ionic.IonCheckbox)],
   });
 
   // beforeEach(async(() => {
