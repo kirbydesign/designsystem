@@ -230,19 +230,27 @@ export class ComponentStatusComponent implements OnInit {
     const regex = new RegExp(searchTerm, 'i');
     return items
       .filter((item) => {
-        return (
-          (item.code.enhancements &&
-            item.code.enhancements.find(
-              (enhancement) => !this.isExcluded(excludedStatuses, enhancement)
-            )) ||
-          (!this.isExcluded(excludedStatuses, item) && this.matchItem(item, regex))
-        );
+        return this.isIncluded(item, excludedStatuses) && this.matchItem(item, regex);
       })
       .concat(this.getGhostItems(searchTerm));
   }
 
-  private isExcluded(excludedStatuses: ItemCodeStatus[], item: ComponentStatusItem) {
+  private isIncluded(item: ComponentStatusItem, excludedStatuses: ItemCodeStatus[]) {
+    return (
+      !this.isExcluded(item, excludedStatuses) ||
+      this.hasIncludedEnhancement(item, excludedStatuses)
+    );
+  }
+
+  private isExcluded(item: ComponentStatusItem, excludedStatuses: ItemCodeStatus[]) {
     return excludedStatuses.includes(item.code.status as ItemCodeStatus);
+  }
+
+  private hasIncludedEnhancement(item: ComponentStatusItem, excludedStatuses: ItemCodeStatus[]) {
+    return (
+      item.code.enhancements &&
+      item.code.enhancements.find((enhancement) => !this.isExcluded(enhancement, excludedStatuses))
+    );
   }
 
   private matchItem(item: ComponentStatusItem, searchTerm: RegExp): boolean {
