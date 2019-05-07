@@ -49,7 +49,6 @@ export class ComponentStatusComponent implements OnInit {
   }
 
   private initializeGithubStatus() {
-    console.time('Initialize Github Status');
     Promise.all([
       this.loadGithubComponentRequests(),
       this.loadGithubComponentEnhancementRequests(),
@@ -57,19 +56,16 @@ export class ComponentStatusComponent implements OnInit {
       this.setCurrentGithubStatus().then((_) => {
         this.sortedItems = this.sortItems(this.items);
         this.isLoading = false;
-        console.timeEnd('Initialize Github Status');
       });
     });
   }
 
   private loadGithubComponentRequests() {
     return new Promise((resolve) => {
-      console.time('Get Github Issues');
       this.getStatusItemsFromGithubIssues()
         .pipe(first())
         .subscribe((githubItems) => {
           this.items = this.items.concat(githubItems);
-          console.timeEnd('Get Github Issues');
           resolve();
         });
     });
@@ -77,7 +73,6 @@ export class ComponentStatusComponent implements OnInit {
 
   private loadGithubComponentEnhancementRequests() {
     return new Promise((resolve) => {
-      console.time('Get Github Enhancement Requests');
       this.getEnhancementItemsFromGithubIssues()
         .pipe(first())
         .subscribe((enhancementItems) => {
@@ -93,7 +88,6 @@ export class ComponentStatusComponent implements OnInit {
                 }
               });
           });
-          console.timeEnd('Get Github Enhancement Requests');
           resolve();
         });
     });
@@ -309,7 +303,6 @@ export class ComponentStatusComponent implements OnInit {
 
   private setCurrentGithubStatus() {
     return new Promise((resolve) => {
-      console.time('Get Github Status');
       this.getGithubProjectStatus()
         .pipe(first())
         .subscribe((issues) => {
@@ -319,7 +312,6 @@ export class ComponentStatusComponent implements OnInit {
               .filter((item) => item.code.githubIssueNo === issue.number)
               .forEach((item) => (item.code.status = issue.status));
           });
-          console.timeEnd('Get Github Status');
           resolve();
         });
     });
