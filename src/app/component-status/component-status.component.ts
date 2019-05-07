@@ -123,6 +123,7 @@ export class ComponentStatusComponent implements OnInit {
 
   private mapGithubIssueToStatusItem(issue: any): ComponentStatusItem {
     const zeplinUrl = this.getZeplinUrl(issue);
+    const sketchUrl = this.getSketchUrl(issue);
     const uxStatus = zeplinUrl ? ItemUXStatus.inProgress : ItemUXStatus.underConsideration;
     const componentTitle = this.getComponentTitle(issue);
     const githubIssueTitle = issue.title.replace('[Enhancement] ', '');
@@ -133,7 +134,7 @@ export class ComponentStatusComponent implements OnInit {
       priority: 0,
       ux: {
         status: uxStatus,
-        wireFrameUrl: zeplinUrl,
+        wireFrameUrl: zeplinUrl || sketchUrl,
       },
       code: {
         status: ItemCodeStatus.underConsideration,
@@ -160,6 +161,14 @@ export class ComponentStatusComponent implements OnInit {
   private getZeplinUrl(issue: { body: string }): string {
     const matches = issue.body.match(
       /https:\/\/(app\.zeplin|zpl)\.io\/(project\/[a-z,0-9]{24}\/screen\/[a-z,0-9]{24}|[a-z,0-9]{7})/i
+    );
+    const url = matches ? matches[0] : null;
+    return url;
+  }
+
+  private getSketchUrl(issue: { body: string }): string {
+    const matches = issue.body.match(
+      /https:\/\/sketch\.cloud\/s\/[a-z,0-9]{5}\/[a-z,0-9]{7}(\/play)?/i
     );
     const url = matches ? matches[0] : null;
     return url;
