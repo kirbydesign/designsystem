@@ -558,10 +558,12 @@ export const componentStatusItems: ComponentStatusItem[] = [
     ux: {
       version: 0.9,
       status: ItemUXStatus.planned,
+      wireFrameUrl: 'https://sketch.cloud/s/7bga2/Gmlbp2Y',
     },
     code: {
       version: 0.5,
       status: ItemCodeStatus.inProgress,
+      githubIssueNo: 238,
     },
   },
 ];
