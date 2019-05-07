@@ -1,27 +1,32 @@
 import { Injectable, ViewContainerRef } from '@angular/core';
 
-import { ModalHelper } from './modal.helper';
-import { ModalConfig } from '../config/modal-config';
+import { ModalWindowHelper } from './modal-window.helper';
+import { ActionSheetHelper } from './action-sheet.helper';
+import { ModalWindowConfig } from '../modal-window/config/modal-window-config';
 import { IModalController } from './modal.controller.interface';
+import { ActionSheetConfig } from '../action-sheet/config/action-sheet-config';
 
 @Injectable()
 export class ModalController implements IModalController {
   private modals: { close: (data?: any) => {} }[] = [];
 
-  constructor(private modalHelper: ModalHelper) {}
+  constructor(
+    private modalWindowHelper: ModalWindowHelper,
+    private actionSheetHelper: ActionSheetHelper
+  ) {}
 
-  public showModal(
-    config: ModalConfig,
+  public showModalWindow(
+    config: ModalWindowConfig,
     vcRef: ViewContainerRef,
     onCloseModal?: (data?: any) => void
   ): void {
     // registerModal needs to be wrapped, because it is a function with side-effects (we modify this.modals),
     // hence this.modals.push(modal) is going to throw an error once we invoke it from another class
     const registerModalWrapper: (modal: { close: (data?: any) => {} }) => void = (modal) => {
-      this.registerModal(modal);
+      this.registerWindow(modal);
     };
 
-    const modalCloseEvent: Promise<any> = this.modalHelper.showModal(
+    const modalCloseEvent: Promise<any> = this.modalWindowHelper.showModalWindow(
       config,
       vcRef,
       registerModalWrapper
@@ -36,14 +41,27 @@ export class ModalController implements IModalController {
     });
   }
 
-  public registerModal(modal: { close: (data?: any) => {} }): void {
+  public showActionSheetWindow(
+    config: ActionSheetConfig,
+    vcRef: ViewContainerRef,
+    onCloseModal?: (data?: any) => void
+  ): void {
+    this.actionSheetHelper.showActionSheet(config, vcRef).then((data) => {
+      this.forgetTopModal();
+      if (onCloseModal) {
+        onCloseModal(data);
+      }
+    });
+  }
+
+  public registerWindow(modal: { close: (data?: any) => {} }): void {
     this.modals.push(modal);
   }
 
-  public hideModal(data?: any): void {
+  public hideWindow(data?: any): void {
     const modal = this.modals[this.modals.length - 1];
     if (!modal) {
-      throw new Error('No modals are currently registered');
+      throw new Error('No modal windows are currently registered');
     }
     modal.close(data);
   }

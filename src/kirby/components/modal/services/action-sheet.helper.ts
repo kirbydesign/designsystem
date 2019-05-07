@@ -5,8 +5,8 @@ import {
   ComponentRef,
 } from '@angular/core';
 
-import { ActionSheetConfig } from '../config/action-sheet-config';
-import { ActionSheetComponent } from '../action-sheet.component';
+import { ActionSheetConfig } from '../action-sheet/config/action-sheet-config';
+import { ActionSheetComponent } from '../action-sheet/action-sheet.component';
 
 @Injectable()
 export class ActionSheetHelper {
@@ -19,7 +19,7 @@ export class ActionSheetHelper {
     this.componentRef.instance.config = config;
   }
 
-  public hideActionSheet() {
-    this.componentRef.destroy();
-  }
+  // public hideActionSheet() {
+  //   this.componentRef.destroy();
+  // }
 }

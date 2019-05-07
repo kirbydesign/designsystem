@@ -1,13 +1,19 @@
 import { ViewContainerRef } from '@angular/core';
 
-import { ModalConfig } from '../config/modal-config';
+import { ModalWindowConfig } from '../modal-window/config/modal-window-config';
+import { ActionSheetConfig } from '../action-sheet/config/action-sheet-config';
 
 export abstract class IModalController {
-  abstract showModal(
-    config: ModalConfig,
+  abstract showModalWindow(
+    config: ModalWindowConfig,
     vcRef: ViewContainerRef,
     onCloseModal?: (data?: any) => any
   ): void;
-  abstract hideModal(data?: any): void;
-  abstract registerModal(modal: { close: (data?: any) => {} }): void;
+  abstract showActionSheetWindow(
+    config: ActionSheetConfig,
+    vcRef: ViewContainerRef,
+    onCloseModal?: (data?: any) => any
+  ): void;
+  abstract hideWindow(data?: any): void;
+  abstract registerWindow(modal: { close: (data?: any) => {} }): void;
 }

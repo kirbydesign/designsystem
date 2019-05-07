@@ -4,10 +4,10 @@ import { NavParams } from '@ionic/angular';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { By } from '@angular/platform-browser';
 
-import { FloatingActionButtonComponent } from '../floating-action-button/floating-action-button.component';
-import { IconComponent } from '../icon/icon.component';
+import { FloatingActionButtonComponent } from '../../floating-action-button/floating-action-button.component';
+import { IconComponent } from '../../icon/icon.component';
 import { ModalWindowComponent } from './modal-window.component';
-import { IModalController } from './services/modal.controller.interface';
+import { IModalController } from '../services/modal.controller.interface';
 
 describe('ModalWindowComponent', () => {
   let component: ModalWindowComponent;

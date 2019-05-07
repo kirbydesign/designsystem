@@ -2,22 +2,22 @@ import { Component } from '@angular/core';
 import { ModalDialogParams } from 'nativescript-angular';
 import { ContentView, ShownModallyData, View } from 'tns-core-modules/ui/content-view';
 
-import { ModalConfig } from './config/modal-config';
-import { ModalConfigHelper } from './config/modal-config.helper';
-import { IModalController } from './services/modal.controller.interface';
+import { ModalWindowConfig } from './config/modal-window-config';
+import { ModalConfigHelper } from './config/modal-window-config.helper';
+import { IModalController } from '../services/modal.controller.interface';
 
 @Component({
   templateUrl: './modal-window.component.html',
   styleUrls: ['./modal-window.component.scss'],
 })
 export class ModalWindowComponent extends ContentView {
-  config: ModalConfig;
+  config: ModalWindowConfig;
   view: View;
 
   constructor(private modalController: IModalController, private params: ModalDialogParams) {
     super();
     this.config = ModalConfigHelper.processOptionalValues(this.params.context);
-    this.modalController.registerModal({ close: this.params.closeCallback });
+    this.modalController.registerWindow({ close: this.params.closeCallback });
   }
 
   onShowingModally(args: ShownModallyData): void {
@@ -26,7 +26,7 @@ export class ModalWindowComponent extends ContentView {
   }
 
   onModalDismiss(): void {
-    this.modalController.hideModal();
+    this.modalController.hideWindow();
   }
 
   // // TODO: fix animations

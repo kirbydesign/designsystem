@@ -1,25 +1,22 @@
 import { Component, ViewContainerRef } from '@angular/core';
 
-import { ActionSheetController } from '~/kirby/components/action-sheet/services/action-sheet.controller';
-import { ActionSheetConfig } from '~/kirby/components/action-sheet/config/action-sheet-config';
+import { ModalController } from '~/kirby/components/modal/services/modal.controller';
+import { ActionSheetConfig } from '~/kirby/components/modal/action-sheet/config/action-sheet-config';
 
 @Component({
   selector: 'kirby-action-sheet-example',
   templateUrl: './action-sheet-example.component.html',
 })
 export class ActionSheetExampleComponent {
-  constructor(
-    private actionSheetController: ActionSheetController,
-    private vcRef: ViewContainerRef
-  ) {}
+  constructor(private modalController: ModalController, private vcRef: ViewContainerRef) {}
 
   openActionSheet(e: any) {
     const config: ActionSheetConfig = {
       title: 'Brug for hjælp?',
       message: 'Here is a message where we can put absolutely anything we want.',
-      actions: ['Vis spørgsmål og svar', 'Ring os op']
+      actions: ['Vis spørgsmål og svar', 'Ring os op'],
     };
-    this.actionSheetController.showActionSheet(config, this.vcRef, this.myCallback);
+    this.modalController.showActionSheetWindow(config, this.vcRef, this.myCallback);
   }
 
   myCallback = (selection: string) => {

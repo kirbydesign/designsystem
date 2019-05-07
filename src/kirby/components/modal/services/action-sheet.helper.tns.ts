@@ -2,8 +2,8 @@ import { Injectable, ViewContainerRef } from '@angular/core';
 import { ModalDialogService } from 'nativescript-angular/directives/dialogs';
 import { ExtendedShowModalOptions } from 'nativescript-windowed-modal/windowed-modal.common';
 
-import { ActionSheetConfig } from '../config/action-sheet-config';
-import { ActionSheetComponent } from '../action-sheet.component';
+import { ActionSheetConfig } from '../action-sheet/config/action-sheet-config';
+import { ActionSheetComponent } from '../action-sheet/action-sheet.component';
 
 @Injectable()
 export class ActionSheetHelper {
