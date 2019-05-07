@@ -1,4 +1,4 @@
-<ModalStack class="action-sheet-wrapper" dismissEnabled="false" (showingModally)="onShowingActionSheet($event)">
+<ModalStack class="action-sheet-wrapper" dismissEnabled="true" (showingModally)="onShowingActionSheet($event)">
     <GridLayout rows="*, auto, auto" class="action-sheet">
         <kirby-card row="1">
             <kirby-card-header textWrap="true" [title]="'Brug for hjælp?'" [subtitle]="'Here is a message where we can put absolutely anything we want.'"></kirby-card-header>
@@ -9,6 +9,6 @@
             </StackLayout>
             <kirby-card-footer></kirby-card-footer>
         </kirby-card>
-        <Button row="2" class="cancel-btn" text="Cancel.."></Button>
+        <Button row="2" class="cancel-btn" text="Cancel.." (tap)="onModalDismiss()"></Button>
     </GridLayout>
 </ModalStack>

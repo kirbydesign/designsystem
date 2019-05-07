@@ -2,22 +2,30 @@ import { Component } from '@angular/core';
 import { ContentView, ShownModallyData, View } from 'tns-core-modules/ui/content-view';
 import { ModalDialogParams } from 'nativescript-angular';
 
+import { IModalController } from '../services/modal.controller.interface';
+import { ActionSheetConfig } from './config/action-sheet-config';
+
 @Component({
   templateUrl: './action-sheet.component.html',
   styleUrls: ['./action-sheet.component.scss'],
 })
 export class ActionSheetComponent extends ContentView {
+  config: ActionSheetConfig;
   view: View;
 
-  constructor(private params: ModalDialogParams) {
+  constructor(private modalController: IModalController, private params: ModalDialogParams) {
     super();
-    const context = this.params.context;
-    console.log(`context: ${context}`);
+    // this.config = this.params.context;
+    this.modalController.registerWindow({ close: this.params.closeCallback });
   }
 
   onShowingActionSheet(args: ShownModallyData): void {
     this.view = <View>args.object;
     this.animateModal();
+  }
+
+  onModalDismiss(): void {
+    this.modalController.hideWindow();
   }
 
   // this function is currently the same as the modal.component.tns.ts one

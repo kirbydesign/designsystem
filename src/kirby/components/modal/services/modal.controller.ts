@@ -9,6 +9,11 @@ import { ActionSheetConfig } from '../action-sheet/config/action-sheet-config';
 @Injectable()
 export class ModalController implements IModalController {
   private modals: { close: (data?: any) => {} }[] = [];
+  // registerModal needs to be wrapped, because it is a function with side-effects (we modify this.modals),
+  // hence this.modals.push(modal) is going to throw an error once we invoke it from another class
+  private registerModalWrapper: (modal: { close: (data?: any) => {} }) => void = (modal) => {
+    this.registerWindow(modal);
+  };
 
   constructor(
     private modalWindowHelper: ModalWindowHelper,
@@ -20,16 +25,10 @@ export class ModalController implements IModalController {
     vcRef: ViewContainerRef,
     onCloseModal?: (data?: any) => void
   ): void {
-    // registerModal needs to be wrapped, because it is a function with side-effects (we modify this.modals),
-    // hence this.modals.push(modal) is going to throw an error once we invoke it from another class
-    const registerModalWrapper: (modal: { close: (data?: any) => {} }) => void = (modal) => {
-      this.registerWindow(modal);
-    };
-
     const modalCloseEvent: Promise<any> = this.modalWindowHelper.showModalWindow(
       config,
       vcRef,
-      registerModalWrapper
+      this.registerModalWrapper
     );
     modalCloseEvent.then((data) => {
       this.forgetTopModal();
@@ -46,12 +45,14 @@ export class ModalController implements IModalController {
     vcRef: ViewContainerRef,
     onCloseModal?: (data?: any) => void
   ): void {
-    this.actionSheetHelper.showActionSheet(config, vcRef).then((data) => {
-      this.forgetTopModal();
-      if (onCloseModal) {
-        onCloseModal(data);
-      }
-    });
+    this.actionSheetHelper
+      .showActionSheet(config, vcRef, this.registerModalWrapper)
+      .then((data) => {
+        this.forgetTopModal();
+        if (onCloseModal) {
+          onCloseModal(data);
+        }
+      });
   }
 
   public registerWindow(modal: { close: (data?: any) => {} }): void {

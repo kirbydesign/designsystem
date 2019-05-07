@@ -20,11 +20,6 @@ export class ActionSheetExampleComponent {
   }
 
   myCallback = (selection: string) => {
-    console.log('Dialog selection: ' + selection);
-    if (selection == 'Option 1') {
-      //Do action1
-    } else if (selection == 'Option 2') {
-      //Do action2
-    }
+    console.log(`Dialog selection: ${selection}`);
   };
 }
