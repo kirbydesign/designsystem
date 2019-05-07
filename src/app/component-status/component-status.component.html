@@ -28,40 +28,52 @@
     </thead>
     <ng-container *ngFor="let item of items$ | async as items">
         <tbody>
-            <tr class="component" [class.someday-maybe]="isUnderConsiderationOrNotPlanned(item)" #componentrow>
-                <td class="component">
-                    <ion-icon *ngIf="item.children?.length > 0" [name]="componentrow.classList.contains('expanded') ? 'folder-open' : 'folder'" (click)="componentrow.classList.toggle('expanded');" color="medium"></ion-icon>
-                    <ng-container *ngTemplateOutlet="componentTemplate; context: {$implicit: item}"></ng-container>
-                </td>
-                <td [class.someday-maybe]="item.ux?.status === uxStatusEnum.underConsideration">
-                    <ng-container *ngTemplateOutlet="uxTemplate; context: {$implicit: item.ux}"></ng-container>
-                </td>
-                <td [class.someday-maybe]="item.code?.status === codeStatusEnum.underConsideration">
-                    <ng-container *ngTemplateOutlet="codeTemplate; context: {$implicit: item.code}"></ng-container>
-                </td>
-            </tr>
-            <tr class="subcomponent" *ngFor="let subitem of item.children">
-                <td>
-                    <ng-container *ngTemplateOutlet="componentTemplate; context: {$implicit: subitem}"></ng-container>
-                </td>
-                <td [class.someday-maybe]="subitem.ux?.status === uxStatusEnum.underConsideration">
-                    <ng-container *ngTemplateOutlet="uxTemplate; context: {$implicit: subitem.ux}"></ng-container>
-                </td>
-                <td [class.someday-maybe]="subitem.code?.status === codeStatusEnum.underConsideration">
-                    <ng-container *ngTemplateOutlet="codeTemplate; context: {$implicit: subitem.code}"></ng-container>
-                </td>
-            </tr>
+            <ng-container *ngTemplateOutlet="itemTemplate; context: {$implicit: item, cssClass: 'component'}"></ng-container>
+            <ng-container *ngFor="let subitem of item.children">
+                <ng-container *ngTemplateOutlet="itemTemplate; context: {$implicit: subitem, cssClass: 'subcomponent'}"></ng-container>
+            </ng-container>
         </tbody>
     </ng-container>
 </table>
 
+<ng-template #itemTemplate let-item let-cssClass="cssClass">
+    <tr [class]="cssClass" [class.someday-maybe]="isUnderConsiderationOrNotPlanned(item)" [class.has-enhancements]="item.code.enhancements" #componentrow>
+        <td [class]="cssClass">
+            <ion-icon *ngIf="item.children?.length > 0" [name]="componentrow.classList.contains('expanded') ? 'folder-open' : 'folder'" (click)="componentrow.classList.toggle('expanded');" color="medium"></ion-icon>
+            <ng-container *ngTemplateOutlet="componentTemplate; context: {$implicit: item}"></ng-container>
+        </td>
+        <td>
+            <ng-container *ngTemplateOutlet="uxTemplate; context: {$implicit: item.ux}"></ng-container>
+        </td>
+        <td>
+            <ng-container *ngTemplateOutlet="codeTemplate; context: {$implicit: item.code}"></ng-container>
+        </td>
+    </tr>
+    <ng-container *ngTemplateOutlet="enhancementTemplate; context: {$implicit: item, cssClass: cssClass}"></ng-container>
+</ng-template>
+
+<ng-template #enhancementTemplate let-item let-cssClass="cssClass">
+    <tr class="enhancement enhancement-{{cssClass}}" [class.someday-maybe]="isUnderConsiderationOrNotPlanned(enhancement)" *ngFor="let enhancement of item.code.enhancements">
+        <td>
+            <kirby-badge colortype="warning" class="vnext">vNext</kirby-badge>
+            {{enhancement.title}}
+        </td>
+        <td>
+            <ng-container *ngTemplateOutlet="uxTemplate; context: {$implicit: enhancement.ux}"></ng-container>
+        </td>
+        <td>
+            <ng-container *ngTemplateOutlet="codeTemplate; context: {$implicit: enhancement.code}"></ng-container>
+        </td>
+    </tr>
+</ng-template>
+
 <ng-template #componentTemplate let-item>
     <a *ngIf="item.code?.cookbookUrl" routerLink="../../{{item.code?.cookbookUrl}}">
-        {{item.component}}
+        {{item.title}}
         <ng-container *ngTemplateOutlet="versionTemplate; context: {$implicit: item.code?.version}"></ng-container>
     </a>
     <ng-container *ngIf="!item.code?.cookbookUrl">
-        <span [innerHTML]="item.component"></span>
+        <span [innerHTML]="item.title"></span>
     </ng-container>
 </ng-template>
 
@@ -79,18 +91,18 @@
 
 <ng-template #uxTemplate let-ux>
     <ng-container *ngTemplateOutlet="uxStatusTemplate; context: {$implicit: ux?.status}"></ng-container>
-    <a *ngIf="ux?.zeplinUrl" [href]="ux?.zeplinUrl">
+    <a *ngIf="ux?.wireFrameUrl" [href]="ux?.wireFrameUrl">
         {{ux?.status}}
-        <ion-icon *ngIf="ux?.zeplinUrl" name="open"></ion-icon>
+        <ion-icon *ngIf="ux?.wireFrameUrl" name="open"></ion-icon>
     </a>
-    <ng-container *ngIf="!ux?.zeplinUrl">
+    <ng-container *ngIf="!ux?.wireFrameUrl">
         {{ux?.status}}
     </ng-container>
     <ng-container *ngTemplateOutlet="versionTemplate; context: {$implicit: ux?.version}"></ng-container>
 </ng-template>
 
 <ng-template #versionTemplate let-version>
-    <ng-container *ngIf="version"><ion-badge mode="ios">{{version | number: '1.1-2'}}</ion-badge></ng-container>
+    <ng-container *ngIf="version"><kirby-badge class="version">{{version | number: '1.1-2'}}</kirby-badge></ng-container>
 </ng-template>
 
 <ng-template #uxStatusTemplate let-status>

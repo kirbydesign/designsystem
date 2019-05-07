@@ -20,11 +20,8 @@ import { componentStatusGhostItems } from './component-status-ghost-items';
 })
 export class ComponentStatusComponent implements OnInit {
   isLoading = true;
-  githubStatusLoaded = false;
-  githubComponentRequestsLoaded = false;
   gitHubError = false;
-  items = componentStatusItems;
-  flattenedItems = this.flattenItems(componentStatusItems);
+  items = this.clone(componentStatusItems);
   sortedItems: ComponentStatusItem[] = [];
   items$: Observable<ComponentStatusItem[]>;
   searchTerm$ = new BehaviorSubject<string>('');
@@ -41,8 +38,7 @@ export class ComponentStatusComponent implements OnInit {
     this.items$ = this.searchTerm$.pipe(
       map((searchTerm) => this.filterItems(this.sortedItems, searchTerm, this.excludedStatuses))
     );
-    this.loadGithubComponentRequests();
-    this.setCurrentGithubStatus();
+    this.initializeGithubStatus();
   }
 
   public toggleExcluded(event) {
@@ -52,30 +48,73 @@ export class ComponentStatusComponent implements OnInit {
     this.searchTerm$.next(this.searchTerm$.value);
   }
 
-  private initializeItems() {
-    if (this.githubStatusLoaded && this.githubComponentRequestsLoaded) {
-      this.sortedItems = this.sortItems(this.items);
-      this.isLoading = false;
-    }
+  private clone<T>(instance: T): T {
+    return JSON.parse(JSON.stringify(instance));
+  }
+
+  private initializeGithubStatus() {
+    Promise.all([
+      this.loadGithubComponentRequests(),
+      this.loadGithubComponentEnhancementRequests(),
+    ]).then((_) => {
+      this.setCurrentGithubStatus().then((_) => {
+        this.sortedItems = this.sortItems(this.items);
+        this.isLoading = false;
+      });
+    });
   }
 
   private loadGithubComponentRequests() {
-    console.time('Get Github Issues');
-    this.getStatusItemsFromGithubIssues()
-      .pipe(first())
-      .subscribe((githubItems) => {
-        this.items = this.items.concat(githubItems);
-        this.githubComponentRequestsLoaded = true;
-        console.timeEnd('Get Github Issues');
-        this.initializeItems();
-      });
+    return new Promise((resolve) => {
+      this.getStatusItemsFromGithubIssues()
+        .pipe(first())
+        .subscribe((githubItems) => {
+          this.items = this.items.concat(githubItems);
+          resolve();
+        });
+    });
+  }
+
+  private loadGithubComponentEnhancementRequests() {
+    return new Promise((resolve) => {
+      this.getEnhancementItemsFromGithubIssues()
+        .pipe(first())
+        .subscribe((enhancementItems) => {
+          const flattenedItems = this.flattenItems(this.items);
+          enhancementItems.forEach((enhancementItem) => {
+            flattenedItems
+              .filter((item) => item.code && item.title === enhancementItem.parentTitle)
+              .forEach((item) => {
+                if (!item.code.enhancements) {
+                  item.code.enhancements = [enhancementItem];
+                } else {
+                  item.code.enhancements.push(enhancementItem);
+                }
+              });
+          });
+          resolve();
+        });
+    });
   }
 
   private getStatusItemsFromGithubIssues() {
-    return this.getGithubIssues().pipe(
+    const flattenedItems = this.flattenItems(this.items);
+    const hasStatusItem = (issue) =>
+      !!flattenedItems.find((item) => item.code.githubIssueNo === issue.number);
+    return this.getGithubComponentIssues().pipe(
       map((issues) => {
         return issues
-          .filter((issue) => !this.hasStatusItem(issue))
+          .filter((issue) => !hasStatusItem(issue))
+          .filter((issue) => this.hasComponentTitleLabel(issue))
+          .map((issue) => this.mapGithubIssueToStatusItem(issue));
+      })
+    );
+  }
+
+  private getEnhancementItemsFromGithubIssues() {
+    return this.getGithubEnhancementIssues().pipe(
+      map((issues) => {
+        return issues
           .filter((issue) => this.hasComponentTitleLabel(issue))
           .map((issue) => this.mapGithubIssueToStatusItem(issue));
       })
@@ -84,24 +123,24 @@ export class ComponentStatusComponent implements OnInit {
 
   private mapGithubIssueToStatusItem(issue: any): ComponentStatusItem {
     const zeplinUrl = this.getZeplinUrl(issue);
+    const sketchUrl = this.getSketchUrl(issue);
+    const uxStatus = zeplinUrl ? ItemUXStatus.inProgress : ItemUXStatus.underConsideration;
+    const componentTitle = this.getComponentTitle(issue);
+    const githubIssueTitle = issue.title.replace('[Enhancement] ', '');
+    const isEnhancement = issue.labels.find((label) => label.name.indexOf('enhancement') > -1);
     return {
-      component: this.getComponentTitle(issue),
+      title: isEnhancement ? githubIssueTitle : componentTitle,
+      parentTitle: isEnhancement ? componentTitle : null,
       priority: 0,
       ux: {
-        version: 0.0,
-        status: zeplinUrl ? ItemUXStatus.inProgress : ItemUXStatus.underConsideration,
-        zeplinUrl: zeplinUrl,
+        status: uxStatus,
+        wireFrameUrl: zeplinUrl || sketchUrl,
       },
       code: {
-        version: 0.0,
         status: ItemCodeStatus.underConsideration,
         githubIssueNo: issue.number,
       },
     };
-  }
-
-  private hasStatusItem(issue: { number: number }) {
-    return !!this.flattenedItems.find((item) => item.code.githubIssueNo === issue.number);
   }
 
   private getComponentTitle(issue: { labels: any[] }): string {
@@ -120,7 +159,17 @@ export class ComponentStatusComponent implements OnInit {
   }
 
   private getZeplinUrl(issue: { body: string }): string {
-    const matches = issue.body.match(/https:\/\/zpl\.io\/[a-z,0-9]{7}/i);
+    const matches = issue.body.match(
+      /https:\/\/(app\.zeplin|zpl)\.io\/(project\/[a-z,0-9]{24}\/screen\/[a-z,0-9]{24}|[a-z,0-9]{7})/i
+    );
+    const url = matches ? matches[0] : null;
+    return url;
+  }
+
+  private getSketchUrl(issue: { body: string }): string {
+    const matches = issue.body.match(
+      /https:\/\/sketch\.cloud\/s\/[a-z,0-9]{5}\/[a-z,0-9]{7}(\/play)?/i
+    );
     const url = matches ? matches[0] : null;
     return url;
   }
@@ -170,13 +219,7 @@ export class ComponentStatusComponent implements OnInit {
   }
 
   private sortByComponentName(a: ComponentStatusItem, b: ComponentStatusItem) {
-    if (a.component < b.component) {
-      return -1;
-    }
-    if (a.component > b.component) {
-      return 1;
-    }
-    return 0;
+    return a.title.localeCompare(b.title);
   }
 
   private filterItems(
@@ -187,17 +230,32 @@ export class ComponentStatusComponent implements OnInit {
     const regex = new RegExp(searchTerm, 'i');
     return items
       .filter((item) => {
-        return (
-          !excludedStatuses.find((status) => status === item.code.status) &&
-          this.matchItem(item, regex)
-        );
+        return this.isIncluded(item, excludedStatuses) && this.matchItem(item, regex);
       })
       .concat(this.getGhostItems(searchTerm));
   }
 
+  private isIncluded(item: ComponentStatusItem, excludedStatuses: ItemCodeStatus[]) {
+    return (
+      !this.isExcluded(item, excludedStatuses) ||
+      this.hasIncludedEnhancement(item, excludedStatuses)
+    );
+  }
+
+  private isExcluded(item: ComponentStatusItem, excludedStatuses: ItemCodeStatus[]) {
+    return excludedStatuses.includes(item.code.status as ItemCodeStatus);
+  }
+
+  private hasIncludedEnhancement(item: ComponentStatusItem, excludedStatuses: ItemCodeStatus[]) {
+    return (
+      item.code.enhancements &&
+      item.code.enhancements.find((enhancement) => !this.isExcluded(enhancement, excludedStatuses))
+    );
+  }
+
   private matchItem(item: ComponentStatusItem, searchTerm: RegExp): boolean {
     return (
-      searchTerm.test(item.component) ||
+      searchTerm.test(item.title) ||
       this.matchAliases(item.aliases, searchTerm) ||
       this.matchChildComponents(item.children, searchTerm)
     );
@@ -224,12 +282,12 @@ export class ComponentStatusComponent implements OnInit {
     if (ghostItem) {
       return [
         {
-          component: ghostItem.tagline,
+          title: ghostItem.tagline,
           priority: 0,
           ux: {
             version: 999,
             status: ItemUXStatus.ready,
-            zeplinUrl: ghostItem.url || null,
+            wireFrameUrl: ghostItem.url || null,
           },
           code: {
             version: 999,
@@ -241,7 +299,7 @@ export class ComponentStatusComponent implements OnInit {
     return [];
   }
 
-  private getGithubIssues() {
+  private getGithubComponentIssues() {
     const options = {
       headers: new HttpHeaders({
         Authorization: 'token ' + environment.oauth.githubToken1 + environment.oauth.githubToken2,
@@ -251,26 +309,40 @@ export class ComponentStatusComponent implements OnInit {
     return this.http.get<any[]>(url, options);
   }
 
+  private getGithubEnhancementIssues() {
+    const options = {
+      headers: new HttpHeaders({
+        Authorization: 'token ' + environment.oauth.githubToken1 + environment.oauth.githubToken2,
+      }),
+    };
+    const url = environment.githubApi + '/repos/kirbydesign/designsystem/issues?labels=enhancement';
+    return this.http.get<any[]>(url, options);
+  }
+
   private setCurrentGithubStatus() {
-    console.time('Get Github Status');
-    this.getGithubProjectStatus()
-      .pipe(first())
-      .subscribe((issues) => {
-        issues.forEach((issue) => {
-          this.flattenedItems
-            .filter((item) => item.code.githubIssueNo === issue.number)
-            .forEach((item) => (item.code.status = issue.status));
+    return new Promise((resolve) => {
+      this.getGithubProjectStatus()
+        .pipe(first())
+        .subscribe((issues) => {
+          const flattenedItems = this.flattenItems(this.items);
+          issues.forEach((issue) => {
+            flattenedItems
+              .filter((item) => item.code.githubIssueNo === issue.number)
+              .forEach((item) => (item.code.status = issue.status));
+          });
+          resolve();
         });
-        console.timeEnd('Get Github Status');
-        this.githubStatusLoaded = true;
-        this.initializeItems();
-      });
+    });
   }
 
   private flattenItems(items: ComponentStatusItem[]): ComponentStatusItem[] {
     const concat = (x, y) => x.concat(y);
     const flatMap = (arr, f) => arr.map(f).reduce(concat, []);
-    return flatMap(items, (item) => [item, ...(item.children ? item.children : [])]);
+    return flatMap(items, (item) => [
+      item,
+      ...(item.children ? this.flattenItems(item.children) : []),
+      ...(item.code && item.code.enhancements ? item.code.enhancements : []),
+    ]);
   }
 
   private getGithubProjectCards(columnId: number, status: ItemCodeStatus) {
