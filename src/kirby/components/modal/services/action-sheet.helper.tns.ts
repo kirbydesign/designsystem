@@ -9,11 +9,16 @@ import { ActionSheetComponent } from '../action-sheet/action-sheet.component';
 export class ActionSheetHelper {
   constructor(private modalDialogService: ModalDialogService) {}
 
-  public async showActionSheet(config: ActionSheetConfig, vcRef: ViewContainerRef): Promise<any> {
+  public async showActionSheet(
+    config: ActionSheetConfig,
+    vcRef: ViewContainerRef,
+    _: any
+  ): Promise<any> {
     return await this.modalDialogService.showModal(ActionSheetComponent, {
       viewContainerRef: vcRef,
       closeCallback: null,
       context: config,
+      dimAmount: 0.1, // TODO: put back to 0.5
     } as ExtendedShowModalOptions);
   }
 }

@@ -1,5 +1,5 @@
 export interface ActionSheetConfig {
-  title?: string;
-  message?: string;
+  header?: string;
+  subheader?: string;
   actions?: Array<string>;
 }

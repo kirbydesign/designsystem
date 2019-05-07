@@ -1,14 +1,19 @@
 <ModalStack class="action-sheet-wrapper" dismissEnabled="true" (showingModally)="onShowingActionSheet($event)">
-    <GridLayout rows="*, auto, auto" class="action-sheet">
-        <kirby-card row="1">
-            <kirby-card-header textWrap="true" [title]="'Brug for hjælp?'" [subtitle]="'Here is a message where we can put absolutely anything we want.'"></kirby-card-header>
-            <StackLayout orientation="vertical" class="options-container">
-                <Button text="Option 1"></Button>        
-                <Button text="Option 2"></Button>        
-                <Button text="Option 3"></Button>        
-            </StackLayout>
-            <kirby-card-footer></kirby-card-footer>
-        </kirby-card>
-        <Button row="2" class="cancel-btn" text="Cancel.." (tap)="onModalDismiss()"></Button>
+    <GridLayout rows="*, auto">
+        <StackLayout row="0" (tap)="onModalDismiss()"></StackLayout>
+        <StackLayout row="1">
+            <kirby-card>
+                <StackLayout>
+                    <StackLayout *ngIf="config.header" class="action-sheet-header">
+                        <Label horizontalAlignment="center" fontWeight="bold" text="{{ config.header }}"></Label>
+                        <Label horizontalAlignment="center" textWrap="true" text="{{ config.subheader }}"></Label>
+                    </StackLayout>
+                    <StackLayout class="action-container" *ngFor="let item of config.actions">
+                        <Label class="action-item" (tap)="onItemSelect(item)" text="{{ item }}"></Label>
+                    </StackLayout>
+                </StackLayout>
+            </kirby-card>
+            <Button verticalAlignment="bottom" class="cancel-btn" text="Cancel" (tap)="onModalDismiss()"></Button>
+        </StackLayout>
     </GridLayout>
 </ModalStack>

@@ -24,7 +24,6 @@ export class ActionSheetHelper {
           return {};
         },
       });
-
       componentRef.instance.result.subscribe((selection: string) => {
         componentRef.destroy();
         resolve(selection);
