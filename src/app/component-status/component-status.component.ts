@@ -123,6 +123,7 @@ export class ComponentStatusComponent implements OnInit {
 
   private mapGithubIssueToStatusItem(issue: any): ComponentStatusItem {
     const zeplinUrl = this.getZeplinUrl(issue);
+    const uxStatus = zeplinUrl ? ItemUXStatus.inProgress : ItemUXStatus.underConsideration;
     const componentTitle = this.getComponentTitle(issue);
     const githubIssueTitle = issue.title.replace('[Enhancement] ', '');
     const isEnhancement = issue.labels.find((label) => label.name.indexOf('enhancement') > -1);
@@ -131,8 +132,8 @@ export class ComponentStatusComponent implements OnInit {
       parentTitle: isEnhancement ? componentTitle : null,
       priority: 0,
       ux: {
-        status: zeplinUrl ? ItemUXStatus.inProgress : ItemUXStatus.underConsideration,
-        zeplinUrl: zeplinUrl,
+        status: uxStatus,
+        wireFrameUrl: zeplinUrl,
       },
       code: {
         status: ItemCodeStatus.underConsideration,
@@ -267,7 +268,7 @@ export class ComponentStatusComponent implements OnInit {
           ux: {
             version: 999,
             status: ItemUXStatus.ready,
-            zeplinUrl: ghostItem.url || null,
+            wireFrameUrl: ghostItem.url || null,
           },
           code: {
             version: 999,

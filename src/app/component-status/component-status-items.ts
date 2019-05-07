@@ -6,7 +6,7 @@ export interface ComponentStatusItem {
   ux: {
     version?: number;
     status: string;
-    zeplinUrl?: string;
+    wireFrameUrl?: string;
   };
   code: {
     version?: number;
@@ -50,7 +50,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
     ux: {
       version: 1.0,
       status: ItemUXStatus.ready,
-      zeplinUrl: 'https://zpl.io/2yONGDG',
+      wireFrameUrl: 'https://zpl.io/2yONGDG',
     },
     code: {
       version: 0.5,
@@ -66,7 +66,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
     ux: {
       version: 1.0,
       status: ItemUXStatus.ready,
-      zeplinUrl: 'https://zpl.io/agzl3GD',
+      wireFrameUrl: 'https://zpl.io/agzl3GD',
     },
     code: {
       version: 0.9,
@@ -80,7 +80,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
     ux: {
       version: 1.0,
       status: ItemUXStatus.ready,
-      zeplinUrl: 'https://zpl.io/bPPk4ok',
+      wireFrameUrl: 'https://zpl.io/bPPk4ok',
     },
     code: {
       version: 0.5,
@@ -121,7 +121,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
     ux: {
       version: 1.0,
       status: ItemUXStatus.ready,
-      zeplinUrl: 'https://zpl.io/2EBLPk8',
+      wireFrameUrl: 'https://zpl.io/2EBLPk8',
     },
     code: {
       version: 0.1,
@@ -231,7 +231,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
     ux: {
       version: 1.0,
       status: ItemUXStatus.ready,
-      zeplinUrl: 'https://zpl.io/VqWoxg5',
+      wireFrameUrl: 'https://zpl.io/VqWoxg5',
     },
     code: {
       version: 0.5,
@@ -245,7 +245,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
     ux: {
       version: 1.0,
       status: ItemUXStatus.ready,
-      zeplinUrl: 'https://zpl.io/a7OAAWR',
+      wireFrameUrl: 'https://zpl.io/a7OAAWR',
     },
     code: {
       version: 0.5,
@@ -479,7 +479,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
     ux: {
       version: 1.0,
       status: ItemUXStatus.ready,
-      zeplinUrl: 'https://zpl.io/2v7Evw5',
+      wireFrameUrl: 'https://zpl.io/2v7Evw5',
     },
     code: {
       version: 0.1,
@@ -492,7 +492,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
         ux: {
           version: 1.0,
           status: ItemUXStatus.ready,
-          zeplinUrl: 'https://zpl.io/2v7Evw5',
+          wireFrameUrl: 'https://zpl.io/2v7Evw5',
         },
         code: {
           version: 0.9,

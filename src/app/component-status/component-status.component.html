@@ -91,11 +91,11 @@
 
 <ng-template #uxTemplate let-ux>
     <ng-container *ngTemplateOutlet="uxStatusTemplate; context: {$implicit: ux?.status}"></ng-container>
-    <a *ngIf="ux?.zeplinUrl" [href]="ux?.zeplinUrl">
+    <a *ngIf="ux?.wireFrameUrl" [href]="ux?.wireFrameUrl">
         {{ux?.status}}
-        <ion-icon *ngIf="ux?.zeplinUrl" name="open"></ion-icon>
+        <ion-icon *ngIf="ux?.wireFrameUrl" name="open"></ion-icon>
     </a>
-    <ng-container *ngIf="!ux?.zeplinUrl">
+    <ng-container *ngIf="!ux?.wireFrameUrl">
         {{ux?.status}}
     </ng-container>
     <ng-container *ngTemplateOutlet="versionTemplate; context: {$implicit: ux?.version}"></ng-container>
