@@ -32,8 +32,8 @@ export class ActionSheetComponent extends ContentView {
     this.modalController.hideWindow(selection);
   }
 
-  // this function is currently the same as the modal.component.tns.ts one
-  // either extract it in a common place, or change the function
+  // TODO: this function is currently the same as the modal-window.component.tns.ts one
+  // extract it in a common class
   private animateModal(): void {
     if (this.view.android) {
       this.view

@@ -12,13 +12,14 @@
 
   .action-container {
     margin-bottom: -10;
-    
+
     .action-item {
       border-width: 1 0 0 0;
-      border-color: get-color("kirby-tertiary");
-      height: 50;
+      border-color: get-color("kirby-medium");
+      height: 70;
       width: 100%;
       text-align: center;
+      line-height: 100%;
     }
   }
 

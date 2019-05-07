@@ -4,7 +4,7 @@
             <h3>{{ config.header }}</h3>
             <span>{{ config.subheader }}</span>
         </div>
-        <kirby-list [items]="config.actions" (itemSelect)="onItemSelect($event)">
+        <kirby-list class="action-sheet-list" [items]="config.actions" (itemSelect)="onItemSelect($event)">
             <kirby-list-cell *kirbyListCell="let item">
                 <kirby-list-cell-line class="option" [text]="item"></kirby-list-cell-line>
             </kirby-list-cell>

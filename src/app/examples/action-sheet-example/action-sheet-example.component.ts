@@ -14,7 +14,7 @@ export class ActionSheetExampleComponent {
     const config: ActionSheetConfig = {
       // header: 'Brug for hjælp?',
       // subheader: 'Here is a message where we can put absolutely anything we want.',
-      actions: ['Vis spørgsmål og svar', 'Ring os op'],
+      actions: ['Vis spørgsmål og svar', 'Ring os op', 'Option 3'],
     };
     this.modalController.showActionSheetWindow(config, this.vcRef, this.myCallback);
   }
