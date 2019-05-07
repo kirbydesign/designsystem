@@ -21,7 +21,7 @@ import { componentStatusGhostItems } from './component-status-ghost-items';
 export class ComponentStatusComponent implements OnInit {
   isLoading = true;
   gitHubError = false;
-  items = componentStatusItems;
+  items = this.clone(componentStatusItems);
   sortedItems: ComponentStatusItem[] = [];
   items$: Observable<ComponentStatusItem[]>;
   searchTerm$ = new BehaviorSubject<string>('');
@@ -46,6 +46,10 @@ export class ComponentStatusComponent implements OnInit {
     const excludedStatuses = event.detail.value as ItemCodeStatus[];
     this.excludedStatuses = checked ? excludedStatuses : [];
     this.searchTerm$.next(this.searchTerm$.value);
+  }
+
+  private clone<T>(instance: T): T {
+    return JSON.parse(JSON.stringify(instance));
   }
 
   private initializeGithubStatus() {
