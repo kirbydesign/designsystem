@@ -50,7 +50,7 @@ export class ModalController implements IModalController {
       .then((data) => {
         this.forgetTopModal();
         if (onCloseModal) {
-          onCloseModal(data);
+          onCloseModal(typeof data === 'object' && 'data' in data ? data.data : data);
         }
       });
   }

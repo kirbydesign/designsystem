@@ -15,19 +15,15 @@ export class ActionSheetComponent {
   constructor(private _eref: ElementRef, private modalController: IModalController) {}
 
   onItemSelect(selection: string) {
-    this.result.emit(selection);
+    this.modalController.hideWindow(selection);
   }
 
-  @HostListener('document:click', ['$event'])
-  onClick(event: any) {
-    if (!this._eref.nativeElement.contains(event.target) && !this.isOpeningClick) {
-      this.modalController.hideWindow();
+  onModalDismiss(e: any) {
+    // Handle key press, due to:
+    // https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/button_role#Required_JavaScript_Features
+    if (e && e.keyCode && e.keyCode !== 32 && e.keyCode !== 13) {
+      return;
     }
-
-    // only the first click opens the action sheet,
-    // so we set the flag to false for the rest of the component's lifecycle
-    if (this.isOpeningClick) {
-      this.isOpeningClick = false;
-    }
+    this.modalController.hideWindow();
   }
 }

@@ -2,7 +2,10 @@
 
 .action-sheet {
   background-color: transparent;
-  width: 250px;
+  width: 304px;
+  left: 50%;
+  top: 100%;
+  transform: translate(-50%, -110%);
   position: absolute;
 
   .action-sheet-card {
@@ -21,4 +24,15 @@
   kirby-list {
     cursor: pointer;
   }
+
+  .cancel-btn-wrapper {
+    width: 100%;
+    text-align: center;
+    
+    .cancel-btn {
+      width: 200px;
+      margin-top: 30px;
+    }
+  }
+  
 }

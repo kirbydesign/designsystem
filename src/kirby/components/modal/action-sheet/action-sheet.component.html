@@ -1,6 +1,6 @@
 <div class="action-sheet">
     <kirby-card class="action-sheet-card">
-        <div class="action-sheet-card-header">
+        <div *ngIf="config.header" class="action-sheet-card-header">
             <h3>{{ config.header }}</h3>
             <span>{{ config.subheader }}</span>
         </div>
@@ -10,4 +10,7 @@
             </kirby-list-cell>
         </kirby-list>
     </kirby-card>
+    <div class="cancel-btn-wrapper">
+        <button class="cancel-btn" kirby-button (click)="onModalDismiss($event)" (keydown)="onModalDismiss($event)">Cancel</button>
+    </div>
 </div>

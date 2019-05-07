@@ -1,35 +1,30 @@
 import { Injectable, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
+import { ModalController as IonicModalController } from '@ionic/angular';
 
 import { ActionSheetConfig } from '../action-sheet/config/action-sheet-config';
 import { ActionSheetComponent } from '../action-sheet/action-sheet.component';
 
 @Injectable()
 export class ActionSheetHelper {
-  constructor(private resolver: ComponentFactoryResolver) {}
+  constructor(
+    private ionicModalController: IonicModalController,
+    private resolver: ComponentFactoryResolver
+  ) {}
 
   public async showActionSheet(
     config: ActionSheetConfig,
     vcRef: ViewContainerRef,
     registerModal: (modal: { close: (data?: any) => {} }) => void
   ): Promise<any> {
-    const factory = this.resolver.resolveComponentFactory(ActionSheetComponent);
-    const componentRef = vcRef.createComponent(factory);
-    componentRef.instance.config = config;
-
-    const result = new Promise((resolve, _) => {
-      registerModal({
-        close: () => {
-          componentRef.destroy();
-          resolve(null);
-          return {};
-        },
-      });
-      componentRef.instance.result.subscribe((selection: string) => {
-        componentRef.destroy();
-        resolve(selection);
-      });
+    const modal = await this.ionicModalController.create({
+      component: ActionSheetComponent,
+      cssClass: 'kirby-action-sheet',
+      componentProps: { config: config },
     });
 
-    return result;
+    registerModal({ close: modal.dismiss });
+
+    modal.present();
+    return modal.onDidDismiss();
   }
 }
