@@ -24,9 +24,9 @@
 }
 
 .warning {
-  --checkmark-color:  #{get-color('kirby-alert-contrast')};
-  --background-checked:  #{get-color('kirby-alert')};
-  --border-color-checked:  #{get-color('kirby-alert')};
+  --checkmark-color:  #{get-color('kirby-warning-contrast')};
+  --background-checked:  #{get-color('kirby-warning')};
+  --border-color-checked:  #{get-color('kirby-warning')};
 }
 
 .success {
