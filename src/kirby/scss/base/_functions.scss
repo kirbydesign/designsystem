@@ -1,48 +1,54 @@
 @function _get-map-prop($map, $key) {
   @if map-has-key($map, $key) {
     @return map-get($map, $key);
-  } 
+  }
 
-  @warn "Unknown key `#{$key}`.";
+  @warn 'Unknown key `#{$key}`.';
   @return null;
 }
 
-@function size($key: "m") {
+@function size($key: 'm') {
+  $negative: str-index($key, '-') == 1;
+  @if ($negative) {
+    $key: str-slice($key, 2, -1);
+  }
+  $value: '';
   @if ($native == false) {
-    @return addPX(_get-map-prop($sizes, $key));
+    $value: addPX(_get-map-prop($sizes, $key));
   } @else {
-    @return _get-map-prop($sizes, $key);
-  }    
+    $value: _get-map-prop($sizes, $key);
+  }
+  @return if($negative, unquote('-' + $value), $value);
 }
 
 @function z($key) {
   @return _get-map-prop($z-layers, $key);
 }
 
-@function font-size($key: "n") {
+@function font-size($key: 'n') {
   @if ($key == 'display') {
-    @warn "Display key is deprecated";
+    @warn 'Display key is deprecated';
   }
   @if ($native == false) {
     @return addPX(_get-map-prop($font-sizes, $key));
   } @else {
     @return _get-map-prop($font-sizes, $key);
-  }  
+  }
 }
 
-@function line-height($key: "m") {
+@function line-height($key: 'm') {
   @if ($native == false) {
     @return addPX(_get-map-prop($line-height, $key));
   } @else {
     @return _get-map-prop($line-height, $key);
-  }    
+  }
 }
 
 @function addPX($value) {
-  @return $value + unquote("px");
+  @return $value + unquote('px');
 }
 
-@function font-weight($key: "normal") {
+@function font-weight($key: 'normal') {
   @return _get-map-prop($font-weight, $key);
 }
 

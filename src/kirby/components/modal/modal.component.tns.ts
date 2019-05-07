@@ -25,7 +25,7 @@ export class ModalComponent extends ContentView {
     this.animateModal();
   }
 
-  dismissModal(): void {
+  onModalDismiss(): void {
     this.modalController.hideModal();
   }
 
