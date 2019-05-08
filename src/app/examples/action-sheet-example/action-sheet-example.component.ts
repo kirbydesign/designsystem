@@ -12,14 +12,14 @@ export class ActionSheetExampleComponent {
 
   openActionSheet(e: any) {
     const config: ActionSheetConfig = {
-      // header: 'Brug for hjælp?',
-      // subheader: 'Here is a message where we can put absolutely anything we want.',
-      actions: ['Vis spørgsmål og svar', 'Ring os op', 'Option 3'],
+      header: 'Brug for hjælp?',
+      subheader: 'Here is a message where we can put absolutely anything we want.',
+      actions: ['Vis spørgsmål og svar', 'Ring os op'], //'Option 3'
     };
     this.modalController.showActionSheetWindow(config, this.vcRef, this.myCallback);
   }
 
   myCallback = (selection: string) => {
-    console.log(`Dialog selection: ${selection}`);
+    console.log(`Action sheet selection: ${selection}`);
   };
 }
