@@ -58,7 +58,7 @@ describe('SegmentedControlComponent', () => {
         fixture.detectChanges();
         expect(component.onSegmentClick).toHaveBeenCalled();
         done();
-      }, 50);
+      }, 100);
     });
   });
 
