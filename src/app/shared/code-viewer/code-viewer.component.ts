@@ -2,7 +2,7 @@ import { highlightAll } from 'prismjs';
 import { Component, AfterViewChecked, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
-  selector: 'kirby-code-viewer,kirby-html-viewer',
+  selector: 'kirby-code-viewer',
   templateUrl: './code-viewer.component.html',
   styleUrls: ['./code-viewer.component.scss'],
 })
