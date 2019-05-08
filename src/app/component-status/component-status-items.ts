@@ -45,6 +45,23 @@ export enum ItemCodeStatusOrder {
 
 export const componentStatusItems: ComponentStatusItem[] = [
   {
+    title: 'Action Sheet',
+    priority: 0,
+    ux: {
+      version: 0.0,
+      status: ItemUXStatus.underConsideration,
+      // wireFrameUrl: 'https://sketch.cloud/s/pAE4G/09KPE22/play',
+    },
+    code: {
+      version: 0.1,
+      status: ItemCodeStatus.ready,
+      cookbookUrl: 'showcase/action-sheet',
+      github:
+        'https://github.com/kirbydesign/designsystem/tree/master/src/kirby/components/action-sheet',
+      githubIssueNo: 210,
+    },
+  },
+  {
     title: 'Avatar',
     priority: 0,
     ux: {
