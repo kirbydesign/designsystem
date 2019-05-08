@@ -1,4 +1,5 @@
-import { Component, ElementRef, Output, EventEmitter, HostListener } from '@angular/core';
+import { Component } from '@angular/core';
+import { NavParams } from '@ionic/angular';
 
 import { ActionSheetConfig } from './config/action-sheet-config';
 import { IModalController } from '../services/modal.controller.interface';
@@ -8,11 +9,11 @@ import { IModalController } from '../services/modal.controller.interface';
   styleUrls: ['./action-sheet.component.scss'],
 })
 export class ActionSheetComponent {
-  @Output() result = new EventEmitter<string>();
   config: ActionSheetConfig;
-  // we need this to detect the first click
-  isOpeningClick: boolean = true;
-  constructor(private _eref: ElementRef, private modalController: IModalController) {}
+
+  constructor(private params: NavParams, private modalController: IModalController) {
+    this.config = this.params.get('config');
+  }
 
   onItemSelect(selection: string) {
     this.modalController.hideWindow(selection);
