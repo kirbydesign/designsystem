@@ -12,10 +12,22 @@ export class ActionSheetShowcaseComponent {
   exampleHtml: string = require('../../examples/action-sheet-example/action-sheet-example.component.html');
   properties: ShowcaseProperty[] = [
     {
-      name: 'title',
-      description: 'The header of the action sheet',
+      name: 'header',
+      description: '(Optional) The header of the action sheet',
       defaultValue: '',
       inputValues: ['string'],
+    },
+    {
+      name: 'subheader',
+      description: '(Optional) The subheader of the action sheet',
+      defaultValue: '',
+      inputValues: ['string'],
+    },
+    {
+      name: 'actions',
+      description: 'The options shown inside the action sheet',
+      defaultValue: '',
+      inputValues: ['Array<string>'],
     },
   ];
 }

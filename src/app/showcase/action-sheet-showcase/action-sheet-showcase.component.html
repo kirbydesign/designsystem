@@ -2,7 +2,31 @@
     <kirby-action-sheet-example></kirby-action-sheet-example>
     <kirby-html-viewer [html]="exampleHtml"></kirby-html-viewer>
     <p>
-        hello action sheet...
+        --- Inside the parent(caller) component ---<br />
+        To show the action sheet, create an ActionSheetConfig and pass it to modalService.showActionSheet:<br />
+        <br />
+        <code>
+        const config: ActionSheetConfig = {{ '{' }}<br />
+            &nbsp;&nbsp;&nbsp;header: 'Your action sheet header',<br />
+            &nbsp;&nbsp;&nbsp;subheader: 'Your action sheet sub-header',<br />
+            &nbsp;&nbsp;&nbsp;actions: ['Option 1', 'Option 2', 'Option 3'],<br />
+        {{ '}' }};<br />
+        this.modalService.showActionSheetWindow(config, this.vcRef);
+        </code>
+        <br /><br />
+        (Optional) if you need to obtain data back from the action sheet, you can pass a callback function:<br />
+        <br />
+        <code>
+            this.modalService.showActionSheetWindow(config, this.vcRef, myCallback);<br />
+        </code>
+        <br />
+        where myCallback can be e.g.:<br />
+        <br />
+        <code>
+            myCallback(selection: string) {{ '{' }}<br />
+            &nbsp;&nbsp;&nbsp;...<br />
+            {{ '}' }}<br />
+        </code>
     </p>
     <h4>Action sheet properties:</h4>
     <kirby-showcase-properties [properties]="properties"></kirby-showcase-properties>
