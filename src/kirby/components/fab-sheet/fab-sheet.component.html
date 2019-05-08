@@ -1,3 +1,13 @@
 <kirby-floating-action-button [disabled]="config.disabled" (click)="handleFabSheet()">
   <kirby-icon [name]="iconName" size="large"></kirby-icon>
 </kirby-floating-action-button>
+
+<div *ngIf="isFabSheetOpen" class="fab-sheet" [style.margin-top.px]="verticalPos" >
+  <kirby-card class="card">
+      <kirby-list [items]="config.actions" (itemSelect)="onItemSelect($event)">
+          <kirby-list-cell *kirbyListCell="let item">
+              <kirby-list-cell-line class="option" [text]="item"></kirby-list-cell-line>
+          </kirby-list-cell>
+      </kirby-list>
+  </kirby-card>
+</div>

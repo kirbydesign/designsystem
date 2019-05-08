@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges, EventEmitter, Output, HostListener, ElementRef } from '@angular/core';
 
 import { FabSheetConfig } from './config/fab-sheet-config';
 
@@ -9,7 +9,10 @@ import { FabSheetConfig } from './config/fab-sheet-config';
 })
 export class FabSheetComponent implements OnChanges {
   @Input() config: FabSheetConfig;
-  private isFabSheetOpen: boolean = false;
+  @Output() actionSelected = new EventEmitter<string>();
+  public isFabSheetOpen: boolean = false;
+
+  constructor(private _elementRef: ElementRef) {}
 
   ngOnChanges() {
     // set default values if not set from component
@@ -28,19 +31,37 @@ export class FabSheetComponent implements OnChanges {
 
   public handleFabSheet() {
     if (!this.config.disabled) {
-      if (this.isFabSheetOpen) {
-        this.closeFabSheet();
-      } else {
-        this.openFabSheet();
-      }
+      this.isFabSheetOpen = !this.isFabSheetOpen;
     }
   }
 
-  private openFabSheet() {
-    this.isFabSheetOpen = true;
-  }
-
-  private closeFabSheet() {
+  public onItemSelect(selection: string) {
+    this.actionSelected.emit(selection);
     this.isFabSheetOpen = false;
   }
+
+  public get verticalPos(): number {
+    if (this.config.align && this.config.align === 'bottom') {
+      return 74;
+    }
+
+    if (this.config.actions) {
+      const yPos = this.config.actions.length * 64 + 10;
+      return yPos * -1;
+    } else {
+      return 74;
+    }
+  }
+
+  @HostListener('document:click', ['$event', '$event.target'])
+    public onClick(event: MouseEvent, targetElement: HTMLElement): void {
+        if (!targetElement) {
+            return;
+        }
+
+        const clickedInside = this._elementRef.nativeElement.contains(targetElement);
+        if (!clickedInside) {
+             this.isFabSheetOpen = false;
+        }
+    }
 }

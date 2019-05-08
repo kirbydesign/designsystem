@@ -1,1 +1,3 @@
-<kirby-fab-sheet [config]="config"></kirby-fab-sheet>
+<kirby-fab-sheet [config]="config" (actionSelected)="onActionSelected($event)"></kirby-fab-sheet>
+
+<div *ngIf="selectedAction">{{ selectedAction }}</div>

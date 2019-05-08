@@ -29,10 +29,6 @@ import { SegmentedChipControlComponent } from './components/segment/segmented-ch
 import { BadgeComponent } from './components/badge/badge.component';
 import { ModalController } from './components/modal/services/modal.controller';
 import { IModalController } from './components/modal/services/modal.controller.interface';
-import { ModalHelper } from './components/modal/services/modal.helper';
-import { ActionSheetController } from './components/action-sheet/services/action-sheet.controller';
-import { ActionSheetHelper } from './components/action-sheet/services/action-sheet.helper';
-import { ActionSheetComponent } from './components/action-sheet/action-sheet.component';
 import { FabSheetComponent } from './components/fab-sheet/fab-sheet.component';
 import { ModalWindowHelper } from './components/modal/services/modal-window.helper';
 import { ActionSheetHelper } from './components/modal/services/action-sheet.helper';

@@ -25,9 +25,21 @@ export class FabSheetShowcaseComponent {
     },
     {
       name: 'disabled',
-      description: 'Determines whether the button will be disabled or not. Default value is false.',
+      description: 'Determines whether the button will be disabled or not.',
       defaultValue: 'false',
       inputValues: ['boolean'],
+    },
+    {
+      name: 'align',
+      description: 'Determines whether the fab-sheet will be displayed under or below fab button.',
+      defaultValue: 'top',
+      inputValues: ['top', 'bottom'],
+    },
+    {
+      name: 'actions',
+      description: 'Fab-sheet actions. Array of action items',
+      defaultValue: 'null',
+      inputValues: ['string[]'],
     },
   ];
 }

@@ -7,13 +7,15 @@ import { FabSheetConfig } from './../../../kirby/components/fab-sheet/config/fab
   templateUrl: './fab-sheet-example.component.html',
 })
 export class FabSheetExampleComponent {
+  selectedAction: string;
+
   public config: FabSheetConfig = {
     openIconName: 'more',
     closeIconName: 'close',
-    actions: [
-      { text: 'Action 0', value: 0 },
-      { text: 'Action 1', value: 1 },
-      { text: 'Action 2', value: 2 },
-    ],
+    actions: ['Action 0', 'Action 1', 'Action 2'],
   };
+
+  onActionSelected(selection: string) {
+    this.selectedAction = selection ? selection : this.selectedAction;
+  }
 }
