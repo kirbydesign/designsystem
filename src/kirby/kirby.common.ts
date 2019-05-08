@@ -22,7 +22,7 @@ import { ListHeaderComponent } from './components/list/list-header/list-header.c
 import { ListCellComponent } from './components/list/list-cell/list-cell.component';
 import { ListCellLineComponent } from './components/list/list-cell-line/list-cell-line.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
-import { ModalComponent } from './components/modal/modal.component';
+import { ModalWindowComponent } from './components/modal/modal-window/modal-window.component';
 import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
 import { ChipComponent } from './components/chip/chip.component';
 import { SegmentedChipControlComponent } from './components/segment/segmented-chip-control/segmented-chip-control.component';
@@ -34,6 +34,10 @@ import { ActionSheetController } from './components/action-sheet/services/action
 import { ActionSheetHelper } from './components/action-sheet/services/action-sheet.helper';
 import { ActionSheetComponent } from './components/action-sheet/action-sheet.component';
 import { FabSheetComponent } from './components/fab-sheet/fab-sheet.component';
+import { ModalWindowHelper } from './components/modal/services/modal-window.helper';
+import { ActionSheetHelper } from './components/modal/services/action-sheet.helper';
+import { ActionSheetComponent } from './components/modal/action-sheet/action-sheet.component';
+import { CustomIconNameDirective } from './components/icon/custom-icon-name.directive';
 
 export const declarations = [
   CardComponent,
@@ -53,13 +57,14 @@ export const declarations = [
   ListHeaderDirective,
   ListHeaderComponent,
   IconComponent,
+  CustomIconNameDirective,
   ChartComponent,
   GridComponent,
   ComponentLoaderDirective,
   AvatarComponent,
   GroupByPipe,
   SpinnerComponent,
-  ModalComponent,
+  ModalWindowComponent,
   ActionSheetComponent,
   SegmentedControlComponent,
   ChipComponent,
@@ -69,9 +74,8 @@ export const declarations = [
 
 export const providerDeclarations: any[] = [
   ModalController,
-  // the provider below is used to fix a cyclic reference problem inside ModalComponent.ts
+  // the provider below is used to fix a cyclic reference problem inside ModalWindowComponent.ts
   { provide: IModalController, useExisting: ModalController },
-  ActionSheetController,
   ActionSheetHelper,
-  ModalHelper,
+  ModalWindowHelper,
 ];

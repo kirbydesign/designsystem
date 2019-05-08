@@ -36,22 +36,11 @@
   overflow: hidden;
 }
 
+// Kirby action sheet styles
 .kirby-action-sheet {
   --background: transparent;
-  --box-shadow: none;
   --width: 100%;
   --height: 100%;
-
-  .selectable {
-    cursor: pointer;
-    height: 50px;
-  }
-  
-  ion-backdrop {
-    opacity: 0 !important;
-  }
+  --overflow: visible;
+  position: fixed;
 }
-
-// .backdrop-no-scroll {
-//   overflow: hidden;
-// }

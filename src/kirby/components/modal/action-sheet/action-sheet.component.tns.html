@@ -1,0 +1,19 @@
+<ModalStack class="action-sheet-wrapper" dismissEnabled="true" (showingModally)="onShowingActionSheet($event)">
+    <GridLayout rows="*, auto">
+        <StackLayout row="0" (tap)="onModalDismiss()"></StackLayout>
+        <StackLayout row="1">
+            <kirby-card>
+                <StackLayout>
+                    <StackLayout *ngIf="config.header" class="action-sheet-header">
+                        <Label horizontalAlignment="center" fontWeight="bold" text="{{ config.header }}"></Label>
+                        <Label horizontalAlignment="center" textWrap="true" text="{{ config.subheader }}"></Label>
+                    </StackLayout>
+                    <StackLayout class="action-container" *ngFor="let item of config.actions">
+                        <Label class="action-item" (tap)="onItemSelect(item)" text="{{ item }}"></Label>
+                    </StackLayout>
+                </StackLayout>
+            </kirby-card>
+            <Button verticalAlignment="bottom" class="cancel-btn" text="Cancel" (tap)="onModalDismiss()"></Button>
+        </StackLayout>
+    </GridLayout>
+</ModalStack>

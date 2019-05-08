@@ -1,11 +1,11 @@
-import { ModalConfig } from './modal-config';
+import { ModalWindowConfig } from './modal-window-config';
 
 export class ModalConfigHelper {
   static readonly defaultTitleHorizontalAlignment = 'center';
   static readonly defaultCloseIconName = 'close';
   static readonly defaultDim = 0.5;
 
-  static processOptionalValues(config: ModalConfig): ModalConfig {
+  static processOptionalValues(config: ModalWindowConfig): ModalWindowConfig {
     if (!config.titleHorizontalAlignment) {
       config.titleHorizontalAlignment = ModalConfigHelper.defaultTitleHorizontalAlignment;
     }

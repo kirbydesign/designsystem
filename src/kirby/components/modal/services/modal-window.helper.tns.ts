@@ -3,16 +3,20 @@ import { Injectable } from '@angular/core';
 import { ModalDialogService } from 'nativescript-angular/directives/dialogs';
 import { ViewContainerRef } from '@angular/core';
 
-import { ModalComponent } from '../modal.component';
-import { ModalConfig } from '../config/modal-config';
-import { ModalConfigHelper } from '../config/modal-config.helper';
+import { ModalWindowComponent } from '../modal-window/modal-window.component';
+import { ModalWindowConfig } from '../modal-window/config/modal-window-config';
+import { ModalConfigHelper } from '../modal-window/config/modal-window-config.helper';
 
 @Injectable()
-export class ModalHelper {
+export class ModalWindowHelper {
   constructor(private modalDialogService: ModalDialogService) {}
 
-  public async showModal(config: ModalConfig, vcRef: ViewContainerRef, _: any): Promise<any> {
-    return await this.modalDialogService.showModal(ModalComponent, {
+  public async showModalWindow(
+    config: ModalWindowConfig,
+    vcRef: ViewContainerRef,
+    _: any
+  ): Promise<any> {
+    return await this.modalDialogService.showModal(ModalWindowComponent, {
       viewContainerRef: vcRef,
       closeCallback: null,
       context: config,

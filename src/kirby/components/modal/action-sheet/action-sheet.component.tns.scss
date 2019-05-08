@@ -1,0 +1,34 @@
+@import "../../../scss/native-imports";
+
+.action-sheet-wrapper {
+  width: 100%;
+  height: 100%;
+
+  .action-sheet-header {
+    background-color: transparent;
+    width: 100%;
+    padding: size("s");
+  }
+
+  .action-container {
+    margin-bottom: -10;
+    
+    .action-item {
+      border-width: 1 0 0 0;
+      border-color: get-color("kirby-tertiary");
+      height: 50;
+      width: 100%;
+      text-align: center;
+    }
+  }
+
+  .cancel-btn {
+    margin-top: size("xs");
+    margin-bottom: size("l");
+    border-radius: size("l");
+    background-color: white;
+    color: get-color("kirby-tertiary");
+    width: 60%;
+    height: size("xxl");
+  }
+}

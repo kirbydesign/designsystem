@@ -1,8 +1,8 @@
-import { ModalConfigHelper } from './modal-config.helper';
-import { ModalConfig } from './modal-config';
+import { ModalConfigHelper } from './modal-window-config.helper';
+import { ModalWindowConfig } from './modal-window-config';
 
 describe('ModalConfigHelper', () => {
-  let mockModalConfig: ModalConfig;
+  let mockModalConfig: ModalWindowConfig;
 
   beforeEach(() => {
     mockModalConfig = {
