@@ -1,32 +1,20 @@
 <div class="example">
     <kirby-action-sheet-example></kirby-action-sheet-example>
-    <kirby-html-viewer [html]="exampleHtml"></kirby-html-viewer>
+    <kirby-code-viewer [html]="exampleHtml"></kirby-code-viewer>
     <p>
-        --- Inside the parent(caller) component ---<br />
-        To show the action sheet, create an ActionSheetConfig and pass it to modalService.showActionSheet:<br />
-        <br />
-        <code>
-        const config: ActionSheetConfig = {{ '{' }}<br />
-            &nbsp;&nbsp;&nbsp;header: 'Your action sheet header',<br />
-            &nbsp;&nbsp;&nbsp;subheader: 'Your action sheet sub-header',<br />
-            &nbsp;&nbsp;&nbsp;actions: ['Option 1', 'Option 2', 'Option 3'],<br />
-        {{ '}' }};<br />
-        this.modalService.showActionSheetWindow(config, this.vcRef);
-        </code>
-        <br /><br />
-        (Optional) if you need to obtain data back from the action sheet, you can pass a callback function:<br />
-        <br />
-        <code>
-            this.modalService.showActionSheetWindow(config, this.vcRef, myCallback);<br />
-        </code>
-        <br />
-        where myCallback can be e.g.:<br />
-        <br />
-        <code>
-            myCallback(selection: string) {{ '{' }}<br />
-            &nbsp;&nbsp;&nbsp;...<br />
-            {{ '}' }}<br />
-        </code>
+        To show the action sheet, create an <code>ActionSheetConfig</code> and pass it to <code>modalController.openActionSheet</code>:
+        <kirby-code-viewer language="ts">const config: ActionSheetConfig={{ '{' }}
+    header: 'Your action sheet header',
+    subheader: 'Your action sheet sub-header',
+    actions: ['Option 1', 'Option 2', 'Option 3'],
+{{ '}' }};
+this.modalController.openActionSheet(config, this.vcRef);</kirby-code-viewer>
+        (Optional) if you need to obtain data back from the action sheet, you can pass a callback function:
+        <kirby-code-viewer language="ts">this.modalController.openActionSheet(config, this.vcRef, myCallback);</kirby-code-viewer>
+        where <code>myCallback</code> can be e.g.:
+        <kirby-code-viewer language="ts">myCallback(selection: string) {{ '{' }}
+    ...
+{{ '}' }}</kirby-code-viewer>
     </p>
     <h4>Action sheet properties:</h4>
     <kirby-showcase-properties [properties]="properties"></kirby-showcase-properties>

@@ -7,6 +7,7 @@ declare var require: any;
 @Component({
   selector: 'kirby-action-sheet-showcase',
   templateUrl: './action-sheet-showcase.component.html',
+  preserveWhitespaces: true,
 })
 export class ActionSheetShowcaseComponent {
   exampleHtml: string = require('../../examples/action-sheet-example/action-sheet-example.component.html');
