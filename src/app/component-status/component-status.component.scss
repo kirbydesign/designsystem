@@ -57,25 +57,27 @@
                 }
             }
    
-            & ~ .subcomponent
+            & ~ .subcomponent,
+            & ~ .enhancement-subcomponent
             {
                 display: none;
             }
     
-            &.expanded ~ .subcomponent
+            &.expanded ~ .subcomponent,
+            &.expanded ~ .enhancement-subcomponent
             {
                 display: table-row;
             }
     
         }
-
-        &.component:not(.expanded),
-        &.subcomponent:last-child
+       
+        &.component
         {
-            border-bottom: .1rem solid get-color('kirby-medium');
+            border-top: .1rem solid get-color('kirby-medium');
         }
 
-        &.subcomponent {
+        &.subcomponent,
+        &.enhancement {
             vertical-align: middle;
             border-top: .1rem dashed get-color('kirby-medium');
             color: get-color('kirby-dark-tint');
@@ -91,10 +93,31 @@
             a {
                 color: get-color('kirby-dark-tint');
             }
+
+            .vnext {
+                font-style: normal;
+            }
             
         }
 
-        &.someday-maybe {
+        &.enhancement {
+            td {
+                padding-top: 0.5rem;
+                padding-bottom: 0.5rem;
+            }
+
+            &-subcomponent td:first-child {
+                padding-left: 2rem;
+
+            }
+            ion-icon[name="add-circle"] {
+                font-size: 16px;
+                vertical-align: sub;
+            }       
+        }
+
+        &.someday-maybe,
+        &.someday-maybe td a {
             color: get-color('kirby-dark-tint');
             font-style: italic;
         }   
@@ -111,11 +134,6 @@
         &.component {
             font-weight: font-weight("bold");
         }
-
-        &.someday-maybe {
-            color: get-color('kirby-dark-tint');
-            font-style: italic;
-        }
     }
 
     a[href^="https://"] ion-icon {
@@ -123,14 +141,17 @@
         font-size: 18px;
 
         &[name="open"] {
-            color: get-color('kirby-contrast-dark');
+            color: get-color('kirby-dark-tint');
         }
     }
     
-    ion-badge {
+    kirby-badge {
         vertical-align: sub;
-        margin-left: 0.5rem;
-        --background: #{get-color(kirby-dark-tint)};
-        --color: #{get-color(kirby-contrast-light)};
+
+        &.version {
+            margin-left: 0.5rem;
+            --ion-color-base: #{get-color(kirby-medium-shade)};
+            --ion-color-contrast: #{get-color(kirby-contrast-light)};   
+        }
     }
 }

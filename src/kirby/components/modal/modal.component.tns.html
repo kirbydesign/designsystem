@@ -4,7 +4,7 @@
             <Label row="0" verticalAlignment="center" horizontalAlignment="{{ config.titleHorizontalAlignment }}"
                 text="{{ config.title }}"></Label>
             <AbsoluteLayout row="0" verticalAlignment="center" horizontalAlignment="right">
-                <kirby-floating-action-button [showShadow]="false" (tap)="dismissModal()">
+                <kirby-floating-action-button [showShadow]="false" (tap)="onModalDismiss()">
                     <kirby-icon [name]="config.closeIconName"></kirby-icon>
                 </kirby-floating-action-button>
             </AbsoluteLayout>
