@@ -1,39 +1,21 @@
 @import "../../../scss/web-imports";
 
-.action-sheet {
-  background-color: transparent;
-  width: 304px;
-  left: 50%;
-  top: 100%;
-  transform: translate(-50%, -110%);
-  position: absolute;
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
 
-  .action-sheet-card {
-    text-align: center;
-    min-height: 100%;
+kirby-card {
+  margin-top: auto;
+  flex: none;
+  width: 200px; //TODO: Get width from common settings
+}
 
-    .action-sheet-card-header {
-      line-break: auto;
-      padding: 10px;
-    }
-  }
-
-  .option {
-    width: 100%;
-  }
-  
-  kirby-list {
-    cursor: pointer;
-  }
-
-  .cancel-btn-wrapper {
-    width: 100%;
-    text-align: center;
-    
-    .cancel-btn {
-      width: 200px;
-      margin-top: 30px;
-    }
-  }
-  
+.cancel-btn {
+  font-weight: font-weight("bold");
+  margin-top: size("s");
+  margin-bottom: size("m");
+  width: 160px; //TODO: Get width from common settings
 }

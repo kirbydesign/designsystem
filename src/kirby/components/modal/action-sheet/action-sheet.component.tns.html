@@ -1,19 +1,24 @@
-<ModalStack class="action-sheet-wrapper" dismissEnabled="true" (showingModally)="onShowingActionSheet($event)">
-    <GridLayout rows="*, auto">
-        <StackLayout row="0" (tap)="onModalDismiss()"></StackLayout>
-        <StackLayout row="1">
-            <kirby-card>
-                <StackLayout>
-                    <StackLayout *ngIf="config.header" class="action-sheet-header">
-                        <Label horizontalAlignment="center" fontWeight="bold" text="{{ config.header }}"></Label>
-                        <Label horizontalAlignment="center" textWrap="true" text="{{ config.subheader }}"></Label>
-                    </StackLayout>
-                    <StackLayout class="action-container" *ngFor="let item of config.actions">
-                        <Label class="action-item" (tap)="onItemSelect(item)" text="{{ item }}"></Label>
-                    </StackLayout>
-                </StackLayout>
-            </kirby-card>
-            <Button verticalAlignment="bottom" class="cancel-btn" text="Cancel" (tap)="onModalDismiss()"></Button>
-        </StackLayout>
+<ModalStack class="action-sheet-wrapperz" dismissEnabled="true" (showingModally)="onShowingActionSheet($event)">
+    <GridLayout rows="*, auto, auto" (tap)="onModalDismiss()">
+        <Label row="0"></Label>
+        <kirby-card row="1">
+            <kirby-card-header *ngIf="config.header" [title]="config.header" [subtitle]="config.subheader">
+            </kirby-card-header>
+            <!-- TODO: Replace with kirby-list -->
+            <StackLayout class="action-container">
+                <Label *ngFor="let item of config.actions" class="action-item" (tap)="onItemSelect(item)" text="{{ item }}"></Label>
+            </StackLayout>
+            
+             <!-- <kirby-list style="border-width: 5; border-color: red; height: 100"
+                [items]="config.actions"
+                (itemSelect)="onItemSelect($event)">
+                <kirby-list-cell
+                        *kirbyListCell="let item"
+                        horisontalAlignment="center">
+                    <kirby-list-cell-line [primary]="true" [text]="item"></kirby-list-cell-line>
+                </kirby-list-cell>
+             </kirby-list> -->
+        </kirby-card>            
+        <Button row="2" kirby-button colortype="secondary" verticalAlignment="bottom" class="cancel-btn" text="Cancel" (tap)="onModalDismiss()"></Button> -->
     </GridLayout>
 </ModalStack>
