@@ -28,21 +28,18 @@ export class FabSheetComponent implements OnChanges {
   }
 
   public openFabSheet(event) {
-    const x = event.android.getX();
-    const y = event.android.getY();
-    console.log('(x,y) in pixels: ' + x + ',' + y);
+    // const x = event.android.getX();
+    // const y = event.android.getY();
+    // console.log('(x,y) in pixels: ' + x + ',' + y);
 
-    // console.log(event.object.y);
     if (!this.config.disabled) {
-      const fabSheetConfig: FabSheet = {
-        alignment: 'right',
-      };
-
       const config: ActionSheetConfig = {
         header: this.config.header,
         subheader: this.config.subheader,
         actions: this.config.actions,
-        fabSheet: fabSheetConfig,
+        fabSheet: {
+          alignment: 'right',
+        },
       };
       this.modalController.showActionSheetWindow(config, this.vcRef, this.myCallback);
     }

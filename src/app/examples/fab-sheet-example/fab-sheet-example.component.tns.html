@@ -1,4 +1,3 @@
 <StackLayout>
-    <kirby-fab-sheet [config]="config"></kirby-fab-sheet>
-    <Label *ngIf="selectedAction" text="{{ selectedAction }}"></Label>
+    <kirby-fab-sheet [config]="config" (actionSelected)="onActionSelected($event)"></kirby-fab-sheet>
 </StackLayout>

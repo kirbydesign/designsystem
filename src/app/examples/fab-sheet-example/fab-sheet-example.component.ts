@@ -18,6 +18,7 @@ export class FabSheetExampleComponent {
   };
 
   public onActionSelected(selection: string) {
+    console.log('action selected:', selection);
     this.selectedAction = selection ? selection : this.selectedAction;
   }
 }
