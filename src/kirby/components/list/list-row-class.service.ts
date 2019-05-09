@@ -55,7 +55,7 @@ export class ListRowClassService {
     }
   }
 
-  private getClassesForItem(current: any, context: ListRowClassContext) {
+  private getClassesForItem(current: any, context: ListRowClassContext): string {
     // Determine index of (current) item and if it's first / list in list
     const index = this.itemsSortedBySection.indexOf(current);
     const isFirst = index === 0;

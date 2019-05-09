@@ -2,6 +2,9 @@
 
 .row, .list-header, .section-header {
   padding: size('gutter') size('gutter-small') size('gutter') size('gutter-small');
+}
+
+.row, .list-header {
   justify-content: space-between;
   flex-direction: row;
 }
