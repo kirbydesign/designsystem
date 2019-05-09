@@ -16,7 +16,7 @@ export class ActionSheetExampleComponent {
       subheader: 'Your action sheet subheader',
       actions: ['Option 1', 'Option 2', 'Option 3'],
     };
-    this.modalController.showActionSheetWindow(config, this.vcRef, this.myCallback);
+    this.modalController.openActionSheet(config, this.vcRef, this.myCallback);
   }
 
   myCallback = (selection: string) => {

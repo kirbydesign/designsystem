@@ -9,6 +9,6 @@ export class SecondEmbeddedModalExampleComponent {
   constructor(private modalController: ModalController) {}
 
   onHideSecond() {
-    this.modalController.hideWindow();
+    this.modalController.closeTopmost();
   }
 }
