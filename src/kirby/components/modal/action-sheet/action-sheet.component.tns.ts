@@ -19,7 +19,7 @@ export class ActionSheetComponent extends ContentView {
   constructor(private modalController: IModalController, private params: ModalDialogParams) {
     super();
     this.config = this.params.context;
-    this.modalController.registerWindow({ close: this.params.closeCallback });
+    this.modalController.register({ close: this.params.closeCallback });
   }
 
   onShowingActionSheet(args: ShownModallyData): void {
@@ -28,11 +28,11 @@ export class ActionSheetComponent extends ContentView {
   }
 
   onModalDismiss(): void {
-    this.modalController.hideWindow();
+    this.modalController.closeTopmost();
   }
 
   onItemSelect(selection: string) {
-    this.modalController.hideWindow(selection);
+    this.modalController.closeTopmost(selection);
   }
 
   // TODO: this function is currently the same as the modal-window.component.tns.ts one

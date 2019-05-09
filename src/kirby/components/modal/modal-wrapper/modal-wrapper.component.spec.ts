@@ -6,12 +6,12 @@ import { By } from '@angular/platform-browser';
 
 import { FloatingActionButtonComponent } from '../../floating-action-button/floating-action-button.component';
 import { IconComponent } from '../../icon/icon.component';
-import { ModalWindowComponent } from './modal-window.component';
+import { ModalWrapperComponent } from './modal-wrapper.component';
 import { IModalController } from '../services/modal.controller.interface';
 
-describe('ModalWindowComponent', () => {
-  let component: ModalWindowComponent;
-  let fixture: ComponentFixture<ModalWindowComponent>;
+describe('ModalWrapperComponent', () => {
+  let component: ModalWrapperComponent;
+  let fixture: ComponentFixture<ModalWrapperComponent>;
 
   beforeEach(async(() => {
     const modalControllerSpy = jasmine.createSpyObj('IModalController', [
@@ -29,7 +29,7 @@ describe('ModalWindowComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [
-        ModalWindowComponent,
+        ModalWrapperComponent,
         MockComponent(IconComponent),
         MockComponent(FloatingActionButtonComponent),
       ],
@@ -40,13 +40,13 @@ describe('ModalWindowComponent', () => {
     }).compileComponents();
     TestBed.overrideModule(BrowserDynamicTestingModule, {
       set: {
-        entryComponents: [ModalWindowComponent, FloatingActionButtonComponent],
+        entryComponents: [ModalWrapperComponent, FloatingActionButtonComponent],
       },
     });
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ModalWindowComponent);
+    fixture = TestBed.createComponent(ModalWrapperComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
