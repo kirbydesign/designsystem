@@ -4,6 +4,11 @@
 
 <div *ngIf="isFabSheetOpen" class="fab-sheet" [style.margin-top.px]="verticalPos" >
   <kirby-card class="card">
+      <div *ngIf="config.header" class="action-sheet-card-header">
+          <h3>{{ config.header }}</h3>
+          <span>{{ config.subheader }}</span>
+      </div>
+      
       <kirby-list [items]="config.actions" (itemSelect)="onItemSelect($event)">
           <kirby-list-cell *kirbyListCell="let item">
               <kirby-list-cell-line class="option" [text]="item"></kirby-list-cell-line>

@@ -11,11 +11,13 @@ export class FabSheetExampleComponent {
 
   public config: FabSheetConfig = {
     openIconName: 'more',
-    closeIconName: 'close',
-    actions: ['Action 0', 'Action 1', 'Action 2'],
+    alignment: 'bottom',
+    header: 'Need some help?',
+    subheader: 'Here is a message where we can put absolutely anything we want.',
+    actions: ['Action 0', 'Action 1'],
   };
 
-  onActionSelected(selection: string) {
+  public onActionSelected(selection: string) {
     this.selectedAction = selection ? selection : this.selectedAction;
   }
 }

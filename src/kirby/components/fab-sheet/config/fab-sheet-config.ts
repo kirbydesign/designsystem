@@ -1,7 +1,8 @@
 export interface FabSheetConfig {
   openIconName?: string;
-  closeIconName?: string;
   disabled?: boolean;
-  align?: string;
+  alignment?: string;
+  header?: string;
+  subheader?: string;
   actions?: Array<string>;
 }

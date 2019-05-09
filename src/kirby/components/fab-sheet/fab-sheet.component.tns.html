@@ -1,4 +1,9 @@
-<kirby-floating-action-button [disabled]="config.disabled" (tap)="handleFabSheet()">
-    <kirby-icon [name]="iconName" size="large"></kirby-icon>
-</kirby-floating-action-button>
-      
+<GridLayout class="fab-sheet-wrapper" rows="*, auto">        
+    <StackLayout row="1">
+        <StackLayout horizontalAlignment="right">  
+            <kirby-floating-action-button [disabled]="config.disabled" (tap)="openFabSheet($event)">
+                <kirby-icon [name]="iconName" size="large"></kirby-icon>
+            </kirby-floating-action-button>
+        </StackLayout>  
+    </StackLayout>
+</GridLayout>

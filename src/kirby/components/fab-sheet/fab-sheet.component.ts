@@ -1,4 +1,12 @@
-import { Component, Input, OnChanges, EventEmitter, Output, HostListener, ElementRef } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  EventEmitter,
+  Output,
+  HostListener,
+  ElementRef,
+} from '@angular/core';
 
 import { FabSheetConfig } from './config/fab-sheet-config';
 
@@ -24,9 +32,8 @@ export class FabSheetComponent implements OnChanges {
       return 'cog';
     }
     const openIconName = !this.config.openIconName ? 'cog' : this.config.openIconName;
-    const closeIconName = !this.config.closeIconName ? 'close' : this.config.closeIconName;
 
-    return this.isFabSheetOpen ? closeIconName : openIconName;
+    return this.isFabSheetOpen ? 'close' : openIconName;
   }
 
   public handleFabSheet() {
@@ -41,27 +48,33 @@ export class FabSheetComponent implements OnChanges {
   }
 
   public get verticalPos(): number {
-    if (this.config.align && this.config.align === 'bottom') {
+    if (this.config.alignment && this.config.alignment === 'bottom') {
       return 74;
     }
 
     if (this.config.actions) {
-      const yPos = this.config.actions.length * 64 + 10;
+      let yPos = this.config.actions.length * 64 + 10;
+
+      if (this.config.header || this.config.subheader) {
+        const headerHeight = document.getElementsByClassName('action-sheet-card-header')[0]
+          .clientHeight;
+        yPos += headerHeight;
+      }
       return yPos * -1;
     } else {
       return 74;
     }
   }
 
-  @HostListener('document:click', ['$event', '$event.target'])
-    public onClick(event: MouseEvent, targetElement: HTMLElement): void {
-        if (!targetElement) {
-            return;
-        }
-
-        const clickedInside = this._elementRef.nativeElement.contains(targetElement);
-        if (!clickedInside) {
-             this.isFabSheetOpen = false;
-        }
+  @HostListener('document:click', ['$event.target'])
+  public onClick(targetElement: HTMLElement): void {
+    if (!targetElement) {
+      return;
     }
+
+    const clickedInside = this._elementRef.nativeElement.contains(targetElement);
+    if (!clickedInside) {
+      this.isFabSheetOpen = false;
+    }
+  }
 }

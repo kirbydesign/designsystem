@@ -13,13 +13,7 @@ export class FabSheetShowcaseComponent {
   properties: ShowcaseProperty[] = [
     {
       name: 'openIconName',
-      description: 'The name of the icon that will appear on fab-sheet when its closed.',
-      defaultValue: 'cog',
-      inputValues: ['string'],
-    },
-    {
-      name: 'closeIconName',
-      description: 'The name of the icon that will appear when fab-sheet is open.',
+      description: 'The name of the icon that will appear when fab-sheet is closed.',
       defaultValue: 'cog',
       inputValues: ['string'],
     },
@@ -30,14 +24,26 @@ export class FabSheetShowcaseComponent {
       inputValues: ['boolean'],
     },
     {
-      name: 'align',
+      name: 'alignment',
       description: 'Determines whether the fab-sheet will be displayed under or below fab button.',
       defaultValue: 'top',
       inputValues: ['top', 'bottom'],
     },
     {
+      name: 'header',
+      description: 'Style sheet header text.',
+      defaultValue: 'null',
+      inputValues: ['string'],
+    },
+    {
+      name: 'subheader',
+      description: 'Style sheet subheader text.',
+      defaultValue: 'null',
+      inputValues: ['string'],
+    },
+    {
       name: 'actions',
-      description: 'Fab-sheet actions. Array of action items',
+      description: 'Fab-sheet actions. Array of action items.',
       defaultValue: 'null',
       inputValues: ['string[]'],
     },

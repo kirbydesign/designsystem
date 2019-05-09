@@ -1,4 +1,4 @@
-@import "../../scss/web-imports";
+@import '../../scss/web-imports';
 
 :host {
   display: inline-flex;
@@ -13,6 +13,11 @@
     margin-left: -230px;
     margin-top: 0;
     background-color: transparent;
+
+    .action-sheet-card-header {
+      line-break: auto;
+      padding: 10px;
+    }
 
     .card {
       text-align: center;
