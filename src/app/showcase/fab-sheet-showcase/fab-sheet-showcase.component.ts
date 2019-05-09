@@ -24,10 +24,16 @@ export class FabSheetShowcaseComponent {
       inputValues: ['boolean'],
     },
     {
-      name: 'alignment',
-      description: 'Determines whether the fab-sheet will be displayed under or below fab button.',
+      name: 'verticalAlignment',
+      description: 'Determines vertical potition of fab-sheet on web.',
       defaultValue: 'top',
       inputValues: ['top', 'bottom'],
+    },
+    {
+      name: 'horizontalAlignment',
+      description: 'Determines horizontal potition of fab-sheet on ios/android',
+      defaultValue: 'center',
+      inputValues: ['left', 'center', 'right'],
     },
     {
       name: 'header',

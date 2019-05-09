@@ -6,5 +6,5 @@ export interface ActionSheetConfig {
 }
 
 export interface FabSheet {
-  alignment?: string;
+  horizontalAlignment?: string;
 }

@@ -18,6 +18,8 @@ export class FabSheetComponent implements OnChanges {
   ngOnChanges() {
     // set default values if not set from component
     this.config.disabled = this.config.disabled === undefined ? false : this.config.disabled;
+    this.config.horizontalAlignment =
+      this.config.horizontalAlignment === undefined ? 'center' : this.config.horizontalAlignment;
   }
 
   public get iconName(): string {
@@ -27,18 +29,14 @@ export class FabSheetComponent implements OnChanges {
     return !this.config.openIconName ? 'cog' : this.config.openIconName;
   }
 
-  public openFabSheet(event) {
-    // const x = event.android.getX();
-    // const y = event.android.getY();
-    // console.log('(x,y) in pixels: ' + x + ',' + y);
-
+  public openFabSheet() {
     if (!this.config.disabled) {
       const config: ActionSheetConfig = {
         header: this.config.header,
         subheader: this.config.subheader,
         actions: this.config.actions,
         fabSheet: {
-          alignment: 'right',
+          horizontalAlignment: this.config.horizontalAlignment,
         },
       };
       this.modalController.showActionSheetWindow(config, this.vcRef, this.myCallback);

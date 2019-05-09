@@ -15,7 +15,7 @@
             </kirby-card>
 
             <!-- FAB Sheet -->
-            <StackLayout *ngIf="config.fabSheet" horizontalAlignment="{{ config.fabSheet.alignment }}"> 
+            <StackLayout *ngIf="config.fabSheet" horizontalAlignment="{{ config.fabSheet.horizontalAlignment }}"> 
                 <kirby-floating-action-button (tap)="onModalDismiss()">
                     <kirby-icon name="close" size="large"></kirby-icon>
                 </kirby-floating-action-button>

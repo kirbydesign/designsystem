@@ -48,7 +48,7 @@ export class FabSheetComponent implements OnChanges {
   }
 
   public get verticalPos(): number {
-    if (this.config.alignment && this.config.alignment === 'bottom') {
+    if (this.config.verticalAlignment && this.config.verticalAlignment === 'bottom') {
       return 74;
     }
 

@@ -11,7 +11,8 @@ export class FabSheetExampleComponent {
 
   public config: FabSheetConfig = {
     openIconName: 'more',
-    alignment: 'bottom',
+    verticalAlignment: 'top',
+    horizontalAlignment: 'center',
     header: 'Need some help?',
     subheader: 'Here is a message where we can put absolutely anything we want.',
     actions: ['Action 0', 'Action 1'],
