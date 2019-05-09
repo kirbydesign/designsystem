@@ -1,9 +1,8 @@
+import { ActionSheetConfig } from '~/kirby/components/modal/action-sheet/config/action-sheet-config';
+
 export interface FabSheetConfig {
-  openIconName?: string;
   disabled?: boolean;
   horizontalAlignment?: string;
   verticalAlignment?: string;
-  header?: string;
-  subheader?: string;
-  actions?: Array<string>;
+  actionSheetConfig: ActionSheetConfig;
 }

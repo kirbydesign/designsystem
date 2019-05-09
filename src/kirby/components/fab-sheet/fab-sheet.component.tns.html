@@ -1,8 +1,8 @@
-<GridLayout class="fab-sheet-wrapper" rows="*, auto">        
+<GridLayout class="fab-sheet-wrapper" rows="*, auto">
     <StackLayout row="1">
         <StackLayout horizontalAlignment="{{ config.horizontalAlignment }}">  
             <kirby-floating-action-button [disabled]="config.disabled" (tap)="openFabSheet()">
-                <kirby-icon [name]="iconName" size="large"></kirby-icon>
+                <ng-content></ng-content>
             </kirby-floating-action-button>
         </StackLayout>  
     </StackLayout>

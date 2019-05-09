@@ -10,12 +10,13 @@ export class FabSheetExampleComponent {
   selectedAction: string;
 
   public config: FabSheetConfig = {
-    openIconName: 'more',
-    verticalAlignment: 'top',
+    verticalAlignment: 'bottom',
     horizontalAlignment: 'center',
-    header: 'Need some help?',
-    subheader: 'Here is a message where we can put absolutely anything we want.',
-    actions: ['Action 0', 'Action 1'],
+    actionSheetConfig: {
+      header: 'Need some help?',
+      subheader: 'Here is a message where we can put absolutely anything we want.',
+      actions: ['Action 0', 'Action 1'],
+    },
   };
 
   public onActionSelected(selection: string) {

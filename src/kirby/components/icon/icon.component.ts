@@ -1,5 +1,21 @@
 import { Component, Input } from '@angular/core';
 
+export type IconNames =
+  | 'add'
+  | 'close'
+  | 'cog'
+  | 'swap'
+  | 'move'
+  | 'log-out'
+  | 'more'
+  | 'arrow-back'
+  | 'help'
+  | 'attach'
+  | 'search'
+  | 'checkbox-outline'
+  | 'checkbox'
+  | 'menu'
+  | 'person';
 @Component({
   selector: 'kirby-icon',
   templateUrl: './icon.component.html',
@@ -9,22 +25,7 @@ export class IconComponent {
   static DEFAULT_ICON_CODE = 0xf2cf;
   static DEFAULT_ICON_NAME: 'cog' = 'cog';
 
-  @Input() name:
-    | 'add'
-    | 'close'
-    | 'cog'
-    | 'swap'
-    | 'move'
-    | 'log-out'
-    | 'more'
-    | 'arrow-back'
-    | 'help'
-    | 'attach'
-    | 'search'
-    | 'checkbox-outline'
-    | 'checkbox'
-    | 'menu'
-    | 'person' = IconComponent.DEFAULT_ICON_NAME;
+  @Input() name: IconNames = IconComponent.DEFAULT_ICON_NAME;
 
   @Input() size: 'small' | 'large' = 'small';
   @Input() colortype: 'primary' | 'secondary' | 'tertiary' | 'warning' | 'success' | 'danger';

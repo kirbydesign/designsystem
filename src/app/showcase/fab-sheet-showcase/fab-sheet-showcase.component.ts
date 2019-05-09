@@ -12,12 +12,6 @@ export class FabSheetShowcaseComponent {
   exampleHtml: string = require('../../examples/fab-sheet-example/fab-sheet-example.component.html');
   properties: ShowcaseProperty[] = [
     {
-      name: 'openIconName',
-      description: 'The name of the icon that will appear when fab-sheet is closed.',
-      defaultValue: 'cog',
-      inputValues: ['string'],
-    },
-    {
       name: 'disabled',
       description: 'Determines whether the button will be disabled or not.',
       defaultValue: 'false',

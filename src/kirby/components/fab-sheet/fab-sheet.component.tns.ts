@@ -2,7 +2,7 @@ import { Component, Input, OnChanges, EventEmitter, Output, ViewContainerRef } f
 
 import { ModalController } from './../modal/services/modal.controller';
 import { FabSheetConfig } from './config/fab-sheet-config';
-import { ActionSheetConfig, FabSheet } from '../modal/action-sheet/config/action-sheet-config';
+import { ActionSheetConfig } from '../modal/action-sheet/config/action-sheet-config';
 
 @Component({
   selector: 'kirby-fab-sheet',
@@ -22,22 +22,14 @@ export class FabSheetComponent implements OnChanges {
       this.config.horizontalAlignment === undefined ? 'center' : this.config.horizontalAlignment;
   }
 
-  public get iconName(): string {
-    if (!this.config) {
-      return 'cog';
-    }
-    return !this.config.openIconName ? 'cog' : this.config.openIconName;
-  }
-
-  public openFabSheet() {
+  public openFabSheet(args) {
     if (!this.config.disabled) {
       const config: ActionSheetConfig = {
-        header: this.config.header,
-        subheader: this.config.subheader,
-        actions: this.config.actions,
-        fabSheet: {
-          horizontalAlignment: this.config.horizontalAlignment,
-        },
+        header: this.config.actionSheetConfig.header,
+        subheader: this.config.actionSheetConfig.subheader,
+        actions: this.config.actionSheetConfig.actions,
+        hideCancelButton: true,
+        horizontalAlignment: this.config.horizontalAlignment,
       };
       this.modalController.showActionSheetWindow(config, this.vcRef, this.myCallback);
     }

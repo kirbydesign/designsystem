@@ -6,8 +6,11 @@ import {
   Output,
   HostListener,
   ElementRef,
+  ContentChild,
+  AfterViewInit,
 } from '@angular/core';
 
+import { IconComponent, IconNames } from './../icon/icon.component';
 import { FabSheetConfig } from './config/fab-sheet-config';
 
 @Component({
@@ -15,30 +18,28 @@ import { FabSheetConfig } from './config/fab-sheet-config';
   templateUrl: './fab-sheet.component.html',
   styleUrls: ['./fab-sheet.component.scss'],
 })
-export class FabSheetComponent implements OnChanges {
+export class FabSheetComponent implements OnChanges, AfterViewInit {
   @Input() config: FabSheetConfig;
   @Output() actionSelected = new EventEmitter<string>();
+  @ContentChild(IconComponent) icon: IconComponent;
   public isFabSheetOpen: boolean = false;
+  private originalIconName: IconNames;
 
   constructor(private _elementRef: ElementRef) {}
+
+  ngAfterViewInit() {
+    this.originalIconName = this.icon.name;
+  }
 
   ngOnChanges() {
     // set default values if not set from component
     this.config.disabled = this.config.disabled === undefined ? false : this.config.disabled;
   }
 
-  public get iconName(): string {
-    if (!this.config) {
-      return 'cog';
-    }
-    const openIconName = !this.config.openIconName ? 'cog' : this.config.openIconName;
-
-    return this.isFabSheetOpen ? 'close' : openIconName;
-  }
-
   public handleFabSheet() {
     if (!this.config.disabled) {
       this.isFabSheetOpen = !this.isFabSheetOpen;
+      this.icon.name = this.isFabSheetOpen ? 'close' : this.originalIconName;
     }
   }
 
@@ -52,10 +53,10 @@ export class FabSheetComponent implements OnChanges {
       return 74;
     }
 
-    if (this.config.actions) {
-      let yPos = this.config.actions.length * 64 + 10;
+    if (this.config.actionSheetConfig.actions) {
+      let yPos = this.config.actionSheetConfig.actions.length * 64 + 10;
 
-      if (this.config.header || this.config.subheader) {
+      if (this.config.actionSheetConfig.header || this.config.actionSheetConfig.subheader) {
         const headerHeight = document.getElementsByClassName('action-sheet-card-header')[0]
           .clientHeight;
         yPos += headerHeight;

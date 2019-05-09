@@ -15,13 +15,13 @@
             </kirby-card>
 
             <!-- FAB Sheet -->
-            <StackLayout *ngIf="config.fabSheet" horizontalAlignment="{{ config.fabSheet.horizontalAlignment }}"> 
+            <StackLayout *ngIf="config.hideCancelButton" horizontalAlignment="{{ config.horizontalAlignment }}"> 
                 <kirby-floating-action-button (tap)="onModalDismiss()">
                     <kirby-icon name="close" size="large"></kirby-icon>
                 </kirby-floating-action-button>
             </StackLayout>
-
-            <Button *ngIf="!config.fabSheet" verticalAlignment="bottom" class="cancel-btn" text="Cancel" (tap)="onModalDismiss()"></Button>
+            
+            <Button *ngIf="!config.hideCancelButton" verticalAlignment="bottom" class="cancel-btn" text="Cancel" (tap)="onModalDismiss()"></Button>
         </StackLayout>
     </GridLayout>
 </ModalStack>

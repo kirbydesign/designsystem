@@ -19,6 +19,7 @@ export class ActionSheetHelper {
       closeCallback: null,
       context: config,
       dimAmount: 0.1, // TODO: put back to 0.5
+      animated: false,
     } as ExtendedShowModalOptions);
   }
 }
