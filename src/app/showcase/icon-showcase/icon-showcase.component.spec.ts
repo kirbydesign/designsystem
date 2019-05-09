@@ -4,7 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import * as ionic from '@ionic/angular';
 
 import { ExamplesModule } from '../../examples/examples.module';
-import { HtmlViewerComponent } from '../../shared/html-viewer/html-viewer.component';
+import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
 import { IconShowcaseComponent } from './icon-showcase.component';
 
 import { ShowcasePropertiesComponent } from '../../shared/showcase-properties/showcase-properties.component';
@@ -18,7 +18,7 @@ describe('IconShowcaseComponent', () => {
       imports: [ExamplesModule, RouterTestingModule],
       declarations: [
         IconShowcaseComponent,
-        HtmlViewerComponent,
+        CodeViewerComponent,
         ShowcasePropertiesComponent,
         MockComponent(ionic.IonIcon),
       ],
