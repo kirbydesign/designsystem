@@ -8,7 +8,7 @@ import { ExamplesModule } from '../examples/examples.module';
 import { COMPONENT_DECLARATIONS } from './showcase.common';
 
 import { ShowcaseRoutingModule } from './showcase-routing.module';
-import { HtmlViewerComponent } from '../shared/html-viewer/html-viewer.component';
+import { CodeViewerComponent } from '../shared/code-viewer/code-viewer.component';
 import { ShowcasePropertiesComponent } from '../shared/showcase-properties/showcase-properties.component';
 import { ShowcaseComponent } from './showcase.component';
 
@@ -22,7 +22,7 @@ describe('ShowcaseComponent', () => {
       declarations: [
         ...COMPONENT_DECLARATIONS,
         ShowcaseComponent,
-        HtmlViewerComponent,
+        CodeViewerComponent,
         ShowcasePropertiesComponent,
         MockComponent(ionic.IonIcon),
       ],
