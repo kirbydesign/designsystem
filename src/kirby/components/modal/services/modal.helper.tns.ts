@@ -8,7 +8,7 @@ import { ModalWrapperConfig } from '../modal-wrapper/config/modal-wrapper-config
 import { ModalWrapperConfigHelper } from '../modal-wrapper/config/modal-wrapper-config.helper';
 
 @Injectable()
-export class ModalWindowHelper {
+export class ModalHelper {
   constructor(private modalDialogService: ModalDialogService) {}
 
   public async showModalWindow(

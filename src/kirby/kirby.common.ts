@@ -29,7 +29,7 @@ import { SegmentedChipControlComponent } from './components/segment/segmented-ch
 import { BadgeComponent } from './components/badge/badge.component';
 import { ModalController } from './components/modal/services/modal.controller';
 import { IModalController } from './components/modal/services/modal.controller.interface';
-import { ModalWindowHelper } from './components/modal/services/modal-window.helper';
+import { ModalHelper } from './components/modal/services/modal.helper';
 import { ActionSheetHelper } from './components/modal/services/action-sheet.helper';
 import { ActionSheetComponent } from './components/modal/action-sheet/action-sheet.component';
 import { CustomIconNameDirective } from './components/icon/custom-icon-name.directive';
@@ -71,5 +71,5 @@ export const providerDeclarations: any[] = [
   // the provider below is used to fix a cyclic reference problem inside ModalWrapperComponent.ts
   { provide: IModalController, useExisting: ModalController },
   ActionSheetHelper,
-  ModalWindowHelper,
+  ModalHelper,
 ];

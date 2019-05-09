@@ -5,7 +5,7 @@ import { ModalWrapperConfig } from '../modal-wrapper/config/modal-wrapper-config
 import { ModalWrapperComponent } from '../modal-wrapper/modal-wrapper.component';
 
 @Injectable()
-export class ModalWindowHelper {
+export class ModalHelper {
   constructor(private ionicModalController: IonicModalController) {}
 
   public async showModalWindow(

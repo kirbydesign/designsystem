@@ -1,6 +1,6 @@
 import { Injectable, ViewContainerRef } from '@angular/core';
 
-import { ModalWindowHelper } from './modal-window.helper';
+import { ModalHelper } from './modal.helper';
 import { ActionSheetHelper } from './action-sheet.helper';
 import { ModalWrapperConfig } from '../modal-wrapper/config/modal-wrapper-config';
 import { IModalController } from './modal.controller.interface';
@@ -9,26 +9,18 @@ import { ActionSheetConfig } from '../action-sheet/config/action-sheet-config';
 @Injectable()
 export class ModalController implements IModalController {
   private modals: { close: (data?: any) => {} }[] = [];
-  // registerModal needs to be wrapped, because it is a function with side-effects (we modify this.modals),
-  // hence this.modals.push(modal) is going to throw an error once we invoke it from another class
-  private registerModalWrapper: (modal: { close: (data?: any) => {} }) => void = (modal) => {
-    this.register(modal);
-  };
 
-  constructor(
-    private modalWindowHelper: ModalWindowHelper,
-    private actionSheetHelper: ActionSheetHelper
-  ) {}
+  constructor(private modalHelper: ModalHelper, private actionSheetHelper: ActionSheetHelper) {}
 
   public openModal(
     config: ModalWrapperConfig,
     vcRef: ViewContainerRef,
     onCloseModal?: (data?: any) => void
   ): void {
-    const modalCloseEvent: Promise<any> = this.modalWindowHelper.showModalWindow(
+    const modalCloseEvent: Promise<any> = this.modalHelper.showModalWindow(
       config,
       vcRef,
-      this.registerModalWrapper
+      this.register.bind(this)
     );
     modalCloseEvent.then((data) => {
       this.forgetTopmost();
@@ -45,14 +37,12 @@ export class ModalController implements IModalController {
     vcRef: ViewContainerRef,
     onCloseModal?: (data?: any) => void
   ): void {
-    this.actionSheetHelper
-      .showActionSheet(config, vcRef, this.registerModalWrapper)
-      .then((data) => {
-        this.forgetTopmost();
-        if (onCloseModal) {
-          onCloseModal(typeof data === 'object' && 'data' in data ? data.data : data);
-        }
-      });
+    this.actionSheetHelper.showActionSheet(config, vcRef, this.register.bind(this)).then((data) => {
+      this.forgetTopmost();
+      if (onCloseModal) {
+        onCloseModal(typeof data === 'object' && 'data' in data ? data.data : data);
+      }
+    });
   }
 
   public register(modal: { close: (data?: any) => {} }): void {
