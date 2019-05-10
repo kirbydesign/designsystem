@@ -1,5 +1,7 @@
+import { ActionSheetItem } from './action-sheet-item';
+
 export interface ActionSheetConfig {
   header?: string;
   subheader?: string;
-  actions: Array<string>;
+  items: Array<ActionSheetItem>;
 }

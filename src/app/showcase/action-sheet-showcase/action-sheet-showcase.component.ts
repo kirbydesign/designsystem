@@ -25,10 +25,10 @@ export class ActionSheetShowcaseComponent {
       inputValues: ['string'],
     },
     {
-      name: 'actions',
+      name: 'items',
       description: 'The options shown inside the action sheet',
       defaultValue: '',
-      inputValues: ['Array<string>'],
+      inputValues: ['Array<ActionSheetItem>'],
     },
   ];
 }

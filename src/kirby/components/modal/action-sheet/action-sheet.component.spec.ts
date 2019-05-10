@@ -29,7 +29,11 @@ describe('ActionSheetComponent', () => {
       get: {
         header: 'Test header',
         subheader: 'Test subheader',
-        actions: ['Action 1', 'Action 2', 'Action 3'],
+        items: [
+          { id: '1', text: 'Action 1' },
+          { id: '2', text: 'Action 2' },
+          { id: '3', text: 'Action 3' },
+        ],
       },
     });
 
@@ -108,22 +112,22 @@ describe('ActionSheetComponent', () => {
   describe('actions', () => {
     it('should contain each item', () => {
       var el = fixture.debugElement.query(By.directive(ListComponent));
-      expect(el.componentInstance.items).toContain('Action 1');
-      expect(el.componentInstance.items).toContain('Action 2');
-      expect(el.componentInstance.items).toContain('Action 3');
+      expect(el.componentInstance.items).toContain({ id: '1', text: 'Action 1' });
+      expect(el.componentInstance.items).toContain({ id: '2', text: 'Action 2' });
+      expect(el.componentInstance.items).toContain({ id: '3', text: 'Action 3' });
     });
 
     it('should reflect add/remove/edit changes of items', () => {
-      component.config.actions[0] = 'New Action 1';
-      component.config.actions.pop();
-      component.config.actions.push('Action 4');
+      component.config.items[0] = { id: '1', text: 'New Action 1' };
+      component.config.items.pop();
+      component.config.items.push({ id: '4', text: 'Action 4' });
       fixture.detectChanges();
       var el = fixture.debugElement.query(By.directive(ListComponent));
-      expect(el.componentInstance.items).not.toContain('Action 1');
-      expect(el.componentInstance.items).toContain('New Action 1');
-      expect(el.componentInstance.items).toContain('Action 2');
-      expect(el.componentInstance.items).not.toContain('Action 3');
-      expect(el.componentInstance.items).toContain('Action 4');
+      expect(el.componentInstance.items).not.toContain({ id: '1', text: 'Action 1' });
+      expect(el.componentInstance.items).toContain({ id: '1', text: 'New Action 1' });
+      expect(el.componentInstance.items).toContain({ id: '2', text: 'Action 2' });
+      expect(el.componentInstance.items).not.toContain({ id: '3', text: 'Action 3' });
+      expect(el.componentInstance.items).toContain({ id: '4', text: 'Action 4' });
     });
   });
 });
