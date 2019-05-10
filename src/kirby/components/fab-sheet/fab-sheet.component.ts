@@ -40,6 +40,7 @@ export class FabSheetComponent implements AfterViewInit {
       if (!this.isFabSheetOpen) {
         this.isFabSheetOpen = true;
         this.icon.name = this.isFabSheetOpen ? 'close' : this.originalIconName;
+
         const rect = event.currentTarget.getBoundingClientRect();
         const config: ActionSheetConfig = {
           header: this.header,

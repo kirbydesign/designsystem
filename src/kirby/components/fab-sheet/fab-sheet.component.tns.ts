@@ -10,7 +10,7 @@ import { ActionSheetItem } from '../modal/action-sheet/config/action-sheet-item'
   styleUrls: ['./fab-sheet.component.scss'],
 })
 export class FabSheetComponent {
-  @Input() disabled?: boolean;
+  @Input() disabled?: boolean = false;
   @Input() horizontalAlignment?: 'left' | 'center' | 'right' = 'right';
   @Input() header?: string;
   @Input() subheader?: string;

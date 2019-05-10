@@ -13,13 +13,13 @@ export class FabSheetShowcaseComponent {
   properties: ShowcaseProperty[] = [
     {
       name: 'disabled',
-      description: 'Determines whether the button will be disabled or not.',
+      description: '(Optional) Determines whether the button will be disabled or not.',
       defaultValue: 'false',
       inputValues: ['boolean'],
     },
     {
       name: 'horizontalAlignment',
-      description: 'Determines horizontal position of fab sheet.',
+      description: '(Optional) Determines horizontal position of fab sheet.',
       defaultValue: 'right',
       inputValues: ['left', 'center', 'right'],
     },

@@ -1,3 +1,9 @@
-<kirby-fab-sheet [horizontalAlignment]="horizontalAlignment" [header]="header" [subheader]="subheader" [items]="items" (actionSelected)="onActionSelected($event)">
-    <kirby-icon name="more" size="large"></kirby-icon>
+<kirby-fab-sheet 
+    [disabled]="false" 
+    [horizontalAlignment]="'center'" 
+    [header]="'Your action sheet header'" 
+    [subheader]="'Your action sheet subheader'" 
+    [items]="items" 
+    (actionSelected)="onActionSelected($event)">
+    <kirby-icon [name]="'more'" [size]="'large'"></kirby-icon>
 </kirby-fab-sheet>
