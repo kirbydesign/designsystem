@@ -24,7 +24,7 @@ export class FabSheetComponent implements OnChanges {
       const config: ActionSheetConfig = {
         header: this.config.actionSheetConfig.header,
         subheader: this.config.actionSheetConfig.subheader,
-        actions: this.config.actionSheetConfig.actions,
+        items: this.config.actionSheetConfig.items,
         position: this.config.horizontalAlignment ? this.config.horizontalAlignment : 'right',
       };
       this.modalController.showActionSheet(config, this.vcRef, this.myCallback);

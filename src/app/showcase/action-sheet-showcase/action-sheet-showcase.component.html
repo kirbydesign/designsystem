@@ -2,17 +2,22 @@
     <kirby-action-sheet-example></kirby-action-sheet-example>
     <kirby-code-viewer [html]="exampleHtml"></kirby-code-viewer>
     <p>
-        To show the action sheet, create an <code>ActionSheetConfig</code> and pass it to <code>modalController.showActionSheet</code>:
+        To show the action sheet, create an <code>ActionSheetConfig</code> and pass it to <code>modalController.showActionSheet</code>. 
+        Each item must to be of type <code>ActionSheetItem</code>.
         <kirby-code-viewer language="ts">const config: ActionSheetConfig={{ '{' }}
     header: 'Your action sheet header',
     subheader: 'Your action sheet sub-header',
-    actions: ['Option 1', 'Option 2', 'Option 3'],
+    items: [
+        {{ '{' }} id: '1', text: 'Option 1' {{ '}' }},
+        {{ '{' }} id: '2', text: 'Option 2' {{ '}' }},
+        {{ '{' }} id: '3', text: 'Option 3' {{ '}' }},
+    ],
 {{ '}' }};
 this.modalController.showActionSheet(config, this.vcRef);</kirby-code-viewer>
         (Optional) if you need to obtain data back from the action sheet, you can pass a callback function:
         <kirby-code-viewer language="ts">this.modalController.showActionSheet(config, this.vcRef, myCallback);</kirby-code-viewer>
         where <code>myCallback</code> can be e.g.:
-        <kirby-code-viewer language="ts">myCallback(selection: string) {{ '{' }}
+        <kirby-code-viewer language="ts">myCallback(selection: ActionSheetItem) {{ '{' }}
     ...
 {{ '}' }}</kirby-code-viewer>
         We can use <code>modalController.hideTopmost</code> to hide (and destroy its component) the topmost action sheet. 

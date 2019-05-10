@@ -4,6 +4,7 @@ import { ModalDialogParams } from 'nativescript-angular';
 
 import { IModalController } from '../services/modal.controller.interface';
 import { ActionSheetConfig } from './config/action-sheet-config';
+import { ActionSheetItem } from './config/action-sheet-item';
 
 @Component({
   templateUrl: './action-sheet.component.html',
@@ -28,7 +29,7 @@ export class ActionSheetComponent extends ContentView {
     this.modalController.hideTopmost();
   }
 
-  onItemSelect(selection: string) {
+  onItemSelect(selection: ActionSheetItem) {
     this.modalController.hideTopmost(selection);
   }
 

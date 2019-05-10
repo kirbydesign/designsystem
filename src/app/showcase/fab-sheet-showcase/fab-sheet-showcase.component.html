@@ -9,7 +9,11 @@
       actionSheetConfig: {{ '{' }}
         header: 'Your action sheet header',
         subheader: 'Your action sheet sub-header',
-        actions: ['Option 1', 'Option 2', 'Option 3'],
+        items: [
+          {{ '{' }} id: '1', text: 'Option 1' {{ '}' }},
+          {{ '{' }} id: '2', text: 'Option 2' {{ '}' }},
+          {{ '{' }} id: '3', text: 'Option 3' {{ '}' }},
+        ],
       {{ '}' }};
     {{ '}' }};
       </pre>
@@ -17,7 +21,7 @@
       (Optional) if you need to obtain data back from the fab sheet, you can pass a callback function:
       <kirby-code-viewer language="html">(actionSelected)="myCallback($event)"</kirby-code-viewer>
       where <code>myCallback</code> can be e.g.:
-      <kirby-code-viewer language="ts">myCallback(selection: string) {{ '{' }}
+      <kirby-code-viewer language="ts">myCallback(selection: ActionSheetItem) {{ '{' }}
   ...
 {{ '}' }}</kirby-code-viewer>
   </p>
