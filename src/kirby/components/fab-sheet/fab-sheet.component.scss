@@ -1,3 +1,9 @@
-kirby-floating-action-button  {
-    z-index: 30000;
+:host {
+    kirby-floating-action-button  {     
+        display: flex;
+    }
+    
+    ::ng-deep ion-fab-button {
+        z-index: 100000;
+    }
 }
