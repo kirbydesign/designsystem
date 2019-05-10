@@ -16,7 +16,7 @@ export class ActionSheetExampleComponent {
       subheader: 'Your action sheet subheader',
       actions: ['Option 1', 'Option 2', 'Option 3'],
     };
-    this.modalController.openActionSheet(config, this.vcRef, this.onActionSelected);
+    this.modalController.showActionSheet(config, this.vcRef, this.onActionSelected);
   }
 
   private onActionSelected(selection: string) {

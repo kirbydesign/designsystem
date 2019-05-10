@@ -12,7 +12,7 @@ export class ModalController implements IModalController {
 
   constructor(private modalHelper: ModalHelper, private actionSheetHelper: ActionSheetHelper) {}
 
-  public openModal(
+  public showModal(
     config: ModalWrapperConfig,
     vcRef: ViewContainerRef,
     onCloseModal?: (data?: any) => void
@@ -32,7 +32,7 @@ export class ModalController implements IModalController {
     });
   }
 
-  public openActionSheet(
+  public showActionSheet(
     config: ActionSheetConfig,
     vcRef: ViewContainerRef,
     onCloseModal?: (data?: any) => void
@@ -49,7 +49,7 @@ export class ModalController implements IModalController {
     this.modals.push(modal);
   }
 
-  public closeTopmost(data?: any): void {
+  public hideTopmost(data?: any): void {
     const modal = this.modals[this.modals.length - 1];
     if (!modal) {
       throw new Error('No modal windows are currently registered');

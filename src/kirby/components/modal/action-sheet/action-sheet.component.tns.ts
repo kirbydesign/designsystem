@@ -28,11 +28,11 @@ export class ActionSheetComponent extends ContentView {
   }
 
   onModalDismiss(): void {
-    this.modalController.closeTopmost();
+    this.modalController.hideTopmost();
   }
 
   onItemSelect(selection: string) {
-    this.modalController.closeTopmost(selection);
+    this.modalController.hideTopmost(selection);
   }
 
   // TODO: this function is currently the same as the modal-window.component.tns.ts one

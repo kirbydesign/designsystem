@@ -19,11 +19,11 @@ export class FirstEmbeddedModalExampleComponent {
     };
 
     // supposing no callback needed for the second component
-    this.modalController.openModal(config, this.vcRef);
+    this.modalController.showModal(config, this.vcRef);
   }
 
   onHideFirst() {
     let someTestData: number = Math.PI;
-    this.modalController.closeTopmost(someTestData);
+    this.modalController.hideTopmost(someTestData);
   }
 }

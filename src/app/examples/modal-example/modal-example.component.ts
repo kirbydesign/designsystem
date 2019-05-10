@@ -18,7 +18,7 @@ export class ModalExampleComponent {
       component: FirstEmbeddedModalExampleComponent,
     };
 
-    this.modalController.openModal(config, this.vcRef, this.onModalClose);
+    this.modalController.showModal(config, this.vcRef, this.onModalClose);
   }
 
   onModalClose(modalData: any): void {

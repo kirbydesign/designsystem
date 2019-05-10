@@ -16,10 +16,10 @@ export class ActionSheetComponent {
   }
 
   onItemSelect(selection: string) {
-    this.modalController.closeTopmost(selection);
+    this.modalController.hideTopmost(selection);
   }
 
   onModalDismiss() {
-    this.modalController.closeTopmost();
+    this.modalController.hideTopmost();
   }
 }
