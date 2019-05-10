@@ -1,37 +1,37 @@
-import { Component, Input, OnChanges, EventEmitter, Output, ViewContainerRef } from '@angular/core';
+import { Component, Input, EventEmitter, Output, ViewContainerRef } from '@angular/core';
 
 import { ModalController } from './../modal/services/modal.controller';
-import { FabSheetConfig } from './config/fab-sheet-config';
 import { ActionSheetConfig } from '../modal/action-sheet/config/action-sheet-config';
+import { ActionSheetItem } from '../modal/action-sheet/config/action-sheet-item';
 
 @Component({
   selector: 'kirby-fab-sheet',
   templateUrl: './fab-sheet.component.html',
   styleUrls: ['./fab-sheet.component.scss'],
 })
-export class FabSheetComponent implements OnChanges {
-  @Input() config: FabSheetConfig;
-  @Output() actionSelected = new EventEmitter<string>();
+export class FabSheetComponent {
+  @Input() disabled?: boolean;
+  @Input() horizontalAlignment?: 'left' | 'center' | 'right' = 'right';
+  @Input() header?: string;
+  @Input() subheader?: string;
+  @Input() items: Array<ActionSheetItem>;
+  @Output() actionSelected = new EventEmitter<ActionSheetItem>();
 
   constructor(private modalController: ModalController, private vcRef: ViewContainerRef) {}
 
-  ngOnChanges() {
-    this.config.disabled = this.config.disabled === undefined ? false : this.config.disabled;
-  }
-
   public openFabSheet() {
-    if (!this.config.disabled) {
+    if (!this.disabled) {
       const config: ActionSheetConfig = {
-        header: this.config.actionSheetConfig.header,
-        subheader: this.config.actionSheetConfig.subheader,
-        items: this.config.actionSheetConfig.items,
-        position: this.config.horizontalAlignment ? this.config.horizontalAlignment : 'right',
+        header: this.header,
+        subheader: this.subheader,
+        items: this.items,
+        position: this.horizontalAlignment,
       };
       this.modalController.showActionSheet(config, this.vcRef, this.myCallback);
     }
   }
 
-  private myCallback = (selection: string) => {
+  private myCallback = (selection: ActionSheetItem) => {
     this.actionSelected.emit(selection);
   };
 }

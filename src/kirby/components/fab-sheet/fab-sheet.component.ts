@@ -1,7 +1,6 @@
 import {
   Component,
   Input,
-  OnChanges,
   EventEmitter,
   Output,
   ContentChild,
@@ -9,18 +8,23 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 
+import { ActionSheetConfig } from '~/kirby/components/modal/action-sheet/config/action-sheet-config';
 import { ModalController } from './../modal/services/modal.controller';
 import { IconComponent, IconNames } from './../icon/icon.component';
-import { FabSheetConfig } from './config/fab-sheet-config';
+import { ActionSheetItem } from '../modal/action-sheet/config/action-sheet-item';
 
 @Component({
   selector: 'kirby-fab-sheet',
   templateUrl: './fab-sheet.component.html',
   styleUrls: ['./fab-sheet.component.scss'],
 })
-export class FabSheetComponent implements OnChanges, AfterViewInit {
-  @Input() config: FabSheetConfig;
-  @Output() actionSelected = new EventEmitter<string>();
+export class FabSheetComponent implements AfterViewInit {
+  @Input() disabled?: boolean = false;
+  @Input() horizontalAlignment?: 'left' | 'center' | 'right' = 'right';
+  @Input() header?: string;
+  @Input() subheader?: string;
+  @Input() items: Array<ActionSheetItem>;
+  @Output() actionSelected = new EventEmitter<ActionSheetItem>();
   @ContentChild(IconComponent) icon: IconComponent;
   public isFabSheetOpen: boolean = false;
   private originalIconName: IconNames;
@@ -31,30 +35,27 @@ export class FabSheetComponent implements OnChanges, AfterViewInit {
     this.originalIconName = this.icon.name;
   }
 
-  ngOnChanges() {
-    this.config.disabled = this.config.disabled === undefined ? false : this.config.disabled;
-  }
-
   public openFabSheet(event) {
-    if (!this.config.disabled) {
+    if (!this.disabled) {
       if (!this.isFabSheetOpen) {
         this.isFabSheetOpen = true;
         this.icon.name = this.isFabSheetOpen ? 'close' : this.originalIconName;
         const rect = event.currentTarget.getBoundingClientRect();
-        this.config.actionSheetConfig.position = this.calculatPosition(rect);
+        const config: ActionSheetConfig = {
+          header: this.header,
+          subheader: this.subheader,
+          items: this.items,
+          position: this.calculatPosition(rect),
+        };
 
-        this.modalController.showActionSheet(
-          this.config.actionSheetConfig,
-          this.vcRef,
-          this.onActionSelected.bind(this)
-        );
+        this.modalController.showActionSheet(config, this.vcRef, this.onActionSelected.bind(this));
       } else {
         this.modalController.hideTopmost();
       }
     }
   }
 
-  private onActionSelected(selection: string) {
+  private onActionSelected(selection: ActionSheetItem) {
     this.actionSelected.emit(selection);
     this.icon.name = this.originalIconName;
     this.isFabSheetOpen = false;
@@ -71,10 +72,10 @@ export class FabSheetComponent implements OnChanges, AfterViewInit {
       left: rect.x - cardWidth + fabWidth + 'px',
     };
 
-    if (this.config.horizontalAlignment) {
-      if (this.config.horizontalAlignment === 'left') {
+    if (this.horizontalAlignment) {
+      if (this.horizontalAlignment === 'left') {
         position.left = rect.x + 'px';
-      } else if (this.config.horizontalAlignment === 'center') {
+      } else if (this.horizontalAlignment === 'center') {
         const width = cardWidth / 2 - fabWidth / 2;
         position.left = rect.x - width + 'px';
       }

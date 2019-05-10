@@ -24,10 +24,22 @@ export class FabSheetShowcaseComponent {
       inputValues: ['left', 'center', 'right'],
     },
     {
-      name: 'ActionSheetConfig',
-      description: 'See documentation for action sheet.',
+      name: 'header',
+      description: '(Optional) The header of the action sheet',
       defaultValue: '',
-      inputValues: ['ActionSheetConfig'],
+      inputValues: ['string'],
+    },
+    {
+      name: 'subheader',
+      description: '(Optional) The subheader of the action sheet',
+      defaultValue: '',
+      inputValues: ['string'],
+    },
+    {
+      name: 'items',
+      description: 'The options shown inside the action sheet',
+      defaultValue: '',
+      inputValues: ['Array<ActionSheetItem>'],
     },
   ];
 }
