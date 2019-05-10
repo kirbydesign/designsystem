@@ -1,21 +1,21 @@
-import { Injectable, ViewContainerRef } from '@angular/core';
+import { Injectable, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
 import { ModalController as IonicModalController } from '@ionic/angular';
 
-import { ModalWrapperConfig } from '../modal-wrapper/config/modal-wrapper-config';
-import { ModalWrapperComponent } from '../modal-wrapper/modal-wrapper.component';
+import { ActionSheetConfig } from '../action-sheet/config/action-sheet-config';
+import { ActionSheetComponent } from '../action-sheet/action-sheet.component';
 
 @Injectable()
-export class ModalHelper {
+export class ActionSheetHelper {
   constructor(private ionicModalController: IonicModalController) {}
 
-  public async showModalWindow(
-    config: ModalWrapperConfig,
-    _vcRef: ViewContainerRef,
+  public async showActionSheet(
+    config: ActionSheetConfig,
+    vcRef: ViewContainerRef,
     registerModal: (modal: { close: (data?: any) => {} }) => void
   ): Promise<any> {
     const modal = await this.ionicModalController.create({
-      component: ModalWrapperComponent,
-      cssClass: 'kirby-modal',
+      component: ActionSheetComponent,
+      cssClass: 'kirby-action-sheet',
       componentProps: { config: config },
     });
 
