@@ -36,17 +36,21 @@ export class FabSheetComponent implements OnChanges, AfterViewInit {
   }
 
   public openFabSheet(event) {
-    if (!this.config.disabled && !this.isFabSheetOpen) {
-      const rect = event.currentTarget.getBoundingClientRect();
-      this.isFabSheetOpen = true;
-      this.icon.name = this.isFabSheetOpen ? 'close' : this.originalIconName;
+    if (!this.config.disabled) {
+      if (!this.isFabSheetOpen) {
+        const rect = event.currentTarget.getBoundingClientRect();
+        this.isFabSheetOpen = true;
+        this.icon.name = this.isFabSheetOpen ? 'close' : this.originalIconName;
 
-      this.config.actionSheetConfig.position = this.calculatPosition(rect);
-      this.modalController.openActionSheet(
-        this.config.actionSheetConfig,
-        this.vcRef,
-        this.onActionSelected.bind(this)
-      );
+        this.config.actionSheetConfig.position = this.calculatPosition(rect);
+        this.modalController.openActionSheet(
+          this.config.actionSheetConfig,
+          this.vcRef,
+          this.onActionSelected.bind(this)
+        );
+      } else {
+        this.modalController.closeTopmost();
+      }
     }
   }
 
