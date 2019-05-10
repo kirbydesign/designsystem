@@ -48,12 +48,12 @@ export const componentStatusItems: ComponentStatusItem[] = [
     title: 'Action Sheet',
     priority: 0,
     ux: {
-      version: 0.0,
-      status: ItemUXStatus.underConsideration,
-      // wireFrameUrl: 'https://sketch.cloud/s/pAE4G/09KPE22/play',
+      version: 1.0,
+      status: ItemUXStatus.ready,
+      wireFrameUrl: 'https://sketch.cloud/s/pAE4G/oYz8ZKQ/play',
     },
     code: {
-      version: 0.1,
+      version: 0.5,
       status: ItemCodeStatus.ready,
       cookbookUrl: 'showcase/action-sheet',
       github:
