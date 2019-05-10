@@ -10,16 +10,16 @@ import { ActionSheetConfig } from '~/kirby/components/modal/action-sheet/config/
 export class ActionSheetExampleComponent {
   constructor(private modalController: ModalController, private vcRef: ViewContainerRef) {}
 
-  openActionSheet(e: any) {
+  openActionSheet() {
     const config: ActionSheetConfig = {
-      // header: 'Brug for hjælp?',
-      // subheader: 'Here is a message where we can put absolutely anything we want.',
-      actions: ['Vis spørgsmål og svar', 'Ring os op'],
+      header: 'Your action sheet header',
+      subheader: 'Your action sheet subheader',
+      actions: ['Option 1', 'Option 2', 'Option 3'],
     };
-    this.modalController.showActionSheetWindow(config, this.vcRef, this.myCallback);
+    this.modalController.openActionSheet(config, this.vcRef, this.onActionSelected);
   }
 
-  myCallback = (selection: string) => {
-    console.log(`Dialog selection: ${selection}`);
-  };
+  private onActionSelected(selection: string) {
+    console.log(`Action sheet selection: ${selection}`);
+  }
 }

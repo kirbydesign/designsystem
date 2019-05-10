@@ -4,12 +4,12 @@ import {
   OnChanges,
   EventEmitter,
   Output,
-  HostListener,
-  ElementRef,
   ContentChild,
   AfterViewInit,
+  ViewContainerRef,
 } from '@angular/core';
 
+import { ModalController } from './../modal/services/modal.controller';
 import { IconComponent, IconNames } from './../icon/icon.component';
 import { FabSheetConfig } from './config/fab-sheet-config';
 
@@ -25,57 +25,56 @@ export class FabSheetComponent implements OnChanges, AfterViewInit {
   public isFabSheetOpen: boolean = false;
   private originalIconName: IconNames;
 
-  constructor(private _elementRef: ElementRef) {}
+  constructor(private modalController: ModalController, private vcRef: ViewContainerRef) {}
 
   ngAfterViewInit() {
     this.originalIconName = this.icon.name;
   }
 
   ngOnChanges() {
-    // set default values if not set from component
     this.config.disabled = this.config.disabled === undefined ? false : this.config.disabled;
   }
 
-  public handleFabSheet() {
-    if (!this.config.disabled) {
-      this.isFabSheetOpen = !this.isFabSheetOpen;
+  public openFabSheet(event) {
+    if (!this.config.disabled && !this.isFabSheetOpen) {
+      const rect = event.currentTarget.getBoundingClientRect();
+      this.isFabSheetOpen = true;
       this.icon.name = this.isFabSheetOpen ? 'close' : this.originalIconName;
+
+      this.config.actionSheetConfig.position = this.calculatPosition(rect);
+      this.modalController.openActionSheet(
+        this.config.actionSheetConfig,
+        this.vcRef,
+        this.onActionSelected.bind(this)
+      );
     }
   }
 
-  public onItemSelect(selection: string) {
-    this.actionSelected.emit(selection);
-    this.isFabSheetOpen = false;
-  }
+  private calculatPosition(rect): any {
+    const topOffset = 10;
+    const fabWidth = 64;
+    const cardWidth = 304;
 
-  public get verticalPos(): number {
-    if (this.config.verticalAlignment && this.config.verticalAlignment === 'bottom') {
-      return 74;
-    }
+    let position = {
+      position: 'absolute',
+      top: rect.y + rect.height + topOffset + 'px',
+      left: rect.x - cardWidth + fabWidth + 'px',
+    };
 
-    if (this.config.actionSheetConfig.actions) {
-      let yPos = this.config.actionSheetConfig.actions.length * 64 + 10;
-
-      if (this.config.actionSheetConfig.header || this.config.actionSheetConfig.subheader) {
-        const headerHeight = document.getElementsByClassName('action-sheet-card-header')[0]
-          .clientHeight;
-        yPos += headerHeight;
+    if (this.config.horizontalAlignment) {
+      if (this.config.horizontalAlignment === 'left') {
+        position.left = rect.x + 'px';
+      } else if (this.config.horizontalAlignment === 'center') {
+        const width = cardWidth / 2 - fabWidth / 2;
+        position.left = rect.x - width + 'px';
       }
-      return yPos * -1;
-    } else {
-      return 74;
     }
+    return position;
   }
 
-  @HostListener('document:click', ['$event.target'])
-  public onClick(targetElement: HTMLElement): void {
-    if (!targetElement) {
-      return;
-    }
-
-    const clickedInside = this._elementRef.nativeElement.contains(targetElement);
-    if (!clickedInside) {
-      this.isFabSheetOpen = false;
-    }
+  private onActionSelected(selection: string) {
+    this.actionSelected.emit(selection);
+    this.icon.name = this.originalIconName;
+    this.isFabSheetOpen = false;
   }
 }

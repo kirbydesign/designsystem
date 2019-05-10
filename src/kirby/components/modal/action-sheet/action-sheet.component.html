@@ -1,16 +1,10 @@
-<div class="action-sheet">
-    <kirby-card class="action-sheet-card">
-        <div *ngIf="config.header" class="action-sheet-card-header">
-            <h3>{{ config.header }}</h3>
-            <span>{{ config.subheader }}</span>
-        </div>
-        <kirby-list [items]="config.actions" (itemSelect)="onItemSelect($event)">
-            <kirby-list-cell *kirbyListCell="let item">
-                <kirby-list-cell-line class="option" [text]="item"></kirby-list-cell-line>
-            </kirby-list-cell>
-        </kirby-list>
-    </kirby-card>
-    <div class="cancel-btn-wrapper">
-        <button class="cancel-btn" kirby-button (click)="onModalDismiss($event)" (keydown)="onModalDismiss($event)">Cancel</button>
-    </div>
-</div>
+<kirby-card [ngStyle]="config.position">
+    <kirby-card-header *ngIf="config.header" [title]="config.header" [subtitle]="config.subheader">
+    </kirby-card-header>
+    <kirby-list [items]="config.actions" (itemSelect)="onItemSelect($event)">
+        <kirby-list-cell *kirbyListCell="let item" showDivider="true" horisontalAlignment="center">
+            <kirby-list-cell-line [text]="item"></kirby-list-cell-line>
+        </kirby-list-cell>
+    </kirby-list>
+</kirby-card>
+<button *ngIf="!config.position" kirby-button class="cancel-btn" colortype="secondary" (click)="onModalDismiss()">Cancel</button>

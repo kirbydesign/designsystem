@@ -18,34 +18,16 @@ export class FabSheetShowcaseComponent {
       inputValues: ['boolean'],
     },
     {
-      name: 'verticalAlignment',
-      description: 'Determines vertical potition of fab-sheet on web.',
-      defaultValue: 'top',
-      inputValues: ['top', 'bottom'],
-    },
-    {
       name: 'horizontalAlignment',
-      description: 'Determines horizontal potition of fab-sheet on ios/android',
+      description: 'Determines horizontal position of fab sheet.',
       defaultValue: 'center',
       inputValues: ['left', 'center', 'right'],
     },
     {
-      name: 'header',
-      description: 'Style sheet header text.',
-      defaultValue: 'null',
-      inputValues: ['string'],
-    },
-    {
-      name: 'subheader',
-      description: 'Style sheet subheader text.',
-      defaultValue: 'null',
-      inputValues: ['string'],
-    },
-    {
-      name: 'actions',
-      description: 'Fab-sheet actions. Array of action items.',
-      defaultValue: 'null',
-      inputValues: ['string[]'],
+      name: 'ActionSheetConfig',
+      description: 'See documentation for action sheet.',
+      defaultValue: '',
+      inputValues: ['ActionSheetConfig'],
     },
   ];
 }

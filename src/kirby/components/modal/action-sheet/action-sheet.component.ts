@@ -1,4 +1,5 @@
-import { Component, ElementRef, Output, EventEmitter, HostListener } from '@angular/core';
+import { Component } from '@angular/core';
+import { NavParams } from '@ionic/angular';
 
 import { ActionSheetConfig } from './config/action-sheet-config';
 import { IModalController } from '../services/modal.controller.interface';
@@ -8,22 +9,17 @@ import { IModalController } from '../services/modal.controller.interface';
   styleUrls: ['./action-sheet.component.scss'],
 })
 export class ActionSheetComponent {
-  @Output() result = new EventEmitter<string>();
   config: ActionSheetConfig;
-  // we need this to detect the first click
-  isOpeningClick: boolean = true;
-  constructor(private _eref: ElementRef, private modalController: IModalController) {}
 
-  onItemSelect(selection: string) {
-    this.modalController.hideWindow(selection);
+  constructor(private params: NavParams, private modalController: IModalController) {
+    this.config = this.params.get('config');
   }
 
-  onModalDismiss(e: any) {
-    // Handle key press, due to:
-    // https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/button_role#Required_JavaScript_Features
-    if (e && e.keyCode && e.keyCode !== 32 && e.keyCode !== 13) {
-      return;
-    }
-    this.modalController.hideWindow();
+  onItemSelect(selection: string) {
+    this.modalController.closeTopmost(selection);
+  }
+
+  onModalDismiss() {
+    this.modalController.closeTopmost();
   }
 }

@@ -10,7 +10,6 @@ export class FabSheetExampleComponent {
   selectedAction: string;
 
   public config: FabSheetConfig = {
-    verticalAlignment: 'bottom',
     horizontalAlignment: 'center',
     actionSheetConfig: {
       header: 'Need some help?',
@@ -19,8 +18,8 @@ export class FabSheetExampleComponent {
     },
   };
 
-  public onActionSelected(selection: string) {
+  public myCallback(selection: string) {
     console.log('action selected:', selection);
-    this.selectedAction = selection ? selection : this.selectedAction;
+    this.selectedAction = selection;
   }
 }

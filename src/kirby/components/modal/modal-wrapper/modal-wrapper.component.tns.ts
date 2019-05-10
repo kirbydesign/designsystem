@@ -2,22 +2,22 @@ import { Component } from '@angular/core';
 import { ModalDialogParams } from 'nativescript-angular';
 import { ContentView, ShownModallyData, View } from 'tns-core-modules/ui/content-view';
 
-import { ModalWindowConfig } from './config/modal-window-config';
-import { ModalConfigHelper } from './config/modal-window-config.helper';
+import { ModalWrapperConfig } from './config/modal-wrapper-config';
+import { ModalWrapperConfigHelper } from './config/modal-wrapper-config.helper';
 import { IModalController } from '../services/modal.controller.interface';
 
 @Component({
-  templateUrl: './modal-window.component.html',
-  styleUrls: ['./modal-window.component.scss'],
+  templateUrl: './modal-wrapper.component.html',
+  styleUrls: ['./modal-wrapper.component.scss'],
 })
-export class ModalWindowComponent extends ContentView {
-  config: ModalWindowConfig;
+export class ModalWrapperComponent extends ContentView {
+  config: ModalWrapperConfig;
   view: View;
 
   constructor(private modalController: IModalController, private params: ModalDialogParams) {
     super();
-    this.config = ModalConfigHelper.processOptionalValues(this.params.context);
-    this.modalController.registerWindow({ close: this.params.closeCallback });
+    this.config = ModalWrapperConfigHelper.processOptionalValues(this.params.context);
+    this.modalController.register({ close: this.params.closeCallback });
   }
 
   onShowingModally(args: ShownModallyData): void {
@@ -26,7 +26,7 @@ export class ModalWindowComponent extends ContentView {
   }
 
   onModalDismiss(): void {
-    this.modalController.hideWindow();
+    this.modalController.closeTopmost();
   }
 
   // // TODO: fix animations

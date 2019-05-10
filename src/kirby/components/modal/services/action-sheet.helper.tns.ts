@@ -18,7 +18,7 @@ export class ActionSheetHelper {
       viewContainerRef: vcRef,
       closeCallback: null,
       context: config,
-      dimAmount: 0.1, // TODO: put back to 0.5
+      dimAmount: 0.5,
       animated: false,
     } as ExtendedShowModalOptions);
   }

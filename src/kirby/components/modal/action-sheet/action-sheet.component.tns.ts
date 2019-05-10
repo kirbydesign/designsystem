@@ -13,10 +13,13 @@ export class ActionSheetComponent extends ContentView {
   config: ActionSheetConfig;
   view: View;
 
+  // TODO: removing padding-bottom: 16; from card.component.tns.scss fixes an issue,
+  // but is a part of a different component
+
   constructor(private modalController: IModalController, private params: ModalDialogParams) {
     super();
     this.config = this.params.context;
-    this.modalController.registerWindow({ close: this.params.closeCallback });
+    this.modalController.register({ close: this.params.closeCallback });
   }
 
   onShowingActionSheet(args: ShownModallyData): void {
@@ -25,15 +28,15 @@ export class ActionSheetComponent extends ContentView {
   }
 
   onModalDismiss(): void {
-    this.modalController.hideWindow();
+    this.modalController.closeTopmost();
   }
 
   onItemSelect(selection: string) {
-    this.modalController.hideWindow(selection);
+    this.modalController.closeTopmost(selection);
   }
 
-  // this function is currently the same as the modal.component.tns.ts one
-  // either extract it in a common place, or change the function
+  // TODO: this function is currently the same as the modal-window.component.tns.ts one
+  // extract it in a common class
   private animateModal(): void {
     if (this.view.android) {
       this.view

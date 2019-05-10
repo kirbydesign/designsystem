@@ -11,7 +11,7 @@ import { declarations, providerDeclarations } from './kirby.common';
 import { NativeScriptDoughnutChartComponent } from './components/nativescript-only/doughnut-chart/doughnut-chart.component.tns-only';
 // tslint:disable-next-line:max-line-length
 import { NativeScriptLineChartComponent } from './components/nativescript-only/line-chart/line-chart.component.tns-only';
-import { ModalWindowComponent } from './components/modal/modal-window/modal-window.component';
+import { ModalWrapperComponent } from './components/modal/modal-wrapper/modal-wrapper.component';
 import { ActionSheetComponent } from './components/modal/action-sheet/action-sheet.component';
 
 overrideModalViewMethod();
@@ -32,7 +32,7 @@ const nativeScriptDeclarations = [
     NativeScriptUIListViewModule,
   ],
   providers: providerDeclarations,
-  entryComponents: [ModalWindowComponent, ActionSheetComponent],
+  entryComponents: [ModalWrapperComponent, ActionSheetComponent],
   declarations: nativeScriptDeclarations,
   exports: nativeScriptDeclarations,
   schemas: [NO_ERRORS_SCHEMA],

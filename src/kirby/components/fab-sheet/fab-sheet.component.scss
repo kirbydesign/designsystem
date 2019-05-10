@@ -1,37 +1,3 @@
-@import '../../scss/web-imports';
-
-:host {
-  display: inline-flex;
-  
-  kirby-floating-action-button  {
+kirby-floating-action-button  {
     z-index: 30000;
-  }
-
-  .fab-sheet {
-    position: absolute;
-    width: 304px;
-    margin-left: -230px;
-    margin-top: 0;
-    background-color: transparent;
-
-    .action-sheet-card-header {
-      line-break: auto;
-      padding: 10px;
-    }
-
-    .card {
-      text-align: center;
-      min-height: auto;
-    }
-
-    .option {
-      width: 100%;
-    }
-    
-    kirby-list {
-      cursor: pointer;
-    }  
-  }
 }
-
-

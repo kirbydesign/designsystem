@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { ExamplesModule } from '../../examples/examples.module';
-import { HtmlViewerComponent } from '../../shared/html-viewer/html-viewer.component';
+import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
 import { AvatarShowcaseComponent } from './avatar-showcase.component';
 
 describe('AvatarShowcaseComponent', () => {
@@ -12,7 +12,7 @@ describe('AvatarShowcaseComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ExamplesModule, RouterTestingModule],
-      declarations: [AvatarShowcaseComponent, HtmlViewerComponent],
+      declarations: [AvatarShowcaseComponent, CodeViewerComponent],
     }).compileComponents();
   }));
 

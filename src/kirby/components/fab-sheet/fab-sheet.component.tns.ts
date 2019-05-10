@@ -18,8 +18,6 @@ export class FabSheetComponent implements OnChanges {
   ngOnChanges() {
     // set default values if not set from component
     this.config.disabled = this.config.disabled === undefined ? false : this.config.disabled;
-    this.config.horizontalAlignment =
-      this.config.horizontalAlignment === undefined ? 'center' : this.config.horizontalAlignment;
   }
 
   public openFabSheet(args) {
@@ -28,10 +26,9 @@ export class FabSheetComponent implements OnChanges {
         header: this.config.actionSheetConfig.header,
         subheader: this.config.actionSheetConfig.subheader,
         actions: this.config.actionSheetConfig.actions,
-        hideCancelButton: true,
-        horizontalAlignment: this.config.horizontalAlignment,
+        position: this.config.horizontalAlignment ? this.config.horizontalAlignment : 'center',
       };
-      this.modalController.showActionSheetWindow(config, this.vcRef, this.myCallback);
+      this.modalController.openActionSheet(config, this.vcRef, this.myCallback);
     }
   }
 

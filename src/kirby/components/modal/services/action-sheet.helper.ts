@@ -6,10 +6,7 @@ import { ActionSheetComponent } from '../action-sheet/action-sheet.component';
 
 @Injectable()
 export class ActionSheetHelper {
-  constructor(
-    private ionicModalController: IonicModalController,
-    private resolver: ComponentFactoryResolver
-  ) {}
+  constructor(private ionicModalController: IonicModalController) {}
 
   public async showActionSheet(
     config: ActionSheetConfig,
