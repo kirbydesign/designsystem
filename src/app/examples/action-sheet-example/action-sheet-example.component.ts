@@ -10,7 +10,7 @@ import { ActionSheetConfig } from '~/kirby/components/modal/action-sheet/config/
 export class ActionSheetExampleComponent {
   constructor(private modalController: ModalController, private vcRef: ViewContainerRef) {}
 
-  openActionSheet() {
+  showActionSheet() {
     const config: ActionSheetConfig = {
       header: 'Your action sheet header',
       subheader: 'Your action sheet subheader',

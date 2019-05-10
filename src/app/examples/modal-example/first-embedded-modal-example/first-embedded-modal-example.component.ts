@@ -10,7 +10,7 @@ import { SecondEmbeddedModalExampleComponent } from '../second-embedded-modal-ex
 export class FirstEmbeddedModalExampleComponent {
   constructor(private modalController: ModalController, private vcRef: ViewContainerRef) {}
 
-  async openSecondModal() {
+  async showSecondModal() {
     const config: ModalWrapperConfig = {
       title: 'Second Embedded Modal',
       titleHorizontalAlignment: 'left',
