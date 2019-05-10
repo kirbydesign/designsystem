@@ -16,11 +16,10 @@ export class FabSheetComponent implements OnChanges {
   constructor(private modalController: ModalController, private vcRef: ViewContainerRef) {}
 
   ngOnChanges() {
-    // set default values if not set from component
     this.config.disabled = this.config.disabled === undefined ? false : this.config.disabled;
   }
 
-  public openFabSheet(args) {
+  public openFabSheet() {
     if (!this.config.disabled) {
       const config: ActionSheetConfig = {
         header: this.config.actionSheetConfig.header,
@@ -28,7 +27,7 @@ export class FabSheetComponent implements OnChanges {
         actions: this.config.actionSheetConfig.actions,
         position: this.config.horizontalAlignment ? this.config.horizontalAlignment : 'center',
       };
-      this.modalController.openActionSheet(config, this.vcRef, this.myCallback);
+      this.modalController.showActionSheet(config, this.vcRef, this.myCallback);
     }
   }
 

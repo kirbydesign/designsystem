@@ -10,7 +10,7 @@ import { SecondEmbeddedModalExampleComponent } from '../second-embedded-modal-ex
 export class FirstEmbeddedModalExampleComponent {
   constructor(private modalController: ModalController, private vcRef: ViewContainerRef) {}
 
-  async openSecondModal() {
+  async showSecondModal() {
     const config: ModalWrapperConfig = {
       title: 'Second Embedded Modal',
       titleHorizontalAlignment: 'left',
@@ -19,11 +19,11 @@ export class FirstEmbeddedModalExampleComponent {
     };
 
     // supposing no callback needed for the second component
-    this.modalController.openModal(config, this.vcRef);
+    this.modalController.showModal(config, this.vcRef);
   }
 
   onHideFirst() {
     let someTestData: number = Math.PI;
-    this.modalController.closeTopmost(someTestData);
+    this.modalController.hideTopmost(someTestData);
   }
 }

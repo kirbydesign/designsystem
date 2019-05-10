@@ -38,23 +38,29 @@ export class FabSheetComponent implements OnChanges, AfterViewInit {
   public openFabSheet(event) {
     if (!this.config.disabled) {
       if (!this.isFabSheetOpen) {
-        const rect = event.currentTarget.getBoundingClientRect();
         this.isFabSheetOpen = true;
         this.icon.name = this.isFabSheetOpen ? 'close' : this.originalIconName;
-
+        const rect = event.currentTarget.getBoundingClientRect();
         this.config.actionSheetConfig.position = this.calculatPosition(rect);
-        this.modalController.openActionSheet(
+
+        this.modalController.showActionSheet(
           this.config.actionSheetConfig,
           this.vcRef,
           this.onActionSelected.bind(this)
         );
       } else {
-        this.modalController.closeTopmost();
+        this.modalController.hideTopmost();
       }
     }
   }
 
-  private calculatPosition(rect): any {
+  private onActionSelected(selection: string) {
+    this.actionSelected.emit(selection);
+    this.icon.name = this.originalIconName;
+    this.isFabSheetOpen = false;
+  }
+
+  private calculatPosition(rect: DOMRect): { position: string; top: string; left: string } {
     const topOffset = 10;
     const fabWidth = 64;
     const cardWidth = 304;
@@ -74,11 +80,5 @@ export class FabSheetComponent implements OnChanges, AfterViewInit {
       }
     }
     return position;
-  }
-
-  private onActionSelected(selection: string) {
-    this.actionSelected.emit(selection);
-    this.icon.name = this.originalIconName;
-    this.isFabSheetOpen = false;
   }
 }

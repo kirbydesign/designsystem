@@ -37,6 +37,6 @@ export class ModalWrapperComponent implements AfterViewInit {
     if (e && e.keyCode && e.keyCode !== 32 && e.keyCode !== 13) {
       return;
     }
-    this.modalController.closeTopmost();
+    this.modalController.hideTopmost();
   }
 }

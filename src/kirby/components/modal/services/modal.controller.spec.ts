@@ -16,14 +16,14 @@ describe('modalController', () => {
   describe('modalController', () => {
     it('should throw an error when closing a modal, when no modals have been registered', () => {
       expect(() => {
-        modalController.closeTopmost();
+        modalController.hideTopmost();
       }).toThrow(expectedError);
     });
 
     it('should succesfully invoke a registered callback', () => {
       modalController.register({ close: mockCallback });
       expect(() => {
-        modalController.closeTopmost();
+        modalController.hideTopmost();
       }).not.toThrow();
     });
   });

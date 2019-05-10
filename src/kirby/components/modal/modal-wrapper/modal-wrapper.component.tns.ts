@@ -26,7 +26,7 @@ export class ModalWrapperComponent extends ContentView {
   }
 
   onModalDismiss(): void {
-    this.modalController.closeTopmost();
+    this.modalController.hideTopmost();
   }
 
   // // TODO: fix animations

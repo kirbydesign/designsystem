@@ -11,14 +11,14 @@ import { FirstEmbeddedModalExampleComponent } from './first-embedded-modal-examp
 export class ModalExampleComponent {
   constructor(private modalController: ModalController, private vcRef: ViewContainerRef) {}
 
-  openModal() {
+  showModal() {
     const config: ModalWrapperConfig = {
       title: 'First Embedded Modal',
       titleHorizontalAlignment: 'center',
       component: FirstEmbeddedModalExampleComponent,
     };
 
-    this.modalController.openModal(config, this.vcRef, this.onModalClose);
+    this.modalController.showModal(config, this.vcRef, this.onModalClose);
   }
 
   onModalClose(modalData: any): void {

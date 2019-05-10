@@ -1,6 +1,8 @@
 :host {
     kirby-floating-action-button  {     
         display: flex;
+        flex-direction: row;
+        width: fit-content;
     }
     
     ::ng-deep ion-fab-button {
