@@ -1,10 +1,13 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { MockComponent } from 'ng-mocks';
+import * as ionic from '@ionic/angular';
 
 import { ExamplesModule } from '../../examples/examples.module';
-import { HtmlViewerComponent } from '../../shared/html-viewer/html-viewer.component';
+import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
 import { ModalShowcaseComponent } from './modal-showcase.component';
 import { ShowcasePropertiesComponent } from '~/app/shared/showcase-properties/showcase-properties.component';
+// tslint:disable-next-line:import-line-spacing
 
 describe('ModalShowcaseComponent', () => {
   let component: ModalShowcaseComponent;
@@ -13,7 +16,12 @@ describe('ModalShowcaseComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ExamplesModule, RouterTestingModule],
-      declarations: [ModalShowcaseComponent, HtmlViewerComponent, ShowcasePropertiesComponent],
+      declarations: [
+        ModalShowcaseComponent,
+        CodeViewerComponent,
+        ShowcasePropertiesComponent,
+        MockComponent(ionic.IonIcon),
+      ],
     }).compileComponents();
   }));
 
