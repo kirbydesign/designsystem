@@ -7,8 +7,6 @@ import { FabSheetConfig } from './../../../kirby/components/fab-sheet/config/fab
   templateUrl: './fab-sheet-example.component.html',
 })
 export class FabSheetExampleComponent {
-  selectedAction: string;
-
   public config: FabSheetConfig = {
     horizontalAlignment: 'center',
     actionSheetConfig: {
@@ -20,6 +18,5 @@ export class FabSheetExampleComponent {
 
   public myCallback(selection: string) {
     console.log('action selected:', selection);
-    this.selectedAction = selection;
   }
 }

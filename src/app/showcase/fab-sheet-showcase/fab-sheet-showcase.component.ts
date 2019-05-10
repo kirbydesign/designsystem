@@ -20,7 +20,7 @@ export class FabSheetShowcaseComponent {
     {
       name: 'horizontalAlignment',
       description: 'Determines horizontal position of fab sheet.',
-      defaultValue: 'center',
+      defaultValue: 'right',
       inputValues: ['left', 'center', 'right'],
     },
     {
