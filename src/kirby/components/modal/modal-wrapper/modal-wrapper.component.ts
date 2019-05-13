@@ -1,21 +1,21 @@
 import { Component, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { NavParams } from '@ionic/angular';
 
-import { ModalConfig } from './config/modal-config';
-import { ModalConfigHelper } from './config/modal-config.helper';
-import { IModalController } from './services/modal.controller.interface';
+import { ModalWrapperConfig } from './config/modal-wrapper-config';
+import { ModalWrapperConfigHelper } from './config/modal-wrapper-config.helper';
+import { IModalController } from '../services/modal.controller.interface';
 
 @Component({
-  templateUrl: './modal.component.html',
-  styleUrls: ['./modal.component.scss'],
+  templateUrl: './modal-wrapper.component.html',
+  styleUrls: ['./modal-wrapper.component.scss'],
 })
-export class ModalComponent implements AfterViewInit {
+export class ModalWrapperComponent implements AfterViewInit {
   @ViewChild('modalWrapper') modalWrapper: ElementRef;
   scrollY: number = Math.abs(window.scrollY);
-  config: ModalConfig;
+  config: ModalWrapperConfig;
 
   constructor(private params: NavParams, private modalController: IModalController) {
-    this.config = ModalConfigHelper.processOptionalValues(this.params.get('config'));
+    this.config = ModalWrapperConfigHelper.processOptionalValues(this.params.get('config'));
   }
 
   ngAfterViewInit(): void {
@@ -37,6 +37,6 @@ export class ModalComponent implements AfterViewInit {
     if (e && e.keyCode && e.keyCode !== 32 && e.keyCode !== 13) {
       return;
     }
-    this.modalController.hideModal();
+    this.modalController.hideTopmost();
   }
 }

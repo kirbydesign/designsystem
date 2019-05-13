@@ -22,7 +22,7 @@ import { ListHeaderComponent } from './components/list/list-header/list-header.c
 import { ListCellComponent } from './components/list/list-cell/list-cell.component';
 import { ListCellLineComponent } from './components/list/list-cell-line/list-cell-line.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
-import { ModalComponent } from './components/modal/modal.component';
+import { ModalWrapperComponent } from './components/modal/modal-wrapper/modal-wrapper.component';
 import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
 import { ChipComponent } from './components/chip/chip.component';
 import { SegmentedChipControlComponent } from './components/segment/segmented-chip-control/segmented-chip-control.component';
@@ -30,6 +30,8 @@ import { BadgeComponent } from './components/badge/badge.component';
 import { ModalController } from './components/modal/services/modal.controller';
 import { IModalController } from './components/modal/services/modal.controller.interface';
 import { ModalHelper } from './components/modal/services/modal.helper';
+import { ActionSheetHelper } from './components/modal/services/action-sheet.helper';
+import { ActionSheetComponent } from './components/modal/action-sheet/action-sheet.component';
 import { CustomIconNameDirective } from './components/icon/custom-icon-name.directive';
 
 export const declarations = [
@@ -56,7 +58,8 @@ export const declarations = [
   AvatarComponent,
   GroupByPipe,
   SpinnerComponent,
-  ModalComponent,
+  ModalWrapperComponent,
+  ActionSheetComponent,
   SegmentedControlComponent,
   ChipComponent,
   SegmentedChipControlComponent,
@@ -65,7 +68,8 @@ export const declarations = [
 
 export const providerDeclarations: any[] = [
   ModalController,
-  // the provider below is used to fix a cyclic reference problem inside ModalComponent.ts
+  // the provider below is used to prevent a cyclic reference problem in our modal components
   { provide: IModalController, useExisting: ModalController },
+  ActionSheetHelper,
   ModalHelper,
 ];
