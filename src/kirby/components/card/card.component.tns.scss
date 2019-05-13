@@ -7,11 +7,10 @@ $color-card-bg: get-color('kirby-contrast-light');
     display: flex;
     flex-direction: column;
     text-align: center;
-    margin: 8;
+    margin: size("xs");
 }
 
 .container {
     background-color: $color-card-bg;
     border-radius: $border-radius;
-
 }

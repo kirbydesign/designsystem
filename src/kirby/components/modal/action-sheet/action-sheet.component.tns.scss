@@ -10,7 +10,7 @@ kirby-card {
   border-color: get-color("kirby-medium");
   width: 100%;
   height: 60;
-  padding: 20;
+  padding: size("s");
   text-align: center;
   vertical-align: middle;
 }
