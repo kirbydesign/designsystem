@@ -9,8 +9,8 @@ declare var require: any;
   templateUrl: './fab-sheet-showcase.component.html',
 })
 export class FabSheetShowcaseComponent {
-  public exampleHtml: string = require('../../examples/fab-sheet-example/fab-sheet-example.component.html');
-  public properties: ShowcaseProperty[] = [
+  exampleHtml: string = require('../../examples/fab-sheet-example/fab-sheet-example.component.html');
+  properties: ShowcaseProperty[] = [
     {
       name: 'disabled',
       description: '(Optional) Determines whether the button will be disabled or not.',

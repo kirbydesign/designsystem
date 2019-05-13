@@ -19,7 +19,7 @@ export class FabSheetComponent {
 
   constructor(private modalController: ModalController, private vcRef: ViewContainerRef) {}
 
-  public openFabSheet() {
+  openFabSheet() {
     if (!this.disabled) {
       const config: ActionSheetConfig = {
         header: this.header,
@@ -31,7 +31,7 @@ export class FabSheetComponent {
     }
   }
 
-  private myCallback = (selection: ActionSheetItem) => {
+  myCallback = (selection: ActionSheetItem) => {
     this.actionSelected.emit(selection);
   };
 }

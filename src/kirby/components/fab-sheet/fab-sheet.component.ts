@@ -35,7 +35,7 @@ export class FabSheetComponent implements AfterViewInit {
     this.originalIconName = this.icon.name;
   }
 
-  public openFabSheet(event) {
+  openFabSheet(event) {
     if (!this.disabled) {
       if (!this.isFabSheetOpen) {
         this.isFabSheetOpen = true;
@@ -63,9 +63,9 @@ export class FabSheetComponent implements AfterViewInit {
   }
 
   private calculatPosition(rect: DOMRect): { position: string; top: string; left: string } {
-    const topOffset = 10;
-    const fabWidth = 64;
-    const cardWidth = 304;
+    const topOffset: number = 10;
+    const fabWidth: number = 64;
+    const cardWidth: number = 304;
 
     let position = {
       position: 'absolute',
