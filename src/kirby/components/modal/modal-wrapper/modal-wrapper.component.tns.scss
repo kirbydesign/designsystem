@@ -10,7 +10,7 @@
   padding: size('xs');
   border-top-left-radius: $border-radius;
   border-top-right-radius: $border-radius;
-  background-color: white;
+  background-color: get-color("kirby-base-color");
   width: 100%;
 }
 
