@@ -1,7 +1,5 @@
 @import '../../scss/native-imports';
 
-$color-card-bg: get-color('kirby-contrast-light');
-
 .background, 
 .container {
     flex-direction: column;
@@ -9,8 +7,32 @@ $color-card-bg: get-color('kirby-contrast-light');
 }
 
 .container {
-    background-color: $color-card-bg;
+    background-color: get-color('kirby-contrast-light');
     border-radius: $border-radius;
     margin: 8;
     padding-bottom: 16;
+
+    &.primary {
+        background-color: get-color('kirby-primary');
+    }
+    
+    &.secondary {
+        background-color: get-color('kirby-secondary');
+    }
+    
+    &.tertiary {
+        background-color: get-color('kirby-tertiary');
+    }
+
+    &.warning {
+        background-color: get-color('kirby-warning');
+    }
+
+    &.success {
+        background-color: get-color('kirby-success');
+    }
+
+    &.danger {
+        background-color: get-color('kirby-danger');
+    }
 }

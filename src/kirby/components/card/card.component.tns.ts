@@ -23,6 +23,7 @@ export const KIRBY_CARD_COMPONENT_SELECTOR = 'kirby-card';
 export class CardComponent extends ContentView implements OnInit {
   @Input() title: string;
   @Input() subtitle: string;
+  @Input() colortype?: 'primary' | 'secondary' | 'tertiary' | 'warning' | 'success' | 'danger';
 
   view: View;
 
