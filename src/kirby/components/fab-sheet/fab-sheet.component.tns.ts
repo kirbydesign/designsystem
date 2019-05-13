@@ -27,11 +27,11 @@ export class FabSheetComponent {
         items: this.items,
         position: this.horizontalAlignment,
       };
-      this.modalController.showActionSheet(config, this.vcRef, this.myCallback);
+      this.modalController.showActionSheet(config, this.vcRef, this.onActionSelected.bind(this));
     }
   }
 
-  myCallback = (selection: ActionSheetItem) => {
+  private onActionSelected(selection: ActionSheetItem) {
     this.actionSelected.emit(selection);
-  };
+  }
 }
