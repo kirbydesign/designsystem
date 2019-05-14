@@ -104,7 +104,8 @@ export class CardComponent extends ContentView implements OnInit {
   }
 
   public get backgroundColor(): string {
-    const color = ColorHelper.getThemeColor(`kirby-${this.colortype}`);
+    const name = this.colortype ? this.colortype : 'contrast-light';
+    const color = ColorHelper.getThemeColor(`kirby-${name}`);
     return color ? color.hex : undefined;
   }
 }
