@@ -23,11 +23,10 @@ export const KIRBY_CARD_COMPONENT_SELECTOR = 'kirby-card';
 export class CardComponent extends ContentView implements OnInit {
   @Input() title: string;
   @Input() subtitle: string;
+  @Input() shadow: boolean = true;
 
   view: View;
-
   currentScreenWidth: number;
-
   cardSizeClass = '';
 
   constructor(private zone: NgZone) {
@@ -77,27 +76,29 @@ export class CardComponent extends ContentView implements OnInit {
   }
 
   addShadow(view: View) {
-    if (view.android) {
-      view.eachChildView((child) => {
-        if (child instanceof FlexboxLayout) {
-          const bgColor = child.style.backgroundColor;
-          const androidView = child.android;
-          const shape = new android.graphics.drawable.GradientDrawable();
-          shape.setShape(android.graphics.drawable.GradientDrawable.RECTANGLE);
-          shape.setColor(android.graphics.Color.parseColor(bgColor + ''));
-          shape.setCornerRadius(ScssHelper.BORDER_RADIUS);
-          androidView.setBackgroundDrawable(shape);
-          androidView.setElevation(ScssHelper.ELEVATION_CARD_RESTING);
-          return true;
-        }
-      });
-    } else if (view.ios) {
-      const iosView = view.ios;
-      iosView.layer.shadowColor = ScssHelper.SHADOW_COLOR.ios.CGColor;
-      iosView.layer.shadowOffset = CGSizeMake(0, ScssHelper.SHADOW_OFFSET_Y);
-      iosView.layer.shadowOpacity = ScssHelper.SHADOW_OPACITY;
-      iosView.layer.shadowRadius = ScssHelper.SHADOW_RADIUS;
-      return;
+    if (this.shadow) {
+      if (view.android) {
+        view.eachChildView((child) => {
+          if (child instanceof FlexboxLayout) {
+            const bgColor = child.style.backgroundColor;
+            const androidView = child.android;
+            const shape = new android.graphics.drawable.GradientDrawable();
+            shape.setShape(android.graphics.drawable.GradientDrawable.RECTANGLE);
+            shape.setColor(android.graphics.Color.parseColor(bgColor + ''));
+            shape.setCornerRadius(ScssHelper.BORDER_RADIUS);
+            androidView.setBackgroundDrawable(shape);
+            androidView.setElevation(ScssHelper.ELEVATION_CARD_RESTING);
+            return true;
+          }
+        });
+      } else if (view.ios) {
+        const iosView = view.ios;
+        iosView.layer.shadowColor = ScssHelper.SHADOW_COLOR.ios.CGColor;
+        iosView.layer.shadowOffset = CGSizeMake(0, ScssHelper.SHADOW_OFFSET_Y);
+        iosView.layer.shadowOpacity = ScssHelper.SHADOW_OPACITY;
+        iosView.layer.shadowRadius = ScssHelper.SHADOW_RADIUS;
+        return;
+      }
     }
   }
 }

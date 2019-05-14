@@ -4,7 +4,7 @@ $min-card-height: 170px;
 $max-card-height: 500px;
 $min-card-width: 304px;
 
-:host{ 
+:host { 
   --kirby-card-header-background-color:  #{get-color('kirby-contrast-light')};
   --kirby-card-header-color: #{get-color('kirby-primary-contrast')};
   --kirby-card-main-background-color: #{get-color('kirby-contrast-light')};
@@ -14,7 +14,6 @@ $min-card-width: 304px;
 
   background-color: var(--kirby-card-main-background-color);
   border-radius: $border-radius;
-  box-shadow: 0 10px 29px -9px rgba(24, 24, 24, 0.3);
   color: var(--kirby-wireframe-text-color);
   display: flex;
   flex-direction: column;
@@ -25,4 +24,8 @@ $min-card-width: 304px;
   min-width: $min-card-width;
   width: 100%;
   overflow: hidden;
+
+  &.shadow {
+    box-shadow: 0 10px 29px -9px rgba(24, 24, 24, 0.3);
+  }
 }

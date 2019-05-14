@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ElementRef, Renderer2, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, Renderer2, OnDestroy, HostBinding } from '@angular/core';
 
 import { ResizeObserverService } from '../shared/resize-observer/resize-observer.service';
 import { ResizeObserverEntry } from '../shared/resize-observer/types/resize-observer-entry';
@@ -11,6 +11,10 @@ import { ResizeObserverEntry } from '../shared/resize-observer/types/resize-obse
 export class CardComponent implements OnInit, OnDestroy {
   @Input() title: string;
   @Input() subtitle: string;
+  @HostBinding('class.shadow')
+  @Input()
+  shadow: boolean = true;
+
   private sizesSortedByBreakpoint = this.sortSizesByBreakpoint({
     small: 360,
     medium: 720,
