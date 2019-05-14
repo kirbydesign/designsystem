@@ -8,9 +8,23 @@
   border: 1px solid get-color('kirby-primary');
   color: get-color('kirby-primary-contrast');
   cursor: pointer;
-  font-size: font-size('n');
-  padding: 0.7rem 1.75rem;
   transition: opacity 200ms linear;
+  
+  padding: size('xs') size('m') size('xs') size('m');
+  font-size: font-size('s');
+  height: size('xl');
+  line-height: line-height('xs');
+
+  &[size='small'] {
+    padding: size('xxs') size('s') size('xxs') size('s');
+    font-size: font-size('xs');
+    height: size('l');
+  }
+
+  &[size='large'] {
+    font-size: font-size('s');
+    height: size('xxl');
+  }
 
   &[expand='block'] {
     display: block;
