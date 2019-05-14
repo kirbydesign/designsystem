@@ -6,8 +6,8 @@ Button[kirby-button] {
   border-color: get-color('kirby-primary');
   border-radius: 100;
   border-width: 1;
-  margin: 10 10;
 
+  margin: size('xxs');
   padding: size('xs') size('m') size('xs') size('m');
   font-size: font-size('s');
   height: size('xl');
