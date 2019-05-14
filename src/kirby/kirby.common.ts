@@ -23,7 +23,6 @@ import { ListCellComponent } from './components/list/list-cell/list-cell.compone
 import { ListCellLineComponent } from './components/list/list-cell-line/list-cell-line.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
-// import { ModalComponent } from './components/modal/modal.component';
 import { ModalWrapperComponent } from './components/modal/modal-wrapper/modal-wrapper.component';
 import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
 import { ChipComponent } from './components/chip/chip.component';
@@ -61,7 +60,6 @@ export const declarations = [
   GroupByPipe,
   SpinnerComponent,
   CheckboxComponent,
-  // ModalComponent,
   ModalWrapperComponent,
   ActionSheetComponent,
   SegmentedControlComponent,
