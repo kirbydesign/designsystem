@@ -2,15 +2,15 @@
 
 .background, 
 .container {
+    display: flex;
     flex-direction: column;
-    width: 100%;
+    text-align: center;
+    margin: size("xs");
 }
 
 .container {
     background-color: get-color('kirby-contrast-light');
     border-radius: $border-radius;
-    margin: 8;
-    padding-bottom: 16;
 
     &.primary {
         background-color: get-color('kirby-primary');
