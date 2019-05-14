@@ -8,6 +8,7 @@ import { registerElement } from 'nativescript-angular';
 import { ContentView } from 'tns-core-modules/ui/content-view';
 
 import { ScssHelper } from '../../scss/scss-helper';
+import { ColorType, ColorHelper } from '~/kirby/helpers/color-helper';
 
 const screenScale = screen.mainScreen.scale;
 declare const CGSizeMake: any;
@@ -24,6 +25,7 @@ export class CardComponent extends ContentView implements OnInit {
   @Input() title: string;
   @Input() subtitle: string;
   @Input() shadow: boolean = true;
+  @Input() colortype?: ColorType;
 
   view: View;
   currentScreenWidth: number;
@@ -100,6 +102,12 @@ export class CardComponent extends ContentView implements OnInit {
         return;
       }
     }
+  }
+
+  public get backgroundColor(): string {
+    const name = this.colortype ? this.colortype : 'contrast-light';
+    const color = ColorHelper.getThemeColor(`kirby-${name}`);
+    return color ? color.hex : undefined;
   }
 }
 

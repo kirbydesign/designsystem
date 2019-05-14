@@ -4,6 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { ExamplesModule } from '../../examples/examples.module';
 import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
 import { CardShowcaseComponent } from './card-showcase.component';
+import { ShowcasePropertiesComponent } from '~/app/shared/showcase-properties/showcase-properties.component';
 
 describe('CardShowcaseComponent', () => {
   let component: CardShowcaseComponent;
@@ -12,7 +13,7 @@ describe('CardShowcaseComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ExamplesModule, RouterTestingModule],
-      declarations: [CardShowcaseComponent, CodeViewerComponent],
+      declarations: [CardShowcaseComponent, CodeViewerComponent, ShowcasePropertiesComponent],
     }).compileComponents();
   }));
 

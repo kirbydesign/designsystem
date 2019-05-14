@@ -12,7 +12,6 @@ $min-card-width: 304px;
   --kirby-card-footer-background-color: #{get-color('kirby-contrast-light')};
   --kirby-card-footer-color: #{get-color('kirby-primary-contrast')};
 
-  background-color: var(--kirby-card-main-background-color);
   border-radius: $border-radius;
   color: var(--kirby-wireframe-text-color);
   display: flex;

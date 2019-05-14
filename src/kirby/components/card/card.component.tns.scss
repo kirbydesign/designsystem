@@ -1,7 +1,5 @@
 @import '../../scss/native-imports';
 
-$color-card-bg: get-color('kirby-contrast-light');
-
 .background, 
 .container {
     display: flex;
@@ -11,6 +9,5 @@ $color-card-bg: get-color('kirby-contrast-light');
 }
 
 .container {
-    background-color: $color-card-bg;
     border-radius: $border-radius;
 }
