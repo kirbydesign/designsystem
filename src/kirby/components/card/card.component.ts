@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ElementRef, Renderer2, OnDestroy } from '@ang
 
 import { ResizeObserverService } from '../shared/resize-observer/resize-observer.service';
 import { ResizeObserverEntry } from '../shared/resize-observer/types/resize-observer-entry';
+import { ColorHelper, ColorType } from '~/kirby/helpers/color-helper';
 
 @Component({
   selector: 'kirby-card',
@@ -11,7 +12,7 @@ import { ResizeObserverEntry } from '../shared/resize-observer/types/resize-obse
 export class CardComponent implements OnInit, OnDestroy {
   @Input() title: string;
   @Input() subtitle: string;
-  @Input() colortype?: 'primary' | 'secondary' | 'tertiary' | 'warning' | 'success' | 'danger';
+  @Input() colortype?: ColorType;
   private sizesSortedByBreakpoint = this.sortSizesByBreakpoint({
     small: 360,
     medium: 720,
@@ -40,6 +41,11 @@ export class CardComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.resizeObserverService.unobserve(this.elementRef);
+  }
+
+  public get backgroundColor(): string {
+    const color = ColorHelper.getThemeColor(`kirby-${this.colortype}`);
+    return color ? color.hex : undefined;
   }
 
   private sortSizesByBreakpoint(sizes: { [size: string]: number }): [string, number][] {

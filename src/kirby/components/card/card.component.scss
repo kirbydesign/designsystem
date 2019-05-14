@@ -25,28 +25,4 @@ $min-card-width: 304px;
   min-width: $min-card-width;
   width: 100%;
   overflow: hidden;
-
-  .primary {
-    background-color: get-color('kirby-primary');
-  }
-
-  .secondary {
-      background-color: get-color('kirby-secondary');
-  }
-
-  .tertiary {
-      background-color: get-color('kirby-tertiary');
-  }
-
-  .warning {
-      background-color: get-color('kirby-warning');
-  }
-
-  .success {
-      background-color: get-color('kirby-success');
-  }
-
-  .danger {
-      background-color: get-color('kirby-danger');
-  }
 }
