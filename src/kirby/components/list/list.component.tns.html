@@ -23,14 +23,14 @@
 
     <!-- SECTION HEADER-->
     <ng-template let-section="category" tkGroupTemplate *ngIf="isSectionsEnabled">
-      <FlexboxLayout alignItems="center" ios:height="50">
+      <GridLayout rows="*" columns="*">
         <ng-container
           *ngTemplateOutlet="
             sectionHeaderTemplate;
             context: { $implicit: section }
           ">
         </ng-container>
-      </FlexboxLayout>
+      </GridLayout>
     </ng-template> 
 
     <!-- HEADER -->

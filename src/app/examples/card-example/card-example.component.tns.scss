@@ -1,25 +1,5 @@
 @import '../../../kirby/scss/native-imports';
 
-kirby-card-header {
-  padding-bottom: size("s");
-}
-
 .card-content {
   padding: 0 size("m") size("m");
-}
-
-.test-me {
-  background-color: orange;
-}
-
-.card-large :host .test-me {
-  background-color: red;
-}
-
-.card-medium :host .test-me {
-  background-color: blue;
-}
-
-.card-small :host .test-me {
-  background-color: green;
 }

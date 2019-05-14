@@ -1,7 +1,7 @@
 import { Component, ViewContainerRef } from '@angular/core';
 
 import { ModalController } from '~/kirby/components/modal/services/modal.controller';
-import { ModalConfig } from '~/kirby/components/modal/config/modal-config';
+import { ModalWrapperConfig } from '~/kirby/components/modal/modal-wrapper/config/modal-wrapper-config';
 import { SecondEmbeddedModalExampleComponent } from '../second-embedded-modal-example/second-embedded-modal-example.component';
 
 @Component({
@@ -10,8 +10,8 @@ import { SecondEmbeddedModalExampleComponent } from '../second-embedded-modal-ex
 export class FirstEmbeddedModalExampleComponent {
   constructor(private modalController: ModalController, private vcRef: ViewContainerRef) {}
 
-  async openSecondModal() {
-    const config: ModalConfig = {
+  async showSecondModal() {
+    const config: ModalWrapperConfig = {
       title: 'Second Embedded Modal',
       titleHorizontalAlignment: 'left',
       closeIconName: 'arrow-back',
@@ -24,6 +24,6 @@ export class FirstEmbeddedModalExampleComponent {
 
   onHideFirst() {
     let someTestData: number = Math.PI;
-    this.modalController.hideModal(someTestData);
+    this.modalController.hideTopmost(someTestData);
   }
 }

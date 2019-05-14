@@ -1,0 +1,25 @@
+<ModalStack class="action-sheet-wrapperz" dismissEnabled="true" (showingModally)="onShowingActionSheet($event)">
+    <GridLayout rows="*, auto, auto">
+        <!-- TODO: onModalDismiss() is better off in the parent GridLayout, but that introduces a bug -->
+        <Label row="0" (tap)="onModalDismiss()"></Label>
+        <kirby-card row="1">
+            <kirby-card-header *ngIf="config.header" [title]="config.header" [subtitle]="config.subheader">
+            </kirby-card-header>
+            <!-- TODO: Replace with kirby-list -->
+            <StackLayout class="action-container">
+                <Label *ngFor="let item of config.items" class="action-item" (tap)="onItemSelect(item)" text="{{ item.text }}"></Label>
+            </StackLayout>
+            
+             <!-- <kirby-list style="border-width: 5; border-color: red; height: 100"
+                [items]="config.items"
+                (itemSelect)="onItemSelect($event)">
+                <kirby-list-cell
+                        *kirbyListCell="let item"
+                        horisontalAlignment="center">
+                    <kirby-list-cell-line [primary]="true" [text]="item"></kirby-list-cell-line>
+                </kirby-list-cell>
+             </kirby-list> -->
+        </kirby-card>            
+        <Button row="2" kirby-button colortype="secondary" verticalAlignment="bottom" class="cancel-btn" text="Cancel" (tap)="onModalDismiss()"></Button> -->
+    </GridLayout>
+</ModalStack>

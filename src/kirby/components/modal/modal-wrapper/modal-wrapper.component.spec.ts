@@ -4,14 +4,14 @@ import { NavParams } from '@ionic/angular';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { By } from '@angular/platform-browser';
 
-import { FloatingActionButtonComponent } from '../floating-action-button/floating-action-button.component';
-import { IconComponent } from './../icon/icon.component';
-import { ModalComponent } from './modal.component';
-import { IModalController } from './services/modal.controller.interface';
+import { FloatingActionButtonComponent } from '../../floating-action-button/floating-action-button.component';
+import { IconComponent } from '../../icon/icon.component';
+import { ModalWrapperComponent } from './modal-wrapper.component';
+import { IModalController } from '../services/modal.controller.interface';
 
-describe('ModalComponent', () => {
-  let component: ModalComponent;
-  let fixture: ComponentFixture<ModalComponent>;
+describe('ModalWrapperComponent', () => {
+  let component: ModalWrapperComponent;
+  let fixture: ComponentFixture<ModalWrapperComponent>;
 
   beforeEach(async(() => {
     const modalControllerSpy = jasmine.createSpyObj('IModalController', [
@@ -29,7 +29,7 @@ describe('ModalComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [
-        ModalComponent,
+        ModalWrapperComponent,
         MockComponent(IconComponent),
         MockComponent(FloatingActionButtonComponent),
       ],
@@ -40,13 +40,13 @@ describe('ModalComponent', () => {
     }).compileComponents();
     TestBed.overrideModule(BrowserDynamicTestingModule, {
       set: {
-        entryComponents: [ModalComponent, FloatingActionButtonComponent],
+        entryComponents: [ModalWrapperComponent, FloatingActionButtonComponent],
       },
     });
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ModalComponent);
+    fixture = TestBed.createComponent(ModalWrapperComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

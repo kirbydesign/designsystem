@@ -1,4 +1,4 @@
-@import "../../scss/native-imports";
+@import "../../../scss/native-imports";
 
 .modal-wrapper {
   width: 100%;
@@ -10,13 +10,13 @@
   padding: size('xs');
   border-top-left-radius: $border-radius;
   border-top-right-radius: $border-radius;
-  background-color: white;
+  background-color: get-color('kirby-base-color');
   width: 100%;
 }
 
 .title-bar {  
   Label {
-    font-weight: font-weight("bold");
+    font-weight: font-weight('bold');
   }
 }
 
