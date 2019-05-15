@@ -20,33 +20,6 @@
     @include ionic-color-map('light');
     @include ionic-color-map('medium');
     @include ionic-color-map('dark');
-}
 
-// Kirby modal styles
-.kirby-modal {
-  --background: #{get-color('kirby-base-color')};
-  --border-radius: 15px;
-  --width: 600px;
-  --height: 300px;
-  --overflow: visible;
-  position: fixed;
-}
-
-.backdrop-no-scroll {
-  overflow: hidden;
-}
-
-// Kirby action sheet styles
-.kirby-action-sheet {
-  --background: transparent;
-  --width: 100%;
-  --height: 100%;
-
-  .modal-wrapper {
-    pointer-events: none; //Fix clickable backdrop of modal
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-  }
-
+    --ion-font-family: var(--kirby-font-family);
 }
