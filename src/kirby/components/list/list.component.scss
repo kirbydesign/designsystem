@@ -7,7 +7,7 @@ ul {
   margin-block-end: 0;
 
   li {
-    background-color: get-color('kirby-contrast-light');
+    background-color: get-color('contrast-light');
     padding: size('m');
     display: flex;
     flex-direction: row;
@@ -18,7 +18,7 @@ ul {
     }
 
     &.divider:not(:last-child) {
-      border-bottom: 1px solid get-color('kirby-medium');
+      border-bottom: 1px solid get-color('medium');
     }
 
     &.section-header {
@@ -33,7 +33,7 @@ ul {
     &.selectable {
 
       &:hover {
-        background-color: get-color('kirby-secondary');
+        background-color: get-color('secondary');
       }
     }
   }
