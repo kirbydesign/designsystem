@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { DynamicComponent } from '../../../kirby/components/shared/dynamic-component';
 
@@ -7,10 +7,6 @@ import { DynamicComponent } from '../../../kirby/components/shared/dynamic-compo
   templateUrl: './card-example.component.html',
   styleUrls: ['./card-example.component.scss'],
 })
-export class CardExampleComponent implements DynamicComponent, OnInit {
+export class CardExampleComponent implements DynamicComponent {
   data: any;
-
-  constructor() {}
-
-  ngOnInit() {}
 }

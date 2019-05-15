@@ -1,16 +1,13 @@
 @import '../../scss/native-imports';
 
-$color-card-bg: get-color('kirby-contrast-light');
-
 .background, 
 .container {
+    display: flex;
     flex-direction: column;
-    width: 100%;
+    text-align: center;
+    margin: size("xs");
 }
 
 .container {
-    background-color: $color-card-bg;
     border-radius: $border-radius;
-    margin: 8;
-    padding-bottom: 16;
 }
