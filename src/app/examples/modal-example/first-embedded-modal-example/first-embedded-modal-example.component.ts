@@ -3,7 +3,7 @@ import { Component, Inject, ViewContainerRef } from '@angular/core';
 import { ModalController } from '~/kirby/components/modal/services/modal.controller';
 import { ModalWrapperConfig } from '~/kirby/components/modal/modal-wrapper/config/modal-wrapper-config';
 import { SecondEmbeddedModalExampleComponent } from '../second-embedded-modal-example/second-embedded-modal-example.component';
-import { COMPONENT_PROPS } from '~/kirby/components/modal/modal-wrapper/config/modal-wrapper-config.helper';
+import { COMPONENT_PROPS } from '~/kirby';
 
 @Component({
   templateUrl: './first-embedded-modal-example.component.html',
