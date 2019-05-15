@@ -10,41 +10,41 @@
 
 .container {
     border-radius: $border-radius;
-    background-color: get-color('kirby-contrast-light');
+    background-color: get-color('contrast-light');
 
     &.primary {
-        background-color: get-color('kirby-primary');
+        background-color: get-color('primary');
     }
     
     &.secondary {
-        background-color: get-color('kirby-secondary');
+        background-color: get-color('secondary');
     }
     
     &.tertiary {
-        background-color: get-color('kirby-tertiary');
+        background-color: get-color('tertiary');
     }
 
     &.warning {
-        background-color: get-color('kirby-warning');
+        background-color: get-color('warning');
     }
 
     &.success {
-        background-color: get-color('kirby-success');
+        background-color: get-color('success');
     }
 
     &.danger {
-        background-color: get-color('kirby-danger');
+        background-color: get-color('danger');
     }
 
     &.light {
-        background-color: get-color('kirby-light');
+        background-color: get-color('light');
     }
 
     &.medium {
-        background-color: get-color('kirby-medium');
+        background-color: get-color('medium');
     }
 
     &.dark {
-        background-color: get-color('kirby-dark');
+        background-color: get-color('dark');
     }
 }

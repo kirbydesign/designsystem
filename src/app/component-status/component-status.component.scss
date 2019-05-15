@@ -73,14 +73,14 @@
        
         &.component
         {
-            border-top: .1rem solid get-color('kirby-medium');
+            border-top: .1rem solid get-color('medium');
         }
 
         &.subcomponent,
         &.enhancement {
             vertical-align: middle;
-            border-top: .1rem dashed get-color('kirby-medium');
-            color: get-color('kirby-dark-tint');
+            border-top: .1rem dashed get-color('medium');
+            color: get-color('dark-tint');
             font-size: font-size("s");
     
             td {
@@ -91,7 +91,7 @@
             }
     
             a {
-                color: get-color('kirby-dark-tint');
+                color: get-color('dark-tint');
             }
 
             .vnext {
@@ -118,7 +118,7 @@
 
         &.someday-maybe,
         &.someday-maybe td a {
-            color: get-color('kirby-dark-tint');
+            color: get-color('dark-tint');
             font-style: italic;
         }   
     
@@ -141,7 +141,7 @@
         font-size: 18px;
 
         &[name="open"] {
-            color: get-color('kirby-dark-tint');
+            color: get-color('dark-tint');
         }
     }
     

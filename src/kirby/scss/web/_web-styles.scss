@@ -6,13 +6,13 @@
     --kirby-font-family: "Roboto";
     font-family: var(--kirby-font-family);
     @each $color, $color-name in $kirby-colors {
-        --#{$color}: #{$color-name};
+        --kirby-#{$color}: #{$color-name};
     }
     
 }
   
 .kirby-modal {
-    --background: #{get-color('kirby-base-color')};
+    --background: #{get-color('base-color')};
     --border-radius: 15px;
     --width: 600px;
     --height: 300px;
