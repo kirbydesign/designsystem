@@ -16,7 +16,6 @@
                      (tap)="onItemSelect(item)">
         <ng-container
           *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }">
-          <!--Label [text]="getCssClasses(item)"></Label-->
         </ng-container>
         <ng-container *ngFor="let template of listCellTemplates">
           <ng-container

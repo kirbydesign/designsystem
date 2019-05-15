@@ -80,8 +80,8 @@ export class ListComponent implements OnInit, OnChanges {
   isSelectable: boolean;
   isLoading: boolean;
   isLoadOnDemandEnabled: boolean;
+  groupedItems: any[];
 
-  private groupedItems: any[];
   private orderMap: WeakMap<any, { isFirst: boolean; isLast: boolean }>;
 
   constructor(private listHelper: ListHelper, private groupBy: GroupByPipe) {}

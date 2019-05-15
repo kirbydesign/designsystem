@@ -6,7 +6,7 @@
 <!-- BODY-->
 <ul kirbyInfiniteScroll (scrollEnd)="onLoadOnDemand()" [disabled]="!isLoadOnDemandEnabled">
   <ng-container *ngIf="isSectionsEnabled; else normalList">
-    <ng-container *ngFor="let section of (items | groupBy: getSectionName)">
+    <ng-container *ngFor="let section of groupedItems">
       <li class="section-header">
         <ng-container
           *ngTemplateOutlet="

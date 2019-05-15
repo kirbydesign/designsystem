@@ -24,7 +24,7 @@ ul {
       }
 
       &.selectable:hover {
-        background-color: get-color('kirby-secondary');
+        background-color: get-color('kirby-base-color');
       }
 
       &:last-child {
@@ -67,7 +67,7 @@ ul {
       background-color: get-color('kirby-contrast-light');
 
       &.selectable:hover {
-        background-color: get-color('kirby-secondary');
+        background-color: get-color('kirby-base-color');
       }
     }
 
