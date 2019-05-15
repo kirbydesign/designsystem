@@ -15,11 +15,7 @@ export abstract class IModalController {
     vcRef: ViewContainerRef,
     onCloseModal?: (data?: any) => any
   ): void;
-  abstract showAlert(
-    config: AlertConfig,
-    vcRef: ViewContainerRef,
-    onCloseModal?: (data?: any) => any
-  );
+  abstract showAlert(config: AlertConfig, onCloseModal?: (data?: any) => any);
   abstract hideTopmost(data?: any): void;
   abstract register(modal: { close: (data?: any) => {} }): void;
 }

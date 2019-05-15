@@ -17,7 +17,7 @@ export class AlertExampleComponent {
       okBtnText: 'Ok',
       cancelBtnText: 'Cancel',
     };
-    this.modalController.showAlert(config, this.vcRef, this.onAlertClosed);
+    this.modalController.showAlert(config, this.onAlertClosed);
   }
 
   private onAlertClosed(selection: boolean) {

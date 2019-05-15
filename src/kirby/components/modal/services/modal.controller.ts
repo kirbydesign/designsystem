@@ -51,9 +51,8 @@ export class ModalController implements IModalController {
       }
     });
   }
-  showAlert(config: AlertConfig, vcRef: ViewContainerRef, onCloseModal?: (data?: any) => void) {
-    this.alertHelper.showAlert(config, vcRef, this.register.bind(this)).then((data) => {
-      this.forgetTopmost();
+  showAlert(config: AlertConfig, onCloseModal?: (data?: any) => void) {
+    this.alertHelper.showAlert(config).then((data) => {
       if (onCloseModal) {
         onCloseModal(data);
       }
