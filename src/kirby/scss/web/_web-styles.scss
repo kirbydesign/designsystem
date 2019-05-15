@@ -39,7 +39,7 @@
 
 .kirby-alert-btn {
     cursor: pointer;
-    --ion-color-primary: #{get-color(tertiary)};
+    --ion-color-primary: #{get-color(contrast-dark)};
 
     &.cancel {
         --ion-color-primary: #{get-color(danger)};
