@@ -9,7 +9,7 @@ import { COMPONENT_PROPS } from '~/kirby';
   templateUrl: './first-embedded-modal-example.component.html',
 })
 export class FirstEmbeddedModalExampleComponent {
-  props: object;
+  props: { [key: string]: any };
 
   constructor(
     @Inject(COMPONENT_PROPS) private componentProps,
