@@ -48,5 +48,14 @@
     justify-content: center;
     align-items: flex-end;
   }
+}
 
+// Kirby alert styles
+.alert-btn {
+  cursor: pointer;
+  color: #{get-color(kirby-tertiary)} !important;
+
+  &.cancel {
+    color: #{get-color(kirby-danger)} !important;
+  }
 }

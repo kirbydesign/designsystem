@@ -1,16 +1,22 @@
 import { Injectable, ViewContainerRef } from '@angular/core';
 
+import { IModalController } from './modal.controller.interface';
 import { ModalHelper } from './modal.helper';
+import { AlertHelper } from './alert.helper';
 import { ActionSheetHelper } from './action-sheet.helper';
 import { ModalWrapperConfig } from '../modal-wrapper/config/modal-wrapper-config';
-import { IModalController } from './modal.controller.interface';
 import { ActionSheetConfig } from '../action-sheet/config/action-sheet-config';
+import { AlertConfig } from '../alert/config/alert-config';
 
 @Injectable()
 export class ModalController implements IModalController {
   private modals: { close: (data?: any) => {} }[] = [];
 
-  constructor(private modalHelper: ModalHelper, private actionSheetHelper: ActionSheetHelper) {}
+  constructor(
+    private modalHelper: ModalHelper,
+    private actionSheetHelper: ActionSheetHelper,
+    private alertHelper: AlertHelper
+  ) {}
 
   public showModal(
     config: ModalWrapperConfig,
@@ -27,6 +33,7 @@ export class ModalController implements IModalController {
       if (onCloseModal) {
         // Since Ionic wraps the return value in an object, which contains data as a property, we need to return data.data
         // We don't expect this on native, hence we return just data
+        console.log(`data: ${JSON.stringify(data)}`);
         onCloseModal(typeof data === 'object' && 'data' in data ? data.data : data);
       }
     });
@@ -41,6 +48,14 @@ export class ModalController implements IModalController {
       this.forgetTopmost();
       if (onCloseModal) {
         onCloseModal(typeof data === 'object' && 'data' in data ? data.data : data);
+      }
+    });
+  }
+  showAlert(config: AlertConfig, vcRef: ViewContainerRef, onCloseModal?: (data?: any) => void) {
+    this.alertHelper.showAlert(config, vcRef, this.register.bind(this)).then((data) => {
+      this.forgetTopmost();
+      if (onCloseModal) {
+        onCloseModal(data);
       }
     });
   }

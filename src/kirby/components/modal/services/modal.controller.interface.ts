@@ -2,6 +2,7 @@ import { ViewContainerRef } from '@angular/core';
 
 import { ModalWrapperConfig } from '../modal-wrapper/config/modal-wrapper-config';
 import { ActionSheetConfig } from '../action-sheet/config/action-sheet-config';
+import { AlertConfig } from '../alert/config/alert-config';
 
 export abstract class IModalController {
   abstract showModal(
@@ -14,6 +15,11 @@ export abstract class IModalController {
     vcRef: ViewContainerRef,
     onCloseModal?: (data?: any) => any
   ): void;
+  abstract showAlert(
+    config: AlertConfig,
+    vcRef: ViewContainerRef,
+    onCloseModal?: (data?: any) => any
+  );
   abstract hideTopmost(data?: any): void;
   abstract register(modal: { close: (data?: any) => {} }): void;
 }

@@ -21,6 +21,7 @@ import { BadgeShowcaseComponent } from './badge-showcase/badge-showcase.componen
 import { IconShowcaseComponent } from './icon-showcase/icon-showcase.component';
 import { SegmentedChipControlShowcaseComponent } from './segmented-chip-control-showcase/segmented-chip-control-showcase.component';
 import { ActionSheetShowcaseComponent } from './action-sheet-showcase/action-sheet-showcase.component';
+import { AlertShowcaseComponent } from './alert-showcase/alert-showcase.component';
 
 export const COMPONENT_IMPORTS: any[] = [ExamplesModule, ShowcaseRoutingModule];
 
@@ -45,6 +46,7 @@ export const COMPONENT_EXPORTS: any[] = [
   BadgeShowcaseComponent,
   IconShowcaseComponent,
   ActionSheetShowcaseComponent,
+  AlertShowcaseComponent,
 ];
 
 export const COMPONENT_DECLARATIONS: any[] = [...COMPONENT_EXPORTS, ShowcaseComponent];

@@ -21,6 +21,7 @@ import {
   CUSTOM_FONT_SETTINGS,
   CustomIconSettings,
 } from '~/kirby/components/icon/custom-icon-settings';
+import { AlertExampleComponent } from './alert-example/alert-example.component';
 
 export const customIconSettings: CustomIconSettings = {
   fontfamily: "'Ionicons', 'ionicons'",
@@ -58,6 +59,7 @@ export const COMPONENT_DECLARATIONS: any[] = [
   BadgeExampleComponent,
   IconExampleComponent,
   ActionSheetExampleComponent,
+  AlertExampleComponent,
 ];
 
 export const PROVIDER_DECLARATIONS: any[] = [
