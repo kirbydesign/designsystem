@@ -2,8 +2,8 @@
 
 @each $color, $color-name in $kirby-colors {
   .#{$color} {
-    background-color: var(--#{$color});
-    color: var(--#{$color});
+    background-color: var(--kirby-#{$color});
+    color: var(--kirby-#{$color});
   }
 }
 
