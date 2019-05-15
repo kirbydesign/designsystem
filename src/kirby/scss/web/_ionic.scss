@@ -23,27 +23,3 @@
 
     --ion-font-family: var(--kirby-font-family);
 }
-
-// Kirby action sheet styles
-.kirby-action-sheet {
-  --background: transparent;
-  --width: 100%;
-  --height: 100%;
-
-  .modal-wrapper {
-    pointer-events: none; //Fix clickable backdrop of modal
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-  }
-}
-
-// Kirby alert styles
-.alert-btn {
-  cursor: pointer;
-  color: #{get-color(kirby-tertiary)} !important;
-
-  &.cancel {
-    color: #{get-color(kirby-danger)} !important;
-  }
-}

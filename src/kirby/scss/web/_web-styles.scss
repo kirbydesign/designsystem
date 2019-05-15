@@ -36,3 +36,12 @@
         align-items: flex-end;
     }  
 }
+
+.alert-btn {
+    cursor: pointer;
+    color: #{get-color(kirby-tertiary)} !important;
+
+    &.cancel {
+        color: #{get-color(kirby-danger)} !important;
+    }
+}

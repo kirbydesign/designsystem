@@ -8,8 +8,8 @@ import { AlertConfig } from '../alert/config/alert-config';
 export class AlertHelper {
   constructor(private alertController: AlertController) {}
 
-  public async showAlert(config: AlertConfig): Promise<any> {
-    const result = new Promise(async (resolve, _) => {
+  public async showAlert(config: AlertConfig): Promise<boolean> {
+    const result = new Promise<boolean>(async (resolve, _) => {
       let buttons = [];
       if (config.cancelBtnText) {
         buttons.push(this.getButton(config.cancelBtnText, true, resolve));

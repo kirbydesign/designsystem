@@ -5,7 +5,7 @@ import { AlertConfig } from '../alert/config/alert-config';
 
 @Injectable()
 export class AlertHelper {
-  public async showAlert(config: AlertConfig): Promise<any> {
+  public async showAlert(config: AlertConfig): Promise<boolean> {
     return confirm({
       title: config.title,
       message: config.message,

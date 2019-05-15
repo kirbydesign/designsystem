@@ -33,7 +33,6 @@ export class ModalController implements IModalController {
       if (onCloseModal) {
         // Since Ionic wraps the return value in an object, which contains data as a property, we need to return data.data
         // We don't expect this on native, hence we return just data
-        console.log(`data: ${JSON.stringify(data)}`);
         onCloseModal(typeof data === 'object' && 'data' in data ? data.data : data);
       }
     });
@@ -51,10 +50,10 @@ export class ModalController implements IModalController {
       }
     });
   }
-  showAlert(config: AlertConfig, onCloseModal?: (data?: any) => void) {
-    this.alertHelper.showAlert(config).then((data) => {
+  showAlert(config: AlertConfig, onCloseModal?: (result?: boolean) => void) {
+    this.alertHelper.showAlert(config).then((result) => {
       if (onCloseModal) {
-        onCloseModal(data);
+        onCloseModal(result);
       }
     });
   }
