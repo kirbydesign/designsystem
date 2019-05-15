@@ -1,7 +1,7 @@
 @import '../../scss/native-imports';
 
 .fab {
-    background-color: get-color('kirby-primary');
+    background-color: get-color('primary');
     border-radius: 32;
     width: 64;
     height: 64;
@@ -10,7 +10,7 @@
 
     &.disabled {
         opacity: 0.6;
-        background-color: get-color('kirby-medium');
+        background-color: get-color('medium');
     }
 }
   
