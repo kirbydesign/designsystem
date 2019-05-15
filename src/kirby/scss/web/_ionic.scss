@@ -20,20 +20,8 @@
     @include ionic-color-map('light');
     @include ionic-color-map('medium');
     @include ionic-color-map('dark');
-}
 
-// Kirby modal styles
-.kirby-modal {
-  --background: #{get-color('kirby-base-color')};
-  --border-radius: 15px;
-  --width: 600px;
-  --height: 300px;
-  --overflow: visible;
-  position: fixed;
-}
-
-.backdrop-no-scroll {
-  overflow: hidden;
+    --ion-font-family: var(--kirby-font-family);
 }
 
 // Kirby action sheet styles

@@ -6,8 +6,24 @@ Button[kirby-button] {
   border-color: get-color('kirby-primary');
   border-radius: 100;
   border-width: 1;
-  margin: 10 10;
-  padding: 12 20;
+
+  // we default to 'md' size.
+  margin: size('xxs');
+  padding: size('xs') size('m') size('xs') size('m');
+  font-size: font-size('s');
+  height: size('xl');
+  line-height: line-height('xs');
+
+  &.sm {
+    padding: size('xxs') size('s') size('xxs') size('s');
+    font-size: font-size('xs');
+    height: size('l');
+  }
+
+  &.lg {
+    font-size: font-size('s');
+    height: size('xxl');
+  }
   
   &[colortype='secondary'] {
     color: get-color('kirby-contrast-dark');
