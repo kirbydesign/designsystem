@@ -1,8 +1,9 @@
 import { ModalController } from './modal.controller';
 
 describe('modalController', () => {
-  const modalWindowHelperSpy = jasmine.createSpyObj('ModalWindowHelper', ['showModalWindow']);
-  const actionSheetHelperSpy = jasmine.createSpyObj('ActionSheetHelper', ['showModalWindow']);
+  const modalWindowHelperSpy = jasmine.createSpyObj('ModalWindowHelper', ['showModal']);
+  const actionSheetHelperSpy = jasmine.createSpyObj('ActionSheetHelper', ['showActionSheet']);
+  const alertHelperSpy = jasmine.createSpyObj('AlertHelper', ['showAlert']);
   let modalController: ModalController;
   let expectedError = new Error('No modal windows are currently registered');
   let mockCallback = (): string => {
@@ -10,7 +11,11 @@ describe('modalController', () => {
   };
 
   beforeEach(() => {
-    modalController = new ModalController(modalWindowHelperSpy, actionSheetHelperSpy);
+    modalController = new ModalController(
+      modalWindowHelperSpy,
+      actionSheetHelperSpy,
+      alertHelperSpy
+    );
   });
 
   describe('modalController', () => {
