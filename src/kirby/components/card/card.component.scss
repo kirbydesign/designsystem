@@ -5,17 +5,17 @@ $max-card-height: 500px;
 $min-card-width: 304px;
 
 :host{ 
-  --kirby-card-header-background-color:  #{get-color('kirby-contrast-light')};
-  --kirby-card-header-color: #{get-color('kirby-primary-contrast')};
-  --kirby-card-main-background-color: #{get-color('kirby-contrast-light')};
-  --kirby-card-main-color: #{get-color('kirby-primary-contrast')};
-  --kirby-card-footer-background-color: #{get-color('kirby-contrast-light')};
-  --kirby-card-footer-color: #{get-color('kirby-primary-contrast')};
+  --kirby-card-header-background-color:  #{get-color('contrast-light')};
+  --kirby-card-header-color: #{get-color('primary-contrast')};
+  --kirby-card-main-background-color: #{get-color('contrast-light')};
+  --kirby-card-main-color: #{get-color('primary-contrast')};
+  --kirby-card-footer-background-color: #{get-color('contrast-light')};
+  --kirby-card-footer-color: #{get-color('primary-contrast')};
 
   border-radius: $border-radius;
   box-shadow: 0 10px 29px -9px rgba(24, 24, 24, 0.3);
   color: var(--kirby-wireframe-text-color);
-  background-color: get-color('kirby-contrast-light');
+  background-color: get-color('contrast-light');
   display: flex;
   flex-direction: column;
   flex: 1 0 100%;
@@ -27,42 +27,42 @@ $min-card-width: 304px;
   overflow: hidden;
 
   .primary {
-      background-color: get-color('kirby-primary');
+      background-color: get-color('primary');
   }
 
   .primary {
-      background-color: get-color('kirby-primary');
+      background-color: get-color('primary');
   }
 
   .secondary {
-      background-color: get-color('kirby-secondary');
+      background-color: get-color('secondary');
   }
 
   .tertiary {
-      background-color: get-color('kirby-tertiary');
+      background-color: get-color('tertiary');
   }
 
   .warning {
-      background-color: get-color('kirby-warning');
+      background-color: get-color('warning');
   }
 
   .success {
-      background-color: get-color('kirby-success');
+      background-color: get-color('success');
   }
 
   .danger {
-      background-color: get-color('kirby-danger');
+      background-color: get-color('danger');
   }
 
   .light {
-      background-color: get-color('kirby-light');
+      background-color: get-color('light');
   }
 
   .medium {
-      background-color: get-color('kirby-medium');
+      background-color: get-color('medium');
   }
 
   .dark {
-      background-color: get-color('kirby-dark');
+      background-color: get-color('dark');
   }
 }

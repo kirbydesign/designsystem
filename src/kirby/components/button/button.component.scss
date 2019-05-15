@@ -2,10 +2,10 @@
 
 :host {
   --kirby-button-border-radius: 2rem;
-  background-color: get-color('kirby-primary');
+  background-color: get-color('primary');
   border-radius: var(--kirby-button-border-radius);
-  border: 1px solid get-color('kirby-primary');
-  color: get-color('kirby-primary-contrast');
+  border: 1px solid get-color('primary');
+  color: get-color('primary-contrast');
   cursor: pointer;
   transition: opacity 200ms linear;
   
@@ -33,15 +33,15 @@
   }
 
   &[colortype='primary'] {
-    background-color: get-color('kirby-primary');
-    border-color: get-color('kirby-primary');
-    color: get-color('kirby-primary-contrast');
+    background-color: get-color('primary');
+    border-color: get-color('primary');
+    color: get-color('primary-contrast');
   }
 
   &[colortype='secondary'] {
-    background-color: get-color('kirby-contrast-light');
-    border-color: get-color('kirby-contrast-light');
-    color: get-color('kirby-contrast-dark');
+    background-color: get-color('contrast-light');
+    border-color: get-color('contrast-light');
+    color: get-color('contrast-dark');
   }
 
   &:hover,
