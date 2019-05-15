@@ -1,10 +1,22 @@
 declare var require: any;
 
+export type ColorType =
+  | 'primary'
+  | 'secondary'
+  | 'tertiary'
+  | 'success'
+  | 'warning'
+  | 'danger'
+  | 'light'
+  | 'medium'
+  | 'dark';
+
 export class ColorHelper {
   static style: any = require('sass-extract-loader!./color-helper.scss');
 
   public static getThemeColor(name: string) {
-    return ColorHelper.style.global['$kirby-colors'].value[name].value;
+    const color = ColorHelper.style.global['$kirby-colors'].value[name];
+    return color ? color.value : undefined;
   }
 
   public static getAlphaIn255Range(alpha: number): number {
