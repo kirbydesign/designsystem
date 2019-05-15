@@ -10,15 +10,13 @@
     cancelBtnText: string;
 {{ '}' }};
 
-this.modalController.showAlert(config, this.vcRef);</kirby-code-viewer>
+this.modalController.showAlert(config);</kirby-code-viewer>
         (Optional) if you need to obtain data back from the alert, you can pass a callback function:
-        <kirby-code-viewer language="ts">this.modalController.showAlert(config, this.vcRef, myCallback);</kirby-code-viewer>
+        <kirby-code-viewer language="ts">this.modalController.showAlert(config, myCallback);</kirby-code-viewer>
         where <code>myCallback</code> can be e.g.:
         <kirby-code-viewer language="ts">myCallback(selection: boolean) {{ '{' }}
     ...
 {{ '}' }}</kirby-code-viewer>
-        We can use <code>modalController.hideTopmost</code> to hide (and destroy its component) the topmost alert. 
-        We can pass an optional result parameter to it, which is then going to be available inside the callback
     </p>
     <h4>Alert config properties:</h4>
     <kirby-showcase-properties [properties]="properties"></kirby-showcase-properties>
