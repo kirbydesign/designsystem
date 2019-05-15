@@ -3,8 +3,8 @@
 .badge { 
   font-size: font-size("xxs");
   border-radius: size("xs");
-  background-color: get-color('kirby-danger');
-  color: get-color('kirby-contrast-light', true, $kirby-colors);
+  background-color: get-color('danger');
+  color: get-color('contrast-light', true, $kirby-colors);
   height: size("s");
   min-width: size("s");
   padding-left: size("xxs");
@@ -12,33 +12,33 @@
   white-space: nowrap;
   
   &[colortype='primary']  {
-    color: get-color('kirby-primary-contrast');
-    background-color: get-color('kirby-primary');
+    color: get-color('primary-contrast');
+    background-color: get-color('primary');
   }
   
   &[colortype='secondary'] {
-    color: get-color('kirby-secondary-contrast');
-    background-color: get-color('kirby-secondary');
+    color: get-color('secondary-contrast');
+    background-color: get-color('secondary');
   }
 
   &[colortype='tertiary'] {
-    color: get-color('kirby-tertiary-contrast');
-    background-color: get-color('kirby-tertiary');
+    color: get-color('tertiary-contrast');
+    background-color: get-color('tertiary');
   }
 
   &[colortype='success'] {
-    color: get-color('kirby-success-contrast');
-    background-color: get-color('kirby-success');
+    color: get-color('success-contrast');
+    background-color: get-color('success');
   }
 
   &[colortype='warning'] {
-    color: get-color('kirby-warning-contrast');
-    background-color: get-color('kirby-warning');
+    color: get-color('warning-contrast');
+    background-color: get-color('warning');
   }
   
   &[colortype='danger'] {
-    color: get-color('kirby-contrast-light');
-    background-color: get-color('kirby-danger');
+    color: get-color('contrast-light');
+    background-color: get-color('danger');
   }
 }
 

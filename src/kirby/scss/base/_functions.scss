@@ -57,6 +57,6 @@
   @if $getValueOnly == true or $native == true {
     @return $value;
   } @else {
-    @return unquote('var(--' + $variant+ ')');
+    @return unquote('var(--kirby-' + $variant+ ')');
   }
 }
