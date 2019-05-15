@@ -21,6 +21,7 @@ export class AlertHelper {
         message: config.message,
         mode: 'ios',
         buttons: buttons,
+        backdropDismiss: false,
       });
       await alert.present();
     });
