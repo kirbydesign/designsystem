@@ -1,4 +1,5 @@
 import { ModalWrapperConfig } from './modal-wrapper-config';
+import { InjectionToken } from '@angular/core';
 
 export class ModalWrapperConfigHelper {
   static readonly defaultTitleHorizontalAlignment = 'center';
@@ -20,3 +21,5 @@ export class ModalWrapperConfigHelper {
     return config;
   }
 }
+
+export const COMPONENT_PROPS = new InjectionToken<string>('componentProps');

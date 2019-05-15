@@ -1,4 +1,17 @@
-<StackLayout> 
+<StackLayout>
+    <Label text="Component properties:"></Label>
+    <Label>
+        <FormattedString>
+            <Span text="prop 1: "></Span>
+            <Span [text]="props.prop1"></Span>
+        </FormattedString>
+    </Label>
+    <Label style="margin-bottom: 50;">
+        <FormattedString>
+            <Span text="prop 2: "></Span>
+            <Span [text]="props.prop2"></Span>
+        </FormattedString>
+    </Label>
     <Label textWrap="true" text="Hello from pay and transfer modal content example component"></Label>
     <Button kirby-button text="Hide me" (tap)="onHideFirst($event)"></Button>
     <Button kirby-button text="Show second modal" (tap)="showSecondModal($event)"></Button>
