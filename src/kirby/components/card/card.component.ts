@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ElementRef, Renderer2, OnDestroy } from '@ang
 
 import { ResizeObserverService } from '../shared/resize-observer/resize-observer.service';
 import { ResizeObserverEntry } from '../shared/resize-observer/types/resize-observer-entry';
-import { ColorHelper, ColorType } from '~/kirby/helpers/color-helper';
+import { ColorHelper, ColorType } from '../../helpers/color-helper';
 
 @Component({
   selector: 'kirby-card',

@@ -8,7 +8,7 @@ import { registerElement } from 'nativescript-angular';
 import { ContentView } from 'tns-core-modules/ui/content-view';
 
 import { ScssHelper } from '../../scss/scss-helper';
-import { ColorType, ColorHelper } from '~/kirby/helpers/color-helper';
+import { ColorType, ColorHelper } from '../../helpers/color-helper';
 
 const screenScale = screen.mainScreen.scale;
 declare const CGSizeMake: any;
