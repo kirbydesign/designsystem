@@ -10,7 +10,6 @@ export class ButtonComponent implements OnInit {
   @Input() expand?: 'full' | 'block';
   // TRM / JEO Fix this - map to button-type instead of color...
   @Input() colortype?: 'primary' | 'secondary';
-  @Input() size: 'small' | 'medium' | 'large';
 
   constructor() {}
 
