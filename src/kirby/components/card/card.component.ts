@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ElementRef, Renderer2, OnDestroy } from '@ang
 
 import { ResizeObserverService } from '../shared/resize-observer/resize-observer.service';
 import { ResizeObserverEntry } from '../shared/resize-observer/types/resize-observer-entry';
-import { ColorHelper, ColorType } from '../../helpers/color-helper';
+import { ColorType } from '~/kirby/helpers/color-type';
 
 @Component({
   selector: 'kirby-card',
@@ -41,12 +41,6 @@ export class CardComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.resizeObserverService.unobserve(this.elementRef);
-  }
-
-  public get backgroundColor(): string {
-    const name = this.colortype ? this.colortype : 'contrast-light';
-    const color = ColorHelper.getThemeColor(`kirby-${name}`);
-    return color ? color.hex : undefined;
   }
 
   private sortSizesByBreakpoint(sizes: { [size: string]: number }): [string, number][] {

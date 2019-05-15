@@ -8,7 +8,7 @@ import { registerElement } from 'nativescript-angular';
 import { ContentView } from 'tns-core-modules/ui/content-view';
 
 import { ScssHelper } from '../../scss/scss-helper';
-import { ColorType, ColorHelper } from '../../helpers/color-helper';
+import { ColorType } from '~/kirby/helpers/color-type';
 
 const screenScale = screen.mainScreen.scale;
 declare const CGSizeMake: any;
@@ -101,12 +101,6 @@ export class CardComponent extends ContentView implements OnInit {
       iosView.layer.shadowRadius = ScssHelper.SHADOW_RADIUS;
       return;
     }
-  }
-
-  public get backgroundColor(): string {
-    const name = this.colortype ? this.colortype : 'contrast-light';
-    const color = ColorHelper.getThemeColor(`kirby-${name}`);
-    return color ? color.hex : undefined;
   }
 }
 
