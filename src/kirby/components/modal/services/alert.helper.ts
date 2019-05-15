@@ -35,7 +35,7 @@ export class AlertHelper {
   ): AlertButton {
     return {
       text: text,
-      cssClass: ['alert-btn', isCancelBtn ? 'cancel' : ''],
+      cssClass: ['kirby-alert-btn', isCancelBtn ? 'cancel' : ''],
       handler: () => {
         resolve(!isCancelBtn);
       },

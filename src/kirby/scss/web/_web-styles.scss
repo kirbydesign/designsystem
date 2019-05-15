@@ -37,11 +37,11 @@
     }  
 }
 
-.alert-btn {
+.kirby-alert-btn {
     cursor: pointer;
-    color: #{get-color(kirby-tertiary)} !important;
+    --ion-color-primary: #{get-color(tertiary)};
 
     &.cancel {
-        color: #{get-color(kirby-danger)} !important;
+        --ion-color-primary: #{get-color(danger)};
     }
 }
