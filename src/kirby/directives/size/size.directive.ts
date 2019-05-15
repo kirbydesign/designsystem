@@ -12,7 +12,7 @@ export class SizeDirective {
   isMediumSize: boolean;
   @HostBinding('class.large')
   isLargeSize: boolean;
-  @Input() set size(size: 'small' | 'medium' | 'large') {
+  @Input() set size(size: 'sm' | 'md' | 'lg') {
     if (size === 'small') {
       this.isSmallSize = true;
     }
