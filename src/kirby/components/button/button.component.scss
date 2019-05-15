@@ -9,20 +9,20 @@
   cursor: pointer;
   transition: opacity 200ms linear;
   
-  // we default to medium size.
+  // we default to 'md' size.
   margin: size('xxs');
   padding: size('xs') size('m') size('xs') size('m');
   font-size: font-size('s');
   height: size('xl');
   line-height: line-height('xs');
 
-  &.small {
+  &.sm {
     padding: size('xxs') size('s') size('xxs') size('s');
     font-size: font-size('xs');
     height: size('l');
   }
 
-  &.large {
+  &.lg {
     font-size: font-size('s');
     height: size('xxl');
   }

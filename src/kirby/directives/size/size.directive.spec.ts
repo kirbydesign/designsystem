@@ -1,7 +1,3 @@
-/* tslint:disable:no-unused-variable */
-
-import { TestBed, async } from '@angular/core/testing';
-
 import { SizeDirective } from './size.directive';
 
 describe('Directive: Size', () => {
@@ -10,23 +6,23 @@ describe('Directive: Size', () => {
     expect(directive).toBeTruthy();
   });
 
-  it(`should be small size if input is 'small'`, () => {
+  it(`should be small size if input is 'sm'`, () => {
     const directive = new SizeDirective();
-    directive.size = 'small';
+    directive.size = 'sm';
 
     expect(directive.isSmallSize).toBeTruthy();
   });
 
-  it(`should be medium size if input is 'medium'`, () => {
+  it(`should be medium size if input is 'md'`, () => {
     const directive = new SizeDirective();
-    directive.size = 'medium';
+    directive.size = 'md';
 
     expect(directive.isMediumSize).toBeTruthy();
   });
 
-  it(`should be large size if input is 'large'`, () => {
+  it(`should be large size if input is 'lg'`, () => {
     const directive = new SizeDirective();
-    directive.size = 'large';
+    directive.size = 'lg';
 
     expect(directive.isLargeSize).toBeTruthy();
   });

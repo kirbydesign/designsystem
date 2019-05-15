@@ -6,20 +6,20 @@ import { Directive, Input, HostBinding } from '@angular/core';
   selector: 'Button[size], button[size]',
 })
 export class SizeDirective {
-  @HostBinding('class.small')
+  @HostBinding('class.sm')
   isSmallSize: boolean;
-  @HostBinding('class.medium')
+  @HostBinding('class.md')
   isMediumSize: boolean;
-  @HostBinding('class.large')
+  @HostBinding('class.lg')
   isLargeSize: boolean;
   @Input() set size(size: 'sm' | 'md' | 'lg') {
-    if (size === 'small') {
+    if (size === 'sm') {
       this.isSmallSize = true;
     }
-    if (size === 'medium') {
+    if (size === 'md') {
       this.isMediumSize = true;
     }
-    if (size === 'large') {
+    if (size === 'lg') {
       this.isLargeSize = true;
     }
   }
