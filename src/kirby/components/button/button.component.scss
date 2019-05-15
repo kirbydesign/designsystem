@@ -1,16 +1,31 @@
 @import '../../scss/web-imports';
 
 :host {
-  margin: 0.25em 0.25em;
   --kirby-button-border-radius: 2rem;
   background-color: get-color('kirby-primary');
   border-radius: var(--kirby-button-border-radius);
   border: 1px solid get-color('kirby-primary');
   color: get-color('kirby-primary-contrast');
   cursor: pointer;
-  font-size: font-size('n');
-  padding: 0.7rem 1.75rem;
   transition: opacity 200ms linear;
+  
+  // we default to 'md' size.
+  margin: size('xxs');
+  padding: size('xs') size('m') size('xs') size('m');
+  font-size: font-size('s');
+  height: size('xl');
+  line-height: line-height('xs');
+
+  &.sm {
+    padding: size('xxs') size('s') size('xxs') size('s');
+    font-size: font-size('xs');
+    height: size('l');
+  }
+
+  &.lg {
+    font-size: font-size('s');
+    height: size('xxl');
+  }
 
   &[expand='block'] {
     display: block;
