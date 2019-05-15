@@ -28,7 +28,7 @@ export class ButtonShowcaseComponent implements OnInit {
       name: 'size',
       description: 'Sets the size of the button.',
       defaultValue: 'medium',
-      inputValues: ['small', 'medium', 'large'],
+      inputValues: ['sm', 'md', 'lg'],
     },
   ];
 
