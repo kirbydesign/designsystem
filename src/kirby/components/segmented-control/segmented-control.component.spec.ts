@@ -1,14 +1,15 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component, EventEmitter, NO_ERRORS_SCHEMA, Output } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
 import { SegmentedControlComponent } from './segmented-control.component';
 import { SegmentItem } from './segment-item';
 import { BadgeComponent } from '../badge/badge.component';
-import { Component, EventEmitter, NO_ERRORS_SCHEMA, Output } from '@angular/core';
 
 // We were attempting to manipulate the shadow dom of IonSegmentButton to write a test
 // that failed gloriously when changing unrelated code... creating a "good 'ol" Angular stub instead
 @Component({
+  // tslint:disable-next-line:component-selector
   selector: 'ion-segment-button',
   template: '',
 })
