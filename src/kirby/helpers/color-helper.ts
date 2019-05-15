@@ -1,16 +1,4 @@
 declare var require: any;
-
-export type ColorType =
-  | 'primary'
-  | 'secondary'
-  | 'tertiary'
-  | 'success'
-  | 'warning'
-  | 'danger'
-  | 'light'
-  | 'medium'
-  | 'dark';
-
 export class ColorHelper {
   static style: any = require('sass-extract-loader!./color-helper.scss');
 
