@@ -16,6 +16,10 @@ export class ModalExampleComponent {
       title: 'First Embedded Modal',
       titleHorizontalAlignment: 'center',
       component: FirstEmbeddedModalExampleComponent,
+      componentProps: {
+        prop1: 'value1',
+        prop2: 'value2',
+      },
     };
 
     this.modalController.showModal(config, this.vcRef, this.onModalClose);

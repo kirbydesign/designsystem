@@ -1,3 +1,5 @@
+import { InjectionToken } from '@angular/core';
+
 import { ModalWrapperConfig } from './modal-wrapper-config';
 
 export class ModalWrapperConfigHelper {
@@ -20,3 +22,5 @@ export class ModalWrapperConfigHelper {
     return config;
   }
 }
+
+export const COMPONENT_PROPS = new InjectionToken<string>('componentProps');
