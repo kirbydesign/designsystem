@@ -5,8 +5,18 @@ import { GroupByPipe } from './pipes/group-by.pipe';
 import { ListComponent } from './list.component';
 import { SpinnerComponent } from '~/kirby';
 import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
-import { ListRowClassService } from '~/kirby/components/list/list-row-class.service';
 import { ListHelper } from '~/kirby/components/list/helpers/list-helper';
+
+/**
+ * We need an actual model item, since WeakMap can't use primitives for keys.
+ */
+class Item {
+  static createItems(...values: number[]) {
+    return values.map((value) => new Item(value));
+  }
+
+  constructor(public value: number) {}
+}
 
 describe('ListComponent', () => {
   let spectator: Spectator<ListComponent>;
@@ -22,13 +32,7 @@ describe('ListComponent', () => {
   const createHost = createTestComponentFactory({
     component: ListComponent,
     declarations: [ListComponent, GroupByPipe, SpinnerComponent, InfiniteScrollDirective],
-    providers: [ListHelper],
-    componentProviders: [
-      {
-        provide: ListRowClassService,
-        useValue: jasmine.createSpyObj('ListRowClassService', ['getCssClasses', 'update']),
-      },
-    ],
+    providers: [ListHelper, GroupByPipe],
   });
 
   beforeEach(() => {
@@ -52,6 +56,7 @@ describe('ListComponent', () => {
 
     it('should be enabled if a section callback is defined', () => {
       spectator.setInput({
+        items: Item.createItems(1, 2, 3),
         getSectionName: (item: any) => 'this is a test',
       });
       runNgOnChanges();
@@ -61,7 +66,7 @@ describe('ListComponent', () => {
 
     it('should render one li element for each item, if the list is not sectioned', () => {
       spectator.setInput({
-        items: [1, 2, 3],
+        items: Item.createItems(1, 2, 3),
       });
       runNgOnChanges();
 
@@ -71,8 +76,8 @@ describe('ListComponent', () => {
 
     it('should render one li element for each item and one for each section, if sections are enabled', () => {
       spectator.setInput({
-        items: [0, 1, 2],
-        getSectionName: (item: number) => (item % 2 === 0 ? 'even' : 'odd'),
+        items: Item.createItems(1, 2, 3),
+        getSectionName: (item: Item) => (item.value % 2 === 0 ? 'even' : 'odd'),
       });
       runNgOnChanges();
 
@@ -84,7 +89,7 @@ describe('ListComponent', () => {
   describe('divider', () => {
     it('should set class "divider" on all li elements when showDivider is true', () => {
       spectator.setInput({
-        items: [1, 2, 3],
+        items: Item.createItems(1, 2, 3),
         showDivider: true,
       });
       runNgOnChanges();
@@ -97,7 +102,7 @@ describe('ListComponent', () => {
 
     it('should not set class "divider" on any li elements when showDivider is false', () => {
       spectator.setInput({
-        items: [1, 2, 3],
+        items: Item.createItems(1, 2, 3),
         showDivider: false,
       });
       runNgOnChanges();
@@ -134,6 +139,61 @@ describe('ListComponent', () => {
       runNgOnChanges();
 
       expect(component.isLoadOnDemandEnabled).toBeFalsy();
+    });
+  });
+
+  describe('css classes', () => {
+    it('should return an empty object, when sections are not enabled', () => {
+      const items = Item.createItems(1, 2, 3);
+      spectator.setInput({
+        items,
+      });
+      runNgOnChanges();
+
+      expect(component.getCssClasses(items[0])).toEqual({});
+    });
+
+    it('should return styling object for sectioned list with rounded corners and a single entry', () => {
+      const items = Item.createItems(1);
+      spectator.setInput({
+        items,
+        shape: 'rounded',
+        getSectionName: () => 'bob',
+      });
+      runNgOnChanges();
+
+      expect(component.getCssClasses(items[0])).toEqual({ first: true, last: true, rounded: true });
+    });
+
+    it('should return styling object for sectioned list with rounded corners and a multiple entries', () => {
+      const items = Item.createItems(1, 2, 3, 4);
+      spectator.setInput({
+        items,
+        shape: 'rounded',
+        getSectionName: (item: Item) => (item.value % 2 == 0 ? 'even' : 'odd'),
+      });
+      runNgOnChanges();
+
+      expect(component.getCssClasses(items[0])).toEqual({
+        first: true,
+        last: false,
+        rounded: true,
+      });
+      expect(component.getCssClasses(items[1])).toEqual({
+        first: true,
+        last: false,
+        rounded: true,
+      });
+      expect(component.getCssClasses(items[2])).toEqual({
+        first: false,
+        last: true,
+        rounded: true,
+      });
+      expect(component.getCssClasses(items[3])).toEqual({
+        first: false,
+        last: true,
+        rounded: true,
+      });
     });
   });
 });

@@ -12,7 +12,7 @@
     <ng-template tkListItemTemplate let-item="item">
       <FlexboxLayout class="row"
                      [class.divider]="showDivider"
-                     [ngClass]="rowClassService.getCssClasses(item)"
+                     [ngClass]="getCssClasses(item)"
                      (tap)="onItemSelect(item)">
         <ng-container
           *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }">

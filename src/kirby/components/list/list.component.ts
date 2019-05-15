@@ -9,7 +9,6 @@ import {
   OnInit,
   Output,
   QueryList,
-  SimpleChanges,
   TemplateRef,
 } from '@angular/core';
 
@@ -21,7 +20,7 @@ import {
 } from './list.directive';
 import { LoadOnDemandEvent, LoadOnDemandEventData } from './list.event';
 import { ListHelper } from './helpers/list-helper';
-import { ListRowClassService } from '~/kirby/components/list/list-row-class.service';
+import { GroupByPipe } from '~/kirby/components/list/pipes/group-by.pipe';
 
 export type ListShape = 'square' | 'rounded';
 
@@ -29,7 +28,7 @@ export type ListShape = 'square' | 'rounded';
   selector: 'kirby-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
-  providers: [ListHelper, ListRowClassService],
+  providers: [ListHelper, GroupByPipe],
 })
 export class ListComponent implements OnInit, OnChanges {
   /**
@@ -81,11 +80,11 @@ export class ListComponent implements OnInit, OnChanges {
   isSelectable: boolean;
   isLoading: boolean;
   isLoadOnDemandEnabled: boolean;
-  getCssClasses: (item: any) => string;
 
-  constructor(private listHelper: ListHelper, private rowClassService: ListRowClassService) {
-    this.getCssClasses = rowClassService.getCssClasses.bind(this);
-  }
+  private groupedItems: any[];
+  private orderMap: WeakMap<any, { isFirst: boolean; isLast: boolean }>;
+
+  constructor(private listHelper: ListHelper, private groupBy: GroupByPipe) {}
 
   ngOnInit() {
     if (this.listItemTemplate) {
@@ -95,13 +94,24 @@ export class ListComponent implements OnInit, OnChanges {
 
   ngOnChanges(): void {
     this.isSectionsEnabled = !!this.getSectionName;
+    if (this.isSectionsEnabled) {
+      this.groupedItems = this.groupBy.transform(this.items, this.getSectionName);
+      this.orderMap = this.createOrderMap(this.groupedItems);
+    }
     this.isSelectable = this.itemSelect.observers.length > 0;
-    this.rowClassService.update({
-      items: this.items || [],
-      getSectionName: this.getSectionName,
-      shape: this.shape,
-    });
     this.isLoadOnDemandEnabled = this.loadOnDemand.observers.length > 0;
+  }
+
+  getCssClasses(item: any) {
+    if (!this.isSectionsEnabled) {
+      return {};
+    }
+    const order = this.orderMap.get(item);
+    return {
+      first: order.isFirst,
+      last: order.isLast,
+      rounded: this.shape === 'rounded',
+    };
   }
 
   onItemSelect(selectedItem: any) {
@@ -110,5 +120,20 @@ export class ListComponent implements OnInit, OnChanges {
 
   onLoadOnDemand(event?: LoadOnDemandEventData) {
     this.listHelper.onLoadOnDemand(this, event);
+  }
+
+  private createOrderMap(
+    groupedItems: { name: string; items: any[] }[]
+  ): WeakMap<any, { isFirst: boolean; isLast: boolean }> {
+    const orderMap = new WeakMap<any, { isFirst: boolean; isLast: boolean }>();
+    groupedItems.forEach((group) => {
+      const lastIndexInGroup = group.items.length - 1;
+      group.items.forEach((item, index) => {
+        const isFirst = index === 0;
+        const isLast = index === lastIndexInGroup;
+        orderMap.set(item, { isFirst, isLast });
+      });
+    });
+    return orderMap;
   }
 }
