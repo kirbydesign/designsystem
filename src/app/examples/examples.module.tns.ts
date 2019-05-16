@@ -2,7 +2,6 @@
 
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { NativeScriptCommonModule } from 'nativescript-angular/common';
-import { NativeScriptFormsModule } from 'nativescript-angular';
 
 import { KirbyModule } from '../../kirby/kirby.module';
 import { COMPONENT_DECLARATIONS, PROVIDER_DECLARATIONS } from './examples.common';
@@ -24,7 +23,7 @@ const nativeScriptDeclarations = [
 ];
 
 @NgModule({
-  imports: [NativeScriptCommonModule, KirbyModule, NativeScriptFormsModule],
+  imports: [NativeScriptCommonModule, KirbyModule],
   declarations: nativeScriptDeclarations,
   entryComponents: [FirstEmbeddedModalExampleComponent, SecondEmbeddedModalExampleComponent],
   exports: nativeScriptDeclarations,
