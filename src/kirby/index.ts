@@ -12,3 +12,13 @@ export {
 export { SegmentItem } from './components/segmented-control/segment-item';
 export { BadgeComponent } from './components/badge/badge.component';
 export { COMPONENT_PROPS } from './components/modal/modal-wrapper/config/modal-config.helper';
+
+export { CustomIconSettings, CUSTOM_FONT_SETTINGS } from './components/icon/custom-icon-settings';
+export { GridCardConfiguration } from './components/grid/grid-card-configuration';
+export {
+  SegmentedChipControlComponent,
+} from './components/segment/segmented-chip-control/segmented-chip-control.component';
+export { ChipComponent } from './components/chip/chip.component';
+export { ModalController } from './components/modal/services/modal.controller';
+export { ModalConfig } from './components/modal/modal-wrapper/config/modal-config';
+export { LoadOnDemandEvent } from './components/list/list.event';
