@@ -3,7 +3,7 @@
         <h2 class="text-{{config.titleHorizontalAlignment}} title">{{ config.title }}</h2>
     </div>
     <div class="modal-content">    
-        <ng-container *ngComponentOutlet="config.component"></ng-container>
+        <ng-container *ngComponentOutlet="config.component; injector: componentPropsInjector"></ng-container>
     </div>
     <kirby-floating-action-button role="button" 
             class="dismiss-button" 

@@ -1,4 +1,4 @@
-import { Component, Input, Output, OnInit, NgZone, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, NgZone, Output, EventEmitter } from '@angular/core';
 import { screen } from 'tns-core-modules/platform';
 import { OrientationChangedEventData } from 'tns-core-modules/application';
 import * as app from 'tns-core-modules/application';
@@ -25,19 +25,17 @@ export class CardComponent extends ContentView implements OnInit {
   @Input() title: string;
   @Input() subtitle: string;
   @Input() colortype?: ColorType;
-  @Output() click = new EventEmitter();
-
+  @Output() select = new EventEmitter();
   view: View;
   currentScreenWidth: number;
   cardSizeClass = '';
   applyShadow: boolean = true;
-
   constructor(private zone: NgZone) {
     super();
   }
 
   ngOnInit() {
-    this.applyShadow = this.click.observers.length === 0;
+    this.applyShadow = this.select.observers.length === 0;
   }
 
   onViewLoaded(args: EventData) {

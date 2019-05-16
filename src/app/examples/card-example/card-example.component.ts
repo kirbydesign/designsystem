@@ -9,5 +9,5 @@ import { DynamicComponent } from '../../../kirby/components/shared/dynamic-compo
 })
 export class CardExampleComponent implements DynamicComponent {
   data: any;
-  onCardClick() {}
+  onCardSelect() {}
 }

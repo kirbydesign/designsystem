@@ -1,8 +1,8 @@
-import { Component, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ElementRef, ViewChild, AfterViewInit, Injector } from '@angular/core';
 import { NavParams } from '@ionic/angular';
 
-import { ModalWrapperConfig } from './config/modal-wrapper-config';
-import { ModalWrapperConfigHelper } from './config/modal-wrapper-config.helper';
+import { ModalConfig } from './config/modal-config';
+import { COMPONENT_PROPS, ModalConfigHelper } from './config/modal-config.helper';
 import { IModalController } from '../services/modal.controller.interface';
 
 @Component({
@@ -12,10 +12,19 @@ import { IModalController } from '../services/modal.controller.interface';
 export class ModalWrapperComponent implements AfterViewInit {
   @ViewChild('modalWrapper') modalWrapper: ElementRef;
   scrollY: number = Math.abs(window.scrollY);
-  config: ModalWrapperConfig;
+  config: ModalConfig;
+  componentPropsInjector: Injector;
 
-  constructor(private params: NavParams, private modalController: IModalController) {
-    this.config = ModalWrapperConfigHelper.processOptionalValues(this.params.get('config'));
+  constructor(
+    private params: NavParams,
+    private modalController: IModalController,
+    injector: Injector
+  ) {
+    this.config = ModalConfigHelper.processOptionalValues(this.params.get('config'));
+    this.componentPropsInjector = Injector.create({
+      providers: [{ provide: COMPONENT_PROPS, useValue: this.params.get('config').componentProps }],
+      parent: injector,
+    });
   }
 
   ngAfterViewInit(): void {
