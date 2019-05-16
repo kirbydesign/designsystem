@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, NgZone } from '@angular/core';
+import { Component, Input, OnInit, NgZone, Output, EventEmitter } from '@angular/core';
 import { screen } from 'tns-core-modules/platform';
 import { OrientationChangedEventData } from 'tns-core-modules/application';
 import * as app from 'tns-core-modules/application';
@@ -25,18 +25,18 @@ export class CardComponent extends ContentView implements OnInit {
   @Input() title: string;
   @Input() subtitle: string;
   @Input() colortype?: ColorType;
-
+  @Output() select = new EventEmitter();
   view: View;
-
   currentScreenWidth: number;
-
   cardSizeClass = '';
-
+  applyShadow: boolean = true;
   constructor(private zone: NgZone) {
     super();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.applyShadow = this.select.observers.length === 0;
+  }
 
   onViewLoaded(args: EventData) {
     this.view = <View>args.object; // We need a reference to the view so we can access it on orientation changes
@@ -79,27 +79,29 @@ export class CardComponent extends ContentView implements OnInit {
   }
 
   addShadow(view: View) {
-    if (view.android) {
-      view.eachChildView((child) => {
-        if (child instanceof FlexboxLayout) {
-          const bgColor = child.style.backgroundColor;
-          const androidView = child.android;
-          const shape = new android.graphics.drawable.GradientDrawable();
-          shape.setShape(android.graphics.drawable.GradientDrawable.RECTANGLE);
-          shape.setColor(android.graphics.Color.parseColor(bgColor + ''));
-          shape.setCornerRadius(ScssHelper.BORDER_RADIUS);
-          androidView.setBackgroundDrawable(shape);
-          androidView.setElevation(ScssHelper.ELEVATION_CARD_RESTING);
-          return true;
-        }
-      });
-    } else if (view.ios) {
-      const iosView = view.ios;
-      iosView.layer.shadowColor = ScssHelper.SHADOW_COLOR.ios.CGColor;
-      iosView.layer.shadowOffset = CGSizeMake(0, ScssHelper.SHADOW_OFFSET_Y);
-      iosView.layer.shadowOpacity = ScssHelper.SHADOW_OPACITY;
-      iosView.layer.shadowRadius = ScssHelper.SHADOW_RADIUS;
-      return;
+    if (this.applyShadow) {
+      if (view.android) {
+        view.eachChildView((child) => {
+          if (child instanceof FlexboxLayout) {
+            const bgColor = child.style.backgroundColor;
+            const androidView = child.android;
+            const shape = new android.graphics.drawable.GradientDrawable();
+            shape.setShape(android.graphics.drawable.GradientDrawable.RECTANGLE);
+            shape.setColor(android.graphics.Color.parseColor(bgColor + ''));
+            shape.setCornerRadius(ScssHelper.BORDER_RADIUS);
+            androidView.setBackgroundDrawable(shape);
+            androidView.setElevation(ScssHelper.ELEVATION_CARD_RESTING);
+            return true;
+          }
+        });
+      } else if (view.ios) {
+        const iosView = view.ios;
+        iosView.layer.shadowColor = ScssHelper.SHADOW_COLOR.ios.CGColor;
+        iosView.layer.shadowOffset = CGSizeMake(0, ScssHelper.SHADOW_OFFSET_Y);
+        iosView.layer.shadowOpacity = ScssHelper.SHADOW_OPACITY;
+        iosView.layer.shadowRadius = ScssHelper.SHADOW_RADIUS;
+        return;
+      }
     }
   }
 }

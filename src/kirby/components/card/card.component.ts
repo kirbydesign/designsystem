@@ -1,4 +1,14 @@
-import { Component, OnInit, Input, ElementRef, Renderer2, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  ElementRef,
+  Renderer2,
+  OnDestroy,
+  HostBinding,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 
 import { ResizeObserverService } from '../shared/resize-observer/resize-observer.service';
 import { ResizeObserverEntry } from '../shared/resize-observer/types/resize-observer-entry';
@@ -28,6 +38,10 @@ export class CardComponent implements OnInit, OnDestroy {
     }
     this.sizesSortedByBreakpoint = this.sortSizesByBreakpoint(value);
   }
+  @HostBinding('class.shadow')
+  applyShadow: boolean = true;
+
+  @Output() select = new EventEmitter();
 
   constructor(
     private elementRef: ElementRef,
@@ -36,6 +50,7 @@ export class CardComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    this.applyShadow = this.select.observers.length === 0;
     this.resizeObserverService.observe(this.elementRef, (entry) => this.handleResize(entry));
   }
 
