@@ -2,15 +2,17 @@ import {
   Component,
   OnInit,
   Input,
+  Output,
   ElementRef,
   Renderer2,
   OnDestroy,
   HostBinding,
+  EventEmitter,
 } from '@angular/core';
 
 import { ResizeObserverService } from '../shared/resize-observer/resize-observer.service';
 import { ResizeObserverEntry } from '../shared/resize-observer/types/resize-observer-entry';
-import { ColorHelper, ColorType } from '~/kirby/helpers/color-helper';
+import { ColorType } from './../../helpers/color-type';
 
 @Component({
   selector: 'kirby-card',
@@ -20,10 +22,6 @@ import { ColorHelper, ColorType } from '~/kirby/helpers/color-helper';
 export class CardComponent implements OnInit, OnDestroy {
   @Input() title: string;
   @Input() subtitle: string;
-  @HostBinding('class.shadow')
-  @Input()
-  shadow: boolean = true;
-
   @Input() colortype?: ColorType;
   private sizesSortedByBreakpoint = this.sortSizesByBreakpoint({
     small: 360,
@@ -40,6 +38,10 @@ export class CardComponent implements OnInit, OnDestroy {
     }
     this.sizesSortedByBreakpoint = this.sortSizesByBreakpoint(value);
   }
+  @Output() click = new EventEmitter();
+
+  @HostBinding('class.shadow')
+  applyShadow: boolean = true;
 
   constructor(
     private elementRef: ElementRef,
@@ -48,17 +50,12 @@ export class CardComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    this.applyShadow = this.click.observers.length === 0;
     this.resizeObserverService.observe(this.elementRef, (entry) => this.handleResize(entry));
   }
 
   ngOnDestroy() {
     this.resizeObserverService.unobserve(this.elementRef);
-  }
-
-  public get backgroundColor(): string {
-    const name = this.colortype ? this.colortype : 'contrast-light';
-    const color = ColorHelper.getThemeColor(`kirby-${name}`);
-    return color ? color.hex : undefined;
   }
 
   private sortSizesByBreakpoint(sizes: { [size: string]: number }): [string, number][] {
