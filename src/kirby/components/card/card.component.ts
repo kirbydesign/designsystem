@@ -8,6 +8,8 @@ import {
   HostBinding,
   Output,
   EventEmitter,
+  OnChanges,
+  HostListener,
 } from '@angular/core';
 
 import { ResizeObserverService } from '../shared/resize-observer/resize-observer.service';
@@ -19,10 +21,10 @@ import { ColorType } from './../../helpers/color-type';
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
 })
-export class CardComponent implements OnInit, OnDestroy {
+export class CardComponent implements OnInit, OnDestroy, OnChanges {
+  @Output() select = new EventEmitter();
   @Input() title: string;
   @Input() subtitle: string;
-  @Input() colortype?: ColorType;
   private sizesSortedByBreakpoint = this.sortSizesByBreakpoint({
     small: 360,
     medium: 720,
@@ -38,11 +40,18 @@ export class CardComponent implements OnInit, OnDestroy {
     }
     this.sizesSortedByBreakpoint = this.sortSizesByBreakpoint(value);
   }
+
+  @HostBinding('class')
+  @Input()
+  colortype?: ColorType;
+
   @HostBinding('class.shadow')
-  applyShadow: boolean = true;
+  applyShadow: boolean = false;
 
-  @Output() select = new EventEmitter();
-
+  @HostListener('click')
+  onCardSelect() {
+    this.select.emit();
+  }
   constructor(
     private elementRef: ElementRef,
     private resizeObserverService: ResizeObserverService,
@@ -50,14 +59,17 @@ export class CardComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.applyShadow = this.select.observers.length === 0;
+    this.handleShadow();
     this.resizeObserverService.observe(this.elementRef, (entry) => this.handleResize(entry));
+  }
+
+  ngOnChanges() {
+    this.handleShadow();
   }
 
   ngOnDestroy() {
     this.resizeObserverService.unobserve(this.elementRef);
   }
-
   private sortSizesByBreakpoint(sizes: { [size: string]: number }): [string, number][] {
     return Object.entries(sizes).sort(this.compareSizesByBreakpoint);
   }
@@ -79,5 +91,9 @@ export class CardComponent implements OnInit, OnDestroy {
         }
       });
     }
+  }
+
+  private handleShadow() {
+    this.applyShadow = this.select.observers.length > 0;
   }
 }

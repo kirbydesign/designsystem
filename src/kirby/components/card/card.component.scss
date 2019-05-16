@@ -25,39 +25,39 @@ $min-card-width: 304px;
   width: 100%;
   overflow: hidden;
 
-  .primary {
+  &.primary {
       background-color: get-color('primary');
   }
 
-  .secondary {
+  &.secondary {
       background-color: get-color('secondary');
   }
 
-  .tertiary {
+  &.tertiary {
       background-color: get-color('tertiary');
   }
 
-  .warning {
+  &.warning {
       background-color: get-color('warning');
   }
 
-  .success {
+  &.success {
       background-color: get-color('success');
   }
 
-  .danger {
+  &.danger {
       background-color: get-color('danger');
   }
 
-  .light {
+  &.light {
       background-color: get-color('light');
   }
 
-  .medium {
+  &.medium {
       background-color: get-color('medium');
   }
 
-  .dark {
+  &.dark {
       background-color: get-color('dark');
   }
 

@@ -1,5 +1,3 @@
-<div [ngClass]="colortype" (click)="select.emit()">
-    <ng-content select="kirby-card-header"></ng-content>
-    <ng-content></ng-content>
-    <ng-content select="kirby-card-footer"></ng-content>
-</div>
+<ng-content select="kirby-card-header"></ng-content>
+<ng-content></ng-content>
+<ng-content select="kirby-card-footer"></ng-content>

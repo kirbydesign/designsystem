@@ -1,4 +1,13 @@
-import { Component, Input, OnInit, NgZone, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  NgZone,
+  Output,
+  EventEmitter,
+  OnChanges,
+  HostListener,
+} from '@angular/core';
 import { screen } from 'tns-core-modules/platform';
 import { OrientationChangedEventData } from 'tns-core-modules/application';
 import * as app from 'tns-core-modules/application';
@@ -21,23 +30,30 @@ export const KIRBY_CARD_COMPONENT_SELECTOR = 'kirby-card';
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
 })
-export class CardComponent extends ContentView implements OnInit {
+export class CardComponent extends ContentView implements OnInit, OnChanges {
+  @Output() select = new EventEmitter();
   @Input() title: string;
   @Input() subtitle: string;
   @Input() colortype?: ColorType;
-  @Output() select = new EventEmitter();
   view: View;
   currentScreenWidth: number;
   cardSizeClass = '';
-  applyShadow: boolean = true;
+  applyShadow: boolean = false;
+
+  @HostListener('tap')
+  onCardSelect() {
+    this.select.emit();
+  }
   constructor(private zone: NgZone) {
     super();
   }
 
   ngOnInit() {
-    this.applyShadow = this.select.observers.length === 0;
+    this.handleShadow();
   }
-
+  ngOnChanges() {
+    this.handleShadow();
+  }
   onViewLoaded(args: EventData) {
     this.view = <View>args.object; // We need a reference to the view so we can access it on orientation changes
     this.setupOnOrientationChangeListener();
@@ -103,6 +119,10 @@ export class CardComponent extends ContentView implements OnInit {
         return;
       }
     }
+  }
+
+  private handleShadow() {
+    this.applyShadow = this.select.observers.length > 0;
   }
 }
 

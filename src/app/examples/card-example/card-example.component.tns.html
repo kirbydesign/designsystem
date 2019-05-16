@@ -1,5 +1,5 @@
 <StackLayout orientation="vertical" width="100%" height="100%">
-  <kirby-card>
+  <kirby-card (select)="onCardSelect()">
     <kirby-card-header title="Titel" subtitle="Subtitel"></kirby-card-header>
 
     <!-- Card content example: -->
@@ -10,7 +10,7 @@
       <kirby-card-footer></kirby-card-footer>
     </kirby-card>
 
-    <kirby-card colortype="warning" (select)="onCardSelect()">
+    <kirby-card colortype="warning">
         <kirby-card-header title="Titel" subtitle="Subtitel"></kirby-card-header>
     
         <!-- Card content example: -->
