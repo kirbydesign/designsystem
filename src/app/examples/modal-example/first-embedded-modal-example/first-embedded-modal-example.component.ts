@@ -1,7 +1,7 @@
 import { Component, Inject, ViewContainerRef } from '@angular/core';
 
 import { ModalController } from '~/kirby/components/modal/services/modal.controller';
-import { ModalWrapperConfig } from '~/kirby/components/modal/modal-wrapper/config/modal-wrapper-config';
+import { ModalConfig } from '~/kirby/components/modal/modal-wrapper/config/modal-config';
 import { SecondEmbeddedModalExampleComponent } from '../second-embedded-modal-example/second-embedded-modal-example.component';
 import { COMPONENT_PROPS } from '~/kirby';
 
@@ -20,7 +20,7 @@ export class FirstEmbeddedModalExampleComponent {
   }
 
   async showSecondModal() {
-    const config: ModalWrapperConfig = {
+    const config: ModalConfig = {
       title: 'Second Embedded Modal',
       titleHorizontalAlignment: 'left',
       closeIconName: 'arrow-back',
