@@ -2,8 +2,8 @@ import { Component, Injector } from '@angular/core';
 import { ModalDialogParams } from 'nativescript-angular';
 import { ContentView, ShownModallyData, View } from 'tns-core-modules/ui/content-view';
 
-import { ModalWrapperConfig } from './config/modal-wrapper-config';
-import { COMPONENT_PROPS, ModalWrapperConfigHelper } from './config/modal-wrapper-config.helper';
+import { ModalConfig } from './config/modal-config';
+import { COMPONENT_PROPS, ModalConfigHelper } from './config/modal-config.helper';
 import { IModalController } from '../services/modal.controller.interface';
 
 @Component({
@@ -11,7 +11,7 @@ import { IModalController } from '../services/modal.controller.interface';
   styleUrls: ['./modal-wrapper.component.scss'],
 })
 export class ModalWrapperComponent extends ContentView {
-  config: ModalWrapperConfig;
+  config: ModalConfig;
   view: View;
   componentPropsInjector: Injector;
 
@@ -21,7 +21,7 @@ export class ModalWrapperComponent extends ContentView {
     injector: Injector
   ) {
     super();
-    this.config = ModalWrapperConfigHelper.processOptionalValues(this.params.context);
+    this.config = ModalConfigHelper.processOptionalValues(this.params.context);
     this.componentPropsInjector = Injector.create({
       providers: [{ provide: COMPONENT_PROPS, useValue: this.params.context.componentProps }],
       parent: injector,

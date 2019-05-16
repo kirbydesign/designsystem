@@ -1,12 +1,12 @@
 import { ViewContainerRef } from '@angular/core';
 
-import { ModalWrapperConfig } from '../modal-wrapper/config/modal-wrapper-config';
+import { ModalConfig } from '../modal-wrapper/config/modal-config';
 import { ActionSheetConfig } from '../action-sheet/config/action-sheet-config';
 import { AlertConfig } from '../alert/config/alert-config';
 
 export abstract class IModalController {
   abstract showModal(
-    config: ModalWrapperConfig,
+    config: ModalConfig,
     vcRef: ViewContainerRef,
     onCloseModal?: (data?: any) => any
   ): void;

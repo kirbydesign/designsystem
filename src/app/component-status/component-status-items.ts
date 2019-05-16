@@ -56,8 +56,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
       version: 0.5,
       status: ItemCodeStatus.ready,
       cookbookUrl: 'showcase/action-sheet',
-      github:
-        'https://github.com/kirbydesign/designsystem/tree/master/src/kirby/components/action-sheet',
+      github: 'https://github.com/kirbydesign/designsystem/tree/master/src/kirby/components/modal',
       githubIssueNo: 210,
     },
   },
@@ -363,12 +362,17 @@ export const componentStatusItems: ComponentStatusItem[] = [
         title: 'Alert Modal',
         priority: 0,
         ux: {
-          version: 0.0,
-          status: ItemUXStatus.underConsideration,
+          version: 1.0,
+          status: ItemUXStatus.ready,
+          wireFrameUrl: 'https://zpl.io/blD0gze',
         },
         code: {
-          version: 0.0,
-          status: ItemCodeStatus.underConsideration,
+          version: 0.9,
+          status: ItemCodeStatus.ready,
+          cookbookUrl: 'showcase/alert',
+          github:
+            'https://github.com/kirbydesign/designsystem/tree/master/src/kirby/components/modal',
+          githubIssueNo: 189,
         },
       },
     ],
