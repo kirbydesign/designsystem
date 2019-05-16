@@ -17,6 +17,7 @@ import { IconExampleComponent } from './icon-example/icon-example.component';
 import { CheckboxExampleComponent } from './checkbox-example/checkbox-example.component';
 import { SegmentedChipControlExampleComponent } from './segmented-chip-control-example/segmented-chip-control-example.component';
 import { ActionSheetExampleComponent } from './action-sheet-example/action-sheet-example.component';
+import { AlertExampleComponent } from './alert-example/alert-example.component';
 
 export const routes: Routes = [
   {
@@ -70,6 +71,10 @@ export const routes: Routes = [
   {
     path: 'action-sheet',
     component: ActionSheetExampleComponent,
+  },
+  {
+    path: 'alert',
+    component: AlertExampleComponent,
   },
   {
     path: 'segmented-control',

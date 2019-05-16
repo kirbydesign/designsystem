@@ -43,5 +43,11 @@ export class ModalShowcaseComponent {
       defaultValue: '',
       inputValues: ['Component'],
     },
+    {
+      name: 'componentProps',
+      description: 'The data to pass to the modal component.',
+      defaultValue: '',
+      inputValues: ['undefined | { [key: string]: any; }'],
+    },
   ];
 }

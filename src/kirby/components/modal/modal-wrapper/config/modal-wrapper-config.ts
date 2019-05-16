@@ -4,4 +4,5 @@ export interface ModalWrapperConfig {
   closeIconName?: 'close' | 'arrow-back';
   dim?: number;
   component: any;
+  componentProps?: { [key: string]: any };
 }

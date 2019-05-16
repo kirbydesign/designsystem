@@ -12,26 +12,26 @@ Label {
     }
 
     &.primary {
-        color: get-color('kirby-primary');
+        color: get-color('primary');
     }
     
     &.secondary {
-        color: get-color('kirby-secondary');
+        color: get-color('secondary');
     }
     
     &.tertiary {
-        color: get-color('kirby-tertiary');
+        color: get-color('tertiary');
     }
 
     &.warning {
-        color: get-color('kirby-warning');
+        color: get-color('warning');
     }
 
     &.success {
-        color: get-color('kirby-success');
+        color: get-color('success');
     }
 
     &.danger {
-        color: get-color('kirby-danger');
+        color: get-color('danger');
     }
 }   

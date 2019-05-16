@@ -21,6 +21,7 @@ import { IconShowcaseComponent } from './icon-showcase/icon-showcase.component';
 import { CheckboxShowcaseComponent } from './checkbox-showcase/checkbox-showcase.component';
 import { SegmentedChipControlShowcaseComponent } from './segmented-chip-control-showcase/segmented-chip-control-showcase.component';
 import { ActionSheetShowcaseComponent } from './action-sheet-showcase/action-sheet-showcase.component';
+import { AlertShowcaseComponent } from './alert-showcase/alert-showcase.component';
 
 export const routes: Routes = [
   {
@@ -91,6 +92,10 @@ export const routes: Routes = [
       {
         path: 'action-sheet',
         component: ActionSheetShowcaseComponent,
+      },
+      {
+        path: 'alert',
+        component: AlertShowcaseComponent,
       },
       {
         path: 'badge',

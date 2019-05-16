@@ -10,7 +10,7 @@
             </AbsoluteLayout>
         </GridLayout>
         <ScrollView class="content-scrollview">
-            <ng-container *ngComponentOutlet="config.component"></ng-container>
+            <ng-container *ngComponentOutlet="config.component; injector: componentPropsInjector"></ng-container>
         </ScrollView>
     </StackLayout>
 </ModalStack>
