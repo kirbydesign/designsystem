@@ -14,14 +14,7 @@ import { KirbyModule } from '../kirby/kirby.module';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, SideNavComponent, HeaderComponent, IntroComponent],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule,
-    KirbyModule,
-    IonicModule.forRoot(),
-  ],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule, KirbyModule],
 
   providers: [],
   bootstrap: [AppComponent],
