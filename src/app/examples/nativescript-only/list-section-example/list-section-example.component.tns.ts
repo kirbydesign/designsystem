@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { BaseListComponent } from '~/app/examples/list/base-list.component';
+import { BaseListComponent } from '../../list/base-list.component';
 
 @Component({
   selector: 'kirby-list-section-example',
