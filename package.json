@@ -9,7 +9,7 @@
       "version": "5.2.0"
     }
   },
-  "version": "0.0.149",
+  "version": "0.0.150",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -67,6 +67,7 @@
     "@angular/cli": "^7.3.1",
     "@angular/compiler-cli": "^7.2.4",
     "@nativescript/schematics": "^0.5.0",
+    "@netbasal/spectator": "^3.6.1",
     "@types/jasmine": "~2.8.6",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",

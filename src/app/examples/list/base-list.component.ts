@@ -1,6 +1,3 @@
-import { Observable, BehaviorSubject } from 'rxjs';
-import { take } from 'rxjs/operators';
-
 export class BaseListComponent {
   public items: any[] = [
     {

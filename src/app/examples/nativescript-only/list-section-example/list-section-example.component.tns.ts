@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 
-import { BaseListComponent } from '../../base-list.component';
+import { BaseListComponent } from '../../list/base-list.component';
 
 @Component({
+  selector: 'kirby-list-section-example',
   templateUrl: './list-section-example.component.tns.html',
   styleUrls: ['./list-section-example.component.tns.scss'],
 })

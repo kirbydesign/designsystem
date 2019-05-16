@@ -47,7 +47,8 @@
 <kirby-list
   [items]="items"
   (itemSelect)="onItemSelect($event)"
-  [getSectionName]="getSectionName">
+  [getSectionName]="getSectionName"
+  shape="rounded">
   <!-- kirby-list-header is not supported in conjunction with *kirbyListSectionHeader due to a bug in RadListView on iOS -->
   <kirby-list-section-header
     *kirbyListSectionHeader="let section"
@@ -68,7 +69,7 @@
 
 <hr />
 
-<kirby-list [items]="items" (itemSelect)="onItemSelect($event)">
+<kirby-list [items]="items" (itemSelect)="onItemSelect($event)" shape="rounded">
   
   <!-- HEADER-->
   <kirby-list-header *kirbyListHeader>
@@ -106,7 +107,7 @@
 
 <hr />
 
-<kirby-list [items]="items" (itemSelect)="onItemSelect($event)">
+<kirby-list [items]="items" (itemSelect)="onItemSelect($event)" shape="rounded">
   <!-- Cells can also take arbitrary markup (client specific) as cell-lines -->
   <kirby-list-cell *kirbyListCell="let item">
     <section style="flex-direction: row; display: flex;">
