@@ -17,14 +17,14 @@ ul {
     }
 
     &.row {
-      border: 0 solid get-color('kirby-medium');
+      border: 0 solid get-color('medium');
 
       &.divider:not(:last-child) {
         border-bottom-width: 1px;
       }
 
       &.selectable:hover {
-        background-color: get-color('kirby-base-color');
+        background-color: get-color('base-color');
       }
 
       &:last-child {
@@ -42,8 +42,8 @@ ul {
   display: block;
 
   &:not(.has-sections) {
-    background-color: get-color('kirby-contrast-light');
-    border: 1px solid  get-color('kirby-medium');
+    background-color: get-color('contrast-light');
+    border: 1px solid  get-color('medium');
   }
 }
 
@@ -64,10 +64,10 @@ ul {
 
   &.has-sections {
     li.row {
-      background-color: get-color('kirby-contrast-light');
+      background-color: get-color('contrast-light');
 
       &.selectable:hover {
-        background-color: get-color('kirby-base-color');
+        background-color: get-color('base-color');
       }
     }
 
@@ -86,5 +86,5 @@ ul {
 }
 
 .list-header {
-  border-bottom: 1px solid get-color('kirby-medium');
+  border-bottom: 1px solid get-color('medium');
 }

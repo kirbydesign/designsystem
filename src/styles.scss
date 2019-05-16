@@ -44,11 +44,11 @@ $native: false;
 body, html {
   margin: 0;
   padding: 0;
-  background-color: get-color('kirby-contrast-light');
+  background-color: get-color('contrast-light');
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   font-size: font-size("n");
-  color: get-color('kirby-contrast-dark');  
+  color: get-color('contrast-dark');  
 }
 
 *, 

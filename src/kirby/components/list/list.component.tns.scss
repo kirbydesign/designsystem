@@ -10,7 +10,7 @@
 }
 
 .row.divider {
-  border-color: get-color('kirby-medium');
+  border-color: get-color('medium');
   border-bottom-width: 1;
 }
 
@@ -22,7 +22,7 @@
 }
 
 .row {
-  border-color: get-color('kirby-medium');
+  border-color: get-color('medium');
   border-left-width: 1;
   border-right-width: 1;
 
@@ -46,7 +46,7 @@
 }
 
 .list-header.rounded {
-  border-color: get-color('kirby-medium');
+  border-color: get-color('medium');
   border-width: 1;
 
   border-top-left-radius: $border-radius;

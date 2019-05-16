@@ -4,12 +4,12 @@
 // https://ionicframework.com/docs/api/fab-button
 
 ion-fab-button {
-    --box-shadow: 0 10px 20px -10px #{get-color('kirby-primary-shade')};
+    --box-shadow: 0 10px 20px -10px #{get-color('primary-shade')};
     width: 64px;
     height: 64px;    
 
     &.disabled {
-        --background: #{get-color('kirby-medium')};
+        --background: #{get-color('medium')};
         --box-shadow: 0;
     }
 
