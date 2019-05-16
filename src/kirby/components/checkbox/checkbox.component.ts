@@ -38,7 +38,7 @@ export class CheckboxComponent implements OnInit, OnChanges {
     this.checkedChange.emit(this.checked);
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   getThemeColor(name: string) {
     const globalValue = style.global['$kirby-colors'].value[name];
@@ -58,10 +58,10 @@ export class CheckboxComponent implements OnInit, OnChanges {
 
     if (changes.color) {
       this.classes[this.COLOR_INDEX] = color.currentValue;
-      this.nativeColor = this.getThemeColor('kirby-' + changes.color.currentValue);
+      this.nativeColor = this.getThemeColor(changes.color.currentValue);
     } else {
       this.classes[this.COLOR_INDEX] = this.color;
-      this.nativeColor = this.getThemeColor('kirby-primary');
+      this.nativeColor = this.getThemeColor('primary');
     }
   }
 }

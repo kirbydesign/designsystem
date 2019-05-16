@@ -3,7 +3,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CheckboxShowcaseComponent } from './checkbox-showcase.component';
 import { ExamplesModule } from '~/app/examples/examples.module';
-import { HtmlViewerComponent } from '~/app/shared/html-viewer/html-viewer.component';
+import { KirbyModule } from '~/kirby';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('CheckboxShowcaseComponent', () => {
   let component: CheckboxShowcaseComponent;
@@ -11,8 +12,9 @@ describe('CheckboxShowcaseComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ExamplesModule],
-      declarations: [CheckboxShowcaseComponent, HtmlViewerComponent],
+      schemas: [NO_ERRORS_SCHEMA],
+      imports: [ExamplesModule, KirbyModule],
+      declarations: [CheckboxShowcaseComponent],
     }).compileComponents();
   }));
 
