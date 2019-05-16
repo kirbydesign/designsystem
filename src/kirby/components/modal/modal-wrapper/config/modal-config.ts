@@ -1,4 +1,4 @@
-export interface ModalWrapperConfig {
+export interface ModalConfig {
   title: string;
   titleHorizontalAlignment?: 'left' | 'center';
   closeIconName?: 'close' | 'arrow-back';

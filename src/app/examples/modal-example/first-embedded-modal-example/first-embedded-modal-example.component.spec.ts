@@ -3,7 +3,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { KirbyModule } from '../../../../kirby/kirby.module';
 import { FirstEmbeddedModalExampleComponent } from './first-embedded-modal-example.component';
-import { COMPONENT_PROPS } from '~/kirby/components/modal/modal-wrapper/config/modal-wrapper-config.helper';
+import { COMPONENT_PROPS } from '~/kirby/components/modal/modal-wrapper/config/modal-config.helper';
 
 describe('FirstEmbeddedModalExampleComponent', () => {
   let component: FirstEmbeddedModalExampleComponent;
