@@ -33,6 +33,8 @@ import { ModalHelper } from './components/modal/services/modal.helper';
 import { ActionSheetHelper } from './components/modal/services/action-sheet.helper';
 import { ActionSheetComponent } from './components/modal/action-sheet/action-sheet.component';
 import { CustomIconNameDirective } from './components/icon/custom-icon-name.directive';
+import { AlertHelper } from './components/modal/services/alert.helper';
+import { SizeDirective } from './directives/size/size.directive';
 
 export const declarations = [
   CardComponent,
@@ -64,6 +66,7 @@ export const declarations = [
   ChipComponent,
   SegmentedChipControlComponent,
   BadgeComponent,
+  SizeDirective,
 ];
 
 export const providerDeclarations: any[] = [
@@ -72,4 +75,5 @@ export const providerDeclarations: any[] = [
   { provide: IModalController, useExisting: ModalController },
   ActionSheetHelper,
   ModalHelper,
+  AlertHelper,
 ];

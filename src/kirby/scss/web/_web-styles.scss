@@ -1,0 +1,47 @@
+@import "./ionic";
+@import "./../base/typography"; 
+@import "./../themes/colors";
+
+:root { 
+    --kirby-font-family: "Roboto";
+    font-family: var(--kirby-font-family);
+    @each $color, $color-name in $kirby-colors {
+        --kirby-#{$color}: #{$color-name};
+    }
+    
+}
+  
+.kirby-modal {
+    --background: #{get-color('base-color')};
+    --border-radius: 15px;
+    --width: 600px;
+    --height: 300px;
+    --overflow: visible;
+    position: fixed;
+}
+  
+.backdrop-no-scroll {
+    overflow: hidden;
+}
+  
+.kirby-action-sheet {
+    --background: transparent;
+    --width: 100%;
+    --height: 100%;
+  
+    .modal-wrapper {
+        pointer-events: none; //Fix clickable backdrop of modal
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+    }  
+}
+
+.kirby-alert-btn {
+    cursor: pointer;
+    --ion-color-primary: #{get-color(contrast-dark)};
+
+    &.cancel {
+        --ion-color-primary: #{get-color(danger)};
+    }
+}

@@ -12,6 +12,10 @@ showModal() {{ '{' }}
         title: 'Your Modal Title',
         titleHorizontalAlignment: 'center',
         component: YourEmbeddedModalComponent,
+        componentProps: {{ '{' }}
+            prop1: 'value1',
+            prop2: 'value2'
+        {{ '}' }}
     {{ '}' }};
     this.modalController.showModal(config, this.vcRef);
 {{ '}' }}</kirby-code-viewer>
@@ -25,14 +29,24 @@ myCallback(dataReturnedByModal: any) {{ '{' }}
 {{ '}' }}</kirby-code-viewer>
     </p>
     <br />
-    <h3>Inside the nested component:</h3>
-    <p>To create a nested component, ensure:</p>
+    <h3>Inside the embedded component:</h3>
+    <p>To create a embedded component, ensure:</p>
     <ol>
-        <li>the nested component must be declared (module file, or inside your <code>@Component</code> decorator)</li>
-        <li>the nested component must be listed in your <code>entryComponents</code> (module file)</li>
+        <li>the embedded component must be declared (module file, or inside your <code>@Component</code> decorator)</li>
+        <li>the embedded component must be listed in your <code>entryComponents</code> (module file)</li>
     </ol>
+    <br />
+    <em>(Optional)</em><br />
+    <p>To access data passed into the embedded component, inject the COMPONENT_PROPS inside the embedded components constructor:</p>
+    <kirby-code-viewer language="ts">constructor(
+    @Inject(COMPONENT_PROPS) private componentProps,
+    private modalController: ModalController,
+    private vcRef: ViewContainerRef
+) {{ '{' }}
+    this.props = componentProps;
+{{ '}' }}</kirby-code-viewer><br />
     <p>
-        In order to hide a modal from within your nested component (and destroy its component), you can use:
+        In order to hide a modal from within your embedded component (and destroy its component), you can use:
         <kirby-code-viewer language="ts">constructor(private modalController: ModalController) {{ '{}' }}
 this.modalController.hideTopmost();</kirby-code-viewer>
         <br /><br />
@@ -40,7 +54,7 @@ this.modalController.hideTopmost();</kirby-code-viewer>
         You can additionally pass data, which will be available in your callback:
         <kirby-code-viewer language="ts">let returnData = ...;
 this.modalController.hideTopmost(returnData);</kirby-code-viewer>
-        It is possible to nest more modals from within your nested components, <br />
+        It is possible to nest more modals from within your embedded components, <br />
         by using the same services and principles as above.
     </p>
 

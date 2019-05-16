@@ -2,8 +2,8 @@
 
 @each $color, $color-name in $kirby-colors {
   .#{$color} {
-    background-color: var(--#{$color});
-    color: var(--#{$color});
+    background-color: var(--kirby-#{$color});
+    color: var(--kirby-#{$color});
   }
 }
 
@@ -77,8 +77,8 @@
 
 .code-wrapper {
   flex: 1 0 100%;
-  background-color: get-color('kirby-contrast-light');
-  border: 1px solid get-color('kirby-medium');  
+  background-color: get-color('contrast-light');
+  border: 1px solid get-color('medium');  
   padding: size("s");
   overflow-x: auto;
   margin-bottom: size("s");

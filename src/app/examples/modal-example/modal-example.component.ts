@@ -1,6 +1,6 @@
 import { Component, ViewContainerRef } from '@angular/core';
 
-import { ModalWrapperConfig } from '~/kirby/components/modal/modal-wrapper/config/modal-wrapper-config';
+import { ModalConfig } from '~/kirby/components/modal/modal-wrapper/config/modal-config';
 import { ModalController } from '~/kirby/components/modal/services/modal.controller';
 import { FirstEmbeddedModalExampleComponent } from './first-embedded-modal-example/first-embedded-modal-example.component';
 
@@ -12,10 +12,14 @@ export class ModalExampleComponent {
   constructor(private modalController: ModalController, private vcRef: ViewContainerRef) {}
 
   showModal() {
-    const config: ModalWrapperConfig = {
+    const config: ModalConfig = {
       title: 'First Embedded Modal',
       titleHorizontalAlignment: 'center',
       component: FirstEmbeddedModalExampleComponent,
+      componentProps: {
+        prop1: 'value1',
+        prop2: 'value2',
+      },
     };
 
     this.modalController.showModal(config, this.vcRef, this.onModalClose);
