@@ -15,7 +15,7 @@ describe('Pipe: GroupBy', () => {
     expect(result).toEqual(collection);
   });
 
-  it('should section the list correctly', () => {
+  it('should section list by callback function', () => {
     const callback = (item: any) => {
       return item.property;
     };
@@ -42,5 +42,30 @@ describe('Pipe: GroupBy', () => {
       expect(section.items.length).toBe(1);
       expect(section.items[0]).toEqual(collection[index]);
     });
+  });
+
+  it('should order sections by alphabetical order', () => {
+    const callback = (item: any) => {
+      return item.property;
+    };
+    const collection = [
+      {
+        property: 'section 202',
+        dummyValue: 1,
+      },
+      {
+        property: 'section 1',
+        dummyValue: 2,
+      },
+      {
+        property: 'section 44',
+        dummyValue: 3,
+      },
+    ];
+    const pipe = new GroupByPipe();
+    const result = pipe.transform(collection, callback);
+    expect(result[0].name).toEqual('section 1');
+    expect(result[1].name).toEqual('section 202');
+    expect(result[2].name).toEqual('section 44');
   });
 });
