@@ -1,7 +1,7 @@
 import { Injectable, ViewContainerRef } from '@angular/core';
 import { ModalController as IonicModalController } from '@ionic/angular';
 
-import { ModalWrapperConfig } from '../modal-wrapper/config/modal-wrapper-config';
+import { ModalConfig } from '../modal-wrapper/config/modal-config';
 import { ModalWrapperComponent } from '../modal-wrapper/modal-wrapper.component';
 
 @Injectable()
@@ -9,7 +9,7 @@ export class ModalHelper {
   constructor(private ionicModalController: IonicModalController) {}
 
   public async showModalWindow(
-    config: ModalWrapperConfig,
+    config: ModalConfig,
     _vcRef: ViewContainerRef,
     registerModal: (modal: { close: (data?: any) => {} }) => void
   ): Promise<any> {
