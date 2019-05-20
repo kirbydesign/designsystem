@@ -1,5 +1,30 @@
+@import '../../scss/web-imports';
+
 :host {
 	display: flex;
-    align-items: center;
-    justify-content: center;
+  align-items: center;
+  justify-content: center;
+  
+  ion-icon {
+    font-size: size('m');
+  }
+
+  &.sm {
+    ion-icon {
+      font-size: size('m');
+    }
+  }
+
+  &.md {
+    ion-icon {
+      font-size: size('l');
+    }
+  }
+
+  &.lg {
+    ion-icon {
+      font-size: size('xxxl');
+    }
+  }
+
 }

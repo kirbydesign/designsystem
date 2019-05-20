@@ -1,15 +1,26 @@
 @import '../../scss/native-imports';
  
-Label {
+.sm {
+  > .kirby-icon {
+    font-size: size('m');
+  }
+}
+
+.md {
+  > .kirby-icon {
+    font-size: size('l');
+  }
+}
+
+.lg {
+  > .kirby-icon {
+    font-size: size('xxxl');
+  }
+}
+
+.kirby-icon {
     font-family: "Ionicons", "ionicons";
-
-    &.small {
-        font-size: 16px;
-    }
-
-    &.large {
-        font-size: 32px;
-    }
+    font-size: size('m'); //default to size 'sm'
 
     &.primary {
         color: get-color('primary');

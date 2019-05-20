@@ -30,8 +30,8 @@ export class IconShowcaseComponent {
     {
       name: 'size',
       description: 'Determines size of the icon.',
-      defaultValue: 'small',
-      inputValues: ['small', 'large'],
+      defaultValue: 'sm',
+      inputValues: ['sm', 'md', 'lg'],
     },
     {
       name: 'colortype',
