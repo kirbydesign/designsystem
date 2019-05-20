@@ -6,10 +6,6 @@ declare var require: any;
   templateUrl: './checkbox-showcase.component.html',
   styleUrls: ['./checkbox-showcase.component.scss'],
 })
-export class CheckboxShowcaseComponent implements OnInit {
+export class CheckboxShowcaseComponent {
   exampleHtml: string = require('../../examples/checkbox-example/checkbox-example.component.html');
-
-  constructor() {}
-
-  ngOnInit() {}
 }
