@@ -31,24 +31,6 @@ describe('IconComponent', () => {
     });
   });
 
-  describe('size', () => {
-    it('should set size to small by default', () => {
-      expect(component.size).toBe('small');
-    });
-
-    it('should be rendered as small by default', () => {
-      var el = fixture.debugElement.query(By.directive(ionic.IonIcon));
-      expect(el.componentInstance.size).toBe('small');
-    });
-
-    it('should be rendered as large when size is set to large', () => {
-      component.size = 'large';
-      fixture.detectChanges();
-      var el = fixture.debugElement.query(By.directive(ionic.IonIcon));
-      expect(el.componentInstance.size).toBe('large');
-    });
-  });
-
   describe('color', () => {
     it('should set icon color to undefined by default', () => {
       expect(component.colortype).toBeUndefined();
