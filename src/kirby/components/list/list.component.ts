@@ -20,7 +20,7 @@ import {
 } from './list.directive';
 import { LoadOnDemandEvent, LoadOnDemandEventData } from './list.event';
 import { ListHelper } from './helpers/list-helper';
-import { GroupByPipe } from '~/kirby/components/list/pipes/group-by.pipe';
+import { GroupByPipe } from './pipes/group-by.pipe';
 
 export type ListShape = 'square' | 'rounded';
 

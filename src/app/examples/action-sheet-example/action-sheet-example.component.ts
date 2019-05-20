@@ -1,8 +1,8 @@
 import { Component, ViewContainerRef } from '@angular/core';
 
-import { ModalController } from '~/kirby/components/modal/services/modal.controller';
-import { ActionSheetConfig } from '~/kirby/components/modal/action-sheet/config/action-sheet-config';
-import { ActionSheetItem } from '~/kirby/components/modal/action-sheet/config/action-sheet-item';
+import { ModalController } from '@kirbydesign/designsystem/modal';
+import { ActionSheetConfig } from '@kirbydesign/designsystem/modal';
+import { ActionSheetItem } from '@kirbydesign/designsystem/modal';
 
 @Component({
   selector: 'kirby-action-sheet-example',

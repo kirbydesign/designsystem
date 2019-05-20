@@ -1,7 +1,7 @@
 import { Component, ViewContainerRef } from '@angular/core';
 
-import { ModalConfig } from '~/kirby/modal';
-import { ModalController } from '~/kirby/modal';
+import { ModalConfig } from '@kirbydesign/designsystem/modal';
+import { ModalController } from '@kirbydesign/designsystem/modal';
 import { FirstEmbeddedModalExampleComponent } from './first-embedded-modal-example/first-embedded-modal-example.component';
 
 @Component({
