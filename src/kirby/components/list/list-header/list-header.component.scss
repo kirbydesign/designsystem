@@ -1,6 +1,6 @@
 @import '../../../scss/web-imports';
 :host {
-  background-color: get-color('contrast-light');
+  background-color: transparent;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

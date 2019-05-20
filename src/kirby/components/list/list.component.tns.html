@@ -6,10 +6,14 @@
     (loadMoreDataRequested)="onLoadOnDemand($event)"
     [groupingFunction]="getSectionName"
     [items]="items"
+    #list
   >
     <!-- ITEM -->
     <ng-template tkListItemTemplate let-item="item">
-      <FlexboxLayout class="row" [ngClass]="{'divider': showDivider}" (tap)="onItemSelect(item)">
+      <FlexboxLayout class="row"
+                     [class.divider]="showDivider"
+                     [ngClass]="getCssClasses(item)"
+                     (tap)="onItemSelect(item)">
         <ng-container
           *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }">
         </ng-container>
@@ -35,14 +39,14 @@
 
     <!-- HEADER -->
     <ng-template tkListViewHeader *ngIf="listHeaderTemplate">
-      <FlexboxLayout class="row">
+      <FlexboxLayout class="list-header" [class.rounded]="shape === 'rounded'">
         <ng-container *ngTemplateOutlet="listHeaderTemplate"></ng-container>
       </FlexboxLayout>
     </ng-template>
 
     <!-- FOOTER -->
     <ng-template tkListViewFooter *ngIf="!isLoadOnDemandEnabled && noMoreItemsText">
-      <Label class="lastRow" text="{{noMoreItemsText}}"></Label>
+      <Label class="footer" text="{{noMoreItemsText}}"></Label>
     </ng-template>
 
   </RadListView>

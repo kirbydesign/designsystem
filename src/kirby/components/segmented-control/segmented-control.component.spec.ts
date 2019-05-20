@@ -1,10 +1,22 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
+import { Component, EventEmitter, NO_ERRORS_SCHEMA, Output } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
 import { SegmentedControlComponent } from './segmented-control.component';
 import { SegmentItem } from './segment-item';
 import { BadgeComponent } from '../badge/badge.component';
+
+// We were attempting to manipulate the shadow dom of IonSegmentButton to write a test
+// that failed gloriously when changing unrelated code... creating a "good 'ol" Angular stub instead
+@Component({
+  // tslint:disable-next-line:component-selector
+  selector: 'ion-segment-button',
+  template: '',
+})
+class MockIonSegmentButtonComponent {
+  @Output()
+  ionSelect: EventEmitter<any> = new EventEmitter();
+}
 
 describe('SegmentedControlComponent', () => {
   let component: SegmentedControlComponent;
@@ -28,8 +40,8 @@ describe('SegmentedControlComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [IonicModule.forRoot()],
-      declarations: [SegmentedControlComponent, BadgeComponent],
+      schemas: [NO_ERRORS_SCHEMA],
+      declarations: [SegmentedControlComponent, BadgeComponent, MockIonSegmentButtonComponent],
     }).compileComponents();
   }));
 
@@ -48,18 +60,12 @@ describe('SegmentedControlComponent', () => {
     expect(fixture.nativeElement.querySelectorAll('ion-segment-button').length).toBe(2);
   });
 
-  it('should call onSegmentClick when clicking a segment button', (done) => {
+  it('should call onSegmentClick when clicking a segment button', () => {
     spyOn(component, 'onSegmentClick');
     const segmentBtn = fixture.debugElement.query(By.css('ion-segment-button'));
-    segmentBtn.nativeElement.componentOnReady().then(() => {
-      // Wait for Ionic's shadowRoot to be available:
-      setTimeout(() => {
-        segmentBtn.nativeElement.shadowRoot.querySelector('button').click();
-        fixture.detectChanges();
-        expect(component.onSegmentClick).toHaveBeenCalled();
-        done();
-      }, 100);
-    });
+    const button = segmentBtn.componentInstance as MockIonSegmentButtonComponent;
+    button.ionSelect.emit();
+    expect(component.onSegmentClick).toHaveBeenCalled();
   });
 
   it('should set activeSegment to second segmentItem', () => {
