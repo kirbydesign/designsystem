@@ -12,7 +12,6 @@ export {
 export { SegmentItem } from './components/segmented-control/segment-item';
 export { BadgeComponent } from './components/badge/badge.component';
 export { COMPONENT_PROPS } from './components/modal/modal-wrapper/config/modal-config.helper';
-
 export { CustomIconSettings, CUSTOM_FONT_SETTINGS } from './components/icon/custom-icon-settings';
 export { GridCardConfiguration } from './components/grid/grid-card-configuration';
 export {
