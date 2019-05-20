@@ -18,25 +18,25 @@
 }
 
 .tertiary {
-  --checkmark-color:  #{get-color('tertiary-contrast')};
-  --background-checked:  #{get-color('tertiary')};
-  --border-color-checked:  #{get-color('tertiary')};
+  --checkmark-color: #{get-color('tertiary-contrast')};
+  --background-checked: #{get-color('tertiary')};
+  --border-color-checked: #{get-color('tertiary')};
 }
 
 .warning {
-  --checkmark-color:  #{get-color('warning-contrast')};
-  --background-checked:  #{get-color('warning')};
-  --border-color-checked:  #{get-color('warning')};
+  --checkmark-color: #{get-color('warning-contrast')};
+  --background-checked: #{get-color('warning')};
+  --border-color-checked: #{get-color('warning')};
 }
 
 .success {
-  --checkmark-color:  #{get-color('success-contrast')};
-  --background-checked:  #{get-color('success')};
-  --border-color-checked:  #{get-color('success')};
+  --checkmark-color: #{get-color('success-contrast')};
+  --background-checked: #{get-color('success')};
+  --border-color-checked: #{get-color('success')};
 }
 
 .danger {
-  --checkmark-color:  #{get-color('danger-contrast')};
-  --background-checked:  #{get-color('danger')};
-  --border-color-checked:  #{get-color('danger')};
+  --checkmark-color: #{get-color('danger-contrast')};
+  --background-checked: #{get-color('danger')};
+  --border-color-checked: #{get-color('danger')};
 }
