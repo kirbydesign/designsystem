@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CheckboxExampleComponent } from './checkbox-example.component';
-import { KirbyModule } from '~/kirby';
+import { KirbyModule } from '@kirbydesign/designsystem';
 
 describe('CheckboxExampleComponent', () => {
   let component: CheckboxExampleComponent;
