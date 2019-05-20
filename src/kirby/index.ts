@@ -19,6 +19,5 @@ export {
   SegmentedChipControlComponent,
 } from './components/segment/segmented-chip-control/segmented-chip-control.component';
 export { ChipComponent } from './components/chip/chip.component';
-export { ModalController } from './components/modal/services/modal.controller';
-export { ModalConfig } from './components/modal/modal-wrapper/config/modal-config';
+export * from './modal';
 export { LoadOnDemandEvent } from './components/list/list.event';
