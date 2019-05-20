@@ -222,8 +222,8 @@ export const componentStatusItems: ComponentStatusItem[] = [
     },
     code: {
       version: 0.5,
-      status: ItemCodeStatus.inProgress,
-      githubIssueNo: 203,
+      status: ItemCodeStatus.ready,
+      cookbookUrl: 'showcase/checkbox',
     },
   },
   {
