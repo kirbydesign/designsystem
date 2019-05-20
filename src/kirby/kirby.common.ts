@@ -22,6 +22,7 @@ import { ListHeaderComponent } from './components/list/list-header/list-header.c
 import { ListCellComponent } from './components/list/list-cell/list-cell.component';
 import { ListCellLineComponent } from './components/list/list-cell-line/list-cell-line.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
+import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { ModalWrapperComponent } from './components/modal/modal-wrapper/modal-wrapper.component';
 import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
 import { ChipComponent } from './components/chip/chip.component';
@@ -60,6 +61,7 @@ export const declarations = [
   AvatarComponent,
   GroupByPipe,
   SpinnerComponent,
+  CheckboxComponent,
   ModalWrapperComponent,
   ActionSheetComponent,
   SegmentedControlComponent,
