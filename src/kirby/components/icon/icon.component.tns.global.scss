@@ -1,21 +1,15 @@
 @import '../../scss/native-imports';
  
-.sm {
-  > .kirby-icon {
-    font-size: size('m');
-  }
+.sm .kirby-icon {
+  font-size: size('m');
 }
 
-.md {
-  > .kirby-icon {
-    font-size: size('l');
-  }
+.md .kirby-icon {
+  font-size: size('l');
 }
 
-.lg {
-  > .kirby-icon {
-    font-size: size('xxxl');
-  }
+.lg .kirby-icon {
+  font-size: size('xxxl');
 }
 
 .kirby-icon {
