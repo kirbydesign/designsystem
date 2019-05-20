@@ -19,5 +19,4 @@ export {
   SegmentedChipControlComponent,
 } from './components/segment/segmented-chip-control/segmented-chip-control.component';
 export { ChipComponent } from './components/chip/chip.component';
-export * from './modal';
 export { LoadOnDemandEvent } from './components/list/list.event';
