@@ -2,41 +2,41 @@
 @import '../../scss/web-imports';
 
 .checkbox {
-  --border-color: #{get-color('kirby-primary-contrast')};
+  --border-color: #{get-color('primary-contrast')};
 }
 
 .primary {
-  --checkmark-color: #{get-color('kirby-primary-contrast')};
-  --background-checked: #{get-color('kirby-primary')};
-  --border-color-checked: #{get-color('kirby-primary')};
+  --checkmark-color: #{get-color('primary-contrast')};
+  --background-checked: #{get-color('primary')};
+  --border-color-checked: #{get-color('primary')};
 }
 
 .secondary {
-  --checkmark-color: #{get-color('kirby-secondary-contrast')};
-  --background-checked: #{get-color('kirby-secondary')};
-  --border-color-checked: #{get-color('kirby-secondary')};
+  --checkmark-color: #{get-color('secondary-contrast')};
+  --background-checked: #{get-color('secondary')};
+  --border-color-checked: #{get-color('secondary')};
 }
 
 .tertiary {
-  --checkmark-color:  #{get-color('kirby-tertiary-contrast')};
-  --background-checked:  #{get-color('kirby-tertiary')};
-  --border-color-checked:  #{get-color('kirby-tertiary')};
+  --checkmark-color:  #{get-color('tertiary-contrast')};
+  --background-checked:  #{get-color('tertiary')};
+  --border-color-checked:  #{get-color('tertiary')};
 }
 
 .warning {
-  --checkmark-color:  #{get-color('kirby-warning-contrast')};
-  --background-checked:  #{get-color('kirby-warning')};
-  --border-color-checked:  #{get-color('kirby-warning')};
+  --checkmark-color:  #{get-color('warning-contrast')};
+  --background-checked:  #{get-color('warning')};
+  --border-color-checked:  #{get-color('warning')};
 }
 
 .success {
-  --checkmark-color:  #{get-color('kirby-success-contrast')};
-  --background-checked:  #{get-color('kirby-success')};
-  --border-color-checked:  #{get-color('kirby-success')};
+  --checkmark-color:  #{get-color('success-contrast')};
+  --background-checked:  #{get-color('success')};
+  --border-color-checked:  #{get-color('success')};
 }
 
 .danger {
-  --checkmark-color:  #{get-color('kirby-danger-contrast')};
-  --background-checked:  #{get-color('kirby-danger')};
-  --border-color-checked:  #{get-color('kirby-danger')};
+  --checkmark-color:  #{get-color('danger-contrast')};
+  --background-checked:  #{get-color('danger')};
+  --border-color-checked:  #{get-color('danger')};
 }
