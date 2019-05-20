@@ -19,23 +19,11 @@ describe('CheckboxComponent', () => {
     declarations: [MockComponent(ionic.IonCheckbox)],
   });
 
-  // beforeEach(async(() => {
-  //   TestBed.configureTestingModule({
-  //     declarations: [CheckboxComponent, MockComponent(ionic.IonCheckbox)],
-  //   }).compileComponents();
-  // }));
-
   beforeEach(() => {
     spectator = createHost({ checked, shape, color });
-    // fixture = TestBed.createComponent(CheckboxComponent);
-    // component = fixture.componentInstance;
   });
 
   it('should create', () => {
-    // component.shape = 'square';
-    // component.ngOnChanges({
-    //   shape: new SimpleChange(null, component.shape, true),
-    // });
     expect(spectator.component).toBeTruthy();
   });
 
