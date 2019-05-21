@@ -12,7 +12,7 @@
     .fab {
       @include fab-size($fab-size);
       background-color: get-color('primary');
-      border-radius: 32;
+      border-radius: $fab-size;
       text-align: center;
       vertical-align: middle;
 
