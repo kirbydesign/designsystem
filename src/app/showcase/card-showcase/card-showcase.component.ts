@@ -6,6 +6,7 @@ declare var require: any;
 @Component({
   selector: 'kirby-card-showcase',
   templateUrl: './card-showcase.component.html',
+  styleUrls: ['./card-showcase.component.scss'],
 })
 export class CardShowcaseComponent {
   exampleHtml: string = require('../../examples/card-example/card-example.component.html');
