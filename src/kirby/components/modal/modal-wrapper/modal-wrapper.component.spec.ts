@@ -9,7 +9,7 @@ import { IconComponent } from '../../icon/icon.component';
 import { ModalWrapperComponent } from './modal-wrapper.component';
 import { IModalController } from '../services/modal.controller.interface';
 
-fdescribe('ModalWrapperComponent', () => {
+describe('ModalWrapperComponent', () => {
   let component: ModalWrapperComponent;
   let fixture: ComponentFixture<ModalWrapperComponent>;
 
@@ -66,22 +66,14 @@ fdescribe('ModalWrapperComponent', () => {
       expect(title.classList).toContain('text-left');
     });
 
-    it('should be aligned left when config.closeBtnPlacement is set to inside (default)', () => {
+    it('should be aligned left by default', () => {
       const rootElement: HTMLElement = fixture.debugElement.nativeElement;
       const title = rootElement.querySelector('span');
       expect(title.classList).toContain('text-left');
     });
 
-    it('should be aligned in the center when config.closeBtnPlacement is set to outside', () => {
-      component.config.closeBtnPlacement = 'outside';
-      fixture.detectChanges();
-      const rootElement: HTMLElement = fixture.debugElement.nativeElement;
-      const title = rootElement.querySelector('span');
-      expect(title.classList).toContain('text-center');
-    });
-
-    it('should be aligned in the center when config.closeBtnPlacement is set to hidden', () => {
-      component.config.closeBtnPlacement = 'hidden';
+    it('should be centered when config.titleHorizontalAlignment is set to center', () => {
+      component.config.titleHorizontalAlignment = 'center';
       fixture.detectChanges();
       const rootElement: HTMLElement = fixture.debugElement.nativeElement;
       const title = rootElement.querySelector('span');

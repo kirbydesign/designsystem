@@ -1,7 +1,7 @@
 <div class="modal-wrapper" #modalWrapper tabindex="-1" (window:focus)="onFocusChange()" (window:focusout)="onFocusChange()">
     <div class="modal-header">
         <div class="title-container">
-            <span class="text-{{config.closeBtnPlacement === 'inside' ? 'left' : 'center'}} title">{{ config.title }}</span>
+            <span class="text-{{config.titleHorizontalAlignment}} title">{{ config.title }}</span>
         </div>
         <kirby-floating-action-button *ngIf="config.closeBtnPlacement !== 'hidden'" role="button"
                 class="close-btn {{ config.closeBtnPlacement }}"

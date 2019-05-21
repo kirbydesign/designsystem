@@ -7,7 +7,7 @@
     <StackLayout class="modal" orientation="vertical" verticalAlignment="bottom">
         <GridLayout rows="auto, *" columns="*, auto" class="title-bar">
 
-            <Label class="title" row="0" col="0" verticalAlignment="center" horizontalAlignment="{{ config.closeBtnPlacement === 'inside' ? 'left' : 'center' }}" textWrap="true"
+            <Label class="title" row="0" col="0" verticalAlignment="center" horizontalAlignment="{{ config.titleHorizontalAlignment }}" textWrap="true"
                     text="{{ config.title }}"></Label>
             
             <kirby-floating-action-button *ngIf="config.closeBtnPlacement === 'inside'" [showShadow]="false" (tap)="onModalDismiss()" row="0" col="1">
