@@ -1,6 +1,6 @@
 import { Input, HostBinding, Directive } from '@angular/core';
 
-import { ColorType } from './../../helpers/color-type';
+import { ThemeColor } from '../../helpers/theme-color.type';
 
 @Directive({
   // tslint:disable-next-line:directive-selector
@@ -25,7 +25,7 @@ export class ThemeColorDirective {
   private isMedium: boolean;
   @HostBinding('class.dark')
   private isDark: boolean;
-  @Input() set themeColor(value: ColorType) {
+  @Input() set themeColor(value: ThemeColor) {
     this.isPrimary = value === 'primary';
     this.isSecondary = value === 'secondary';
     this.isTertiary = value === 'tertiary';
