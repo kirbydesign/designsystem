@@ -1,3 +1,5 @@
+import { CustomIconSettings, CUSTOM_FONT_SETTINGS } from '@kirbydesign/designsystem';
+
 import { AvatarExampleComponent } from './avatar-example/avatar-example.component';
 import { ButtonExampleComponent } from './button-example/button-example.component';
 import { FloatingActionButtonExampleComponent } from './floating-action-button-example/floating-action-button-example.component';
@@ -18,10 +20,6 @@ import { IconExampleComponent } from './icon-example/icon-example.component';
 import { CheckboxExampleComponent } from './checkbox-example/checkbox-example.component';
 import { SegmentedChipControlExampleComponent } from './segmented-chip-control-example/segmented-chip-control-example.component';
 import { ActionSheetExampleComponent } from './action-sheet-example/action-sheet-example.component';
-import {
-  CUSTOM_FONT_SETTINGS,
-  CustomIconSettings,
-} from '~/kirby/components/icon/custom-icon-settings';
 import { AlertExampleComponent } from './alert-example/alert-example.component';
 
 export const customIconSettings: CustomIconSettings = {
