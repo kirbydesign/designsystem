@@ -25,7 +25,7 @@ Button[kirby-button] {
     height: size('xxl');
   }
   
-  &[colortype='secondary'] {
+  &.secondary {
     color: get-color('contrast-dark');
     background-color: get-color('contrast-light');
     border-color: get-color('contrast-light');
