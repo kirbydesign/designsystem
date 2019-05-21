@@ -1,16 +1,22 @@
 <ModalStack class="modal-wrapper" dismissEnabled="true" (showingModally)="onShowingModally($event)">
+    <AbsoluteLayout *ngIf="config.closeBtnPlacement === 'outside'" class="close-btn-outside" horizontalAlignment="right">
+        <kirby-floating-action-button class="close-btn" [showShadow]="false" (tap)="onModalDismiss()">
+            <kirby-icon [name]="config.closeIconName"></kirby-icon>
+        </kirby-floating-action-button>
+    </AbsoluteLayout>
     <StackLayout class="modal" orientation="vertical" verticalAlignment="bottom">
-        <GridLayout rows="auto" columns="*" class="title-bar">
-            <Label row="0" verticalAlignment="center" horizontalAlignment="{{ config.closeBtnPlacement === 'inside' ? 'left' : 'center' }}" textWrap="true"
-                text="{{ config.title }}"></Label>
-            <AbsoluteLayout row="0" verticalAlignment="center" horizontalAlignment="right">
-                <kirby-floating-action-button [showShadow]="false" (tap)="onModalDismiss()">
-                    <kirby-icon [name]="config.closeIconName"></kirby-icon>
-                </kirby-floating-action-button>
-            </AbsoluteLayout>
+        <GridLayout rows="auto, *" columns="*, auto" class="title-bar">
+
+            <Label class="title" row="0" col="0" verticalAlignment="center" horizontalAlignment="{{ config.closeBtnPlacement === 'inside' ? 'left' : 'center' }}" textWrap="true"
+                    text="{{ config.title }}"></Label>
+            
+            <kirby-floating-action-button *ngIf="config.closeBtnPlacement === 'inside'" [showShadow]="false" (tap)="onModalDismiss()" row="0" col="1">
+                <kirby-icon [name]="config.closeIconName"></kirby-icon>
+            </kirby-floating-action-button>
+            
+            <ScrollView height="100%" width="100%" row="1" colSpan="2">
+                <ng-container *ngComponentOutlet="config.component; injector: componentPropsInjector"></ng-container>
+            </ScrollView>
         </GridLayout>
-        <ScrollView class="content-scrollview">
-            <ng-container *ngComponentOutlet="config.component; injector: componentPropsInjector"></ng-container>
-        </ScrollView>
     </StackLayout>
 </ModalStack>
