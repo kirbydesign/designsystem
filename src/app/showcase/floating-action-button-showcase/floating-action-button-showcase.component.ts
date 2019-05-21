@@ -24,5 +24,11 @@ export class FloatingActionButtonShowcaseComponent {
       defaultValue: 'false',
       inputValues: ['boolean'],
     },
+    {
+      name: 'size',
+      description: 'The size of the button.',
+      defaultValue: 'sm',
+      inputValues: ['sm', 'md', 'lg'],
+    },
   ];
 }

@@ -3,10 +3,25 @@
 // Ionic fab can be customized by using the css properties listed in the CSS Custom Properties section of the below docs page:
 // https://ionicframework.com/docs/api/fab-button
 
+@mixin fab-size($fab-size) {
+    width: #{$fab-size}px;
+    height: #{$fab-size}px;
+}
+
 ion-fab-button {
     --box-shadow: 0 10px 20px -10px #{get-color('primary-shade')};
-    width: 64px;
-    height: 64px;    
+    
+    &.small {
+        @include fab-size(size('xl'));
+    }
+    
+    &.medium {
+        @include fab-size(size('xxl'));
+    }
+
+    &.large {
+        @include fab-size(size('xxxl'));
+    }
 
     &.disabled {
         --background: #{get-color('medium')};

@@ -1,25 +1,39 @@
 @import '../../scss/native-imports';
 
-.fab {
-    background-color: get-color('primary');
-    border-radius: 32;
-    width: 64;
-    height: 64;
-    text-align: center;
-    vertical-align: middle;
+@mixin fab-size($fab-size) {
+  width: #{$fab-size};
+  height: #{$fab-size};
+}
 
-    &.disabled {
+@mixin fab-wrapper($fab-size) {
+  @include fab-size($fab-size * (3/2));
+  .fab-shadow {
+    @include fab-size($fab-size);
+    .fab {
+      @include fab-size($fab-size);
+      background-color: get-color('primary');
+      border-radius: 32;
+      text-align: center;
+      vertical-align: middle;
+
+      &.disabled {
         opacity: 0.6;
         background-color: get-color('medium');
+      }
     }
-}
-  
-.fab-shadow {
-    width:64;
-    height:64;
+  }
 }
 
 .fab-wrapper {
-    width:96;
-    height:96;
+  &.small {
+    @include fab-wrapper(size('xl'));
+  }
+
+  &.medium {
+    @include fab-wrapper(size('xxl'));
+  }
+
+  &.large {
+    @include fab-wrapper(size('xxxl'));
+  }
 }

@@ -25,6 +25,19 @@ describe('FloatingActionButtonComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  describe('size', () => {
+    it('should be small by default', () => {
+      expect(component.size).toEqual('sm');
+    });
+
+    it('should render medium fab when size property has changed', () => {
+      component.size = 'md';
+      fixture.detectChanges();
+      const rootElement: HTMLElement = fixture.debugElement.nativeElement;
+      expect(rootElement.innerHTML).toContain('md');
+    });
+  });
+
   describe('shadows', () => {
     it('should have a shadow by default', () => {
       expect(component.showShadow).toBeTruthy();

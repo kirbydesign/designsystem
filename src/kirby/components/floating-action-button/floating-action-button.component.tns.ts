@@ -22,6 +22,7 @@ export class FloatingActionButtonComponent extends ContentView {
   // TODO: showShadow should become an "elevation" enum in the future;
   @Input() showShadow?: boolean = true;
   @Input() disabled?: boolean = false;
+  @Input() size?: 'sm' | 'md' | 'lg' = 'sm';
 
   view: View;
 
@@ -48,7 +49,7 @@ export class FloatingActionButtonComponent extends ContentView {
       return;
     }
 
-    const shadowColor = this.getThemeColor('kirby-primary-shade');
+    const shadowColor = this.getThemeColor('primary-shade');
 
     if (this.view.android) {
       let nativeView = this.view.android;
