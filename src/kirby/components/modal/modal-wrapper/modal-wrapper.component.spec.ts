@@ -56,30 +56,44 @@ describe('ModalWrapperComponent', () => {
   });
 
   describe('title', () => {
-    it('should have a default horizontal alignment value of center', () => {
-      expect(component.config.titleHorizontalAlignment).toEqual('center');
-    });
-
     it('should render', () => {
       expect(component.config.title).toEqual('Test title');
     });
 
-    it('should be aligned in the center by default', () => {
+    it('should be aligned left by default', () => {
       const rootElement: HTMLElement = fixture.debugElement.nativeElement;
-      const title = rootElement.querySelector('h2');
-      expect(title.classList).toContain('text-center');
+      const title = rootElement.querySelector('span');
+      expect(title.classList).toContain('text-left');
     });
 
-    it('should be aligned left when config.titleHorizontalAlignment is set to left', () => {
-      component.config.titleHorizontalAlignment = 'left';
+    it('should be aligned left when config.closeBtnPlacement is set to inside (default)', () => {
+      const rootElement: HTMLElement = fixture.debugElement.nativeElement;
+      const title = rootElement.querySelector('span');
+      expect(title.classList).toContain('text-left');
+    });
+
+    it('should be aligned in the center when config.closeBtnPlacement is set to outside', () => {
+      component.config.closeBtnPlacement = 'outside';
       fixture.detectChanges();
       const rootElement: HTMLElement = fixture.debugElement.nativeElement;
-      const title = rootElement.querySelector('h2');
-      expect(title.classList).toContain('text-left');
+      const title = rootElement.querySelector('span');
+      expect(title.classList).toContain('text-center');
     });
   });
 
-  describe('dismiss icon', () => {
+  describe('close button', () => {
+    it('should be placed inside by default', () => {
+      expect(component.config.closeBtnPlacement).toEqual('inside');
+    });
+
+    it('should be placed outside when config.closeBtnPlacement is set to outside', () => {
+      component.config.closeBtnPlacement = 'outside';
+      fixture.detectChanges();
+      const rootElement: HTMLElement = fixture.debugElement.nativeElement;
+      const button = rootElement.querySelector('.close-btn');
+      expect(button.classList).toContain('outside');
+    });
+
     it('should have a default value of close', () => {
       expect(component.config.closeIconName).toEqual('close');
     });

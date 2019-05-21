@@ -1,7 +1,7 @@
 <ModalStack class="modal-wrapper" dismissEnabled="true" (showingModally)="onShowingModally($event)">
     <StackLayout class="modal" orientation="vertical" verticalAlignment="bottom">
         <GridLayout rows="auto" columns="*" class="title-bar">
-            <Label row="0" verticalAlignment="center" horizontalAlignment="{{ config.titleHorizontalAlignment }}"
+            <Label row="0" verticalAlignment="center" horizontalAlignment="{{ config.closeBtnPlacement === 'inside' ? 'left' : 'center' }}" textWrap="true"
                 text="{{ config.title }}"></Label>
             <AbsoluteLayout row="0" verticalAlignment="center" horizontalAlignment="right">
                 <kirby-floating-action-button [showShadow]="false" (tap)="onModalDismiss()">

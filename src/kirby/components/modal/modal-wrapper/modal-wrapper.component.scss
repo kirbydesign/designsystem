@@ -6,27 +6,38 @@
   display: flex;
   flex-flow: column;
   height: 100%;
-  padding: 5px;
-
-  .dismiss-button {
-    position: fixed;
-    top: -70px;
-    right: 5px;
-  }
 
   .modal-header {
-    flex: 0 1 50px;
+    display: flex;
+    justify-content: flex-end;
+    padding: size('s');
+    
+    .title-container {
+      width: 100%;
+      display: inline-table;
 
-    .title {
-      padding-top: 10px;
+      .title {
+        height: 40px;
+        vertical-align: middle;
+        display: table-cell;
+        font-weight: font-weight("bold");
+      }
+      
+      .text-left {
+        text-align: left;
+      }
+  
+      .text-center {
+        text-align: center;
+      }
     }
 
-    .text-left {
-      text-align: left;
-    }
-
-    .text-center {
-      text-align: center;
+    .close-btn {
+      &.outside {
+        position: absolute;
+        top: -#{size('s')};
+        transform: translateY(-100%);
+      }
     }
   }
 
@@ -34,5 +45,7 @@
     flex: 1 1 auto;
     height: 100%;
     overflow: scroll;
+    padding-left: size('s');
+    padding-right: size('s');
   }
 }

@@ -19,10 +19,11 @@ export class ModalShowcaseComponent {
       inputValues: ['string'],
     },
     {
-      name: 'titleHorizontalAlignment',
-      description: 'The horizontal alignment of the title',
-      defaultValue: 'center',
-      inputValues: ['left', 'center'],
+      name: 'closeBtnPlacement',
+      description:
+        'The placement of the close modal button, in relation to the modal. If the button is placed outside, the title will be centered, otherwise it will be aligned to the left.',
+      defaultValue: 'inside',
+      inputValues: ['inside', 'outside'],
     },
     {
       name: 'closeIcon',

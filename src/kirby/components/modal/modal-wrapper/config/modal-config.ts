@@ -1,6 +1,6 @@
 export interface ModalConfig {
   title: string;
-  titleHorizontalAlignment?: 'left' | 'center';
+  closeBtnPlacement?: 'inside' | 'outside';
   closeIconName?: 'close' | 'arrow-back';
   dim?: number;
   component: any;
