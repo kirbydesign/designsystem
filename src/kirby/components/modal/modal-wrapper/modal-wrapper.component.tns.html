@@ -1,6 +1,6 @@
 <ModalStack class="modal-wrapper" dismissEnabled="true" (showingModally)="onShowingModally($event)">
-    <AbsoluteLayout *ngIf="config.closeBtnPlacement === 'outside'" class="close-btn-outside" horizontalAlignment="right">
-        <kirby-floating-action-button class="close-btn" [showShadow]="false" (tap)="onModalDismiss()">
+    <AbsoluteLayout *ngIf="config.closeBtnPlacement === 'outside'" horizontalAlignment="right">
+        <kirby-floating-action-button [showShadow]="false" (tap)="onModalDismiss()">
             <kirby-icon [name]="config.closeIconName"></kirby-icon>
         </kirby-floating-action-button>
     </AbsoluteLayout>

@@ -9,7 +9,7 @@ import { IconComponent } from '../../icon/icon.component';
 import { ModalWrapperComponent } from './modal-wrapper.component';
 import { IModalController } from '../services/modal.controller.interface';
 
-describe('ModalWrapperComponent', () => {
+fdescribe('ModalWrapperComponent', () => {
   let component: ModalWrapperComponent;
   let fixture: ComponentFixture<ModalWrapperComponent>;
 
@@ -79,6 +79,14 @@ describe('ModalWrapperComponent', () => {
       const title = rootElement.querySelector('span');
       expect(title.classList).toContain('text-center');
     });
+
+    it('should be aligned in the center when config.closeBtnPlacement is set to hidden', () => {
+      component.config.closeBtnPlacement = 'hidden';
+      fixture.detectChanges();
+      const rootElement: HTMLElement = fixture.debugElement.nativeElement;
+      const title = rootElement.querySelector('span');
+      expect(title.classList).toContain('text-center');
+    });
   });
 
   describe('close button', () => {
@@ -92,6 +100,14 @@ describe('ModalWrapperComponent', () => {
       const rootElement: HTMLElement = fixture.debugElement.nativeElement;
       const button = rootElement.querySelector('.close-btn');
       expect(button.classList).toContain('outside');
+    });
+
+    it('should not be rendered when config.closeBtnPlacement is set to hidden', () => {
+      component.config.closeBtnPlacement = 'hidden';
+      fixture.detectChanges();
+      const rootElement: HTMLElement = fixture.debugElement.nativeElement;
+      const button = rootElement.querySelector('.close-btn');
+      expect(button).not.toBeTruthy();
     });
 
     it('should have a default value of close', () => {
