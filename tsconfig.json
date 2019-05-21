@@ -29,6 +29,9 @@
             ],
             "@kirbydesign/designsystem/*": [
                 "src/kirby/*"
+            ],
+            "~/*": [
+                "tilde-imports-are-not-allowed-as-it-breaks-compilation-in-target-project"
             ]
         }
     }
