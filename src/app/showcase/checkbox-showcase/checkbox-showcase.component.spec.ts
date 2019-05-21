@@ -3,7 +3,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { CheckboxShowcaseComponent } from './checkbox-showcase.component';
 import { ExamplesModule } from '~/app/examples/examples.module';
-import { KirbyModule } from '~/kirby';
+import { KirbyModule } from '@kirbydesign/designsystem';
 
 describe('CheckboxShowcaseComponent', () => {
   let component: CheckboxShowcaseComponent;

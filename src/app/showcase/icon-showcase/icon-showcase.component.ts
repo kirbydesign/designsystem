@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 
+import { iconsCharCodeMap } from '@kirbydesign/designsystem/components/icon/icon.component';
+
 import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
-import { iconsCharCodeMap } from '~/kirby/components/icon/icon.component';
 
 declare var require: any;
 
