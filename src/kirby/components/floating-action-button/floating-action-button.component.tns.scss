@@ -25,15 +25,15 @@
 }
 
 .fab-wrapper {
-  &.small {
+  &.sm {
     @include fab-wrapper(size('xl'));
   }
 
-  &.medium {
+  &.md {
     @include fab-wrapper(size('xxl'));
   }
 
-  &.large {
+  &.lg {
     @include fab-wrapper(size('xxxl'));
   }
 }

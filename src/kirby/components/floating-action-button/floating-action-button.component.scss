@@ -11,15 +11,15 @@
 ion-fab-button {
     --box-shadow: 0 10px 20px -10px #{get-color('primary-shade')};
     
-    &.small {
+    &.sm {
         @include fab-size(size('xl'));
     }
     
-    &.medium {
+    &.md {
         @include fab-size(size('xxl'));
     }
 
-    &.large {
+    &.lg {
         @include fab-size(size('xxxl'));
     }
 
