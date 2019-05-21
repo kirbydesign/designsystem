@@ -94,9 +94,12 @@ export class ListComponent implements OnInit, OnChanges {
 
   ngOnChanges(): void {
     this.isSectionsEnabled = !!this.getSectionName;
-    if (this.isSectionsEnabled) {
+    if (this.isSectionsEnabled && this.items) {
       this.groupedItems = this.groupBy.transform(this.items, this.getSectionName);
       this.orderMap = this.createOrderMap(this.groupedItems);
+    } else {
+      this.groupedItems = null;
+      this.orderMap = null;
     }
     this.isSelectable = this.itemSelect.observers.length > 0;
     this.isLoadOnDemandEnabled = this.loadOnDemand.observers.length > 0;
