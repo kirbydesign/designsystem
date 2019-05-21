@@ -1,36 +1,19 @@
 @import "../../scss/web-imports";
 
 :host {
-  --ion-color-base: #{get-color('primary')};
-  --ion-color-contrast: #{get-color('primary-contrast')};
+  --kirby-badge-background-color: #{get-color('primary')};
+  --kirby-badge-color: #{get-color('primary-contrast')};
+  --ion-color-base: var(--kirby-badge-background-color);
+  --ion-color-contrast: var(--kirby-badge-color);
+}
 
-  &[colortype='primary'] {
-    --ion-color-base: #{get-color('primary')};
-    --ion-color-contrast: #{get-color('primary-contrast')};
+@each $color-name, $color-value in $kirby-colors {
+  :host(.#{$color-name}) {
+    --kirby-badge-background-color: #{get-color($color-name)};
+    --kirby-badge-color: #{get-color($color-name+'-contrast')};
   }
+}
 
-  &[colortype='secondary'] {
-    --ion-color-base: #{get-color('secondary')};
-    --ion-color-contrast: #{get-color('secondary-contrast')};
-  }
-
-  &[colortype='tertiary'] {
-    --ion-color-base: #{get-color('tertiary')};
-    --ion-color-contrast: #{get-color('tertiary-contrast')};
-  }
-
-  &[colortype='success'] {
-    --ion-color-base: #{get-color('success')};
-    --ion-color-contrast: #{get-color('success-contrast')};
-  }
-  
-  &[colortype='warning'] {
-    --ion-color-base: #{get-color('warning')};
-    --ion-color-contrast: #{get-color('warning-contrast')};
-  }
-
-  &[colortype='danger'] {
-    --ion-color-base: #{get-color('danger')};
-    --ion-color-contrast: #{get-color('contrast-light')};
-  }
+:host(.danger) {
+  --kirby-badge-color: #{get-color('contrast-light')};
 }

@@ -11,32 +11,32 @@
   padding-right: size("xxs");    
   white-space: nowrap;
   
-  &[colortype='primary']  {
+  &[themeColor='primary']  {
     color: get-color('primary-contrast');
     background-color: get-color('primary');
   }
   
-  &[colortype='secondary'] {
+  &[themeColor='secondary'] {
     color: get-color('secondary-contrast');
     background-color: get-color('secondary');
   }
 
-  &[colortype='tertiary'] {
+  &[themeColor='tertiary'] {
     color: get-color('tertiary-contrast');
     background-color: get-color('tertiary');
   }
 
-  &[colortype='success'] {
+  &[themeColor='success'] {
     color: get-color('success-contrast');
     background-color: get-color('success');
   }
 
-  &[colortype='warning'] {
+  &[themeColor='warning'] {
     color: get-color('warning-contrast');
     background-color: get-color('warning');
   }
   
-  &[colortype='danger'] {
+  &[themeColor='danger'] {
     color: get-color('contrast-light');
     background-color: get-color('danger');
   }
