@@ -21,9 +21,9 @@ export class ModalShowcaseComponent {
     {
       name: 'closeBtnPlacement',
       description:
-        'The placement of the close modal button, in relation to the modal. If the button is placed outside, the title will be centered, otherwise it will be aligned to the left.',
+        'The placement of the close modal button, in relation to the modal. If the button is placed inside, the title will be aligned to the left, otherwise it will be centered.',
       defaultValue: 'inside',
-      inputValues: ['inside', 'outside'],
+      inputValues: ['inside', 'outside', 'hidden'],
     },
     {
       name: 'closeIcon',
