@@ -12,39 +12,11 @@
     border-radius: $border-radius;
     background-color: get-color('contrast-light');
 
-    &.primary {
-        background-color: get-color('primary');
-    }
-    
-    &.secondary {
-        background-color: get-color('secondary');
-    }
-    
-    &.tertiary {
-        background-color: get-color('tertiary');
+    @each $color-name, $color-value in $kirby-colors {
+        &.#{$color-name} {
+            background-color: #{get-color($color-name)};
+            color: #{get-color($color-name+'-contrast')};
+        }
     }
 
-    &.warning {
-        background-color: get-color('warning');
-    }
-
-    &.success {
-        background-color: get-color('success');
-    }
-
-    &.danger {
-        background-color: get-color('danger');
-    }
-
-    &.light {
-        background-color: get-color('light');
-    }
-
-    &.medium {
-        background-color: get-color('medium');
-    }
-
-    &.dark {
-        background-color: get-color('dark');
-    }
 }
