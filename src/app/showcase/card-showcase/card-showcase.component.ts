@@ -24,7 +24,7 @@ export class CardShowcaseComponent {
       inputValues: ['string'],
     },
     {
-      name: 'colortype',
+      name: 'themeColor',
       description: 'Sets which color the card should use from the theme palette.',
       defaultValue: 'null',
       inputValues: [
