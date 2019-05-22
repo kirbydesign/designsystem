@@ -13,10 +13,20 @@ export class BadgeShowcaseComponent {
 
   properties: ShowcaseProperty[] = [
     {
-      name: 'colortype',
+      name: 'themeColor',
       description: 'Sets which color the badge should use from the theme palette.',
       defaultValue: '',
-      inputValues: ["'primary'", "'secondary'", "'tertiary'", "'success'", "'danger'", "'warning'"],
+      inputValues: [
+        'primary',
+        'secondary',
+        'tertiary',
+        'success',
+        'warning',
+        'danger',
+        'light',
+        'medium',
+        'dark',
+      ],
     },
   ];
 }
