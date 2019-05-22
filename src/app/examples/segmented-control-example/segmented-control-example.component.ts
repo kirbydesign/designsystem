@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { SegmentItem } from '~/kirby/components/segmented-control/segment-item';
+import { SegmentItem } from '@kirbydesign/designsystem';
 
 @Component({
   selector: 'kirby-segmented-control-example',
@@ -17,7 +17,7 @@ export class SegmentedControlExampleComponent implements OnInit {
       checked: true,
       badge: {
         content: '4',
-        type: 'warning',
+        themeColor: 'warning',
       },
     },
     {

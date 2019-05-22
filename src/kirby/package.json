@@ -26,8 +26,9 @@
   "dependencies": {
     "@ionic/angular": "^4.1.1",
     "highcharts": "7.0.3",
-    "nativescript-webview-interface": "^1.4.2",
-    "nativescript-windowed-modal": "^5.0.6"
+    "nativescript-webview-interface": "^1.4.3",
+    "nativescript-windowed-modal": "^5.0.6",
+    "nativescript-checkbox": "^3.0.3"
   },
   "devDependencies": {
     "sass-extract": "^2.1.0",

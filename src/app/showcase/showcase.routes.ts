@@ -18,6 +18,7 @@ import { SegmentedControlShowcaseComponent } from './segmented-control-showcase/
 import { ChipShowcaseComponent } from './chip-showcase/chip-showcase.component';
 import { BadgeShowcaseComponent } from './badge-showcase/badge-showcase.component';
 import { IconShowcaseComponent } from './icon-showcase/icon-showcase.component';
+import { CheckboxShowcaseComponent } from './checkbox-showcase/checkbox-showcase.component';
 import { SegmentedChipControlShowcaseComponent } from './segmented-chip-control-showcase/segmented-chip-control-showcase.component';
 import { ActionSheetShowcaseComponent } from './action-sheet-showcase/action-sheet-showcase.component';
 import { AlertShowcaseComponent } from './alert-showcase/alert-showcase.component';
@@ -103,6 +104,10 @@ export const routes: Routes = [
       {
         path: 'icon',
         component: IconShowcaseComponent,
+      },
+      {
+        path: 'checkbox',
+        component: CheckboxShowcaseComponent,
       },
       {
         path: 'nativescript-only',

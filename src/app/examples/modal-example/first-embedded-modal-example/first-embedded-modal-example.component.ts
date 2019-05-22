@@ -1,9 +1,9 @@
 import { Component, Inject, ViewContainerRef } from '@angular/core';
 
-import { ModalController } from '~/kirby/components/modal/services/modal.controller';
-import { ModalConfig } from '~/kirby/components/modal/modal-wrapper/config/modal-config';
+import { ModalController } from '@kirbydesign/designsystem/modal';
+import { ModalConfig } from '@kirbydesign/designsystem/modal';
 import { SecondEmbeddedModalExampleComponent } from '../second-embedded-modal-example/second-embedded-modal-example.component';
-import { COMPONENT_PROPS } from '~/kirby';
+import { COMPONENT_PROPS } from '@kirbydesign/designsystem/modal';
 
 @Component({
   templateUrl: './first-embedded-modal-example.component.html',

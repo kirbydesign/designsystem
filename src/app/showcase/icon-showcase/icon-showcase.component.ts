@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 
+import { iconsCharCodeMap } from '@kirbydesign/designsystem/components/icon/icon.component';
+
 import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
-import { iconsCharCodeMap } from '~/kirby/components/icon/icon.component';
 
 declare var require: any;
 
@@ -34,10 +35,20 @@ export class IconShowcaseComponent {
       inputValues: ['small', 'large'],
     },
     {
-      name: 'colortype',
+      name: 'themeColor',
       description: 'Sets which color the icon should use from the theme palette.',
       defaultValue: 'null',
-      inputValues: ['primary', 'secondary', 'tertiary', 'warning', 'success', 'danger'],
+      inputValues: [
+        'primary',
+        'secondary',
+        'tertiary',
+        'success',
+        'warning',
+        'danger',
+        'light',
+        'medium',
+        'dark',
+      ],
     },
     {
       name: 'customName',

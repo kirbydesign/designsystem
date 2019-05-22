@@ -1,6 +1,8 @@
 <kirby-list
         [items]="items"
-        (itemSelect)="onItemSelect($event)">
+        (itemSelect)="onItemSelect($event)"
+        [showDivider]="true"
+        shape="rounded">
 
   <!-- HEADER-->
   <kirby-list-header *kirbyListHeader>

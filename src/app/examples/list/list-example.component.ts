@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { BaseListComponent } from '~/app/examples/list/base-list.component';
+import { BaseListComponent } from './base-list.component';
 
 @Component({
   selector: 'kirby-list-example',
