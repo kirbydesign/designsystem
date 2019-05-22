@@ -28,7 +28,7 @@ describe('SegmentedControlComponent', () => {
       checked: false,
       badge: {
         content: '2',
-        type: 'danger',
+        themeColor: 'danger',
       },
     },
     {
