@@ -21,7 +21,6 @@ import {
 import { LoadOnDemandEvent, LoadOnDemandEventData } from './list.event';
 import { ListHelper } from './helpers/list-helper';
 import { GroupByPipe } from './pipes/group-by.pipe';
-
 export type ListShape = 'square' | 'rounded';
 
 @Component({
@@ -45,6 +44,21 @@ export class ListComponent implements OnInit, OnChanges {
    * Text to display when no more items can be loaded (used for "on demand"-loading).
    */
   @Input() noMoreItemsText: string;
+
+  /**
+   * Turns off styling of the section header on Web.
+   */
+  @Input() noSectionHeaderStyling: boolean;
+
+  /**
+   * Turns off styling of the row on Web.
+   */
+  @Input() noRowStyling: boolean;
+
+  /**
+   * Shows shadows on sections on Web.
+   */
+  @Input() sectionShadow: boolean;
 
   /**
    * Determines if dividers should be shown or not.
