@@ -4,41 +4,22 @@
   font-size: font-size("xxs");
   border-radius: size("xs");
   background-color: get-color('danger');
-  color: get-color('contrast-light', true, $kirby-colors);
+  color: get-color('contrast-light');
   height: size("s");
   min-width: size("s");
   padding-left: size("xxs");
   padding-right: size("xxs");    
   white-space: nowrap;
-  
-  &[colortype='primary']  {
-    color: get-color('primary-contrast');
-    background-color: get-color('primary');
-  }
-  
-  &[colortype='secondary'] {
-    color: get-color('secondary-contrast');
-    background-color: get-color('secondary');
+
+  @each $color-name, $color-value in $main-colors {
+    &[themeColor='#{$color-name}'] {
+      background-color: #{get-color($color-name)};
+      color: #{get-color($color-name+'-contrast')};
+    }
   }
 
-  &[colortype='tertiary'] {
-    color: get-color('tertiary-contrast');
-    background-color: get-color('tertiary');
-  }
-
-  &[colortype='success'] {
-    color: get-color('success-contrast');
-    background-color: get-color('success');
-  }
-
-  &[colortype='warning'] {
-    color: get-color('warning-contrast');
-    background-color: get-color('warning');
-  }
-  
-  &[colortype='danger'] {
+  &[themeColor='danger'] {
     color: get-color('contrast-light');
-    background-color: get-color('danger');
   }
 }
 
