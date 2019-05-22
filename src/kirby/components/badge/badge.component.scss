@@ -7,7 +7,7 @@
   --ion-color-contrast: var(--kirby-badge-color);
 }
 
-@each $color-name, $color-value in $kirby-colors {
+@each $color-name, $color-value in $main-colors {
   :host(.#{$color-name}) {
     --kirby-badge-background-color: #{get-color($color-name)};
     --kirby-badge-color: #{get-color($color-name+'-contrast')};

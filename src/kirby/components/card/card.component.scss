@@ -25,7 +25,7 @@ $min-card-width: 304px;
   overflow: hidden;
 }
 
-@each $color-name, $color-value in $kirby-colors {
+@each $color-name, $color-value in $main-colors {
     :host(.#{$color-name}) {
       --kirby-card-main-background-color: #{get-color($color-name)};
       --kirby-card-main-color: #{get-color($color-name+'-contrast')};
