@@ -2,9 +2,9 @@
 
 :host {
   --kirby-button-border-radius: 2rem;
-  --kirby-button-background-color: get-color('primary');
-  --kirby-button-border-color: get-color('primary');
-  --kirby-button-color: get-color('primary-contrast');
+  --kirby-button-background-color: #{get-color('primary')};
+  --kirby-button-border-color: #{get-color('primary')};
+  --kirby-button-color: #{get-color('primary-contrast')};
 
   background-color: var(--kirby-button-background-color);
   border-radius: var(--kirby-button-border-radius);
@@ -37,15 +37,15 @@
   }
 
   &.primary {
-    --kirby-button-background-color: get-color('primary');
-    --kirby-button-border-color: get-color('primary');
-    --kirby-button-color: get-color('primary-contrast');
+    --kirby-button-background-color:#{get-color('primary')};
+    --kirby-button-border-color: #{get-color('primary')};
+    --kirby-button-color: #{get-color('primary-contrast')};
   }
 
   &.secondary {
-    --kirby-button-background-color: get-color('contrast-light');
-    --kirby-button-border-color: get-color('contrast-light');
-    --kirby-button-color: get-color('contrast-dark');
+    --kirby-button-background-color: #{get-color('contrast-light')};
+    --kirby-button-border-color: #{get-color('contrast-light')};
+    --kirby-button-color: #{get-color('contrast-dark')};
   }
 
   &:hover,
