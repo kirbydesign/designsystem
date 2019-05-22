@@ -3,14 +3,14 @@ import { InjectionToken } from '@angular/core';
 import { ModalConfig } from './modal-config';
 
 export class ModalConfigHelper {
-  static readonly defaultCloseBtnPlacement = 'inside';
+  static readonly defaultcloseBtnPosition = 'inside';
   static readonly defaultTitleHorizontalAlignment = 'left';
   static readonly defaultCloseIconName = 'close';
   static readonly defaultDim = 0.5;
 
   static processOptionalValues(config: ModalConfig): ModalConfig {
-    if (!config.closeBtnPlacement) {
-      config.closeBtnPlacement = ModalConfigHelper.defaultCloseBtnPlacement;
+    if (!config.closeBtnPosition) {
+      config.closeBtnPosition = ModalConfigHelper.defaultcloseBtnPosition;
     }
 
     if (!config.titleHorizontalAlignment) {

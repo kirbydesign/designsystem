@@ -11,29 +11,25 @@
     display: flex;
     justify-content: flex-end;
     padding: size('s');
-    
-    .title-container {
+
+    .title {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       width: 100%;
-      display: inline-table;
+      font-weight: font-weight("bold");
+    }
+    
+    .text-left {
+      text-align: left;
+    }
 
-      .title {
-        height: 40px;
-        vertical-align: middle;
-        display: table-cell;
-        font-weight: font-weight("bold");
-      }
-      
-      .text-left {
-        text-align: left;
-      }
-  
-      .text-center {
-        text-align: center;
-      }
+    .text-center {
+      text-align: center;
+    }
 
-      .text-right {
-        text-align: right;
-      }
+    .text-right {
+      text-align: right;
     }
 
     .close-btn {

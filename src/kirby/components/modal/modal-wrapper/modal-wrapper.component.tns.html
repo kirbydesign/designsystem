@@ -1,5 +1,5 @@
 <ModalStack class="modal-wrapper" dismissEnabled="true" (showingModally)="onShowingModally($event)">
-    <AbsoluteLayout *ngIf="config.closeBtnPlacement === 'outside'" horizontalAlignment="right">
+    <AbsoluteLayout *ngIf="config.closeBtnPosition === 'outside'" horizontalAlignment="right">
         <kirby-floating-action-button [showShadow]="false" (tap)="onModalDismiss()">
             <kirby-icon [name]="config.closeIconName"></kirby-icon>
         </kirby-floating-action-button>
@@ -10,7 +10,7 @@
             <Label class="title" row="0" col="0" verticalAlignment="center" horizontalAlignment="{{ config.titleHorizontalAlignment }}" textWrap="true"
                     text="{{ config.title }}"></Label>
             
-            <kirby-floating-action-button *ngIf="config.closeBtnPlacement === 'inside'" [showShadow]="false" (tap)="onModalDismiss()" row="0" col="1">
+            <kirby-floating-action-button *ngIf="config.closeBtnPosition === 'inside'" [showShadow]="false" (tap)="onModalDismiss()" row="0" col="1">
                 <kirby-icon [name]="config.closeIconName"></kirby-icon>
             </kirby-floating-action-button>
             

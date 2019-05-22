@@ -83,19 +83,19 @@ describe('ModalWrapperComponent', () => {
 
   describe('close button', () => {
     it('should be placed inside by default', () => {
-      expect(component.config.closeBtnPlacement).toEqual('inside');
+      expect(component.config.closeBtnPosition).toEqual('inside');
     });
 
-    it('should be placed outside when config.closeBtnPlacement is set to outside', () => {
-      component.config.closeBtnPlacement = 'outside';
+    it('should be placed outside when config.closeBtnPosition is set to outside', () => {
+      component.config.closeBtnPosition = 'outside';
       fixture.detectChanges();
       const rootElement: HTMLElement = fixture.debugElement.nativeElement;
       const button = rootElement.querySelector('.close-btn');
       expect(button.classList).toContain('outside');
     });
 
-    it('should not be rendered when config.closeBtnPlacement is set to hidden', () => {
-      component.config.closeBtnPlacement = 'hidden';
+    it('should not be rendered when config.closeBtnPosition is set to hidden', () => {
+      component.config.closeBtnPosition = 'hidden';
       fixture.detectChanges();
       const rootElement: HTMLElement = fixture.debugElement.nativeElement;
       const button = rootElement.querySelector('.close-btn');

@@ -1,6 +1,6 @@
 export interface ModalConfig {
   title: string;
-  closeBtnPlacement?: 'inside' | 'outside' | 'hidden';
+  closeBtnPosition?: 'inside' | 'outside' | 'hidden';
   closeIconName?: 'close' | 'arrow-back';
   titleHorizontalAlignment?: 'left' | 'center' | 'right';
   dim?: number;
