@@ -48,7 +48,7 @@ export class FloatingActionButtonComponent extends ContentView {
       return;
     }
 
-    const shadowColor = this.getThemeColor('kirby-primary-shade');
+    const shadowColor = this.getThemeColor('primary-shade');
 
     if (this.view.android) {
       let nativeView = this.view.android;
