@@ -32,7 +32,7 @@ export class FloatingActionButtonComponent extends ContentView {
 
   onViewLoaded(args: EventData) {
     this.view = <View>args.object;
-    this.setupOnOrientationChangeListener();
+    // this.setupOnOrientationChangeListener();
     this.addShadow();
   }
 
