@@ -1,8 +1,6 @@
 <ModalStack class="modal-wrapper" dismissEnabled="true" (showingModally)="onShowingModally($event)">
     <AbsoluteLayout *ngIf="config.closeBtnPosition === 'outside'" horizontalAlignment="right">
-        <kirby-floating-action-button [showShadow]="false" (tap)="onModalDismiss()">
-            <kirby-icon [name]="config.closeIconName"></kirby-icon>
-        </kirby-floating-action-button>
+        <ng-container *ngTemplateOutlet="closeBtn"></ng-container>
     </AbsoluteLayout>
     <StackLayout class="modal" orientation="vertical" verticalAlignment="bottom">
         <GridLayout rows="auto, *" columns="*, auto" class="title-bar">
@@ -10,9 +8,9 @@
             <Label class="title" row="0" col="0" verticalAlignment="center" horizontalAlignment="{{ config.titleHorizontalAlignment }}" textWrap="true"
                     text="{{ config.title }}"></Label>
             
-            <kirby-floating-action-button *ngIf="config.closeBtnPosition === 'inside'" [showShadow]="false" (tap)="onModalDismiss()" row="0" col="1">
-                <kirby-icon [name]="config.closeIconName"></kirby-icon>
-            </kirby-floating-action-button>
+            <StackLayout *ngIf="config.closeBtnPosition === 'inside'" row="0" col="1">
+                <ng-container *ngTemplateOutlet="closeBtn"></ng-container>
+            </StackLayout>
             
             <ScrollView height="100%" width="100%" row="1" colSpan="2">
                 <ng-container *ngComponentOutlet="config.component; injector: componentPropsInjector"></ng-container>
@@ -20,3 +18,11 @@
         </GridLayout>
     </StackLayout>
 </ModalStack>
+
+<ng-template #closeBtn>
+    <kirby-floating-action-button [showShadow]="false" (tap)="onModalDismiss()">
+        <kirby-icon [name]="config.closeIconName"></kirby-icon>
+    </kirby-floating-action-button>
+</ng-template>
+
+
