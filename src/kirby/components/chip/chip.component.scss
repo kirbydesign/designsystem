@@ -1,17 +1,16 @@
 @import "../../scss/web-imports";
-$min-chip-width: 50px;
 
 :host {
-  white-space:nowrap;
+  white-space: nowrap;
   padding: 0 25px;
   height: 30px;
-  font-size: font-size('s');
-  line-height: line-height('xl');
+  font-size: font-size("s");
+  line-height: line-height("xl");
   border-radius: 25px;
   margin-right: 5px;
-  min-width: $min-chip-width;
   cursor: pointer;
-  &:hover,&.is-selected {
-      background-color:get-color('medium');
-    }
+  &:hover,
+  &.is-selected {
+    background-color: get-color("medium");
+  }
 }
