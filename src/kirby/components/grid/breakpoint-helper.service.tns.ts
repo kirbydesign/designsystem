@@ -3,14 +3,13 @@ import { screen } from 'tns-core-modules/platform';
 import { OrientationChangedEventData } from 'tns-core-modules/application';
 import * as app from 'tns-core-modules/application';
 import { Observable, Subject } from 'rxjs';
-import { distinctUntilChanged, debounceTime } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BreakpointHelperService implements OnDestroy {
   currentScreenWidth: number;
-  private orientationChangedSubject = new Subject<number>();
+  private orientationChangedSubject = new Subject<void>();
 
   constructor(private zone: NgZone) {
     this.init();
@@ -33,15 +32,12 @@ export class BreakpointHelperService implements OnDestroy {
         }
       }
       // Run in the zone, to make sure Angular data binding is informed of this:
-      this.zone.run(() => this.orientationChangedSubject.next(this.currentScreenWidth));
+      this.zone.run(() => this.orientationChangedSubject.next());
     });
   }
 
   observe(): Observable<number> {
-    return this.orientationChangedSubject.asObservable().pipe(
-      distinctUntilChanged(),
-      debounceTime(500)
-    );
+    return this.orientationChangedSubject.asObservable();
   }
 
   ngOnDestroy() {
