@@ -19,6 +19,7 @@ $border-radius: 20;
   padding-right: size("m");
   border-radius: $border-radius;
   height: 100%;
+  color: get-color('contrast-dark');
 
   &.is-checked {
     color: get-color('contrast-light');
