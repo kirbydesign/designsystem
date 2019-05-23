@@ -36,7 +36,7 @@ export class BreakpointHelperService implements OnDestroy {
     });
   }
 
-  observe(): Observable<number> {
+  observe(): Observable<void> {
     return this.orientationChangedSubject.asObservable();
   }
 
