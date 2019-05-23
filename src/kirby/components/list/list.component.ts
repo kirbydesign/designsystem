@@ -20,8 +20,7 @@ import {
 } from './list.directive';
 import { LoadOnDemandEvent, LoadOnDemandEventData } from './list.event';
 import { ListHelper } from './helpers/list-helper';
-import { GroupByPipe } from '~/kirby/components/list/pipes/group-by.pipe';
-
+import { GroupByPipe } from './pipes/group-by.pipe';
 export type ListShape = 'square' | 'rounded';
 
 @Component({
@@ -45,6 +44,21 @@ export class ListComponent implements OnInit, OnChanges {
    * Text to display when no more items can be loaded (used for "on demand"-loading).
    */
   @Input() noMoreItemsText: string;
+
+  /**
+   * Turns off styling of the section header on Web.
+   */
+  @Input() noSectionHeaderStyling: boolean;
+
+  /**
+   * Turns off styling of the row on Web.
+   */
+  @Input() noRowStyling: boolean;
+
+  /**
+   * Shows shadows on sections on Web.
+   */
+  @Input() sectionShadow: boolean;
 
   /**
    * Determines if dividers should be shown or not.
@@ -94,9 +108,12 @@ export class ListComponent implements OnInit, OnChanges {
 
   ngOnChanges(): void {
     this.isSectionsEnabled = !!this.getSectionName;
-    if (this.isSectionsEnabled) {
+    if (this.isSectionsEnabled && this.items) {
       this.groupedItems = this.groupBy.transform(this.items, this.getSectionName);
       this.orderMap = this.createOrderMap(this.groupedItems);
+    } else {
+      this.groupedItems = null;
+      this.orderMap = null;
     }
     this.isSelectable = this.itemSelect.observers.length > 0;
     this.isLoadOnDemandEnabled = this.loadOnDemand.observers.length > 0;

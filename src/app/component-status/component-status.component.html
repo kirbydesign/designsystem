@@ -55,7 +55,7 @@
 <ng-template #enhancementTemplate let-item let-cssClass="cssClass">
     <tr class="enhancement enhancement-{{cssClass}}" [class.someday-maybe]="isUnderConsiderationOrNotPlanned(enhancement)" *ngFor="let enhancement of item.code.enhancements">
         <td>
-            <kirby-badge colortype="warning" class="vnext">vNext</kirby-badge>
+            <kirby-badge themeColor="warning" class="vnext">vNext</kirby-badge>
             {{enhancement.title}}
         </td>
         <td>

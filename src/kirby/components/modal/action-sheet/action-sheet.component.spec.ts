@@ -10,7 +10,7 @@ import { ListComponent } from '../../list/list.component';
 import { ListCellLineComponent } from '../../list/list-cell-line/list-cell-line.component';
 import { CardComponent } from '../../card/card.component';
 import { GroupByPipe } from '../../list/pipes/group-by.pipe';
-import { SpinnerComponent } from '~/kirby';
+import { SpinnerComponent } from '../../spinner/spinner.component';
 import { InfiniteScrollDirective } from '../../list/directives/infinite-scroll.directive';
 import { CardHeaderComponent } from '../../card/card-header/card-header.component';
 

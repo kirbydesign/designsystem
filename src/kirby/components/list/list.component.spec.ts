@@ -3,9 +3,9 @@ import { createTestComponentFactory, Spectator } from '@netbasal/spectator';
 import { LoadOnDemandEvent } from './list.event';
 import { GroupByPipe } from './pipes/group-by.pipe';
 import { ListComponent } from './list.component';
-import { SpinnerComponent } from '~/kirby';
+import { SpinnerComponent } from '../spinner/spinner.component';
 import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
-import { ListHelper } from '~/kirby/components/list/helpers/list-helper';
+import { ListHelper } from './helpers/list-helper';
 
 /**
  * We need an actual model item, since WeakMap can't use primitives for keys.

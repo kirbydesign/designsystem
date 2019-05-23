@@ -13,55 +13,24 @@ $min-card-width: 304px;
   --kirby-card-footer-color: #{get-color('primary-contrast')};
 
   border-radius: $border-radius;
-  color: var(--kirby-wireframe-text-color);
-  background-color: get-color('contrast-light');
+  color: var(--kirby-card-main-color);
+  background-color: var(--kirby-card-main-background-color);
   display: flex;
   flex-direction: column;
-  flex: 1 0 100%;
   justify-content: space-between;
   max-height: $max-card-height;
   min-height: $min-card-height;
   min-width: $min-card-width;
-  width: 100%;
   overflow: hidden;
-
-  &.primary {
-      background-color: get-color('primary');
-  }
-
-  &.secondary {
-      background-color: get-color('secondary');
-  }
-
-  &.tertiary {
-      background-color: get-color('tertiary');
-  }
-
-  &.warning {
-      background-color: get-color('warning');
-  }
-
-  &.success {
-      background-color: get-color('success');
-  }
-
-  &.danger {
-      background-color: get-color('danger');
-  }
-
-  &.light {
-      background-color: get-color('light');
-  }
-
-  &.medium {
-      background-color: get-color('medium');
-  }
-
-  &.dark {
-      background-color: get-color('dark');
-  }
 
   &.shadow {
     box-shadow: 0 10px 29px -9px rgba(24, 24, 24, 0.3);
   }
+}
+
+@each $color-name, $color-value in $main-colors {
+    :host(.#{$color-name}) {
+      --kirby-card-main-background-color: #{get-color($color-name)};
+      --kirby-card-main-color: #{get-color($color-name+'-contrast')};
+    }
 }

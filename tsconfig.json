@@ -18,8 +18,20 @@
         ],
         "baseUrl": ".",
         "paths": {
+            "~/app/*": [
+                "src/app/*"
+            ],
+            "~/environments/*": [
+                "src/environments/*"
+            ],
+            "@kirbydesign/designsystem": [
+                "src/kirby/index.ts"
+            ],
+            "@kirbydesign/designsystem/*": [
+                "src/kirby/*"
+            ],
             "~/*": [
-                "src/*"
+                "tilde-imports-are-not-allowed-as-it-breaks-compilation-in-target-project"
             ]
         }
     }

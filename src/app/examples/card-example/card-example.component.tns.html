@@ -1,23 +1,29 @@
 <StackLayout orientation="vertical" width="100%" height="100%">
   <kirby-card (select)="onCardSelect()">
     <kirby-card-header title="Titel" subtitle="Subtitel"></kirby-card-header>
+    <StackLayout class="card-content">
+      <Label text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui quas quibusdam eligendi, debitis nemo fuga quia accusamus doloremque sit reprehenderit!" textWrap="true"></Label>
+    </StackLayout>
+  </kirby-card>
 
-    <!-- Card content example: -->
-       <StackLayout class="card-content">
-         <Label text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui quas quibusdam eligendi, debitis nemo fuga quia accusamus doloremque sit reprehenderit!" textWrap="true"></Label>
-        </StackLayout>
+  <kirby-card themeColor="primary">
+    <kirby-card-header title="Titel" subtitle="Subtitel"></kirby-card-header>
+    <StackLayout class="card-content">
+      <Label text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui quas quibusdam eligendi, debitis nemo fuga quia accusamus doloremque sit reprehenderit!" textWrap="true"></Label>
+    </StackLayout>
+  </kirby-card>
 
-      <kirby-card-footer></kirby-card-footer>
-    </kirby-card>
-
-    <kirby-card colortype="warning">
-        <kirby-card-header title="Titel" subtitle="Subtitel"></kirby-card-header>
-    
-        <!-- Card content example: -->
-           <StackLayout class="card-content">
-             <Label text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui quas quibusdam eligendi, debitis nemo fuga quia accusamus doloremque sit reprehenderit!" textWrap="true"></Label>
-            </StackLayout>
-    
-          <kirby-card-footer></kirby-card-footer>
-        </kirby-card>
-  </StackLayout>
+  <kirby-card themeColor="secondary">
+    <kirby-card-header title="Titel" subtitle="Subtitel"></kirby-card-header>
+    <StackLayout class="card-content">
+      <Label text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui quas quibusdam eligendi, debitis nemo fuga quia accusamus doloremque sit reprehenderit!" textWrap="true"></Label>
+    </StackLayout>
+  </kirby-card>
+ 
+  <kirby-card themeColor="warning">
+    <kirby-card-header title="Titel" subtitle="Subtitel"></kirby-card-header>
+    <StackLayout class="card-content">
+      <Label text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui quas quibusdam eligendi, debitis nemo fuga quia accusamus doloremque sit reprehenderit!" textWrap="true"></Label>
+    </StackLayout>
+  </kirby-card>
+</StackLayout>

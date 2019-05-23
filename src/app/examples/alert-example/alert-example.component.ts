@@ -1,7 +1,7 @@
 import { Component, ViewContainerRef } from '@angular/core';
 
-import { ModalController } from '~/kirby/components/modal/services/modal.controller';
-import { AlertConfig } from '~/kirby/components/modal/alert/config/alert-config';
+import { ModalController } from '@kirbydesign/designsystem/modal';
+import { AlertConfig } from '@kirbydesign/designsystem/modal';
 
 @Component({
   selector: 'kirby-alert-example',

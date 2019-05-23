@@ -17,7 +17,7 @@ import { registerElement } from 'nativescript-angular';
 import { ContentView } from 'tns-core-modules/ui/content-view';
 
 import { ScssHelper } from '../../scss/scss-helper';
-import { ColorType } from './../../helpers/color-type';
+import { ThemeColor } from '../../helpers/theme-color.type';
 
 const screenScale = screen.mainScreen.scale;
 declare const CGSizeMake: any;
@@ -34,7 +34,7 @@ export class CardComponent extends ContentView implements OnInit, OnChanges {
   @Output() select = new EventEmitter();
   @Input() title: string;
   @Input() subtitle: string;
-  @Input() colortype?: ColorType;
+  @Input() themeColor?: ThemeColor;
   view: View;
   currentScreenWidth: number;
   cardSizeClass = '';
