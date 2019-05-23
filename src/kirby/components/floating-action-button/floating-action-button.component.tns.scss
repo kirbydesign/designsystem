@@ -5,13 +5,13 @@
   height: #{$fab-size};
 }
 
-@mixin fab-wrapper($fab-size) {
+@mixin fab-wrapper($fab-size, $color) {
   @include fab-size($fab-size * (3/2));
   .fab-shadow {
     @include fab-size($fab-size);
     .fab {
       @include fab-size($fab-size);
-      background-color: get-color('primary');
+      background-color: get-color($color);
       border-radius: $fab-size;
       text-align: center;
       vertical-align: middle;
@@ -25,15 +25,9 @@
 }
 
 .fab-wrapper {
-  &.sm {
-    @include fab-wrapper(size('xl'));
-  }
-
-  &.md {
-    @include fab-wrapper(size('xxl'));
-  }
-
-  &.lg {
-    @include fab-wrapper(size('xxxl'));
+  @include fab-wrapper(64, 'primary');
+  
+  &.not-floating {
+    @include fab-wrapper(size('xl'), 'light');
   }
 }

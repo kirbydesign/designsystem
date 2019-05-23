@@ -22,7 +22,7 @@ export class FloatingActionButtonComponent extends ContentView {
   // TODO: showShadow should become an "elevation" enum in the future;
   @Input() showShadow?: boolean = true;
   @Input() disabled?: boolean = false;
-  @Input() size?: 'sm' | 'md' | 'lg' = 'sm';
+  @Input() isFloating?: boolean = true;
 
   view: View;
 
@@ -45,7 +45,7 @@ export class FloatingActionButtonComponent extends ContentView {
 
   // TODO: extract a shared function; logic of adding shadow is the same as in many other components;
   addShadow(): void {
-    if (!this.showShadow || this.disabled) {
+    if (!this.showShadow || this.disabled || !this.isFloating) {
       return;
     }
 

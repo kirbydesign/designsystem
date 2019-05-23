@@ -5,20 +5,11 @@
 
 ion-fab-button {
     --box-shadow: 0 10px 20px -10px #{get-color('primary-shade')};
-    
-    &.sm {
-        width: #{size('xl')}px;
-        height: #{size('xl')}px;
-    }
-    
-    &.md {
-        width: #{size('xxl')}px;
-        height: #{size('xxl')}px;
-    }
+    width: 64px;
+    height: 64px;
 
-    &.lg {
-        width: #{size('xxxl')}px;
-        height: #{size('xxxl')}px;
+    &.no-shadow {
+        --box-shadow: 0;
     }
 
     &.disabled {
@@ -26,7 +17,10 @@ ion-fab-button {
         --box-shadow: 0;
     }
 
-    &.no-shadow {
+    &.not-floating {
+        width: #{size('xl')}px;
+        height: #{size('xl')}px;
+        --background: #{get-color('light')};
         --box-shadow: 0;
     }
 }

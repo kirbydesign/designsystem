@@ -1,4 +1,4 @@
-<GridLayout class="fab-wrapper {{ size }}">
+<GridLayout class="fab-wrapper {{ isFloating ? '' : 'not-floating' }}">
     <StackLayout class="fab-shadow" (loaded)="onViewLoaded($event)">
         <StackLayout class="fab" [ngClass]="{ 'disabled' : disabled }">
             <ng-content></ng-content>
