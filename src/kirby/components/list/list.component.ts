@@ -124,10 +124,13 @@ export class ListComponent implements OnInit, OnChanges {
       return {};
     }
     const order = this.orderMap.get(item);
+    if (!order) {
+      console.warn('Order of list item within section not found!');
+      return {}
+    }
     return {
       first: order.isFirst,
       last: order.isLast,
-      rounded: this.shape === 'rounded',
     };
   }
 

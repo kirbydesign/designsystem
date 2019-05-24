@@ -1,5 +1,5 @@
 
-<GridLayout rows="*"> <!-- GridLayout kept for backwards compatibility-->
+
   <RadListView
     row="0"
     loadOnDemandMode="Auto"
@@ -10,8 +10,9 @@
   >
     <!-- ITEM -->
     <ng-template tkListItemTemplate let-item="item">
-      <FlexboxLayout class="row"
+      <StackLayout class="row"
                      [class.divider]="showDivider"
+                     [class.rounded]="shape === 'rounded'"
                      [ngClass]="getCssClasses(item)"
                      (tap)="onItemSelect(item)">
         <ng-container
@@ -22,19 +23,19 @@
             *ngTemplateOutlet="template; context: { $implicit: item }">
           </ng-container>
         </ng-container>
-      </FlexboxLayout>
+      </StackLayout>
     </ng-template>
 
     <!-- SECTION HEADER-->
     <ng-template let-section="category" tkGroupTemplate *ngIf="isSectionsEnabled">
-      <GridLayout rows="*" columns="*">
-        <ng-container
-          *ngTemplateOutlet="
-            sectionHeaderTemplate;
-            context: { $implicit: section }
-          ">
-        </ng-container>
-      </GridLayout>
+      <StackLayout>
+            <ng-container
+            *ngTemplateOutlet="
+              sectionHeaderTemplate;
+              context: { $implicit: section }
+            ">
+          </ng-container> 
+      </StackLayout>
     </ng-template> 
 
     <!-- HEADER -->
@@ -50,4 +51,3 @@
     </ng-template>
 
   </RadListView>
-</GridLayout>
