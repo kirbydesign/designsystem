@@ -1,5 +1,6 @@
 @import "../../../scss/native-imports";
 
 .section-header {
-  padding: 0 size('gutter') 0 size('gutter');
+  padding: size('s');
+  padding-bottom: 0;
 }
