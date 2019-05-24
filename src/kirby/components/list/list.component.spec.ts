@@ -162,7 +162,7 @@ describe('ListComponent', () => {
       });
       runNgOnChanges();
 
-      expect(component.getCssClasses(items[0])).toEqual({ first: true, last: true, rounded: true });
+      expect(component.getCssClasses(items[0])).toEqual({ first: true, last: true });
     });
 
     it('should return styling object for sectioned list with rounded corners and a multiple entries', () => {
@@ -177,22 +177,18 @@ describe('ListComponent', () => {
       expect(component.getCssClasses(items[0])).toEqual({
         first: true,
         last: false,
-        rounded: true,
       });
       expect(component.getCssClasses(items[1])).toEqual({
         first: true,
         last: false,
-        rounded: true,
       });
       expect(component.getCssClasses(items[2])).toEqual({
         first: false,
         last: true,
-        rounded: true,
       });
       expect(component.getCssClasses(items[3])).toEqual({
         first: false,
         last: true,
-        rounded: true,
       });
     });
   });

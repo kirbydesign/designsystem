@@ -1,22 +1,20 @@
 import {
   Component,
   ContentChild,
-  ContentChildren,
   EventEmitter,
   HostBinding,
   Input,
   OnChanges,
   OnInit,
   Output,
-  QueryList,
   TemplateRef,
 } from '@angular/core';
 
 import {
-  ListCellDirective,
   ListHeaderDirective,
   ListItemDirective,
   ListSectionHeaderDirective,
+  ListFlexItemDirective,
 } from './list.directive';
 import { LoadOnDemandEvent, LoadOnDemandEventData } from './list.event';
 import { ListHelper } from './helpers/list-helper';
@@ -86,9 +84,9 @@ export class ListComponent implements OnInit, OnChanges {
 
   // The first element that matches ListItemDirective. As a structural directive it unfolds into a template. This is a reference to that.
   @ContentChild(ListItemDirective, { read: TemplateRef }) listItemTemplate;
+  @ContentChild(ListFlexItemDirective, { read: TemplateRef }) listFlexItemTemplate;
   @ContentChild(ListHeaderDirective, { read: TemplateRef }) listHeaderTemplate;
   @ContentChild(ListSectionHeaderDirective, { read: TemplateRef }) sectionHeaderTemplate;
-  @ContentChildren(ListCellDirective, { read: TemplateRef }) listCellTemplates: QueryList<any>;
 
   @HostBinding('class.has-sections') isSectionsEnabled: boolean;
   isSelectable: boolean;
@@ -124,10 +122,13 @@ export class ListComponent implements OnInit, OnChanges {
       return {};
     }
     const order = this.orderMap.get(item);
+    if (!order) {
+      console.warn('Order of list item within section not found!');
+      return {};
+    }
     return {
       first: order.isFirst,
       last: order.isLast,
-      rounded: this.shape === 'rounded',
     };
   }
 
