@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { ToastConfig } from './../../../kirby/components/toast/config/toast-config';
-import { ToastController } from '@kirbydesign/designsystem/components/toast/toast.controller';
+import { ToastController } from '@kirbydesign/designsystem/components/toast/services/toast.controller';
 
 @Component({
   selector: 'kirby-toast-example',

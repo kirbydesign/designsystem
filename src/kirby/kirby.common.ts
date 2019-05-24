@@ -37,8 +37,8 @@ import { CustomIconNameDirective } from './components/icon/custom-icon-name.dire
 import { AlertHelper } from './components/modal/services/alert.helper';
 import { SizeDirective } from './directives/size/size.directive';
 import { ThemeColorDirective } from './directives/theme-color/theme-color.directive';
-import { ToastController } from '@kirbydesign/designsystem/components/toast/toast.controller';
-import { ToastHelper } from './components/toast/toast.helper';
+import { ToastController } from '@kirbydesign/designsystem/components/toast/services/toast.controller';
+import { ToastHelper } from './components/toast/services/toast.helper';
 
 export const declarations = [
   CardComponent,

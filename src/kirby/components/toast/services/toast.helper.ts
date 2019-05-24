@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 
-import { ThemeColor } from './../../helpers/theme-color.type';
-import { ToastConfig } from './config/toast-config';
+import { ToastConfig } from '../config/toast-config';
+import { ThemeColor } from './../../../helpers/theme-color.type';
 
 @Injectable()
 export class ToastHelper {

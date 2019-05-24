@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { ToastConfig } from './config/toast-config';
 import { ToastHelper } from './toast.helper';
+import { ToastConfig } from '../config/toast-config';
 
 @Injectable()
 export class ToastController {

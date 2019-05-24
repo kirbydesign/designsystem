@@ -47,6 +47,8 @@
 }
 
 .kirby-toast {
+    position: fixed;
+    
     // Set default colors
     --background: #{get-color('light')};
     --color: #{get-color('light-contrast')};
