@@ -1,13 +1,12 @@
 <div class="modal-wrapper" #modalWrapper tabindex="-1" (window:focus)="onFocusChange()" (window:focusout)="onFocusChange()">
     <div class="modal-header">
-        <!-- <div class="title-container"> -->
         <span class="text-{{config.titleHorizontalAlignment}} title">{{ config.title }}</span>
-        <!-- </div> -->
         <kirby-floating-action-button *ngIf="config.closeBtnPosition !== 'hidden'" role="button"
-                class="close-btn {{ config.closeBtnPosition }}"
-                (click)="onModalDismiss($event)" 
-                (keydown)="onModalDismiss($event)" 
-                tabindex="0">
+            class="close-btn {{ config.closeBtnPosition }}"
+            (click)="onModalDismiss($event)" 
+            (keydown)="onModalDismiss($event)" 
+            [isFloating]="false"
+            tabindex="0">
             <kirby-icon [name]="config.closeIconName"></kirby-icon>
         </kirby-floating-action-button>
     </div>    

@@ -20,7 +20,7 @@
 </ModalStack>
 
 <ng-template #closeBtn>
-    <kirby-floating-action-button [showShadow]="false" (tap)="onModalDismiss()">
+    <kirby-floating-action-button [showShadow]="false" (tap)="onModalDismiss()" [isFloating]="false">
         <kirby-icon [name]="config.closeIconName"></kirby-icon>
     </kirby-floating-action-button>
 </ng-template>
