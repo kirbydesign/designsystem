@@ -38,9 +38,7 @@
 
     <!-- HEADER -->
     <ng-template tkListViewHeader *ngIf="listHeaderTemplate">
-      <FlexboxLayout class="list-header" [class.rounded]="shape === 'rounded'">
-        <ng-container *ngTemplateOutlet="listHeaderTemplate"></ng-container>
-      </FlexboxLayout>
+      <ng-container *ngTemplateOutlet="listHeaderTemplate"></ng-container>
     </ng-template>
 
     <!-- FOOTER -->

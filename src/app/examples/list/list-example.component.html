@@ -17,9 +17,11 @@
   <!-- HEADER -->
   <!-- *kirbyListHeader is not supported in conjunction with *kirbyListSectionHeader due to a bug in RadListView on iOS -->
   <kirby-list-header *kirbyListHeader>
-    <kirby-list-cell width="2">Name</kirby-list-cell>
-    <kirby-list-cell width="0.5"></kirby-list-cell>
-    <kirby-list-cell horisontalAlignment="right">Value</kirby-list-cell>
+    <kirby-list-flex-item>
+      <kirby-list-cell width="2">Name</kirby-list-cell>
+      <kirby-list-cell width="0.5"></kirby-list-cell>
+      <kirby-list-cell horisontalAlignment="right">Value</kirby-list-cell>
+    </kirby-list-flex-item>
   </kirby-list-header>
 
   <!-- BODY -->
@@ -72,10 +74,12 @@
   
   <!-- HEADER-->
   <kirby-list-header *kirbyListHeader>
-    <kirby-list-cell>Name</kirby-list-cell>
-    <!-- Headers doesn't have to be kirby-list-cell components. -->
-    <div style="width: 150px; text-align: right">Amount</div>
-    <kirby-list-cell horisontalAlignment="right">Value</kirby-list-cell>
+    <kirby-list-flex-item>
+      <kirby-list-cell>Name</kirby-list-cell>
+      <!-- Headers doesn't have to be kirby-list-cell components. -->
+      <div style="width: 150px; text-align: right">Amount</div>
+      <kirby-list-cell horisontalAlignment="right">Value</kirby-list-cell>
+    </kirby-list-flex-item>
   </kirby-list-header>
   
   <!-- BODY -->
