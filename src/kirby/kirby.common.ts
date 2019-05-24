@@ -37,6 +37,8 @@ import { CustomIconNameDirective } from './components/icon/custom-icon-name.dire
 import { AlertHelper } from './components/modal/services/alert.helper';
 import { SizeDirective } from './directives/size/size.directive';
 import { ThemeColorDirective } from './directives/theme-color/theme-color.directive';
+import { ToastController } from '@kirbydesign/designsystem/components/toast/toast.controller';
+import { ToastHelper } from './components/toast/toast.helper';
 
 export const declarations = [
   CardComponent,
@@ -75,9 +77,11 @@ export const declarations = [
 
 export const providerDeclarations: any[] = [
   ModalController,
+  ToastController,
   // the provider below is used to prevent a cyclic reference problem in our modal components
   { provide: IModalController, useExisting: ModalController },
   ActionSheetHelper,
   ModalHelper,
   AlertHelper,
+  ToastHelper,
 ];

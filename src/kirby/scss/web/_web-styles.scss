@@ -45,3 +45,18 @@
         --ion-color-primary: #{get-color(danger)};
     }
 }
+
+.kirby-toast {
+    // Set default colors
+    --background: #{get-color('light')};
+    --color: #{get-color('light-contrast')};
+    --button-color: #{get-color('light-contrast')};
+
+    @each $color-name, $color-value in $main-colors {
+        &.#{$color-name} {
+            --background: #{get-color($color-name)};
+            --color: #{get-color($color-name+'-contrast')};
+            --button-color: #{get-color($color-name+'-contrast')};
+        }
+    }
+}
