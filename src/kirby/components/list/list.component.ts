@@ -124,7 +124,7 @@ export class ListComponent implements OnInit, OnChanges {
     const order = this.orderMap.get(item);
     if (!order) {
       console.warn('Order of list item within section not found!');
-      return {}
+      return {};
     }
     return {
       first: order.isFirst,
