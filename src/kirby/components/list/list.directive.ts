@@ -16,11 +16,6 @@ export class ListFlexItemDirective {}
 export class ListHeaderDirective {}
 
 @Directive({
-  selector: '[kirbyListCell]',
-})
-export class ListCellDirective {}
-
-@Directive({
   selector: '[kirbyListSectionHeader]',
 })
 export class ListSectionHeaderDirective {}

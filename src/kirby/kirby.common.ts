@@ -13,7 +13,6 @@ import {
   ListFlexItemDirective,
   ListHeaderDirective,
   ListSectionHeaderDirective,
-  ListCellDirective,
 } from './components/list/list.directive';
 import { ComponentLoaderDirective } from './components/shared/component-loader.directive';
 import { ChartComponent } from './components/chart/chart.component';
@@ -52,7 +51,6 @@ export const declarations = [
   ListItemComponent,
   ListFlexItemComponent,
   ListCellComponent,
-  ListCellDirective,
   ListCellLineComponent,
   ListSectionHeaderComponent,
   ListSectionHeaderDirective,

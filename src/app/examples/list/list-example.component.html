@@ -23,24 +23,23 @@
   </kirby-list-header>
 
   <!-- BODY -->
-  <kirby-list-cell
-    *kirbyListCell="let account"
-    width="2">
-    <kirby-list-cell-line [primary]="true" [text]="account.title"></kirby-list-cell-line>
-    <kirby-list-cell-line [text]="account.detail === 0 ? null : account.detail"></kirby-list-cell-line>
-  </kirby-list-cell>
-  <kirby-list-cell
-    *kirbyListCell="let account"
-    width="0.5"
-    horisontalAlignment="right">
-    <kirby-list-cell-line [primary]="true" [text]="account.subTitle"></kirby-list-cell-line>
-  </kirby-list-cell>
-  <kirby-list-cell
-    *kirbyListCell="let account"
-    verticalAlignment="center"
-    horisontalAlignment="right">
-    <kirby-list-cell-line [primary]="true" [text]="account.amount"></kirby-list-cell-line>
-  </kirby-list-cell>
+  <kirby-list-flex-item *kirbyListFlexItem="let account">
+    <kirby-list-cell
+      width="2">
+      <kirby-list-cell-line [primary]="true" [text]="account.title"></kirby-list-cell-line>
+      <kirby-list-cell-line [text]="account.detail === 0 ? null : account.detail"></kirby-list-cell-line>
+    </kirby-list-cell>
+    <kirby-list-cell
+      width="0.5"
+      horisontalAlignment="right">
+      <kirby-list-cell-line [primary]="true" [text]="account.subTitle"></kirby-list-cell-line>
+    </kirby-list-cell>
+    <kirby-list-cell
+      verticalAlignment="center"
+      horisontalAlignment="right">
+      <kirby-list-cell-line [primary]="true" [text]="account.amount"></kirby-list-cell-line>
+    </kirby-list-cell>
+  </kirby-list-flex-item>
 </kirby-list>
 <hr />
 
@@ -54,17 +53,17 @@
     *kirbyListSectionHeader="let section"
     [title]="section"
   ></kirby-list-section-header>
-  <kirby-list-cell
-    *kirbyListCell="let item">
-    <kirby-list-cell-line [primary]="true" [text]="item.title"></kirby-list-cell-line>
-    <kirby-list-cell-line [text]="item.detail"></kirby-list-cell-line>
-  </kirby-list-cell>
-  <kirby-list-cell
-    *kirbyListCell="let item"
-    verticalAlignment="top"
-    horisontalAlignment="right">
-    <kirby-list-cell-line [primary]="true" [text]="item.amount"></kirby-list-cell-line>
-  </kirby-list-cell>
+  <kirby-list-flex-item *kirbyListFlexItem="let item">
+    <kirby-list-cell>
+      <kirby-list-cell-line [primary]="true" [text]="item.title"></kirby-list-cell-line>
+      <kirby-list-cell-line [text]="item.detail"></kirby-list-cell-line>
+    </kirby-list-cell>
+    <kirby-list-cell
+      verticalAlignment="top"
+      horisontalAlignment="right">
+      <kirby-list-cell-line [primary]="true" [text]="item.amount"></kirby-list-cell-line>
+    </kirby-list-cell>
+  </kirby-list-flex-item>
 </kirby-list> 
 
 <hr />
@@ -80,19 +79,19 @@
   </kirby-list-header>
   
   <!-- BODY -->
-  <kirby-list-cell
-    *kirbyListCell="let item">
-    <kirby-list-cell-line [primary]="true" [text]="item.title"></kirby-list-cell-line>
-    <kirby-list-cell-line [text]="item.detail"></kirby-list-cell-line>
-  </kirby-list-cell>
-  <!-- you can make custom cells using the kirbyListCell directive -->
-  <div *kirbyListCell="let item" style="width: 150px; text-align: right">{{ item.subTitle }}</div>
-  <kirby-list-cell
-    *kirbyListCell="let item"
-    verticalAlignment="top"
-    horisontalAlignment="right">
-    <kirby-list-cell-line [primary]="true" [text]="item.amount"></kirby-list-cell-line>
-  </kirby-list-cell>
+  <kirby-list-flex-item *kirbyListFlexItem="let item">
+    <kirby-list-cell>
+      <kirby-list-cell-line [primary]="true" [text]="item.title"></kirby-list-cell-line>
+      <kirby-list-cell-line [text]="item.detail"></kirby-list-cell-line>
+    </kirby-list-cell>
+    <!-- you can make custom cells using the kirbyListCell directive -->
+    <div style="width: 150px; text-align: right">{{ item.subTitle }}</div>
+    <kirby-list-cell
+            verticalAlignment="top"
+      horisontalAlignment="right">
+      <kirby-list-cell-line [primary]="true" [text]="item.amount"></kirby-list-cell-line>
+    </kirby-list-cell>
+  </kirby-list-flex-item>
 </kirby-list> 
 
 <hr />
@@ -109,20 +108,21 @@
 
 <kirby-list [items]="items" (itemSelect)="onItemSelect($event)" shape="rounded">
   <!-- Cells can also take arbitrary markup (client specific) as cell-lines -->
-  <kirby-list-cell *kirbyListCell="let item">
-    <section style="flex-direction: row; display: flex;">
-      <kirby-avatar [imageSrc]="imageSrc" [size]="'small'"></kirby-avatar>
-      <div style="margin-left: 10px; flex-direction: column; display: flex;">
-        <kirby-list-cell-line [primary]="true" [text]="item.title"></kirby-list-cell-line>
-        <kirby-list-cell-line [text]="item.detail"></kirby-list-cell-line>
-      </div>
-    </section>
-  </kirby-list-cell>
-
-  <kirby-list-cell
-          *kirbyListCell="let item"
-          verticalAlignment="top"
-          horisontalAlignment="right">
-    <kirby-list-cell-line [primary]="true" [text]="item.amount"></kirby-list-cell-line>
-  </kirby-list-cell>
+  <kirby-list-flex-item *kirbyListFlexItem="let item">
+    <kirby-list-cell>
+      <section style="flex-direction: row; display: flex;">
+        <kirby-avatar [imageSrc]="imageSrc" [size]="'small'"></kirby-avatar>
+        <div style="margin-left: 10px; flex-direction: column; display: flex;">
+          <kirby-list-cell-line [primary]="true" [text]="item.title"></kirby-list-cell-line>
+          <kirby-list-cell-line [text]="item.detail"></kirby-list-cell-line>
+        </div>
+      </section>
+    </kirby-list-cell>
+  
+    <kirby-list-cell
+        verticalAlignment="top"
+        horisontalAlignment="right">
+      <kirby-list-cell-line [primary]="true" [text]="item.amount"></kirby-list-cell-line>
+    </kirby-list-cell>
+  </kirby-list-flex-item>
 </kirby-list>
