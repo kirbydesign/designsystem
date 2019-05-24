@@ -1,7 +1,7 @@
 @import "../../scss/native-imports";
 
 .row, .list-header, .section-header {
-  padding: size('gutter') size('gutter-small') size('gutter') size('gutter-small');
+  padding: size('s') size('xs') size('s') size('xs');
 }
 
 .row, .list-header {
@@ -17,7 +17,7 @@
 .footer {
   font-weight: bold;
   text-align: center;
-  padding-bottom: size('gutter');
+  padding-bottom: size('s');
   padding-top: 0;
 }
 
