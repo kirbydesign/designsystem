@@ -18,8 +18,8 @@ ion-fab-button {
     }
 
     &.not-floating {
-        width: #{size('xl')}px;
-        height: #{size('xl')}px;
+        width: 40px;
+        height: 40px;
         --background: #{get-color('light')};
         --box-shadow: 0;
     }

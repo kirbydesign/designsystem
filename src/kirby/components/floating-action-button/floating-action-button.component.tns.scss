@@ -6,7 +6,8 @@
 }
 
 @mixin fab-wrapper($fab-size, $color) {
-  @include fab-size($fab-size * (3/2));
+  $shadow-overhead: 3/2;
+  @include fab-size($fab-size * $shadow-overhead);
   .fab-shadow {
     @include fab-size($fab-size);
     .fab {
@@ -28,6 +29,6 @@
   @include fab-wrapper(64, 'primary');
   
   &.not-floating {
-    @include fab-wrapper(size('xl'), 'light');
+    @include fab-wrapper(40, 'light');
   }
 }
