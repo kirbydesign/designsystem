@@ -26,11 +26,8 @@
         <ng-container
           *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }">
         </ng-container>
-
-        <ng-container *ngFor="let template of listCellTemplates">
-          <ng-container
-            *ngTemplateOutlet="template; context: { $implicit: item }">
-          </ng-container>
+        <ng-container
+          *ngTemplateOutlet="listFlexItemTemplate; context: { $implicit: item }">
         </ng-container>
       </li>
     </ng-container>
@@ -47,9 +44,8 @@
         *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }">
       </ng-container>
 
-      <ng-container *ngFor="let template of listCellTemplates">
-        <ng-container
-          *ngTemplateOutlet="template; context: { $implicit: item }"></ng-container>
+      <ng-container
+        *ngTemplateOutlet="listFlexItemTemplate; context: { $implicit: item }">
       </ng-container>
     </li>
   </ng-template>

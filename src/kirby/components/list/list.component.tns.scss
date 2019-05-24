@@ -1,12 +1,7 @@
 @import "../../scss/native-imports";
 
-.row, .list-header, .section-header {
-  padding: size('gutter') size('gutter-small') size('gutter') size('gutter-small');
-}
-
-.row, .list-header {
-  justify-content: space-between;
-  flex-direction: row;
+.row, .section-header {
+  padding: size('s') size('xs') size('s') size('xs');
 }
 
 .row.divider {
@@ -17,7 +12,7 @@
 .footer {
   font-weight: bold;
   text-align: center;
-  padding-bottom: size('gutter');
+  padding-bottom: size('s');
   padding-top: 0;
 }
 
@@ -43,12 +38,4 @@
       border-bottom-right-radius: $border-radius;
     }
   }
-}
-
-.list-header.rounded {
-  border-color: get-color('medium');
-  border-width: 1;
-
-  border-top-left-radius: $border-radius;
-  border-top-right-radius: $border-radius;
 }
