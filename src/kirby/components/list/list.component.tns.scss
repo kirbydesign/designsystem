@@ -4,11 +4,6 @@
   padding: size('s') size('xs') size('s') size('xs');
 }
 
-.row, .list-header {
-  justify-content: space-between;
-  flex-direction: row;
-}
-
 .row.divider {
   border-color: get-color('medium');
   border-bottom-width: 1;
