@@ -1,7 +1,7 @@
 <input 
     type="range" 
     (mouseup)="onSliderMouseup()" 
-    (input)='onSlide($event.target.value)' 
+    (input)='onSliderValueChange($event.target.value)' 
     [ngStyle]="{'opacity': isSlideDone ? 0 : 1}" 
     (mousedown)="onSliderMousedown()" 
     class="slide-button" 

@@ -20,6 +20,7 @@ export class SlideButtonComponent {
   public value = 0;
 
   public onSliderMouseup() {
+    console.log(this.value); // TODO: remove
     if (this.value == 100) {
       this.handleSlideDone();
     } else {
@@ -31,7 +32,7 @@ export class SlideButtonComponent {
     }
   }
 
-  public onSlide(val: string) {
+  public onSliderValueChange(val: string) {
     this.value = +val;
     this.slidingPercentageChanged.emit(this.value);
   }
