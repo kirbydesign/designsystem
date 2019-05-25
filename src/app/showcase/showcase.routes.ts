@@ -22,6 +22,7 @@ import { CheckboxShowcaseComponent } from './checkbox-showcase/checkbox-showcase
 import { SegmentedChipControlShowcaseComponent } from './segmented-chip-control-showcase/segmented-chip-control-showcase.component';
 import { ActionSheetShowcaseComponent } from './action-sheet-showcase/action-sheet-showcase.component';
 import { AlertShowcaseComponent } from './alert-showcase/alert-showcase.component';
+import { SlideButtonShowcaseComponent } from './slide-button-showcase/slide-button-showcase.component';
 
 export const routes: Routes = [
   {
@@ -36,6 +37,10 @@ export const routes: Routes = [
       {
         path: 'button',
         component: ButtonShowcaseComponent,
+      },
+      {
+        path: 'slide-button',
+        component: SlideButtonShowcaseComponent,
       },
       {
         path: 'chip',

@@ -22,6 +22,7 @@ import { CheckboxExampleComponent } from './checkbox-example/checkbox-example.co
 import { SegmentedChipControlExampleComponent } from './segmented-chip-control-example/segmented-chip-control-example.component';
 import { ActionSheetExampleComponent } from './action-sheet-example/action-sheet-example.component';
 import { AlertExampleComponent } from './alert-example/alert-example.component';
+import { SlideButtonExampleComponent } from './slide-button-example/slide-button-example.component';
 
 export const customIconSettings: CustomIconSettings = {
   fontfamily: "'Ionicons', 'ionicons'",
@@ -41,6 +42,7 @@ export const customIconSettings: CustomIconSettings = {
 
 export const COMPONENT_DECLARATIONS: any[] = [
   ButtonExampleComponent,
+  SlideButtonExampleComponent,
   FloatingActionButtonExampleComponent,
   CardExampleComponent,
   CardThemecolorExampleComponent,
