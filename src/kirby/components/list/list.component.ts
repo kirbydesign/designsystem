@@ -5,7 +5,6 @@ import {
   HostBinding,
   Input,
   OnChanges,
-  OnInit,
   Output,
   TemplateRef,
 } from '@angular/core';
@@ -27,7 +26,7 @@ export type ListShape = 'square' | 'rounded';
   styleUrls: ['./list.component.scss'],
   providers: [ListHelper, GroupByPipe],
 })
-export class ListComponent implements OnInit, OnChanges {
+export class ListComponent implements OnChanges {
   /**
    * Provide items for the list to render. Items must be provided in the order you expect them to be rendered.
    */
@@ -97,12 +96,6 @@ export class ListComponent implements OnInit, OnChanges {
   private orderMap: WeakMap<any, { isFirst: boolean; isLast: boolean }>;
 
   constructor(private listHelper: ListHelper, private groupBy: GroupByPipe) {}
-
-  ngOnInit() {
-    if (this.listItemTemplate) {
-      console.warn('kirbyListItem is deprecated and will be removed in future versions of Kirby');
-    }
-  }
 
   ngOnChanges(): void {
     this.isSectionsEnabled = !!this.getSectionName;
