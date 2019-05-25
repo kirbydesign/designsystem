@@ -1,12 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  EventEmitter,
-  Input,
-  Output,
-  ViewChild,
-} from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 
 declare var document;
 
@@ -15,40 +7,41 @@ declare var document;
   templateUrl: './slide-button.component.html',
   styleUrls: ['./slide-button.component.scss'],
 })
-export class SlideButtonComponent implements AfterViewInit {
+export class SlideButtonComponent {
   @Input() public text = '';
   @Input() expand?: 'fullWidth';
 
   @Output() public slideDone = new EventEmitter();
   @Output() public slidingPercentageChanged = new EventEmitter<number>();
-  @ViewChild('slideButtonRef') public slideButtonRef: ElementRef;
+  @ViewChild('sliderButtonRef') public sliderButtonRef: ElementRef;
+
+  public isSlideDone = false;
+
+  public value = 0;
 
   public onSliderMouseup() {
-    console.log('mouse Up');
+    if (this.value == 100) {
+      this.handleSlideDone();
+    } else {
+      document.init = setInterval(() => {
+        if (this.value != 0) {
+          this.value--;
+        }
+      }, 1);
+    }
   }
 
-  public onSliderMousedown() {}
-
-  ngAfterViewInit(): void {
-    this.slideButtonRef.nativeElement.onmouseup = () => {
-      var theRange = this.slideButtonRef.nativeElement.value;
-      if (theRange == 100) {
-        this.hideSlider();
-      } else {
-        document.init = setInterval(() => {
-          if (this.slideButtonRef.nativeElement.value != 0) {
-            this.slideButtonRef.nativeElement.value = theRange--;
-          }
-        }, 1);
-      }
-    };
-
-    this.slideButtonRef.nativeElement.onmousedown = () => {
-      clearInterval(document.init);
-    };
+  public onSlide(val: string) {
+    this.value = +val;
+    this.slidingPercentageChanged.emit(this.value);
   }
 
-  private hideSlider() {
-    this.slideButtonRef.nativeElement.style.opacity = '0';
+  public onSliderMousedown() {
+    clearInterval(document.init);
+  }
+
+  private handleSlideDone() {
+    this.slideDone.emit();
+    this.isSlideDone = true;
   }
 }

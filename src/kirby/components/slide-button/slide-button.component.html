@@ -1,1 +1,12 @@
-<input type="range" class="slide-button" #slideButtonRef [attr.data-before-content]="text" value="0" max="100">
+<input 
+    type="range" 
+    (mouseup)="onSliderMouseup()" 
+    (input)='onSlide($event.target.value)' 
+    [ngStyle]="{'opacity': isSlideDone ? 0 : 1}" 
+    (mousedown)="onSliderMousedown()" 
+    class="slide-button" 
+    #sliderButtonRef 
+    [attr.data-before-content]="text" 
+    [value]="value" 
+    max="100"
+/>
