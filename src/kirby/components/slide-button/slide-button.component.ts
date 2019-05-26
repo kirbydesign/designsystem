@@ -24,7 +24,6 @@ export class SlideButtonComponent {
   private resetSliderIntervalTimer: any;
 
   public onSliderMouseup() {
-    console.log(this.value); // TODO: remove
     if (this.value == 100) {
       this.handleSlideDone();
     } else {
