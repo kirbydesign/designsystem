@@ -16,9 +16,18 @@ export class SlideButtonComponent {
 
   public isSlideDone = false;
 
-  public value = 0;
-  public get pctInTens() {
-    return Math.ceil(this.value / 10) * 10;
+  private _value: number = 0;
+  public get value(): number {
+    return this._value;
+  }
+  public set value(v: number) {
+    this._value = v;
+    this.calculatePctInTens();
+  }
+
+  public pctInTens = 0;
+  private calculatePctInTens() {
+    this.pctInTens = Math.ceil(this.value / 10) * 10;
   }
 
   private resetSliderIntervalTimer: any;
