@@ -1,10 +1,10 @@
 declare var require: any;
-
 export class ColorHelper {
   static style: any = require('sass-extract-loader!./color-helper.scss');
 
   public static getThemeColor(name: string) {
-    return ColorHelper.style.global['$kirby-colors'].value[name].value;
+    const color = ColorHelper.style.global['$kirby-colors'].value[name];
+    return color ? color.value : undefined;
   }
 
   public static getAlphaIn255Range(alpha: number): number {

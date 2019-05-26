@@ -4,8 +4,8 @@ $border-radius: 20;
 
 .segment-control {
   border-radius: $border-radius;
-  background: get-color('kirby-contrast-light');
-  color: get-color('kirby-contrast-dark');
+  background: get-color('contrast-light');
+  color: get-color('contrast-dark');
   display: inline-block;
   height: size("xl");
   margin-top: size("s");
@@ -19,10 +19,11 @@ $border-radius: 20;
   padding-right: size("m");
   border-radius: $border-radius;
   height: 100%;
+  color: get-color('contrast-dark');
 
   &.is-checked {
-    color: get-color('kirby-contrast-light');
-    background-color: get-color('kirby-contrast-dark');
+    color: get-color('contrast-light');
+    background-color: get-color('contrast-dark');
   }
 
   & + & {

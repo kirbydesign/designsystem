@@ -1,23 +1,39 @@
 @import '../../scss/native-imports';
 
 Button[kirby-button] {
-  color: get-color('kirby-primary-contrast');
-  background-color: get-color('kirby-primary');
-  border-color: get-color('kirby-primary');
+  color: get-color('primary-contrast');
+  background-color: get-color('primary');
+  border-color: get-color('primary');
   border-radius: 100;
   border-width: 1;
-  margin: 10 10;
-  padding: 12 20;
+
+  // we default to 'md' size.
+  margin: size('xxs');
+  padding: size('xs') size('m') size('xs') size('m');
+  font-size: font-size('s');
+  height: size('xl');
+  line-height: line-height('xs');
+
+  &.sm {
+    padding: size('xxs') size('s') size('xxs') size('s');
+    font-size: font-size('xs');
+    height: size('l');
+  }
+
+  &.lg {
+    font-size: font-size('s');
+    height: size('xxl');
+  }
   
-  &[colortype='secondary'] {
-    color: get-color('kirby-contrast-dark');
-    background-color: get-color('kirby-contrast-light');
-    border-color: get-color('kirby-contrast-light');
+  &.secondary {
+    color: get-color('contrast-dark');
+    background-color: get-color('contrast-light');
+    border-color: get-color('contrast-light');
   }
 
   &[isEnabled=false] {
-    background-color: get-color('kirby-light-tint');
-    border-color: get-color('kirby-light-tint');
+    background-color: get-color('light-tint');
+    border-color: get-color('light-tint');
   }
 
 }

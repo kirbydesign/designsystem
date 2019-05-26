@@ -1,36 +1,19 @@
 @import "../../scss/web-imports";
 
 :host {
-  --ion-color-base: #{get-color('kirby-primary')};
-  --ion-color-contrast: #{get-color('kirby-primary-contrast')};
+  --kirby-badge-background-color: #{get-color('primary')};
+  --kirby-badge-color: #{get-color('primary-contrast')};
+  --ion-color-base: var(--kirby-badge-background-color);
+  --ion-color-contrast: var(--kirby-badge-color);
+}
 
-  &[colortype='primary'] {
-    --ion-color-base: #{get-color('kirby-primary')};
-    --ion-color-contrast: #{get-color('kirby-primary-contrast')};
+@each $color-name, $color-value in $main-colors {
+  :host(.#{$color-name}) {
+    --kirby-badge-background-color: #{get-color($color-name)};
+    --kirby-badge-color: #{get-color($color-name+'-contrast')};
   }
+}
 
-  &[colortype='secondary'] {
-    --ion-color-base: #{get-color('kirby-secondary')};
-    --ion-color-contrast: #{get-color('kirby-secondary-contrast')};
-  }
-
-  &[colortype='tertiary'] {
-    --ion-color-base: #{get-color('kirby-tertiary')};
-    --ion-color-contrast: #{get-color('kirby-tertiary-contrast')};
-  }
-
-  &[colortype='success'] {
-    --ion-color-base: #{get-color('kirby-success')};
-    --ion-color-contrast: #{get-color('kirby-success-contrast')};
-  }
-  
-  &[colortype='warning'] {
-    --ion-color-base: #{get-color('kirby-warning')};
-    --ion-color-contrast: #{get-color('kirby-warning-contrast')};
-  }
-
-  &[colortype='danger'] {
-    --ion-color-base: #{get-color('kirby-danger')};
-    --ion-color-contrast: #{get-color('kirby-contrast-light')};
-  }
+:host(.danger) {
+  --kirby-badge-color: #{get-color('contrast-light')};
 }

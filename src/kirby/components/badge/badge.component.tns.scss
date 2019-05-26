@@ -3,42 +3,23 @@
 .badge { 
   font-size: font-size("xxs");
   border-radius: size("xs");
-  background-color: get-color('kirby-danger');
-  color: get-color('kirby-contrast-light', true, $kirby-colors);
+  background-color: get-color('danger');
+  color: get-color('contrast-light');
   height: size("s");
   min-width: size("s");
   padding-left: size("xxs");
   padding-right: size("xxs");    
   white-space: nowrap;
-  
-  &[colortype='primary']  {
-    color: get-color('kirby-primary-contrast');
-    background-color: get-color('kirby-primary');
-  }
-  
-  &[colortype='secondary'] {
-    color: get-color('kirby-secondary-contrast');
-    background-color: get-color('kirby-secondary');
+
+  @each $color-name, $color-value in $main-colors {
+    &[themeColor='#{$color-name}'] {
+      background-color: #{get-color($color-name)};
+      color: #{get-color($color-name+'-contrast')};
+    }
   }
 
-  &[colortype='tertiary'] {
-    color: get-color('kirby-tertiary-contrast');
-    background-color: get-color('kirby-tertiary');
-  }
-
-  &[colortype='success'] {
-    color: get-color('kirby-success-contrast');
-    background-color: get-color('kirby-success');
-  }
-
-  &[colortype='warning'] {
-    color: get-color('kirby-warning-contrast');
-    background-color: get-color('kirby-warning');
-  }
-  
-  &[colortype='danger'] {
-    color: get-color('kirby-contrast-light');
-    background-color: get-color('kirby-danger');
+  &[themeColor='danger'] {
+    color: get-color('contrast-light');
   }
 }
 

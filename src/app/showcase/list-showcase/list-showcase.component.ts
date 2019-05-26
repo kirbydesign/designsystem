@@ -9,6 +9,8 @@ declare var require: any;
 export class ListShowcaseComponent implements OnInit {
   exampleHtml: string = require('../../examples/list/list-example.component.html');
 
+  sectionHeaderExampleHtml: string =
+    '<GridLayout *kirbyListSectionHeader="let section" ios:height="50">...</GridLayout>';
   constructor() {}
 
   ngOnInit() {}

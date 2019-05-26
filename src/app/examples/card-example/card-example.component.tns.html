@@ -1,15 +1,29 @@
-<StackLayout>
+<StackLayout orientation="vertical" width="100%" height="100%">
   <kirby-card>
-    <kirby-card-header [title]="'Titel'" [subtitle]="'Subtitel'">
-    </kirby-card-header>
+    <kirby-card-header title="Titel" subtitle="Subtitel"></kirby-card-header>
+    <StackLayout class="card-content">
+      <Label text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui quas quibusdam eligendi, debitis nemo fuga quia accusamus doloremque sit reprehenderit!" textWrap="true"></Label>
+    </StackLayout>
+  </kirby-card>
 
-    <!-- Card content example: -->
-    <ScrollView>
-      <StackLayout class="card-content">
-        <Label text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui quas quibusdam eligendi, debitis nemo fuga quia accusamus doloremque sit reprehenderit!" textWrap="true"></Label>        
-      </StackLayout>
-    </ScrollView>
+  <kirby-card themeColor="primary">
+    <kirby-card-header title="Titel" subtitle="Subtitel"></kirby-card-header>
+    <StackLayout class="card-content">
+      <Label text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui quas quibusdam eligendi, debitis nemo fuga quia accusamus doloremque sit reprehenderit!" textWrap="true"></Label>
+    </StackLayout>
+  </kirby-card>
 
-    <kirby-card-footer></kirby-card-footer>
+  <kirby-card themeColor="secondary">
+    <kirby-card-header title="Titel" subtitle="Subtitel"></kirby-card-header>
+    <StackLayout class="card-content">
+      <Label text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui quas quibusdam eligendi, debitis nemo fuga quia accusamus doloremque sit reprehenderit!" textWrap="true"></Label>
+    </StackLayout>
+  </kirby-card>
+ 
+  <kirby-card themeColor="warning">
+    <kirby-card-header title="Titel" subtitle="Subtitel"></kirby-card-header>
+    <StackLayout class="card-content">
+      <Label text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui quas quibusdam eligendi, debitis nemo fuga quia accusamus doloremque sit reprehenderit!" textWrap="true"></Label>
+    </StackLayout>
   </kirby-card>
 </StackLayout>

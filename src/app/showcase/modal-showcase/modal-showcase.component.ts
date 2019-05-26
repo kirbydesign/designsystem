@@ -7,6 +7,7 @@ declare var require: any;
 @Component({
   selector: 'kirby-modal-showcase',
   templateUrl: './modal-showcase.component.html',
+  preserveWhitespaces: true,
 })
 export class ModalShowcaseComponent {
   exampleHtml: string = require('../../examples/modal-example/modal-example.component.html');
@@ -41,6 +42,12 @@ export class ModalShowcaseComponent {
       description: 'The component which will be rendered inside the modal.',
       defaultValue: '',
       inputValues: ['Component'],
+    },
+    {
+      name: 'componentProps',
+      description: 'The data to pass to the modal component.',
+      defaultValue: '',
+      inputValues: ['undefined | { [key: string]: any; }'],
     },
   ];
 }

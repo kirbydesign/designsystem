@@ -100,9 +100,9 @@ export class GridComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.breakpointSubscription = this.breakpointHelper.observe().subscribe(() => {
-      this.configureGrid();
-    });
+    // this.breakpointSubscription = this.breakpointHelper.observe().subscribe(() => {
+    //   this.configureGrid();
+    // });
   }
 
   ngOnDestroy() {
