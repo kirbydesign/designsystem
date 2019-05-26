@@ -47,11 +47,11 @@
         $iTenth: $i*10;
         .slide-#{$iTenth}-pct {
             &.slide-button::before {
-                -webkit-transition: opacity 0.2s ease-in-out;
-                -moz-transition: opacity 0.2s ease-in-out;
-                -ms-transition: opacity 0.2s ease-in-out;
-                -o-transition: opacity 0.2s ease-in-out;
-                transition: opacity 0.2s ease-in-out;
+                -webkit-transition: opacity 0.2s linear;
+                -moz-transition: opacity 0.2s linear;
+                -ms-transition: opacity 0.2s linear;
+                -o-transition: opacity 0.2s linear;
+                transition: opacity 0.2s linear;
                 opacity: 1-($i/10);
             }
         }
