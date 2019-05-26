@@ -13,7 +13,8 @@
       <StackLayout class="row"
                 [class.divider]="showDivider"
                 [class.rounded]="shape === 'rounded'"
-                [ngClass]="getCssClasses(item)"
+                [class.first]="isFirstInSection(item)"
+                [class.last]="isLastInSection(item)"
                 (tap)="onItemSelect(item)">
         <ng-container
           *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }">
