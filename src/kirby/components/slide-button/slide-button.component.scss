@@ -32,7 +32,7 @@
         height: 50px;
     }
   
-    .slide-button:before {
+    .slide-button::before {
         content: attr(data-before-content);
         color: get-color('contrast-light');
         position: absolute;
@@ -41,6 +41,29 @@
         top: 10px;
         z-index: 1;
         font-size: 32px;
+    }
+
+    @for $i from 1 through 10 {
+        $iTenth: $i*10;
+        .slide-#{$iTenth}-pct {
+            &.slide-button::before {
+                -webkit-transition: opacity 0.2s ease-in-out;
+                -moz-transition: opacity 0.2s ease-in-out;
+                -ms-transition: opacity 0.2s ease-in-out;
+                -o-transition: opacity 0.2s ease-in-out;
+                transition: opacity 0.2s ease-in-out;
+                opacity: 1-($i/10);
+            }
+        }
+    }
+
+    .slide-done {
+        -webkit-transition: opacity 0.5s ease-in-out;
+        -moz-transition: opacity 0.5s ease-in-out;
+        -ms-transition: opacity 0.5s ease-in-out;
+        -o-transition: opacity 0.5s ease-in-out;
+        transition: opacity 0.5s ease-in-out;
+        opacity: 0;
     }
   
     .slide-button::-webkit-slider-thumb:before {

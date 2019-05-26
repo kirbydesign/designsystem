@@ -1,6 +1,5 @@
 import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-
-declare var document;
+import { TouchGestureEventData } from 'tns-core-modules/ui/gestures/gestures';
 
 @Component({
   selector: 'kirby-slide-button',
@@ -9,7 +8,7 @@ declare var document;
 })
 export class SlideButtonComponent {
   @Input() public text = '';
-  @Input() expand?: 'fullWidth';
+  @Input() public expand?: 'fullWidth';
 
   @Output() public slideDone = new EventEmitter();
   @Output() public slidingPercentageChanged = new EventEmitter<number>();
@@ -18,17 +17,31 @@ export class SlideButtonComponent {
   public isSlideDone = false;
 
   public value = 0;
+  public get pctInTens() {
+    return Math.ceil(this.value / 10) * 10;
+  }
+
+  private resetSliderIntervalTimer: any;
 
   public onSliderMouseup() {
     console.log(this.value); // TODO: remove
     if (this.value == 100) {
       this.handleSlideDone();
     } else {
-      document.init = setInterval(() => {
+      this.resetSliderIntervalTimer = setInterval(() => {
         if (this.value != 0) {
           this.value--;
         }
       }, 1);
+    }
+  }
+
+  onTouch(args: TouchGestureEventData) {
+    if (args.action === 'up') {
+      this.onSliderMouseup();
+    }
+    if (args.action === 'down') {
+      this.onSliderMousedown();
     }
   }
 
@@ -38,7 +51,7 @@ export class SlideButtonComponent {
   }
 
   public onSliderMousedown() {
-    clearInterval(document.init);
+    clearInterval(this.resetSliderIntervalTimer);
   }
 
   private handleSlideDone() {

@@ -2,9 +2,9 @@
     type="range" 
     (mouseup)="onSliderMouseup()" 
     (input)='onSliderValueChange($event.target.value)' 
-    [ngStyle]="{'opacity': isSlideDone ? 0 : 1}" 
     (mousedown)="onSliderMousedown()" 
-    class="slide-button" 
+    class="slide-button slide-{{pctInTens}}-pct"
+    [ngClass]="{'slide-done': isSlideDone}" 
     #sliderButtonRef 
     [attr.data-before-content]="text" 
     [value]="value" 
