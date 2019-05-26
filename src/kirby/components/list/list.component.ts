@@ -110,19 +110,25 @@ export class ListComponent implements OnChanges {
     this.isLoadOnDemandEnabled = this.loadOnDemand.observers.length > 0;
   }
 
-  getCssClasses(item: any) {
+  private getItemOrder(item: any): { isFirst: boolean; isLast: boolean } {
+    const defaultOrder = { isFirst: false, isLast: false };
     if (!this.isSectionsEnabled) {
-      return {};
+      return defaultOrder;
     }
     const order = this.orderMap.get(item);
     if (!order) {
       console.warn('Order of list item within section not found!');
-      return {};
+      return defaultOrder;
     }
-    return {
-      first: order.isFirst,
-      last: order.isLast,
-    };
+    return order;
+  }
+
+  isFirstInSection(item: any) {
+    return this.getItemOrder(item).isFirst;
+  }
+
+  isLastInSection(item: any) {
+    return this.getItemOrder(item).isLast;
   }
 
   onItemSelect(selectedItem: any) {
