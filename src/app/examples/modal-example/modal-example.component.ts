@@ -14,6 +14,7 @@ export class ModalExampleComponent {
   showModal() {
     const config: ModalConfig = {
       title: 'First Embedded Modal',
+      closeBtnPosition: 'inside',
       titleHorizontalAlignment: 'center',
       component: FirstEmbeddedModalExampleComponent,
       componentProps: {
