@@ -20,7 +20,7 @@ export class ModalShowcaseComponent {
     },
     {
       name: 'closeBtnPosition',
-      description: 'The placement of the close modal button, in relation to the modal.',
+      description: 'The position of the close modal button, in relation to the modal.',
       defaultValue: 'inside',
       inputValues: ['inside', 'outside', 'hidden'],
     },
