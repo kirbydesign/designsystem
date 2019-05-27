@@ -142,18 +142,19 @@ describe('ListComponent', () => {
     });
   });
 
-  describe('css classes', () => {
-    it('should return an empty object, when sections are not enabled', () => {
+  describe('first/last in section', () => {
+    it('should return false, when sections are not enabled', () => {
       const items = Item.createItems(1, 2, 3);
       spectator.setInput({
         items,
       });
       runNgOnChanges();
 
-      expect(component.getCssClasses(items[0])).toEqual({});
+      expect(component.isFirstInSection(items[0])).toEqual(false);
+      expect(component.isLastInSection(items[0])).toEqual(false);
     });
 
-    it('should return styling object for sectioned list with rounded corners and a single entry', () => {
+    it('should return true for sectioned list with rounded corners and a single entry', () => {
       const items = Item.createItems(1);
       spectator.setInput({
         items,
@@ -162,10 +163,11 @@ describe('ListComponent', () => {
       });
       runNgOnChanges();
 
-      expect(component.getCssClasses(items[0])).toEqual({ first: true, last: true, rounded: true });
+      expect(component.isFirstInSection(items[0])).toEqual(true);
+      expect(component.isLastInSection(items[0])).toEqual(true);
     });
 
-    it('should return styling object for sectioned list with rounded corners and a multiple entries', () => {
+    it('should return true for sectioned list with rounded corners and a multiple entries', () => {
       const items = Item.createItems(1, 2, 3, 4);
       spectator.setInput({
         items,
@@ -174,26 +176,17 @@ describe('ListComponent', () => {
       });
       runNgOnChanges();
 
-      expect(component.getCssClasses(items[0])).toEqual({
-        first: true,
-        last: false,
-        rounded: true,
-      });
-      expect(component.getCssClasses(items[1])).toEqual({
-        first: true,
-        last: false,
-        rounded: true,
-      });
-      expect(component.getCssClasses(items[2])).toEqual({
-        first: false,
-        last: true,
-        rounded: true,
-      });
-      expect(component.getCssClasses(items[3])).toEqual({
-        first: false,
-        last: true,
-        rounded: true,
-      });
+      expect(component.isFirstInSection(items[0])).toEqual(true);
+      expect(component.isLastInSection(items[0])).toEqual(false);
+
+      expect(component.isFirstInSection(items[1])).toEqual(true);
+      expect(component.isLastInSection(items[1])).toEqual(false);
+
+      expect(component.isFirstInSection(items[2])).toEqual(false);
+      expect(component.isLastInSection(items[2])).toEqual(true);
+
+      expect(component.isFirstInSection(items[3])).toEqual(false);
+      expect(component.isLastInSection(items[3])).toEqual(true);
     });
   });
 });

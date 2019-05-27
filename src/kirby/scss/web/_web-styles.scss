@@ -1,4 +1,6 @@
 @import "./ionic";
+@import "./web-variables"; 
+@import './web-include-media';
 @import "./../base/typography"; 
 @import "./../themes/colors";
 
@@ -13,11 +15,14 @@
   
 .kirby-modal {
     --background: #{get-color('base-color')};
-    --border-radius: 15px;
-    --width: 375px;
-    --height: 647px;
-    --overflow: visible;
+    --border-radius: #{$border-radius};
     position: fixed;
+
+    @include media(">=medium") {
+        //TODO Hardcoded magic numbers: Jakob + Jonathan, revisit!!!
+        --width: 720px;
+        --height: 647px;
+    }
 }
   
 .backdrop-no-scroll {

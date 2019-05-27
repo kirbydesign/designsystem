@@ -14,17 +14,20 @@ describe('ModalConfigHelper', () => {
   it('should fill missing optional fields', () => {
     let updatedModalConfig = ModalConfigHelper.processOptionalValues(mockModalConfig);
     expect(updatedModalConfig.dim).toEqual(0.5);
-    expect(updatedModalConfig.titleHorizontalAlignment).toEqual('center');
+    expect(updatedModalConfig.closeBtnPosition).toEqual('inside');
     expect(updatedModalConfig.closeIconName).toEqual('close');
+    expect(updatedModalConfig.titleHorizontalAlignment).toEqual('left');
   });
 
   it('should not overwrite provided optional fields', () => {
     mockModalConfig.dim = 0.1;
-    mockModalConfig.titleHorizontalAlignment = 'left';
+    mockModalConfig.closeBtnPosition = 'outside';
     mockModalConfig.closeIconName = 'arrow-back';
+    mockModalConfig.titleHorizontalAlignment = 'center';
     let updatedModalConfig = ModalConfigHelper.processOptionalValues(mockModalConfig);
     expect(updatedModalConfig.dim).not.toEqual(0.5);
-    expect(updatedModalConfig.titleHorizontalAlignment).not.toEqual('center');
+    expect(updatedModalConfig.closeBtnPosition).not.toEqual('inside');
     expect(updatedModalConfig.closeIconName).not.toEqual('close');
+    expect(updatedModalConfig.titleHorizontalAlignment).not.toEqual('left');
   });
 });

@@ -25,14 +25,27 @@ describe('FloatingActionButtonComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  describe('isFloating', () => {
+    it('should be floating by default', () => {
+      expect(component.isFloating).toEqual(true);
+    });
+
+    it('should render medium fab when size property has changed', () => {
+      component.isFloating = false;
+      fixture.detectChanges();
+      var el = fixture.debugElement.query(By.directive(ionic.IonFabButton));
+      expect(el.classes['not-floating']).toBeTruthy();
+    });
+  });
+
   describe('shadows', () => {
     it('should have a shadow by default', () => {
       expect(component.showShadow).toBeTruthy();
     });
 
     it('should render a shadow by default', () => {
-      const rootElement: HTMLElement = fixture.debugElement.nativeElement;
-      expect(rootElement.classList).not.toContain('no-shadow');
+      var el = fixture.debugElement.query(By.directive(ionic.IonFabButton));
+      expect(el.classes['no-shadow']).not.toBeTruthy();
     });
   });
 

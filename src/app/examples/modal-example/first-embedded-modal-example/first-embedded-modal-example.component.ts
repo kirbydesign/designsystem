@@ -22,7 +22,7 @@ export class FirstEmbeddedModalExampleComponent {
   async showSecondModal() {
     const config: ModalConfig = {
       title: 'Second Embedded Modal',
-      titleHorizontalAlignment: 'left',
+      titleHorizontalAlignment: 'center',
       closeIconName: 'arrow-back',
       component: SecondEmbeddedModalExampleComponent,
     };
