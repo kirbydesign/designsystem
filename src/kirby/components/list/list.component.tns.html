@@ -13,8 +13,7 @@
                 [class.divider]="showDivider"
                 [class.rounded]="shape === 'rounded'"
                 [class.first]="isFirstInSection(item)"
-                [class.last]="isLastInSection(item)"
-                (tap)="onItemSelect(item)">
+                [class.last]="isLastInSection(item)">
         <ng-container
           *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }">
         </ng-container>
