@@ -7,7 +7,7 @@ import { ThemeColor } from './../../../helpers/theme-color.type';
 @Injectable()
 export class ToastHelper {
   static DEFAULT_CSS_CLASS = 'kirby-toast';
-  static DEFAULT_DURATION = 3000;
+  static DEFAULT_DURATION = 4000;
 
   constructor(private toastController: ToastController) {}
 

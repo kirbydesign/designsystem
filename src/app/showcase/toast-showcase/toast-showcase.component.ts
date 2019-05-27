@@ -27,12 +27,13 @@ export class ToastShowcaseComponent {
       name: 'duration',
       description:
         '(Optional) Duretion in milliseconds before the toast dismisses automatically. If cancelBtnText is set, duration will not be used.',
-      defaultValue: '3000',
+      defaultValue: '4000',
       inputValues: ['number'],
     },
     {
       name: 'cancelBtnText',
-      description: '(Optional) The text that will appear on the cancel button',
+      description:
+        '(Optional) The text that will appear on the cancel button. (only available for web)',
       defaultValue: '',
       inputValues: ['string'],
     },
