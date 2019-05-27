@@ -24,8 +24,8 @@ export class ListHelper {
   }
 
   getSelectedItem(items: any[], args: ListViewEventData) {
-    let selectedItem = {};
-    if (args.index && args.index >= 0) {
+    let selectedItem: any;
+    if (args.index >= 0) {
       selectedItem = items[args.index];
     }
     return selectedItem;
