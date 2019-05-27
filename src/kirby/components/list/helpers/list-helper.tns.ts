@@ -1,4 +1,4 @@
-import { RadListView, ListViewEventData } from 'nativescript-ui-listview';
+import { RadListView } from 'nativescript-ui-listview';
 
 import { LoadOnDemandEventData } from '../list.event';
 import { ListComponent } from './../list.component';
@@ -21,10 +21,5 @@ export class ListHelper {
         event.returnValue = false;
       }
     }
-  }
-
-  getSelectedItem(args: ListViewEventData) {
-    const listview = args.object as RadListView;
-    return listview.getSelectedItems()[0];
   }
 }

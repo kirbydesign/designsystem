@@ -131,8 +131,8 @@ export class ListComponent implements OnChanges {
     return this.getItemOrder(item).isLast;
   }
 
-  onItemSelect(args: any) {
-    this.itemSelect.emit(this.listHelper.getSelectedItem(args));
+  onItemSelect(selectedItem: any) {
+    this.itemSelect.emit(selectedItem);
   }
 
   onLoadOnDemand(event?: LoadOnDemandEventData) {
