@@ -16,40 +16,6 @@
     --border-radius: #{$border-radius};
     --overflow: visible;
     position: fixed;
-
-    @mixin wrapper-bottom() {
-        .modal-wrapper {
-            height: unquote("calc(100% - 72px)");
-            position: fixed;
-            bottom: 0;
-        }
-    }
-
-    // phone if less than, tablet or desktop if larger than
-    $width-separator: 768px;
-    // 647 + the top margin needed for the close button
-    $height-separator: 719px;
-
-    // small width
-    @media screen and (max-width: $width-separator) {
-        --width: 100%;
-        @include wrapper-bottom();
-    }
-
-    // large width
-    @media screen and (min-width: $width-separator) {
-        --width: 375px;
-    }
-
-    // small height
-    @media screen and (max-height: $height-separator) {
-        @include wrapper-bottom();
-    }
-
-    // large height
-    @media screen and (min-height: $height-separator) {
-        --height: 647px;
-    }
 }
   
 .backdrop-no-scroll {
