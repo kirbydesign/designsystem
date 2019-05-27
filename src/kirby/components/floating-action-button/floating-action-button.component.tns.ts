@@ -22,6 +22,7 @@ export class FloatingActionButtonComponent extends ContentView {
   // TODO: showShadow should become an "elevation" enum in the future;
   @Input() showShadow?: boolean = true;
   @Input() disabled?: boolean = false;
+  @Input() isFloating?: boolean = true;
 
   view: View;
 
@@ -31,7 +32,7 @@ export class FloatingActionButtonComponent extends ContentView {
 
   onViewLoaded(args: EventData) {
     this.view = <View>args.object;
-    this.setupOnOrientationChangeListener();
+    // this.setupOnOrientationChangeListener();
     this.addShadow();
   }
 
@@ -44,11 +45,11 @@ export class FloatingActionButtonComponent extends ContentView {
 
   // TODO: extract a shared function; logic of adding shadow is the same as in many other components;
   addShadow(): void {
-    if (!this.showShadow || this.disabled) {
+    if (!this.showShadow || this.disabled || !this.isFloating) {
       return;
     }
 
-    const shadowColor = this.getThemeColor('kirby-primary-shade');
+    const shadowColor = this.getThemeColor('primary-shade');
 
     if (this.view.android) {
       let nativeView = this.view.android;

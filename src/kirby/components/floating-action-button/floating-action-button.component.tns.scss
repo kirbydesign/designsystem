@@ -1,25 +1,34 @@
 @import '../../scss/native-imports';
 
-.fab {
-    background-color: get-color('primary');
-    border-radius: 32;
-    width: 64;
-    height: 64;
-    text-align: center;
-    vertical-align: middle;
+@mixin fab-size($fab-size) {
+  width: #{$fab-size};
+  height: #{$fab-size};
+}
 
-    &.disabled {
+@mixin fab-wrapper($fab-size, $color) {
+  $shadow-overhead: 3/2;
+  @include fab-size($fab-size * $shadow-overhead);
+  .fab-shadow {
+    @include fab-size($fab-size);
+    .fab {
+      @include fab-size($fab-size);
+      background-color: get-color($color);
+      border-radius: $fab-size;
+      text-align: center;
+      vertical-align: middle;
+
+      &.disabled {
         opacity: 0.6;
         background-color: get-color('medium');
+      }
     }
-}
-  
-.fab-shadow {
-    width:64;
-    height:64;
+  }
 }
 
 .fab-wrapper {
-    width:96;
-    height:96;
+  @include fab-wrapper(64, 'primary');
+  
+  &.not-floating {
+    @include fab-wrapper(40, 'light');
+  }
 }

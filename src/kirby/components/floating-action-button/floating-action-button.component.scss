@@ -6,14 +6,21 @@
 ion-fab-button {
     --box-shadow: 0 10px 20px -10px #{get-color('primary-shade')};
     width: 64px;
-    height: 64px;    
+    height: 64px;
+
+    &.no-shadow {
+        --box-shadow: 0;
+    }
 
     &.disabled {
         --background: #{get-color('medium')};
         --box-shadow: 0;
     }
 
-    &.no-shadow {
+    &.not-floating {
+        width: 40px;
+        height: 40px;
+        --background: #{get-color('light')};
         --box-shadow: 0;
     }
 }

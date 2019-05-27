@@ -6,14 +6,14 @@ import { Directive } from '@angular/core';
 export class ListItemDirective {}
 
 @Directive({
+  selector: '[kirbyListFlexItem]',
+})
+export class ListFlexItemDirective {}
+
+@Directive({
   selector: '[kirbyListHeader]',
 })
 export class ListHeaderDirective {}
-
-@Directive({
-  selector: '[kirbyListCell]',
-})
-export class ListCellDirective {}
 
 @Directive({
   selector: '[kirbyListSectionHeader]',

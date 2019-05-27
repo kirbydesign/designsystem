@@ -1,22 +1,19 @@
 import {
   Component,
   ContentChild,
-  ContentChildren,
   EventEmitter,
   HostBinding,
   Input,
   OnChanges,
-  OnInit,
   Output,
-  QueryList,
   TemplateRef,
 } from '@angular/core';
 
 import {
-  ListCellDirective,
   ListHeaderDirective,
   ListItemDirective,
   ListSectionHeaderDirective,
+  ListFlexItemDirective,
 } from './list.directive';
 import { LoadOnDemandEvent, LoadOnDemandEventData } from './list.event';
 import { ListHelper } from './helpers/list-helper';
@@ -29,7 +26,7 @@ export type ListShape = 'square' | 'rounded';
   styleUrls: ['./list.component.scss'],
   providers: [ListHelper, GroupByPipe],
 })
-export class ListComponent implements OnInit, OnChanges {
+export class ListComponent implements OnChanges {
   /**
    * Provide items for the list to render. Items must be provided in the order you expect them to be rendered.
    */
@@ -86,9 +83,9 @@ export class ListComponent implements OnInit, OnChanges {
 
   // The first element that matches ListItemDirective. As a structural directive it unfolds into a template. This is a reference to that.
   @ContentChild(ListItemDirective, { read: TemplateRef }) listItemTemplate;
+  @ContentChild(ListFlexItemDirective, { read: TemplateRef }) listFlexItemTemplate;
   @ContentChild(ListHeaderDirective, { read: TemplateRef }) listHeaderTemplate;
   @ContentChild(ListSectionHeaderDirective, { read: TemplateRef }) sectionHeaderTemplate;
-  @ContentChildren(ListCellDirective, { read: TemplateRef }) listCellTemplates: QueryList<any>;
 
   @HostBinding('class.has-sections') isSectionsEnabled: boolean;
   isSelectable: boolean;
@@ -99,12 +96,6 @@ export class ListComponent implements OnInit, OnChanges {
   private orderMap: WeakMap<any, { isFirst: boolean; isLast: boolean }>;
 
   constructor(private listHelper: ListHelper, private groupBy: GroupByPipe) {}
-
-  ngOnInit() {
-    if (this.listItemTemplate) {
-      console.warn('kirbyListItem is deprecated and will be removed in future versions of Kirby');
-    }
-  }
 
   ngOnChanges(): void {
     this.isSectionsEnabled = !!this.getSectionName;
@@ -119,16 +110,25 @@ export class ListComponent implements OnInit, OnChanges {
     this.isLoadOnDemandEnabled = this.loadOnDemand.observers.length > 0;
   }
 
-  getCssClasses(item: any) {
+  private getItemOrder(item: any): { isFirst: boolean; isLast: boolean } {
+    const defaultOrder = { isFirst: false, isLast: false };
     if (!this.isSectionsEnabled) {
-      return {};
+      return defaultOrder;
     }
     const order = this.orderMap.get(item);
-    return {
-      first: order.isFirst,
-      last: order.isLast,
-      rounded: this.shape === 'rounded',
-    };
+    if (!order) {
+      console.warn('Order of list item within section not found!');
+      return defaultOrder;
+    }
+    return order;
+  }
+
+  isFirstInSection(item: any) {
+    return this.getItemOrder(item).isFirst;
+  }
+
+  isLastInSection(item: any) {
+    return this.getItemOrder(item).isLast;
   }
 
   onItemSelect(selectedItem: any) {
