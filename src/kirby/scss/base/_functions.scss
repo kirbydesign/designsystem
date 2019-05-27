@@ -12,12 +12,7 @@
   @if ($negative) {
     $key: str-slice($key, 2, -1);
   }
-  $value: '';
-  @if ($native == false) {
-    $value: addPX(_get-map-prop($sizes, $key));
-  } @else {
-    $value: _get-map-prop($sizes, $key);
-  }
+  $value: get-unit-value(_get-map-prop($sizes, $key));
   @return if($negative, unquote('-' + $value), $value);
 }
 
@@ -29,23 +24,19 @@
   @if ($key == 'display') {
     @warn 'Display key is deprecated';
   }
-  @if ($native == false) {
-    @return addPX(_get-map-prop($font-sizes, $key));
-  } @else {
-    @return _get-map-prop($font-sizes, $key);
-  }
+  @return get-unit-value(_get-map-prop($font-sizes, $key));
 }
 
 @function line-height($key: 'm') {
-  @if ($native == false) {
-    @return addPX(_get-map-prop($line-height, $key));
-  } @else {
-    @return _get-map-prop($line-height, $key);
-  }
+  @return get-unit-value(_get-map-prop($line-height, $key));
 }
 
-@function addPX($value) {
-  @return $value + unquote('px');
+@function get-unit-value($value) {
+  @if ($native == false) {
+    @return $value + unquote('px');
+  } @else {
+    @return $value;
+  }
 }
 
 @function font-weight($key: 'normal') {
