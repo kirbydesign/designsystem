@@ -556,8 +556,9 @@ export const componentStatusItems: ComponentStatusItem[] = [
       status: ItemUXStatus.notCurrentlyPlanned,
     },
     code: {
-      version: 0.0,
-      status: ItemCodeStatus.notCurrentlyPlanned,
+      version: 0.1,
+      status: ItemCodeStatus.ready,
+      cookbookUrl: 'showcase/toast',
     },
   },
   {
