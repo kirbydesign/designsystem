@@ -42,9 +42,8 @@
   }
 
   .modal-content {
-    flex: 1 1 auto;
     height: 100%;
-    overflow: scroll;
+    overflow-y: auto;
     padding-left: size('s');
     padding-right: size('s');
   }
