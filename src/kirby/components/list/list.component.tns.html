@@ -6,7 +6,9 @@
     (loadMoreDataRequested)="onLoadOnDemand($event)"
     [groupingFunction]="getSectionName"
     [items]="items"
-    #list
+    (itemSelected)="onItemSelect($event)"
+    selectionBehavior="Press"
+    multipleSelection="false"
   >
     <!-- ITEM -->
     <ng-template tkListItemTemplate let-item="item">
