@@ -17,8 +17,8 @@ export class ModalWrapperComponent extends ContentView implements OnInit {
   config: ModalConfig;
   view: View;
   componentPropsInjector: Injector;
-  outerPaddingTop: number;
-  innerMarginBottom: number;
+  outerPaddingTop = 32;
+  innerMarginBottom = 0;
 
   constructor(
     private modalController: IModalController,
