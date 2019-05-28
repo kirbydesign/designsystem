@@ -35,9 +35,6 @@ export class ToastHelper {
         backgroundColor: this.backgroundColor(config.themeColor),
         onTap: () => {
           resolve();
-          if (!config.duration) {
-            this.feedback.hide();
-          }
         },
       };
       this.feedback.show(options);
