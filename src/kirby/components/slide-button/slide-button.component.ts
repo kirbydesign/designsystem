@@ -6,6 +6,8 @@ import {
   Output,
   ViewChild,
   OnDestroy,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { TouchGestureEventData } from 'tns-core-modules/ui/gestures/gestures';
 
@@ -13,6 +15,7 @@ import { TouchGestureEventData } from 'tns-core-modules/ui/gestures/gestures';
   selector: 'kirby-slide-button',
   templateUrl: './slide-button.component.html',
   styleUrls: ['./slide-button.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SlideButtonComponent implements OnDestroy {
   @Input() public text = '';
@@ -40,6 +43,8 @@ export class SlideButtonComponent implements OnDestroy {
 
   private resetSliderIntervalTimer: any;
 
+  constructor(private changeDetectionRef: ChangeDetectorRef) {}
+
   ngOnDestroy(): void {
     if (this.resetSliderIntervalTimer) {
       clearInterval(this.resetSliderIntervalTimer);
@@ -51,9 +56,11 @@ export class SlideButtonComponent implements OnDestroy {
       this.handleSlideDone();
     } else {
       this.resetSliderIntervalTimer = setInterval(() => {
-        if (this.value != 0) {
+        if (this.value !== 0) {
           this.value--;
         }
+
+        this.changeDetectionRef.markForCheck();
       }, 1);
     }
   }
