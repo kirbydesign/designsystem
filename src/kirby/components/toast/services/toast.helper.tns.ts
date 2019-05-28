@@ -33,7 +33,7 @@ export class ToastHelper {
         type: FeedbackType.Custom,
         messageColor: this.messageColor(config.themeColor),
         backgroundColor: this.backgroundColor(config.themeColor),
-        onTap: () => {
+        onHide: () => {
           resolve();
         },
       };
