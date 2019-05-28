@@ -6,16 +6,14 @@
     (loadMoreDataRequested)="onLoadOnDemand($event)"
     [groupingFunction]="getSectionName"
     [items]="items"
-    #list
-  >
+    (itemTap)="onItemSelect($event)">
     <!-- ITEM -->
     <ng-template tkListItemTemplate let-item="item">
       <StackLayout class="row"
                 [class.divider]="showDivider"
                 [class.rounded]="shape === 'rounded'"
                 [class.first]="isFirstInSection(item)"
-                [class.last]="isLastInSection(item)"
-                (tap)="onItemSelect(item)">
+                [class.last]="isLastInSection(item)">
         <ng-container
           *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }">
         </ng-container>
