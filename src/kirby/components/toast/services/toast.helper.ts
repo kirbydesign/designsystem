@@ -15,8 +15,8 @@ export class ToastHelper {
     const toast = await this.toastController.create({
       message: config.message,
       position: config.position ? config.position : 'top',
-      showCloseButton: config.cancelBtnText ? true : false,
-      closeButtonText: config.cancelBtnText ? config.cancelBtnText : '',
+      showCloseButton: config.closeBtnText ? true : false,
+      closeButtonText: config.closeBtnText ? config.closeBtnText : '',
       duration: this.duration(config),
       cssClass: this.cssClass(config.themeColor),
     });
@@ -26,7 +26,7 @@ export class ToastHelper {
 
   private duration(config: ToastConfig): number {
     const duration = config.duration ? config.duration : ToastHelper.DEFAULT_DURATION;
-    return config.cancelBtnText ? 0 : duration;
+    return config.closeBtnText ? 0 : duration;
   }
 
   private cssClass(themeColor: ThemeColor): string {

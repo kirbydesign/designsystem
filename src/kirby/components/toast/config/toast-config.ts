@@ -4,6 +4,6 @@ export interface ToastConfig {
   message?: string;
   position?: 'top' | 'bottom' | 'middle';
   duration?: number;
-  cancelBtnText?: string;
+  closeBtnText?: string;
   themeColor?: ThemeColor;
 }
