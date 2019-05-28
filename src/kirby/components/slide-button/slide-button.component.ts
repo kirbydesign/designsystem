@@ -1,4 +1,12 @@
-import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+  OnDestroy,
+} from '@angular/core';
 import { TouchGestureEventData } from 'tns-core-modules/ui/gestures/gestures';
 
 @Component({
@@ -6,7 +14,7 @@ import { TouchGestureEventData } from 'tns-core-modules/ui/gestures/gestures';
   templateUrl: './slide-button.component.html',
   styleUrls: ['./slide-button.component.scss'],
 })
-export class SlideButtonComponent {
+export class SlideButtonComponent implements OnDestroy {
   @Input() public text = '';
   @Input() public expand?: 'fullWidth';
 
@@ -31,6 +39,12 @@ export class SlideButtonComponent {
   }
 
   private resetSliderIntervalTimer: any;
+
+  ngOnDestroy(): void {
+    if (this.resetSliderIntervalTimer) {
+      clearInterval(this.resetSliderIntervalTimer);
+    }
+  }
 
   public onSliderMouseup() {
     if (this.value == 100) {
