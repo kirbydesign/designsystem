@@ -27,10 +27,10 @@ export class ToastHelper {
   public async showToast(config: ToastConfig): Promise<any> {
     return new Promise((resolve) => {
       const options: FeedbackShowOptions = {
-        position: this.position(config.position), // Android can only have FeedbackPosition.Top
-        type: FeedbackType.Custom,
-        duration: this.duration(config.duration),
         message: config.message,
+        position: FeedbackPosition.Top,
+        duration: config.duration ? config.duration : ToastHelper.DEFAULT_DURATION,
+        type: FeedbackType.Custom,
         messageColor: this.messageColor(config.themeColor),
         backgroundColor: this.backgroundColor(config.themeColor),
         onTap: () => {
@@ -39,20 +39,6 @@ export class ToastHelper {
       };
       this.feedback.show(options);
     });
-  }
-
-  private position(position: string): FeedbackPosition {
-    if (!position) {
-      return FeedbackPosition.Top;
-    }
-    return position === 'top' ? FeedbackPosition.Top : FeedbackPosition.Bottom;
-  }
-
-  private duration(duration: number): number {
-    if (!duration) {
-      return ToastHelper.DEFAULT_DURATION;
-    }
-    return duration ? duration : ToastHelper.DEFAULT_DURATION;
   }
 
   private messageColor(themeColor: ThemeColor): Color {

@@ -14,19 +14,12 @@ export class ToastHelper {
   public async showToast(config: ToastConfig): Promise<any> {
     const toast = await this.toastController.create({
       message: config.message,
-      position: config.position ? config.position : 'top',
-      showCloseButton: config.closeBtnText ? true : false,
-      closeButtonText: config.closeBtnText ? config.closeBtnText : '',
-      duration: this.duration(config),
+      position: 'top',
+      duration: config.duration ? config.duration : ToastHelper.DEFAULT_DURATION,
       cssClass: this.cssClass(config.themeColor),
     });
     toast.present();
     return toast.onDidDismiss();
-  }
-
-  private duration(config: ToastConfig): number {
-    const duration = config.duration ? config.duration : ToastHelper.DEFAULT_DURATION;
-    return config.closeBtnText ? 0 : duration;
   }
 
   private cssClass(themeColor: ThemeColor): string {

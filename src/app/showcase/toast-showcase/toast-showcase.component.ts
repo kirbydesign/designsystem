@@ -18,24 +18,10 @@ export class ToastShowcaseComponent {
       inputValues: ['string'],
     },
     {
-      name: 'position',
-      description: '(Optional) Defines toasts position.',
-      defaultValue: 'top',
-      inputValues: ['top', 'bottom', 'middle'],
-    },
-    {
       name: 'duration',
-      description:
-        '(Optional) Duretion in milliseconds before the toast dismisses automatically. If closeBtnText is set, duration will not be used.',
+      description: '(Optional) Duretion in milliseconds before the toast dismisses automatically.',
       defaultValue: '4000',
       inputValues: ['number'],
-    },
-    {
-      name: 'closeBtnText',
-      description:
-        '(Optional) The text that will appear on the close button. (only available for web)',
-      defaultValue: '',
-      inputValues: ['string'],
     },
     {
       name: 'themeColor',
