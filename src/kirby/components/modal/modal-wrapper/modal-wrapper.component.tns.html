@@ -1,8 +1,8 @@
-<ModalStack class="modal-wrapper" dismissEnabled="true" (showingModally)="onShowingModally($event)">
+<ModalStack class="modal-wrapper" android:style="padding-top: {{outerPaddingTop}};" dismissEnabled="true" (showingModally)="onShowingModally($event)">
     <AbsoluteLayout *ngIf="config.closeBtnPosition === 'outside'" horizontalAlignment="right">
         <ng-container *ngTemplateOutlet="closeBtn"></ng-container>
     </AbsoluteLayout>
-    <StackLayout class="modal" orientation="vertical" verticalAlignment="bottom">
+    <StackLayout class="modal" android:style="margin-bottom: {{innerMarginBottom}};" orientation="vertical" verticalAlignment="bottom">
         <GridLayout rows="auto, *" columns="*, auto" class="title-bar">
 
             <Label class="title" row="0" col="0" verticalAlignment="center" horizontalAlignment="{{ config.titleHorizontalAlignment }}" textWrap="true"
@@ -24,5 +24,3 @@
         <kirby-icon [name]="config.closeIconName"></kirby-icon>
     </kirby-floating-action-button>
 </ng-template>
-
-
