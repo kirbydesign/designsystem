@@ -2,16 +2,23 @@
   <kirby-toast-example></kirby-toast-example>
   <kirby-code-viewer [html]="exampleHtml"></kirby-code-viewer>
   To show the toast, create an <code>ToastConfig</code> and pass it to <code>toastController.showToast</code>
-  <pre>
-    <kirby-code-viewer language="ts">const config: ToastConfig = {{ '{' }}
+
+    <kirby-code-viewer language="ts">const config: ToastConfig = 
+      <pre>{{ '{' }}
   message: 'Your toast message',
   position: 'top',
   duration: 5000,
   themeColor: 'primary';
 {{ '}' }};
 this.toastController.showToast(config);
+</pre>
     </kirby-code-viewer>
-  </pre>
+  (Optional) if you need to know when toast is dismissed, you can pass a callback function:
+  <kirby-code-viewer language="ts">this.toastController.showToast(config, myCallback);</kirby-code-viewer>
+  where <code>myCallback</code> can be e.g.:
+  <kirby-code-viewer language="ts">myCallback() {{ '{' }}
+...
+{{ '}' }}</kirby-code-viewer>
     <h4>Toast config properties:</h4>
     <kirby-showcase-properties [properties]="properties"></kirby-showcase-properties>
 </div>
