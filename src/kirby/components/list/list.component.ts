@@ -5,7 +5,6 @@ import {
   HostBinding,
   Input,
   OnChanges,
-  OnInit,
   Output,
   TemplateRef,
 } from '@angular/core';
@@ -27,7 +26,7 @@ export type ListShape = 'square' | 'rounded';
   styleUrls: ['./list.component.scss'],
   providers: [ListHelper, GroupByPipe],
 })
-export class ListComponent implements OnInit, OnChanges {
+export class ListComponent implements OnChanges {
   /**
    * Provide items for the list to render. Items must be provided in the order you expect them to be rendered.
    */
@@ -98,12 +97,6 @@ export class ListComponent implements OnInit, OnChanges {
 
   constructor(private listHelper: ListHelper, private groupBy: GroupByPipe) {}
 
-  ngOnInit() {
-    if (this.listItemTemplate) {
-      console.warn('kirbyListItem is deprecated and will be removed in future versions of Kirby');
-    }
-  }
-
   ngOnChanges(): void {
     this.isSectionsEnabled = !!this.getSectionName;
     if (this.isSectionsEnabled && this.items) {
@@ -117,23 +110,29 @@ export class ListComponent implements OnInit, OnChanges {
     this.isLoadOnDemandEnabled = this.loadOnDemand.observers.length > 0;
   }
 
-  getCssClasses(item: any) {
+  private getItemOrder(item: any): { isFirst: boolean; isLast: boolean } {
+    const defaultOrder = { isFirst: false, isLast: false };
     if (!this.isSectionsEnabled) {
-      return {};
+      return defaultOrder;
     }
     const order = this.orderMap.get(item);
     if (!order) {
       console.warn('Order of list item within section not found!');
-      return {};
+      return defaultOrder;
     }
-    return {
-      first: order.isFirst,
-      last: order.isLast,
-    };
+    return order;
   }
 
-  onItemSelect(selectedItem: any) {
-    this.itemSelect.emit(selectedItem);
+  isFirstInSection(item: any) {
+    return this.getItemOrder(item).isFirst;
+  }
+
+  isLastInSection(item: any) {
+    return this.getItemOrder(item).isLast;
+  }
+
+  onItemSelect(args: any) {
+    this.itemSelect.emit(this.listHelper.getSelectedItem(this.items, args));
   }
 
   onLoadOnDemand(event?: LoadOnDemandEventData) {
