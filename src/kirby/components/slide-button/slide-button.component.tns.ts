@@ -7,6 +7,8 @@ import { ScssHelper } from '@kirbydesign/designsystem/scss/scss-helper';
 import { constants } from 'perf_hooks';
 import * as applicationModule from 'tns-core-modules/application';
 import { StackLayout } from 'tns-core-modules/ui/layouts/stack-layout/stack-layout';
+import { MTRoundImageView } from './round-image-view';
+import { SlideButtonIos } from './slide-button-ios';
 declare var MTSlideToOpenView, CGRect, UIView, UILabel;
 
 export const SLIDE_BUTTON_SELECTOR = 'kirby-slide-button';
@@ -17,21 +19,21 @@ export const SLIDE_BUTTON_SELECTOR = 'kirby-slide-button';
   styleUrls: ['./slide-button.component.scss'],
 })
 export class SlideButtonComponent extends ContentView {
-  view: View;
+  private stackView: View;
 
   addButtonAndroid() {
     const androidButton = new android.widget.Button(applicationModule.android.context);
     androidButton.setText('Some button text');
-    this.view.nativeView.nativeView.addView(androidButton);
+    this.stackView.nativeView.nativeView.addView(androidButton);
   }
 
-  addButtonIOS() {
+  getButtonIOS() {
     let button = UIButton.alloc().init();
     button.setTitleForState('Add', UIControlState.Normal);
     button.setTitleColorForState(UIColor.blueColor, UIControlState.Normal);
 
-    const x = this.view.scaleX;
-    const y = this.view.scaleY;
+    const x = this.stackView.scaleX;
+    const y = this.stackView.scaleY;
 
     console.log(`X and y is: ${x} ${y}`);
 
@@ -47,22 +49,81 @@ export class SlideButtonComponent extends ContentView {
     };
     button.frame = rect;
 
-    console.log('Stack view' + JSON.stringify(this.view.nativeView));
-    this.view.nativeView.addSubview(button);
+    console.log('Stack view' + JSON.stringify(this.stackView.nativeView));
+    return button;
   }
 
   onViewLoaded(args: EventData) {
-    this.view = <View>args.object;
+    this.stackView = <View>args.object;
 
-    if (!this.view) {
+    if (!this.stackView) {
       return console.log('No stack layout');
     }
 
-    // this.view = <View>this.nativeView; // We need a reference to the view so we can access it on orientation changes
+    const x = this.stackView.scaleX;
+    const y = this.stackView.scaleY;
 
-    console.log('Called on view loaded');
+    var rect = {
+      origin: {
+        x: x,
+        y: y,
+      },
+      size: {
+        width: 200,
+        height: 200,
+      },
+    };
 
-    this.addButtonIOS();
+    const slideButton = new SlideButtonIos(rect);
+
+    // slideButton.view.frame = rect;
+
+    // slideButton.view.leadingAnchor.constraintEqualToAnchor(
+    //   this.stackView.nativeView.leadingAnchor
+    // ).active = true;
+    // slideButton.view.trailingAnchor.constraintEqualToAnchor(
+    //   this.stackView.nativeView.trailingAnchor
+    // ).active = true;
+    // slideButton.view.topAnchor.constraintEqualToAnchor(
+    //   this.stackView.nativeView.topAnchor
+    // ).active = true;
+    // slideButton.view.bottomAnchor.constraintEqualToAnchor(
+    //   this.stackView.nativeView.bottomAnchor
+    // ).active = true;
+
+    // slideButton.sliderViewTopDistance = 0;
+    // slideButton.sliderCornerRadious = 28;
+    // slideButton.thumnailImageView.backgroundColor = UIColor.redColor;
+
+    this.stackView.nativeView.addSubview(slideButton);
+
+    // const button = this.getButtonIOS();
+    // this.stackView.nativeView.addSubview(button);
+
+    // this.view = UIView.alloc().init();
+    // this.textLabel = UILabel.alloc().init();
+
+    // this.thumnailImageView = UIImageView.alloc().init();
+    // // const img = UIImage.alloc().init();
+    // // this.thumnailImageView = new MTRoundImageView({ image: img });
+    // this.thumnailImageView.userInteractionEnabled = true;
+    // this.thumnailImageView.contentMode = UIViewContentMode.Center;
+
+    // this.sliderHolderView = UIView.alloc().init();
+    // this.draggedView = UIView.alloc().init();
+
+    // console.log('Called on view loaded');
+
+    // this.stackView.nativeView.addSubview(this.view);
+    // this.view.addSubview(this.thumnailImageView);
+    // this.view.addSubview(this.sliderHolderView);
+    // this.view.addSubview(this.draggedView);
+    // this.sliderHolderView.addSubview(this.textLabel);
+    // this.view.bringSubviewToFront(this.thumnailImageView);
+    // this.setupConstraint();
+    // setStyle()
+
+    // this.addButtonIOS();
   }
 
   onLoaded(): void {
@@ -118,66 +179,6 @@ export class SlideButtonComponent extends ContentView {
 
   constructor(private zone: NgZone) {
     super();
-  }
-
-  //   private func setupConstraint() {
-  //     view.translatesAutoresizingMaskIntoConstraints = false
-  //     thumnailImageView.translatesAutoresizingMaskIntoConstraints = false
-  //     sliderHolderView.translatesAutoresizingMaskIntoConstraints = false
-  //     textLabel.translatesAutoresizingMaskIntoConstraints = false
-  //     draggedView.translatesAutoresizingMaskIntoConstraints = false
-  //     // Setup for view
-  //     view.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-  //     view.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-  //     view.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-  //     view.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-  //     // Setup for circle View
-  //     leadingThumbnailViewConstraint = thumnailImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
-  //     leadingThumbnailViewConstraint?.isActive = true
-  //     topThumbnailViewConstraint = thumnailImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: thumbnailViewTopDistance)
-  //     topThumbnailViewConstraint?.isActive = true
-  //     thumnailImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-  //     thumnailImageView.heightAnchor.constraint(equalTo: thumnailImageView.widthAnchor).isActive = true
-  //     // Setup for slider holder view
-  //     topSliderConstraint = sliderHolderView.topAnchor.constraint(equalTo: view.topAnchor, constant: sliderViewTopDistance)
-  //     topSliderConstraint?.isActive = true
-  //     sliderHolderView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-  //     sliderHolderView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-  //     sliderHolderView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-  //     // Setup for textLabel
-  //     textLabel.topAnchor.constraint(equalTo: sliderHolderView.topAnchor).isActive = true
-  //     textLabel.centerYAnchor.constraint(equalTo: sliderHolderView.centerYAnchor).isActive = true
-  //     leadingTextLabelConstraint = textLabel.leadingAnchor.constraint(equalTo: sliderHolderView.leadingAnchor, constant: textLabelLeadingDistance)
-  //     leadingTextLabelConstraint?.isActive = true
-  //     textLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: CGFloat(-8)).isActive = true
-  //     // Setup for Dragged View
-  //     draggedView.leadingAnchor.constraint(equalTo: sliderHolderView.leadingAnchor).isActive = true
-  //     draggedView.topAnchor.constraint(equalTo: sliderHolderView.topAnchor).isActive = true
-  //     draggedView.centerYAnchor.constraint(equalTo: sliderHolderView.centerYAnchor).isActive = true
-  //     trailingDraggedViewConstraint = draggedView.trailingAnchor.constraint(equalTo: thumnailImageView.trailingAnchor, constant: thumbnailViewStartingDistance)
-  //     trailingDraggedViewConstraint?.isActive = true
-  // }
-
-  // private func setStyle() {
-  //     thumnailImageView.backgroundColor = defaultThumbnailColor
-  //     textLabel.text = defaultLabelText
-  //     textLabel.font = UIFont.systemFont(ofSize: 15.0)
-  //     textLabel.textColor = UIColor(red:0.1, green:0.61, blue:0.84, alpha:1)
-  //     textLabel.textAlignment = .center
-  //     sliderHolderView.backgroundColor = defaultSliderBackgroundColor
-  //     sliderHolderView.layer.cornerRadius = sliderCornerRadious
-  //     draggedView.backgroundColor = defaultSlidingColor
-  //     draggedView.layer.cornerRadius = sliderCornerRadious
-  // }
-
-  sliderHolderView(): UIView {
-    const view = UIView.new();
-    return view;
-  }
-
-  textLabel(): UILabel {
-    const label = UILabel.alloc().init();
-    return label;
   }
 
   public onSliderValueChange(val: string) {
