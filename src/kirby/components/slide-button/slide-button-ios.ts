@@ -1,4 +1,5 @@
 import { View } from 'tns-core-modules/ui/page/page';
+import { MTRoundImageView } from './round-image-view';
 
 export class SlideButtonIos extends UIView {
   public textLabel: UILabel;
@@ -14,11 +15,13 @@ export class SlideButtonIos extends UIView {
 
   private setupView() {
     this.view = UIView.alloc().init();
+
+    this.addSubview(this.view);
+
     this.textLabel = UILabel.alloc().init();
 
-    this.thumnailImageView = UIImageView.alloc().init();
-    // const img = UIImage.alloc().init();
-    // this.thumnailImageView = new MTRoundImageView({ image: img });
+    const img = UIImage.alloc().init();
+    this.thumnailImageView = new MTRoundImageView({ image: img });
     this.thumnailImageView.userInteractionEnabled = true;
     this.thumnailImageView.contentMode = UIViewContentMode.Center;
 
@@ -32,9 +35,9 @@ export class SlideButtonIos extends UIView {
     this.view.addSubview(this.draggedView);
     this.sliderHolderView.addSubview(this.textLabel);
     this.view.bringSubviewToFront(this.thumnailImageView);
-    this.setupConstraint();
 
-    // setStyle()
+    this.setupConstraint();
+    this.setStyle();
     // Add pan gesture
     // panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(self.handlePanGesture(_:)))
     // panGestureRecognizer.minimumNumberOfTouches = 1
@@ -251,17 +254,17 @@ export class SlideButtonIos extends UIView {
     this.trailingDraggedViewConstraint.active = true;
   }
 
-  //     private func setStyle() {
-  //         thumnailImageView.backgroundColor = defaultThumbnailColor
-  //         textLabel.text = defaultLabelText
-  //         textLabel.font = UIFont.systemFont(ofSize: 15.0)
-  //         textLabel.textColor = UIColor(red:0.1, green:0.61, blue:0.84, alpha:1)
-  //         textLabel.textAlignment = .center
-  //         sliderHolderView.backgroundColor = defaultSliderBackgroundColor
-  //         sliderHolderView.layer.cornerRadius = sliderCornerRadious
-  //         draggedView.backgroundColor = defaultSlidingColor
-  //         draggedView.layer.cornerRadius = sliderCornerRadious
-  //     }
+  private setStyle() {
+    this.thumnailImageView.backgroundColor = this.defaultThumbnailColor;
+    this.textLabel.text = this.defaultLabelText;
+    this.textLabel.font = UIFont.systemFontOfSize(15);
+    this.textLabel.textColor = new UIColor({ red: 0.1, green: 0.61, blue: 0.84, alpha: 1 });
+    this.textLabel.textAlignment = NSTextAlignment.Center;
+    this.sliderHolderView.backgroundColor = this.defaultSliderBackgroundColor;
+    this.sliderHolderView.layer.cornerRadius = this.sliderCornerRadious;
+    this.draggedView.backgroundColor = this.defaultSlidingColor;
+    this.draggedView.layer.cornerRadius = this.sliderCornerRadious;
+  }
 
   //     private func isTapOnThumbnailViewWithPoint(_ point: CGPoint) -> Bool{
   //         return self.thumnailImageView.frame.contains(point)
