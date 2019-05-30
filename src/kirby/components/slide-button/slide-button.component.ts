@@ -11,8 +11,9 @@ import {
 } from '@angular/core';
 import { TouchGestureEventData } from 'tns-core-modules/ui/gestures/gestures';
 
+export const SLIDE_BUTTON_SELECTOR = 'kirby-slide-button';
 @Component({
-  selector: 'kirby-slide-button',
+  selector: SLIDE_BUTTON_SELECTOR,
   templateUrl: './slide-button.component.html',
   styleUrls: ['./slide-button.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

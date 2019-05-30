@@ -1,5 +1,1 @@
-<GridLayout class="m-15" rows="auto auto" columns="50 * 50">
-    <Label row="1" col="0" text="" textWrap="true" fontSize="15" class="icon"></Label>
-    <Slider row="1" col="1" [value]="value" (touch)="onTouch($event)" (valueChange)="onSliderValueChange($event.object.value)" minValue="0" maxValue="100"></Slider>
-    <Label row="1" col="2" text="" textWrap="true" fontSize="20" class="icon"></Label>
-</GridLayout>
+<StackLayout (loaded)="onViewLoaded($event)"></StackLayout>
