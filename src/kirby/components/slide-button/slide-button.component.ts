@@ -1,15 +1,14 @@
 import {
   Component,
   ElementRef,
-  EventEmitter,
-  Input,
-  Output,
   ViewChild,
   OnDestroy,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
 } from '@angular/core';
 import { TouchGestureEventData } from 'tns-core-modules/ui/gestures/gestures';
+
+import { SlideButtonCommon } from './slide-button.common';
 
 export const SLIDE_BUTTON_SELECTOR = 'kirby-slide-button';
 @Component({
@@ -18,12 +17,7 @@ export const SLIDE_BUTTON_SELECTOR = 'kirby-slide-button';
   styleUrls: ['./slide-button.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SlideButtonComponent implements OnDestroy {
-  @Input() public text = '';
-  @Input() public expand?: 'fullWidth';
-
-  @Output() public slideDone = new EventEmitter();
-  @Output() public slidingPercentageChanged = new EventEmitter<number>();
+export class SlideButtonComponent extends SlideButtonCommon implements OnDestroy {
   @ViewChild('sliderButtonRef') public sliderButtonRef: ElementRef;
 
   public isSlideDone = false;
@@ -44,7 +38,9 @@ export class SlideButtonComponent implements OnDestroy {
 
   private resetSliderIntervalTimer: any;
 
-  constructor(private changeDetectionRef: ChangeDetectorRef) {}
+  constructor(private changeDetectionRef: ChangeDetectorRef) {
+    super();
+  }
 
   ngOnDestroy(): void {
     if (this.resetSliderIntervalTimer) {
@@ -77,7 +73,6 @@ export class SlideButtonComponent implements OnDestroy {
 
   public onSliderValueChange(val: string) {
     this.value = +val;
-    this.slidingPercentageChanged.emit(this.value);
   }
 
   public onSliderMousedown() {

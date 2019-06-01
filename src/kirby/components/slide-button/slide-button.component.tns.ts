@@ -1,203 +1,102 @@
-import { Component, NgZone, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { TouchGestureEventData } from 'tns-core-modules/ui/gestures/gestures';
-import { ContentView, View, EventData } from 'tns-core-modules/ui/content-view';
-import { registerElement } from 'nativescript-angular';
+import { Component, OnInit, ViewChild, ElementRef, ChangeDetectionStrategy } from '@angular/core';
+import { PanGestureEventData } from 'tns-core-modules/ui/gestures/gestures';
+import { GridLayout } from 'tns-core-modules/ui/layouts/grid-layout';
+import { Button } from 'tns-core-modules/ui/button';
 
-import { ScssHelper } from '@kirbydesign/designsystem/scss/scss-helper';
-import { constants } from 'perf_hooks';
-import * as applicationModule from 'tns-core-modules/application';
-import { StackLayout } from 'tns-core-modules/ui/layouts/stack-layout/stack-layout';
-import { MTRoundImageView } from './round-image-view';
-import { SlideButtonIos } from './slide-button-ios';
-declare var MTSlideToOpenView, CGRect, UIView, UILabel;
-
+import { SlideButtonCommon } from './slide-button.common';
 export const SLIDE_BUTTON_SELECTOR = 'kirby-slide-button';
 
 @Component({
   selector: SLIDE_BUTTON_SELECTOR,
   templateUrl: './slide-button.component.html',
   styleUrls: ['./slide-button.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SlideButtonComponent extends ContentView {
-  private stackView: View;
+export class SlideButtonComponent extends SlideButtonCommon implements OnInit {
+  @ViewChild('slideTextRef') slideTextRef: ElementRef;
+  @ViewChild('slideThumbnailRef') slideThumbnailRef: ElementRef;
+  slideThumbnailElm: Button;
+  prevDeltaX: number;
+  prevDeltaY: number;
+  isDraggedToEnd: boolean;
+  @ViewChild('container') container: ElementRef;
+  itemContainer: GridLayout;
 
-  addButtonAndroid() {
-    const androidButton = new android.widget.Button(applicationModule.android.context);
-    androidButton.setText('Some button text');
-    this.stackView.nativeView.nativeView.addView(androidButton);
+  private _slidePct = 0;
+  public get slidePct(): number {
+    return this._slidePct;
+  }
+  public set slidePct(v: number) {
+    this._slidePct = v;
+    this.slideTextRef.nativeElement.opacity = 1 - v / 100;
   }
 
-  getButtonIOS() {
-    let button = UIButton.alloc().init();
-    button.setTitleForState('Add', UIControlState.Normal);
-    button.setTitleColorForState(UIColor.blueColor, UIControlState.Normal);
-
-    const x = this.stackView.scaleX;
-    const y = this.stackView.scaleY;
-
-    console.log(`X and y is: ${x} ${y}`);
-
-    var rect = {
-      origin: {
-        x: x,
-        y: y,
-      },
-      size: {
-        width: 200,
-        height: 200,
-      },
-    };
-    button.frame = rect;
-
-    console.log('Stack view' + JSON.stringify(this.stackView.nativeView));
-    return button;
+  public ngOnInit() {
+    this.itemContainer = <GridLayout>this.container.nativeElement;
+    this.slideThumbnailElm = <Button>this.slideThumbnailRef.nativeElement;
   }
 
-  onViewLoaded(args: EventData) {
-    this.stackView = <View>args.object;
-
-    if (!this.stackView) {
-      return console.log('No stack layout');
+  onPan(args: PanGestureEventData) {
+    if (args.state === 1) {
+      this.onPanDown();
+    } else if (args.state === 2) {
+      this.onDrag(args);
+    } else if (args.state === 3) {
+      this.onPanUp();
     }
-
-    const x = this.stackView.scaleX;
-    const y = this.stackView.scaleY;
-
-    var rect = {
-      origin: {
-        x: x,
-        y: y,
-      },
-      size: {
-        width: 200,
-        height: 200,
-      },
-    };
-
-    const slideButton = new SlideButtonIos(rect);
-
-    // slideButton.view.frame = rect;
-
-    // slideButton.view.leadingAnchor.constraintEqualToAnchor(
-    //   this.stackView.nativeView.leadingAnchor
-    // ).active = true;
-    // slideButton.view.trailingAnchor.constraintEqualToAnchor(
-    //   this.stackView.nativeView.trailingAnchor
-    // ).active = true;
-    // slideButton.view.topAnchor.constraintEqualToAnchor(
-    //   this.stackView.nativeView.topAnchor
-    // ).active = true;
-    // slideButton.view.bottomAnchor.constraintEqualToAnchor(
-    //   this.stackView.nativeView.bottomAnchor
-    // ).active = true;
-
-    // slideButton.sliderViewTopDistance = 0;
-    // slideButton.sliderCornerRadious = 28;
-    // slideButton.thumnailImageView.backgroundColor = UIColor.redColor;
-
-    this.stackView.nativeView.addSubview(slideButton);
-
-    // const button = this.getButtonIOS();
-    // this.stackView.nativeView.addSubview(button);
-
-    // this.view = UIView.alloc().init();
-    // this.textLabel = UILabel.alloc().init();
-
-    // this.thumnailImageView = UIImageView.alloc().init();
-    // // const img = UIImage.alloc().init();
-    // // this.thumnailImageView = new MTRoundImageView({ image: img });
-    // this.thumnailImageView.userInteractionEnabled = true;
-    // this.thumnailImageView.contentMode = UIViewContentMode.Center;
-
-    // this.sliderHolderView = UIView.alloc().init();
-    // this.draggedView = UIView.alloc().init();
-
-    // console.log('Called on view loaded');
-
-    // this.stackView.nativeView.addSubview(this.view);
-    // this.view.addSubview(this.thumnailImageView);
-    // this.view.addSubview(this.sliderHolderView);
-    // this.view.addSubview(this.draggedView);
-    // this.sliderHolderView.addSubview(this.textLabel);
-    // this.view.bringSubviewToFront(this.thumnailImageView);
-    // this.setupConstraint();
-    // setStyle()
-
-    // this.addButtonIOS();
   }
 
-  onLoaded(): void {
-    super.onLoaded();
-
-    // if (!this.stackLayout) {
-    //   return console.log('No stack layout');
-    // }
-
-    // // this.view = <View>this.nativeView; // We need a reference to the view so we can access it on orientation changes
-
-    // console.log('Called on view loaded2');
-
-    // this.addButtonIOS();
-
-    // const iosView = this.ios.view;
-    // iosView.layer.shadowColor = ScssHelper.SHADOW_COLOR.ios.CGColor;
-    // iosView.layer.shadowOffset = CGSizeMake(0, ScssHelper.SHADOW_OFFSET_Y);
-    // iosView.layer.shadowOpacity = ScssHelper.SHADOW_OPACITY;
-    // iosView.layer.shadowRadius = ScssHelper.SHADOW_RADIUS;
-
-    // const iosView = this.ios;
-    // const view = UIView.alloc().init();
-    // iosView.addSubview(view);
-
-    // const sliderHolderView = UIView.alloc().init();
-    // const textLabel = this.textLabel();
-
-    // view.addSubview(sliderHolderView);
-    // sliderHolderView.addSubview(textLabel);
-
-    // sliderHolderView.backgroundColor = 'blue';
-    // textLabel.text = 'some text lala';
-    // textLabel.font = UIFont.systemFont(ofSize: 15.0)
-    // textLabel.textColor = UIColor(red:0.1, green:0.61, blue:0.84, alpha:1)
-    // textLabel.textAlignment = .center
-    // sliderHolderView.backgroundColor = defaultSliderBackgroundColor
-    // sliderHolderView.layer.cornerRadius = sliderCornerRadious
-
-    // this.view._addView(this.view);
-    // this.view._addView(thumnailImageView)
-    // view.addSubview(sliderHolderView)
-    // view.addSubview(draggedView)
-    // sliderHolderView.addSubview(textLabel)
-    // view.bringSubviewToFront(self.thumnailImageView)
-    // setupConstraint()
-    // setStyle()
-    // // Add pan gesture
-    // panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(self.handlePanGesture(_:)))
-    // panGestureRecognizer.minimumNumberOfTouches = 1
-    // thumnailImageView.addGestureRecognizer(panGestureRecognizer)
-  }
-
-  constructor(private zone: NgZone) {
+  constructor() {
     super();
   }
 
-  public onSliderValueChange(val: string) {
-    // this.value = +val;
-    // this.slidingPercentageChanged.emit(this.value);
+  private onPanUp() {
+    if (this.isDraggedToEnd) {
+      this.slideDone.emit();
+      this.itemContainer.animate({
+        opacity: 0,
+        duration: this.slideDoneFadeTime,
+      });
+    } else {
+      this.slideThumbnailElm.animate({
+        translate: { x: 0, y: 0 },
+        duration: this.slideResetTime,
+      });
+      this.slidePct = 0;
+    }
   }
 
-  onTouch(args: TouchGestureEventData) {
-    console.log('On touch clicked');
-    // if (args.action === 'up') {
-    //   this.onSliderMouseup();
-    // }
-    // if (args.action === 'down') {
-    //   this.onSliderMousedown();
-    // }
+  private onDrag(args: PanGestureEventData) {
+    this.slideThumbnailElm.translateX += args.deltaX - this.prevDeltaX;
+    this.prevDeltaX = args.deltaX;
+    this.prevDeltaY = args.deltaY;
+    const convDpToPixelsFactor =
+      (this.slideThumbnailElm.width as number) / this.slideThumbnailElm.getMeasuredWidth();
+    const edgeX =
+      (this.itemContainer.getMeasuredWidth() - this.slideThumbnailElm.getMeasuredWidth()) *
+      convDpToPixelsFactor;
+
+    const edgeXMarginAdjusted = edgeX - +this.slideThumbnailElm.margin * 2; // adjusted for thumbnail margin
+
+    const edgeXPct = (this.slideThumbnailElm.translateX / edgeXMarginAdjusted) * 100;
+    this.slidePct = edgeXPct > 100 ? 100 : edgeXPct;
+    if (this.slideThumbnailElm.translateX < 0) {
+      this.resetSlideButton();
+    } else if (this.slideThumbnailElm.translateX >= edgeXMarginAdjusted) {
+      this.slideThumbnailElm.translateX = edgeXMarginAdjusted;
+      this.isDraggedToEnd = true;
+    } else {
+      this.isDraggedToEnd = false;
+    }
+  }
+
+  private resetSlideButton() {
+    this.slideThumbnailElm.translateX = 0;
+  }
+
+  private onPanDown() {
+    this.prevDeltaX = 0;
+    this.prevDeltaY = 0;
+    this.slidePct = 0;
   }
 }
-
-registerElement(
-  SLIDE_BUTTON_SELECTOR,
-  () => require('./slide-button.component').SlideButtonComponent
-);

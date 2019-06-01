@@ -1,0 +1,19 @@
+@import "../../scss/_native-imports";
+
+.slide-button-container {
+    border-radius: 25;
+    background-color: get-color("primary");
+
+    .slide-button {
+        width: 40;
+        height: 40;
+        margin: 5;
+        border-width: 1;
+        border-radius: 100;
+        background-color: get-color('contrast-light');
+    }
+
+    .slide-button-text {
+        color: get-color('contrast-light');
+    }
+}

@@ -1,1 +1,4 @@
-<StackLayout (loaded)="onViewLoaded($event)"></StackLayout>
+<GridLayout #container class="slide-button-container" width="250" height="50">
+    <Label #slideTextRef horizontalAlignment="center" class="slide-button-text" text="{{text}}" verticalAlignment="center"></Label>
+    <Button class="slide-button" (pan)="onPan($event)" horizontalAlignment="left" verticalAlignment="center" #slideThumbnailRef></Button>
+</GridLayout>
