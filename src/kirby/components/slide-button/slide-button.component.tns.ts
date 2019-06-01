@@ -21,6 +21,7 @@ export class SlideButtonComponent extends SlideButtonCommon implements OnInit {
   isDraggedToEnd: boolean;
   @ViewChild('container') container: ElementRef;
   itemContainer: GridLayout;
+  width: any = 250;
 
   private _slidePct = 0;
   public get slidePct(): number {
@@ -35,6 +36,10 @@ export class SlideButtonComponent extends SlideButtonCommon implements OnInit {
   public ngOnInit() {
     this.itemContainer = <GridLayout>this.container.nativeElement;
     this.slideThumbnailElm = <Button>this.slideThumbnailRef.nativeElement;
+
+    if (this.expand === 'fullWidth') {
+      this.width = '100%';
+    }
   }
 
   onPan(args: PanGestureEventData) {
