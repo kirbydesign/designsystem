@@ -29,6 +29,7 @@ export class SlideButtonComponent extends SlideButtonCommon implements OnDestroy
   public set value(v: number) {
     this._value = v;
     this.calculatePctInTens();
+    this.slidingPercentageChanged.emit(v);
   }
 
   public pctInTens = 0;

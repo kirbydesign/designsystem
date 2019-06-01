@@ -29,6 +29,7 @@ export class SlideButtonComponent extends SlideButtonCommon implements OnInit {
   public set slidePct(v: number) {
     this._slidePct = v;
     this.slideTextRef.nativeElement.opacity = 1 - v / 100;
+    this.slidingPercentageChanged.emit(v);
   }
 
   public ngOnInit() {
