@@ -26,10 +26,10 @@
         border-radius: 50%;
         background: get-color('contrast-light');
         z-index: 1;
-        width: 50px;
-        font-size: 20px;
+        font-size: font-size('m');;
         position: relative;
-        height: 50px;
+        width: size('xxl');
+        height: size('xxl');
     }
   
     .slide-button::before {
@@ -40,17 +40,13 @@
         text-align: center;
         top: 10px;
         z-index: 1;
-        font-size: 32px;
+        font-size: font-size('l');
     }
 
     @for $i from 1 through 10 {
         $iTenth: $i*10;
         .slide-#{$iTenth}-pct {
             &.slide-button::before {
-                -webkit-transition: opacity 0.2s linear;
-                -moz-transition: opacity 0.2s linear;
-                -ms-transition: opacity 0.2s linear;
-                -o-transition: opacity 0.2s linear;
                 transition: opacity 0.2s linear;
                 opacity: 1-($i/10);
             }
@@ -58,22 +54,19 @@
     }
 
     .slide-done {
-        -webkit-transition: opacity 0.5s ease-in-out;
-        -moz-transition: opacity 0.5s ease-in-out;
-        -ms-transition: opacity 0.5s ease-in-out;
-        -o-transition: opacity 0.5s ease-in-out;
         transition: opacity 0.5s ease-in-out;
         opacity: 0;
     }
-  
+
     .slide-button::-webkit-slider-thumb:before {
         color: get-color('contrast-light');
         position: absolute;
         left: 5px;
         top: -10px;
         z-index: 1;
-        font-size: 56px;
+        font-size: font-size('xxl');;
         font-weight: bold;
         content: "→";
     }
   }
+  
