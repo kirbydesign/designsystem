@@ -1,5 +1,5 @@
 <StackLayout class="container">
-    <kirby-slide-button [text]="'Slide to unlock'"></kirby-slide-button>
-    <kirby-slide-button [text]="'Slide to unlock'" [expand]="'fullWidth'"></kirby-slide-button>
+    <kirby-slide-button [text]="'Slide to unlock'" (slideDone)="showAlert()"></kirby-slide-button>
+    <kirby-slide-button [text]="'Slide to unlock'" [expand]="'fullWidth'" (slideDone)="showAlert()"></kirby-slide-button>
 </StackLayout>
 
