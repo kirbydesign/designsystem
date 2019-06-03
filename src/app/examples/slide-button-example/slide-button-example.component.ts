@@ -5,4 +5,8 @@ import { Component } from '@angular/core';
   templateUrl: './slide-button-example.component.html',
   styleUrls: ['./slide-button-example.component.scss'],
 })
-export class SlideButtonExampleComponent {}
+export class SlideButtonExampleComponent {
+  public showAlert() {
+    alert('Slide done');
+  }
+}

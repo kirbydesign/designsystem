@@ -22,7 +22,7 @@ export class SlideButtonComponent implements OnDestroy {
   @Input() public expand?: 'fullWidth';
 
   @Output() public slideDone = new EventEmitter();
-  @Output() public slidingPercentageChanged = new EventEmitter<number>();
+  @Output() public slidePercentageChanged = new EventEmitter<number>();
   @ViewChild('sliderButtonRef') public sliderButtonRef: ElementRef;
 
   public isSlideDone = false;
@@ -76,7 +76,7 @@ export class SlideButtonComponent implements OnDestroy {
 
   public onSliderValueChange(val: string) {
     this.value = +val;
-    this.slidingPercentageChanged.emit(this.value);
+    this.slidePercentageChanged.emit(this.value);
   }
 
   public onSliderMousedown() {

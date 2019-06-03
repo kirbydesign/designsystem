@@ -17,5 +17,23 @@ export class SlideButtonShowcaseComponent {
       defaultValue: 'null',
       inputValues: ['fullWidth'],
     },
+    {
+      name: 'text',
+      description: 'The text to show in the slide button',
+      defaultValue: '',
+      inputValues: ['string'],
+    },
+    {
+      name: 'slideDone',
+      description: 'Event triggered on slide done',
+      defaultValue: null,
+      inputValues: [''],
+    },
+    {
+      name: 'slidePercentageChanged',
+      description: 'Event triggered when the slide percentage changes containing the percentage',
+      defaultValue: null,
+      inputValues: ['number'],
+    },
   ];
 }
