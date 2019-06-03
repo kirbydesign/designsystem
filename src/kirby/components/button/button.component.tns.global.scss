@@ -25,10 +25,12 @@ Button[kirby-button] {
     height: size('xxl');
   }
   
-  &.secondary {
-    color: get-color('contrast-dark');
-    background-color: get-color('contrast-light');
-    border-color: get-color('contrast-light');
+  @each $color-name, $color-value in $main-colors {
+    &.#{$color-name} {
+      background-color: #{get-color($color-name)};
+      border-color: #{get-color($color-name)};
+      color: #{get-color($color-name+'-contrast')};
+    }
   }
 
   &[isEnabled=false] {

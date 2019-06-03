@@ -36,16 +36,12 @@
     width: 100%;
   }
 
-  &.primary {
-    --kirby-button-background-color:#{get-color('primary')};
-    --kirby-button-border-color: #{get-color('primary')};
-    --kirby-button-color: #{get-color('primary-contrast')};
-  }
-
-  &.secondary {
-    --kirby-button-background-color: #{get-color('contrast-light')};
-    --kirby-button-border-color: #{get-color('contrast-light')};
-    --kirby-button-color: #{get-color('contrast-dark')};
+  @each $color-name, $color-value in $main-colors {
+    &.#{$color-name} {
+      --kirby-button-background-color: #{get-color($color-name)};
+      --kirby-button-border-color: #{get-color($color-name)};
+      --kirby-button-color: #{get-color($color-name+'-contrast')};
+    }
   }
 
   &:hover,
