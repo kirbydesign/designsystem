@@ -3,12 +3,12 @@
 .slide-button-container {
     border-radius: 25;
     background-color: get-color("primary");
-    margin: 5;
+    margin: size('xxs');
 
     .slide-button {
-        width: 40;
-        height: 40;
-        margin: 5;
+        width: size('xl');
+        height: size('xl');
+        margin: size('xxs');
         border-width: 1;
         border-radius: 100;
         background-color: get-color('contrast-light');

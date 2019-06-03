@@ -1,3 +1,6 @@
+
+@import "../../../kirby/scss/_native-imports";
+
 .container {
-    padding: 20;
+    padding: size('m');
 }
