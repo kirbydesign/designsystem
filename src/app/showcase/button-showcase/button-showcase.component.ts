@@ -22,7 +22,17 @@ export class ButtonShowcaseComponent implements OnInit {
       name: 'themeColor',
       description: 'Sets which color the button should use from the theme palette.',
       defaultValue: 'primary',
-      inputValues: ['primary', 'secondary'],
+      inputValues: [
+        'primary',
+        'secondary',
+        'tertiary',
+        'success',
+        'warning',
+        'danger',
+        'light',
+        'medium',
+        'dark',
+      ],
     },
     {
       name: 'size',
