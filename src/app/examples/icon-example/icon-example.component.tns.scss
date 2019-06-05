@@ -2,4 +2,14 @@
 
 .background {
   background-color: get-color("base-color");
+  padding: size('s');
+}
+
+WrapLayout StackLayout {
+    horizontal-align:center;
+
+    Label {
+        text-align: center;
+        font-size: font-size('xs');
+    }
 }
