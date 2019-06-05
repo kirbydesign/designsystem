@@ -1,11 +1,14 @@
-import { Component, Input } from '@angular/core';
-
-import { ThemeColor } from '../../helpers/theme-color.type';
+import { Component, Input, HostBinding } from '@angular/core';
 
 @Component({
   selector: 'kirby-icon',
   templateUrl: './icon.component.html',
   styleUrls: ['./icon.component.scss'],
+  // Using host property decorator is fine for static values:
+  // tslint:disable-next-line:use-host-property-decorator
+  host: {
+    class: 'kirby-icon',
+  },
 })
 export class IconComponent {
   static DEFAULT_ICON_CODE = 0xf2cf;
@@ -27,9 +30,6 @@ export class IconComponent {
     | 'checkbox'
     | 'menu'
     | 'person' = IconComponent.DEFAULT_ICON_NAME;
-
-  @Input() size: 'small' | 'large' = 'small';
-  @Input() themeColor: ThemeColor;
 
   getIonicIconName(name: string): string {
     const icon = iconsCharCodeMap[name];
