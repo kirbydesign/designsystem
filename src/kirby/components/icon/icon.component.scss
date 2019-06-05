@@ -18,3 +18,9 @@
 :host(.lg) {
   font-size: size('xxxl');
 }
+
+@each $color-name, $color-value in $main-colors {
+  :host(.#{$color-name}) {
+    color: get-color($color-name);
+  }
+}

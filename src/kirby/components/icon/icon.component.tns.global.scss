@@ -21,7 +21,7 @@
     }
 
     @each $color-name, $color-value in $main-colors {
-        .#{$color-name} {
+        &.#{$color-name} {
             color: get-color($color-name);
         }
     }
