@@ -8,7 +8,7 @@ import { ThemeColorDirective } from '@kirbydesign/designsystem/directives/theme-
 import { ColorHelper } from '@kirbydesign/designsystem/helpers/color-helper';
 import { IconComponent } from './icon.component';
 
-fdescribe('IconComponent', () => {
+describe('IconComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
