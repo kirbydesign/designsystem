@@ -1,23 +1,20 @@
 @import '../../scss/web-imports';
 
-ion-icon {
+:host {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
   font-size: size('m');
 }
 
-:host(.sm) ion-icon {
+:host(.sm) {
   font-size: size('m');
 }
 
-:host(.md) ion-icon {
+:host(.md) {
   font-size: size('l');
 }
 
-:host(.lg) ion-icon {
+:host(.lg) {
   font-size: size('xxxl');
-}
-
-:host {
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
