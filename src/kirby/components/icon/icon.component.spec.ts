@@ -33,7 +33,7 @@ describe('IconComponent', () => {
 
   describe('color', () => {
     it('should set icon color to undefined by default', () => {
-      expect(component.colortype).toBeUndefined();
+      expect(component.themeColor).toBeUndefined();
     });
 
     it('should be rendered with no color by default', () => {
@@ -42,42 +42,42 @@ describe('IconComponent', () => {
     });
 
     it('should be rendered as primary when color is set to primary', () => {
-      component.colortype = 'primary';
+      component.themeColor = 'primary';
       fixture.detectChanges();
       var el = fixture.debugElement.query(By.directive(ionic.IonIcon));
       expect(el.componentInstance.color).toBe('primary');
     });
 
     it('should be rendered as secondary when color is set to secondary', () => {
-      component.colortype = 'secondary';
+      component.themeColor = 'secondary';
       fixture.detectChanges();
       var el = fixture.debugElement.query(By.directive(ionic.IonIcon));
       expect(el.componentInstance.color).toBe('secondary');
     });
 
     it('should be rendered as tertiary when color is set to tertiary', () => {
-      component.colortype = 'tertiary';
+      component.themeColor = 'tertiary';
       fixture.detectChanges();
       var el = fixture.debugElement.query(By.directive(ionic.IonIcon));
       expect(el.componentInstance.color).toBe('tertiary');
     });
 
     it('should be rendered as warning when color is set to warning', () => {
-      component.colortype = 'warning';
+      component.themeColor = 'warning';
       fixture.detectChanges();
       var el = fixture.debugElement.query(By.directive(ionic.IonIcon));
       expect(el.componentInstance.color).toBe('warning');
     });
 
     it('should be rendered as success when color is set to success', () => {
-      component.colortype = 'success';
+      component.themeColor = 'success';
       fixture.detectChanges();
       var el = fixture.debugElement.query(By.directive(ionic.IonIcon));
       expect(el.componentInstance.color).toBe('success');
     });
 
     it('should be rendered as danger when color is set to danger', () => {
-      component.colortype = 'danger';
+      component.themeColor = 'danger';
       fixture.detectChanges();
       var el = fixture.debugElement.query(By.directive(ionic.IonIcon));
       expect(el.componentInstance.color).toBe('danger');

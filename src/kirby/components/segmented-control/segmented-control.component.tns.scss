@@ -1,7 +1,5 @@
 @import "../../scss/native-imports";
 
-$border-radius: 20;
-
 .segment-control {
   border-radius: $border-radius;
   background: get-color('contrast-light');
@@ -19,6 +17,7 @@ $border-radius: 20;
   padding-right: size("m");
   border-radius: $border-radius;
   height: 100%;
+  color: get-color('contrast-dark');
 
   &.is-checked {
     color: get-color('contrast-light');

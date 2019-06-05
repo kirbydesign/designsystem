@@ -10,13 +10,14 @@ import { IconComponent } from './components/icon/icon.component';
 import { ListComponent } from './components/list/list.component';
 import {
   ListItemDirective,
+  ListFlexItemDirective,
   ListHeaderDirective,
   ListSectionHeaderDirective,
-  ListCellDirective,
 } from './components/list/list.directive';
 import { ComponentLoaderDirective } from './components/shared/component-loader.directive';
 import { ChartComponent } from './components/chart/chart.component';
 import { ListItemComponent } from './components/list/list-item/list-item.component';
+import { ListFlexItemComponent } from './components/list/list-flex-item/list-flex-item.component';
 import { ListSectionHeaderComponent } from './components/list/list-section-header/list-section-header.component';
 import { ListHeaderComponent } from './components/list/list-header/list-header.component';
 import { ListCellComponent } from './components/list/list-cell/list-cell.component';
@@ -36,6 +37,7 @@ import { ActionSheetComponent } from './components/modal/action-sheet/action-she
 import { CustomIconNameDirective } from './components/icon/custom-icon-name.directive';
 import { AlertHelper } from './components/modal/services/alert.helper';
 import { SizeDirective } from './directives/size/size.directive';
+import { ThemeColorDirective } from './directives/theme-color/theme-color.directive';
 
 export const declarations = [
   CardComponent,
@@ -45,9 +47,10 @@ export const declarations = [
   FloatingActionButtonComponent,
   ListComponent,
   ListItemDirective,
+  ListFlexItemDirective,
   ListItemComponent,
+  ListFlexItemComponent,
   ListCellComponent,
-  ListCellDirective,
   ListCellLineComponent,
   ListSectionHeaderComponent,
   ListSectionHeaderDirective,
@@ -69,6 +72,7 @@ export const declarations = [
   SegmentedChipControlComponent,
   BadgeComponent,
   SizeDirective,
+  ThemeColorDirective,
 ];
 
 export const providerDeclarations: any[] = [

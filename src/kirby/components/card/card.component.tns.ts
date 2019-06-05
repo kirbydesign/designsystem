@@ -8,7 +8,7 @@ import { registerElement } from 'nativescript-angular';
 import { ContentView } from 'tns-core-modules/ui/content-view';
 
 import { ScssHelper } from '../../scss/scss-helper';
-import { ColorType } from './../../helpers/color-type';
+import { ThemeColor } from '../../helpers/theme-color.type';
 
 const screenScale = screen.mainScreen.scale;
 declare const CGSizeMake: any;
@@ -24,7 +24,7 @@ export const KIRBY_CARD_COMPONENT_SELECTOR = 'kirby-card';
 export class CardComponent extends ContentView implements OnInit {
   @Input() title: string;
   @Input() subtitle: string;
-  @Input() colortype?: ColorType;
+  @Input() themeColor?: ThemeColor;
 
   view: View;
 
@@ -40,7 +40,7 @@ export class CardComponent extends ContentView implements OnInit {
 
   onViewLoaded(args: EventData) {
     this.view = <View>args.object; // We need a reference to the view so we can access it on orientation changes
-    this.setupOnOrientationChangeListener();
+    // this.setupOnOrientationChangeListener();
     this.applySizeAndShadow();
   }
 

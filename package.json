@@ -9,7 +9,7 @@
       "version": "5.2.0"
     }
   },
-  "version": "0.0.154",
+  "version": "0.0.177",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -54,7 +54,7 @@
     "nativescript-platform-css": "^1.6.6",
     "nativescript-theme-core": "^1.0.4",
     "nativescript-ui-chart": "^3.11.1",
-    "nativescript-ui-listview": "^5.1.1",
+    "nativescript-ui-listview": "^6.3.0",
     "nativescript-webview-interface": "^1.4.3",
     "nativescript-windowed-modal": "^5.0.6",
     "prismjs": "^1.15.0",

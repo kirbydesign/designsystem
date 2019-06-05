@@ -13,13 +13,14 @@
              <!-- <kirby-list style="border-width: 5; border-color: red; height: 100"
                 [items]="config.items"
                 (itemSelect)="onItemSelect($event)">
-                <kirby-list-cell
-                        *kirbyListCell="let item"
-                        horisontalAlignment="center">
-                    <kirby-list-cell-line [primary]="true" [text]="item"></kirby-list-cell-line>
-                </kirby-list-cell>
+                <kirby-list-flex-item *kirbyListFlexItem="let item">
+                    <kirby-list-cell
+                            horisontalAlignment="center">
+                        <kirby-list-cell-line [primary]="true" [text]="item"></kirby-list-cell-line>
+                    </kirby-list-cell>
+                </kirby-list-flex-item>
              </kirby-list> -->
         </kirby-card>            
-        <Button row="2" kirby-button colortype="secondary" verticalAlignment="bottom" class="cancel-btn" text="Cancel" (tap)="onModalDismiss()"></Button> -->
+        <Button row="2" kirby-button themeColor="secondary" verticalAlignment="bottom" class="cancel-btn" text="Cancel" (tap)="onModalDismiss()"></Button> -->
     </GridLayout>
 </ModalStack>

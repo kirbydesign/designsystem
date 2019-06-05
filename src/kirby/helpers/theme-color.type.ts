@@ -1,4 +1,4 @@
-export type ColorType =
+export type ThemeColor =
   | 'primary'
   | 'secondary'
   | 'tertiary'

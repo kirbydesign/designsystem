@@ -35,10 +35,20 @@ export class IconShowcaseComponent {
       inputValues: ['sm', 'md', 'lg'],
     },
     {
-      name: 'colortype',
+      name: 'themeColor',
       description: 'Sets which color the icon should use from the theme palette.',
       defaultValue: 'null',
-      inputValues: ['primary', 'secondary', 'tertiary', 'warning', 'success', 'danger'],
+      inputValues: [
+        'primary',
+        'secondary',
+        'tertiary',
+        'success',
+        'warning',
+        'danger',
+        'light',
+        'medium',
+        'dark',
+      ],
     },
     {
       name: 'customName',

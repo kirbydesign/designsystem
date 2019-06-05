@@ -17,7 +17,7 @@ export class SegmentedControlExampleComponent implements OnInit {
       checked: true,
       badge: {
         content: '4',
-        type: 'warning',
+        themeColor: 'warning',
       },
     },
     {
