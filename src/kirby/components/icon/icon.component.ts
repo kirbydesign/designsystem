@@ -1,9 +1,14 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, HostBinding } from '@angular/core';
 
 @Component({
   selector: 'kirby-icon',
   templateUrl: './icon.component.html',
   styleUrls: ['./icon.component.scss'],
+  // Using host property decorator is fine for static values:
+  // tslint:disable-next-line:use-host-property-decorator
+  host: {
+    class: 'kirby-icon',
+  },
 })
 export class IconComponent {
   static DEFAULT_ICON_CODE = 0xf2cf;

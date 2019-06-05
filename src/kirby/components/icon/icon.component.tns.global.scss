@@ -1,42 +1,27 @@
 @import '../../scss/native-imports';
  
-.sm .kirby-icon {
-  font-size: size('m');
-}
-
-.md .kirby-icon {
-  font-size: size('l');
-}
-
-.lg .kirby-icon {
-  font-size: size('xxxl');
-}
-
 .kirby-icon {
-    font-family: "Ionicons", "ionicons";
-    font-size: size('m'); //default to size 'sm'
-
-    &.primary {
-        color: get-color('primary');
-    }
-    
-    &.secondary {
-        color: get-color('secondary');
-    }
-    
-    &.tertiary {
-        color: get-color('tertiary');
+    Label {
+        font-family: "Ionicons", "ionicons";
     }
 
-    &.warning {
-        color: get-color('warning');
+    font-size: size('m'); //default to icon size 'sm'   
+
+    &.sm {
+        font-size: size('m');
+    }
+        
+    &.md {
+        font-size: size('l');
+    }
+        
+    &.lg {
+        font-size: size('xxxl');
     }
 
-    &.success {
-        color: get-color('success');
-    }
-
-    &.danger {
-        color: get-color('danger');
+    @each $color-name, $color-value in $main-colors {
+        .#{$color-name} {
+            color: get-color($color-name);
+        }
     }
 }   
