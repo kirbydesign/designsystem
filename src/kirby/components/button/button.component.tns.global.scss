@@ -24,16 +24,9 @@ Button[kirby-button] {
     font-size: font-size('s');
     height: size('xxl');
   }
-  
-  &.secondary {
-    color: get-color('contrast-dark');
-    background-color: get-color('contrast-light');
-    border-color: get-color('contrast-light');
-  }
 
   &[isEnabled=false] {
     background-color: get-color('light-tint');
     border-color: get-color('light-tint');
   }
-
 }

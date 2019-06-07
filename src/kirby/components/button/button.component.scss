@@ -36,18 +36,6 @@
     width: 100%;
   }
 
-  &.primary {
-    --kirby-button-background-color:#{get-color('primary')};
-    --kirby-button-border-color: #{get-color('primary')};
-    --kirby-button-color: #{get-color('primary-contrast')};
-  }
-
-  &.secondary {
-    --kirby-button-background-color: #{get-color('contrast-light')};
-    --kirby-button-border-color: #{get-color('contrast-light')};
-    --kirby-button-color: #{get-color('contrast-dark')};
-  }
-
   &:hover,
   &:focus {
     opacity: 0.8;

@@ -19,12 +19,6 @@ export class ButtonShowcaseComponent implements OnInit {
       inputValues: ['block'],
     },
     {
-      name: 'themeColor',
-      description: 'Sets which color the button should use from the theme palette.',
-      defaultValue: 'primary',
-      inputValues: ['primary', 'secondary'],
-    },
-    {
       name: 'size',
       description: 'Sets the size of the button.',
       defaultValue: 'md',
