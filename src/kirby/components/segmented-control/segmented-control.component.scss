@@ -1,19 +1,17 @@
 @import "../../scss/web-imports";
 
-$border-radius: 20px;
-
 :host {
   display: inline-block;
 }
 
 ion-segment {
-  --color: #{get-color('kirby-contrast-dark')};
-  --color-checked: #{get-color('kirby-contrast-light')};
-  --background: #{get-color('kirby-contrast-light')};
-  --background-checked: #{get-color('kirby-contrast-dark')};
-  --background-hover: #{get-color('kirby-contrast-light')};
+  --color: #{get-color('contrast-dark')};
+  --color-checked: #{get-color('contrast-light')};
+  --background: #{get-color('contrast-light')};
+  --background-checked: #{get-color('contrast-dark')};
+  --background-hover: #{get-color('contrast-light')};
   border-radius: $border-radius;
-  background: get-color('kirby-contrast-light');
+  background: get-color('contrast-light');
 }
 
 ion-segment-button {
@@ -29,7 +27,7 @@ ion-segment-button {
   --padding-end: #{size("m")};
 
   &.segment-button-checked:hover {
-    --background-hover: #{get-color('kirby-contrast-dark')};
+    --background-hover: #{get-color('contrast-dark')};
   }
 
   &:focus-within {

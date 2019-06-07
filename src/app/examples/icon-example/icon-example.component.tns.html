@@ -1,21 +1,95 @@
-<WrapLayout itemWidth="40" itemHeight="40" class="background">
-    <kirby-icon name="add" size="large"></kirby-icon>
-    <kirby-icon name="cog" size="large"></kirby-icon>
-    <kirby-icon name="swap" size="large"></kirby-icon>
-    <kirby-icon name="move" size="large"></kirby-icon>
-    <kirby-icon name="log-out" size="large"></kirby-icon>
-    <kirby-icon name="more" size="large"></kirby-icon>
-    <kirby-icon name="arrow-back" size="large"></kirby-icon>
-    <kirby-icon name="help" size="large"></kirby-icon>
-    <kirby-icon name="close" size="large"></kirby-icon>
-    <kirby-icon name="attach" size="large"></kirby-icon>
-    <kirby-icon name="search" size="large"></kirby-icon>
-    <kirby-icon name="checkbox" size="large"></kirby-icon>
-    <kirby-icon name="checkbox-outline" size="large"></kirby-icon>
-    <kirby-icon name="menu" size="large"></kirby-icon>
-    <kirby-icon name="person" size="large" colortype="success"></kirby-icon>
+<ScrollView>
+    <StackLayout class="background">
+        <Label text="Default Icons" class="h2"></Label>
+        <WrapLayout itemWidth="40" itemHeight="40">
+            <kirby-icon name="add"></kirby-icon>
+            <kirby-icon name="cog"></kirby-icon>
+            <kirby-icon name="swap"></kirby-icon>
+            <kirby-icon name="move"></kirby-icon>
+            <kirby-icon name="log-out"></kirby-icon>
+            <kirby-icon name="more"></kirby-icon>
+            <kirby-icon name="arrow-back"></kirby-icon>
+            <kirby-icon name="help"></kirby-icon>
+            <kirby-icon name="close"></kirby-icon>
+            <kirby-icon name="attach"></kirby-icon>
+            <kirby-icon name="search"></kirby-icon>
+            <kirby-icon name="checkbox"></kirby-icon>
+            <kirby-icon name="checkbox-outline"></kirby-icon>
+            <kirby-icon name="menu"></kirby-icon>
+            <kirby-icon name="person"></kirby-icon>
+        </WrapLayout>
 
-    <!-- use custom font icons -->
-    <kirby-icon customName="football" size="large" colortype="warning"></kirby-icon>
-    <kirby-icon customName="umbrella" size="large" colortype="danger"></kirby-icon>
-</WrapLayout>
+        <Label text="Custom Icons" class="h2"></Label>
+        <WrapLayout orientation="horizontal" itemWidth="100" itemHeight="80">
+            <StackLayout>
+                <kirby-icon customName="football"></kirby-icon>
+                <Label text="customName: football" textWrap="true"></Label>
+            </StackLayout>
+            <StackLayout>
+                <kirby-icon customName="umbrella"></kirby-icon>
+                <Label text="customName: umbrella" textWrap="true"></Label>
+            </StackLayout>
+        </WrapLayout>
+
+        <Label text="Sizes" class="h2"></Label>
+        <WrapLayout orientation="horizontal" itemWidth="80" itemHeight="80">
+            <StackLayout>
+                <kirby-icon name="person"></kirby-icon>
+                <Label text="default"></Label>
+                <Label text="(sm)"></Label>
+            </StackLayout>
+            <StackLayout>
+                <kirby-icon name="person" size="sm"></kirby-icon>
+                <Label text="sm"></Label>
+            </StackLayout>
+            <StackLayout>
+                <kirby-icon name="person" size="md"></kirby-icon>
+                <Label text="md"></Label>
+            </StackLayout>
+            <StackLayout>
+                <kirby-icon name="person" size="lg"></kirby-icon>
+                <Label text="lg"></Label>
+            </StackLayout>
+        </WrapLayout>
+
+        <Label text="Colors" class="h2"></Label>
+        <WrapLayout orientation="horizontal" itemWidth="60" itemHeight="60">
+            <StackLayout>
+                <kirby-icon name="person" themeColor="primary"></kirby-icon>
+                <Label text="primary"></Label>
+            </StackLayout>
+            <StackLayout>
+                <kirby-icon name="person" themeColor="secondary"></kirby-icon>
+                <Label text="secondary"></Label>
+            </StackLayout>
+            <StackLayout>
+                <kirby-icon name="person" themeColor="tertiary"></kirby-icon>
+                <Label text="tertiary"></Label>
+            </StackLayout>
+            <StackLayout>
+                <kirby-icon name="person" themeColor="success"></kirby-icon>
+                <Label text="success"></Label>
+            </StackLayout>
+            <StackLayout>
+                <kirby-icon name="person" themeColor="warning"></kirby-icon>
+                <Label text="warning"></Label>
+            </StackLayout>
+            <StackLayout>
+                <kirby-icon name="person" themeColor="danger"></kirby-icon>
+                <Label text="danger"></Label>
+            </StackLayout>
+            <StackLayout>
+                <kirby-icon name="person" themeColor="light"></kirby-icon>
+                <Label text="light"></Label>
+            </StackLayout>
+            <StackLayout>
+                <kirby-icon name="person" colortype="medium"></kirby-icon>
+                <Label text="medium"></Label>
+            </StackLayout>
+            <StackLayout>
+                <kirby-icon name="person" colortype="dark"></kirby-icon>
+                <Label text="dark"></Label>
+            </StackLayout>
+        </WrapLayout>
+    </StackLayout>
+</ScrollView>

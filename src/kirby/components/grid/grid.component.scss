@@ -7,17 +7,17 @@ $page-max-width: 1366px;
   display: grid;
   grid-template-columns: 1fr;
   grid-auto-rows: minmax($grid-item-min-height, auto);
-  grid-column-gap: size("gutter-small");
-  grid-row-gap: size("gutter-small");
+  grid-column-gap: size("xs");
+  grid-row-gap: size("xs");
   max-width: $page-max-width;
-  margin: size("gutter-small") auto;
-  padding: 0 size("gutter-small");
+  margin: size("xs") auto;
+  padding: 0 size("xs");
   
   @include media(">=small") {
-    grid-column-gap: size("gutter");
-    grid-row-gap: size("gutter");  
-    margin: size("gutter") auto;
-    padding: 0 size("gutter");  
+    grid-column-gap: size("s");
+    grid-row-gap: size("s");  
+    margin: size("s") auto;
+    padding: 0 size("s");  
   }
 
   @include media(">=medium") {

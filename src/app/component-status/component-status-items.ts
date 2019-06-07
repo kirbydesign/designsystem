@@ -1,18 +1,20 @@
 export interface ComponentStatusItem {
-  component: string;
+  title: string;
+  parentTitle?: string;
   aliases?: string[];
-  priority: number;
+  priority?: number;
   ux: {
-    version: number;
+    version?: number;
     status: string;
-    zeplinUrl?: string;
+    wireFrameUrl?: string;
   };
   code: {
-    version: number;
+    version?: number;
     status: string;
     githubIssueNo?: number;
     cookbookUrl?: string;
     github?: string;
+    enhancements?: ComponentStatusItem[];
   };
   children?: ComponentStatusItem[];
 }
@@ -43,12 +45,28 @@ export enum ItemCodeStatusOrder {
 
 export const componentStatusItems: ComponentStatusItem[] = [
   {
-    component: 'Avatar',
+    title: 'Action Sheet',
     priority: 0,
     ux: {
       version: 1.0,
       status: ItemUXStatus.ready,
-      zeplinUrl: 'https://zpl.io/2yONGDG',
+      wireFrameUrl: 'https://sketch.cloud/s/pAE4G/oYz8ZKQ/play',
+    },
+    code: {
+      version: 0.5,
+      status: ItemCodeStatus.ready,
+      cookbookUrl: 'showcase/action-sheet',
+      github: 'https://github.com/kirbydesign/designsystem/tree/master/src/kirby/components/modal',
+      githubIssueNo: 210,
+    },
+  },
+  {
+    title: 'Avatar',
+    priority: 0,
+    ux: {
+      version: 1.0,
+      status: ItemUXStatus.ready,
+      wireFrameUrl: 'https://zpl.io/2yONGDG',
     },
     code: {
       version: 0.5,
@@ -58,13 +76,13 @@ export const componentStatusItems: ComponentStatusItem[] = [
     },
   },
   {
-    component: 'Badge',
+    title: 'Badge',
     aliases: ['Beacon'],
     priority: 20,
     ux: {
       version: 1.0,
       status: ItemUXStatus.ready,
-      zeplinUrl: 'https://zpl.io/agzl3GD',
+      wireFrameUrl: 'https://zpl.io/agzl3GD',
     },
     code: {
       version: 0.9,
@@ -73,12 +91,12 @@ export const componentStatusItems: ComponentStatusItem[] = [
     },
   },
   {
-    component: 'Button',
+    title: 'Button',
     priority: 0,
     ux: {
       version: 1.0,
       status: ItemUXStatus.ready,
-      zeplinUrl: 'https://zpl.io/bPPk4ok',
+      wireFrameUrl: 'https://zpl.io/bPPk4ok',
     },
     code: {
       version: 0.5,
@@ -88,7 +106,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
     },
     children: [
       {
-        component: 'Icon Button',
+        title: 'Icon Button',
         priority: 0,
         ux: {
           version: 0.0,
@@ -100,7 +118,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
         },
       },
       {
-        component: 'Outline Button',
+        title: 'Outline Button',
         priority: 0,
         ux: {
           version: 0.0,
@@ -114,12 +132,12 @@ export const componentStatusItems: ComponentStatusItem[] = [
     ],
   },
   {
-    component: 'Card',
+    title: 'Card',
     priority: 0,
     ux: {
       version: 1.0,
       status: ItemUXStatus.ready,
-      zeplinUrl: 'https://zpl.io/2EBLPk8',
+      wireFrameUrl: 'https://zpl.io/2EBLPk8',
     },
     code: {
       version: 0.1,
@@ -129,7 +147,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
     },
   },
   {
-    component: 'Charts',
+    title: 'Charts',
     priority: 0,
     ux: {
       version: 0.0,
@@ -142,7 +160,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
     },
     children: [
       {
-        component: 'Donut',
+        title: 'Donut',
         priority: 0,
         ux: {
           version: 0.0,
@@ -155,7 +173,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
         },
       },
       {
-        component: 'Pie',
+        title: 'Pie',
         priority: 0,
         ux: {
           version: 0.0,
@@ -168,7 +186,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
         },
       },
       {
-        component: 'Area Spline',
+        title: 'Area Spline',
         priority: 0,
         ux: {
           version: 0.0,
@@ -181,7 +199,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
         },
       },
       {
-        component: 'Activity Gauge',
+        title: 'Activity Gauge',
         priority: 0,
         ux: {
           version: 0.0,
@@ -196,7 +214,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
     ],
   },
   {
-    component: 'Checkbox',
+    title: 'Checkbox',
     priority: 0,
     ux: {
       version: 1.0,
@@ -204,12 +222,12 @@ export const componentStatusItems: ComponentStatusItem[] = [
     },
     code: {
       version: 0.5,
-      status: ItemCodeStatus.inProgress,
-      githubIssueNo: 203,
+      status: ItemCodeStatus.ready,
+      cookbookUrl: 'showcase/checkbox',
     },
   },
   {
-    component: 'Chip',
+    title: 'Chip',
     aliases: ['Button', 'Compact Button', 'Tag'],
     priority: 30,
     ux: {
@@ -223,13 +241,13 @@ export const componentStatusItems: ComponentStatusItem[] = [
     },
   },
   {
-    component: 'Floating Action Button',
+    title: 'Floating Action Button',
     aliases: ['FAB'],
     priority: 0,
     ux: {
       version: 1.0,
       status: ItemUXStatus.ready,
-      zeplinUrl: 'https://zpl.io/VqWoxg5',
+      wireFrameUrl: 'https://zpl.io/VqWoxg5',
     },
     code: {
       version: 0.5,
@@ -238,12 +256,12 @@ export const componentStatusItems: ComponentStatusItem[] = [
     },
   },
   {
-    component: 'Icon',
+    title: 'Icon',
     priority: 40,
     ux: {
       version: 1.0,
       status: ItemUXStatus.ready,
-      zeplinUrl: 'https://zpl.io/a7OAAWR',
+      wireFrameUrl: 'https://zpl.io/a7OAAWR',
     },
     code: {
       version: 0.5,
@@ -252,7 +270,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
     },
   },
   {
-    component: 'Input',
+    title: 'Input',
     priority: 80,
     ux: {
       version: 0.0,
@@ -264,7 +282,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
     },
   },
   {
-    component: 'List',
+    title: 'List',
     priority: 50,
     ux: {
       version: 1.0,
@@ -278,7 +296,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
     },
   },
   {
-    component: 'List Item',
+    title: 'List Item',
     priority: 60,
     ux: {
       version: 1.0,
@@ -290,7 +308,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
     },
   },
   {
-    component: 'Menu',
+    title: 'Menu',
     priority: 0,
     ux: {
       version: 0.0,
@@ -302,7 +320,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
     },
   },
   {
-    component: 'Modal',
+    title: 'Modal',
     priority: 70,
     ux: {
       version: 1.0,
@@ -315,7 +333,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
     },
     children: [
       {
-        component: 'Full Screen Modal',
+        title: 'Full Screen Modal',
         priority: 0,
         ux: {
           version: 1.0,
@@ -328,7 +346,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
         },
       },
       {
-        component: 'Popover Modal',
+        title: 'Popover Modal',
         priority: 0,
         ux: {
           version: 1.0,
@@ -341,21 +359,26 @@ export const componentStatusItems: ComponentStatusItem[] = [
         },
       },
       {
-        component: 'Alert Modal',
+        title: 'Alert Modal',
         priority: 0,
         ux: {
-          version: 0.0,
-          status: ItemUXStatus.underConsideration,
+          version: 1.0,
+          status: ItemUXStatus.ready,
+          wireFrameUrl: 'https://zpl.io/blD0gze',
         },
         code: {
-          version: 0.0,
-          status: ItemCodeStatus.underConsideration,
+          version: 0.9,
+          status: ItemCodeStatus.ready,
+          cookbookUrl: 'showcase/alert',
+          github:
+            'https://github.com/kirbydesign/designsystem/tree/master/src/kirby/components/modal',
+          githubIssueNo: 189,
         },
       },
     ],
   },
   {
-    component: 'Loading Indicators',
+    title: 'Loading Indicators',
     priority: 0,
     ux: {
       version: 0.0,
@@ -370,7 +393,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
     },
     children: [
       {
-        component: 'Loading',
+        title: 'Loading',
         priority: 0,
         ux: {
           version: 0.0,
@@ -382,7 +405,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
         },
       },
       {
-        component: 'Progress Bar',
+        title: 'Progress Bar',
         priority: 0,
         ux: {
           version: 0.0,
@@ -394,7 +417,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
         },
       },
       {
-        component: 'Skeleton Text',
+        title: 'Skeleton Text',
         priority: 0,
         ux: {
           version: 0.0,
@@ -406,7 +429,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
         },
       },
       {
-        component: 'Spinner',
+        title: 'Spinner',
         priority: 0,
         ux: {
           version: 0.0,
@@ -421,7 +444,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
     ],
   },
   {
-    component: 'Radio Button',
+    title: 'Radio Button',
     priority: 0,
     ux: {
       version: 1.0,
@@ -433,7 +456,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
     },
     children: [
       {
-        component: 'Radio Button Group',
+        title: 'Radio Button Group',
         priority: 0,
         ux: {
           version: 0.0,
@@ -447,7 +470,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
     ],
   },
   {
-    component: 'Pull To Refresh',
+    title: 'Pull To Refresh',
     priority: 0,
     ux: {
       version: 0.0,
@@ -459,7 +482,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
     },
   },
   {
-    component: 'Reorder',
+    title: 'Reorder',
     priority: 0,
     ux: {
       version: 0.0,
@@ -471,13 +494,13 @@ export const componentStatusItems: ComponentStatusItem[] = [
     },
   },
   {
-    component: 'Segmented Control',
+    title: 'Segmented Control',
     aliases: ['Segment', 'Inline Tabs', 'Button Group'],
     priority: 10,
     ux: {
       version: 1.0,
       status: ItemUXStatus.ready,
-      zeplinUrl: 'https://zpl.io/2v7Evw5',
+      wireFrameUrl: 'https://zpl.io/2v7Evw5',
     },
     code: {
       version: 0.1,
@@ -485,12 +508,12 @@ export const componentStatusItems: ComponentStatusItem[] = [
     },
     children: [
       {
-        component: 'Segmented Control',
+        title: 'Segmented Control',
         priority: 11,
         ux: {
           version: 1.0,
           status: ItemUXStatus.ready,
-          zeplinUrl: 'https://zpl.io/2v7Evw5',
+          wireFrameUrl: 'https://zpl.io/2v7Evw5',
         },
         code: {
           version: 0.9,
@@ -499,7 +522,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
         },
       },
       {
-        component: 'Segmented Chip Control',
+        title: 'Segmented Chip Control',
         priority: 12,
         ux: {
           version: 0.0,
@@ -514,7 +537,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
     ],
   },
   {
-    component: 'Tabs',
+    title: 'Tabs',
     priority: 0,
     ux: {
       version: 0.0,
@@ -526,7 +549,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
     },
   },
   {
-    component: 'Toast',
+    title: 'Toast',
     priority: 0,
     ux: {
       version: 0.0,
@@ -538,7 +561,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
     },
   },
   {
-    component: 'Switch',
+    title: 'Switch',
     aliases: ['Toggle'],
     priority: 0,
     ux: {
@@ -551,15 +574,17 @@ export const componentStatusItems: ComponentStatusItem[] = [
     },
   },
   {
-    component: 'Calendar',
+    title: 'Calendar',
     priority: 0,
     ux: {
       version: 0.9,
       status: ItemUXStatus.planned,
+      wireFrameUrl: 'https://sketch.cloud/s/7bga2/Gmlbp2Y',
     },
     code: {
       version: 0.5,
       status: ItemCodeStatus.inProgress,
+      githubIssueNo: 238,
     },
   },
 ];

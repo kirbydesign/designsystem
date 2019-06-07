@@ -7,16 +7,3 @@ $breakpoints: (
   xlarge: 60em, 
   xxlarge: 80em 
 );
-
-/* Z-index
---------------------------------------------------------------------------------*/
-$z-layers: (
-  default: 1,
-  modal-overlay: 900,
-  modal: 901
-);
-
-/* Borders 
---------------------------------------------------------------------------------*/
-$border-radius: 18px;
-$border-radius-small: 6px;

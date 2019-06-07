@@ -1,0 +1,21 @@
+@import "../../../scss/web-imports";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+kirby-card {
+  flex: none;
+  width: 200px; //TODO: Get width from common settings
+  pointer-events: auto;
+}
+
+.cancel-btn {
+  font-weight: font-weight("bold");
+  margin-top: size("s");
+  margin-bottom: size("m");
+  width: 160px; //TODO: Get width from common settings
+  pointer-events: auto;
+}

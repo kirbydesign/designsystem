@@ -1,105 +1,113 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { createTestComponentFactory, Spectator } from '@netbasal/spectator';
 
 import { LoadOnDemandEvent } from './list.event';
 import { GroupByPipe } from './pipes/group-by.pipe';
 import { ListComponent } from './list.component';
-import { SpinnerComponent } from '~/kirby';
+import { SpinnerComponent } from '../spinner/spinner.component';
 import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
+import { ListHelper } from './helpers/list-helper';
+
+/**
+ * We need an actual model item, since WeakMap can't use primitives for keys.
+ */
+class Item {
+  static createItems(...values: number[]) {
+    return values.map((value) => new Item(value));
+  }
+
+  constructor(public value: number) {}
+}
 
 describe('ListComponent', () => {
+  let spectator: Spectator<ListComponent>;
   let component: ListComponent;
-  let fixture: ComponentFixture<ListComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ListComponent, GroupByPipe, SpinnerComponent, InfiniteScrollDirective],
-    }).compileComponents();
-  }));
+  function runNgOnChanges() {
+    // Forces ngOnChanges to run (since that won't happen, when inputs are changed programmatically)
+    component.ngOnChanges();
+    // Detect changes, since ngOnChanges altered state of component
+    spectator.detectChanges();
+  }
+
+  const createHost = createTestComponentFactory({
+    component: ListComponent,
+    declarations: [ListComponent, GroupByPipe, SpinnerComponent, InfiniteScrollDirective],
+    providers: [ListHelper, GroupByPipe],
+  });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ListComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    spectator = createHost({});
+    component = spectator.component;
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(spectator.component).toBeTruthy();
   });
 
   describe('sections', () => {
-    beforeEach(() => {
-      fixture = TestBed.createComponent(ListComponent);
-      component = fixture.componentInstance;
-    });
-
     it('should be disabled if no section callback is defined', () => {
-      fixture.detectChanges();
+      spectator.setInput({
+        getSectionName: undefined,
+      });
+      runNgOnChanges();
 
-      expect(component.isSectionsEnabled).toBeFalsy();
+      expect(spectator.component.isSectionsEnabled).toBeFalsy();
     });
 
     it('should be enabled if a section callback is defined', () => {
-      component.getSectionName = (item: any) => 'this is a test';
+      spectator.setInput({
+        items: Item.createItems(1, 2, 3),
+        getSectionName: (item: any) => 'this is a test',
+      });
+      runNgOnChanges();
 
-      fixture.detectChanges();
-
-      expect(component.isSectionsEnabled).toBeTruthy();
+      expect(spectator.component.isSectionsEnabled).toBeTruthy();
     });
 
     it('should render one li element for each item, if the list is not sectioned', () => {
-      component.items = [1, 2, 3];
+      spectator.setInput({
+        items: Item.createItems(1, 2, 3),
+      });
+      runNgOnChanges();
 
-      fixture.detectChanges();
-
-      const rootElement: HTMLElement = fixture.debugElement.nativeElement;
-      const liElements = rootElement.querySelectorAll('li');
-
+      const liElements = spectator.queryAll('li');
       expect(liElements.length).toEqual(component.items.length);
     });
 
     it('should render one li element for each item and one for each section, if sections are enabled', () => {
-      const sections = ['section 1', 'section 2', 'section 3'];
-      component.items = [0, 1, 2];
-      component.getSectionName = (item: any): string => sections[item];
+      spectator.setInput({
+        items: Item.createItems(1, 2, 3),
+        getSectionName: (item: Item) => (item.value % 2 === 0 ? 'even' : 'odd'),
+      });
+      runNgOnChanges();
 
-      fixture.detectChanges();
-
-      const rootElement: HTMLElement = fixture.debugElement.nativeElement;
-      const liElements = rootElement.querySelectorAll('li');
-
-      expect(liElements.length).toEqual(component.items.length + sections.length);
+      const liElements = spectator.queryAll('li');
+      expect(liElements.length).toEqual(component.items.length + 2);
     });
   });
 
   describe('divider', () => {
-    beforeEach(() => {
-      fixture = TestBed.createComponent(ListComponent);
-      component = fixture.componentInstance;
-    });
-
     it('should set class "divider" on all li elements when showDivider is true', () => {
-      component.items = [1, 2, 3];
-      component.showDivider = true;
+      spectator.setInput({
+        items: Item.createItems(1, 2, 3),
+        showDivider: true,
+      });
+      runNgOnChanges();
 
-      fixture.detectChanges();
-
-      const rootElement: HTMLElement = fixture.debugElement.nativeElement;
-      const liElements = rootElement.querySelectorAll('li');
-
+      const liElements = spectator.queryAll('li');
       liElements.forEach((liElement) => {
         expect(liElement.getAttribute('class')).toContain('divider');
       });
     });
 
     it('should not set class "divider" on any li elements when showDivider is false', () => {
-      component.items = [1, 2, 3];
-      component.showDivider = false;
+      spectator.setInput({
+        items: Item.createItems(1, 2, 3),
+        showDivider: false,
+      });
+      runNgOnChanges();
 
-      fixture.detectChanges();
-
-      const rootElement: HTMLElement = fixture.debugElement.nativeElement;
-      const liElements = rootElement.querySelectorAll('li');
-
+      const liElements = spectator.queryAll('li');
       liElements.forEach((liElement) => {
         expect(liElement.getAttribute('class')).not.toContain('divider');
       });
@@ -122,15 +130,63 @@ describe('ListComponent', () => {
     it('should enable load more, if there is a subscriber to the loadMore event emitter', () => {
       component.loadOnDemand.subscribe((loadMoreEvent: LoadOnDemandEvent) => {});
 
-      component.ngOnInit();
+      runNgOnChanges();
 
       expect(component.isLoadOnDemandEnabled).toBeTruthy();
     });
 
     it('should disable load more, if there is no subscriber to the loadMore event emitter', () => {
-      component.ngOnInit();
+      runNgOnChanges();
 
       expect(component.isLoadOnDemandEnabled).toBeFalsy();
+    });
+  });
+
+  describe('first/last in section', () => {
+    it('should return false, when sections are not enabled', () => {
+      const items = Item.createItems(1, 2, 3);
+      spectator.setInput({
+        items,
+      });
+      runNgOnChanges();
+
+      expect(component.isFirstInSection(items[0])).toEqual(false);
+      expect(component.isLastInSection(items[0])).toEqual(false);
+    });
+
+    it('should return true for sectioned list with rounded corners and a single entry', () => {
+      const items = Item.createItems(1);
+      spectator.setInput({
+        items,
+        shape: 'rounded',
+        getSectionName: () => 'bob',
+      });
+      runNgOnChanges();
+
+      expect(component.isFirstInSection(items[0])).toEqual(true);
+      expect(component.isLastInSection(items[0])).toEqual(true);
+    });
+
+    it('should return true for sectioned list with rounded corners and a multiple entries', () => {
+      const items = Item.createItems(1, 2, 3, 4);
+      spectator.setInput({
+        items,
+        shape: 'rounded',
+        getSectionName: (item: Item) => (item.value % 2 == 0 ? 'even' : 'odd'),
+      });
+      runNgOnChanges();
+
+      expect(component.isFirstInSection(items[0])).toEqual(true);
+      expect(component.isLastInSection(items[0])).toEqual(false);
+
+      expect(component.isFirstInSection(items[1])).toEqual(true);
+      expect(component.isLastInSection(items[1])).toEqual(false);
+
+      expect(component.isFirstInSection(items[2])).toEqual(false);
+      expect(component.isLastInSection(items[2])).toEqual(true);
+
+      expect(component.isFirstInSection(items[3])).toEqual(false);
+      expect(component.isLastInSection(items[3])).toEqual(true);
     });
   });
 });

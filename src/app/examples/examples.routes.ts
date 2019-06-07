@@ -14,7 +14,10 @@ import { SegmentedControlExampleComponent } from './segmented-control-example/se
 import { ChipExampleComponent } from './chip-example/chip-example.component';
 import { BadgeExampleComponent } from './badge-example/badge-example.component';
 import { IconExampleComponent } from './icon-example/icon-example.component';
+import { CheckboxExampleComponent } from './checkbox-example/checkbox-example.component';
 import { SegmentedChipControlExampleComponent } from './segmented-chip-control-example/segmented-chip-control-example.component';
+import { ActionSheetExampleComponent } from './action-sheet-example/action-sheet-example.component';
+import { AlertExampleComponent } from './alert-example/alert-example.component';
 
 export const routes: Routes = [
   {
@@ -66,6 +69,14 @@ export const routes: Routes = [
     component: ModalExampleComponent,
   },
   {
+    path: 'action-sheet',
+    component: ActionSheetExampleComponent,
+  },
+  {
+    path: 'alert',
+    component: AlertExampleComponent,
+  },
+  {
     path: 'segmented-control',
     component: SegmentedControlExampleComponent,
   },
@@ -80,5 +91,9 @@ export const routes: Routes = [
   {
     path: 'icon',
     component: IconExampleComponent,
+  },
+  {
+    path: 'checkbox',
+    component: CheckboxExampleComponent,
   },
 ];
