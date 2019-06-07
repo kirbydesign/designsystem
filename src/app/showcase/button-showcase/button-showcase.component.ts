@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 declare var require: any;
 
 import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
@@ -8,7 +8,7 @@ import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-prop
   templateUrl: './button-showcase.component.html',
   styleUrls: ['./button-showcase.component.scss'],
 })
-export class ButtonShowcaseComponent implements OnInit {
+export class ButtonShowcaseComponent{
   exampleHtml: string = require('../../examples/button-example/button-example.component.html');
   properties: ShowcaseProperty[] = [
     {
@@ -24,9 +24,17 @@ export class ButtonShowcaseComponent implements OnInit {
       defaultValue: 'md',
       inputValues: ['sm', 'md', 'lg'],
     },
+    {
+      name: 'attentionLevel',
+      description: 'Sets the attention level for the button.',
+      defaultValue: '1',
+      inputValues: ['1', '2', '3', '4'],
+    },
+    {
+      name: 'isDestructive',
+      description: 'Sets the color of the button to danger red.',
+      defaultValue: 'false',
+      inputValues: ['true', 'false'],
+    },
   ];
-
-  constructor() {}
-
-  ngOnInit() {}
 }

@@ -1,11 +1,10 @@
 @import '../../scss/web-imports';
+@import '../../scss/themes/attention-level';
 
 :host {
+  --kirby-button-background-color: transparent;
+  --kirby-button-border-color: transparent;
   --kirby-button-border-radius: 2rem;
-  --kirby-button-background-color: #{get-color('primary')};
-  --kirby-button-border-color: #{get-color('primary')};
-  --kirby-button-color: #{get-color('primary-contrast')};
-
   background-color: var(--kirby-button-background-color);
   border-radius: var(--kirby-button-border-radius);
   border: 1px solid var(--kirby-button-border-color);
@@ -31,6 +30,38 @@
     height: size('xxl');
   }
 
+  &.attention-level1 {
+    @include  attention-level1-theme();
+      
+    &.destructive {
+      @include attention-level1-destructive-theme();
+    }
+  }
+
+  &.attention-level2 {
+    @include  attention-level2-theme();
+
+    &.destructive {
+      @include attention-level2-destructive-theme();
+    }
+  }
+
+  &.attention-level3 {
+    @include  attention-level3-theme();
+
+    &.destructive {
+      @include attention-level3-destructive-theme();
+    }
+  }
+
+  &.attention-level4 {
+    @include  attention-level4-theme();
+
+    &.destructive {
+      @include attention-level4-destructive-theme();
+    }
+  }
+
   &[expand='block'] {
     display: block;
     width: 100%;
@@ -46,5 +77,4 @@
     border-color: var(--kirby-light-tint);
     pointer-events: none;
   }
-
 }
