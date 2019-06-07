@@ -1,5 +1,10 @@
 @import "../../scss/native-imports";
 
+
+RadListView {
+  background-color:  get-color('base-color');
+}
+
 .row, .section-header {
   padding: size('s') size('xs') size('s') size('xs');
 }
@@ -17,12 +22,9 @@
 }
 
 .row {
-  border-color: get-color('medium');
-  border-left-width: 1;
-  border-right-width: 1;
+  background-color: get-color('contrast-light');
 
   &.first {
-    border-top-width: 1;
 
     &.rounded {
       border-top-left-radius: $border-radius;
@@ -31,7 +33,6 @@
   }
 
   &.last {
-    border-bottom-width: 1;
 
     &.rounded {
       border-bottom-left-radius: $border-radius;
