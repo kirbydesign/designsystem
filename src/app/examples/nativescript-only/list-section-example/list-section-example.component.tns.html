@@ -1,8 +1,9 @@
-  <kirby-list
+    <kirby-list
         [items]="items"
         [getSectionName]="getSectionName"
         (itemSelect)="onItemSelect($event)"
         shape="rounded"
+        padding="20"
         >
     <kirby-list-section-header
             *kirbyListSectionHeader="let section"

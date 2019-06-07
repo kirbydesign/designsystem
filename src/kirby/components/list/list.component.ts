@@ -72,6 +72,11 @@ export class ListComponent implements OnChanges {
   @Input() shape: ListShape = 'square';
 
   /**
+   * Adds padding to the list.
+   */
+  @Input() padding: string = null;
+
+  /**
    * Emitting event when more items are to be loaded.
    */
   @Output() loadOnDemand = new EventEmitter<LoadOnDemandEvent>();
