@@ -1,7 +1,18 @@
 @import '../../scss/web-imports';
-@import '../../scss/themes/attention-level';
 
 :host {
+  @mixin background-color($color) {
+      --kirby-button-background-color:#{get-color($color)};
+  }
+
+  @mixin border-color($color) {
+      --kirby-button-border-color: #{get-color($color)};
+  }
+
+  @mixin text-color($color) {
+      --kirby-button-color: #{get-color($color)};
+  }
+
   --kirby-button-background-color: transparent;
   --kirby-button-border-color: transparent;
   --kirby-button-border-radius: 2rem;
@@ -31,34 +42,50 @@
   }
 
   &.attention-level1 {
-    @include  attention-level1-theme();
+    :host-context([themecolor='primary'], [themecolor='success']) {
+      @include background-color('light');
+      @include border-color('light');
+      @include text-color('light-contrast');
+    }
+
+    @include background-color('primary');
+    @include border-color('primary');
+    @include text-color('primary-contrast');
       
     &.destructive {
-      @include attention-level1-destructive-theme();
+      @include background-color('danger');
+      @include border-color('danger');
+      @include text-color('danger-contrast');
     }
   }
 
   &.attention-level2 {
-    @include  attention-level2-theme();
+    @include background-color('light');
+    @include border-color('light');
+    @include text-color('light-contrast');
 
     &.destructive {
-      @include attention-level2-destructive-theme();
+      @include background-color('light');
+      @include border-color('light');
+      @include text-color('danger');
     }
   }
 
   &.attention-level3 {
-    @include  attention-level3-theme();
+    @include border-color('medium');
+    @include text-color('medium-contrast');
 
     &.destructive {
-      @include attention-level3-destructive-theme();
+      @include border-color('medium');
+      @include text-color('danger');
     }
   }
 
   &.attention-level4 {
-    @include  attention-level4-theme();
+    @include text-color('primary-contrast');
 
     &.destructive {
-      @include attention-level4-destructive-theme();
+      @include text-color('danger');
     }
   }
 

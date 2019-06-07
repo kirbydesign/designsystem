@@ -1,9 +1,9 @@
 @import '../../scss/native-imports';
 
 Button[kirby-button] {
-  color: get-color('primary-contrast');
   background-color: get-color('primary');
   border-color: get-color('primary');
+  color: get-color('primary-contrast');
   border-radius: 100;
   border-width: 1;
 
@@ -23,6 +23,54 @@ Button[kirby-button] {
   &.lg {
     font-size: font-size('s');
     height: size('xxl');
+  }
+
+  &.attention-level1 {
+    background-color: get-color('primary');
+    border-color: get-color('primary');
+    color: get-color('primary-contrast');
+      
+    &.destructive {
+      background-color: get-color('danger');
+      border-color: get-color('danger');
+      color: get-color('danger-contrast');
+    }
+  }
+
+  &.attention-level2 {
+    background-color: get-color('light');
+    border-color: get-color('light');
+    color: get-color('light-contrast');
+
+    &.destructive {
+      background-color: get-color('light');
+      border-color: get-color('light');
+      color: get-color('danger');
+    }
+  }
+
+  &.attention-level3 {
+    background-color: transparent;
+    border-color: get-color('medium');
+    color: get-color('medium-contrast');
+
+    &.destructive {
+      background-color: transparent;
+      border-color: get-color('medium');
+      color: get-color('danger');
+    }
+  }
+
+  &.attention-level4 {
+    background-color: transparent;
+    border-color: transparent;
+    color: get-color('primary-contrast');
+
+    &.destructive {
+      background-color: transparent;
+      border-color: transparent;
+      color: get-color('danger');
+    }
   }
 
   &[isEnabled=false] {
