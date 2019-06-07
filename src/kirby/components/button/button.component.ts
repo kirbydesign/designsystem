@@ -8,4 +8,6 @@ import { Component, Input } from '@angular/core';
 })
 export class ButtonComponent {
   @Input() expand?: 'full' | 'block';
+  @Input() isDestructive?: true | false = false;
+  @Input() attentionLevel?: 1 | 2 | 3 | 4 = 1;
 }
