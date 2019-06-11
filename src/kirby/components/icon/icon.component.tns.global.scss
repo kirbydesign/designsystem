@@ -1,0 +1,28 @@
+@import '../../scss/native-imports';
+ 
+.kirby-icon {
+    Label {
+        font-family: "Ionicons", "ionicons";
+        text-align: center;
+    }
+
+    font-size: size('m'); //default to icon size 'sm'   
+
+    &.sm {
+        font-size: size('m');
+    }
+        
+    &.md {
+        font-size: size('l');
+    }
+        
+    &.lg {
+        font-size: size('xxxl');
+    }
+
+    @each $color-name, $color-value in $main-colors {
+        &.#{$color-name} {
+            color: get-color($color-name);
+        }
+    }
+}   
