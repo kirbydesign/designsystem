@@ -69,7 +69,9 @@ export class ListComponent implements OnChanges {
    *
    * `square` means **without** rounded corners, `rounded` means **with** rounded corners.
    */
-  @Input() shape: ListShape = 'square';
+  @HostBinding('class.rounded')
+  @Input()
+  shape: ListShape = 'rounded';
 
   /**
    * Adds padding to the list.
