@@ -1,0 +1,7 @@
+@import "../../../kirby/scss/web-imports";
+
+:host {
+    kirby-card {
+        margin: size("m") 0;
+    }
+}

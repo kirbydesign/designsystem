@@ -2,7 +2,7 @@
 
 :host {
   @mixin background-color($color) {
-      --kirby-button-background-color:#{get-color($color)};
+    --kirby-button-background-color:#{get-color($color)};
   }
 
   @mixin border-color($color) {
@@ -11,6 +11,50 @@
 
   @mixin text-color($color) {
       --kirby-button-color: #{get-color($color)};
+  }
+
+  :host-context(.primary).attention-level1,
+  :host-context(.secondary).attention-level1,
+  :host-context(.tertiary).attention-level1,
+  :host-context(.success).attention-level1,
+  :host-context(.warning).attention-level1,
+  :host-context(.danger).attention-level1 {
+    @include background-color('light'); //update to white when ready
+    @include border-color('light'); //update to white when ready
+    @include text-color('light-contrast'); //update to white when ready
+  }
+
+  :host-context(.white).attention-level2 {
+    @include background-color('light');
+    @include border-color('light');
+    @include text-color('light-contrast');
+  }
+
+  :host-context(.black).attention-level3,
+  :host-context(.semi-dark).attention-level3,
+  :host-context(.dark).attention-level3,
+  :host-context(.secondary).attention-level3,
+  :host-context(.tertiary).attention-level3 {
+    @include border-color('light');  //update to white when ready
+    @include text-color('light');  //update to white when ready
+  }
+
+  :host-context(.semi-light).attention-level3,
+  :host-context(.medium).attention-level3,
+  :host-context(.success).attention-level3,
+  :host-context(.warning).attention-level3,
+  :host-context(.danger).attention-level3,
+  :host-context(.primary).attention-level3 {
+    @include border-color('dark'); //update to black when ready
+    @include text-color('dark'); //update to black when ready
+  }
+
+  :host-context(.black).attention-level4,
+  :host-context(.semi-dark).attention-level4,
+  :host-context(.dark).attention-level4,
+  :host-context(.secondary).attention-level4,
+  :host-context(.tertiary).attention-level4 {
+    @include text-color('light'); //update to white when ready
   }
 
   --kirby-button-background-color: transparent;
@@ -42,12 +86,6 @@
   }
 
   &.attention-level1 {
-    :host-context([themecolor='primary'], [themecolor='success']) {
-      @include background-color('light');
-      @include border-color('light');
-      @include text-color('light-contrast');
-    }
-
     @include background-color('primary');
     @include border-color('primary');
     @include text-color('primary-contrast');
@@ -60,9 +98,9 @@
   }
 
   &.attention-level2 {
-    @include background-color('light');
-    @include border-color('light');
-    @include text-color('light-contrast');
+    @include background-color('light'); //update to white when ready
+    @include border-color('light'); //update to white when ready
+    @include text-color('light-contrast'); //update to white when ready
 
     &.destructive {
       @include background-color('light');

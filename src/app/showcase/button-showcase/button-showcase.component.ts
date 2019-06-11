@@ -8,7 +8,19 @@ import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-prop
   templateUrl: './button-showcase.component.html',
   styleUrls: ['./button-showcase.component.scss'],
 })
-export class ButtonShowcaseComponent{
+export class ButtonShowcaseComponent {
+  themeColors = [
+    'primary',
+    'secondary',
+    'tertiary',
+    'success',
+    'warning',
+    'danger',
+    'light',
+    'medium',
+    'dark',
+  ];
+  themeColor: string = this.themeColors[0];
   exampleHtml: string = require('../../examples/button-example/button-example.component.html');
   properties: ShowcaseProperty[] = [
     {
@@ -26,15 +38,22 @@ export class ButtonShowcaseComponent{
     },
     {
       name: 'attentionLevel',
-      description: 'Sets the attention level for the button.',
+      description:
+        'Sets the attention level for the button. Button color will be updated automatically depending on host color.',
       defaultValue: '1',
       inputValues: ['1', '2', '3', '4'],
     },
     {
       name: 'isDestructive',
-      description: 'Sets the color of the button to danger red.',
+      description:
+        'If isDestructive is set, color of the button will be changed according to attention level.',
       defaultValue: 'false',
       inputValues: ['true', 'false'],
     },
   ];
+
+  onChange(value) {
+    console.log(value);
+    this.themeColor = value;
+  }
 }
