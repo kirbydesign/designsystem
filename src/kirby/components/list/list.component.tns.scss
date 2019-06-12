@@ -3,6 +3,7 @@
 
 RadListView {
   background-color:  get-color('base-color');
+  //TODO: Add shadow for entire list for list WITHOUT sections
 }
 
 .row, .section-header {
@@ -23,6 +24,7 @@ RadListView {
 
 .row {
   background-color: get-color('contrast-light');
+  //TODO: Add shadow on each section for list WITH sections
 
   &.first {
 
