@@ -85,7 +85,7 @@
     "karma-jasmine-html-reporter": "^0.2.2",
     "karma-junit-reporter": "^1.2.0",
     "karma-spec-reporter": "0.0.32",
-    "nativescript": "^5.3.4",
+    "nativescript": "^5.4.0",
     "nativescript-dev-sass": "^1.7.0",
     "nativescript-dev-typescript": "^0.10.0",
     "nativescript-dev-webpack": "^0.24.1",
