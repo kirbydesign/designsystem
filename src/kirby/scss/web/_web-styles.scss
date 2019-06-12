@@ -16,6 +16,7 @@
 .kirby-modal {
     --background: #{get-color('base-color')};
     --border-radius: #{$border-radius};
+    --box-shadow: #{get-elevation('z8')};
     position: fixed;
 
     @include media(">=medium") {

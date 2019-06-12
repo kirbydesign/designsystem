@@ -11,6 +11,7 @@ import { ResizeObserverEntry } from '../shared/resize-observer/types/resize-obse
 export class CardComponent implements OnInit, OnDestroy {
   @Input() title: string;
   @Input() subtitle: string;
+  @Input() isHighlighted?: boolean;
   private sizesSortedByBreakpoint = this.sortSizesByBreakpoint({
     small: 360,
     medium: 720,

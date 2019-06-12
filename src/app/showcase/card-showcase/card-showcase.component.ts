@@ -24,6 +24,12 @@ export class CardShowcaseComponent {
       inputValues: ['string'],
     },
     {
+      name: 'isHighlighted',
+      description: 'Puts more emphasis on the card',
+      defaultValue: 'false',
+      inputValues: ['boolean'],
+    },
+    {
       name: 'themeColor',
       description: 'Sets which color the card should use from the theme palette.',
       defaultValue: 'null',

@@ -25,6 +25,7 @@ export class CardComponent extends ContentView implements OnInit {
   @Input() title: string;
   @Input() subtitle: string;
   @Input() themeColor?: ThemeColor;
+  @Input() isHighlighted: boolean;
 
   view: View;
 
