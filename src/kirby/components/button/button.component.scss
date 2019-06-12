@@ -19,9 +19,9 @@
   :host-context(.success).attention-level1,
   :host-context(.warning).attention-level1,
   :host-context(.danger).attention-level1 {
-    @include background-color('light'); //update to white when ready
-    @include border-color('light'); //update to white when ready
-    @include text-color('light-contrast'); //update to white when ready
+    @include background-color('base-color');
+    @include border-color('base-color');
+    @include text-color('contrast-dark');
   }
 
   :host-context(.white).attention-level2 {
@@ -35,8 +35,8 @@
   :host-context(.dark).attention-level3,
   :host-context(.secondary).attention-level3,
   :host-context(.tertiary).attention-level3 {
-    @include border-color('light');  //update to white when ready
-    @include text-color('light');  //update to white when ready
+    @include border-color('base-color');
+    @include text-color('base-color');
   }
 
   :host-context(.semi-light).attention-level3,
@@ -45,8 +45,8 @@
   :host-context(.warning).attention-level3,
   :host-context(.danger).attention-level3,
   :host-context(.primary).attention-level3 {
-    @include border-color('dark'); //update to black when ready
-    @include text-color('dark'); //update to black when ready
+    @include border-color('contrast-dark');
+    @include text-color('contrast-dark');
   }
 
   :host-context(.black).attention-level4,
@@ -54,7 +54,7 @@
   :host-context(.dark).attention-level4,
   :host-context(.secondary).attention-level4,
   :host-context(.tertiary).attention-level4 {
-    @include text-color('light'); //update to white when ready
+    @include text-color('base-color');
   }
 
   --kirby-button-background-color: transparent;
@@ -98,9 +98,9 @@
   }
 
   &.attention-level2 {
-    @include background-color('light'); //update to white when ready
-    @include border-color('light'); //update to white when ready
-    @include text-color('light-contrast'); //update to white when ready
+    @include background-color('base-color');
+    @include border-color('base-color');
+    @include text-color('contrast-dark');
 
     &.destructive {
       @include background-color('light');

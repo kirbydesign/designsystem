@@ -38,9 +38,9 @@ Button[kirby-button] {
   }
 
   &.attention-level2 {
-    background-color: get-color('light');  //update to white when ready
-    border-color: get-color('light');  //update to white when ready
-    color: get-color('light-contrast');  //update to white when ready
+    background-color: get-color('base-color');
+    border-color: get-color('base-color');
+    color: get-color('contrast-dark');
 
     &.destructive {
       background-color: get-color('light');
