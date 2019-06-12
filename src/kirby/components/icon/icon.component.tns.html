@@ -1,1 +1,5 @@
-<Label [text]="getCharCode(name)"></Label>
+<Label *ngIf="ionicon" [text]="fromCharCode(ionicon.unicode)" [style.fontFamily]="fontFamily"></Label>
+<Label *ngIf="kirbyIcon || customIcon"
+       [text]="kirbyIcon?.fromCharCode || customIcon?.fromCharCode"
+       [style.fontFamily]="fontFamily">
+</Label>

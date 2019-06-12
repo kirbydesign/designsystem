@@ -1,14 +1,15 @@
-import { CustomIconSettings } from '~/kirby/components/icon/custom-icon-settings';
+import { CustomIconSettings } from '@kirbydesign/designsystem/components/icon/custom-icon-settings';
 
+// tslint:disable:prettier
 export const {{fontName}}CustomIconSettings: CustomIconSettings = {
     fontfamily: "'{{fontName}}'",
     icons: [
-        {{#each codepoints}}
-            {
+    {{#each codepoints}}
+        {
             "name": "{{@key}}",
             "svg": "{{svg}}/{{@key}}.svg",
             "unicode": "0x{{this}}"
-            }{{#if @last}}{{else}},{{/if}}
-        {{/each}}
+        }{{#if @last}}{{else}},{{/if}}
+    {{/each}}
     ]
 };

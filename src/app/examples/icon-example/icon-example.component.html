@@ -1,28 +1,47 @@
 <h2>Default Icons</h2>
-<kirby-icon name="add" title="add"></kirby-icon>
-<kirby-icon name="cog" title="cog"></kirby-icon>
-<kirby-icon name="swap" title="swap"></kirby-icon>
-<kirby-icon name="move" title="move"></kirby-icon>
-<kirby-icon name="log-out" title="log-out"></kirby-icon>
-<kirby-icon name="more" title="more"></kirby-icon>
-<kirby-icon name="arrow-back" title="arrow-back"></kirby-icon>
-<kirby-icon name="help" title="help"></kirby-icon>
-<kirby-icon name="close" title="close"></kirby-icon>
-<kirby-icon name="attach" title="attach"></kirby-icon>
-<kirby-icon name="search" title="search"></kirby-icon>
-<kirby-icon name="checkbox" title="checkbox"></kirby-icon>
-<kirby-icon name="checkbox-outline" title="checkbox-outline"></kirby-icon>
-<kirby-icon name="menu" title="menu"></kirby-icon>
-<kirby-icon name="person" title="person"></kirby-icon>
+<p class="note">*If icon is <strong>NOT</strong> found, 'cog' will be used as default icon</p>
+
+<div class="icon-item-container" *ngFor="let icon of icons">
+    <div class="icon-item-inner-container">
+        <kirby-icon [name]="icon.name" size="md" title="md"></kirby-icon>
+        <span class="icon-item-title">{{icon.name}}</span>
+    </div>
+</div>
 
 <h2>Custom Icons</h2>
-<kirby-icon customName="football" title="football"></kirby-icon>
-<kirby-icon customName="umbrella" title="umbrella"></kirby-icon>
+
+<div class="icon-item-container">
+    <div class="icon-item-inner-container">
+        <kirby-icon customName="football" title="football"></kirby-icon>
+        <span class="icon-item-title">football</span>
+    </div>
+</div>
+<div class="icon-item-container">
+    <div class="icon-item-inner-container">
+        <kirby-icon customName="umbrella" title="umbrella"></kirby-icon>
+        <span class="icon-item-title">umbrella</span>
+    </div>
+</div>
 
 <h2>Sizes</h2>
-<kirby-icon name="person" size="sm" title="sm (default)"></kirby-icon>
-<kirby-icon name="person" size="md" title="md"></kirby-icon>
-<kirby-icon name="person" size="lg" title="lg"></kirby-icon>
+<div class="icon-item-container">
+    <div class="icon-item-inner-container">
+        <kirby-icon name="person" size="sm" title="sm (default)"></kirby-icon>
+        <span class="icon-item-title">sm (default)</span>
+    </div>
+</div>
+<div class="icon-item-container">
+    <div class="icon-item-inner-container">
+        <kirby-icon name="person" size="md" title="md"></kirby-icon>
+        <span class="icon-item-title">md</span>
+    </div>
+</div>
+<div class="icon-item-container">
+    <div class="icon-item-inner-container">
+        <kirby-icon name="person" size="lg" title="lg"></kirby-icon>
+        <span class="icon-item-title">lg</span>
+    </div>
+</div>
 
 <h2>Colors</h2>
 <kirby-icon name="person" themeColor="primary" title="primary"></kirby-icon>

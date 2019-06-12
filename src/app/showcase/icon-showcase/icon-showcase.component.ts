@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { iconsCharCodeMap } from '@kirbydesign/designsystem/components/icon/icon.component';
+import { icons } from '@kirbydesign/designsystem/components/icon/icon.component';
 
 import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
 
@@ -16,7 +16,7 @@ export class IconShowcaseComponent {
   iconNames: Array<string> = new Array();
 
   constructor() {
-    for (const key in iconsCharCodeMap) {
+    for (const key in icons) {
       this.iconNames.push(key);
     }
   }

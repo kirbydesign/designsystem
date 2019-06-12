@@ -12,6 +12,7 @@ const handlebars = require('handlebars');
  */
 const src = getNamedArg('src');
 const dest = getNamedArg('dest');
+const configDest = getNamedArg('config-dest');
 const fontname = getNamedArg('fontname', true) || 'iconfont';
 
 if(src && dest) {
@@ -25,7 +26,7 @@ if(src && dest) {
   });
 
   const icons = locateIcons(src);
-  generateWebfont(icons, dest, fontname);
+  generateWebfont(icons, dest, fontname, configDest);
 }
 
 /*
@@ -46,19 +47,19 @@ function locateIcons(src) {
 /*
  * Generate webfont
  */
-function generateWebfont(icons, dest, fontname) {
+function generateWebfont(icons, dest, fontname, configDest = dest) {
   webfontsGenerator({
     files: icons,
     dest,
     fontName: fontname,
     types: ['ttf'],
-    cssDest: path.join(dest, fontname + '.ts'),
+    cssDest: path.join(configDest, fontname + '.ts'),
     cssTemplate: `${__dirname}/customIconSettings.hbs`
   }, function(error) {
     if (error) {
       console.log('Fail!', error);
     } else {
-      console.log(`Done! Webfont is located here: ${dest}`);
+      console.log(`Done! Webfont is located here: ${dest}, configuration is located here: ${configDest}`);
     }
   });
 }
