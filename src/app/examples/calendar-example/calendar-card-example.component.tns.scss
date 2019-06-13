@@ -11,10 +11,10 @@ Button[kirby-button] {
     border-radius: 0;
 
     &.left {
-        border-bottom-left-radius: 20;
+        border-bottom-left-radius: $border-radius;
     }
     
     &.right {
-        border-bottom-right-radius: 20;
+        border-bottom-right-radius: $border-radius;
     }
 }

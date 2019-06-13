@@ -1,3 +1,6 @@
+$native: false;
+
+@import '../../scss/web/web-styles';
 @import 'calendar.component';
 
 @font-face {
@@ -9,10 +12,4 @@
 body {
   font-family: Roboto;
   background-color: transparent;
-}
-
-:root {
-  @each $color, $color-name in $kirby-colors {
-    --#{$color}: #{$color-name};
-  }
 }
