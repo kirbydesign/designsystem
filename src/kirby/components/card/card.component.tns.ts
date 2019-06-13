@@ -80,6 +80,7 @@ export class CardComponent extends ContentView implements OnInit {
 
   addShadow(view: View) {
     if (view.android) {
+      const dpi = app.android.context.getResources().getDisplayMetrics().density;
       view.eachChildView((child) => {
         if (child instanceof FlexboxLayout) {
           const bgColor = child.style.backgroundColor;
@@ -87,7 +88,7 @@ export class CardComponent extends ContentView implements OnInit {
           const shape = new android.graphics.drawable.GradientDrawable();
           shape.setShape(android.graphics.drawable.GradientDrawable.RECTANGLE);
           shape.setColor(android.graphics.Color.parseColor(bgColor + ''));
-          shape.setCornerRadius(ScssHelper.BORDER_RADIUS);
+          shape.setCornerRadius(ScssHelper.BORDER_RADIUS * dpi);
           androidView.setBackgroundDrawable(shape);
           androidView.setElevation(ScssHelper.ELEVATION_CARD_RESTING);
           return true;
