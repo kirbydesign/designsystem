@@ -16,7 +16,7 @@ table.calendar-table {
 
   thead {
     padding: 0.5em;
-    border-bottom: 1px solid get-color('kirby-medium');
+    border-bottom: 1px solid get-color('medium');
 
     th {
       height: 50px;
@@ -87,17 +87,17 @@ table.calendar-table {
 .day.past,
 .day.weekend,
 .day.disabled {
-  color: get-color('kirby-medium-tint');
+  color: get-color('medium-tint');
 }
 
 .day.today {
-  color: get-color('kirby-contrast-dark');
-  background-color: get-color('kirby-medium-shade');
+  color: get-color('contrast-dark');
+  background-color: get-color('medium-shade');
 }
 
 .day.selected {
-  color: get-color('kirby-contrast-dark');
-  background-color: get-color('kirby-primary');
+  color: get-color('contrast-dark');
+  background-color: get-color('primary');
   pointer-events: none;
 }
 
@@ -107,6 +107,6 @@ table.calendar-table {
 }
 
 .day.selectable:not(.selected):hover {
-  color: get-color('kirby-contrast-dark');
-  background-color: get-color('kirby-light');
+  color: get-color('contrast-dark');
+  background-color: get-color('light');
 }
