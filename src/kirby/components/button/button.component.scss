@@ -1,62 +1,6 @@
 @import '../../scss/web-imports';
 
 :host {
-  @mixin background-color($color) {
-    --kirby-button-background-color:#{get-color($color)};
-  }
-
-  @mixin border-color($color) {
-      --kirby-button-border-color: #{get-color($color)};
-  }
-
-  @mixin text-color($color) {
-      --kirby-button-color: #{get-color($color)};
-  }
-
-  :host-context(.primary).attention-level1,
-  :host-context(.secondary).attention-level1,
-  :host-context(.tertiary).attention-level1,
-  :host-context(.success).attention-level1,
-  :host-context(.warning).attention-level1,
-  :host-context(.danger).attention-level1 {
-    @include background-color('base-color');
-    @include border-color('base-color');
-    @include text-color('contrast-dark');
-  }
-
-  :host-context(.white).attention-level2 {
-    @include background-color('light');
-    @include border-color('light');
-    @include text-color('light-contrast');
-  }
-
-  :host-context(.black).attention-level3,
-  :host-context(.semi-dark).attention-level3,
-  :host-context(.dark).attention-level3,
-  :host-context(.secondary).attention-level3,
-  :host-context(.tertiary).attention-level3 {
-    @include border-color('base-color');
-    @include text-color('base-color');
-  }
-
-  :host-context(.semi-light).attention-level3,
-  :host-context(.medium).attention-level3,
-  :host-context(.success).attention-level3,
-  :host-context(.warning).attention-level3,
-  :host-context(.danger).attention-level3,
-  :host-context(.primary).attention-level3 {
-    @include border-color('contrast-dark');
-    @include text-color('contrast-dark');
-  }
-
-  :host-context(.black).attention-level4,
-  :host-context(.semi-dark).attention-level4,
-  :host-context(.dark).attention-level4,
-  :host-context(.secondary).attention-level4,
-  :host-context(.tertiary).attention-level4 {
-    @include text-color('base-color');
-  }
-
   --kirby-button-background-color: transparent;
   --kirby-button-border-color: transparent;
   --kirby-button-border-radius: 2rem;
@@ -86,44 +30,44 @@
   }
 
   &.attention-level1 {
-    @include background-color('primary');
-    @include border-color('primary');
-    @include text-color('primary-contrast');
+    --kirby-button-background-color:#{get-color('primary')};
+    --kirby-button-border-color: #{get-color('primary')};
+    --kirby-button-color: #{get-color('primary-contrast')};
       
     &.destructive {
-      @include background-color('danger');
-      @include border-color('danger');
-      @include text-color('danger-contrast');
+      --kirby-button-background-color:#{get-color('danger')};
+      --kirby-button-border-color: #{get-color('danger')};
+      --kirby-button-color: #{get-color('danger-contrast')};
     }
   }
 
   &.attention-level2 {
-    @include background-color('base-color');
-    @include border-color('base-color');
-    @include text-color('contrast-dark');
+    --kirby-button-background-color:#{get-color('base-color')};
+    --kirby-button-border-color: #{get-color('base-color')};
+    --kirby-button-color: #{get-color('contrast-dark')};
 
     &.destructive {
-      @include background-color('light');
-      @include border-color('light');
-      @include text-color('danger');
+      --kirby-button-background-color:#{get-color('light')};
+      --kirby-button-border-color: #{get-color('light')};
+      --kirby-button-color: #{get-color('danger')};
     }
   }
 
   &.attention-level3 {
-    @include border-color('medium');
-    @include text-color('medium-contrast');
+    --kirby-button-border-color: #{get-color('medium')};
+    --kirby-button-color: #{get-color('medium-contrast')};
 
     &.destructive {
-      @include border-color('medium');
-      @include text-color('danger');
+      --kirby-button-border-color: #{get-color('medium')};
+      --kirby-button-color: #{get-color('danger')};
     }
   }
 
   &.attention-level4 {
-    @include text-color('primary-contrast');
+    --kirby-button-color: #{get-color('primary-contrast')};
 
     &.destructive {
-      @include text-color('danger');
+      --kirby-button-color: #{get-color('danger')};
     }
   }
 
@@ -141,5 +85,36 @@
     background-color: var(--kirby-light-tint);
     border-color: var(--kirby-light-tint);
     pointer-events: none;
+  }
+
+  :host-context(.primary).attention-level1,
+  :host-context(.secondary).attention-level1,
+  :host-context(.tertiary).attention-level1,
+  :host-context(.success).attention-level1,
+  :host-context(.warning).attention-level1,
+  :host-context(.danger).attention-level1 {
+    --kirby-button-background-color:#{get-color('base-color')};
+    --kirby-button-border-color: #{get-color('base-color')};
+    --kirby-button-color: #{get-color('contrast-dark')};
+  }
+
+  :host-context(.secondary).attention-level3,
+  :host-context(.tertiary).attention-level3 {
+    --kirby-button-border-color: #{get-color('base-color')};
+    --kirby-button-color: #{get-color('base-color')};
+  }
+
+  :host-context(.medium).attention-level3,
+  :host-context(.success).attention-level3,
+  :host-context(.warning).attention-level3,
+  :host-context(.danger).attention-level3,
+  :host-context(.primary).attention-level3 {
+    --kirby-button-border-color: #{get-color('contrast-dark')};
+    --kirby-button-color: #{get-color('contrast-dark')};
+  }
+
+  :host-context(.secondary).attention-level4,
+  :host-context(.tertiary).attention-level4 {
+    --kirby-button-color: #{get-color('base-color')};
   }
 }

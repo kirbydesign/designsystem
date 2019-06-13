@@ -3,5 +3,10 @@
 :host {
     kirby-card {
         margin: size("m") 0;
+        max-width: size("m");
+    }
+
+    h2 {
+        margin-top: size("m");
     }
 }
