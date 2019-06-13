@@ -78,3 +78,47 @@ Button[kirby-button] {
     border-color: get-color('light-tint');
   }
 }
+
+.primary Button.attention-level1,
+.secondary Button.attention-level1,
+.tertiary Button.attention-level1,
+.success Button.attention-level1,
+.warning Button.attention-level1,
+.danger Button.attention-level1 {
+  background-color: get-color('base-color');
+  border-color: get-color('base-color');
+  color: get-color('contrast-dark');
+}
+
+.white Button.attention-level2 {
+  background-color: get-color('light');
+  border-color: get-color('light');
+  color: get-color('light-contrast');
+}
+
+.black Button.attention-level3,
+.semi-dark Button.attention-level3,
+.dark Button.attention-level3,
+.secondary Button.attention-level3,
+.tertiary Button.attention-level3 {
+  border-color: get-color('base-color');
+  color: get-color('base-color');
+}
+
+.semi-light Button.attention-level3,
+.medium Button.attention-level3,
+.success Button.attention-level3,
+.warning Button.attention-level3,
+.danger Button.attention-level3,
+.primary Button.attention-level3 {
+  border-color: get-color('contrast-dark');
+  color: get-color('contrast-dark');
+}
+
+.black Button.attention-level4,
+.semi-dark Button.attention-level4,
+.dark Button.attention-level4,
+.secondary Button.attention-level4,
+.tertiary Button.attention-level4 {
+  color: get-color('base-color');
+}
