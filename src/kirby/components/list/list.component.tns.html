@@ -6,7 +6,8 @@
     (loadMoreDataRequested)="onLoadOnDemand($event)"
     [groupingFunction]="getSectionName"
     [items]="items"
-    (itemTap)="onItemSelect($event)">
+    (itemTap)="onItemSelect($event)"
+    style="padding: {{padding}}">
     <!-- ITEM -->
     <ng-template tkListItemTemplate let-item="item">
       <StackLayout class="row"
