@@ -26,7 +26,6 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { ModalWrapperComponent } from './components/modal/modal-wrapper/modal-wrapper.component';
-import { ModalComponent } from 'dist-lib/components/modal/modal.component';
 import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
 import { ChipComponent } from './components/chip/chip.component';
 import { SegmentedChipControlComponent } from './components/segment/segmented-chip-control/segmented-chip-control.component';
@@ -67,7 +66,6 @@ export const declarations = [
   GroupByPipe,
   SpinnerComponent,
   CalendarComponent,
-  ModalComponent,
   CheckboxComponent,
   ModalWrapperComponent,
   ActionSheetComponent,
