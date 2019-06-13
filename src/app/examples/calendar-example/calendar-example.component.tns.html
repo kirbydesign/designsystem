@@ -1,15 +1,6 @@
-<StackLayout>
-    <kirby-card>
-        <kirby-calendar 
-            [disableWeekends]="true" 
-            [disablePastDates]="true" 
-            [disableDates]="disableDatesArray" 
-            (dateChange)="onDateChange($event)">
-        </kirby-calendar>
-        
-        <Button kirby-button (tap)="nextBankDay()" text="Næste bankdag"></Button>
-        <Button kirby-button (tap)="immediately()" colortype="secondary" text="Straks"></Button>
-    </kirby-card>
-
+<StackLayout class="wrapper">
+    <kirby-calendar [selectedDate]="selectedDate" (dateChange)="onDateChange($event)">
+    </kirby-calendar>
+    <Label text="Default calendar with selectable past dates & weekends" textWrap="true"></Label>
     <Label *ngIf="selectedDate" text="Selected Date: {{ selectedDate | date }}"></Label>
 </StackLayout>

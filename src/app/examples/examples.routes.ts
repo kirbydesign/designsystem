@@ -16,6 +16,7 @@ import { BadgeExampleComponent } from './badge-example/badge-example.component';
 import { IconExampleComponent } from './icon-example/icon-example.component';
 import { CalendarExampleComponent } from './calendar-example/calendar-example.component';
 import { SegmentedChipControlExampleComponent } from './segmented-chip-control-example/segmented-chip-control-example.component';
+import { CalendarCardExampleComponent } from './calendar-example/calendar-card-example.component';
 
 export const routes: Routes = [
   {
@@ -85,5 +86,9 @@ export const routes: Routes = [
   {
     path: 'calendar',
     component: CalendarExampleComponent,
+  },
+  {
+    path: 'calendar-card',
+    component: CalendarCardExampleComponent,
   },
 ];

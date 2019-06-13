@@ -1,0 +1,19 @@
+<StackLayout class="wrapper">
+    <kirby-card>
+        <kirby-calendar 
+            [disableWeekends]="true" 
+            [disablePastDates]="true" 
+            [disableDates]="disableDatesArray" 
+            [selectedDate]="selectedDate"
+            (dateChange)="onDateChange($event)">
+        </kirby-calendar>
+        
+        <GridLayout rows="auto", columns="1/2*, 1/2*" orientation="horizontal">
+            <Button kirby-button shape="square" class="left" col="0" (tap)="selectNextMonth()" text="Next month"></Button>
+            <Button kirby-button shape="square" class="right" col="1" (tap)="selectToday()" colortype="secondary" text="Now"></Button>   
+        </GridLayout>
+    </kirby-card>
+
+    <Label text="Calendar with disabled past dates & weekends, and custom disabled dates" textWrap="true"></Label>
+    <Label *ngIf="selectedDate" text="Selected Date: {{ selectedDate | date }}"></Label>
+</StackLayout>
