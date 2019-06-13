@@ -22,6 +22,14 @@ matrix:
         - npm run ci-test
         - npm run coverage-report
 
+    # Running icon generation
+    - stage: "Generate icons"
+      cache:
+        - directories:
+            - $HOME/.npm
+      script:
+        - npm run generate:icons
+
     # Running iOS build
     - stage: "Build"
       os: osx
