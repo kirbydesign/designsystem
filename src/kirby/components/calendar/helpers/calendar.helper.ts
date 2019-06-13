@@ -1,58 +1,98 @@
 import { ElementRef } from '@angular/core';
 
-import { CalendarOptions } from '../calendar.component';
+import { CalendarOptions } from './calendar-options.model';
 
 export class CalendarHelper {
-  private iframe: HTMLIFrameElement;
-  public init(calendarContainer: ElementRef, options: CalendarOptions) {
-    if (
-      calendarContainer &&
-      calendarContainer.nativeElement &&
-      calendarContainer.nativeElement instanceof HTMLIFrameElement &&
-      calendarContainer.nativeElement.contentWindow
-    ) {
-      this.iframe = <HTMLIFrameElement>calendarContainer.nativeElement;
-      this.iframe.onload = () => {
-        this.iframe.contentWindow.postMessage(
-          {
-            type: 'kirbyCalendarInit',
-            disableWeekends: options.disableWeekends,
-            disablePastDates: options.disablePastDates,
-            disableDates: options.disableDates,
-            currentDate: options.currentDate,
-            displayDate: options.displayDate,
-            weekDays: options.weekDays,
-            month: JSON.stringify(options.month),
-          },
-          '*'
-        );
+  private embeddedView: Window;
+  private embeddedViewReady = false;
+
+  public init(
+    calendarContainer: ElementRef,
+    options: CalendarOptions,
+    onDaySelected: (cell: { isSelectable: boolean; date: number }) => void,
+    onChangeMonth: (index: number) => void
+  ) {
+    if (this.hasEmbeddedView(calendarContainer)) {
+      const iframe = <HTMLIFrameElement>calendarContainer.nativeElement;
+      iframe.onload = () => {
+        this.embeddedViewReady = true;
+        this.emitOptionsToEmbeddedView(options);
       };
-      window.addEventListener('message', (evt: MessageEvent) => {
-        if (this.validateMessage(evt)) {
-          options.selectDate(evt.data.date);
-        }
-      });
+      this.embeddedView = iframe.contentWindow;
+
+      window.addEventListener('message', (evt: MessageEvent) =>
+        this.handleMessageEvent(evt, onDaySelected, onChangeMonth)
+      );
     }
   }
 
-  private validateMessage(evt: MessageEvent) {
-    return (
-      evt.type === 'message' &&
-      evt.data &&
-      evt.data.type === 'kirbyCalendarSelectedDate' &&
-      evt.data.date instanceof Date
-    );
+  public update(options: CalendarOptions) {
+    if (this.embeddedViewReady) {
+      this.emitOptionsToEmbeddedView(options);
+    }
   }
 
-  public selectCurrentDate(date: Date) {
-    if (this.iframe) {
-      this.iframe.contentWindow.postMessage(
+  public setSelectedDay(day: number) {
+    if (this.embeddedViewReady) {
+      this.embeddedView.postMessage(
         {
-          type: 'kirbyCalendarSelectCurrentDate',
-          currentDate: date,
+          type: 'kirbyCalendarSetSelectedDay',
+          selectedDay: day,
         },
         '*'
       );
     }
+  }
+
+  private hasEmbeddedView(calendarContainer: ElementRef) {
+    return (
+      calendarContainer &&
+      calendarContainer.nativeElement &&
+      calendarContainer.nativeElement instanceof HTMLIFrameElement &&
+      calendarContainer.nativeElement.contentWindow
+    );
+  }
+
+  private emitOptionsToEmbeddedView(options: CalendarOptions) {
+    this.embeddedView.postMessage(
+      {
+        type: 'kirbyCalendarInit',
+        ...options,
+      },
+      '*'
+    );
+  }
+
+  private handleMessageEvent(
+    evt: MessageEvent,
+    onDaySelected: (cell: { isSelectable: boolean; date: number }) => void,
+    onChangeMonth: (index: number) => void
+  ) {
+    if (this.validateMessage(evt)) {
+      switch (evt.data.type) {
+        case 'kirbyCalendarDaySelected':
+          if (this.validateDateSelectedMessage(evt)) {
+            onDaySelected({ isSelectable: true, date: evt.data.day });
+          }
+          break;
+        case 'kirbyCalendarChangeMonth':
+          if (this.validateNavigateMonthMessage(evt)) {
+            onChangeMonth(evt.data.index);
+          }
+          break;
+      }
+    }
+  }
+
+  private validateMessage(evt: MessageEvent) {
+    return this.embeddedView === evt.source && evt.type === 'message' && evt.data && evt.data.type;
+  }
+
+  private validateDateSelectedMessage(evt: MessageEvent) {
+    return evt.data.type === 'kirbyCalendarDaySelected' && evt.data.day;
+  }
+
+  private validateNavigateMonthMessage(evt: MessageEvent) {
+    return evt.data.type === 'kirbyCalendarChangeMonth' && typeof evt.data.index === 'number';
   }
 }

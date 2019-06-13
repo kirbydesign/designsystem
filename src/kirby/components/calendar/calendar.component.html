@@ -1,12 +1,12 @@
-<div id="calendar">
-  <div class="month-and-year">
-    <button [ngClass]="{ 'disable-past-dates' : disablePastDatesButton }" (click)="changeMonth(-1)">
+<!-- <div id="calendar">
+  <div class="header">
+    <button [disabled]="!canNavigateBack" (click)="changeMonth(-1)">
       <kirby-icon name="arrow-back"></kirby-icon>
     </button>
 
-    <div class="month-name"><b>{{ currentMonth }}</b> {{ displayDate | date:'y' }}</div>
+    <div class="month-and-year"><span class="month">{{ activeMonthName }}</span><span class="year">{{ activeYear }}</span></div>
   
-    <button (click)="changeMonth(1)">
+    <button [disabled]="!canNavigateForward" (click)="changeMonth(1)">
       <kirby-icon name="arrow-forward"></kirby-icon>
     </button>
   </div>
@@ -19,13 +19,13 @@
     <tbody>
       <tr *ngFor="let week of month">
         <td *ngFor="let day of week">
-          <div *ngIf="day.currentMonth" (click)="selectCalendarDate(day)" class="cell-content" [ngClass]="{ 'current-month' : day.currentMonth, 'weekend' : day.weekend, 'today' : day.today, 'selectable' :  day.selectable , 'selected' :  day.selected, 'past' :  day.past, 'disabled' :  day.disabled }">
-            <span>{{ day.date | date:'d' }}</span>
+          <div (click)="onDateSelected(day)" class="{{day.cssClasses}}" [class.selected]="day.isSelected">
+            {{ day.date }}
           </div>
         </td>
       </tr>
     </tbody>
   </table>
-</div>
+</div> -->
   
-<!-- <iframe src="kirby/components/calendar/calendar.webview.html" #calendarContainer style="width: 320px; height: 304px; border: 0"> -->
+<iframe src="kirby/components/calendar/calendar.webview.html" #calendarContainer style="width: 320px; height: 304px; border: 0">

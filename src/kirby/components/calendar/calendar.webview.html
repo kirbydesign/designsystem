@@ -6,24 +6,19 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <link rel="stylesheet" type="text/css" href="calendar.webview.css">
         <script src="nativescript-webview-interface.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
         <script>
             (function () {
                 var oWebViewInterface = window.nsWebViewInterface;
                 var parentWindow;
-                var options;
-                var selectedDay
-                var selectedDate;
 
                 function addNativeMsgListener() {
                     if (oWebViewInterface) {
-                        oWebViewInterface.on('updateCalendarOptions', function (calendarOptions) {
-                            options = calendarOptions;
-                            updateCalendarData();
+                        oWebViewInterface.on('init', function(calendarOptions) {
+                            renderCalendar(calendarOptions);
                         });
 
-                        oWebViewInterface.on('selectCurrentDate', function (date) {
-                            selectCurrentDate(date);
+                        oWebViewInterface.on('setSelectedDay', function(day) {
+                            setSelectedDay(day);
                         });
                     }
                     window.addEventListener('message', updateCalendarFromEventMessage);
@@ -33,235 +28,148 @@
                     if (event.type === 'message' && event.data) {
                         if (event.data.type === 'kirbyCalendarInit') {
                             parentWindow = event.source;
-                            options = event.data;
-                            updateCalendarData();
-                        } else if (event.data.type === 'kirbyCalendarSelectCurrentDate') {
-                            selectCurrentDate(event.data.currentDate);
+                            var options = event.data;
+                            renderCalendar(options);
+                        } else if (event.data.type === 'kirbyCalendarSetSelectedDay') {
+                            setSelectedDay(event.data.selectedDay);
                         }
                     }
                 }
 
-                function emitSelectedDate(date) {
-                    if (parentWindow && date instanceof Date) {
+                function emitSelectedDay(day) {
+                    if (parentWindow && day) {
                         parentWindow.postMessage({
-                            type: 'kirbyCalendarSelectedDate',
-                            date: date
+                            type: 'kirbyCalendarDaySelected',
+                            day: day
                         }, '*');
                     }
-                    if (oWebViewInterface && date instanceof Date) {
-                        oWebViewInterface.emit('dateSelected', date);
+                    if (oWebViewInterface && day) {
+                        oWebViewInterface.emit('daySelected', day);
                     }
                 }
 
-                function updateCalendarData() {
-                    var momentDate = moment(options.displayDate);
-                    var monthStart = momentDate.startOf('month').toDate();
-                    var weekDay = fixWeekday(monthStart.getDay());
-                    var startOfWeek = momentDate.subtract(weekDay, 'days').toDate();
-                    var count = fixCount(weekDay + momentDate.daysInMonth());
-                    var days = new Array();
-                    
-                    for (var i = 0; i < count; i++) {
-                        var date = moment(startOfWeek).add(i, 'days');
-                        var disabled = false;
-
-                        if (options.disableDates && options.disableDates.length > 0) {
-                            options.disableDates.forEach(function(disableDate) {
-                            if (moment(disableDate).isSame(date, 'day')) {
-                                disabled = true;
-                            }
-                            });
-                        }
-
-                        var today = date.isSame(moment(), 'day');
-                        var past = options.disablePastDates ? date.isBefore() && !today : false;
-                        var weekend = date.toDate().getDay() === 0 || date.toDate().getDay() === 6;
-                        var currentMonth = date.isSame(monthStart, 'month');
-                        var selectable = currentMonth && !(weekend && options.disableWeekends) && !past && !disabled;
-                        var selected = selectedDay !== undefined ? moment(selectedDay.date).isSame(date) : false;
-
-                        var day = {
-                            date,
-                            past,
-                            today,
-                            weekend,
-                            currentMonth,
-                            selectable,
-                            selected,
-                            disabled,
-                        }
-                        days.push(day);
+                function emitChangeMonth(index) {
+                    if (parentWindow) {
+                        parentWindow.postMessage({
+                            type: 'kirbyCalendarChangeMonth',
+                            index
+                        }, '*');
                     }
-                    options.month = JSON.stringify(chunk(days, 7));
-                    renderCalendar();
+                    if (oWebViewInterface) {
+                        oWebViewInterface.emit('changeMonth', index);
+                    }
                 }
 
-                function renderCalendar() {
+                function renderCalendar(options) {
                     var calendarOutlet = document.getElementById('calendar');
+                    var calendarTable = calendarOutlet.querySelector('table.calendar-table');                   
 
+                    updateHeader(calendarOutlet, options);
+                    updateTableHeader(calendarTable, options.weekDays);
+                    renderTableBody(calendarTable, options.month);                   
+                }
+
+                function updateHeader(calendarOutlet, options) {
                     // Render month and year
-                    var monthAndYearOutlet = calendarOutlet.querySelector('.month-and-year');
-                    var monthNameOutlet = monthAndYearOutlet.querySelector('.month-name');
-                    var monthOutlet = monthNameOutlet.querySelector('.month');
-                    var yearOutlet = monthNameOutlet.querySelector('.year');
+                    var monthAndYearOutlet = calendarOutlet.querySelector('.header .month-and-year');
+                    var monthOutlet = monthAndYearOutlet.querySelector('.month');
+                    var yearOutlet = monthAndYearOutlet.querySelector('.year');
                              
-                    monthOutlet.innerText =  moment.months()[new Date(options.displayDate).getMonth()];
-                    yearOutlet.innerText = new Date(options.displayDate).getFullYear();
+                    monthOutlet.innerText = options.monthName;
+                    yearOutlet.innerText = options.year;
 
                     // Render next/previous buttons
                     var previousButtonOutlet = calendarOutlet.querySelector('.previous-button');
                     var nextButtonOutlet = calendarOutlet.querySelector('.next-button');
-                    
-                    if (disablePastDatesButton()) {
-                        previousButtonOutlet.onclick = null;
-                        previousButtonOutlet.classList.add('disable-past-dates');                        
-                    } else {
-                        previousButtonOutlet.onclick = previousMonth;
-                        previousButtonOutlet.classList.remove('disable-past-dates');  
-                    }
-                    nextButtonOutlet.onclick = nextMonth;
-                    
-                    // Render weekdays only once
-                    var calenderTableOutlet = calendarOutlet.querySelector('.calendar-table');
-                    var calenderTableHeaderOutlet = calenderTableOutlet.querySelector('thead');
-                    if (calenderTableHeaderOutlet.childElementCount === 0) {
-                        renderWeekDaysHeader(calenderTableHeaderOutlet, options.weekDays);
-                    }
-                    
-                    var calenderTableBodyOutlet = calenderTableOutlet.querySelector('tbody');
-                    
-                    // Remove tbody elements
-                    while (calenderTableBodyOutlet.firstChild) {
-                        calenderTableBodyOutlet.removeChild(calenderTableBodyOutlet.firstChild);
-                    }
-                    
-                    // Render month
-                    renderMonth(calenderTableBodyOutlet, JSON.parse(options.month));
+                   
+                    previousButtonOutlet.disabled = !options.canNavigateBack;
+                    previousButtonOutlet.onclick = options.canNavigateBack ? gotoPreviousMonth : null;
+                    nextButtonOutlet.disabled = !options.canNavigateForward;
+                    nextButtonOutlet.onclick = options.canNavigateForward ? gotoNextMonth : null;
                 }
 
-                function renderWeekDaysHeader(tableHeaderRow, weekDays) {
+                function updateTableHeader(calendarTable, weekDays) {
+                    var newCalendarTableHeader = getWeekDaysHeader(weekDays);
+                    var existingCalendarTableHeader = calendarTable.querySelector('thead');                   
+                    calendarTable.replaceChild(newCalendarTableHeader, existingCalendarTableHeader);
+                }
+
+                function renderTableBody(calendarTable, month) {
+                    var newCalendarTableBody = getTableBody(month);
+                    var existingCalendarTableBody = calendarTable.querySelector('tbody');
+                    calendarTable.replaceChild(newCalendarTableBody, existingCalendarTableBody);
+                }
+
+                function getWeekDaysHeader(weekDays) {
+                    var tableHeaderRow = document.createElement('thead');
                     weekDays.forEach(function(weekDay) {
-                        var th = document.createElement("th");
+                        var th = document.createElement('th');
                         th.appendChild(document.createTextNode(weekDay));
                         tableHeaderRow.appendChild(th);
                     });
+                    return tableHeaderRow;
                 }
 
-                function renderMonth(tableBody, month) {
+                function getTableBody(month) {
+                    var tableBody = document.createElement('tbody');                    
                     month.forEach(function(week) {
-                        renderWeek(tableBody, week)
+                        tableBody.appendChild(getWeekRow(week));
                     });
+                    tableBody.onclick = selectCell;
+                    return tableBody;
                 }
 
-                function renderWeek(tableBody, week) {
-                    var tr = document.createElement("tr");
+                function getWeekRow(week) {
+                    var tr = document.createElement('tr');
 
-                    week.forEach(function(day) {
-                        var date = new Date(day.date);
-                        var cellContent = document.createElement("div");
-                        var divContent = document.createElement("span");
-                        cellContent.appendChild(divContent);
-
-                        divContent.appendChild(document.createTextNode(date.getDate()));
-
-                        cellContent.className = "cell-content";
-                        cellContent.dataset.day = JSON.stringify(day);
-                        cellContent.onclick = selectDate;
-        
-                        if (day.currentMonth) {
-                            cellContent.classList.add('current-month');
-                        }
-                        if (day.weekend) {
-                            cellContent.classList.add('weekend');
-                        } 
-                        if (day.today) {
-                            cellContent.classList.add('today');
-                        }
-                        if (day.selectable) {
-                            cellContent.classList.add('selectable');
-                        }
-                        if (day.selected) {
-                            selectedDate = cellContent;
-                            cellContent.classList.add('selected');
-                        }
-                        if (day.past) {
-                            cellContent.classList.add('past');
-                        }
-                        if (day.disabled) {
-                            cellContent.classList.add('disabled');
-                        }
+                    week.forEach(function(cell) {
+                        var dayCell = document.createElement('div');
+                        dayCell.className = cell.cssClasses + ' day-' + cell.date;
+                        dayCell.appendChild(document.createTextNode(cell.date));
+                        dayCell.dataset.isSelectable = cell.isSelectable;
+                        dayCell.dataset.day = cell.date;
                         
-                        var td = document.createElement("td");
-                        td.appendChild(cellContent);
+                        var td = document.createElement('td');
+                        td.appendChild(dayCell);
                         tr.appendChild(td);
                     });
-                    tableBody.appendChild(tr);
+                    return tr;
                 }
 
-                function previousMonth() {
-                    changeMonth(-1);
+                function gotoPreviousMonth() {
+                    emitChangeMonth(-1);
                 }
 
-                function nextMonth() {
-                    changeMonth(1);
+                function gotoNextMonth() {
+                    emitChangeMonth(1);
                 }
 
-                function changeMonth(index) {
-                    options.displayDate = moment(options.displayDate).add(index, 'months').toDate();
-                    updateCalendarData();
-                }
-
-                function selectDate(event) {
-                    var day = JSON.parse(event.target.dataset.day);                    
-                    
-                    if (day.selectable) {
-                        selectedDay = day;
-
-                        if (selectedDate) {
-                            selectedDate.classList.remove('selected');
-                        }
-                        selectedDate = event.target;
-                        selectedDate.classList.add('selected');
-                        emitSelectedDate(new Date(day.date));
+                function selectCell(event) {
+                    var cellToSelect = event.target;
+                    var isSelectable = cellToSelect.dataset.isSelectable === 'true';
+                    var selectedDay = parseInt(cellToSelect.dataset.day);
+                    if (isSelectable && selectedDay) {
+                        setSelectedCell(cellToSelect);
+                        emitSelectedDay(selectedDay);
                     }
                 }          
 
-                function chunk(arr, chunkSize) {
-                    var array = [];
-                    for (var i=0,len=arr.length; i<len; i+=chunkSize) {
-                        array.push(arr.slice(i,i+chunkSize));
+                function setSelectedCell(cellToSelect) {
+                    var selectedCell = document.querySelector('#calendar .day.selected');
+                    if (selectedCell === cellToSelect) {
+                        return;
                     }
-                    return array;
+                    if (selectedCell) {
+                        selectedCell.classList.remove('selected');
+                    }
+                    if (cellToSelect) {
+                        cellToSelect.classList.add('selected');
+                    }
                 }
 
-                function fixCount(count) {
-                    const x = count % 7;
-                    return x !== 0 ? count - x + 7 : count;
-                }
-
-                function fixWeekday(weekDay) {
-                    return weekDay === 0 ? 6 : weekDay - 1;
-                }
-
-                function disablePastDatesButton() {
-                    return options.disablePastDates && moment(options.displayDate).isSame(new Date(), 'month');
-                }
-
-                function selectCurrentDate(date) {
-                    options.displayDate = date;
-                    updateCalendarData();
-                    
-                    JSON.parse(options.month).forEach(function(week) {
-                        week.forEach(function(day) {
-                            if (moment(day.date).isSame(moment(date), 'day')) {
-                                if (day.selectable) {
-                                    selectedDay = day;
-                                    updateCalendarData();
-                                    emitSelectedDate(new Date(day.date));
-                                }
-                            }
-                        });
-                    });
+                function setSelectedDay(day) {
+                    var cellToSelect = document.querySelector('#calendar .day.current-month.day-' + day);
+                    setSelectedCell(cellToSelect);
                 }
 
                 function init() {
@@ -274,9 +182,9 @@
 
     <body style="margin: 0; padding: 0;">
         <div id="calendar">
-            <div class="month-and-year">
+            <div class="header">
                 <button class="previous-button"><</button>
-                <div class="month-name">
+                <div class="month-and-year">
                     <span class="month"></span>
                     <span class="year"></span>
                 </div>
@@ -284,7 +192,7 @@
             </div>
             
             <table class="calendar-table">
-                <thead class="calendar-table-header"></thead>                    
+                <thead></thead>
                 <tbody></tbody>
             </table>
         </div>

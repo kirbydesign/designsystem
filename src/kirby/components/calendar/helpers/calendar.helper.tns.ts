@@ -1,75 +1,92 @@
-import { ElementRef } from '@angular/core';
+// import 'reflect-metadata';
+
+import { ElementRef, NgZone } from '@angular/core';
 import { WebView, LoadEventData } from 'tns-core-modules/ui/web-view/web-view';
 import { isAndroid, isIOS } from 'tns-core-modules/platform';
-
-import * as webViewInterfaceModule from 'nativescript-webview-interface';
+import { WebViewInterface } from 'nativescript-webview-interface';
 import * as applicationModule from 'tns-core-modules/application';
 
-import { CalendarOptions } from '../calendar.component';
+import { CalendarOptions } from './calendar-options.model';
 
 declare const android;
 declare const UIColor;
 
-export class CalendarHelper {
-  calendarWebViewInterface;
-  webViewReady = false;
+// declare var zonedCallback: Function;
 
-  public init(calendarContainer: ElementRef, options: CalendarOptions) {
+export class CalendarHelper {
+  private webViewInterface: WebViewInterface;
+  private webViewReady = false;
+
+  // constructor(private zone: NgZone) {}
+
+  public init(
+    calendarContainer: ElementRef,
+    options: CalendarOptions,
+    onDaySelected: (cell: { isSelectable: boolean; date: number }) => void,
+    onChangeMonth: (direction: number) => void
+  ) {
     if (calendarContainer && calendarContainer.nativeElement) {
-      console.log('calendarContainer.nativeElement exists');
       const webView = calendarContainer.nativeElement as WebView;
       if (webView) {
         webView.on(WebView.loadedEvent, (args: LoadEventData) => {
           setTimeout(() => {
-            this.initializeWebView(webView, options);
+            this.initializeWebView(webView, options, onDaySelected, onChangeMonth);
           }, 0);
         });
       }
     }
   }
 
-  public selectCurrentDate(date: Date) {
+  public update(options: CalendarOptions) {
+    this.emitOptionsToWebView(options);
+  }
+
+  public setSelectedDay(day: number) {
     if (this.webViewReady) {
-      this.calendarWebViewInterface.emit('selectCurrentDate', date);
+      this.webViewInterface.emit('setSelectedDay', day);
     }
   }
 
-  private initializeWebView(webView: WebView, options: CalendarOptions) {
+  private initializeWebView(
+    webView: WebView,
+    options: CalendarOptions,
+    onDaySelected: (cell: { isSelectable: boolean; date: number }) => void,
+    onChangeMonth: (direction: number) => void
+  ) {
     if (webView) {
       webView.on(WebView.loadFinishedEvent, (args: LoadEventData) => {
         if (!args.error) {
           this.webViewReady = true;
           this.setupWebViewForPlatform(webView);
-          this.emitDataToWebView(options);
-          this.addWebViewEventListener(options.selectDate);
+          this.addEventListeners(onDaySelected, onChangeMonth);
+          this.emitOptionsToWebView(options);
         }
       });
 
-      this.calendarWebViewInterface = new webViewInterfaceModule.WebViewInterface(
-        webView,
-        '~/calendar/calendar.webview.html'
-      );
+      this.webViewInterface = new WebViewInterface(webView, '~/calendar/calendar.webview.html');
       this.setTransparentBackground(webView);
     }
   }
 
-  private emitDataToWebView(options: CalendarOptions) {
-    const calendarOptions = {
-      type: 'kirbyCalendarInit',
-      disableWeekends: options.disableWeekends,
-      disablePastDates: options.disablePastDates,
-      disableDates: options.disableDates,
-      currentDate: options.currentDate,
-      displayDate: options.displayDate,
-      weekDays: options.weekDays,
-      month: JSON.stringify(options.month),
-    };
-    this.calendarWebViewInterface.emit('updateCalendarOptions', calendarOptions);
+  private emitOptionsToWebView(options: CalendarOptions) {
+    if (this.webViewReady) {
+      this.webViewInterface.emit('init', options);
+    }
   }
 
-  private addWebViewEventListener(selectDateCallback: (date: Date) => {}) {
-    this.calendarWebViewInterface.on('dateSelected', (selectedDate: string) => {
-      selectDateCallback(new Date(selectedDate));
+  private addEventListeners(
+    onDaySelected: (cell: { isSelectable: boolean; date: number }) => void,
+    onChangeMonth: (direction: number) => void
+  ) {
+    this.webViewInterface.on('daySelected', (selectedDay: number) => {
+      // TODO: Run in zone when DI bug regarding NgZone has been fixed:
+      // Run in the zone, to make sure Angular data binding is informed of this:
+      // this.zone.run(() => {
+      onDaySelected({ isSelectable: true, date: selectedDay });
+      // });
+    });
+    this.webViewInterface.on('changeMonth', (index: number) => {
+      onChangeMonth(index);
     });
   }
 

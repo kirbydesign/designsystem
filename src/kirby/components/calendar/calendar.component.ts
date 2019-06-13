@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import {
   Component,
   ViewChild,
@@ -7,24 +8,24 @@ import {
   EventEmitter,
   OnInit,
   AfterViewInit,
-  OnChanges,
+  LOCALE_ID,
+  Inject,
+  NgZone,
 } from '@angular/core';
 import * as moment from 'moment';
-import { chunk, range } from 'lodash';
 
 import { CalendarHelper } from './helpers/calendar.helper';
-import { CalendarDay } from './helpers/calendar-day.model';
+import { CalendarOptions } from './helpers/calendar-options.model';
+import { CalendarCell } from './helpers/calendar-cell.model';
 
-export interface CalendarOptions {
-  selectDate: (Date) => {};
-  disableWeekends: boolean;
-  disablePastDates: boolean;
-  disableDates: Date[];
-  currentDate: Date;
-  displayDate: Date;
-  weekDays: string[];
-  month: any[][];
-}
+type CalendarDay = {
+  isCurrentMonth: boolean;
+  isToday: boolean;
+  isWeekend: boolean;
+  isPast: boolean;
+  isFuture: boolean;
+  isDisabled: boolean;
+};
 
 @Component({
   selector: 'kirby-calendar',
@@ -32,160 +33,285 @@ export interface CalendarOptions {
   styleUrls: ['./calendar.component.scss'],
   providers: [CalendarHelper],
 })
-export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
+export class CalendarComponent implements OnInit, AfterViewInit {
   @ViewChild('calendarContainer') calendarContainer: ElementRef;
   @Output() dateChange = new EventEmitter<Date>();
-  @Input() disableWeekends: true | false = false;
-  @Input() disablePastDates: true | false = true;
+  @Input() disableWeekends = false;
+  @Input() disablePastDates = false;
+  @Input() disableFutureDates = false;
   @Input() disableDates: Date[];
-  @Input() currentDate: Date;
+  public month: CalendarCell[][];
+  public weekDays: string[];
+  private activeMonth: moment.Moment;
+  private selectedDay: CalendarCell;
+  private _selectedDate: Date;
 
-  private selectedDay: CalendarDay;
-  private _displayDate: Date;
-  public month: any[][];
-  public weekDays = [0, 1, 2, 3, 4, 5, 6].map((index) =>
-    moment()
-      .locale('da')
-      .weekday(index)
-      .format('dd')
-      .substr(0, 1)
-      .toUpperCase()
-  );
+  get selectedDate(): Date {
+    return this._selectedDate;
+  }
 
-  constructor(private calendarHelper: CalendarHelper) {
+  @Input() set selectedDate(value: Date) {
+    this.setActiveMonth(value);
+    if (this.hasDateChanged(value, this._selectedDate)) {
+      this.onSelectedDateChange(value);
+      this._selectedDate = value;
+      this.dateChange.emit(this._selectedDate);
+    }
+  }
+
+  get activeMonthName(): string {
+    return this.capitalizeFirstLetter(this.activeMonth.format('MMMM'));
+  }
+
+  get activeYear(): string {
+    return this.activeMonth.format('YYYY');
+  }
+
+  constructor(
+    private calendarHelper: CalendarHelper,
+    @Inject(LOCALE_ID) private locale: string,
+    private zone: NgZone
+  ) {
+    if (this.locale === 'en-US') {
+      this.locale = 'en-GB';
+    }
+    moment.locale(this.locale);
     moment().format('YYYY-MM-DD');
   }
 
-  set displayDate(date: Date) {
-    this._displayDate = date;
-    this.updateCalendar();
-  }
-
-  get displayDate(): Date {
-    return this._displayDate || new Date();
-  }
-
-  static fixWeekday(weekDay: number) {
-    return weekDay === 0 ? 6 : weekDay - 1;
-  }
-
-  static fixCount(count: number) {
-    const x = count % 7;
-    return x !== 0 ? count - x + 7 : count;
-  }
-
-  get currentMonth(): string {
-    return moment.months()[this.displayDate.getMonth()];
-  }
-
   ngOnInit() {
-    this.updateCalendar();
+    this.weekDays = this.getWeekDays();
+    this.setActiveMonth();
   }
 
   ngAfterViewInit() {
-    this.calendarHelper.init(this.calendarContainer, {
-      selectDate: this.selectDate.bind(this),
-      disableWeekends: this.disableWeekends,
-      disablePastDates: this.disablePastDates,
-      disableDates: this.disableDates,
-      currentDate: this.currentDate,
-      displayDate: this.displayDate,
-      weekDays: this.weekDays,
-      month: this.month,
-    });
+    this.calendarHelper.init(
+      this.calendarContainer,
+      this.getHelperOptions(),
+      this.onDateSelected.bind(this),
+      this.onChangeMonth.bind(this)
+    );
   }
 
-  ngOnChanges(changes: any) {
-    if (this.currentDate !== undefined) {
-      const currentDate = changes.currentDate.currentValue;
-
-      if (currentDate) {
-        this.displayDate = currentDate;
-        this.selectCurrentDate(currentDate);
-        this.calendarHelper.selectCurrentDate(currentDate);
-      }
+  private setActiveMonth(date?: Date) {
+    if (!this.activeMonth || !this.activeMonth.isSame(date, 'month')) {
+      this.activeMonth = moment(date).startOf('month');
+      this.refreshActiveMonth();
+      this.calendarHelper.update(this.getHelperOptions());
     }
   }
 
-  updateCalendar() {
-    const momentDate = moment(this.displayDate);
-    const monthStart = momentDate.startOf('month').toDate();
-    const weekDay = CalendarComponent.fixWeekday(monthStart.getDay());
-    const startOfWeek = momentDate.subtract(weekDay, 'days').toDate();
-    const count = CalendarComponent.fixCount(weekDay + momentDate.daysInMonth());
+  private capitalizeFirstLetter(string: string) {
+    if (typeof string !== 'string') {
+      return '';
+    }
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
 
-    const days = range(0, count).map((number) => {
-      const date = moment(startOfWeek).add(number, 'days');
-      let disabled = false;
+  private getWeekDays(): string[] {
+    return [0, 1, 2, 3, 4, 5, 6].map((index) =>
+      moment()
+        .weekday(index)
+        .format('dd')
+        .substr(0, 1)
+        .toUpperCase()
+    );
+  }
 
-      if (this.disableDates && this.disableDates.length > 0) {
-        this.disableDates.forEach(function(disableDate) {
-          if (moment(disableDate).isSame(date, 'day')) {
-            disabled = true;
-          }
-        });
-      }
+  private hasDateChanged(newDate: Date, previousDate: Date): boolean {
+    if (!newDate && !previousDate) {
+      return false;
+    }
+    if (newDate instanceof Date && !previousDate) {
+      return true;
+    }
+    return !this.isSameDay(newDate, previousDate);
+  }
 
-      const today = date.isSame(moment(), 'day');
-      const past = this.disablePastDates ? date.isBefore() && !today : false;
-      const weekend = date.toDate().getDay() === 0 || date.toDate().getDay() === 6;
-      const currentMonth = date.isSame(monthStart, 'month');
-      const selectable = currentMonth && !(weekend && this.disableWeekends) && !past && !disabled;
-      const selected =
-        this.selectedDay !== undefined ? moment(this.selectedDay.date).isSame(date) : false;
+  private isSameDay(date1: Date | moment.Moment, date2: Date | moment.Moment): boolean {
+    // Moment will return a new moment with the current time from `undefined`,
+    // so `moment(date1).isSame(undefined, 'day')` will return `true` if date1 equals current time:
+    if (!date1 || !date2) {
+      return false;
+    }
+    return moment(date1).isSame(date2, 'day');
+  }
 
-      return {
-        date,
-        past,
-        today,
-        weekend,
-        currentMonth,
-        selectable,
-        selected,
-        disabled,
+  private isDisabledDate(date: Date | moment.Moment) {
+    let isDisabled = false;
+
+    if (this.disableDates && this.disableDates.length > 0) {
+      this.disableDates.forEach((disableDate) => {
+        if (moment(disableDate).isSame(date, 'day')) {
+          isDisabled = true;
+        }
+      });
+    }
+    return isDisabled;
+  }
+
+  refreshActiveMonth() {
+    // IMPORTANT: Moment startOf|endOf functions mutates the date!
+    // Clone the date before mutating:
+    const monthStart = this.activeMonth.clone().startOf('month');
+    const monthEnd = this.activeMonth.clone().endOf('month');
+    const startOfFirstWeek = monthStart.clone().startOf('isoWeek');
+    const endOfLastWeek = monthEnd.clone().endOf('isoWeek');
+    const totalDayCount = endOfLastWeek.diff(startOfFirstWeek, 'days') + 1;
+    const today = moment().startOf('day');
+    const daysArray = Array.from(Array(totalDayCount).keys());
+
+    const days: CalendarCell[] = daysArray.map((number) => {
+      const momentDate = startOfFirstWeek.clone().add(number, 'days');
+      const day = this.getCalendarDay(momentDate, today, monthStart);
+
+      const isSelectable = this.isSelectable(day);
+      const isSelected = this.isSameDay(this.selectedDate, momentDate);
+      const cell = {
+        date: momentDate.date(),
+        isCurrentMonth: day.isCurrentMonth,
+        isSelectable,
+        isSelected,
+        cssClasses: this.getCssClasses(day, isSelectable, isSelected),
       };
+      if (isSelected) {
+        this.selectedDay = cell;
+      }
+      return cell;
     });
-    this.month = chunk(days, 7);
+    this.month = this.chunk(days, 7);
   }
 
-  public selectDate(selectedDate: Date) {
-    if (selectedDate instanceof Date) {
-      this.dateChange.emit(selectedDate);
+  private getCalendarDay(
+    date: moment.Moment,
+    today: moment.Moment,
+    monthStart: moment.Moment
+  ): CalendarDay {
+    return {
+      isToday: date.isSame(today, 'day'),
+      isPast: date.isBefore(today),
+      isFuture: date.isAfter(today),
+      isWeekend: date.isoWeekday() === 6 || date.isoWeekday() === 7,
+      isCurrentMonth: date.isSame(monthStart, 'month'),
+      isDisabled: this.isDisabledDate(date),
+    };
+  }
+
+  private isSelectable(day: CalendarDay) {
+    return (
+      !day.isDisabled &&
+      day.isCurrentMonth &&
+      !(this.disableWeekends && day.isWeekend) &&
+      !(this.disablePastDates && day.isPast) &&
+      !(this.disableFutureDates && day.isFuture)
+    );
+  }
+
+  private getCssClasses(day: CalendarDay, isSelectable: boolean, isSelected: boolean) {
+    const cssClasses = {
+      'current-month': day.isCurrentMonth,
+      weekend: day.isWeekend,
+      today: day.isToday,
+      selectable: isSelectable,
+      selected: isSelected,
+      past: day.isPast,
+      disabled: day.isDisabled,
+    };
+    let cssClassString = 'day';
+    for (var key in cssClasses) {
+      if (cssClasses[key]) {
+        cssClassString += ' ' + key;
+      }
+    }
+    return cssClassString;
+  }
+
+  private chunk(array: any[], size: number) {
+    var results = [];
+    while (array.length) {
+      results.push(array.splice(0, size));
+    }
+    return results;
+  }
+
+  private onSelectedDateChange(newDate: Date): void {
+    if (this.selectedDay) {
+      this.selectedDay.isSelected = false;
+    }
+
+    const newDay = this.getCell(newDate);
+    if (newDay) {
+      newDay.isSelected = true;
+      this.selectedDay = newDay;
+    }
+    this.calendarHelper.setSelectedDay(newDate.getDate());
+  }
+
+  private onDateSelected(newDay: CalendarCell) {
+    if (newDay.isSelectable && newDay.date) {
+      const selectedDate = this.activeMonth
+        .clone()
+        .date(newDay.date)
+        .toDate();
+      // TODO: Move to helper class when DI bug regarding NgZone has been fixed:
+      // Run in the zone, to make sure Angular data binding is informed of this:
+      this.zone.run(() => {
+        this.selectedDate = selectedDate;
+      });
     }
   }
 
-  public selectCalendarDate(day) {
-    if (day.selectable) {
-      this.selectedDay = day;
-      this.displayDate = day.date.toDate();
-      this.dateChange.emit(day.date.toDate());
-    }
+  private onChangeMonth(direction: number) {
+    this.changeMonth(direction);
+    this.calendarHelper.update(this.getHelperOptions());
   }
 
   public changeMonth(index: number) {
-    this.displayDate = moment(this.displayDate)
-      .add(index, 'months')
-      .toDate();
+    this.changeActiveView(index, 'months');
   }
 
   public changeYear(index: number) {
-    this.displayDate = moment(this.displayDate)
-      .add(index, 'year')
-      .toDate();
+    this.changeActiveView(index, 'year');
   }
 
-  public get disablePastDatesButton(): boolean {
-    return this.disablePastDates && moment(this.displayDate).isSame(new Date(), 'month');
+  private changeActiveView(index: number, unit: moment.unitOfTime.Base) {
+    if (index != 0) {
+      this.activeMonth.add(index, unit);
+      this.refreshActiveMonth();
+    }
   }
 
-  private selectCurrentDate(date) {
-    var self = this;
-    this.month.forEach(function(week) {
-      week.forEach(function(day) {
-        if (moment(day.date).isSame(moment(date), 'day')) {
-          self.selectCalendarDate(day);
+  public get canNavigateBack(): boolean {
+    return !(this.disablePastDates && moment().isSame(this.activeMonth, 'month'));
+  }
+
+  public get canNavigateForward(): boolean {
+    return !(this.disableFutureDates && moment().isSame(this.activeMonth, 'month'));
+  }
+
+  private getCell(date: Date) {
+    let foundDay = null;
+    if (date) {
+      for (let week of this.month) {
+        foundDay = week.find((day) => {
+          return day.isCurrentMonth && day.date === date.getDate();
+        });
+        if (foundDay) {
+          break;
         }
-      });
-    });
+      }
+    }
+    return foundDay;
+  }
+
+  private getHelperOptions(): CalendarOptions {
+    return {
+      canNavigateBack: this.canNavigateBack,
+      canNavigateForward: this.canNavigateForward,
+      year: this.activeYear,
+      monthName: this.activeMonthName,
+      weekDays: this.weekDays,
+      month: this.month,
+    };
   }
 }

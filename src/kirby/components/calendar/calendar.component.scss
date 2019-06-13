@@ -13,104 +13,100 @@ table.calendar-table {
   outline: none !important;
   -webkit-tap-highlight-color: transparent;
   border-spacing: 0;
+
+  thead {
+    padding: 0.5em;
+    border-bottom: 1px solid get-color('kirby-medium');
+
+    th {
+      height: 50px;
+      text-align: center;
+    }
+  }
+  
+  tbody {
+    padding: 0.5em;
+  }
+
+  tr, td {
+    border-style: none;
+    padding: 0;
+    line-height: 2em;
+    height: 0;
+  }
+
 }
 
-tr, td {
-  border-style: none;
-  padding: 0;
-  line-height: 2em;
-  height: 0;
-}
-
-thead.calendar-table-header {
-  padding: 0.5em;
-  border-bottom: 1px solid get-color('kirby-medium');
-}
-
-tbody.calendar-table-body {
-  padding: 0.5em;
-}
-
-.month-and-year, th, td {
+.header, th, td {
   background-color: transparent;
 }
 
-.month-and-year {
+.header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding: 0.5em;
+  
+  button {
+    background-color: transparent;
+    outline: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  button:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
 }
 
-.month-name {
-  line-height: 35px;
+.month-and-year {
+  line-height: line-height('xxl');
   user-select: none;
+
+  .month {
+    font-weight: font-weight('bold');
+    margin-right: size('xs');
+  }
 }
 
-th,
-div.cell-content {
+.day {
+  $dayWidth: 40px;
+  border-radius: $dayWidth / 2;
+  width: $dayWidth;
+  height: $dayWidth;
+  line-height: $dayWidth;
   text-align: center;
 }
 
-thead th {
-  height: 50px;
-}
-
-div.cell-content {
-  border-radius: 20px;
-  width: 40px;
-  height: 40px;
-  margin: auto;
-}
-
-div.cell-content span {
-  text-align: center;
-  line-height: 40px;
-  pointer-events: none;
-}
-
-button {
-  background-color: transparent;
-  outline: none;
-  border: none;
+.day.selectable {
   cursor: pointer;
 }
 
-.disable-past-dates {
-  opacity: 0.5;
-  pointer-events: none;
-}
-
-div.cell-content.selectable {
-  cursor: pointer;
-}
-
-div.cell-content.weekend,
-div.cell-content.disabled {
+.day.past,
+.day.weekend,
+.day.disabled {
   color: get-color('kirby-medium-tint');
 }
 
-div.cell-content.today {
+.day.today {
   color: get-color('kirby-contrast-dark');
   background-color: get-color('kirby-medium-shade');
 }
 
-div.cell-content.selected {
+.day.selected {
   color: get-color('kirby-contrast-dark');
   background-color: get-color('kirby-primary');
-}
-
-div.cell-content.past {
-  color: get-color('kirby-medium-tint');
-  opacity: 0.5;
-}
-
-div.cell-content:not(.current-month) {
-  opacity: 0;
   pointer-events: none;
 }
 
-div.cell-content.selectable:not(.selected):hover {
+.day:not(.current-month) {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.day.selectable:not(.selected):hover {
   color: get-color('kirby-contrast-dark');
   background-color: get-color('kirby-light');
 }
