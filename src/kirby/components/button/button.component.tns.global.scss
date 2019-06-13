@@ -26,9 +26,9 @@ Button[kirby-button] {
   }
   
   &.secondary {
-    color: get-color('contrast-dark');
-    background-color: get-color('contrast-light');
-    border-color: get-color('contrast-light');
+    color: get-color('black');
+    background-color: get-color('white');
+    border-color: get-color('white');
   }
 
   &[isEnabled=false] {

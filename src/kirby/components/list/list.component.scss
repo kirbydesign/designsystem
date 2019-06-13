@@ -24,7 +24,7 @@ ul {
       }
 
       &.selectable:hover {
-        background-color: get-color('base-color');
+        background-color: get-color('background-color');
       }
 
       &:last-child {
@@ -52,7 +52,7 @@ ul {
   display: block;
 
   &:not(.has-sections) {
-    background-color: get-color('contrast-light');
+    background-color: get-color('white');
     border: 1px solid  get-color('medium');
   }
 }
@@ -74,10 +74,10 @@ ul {
 
   &.has-sections {
     li.row {
-      background-color: get-color('contrast-light');
+      background-color: get-color('white');
 
       &.selectable:hover {
-        background-color: get-color('base-color');
+        background-color: get-color('background-color');
       }
     }
 

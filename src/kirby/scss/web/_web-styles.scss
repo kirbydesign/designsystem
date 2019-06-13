@@ -14,7 +14,7 @@
 }
   
 .kirby-modal {
-    --background: #{get-color('base-color')};
+    --background: #{get-color('background-color')};
     --border-radius: #{$border-radius};
     position: fixed;
 

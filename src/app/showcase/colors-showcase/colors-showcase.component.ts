@@ -32,10 +32,23 @@ export class ColorsShowcaseComponent implements OnInit {
 
   getThemeColors() {
     const colors = [];
-    const defaultColors = style.global['$kirby-colors'].value;
-    for (const [value, type] of Object.entries(defaultColors)) {
+    const mainColors = style.global['$main-colors'].value;
+    const generatedColors = style.global['$kirby-colors'].value;
+    for (const [value, type] of Object.entries(mainColors)) {
       const sassColor = <SassColor>type;
       sassColor.name = value;
+      sassColor.tint = {
+        name: value + '-tint',
+        hex: generatedColors[sassColor.name + '-tint'].value,
+      };
+      sassColor.shade = {
+        name: value + '-shade',
+        hex: generatedColors[sassColor.name + '-shade'].value,
+      };
+      sassColor.contrast = {
+        name: value + '-contrast',
+        hex: generatedColors[sassColor.name + '-contrast'].value,
+      };
       colors.push(sassColor);
     }
     return colors;

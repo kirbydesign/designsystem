@@ -43,9 +43,9 @@
   }
 
   &.secondary {
-    --kirby-button-background-color: #{get-color('contrast-light')};
-    --kirby-button-border-color: #{get-color('contrast-light')};
-    --kirby-button-color: #{get-color('contrast-dark')};
+    --kirby-button-background-color: #{get-color('white')};
+    --kirby-button-border-color: #{get-color('white')};
+    --kirby-button-color: #{get-color('black')};
   }
 
   &:hover,
