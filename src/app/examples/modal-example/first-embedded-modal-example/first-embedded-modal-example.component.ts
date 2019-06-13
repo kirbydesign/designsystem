@@ -1,19 +1,28 @@
-import { Component, ViewContainerRef } from '@angular/core';
+import { Component, Inject, ViewContainerRef } from '@angular/core';
 
-import { ModalController } from '~/kirby/components/modal/services/modal.controller';
-import { ModalConfig } from '~/kirby/components/modal/config/modal-config';
+import { ModalController } from '@kirbydesign/designsystem/modal';
+import { ModalConfig } from '@kirbydesign/designsystem/modal';
 import { SecondEmbeddedModalExampleComponent } from '../second-embedded-modal-example/second-embedded-modal-example.component';
+import { COMPONENT_PROPS } from '@kirbydesign/designsystem/modal';
 
 @Component({
   templateUrl: './first-embedded-modal-example.component.html',
 })
 export class FirstEmbeddedModalExampleComponent {
-  constructor(private modalController: ModalController, private vcRef: ViewContainerRef) {}
+  props: { [key: string]: any };
 
-  async openSecondModal() {
+  constructor(
+    @Inject(COMPONENT_PROPS) private componentProps,
+    private modalController: ModalController,
+    private vcRef: ViewContainerRef
+  ) {
+    this.props = componentProps;
+  }
+
+  async showSecondModal() {
     const config: ModalConfig = {
       title: 'Second Embedded Modal',
-      titleHorizontalAlignment: 'left',
+      titleHorizontalAlignment: 'center',
       closeIconName: 'arrow-back',
       component: SecondEmbeddedModalExampleComponent,
     };
@@ -24,6 +33,6 @@ export class FirstEmbeddedModalExampleComponent {
 
   onHideFirst() {
     let someTestData: number = Math.PI;
-    this.modalController.hideModal(someTestData);
+    this.modalController.hideTopmost(someTestData);
   }
 }

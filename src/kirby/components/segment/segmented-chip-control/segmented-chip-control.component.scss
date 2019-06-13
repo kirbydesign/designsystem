@@ -1,3 +1,4 @@
+@import "../../../scss/web-imports";
 :host {
     /* @Polyfill  
      * This is the way to hide scrollbar
@@ -8,9 +9,13 @@
     display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
-    justify-content: center;
-    margin-bottom: -50px;
-    padding-bottom: 50px;
+    margin-bottom: -30px;
+    padding-bottom: 30px;
+    @include media('>=medium') {
+      justify-content: center;
+      margin-bottom: -50px;
+      padding-bottom: 50px;
+    }
   }
 }
   

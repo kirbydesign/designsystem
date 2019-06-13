@@ -1,36 +1,51 @@
 @import '../../scss/web-imports';
 
 :host {
-  margin: 0.25em 0.25em;
   --kirby-button-border-radius: 2rem;
-  background-color: get-color('kirby-primary');
+  --kirby-button-background-color: #{get-color('primary')};
+  --kirby-button-border-color: #{get-color('primary')};
+  --kirby-button-color: #{get-color('primary-contrast')};
+
+  background-color: var(--kirby-button-background-color);
   border-radius: var(--kirby-button-border-radius);
-  border: 1px solid get-color('kirby-primary');
-  color: get-color('kirby-primary-contrast');
+  border: 1px solid var(--kirby-button-border-color);
+  color: var(--kirby-button-color);
   cursor: pointer;
-  font-size: font-size('n');
-  padding: 0.7rem 1.75rem;
   transition: opacity 200ms linear;
+  
+  // we default to 'md' size.
+  margin: size('xxs');
+  padding: size('xs') size('m') size('xs') size('m');
+  font-size: font-size('s');
+  height: size('xl');
+  line-height: line-height('xs');
+
+  &.sm {
+    padding: size('xxs') size('s') size('xxs') size('s');
+    font-size: font-size('xs');
+    height: size('l');
+  }
+
+  &.lg {
+    font-size: font-size('s');
+    height: size('xxl');
+  }
 
   &[expand='block'] {
     display: block;
     width: 100%;
   }
 
-  &[shape='square'] {
-    --kirby-button-border-radius: 0.2rem;
+  &.primary {
+    --kirby-button-background-color:#{get-color('primary')};
+    --kirby-button-border-color: #{get-color('primary')};
+    --kirby-button-color: #{get-color('primary-contrast')};
   }
 
-  &[colortype='primary'] {
-    background-color: get-color('kirby-primary');
-    border-color: get-color('kirby-primary');
-    color: get-color('kirby-primary-contrast');
-  }
-
-  &[colortype='secondary'] {
-    background-color: get-color('kirby-contrast-light');
-    border-color: get-color('kirby-contrast-light');
-    color: get-color('kirby-contrast-dark');
+  &.secondary {
+    --kirby-button-background-color: #{get-color('contrast-light')};
+    --kirby-button-border-color: #{get-color('contrast-light')};
+    --kirby-button-color: #{get-color('contrast-dark')};
   }
 
   &:hover,

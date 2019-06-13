@@ -3,6 +3,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { KirbyModule } from '../../../kirby/kirby.module';
 import { IconExampleComponent } from './icon-example.component';
+import { CUSTOM_FONT_SETTINGS } from '@kirbydesign/designsystem';
+import { customIconSettings } from '../examples.common';
 
 describe('IconExampleComponent', () => {
   let component: IconExampleComponent;
@@ -11,6 +13,13 @@ describe('IconExampleComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [KirbyModule, RouterTestingModule],
+      providers: [
+        {
+          provide: CUSTOM_FONT_SETTINGS,
+          useValue: customIconSettings,
+          multi: true,
+        },
+      ],
       declarations: [IconExampleComponent],
     }).compileComponents();
   }));

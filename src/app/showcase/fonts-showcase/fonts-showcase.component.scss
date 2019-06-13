@@ -1,8 +1,8 @@
 @import '../../../kirby/scss/web-imports';
 
 code {
-  background-color: get-color('kirby-medium');
-  color: get-color('kirby-contrast-dark');
+  background-color: get-color('medium');
+  color: get-color('contrast-dark');
   padding: 0.2rem 0.5rem;
   border-radius: 2px;
   white-space: nowrap;
@@ -12,7 +12,7 @@ code {
   display: flex;
   flex-wrap: wrap;
 
-  kirby-html-viewer {
+  kirby-code-viewer {
     flex: 1;
     flex-basis: 200px;
   }
@@ -20,12 +20,12 @@ code {
   code {
     padding: 0.25rem 0 0 0;
     display: block;
-    color: get-color('kirby-dark');
+    color: get-color('dark');
     background-color: transparent;
   }
 
   code.highlight {
-    color: get-color('kirby-contrast-dark');
+    color: get-color('contrast-dark');
     font-weight: font-weight('bold');
   }
 }
@@ -87,14 +87,14 @@ code {
 }
 
 [class^="sample-"]::after {
-  color: get-color('kirby-danger');
+  color: get-color('danger');
   font-size: font-size("xs");
   margin-left: size("m");
 }
 
 .info-box {
-  background-color: get-color('kirby-contrast-light');
+  background-color: get-color('contrast-light');
   padding: 0.5rem 1rem;
   margin-right: 1rem;
-  border: 1px solid get-color('kirby-medium');
+  border: 1px solid get-color('medium');
 }

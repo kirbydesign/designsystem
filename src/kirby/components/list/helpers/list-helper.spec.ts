@@ -1,6 +1,6 @@
 import { EventEmitter } from '@angular/core';
 
-import { ListComponent } from '~/kirby';
+import { ListComponent } from '../list.component';
 import { ListHelper } from './list-helper';
 import { LoadOnDemandEvent } from '../list.event';
 

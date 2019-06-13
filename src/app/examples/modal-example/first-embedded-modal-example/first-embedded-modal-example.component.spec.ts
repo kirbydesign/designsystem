@@ -1,7 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { KirbyModule } from '../../../../kirby/kirby.module';
+import { KirbyModule } from '@kirbydesign/designsystem';
+import { COMPONENT_PROPS } from '@kirbydesign/designsystem/modal';
+
 import { FirstEmbeddedModalExampleComponent } from './first-embedded-modal-example.component';
 
 describe('FirstEmbeddedModalExampleComponent', () => {
@@ -12,6 +14,7 @@ describe('FirstEmbeddedModalExampleComponent', () => {
     TestBed.configureTestingModule({
       imports: [KirbyModule, RouterTestingModule],
       declarations: [FirstEmbeddedModalExampleComponent],
+      providers: [{ provide: COMPONENT_PROPS, useValue: {} }],
     }).compileComponents();
   }));
 

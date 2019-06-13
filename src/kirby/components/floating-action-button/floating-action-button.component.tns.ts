@@ -22,6 +22,7 @@ export class FloatingActionButtonComponent extends ContentView {
   // TODO: showShadow should become an "elevation" enum in the future;
   @Input() showShadow?: boolean = true;
   @Input() disabled?: boolean = false;
+  @Input() isFloating?: boolean = true;
 
   view: View;
 
@@ -31,7 +32,7 @@ export class FloatingActionButtonComponent extends ContentView {
 
   onViewLoaded(args: EventData) {
     this.view = <View>args.object;
-    this.setupOnOrientationChangeListener();
+    // this.setupOnOrientationChangeListener();
     this.addShadow();
   }
 
@@ -44,22 +45,22 @@ export class FloatingActionButtonComponent extends ContentView {
 
   // TODO: extract a shared function; logic of adding shadow is the same as in many other components;
   addShadow(): void {
-    if (!this.showShadow || this.disabled) {
+    if (!this.showShadow || this.disabled || !this.isFloating) {
       return;
     }
+
+    const shadowColor = this.getThemeColor('primary-shade');
 
     if (this.view.android) {
       let nativeView = this.view.android;
       var shape = new android.graphics.drawable.GradientDrawable();
       shape.setShape(android.graphics.drawable.GradientDrawable.OVAL);
-      shape.setColor(android.graphics.Color.parseColor(this.getThemeColor('kirby-primary-shade')));
+      shape.setColor(android.graphics.Color.parseColor(shadowColor));
       nativeView.setBackgroundDrawable(shape);
       nativeView.setElevation(15);
     } else if (this.view.ios) {
       let nativeView = this.view.ios;
-      nativeView.layer.shadowColor = new Color(
-        this.getThemeColor('kirby-primary-shade')
-      ).ios.CGColor;
+      nativeView.layer.shadowColor = new Color(shadowColor).ios.CGColor;
       nativeView.layer.shadowOffset = CGSizeMake(0, 2.0);
       nativeView.layer.shadowOpacity = 0.3;
       nativeView.layer.shadowRadius = 5.0;
@@ -67,7 +68,7 @@ export class FloatingActionButtonComponent extends ContentView {
   }
 
   getThemeColor(name: string) {
-    return style.global['$kirby-colors'].value[name].value.hex;
+    return style.global['$kirby-colors'].value[name].value;
   }
 }
 

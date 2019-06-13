@@ -9,4 +9,5 @@ export class FloatingActionButtonComponent {
   // TODO: showShadow should become an "elevation" enum in the future;
   @Input() showShadow?: boolean = true;
   @Input() disabled?: boolean = false;
+  @Input() isFloating?: boolean = true;
 }

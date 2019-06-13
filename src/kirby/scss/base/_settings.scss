@@ -1,3 +1,5 @@
+@import './functions';
+
 /*
   SPACINGS
 ****************************************************************************/
@@ -8,8 +10,6 @@ $sizes: (
   l:    32,
   m:    24,
   s:    16,
-  gutter: 16, //Deprecated, don't use!
-  gutter-small: 8, //Deprecated, don't use!
   xs:    8,   
   xxs:   4,
 );
@@ -50,5 +50,10 @@ $font-weight: (
   Z - Index overview
 ****************************************************************************/
 $z-layers: (
-  segmentBadge: 2
+  default: 1,
+  segmentBadge: 2,
+  modal-overlay: 900,
+  modal: 901
 );
+
+$border-radius: get-unit-value(20);

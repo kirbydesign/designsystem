@@ -1,0 +1,12 @@
+<kirby-card>
+    <kirby-card-header *ngIf="config.header" [title]="config.header" [subtitle]="config.subheader">
+    </kirby-card-header>
+    <kirby-list [items]="config.items" (itemSelect)="onItemSelect($event)">
+        <kirby-list-flex-item *kirbyListFlexItem="let item">
+            <kirby-list-cell showDivider="true" horisontalAlignment="center">
+                <kirby-list-cell-line [text]="item.text"></kirby-list-cell-line>
+            </kirby-list-cell>            
+        </kirby-list-flex-item>
+    </kirby-list>
+</kirby-card>
+<button kirby-button class="cancel-btn" themeColor="secondary" (click)="onModalDismiss()">Cancel</button>

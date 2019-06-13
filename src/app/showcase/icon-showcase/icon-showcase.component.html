@@ -1,8 +1,41 @@
 <div class="example">
   <kirby-icon-example></kirby-icon-example>
-  <kirby-html-viewer [html]="exampleHtml"></kirby-html-viewer>
+  <kirby-code-viewer [html]="exampleHtml"></kirby-code-viewer>
   <h4>Properties:</h4>
   <kirby-showcase-properties [properties]="properties"></kirby-showcase-properties>
+  
+  <br />
+  <br />
+  Use 'customName' if you want to add custom icons font. You need to include TTF file inside your project and add 'CustomIconSettings' under your NgModule
+  <br />
+  <pre>
+    const customIconSettings: CustomIconSettings = {{ '{' }} 
+      fontfamily: "'ios-font-name', 'android-font-file-name'",
+      icons: [
+        {{ '{' }} 
+          name: 'football',
+          svg: '[PATH_TO_SVG_FILE]',
+          unicode: '[UNICODE_FROM_TTF_FILE]',
+        {{ '},' }} 
+        {{ '{' }} 
+          name: 'umbrella',
+          svg: '[PATH_TO_SVG_FILE]',
+          unicode: '[UNICODE_FROM_TTF_FILE]',
+        {{ '},' }} 
+      {{ '],' }} 
+    {{'};'}}
+
+    @NgModule({{ '{' }} 
+      ...
+      providers: [
+      {{ '{' }} 
+          provide: CUSTOM_FONT_SETTINGS,
+          useValue: customIconSettings,
+      {{ '},' }} 
+      {{ '],' }} 
+      ...
+    {{ '}),' }} 
+  </pre>
 
   <div class="performance">
     <div class="title">

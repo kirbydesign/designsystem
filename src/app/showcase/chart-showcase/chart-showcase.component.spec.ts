@@ -3,7 +3,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { ChartShowcaseComponent } from './chart-showcase.component';
 import { ExamplesModule } from '../../examples/examples.module';
-import { HtmlViewerComponent } from '../../shared/html-viewer/html-viewer.component';
+import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
 
 describe('ChartShowcaseComponent', () => {
   let component: ChartShowcaseComponent;
@@ -12,7 +12,7 @@ describe('ChartShowcaseComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ExamplesModule, RouterTestingModule],
-      declarations: [ChartShowcaseComponent, HtmlViewerComponent],
+      declarations: [ChartShowcaseComponent, CodeViewerComponent],
     }).compileComponents();
   }));
 

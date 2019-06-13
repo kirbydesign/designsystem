@@ -32,7 +32,7 @@ export class AvatarComponent extends ContentView {
 
   onViewLoaded(args: EventData) {
     this.view = <View>args.object; // We need a reference to the view so we can access it on orientation changes
-    this.setupOnOrientationChangeListener();
+    // this.setupOnOrientationChangeListener();
     this.addShadow();
   }
 
