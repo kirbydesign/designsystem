@@ -17,11 +17,11 @@ export class ButtonComponent {
   isAttentionLevel4: boolean;
   @HostBinding('class.destructive')
   destructive: boolean = false; // Default
-  @Input() set attentionLevel(level: 1 | 2 | 3 | 4) {
-    this.isAttentionLevel1 = level == 1;
-    this.isAttentionLevel2 = level == 2;
-    this.isAttentionLevel3 = level == 3;
-    this.isAttentionLevel4 = level == 4;
+  @Input() set attentionLevel(level: '1' | '2' | '3' | '4') {
+    this.isAttentionLevel1 = level === '1';
+    this.isAttentionLevel2 = level === '2';
+    this.isAttentionLevel3 = level === '3';
+    this.isAttentionLevel4 = level === '4';
   }
   @Input() set isDestructive(state: boolean) {
     this.destructive = state;
