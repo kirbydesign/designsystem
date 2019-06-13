@@ -53,7 +53,6 @@ export class ButtonShowcaseComponent {
   ];
 
   onChange(value) {
-    console.log(value);
     this.themeColor = value;
   }
 }
