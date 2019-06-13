@@ -12,6 +12,7 @@ const handlebars = require('handlebars');
  */
 const src = getNamedArg('src');
 const dest = getNamedArg('dest');
+const svgSpriteDest = getNamedArg('svg-sprite-dest');
 const configDest = getNamedArg('config-dest');
 const fontname = getNamedArg('fontname', true) || 'iconfont';
 
@@ -59,7 +60,18 @@ function generateWebfont(icons, dest, fontname, configDest = dest) {
     if (error) {
       console.log('Fail!', error);
     } else {
-      console.log(`Done! Webfont is located here: ${dest}, configuration is located here: ${configDest}`);
+      // Move svg sprite
+      if(svgSpriteDest) {
+        fs.rename(`${dest}/${fontname}.svg`, `${svgSpriteDest}/${fontname}.svg`, (err) => {
+          if (err) throw err;
+          console.log(`Done! Webfont is located here: ${dest}`);
+          console.log(`Configuration is located here: ${configDest}`);
+          console.log(`SVG sprite is located here: ${svgSpriteDest}`);
+        });
+      } else {
+        console.log(`Done! Webfont is located here: ${dest}`);
+        console.log(`Configuration is located here: ${configDest}`);
+      }
     }
   });
 }
