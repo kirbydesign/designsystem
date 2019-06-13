@@ -1,22 +1,13 @@
 <div class="example">
-  
-  <!-- <ion-select (ionChange)="selectChanged($event);" [value]="selectValue" okText="Okay" cancelText="Dismiss">
-    <ion-select-option value="brown">Brown</ion-select-option>
-    <ion-select-option value="blonde">Blonde</ion-select-option>
-    <ion-select-option value="black">Black</ion-select-option>
-    <ion-select-option value="red">Red</ion-select-option>
-  </ion-select>
-  <button (click)="selectValue = 'brown'">Set value to brown</button> -->
-
   <h2>Default (transparent background):</h2>
   <div class="calendar-example">
     <kirby-calendar-example></kirby-calendar-example>
-    <kirby-html-viewer [html]="exampleHtml"></kirby-html-viewer>
+    <kirby-code-viewer [html]="exampleHtml"></kirby-code-viewer>
   </div>
   <h2 class="custom-example">Card wrapped, custom buttons integration, past date + weekends disabled:</h2>
   <div class="calendar-example">
     <kirby-calendar-card-example></kirby-calendar-card-example>
-    <kirby-html-viewer [html]="exampleWithCardHtml"></kirby-html-viewer>  
+    <kirby-code-viewer [html]="exampleWithCardHtml"></kirby-code-viewer>
   </div>
   <h4>Properties:</h4>
   <kirby-showcase-properties [properties]="properties"></kirby-showcase-properties>
