@@ -49,10 +49,10 @@
     </li>
   </ng-template>
 
-  <li *ngIf="isLoading">
+  <li *ngIf="isLoading" class="loading">
       <div class="extending"><kirby-spinner></kirby-spinner></div>
   </li>
-  <li *ngIf="!isLoadOnDemandEnabled && noMoreItemsText">
+  <li *ngIf="!isLoadOnDemandEnabled && noMoreItemsText" class="no-more-items">
     <span class="extending">{{noMoreItemsText}}</span>
   </li>
 </ul>

@@ -97,6 +97,12 @@ ul {
         }
       }
     }
+    
+    &.loading,
+    &.no-more-items
+    {
+      background-color: get-color('contrast-light');
+    }
   }
 }
 
