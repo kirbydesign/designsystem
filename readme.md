@@ -45,7 +45,7 @@ Include the Kirby Sass variables in your app:
 
 * Web (eg. in `src/styles.scss`):
   ```css
-  @import '~@kirbydesign/designsystem/scss/web-imports';
+  @import '~@kirbydesign/designsystem/scss/web/web-styles';
   ```
 * {N} (eg. in `src/_app-variables.scss`)::
   ```css

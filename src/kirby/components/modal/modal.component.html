@@ -1,9 +1,0 @@
-<div class="modal-content">
-    <h2 class="text-{{config.titleHorizontalAlignment}}">{{ config.title }}</h2>
-    <kirby-floating-action-button class="dismiss-button" (click)="dismissModal()">
-        <kirby-icon [name]="config.closeIconName"></kirby-icon>
-    </kirby-floating-action-button>
-    <div class="inner-component">
-        <ng-container *ngComponentOutlet="config.component"></ng-container>
-    </div>
-</div>
