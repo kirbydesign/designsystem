@@ -13,7 +13,6 @@ const style = require('sass-extract-loader!./colors-showcase.component.scss');
 export class ColorsShowcaseComponent implements OnInit {
   selectedColor = 'primary';
   selectedOnColor = 'primary-contrast';
-  activeColorType = 'bg';
   colorPalette = [];
 
   constructor() {
@@ -23,11 +22,8 @@ export class ColorsShowcaseComponent implements OnInit {
   ngOnInit() {}
 
   onColorClick(sassColor: SassColor) {
-    if (this.activeColorType === 'bg') {
-      this.selectedColor = sassColor.name;
-    } else {
-      this.selectedOnColor = sassColor.name;
-    }
+    this.selectedColor = sassColor.name;
+    this.selectedOnColor = sassColor.name + '-contrast';
   }
 
   getThemeColors() {
