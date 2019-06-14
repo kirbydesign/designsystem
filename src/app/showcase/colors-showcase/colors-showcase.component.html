@@ -6,12 +6,21 @@
       <div class="color-sample-on-text {{selectedOnColor}}">
         Contrast Text
       </div>
+      <div class="color-sample-tint {{selectedColor}}-tint">Tint</div>
+      <div class="color-sample-shade {{selectedColor}}-shade">Shade</div>
     </div>
     <pre class="language-css">
   .color-sample-example {{'{'}}
     color: get-color('{{selectedOnColor}}');
     background-color: get-color('{{selectedColor}}');
-  {{'}'}}</pre>
+  {{'}'}}
+  .color-sample-tint {{'{'}}
+    background-color: get-color('{{selectedColor}}-tint');
+  {{'}'}}
+  .color-sample-shade {{'{'}}
+    background-color: get-color('{{selectedColor}}-shade');
+  {{'}'}}
+</pre>
   </div>
   <p>The get-color function will output CSS variables for web and output the color values directly for Nativescript.</p>
 </div>

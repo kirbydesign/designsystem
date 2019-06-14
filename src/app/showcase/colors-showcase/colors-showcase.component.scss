@@ -3,7 +3,7 @@
 @each $color, $color-name in $kirby-colors {
   .#{$color} {
     background-color: var(--kirby-#{$color});
-    color: var(--kirby-#{$color});
+    color: var(--kirby-#{$color}-contrast);
   }
 }
 
@@ -49,8 +49,7 @@
 
 .derp {
   display: flex;
-  justify-content: stretch;
-  align-items: stretch;
+  align-items: flex-start;
   flex-wrap: wrap;
 
   pre {
@@ -60,16 +59,24 @@
 }
 
 .color-sample-example {
-  border-radius: 8px;
-  padding: size('xxl');
+  border-radius: size('s');
   margin: 0.5em 0;
   margin-right: size('s');
-  border: 1px solid #eee;
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+  min-height: 140px;
+  min-width: 140px;
+
+  > * {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .color-sample-on-text {
+  grid-column: 1 / span 2;
   background-color: transparent;
 }
 
