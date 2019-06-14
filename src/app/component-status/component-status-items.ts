@@ -570,7 +570,8 @@ export const componentStatusItems: ComponentStatusItem[] = [
     },
     code: {
       version: 0.1,
-      status: ItemCodeStatus.planned,
+      status: ItemCodeStatus.ready,
+      cookbookUrl: 'showcase/toggle',
     },
   },
   {

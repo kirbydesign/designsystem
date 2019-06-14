@@ -1,6 +1,6 @@
 @import '../../scss/native-imports';
 
-.switch {
+Switch {
     background-color: #{get-color('primary')};
 
     @each $color-name, $color-value in $main-colors {
