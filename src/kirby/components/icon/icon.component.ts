@@ -1,4 +1,5 @@
-import { Component, Inject, Input, Optional } from '@angular/core';
+import { Component, Inject, Input, OnChanges, Optional, SimpleChanges } from '@angular/core';
+
 import { kirbyCustomIconSettings } from './kirby';
 import { CUSTOM_FONT_SETTINGS, CustomIcon, CustomIconSettings } from './custom-icon-settings';
 
@@ -12,49 +13,46 @@ import { CUSTOM_FONT_SETTINGS, CustomIcon, CustomIconSettings } from './custom-i
     class: 'kirby-icon',
   },
 })
-export class IconComponent {
+export class IconComponent implements OnChanges {
   defaultIcon: CustomIcon = this.getCustomIcon(kirbyCustomIconSettings.icons, 'cog');
+  fontFamily: string = kirbyCustomIconSettings.fontfamily;
+  private _icon = (this.icon = this.defaultIcon);
 
-  ionicon: CustomIcon;
-  kirbyIcon: CustomIcon;
-  customIcon: CustomIcon;
-  fontFamily: string;
+  @Input() name: string;
+  @Input() customName: string;
 
-  @Input()
-  set name(val) {
-    const kirbyIcon = this.getCustomIcon(kirbyCustomIconSettings.icons, val);
-    if (kirbyIcon) {
-      this.fontFamily = kirbyCustomIconSettings.fontfamily;
-      this.kirbyIcon = { ...kirbyIcon, fromCharCode: this.fromCharCode(kirbyIcon.unicode) };
-    } else {
-      this.kirbyIcon = {
-        ...this.defaultIcon,
-        fromCharCode: this.fromCharCode(this.defaultIcon.unicode),
-      };
-      console.warn('Icon with name', val, 'was not found.');
-    }
+  get icon(): CustomIcon {
+    return this._icon;
   }
 
-  @Input()
-  set customName(val) {
-    if (!this.customIconSettings) {
+  set icon(icon: CustomIcon) {
+    if (!this.customIconSettings && this.customName) {
       console.warn(
         'CUSTOM_FONT_SETTINGS provider in your module.ts is not set. Read documentation on how to set it up.'
       );
-    } else {
-      this.kirbyIcon = null;
-      const customIcon = this.getCustomIcon(this.customIconSettings.icons, val);
-      if (customIcon) {
-        this.fontFamily = this.customIconSettings.fontfamily;
-        this.customIcon = { ...customIcon, fromCharCode: this.fromCharCode(customIcon.unicode) };
-      } else {
-        this.customIcon = null;
-        this.kirbyIcon = {
-          ...this.defaultIcon,
-          fromCharCode: this.fromCharCode(this.defaultIcon.unicode),
-        };
-        console.warn('Icon with name', val, 'was not found in custom icons.');
-      }
+    }
+
+    if (!icon) {
+      console.warn('Icon with name', this.name || this.customName, 'was not found.');
+      icon = this.defaultIcon;
+    }
+
+    this._icon = {
+      ...icon,
+      fromCharCode: this.fromCharCode(icon.unicode),
+    };
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.name) {
+      this.fontFamily = kirbyCustomIconSettings.fontfamily;
+      this.icon = this.getCustomIcon(kirbyCustomIconSettings.icons, changes.name.currentValue);
+    } else if (changes.customName) {
+      this.fontFamily = this.customIconSettings.fontfamily;
+      this.icon = this.getCustomIcon(
+        this.customIconSettings.icons,
+        changes.customName.currentValue
+      );
     }
   }
 
@@ -67,6 +65,7 @@ export class IconComponent {
   }
 
   private getCustomIcon(icons, name: string): CustomIcon {
+    console.log(icons, name);
     return icons.find((icon) => icon.name === name);
   }
 }
