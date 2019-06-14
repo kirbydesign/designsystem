@@ -1,5 +1,5 @@
 export class BaseListComponent {
-  public items: any[] = [
+  public itemsFullList: any[] = [
     {
       id: 0,
       title: 'Vestas Wind Systems has a very long name',
@@ -708,6 +708,8 @@ export class BaseListComponent {
       detail: 75,
     },
   ];
+
+  public items: any[] = this.itemsFullList.slice(0, 8);
 
   onItemSelect(item: any) {
     alert(`You have clicked the row [${item.title} ${item.amount}]`);

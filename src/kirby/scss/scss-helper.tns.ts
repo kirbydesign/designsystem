@@ -1,10 +1,11 @@
 import { Color } from 'tns-core-modules/color';
+const style = require('sass-extract-loader!./_native-imports.scss');
 
 /**
  * Always remember to keep this class and _native-variables.scss in sync when needed
  */
 export class ScssHelper {
-  public static BORDER_RADIUS = 18.0;
+  public static BORDER_RADIUS = style.global['$border-radius'].value;
 
   // Elevation
   public static ELEVATION_CARD_RESTING = 8;
