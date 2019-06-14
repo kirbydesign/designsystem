@@ -14,12 +14,10 @@ export class ToggleComponent {
   @Input() disabled: boolean = false;
   @Input() themeColor?: ThemeColor;
   @Output() change = new EventEmitter<boolean>();
-
   checkedChange(args: EventData): void {
     const toggle = args.object as Switch;
     this.change.emit(toggle.checked);
   }
-
   ionChange(event): void {
     const toggle = event.detail;
     this.change.emit(toggle.checked);
