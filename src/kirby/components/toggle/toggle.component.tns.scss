@@ -1,1 +1,11 @@
-/* Add mobile styles for the component here.  */
+@import '../../scss/native-imports';
+
+.switch {
+    background-color: #{get-color('primary')};
+
+    @each $color-name, $color-value in $main-colors {
+        &.#{$color-name} {
+            background-color: #{get-color($color-name)};
+        }
+    }
+}

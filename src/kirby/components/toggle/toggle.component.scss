@@ -1,0 +1,11 @@
+@import '../../scss/web-imports';
+
+.toggle-checked {
+    --background-checked: #{get-color('primary')};
+}
+
+@each $color-name, $color-value in $main-colors {
+    :host(.#{$color-name}) &.toggle-checked {
+        --background-checked: #{get-color($color-name)};
+    }
+}

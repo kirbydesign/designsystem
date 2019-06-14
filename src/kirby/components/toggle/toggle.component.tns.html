@@ -1,1 +1,1 @@
-<Button text="toggle works!" class="btn btn-primary"></Button>
+<Switch class="switch" [ngClass]="themeColor" [checked]="checked" [isEnabled]="!disabled" (checkedChange)="checkedChange($event)"></Switch>

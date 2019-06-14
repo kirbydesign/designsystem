@@ -1,5 +1,11 @@
 <div class="example">
     <kirby-toggle-example></kirby-toggle-example>
     <kirby-code-viewer [html]="exampleHtml"></kirby-code-viewer>
+    (Optional) if you need to obtain data back from the toggle, you can pass a callback function:
+    <kirby-code-viewer language="HTML">(change)="onChange($event)"</kirby-code-viewer>where <code>onChange</code> can be e.g.:
+    <kirby-code-viewer language="ts">onChange(checked: boolean) {{ '{' }}...{{ '}' }}</kirby-code-viewer>
+    <p>
+    <h4>Toggle properties:</h4>
     <kirby-showcase-properties [properties]="properties"></kirby-showcase-properties> 
 </div>
+

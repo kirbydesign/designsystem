@@ -8,7 +8,8 @@ import { ThemeColor } from '../../helpers/theme-color.type';
              button[kirby-button][themeColor],
              Button[kirby-button][themeColor],
              kirby-badge[themeColor],
-             kirby-icon[themeColor]`,
+             kirby-icon[themeColor],
+             kirby-toggle[themeColor]`,
 })
 export class ThemeColorDirective {
   @HostBinding('class.primary')

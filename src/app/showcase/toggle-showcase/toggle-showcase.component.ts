@@ -6,7 +6,6 @@ declare var require: any;
 @Component({
   selector: 'kirby-toggle-showcase',
   templateUrl: './toggle-showcase.component.html',
-  styleUrls: ['./toggle-showcase.component.scss'],
 })
 export class ToggleShowcaseComponent {
   exampleHtml: string = require('../../examples/toggle-example/toggle-example.component.html');
@@ -14,6 +13,12 @@ export class ToggleShowcaseComponent {
     {
       name: 'checked',
       description: 'If true, the toggle is selected.',
+      defaultValue: 'false',
+      inputValues: ['true', 'false'],
+    },
+    {
+      name: 'disabled',
+      description: 'If true, the toggle is disabled.',
       defaultValue: 'false',
       inputValues: ['true', 'false'],
     },
