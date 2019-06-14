@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { SassColor } from '../../../kirby/scss/scss-helper';
 
@@ -10,7 +10,7 @@ const style = require('sass-extract-loader!./colors-showcase.component.scss');
   templateUrl: './colors-showcase.component.html',
   styleUrls: ['./colors-showcase.component.scss'],
 })
-export class ColorsShowcaseComponent implements OnInit {
+export class ColorsShowcaseComponent {
   selectedColor = 'primary';
   selectedOnColor = 'primary-contrast';
   colorPalette = [];
@@ -18,8 +18,6 @@ export class ColorsShowcaseComponent implements OnInit {
   constructor() {
     this.colorPalette = this.getThemeColors();
   }
-
-  ngOnInit() {}
 
   onColorClick(sassColor: SassColor) {
     this.selectedColor = sassColor.name;
