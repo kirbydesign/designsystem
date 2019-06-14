@@ -1,7 +1,7 @@
 <p>Below is the Kirby color palette. You can try out the different color combinations there and see how it can be used in the CSS in the code example box. All the colors are fetched from the <code>scss/themes/_colors.scss</code> file.</p>
 <div class="color-sample-wrapper">
   <div class="h2">Example use (Click on a color below to change it):</div>
-  <div class="derp">
+  <div class="color-sample-flex">
     <div class="color-sample-example {{selectedColor}}">
       <div class="color-sample-on-text {{selectedOnColor}}">
         Contrast Text
@@ -10,17 +10,16 @@
       <div class="color-sample-shade {{selectedColor}}-shade">Shade</div>
     </div>
     <pre class="language-css">
-  .color-sample-example {{'{'}}
-    color: get-color('{{selectedOnColor}}');
-    background-color: get-color('{{selectedColor}}');
-  {{'}'}}
-  .color-sample-tint {{'{'}}
-    background-color: get-color('{{selectedColor}}-tint');
-  {{'}'}}
-  .color-sample-shade {{'{'}}
-    background-color: get-color('{{selectedColor}}-shade');
-  {{'}'}}
-</pre>
+.color-sample-example {{'{'}}
+  color: get-color('{{selectedOnColor}}');
+  background-color: get-color('{{selectedColor}}');
+{{'}'}}
+.color-sample-tint {{'{'}}
+  background-color: get-color('{{selectedColor}}-tint');
+{{'}'}}
+.color-sample-shade {{'{'}}
+  background-color: get-color('{{selectedColor}}-shade');
+{{'}'}}</pre>
   </div>
   <p>The get-color function will output CSS variables for web and output the color values directly for Nativescript.</p>
 </div>
