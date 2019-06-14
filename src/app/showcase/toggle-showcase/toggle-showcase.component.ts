@@ -24,9 +24,19 @@ export class ToggleShowcaseComponent {
     },
     {
       name: 'themeColor',
-      description: 'Sets which color the button should use from the theme palette.',
+      description: 'Sets which color the toggle should use from the theme palette.',
       defaultValue: 'primary',
-      inputValues: ['primary', 'secondary'],
+      inputValues: [
+        'primary',
+        'secondary',
+        'tertiary',
+        'success',
+        'warning',
+        'danger',
+        'light',
+        'medium',
+        'dark',
+      ],
     },
   ];
 }
