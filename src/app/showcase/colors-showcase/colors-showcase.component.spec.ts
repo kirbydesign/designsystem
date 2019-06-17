@@ -29,6 +29,6 @@ fdescribe('ColorsShowcaseComponent', () => {
     spyOn(component, 'onColorClick');
     const colorElm = fixture.debugElement.nativeElement.querySelector('.color-box');
     colorElm.click();
-    expect(component.onColorClick).toHaveBeenCalledWith();
+    expect(component.onColorClick).toHaveBeenCalled();
   });
 });
