@@ -26,9 +26,11 @@ fdescribe('ColorsShowcaseComponent', () => {
   });
 
   it('should call onColorClick when clicking a color box', () => {
-    spyOn(component, 'onColorClick');
+    spyOn(component, 'onColorClick').and.callThrough();
     const colorElm = fixture.debugElement.nativeElement.querySelector('.color-box');
     colorElm.click();
     expect(component.onColorClick).toHaveBeenCalledWith(jasmine.any(Object));
+    expect(component.selectedColor).toBe(component.colorPalette[0].name);
+    expect(component.selectedOnColor).toBe(component.colorPalette[0].contrast.name);
   });
 });
