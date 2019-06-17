@@ -24,7 +24,7 @@ export class ColorsShowcaseComponent {
     this.selectedOnColor = sassColor.name + '-contrast';
   }
 
-  getThemeColors() {
+  private getThemeColors() {
     const colors = [];
     const mainColors = style.global['$main-colors'].value;
     const generatedColors = style.global['$kirby-colors'].value;
