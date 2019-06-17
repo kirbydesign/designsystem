@@ -4,7 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { ExamplesModule } from '../../examples/examples.module';
 import { ColorsShowcaseComponent } from './colors-showcase.component';
 
-fdescribe('ColorsShowcaseComponent', () => {
+describe('ColorsShowcaseComponent', () => {
   let component: ColorsShowcaseComponent;
   let fixture: ComponentFixture<ColorsShowcaseComponent>;
 
