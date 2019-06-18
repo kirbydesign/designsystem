@@ -1,5 +1,71 @@
 @import '../../scss/web-imports';
 
+$shadow: 0 5px 10px -10px rgba(28, 28, 28, 0.3), 0 0 5px 0 rgba(28, 28, 28, 0.08);
+$shadow-mask: 0 -6px 0px 0px get-color('contrast-light');
+
+:host {
+  display: block;
+  background-color: get-color('base-color');
+
+  &:not(.has-sections) {
+    box-shadow: $shadow;
+  }
+}
+
+:host(.rounded) {
+  &:not(.has-sections) {
+    border-radius: $border-radius;
+
+    li:first-child {
+      border-top-left-radius: $border-radius;
+      border-top-right-radius: $border-radius;
+    }
+
+    .list-header {
+      border-top-left-radius: $border-radius;
+      border-top-right-radius: $border-radius;
+
+      & + ul > li:first-child {
+        border-radius: 0;
+      }
+    }
+
+    li:last-child {
+      border-bottom-left-radius: $border-radius;
+      border-bottom-right-radius: $border-radius;
+    }
+  }
+
+  &.has-sections {
+
+    li.row {
+      box-shadow: $shadow-mask, $shadow;
+      
+    }
+
+    li.row.selectable:hover {
+      background-color: get-color('base-color');
+    }
+
+    li.section-header + li.row
+    {
+      border-top-left-radius: $border-radius;
+      border-top-right-radius: $border-radius;
+      box-shadow: $shadow;
+    }
+
+    li.row.last-in-section {
+      border-bottom-left-radius: $border-radius;
+      border-bottom-right-radius: $border-radius;
+    }
+  }
+}
+
+.list-header {
+  background-color: get-color('contrast-light');
+  border-bottom: 1px solid get-color('base-color');
+}
+
 ul {
   list-style-type: none;
   padding-left: 0;
@@ -17,84 +83,29 @@ ul {
     }
 
     &.row {
-      border: 0 solid get-color('medium');
+      background-color: get-color('contrast-light');
 
       &.divider:not(:last-child) {
-        border-bottom-width: 1px;
+        border-bottom: 1px solid get-color('base-color');
       }
 
-      &.selectable:hover {
-        background-color: get-color('base-color');
-      }
+      &.selectable {
+        cursor: pointer;
 
-      &:last-child {
-        border-bottom-width: 0;
+        &:hover {
+          background-color: get-color('base-color');
+        }
       }
     }
-
-    &.section-header.no-section-header-styling, &.row.no-row-styling {
-      display: block;
-      overflow: hidden;
-      padding: 0;
-    }
-
-    &.row.section-shadow {
-      box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.3);
+    
+    &.loading,
+    &.no-more-items
+    {
+      background-color: get-color('contrast-light');
     }
   }
 }
 
 .extending {
   margin: auto;
-}
-
-:host {
-  display: block;
-
-  &:not(.has-sections) {
-    background-color: get-color('contrast-light');
-    border: 1px solid  get-color('medium');
-  }
-}
-
-:host([shape="rounded"]) {
-  &:not(.has-sections) {
-    border-radius: $border-radius;
-
-    li:first-child {
-      border-top-left-radius: $border-radius;
-      border-top-right-radius: $border-radius;
-    }
-
-    li:last-child {
-      border-bottom-left-radius: $border-radius;
-      border-bottom-right-radius: $border-radius;
-    }
-  }
-
-  &.has-sections {
-    li.row {
-      background-color: get-color('contrast-light');
-
-      &.selectable:hover {
-        background-color: get-color('base-color');
-      }
-    }
-
-    li.section-header + li.row
-    {
-      border-top-left-radius: $border-radius;
-      border-top-right-radius: $border-radius;
-    }
-
-    li.row.last-in-section {
-      border-bottom-left-radius: $border-radius;
-      border-bottom-right-radius: $border-radius;
-      border-width: 0;
-    }
-  }
-}
-
-.list-header {
-  border-bottom: 1px solid get-color('medium');
 }
