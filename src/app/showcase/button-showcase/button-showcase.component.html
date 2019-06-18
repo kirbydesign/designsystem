@@ -1,9 +1,9 @@
 <div class="example">
     <kirby-button-example [themeColor]="themeColor"></kirby-button-example>
     <div>
-        <label>Change card color: </label>
         <select (change)="onChange($event.target.value)">
-            <option *ngFor="let color of themeColors" value={{color}}>{{ color }}</option>
+            <option value="">Card color: None</option>
+            <option *ngFor="let color of themeColors" value="{{color}}" [attr.selected]="themeColor === color ? true : null">Card color: {{ color }}</option>
         </select>
     </div>
     <kirby-code-viewer [html]="exampleHtml"></kirby-code-viewer>

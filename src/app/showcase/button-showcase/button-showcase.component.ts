@@ -20,7 +20,7 @@ export class ButtonShowcaseComponent {
     'medium',
     'dark',
   ];
-  themeColor: string = this.themeColors[0];
+  themeColor = '';
   exampleHtml: string = require('../../examples/button-example/button-example.component.html');
   properties: ShowcaseProperty[] = [
     {

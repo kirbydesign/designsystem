@@ -2,8 +2,9 @@
 
 :host {
     kirby-card {
-        margin: size("m") 0;
+        margin-bottom: size("m");
         max-width: size("m");
+        padding: size("m");
     }
 
     h2 {
