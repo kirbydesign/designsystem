@@ -33,7 +33,7 @@
     --kirby-button-background-color:#{get-color('primary')};
     --kirby-button-border-color: #{get-color('primary')};
     --kirby-button-color: #{get-color('primary-contrast')};
-      
+  
     &.destructive {
       --kirby-button-background-color:#{get-color('danger')};
       --kirby-button-border-color: #{get-color('danger')};
@@ -42,8 +42,8 @@
   }
 
   &.attention-level2 {
-    --kirby-button-background-color:#{get-color('base-color')};
-    --kirby-button-border-color: #{get-color('base-color')};
+    --kirby-button-background-color:#{get-color('contrast-light')};
+    --kirby-button-border-color: #{get-color('contrast-light')};
     --kirby-button-color: #{get-color('contrast-dark')};
 
     &.destructive {
@@ -82,39 +82,47 @@
   }
 
   &:disabled {
-    background-color: var(--kirby-light-tint);
-    border-color: var(--kirby-light-tint);
+    background-color: get-color('light-tint');
+    border-color: get-color('light-tint');
     pointer-events: none;
   }
 
+  :host-context(.default).attention-level2 {
+    --kirby-button-border-color: #{get-color('light')};
+    --kirby-button-background-color: #{get-color('light')};
+    --kirby-button-color: #{get-color('light-contrast')};
+  }
+  
   :host-context(.primary).attention-level1,
   :host-context(.secondary).attention-level1,
   :host-context(.tertiary).attention-level1,
   :host-context(.success).attention-level1,
   :host-context(.warning).attention-level1,
   :host-context(.danger).attention-level1 {
-    --kirby-button-background-color:#{get-color('base-color')};
-    --kirby-button-border-color: #{get-color('base-color')};
+    --kirby-button-background-color: #{get-color('contrast-light')};
+    --kirby-button-border-color: #{get-color('contrast-light')};
     --kirby-button-color: #{get-color('contrast-dark')};
   }
-
+  
   :host-context(.secondary).attention-level3,
-  :host-context(.tertiary).attention-level3 {
-    --kirby-button-border-color: #{get-color('base-color')};
-    --kirby-button-color: #{get-color('base-color')};
+  :host-context(.tertiary).attention-level3,
+  :host-context(.dark).attention-level3 {
+    --kirby-button-border-color: #{get-color('contrast-light')};
+    --kirby-button-color: #{get-color('contrast-light')};
   }
-
-  :host-context(.medium).attention-level3,
+  
+  :host-context(.primary).attention-level3,
   :host-context(.success).attention-level3,
   :host-context(.warning).attention-level3,
   :host-context(.danger).attention-level3,
-  :host-context(.primary).attention-level3 {
+  :host-context(.medium).attention-level3 {
     --kirby-button-border-color: #{get-color('contrast-dark')};
     --kirby-button-color: #{get-color('contrast-dark')};
   }
-
+  
   :host-context(.secondary).attention-level4,
-  :host-context(.tertiary).attention-level4 {
-    --kirby-button-color: #{get-color('base-color')};
+  :host-context(.tertiary).attention-level4,
+  :host-context(.dark).attention-level4 {
+    --kirby-button-color: #{get-color('contrast-light')};
   }
 }
