@@ -38,6 +38,7 @@ import { CustomIconNameDirective } from './components/icon/custom-icon-name.dire
 import { AlertHelper } from './components/modal/services/alert.helper';
 import { SizeDirective } from './directives/size/size.directive';
 import { ThemeColorDirective } from './directives/theme-color/theme-color.directive';
+import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';
 
 export const declarations = [
   CardComponent,
@@ -73,6 +74,7 @@ export const declarations = [
   BadgeComponent,
   SizeDirective,
   ThemeColorDirective,
+  KeyHandlerDirective,
 ];
 
 export const providerDeclarations: any[] = [

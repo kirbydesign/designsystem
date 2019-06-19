@@ -17,7 +17,8 @@
           [class.selectable]="isSelectable"
           [class.divider]="showDivider"
           tabindex="0"
-          class="row">
+          class="row"
+          keyHandler>
 
         <ng-container *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }"></ng-container>
         <ng-container *ngTemplateOutlet="listFlexItemTemplate; context: { $implicit: item }"></ng-container>
@@ -26,13 +27,14 @@
   </div>
 
   <ng-template #normalList>
-    <ion-item  *ngFor="let item of items"
+    <ion-item *ngFor="let item of items"
       (click)="onItemSelect(item)"
       [class.selectable]="isSelectable"
       [class.divider]="showDivider"
       [attr.role]="isSelectable ? 'button' : null"
       tabindex="0" 
-      class="row">
+      class="row"
+      keyHandler>
 
       <ng-container *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }"></ng-container>
       <ng-container *ngTemplateOutlet="listFlexItemTemplate; context: { $implicit: item }"></ng-container>
