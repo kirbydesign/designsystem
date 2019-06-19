@@ -11,12 +11,11 @@ $shadow-mask: 0 -6px 0px 0px get-color('contrast-light');
     box-shadow: $shadow;
   }
 
-  .list-ios {
+  .list-ios,
+  ion-list-header {
     background-color: transparent;
-  }
-
-  ion-list-header{
     padding: 0;
+    margin: 0;
   } 
   
   ion-item {
@@ -27,6 +26,11 @@ $shadow-mask: 0 -6px 0px 0px get-color('contrast-light');
     font-size: font-size('s');
     --inner-border-width: 0;
     --background: transparent;
+
+    &:focus {
+      outline: -webkit-focus-ring-color auto 5px;
+      outline-offset: -4px;
+    }
 
     p {
       margin: 0;
