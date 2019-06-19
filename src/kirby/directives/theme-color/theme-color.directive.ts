@@ -11,6 +11,8 @@ import { ThemeColor } from '../../helpers/theme-color.type';
              kirby-icon[themeColor]`,
 })
 export class ThemeColorDirective {
+  @HostBinding('class.default')
+  private isDefault = true;
   @HostBinding('class.primary')
   private isPrimary: boolean;
   @HostBinding('class.secondary')
@@ -30,6 +32,7 @@ export class ThemeColorDirective {
   @HostBinding('class.dark')
   private isDark: boolean;
   @Input() set themeColor(value: ThemeColor) {
+    this.isDefault = !value;
     this.isPrimary = value === 'primary';
     this.isSecondary = value === 'secondary';
     this.isTertiary = value === 'tertiary';
