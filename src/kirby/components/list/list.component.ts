@@ -56,7 +56,16 @@ export class ListComponent implements OnChanges {
    */
   @HostBinding('class.rounded')
   @Input()
-  shape: ListShape = 'rounded';
+  isRoundedShape: boolean = true;
+
+  @Input() set shape(listShape: ListShape) {
+    if (listShape === 'square') {
+      this.isRoundedShape = false;
+    }
+    if (listShape === 'rounded') {
+      this.isRoundedShape = true;
+    }
+  }
 
   /**
    * Adds padding to the list.
