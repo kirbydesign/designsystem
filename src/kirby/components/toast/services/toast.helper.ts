@@ -6,8 +6,8 @@ import { ThemeColor } from './../../../helpers/theme-color.type';
 
 @Injectable()
 export class ToastHelper {
-  static DEFAULT_CSS_CLASS = 'kirby-toast';
-  static DEFAULT_DURATION = 4000;
+  static CSS_CLASS = 'kirby-toast';
+  static DURATION_IN_MS = 4000;
 
   constructor(private toastController: ToastController) {}
 
@@ -15,16 +15,18 @@ export class ToastHelper {
     const toast = await this.toastController.create({
       message: config.message,
       position: 'top',
-      duration: config.duration ? config.duration : ToastHelper.DEFAULT_DURATION,
-      cssClass: this.cssClass(config.themeColor),
+      duration: config.durationInMs ? config.durationInMs : ToastHelper.DURATION_IN_MS,
+      cssClass: this.getCssClass(config.themeColor),
     });
     toast.present();
     return toast.onDidDismiss();
   }
 
-  private cssClass(themeColor: ThemeColor): string {
-    return themeColor
-      ? `${ToastHelper.DEFAULT_CSS_CLASS} ${themeColor}`
-      : ToastHelper.DEFAULT_CSS_CLASS;
+  private getCssClass(themeColor: ThemeColor): string {
+    let cssClass = ToastHelper.CSS_CLASS;
+    if (themeColor) {
+      cssClass += ' ' + themeColor;
+    }
+    return cssClass;
   }
 }

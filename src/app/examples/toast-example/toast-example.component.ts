@@ -12,7 +12,7 @@ export class ToastExampleComponent {
   showToast() {
     const config: ToastConfig = {
       message: 'Your toast message',
-      duration: 5000,
+      durationInMs: 5000,
       themeColor: 'primary',
     };
     this.toastController.showToast(config, this.onToastClosed);

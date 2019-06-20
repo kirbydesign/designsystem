@@ -13,13 +13,13 @@ export class ToastShowcaseComponent {
   properties: ShowcaseProperty[] = [
     {
       name: 'message',
-      description: '(Optional) Sets the message for the toast',
+      description: 'Sets the message for the toast',
       defaultValue: 'null',
       inputValues: ['string'],
     },
     {
-      name: 'duration',
-      description: '(Optional) Duretion in milliseconds before the toast dismisses automatically.',
+      name: 'durationInMs',
+      description: '(Optional) Duration in milliseconds before the toast dismisses automatically.',
       defaultValue: '4000',
       inputValues: ['number'],
     },
