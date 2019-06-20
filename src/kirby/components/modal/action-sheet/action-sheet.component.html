@@ -1,7 +1,7 @@
 <kirby-card>
     <kirby-card-header *ngIf="config.header" [title]="config.header" [subtitle]="config.subheader">
     </kirby-card-header>
-    <kirby-list [items]="config.items" (itemSelect)="onItemSelect($event)">
+    <kirby-list shape="square" [items]="config.items" (itemSelect)="onItemSelect($event)">
         <kirby-list-flex-item *kirbyListFlexItem="let item">
             <kirby-list-cell showDivider="true" horisontalAlignment="center">
                 <kirby-list-cell-line [text]="item.text"></kirby-list-cell-line>
