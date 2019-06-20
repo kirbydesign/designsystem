@@ -19,13 +19,13 @@ $shadow-mask: 0 -6px 0px 0px get-color('contrast-light');
   } 
   
   ion-item {
-    padding: size('m') size('xs');
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     font-size: font-size('s');
     --inner-border-width: 0;
     --background: transparent;
+    --min-height: unset;
 
     &:focus {
       outline: -webkit-focus-ring-color auto 5px;
@@ -38,6 +38,7 @@ $shadow-mask: 0 -6px 0px 0px get-color('contrast-light');
 
     &.row {
       background-color: get-color('contrast-light');
+      padding: size('m') size('xs');
 
       &.divider:not(:last-child) {
         border-bottom: 1px solid get-color('base-color');

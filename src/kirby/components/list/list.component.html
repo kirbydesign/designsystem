@@ -7,7 +7,7 @@
   <div *ngIf="isSectionsEnabled; else normalList">
     <div *ngFor="let section of groupedItems">
         <ion-list-header class="section-header">
-          <ion-label class="kirby-text-small">{{ section.name}}</ion-label>
+          <ion-label class="kirby-text-small">{{ section.name }}</ion-label>
         </ion-list-header>
 
         <ion-item *ngFor="let item of section.items; let idx = index;" 
