@@ -5,4 +5,8 @@ import { Component } from '@angular/core';
   templateUrl: './checkbox-example.component.html',
   styleUrls: ['./checkbox-example.component.scss'],
 })
-export class CheckboxExampleComponent {}
+export class CheckboxExampleComponent {
+  checkedChange(checked: boolean) {
+    console.log('Checked:', checked);
+  }
+}
