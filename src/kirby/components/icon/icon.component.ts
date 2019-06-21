@@ -32,16 +32,27 @@ export class IconComponent implements OnChanges {
       );
     }
 
-    if (!icon) {
-      console.warn('Icon with name', this.name || this.customName, 'was not found.');
+    if (!icon && (this.name || this.customName)) {
+      console.warn(`Icon with name "${this.name || this.customName}" was not found.`);
       icon = this.defaultIcon;
+
+      if (!icon) {
+        console.warn('Default icon was not found.');
+        return;
+      }
     }
 
-    this._icon = {
-      ...icon,
-      fromCharCode: this.fromCharCode(icon.unicode),
-    };
+    if (icon) {
+      this._icon = {
+        ...icon,
+        fromCharCode: this.fromCharCode(icon.unicode),
+      };
+    }
   }
+
+  constructor(
+    @Optional() @Inject(CUSTOM_FONT_SETTINGS) private customIconSettings?: CustomIconSettings
+  ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.name) {
@@ -56,16 +67,11 @@ export class IconComponent implements OnChanges {
     }
   }
 
-  constructor(
-    @Optional() @Inject(CUSTOM_FONT_SETTINGS) private customIconSettings?: CustomIconSettings
-  ) {}
-
   private fromCharCode(icon) {
     return String.fromCharCode(icon);
   }
 
   private getCustomIcon(icons, name: string): CustomIcon {
-    console.log(icons, name);
     return icons.find((icon) => icon.name === name);
   }
 }
