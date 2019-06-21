@@ -7,6 +7,15 @@ export class ColorHelper {
   public static getContrastColor(name: string) {
     return ColorHelper.getColor(name + '-contrast');
   }
+  public static getThemeColorRgbString(name: string) {
+    return ColorHelper.getRgbString(ColorHelper.getThemeColor(name));
+  }
+  public static getRgbString(color: RgbColor) {
+    if (!color) {
+      return undefined;
+    }
+    return `rgb(${color.r}, ${color.g}, ${color.b})`;
+  }
   public static getAlphaIn255Range(alpha: number): number {
     const defaultAlpha = 0.5;
     if (!alpha) {
@@ -24,4 +33,11 @@ export class ColorHelper {
     const color = ColorHelper.style.global['$kirby-colors'].value[name];
     return color ? color.value : undefined;
   }
+}
+export interface RgbColor {
+  a: number;
+  r: number;
+  g: number;
+  b: number;
+  hex: string;
 }

@@ -3,13 +3,13 @@
   "nativescript": {
     "id": "dk.kirby.design.system",
     "tns-ios": {
-      "version": "5.2.0"
+      "version": "5.4.0"
     },
     "tns-android": {
-      "version": "5.2.0"
+      "version": "5.4.0"
     }
   },
-  "version": "0.0.175",
+  "version": "0.0.184",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -21,12 +21,12 @@
     "lint:fix": "tslint './src/**/*.ts' --fix",
     "e2e": "ng e2e",
     "dist": "ng build --prod --aot --progress false",
-    "android": "tns run android --hmr",
-    "android-debug": "tns debug android --bundle",
-    "ios": "tns run ios --hmr",
-    "ios-debug": "tns debug ios --bundle --device 'iPhone X'",
-    "dist:ios": "tns build ios --bundle --for-device --provision dk.kirby.design.system --copy-to dist/designsystem.ipa",
-    "dist:android": "tns build android --for-device --bundle --copy-to dist/designsystem.apk",
+    "android": "tns run android",
+    "android-debug": "tns debug android",
+    "ios": "tns run ios",
+    "ios-debug": "tns debug ios --device 'iPhone X'",
+    "dist:ios": "tns build ios --for-device --provision dk.kirby.design.system --copy-to dist/designsystem.ipa",
+    "dist:android": "tns build android --for-device --copy-to dist/designsystem.apk",
     "pack-copy-to-dist-folder-watch": "cpx \"src\\kirby\\**\\!(*.spec.ts)\" dist-lib --watch",
     "postinstall": "npm run build-polyfills && npm run transpile:tools",
     "postversion": "git push && git push --tags",
@@ -61,7 +61,7 @@
     "prismjs": "^1.15.0",
     "reflect-metadata": "~0.1.8",
     "rxjs": "^6.3.3",
-    "tns-core-modules": "^5.2.0",
+    "tns-core-modules": "^5.4.0",
     "zone.js": "^0.8.4"
   },
   "devDependencies": {
@@ -86,10 +86,10 @@
     "karma-jasmine-html-reporter": "^0.2.2",
     "karma-junit-reporter": "^1.2.0",
     "karma-spec-reporter": "0.0.32",
-    "nativescript": "^5.3.4",
+    "nativescript": "^5.4.0",
     "nativescript-dev-sass": "^1.7.0",
-    "nativescript-dev-typescript": "^0.8.0",
-    "nativescript-dev-webpack": "^0.21.2",
+    "nativescript-dev-typescript": "^0.10.0",
+    "nativescript-dev-webpack": "^0.24.1",
     "ng-mocks": "^7.7.0",
     "prettier": "^1.15.3",
     "protractor": "~5.3.0",

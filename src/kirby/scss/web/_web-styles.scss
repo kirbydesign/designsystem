@@ -33,6 +33,7 @@
     --background: transparent;
     --width: 100%;
     --height: 100%;
+    position: fixed;
   
     .modal-wrapper {
         pointer-events: none; //Fix clickable backdrop of modal
