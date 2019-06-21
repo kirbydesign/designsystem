@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
 
@@ -10,7 +10,6 @@ declare var require: any;
   styleUrls: ['./calendar-showcase.component.scss'],
 })
 export class CalendarShowcaseComponent {
-  selectValue = 'red';
   exampleHtml: string = require('../../examples/calendar-example/calendar-example.component.html');
   exampleWithCardHtml: string = require('../../examples/calendar-example/calendar-card-example.component.html');
   properties: ShowcaseProperty[] = [
@@ -40,9 +39,4 @@ export class CalendarShowcaseComponent {
       inputValues: ['Date'],
     },
   ];
-
-  selectChanged(event) {
-    console.log('selectChanged:', event.detail);
-    this.selectValue = event.detail.value;
-  }
 }
