@@ -294,14 +294,14 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   public get canNavigateBack(): boolean {
     return (
       !(this.disablePastDates && moment().isSame(this.activeMonth, 'month')) &&
-      !(this.minDate && this.activeMonth.isSame(this.minDate, 'month'))
+      !(this.minDate && this.activeMonth.isSameOrBefore(this.minDate, 'month'))
     );
   }
 
   public get canNavigateForward(): boolean {
     return (
       !(this.disableFutureDates && moment().isSame(this.activeMonth, 'month')) &&
-      !(this.maxDate && this.activeMonth.isSame(this.maxDate, 'month'))
+      !(this.maxDate && this.activeMonth.isSameOrAfter(this.maxDate, 'month'))
     );
   }
 
