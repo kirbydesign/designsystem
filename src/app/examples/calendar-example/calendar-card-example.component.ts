@@ -28,7 +28,7 @@ export class CalendarCardExampleComponent {
     var date8 = new Date();
     date8.setDate(today.getDate() + 35);
 
-    this.disableDatesArray.push(date1, date2, date3, date5, date6, date7, date8);
+    this.disableDatesArray.push(date1, date2, date3, date4, date5, date6, date7, date8);
   }
 
   onDateChange(selectedDate: Date) {
