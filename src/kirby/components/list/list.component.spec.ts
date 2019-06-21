@@ -1,4 +1,6 @@
 import { createTestComponentFactory, Spectator } from '@netbasal/spectator';
+import { MockComponent } from 'ng-mocks';
+import * as ionic from '@ionic/angular';
 
 import { LoadOnDemandEvent } from './list.event';
 import { GroupByPipe } from './pipes/group-by.pipe';
@@ -31,7 +33,16 @@ describe('ListComponent', () => {
 
   const createHost = createTestComponentFactory({
     component: ListComponent,
-    declarations: [ListComponent, GroupByPipe, SpinnerComponent, InfiniteScrollDirective],
+    declarations: [
+      ListComponent,
+      GroupByPipe,
+      SpinnerComponent,
+      InfiniteScrollDirective,
+      MockComponent(ionic.IonList),
+      MockComponent(ionic.IonListHeader),
+      MockComponent(ionic.IonLabel),
+      MockComponent(ionic.IonItem),
+    ],
     providers: [ListHelper, GroupByPipe],
   });
 
@@ -64,50 +75,39 @@ describe('ListComponent', () => {
       expect(spectator.component.isSectionsEnabled).toBeTruthy();
     });
 
-    it('should render one li element for each item, if the list is not sectioned', () => {
+    it('should render one item element for each item, if the list is not sectioned', () => {
       spectator.setInput({
         items: Item.createItems(1, 2, 3),
       });
       runNgOnChanges();
 
-      const liElements = spectator.queryAll('li');
+      const liElements = spectator.queryAll('ion-item');
       expect(liElements.length).toEqual(component.items.length);
-    });
-
-    it('should render one li element for each item and one for each section, if sections are enabled', () => {
-      spectator.setInput({
-        items: Item.createItems(1, 2, 3),
-        getSectionName: (item: Item) => (item.value % 2 === 0 ? 'even' : 'odd'),
-      });
-      runNgOnChanges();
-
-      const liElements = spectator.queryAll('li');
-      expect(liElements.length).toEqual(component.items.length + 2);
     });
   });
 
   describe('divider', () => {
-    it('should set class "divider" on all li elements when showDivider is true', () => {
+    it('should set class "divider" on all items elements when showDivider is true', () => {
       spectator.setInput({
         items: Item.createItems(1, 2, 3),
         showDivider: true,
       });
       runNgOnChanges();
 
-      const liElements = spectator.queryAll('li');
+      const liElements = spectator.queryAll('ion-item');
       liElements.forEach((liElement) => {
         expect(liElement.getAttribute('class')).toContain('divider');
       });
     });
 
-    it('should not set class "divider" on any li elements when showDivider is false', () => {
+    it('should not set class "divider" on any item elements when showDivider is false', () => {
       spectator.setInput({
         items: Item.createItems(1, 2, 3),
         showDivider: false,
       });
       runNgOnChanges();
 
-      const liElements = spectator.queryAll('li');
+      const liElements = spectator.queryAll('ion-item');
       liElements.forEach((liElement) => {
         expect(liElement.getAttribute('class')).not.toContain('divider');
       });

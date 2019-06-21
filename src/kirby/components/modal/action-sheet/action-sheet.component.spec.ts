@@ -2,6 +2,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NavParams } from '@ionic/angular';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { By } from '@angular/platform-browser';
+import { MockComponent } from 'ng-mocks';
+import * as ionic from '@ionic/angular';
 
 import { ActionSheetComponent } from './action-sheet.component';
 import { IModalController } from '../services/modal.controller.interface';
@@ -50,6 +52,10 @@ describe('ActionSheetComponent', () => {
         GroupByPipe,
         SpinnerComponent,
         InfiniteScrollDirective,
+        MockComponent(ionic.IonList),
+        MockComponent(ionic.IonListHeader),
+        MockComponent(ionic.IonLabel),
+        MockComponent(ionic.IonItem),
       ],
       providers: [
         { provide: IModalController, useValue: modalControllerSpy },
