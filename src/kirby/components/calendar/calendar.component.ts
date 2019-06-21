@@ -8,6 +8,8 @@ import {
   EventEmitter,
   OnInit,
   AfterViewInit,
+  OnChanges,
+  SimpleChanges,
   LOCALE_ID,
   Inject,
   NgZone,
@@ -33,13 +35,15 @@ type CalendarDay = {
   styleUrls: ['./calendar.component.scss'],
   providers: [CalendarHelper],
 })
-export class CalendarComponent implements OnInit, AfterViewInit {
+export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   @ViewChild('calendarContainer') calendarContainer: ElementRef;
   @Output() dateChange = new EventEmitter<Date>();
   @Input() disableWeekends = false;
   @Input() disablePastDates = false;
   @Input() disableFutureDates = false;
-  @Input() disableDates: Date[];
+  @Input() disabledDates: Date[];
+  @Input() minDate: Date;
+  @Input() maxDate: Date;
   public month: CalendarCell[][];
   public weekDays: string[];
   private activeMonth: moment.Moment;
@@ -93,6 +97,20 @@ export class CalendarComponent implements OnInit, AfterViewInit {
     );
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (
+      changes.disableWeekends ||
+      changes.disablePastDates ||
+      changes.disableFutureDates ||
+      changes.disabledDates ||
+      changes.minDate ||
+      changes.maxDate
+    ) {
+      this.refreshActiveMonth();
+      this.calendarHelper.update(this.getHelperOptions());
+    }
+  }
+
   private setActiveMonth(date?: Date) {
     if (!this.activeMonth || !this.activeMonth.isSame(date, 'month')) {
       this.activeMonth = moment(date).startOf('month');
@@ -140,9 +158,9 @@ export class CalendarComponent implements OnInit, AfterViewInit {
   private isDisabledDate(date: Date | moment.Moment) {
     let isDisabled = false;
 
-    if (this.disableDates && this.disableDates.length > 0) {
-      this.disableDates.forEach((disableDate) => {
-        if (moment(disableDate).isSame(date, 'day')) {
+    if (this.disabledDates && this.disabledDates.length > 0) {
+      this.disabledDates.forEach((disabledDate) => {
+        if (moment(disabledDate).isSame(date, 'day')) {
           isDisabled = true;
         }
       });
@@ -165,7 +183,7 @@ export class CalendarComponent implements OnInit, AfterViewInit {
       const momentDate = startOfFirstWeek.clone().add(number, 'days');
       const day = this.getCalendarDay(momentDate, today, monthStart);
 
-      const isSelectable = this.isSelectable(day);
+      const isSelectable = this.isSelectable(day, momentDate);
       const isSelected = this.isSameDay(this.selectedDate, momentDate);
       const cell = {
         date: momentDate.date(),
@@ -197,13 +215,15 @@ export class CalendarComponent implements OnInit, AfterViewInit {
     };
   }
 
-  private isSelectable(day: CalendarDay) {
+  private isSelectable(day: CalendarDay, date: moment.Moment) {
     return (
       !day.isDisabled &&
       day.isCurrentMonth &&
       !(this.disableWeekends && day.isWeekend) &&
       !(this.disablePastDates && day.isPast) &&
-      !(this.disableFutureDates && day.isFuture)
+      !(this.disableFutureDates && day.isFuture) &&
+      !(this.minDate && date.isBefore(this.minDate, 'day')) &&
+      !(this.maxDate && date.isAfter(this.maxDate, 'day'))
     );
   }
 
@@ -282,11 +302,17 @@ export class CalendarComponent implements OnInit, AfterViewInit {
   }
 
   public get canNavigateBack(): boolean {
-    return !(this.disablePastDates && moment().isSame(this.activeMonth, 'month'));
+    return (
+      !(this.disablePastDates && moment().isSame(this.activeMonth, 'month')) &&
+      !(this.minDate && this.activeMonth.isSame(this.minDate, 'month'))
+    );
   }
 
   public get canNavigateForward(): boolean {
-    return !(this.disableFutureDates && moment().isSame(this.activeMonth, 'month'));
+    return (
+      !(this.disableFutureDates && moment().isSame(this.activeMonth, 'month')) &&
+      !(this.maxDate && this.activeMonth.isSame(this.maxDate, 'month'))
+    );
   }
 
   private getCell(date: Date) {
