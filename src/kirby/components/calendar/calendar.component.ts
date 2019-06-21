@@ -18,14 +18,14 @@ import { CalendarHelper } from './helpers/calendar.helper';
 import { CalendarOptions } from './helpers/calendar-options.model';
 import { CalendarCell } from './helpers/calendar-cell.model';
 
-type CalendarDay = {
+interface CalendarDay {
   isCurrentMonth: boolean;
   isToday: boolean;
   isWeekend: boolean;
   isPast: boolean;
   isFuture: boolean;
   isDisabled: boolean;
-};
+}
 
 @Component({
   selector: 'kirby-calendar',

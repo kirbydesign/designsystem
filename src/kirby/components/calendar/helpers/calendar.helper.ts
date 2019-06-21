@@ -21,8 +21,8 @@ export class CalendarHelper {
       };
       this.embeddedView = iframe.contentWindow;
 
-      window.addEventListener('message', (evt: MessageEvent) =>
-        this.handleMessageEvent(evt, onDaySelected, onChangeMonth)
+      window.addEventListener('message', (event: MessageEvent) =>
+        this.handleMessageEvent(event, onDaySelected, onChangeMonth)
       );
     }
   }
@@ -65,35 +65,40 @@ export class CalendarHelper {
   }
 
   private handleMessageEvent(
-    evt: MessageEvent,
+    event: MessageEvent,
     onDaySelected: (cell: { isSelectable: boolean; date: number }) => void,
     onChangeMonth: (index: number) => void
   ) {
-    if (this.validateMessage(evt)) {
-      switch (evt.data.type) {
+    if (this.validateMessage(event)) {
+      switch (event.data.type) {
         case 'kirbyCalendarDaySelected':
-          if (this.validateDateSelectedMessage(evt)) {
-            onDaySelected({ isSelectable: true, date: evt.data.day });
+          if (this.validateDateSelectedMessage(event)) {
+            onDaySelected({ isSelectable: true, date: event.data.day });
           }
           break;
         case 'kirbyCalendarChangeMonth':
-          if (this.validateNavigateMonthMessage(evt)) {
-            onChangeMonth(evt.data.index);
+          if (this.validateNavigateMonthMessage(event)) {
+            onChangeMonth(event.data.index);
           }
           break;
       }
     }
   }
 
-  private validateMessage(evt: MessageEvent) {
-    return this.embeddedView === evt.source && evt.type === 'message' && evt.data && evt.data.type;
+  private validateMessage(event: MessageEvent) {
+    return (
+      this.embeddedView === event.source &&
+      event.type === 'message' &&
+      event.data &&
+      event.data.type
+    );
   }
 
-  private validateDateSelectedMessage(evt: MessageEvent) {
-    return evt.data.type === 'kirbyCalendarDaySelected' && evt.data.day;
+  private validateDateSelectedMessage(event: MessageEvent) {
+    return event.data.type === 'kirbyCalendarDaySelected' && event.data.day;
   }
 
-  private validateNavigateMonthMessage(evt: MessageEvent) {
-    return evt.data.type === 'kirbyCalendarChangeMonth' && typeof evt.data.index === 'number';
+  private validateNavigateMonthMessage(event: MessageEvent) {
+    return event.data.type === 'kirbyCalendarChangeMonth' && typeof event.data.index === 'number';
   }
 }
