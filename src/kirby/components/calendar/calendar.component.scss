@@ -85,9 +85,13 @@ table.calendar-table {
 }
 
 .day.past,
-.day.weekend,
-.day.disabled {
-  color: get-color('medium-tint');
+.day.weekend {
+  color: get-color('medium-shade');
+}
+
+.day.disabled,
+.day:not(.selectable) {
+  color: get-color('light-shade');
 }
 
 .day.today {
