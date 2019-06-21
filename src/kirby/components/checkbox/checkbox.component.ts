@@ -10,8 +10,6 @@ import {
   ChangeDetectionStrategy,
 } from '@angular/core';
 
-import { createTestComponentFactory, Spectator } from '@netbasal/spectator';
-
 declare var require: any;
 const style: any = require('sass-extract-loader!./checkbox.component.scss');
 
