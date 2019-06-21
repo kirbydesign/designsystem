@@ -31,8 +31,8 @@ export class CheckboxComponent implements OnInit, OnChanges {
   private readonly SHAPE_INDEX = 0;
   private readonly COLOR_INDEX = 1;
 
-  onChecked(event): void {
-    this.checked = event.value;
+  onChecked(checked: boolean): void {
+    this.checked = checked;
     this.checkedChange.emit(this.checked);
   }
 
