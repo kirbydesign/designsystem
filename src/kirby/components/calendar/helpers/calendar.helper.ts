@@ -1,7 +1,8 @@
-import { ElementRef } from '@angular/core';
+import { ElementRef, Injectable } from '@angular/core';
 
 import { CalendarOptions } from './calendar-options.model';
 
+@Injectable()
 export class CalendarHelper {
   private embeddedView: Window;
   private embeddedViewReady = false;

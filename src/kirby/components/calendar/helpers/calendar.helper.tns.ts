@@ -1,6 +1,4 @@
-// import 'reflect-metadata';
-
-import { ElementRef, NgZone } from '@angular/core';
+import { ElementRef, NgZone, Injectable } from '@angular/core';
 import { WebView, LoadEventData } from 'tns-core-modules/ui/web-view/web-view';
 import { isAndroid, isIOS } from 'tns-core-modules/platform';
 import { WebViewInterface } from 'nativescript-webview-interface';
@@ -11,13 +9,12 @@ import { CalendarOptions } from './calendar-options.model';
 declare const android;
 declare const UIColor;
 
-// declare var zonedCallback: Function;
-
+@Injectable()
 export class CalendarHelper {
   private webViewInterface: WebViewInterface;
   private webViewReady = false;
 
-  // constructor(private zone: NgZone) {}
+  constructor(private zone: NgZone) {}
 
   public init(
     calendarContainer: ElementRef,
@@ -79,11 +76,10 @@ export class CalendarHelper {
     onChangeMonth: (direction: number) => void
   ) {
     this.webViewInterface.on('daySelected', (selectedDay: number) => {
-      // TODO: Run in zone when DI bug regarding NgZone has been fixed:
       // Run in the zone, to make sure Angular data binding is informed of this:
-      // this.zone.run(() => {
-      onDaySelected({ isSelectable: true, date: selectedDay });
-      // });
+      this.zone.run(() => {
+        onDaySelected({ isSelectable: true, date: selectedDay });
+      });
     });
     this.webViewInterface.on('changeMonth', (index: number) => {
       onChangeMonth(index);

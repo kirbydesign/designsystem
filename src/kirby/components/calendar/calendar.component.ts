@@ -1,4 +1,3 @@
-import 'reflect-metadata';
 import {
   Component,
   ViewChild,
@@ -12,7 +11,6 @@ import {
   SimpleChanges,
   LOCALE_ID,
   Inject,
-  NgZone,
 } from '@angular/core';
 import * as moment from 'moment';
 
@@ -71,11 +69,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
     return this.activeMonth.format('YYYY');
   }
 
-  constructor(
-    private calendarHelper: CalendarHelper,
-    @Inject(LOCALE_ID) private locale: string,
-    private zone: NgZone
-  ) {
+  constructor(private calendarHelper: CalendarHelper, @Inject(LOCALE_ID) private locale: string) {
     if (this.locale === 'en-US') {
       this.locale = 'en-GB';
     }
@@ -273,11 +267,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
         .clone()
         .date(newDay.date)
         .toDate();
-      // TODO: Move to helper class when DI bug regarding NgZone has been fixed:
-      // Run in the zone, to make sure Angular data binding is informed of this:
-      this.zone.run(() => {
-        this.selectedDate = selectedDate;
-      });
+      this.selectedDate = selectedDate;
     }
   }
 
