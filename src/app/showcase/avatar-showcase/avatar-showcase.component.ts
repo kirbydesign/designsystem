@@ -21,7 +21,7 @@ export class AvatarShowcaseComponent implements OnInit {
       name: 'size',
       description: 'Sets the size of the button.',
       defaultValue: 'null',
-      inputValues: ['sm', 'md', 'lg'],
+      inputValues: ['small', 'medium', 'large'],
     },
     {
       name: 'altText',
