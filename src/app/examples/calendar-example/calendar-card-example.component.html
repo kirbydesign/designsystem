@@ -3,10 +3,10 @@
         [disableWeekends]="disableWeekends" 
         [disablePastDates]="disablePastDates" 
         [disableFutureDates]="disableFutureDates" 
-        [disabledDates]="disabledDates" 
-        [selectedDate]="selectedDate" 
-        [minDate]="minDate"
-        [maxDate]="maxDate"
+        [disabledDates]="setDisabledDates ? disabledDates : null"
+        [minDate]="setMinDate ? minDate : null"
+        [maxDate]="setMaxDate ? maxDate : null"
+        [selectedDate]="selectedDate"
         (dateChange)="onDateChange($event)">
     </kirby-calendar>
     
