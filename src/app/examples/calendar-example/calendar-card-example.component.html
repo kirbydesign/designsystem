@@ -1,9 +1,12 @@
 <kirby-card>
     <kirby-calendar 
-        [disableWeekends]="true" 
-        [disablePastDates]="true" 
-        [disableDates]="disableDatesArray" 
+        [disableWeekends]="disableWeekends" 
+        [disablePastDates]="disablePastDates" 
+        [disableFutureDates]="disableFutureDates" 
+        [disabledDates]="disabledDates" 
         [selectedDate]="selectedDate" 
+        [minDate]="minDate"
+        [maxDate]="maxDate"
         (dateChange)="onDateChange($event)">
     </kirby-calendar>
     
