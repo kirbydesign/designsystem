@@ -11,6 +11,10 @@ $shadow-mask: 0 -6px 0px 0px get-color('contrast-light');
     box-shadow: $shadow;
   }
 
+  ion-list {
+    contain: inherit;
+  }
+
   .list-ios,
   ion-list-header {
     background-color: transparent;
@@ -91,7 +95,6 @@ $shadow-mask: 0 -6px 0px 0px get-color('contrast-light');
   &.has-sections  {
     .row {
       box-shadow: $shadow-mask, $shadow;
-      margin: 0 2px;
     }
 
     .row.selectable:hover {
@@ -107,7 +110,6 @@ $shadow-mask: 0 -6px 0px 0px get-color('contrast-light');
     .row.last-in-section {
       border-bottom-left-radius: $border-radius;
       border-bottom-right-radius: $border-radius;
-      margin-bottom: 2px;
     }
   }
 }
