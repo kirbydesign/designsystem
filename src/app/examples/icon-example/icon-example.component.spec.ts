@@ -1,10 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { MockComponent, MockDirective } from 'ng-mocks';
 
-import { KirbyModule } from '../../../kirby/kirby.module';
 import { IconExampleComponent } from './icon-example.component';
-import { CUSTOM_FONT_SETTINGS } from '@kirbydesign/designsystem';
+import { CUSTOM_FONT_SETTINGS, IconComponent } from '@kirbydesign/designsystem';
 import { customIconSettings } from '../examples.common';
+import { SizeDirective } from '@kirbydesign/designsystem/directives/size/size.directive';
 
 describe('IconExampleComponent', () => {
   let component: IconExampleComponent;
@@ -12,7 +12,7 @@ describe('IconExampleComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [KirbyModule, RouterTestingModule],
+      imports: [],
       providers: [
         {
           provide: CUSTOM_FONT_SETTINGS,
@@ -20,7 +20,11 @@ describe('IconExampleComponent', () => {
           multi: true,
         },
       ],
-      declarations: [IconExampleComponent],
+      declarations: [
+        IconExampleComponent,
+        MockComponent(IconComponent),
+        MockDirective(SizeDirective),
+      ],
     }).compileComponents();
   }));
 
