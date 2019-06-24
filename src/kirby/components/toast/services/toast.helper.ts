@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 
-import { ToastConfig } from '../config/toast-config';
-import { ThemeColor } from './../../../helpers/theme-color.type';
+import { ToastConfig, MessageType } from '../config/toast-config';
 
 @Injectable()
 export class ToastHelper {
@@ -16,16 +15,16 @@ export class ToastHelper {
       message: config.message,
       position: 'top',
       duration: config.durationInMs ? config.durationInMs : ToastHelper.DURATION_IN_MS,
-      cssClass: this.getCssClass(config.themeColor),
+      cssClass: this.getCssClass(config.messageType),
     });
     toast.present();
     return toast.onDidDismiss();
   }
 
-  private getCssClass(themeColor: ThemeColor): string {
+  private getCssClass(messageType: MessageType): string {
     let cssClass = ToastHelper.CSS_CLASS;
-    if (themeColor) {
-      cssClass += ' ' + themeColor;
+    if (messageType) {
+      cssClass += ' ' + messageType;
     }
     return cssClass;
   }

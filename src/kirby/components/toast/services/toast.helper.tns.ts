@@ -8,14 +8,12 @@ import {
 } from 'nativescript-feedback';
 
 import { ColorHelper } from '../../../helpers/color-helper';
-import { ToastConfig } from '../config/toast-config';
-import { ThemeColor } from '../../../helpers/theme-color.type';
+import { ToastConfig, MessageType } from '../config/toast-config';
 
 @Injectable()
 export class ToastHelper {
   static DURATION_IN_MS = 4000;
-  static COLOR = 'light';
-  static HEX_COLOR = '#edeeee';
+  static COLOR = 'success';
   private feedback: Feedback;
 
   constructor() {
@@ -29,8 +27,8 @@ export class ToastHelper {
         position: FeedbackPosition.Top,
         duration: config.durationInMs ? config.durationInMs : ToastHelper.DURATION_IN_MS,
         type: FeedbackType.Custom,
-        messageColor: this.getTextColor(config.themeColor),
-        backgroundColor: this.getBackgroundColor(config.themeColor),
+        messageColor: this.getTextColor(config.messageType),
+        backgroundColor: this.getBackgroundColor(config.messageType),
         onHide: () => {
           resolve();
         },
@@ -39,19 +37,15 @@ export class ToastHelper {
     });
   }
 
-  private getTextColor(themeColor: ThemeColor): Color {
-    if (themeColor) {
-      let color = ColorHelper.getContrastColor(themeColor);
-      return color ? new Color(color) : new Color(ToastHelper.HEX_COLOR);
-    }
-    return new Color(ToastHelper.HEX_COLOR);
+  private getTextColor(messageType: MessageType): Color {
+    const messageTypeColor = messageType ? messageType : ToastHelper.COLOR;
+    const color = ColorHelper.getContrastColor(messageTypeColor);
+    return new Color(color);
   }
 
-  private getBackgroundColor(themeColor: ThemeColor): Color {
-    if (themeColor) {
-      let color = ColorHelper.getThemeColor(themeColor);
-      return color ? new Color(color.hex) : new Color(ToastHelper.HEX_COLOR);
-    }
-    return new Color(ToastHelper.HEX_COLOR);
+  private getBackgroundColor(messageType: MessageType): Color {
+    const messageTypeColor = messageType ? messageType : ToastHelper.COLOR;
+    const color = ColorHelper.getThemeColor(messageTypeColor);
+    return new Color(color.hex);
   }
 }

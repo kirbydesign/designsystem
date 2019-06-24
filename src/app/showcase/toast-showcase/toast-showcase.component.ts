@@ -18,26 +18,16 @@ export class ToastShowcaseComponent {
       inputValues: ['string'],
     },
     {
+      name: 'messageType',
+      description: '(Optional) Sets which message type the toast should have.',
+      defaultValue: 'success',
+      inputValues: ['success', 'warning', 'danger'],
+    },
+    {
       name: 'durationInMs',
       description: '(Optional) Duration in milliseconds before the toast dismisses automatically.',
       defaultValue: '4000',
       inputValues: ['number'],
-    },
-    {
-      name: 'themeColor',
-      description: '(Optional) Sets which color the toast should use from the theme palette.',
-      defaultValue: 'light',
-      inputValues: [
-        'primary',
-        'secondary',
-        'tertiary',
-        'success',
-        'warning',
-        'danger',
-        'light',
-        'medium',
-        'dark',
-      ],
     },
   ];
 }

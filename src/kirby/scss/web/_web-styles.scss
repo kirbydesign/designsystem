@@ -56,9 +56,9 @@
     position: fixed;
     
     // Set default colors
-    --background: #{get-color('light')};
-    --color: #{get-color('light-contrast')};
-    --button-color: #{get-color('light-contrast')};
+    --background: #{get-color('success')};
+    --color: #{get-color('success-contrast')};
+    --button-color: #{get-color('success-contrast')};
 
     @each $color-name, $color-value in $main-colors {
         &.#{$color-name} {
