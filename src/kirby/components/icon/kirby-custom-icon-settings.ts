@@ -22,7 +22,7 @@ export const kirbyCustomIconSettings: CustomIconSettings = {
     { name: 'filter', svg: 'assets/icons/kirby/filter.svg', unicode: '0xe90f' },
     { name: 'flash-off', svg: 'assets/icons/kirby/flash-off.svg', unicode: '0xe910' },
     { name: 'flash', svg: 'assets/icons/kirby/flash.svg', unicode: '0xe911' },
-    { name: 'fortune', svg: 'assets/icons/kirby/Formue.svg', unicode: '0xe912' },
+    { name: 'moneybag', svg: 'assets/icons/kirby/Formue.svg', unicode: '0xe912' },
     { name: 'help', svg: 'assets/icons/kirby/help.svg', unicode: '0xe913' },
     { name: 'inbox-outline', svg: 'assets/icons/kirby/inbox-outline.svg', unicode: '0xe914' },
     { name: 'inbox', svg: 'assets/icons/kirby/inbox.svg', unicode: '0xe915' },
