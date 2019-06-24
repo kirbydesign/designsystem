@@ -1,11 +1,5 @@
 @import '../../scss/native-imports';
 
 Switch {
-    background-color: #{get-color('primary')};
-
-    @each $color-name, $color-value in $main-colors {
-        &.#{$color-name} {
-            background-color: #{get-color($color-name)};
-        }
-    }
+    background-color: #{get-color('success')};
 }

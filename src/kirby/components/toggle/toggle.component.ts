@@ -12,7 +12,6 @@ import { ThemeColor } from './../../helpers/theme-color.type';
 export class ToggleComponent {
   @Input() checked: boolean = false;
   @Input() disabled: boolean = false;
-  @Input() themeColor?: ThemeColor;
   @Output() change = new EventEmitter<boolean>();
   checkedChange(args: EventData): void {
     const toggle = args.object as Switch;
