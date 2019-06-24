@@ -1,4 +1,3 @@
-
 export interface ToastConfig {
   message: string;
   messageType: MessageType;
