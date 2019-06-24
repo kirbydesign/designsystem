@@ -61,10 +61,12 @@
     --button-color: #{get-color('success-contrast')};
 
     @each $color-name, $color-value in $main-colors {
-        &.#{$color-name} {
-            --background: #{get-color($color-name)};
-            --color: #{get-color($color-name+'-contrast')};
-            --button-color: #{get-color($color-name+'-contrast')};
+        @if ($color-name == 'success' or $color-name == 'warning' or $color-name == 'danger') {
+            &.#{$color-name} {
+                --background: #{get-color($color-name)};
+                --color: #{get-color($color-name+'-contrast')};
+                --button-color: #{get-color($color-name+'-contrast')};
+            }
         }
     }
 }

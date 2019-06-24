@@ -13,7 +13,6 @@ import { ToastConfig, MessageType } from '../config/toast-config';
 @Injectable()
 export class ToastHelper {
   static DURATION_IN_MS = 4000;
-  static COLOR = 'success';
   private feedback: Feedback;
 
   constructor() {
@@ -38,14 +37,12 @@ export class ToastHelper {
   }
 
   private getTextColor(messageType: MessageType): Color {
-    const messageTypeColor = messageType ? messageType : ToastHelper.COLOR;
-    const color = ColorHelper.getContrastColor(messageTypeColor);
+    const color = ColorHelper.getContrastColor(messageType);
     return new Color(color);
   }
 
   private getBackgroundColor(messageType: MessageType): Color {
-    const messageTypeColor = messageType ? messageType : ToastHelper.COLOR;
-    const color = ColorHelper.getThemeColor(messageTypeColor);
+    const color = ColorHelper.getThemeColor(messageType);
     return new Color(color.hex);
   }
 }

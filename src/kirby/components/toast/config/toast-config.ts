@@ -1,7 +1,7 @@
 
 export interface ToastConfig {
   message: string;
-  messageType?: MessageType;
+  messageType: MessageType;
   durationInMs?: number;
 }
 
