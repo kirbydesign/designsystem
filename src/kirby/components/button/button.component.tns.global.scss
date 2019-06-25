@@ -6,6 +6,7 @@ Button[kirby-button] {
   color: get-color('primary-contrast');
   border-radius: 100;
   border-width: 1;
+  android-elevation: 0;
 
   // we default to 'md' size.
   margin: size('xxs');
