@@ -24,6 +24,7 @@ import { CheckboxExampleComponent } from './checkbox-example/checkbox-example.co
 import { SegmentedChipControlExampleComponent } from './segmented-chip-control-example/segmented-chip-control-example.component';
 import { ActionSheetExampleComponent } from './action-sheet-example/action-sheet-example.component';
 import { AlertExampleComponent } from './alert-example/alert-example.component';
+import { ToastExampleComponent } from './toast-example/toast-example.component';
 import { ToggleExampleComponent } from './toggle-example/toggle-example.component';
 
 export const customIconSettings: CustomIconSettings = {
@@ -67,6 +68,7 @@ export const COMPONENT_DECLARATIONS: any[] = [
   ActionSheetExampleComponent,
   CheckboxExampleComponent,
   AlertExampleComponent,
+  ToastExampleComponent,
   ToggleExampleComponent,
 ];
 
