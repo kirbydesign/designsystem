@@ -79,11 +79,11 @@ export const declarations = [
 
 export const providerDeclarations: any[] = [
   ModalController,
-  ToastController,
   // the provider below is used to prevent a cyclic reference problem in our modal components
   { provide: IModalController, useExisting: ModalController },
   ActionSheetHelper,
   ModalHelper,
   AlertHelper,
   ToastHelper,
+  ToastController,
 ];
