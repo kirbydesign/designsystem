@@ -232,7 +232,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
       disabled: day.isDisabled,
     };
     let cssClassString = 'day';
-    for (var key in cssClasses) {
+    for (const key in cssClasses) {
       if (cssClasses[key]) {
         cssClassString += ' ' + key;
       }
@@ -241,7 +241,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   private chunk(array: any[], size: number) {
-    var results = [];
+    const results = [];
     while (array.length) {
       results.push(array.splice(0, size));
     }
