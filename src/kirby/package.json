@@ -26,6 +26,7 @@
   "dependencies": {
     "@ionic/angular": "^4.1.1",
     "highcharts": "7.0.3",
+    "moment": "^2.24.0",
     "nativescript-webview-interface": "^1.4.3",
     "nativescript-windowed-modal": "^5.0.6",
     "nativescript-checkbox": "^3.0.3",
