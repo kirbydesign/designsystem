@@ -21,6 +21,7 @@ import { SegmentedChipControlExampleComponent } from './segmented-chip-control-e
 import { ActionSheetExampleComponent } from './action-sheet-example/action-sheet-example.component';
 import { AlertExampleComponent } from './alert-example/alert-example.component';
 import { ToastExampleComponent } from './toast-example/toast-example.component';
+import { ToggleExampleComponent } from './toggle-example/toggle-example.component';
 
 export const routes: Routes = [
   {
@@ -102,6 +103,10 @@ export const routes: Routes = [
   {
     path: 'toast',
     component: ToastExampleComponent,
+  },
+  {
+    path: 'toggle',
+    component: ToggleExampleComponent,
   },
   {
     path: 'calendar',

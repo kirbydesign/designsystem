@@ -1,0 +1,14 @@
+<StackLayout class="background">
+    <StackLayout orientation="horizontal">
+        <Label text="Unchecked:"></Label>
+        <kirby-toggle></kirby-toggle>
+    </StackLayout>
+    <StackLayout orientation="horizontal">
+        <Label text="Checked:"></Label>
+        <kirby-toggle checked="true" (checkedChange)="onCheckedChange($event)"></kirby-toggle>
+    </StackLayout>
+    <StackLayout orientation="horizontal">
+        <Label text="Disabled:"></Label>
+        <kirby-toggle disabled="true"></kirby-toggle>
+    </StackLayout>
+ </StackLayout>

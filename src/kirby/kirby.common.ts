@@ -41,6 +41,7 @@ import { SizeDirective } from './directives/size/size.directive';
 import { ThemeColorDirective } from './directives/theme-color/theme-color.directive';
 import { ToastController } from './components/toast/services/toast.controller';
 import { ToastHelper } from './components/toast/services/toast.helper';
+import { ToggleComponent } from './components/toggle/toggle.component';
 
 export const declarations = [
   CardComponent,
@@ -77,6 +78,7 @@ export const declarations = [
   BadgeComponent,
   SizeDirective,
   ThemeColorDirective,
+  ToggleComponent,
 ];
 
 export const providerDeclarations: any[] = [

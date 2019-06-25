@@ -25,6 +25,7 @@ import { SegmentedChipControlExampleComponent } from './segmented-chip-control-e
 import { ActionSheetExampleComponent } from './action-sheet-example/action-sheet-example.component';
 import { AlertExampleComponent } from './alert-example/alert-example.component';
 import { ToastExampleComponent } from './toast-example/toast-example.component';
+import { ToggleExampleComponent } from './toggle-example/toggle-example.component';
 
 export const customIconSettings: CustomIconSettings = {
   fontfamily: "'Ionicons', 'ionicons'",
@@ -68,6 +69,7 @@ export const COMPONENT_DECLARATIONS: any[] = [
   CheckboxExampleComponent,
   AlertExampleComponent,
   ToastExampleComponent,
+  ToggleExampleComponent,
 ];
 
 export const PROVIDER_DECLARATIONS: any[] = [

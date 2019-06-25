@@ -24,6 +24,7 @@ import { SegmentedChipControlShowcaseComponent } from './segmented-chip-control-
 import { ActionSheetShowcaseComponent } from './action-sheet-showcase/action-sheet-showcase.component';
 import { AlertShowcaseComponent } from './alert-showcase/alert-showcase.component';
 import { ToastShowcaseComponent } from './toast-showcase/toast-showcase.component';
+import { ToggleShowcaseComponent } from './toggle-showcase/toggle-showcase.component';
 
 export const routes: Routes = [
   {
@@ -114,6 +115,10 @@ export const routes: Routes = [
       {
         path: 'toast',
         component: ToastShowcaseComponent,
+      },
+      {
+        path: 'toggle',
+        component: ToggleShowcaseComponent,
       },
       {
         path: 'calendar',
