@@ -569,7 +569,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
       status: ItemUXStatus.planned,
     },
     code: {
-      version: 0.1,
+      version: 0.5,
       status: ItemCodeStatus.ready,
       cookbookUrl: 'showcase/toggle',
     },
