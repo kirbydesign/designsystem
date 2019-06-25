@@ -24,7 +24,7 @@ export class ToggleShowcaseComponent {
     },
     {
       name: 'checkedChange',
-      description: 'It will emit the selected toggle.',
+      description: 'Emits the checked state of the toggle on change (true|false).',
       defaultValue: '',
       inputValues: ['function'],
     },
