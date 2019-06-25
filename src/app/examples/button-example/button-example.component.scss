@@ -1,0 +1,13 @@
+@import "../../../kirby/scss/web-imports";
+
+:host {
+    kirby-card {
+        margin-bottom: size("m");
+        max-width: size("m");
+        padding: size("m");
+    }
+
+    h2 {
+        margin-top: size("m");
+    }
+}

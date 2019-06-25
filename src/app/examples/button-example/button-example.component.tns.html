@@ -1,10 +1,43 @@
-<StackLayout class="background">
-  <Button kirby-button text="Kirby Button"></Button>
-  <Button kirby-button text="Small Button" size="sm" expand="block"></Button>
-  <Button kirby-button text="Medium Button" size="md" expand="block"></Button>
-  <Button kirby-button text="Large Button" size="lg" expand="block"></Button>
-  <Button kirby-button text="Kirby Block Button" expand="block"></Button>
-  <Button kirby-button text="Primary Button" themeColor="primary"></Button>
-  <Button kirby-button text="Secondary Button" themeColor="secondary"></Button>
-  <Button kirby-button text="Disabled Button" isEnabled="false"></Button>
-</StackLayout>
+<ScrollView>
+    <Stacklayout class="wrapper">
+      <kirby-segmented-control [items]="[{ text: 'Default', id: 'default', checked: true }, { text: 'Attention Lvl', id: 'attention-level' }, { text: 'Destructive', id: 'destructive' }]" (segmentClick)="onSegmentClick($event)">
+      </kirby-segmented-control>
+      <ng-container *ngIf="activeTab === 'default'">
+          <Button kirby-button text="Small Button" size="sm"></Button>
+          <Button kirby-button text="Medium Button" size="md"></Button>
+          <Button kirby-button text="Large Button" size="lg"></Button>
+          <Button kirby-button text="Kirby Block Button" expand="block"></Button>
+          <Button kirby-button text="Disabled Button" isEnabled="false"></Button>   
+      </ng-container>
+      <ng-container *ngIf="activeTab === 'attention-level'">
+          <kirby-card [themeColor]="themeColor" class="card">
+            <Stacklayout>
+              <Button kirby-button attentionLevel="1" text="Attention Level 1"></Button>
+              <Button kirby-button attentionLevel="2" text="Attention Level 2"></Button>
+              <Button kirby-button attentionLevel="3" text="Attention Level 3"></Button>
+              <Button kirby-button attentionLevel="4" text="Attention Level 4"></Button>        
+            </Stacklayout>
+          </kirby-card>
+          <ListPicker #themeColorPicker [items]="[{ text: 'Card color: None', value: '' },
+              { text: 'Card color: Primary', value: 'primary' },
+              { text: 'Card color: Secondary', value: 'secondary' },
+              { text: 'Card color: Tertiary', value: 'tertiary' },
+              { text: 'Card color: Success', value: 'success' },
+              { text: 'Card color: Warning', value: 'warning' },
+              { text: 'Card color: Danger', value: 'danger' },
+              { text: 'Card color: Light', value: 'light' },
+              { text: 'Card color: Medium', value: 'medium' },
+              { text: 'Card color: Dark', value: 'dark' }
+            ]"
+            textField="text"
+            valueField="value"
+           (selectedValueChange)="themeColor = themeColorPicker.selectedValue;"></ListPicker>
+        </ng-container>
+      <ng-container *ngIf="activeTab === 'destructive'">
+          <Button kirby-button attentionLevel="1" isDestructive="true" text="Attention Level 1"></Button>
+          <Button kirby-button attentionLevel="2" isDestructive="true" text="Attention Level 2"></Button>
+          <Button kirby-button attentionLevel="3" isDestructive="true" text="Attention Level 3"></Button>
+          <Button kirby-button attentionLevel="4" isDestructive="true" text="Attention Level 4"></Button>   
+      </ng-container>
+    </Stacklayout>
+</ScrollView>

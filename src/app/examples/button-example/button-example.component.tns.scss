@@ -1,5 +1,27 @@
 @import '../../../kirby/scss/native-imports';
 
-.background {
-    background-color: get-color("base-color")
+.wrapper {
+    background-color: get-color("base-color");
+    padding: 0 10;
+}
+
+Button[kirby-button] {
+    margin-top: 10;
+    width: 180;
+
+    &[expand="block"] {
+        width: auto;
+    }
+}
+
+Label.h3 {
+    margin-top: 30;
+}
+
+.card {
+
+    StackLayout {
+        padding: 20;
+    }
+
 }
