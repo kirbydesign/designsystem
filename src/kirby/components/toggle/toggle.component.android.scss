@@ -1,0 +1,11 @@
+
+@import '../../scss/native-imports';
+
+Switch {
+   color: #{get-color('light')};
+
+   &[checked="true"] {
+       color: #{get-color('success')};
+       background-color: #{get-color('success')};
+   }
+}
