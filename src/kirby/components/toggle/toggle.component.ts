@@ -2,7 +2,6 @@ import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { EventData } from 'tns-core-modules/ui/page/page';
 import { Switch } from 'tns-core-modules/ui/switch/switch';
 
-import { ThemeColor } from './../../helpers/theme-color.type';
 
 @Component({
   selector: 'kirby-toggle',
