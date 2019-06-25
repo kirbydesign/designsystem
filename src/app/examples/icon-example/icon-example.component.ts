@@ -13,5 +13,4 @@ export class IconExampleComponent {
   icons: CustomIcon[] = icons;
   sizes = Sizes;
 
-  defaultIconsCodeExample = `<kirby-icon name="NAME"></kirby-icon>`;
 }
