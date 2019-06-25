@@ -53,6 +53,7 @@ export const iconsCharCodeMap = {
   'log-out': 0xf359,
   'more': 0xf1c9,
   'arrow-back': 0xf27d,
+  'arrow-forward': 0xf287,
   'help': 0xf30b,
   'attach': 0xf28e,
   'search': 0xf375,

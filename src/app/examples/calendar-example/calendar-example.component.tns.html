@@ -1,0 +1,6 @@
+<StackLayout class="wrapper">
+    <kirby-calendar [selectedDate]="selectedDate" (dateChange)="onDateChange($event)">
+    </kirby-calendar>
+    <Label text="Default calendar with selectable past dates & weekends" textWrap="true"></Label>
+    <Label *ngIf="selectedDate" text="Selected Date: {{ selectedDate | date }}"></Label>
+</StackLayout>

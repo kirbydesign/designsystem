@@ -29,6 +29,8 @@
               "src/favicon.ico",
               "src/assets",
               "src/kirby/polyfills",
+              "src/kirby/components/calendar/calendar.webview.html",
+              "src/kirby/components/calendar/calendar.webview.css",
               {
                 "glob": "**/*.svg",
                 "input": "node_modules/ionicons/dist/ionicons/svg",
