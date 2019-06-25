@@ -1,11 +1,9 @@
 @import '../../scss/web-imports';
 
 :host {
+  --kirby-button-background-color: transparent;
+  --kirby-button-border-color: transparent;
   --kirby-button-border-radius: 2rem;
-  --kirby-button-background-color: #{get-color('primary')};
-  --kirby-button-border-color: #{get-color('primary')};
-  --kirby-button-color: #{get-color('primary-contrast')};
-
   background-color: var(--kirby-button-background-color);
   border-radius: var(--kirby-button-border-radius);
   border: 1px solid var(--kirby-button-border-color);
@@ -31,21 +29,51 @@
     height: size('xxl');
   }
 
-  &[expand='block'] {
-    display: block;
-    width: 100%;
-  }
-
-  &.primary {
+  &.attention-level1 {
     --kirby-button-background-color:#{get-color('primary')};
     --kirby-button-border-color: #{get-color('primary')};
     --kirby-button-color: #{get-color('primary-contrast')};
+  
+    &.destructive {
+      --kirby-button-background-color:#{get-color('danger')};
+      --kirby-button-border-color: #{get-color('danger')};
+      --kirby-button-color: #{get-color('danger-contrast')};
+    }
   }
 
-  &.secondary {
-    --kirby-button-background-color: #{get-color('contrast-light')};
+  &.attention-level2 {
+    --kirby-button-background-color:#{get-color('contrast-light')};
     --kirby-button-border-color: #{get-color('contrast-light')};
     --kirby-button-color: #{get-color('contrast-dark')};
+
+    &.destructive {
+      --kirby-button-background-color:#{get-color('light')};
+      --kirby-button-border-color: #{get-color('light')};
+      --kirby-button-color: #{get-color('danger')};
+    }
+  }
+
+  &.attention-level3 {
+    --kirby-button-border-color: #{get-color('medium')};
+    --kirby-button-color: #{get-color('medium-contrast')};
+
+    &.destructive {
+      --kirby-button-border-color: #{get-color('medium')};
+      --kirby-button-color: #{get-color('danger')};
+    }
+  }
+
+  &.attention-level4 {
+    --kirby-button-color: #{get-color('primary-contrast')};
+
+    &.destructive {
+      --kirby-button-color: #{get-color('danger')};
+    }
+  }
+
+  &[expand='block'] {
+    display: block;
+    width: 100%;
   }
 
   &:hover,
@@ -54,9 +82,47 @@
   }
 
   &:disabled {
-    background-color: var(--kirby-light-tint);
-    border-color: var(--kirby-light-tint);
+    background-color: get-color('light-tint');
+    border-color: get-color('light-tint');
     pointer-events: none;
   }
 
+  :host-context(.default).attention-level2 {
+    --kirby-button-border-color: #{get-color('light')};
+    --kirby-button-background-color: #{get-color('light')};
+    --kirby-button-color: #{get-color('light-contrast')};
+  }
+  
+  :host-context(.primary).attention-level1,
+  :host-context(.secondary).attention-level1,
+  :host-context(.tertiary).attention-level1,
+  :host-context(.success).attention-level1,
+  :host-context(.warning).attention-level1,
+  :host-context(.danger).attention-level1 {
+    --kirby-button-background-color: #{get-color('contrast-light')};
+    --kirby-button-border-color: #{get-color('contrast-light')};
+    --kirby-button-color: #{get-color('contrast-dark')};
+  }
+  
+  :host-context(.secondary).attention-level3,
+  :host-context(.tertiary).attention-level3,
+  :host-context(.dark).attention-level3 {
+    --kirby-button-border-color: #{get-color('contrast-light')};
+    --kirby-button-color: #{get-color('contrast-light')};
+  }
+  
+  :host-context(.primary).attention-level3,
+  :host-context(.success).attention-level3,
+  :host-context(.warning).attention-level3,
+  :host-context(.danger).attention-level3,
+  :host-context(.medium).attention-level3 {
+    --kirby-button-border-color: #{get-color('contrast-dark')};
+    --kirby-button-color: #{get-color('contrast-dark')};
+  }
+  
+  :host-context(.secondary).attention-level4,
+  :host-context(.tertiary).attention-level4,
+  :host-context(.dark).attention-level4 {
+    --kirby-button-color: #{get-color('contrast-light')};
+  }
 }

@@ -27,10 +27,10 @@ describe('CheckboxComponent', () => {
     expect(spectator.component).toBeTruthy();
   });
 
-  describe('function: onChecked', () => {
+  describe('event: checkedChange', () => {
     it('should emit true', () => {
       spyOn(spectator.component.checkedChange, 'emit');
-      const change = { value: true };
+      const change = true;
 
       spectator.component.onChecked(change);
 
@@ -40,7 +40,7 @@ describe('CheckboxComponent', () => {
 
     it('should emit false', () => {
       spyOn(spectator.component.checkedChange, 'emit');
-      const change = { value: false };
+      const change = false;
 
       spectator.component.onChecked(change);
 
