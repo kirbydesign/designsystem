@@ -24,6 +24,7 @@ import { CheckboxShowcaseComponent } from './checkbox-showcase/checkbox-showcase
 import { SegmentedChipControlShowcaseComponent } from './segmented-chip-control-showcase/segmented-chip-control-showcase.component';
 import { ActionSheetShowcaseComponent } from './action-sheet-showcase/action-sheet-showcase.component';
 import { AlertShowcaseComponent } from './alert-showcase/alert-showcase.component';
+import { ToastShowcaseComponent } from './toast-showcase/toast-showcase.component';
 
 export const COMPONENT_IMPORTS: any[] = [ExamplesModule, ShowcaseRoutingModule];
 
@@ -51,6 +52,7 @@ export const COMPONENT_EXPORTS: any[] = [
   ActionSheetShowcaseComponent,
   CheckboxShowcaseComponent,
   AlertShowcaseComponent,
+  ToastShowcaseComponent,
 ];
 
 export const COMPONENT_DECLARATIONS: any[] = [...COMPONENT_EXPORTS, ShowcaseComponent];
