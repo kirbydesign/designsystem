@@ -14,6 +14,8 @@ import { SegmentedControlExampleComponent } from './segmented-control-example/se
 import { ChipExampleComponent } from './chip-example/chip-example.component';
 import { BadgeExampleComponent } from './badge-example/badge-example.component';
 import { IconExampleComponent } from './icon-example/icon-example.component';
+import { CalendarExampleComponent } from './calendar-example/calendar-example.component';
+import { CalendarCardExampleComponent } from './calendar-example/calendar-card-example.component';
 import { CheckboxExampleComponent } from './checkbox-example/checkbox-example.component';
 import { SegmentedChipControlExampleComponent } from './segmented-chip-control-example/segmented-chip-control-example.component';
 import { ActionSheetExampleComponent } from './action-sheet-example/action-sheet-example.component';
@@ -95,5 +97,13 @@ export const routes: Routes = [
   {
     path: 'checkbox',
     component: CheckboxExampleComponent,
+  },
+  {
+    path: 'calendar',
+    component: CalendarExampleComponent,
+  },
+  {
+    path: 'calendar-card',
+    component: CalendarCardExampleComponent,
   },
 ];
