@@ -1,11 +1,12 @@
 @import '../../scss/native-imports';
 
 Button[kirby-button] {
-  color: get-color('primary-contrast');
   background-color: get-color('primary');
   border-color: get-color('primary');
+  color: get-color('primary-contrast');
   border-radius: 100;
   border-width: 1;
+  android-elevation: 0;
 
   // we default to 'md' size.
   margin: size('xxs');
@@ -24,16 +25,96 @@ Button[kirby-button] {
     font-size: font-size('s');
     height: size('xxl');
   }
-  
-  &.secondary {
-    color: get-color('contrast-dark');
+
+  &.attention-level1 {
+    background-color: get-color('primary');
+    border-color: get-color('primary');
+    color: get-color('primary-contrast');
+      
+    &.destructive {
+      background-color: get-color('danger');
+      border-color: get-color('danger');
+      color: get-color('danger-contrast');
+    }
+  }
+
+  &.attention-level2 {
     background-color: get-color('contrast-light');
     border-color: get-color('contrast-light');
+    color: get-color('contrast-dark');
+
+    &.destructive {
+      background-color: get-color('light');
+      border-color: get-color('light');
+      color: get-color('danger');
+    }
+  }
+
+  &.attention-level3 {
+    background-color: transparent;
+    border-color: get-color('medium');
+    color: get-color('medium-contrast');
+
+    &.destructive {
+      background-color: transparent;
+      border-color: get-color('medium');
+      color: get-color('danger');
+    }
+  }
+
+  &.attention-level4 {
+    background-color: transparent;
+    border-color: transparent;
+    color: get-color('primary-contrast');
+
+    &.destructive {
+      background-color: transparent;
+      border-color: transparent;
+      color: get-color('danger');
+    }
   }
 
   &[isEnabled=false] {
     background-color: get-color('light-tint');
     border-color: get-color('light-tint');
   }
+}
 
+.default Button.attention-level2 {
+  background-color: get-color('light');
+  border-color: get-color('light');
+  color: get-color('light-contrast');
+}
+
+.primary Button.attention-level1,
+.secondary Button.attention-level1,
+.tertiary Button.attention-level1,
+.success Button.attention-level1,
+.warning Button.attention-level1,
+.danger Button.attention-level1 {
+  background-color: get-color('contrast-light');
+  border-color: get-color('contrast-light');
+  color: get-color('contrast-dark');
+}
+
+.secondary Button.attention-level3,
+.tertiary Button.attention-level3,
+.dark Button.attention-level3 {
+  border-color: get-color('contrast-light');
+  color: get-color('contrast-light');
+}
+
+.primary Button.attention-level3,
+.success Button.attention-level3,
+.warning Button.attention-level3,
+.danger Button.attention-level3,
+.medium Button.attention-level3 {
+  border-color: get-color('contrast-dark');
+  color: get-color('contrast-dark');
+}
+
+.secondary Button.attention-level4,
+.tertiary Button.attention-level4,
+.dark Button.attention-level4 {
+  color: get-color('contrast-light');
 }
