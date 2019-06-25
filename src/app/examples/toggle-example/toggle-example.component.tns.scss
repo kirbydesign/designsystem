@@ -1,5 +1,14 @@
-.toggle-example {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+@import '../../../kirby/scss/native-imports';
+
+.background {
+    background-color: get-color("base-color");
+    padding: size('s');
+
+    StackLayout {
+        margin-bottom: size('s');
+
+        Label {
+            margin-right: size('xs');
+        }
+    }
 }
