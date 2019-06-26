@@ -6,6 +6,9 @@ export { ListFlexItemComponent } from './components/list/list-flex-item/list-fle
 export { ListHeaderComponent } from './components/list/list-header/list-header.component';
 export { ListItemComponent } from './components/list/list-item/list-item.component';
 export {
+  ListItemSlidingComponent,
+} from './components/list/list-item-sliding/list-item-sliding.component';
+export {
   ListSectionHeaderComponent,
 } from './components/list/list-section-header/list-section-header.component';
 export { ListFlexItemDirective } from './components/list/list.directive';

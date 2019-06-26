@@ -10,35 +10,47 @@
           <ion-label class="kirby-text-small">{{ section.name }}</ion-label>
         </ion-list-header>
 
-        <ion-item *ngFor="let item of section.items; let idx = index;" 
-          [class.last-in-section]="idx === section.items.length - 1"
-          (click)="onItemSelect(item)"
-          [attr.role]="isSelectable ? 'button' : null"
-          [class.selectable]="isSelectable"
-          [class.divider]="showDivider"
-          tabindex="0"
-          class="row"
-          keyHandler>
+        <kirby-list-item-sliding 
+          [isSlidingEnabled]="isSlidingEnabled" 
+          *ngFor="let item of section.items; let idx = index;"
+          class="row"> 
 
-        <ng-container *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }"></ng-container>
-        <ng-container *ngTemplateOutlet="listFlexItemTemplate; context: { $implicit: item }"></ng-container>
-      </ion-item>
+          <ion-item
+            [class.last-in-section]="idx === section.items.length - 1"
+            (click)="onItemSelect(item)"
+            [attr.role]="isSelectable ? 'button' : null"
+            [class.selectable]="isSelectable"
+            [class.divider]="showDivider"
+            tabindex="0"
+            class="row"
+            keyHandler>
+
+            <ng-container *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }"></ng-container>
+            <ng-container *ngTemplateOutlet="listFlexItemTemplate; context: { $implicit: item }"></ng-container>
+          </ion-item>
+        </kirby-list-item-sliding>
     </div>
   </div>
 
   <ng-template #normalList>
-    <ion-item *ngFor="let item of items"
-      (click)="onItemSelect(item)"
-      [class.selectable]="isSelectable"
-      [class.divider]="showDivider"
-      [attr.role]="isSelectable ? 'button' : null"
-      tabindex="0" 
-      class="row"
-      keyHandler>
+      <kirby-list-item-sliding 
+        [isSlidingEnabled]="isSlidingEnabled" 
+        *ngFor="let item of items"
+        class="row">
 
-      <ng-container *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }"></ng-container>
-      <ng-container *ngTemplateOutlet="listFlexItemTemplate; context: { $implicit: item }"></ng-container>
-    </ion-item>
+        <ion-item
+          (click)="onItemSelect(item)"
+          [attr.role]="isSelectable ? 'button' : null"
+          [class.selectable]="isSelectable"
+          [class.divider]="showDivider"
+          tabindex="0" 
+          class="row"
+          keyHandler>
+  
+          <ng-container *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }"></ng-container>
+          <ng-container *ngTemplateOutlet="listFlexItemTemplate; context: { $implicit: item }"></ng-container>
+        </ion-item>
+      </kirby-list-item-sliding>
   </ng-template>
 
   <ion-item *ngIf="isLoading" class="loading">

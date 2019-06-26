@@ -17,6 +17,7 @@ import {
 import { ComponentLoaderDirective } from './components/shared/component-loader.directive';
 import { ChartComponent } from './components/chart/chart.component';
 import { ListItemComponent } from './components/list/list-item/list-item.component';
+import { ListItemSlidingComponent } from './components/list/list-item-sliding/list-item-sliding.component';
 import { ListFlexItemComponent } from './components/list/list-flex-item/list-flex-item.component';
 import { ListSectionHeaderComponent } from './components/list/list-section-header/list-section-header.component';
 import { ListHeaderComponent } from './components/list/list-header/list-header.component';
@@ -50,6 +51,7 @@ export const declarations = [
   ListItemDirective,
   ListFlexItemDirective,
   ListItemComponent,
+  ListItemSlidingComponent,
   ListFlexItemComponent,
   ListCellComponent,
   ListCellLineComponent,

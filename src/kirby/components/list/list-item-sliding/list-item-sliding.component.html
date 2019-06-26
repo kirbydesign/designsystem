@@ -1,0 +1,22 @@
+<ion-item-sliding mode="ios">
+  <!-- Left side sliding items -->
+  <div *ngIf="isSlidingEnabled">
+    <ion-item-options side="start">
+      <div *ngFor="let leftItem of leftItems;">
+        <ion-item-option color="warning">{{ leftItem }}</ion-item-option>
+      </div>
+    </ion-item-options>
+  </div>
+
+  <!-- Item content -->
+  <ng-content></ng-content>
+
+  <!-- Right side sliding items -->
+  <div *ngIf="isSlidingEnabled">
+    <ion-item-options side="end">
+      <div *ngFor="let rightItem of rightItems;">
+        <ion-item-option color="warning">{{ rightItem }}</ion-item-option>
+      </div>
+    </ion-item-options>
+  </div>
+</ion-item-sliding>

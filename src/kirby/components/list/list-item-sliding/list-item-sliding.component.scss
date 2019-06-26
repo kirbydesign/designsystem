@@ -1,0 +1,10 @@
+@import '../../../scss/web-imports';
+
+:host {
+    display: block;
+    background-color: get-color('base-color');
+
+    ion-item-sliding {
+        border-radius: inherit;
+    }
+}
