@@ -2,9 +2,12 @@ declare var require: any;
 export class ColorHelper {
   static style: any = require('sass-extract-loader!./color-helper.scss');
 
-  public static getThemeColor(name: string): RgbColor {
-    const color = ColorHelper.style.global['$kirby-colors'].value[name];
-    return color ? color.value : undefined;
+  public static getThemeColor(name: string) {
+    return ColorHelper.getColor(name);
+  }
+
+  public static getContrastColor(name: string) {
+    return ColorHelper.getColor(name + '-contrast');
   }
 
   public static getThemeColorRgbString(name: string) {
@@ -30,6 +33,11 @@ export class ColorHelper {
     } else {
       return alpha * 25500;
     }
+  }
+
+  private static getColor(name: string) {
+    const color = ColorHelper.style.global['$kirby-colors'].value[name];
+    return color ? color.value : undefined;
   }
 }
 export interface RgbColor {

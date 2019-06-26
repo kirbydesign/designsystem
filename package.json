@@ -9,7 +9,7 @@
       "version": "5.4.0"
     }
   },
-  "version": "0.0.189",
+  "version": "0.0.192",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -52,6 +52,7 @@
     "moment": "^2.24.0",
     "nativescript-angular": "^7.2.1",
     "nativescript-checkbox": "^3.0.3",
+    "nativescript-feedback": "^1.3.9",
     "nativescript-orientation": "^2.2.1",
     "nativescript-platform-css": "^1.6.6",
     "nativescript-theme-core": "^1.0.4",
