@@ -42,9 +42,13 @@
     </ng-template>
 
     <!-- FOOTER -->
-    <ng-template tkListViewFooter *ngIf="!isLoadOnDemandEnabled && noMoreItemsText">
+    <ng-template tkListViewFooter *ngIf="!isLoadOnDemandEnabled && noMoreItemsText && !listFooterTemplate">
       <Label class="footer" text="{{noMoreItemsText}}"></Label>
     </ng-template>
+    <ng-template tkListViewFooter *ngIf="listFooterTemplate">
+      <ng-container *ngTemplateOutlet="listFooterTemplate"></ng-container>
+    </ng-template>
+    
 
   </RadListView>
 </GridLayout>
