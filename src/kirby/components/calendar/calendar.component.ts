@@ -79,7 +79,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
 
   ngOnInit() {
     this.weekDays = this.getWeekDays();
-    this.setActiveMonth();
+    this.setActiveMonth(this.selectedDate);
   }
 
   ngAfterViewInit() {
