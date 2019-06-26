@@ -8,6 +8,36 @@ import { Component, Input } from '@angular/core';
 export class ListItemSlidingComponent {
   @Input() isSlidingEnabled: boolean;
 
-  leftItems = ['Share', 'Unread', 'Archive'];
-  rightItems = ['Undo', 'Delete'];
+  leftItems: SlidingItemProperty[] = [
+    {
+      name: 'Share',
+      icon: 'share',
+      color: 'secondary',
+    },
+    {
+      name: 'Delete',
+      icon: 'trash',
+      color: 'primary',
+    },
+  ];
+  rightItems: SlidingItemProperty[] = [
+    {
+      icon: 'undo',
+      color: 'danger',
+    },
+    {
+      name: 'Archive',
+      color: 'warning',
+    },
+  ];
+
+  onClick(item: SlidingItemProperty) {
+    console.log(`Sliding item selection: ${JSON.stringify(item)}`);
+  }
+}
+
+interface SlidingItemProperty {
+  name?: string;
+  icon?: string;
+  color: string;
 }

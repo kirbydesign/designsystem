@@ -13,6 +13,7 @@
         <kirby-list-item-sliding 
           [isSlidingEnabled]="isSlidingEnabled" 
           *ngFor="let item of section.items; let idx = index;"
+          [class.last-in-section]="idx === section.items.length - 1"
           class="row"> 
 
           <ion-item

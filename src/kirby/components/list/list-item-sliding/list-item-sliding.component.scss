@@ -7,4 +7,17 @@
     ion-item-sliding {
         border-radius: inherit;
     }
+
+    ion-item-option {
+        display: flex;
+        height: 100%;
+        min-width: 75px;
+
+        @each $color-name, $color-value in $main-colors {
+            &.#{$color-name} {
+                --background: #{get-color($color-name)};
+                --color: #{get-color($color-name+'-contrast')};
+            }
+        }
+    }
 }
