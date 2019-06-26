@@ -1,18 +1,13 @@
-<kirby-list [items]="items"
-        shape="rounded">
-        <StackLayout *kirbyListHeader>
-            <Label text="This is the header" textWrap="true" class="header"></Label>
-        </StackLayout>
+<kirby-list [items]="items">
+    <StackLayout *kirbyListHeader>
+        <Label text="This is the header" textWrap="true" class="header"></Label>
+    </StackLayout>
 
-  <kirby-list-flex-item *kirbyListFlexItem="let item">
-    <kirby-list-cell>
-        <GridLayout columns="*" rows="auto">
-          <kirby-list-cell-line col="0" row="0" [primary]="true" [text]="item.title"></kirby-list-cell-line>
-        </GridLayout>
-      </kirby-list-cell>
-</kirby-list-flex-item>
+    <StackLayout *kirbyListItem="let item">
+        <Label [text]="item.title"></Label>
+    </StackLayout>
 
-<StackLayout *kirbyListFooter>
-    <Label text="This is the footer" textWrap="true" class="header"></Label>
-</StackLayout>
+    <StackLayout *kirbyListFooter>
+        <Label text="This is the footer" textWrap="true" class="footer"></Label>
+    </StackLayout>
 </kirby-list>
