@@ -2,8 +2,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MockComponent, MockDirective } from 'ng-mocks';
 
 import { IconExampleComponent } from './icon-example.component';
-import { CUSTOM_FONT_SETTINGS, IconComponent } from '@kirbydesign/designsystem';
-import { customIconSettings } from '../examples.common';
+import { ICON_SETTINGS, IconComponent } from '@kirbydesign/designsystem';
+import { iconSettings } from '../examples.common';
 import { SizeDirective } from '@kirbydesign/designsystem/directives/size/size.directive';
 
 describe('IconExampleComponent', () => {
@@ -15,8 +15,8 @@ describe('IconExampleComponent', () => {
       imports: [],
       providers: [
         {
-          provide: CUSTOM_FONT_SETTINGS,
-          useValue: customIconSettings,
+          provide: ICON_SETTINGS,
+          useValue: iconSettings,
           multi: true,
         },
       ],

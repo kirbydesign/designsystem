@@ -1,7 +1,7 @@
-import { CustomIconSettings } from '@kirbydesign/designsystem/components/icon/custom-icon-settings';
+import { IconSettings } from '@kirbydesign/designsystem/components/icon/icon-settings';
 
 // tslint:disable:prettier
-export const kirbyCustomIconSettings: CustomIconSettings = {
+export const kirbyIconSettings: IconSettings = {
   fontfamily: 'kirby',
   icons: [
     { name: 'accounts-outline', svg: 'assets/icons/kirby/accounts-outline.svg', unicode: '0xe900' },

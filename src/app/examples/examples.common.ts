@@ -1,4 +1,4 @@
-import { CustomIconSettings, CUSTOM_FONT_SETTINGS } from '@kirbydesign/designsystem';
+import { IconSettings, ICON_SETTINGS } from '@kirbydesign/designsystem';
 
 import { AvatarExampleComponent } from './avatar-example/avatar-example.component';
 import { ButtonExampleComponent } from './button-example/button-example.component';
@@ -23,7 +23,7 @@ import { SegmentedChipControlExampleComponent } from './segmented-chip-control-e
 import { ActionSheetExampleComponent } from './action-sheet-example/action-sheet-example.component';
 import { AlertExampleComponent } from './alert-example/alert-example.component';
 
-export const customIconSettings: CustomIconSettings = {
+export const iconSettings: IconSettings = {
   fontfamily: "'Ionicons', 'ionicons'",
   icons: [
     {
@@ -64,6 +64,4 @@ export const COMPONENT_DECLARATIONS: any[] = [
   AlertExampleComponent,
 ];
 
-export const PROVIDER_DECLARATIONS: any[] = [
-  { provide: CUSTOM_FONT_SETTINGS, useValue: customIconSettings },
-];
+export const PROVIDER_DECLARATIONS: any[] = [{ provide: ICON_SETTINGS, useValue: iconSettings }];
