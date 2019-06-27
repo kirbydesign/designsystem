@@ -28,15 +28,15 @@ export interface SassColor {
   value: {
     hex: string;
   };
-  tint?: {
+  tint: {
     name: string;
     hex: string;
   };
-  shade?: {
+  shade: {
     name: string;
     hex: string;
   };
-  contrast?: {
+  contrast: {
     name: string;
     hex: string;
   };
