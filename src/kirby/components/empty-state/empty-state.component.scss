@@ -1,0 +1,43 @@
+@import "../../../kirby/scss/web-imports";
+
+article {
+  width: 330px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+kirby-icon {
+  margin: auto;
+}
+
+h3,p {
+  margin: 0px;
+}
+
+button {
+  display: block;
+  margin: 0 auto;
+}
+
+kirby-icon + * {
+  margin-top: size('m');
+}
+
+kirby-icon + button {
+  margin-top: size('s');
+}
+
+h3 + * {
+  margin-top: size('s');
+}
+
+h3 + p {
+  margin-top: size('xs');
+}
+
+p + * {
+  margin-top: size('s');
+}
