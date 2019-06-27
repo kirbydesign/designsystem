@@ -19,3 +19,8 @@ export class ListHeaderDirective {}
   selector: '[kirbyListSectionHeader]',
 })
 export class ListSectionHeaderDirective {}
+
+@Directive({
+  selector: '[kirbyListFooter]',
+})
+export class ListFooterDirective {}
