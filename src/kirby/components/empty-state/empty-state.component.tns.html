@@ -1,1 +1,8 @@
-<Button text="empty-state works!" class="btn btn-primary"></Button>
+<FlexboxLayout flexDirection="column" justifyContent="space-around">
+  <StackLayout class="box" alignSelf="center">
+    <kirby-icon *ngIf="iconName" [name]="iconName" size="lg" class="icon"></kirby-icon>
+    <Label *ngIf="title" class="kirby-text-normal-bold title" [text]="title"></Label>
+    <Label *ngIf="text" class="kirby-text-normal message" [text]="text" textWrap="true"></Label>
+    <Button kirby-button *ngIf="buttonText" [text]="buttonText"></Button>
+  </StackLayout>
+</FlexboxLayout>

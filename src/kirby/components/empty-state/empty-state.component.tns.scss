@@ -1,1 +1,19 @@
-/* Add mobile styles for the component here.  */
+@import "../../scss/native-imports";
+
+.box {
+  width: 88%;
+  text-align: center;
+}
+
+.kirby-icon + * {
+  margin-top: size('m');
+}
+
+.title + .message {
+  margin-top: size('xs');
+}
+
+.title + Button,
+.message + Button {
+  margin-top: size('m');
+}
