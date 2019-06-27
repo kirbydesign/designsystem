@@ -52,3 +52,7 @@ src/kirby/polyfills
 
 # ts-lint
 /tools/tslint-rules/dist
+
+
+# Calendar WebView
+src/kirby/components/calendar/calendar.webview.css
