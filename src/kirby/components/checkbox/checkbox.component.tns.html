@@ -1,7 +1,3 @@
-<ng-container>
-  <GridLayout rows="auto" columns="auto" [ngClass]="size">
-    <Checkbox [checked]="checked" [fillColor]="nativeColor" [boxType]="shape" (checkedChange)="onChecked($event)"
-      [onTintColor]="nativeColor" onCheckColor="white">
-    </Checkbox>
-  </GridLayout>
-</ng-container>
+<Checkbox [checked]="checked" [fillColor]="nativeColor" [boxType]="shape" (checkedChange)="onChecked($event.value)"
+  [onTintColor]="nativeColor" onCheckColor="white">
+</Checkbox>

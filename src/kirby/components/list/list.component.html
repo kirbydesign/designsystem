@@ -7,7 +7,7 @@
 <ul kirbyInfiniteScroll (scrollEnd)="onLoadOnDemand()" [disabled]="!isLoadOnDemandEnabled">
   <ng-container *ngIf="isSectionsEnabled; else normalList">
     <ng-container *ngFor="let section of groupedItems">
-      <li class="section-header" [ngClass]="{'no-section-header-styling': noSectionHeaderStyling}">
+      <li class="section-header">
         <ng-container
           *ngTemplateOutlet="
             sectionHeaderTemplate;
@@ -20,7 +20,6 @@
           [attr.role]="isSelectable ? 'button' : null"
           [class.selectable]="isSelectable"
           [class.divider]="showDivider"
-          [ngClass]="{'no-row-styling': noRowStyling, 'section-shadow': sectionShadow}"
           tabindex="0" class="row">
         <!-- TODO remove container when the kirbyListItem is no longer in use -->
         <ng-container
@@ -50,10 +49,13 @@
     </li>
   </ng-template>
 
-  <li *ngIf="isLoading">
+  <li *ngIf="isLoading" class="loading">
       <div class="extending"><kirby-spinner></kirby-spinner></div>
   </li>
-  <li *ngIf="!isLoadOnDemandEnabled && noMoreItemsText">
+  <li *ngIf="!isLoadOnDemandEnabled && noMoreItemsText" class="no-more-items">
     <span class="extending">{{noMoreItemsText}}</span>
+  </li>
+  <li *ngIf="listFooterTemplate">
+    <ng-container *ngTemplateOutlet="listFooterTemplate"></ng-container>
   </li>
 </ul>
