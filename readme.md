@@ -27,6 +27,7 @@ The Kirby Cookbook, containing samples, status of components etc. can be accesse
   * [Typescript Configuration](#typescript-configuration)
   * [NativeScript Webpack Configuration](#nativescript-webpack-configuration)
   * [Ionic](#ionic)
+  * [Icons](#icons)
 * [NativeScript-Only Components](#nativescript-only-components)
 * [Polyfills](#polyfills)
 * [Chart Components](#chart-components)
@@ -87,8 +88,8 @@ The Kirby web components are build on top of [Ionic](https://ionicframework.com/
 ```bash
 npm install @ionic/angular
 ```
-#### Ionicons
-Ionic comes bundled with [Ionicons](https://ionicons.com/). Make sure the `.svg` files used by Ionic are copied to your output folder by adding the following to `build > options > assets` in `angular.json`:
+### Icons
+Kirby comes bundled with a default set of icons . Make sure the `.svg` files used by Kirby are copied to your output folder by adding the following to `build > options > assets` in `angular.json`:
 ```json
 {
   ...
@@ -98,8 +99,8 @@ Ionic comes bundled with [Ionicons](https://ionicons.com/). Make sure the `.svg`
         ...
         {
           "glob": "**/*.svg",
-          "input": "node_modules/ionicons/dist/ionicons/svg",
-          "output": "./svg"
+          "input": "node_modules/@kirbydesign/designsystem/icons/svg",
+          "output": "./kirby/icons/svg"
         }
         ...
       ],
@@ -108,12 +109,12 @@ Ionic comes bundled with [Ionicons](https://ionicons.com/). Make sure the `.svg`
 }
 ```
 
-As the native platforms not support `.svg` files, the `ionicons.ttf` file will have to be copied to your `fonts` folder. This is done by adding the following line to your `webpack.config.js` file:
+As the native platforms do not support `.svg` files, the `kirby.ttf` file will have to be copied to your `fonts` folder. This is done by adding the following line to your `webpack.config.js` file:
 
 ```json
 new CopyWebpackPlugin([
   ...
-  { "from": "../node_modules/ionicons/dist/fonts/ionicons.ttf", "to": "fonts" },
+  { "from": "../node_modules/@kirbydesign/designsystem/icons/fonts/kirby.ttf", "to": "fonts" },
   ...
 ],...
 ```
