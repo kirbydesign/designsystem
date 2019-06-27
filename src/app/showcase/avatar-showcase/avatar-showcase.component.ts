@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Sizes } from '@kirbydesign/designsystem/directives/size/size.directive';
+
 import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
 declare var require: any;
 
@@ -21,7 +23,7 @@ export class AvatarShowcaseComponent implements OnInit {
       name: 'size',
       description: 'Sets the size of the button.',
       defaultValue: 'null',
-      inputValues: ['small', 'medium', 'large'],
+      inputValues: Object.values(Sizes),
     },
     {
       name: 'altText',
