@@ -26,6 +26,7 @@ import { ActionSheetExampleComponent } from './action-sheet-example/action-sheet
 import { AlertExampleComponent } from './alert-example/alert-example.component';
 import { ToastExampleComponent } from './toast-example/toast-example.component';
 import { ToggleExampleComponent } from './toggle-example/toggle-example.component';
+import { EmptyStateExampleComponent } from './empty-state-example/empty-state-example.component';
 
 export const customIconSettings: CustomIconSettings = {
   fontfamily: "'Ionicons', 'ionicons'",
@@ -70,6 +71,7 @@ export const COMPONENT_DECLARATIONS: any[] = [
   AlertExampleComponent,
   ToastExampleComponent,
   ToggleExampleComponent,
+  EmptyStateExampleComponent,
 ];
 
 export const PROVIDER_DECLARATIONS: any[] = [
