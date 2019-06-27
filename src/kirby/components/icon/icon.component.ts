@@ -14,7 +14,7 @@ import { ICON_SETTINGS, Icon, IconSettings } from './icon-settings';
   },
 })
 export class IconComponent implements OnChanges {
-  defaultIcon: Icon = this.getCustomIcon(kirbyIconSettings.icons, 'cog');
+  defaultIcon: Icon = this.findIcon(kirbyIconSettings.icons, 'cog');
   fontFamily: string = kirbyIconSettings.fontfamily;
   private _icon = (this.icon = this.defaultIcon);
 
@@ -49,7 +49,7 @@ export class IconComponent implements OnChanges {
     if (icon) {
       this._icon = {
         ...icon,
-        charCode: this.fromCharCode(icon.unicode),
+        charCode: String.fromCharCode(icon.unicode),
       };
     }
   }
@@ -59,18 +59,14 @@ export class IconComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.name) {
       this.fontFamily = kirbyIconSettings.fontfamily;
-      this.icon = this.getCustomIcon(kirbyIconSettings.icons, changes.name.currentValue);
+      this.icon = this.findIcon(kirbyIconSettings.icons, changes.name.currentValue);
     } else if (changes.customName) {
       this.fontFamily = this.iconSettings.fontfamily;
-      this.icon = this.getCustomIcon(this.iconSettings.icons, changes.customName.currentValue);
+      this.icon = this.findIcon(this.iconSettings.icons, changes.customName.currentValue);
     }
   }
 
-  private fromCharCode(icon) {
-    return String.fromCharCode(icon);
-  }
-
-  private getCustomIcon(icons, name: string): Icon {
+  private findIcon(icons, name: string): Icon {
     return icons.find((icon) => icon.name === name);
   }
 }

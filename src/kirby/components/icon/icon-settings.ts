@@ -3,7 +3,7 @@ import { InjectionToken } from '@angular/core';
 export interface Icon {
   name: string;
   svg?: string;
-  unicode: string;
+  unicode: number;
   charCode?: string;
 }
 

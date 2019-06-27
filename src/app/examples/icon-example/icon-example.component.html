@@ -3,7 +3,7 @@
 
 <div class="icon-item-container" *ngFor="let icon of icons">
     <div class="icon-item-inner-container">
-        <kirby-icon [name]="icon.name" size="md" title="md"></kirby-icon>
+        <kirby-icon [name]="icon.name" [title]="icon.name"></kirby-icon>
         <span class="icon-item-title">{{icon.name}}</span>
     </div>
 </div>

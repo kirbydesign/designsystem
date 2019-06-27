@@ -23,18 +23,19 @@ import { SegmentedChipControlExampleComponent } from './segmented-chip-control-e
 import { ActionSheetExampleComponent } from './action-sheet-example/action-sheet-example.component';
 import { AlertExampleComponent } from './alert-example/alert-example.component';
 
+// Example of "custom" icons
 export const iconSettings: IconSettings = {
   fontfamily: "'Ionicons', 'ionicons'",
   icons: [
     {
       name: 'football',
       svg: 'assets/icons/football.svg',
-      unicode: '0xf2f6',
+      unicode: 0xf2f6,
     },
     {
       name: 'umbrella',
       svg: 'assets/icons/umbrella.svg',
-      unicode: '0xf25f',
+      unicode: 0xf25f,
     },
   ],
 };
@@ -64,4 +65,5 @@ export const COMPONENT_DECLARATIONS: any[] = [
   AlertExampleComponent,
 ];
 
+// Configure custom icons (used by example to show the usage of custom icons)
 export const PROVIDER_DECLARATIONS: any[] = [{ provide: ICON_SETTINGS, useValue: iconSettings }];

@@ -5,6 +5,7 @@ export { CardFooterComponent } from './components/card/card-footer/card-footer.c
 export { CardHeaderComponent } from './components/card/card-header/card-header.component';
 export { GridComponent } from './components/grid/grid.component';
 export { IconComponent } from './components/icon/icon.component';
+export { IconSettings, ICON_SETTINGS } from './components/icon/icon-settings';
 export { KirbyModule } from './kirby.module';
 export { SpinnerComponent } from './components/spinner/spinner.component';
 export {
@@ -12,7 +13,6 @@ export {
 } from './components/segmented-control/segmented-control.component';
 export { SegmentItem } from './components/segmented-control/segment-item';
 export { BadgeComponent } from './components/badge/badge.component';
-export { IconSettings, ICON_SETTINGS } from './components/icon/icon-settings';
 export { GridCardConfiguration } from './components/grid/grid-card-configuration';
 export {
   SegmentedChipControlComponent,
