@@ -2,7 +2,8 @@
 
 :host {
     padding: 2px;
-    width: 800px;
+    width: 100%;
+
 }
 
 hr {
@@ -14,6 +15,9 @@ h2 {
 }
 
 .footer {
-  font-size: size('l');
-  text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: size('s') 0;
 }
