@@ -72,3 +72,4 @@ export class IconComponent implements OnChanges {
 }
 
 export const icons: Icon[] = [...kirbyIconSettings.icons];
+
