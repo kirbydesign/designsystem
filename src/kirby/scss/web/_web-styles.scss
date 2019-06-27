@@ -51,3 +51,22 @@
         --ion-color-primary: #{get-color(danger)};
     }
 }
+
+.kirby-toast {
+    position: fixed;
+    
+    // Set default colors
+    --background: #{get-color('success')};
+    --color: #{get-color('success-contrast')};
+    --button-color: #{get-color('success-contrast')};
+
+    @each $color-name, $color-value in $main-colors {
+        @if ($color-name == 'success' or $color-name == 'warning' or $color-name == 'danger') {
+            &.#{$color-name} {
+                --background: #{get-color($color-name)};
+                --color: #{get-color($color-name+'-contrast')};
+                --button-color: #{get-color($color-name+'-contrast')};
+            }
+        }
+    }
+}

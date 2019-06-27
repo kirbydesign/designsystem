@@ -46,7 +46,7 @@
 
 <hr />
 
-<h2>List with header:</h2>
+<h2>List with header and footer:</h2>
 <kirby-list [items]="items" (itemSelect)="onItemSelect($event)" shape="rounded">
   
   <!-- HEADER-->
@@ -73,6 +73,12 @@
       <kirby-list-cell-line [primary]="true" [text]="item.amount"></kirby-list-cell-line>
     </kirby-list-cell>
   </kirby-list-flex-item>
+
+  <!-- Footer -->
+  <ng-container *kirbyListFooter>
+    <p class="footer">An appropriate footer</p>
+    <button kirby-button attentionLevel="1">Click me!</button>
+  </ng-container> 
 </kirby-list> 
 
 <hr />

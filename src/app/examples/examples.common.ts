@@ -18,10 +18,14 @@ import { SegmentedControlExampleComponent } from './segmented-control-example/se
 import { ChipExampleComponent } from './chip-example/chip-example.component';
 import { BadgeExampleComponent } from './badge-example/badge-example.component';
 import { IconExampleComponent } from './icon-example/icon-example.component';
+import { CalendarExampleComponent } from './calendar-example/calendar-example.component';
+import { CalendarCardExampleComponent } from './calendar-example/calendar-card-example.component';
 import { CheckboxExampleComponent } from './checkbox-example/checkbox-example.component';
 import { SegmentedChipControlExampleComponent } from './segmented-chip-control-example/segmented-chip-control-example.component';
 import { ActionSheetExampleComponent } from './action-sheet-example/action-sheet-example.component';
 import { AlertExampleComponent } from './alert-example/alert-example.component';
+import { ToastExampleComponent } from './toast-example/toast-example.component';
+import { ToggleExampleComponent } from './toggle-example/toggle-example.component';
 
 // Example of "custom" icons
 export const iconSettings: IconSettings = {
@@ -60,9 +64,13 @@ export const COMPONENT_DECLARATIONS: any[] = [
   ChipExampleComponent,
   BadgeExampleComponent,
   IconExampleComponent,
+  CalendarExampleComponent,
+  CalendarCardExampleComponent,
   ActionSheetExampleComponent,
   CheckboxExampleComponent,
   AlertExampleComponent,
+  ToastExampleComponent,
+  ToggleExampleComponent,
 ];
 
 // Configure custom icons (used by example to show the usage of custom icons)

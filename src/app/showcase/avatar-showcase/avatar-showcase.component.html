@@ -2,39 +2,5 @@
     <kirby-avatar-example></kirby-avatar-example>
     <kirby-code-viewer [html]="exampleHtml"></kirby-code-viewer>
     <h4>Properties:</h4>
-    <table class="cookbook-properties">
-      <thead>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Input values</th>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>imageSrc</code></td>
-          <td>Points to the src of the image location.</td>
-          <td><code>string</code></td>
-        </tr>
-        <tr>
-          <td><code>altText</code></td>
-          <td>Must be filled out - its the alt text attribute that screenreaders use when 'viewing' the image.</td>
-          <td><code>string</code></td>
-        </tr>
-        <tr>
-            <td><code>size</code></td>
-            <td>Yeah, as the name implies, this sets it size :)</td>
-            <td><code>small, medium, large, xlarge</code></td>
-        </tr>      
-        <tr>
-          <td><code>overlay</code></td>
-          <td>Adds a dimmed overlay on the avatar. Useful when using the avatar on a white background and the image also has a white background.</td>
-          <td><code>boolean</code></td>
-        </tr>      
-        <tr>
-          <td><code>shadow</code></td>
-          <td>Adds a box-shadow to the avatar</td>
-          <td><code>boolean</code></td>
-        </tr>      
-
-      </tbody>
-    </table>     
+    <kirby-showcase-properties [properties]="properties"></kirby-showcase-properties> 
 </div>
