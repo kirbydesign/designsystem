@@ -1,0 +1,5 @@
+@import '../../scss/native-imports';
+
+Switch {
+    background-color: #{get-color('success')};
+}

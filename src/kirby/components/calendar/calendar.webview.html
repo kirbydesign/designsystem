@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Calendar</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <link rel="stylesheet" type="text/css" href="calendar.webview.css">
+        <script src="nativescript-webview-interface.js"></script>
+        <script>
+            (function () {
+                var oWebViewInterface = window.nsWebViewInterface;
+                var parentWindow;
+
+                function addNativeMsgListener() {
+                    if (oWebViewInterface) {
+                        oWebViewInterface.on('init', function(calendarOptions) {
+                            renderCalendar(calendarOptions);
+                        });
+
+                        oWebViewInterface.on('setSelectedDay', function(day) {
+                            setSelectedDay(day);
+                        });
+                    }
+                    window.addEventListener('message', updateCalendarFromEventMessage);
+                }
+
+                 function updateCalendarFromEventMessage(event) {
+                    if (event.type === 'message' && event.data) {
+                        if (event.data.type === 'kirbyCalendarInit') {
+                            parentWindow = event.source;
+                            var options = event.data;
+                            renderCalendar(options);
+                        } else if (event.data.type === 'kirbyCalendarSetSelectedDay') {
+                            setSelectedDay(event.data.selectedDay);
+                        }
+                    }
+                }
+
+                function emitSelectedDay(day) {
+                    if (parentWindow && day) {
+                        parentWindow.postMessage({
+                            type: 'kirbyCalendarDaySelected',
+                            day: day
+                        }, '*');
+                    }
+                    if (oWebViewInterface && day) {
+                        oWebViewInterface.emit('daySelected', day);
+                    }
+                }
+
+                function emitChangeMonth(index) {
+                    if (parentWindow) {
+                        parentWindow.postMessage({
+                            type: 'kirbyCalendarChangeMonth',
+                            index
+                        }, '*');
+                    }
+                    if (oWebViewInterface) {
+                        oWebViewInterface.emit('changeMonth', index);
+                    }
+                }
+
+                function renderCalendar(options) {
+                    var calendarOutlet = document.getElementById('calendar');
+                    var calendarTable = calendarOutlet.querySelector('table.calendar-table');                   
+
+                    updateHeader(calendarOutlet, options);
+                    updateTableHeader(calendarTable, options.weekDays);
+                    renderTableBody(calendarTable, options.month);                   
+                }
+
+                function updateHeader(calendarOutlet, options) {
+                    // Render month and year
+                    var monthAndYearOutlet = calendarOutlet.querySelector('.header .month-and-year');
+                    var monthOutlet = monthAndYearOutlet.querySelector('.month');
+                    var yearOutlet = monthAndYearOutlet.querySelector('.year');
+                             
+                    monthOutlet.innerText = options.monthName;
+                    yearOutlet.innerText = options.year;
+
+                    // Render next/previous buttons
+                    var previousButtonOutlet = calendarOutlet.querySelector('.previous-button');
+                    var nextButtonOutlet = calendarOutlet.querySelector('.next-button');
+                   
+                    previousButtonOutlet.disabled = !options.canNavigateBack;
+                    previousButtonOutlet.onclick = options.canNavigateBack ? gotoPreviousMonth : null;
+                    nextButtonOutlet.disabled = !options.canNavigateForward;
+                    nextButtonOutlet.onclick = options.canNavigateForward ? gotoNextMonth : null;
+                }
+
+                function updateTableHeader(calendarTable, weekDays) {
+                    var newCalendarTableHeader = getWeekDaysHeader(weekDays);
+                    var existingCalendarTableHeader = calendarTable.querySelector('thead');                   
+                    calendarTable.replaceChild(newCalendarTableHeader, existingCalendarTableHeader);
+                }
+
+                function renderTableBody(calendarTable, month) {
+                    var newCalendarTableBody = getTableBody(month);
+                    var existingCalendarTableBody = calendarTable.querySelector('tbody');
+                    calendarTable.replaceChild(newCalendarTableBody, existingCalendarTableBody);
+                }
+
+                function getWeekDaysHeader(weekDays) {
+                    var tableHeaderRow = document.createElement('thead');
+                    weekDays.forEach(function(weekDay) {
+                        var th = document.createElement('th');
+                        th.appendChild(document.createTextNode(weekDay));
+                        tableHeaderRow.appendChild(th);
+                    });
+                    return tableHeaderRow;
+                }
+
+                function getTableBody(month) {
+                    var tableBody = document.createElement('tbody');                    
+                    month.forEach(function(week) {
+                        tableBody.appendChild(getWeekRow(week));
+                    });
+                    tableBody.onclick = selectCell;
+                    return tableBody;
+                }
+
+                function getWeekRow(week) {
+                    var tr = document.createElement('tr');
+
+                    week.forEach(function(cell) {
+                        var dayCell = document.createElement('div');
+                        dayCell.className = cell.cssClasses + ' day-' + cell.date;
+                        dayCell.appendChild(document.createTextNode(cell.date));
+                        dayCell.dataset.isSelectable = cell.isSelectable;
+                        dayCell.dataset.day = cell.date;
+                        
+                        var td = document.createElement('td');
+                        td.appendChild(dayCell);
+                        tr.appendChild(td);
+                    });
+                    return tr;
+                }
+
+                function gotoPreviousMonth() {
+                    emitChangeMonth(-1);
+                }
+
+                function gotoNextMonth() {
+                    emitChangeMonth(1);
+                }
+
+                function selectCell(event) {
+                    var cellToSelect = event.target;
+                    var isSelectable = cellToSelect.dataset.isSelectable === 'true';
+                    var selectedDay = parseInt(cellToSelect.dataset.day);
+                    if (isSelectable && selectedDay) {
+                        setSelectedCell(cellToSelect);
+                        emitSelectedDay(selectedDay);
+                    }
+                }          
+
+                function setSelectedCell(cellToSelect) {
+                    var selectedCell = document.querySelector('#calendar .day.selected');
+                    if (selectedCell === cellToSelect) {
+                        return;
+                    }
+                    if (selectedCell) {
+                        selectedCell.classList.remove('selected');
+                    }
+                    if (cellToSelect) {
+                        cellToSelect.classList.add('selected');
+                    }
+                }
+
+                function setSelectedDay(day) {
+                    var cellToSelect = document.querySelector('#calendar .day.current-month.day-' + day);
+                    setSelectedCell(cellToSelect);
+                }
+
+                function init() {
+                    addNativeMsgListener();
+                }
+                init();
+            })();
+        </script>
+    </head>
+
+    <body style="margin: 0; padding: 0;">
+        <div id="calendar">
+            <div class="header">
+                <button class="previous-button"><</button>
+                <div class="month-and-year">
+                    <span class="month"></span>
+                    <span class="year"></span>
+                </div>
+                <button class="next-button">></button>
+            </div>
+            
+            <table class="calendar-table">
+                <thead></thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </body>
+</html>

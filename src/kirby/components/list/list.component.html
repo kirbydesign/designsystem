@@ -50,4 +50,9 @@
   <ion-item *ngIf="!isLoadOnDemandEnabled && noMoreItemsText" class="no-more-items">
     <span class="extending">{{ noMoreItemsText }}</span>
   </ion-item>
+
+  <ion-item *ngIf="listFooterTemplate">
+    <ng-container *ngTemplateOutlet="listFooterTemplate"></ng-container>
+  </ion-item>
 </ion-list>
+
