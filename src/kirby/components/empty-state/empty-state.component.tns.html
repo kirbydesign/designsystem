@@ -3,6 +3,8 @@
     <kirby-icon *ngIf="iconName" [name]="iconName" size="lg" class="icon"></kirby-icon>
     <Label *ngIf="title" class="kirby-text-normal-bold title" [text]="title"></Label>
     <Label *ngIf="text" class="kirby-text-normal message" [text]="text" textWrap="true"></Label>
-    <Button kirby-button *ngIf="buttonText" [text]="buttonText"></Button>
+    <StackLayout class="button-wrapper">
+      <ng-content></ng-content>
+    </StackLayout>
   </StackLayout>
 </FlexboxLayout>

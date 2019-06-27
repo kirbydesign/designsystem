@@ -17,27 +17,15 @@ h3,p {
   margin: 0px;
 }
 
-button {
-  display: block;
-  margin: 0 auto;
-}
-
 kirby-icon + * {
   margin-top: size('m');
 }
 
-kirby-icon + button {
-  margin-top: size('s');
-}
-
-h3 + * {
+h3 + .button-wrapper,
+p + .button-wrapper {
   margin-top: size('s');
 }
 
 h3 + p {
   margin-top: size('xs');
-}
-
-p + * {
-  margin-top: size('s');
 }

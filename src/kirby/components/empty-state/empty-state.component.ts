@@ -9,5 +9,4 @@ export class EmptyStateComponent {
   @Input() iconName: string;
   @Input() title: string;
   @Input() text: string;
-  @Input() buttonText: string;
 }
