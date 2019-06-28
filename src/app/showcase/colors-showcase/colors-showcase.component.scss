@@ -1,9 +1,8 @@
 @import '../../../kirby/scss/web-imports';
 
-@each $color, $color-name in $kirby-colors {
-  .#{$color} {
-    background-color: var(--kirby-#{$color});
-    color: var(--kirby-#{$color}-contrast);
+@each $color-name, $color-value in $kirby-colors {
+  .#{$color-name} {
+    background-color: get-color($color-name); 
   }
 }
 
