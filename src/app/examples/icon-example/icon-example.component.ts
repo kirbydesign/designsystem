@@ -12,4 +12,9 @@ import { Sizes } from '@kirbydesign/designsystem/directives/size/size.directive'
 export class IconExampleComponent {
   icons: Icon[] = icons;
   sizes = Sizes;
+  color: string;
+
+  changeColor(color: string) {
+    this.color = color;
+  }
 }
