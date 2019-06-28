@@ -89,7 +89,7 @@ The Kirby web components are build on top of [Ionic](https://ionicframework.com/
 npm install @ionic/angular
 ```
 ### Icons
-Kirby comes bundled with a default set of icons . Make sure the `.svg` files used by Kirby are copied to your output folder by adding the following to `build > options > assets` in `angular.json`:
+Kirby comes bundled with a default set of icons. Make sure the `.svg` files used by Kirby are copied to your output folder by adding the following to `build > options > assets` in `angular.json`:
 ```json
 {
   ...
@@ -101,6 +101,11 @@ Kirby comes bundled with a default set of icons . Make sure the `.svg` files use
           "glob": "**/*.svg",
           "input": "node_modules/@kirbydesign/designsystem/icons/svg",
           "output": "./assets/kirby/icons/svg"
+        },
+        {
+          "glob": "**/*.svg",
+          "input": "node_modules/ionicons/dist/ionicons/svg",
+          "output": "./svg"
         }
         ...
       ],
