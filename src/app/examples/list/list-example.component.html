@@ -18,8 +18,22 @@
   <kirby-list-item
     *kirbyListItem="let item"
     [title]="item.title"
-    [amount]="item.amount"
-  ></kirby-list-item>
+    [amount]="item.amount">
+  </kirby-list-item>
+
+  <!-- Sliding items -->
+  <div *kirbyListItemOptions>
+    <kirby-list-item-options side="start">
+      <kirby-list-item-option iconName="share" themeColor="warning">Share</kirby-list-item-option>
+      <kirby-list-item-option iconName="trash" themeColor="danger"></kirby-list-item-option>
+      <kirby-list-item-option themeColor="medium">Like</kirby-list-item-option>
+    </kirby-list-item-options>
+    
+    <kirby-list-item-options side="end">
+      <button kirby-button attentionLevel="2" isDestructive="true">Button3</button>
+      <button kirby-button attentionLevel="3" isDestructive="true">Button4</button>
+    </kirby-list-item-options>
+  </div>
 </kirby-list>
 
 <hr />

@@ -1,0 +1,4 @@
+<ion-item-option (click)="onClick($event)">
+  <ion-icon *ngIf="iconName" slot="icon-only" [name]="iconName"></ion-icon>
+  <ng-content></ng-content>
+</ion-item-option>

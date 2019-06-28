@@ -20,7 +20,13 @@ $shadow-mask: 0 -6px 0px 0px get-color('contrast-light');
     background-color: transparent;
     padding: 0;
     margin: 0;
-  } 
+  }
+
+  ion-item-sliding {    
+    &.divider:not(:last-child) {
+      border-bottom: 1px solid get-color('base-color');
+    }
+  }
   
   ion-item {
     display: flex;
@@ -36,17 +42,9 @@ $shadow-mask: 0 -6px 0px 0px get-color('contrast-light');
       outline-offset: -4px;
     }
 
-    p {
-      margin: 0;
-    }
-
     &.row {
       background-color: get-color('contrast-light');
       padding: size('m') size('xs');
-
-      &.divider:not(:last-child) {
-        border-bottom: 1px solid get-color('base-color');
-      }
 
       &.selectable {
         cursor: pointer;
@@ -93,23 +91,32 @@ $shadow-mask: 0 -6px 0px 0px get-color('contrast-light');
   }
 
   &.has-sections  {
-    .row {
+    .row,
+    .sliding-row  {
       box-shadow: $shadow-mask, $shadow;
     }
 
-    .row.selectable:hover {
+    .row.selectable:hover,
+    .sliding-row.selectable:hover  {
       background-color: get-color('base-color');
     }
 
-    .section-header + .row {
+    .section-header + .row,
+    .section-header + .sliding-row  {
       border-top-left-radius: $border-radius;
       border-top-right-radius: $border-radius;
       box-shadow: $shadow;
     }
 
-    .row.last-in-section {
+    .row.last-in-section,
+    .sliding-row.last-in-section  {
       border-bottom-left-radius: $border-radius;
       border-bottom-right-radius: $border-radius;
     }
   }
+}
+
+
+ion-item-sliding ion-item {
+  border-radius: inherit !important;
 }

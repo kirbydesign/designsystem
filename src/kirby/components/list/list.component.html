@@ -10,18 +10,18 @@
           <ion-label class="kirby-text-small">{{ section.name }}</ion-label>
         </ion-list-header>
 
-        <kirby-list-item-sliding 
-          [isSlidingEnabled]="isSlidingEnabled" 
+        <ion-item-sliding 
           *ngFor="let item of section.items; let idx = index;"
           [class.last-in-section]="idx === section.items.length - 1"
-          class="row"> 
+          [class.divider]="showDivider"
+          class="sliding-row"> 
+          <ng-container *ngTemplateOutlet="listItemOptionsTemplate; context: { $implicit: item }"></ng-container>
 
           <ion-item
             [class.last-in-section]="idx === section.items.length - 1"
             (click)="onItemSelect(item)"
             [attr.role]="isSelectable ? 'button' : null"
             [class.selectable]="isSelectable"
-            [class.divider]="showDivider"
             tabindex="0"
             class="row"
             keyHandler>
@@ -29,29 +29,28 @@
             <ng-container *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }"></ng-container>
             <ng-container *ngTemplateOutlet="listFlexItemTemplate; context: { $implicit: item }"></ng-container>
           </ion-item>
-        </kirby-list-item-sliding>
+      </ion-item-sliding>
     </div>
   </div>
 
   <ng-template #normalList>
-      <kirby-list-item-sliding 
-        [isSlidingEnabled]="isSlidingEnabled" 
+      <ion-item-sliding 
         *ngFor="let item of items"
-        class="row">
-
+        [class.divider]="showDivider">
+        <ng-container *ngTemplateOutlet="listItemOptionsTemplate; context: { $implicit: item }"></ng-container>
+          
         <ion-item
           (click)="onItemSelect(item)"
           [attr.role]="isSelectable ? 'button' : null"
           [class.selectable]="isSelectable"
-          [class.divider]="showDivider"
-          tabindex="0" 
+          tabindex="0"
           class="row"
           keyHandler>
   
           <ng-container *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }"></ng-container>
           <ng-container *ngTemplateOutlet="listFlexItemTemplate; context: { $implicit: item }"></ng-container>
         </ion-item>
-      </kirby-list-item-sliding>
+      </ion-item-sliding>
   </ng-template>
 
   <ion-item *ngIf="isLoading" class="loading">

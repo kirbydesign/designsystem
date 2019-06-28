@@ -14,6 +14,7 @@ import {
   ListItemDirective,
   ListSectionHeaderDirective,
   ListFlexItemDirective,
+  ListItemOptionsDirective,
 } from './list.directive';
 import { LoadOnDemandEvent, LoadOnDemandEventData } from './list.event';
 import { ListHelper } from './helpers/list-helper';
@@ -87,6 +88,7 @@ export class ListComponent implements OnChanges {
   @ContentChild(ListFlexItemDirective, { read: TemplateRef }) listFlexItemTemplate;
   @ContentChild(ListHeaderDirective, { read: TemplateRef }) listHeaderTemplate;
   @ContentChild(ListSectionHeaderDirective, { read: TemplateRef }) sectionHeaderTemplate;
+  @ContentChild(ListItemOptionsDirective, { read: TemplateRef }) listItemOptionsTemplate;
 
   @HostBinding('class.has-sections') isSectionsEnabled: boolean;
   isSelectable: boolean;
