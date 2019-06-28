@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MockComponent } from 'ng-mocks';
+import { MockComponent, MockDirective } from 'ng-mocks';
 import * as ionic from '@ionic/angular';
 import { By } from '@angular/platform-browser';
 import { Component, OnInit } from '@angular/core';
@@ -13,7 +13,7 @@ describe('IconComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         IconComponent,
-        ThemeColorDirective,
+        MockDirective(ThemeColorDirective),
         TestWrapperComponent,
         MockComponent(ionic.IonIcon),
       ],
