@@ -241,6 +241,19 @@ export const componentStatusItems: ComponentStatusItem[] = [
     },
   },
   {
+    title: 'Empty State',
+    priority: 0,
+    ux: {
+      version: 0.0,
+      status: ItemUXStatus.underConsideration,
+    },
+    code: {
+      version: 0.1,
+      status: ItemCodeStatus.ready,
+      cookbookUrl: 'showcase/empty-state',
+    },
+  },
+  {
     title: 'Floating Action Button',
     aliases: ['FAB'],
     priority: 0,
