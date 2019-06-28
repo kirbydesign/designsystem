@@ -92,7 +92,12 @@
             "scripts": [],
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*.svg",
+                "input": "src/kirby/icons/svg",
+                "output": "./assets/kirby/icons/svg"
+              }
             ],
             "sourceMap": true
           }
