@@ -575,15 +575,16 @@ export const componentStatusItems: ComponentStatusItem[] = [
     },
   },
   {
-    title: 'Switch',
-    aliases: ['Toggle'],
+    title: 'Toggle',
+    aliases: ['Switch'],
     priority: 0,
     ux: {
       version: 1.0,
       status: ItemUXStatus.planned,
+      wireFrameUrl: 'https://zpl.io/beKAX3B',
     },
     code: {
-      version: 0.5,
+      version: 0.9,
       status: ItemCodeStatus.ready,
       cookbookUrl: 'showcase/toggle',
     },

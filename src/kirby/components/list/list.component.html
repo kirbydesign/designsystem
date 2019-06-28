@@ -55,4 +55,7 @@
   <li *ngIf="!isLoadOnDemandEnabled && noMoreItemsText" class="no-more-items">
     <span class="extending">{{noMoreItemsText}}</span>
   </li>
+  <li *ngIf="listFooterTemplate">
+    <ng-container *ngTemplateOutlet="listFooterTemplate"></ng-container>
+  </li>
 </ul>
