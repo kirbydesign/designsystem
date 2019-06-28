@@ -1,13 +1,13 @@
 <StackLayout>
   <Label text="Standard"></Label>
-  <kirby-checkbox checked="true"></kirby-checkbox>
+  <kirby-checkbox checked="true" (checkedChange)="checkedChange($event)"></kirby-checkbox>
   <Label text="Colors"></Label>
-  <kirby-checkbox checked="true" [color]="'primary'"></kirby-checkbox>
-  <kirby-checkbox checked="true" [color]="'secondary'"></kirby-checkbox>
-  <kirby-checkbox checked="true" [color]="'tertiary'"></kirby-checkbox>
+  <kirby-checkbox checked="true" (checkedChange)="checkedChange($event)" [color]="'primary'"></kirby-checkbox>
+  <kirby-checkbox checked="true" (checkedChange)="checkedChange($event)" [color]="'secondary'"></kirby-checkbox>
+  <kirby-checkbox checked="true" (checkedChange)="checkedChange($event)" [color]="'tertiary'"></kirby-checkbox>
   <Label text="Shapes"></Label>
   <StackLayout orientation="horizontal">
-    <kirby-checkbox checked="true"></kirby-checkbox>
-    <kirby-checkbox checked="true" shape="circle"></kirby-checkbox>
+    <kirby-checkbox checked="true" (checkedChange)="checkedChange($event)"></kirby-checkbox>
+    <kirby-checkbox checked="false" (checkedChange)="checkedChange($event)" shape="circle"></kirby-checkbox>
   </StackLayout>
 </StackLayout>
