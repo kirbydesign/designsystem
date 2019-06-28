@@ -5,6 +5,11 @@
   width: 1em;
   height: 1em;
   font-size: size('m');
+
+  svg path {
+    fill: currentColor;
+    stroke: currentColor;
+  }
 }
 
 :host(.sm) {
