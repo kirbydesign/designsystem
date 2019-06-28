@@ -30,4 +30,16 @@ export interface SassColor {
   value: {
     hex: string;
   };
+  tint: {
+    name: string;
+    hex: string;
+  };
+  shade: {
+    name: string;
+    hex: string;
+  };
+  contrast: {
+    name: string;
+    hex: string;
+  };
 }
