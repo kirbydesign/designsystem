@@ -13,8 +13,13 @@ export class IconExampleComponent {
   icons: Icon[] = icons;
   sizes = Sizes;
   color: string;
+  outline: boolean;
 
   changeColor(color: string) {
     this.color = color;
+  }
+
+  onOutlineChecked(checked) {
+    this.outline = checked;
   }
 }

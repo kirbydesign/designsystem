@@ -1,9 +1,19 @@
 @import '../../scss/native-imports';
- 
+
 .kirby-icon {
+    display: none;
     Label {
         font-family: "Ionicons", "ionicons";
         text-align: center;
+
+        &.outline {
+            // Inherit or currentColor is not supported by native script :(
+            // TODO: need to figure out a better solution for setting border-color
+            border-color: get-color('dark');
+            border-width: 3;
+            padding: size('m');
+            border-radius: 50%;
+        }
     }
 
     font-size: size('m'); //default to icon size 'sm'   
@@ -23,6 +33,13 @@
     @each $color-name, $color-value in $main-colors {
         &.#{$color-name} {
             color: get-color($color-name);
+
+            label.outline {
+                border-color: get-color($color-name);
+                border-width: 3;
+                padding: size('m');
+                border-radius: 50%;
+            }
         }
     }
 }   

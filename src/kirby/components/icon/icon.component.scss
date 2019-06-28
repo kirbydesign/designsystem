@@ -2,14 +2,18 @@
 
 :host {
   display: inline-block;
-  width: 1em;
-  height: 1em;
   font-size: size('m');
 
   svg path {
     fill: currentColor;
     stroke: currentColor;
   }
+}
+
+.outline {
+  border: solid 3px currentColor;
+  padding: size('m');
+  border-radius: 50%;
 }
 
 :host(.sm) {
