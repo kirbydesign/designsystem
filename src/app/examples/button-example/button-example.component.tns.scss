@@ -1,15 +1,15 @@
 @import '../../../kirby/scss/native-imports';
 
 .wrapper {
-    background-color: get-color("base-color");
-    padding: 0 10;
+    background-color: get-color('background-color');
+    padding: 0 20;
 }
 
 Button[kirby-button] {
     margin-top: 10;
     width: 180;
 
-    &[expand="block"] {
+    &[expand='block'] {
         width: auto;
     }
 }
