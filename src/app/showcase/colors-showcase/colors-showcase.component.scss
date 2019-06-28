@@ -7,8 +7,8 @@
 }
 
 .color-box {
-  background-color: #fff;
-  border: 1px solid #eee;
+  background-color: get-color('white');
+  border: 1px solid get-color('medium');
 }
 
 .color-samples {
@@ -80,7 +80,6 @@
 }
 
 .color-name {
-  color: #333;
   margin-bottom: size('xxs');
   width: 100%;
 }
