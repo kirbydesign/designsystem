@@ -4,7 +4,7 @@
   font-size: font-size("xxs");
   border-radius: size("xs");
   background-color: get-color('danger');
-  color: get-color('contrast-light');
+  color: get-color('white');
   height: size("s");
   min-width: size("s");
   padding-left: size("xxs");
@@ -19,7 +19,7 @@
   }
 
   &[themeColor='danger'] {
-    color: get-color('contrast-light');
+    color: get-color('white');
   }
 }
 
