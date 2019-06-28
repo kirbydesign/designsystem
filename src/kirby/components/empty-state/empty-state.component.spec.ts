@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MockComponents } from 'ng-mocks';
 
 import { EmptyStateComponent } from './empty-state.component';
+import { IconComponent } from '@kirbydesign/designsystem';
 
 describe('EmptyStateComponent', () => {
   let component: EmptyStateComponent;
@@ -8,7 +10,7 @@ describe('EmptyStateComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [EmptyStateComponent],
+      declarations: [EmptyStateComponent, MockComponents(IconComponent)],
     }).compileComponents();
   }));
 

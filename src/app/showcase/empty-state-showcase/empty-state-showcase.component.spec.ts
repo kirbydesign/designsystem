@@ -3,9 +3,9 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { ExamplesModule } from '../../examples/examples.module';
 import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
-import { EmptyStateShowcaseComponent } from './avatar-showcase.component';
+import { EmptyStateShowcaseComponent } from './empty-state-showcase.component';
 
-describe('AvatarShowcaseComponent', () => {
+describe('EmptyStateShowcaseComponent', () => {
   let component: EmptyStateShowcaseComponent;
   let fixture: ComponentFixture<EmptyStateShowcaseComponent>;
 
