@@ -1,9 +1,49 @@
 <h2>Default Icons</h2>
 <p class="note">*If icon is <strong>NOT</strong> found, 'cog' will be used as default icon</p>
 
+<p>Change color: </p>
+<div class="colors">
+    <button class="color-button" (click)="changeColor('primary')">
+        <span class="color color--primary"></span>
+        <span class="color-button__txt">primary</span>
+    </button>
+    <button class="color-button" (click)="changeColor('secondary')">
+        <span class="color color--secondary"></span>
+        <span class="color-button__txt">secondary</span>
+    </button>
+    <button class="color-button" (click)="changeColor('tertiary')">
+        <span class="color color--tertiary"></span>
+        <span class="color-button__txt">tertiary</span>
+    </button>
+    <button class="color-button" (click)="changeColor('success')">
+        <span class="color color--success"></span>
+        <span class="color-button__txt">success</span>
+    </button>
+    <button class="color-button" (click)="changeColor('warning')">
+        <span class="color color--warning"></span>
+        <span class="color-button__txt">warning</span>
+    </button>
+    <button class="color-button" (click)="changeColor('danger')">
+        <span class="color color--danger"></span>
+        <span class="color-button__txt">danger</span>
+    </button>
+    <button class="color-button" (click)="changeColor('light')">
+        <span class="color color--light"></span>
+        <span class="color-button__txt">light</span>
+    </button>
+    <button class="color-button" (click)="changeColor('medium')">
+        <span class="color color--medium"></span>
+        <span class="color-button__txt">medium</span>
+    </button>
+    <button class="color-button" (click)="changeColor('dark')">
+        <span class="color color--dark"></span>
+        <span class="color-button__txt">dark</span>
+    </button>
+</div>
+
 <div class="icon-item-container" *ngFor="let icon of icons">
     <div class="icon-item-inner-container">
-        <kirby-icon [name]="icon.name" [title]="icon.name"></kirby-icon>
+        <kirby-icon [name]="icon.name" [title]="icon.name" [themeColor]="color"></kirby-icon>
         <span class="icon-item-title">{{icon.name}}</span>
     </div>
 </div>
@@ -30,15 +70,3 @@
         <span class="icon-item-title">{{size.value}}</span>
     </div>
 </div>
-
-<!-- Removed for now, until we have a usecase for using colors for icons -->
-<!--<h2>Colors</h2>-->
-<!--<kirby-icon name="person" themeColor="primary" title="primary"></kirby-icon>-->
-<!--<kirby-icon name="person" themeColor="secondary" title="secondary"></kirby-icon>-->
-<!--<kirby-icon name="person" themeColor="tertiary" title="tertiary"></kirby-icon>-->
-<!--<kirby-icon name="person" themeColor="success" title="success"></kirby-icon>-->
-<!--<kirby-icon name="person" themeColor="warning" title="warning"></kirby-icon>-->
-<!--<kirby-icon name="person" themeColor="danger" title="danger"></kirby-icon>-->
-<!--<kirby-icon name="person" themeColor="light" title="light"></kirby-icon>-->
-<!--<kirby-icon name="person" colortype="medium" title="medium"></kirby-icon>-->
-<!--<kirby-icon name="person" colortype="dark" title="dark"></kirby-icon>-->

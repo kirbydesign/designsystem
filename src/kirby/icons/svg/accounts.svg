@@ -8,6 +8,6 @@
         <mask id="mask-2" fill="white">
             <use xlink:href="#path-1"></use>
         </mask>
-        <use id="icon-color" fill="#1C1C1C" fill-rule="nonzero" xlink:href="#path-1"></use>
+        <use id="icon-color" fill="currentColor" fill-rule="nonzero" xlink:href="#path-1"></use>
     </g>
 </svg>
