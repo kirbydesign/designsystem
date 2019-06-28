@@ -1,4 +1,4 @@
-import { CustomIconSettings, CUSTOM_FONT_SETTINGS } from '@kirbydesign/designsystem';
+import { IconSettings, ICON_SETTINGS } from '@kirbydesign/designsystem';
 
 import { AvatarExampleComponent } from './avatar-example/avatar-example.component';
 import { ButtonExampleComponent } from './button-example/button-example.component';
@@ -27,18 +27,19 @@ import { AlertExampleComponent } from './alert-example/alert-example.component';
 import { ToastExampleComponent } from './toast-example/toast-example.component';
 import { ToggleExampleComponent } from './toggle-example/toggle-example.component';
 
-export const customIconSettings: CustomIconSettings = {
+// Example of "custom" icons
+export const iconSettings: IconSettings = {
   fontfamily: "'Ionicons', 'ionicons'",
   icons: [
     {
       name: 'football',
       svg: 'assets/icons/football.svg',
-      unicode: '0xf2f6',
+      unicode: 0xf2f6,
     },
     {
       name: 'umbrella',
       svg: 'assets/icons/umbrella.svg',
-      unicode: '0xf25f',
+      unicode: 0xf25f,
     },
   ],
 };
@@ -72,6 +73,5 @@ export const COMPONENT_DECLARATIONS: any[] = [
   ToggleExampleComponent,
 ];
 
-export const PROVIDER_DECLARATIONS: any[] = [
-  { provide: CUSTOM_FONT_SETTINGS, useValue: customIconSettings },
-];
+// Configure custom icons (used by example to show the usage of custom icons)
+export const PROVIDER_DECLARATIONS: any[] = [{ provide: ICON_SETTINGS, useValue: iconSettings }];
