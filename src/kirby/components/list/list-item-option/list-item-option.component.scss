@@ -1,5 +1,9 @@
 @import '../../../scss/web-imports';
  
+:host {
+    display: flex;
+}
+
 ion-item-option {
     display: flex;
     height: 100%;

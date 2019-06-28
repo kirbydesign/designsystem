@@ -1,4 +1,4 @@
-<ion-item-option (click)="onClick($event)">
+<ion-item-option (click)="onClick($event)" [attr.expandable]="expandable">
   <ion-icon *ngIf="iconName" slot="icon-only" [name]="iconName"></ion-icon>
   <ng-content></ng-content>
 </ion-item-option>

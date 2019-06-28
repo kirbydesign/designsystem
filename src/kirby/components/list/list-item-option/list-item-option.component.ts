@@ -7,8 +7,8 @@ import { Component, Input } from '@angular/core';
 })
 export class ListItemOptionComponent {
   @Input() iconName: string;
-
+  @Input() expandable: boolean = false;
   onClick(event) {
-    console.log('onClick', event.target);
+    console.log('onClick', event);
   }
 }

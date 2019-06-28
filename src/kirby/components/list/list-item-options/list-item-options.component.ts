@@ -7,4 +7,8 @@ import { Component, Input } from '@angular/core';
 })
 export class ListItemOptionsComponent {
   @Input() side: 'start' | 'end' = 'start';
+  @Input() item: any;
+  ionSwipe() {
+    console.log('ionSwipe', this.item);
+  }
 }
