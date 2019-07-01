@@ -260,6 +260,7 @@ module.exports = env => {
             // Copy assets to out dir. Add your own globs as needed.
             new CopyWebpackPlugin([
                 { from: { glob: "fonts/**" } },
+                { from: { glob: "kirby/icons/fonts/**" }, to: "fonts", flatten: true },
                 { from: { glob: "**/*.jpg" } },
                 { from: { glob: "**/*.png" } },
                 { from: "kirby/components/chart/chart.webview.html", to: "chart" },

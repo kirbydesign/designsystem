@@ -42,9 +42,9 @@
   }
 
   &.attention-level2 {
-    --kirby-button-background-color:#{get-color('contrast-light')};
-    --kirby-button-border-color: #{get-color('contrast-light')};
-    --kirby-button-color: #{get-color('contrast-dark')};
+    --kirby-button-background-color:#{get-color('white')};
+    --kirby-button-border-color: #{get-color('white')};
+    --kirby-button-color: #{get-color('black')};
 
     &.destructive {
       --kirby-button-background-color:#{get-color('light')};
@@ -99,16 +99,16 @@
   :host-context(.success).attention-level1,
   :host-context(.warning).attention-level1,
   :host-context(.danger).attention-level1 {
-    --kirby-button-background-color: #{get-color('contrast-light')};
-    --kirby-button-border-color: #{get-color('contrast-light')};
-    --kirby-button-color: #{get-color('contrast-dark')};
+    --kirby-button-background-color: #{get-color('white')};
+    --kirby-button-border-color: #{get-color('white')};
+    --kirby-button-color: #{get-color('black')};
   }
   
   :host-context(.secondary).attention-level3,
   :host-context(.tertiary).attention-level3,
   :host-context(.dark).attention-level3 {
-    --kirby-button-border-color: #{get-color('contrast-light')};
-    --kirby-button-color: #{get-color('contrast-light')};
+    --kirby-button-border-color: #{get-color('white')};
+    --kirby-button-color: #{get-color('white')};
   }
   
   :host-context(.primary).attention-level3,
@@ -116,13 +116,13 @@
   :host-context(.warning).attention-level3,
   :host-context(.danger).attention-level3,
   :host-context(.medium).attention-level3 {
-    --kirby-button-border-color: #{get-color('contrast-dark')};
-    --kirby-button-color: #{get-color('contrast-dark')};
+    --kirby-button-border-color: #{get-color('black')};
+    --kirby-button-color: #{get-color('black')};
   }
   
   :host-context(.secondary).attention-level4,
   :host-context(.tertiary).attention-level4,
   :host-context(.dark).attention-level4 {
-    --kirby-button-color: #{get-color('contrast-light')};
+    --kirby-button-color: #{get-color('white')};
   }
 }

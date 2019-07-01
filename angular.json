@@ -33,6 +33,11 @@
               "src/kirby/components/calendar/calendar.webview.css",
               {
                 "glob": "**/*.svg",
+                "input": "src/kirby/icons/svg",
+                "output": "./assets/kirby/icons/svg"
+              },
+              {
+                "glob": "**/*.svg",
                 "input": "node_modules/ionicons/dist/ionicons/svg",
                 "output": "./svg"
               }
@@ -92,7 +97,12 @@
             "scripts": [],
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*.svg",
+                "input": "src/kirby/icons/svg",
+                "output": "./assets/kirby/icons/svg"
+              }
             ],
             "sourceMap": true
           }

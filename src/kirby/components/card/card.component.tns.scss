@@ -9,7 +9,7 @@
 
 .container {
     border-radius: $border-radius;
-    background-color: get-color('contrast-light');
+    background-color: get-color('white');
 
     @each $color-name, $color-value in $main-colors {
         &.#{$color-name} {

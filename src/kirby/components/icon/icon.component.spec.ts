@@ -40,7 +40,8 @@ describe('IconComponent', () => {
     it('should point to the cog icon by default', () => {
       const fixture = createTestComponent('<kirby-icon></kirby-icon>');
       const component = fixture.debugElement.query(By.directive(IconComponent)).componentInstance;
-      expect(component.name).toBe('cog');
+      expect(component.name).toBe(undefined);
+      expect(component.icon.name).toBe(component.defaultIcon.name);
     });
   });
 
