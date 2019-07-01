@@ -2,6 +2,17 @@ declare var require: any;
 export class ColorHelper {
   static style: any = require('sass-extract-loader!./color-helper.scss');
 
+  public static getMainColors() {
+    const mainColors = ColorHelper.style.global['$main-colors'].value;
+    return Object.entries(mainColors).map((color: [string, Color]) => {
+      return {
+        name: color[0],
+        type: color[1].type,
+        value: color[1].value,
+      };
+    });
+  }
+
   public static getThemeColor(name: string) {
     return ColorHelper.getColor(name);
   }
@@ -40,6 +51,13 @@ export class ColorHelper {
     return color ? color.value : undefined;
   }
 }
+
+export interface Color {
+  name: string;
+  type: string;
+  value: RgbColor;
+}
+
 export interface RgbColor {
   a: number;
   r: number;
