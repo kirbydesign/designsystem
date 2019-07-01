@@ -2,8 +2,8 @@
 
 .segment-control {
   border-radius: $border-radius;
-  background: get-color('contrast-light');
-  color: get-color('contrast-dark');
+  background: get-color('white');
+  color: get-color('black');
   display: inline-block;
   height: size("xl");
   margin-top: size("s");
@@ -17,11 +17,11 @@
   padding-right: size("m");
   border-radius: $border-radius;
   height: 100%;
-  color: get-color('contrast-dark');
+  color: get-color('black');
 
   &.is-checked {
-    color: get-color('contrast-light');
-    background-color: get-color('contrast-dark');
+    color: get-color('white');
+    background-color: get-color('black');
   }
 
   & + & {

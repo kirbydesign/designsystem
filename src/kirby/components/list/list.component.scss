@@ -1,11 +1,11 @@
 @import '../../scss/web-imports';
 
 $shadow: 0 5px 10px -10px rgba(28, 28, 28, 0.3), 0 0 5px 0 rgba(28, 28, 28, 0.08);
-$shadow-mask: 0 -6px 0px 0px get-color('contrast-light');
+$shadow-mask: 0 -6px 0px 0px get-color('white');
 
 :host {
   display: block;
-  background-color: get-color('base-color');
+  background-color: get-color('background-color');
 
   &:not(.has-sections) {
     box-shadow: $shadow;
@@ -41,31 +41,31 @@ $shadow-mask: 0 -6px 0px 0px get-color('contrast-light');
     }
 
     &.row {
-      background-color: get-color('contrast-light');
+      background-color: get-color('white');
       padding: size('m') size('xs');
 
       &.divider:not(:last-child) {
-        border-bottom: 1px solid get-color('base-color');
+        border-bottom: 1px solid get-color('background-color');
       }
 
       &.selectable {
         cursor: pointer;
 
         &:hover {
-          background-color: get-color('base-color');
+          background-color: get-color('background-color');
         }
       }
     }
     
     &.loading,
     &.no-more-items {
-      background-color: get-color('contrast-light');
+      background-color: get-color('white');
     }
   }
 
   .list-header {
-    background-color: get-color('contrast-light');
-    border-bottom: 1px solid get-color('base-color');
+    background-color: get-color('white');
+    border-bottom: 1px solid get-color('background-color');
   }
   
   .section-header {
@@ -98,7 +98,7 @@ $shadow-mask: 0 -6px 0px 0px get-color('contrast-light');
     }
 
     .row.selectable:hover {
-      background-color: get-color('base-color');
+      background-color: get-color('background-color');
     }
 
     .section-header + .row {
