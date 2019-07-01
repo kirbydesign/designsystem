@@ -64,7 +64,6 @@ export class IconComponent implements OnChanges {
   }
 
   constructor(
-    private elementRef: ElementRef,
     @Optional() @Inject(ICON_SETTINGS) private iconSettings?: IconSettings
   ) {}
 
