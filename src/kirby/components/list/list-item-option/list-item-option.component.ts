@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'kirby-list-item-option',
@@ -6,9 +6,11 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./list-item-option.component.scss'],
 })
 export class ListItemOptionComponent {
-  @Input() iconName: string;
-  @Input() expandable: boolean = false;
+  @Input() id: number;
+  @Input() title: string;
+  @Input() iconName?: string;
+  @Output() itemOptionSelect = new EventEmitter<string>();
   onClick(event) {
-    console.log('onClick', event);
+    this.itemOptionSelect.emit(event.currentTarget.id);
   }
 }

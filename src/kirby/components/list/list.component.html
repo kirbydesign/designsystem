@@ -10,10 +10,11 @@
           <ion-label class="kirby-text-small">{{ section.name }}</ion-label>
         </ion-list-header>
 
-        <ion-item-sliding 
+        <ion-item-sliding #slidingItem
           *ngFor="let item of section.items; let idx = index;"
           [class.last-in-section]="idx === section.items.length - 1"
           [class.divider]="showDivider"
+          (ionSwipe)="ionSwipe(slidingItem, item)"
           class="sliding-row"> 
           <ng-container *ngTemplateOutlet="listItemOptionsTemplate; context: { $implicit: item }"></ng-container>
 
@@ -35,10 +36,11 @@
 
   <ng-template #normalList>
       <ion-item-sliding 
-        *ngFor="let item of items"
-        [class.divider]="showDivider">
+        *ngFor="let item of items" #slidingItem
+        [class.divider]="showDivider"
+        (ionSwipe)="ionSwipe(slidingItem, item)">
         <ng-container *ngTemplateOutlet="listItemOptionsTemplate; context: { $implicit: item }"></ng-container>
-          
+        
         <ion-item
           (click)="onItemSelect(item)"
           [attr.role]="isSelectable ? 'button' : null"
@@ -46,7 +48,7 @@
           tabindex="0"
           class="row"
           keyHandler>
-  
+          
           <ng-container *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }"></ng-container>
           <ng-container *ngTemplateOutlet="listFlexItemTemplate; context: { $implicit: item }"></ng-container>
         </ion-item>

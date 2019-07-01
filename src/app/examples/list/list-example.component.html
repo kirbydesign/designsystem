@@ -23,14 +23,13 @@
 
   <!-- Sliding items -->
   <div *kirbyListItemOptions="let item">
-    <kirby-list-item-options [item]="item" side="start">
-      <kirby-list-item-option iconName="share" themeColor="warning" expandable>Share</kirby-list-item-option>
-      <kirby-list-item-option iconName="trash" themeColor="danger"></kirby-list-item-option>
-      <kirby-list-item-option themeColor="medium">Like</kirby-list-item-option>
+    <kirby-list-item-options side="start" [item]="item">
+      <kirby-list-item-option id="0" title="Afstem" iconName="swap" themeColor="success"></kirby-list-item-option>
+      <kirby-list-item-option id="1" title="Flag" iconName="attach" themeColor="warning"></kirby-list-item-option>
     </kirby-list-item-options>
-    
-    <kirby-list-item-options [item]="item" side="end">
-      <kirby-list-item-option iconName="share" themeColor="danger">Delete</kirby-list-item-option>
+
+    <kirby-list-item-options side="end" [item]="item">
+      <kirby-list-item-option id="2" title="Fjer Afstem" themeColor="success"></kirby-list-item-option>
     </kirby-list-item-options>
   </div>
 </kirby-list>

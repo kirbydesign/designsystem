@@ -1,3 +1,4 @@
+import { IonItemSliding } from '@ionic/angular';
 import {
   Component,
   ContentChild,
@@ -156,5 +157,15 @@ export class ListComponent implements OnChanges {
       });
     });
     return orderMap;
+  }
+
+  ionSwipe(slidingItem: IonItemSliding, item: any) {
+    slidingItem.getSlidingRatio().then((percent) => {
+      if (percent > 0) {
+        console.log('right side');
+      } else {
+        console.log('left side');
+      }
+    });
   }
 }
