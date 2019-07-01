@@ -60,11 +60,6 @@ export class ListComponent implements OnChanges {
   shape: ListShape = 'rounded';
 
   /**
-   * Adds padding to the list.
-   */
-  @Input() padding: string = null;
-
-  /**
    * Emitting event when more items are to be loaded.
    */
   @Output() loadOnDemand = new EventEmitter<LoadOnDemandEvent>();
@@ -117,12 +112,14 @@ export class ListComponent implements OnChanges {
     return order;
   }
 
-  isFirstInSection(item: any) {
-    return this.getItemOrder(item).isFirst;
+  isFirstItem(item: any, index: number) {
+    return this.isSectionsEnabled ? this.getItemOrder(item).isFirst : index === 0;
   }
 
-  isLastInSection(item: any) {
-    return this.getItemOrder(item).isLast;
+  isLastItem(item: any, index: number) {
+    return this.isSectionsEnabled
+      ? this.getItemOrder(item).isLast
+      : index === this.items.length - 1;
   }
 
   onItemSelect(args: any) {
