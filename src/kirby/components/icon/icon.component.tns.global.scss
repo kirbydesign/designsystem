@@ -2,32 +2,37 @@
 
 .kirby-icon {
     display: none;
+    //default to icon size 'sm'
     Label {
         font-family: "Ionicons", "ionicons";
         text-align: center;
+        font-size: size('m');
 
         &.outline {
+            width: #{size('m') + (size('xs') * 2)};
+            height: #{size('m') + (size('xs') * 2)};
             // Inherit or currentColor is not supported by native script :(
             // TODO: need to figure out a better solution for setting border-color
             border-color: get-color('dark');
             border-width: 3;
-            padding: size('m');
-            border-radius: 50%;
+            border-radius: #{size('xxxl') * 2};
         }
     }
 
-    font-size: size('m'); //default to icon size 'sm'   
-
-    &.sm {
-        font-size: size('m');
-    }
-        
-    &.md {
+    &.md Label {
         font-size: size('l');
+        &.outline {
+            width: #{size('l') + (size('s') * 2)};
+            height: #{size('l') + (size('s') * 2)};
+        }
     }
         
-    &.lg {
+    &.lg Label {
         font-size: size('xxxl');
+        &.outline {
+            width: #{size('xxxl') + (size('m') * 2)};
+            height: #{size('xxxl') + (size('m') * 2)};
+        }
     }
 
     @each $color-name, $color-value in $main-colors {
