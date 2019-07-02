@@ -14,6 +14,7 @@ import {
   ListItemDirective,
   ListSectionHeaderDirective,
   ListFlexItemDirective,
+  ListFooterDirective,
 } from './list.directive';
 import { LoadOnDemandEvent, LoadOnDemandEventData } from './list.event';
 import { ListHelper } from './helpers/list-helper';
@@ -43,21 +44,6 @@ export class ListComponent implements OnChanges {
   @Input() noMoreItemsText: string;
 
   /**
-   * Turns off styling of the section header on Web.
-   */
-  @Input() noSectionHeaderStyling: boolean;
-
-  /**
-   * Turns off styling of the row on Web.
-   */
-  @Input() noRowStyling: boolean;
-
-  /**
-   * Shows shadows on sections on Web.
-   */
-  @Input() sectionShadow: boolean;
-
-  /**
    * Determines if dividers should be shown or not.
    */
   @Input() showDivider = false;
@@ -69,7 +55,14 @@ export class ListComponent implements OnChanges {
    *
    * `square` means **without** rounded corners, `rounded` means **with** rounded corners.
    */
-  @Input() shape: ListShape = 'square';
+  @HostBinding('class.rounded')
+  @Input()
+  shape: ListShape = 'rounded';
+
+  /**
+   * Adds padding to the list.
+   */
+  @Input() padding: string = null;
 
   /**
    * Emitting event when more items are to be loaded.
@@ -86,6 +79,7 @@ export class ListComponent implements OnChanges {
   @ContentChild(ListFlexItemDirective, { read: TemplateRef }) listFlexItemTemplate;
   @ContentChild(ListHeaderDirective, { read: TemplateRef }) listHeaderTemplate;
   @ContentChild(ListSectionHeaderDirective, { read: TemplateRef }) sectionHeaderTemplate;
+  @ContentChild(ListFooterDirective, { read: TemplateRef }) listFooterTemplate;
 
   @HostBinding('class.has-sections') isSectionsEnabled: boolean;
   isSelectable: boolean;

@@ -1,0 +1,23 @@
+@import '../../../kirby/scss/native-imports';
+
+.wrapper {
+    background-color: get-color("base-color");
+    padding: 10;
+}
+
+.card {
+    width: 360;
+}
+
+Button[kirby-button] {
+    margin: 0;
+    border-radius: 0;
+
+    &.left {
+        border-bottom-left-radius: $border-radius;
+    }
+    
+    &.right {
+        border-bottom-right-radius: $border-radius;
+    }
+}

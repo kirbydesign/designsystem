@@ -13,6 +13,7 @@ import {
   ListFlexItemDirective,
   ListHeaderDirective,
   ListSectionHeaderDirective,
+  ListFooterDirective,
 } from './components/list/list.directive';
 import { ComponentLoaderDirective } from './components/shared/component-loader.directive';
 import { ChartComponent } from './components/chart/chart.component';
@@ -23,6 +24,7 @@ import { ListHeaderComponent } from './components/list/list-header/list-header.c
 import { ListCellComponent } from './components/list/list-cell/list-cell.component';
 import { ListCellLineComponent } from './components/list/list-cell-line/list-cell-line.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
+import { CalendarComponent } from './components/calendar/calendar.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { ModalWrapperComponent } from './components/modal/modal-wrapper/modal-wrapper.component';
 import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
@@ -34,11 +36,13 @@ import { IModalController } from './components/modal/services/modal.controller.i
 import { ModalHelper } from './components/modal/services/modal.helper';
 import { ActionSheetHelper } from './components/modal/services/action-sheet.helper';
 import { ActionSheetComponent } from './components/modal/action-sheet/action-sheet.component';
-import { CustomIconNameDirective } from './components/icon/custom-icon-name.directive';
 import { AlertHelper } from './components/modal/services/alert.helper';
 import { SizeDirective } from './directives/size/size.directive';
 import { ThemeColorDirective } from './directives/theme-color/theme-color.directive';
 import { SlideButtonComponent } from './components/slide-button/slide-button.component';
+import { ToastController } from './components/toast/services/toast.controller';
+import { ToastHelper } from './components/toast/services/toast.helper';
+import { ToggleComponent } from './components/toggle/toggle.component';
 
 export const declarations = [
   CardComponent,
@@ -57,14 +61,15 @@ export const declarations = [
   ListSectionHeaderDirective,
   ListHeaderDirective,
   ListHeaderComponent,
+  ListFooterDirective,
   IconComponent,
-  CustomIconNameDirective,
   ChartComponent,
   GridComponent,
   ComponentLoaderDirective,
   AvatarComponent,
   GroupByPipe,
   SpinnerComponent,
+  CalendarComponent,
   CheckboxComponent,
   ModalWrapperComponent,
   ActionSheetComponent,
@@ -75,6 +80,7 @@ export const declarations = [
   SizeDirective,
   ThemeColorDirective,
   SlideButtonComponent,
+  ToggleComponent,
 ];
 
 export const providerDeclarations: any[] = [
@@ -84,4 +90,6 @@ export const providerDeclarations: any[] = [
   ActionSheetHelper,
   ModalHelper,
   AlertHelper,
+  ToastHelper,
+  ToastController,
 ];

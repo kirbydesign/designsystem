@@ -2,7 +2,7 @@
 
 code {
   background-color: get-color('medium');
-  color: get-color('contrast-dark');
+  color: get-color('black');
   padding: 0.2rem 0.5rem;
   border-radius: 2px;
   white-space: nowrap;
@@ -25,7 +25,7 @@ code {
   }
 
   code.highlight {
-    color: get-color('contrast-dark');
+    color: get-color('black');
     font-weight: font-weight('bold');
   }
 }
@@ -93,7 +93,7 @@ code {
 }
 
 .info-box {
-  background-color: get-color('contrast-light');
+  background-color: get-color('white');
   padding: 0.5rem 1rem;
   margin-right: 1rem;
   border: 1px solid get-color('medium');

@@ -73,4 +73,8 @@ export class ModalController implements IModalController {
   private forgetTopmost(): void {
     this.modals.pop();
   }
+
+  public hideAll(): void {
+    this.modals.forEach((modal) => modal.close());
+  }
 }

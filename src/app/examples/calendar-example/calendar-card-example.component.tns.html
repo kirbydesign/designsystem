@@ -1,0 +1,38 @@
+<StackLayout class="wrapper">
+    <kirby-card class="card">
+        <kirby-calendar 
+            [disableWeekends]="disableWeekends" 
+            [disablePastDates]="disablePastDates" 
+            [disableFutureDates]="disableFutureDates" 
+            [disabledDates]="setDisabledDates ? disabledDates : null"
+            [minDate]="setMinDate ? minDate : null"
+            [maxDate]="setMaxDate ? maxDate : null"
+            [selectedDate]="selectedDate"
+            (dateChange)="onDateChange($event)">
+        </kirby-calendar>
+        
+        <GridLayout rows="auto", columns="*, *" orientation="horizontal">
+            <Button kirby-button shape="square" class="left" col="0" (tap)="selectNextMonth()" text="Next month"></Button>
+            <Button kirby-button shape="square" class="right" col="1" (tap)="selectToday()" attentionLevel="2" text="Now"></Button>   
+        </GridLayout>
+    </kirby-card>
+    <StackLayout orientation="horizontal">
+        <kirby-checkbox [checked]="disableWeekends" (checkedChange)="disableWeekends = $event;"></kirby-checkbox><Label (tap)="disableWeekends = !disableWeekends" text="Disable weekends"></Label>
+    </StackLayout>
+    <StackLayout orientation="horizontal">
+        <kirby-checkbox [checked]="disablePastDates" (checkedChange)="disablePastDates = $event;"></kirby-checkbox><Label (tap)="disablePastDates = !disablePastDates" text="Disable past dates"></Label>
+    </StackLayout>
+    <StackLayout orientation="horizontal">
+        <kirby-checkbox [checked]="disableFutureDates" (checkedChange)="disableFutureDates = $event;"></kirby-checkbox><Label (tap)="disableFutureDates = !disableFutureDates" text="Disable future dates"></Label>
+    </StackLayout>
+    <StackLayout orientation="horizontal">
+        <kirby-checkbox [checked]="setDisabledDates" (checkedChange)="setDisabledDates = $event;"></kirby-checkbox><Label (tap)="setDisabledDates = !setDisabledDates" text="Set disabled dates"></Label>
+    </StackLayout>
+    <StackLayout orientation="horizontal">
+        <kirby-checkbox [checked]="setMinDate" (checkedChange)="setMinDate = $event;"></kirby-checkbox><Label (tap)="setMinDate = !setMinDate" text="Set min date ({{minDate | date}})"></Label>
+    </StackLayout>
+    <StackLayout orientation="horizontal">
+        <kirby-checkbox [checked]="setMaxDate" (checkedChange)="setMaxDate = $event;"></kirby-checkbox><Label (tap)="setMaxDate = !setMaxDate" text="Set max date ({{maxDate | date}})"></Label>
+    </StackLayout>
+    <Label *ngIf="selectedDate" text="Selected Date: {{ selectedDate | date }}"></Label>
+</StackLayout>
