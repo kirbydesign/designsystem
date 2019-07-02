@@ -63,9 +63,7 @@ export class IconComponent implements OnChanges {
     }
   }
 
-  constructor(
-    @Optional() @Inject(ICON_SETTINGS) private iconSettings?: IconSettings
-  ) {}
+  constructor(@Optional() @Inject(ICON_SETTINGS) private iconSettings?: IconSettings) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.name) {
