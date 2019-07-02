@@ -25,7 +25,7 @@ $image-diameter-large:  96px;
   }
 }
 
-:host(){
+:host{
   .avatar {
     width: $image-diameter-small;
     height: $image-diameter-small;
