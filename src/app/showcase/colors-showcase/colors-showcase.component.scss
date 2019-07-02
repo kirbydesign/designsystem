@@ -6,6 +6,12 @@
   }
 }
 
+@each $color-name, $color-value in $main-colors {
+  .#{$color-name} {
+    color: get-color($color-name + '-contrast');
+  }
+}
+
 .color-box {
   background-color: get-color('white');
   border: 1px solid get-color('medium');
