@@ -101,6 +101,9 @@ export class ListComponent implements OnChanges {
 
   private getItemOrder(item: any): { isFirst: boolean; isLast: boolean } {
     const defaultOrder = { isFirst: false, isLast: false };
+    if (!item) {
+      return defaultOrder;
+    }
     if (!this.isSectionsEnabled) {
       return defaultOrder;
     }
@@ -128,6 +131,14 @@ export class ListComponent implements OnChanges {
 
   onLoadOnDemand(event?: LoadOnDemandEventData) {
     this.listHelper.onLoadOnDemand(this, event);
+  }
+
+  isIOS(): boolean {
+    return this.listHelper.isIOS();
+  }
+
+  onRowLoaded(row: any): void {
+    this.listHelper.renderShadow(row);
   }
 
   private createOrderMap(

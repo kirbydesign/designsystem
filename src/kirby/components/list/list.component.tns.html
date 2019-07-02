@@ -9,17 +9,19 @@
     (itemTap)="onItemSelect($event)">
     <!-- ITEM -->
     <ng-template tkListItemTemplate let-item="item" let-index="index">
-      <StackLayout class="row"
-                [class.divider]="showDivider"
-                [class.rounded]="shape === 'rounded'"
-                [class.first]="isFirstItem(item, index)"
-                [class.last]="isLastItem(item, index)">
-        <ng-container
-          *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }">
-        </ng-container>
-        <ng-container
-          *ngTemplateOutlet="listFlexItemTemplate; context: { $implicit: item }">
-        </ng-container>
+      <StackLayout (loaded)="onRowLoaded($event)">
+        <StackLayout class="row"
+          [class.divider]="showDivider"
+          [class.rounded]="shape === 'rounded'"
+          [class.first]="isFirstItem(item, index)"
+          [class.last]="isLastItem(item, index)">
+          <ng-container
+            *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }">
+          </ng-container>
+          <ng-container
+            *ngTemplateOutlet="listFlexItemTemplate; context: { $implicit: item }">
+          </ng-container>  
+        </StackLayout>
       </StackLayout>
     </ng-template>
 
@@ -47,7 +49,7 @@
     <ng-template tkListViewFooter *ngIf="listFooterTemplate">
       <ng-container *ngTemplateOutlet="listFooterTemplate"></ng-container>
     </ng-template>
-    
+
 
   </RadListView>
 </GridLayout>

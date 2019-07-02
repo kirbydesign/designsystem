@@ -17,4 +17,13 @@ export class ListHelper {
   getSelectedItem(items: any[], item: any) {
     return item;
   }
+
+  isIOS(): boolean {
+    return false;
+  }
+
+  renderShadow(_: any): void {
+    // only native implementation
+    return;
+  }
 }
