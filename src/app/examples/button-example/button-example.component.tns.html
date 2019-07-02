@@ -18,17 +18,7 @@
               <Button kirby-button attentionLevel="4" text="Attention Level 4"></Button>        
             </Stacklayout>
           </kirby-card>
-          <ListPicker #themeColorPicker [items]="[{ text: 'Card color: None', value: '' },
-              { text: 'Card color: Primary', value: 'primary' },
-              { text: 'Card color: Secondary', value: 'secondary' },
-              { text: 'Card color: Tertiary', value: 'tertiary' },
-              { text: 'Card color: Success', value: 'success' },
-              { text: 'Card color: Warning', value: 'warning' },
-              { text: 'Card color: Danger', value: 'danger' },
-              { text: 'Card color: Light', value: 'light' },
-              { text: 'Card color: Medium', value: 'medium' },
-              { text: 'Card color: Dark', value: 'dark' }
-            ]"
+          <ListPicker #themeColorPicker [items]="items"
             textField="text"
             valueField="value"
            (selectedValueChange)="themeColor = themeColorPicker.selectedValue;"></ListPicker>

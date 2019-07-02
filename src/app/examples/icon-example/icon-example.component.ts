@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { icons } from '@kirbydesign/designsystem/components/icon/icon.component';
 import { Icon } from '@kirbydesign/designsystem/components/icon/icon-settings';
 import { Sizes } from '@kirbydesign/designsystem/directives/size/size.directive';
+import { Color, ColorHelper } from '@kirbydesign/designsystem/helpers/color-helper';
 
 @Component({
   selector: 'kirby-icon-example',
@@ -12,9 +13,10 @@ import { Sizes } from '@kirbydesign/designsystem/directives/size/size.directive'
 export class IconExampleComponent {
   icons: Icon[] = icons;
   sizes = Sizes;
-  color: string;
+  color: Color;
+  colors: Color[] = ColorHelper.getMainColors();
 
-  changeColor(color: string) {
+  changeColor(color: Color) {
     this.color = color;
   }
 }
