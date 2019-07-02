@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 import { ThemeColor } from './../../../kirby/helpers/theme-color.type';
+import { Color, ColorHelper } from '@kirbydesign/designsystem/helpers/color-helper';
 
 @Component({
   selector: 'kirby-button-example',
@@ -10,17 +11,15 @@ import { ThemeColor } from './../../../kirby/helpers/theme-color.type';
 export class ButtonExampleComponent {
   activeTab = 'default';
   @Input() themeColor: ThemeColor | '' = '';
+  colors: Color[] = ColorHelper.getMainColors();
   items = [
-    { text: '[None]', value: '' },
-    { text: 'primary', value: 'primary' },
-    { text: 'secondary', value: 'secondary' },
-    { text: 'tertiary', value: 'tertiary' },
-    { text: 'success', value: 'success' },
-    { text: 'warning', value: 'warning' },
-    { text: 'danger', value: 'danger' },
-    { text: 'light', value: 'light' },
-    { text: 'medium', value: 'medium' },
-    { text: 'dark', value: 'dark' },
+    { text: 'Card color: None', value: '' },
+    ...this.colors.map((color) => {
+      return {
+        text: `Card color: ${color.name}`,
+        value: color.name,
+      };
+    }),
   ];
 
   onSegmentClick(segment) {
