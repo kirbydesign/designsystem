@@ -1,5 +1,31 @@
+@import '../../scss/web-imports';
+
 :host {
-	display: flex;
-    align-items: center;
-    justify-content: center;
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  font-size: size('m');
+
+  svg path {
+    fill: currentColor;
+    stroke: currentColor;
+  }
+}
+
+:host(.sm) {
+  font-size: size('m');
+}
+
+:host(.md) {
+  font-size: size('l');
+}
+
+:host(.lg) {
+  font-size: size('xxxl');
+}
+
+@each $color-name, $color-value in $main-colors {
+  :host(.#{$color-name}) {
+    color: get-color($color-name);
+  }
 }
