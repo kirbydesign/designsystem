@@ -107,16 +107,13 @@ export class ListComponent implements OnChanges, OnDestroy {
   private orderMap: WeakMap<any, { isFirst: boolean; isLast: boolean }>;
 
   constructor(
-    listItemOptionHelper: ListItemOptionHelper,
     private listHelper: ListHelper,
+    private listItemOptionHelper: ListItemOptionHelper,
     private groupBy: GroupByPipe
   ) {
     this.optionItemSubscription = listItemOptionHelper.selectedOptionItem$.subscribe(
       (selectedOptionItem: SelectedOptionItem) => {
-        this.optionItemSelect.emit(selectedOptionItem);
-        if (this.ionList) {
-          this.ionList.closeSlidingItems();
-        }
+        this.emitSelectedOptionItem(selectedOptionItem);
       }
     );
   }
@@ -184,13 +181,23 @@ export class ListComponent implements OnChanges, OnDestroy {
     return orderMap;
   }
 
+  private emitSelectedOptionItem(selectedOptionItem: SelectedOptionItem) {
+    this.optionItemSelect.emit(selectedOptionItem);
+
+    if (this.ionList) {
+      this.ionList.closeSlidingItems();
+    }
+  }
+
   ionSwipe(slidingItem: IonItemSliding, item: any) {
-    slidingItem.getSlidingRatio().then((percent) => {
-      if (percent > 0) {
-        console.log('right side');
-      } else {
-        console.log('left side');
-      }
+    slidingItem.getSlidingRatio().then(async (percent) => {
+      const side = percent > 0 ? 'end' : 'start';
+      const id = await this.listItemOptionHelper.getOptionItemId(slidingItem, side);
+      const selectedOptionItem: SelectedOptionItem = {
+        id: id,
+        item: item,
+      };
+      this.emitSelectedOptionItem(selectedOptionItem);
     });
   }
 }
