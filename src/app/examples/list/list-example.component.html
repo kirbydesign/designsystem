@@ -20,16 +20,27 @@
     [title]="item.title"
     [amount]="item.amount">
   </kirby-list-item>
+</kirby-list>
+
+<hr />
+
+<h2>List with sliding items:</h2>
+<kirby-list [items]="items" showDivider="true" (optionItemSelect)="onOptionItemSelect($event)">
+  <kirby-list-item
+    *kirbyListItem="let item"
+    [title]="item.title"
+    [amount]="item.amount"
+  ></kirby-list-item>
 
   <!-- Sliding items -->
   <div *kirbyListItemOptions="let item">
-    <kirby-list-item-options side="start" [item]="item">
-      <kirby-list-item-option id="0" title="Afstem" iconName="swap" themeColor="success"></kirby-list-item-option>
-      <kirby-list-item-option id="1" title="Flag" iconName="attach" themeColor="warning"></kirby-list-item-option>
+    <kirby-list-item-options side="start">
+      <kirby-list-item-option id="0" title="Afstem" iconName="swap" themeColor="success" [item]="item"></kirby-list-item-option>
+      <kirby-list-item-option id="1" title="Flag" iconName="attach" themeColor="warning" [item]="item"></kirby-list-item-option>
     </kirby-list-item-options>
 
-    <kirby-list-item-options side="end" [item]="item">
-      <kirby-list-item-option id="2" title="Fjer Afstem" themeColor="success"></kirby-list-item-option>
+    <kirby-list-item-options side="end">
+      <kirby-list-item-option id="2" title="Fjer Afstem" themeColor="success" [item]="item"></kirby-list-item-option>
     </kirby-list-item-options>
   </div>
 </kirby-list>

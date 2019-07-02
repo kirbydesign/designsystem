@@ -1,4 +1,4 @@
-<ion-item-option [attr.id]="id" (click)="onClick($event)" expandable>
+<ion-item-option [attr.id]="id" (click)="onClick($event.currentTarget.id)" expandable>
   <div class="item-content">
     <ion-icon *ngIf="iconName" [name]="iconName"></ion-icon>
     <ion-label>{{ title }}</ion-label>

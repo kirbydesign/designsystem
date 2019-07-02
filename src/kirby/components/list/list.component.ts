@@ -1,4 +1,5 @@
-import { IonItemSliding } from '@ionic/angular';
+import { IonList, IonItemSliding } from '@ionic/angular';
+import { Subscription } from 'rxjs';
 import {
   Component,
   ContentChild,
@@ -8,6 +9,8 @@ import {
   OnChanges,
   Output,
   TemplateRef,
+  ViewChild,
+  OnDestroy,
 } from '@angular/core';
 
 import {
@@ -20,6 +23,7 @@ import {
 import { LoadOnDemandEvent, LoadOnDemandEventData } from './list.event';
 import { ListHelper } from './helpers/list-helper';
 import { GroupByPipe } from './pipes/group-by.pipe';
+import { ListItemOptionHelper, SelectedOptionItem } from './helpers/list-item-option-helper';
 export type ListShape = 'square' | 'rounded';
 
 @Component({
@@ -28,7 +32,7 @@ export type ListShape = 'square' | 'rounded';
   styleUrls: ['./list.component.scss'],
   providers: [ListHelper, GroupByPipe],
 })
-export class ListComponent implements OnChanges {
+export class ListComponent implements OnChanges, OnDestroy {
   /**
    * Provide items for the list to render. Items must be provided in the order you expect them to be rendered.
    */
@@ -83,6 +87,7 @@ export class ListComponent implements OnChanges {
    * Emitting event when an item is selected (tab'ed on mobile, clicked on web)
    */
   @Output() itemSelect = new EventEmitter<any>();
+  @Output() optionItemSelect = new EventEmitter<SelectedOptionItem>();
 
   // The first element that matches ListItemDirective. As a structural directive it unfolds into a template. This is a reference to that.
   @ContentChild(ListItemDirective, { read: TemplateRef }) listItemTemplate;
@@ -90,6 +95,7 @@ export class ListComponent implements OnChanges {
   @ContentChild(ListHeaderDirective, { read: TemplateRef }) listHeaderTemplate;
   @ContentChild(ListSectionHeaderDirective, { read: TemplateRef }) sectionHeaderTemplate;
   @ContentChild(ListItemOptionsDirective, { read: TemplateRef }) listItemOptionsTemplate;
+  @ViewChild('ionList') ionList: IonList;
 
   @HostBinding('class.has-sections') isSectionsEnabled: boolean;
   isSelectable: boolean;
@@ -97,10 +103,23 @@ export class ListComponent implements OnChanges {
   isLoadOnDemandEnabled: boolean;
   groupedItems: any[];
   isSlidingEnabled: boolean = true;
-
+  private optionItemSubscription: Subscription;
   private orderMap: WeakMap<any, { isFirst: boolean; isLast: boolean }>;
 
-  constructor(private listHelper: ListHelper, private groupBy: GroupByPipe) {}
+  constructor(
+    listItemOptionHelper: ListItemOptionHelper,
+    private listHelper: ListHelper,
+    private groupBy: GroupByPipe
+  ) {
+    this.optionItemSubscription = listItemOptionHelper.selectedOptionItem$.subscribe(
+      (selectedOptionItem: SelectedOptionItem) => {
+        this.optionItemSelect.emit(selectedOptionItem);
+        if (this.ionList) {
+          this.ionList.closeSlidingItems();
+        }
+      }
+    );
+  }
 
   ngOnChanges(): void {
     this.isSectionsEnabled = !!this.getSectionName;
@@ -113,6 +132,12 @@ export class ListComponent implements OnChanges {
     }
     this.isSelectable = this.itemSelect.observers.length > 0;
     this.isLoadOnDemandEnabled = this.loadOnDemand.observers.length > 0;
+  }
+
+  ngOnDestroy() {
+    if (this.optionItemSubscription) {
+      this.optionItemSubscription.unsubscribe();
+    }
   }
 
   private getItemOrder(item: any): { isFirst: boolean; isLast: boolean } {

@@ -42,6 +42,7 @@ import { AlertHelper } from './components/modal/services/alert.helper';
 import { SizeDirective } from './directives/size/size.directive';
 import { ThemeColorDirective } from './directives/theme-color/theme-color.directive';
 import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';
+import { ListItemOptionHelper } from './components/list/helpers/list-item-option-helper';
 
 export const declarations = [
   CardComponent,
@@ -90,4 +91,5 @@ export const providerDeclarations: any[] = [
   ActionSheetHelper,
   ModalHelper,
   AlertHelper,
+  ListItemOptionHelper,
 ];
