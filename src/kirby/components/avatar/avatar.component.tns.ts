@@ -16,11 +16,15 @@ const AVATAR_COMPONENT_SELECTOR = 'kirby-avatar';
   selector: AVATAR_COMPONENT_SELECTOR,
   templateUrl: './avatar.component.html',
   styleUrls: ['./avatar.component.scss'],
+  // Using host property decorator is fine for static values:
+  // tslint:disable-next-line:use-host-property-decorator
+  host: {
+    class: 'kirby-avatar',
+  },
 })
 export class AvatarComponent extends ContentView {
   @Input() imageSrc: string;
   @Input() altText: string;
-  @Input() size: string;
   @Input() shadow?: false;
   @Input() overlay?: true;
 
@@ -60,6 +64,7 @@ export class AvatarComponent extends ContentView {
             return true;
           });
         } else if (this.view.ios) {
+          console.log(this.view.nativeView);
           const iosView = this.view.ios;
           iosView.layer.shadowColor = ScssHelper.SHADOW_COLOR.ios.CGColor;
           iosView.layer.shadowOffset = CGSizeMake(0, ScssHelper.SHADOW_OFFSET_Y);
