@@ -7,7 +7,7 @@
   .outline {
     border: solid 3px currentColor;
     padding: size('xs');
-    border-radius: calc(#{size('xxxl')} * 2);
+    border-radius: size('xxxl') * 2;
   }
 
   svg path {
