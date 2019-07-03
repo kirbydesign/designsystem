@@ -21,9 +21,8 @@ import {
   ListItemOptionsDirective,
 } from './list.directive';
 import { LoadOnDemandEvent, LoadOnDemandEventData } from './list.event';
-import { ListHelper } from './helpers/list-helper';
+import { ListHelper, SelectedOptionItem } from './helpers/list-helper';
 import { GroupByPipe } from './pipes/group-by.pipe';
-import { ListItemOptionHelper, SelectedOptionItem } from './helpers/list-item-option-helper';
 export type ListShape = 'square' | 'rounded';
 
 @Component({
@@ -106,12 +105,8 @@ export class ListComponent implements OnChanges, OnDestroy {
   private optionItemSubscription: Subscription;
   private orderMap: WeakMap<any, { isFirst: boolean; isLast: boolean }>;
 
-  constructor(
-    private listHelper: ListHelper,
-    private listItemOptionHelper: ListItemOptionHelper,
-    private groupBy: GroupByPipe
-  ) {
-    this.optionItemSubscription = listItemOptionHelper.selectedOptionItem$.subscribe(
+  constructor(private listHelper: ListHelper, private groupBy: GroupByPipe) {
+    this.optionItemSubscription = this.listHelper.selectedOptionItem$.subscribe(
       (selectedOptionItem: SelectedOptionItem) => {
         this.emitSelectedOptionItem(selectedOptionItem);
       }
@@ -192,7 +187,7 @@ export class ListComponent implements OnChanges, OnDestroy {
   ionSwipe(slidingItem: IonItemSliding, item: any) {
     slidingItem.getSlidingRatio().then(async (percent) => {
       const side = percent > 0 ? 'end' : 'start';
-      const id = await this.listItemOptionHelper.getOptionItemId(slidingItem, side);
+      const id = await this.listHelper.getOptionItemId(slidingItem, side);
       const selectedOptionItem: SelectedOptionItem = {
         id: id,
         item: item,
