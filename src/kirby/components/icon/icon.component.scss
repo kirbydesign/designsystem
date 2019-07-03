@@ -1,12 +1,15 @@
 @import '../../scss/web-imports';
+@import './icon.component.shared';
 
 :host {
+  @include _icon-size('sm');
+
   display: inline-block;
-  font-size: size('m');
+  font-size: var(--kirby-icon-font-size);
 
   .outline {
     border: 3px solid currentColor;
-    padding: size('xs');
+    padding: var(--kirby-icon-padding);
     border-radius: size('xxxl') * 2;
   }
 
@@ -17,21 +20,15 @@
 }
 
 :host(.sm) {
-  font-size: size('m');
+  @include _icon-size('sm');
 }
 
 :host(.md) {
-  font-size: size('l');
-  .outline {
-    padding: size('s');
-  }
+  @include _icon-size('md');
 }
 
 :host(.lg) {
-  font-size: size('xxxl');
-  .outline {
-    padding: size('m');
-  }
+  @include _icon-size('lg');
 }
 
 @each $color-name, $color-value in $main-colors {

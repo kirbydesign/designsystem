@@ -1,38 +1,34 @@
 @import '../../scss/native-imports';
-
+@import './icon.component.shared';
+  
 .kirby-icon {
     display: none;
     //default to icon size 'sm'
     Label {
         font-family: "Ionicons", "ionicons";
         text-align: center;
-        font-size: size('m');
+
+        @include _icon-size_native('sm');
 
         &.outline {
-            width: #{size('m') + (size('xs') * 2)};
-            height: #{size('m') + (size('xs') * 2)};
             // Inherit or currentColor is not supported by native script :(
             // TODO: need to figure out a better solution for setting border-color
             border-color: get-color('dark');
             border-width: 3;
-            border-radius: #{size('xxxl') * 2};
+            border-radius: size('xxxl') * 2;
         }
     }
 
+    &.sm Label {
+        @include _icon-size_native('sm');
+    }
+
     &.md Label {
-        font-size: size('l');
-        &.outline {
-            width: #{size('l') + (size('s') * 2)};
-            height: #{size('l') + (size('s') * 2)};
-        }
+        @include _icon-size_native('md');
     }
         
     &.lg Label {
-        font-size: size('xxxl');
-        &.outline {
-            width: #{size('xxxl') + (size('m') * 2)};
-            height: #{size('xxxl') + (size('m') * 2)};
-        }
+        @include _icon-size_native('lg');
     }
 
     @each $color-name, $color-value in $main-colors {
