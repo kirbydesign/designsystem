@@ -2,6 +2,7 @@
 @import './icon.component.shared';
 
 :host {
+  //default to icon size 'sm'
   @include _icon-size('sm');
 
   display: inline-block;
