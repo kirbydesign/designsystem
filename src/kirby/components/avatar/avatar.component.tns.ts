@@ -64,7 +64,6 @@ export class AvatarComponent extends ContentView {
             return true;
           });
         } else if (this.view.ios) {
-          console.log(this.view.nativeView);
           const iosView = this.view.ios;
           iosView.layer.shadowColor = ScssHelper.SHADOW_COLOR.ios.CGColor;
           iosView.layer.shadowOffset = CGSizeMake(0, ScssHelper.SHADOW_OFFSET_Y);
