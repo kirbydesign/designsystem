@@ -2,6 +2,6 @@
   <Image [visibility]="imageSrc ? 'visible' : 'collapse'" class="image" [src]="imageSrc" [automationText]="altText"></Image>
   <AbsoluteLayout class="overlay" [visibility]="overlay ? 'visible' : 'collapse'"></AbsoluteLayout>
   <GridLayout class="inner">
-    <ng-content></ng-content>
+    <ng-content select="kirby-icon"></ng-content>
   </GridLayout>
 </AbsoluteLayout>
