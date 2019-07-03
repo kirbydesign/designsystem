@@ -15,7 +15,9 @@
           [class.last-in-section]="idx === section.items.length - 1"
           [class.divider]="showDivider"
           (ionSwipe)="ionSwipe(slidingItem, item)"
-          class="sliding-row"> 
+          class="sliding-row"
+          [attr.disabled]="isSlidingDisabled"> 
+
           <ng-container *ngTemplateOutlet="listItemOptionsTemplate; context: { $implicit: item }"></ng-container>
 
           <ion-item
@@ -38,7 +40,9 @@
       <ion-item-sliding #slidingItem
         *ngFor="let item of items"
         [class.divider]="showDivider"
-        (ionSwipe)="ionSwipe(slidingItem, item)">
+        (ionSwipe)="ionSwipe(slidingItem, item)"
+        [attr.disabled]="isSlidingDisabled">
+        
         <ng-container *ngTemplateOutlet="listItemOptionsTemplate; context: { $implicit: item }"></ng-container>
         
         <ion-item

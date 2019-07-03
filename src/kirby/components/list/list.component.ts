@@ -6,11 +6,13 @@ import {
   EventEmitter,
   HostBinding,
   Input,
+  OnInit,
   OnChanges,
   Output,
   TemplateRef,
   ViewChild,
   OnDestroy,
+  HostListener,
 } from '@angular/core';
 
 import {
@@ -25,13 +27,16 @@ import { ListHelper, SelectedOptionItem } from './helpers/list-helper';
 import { GroupByPipe } from './pipes/group-by.pipe';
 export type ListShape = 'square' | 'rounded';
 
+declare var require: any;
+const style: any = require('sass-extract-loader!./list.component.scss');
+
 @Component({
   selector: 'kirby-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
   providers: [ListHelper, GroupByPipe],
 })
-export class ListComponent implements OnChanges, OnDestroy {
+export class ListComponent implements OnInit, OnChanges, OnDestroy {
   /**
    * Provide items for the list to render. Items must be provided in the order you expect them to be rendered.
    */
@@ -101,7 +106,7 @@ export class ListComponent implements OnChanges, OnDestroy {
   isLoading: boolean;
   isLoadOnDemandEnabled: boolean;
   groupedItems: any[];
-  isSlidingEnabled: boolean = true;
+  isSlidingDisabled: boolean = true;
   private optionItemSubscription: Subscription;
   private orderMap: WeakMap<any, { isFirst: boolean; isLast: boolean }>;
 
@@ -111,6 +116,10 @@ export class ListComponent implements OnChanges, OnDestroy {
         this.emitSelectedOptionItem(selectedOptionItem);
       }
     );
+  }
+
+  ngOnInit() {
+    this.onResize(window.innerWidth);
   }
 
   ngOnChanges(): void {
@@ -194,5 +203,15 @@ export class ListComponent implements OnChanges, OnDestroy {
       };
       this.emitSelectedOptionItem(selectedOptionItem);
     });
+  }
+
+  @HostListener('window:resize', ['$event.target.innerWidth'])
+  onResize(width) {
+    const large = style.global['$breakpoints'].value['large'].value;
+    this.isSlidingDisabled = width >= large;
+
+    if (this.ionList && this.isSlidingDisabled) {
+      this.ionList.closeSlidingItems();
+    }
   }
 }
