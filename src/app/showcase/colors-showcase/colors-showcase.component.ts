@@ -13,10 +13,14 @@ const style = require('sass-extract-loader!./colors-showcase.component.scss');
 export class ColorsShowcaseComponent {
   selectedColor = 'primary';
   selectedOnColor = 'primary-contrast';
-  colorPalette = [];
+  brandColors = [];
+  systemColors = [];
+  notificationColors = [];
 
   constructor() {
-    this.colorPalette = this.getThemeColors();
+    this.brandColors = this.getColors('$brand-colors');
+    this.systemColors = this.getColors('$system-colors');
+    this.notificationColors = this.getColors('$notification-colors');
   }
 
   onColorClick(sassColor: SassColor) {
@@ -24,9 +28,9 @@ export class ColorsShowcaseComponent {
     this.selectedOnColor = sassColor.name + '-contrast';
   }
 
-  private getThemeColors() {
+  private getColors(colorType: string) {
     const colors = [];
-    const mainColors = style.global['$main-colors'].value;
+    const mainColors = style.global[colorType].value;
     const generatedColors = style.global['$kirby-colors'].value;
     for (const [value, type] of Object.entries(mainColors)) {
       const sassColor = <SassColor>type;
