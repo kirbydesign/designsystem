@@ -201,8 +201,10 @@ The Kirby chart components use Highcharts. Note that this is a licensed product.
   ...
     { from: "../node_modules/@kirbydesign/designsystem/components/chart/chart.webview.html", to: "chart" },
     { from: "../node_modules/@kirbydesign/designsystem/components/chart/css/styles.css", to: "chart" },
-    { from: "../node_modules/@kirbydesign/designsystem/node_modules/highcharts/highcharts.js", to: "chart" },
-    { from: "../node_modules/@kirbydesign/designsystem/node_modules/nativescript-webview-interface/www/nativescript-webview-interface.js", to: "chart" }
+    { from: "../node_modules/highcharts/highcharts.js", to: "chart" },
+    { from: "../node_modules/highcharts/highcharts-more.js", to: "chart" },
+    { from: "../node_modules/highcharts/modules/solid-gauge.js", to: "chart" },
+    { from: "../node_modules/nativescript-webview-interface/www/nativescript-webview-interface.js", to: "chart" }
   ]...
 ...
 ```
@@ -215,7 +217,7 @@ On iOS and Android the calendar is rendered inside a webview. To use the calenda
   ...
     { from: "../node_modules/@kirbydesign/designsystem/components/calendar/calendar.webview.html", to: "calendar" },
     { from: "../node_modules/@kirbydesign/designsystem/components/calendar/calendar.webview.css", to: "calendar" },
-    { from: "../node_modules/@kirbydesign/designsystem/node_modules/nativescript-webview-interface/www/nativescript-webview-interface.js", to: "calendar" }
+    { from: "../node_modules/nativescript-webview-interface/www/nativescript-webview-interface.js", to: "calendar" }
   ]...
 ...
 ```
