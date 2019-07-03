@@ -5,7 +5,6 @@
     display: none;
     //default to icon size 'sm'
     Label {
-        font-family: "Ionicons", "ionicons";
         text-align: center;
 
         @include _icon-size_native('sm');
