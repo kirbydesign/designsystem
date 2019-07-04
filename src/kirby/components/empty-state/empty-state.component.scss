@@ -10,22 +10,13 @@ article {
 }
 
 kirby-icon {
-  margin: auto;
+  margin-bottom: size('m');
 }
 
-h3,p {
-  margin: 0px;
+h3.title {
+  margin-bottom: size('xs');
 }
 
-kirby-icon + * {
-  margin-top: size('s');
-}
-
-h3 + .content,
-p + .content {
-  margin-top: size('s');
-}
-
-h3 + p {
-  margin-top: size('xs');
+p.subtitle {
+  margin-bottom: size('m');
 }

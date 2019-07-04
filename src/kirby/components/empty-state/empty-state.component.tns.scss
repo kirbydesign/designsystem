@@ -5,15 +5,14 @@
   text-align: center;
 }
 
-.kirby-icon + * {
-  margin-top: size('m');
+.icon {
+  margin-bottom: size('m');
 }
 
-.title + .message {
-  margin-top: size('xs');
+.title {
+  margin-bottom: size('xs');
 }
 
-.title + .content,
-.message + .content {
-  margin-top: size('m');
+.subtitle {
+  margin-bottom: size('m');
 }
