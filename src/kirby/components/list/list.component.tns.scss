@@ -2,7 +2,7 @@
 
 
 RadListView {
-  background-color:  get-color('base-color');
+  background-color:  get-color('background-color');
   //TODO: Add shadow for entire list for list WITHOUT sections
 }
 
@@ -11,7 +11,7 @@ RadListView {
 }
 
 .row.divider {
-  border-color: get-color('base-color');
+  border-color: get-color('background-color');
   border-bottom-width: 1;
 }
 
@@ -23,7 +23,7 @@ RadListView {
 }
 
 .row {
-  background-color: get-color('contrast-light');
+  background-color: get-color('white');
   //TODO: Add shadow on each section for list WITH sections
 
   &.first {
