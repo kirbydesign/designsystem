@@ -248,7 +248,7 @@ export const componentStatusItems: ComponentStatusItem[] = [
       status: ItemUXStatus.underConsideration,
     },
     code: {
-      version: 0.1,
+      version: 0.8,
       status: ItemCodeStatus.ready,
       cookbookUrl: 'showcase/empty-state',
     },
