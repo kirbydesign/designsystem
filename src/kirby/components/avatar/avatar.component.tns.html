@@ -1,7 +1,13 @@
-<AbsoluteLayout (loaded)="onViewLoaded($event)" class="avatar">
+<GridLayout (loaded)="onViewLoaded($event)" class="avatar" columns="*" rows="auto" horizontalAlignment="center" verticalAlignment="center">
   <Image [visibility]="imageSrc ? 'visible' : 'collapse'" class="image" [src]="imageSrc" [automationText]="altText"></Image>
-  <AbsoluteLayout class="overlay" [visibility]="overlay ? 'visible' : 'collapse'"></AbsoluteLayout>
-  <GridLayout class="inner">
+  <GridLayout class="overlay" [visibility]="overlay ? 'visible' : 'collapse'"></GridLayout>
+  <GridLayout 
+    class="inner" 
+    columns="*" 
+    rows="auto" 
+    horizontalAlignment="center" 
+    verticalAlignment="center" 
+    [visibility]="imageSrc ? 'collapse' : 'visible'">
     <ng-content select="kirby-icon"></ng-content>
   </GridLayout>
-</AbsoluteLayout>
+</GridLayout>

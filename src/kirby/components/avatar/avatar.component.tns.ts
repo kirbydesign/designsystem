@@ -53,10 +53,13 @@ export class AvatarComponent extends ContentView {
         if (this.view.android) {
           this.view.eachChildView((child) => {
             const bgColor = child.style.backgroundColor;
+            const transparentColor = '#00ff0000';
             const androidView = child.android;
             const shape = new android.graphics.drawable.GradientDrawable();
             shape.setShape(android.graphics.drawable.GradientDrawable.RECTANGLE);
-            shape.setColor(android.graphics.Color.parseColor(bgColor + ''));
+            shape.setColor(
+              android.graphics.Color.parseColor(bgColor ? bgColor + '' : transparentColor)
+            );
             shape.setCornerRadius(androidView.getMeasuredWidth());
             androidView.setBackgroundDrawable(shape);
             androidView.setClipToOutline(true);
