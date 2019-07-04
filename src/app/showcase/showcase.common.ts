@@ -26,6 +26,7 @@ import { ActionSheetShowcaseComponent } from './action-sheet-showcase/action-she
 import { AlertShowcaseComponent } from './alert-showcase/alert-showcase.component';
 import { ToastShowcaseComponent } from './toast-showcase/toast-showcase.component';
 import { ToggleShowcaseComponent } from './toggle-showcase/toggle-showcase.component';
+import { EmptyStateShowcaseComponent } from './empty-state-showcase/empty-state-showcase.component';
 
 export const COMPONENT_IMPORTS: any[] = [ExamplesModule, ShowcaseRoutingModule];
 
@@ -55,6 +56,7 @@ export const COMPONENT_EXPORTS: any[] = [
   AlertShowcaseComponent,
   ToastShowcaseComponent,
   ToggleShowcaseComponent,
+  EmptyStateShowcaseComponent,
 ];
 
 export const COMPONENT_DECLARATIONS: any[] = [...COMPONENT_EXPORTS, ShowcaseComponent];
