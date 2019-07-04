@@ -2,7 +2,8 @@
  
 :host {
     .item-content {
-        display: flex;
+        display: inline-grid;
+        min-width: 70px;
         flex-direction: column;
         
         ion-icon {
@@ -20,9 +21,10 @@
     }
     
     ion-item-option {
-        display: flex;
+        display: inline-grid;
+        flex-grow: 1;
         height: 100%;
-        min-width: 87px;
+        min-width: 70px;
         --background: unset;
         --color: unset;
     }
