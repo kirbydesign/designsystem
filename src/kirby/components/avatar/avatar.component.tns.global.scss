@@ -1,18 +1,16 @@
 @import '../../scss/native-imports';
+@import '../icon/icon.component.shared';
 
 $image-diameter-small:  40;
 $image-diameter-medium: 56;
 $image-diameter-large:  96;
 
-$icon-size-small: 24;
-$icon-size-medium: 32;
-$icon-size-large: 56;
-
 $color-card-bg: rgb(255, 255, 255);
 
 .kirby-avatar {
 
-  .avatar, .image {
+  .avatar, .image, .overlay {
+    //default to size 'sm'
     width: $image-diameter-small;
     height: $image-diameter-small;
   }
@@ -30,8 +28,9 @@ $color-card-bg: rgb(255, 255, 255);
     background-color: $color-card-bg;
   }
 
-  .kirby-icon {
-    font-size: $icon-size-small;
+  .kirby-icon Label {
+    //default to icon size 'sm'
+    @include _icon-size_native('sm');
   }
 
   &.sm {
@@ -40,8 +39,8 @@ $color-card-bg: rgb(255, 255, 255);
       height: $image-diameter-small;
     }
 
-    .kirby-icon {
-      font-size: $icon-size-small;
+    .kirby-icon Label {
+      @include _icon-size_native('sm');
     }
   }
 
@@ -51,8 +50,8 @@ $color-card-bg: rgb(255, 255, 255);
       height: $image-diameter-medium;
     }
 
-    .kirby-icon {
-      font-size: $icon-size-medium;
+    .kirby-icon Label {
+      @include _icon-size_native('md');
     }
   }
 
@@ -62,8 +61,8 @@ $color-card-bg: rgb(255, 255, 255);
       height: $image-diameter-large;
     }
 
-    .kirby-icon {
-      font-size: $icon-size-large;
+    .kirby-icon Label {
+      @include _icon-size_native('lg');
     }
   }
 }

@@ -1,21 +1,19 @@
 @import "../../scss/web-imports";
+@import '../icon/icon.component.shared';
+
 $image-diameter-small:  40px;
 $image-diameter-medium: 56px;
 $image-diameter-large:  96px;
 
-$icon-size-small: 24px;
-$icon-size-medium: 32px;
-$icon-size-large: 56px;
-
 :host{
   .avatar {
+    //default to size 'sm'
     width: $image-diameter-small;
     height: $image-diameter-small;
     border-radius: 50%;
     overflow: hidden;
     position: relative;
 
-    
     &.shadow {
       box-shadow: 0px 2px 4px 2px rgba(113, 113, 113, 0.4);
     }
@@ -44,6 +42,8 @@ $icon-size-large: 56px;
       display: flex;
       justify-content: center;
       align-items: center;
+      //default to icon size 'sm'
+      @include _icon-size('sm');
     }
   }
 }
@@ -54,7 +54,7 @@ $icon-size-large: 56px;
     height: $image-diameter-small;
 
     ::ng-deep kirby-icon {
-      font-size: $icon-size-small;
+      @include _icon-size('sm');
     }
   }
 }
@@ -65,7 +65,7 @@ $icon-size-large: 56px;
     height: $image-diameter-medium;
 
     ::ng-deep kirby-icon {
-      font-size: $icon-size-medium;
+      @include _icon-size('md');
     }
   }
 }
@@ -76,7 +76,7 @@ $icon-size-large: 56px;
     height: $image-diameter-large;
 
     ::ng-deep kirby-icon {
-      font-size: $icon-size-large;
+      @include _icon-size('lg');
     }
   }
 }
