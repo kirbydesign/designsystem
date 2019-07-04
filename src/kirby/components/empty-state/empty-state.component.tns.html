@@ -3,7 +3,7 @@
     <kirby-icon *ngIf="iconName" [name]="iconName" size="lg" outline="true" class="icon"></kirby-icon>
     <Label *ngIf="title" class="kirby-text-normal-bold title" [text]="title"></Label>
     <Label *ngIf="text" class="kirby-text-normal message" [text]="text" textWrap="true"></Label>
-    <StackLayout class="button-wrapper">
+    <StackLayout class="content">
       <ng-content></ng-content>
     </StackLayout>
   </StackLayout>

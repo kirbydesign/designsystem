@@ -13,7 +13,7 @@
   margin-top: size('xs');
 }
 
-.title + .button-wrapper,
-.message + .button-wrapper {
+.title + .content,
+.message + .content {
   margin-top: size('m');
 }
