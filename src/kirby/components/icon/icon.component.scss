@@ -5,7 +5,9 @@
   //default to icon size 'sm'
   @include _icon-size('sm');
 
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font-size: var(--kirby-icon-font-size);
 
   .outline {

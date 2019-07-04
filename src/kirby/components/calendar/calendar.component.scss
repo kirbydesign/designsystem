@@ -89,12 +89,12 @@ table.calendar-table {
 }
 
 .day.today {
-  color: get-color('contrast-dark');
+  color: get-color('medium-contrast');
   background-color: get-color('medium-shade');
 }
 
 .day.selected {
-  color: get-color('contrast-dark');
+  color: get-color('black');
   background-color: get-color('primary');
   pointer-events: none;
 }
@@ -105,6 +105,6 @@ table.calendar-table {
 }
 
 .day.selectable:not(.selected):hover {
-  color: get-color('contrast-dark');
+  color: get-color('light-contrast');
   background-color: get-color('light');
 }

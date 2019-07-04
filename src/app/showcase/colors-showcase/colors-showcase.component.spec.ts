@@ -30,7 +30,7 @@ describe('ColorsShowcaseComponent', () => {
     const colorElm = fixture.debugElement.nativeElement.querySelector('.color-box');
     colorElm.click();
     expect(component.onColorClick).toHaveBeenCalledWith(jasmine.any(Object));
-    expect(component.selectedColor).toBe(component.colorPalette[0].name);
-    expect(component.selectedOnColor).toBe(component.colorPalette[0].contrast.name);
+    expect(component.selectedColor).toBe(component.brandColors[0].name);
+    expect(component.selectedOnColor).toBe(component.brandColors[0].contrast.name);
   });
 });
