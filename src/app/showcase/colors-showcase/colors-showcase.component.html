@@ -24,8 +24,9 @@
   <p>The <code>get-color</code> function will output CSS variables for web and output the color values directly for Nativescript.</p>
 </div>
 
+<h2>Brand Colors</h2>
 <ul class="color-palette">
-  <li *ngFor="let entry of colorPalette" class="color-box" (click)="onColorClick(entry)">
+  <li *ngFor="let entry of brandColors" class="color-box" (click)="onColorClick(entry)">
     <h2 class="color-name">{{entry.name}}</h2>
     <div class="color-samples">
       <div class="color-sample {{entry.name}}"><span class="h3" [ngStyle]="{color: entry.contrast.hex}">{{entry.name | slice:0:2 | uppercase }}</span></div>
@@ -45,3 +46,46 @@
   </li>
 </ul>
 
+<h2>Notification colors</h2>
+<ul class="color-palette">
+  <li *ngFor="let entry of notificationColors" class="color-box" (click)="onColorClick(entry)">
+    <h2 class="color-name">{{entry.name}}</h2>
+    <div class="color-samples">
+      <div class="color-sample {{entry.name}}"><span class="h3" [ngStyle]="{color: entry.contrast.hex}">{{entry.name | slice:0:2 | uppercase }}</span></div>
+      <div class="color-sample {{entry.tint.name}}"></div>
+      <div class="color-sample {{entry.shade.name}}"></div>
+    </div>
+    <dl class="kirby-text-xsmall color-values">
+      <dt>Base</dt>
+      <dd>{{entry.value.hex}}</dd>
+      <dt>Tint</dt>
+      <dd>{{entry.tint.hex}}</dd>
+      <dt>Shade</dt>
+      <dd>{{entry.shade.hex}}</dd>
+      <dt>Contrast</dt>
+      <dd>{{entry.contrast.hex}}</dd>
+    </dl>
+  </li>
+</ul>
+
+<h2>System colors</h2>
+<ul class="color-palette">
+  <li *ngFor="let entry of systemColors" class="color-box" (click)="onColorClick(entry)">
+    <h2 class="color-name">{{entry.name}}</h2>
+    <div class="color-samples">
+      <div class="color-sample {{entry.name}}"><span class="h3" [ngStyle]="{color: entry.contrast.hex}">{{entry.name | slice:0:2 | uppercase }}</span></div>
+      <div class="color-sample {{entry.tint.name}}"></div>
+      <div class="color-sample {{entry.shade.name}}"></div>
+    </div>
+    <dl class="kirby-text-xsmall color-values">
+      <dt>Base</dt>
+      <dd>{{entry.value.hex}}</dd>
+      <dt>Tint</dt>
+      <dd>{{entry.tint.hex}}</dd>
+      <dt>Shade</dt>
+      <dd>{{entry.shade.hex}}</dd>
+      <dt>Contrast</dt>
+      <dd>{{entry.contrast.hex}}</dd>
+    </dl>
+  </li>  
+</ul>

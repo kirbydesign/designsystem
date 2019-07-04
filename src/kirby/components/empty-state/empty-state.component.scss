@@ -1,7 +1,7 @@
 @import "../../scss/web-imports";
 
 article {
-  width: 330px;
+  max-width: 330px;
   margin: auto;
   display: flex;
   flex-direction: column;
