@@ -1,3 +1,4 @@
-<div class="image-wrapper {{size}}" [ngClass]="{'show-shadow': shadow, 'show-overlay': overlay}">
-  <img [src]="imageSrc" [attr.alt]="altText" />
+<div class="avatar" [ngClass]="{'shadow': shadow, 'overlay': overlay}">
+  <img *ngIf="imageSrc"[src]="imageSrc" [attr.alt]="altText" />
+  <ng-content select="kirby-icon"></ng-content>
 </div>
