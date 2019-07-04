@@ -21,7 +21,7 @@ export class AvatarShowcaseComponent implements OnInit {
     },
     {
       name: 'size',
-      description: 'Sets the size of the button.',
+      description: 'Sets the size of the avatar.',
       defaultValue: 'sm',
       inputValues: Object.values(Sizes),
     },
