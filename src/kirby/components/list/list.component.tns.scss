@@ -23,7 +23,7 @@ RadListView {
 }
 
 .row {
-  background-color: get-color('contrast-light');
+  background-color: get-color('white');
   //TODO: Add shadow on each section for list WITH sections
 
   &.first {
