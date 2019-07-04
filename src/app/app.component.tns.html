@@ -1,1 +1,4 @@
-  <page-router-outlet></page-router-outlet>
+<GridLayout rows="*,30">
+  <page-router-outlet row="0"></page-router-outlet>
+  <Label textAlignment="center" row="1" text="fps: {{fps | async }} | minfps: {{minFps | async }}" backgroundColor="lightyellow"></Label>
+</GridLayout>
