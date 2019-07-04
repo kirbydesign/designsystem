@@ -18,10 +18,6 @@ export class ListHelper {
     return item;
   }
 
-  isIOS(): boolean {
-    return false;
-  }
-
   renderShadow(_: any): void {
     // only native implementation
     return;

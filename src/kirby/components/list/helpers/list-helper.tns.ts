@@ -1,5 +1,6 @@
 import { RadListView, ListViewEventData } from 'nativescript-ui-listview';
-import { isIOS, View, EventData } from 'tns-core-modules/ui/page/page';
+import { isIOS } from 'tns-core-modules/platform';
+import { View, EventData } from 'tns-core-modules/ui/page/page';
 
 import { LoadOnDemandEventData } from '../list.event';
 import { ListComponent } from './../list.component';
@@ -31,10 +32,6 @@ export class ListHelper {
       selectedItem = items[args.index];
     }
     return selectedItem;
-  }
-
-  isIOS(): boolean {
-    return isIOS;
   }
 
   renderShadow(args: EventData): void {

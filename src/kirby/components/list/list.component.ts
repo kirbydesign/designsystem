@@ -133,12 +133,8 @@ export class ListComponent implements OnChanges {
     this.listHelper.onLoadOnDemand(this, event);
   }
 
-  isIOS(): boolean {
-    return this.listHelper.isIOS();
-  }
-
-  onRowLoaded(row: any): void {
-    this.listHelper.renderShadow(row);
+  onRowLoaded(event: any): void {
+    this.listHelper.renderShadow(event);
   }
 
   private createOrderMap(

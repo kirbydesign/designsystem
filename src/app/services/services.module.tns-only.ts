@@ -1,5 +1,5 @@
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
-import { FpsService } from './services/fps.service.tns-only';
+import { FpsService } from './fps.service.tns-only';
 
 @NgModule({
   providers: [FpsService],
