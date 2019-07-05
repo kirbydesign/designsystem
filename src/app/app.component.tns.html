@@ -1,6 +1,6 @@
-<GridLayout rows="*,30">
+<GridLayout rows="*,auto">
   <page-router-outlet row="0"></page-router-outlet>
-  <FlexboxLayout *ngIf="showFpsMeter" row="1" justifyContent="space-between" backgroundColor="lightyellow" style="padding: 0 10">
+  <FlexboxLayout *ngIf="showFpsMeter" row="1" justifyContent="space-between" alignItems="center" backgroundColor="lightyellow" style="padding: 0 10">
     <Label textAlignment="center" text="fps: {{fps | async }} | minfps: {{minFps | async }}"></Label>
     <StackLayout orientation="horizontal">
       <Button text="Reset " (tap)="resetFps()"></Button>
