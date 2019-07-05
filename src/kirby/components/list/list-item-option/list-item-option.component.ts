@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 
-import { ListHelper, SelectedOptionItem } from '../helpers/list-helper';
+import { ListHelper } from '../helpers/list-helper';
+import { ItemOption, SelectedItemWithOption } from './list-item-option';
 
 @Component({
   selector: 'kirby-list-item-option',
@@ -8,16 +9,15 @@ import { ListHelper, SelectedOptionItem } from '../helpers/list-helper';
   styleUrls: ['./list-item-option.component.scss'],
 })
 export class ListItemOptionComponent {
-  @Input() id: string;
-  @Input() title: string;
-  @Input() iconName?: string;
   @Input() item: any;
+  @Input() option: ItemOption;
   constructor(private listHelper: ListHelper) {}
-  onClick(id: string) {
-    const selectedOptionItem: SelectedOptionItem = {
-      id: id,
+  onClick() {
+    this.option.selected = !this.option.selected;
+    const selectedItemWithOption: SelectedItemWithOption = {
       item: this.item,
+      option: this.option,
     };
-    this.listHelper.selectedOptionItem$.next(selectedOptionItem);
+    this.listHelper.setSelectedItemWithOption(selectedItemWithOption);
   }
 }

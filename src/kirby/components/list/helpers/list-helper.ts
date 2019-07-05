@@ -1,10 +1,12 @@
-import { BehaviorSubject } from 'rxjs';
+import { Subject } from 'rxjs';
 
 import { LoadOnDemandEventData } from '../list.event';
 import { ListComponent } from './../list.component';
+import { SelectedItemWithOption } from '../list-item-option/list-item-option';
 
 export class ListHelper {
-  selectedOptionItem$ = new BehaviorSubject<SelectedOptionItem>(undefined);
+  private selectedItemWithOption = new Subject<SelectedItemWithOption>();
+  public selectedItemWithOption$ = this.selectedItemWithOption.asObservable();
 
   onLoadOnDemand(component: ListComponent, _event: LoadOnDemandEventData) {
     if (component.isLoadOnDemandEnabled && !component.isLoading) {
@@ -22,35 +24,7 @@ export class ListHelper {
     return item;
   }
 
-  async getOptionItemId(slidingItem: any, side: string): Promise<string> {
-    /*
-     * Must cast slidingItem as any to avoid
-     * Property 'slidingItem.el' is protected and only accessible within class 'IonItemSliding' and its subclasses.
-     */
-    const elements = Array.from(
-      slidingItem.el.firstElementChild.getElementsByTagName('kirby-list-item-options')
-    );
-    return new Promise<string>((resolve) => {
-      if (elements) {
-        elements.forEach(function(element: HTMLElement) {
-          const sideValue = element.getAttribute('side');
-          // Left side items - start
-          if (sideValue === side) {
-            resolve(element.firstElementChild.firstElementChild.id);
-          }
-          // Right side items - end
-          if (sideValue === side) {
-            resolve(element.firstElementChild.lastElementChild.id);
-          }
-        });
-      } else {
-        resolve(undefined);
-      }
-    });
+  setSelectedItemWithOption(item: any) {
+    this.selectedItemWithOption.next(item);
   }
-}
-
-export interface SelectedOptionItem {
-  id: string;
-  item: any;
 }

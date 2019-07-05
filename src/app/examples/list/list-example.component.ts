@@ -25,7 +25,7 @@ export class ListExampleComponent extends BaseListComponent {
     this.router.navigateByUrl(url);
   }
 
-  onOptionItemSelect(event) {
-    console.log(`list option item selected : ${JSON.stringify(event)}`);
+  onItemOptionSelect(event) {
+    console.log('list option item selected :', event);
   }
 }

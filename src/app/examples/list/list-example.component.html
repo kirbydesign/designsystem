@@ -25,7 +25,7 @@
 <hr />
 
 <h2>List with sliding items:</h2>
-<kirby-list [items]="items" showDivider="true" (optionItemSelect)="onOptionItemSelect($event)">
+<kirby-list [items]="items" showDivider="true" (itemOptionSelect)="onItemOptionSelect($event)">
   <kirby-list-item
     *kirbyListItem="let item"
     [title]="item.title"
@@ -35,12 +35,21 @@
   <!-- Sliding items -->
   <div *kirbyListItemOptions="let item">
     <kirby-list-item-options side="start">
-      <kirby-list-item-option id="0" title="Afstem" iconName="swap" themeColor="success" [item]="item"></kirby-list-item-option>
-      <kirby-list-item-option id="1" title="Flag" iconName="attach" themeColor="warning" [item]="item"></kirby-list-item-option>
+      <kirby-list-item-option
+        *ngFor="let option of item.startOptions" 
+        [item]="item" 
+        [option]="option"
+        [themeColor]="option.themeColor">
+      </kirby-list-item-option>
     </kirby-list-item-options>
 
     <kirby-list-item-options side="end">
-      <kirby-list-item-option id="2" title="Fjer Afstem" themeColor="success" [item]="item"></kirby-list-item-option>
+        <kirby-list-item-option
+          *ngFor="let option of item.endOptions" 
+          [item]="item" 
+          [option]="option"
+          [themeColor]="option.themeColor">
+      </kirby-list-item-option>
     </kirby-list-item-options>
   </div>
 </kirby-list>

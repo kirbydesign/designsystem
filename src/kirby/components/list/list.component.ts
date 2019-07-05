@@ -23,8 +23,10 @@ import {
   ListItemOptionsDirective,
 } from './list.directive';
 import { LoadOnDemandEvent, LoadOnDemandEventData } from './list.event';
-import { ListHelper, SelectedOptionItem } from './helpers/list-helper';
+import { ListHelper } from './helpers/list-helper';
 import { GroupByPipe } from './pipes/group-by.pipe';
+import { SelectedItemWithOption, ItemOption } from './list-item-option/list-item-option';
+
 export type ListShape = 'square' | 'rounded';
 
 declare var require: any;
@@ -91,7 +93,7 @@ export class ListComponent implements OnInit, OnChanges, OnDestroy {
    * Emitting event when an item is selected (tab'ed on mobile, clicked on web)
    */
   @Output() itemSelect = new EventEmitter<any>();
-  @Output() optionItemSelect = new EventEmitter<SelectedOptionItem>();
+  @Output() itemOptionSelect = new EventEmitter<SelectedItemWithOption>();
 
   // The first element that matches ListItemDirective. As a structural directive it unfolds into a template. This is a reference to that.
   @ContentChild(ListItemDirective, { read: TemplateRef }) listItemTemplate;
@@ -111,9 +113,9 @@ export class ListComponent implements OnInit, OnChanges, OnDestroy {
   private orderMap: WeakMap<any, { isFirst: boolean; isLast: boolean }>;
 
   constructor(private listHelper: ListHelper, private groupBy: GroupByPipe) {
-    this.optionItemSubscription = this.listHelper.selectedOptionItem$.subscribe(
-      (selectedOptionItem: SelectedOptionItem) => {
-        this.emitSelectedOptionItem(selectedOptionItem);
+    this.optionItemSubscription = this.listHelper.selectedItemWithOption$.subscribe(
+      (selectedItemWithOption) => {
+        this.emitSelectedItemWithOption(selectedItemWithOption);
       }
     );
   }
@@ -185,8 +187,8 @@ export class ListComponent implements OnInit, OnChanges, OnDestroy {
     return orderMap;
   }
 
-  private emitSelectedOptionItem(selectedOptionItem: SelectedOptionItem) {
-    this.optionItemSelect.emit(selectedOptionItem);
+  private emitSelectedItemWithOption(selectedItemWithOption) {
+    this.itemOptionSelect.emit(selectedItemWithOption);
 
     if (this.ionList) {
       this.ionList.closeSlidingItems();
@@ -195,13 +197,21 @@ export class ListComponent implements OnInit, OnChanges, OnDestroy {
 
   ionSwipe(slidingItem: IonItemSliding, item: any) {
     slidingItem.getSlidingRatio().then(async (percent) => {
-      const side = percent > 0 ? 'end' : 'start';
-      const id = await this.listHelper.getOptionItemId(slidingItem, side);
-      const selectedOptionItem: SelectedOptionItem = {
-        id: id,
+      let option: ItemOption = undefined;
+
+      if (item.endOptions) {
+        if (percent > 0) {
+          option = item.endOptions[item.endOptions.length - 1];
+        } else {
+          option = item.startOptions[0];
+        }
+      }
+
+      const selectedItemWithOption: SelectedItemWithOption = {
         item: item,
+        option: option,
       };
-      this.emitSelectedOptionItem(selectedOptionItem);
+      this.emitSelectedItemWithOption(selectedItemWithOption);
     });
   }
 
