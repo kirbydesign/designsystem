@@ -1,21 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { BaseListComponent } from '../../list/base-list.component';
-import { FpsService } from '~/app/services/fps.service.tns-only';
 
 @Component({
   selector: 'kirby-list-section-example',
   templateUrl: './list-section-example.component.tns.html',
   styleUrls: ['./list-section-example.component.tns.scss'],
 })
-export class ListSectionExampleComponent extends BaseListComponent implements OnInit {
-  constructor(private fpsService: FpsService) {
-    super();
-  }
-
-  ngOnInit(): void {
-    setTimeout(this.fpsService.reset, 500);
-  }
+export class ListSectionExampleComponent extends BaseListComponent {
 
   getSectionName(item: any): string {
     if (item.id < 5) return '1st section';
