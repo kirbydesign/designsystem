@@ -9,11 +9,20 @@ import { Observable } from 'rxjs';
 })
 export class AppComponent {
   title = 'Kirby design system';
+  showFpsMeter = true;
   fps: Observable<string>;
   minFps: Observable<string>;
 
-  constructor(fpsService: FpsService) {
+  constructor(private fpsService: FpsService) {
     this.fps = fpsService.fps;
     this.minFps = fpsService.minFps;
+  }
+
+  resetFps() {
+    this.fpsService.reset();
+  }
+
+  hideFpsMeter() {
+    this.showFpsMeter = false;
   }
 }

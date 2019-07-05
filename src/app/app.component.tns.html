@@ -1,4 +1,11 @@
 <GridLayout rows="*,30">
   <page-router-outlet row="0"></page-router-outlet>
-  <Label textAlignment="center" row="1" text="fps: {{fps | async }} | minfps: {{minFps | async }}" backgroundColor="lightyellow"></Label>
+  <FlexboxLayout *ngIf="showFpsMeter" row="1" justifyContent="space-between" backgroundColor="lightyellow" style="padding: 0 10">
+    <Label textAlignment="center" text="fps: {{fps | async }} | minfps: {{minFps | async }}"></Label>
+    <StackLayout orientation="horizontal">
+      <Button text="Reset " (tap)="resetFps()"></Button>
+      <Label text=" | "></Label>
+      <Button text="Hide" (tap)="hideFpsMeter()"></Button>
+    </StackLayout>
+  </FlexboxLayout>
 </GridLayout>
