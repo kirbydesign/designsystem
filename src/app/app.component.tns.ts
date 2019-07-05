@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { FpsService } from './services/fps.service.tns-only';
 import { Observable } from 'rxjs';
+
+import { FpsService } from './services/fps.service.tns-only';
 
 @Component({
   selector: 'kirby-root',

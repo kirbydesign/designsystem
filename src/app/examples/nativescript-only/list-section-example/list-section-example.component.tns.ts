@@ -8,7 +8,6 @@ import { BaseListComponent } from '../../list/base-list.component';
   styleUrls: ['./list-section-example.component.tns.scss'],
 })
 export class ListSectionExampleComponent extends BaseListComponent {
-
   getSectionName(item: any): string {
     if (item.id < 5) return '1st section';
     if (item.id < 10) return '2nd section';
