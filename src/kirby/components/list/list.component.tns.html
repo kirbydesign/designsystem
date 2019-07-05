@@ -1,55 +1,49 @@
-
-<GridLayout rows="*"> <!-- GridLayout kept for iOS compability -->
-  <RadListView
-    row="0"
-    loadOnDemandMode="Auto"
-    (loadMoreDataRequested)="onLoadOnDemand($event)"
-    [groupingFunction]="getSectionName"
-    [items]="items"
-    (itemTap)="onItemSelect($event)">
-    <!-- ITEM -->
-    <ng-template tkListItemTemplate let-item="item" let-index="index">
-      <StackLayout (loaded)="onRowLoaded($event)">
-        <StackLayout class="row"
-          [class.divider]="showDivider"
-          [class.rounded]="shape === 'rounded'"
-          [class.first]="isFirstItem(item, index)"
-          [class.last]="isLastItem(item, index)">
-          <ng-container
-            *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }">
-          </ng-container>
-          <ng-container
-            *ngTemplateOutlet="listFlexItemTemplate; context: { $implicit: item }">
-          </ng-container>  
-        </StackLayout>
+<RadListView
+  loadOnDemandMode="Auto"
+  (loadMoreDataRequested)="onLoadOnDemand($event)"
+  [groupingFunction]="getSectionName"
+  [items]="items"
+  (itemTap)="onItemSelect($event)">
+  <!-- ITEM -->
+  <ng-template tkListItemTemplate let-item="item" let-index="index">
+    <StackLayout (loaded)="onRowLoaded($event)">
+      <StackLayout class="row"
+        [class.divider]="showDivider"
+        [class.rounded]="shape === 'rounded'"
+        [class.first]="isFirstItem(item, index)"
+        [class.last]="isLastItem(item, index)">
+        <ng-container
+          *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }">
+        </ng-container>
+        <ng-container
+          *ngTemplateOutlet="listFlexItemTemplate; context: { $implicit: item }">
+        </ng-container>  
       </StackLayout>
-    </ng-template>
+    </StackLayout>
+  </ng-template>
 
-    <!-- SECTION HEADER-->
-    <ng-template let-section="category" tkGroupTemplate *ngIf="isSectionsEnabled">
-      <StackLayout>
-            <ng-container
-            *ngTemplateOutlet="
-              sectionHeaderTemplate;
-              context: { $implicit: section }
-            ">
-          </ng-container> 
-      </StackLayout>
-    </ng-template> 
+  <!-- SECTION HEADER-->
+  <ng-template let-section="category" tkGroupTemplate *ngIf="isSectionsEnabled">
+    <StackLayout>
+          <ng-container
+          *ngTemplateOutlet="
+            sectionHeaderTemplate;
+            context: { $implicit: section }
+          ">
+        </ng-container> 
+    </StackLayout>
+  </ng-template> 
 
-    <!-- HEADER -->
-    <ng-template tkListViewHeader *ngIf="listHeaderTemplate">
-      <ng-container *ngTemplateOutlet="listHeaderTemplate"></ng-container>
-    </ng-template>
+  <!-- HEADER -->
+  <ng-template tkListViewHeader *ngIf="listHeaderTemplate">
+    <ng-container *ngTemplateOutlet="listHeaderTemplate"></ng-container>
+  </ng-template>
 
-    <!-- FOOTER -->
-    <ng-template tkListViewFooter *ngIf="!isLoadOnDemandEnabled && noMoreItemsText && !listFooterTemplate">
-      <Label class="footer" text="{{noMoreItemsText}}"></Label>
-    </ng-template>
-    <ng-template tkListViewFooter *ngIf="listFooterTemplate">
-      <ng-container *ngTemplateOutlet="listFooterTemplate"></ng-container>
-    </ng-template>
-
-
-  </RadListView>
-</GridLayout>
+  <!-- FOOTER -->
+  <ng-template tkListViewFooter *ngIf="!isLoadOnDemandEnabled && noMoreItemsText && !listFooterTemplate">
+    <Label class="footer" text="{{noMoreItemsText}}"></Label>
+  </ng-template>
+  <ng-template tkListViewFooter *ngIf="listFooterTemplate">
+    <ng-container *ngTemplateOutlet="listFooterTemplate"></ng-container>
+  </ng-template>
+</RadListView>
