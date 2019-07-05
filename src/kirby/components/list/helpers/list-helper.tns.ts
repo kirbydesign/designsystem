@@ -6,6 +6,8 @@ import { LoadOnDemandEventData } from '../list.event';
 import { ListComponent } from './../list.component';
 import { ScssHelper } from '../../../scss/scss-helper';
 
+declare const CGSizeMake: any;
+
 export class ListHelper {
   onLoadOnDemand(component: ListComponent, event: LoadOnDemandEventData) {
     const listView: RadListView = event.object;
