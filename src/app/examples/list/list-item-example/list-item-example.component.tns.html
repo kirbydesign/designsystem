@@ -1,3 +1,3 @@
-<kirby-list [items]="items" (itemSelect)="onItemSelect($event)">
-  <kirby-list-item *kirbyListItem="let item" [title]="item.title" [amount]="item.amount"></kirby-list-item>
+<kirby-list [items]="itemsFullList" (itemSelect)="onItemSelect($event)" showDivider="true">
+  <kirby-list-item *kirbyListItem="let item" [title]="item?.title" [amount]="item?.amount"></kirby-list-item>
 </kirby-list>
