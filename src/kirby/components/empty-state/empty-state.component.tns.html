@@ -1,0 +1,10 @@
+<StackLayout class="box" verticalAlignment="center">
+  <StackLayout class="icon">
+    <kirby-icon *ngIf="iconName" [name]="iconName" size="lg" outline="true" themeColor="medium"></kirby-icon>
+  </StackLayout>
+  <Label *ngIf="title" class="h3 title" [text]="title"></Label>
+  <Label *ngIf="subtitle" class="p subtitle" [text]="subtitle" textWrap="true"></Label>
+  <StackLayout class="content">
+    <ng-content></ng-content>
+  </StackLayout>
+</StackLayout>
