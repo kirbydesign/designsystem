@@ -6,9 +6,4 @@ import { BaseListComponent } from '../base-list.component';
   templateUrl: './list-item-example.component.tns.html',
   styleUrls: ['./list-item-example.component.tns.scss'],
 })
-export class ListItemExampleComponent extends BaseListComponent {
-  constructor() {
-    super();
-    this.items = this.itemsFullList.slice(0, 15);
-  }
-}
+export class ListItemExampleComponent extends BaseListComponent {}
