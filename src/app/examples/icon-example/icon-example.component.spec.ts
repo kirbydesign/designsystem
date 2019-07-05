@@ -6,6 +6,7 @@ import { ICON_SETTINGS, IconComponent } from '@kirbydesign/designsystem';
 import { iconSettings } from '../examples.common';
 import { SizeDirective } from '@kirbydesign/designsystem/directives/size/size.directive';
 import { ThemeColorDirective } from '@kirbydesign/designsystem/directives/theme-color/theme-color.directive';
+import { CheckboxComponent } from '@kirbydesign/designsystem/components/checkbox/checkbox.component';
 
 describe('IconExampleComponent', () => {
   let component: IconExampleComponent;
@@ -24,6 +25,7 @@ describe('IconExampleComponent', () => {
       declarations: [
         IconExampleComponent,
         MockComponent(IconComponent),
+        MockComponent(CheckboxComponent),
         MockDirective(SizeDirective),
         MockDirective(ThemeColorDirective),
       ],
