@@ -4,4 +4,5 @@ export interface ActionSheetConfig {
   header?: string;
   subheader?: string;
   items: Array<ActionSheetItem>;
+  cancelButtonText?: string;
 }
