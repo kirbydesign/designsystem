@@ -14,6 +14,7 @@ import { SpinnerComponent } from '../../spinner/spinner.component';
 import { InfiniteScrollDirective } from '../../list/directives/infinite-scroll.directive';
 import { CardHeaderComponent } from '../../card/card-header/card-header.component';
 import { ListFlexItemComponent } from '../../list/list-flex-item/list-flex-item.component';
+import { ButtonComponent } from '@kirbydesign/designsystem';
 
 describe('ActionSheetComponent', () => {
   let component: ActionSheetComponent;
@@ -35,6 +36,7 @@ describe('ActionSheetComponent', () => {
           { id: '2', text: 'Action 2' },
           { id: '3', text: 'Action 3' },
         ],
+        cancelButtonText: 'Test cancel button text',
       },
     });
 
@@ -130,6 +132,23 @@ describe('ActionSheetComponent', () => {
       expect(el.componentInstance.items).toContain({ id: '2', text: 'Action 2' });
       expect(el.componentInstance.items).not.toContain({ id: '3', text: 'Action 3' });
       expect(el.componentInstance.items).toContain({ id: '4', text: 'Action 4' });
+    });
+  });
+
+  describe('cancel button text', () => {
+    it('should render', () => {
+      const expected = 'Test cancel button text';
+      const cancelButton = fixture.debugElement.query(By.directive(ButtonComponent));
+      expect(component.cancelButtonText).toEqual(expected);
+      expect(cancelButton.componentInstance.text).toEqual(expected);
+    });
+
+    it('should reflect changes in the UI', () => {
+      const newCancelButtonText = 'Another cancel button text';
+      component.cancelButtonText = newCancelButtonText;
+      fixture.detectChanges();
+      const cancelButton = fixture.debugElement.query(By.directive(ButtonComponent));
+      expect(cancelButton.componentInstance.text).toEqual(newCancelButtonText);
     });
   });
 });

@@ -12,11 +12,13 @@ import { ActionSheetItem } from './config/action-sheet-item';
 })
 export class ActionSheetComponent extends ContentView {
   config: ActionSheetConfig;
+  cancelButtonText: string;
   view: View;
 
   constructor(private modalController: IModalController, private params: ModalDialogParams) {
     super();
     this.config = this.params.context;
+    this.cancelButtonText = this.config.cancelButtonText || 'Cancel';
     this.modalController.register({ close: this.params.closeCallback });
   }
 
