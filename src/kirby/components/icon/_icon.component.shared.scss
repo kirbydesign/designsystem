@@ -1,0 +1,40 @@
+$_icon-size-map: (
+  'sm': (
+    font-size: size('m'),
+    padding: size('xs'),
+  ),
+  'md': (
+    font-size: size('l'),
+    padding: size('s'),
+  ),
+  'lg': (
+    font-size: size('xxxl'),
+    padding: size('m'),
+  ),
+);
+
+@function _icon-font-size($key) {
+  $size: map-get($_icon-size-map, $key);
+  @return map-get($size, font-size);
+}
+
+@function _icon-padding($key) {
+  $size: map-get($_icon-size-map, $key);
+  @return map-get($size, padding);
+}
+  
+@mixin _icon-size($key) {
+  --kirby-icon-font-size: #{_icon-font-size($key)};
+  --kirby-icon-padding: #{_icon-padding($key)};
+}
+
+@mixin _icon-size_native($key) {
+  $font-size: _icon-font-size($key);
+  $padding: _icon-padding($key);
+  font-size: $font-size;
+  &.outline {
+    $icon-size: $font-size + $padding * 2;
+    width: $icon-size;
+    height: $icon-size;
+  }
+}

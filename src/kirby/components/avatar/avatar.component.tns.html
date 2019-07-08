@@ -1,4 +1,12 @@
-<AbsoluteLayout (loaded)="onViewLoaded($event)" class="image-wrapper {{size}}">
-  <Image class="container" [src]="imageSrc" [automationText]="altText"></Image>
-  <AbsoluteLayout class="image-overlay" *ngIf="overlay"></AbsoluteLayout>
-</AbsoluteLayout>
+<GridLayout (loaded)="onViewLoaded($event)" class="avatar" columns="*" rows="auto" horizontalAlignment="center" verticalAlignment="center">
+  <Image [visibility]="imageSrc ? 'visible' : 'collapse'" class="image" [src]="imageSrc" [automationText]="altText"></Image>
+  <GridLayout class="overlay" [visibility]="overlay ? 'visible' : 'collapse'"></GridLayout>
+  <GridLayout
+    columns="*" 
+    rows="auto" 
+    horizontalAlignment="center" 
+    verticalAlignment="center" 
+    [visibility]="imageSrc ? 'collapse' : 'visible'">
+    <ng-content select="kirby-icon"></ng-content>
+  </GridLayout>
+</GridLayout>

@@ -6,6 +6,7 @@ import { registerLocaleData } from '@angular/common';
 import localeEn from '@angular/common/locales/en-GB';
 
 import { AppRoutingModule } from './app-routing.module';
+import { ServicesModule } from './services/services.module.tns-only';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { SideNavComponent } from './page/side-nav/side-nav.component';
@@ -18,7 +19,7 @@ registerLocaleData(localeEn);
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, SideNavComponent, HeaderComponent, IntroComponent],
-  imports: [NativeScriptModule, AppRoutingModule],
+  imports: [NativeScriptModule, AppRoutingModule, ServicesModule],
   providers: [{ provide: LOCALE_ID, useValue: 'en-GB' }],
   bootstrap: [AppComponent],
   schemas: [NO_ERRORS_SCHEMA],

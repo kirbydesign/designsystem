@@ -6,10 +6,10 @@
   
   <br />
   <br />
-  Use 'customName' if you want to add custom icons font. You need to include TTF file inside your project and add 'CustomIconSettings' under your NgModule
+  Use 'customName' if you want to add custom icons font. You need to include TTF file inside your project and add 'IconSettings' under your NgModule
   <br />
   <pre>
-    const customIconSettings: CustomIconSettings = {{ '{' }} 
+    const customIconSettings: IconSettings = {{ '{' }}
       fontfamily: "'ios-font-name', 'android-font-file-name'",
       icons: [
         {{ '{' }} 
@@ -29,8 +29,7 @@
       ...
       providers: [
       {{ '{' }} 
-          provide: CUSTOM_FONT_SETTINGS,
-          useValue: customIconSettings,
+          provide: ICON_SETTINGS, useValue: customIconSettings,
       {{ '},' }} 
       {{ '],' }} 
       ...

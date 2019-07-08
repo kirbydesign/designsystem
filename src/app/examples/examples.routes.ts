@@ -23,6 +23,7 @@ import { AlertExampleComponent } from './alert-example/alert-example.component';
 import { SlideButtonExampleComponent } from './slide-button-example/slide-button-example.component';
 import { ToastExampleComponent } from './toast-example/toast-example.component';
 import { ToggleExampleComponent } from './toggle-example/toggle-example.component';
+import { EmptyStateExampleComponent } from './empty-state-example/empty-state-example.component';
 
 export const routes: Routes = [
   {
@@ -120,5 +121,9 @@ export const routes: Routes = [
   {
     path: 'calendar-card',
     component: CalendarCardExampleComponent,
+  },
+  {
+    path: 'empty-state',
+    component: EmptyStateExampleComponent,
   },
 ];

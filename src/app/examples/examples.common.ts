@@ -27,6 +27,7 @@ import { AlertExampleComponent } from './alert-example/alert-example.component';
 import { SlideButtonExampleComponent } from './slide-button-example/slide-button-example.component';
 import { ToastExampleComponent } from './toast-example/toast-example.component';
 import { ToggleExampleComponent } from './toggle-example/toggle-example.component';
+import { EmptyStateExampleComponent } from './empty-state-example/empty-state-example.component';
 
 // Example of "custom" icons
 export const iconSettings: IconSettings = {
@@ -73,6 +74,7 @@ export const COMPONENT_DECLARATIONS: any[] = [
   AlertExampleComponent,
   ToastExampleComponent,
   ToggleExampleComponent,
+  EmptyStateExampleComponent,
 ];
 
 // Configure custom icons (used by example to show the usage of custom icons)
