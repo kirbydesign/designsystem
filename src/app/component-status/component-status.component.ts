@@ -1,18 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, BehaviorSubject, forkJoin, of } from 'rxjs';
+import { Observable, BehaviorSubject, forkJoin, of, combineLatest } from 'rxjs';
 import { map, first, catchError } from 'rxjs/operators';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 import { environment } from '~/environments/environment';
 
 import {
-  componentStatusItems,
   ComponentStatusItem,
   ItemCodeStatusOrder,
   ItemUXStatus,
   ItemCodeStatus,
 } from './component-status-items';
-import { componentStatusGhostItems } from './component-status-ghost-items';
+
+export interface GhostComponent {
+  name: string;
+  tagline: string;
+  url: string;
+}
+
 @Component({
   selector: 'kirby-component-status',
   templateUrl: './component-status.component.html',
@@ -21,7 +27,8 @@ import { componentStatusGhostItems } from './component-status-ghost-items';
 export class ComponentStatusComponent implements OnInit {
   isLoading = true;
   gitHubError = false;
-  items = this.clone(componentStatusItems);
+  items: ComponentStatusItem[];
+  ghostItems: GhostComponent[];
   sortedItems: ComponentStatusItem[] = [];
   items$: Observable<ComponentStatusItem[]>;
   searchTerm$ = new BehaviorSubject<string>('');
@@ -32,13 +39,29 @@ export class ComponentStatusComponent implements OnInit {
     environment.githubBaseUrl +
     '/issues/new?labels=component&template=component-request.md&title=%5BCOMPONENT%5D+';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private db: AngularFirestore) {}
 
   ngOnInit() {
     this.items$ = this.searchTerm$.pipe(
       map((searchTerm) => this.filterItems(this.sortedItems, searchTerm, this.excludedStatuses))
     );
-    this.initializeGithubStatus();
+
+    const componentsCollection$ = this.db
+      .collection<ComponentStatusItem>('component-status-items')
+      .valueChanges();
+
+    const ghostComponentsCollection$ = this.db
+      .collection<GhostComponent>('component-status-ghost-items')
+      .valueChanges();
+
+    combineLatest([componentsCollection$, ghostComponentsCollection$]).subscribe(
+      ([components, ghostComponents]) => {
+        this.isLoading = true;
+        this.items = components;
+        this.ghostItems = ghostComponents;
+        this.initializeGithubStatus();
+      }
+    );
   }
 
   public toggleExcluded(event) {
@@ -46,10 +69,6 @@ export class ComponentStatusComponent implements OnInit {
     const excludedStatuses = event.detail.value as ItemCodeStatus[];
     this.excludedStatuses = checked ? excludedStatuses : [];
     this.searchTerm$.next(this.searchTerm$.value);
-  }
-
-  private clone<T>(instance: T): T {
-    return JSON.parse(JSON.stringify(instance));
   }
 
   private initializeGithubStatus() {
@@ -99,8 +118,10 @@ export class ComponentStatusComponent implements OnInit {
 
   private getStatusItemsFromGithubIssues() {
     const flattenedItems = this.flattenItems(this.items);
+
     const hasStatusItem = (issue) =>
       !!flattenedItems.find((item) => item.code.githubIssueNo === issue.number);
+
     return this.getGithubComponentIssues().pipe(
       map((issues) => {
         return issues
@@ -276,7 +297,7 @@ export class ComponentStatusComponent implements OnInit {
   }
 
   private getGhostItems(searchTerm: string): ComponentStatusItem[] {
-    const ghostItem = componentStatusGhostItems.find(
+    const ghostItem = this.ghostItems.find(
       (x) => x.name.toLowerCase() === searchTerm.toLowerCase()
     );
     if (ghostItem) {
