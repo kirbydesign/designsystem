@@ -37,7 +37,9 @@
 
     <!-- HEADER -->
     <ng-template tkListViewHeader *ngIf="listHeaderTemplate">
-      <ng-container *ngTemplateOutlet="listHeaderTemplate"></ng-container>
+      <StackLayout>
+        <ng-container *ngTemplateOutlet="listHeaderTemplate"></ng-container>
+      </StackLayout>
     </ng-template>
 
     <!-- FOOTER -->
