@@ -1,26 +1,15 @@
 <ScrollView>
     <StackLayout class="background">
         <Label text="Default Icons" class="h2"></Label>
-        <WrapLayout itemWidth="40" itemHeight="40">
-            <kirby-icon name="add"></kirby-icon>
-            <kirby-icon name="cog"></kirby-icon>
-            <kirby-icon name="swap"></kirby-icon>
-            <kirby-icon name="move"></kirby-icon>
-            <kirby-icon name="log-out"></kirby-icon>
-            <kirby-icon name="more"></kirby-icon>
-            <kirby-icon name="arrow-back"></kirby-icon>
-            <kirby-icon name="help"></kirby-icon>
-            <kirby-icon name="close"></kirby-icon>
-            <kirby-icon name="attach"></kirby-icon>
-            <kirby-icon name="search"></kirby-icon>
-            <kirby-icon name="checkbox"></kirby-icon>
-            <kirby-icon name="checkbox-outline"></kirby-icon>
-            <kirby-icon name="menu"></kirby-icon>
-            <kirby-icon name="person"></kirby-icon>
+        <WrapLayout itemWidth="100" itemHeight="80">
+            <StackLayout *ngFor="let icon of icons">
+                <kirby-icon [name]="icon.name"></kirby-icon>
+                <Label [text]="icon.name"></Label>
+            </StackLayout>
         </WrapLayout>
 
         <Label text="Custom Icons" class="h2"></Label>
-        <WrapLayout orientation="horizontal" itemWidth="100" itemHeight="80">
+        <WrapLayout orientation="horizontal" itemWidth="100" itemHeight="60">
             <StackLayout>
                 <kirby-icon customName="football"></kirby-icon>
                 <Label text="customName: football" textWrap="true"></Label>
@@ -33,22 +22,9 @@
 
         <Label text="Sizes" class="h2"></Label>
         <WrapLayout orientation="horizontal" itemWidth="80" itemHeight="80">
-            <StackLayout>
-                <kirby-icon name="person"></kirby-icon>
-                <Label text="default"></Label>
-                <Label text="(sm)"></Label>
-            </StackLayout>
-            <StackLayout>
-                <kirby-icon name="person" size="sm"></kirby-icon>
-                <Label text="sm"></Label>
-            </StackLayout>
-            <StackLayout>
-                <kirby-icon name="person" size="md"></kirby-icon>
-                <Label text="md"></Label>
-            </StackLayout>
-            <StackLayout>
-                <kirby-icon name="person" size="lg"></kirby-icon>
-                <Label text="lg"></Label>
+            <StackLayout *ngFor="let size of sizes | keyvalue">
+                <kirby-icon name="person" [size]="size.value"></kirby-icon>
+                <Label [text]="size.value"></Label>
             </StackLayout>
         </WrapLayout>
 
@@ -91,5 +67,13 @@
                 <Label text="dark"></Label>
             </StackLayout>
         </WrapLayout>
+
+        <Label text="Outline" class="h2"></Label>
+        <WrapLayout orientation="horizontal" itemWidth="80" itemHeight="80">
+            <StackLayout>
+                <kirby-icon name="person" outline="true"></kirby-icon>
+            </StackLayout>
+        </WrapLayout>
+
     </StackLayout>
 </ScrollView>

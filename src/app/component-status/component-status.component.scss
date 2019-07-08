@@ -150,8 +150,8 @@
 
         &.version {
             margin-left: 0.5rem;
-            --ion-color-base: #{get-color(medium-shade)};
-            --ion-color-contrast: #{get-color(contrast-light)};   
+            --ion-color-base: #{get-color('semi-dark')};
+            --ion-color-contrast: #{get-color('white')};   
         }
     }
 }

@@ -25,6 +25,12 @@ Add any other context or screenshots about the feature request here, e.g. a link
 - [ ] Implement Skeleton Component:
     - [ ] Web implementation
     - [ ] {N} implementation
+- Ask UX for review:
+    - Ensure implementation is correct on all 3 platforms:
+      - [ ] Web
+      - [ ] iOS
+      - [ ] Android
+    - [ ] Define the version of the implementation + steps needed to reach version 1.0 (create [enhancement requests](https://github.com/kirbydesign/designsystem/issues/new?assignees=&labels=enhancement&template=enhancement-request.md&title=%5BEnhancement%5D))
 - [ ] [Implement Examples and Showcase](https://cookbook.kirby.design/home/showcase/button)
 - [ ] Add link to showcase on Kirby Component Status (`component-status-items.ts => code.cookbookUrl`)
 - [ ] Also remove `githubIssueNo` and set `status` to `ItemCodeStatus.ready`

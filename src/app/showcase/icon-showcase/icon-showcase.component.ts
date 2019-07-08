@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 
-import { iconsCharCodeMap } from '@kirbydesign/designsystem/components/icon/icon.component';
+import { icons } from '@kirbydesign/designsystem/components/icon/icon.component';
 
 import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
+import { Sizes } from '@kirbydesign/designsystem/directives/size/size.directive';
 
 declare var require: any;
 
@@ -12,14 +13,16 @@ declare var require: any;
   styleUrls: ['./icon-showcase.component.scss'],
 })
 export class IconShowcaseComponent {
-  exampleHtml: string = require('../../examples/icon-example/icon-example.component.html');
-  iconNames: Array<string> = new Array();
-
-  constructor() {
-    for (const key in iconsCharCodeMap) {
-      this.iconNames.push(key);
-    }
-  }
+  exampleHtml: string = `
+<!-- Default icons -->
+<kirby-icon name="NAME"></kirby-icon>
+<!-- Custom icons -->
+<kirby-icon customName="NAME"></kirby-icon>
+<!-- Size -->
+<kirby-icon size="SIZE"></kirby-icon>
+    `;
+  iconNames: Array<string> = icons.map((x) => x.name);
+  sizes = Sizes;
 
   properties: ShowcaseProperty[] = [
     {
@@ -32,7 +35,7 @@ export class IconShowcaseComponent {
       name: 'size',
       description: 'Determines size of the icon.',
       defaultValue: 'sm',
-      inputValues: ['sm', 'md', 'lg'],
+      inputValues: Object.values(this.sizes),
     },
     {
       name: 'themeColor',

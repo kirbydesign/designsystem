@@ -27,4 +27,9 @@ export class ListHelper {
   setSelectedItemWithOption(item: any) {
     this.selectedItemWithOption.next(item);
   }
+
+  renderShadow(_: any): void {
+    // only native implementation
+    return;
+  }
 }

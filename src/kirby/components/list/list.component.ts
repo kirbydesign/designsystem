@@ -21,6 +21,7 @@ import {
   ListSectionHeaderDirective,
   ListFlexItemDirective,
   ListItemOptionsDirective,
+  ListFooterDirective,
 } from './list.directive';
 import { LoadOnDemandEvent, LoadOnDemandEventData } from './list.event';
 import { ListHelper } from './helpers/list-helper';
@@ -80,11 +81,6 @@ export class ListComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   /**
-   * Adds padding to the list.
-   */
-  @Input() padding: string = null;
-
-  /**
    * Emitting event when more items are to be loaded.
    */
   @Output() loadOnDemand = new EventEmitter<LoadOnDemandEvent>();
@@ -101,6 +97,7 @@ export class ListComponent implements OnInit, OnChanges, OnDestroy {
   @ContentChild(ListHeaderDirective, { read: TemplateRef }) listHeaderTemplate;
   @ContentChild(ListSectionHeaderDirective, { read: TemplateRef }) sectionHeaderTemplate;
   @ContentChild(ListItemOptionsDirective, { read: TemplateRef }) listItemOptionsTemplate;
+  @ContentChild(ListFooterDirective, { read: TemplateRef }) listFooterTemplate;
   @ViewChild('ionList') ionList: IonList;
 
   @HostBinding('class.has-sections') isSectionsEnabled: boolean;
@@ -145,6 +142,9 @@ export class ListComponent implements OnInit, OnChanges, OnDestroy {
 
   private getItemOrder(item: any): { isFirst: boolean; isLast: boolean } {
     const defaultOrder = { isFirst: false, isLast: false };
+    if (!item) {
+      return defaultOrder;
+    }
     if (!this.isSectionsEnabled) {
       return defaultOrder;
     }
@@ -156,12 +156,14 @@ export class ListComponent implements OnInit, OnChanges, OnDestroy {
     return order;
   }
 
-  isFirstInSection(item: any) {
-    return this.getItemOrder(item).isFirst;
+  isFirstItem(item: any, index: number) {
+    return this.isSectionsEnabled ? this.getItemOrder(item).isFirst : index === 0;
   }
 
-  isLastInSection(item: any) {
-    return this.getItemOrder(item).isLast;
+  isLastItem(item: any, index: number) {
+    return this.isSectionsEnabled
+      ? this.getItemOrder(item).isLast
+      : index === this.items.length - 1;
   }
 
   onItemSelect(args: any) {
@@ -170,6 +172,10 @@ export class ListComponent implements OnInit, OnChanges, OnDestroy {
 
   onLoadOnDemand(event?: LoadOnDemandEventData) {
     this.listHelper.onLoadOnDemand(this, event);
+  }
+
+  onRowLoaded(event: any): void {
+    this.listHelper.renderShadow(event);
   }
 
   private createOrderMap(

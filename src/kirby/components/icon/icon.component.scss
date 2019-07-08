@@ -1,22 +1,37 @@
 @import '../../scss/web-imports';
+@import './icon.component.shared';
 
 :host {
-  display: inline-block;
-  width: 1em;
-  height: 1em;
-  font-size: size('m');
+  //default to icon size 'sm'
+  @include _icon-size('sm');
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--kirby-icon-font-size);
+
+  .outline {
+    border: 3px solid currentColor;
+    padding: var(--kirby-icon-padding);
+    border-radius: size('xxxl') * 3;
+  }
+
+  svg path {
+    fill: currentColor;
+    stroke: currentColor;
+  }
 }
 
 :host(.sm) {
-  font-size: size('m');
+  @include _icon-size('sm');
 }
 
 :host(.md) {
-  font-size: size('l');
+  @include _icon-size('md');
 }
 
 :host(.lg) {
-  font-size: size('xxxl');
+  @include _icon-size('lg');
 }
 
 @each $color-name, $color-value in $main-colors {

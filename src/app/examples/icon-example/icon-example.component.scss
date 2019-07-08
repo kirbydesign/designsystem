@@ -1,11 +1,77 @@
 @import "../../../kirby/scss/web-imports";
 
-:host {
-  kirby-icon {
-    margin-left: size("s");
+h2 {
+  margin-top: size('l');
+  margin-bottom: 0;
+}
+
+.note {
+  color: get-color('danger');
+  font-size: font-size('xs');
+}
+
+.icon-item-container {
+  width: 112px;
+  padding: 8px;
+  display: inline-block;
+  text-align: center;
+}
+
+.icon-item-inner-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  flex-wrap: wrap;
+}
+
+.icon-item-title {
+  display: block;
+  max-width: 112px;
+  font-size: 12px;
+  color: rgba(0,0,0,.6);
+  white-space: nowrap;
+}
+
+kirby-icon {
+  width: 100%;
+}
+
+.options {
+  width: 100%;
+  margin-bottom: size('m');
+}
+
+.colors {
+  display: flex;
+  width: 100%;
+  margin-bottom: size('m');
+  flex-wrap: wrap;
+}
+
+.color-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin: size('s');
+  width: 70px;
+
+  &__txt {
+    display: block;
+    width: 100%;
   }
 }
 
-h2 {
-  margin-top: size('l');
+.color {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  display: inline-block;
 }
+
+@each $color-name, $color-value in $main-colors {
+  .color--#{$color-name} {
+    background-color: get-color($color-name);
+  }
+}
+

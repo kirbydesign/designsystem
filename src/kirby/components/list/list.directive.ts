@@ -24,3 +24,8 @@ export class ListSectionHeaderDirective {}
   selector: '[kirbyListItemOptions]',
 })
 export class ListItemOptionsDirective {}
+
+@Directive({
+  selector: '[kirbyListFooter]',
+})
+export class ListFooterDirective {}

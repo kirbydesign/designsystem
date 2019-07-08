@@ -39,9 +39,9 @@ Button[kirby-button] {
   }
 
   &.attention-level2 {
-    background-color: get-color('contrast-light');
-    border-color: get-color('contrast-light');
-    color: get-color('contrast-dark');
+    background-color: get-color('white');
+    border-color: get-color('white');
+    color: get-color('black');
 
     &.destructive {
       background-color: get-color('light');
@@ -92,16 +92,16 @@ Button[kirby-button] {
 .success Button.attention-level1,
 .warning Button.attention-level1,
 .danger Button.attention-level1 {
-  background-color: get-color('contrast-light');
-  border-color: get-color('contrast-light');
-  color: get-color('contrast-dark');
+  background-color: get-color('white');
+  border-color: get-color('white');
+  color: get-color('black');
 }
 
 .secondary Button.attention-level3,
 .tertiary Button.attention-level3,
 .dark Button.attention-level3 {
-  border-color: get-color('contrast-light');
-  color: get-color('contrast-light');
+  border-color: get-color('white');
+  color: get-color('white');
 }
 
 .primary Button.attention-level3,
@@ -109,12 +109,12 @@ Button[kirby-button] {
 .warning Button.attention-level3,
 .danger Button.attention-level3,
 .medium Button.attention-level3 {
-  border-color: get-color('contrast-dark');
-  color: get-color('contrast-dark');
+  border-color: get-color('black');
+  color: get-color('black');
 }
 
 .secondary Button.attention-level4,
 .tertiary Button.attention-level4,
 .dark Button.attention-level4 {
-  color: get-color('contrast-light');
+  color: get-color('white');
 }

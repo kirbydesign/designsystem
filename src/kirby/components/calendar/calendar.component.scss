@@ -1,0 +1,110 @@
+@import '../../scss/web-imports';
+
+table.calendar-table {
+  width: 100%;
+  border-collapse: collapse;
+  user-select: none;
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent;
+  border-spacing: 0;
+
+  thead {
+    padding: 0.5em;
+    border-bottom: 1px solid get-color('medium');
+
+    th {
+      height: 50px;
+      text-align: center;
+    }
+  }
+  
+  tbody {
+    padding: 0.5em;
+  }
+
+  tr, td {
+    border-style: none;
+    padding: 0;
+    line-height: 2em;
+    height: 0;
+  }
+
+}
+
+.header, th, td {
+  background-color: transparent;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.5em;
+  
+  button {
+    background-color: transparent;
+    outline: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  button:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+}
+
+.month-and-year {
+  line-height: line-height('xxl');
+  user-select: none;
+
+  .month {
+    font-weight: font-weight('bold');
+    margin-right: size('xs');
+  }
+}
+
+.day {
+  $dayWidth: 40px;
+  border-radius: $dayWidth / 2;
+  width: $dayWidth;
+  height: $dayWidth;
+  line-height: $dayWidth;
+  text-align: center;
+}
+
+.day.selectable {
+  cursor: pointer;
+}
+
+.day.past,
+.day.weekend {
+  color: get-color('medium-shade');
+}
+
+.day.disabled,
+.day:not(.selectable) {
+  color: get-color('light-shade');
+}
+
+.day.today {
+  color: get-color('medium-contrast');
+  background-color: get-color('medium-shade');
+}
+
+.day.selected {
+  color: get-color('black');
+  background-color: get-color('primary');
+  pointer-events: none;
+}
+
+.day:not(.current-month) {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.day.selectable:not(.selected):hover {
+  color: get-color('light-contrast');
+  background-color: get-color('light');
+}

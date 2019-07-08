@@ -16,11 +16,15 @@ const AVATAR_COMPONENT_SELECTOR = 'kirby-avatar';
   selector: AVATAR_COMPONENT_SELECTOR,
   templateUrl: './avatar.component.html',
   styleUrls: ['./avatar.component.scss'],
+  // Using host property decorator is fine for static values:
+  // tslint:disable-next-line:use-host-property-decorator
+  host: {
+    class: 'kirby-avatar',
+  },
 })
 export class AvatarComponent extends ContentView {
   @Input() imageSrc: string;
   @Input() altText: string;
-  @Input() size: string;
   @Input() shadow?: false;
   @Input() overlay?: true;
 
@@ -49,10 +53,13 @@ export class AvatarComponent extends ContentView {
         if (this.view.android) {
           this.view.eachChildView((child) => {
             const bgColor = child.style.backgroundColor;
+            const transparentColor = '#00ff0000';
             const androidView = child.android;
             const shape = new android.graphics.drawable.GradientDrawable();
             shape.setShape(android.graphics.drawable.GradientDrawable.RECTANGLE);
-            shape.setColor(android.graphics.Color.parseColor(bgColor + ''));
+            shape.setColor(
+              android.graphics.Color.parseColor(bgColor ? bgColor + '' : transparentColor)
+            );
             shape.setCornerRadius(androidView.getMeasuredWidth());
             androidView.setBackgroundDrawable(shape);
             androidView.setClipToOutline(true);

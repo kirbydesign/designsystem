@@ -15,5 +15,5 @@
 }
 
 :host(.danger) {
-  --kirby-badge-color: #{get-color('contrast-light')};
+  --kirby-badge-color: #{get-color('white')};
 }

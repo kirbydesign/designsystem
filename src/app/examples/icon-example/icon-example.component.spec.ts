@@ -1,10 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { MockComponent, MockDirective } from 'ng-mocks';
 
-import { KirbyModule } from '../../../kirby/kirby.module';
 import { IconExampleComponent } from './icon-example.component';
-import { CUSTOM_FONT_SETTINGS } from '@kirbydesign/designsystem';
-import { customIconSettings } from '../examples.common';
+import { ICON_SETTINGS, IconComponent } from '@kirbydesign/designsystem';
+import { iconSettings } from '../examples.common';
+import { SizeDirective } from '@kirbydesign/designsystem/directives/size/size.directive';
+import { ThemeColorDirective } from '@kirbydesign/designsystem/directives/theme-color/theme-color.directive';
+import { CheckboxComponent } from '@kirbydesign/designsystem/components/checkbox/checkbox.component';
 
 describe('IconExampleComponent', () => {
   let component: IconExampleComponent;
@@ -12,15 +14,21 @@ describe('IconExampleComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [KirbyModule, RouterTestingModule],
+      imports: [],
       providers: [
         {
-          provide: CUSTOM_FONT_SETTINGS,
-          useValue: customIconSettings,
+          provide: ICON_SETTINGS,
+          useValue: iconSettings,
           multi: true,
         },
       ],
-      declarations: [IconExampleComponent],
+      declarations: [
+        IconExampleComponent,
+        MockComponent(IconComponent),
+        MockComponent(CheckboxComponent),
+        MockDirective(SizeDirective),
+        MockDirective(ThemeColorDirective),
+      ],
     }).compileComponents();
   }));
 

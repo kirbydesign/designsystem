@@ -260,6 +260,7 @@ module.exports = env => {
             // Copy assets to out dir. Add your own globs as needed.
             new CopyWebpackPlugin([
                 { from: { glob: "fonts/**" } },
+                { from: { glob: "kirby/icons/fonts/**" }, to: "fonts", flatten: true },
                 { from: { glob: "**/*.jpg" } },
                 { from: { glob: "**/*.png" } },
                 { from: "kirby/components/chart/chart.webview.html", to: "chart" },
@@ -268,6 +269,9 @@ module.exports = env => {
                 { from: "../node_modules/highcharts/highcharts-more.js", to: "chart" },
                 { from: "../node_modules/highcharts/modules/solid-gauge.js", to: "chart" },
                 { from: "../node_modules/nativescript-webview-interface/www/nativescript-webview-interface.js", to: "chart" },
+                { from: "kirby/components/calendar/calendar.webview.html", to: "calendar" },
+                { from: "kirby/components/calendar/calendar.webview.css", to: "calendar" },
+                { from: "../node_modules/nativescript-webview-interface/www/nativescript-webview-interface.js", to: "calendar" },
             ], { ignore: [`${relative(appPath, appResourcesFullPath)}/**`] }),
             // Generate a bundle starter script and activate it in package.json
             new nsWebpack.GenerateBundleStarterPlugin(
