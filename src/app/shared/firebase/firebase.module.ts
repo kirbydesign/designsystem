@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
-import { environment } from '~/environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+
+import { environment } from '~/environments/environment';
 
 @NgModule({
   declarations: [],
