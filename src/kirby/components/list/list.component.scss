@@ -71,6 +71,7 @@ $shadow-mask: 0 -6px 0px 0px get-color('white');
   }
   
   .extending {
+    padding: size('m');
     margin: auto;
   }
 }

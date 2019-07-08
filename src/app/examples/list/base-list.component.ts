@@ -816,7 +816,7 @@ export class BaseListComponent {
   get slidingOptions(): SlidingOptions {
     const slidingOptions: SlidingOptions = {
       start: [
-        { id: 0, title: 'Archive', iconName: 'swap', themeColor: 'warning', selected: false },
+        { id: 0, title: 'Archive', iconName: 'verifiy', themeColor: 'warning', selected: false },
         { id: 1, title: 'Flag', iconName: 'attach', themeColor: 'success', selected: false },
       ],
       end: [{ id: 2, title: 'Delete', iconName: 'trash', themeColor: 'danger', selected: false }],

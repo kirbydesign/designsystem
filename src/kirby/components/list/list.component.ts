@@ -205,7 +205,7 @@ export class ListComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ionSwipe(slidingItem: IonItemSliding, item: any) {
-    slidingItem.getSlidingRatio().then(async (percent) => {
+    slidingItem.getSlidingRatio().then((percent) => {
       let option: ItemOption = undefined;
 
       if (item.slidingOptions.start && percent < 0) {
