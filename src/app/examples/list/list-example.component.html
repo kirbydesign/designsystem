@@ -34,21 +34,21 @@
 
   <!-- Sliding items -->
   <div *kirbyListItemOptions="let item">
-    <kirby-list-item-options side="start">
+    <!-- left side (start) -->
+    <kirby-list-item-options side="start" *ngIf="item.slidingOptions.start">
       <kirby-list-item-option
-        *ngFor="let option of item.startOptions" 
+        *ngFor="let option of item.slidingOptions.start" 
         [item]="item" 
-        [option]="option"
-        [themeColor]="option.themeColor">
+        [option]="option">
       </kirby-list-item-option>
     </kirby-list-item-options>
 
-    <kirby-list-item-options side="end">
+    <!-- right side (end) -->
+    <kirby-list-item-options side="end" *ngIf="item.slidingOptions.end">
         <kirby-list-item-option
-          *ngFor="let option of item.endOptions" 
+          *ngFor="let option of item.slidingOptions.end" 
           [item]="item" 
-          [option]="option"
-          [themeColor]="option.themeColor">
+          [option]="option">
       </kirby-list-item-option>
     </kirby-list-item-options>
   </div>

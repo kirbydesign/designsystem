@@ -1,6 +1,16 @@
 @import '../../../scss/web-imports';
  
 :host {
+    background-color: #{get-color('primary')};
+    color: #{get-color('primary-contrast')};
+
+    @each $color-name, $color-value in $main-colors {
+        .#{$color-name} {
+            background-color: #{get-color($color-name)};
+            color: #{get-color($color-name+'-contrast')};
+        }
+    }
+    
     .item-content {
         display: inline-grid;
         min-width: 70px;
@@ -27,13 +37,5 @@
         min-width: 70px;
         --background: unset;
         --color: unset;
-    }
-}
-
-
-@each $color-name, $color-value in $main-colors {
-    :host(.#{$color-name}) {
-        --background: #{get-color($color-name)};
-        --color: #{get-color($color-name+'-contrast')};
     }
 }

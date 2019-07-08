@@ -1,4 +1,4 @@
-<ion-item-option [attr.id]="option.id" (click)="onClick()" expandable>
+<ion-item-option [attr.id]="option.id" [themeColor]="option.themeColor" (click)="onClick()" expandable>
   <div class="item-content">
     <ion-icon *ngIf="option.iconName" [name]="option.iconName"></ion-icon>
     <ion-label>{{ option.title }}</ion-label>

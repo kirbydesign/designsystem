@@ -13,7 +13,6 @@ export class ListItemOptionComponent {
   @Input() option: ItemOption;
   constructor(private listHelper: ListHelper) {}
   onClick() {
-    this.option.selected = !this.option.selected;
     const selectedItemWithOption: SelectedItemWithOption = {
       item: this.item,
       option: this.option,

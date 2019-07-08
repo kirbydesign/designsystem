@@ -1,3 +1,4 @@
+import { SlidingOptions } from './../../../kirby/components/list/list-item-option/list-item-option';
 export class BaseListComponent {
   public itemsFullList: any[] = [
     {
@@ -6,13 +7,7 @@ export class BaseListComponent {
       subTitle: '2000 pcs',
       amount: '5.587.218.309 DKK',
       detail: 225,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 1,
@@ -20,13 +15,7 @@ export class BaseListComponent {
       subTitle: '1827 pcs',
       amount: '76.980 DKK',
       detail: -3,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 2,
@@ -34,13 +23,7 @@ export class BaseListComponent {
       subTitle: '787 pcs',
       amount: '83.004 DKK',
       detail: -115,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 3,
@@ -48,13 +31,7 @@ export class BaseListComponent {
       subTitle: '467 pcs',
       amount: '60.963 DKK',
       detail: 6,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 4,
@@ -62,13 +39,7 @@ export class BaseListComponent {
       subTitle: '791 pcs',
       amount: '33.830 DKK',
       detail: -154,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 5,
@@ -76,13 +47,7 @@ export class BaseListComponent {
       subTitle: '206 pcs',
       amount: '60.775 DKK',
       detail: 98,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 6,
@@ -90,13 +55,7 @@ export class BaseListComponent {
       subTitle: '988 pcs',
       amount: '61.196 DKK',
       detail: 220,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 7,
@@ -104,13 +63,7 @@ export class BaseListComponent {
       subTitle: '1706 pcs',
       amount: '52.441 DKK',
       detail: 129,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 8,
@@ -118,13 +71,7 @@ export class BaseListComponent {
       subTitle: '827 pcs',
       amount: '62.276 DKK',
       detail: 53,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 9,
@@ -132,13 +79,7 @@ export class BaseListComponent {
       subTitle: '443 pcs',
       amount: '95.190 DKK',
       detail: -135,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 10,
@@ -146,13 +87,7 @@ export class BaseListComponent {
       subTitle: '1799 pcs',
       amount: '18.442 DKK',
       detail: 86,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 11,
@@ -160,13 +95,7 @@ export class BaseListComponent {
       subTitle: '129 pcs',
       amount: '75.842 DKK',
       detail: -43,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 12,
@@ -174,13 +103,7 @@ export class BaseListComponent {
       subTitle: '36 pcs',
       amount: '99.125 DKK',
       detail: -144,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 13,
@@ -188,13 +111,7 @@ export class BaseListComponent {
       subTitle: '1426 pcs',
       amount: '35.459 DKK',
       detail: -78,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 14,
@@ -202,13 +119,7 @@ export class BaseListComponent {
       subTitle: '1840 pcs',
       amount: '26.466 DKK',
       detail: -84,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 15,
@@ -216,13 +127,7 @@ export class BaseListComponent {
       subTitle: '854 pcs',
       amount: '37.490 DKK',
       detail: -94,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 16,
@@ -230,13 +135,7 @@ export class BaseListComponent {
       subTitle: '1964 pcs',
       amount: '41.765 DKK',
       detail: 122,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 17,
@@ -244,13 +143,7 @@ export class BaseListComponent {
       subTitle: '393 pcs',
       amount: '68.623 DKK',
       detail: 14,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 18,
@@ -258,13 +151,7 @@ export class BaseListComponent {
       subTitle: '171 pcs',
       amount: '45.999 DKK',
       detail: -77,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 19,
@@ -272,13 +159,7 @@ export class BaseListComponent {
       subTitle: '1837 pcs',
       amount: '52.101 DKK',
       detail: -152,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 20,
@@ -286,13 +167,7 @@ export class BaseListComponent {
       subTitle: '1271 pcs',
       amount: '36.160 DKK',
       detail: 183,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 21,
@@ -300,13 +175,7 @@ export class BaseListComponent {
       subTitle: '929 pcs',
       amount: '49.608 DKK',
       detail: 174,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 22,
@@ -314,13 +183,7 @@ export class BaseListComponent {
       subTitle: '861 pcs',
       amount: '10.419 DKK',
       detail: -179,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 23,
@@ -328,13 +191,7 @@ export class BaseListComponent {
       subTitle: '1195 pcs',
       amount: '53.019 DKK',
       detail: -156,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 24,
@@ -342,13 +199,7 @@ export class BaseListComponent {
       subTitle: '1522 pcs',
       amount: '36.737 DKK',
       detail: -147,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 25,
@@ -356,13 +207,7 @@ export class BaseListComponent {
       subTitle: '958 pcs',
       amount: '95.228 DKK',
       detail: 249,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 26,
@@ -370,13 +215,7 @@ export class BaseListComponent {
       subTitle: '27 pcs',
       amount: '92.171 DKK',
       detail: 82,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 27,
@@ -384,13 +223,7 @@ export class BaseListComponent {
       subTitle: '281 pcs',
       amount: '5.875 DKK',
       detail: -121,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 28,
@@ -398,13 +231,7 @@ export class BaseListComponent {
       subTitle: '1882 pcs',
       amount: '5.498 DKK',
       detail: 66,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 29,
@@ -412,13 +239,7 @@ export class BaseListComponent {
       subTitle: '941 pcs',
       amount: '24.855 DKK',
       detail: -1,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 30,
@@ -426,13 +247,7 @@ export class BaseListComponent {
       subTitle: '1689 pcs',
       amount: '86.716 DKK',
       detail: -150,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 31,
@@ -440,13 +255,7 @@ export class BaseListComponent {
       subTitle: '1568 pcs',
       amount: '25.747 DKK',
       detail: -197,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 32,
@@ -454,13 +263,7 @@ export class BaseListComponent {
       subTitle: '936 pcs',
       amount: '64.032 DKK',
       detail: -103,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 33,
@@ -468,13 +271,7 @@ export class BaseListComponent {
       subTitle: '287 pcs',
       amount: '51.267 DKK',
       detail: 5,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 34,
@@ -482,13 +279,7 @@ export class BaseListComponent {
       subTitle: '656 pcs',
       amount: '45.622 DKK',
       detail: -178,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 35,
@@ -496,13 +287,7 @@ export class BaseListComponent {
       subTitle: '587 pcs',
       amount: '65.442 DKK',
       detail: -117,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 36,
@@ -510,13 +295,7 @@ export class BaseListComponent {
       subTitle: '492 pcs',
       amount: '19.560 DKK',
       detail: 48,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 37,
@@ -524,13 +303,7 @@ export class BaseListComponent {
       subTitle: '185 pcs',
       amount: '60.367 DKK',
       detail: 169,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 38,
@@ -538,13 +311,7 @@ export class BaseListComponent {
       subTitle: '907 pcs',
       amount: '80.383 DKK',
       detail: -75,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 39,
@@ -552,13 +319,7 @@ export class BaseListComponent {
       subTitle: '672 pcs',
       amount: '93.421 DKK',
       detail: 32,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 40,
@@ -566,13 +327,7 @@ export class BaseListComponent {
       subTitle: '329 pcs',
       amount: '67.225 DKK',
       detail: 249,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 41,
@@ -580,13 +335,7 @@ export class BaseListComponent {
       subTitle: '1060 pcs',
       amount: '4.490 DKK',
       detail: 196,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 42,
@@ -594,13 +343,7 @@ export class BaseListComponent {
       subTitle: '1926 pcs',
       amount: '31.059 DKK',
       detail: 213,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 43,
@@ -608,13 +351,7 @@ export class BaseListComponent {
       subTitle: '1177 pcs',
       amount: '59.227 DKK',
       detail: 110,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 44,
@@ -622,13 +359,7 @@ export class BaseListComponent {
       subTitle: '663 pcs',
       amount: '10.415 DKK',
       detail: 99,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 45,
@@ -636,13 +367,7 @@ export class BaseListComponent {
       subTitle: '517 pcs',
       amount: '30.143 DKK',
       detail: 90,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 46,
@@ -650,13 +375,7 @@ export class BaseListComponent {
       subTitle: '1739 pcs',
       amount: '4.334 DKK',
       detail: -70,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 47,
@@ -664,13 +383,7 @@ export class BaseListComponent {
       subTitle: '109 pcs',
       amount: '46.363 DKK',
       detail: 160,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 48,
@@ -678,13 +391,7 @@ export class BaseListComponent {
       subTitle: '219 pcs',
       amount: '73.717 DKK',
       detail: -40,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 49,
@@ -692,13 +399,7 @@ export class BaseListComponent {
       subTitle: '1610 pcs',
       amount: '86.740 DKK',
       detail: 74,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 50,
@@ -706,13 +407,7 @@ export class BaseListComponent {
       subTitle: '1656 pcs',
       amount: '68.075 DKK',
       detail: 237,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 51,
@@ -720,13 +415,7 @@ export class BaseListComponent {
       subTitle: '1044 pcs',
       amount: '20.552 DKK',
       detail: 31,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 52,
@@ -734,13 +423,7 @@ export class BaseListComponent {
       subTitle: '62 pcs',
       amount: '40.611 DKK',
       detail: 10,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 53,
@@ -748,13 +431,7 @@ export class BaseListComponent {
       subTitle: '377 pcs',
       amount: '92.387 DKK',
       detail: 104,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 54,
@@ -762,13 +439,7 @@ export class BaseListComponent {
       subTitle: '681 pcs',
       amount: '81.602 DKK',
       detail: -22,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 55,
@@ -776,13 +447,7 @@ export class BaseListComponent {
       subTitle: '1196 pcs',
       amount: '80.588 DKK',
       detail: -62,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 56,
@@ -790,13 +455,7 @@ export class BaseListComponent {
       subTitle: '1939 pcs',
       amount: '77.171 DKK',
       detail: -182,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 57,
@@ -804,13 +463,7 @@ export class BaseListComponent {
       subTitle: '1657 pcs',
       amount: '46.813 DKK',
       detail: -90,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 58,
@@ -818,13 +471,7 @@ export class BaseListComponent {
       subTitle: '1609 pcs',
       amount: '58.124 DKK',
       detail: -141,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 59,
@@ -832,13 +479,7 @@ export class BaseListComponent {
       subTitle: '1157 pcs',
       amount: '6.468 DKK',
       detail: 224,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 60,
@@ -846,13 +487,7 @@ export class BaseListComponent {
       subTitle: '963 pcs',
       amount: '50.810 DKK',
       detail: 103,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 61,
@@ -860,13 +495,7 @@ export class BaseListComponent {
       subTitle: '13 pcs',
       amount: '47.434 DKK',
       detail: 30,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 62,
@@ -874,13 +503,7 @@ export class BaseListComponent {
       subTitle: '1022 pcs',
       amount: '10.281 DKK',
       detail: 30,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 63,
@@ -888,13 +511,7 @@ export class BaseListComponent {
       subTitle: '1260 pcs',
       amount: '81.019 DKK',
       detail: 212,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 64,
@@ -902,13 +519,7 @@ export class BaseListComponent {
       subTitle: '408 pcs',
       amount: '99.185 DKK',
       detail: 69,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 65,
@@ -916,13 +527,7 @@ export class BaseListComponent {
       subTitle: '1107 pcs',
       amount: '29.376 DKK',
       detail: -74,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 66,
@@ -930,13 +535,7 @@ export class BaseListComponent {
       subTitle: '840 pcs',
       amount: '75.339 DKK',
       detail: 248,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 67,
@@ -944,13 +543,7 @@ export class BaseListComponent {
       subTitle: '957 pcs',
       amount: '27.564 DKK',
       detail: -150,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 68,
@@ -958,13 +551,7 @@ export class BaseListComponent {
       subTitle: '281 pcs',
       amount: '69.197 DKK',
       detail: 47,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 69,
@@ -972,13 +559,7 @@ export class BaseListComponent {
       subTitle: '1113 pcs',
       amount: '57.923 DKK',
       detail: 203,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 70,
@@ -986,13 +567,7 @@ export class BaseListComponent {
       subTitle: '735 pcs',
       amount: '89.855 DKK',
       detail: 146,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 71,
@@ -1000,13 +575,7 @@ export class BaseListComponent {
       subTitle: '313 pcs',
       amount: '99.364 DKK',
       detail: -86,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 72,
@@ -1014,13 +583,7 @@ export class BaseListComponent {
       subTitle: '71 pcs',
       amount: '69.832 DKK',
       detail: 188,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 73,
@@ -1028,13 +591,7 @@ export class BaseListComponent {
       subTitle: '473 pcs',
       amount: '12.219 DKK',
       detail: -64,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 74,
@@ -1042,13 +599,7 @@ export class BaseListComponent {
       subTitle: '564 pcs',
       amount: '58.651 DKK',
       detail: 154,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 75,
@@ -1056,13 +607,7 @@ export class BaseListComponent {
       subTitle: '810 pcs',
       amount: '72.391 DKK',
       detail: 198,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 76,
@@ -1070,13 +615,7 @@ export class BaseListComponent {
       subTitle: '1473 pcs',
       amount: '1.976 DKK',
       detail: -135,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 77,
@@ -1084,13 +623,7 @@ export class BaseListComponent {
       subTitle: '1079 pcs',
       amount: '58.112 DKK',
       detail: 41,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 78,
@@ -1098,13 +631,7 @@ export class BaseListComponent {
       subTitle: '1851 pcs',
       amount: '59.546 DKK',
       detail: 48,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 79,
@@ -1112,13 +639,7 @@ export class BaseListComponent {
       subTitle: '1134 pcs',
       amount: '99.919 DKK',
       detail: 91,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 80,
@@ -1126,13 +647,7 @@ export class BaseListComponent {
       subTitle: '228 pcs',
       amount: '1.030 DKK',
       detail: 240,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 81,
@@ -1140,13 +655,7 @@ export class BaseListComponent {
       subTitle: '1534 pcs',
       amount: '66.856 DKK',
       detail: -70,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 82,
@@ -1154,13 +663,7 @@ export class BaseListComponent {
       subTitle: '1584 pcs',
       amount: '27.582 DKK',
       detail: 109,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 83,
@@ -1168,13 +671,7 @@ export class BaseListComponent {
       subTitle: '157 pcs',
       amount: '76.750 DKK',
       detail: 73,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 84,
@@ -1182,13 +679,7 @@ export class BaseListComponent {
       subTitle: '857 pcs',
       amount: '98.364 DKK',
       detail: -20,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 85,
@@ -1196,13 +687,7 @@ export class BaseListComponent {
       subTitle: '95 pcs',
       amount: '79.359 DKK',
       detail: -102,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 86,
@@ -1210,13 +695,7 @@ export class BaseListComponent {
       subTitle: '687 pcs',
       amount: '17.861 DKK',
       detail: -95,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 87,
@@ -1224,13 +703,7 @@ export class BaseListComponent {
       subTitle: '441 pcs',
       amount: '71.454 DKK',
       detail: 241,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 88,
@@ -1238,13 +711,7 @@ export class BaseListComponent {
       subTitle: '1034 pcs',
       amount: '77.255 DKK',
       detail: 30,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 89,
@@ -1252,13 +719,7 @@ export class BaseListComponent {
       subTitle: '1213 pcs',
       amount: '99.418 DKK',
       detail: 12,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 90,
@@ -1266,13 +727,7 @@ export class BaseListComponent {
       subTitle: '1366 pcs',
       amount: '24.934 DKK',
       detail: -46,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 91,
@@ -1280,13 +735,7 @@ export class BaseListComponent {
       subTitle: '79 pcs',
       amount: '9.423 DKK',
       detail: 32,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 92,
@@ -1294,13 +743,7 @@ export class BaseListComponent {
       subTitle: '299 pcs',
       amount: '87.935 DKK',
       detail: -105,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 93,
@@ -1308,13 +751,7 @@ export class BaseListComponent {
       subTitle: '564 pcs',
       amount: '76.053 DKK',
       detail: -129,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 94,
@@ -1322,13 +759,7 @@ export class BaseListComponent {
       subTitle: '1912 pcs',
       amount: '48.066 DKK',
       detail: -141,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 95,
@@ -1336,13 +767,7 @@ export class BaseListComponent {
       subTitle: '557 pcs',
       amount: '81.093 DKK',
       detail: -76,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 96,
@@ -1350,13 +775,7 @@ export class BaseListComponent {
       subTitle: '106 pcs',
       amount: '88.488 DKK',
       detail: -16,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 97,
@@ -1364,13 +783,7 @@ export class BaseListComponent {
       subTitle: '406 pcs',
       amount: '2.622 DKK',
       detail: 217,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 98,
@@ -1378,13 +791,7 @@ export class BaseListComponent {
       subTitle: '1649 pcs',
       amount: '58.086 DKK',
       detail: 102,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 99,
@@ -1392,13 +799,7 @@ export class BaseListComponent {
       subTitle: '1959 pcs',
       amount: '28.587 DKK',
       detail: 52,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
     {
       id: 100,
@@ -1406,17 +807,22 @@ export class BaseListComponent {
       subTitle: '1835 pcs',
       amount: '88.272 DKK',
       detail: 75,
-      startOptions: [
-        { id: '0', title: 'Afvis', iconName: 'swap', themeColor: 'success', selected: false },
-        { id: '1', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
-      endOptions: [
-        { id: '2', title: 'Flag', iconName: 'attach', themeColor: 'warning', selected: false },
-      ],
+      slidingOptions: this.slidingOptions,
     },
   ];
 
   public items: any[] = this.itemsFullList.slice(0, 8);
+
+  get slidingOptions(): SlidingOptions {
+    const slidingOptions: SlidingOptions = {
+      start: [
+        { id: 0, title: 'Archive', iconName: 'swap', themeColor: 'warning', selected: false },
+        { id: 1, title: 'Flag', iconName: 'attach', themeColor: 'success', selected: false },
+      ],
+      end: [{ id: 2, title: 'Delete', iconName: 'trash', themeColor: 'danger', selected: false }],
+    };
+    return slidingOptions;
+  }
 
   onItemSelect(item: any) {
     alert(`You have clicked the row [${item.title} ${item.amount}]`);

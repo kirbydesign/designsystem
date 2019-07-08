@@ -188,10 +188,13 @@ export class ListComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   private emitSelectedItemWithOption(selectedItemWithOption) {
-    this.itemOptionSelect.emit(selectedItemWithOption);
+    if (selectedItemWithOption.option) {
+      selectedItemWithOption.option.selected = !selectedItemWithOption.option.selected;
+      this.itemOptionSelect.emit(selectedItemWithOption);
 
-    if (this.ionList) {
-      this.ionList.closeSlidingItems();
+      if (this.ionList) {
+        this.ionList.closeSlidingItems();
+      }
     }
   }
 
@@ -199,12 +202,12 @@ export class ListComponent implements OnInit, OnChanges, OnDestroy {
     slidingItem.getSlidingRatio().then(async (percent) => {
       let option: ItemOption = undefined;
 
-      if (item.endOptions) {
-        if (percent > 0) {
-          option = item.endOptions[item.endOptions.length - 1];
-        } else {
-          option = item.startOptions[0];
-        }
+      if (item.slidingOptions.start && percent < 0) {
+        option = item.slidingOptions.start[0];
+      }
+
+      if (item.slidingOptions.end && percent > 0) {
+        option = item.slidingOptions.end[item.slidingOptions.end.length - 1];
       }
 
       const selectedItemWithOption: SelectedItemWithOption = {
