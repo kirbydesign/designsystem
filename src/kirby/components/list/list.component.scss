@@ -2,6 +2,7 @@
 
 $shadow: 0 5px 10px -10px rgba(28, 28, 28, 0.3), 0 0 5px 0 rgba(28, 28, 28, 0.08);
 $shadow-mask: 0 -6px 0px 0px get-color('white');
+$shadow-mask-hover: 0 -3px 0px 0px get-color('background-color');
 
 :host {
   display: block;
@@ -45,6 +46,7 @@ $shadow-mask: 0 -6px 0px 0px get-color('white');
 
     li.row.selectable:hover {
       background-color: get-color('background-color');
+      box-shadow: $shadow-mask-hover, $shadow;
     }
 
     li.section-header + li.row
