@@ -17,4 +17,9 @@ export class ListHelper {
   getSelectedItem(items: any[], item: any) {
     return item;
   }
+
+  renderShadow(_: any): void {
+    // only native implementation
+    return;
+  }
 }

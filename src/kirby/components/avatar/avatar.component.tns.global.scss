@@ -1,0 +1,68 @@
+@import '../../scss/native-imports';
+@import '../icon/icon.component.shared';
+
+$image-diameter-small:  40;
+$image-diameter-medium: 56;
+$image-diameter-large:  96;
+
+$color-card-bg: rgb(255, 255, 255);
+
+.kirby-avatar {
+
+  .avatar, .image, .overlay {
+    //default to size 'sm'
+    width: $image-diameter-small;
+    height: $image-diameter-small;
+  }
+
+  .overlay {
+    background-color: #333;
+    opacity: 0.05;
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+  }
+
+  .image {
+    border-radius: 100%;
+    background-color: $color-card-bg;
+  }
+
+  .kirby-icon Label {
+    //default to icon size 'sm'
+    @include _icon-size_native('sm');
+  }
+
+  &.sm {
+    .avatar, .image {
+      width: $image-diameter-small;
+      height: $image-diameter-small;
+    }
+
+    .kirby-icon Label {
+      @include _icon-size_native('sm');
+    }
+  }
+
+  &.md {
+    .avatar, .image {
+      width: $image-diameter-medium;
+      height: $image-diameter-medium;
+    }
+
+    .kirby-icon Label {
+      @include _icon-size_native('md');
+    }
+  }
+
+  &.lg {
+    .avatar, .image {
+      width: $image-diameter-large;
+      height: $image-diameter-large;
+    }
+
+    .kirby-icon Label {
+      @include _icon-size_native('lg');
+    }
+  }
+}

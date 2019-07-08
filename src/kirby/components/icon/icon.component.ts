@@ -1,4 +1,12 @@
-import { Component, Inject, Input, OnChanges, Optional, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Inject,
+  Input,
+  OnChanges,
+  Optional,
+  SimpleChanges,
+} from '@angular/core';
 
 import { kirbyIconSettings } from './kirby-icon-settings';
 import { ICON_SETTINGS, Icon, IconSettings } from './icon-settings';
@@ -20,6 +28,7 @@ export class IconComponent implements OnChanges {
 
   @Input() name: string;
   @Input() customName: string;
+  @Input() outline: boolean;
 
   get icon(): Icon {
     return this._icon;

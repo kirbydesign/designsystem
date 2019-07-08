@@ -6,6 +6,12 @@
   }
 }
 
+@each $color-name, $color-value in getAllColors() {
+  .#{$color-name} {
+    color: get-color($color-name + '-contrast');
+  }
+}
+
 .color-box {
   background-color: get-color('white');
   border: 1px solid get-color('medium');
@@ -102,7 +108,7 @@
   grid-gap: size('m');
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 0 0 size('xl');
 
   li {
     display: flex;

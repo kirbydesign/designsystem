@@ -26,6 +26,7 @@ import { AlertShowcaseComponent } from './alert-showcase/alert-showcase.componen
 import { SlideButtonShowcaseComponent } from './slide-button-showcase/slide-button-showcase.component';
 import { ToastShowcaseComponent } from './toast-showcase/toast-showcase.component';
 import { ToggleShowcaseComponent } from './toggle-showcase/toggle-showcase.component';
+import { EmptyStateShowcaseComponent } from './empty-state-showcase/empty-state-showcase.component';
 
 export const routes: Routes = [
   {
@@ -141,6 +142,10 @@ export const routes: Routes = [
       {
         path: 'segmented-control',
         component: SegmentedControlShowcaseComponent,
+      },
+      {
+        path: 'empty-state',
+        component: EmptyStateShowcaseComponent,
       },
     ],
   },
