@@ -43,6 +43,7 @@ import { KeyHandlerDirective } from './directives/key-handler/key-handler.direct
 import { ToastController } from './components/toast/services/toast.controller';
 import { ToastHelper } from './components/toast/services/toast.helper';
 import { ToggleComponent } from './components/toggle/toggle.component';
+import { EmptyStateComponent } from './components/empty-state/empty-state.component';
 
 export const declarations = [
   CardComponent,
@@ -81,6 +82,7 @@ export const declarations = [
   ThemeColorDirective,
   KeyHandlerDirective,
   ToggleComponent,
+  EmptyStateComponent,
 ];
 
 export const providerDeclarations: any[] = [

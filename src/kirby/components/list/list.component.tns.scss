@@ -1,17 +1,21 @@
 @import "../../scss/native-imports";
 
+$elevation: 2;
+//Note: On Android the shadow size is a result of the elevation property, e.g. 6 => 9:
+$shadow-size: $elevation * 3/2;
+$shadow-size-bottom: $elevation * 2;
+$row-padding-top: size('s');
 
 RadListView {
-  background-color:  get-color('base-color');
-  //TODO: Add shadow for entire list for list WITHOUT sections
+  background-color:  get-color('background-color');
 }
 
 .row, .section-header {
-  padding: size('s') size('xs') size('s') size('xs');
+  padding: $row-padding-top size('xs') size('s') size('xs');
 }
 
 .row.divider {
-  border-color: get-color('base-color');
+  border-color: get-color('background-color');
   border-bottom-width: 1;
 }
 
@@ -23,10 +27,15 @@ RadListView {
 }
 
 .row {
-  background-color: get-color('contrast-light');
-  //TODO: Add shadow on each section for list WITH sections
+  background-color: get-color('white');
+  android-elevation: $elevation;
+  margin: 0 $shadow-size;
+  margin-top: -$shadow-size;
+  padding-top: $row-padding-top + $shadow-size;
 
   &.first {
+    margin-top: $shadow-size;
+    padding-top: $row-padding-top;
 
     &.rounded {
       border-top-left-radius: $border-radius;
@@ -35,6 +44,7 @@ RadListView {
   }
 
   &.last {
+    margin-bottom: $shadow-size-bottom;
 
     &.rounded {
       border-bottom-left-radius: $border-radius;

@@ -1,0 +1,22 @@
+@import "../../scss/web-imports";
+
+article {
+  max-width: 330px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+kirby-icon {
+  margin-bottom: size('m');
+}
+
+h3.title {
+  margin-bottom: size('xs');
+}
+
+p.subtitle {
+  margin-bottom: size('m');
+}

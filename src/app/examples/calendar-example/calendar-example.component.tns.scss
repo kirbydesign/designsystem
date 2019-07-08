@@ -1,6 +1,6 @@
 @import '../../../kirby/scss/native-imports';
 
 .wrapper {
-    background-color: get-color("base-color");
+    background-color: get-color('background-color');
     padding: 10;
 }
