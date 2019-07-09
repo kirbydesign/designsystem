@@ -64,7 +64,7 @@
     "reflect-metadata": "0.1.8",
     "rxjs": "6.3.3",
     "tns-core-modules": "5.4.0",
-    "zone.js": "0.8.4"
+    "zone.js": "0.8.29"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "0.13.9",
