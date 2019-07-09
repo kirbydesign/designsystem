@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, BehaviorSubject, forkJoin, of, combineLatest } from 'rxjs';
+import { Observable, BehaviorSubject, forkJoin, of, combineLatest, Subscription } from 'rxjs';
 import { map, first, catchError } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
 
@@ -24,7 +24,7 @@ export interface GhostComponent {
   templateUrl: './component-status.component.html',
   styleUrls: ['./component-status.component.scss'],
 })
-export class ComponentStatusComponent implements OnInit {
+export class ComponentStatusComponent implements OnInit, OnDestroy {
   isLoading = true;
   gitHubError = false;
   items: ComponentStatusItem[];
@@ -39,13 +39,18 @@ export class ComponentStatusComponent implements OnInit {
     environment.githubBaseUrl +
     '/issues/new?labels=component&template=component-request.md&title=%5BCOMPONENT%5D+';
 
+  firebaseSubscription: Subscription;
+
   constructor(private http: HttpClient, private db: AngularFirestore) {}
 
   ngOnInit() {
     this.items$ = this.searchTerm$.pipe(
       map((searchTerm) => this.filterItems(this.sortedItems, searchTerm, this.excludedStatuses))
     );
+    this.connectFirebase();
+  }
 
+  private connectFirebase(): void {
     const componentsCollection$ = this.db
       .collection<ComponentStatusItem>('component-status-items')
       .valueChanges();
@@ -54,14 +59,19 @@ export class ComponentStatusComponent implements OnInit {
       .collection<GhostComponent>('component-status-ghost-items')
       .valueChanges();
 
-    combineLatest([componentsCollection$, ghostComponentsCollection$]).subscribe(
-      ([components, ghostComponents]) => {
-        this.isLoading = true;
-        this.items = components;
-        this.ghostItems = ghostComponents;
-        this.initializeGithubStatus();
-      }
-    );
+    this.firebaseSubscription = combineLatest([
+      componentsCollection$,
+      ghostComponentsCollection$,
+    ]).subscribe(([components, ghostComponents]) => {
+      this.isLoading = true;
+      this.items = components;
+      this.ghostItems = ghostComponents;
+      this.initializeGithubStatus();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.firebaseSubscription.unsubscribe();
   }
 
   public toggleExcluded(event) {
