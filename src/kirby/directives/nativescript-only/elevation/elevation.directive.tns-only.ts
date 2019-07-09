@@ -21,7 +21,6 @@ export class NativeScriptElevationDirective implements OnInit {
     // https://github.com/NativeScript/nativescript-angular/issues/848
     // As a workaround we add 50 ms delay.
     setTimeout(this.applyElevation.bind(this), 50);
-    // this.el.nativeElement.style.backgroundColor = 'red';
   }
 
   private applyElevation() {
@@ -44,7 +43,6 @@ export class NativeScriptElevationDirective implements OnInit {
         return;
       }
       this.renderer.setStyle(androidChildView, `android-elevation`, `${this.elevation}`);
-      // this.renderer.setStyle(this.el.nativeElement, `margin`, `50`);
     }
   }
 

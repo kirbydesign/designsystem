@@ -14,8 +14,7 @@
     border-radius: $fab-size;
     text-align: center;
     vertical-align: middle;
-    // the overhead is 3/2 of the size, hence we need to move the button 1/2*(1/2*size) down
-    margin-top: $fab-size/4; 
+    margin-top: ($shadow-overhead - 1)/2; // center content inside the shadow overhead
     
     &.disabled {
       opacity: 0.6;
