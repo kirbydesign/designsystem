@@ -1,16 +1,27 @@
 import { Directive, OnInit, Input, HostBinding, ElementRef } from '@angular/core';
+import { isIOS } from 'tns-core-modules/ui/page/page';
 
-@Directive({ selector: '[kirbyShadow]' })
+@Directive({ selector: '[kirbyElevation]' })
 export class NativeScriptElevationDirective implements OnInit {
-  @Input() elevation?: 'z2' | 'z4' | 'z8';
+  @Input() kirbyElevation?: 'z2' | 'z4' | 'z8';
 
-  constructor(private el: ElementRef) {
-    // backgroundColor: string = 'red';
-  }
+  constructor(private el: ElementRef) {}
 
   ngOnInit(): void {
-    console.log(this.el);
-    this.el.nativeElement.style.backgroundColor = 'red';
-    // console.log('ngOnInit() invoked for kirby shadow directive');
+    if (!this.kirbyElevation) {
+      return;
+    }
+
+    this.applyElevation();
+    // this.el.nativeElement.style.backgroundColor = 'red';
+  }
+
+  private applyElevation() {
+    const el = this.el.nativeElement;
+    if (isIOS) {
+      console.log(`applying elevation ${this.kirbyElevation} on iOS`);
+    } else {
+      console.log(`applying elevation ${this.kirbyElevation} on Android`);
+    }
   }
 }
