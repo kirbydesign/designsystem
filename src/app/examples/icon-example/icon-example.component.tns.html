@@ -21,7 +21,7 @@
         </WrapLayout>
 
         <Label text="Sizes" class="h2"></Label>
-        <WrapLayout orientation="horizontal" itemWidth="80" itemHeight="80">
+        <WrapLayout orientation="horizontal" itemWidth="120" itemHeight="120">
             <StackLayout *ngFor="let size of sizes | keyvalue">
                 <kirby-icon name="person" [size]="size.value"></kirby-icon>
                 <Label [text]="size.value"></Label>
