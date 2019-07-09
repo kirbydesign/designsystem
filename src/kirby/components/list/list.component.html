@@ -1,5 +1,5 @@
 
-<ion-list #ionList mode="ios" kirbyInfiniteScroll (scrollEnd)="onLoadOnDemand()" [disabled]="!isLoadOnDemandEnabled">
+<ion-list #list mode="ios" kirbyInfiniteScroll (scrollEnd)="onLoadOnDemand()" [disabled]="!isLoadOnDemandEnabled" (window:resize)="onResize($event)">
   <ion-list-header class="list-header" *ngIf="listHeaderTemplate">
     <ng-container *ngTemplateOutlet="listHeaderTemplate"></ng-container>
   </ion-list-header>
@@ -14,9 +14,9 @@
           *ngFor="let item of section.items; let idx = index;"
           [class.last-in-section]="idx === section.items.length - 1"
           [class.divider]="showDivider"
-          (ionSwipe)="ionSwipe(slidingItem, item)"
+          (ionSwipe)="listItemSwipe(slidingItem, item)"
           class="sliding-row"
-          [attr.disabled]="isSlidingDisabled"> 
+          [attr.disabled]="slidingDisabled"> 
 
           <ng-container *ngTemplateOutlet="listItemOptionsTemplate; context: { $implicit: item }"></ng-container>
 
@@ -40,8 +40,8 @@
       <ion-item-sliding #slidingItem
         *ngFor="let item of items"
         [class.divider]="showDivider"
-        (ionSwipe)="ionSwipe(slidingItem, item)"
-        [attr.disabled]="isSlidingDisabled">
+        (ionSwipe)="listItemSwipe(slidingItem, item)"
+        [attr.disabled]="slidingDisabled">
         
         <ng-container *ngTemplateOutlet="listItemOptionsTemplate; context: { $implicit: item }"></ng-container>
         

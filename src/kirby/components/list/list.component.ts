@@ -1,4 +1,3 @@
-import { IonList, IonItemSliding } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import {
   Component,
@@ -12,7 +11,6 @@ import {
   TemplateRef,
   ViewChild,
   OnDestroy,
-  HostListener,
 } from '@angular/core';
 
 import {
@@ -26,12 +24,9 @@ import {
 import { LoadOnDemandEvent, LoadOnDemandEventData } from './list.event';
 import { ListHelper } from './helpers/list-helper';
 import { GroupByPipe } from './pipes/group-by.pipe';
-import { SelectedItemWithOption, ItemOption } from './list-item-option/list-item-option';
+import { SelectedItemWithOption } from './list-item-option/list-item-option';
 
 export type ListShape = 'square' | 'rounded';
-
-declare var require: any;
-const style: any = require('sass-extract-loader!./list.component.scss');
 
 @Component({
   selector: 'kirby-list',
@@ -98,27 +93,24 @@ export class ListComponent implements OnInit, OnChanges, OnDestroy {
   @ContentChild(ListSectionHeaderDirective, { read: TemplateRef }) sectionHeaderTemplate;
   @ContentChild(ListItemOptionsDirective, { read: TemplateRef }) listItemOptionsTemplate;
   @ContentChild(ListFooterDirective, { read: TemplateRef }) listFooterTemplate;
-  @ViewChild('ionList') ionList: IonList;
-
+  @ViewChild('list') list: any;
   @HostBinding('class.has-sections') isSectionsEnabled: boolean;
   isSelectable: boolean;
   isLoading: boolean;
   isLoadOnDemandEnabled: boolean;
   groupedItems: any[];
-  isSlidingDisabled: boolean = true;
-  private optionItemSubscription: Subscription;
+  slidingDisabled: boolean = false;
+  private subscriptions: Subscription = new Subscription();
   private orderMap: WeakMap<any, { isFirst: boolean; isLast: boolean }>;
 
-  constructor(private listHelper: ListHelper, private groupBy: GroupByPipe) {
-    this.optionItemSubscription = this.listHelper.selectedItemWithOption$.subscribe(
-      (selectedItemWithOption) => {
-        this.emitSelectedItemWithOption(selectedItemWithOption);
-      }
-    );
-  }
+  constructor(private listHelper: ListHelper, private groupBy: GroupByPipe) {}
 
   ngOnInit() {
-    this.onResize(window.innerWidth);
+    if (this.listItemOptionsTemplate) {
+      this.addSubscriptions();
+      this.listHelper.setList(this.list);
+      this.listHelper.resizeList();
+    }
   }
 
   ngOnChanges(): void {
@@ -135,9 +127,7 @@ export class ListComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.optionItemSubscription) {
-      this.optionItemSubscription.unsubscribe();
-    }
+    this.subscriptions.unsubscribe();
   }
 
   private getItemOrder(item: any): { isFirst: boolean; isLast: boolean } {
@@ -193,44 +183,38 @@ export class ListComponent implements OnInit, OnChanges, OnDestroy {
     return orderMap;
   }
 
-  private emitSelectedItemWithOption(selectedItemWithOption) {
-    if (selectedItemWithOption.option) {
-      selectedItemWithOption.option.selected = !selectedItemWithOption.option.selected;
-      this.itemOptionSelect.emit(selectedItemWithOption);
-
-      if (this.ionList) {
-        this.ionList.closeSlidingItems();
-      }
+  private addSubscriptions() {
+    if (this.listItemOptionsTemplate) {
+      // Emit selected sliding item option
+      this.subscriptions.add(
+        this.listHelper.selectedItemWithOption$.subscribe((selectedItemWithOption) => {
+          this.emitSelectedItemWithOption(selectedItemWithOption);
+        })
+      );
+      // Disable sliding items while in desktop mode
+      this.subscriptions.add(
+        this.listHelper.slidingDisabled$.subscribe((disabled) => {
+          this.slidingDisabled = disabled;
+        })
+      );
     }
   }
 
-  ionSwipe(slidingItem: IonItemSliding, item: any) {
-    slidingItem.getSlidingRatio().then((percent) => {
-      let option: ItemOption = undefined;
+  private emitSelectedItemWithOption(selectedItemWithOption) {
+    if (selectedItemWithOption.option) {
+      selectedItemWithOption.option.selected = !selectedItemWithOption.option.selected;
+      this.listHelper.closeSlidingItems();
+      this.itemOptionSelect.emit(selectedItemWithOption);
+    }
+  }
 
-      if (item.slidingOptions.start && percent < 0) {
-        option = item.slidingOptions.start[0];
-      }
-
-      if (item.slidingOptions.end && percent > 0) {
-        option = item.slidingOptions.end[item.slidingOptions.end.length - 1];
-      }
-
-      const selectedItemWithOption: SelectedItemWithOption = {
-        item: item,
-        option: option,
-      };
+  async listItemSwipe(slidingItem: any, item: any) {
+    this.listHelper.listItemSwipe(slidingItem, item).then((selectedItemWithOption) => {
       this.emitSelectedItemWithOption(selectedItemWithOption);
     });
   }
 
-  @HostListener('window:resize', ['$event.target.innerWidth'])
-  onResize(width) {
-    const large = style.global['$breakpoints'].value['large'].value;
-    this.isSlidingDisabled = width >= large;
-
-    if (this.ionList && this.isSlidingDisabled) {
-      this.ionList.closeSlidingItems();
-    }
+  onResize(event) {
+    this.listHelper.onResize(event.target.innerWidth);
   }
 }
