@@ -25,7 +25,7 @@ export class CardComponent extends ContentView implements OnInit {
   @Input() title: string;
   @Input() subtitle: string;
   @Input() themeColor?: ThemeColor;
-  @Input() isHighlighted: boolean;
+  @Input() elevation?: 'highlighted' | 'disabled';
 
   view: View;
 
@@ -42,7 +42,7 @@ export class CardComponent extends ContentView implements OnInit {
   onViewLoaded(args: EventData) {
     this.view = <View>args.object; // We need a reference to the view so we can access it on orientation changes
     // this.setupOnOrientationChangeListener();
-    this.applySizeAndShadow();
+    // this.applySizeAndShadow();
   }
 
   applySizeAndShadow() {

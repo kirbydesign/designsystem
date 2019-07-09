@@ -21,10 +21,15 @@ $min-card-width: 304px;
   min-height: $min-card-height;
   min-width: $min-card-width;
   overflow: hidden;
-  
-  &[isHighlighted='true'] {
+
+  &[elevation='highlighted'] {
     box-shadow: #{get-elevation('z4')};
   }
+
+  &[elevation='disabled'] {
+    box-shadow: none;
+  }
+
 }
 
 @each $color-name, $color-value in $main-colors {

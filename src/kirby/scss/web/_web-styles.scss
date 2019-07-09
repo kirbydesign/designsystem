@@ -44,6 +44,10 @@
     }  
 }
 
+.alert-wrapper {
+    box-shadow: #{get-elevation('z8')} !important;
+}
+
 .kirby-alert-btn {
     cursor: pointer;
     --ion-color-primary: #{get-color(contrast-dark)};
