@@ -1,76 +1,82 @@
-  
 @import "../../scss/web-imports";
 
+@mixin _slider-thumb() {
+  -webkit-appearance: none;
+  border-radius: 50%;
+  background-color: get-color('white');
+  background-image: url('../../icons/svg/arrow-more.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: size('m');
+  width: size('xxl');
+  height: size('xxl');
+  border: none;
+  cursor: pointer;
+}
+
 :host {
+  position: relative;
+  display: inline-block;
+  width: 320px;
+  height: 0;
+
+  &[expand='fullWidth'] {
     display: block;
-    width: 320px;
-    &[expand='fullWidth'] {
-        display: block;
-        width: 100%;
-    }
+    width: 100%;
+  }
 
-    .slide-button {
-        outline: none;
-        -webkit-appearance: none;
-        width: 100%;
-        background: get-color("primary");
-        -webkit-appearance: none;
-        border-radius: 28px;
-        padding: 2px;
-        transition: opacity 0.5s;
-        position: relative;
-    }
-    
-    .slide-button::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        border-radius: 50%;
-        background: get-color('white');
-        z-index: 1;
-        font-size: font-size('m');
-        position: relative;
-        width: size('xxl');
-        height: size('xxl');
-    }
-  
-    .slide-button::before {
-        content: attr(data-before-content);
-        color: get-color('primary-contrast');
-        position: absolute;
-        top: 0;
-        left: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100%;
-        width: 100%;
-        text-align: center;
-        z-index: 1;
-        font-size: font-size('n');
-    }
+  .range-container {
+    $padding: 2px;
 
-    @for $i from 1 through 10 {
-        $iTenth: $i*10;
-        .slide-#{$iTenth}-pct {
-            &.slide-button::before {
-                transition: opacity 0.2s linear;
-                opacity: 1-($i/10);
-            }
-        }
-    }
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: get-color("primary");
 
-    .slide-done {
-        transition: opacity 0.5s ease-in-out;
-        opacity: 0;
-    }
+    height: size('xxl') + $padding * 2;
+    border-radius: 28px;
+  }
 
-    .slide-button::-webkit-slider-thumb:before {
-        color: get-color('light-contrast');
-        position: absolute;
-        left: 5px;
-        top: -10px;
-        z-index: 1;
-        font-size: font-size('xxl');;
-        font-weight: bold;
-        content: "→";
+  @for $i from 1 through 10 {
+    $iTenth: $i*10;
+    .slide-#{$iTenth}-pct {
+      transition: opacity 0.2s linear;
+      opacity: 1-($i/10);
     }
   }
+
+  .range-text {
+    position: absolute;
+    color: get-color('primary-contrast');
+    font-size: font-size('n');
+    margin: 0;
+    line-height: 1;
+    z-index: 1;
+    transition: opacity 0.5s;
+  }
+
+  .slide-button {
+    width: 100%;
+    height: 100%;
+    -webkit-appearance: none;
+    background: transparent;
+    z-index: 2;
+  }
+
+  .slide-button::-webkit-slider-thumb {
+    @include _slider-thumb;
+  }
+
+  .slide-button::-moz-range-thumb {
+    @include _slider-thumb;
+  }
+
+  .slide-done {
+    transition: all .3s ease-in-out;
+    opacity: 0;
+    height: 0;
+    transform: scale(0);
+    poiter-events: none;
+  }
+}
