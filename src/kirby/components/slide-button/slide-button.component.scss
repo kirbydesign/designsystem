@@ -15,8 +15,8 @@
         width: 100%;
         background: get-color("primary");
         -webkit-appearance: none;
-        border-radius: 25px;
-        padding: 5px;
+        border-radius: 28px;
+        padding: 2px;
         transition: opacity 0.5s;
         position: relative;
     }
@@ -24,9 +24,9 @@
     .slide-button::-webkit-slider-thumb {
         -webkit-appearance: none;
         border-radius: 50%;
-        background: get-color('contrast-light');
+        background: get-color('white');
         z-index: 1;
-        font-size: font-size('m');;
+        font-size: font-size('m');
         position: relative;
         width: size('xxl');
         height: size('xxl');
@@ -34,13 +34,18 @@
   
     .slide-button::before {
         content: attr(data-before-content);
-        color: get-color('contrast-light');
+        color: get-color('primary-contrast');
         position: absolute;
+        top: 0;
+        left: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
         width: 100%;
         text-align: center;
-        top: 10px;
         z-index: 1;
-        font-size: font-size('l');
+        font-size: font-size('n');
     }
 
     @for $i from 1 through 10 {
@@ -59,7 +64,7 @@
     }
 
     .slide-button::-webkit-slider-thumb:before {
-        color: get-color('contrast-light');
+        color: get-color('light-contrast');
         position: absolute;
         left: 5px;
         top: -10px;
@@ -69,4 +74,3 @@
         content: "→";
     }
   }
-  
