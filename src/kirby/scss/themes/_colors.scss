@@ -1,20 +1,42 @@
-$kirby-base-color: #f6f6f6;
-$kirby-contrast-light: #fff;
-$kirby-contrast-dark: #222a32;
-
-$main-colors: (
-  'primary': #01db9f,
+$brand-colors: (
+  'primary': #00e89a,
   'secondary': #005c3c,
-  'tertiary': #01352c,
-  'success': #00e89a,
-  'warning': #ffca3a,
-  'danger': #ff595e,
-  'light': #edeeee,
-  'medium': #b7babd,
-  'dark': #454c52
+  'tertiary': #01352c,  
 );
 
-@function _get-color-contrast($color, $contrast-dark: $kirby-contrast-dark, $contrast-light: $kirby-contrast-light) {
+$notification-colors: (
+  'success': #2cf287,
+  'warning': #ffca3a,
+  'danger': #ff595e,
+);
+
+$system-colors: (
+  'background-color': #f6f6f6,  
+  'white': #ffffff,  
+  'light': #f2f2f2,
+  'semi-light': #ebebeb,
+  'medium': #d1d1d1,
+  'semi-dark': #767676,
+  'dark': #353535,  
+  'black': #1c1c1c,
+);
+
+@function getAllColors() {
+  @return 
+    map-merge(
+      map-merge($brand-colors, $notification-colors),
+      $system-colors
+    );
+}
+
+$_color-palette: getAllColors();
+
+// TODO Deprecated variable, used to generate colors in some components - don't use it anymore! 
+$main-colors: map-remove($_color-palette, 'background-color', 'black', 'white', 'semi-light', 'semi-dark');
+
+@function _get-color-contrast($color) {
+  $contrast-light: map-get($system-colors, 'white');
+  $contrast-dark: map-get($system-colors, 'black');
   $red: red($color);
   $green: green($color);
   $blue: blue($color);
@@ -44,7 +66,7 @@ $main-colors: (
   @return red($color), green($color), blue($color);
 }
 
-@function generate-colors($colors: $main-colors) {
+@function generate-colors($colors: $_color-palette) {
   $color-list: ();
   @each $color-name, $color-value in $colors {
       $color-list: map-merge(
@@ -62,11 +84,3 @@ $main-colors: (
 }
 
 $kirby-colors: generate-colors();
-$kirby-colors: map-merge(
-  (
-    'base-color': $kirby-base-color,
-    'contrast-light': $kirby-contrast-light,
-    'contrast-dark': $kirby-contrast-dark
-  ),
-  $kirby-colors
-);

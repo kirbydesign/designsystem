@@ -1,4 +1,56 @@
-<kirby-avatar [imageSrc]="imageSrc" [altText]="'Proper alt text'" [size]="'small'" overlay="true"></kirby-avatar>
-<kirby-avatar [imageSrc]="imageSrc" [altText]="'Proper alt text'" [size]="'medium'" shadow="true"></kirby-avatar>
-<kirby-avatar [imageSrc]="imageSrc" [altText]="'Proper alt text'" [size]="'large'" ></kirby-avatar>
-<kirby-avatar [imageSrc]="imageSrc" [altText]="'Proper alt text'" [size]="'xlarge'" ></kirby-avatar>
+<h2>Avatar with image</h2>
+
+<div class="avatar-item-container" >
+  <div class="avatar-item-inner-container">
+    <kirby-avatar [imageSrc]="imageSrc" [altText]="altText" size="lg"></kirby-avatar>
+  </div>
+</div>
+
+<h2>Avatar with overlay</h2>
+
+<div class="avatar-item-container" >
+  <div class="avatar-item-inner-container">
+    <kirby-avatar [imageSrc]="imageSrc" [altText]="altText" size="lg" overlay="true"></kirby-avatar>
+  </div>
+</div>
+
+<h2>Avatar with shadow</h2>
+
+<div class="avatar-item-container" >
+  <div class="avatar-item-inner-container">
+    <kirby-avatar [imageSrc]="imageSrc" [altText]="altText" size="lg" shadow="true"></kirby-avatar>
+  </div>
+</div>
+
+<h2>Avatar with icon</h2>
+
+<div class="avatar-item-container">
+  <div class="avatar-item-inner-container">
+    <kirby-avatar size="lg" overlay="true"> 
+      <kirby-icon name="qr"></kirby-icon>
+    </kirby-avatar>
+  </div>
+</div>
+<div class="avatar-item-container">
+  <div class="avatar-item-inner-container">
+    <kirby-avatar size="md" overlay="true">
+      <kirby-icon name="qr"></kirby-icon>
+    </kirby-avatar>
+  </div>
+</div>
+<div class="avatar-item-container">
+  <div class="avatar-item-inner-container">
+    <kirby-avatar size="sm" overlay="true">
+      <kirby-icon name="qr"></kirby-icon>
+    </kirby-avatar>
+  </div>
+</div>
+
+<h2>Sizes</h2>
+
+<div class="avatar-item-container" *ngFor="let size of sizes | keyvalue">
+  <div class="avatar-item-inner-container">
+    <kirby-avatar [imageSrc]="imageSrc" [altText]="altText" [size]="size.value" overlay="true" shadow="true"></kirby-avatar>
+    <span class="avatar-item-title">{{size.value}}</span>
+  </div>
+</div>

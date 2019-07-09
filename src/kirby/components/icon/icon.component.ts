@@ -1,4 +1,15 @@
-import { Component, Input, HostBinding } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Inject,
+  Input,
+  OnChanges,
+  Optional,
+  SimpleChanges,
+} from '@angular/core';
+
+import { kirbyIconSettings } from './kirby-icon-settings';
+import { ICON_SETTINGS, Icon, IconSettings } from './icon-settings';
 
 @Component({
   selector: 'kirby-icon',
@@ -10,55 +21,63 @@ import { Component, Input, HostBinding } from '@angular/core';
     class: 'kirby-icon',
   },
 })
-export class IconComponent {
-  static DEFAULT_ICON_CODE = 0xf2cf;
-  static DEFAULT_ICON_NAME: 'cog' = 'cog';
+export class IconComponent implements OnChanges {
+  defaultIcon: Icon = this.findIcon(kirbyIconSettings.icons, 'cog');
+  fontFamily: string = kirbyIconSettings.fontfamily;
+  private _icon = (this.icon = this.defaultIcon);
 
-  @Input() name:
-    | 'add'
-    | 'close'
-    | 'cog'
-    | 'swap'
-    | 'move'
-    | 'log-out'
-    | 'more'
-    | 'arrow-back'
-    | 'help'
-    | 'attach'
-    | 'search'
-    | 'checkbox-outline'
-    | 'checkbox'
-    | 'menu'
-    | 'person' = IconComponent.DEFAULT_ICON_NAME;
+  @Input() name: string;
+  @Input() customName: string;
+  @Input() outline: boolean;
 
-  getIonicIconName(name: string): string {
-    const icon = iconsCharCodeMap[name];
-    return icon !== undefined ? name : IconComponent.DEFAULT_ICON_NAME;
+  get icon(): Icon {
+    return this._icon;
   }
 
-  getCharCode(name: string): string {
-    const icon = iconsCharCodeMap[name];
-    return icon !== undefined
-      ? String.fromCharCode(icon)
-      : String.fromCharCode(IconComponent.DEFAULT_ICON_CODE);
+  set icon(icon: Icon) {
+    // Check if ICON_SETTINGS are configured
+    if (!this.iconSettings && this.customName) {
+      console.warn(
+        'ICON_SETTINGS provider in your module.ts is not set. Read documentation on how to set it up.'
+      );
+    }
+
+    // If icon are not found, set default icon
+    if (!icon && (this.name || this.customName)) {
+      console.warn(`Icon with name "${this.name || this.customName}" was not found.`);
+      icon = this.defaultIcon;
+
+      // If default icon are not found
+      if (!icon) {
+        console.warn('Default icon was not found.');
+        return;
+      }
+    }
+
+    // Set icon if it's found
+    if (icon) {
+      this._icon = {
+        ...icon,
+        charCode: String.fromCharCode(icon.unicode),
+      };
+    }
+  }
+
+  constructor(@Optional() @Inject(ICON_SETTINGS) private iconSettings?: IconSettings) {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.name) {
+      this.fontFamily = kirbyIconSettings.fontfamily;
+      this.icon = this.findIcon(kirbyIconSettings.icons, changes.name.currentValue);
+    } else if (changes.customName) {
+      this.fontFamily = this.iconSettings.fontfamily;
+      this.icon = this.findIcon(this.iconSettings.icons, changes.customName.currentValue);
+    }
+  }
+
+  private findIcon(icons, name: string): Icon {
+    return icons.find((icon) => icon.name === name);
   }
 }
-// tslint:disable:prettier
-export const iconsCharCodeMap = {
-  'add': 0xf102,
-  'close': 0xf2c0,
-  'cog': 0xf2cf,
-  'swap': 0xf389,
-  'move': 0xf331,
-  'log-out': 0xf359,
-  'more': 0xf1c9,
-  'arrow-back': 0xf27d,
-  'help': 0xf30b,
-  'attach': 0xf28e,
-  'search': 0xf375,
-  'checkbox-outline': 0xf2b8,
-  'checkbox': 0xf2b9,
-  'menu': 0xf32a,
-  'person': 0xf345,
-};
-// tslint:enable:prettier
+
+export const icons: Icon[] = [...kirbyIconSettings.icons];

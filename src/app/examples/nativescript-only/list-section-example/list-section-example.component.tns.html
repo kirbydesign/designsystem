@@ -1,8 +1,8 @@
-  <kirby-list
-        [items]="items"
+    <kirby-list
+        [items]="itemsFullList"
         [getSectionName]="getSectionName"
         (itemSelect)="onItemSelect($event)"
-        shape="rounded"
+        showDivider="true"
         >
     <kirby-list-section-header
             *kirbyListSectionHeader="let section"
@@ -10,10 +10,10 @@
     ></kirby-list-section-header>
     <GridLayout *kirbyListItem="let item" rows="*" columns="3*, *, auto">
         <StackLayout col="0">
-            <Label [text]="item.title" class="primary"></Label>
-            <Label [text]="item.detail"></Label>
+            <Label [text]="item?.title" class="primary"></Label>
+            <Label [text]="item?.detail"></Label>
         </StackLayout>
-        <Label col="1" [text]="item.subTitle" verticalAlignment="top"></Label>
-        <Label col="2" [text]="item.amount" class="primary" verticalAlignment="top"></Label>
+        <Label col="1" [text]="item?.subTitle" verticalAlignment="top"></Label>
+        <Label col="2" [text]="item?.amount" class="primary" verticalAlignment="top"></Label>
     </GridLayout>
 </kirby-list>

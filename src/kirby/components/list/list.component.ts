@@ -14,6 +14,7 @@ import {
   ListItemDirective,
   ListSectionHeaderDirective,
   ListFlexItemDirective,
+  ListFooterDirective,
 } from './list.directive';
 import { LoadOnDemandEvent, LoadOnDemandEventData } from './list.event';
 import { ListHelper } from './helpers/list-helper';
@@ -43,21 +44,6 @@ export class ListComponent implements OnChanges {
   @Input() noMoreItemsText: string;
 
   /**
-   * Turns off styling of the section header on Web.
-   */
-  @Input() noSectionHeaderStyling: boolean;
-
-  /**
-   * Turns off styling of the row on Web.
-   */
-  @Input() noRowStyling: boolean;
-
-  /**
-   * Shows shadows on sections on Web.
-   */
-  @Input() sectionShadow: boolean;
-
-  /**
    * Determines if dividers should be shown or not.
    */
   @Input() showDivider = false;
@@ -69,7 +55,9 @@ export class ListComponent implements OnChanges {
    *
    * `square` means **without** rounded corners, `rounded` means **with** rounded corners.
    */
-  @Input() shape: ListShape = 'square';
+  @HostBinding('class.rounded')
+  @Input()
+  shape: ListShape = 'rounded';
 
   /**
    * Emitting event when more items are to be loaded.
@@ -86,6 +74,7 @@ export class ListComponent implements OnChanges {
   @ContentChild(ListFlexItemDirective, { read: TemplateRef }) listFlexItemTemplate;
   @ContentChild(ListHeaderDirective, { read: TemplateRef }) listHeaderTemplate;
   @ContentChild(ListSectionHeaderDirective, { read: TemplateRef }) sectionHeaderTemplate;
+  @ContentChild(ListFooterDirective, { read: TemplateRef }) listFooterTemplate;
 
   @HostBinding('class.has-sections') isSectionsEnabled: boolean;
   isSelectable: boolean;
@@ -112,6 +101,9 @@ export class ListComponent implements OnChanges {
 
   private getItemOrder(item: any): { isFirst: boolean; isLast: boolean } {
     const defaultOrder = { isFirst: false, isLast: false };
+    if (!item) {
+      return defaultOrder;
+    }
     if (!this.isSectionsEnabled) {
       return defaultOrder;
     }
@@ -123,12 +115,14 @@ export class ListComponent implements OnChanges {
     return order;
   }
 
-  isFirstInSection(item: any) {
-    return this.getItemOrder(item).isFirst;
+  isFirstItem(item: any, index: number) {
+    return this.isSectionsEnabled ? this.getItemOrder(item).isFirst : index === 0;
   }
 
-  isLastInSection(item: any) {
-    return this.getItemOrder(item).isLast;
+  isLastItem(item: any, index: number) {
+    return this.isSectionsEnabled
+      ? this.getItemOrder(item).isLast
+      : index === this.items.length - 1;
   }
 
   onItemSelect(args: any) {
@@ -137,6 +131,10 @@ export class ListComponent implements OnChanges {
 
   onLoadOnDemand(event?: LoadOnDemandEventData) {
     this.listHelper.onLoadOnDemand(this, event);
+  }
+
+  onRowLoaded(event: any): void {
+    this.listHelper.renderShadow(event);
   }
 
   private createOrderMap(

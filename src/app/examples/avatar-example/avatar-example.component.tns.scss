@@ -1,0 +1,23 @@
+@import '../../../kirby/scss/native-imports';
+
+.background {
+  background-color: get-color('background-color');
+  padding: size('s');
+}
+
+.kirby-avatar {
+  margin-bottom: 20;
+}
+
+Label.h2 {
+  margin-top: size('s');
+}
+
+WrapLayout StackLayout {
+  horizontal-align:center;
+
+  Label {
+      text-align: center;
+      font-size: font-size('xs');
+  }
+}

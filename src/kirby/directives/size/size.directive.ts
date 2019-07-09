@@ -3,7 +3,7 @@ import { Directive, Input, HostBinding } from '@angular/core';
 @Directive({
   // don't worry. I know what i am doing!
   // tslint:disable-next-line:directive-selector
-  selector: 'Button[size], button[size], kirby-icon[size]',
+  selector: 'Button[size], button[size], kirby-icon[size], kirby-avatar[size]',
 })
 export class SizeDirective {
   @HostBinding('class.sm')
@@ -12,7 +12,7 @@ export class SizeDirective {
   isMediumSize: boolean;
   @HostBinding('class.lg')
   isLargeSize: boolean;
-  @Input() set size(size: 'sm' | 'md' | 'lg') {
+  @Input() set size(size: Sizes) {
     if (size === 'sm') {
       this.isSmallSize = true;
     }
@@ -25,4 +25,10 @@ export class SizeDirective {
   }
 
   constructor() {}
+}
+
+export enum Sizes {
+  small = 'sm',
+  medium = 'md',
+  large = 'lg',
 }

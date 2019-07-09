@@ -4,6 +4,7 @@ import * as ionic from '@ionic/angular';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FormsModule } from '@angular/forms';
 
+import { KirbyModule } from '@kirbydesign/designsystem';
 import { ExamplesModule } from '../examples/examples.module';
 import { COMPONENT_DECLARATIONS } from './showcase.common';
 
@@ -18,7 +19,13 @@ describe('ShowcaseComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ShowcaseRoutingModule, ExamplesModule, RouterTestingModule, FormsModule],
+      imports: [
+        ShowcaseRoutingModule,
+        ExamplesModule,
+        RouterTestingModule,
+        FormsModule,
+        KirbyModule,
+      ],
       declarations: [
         ...COMPONENT_DECLARATIONS,
         ShowcaseComponent,

@@ -33,7 +33,7 @@
 
 @function get-unit-value($value) {
   @if ($native == false) {
-    @return $value + unquote('px');
+    @return $value * 1px;
   } @else {
     @return $value;
   }

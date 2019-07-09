@@ -19,10 +19,14 @@ import { SegmentedControlShowcaseComponent } from './segmented-control-showcase/
 import { ChipShowcaseComponent } from './chip-showcase/chip-showcase.component';
 import { BadgeShowcaseComponent } from './badge-showcase/badge-showcase.component';
 import { IconShowcaseComponent } from './icon-showcase/icon-showcase.component';
+import { CalendarShowcaseComponent } from './calendar-showcase/calendar-showcase.component';
 import { CheckboxShowcaseComponent } from './checkbox-showcase/checkbox-showcase.component';
 import { SegmentedChipControlShowcaseComponent } from './segmented-chip-control-showcase/segmented-chip-control-showcase.component';
 import { ActionSheetShowcaseComponent } from './action-sheet-showcase/action-sheet-showcase.component';
 import { AlertShowcaseComponent } from './alert-showcase/alert-showcase.component';
+import { ToastShowcaseComponent } from './toast-showcase/toast-showcase.component';
+import { ToggleShowcaseComponent } from './toggle-showcase/toggle-showcase.component';
+import { EmptyStateShowcaseComponent } from './empty-state-showcase/empty-state-showcase.component';
 
 export const COMPONENT_IMPORTS: any[] = [ExamplesModule, ShowcaseRoutingModule];
 
@@ -46,9 +50,13 @@ export const COMPONENT_EXPORTS: any[] = [
   SegmentedChipControlShowcaseComponent,
   BadgeShowcaseComponent,
   IconShowcaseComponent,
+  CalendarShowcaseComponent,
   ActionSheetShowcaseComponent,
   CheckboxShowcaseComponent,
   AlertShowcaseComponent,
+  ToastShowcaseComponent,
+  ToggleShowcaseComponent,
+  EmptyStateShowcaseComponent,
 ];
 
 export const COMPONENT_DECLARATIONS: any[] = [...COMPONENT_EXPORTS, ShowcaseComponent];

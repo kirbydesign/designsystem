@@ -1,0 +1,5 @@
+@import '../../scss/web-imports';
+
+.toggle-checked {
+    --background-checked: #{get-color('success')};
+}

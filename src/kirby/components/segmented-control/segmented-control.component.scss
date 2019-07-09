@@ -5,13 +5,13 @@
 }
 
 ion-segment {
-  --color: #{get-color('contrast-dark')};
-  --color-checked: #{get-color('contrast-light')};
-  --background: #{get-color('contrast-light')};
-  --background-checked: #{get-color('contrast-dark')};
-  --background-hover: #{get-color('contrast-light')};
+  --color: #{get-color('black')};
+  --color-checked: #{get-color('white')};
+  --background: #{get-color('white')};
+  --background-checked: #{get-color('black')};
+  --background-hover: #{get-color('white')};
   border-radius: $border-radius;
-  background: get-color('contrast-light');
+  background: get-color('white');
 }
 
 ion-segment-button {
@@ -27,7 +27,7 @@ ion-segment-button {
   --padding-end: #{size("m")};
 
   &.segment-button-checked:hover {
-    --background-hover: #{get-color('contrast-dark')};
+    --background-hover: #{get-color('black')};
   }
 
   &:focus-within {

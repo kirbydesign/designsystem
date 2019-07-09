@@ -1,0 +1,13 @@
+<kirby-list [items]="items">
+    <StackLayout *kirbyListHeader>
+        <Label text="This is the header" textWrap="true" class="header"></Label>
+    </StackLayout>
+
+    <StackLayout *kirbyListItem="let item">
+        <Label [text]="item?.title"></Label>
+    </StackLayout>
+
+    <StackLayout *kirbyListFooter>
+        <Label text="This is the footer" textWrap="true" class="footer"></Label>
+    </StackLayout>
+</kirby-list>

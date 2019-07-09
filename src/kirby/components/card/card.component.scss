@@ -4,11 +4,11 @@ $min-card-height: 170px;
 $min-card-width: 304px;
 
 :host{ 
-  --kirby-card-header-background-color:  #{get-color('contrast-light')};
+  --kirby-card-header-background-color:  #{get-color('white')};
   --kirby-card-header-color: #{get-color('primary-contrast')};
-  --kirby-card-main-background-color: #{get-color('contrast-light')};
+  --kirby-card-main-background-color: #{get-color('white')};
   --kirby-card-main-color: #{get-color('primary-contrast')};
-  --kirby-card-footer-background-color: #{get-color('contrast-light')};
+  --kirby-card-footer-background-color: #{get-color('white')};
   --kirby-card-footer-color: #{get-color('primary-contrast')};
 
   border-radius: $border-radius;

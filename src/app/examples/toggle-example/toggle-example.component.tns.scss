@@ -1,0 +1,14 @@
+@import '../../../kirby/scss/native-imports';
+
+.background {
+    background-color: get-color('background-color');
+    padding: size('s');
+
+    StackLayout {
+        margin-bottom: size('s');
+
+        Label {
+            margin-right: size('xs');
+        }
+    }
+}
