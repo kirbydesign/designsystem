@@ -1,0 +1,1 @@
+:host{display:grid;grid-template-columns:repeat(1, 1fr);grid-gap:16px}@media (min-width: 721px){:host{grid-template-columns:repeat(3, 1fr)}}.card-content{padding:16px}

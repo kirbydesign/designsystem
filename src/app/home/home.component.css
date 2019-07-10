@@ -1,0 +1,1 @@
+:host{position:relative;display:flex;flex-direction:column;min-height:100vh}main{display:flex;flex-direction:row;flex-grow:1;width:100%;max-width:1366px;margin:0 auto}@media (min-width: 1025px){main{padding-right:1rem}}section{flex-grow:1;background-color:var(--kirby-background-color);margin:2rem 0;box-shadow:0 0 5px rgba(0,0,0,0.2);padding:1rem 2rem;overflow:hidden}
