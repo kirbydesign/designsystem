@@ -1,4 +1,4 @@
-<ion-item-option [attr.id]="option.id" [themeColor]="option.themeColor" (click)="onClick()" expandable>
+<ion-item-option [attr.id]="option.id" [ngClass]="option.themeColor" (click)="onClick()" expandable>
   <div class="item-content">
     <kirby-icon *ngIf="option.iconName" [name]="option.iconName"></kirby-icon>
     <ion-label>{{ option.title }}</ion-label>

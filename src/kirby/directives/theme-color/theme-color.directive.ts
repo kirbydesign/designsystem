@@ -6,8 +6,7 @@ import { ThemeColor } from '../../helpers/theme-color.type';
   // tslint:disable-next-line:directive-selector
   selector: `kirby-card[themeColor],
              kirby-badge[themeColor],
-             kirby-icon[themeColor],
-             ion-item-option[themeColor]`,
+             kirby-icon[themeColor]`,
 })
 export class ThemeColorDirective {
   @HostBinding('class.default')
