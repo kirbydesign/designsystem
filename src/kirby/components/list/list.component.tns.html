@@ -7,7 +7,7 @@
     (itemTap)="onItemSelect($event)">
     <!-- ITEM -->
     <ng-template tkListItemTemplate let-item="item" let-index="index">
-      <StackLayout kirbyElevation="z2" iosMasksToBounds="true">
+      <StackLayout [kirbyElevation]="2" [iosMasksToBounds]="true">
         <StackLayout class="row"
           [class.divider]="showDivider"
           [class.rounded]="shape === 'rounded'"

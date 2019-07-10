@@ -12,7 +12,7 @@ $min-card-width: 304px;
   --kirby-card-footer-color: #{get-color('primary-contrast')};
 
   border-radius: $border-radius;
-  box-shadow: #{get-elevation('z2')};
+  box-shadow: get-elevation(2);
   color: var(--kirby-card-main-color);
   background-color: var(--kirby-card-main-background-color);
   display: flex;
@@ -22,11 +22,11 @@ $min-card-width: 304px;
   min-width: $min-card-width;
   overflow: hidden;
 
-  &[elevation='highlighted'] {
-    box-shadow: #{get-elevation('z4')};
+  &[isHighlighted=true] {
+    box-shadow: get-elevation(4);
   }
 
-  &[elevation='disabled'] {
+  &[isDisabled=true] {
     box-shadow: none;
   }
 

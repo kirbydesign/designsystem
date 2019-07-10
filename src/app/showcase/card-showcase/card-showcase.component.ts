@@ -24,11 +24,16 @@ export class CardShowcaseComponent {
       inputValues: ['string'],
     },
     {
-      name: 'elevation',
-      description:
-        '(Optional) Elevation on the card. By default the card has an elevation of z2, whereas highlighted sets it to z4 and disabled removes it',
-      defaultValue: '',
-      inputValues: ['disabled', 'highlighted'],
+      name: 'isHighlighted',
+      description: '(Optional) Adds additional elevation of z4 on the card.',
+      defaultValue: 'false',
+      inputValues: ['boolean'],
+    },
+    {
+      name: 'isDisabled',
+      description: '(Optional) Removes the elevation of the card.',
+      defaultValue: 'false',
+      inputValues: ['boolean'],
     },
     {
       name: 'themeColor',

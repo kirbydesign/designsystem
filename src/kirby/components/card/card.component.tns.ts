@@ -16,7 +16,10 @@ export class CardComponent extends ContentView implements OnInit {
   @Input() title: string;
   @Input() subtitle: string;
   @Input() themeColor?: ThemeColor;
-  @Input() elevation?: 'highlighted' | 'disabled';
+  @Input() isHighlighted: boolean = false;
+  @Input() isDisabled: boolean = false;
+
+  elevation: number = 2;
 
   view: View;
 
@@ -28,15 +31,16 @@ export class CardComponent extends ContentView implements OnInit {
     super();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.setElevation();
+  }
 
-  getElevation() {
-    if (this.elevation === 'disabled') {
-      return null;
-    } else if (this.elevation === 'highlighted') {
-      return 'z4';
-    } else {
-      return 'z2';
+  setElevation() {
+    if (this.isHighlighted) {
+      this.elevation = 4;
+    }
+    if (this.isDisabled) {
+      this.elevation = null;
     }
   }
 }

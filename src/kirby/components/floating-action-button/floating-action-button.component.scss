@@ -4,7 +4,7 @@
 // https://ionicframework.com/docs/api/fab-button
 
 ion-fab-button {
-    --box-shadow: #{get-elevation('z8')};
+    --box-shadow: #{get-elevation(8)};
     width: 64px;
     height: 64px;
 

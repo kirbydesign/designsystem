@@ -53,11 +53,11 @@
 }
 
 @function get-elevation($variant) {
-  @if ($variant == 'z2') {
+  @if ($variant == 2) {
     @return unquote('0 5px 10px -10px rgba(28, 28, 28, 0.3), 0 0 5px 0 rgba(28, 28, 28, 0.08)')  
-  } @else if ($variant == 'z4') {
+  } @else if ($variant == 4) {
     @return unquote('0 10px 15px -10px rgba(28, 28, 28, 0.3), 0 0 5px 0 rgba(28, 28, 28, 0.08)')  
-  } @else if ($variant == 'z8') {
+  } @else if ($variant == 8) {
     @return unquote('0 20px 30px -15px rgba(28, 28, 28, 0.3), 0 0 5px 0 rgba(28, 28, 28, 0.08)')  
   }
 }

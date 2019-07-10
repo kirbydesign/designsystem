@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ContentView } from 'tns-core-modules/ui/content-view';
 import { View } from 'tns-core-modules/ui/page/page';
 import { registerElement } from 'nativescript-angular';
@@ -11,10 +11,12 @@ declare var require: any;
   templateUrl: './floating-action-button.component.html',
   styleUrls: ['./floating-action-button.component.scss'],
 })
-export class FloatingActionButtonComponent extends ContentView {
+export class FloatingActionButtonComponent extends ContentView implements OnInit {
   @Input() showShadow?: boolean = true;
   @Input() disabled?: boolean = false;
   @Input() isFloating?: boolean = true;
+
+  elevation: number = 8;
 
   view: View;
 
@@ -22,11 +24,10 @@ export class FloatingActionButtonComponent extends ContentView {
     super();
   }
 
-  getElevation() {
+  ngOnInit() {
     if (!this.showShadow || this.disabled || !this.isFloating) {
-      return null;
+      this.elevation = null;
     }
-    return 'z8';
   }
 }
 
