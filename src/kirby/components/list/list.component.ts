@@ -184,20 +184,19 @@ export class ListComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   private addSubscriptions() {
-    if (this.listItemOptionsTemplate) {
-      // Emit selected sliding item option
-      this.subscriptions.add(
-        this.listHelper.selectedItemWithOption$.subscribe((selectedItemWithOption) => {
-          this.emitSelectedItemWithOption(selectedItemWithOption);
-        })
-      );
-      // Disable sliding items while in desktop mode
-      this.subscriptions.add(
-        this.listHelper.slidingDisabled$.subscribe((disabled) => {
-          this.slidingDisabled = disabled;
-        })
-      );
-    }
+    // Emit selected sliding item option
+    this.subscriptions.add(
+      this.listHelper.selectedItemWithOption$.subscribe((selectedItemWithOption) => {
+        this.emitSelectedItemWithOption(selectedItemWithOption);
+      })
+    );
+
+    // Disable sliding items while in desktop mode
+    this.subscriptions.add(
+      this.listHelper.slidingDisabled$.subscribe((disabled) => {
+        this.slidingDisabled = disabled;
+      })
+    );
   }
 
   private emitSelectedItemWithOption(selectedItemWithOption) {

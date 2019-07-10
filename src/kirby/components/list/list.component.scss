@@ -33,6 +33,7 @@ $shadow-mask: 0 -6px 0px 0px get-color('white');
     flex-direction: row;
     justify-content: space-between;
     font-size: font-size('s');
+    z-index: 1;
     --inner-border-width: 0;
     --background: transparent;
     --min-height: unset;
