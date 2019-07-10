@@ -200,17 +200,14 @@ export class ListComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   private emitSelectedItemWithOption(selectedItemWithOption) {
-    if (selectedItemWithOption.option) {
-      selectedItemWithOption.option.selected = !selectedItemWithOption.option.selected;
-      this.listHelper.closeSlidingItems();
-      this.itemOptionSelect.emit(selectedItemWithOption);
-    }
+    this.listHelper.closeSlidingItems();
+    this.itemOptionSelect.emit(selectedItemWithOption);
   }
 
   async listItemSwipe(slidingItem: any, item: any) {
-    this.listHelper.listItemSwipe(slidingItem, item).then((selectedItemWithOption) => {
-      this.emitSelectedItemWithOption(selectedItemWithOption);
-    });
+    // this.listHelper.listItemSwipe(slidingItem, item).then((selectedItemWithOption) => {
+    //   this.emitSelectedItemWithOption(selectedItemWithOption);
+    // });
   }
 
   onResize(event) {

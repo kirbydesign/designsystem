@@ -27,10 +27,10 @@ export class ListExampleComponent extends BaseListComponent {
 
   onItemOptionSelect(event) {
     // Example of updating title and icon for selected option
-    if (event.option.id === 0) {
-      event.option.title = event.option.selected ? 'Restore' : 'Archive';
-      event.option.iconName = event.option.selected ? 'unsubscribe' : 'verifiy';
-    }
+    // if (event.option.id === 0) {
+    //   event.option.title = event.option.selected ? 'Restore' : 'Archive';
+    //   event.option.iconName = event.option.selected ? 'unsubscribe' : 'verifiy';
+    // }
     console.log('list option item selected :', event);
   }
 }

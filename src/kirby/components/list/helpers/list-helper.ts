@@ -52,7 +52,7 @@ export class ListHelper {
   async listItemSwipe(slidingItem: IonItemSliding, item: any): Promise<SelectedItemWithOption> {
     return new Promise<SelectedItemWithOption>((resolve) => {
       slidingItem.getSlidingRatio().then((percent) => {
-        let option: ItemOption = undefined;
+        /*let option: ItemOption = undefined;
 
         if (item.slidingOptions.start && percent < 0) {
           option = item.slidingOptions.start[0];
@@ -66,7 +66,8 @@ export class ListHelper {
           item: item,
           option: option,
         };
-        resolve(selectedItemWithOption);
+        resolve(selectedItemWithOption);*/
+        resolve(undefined);
       });
     });
   }

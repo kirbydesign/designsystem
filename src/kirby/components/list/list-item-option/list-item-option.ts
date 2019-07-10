@@ -13,7 +13,12 @@ export interface SlidingOptions {
   end?: Array<ItemOption>;
 }
 
+export interface SelectedItemOption {
+  id: number;
+  selected: boolean;
+}
+
 export interface SelectedItemWithOption {
   item: any;
-  option?: ItemOption;
+  selectedItemOption: SelectedItemOption;
 }

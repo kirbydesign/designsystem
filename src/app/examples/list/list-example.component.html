@@ -35,21 +35,14 @@
   <!-- Sliding items -->
   <div *kirbyListItemOptions="let item">
     <!-- left side (start) -->
-    <kirby-list-item-options side="start" *ngIf="item.slidingOptions.start">
-      <kirby-list-item-option
-        *ngFor="let option of item.slidingOptions.start" 
-        [item]="item" 
-        [option]="option">
-      </kirby-list-item-option>
+    <kirby-list-item-options side="start">
+      <kirby-list-item-option [item]="item" [selected]='false' id='0' title='Archive' iconName='verifiy' themeColor='warning'></kirby-list-item-option>
+      <kirby-list-item-option [item]="item" [selected]='false' id='1' title='Flag' iconName='attach' themeColor='success'></kirby-list-item-option>
     </kirby-list-item-options>
 
     <!-- right side (end) -->
-    <kirby-list-item-options side="end" *ngIf="item.slidingOptions.end">
-        <kirby-list-item-option
-          *ngFor="let option of item.slidingOptions.end" 
-          [item]="item" 
-          [option]="option">
-      </kirby-list-item-option>
+    <kirby-list-item-options side="end">
+      <kirby-list-item-option [item]="item" [selected]='false' id='2' title='Delete' iconName='trash' themeColor='danger'></kirby-list-item-option>
     </kirby-list-item-options>
   </div>
 </kirby-list>
