@@ -56,6 +56,7 @@ describe('ActionSheetComponent', () => {
         MockComponent(ionic.IonListHeader),
         MockComponent(ionic.IonLabel),
         MockComponent(ionic.IonItem),
+        MockComponent(ionic.IonItemSliding),
       ],
       providers: [
         { provide: IModalController, useValue: modalControllerSpy },
