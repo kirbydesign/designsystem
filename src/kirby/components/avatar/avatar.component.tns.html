@@ -9,4 +9,9 @@
     [visibility]="imageSrc ? 'collapse' : 'visible'">
     <ng-content select="kirby-icon"></ng-content>
   </GridLayout>
+  <AbsoluteLayout class="badge-wrapper" id="badge-wrapper">
+    <GridLayout class="badge-container">
+      <ng-content select="kirby-badge"></ng-content>
+    </GridLayout>
+  </AbsoluteLayout>
 </GridLayout>

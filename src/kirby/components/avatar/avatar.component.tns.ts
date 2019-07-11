@@ -51,21 +51,30 @@ export class AvatarComponent extends ContentView {
     if (this.shadow) {
       setTimeout(() => {
         if (this.view.android) {
-          this.view.eachChildView((child) => {
-            const bgColor = child.style.backgroundColor;
-            const transparentColor = '#00ff0000';
-            const androidView = child.android;
-            const shape = new android.graphics.drawable.GradientDrawable();
-            shape.setShape(android.graphics.drawable.GradientDrawable.RECTANGLE);
-            shape.setColor(
-              android.graphics.Color.parseColor(bgColor ? bgColor + '' : transparentColor)
-            );
-            shape.setCornerRadius(androidView.getMeasuredWidth());
-            androidView.setBackgroundDrawable(shape);
-            androidView.setClipToOutline(true);
-            androidView.setElevation(ScssHelper.ELEVATION_IMAGE);
-            return true;
-          });
+          // this.view.eachChildView((child: View) => {
+          //   const androidView = child.android;
+          //   const cssClasse = child.cssClasses;
+
+          //   if (cssClasse.has('image') || cssClasse.has('overlay')) {
+          //     const bgColor = child.style.backgroundColor;
+          //     const transparentColor = '#00ff0000';
+          //     const shape = new android.graphics.drawable.GradientDrawable();
+          //     shape.setShape(android.graphics.drawable.GradientDrawable.RECTANGLE);
+          //     shape.setColor(
+          //       android.graphics.Color.parseColor(bgColor ? bgColor + '' : transparentColor)
+          //     );
+          //     shape.setCornerRadius(androidView.getMeasuredWidth());
+          //     androidView.setBackgroundDrawable(shape);
+          //     androidView.setClipToOutline(true);
+          //     androidView.setElevation(ScssHelper.ELEVATION_IMAGE);
+          //   }
+          //   return true;
+          // });
+          // const badgeWrapper = this.view.getViewById('badge-wrapper');
+          // if (badgeWrapper) {
+          //   console.log(badgeWrapper);
+          //   badgeWrapper.android.bringToFront();
+          // }
         } else if (this.view.ios) {
           const iosView = this.view.ios;
           iosView.layer.shadowColor = ScssHelper.SHADOW_COLOR.ios.CGColor;
