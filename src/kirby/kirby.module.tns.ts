@@ -16,6 +16,7 @@ import { NativeScriptDoughnutChartComponent } from './components/nativescript-on
 import { NativeScriptLineChartComponent } from './components/nativescript-only/line-chart/line-chart.component.tns-only';
 import { ModalWrapperComponent } from './components/modal/modal-wrapper/modal-wrapper.component';
 import { ActionSheetComponent } from './components/modal/action-sheet/action-sheet.component';
+import { VerticalTextAlignmentDirective } from './directives/vertical-text-alignment/vertical-text-alignment.directive.tns-only';
 
 overrideModalViewMethod();
 registerElement('ModalStack', () => ModalStack);
@@ -25,6 +26,7 @@ const nativeScriptDeclarations = [
   ...declarations,
   NativeScriptDoughnutChartComponent,
   NativeScriptLineChartComponent,
+  VerticalTextAlignmentDirective,
 ];
 
 @NgModule({
