@@ -1,10 +1,8 @@
 import {
   Component,
-  ElementRef,
   EventEmitter,
   Input,
   Output,
-  ViewChild,
   OnDestroy,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -23,7 +21,6 @@ export class SlideButtonComponent implements OnDestroy {
 
   @Output() slideDone = new EventEmitter();
   @Output() slidePercentageChanged = new EventEmitter<number>();
-  @ViewChild('sliderButtonRef') sliderButtonRef: ElementRef;
 
   isSlideDone = false;
   pctInTens = 0;
@@ -37,11 +34,10 @@ export class SlideButtonComponent implements OnDestroy {
   }
 
   private _value: number = 0;
+  private resetSliderIntervalTimer: any;
   private calculatePctInTens() {
     this.pctInTens = Math.ceil(this.value / 10) * 10;
   }
-
-  private resetSliderIntervalTimer: any;
 
   constructor(private changeDetectionRef: ChangeDetectorRef) {}
 
