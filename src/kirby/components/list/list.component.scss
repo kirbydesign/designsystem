@@ -2,7 +2,7 @@
 
 $shadow: 0 5px 10px -10px rgba(28, 28, 28, 0.3), 0 0 5px 0 rgba(28, 28, 28, 0.08);
 $shadow-mask: 0 -6px 0px 0px get-color('white');
-$shadow-mask-hover: 0 -3px 0px 0px get-color('background-color');
+$shadow-mask-hover: 0 -6px 0px 0px get-color('background-color');
 
 :host {
   display: block;
@@ -13,68 +13,64 @@ $shadow-mask-hover: 0 -3px 0px 0px get-color('background-color');
   }
 
   ion-list {
+    background: transparent;
     contain: inherit;
+    padding: 0;
   }
 
-  .list-ios,
   ion-list-header {
-    background-color: transparent;
+    background-color: get-color('white');
+    border-bottom: 1px solid get-color('background-color');
     padding: 0;
-    margin: 0;
   } 
-  
+
+  ion-item-divider {
+    background-color: get-color('white');
+    border-color: transparent;
+    padding: 0;
+    --color: unset;
+
+    &.divider:not(:last-child) {
+      border-color: get-color('background-color');
+    }
+
+    &.selectable {
+      cursor: pointer;
+
+      &:hover {
+        background-color: get-color('background-color');
+      }
+    }
+  }
+
   ion-item {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    width: 100%;
+    padding: size('m') size('xs');
     font-size: font-size('s');
     --inner-border-width: 0;
     --background: transparent;
     --min-height: unset;
-
-    &:focus {
-      outline: -webkit-focus-ring-color auto 5px;
-      outline-offset: -4px;
-    }
-
-    p {
-      margin: 0;
-    }
-
-    &.row {
-      background-color: get-color('white');
-      padding: size('m') size('xs');
-
-      &.divider:not(:last-child) {
-        border-bottom: 1px solid get-color('background-color');
-      }
-
-      &.selectable {
-        cursor: pointer;
-
-        &:hover {
-          background-color: get-color('background-color');
-        }
-      }
-    }
-    
-    &.loading,
-    &.no-more-items {
-      background-color: get-color('white');
-    }
   }
 
-  .list-header {
+  .loading,
+  .no-more-items,
+  .extending  {
+    display: block;
     background-color: get-color('white');
-    border-bottom: 1px solid get-color('background-color');
+    text-align: center;
+    padding: size('s');
   }
-  
+
+  .footer {
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+  }
+
   .section-header {
+    background-color: transparent;
     padding: size('m');
-  }
-  
-  .extending {
-    margin: auto;
   }
 }
 
@@ -94,22 +90,22 @@ $shadow-mask-hover: 0 -3px 0px 0px get-color('background-color');
   }
 
   &.has-sections  {
-    .row {
+    ion-item-divider:not(.section-header) {
       box-shadow: $shadow-mask, $shadow;
     }
 
-    .row.selectable:hover {
+    ion-item-divider.selectable:hover {
       background-color: get-color('background-color');
       box-shadow: $shadow-mask-hover, $shadow;
     }
 
-    .section-header + .row {
+    .section-header + ion-item-divider {
       border-top-left-radius: $border-radius;
       border-top-right-radius: $border-radius;
       box-shadow: $shadow;
     }
 
-    .row.last-in-section {
+    ion-item-divider.last-in-section {
       border-bottom-left-radius: $border-radius;
       border-bottom-right-radius: $border-radius;
     }

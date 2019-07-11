@@ -55,17 +55,10 @@ export class ListComponent implements OnChanges {
    *
    * `square` means **without** rounded corners, `rounded` means **with** rounded corners.
    */
+  @Input() shape: ListShape = 'rounded';
   @HostBinding('class.rounded')
-  @Input()
-  isRoundedShape: boolean = true;
-
-  @Input() set shape(listShape: ListShape) {
-    if (listShape === 'square') {
-      this.isRoundedShape = false;
-    }
-    if (listShape === 'rounded') {
-      this.isRoundedShape = true;
-    }
+  public get isRounded(): boolean {
+    return this.shape === 'rounded';
   }
 
   /**

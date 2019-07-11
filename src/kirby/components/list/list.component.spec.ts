@@ -42,6 +42,7 @@ describe('ListComponent', () => {
       MockComponent(ionic.IonListHeader),
       MockComponent(ionic.IonLabel),
       MockComponent(ionic.IonItem),
+      MockComponent(ionic.IonItemDivider),
     ],
     providers: [ListHelper, GroupByPipe],
   });
@@ -81,8 +82,19 @@ describe('ListComponent', () => {
       });
       runNgOnChanges();
 
-      const liElements = spectator.queryAll('ion-item');
+      const liElements = spectator.queryAll('ion-item-divider');
       expect(liElements.length).toEqual(component.items.length);
+    });
+
+    it('should render one ion-item for each ion-item-divider and one for each section, if sections are enabled', () => {
+      spectator.setInput({
+        items: Item.createItems(1, 2, 3),
+        getSectionName: (item: Item) => (item.value % 2 === 0 ? 'even' : 'odd'),
+      });
+      runNgOnChanges();
+
+      const liElements = spectator.queryAll('ion-item-divider');
+      expect(liElements.length).toEqual(component.items.length + 2);
     });
   });
 
@@ -94,7 +106,7 @@ describe('ListComponent', () => {
       });
       runNgOnChanges();
 
-      const liElements = spectator.queryAll('ion-item');
+      const liElements = spectator.queryAll('ion-item-divider');
       liElements.forEach((liElement) => {
         expect(liElement.getAttribute('class')).toContain('divider');
       });
@@ -107,7 +119,7 @@ describe('ListComponent', () => {
       });
       runNgOnChanges();
 
-      const liElements = spectator.queryAll('ion-item');
+      const liElements = spectator.queryAll('ion-item-divider');
       liElements.forEach((liElement) => {
         expect(liElement.getAttribute('class')).not.toContain('divider');
       });
