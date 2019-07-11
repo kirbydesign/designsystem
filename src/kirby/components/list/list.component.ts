@@ -16,7 +16,7 @@ import {
   ListItemDirective,
   ListSectionHeaderDirective,
   ListFlexItemDirective,
-  ListItemOptionsDirective,
+  ListSwipeActionsDirective,
   ListFooterDirective,
 } from './list.directive';
 import { LoadOnDemandEvent, LoadOnDemandEventData } from './list.event';
@@ -87,7 +87,7 @@ export class ListComponent implements OnInit, OnChanges {
   @ContentChild(ListFlexItemDirective, { read: TemplateRef }) listFlexItemTemplate;
   @ContentChild(ListHeaderDirective, { read: TemplateRef }) listHeaderTemplate;
   @ContentChild(ListSectionHeaderDirective, { read: TemplateRef }) sectionHeaderTemplate;
-  @ContentChild(ListItemOptionsDirective, { read: TemplateRef }) listItemOptionsTemplate;
+  @ContentChild(ListSwipeActionsDirective, { read: TemplateRef }) listSwipeActionsTemplate;
   @ContentChild(ListFooterDirective, { read: TemplateRef }) listFooterTemplate;
   @ViewChild('list') list: any;
   @HostBinding('class.has-sections') isSectionsEnabled: boolean;
@@ -101,7 +101,7 @@ export class ListComponent implements OnInit, OnChanges {
   constructor(private listHelper: ListHelper, private groupBy: GroupByPipe) {}
 
   ngOnInit() {
-    if (this.listItemOptionsTemplate) {
+    if (this.listSwipeActionsTemplate) {
       this.listHelper.setList(this.list);
       this.isSlidingDisabled = this.listHelper.getIsSlidingDisabled(window.innerWidth);
     }

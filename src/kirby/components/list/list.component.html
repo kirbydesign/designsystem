@@ -17,7 +17,7 @@
           class="sliding-row"
           [attr.disabled]="isSlidingDisabled"> 
 
-          <ng-container *ngTemplateOutlet="listItemOptionsTemplate; context: { $implicit: item }"></ng-container>
+          <ng-container *ngTemplateOutlet="listSwipeActionsTemplate; context: { $implicit: item }"></ng-container>
 
           <ion-item
             [class.last-in-section]="idx === section.items.length - 1"
@@ -31,6 +31,7 @@
             <ng-container *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }"></ng-container>
             <ng-container *ngTemplateOutlet="listFlexItemTemplate; context: { $implicit: item }"></ng-container>
           </ion-item>
+
       </ion-item-sliding>
     </div>
   </div>
@@ -41,7 +42,7 @@
         [class.divider]="showDivider"
         [attr.disabled]="isSlidingDisabled">
         
-        <ng-container *ngTemplateOutlet="listItemOptionsTemplate; context: { $implicit: item }"></ng-container>
+        <ng-container *ngTemplateOutlet="listSwipeActionsTemplate; context: { $implicit: item }"></ng-container>
         
         <ion-item
           (click)="onItemSelect(item)"

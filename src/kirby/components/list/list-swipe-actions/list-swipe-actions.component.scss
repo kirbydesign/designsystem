@@ -1,6 +1,6 @@
 @import '../../../scss/web-imports';
  
-:host {
+.swipe-action {
     background-color: #{get-color('primary')};
     color: #{get-color('primary-contrast')};
 

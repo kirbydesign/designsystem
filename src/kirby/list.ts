@@ -9,13 +9,10 @@ export {
   ListSwipeActionsComponent,
 } from './components/list/list-swipe-actions/list-swipe-actions.component';
 export {
-  ListSwipeActionComponent,
-} from './components/list/list-swipe-action/list-swipe-action.component';
-export {
   ListSectionHeaderComponent,
 } from './components/list/list-section-header/list-section-header.component';
 export { ListFlexItemDirective } from './components/list/list.directive';
 export { ListHeaderDirective } from './components/list/list.directive';
 export { ListItemDirective } from './components/list/list.directive';
 export { ListSectionHeaderDirective } from './components/list/list.directive';
-export { ListItemOptionsDirective } from './components/list/list.directive';
+export { ListSwipeActionsDirective } from './components/list/list.directive';

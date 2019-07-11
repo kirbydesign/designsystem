@@ -21,9 +21,9 @@ export class ListHeaderDirective {}
 export class ListSectionHeaderDirective {}
 
 @Directive({
-  selector: '[kirbyListItemOptions]',
+  selector: '[kirbyListSwipeActions]',
 })
-export class ListItemOptionsDirective {}
+export class ListSwipeActionsDirective {}
 
 @Directive({
   selector: '[kirbyListFooter]',
