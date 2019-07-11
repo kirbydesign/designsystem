@@ -25,7 +25,8 @@
 <hr />
 
 <h2>List with sliding items:</h2>
-<kirby-list [items]="items" showDivider="true" (itemOptionSelect)="onItemOptionSelect($event)">
+<kirby-list [items]="items" 
+  showDivider="true">
   <kirby-list-item
     *kirbyListItem="let item"
     [title]="item.title"
@@ -35,15 +36,21 @@
   <!-- Sliding items -->
   <div *kirbyListItemOptions="let item">
     <!-- left side (start) -->
-    <kirby-list-item-options side="start">
-      <kirby-list-item-option [item]="item" [selected]='false' id='0' title='Archive' iconName='verifiy' themeColor='warning'></kirby-list-item-option>
-      <kirby-list-item-option [item]="item" [selected]='false' id='1' title='Flag' iconName='attach' themeColor='success'></kirby-list-item-option>
-    </kirby-list-item-options>
+    <kirby-list-swipe-actions side="start" (fullSwipe)="onArchiveItem(item)">
+      <kirby-list-swipe-action (swipeActionSelect)="onArchiveItem(item)"
+        [selected]="item.archived || false" title='Archive' altTitle='Unarchive' iconName='verifiy' themeColor='warning'>
+      </kirby-list-swipe-action>
+      <kirby-list-swipe-action (swipeActionSelect)="onFlagItem(item)"
+        [selected]="item.flagged || false" title='Flag' altTitle='Unflag' iconName='attach' themeColor='success'>
+      </kirby-list-swipe-action>
+    </kirby-list-swipe-actions>
 
     <!-- right side (end) -->
-    <kirby-list-item-options side="end">
-      <kirby-list-item-option [item]="item" [selected]='false' id='2' title='Delete' iconName='trash' themeColor='danger'></kirby-list-item-option>
-    </kirby-list-item-options>
+    <kirby-list-swipe-actions side="end" (fullSwipe)="onDeleteItem(item)">
+      <kirby-list-swipe-action (swipeActionSelect)="onDeleteItem(item)"
+        [selected]="item.deleted || false" title='Delete' iconName='trash' themeColor='danger'>
+      </kirby-list-swipe-action>
+    </kirby-list-swipe-actions>
   </div>
 </kirby-list>
 

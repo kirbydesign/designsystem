@@ -19,8 +19,8 @@ import {
 import { ComponentLoaderDirective } from './components/shared/component-loader.directive';
 import { ChartComponent } from './components/chart/chart.component';
 import { ListItemComponent } from './components/list/list-item/list-item.component';
-import { ListItemOptionsComponent } from './components/list/list-item-options/list-item-options.component';
-import { ListItemOptionComponent } from './components/list/list-item-option/list-item-option.component';
+import { ListSwipeActionsComponent } from './components/list/list-swipe-actions/list-swipe-actions.component';
+import { ListSwipeActionComponent } from './components/list/list-swipe-action/list-swipe-action.component';
 import { ListFlexItemComponent } from './components/list/list-flex-item/list-flex-item.component';
 import { ListSectionHeaderComponent } from './components/list/list-section-header/list-section-header.component';
 import { ListHeaderComponent } from './components/list/list-header/list-header.component';
@@ -58,8 +58,8 @@ export const declarations = [
   ListItemDirective,
   ListFlexItemDirective,
   ListItemComponent,
-  ListItemOptionsComponent,
-  ListItemOptionComponent,
+  ListSwipeActionsComponent,
+  ListSwipeActionComponent,
   ListFlexItemComponent,
   ListCellComponent,
   ListCellLineComponent,

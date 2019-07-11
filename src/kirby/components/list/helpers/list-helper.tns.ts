@@ -1,5 +1,3 @@
-import { Subject } from 'rxjs';
-import { IonList, IonItemSliding } from '@ionic/angular';
 import { RadListView, ListViewEventData } from 'nativescript-ui-listview';
 import { isIOS } from 'tns-core-modules/platform';
 import { View, EventData } from 'tns-core-modules/ui/page/page';
@@ -7,16 +5,10 @@ import { View, EventData } from 'tns-core-modules/ui/page/page';
 import { LoadOnDemandEventData } from '../list.event';
 import { ListComponent } from './../list.component';
 import { ScssHelper } from '../../../scss/scss-helper';
-import { SelectedItemWithOption, ItemOption } from '../list-item-option/list-item-option';
 
 declare const CGSizeMake: any;
 
 export class ListHelper {
-  private selectedItemWithOption = new Subject<SelectedItemWithOption>();
-  private slidingDisabled = new Subject<boolean>();
-  public selectedItemWithOption$ = this.selectedItemWithOption.asObservable();
-  public slidingDisabled$ = this.slidingDisabled.asObservable();
-  private list: any;
   onLoadOnDemand(component: ListComponent, event: LoadOnDemandEventData) {
     const listView: RadListView = event.object;
 
@@ -44,21 +36,13 @@ export class ListHelper {
     return selectedItem;
   }
 
-  setSelectedItemWithOption(item: any) {
-    this.selectedItemWithOption.next(item);
+  // Only web implementation
+  getIsSlidingDisabled(_: any): boolean {
+    return false;
   }
 
-  setList(_: any) {}
-
-  resizeList() {}
-
-  closeSlidingItems() {}
-
-  onResize(_: number) {}
-
-  async listItemSwipe(_: any, _item: any): Promise<any> {
-    // only web implementation
-    return new Promise(undefined);
+  closeActionItems() {
+    // TODO: implement on native
   }
 
   renderShadow(args: EventData): void {

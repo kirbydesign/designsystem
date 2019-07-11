@@ -6,11 +6,11 @@ export { ListFlexItemComponent } from './components/list/list-flex-item/list-fle
 export { ListHeaderComponent } from './components/list/list-header/list-header.component';
 export { ListItemComponent } from './components/list/list-item/list-item.component';
 export {
-  ListItemOptionsComponent,
-} from './components/list/list-item-options/list-item-options.component';
+  ListSwipeActionsComponent,
+} from './components/list/list-swipe-actions/list-swipe-actions.component';
 export {
-  ListItemOptionComponent,
-} from './components/list/list-item-option/list-item-option.component';
+  ListSwipeActionComponent,
+} from './components/list/list-swipe-action/list-swipe-action.component';
 export {
   ListSectionHeaderComponent,
 } from './components/list/list-section-header/list-section-header.component';

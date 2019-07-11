@@ -25,12 +25,31 @@ export class ListExampleComponent extends BaseListComponent {
     this.router.navigateByUrl(url);
   }
 
-  onItemOptionSelect(event) {
-    // Example of updating title and icon for selected option
-    // if (event.option.id === 0) {
-    //   event.option.title = event.option.selected ? 'Restore' : 'Archive';
-    //   event.option.iconName = event.option.selected ? 'unsubscribe' : 'verifiy';
-    // }
-    console.log('list option item selected :', event);
+  onArchiveItem(item: any) {
+    console.log(`onArchiveItem called on item with id: ${item.id}...`);
+    this.delayAction(() => {
+      item.archived = !(item.archived || false);
+    });
+  }
+
+  onFlagItem(item: any) {
+    console.log(`onFlagItem called on item with id: ${item.id}...`);
+    this.delayAction(() => {
+      item.flagged = !(item.flagged || false);
+    });
+  }
+
+  onDeleteItem(item: any) {
+    console.log(`onDeleteItem called on item with id: ${item.id}...`);
+    this.delayAction(() => {
+      item.deleted = !(item.deleted || false);
+    });
+  }
+
+  delayAction(action: () => void) {
+    // supposing that there should be a call to the back-end here that takes 1 sec...
+    setTimeout(() => {
+      action();
+    }, 1000);
   }
 }
