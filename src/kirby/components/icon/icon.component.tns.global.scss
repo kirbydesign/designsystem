@@ -2,33 +2,29 @@
 @import './icon.component.shared';
 
 .kirby-icon {
-    display: none;
-    .icon-container {
-        &.outline {
-            border-radius: size('xxxl') * 3;
-            border-color: get-color('dark');
-            border-width: 3;
-        }
+    Label.outline {
+        border-radius: size('xxxl') * 3;
+        border-color: get-color('dark');
+        border-width: 3;
+    }
+    @include _icon-size_native('sm');
+
+    &.sm {
         @include _icon-size_native('sm');
     }
 
-    &.sm .icon-container {
-        @include _icon-size_native('sm');
-    }
-
-    &.md .icon-container {
+    &.md {
         @include _icon-size_native('md');
     }
 
-    &.lg .icon-container {
+    &.lg {
         @include _icon-size_native('lg');
     }
 
     @each $color-name, $color-value in $main-colors {
-        &.#{$color-name} .icon-container {
+        &.#{$color-name} {
             color: get-color($color-name);
-
-            &.outline {
+            Label.outline {
                 border-color: get-color($color-name);
             }
         }
