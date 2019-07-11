@@ -1,8 +1,10 @@
 @import '../../scss/web-imports';
 
+$divider-color: get-color('background-color');
+$background-color-hover: get-color('background-color');
 $shadow: 0 5px 10px -10px rgba(28, 28, 28, 0.3), 0 0 5px 0 rgba(28, 28, 28, 0.08);
 $shadow-mask: 0 -6px 0px 0px get-color('white');
-$shadow-mask-hover: 0 -6px 0px 0px get-color('background-color');
+$shadow-mask-divider: 0 -1px 0px 0px $divider-color;
 
 :host {
   display: block;
@@ -10,67 +12,6 @@ $shadow-mask-hover: 0 -6px 0px 0px get-color('background-color');
 
   &:not(.has-sections) {
     box-shadow: $shadow;
-  }
-
-  ion-list {
-    background: transparent;
-    contain: inherit;
-    padding: 0;
-  }
-
-  ion-list-header {
-    background-color: get-color('white');
-    border-bottom: 1px solid get-color('background-color');
-    padding: 0;
-  } 
-
-  ion-item-divider {
-    background-color: get-color('white');
-    border-color: transparent;
-    padding: 0;
-    --color: unset;
-
-    &.divider:not(:last-child) {
-      border-color: get-color('background-color');
-    }
-
-    &.selectable {
-      cursor: pointer;
-
-      &:hover {
-        background-color: get-color('background-color');
-      }
-    }
-  }
-
-  ion-item {
-    display: flex;
-    width: 100%;
-    padding: size('m') size('xs');
-    font-size: font-size('s');
-    --inner-border-width: 0;
-    --background: transparent;
-    --min-height: unset;
-  }
-
-  .loading,
-  .no-more-items,
-  .extending  {
-    display: block;
-    background-color: get-color('white');
-    text-align: center;
-    padding: size('s');
-  }
-
-  .footer {
-    overflow: hidden;
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .section-header {
-    background-color: transparent;
-    padding: size('m');
   }
 }
 
@@ -92,11 +33,14 @@ $shadow-mask-hover: 0 -6px 0px 0px get-color('background-color');
   &.has-sections  {
     ion-item-divider:not(.section-header) {
       box-shadow: $shadow-mask, $shadow;
+
+      &.divider {
+        box-shadow: $shadow-mask-divider, $shadow-mask, $shadow;
+      }
     }
 
-    ion-item-divider.selectable:hover {
-      background-color: get-color('background-color');
-      box-shadow: $shadow-mask-hover, $shadow;
+    ion-item-divider.selectable:hover ion-item {
+      background-color: $background-color-hover;
     }
 
     .section-header + ion-item-divider {
@@ -110,4 +54,65 @@ $shadow-mask-hover: 0 -6px 0px 0px get-color('background-color');
       border-bottom-right-radius: $border-radius;
     }
   }
+}
+
+ion-list {
+  background: transparent;
+  contain: inherit;
+  padding: 0;
+}
+
+ion-list-header {
+  background-color: get-color('white');
+  border-bottom: 1px solid $divider-color;
+  padding: 0;
+} 
+
+ion-item-divider {
+  background-color: get-color('white');
+  border-color: transparent;
+  padding: 0;
+  --color: unset;
+
+  &.divider:not(:last-child) {
+    border-color: $divider-color;
+  }
+
+  &.selectable {
+    cursor: pointer;
+
+    &:hover {
+      background-color: $background-color-hover;
+    }
+  }
+}
+
+ion-item {
+  display: flex;
+  width: 100%;
+  padding: size('m') size('xs');
+  font-size: font-size('s');
+  --inner-border-width: 0;
+  --background: transparent;
+  --min-height: unset;
+}
+
+.loading,
+.no-more-items,
+.extending  {
+  display: block;
+  background-color: get-color('white');
+  text-align: center;
+  padding: size('s');
+}
+
+.section-header {
+  background-color: transparent;
+  padding: size('m');
+}
+
+.footer {
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
 }
