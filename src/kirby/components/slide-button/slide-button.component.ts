@@ -18,25 +18,25 @@ import { TouchGestureEventData } from 'tns-core-modules/ui/gestures/gestures';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SlideButtonComponent implements OnDestroy {
-  @Input() public text = '';
+  @Input() text = '';
   @Input() expand?: 'block';
 
-  @Output() public slideDone = new EventEmitter();
-  @Output() public slidePercentageChanged = new EventEmitter<number>();
-  @ViewChild('sliderButtonRef') public sliderButtonRef: ElementRef;
+  @Output() slideDone = new EventEmitter();
+  @Output() slidePercentageChanged = new EventEmitter<number>();
+  @ViewChild('sliderButtonRef') sliderButtonRef: ElementRef;
 
-  public isSlideDone = false;
+  isSlideDone = false;
+  pctInTens = 0;
 
-  private _value: number = 0;
-  public get value(): number {
+  get value(): number {
     return this._value;
   }
-  public set value(v: number) {
+  set value(v: number) {
     this._value = v;
     this.calculatePctInTens();
   }
 
-  public pctInTens = 0;
+  private _value: number = 0;
   private calculatePctInTens() {
     this.pctInTens = Math.ceil(this.value / 10) * 10;
   }
@@ -51,7 +51,7 @@ export class SlideButtonComponent implements OnDestroy {
     }
   }
 
-  public onSliderMouseup() {
+  onSliderMouseup() {
     if (this.value == 100) {
       this.handleSlideDone();
     } else {
@@ -74,12 +74,12 @@ export class SlideButtonComponent implements OnDestroy {
     }
   }
 
-  public onSliderValueChange(val: string) {
+  onSliderValueChange(val: string) {
     this.value = +val;
     this.slidePercentageChanged.emit(this.value);
   }
 
-  public onSliderMousedown() {
+  onSliderMousedown() {
     clearInterval(this.resetSliderIntervalTimer);
   }
 
