@@ -12,12 +12,20 @@ import { SideNavComponent } from './page/side-nav/side-nav.component';
 import { HeaderComponent } from './page/header/header.component';
 import { IntroComponent } from './intro/intro.component';
 import { KirbyModule } from '@kirbydesign/designsystem';
+import { FirebaseModule } from './shared/firebase/firebase.module';
 
 registerLocaleData(localeEn);
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, SideNavComponent, HeaderComponent, IntroComponent],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule, KirbyModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    KirbyModule,
+    FirebaseModule,
+  ],
 
   providers: [{ provide: LOCALE_ID, useValue: 'en-GB' }],
   bootstrap: [AppComponent],

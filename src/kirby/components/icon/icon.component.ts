@@ -66,10 +66,10 @@ export class IconComponent implements OnChanges {
   constructor(@Optional() @Inject(ICON_SETTINGS) private iconSettings?: IconSettings) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.name) {
+    if (changes.name && changes.name.currentValue) {
       this.fontFamily = kirbyIconSettings.fontfamily;
       this.icon = this.findIcon(kirbyIconSettings.icons, changes.name.currentValue);
-    } else if (changes.customName) {
+    } else if (changes.customName && changes.customName.currentValue) {
       this.fontFamily = this.iconSettings.fontfamily;
       this.icon = this.findIcon(this.iconSettings.icons, changes.customName.currentValue);
     }
