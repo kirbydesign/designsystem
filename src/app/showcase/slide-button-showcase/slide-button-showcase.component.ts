@@ -27,7 +27,7 @@ export class SlideButtonShowcaseComponent {
       name: 'slideDone',
       description: 'Event triggered on slide done',
       defaultValue: null,
-      inputValues: [''],
+      inputValues: ['event'],
     },
     {
       name: 'slidePercentageChanged',
