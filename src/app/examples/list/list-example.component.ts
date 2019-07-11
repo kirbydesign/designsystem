@@ -10,8 +10,8 @@ import { ListSwipeAction } from './../../../kirby/components/list/list-swipe-act
   styleUrls: ['./list-example.component.scss'],
 })
 export class ListExampleComponent extends BaseListComponent implements OnInit {
-  swipeActionsStart: ListSwipeAction[] = [];
-  swipeActionsEnd: ListSwipeAction[] = [];
+  swipeActionsLeft: ListSwipeAction[] = [];
+  swipeActionsRight: ListSwipeAction[] = [];
 
   constructor(private router: Router) {
     super();
@@ -34,47 +34,44 @@ export class ListExampleComponent extends BaseListComponent implements OnInit {
   }
 
   setUpSwipeActions() {
-    this.swipeActionsStart.push({
+    this.swipeActionsLeft.push({
       swipeActionFlag: 'archived',
       title: 'Archive',
       altTitle: 'Unarchive',
       iconName: 'verifiy',
       themeColor: 'warning',
       onSelected: this.onArchiveItem,
-      side: 'start',
     });
-    this.swipeActionsStart.push({
+    this.swipeActionsLeft.push({
       swipeActionFlag: 'flagged',
       title: 'Flag',
-      altTitle: 'Unflag',
       iconName: 'attach',
+      altIconName: 'moneybag',
       themeColor: 'success',
       onSelected: this.onFlagItem,
-      side: 'start',
     });
-    this.swipeActionsEnd.push({
+    this.swipeActionsRight.push({
       swipeActionFlag: 'deleted',
       title: 'Delete',
       iconName: 'trash',
       themeColor: 'danger',
       onSelected: this.onDeleteItem,
-      side: 'end',
     });
   }
 
-  onArchiveItem(item: any) {
+  onArchiveItem(item: any): void {
     console.log(`onArchiveItem called on item with id: ${item.id}...`);
     // supposing that there should be a call to the back-end here...
     item.archived = !item.archived;
   }
 
-  onFlagItem(item: any) {
+  onFlagItem(item: any): void {
     console.log(`onFlagItem called on item with id: ${item.id}...`);
     // supposing that there should be a call to the back-end here...
     item.flagged = !item.flagged;
   }
 
-  onDeleteItem(item: any) {
+  onDeleteItem(item: any): void {
     console.log(`onDeleteItem called on item with id: ${item.id}...`);
     // supposing that there should be a call to the back-end here...
     item.deleted = !item.deleted;

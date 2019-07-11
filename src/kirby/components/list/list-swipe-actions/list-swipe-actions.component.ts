@@ -10,20 +10,20 @@ import { ListSwipeAction } from './list-swipe-action';
 })
 export class ListSwipeActionsComponent {
   @Input() item: any;
-  @Input() swipeActionsStart: ListSwipeAction[];
-  @Input() swipeActionsEnd: ListSwipeAction[];
+  @Input() swipeActionsLeft: ListSwipeAction[];
+  @Input() swipeActionsRight: ListSwipeAction[];
 
   constructor(private listHelper: ListHelper) {}
 
   onActionSwipeLtR() {
-    this.selectSwipeAction(this.swipeActionsStart[0].onSelected);
+    this.onSwipeActionSelect(this.swipeActionsLeft[0].onSelected);
   }
 
   onActionSwipeRtL() {
-    this.selectSwipeAction(this.swipeActionsEnd[this.swipeActionsEnd.length - 1].onSelected);
+    this.onSwipeActionSelect(this.swipeActionsRight[this.swipeActionsRight.length - 1].onSelected);
   }
 
-  selectSwipeAction(action: Function) {
+  onSwipeActionSelect(action: (item: any) => void) {
     this.listHelper.closeActionItems();
     action(this.item);
   }
