@@ -1,7 +1,7 @@
 <ScrollView>
     <StackLayout class="background">
         <Label text="Default Icons" class="h2"></Label>
-        <WrapLayout itemWidth="100" itemHeight="80">
+        <WrapLayout itemWidth="100" itemHeight="90">
             <StackLayout *ngFor="let icon of icons">
                 <kirby-icon [name]="icon.name"></kirby-icon>
                 <Label [text]="icon.name"></Label>
@@ -22,7 +22,7 @@
 
         <Label text="Sizes" class="h2"></Label>
         <WrapLayout orientation="horizontal" itemWidth="80" itemHeight="80">
-            <StackLayout *ngFor="let size of sizes | keyvalue">
+            <StackLayout *ngFor="let size of (sizes | keyvalue).reverse()">
                 <kirby-icon name="person" [size]="size.value"></kirby-icon>
                 <Label [text]="size.value"></Label>
             </StackLayout>
@@ -69,9 +69,10 @@
         </WrapLayout>
 
         <Label text="Outline" class="h2"></Label>
-        <WrapLayout orientation="horizontal" itemWidth="80" itemHeight="80">
-            <StackLayout>
-                <kirby-icon name="person" outline="true"></kirby-icon>
+        <WrapLayout orientation="horizontal" itemWidth="140" itemHeight="140">
+            <StackLayout *ngFor="let size of (sizes | keyvalue).reverse()">
+                <kirby-icon name="person" [size]="size.value" outline="true"></kirby-icon>
+                <Label [text]="size.value"></Label>
             </StackLayout>
         </WrapLayout>
 
