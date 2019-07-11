@@ -19,7 +19,7 @@ import { TouchGestureEventData } from 'tns-core-modules/ui/gestures/gestures';
 })
 export class SlideButtonComponent implements OnDestroy {
   @Input() public text = '';
-  @Input() public expand?: 'fullWidth';
+  @Input() expand?: 'block';
 
   @Output() public slideDone = new EventEmitter();
   @Output() public slidePercentageChanged = new EventEmitter<number>();

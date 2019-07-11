@@ -17,10 +17,9 @@
 :host {
   position: relative;
   display: inline-block;
-  width: 320px;
-  height: 0;
+  width: 256px;
 
-  &[expand='fullWidth'] {
+  &[expand='block'] {
     display: block;
     width: 100%;
   }
