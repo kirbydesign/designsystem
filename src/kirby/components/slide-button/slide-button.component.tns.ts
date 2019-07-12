@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, ChangeDetectionStrategy } from '@angular/core';
-import { PanGestureEventData, TouchGestureEventData } from 'tns-core-modules/ui/gestures/gestures';
+import { PanGestureEventData } from 'tns-core-modules/ui/gestures/gestures';
 import { GridLayout } from 'tns-core-modules/ui/layouts/grid-layout';
 import { Button } from 'tns-core-modules/ui/button';
 
@@ -21,30 +21,31 @@ enum PanStates {
 export class SlideButtonComponent extends SlideButtonCommon implements OnInit {
   @ViewChild('slideTextRef') slideTextRef: ElementRef;
   @ViewChild('slideThumbnailRef') slideThumbnailRef: ElementRef;
+  @ViewChild('container') container: ElementRef;
   slideThumbnailElm: Button;
   virtualPanXPosition = 0; // this is used to get the tap x position when dragging out of sliding frame
   prevDeltaX: number;
   prevDeltaY: number;
   isDraggedToEnd: boolean;
-  @ViewChild('container') container: ElementRef;
   itemContainer: GridLayout;
   width: any = 250;
 
-  private _slidePct = 0;
-  public get slidePct(): number {
+  get slidePct(): number {
     return this._slidePct;
   }
-  public set slidePct(v: number) {
+  set slidePct(v: number) {
     this._slidePct = v;
     this.slideTextRef.nativeElement.opacity = 1 - v / 100;
     this.slidingPercentageChanged.emit(v);
   }
 
-  public ngOnInit() {
+  private _slidePct = 0;
+
+  ngOnInit() {
     this.itemContainer = <GridLayout>this.container.nativeElement;
     this.slideThumbnailElm = <Button>this.slideThumbnailRef.nativeElement;
 
-    if (this.expand === 'fullWidth') {
+    if (this.expand === 'block') {
       this.width = '100%';
     }
   }

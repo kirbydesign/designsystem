@@ -19,7 +19,7 @@ export class ModalHelper {
       componentProps: { config: config },
     });
 
-    registerModal({ close: modal.dismiss });
+    registerModal({ close: modal.dismiss.bind(modal) });
 
     modal.present();
     return modal.onDidDismiss();
