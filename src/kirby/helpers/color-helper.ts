@@ -21,6 +21,10 @@ export class ColorHelper {
     return ColorHelper.getColor(name + '-contrast');
   }
 
+  public static getColorBrightness(name: string) {
+    return ColorHelper.getColor(name + '-color-brightness');
+  }
+
   public static getThemeColorRgbString(name: string) {
     return ColorHelper.getRgbString(ColorHelper.getThemeColor(name));
   }
