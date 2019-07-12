@@ -7,6 +7,7 @@ import { Component, Input } from '@angular/core';
 })
 export class EmptyStateComponent {
   @Input() iconName: string;
+  @Input() customIconName: string;
   @Input() title: string;
   @Input() subtitle: string;
 }
