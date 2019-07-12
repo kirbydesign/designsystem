@@ -10,8 +10,30 @@ $shadow-mask-divider: 0 -1px 0px 0px $divider-color;
   display: block;
   background-color: get-color('background-color');
 
+  .load-on-demand {
+    background-color: get-color('white');
+  }
+
   &:not(.has-sections) {
     box-shadow: $shadow;
+  }
+
+  &.has-sections  {
+    ion-item-divider:not(.section-header) {
+      box-shadow: $shadow-mask, $shadow;
+
+      &.divider {
+        box-shadow: $shadow-mask-divider, $shadow-mask, $shadow;
+      }
+    }
+
+    ion-item-divider.selectable:hover ion-item {
+      background-color: $background-color-hover;
+    }
+
+    .section-header + ion-item-divider {
+      box-shadow: $shadow;
+    }
   }
 }
 
@@ -31,14 +53,6 @@ $shadow-mask-divider: 0 -1px 0px 0px $divider-color;
   }
 
   &.has-sections  {
-    ion-item-divider:not(.section-header) {
-      box-shadow: $shadow-mask, $shadow;
-
-      &.divider {
-        box-shadow: $shadow-mask-divider, $shadow-mask, $shadow;
-      }
-    }
-
     ion-item-divider.selectable:hover ion-item {
       background-color: $background-color-hover;
     }
@@ -97,13 +111,9 @@ ion-item {
   --min-height: unset;
 }
 
-.loading,
-.no-more-items,
-.extending  {
-  display: block;
+ion-infinite-scroll,
+ion-infinite-scroll-content {
   background-color: get-color('white');
-  text-align: center;
-  padding: size('s');
 }
 
 .section-header {

@@ -82,6 +82,7 @@ export class ListComponent implements OnChanges {
   isSelectable: boolean;
   isLoading: boolean;
   isLoadOnDemandEnabled: boolean;
+  showNoMoreItemsText: boolean;
   groupedItems: any[];
 
   private orderMap: WeakMap<any, { isFirst: boolean; isLast: boolean }>;

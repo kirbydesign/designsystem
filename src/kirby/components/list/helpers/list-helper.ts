@@ -9,6 +9,11 @@ export class ListHelper {
         complete: (disableLoadOnDamand: boolean) => {
           component.isLoadOnDemandEnabled = !disableLoadOnDamand;
           component.isLoading = false;
+
+          if (component.noMoreItemsText !== undefined && !component.isLoadOnDemandEnabled) {
+            component.isLoadOnDemandEnabled = true;
+            component.showNoMoreItemsText = true;
+          }
         },
       });
     }
