@@ -1,6 +1,5 @@
-<GridLayout class="m-15" rows="auto auto" >
-    <StackLayout class="sliders background">
-        <kirby-slide-button [text]="'Slide to unlock'"></kirby-slide-button>
-        <kirby-slide-button [text]="'Slide to unlock'" expand="block"></kirby-slide-button>
-    </StackLayout>
-</GridLayout>
+<StackLayout class="container">
+    <kirby-slide-button [text]="'Slide to unlock'" (slideDone)="showAlert()"></kirby-slide-button>
+    <kirby-slide-button [text]="'Slide to unlock'" expand="block" (slideDone)="showAlert()"></kirby-slide-button>
+</StackLayout>
+
