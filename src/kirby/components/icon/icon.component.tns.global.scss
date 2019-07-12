@@ -1,42 +1,32 @@
 @import '../../scss/native-imports';
 @import './icon.component.shared';
-  
+
 .kirby-icon {
-    display: none;
-    Label {
-        text-align: center;
-
-        //default to icon size 'sm'
-        @include _icon-size_native('sm');
-
-        &.outline {
-            // Inherit or currentColor is not supported by native script :(
-            // TODO: need to figure out a better solution for setting border-color
-            border-color: get-color('dark');
-            border-width: 3;
-            border-radius: size('xxxl') * 3;
-        }
+    Label.outline {
+        border-radius: size('xxxl') * 3;
+        border-color: get-color('dark');
+        border-width: 3;
     }
+    @include _icon-size_native('sm');
 
-    &.sm Label {
+    &.sm {
         @include _icon-size_native('sm');
     }
 
-    &.md Label {
+    &.md {
         @include _icon-size_native('md');
     }
-        
-    &.lg Label {
+
+    &.lg {
         @include _icon-size_native('lg');
     }
 
     @each $color-name, $color-value in $main-colors {
         &.#{$color-name} {
             color: get-color($color-name);
-
-            label.outline {
+            Label.outline {
                 border-color: get-color($color-name);
             }
         }
     }
-}   
+}
