@@ -23,7 +23,8 @@ export class CardComponent extends ContentView  {
   @Input() subtitle: string;
   @Input() themeColor?: ThemeColor;
 
-  elevation: number = 2;
+  DEFAULT_ELEVATION = 2;
+  elevation: number = this.DEFAULT_ELEVATION;
   view: View;
   currentScreenWidth: number;
   cardSizeClass = '';
@@ -34,7 +35,7 @@ export class CardComponent extends ContentView  {
     } else if (value === 'highlighted') {
       this.elevation = 4;
     } else {
-      this.elevation = 0;
+      this.elevation = this.DEFAULT_ELEVATION;
     }
   }
 
