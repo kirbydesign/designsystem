@@ -1,9 +1,15 @@
 import { Component, Input, OnInit, NgZone } from '@angular/core';
-import { View } from 'tns-core-modules/ui/core/view/view';
+import { screen } from 'tns-core-modules/platform';
+import { OrientationChangedEventData } from 'tns-core-modules/application';
+import * as app from 'tns-core-modules/application';
+import { View, EventData } from 'tns-core-modules/ui/core/view/view';
 import { registerElement } from 'nativescript-angular';
 import { ContentView } from 'tns-core-modules/ui/content-view';
 
+import { ScssHelper } from '../../scss/scss-helper';
 import { ThemeColor } from '../../helpers/theme-color.type';
+
+const screenScale = screen.mainScreen.scale;
 
 export const KIRBY_CARD_COMPONENT_SELECTOR = 'kirby-card';
 
@@ -12,52 +18,59 @@ export const KIRBY_CARD_COMPONENT_SELECTOR = 'kirby-card';
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
 })
-export class CardComponent extends ContentView implements OnInit {
+export class CardComponent extends ContentView  {
   @Input() title: string;
   @Input() subtitle: string;
   @Input() themeColor?: ThemeColor;
-  @Input() isHighlighted: boolean = false;
-  @Input() isDisabled: boolean = false;
 
   elevation: number = 2;
-
   view: View;
-
   currentScreenWidth: number;
-
   cardSizeClass = '';
+
+  @Input() set mode(value: 'flat' | 'highlighted') {
+    if (value === 'flat') {
+      this.elevation = 0;
+    } else if (value === 'highlighted') {
+      this.elevation = 4;
+    } else {
+      this.elevation = 0;
+    }
+  }
 
   constructor(private zone: NgZone) {
     super();
   }
 
-  ngOnInit() {
-    this.setElevation();
+  onViewLoaded(args: EventData) {
+    this.view = <View>args.object; // We need a reference to the view so we can access it on orientation changes
+    // this.setupOnOrientationChangeListener();
+    this.applySize();
   }
 
-  setElevation() {
-    if (this.isHighlighted) {
-      this.elevation = 4;
+  applySize() {
+    const widthDP = this.view.getMeasuredWidth() / screenScale;
+    if (widthDP >= ScssHelper.BREAKPOINT_CARD_L) {
+      this.cardSizeClass = 'card-large';
+    } else if (widthDP >= ScssHelper.BREAKPOINT_CARD_M) {
+      this.cardSizeClass = 'card-medium';
+    } else {
+      this.cardSizeClass = 'card-small';
     }
-    if (this.isDisabled) {
-      this.elevation = null;
-    }
+  }
+
+  setupOnOrientationChangeListener() {
+    this.currentScreenWidth = screen.mainScreen.widthDIPs;
+    app.on(app.orientationChangedEvent, (args: OrientationChangedEventData) => {
+      if (this.currentScreenWidth === screen.mainScreen.widthDIPs) {
+        this.currentScreenWidth = screen.mainScreen.heightDIPs;
+      } else {
+        this.currentScreenWidth = screen.mainScreen.widthDIPs;
+      }
+      // Run in the zone, to make sure Angular data binding is informed of this:
+      this.zone.run(() => this.applySize());
+    });
   }
 }
 
 registerElement(KIRBY_CARD_COMPONENT_SELECTOR, () => require('./card.component').CardComponent);
-
-/**
- * First try to simply remove the timeout, it seems to work with the grid now,
- * but test it with a ListView also because that is known to cause problems.
- *
- * Another option is to try and fix it with native Android code, as it is a
- * Android problem only. There are two ways.
- *
- * First I would simply try and post
- * the update on the Android view (not postDelayed, that would just be the same):
- * https://developer.android.com/reference/android/view/View.html#post(java.lang.Runnable)
- *
- * If that does not work, I would try and use a ViewTreeObserver.OnGlobalLayoutListener:
- * https://developer.android.com/reference/android/view/ViewTreeObserver.OnGlobalLayoutListener
- */

@@ -22,11 +22,11 @@ $min-card-width: 304px;
   min-width: $min-card-width;
   overflow: hidden;
 
-  &[isHighlighted=true] {
+  &.highlighted {
     box-shadow: get-elevation(4);
   }
 
-  &[isDisabled=true] {
+  &.flat {
     box-shadow: none;
   }
 
