@@ -8,9 +8,12 @@ $image-diameter-large:  96;
 
 $color-card-bg: rgb(255, 255, 255);
 
-.kirby-avatar {
+.android .kirby-avatar {
   border-width: 6;
   border-color: transparent;
+}
+
+.kirby-avatar {
 
   .badge-container, .badge-wrapper {
     z-index: 99;
