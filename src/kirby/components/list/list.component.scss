@@ -1,7 +1,11 @@
 @import '../../scss/web-imports';
 
+$divider-color: get-color('background-color');
+$background-color-hover: get-color('background-color');
 $shadow: 0 5px 10px -10px rgba(28, 28, 28, 0.3), 0 0 5px 0 rgba(28, 28, 28, 0.08);
 $shadow-mask: 0 -6px 0px 0px get-color('white');
+$shadow-mask-divider: 0 -1px 0px 0px $divider-color;
+$shadow-mask-hover: 0 -6px 0px 0px $background-color-hover;
 
 :host {
   display: block;
@@ -41,10 +45,19 @@ $shadow-mask: 0 -6px 0px 0px get-color('white');
     li.row {
       box-shadow: $shadow-mask, $shadow;
       
-    }
+      &.divider {
+        box-shadow: $shadow-mask-divider, $shadow-mask, $shadow;
+      }
 
-    li.row.selectable:hover {
-      background-color: get-color('background-color');
+      &.selectable:hover {
+        & + li.row {
+          box-shadow: $shadow-mask-hover, $shadow;
+        }
+        
+        &.divider + li.row {
+          box-shadow: $shadow-mask-divider, $shadow-mask-hover, $shadow;
+        }
+      }     
     }
 
     li.section-header + li.row
@@ -85,15 +98,15 @@ ul {
     &.row {
       background-color: get-color('white');
 
-      &.divider:not(:last-child) {
-        border-bottom: 1px solid get-color('background-color');
+      &.divider:not(:last-child):not(.last-in-section) {
+        border-bottom: 1px solid $divider-color;
       }
 
       &.selectable {
         cursor: pointer;
 
         &:hover {
-          background-color: get-color('background-color');
+          background-color: $background-color-hover;
         }
       }
     }

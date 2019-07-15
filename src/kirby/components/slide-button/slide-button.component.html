@@ -1,0 +1,12 @@
+<div class="range-container" [ngClass]="{'slide-done': isSlideDone}">
+    <input
+        type="range"
+        (mouseup)="onSliderMouseup()"
+        (input)='onSliderValueChange($event.target.value)'
+        (mousedown)="onSliderMousedown()"
+        class="slide-button"
+        [value]="value"
+        max="100"
+    />
+    <p class="range-text slide-{{pctInTens}}-pct">{{text}}</p>
+</div>
