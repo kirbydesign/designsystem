@@ -1,6 +1,7 @@
 import { Input, HostBinding, Directive } from '@angular/core';
 
 import { ThemeColor } from '../../helpers/theme-color.type';
+import { ColorHelper } from '../../helpers/color-helper';
 
 @Directive({
   // tslint:disable-next-line:directive-selector
@@ -29,6 +30,12 @@ export class ThemeColorDirective {
   private isMedium: boolean;
   @HostBinding('class.dark')
   private isDark: boolean;
+  @HostBinding('class.kirby-color-brightness-white')
+  private isBrightnessWhite: boolean;
+  @HostBinding('class.kirby-color-brightness-light')
+  private isBrightnessLight: boolean;
+  @HostBinding('class.kirby-color-brightness-dark')
+  private isBrightnessDark: boolean;
   @Input() set themeColor(value: ThemeColor) {
     this.isDefault = !value;
     this.isPrimary = value === 'primary';
@@ -40,5 +47,9 @@ export class ThemeColorDirective {
     this.isLight = value === 'light';
     this.isMedium = value === 'medium';
     this.isDark = value === 'dark';
+    const colorBrightness = ColorHelper.getColorBrightness(value);
+    this.isBrightnessWhite = colorBrightness === 'white';
+    this.isBrightnessLight = colorBrightness === 'light';
+    this.isBrightnessDark = colorBrightness === 'dark';
   }
 }
