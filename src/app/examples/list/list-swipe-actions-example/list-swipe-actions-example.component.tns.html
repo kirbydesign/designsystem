@@ -1,0 +1,11 @@
+<kirby-list [items]="items" showDivider="true">
+  <kirby-list-item *kirbyListItem="let item" [title]="item?.title" [amount]="item?.amount"></kirby-list-item>
+
+  <!-- Swipe actions -->
+  <kirby-list-swipe-actions
+    *kirbyListSwipeActions="let item"
+    [item]="item"
+    [swipeActionsLeft]="swipeActionsLeft"
+    [swipeActionsRight]="swipeActionsRight">
+  </kirby-list-swipe-actions>
+</kirby-list>

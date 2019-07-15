@@ -1,5 +1,9 @@
 <GridLayout rows="*"> <!-- GridLayout kept for iOS compability -->
   <RadListView
+    (itemSwipeProgressEnded)="onSwipeCellFinished($event)"
+    (itemSwipeProgressStarted)="onSwipeCellStarted($event)"
+    (itemSwipeProgressChanged)="onCellSwiping($event)" 
+    [swipeActions]="isSwipeActionsEnabled"
     loadOnDemandMode="Auto"
     (loadMoreDataRequested)="onLoadOnDemand($event)"
     [groupingFunction]="getSectionName"
@@ -21,6 +25,14 @@
           </ng-container>  
         </StackLayout>
       </StackLayout>
+    </ng-template>
+
+    <!-- SWIPE ACTIONS -->
+    <ng-template tkListItemSwipeTemplate *ngIf="isSwipeActionsEnabled">
+      <StackLayout>
+        <!-- TODO: implement -->
+        <!-- <ng-container *ngTemplateOutlet="listSwipeActionsTemplate"></ng-container> -->
+      </StackLayout> 
     </ng-template>
 
     <!-- SECTION HEADER-->

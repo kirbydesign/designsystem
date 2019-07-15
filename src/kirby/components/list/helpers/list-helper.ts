@@ -29,9 +29,9 @@ export class ListHelper {
     this.list = list;
   }
 
-  getIsSlidingDisabled(width: number): boolean {
+  getIsSlidingDisabled(): boolean {
     const large = style.global['$breakpoints'].value['large'].value;
-    const disabled = width >= large;
+    const disabled = window.innerWidth >= large;
 
     if (disabled) {
       this.closeActionItems();
@@ -45,8 +45,20 @@ export class ListHelper {
     }
   }
 
+  // only {N} implementation
   renderShadow(_: any): void {
-    // only native implementation
+    return;
+  }
+
+  onSwipeCellStarted(args: any) {
+    return;
+  }
+
+  onCellSwiping(args: any) {
+    return;
+  }
+
+  onSwipeCellFinished(args: any) {
     return;
   }
 }

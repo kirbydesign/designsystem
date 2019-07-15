@@ -91,6 +91,7 @@ export class ListComponent implements OnInit, OnChanges {
   @ContentChild(ListFooterDirective, { read: TemplateRef }) listFooterTemplate;
   @ViewChild('list') list: any;
   @HostBinding('class.has-sections') isSectionsEnabled: boolean;
+  isSwipeActionsEnabled: boolean = false;
   isSelectable: boolean;
   isLoading: boolean;
   isLoadOnDemandEnabled: boolean;
@@ -102,8 +103,9 @@ export class ListComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     if (this.listSwipeActionsTemplate) {
+      this.isSwipeActionsEnabled = true;
       this.listHelper.setList(this.list);
-      this.isSlidingDisabled = this.listHelper.getIsSlidingDisabled(window.innerWidth);
+      this.isSlidingDisabled = this.listHelper.getIsSlidingDisabled();
     }
   }
 
@@ -158,6 +160,19 @@ export class ListComponent implements OnInit, OnChanges {
     this.listHelper.renderShadow(event);
   }
 
+  // {N} action swipe specifics
+  onSwipeCellStarted(args: any) {
+    this.listHelper.onSwipeCellStarted(args);
+  }
+
+  onCellSwiping(args: any) {
+    this.listHelper.onCellSwiping(args);
+  }
+
+  onSwipeCellFinished(args: any) {
+    this.listHelper.onSwipeCellFinished(args);
+  }
+
   private createOrderMap(
     groupedItems: { name: string; items: any[] }[]
   ): WeakMap<any, { isFirst: boolean; isLast: boolean }> {
@@ -173,7 +188,7 @@ export class ListComponent implements OnInit, OnChanges {
     return orderMap;
   }
 
-  onResize(event: any) {
-    this.isSlidingDisabled = this.listHelper.getIsSlidingDisabled(event.target.innerWidth);
+  onResize() {
+    this.isSlidingDisabled = this.listHelper.getIsSlidingDisabled();
   }
 }

@@ -36,9 +36,25 @@ export class ListHelper {
     return selectedItem;
   }
 
+  onSwipeCellStarted(args: any) {
+    console.log('on swipe cell started');
+  }
+
+  onCellSwiping(args: any) {
+    console.log('on cell swiping');
+  }
+
+  onSwipeCellFinished(args: any) {
+    console.log('on swipe cell finished');
+  }
+
   // Only web implementation
-  getIsSlidingDisabled(_: any): boolean {
+  getIsSlidingDisabled(): boolean {
     return false;
+  }
+
+  setList(list: any) {
+    // TODO: implement on native
   }
 
   closeActionItems() {

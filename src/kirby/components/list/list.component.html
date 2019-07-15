@@ -1,5 +1,5 @@
 
-<ion-list #list mode="ios" kirbyInfiniteScroll (scrollEnd)="onLoadOnDemand()" [disabled]="!isLoadOnDemandEnabled" (window:resize)="onResize($event)">
+<ion-list #list mode="ios" kirbyInfiniteScroll (scrollEnd)="onLoadOnDemand()" [disabled]="!isLoadOnDemandEnabled" (window:resize)="onResize()">
   <ion-list-header class="list-header" *ngIf="listHeaderTemplate">
     <ng-container *ngTemplateOutlet="listHeaderTemplate"></ng-container>
   </ion-list-header>

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { BaseListComponent } from './base-list.component';
 import { ListSwipeAction } from './../../../kirby/components/list/list-swipe-actions/list-swipe-action';
+import { ListSwipeActionsHelper } from './helpers/list-swipe-actions.helper';
 
 @Component({
   selector: 'kirby-list-example',
@@ -34,46 +35,8 @@ export class ListExampleComponent extends BaseListComponent implements OnInit {
   }
 
   setUpSwipeActions() {
-    this.swipeActionsLeft.push({
-      swipeActionFlag: 'archived',
-      title: 'Archive',
-      altTitle: 'Unarchive',
-      iconName: 'verifiy',
-      themeColor: 'warning',
-      onSelected: this.onArchiveItem,
-    });
-    this.swipeActionsLeft.push({
-      swipeActionFlag: 'flagged',
-      title: 'Flag',
-      iconName: 'attach',
-      altIconName: 'moneybag',
-      themeColor: 'success',
-      onSelected: this.onFlagItem,
-    });
-    this.swipeActionsRight.push({
-      swipeActionFlag: 'deleted',
-      title: 'Delete',
-      iconName: 'trash',
-      themeColor: 'danger',
-      onSelected: this.onDeleteItem,
-    });
-  }
-
-  onArchiveItem(item: any): void {
-    console.log(`onArchiveItem called on item with id: ${item.id}...`);
-    // supposing that there should be a call to the back-end here...
-    item.archived = !item.archived;
-  }
-
-  onFlagItem(item: any): void {
-    console.log(`onFlagItem called on item with id: ${item.id}...`);
-    // supposing that there should be a call to the back-end here...
-    item.flagged = !item.flagged;
-  }
-
-  onDeleteItem(item: any): void {
-    console.log(`onDeleteItem called on item with id: ${item.id}...`);
-    // supposing that there should be a call to the back-end here...
-    item.deleted = !item.deleted;
+    const swipeActions = ListSwipeActionsHelper.getInstance().getSwipeActions();
+    this.swipeActionsLeft = swipeActions.left;
+    this.swipeActionsRight = swipeActions.right;
   }
 }
