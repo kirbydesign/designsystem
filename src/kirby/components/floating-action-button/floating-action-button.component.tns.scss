@@ -5,30 +5,28 @@
   height: #{$fab-size};
 }
 
-@mixin fab-wrapper($fab-size, $color) {
+@mixin fab-shadow($fab-size, $color) {
   $shadow-overhead: 3/2;
   @include fab-size($fab-size * $shadow-overhead);
-  .fab-shadow {
+  .fab {
     @include fab-size($fab-size);
-    .fab {
-      @include fab-size($fab-size);
-      background-color: get-color($color);
-      border-radius: $fab-size;
-      text-align: center;
-      vertical-align: middle;
-
-      &.disabled {
-        opacity: 0.6;
-        background-color: get-color('medium');
-      }
+    background-color: get-color($color);
+    border-radius: $fab-size;
+    text-align: center;
+    vertical-align: middle;
+    margin-top: ($shadow-overhead - 1)/2; // center content inside the shadow overhead
+    
+    &.disabled {
+      opacity: 0.6;
+      background-color: get-color('medium');
     }
   }
 }
 
-.fab-wrapper {
-  @include fab-wrapper(64, 'primary');
+.fab-shadow {
+  @include fab-shadow(64, 'primary');
   
   &.not-floating {
-    @include fab-wrapper(40, 'light');
+    @include fab-shadow(40, 'light');
   }
 }
