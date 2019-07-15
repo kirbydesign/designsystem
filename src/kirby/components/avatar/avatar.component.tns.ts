@@ -38,6 +38,7 @@ export class AvatarComponent extends ContentView {
     this.view = <View>args.object; // We need a reference to the view so we can access it on orientation changes
     // this.setupOnOrientationChangeListener();
     this.addShadow();
+    this.setClipping();
   }
 
   setupOnOrientationChangeListener() {
@@ -51,30 +52,25 @@ export class AvatarComponent extends ContentView {
     if (this.shadow) {
       setTimeout(() => {
         if (this.view.android) {
-          // this.view.eachChildView((child: View) => {
-          //   const androidView = child.android;
-          //   const cssClasse = child.cssClasses;
+          this.view.eachChildView((child: View) => {
+            const androidView = child.android;
+            const cssClasses = child.cssClasses;
 
-          //   if (cssClasse.has('image') || cssClasse.has('overlay')) {
-          //     const bgColor = child.style.backgroundColor;
-          //     const transparentColor = '#00ff0000';
-          //     const shape = new android.graphics.drawable.GradientDrawable();
-          //     shape.setShape(android.graphics.drawable.GradientDrawable.RECTANGLE);
-          //     shape.setColor(
-          //       android.graphics.Color.parseColor(bgColor ? bgColor + '' : transparentColor)
-          //     );
-          //     shape.setCornerRadius(androidView.getMeasuredWidth());
-          //     androidView.setBackgroundDrawable(shape);
-          //     androidView.setClipToOutline(true);
-          //     androidView.setElevation(ScssHelper.ELEVATION_IMAGE);
-          //   }
-          //   return true;
-          // });
-          // const badgeWrapper = this.view.getViewById('badge-wrapper');
-          // if (badgeWrapper) {
-          //   console.log(badgeWrapper);
-          //   badgeWrapper.android.bringToFront();
-          // }
+            if (cssClasses.has('image') || cssClasses.has('overlay')) {
+              const bgColor = child.style.backgroundColor;
+              const transparentColor = '#00ff0000';
+              const shape = new android.graphics.drawable.GradientDrawable();
+              shape.setShape(android.graphics.drawable.GradientDrawable.RECTANGLE);
+              shape.setColor(
+                android.graphics.Color.parseColor(bgColor ? bgColor + '' : transparentColor)
+              );
+              shape.setCornerRadius(androidView.getMeasuredWidth());
+              androidView.setBackgroundDrawable(shape);
+              androidView.setClipToOutline(true);
+              androidView.setElevation(ScssHelper.ELEVATION_IMAGE);
+            }
+            return true;
+          });
         } else if (this.view.ios) {
           const iosView = this.view.ios;
           iosView.layer.shadowColor = ScssHelper.SHADOW_COLOR.ios.CGColor;
@@ -83,6 +79,18 @@ export class AvatarComponent extends ContentView {
           iosView.layer.shadowRadius = ScssHelper.SHADOW_RADIUS;
           return;
         }
+      }, 100);
+    }
+  }
+
+  private setClipping() {
+    if (this.view.android) {
+      setTimeout(() => {
+        this.view.parent.android.setClipChildren(false);
+        this.view.parent.android.setClipToPadding(false);
+
+        this.view.android.setClipChildren(false);
+        this.view.android.setClipToPadding(false);
       }, 100);
     }
   }

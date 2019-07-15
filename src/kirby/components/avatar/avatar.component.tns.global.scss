@@ -9,15 +9,18 @@ $image-diameter-large:  96;
 $color-card-bg: rgb(255, 255, 255);
 
 .kirby-avatar {
+  border-width: 6;
+  border-color: transparent;
 
-  .badge-container {
-    z-index: 2;
+  .badge-container, .badge-wrapper {
+    z-index: 99;
   }
 
   .avatar, .image, .overlay, .badge-wrapper {
     //default to size 'sm'
     width: $image-diameter-small;
     height: $image-diameter-small;
+    
   }
 
   .overlay {
