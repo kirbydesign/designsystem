@@ -18,7 +18,7 @@ export const KIRBY_CARD_COMPONENT_SELECTOR = 'kirby-card';
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
 })
-export class CardComponent extends ContentView  {
+export class CardComponent extends ContentView {
   @Input() title: string;
   @Input() subtitle: string;
   @Input() themeColor?: ThemeColor;
