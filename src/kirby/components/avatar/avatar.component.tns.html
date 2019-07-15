@@ -1,4 +1,11 @@
-<GridLayout (loaded)="onViewLoaded($event)" class="avatar" columns="*" rows="auto" horizontalAlignment="center" verticalAlignment="center">
+<GridLayout 
+  [kirbyElevation]="this.shadow ? 4 : null"
+  (loaded)="onViewLoaded($event)" 
+  class="avatar" 
+  columns="*" 
+  rows="auto" 
+  horizontalAlignment="center" 
+  verticalAlignment="center">
   <Image [visibility]="imageSrc ? 'visible' : 'collapse'" class="image" [src]="imageSrc" [automationText]="altText"></Image>
   <GridLayout class="overlay" [visibility]="overlay ? 'visible' : 'collapse'"></GridLayout>
   <GridLayout
