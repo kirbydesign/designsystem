@@ -28,7 +28,6 @@ RadListView {
 
 .row {
   background-color: get-color('white');
-  android-elevation: $elevation;
   margin: 0 $shadow-size;
   margin-top: -$shadow-size;
   padding-top: $row-padding-top + $shadow-size;

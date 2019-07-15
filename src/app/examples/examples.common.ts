@@ -5,6 +5,7 @@ import { ButtonExampleComponent } from './button-example/button-example.componen
 import { FloatingActionButtonExampleComponent } from './floating-action-button-example/floating-action-button-example.component';
 import { CardExampleComponent } from './card-example/card-example.component';
 import { CardThemecolorExampleComponent } from './card/card-themecolor-example/card-themecolor-example.component';
+import { CardElevationsExampleComponent } from './card/card-elevations-example/card-elevations-example.component';
 import { GridExampleComponent } from './grid-example/grid-example.component';
 import { ListExampleComponent } from './list/list-example.component';
 import { ListLoadOnDemandExampleComponent } from './list/load-on-demand/list-load-on-demand-example.component';
@@ -52,6 +53,7 @@ export const COMPONENT_DECLARATIONS: any[] = [
   FloatingActionButtonExampleComponent,
   CardExampleComponent,
   CardThemecolorExampleComponent,
+  CardElevationsExampleComponent,
   ListExampleComponent,
   ListLoadOnDemandExampleComponent,
   GridExampleComponent,

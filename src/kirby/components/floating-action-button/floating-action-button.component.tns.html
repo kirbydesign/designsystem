@@ -1,7 +1,5 @@
-<GridLayout class="fab-wrapper {{ isFloating ? '' : 'not-floating' }}">
-    <StackLayout class="fab-shadow" (loaded)="onViewLoaded($event)">
-        <StackLayout class="fab" [ngClass]="{ 'disabled' : disabled }">
-            <ng-content></ng-content>
-        </StackLayout>
+<StackLayout class="fab-shadow {{ isFloating ? '' : 'not-floating' }}" [kirbyElevation]="elevation">
+    <StackLayout class="fab" [ngClass]="{ 'disabled' : disabled }">
+        <ng-content></ng-content>
     </StackLayout>
-</GridLayout>
+</StackLayout>
