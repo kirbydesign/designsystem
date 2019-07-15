@@ -1,6 +1,5 @@
 @import "../../scss/web-imports";
 @import '../icon/icon.component.shared';
-@import './avatar.component.shared';
 
 $image-diameter-small:  40px;
 $image-diameter-medium: 56px;
@@ -12,7 +11,8 @@ $image-diameter-large:  96px;
   ::ng-deep kirby-badge {
     position: absolute;
     z-index: 2;
-    @include _badge-position('sm');
+    top: size('-xxs');
+    right: size('-xs');
   }
 }
 
@@ -69,7 +69,8 @@ $image-diameter-large:  96px;
   }
 
   ::ng-deep kirby-badge {
-    @include _badge-position('sm');
+    top: size('-xxs');
+    right: size('-xs');
   }
 }
 
@@ -84,7 +85,8 @@ $image-diameter-large:  96px;
   }
 
   ::ng-deep kirby-badge {
-    @include _badge-position('md');
+    top: size('-xxs');
+    right: size('-xxs');
   }
 }
 
@@ -99,7 +101,8 @@ $image-diameter-large:  96px;
   }
 
   ::ng-deep kirby-badge {
-    @include _badge-position('lg');
+    top: 0;
+    right: size('xxs');
   }
 }
 
