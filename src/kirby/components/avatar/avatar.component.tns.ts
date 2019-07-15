@@ -30,25 +30,17 @@ export class AvatarComponent extends ContentView {
 
   view: View;
 
-  constructor(private zone: NgZone) {
+  constructor() {
     super();
   }
 
   onViewLoaded(args: EventData) {
     this.view = <View>args.object; // We need a reference to the view so we can access it on orientation changes
-    // this.setupOnOrientationChangeListener();
     this.addShadow();
     this.setClipping();
   }
 
-  setupOnOrientationChangeListener() {
-    app.on(app.orientationChangedEvent, (args: OrientationChangedEventData) => {
-      // Run in the zone, to make sure Angular data binding is informed of this:
-      this.zone.run(() => this.addShadow());
-    });
-  }
-
-  addShadow() {
+  private addShadow() {
     if (this.shadow) {
       setTimeout(() => {
         if (this.view.android) {
@@ -56,6 +48,7 @@ export class AvatarComponent extends ContentView {
             const androidView = child.android;
             const cssClasses = child.cssClasses;
 
+            // we only want shadows + circle shape on the image and the overlay and not all elements inside an avatar.
             if (cssClasses.has('image') || cssClasses.has('overlay')) {
               const bgColor = child.style.backgroundColor;
               const transparentColor = '#00ff0000';
@@ -85,13 +78,11 @@ export class AvatarComponent extends ContentView {
 
   private setClipping() {
     if (this.view.android) {
-      setTimeout(() => {
-        this.view.parent.android.setClipChildren(false);
-        this.view.parent.android.setClipToPadding(false);
+      this.view.parent.android.setClipChildren(false);
+      this.view.parent.android.setClipToPadding(false);
 
-        this.view.android.setClipChildren(false);
-        this.view.android.setClipToPadding(false);
-      }, 100);
+      this.view.android.setClipChildren(false);
+      this.view.android.setClipToPadding(false);
     }
   }
 }
