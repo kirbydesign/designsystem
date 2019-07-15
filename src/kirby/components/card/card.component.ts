@@ -1,4 +1,12 @@
-import { Component, OnInit, Input, ElementRef, Renderer2, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  ElementRef,
+  Renderer2,
+  OnDestroy,
+  HostBinding,
+} from '@angular/core';
 
 import { ResizeObserverService } from '../shared/resize-observer/resize-observer.service';
 import { ResizeObserverEntry } from '../shared/resize-observer/types/resize-observer-entry';
@@ -11,6 +19,7 @@ import { ResizeObserverEntry } from '../shared/resize-observer/types/resize-obse
 export class CardComponent implements OnInit, OnDestroy {
   @Input() title: string;
   @Input() subtitle: string;
+
   private sizesSortedByBreakpoint = this.sortSizesByBreakpoint({
     small: 360,
     medium: 720,
@@ -25,6 +34,15 @@ export class CardComponent implements OnInit, OnDestroy {
       );
     }
     this.sizesSortedByBreakpoint = this.sortSizesByBreakpoint(value);
+  }
+
+  @HostBinding('class.flat')
+  flat: boolean = false;
+  @HostBinding('class.highlighted')
+  highlighted: boolean = false;
+  @Input() set mode(value: 'flat' | 'highlighted') {
+    this.flat = value === 'flat';
+    this.highlighted = value === 'highlighted';
   }
 
   constructor(

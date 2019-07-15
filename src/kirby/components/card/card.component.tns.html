@@ -1,4 +1,4 @@
-<FlexboxLayout (loaded)="onViewLoaded($event)" class="background" [ngClass]="cardSizeClass">
+<FlexboxLayout (loaded)="onViewLoaded($event)" class="background" [ngClass]="cardSizeClass" [kirbyElevation]="elevation">
     <FlexboxLayout class="container" [ngClass]="themeColor">
         <ng-content select="kirby-card-header"></ng-content>
         <ng-content></ng-content>

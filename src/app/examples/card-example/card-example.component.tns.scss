@@ -1,5 +1,15 @@
 @import '../../../kirby/scss/native-imports';
 
+.background {
+  background-color: get-color('background-color');
+  padding: size('s');
+}
+
+Label.h2 {
+    margin-bottom: size('xxs');
+    margin-top: size('s');
+}
+
 .card-content {
   padding: 0 size("m") size("m");
 }
