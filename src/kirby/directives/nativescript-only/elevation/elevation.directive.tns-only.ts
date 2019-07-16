@@ -16,13 +16,9 @@ export class NativeScriptElevationDirective implements OnInit {
     }
     // Due to a timing issue, the native element is not available initially on Android:
     // https://github.com/NativeScript/nativescript-angular/issues/848
-    if (isAndroid) {
-      this.elementRef.nativeElement.on('loaded', () => {
-        this.applyElevation();
-      });
-    } else {
+    this.elementRef.nativeElement.on('loaded', () => {
       this.applyElevation();
-    }
+    });
   }
 
   private applyElevation() {
