@@ -5,6 +5,17 @@ $image-diameter-small:  40px;
 $image-diameter-medium: 56px;
 $image-diameter-large:  96px;
 
+:host {
+  position: relative;
+
+  ::ng-deep kirby-badge {
+    position: absolute;
+    z-index: 2;
+    top: size('-xxs');
+    right: size('-xs');
+  }
+}
+
 .avatar {
   //default to size 'sm'
   width: $image-diameter-small;
@@ -12,6 +23,7 @@ $image-diameter-large:  96px;
   border-radius: 50%;
   overflow: hidden;
   position: relative;
+  z-index: 1;
 
   &.shadow {
     box-shadow: 0px 2px 4px 2px rgba(113, 113, 113, 0.4);
@@ -55,6 +67,11 @@ $image-diameter-large:  96px;
       @include _icon-size('sm');
     }
   }
+
+  ::ng-deep kirby-badge {
+    top: size('-xxs');
+    right: size('-xs');
+  }
 }
 
 :host(.md){
@@ -66,6 +83,11 @@ $image-diameter-large:  96px;
       @include _icon-size('md');
     }
   }
+
+  ::ng-deep kirby-badge {
+    top: size('-xxs');
+    right: size('-xxs');
+  }
 }
 
 :host(.lg){
@@ -76,6 +98,11 @@ $image-diameter-large:  96px;
     ::ng-deep kirby-icon {
       @include _icon-size('lg');
     }
+  }
+
+  ::ng-deep kirby-badge {
+    top: 0;
+    right: size('xxs');
   }
 }
 
