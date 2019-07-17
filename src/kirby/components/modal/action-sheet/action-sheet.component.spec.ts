@@ -52,6 +52,7 @@ describe('ActionSheetComponent', () => {
         GroupByPipe,
         SpinnerComponent,
         InfiniteScrollDirective,
+        ButtonComponent,
       ],
       providers: [
         { provide: IModalController, useValue: modalControllerSpy },
@@ -135,20 +136,13 @@ describe('ActionSheetComponent', () => {
     });
   });
 
-  describe('cancel button text', () => {
+  fdescribe('cancel button text', () => {
     it('should render', () => {
       const expected = 'Test cancel button text';
-      const cancelButton = fixture.debugElement.query(By.directive(ButtonComponent));
-      expect(component.cancelButtonText).toEqual(expected);
-      expect(cancelButton.componentInstance.text).toEqual(expected);
-    });
-
-    it('should reflect changes in the UI', () => {
-      const newCancelButtonText = 'Another cancel button text';
-      component.cancelButtonText = newCancelButtonText;
       fixture.detectChanges();
       const cancelButton = fixture.debugElement.query(By.directive(ButtonComponent));
-      expect(cancelButton.componentInstance.text).toEqual(newCancelButtonText);
+      expect(component.cancelButtonText).toEqual(expected);
+      expect(cancelButton.nativeElement.textContent).toEqual(expected);
     });
   });
 });
