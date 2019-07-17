@@ -3,6 +3,8 @@ import { isAndroid, isIOS } from 'tns-core-modules/platform';
 
 import { ScssHelper } from '../../../scss/scss-helper';
 
+declare const CGSizeMake: any;
+
 @Directive({ selector: '[kirbyElevation]' })
 export class NativeScriptElevationDirective implements OnInit {
   @Input() kirbyElevation?: 2 | 4 | 8;
