@@ -5,8 +5,8 @@
         <kirby-list-flex-item *kirbyListFlexItem="let item">
             <kirby-list-cell showDivider="true" horisontalAlignment="center">
                 <kirby-list-cell-line [text]="item.text"></kirby-list-cell-line>
-            </kirby-list-cell>            
+            </kirby-list-cell>
         </kirby-list-flex-item>
     </kirby-list>
 </kirby-card>
-<button kirby-button class="cancel-btn" attentionLevel="2" (click)="onModalDismiss()">Cancel</button>
+<button kirby-button class="cancel-btn" attentionLevel="2" (click)="onModalDismiss()">{{ cancelButtonText }}</button>

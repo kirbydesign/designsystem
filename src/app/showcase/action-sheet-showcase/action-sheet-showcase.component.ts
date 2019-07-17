@@ -30,5 +30,11 @@ export class ActionSheetShowcaseComponent {
       defaultValue: '',
       inputValues: ['Array<ActionSheetItem>'],
     },
+    {
+      name: 'cancelButtonText',
+      description: '(Optional) The text for the cancel button.',
+      defaultValue: 'Cancel',
+      inputValues: ['string'],
+    },
   ];
 }
