@@ -44,7 +44,7 @@
   &.attention-level2 {
     --kirby-button-background-color:#{get-color('white')};
     --kirby-button-border-color: #{get-color('white')};
-    --kirby-button-color: #{get-color('black')};
+    --kirby-button-color: #{get-color('white-contrast')};
 
     &.destructive {
       --kirby-button-background-color:#{get-color('light')};
@@ -87,42 +87,22 @@
     pointer-events: none;
   }
 
-  :host-context(.default).attention-level2 {
-    --kirby-button-border-color: #{get-color('light')};
-    --kirby-button-background-color: #{get-color('light')};
-    --kirby-button-color: #{get-color('light-contrast')};
+  :host-context(.default),
+  :host-context(.kirby-color-brightness-white) {
+    &.attention-level2 {
+      --kirby-button-background-color: #{get-color('light')};
+      --kirby-button-border-color: #{get-color('light')};
+      --kirby-button-color: #{get-color('light-contrast')};
+    }
   }
-  
-  :host-context(.primary).attention-level1,
-  :host-context(.secondary).attention-level1,
-  :host-context(.tertiary).attention-level1,
-  :host-context(.success).attention-level1,
-  :host-context(.warning).attention-level1,
-  :host-context(.danger).attention-level1 {
-    --kirby-button-background-color: #{get-color('white')};
-    --kirby-button-border-color: #{get-color('white')};
-    --kirby-button-color: #{get-color('black')};
-  }
-  
-  :host-context(.secondary).attention-level3,
-  :host-context(.tertiary).attention-level3,
-  :host-context(.dark).attention-level3 {
-    --kirby-button-border-color: #{get-color('white')};
-    --kirby-button-color: #{get-color('white')};
-  }
-  
-  :host-context(.primary).attention-level3,
-  :host-context(.success).attention-level3,
-  :host-context(.warning).attention-level3,
-  :host-context(.danger).attention-level3,
-  :host-context(.medium).attention-level3 {
-    --kirby-button-border-color: #{get-color('black')};
-    --kirby-button-color: #{get-color('black')};
-  }
-  
-  :host-context(.secondary).attention-level4,
-  :host-context(.tertiary).attention-level4,
-  :host-context(.dark).attention-level4 {
-    --kirby-button-color: #{get-color('white')};
+
+  :host-context(.kirby-color-brightness-dark) {
+    &.attention-level3 {
+      --kirby-button-border-color: #{get-color('white')};
+      --kirby-button-color: #{get-color('white')};
+    }
+    &.attention-level4 {
+      --kirby-button-color: #{get-color('white')};
+    }
   }
 }

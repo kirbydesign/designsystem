@@ -41,6 +41,8 @@ export class ComponentStatusComponent implements OnInit, OnDestroy {
 
   firebaseSubscription: Subscription;
 
+  milestone$ = this.loadCurrentMilestone();
+
   constructor(private http: HttpClient, private db: AngularFirestore) {}
 
   ngOnInit() {
@@ -79,6 +81,17 @@ export class ComponentStatusComponent implements OnInit, OnDestroy {
     const excludedStatuses = event.detail.value as ItemCodeStatus[];
     this.excludedStatuses = checked ? excludedStatuses : [];
     this.searchTerm$.next(this.searchTerm$.value);
+  }
+
+  // return milestone with soonest duedate
+  private loadCurrentMilestone() {
+    const options = {
+      headers: new HttpHeaders({
+        Authorization: 'token ' + environment.oauth.githubToken1 + environment.oauth.githubToken2,
+      }),
+    };
+    const url = environment.githubApi + '/repos/kirbydesign/designsystem/milestones?sort=due_on';
+    return this.http.get<any[]>(url, options).pipe(map((x) => x[0]));
   }
 
   private initializeGithubStatus() {

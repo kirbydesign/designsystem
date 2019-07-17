@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 declare var require: any;
 
 import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
-import { Color, ColorHelper } from '@kirbydesign/designsystem/helpers/color-helper';
 
 @Component({
   selector: 'kirby-button-showcase',
@@ -10,7 +9,7 @@ import { Color, ColorHelper } from '@kirbydesign/designsystem/helpers/color-help
   styleUrls: ['./button-showcase.component.scss'],
 })
 export class ButtonShowcaseComponent {
-  themeColors = ColorHelper.getMainColors().map((color) => color.name);
+  themeColors = ['light', 'white', 'dark'];
   themeColor = '';
   exampleHtml: string = require('../../examples/button-example/button-example.component.html');
   properties: ShowcaseProperty[] = [

@@ -7,12 +7,22 @@ $image-diameter-large:  96;
 
 $color-card-bg: rgb(255, 255, 255);
 
+.android .kirby-avatar {
+  border-width: 6;
+  border-color: transparent;
+}
+
 .kirby-avatar {
 
-  .avatar, .image, .overlay {
+  .badge-container, .badge-wrapper {
+    z-index: 99;
+  }
+
+  .avatar, .image, .overlay, .badge-wrapper {
     //default to size 'sm'
     width: $image-diameter-small;
     height: $image-diameter-small;
+    
   }
 
   .overlay {
@@ -33,8 +43,13 @@ $color-card-bg: rgb(255, 255, 255);
     @include _icon-size_native('sm');
   }
 
+  .badge-container {
+    top: 1;
+    left: 29;
+  }
+
   &.sm {
-    .avatar, .image {
+    .avatar, .image, .badge-wrapper {
       width: $image-diameter-small;
       height: $image-diameter-small;
     }
@@ -42,10 +57,14 @@ $color-card-bg: rgb(255, 255, 255);
     .kirby-icon Label {
       @include _icon-size_native('sm');
     }
+
+    .badge-container {
+      left: 30;
+    }
   }
 
   &.md {
-    .avatar, .image {
+    .avatar, .image, .badge-wrapper {
       width: $image-diameter-medium;
       height: $image-diameter-medium;
     }
@@ -53,16 +72,24 @@ $color-card-bg: rgb(255, 255, 255);
     .kirby-icon Label {
       @include _icon-size_native('md');
     }
+
+    .badge-container {
+      left: 40;
+    }
   }
 
   &.lg {
-    .avatar, .image {
+    .avatar, .image, .badge-wrapper {
       width: $image-diameter-large;
       height: $image-diameter-large;
     }
 
     .kirby-icon Label {
       @include _icon-size_native('lg');
+    }
+
+    .badge-container {
+      left: 67;
     }
   }
 }
