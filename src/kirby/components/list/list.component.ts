@@ -16,12 +16,13 @@ import {
   ListItemDirective,
   ListSectionHeaderDirective,
   ListFlexItemDirective,
-  ListSwipeActionsDirective,
   ListFooterDirective,
 } from './list.directive';
 import { LoadOnDemandEvent, LoadOnDemandEventData } from './list.event';
 import { ListHelper } from './helpers/list-helper';
+import { ListSwipeActionsHelper } from './helpers/list-swipe-actions-helper';
 import { GroupByPipe } from './pipes/group-by.pipe';
+import { ListSwipeAction } from './helpers/list-swipe-action';
 
 export type ListShape = 'square' | 'rounded';
 
@@ -29,7 +30,7 @@ export type ListShape = 'square' | 'rounded';
   selector: 'kirby-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
-  providers: [ListHelper, GroupByPipe],
+  providers: [ListHelper, ListSwipeActionsHelper, GroupByPipe],
 })
 export class ListComponent implements OnInit, OnChanges {
   /**
@@ -73,6 +74,13 @@ export class ListComponent implements OnInit, OnChanges {
   }
 
   /**
+   * Determines if list items should have swipe actions or not
+   * - the order of swipe actions is used to determine edge actions,
+   * as well as their order of appearance on the screen.
+   */
+  @Input() swipeActions?: ListSwipeAction[] = [];
+
+  /**
    * Emitting event when more items are to be loaded.
    */
   @Output() loadOnDemand = new EventEmitter<LoadOnDemandEvent>();
@@ -87,25 +95,26 @@ export class ListComponent implements OnInit, OnChanges {
   @ContentChild(ListFlexItemDirective, { read: TemplateRef }) listFlexItemTemplate;
   @ContentChild(ListHeaderDirective, { read: TemplateRef }) listHeaderTemplate;
   @ContentChild(ListSectionHeaderDirective, { read: TemplateRef }) sectionHeaderTemplate;
-  @ContentChild(ListSwipeActionsDirective, { read: TemplateRef }) listSwipeActionsTemplate;
   @ContentChild(ListFooterDirective, { read: TemplateRef }) listFooterTemplate;
   @ViewChild('list') list: any;
   @HostBinding('class.has-sections') isSectionsEnabled: boolean;
-  isSwipeActionsEnabled: boolean = false;
+  isSwipingDisabled: boolean = false;
   isSelectable: boolean;
   isLoading: boolean;
   isLoadOnDemandEnabled: boolean;
   groupedItems: any[];
-  isSlidingDisabled: boolean = false;
   private orderMap: WeakMap<any, { isFirst: boolean; isLast: boolean }>;
 
-  constructor(private listHelper: ListHelper, private groupBy: GroupByPipe) {}
+  constructor(
+    private listHelper: ListHelper,
+    private listSwipeActionsHelper: ListSwipeActionsHelper,
+    private groupBy: GroupByPipe
+  ) {}
 
   ngOnInit() {
-    if (this.listSwipeActionsTemplate) {
-      this.isSwipeActionsEnabled = true;
-      this.listHelper.setList(this.list);
-      this.isSlidingDisabled = this.listHelper.getIsSlidingDisabled();
+    if (this.swipeActions) {
+      this.listSwipeActionsHelper.setList(this.list);
+      this.isSwipingDisabled = this.listSwipeActionsHelper.getIsSwipingDisabled();
     }
   }
 
@@ -160,17 +169,61 @@ export class ListComponent implements OnInit, OnChanges {
     this.listHelper.renderShadow(event);
   }
 
-  // {N} action swipe specifics
-  onSwipeCellStarted(args: any) {
-    this.listHelper.onSwipeCellStarted(args);
+  getSwipeActionsSide(side: 'left' | 'right'): ListSwipeAction[] {
+    return this.swipeActions.filter((sa) => sa.position === side);
   }
 
-  onCellSwiping(args: any) {
-    this.listHelper.onCellSwiping(args);
+  getSwipeActionIconName(swipeAction: ListSwipeAction, item: any): string {
+    return this.listSwipeActionsHelper.getIsSwipeActionSelected(swipeAction, item) &&
+      swipeAction.altIconName
+      ? swipeAction.altIconName
+      : swipeAction.iconName;
   }
 
-  onSwipeCellFinished(args: any) {
-    this.listHelper.onSwipeCellFinished(args);
+  getSwipeActionTitle(swipeAction: ListSwipeAction, item: any): string {
+    return this.listSwipeActionsHelper.getIsSwipeActionSelected(swipeAction, item) &&
+      swipeAction.altTitle
+      ? swipeAction.altTitle
+      : swipeAction.title;
+  }
+
+  onActionSwipeLtR(item: any): void {
+    const firstSwipeAction = this.getSwipeActionsSide('left')[0];
+    this.onSwipeActionSelect(firstSwipeAction, item);
+  }
+
+  onActionSwipeRtL(item: any): void {
+    const swipeActionsRight = this.getSwipeActionsSide('right');
+    const lastSwipeAction = swipeActionsRight[swipeActionsRight.length - 1];
+    this.onSwipeActionSelect(lastSwipeAction, item);
+  }
+
+  onSwipeActionSelect(swipeAction: ListSwipeAction, item: any): void {
+    this.listSwipeActionsHelper.onSwipeActionSelected(swipeAction, item);
+  }
+
+  // Web-only
+  onResize(): void {
+    this.isSwipingDisabled = this.listSwipeActionsHelper.getIsSwipingDisabled();
+  }
+
+  // {N}-only
+  onSwipeCellStarted(args: any): void {
+    this.listSwipeActionsHelper.onSwipeCellStarted(args);
+  }
+
+  // {N}-only
+  onCellSwiping(args: any): void {
+    this.listSwipeActionsHelper.onCellSwiping(args);
+  }
+
+  // {N}-only
+  onSwipeCellFinished(args: any): void {
+    this.listSwipeActionsHelper.onSwipeCellFinished(
+      args,
+      this.onActionSwipeLtR.bind(this),
+      this.onActionSwipeRtL.bind(this)
+    );
   }
 
   private createOrderMap(
@@ -186,9 +239,5 @@ export class ListComponent implements OnInit, OnChanges {
       });
     });
     return orderMap;
-  }
-
-  onResize() {
-    this.isSlidingDisabled = this.listHelper.getIsSlidingDisabled();
   }
 }

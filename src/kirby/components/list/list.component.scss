@@ -118,7 +118,46 @@ $shadow-mask: 0 -6px 0px 0px get-color('white');
   }
 }
 
-
 ion-item-sliding ion-item {
   border-radius: inherit !important;
+}
+
+.swipe-action {
+  background-color: #{get-color('primary')};
+  color: #{get-color('primary-contrast')};
+
+  @each $color-name, $color-value in $main-colors {
+      .#{$color-name} {
+          background-color: #{get-color($color-name)};
+          color: #{get-color($color-name+'-contrast')};
+      }
+  }
+  
+  .item-content {
+      display: inline-grid;
+      min-width: 70px;
+      flex-direction: column;
+      
+      kirby-icon {
+          width: 24px;
+          height: 24px;
+          margin: auto;
+      }
+
+      ion-label {
+          text-align: center;
+          text-transform: none;
+          font-size: font-size("s");
+          font-weight: font-weight("bold");
+      }
+  }
+  
+  ion-item-option {
+      display: inline-grid;
+      flex-grow: 1;
+      height: 100%;
+      min-width: 70px;
+      --background: unset;
+      --color: unset;
+  }
 }

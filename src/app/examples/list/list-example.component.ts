@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { BaseListComponent } from './base-list.component';
-import { ListSwipeAction } from './../../../kirby/components/list/list-swipe-actions/list-swipe-action';
+import { ListSwipeAction } from '../../../kirby/components/list/helpers/list-swipe-action';
 import { ListSwipeActionsHelper } from './helpers/list-swipe-actions.helper';
 
 @Component({
@@ -11,8 +11,7 @@ import { ListSwipeActionsHelper } from './helpers/list-swipe-actions.helper';
   styleUrls: ['./list-example.component.scss'],
 })
 export class ListExampleComponent extends BaseListComponent implements OnInit {
-  swipeActionsLeft: ListSwipeAction[] = [];
-  swipeActionsRight: ListSwipeAction[] = [];
+  swipeActions: ListSwipeAction[] = [];
 
   constructor(private router: Router) {
     super();
@@ -35,8 +34,6 @@ export class ListExampleComponent extends BaseListComponent implements OnInit {
   }
 
   setUpSwipeActions() {
-    const swipeActions = ListSwipeActionsHelper.getInstance().getSwipeActions();
-    this.swipeActionsLeft = swipeActions.left;
-    this.swipeActionsRight = swipeActions.right;
+    this.swipeActions = ListSwipeActionsHelper.getInstance().getSwipeActions();
   }
 }

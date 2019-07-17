@@ -21,11 +21,6 @@ export class ListHeaderDirective {}
 export class ListSectionHeaderDirective {}
 
 @Directive({
-  selector: '[kirbyListSwipeActions]',
-})
-export class ListSwipeActionsDirective {}
-
-@Directive({
   selector: '[kirbyListFooter]',
 })
 export class ListFooterDirective {}

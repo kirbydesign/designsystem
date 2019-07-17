@@ -1,14 +1,7 @@
-import { IonList } from '@ionic/angular';
-
 import { LoadOnDemandEventData } from '../list.event';
 import { ListComponent } from './../list.component';
 
-declare var require: any;
-const style: any = require('sass-extract-loader!../list.component.scss');
-
 export class ListHelper {
-  private list: IonList;
-
   onLoadOnDemand(component: ListComponent, _event: LoadOnDemandEventData) {
     if (component.isLoadOnDemandEnabled && !component.isLoading) {
       component.isLoading = true;
@@ -25,40 +18,8 @@ export class ListHelper {
     return item;
   }
 
-  setList(list: IonList) {
-    this.list = list;
-  }
-
-  getIsSlidingDisabled(): boolean {
-    const large = style.global['$breakpoints'].value['large'].value;
-    const disabled = window.innerWidth >= large;
-
-    if (disabled) {
-      this.closeActionItems();
-    }
-    return disabled;
-  }
-
-  closeActionItems() {
-    if (this.list) {
-      this.list.closeSlidingItems();
-    }
-  }
-
   // only {N} implementation
   renderShadow(_: any): void {
-    return;
-  }
-
-  onSwipeCellStarted(args: any) {
-    return;
-  }
-
-  onCellSwiping(args: any) {
-    return;
-  }
-
-  onSwipeCellFinished(args: any) {
     return;
   }
 }

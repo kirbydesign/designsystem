@@ -13,13 +13,11 @@ import {
   ListFlexItemDirective,
   ListHeaderDirective,
   ListSectionHeaderDirective,
-  ListSwipeActionsDirective,
   ListFooterDirective,
 } from './components/list/list.directive';
 import { ComponentLoaderDirective } from './components/shared/component-loader.directive';
 import { ChartComponent } from './components/chart/chart.component';
 import { ListItemComponent } from './components/list/list-item/list-item.component';
-import { ListSwipeActionsComponent } from './components/list/list-swipe-actions/list-swipe-actions.component';
 import { ListFlexItemComponent } from './components/list/list-flex-item/list-flex-item.component';
 import { ListSectionHeaderComponent } from './components/list/list-section-header/list-section-header.component';
 import { ListHeaderComponent } from './components/list/list-header/list-header.component';
@@ -57,13 +55,11 @@ export const declarations = [
   ListItemDirective,
   ListFlexItemDirective,
   ListItemComponent,
-  ListSwipeActionsComponent,
   ListFlexItemComponent,
   ListCellComponent,
   ListCellLineComponent,
   ListSectionHeaderComponent,
   ListSectionHeaderDirective,
-  ListSwipeActionsDirective,
   ListHeaderDirective,
   ListHeaderComponent,
   ListFooterDirective,

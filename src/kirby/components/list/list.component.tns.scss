@@ -52,3 +52,15 @@ RadListView {
     }
   }
 }
+
+.swipe-action {
+  background-color: #{get-color('primary')};
+  color: #{get-color('primary-contrast')};
+
+  @each $color-name, $color-value in $main-colors {
+      &.#{$color-name} {
+          background-color: #{get-color($color-name)};
+          color: #{get-color($color-name+'-contrast')};
+      }
+  }
+}

@@ -1,9 +1,8 @@
-import { ListSwipeAction } from '@kirbydesign/designsystem/components/list/list-swipe-actions/list-swipe-action';
+import { ListSwipeAction } from '@kirbydesign/designsystem/components/list/helpers/list-swipe-action';
 
 export class ListSwipeActionsHelper {
   private static instance: ListSwipeActionsHelper;
-  private swipeActionsLeft: ListSwipeAction[] = [];
-  private swipeActionsRight: ListSwipeAction[] = [];
+  private swipeActions: ListSwipeAction[] = [];
 
   private constructor() {
     this.setUpSwipeActions();
@@ -17,31 +16,31 @@ export class ListSwipeActionsHelper {
   }
 
   public getSwipeActions() {
-    return {
-      left: this.swipeActionsLeft,
-      right: this.swipeActionsRight,
-    };
+    return this.swipeActions;
   }
 
   private setUpSwipeActions() {
-    this.swipeActionsLeft.push({
+    this.swipeActions.push({
       swipeActionFlag: 'archived',
+      position: 'left',
       title: 'Archive',
       altTitle: 'Unarchive',
       iconName: 'verifiy',
       themeColor: 'warning',
       onSelected: this.onArchiveItem,
     });
-    this.swipeActionsLeft.push({
+    this.swipeActions.push({
       swipeActionFlag: 'flagged',
+      position: 'left',
       title: 'Flag',
       iconName: 'attach',
       altIconName: 'moneybag',
       themeColor: 'success',
       onSelected: this.onFlagItem,
     });
-    this.swipeActionsRight.push({
+    this.swipeActions.push({
       swipeActionFlag: 'deleted',
+      position: 'right',
       title: 'Delete',
       iconName: 'trash',
       themeColor: 'danger',

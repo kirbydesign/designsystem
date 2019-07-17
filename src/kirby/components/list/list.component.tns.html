@@ -3,7 +3,7 @@
     (itemSwipeProgressEnded)="onSwipeCellFinished($event)"
     (itemSwipeProgressStarted)="onSwipeCellStarted($event)"
     (itemSwipeProgressChanged)="onCellSwiping($event)" 
-    [swipeActions]="isSwipeActionsEnabled"
+    [swipeActions]="!isSwipingDisabled"
     loadOnDemandMode="Auto"
     (loadMoreDataRequested)="onLoadOnDemand($event)"
     [groupingFunction]="getSectionName"
@@ -28,11 +28,15 @@
     </ng-template>
 
     <!-- SWIPE ACTIONS -->
-    <ng-template tkListItemSwipeTemplate *ngIf="isSwipeActionsEnabled">
-      <StackLayout>
-        <!-- TODO: implement -->
-        <!-- <ng-container *ngTemplateOutlet="listSwipeActionsTemplate"></ng-container> -->
-      </StackLayout> 
+    <ng-template tkListItemSwipeTemplate *ngIf="!isSwipingDisabled" let-item="item">
+        <GridLayout columns="auto, *, auto">          
+          <StackLayout col=0 orientation="horizontal" id="swipe-actions-left">
+            <ng-container *ngTemplateOutlet="swipeActionTemplate; context: { swipeActions: getSwipeActionsSide('left') }"></ng-container>
+          </StackLayout>
+          <StackLayout col=2 orientation="horizontal" id="swipe-actions-right">
+            <ng-container *ngTemplateOutlet="swipeActionTemplate; context: { swipeActions: getSwipeActionsSide('right') }"></ng-container>  
+          </StackLayout>
+        </GridLayout>
     </ng-template>
 
     <!-- SECTION HEADER-->
@@ -60,6 +64,21 @@
     </ng-template>
     <ng-template tkListViewFooter *ngIf="listFooterTemplate">
       <ng-container *ngTemplateOutlet="listFooterTemplate"></ng-container>
+    </ng-template>
+
+    <!-- SWIPE ACTION TEMPLATE -->
+    <ng-template #swipeActionTemplate let-swipeActions="swipeActions">
+      <StackLayout *ngFor="let swipeAction of swipeActions" 
+          minWidth="60" 
+          padding="5"
+          class="swipe-action"
+          [ngClass]="swipeAction.themeColor"
+          (tap)="onSwipeActionSelect(swipeAction, null)">
+        <kirby-icon *ngIf="swipeAction.iconName" [name]="getSwipeActionIconName(swipeAction, null)">
+        </kirby-icon>
+        <Label fontSize="13" horizontalAlignment="center" [text]="getSwipeActionTitle(swipeAction, null)">
+        </Label>
+      </StackLayout>
     </ng-template>
   </RadListView>
 </GridLayout>
