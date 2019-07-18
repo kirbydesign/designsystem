@@ -5,7 +5,6 @@ $background-color-hover: get-color('background-color');
 $shadow: 0 5px 10px -10px rgba(28, 28, 28, 0.3), 0 0 5px 0 rgba(28, 28, 28, 0.08);
 $shadow-mask: 0 -6px 0px 0px get-color('white');
 $shadow-mask-divider: 0 -1px 0px 0px $divider-color;
-$shadow-mask-hover: 0 -6px 0px 0px $background-color-hover;
 
 :host {
   display: block;
@@ -14,111 +13,120 @@ $shadow-mask-hover: 0 -6px 0px 0px $background-color-hover;
   &:not(.has-sections) {
     box-shadow: $shadow;
   }
+
+  &.has-sections  {
+    ion-item-divider:not(.section-header) {
+      box-shadow: $shadow-mask, $shadow;
+
+      &.divider {
+        box-shadow: $shadow-mask-divider, $shadow-mask, $shadow;
+      }
+    }
+
+    ion-item-divider.selectable:hover ion-item {
+      background-color: $background-color-hover;
+    }
+
+    .section-header + ion-item-divider {
+      box-shadow: $shadow;
+    }
+  }
 }
 
 :host(.rounded) {
   &:not(.has-sections) {
     border-radius: $border-radius;
 
-    li:first-child {
+    :first-child {
       border-top-left-radius: $border-radius;
       border-top-right-radius: $border-radius;
     }
-
-    .list-header {
-      border-top-left-radius: $border-radius;
-      border-top-right-radius: $border-radius;
-
-      & + ul > li:first-child {
-        border-radius: 0;
-      }
-    }
-
-    li:last-child {
+    
+    :last-child {
       border-bottom-left-radius: $border-radius;
       border-bottom-right-radius: $border-radius;
     }
   }
 
-  &.has-sections {
-
-    li.row {
-      box-shadow: $shadow-mask, $shadow;
-      
-      &.divider {
-        box-shadow: $shadow-mask-divider, $shadow-mask, $shadow;
-      }
-
-      &.selectable:hover {
-        & + li.row {
-          box-shadow: $shadow-mask-hover, $shadow;
-        }
-        
-        &.divider + li.row {
-          box-shadow: $shadow-mask-divider, $shadow-mask-hover, $shadow;
-        }
-      }     
+  &.has-sections  {
+    ion-item-divider.selectable:hover ion-item {
+      background-color: $background-color-hover;
     }
 
-    li.section-header + li.row
-    {
+    .section-header + ion-item-divider {
       border-top-left-radius: $border-radius;
       border-top-right-radius: $border-radius;
       box-shadow: $shadow;
     }
 
-    li.row.last-in-section {
+    ion-item-divider.last-in-section {
       border-bottom-left-radius: $border-radius;
       border-bottom-right-radius: $border-radius;
     }
   }
 }
 
-.list-header {
-  background-color: get-color('white');
-  border-bottom: 1px solid get-color('background-color');
+ion-list {
+  background: transparent;
+  contain: inherit;
+  padding: 0;
 }
 
-ul {
-  list-style-type: none;
-  padding-left: 0;
-  margin: 0;
-  font-size: font-size('s');
+ion-list-header {
+  background-color: get-color('white');
+  border-bottom: 1px solid $divider-color;
+  padding: 0;
+} 
 
-  li {
-    padding: size('m');
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+ion-item-divider {
+  background-color: get-color('white');
+  border-color: transparent;
+  padding: 0;
+  --color: unset;
 
-    p {
-      margin: 0;
-    }
+  &.divider:not(:last-child) {
+    border-color: $divider-color;
+  }
 
-    &.row {
-      background-color: get-color('white');
+  &.selectable {
+    cursor: pointer;
 
-      &.divider:not(:last-child):not(.last-in-section) {
-        border-bottom: 1px solid $divider-color;
-      }
-
-      &.selectable {
-        cursor: pointer;
-
-        &:hover {
-          background-color: $background-color-hover;
-        }
-      }
-    }
-    
-    &.loading,
-    &.no-more-items
-    {
-      background-color: get-color('white');
+    &:hover {
+      background-color: $background-color-hover;
     }
   }
 }
 
-.extending {
-  margin: auto;
+ion-item {
+  display: flex;
+  width: 100%;
+  padding: size('m') size('xs');
+  font-size: font-size('s');
+  --inner-border-width: 0;
+  --background: transparent;
+  --min-height: unset;
+}
+
+ion-infinite-scroll,
+ion-infinite-scroll-content {
+  background-color: get-color('white');
+}
+
+.section-header {
+  background-color: transparent;
+  padding: size('m');
+}
+
+.loading,
+.no-more-items,
+.extending  {
+  background-color: get-color('white');
+  text-align: center;
+  padding: size('s');
+}
+
+.footer {
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
 }

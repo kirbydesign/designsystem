@@ -1,61 +1,60 @@
-<!-- HEADER-->
-<div class="list-header" *ngIf="listHeaderTemplate">
-  <ng-container *ngTemplateOutlet="listHeaderTemplate" ></ng-container>
-</div>
-
-<!-- BODY-->
-<ul kirbyInfiniteScroll (scrollEnd)="onLoadOnDemand()" [disabled]="!isLoadOnDemandEnabled">
+<ion-list kirbyInfiniteScroll (scrollEnd)="onLoadOnDemand()" [disabled]="!isLoadOnDemandEnabled">
+  <ion-list-header *ngIf="listHeaderTemplate">
+    <ng-container *ngTemplateOutlet="listHeaderTemplate"></ng-container>
+  </ion-list-header>
+  
   <ng-container *ngIf="isSectionsEnabled; else normalList">
-    <ng-container *ngFor="let section of groupedItems">
-      <li class="section-header">
-        <ng-container
-          *ngTemplateOutlet="
-            sectionHeaderTemplate;
-            context: { $implicit: section.name }
-          ">
-        </ng-container>
-      </li>
-      <li *ngFor="let item of section.items; let idx = index;" [class.last-in-section]="idx === section.items.length - 1"
-          (click)="onItemSelect(item)"
-          [attr.role]="isSelectable ? 'button' : null"
-          [class.selectable]="isSelectable"
+    <ng-container *ngFor="let section of groupedItems;trackBy: trackByFn">
+        <ion-item-divider class="section-header">
+          <ng-container *ngTemplateOutlet="sectionHeaderTemplate; context: { $implicit: section.name }"></ng-container>
+        </ion-item-divider>
+
+        <ion-item-divider 
+          *ngFor="let item of section.items; let idx = index;trackBy: trackByFn"
           [class.divider]="showDivider"
-          tabindex="0" class="row">
-        <!-- TODO remove container when the kirbyListItem is no longer in use -->
-        <ng-container
-          *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }">
-        </ng-container>
-        <ng-container
-          *ngTemplateOutlet="listFlexItemTemplate; context: { $implicit: item }">
-        </ng-container>
-      </li>
+          [class.selectable]="isSelectable"
+          [attr.role]="isSelectable ? 'button' : null"
+          [class.last-in-section]="idx === section.items.length - 1"
+          (click)="onItemSelect(item)"
+          tabindex="0"
+          keyHandler>
+            
+          <ion-item>    
+            <ng-container *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }"></ng-container>
+            <ng-container *ngTemplateOutlet="listFlexItemTemplate; context: { $implicit: item }"></ng-container>
+          </ion-item>
+        </ion-item-divider>
     </ng-container>
   </ng-container>
 
   <ng-template #normalList>
-    <li *ngFor="let item of items" (click)="onItemSelect(item)"
-        [class.selectable]="isSelectable"
-        [class.divider]="showDivider"
-        [attr.role]="isSelectable ? 'button' : null"
-        tabindex="0" class="row">
-      <!-- TODO remove container when the kirbyListItem is no longer in use -->
-      <ng-container
-        *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }">
-      </ng-container>
-
-      <ng-container
-        *ngTemplateOutlet="listFlexItemTemplate; context: { $implicit: item }">
-      </ng-container>
-    </li>
+    <ion-item-divider 
+      *ngFor="let item of items;trackBy: trackByFn"
+      [class.divider]="showDivider"
+      [class.selectable]="isSelectable"
+      [attr.role]="isSelectable ? 'button' : null"
+      (click)="onItemSelect(item)"
+      tabindex="0"
+      keyHandler>       
+      
+      <ion-item>  
+        <ng-container *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }"></ng-container>
+        <ng-container *ngTemplateOutlet="listFlexItemTemplate; context: { $implicit: item }"></ng-container>
+      </ion-item>
+    </ion-item-divider>
   </ng-template>
 
-  <li *ngIf="isLoading" class="loading">
-      <div class="extending"><kirby-spinner></kirby-spinner></div>
-  </li>
-  <li *ngIf="!isLoadOnDemandEnabled && noMoreItemsText" class="no-more-items">
-    <span class="extending">{{noMoreItemsText}}</span>
-  </li>
-  <li *ngIf="listFooterTemplate">
+  <div *ngIf="isLoading" class="loading">
+    <div class="extending">
+      <kirby-spinner></kirby-spinner>
+    </div>
+  </div>
+  
+  <div *ngIf="!isLoadOnDemandEnabled && noMoreItemsText" class="no-more-items">
+    <span class="extending">{{ noMoreItemsText }}</span>
+  </div>
+
+  <div *ngIf="listFooterTemplate" class="footer">
     <ng-container *ngTemplateOutlet="listFooterTemplate"></ng-container>
-  </li>
-</ul>
+  </div>
+</ion-list>

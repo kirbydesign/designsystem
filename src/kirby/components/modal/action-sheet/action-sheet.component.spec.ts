@@ -2,6 +2,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NavParams } from '@ionic/angular';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { By } from '@angular/platform-browser';
+import { MockComponent } from 'ng-mocks';
+import * as ionic from '@ionic/angular';
 
 import { ActionSheetComponent } from './action-sheet.component';
 import { IModalController } from '../services/modal.controller.interface';
@@ -53,6 +55,11 @@ describe('ActionSheetComponent', () => {
         SpinnerComponent,
         InfiniteScrollDirective,
         ButtonComponent,
+        MockComponent(ionic.IonList),
+        MockComponent(ionic.IonListHeader),
+        MockComponent(ionic.IonLabel),
+        MockComponent(ionic.IonItem),
+        MockComponent(ionic.IonItemDivider),
       ],
       providers: [
         { provide: IModalController, useValue: modalControllerSpy },
@@ -136,7 +143,7 @@ describe('ActionSheetComponent', () => {
     });
   });
 
-  fdescribe('cancel button text', () => {
+  describe('cancel button text', () => {
     it('should render', () => {
       const expected = 'Test cancel button text';
       fixture.detectChanges();
