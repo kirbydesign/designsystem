@@ -24,6 +24,13 @@ export class CardShowcaseComponent {
       inputValues: ['string'],
     },
     {
+      name: 'mode',
+      description:
+        '(Optional) Sets a custom elevation on the card. Default elevation = 2, flat = 0, highlighted = 4.',
+      defaultValue: '',
+      inputValues: ['flat', 'highlighted'],
+    },
+    {
       name: 'themeColor',
       description: 'Sets which color the card should use from the theme palette.',
       defaultValue: 'null',

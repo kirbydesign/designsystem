@@ -37,6 +37,15 @@ $main-colors: map-remove($_color-palette, 'background-color', 'black', 'white', 
 @function _get-color-contrast($color) {
   $contrast-light: map-get($system-colors, 'white');
   $contrast-dark: map-get($system-colors, 'black');
+  $color-brightness: _get-color-brightness($color);
+  @if $color-brightness == 'dark' {
+    @return $contrast-light;
+  } @else {
+    @return $contrast-dark;
+  }
+}
+
+@function _get-color-brightness($color) {
   $red: red($color);
   $green: green($color);
   $blue: blue($color);
@@ -46,11 +55,14 @@ $main-colors: map-remove($_color-palette, 'background-color', 'black', 'white', 
   */
   $color-brightness: (($red * 299) + ($green * 587) + ($blue * 114)) / 1000;
   /* The range for color brightness difference is 125 */
-  $color-range: 125;
-  @if $color-brightness < $color-range {
-    @return $contrast-light;
+  $color-range: 128;
+
+  @if $color-brightness == 255 {
+    @return 'white';
+  } @else if $color-brightness >= $color-range {
+    @return 'light';
   } @else {
-    @return $contrast-dark;
+    @return 'dark';
   }
 }
 
@@ -76,7 +88,8 @@ $main-colors: map-remove($_color-palette, 'background-color', 'black', 'white', 
         #{$color-name}-contrast: #{_get-color-contrast($color-value)},
         #{$color-name}-contrast-rgb: #{_get-rgb-values(_get-color-contrast($color-value))},
         #{$color-name}-shade: #{_get-shade-value($color-value)},
-        #{$color-name}-tint: #{_get-tint-value($color-value)}
+        #{$color-name}-tint: #{_get-tint-value($color-value)},
+        #{$color-name}-color-brightness: #{_get-color-brightness($color-value)},
       )
       , $color-list)
   }

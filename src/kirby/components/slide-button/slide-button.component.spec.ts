@@ -51,11 +51,11 @@ describe('SlideButtonComponent', () => {
     it('should set value and emit change', () => {
       const newVal = 50;
 
-      spyOn(component.slidePercentageChanged, 'emit');
+      spyOn(component.slidingPercentageChanged, 'emit');
       component.onSliderValueChange(newVal.toString());
 
       expect(component.value).toBe(newVal);
-      expect(component.slidePercentageChanged.emit).toHaveBeenCalledWith(newVal);
+      expect(component.slidingPercentageChanged.emit).toHaveBeenCalledWith(newVal);
     });
   });
 

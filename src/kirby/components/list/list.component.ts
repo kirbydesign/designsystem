@@ -136,10 +136,6 @@ export class ListComponent implements OnChanges {
     this.listHelper.onLoadOnDemand(this, event);
   }
 
-  onRowLoaded(event: any): void {
-    this.listHelper.renderShadow(event);
-  }
-
   private createOrderMap(
     groupedItems: { name: string; items: any[] }[]
   ): WeakMap<any, { isFirst: boolean; isLast: boolean }> {

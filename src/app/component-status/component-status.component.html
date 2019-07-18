@@ -6,6 +6,32 @@
     component not listed here,
     <a [href]="newIssueUrl">create an issue on GitHub</a></p>
 
+<p *ngIf="milestone$ | async as milestone">Current milestone: <a [href]="milestone.html_url">{{milestone.title}}</a></p>
+
+<p>You can follow working progress <a href="https://github.com/kirbydesign/designsystem/projects/1">here - Kirby kan-ban board</a></p>
+
+<h2>Versioning of components</h2>
+<table>
+    <tr>
+        <td>v1.0</td>
+        <td>Production ready</td>
+    </tr>
+    <tr>
+        <td>v0.9</td>
+        <td>Almost ready</td>
+    </tr>
+    <tr>
+        <td>v0.5</td>
+        <td>Halfway ready for production</td>
+    </tr>
+    <tr>
+        <td>v0.1</td>
+        <td>Walking Skeleton</td>
+    </tr>
+</table>
+
+<br /><br />
+
 <div class="search">Search Component(s): <input autofocus type="text" (keyup)="searchTerm$.next($event.target.value)"></div>
 
 <div *ngIf="gitHubError" class="github-error">

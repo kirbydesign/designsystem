@@ -1,29 +1,56 @@
-<StackLayout orientation="vertical" width="100%" height="100%">
-  <kirby-card>
-    <kirby-card-header title="Titel" subtitle="Subtitel"></kirby-card-header>
-    <StackLayout class="card-content">
-      <Label text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui quas quibusdam eligendi, debitis nemo fuga quia accusamus doloremque sit reprehenderit!" textWrap="true"></Label>
-    </StackLayout>
-  </kirby-card>
+<ScrollView>
+  <StackLayout class="background">
+    <Label text="Elevation" class="h2"></Label>
+  
+    <kirby-card mode="flat">
+      <kirby-card-header title="Flat" subtitle='mode="flat"'></kirby-card-header>  
+      <StackLayout class="card-content">
+        <Label text='mode="flat" sets the elevation of the z-axis to 0.'></Label>"
+      </StackLayout>
+    </kirby-card>
+    
+    <kirby-card>
+      <kirby-card-header title="Default" subtitle=" "></kirby-card-header>  
+      <StackLayout class="card-content">
+        <Label text="The default elevation of the card on the z-axis is 2."></Label>"
+      </StackLayout>
+    </kirby-card>
 
-  <kirby-card themeColor="primary">
-    <kirby-card-header title="Titel" subtitle="Subtitel"></kirby-card-header>
-    <StackLayout class="card-content">
-      <Label text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui quas quibusdam eligendi, debitis nemo fuga quia accusamus doloremque sit reprehenderit!" textWrap="true"></Label>
-    </StackLayout>
-  </kirby-card>
+    <kirby-card mode="highlighted">
+      <kirby-card-header title="Highlighted" subtitle='mode="highlighted"'></kirby-card-header>  
+      <StackLayout class="card-content">
+        <Label text='mode="highlighted" sets the elevation of the z-axis to 4.'></Label>"
+      </StackLayout>
+    </kirby-card>
 
-  <kirby-card themeColor="secondary">
-    <kirby-card-header title="Titel" subtitle="Subtitel"></kirby-card-header>
-    <StackLayout class="card-content">
-      <Label text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui quas quibusdam eligendi, debitis nemo fuga quia accusamus doloremque sit reprehenderit!" textWrap="true"></Label>
-    </StackLayout>
-  </kirby-card>
- 
-  <kirby-card themeColor="warning">
-    <kirby-card-header title="Titel" subtitle="Subtitel"></kirby-card-header>
-    <StackLayout class="card-content">
-      <Label text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui quas quibusdam eligendi, debitis nemo fuga quia accusamus doloremque sit reprehenderit!" textWrap="true"></Label>
-    </StackLayout>
-  </kirby-card>
-</StackLayout>
+    <Label text="Colors" class="h2"></Label>
+
+    <kirby-card>
+      <kirby-card-header title="Default" subtitle="Default Card Color"></kirby-card-header>
+      <StackLayout class="card-content">
+        <Label text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui quas quibusdam eligendi, debitis nemo fuga quia accusamus doloremque sit reprehenderit!" textWrap="true"></Label>
+      </StackLayout>
+    </kirby-card>
+
+    <kirby-card themeColor="primary">
+      <kirby-card-header title="Primary" subtitle='themeColor="primary"'></kirby-card-header>
+      <StackLayout class="card-content">
+        <Label text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui quas quibusdam eligendi, debitis nemo fuga quia accusamus doloremque sit reprehenderit!" textWrap="true"></Label>
+      </StackLayout>
+    </kirby-card>
+
+    <kirby-card themeColor="secondary">
+      <kirby-card-header title="Secondary" subtitle='themeColor="secondary"'></kirby-card-header>
+      <StackLayout class="card-content">
+        <Label text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui quas quibusdam eligendi, debitis nemo fuga quia accusamus doloremque sit reprehenderit!" textWrap="true"></Label>
+      </StackLayout>
+    </kirby-card>
+
+    <kirby-card themeColor="warning">
+      <kirby-card-header title="Warning" subtitle='themeColor="warning"'></kirby-card-header>
+      <StackLayout class="card-content">
+        <Label text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui quas quibusdam eligendi, debitis nemo fuga quia accusamus doloremque sit reprehenderit!" textWrap="true"></Label>
+      </StackLayout>
+    </kirby-card>   
+  </StackLayout>
+</ScrollView>
