@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   ContentChild,
   EventEmitter,
@@ -10,15 +11,16 @@ import {
 } from '@angular/core';
 
 import {
+  ListFlexItemDirective,
+  ListFooterDirective,
   ListHeaderDirective,
   ListItemDirective,
   ListSectionHeaderDirective,
-  ListFlexItemDirective,
-  ListFooterDirective,
 } from './list.directive';
 import { LoadOnDemandEvent, LoadOnDemandEventData } from './list.event';
 import { ListHelper } from './helpers/list-helper';
 import { GroupByPipe } from './pipes/group-by.pipe';
+
 export type ListShape = 'square' | 'rounded';
 
 @Component({
@@ -133,6 +135,10 @@ export class ListComponent implements OnChanges {
 
   onLoadOnDemand(event?: LoadOnDemandEventData) {
     this.listHelper.onLoadOnDemand(this, event);
+  }
+
+  trackByFn(index) {
+    return index;
   }
 
   private createOrderMap(

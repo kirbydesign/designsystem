@@ -4,13 +4,13 @@
   </ion-list-header>
   
   <ng-container *ngIf="isSectionsEnabled; else normalList">
-    <ng-container *ngFor="let section of groupedItems">
+    <ng-container *ngFor="let section of groupedItems;trackBy: trackByFn">
         <ion-item-divider class="section-header">
           <ng-container *ngTemplateOutlet="sectionHeaderTemplate; context: { $implicit: section.name }"></ng-container>
         </ion-item-divider>
 
         <ion-item-divider 
-          *ngFor="let item of section.items; let idx = index;" 
+          *ngFor="let item of section.items; let idx = index;trackBy: trackByFn"
           [class.divider]="showDivider"
           [class.selectable]="isSelectable"
           [attr.role]="isSelectable ? 'button' : null"
@@ -29,7 +29,7 @@
 
   <ng-template #normalList>
     <ion-item-divider 
-      *ngFor="let item of items" 
+      *ngFor="let item of items;trackBy: trackByFn"
       [class.divider]="showDivider"
       [class.selectable]="isSelectable"
       [attr.role]="isSelectable ? 'button' : null"
