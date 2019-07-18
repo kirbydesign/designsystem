@@ -1,4 +1,4 @@
-<ion-list [ngClass]="{ 'load-on-demand' : isLoadOnDemandEnabled }">
+<ion-list kirbyInfiniteScroll (scrollEnd)="onLoadOnDemand()" [disabled]="!isLoadOnDemandEnabled">
   <ion-list-header *ngIf="listHeaderTemplate">
     <ng-container *ngTemplateOutlet="listHeaderTemplate"></ng-container>
   </ion-list-header>
@@ -44,14 +44,17 @@
     </ion-item-divider>
   </ng-template>
 
+  <div *ngIf="isLoading" class="loading">
+    <div class="extending">
+      <kirby-spinner></kirby-spinner>
+    </div>
+  </div>
+  
+  <div *ngIf="!isLoadOnDemandEnabled && noMoreItemsText" class="no-more-items">
+    <span class="extending">{{ noMoreItemsText }}</span>
+  </div>
+
   <div *ngIf="listFooterTemplate" class="footer">
     <ng-container *ngTemplateOutlet="listFooterTemplate"></ng-container>
   </div>
 </ion-list>
-
-<ion-infinite-scroll kirbyInfiniteScroll (scrollEnd)="onLoadOnDemand()" [disabled]="!isLoadOnDemandEnabled">
-  <ion-infinite-scroll-content>
-    <kirby-spinner *ngIf="isLoading"></kirby-spinner>
-    <ion-label *ngIf="showNoMoreItemsText">{{ noMoreItemsText }}</ion-label>
-  </ion-infinite-scroll-content>
-</ion-infinite-scroll>

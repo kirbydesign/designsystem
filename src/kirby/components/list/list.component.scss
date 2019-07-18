@@ -10,10 +10,6 @@ $shadow-mask-divider: 0 -1px 0px 0px $divider-color;
   display: block;
   background-color: get-color('background-color');
 
-  .load-on-demand {
-    background-color: get-color('white');
-  }
-
   &:not(.has-sections) {
     box-shadow: $shadow;
   }
@@ -119,6 +115,14 @@ ion-infinite-scroll-content {
 .section-header {
   background-color: transparent;
   padding: size('m');
+}
+
+.loading,
+.no-more-items,
+.extending  {
+  background-color: get-color('white');
+  text-align: center;
+  padding: size('s');
 }
 
 .footer {

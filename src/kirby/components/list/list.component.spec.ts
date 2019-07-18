@@ -43,8 +43,6 @@ describe('ListComponent', () => {
       MockComponent(ionic.IonLabel),
       MockComponent(ionic.IonItem),
       MockComponent(ionic.IonItemDivider),
-      MockComponent(ionic.IonInfiniteScroll),
-      MockComponent(ionic.IonInfiniteScrollContent),
     ],
     providers: [ListHelper, GroupByPipe],
   });
