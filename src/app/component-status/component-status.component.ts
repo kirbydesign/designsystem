@@ -168,7 +168,7 @@ export class ComponentStatusComponent implements OnInit, OnDestroy {
   private mapGithubIssueToStatusItem(issue: any): ComponentStatusItem {
     const zeplinUrl = this.getZeplinUrl(issue);
     const sketchUrl = this.getSketchUrl(issue);
-    const uxStatus = zeplinUrl ? ItemUXStatus.inProgress : ItemUXStatus.underConsideration;
+    const uxStatus = zeplinUrl ? ItemUXStatus.ready : ItemUXStatus.underConsideration;
     const componentTitle = this.getComponentTitle(issue);
     const githubIssueTitle = issue.title.replace('[Enhancement] ', '');
     const isEnhancement = issue.labels.find((label) => label.name.indexOf('enhancement') > -1);
