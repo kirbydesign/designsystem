@@ -1,18 +1,18 @@
 import {
   Component,
-  ElementRef,
   Inject,
   Input,
   OnChanges,
   Optional,
   SimpleChanges,
+  HostBinding,
 } from '@angular/core';
 
 import { kirbyIconSettings } from './kirby-icon-settings';
 import { ICON_SETTINGS, Icon, IconSettings } from './icon-settings';
 
 @Component({
-  selector: 'kirby-icon',
+  selector: 'kirby-icon, [kirby-icon]',
   templateUrl: './icon.component.html',
   styleUrls: ['./icon.component.scss'],
   // Using host property decorator is fine for static values:
@@ -29,6 +29,25 @@ export class IconComponent implements OnChanges {
   @Input() name: string;
   @Input() customName: string;
   @Input() outline: boolean;
+
+  @Input() isSpanIcon?: boolean;
+
+  @HostBinding('style.fontFamily')
+  get spanFontFamily() {
+    return this.isSpanIcon ? this.fontFamily : '';
+  }
+
+  @HostBinding('attr.text')
+  get spanText() {
+    return this.isSpanIcon
+      ? String.fromCharCode(this.findIcon(kirbyIconSettings.icons, this.name).unicode)
+      : '';
+  }
+
+  @HostBinding('class.span-icon')
+  get spanClass() {
+    return this.isSpanIcon;
+  }
 
   get icon(): Icon {
     return this._icon;

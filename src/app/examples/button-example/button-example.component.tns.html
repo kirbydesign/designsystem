@@ -8,6 +8,12 @@
           <Button kirby-button text="Large Button" size="lg"></Button>
           <Button kirby-button text="Kirby Block Button" expand="block"></Button>
           <Button kirby-button text="Disabled Button" isEnabled="false"></Button>   
+          <Button kirby-button text="test">
+            <FormattedString>
+              <Span text="Hello"></Span>
+              <Span kirby-icon name="add" [isSpanIcon]="true"></Span>
+            </FormattedString>
+          </Button>
       </ng-container>
       <ng-container *ngIf="activeTab === 'attention-level'">
           <kirby-card [themeColor]="themeColor" class="card">
