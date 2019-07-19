@@ -3,73 +3,57 @@
 $divider-color: get-color('background-color');
 $background-color-hover: get-color('background-color');
 $shadow: 0 5px 10px -10px rgba(28, 28, 28, 0.3), 0 0 5px 0 rgba(28, 28, 28, 0.08);
-$shadow-mask: 0 -6px 0px 0px get-color('white');
-$shadow-mask-divider: 0 -1px 0px 0px $divider-color;
 
 :host {
-  display: block;
-  background-color: get-color('background-color');
-
-  &:not(.has-sections) {
+  ion-list {
     box-shadow: $shadow;
+    background: transparent;
+    contain: inherit;
+    padding: 0;
   }
 
-  &.has-sections  {
-    ion-item-divider:not(.section-header) {
-      box-shadow: $shadow-mask, $shadow;
-
-      &.divider {
-        box-shadow: $shadow-mask-divider, $shadow-mask, $shadow;
-      }
-    }
-
-    ion-item-divider.selectable:hover ion-item {
+  .selectable {
+    cursor: pointer;
+    &:hover {
       background-color: $background-color-hover;
     }
+  }
 
-    .section-header + ion-item-divider {
+  ion-item {
+    background-color: get-color('white');
+    &:not(:last-of-type).has-divider {
+      border-bottom: 1px solid $divider-color;
+    }
+  }
+
+  &.has-sections {
+    ion-list {
+      box-shadow: none;
+    }
+    .list-items {
       box-shadow: $shadow;
+      border-radius: $border-radius;
     }
   }
 }
 
 :host(.rounded) {
-  &:not(.has-sections) {
+  ion-list,
+  .list-items {
     border-radius: $border-radius;
-
-    :first-child {
-      border-top-left-radius: $border-radius;
-      border-top-right-radius: $border-radius;
-    }
-    
-    :last-child {
-      border-bottom-left-radius: $border-radius;
-      border-bottom-right-radius: $border-radius;
-    }
   }
 
-  &.has-sections  {
-    ion-item-divider.selectable:hover ion-item {
-      background-color: $background-color-hover;
-    }
-
-    .section-header + ion-item-divider {
-      border-top-left-radius: $border-radius;
-      border-top-right-radius: $border-radius;
-      box-shadow: $shadow;
-    }
-
-    ion-item-divider.last-in-section {
-      border-bottom-left-radius: $border-radius;
-      border-bottom-right-radius: $border-radius;
-    }
+  ion-list:not(.has-header) ion-item:first-of-type,
+  ion-list-header {
+    border-top-left-radius: $border-radius;
+    border-top-right-radius: $border-radius;
   }
-}
 
-ion-list {
-  background: transparent;
-  contain: inherit;
-  padding: 0;
+  ion-list:not(.has-footer) ion-item:last-of-type,
+  .footer {
+    border-bottom-left-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
+  }
 }
 
 ion-list-header {
@@ -83,18 +67,6 @@ ion-item-divider {
   border-color: transparent;
   padding: 0;
   --color: unset;
-
-  &.divider:not(:last-child) {
-    border-color: $divider-color;
-  }
-
-  &.selectable {
-    cursor: pointer;
-
-    &:hover {
-      background-color: $background-color-hover;
-    }
-  }
 }
 
 ion-item {
@@ -118,8 +90,8 @@ ion-infinite-scroll-content {
 }
 
 .loading,
-.no-more-items,
-.extending  {
+.no-more-items {
+  width: 100%;
   background-color: get-color('white');
   text-align: center;
   padding: size('s');
@@ -129,4 +101,5 @@ ion-infinite-scroll-content {
   overflow: hidden;
   display: flex;
   justify-content: space-between;
+  border-top: 1px solid $divider-color;
 }
