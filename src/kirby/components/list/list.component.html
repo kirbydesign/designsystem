@@ -1,18 +1,24 @@
-<ion-list #list kirbyInfiniteScroll (scrollEnd)="onLoadOnDemand()" [disabled]="!isLoadOnDemandEnabled" (window:resize)="onResize()">
+<ion-list #list 
+          kirbyInfiniteScroll
+          (scrollEnd)="onLoadOnDemand()"
+          [disabled]="!isLoadOnDemandEnabled"
+          [class.has-header]="listHeaderTemplate"
+          [class.has-footer]="listFooterTemplate"
+          (window:resize)="onResize()">
   <ion-list-header *ngIf="listHeaderTemplate">
     <ng-container *ngTemplateOutlet="listHeaderTemplate"></ng-container>
   </ion-list-header>
- 
+
   <ng-container *ngIf="isSectionsEnabled; else normalList">
     <ion-item-group *ngFor="let section of groupedItems;trackBy: trackByFn">
-        <ion-item-divider class="section-header">
-          <ng-container *ngTemplateOutlet="sectionHeaderTemplate; context: { $implicit: section.name }"></ng-container>
-        </ion-item-divider>
+      <ion-item-divider class="section-header">
+        <ng-container *ngTemplateOutlet="sectionHeaderTemplate; context: { $implicit: section.name }"></ng-container>
+      </ion-item-divider>
 
-        
+      <div class="list-items">
         <ion-item-sliding *ngFor="let item of section.items; let idx = index;trackBy: trackByFn" [attr.disabled]="isSwipingDisabled">
           <ng-container *ngTemplateOutlet="swipeActions; context: { $implicit: item }"></ng-container>
-          <ion-item [class.divider]="showDivider"
+          <ion-item [class.has-divider]="showDivider"
                     [class.selectable]="isSelectable"
                     [attr.role]="isSelectable ? 'button' : null"
                     [class.last-in-section]="idx === section.items.length - 1"
@@ -23,48 +29,49 @@
             <ng-container *ngTemplateOutlet="listFlexItemTemplate; context: { $implicit: item }"></ng-container>
           </ion-item>
         </ion-item-sliding>
+      </div>
     </ion-item-group>
   </ng-container>
  
   <ng-template #normalList>
-
-    
-      <ion-item-sliding *ngFor="let item of items;trackBy: trackByFn" [attr.disabled]="isSwipingDisabled"> 
-        <ng-container *ngTemplateOutlet="swipeActions; context: { $implicit: item }"></ng-container>
-        <ion-item [class.divider]="showDivider"
-                  [class.selectable]="isSelectable"
-                  [attr.role]="isSelectable ? 'button' : null"
-                  (click)="onItemSelect(item)"
-                  tabindex="0"
-                  keyHandler>
-          <ng-container *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }"></ng-container>
-          <ng-container *ngTemplateOutlet="listFlexItemTemplate; context: { $implicit: item }"></ng-container>
-        </ion-item>
-      </ion-item-sliding>
+    <ion-item-sliding *ngFor="let item of items;trackBy: trackByFn" [attr.disabled]="isSwipingDisabled"> 
+      <ng-container *ngTemplateOutlet="swipeActions; context: { $implicit: item }"></ng-container>
+      <ion-item [class.has-divider]="showDivider"
+                [class.selectable]="isSelectable"
+                [attr.role]="isSelectable ? 'button' : null"
+                (click)="onItemSelect(item)"
+                tabindex="0"
+                keyHandler>
+        <ng-container *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }"></ng-container>
+        <ng-container *ngTemplateOutlet="listFlexItemTemplate; context: { $implicit: item }"></ng-container>
+      </ion-item>
+    </ion-item-sliding>
   </ng-template>
- 
-  <div *ngIf="isLoading" class="loading">
-    <div class="extending">
-      <kirby-spinner></kirby-spinner>
-    </div>
-  </div>
- 
-  <div *ngIf="!isLoadOnDemandEnabled && noMoreItemsText" class="no-more-items">
-    <span class="extending">{{ noMoreItemsText }}</span>
-  </div>
- 
+
+  <ion-item *ngIf="isLoading">
+    <div class="loading"><kirby-spinner></kirby-spinner></div>
+  </ion-item>
+
+  <ion-item *ngIf="!isLoadOnDemandEnabled && noMoreItemsText">
+    <p class="no-more-items">{{ noMoreItemsText }}</p>
+  </ion-item>
+
   <div *ngIf="listFooterTemplate" class="footer">
     <ng-container *ngTemplateOutlet="listFooterTemplate"></ng-container>
   </div>
  </ion-list>
 
  <!-- Swipe Action templates -->
+ <!-- TODO: Adding back the comments below ((ionSwipe)=... and adding expandable on ion-item-option) will re-enable full-swiping on each side.  -->
+ <!--       They is temporarily disabled for consistency, as full-swiping is currently not implemented in {N} -->
 <ng-template #swipeActions let-item>
-  <ion-item-options *ngIf="getSwipeActionsSide('left') && getSwipeActionsSide('left').length > 0" side="start" (ionSwipe)="onActionSwipeLtR(item)">
+  <!-- <ion-item-options *ngIf="getSwipeActionsSide('left') && getSwipeActionsSide('left').length > 0" side="start" (ionSwipe)="onActionSwipeLtR(item)">  -->
+  <ion-item-options *ngIf="getSwipeActionsSide('left') && getSwipeActionsSide('left').length > 0" side="start">
     <ng-container *ngTemplateOutlet="swipeAction; context: { $implicit: item, swipeActions: getSwipeActionsSide('left') }"></ng-container>
   </ion-item-options>
   
-  <ion-item-options  *ngIf="getSwipeActionsSide('left') && getSwipeActionsSide('left').length > 0" side="end" (ionSwipe)="onActionSwipeRtL(item)">
+  <!-- <ion-item-options  *ngIf="getSwipeActionsSide('left') && getSwipeActionsSide('left').length > 0" side="end" (ionSwipe)="onActionSwipeRtL(item)"> -->
+  <ion-item-options  *ngIf="getSwipeActionsSide('left') && getSwipeActionsSide('left').length > 0" side="end">
     <ng-container *ngTemplateOutlet="swipeAction; context: { $implicit: item, swipeActions: getSwipeActionsSide('right') }"></ng-container>
   </ion-item-options>
 </ng-template>
@@ -75,7 +82,8 @@
         *ngFor="let swipeAction of swipeActions" 
         [ngClass]="swipeAction.themeColor"
         (click)="onSwipeActionSelect(swipeAction, item)"
-        expandable>
+        >
+        <!-- expandable> -->
       <div class="item-content">
         <kirby-icon *ngIf="swipeAction.iconName" [name]="getSwipeActionIconName(swipeAction, item)">
         </kirby-icon>

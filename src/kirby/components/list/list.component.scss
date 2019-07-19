@@ -1,176 +1,133 @@
-@import '../../scss/web-imports';
+@import "../../scss/web-imports";
 
-$divider-color: get-color('background-color');
-$background-color-hover: get-color('background-color');
-$shadow: 0 5px 10px -10px rgba(28, 28, 28, 0.3), 0 0 5px 0 rgba(28, 28, 28, 0.08);
-$shadow-mask: 0 -6px 0px 0px get-color('white');
-$shadow-mask-divider: 0 -1px 0px 0px $divider-color;
+$divider-color: get-color("background-color");
+$background-color-hover: get-color("background-color");
+$shadow: get-elevation(2);
 
 :host {
-  display: block;
-  background-color: get-color('background-color');
-
-  &:not(.has-sections) {
+  ion-list {
     box-shadow: $shadow;
+    background: transparent;
+    contain: inherit;
+    padding: 0;
   }
 
-  &.has-sections  {
-    ion-item-divider:not(.section-header) {
-      box-shadow: $shadow-mask, $shadow;
-
-      &.divider {
-        box-shadow: $shadow-mask-divider, $shadow-mask, $shadow;
-      }
-    }
-
-    ion-item-divider.selectable:hover ion-item {
+  .selectable {
+    cursor: pointer;
+    &:hover {
       background-color: $background-color-hover;
     }
+  }
 
-    .section-header + ion-item-divider {
+  ion-item {
+    background-color: get-color("white");
+    &:not(:last-of-type).has-divider {
+      border-bottom: 1px solid $divider-color;
+    }
+  }
+
+  &.has-sections {
+    ion-list {
+      box-shadow: none;
+    }
+    .list-items {
       box-shadow: $shadow;
+      border-radius: $border-radius;
     }
   }
 }
 
 :host(.rounded) {
-  &:not(.has-sections) {
+  ion-list,
+  .list-items {
     border-radius: $border-radius;
-
-    :first-child {
-      border-top-left-radius: $border-radius;
-      border-top-right-radius: $border-radius;
-    }
-    
-    :last-child {
-      border-bottom-left-radius: $border-radius;
-      border-bottom-right-radius: $border-radius;
-    }
   }
 
-  &.has-sections  {
-    ion-item-divider.selectable:hover ion-item {
-      background-color: $background-color-hover;
-    }
-
-    .section-header + ion-item-divider {
-      border-top-left-radius: $border-radius;
-      border-top-right-radius: $border-radius;
-      box-shadow: $shadow;
-    }
-
-    ion-item-divider.last-in-section {
-      border-bottom-left-radius: $border-radius;
-      border-bottom-right-radius: $border-radius;
-    }
+  ion-list:not(.has-header) ion-item-sliding:first-of-type,
+  ion-list-header {
+    border-top-left-radius: $border-radius;
+    border-top-right-radius: $border-radius;
   }
-}
 
-ion-item-sliding ion-item {
-  border-radius: inherit !important;
-}
-
-ion-list {
-  background: transparent;
-  contain: inherit;
-  padding: 0;
+  ion-list:not(.has-footer) ion-item-sliding:last-of-type,
+  .footer {
+    border-bottom-left-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
+  }
 }
 
 ion-list-header {
-  background-color: get-color('white');
+  background-color: get-color("white");
   border-bottom: 1px solid $divider-color;
   padding: 0;
-} 
+}
 
 ion-item-divider {
-  background-color: get-color('white');
+  background-color: get-color("white");
   border-color: transparent;
   padding: 0;
   --color: unset;
-
-  &.divider:not(:last-child) {
-    border-color: $divider-color;
-  }
-
-  &.selectable {
-    cursor: pointer;
-
-    &:hover {
-      background-color: $background-color-hover;
-    }
-  }
 }
 
 ion-item {
   display: flex;
   width: 100%;
-  padding: size('m') size('xs');
-  font-size: font-size('s');
+  padding: size("m") size("xs");
+  font-size: font-size("s");
   --inner-border-width: 0;
   --background: transparent;
   --min-height: unset;
 }
 
-ion-infinite-scroll,
-ion-infinite-scroll-content {
-  background-color: get-color('white');
-}
-
 .section-header {
   background-color: transparent;
-  padding: size('m');
+  padding: size("m");
 }
 
 .loading,
-.no-more-items,
-.extending  {
-  background-color: get-color('white');
+.no-more-items {
+  width: 100%;
+  background-color: get-color("white");
   text-align: center;
-  padding: size('s');
+  padding: size("s");
 }
 
 .footer {
   overflow: hidden;
   display: flex;
   justify-content: space-between;
+  border-top: 1px solid $divider-color;
 }
 
 .swipe-action {
-  background-color: #{get-color('primary')};
-  color: #{get-color('primary-contrast')};
-
+  // background-color: #{get-color("primary")};
+  color: #{get-color("primary-contrast")};
   @each $color-name, $color-value in $main-colors {
-      .#{$color-name} {
-          background-color: #{get-color($color-name)};
-          color: #{get-color($color-name+'-contrast')};
-      }
+    .#{$color-name} {
+      background-color: #{get-color($color-name)};
+      color: #{get-color($color-name + "-contrast")};
+    }
   }
-  
-  .item-content {
-      display: inline-grid;
-      min-width: 70px;
-      flex-direction: column;
-      
-      kirby-icon {
-          width: 24px;
-          height: 24px;
-          margin: auto;
-      }
 
-      ion-label {
-          text-align: center;
-          text-transform: none;
-          font-size: font-size("s");
-          font-weight: font-weight("bold");
-      }
-  }
-  
   ion-item-option {
-      display: inline-grid;
-      flex-grow: 1;
-      height: 100%;
-      min-width: 70px;
+    height: 100%;
+    display: inline-block;
+    text-align: center;
+  }
+
+  .item-content {
+    display: inline-grid;
+    min-width: 70px;
+    flex-direction: column;
+
+    kirby-icon {
+      width: 24px;
+      height: 24px;
+      margin: auto;
+    }
+    ion-label {
       --background: unset;
       --color: unset;
+    }
   }
 }

@@ -9,6 +9,7 @@ import { ListComponent } from './list.component';
 import { SpinnerComponent } from '../spinner/spinner.component';
 import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
 import { ListHelper } from './helpers/list-helper';
+import { ListSwipeActionsHelper } from './helpers/list-swipe-actions-helper';
 
 /**
  * We need an actual model item, since WeakMap can't use primitives for keys.
@@ -43,9 +44,11 @@ describe('ListComponent', () => {
       MockComponent(ionic.IonListHeader),
       MockComponent(ionic.IonLabel),
       MockComponent(ionic.IonItem),
+      MockComponent(ionic.IonItemDivider),
+      MockComponent(ionic.IonItemGroup),
       MockComponent(ionic.IonItemSliding),
     ],
-    providers: [ListHelper, GroupByPipe],
+    providers: [ListHelper, ListSwipeActionsHelper, GroupByPipe],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
   });
 
@@ -84,19 +87,19 @@ describe('ListComponent', () => {
       });
       runNgOnChanges();
 
-      const liElements = spectator.queryAll('ion-item-sliding');
+      const liElements = spectator.queryAll('ion-item');
       expect(liElements.length).toEqual(component.items.length);
     });
 
-    it('should render one ion-item for each ion-item-sliding and one for each section, if sections are enabled', () => {
+    it('should render one ion-item for each ion-item-group and one for each section, if sections are enabled', () => {
       spectator.setInput({
         items: Item.createItems(1, 2, 3),
         getSectionName: (item: Item) => (item.value % 2 === 0 ? 'even' : 'odd'),
       });
       runNgOnChanges();
 
-      const liElements = spectator.queryAll('ion-item-sliding');
-      expect(liElements.length).toEqual(component.items.length + 2);
+      const liElements = spectator.queryAll('ion-item');
+      expect(liElements.length).toEqual(component.items.length);
     });
   });
 
@@ -108,7 +111,7 @@ describe('ListComponent', () => {
       });
       runNgOnChanges();
 
-      const liElements = spectator.queryAll('ion-item-sliding');
+      const liElements = spectator.queryAll('ion-item');
       liElements.forEach((liElement) => {
         expect(liElement.getAttribute('class')).toContain('divider');
       });
@@ -121,7 +124,7 @@ describe('ListComponent', () => {
       });
       runNgOnChanges();
 
-      const liElements = spectator.queryAll('ion-item-sliding');
+      const liElements = spectator.queryAll('ion-item');
       liElements.forEach((liElement) => {
         expect(liElement.getAttribute('class')).not.toContain('divider');
       });
