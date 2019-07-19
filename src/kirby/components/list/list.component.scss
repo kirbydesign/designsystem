@@ -2,7 +2,7 @@
 
 $divider-color: get-color('background-color');
 $background-color-hover: get-color('background-color');
-$shadow: 0 5px 10px -10px rgba(28, 28, 28, 0.3), 0 0 5px 0 rgba(28, 28, 28, 0.08);
+$shadow: get-elevation(2);
 
 :host {
   ion-list {
