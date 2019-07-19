@@ -29,11 +29,11 @@
 
     <!-- SWIPE ACTIONS -->
     <ng-template tkListItemSwipeTemplate *ngIf="!isSwipingDisabled" let-item="item">
-        <GridLayout columns="auto, *, auto">          
-          <StackLayout col=0 orientation="horizontal" id="swipe-actions-left">
+        <GridLayout columns="auto, *, auto">
+          <StackLayout col=0 orientation="horizontal" id="swipe-actions-left" visibility="hidden">
             <ng-container *ngTemplateOutlet="swipeActionTemplate; context: { swipeActions: getSwipeActionsSide('left') }"></ng-container>
           </StackLayout>
-          <StackLayout col=2 orientation="horizontal" id="swipe-actions-right">
+          <StackLayout col=2 orientation="horizontal" id="swipe-actions-right" visibility="hidden">
             <ng-container *ngTemplateOutlet="swipeActionTemplate; context: { swipeActions: getSwipeActionsSide('right') }"></ng-container>  
           </StackLayout>
         </GridLayout>
@@ -68,7 +68,7 @@
 
     <!-- SWIPE ACTION TEMPLATE -->
     <ng-template #swipeActionTemplate let-swipeActions="swipeActions">
-      <StackLayout *ngFor="let swipeAction of swipeActions" 
+      <StackLayout *ngFor="let swipeAction of swipeActions"
           minWidth="60" 
           padding="5"
           class="swipe-action"
