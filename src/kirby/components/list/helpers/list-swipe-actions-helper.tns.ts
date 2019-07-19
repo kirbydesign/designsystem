@@ -20,10 +20,14 @@ export class ListSwipeActionsHelper {
     this.swipeActionSelections = {};
 
     const leftView = <View>swipeView.getViewById('swipe-actions-left');
+    const rightView = <View>swipeView.getViewById('swipe-actions-right');
 
     swipeLimits.left = leftView.getMeasuredWidth();
-    swipeLimits.right = swipeView.getMeasuredWidth();
-    swipeLimits.threshold = swipeView.getMeasuredWidth() / 4;
+    swipeLimits.right = rightView.getMeasuredWidth();
+
+    // need to exceed two thirds of the smaller of the two sides to keep the swipe items open
+    swipeLimits.threshold =
+      (Math.min(leftView.getMeasuredWidth(), rightView.getMeasuredWidth()) * 2) / 3;
   }
 
   onCellSwiping(args: SwipeActionsEventData): void {
