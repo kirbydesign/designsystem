@@ -79,11 +79,6 @@ ion-item {
   --min-height: unset;
 }
 
-ion-infinite-scroll,
-ion-infinite-scroll-content {
-  background-color: get-color('white');
-}
-
 .section-header {
   background-color: transparent;
   padding: size('m');
