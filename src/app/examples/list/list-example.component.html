@@ -60,7 +60,7 @@
 <hr />
 
 <h2>List with header and footer:</h2>
-<kirby-list [items]="items" (itemSelect)="onItemSelect($event)" shape="rounded">
+<kirby-list [items]="items" (itemSelect)="onItemSelect($event)">
   
   <!-- HEADER-->
   <kirby-list-header *kirbyListHeader>
@@ -90,8 +90,8 @@
   <!-- Footer -->
   <ng-container *kirbyListFooter>
     <div class="footer">
-      <label class="kirby-text-medium">An appropriate footer</label>
-      <button kirby-button attentionLevel="1">Click me!</button>
+      <h2>An appropriate footer</h2>
+      <button kirby-button>Click me!</button>
     </div>
   </ng-container> 
 </kirby-list> 
@@ -103,7 +103,7 @@
   [items]="items"
   (itemSelect)="onItemSelect($event)"
   [getSectionName]="getSectionName"
-  [showDivider]="false">
+  [showDivider]="true">
   <!-- kirby-list-header is not supported in conjunction with *kirbyListSectionHeader due to a bug in RadListView on iOS -->
   <kirby-list-section-header
     *kirbyListSectionHeader="let section"

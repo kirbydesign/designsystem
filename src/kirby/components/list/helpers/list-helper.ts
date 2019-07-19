@@ -17,9 +17,4 @@ export class ListHelper {
   getSelectedItem(items: any[], item: any) {
     return item;
   }
-
-  // only {N} implementation
-  renderShadow(_: any): void {
-    return;
-  }
 }

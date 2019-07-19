@@ -10,6 +10,8 @@ kirby-card {
   flex: none;
   width: 200px; //TODO: Get width from common settings
   pointer-events: auto;
+  box-shadow: get-elevation(8);
+  min-height: 0;
 }
 
 .cancel-btn {
@@ -18,4 +20,5 @@ kirby-card {
   margin-bottom: size("m");
   width: 160px; //TODO: Get width from common settings
   pointer-events: auto;
+  box-shadow: get-elevation(8);
 }

@@ -55,6 +55,7 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
   constructor(private elementRef: ElementRef, @Inject(WINDOW_REF) private windowRef: WindowRef) {}
 
   ngAfterViewInit(): void {
+    if (this.disabled) return;
     /**
      * Subscribe to {@link scroll$} observable and emit {@link scrollEnd} event
      * when element scroll position has surpassed the offset.
@@ -81,6 +82,7 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
    */
   @HostListener('window:scroll')
   onScroll(): void {
+    if (this.disabled) return;
     const element = this.elementRef.nativeElement as HTMLElement;
     const boundindClientRect = element.getBoundingClientRect();
 

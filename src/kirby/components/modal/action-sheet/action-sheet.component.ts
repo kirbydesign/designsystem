@@ -11,9 +11,11 @@ import { ActionSheetItem } from './config/action-sheet-item';
 })
 export class ActionSheetComponent {
   config: ActionSheetConfig;
+  cancelButtonText: string;
 
   constructor(private params: NavParams, private modalController: IModalController) {
     this.config = this.params.get('config');
+    this.cancelButtonText = this.config.cancelButtonText || 'Cancel';
   }
 
   onItemSelect(selection: ActionSheetItem) {

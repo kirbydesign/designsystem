@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   ContentChild,
   EventEmitter,
@@ -12,11 +13,11 @@ import {
 } from '@angular/core';
 
 import {
+  ListFlexItemDirective,
+  ListFooterDirective,
   ListHeaderDirective,
   ListItemDirective,
   ListSectionHeaderDirective,
-  ListFlexItemDirective,
-  ListFooterDirective,
 } from './list.directive';
 import { LoadOnDemandEvent, LoadOnDemandEventData } from './list.event';
 import { ListHelper } from './helpers/list-helper';
@@ -60,17 +61,10 @@ export class ListComponent implements OnInit, OnChanges {
    *
    * `square` means **without** rounded corners, `rounded` means **with** rounded corners.
    */
+  @Input() shape: ListShape = 'rounded';
   @HostBinding('class.rounded')
-  @Input()
-  isRoundedShape: boolean = true;
-
-  @Input() set shape(listShape: ListShape) {
-    if (listShape === 'square') {
-      this.isRoundedShape = false;
-    }
-    if (listShape === 'rounded') {
-      this.isRoundedShape = true;
-    }
+  public get isRounded(): boolean {
+    return this.shape === 'rounded';
   }
 
   /**
@@ -165,8 +159,8 @@ export class ListComponent implements OnInit, OnChanges {
     this.listHelper.onLoadOnDemand(this, event);
   }
 
-  onRowLoaded(event: any): void {
-    this.listHelper.renderShadow(event);
+  trackByFn(index) {
+    return index;
   }
 
   getSwipeActionsSide(side: 'left' | 'right'): ListSwipeAction[] {

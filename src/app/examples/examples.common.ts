@@ -5,6 +5,7 @@ import { ButtonExampleComponent } from './button-example/button-example.componen
 import { FloatingActionButtonExampleComponent } from './floating-action-button-example/floating-action-button-example.component';
 import { CardExampleComponent } from './card-example/card-example.component';
 import { CardThemecolorExampleComponent } from './card/card-themecolor-example/card-themecolor-example.component';
+import { CardElevationsExampleComponent } from './card/card-elevations-example/card-elevations-example.component';
 import { GridExampleComponent } from './grid-example/grid-example.component';
 import { ListExampleComponent } from './list/list-example.component';
 import { ListLoadOnDemandExampleComponent } from './list/load-on-demand/list-load-on-demand-example.component';
@@ -24,6 +25,7 @@ import { CheckboxExampleComponent } from './checkbox-example/checkbox-example.co
 import { SegmentedChipControlExampleComponent } from './segmented-chip-control-example/segmented-chip-control-example.component';
 import { ActionSheetExampleComponent } from './action-sheet-example/action-sheet-example.component';
 import { AlertExampleComponent } from './alert-example/alert-example.component';
+import { SlideButtonExampleComponent } from './slide-button-example/slide-button-example.component';
 import { ToastExampleComponent } from './toast-example/toast-example.component';
 import { ToggleExampleComponent } from './toggle-example/toggle-example.component';
 import { EmptyStateExampleComponent } from './empty-state-example/empty-state-example.component';
@@ -47,9 +49,11 @@ export const iconSettings: IconSettings = {
 
 export const COMPONENT_DECLARATIONS: any[] = [
   ButtonExampleComponent,
+  SlideButtonExampleComponent,
   FloatingActionButtonExampleComponent,
   CardExampleComponent,
   CardThemecolorExampleComponent,
+  CardElevationsExampleComponent,
   ListExampleComponent,
   ListLoadOnDemandExampleComponent,
   GridExampleComponent,

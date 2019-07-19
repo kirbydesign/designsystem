@@ -20,6 +20,7 @@ export class ActionSheetExampleComponent {
         { id: '2', text: 'Option 2' },
         { id: '3', text: 'Option 3' },
       ],
+      cancelButtonText: 'Custom cancel',
     };
     this.modalController.showActionSheet(config, this.vcRef, this.onActionSelected);
   }

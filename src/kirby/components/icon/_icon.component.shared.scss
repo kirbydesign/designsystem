@@ -22,7 +22,7 @@ $_icon-size-map: (
   $size: map-get($_icon-size-map, $key);
   @return map-get($size, padding);
 }
-  
+
 @mixin _icon-size($key) {
   --kirby-icon-font-size: #{_icon-font-size($key)};
   --kirby-icon-padding: #{_icon-padding($key)};
@@ -31,9 +31,11 @@ $_icon-size-map: (
 @mixin _icon-size_native($key) {
   $font-size: _icon-font-size($key);
   $padding: _icon-padding($key);
+  $icon-size: $font-size + $padding * 2;
+
   font-size: $font-size;
-  &.outline {
-    $icon-size: $font-size + $padding * 2;
+
+  Label.outline {
     width: $icon-size;
     height: $icon-size;
   }

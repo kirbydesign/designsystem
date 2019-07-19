@@ -15,8 +15,12 @@ h2 {
 
 .footer {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
     width: 100%;
-    margin: size('xs') 0;
+    justify-content: space-between;
+    padding: size('s');
+    background-color: get-color('white');
+
+    h2 {
+        margin: 0;
+    }
 }

@@ -87,6 +87,17 @@ describe('ListComponent', () => {
       const liElements = spectator.queryAll('ion-item-sliding');
       expect(liElements.length).toEqual(component.items.length);
     });
+
+    it('should render one ion-item for each ion-item-sliding and one for each section, if sections are enabled', () => {
+      spectator.setInput({
+        items: Item.createItems(1, 2, 3),
+        getSectionName: (item: Item) => (item.value % 2 === 0 ? 'even' : 'odd'),
+      });
+      runNgOnChanges();
+
+      const liElements = spectator.queryAll('ion-item-sliding');
+      expect(liElements.length).toEqual(component.items.length + 2);
+    });
   });
 
   describe('divider', () => {

@@ -16,6 +16,7 @@
 .kirby-modal {
     --background: #{get-color('background-color')};
     --border-radius: #{$border-radius};
+    --box-shadow: #{get-elevation(8)};
     position: fixed;
 
     @include media(">=medium") {
@@ -41,6 +42,10 @@
         justify-content: center;
         align-items: flex-end;
     }  
+}
+
+.alert-wrapper {
+    box-shadow: get-elevation(8) !important;
 }
 
 .kirby-alert-btn {

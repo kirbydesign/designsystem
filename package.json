@@ -9,7 +9,7 @@
       "version": "5.4.0"
     }
   },
-  "version": "0.0.212",
+  "version": "0.0.230",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -40,14 +40,16 @@
     "@angular/common": "7.2.0",
     "@angular/compiler": "7.2.0",
     "@angular/core": "7.2.0",
+    "@angular/fire": "5.2.1",
     "@angular/forms": "7.2.0",
     "@angular/http": "7.2.0",
     "@angular/platform-browser": "7.2.0",
     "@angular/platform-browser-dynamic": "7.2.0",
     "@angular/router": "7.2.0",
-    "@ionic/angular": "4.6.0",
+    "@ionic/angular": "4.6.2",
     "@types/prismjs": "1.9.0",
     "core-js": "2.5.4",
+    "firebase": "6.2.4",
     "highcharts": "7.0.3",
     "moment": "2.24.0",
     "nativescript-angular": "7.2.1",
