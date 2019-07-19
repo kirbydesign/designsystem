@@ -39,9 +39,7 @@ export class ListSwipeActionsHelper {
     ltrCallback: (item: any) => void,
     rtlCallback: (item: any) => void
   ): void {
-    if (args.data.x < 0) {
-      rtlCallback(this.item);
-    }
+    // TODO: Once full-swipe is implemented, we can call rtlCallback/ltrCallback
   }
 
   onSwipeActionSelected(swipeAction: ListSwipeAction, _: any): void {
