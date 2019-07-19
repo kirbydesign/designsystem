@@ -43,6 +43,7 @@ describe('ListComponent', () => {
       MockComponent(ionic.IonLabel),
       MockComponent(ionic.IonItem),
       MockComponent(ionic.IonItemDivider),
+      MockComponent(ionic.IonItemGroup),
     ],
     providers: [ListHelper, GroupByPipe],
   });
@@ -82,19 +83,19 @@ describe('ListComponent', () => {
       });
       runNgOnChanges();
 
-      const liElements = spectator.queryAll('ion-item-divider');
+      const liElements = spectator.queryAll('ion-item');
       expect(liElements.length).toEqual(component.items.length);
     });
 
-    it('should render one ion-item for each ion-item-divider and one for each section, if sections are enabled', () => {
+    it('should render one ion-item for each ion-item-group and one for each section, if sections are enabled', () => {
       spectator.setInput({
         items: Item.createItems(1, 2, 3),
         getSectionName: (item: Item) => (item.value % 2 === 0 ? 'even' : 'odd'),
       });
       runNgOnChanges();
 
-      const liElements = spectator.queryAll('ion-item-divider');
-      expect(liElements.length).toEqual(component.items.length + 2);
+      const liElements = spectator.queryAll('ion-item');
+      expect(liElements.length).toEqual(component.items.length);
     });
   });
 
@@ -106,7 +107,7 @@ describe('ListComponent', () => {
       });
       runNgOnChanges();
 
-      const liElements = spectator.queryAll('ion-item-divider');
+      const liElements = spectator.queryAll('ion-item');
       liElements.forEach((liElement) => {
         expect(liElement.getAttribute('class')).toContain('divider');
       });
@@ -119,7 +120,7 @@ describe('ListComponent', () => {
       });
       runNgOnChanges();
 
-      const liElements = spectator.queryAll('ion-item-divider');
+      const liElements = spectator.queryAll('ion-item');
       liElements.forEach((liElement) => {
         expect(liElement.getAttribute('class')).not.toContain('divider');
       });
