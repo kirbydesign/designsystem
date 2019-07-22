@@ -28,6 +28,7 @@ import { SlideButtonShowcaseComponent } from './slide-button-showcase/slide-butt
 import { ToastShowcaseComponent } from './toast-showcase/toast-showcase.component';
 import { ToggleShowcaseComponent } from './toggle-showcase/toggle-showcase.component';
 import { EmptyStateShowcaseComponent } from './empty-state-showcase/empty-state-showcase.component';
+import { ToolbarShowcaseComponent } from './toolbar-showcase/toolbar-showcase.component';
 
 export const COMPONENT_IMPORTS: any[] = [ExamplesModule, ShowcaseRoutingModule];
 
@@ -59,6 +60,7 @@ export const COMPONENT_EXPORTS: any[] = [
   ToastShowcaseComponent,
   ToggleShowcaseComponent,
   EmptyStateShowcaseComponent,
+  ToolbarShowcaseComponent,
 ];
 
 export const COMPONENT_DECLARATIONS: any[] = [...COMPONENT_EXPORTS, ShowcaseComponent];

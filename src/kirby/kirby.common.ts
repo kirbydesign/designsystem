@@ -45,6 +45,7 @@ import { ToastController } from './components/toast/services/toast.controller';
 import { ToastHelper } from './components/toast/services/toast.helper';
 import { ToggleComponent } from './components/toggle/toggle.component';
 import { EmptyStateComponent } from './components/empty-state/empty-state.component';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
 
 export const declarations = [
   CardComponent,
@@ -85,6 +86,7 @@ export const declarations = [
   SlideButtonComponent,
   ToggleComponent,
   EmptyStateComponent,
+  ToolbarComponent,
 ];
 
 export const providerDeclarations: any[] = [
