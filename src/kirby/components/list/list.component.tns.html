@@ -12,7 +12,7 @@
     <!-- ITEM -->
     <ng-template tkListItemTemplate let-item="item" let-index="index">
       <StackLayout [kirbyElevation]="2" [iosMasksToBounds]="true">
-        <StackLayout class="row"
+        <StackLayout id="row" class="row"
           [class.divider]="showDivider"
           [class.rounded]="shape === 'rounded'"
           [class.first]="isFirstItem(item, index)"
@@ -28,8 +28,8 @@
     </ng-template>
 
     <!-- SWIPE ACTIONS -->
-    <ng-template tkListItemSwipeTemplate *ngIf="!isSwipingDisabled" let-item="item">
-        <GridLayout columns="auto, *, auto">
+    <ng-template tkListItemSwipeTemplate *ngIf="!isSwipingDisabled">
+        <GridLayout id="swipe-actions-container" columns="auto, *, auto">
           <StackLayout col=0 orientation="horizontal" id="swipe-actions-left" visibility="hidden">
             <ng-container *ngTemplateOutlet="swipeActionTemplate; context: { swipeActions: getSwipeActionsSide('left') }"></ng-container>
           </StackLayout>

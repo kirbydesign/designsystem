@@ -13,6 +13,7 @@ export class ListSwipeActionsHelper {
     const swipeLimits = args.data.swipeLimits;
     const swipeView = args.swipeView;
     const mainView = args['mainView'];
+    const swipeActionsContainerView = <View>swipeView.getViewById('swipe-actions-container');
 
     // The bindingContext provides the item that is being swiped and
     // allows us to get the selected values for each swipe action
@@ -33,6 +34,19 @@ export class ListSwipeActionsHelper {
       leftView.visibility = 'visible';
     } else if (args.data.x < 0) {
       rightView.visibility = 'visible';
+    }
+
+    // apply custom styles to elements
+    const child = mainView.getViewById('row');
+    child.className = 'row divider';
+    if (child.className.indexOf('first') > 0) {
+      console.log('first element swiped');
+      // swipeActionsContainerView. something = something
+    }
+
+    if (child.className.indexOf('last') > 0) {
+      console.log('last element swiped');
+      // swipeActionsContainerView. something = something
     }
   }
 
