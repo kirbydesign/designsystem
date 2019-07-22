@@ -45,6 +45,9 @@
             "styles": [
               "src/styles.scss"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": ["src/kirby/scss"]
+            },
             "scripts": []
           },
           "configurations": {
