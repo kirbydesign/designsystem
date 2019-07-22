@@ -1,11 +1,4 @@
-import {
-  Component,
-  Input,
-  AfterViewInit,
-  ContentChild,
-  AfterContentInit,
-  ChangeDetectionStrategy,
-} from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { registerElement } from 'nativescript-angular';
 import { EventData, View } from 'tns-core-modules/ui/core/view/view';
 import { ContentView } from 'tns-core-modules/ui/content-view';
