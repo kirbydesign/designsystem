@@ -24,7 +24,7 @@ const AVATAR_COMPONENT_SELECTOR = 'kirby-avatar';
 export class AvatarComponent extends ContentView implements Avatar {
   @Input() imageSrc: string;
   @Input() altText: string;
-  @Input() text: string;
+  @Input() text?: string;
   @Input() shadow?: false;
   @Input() overlay?: true;
 
