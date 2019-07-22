@@ -107,6 +107,9 @@
                 "output": "./assets/kirby/icons/svg"
               }
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": ["src/kirby/scss"]
+            },
             "sourceMap": true
           }
         },
