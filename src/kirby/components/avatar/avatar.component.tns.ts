@@ -1,9 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, AfterViewInit, ContentChild, AfterContentInit } from '@angular/core';
 import { registerElement } from 'nativescript-angular';
 import { EventData, View } from 'tns-core-modules/ui/core/view/view';
 import { ContentView } from 'tns-core-modules/ui/content-view';
-
-import { ScssHelper } from '../../scss/scss-helper';
 
 declare const CGSizeMake: any;
 declare const android: any;
@@ -23,6 +21,7 @@ const AVATAR_COMPONENT_SELECTOR = 'kirby-avatar';
 export class AvatarComponent extends ContentView {
   @Input() imageSrc: string;
   @Input() altText: string;
+  @Input() text: string;
   @Input() shadow?: false;
   @Input() overlay?: true;
 
