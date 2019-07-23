@@ -1,8 +1,15 @@
 @import '../../scss/web-imports';
+
+.toolbar {
+  --background:  #{get-color('background-color')};
+  --color: #{get-color('background-color-contrast')};
+}
+
 @each $color-name, $color-value in $main-colors {
   :host(.#{$color-name}) {
     ion-toolbar {
       --background:  #{get-color($color-name)};
+      --color: #{get-color($color-name+'-contrast')};
     }
   }
 }
