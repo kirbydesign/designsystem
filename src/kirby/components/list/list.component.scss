@@ -24,6 +24,13 @@ $shadow: get-elevation(2);
     &:not(:last-of-type).has-divider {
       border-bottom: 1px solid $divider-color;
     }
+
+    &:focus {
+      outline-color: var(--highlight-color-focused);
+      outline-style: auto;
+      outline-width: 5px;
+      margin-bottom: 5px;
+    }
   }
 
   &.has-sections {
