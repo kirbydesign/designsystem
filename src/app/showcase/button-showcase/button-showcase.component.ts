@@ -41,10 +41,10 @@ export class ButtonShowcaseComponent {
       inputValues: ['boolean'],
     },
     {
-      name: 'isDisabled',
-      description: '(Optional) Toggle the button disable.',
-      defaultValue: 'false',
-      inputValues: ['boolean'],
+      name: 'disabled',
+      description: '(Optional) Disables the button if specified.',
+      defaultValue: '',
+      inputValues: ['directive'],
     },
     {
       name: 'isOutlinedOnFocus',

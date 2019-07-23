@@ -13,6 +13,7 @@
   display: inline-flex;
   line-height: line-height('xs');
   vertical-align: middle;
+  outline: none;
 
   // we default to 'md' size.
   margin: size('xxs');
@@ -106,6 +107,11 @@
     background-color: get-color('light-tint');
     border-color: get-color('light-tint');
     pointer-events: none;
+  }
+
+  &.disabled:focus {
+    // todo: not working, needs fixing
+    outline: none;
   }
 
   :host-context(.default),

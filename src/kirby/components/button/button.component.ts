@@ -38,9 +38,5 @@ export class ButtonComponent {
 
   @Input() text?: string;
 
-  @Input() set isDisabled(disabled: boolean) {
-    this.disabled = disabled;
-  }
-
   @Input() isOutlinedOnFocus?: boolean = true;
 }

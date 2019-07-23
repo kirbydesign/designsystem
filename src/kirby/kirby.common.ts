@@ -38,6 +38,7 @@ import { ActionSheetHelper } from './components/modal/services/action-sheet.help
 import { ActionSheetComponent } from './components/modal/action-sheet/action-sheet.component';
 import { AlertHelper } from './components/modal/services/alert.helper';
 import { SizeDirective } from './directives/size/size.directive';
+import { DisabledDirective } from './directives/disabled/disabled.directive';
 import { ThemeColorDirective } from './directives/theme-color/theme-color.directive';
 import { SlideButtonComponent } from './components/slide-button/slide-button.component';
 import { ToastController } from './components/toast/services/toast.controller';
@@ -79,6 +80,7 @@ export const declarations = [
   SegmentedChipControlComponent,
   BadgeComponent,
   SizeDirective,
+  DisabledDirective,
   ThemeColorDirective,
   SlideButtonComponent,
   ToggleComponent,
