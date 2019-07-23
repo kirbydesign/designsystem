@@ -5,28 +5,50 @@
   --kirby-button-border-color: transparent;
   --kirby-button-border-radius: 2rem;
   background-color: var(--kirby-button-background-color);
-  border-radius: var(--kirby-button-border-radius);
   border: 1px solid var(--kirby-button-border-color);
+  border-radius: var(--kirby-button-border-radius);
   color: var(--kirby-button-color);
   cursor: pointer;
   transition: opacity 200ms linear;
-  
+  display: inline-flex;
+  line-height: line-height('xs');
+  vertical-align: middle;
+
   // we default to 'md' size.
   margin: size('xxs');
-  padding: size('xs') size('m') size('xs') size('m');
-  font-size: font-size('s');
   height: size('xl');
-  line-height: line-height('xs');
+  
+  button {
+    background-color: transparent;
+    border: 1px solid transparent;
+    height: 100%;
+    width: 100%;
+    border-radius: var(--kirby-button-border-radius);
+    padding: size('xs') size('m') size('xs') size('m');
+    color: var(--kirby-button-color);
+    font-size: font-size('s');
+    cursor: pointer;
+  }
+
+  .no-outline-on-focus:focus {
+    outline: none;
+  }
 
   &.sm {
-    padding: size('xxs') size('s') size('xxs') size('s');
-    font-size: font-size('xs');
     height: size('l');
+    
+    button {
+      font-size: font-size('xs');
+      padding: size('xxs') size('s') size('xxs') size('s');
+    }
   }
 
   &.lg {
-    font-size: font-size('s');
     height: size('xxl');
+    
+    button {
+      font-size: font-size('s');
+    }
   }
 
   &.attention-level1 {
@@ -72,7 +94,6 @@
   }
 
   &[expand='block'] {
-    display: block;
     width: 100%;
   }
 
@@ -81,7 +102,7 @@
     opacity: 0.8;
   }
 
-  &:disabled {
+  &.disabled {
     background-color: get-color('light-tint');
     border-color: get-color('light-tint');
     pointer-events: none;

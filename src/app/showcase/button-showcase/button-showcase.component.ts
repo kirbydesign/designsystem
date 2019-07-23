@@ -38,7 +38,19 @@ export class ButtonShowcaseComponent {
       description:
         'If isDestructive is set, color of the button will be changed according to attention level.',
       defaultValue: 'false',
-      inputValues: ['true', 'false'],
+      inputValues: ['boolean'],
+    },
+    {
+      name: 'isDisabled',
+      description: '(Optional) Toggle the button disable.',
+      defaultValue: 'false',
+      inputValues: ['boolean'],
+    },
+    {
+      name: 'isOutlinedOnFocus',
+      description: '(Optional) Toggle the button outline on focus.',
+      defaultValue: 'true',
+      inputValues: ['boolean'],
     },
   ];
 

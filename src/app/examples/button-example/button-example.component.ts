@@ -25,4 +25,8 @@ export class ButtonExampleComponent {
   onSegmentClick(segment) {
     this.activeTab = segment.id;
   }
+
+  onSelect(event: any) {
+    console.log(`Button selected; event: ${event}`);
+  }
 }

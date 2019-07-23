@@ -3,19 +3,19 @@
       <kirby-segmented-control [items]="[{ text: 'Default', id: 'default', checked: true }, { text: 'Attention Lvl', id: 'attention-level' }, { text: 'Destructive', id: 'destructive' }]" (segmentClick)="onSegmentClick($event)">
       </kirby-segmented-control>
       <ng-container *ngIf="activeTab === 'default'">
-          <Button kirby-button text="Small Button" size="sm"></Button>
-          <Button kirby-button text="Medium Button" size="md"></Button>
-          <Button kirby-button text="Large Button" size="lg"></Button>
-          <Button kirby-button text="Kirby Block Button" expand="block"></Button>
-          <Button kirby-button text="Disabled Button" isEnabled="false"></Button>   
+          <kirby-button text="Small Button" size="sm"></kirby-button>
+          <kirby-button text="Medium Button" size="md"></kirby-button>
+          <kirby-button text="Large Button" size="lg"></kirby-button>
+          <kirby-button text="Kirby Block Button" expand="block"></kirby-button>
+          <kirby-button text="Disabled Button" isEnabled="false"></kirby-button>
       </ng-container>
       <ng-container *ngIf="activeTab === 'attention-level'">
           <kirby-card [themeColor]="themeColor" class="card">
             <Stacklayout>
-              <Button kirby-button attentionLevel="1" text="Attention Level 1"></Button>
-              <Button kirby-button attentionLevel="2" text="Attention Level 2"></Button>
-              <Button kirby-button attentionLevel="3" text="Attention Level 3"></Button>
-              <Button kirby-button attentionLevel="4" text="Attention Level 4"></Button>        
+              <kirby-button attentionLevel="1" text="Attention Level 1"></kirby-button>
+              <kirby-button attentionLevel="2" text="Attention Level 2"></kirby-button>
+              <kirby-button attentionLevel="3" text="Attention Level 3"></kirby-button>
+              <kirby-button attentionLevel="4" text="Attention Level 4"></kirby-button>
             </Stacklayout>
           </kirby-card>
           <ListPicker #themeColorPicker [items]="items"
@@ -24,10 +24,10 @@
            (selectedValueChange)="themeColor = themeColorPicker.selectedValue;"></ListPicker>
         </ng-container>
       <ng-container *ngIf="activeTab === 'destructive'">
-          <Button kirby-button attentionLevel="1" isDestructive="true" text="Attention Level 1"></Button>
-          <Button kirby-button attentionLevel="2" isDestructive="true" text="Attention Level 2"></Button>
-          <Button kirby-button attentionLevel="3" isDestructive="true" text="Attention Level 3"></Button>
-          <Button kirby-button attentionLevel="4" isDestructive="true" text="Attention Level 4"></Button>   
+          <kirby-button attentionLevel="1" isDestructive="true" text="Attention Level 1"></kirby-button>
+          <kirby-button attentionLevel="2" isDestructive="true" text="Attention Level 2"></kirby-button>
+          <kirby-button attentionLevel="3" isDestructive="true" text="Attention Level 3"></kirby-button>
+          <kirby-button attentionLevel="4" isDestructive="true" text="Attention Level 4"></kirby-button>
       </ng-container>
     </Stacklayout>
 </ScrollView>

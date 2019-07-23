@@ -8,13 +8,12 @@ kirby-card {
         display: flex;
         border-top: 1px solid get-color('medium');
         
-        button {
+        kirby-button {
             font-size: 14px;
             width: 100%;
             height: 50px;
             border-radius: 0;
             margin: auto;
-            outline: none;
         }
     }
 }

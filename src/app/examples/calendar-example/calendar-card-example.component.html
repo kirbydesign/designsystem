@@ -11,8 +11,8 @@
     </kirby-calendar>
     
     <div>
-        <button kirby-button (click)="selectNextMonth()">Next month</button>
-        <button kirby-button (click)="selectToday()" attentionLevel="2">Now</button>
+        <kirby-button (click)="selectNextMonth()" text="Next month" [isOutlinedOnFocus]="false"></kirby-button>
+        <kirby-button (click)="selectToday()" attentionLevel="2" text="Now" [isOutlinedOnFocus]="false"></kirby-button>
     </div>
 </kirby-card>
 
