@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, ContentChild, TemplateRef, HostBinding } from '@angular/core';
+
+import { ToolbarStartElementDirective, ToolbarEndElementDirective } from './toolbar.directive';
 
 @Component({
   selector: 'kirby-toolbar',
@@ -6,6 +8,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./toolbar.component.scss'],
 })
 export class ToolbarComponent implements OnInit {
+  @Input() title: string;
+
+  @ContentChild(ToolbarStartElementDirective, { read: TemplateRef }) startElement;
+  @ContentChild(ToolbarEndElementDirective, { read: TemplateRef }) endElement;
   constructor() {}
 
   ngOnInit() {}
