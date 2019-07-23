@@ -26,10 +26,11 @@ $shadow: get-elevation(2);
     }
 
     &:focus {
+      $outline-width: 5px;
       outline-color: var(--highlight-color-focused);
       outline-style: auto;
-      outline-width: 5px;
-      margin-bottom: 5px;
+      outline-width: $outline-width;
+      margin-bottom: $outline-width;
       background-color: $background-color-hover;
     }
   }
