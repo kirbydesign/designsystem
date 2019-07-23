@@ -15,7 +15,7 @@
     verticalAlignment="center" 
     [visibility]="imageSrc ? 'collapse' : 'visible'">
     <ng-content *ngIf="!text" select="kirby-icon"></ng-content>
-    <Label *ngIf="text" class="avatar-text" horizontalAlignment="center" text="{{text}}" verticalAlignment="center"></Label>
+    <Label *ngIf="text" class="avatar-text" horizontalAlignment="center" [text]="text" verticalAlignment="center"></Label>
   </GridLayout>
   <AbsoluteLayout class="badge-wrapper">
     <GridLayout class="badge-container">
