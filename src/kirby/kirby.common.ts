@@ -46,6 +46,10 @@ import { ToastHelper } from './components/toast/services/toast.helper';
 import { ToggleComponent } from './components/toggle/toggle.component';
 import { EmptyStateComponent } from './components/empty-state/empty-state.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import {
+  ToolbarStartElementDirective,
+  ToolbarEndElementDirective,
+} from './components/toolbar/toolbar.directive';
 
 export const declarations = [
   CardComponent,
@@ -87,6 +91,8 @@ export const declarations = [
   ToggleComponent,
   EmptyStateComponent,
   ToolbarComponent,
+  ToolbarStartElementDirective,
+  ToolbarEndElementDirective,
 ];
 
 export const providerDeclarations: any[] = [
