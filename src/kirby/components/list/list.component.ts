@@ -20,6 +20,7 @@ import {
 import { LoadOnDemandEvent, LoadOnDemandEventData } from './list.event';
 import { ListHelper } from './helpers/list-helper';
 import { GroupByPipe } from './pipes/group-by.pipe';
+import { ListItem } from './list-item/list-item.interface';
 
 export type ListShape = 'square' | 'rounded';
 
@@ -28,6 +29,11 @@ export type ListShape = 'square' | 'rounded';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
   providers: [ListHelper, GroupByPipe],
+  // Using host property decorator is fine for static values:
+  // tslint:disable-next-line:use-host-property-decorator
+  host: {
+    class: 'kirby-list',
+  },
 })
 export class ListComponent implements OnChanges {
   /**
@@ -85,6 +91,7 @@ export class ListComponent implements OnChanges {
   isLoading: boolean;
   isLoadOnDemandEnabled: boolean;
   groupedItems: any[];
+  selectedItem: ListItem;
 
   private orderMap: WeakMap<any, { isFirst: boolean; isLast: boolean }>;
 
@@ -130,7 +137,13 @@ export class ListComponent implements OnChanges {
   }
 
   onItemSelect(args: any) {
-    this.itemSelect.emit(this.listHelper.getSelectedItem(this.items, args));
+    debugger;
+    this.selectedItem = this.listHelper.getSelectedItem(this.items, args);
+    this.items.forEach((item) => {
+      item.selected = false;
+    });
+    this.selectedItem.selected = true;
+    this.itemSelect.emit(this.selectedItem);
   }
 
   onLoadOnDemand(event?: LoadOnDemandEventData) {
