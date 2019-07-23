@@ -1,3 +1,10 @@
 <ion-toolbar>
-  <ion-title>Toolbare works!</ion-title>
+  <div slot="start" *ngIf="startElement">
+    <ng-container *ngTemplateOutlet="startElement"></ng-container>
+  </div>
+  
+  <ion-title>{{ title }}</ion-title>
+  <div slot="end" *ngIf="endElement">
+    <ng-container *ngTemplateOutlet="endElement" ></ng-container>
+  </div>
 </ion-toolbar>;
