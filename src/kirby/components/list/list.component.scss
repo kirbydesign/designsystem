@@ -35,6 +35,10 @@ $shadow: get-elevation(2);
     }
   }
 
+  .selected ::ng-deep * {
+    font-weight: font-weight('bold');
+  }
+
   &.has-sections {
     ion-list {
       box-shadow: none;

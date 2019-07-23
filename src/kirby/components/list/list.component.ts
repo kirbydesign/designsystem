@@ -137,7 +137,6 @@ export class ListComponent implements OnChanges {
   }
 
   onItemSelect(args: any) {
-    debugger;
     this.selectedItem = this.listHelper.getSelectedItem(this.items, args);
     this.items.forEach((item) => {
       item.selected = false;
