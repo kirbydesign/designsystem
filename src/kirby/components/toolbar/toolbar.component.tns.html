@@ -1,13 +1,9 @@
 <ActionBar [title]="title" class="primary">
-  <ActionItem *ngIf="startElement" android.position="actionBar" ios.position="left">
-    <GridLayout rows="auto" columns="auto">
-        <ng-container *ngTemplateOutlet="startElement"></ng-container>
-    
-    </GridLayout>
-    
-  </ActionItem>
-  <ActionItem *ngIf="endElement">
-    <ng-container *ngTemplateOutlet="endElement"></ng-container>
-    
+  <NavigationButton android.systemIcon="ic_menu_back" text="" *ngIf="showBackButton">
+  </NavigationButton>
+  <ActionItem *ngIf="endElement" ios.position="right">
+    <GridLAyout rows="auto" columns="auto">
+      <ng-container *ngTemplateOutlet="endElement"></ng-container>
+    </GridLAyout>
   </ActionItem>
 </ActionBar>
