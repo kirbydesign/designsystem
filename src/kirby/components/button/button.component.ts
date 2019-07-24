@@ -4,6 +4,11 @@ import { Component, Input, HostBinding } from '@angular/core';
   selector: 'kirby-button',
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.scss'],
+  // Using host property decorator is fine for static values:
+  // tslint:disable-next-line:use-host-property-decorator
+  host: {
+    class: 'kirby-button',
+  },
 })
 export class ButtonComponent {
   @HostBinding('class.attention-level1')

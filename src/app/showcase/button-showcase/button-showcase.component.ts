@@ -42,9 +42,9 @@ export class ButtonShowcaseComponent {
     },
     {
       name: 'disabled',
-      description: '(Optional) Disables the button if specified.',
+      description: '(Optional) Disables the button.',
       defaultValue: '',
-      inputValues: ['directive'],
+      inputValues: [''],
     },
     {
       name: 'isOutlinedOnFocus',
