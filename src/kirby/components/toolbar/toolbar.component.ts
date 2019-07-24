@@ -9,6 +9,7 @@ import { ToolbarStartElementDirective, ToolbarEndElementDirective } from './tool
 })
 export class ToolbarComponent implements OnInit {
   @Input() title: string;
+  @Input() showBackButton: boolean;
 
   @ContentChild(ToolbarStartElementDirective, { read: TemplateRef }) startElement;
   @ContentChild(ToolbarEndElementDirective, { read: TemplateRef }) endElement;
