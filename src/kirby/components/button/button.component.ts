@@ -22,7 +22,13 @@ export class ButtonComponent {
   destructive: boolean = false; // Default
 
   @HostBinding('class.disabled')
-  disabled: boolean = false; // Default
+  isDisabled: boolean = false; //Default
+
+  @Input()
+  set disabled(_: any) {
+    // this only gets invoked if disabled is specified on the component
+    this.isDisabled = true;
+  }
 
   @Input() set attentionLevel(level: '1' | '2' | '3' | '4') {
     this.isAttentionLevel1 = level === '1';
