@@ -4,6 +4,7 @@ import { NativeScriptCommonModule } from 'nativescript-angular/common';
 import { NativeScriptRouterModule } from 'nativescript-angular/router';
 import { NativeScriptUIChartModule } from 'nativescript-ui-chart/angular';
 import { NativeScriptUIListViewModule } from 'nativescript-ui-listview/angular';
+import { ContentView } from 'tns-core-modules/ui/content-view/content-view';
 
 import { TNSCheckBoxModule } from 'nativescript-checkbox/angular';
 // tslint:disable-next-line:import-line-spacing
@@ -21,6 +22,13 @@ import { VerticalTextAlignmentDirective } from './directives/vertical-text-align
 
 overrideModalViewMethod();
 registerElement('ModalStack', () => ModalStack);
+
+// the lines below allow us to use row and col on kirby buttons inside GridLayout
+// when https://github.com/NativeScript/nativescript-angular/issues/1422 gets fixed
+// there may be a better way to do this.
+registerElement('kirby-button', () => {
+  return ContentView;
+});
 
 // tslint:disable-next-line:max-line-length
 const nativeScriptDeclarations = [

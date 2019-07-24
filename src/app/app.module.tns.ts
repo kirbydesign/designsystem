@@ -12,6 +12,7 @@ import { HomeComponent } from './home/home.component';
 import { SideNavComponent } from './page/side-nav/side-nav.component';
 import { HeaderComponent } from './page/header/header.component';
 import { IntroComponent } from './intro/intro.component';
+import { KirbyModule } from '@kirbydesign/designsystem';
 
 registerLocaleData(localeEn);
 // Uncomment and add to NgModule imports  if you need to use the HTTP wrapper
@@ -19,7 +20,7 @@ registerLocaleData(localeEn);
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, SideNavComponent, HeaderComponent, IntroComponent],
-  imports: [NativeScriptModule, AppRoutingModule, ServicesModule],
+  imports: [NativeScriptModule, AppRoutingModule, ServicesModule, KirbyModule],
   providers: [{ provide: LOCALE_ID, useValue: 'en-GB' }],
   bootstrap: [AppComponent],
   schemas: [NO_ERRORS_SCHEMA],

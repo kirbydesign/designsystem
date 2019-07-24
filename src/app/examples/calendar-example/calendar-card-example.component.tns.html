@@ -11,9 +11,9 @@
             (dateChange)="onDateChange($event)">
         </kirby-calendar>
         
-        <GridLayout rows="auto", columns="*, *" orientation="horizontal">
-            <Button kirby-button shape="square" class="left" col="0" (tap)="selectNextMonth()" text="Next month"></Button>
-            <Button kirby-button shape="square" class="right" col="1" (tap)="selectToday()" attentionLevel="2" text="Now"></Button>   
+        <GridLayout rows="auto" columns="*, *" >
+            <kirby-button shape="square" class="left" col="0" (tap)="selectNextMonth()" text="Next month" expand="block"></kirby-button>
+            <kirby-button shape="square" class="right" col="1" (tap)="selectToday()" attetionLevel="2" text="Now" expand="block"></kirby-button>   
         </GridLayout>
     </kirby-card>
     <StackLayout orientation="horizontal">
