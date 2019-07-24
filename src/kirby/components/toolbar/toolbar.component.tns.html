@@ -1,0 +1,13 @@
+<ActionBar [title]="title" class="primary">
+  <ActionItem *ngIf="startElement" android.position="actionBar" ios.position="left">
+    <GridLayout rows="auto" columns="auto">
+        <ng-container *ngTemplateOutlet="startElement"></ng-container>
+    
+    </GridLayout>
+    
+  </ActionItem>
+  <ActionItem *ngIf="endElement">
+    <ng-container *ngTemplateOutlet="endElement"></ng-container>
+    
+  </ActionItem>
+</ActionBar>
