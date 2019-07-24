@@ -1,4 +1,4 @@
-@import '../../scss/native-imports';
+@import 'native-imports';
 @import '../icon/icon.component.shared';
 
 $image-diameter-small:  40;
@@ -61,6 +61,9 @@ $color-card-bg: rgb(255, 255, 255);
     .badge-container {
       left: 30;
     }
+    .avatar-text {
+      font-size: font-size('s');
+    }
   }
 
   &.md {
@@ -76,6 +79,9 @@ $color-card-bg: rgb(255, 255, 255);
     .badge-container {
       left: 40;
     }
+    .avatar-text {
+      font-size: font-size('m');      
+    }
   }
 
   &.lg {
@@ -90,6 +96,10 @@ $color-card-bg: rgb(255, 255, 255);
 
     .badge-container {
       left: 67;
+    }
+
+    .avatar-text {
+      font-size: font-size('l');      
     }
   }
 }

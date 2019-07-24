@@ -7,9 +7,15 @@ declare var require: any;
   styleUrls: ['./chip-showcase.component.scss'],
 })
 export class ChipShowcaseComponent implements OnInit {
+  themeColors = ['light', 'dark'];
+  themeColor = '';
   exampleHtml: string = require('../../examples/chip-example/chip-example.component.html');
 
   constructor() {}
 
   ngOnInit() {}
+
+  onThemeChange(themeColor) {
+    this.themeColor = themeColor;
+  }
 }
