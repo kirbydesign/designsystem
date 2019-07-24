@@ -8,6 +8,7 @@ import { ContentView } from 'tns-core-modules/ui/content-view';
 
 import { ScssHelper } from '../../scss/scss-helper';
 import { ThemeColor } from '../../helpers/theme-color.type';
+import { CardCommon } from './card.common';
 
 const screenScale = screen.mainScreen.scale;
 
@@ -18,10 +19,11 @@ export const KIRBY_CARD_COMPONENT_SELECTOR = 'kirby-card';
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
 })
-export class CardComponent extends ContentView {
+export class CardComponent extends ContentView implements CardCommon {
   @Input() title: string;
   @Input() subtitle: string;
   @Input() themeColor?: ThemeColor;
+  @Input() hasPadding?: boolean;
 
   DEFAULT_ELEVATION = 2;
   elevation: number = this.DEFAULT_ELEVATION;
