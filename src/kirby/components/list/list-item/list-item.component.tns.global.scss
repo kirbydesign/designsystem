@@ -1,12 +1,6 @@
 @import "native-imports";
 
 .kirby-list-item {
-    @each $color-name, $color-value in $main-colors {
-        &.bg-#{$color-name} {
-            background-color: #{get-color($color-name)};
-        }
-    }
-    
     .titles-container {
         vertical-align: center;
     }
@@ -39,8 +33,17 @@
         font-weight: bold;
         horizontal-align:right;
     }
-    
+
+    @each $color-name, $color-value in $main-colors {
+        &.bg-#{$color-name} {
+            .list-item {
+                background-color: #{get-color($color-name)};
+            }
+        }    
+    }
+
     .list-item {
         padding: 0 size('xs') 0 size('xs');
+
     }
 }
