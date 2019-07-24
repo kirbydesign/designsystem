@@ -12,6 +12,7 @@ import { ListCustomCellLinesExampleComponent } from './list/list-custom-cell-lin
 import { ListItemExampleComponent } from './list/list-item-example/list-item-example.component.tns';
 import { ListLoadOnDemandExampleComponent } from './list/load-on-demand/list-load-on-demand-example.component';
 import { ListHeaderAndFooterExampleComponent } from './nativescript-only/list-header-and-footer/list-header-and-footer-example.component.tns';
+import { ListWithColorsExampleComponent } from './list/list-with-colors-example/list-with-colors-example.component.tns';
 
 const nativeScriptRoutes = [
   ...routes,
@@ -42,6 +43,10 @@ const nativeScriptRoutes = [
       {
         path: 'original',
         component: ListItemExampleComponent,
+      },
+      {
+        path: 'colors',
+        component: ListWithColorsExampleComponent,
       },
       {
         path: 'load-on-demand',

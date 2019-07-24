@@ -4,6 +4,11 @@ import { Component, OnInit, Input } from '@angular/core';
   selector: 'kirby-list-item',
   templateUrl: './list-item.component.html',
   styleUrls: ['./list-item.component.scss'],
+  // Using host property decorator is fine for static values:
+  // tslint:disable-next-line:use-host-property-decorator
+  host: {
+    class: 'kirby-list-item',
+  },
 })
 export class ListItemComponent implements OnInit {
   @Input() item: any = {};

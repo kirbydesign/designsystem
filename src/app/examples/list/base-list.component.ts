@@ -6,6 +6,7 @@ export class BaseListComponent {
       subTitle: '2000 pcs',
       amount: '5.587.218.309 DKK',
       detail: 225,
+      color: 'default',
     },
     {
       id: 1,
@@ -13,6 +14,7 @@ export class BaseListComponent {
       subTitle: '1827 pcs',
       amount: '76.980 DKK',
       detail: -3,
+      color: 'primary',
     },
     {
       id: 2,
@@ -20,6 +22,7 @@ export class BaseListComponent {
       subTitle: '787 pcs',
       amount: '83.004 DKK',
       detail: -115,
+      color: 'secondary',
     },
     {
       id: 3,
@@ -27,6 +30,7 @@ export class BaseListComponent {
       subTitle: '467 pcs',
       amount: '60.963 DKK',
       detail: 6,
+      color: 'tertiary',
     },
     {
       id: 4,
@@ -34,6 +38,7 @@ export class BaseListComponent {
       subTitle: '791 pcs',
       amount: '33.830 DKK',
       detail: -154,
+      color: 'success',
     },
     {
       id: 5,
@@ -41,6 +46,7 @@ export class BaseListComponent {
       subTitle: '206 pcs',
       amount: '60.775 DKK',
       detail: 98,
+      color: 'warning',
     },
     {
       id: 6,
@@ -48,6 +54,7 @@ export class BaseListComponent {
       subTitle: '988 pcs',
       amount: '61.196 DKK',
       detail: 220,
+      color: 'danger',
     },
     {
       id: 7,
@@ -55,6 +62,7 @@ export class BaseListComponent {
       subTitle: '1706 pcs',
       amount: '52.441 DKK',
       detail: 129,
+      color: 'light',
     },
     {
       id: 8,
@@ -62,6 +70,7 @@ export class BaseListComponent {
       subTitle: '827 pcs',
       amount: '62.276 DKK',
       detail: 53,
+      color: 'medium',
     },
     {
       id: 9,
@@ -69,6 +78,7 @@ export class BaseListComponent {
       subTitle: '443 pcs',
       amount: '95.190 DKK',
       detail: -135,
+      color: 'dark',
     },
     {
       id: 10,
@@ -76,6 +86,7 @@ export class BaseListComponent {
       subTitle: '1799 pcs',
       amount: '18.442 DKK',
       detail: 86,
+      color: 'kirby-color-brightness-white',
     },
     {
       id: 11,
@@ -83,6 +94,7 @@ export class BaseListComponent {
       subTitle: '129 pcs',
       amount: '75.842 DKK',
       detail: -43,
+      color: 'bg-kirby-color-brightness-ligh',
     },
     {
       id: 12,
@@ -90,6 +102,7 @@ export class BaseListComponent {
       subTitle: '36 pcs',
       amount: '99.125 DKK',
       detail: -144,
+      color: 'kirby-color-brightness-dark',
     },
     {
       id: 13,

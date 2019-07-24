@@ -66,7 +66,7 @@ $shadow: get-elevation(2);
 }
 
 ion-list-header {
-  background-color: get-color('white');
+  background: transparent;
   border-bottom: 1px solid $divider-color;
   padding: 0;
 }
@@ -96,7 +96,7 @@ ion-item {
 .loading,
 .no-more-items {
   width: 100%;
-  background-color: get-color('white');
+  background: transparent;
   text-align: center;
   padding: size('s');
 }

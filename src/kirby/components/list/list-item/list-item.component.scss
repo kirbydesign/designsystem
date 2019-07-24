@@ -1,4 +1,4 @@
-@import '../../../scss/web-imports';
+@import 'web-imports';
 $left-column: 1;
 $middle-column: 2;
 $right-column: 3;
@@ -8,33 +8,39 @@ $right-column: 3;
     display: grid;
     grid-template-columns: 40% 20% 40%;
     padding: size('s') size('m');
-}
 
-.title-container {
+    @each $color-name, $color-value in $main-colors {
+        &.bg-#{$color-name} {
+            background-color: #{get-color($color-name)};
+        }
+    }
     
-    grid-column-start: $left-column;
-    grid-column-end: $left-column;
-    text-align: left;
-
-    .title {
-        flex: 1;
+    .title-container {
+        
+        grid-column-start: $left-column;
+        grid-column-end: $left-column;
+        text-align: left;
+    
+        .title {
+            flex: 1;
+        }
+    
+        .subTitle {
+            flex: 1;
+            color: #a0a0a0;
+        }
     }
-
-    .subTitle {
-        flex: 1;
-        color: #a0a0a0;
+    
+    .details-container {
+        grid-column-start: $middle-column;
+        grid-column-end: $middle-column;
+        text-align: center;
     }
-}
-
-.details-container {
-    grid-column-start: $middle-column;
-    grid-column-end: $middle-column;
-    text-align: center;
-}
-
-.amount-container {
-    grid-column-start: $right-column;
-    grid-column-end: $right-column;
-    text-align: right;
-    font-weight: bold;
+    
+    .amount-container {
+        grid-column-start: $right-column;
+        grid-column-end: $right-column;
+        text-align: right;
+        font-weight: bold;
+    }
 }

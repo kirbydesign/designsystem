@@ -13,6 +13,7 @@ import { ListSectionExampleComponent } from './nativescript-only/list-section-ex
 import { FirstEmbeddedModalExampleComponent } from './modal-example/first-embedded-modal-example/first-embedded-modal-example.component';
 import { SecondEmbeddedModalExampleComponent } from './modal-example/second-embedded-modal-example/second-embedded-modal-example.component';
 import { ListHeaderAndFooterExampleComponent } from './nativescript-only/list-header-and-footer/list-header-and-footer-example.component.tns';
+import { ListWithColorsExampleComponent } from './list/list-with-colors-example/list-with-colors-example.component.tns';
 
 const nativeScriptDeclarations = [
   ...COMPONENT_DECLARATIONS,
@@ -22,6 +23,7 @@ const nativeScriptDeclarations = [
   ListHeaderAndFooterExampleComponent,
   ListCustomCellLinesExampleComponent,
   ListItemExampleComponent,
+  ListWithColorsExampleComponent,
 ];
 
 @NgModule({
