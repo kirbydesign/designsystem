@@ -45,7 +45,7 @@ export class ButtonComponent {
   @Input() set isDestructive(state: boolean) {
     this.destructive = state;
   }
-  @Input() expand?: 'full' | 'block';
+  @Input() expand?: 'block';
 
   @Input() text?: string;
 

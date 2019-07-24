@@ -16,8 +16,8 @@ export class ButtonShowcaseComponent {
     {
       name: 'expand',
       description:
-        'If the button needs to expand to full width of its parent container, then use expand.',
-      defaultValue: 'null',
+        '(Optional) If the button needs to expand to full width of its parent container, then use expand.',
+      defaultValue: '',
       inputValues: ['block'],
     },
     {

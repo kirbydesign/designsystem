@@ -3,11 +3,13 @@
       <kirby-segmented-control [items]="[{ text: 'Default', id: 'default', checked: true }, { text: 'Attention Lvl', id: 'attention-level' }, { text: 'Destructive', id: 'destructive' }]" (segmentClick)="onSegmentClick($event)">
       </kirby-segmented-control>
       <ng-container *ngIf="activeTab === 'default'">
+        <WrapLayout orientation="horizontal">
           <kirby-button text="Small Button" size="sm"></kirby-button>
           <kirby-button text="Medium Button" size="md"></kirby-button>
           <kirby-button text="Large Button" size="lg"></kirby-button>
-          <kirby-button text="Kirby Block Button" expand="block"></kirby-button>
           <kirby-button text="Disabled Button" isEnabled="false"></kirby-button>
+          <kirby-button text="Kirby Block Button" expand="block"></kirby-button>
+        </WrapLayout>
       </ng-container>
       <ng-container *ngIf="activeTab === 'attention-level'">
           <kirby-card [themeColor]="themeColor" class="card">
