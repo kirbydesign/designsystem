@@ -12,7 +12,7 @@
           [class.divider]="showDivider"
           [class.rounded]="shape === 'rounded'"
           [class.first]="isFirstItem(item, index)"
-          [class.selected]="!!selectedItem && item.id === selectedItem.id"
+          [class.selected]="markSelectedRow && !!selectedItem && item.id === selectedItem.id"
           [class.last]="isLastItem(item, index)">
           <ng-container
             *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }">

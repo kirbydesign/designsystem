@@ -57,6 +57,11 @@ export class ListComponent implements OnChanges {
   @Input() showDivider = false;
 
   /**
+   * Determines if list row text should turn bold on selection
+   */
+  @Input() markSelectedRow = false;
+
+  /**
    * Determine outline shape of:
    * - list, if {@link #isSectionsEnabled} is `false`
    * - section, if {@link #isSectionsEnabled} is `true`
