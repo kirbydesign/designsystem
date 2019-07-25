@@ -1,6 +1,18 @@
 @import '../../scss/native-imports';
 
+@mixin highlighted($color) {
+  @if $color != 'transparent' {
+    $color: get-color($color);
+  }
+  
+  &.highlighted {
+    background-color: $color;
+    border-color: $color;
+  }
+}
+
 .kirby-button {
+
   .button-wrapper {
     background-color: get-color('primary');
     border-color: get-color('primary');
@@ -14,14 +26,9 @@
     font-size: font-size('s');
     height: size('xl');
     line-height: line-height('xs');
+  
+    @include highlighted('primary-shade');
   }
-
-  // &[isEnabled=true] .button-wrapper {
-  //   &.highlighted {
-  //     background-color: get-color('primary-shade');
-  //     border-color: get-color('primary-shade');
-  //   }
-  // }
 
   &.sm .button-wrapper {
     padding: size('xxs') size('s') size('xxs') size('s');
@@ -39,12 +46,14 @@
       background-color: get-color('primary');
       border-color: get-color('primary');
       color: get-color('primary-contrast');
+      @include highlighted('primary-shade');
     }
     
     &.destructive .button-wrapper {
       background-color: get-color('danger');
       border-color: get-color('danger');
       color: get-color('danger-contrast');
+      @include highlighted('danger-shade');
     }
   }
 
@@ -53,12 +62,14 @@
       background-color: get-color('white');
       border-color: get-color('white');
       color: get-color('black');
+      @include highlighted('white-shade');
     }
 
     &.destructive .button-wrapper {
       background-color: get-color('light');
       border-color: get-color('light');
       color: get-color('danger');
+      @include highlighted('light-shade');
     }
   }
 
@@ -67,12 +78,14 @@
       background-color: transparent;
       border-color: get-color('medium');
       color: get-color('medium-contrast');
+      @include highlighted('medium-shade');
     }
     
     &.destructive .button-wrapper {
       background-color: transparent;
       border-color: get-color('medium');
       color: get-color('danger');
+      @include highlighted('medium-shade');
     }
   }
 
@@ -81,18 +94,21 @@
       background-color: transparent;
       border-color: transparent;
       color: get-color('primary-contrast');
+      @include highlighted('transparent');
     }
 
     &.destructive .button-wrapper {
       background-color: transparent;
       border-color: transparent;
       color: get-color('danger');
+      @include highlighted('transparent');
     }
   }
 
   &[isEnabled=false] .button-wrapper {
     background-color: get-color('light-tint');
     border-color: get-color('light-tint');
+    @include highlighted('light-tint');    
   }
 }
 
@@ -101,6 +117,7 @@
     background-color: get-color('light');
     border-color: get-color('light');
     color: get-color('light-contrast');
+    @include highlighted('light-shade');
   }
 }
 
@@ -114,6 +131,7 @@
     background-color: get-color('white');
     border-color: get-color('white');
     color: get-color('black');
+    @include highlighted('white-shade');
   }
 }
 
@@ -123,6 +141,7 @@
   .button-wrapper {
     border-color: get-color('white');
     color: get-color('white');
+    @include highlighted('transparent');
   }
 }
 
@@ -134,6 +153,7 @@
   .button-wrapper {
     border-color: get-color('black');
     color: get-color('black');
+    @include highlighted('transparent');
   }
 }
 
@@ -142,5 +162,6 @@
 .dark .kirby-button.attention-level4 {
   .button-wrapper {
     color: get-color('white');
+    @include highlighted('transparent');
   }
 }
