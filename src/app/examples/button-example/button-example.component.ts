@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 
 import { ThemeColor } from './../../../kirby/helpers/theme-color.type';
 import { Color, ColorHelper } from '@kirbydesign/designsystem/helpers/color-helper';
@@ -8,7 +8,7 @@ import { Color, ColorHelper } from '@kirbydesign/designsystem/helpers/color-help
   templateUrl: './button-example.component.html',
   styleUrls: ['./button-example.component.scss'],
 })
-export class ButtonExampleComponent {
+export class ButtonExampleComponent implements OnInit, OnDestroy {
   activeTab = 'default';
   @Input() themeColor: ThemeColor | '' = '';
   colors: Color[] = ColorHelper.getMainColors();
@@ -21,6 +21,19 @@ export class ButtonExampleComponent {
       };
     }),
   ];
+
+  disabled = true;
+  disabledInterval: any;
+
+  ngOnInit(): void {
+    this.disabledInterval = setInterval(() => {
+      this.disabled = !this.disabled;
+    }, 3000);
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.disabledInterval);
+  }
 
   onSegmentClick(segment) {
     this.activeTab = segment.id;

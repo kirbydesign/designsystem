@@ -8,7 +8,8 @@
 <kirby-button attentionLevel="2" isDestructive="true" text="Destructive Level 2"></kirby-button>
 <kirby-button attentionLevel="3" isDestructive="true" text="Destructive Level 3"></kirby-button>
 <kirby-button attentionLevel="4" isDestructive="true" text="Destructive Level 4"></kirby-button>
-<kirby-button text="Disabled Button" disabled></kirby-button>
+<kirby-button text="Permanently disabled button" (click)="onSelect($event)" disabled></kirby-button>
+<kirby-button text="Disabled Button" (click)="onSelect($event)" [disabled]="disabled"></kirby-button>
 
 <h2>Button with attention level</h2>
 <kirby-card [themeColor]="themeColor">

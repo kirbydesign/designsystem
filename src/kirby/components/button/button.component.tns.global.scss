@@ -105,7 +105,7 @@
     }
   }
 
-  &[isEnabled=false] .button-wrapper {
+  &.disabled .button-wrapper {
     background-color: get-color('light-tint');
     border-color: get-color('light-tint');
     @include highlighted('light-tint');    

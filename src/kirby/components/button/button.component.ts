@@ -30,12 +30,20 @@ export class ButtonComponent {
   destructive: boolean = false; // Default
 
   @HostBinding('class.disabled')
-  isDisabled: boolean = false; //Default
+  isDisabled: boolean = false; // Default
+
+  // Prevents event propagation in {N}
+  @HostBinding('attr.isUserInteractionEnabled')
+  isUserInteractionEnabled: boolean = true; // Default
 
   @Input()
-  set disabled(_: any) {
-    // this setter only gets invoked if disabled is specified on the component
-    this.isDisabled = true;
+  set disabled(value: boolean) {
+    // Using disabled without a value is still a valid way of disabling the button
+    // e.g. <kirby-button disabled></kirby-button>
+    // Hence value being undefined or empty string should be equivalent to true
+    const isDisabled = value !== false;
+    this.isDisabled = isDisabled;
+    this.isUserInteractionEnabled = !isDisabled;
   }
 
   @Input() set attentionLevel(level: '1' | '2' | '3' | '4') {

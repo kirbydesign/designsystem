@@ -7,8 +7,9 @@
           <kirby-button text="Small Button" size="sm"></kirby-button>
           <kirby-button text="Medium Button" size="md"></kirby-button>
           <kirby-button text="Large Button" size="lg"></kirby-button>
-          <kirby-button text="Disabled Button" isEnabled="false"></kirby-button>
           <kirby-button text="Kirby Block Button" expand="block"></kirby-button>
+          <kirby-button text="Permanently disabled button" (tap)="onSelect($event)" disabled></kirby-button>
+          <kirby-button text="Disabled Button" (tap)="onSelect($event)" [disabled]="disabled"></kirby-button>
         </WrapLayout>
       </ng-container>
       <ng-container *ngIf="activeTab === 'attention-level'">
