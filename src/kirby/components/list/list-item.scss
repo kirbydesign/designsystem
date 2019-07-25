@@ -1,0 +1,55 @@
+
+@import 'web-imports';
+
+@mixin list-item {
+    $divider-color: get-color('background-color');
+    $background-color-hover: get-color('background-color');
+
+    @each $color-name, $color-value in $main-colors {
+        &.#{$color-name} {
+            ion-item {
+                background-color: #{get-color($color-name)};
+                color: #{get-color($color-name+'-contrast')};
+            }
+        }
+    }
+
+    .selectable {
+        cursor: pointer;
+        &:hover {
+          background-color: $background-color-hover;
+        }
+    }
+
+    ion-item {
+        display: flex;
+        width: 100%;
+        padding: size('m') size('xs');
+        font-size: font-size('s');
+        --inner-border-width: 0;
+        --background: transparent;
+        --min-height: unset;
+
+        .row-content {
+            width: 100%;
+            display: grid;
+            padding: size('s') size('m');
+            grid-template-columns: 40% 20% 40%;
+        }
+
+        background-color: get-color('white');
+        &.has-divider {
+            border-bottom: 1px solid $divider-color;
+        }
+
+        &:focus {
+            $outline-width: 5px;
+            outline-color: var(--highlight-color-focused);
+            outline-style: auto;
+            outline-width: $outline-width;
+            margin-bottom: $outline-width;
+            background-color: $background-color-hover;
+            color: var(--kirby-black);
+        }
+    }
+}

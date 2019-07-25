@@ -1,1 +1,10 @@
-<ng-content></ng-content>
+<ion-item
+[class.has-divider]="showDivider"
+[class.selectable]="isSelectable"
+[attr.role]="isSelectable ? 'button' : null"
+tabindex="0"
+keyHandler>
+    <div class="row-content">
+        <ng-content></ng-content>
+    </div>
+</ion-item>

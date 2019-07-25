@@ -3,17 +3,11 @@ $left-column: 1;
 $middle-column: 2;
 $right-column: 3;
 
-:host {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 40% 20% 40%;
-    padding: size('s') size('m');
+@import '../list-item';
 
-    @each $color-name, $color-value in $main-colors {
-        &.bg-#{$color-name} {
-            background-color: #{get-color($color-name)};
-        }
-    }
+:host {
+
+    @include list-item;
     
     .title-container {
         

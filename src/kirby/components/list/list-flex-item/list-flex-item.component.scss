@@ -1,4 +1,9 @@
+@import 'web-imports';
+@import '../list-item';
+
 :host {
   display: flex;
   width: 100%;
+
+  @include list-item;
 }

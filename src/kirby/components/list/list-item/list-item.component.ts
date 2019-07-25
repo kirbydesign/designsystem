@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
+import { ListComponent } from '../list.component';
+
 @Component({
   selector: 'kirby-list-item',
   templateUrl: './list-item.component.html',
@@ -49,7 +51,10 @@ export class ListItemComponent implements OnInit {
     return this.item.subTitle ? this.item.subTitle : null;
   }
 
-  constructor() {}
+  public showDivider = this.listComponent.showDivider;
+  public isSelectable = this.listComponent.isSelectable;
+
+  constructor(private listComponent: ListComponent) {}
 
   ngOnInit() {}
 }
