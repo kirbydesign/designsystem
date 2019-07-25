@@ -1,7 +1,9 @@
 @import '../../scss/native-imports';
 
 @mixin highlighted($color) {
-  @if $color != 'transparent' {
+  @if $color == 'transparent' {
+    $color: unquote($color);
+  } @else {
     $color: get-color($color);
   }
   
