@@ -1,5 +1,5 @@
-<ActionBar [title]="title" class="primary">
-  <NavigationButton android.systemIcon="ic_menu_back" text="" *ngIf="showBackButton">
+<ActionBar [title]="title" class="toolbar {{themeColor}}">
+  <NavigationButton android.systemIcon="ic_menu_back" [visibility]="showBackButton ? 'visible' : 'collapsed'">
   </NavigationButton>
   <ActionItem *ngIf="endElement" ios.position="right">
     <GridLAyout rows="auto" columns="auto">
