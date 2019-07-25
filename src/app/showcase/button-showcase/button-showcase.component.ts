@@ -42,9 +42,10 @@ export class ButtonShowcaseComponent {
     },
     {
       name: 'disabled',
-      description: '(Optional) Disables the button.',
-      defaultValue: '',
-      inputValues: [''],
+      description:
+        '(Optional) Disables the button. It is possible to omit the inputs e.g. <kirby-button disabled></kirby-button>.',
+      defaultValue: 'false',
+      inputValues: ['boolean'],
     },
     {
       name: 'isOutlinedOnFocus',
