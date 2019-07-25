@@ -24,6 +24,15 @@ $shadow: get-elevation(2);
     &:not(:last-of-type).has-divider {
       border-bottom: 1px solid $divider-color;
     }
+
+    &:focus {
+      $outline-width: 5px;
+      outline-color: var(--highlight-color-focused);
+      outline-style: auto;
+      outline-width: $outline-width;
+      margin-bottom: $outline-width;
+      background-color: $background-color-hover;
+    }
   }
 
   &.has-sections {
