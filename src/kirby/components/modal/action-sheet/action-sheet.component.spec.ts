@@ -150,7 +150,7 @@ describe('ActionSheetComponent', () => {
       fixture.detectChanges();
       const cancelButton = fixture.debugElement.query(By.directive(ButtonComponent));
       expect(component.cancelButtonText).toEqual(expected);
-      expect(cancelButton.nativeElement.textContent).toEqual(expected);
+      expect(cancelButton.nativeElement.children[0].textContent.trim()).toEqual(expected);
     });
   });
 });

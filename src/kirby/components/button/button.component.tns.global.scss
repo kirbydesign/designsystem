@@ -80,14 +80,12 @@
       background-color: transparent;
       border-color: get-color('medium');
       color: get-color('medium-contrast');
-      @include highlighted('medium-shade');
     }
     
     &.destructive .button-wrapper {
       background-color: transparent;
       border-color: get-color('medium');
       color: get-color('danger');
-      @include highlighted('medium-shade');
     }
   }
 
