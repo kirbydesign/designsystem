@@ -1,6 +1,6 @@
 <ion-toolbar class="toolbar">
-  <div slot="start" *ngIf="startElement">
-    <ng-container *ngTemplateOutlet="startElement"></ng-container>
+  <div slot="start" *ngIf="showBackButton" (click)="onBackButtonSelected()">
+    <kirby-icon name="arrow-back" size="md"></kirby-icon>
   </div>
   
   <ion-title>{{ title }}</ion-title>

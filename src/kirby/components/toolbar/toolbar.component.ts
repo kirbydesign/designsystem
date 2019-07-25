@@ -1,4 +1,13 @@
-import { Component, OnInit, Input, ContentChild, TemplateRef, HostBinding } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  ContentChild,
+  TemplateRef,
+  HostBinding,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 
 import { ToolbarEndElementDirective } from './toolbar.directive';
 
@@ -12,8 +21,15 @@ export class ToolbarComponent implements OnInit {
   @Input() showBackButton: boolean;
   @Input() themeColor: string;
 
+  @Output() backButtonSelected: EventEmitter<null> = new EventEmitter<null>();
+
   @ContentChild(ToolbarEndElementDirective, { read: TemplateRef }) endElement;
   constructor() {}
 
   ngOnInit() {}
+
+  onBackButtonSelected(): void {
+    console.log('Hello!');
+    this.backButtonSelected.emit();
+  }
 }
