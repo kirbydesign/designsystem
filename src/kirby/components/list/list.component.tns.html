@@ -8,8 +8,7 @@
     <!-- ITEM -->
     <ng-template tkListItemTemplate let-item="item" let-index="index">
       <StackLayout [kirbyElevation]="2" [iosMasksToBounds]="true">
-        <StackLayout class="row"
-          [class.divider]="showDivider"
+        <StackLayout
           [class.rounded]="shape === 'rounded'"
           [class.first]="isFirstItem(item, index)"
           [class.last]="isLastItem(item, index)">

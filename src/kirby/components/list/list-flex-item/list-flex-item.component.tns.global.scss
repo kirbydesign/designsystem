@@ -1,0 +1,7 @@
+/* Add mobile styles for the component here.  */
+@import 'native-imports';
+@import '../list-item.tns';
+
+.kirby-list-flex-item {
+    @include list-item;
+}

@@ -1,0 +1,45 @@
+
+@import 'native-imports';
+@mixin list-item {
+
+  $divider-color: get-color('background-color');
+    
+  .row {
+      background-color: get-color('white');
+      margin: 0 $shadow-size;
+      margin-top: -$shadow-size;
+      padding: $row-padding-top + $shadow-size size('xs') size('s') size('xs');
+
+      &.divider {
+          border-color: $divider-color;
+          border-bottom-width: 1;
+      }
+    
+      &.first {
+        margin-top: $shadow-size;
+        padding-top: $row-padding-top;
+    
+        &.rounded {
+          border-top-left-radius: $border-radius;
+          border-top-right-radius: $border-radius;
+        }
+      }
+    
+      &.last {
+        margin-bottom: $shadow-size-bottom;
+    
+        &.rounded {
+          border-bottom-left-radius: $border-radius;
+          border-bottom-right-radius: $border-radius;
+        }
+      }
+  }
+
+  @each $color-name, $color-value in $main-colors {
+      &.#{$color-name} {
+          .row {
+              background-color: #{get-color($color-name)};
+          }
+      }    
+  }
+}

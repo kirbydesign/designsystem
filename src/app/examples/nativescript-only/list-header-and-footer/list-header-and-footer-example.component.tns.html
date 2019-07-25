@@ -3,9 +3,11 @@
         <Label text="This is the header" textWrap="true" class="header"></Label>
     </StackLayout>
 
-    <StackLayout *kirbyListItem="let item">
-        <Label [text]="item?.title"></Label>
-    </StackLayout>
+    <kirby-list-item *kirbyListItem="let item" [title]="item?.title" [amount]="item?.amount">
+        <StackLayout>
+            <Label [text]="item?.title"></Label>
+        </StackLayout>
+    </kirby-list-item>
 
     <StackLayout *kirbyListFooter>
         <Label text="This is the footer" textWrap="true" class="footer"></Label>

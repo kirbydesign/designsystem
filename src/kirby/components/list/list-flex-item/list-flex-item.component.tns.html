@@ -1,3 +1,5 @@
-<FlexboxLayout>
-    <ng-content></ng-content>
-</FlexboxLayout>
+<StackLayout class="row" [class.divider]="showDivider">
+    <FlexboxLayout>
+        <ng-content></ng-content>
+    </FlexboxLayout>
+</StackLayout>

@@ -14,8 +14,8 @@
       </ion-item-divider>
 
       <div class="list-items">
-        <ng-container *ngFor="let item of section.items; trackBy: trackByFn">
-          <div (click)="onItemSelect(item)">
+        <ng-container *ngFor="let item of section.items; let idx = index; trackBy: trackByFn">
+          <div (click)="onItemSelect(item)" [class.last-in-section]="idx === section.items.length - 1">
             <ng-container *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }"></ng-container>
             <ng-container *ngTemplateOutlet="listFlexItemTemplate; context: { $implicit: item }"></ng-container>
           </div>
