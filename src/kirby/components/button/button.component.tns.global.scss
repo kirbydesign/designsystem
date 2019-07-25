@@ -16,6 +16,13 @@
     line-height: line-height('xs');
   }
 
+  // &[isEnabled=true] .button-wrapper {
+  //   &.highlighted {
+  //     background-color: get-color('primary-shade');
+  //     border-color: get-color('primary-shade');
+  //   }
+  // }
+
   &.sm .button-wrapper {
     padding: size('xxs') size('s') size('xxs') size('s');
     font-size: font-size('xs');

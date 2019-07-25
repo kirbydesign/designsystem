@@ -1,5 +1,7 @@
 import { Component, Input, HostBinding } from '@angular/core';
 
+import { ButtonHelper } from './helpers/button.helper';
+
 @Component({
   selector: 'kirby-button',
   templateUrl: './button.component.html',
@@ -9,6 +11,7 @@ import { Component, Input, HostBinding } from '@angular/core';
   host: {
     class: 'kirby-button',
   },
+  providers: [ButtonHelper],
 })
 export class ButtonComponent {
   @HostBinding('class.attention-level1')
@@ -31,7 +34,7 @@ export class ButtonComponent {
 
   @Input()
   set disabled(_: any) {
-    // this only gets invoked if disabled is specified on the component
+    // this setter only gets invoked if disabled is specified on the component
     this.isDisabled = true;
   }
 
@@ -50,4 +53,16 @@ export class ButtonComponent {
   @Input() text?: string;
 
   @Input() isOutlinedOnFocus?: boolean = true;
+
+  isHighlighted: boolean = false;
+
+  constructor(private buttonHelper: ButtonHelper) {}
+
+  setHighlighted(value: boolean): void {
+    this.isHighlighted = value;
+  }
+
+  onPressAndHold(args: any) {
+    this.buttonHelper.onPressAndHold(args, this.setHighlighted.bind(this));
+  }
 }

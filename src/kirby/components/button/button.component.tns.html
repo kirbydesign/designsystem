@@ -1,6 +1,11 @@
-<GridLayout class="button-wrapper" [columns]="expand ? '*, auto, *': 'auto'" horizontalAlignment="center" verticalAlignment="center">
-    <GridLayout [col]="expand ? '1' : '0'">
+<GridLayout (touch)="onPressAndHold($event)" 
+        class="button-wrapper" 
+        [class.highlighted]="isHighlighted" 
+        [columns]="expand ? '*': 'auto'" 
+        horizontalAlignment="center" 
+        verticalAlignment="center">
+    <GridLayout>
         <!-- TODO: add additional items (e.g. icons) here -->
-        <Label [text]="text"></Label>
+        <Label horizontalAlignment="center" [text]="text"></Label>
     </GridLayout>
 </GridLayout>
