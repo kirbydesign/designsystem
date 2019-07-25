@@ -62,7 +62,18 @@ export class ButtonComponent {
     this.isHighlighted = value;
   }
 
-  onPressAndHold(args: any) {
+  // Web-only
+  onMouseDown(args: any) {
+    this.setHighlighted(true);
+  }
+
+  // Web-only
+  onMouseUp(args: any) {
+    this.setHighlighted(false);
+  }
+
+  // {N}-only
+  onTouch(args: any) {
     this.buttonHelper.onPressAndHold(args, this.setHighlighted.bind(this));
   }
 }

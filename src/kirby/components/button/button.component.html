@@ -1,1 +1,7 @@
-<button [class.no-outline-on-focus]="!isOutlinedOnFocus" [disabled]="isDisabled">{{text}}</button>
+<button [class.highlighted]="isHighlighted" 
+        [class.no-outline-on-focus]="!isOutlinedOnFocus" 
+        [disabled]="isDisabled"
+        (mousedown)="onMouseDown($event)" 
+        (mouseup)="onMouseUp($event)">
+    {{text}}
+</button>

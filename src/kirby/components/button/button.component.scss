@@ -1,5 +1,18 @@
 @import '../../scss/web-imports';
 
+@mixin highlighted($color) {
+  @if $color == 'transparent' {
+    $color: unquote($color);
+  } @else {
+    $color: #{get-color($color)};
+  }
+  
+  .highlighted {
+    background-color: $color;
+    border-color: $color;
+  }
+}
+
 :host {
   --kirby-button-background-color: transparent;
   --kirby-button-border-color: transparent;
@@ -55,11 +68,13 @@
     --kirby-button-background-color:#{get-color('primary')};
     --kirby-button-border-color: #{get-color('primary')};
     --kirby-button-color: #{get-color('primary-contrast')};
+    @include highlighted('primary-shade');
   
     &.destructive {
       --kirby-button-background-color:#{get-color('danger')};
       --kirby-button-border-color: #{get-color('danger')};
       --kirby-button-color: #{get-color('danger-contrast')};
+      @include highlighted('danger-shade');
     }
   }
 
@@ -67,29 +82,35 @@
     --kirby-button-background-color:#{get-color('white')};
     --kirby-button-border-color: #{get-color('white')};
     --kirby-button-color: #{get-color('white-contrast')};
+    @include highlighted('white-shade');
 
     &.destructive {
       --kirby-button-background-color:#{get-color('light')};
       --kirby-button-border-color: #{get-color('light')};
       --kirby-button-color: #{get-color('danger')};
+      @include highlighted('light-shade');
     }
   }
 
   &.attention-level3 {
     --kirby-button-border-color: #{get-color('medium')};
     --kirby-button-color: #{get-color('medium-contrast')};
+    @include highlighted('transparent');
 
     &.destructive {
       --kirby-button-border-color: #{get-color('medium')};
       --kirby-button-color: #{get-color('danger')};
+      @include highlighted('transparent');
     }
   }
 
   &.attention-level4 {
     --kirby-button-color: #{get-color('primary-contrast')};
+    @include highlighted('transparent');
 
     &.destructive {
       --kirby-button-color: #{get-color('danger')};
+      @include highlighted('transparent');
     }
   }
 
@@ -106,6 +127,7 @@
     background-color: get-color('light-tint');
     border-color: get-color('light-tint');
     pointer-events: none;
+    @include highlighted('light-tint');
   }
 
   :host-context(.default),
@@ -114,6 +136,7 @@
       --kirby-button-background-color: #{get-color('light')};
       --kirby-button-border-color: #{get-color('light')};
       --kirby-button-color: #{get-color('light-contrast')};
+      @include highlighted('light-shade');
     }
   }
 
@@ -121,9 +144,11 @@
     &.attention-level3 {
       --kirby-button-border-color: #{get-color('white')};
       --kirby-button-color: #{get-color('white')};
+      @include highlighted('transparent');
     }
     &.attention-level4 {
       --kirby-button-color: #{get-color('white')};
+      @include highlighted('transparent');
     }
   }
 }
