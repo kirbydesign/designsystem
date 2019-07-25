@@ -9,4 +9,8 @@ export class ToolbarExampleComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
+
+  backButtonSelected(): void {
+    alert('backbutton clicked!');
+  }
 }

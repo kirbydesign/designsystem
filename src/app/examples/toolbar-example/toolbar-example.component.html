@@ -1,45 +1,36 @@
 <!-- todo is only there to prevent self closing tag right now -->
 <kirby-toolbar title="Standard" >
-  <kirby-icon *kirbyToolbarStart size="md" name="arrow-back">todo</kirby-icon>
   <kirby-icon *kirbyToolbarEnd size="md" name="more">todo</kirby-icon>
 </kirby-toolbar>
 
 <kirby-toolbar title="Primary" themeColor="primary">
-  <kirby-icon *kirbyToolbarStart size="md" name="arrow-back">todo</kirby-icon>
   <kirby-icon *kirbyToolbarEnd size="md" name="more">todo</kirby-icon>
 </kirby-toolbar>
 
 <kirby-toolbar title="Secondary" themeColor="secondary">
-  <kirby-icon *kirbyToolbarStart size="md" name="arrow-back">todo</kirby-icon>
   <kirby-icon *kirbyToolbarEnd size="md" name="more">todo</kirby-icon>
 </kirby-toolbar>
 
 <kirby-toolbar title="Tertiary" themeColor="tertiary">
-  <kirby-icon *kirbyToolbarStart size="md" name="arrow-back">todo</kirby-icon>
-  <kirby-icon *kirbyToolbarEnd size="md" name="more">todo</kirby-icon>
+  <kirby-icon *kirbyToolbarEnd size="md" name="add">todo</kirby-icon>
 </kirby-toolbar>
 
-<kirby-toolbar title="Succes" themeColor="success">
-  <kirby-icon *kirbyToolbarStart size="md" name="arrow-back">todo</kirby-icon>
-  <kirby-icon *kirbyToolbarEnd size="md" name="more">todo</kirby-icon>
+<kirby-toolbar title="Succes" themeColor="success" showBackButton="true" (backButtonSelected)="backButtonSelected()">
+  <kirby-icon *kirbyToolbarEnd size="md" name="cog">todo</kirby-icon>
 </kirby-toolbar>
 
-<kirby-toolbar title="Warning" themeColor="warning">
-  <kirby-icon *kirbyToolbarStart size="md" name="arrow-back">todo</kirby-icon>
-  <kirby-icon *kirbyToolbarEnd size="md" name="more">todo</kirby-icon>
+<kirby-toolbar title="Warning" themeColor="warning" showBackButton="true" (backButtonSelected)="backButtonSelected()">
+  <kirby-icon *kirbyToolbarEnd size="md" name="unsubscribe">todo</kirby-icon>
 </kirby-toolbar>
 
-<kirby-toolbar title="Danger" themeColor="danger">
-  <kirby-icon *kirbyToolbarStart size="md" name="arrow-back">todo</kirby-icon>
-  <kirby-icon *kirbyToolbarEnd size="md" name="more">todo</kirby-icon>
+<kirby-toolbar title="Danger" themeColor="danger" showBackButton="true" (backButtonSelected)="backButtonSelected()">
+  <p *kirbyToolbarEnd>See more</p>
 </kirby-toolbar>
 
-<kirby-toolbar title="Dark" themeColor="dark">
-  <kirby-icon *kirbyToolbarStart size="md" name="arrow-back">todo</kirby-icon>
-  <kirby-icon *kirbyToolbarEnd size="md" name="more">todo</kirby-icon>
+<kirby-toolbar title="Dark" themeColor="dark" showBackButton="true" (backButtonSelected)="backButtonSelected()">
+  <button kirby-button size="sm" *kirbyToolbarEnd>Click me!</button>
 </kirby-toolbar>
 
-<kirby-toolbar title="Light" themeColor="light">
-  <kirby-icon *kirbyToolbarStart size="md" name="arrow-back">todo</kirby-icon>
-  <kirby-icon *kirbyToolbarEnd size="md" name="more">todo</kirby-icon>
+<kirby-toolbar title="Light" themeColor="light" showBackButton="true" (backButtonSelected)="backButtonSelected()">
+  <kirby-badge *kirbyToolbarEnd>123</kirby-badge>
 </kirby-toolbar>
