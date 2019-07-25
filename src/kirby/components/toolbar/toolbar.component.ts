@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ContentChild, TemplateRef, HostBinding } from '@angular/core';
 
-import { ToolbarStartElementDirective, ToolbarEndElementDirective } from './toolbar.directive';
+import { ToolbarEndElementDirective } from './toolbar.directive';
 
 @Component({
   selector: 'kirby-toolbar',
@@ -12,7 +12,6 @@ export class ToolbarComponent implements OnInit {
   @Input() showBackButton: boolean;
   @Input() themeColor: string;
 
-  @ContentChild(ToolbarStartElementDirective, { read: TemplateRef }) startElement;
   @ContentChild(ToolbarEndElementDirective, { read: TemplateRef }) endElement;
   constructor() {}
 
