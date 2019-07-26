@@ -1,5 +1,33 @@
 
 @import 'native-imports';
+
+@mixin rounded-corners ($host-class) {
+  .first {
+    .#{$host-class} .row {
+        margin-top: $shadow-size;
+        padding-top: $row-padding-top;
+    }
+    &.rounded {
+      .#{$host-class} .row {
+            border-top-left-radius: $border-radius;
+            border-top-right-radius: $border-radius;
+        }
+    }
+}
+
+.last {
+  .#{$host-class} .row {
+    margin-bottom: $shadow-size-bottom;
+    }
+    &.rounded {
+      .#{$host-class} .row {
+        border-bottom-left-radius: $border-radius;
+        border-bottom-right-radius: $border-radius;
+      }
+    }
+  }
+}
+
 @mixin list-item {
 
   $divider-color: get-color('background-color');
@@ -13,25 +41,6 @@
       &.divider {
           border-color: $divider-color;
           border-bottom-width: 1;
-      }
-    
-      &.first {
-        margin-top: $shadow-size;
-        padding-top: $row-padding-top;
-    
-        &.rounded {
-          border-top-left-radius: $border-radius;
-          border-top-right-radius: $border-radius;
-        }
-      }
-    
-      &.last {
-        margin-bottom: $shadow-size-bottom;
-    
-        &.rounded {
-          border-bottom-left-radius: $border-radius;
-          border-bottom-right-radius: $border-radius;
-        }
       }
   }
 

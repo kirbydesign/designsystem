@@ -7,6 +7,8 @@ $shadow-size: $elevation * 3/2;
 $shadow-size-bottom: $elevation * 2;
 $row-padding-top: size('s');
 
+@include rounded-corners("kirby-list-item");
+  
 .kirby-list-item {
 
     width: 100%;

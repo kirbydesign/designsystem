@@ -2,6 +2,8 @@
 @import 'native-imports';
 @import '../list-item.tns';
 
+@include rounded-corners("kirby-list-flex-item");
+
 .kirby-list-flex-item {
     @include list-item;
 }
