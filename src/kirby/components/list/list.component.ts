@@ -1,5 +1,3 @@
-import { createGuid } from './../../helpers/guid-helper';
-import { ListItem } from '@kirbydesign/designsystem/components/list/list-item/list-item.interface';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -12,6 +10,7 @@ import {
   TemplateRef,
 } from '@angular/core';
 
+import { createGuid } from './../../helpers/guid-helper';
 import {
   ListFlexItemDirective,
   ListFooterDirective,
@@ -46,7 +45,7 @@ export class ListComponent implements OnChanges {
   public get items(): ListItem[] {
     return this._items;
   }
-  @Input() items: ListItem[];
+  @Input()
   public set items(items: ListItem[]) {
     this._items = items.map((item) => {
       item._id = createGuid();

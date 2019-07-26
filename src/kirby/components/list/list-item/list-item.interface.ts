@@ -1,4 +1,4 @@
 export interface ListItem {
-  _id: string;
+  _id?: string;
   [key: string]: any;
 }
