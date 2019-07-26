@@ -29,13 +29,14 @@ $shadow: get-elevation(2);
     border-radius: $border-radius;
   }
 
-  ion-list:not(.has-header) ion-item:first-of-type,
+  ion-list:not(.has-header) .first-item ::ng-deep ion-item,
   ion-list-header {
     border-top-left-radius: $border-radius;
     border-top-right-radius: $border-radius;
   }
 
-  ion-list:not(.has-footer) ion-item:last-of-type,
+  ion-list:not(.has-footer) .last-item ::ng-deep ion-item,
+  ion-list:not(.has-footer) .last-item, 
   .footer {
     border-bottom-left-radius: $border-radius;
     border-bottom-right-radius: $border-radius;

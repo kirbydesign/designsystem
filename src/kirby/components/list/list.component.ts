@@ -85,6 +85,10 @@ export class ListComponent implements OnChanges {
   isLoadOnDemandEnabled: boolean;
   groupedItems: any[];
 
+  public get showNoMoreItemsItem() {
+    return !this.isLoadOnDemandEnabled && this.noMoreItemsText;
+  }
+
   private orderMap: WeakMap<any, { isFirst: boolean; isLast: boolean }>;
 
   constructor(private listHelper: ListHelper, private groupBy: GroupByPipe) {}
