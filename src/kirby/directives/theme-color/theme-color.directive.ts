@@ -5,7 +5,11 @@ import { ColorHelper } from '../../helpers/color-helper';
 
 @Directive({
   // tslint:disable-next-line:directive-selector
-  selector: `[themeColor]`,
+  selector: `kirby-card[themeColor],
+             kirby-badge[themeColor],
+             kirby-icon[themeColor],
+             kirby-list-item[themeColor],
+             kirby-list-flex-item[themeColor]`,
 })
 export class ThemeColorDirective {
   @HostBinding('class.default')
