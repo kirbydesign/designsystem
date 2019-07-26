@@ -32,12 +32,12 @@ $shadow: get-elevation(2);
       outline-width: $outline-width;
       margin-bottom: $outline-width;
       background-color: $background-color-hover;
+      &.selected ::ng-deep * {
+        font-weight: font-weight('bold');
+      }
     }
   }
 
-  .selected ::ng-deep * {
-    font-weight: font-weight('bold');
-  }
 
   &.has-sections {
     ion-list {

@@ -1,3 +1,5 @@
+import { createGuid } from './../../helpers/guid-helper';
+import { ListItem } from '@kirbydesign/designsystem/components/list/list-item/list-item.interface';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -39,7 +41,18 @@ export class ListComponent implements OnChanges {
   /**
    * Provide items for the list to render. Items must be provided in the order you expect them to be rendered.
    */
-  @Input() items: any[];
+
+  private _items: ListItem[];
+  public get items(): ListItem[] {
+    return this._items;
+  }
+  @Input() items: ListItem[];
+  public set items(items: ListItem[]) {
+    this._items = items.map((item) => {
+      item._id = createGuid();
+      return item;
+    });
+  }
 
   /**
    * Callback to determine name of section. Sections will be ordered alphabetically.
@@ -146,8 +159,14 @@ export class ListComponent implements OnChanges {
     this.items.forEach((item) => {
       item.selected = false;
     });
-    this.selectedItem.selected = true;
-    this.itemSelect.emit(this.selectedItem);
+
+    const orgItem = {
+      ...this.selectedItem,
+    };
+
+    delete orgItem._id;
+
+    this.itemSelect.emit(orgItem);
   }
 
   onLoadOnDemand(event?: LoadOnDemandEventData) {

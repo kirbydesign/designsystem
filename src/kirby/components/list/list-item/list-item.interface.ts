@@ -1,8 +1,4 @@
 export interface ListItem {
-  id: number;
-  title: string;
-  subTitle: string;
-  amount: string;
-  detail: number;
-  selected?: boolean;
+  _id: string;
+  [key: string]: any;
 }
