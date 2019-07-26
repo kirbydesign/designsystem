@@ -12,6 +12,29 @@ kirby-card {
   pointer-events: auto;
   box-shadow: get-elevation(8);
   min-height: 0;
+
+  kirby-card-header {
+    h2 {
+      font-weight: font-weight("bold");  
+    }
+  }
+
+  .action-sheet-items {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+      
+    button {
+      cursor: pointer;
+      flex: 0 0 auto;
+      border: none;
+      height: size("xxl");
+      border-top: 1px solid get-color('background-color');
+      background-color: transparent;
+      font-size: font-size('s');
+    }
+  }
 }
 
 .cancel-btn {

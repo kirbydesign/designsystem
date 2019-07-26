@@ -8,6 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class CardHeaderComponent implements OnInit {
   @Input() title: string;
   @Input() subtitle: string;
+  @Input() isTitleBold?: boolean;
 
   constructor() {}
 
