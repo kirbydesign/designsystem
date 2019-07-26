@@ -6,11 +6,18 @@
     border-radius: size("xs");
     background-color: get-color('danger');
     color: get-color('white');
-    padding-left: size("xxs");
-    padding-right: size("xxs");    
-    white-space: nowrap;
     height: size("s");
     min-width: size("s");
+
+    .badge-label {
+      // border used for alignment hack.
+      border-width: 1;
+      border-color: transparent;
+      margin-left: size("xxs");
+      margin-right: size("xxs"); 
+      white-space: nowrap;
+      height: 100%;
+    }
   
     @each $color-name, $color-value in $main-colors {
       &[themeColor='#{$color-name}'] {
@@ -26,13 +33,8 @@
     .kirby-icon Label {
       font-size: font-size('n');
       padding: 0;
-      margin-left: size("-xxs");  
-      margin-right: size("-xxs");  
+      height: 100%;
     }
   
-  }
-  
-  .badge-label {
-    height: 100%; // Needed for IOS
   }
 }
