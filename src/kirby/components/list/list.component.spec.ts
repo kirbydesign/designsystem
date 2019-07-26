@@ -130,14 +130,13 @@ describe('ListComponent', () => {
   describe('function: onItemSelect', () => {
     it('should emit the selected item and mark it as selected', () => {
       spyOn(component.itemSelect, 'emit');
-      const itemToBeSelected = { value: 'this is a dummy item', selected: false };
+      const itemToBeSelected = { value: 'this is a dummy item' };
       component.items = [itemToBeSelected];
 
       component.onItemSelect(itemToBeSelected);
 
       expect(component.itemSelect.emit).toHaveBeenCalledTimes(1);
       expect(component.itemSelect.emit).toHaveBeenCalledWith(itemToBeSelected);
-      expect(itemToBeSelected.selected).toBe(true);
     });
   });
 

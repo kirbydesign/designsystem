@@ -155,9 +155,6 @@ export class ListComponent implements OnChanges {
 
   onItemSelect(args: any) {
     this.selectedItem = this.listHelper.getSelectedItem(this.items, args);
-    this.items.forEach((item) => {
-      item.selected = false;
-    });
 
     const orgItem = {
       ...this.selectedItem,
