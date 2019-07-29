@@ -4,10 +4,10 @@ import {
   Input,
   ContentChild,
   TemplateRef,
-  HostBinding,
   Output,
   EventEmitter,
 } from '@angular/core';
+import { isAndroid } from 'tns-core-modules/platform';
 
 import { ToolbarEndElementDirective, ToolbarSecondaryElementDirective } from './toolbar.directive';
 
@@ -19,16 +19,23 @@ import { ToolbarEndElementDirective, ToolbarSecondaryElementDirective } from './
 export class ToolbarComponent implements OnInit {
   @Input() title: string;
   @Input() showBackButton: boolean;
+  @Input() themeColor: string;
 
   @Output() backButtonSelected: EventEmitter<null> = new EventEmitter<null>();
 
   @ContentChild(ToolbarEndElementDirective, { read: TemplateRef }) endElement;
   @ContentChild(ToolbarSecondaryElementDirective, { read: TemplateRef }) secondaryElement;
+
+  isAndroid(): boolean {
+    return isAndroid;
+  }
+
   constructor() {}
 
   ngOnInit() {}
 
   onBackButtonSelected(): void {
+    console.log('Hello!');
     this.backButtonSelected.emit();
   }
 }
