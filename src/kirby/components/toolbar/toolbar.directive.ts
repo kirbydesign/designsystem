@@ -4,3 +4,8 @@ import { Directive } from '@angular/core';
   selector: '[kirbyToolbarEnd]',
 })
 export class ToolbarEndElementDirective {}
+
+@Directive({
+  selector: '[kirbyToolbarSecondary]',
+})
+export class ToolbarSecondaryElementDirective {}
