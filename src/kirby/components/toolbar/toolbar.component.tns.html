@@ -1,21 +1,24 @@
-<ActionBar [title]="title" class="toolbar {{themeColor}}">
+<ActionBar class="toolbar {{themeColor}}">
+  <NavigationButton  icon="~/assets/images/arrow-back.png" [visibility]="showBackButton && isAndroid() ? 'visible' : 'collapsed'" (tap)="onBackButtonSelected()">
+  </NavigationButton>
+   <ActionItem *ngIf="showBackButton && !isAndroid()" ios.position="left" >
+    <StackLayout orientation="horizontal" class="toolbar-item-secondary">
+      <kirby-icon name="arrow-back" size="md"></kirby-icon>
+    </StackLayout>
+  </ActionItem>
   <StackLayout orientation="horizontal"
     ios:horizontalAlignment="center"
     android:horizontalAlignment="center">
-    <Label [text]="title"  class="toolbar-title"></Label>
+    <Label [text]="title"  class="toolbar-title kirby-text-normal"></Label>
   </StackLayout>
-  <NavigationButton android.systemIcon="ic_menu_back" [visibility]="showBackButton ? 'visible' : 'collapsed'" (tap)="onBackButtonSelected()">
-    <Label text="Hello" textWrap="true"></Label>
-  </NavigationButton>
+  
   <ActionItem *ngIf="secondaryElement" ios.position="right" >
-    <StackLayout orientation="horizontal" class="toolbar-item">
-      <Label text="" class="action-item-spacer-large"></Label>
+    <StackLayout orientation="horizontal" class="toolbar-item-secondary">
       <ng-container *ngTemplateOutlet="secondaryElement"></ng-container>
-      <Label text="" class="action-item-spacer-small"></Label>
     </StackLayout>
   </ActionItem>
   <ActionItem *ngIf="endElement" ios.position="right" >
-    <StackLayout orientation="horizontal" class="toolbar-item">
+    <StackLayout orientation="horizontal">
       <Label text="" class="action-item-spacer-small"></Label>
       <ng-container *ngTemplateOutlet="endElement"></ng-container>
       <Label text="" class="action-item-spacer-large"></Label>
