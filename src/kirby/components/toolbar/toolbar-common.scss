@@ -11,12 +11,6 @@
       color: #{get-color($color-name+'-contrast')};
     }
   }
-
-  .toolbar-title {
-    font-size: font-size('n');
-    font-weight: font-weight('normal');
-    line-height: line-height('s');
-  }
   
 }
 
