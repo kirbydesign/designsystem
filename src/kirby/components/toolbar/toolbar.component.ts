@@ -9,7 +9,7 @@ import {
   EventEmitter,
 } from '@angular/core';
 
-import { ToolbarEndElementDirective } from './toolbar.directive';
+import { ToolbarEndElementDirective, ToolbarSecondaryElementDirective } from './toolbar.directive';
 
 @Component({
   selector: 'kirby-toolbar',
@@ -24,6 +24,7 @@ export class ToolbarComponent implements OnInit {
   @Output() backButtonSelected: EventEmitter<null> = new EventEmitter<null>();
 
   @ContentChild(ToolbarEndElementDirective, { read: TemplateRef }) endElement;
+  @ContentChild(ToolbarSecondaryElementDirective, { read: TemplateRef }) secondaryElement;
   constructor() {}
 
   ngOnInit() {}
