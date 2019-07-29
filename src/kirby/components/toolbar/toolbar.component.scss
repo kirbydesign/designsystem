@@ -13,3 +13,21 @@
     }
   }
 }
+
+.toolbar-item {
+
+  &-left {
+    margin-left: size('s');
+    margin-right: size('s');
+  }
+
+  &-secondary {
+    margin-left: size('s');
+    margin-right: size('xxs');
+  }
+
+  &-end {
+    margin-left: size('xxs');
+    margin-right: size('s');
+  }
+}
