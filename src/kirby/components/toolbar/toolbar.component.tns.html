@@ -1,9 +1,24 @@
 <ActionBar [title]="title" class="toolbar {{themeColor}}">
+  <StackLayout orientation="horizontal"
+    ios:horizontalAlignment="center"
+    android:horizontalAlignment="center">
+    <Label [text]="title"  class="toolbar-title"></Label>
+  </StackLayout>
   <NavigationButton android.systemIcon="ic_menu_back" [visibility]="showBackButton ? 'visible' : 'collapsed'" (tap)="onBackButtonSelected()">
+    <Label text="Hello" textWrap="true"></Label>
   </NavigationButton>
-  <ActionItem *ngIf="endElement" ios.position="right">
-    <GridLAyout rows="auto" columns="auto">
+  <ActionItem *ngIf="secondaryElement" ios.position="right" >
+    <StackLayout orientation="horizontal" class="toolbar-item">
+      <Label text="" class="action-item-spacer-large"></Label>
+      <ng-container *ngTemplateOutlet="secondaryElement"></ng-container>
+      <Label text="" class="action-item-spacer-small"></Label>
+    </StackLayout>
+  </ActionItem>
+  <ActionItem *ngIf="endElement" ios.position="right" >
+    <StackLayout orientation="horizontal" class="toolbar-item">
+      <Label text="" class="action-item-spacer-small"></Label>
       <ng-container *ngTemplateOutlet="endElement"></ng-container>
-    </GridLAyout>
+      <Label text="" class="action-item-spacer-large"></Label>
+    </StackLayout>
   </ActionItem>
 </ActionBar>
