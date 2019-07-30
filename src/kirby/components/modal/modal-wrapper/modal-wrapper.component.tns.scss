@@ -10,6 +10,10 @@
     border-top-right-radius: $border-radius;
     background-color: get-color('background-color');
     width: 100%;
+
+    .close-icon {
+      margin-top: size('xs'); 
+    }
     
     .title-bar {  
       Label {

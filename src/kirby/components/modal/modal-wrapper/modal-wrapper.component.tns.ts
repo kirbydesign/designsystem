@@ -85,8 +85,23 @@ export class ModalWrapperComponent extends ContentView implements OnInit {
             duration: 300,
           });
         });
+    } else if (this.view.ios) {
+      // by default iOS slides up, we don't want this if the flavor is 'modal'
+      if (this.config.flavor === 'modal') {
+        // this.view.opacity = 0;
+        // setTimeout(() => {
+        //   this.view
+        //     .animate({
+        //       opacity: 1,
+        //       duration: 300,
+        //     })
+        //     .then(() => {
+        //       console.log(`animation applied...`);
+        //     });
+        // }, 1000);
+      }
     }
-    // TODO: by default iOS slides up, however it slides together with the dimmed background, hence needs fixing
+    // TODO: FIX backdrop sliding together with the dimmed background on iOS
   }
 
   getStatusBarHeight() {
