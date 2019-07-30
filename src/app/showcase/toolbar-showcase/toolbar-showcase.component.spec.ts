@@ -4,6 +4,8 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { ToolbarShowcaseComponent } from './toolbar-showcase.component';
+import { ExamplesModule } from '~/app/examples/examples.module';
+import { CodeViewerComponent } from '~/app/shared/code-viewer/code-viewer.component';
 
 describe('ToolbarShowcaseComponent', () => {
   let component: ToolbarShowcaseComponent;
@@ -11,7 +13,8 @@ describe('ToolbarShowcaseComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ToolbarShowcaseComponent],
+      imports: [ExamplesModule],
+      declarations: [ToolbarShowcaseComponent, CodeViewerComponent],
     }).compileComponents();
   }));
 
