@@ -11,9 +11,8 @@ describe('ToolbarShowcaseComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ToolbarShowcaseComponent ]
-    })
-    .compileComponents();
+      declarations: [ToolbarShowcaseComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

@@ -1,9 +1,8 @@
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
 
 import { ToolbarExampleComponent } from './toolbar-example.component';
+import { KirbyModule } from '@kirbydesign/designsystem';
 
 describe('ToolbarExampleComponent', () => {
   let component: ToolbarExampleComponent;
@@ -11,9 +10,9 @@ describe('ToolbarExampleComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ToolbarExampleComponent ]
-    })
-    .compileComponents();
+      imports: [KirbyModule],
+      declarations: [ToolbarExampleComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
