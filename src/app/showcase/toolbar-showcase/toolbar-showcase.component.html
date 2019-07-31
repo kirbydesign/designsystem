@@ -1,4 +1,33 @@
 <div class="example">
   <kirby-toolbar-example></kirby-toolbar-example>
   <kirby-code-viewer [html]="exampleHtml"></kirby-code-viewer>
+  <h4>Properties:</h4>
+  <table class="cookbook-properties">
+    <thead>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Input values</th>
+      <th>Default</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>title</code></td>
+        <td>Sets the title in the toolbar</td>
+        <td><code>string</code></td>
+        <td>''</td>
+      </tr>
+      <tr>
+        <td><code>themeColor</code></td>
+        <td>Specifies the background color of the toolbar</td>
+        <td><code>"primary" || "secondary" || "tertiary" || "warning" || "success" || "danger"</code></td>
+        <td>"background-color"</td>
+      </tr>
+      <tr>
+        <td><code>hideBackButton</code></td>
+        <td>Specifies if the backbutton should be shown</td>
+        <td><code>boolean</code></td>
+        <td>false</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
