@@ -63,29 +63,35 @@ export class ModalWrapperComponent extends ContentView implements OnInit {
 
   private animateModal(): void {
     if (this.view.android) {
-      this.view
-        .animate({
-          translate: { x: 0, y: Number(this.view.height) },
-          duration: 0,
-        })
-        .then(() => {
-          this.view.animate({
-            translate: { x: 0, y: 0 },
-            duration: 300,
+      if (this.config.flavor === 'drawer') {
+        this.view
+          .animate({
+            translate: { x: 0, y: Number(this.view.height) },
+            duration: 0,
+          })
+          .then(() => {
+            this.view.animate({
+              translate: { x: 0, y: 0 },
+              duration: 300,
+            });
           });
-        });
+      }
     } else if (this.view.ios) {
       const viewController = this.view.viewController;
       // modalTransitionStyle=2 is a fade-in animation
       viewController.modalTransitionStyle = 2;
       if (this.config.flavor === 'drawer') {
+        // TODO: the animation starting point should be dependent on the context - bottom of the opening element
+        const animationStartingY = screen.mainScreen.heightDIPs;
         const modalContainer = <View>this.view.getViewById('modal');
         // setTimeout prevents an error caused by {N} on iOS when calling animate
+        // https://github.com/NativeScript/nativescript-angular/issues/431
+
         setTimeout(() => {
           modalContainer.opacity = 0;
           modalContainer
             .animate({
-              translate: { x: 0, y: 600 },
+              translate: { x: 0, y: animationStartingY },
               duration: 0,
             })
             .then(() => {
@@ -93,7 +99,7 @@ export class ModalWrapperComponent extends ContentView implements OnInit {
               modalContainer.animate({
                 translate: { x: 0, y: 0 },
                 curve: AnimationCurve.easeOut,
-                duration: 200,
+                duration: 300,
               });
             });
         });
