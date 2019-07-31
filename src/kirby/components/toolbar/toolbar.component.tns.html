@@ -1,7 +1,7 @@
 <ActionBar class="toolbar {{themeColor}}">
-  <NavigationButton  icon="~/assets/images/arrow-back.png" [visibility]="hideBackButton && isAndroid() ? 'visible' : 'collapsed'" (tap)="onBackButtonSelected()">
+  <NavigationButton  icon="~/assets/images/arrow-back.png" [visibility]="!hideBackButton && isAndroid() ? 'visible' : 'collapsed'" (tap)="onBackButtonSelected()">
   </NavigationButton>
-   <ActionItem *ngIf="hideBackButton && !isAndroid()" ios.position="left" >
+   <ActionItem *ngIf="!hideBackButton && !isAndroid()" ios.position="left" (tap)="onBackButtonSelected()">
     <StackLayout orientation="horizontal" class="toolbar-item-secondary">
       <kirby-icon name="arrow-back" size="md"></kirby-icon>
     </StackLayout>

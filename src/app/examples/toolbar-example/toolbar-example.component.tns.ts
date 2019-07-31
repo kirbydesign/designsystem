@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { RouterExtensions } from 'nativescript-angular';
 
 import { Color, ColorHelper } from '@kirbydesign/designsystem/helpers/color-helper';
 
@@ -11,11 +12,13 @@ export class ToolbarExampleComponent {
   color: Color;
   colors: Color[] = ColorHelper.getMainColors();
 
+  constructor(private router: RouterExtensions) {}
+
   changeColor(color: Color) {
     this.color = color;
   }
 
   backButtonSelected(): void {
-    alert('backbutton clicked!');
+    this.router.backToPreviousPage();
   }
 }
