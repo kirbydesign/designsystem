@@ -7,9 +7,8 @@ import * as ionic from '@ionic/angular';
 import { ToolbarComponent } from './toolbar.component';
 
 import { IconComponent } from '../icon/icon.component';
-import { IonTitle } from '@ionic/angular';
 
-fdescribe('ToolbarComponent', () => {
+describe('ToolbarComponent', () => {
   const title = 'title';
   const showBackButton = true;
 
