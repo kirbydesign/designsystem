@@ -6,7 +6,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./toolbar-showcase.component.scss'],
 })
 export class ToolbarShowcaseComponent implements OnInit {
-  exampleHtml: string = require('../../examples/toolbar-example/toolbar-example.component.html');
+  exampleHtml: string = `
+      <!-- title -->
+      <kirby-toolbar title="TITLE"></kirby-toolbar>
+      <!-- themeColor -->
+      <kirby-toolbar themeColor="primary"></kirby-toolbar>
+      <!-- Size -->
+      <kirby-toolbar hideBackButton="false"></kirby-toolbar>
+      <!-- Secondary and end elements -->
+      <kirby-toolbar>
+        <kirby-icon *kirbyToolbarSecondary size="md"></kirby-icon>
+        <kirby-icon *kirbyToolbarEnd size="md" name="more"></kirby-icon>
+      </kirby-toolbar>
+    `;
   constructor() {}
 
   ngOnInit() {}
