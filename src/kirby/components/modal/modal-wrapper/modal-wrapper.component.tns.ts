@@ -72,7 +72,7 @@ export class ModalWrapperComponent extends ContentView implements OnInit {
           .then(() => {
             this.view.animate({
               translate: { x: 0, y: 0 },
-              duration: 300,
+              duration: 200,
             });
           });
       }
@@ -99,7 +99,7 @@ export class ModalWrapperComponent extends ContentView implements OnInit {
               modalContainer.animate({
                 translate: { x: 0, y: 0 },
                 curve: AnimationCurve.easeOut,
-                duration: 300,
+                duration: 200,
               });
             });
         });
