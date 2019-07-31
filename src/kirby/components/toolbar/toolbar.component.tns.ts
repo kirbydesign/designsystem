@@ -35,7 +35,6 @@ export class ToolbarComponent implements OnInit {
   ngOnInit() {}
 
   onBackButtonSelected(): void {
-    console.log('Hello!');
     this.backButtonSelected.emit();
   }
 }
