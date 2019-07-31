@@ -20,7 +20,7 @@ export class ToolbarComponent implements OnInit {
   @Input() title: string;
   @Input() hideBackButton: boolean;
 
-  @Output() backButtonSelected: EventEmitter<null> = new EventEmitter<null>();
+  @Output() back: EventEmitter<null> = new EventEmitter<null>();
 
   @ContentChild(ToolbarEndElementDirective, { read: TemplateRef }) endElement;
   @ContentChild(ToolbarSecondaryElementDirective, { read: TemplateRef }) secondaryElement;
@@ -29,6 +29,6 @@ export class ToolbarComponent implements OnInit {
   ngOnInit() {}
 
   onBackButtonSelected(): void {
-    this.backButtonSelected.emit();
+    this.back.emit();
   }
 }

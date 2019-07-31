@@ -31,11 +31,11 @@ fdescribe('ToolbarComponent', () => {
 
   describe('event: back', () => {
     it('should be called once', () => {
-      spyOn(spectator.component.backButtonSelected, 'emit');
+      spyOn(spectator.component.back, 'emit');
 
       spectator.component.onBackButtonSelected();
 
-      expect(spectator.component.backButtonSelected.emit).toHaveBeenCalledTimes(1);
+      expect(spectator.component.back.emit).toHaveBeenCalledTimes(1);
     });
   });
 
