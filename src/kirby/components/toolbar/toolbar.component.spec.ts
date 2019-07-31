@@ -1,5 +1,3 @@
-/* tslint:disable:no-unused-variable */
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Spectator, createTestComponentFactory } from '@netbasal/spectator';
 import { MockComponent } from 'ng-mocks';
 import * as ionic from '@ionic/angular';
@@ -8,9 +6,9 @@ import { ToolbarComponent } from './toolbar.component';
 
 import { IconComponent } from '../icon/icon.component';
 
-describe('ToolbarComponent', () => {
+fdescribe('ToolbarComponent', () => {
   const title = 'title';
-  const showBackButton = true;
+  const hideBackButton = false;
 
   let spectator: Spectator<ToolbarComponent>;
 
@@ -24,7 +22,7 @@ describe('ToolbarComponent', () => {
   });
 
   beforeEach(() => {
-    spectator = createHost({ title, showBackButton });
+    spectator = createHost({ title, hideBackButton });
   });
 
   it('should create', () => {
@@ -50,20 +48,20 @@ describe('ToolbarComponent', () => {
       expect(spectator.query('ion-title').textContent).toContain(titleChange);
     });
 
-    it('should trigger rendering of the back button', () => {
-      const show = true;
-
-      spectator.setInput('showBackButton', show);
-
-      expect(spectator.query('.toolbar-item-left')).toBeTruthy();
-    });
-
     it('should remove the back button from the DOM', () => {
-      const show = false;
+      const hide = true;
 
-      spectator.setInput('showBackButton', show);
+      spectator.setInput('hideBackButton', hide);
 
       expect(spectator.query('.toolbar-item-left')).not.toBeTruthy();
+    });
+
+    it('should render the back button', () => {
+      const hide = false;
+
+      spectator.setInput('hideBackButton', hide);
+
+      expect(spectator.query('.toolbar-item-left')).toBeTruthy();
     });
   });
 });

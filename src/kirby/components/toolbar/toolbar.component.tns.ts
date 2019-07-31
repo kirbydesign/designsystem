@@ -18,7 +18,7 @@ import { ToolbarEndElementDirective, ToolbarSecondaryElementDirective } from './
 })
 export class ToolbarComponent implements OnInit {
   @Input() title: string;
-  @Input() showBackButton: boolean;
+  @Input() hideBackButton: boolean;
   @Input() themeColor: string;
 
   @Output() backButtonSelected: EventEmitter<null> = new EventEmitter<null>();
