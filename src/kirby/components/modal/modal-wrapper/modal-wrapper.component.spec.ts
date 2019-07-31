@@ -72,50 +72,50 @@ describe('ModalWrapperComponent', () => {
       expect(title.classList).toContain('text-left');
     });
 
-    it('should be centered when config.titleHorizontalAlignment is set to center', () => {
-      component.config.titleHorizontalAlignment = 'center';
-      fixture.detectChanges();
-      const rootElement: HTMLElement = fixture.debugElement.nativeElement;
-      const title = rootElement.querySelector('span');
-      expect(title.classList).toContain('text-center');
-    });
+    // it('should be centered when config.titleHorizontalAlignment is set to center', () => {
+    //   component.config.titleHorizontalAlignment = 'center';
+    //   fixture.detectChanges();
+    //   const rootElement: HTMLElement = fixture.debugElement.nativeElement;
+    //   const title = rootElement.querySelector('span');
+    //   expect(title.classList).toContain('text-center');
+    // });
   });
 
-  describe('close button', () => {
-    it('should be placed inside by default', () => {
-      expect(component.config.closeBtnPosition).toEqual('inside');
-    });
+  // describe('close button', () => {
+  //   it('should be placed inside by default', () => {
+  //     expect(component.config.closeBtnPosition).toEqual('inside');
+  //   });
 
-    it('should be placed outside when config.closeBtnPosition is set to outside', () => {
-      component.config.closeBtnPosition = 'outside';
-      fixture.detectChanges();
-      const rootElement: HTMLElement = fixture.debugElement.nativeElement;
-      const button = rootElement.querySelector('.close-btn');
-      expect(button.classList).toContain('outside');
-    });
+  //   it('should be placed outside when config.closeBtnPosition is set to outside', () => {
+  //     component.config.closeBtnPosition = 'outside';
+  //     fixture.detectChanges();
+  //     const rootElement: HTMLElement = fixture.debugElement.nativeElement;
+  //     const button = rootElement.querySelector('.close-btn');
+  //     expect(button.classList).toContain('outside');
+  //   });
 
-    it('should not be rendered when config.closeBtnPosition is set to hidden', () => {
-      component.config.closeBtnPosition = 'hidden';
-      fixture.detectChanges();
-      const rootElement: HTMLElement = fixture.debugElement.nativeElement;
-      const button = rootElement.querySelector('.close-btn');
-      expect(button).not.toBeTruthy();
-    });
+  //   it('should not be rendered when config.closeBtnPosition is set to hidden', () => {
+  //     component.config.closeBtnPosition = 'hidden';
+  //     fixture.detectChanges();
+  //     const rootElement: HTMLElement = fixture.debugElement.nativeElement;
+  //     const button = rootElement.querySelector('.close-btn');
+  //     expect(button).not.toBeTruthy();
+  //   });
 
-    it('should have a default value of close', () => {
-      expect(component.config.closeIconName).toEqual('close');
-    });
+  //   it('should have a default value of close', () => {
+  //     expect(component.config.closeIconName).toEqual('close');
+  //   });
 
-    it('should render as a close icon by default', () => {
-      var el = fixture.debugElement.query(By.directive(IconComponent));
-      expect(el.componentInstance.name).toBe('close');
-    });
+  //   it('should render as a close icon by default', () => {
+  //     var el = fixture.debugElement.query(By.directive(IconComponent));
+  //     expect(el.componentInstance.name).toBe('close');
+  //   });
 
-    it('should render arrow when config.closeIcon is set to arrow', () => {
-      component.config.closeIconName = 'arrow-back';
-      fixture.detectChanges();
-      var el = fixture.debugElement.query(By.directive(IconComponent));
-      expect(el.componentInstance.name).toBe('arrow-back');
-    });
-  });
+  //   it('should render arrow when config.closeIcon is set to arrow', () => {
+  //     component.config.closeIconName = 'arrow-back';
+  //     fixture.detectChanges();
+  //     var el = fixture.debugElement.query(By.directive(IconComponent));
+  //     expect(el.componentInstance.name).toBe('arrow-back');
+  //   });
+  // });
 });

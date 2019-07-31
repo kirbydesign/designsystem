@@ -2,6 +2,7 @@ import { Component, Injector, OnInit } from '@angular/core';
 import { ModalDialogParams } from 'nativescript-angular';
 import { ContentView, ShownModallyData, View } from 'tns-core-modules/ui/content-view';
 import { screen } from 'tns-core-modules/platform';
+import { AnimationCurve } from 'tns-core-modules/ui/enums';
 import * as application from 'tns-core-modules/application';
 declare const android;
 
@@ -60,18 +61,6 @@ export class ModalWrapperComponent extends ContentView implements OnInit {
     this.modalController.hideTopmost();
   }
 
-  // // TODO: fix animations
-  // private animateBackgroundColor(stackLayout: StackLayout): void {
-  //   const shadowColor = ColorHelper.getThemeColor('kirby-grey-7');
-  //   stackLayout.backgroundColor = new Color(
-  //     ColorHelper.getAlphaIn255Range(this.config.dim),
-  //     shadowColor.r,
-  //     shadowColor.g,
-  //     shadowColor.b
-  //   );
-  //   stackLayout.color = new Color(ColorHelper.getThemeColor('kirby-brand-5').hex);
-  // }
-
   private animateModal(): void {
     if (this.view.android) {
       this.view
@@ -86,22 +75,30 @@ export class ModalWrapperComponent extends ContentView implements OnInit {
           });
         });
     } else if (this.view.ios) {
-      // by default iOS slides up, we don't want this if the flavor is 'modal'
-      if (this.config.flavor === 'modal') {
-        // this.view.opacity = 0;
-        // setTimeout(() => {
-        //   this.view
-        //     .animate({
-        //       opacity: 1,
-        //       duration: 300,
-        //     })
-        //     .then(() => {
-        //       console.log(`animation applied...`);
-        //     });
-        // }, 1000);
+      const viewController = this.view.viewController;
+      // modalTransitionStyle=2 is a fade-in animation
+      viewController.modalTransitionStyle = 2;
+      if (this.config.flavor === 'drawer') {
+        const modalContainer = <View>this.view.getViewById('modal');
+        // setTimeout prevents an error caused by {N} on iOS when calling animate
+        setTimeout(() => {
+          modalContainer.opacity = 0;
+          modalContainer
+            .animate({
+              translate: { x: 0, y: 600 },
+              duration: 0,
+            })
+            .then(() => {
+              modalContainer.opacity = 1;
+              modalContainer.animate({
+                translate: { x: 0, y: 0 },
+                curve: AnimationCurve.easeOut,
+                duration: 200,
+              });
+            });
+        });
       }
     }
-    // TODO: FIX backdrop sliding together with the dimmed background on iOS
   }
 
   getStatusBarHeight() {

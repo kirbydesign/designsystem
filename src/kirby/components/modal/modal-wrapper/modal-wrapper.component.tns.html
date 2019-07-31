@@ -1,5 +1,5 @@
 <ModalStack class="modal-wrapper" android:style="padding-top: {{outerPaddingTop}};" dismissEnabled="true" (showingModally)="onShowingModally($event)">
-    <StackLayout class="modal" android:style="margin-bottom: {{innerMarginBottom}};" orientation="vertical" verticalAlignment="bottom">
+    <StackLayout id="modal" class="modal" android:style="margin-bottom: {{innerMarginBottom}};" orientation="vertical" verticalAlignment="bottom">
         <StackLayout *ngIf="config.flavor === 'drawer'">
             <ng-container *ngTemplateOutlet="drawer"></ng-container>
         </StackLayout>
