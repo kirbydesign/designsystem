@@ -20,7 +20,6 @@ export class ToastHelper {
   }
 
   public async showToast(config: ToastConfig): Promise<any> {
-    console.log('WHAT');
     return new Promise((resolve) => {
       const options: FeedbackShowOptions = {
         message: config.message,
