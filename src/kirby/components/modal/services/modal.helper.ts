@@ -43,7 +43,7 @@ export class ModalHelper {
     wrapperAnimation.addElement(wrapperElem);
 
     // Define animation transition values
-    let transformYFromTo = [`${baseEl.clientHeight}px`, `60px`];
+    let transformYFromTo = [`${baseEl.clientHeight}px`, `40px`];
     let fadeBackdropFromTo = [0.01, 0.3];
     let fadeWrapperFromTo = [0.01, 1];
     if (!isAnimEnter) {

@@ -1,4 +1,4 @@
-export class ModalOptionalAction {
+export class DrawerSupplementaryAction {
   iconName: string;
   action: Function;
 }

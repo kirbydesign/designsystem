@@ -23,6 +23,10 @@ export class FirstEmbeddedModalExampleComponent {
     const config: ModalConfig = {
       title: 'Second Embedded Modal',
       flavor: 'drawer',
+      drawerSupplementaryAction: {
+        iconName: 'qr',
+        action: this.onSupplementaryActionSelect,
+      },
       component: SecondEmbeddedModalExampleComponent,
     };
 
@@ -33,5 +37,9 @@ export class FirstEmbeddedModalExampleComponent {
   onHideFirst() {
     let someTestData: number = Math.PI;
     this.modalController.hideTopmost(someTestData);
+  }
+
+  onSupplementaryActionSelect(args: any) {
+    console.log('Supplementary action selected');
   }
 }

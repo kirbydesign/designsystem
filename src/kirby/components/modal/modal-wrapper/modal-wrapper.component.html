@@ -11,6 +11,9 @@
         <div *ngIf="config.flavor === 'modal'">
             <ng-container *ngTemplateOutlet="closeButton; context: { icon: 'close' }"></ng-container>
         </div>
+        <div *ngIf="config.flavor === 'drawer' && config.drawerSupplementaryAction">
+            <ng-container *ngTemplateOutlet="supplementaryButton; context: { btn: config.drawerSupplementaryAction }"></ng-container>
+        </div>
     </div>    
     <div class="modal-content">    
         <ng-container *ngComponentOutlet="config.component; injector: componentPropsInjector"></ng-container>
@@ -19,11 +22,20 @@
 
 <ng-template #closeButton let-icon="icon">
     <kirby-floating-action-button role="button"
-        class="close-btn"
         (click)="onModalDismiss($event)" 
         (keydown)="onModalDismiss($event)" 
         [isFloating]="false"
         tabindex="0">
         <kirby-icon [name]="icon"></kirby-icon>
+    </kirby-floating-action-button>
+</ng-template>
+
+<ng-template #supplementaryButton let-btn="btn">
+    <kirby-floating-action-button role="button"
+        (click)="btn.action($event)" 
+        (keydown)="btn.action($event)" 
+        [isFloating]="false"
+        tabindex="0">
+        <kirby-icon [name]="btn.iconName"></kirby-icon>
     </kirby-floating-action-button>
 </ng-template>
