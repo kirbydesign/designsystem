@@ -4,12 +4,12 @@
 </kirby-toolbar>
 
 <p>Change color: </p>
-    <div class="colors">
-        <button class="color-button" (click)="changeColor(color)" *ngFor="let color of colors">
-            <span class="color" [style.backgroundColor]="color.value.hex"></span>
-            <span class="color-button__txt">{{color.name}}</span>
-        </button>
-        <button class="color-button" (click)="changeColor(null)" >
-            <span class="color-button__txt">Standard</span>
-        </button>
-  </div>
+<div class="colors">
+    <button class="color-button" (click)="changeColor(color)" *ngFor="let color of colors">
+        <span class="color" [style.backgroundColor]="color.value.hex"></span>
+        <span class="color-button__txt">{{color.name}}</span>
+    </button>
+    <button class="color-button" (click)="changeColor(null)" >
+        <span class="color-button__txt">Standard</span>
+    </button>
+</div>
