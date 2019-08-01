@@ -27,7 +27,7 @@ export class ModalWrapperComponent extends ContentView implements OnInit {
     injector: Injector
   ) {
     super();
-    this.config = ModalConfigHelper.processOptionalValues(this.params.context);
+    this.config = this.params.context;
     this.componentPropsInjector = Injector.create({
       providers: [{ provide: COMPONENT_PROPS, useValue: this.params.context.componentProps }],
       parent: injector,
