@@ -22,6 +22,7 @@
 
 <ng-template #closeButton let-icon="icon">
     <kirby-floating-action-button role="button"
+        class="close-button"
         (click)="onModalDismiss($event)" 
         (keydown)="onModalDismiss($event)" 
         [isFloating]="false"
@@ -32,6 +33,7 @@
 
 <ng-template #supplementaryButton let-btn="btn">
     <kirby-floating-action-button role="button"
+        class="supplementary-button"
         (click)="btn.action($event)" 
         (keydown)="btn.action($event)" 
         [isFloating]="false"
