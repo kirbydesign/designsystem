@@ -7,9 +7,9 @@ import {
   Output,
   EventEmitter,
 } from '@angular/core';
-import { isAndroid } from 'tns-core-modules/platform';
 
 import { ToolbarEndElementDirective, ToolbarSecondaryElementDirective } from './toolbar.directive';
+import { PlatformService } from '~/app/services/platform/platform.service';
 
 @Component({
   selector: 'kirby-toolbar',
@@ -26,11 +26,11 @@ export class ToolbarComponent implements OnInit {
   @ContentChild(ToolbarEndElementDirective, { read: TemplateRef }) endElement;
   @ContentChild(ToolbarSecondaryElementDirective, { read: TemplateRef }) secondaryElement;
 
-  isAndroid(): boolean {
-    return isAndroid;
-  }
+  isAndroid: boolean;
 
-  constructor() {}
+  constructor(private platform: PlatformService) {
+    this.isAndroid = this.platform.isAndroid;
+  }
 
   ngOnInit() {}
 
