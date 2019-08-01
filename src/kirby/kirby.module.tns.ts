@@ -18,7 +18,7 @@ import { ModalWrapperComponent } from './components/modal/modal-wrapper/modal-wr
 import { ActionSheetComponent } from './components/modal/action-sheet/action-sheet.component';
 import { NativeScriptElevationDirective } from './directives/nativescript-only/elevation/elevation.directive.tns-only';
 import { VerticalTextAlignmentDirective } from './directives/vertical-text-alignment/vertical-text-alignment.directive.tns-only';
-import { IfAndroid } from './directives/nativescript-only/ifAndroid/ifAndroid.directive.tns-only';
+import { IfAndroidDirective } from './directives/nativescript-only/ifAndroid/ifAndroid.directive.tns-only';
 
 overrideModalViewMethod();
 registerElement('ModalStack', () => ModalStack);
@@ -30,7 +30,7 @@ const nativeScriptDeclarations = [
   NativeScriptLineChartComponent,
   NativeScriptElevationDirective,
   VerticalTextAlignmentDirective,
-  IfAndroid,
+  IfAndroidDirective,
 ];
 
 @NgModule({

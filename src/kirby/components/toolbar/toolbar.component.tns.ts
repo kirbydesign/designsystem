@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 
 import { ToolbarEndElementDirective, ToolbarSecondaryElementDirective } from './toolbar.directive';
-import { PlatformService } from '~/app/services/platform/platform.service';
+import { PlatformService } from '~/app/services/platform/platform.service.tns-only';
 
 @Component({
   selector: 'kirby-toolbar',
