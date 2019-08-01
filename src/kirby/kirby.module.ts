@@ -7,7 +7,7 @@ import { declarations, providerDeclarations } from './kirby.common';
 import { InfiniteScrollDirective } from './components/list/directives/infinite-scroll.directive';
 import { ModalWrapperComponent } from './components/modal/modal-wrapper/modal-wrapper.component';
 import { ActionSheetComponent } from './components/modal/action-sheet/action-sheet.component';
-import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';
+import { KeyHandlerDirective } from '@kirbydesign/designsystem/directives/key-handler/key-handler.directive';
 
 @NgModule({
   imports: [CommonModule, RouterModule, IonicModule.forRoot()],

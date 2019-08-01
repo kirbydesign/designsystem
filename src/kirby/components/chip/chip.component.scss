@@ -12,5 +12,24 @@
   &:hover,
   &.is-selected {
     background-color: get-color("medium");
+  } 
+  
+  :host-context(.default),
+  :host-context(.kirby-color-brightness-white) {
+    &:hover,
+    &.is-selected {
+      background-color: get-color("medium");
+    } 
+  }
+
+  :host-context(.kirby-color-brightness-dark) {
+
+    color: get-color("white");
+
+    &:hover,
+    &.is-selected {
+      background-color: get-color("white");
+      color: get-color("black");
+    }
   }
 }

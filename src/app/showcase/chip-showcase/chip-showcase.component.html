@@ -1,5 +1,11 @@
 <div class="example">
-    <kirby-chip-example></kirby-chip-example>
+    <kirby-chip-example [themeColor]="themeColor"></kirby-chip-example>
+    <div>
+        <select (change)="onThemeChange($event.target.value)">
+            <option value="">Card color: None</option>
+            <option *ngFor="let color of themeColors" value="{{color}}" [attr.selected]="themeColor === color ? true : null">Card color: {{ color }}</option>
+        </select>
+    </div>
     <kirby-code-viewer [html]="exampleHtml"></kirby-code-viewer>
     <h4>Properties:</h4>
     <table class="cookbook-properties">
