@@ -9,7 +9,7 @@ import { IconComponent } from '../../icon/icon.component';
 import { ModalWrapperComponent } from './modal-wrapper.component';
 import { IModalController } from '../services/modal.controller.interface';
 
-fdescribe('ModalWrapperComponent', () => {
+describe('ModalWrapperComponent', () => {
   let component: ModalWrapperComponent;
   let fixture: ComponentFixture<ModalWrapperComponent>;
 
@@ -82,7 +82,7 @@ fdescribe('ModalWrapperComponent', () => {
       expect(el.componentInstance.name).toBe('close');
     });
 
-    it('should render arrow when config.closeIcon is set to arrow', () => {
+    it("should render arrow-down when flavor is set to 'drawer'", () => {
       component.config.flavor = 'drawer';
       fixture.detectChanges();
       var el = fixture.debugElement.query(By.directive(IconComponent));

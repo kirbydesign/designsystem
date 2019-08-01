@@ -84,9 +84,9 @@ export class ModalWrapperComponent extends ContentView implements OnInit {
         // TODO: the animation starting point should be dependent on the context - bottom of the opening element
         const animationStartingY = screen.mainScreen.heightDIPs;
         const modalContainer = <View>this.view.getViewById('modal');
+
         // setTimeout prevents an error caused by {N} on iOS when calling animate
         // https://github.com/NativeScript/nativescript-angular/issues/431
-
         setTimeout(() => {
           modalContainer.opacity = 0;
           modalContainer
