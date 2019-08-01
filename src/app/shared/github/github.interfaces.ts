@@ -10,35 +10,34 @@ export interface GithubTag {
 }
 
 export interface GitHubCompare {
-  permalink: string;
-  ahead_by: number;
+  url: string;
+  html_url: string;
+  permalink_url: string;
+  diff_url: string;
+  patch_url: string;
   base_commit: GithubCommit;
+  ahead_by: number;
   behind_by: number;
   commits: any[];
-  diff_url: string;
   files: any[];
-  html_url: string;
   merge_base_commit: GithubCommit;
-  patch_url: string;
-  permalink_url: string;
   status: string;
   total_commits: number;
-  url: string;
 }
 
 export interface GithubCommit {
+  sha: string;
+  node_id: string;
+  commit: GithubCommit;
   author: GithubAuthor;
   comments_url: string;
-  commit: GithubCommit;
   committer: GithubComitter;
   html_url: string;
-  node_id: string;
   parents: {
     html_url: string;
     sha: string;
     url: string;
   }[];
-  sha: string;
   url: string;
 }
 
