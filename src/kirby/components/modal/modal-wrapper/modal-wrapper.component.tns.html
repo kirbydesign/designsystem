@@ -11,12 +11,16 @@
 
 <ng-template #drawer>
     <GridLayout rows="auto, *" columns="64, *, 64" class="title-bar">
-        <StackLayout row="0" col="0" class="close-icon">
+        <StackLayout row="0" col="0" class="modal-button">
             <ng-container *ngTemplateOutlet="closeIcon; context: { icon: 'arrow-down' }"></ng-container>
         </StackLayout>
 
         <StackLayout row="0" col="1" >
             <ng-container *ngTemplateOutlet="title; context: { horizontalAlignment: 'center' }"></ng-container>
+        </StackLayout>
+        
+        <StackLayout row="0" col="2" class="modal-button" *ngIf="config.drawerSupplementaryAction">
+            <ng-container *ngTemplateOutlet="supplementaryButton; context: { btn: config.drawerSupplementaryAction }"></ng-container>
         </StackLayout>
         
         <ScrollView height="100%" width="100%" row="1" colSpan="3">
@@ -31,7 +35,7 @@
             <ng-container *ngTemplateOutlet="title; context: { horizontalAlignment: 'left' }"></ng-container>
         </StackLayout>
         
-        <StackLayout row="0" col="1" class="close-icon">
+        <StackLayout row="0" col="1" class="modal-button">
             <ng-container *ngTemplateOutlet="closeIcon; context: { icon: 'close' }"></ng-container>
         </StackLayout>
 
@@ -47,6 +51,15 @@
             (tap)="onModalDismiss()" 
             [isFloating]="false">
         <kirby-icon [name]="icon"></kirby-icon>
+    </kirby-floating-action-button>
+</ng-template>
+
+<ng-template #supplementaryButton let-btn="btn">
+    <kirby-floating-action-button
+        [showShadow]="false"
+        (tap)="btn.action($event)" 
+        [isFloating]="false">
+        <kirby-icon [name]="btn.iconName"></kirby-icon>
     </kirby-floating-action-button>
 </ng-template>
 
