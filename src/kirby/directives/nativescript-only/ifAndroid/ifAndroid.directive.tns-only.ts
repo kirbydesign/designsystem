@@ -1,8 +1,8 @@
 import { Directive, ViewContainerRef } from '@angular/core';
 import { isAndroid } from 'tns-core-modules/platform';
 
-@Directive({ selector: '[ifAndroid]' })
-export class IfAndroid {
+@Directive({ selector: '[kirbyIfAndroid]' })
+export class IfAndroidDirective {
   constructor(private _viewContainer: ViewContainerRef) {
     this._updateView();
   }
