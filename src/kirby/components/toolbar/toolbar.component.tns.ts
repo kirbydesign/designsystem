@@ -8,7 +8,6 @@ import {
   EventEmitter,
 } from '@angular/core';
 
-import { ToolbarEndElementDirective, ToolbarSecondaryElementDirective } from './toolbar.directive';
 import { PlatformService } from '~/app/services/platform/platform.service.tns-only';
 
 @Component({
@@ -22,9 +21,6 @@ export class ToolbarComponent implements OnInit {
   @Input() themeColor: string;
 
   @Output() back: EventEmitter<null> = new EventEmitter<null>();
-
-  @ContentChild(ToolbarEndElementDirective, { read: TemplateRef }) endElement;
-  @ContentChild(ToolbarSecondaryElementDirective, { read: TemplateRef }) secondaryElement;
 
   isAndroid: boolean;
 

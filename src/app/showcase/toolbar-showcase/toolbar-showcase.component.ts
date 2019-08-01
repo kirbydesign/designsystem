@@ -15,8 +15,8 @@ export class ToolbarShowcaseComponent implements OnInit {
       <kirby-toolbar hideBackButton="false"></kirby-toolbar>
       <!-- Secondary and end elements -->
       <kirby-toolbar>
-        <kirby-icon *kirbyToolbarSecondary size="md"></kirby-icon>
-        <kirby-icon *kirbyToolbarEnd size="md" name="more"></kirby-icon>
+        <kirby-icon secondary size="md"></kirby-icon>
+        <kirby-icon end size="md" name="more"></kirby-icon>
       </kirby-toolbar>
     `;
   constructor() {}

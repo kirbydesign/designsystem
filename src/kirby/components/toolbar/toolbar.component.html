@@ -3,10 +3,12 @@
     <kirby-icon name="arrow-back" size="md"></kirby-icon>
   </div>
   <div slot="end" class="toolbar-item-secondary">
-    <ng-container *ngTemplateOutlet="secondaryElement"></ng-container>
+    <ng-content select="[secondary]"></ng-content>
+    
   </div>
-  <div slot="end" *ngIf="endElement" class="toolbar-item-end">
-    <ng-container *ngTemplateOutlet="endElement" ></ng-container>
+  <div slot="end" class="toolbar-item-end">
+    <ng-content select="[end]"></ng-content>
+    
   </div>
   <ion-title>{{ title }}</ion-title>
 </ion-toolbar>

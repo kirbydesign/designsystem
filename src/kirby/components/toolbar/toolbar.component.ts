@@ -9,8 +9,6 @@ import {
   EventEmitter,
 } from '@angular/core';
 
-import { ToolbarEndElementDirective, ToolbarSecondaryElementDirective } from './toolbar.directive';
-
 @Component({
   selector: 'kirby-toolbar',
   templateUrl: './toolbar.component.html',
@@ -22,8 +20,6 @@ export class ToolbarComponent implements OnInit {
 
   @Output() back: EventEmitter<null> = new EventEmitter<null>();
 
-  @ContentChild(ToolbarEndElementDirective, { read: TemplateRef }) endElement;
-  @ContentChild(ToolbarSecondaryElementDirective, { read: TemplateRef }) secondaryElement;
   constructor() {}
 
   ngOnInit() {}

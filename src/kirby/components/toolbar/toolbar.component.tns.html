@@ -12,15 +12,15 @@
     <Label [text]="title"  class="toolbar-title kirby-text-normal"></Label>
   </StackLayout>
   
-  <ActionItem *ngIf="secondaryElement" ios.position="right" >
+  <ActionItem ios.position="right" >
     <StackLayout orientation="horizontal" class="toolbar-item-secondary">
-      <ng-container *ngTemplateOutlet="secondaryElement"></ng-container>
+      <ng-content select="[secondary]"></ng-content>
     </StackLayout>
   </ActionItem>
-  <ActionItem *ngIf="endElement" ios.position="right" >
+  <ActionItem ios.position="right" >
     <StackLayout orientation="horizontal">
       <Label text="" class="action-item-spacer-small"></Label>
-      <ng-container *ngTemplateOutlet="endElement"></ng-container>
+      <ng-content select="[end]]"></ng-content>
       <Label text="" class="action-item-spacer-large"></Label>
     </StackLayout>
   </ActionItem>
