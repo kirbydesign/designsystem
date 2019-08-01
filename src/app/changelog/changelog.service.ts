@@ -21,7 +21,6 @@ export class ChangelogService {
   updateChangelog(fromVersion?, toVersion?) {
     this.getChangelog(fromVersion, toVersion).subscribe((release) => {
       if (!this.github.useMocks) {
-        console.log('set ', release.name, ' at firebase');
         this.changelog.doc(release.name).set(release);
       }
     });
@@ -31,7 +30,7 @@ export class ChangelogService {
     let tags: string[];
     let currentTag: string;
     let previousTag: string;
-    const delayed = 180000;
+    const delayed = 3000;
 
     return this.versionsToUpdate(fromVersion, toVersion).pipe(
       map((x) => {
@@ -48,6 +47,8 @@ export class ChangelogService {
         return forkJoin(this.github.compareCommits(previousTag, currentTag));
       }),
       switchMap((compares: any) => {
+        if (compares[0].commits.length === 0) return of([]);
+
         const pullRequests = compares[0].commits.map((compare: any, index: number) => {
           return of(compares).pipe(
             delay(index * 3000),
@@ -123,8 +124,6 @@ export class ChangelogService {
           // Find missing versions
           versionsToUpdate = tags.filter((tag) => changelog.indexOf(tag) === -1);
         }
-
-        console.log('versions to update', versionsToUpdate.length);
 
         return {
           versionsToUpdate,
