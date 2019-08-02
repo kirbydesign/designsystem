@@ -23,7 +23,7 @@ export class CardComponent extends ContentView implements CardCommon {
   @Input() title: string;
   @Input() subtitle: string;
   @Input() themeColor?: ThemeColor;
-  @Input() hasPadding?: boolean;
+  @Input() hasPadding?: boolean = true;
 
   DEFAULT_ELEVATION = 2;
   elevation: number = this.DEFAULT_ELEVATION;
