@@ -10,8 +10,7 @@
 showModal() {{ '{' }}
     const config: ModalConfig = {{ '{' }}
         title: 'Your Modal Title',
-        closeBtnPosition: 'inside',
-        titleHorizontalAlignment: 'center',
+        flavor: 'modal',
         component: YourEmbeddedModalComponent,
         componentProps: {{ '{' }}
             prop1: 'value1',
@@ -19,6 +18,30 @@ showModal() {{ '{' }}
         {{ '}' }}
     {{ '}' }};
     this.modalController.showModal(config, this.vcRef);
+{{ '}' }}</kirby-code-viewer>
+        <br /><br />
+        The modal can have one of multiple flavors, used to determine the opening animation, the position of their titles and their close buttons.
+        With the <code>modal</code> flavor, the dialog opens with a fade-in animation, its title is aligned to the left and its close button
+        is placed in the top right corner. When a <code>drawer</code> flavor is used, the dialog opens with a slide-up animation, its title
+        is centered and its close button is placed in the top left corner. Additionally, with the <code>drawer</code> flavor, users can specify a
+        <code>drawerSupplementaryAction</code>, which is an additional button rendered in the top right corner (see the example below). The
+        <code>drawerSupplementaryAction</code> option takes an <code>iconName: string</code> which corresponds to an icon of the kirby font, and 
+        <code>action: Function</code>, which is invoked when the supplementary button is selected. 
+        <kirby-code-viewer language="ts">showModal() {{ '{' }}
+    const config: ModalConfig = {{ '{' }}
+        title: 'Your Drawer Title',
+        flavor: 'drawer',
+        drawerSupplementaryAction: {{ '{' }}
+            iconName: 'qr',
+            action: this.onSupplementaryActionSelect,
+        {{ '}' }},
+        component: YourEmbeddedDrawerComponent
+    {{ '}' }};
+    this.modalController.showModal(config, this.vcRef);
+{{ '}' }}
+
+private onSupplementaryActionSelect() {{ '{' }}
+    console.log('Supplementary action selected');
 {{ '}' }}</kirby-code-viewer>
         <br /><br />
         <em>(Optional)</em><br />

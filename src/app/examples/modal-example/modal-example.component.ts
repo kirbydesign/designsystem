@@ -13,9 +13,8 @@ export class ModalExampleComponent {
 
   showModal() {
     const config: ModalConfig = {
-      title: 'First Embedded Modal',
-      closeBtnPosition: 'inside',
-      titleHorizontalAlignment: 'center',
+      title: 'My Modal Title',
+      flavor: 'modal',
       component: FirstEmbeddedModalExampleComponent,
       componentProps: {
         prop1: 'value1',
@@ -26,8 +25,27 @@ export class ModalExampleComponent {
     this.modalController.showModal(config, this.vcRef, this.onModalClose);
   }
 
-  onModalClose(modalData: any): void {
-    console.log('Callback from FirstEmbeddedModalExampleComponent:');
-    console.log(`Data received: ${JSON.stringify(modalData)}`);
+  showDrawer() {
+    const config: ModalConfig = {
+      title: 'My Drawer Title',
+      flavor: 'drawer',
+      component: FirstEmbeddedModalExampleComponent,
+      componentProps: {
+        prop1: 'value1',
+        prop2: 'value2',
+      },
+    };
+
+    this.modalController.showModal(config, this.vcRef, this.onDrawerClose);
+  }
+
+  onModalClose(data: any): void {
+    console.log('Callback from Embedded Modal:');
+    console.log(`Data received: ${JSON.stringify(data)}`);
+  }
+
+  onDrawerClose(data: any): void {
+    console.log('Callback from Embedded Drawer:');
+    console.log(`Data received: ${JSON.stringify(data)}`);
   }
 }

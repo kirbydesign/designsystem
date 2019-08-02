@@ -5,6 +5,25 @@
   --kirby-badge-color: #{get-color('primary-contrast')};
   --ion-color-base: var(--kirby-badge-background-color);
   --ion-color-contrast: var(--kirby-badge-color);
+
+  ion-badge {
+    --padding-top: 3px;
+    --padding-end: 5px;
+    --padding-bottom: 4px;
+    --padding-start: 5px;
+    border-radius: 8px;
+    min-width: 16px;
+    min-height: 16px;
+    font-size: font-size('xxs');
+    position: relative;
+  }
+
+  ::ng-deep kirby-icon {
+    --kirby-icon-font-size: #{font-size('n')};
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
 }
 
 @each $color-name, $color-value in $main-colors {
