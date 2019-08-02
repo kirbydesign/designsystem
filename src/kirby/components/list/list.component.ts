@@ -48,8 +48,10 @@ export class ListComponent implements OnChanges {
   @Input()
   public set items(items: ListItem[]) {
     this._items = items.map((item) => {
-      item._id = createGuid();
-      return item;
+      return {
+        ...item,
+        _id: createGuid(),
+      };
     });
   }
 
