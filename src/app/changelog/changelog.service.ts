@@ -39,6 +39,7 @@ export class ChangelogService {
         return x.versionsToUpdate;
       }),
       mergeMap((x) => x),
+      // Delay is needed not to SPAM the GitHub API
       concatMap((x) => of(x).pipe(delay(delayed))),
       switchMap((x: string) => {
         const indexOfPreviousTag = tags.indexOf(x) + 1;
@@ -52,6 +53,7 @@ export class ChangelogService {
 
         const pullRequests = compares[0].commits.map((compare: any, index: number) => {
           return of(compares).pipe(
+            // Delay is needed not to SPAM the GitHub API
             delay(index * 3000),
             switchMap(() => this.github.searchAssociatedPullRequest(compare.sha))
           );
