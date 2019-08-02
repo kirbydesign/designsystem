@@ -4,6 +4,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 import { ChangelogService } from '~/app/changelog/changelog.service';
 import { ColorService } from '~/app/shared/color/color.service';
+import { ChangelogVersion } from '~/app/changelog/changelog.interfaces';
 
 @Component({
   selector: 'kirby-changelog',
@@ -33,7 +34,7 @@ export class ChangelogComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.changelogService.updateChangelog();
 
-    this.changelogService.changelog$.subscribe((changelog) => {
+    this.changelogService.changelog$.subscribe((changelog: ChangelogVersion[]) => {
       this.changelog = changelog;
     });
   }
@@ -42,11 +43,11 @@ export class ChangelogComponent implements OnInit, OnDestroy {
     this.changelogSubscription.unsubscribe();
   }
 
-  onRefreshVersion(version) {
+  onRefreshVersion(version: ChangelogVersion) {
     this.changelogService.updateChangelog(version.name, version.name);
   }
 
-  trackByFn(index, item) {
+  trackByFn(index: number, item: ChangelogVersion) {
     return item.name;
   }
 }

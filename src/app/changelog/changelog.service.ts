@@ -4,6 +4,7 @@ import { concatMap, delay, map, mergeMap, switchMap, take } from 'rxjs/operators
 import { combineLatest, forkJoin, Observable, of } from 'rxjs';
 
 import { GithubService } from '~/app/shared/github/github.service';
+import { ChangelogVersion } from '~/app/changelog/changelog.interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -18,15 +19,15 @@ export class ChangelogService {
 
   constructor(private db: AngularFirestore, private github: GithubService) {}
 
-  updateChangelog(fromVersion?, toVersion?) {
-    this.getChangelog(fromVersion, toVersion).subscribe((release) => {
+  updateChangelog(fromVersion?: string, toVersion?: string) {
+    this.getChangelog(fromVersion, toVersion).subscribe((release: ChangelogVersion) => {
       if (!this.github.useMocks) {
         this.changelog.doc(release.name).set(release);
       }
     });
   }
 
-  private getChangelog(fromVersion?, toVersion?) {
+  private getChangelog(fromVersion?: string, toVersion?: string): Observable<ChangelogVersion> {
     let tags: string[];
     let currentTag: string;
     let previousTag: string;
@@ -58,7 +59,6 @@ export class ChangelogService {
         return forkJoin(pullRequests);
       }),
       map((searchResults: any) => {
-        let pullRequests = [];
         let items = searchResults
           .map((x: any) => x.items[0])
           .filter((x: any) => {
@@ -101,7 +101,10 @@ export class ChangelogService {
     return unique;
   }
 
-  private versionsToUpdate(fromVersion?, toVersion?): Observable<any> {
+  private versionsToUpdate(
+    fromVersion?: string,
+    toVersion?: string
+  ): Observable<{ versionsToUpdate: string[]; tags: string[] }> {
     const changelog$ = this.changelog.valueChanges().pipe(take(1));
     const tags$ = this.github.getAllTags();
 
@@ -135,7 +138,7 @@ export class ChangelogService {
     return versions$;
   }
 
-  private sortByDate(a: any, b: any) {
+  private sortByDate(a: ChangelogVersion, b: ChangelogVersion) {
     return new Date(b.date).getTime() - new Date(a.date).getTime();
   }
 }
