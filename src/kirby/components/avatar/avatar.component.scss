@@ -12,7 +12,7 @@ $image-diameter-large:  96px;
     position: absolute;
     z-index: 2;
     top: size('-xxs');
-    right: size('-xs');
+    right: size('-xxs');
   }
 }
 
@@ -77,7 +77,7 @@ $image-diameter-large:  96px;
 
   ::ng-deep kirby-badge {
     top: size('-xxs');
-    right: size('-xs');
+    right: size('-xxs');
   }
 }
 
@@ -97,7 +97,7 @@ $image-diameter-large:  96px;
 
   ::ng-deep kirby-badge {
     top: size('-xxs');
-    right: size('-xxs');
+    right: 0;
   }
 }
 
@@ -117,7 +117,7 @@ $image-diameter-large:  96px;
 
   ::ng-deep kirby-badge {
     top: 0;
-    right: size('xxs');
+    right: size('xs');
   }
 }
 

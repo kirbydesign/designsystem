@@ -9,6 +9,10 @@
     font-weight: font-weight("normal");
     width: 100%;
     text-align: center;
+    
+    &.bold {
+      font-weight: font-weight("bold");
+    }
 }
 
 .subtitle {
