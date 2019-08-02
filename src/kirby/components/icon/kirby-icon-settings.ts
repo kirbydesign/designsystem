@@ -43,7 +43,7 @@ export const kirbyIconSettings: IconSettings = {
     { name: 'trash', svg: 'assets/kirby/icons/svg/trash.svg', unicode: 0xe924 },
     { name: 'foreign-payment', svg: 'assets/kirby/icons/svg/foreign-payment.svg', unicode: 0xe925 },
     { name: 'clock', svg: 'assets/kirby/icons/svg/clock.svg', unicode: 0xe926 },
-    { name: 'verifiy', svg: 'assets/kirby/icons/svg/verifiy.svg', unicode: 0xe927 },
+    { name: 'verify', svg: 'assets/kirby/icons/svg/verify.svg', unicode: 0xe927 },
     { name: 'warning', svg: 'assets/kirby/icons/svg/warning.svg', unicode: 0xe928 },
     { name: 'write-message', svg: 'assets/kirby/icons/svg/write-message.svg', unicode: 0xe929 },
   ],
