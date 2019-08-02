@@ -24,6 +24,7 @@ describe('ModalWrapperComponent', () => {
       get: {
         title: 'Test title',
         component: undefined,
+        flavor: 'modal',
       },
     });
 
@@ -66,14 +67,8 @@ describe('ModalWrapperComponent', () => {
       expect(title.classList).toContain('text-left');
     });
 
-    it('should be aligned left by default', () => {
-      const rootElement: HTMLElement = fixture.debugElement.nativeElement;
-      const title = rootElement.querySelector('span');
-      expect(title.classList).toContain('text-left');
-    });
-
-    it('should be centered when config.titleHorizontalAlignment is set to center', () => {
-      component.config.titleHorizontalAlignment = 'center';
+    it('should be aligned center when drawer flavor is used', () => {
+      component.config.flavor = 'drawer';
       fixture.detectChanges();
       const rootElement: HTMLElement = fixture.debugElement.nativeElement;
       const title = rootElement.querySelector('span');
@@ -82,40 +77,52 @@ describe('ModalWrapperComponent', () => {
   });
 
   describe('close button', () => {
-    it('should be placed inside by default', () => {
-      expect(component.config.closeBtnPosition).toEqual('inside');
-    });
-
-    it('should be placed outside when config.closeBtnPosition is set to outside', () => {
-      component.config.closeBtnPosition = 'outside';
-      fixture.detectChanges();
-      const rootElement: HTMLElement = fixture.debugElement.nativeElement;
-      const button = rootElement.querySelector('.close-btn');
-      expect(button.classList).toContain('outside');
-    });
-
-    it('should not be rendered when config.closeBtnPosition is set to hidden', () => {
-      component.config.closeBtnPosition = 'hidden';
-      fixture.detectChanges();
-      const rootElement: HTMLElement = fixture.debugElement.nativeElement;
-      const button = rootElement.querySelector('.close-btn');
-      expect(button).not.toBeTruthy();
-    });
-
-    it('should have a default value of close', () => {
-      expect(component.config.closeIconName).toEqual('close');
-    });
-
     it('should render as a close icon by default', () => {
       var el = fixture.debugElement.query(By.directive(IconComponent));
       expect(el.componentInstance.name).toBe('close');
     });
 
-    it('should render arrow when config.closeIcon is set to arrow', () => {
-      component.config.closeIconName = 'arrow-back';
+    it("should render arrow-down when flavor is set to 'drawer'", () => {
+      component.config.flavor = 'drawer';
       fixture.detectChanges();
       var el = fixture.debugElement.query(By.directive(IconComponent));
-      expect(el.componentInstance.name).toBe('arrow-back');
+      expect(el.componentInstance.name).toBe('arrow-down');
+    });
+  });
+
+  describe('supplementary button', () => {
+    it('should not render if an icon was provided, but the flavor is modal', () => {
+      component.config.drawerSupplementaryAction = { iconName: 'qr', action: undefined };
+      fixture.detectChanges();
+      var elements = fixture.debugElement.queryAll(By.directive(IconComponent));
+      expect(elements.length).toBe(1);
+      expect(elements[0].componentInstance.name).toBe('close');
+    });
+
+    it('should render as the provided icon when flavor is drawer', () => {
+      component.config.flavor = 'drawer';
+      component.config.drawerSupplementaryAction = { iconName: 'qr', action: undefined };
+      fixture.detectChanges();
+      var elements = fixture.debugElement.queryAll(By.directive(IconComponent));
+      expect(elements.length).toBe(2);
+      expect(elements[0].componentInstance.name).toBe('arrow-down');
+      expect(elements[1].componentInstance.name).toBe('qr');
+    });
+
+    it('should invoke the provided callback on select', () => {
+      component.config.flavor = 'drawer';
+      component.config.drawerSupplementaryAction = {
+        iconName: 'qr',
+        action: (_: any) => {},
+      };
+      spyOn(component.config.drawerSupplementaryAction, 'action');
+
+      fixture.detectChanges();
+      var elements = fixture.debugElement.queryAll(By.directive(IconComponent));
+      expect(elements.length).toBe(2);
+      expect(elements[1].componentInstance.name).toBe('qr');
+      elements[1].parent.triggerEventHandler('click', 'test');
+      expect(component.config.drawerSupplementaryAction.action).toHaveBeenCalledWith('test');
     });
   });
 });
