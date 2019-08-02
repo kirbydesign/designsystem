@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { concatMap, delay, map, mergeMap, switchMap, take } from 'rxjs/operators';
-import { combineLatest, EMPTY, forkJoin, Observable, of, timer, zip } from 'rxjs';
+import { combineLatest, forkJoin, Observable, of } from 'rxjs';
 
 import { GithubService } from '~/app/shared/github/github.service';
 
