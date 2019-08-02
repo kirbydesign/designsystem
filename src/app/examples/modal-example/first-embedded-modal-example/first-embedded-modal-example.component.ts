@@ -19,11 +19,25 @@ export class FirstEmbeddedModalExampleComponent {
     this.props = componentProps;
   }
 
-  async showSecondModal() {
+  async showNestedModal() {
     const config: ModalConfig = {
-      title: 'Second Embedded Modal',
-      titleHorizontalAlignment: 'center',
-      closeIconName: 'arrow-back',
+      title: 'Embedded Modal Title',
+      flavor: 'modal',
+      component: SecondEmbeddedModalExampleComponent,
+    };
+
+    // supposing no callback needed for the second component
+    this.modalController.showModal(config, this.vcRef);
+  }
+
+  async showNestedDrawer() {
+    const config: ModalConfig = {
+      title: 'Embedded Drawer Title',
+      flavor: 'drawer',
+      drawerSupplementaryAction: {
+        iconName: 'qr',
+        action: this.onSupplementaryActionSelect,
+      },
       component: SecondEmbeddedModalExampleComponent,
     };
 
@@ -34,5 +48,9 @@ export class FirstEmbeddedModalExampleComponent {
   onHideFirst() {
     let someTestData: number = Math.PI;
     this.modalController.hideTopmost(someTestData);
+  }
+
+  onSupplementaryActionSelect(args: any) {
+    console.log('Supplementary action selected');
   }
 }
