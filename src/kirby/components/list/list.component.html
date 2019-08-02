@@ -34,7 +34,7 @@
     <ion-item *ngFor="let item of items;trackBy: trackByFn"
               [class.has-divider]="showDivider"
               [class.selectable]="isSelectable"
-              [class.selected]="markSelectedRow && selectedItem && item.id === selectedItem._id"
+              [class.selected]="markSelectedRow && selectedItem && item._id === selectedItem._id"
               [attr.role]="isSelectable ? 'button' : null"
               (click)="onItemSelect(item)"
               tabindex="0"
