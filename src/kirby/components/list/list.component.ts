@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   ContentChild,
   EventEmitter,
@@ -10,15 +11,16 @@ import {
 } from '@angular/core';
 
 import {
+  ListFlexItemDirective,
+  ListFooterDirective,
   ListHeaderDirective,
   ListItemDirective,
   ListSectionHeaderDirective,
-  ListFlexItemDirective,
-  ListFooterDirective,
 } from './list.directive';
 import { LoadOnDemandEvent, LoadOnDemandEventData } from './list.event';
 import { ListHelper } from './helpers/list-helper';
 import { GroupByPipe } from './pipes/group-by.pipe';
+
 export type ListShape = 'square' | 'rounded';
 
 @Component({
@@ -55,9 +57,11 @@ export class ListComponent implements OnChanges {
    *
    * `square` means **without** rounded corners, `rounded` means **with** rounded corners.
    */
+  @Input() shape: ListShape = 'rounded';
   @HostBinding('class.rounded')
-  @Input()
-  shape: ListShape = 'rounded';
+  public get isRounded(): boolean {
+    return this.shape === 'rounded';
+  }
 
   /**
    * Emitting event when more items are to be loaded.
@@ -133,8 +137,8 @@ export class ListComponent implements OnChanges {
     this.listHelper.onLoadOnDemand(this, event);
   }
 
-  onRowLoaded(event: any): void {
-    this.listHelper.renderShadow(event);
+  trackByFn(index) {
+    return index;
   }
 
   private createOrderMap(

@@ -1,0 +1,29 @@
+@import "../../scss/_native-imports";
+
+.slide-button-container {
+    width: 256;
+    height: 56;
+    border-radius: 28;
+    background-color: get-color("primary");
+    margin: size('xxs');
+
+    &.expand {
+        width: 100%;
+    }
+
+    .slide-button {
+        width: 52;
+        height: 52;
+        margin: 2;
+        border-radius: 100;
+        background-color: get-color('white');
+        color: get-color('primary-contrast');
+        font-family: 'kirby';
+        font-size: font-size('m');
+    }
+
+    .slide-button-text {
+        color: get-color('primary-contrast');
+        font-size: font-size('n');
+    }
+}

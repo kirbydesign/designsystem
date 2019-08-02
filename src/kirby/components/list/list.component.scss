@@ -1,111 +1,109 @@
 @import '../../scss/web-imports';
 
-$shadow: 0 5px 10px -10px rgba(28, 28, 28, 0.3), 0 0 5px 0 rgba(28, 28, 28, 0.08);
-$shadow-mask: 0 -6px 0px 0px get-color('white');
+$divider-color: get-color('background-color');
+$background-color-hover: get-color('background-color');
+$shadow: get-elevation(2);
 
 :host {
-  display: block;
-  background-color: get-color('background-color');
-
-  &:not(.has-sections) {
+  ion-list {
     box-shadow: $shadow;
+    background: transparent;
+    contain: inherit;
+    padding: 0;
   }
-}
 
-:host(.rounded) {
-  &:not(.has-sections) {
-    border-radius: $border-radius;
+  .selectable {
+    cursor: pointer;
+    &:hover {
+      background-color: $background-color-hover;
+    }
+  }
 
-    li:first-child {
-      border-top-left-radius: $border-radius;
-      border-top-right-radius: $border-radius;
+  ion-item {
+    background-color: get-color('white');
+    &:not(:last-of-type).has-divider {
+      border-bottom: 1px solid $divider-color;
     }
 
-    .list-header {
-      border-top-left-radius: $border-radius;
-      border-top-right-radius: $border-radius;
-
-      & + ul > li:first-child {
-        border-radius: 0;
-      }
-    }
-
-    li:last-child {
-      border-bottom-left-radius: $border-radius;
-      border-bottom-right-radius: $border-radius;
+    &:focus {
+      $outline-width: 5px;
+      outline-color: var(--highlight-color-focused);
+      outline-style: auto;
+      outline-width: $outline-width;
+      margin-bottom: $outline-width;
+      background-color: $background-color-hover;
     }
   }
 
   &.has-sections {
-
-    li.row {
-      box-shadow: $shadow-mask, $shadow;
-      
+    ion-list {
+      box-shadow: none;
     }
-
-    li.row.selectable:hover {
-      background-color: get-color('background-color');
-    }
-
-    li.section-header + li.row
-    {
-      border-top-left-radius: $border-radius;
-      border-top-right-radius: $border-radius;
+    .list-items {
       box-shadow: $shadow;
-    }
-
-    li.row.last-in-section {
-      border-bottom-left-radius: $border-radius;
-      border-bottom-right-radius: $border-radius;
+      border-radius: $border-radius;
     }
   }
 }
 
-.list-header {
+:host(.rounded) {
+  ion-list,
+  .list-items {
+    border-radius: $border-radius;
+  }
+
+  ion-list:not(.has-header) ion-item:first-of-type,
+  ion-list-header {
+    border-top-left-radius: $border-radius;
+    border-top-right-radius: $border-radius;
+  }
+
+  ion-list:not(.has-footer) ion-item:last-of-type,
+  .footer {
+    border-bottom-left-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
+  }
+}
+
+ion-list-header {
   background-color: get-color('white');
-  border-bottom: 1px solid get-color('background-color');
+  border-bottom: 1px solid $divider-color;
+  padding: 0;
 }
 
-ul {
-  list-style-type: none;
-  padding-left: 0;
-  margin: 0;
+ion-item-divider {
+  background-color: get-color('white');
+  border-color: transparent;
+  padding: 0;
+  --color: unset;
+}
+
+ion-item {
+  display: flex;
+  width: 100%;
+  padding: size('m') size('xs');
   font-size: font-size('s');
-
-  li {
-    padding: size('m');
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-
-    p {
-      margin: 0;
-    }
-
-    &.row {
-      background-color: get-color('white');
-
-      &.divider:not(:last-child) {
-        border-bottom: 1px solid get-color('background-color');
-      }
-
-      &.selectable {
-        cursor: pointer;
-
-        &:hover {
-          background-color: get-color('background-color');
-        }
-      }
-    }
-    
-    &.loading,
-    &.no-more-items
-    {
-      background-color: get-color('white');
-    }
-  }
+  --inner-border-width: 0;
+  --background: transparent;
+  --min-height: unset;
 }
 
-.extending {
-  margin: auto;
+.section-header {
+  background-color: transparent;
+  padding: size('m');
+}
+
+.loading,
+.no-more-items {
+  width: 100%;
+  background-color: get-color('white');
+  text-align: center;
+  padding: size('s');
+}
+
+.footer {
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid $divider-color;
 }

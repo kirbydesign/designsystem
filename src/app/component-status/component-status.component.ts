@@ -1,27 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, BehaviorSubject, forkJoin, of } from 'rxjs';
+import { Observable, BehaviorSubject, forkJoin, of, combineLatest, Subscription } from 'rxjs';
 import { map, first, catchError } from 'rxjs/operators';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 import { environment } from '~/environments/environment';
 
 import {
-  componentStatusItems,
   ComponentStatusItem,
   ItemCodeStatusOrder,
   ItemUXStatus,
   ItemCodeStatus,
 } from './component-status-items';
-import { componentStatusGhostItems } from './component-status-ghost-items';
+
+export interface GhostComponent {
+  name: string;
+  tagline: string;
+  url: string;
+}
+
 @Component({
   selector: 'kirby-component-status',
   templateUrl: './component-status.component.html',
   styleUrls: ['./component-status.component.scss'],
 })
-export class ComponentStatusComponent implements OnInit {
+export class ComponentStatusComponent implements OnInit, OnDestroy {
   isLoading = true;
   gitHubError = false;
-  items = this.clone(componentStatusItems);
+  items: ComponentStatusItem[];
+  ghostItems: GhostComponent[];
   sortedItems: ComponentStatusItem[] = [];
   items$: Observable<ComponentStatusItem[]>;
   searchTerm$ = new BehaviorSubject<string>('');
@@ -32,13 +39,41 @@ export class ComponentStatusComponent implements OnInit {
     environment.githubBaseUrl +
     '/issues/new?labels=component&template=component-request.md&title=%5BCOMPONENT%5D+';
 
-  constructor(private http: HttpClient) {}
+  firebaseSubscription: Subscription;
+
+  milestone$ = this.loadCurrentMilestone();
+
+  constructor(private http: HttpClient, private db: AngularFirestore) {}
 
   ngOnInit() {
     this.items$ = this.searchTerm$.pipe(
       map((searchTerm) => this.filterItems(this.sortedItems, searchTerm, this.excludedStatuses))
     );
-    this.initializeGithubStatus();
+    this.connectFirebase();
+  }
+
+  private connectFirebase(): void {
+    const componentsCollection$ = this.db
+      .collection<ComponentStatusItem>('component-status-items')
+      .valueChanges();
+
+    const ghostComponentsCollection$ = this.db
+      .collection<GhostComponent>('component-status-ghost-items')
+      .valueChanges();
+
+    this.firebaseSubscription = combineLatest([
+      componentsCollection$,
+      ghostComponentsCollection$,
+    ]).subscribe(([components, ghostComponents]) => {
+      this.isLoading = true;
+      this.items = components;
+      this.ghostItems = ghostComponents;
+      this.initializeGithubStatus();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.firebaseSubscription.unsubscribe();
   }
 
   public toggleExcluded(event) {
@@ -48,8 +83,15 @@ export class ComponentStatusComponent implements OnInit {
     this.searchTerm$.next(this.searchTerm$.value);
   }
 
-  private clone<T>(instance: T): T {
-    return JSON.parse(JSON.stringify(instance));
+  // return milestone with soonest duedate
+  private loadCurrentMilestone() {
+    const options = {
+      headers: new HttpHeaders({
+        Authorization: 'token ' + environment.oauth.githubToken1 + environment.oauth.githubToken2,
+      }),
+    };
+    const url = environment.githubApi + '/repos/kirbydesign/designsystem/milestones?sort=due_on';
+    return this.http.get<any[]>(url, options).pipe(map((x) => x[0]));
   }
 
   private initializeGithubStatus() {
@@ -99,8 +141,10 @@ export class ComponentStatusComponent implements OnInit {
 
   private getStatusItemsFromGithubIssues() {
     const flattenedItems = this.flattenItems(this.items);
+
     const hasStatusItem = (issue) =>
       !!flattenedItems.find((item) => item.code.githubIssueNo === issue.number);
+
     return this.getGithubComponentIssues().pipe(
       map((issues) => {
         return issues
@@ -124,7 +168,7 @@ export class ComponentStatusComponent implements OnInit {
   private mapGithubIssueToStatusItem(issue: any): ComponentStatusItem {
     const zeplinUrl = this.getZeplinUrl(issue);
     const sketchUrl = this.getSketchUrl(issue);
-    const uxStatus = zeplinUrl ? ItemUXStatus.inProgress : ItemUXStatus.underConsideration;
+    const uxStatus = zeplinUrl ? ItemUXStatus.ready : ItemUXStatus.underConsideration;
     const componentTitle = this.getComponentTitle(issue);
     const githubIssueTitle = issue.title.replace('[Enhancement] ', '');
     const isEnhancement = issue.labels.find((label) => label.name.indexOf('enhancement') > -1);
@@ -276,7 +320,7 @@ export class ComponentStatusComponent implements OnInit {
   }
 
   private getGhostItems(searchTerm: string): ComponentStatusItem[] {
-    const ghostItem = componentStatusGhostItems.find(
+    const ghostItem = this.ghostItems.find(
       (x) => x.name.toLowerCase() === searchTerm.toLowerCase()
     );
     if (ghostItem) {

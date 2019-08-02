@@ -20,3 +20,4 @@ export {
 export { ChipComponent } from './components/chip/chip.component';
 export { LoadOnDemandEvent } from './components/list/list.event';
 export { EmptyStateComponent } from './components/empty-state/empty-state.component';
+export * from './components/toast';

@@ -22,6 +22,7 @@ export class AlertHelper {
         mode: 'ios',
         buttons: buttons,
         backdropDismiss: false,
+        cssClass: 'kirby-alert',
       });
       await alert.present();
     });
