@@ -166,8 +166,8 @@ describe('ListComponent', () => {
       });
       runNgOnChanges();
 
-      expect(component.isFirstItem(items[0], 0)).toEqual(true);
-      expect(component.isLastItem(items[0], 0)).toEqual(true);
+      expect(component.isFirstItem(component.items[0], 0)).toEqual(true);
+      expect(component.isLastItem(component.items[0], 0)).toEqual(true);
     });
 
     it('should return true for sectioned list with rounded corners and multiple entries', () => {
@@ -179,17 +179,17 @@ describe('ListComponent', () => {
       });
       runNgOnChanges();
 
-      expect(component.isFirstItem(items[0], 0)).toEqual(true);
-      expect(component.isLastItem(items[0], 0)).toEqual(false);
+      expect(component.isFirstItem(component.items[0], 0)).toEqual(true);
+      expect(component.isLastItem(component.items[0], 0)).toEqual(false);
 
-      expect(component.isFirstItem(items[1], 1)).toEqual(true);
-      expect(component.isLastItem(items[1], 1)).toEqual(false);
+      expect(component.isFirstItem(component.items[1], 1)).toEqual(true);
+      expect(component.isLastItem(component.items[1], 1)).toEqual(false);
 
-      expect(component.isFirstItem(items[2], 2)).toEqual(false);
-      expect(component.isLastItem(items[2], 2)).toEqual(true);
+      expect(component.isFirstItem(component.items[2], 2)).toEqual(false);
+      expect(component.isLastItem(component.items[2], 2)).toEqual(true);
 
-      expect(component.isFirstItem(items[3], 3)).toEqual(false);
-      expect(component.isLastItem(items[3], 3)).toEqual(true);
+      expect(component.isFirstItem(component.items[3], 3)).toEqual(false);
+      expect(component.isLastItem(component.items[3], 3)).toEqual(true);
     });
   });
 });

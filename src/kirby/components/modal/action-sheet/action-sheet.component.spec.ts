@@ -125,6 +125,9 @@ describe('ActionSheetComponent', () => {
   describe('actions', () => {
     it('should contain each item', () => {
       var el = fixture.debugElement.query(By.directive(ListComponent));
+      delete el.componentInstance.items[0]['_id'];
+      delete el.componentInstance.items[1]['_id'];
+      delete el.componentInstance.items[2]['_id'];
       expect(el.componentInstance.items).toContain({ id: '1', text: 'Action 1' });
       expect(el.componentInstance.items).toContain({ id: '2', text: 'Action 2' });
       expect(el.componentInstance.items).toContain({ id: '3', text: 'Action 3' });
