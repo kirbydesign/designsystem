@@ -20,7 +20,7 @@ class Item {
   constructor(public value: number) {}
 }
 
-describe('ListComponent', () => {
+fdescribe('ListComponent', () => {
   let spectator: Spectator<ListComponent>;
   let component: ListComponent;
 
@@ -83,7 +83,7 @@ describe('ListComponent', () => {
       });
       runNgOnChanges();
 
-      const liElements = spectator.queryAll('ion-item');
+      const liElements = spectator.queryAll('.list-item');
       expect(liElements.length).toEqual(component.items.length);
     });
 
@@ -94,7 +94,7 @@ describe('ListComponent', () => {
       });
       runNgOnChanges();
 
-      const liElements = spectator.queryAll('ion-item');
+      const liElements = spectator.queryAll('.list-item');
       expect(liElements.length).toEqual(component.items.length);
     });
   });

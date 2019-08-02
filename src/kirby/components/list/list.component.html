@@ -15,7 +15,7 @@
 
       <div class="list-items">
         <ng-container *ngFor="let item of section.items; let idx = index; trackBy: trackByFn">
-          <div (click)="onItemSelect(item)" [class.first-item]="idx == 0" [class.last-item]="!isLoading && !showNoMoreItemsItem && idx === section.items.length - 1">
+          <div (click)="onItemSelect(item)" class="list-item" [class.first-item]="idx == 0" [class.last-item]="!isLoading && !showNoMoreItemsItem && idx === section.items.length - 1">
             <ng-container *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }"></ng-container>
             <ng-container *ngTemplateOutlet="listFlexItemTemplate; context: { $implicit: item }"></ng-container>
           </div>
