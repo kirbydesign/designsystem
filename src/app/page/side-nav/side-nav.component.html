@@ -14,6 +14,13 @@
       Component Status
     </a>
   </li>
+  <li>
+    <a class="side-nav__item side-nav-header" routerLink="/home/changelog" [routerLinkActive]="'is-selected'"
+       [routerLinkActiveOptions]="{exact: false}">
+      <kirby-icon name="pension" size="md"></kirby-icon>
+      Changelog
+    </a>
+  </li>
   <li routerLinkActive="is-selected" [routerLinkActiveOptions]="{exact: false}">
     <a class="side-nav__item side-nav-header" [routerLinkActive]="'is-selected'"
       [routerLinkActiveOptions]="{exact: false}">
