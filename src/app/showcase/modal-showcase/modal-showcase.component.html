@@ -82,10 +82,26 @@ this.modalController.hideTopmost(returnData);</kirby-code-viewer>
         by using the same services and principles as above.
     </p>
 
-    <h4>ModalConfig properties:</h4>
+    <div>
+        <h4>Opening multiple modals from same view</h4>
+        <div>
+            <i>In response to issue #385.</i>
+            It might seem compelling to use callbacks from a modal to instruct the "parent" component (the one launching the modal) to launch a secondary modal - this way you would be able to control multiple modals from the same parent-component, which would be nice, but sadly - its not possible.
+            It works fine with Web and Android, but iOS wont hear of it - and is pretty clear in its error-text: "<i>Close the open modal before attempting to open a new one</i>".
+            <br />
+            Conclusion must be: If you want to open a second modal - let the first modal do it - just like the example above shows.
+            <br />
+            To see the problem in action: <a href="https://play.nativescript.org/?template=play-ng&id=J3Gjbm&v=3">Se Playground Example</a>
+        </div>
+        <p></p>
+    </div>
+
+    <div>
+        <h4>ModalConfig properties:</h4>
     <kirby-showcase-properties [properties]="properties"></kirby-showcase-properties>
     <br>
     <p><ion-icon name="information-circle" style="color: #3880ff"></ion-icon>
         <em>For more details concerning the technical implementation of the modal component, see <a target="_blank" href="https://github.com/kirbydesign/designsystem/tree/master/src/app/showcase/modal-showcase/readme.md">this flow diagram</a></em>
     </p>
+    </div>
 </div>
