@@ -19,22 +19,24 @@ export class ModalShowcaseComponent {
       inputValues: ['string'],
     },
     {
-      name: 'closeBtnPosition',
-      description: 'The position of the close modal button, in relation to the modal.',
-      defaultValue: 'inside',
-      inputValues: ['inside', 'outside', 'hidden'],
+      name: 'component',
+      description: 'The component which will be rendered inside the modal.',
+      defaultValue: '',
+      inputValues: ['Component'],
     },
     {
-      name: 'closeIcon',
-      description: 'The name of the icon that will appear on the default close modal button',
-      defaultValue: 'close',
-      inputValues: ['close', 'arrow'],
+      name: 'flavor',
+      description:
+        "The flavor of the modal. Modals with 'modal' flavor fade-in/out and have a close button placed in the top right corner. Modals with a 'drawer' flavor slide-up/down and have a arrow-down button placed in the top left corner.",
+      defaultValue: 'modal',
+      inputValues: ['modal', 'drawer'],
     },
     {
-      name: 'titleHorizontalAlignment',
-      description: 'The horizontal placement of the modal title.',
-      defaultValue: 'left',
-      inputValues: ['left', 'center', 'right'],
+      name: 'drawerSupplementaryAction',
+      description:
+        "(Optional) Allows placing a supplementary button in the top right corner of drawers. Note that this is only available on modals with a 'drawer' flavor",
+      defaultValue: '',
+      inputValues: ['{iconName: string, action: Function}'],
     },
     {
       name: 'dim',
@@ -42,12 +44,6 @@ export class ModalShowcaseComponent {
         'The transparency of the background of the modal. 0 is fully transparent, while 1 is fully visible.',
       defaultValue: '0.5',
       inputValues: ['number (0..1)'],
-    },
-    {
-      name: 'component',
-      description: 'The component which will be rendered inside the modal.',
-      defaultValue: '',
-      inputValues: ['Component'],
     },
     {
       name: 'componentProps',

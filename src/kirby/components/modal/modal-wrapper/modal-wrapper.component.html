@@ -1,16 +1,43 @@
 <div class="modal-wrapper" #modalWrapper tabindex="-1" (window:focus)="onFocusChange()" (window:focusout)="onFocusChange()">
     <div class="modal-header">
-        <span class="text-{{config.titleHorizontalAlignment}} title">{{ config.title }}</span>
-        <kirby-floating-action-button *ngIf="config.closeBtnPosition !== 'hidden'" role="button"
-            class="close-btn {{ config.closeBtnPosition }}"
-            (click)="onModalDismiss($event)" 
-            (keydown)="onModalDismiss($event)" 
-            [isFloating]="false"
-            tabindex="0">
-            <kirby-icon [name]="config.closeIconName"></kirby-icon>
-        </kirby-floating-action-button>
+        <div *ngIf="config.flavor === 'drawer'">
+            <ng-container *ngTemplateOutlet="closeButton; context: { icon: 'arrow-down' }"></ng-container>
+        </div>
+        <span class="title"
+            [class.text-center]="config.flavor==='drawer'"
+            [class.text-left]="config.flavor==='modal'">
+            {{ config.title }}
+        </span>
+        <div *ngIf="config.flavor === 'modal'">
+            <ng-container *ngTemplateOutlet="closeButton; context: { icon: 'close' }"></ng-container>
+        </div>
+        <div *ngIf="config.flavor === 'drawer' && config.drawerSupplementaryAction">
+            <ng-container *ngTemplateOutlet="supplementaryButton; context: { btn: config.drawerSupplementaryAction }"></ng-container>
+        </div>
     </div>    
     <div class="modal-content">    
         <ng-container *ngComponentOutlet="config.component; injector: componentPropsInjector"></ng-container>
     </div>
 </div>
+
+<ng-template #closeButton let-icon="icon">
+    <kirby-floating-action-button role="button"
+        class="close-button"
+        (click)="onModalDismiss($event)" 
+        (keydown)="onModalDismiss($event)" 
+        [isFloating]="false"
+        tabindex="0">
+        <kirby-icon [name]="icon"></kirby-icon>
+    </kirby-floating-action-button>
+</ng-template>
+
+<ng-template #supplementaryButton let-btn="btn">
+    <kirby-floating-action-button role="button"
+        class="supplementary-button"
+        (click)="btn.action($event)" 
+        (keydown)="btn.action($event)" 
+        [isFloating]="false"
+        tabindex="0">
+        <kirby-icon [name]="btn.iconName"></kirby-icon>
+    </kirby-floating-action-button>
+</ng-template>
