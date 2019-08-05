@@ -2,11 +2,11 @@
   <div slot="start" *ngIf="!hideBackButton" (click)="onBackButtonSelected()" class="item-start">
     <kirby-icon name="arrow-back" size="md"></kirby-icon>
   </div>
-  <div slot="end" class="tem-middle">
+  <div slot="end" class="item-middle">
     <ng-content select="[secondary]"></ng-content>
     
   </div>
-  <div slot="end" class="tem-end">
+  <div slot="end" class="item-end">
     <ng-content select="[end]"></ng-content>
     
   </div>
