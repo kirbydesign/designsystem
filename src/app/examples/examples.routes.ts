@@ -24,6 +24,7 @@ import { SlideButtonExampleComponent } from './slide-button-example/slide-button
 import { ToastExampleComponent } from './toast-example/toast-example.component';
 import { ToggleExampleComponent } from './toggle-example/toggle-example.component';
 import { EmptyStateExampleComponent } from './empty-state-example/empty-state-example.component';
+import { ToolbarExampleComponent } from './toolbar-example/toolbar-example.component';
 
 export const routes: Routes = [
   {
@@ -125,5 +126,9 @@ export const routes: Routes = [
   {
     path: 'empty-state',
     component: EmptyStateExampleComponent,
+  },
+  {
+    path: 'toolbar',
+    component: ToolbarExampleComponent,
   },
 ];
