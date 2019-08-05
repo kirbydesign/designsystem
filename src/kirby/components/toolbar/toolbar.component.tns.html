@@ -1,0 +1,26 @@
+<ActionBar class="toolbar {{themeColor}}">
+  <NavigationButton  icon="~/assets/images/arrow-back.png" [visibility]="!hideBackButton && isAndroid ? 'visible' : 'collapsed'" (tap)="onBackButtonSelected()">
+  </NavigationButton>
+  <ActionItem *ngIf="!hideBackButton && !isAndroid" ios.position="left" (tap)="onBackButtonSelected()">
+  <StackLayout orientation="horizontal">
+    <kirby-icon name="arrow-back" size="md"></kirby-icon>
+  </StackLayout>
+  </ActionItem>
+  <StackLayout orientation="horizontal"
+    horizontalAlignment="center">
+    <Label [text]="title"  class="toolbar-title kirby-text-normal"></Label>
+  </StackLayout>
+  
+  <ActionItem ios.position="right" >
+    <StackLayout orientation="horizontal">
+      <ng-content select="[secondary]"></ng-content>
+    </StackLayout>
+  </ActionItem>
+  <ActionItem ios.position="right" >
+    <StackLayout orientation="horizontal">
+      <Label text="" class="action-item-spacer-small"></Label>
+      <ng-content select="[end]]"></ng-content>
+      <Label text="" class="action-item-spacer-large"></Label>
+    </StackLayout>
+  </ActionItem>
+</ActionBar>
