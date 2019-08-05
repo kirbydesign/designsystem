@@ -1,12 +1,8 @@
 <kirby-card>
-    <kirby-card-header *ngIf="config.header" [title]="config.header" [subtitle]="config.subheader">
+    <kirby-card-header *ngIf="config.header" [title]="config.header" [isTitleBold]="true" [subtitle]="config.subheader">
     </kirby-card-header>
-    <kirby-list shape="square" [items]="config.items" (itemSelect)="onItemSelect($event)">
-        <kirby-list-flex-item *kirbyListFlexItem="let item">
-            <kirby-list-cell showDivider="true" horisontalAlignment="center">
-                <kirby-list-cell-line [text]="item.text"></kirby-list-cell-line>
-            </kirby-list-cell>
-        </kirby-list-flex-item>
-    </kirby-list>
+    <div class="action-sheet-items">
+        <button (click)="onItemSelect(item)" *ngFor="let item of config.items">{{ item.text }}</button>
+    </div>
 </kirby-card>
 <kirby-button class="cancel-btn" attentionLevel="2" (click)="onModalDismiss()" [text]="cancelButtonText"></kirby-button>

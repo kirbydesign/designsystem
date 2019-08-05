@@ -124,10 +124,12 @@ describe('ActionSheetComponent', () => {
 
   describe('actions', () => {
     it('should contain each item', () => {
-      var el = fixture.debugElement.query(By.directive(ListComponent));
-      expect(el.componentInstance.items).toContain({ id: '1', text: 'Action 1' });
-      expect(el.componentInstance.items).toContain({ id: '2', text: 'Action 2' });
-      expect(el.componentInstance.items).toContain({ id: '3', text: 'Action 3' });
+      const rootElement: HTMLElement = fixture.debugElement.nativeElement;
+      const actionSheetItems = rootElement.querySelector('.action-sheet-items');
+      expect(actionSheetItems.children.length).toBe(3);
+      Array.from(actionSheetItems.children).forEach((item, index) => {
+        expect(item.textContent).toEqual(`Action ${index + 1}`);
+      });
     });
 
     it('should reflect add/remove/edit changes of items', () => {
@@ -135,12 +137,16 @@ describe('ActionSheetComponent', () => {
       component.config.items.pop();
       component.config.items.push({ id: '4', text: 'Action 4' });
       fixture.detectChanges();
-      var el = fixture.debugElement.query(By.directive(ListComponent));
-      expect(el.componentInstance.items).not.toContain({ id: '1', text: 'Action 1' });
-      expect(el.componentInstance.items).toContain({ id: '1', text: 'New Action 1' });
-      expect(el.componentInstance.items).toContain({ id: '2', text: 'Action 2' });
-      expect(el.componentInstance.items).not.toContain({ id: '3', text: 'Action 3' });
-      expect(el.componentInstance.items).toContain({ id: '4', text: 'Action 4' });
+      const rootElement: HTMLElement = fixture.debugElement.nativeElement;
+      const actionSheetItems = rootElement.querySelector('.action-sheet-items');
+      const actionSheetItemsText = Array.from(actionSheetItems.children).map((item) => {
+        return item.textContent;
+      });
+      expect(actionSheetItemsText).not.toContain('Action 1');
+      expect(actionSheetItemsText).toContain('New Action 1');
+      expect(actionSheetItemsText).toContain('Action 2');
+      expect(actionSheetItemsText).not.toContain('Action 3');
+      expect(actionSheetItemsText).toContain('Action 4');
     });
   });
 
