@@ -61,7 +61,7 @@ describe('ToolbarComponent', () => {
 
       spectator.setInput('hideBackButton', hide);
 
-      expect(spectator.query('.toolbar-item-left')).toBeTruthy();
+      expect(spectator.query('.item-start')).toBeTruthy();
     });
   });
 });
