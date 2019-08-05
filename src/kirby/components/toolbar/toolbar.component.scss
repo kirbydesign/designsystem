@@ -14,14 +14,14 @@
   }
 }
 
-.toolbar-item {
+.item {
 
-  &-left {
+  &-start {
     margin-left: size('s');
     margin-right: size('s');
   }
 
-  &-secondary {
+  &-middle {
     margin-left: size('s');
     margin-right: size('xxs');
   }

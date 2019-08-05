@@ -1,12 +1,12 @@
 <ion-toolbar class="toolbar">
-  <div slot="start" *ngIf="!hideBackButton" (click)="onBackButtonSelected()" class="toolbar-item-left">
+  <div slot="start" *ngIf="!hideBackButton" (click)="onBackButtonSelected()" class="item-start">
     <kirby-icon name="arrow-back" size="md"></kirby-icon>
   </div>
-  <div slot="end" class="toolbar-item-secondary">
+  <div slot="end" class="tem-middle">
     <ng-content select="[secondary]"></ng-content>
     
   </div>
-  <div slot="end" class="toolbar-item-end">
+  <div slot="end" class="tem-end">
     <ng-content select="[end]"></ng-content>
     
   </div>
