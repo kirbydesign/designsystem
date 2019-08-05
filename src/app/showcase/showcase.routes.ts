@@ -27,6 +27,7 @@ import { SlideButtonShowcaseComponent } from './slide-button-showcase/slide-butt
 import { ToastShowcaseComponent } from './toast-showcase/toast-showcase.component';
 import { ToggleShowcaseComponent } from './toggle-showcase/toggle-showcase.component';
 import { EmptyStateShowcaseComponent } from './empty-state-showcase/empty-state-showcase.component';
+import { LoadingShowcaseComponent } from './loading-showcase/loading-showcase.component';
 
 export const routes: Routes = [
   {
@@ -97,6 +98,10 @@ export const routes: Routes = [
       {
         path: 'modal',
         component: ModalShowcaseComponent,
+      },
+      {
+        path: 'loading',
+        component: LoadingShowcaseComponent,
       },
       {
         path: 'action-sheet',
