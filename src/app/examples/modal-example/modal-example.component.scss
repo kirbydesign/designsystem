@@ -1,0 +1,15 @@
+@import 'web-imports';
+
+a {
+    display: block;
+    color: get-color('black');
+    text-decoration: none;
+
+    &:hover {
+        color: get-color('primary');
+    }
+}
+
+.note {
+    color: get-color('danger');
+}
