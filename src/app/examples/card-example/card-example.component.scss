@@ -2,14 +2,11 @@
 
 kirby-card {
   position: relative;
+  margin-bottom: size('s');
 }
 
 kirby-card-header {
   padding-bottom: 0;
-}
-
-.card-content {
-  padding: size("s");
 }
 
 kirby-card {
