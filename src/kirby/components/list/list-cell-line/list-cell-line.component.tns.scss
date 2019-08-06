@@ -8,4 +8,8 @@ Label {
     font-size: font-size('n');
     font-weight: font-weight('light');
   }
+
+  &.selected {
+    font-weight: font-weight('bold');
+  }
 }
