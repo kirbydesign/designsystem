@@ -8,7 +8,7 @@ import { SegmentItem } from './segment-item';
   styleUrls: ['./segmented-control.component.scss'],
 })
 export class SegmentedControlComponent {
-  @Output() segmentClick: EventEmitter<SegmentItem> = new EventEmitter();
+  @Output() segmentSelect: EventEmitter<SegmentItem> = new EventEmitter();
 
   @HostBinding('class.default-mode')
   isDefaultMode: boolean = true; // Default
@@ -25,9 +25,9 @@ export class SegmentedControlComponent {
 
   activeSegment: SegmentItem;
 
-  onSegmentClick(item: SegmentItem) {
+  onSegmentSelect(item: SegmentItem) {
     this.activeSegment = item;
     this.items.forEach((segment) => (segment.checked = this.activeSegment.id === segment.id));
-    this.segmentClick.emit(this.activeSegment);
+    this.segmentSelect.emit(this.activeSegment);
   }
 }

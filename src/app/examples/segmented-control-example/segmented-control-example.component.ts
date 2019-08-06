@@ -22,8 +22,8 @@ export class SegmentedControlExampleComponent implements OnInit, OnChanges {
     this.items = this.getSegmentedItems();
   }
 
-  onSegmentClick(id) {
-    this.activeSegment = id;
+  onSegmentSelect(selectedSegment: SegmentItem) {
+    this.activeSegment = selectedSegment;
   }
 
   private getSegmentedItems(): SegmentItem[] {

@@ -1,5 +1,5 @@
 <StackLayout backgroundColor="#f5f5f5">
-  <kirby-segmented-control [items]="items" (segmentClick)="onSegmentClick($event)"></kirby-segmented-control>
+  <kirby-segmented-control [items]="items" (segmentSelect)="onSegmentSelect($event)"></kirby-segmented-control>
   <ng-container *ngIf="items[0] === activeSegment">
     <StackLayout>
       <Label class="kirby-text-medium" text="Content for {{items[0].id}} segment"></Label>
