@@ -1,4 +1,4 @@
-<ion-segment mode="ios">
+<ion-segment mode="ios" *ngIf="isDefaultMode">
   <div class="segment-btn-wrapper" *ngFor="let item of items">
     <kirby-badge *ngIf="item.badge" [themeColor]="item.badge.themeColor">{{item.badge.content}}</kirby-badge>
     <ion-segment-button [value]="item" class="kirby-text-small" [checked]="item.checked" (ionSelect)="onSegmentClick(item)">
@@ -6,3 +6,8 @@
     </ion-segment-button> 
   </div>
 </ion-segment> 
+
+<div class="scrollable" *ngIf="isChipMode">
+  <kirby-chip [text]="item.text" [isSelected]="item.checked"
+      (click)="onSegmentClick(item)" *ngFor="let item of items"></kirby-chip>
+</div>

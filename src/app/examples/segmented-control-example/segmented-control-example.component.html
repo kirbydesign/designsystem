@@ -1,11 +1,12 @@
-<kirby-segmented-control [items]="items" (segmentClick)="onSegmentClick($event)"></kirby-segmented-control>
+<kirby-segmented-control
+  [mode]="mode" 
+  [items]="items" 
+  (segmentClick)="onSegmentClick($event)">
+</kirby-segmented-control>
 
-<ng-container *ngIf="items[0] === activeSegment">
-  <h2>Content for {{items[0].id}} segment</h2>
-  <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quia similique voluptas veniam ducimus? Accusantium necessitatibus similique libero, eos incidunt sed.</p>
-</ng-container>
-
-<ng-container *ngIf="items[1] === activeSegment">
-  <h2>Content for {{items[1].id}} segment</h2>
-  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, quia.</p>
+<ng-container>
+  <div class="segment-data">
+    <h2>Content for {{activeSegment.id}} segment</h2>
+    <p>The selected segment has text "{{ activeSegment.text }}" and id "{{ activeSegment.id }}"</p>
+  </div>
 </ng-container>
