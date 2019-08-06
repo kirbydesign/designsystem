@@ -22,6 +22,10 @@ $min-card-width: 304px;
   min-width: $min-card-width;
   overflow: hidden;
 
+  &.padding {
+    padding: size('s');
+  }
+
   &.highlighted {
     box-shadow: get-elevation(4);
   }
