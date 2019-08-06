@@ -14,25 +14,33 @@ export class SegmentedControlExampleComponent implements OnInit, OnChanges {
   items: SegmentItem[] = this.getSegmentedItems();
 
   ngOnInit() {
+    this.mode = 'default';
     const checkedSegment = this.items.find((segment) => segment.checked === true);
     this.activeSegment = checkedSegment;
   }
 
   ngOnChanges(_: any): void {
     this.items = this.getSegmentedItems();
+    this.activeSegment = this.items[0];
   }
 
   onSegmentSelect(selectedSegment: SegmentItem) {
     this.activeSegment = selectedSegment;
   }
 
+  onCheckedChange(newState: boolean): void {
+    this.mode = newState ? 'chip' : 'default';
+    this.ngOnChanges(null);
+  }
+
   private getSegmentedItems(): SegmentItem[] {
     let segmentedItems = [];
     if (this.mode === 'chip') {
       segmentedItems.push({ text: 'Chip-1', checked: true, id: '1' });
-      for (let i = 2; i < 7; ++i) {
-        segmentedItems.push({ text: 'Chip-'.concat(i.toString()), id: i.toString() });
-      }
+      // Add additional chips for testing
+      Array.from('23456'.split('')).forEach((i: string) => {
+        segmentedItems.push({ text: 'Chip-'.concat(i), id: i });
+      });
     } else {
       segmentedItems.push({
         text: 'First item',

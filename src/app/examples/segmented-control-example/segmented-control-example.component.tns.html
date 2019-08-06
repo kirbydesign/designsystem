@@ -1,16 +1,15 @@
-<StackLayout backgroundColor="#f5f5f5">
-  <kirby-segmented-control [items]="items" (segmentSelect)="onSegmentSelect($event)"></kirby-segmented-control>
-  <ng-container *ngIf="items[0] === activeSegment">
-    <StackLayout>
-      <Label class="kirby-text-medium" text="Content for {{items[0].id}} segment"></Label>
-      <Label textWrap="true"text="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quia similique voluptas veniam ducimus? Accusantium necessitatibus similique libero, eos incidunt sed."></Label>
-    </StackLayout>
-  </ng-container>
-      
-  <ng-container *ngIf="items[1] === activeSegment">
-    <StackLayout>
-      <Label class="kirby-text-medium" text="Content for {{items[1].id}} segment"></Label>
-      <Label textWrap="true"text="Lorem ipsum, dolor sit amet consectetur adipisicing elit"></Label>
+<StackLayout backgroundColor="#f5f5f5" class="segment-example">
+  <StackLayout marginBottom="20" horizontalAlignment="center" orientation="horizontal">
+    <kirby-toggle checked="false" (checkedChange)="onCheckedChange($event)"></kirby-toggle>
+    <Label marginLeft="20" text="Mode: {{ mode }}"></Label>
+  </StackLayout>
+
+  <kirby-segmented-control [mode]="mode" [items]="items" (segmentSelect)="onSegmentSelect($event)"></kirby-segmented-control>
+
+  <ng-container>
+    <StackLayout class="segment-data" padding="20">
+      <Label class="kirby-text-medium" text="Content for {{activeSegment.text}} segment"></Label>
+      <Label textWrap="true" text="The selected segment has text '{{ activeSegment.text }}' and id '{{ activeSegment.id }}'"></Label>
     </StackLayout>
   </ng-container>
 </StackLayout>

@@ -22,7 +22,6 @@ import { IconExampleComponent } from './icon-example/icon-example.component';
 import { CalendarExampleComponent } from './calendar-example/calendar-example.component';
 import { CalendarCardExampleComponent } from './calendar-example/calendar-card-example.component';
 import { CheckboxExampleComponent } from './checkbox-example/checkbox-example.component';
-import { SegmentedChipControlExampleComponent } from './segmented-chip-control-example/segmented-chip-control-example.component';
 import { ActionSheetExampleComponent } from './action-sheet-example/action-sheet-example.component';
 import { AlertExampleComponent } from './alert-example/alert-example.component';
 import { SlideButtonExampleComponent } from './slide-button-example/slide-button-example.component';
@@ -66,7 +65,6 @@ export const COMPONENT_DECLARATIONS: any[] = [
   FirstEmbeddedModalExampleComponent,
   SecondEmbeddedModalExampleComponent,
   SegmentedControlExampleComponent,
-  SegmentedChipControlExampleComponent,
   ChipExampleComponent,
   BadgeExampleComponent,
   IconExampleComponent,

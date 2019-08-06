@@ -29,7 +29,6 @@ import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { ModalWrapperComponent } from './components/modal/modal-wrapper/modal-wrapper.component';
 import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
 import { ChipComponent } from './components/chip/chip.component';
-import { SegmentedChipControlComponent } from './components/segment/segmented-chip-control/segmented-chip-control.component';
 import { BadgeComponent } from './components/badge/badge.component';
 import { ModalController } from './components/modal/services/modal.controller';
 import { IModalController } from './components/modal/services/modal.controller.interface';
@@ -77,7 +76,6 @@ export const declarations = [
   ActionSheetComponent,
   SegmentedControlComponent,
   ChipComponent,
-  SegmentedChipControlComponent,
   BadgeComponent,
   SizeDirective,
   ThemeColorDirective,
