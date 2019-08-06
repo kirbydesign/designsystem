@@ -1,6 +1,6 @@
 <StackLayout class="box" verticalAlignment="center">
-  <StackLayout class="icon">
-    <kirby-icon *ngIf="iconName || customIconName" [name]="iconName" [customName]="customIconName" size="lg" outline="true" themeColor="medium"></kirby-icon>
+  <StackLayout verticalAlignment="center" class="icon-outline" *ngIf="iconName || customIconName">
+    <kirby-icon [name]="iconName" [customName]="customIconName" size="lg" themeColor="medium"></kirby-icon>
   </StackLayout>
   <Label *ngIf="title" class="h3 title" [text]="title"></Label>
   <Label *ngIf="subtitle" class="p subtitle" [text]="subtitle" textWrap="true"></Label>
