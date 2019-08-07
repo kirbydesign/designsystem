@@ -6,6 +6,10 @@
   margin-bottom: 10;
 }
 
+.hide-check {
+  opacity: 0;
+}
+
 Label {
   font-size: font-size('xs');
   font-weight: font-weight('light');

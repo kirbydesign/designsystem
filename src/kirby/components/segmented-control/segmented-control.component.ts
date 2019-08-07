@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, Input } from '@angular/core';
+import { Component, EventEmitter, Output, Input, HostBinding } from '@angular/core';
 
 import { SegmentItem } from './segment-item';
 
@@ -8,13 +8,26 @@ import { SegmentItem } from './segment-item';
   styleUrls: ['./segmented-control.component.scss'],
 })
 export class SegmentedControlComponent {
-  @Output() segmentClick: EventEmitter<SegmentItem> = new EventEmitter();
+  @Output() segmentSelect: EventEmitter<SegmentItem> = new EventEmitter();
+
+  @HostBinding('class.default-mode')
+  isDefaultMode: boolean = true; // Default
+
+  @HostBinding('class.chip-mode')
+  isChipMode: boolean;
+
   @Input() items: SegmentItem[];
+
+  @Input() set mode(mode: 'default' | 'chip') {
+    this.isDefaultMode = mode === 'default';
+    this.isChipMode = mode === 'chip';
+  }
+
   activeSegment: SegmentItem;
 
-  onSegmentClick(item: SegmentItem) {
+  onSegmentSelect(item: SegmentItem) {
     this.activeSegment = item;
     this.items.forEach((segment) => (segment.checked = this.activeSegment.id === segment.id));
-    this.segmentClick.emit(this.activeSegment);
+    this.segmentSelect.emit(this.activeSegment);
   }
 }
