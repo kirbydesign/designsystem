@@ -10,12 +10,6 @@
   justify-content: center;
   font-size: var(--kirby-icon-font-size);
 
-  .outline {
-    border: 3px solid currentColor;
-    padding: var(--kirby-icon-padding);
-    border-radius: size('xxxl') * 3;
-  }
-
   svg path {
     fill: currentColor;
     stroke: currentColor;

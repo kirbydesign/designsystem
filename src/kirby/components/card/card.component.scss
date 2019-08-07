@@ -24,6 +24,9 @@ $min-card-width: 304px;
 
   &.padding {
     padding: size('s');
+    @include media("<small") {
+      padding: size('xs');
+    }
   }
 
   &.highlighted {
