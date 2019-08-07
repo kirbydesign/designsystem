@@ -15,13 +15,8 @@ export class IconExampleComponent {
   sizes = Sizes;
   color: Color;
   colors: Color[] = ColorHelper.getMainColors();
-  outline: boolean;
 
   changeColor(color: Color) {
     this.color = color;
-  }
-
-  onOutlineChecked(checked) {
-    this.outline = checked;
   }
 }
