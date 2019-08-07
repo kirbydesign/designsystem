@@ -44,7 +44,7 @@ export class ModalHelper {
 
     // Define animation transition values
     // TODO: Replace 40px with the respective kirby size
-    let transformYFromTo = [`${baseEl.clientHeight}px`, `40px`];
+    let transformYFromTo = [`${baseEl.clientHeight}px`, `0px`];
     let fadeBackdropFromTo = [0.01, 0.3];
     let fadeWrapperFromTo = [0.01, 1];
     if (!isAnimEnter) {

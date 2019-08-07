@@ -2,15 +2,18 @@
 
 // Global modal styling can be found at scss/web/_ionic.scss
 
-.modal-wrapper {
+.kirby-modal-wrapper {
   display: flex;
   flex-flow: column;
-  height: 100%;
 
   .modal-header {
     display: flex;
     justify-content: flex-end;
     padding: size('s');
+    @include media('>=medium') {
+      padding-left: size('xxxl');
+      padding-right: size('xxxl');
+    }
 
     .title {
       display: flex;
@@ -34,9 +37,11 @@
   }
 
   .modal-content {
-    height: 100%;
-    overflow-y: auto;
     padding-left: size('s');
     padding-right: size('s');
+    @include media('>=medium') {
+      padding-left: size('xxxl');
+      padding-right: size('xxxl');
+    }
   }
 }

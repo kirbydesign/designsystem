@@ -12,17 +12,41 @@
     }
     
 }
-  
+
 .kirby-modal {
+    // Hardcoded magic numbers: 
+    // https://github.com/kirbydesign/designsystem/issues/468
+    $modal-max-width: 720px;
+    $modal-max-height: 648px;
+
     --background: #{get-color('background-color')};
     --border-radius: #{$border-radius};
     --box-shadow: #{get-elevation(8)};
+    --max-height: 100%;
+    --height: auto;
     position: fixed;
+    align-items: flex-end;
+
+    .modal-wrapper {
+        // remove top spacing introduced by ionic
+        transform: translate3d(0,0,0);
+        
+        // handle scrollable content
+        .kirby-modal-wrapper {
+            max-height: $modal-max-height;
+            .modal-content {
+                overflow-y: auto;
+            }
+        }
+    }
 
     @include media(">=medium") {
-        //TODO Hardcoded magic numbers: Jakob + Jonathan, revisit!!!
-        --width: 720px;
-        --height: 647px;
+        --width: $modal-max-width;
+    }
+
+    @media screen and (min-height: $modal-max-height) {
+        --height: $modal-max-height;
+        align-items: center;
     }
 }
   

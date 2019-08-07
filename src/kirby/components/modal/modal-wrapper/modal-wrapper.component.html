@@ -1,4 +1,4 @@
-<div class="modal-wrapper" #modalWrapper tabindex="-1" (window:focus)="onFocusChange()" (window:focusout)="onFocusChange()">
+<div class="kirby-modal-wrapper" #modalWrapper tabindex="-1" (window:focus)="onFocusChange()" (window:focusout)="onFocusChange()">
     <div class="modal-header">
         <div *ngIf="config.flavor === 'drawer'">
             <ng-container *ngTemplateOutlet="closeButton; context: { icon: 'arrow-down' }"></ng-container>
