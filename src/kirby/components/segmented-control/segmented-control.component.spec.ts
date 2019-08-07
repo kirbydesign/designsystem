@@ -56,21 +56,63 @@ describe('SegmentedControlComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should have 2 segments buttons', () => {
-    expect(fixture.nativeElement.querySelectorAll('ion-segment-button').length).toBe(2);
+  describe('default mode', () => {
+    it("should have a 'default' mode when created", () => {
+      expect(component.isDefaultMode).toBeTruthy();
+      expect(component.isChipMode).toBeFalsy();
+    });
+
+    it('should have 2 segments buttons', () => {
+      expect(fixture.nativeElement.querySelectorAll('ion-segment-button').length).toBe(2);
+    });
+
+    it('should not have any segmented chips', () => {
+      expect(fixture.nativeElement.querySelectorAll('kirby-chip').length).toBe(0);
+    });
+
+    it('should call onSegmentSelect when clicking a segment button', () => {
+      spyOn(component, 'onSegmentSelect');
+      const segmentBtn = fixture.debugElement.query(By.css('ion-segment-button'));
+      const button = segmentBtn.componentInstance as MockIonSegmentButtonComponent;
+      button.ionSelect.emit();
+      expect(component.onSegmentSelect).toHaveBeenCalled();
+    });
+
+    it('should set activeSegment to second segmentItem', () => {
+      const segmentElm = fixture.debugElement.queryAll(By.css('ion-segment-button'))[1];
+      segmentElm.triggerEventHandler('ionSelect', null);
+      expect(component.activeSegment).toBe(items[1]);
+    });
   });
 
-  it('should call onSegmentClick when clicking a segment button', () => {
-    spyOn(component, 'onSegmentClick');
-    const segmentBtn = fixture.debugElement.query(By.css('ion-segment-button'));
-    const button = segmentBtn.componentInstance as MockIonSegmentButtonComponent;
-    button.ionSelect.emit();
-    expect(component.onSegmentClick).toHaveBeenCalled();
-  });
+  describe('chip mode', () => {
+    beforeEach(() => {
+      component.mode = 'chip';
+      fixture.detectChanges();
+    });
 
-  it('should set activeSegment to second segmentItem', () => {
-    const segmentElm = fixture.debugElement.queryAll(By.css('ion-segment-button'))[1];
-    segmentElm.triggerEventHandler('ionSelect', null);
-    expect(component.activeSegment).toBe(items[1]);
+    it("should have a 'chip' mode when created", () => {
+      expect(component.isDefaultMode).toBeFalsy();
+      expect(component.isChipMode).toBeTruthy();
+    });
+
+    it('should not have any segments buttons', () => {
+      expect(fixture.nativeElement.querySelectorAll('ion-segment-button').length).toBe(0);
+    });
+
+    it('should have 2 segmented chips', () => {
+      expect(fixture.nativeElement.querySelectorAll('kirby-chip').length).toBe(2);
+    });
+
+    it('should call onSegmentSelect when clicking a segment chip', () => {
+      spyOn(component, 'onSegmentSelect');
+      fixture.debugElement.query(By.css('kirby-chip')).nativeElement.click();
+      expect(component.onSegmentSelect).toHaveBeenCalled();
+    });
+
+    it('should set activeSegment to second segmentItem', () => {
+      fixture.debugElement.queryAll(By.css('kirby-chip'))[1].nativeElement.click();
+      expect(component.activeSegment).toBe(items[1]);
+    });
   });
 });
