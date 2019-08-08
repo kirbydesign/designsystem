@@ -7,8 +7,11 @@ import * as application from 'tns-core-modules/application';
 declare const android;
 
 import { ModalConfig } from './config/modal-config';
-import { COMPONENT_PROPS, ModalConfigHelper } from './config/modal-config.helper';
+import { COMPONENT_PROPS } from './config/modal-config.helper';
 import { IModalController } from '../services/modal.controller.interface';
+
+declare var require: any;
+const style: any = require('sass-extract-loader!./modal-wrapper.component.scss');
 
 @Component({
   templateUrl: './modal-wrapper.component.html',
@@ -18,8 +21,10 @@ export class ModalWrapperComponent extends ContentView implements OnInit {
   config: ModalConfig;
   view: View;
   componentPropsInjector: Injector;
-  outerPaddingTop = 32;
+  outerPaddingTop = 0;
   innerMarginBottom = 0;
+  isScreenWide = false;
+  isScreenTall = false;
 
   constructor(
     private modalController: IModalController,
@@ -36,7 +41,9 @@ export class ModalWrapperComponent extends ContentView implements OnInit {
   }
 
   ngOnInit(): void {
+    // On iOS the modal never overlaps with the statusbar, hence we need no padding top (0)
     this.setAndroidPaddingAndMargin();
+    this.setIsLargeScreenSize();
   }
 
   setAndroidPaddingAndMargin() {
@@ -154,5 +161,10 @@ export class ModalWrapperComponent extends ContentView implements OnInit {
       return navBarHeight / application.android.context.getResources().getDisplayMetrics().density;
     }
     return 0;
+  }
+
+  private setIsLargeScreenSize() {
+    this.isScreenTall = screen.mainScreen.heightDIPs >= style.global['$modal-max-height'].value;
+    this.isScreenWide = screen.mainScreen.widthDIPs >= style.global['$modal-max-width'].value;
   }
 }

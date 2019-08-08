@@ -1,5 +1,10 @@
 @import "../../../scss/native-imports";
 
+@mixin left-and-right-margin($size) {
+  padding-left: size($size);
+  padding-right: size($size);
+}
+
 .modal-wrapper {
   padding-top: size('l');
 
@@ -7,19 +12,39 @@
     border-top-left-radius: $border-radius;
     border-top-right-radius: $border-radius;
     background-color: get-color('background-color');
+    .scroll-view {
+      padding: size('s');
+    }
 
     .modal-button {
       margin-top: size('xs'); 
     }
-    
-    .title-bar {  
+
+    .title-bar {
       Label {
         font-weight: font-weight('bold');
       }
-    
       .title {
         padding: size('s');
       }
-    }    
-  }  
+    }
+
+    &.wide-screen {
+      width: $modal-max-width;
+      .scroll-view {
+        @include left-and-right-margin('xxxl');
+      }
+      .title-bar {
+        .title {
+          @include left-and-right-margin('xxxl');
+        }
+      }
+    }
+  
+    &.tall-screen {
+      height: $modal-max-height;
+      border-bottom-left-radius: $border-radius;
+      border-bottom-right-radius: $border-radius;
+    }
+  }
 }

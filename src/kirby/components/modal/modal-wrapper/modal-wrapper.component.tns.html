@@ -1,5 +1,14 @@
-<ModalStack class="modal-wrapper" android:style="padding-top: {{outerPaddingTop}};" dismissEnabled="true" (showingModally)="onShowingModally($event)">
-    <StackLayout id="modal" class="modal" android:style="margin-bottom: {{innerMarginBottom}};" orientation="vertical" verticalAlignment="bottom">
+<ModalStack class="modal-wrapper"
+        android:style="padding-top: {{outerPaddingTop}};" 
+        dismissEnabled="true" 
+        (showingModally)="onShowingModally($event)">
+    <StackLayout id="modal" 
+            [class.wide-screen]="isScreenWide"
+            [class.tall-screen]="isScreenTall"
+            class="modal" 
+            android:style="margin-bottom: {{innerMarginBottom}};" 
+            orientation="vertical" 
+            verticalAlignment="bottom">
         <StackLayout *ngIf="config.flavor === 'drawer'">
             <ng-container *ngTemplateOutlet="drawer"></ng-container>
         </StackLayout>
@@ -24,7 +33,9 @@
         </StackLayout>
         
         <ScrollView height="100%" width="100%" row="1" colSpan="3">
-            <ng-container *ngComponentOutlet="config.component; injector: componentPropsInjector"></ng-container>
+            <StackLayout class="scroll-view">
+                <ng-container *ngComponentOutlet="config.component; injector: componentPropsInjector"></ng-container>
+            </StackLayout>
         </ScrollView>
     </GridLayout>
 </ng-template>
@@ -40,7 +51,9 @@
         </StackLayout>
 
         <ScrollView height="100%" width="100%" row="1" colSpan="2">
-            <ng-container *ngComponentOutlet="config.component; injector: componentPropsInjector"></ng-container>
+            <StackLayout class="scroll-view">
+                <ng-container *ngComponentOutlet="config.component; injector: componentPropsInjector"></ng-container>
+            </StackLayout>
         </ScrollView>
     </GridLayout>
 </ng-template>
