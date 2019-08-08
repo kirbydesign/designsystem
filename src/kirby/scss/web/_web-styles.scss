@@ -16,8 +16,6 @@
 .kirby-modal {
     // Hardcoded magic numbers: 
     // https://github.com/kirbydesign/designsystem/issues/468
-    $modal-max-width: 720px;
-    $modal-max-height: 648px;
 
     --background: #{get-color('background-color')};
     --border-radius: #{$border-radius};
@@ -33,7 +31,7 @@
         
         // handle scrollable content
         .kirby-modal-wrapper {
-            max-height: $modal-max-height;
+            max-height: #{$modal-max-height}px;
             .modal-content {
                 overflow-y: auto;
             }
@@ -41,11 +39,11 @@
     }
 
     @include media(">=medium") {
-        --width: $modal-max-width;
+        --width: #{$modal-max-width}px;
     }
 
-    @media screen and (min-height: $modal-max-height) {
-        --height: $modal-max-height;
+    @media screen and (min-height: #{$modal-max-height}px) {
+        --height: #{$modal-max-height}px;
         align-items: center;
     }
 }
