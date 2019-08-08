@@ -34,9 +34,11 @@ export class ChangelogComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.changelogService.updateChangelog();
 
-    this.changelogService.changelog$.subscribe((changelog: ChangelogVersion[]) => {
-      this.changelog = changelog;
-    });
+    this.changelogSubscription = this.changelogService.changelog$.subscribe(
+      (changelog: ChangelogVersion[]) => {
+        this.changelog = changelog;
+      }
+    );
   }
 
   ngOnDestroy(): void {
