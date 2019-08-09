@@ -30,14 +30,15 @@ $font-sizes: (
 );
 
 $line-height: (
-  display: 41,
-  xxl:  34,
-  xl:   28,
-  l:    26,
-  m:    22,
-  n:    22,
-  s:    20,
-  xs:   18 
+  display: 41,  // Designers/UX's haven't made up their minds yet on this one.
+  xxl: 34, // UX - Not decided yet..
+  xl: 38, // h1 - Not decided yet..
+  l: 26,  // UX - Not decided yet..
+  m: 21,  // UX - Not decided yet..
+  n: 24,  // h1, h2, h3 and p all use this....(Weird rhythm?)
+  s: 18,  // For text-small
+  xs: 14, // For text-xsmall
+  xxs: 11 // For text-xxsmall
 );
 
 $font-weight: (
