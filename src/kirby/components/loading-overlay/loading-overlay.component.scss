@@ -1,29 +1,29 @@
-@import "native-imports";
+@import "web-imports";
 
-.content {
-    z-index: 0;
-}
-
-.overlay {
-    width: 100%;
-    height: 100%;
-    z-index: 1004;
-    opacity: 0.8;
-    
-    &.backdrop {
-        background-color: get-color('background-color');
-    }
-}
-
-.spinner-wrapper {
+.overlay-wrapper {
     height: 100%;
     width: 100%;
-    z-index: 1004;
+    position: relative;
 
-    .spinner {
-        z-index: 1004;
+    .spinner-wrapper {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        z-index: z(modal-overlay);
+        opacity: 0.8;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        justify-items: center;
+        
+        &.backdrop {
+            background-color: get-color('background-color');
+        }
 
-        width: 34px;
-        height: 34px;
+        .spinner {
+
+            width: size(l);
+            height: size(l);
+        }
     }
 }

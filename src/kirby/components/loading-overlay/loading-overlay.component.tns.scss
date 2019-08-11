@@ -1,0 +1,17 @@
+@import "native-imports";
+
+.spinner-wrapper {
+    height: 100%;
+    width: 100%;
+    z-index: z(modal-overlay);
+    opacity: 0.8;
+    
+    &.backdrop {
+        background-color: get-color('background-color');
+    }
+
+    .spinner {
+        width: 34px;
+        height: 34px;
+    }
+}

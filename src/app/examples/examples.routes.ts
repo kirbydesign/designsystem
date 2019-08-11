@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 
-
 import { AvatarExampleComponent } from './avatar-example/avatar-example.component';
 import { ButtonExampleComponent } from './button-example/button-example.component';
 import { FloatingActionButtonExampleComponent } from './floating-action-button-example/floating-action-button-example.component';

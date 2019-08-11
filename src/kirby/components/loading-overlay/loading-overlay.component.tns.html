@@ -1,11 +1,11 @@
-<GridLayout  #overlayWrapperRef>
-    <StackLayout class="content">
+<GridLayout #overlayWrapperRef>
+    <StackLayout class="content-wrapper">
         <ng-content></ng-content>
     </StackLayout>
     <FlexboxLayout
     *ngIf="isLoading"
     [class.backdrop]="showBackdrop"
-    class="spinner-wrapper overlay"
+    class="spinner-wrapper"
     justifyContent="center"
     alignContent="center"
     alignItems="center"
