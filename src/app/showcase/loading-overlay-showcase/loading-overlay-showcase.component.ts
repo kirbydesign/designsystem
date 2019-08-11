@@ -1,0 +1,12 @@
+import { Component } from '@angular/core';
+
+import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
+
+@Component({
+  selector: 'kirby-loading-overlay-showcase',
+  templateUrl: './loading-overlay-showcase.component.html',
+})
+export class LoadingOverlayShowcaseComponent {
+  exampleHtml: string = require('../../examples/loading-overlay-example/loading-overlay-example.component.html');
+  properties: ShowcaseProperty[] = [];
+}

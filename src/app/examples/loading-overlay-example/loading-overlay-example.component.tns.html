@@ -1,0 +1,13 @@
+
+<kirby-loading-overlay [isLoading]="isLoading" [showBackdrop]="showBackdrop">
+  <StackLayout>
+    <Button kirby-button attentionLevel="1" text="Show alert" (tap)="showAlert()"></Button>
+    <Button kirby-button attentionLevel="1" text="Show alert" (tap)="showAlert()"></Button>
+    <Button kirby-button attentionLevel="2" text="Show alert" (tap)="showAlert()"></Button>
+    <Button kirby-button attentionLevel="2" text="Show alert" (tap)="showAlert()"></Button>
+    <Button kirby-button attentionLevel="3" text="Show alert" (tap)="showAlert()"></Button>
+    <Button kirby-button attentionLevel="3" text="Show alert" (tap)="showAlert()"></Button>
+    <Button kirby-button attentionLevel="4" text="Show loading overlay" (tap)="showLoadingOverlay(true)"></Button>
+    <Button kirby-button attentionLevel="4" text="Show loading overlay without backdrop" (tap)="showLoadingOverlay(false)"></Button>
+  </StackLayout>
+</kirby-loading-overlay>

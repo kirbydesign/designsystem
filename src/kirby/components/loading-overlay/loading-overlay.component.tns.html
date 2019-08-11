@@ -1,0 +1,18 @@
+<GridLayout  #overlayWrapperRef>
+    <StackLayout class="content">
+        <ng-content></ng-content>
+    </StackLayout>
+    <FlexboxLayout
+    *ngIf="isLoading"
+    [class.backdrop]="showBackdrop"
+    class="spinner-wrapper overlay"
+    justifyContent="center"
+    alignContent="center"
+    alignItems="center"
+    horizontalAlignment="center"
+    verticalAlignment="center"
+    background="transparent"
+  >
+    <kirby-spinner class="spinner"></kirby-spinner>
+  </FlexboxLayout>
+</GridLayout>

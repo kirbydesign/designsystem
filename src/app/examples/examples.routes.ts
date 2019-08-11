@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 
+
 import { AvatarExampleComponent } from './avatar-example/avatar-example.component';
 import { ButtonExampleComponent } from './button-example/button-example.component';
 import { FloatingActionButtonExampleComponent } from './floating-action-button-example/floating-action-button-example.component';
@@ -24,7 +25,7 @@ import { SlideButtonExampleComponent } from './slide-button-example/slide-button
 import { ToastExampleComponent } from './toast-example/toast-example.component';
 import { ToggleExampleComponent } from './toggle-example/toggle-example.component';
 import { EmptyStateExampleComponent } from './empty-state-example/empty-state-example.component';
-import { LoadingExampleComponent } from './loading-example/loading-example.component';
+import { LoadingOverlayExampleComponent } from './loading-overlay-example/loading-overlay-example.component';
 
 export const routes: Routes = [
   {
@@ -80,8 +81,8 @@ export const routes: Routes = [
     component: ModalExampleComponent,
   },
   {
-    path: 'loading',
-    component: LoadingExampleComponent,
+    path: 'loading-overlay',
+    component: LoadingOverlayExampleComponent,
   },
   {
     path: 'action-sheet',

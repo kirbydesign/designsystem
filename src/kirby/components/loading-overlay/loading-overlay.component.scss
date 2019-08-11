@@ -1,0 +1,29 @@
+@import "native-imports";
+
+.content {
+    z-index: 0;
+}
+
+.overlay {
+    width: 100%;
+    height: 100%;
+    z-index: 1004;
+    opacity: 0.8;
+    
+    &.backdrop {
+        background-color: get-color('background-color');
+    }
+}
+
+.spinner-wrapper {
+    height: 100%;
+    width: 100%;
+    z-index: 1004;
+
+    .spinner {
+        z-index: 1004;
+
+        width: 34px;
+        height: 34px;
+    }
+}

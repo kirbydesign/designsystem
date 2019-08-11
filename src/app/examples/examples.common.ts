@@ -29,7 +29,7 @@ import { SlideButtonExampleComponent } from './slide-button-example/slide-button
 import { ToastExampleComponent } from './toast-example/toast-example.component';
 import { ToggleExampleComponent } from './toggle-example/toggle-example.component';
 import { EmptyStateExampleComponent } from './empty-state-example/empty-state-example.component';
-import { LoadingExampleComponent } from './loading-example/loading-example.component';
+import { LoadingOverlayExampleComponent } from './loading-overlay-example/loading-overlay-example.component';
 
 // Example of "custom" icons
 export const iconSettings: IconSettings = {
@@ -78,7 +78,7 @@ export const COMPONENT_DECLARATIONS: any[] = [
   ToastExampleComponent,
   ToggleExampleComponent,
   EmptyStateExampleComponent,
-  LoadingExampleComponent,
+  LoadingOverlayExampleComponent,
 ];
 
 // Configure custom icons (used by example to show the usage of custom icons)
