@@ -34,8 +34,6 @@
     }
 
     &.wide-screen {
-      width: $modal-max-width;
-      
       .scroll-view, .title {
         padding-left: size('xxxl');
         padding-right: size('xxxl');

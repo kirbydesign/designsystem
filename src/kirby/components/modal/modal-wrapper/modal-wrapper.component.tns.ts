@@ -25,7 +25,8 @@ export class ModalWrapperComponent extends ContentView implements OnInit {
   innerMarginBottom = 0;
   isScreenWide = false;
   isScreenTall = false;
-  modalMaxHeight: number = 0;
+  private modalMaxHeight: number = 0;
+  private modalMaxWidth: number = 0;
   isContentExceedingModalMaxHeight = false;
 
   constructor(
@@ -177,7 +178,8 @@ export class ModalWrapperComponent extends ContentView implements OnInit {
 
   private setScreenSizeFlags() {
     this.modalMaxHeight = parseInt(style.global['$modal-max-height'].value);
+    this.modalMaxWidth = parseInt(style.global['$modal-max-width'].value);
     this.isScreenTall = screen.mainScreen.heightDIPs >= this.modalMaxHeight;
-    this.isScreenWide = screen.mainScreen.widthDIPs >= style.global['$modal-max-width'].value;
+    this.isScreenWide = screen.mainScreen.widthDIPs >= this.modalMaxWidth;
   }
 }

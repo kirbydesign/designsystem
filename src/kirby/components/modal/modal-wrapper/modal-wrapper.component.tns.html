@@ -3,7 +3,7 @@
         dismissEnabled="true" 
         (showingModally)="onShowingModally($event)">
     <GridLayout rows="*, {{ modalMaxHeight }}, *"> <!-- center modal vertically -->
-        <FlexboxLayout row="1" flexDirection="column" justifyContent="flex-end">
+        <FlexboxLayout row="1" flexDirection="column" justifyContent="flex-end" [width]="isScreenTall ? modalMaxWidth : 'auto'">
             <StackLayout id="modal"
                     [class.wide-screen]="isScreenWide"
                     [class.tall-screen]="isScreenTall"
