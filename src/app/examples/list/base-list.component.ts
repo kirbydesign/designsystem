@@ -1,12 +1,14 @@
+import { ListItem } from '@kirbydesign/designsystem/components/list/list-item/list-item.interface';
+
 export class BaseListComponent {
-  public itemsFullList: any[] = [
+  public itemsFullList: ListItem[] = [
     {
       id: 0,
       title: 'Vestas Wind Systems has a very long name',
       subTitle: '2000 pcs',
       amount: '5.587.218.309 DKK',
       detail: 225,
-      color: 'medium',
+      color: 'default',
     },
     {
       id: 1,
@@ -14,7 +16,7 @@ export class BaseListComponent {
       subTitle: '1827 pcs',
       amount: '76.980 DKK',
       detail: -3,
-      color: 'default',
+      color: 'light',
     },
     {
       id: 2,
@@ -22,7 +24,7 @@ export class BaseListComponent {
       subTitle: '787 pcs',
       amount: '83.004 DKK',
       detail: -115,
-      color: 'medium',
+      color: 'white',
     },
     {
       id: 3,
@@ -38,7 +40,7 @@ export class BaseListComponent {
       subTitle: '791 pcs',
       amount: '33.830 DKK',
       detail: -154,
-      color: 'medium',
+      color: 'white',
     },
     {
       id: 5,
@@ -54,7 +56,7 @@ export class BaseListComponent {
       subTitle: '988 pcs',
       amount: '61.196 DKK',
       detail: 220,
-      color: 'medium',
+      color: 'white',
     },
     {
       id: 7,
@@ -70,7 +72,7 @@ export class BaseListComponent {
       subTitle: '827 pcs',
       amount: '62.276 DKK',
       detail: 53,
-      color: 'medium',
+      color: 'white',
     },
     {
       id: 9,
@@ -78,7 +80,7 @@ export class BaseListComponent {
       subTitle: '443 pcs',
       amount: '95.190 DKK',
       detail: -135,
-      color: 'dark',
+      color: 'white',
     },
     {
       id: 10,
@@ -722,7 +724,7 @@ export class BaseListComponent {
     },
   ];
 
-  public items: any[] = this.itemsFullList.slice(0, 8);
+  public items: ListItem[] = this.itemsFullList.slice(0, 8);
 
   onItemSelect(item: any) {
     alert(`You have clicked the row [${item.title} ${item.amount}]`);

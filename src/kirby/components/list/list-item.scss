@@ -6,7 +6,7 @@
     $background-color-hover: get-color('background-color');
     $hover-text: get-color('background-color-contrast');
 
-    $list-colors: ('white', 'light', 'medium');
+    $list-colors: ('white', 'light');
 
     @each $color-name, $color-value in $list-colors {
         &.#{$color-name} {

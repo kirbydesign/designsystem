@@ -44,9 +44,9 @@
       }
   }
 
-  $list-colors: ('light', 'white');
+  $list-colors: ('white', 'light');
 
-  @each $color-name, $color-value in $main-colors {
+  @each $color-name, $color-value in $list-colors {
     &.#{$color-name} {
         .row {
             background-color: #{get-color($color-name)};

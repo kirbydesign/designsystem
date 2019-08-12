@@ -12,6 +12,9 @@ export class ListCellLineComponent {
   @Input()
   primary: boolean;
 
+  @Input()
+  selected?: boolean;
+
   constructor() {
     this.primary = false;
   }

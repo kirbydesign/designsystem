@@ -9,7 +9,8 @@ import { ColorHelper } from '../../helpers/color-helper';
              kirby-badge[themeColor],
              kirby-icon[themeColor],
              kirby-list-item[themeColor],
-             kirby-list-flex-item[themeColor]`,
+             kirby-list-flex-item[themeColor],
+             kirby-toolbar[themeColor]`,
 })
 export class ThemeColorDirective {
   @HostBinding('class.default')

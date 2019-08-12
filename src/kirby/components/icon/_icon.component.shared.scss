@@ -34,9 +34,4 @@ $_icon-size-map: (
   $icon-size: $font-size + $padding * 2;
 
   font-size: $font-size;
-
-  Label.outline {
-    width: $icon-size;
-    height: $icon-size;
-  }
 }

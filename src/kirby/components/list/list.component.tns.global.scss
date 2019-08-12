@@ -1,0 +1,31 @@
+@import "../../scss/native-imports";
+
+$elevation: 2;
+//Note: On Android the shadow size is a result of the elevation property, e.g. 6 => 9:
+$shadow-size: $elevation * 3/2;
+$shadow-size-bottom: $elevation * 2;
+$row-padding-top: size('s');
+
+.kirby-list {
+  RadListView {
+    background-color:  get-color('background-color');
+  }
+  
+  .section-header {
+    padding: $row-padding-top size('xs') size('s') size('xs');
+  }
+  
+  
+  .footer {
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: size('s');
+    padding-top: 0;
+  }
+  
+  .row-wrapper {
+    &.selected Label {
+      font-weight: font-weight('bold');
+    }
+  }
+}

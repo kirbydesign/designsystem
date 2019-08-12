@@ -9,15 +9,17 @@
     <ng-template tkListItemTemplate let-item="item" let-index="index">
       <StackLayout [kirbyElevation]="2" [iosMasksToBounds]="true">
         <StackLayout
+          class="row-wrapper"
           [class.rounded]="shape === 'rounded'"
           [class.first]="isFirstItem(item, index)"
+          [class.selected]="markSelectedRow && !!selectedItem && item?._id === selectedItem?._id"
           [class.last]="isLastItem(item, index)">
           <ng-container
             *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }">
           </ng-container>
           <ng-container
             *ngTemplateOutlet="listFlexItemTemplate; context: { $implicit: item }">
-          </ng-container>  
+          </ng-container>
         </StackLayout>
       </StackLayout>
     </ng-template>
@@ -30,9 +32,9 @@
               sectionHeaderTemplate;
               context: { $implicit: section }
             ">
-          </ng-container> 
+          </ng-container>
       </StackLayout>
-    </ng-template> 
+    </ng-template>
 
     <!-- HEADER -->
     <ng-template tkListViewHeader *ngIf="listHeaderTemplate">
