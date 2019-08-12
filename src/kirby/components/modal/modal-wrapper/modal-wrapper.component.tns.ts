@@ -169,11 +169,20 @@ export class ModalWrapperComponent extends ContentView implements OnInit {
 
   private setMaxHeightConstraints() {
     const modalView: View = this.view.getViewById('modal');
-    // setTimeout prevents a {N} bug when loading the modalView's height
-    // TODO: must fix this horrendeous disasterpiece
+    this.setIsContentExceedingModalMaxHeight(modalView);
+  }
+
+  private setIsContentExceedingModalMaxHeight(modalView: View) {
+    // TODO: this should be improved at some point
+    // {N} allows us to get the height of the modal, but it comes after an uncertain delay
     setTimeout(() => {
-      this.isContentExceedingModalMaxHeight = modalView.getMeasuredHeight() > this.modalMaxHeight;
-    }, 1000);
+      let height = modalView.getMeasuredHeight();
+      if (height > 0) {
+        this.isContentExceedingModalMaxHeight = height > this.modalMaxHeight;
+      } else {
+        this.setIsContentExceedingModalMaxHeight(modalView);
+      }
+    }, 1);
   }
 
   private setScreenSizeFlags() {
