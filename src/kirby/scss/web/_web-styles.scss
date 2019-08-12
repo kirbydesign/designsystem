@@ -14,24 +14,30 @@
 }
 
 .kirby-modal {
-    // Hardcoded magic numbers: 
-    // https://github.com/kirbydesign/designsystem/issues/468
-
-    --background: #{get-color('background-color')};
-    --border-radius: #{$border-radius};
-    --box-shadow: #{get-elevation(8)};
-    --max-height: 100%;
-    --height: auto;
+    --background: transparent;
+    --box-shadow: none;
     position: fixed;
-    align-items: flex-end;
-
+    
     .modal-wrapper {
         // remove top spacing introduced by ionic
         transform: translate3d(0,0,0);
         
-        // handle scrollable content
+        .ion-page {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: flex-end;
+        }
+
         .kirby-modal-wrapper {
-            max-height: #{$modal-max-height}px;
+            background: #{get-color('background-color')};
+            border-radius: #{$border-radius};
+            box-shadow: #{get-elevation(8)};
+            max-height: 100%;
+            width: 100%;
+            
+            // handle scrollable content
             .modal-content {
                 overflow-y: auto;
             }
@@ -45,6 +51,9 @@
     @media screen and (min-height: #{$modal-max-height}px) {
         --height: #{$modal-max-height}px;
         align-items: center;
+        .kirby-modal-wrapper {
+            --max-height: #{$modal-max-height}px;
+        }
     }
 }
   

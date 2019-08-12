@@ -58,5 +58,7 @@ $z-layers: (
 
 $border-radius: get-unit-value(20);
 
+// Hardcoded magic numbers: 
+// https://github.com/kirbydesign/designsystem/issues/468
 $modal-max-width: 720;
 $modal-max-height: 648;
