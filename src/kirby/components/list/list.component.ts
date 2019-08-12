@@ -155,6 +155,11 @@ export class ListComponent implements OnChanges {
       : index === this.items.length - 1;
   }
 
+  onItemMousedown(event: Event) {
+    // prevent blur
+    event.preventDefault();
+  }
+
   onItemSelect(args: any) {
     this.selectedItem = this.listHelper.getSelectedItem(this.items, args);
 
