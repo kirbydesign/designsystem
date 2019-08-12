@@ -1,10 +1,5 @@
 @import "../../../scss/native-imports";
 
-@mixin left-and-right-margin($size) {
-  padding-left: size($size);
-  padding-right: size($size);
-}
-
 .modal-wrapper {
   padding-top: size('l');
 
@@ -12,6 +7,11 @@
     border-top-left-radius: $border-radius;
     border-top-right-radius: $border-radius;
     background-color: get-color('background-color');
+    
+    .full-scroll-height {
+      height: 100%;  
+    }
+    
     .scroll-view {
       padding: size('s');
     }
@@ -20,31 +20,26 @@
       margin-top: size('xs'); 
     }
 
-    .title-bar {
-      Label {
-        font-weight: font-weight('bold');
-      }
-      .title {
-        padding: size('s');
-      }
+    Label {
+      font-weight: font-weight('bold');
+    }
+
+    .title {
+      padding: size('s');
+    }
+
+    &.tall-screen {
+      border-bottom-left-radius: $border-radius;
+      border-bottom-right-radius: $border-radius;
     }
 
     &.wide-screen {
       width: $modal-max-width;
-      .scroll-view {
-        @include left-and-right-margin('xxxl');
+      
+      .scroll-view, .title {
+        padding-left: size('xxxl');
+        padding-right: size('xxxl');
       }
-      .title-bar {
-        .title {
-          @include left-and-right-margin('xxxl');
-        }
-      }
-    }
-  
-    &.tall-screen {
-      height: $modal-max-height;
-      border-bottom-left-radius: $border-radius;
-      border-bottom-right-radius: $border-radius;
     }
   }
 }

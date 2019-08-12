@@ -2,24 +2,26 @@
         android:style="padding-top: {{outerPaddingTop}};" 
         dismissEnabled="true" 
         (showingModally)="onShowingModally($event)">
-    <StackLayout id="modal" 
-            [class.wide-screen]="isScreenWide"
-            [class.tall-screen]="isScreenTall"
-            class="modal" 
-            android:style="margin-bottom: {{innerMarginBottom}};" 
-            orientation="vertical" 
-            verticalAlignment="bottom">
-        <StackLayout *ngIf="config.flavor === 'drawer'">
-            <ng-container *ngTemplateOutlet="drawer"></ng-container>
-        </StackLayout>
-        <StackLayout *ngIf="config.flavor === 'modal'">
-            <ng-container *ngTemplateOutlet="modal"></ng-container>
-        </StackLayout>
-    </StackLayout>
+    <GridLayout rows="*, {{ modalMaxHeight }}, *"> <!-- center modal vertically -->
+        <FlexboxLayout row="1" flexDirection="column" justifyContent="flex-end">
+            <StackLayout id="modal"
+                    [class.wide-screen]="isScreenWide"
+                    [class.tall-screen]="isScreenTall"
+                    class="modal"
+                    android:style="margin-bottom: {{innerMarginBottom}};">
+                <StackLayout *ngIf="config.flavor === 'drawer'">
+                    <ng-container *ngTemplateOutlet="drawer"></ng-container>
+                </StackLayout>
+                <StackLayout *ngIf="config.flavor === 'modal'">
+                    <ng-container *ngTemplateOutlet="modal"></ng-container>
+                </StackLayout>
+            </StackLayout>
+        </FlexboxLayout>
+    </GridLayout>
 </ModalStack>
 
 <ng-template #drawer>
-    <GridLayout rows="auto, *" columns="64, *, 64" class="title-bar">
+    <GridLayout rows="auto, {{ isContentExceedingModalMaxHeight ? '*' : 'auto' }}" columns="64, *, 64">
         <StackLayout row="0" col="0" class="modal-button">
             <ng-container *ngTemplateOutlet="closeIcon; context: { icon: 'arrow-down' }"></ng-container>
         </StackLayout>
@@ -32,7 +34,7 @@
             <ng-container *ngTemplateOutlet="supplementaryButton; context: { btn: config.drawerSupplementaryAction }"></ng-container>
         </StackLayout>
         
-        <ScrollView height="100%" width="100%" row="1" colSpan="3">
+        <ScrollView [class.full-scroll-height]="isContentExceedingModalMaxHeight" row="1" colSpan="3">
             <StackLayout class="scroll-view">
                 <ng-container *ngComponentOutlet="config.component; injector: componentPropsInjector"></ng-container>
             </StackLayout>
@@ -41,7 +43,7 @@
 </ng-template>
 
 <ng-template #modal>
-    <GridLayout rows="auto, *" columns="*, 64" class="title-bar">    
+    <GridLayout rows="auto, {{ isContentExceedingModalMaxHeight ? '*' : 'auto' }}" columns="*, 64">
         <StackLayout row="0" col="0" >
             <ng-container *ngTemplateOutlet="title; context: { horizontalAlignment: 'left' }"></ng-container>
         </StackLayout>
@@ -50,7 +52,7 @@
             <ng-container *ngTemplateOutlet="closeIcon; context: { icon: 'close' }"></ng-container>
         </StackLayout>
 
-        <ScrollView height="100%" width="100%" row="1" colSpan="2">
+        <ScrollView [class.full-scroll-height]="isContentExceedingModalMaxHeight" row="1" colSpan="2">
             <StackLayout class="scroll-view">
                 <ng-container *ngComponentOutlet="config.component; injector: componentPropsInjector"></ng-container>
             </StackLayout>

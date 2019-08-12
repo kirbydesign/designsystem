@@ -25,6 +25,8 @@ export class ModalWrapperComponent extends ContentView implements OnInit {
   innerMarginBottom = 0;
   isScreenWide = false;
   isScreenTall = false;
+  modalMaxHeight: number = 0;
+  isContentExceedingModalMaxHeight = false;
 
   constructor(
     private modalController: IModalController,
@@ -43,7 +45,7 @@ export class ModalWrapperComponent extends ContentView implements OnInit {
   ngOnInit(): void {
     // On iOS the modal never overlaps with the statusbar, hence we need no padding top (0)
     this.setAndroidPaddingAndMargin();
-    this.setIsLargeScreenSize();
+    this.setScreenSizeFlags();
   }
 
   setAndroidPaddingAndMargin() {
@@ -61,6 +63,7 @@ export class ModalWrapperComponent extends ContentView implements OnInit {
 
   onShowingModally(args: ShownModallyData): void {
     this.view = <View>args.object;
+    this.setMaxHeightConstraints();
     this.animateModal();
   }
 
@@ -163,8 +166,18 @@ export class ModalWrapperComponent extends ContentView implements OnInit {
     return 0;
   }
 
-  private setIsLargeScreenSize() {
-    this.isScreenTall = screen.mainScreen.heightDIPs >= style.global['$modal-max-height'].value;
+  private setMaxHeightConstraints() {
+    const modalView: View = this.view.getViewById('modal');
+    // setTimeout prevents a {N} bug when loading the modalView's height
+    // TODO: must fix this horrendeous disasterpiece
+    setTimeout(() => {
+      this.isContentExceedingModalMaxHeight = modalView.getMeasuredHeight() > this.modalMaxHeight;
+    }, 1000);
+  }
+
+  private setScreenSizeFlags() {
+    this.modalMaxHeight = parseInt(style.global['$modal-max-height'].value);
+    this.isScreenTall = screen.mainScreen.heightDIPs >= this.modalMaxHeight;
     this.isScreenWide = screen.mainScreen.widthDIPs >= style.global['$modal-max-width'].value;
   }
 }
