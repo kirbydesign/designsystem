@@ -18,7 +18,6 @@ $sizes: (
   FONT SETTINGS 
 ****************************************************************************/
 $font-sizes: (
-  display: 32, // Deprecated
   xxl: 48, // Not used, yet 
   xl: 40, // Not used, yet
   l:  32,
@@ -30,14 +29,14 @@ $font-sizes: (
 );
 
 $line-height: (
-  display: 41,
-  xxl:  34,
-  xl:   28,
-  l:    26,
-  m:    22,
-  n:    22,
-  s:    20,
-  xs:   18 
+  xxl: 34, // Not used in typography
+  xl: 38, // h1 - Not decided yet..
+  l: 26,  // Not used in typography
+  m: 21,  // Not used in typography
+  n: 24,  // h2, h3 and p all use this....(Weird rhythm?)
+  s: 20,  // For text-small
+  xs: 14, // For text-xsmall
+  xxs: 11 // For text-xxsmall
 );
 
 $font-weight: (
