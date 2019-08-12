@@ -20,7 +20,7 @@ matrix:
       script: 
         - npm run lint
         - npm run ci-test
-        - npm run coverage-report
+        - npm run coverage-report || true
 
     # Running iOS build
     - stage: "Build"
