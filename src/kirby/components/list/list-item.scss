@@ -6,11 +6,18 @@
     $background-color-hover: get-color('background-color');
     $hover-text: get-color('background-color-contrast');
 
-    @each $color-name, $color-value in $main-colors {
+    $list-colors: ('white', 'light', 'medium');
+
+    @each $color-name, $color-value in $list-colors {
         &.#{$color-name} {
             ion-item {
                 background-color: #{get-color($color-name)};
-                color: #{get-color($color-name+'-contrast')};
+                &:hover {
+                    background-color: #{get-color($color-name+'-tint')};
+                }
+                &:focus {
+                    background-color: #{get-color($color-name+'-shade')};
+                }
             }
         }
     }

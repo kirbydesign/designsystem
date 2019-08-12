@@ -40,7 +40,14 @@ $shadow: get-elevation(2);
   .footer {
     border-bottom-left-radius: $border-radius;
     border-bottom-right-radius: $border-radius;
+    --inner-border-width: 0 0 0 0;
   }
+
+  .loading-item {
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    --inner-border-width: 0 0 0 0;
+  }  
 }
 
 ion-list-header {

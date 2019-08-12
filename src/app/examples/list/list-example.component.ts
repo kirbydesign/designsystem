@@ -9,6 +9,8 @@ import { BaseListComponent } from './base-list.component';
   styleUrls: ['./list-example.component.scss'],
 })
 export class ListExampleComponent extends BaseListComponent {
+  public colorList = this.itemsFullList.slice(0, 10);
+
   constructor(private router: Router) {
     super();
   }

@@ -6,7 +6,7 @@ export class BaseListComponent {
       subTitle: '2000 pcs',
       amount: '5.587.218.309 DKK',
       detail: 225,
-      color: 'default',
+      color: 'medium',
     },
     {
       id: 1,
@@ -14,7 +14,7 @@ export class BaseListComponent {
       subTitle: '1827 pcs',
       amount: '76.980 DKK',
       detail: -3,
-      color: 'primary',
+      color: 'default',
     },
     {
       id: 2,
@@ -22,7 +22,7 @@ export class BaseListComponent {
       subTitle: '787 pcs',
       amount: '83.004 DKK',
       detail: -115,
-      color: 'secondary',
+      color: 'medium',
     },
     {
       id: 3,
@@ -30,7 +30,7 @@ export class BaseListComponent {
       subTitle: '467 pcs',
       amount: '60.963 DKK',
       detail: 6,
-      color: 'tertiary',
+      color: 'light',
     },
     {
       id: 4,
@@ -38,7 +38,7 @@ export class BaseListComponent {
       subTitle: '791 pcs',
       amount: '33.830 DKK',
       detail: -154,
-      color: 'success',
+      color: 'medium',
     },
     {
       id: 5,
@@ -46,7 +46,7 @@ export class BaseListComponent {
       subTitle: '206 pcs',
       amount: '60.775 DKK',
       detail: 98,
-      color: 'warning',
+      color: 'light',
     },
     {
       id: 6,
@@ -54,7 +54,7 @@ export class BaseListComponent {
       subTitle: '988 pcs',
       amount: '61.196 DKK',
       detail: 220,
-      color: 'danger',
+      color: 'medium',
     },
     {
       id: 7,

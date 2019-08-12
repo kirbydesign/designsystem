@@ -44,11 +44,13 @@
       }
   }
 
+  $list-colors: ('light', 'white');
+
   @each $color-name, $color-value in $main-colors {
-      &.#{$color-name} {
-          .row {
-              background-color: #{get-color($color-name)};
-          }
-      }    
-  }
+    &.#{$color-name} {
+        .row {
+            background-color: #{get-color($color-name)};
+        }
+    }    
+}
 }
