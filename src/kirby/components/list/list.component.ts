@@ -156,7 +156,7 @@ export class ListComponent implements OnChanges {
   }
 
   onItemMousedown(event: Event) {
-    // prevent blur
+    // prevent focus
     event.preventDefault();
   }
 
