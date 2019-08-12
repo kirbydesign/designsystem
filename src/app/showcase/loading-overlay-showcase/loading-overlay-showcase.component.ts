@@ -8,5 +8,18 @@ import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-prop
 })
 export class LoadingOverlayShowcaseComponent {
   exampleHtml: string = require('../../examples/loading-overlay-example/loading-overlay-example.component.html');
-  properties: ShowcaseProperty[] = [];
+  properties: ShowcaseProperty[] = [
+    {
+      name: 'isLoading',
+      description: 'Shows the loading spinner.',
+      defaultValue: 'false',
+      inputValues: ['true', 'false'],
+    },
+    {
+      name: 'showBackdrop',
+      description: 'Adds a dimmer on the background.',
+      defaultValue: 'true',
+      inputValues: ['true', 'false'],
+    },
+  ];
 }
