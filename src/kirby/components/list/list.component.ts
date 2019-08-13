@@ -10,6 +10,7 @@ import {
   TemplateRef,
 } from '@angular/core';
 
+import { createGuid } from './../../helpers/guid-helper';
 import {
   ListFlexItemDirective,
   ListFooterDirective,
@@ -20,6 +21,7 @@ import {
 import { LoadOnDemandEvent, LoadOnDemandEventData } from './list.event';
 import { ListHelper } from './helpers/list-helper';
 import { GroupByPipe } from './pipes/group-by.pipe';
+import { ListItem } from './list-item/list-item.interface';
 
 export type ListShape = 'square' | 'rounded';
 
@@ -28,12 +30,30 @@ export type ListShape = 'square' | 'rounded';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
   providers: [ListHelper, GroupByPipe],
+  // Using host property decorator is fine for static values:
+  // tslint:disable-next-line:use-host-property-decorator
+  host: {
+    class: 'kirby-list',
+  },
 })
 export class ListComponent implements OnChanges {
   /**
    * Provide items for the list to render. Items must be provided in the order you expect them to be rendered.
    */
-  @Input() items: any[];
+
+  private _items: ListItem[];
+  public get items(): ListItem[] {
+    return this._items;
+  }
+  @Input()
+  public set items(items: ListItem[]) {
+    this._items = items.map((item) => {
+      return {
+        ...item,
+        _id: createGuid(),
+      };
+    });
+  }
 
   /**
    * Callback to determine name of section. Sections will be ordered alphabetically.
@@ -49,6 +69,11 @@ export class ListComponent implements OnChanges {
    * Determines if dividers should be shown or not.
    */
   @Input() showDivider = false;
+
+  /**
+   * Determines if list row text should turn bold on selection
+   */
+  @Input() markSelectedRow = false;
 
   /**
    * Determine outline shape of:
@@ -85,6 +110,7 @@ export class ListComponent implements OnChanges {
   isLoading: boolean;
   isLoadOnDemandEnabled: boolean;
   groupedItems: any[];
+  selectedItem: ListItem;
 
   private orderMap: WeakMap<any, { isFirst: boolean; isLast: boolean }>;
 
@@ -130,7 +156,15 @@ export class ListComponent implements OnChanges {
   }
 
   onItemSelect(args: any) {
-    this.itemSelect.emit(this.listHelper.getSelectedItem(this.items, args));
+    this.selectedItem = this.listHelper.getSelectedItem(this.items, args);
+
+    const orgItem = {
+      ...this.selectedItem,
+    };
+
+    delete orgItem._id;
+
+    this.itemSelect.emit(orgItem);
   }
 
   onLoadOnDemand(event?: LoadOnDemandEventData) {

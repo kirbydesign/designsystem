@@ -22,13 +22,13 @@ import { IconExampleComponent } from './icon-example/icon-example.component';
 import { CalendarExampleComponent } from './calendar-example/calendar-example.component';
 import { CalendarCardExampleComponent } from './calendar-example/calendar-card-example.component';
 import { CheckboxExampleComponent } from './checkbox-example/checkbox-example.component';
-import { SegmentedChipControlExampleComponent } from './segmented-chip-control-example/segmented-chip-control-example.component';
 import { ActionSheetExampleComponent } from './action-sheet-example/action-sheet-example.component';
 import { AlertExampleComponent } from './alert-example/alert-example.component';
 import { SlideButtonExampleComponent } from './slide-button-example/slide-button-example.component';
 import { ToastExampleComponent } from './toast-example/toast-example.component';
 import { ToggleExampleComponent } from './toggle-example/toggle-example.component';
 import { EmptyStateExampleComponent } from './empty-state-example/empty-state-example.component';
+import { ToolbarExampleComponent } from './toolbar-example/toolbar-example.component';
 
 // Example of "custom" icons
 export const iconSettings: IconSettings = {
@@ -65,7 +65,6 @@ export const COMPONENT_DECLARATIONS: any[] = [
   FirstEmbeddedModalExampleComponent,
   SecondEmbeddedModalExampleComponent,
   SegmentedControlExampleComponent,
-  SegmentedChipControlExampleComponent,
   ChipExampleComponent,
   BadgeExampleComponent,
   IconExampleComponent,
@@ -77,6 +76,7 @@ export const COMPONENT_DECLARATIONS: any[] = [
   ToastExampleComponent,
   ToggleExampleComponent,
   EmptyStateExampleComponent,
+  ToolbarExampleComponent,
 ];
 
 // Configure custom icons (used by example to show the usage of custom icons)

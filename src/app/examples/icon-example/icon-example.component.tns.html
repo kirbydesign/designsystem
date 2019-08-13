@@ -67,14 +67,5 @@
                 <Label text="dark"></Label>
             </StackLayout>
         </WrapLayout>
-
-        <Label text="Outline" class="h2"></Label>
-        <WrapLayout orientation="horizontal" itemWidth="140" itemHeight="140">
-            <StackLayout *ngFor="let size of (sizes | keyvalue).reverse()">
-                <kirby-icon name="person" [size]="size.value" outline="true"></kirby-icon>
-                <Label [text]="size.value"></Label>
-            </StackLayout>
-        </WrapLayout>
-
     </StackLayout>
 </ScrollView>

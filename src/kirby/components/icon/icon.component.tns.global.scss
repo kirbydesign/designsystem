@@ -2,11 +2,6 @@
 @import './icon.component.shared';
 
 .kirby-icon {
-    Label.outline {
-        border-radius: size('xxxl') * 3;
-        border-color: get-color('dark');
-        border-width: 3;
-    }
     @include _icon-size_native('sm');
 
     &.sm {
@@ -24,9 +19,6 @@
     @each $color-name, $color-value in $main-colors {
         &.#{$color-name} {
             color: get-color($color-name);
-            Label.outline {
-                border-color: get-color($color-name);
-            }
         }
     }
 }

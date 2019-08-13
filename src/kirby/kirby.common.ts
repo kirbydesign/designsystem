@@ -29,7 +29,6 @@ import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { ModalWrapperComponent } from './components/modal/modal-wrapper/modal-wrapper.component';
 import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
 import { ChipComponent } from './components/chip/chip.component';
-import { SegmentedChipControlComponent } from './components/segment/segmented-chip-control/segmented-chip-control.component';
 import { BadgeComponent } from './components/badge/badge.component';
 import { ModalController } from './components/modal/services/modal.controller';
 import { IModalController } from './components/modal/services/modal.controller.interface';
@@ -44,6 +43,7 @@ import { ToastController } from './components/toast/services/toast.controller';
 import { ToastHelper } from './components/toast/services/toast.helper';
 import { ToggleComponent } from './components/toggle/toggle.component';
 import { EmptyStateComponent } from './components/empty-state/empty-state.component';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
 
 export const declarations = [
   CardComponent,
@@ -76,13 +76,13 @@ export const declarations = [
   ActionSheetComponent,
   SegmentedControlComponent,
   ChipComponent,
-  SegmentedChipControlComponent,
   BadgeComponent,
   SizeDirective,
   ThemeColorDirective,
   SlideButtonComponent,
   ToggleComponent,
   EmptyStateComponent,
+  ToolbarComponent,
 ];
 
 export const providerDeclarations: any[] = [

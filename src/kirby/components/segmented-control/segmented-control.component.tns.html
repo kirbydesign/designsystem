@@ -1,5 +1,6 @@
-  <StackLayout orientation="horizontal" horizontalAlignment="left" class="segment-control">
-    <GridLayout columns="auto, auto" (tap)="onSegmentClick(item)" *ngFor="let item of items">
+<StackLayout>
+  <StackLayout *ngIf="isDefaultMode" orientation="horizontal" horizontalAlignment="left" class="segment-control">
+    <GridLayout columns="auto, auto" (tap)="onSegmentSelect(item)" *ngFor="let item of items">
       <FlexBoxLayout *ngIf="item.badge" class="segment-badge-wrapper" col="1" flexDirection="row" alignItems="center" justifyContent="flex-end">
         <kirby-badge text="{{item.badge.content}}" themeColor="{{item.badge.type}}"></kirby-badge>
       </FlexBoxLayout>
@@ -8,4 +9,13 @@
       </StackLayout>
     </GridLayout>
   </StackLayout>
+
+  <ScrollView *ngIf="isChipMode" orientation="horizontal">
+      <StackLayout orientation="horizontal" class="segmented-chip-control">
+          <StackLayout *ngFor="let item of items" (tap)="onSegmentSelect(item)">
+              <kirby-chip [text]="item.text" [isSelected]="item.checked"></kirby-chip>
+          </StackLayout>
+      </StackLayout>
+  </ScrollView>
+</StackLayout>
  

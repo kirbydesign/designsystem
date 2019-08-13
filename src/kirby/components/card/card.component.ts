@@ -10,15 +10,20 @@ import {
 
 import { ResizeObserverService } from '../shared/resize-observer/resize-observer.service';
 import { ResizeObserverEntry } from '../shared/resize-observer/types/resize-observer-entry';
+import { CardCommon } from './card.common';
 
 @Component({
   selector: 'kirby-card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
 })
-export class CardComponent implements OnInit, OnDestroy {
+export class CardComponent implements OnInit, OnDestroy, CardCommon {
   @Input() title: string;
   @Input() subtitle: string;
+
+  @HostBinding('class.padding')
+  @Input()
+  hasPadding: boolean = true;
 
   private sizesSortedByBreakpoint = this.sortSizesByBreakpoint({
     small: 360,

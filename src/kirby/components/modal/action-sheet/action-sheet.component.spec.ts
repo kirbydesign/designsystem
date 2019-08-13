@@ -133,9 +133,12 @@ describe('ActionSheetComponent', () => {
     });
 
     it('should reflect add/remove/edit changes of items', () => {
-      component.config.items[0] = { id: '1', text: 'New Action 1' };
-      component.config.items.pop();
-      component.config.items.push({ id: '4', text: 'Action 4' });
+      component.config.items = [
+        { id: '1', text: 'New Action 1' },
+        { id: '2', text: 'Action 2' },
+        { id: '4', text: 'Action 4' },
+      ];
+
       fixture.detectChanges();
       const rootElement: HTMLElement = fixture.debugElement.nativeElement;
       const actionSheetItems = rootElement.querySelector('.action-sheet-items');

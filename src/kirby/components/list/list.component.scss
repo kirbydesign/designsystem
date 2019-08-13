@@ -25,6 +25,9 @@ $shadow: get-elevation(2);
       border-bottom: 1px solid $divider-color;
     }
 
+    &.selected ::ng-deep * {
+      font-weight: font-weight('bold');
+    }
     &:focus {
       $outline-width: 5px;
       outline-color: var(--highlight-color-focused);
@@ -34,6 +37,7 @@ $shadow: get-elevation(2);
       background-color: $background-color-hover;
     }
   }
+
 
   &.has-sections {
     ion-list {
