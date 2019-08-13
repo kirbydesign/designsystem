@@ -12,7 +12,7 @@
 h2 {
   font-size: font-size("n");
   font-weight: font-weight("normal");
-  margin: 0 0 size("xs");
+  margin: 0 0 size('xxs');
   &.bold {
     font-weight: font-weight("bold");
   }
@@ -20,6 +20,6 @@ h2 {
 
 h4 {
   font-size: font-size("s");
-  margin: 0 0 size("xs");
+  margin: 0 0 size('xxs');
   font-weight: font-weight("normal");
 }
