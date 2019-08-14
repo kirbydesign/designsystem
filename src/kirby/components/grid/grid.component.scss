@@ -7,11 +7,11 @@ $page-max-width: 1366px;
   display: grid;
   grid-template-columns: 1fr;
   grid-auto-rows: minmax($grid-item-min-height, auto);
-  grid-column-gap: size("xs");
-  grid-row-gap: size("xs");
+  grid-column-gap: size('xxs');
+  grid-row-gap: size('xxs');
   max-width: $page-max-width;
-  margin: size("xs") auto;
-  padding: 0 size("xs");
+  margin: size('xxs') auto;
+  padding: 0 size('xxs');
   
   @include media(">=small") {
     grid-column-gap: size("s");
