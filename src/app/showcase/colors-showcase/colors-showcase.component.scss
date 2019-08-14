@@ -41,8 +41,8 @@
   left: 0;
   z-index: 3;
   &:nth-child(2) {
-    top: size('xs');
-    left: size('xs');
+    top: size('xxs');
+    left: size('xxs');
     z-index: 2;
   }
   &:nth-child(3) {
@@ -86,7 +86,7 @@
 }
 
 .color-name {
-  margin-bottom: size('xxs');
+  margin-bottom: size('xxxs');
   width: 100%;
 }
 
