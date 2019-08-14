@@ -11,12 +11,12 @@
     <Label [text]="title"  class="toolbar-title kirby-text-normal"></Label>
   </StackLayout>
   
-  <ActionItem ios.position="right" >
+  <ActionItem ios.position="right" (tap)="onMiddleSelected()">
     <StackLayout orientation="horizontal">
-      <ng-content select="[secondary]"></ng-content>
+      <ng-content select="[middle]"></ng-content>
     </StackLayout>
   </ActionItem>
-  <ActionItem ios.position="right" >
+  <ActionItem ios.position="right" (tap)="onEndSelected()">
     <StackLayout orientation="horizontal">
       <Label text="" class="action-item-spacer-small"></Label>
       <ng-content select="[end]]"></ng-content>
