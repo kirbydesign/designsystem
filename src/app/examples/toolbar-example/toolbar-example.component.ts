@@ -18,4 +18,12 @@ export class ToolbarExampleComponent {
   backButtonSelected(): void {
     alert('backbutton clicked!');
   }
+
+  middleSelected(): void {
+    alert('middle clicked!');
+  }
+
+  endSelected(): void {
+    alert('end clicked!');
+  }
 }
