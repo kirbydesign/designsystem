@@ -8,7 +8,7 @@ import {
   EventEmitter,
 } from '@angular/core';
 
-import { PlatformService } from '~/app/services/platform/platform.service.tns-only';
+import { PlatformService } from '@kirbydesign/designsystem/services/platform/platform.service';
 
 @Component({
   selector: 'kirby-toolbar',
