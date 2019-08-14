@@ -2,8 +2,8 @@
 
 .kirby-badge {
   .badge { 
-    font-size: font-size("xxs");
-    border-radius: size("xs");
+    font-size: font-size('xxs');
+    border-radius: size('xxs');
     background-color: get-color('danger');
     color: get-color('white');
     height: size("s");
@@ -13,8 +13,8 @@
       // border used for alignment hack.
       border-width: 1;
       border-color: transparent;
-      margin-left: size("xxs");
-      margin-right: size("xxs"); 
+      margin-left: size('xxxs');
+      margin-right: size('xxxs'); 
       white-space: nowrap;
       height: 100%;
     }
