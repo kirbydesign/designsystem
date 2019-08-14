@@ -85,9 +85,9 @@ export class ModalWrapperComponent extends ContentView implements OnInit {
         const animationStartingY = screen.mainScreen.heightDIPs;
         const modalContainer = <View>this.view.getViewById('modal');
 
-        // setTimeout prevents an error caused by {N} on iOS when calling animate
+        // modalContainer.on('loaded') prevents an error caused by {N} on iOS when calling animate
         // https://github.com/NativeScript/nativescript-angular/issues/431
-        setTimeout(() => {
+        modalContainer.on('loaded', () => {
           modalContainer.opacity = 0;
           modalContainer
             .animate({
