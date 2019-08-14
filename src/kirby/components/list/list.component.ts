@@ -9,7 +9,6 @@ import {
   Output,
   TemplateRef,
 } from '@angular/core';
-
 import { createGuid } from './../../helpers/guid-helper';
 import {
   ListFlexItemDirective,
@@ -47,6 +46,11 @@ export class ListComponent implements OnChanges {
   }
   @Input()
   public set items(items: ListItem[]) {
+    if (!items) {
+      this._items = items;
+      return;
+    }
+
     this._items = items.map((item) => {
       return {
         ...item,
