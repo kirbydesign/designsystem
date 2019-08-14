@@ -39,6 +39,26 @@ describe('ToolbarComponent', () => {
     });
   });
 
+  describe('event: middleSelected', () => {
+    it('should be called once', () => {
+      spyOn(spectator.component.middleSelected, 'emit');
+
+      spectator.component.onMiddleSelected();
+
+      expect(spectator.component.middleSelected.emit).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('event: endSelected', () => {
+    it('should be called once', () => {
+      spyOn(spectator.component.endSelected, 'emit');
+
+      spectator.component.onEndSelected();
+
+      expect(spectator.component.endSelected.emit).toHaveBeenCalledTimes(1);
+    });
+  });
+
   describe('Inputs', () => {
     it('should set the text in ion-title', () => {
       const titleChange = 'test';
