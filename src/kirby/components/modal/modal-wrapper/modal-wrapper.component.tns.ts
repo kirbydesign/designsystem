@@ -85,11 +85,11 @@ export class ModalWrapperComponent extends ContentView implements OnInit {
         const animationStartingY = screen.mainScreen.heightDIPs;
         const modalContainer = <View>this.view.getViewById('modal');
 
-        // modalContainer.on('loaded') prevents Error: Animation cancelled
         if (modalContainer.isLoaded) {
-          // modalContainer may sometimes be loaded before reaching the on('loaded')
+          // modalContainer may sometimes be loaded before reaching on('loaded')
           this.animateSlideUpOniOS(modalContainer, animationStartingY);
         } else {
+          // modalContainer.on('loaded') prevents Error: Animation cancelled
           modalContainer.on('loaded', () => {
             this.animateSlideUpOniOS(modalContainer, animationStartingY);
             modalContainer.off('loaded');
