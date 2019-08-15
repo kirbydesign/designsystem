@@ -9,6 +9,7 @@ declare const android;
 import { ModalConfig } from './config/modal-config';
 import { COMPONENT_PROPS, ModalConfigHelper } from './config/modal-config.helper';
 import { IModalController } from '../services/modal.controller.interface';
+import { ViewHelper } from '../../../helpers/view-helper.tns-only';
 
 @Component({
   templateUrl: './modal-wrapper.component.html',
@@ -85,16 +86,11 @@ export class ModalWrapperComponent extends ContentView implements OnInit {
         const animationStartingY = screen.mainScreen.heightDIPs;
         const modalContainer = <View>this.view.getViewById('modal');
 
-        if (modalContainer.isLoaded) {
-          // modalContainer may sometimes be loaded before reaching on('loaded')
-          this.animateSlideUpOniOS(modalContainer, animationStartingY);
-        } else {
-          // modalContainer.on('loaded') prevents Error: Animation cancelled
-          modalContainer.on('loaded', () => {
-            this.animateSlideUpOniOS(modalContainer, animationStartingY);
-            modalContainer.off('loaded');
-          });
-        }
+        // waiting for modalContainer to load prevents Error: Animation cancelled
+        ViewHelper.invokeOnViewLoaded(
+          modalContainer,
+          this.animateSlideUpOniOS.bind(this, modalContainer, animationStartingY)
+        );
       }
     }
   }
