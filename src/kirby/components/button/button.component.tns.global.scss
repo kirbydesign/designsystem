@@ -23,8 +23,8 @@
     border-width: 1;
     
     // we default to 'md' size.
-    margin: size('xxs');
-    padding: size('xs') size('m') size('xs') size('m');
+    margin: size('xxxs');
+    padding: size('xxs') size('m') size('xxs') size('m');
     font-size: font-size('s');
     height: size('xl');
     line-height: line-height('xs');
@@ -33,7 +33,7 @@
   }
 
   &.sm .button-wrapper {
-    padding: size('xxs') size('s') size('xxs') size('s');
+    padding: size('xxxs') size('s') size('xxxs') size('s');
     font-size: font-size('xs');
     height: size('l');
   }

@@ -28,7 +28,9 @@
   vertical-align: middle;
 
   // we default to 'md' size.
-  margin: size('xxs');
+  margin: size('xxxs');
+  padding: size('xxs') size('m') size('xxs') size('m');
+  font-size: font-size('s');
   height: size('xl');
   
   button {
@@ -52,7 +54,7 @@
     
     button {
       font-size: font-size('xs');
-      padding: size('xxs') size('s') size('xxs') size('s');
+      padding: size('xxxs') size('s') size('xxxs') size('s');
     }
   }
 

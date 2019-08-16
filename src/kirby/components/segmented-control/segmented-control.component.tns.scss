@@ -25,13 +25,13 @@
   }
 
   & + & {
-    margin-left: size("xs") * -1;
+    margin-left: size('xxs') * -1;
   }
 }
 
 .segment-badge-wrapper {
   z-index: 2;
-  margin-right: size("xs");
+  margin-right: size('xxs');
   margin-top: #{size("s") * -1};
   height: 100%;
 }
