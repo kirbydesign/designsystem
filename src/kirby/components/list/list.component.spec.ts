@@ -57,6 +57,17 @@ describe('ListComponent', () => {
     expect(spectator.component).toBeTruthy();
   });
 
+  describe('items', () => {
+    it('should accept null items without errors', () => {
+      spectator.setInput({
+        items: null,
+      });
+      runNgOnChanges();
+
+      expect(spectator.component.items).toBe(null);
+    });
+  });
+
   describe('sections', () => {
     it('should be disabled if no section callback is defined', () => {
       spectator.setInput({
