@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ContentChild,
   EventEmitter,
@@ -10,7 +9,7 @@ import {
   TemplateRef,
 } from '@angular/core';
 
-import { createGuid } from './../../helpers/guid-helper';
+import { createGuid } from '@kirbydesign/designsystem/helpers/guid-helper';
 import {
   ListFlexItemDirective,
   ListFooterDirective,
@@ -47,12 +46,7 @@ export class ListComponent implements OnChanges {
   }
   @Input()
   public set items(items: ListItem[]) {
-    this._items = items.map((item) => {
-      return {
-        ...item,
-        _id: createGuid(),
-      };
-    });
+    this._items = items ? this.addInternalId(items) : null;
   }
 
   /**
@@ -188,5 +182,14 @@ export class ListComponent implements OnChanges {
       });
     });
     return orderMap;
+  }
+
+  private addInternalId(items: ListItem[]) {
+    return items.map((item) => {
+      return {
+        ...item,
+        _id: createGuid(),
+      };
+    });
   }
 }
