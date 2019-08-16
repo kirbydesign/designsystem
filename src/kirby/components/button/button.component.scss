@@ -29,8 +29,6 @@
 
   // we default to 'md' size.
   margin: size('xxxs');
-  padding: size('xxs') size('m') size('xxs') size('m');
-  font-size: font-size('s');
   height: size('xl');
   
   button {
@@ -39,7 +37,7 @@
     height: 100%;
     width: 100%;
     border-radius: var(--kirby-button-border-radius);
-    padding: size('xs') size('m') size('xs') size('m');
+    padding: size('xxs') size('m') size('xxs') size('m');
     color: var(--kirby-button-color);
     font-size: font-size('s');
     cursor: pointer;

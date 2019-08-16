@@ -1,6 +1,6 @@
 <ScrollView>
     <Stacklayout class="wrapper">
-      <kirby-segmented-control [items]="[{ text: 'Default', id: 'default', checked: true }, { text: 'Attention Lvl', id: 'attention-level' }, { text: 'Destructive', id: 'destructive' }]" (segmentClick)="onSegmentClick($event)">
+      <kirby-segmented-control [items]="[{ text: 'Default', id: 'default', checked: true }, { text: 'Attention Lvl', id: 'attention-level' }, { text: 'Destructive', id: 'destructive' }]" (segmentSelect)="onSegmentSelect($event)">
       </kirby-segmented-control>
       <ng-container *ngIf="activeTab === 'default'">
         <WrapLayout orientation="horizontal">
@@ -8,8 +8,7 @@
           <kirby-button text="Medium Button" size="md"></kirby-button>
           <kirby-button text="Large Button" size="lg"></kirby-button>
           <kirby-button text="Kirby Block Button" expand="block"></kirby-button>
-          <kirby-button text="Permanently disabled button" (tap)="onSelect($event)" disabled></kirby-button>
-          <kirby-button text="Disabled Button" (tap)="onSelect($event)" [disabled]="disabled"></kirby-button>
+          <kirby-button text="Disabled for 3s on select" (tap)="onDisabledBtnSelect()" [disabled]="disabled"></kirby-button>
         </WrapLayout>
       </ng-container>
       <ng-container *ngIf="activeTab === 'attention-level'">

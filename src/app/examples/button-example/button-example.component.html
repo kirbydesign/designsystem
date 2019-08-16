@@ -1,5 +1,5 @@
 <h2>Standalone button</h2>
-<kirby-button text="Kirby Button" (click)="onSelect($event)"></kirby-button>
+<kirby-button text="Kirby Button"></kirby-button>
 <kirby-button size="sm" text="Small Button"></kirby-button>
 <kirby-button size="md" text="Medium Button"></kirby-button>
 <kirby-button size="lg" text="Large Button"></kirby-button>
@@ -8,8 +8,7 @@
 <kirby-button attentionLevel="2" isDestructive="true" text="Destructive Level 2"></kirby-button>
 <kirby-button attentionLevel="3" isDestructive="true" text="Destructive Level 3"></kirby-button>
 <kirby-button attentionLevel="4" isDestructive="true" text="Destructive Level 4"></kirby-button>
-<kirby-button text="Permanently disabled button" (click)="onSelect($event)" disabled></kirby-button>
-<kirby-button text="Disabled Button" (click)="onSelect($event)" [disabled]="disabled"></kirby-button>
+<kirby-button text="Disabled for 3s on select" (click)="onDisabledBtnSelect()" [disabled]="disabled"></kirby-button>
 
 <h2>Button with attention level</h2>
 <kirby-card [themeColor]="themeColor">
