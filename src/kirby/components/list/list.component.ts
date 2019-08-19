@@ -9,7 +9,6 @@ import {
   TemplateRef,
 } from '@angular/core';
 
-import { createGuid } from '@kirbydesign/designsystem/helpers/guid-helper';
 import {
   ListFlexItemDirective,
   ListFooterDirective,
@@ -40,14 +39,8 @@ export class ListComponent implements OnChanges {
    * Provide items for the list to render. Items must be provided in the order you expect them to be rendered.
    */
 
-  private _items: ListItem[];
-  public get items(): ListItem[] {
-    return this._items;
-  }
   @Input()
-  public set items(items: ListItem[]) {
-    this._items = items ? this.addInternalId(items) : null;
-  }
+  public items: ListItem[];
 
   /**
    * Callback to determine name of section. Sections will be ordered alphabetically.
@@ -152,13 +145,7 @@ export class ListComponent implements OnChanges {
   onItemSelect(args: any) {
     this.selectedItem = this.listHelper.getSelectedItem(this.items, args);
 
-    const orgItem = {
-      ...this.selectedItem,
-    };
-
-    delete orgItem._id;
-
-    this.itemSelect.emit(orgItem);
+    this.itemSelect.emit(this.selectedItem);
   }
 
   onLoadOnDemand(event?: LoadOnDemandEventData) {
@@ -182,14 +169,5 @@ export class ListComponent implements OnChanges {
       });
     });
     return orderMap;
-  }
-
-  private addInternalId(items: ListItem[]) {
-    return items.map((item) => {
-      return {
-        ...item,
-        _id: createGuid(),
-      };
-    });
   }
 }
