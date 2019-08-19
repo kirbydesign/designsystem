@@ -1,5 +1,6 @@
 @import "../../scss/_native-imports";
 
+$slide-button-width: 52;
 .slide-button-container {
     width: 256;
     height: 56;
@@ -12,8 +13,8 @@
     }
 
     .slide-button {
-        width: 52;
-        height: 52;
+        width: $slide-button-width;
+        height: $slide-button-width;
         margin: 2;
         border-radius: 100;
         background-color: get-color('white');
@@ -25,5 +26,6 @@
     .slide-button-text {
         color: get-color('primary-contrast');
         font-size: font-size('n');
+        padding-left: $slide-button-width/2;
     }
 }
