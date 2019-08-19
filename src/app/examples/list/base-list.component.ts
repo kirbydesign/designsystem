@@ -1,4 +1,3 @@
-
 export class BaseListComponent {
   public itemsFullList: any[] = [
     {
