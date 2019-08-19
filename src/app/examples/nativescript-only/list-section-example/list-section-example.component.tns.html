@@ -12,7 +12,7 @@
 
     <GridLayout *kirbyListItem="let item" rows="*" columns="*, 3*, *, auto">
         <StackLayout col="0" [ngClass]="{'hide-check': !item.selected}">
-            <kirby-icon name="verifiy"></kirby-icon>
+            <kirby-icon name="verify"></kirby-icon>
         </StackLayout>
         <StackLayout col="1">
             <Label [text]="item?.title" class="primary"></Label>
