@@ -1,11 +1,7 @@
 @import '../../scss/native-imports';
 
 @mixin highlighted($color) {
-  @if $color == 'transparent' {
-    $color: unquote($color);
-  } @else {
-    $color: get-color($color);
-  }
+  $color: get-color($color);
   
   &:active {
     background-color: $color;
@@ -100,13 +96,11 @@
     background-color: transparent;
     border-color: transparent;
     color: get-color('primary-contrast');
-    @include highlighted('transparent');
 
     &.destructive {
       background-color: transparent;
       border-color: transparent;
       color: get-color('danger');
-      @include highlighted('transparent');
     }
   }
 
@@ -141,7 +135,6 @@
 .dark .button.attention-level3 {
   border-color: get-color('white');
   color: get-color('white');
-  @include highlighted('transparent');
 }
 
 .primary .button.attention-level3,
@@ -151,12 +144,10 @@
 .medium .button.attention-level3 {
   border-color: get-color('black');
   color: get-color('black');
-  @include highlighted('transparent');
 }
 
 .secondary .button.attention-level4,
 .tertiary .button.attention-level4,
 .dark .button.attention-level4 {
   color: get-color('white');
-  @include highlighted('transparent');
 }

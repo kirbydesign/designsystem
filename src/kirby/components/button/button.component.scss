@@ -1,11 +1,7 @@
 @import '../../scss/web-imports';
 
 @mixin highlighted($color) {
-  @if $color == 'transparent' {
-    $color: unquote($color);
-  } @else {
-    $color: #{get-color($color)};
-  }
+  $color: #{get-color($color)};
   
   &.highlighted {
     background-color: $color;
@@ -89,22 +85,18 @@
     &.attention-level3 {
       --kirby-button-border-color: #{get-color('medium')};
       --kirby-button-color: #{get-color('medium-contrast')};
-      @include highlighted('transparent');
   
       &.destructive {
         --kirby-button-border-color: #{get-color('medium')};
         --kirby-button-color: #{get-color('danger')};
-        @include highlighted('transparent');
       }
     }
   
     &.attention-level4 {
       --kirby-button-color: #{get-color('primary-contrast')};
-      @include highlighted('transparent');
   
       &.destructive {
         --kirby-button-color: #{get-color('danger')};
-        @include highlighted('transparent');
       }
     }
   
@@ -141,11 +133,9 @@
         &.attention-level3 {
           --kirby-button-border-color: #{get-color('white')};
           --kirby-button-color: #{get-color('white')};
-          @include highlighted('transparent');
         }
         &.attention-level4 {
           --kirby-button-color: #{get-color('white')};
-          @include highlighted('transparent');
         }
       }
     }
