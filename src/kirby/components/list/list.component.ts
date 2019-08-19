@@ -19,7 +19,6 @@ import {
 import { LoadOnDemandEvent, LoadOnDemandEventData } from './list.event';
 import { ListHelper } from './helpers/list-helper';
 import { GroupByPipe } from './pipes/group-by.pipe';
-import { ListItem } from './list-item/list-item.interface';
 
 export type ListShape = 'square' | 'rounded';
 
@@ -40,7 +39,7 @@ export class ListComponent implements OnChanges {
    */
 
   @Input()
-  public items: ListItem[];
+  public items: any[];
 
   /**
    * Callback to determine name of section. Sections will be ordered alphabetically.
@@ -97,7 +96,7 @@ export class ListComponent implements OnChanges {
   isLoading: boolean;
   isLoadOnDemandEnabled: boolean;
   groupedItems: any[];
-  selectedItem: ListItem;
+  selectedItem: any;
 
   private orderMap: WeakMap<any, { isFirst: boolean; isLast: boolean }>;
 
