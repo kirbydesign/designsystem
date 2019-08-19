@@ -97,7 +97,11 @@ ion-item {
   padding: size('m');
 }
 
-.loading,
+.loading {
+  width: 100%;
+  padding: size('s');
+}
+
 .no-more-items {
   width: 100%;
   background-color: get-color('white');

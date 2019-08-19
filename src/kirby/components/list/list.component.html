@@ -1,8 +1,5 @@
-<ion-list kirbyInfiniteScroll
-          (scrollEnd)="onLoadOnDemand()"
-          [disabled]="!isLoadOnDemandEnabled"
-          [class.has-header]="listHeaderTemplate"
-          [class.has-footer]="listFooterTemplate">
+<ion-list kirbyInfiniteScroll (scrollEnd)="onLoadOnDemand()" [disabled]="!isLoadOnDemandEnabled"
+  [class.has-header]="listHeaderTemplate" [class.has-footer]="listFooterTemplate">
   <ion-list-header *ngIf="listHeaderTemplate">
     <ng-container *ngTemplateOutlet="listHeaderTemplate"></ng-container>
   </ion-list-header>
@@ -15,14 +12,10 @@
 
       <div class="list-items">
         <ion-item *ngFor="let item of section.items; let idx = index;trackBy: trackByFn"
-                  [class.has-divider]="showDivider"
-                  [class.selectable]="isSelectable"
-                  [class.selected]="markSelectedRow && selectedItem && item._id === selectedItem._id"
-                  [attr.role]="isSelectable ? 'button' : null"
-                  [class.last-in-section]="idx === section.items.length - 1"
-                  (click)="onItemSelect(item)"
-                  tabindex="0"
-                  keyHandler>
+          [class.has-divider]="showDivider" [class.selectable]="isSelectable"
+          [class.selected]="markSelectedRow && selectedItem && item._id === selectedItem._id"
+          [attr.role]="isSelectable ? 'button' : null" [class.last-in-section]="idx === section.items.length - 1"
+          (click)="onItemSelect(item)" tabindex="0" keyHandler>
           <ng-container *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }"></ng-container>
           <ng-container *ngTemplateOutlet="listFlexItemTemplate; context: { $implicit: item }"></ng-container>
         </ion-item>
@@ -31,22 +24,14 @@
   </ng-container>
 
   <ng-template #normalList>
-    <ion-item *ngFor="let item of items;trackBy: trackByFn"
-              [class.has-divider]="showDivider"
-              [class.selectable]="isSelectable"
-              [class.selected]="markSelectedRow && selectedItem && item._id === selectedItem._id"
-              [attr.role]="isSelectable ? 'button' : null"
-              (click)="onItemSelect(item)"
-              tabindex="0"
-              keyHandler>
+    <ion-item *ngFor="let item of items;trackBy: trackByFn" [class.has-divider]="showDivider"
+      [class.selectable]="isSelectable"
+      [class.selected]="markSelectedRow && selectedItem && item._id === selectedItem._id"
+      [attr.role]="isSelectable ? 'button' : null" (click)="onItemSelect(item)" tabindex="0" keyHandler>
       <ng-container *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }"></ng-container>
       <ng-container *ngTemplateOutlet="listFlexItemTemplate; context: { $implicit: item }"></ng-container>
     </ion-item>
   </ng-template>
-
-  <ion-item *ngIf="isLoading">
-    <div class="loading"><kirby-spinner></kirby-spinner></div>
-  </ion-item>
 
   <ion-item *ngIf="!isLoadOnDemandEnabled && noMoreItemsText">
     <p class="no-more-items">{{ noMoreItemsText }}</p>
@@ -56,3 +41,7 @@
     <ng-container *ngTemplateOutlet="listFooterTemplate"></ng-container>
   </div>
 </ion-list>
+
+<div *ngIf="isLoading" class="loading">
+  <kirby-spinner></kirby-spinner>
+</div>
