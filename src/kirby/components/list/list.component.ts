@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ContentChild,
   EventEmitter,
@@ -34,6 +33,8 @@ export type ListShape = 'square' | 'rounded';
   providers: [ListHelper, ListSwipeActionsHelper, GroupByPipe],
 })
 export class ListComponent implements OnInit, OnChanges {
+  @ViewChild('list') list: any;
+
   /**
    * Provide items for the list to render. Items must be provided in the order you expect them to be rendered.
    */
@@ -90,13 +91,14 @@ export class ListComponent implements OnInit, OnChanges {
   @ContentChild(ListHeaderDirective, { read: TemplateRef }) listHeaderTemplate;
   @ContentChild(ListSectionHeaderDirective, { read: TemplateRef }) sectionHeaderTemplate;
   @ContentChild(ListFooterDirective, { read: TemplateRef }) listFooterTemplate;
-  @ViewChild('list') list: any;
+
   @HostBinding('class.has-sections') isSectionsEnabled: boolean;
   isSwipingDisabled: boolean = false;
   isSelectable: boolean;
   isLoading: boolean;
   isLoadOnDemandEnabled: boolean;
   groupedItems: any[];
+
   private orderMap: WeakMap<any, { isFirst: boolean; isLast: boolean }>;
 
   constructor(
@@ -181,12 +183,12 @@ export class ListComponent implements OnInit, OnChanges {
       : swipeAction.title;
   }
 
-  onActionSwipeLtR(item: any): void {
+  onActionLongSwipeLeft(item: any): void {
     const firstSwipeAction = this.getSwipeActionsSide('left')[0];
     this.onSwipeActionSelect(firstSwipeAction, item);
   }
 
-  onActionSwipeRtL(item: any): void {
+  onActionLongSwipeRight(item: any): void {
     const swipeActionsRight = this.getSwipeActionsSide('right');
     const lastSwipeAction = swipeActionsRight[swipeActionsRight.length - 1];
     this.onSwipeActionSelect(lastSwipeAction, item);
@@ -215,8 +217,8 @@ export class ListComponent implements OnInit, OnChanges {
   onSwipeCellFinished(args: any): void {
     this.listSwipeActionsHelper.onSwipeCellFinished(
       args,
-      this.onActionSwipeLtR.bind(this),
-      this.onActionSwipeRtL.bind(this)
+      this.onActionLongSwipeLeft.bind(this),
+      this.onActionLongSwipeRight.bind(this)
     );
   }
 
