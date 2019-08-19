@@ -96,26 +96,27 @@ export class ModalWrapperComponent extends ContentView implements OnInit {
         const animationStartingY = screen.mainScreen.heightDIPs;
         const modalContainer = <View>this.view.getViewById('modal');
 
-        // setTimeout prevents an error caused by {N} on iOS when calling animate
-        // https://github.com/NativeScript/nativescript-angular/issues/431
-        setTimeout(() => {
-          modalContainer.opacity = 0;
-          modalContainer
-            .animate({
-              translate: { x: 0, y: animationStartingY },
-              duration: 0,
-            })
-            .then(() => {
-              modalContainer.opacity = 1;
-              modalContainer.animate({
-                translate: { x: 0, y: 0 },
-                curve: AnimationCurve.easeOut,
-                duration: 200,
-              });
-            });
-        });
+        if (modalContainer.isLoaded) {
+          // modalContainer may sometimes be loaded before reaching on('loaded')
+          this.animateSlideUpOniOS(modalContainer, animationStartingY);
+        } else {
+          // modalContainer.on('loaded') prevents Error: Animation cancelled
+          modalContainer.on('loaded', () => {
+            this.animateSlideUpOniOS(modalContainer, animationStartingY);
+            modalContainer.off('loaded');
+          });
+        }
       }
     }
+  }
+
+  private animateSlideUpOniOS(modalContainer: View, animationStartingY: number) {
+    modalContainer.translateY = animationStartingY;
+    modalContainer.animate({
+      translate: { x: 0, y: 0 },
+      curve: AnimationCurve.easeOut,
+      duration: 200,
+    });
   }
 
   getStatusBarHeight() {
