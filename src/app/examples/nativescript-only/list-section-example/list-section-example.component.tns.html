@@ -1,17 +1,17 @@
-    <kirby-list
-        [items]="itemsFullList"
-        [getSectionName]="getSectionName"
-        (itemSelect)="onItemSelect($event)"
-        [markSelectedRow]="true"
-        showDivider="true"
-        >
+<kirby-list
+    [items]="itemsFullList"
+    [getSectionName]="getSectionName"
+    (itemSelect)="onItemSelect($event)"
+    [markSelectedRow]="true"
+    showDivider="true"
+    >
     <kirby-list-section-header
         *kirbyListSectionHeader="let section"
         [title]="section"
     ></kirby-list-section-header>
 
-    <GridLayout *kirbyListItem="let item" rows="*" columns="*, 3*, *, auto">
-        <StackLayout col="0" [ngClass]="{'hide-check': !item.selected}">
+    <GridLayout *kirbyListItem="let item" rows="*" columns="32, 3*, *, auto">
+        <StackLayout col="0" [ngClass]="{'hide-check': item !== selectedItem}">
             <kirby-icon name="verify"></kirby-icon>
         </StackLayout>
         <StackLayout col="1">

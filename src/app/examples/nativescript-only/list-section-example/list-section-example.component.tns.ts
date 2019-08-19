@@ -8,6 +8,9 @@ import { BaseListComponent } from '../../list/base-list.component';
   styleUrls: ['./list-section-example.component.tns.scss'],
 })
 export class ListSectionExampleComponent extends BaseListComponent {
+
+  selectedItem: any;
+
   getSectionName(item: any): string {
     if (item.id < 5) return '1st section';
     if (item.id < 10) return '2nd section';
@@ -15,5 +18,10 @@ export class ListSectionExampleComponent extends BaseListComponent {
     if (item.id < 30) return '4th section';
     if (item.id < 60) return '5th section';
     return 'Large section';
+  }
+
+  onItemSelect(item) {
+    this.selectedItem = item;
+    super.onItemSelect(item);
   }
 }
