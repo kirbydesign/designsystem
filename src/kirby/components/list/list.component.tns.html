@@ -27,12 +27,12 @@
     <!-- SECTION HEADER-->
     <ng-template let-section="category" tkGroupTemplate *ngIf="isSectionsEnabled">
       <StackLayout>
-        <ng-container
-        *ngTemplateOutlet="
-              sectionHeaderTemplate;
-              context: { $implicit: section }
-            ">
-        </ng-container>
+          <ng-container
+          *ngTemplateOutlet="
+                sectionHeaderTemplate;
+                context: { $implicit: section }
+              ">
+          </ng-container>
       </StackLayout>
     </ng-template>
 
