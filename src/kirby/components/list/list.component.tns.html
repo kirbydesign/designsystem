@@ -8,18 +8,18 @@
     <!-- ITEM -->
     <ng-template tkListItemTemplate let-item="item" let-index="index">
       <StackLayout [kirbyElevation]="2" [iosMasksToBounds]="true">
-        <StackLayout class="row" 
-          [class.divider]="showDivider" 
+        <StackLayout class="row"
+          [class.divider]="showDivider"
           [class.rounded]="shape === 'rounded'"
           [class.first]="isFirstItem(item, index)"
-          [class.selected]="markSelectedRow && !!selectedItem && item.id === selectedItem.id"
+          [class.selected]="markSelectedRow && item === selectedItem"
           [class.last]="isLastItem(item, index)">
           <ng-container
             *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }">
           </ng-container>
           <ng-container
             *ngTemplateOutlet="listFlexItemTemplate; context: { $implicit: item }">
-          </ng-container>
+          </ng-container>  
         </StackLayout>
       </StackLayout>
     </ng-template>
@@ -27,14 +27,14 @@
     <!-- SECTION HEADER-->
     <ng-template let-section="category" tkGroupTemplate *ngIf="isSectionsEnabled">
       <StackLayout>
-          <ng-container
-          *ngTemplateOutlet="
-                sectionHeaderTemplate;
-                context: { $implicit: section }
-              ">
-          </ng-container>
+            <ng-container
+            *ngTemplateOutlet="
+              sectionHeaderTemplate;
+              context: { $implicit: section }
+            ">
+          </ng-container> 
       </StackLayout>
-    </ng-template>
+    </ng-template> 
 
     <!-- HEADER -->
     <ng-template tkListViewHeader *ngIf="listHeaderTemplate">
@@ -45,7 +45,7 @@
 
     <!-- FOOTER -->
     <ng-template tkListViewFooter *ngIf="!isLoadOnDemandEnabled && noMoreItemsText && !listFooterTemplate">
-      <Label class="show-more-items" text="{{noMoreItemsText}}"></Label>
+        <Label class="show-more-items" text="{{noMoreItemsText}}"></Label>
     </ng-template>
     <ng-template tkListViewFooter *ngIf="listFooterTemplate">
       <ng-container *ngTemplateOutlet="listFooterTemplate"></ng-container>
