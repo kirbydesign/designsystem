@@ -1,7 +1,5 @@
-import { ListItem } from '@kirbydesign/designsystem/components/list/list-item/list-item.interface';
-
 export class BaseListComponent {
-  public itemsFullList: ListItem[] = [
+  public itemsFullList: any[] = [
     {
       id: 0,
       title: 'Vestas Wind Systems has a very long name',
@@ -711,7 +709,7 @@ export class BaseListComponent {
     },
   ];
 
-  public items: ListItem[] = this.itemsFullList.slice(0, 8);
+  public items: any[] = this.itemsFullList.slice(0, 8);
 
   onItemSelect(item: any) {
     alert(`You have clicked the row [${item.title} ${item.amount}]`);
