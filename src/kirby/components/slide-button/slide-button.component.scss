@@ -40,7 +40,6 @@
   @for $i from 1 through 10 {
     $iTenth: $i*10;
     .slide-#{$iTenth}-pct {
-      transition: opacity 0.2s linear;
       opacity: 1-($i/10);
     }
   }
