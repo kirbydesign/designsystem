@@ -31,6 +31,12 @@ export class CardShowcaseComponent {
       inputValues: ['flat', 'highlighted'],
     },
     {
+      name: 'hasPadding',
+      description: '',
+      defaultValue: 'true',
+      inputValues: ['boolean'],
+    },
+    {
       name: 'themeColor',
       description: 'Sets which color the card should use from the theme palette.',
       defaultValue: 'null',

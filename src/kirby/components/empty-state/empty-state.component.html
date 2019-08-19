@@ -1,5 +1,7 @@
 <article>
-  <kirby-icon *ngIf="iconName || customIconName" [name]="iconName" [customName]="customIconName" size="lg" outline="true" themeColor="medium"></kirby-icon>
+  <div *ngIf="iconName || customIconName" class="icon-outline">
+    <kirby-icon [name]="iconName" [customName]="customIconName" size="lg" themeColor="medium"></kirby-icon>
+  </div>
   <h3 *ngIf="title" class="title">{{ title }}</h3>
   <p *ngIf="subtitle" class="subtitle">{{ subtitle }}</p>
   <div class="content">

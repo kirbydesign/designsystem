@@ -32,11 +32,10 @@ import { ActionSheetComponent } from './components/modal/action-sheet/action-she
 import { ModalWrapperComponent } from './components/modal/modal-wrapper/modal-wrapper.component';
 import { ActionSheetHelper } from './components/modal/services/action-sheet.helper';
 import { AlertHelper } from './components/modal/services/alert.helper';
+import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
 import { ModalController } from './components/modal/services/modal.controller';
 import { IModalController } from './components/modal/services/modal.controller.interface';
 import { ModalHelper } from './components/modal/services/modal.helper';
-import { SegmentedChipControlComponent } from './components/segment/segmented-chip-control/segmented-chip-control.component';
-import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
 import { ComponentLoaderDirective } from './components/shared/component-loader.directive';
 import { SlideButtonComponent } from './components/slide-button/slide-button.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
@@ -45,6 +44,7 @@ import { ToastHelper } from './components/toast/services/toast.helper';
 import { ToggleComponent } from './components/toggle/toggle.component';
 import { SizeDirective } from './directives/size/size.directive';
 import { ThemeColorDirective } from './directives/theme-color/theme-color.directive';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
 
 export const declarations = [
   CardComponent,
@@ -77,7 +77,6 @@ export const declarations = [
   ActionSheetComponent,
   SegmentedControlComponent,
   ChipComponent,
-  SegmentedChipControlComponent,
   BadgeComponent,
   SizeDirective,
   ThemeColorDirective,
@@ -85,6 +84,7 @@ export const declarations = [
   ToggleComponent,
   EmptyStateComponent,
   LoadingOverlayComponent,
+  ToolbarComponent,
 ];
 
 export const providerDeclarations: any[] = [

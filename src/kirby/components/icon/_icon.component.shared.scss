@@ -1,7 +1,7 @@
 $_icon-size-map: (
   'sm': (
     font-size: size('m'),
-    padding: size('xs'),
+    padding: size('xxs'),
   ),
   'md': (
     font-size: size('l'),
@@ -34,9 +34,4 @@ $_icon-size-map: (
   $icon-size: $font-size + $padding * 2;
 
   font-size: $font-size;
-
-  Label.outline {
-    width: $icon-size;
-    height: $icon-size;
-  }
 }

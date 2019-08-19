@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ContentChild,
   EventEmitter,
@@ -28,12 +27,19 @@ export type ListShape = 'square' | 'rounded';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
   providers: [ListHelper, GroupByPipe],
+  // Using host property decorator is fine for static values:
+  // tslint:disable-next-line:use-host-property-decorator
+  host: {
+    class: 'kirby-list',
+  },
 })
 export class ListComponent implements OnChanges {
   /**
    * Provide items for the list to render. Items must be provided in the order you expect them to be rendered.
    */
-  @Input() items: any[];
+
+  @Input()
+  public items: any[];
 
   /**
    * Callback to determine name of section. Sections will be ordered alphabetically.
@@ -49,6 +55,11 @@ export class ListComponent implements OnChanges {
    * Determines if dividers should be shown or not.
    */
   @Input() showDivider = false;
+
+  /**
+   * Determines if list row text should turn bold on selection
+   */
+  @Input() markSelectedRow = false;
 
   /**
    * Determine outline shape of:
@@ -85,6 +96,7 @@ export class ListComponent implements OnChanges {
   isLoading: boolean;
   isLoadOnDemandEnabled: boolean;
   groupedItems: any[];
+  selectedItem: any;
 
   private orderMap: WeakMap<any, { isFirst: boolean; isLast: boolean }>;
 
@@ -130,7 +142,8 @@ export class ListComponent implements OnChanges {
   }
 
   onItemSelect(args: any) {
-    this.itemSelect.emit(this.listHelper.getSelectedItem(this.items, args));
+    this.selectedItem = this.listHelper.getSelectedItem(this.items, args);
+    this.itemSelect.emit(this.selectedItem);
   }
 
   onLoadOnDemand(event?: LoadOnDemandEventData) {

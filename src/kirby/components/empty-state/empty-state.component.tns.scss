@@ -4,12 +4,18 @@
   text-align: center;
 }
 
-.icon {
+.icon-outline {
   margin-bottom: size('m');
+  border-radius: size('xxxl') * 3;
+  border-width: 3;
+  border-color: get-color('medium');
+  $icon-size: size('l') * 2;
+  width: $icon-size;
+  height: $icon-size;
 }
 
 .title {
-  margin-bottom: size('xs');
+  margin-bottom: size('xxs');
 }
 
 .subtitle {

@@ -9,12 +9,19 @@ article {
   text-align: center;
 }
 
-kirby-icon {
-  margin-bottom: size('m');
+.icon-outline {
+  margin-left: auto;
+  margin-right: auto;
+  border: 3px solid var(--kirby-medium);
+  border-radius: size('xxxl') * 3;
+  $icon-size: size('l') * 2;
+  width: $icon-size;
+  height: $icon-size;
+  margin-bottom: size('m'); 
 }
 
 h3.title {
-  margin-bottom: size('xs');
+  margin-bottom: size('xxs');
 }
 
 p.subtitle {
