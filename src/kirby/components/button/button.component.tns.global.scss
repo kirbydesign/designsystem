@@ -7,51 +7,62 @@
     $color: get-color($color);
   }
   
-  &.highlighted {
+  &:active {
     background-color: $color;
     border-color: $color;
   }
 }
 
 .kirby-button {
-
-  .button-wrapper {
-    background-color: get-color('primary');
-    border-color: get-color('primary');
-    color: get-color('primary-contrast');
-    border-radius: 100;
-    border-width: 1;
-    
+  .button {
     // we default to 'md' size.
-    margin: size('xxxs');
     padding: size('xxs') size('m') size('xxs') size('m');
     font-size: font-size('s');
     height: size('xl');
-    line-height: line-height('xs');
+  }
   
-    @include highlighted('primary-shade');
+  &.sm {
+    .button {
+      padding: size('xxxs') size('s') size('xxxs') size('s');
+      font-size: font-size('xs');
+      height: size('l');
+    }
   }
 
-  &.sm .button-wrapper {
-    padding: size('xxxs') size('s') size('xxxs') size('s');
-    font-size: font-size('xs');
-    height: size('l');
+  &.lg {
+    .button {
+      font-size: font-size('s');
+      height: size('xxl');
+    }
+  }
+}
+
+.button {
+  background-color: get-color('primary');
+  border-color: get-color('primary');
+  color: get-color('primary-contrast');
+  border-radius: 100;
+  border-width: 1;
+  margin: size('xxxs');
+  android-elevation: 0;
+  @include highlighted('primary-shade');
+  
+  * {
+    // FormattedString, Span
+    background-color: transparent;
   }
 
-  &.lg .button-wrapper {
-    font-size: font-size('s');
-    height: size('xxl');
+  &.expand-block {
+    width: 100%;
   }
 
   &.attention-level1 {
-    .button-wrapper {
-      background-color: get-color('primary');
-      border-color: get-color('primary');
-      color: get-color('primary-contrast');
-      @include highlighted('primary-shade');
-    }
-    
-    &.destructive .button-wrapper {
+    background-color: get-color('primary');
+    border-color: get-color('primary');
+    color: get-color('primary-contrast');
+    @include highlighted('primary-shade');
+      
+    &.destructive {
       background-color: get-color('danger');
       border-color: get-color('danger');
       color: get-color('danger-contrast');
@@ -60,14 +71,12 @@
   }
 
   &.attention-level2 {
-    .button-wrapper {
-      background-color: get-color('white');
-      border-color: get-color('white');
-      color: get-color('black');
-      @include highlighted('white-shade');
-    }
+    background-color: get-color('white');
+    border-color: get-color('white');
+    color: get-color('black');
+    @include highlighted('white-shade');
 
-    &.destructive .button-wrapper {
+    &.destructive {
       background-color: get-color('light');
       border-color: get-color('light');
       color: get-color('danger');
@@ -76,13 +85,11 @@
   }
 
   &.attention-level3 {
-    .button-wrapper {
-      background-color: transparent;
-      border-color: get-color('medium');
-      color: get-color('medium-contrast');
-    }
-    
-    &.destructive .button-wrapper {
+    background-color: transparent;
+    border-color: get-color('medium');
+    color: get-color('medium-contrast');
+
+    &.destructive {
       background-color: transparent;
       border-color: get-color('medium');
       color: get-color('danger');
@@ -90,14 +97,12 @@
   }
 
   &.attention-level4 {
-    .button-wrapper {
-      background-color: transparent;
-      border-color: transparent;
-      color: get-color('primary-contrast');
-      @include highlighted('transparent');
-    }
+    background-color: transparent;
+    border-color: transparent;
+    color: get-color('primary-contrast');
+    @include highlighted('transparent');
 
-    &.destructive .button-wrapper {
+    &.destructive {
       background-color: transparent;
       border-color: transparent;
       color: get-color('danger');
@@ -105,63 +110,53 @@
     }
   }
 
-  &.disabled .button-wrapper {
+  &.disabled {
     background-color: get-color('light-tint');
     border-color: get-color('light-tint');
-    @include highlighted('light-tint');    
+    @include highlighted('light-tint');
   }
 }
 
-.default .kirby-button.attention-level2 {
-  .button-wrapper {
-    background-color: get-color('light');
-    border-color: get-color('light');
-    color: get-color('light-contrast');
-    @include highlighted('light-shade');
-  }
+.default .button.attention-level2 {
+  background-color: get-color('light');
+  border-color: get-color('light');
+  color: get-color('light-contrast');
+  @include highlighted('light-shade');
 }
 
-.primary .kirby-button.attention-level1,
-.secondary .kirby-button.attention-level1,
-.tertiary .kirby-button.attention-level1,
-.success .kirby-button.attention-level1,
-.warning .kirby-button.attention-level1,
-.danger .kirby-button.attention-level1 {
-  .button-wrapper {
-    background-color: get-color('white');
-    border-color: get-color('white');
-    color: get-color('black');
-    @include highlighted('white-shade');
-  }
+.primary .button.attention-level1,
+.secondary .button.attention-level1,
+.tertiary .button.attention-level1,
+.success .button.attention-level1,
+.warning .button.attention-level1,
+.danger .button.attention-level1 {
+  background-color: get-color('white');
+  border-color: get-color('white');
+  color: get-color('black');
+  @include highlighted('white-shade');
 }
 
-.secondary .kirby-button.attention-level3,
-.tertiary .kirby-button.attention-level3,
-.dark .kirby-button.attention-level3 {
-  .button-wrapper {
-    border-color: get-color('white');
-    color: get-color('white');
-    @include highlighted('transparent');
-  }
+.secondary .button.attention-level3,
+.tertiary .button.attention-level3,
+.dark .button.attention-level3 {
+  border-color: get-color('white');
+  color: get-color('white');
+  @include highlighted('transparent');
 }
 
-.primary .kirby-button.attention-level3,
-.success .kirby-button.attention-level3,
-.warning .kirby-button.attention-level3,
-.danger .kirby-button.attention-level3,
-.medium .kirby-button.attention-level3 {
-  .button-wrapper {
-    border-color: get-color('black');
-    color: get-color('black');
-    @include highlighted('transparent');
-  }
+.primary .button.attention-level3,
+.success .button.attention-level3,
+.warning .button.attention-level3,
+.danger .button.attention-level3,
+.medium .button.attention-level3 {
+  border-color: get-color('black');
+  color: get-color('black');
+  @include highlighted('transparent');
 }
 
-.secondary .kirby-button.attention-level4,
-.tertiary .kirby-button.attention-level4,
-.dark .kirby-button.attention-level4 {
-  .button-wrapper {
-    color: get-color('white');
-    @include highlighted('transparent');
-  }
+.secondary .button.attention-level4,
+.tertiary .button.attention-level4,
+.dark .button.attention-level4 {
+  color: get-color('white');
+  @include highlighted('transparent');
 }

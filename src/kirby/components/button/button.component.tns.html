@@ -1,14 +1,17 @@
-<GridLayout (touch)="onTouch($event)" 
-        class="button-wrapper" 
-        [class.highlighted]="isHighlighted" 
-        [columns]="expand ? '*': 'auto'" 
-        horizontalAlignment="center" 
-        verticalAlignment="center">
-    <GridLayout>
-        <!-- TODO: add additional items (e.g. icons) here -->
-        <Label verticalAlignment="center" 
-            horizontalAlignment="center" 
-            [text]="text">
-        </Label>
-    </GridLayout>
-</GridLayout>
+<Button (tap)="onTap($event)" 
+    width="100%"
+    class="button"
+    [width]="expand === 'block' ? '100%' : 'auto'"
+    [class.attention-level1]="attentionLevel === '1'"
+    [class.attention-level2]="attentionLevel === '2'"
+    [class.attention-level3]="attentionLevel === '3'"
+    [class.attention-level4]="attentionLevel === '4'"
+    [class.destructive]="isDestructive"
+    [class.disabled]="isDisabled"
+    [isEnabled]="!isDisabled">
+    <FormattedString class="transparent-bg">
+        <Span class="transparent-bg" [text]="text"></Span>
+        <!-- TODO: we can add icons e.g. -->
+        <!-- <Span text=" &#x266B;"></Span> -->
+    </FormattedString>
+</Button>

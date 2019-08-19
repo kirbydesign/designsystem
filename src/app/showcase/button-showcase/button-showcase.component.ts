@@ -49,7 +49,7 @@ export class ButtonShowcaseComponent {
     },
     {
       name: 'isOutlinedOnFocus',
-      description: '(Optional) Toggle the button outline on focus.',
+      description: '(Optional) Toggle the button outline on focus (Web only).',
       defaultValue: 'true',
       inputValues: ['boolean'],
     },

@@ -7,148 +7,148 @@
     $color: #{get-color($color)};
   }
   
-  .highlighted {
+  &.highlighted {
     background-color: $color;
     border-color: $color;
   }
 }
 
 :host {
-  --kirby-button-background-color: transparent;
-  --kirby-button-border-color: transparent;
-  --kirby-button-border-radius: 2rem;
-  background-color: var(--kirby-button-background-color);
-  border: 1px solid var(--kirby-button-border-color);
-  border-radius: var(--kirby-button-border-radius);
-  color: var(--kirby-button-color);
-  cursor: pointer;
-  transition: opacity 200ms linear;
+  pointer-events: none;
   display: inline-flex;
-  line-height: line-height('xs');
-  vertical-align: middle;
+  flex-direction: row;
 
-  // we default to 'md' size.
-  margin: size('xxxs');
-  height: size('xl');
-  
-  button {
-    background-color: transparent;
-    border: 1px solid transparent;
-    height: 100%;
-    width: 100%;
-    border-radius: var(--kirby-button-border-radius);
-    padding: size('xxs') size('m') size('xxs') size('m');
-    color: var(--kirby-button-color);
-    font-size: font-size('s');
-    cursor: pointer;
-  }
-
-  .no-outline-on-focus:focus {
-    outline: none;
-  }
-
-  &.sm {
+  &.sm button {
     height: size('l');
-    
-    button {
-      font-size: font-size('xs');
-      padding: size('xxxs') size('s') size('xxxs') size('s');
-    }
+    font-size: font-size('xs');
+    padding: size('xxxs') size('s') size('xxxs') size('s');
   }
 
-  &.lg {
+  &.lg button {
     height: size('xxl');
-    
-    button {
-      font-size: font-size('s');
-    }
-  }
-
-  &.attention-level1 {
-    --kirby-button-background-color:#{get-color('primary')};
-    --kirby-button-border-color: #{get-color('primary')};
-    --kirby-button-color: #{get-color('primary-contrast')};
-    @include highlighted('primary-shade');
-  
-    &.destructive {
-      --kirby-button-background-color:#{get-color('danger')};
-      --kirby-button-border-color: #{get-color('danger')};
-      --kirby-button-color: #{get-color('danger-contrast')};
-      @include highlighted('danger-shade');
-    }
-  }
-
-  &.attention-level2 {
-    --kirby-button-background-color:#{get-color('white')};
-    --kirby-button-border-color: #{get-color('white')};
-    --kirby-button-color: #{get-color('white-contrast')};
-    @include highlighted('white-shade');
-
-    &.destructive {
-      --kirby-button-background-color:#{get-color('light')};
-      --kirby-button-border-color: #{get-color('light')};
-      --kirby-button-color: #{get-color('danger')};
-      @include highlighted('light-shade');
-    }
-  }
-
-  &.attention-level3 {
-    --kirby-button-border-color: #{get-color('medium')};
-    --kirby-button-color: #{get-color('medium-contrast')};
-    @include highlighted('transparent');
-
-    &.destructive {
-      --kirby-button-border-color: #{get-color('medium')};
-      --kirby-button-color: #{get-color('danger')};
-      @include highlighted('transparent');
-    }
-  }
-
-  &.attention-level4 {
-    --kirby-button-color: #{get-color('primary-contrast')};
-    @include highlighted('transparent');
-
-    &.destructive {
-      --kirby-button-color: #{get-color('danger')};
-      @include highlighted('transparent');
-    }
+    font-size: font-size('s');
   }
 
   &[expand='block'] {
-    width: 100%;
+    display: flex;
+    button {      
+      width: 100%;
+    }
   }
-
-  &:hover,
-  &:focus {
-    opacity: 0.8;
-  }
-
-  &.disabled {
-    background-color: get-color('light-tint');
-    border-color: get-color('light-tint');
-    pointer-events: none;
-    @include highlighted('light-tint');
-  }
-
-  :host-context(.default),
-  :host-context(.kirby-color-brightness-white) {
+  
+  button {
+    --kirby-button-background-color: transparent;
+    --kirby-button-border-color: transparent;
+    --kirby-button-border-radius: 2rem;
+    background-color: var(--kirby-button-background-color);
+    border: 1px solid var(--kirby-button-border-color);
+    border-radius: var(--kirby-button-border-radius);
+    color: var(--kirby-button-color);
+    transition: opacity 200ms linear;
+    display: inline-flex;
+    justify-content: center;
+    line-height: line-height('xs');
+    vertical-align: middle;
+    cursor: pointer;
+    pointer-events: auto;
+    
+    // we default to 'md' size.
+    margin: size('xxxs');
+    height: size('xl');
+    padding: size('xxs') size('m') size('xxs') size('m');
+    font-size: font-size('s');
+  
+    &.attention-level1 {
+      --kirby-button-background-color:#{get-color('primary')};
+      --kirby-button-border-color: #{get-color('primary')};
+      --kirby-button-color: #{get-color('primary-contrast')};
+      @include highlighted('primary-shade');
+    
+      &.destructive {
+        --kirby-button-background-color:#{get-color('danger')};
+        --kirby-button-border-color: #{get-color('danger')};
+        --kirby-button-color: #{get-color('danger-contrast')};
+        @include highlighted('danger-shade');
+      }
+    }
+  
     &.attention-level2 {
-      --kirby-button-background-color: #{get-color('light')};
-      --kirby-button-border-color: #{get-color('light')};
-      --kirby-button-color: #{get-color('light-contrast')};
-      @include highlighted('light-shade');
-    }
-  }
-
-  :host-context(.kirby-color-brightness-dark) {
-    &.attention-level3 {
+      --kirby-button-background-color:#{get-color('white')};
       --kirby-button-border-color: #{get-color('white')};
-      --kirby-button-color: #{get-color('white')};
-      @include highlighted('transparent');
+      --kirby-button-color: #{get-color('white-contrast')};
+      @include highlighted('white-shade');
+  
+      &.destructive {
+        --kirby-button-background-color:#{get-color('light')};
+        --kirby-button-border-color: #{get-color('light')};
+        --kirby-button-color: #{get-color('danger')};
+        @include highlighted('light-shade');
+      }
     }
-    &.attention-level4 {
-      --kirby-button-color: #{get-color('white')};
+  
+    &.attention-level3 {
+      --kirby-button-border-color: #{get-color('medium')};
+      --kirby-button-color: #{get-color('medium-contrast')};
       @include highlighted('transparent');
+  
+      &.destructive {
+        --kirby-button-border-color: #{get-color('medium')};
+        --kirby-button-color: #{get-color('danger')};
+        @include highlighted('transparent');
+      }
+    }
+  
+    &.attention-level4 {
+      --kirby-button-color: #{get-color('primary-contrast')};
+      @include highlighted('transparent');
+  
+      &.destructive {
+        --kirby-button-color: #{get-color('danger')};
+        @include highlighted('transparent');
+      }
+    }
+  
+    &:hover,
+    &:focus {
+      opacity: 0.8;
+    }
+  
+    &.disabled {
+      background-color: get-color('light-tint');
+      border-color: get-color('light-tint');
+      pointer-events: none;
+      @include highlighted('light-tint');
+    }
+  
+    &.no-outline-on-focus:focus {
+      outline: none;
+    }
+  
+    :host-context(.default),
+    :host-context(.kirby-color-brightness-white) {
+      button {
+        &.attention-level2 {
+          --kirby-button-background-color: #{get-color('light')};
+          --kirby-button-border-color: #{get-color('light')};
+          --kirby-button-color: #{get-color('light-contrast')};
+          @include highlighted('light-shade');
+        }
+      }
+    }
+  
+    :host-context(.kirby-color-brightness-dark) {
+      button {
+        &.attention-level3 {
+          --kirby-button-border-color: #{get-color('white')};
+          --kirby-button-color: #{get-color('white')};
+          @include highlighted('transparent');
+        }
+        &.attention-level4 {
+          --kirby-button-color: #{get-color('white')};
+          @include highlighted('transparent');
+        }
+      }
     }
   }
 }
+

@@ -1,7 +1,13 @@
 <button [class.highlighted]="isHighlighted" 
         [class.no-outline-on-focus]="!isOutlinedOnFocus" 
+        [class.attention-level1]="attentionLevel === '1'"
+        [class.attention-level2]="attentionLevel === '2'"
+        [class.attention-level3]="attentionLevel === '3'"
+        [class.attention-level4]="attentionLevel === '4'"
+        [class.destructive]="isDestructive"
+        [class.disabled]="isDisabled"
         [disabled]="isDisabled"
-        (mousedown)="onMouseDown($event)" 
-        (mouseup)="onMouseUp($event)">
+        (mousedown)="onMouseDown()" 
+        (mouseup)="onMouseUp()">
     {{text}}
 </button>

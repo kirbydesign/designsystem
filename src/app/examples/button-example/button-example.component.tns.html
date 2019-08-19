@@ -12,24 +12,22 @@
         </WrapLayout>
       </ng-container>
       <ng-container *ngIf="activeTab === 'attention-level'">
-          <kirby-card [themeColor]="themeColor" class="card">
-            <Stacklayout>
-              <kirby-button attentionLevel="1" text="Attention Level 1"></kirby-button>
-              <kirby-button attentionLevel="2" text="Attention Level 2"></kirby-button>
-              <kirby-button attentionLevel="3" text="Attention Level 3"></kirby-button>
-              <kirby-button attentionLevel="4" text="Attention Level 4"></kirby-button>
-            </Stacklayout>
-          </kirby-card>
-          <ListPicker #themeColorPicker [items]="items"
-            textField="text"
-            valueField="value"
-           (selectedValueChange)="themeColor = themeColorPicker.selectedValue;"></ListPicker>
-        </ng-container>
+        <kirby-card [themeColor]="themeColor" class="card">
+          <kirby-button expand="block" attentionLevel="1" text="Attention Level 1"></kirby-button>
+          <kirby-button expand="block" attentionLevel="2" text="Attention Level 2"></kirby-button>
+          <kirby-button expand="block" attentionLevel="3" text="Attention Level 3"></kirby-button>
+          <kirby-button expand="block" attentionLevel="4" text="Attention Level 4"></kirby-button>
+        </kirby-card>
+        <ListPicker #themeColorPicker [items]="items"
+          textField="text"
+          valueField="value"
+          (selectedValueChange)="themeColor = themeColorPicker.selectedValue;"></ListPicker>
+      </ng-container>
       <ng-container *ngIf="activeTab === 'destructive'">
-          <kirby-button attentionLevel="1" isDestructive="true" text="Attention Level 1"></kirby-button>
-          <kirby-button attentionLevel="2" isDestructive="true" text="Attention Level 2"></kirby-button>
-          <kirby-button attentionLevel="3" isDestructive="true" text="Attention Level 3"></kirby-button>
-          <kirby-button attentionLevel="4" isDestructive="true" text="Attention Level 4"></kirby-button>
+        <kirby-button expand="block" attentionLevel="1" isDestructive="true" text="Attention Level 1"></kirby-button>
+        <kirby-button expand="block" attentionLevel="2" isDestructive="true" text="Attention Level 2"></kirby-button>
+        <kirby-button expand="block" attentionLevel="3" isDestructive="true" text="Attention Level 3"></kirby-button>
+        <kirby-button expand="block" attentionLevel="4" isDestructive="true" text="Attention Level 4"></kirby-button>
       </ng-container>
     </Stacklayout>
 </ScrollView>
