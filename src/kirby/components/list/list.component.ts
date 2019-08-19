@@ -143,7 +143,6 @@ export class ListComponent implements OnChanges {
 
   onItemSelect(args: any) {
     this.selectedItem = this.listHelper.getSelectedItem(this.items, args);
-
     this.itemSelect.emit(this.selectedItem);
   }
 
