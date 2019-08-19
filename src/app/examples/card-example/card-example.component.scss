@@ -1,4 +1,4 @@
-@import '../../../kirby/scss/web-imports';
+@import 'web-imports';
 
 kirby-card {
   position: relative;
@@ -7,6 +7,10 @@ kirby-card {
 
 kirby-card-header {
   padding-bottom: 0;
+}
+
+.card-content {
+  padding: size("s");
 }
 
 kirby-card {
