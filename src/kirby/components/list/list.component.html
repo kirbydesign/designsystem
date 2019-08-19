@@ -1,4 +1,7 @@
-<ion-list kirbyInfiniteScroll (scrollEnd)="onLoadOnDemand()" [disabled]="!isLoadOnDemandEnabled"
+<ion-list
+  kirbyInfiniteScroll
+  (scrollEnd)="onLoadOnDemand()"
+  [disabled]="!isLoadOnDemandEnabled"
   [class.has-header]="listHeaderTemplate" [class.has-footer]="listFooterTemplate">
   <ion-list-header *ngIf="listHeaderTemplate">
     <ng-container *ngTemplateOutlet="listHeaderTemplate"></ng-container>
