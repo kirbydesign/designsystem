@@ -24,13 +24,6 @@ import { IfAndroidDirective } from './directives/nativescript-only/ifAndroid/ifA
 overrideModalViewMethod();
 registerElement('ModalStack', () => ModalStack);
 
-// the lines below allow us to use row and col on kirby buttons inside GridLayout
-// when https://github.com/NativeScript/nativescript-angular/issues/1422 gets fixed
-// there may be a better way to do this.
-registerElement('kirby-button', () => {
-  return ContentView;
-});
-
 // tslint:disable-next-line:max-line-length
 const nativeScriptDeclarations = [
   ...declarations,
