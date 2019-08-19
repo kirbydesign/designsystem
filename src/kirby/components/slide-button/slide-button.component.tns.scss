@@ -1,6 +1,5 @@
 @import "../../scss/_native-imports";
 
-$slide-button-width: 52;
 .slide-button-container {
     width: 256;
     height: 56;
@@ -12,10 +11,12 @@ $slide-button-width: 52;
         width: 100%;
     }
 
+    $slide-button-width: 52;
+    $slide-button-margin: 2;
     .slide-button {
         width: $slide-button-width;
         height: $slide-button-width;
-        margin: 2;
+        margin: $slide-button-margin;
         border-radius: 100;
         background-color: get-color('white');
         color: get-color('primary-contrast');
@@ -26,6 +27,6 @@ $slide-button-width: 52;
     .slide-button-text {
         color: get-color('primary-contrast');
         font-size: font-size('n');
-        padding-left: $slide-button-width/2;
+        margin-left: ($slide-button-width+$slide-button-margin*2)/2;
     }
 }

@@ -1,4 +1,4 @@
-@import "../../scss/web-imports";
+@import "web-imports";
 
 @mixin _slider-thumb() {
   -webkit-appearance: none;
@@ -24,8 +24,9 @@
     width: 100%;
   }
 
+  $slide-button-padding: 2px;
   .range-container {
-    $padding: 2px;
+    $padding: $slide-button-padding;
 
     width: 100%;
     display: flex;
@@ -51,7 +52,7 @@
     margin: 0;
     line-height: 1;
     z-index: 1;
-    padding-left: size('xxl')/2;
+    margin-left: (size('xxl')+$slide-button-padding)/2;
   }
 
   .slide-button {
