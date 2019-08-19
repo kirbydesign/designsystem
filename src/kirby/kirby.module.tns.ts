@@ -4,7 +4,6 @@ import { NativeScriptCommonModule } from 'nativescript-angular/common';
 import { NativeScriptRouterModule } from 'nativescript-angular/router';
 import { NativeScriptUIChartModule } from 'nativescript-ui-chart/angular';
 import { NativeScriptUIListViewModule } from 'nativescript-ui-listview/angular';
-import { ContentView } from 'tns-core-modules/ui/content-view/content-view';
 
 import { TNSCheckBoxModule } from 'nativescript-checkbox/angular';
 // tslint:disable-next-line:import-line-spacing
