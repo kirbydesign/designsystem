@@ -1,7 +1,7 @@
-@import "../../scss/web-imports";
+@import '../../scss/web-imports';
 
-$divider-color: get-color("background-color");
-$background-color-hover: get-color("background-color");
+$divider-color: get-color('background-color');
+$background-color-hover: get-color('background-color');
 $shadow: get-elevation(2);
 
 :host {
@@ -20,7 +20,7 @@ $shadow: get-elevation(2);
   }
 
   ion-item {
-    background-color: get-color("white");
+    background-color: get-color('white');
     &:not(:last-of-type).has-divider {
       border-bottom: 1px solid $divider-color;
     }
@@ -66,13 +66,13 @@ $shadow: get-elevation(2);
 }
 
 ion-list-header {
-  background-color: get-color("white");
+  background-color: get-color('white');
   border-bottom: 1px solid $divider-color;
   padding: 0;
 }
 
 ion-item-divider {
-  background-color: get-color("white");
+  background-color: get-color('white');
   border-color: transparent;
   padding: 0;
   --color: unset;
@@ -81,8 +81,8 @@ ion-item-divider {
 ion-item {
   display: flex;
   width: 100%;
-  padding: size("m") size("xs");
-  font-size: font-size("s");
+  padding: size('m') size('xs');
+  font-size: font-size('s');
   --inner-border-width: 0;
   --background: transparent;
   --min-height: unset;
@@ -90,15 +90,15 @@ ion-item {
 
 .section-header {
   background-color: transparent;
-  padding: size("m");
+  padding: size('m');
 }
 
 .loading,
 .no-more-items {
   width: 100%;
-  background-color: get-color("white");
+  background-color: get-color('white');
   text-align: center;
-  padding: size("s");
+  padding: size('s');
 }
 
 .footer {
@@ -109,12 +109,11 @@ ion-item {
 }
 
 .swipe-action {
-  // background-color: #{get-color("primary")};
-  color: #{get-color("primary-contrast")};
+  color: #{get-color('primary-contrast')};
   @each $color-name, $color-value in $main-colors {
     .#{$color-name} {
       background-color: #{get-color($color-name)};
-      color: #{get-color($color-name + "-contrast")};
+      color: #{get-color($color-name + '-contrast')};
     }
   }
 
