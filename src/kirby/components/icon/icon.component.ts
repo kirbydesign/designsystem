@@ -6,6 +6,7 @@ import {
   Optional,
   SimpleChanges,
   HostBinding,
+  ElementRef,
 } from '@angular/core';
 
 import { kirbyIconSettings } from './kirby-icon-settings';
@@ -25,11 +26,10 @@ export class IconComponent implements OnChanges {
   defaultIcon: Icon = this.findIcon(kirbyIconSettings.icons, 'cog');
   fontFamily: string = kirbyIconSettings.fontfamily;
   private _icon = (this.icon = this.defaultIcon);
+  isSpanIcon: boolean;
 
   @Input() name: string;
   @Input() customName: string;
-
-  @Input() isSpanIcon?: boolean;
 
   @HostBinding('style.fontFamily')
   get spanFontFamily() {
@@ -81,7 +81,12 @@ export class IconComponent implements OnChanges {
     }
   }
 
-  constructor(@Optional() @Inject(ICON_SETTINGS) private iconSettings?: IconSettings) {}
+  constructor(
+    private elRef: ElementRef,
+    @Optional() @Inject(ICON_SETTINGS) private iconSettings?: IconSettings
+  ) {
+    this.isSpanIcon = elRef.nativeElement.toString().indexOf('Span') > -1;
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.name && changes.name.currentValue) {
