@@ -1,65 +1,62 @@
 <ScrollView>
   <StackLayout class="background">
+    <Label text="Card" class="h1"></Label>
+
     <Label text="Elevation" class="h2"></Label>
   
-    <kirby-card mode="flat">
+    <kirby-card [hasPadding]="true" mode="flat">
       <kirby-card-header title="Flat" subtitle='mode="flat"'></kirby-card-header>  
-      <StackLayout class="card-content">
-        <Label text='mode="flat" sets the elevation of the z-axis to 0.'></Label>"
+      <Label text='mode="flat" sets the elevation of the z-axis to 0.'></Label>"
+    </kirby-card>
+    
+    <kirby-card [hasPadding]="true">
+      <kirby-card-header title="Default" subtitle=" "></kirby-card-header>  
+      <Label text="The default elevation of the card on the z-axis is 2."></Label>"
+    </kirby-card>
+
+    <kirby-card [hasPadding]="true" mode="highlighted">
+      <kirby-card-header title="Highlighted" subtitle='mode="highlighted"'></kirby-card-header>  
+      <Label text='mode="highlighted" sets the elevation of the z-axis to 4.'></Label>"
+    </kirby-card>
+
+    <label text="Padding" class="h2"></label>
+
+    <kirby-card [hasPadding]="false">
+      <kirby-card-header title="Card without padding" subtitle="(default)"></kirby-card-header>
+      <StackLayout class="card-content-background-color bottom-rounded">
+        <Label text="Example content (with background color)" style="font-weight: bold"></Label>
+        <Label text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui quas quibusdam eligendi, debitis nemo fuga quia accusamus doloremque sit reprehenderit!" textWrap="true"></Label>
       </StackLayout>
     </kirby-card>
     
-    <kirby-card>
-      <kirby-card-header title="Default" subtitle=" "></kirby-card-header>  
-      <StackLayout class="card-content">
-        <Label text="The default elevation of the card on the z-axis is 2."></Label>"
-      </StackLayout>
-    </kirby-card>
-
-    <kirby-card mode="highlighted">
-      <kirby-card-header title="Highlighted" subtitle='mode="highlighted"'></kirby-card-header>  
-      <StackLayout class="card-content">
-        <Label text='mode="highlighted" sets the elevation of the z-axis to 4.'></Label>"
-      </StackLayout>
-    </kirby-card>
-
-    <label text="Styling" class="h2"></label>
-
-    <kirby-card themeColor="primary" [hasPadding]="true">
-      <kirby-card-header title="Card with padding" subtitle='themeColor="primary"'></kirby-card-header>
-      <StackLayout>
+    <kirby-card [hasPadding]="true">
+      <kirby-card-header title="Card with padding" subtitle='hasPadding="true"'></kirby-card-header>
+      <StackLayout class="card-content-background-color">
+        <Label text="Example content (with background color)" style="font-weight: bold"></Label>
         <Label text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui quas quibusdam eligendi, debitis nemo fuga quia accusamus doloremque sit reprehenderit!" textWrap="true"></Label>
       </StackLayout>
     </kirby-card>
 
     <Label text="Colors" class="h2"></Label>
 
-    <kirby-card>
+    <kirby-card [hasPadding]="true">
       <kirby-card-header title="Default" subtitle="Default Card Color"></kirby-card-header>
-      <StackLayout class="card-content">
-        <Label text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui quas quibusdam eligendi, debitis nemo fuga quia accusamus doloremque sit reprehenderit!" textWrap="true"></Label>
-      </StackLayout>
+      <Label text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui quas quibusdam eligendi, debitis nemo fuga quia accusamus doloremque sit reprehenderit!" textWrap="true"></Label>
     </kirby-card>
 
-    <kirby-card themeColor="primary">
+    <kirby-card [hasPadding]="true" themeColor="primary">
       <kirby-card-header title="Primary" subtitle='themeColor="primary"'></kirby-card-header>
-      <StackLayout class="card-content">
-        <Label text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui quas quibusdam eligendi, debitis nemo fuga quia accusamus doloremque sit reprehenderit!" textWrap="true"></Label>
-      </StackLayout>
+      <Label text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui quas quibusdam eligendi, debitis nemo fuga quia accusamus doloremque sit reprehenderit!" textWrap="true"></Label>
     </kirby-card>
 
-    <kirby-card themeColor="secondary">
+    <kirby-card [hasPadding]="true" themeColor="secondary">
       <kirby-card-header title="Secondary" subtitle='themeColor="secondary"'></kirby-card-header>
-      <StackLayout class="card-content">
-        <Label text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui quas quibusdam eligendi, debitis nemo fuga quia accusamus doloremque sit reprehenderit!" textWrap="true"></Label>
-      </StackLayout>
+      <Label text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui quas quibusdam eligendi, debitis nemo fuga quia accusamus doloremque sit reprehenderit!" textWrap="true"></Label>
     </kirby-card>
 
-    <kirby-card themeColor="warning">
+    <kirby-card [hasPadding]="true" themeColor="warning">
       <kirby-card-header title="Warning" subtitle='themeColor="warning"'></kirby-card-header>
-      <StackLayout class="card-content">
-        <Label text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui quas quibusdam eligendi, debitis nemo fuga quia accusamus doloremque sit reprehenderit!" textWrap="true"></Label>
-      </StackLayout>
+      <Label text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui quas quibusdam eligendi, debitis nemo fuga quia accusamus doloremque sit reprehenderit!" textWrap="true"></Label>
     </kirby-card>   
   </StackLayout>
 </ScrollView>
