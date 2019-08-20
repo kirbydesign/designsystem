@@ -97,12 +97,10 @@ ion-item {
   padding: size('m');
 }
 
-.loading,
-.no-more-items {
+.no-more-items, .loading {
   width: 100%;
-  background-color: get-color('white');
+  padding: size('m');
   text-align: center;
-  padding: size('s');
 }
 
 .footer {
