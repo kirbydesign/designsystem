@@ -34,7 +34,7 @@
     <ion-item *ngFor="let item of items;trackBy: trackByFn"
               [class.has-divider]="showDivider"
               [class.selectable]="isSelectable"
-              [class.selected]="markSelectedRow && selectedItem && item._id === selectedItem._id"
+              [class.selected]="markSelectedRow && item === selectedItem"
               [attr.role]="isSelectable ? 'button' : null"
               (click)="onItemSelect(item)"
               tabindex="0"
@@ -44,15 +44,12 @@
     </ion-item>
   </ng-template>
 
-  <ion-item *ngIf="isLoading">
-    <div class="loading"><kirby-spinner></kirby-spinner></div>
-  </ion-item>
-
-  <ion-item *ngIf="!isLoadOnDemandEnabled && noMoreItemsText">
-    <p class="no-more-items">{{ noMoreItemsText }}</p>
-  </ion-item>
-
   <div *ngIf="listFooterTemplate" class="footer">
     <ng-container *ngTemplateOutlet="listFooterTemplate"></ng-container>
   </div>
 </ion-list>
+
+<p *ngIf="!isLoadOnDemandEnabled && noMoreItemsText" class="no-more-items">{{ noMoreItemsText }}</p>
+<div *ngIf="isLoading" class="loading">
+  <kirby-spinner></kirby-spinner>
+</div>
