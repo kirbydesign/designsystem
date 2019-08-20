@@ -37,7 +37,7 @@
   --kirby-badge-color: #{get-color('white')};
 }
 
-:host(.kirby-color-brightness-white) {
+:host(.white) {
   --kirby-badge-background-color: #{get-color('white')};
   --kirby-badge-color: #{get-color('white-contrast')};
 }
