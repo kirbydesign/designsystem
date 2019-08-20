@@ -30,6 +30,10 @@ export const routes: Routes = [
         path: 'component-status',
         loadChildren: './component-status/component-status.module#ComponentStatusModule',
       },
+      {
+        path: 'changelog',
+        loadChildren: './changelog/changelog.module#ChangelogModule',
+      },
     ],
   },
   {

@@ -31,14 +31,6 @@
     .text-right {
       text-align: right;
     }
-
-    .close-btn {
-      &.outside {
-        position: absolute;
-        top: -#{size('s')};
-        transform: translateY(-100%);
-      }
-    }
   }
 
   .modal-content {

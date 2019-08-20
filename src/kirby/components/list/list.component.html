@@ -20,6 +20,7 @@
           <ng-container *ngTemplateOutlet="swipeActions; context: { $implicit: item }"></ng-container>
           <ion-item [class.has-divider]="showDivider"
                     [class.selectable]="isSelectable"
+                    [class.selected]="markSelectedRow && selectedItem && item._id === selectedItem._id"
                     [attr.role]="isSelectable ? 'button' : null"
                     [class.last-in-section]="idx === section.items.length - 1"
                     (click)="onItemSelect(item)"
@@ -38,6 +39,7 @@
       <ng-container *ngTemplateOutlet="swipeActions; context: { $implicit: item }"></ng-container>
       <ion-item [class.has-divider]="showDivider"
                 [class.selectable]="isSelectable"
+                [class.selected]="markSelectedRow && item === selectedItem"
                 [attr.role]="isSelectable ? 'button' : null"
                 (click)="onItemSelect(item)"
                 tabindex="0"
@@ -48,22 +50,19 @@
     </ion-item-sliding>
   </ng-template>
 
-  <ion-item *ngIf="isLoading">
-    <div class="loading"><kirby-spinner></kirby-spinner></div>
-  </ion-item>
-
-  <ion-item *ngIf="!isLoadOnDemandEnabled && noMoreItemsText">
-    <p class="no-more-items">{{ noMoreItemsText }}</p>
-  </ion-item>
-
   <div *ngIf="listFooterTemplate" class="footer">
     <ng-container *ngTemplateOutlet="listFooterTemplate"></ng-container>
   </div>
- </ion-list>
+</ion-list>
+
+<p *ngIf="!isLoadOnDemandEnabled && noMoreItemsText" class="no-more-items">{{ noMoreItemsText }}</p>
+<div *ngIf="isLoading" class="loading">
+  <kirby-spinner></kirby-spinner>
+</div>
 
  <!-- Swipe Action templates -->
  <!-- TODO: Adding back the comments below ((ionSwipe)=... and adding expandable on ion-item-option) will re-enable full-swiping on each side.  -->
- <!--       They is temporarily disabled for consistency, as full-swiping is currently not implemented in {N} -->
+<!-- They is temporarily disabled for consistency, as full-swiping is currently not implemented in {N} -->
 <ng-template #swipeActions let-item>
   <!-- <ion-item-options *ngIf="getSwipeActionsSide('left') && getSwipeActionsSide('left').length > 0" side="start" (ionSwipe)="onActionLongSwipeLeft(item)">  -->
   <ion-item-options *ngIf="getSwipeActionsSide('left') && getSwipeActionsSide('left').length > 0" side="start">

@@ -1,0 +1,11 @@
+@import '_toolbar.component.shared.scss';
+
+.action-item-spacer {
+    
+    &-small {
+      width: size('xxxs');
+    }
+    &-large {
+      width: size('s');
+    }
+}

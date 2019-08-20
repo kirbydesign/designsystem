@@ -1,0 +1,33 @@
+@import '../../scss/web-imports';
+
+.toolbar {
+  --background:  #{get-color('background-color')};
+  --color: #{get-color('background-color-contrast')};
+}
+
+@each $color-name, $color-value in $main-colors {
+  :host(.#{$color-name}) {
+    ion-toolbar {
+      --background:  #{get-color($color-name)};
+      --color: #{get-color($color-name+'-contrast')};
+    }
+  }
+}
+
+.item {
+
+  &-start {
+    margin-left: size('s');
+    margin-right: size('s');
+  }
+
+  &-middle {
+    margin-left: size('s');
+    margin-right: size('xxxs');
+  }
+
+  &-end {
+    margin-left: size('xxxs');
+    margin-right: size('s');
+  }
+}

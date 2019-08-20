@@ -16,6 +16,9 @@ export class ListCellLineComponent extends ContentView {
   @Input()
   primary: boolean;
 
+  @Input()
+  selected: boolean;
+
   constructor() {
     super();
     this.primary = false;
