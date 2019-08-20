@@ -22,10 +22,12 @@ $min-card-width: 304px;
   min-width: $min-card-width;
   overflow: hidden;
 
-  &.padding {
-    padding: size('s');
-    @include media("<small") {
-      padding: size('xxs');
+  .content-wrapper {
+    &.padding {
+        padding: size('s');
+        @include media("<small") {
+          padding: size('xxs');
+        }
     }
   }
 
