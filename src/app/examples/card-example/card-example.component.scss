@@ -6,14 +6,29 @@ kirby-card {
 }
 
 kirby-card-header {
-  padding-bottom: 0;
+  &:not(.bg-color) {
+    padding-bottom: 0;
+  }
+
+  &.bg-color {
+    color: get-color('dark-contrast');
+    background-color: get-color('dark');
+  }
+}
+
+kirby-card-footer {
+  &.bg-color {
+    color: get-color('dark-contrast');
+    background-color: get-color('dark');
+  }
 }
 
 .card-content {
   padding: size("s");
+  background-color: get-color('light');
 }
 
-kirby-card {
+kirby-card.show-size {
   &::before {
       background-color: #ccc;
       color: white;
