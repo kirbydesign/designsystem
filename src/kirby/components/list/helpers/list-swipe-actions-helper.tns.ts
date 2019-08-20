@@ -44,7 +44,6 @@ export class ListSwipeActionsHelper {
 
     // apply custom styles to elements
     const child = mainView.getViewById('row');
-    child.className = 'row divider';
     if (child.className.indexOf('first') > 0) {
       console.log('first element swiped');
       // swipeActionsContainerView. something = something
