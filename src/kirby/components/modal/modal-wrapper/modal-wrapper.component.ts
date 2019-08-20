@@ -20,7 +20,7 @@ export class ModalWrapperComponent implements AfterViewInit {
     private modalController: IModalController,
     injector: Injector
   ) {
-    this.config = ModalConfigHelper.processOptionalValues(this.params.get('config'));
+    this.config = this.params.get('config');
     this.componentPropsInjector = Injector.create({
       providers: [{ provide: COMPONENT_PROPS, useValue: this.params.get('config').componentProps }],
       parent: injector,

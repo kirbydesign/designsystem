@@ -24,6 +24,17 @@
 
 <hr />
 
+<h2>List with bold text on row selection</h2>
+<kirby-list [items]="items" [markSelectedRow]="true">
+  <kirby-list-item
+    *kirbyListItem="let item"
+    [title]="item.title"
+    [amount]="item.amount"
+  ></kirby-list-item>
+</kirby-list>
+
+<hr />
+
 <h2>List with dividers:</h2>
 <kirby-list [items]="items" showDivider="true">
   <kirby-list-item
@@ -47,7 +58,7 @@
 <hr />
 
 <h2>List with header and footer:</h2>
-<kirby-list [items]="items" (itemSelect)="onItemSelect($event)" shape="rounded">
+<kirby-list [items]="items" (itemSelect)="onItemSelect($event)">
   
   <!-- HEADER-->
   <kirby-list-header *kirbyListHeader>
@@ -76,9 +87,11 @@
 
   <!-- Footer -->
   <ng-container *kirbyListFooter>
-    <p class="footer">An appropriate footer</p>
-    <button kirby-button attentionLevel="1">Click me!</button>
-  </ng-container> 
+    <div class="footer">
+      <h2>An appropriate footer</h2>
+      <button kirby-button>Click me!</button>
+    </div>
+  </ng-container>
 </kirby-list> 
 
 <hr />

@@ -2,6 +2,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NavParams } from '@ionic/angular';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { By } from '@angular/platform-browser';
+import { MockComponent } from 'ng-mocks';
+import * as ionic from '@ionic/angular';
 
 import { ActionSheetComponent } from './action-sheet.component';
 import { IModalController } from '../services/modal.controller.interface';
@@ -14,6 +16,7 @@ import { SpinnerComponent } from '../../spinner/spinner.component';
 import { InfiniteScrollDirective } from '../../list/directives/infinite-scroll.directive';
 import { CardHeaderComponent } from '../../card/card-header/card-header.component';
 import { ListFlexItemComponent } from '../../list/list-flex-item/list-flex-item.component';
+import { ButtonComponent } from '@kirbydesign/designsystem';
 
 describe('ActionSheetComponent', () => {
   let component: ActionSheetComponent;
@@ -35,6 +38,7 @@ describe('ActionSheetComponent', () => {
           { id: '2', text: 'Action 2' },
           { id: '3', text: 'Action 3' },
         ],
+        cancelButtonText: 'Test cancel button text',
       },
     });
 
@@ -50,6 +54,13 @@ describe('ActionSheetComponent', () => {
         GroupByPipe,
         SpinnerComponent,
         InfiniteScrollDirective,
+        ButtonComponent,
+        MockComponent(ionic.IonList),
+        MockComponent(ionic.IonListHeader),
+        MockComponent(ionic.IonLabel),
+        MockComponent(ionic.IonItem),
+        MockComponent(ionic.IonItemDivider),
+        MockComponent(ionic.IonItemGroup),
       ],
       providers: [
         { provide: IModalController, useValue: modalControllerSpy },
@@ -113,23 +124,42 @@ describe('ActionSheetComponent', () => {
 
   describe('actions', () => {
     it('should contain each item', () => {
-      var el = fixture.debugElement.query(By.directive(ListComponent));
-      expect(el.componentInstance.items).toContain({ id: '1', text: 'Action 1' });
-      expect(el.componentInstance.items).toContain({ id: '2', text: 'Action 2' });
-      expect(el.componentInstance.items).toContain({ id: '3', text: 'Action 3' });
+      const rootElement: HTMLElement = fixture.debugElement.nativeElement;
+      const actionSheetItems = rootElement.querySelector('.action-sheet-items');
+      expect(actionSheetItems.children.length).toBe(3);
+      Array.from(actionSheetItems.children).forEach((item, index) => {
+        expect(item.textContent).toEqual(`Action ${index + 1}`);
+      });
     });
 
     it('should reflect add/remove/edit changes of items', () => {
-      component.config.items[0] = { id: '1', text: 'New Action 1' };
-      component.config.items.pop();
-      component.config.items.push({ id: '4', text: 'Action 4' });
+      component.config.items = [
+        { id: '1', text: 'New Action 1' },
+        { id: '2', text: 'Action 2' },
+        { id: '4', text: 'Action 4' },
+      ];
+
       fixture.detectChanges();
-      var el = fixture.debugElement.query(By.directive(ListComponent));
-      expect(el.componentInstance.items).not.toContain({ id: '1', text: 'Action 1' });
-      expect(el.componentInstance.items).toContain({ id: '1', text: 'New Action 1' });
-      expect(el.componentInstance.items).toContain({ id: '2', text: 'Action 2' });
-      expect(el.componentInstance.items).not.toContain({ id: '3', text: 'Action 3' });
-      expect(el.componentInstance.items).toContain({ id: '4', text: 'Action 4' });
+      const rootElement: HTMLElement = fixture.debugElement.nativeElement;
+      const actionSheetItems = rootElement.querySelector('.action-sheet-items');
+      const actionSheetItemsText = Array.from(actionSheetItems.children).map((item) => {
+        return item.textContent;
+      });
+      expect(actionSheetItemsText).not.toContain('Action 1');
+      expect(actionSheetItemsText).toContain('New Action 1');
+      expect(actionSheetItemsText).toContain('Action 2');
+      expect(actionSheetItemsText).not.toContain('Action 3');
+      expect(actionSheetItemsText).toContain('Action 4');
+    });
+  });
+
+  describe('cancel button text', () => {
+    it('should render', () => {
+      const expected = 'Test cancel button text';
+      fixture.detectChanges();
+      const cancelButton = fixture.debugElement.query(By.directive(ButtonComponent));
+      expect(component.cancelButtonText).toEqual(expected);
+      expect(cancelButton.nativeElement.textContent).toEqual(expected);
     });
   });
 });

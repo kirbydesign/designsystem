@@ -1,0 +1,40 @@
+@import "native-imports";
+
+.kirby-badge {
+  .badge { 
+    font-size: font-size('xxs');
+    border-radius: size('xxs');
+    background-color: get-color('danger');
+    color: get-color('white');
+    height: size("s");
+    min-width: size("s");
+
+    .badge-label {
+      // border used for alignment hack.
+      border-width: 1;
+      border-color: transparent;
+      margin-left: size('xxxs');
+      margin-right: size('xxxs'); 
+      white-space: nowrap;
+      height: 100%;
+    }
+  
+    @each $color-name, $color-value in $main-colors {
+      &[themeColor='#{$color-name}'] {
+        background-color: #{get-color($color-name)};
+        color: #{get-color($color-name+'-contrast')};
+      }
+    }
+  
+    &[themeColor='danger'] {
+      color: get-color('white');
+    }
+  
+    .kirby-icon Label {
+      font-size: font-size('n');
+      padding: 0;
+      height: 100%;
+    }
+  
+  }
+}

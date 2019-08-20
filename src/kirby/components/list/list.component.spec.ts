@@ -1,4 +1,6 @@
 import { createTestComponentFactory, Spectator } from '@netbasal/spectator';
+import { MockComponent } from 'ng-mocks';
+import * as ionic from '@ionic/angular';
 
 import { LoadOnDemandEvent } from './list.event';
 import { GroupByPipe } from './pipes/group-by.pipe';
@@ -31,7 +33,18 @@ describe('ListComponent', () => {
 
   const createHost = createTestComponentFactory({
     component: ListComponent,
-    declarations: [ListComponent, GroupByPipe, SpinnerComponent, InfiniteScrollDirective],
+    declarations: [
+      ListComponent,
+      GroupByPipe,
+      SpinnerComponent,
+      InfiniteScrollDirective,
+      MockComponent(ionic.IonList),
+      MockComponent(ionic.IonListHeader),
+      MockComponent(ionic.IonLabel),
+      MockComponent(ionic.IonItem),
+      MockComponent(ionic.IonItemDivider),
+      MockComponent(ionic.IonItemGroup),
+    ],
     providers: [ListHelper, GroupByPipe],
   });
 
@@ -42,6 +55,17 @@ describe('ListComponent', () => {
 
   it('should create', () => {
     expect(spectator.component).toBeTruthy();
+  });
+
+  describe('items', () => {
+    it('should accept null items without errors', () => {
+      spectator.setInput({
+        items: null,
+      });
+      runNgOnChanges();
+
+      expect(spectator.component.items).toBe(null);
+    });
   });
 
   describe('sections', () => {
@@ -64,50 +88,50 @@ describe('ListComponent', () => {
       expect(spectator.component.isSectionsEnabled).toBeTruthy();
     });
 
-    it('should render one li element for each item, if the list is not sectioned', () => {
+    it('should render one item element for each item, if the list is not sectioned', () => {
       spectator.setInput({
         items: Item.createItems(1, 2, 3),
       });
       runNgOnChanges();
 
-      const liElements = spectator.queryAll('li');
+      const liElements = spectator.queryAll('ion-item');
       expect(liElements.length).toEqual(component.items.length);
     });
 
-    it('should render one li element for each item and one for each section, if sections are enabled', () => {
+    it('should render one ion-item for each ion-item-group and one for each section, if sections are enabled', () => {
       spectator.setInput({
         items: Item.createItems(1, 2, 3),
         getSectionName: (item: Item) => (item.value % 2 === 0 ? 'even' : 'odd'),
       });
       runNgOnChanges();
 
-      const liElements = spectator.queryAll('li');
-      expect(liElements.length).toEqual(component.items.length + 2);
+      const liElements = spectator.queryAll('ion-item');
+      expect(liElements.length).toEqual(component.items.length);
     });
   });
 
   describe('divider', () => {
-    it('should set class "divider" on all li elements when showDivider is true', () => {
+    it('should set class "divider" on all items elements when showDivider is true', () => {
       spectator.setInput({
         items: Item.createItems(1, 2, 3),
         showDivider: true,
       });
       runNgOnChanges();
 
-      const liElements = spectator.queryAll('li');
+      const liElements = spectator.queryAll('ion-item');
       liElements.forEach((liElement) => {
         expect(liElement.getAttribute('class')).toContain('divider');
       });
     });
 
-    it('should not set class "divider" on any li elements when showDivider is false', () => {
+    it('should not set class "divider" on any item elements when showDivider is false', () => {
       spectator.setInput({
         items: Item.createItems(1, 2, 3),
         showDivider: false,
       });
       runNgOnChanges();
 
-      const liElements = spectator.queryAll('li');
+      const liElements = spectator.queryAll('ion-item');
       liElements.forEach((liElement) => {
         expect(liElement.getAttribute('class')).not.toContain('divider');
       });
@@ -115,9 +139,10 @@ describe('ListComponent', () => {
   });
 
   describe('function: onItemSelect', () => {
-    it('should emit the selected item', () => {
+    it('should emit the selected item and mark it as selected', () => {
       spyOn(component.itemSelect, 'emit');
       const itemToBeSelected = { value: 'this is a dummy item' };
+      component.items = [itemToBeSelected];
 
       component.onItemSelect(itemToBeSelected);
 
@@ -152,8 +177,8 @@ describe('ListComponent', () => {
       });
       runNgOnChanges();
 
-      expect(component.isFirstItem(items[0], 0)).toEqual(true);
-      expect(component.isLastItem(items[0], 0)).toEqual(true);
+      expect(component.isFirstItem(component.items[0], 0)).toEqual(true);
+      expect(component.isLastItem(component.items[0], 0)).toEqual(true);
     });
 
     it('should return true for sectioned list with rounded corners and multiple entries', () => {
@@ -165,17 +190,17 @@ describe('ListComponent', () => {
       });
       runNgOnChanges();
 
-      expect(component.isFirstItem(items[0], 0)).toEqual(true);
-      expect(component.isLastItem(items[0], 0)).toEqual(false);
+      expect(component.isFirstItem(component.items[0], 0)).toEqual(true);
+      expect(component.isLastItem(component.items[0], 0)).toEqual(false);
 
-      expect(component.isFirstItem(items[1], 1)).toEqual(true);
-      expect(component.isLastItem(items[1], 1)).toEqual(false);
+      expect(component.isFirstItem(component.items[1], 1)).toEqual(true);
+      expect(component.isLastItem(component.items[1], 1)).toEqual(false);
 
-      expect(component.isFirstItem(items[2], 2)).toEqual(false);
-      expect(component.isLastItem(items[2], 2)).toEqual(true);
+      expect(component.isFirstItem(component.items[2], 2)).toEqual(false);
+      expect(component.isLastItem(component.items[2], 2)).toEqual(true);
 
-      expect(component.isFirstItem(items[3], 3)).toEqual(false);
-      expect(component.isLastItem(items[3], 3)).toEqual(true);
+      expect(component.isFirstItem(component.items[3], 3)).toEqual(false);
+      expect(component.isLastItem(component.items[3], 3)).toEqual(true);
     });
   });
 });

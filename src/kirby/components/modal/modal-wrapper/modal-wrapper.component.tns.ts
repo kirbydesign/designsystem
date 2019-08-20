@@ -2,6 +2,7 @@ import { Component, Injector, OnInit } from '@angular/core';
 import { ModalDialogParams } from 'nativescript-angular';
 import { ContentView, ShownModallyData, View } from 'tns-core-modules/ui/content-view';
 import { screen } from 'tns-core-modules/platform';
+import { AnimationCurve } from 'tns-core-modules/ui/enums';
 import * as application from 'tns-core-modules/application';
 declare const android;
 
@@ -26,7 +27,7 @@ export class ModalWrapperComponent extends ContentView implements OnInit {
     injector: Injector
   ) {
     super();
-    this.config = ModalConfigHelper.processOptionalValues(this.params.context);
+    this.config = this.params.context;
     this.componentPropsInjector = Injector.create({
       providers: [{ provide: COMPONENT_PROPS, useValue: this.params.context.componentProps }],
       parent: injector,
@@ -60,33 +61,51 @@ export class ModalWrapperComponent extends ContentView implements OnInit {
     this.modalController.hideTopmost();
   }
 
-  // // TODO: fix animations
-  // private animateBackgroundColor(stackLayout: StackLayout): void {
-  //   const shadowColor = ColorHelper.getThemeColor('kirby-grey-7');
-  //   stackLayout.backgroundColor = new Color(
-  //     ColorHelper.getAlphaIn255Range(this.config.dim),
-  //     shadowColor.r,
-  //     shadowColor.g,
-  //     shadowColor.b
-  //   );
-  //   stackLayout.color = new Color(ColorHelper.getThemeColor('kirby-brand-5').hex);
-  // }
-
   private animateModal(): void {
     if (this.view.android) {
-      this.view
-        .animate({
-          translate: { x: 0, y: Number(this.view.height) },
-          duration: 0,
-        })
-        .then(() => {
-          this.view.animate({
-            translate: { x: 0, y: 0 },
-            duration: 300,
+      if (this.config.flavor === 'drawer') {
+        this.view
+          .animate({
+            translate: { x: 0, y: Number(this.view.height) },
+            duration: 0,
+          })
+          .then(() => {
+            this.view.animate({
+              translate: { x: 0, y: 0 },
+              duration: 200,
+            });
           });
-        });
+      }
+    } else if (this.view.ios) {
+      const viewController = this.view.viewController;
+      // modalTransitionStyle=2 is a fade-in animation
+      viewController.modalTransitionStyle = 2;
+      if (this.config.flavor === 'drawer') {
+        // TODO: the animation starting point should be dependent on the context - bottom of the opening element
+        const animationStartingY = screen.mainScreen.heightDIPs;
+        const modalContainer = <View>this.view.getViewById('modal');
+
+        if (modalContainer.isLoaded) {
+          // modalContainer may sometimes be loaded before reaching on('loaded')
+          this.animateSlideUpOniOS(modalContainer, animationStartingY);
+        } else {
+          // modalContainer.on('loaded') prevents Error: Animation cancelled
+          modalContainer.on('loaded', () => {
+            this.animateSlideUpOniOS(modalContainer, animationStartingY);
+            modalContainer.off('loaded');
+          });
+        }
+      }
     }
-    // TODO: by default iOS slides up, however it slides together with the dimmed background, hence needs fixing
+  }
+
+  private animateSlideUpOniOS(modalContainer: View, animationStartingY: number) {
+    modalContainer.translateY = animationStartingY;
+    modalContainer.animate({
+      translate: { x: 0, y: 0 },
+      curve: AnimationCurve.easeOut,
+      duration: 200,
+    });
   }
 
   getStatusBarHeight() {

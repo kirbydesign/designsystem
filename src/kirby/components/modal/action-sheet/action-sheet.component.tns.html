@@ -3,24 +3,12 @@
         <!-- TODO: onModalDismiss() is better off in the parent GridLayout, but that introduces a bug -->
         <Label row="0" (tap)="onModalDismiss()"></Label>
         <kirby-card row="1">
-            <kirby-card-header *ngIf="config.header" [title]="config.header" [subtitle]="config.subheader">
+            <kirby-card-header *ngIf="config.header" [title]="config.header" [isTitleBold]="true" [subtitle]="config.subheader">
             </kirby-card-header>
-            <!-- TODO: Replace with kirby-list -->
             <StackLayout class="action-container">
                 <Label *ngFor="let item of config.items" class="action-item" (tap)="onItemSelect(item)" text="{{ item.text }}"></Label>
             </StackLayout>
-            
-             <!-- <kirby-list style="border-width: 5; border-color: red; height: 100"
-                [items]="config.items"
-                (itemSelect)="onItemSelect($event)">
-                <kirby-list-flex-item *kirbyListFlexItem="let item">
-                    <kirby-list-cell
-                            horisontalAlignment="center">
-                        <kirby-list-cell-line [primary]="true" [text]="item"></kirby-list-cell-line>
-                    </kirby-list-cell>
-                </kirby-list-flex-item>
-             </kirby-list> -->
-        </kirby-card>            
-        <Button row="2" kirby-button attentionLevel="2" verticalAlignment="bottom" class="cancel-btn" text="Cancel" (tap)="onModalDismiss()"></Button> -->
+        </kirby-card>
+        <Button row="2" kirby-button attentionLevel="2" verticalAlignment="bottom" class="cancel-btn" [text]="cancelButtonText" (tap)="onModalDismiss()"></Button> -->
     </GridLayout>
 </ModalStack>

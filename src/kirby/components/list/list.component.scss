@@ -2,123 +2,110 @@
 
 $divider-color: get-color('background-color');
 $background-color-hover: get-color('background-color');
-$shadow: 0 5px 10px -10px rgba(28, 28, 28, 0.3), 0 0 5px 0 rgba(28, 28, 28, 0.08);
-$shadow-mask: 0 -6px 0px 0px get-color('white');
-$shadow-mask-divider: 0 -1px 0px 0px $divider-color;
-$shadow-mask-hover: 0 -6px 0px 0px $background-color-hover;
+$shadow: get-elevation(2);
 
 :host {
-  display: block;
-  background-color: get-color('background-color');
-
-  &:not(.has-sections) {
+  ion-list {
     box-shadow: $shadow;
+    background: transparent;
+    contain: inherit;
+    padding: 0;
+  }
+
+  .selectable {
+    cursor: pointer;
+    &:hover {
+      background-color: $background-color-hover;
+    }
+  }
+
+  ion-item {
+    background-color: get-color('white');
+    &:not(:last-of-type).has-divider {
+      border-bottom: 1px solid $divider-color;
+    }
+
+    &.selected ::ng-deep * {
+      font-weight: font-weight('bold');
+    }
+    &:focus {
+      $outline-width: 5px;
+      outline-color: var(--highlight-color-focused);
+      outline-style: auto;
+      outline-width: $outline-width;
+      margin-bottom: $outline-width;
+      background-color: $background-color-hover;
+    }
+  }
+
+
+  &.has-sections {
+    ion-list {
+      box-shadow: none;
+    }
+    .list-items {
+      box-shadow: $shadow;
+      border-radius: $border-radius;
+    }
   }
 }
 
 :host(.rounded) {
-  &:not(.has-sections) {
+  ion-list,
+  .list-items {
     border-radius: $border-radius;
-
-    li:first-child {
-      border-top-left-radius: $border-radius;
-      border-top-right-radius: $border-radius;
-    }
-
-    .list-header {
-      border-top-left-radius: $border-radius;
-      border-top-right-radius: $border-radius;
-
-      & + ul > li:first-child {
-        border-radius: 0;
-      }
-    }
-
-    li:last-child {
-      border-bottom-left-radius: $border-radius;
-      border-bottom-right-radius: $border-radius;
-    }
   }
 
-  &.has-sections {
+  ion-list:not(.has-header) ion-item:first-of-type,
+  ion-list-header {
+    border-top-left-radius: $border-radius;
+    border-top-right-radius: $border-radius;
+  }
 
-    li.row {
-      box-shadow: $shadow-mask, $shadow;
-      
-      &.divider {
-        box-shadow: $shadow-mask-divider, $shadow-mask, $shadow;
-      }
-
-      &.selectable:hover {
-        & + li.row {
-          box-shadow: $shadow-mask-hover, $shadow;
-        }
-        
-        &.divider + li.row {
-          box-shadow: $shadow-mask-divider, $shadow-mask-hover, $shadow;
-        }
-      }     
-    }
-
-    li.section-header + li.row
-    {
-      border-top-left-radius: $border-radius;
-      border-top-right-radius: $border-radius;
-      box-shadow: $shadow;
-    }
-
-    li.row.last-in-section {
-      border-bottom-left-radius: $border-radius;
-      border-bottom-right-radius: $border-radius;
-    }
+  ion-list:not(.has-footer) ion-item:last-of-type,
+  .footer {
+    border-bottom-left-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
   }
 }
 
-.list-header {
+ion-list-header {
   background-color: get-color('white');
-  border-bottom: 1px solid get-color('background-color');
+  border-bottom: 1px solid $divider-color;
+  padding: 0;
 }
 
-ul {
-  list-style-type: none;
-  padding-left: 0;
-  margin: 0;
+ion-item-divider {
+  background-color: get-color('white');
+  border-color: transparent;
+  padding: 0;
+  --color: unset;
+}
+
+ion-item {
+  display: flex;
+  width: 100%;
+  padding: size('m') size('xxs');
   font-size: font-size('s');
-
-  li {
-    padding: size('m');
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-
-    p {
-      margin: 0;
-    }
-
-    &.row {
-      background-color: get-color('white');
-
-      &.divider:not(:last-child):not(.last-in-section) {
-        border-bottom: 1px solid $divider-color;
-      }
-
-      &.selectable {
-        cursor: pointer;
-
-        &:hover {
-          background-color: $background-color-hover;
-        }
-      }
-    }
-    
-    &.loading,
-    &.no-more-items
-    {
-      background-color: get-color('white');
-    }
-  }
+  --inner-border-width: 0;
+  --background: transparent;
+  --min-height: unset;
 }
 
-.extending {
-  margin: auto;
+.section-header {
+  background-color: transparent;
+  padding: size('m');
+}
+
+.no-more-items, .loading {
+  width: 100%;
+  padding: size('m');
+  text-align: center;
+}
+
+.footer {
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid $divider-color;
 }

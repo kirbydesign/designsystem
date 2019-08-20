@@ -14,9 +14,7 @@ export {
 export { SegmentItem } from './components/segmented-control/segment-item';
 export { BadgeComponent } from './components/badge/badge.component';
 export { GridCardConfiguration } from './components/grid/grid-card-configuration';
-export {
-  SegmentedChipControlComponent,
-} from './components/segment/segmented-chip-control/segmented-chip-control.component';
 export { ChipComponent } from './components/chip/chip.component';
 export { LoadOnDemandEvent } from './components/list/list.event';
 export { EmptyStateComponent } from './components/empty-state/empty-state.component';
+export * from './components/toast';

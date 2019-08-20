@@ -28,7 +28,6 @@ export class IconComponent implements OnChanges {
 
   @Input() name: string;
   @Input() customName: string;
-  @Input() outline: boolean;
 
   @Input() isSpanIcon?: boolean;
 

@@ -1,9 +1,13 @@
-export interface ModalConfig {
+import { ModalConfigHelper } from './modal-config.helper';
+
+import { DrawerSupplementaryAction } from './drawer-supplementary-action';
+
+export class ModalConfig {
   title: string;
-  closeBtnPosition?: 'inside' | 'outside' | 'hidden';
-  closeIconName?: 'close' | 'arrow-back';
-  titleHorizontalAlignment?: 'left' | 'center' | 'right';
-  dim?: number;
   component: any;
+  flavor: 'modal' | 'drawer' = 'modal'; // TODO: also add 'alert' in the future
+  dim?: number = ModalConfigHelper.defaultDim;
   componentProps?: { [key: string]: any };
+  // the supplementary action is only available in the drawer
+  drawerSupplementaryAction?: DrawerSupplementaryAction;
 }
