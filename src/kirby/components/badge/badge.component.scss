@@ -1,8 +1,8 @@
 @import "../../scss/web-imports";
 
 :host {
-  --kirby-badge-background-color: #{get-color('primary')};
-  --kirby-badge-color: #{get-color('primary-contrast')};
+  --kirby-badge-background-color: #{get-color('white')};
+  --kirby-badge-color: #{get-color('white-contrast')};
   --ion-color-base: var(--kirby-badge-background-color);
   --ion-color-contrast: var(--kirby-badge-color);
 
