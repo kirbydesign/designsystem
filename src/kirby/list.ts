@@ -12,3 +12,4 @@ export { ListFlexItemDirective } from './components/list/list.directive';
 export { ListHeaderDirective } from './components/list/list.directive';
 export { ListItemDirective } from './components/list/list.directive';
 export { ListSectionHeaderDirective } from './components/list/list.directive';
+export { ListSwipeAction } from './components/list/helpers/list-swipe-action';
