@@ -19,7 +19,7 @@
       height: 100%;
     }
   
-    @each $color-name, $color-value in $main-colors {
+    @each $color-name, $color-value in $notification-colors {
       &[themeColor='#{$color-name}'] {
         background-color: #{get-color($color-name)};
         color: #{get-color($color-name+'-contrast')};
@@ -29,12 +29,16 @@
     &[themeColor='danger'] {
       color: get-color('white');
     }
+
+    &[themeColor='white'] {
+      background-color: get-color('white');
+      color: get-color('white-contrast');
+    }
   
     .kirby-icon Label {
       font-size: font-size('n');
       padding: 0;
       height: 100%;
-    }
-  
+    } 
   }
 }
