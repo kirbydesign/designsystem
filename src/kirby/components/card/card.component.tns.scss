@@ -9,10 +9,7 @@
 .container {
     // the max elevation for cards (when highlighted)
     $max-elevation: 4; 
-    margin-left: size('xxs');
-    margin-right: size('xxs');
-    margin-top: $max-elevation * (3/2);
-    margin-bottom: $max-elevation * (3/2);
+    margin: $max-elevation * (3/2) size('xxs');
     border-radius: $border-radius;
     background-color: get-color('white');
 
