@@ -12,7 +12,7 @@ import { kirbyIconSettings } from './kirby-icon-settings';
 import { ICON_SETTINGS, Icon, IconSettings } from './icon-settings';
 
 @Component({
-  selector: 'kirby-icon, [kirby-icon]',
+  selector: 'kirby-icon, Span[kirby-icon]',
   templateUrl: './icon.component.html',
   styleUrls: ['./icon.component.scss'],
   // Using host property decorator is fine for static values:
