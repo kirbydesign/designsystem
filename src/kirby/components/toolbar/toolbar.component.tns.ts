@@ -20,9 +20,9 @@ export class ToolbarComponent implements OnInit {
   @Input() hideBackButton: boolean;
   @Input() themeColor: string;
 
-  @Output() back: EventEmitter<null> = new EventEmitter<null>();
-  @Output() primarySelected: EventEmitter<null> = new EventEmitter<null>();
-  @Output() secondarySelected: EventEmitter<null> = new EventEmitter<null>();
+  @Output() back = new EventEmitter();
+  @Output() primarySelect = new EventEmitter();
+  @Output() secondarySelect = new EventEmitter();
 
   isAndroid: boolean;
 
@@ -37,10 +37,10 @@ export class ToolbarComponent implements OnInit {
   }
 
   onPrimarySelected(): void {
-    this.primarySelected.emit();
+    this.primarySelect.emit();
   }
 
   onSecondarySelected(): void {
-    this.secondarySelected.emit();
+    this.secondarySelect.emit();
   }
 }

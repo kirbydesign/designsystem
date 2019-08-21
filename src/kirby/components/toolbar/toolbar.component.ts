@@ -18,9 +18,9 @@ export class ToolbarComponent implements OnInit {
   @Input() title: string;
   @Input() hideBackButton: boolean;
 
-  @Output() back: EventEmitter<null> = new EventEmitter<null>();
-  @Output() primarySelected: EventEmitter<null> = new EventEmitter<null>();
-  @Output() secondarySelected: EventEmitter<null> = new EventEmitter<null>();
+  @Output() back = new EventEmitter();
+  @Output() primarySelect = new EventEmitter();
+  @Output() secondarySelect = new EventEmitter();
 
   constructor() {}
 
@@ -31,10 +31,10 @@ export class ToolbarComponent implements OnInit {
   }
 
   onPrimarySelected(): void {
-    this.primarySelected.emit();
+    this.primarySelect.emit();
   }
 
   onSecondarySelected(): void {
-    this.secondarySelected.emit();
+    this.secondarySelect.emit();
   }
 }
