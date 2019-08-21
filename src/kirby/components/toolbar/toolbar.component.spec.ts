@@ -41,21 +41,21 @@ describe('ToolbarComponent', () => {
 
   describe('event: primarySelected', () => {
     it('should be called once', () => {
-      spyOn(spectator.component.primarySelected, 'emit');
+      spyOn(spectator.component.primarySelect, 'emit');
 
       spectator.component.onPrimarySelected();
 
-      expect(spectator.component.primarySelected.emit).toHaveBeenCalledTimes(1);
+      expect(spectator.component.primarySelect.emit).toHaveBeenCalledTimes(1);
     });
   });
 
   describe('event: endSelected', () => {
     it('should be called once', () => {
-      spyOn(spectator.component.secondarySelected, 'emit');
+      spyOn(spectator.component.secondarySelect, 'emit');
 
       spectator.component.onSecondarySelected();
 
-      expect(spectator.component.secondarySelected.emit).toHaveBeenCalledTimes(1);
+      expect(spectator.component.secondarySelect.emit).toHaveBeenCalledTimes(1);
     });
   });
 
