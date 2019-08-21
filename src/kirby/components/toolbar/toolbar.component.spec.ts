@@ -6,7 +6,7 @@ import { ToolbarComponent } from './toolbar.component';
 
 import { IconComponent } from '../icon/icon.component';
 
-describe('ToolbarComponent', () => {
+fdescribe('ToolbarComponent', () => {
   const title = 'title';
   const hideBackButton = false;
 
@@ -39,23 +39,23 @@ describe('ToolbarComponent', () => {
     });
   });
 
-  describe('event: middleSelected', () => {
+  describe('event: primarySelected', () => {
     it('should be called once', () => {
-      spyOn(spectator.component.middleSelected, 'emit');
+      spyOn(spectator.component.primarySelected, 'emit');
 
-      spectator.component.onMiddleSelected();
+      spectator.component.onPrimarySelected();
 
-      expect(spectator.component.middleSelected.emit).toHaveBeenCalledTimes(1);
+      expect(spectator.component.primarySelected.emit).toHaveBeenCalledTimes(1);
     });
   });
 
   describe('event: endSelected', () => {
     it('should be called once', () => {
-      spyOn(spectator.component.endSelected, 'emit');
+      spyOn(spectator.component.secondarySelected, 'emit');
 
-      spectator.component.onEndSelected();
+      spectator.component.onSecondarySelected();
 
-      expect(spectator.component.endSelected.emit).toHaveBeenCalledTimes(1);
+      expect(spectator.component.secondarySelected.emit).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -73,7 +73,7 @@ describe('ToolbarComponent', () => {
 
       spectator.setInput('hideBackButton', hide);
 
-      expect(spectator.query('.toolbar-item-left')).not.toBeTruthy();
+      expect(spectator.query('.toolbar-start')).not.toBeTruthy();
     });
 
     it('should render the back button', () => {

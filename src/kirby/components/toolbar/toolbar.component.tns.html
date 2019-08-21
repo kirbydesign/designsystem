@@ -11,15 +11,15 @@
     <Label [text]="title"  class="toolbar-title kirby-text-normal"></Label>
   </StackLayout>
   
-  <ActionItem ios.position="right" (tap)="onMiddleSelected()">
+  <ActionItem ios.position="right" (tap)="onPrimarySelected()">
     <StackLayout orientation="horizontal">
-      <ng-content select="[middle]"></ng-content>
+      <ng-content select="[primary]"></ng-content>
     </StackLayout>
   </ActionItem>
-  <ActionItem ios.position="right" (tap)="onEndSelected()">
+  <ActionItem ios.position="right" (tap)="onSecondarySelected()">
     <StackLayout orientation="horizontal">
       <Label text="" class="action-item-spacer-small"></Label>
-      <ng-content select="[end]]"></ng-content>
+      <ng-content select="[secondary]]"></ng-content>
       <Label text="" class="action-item-spacer-large"></Label>
     </StackLayout>
   </ActionItem>

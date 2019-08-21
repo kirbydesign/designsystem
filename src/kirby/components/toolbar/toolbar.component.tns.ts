@@ -21,8 +21,8 @@ export class ToolbarComponent implements OnInit {
   @Input() themeColor: string;
 
   @Output() back: EventEmitter<null> = new EventEmitter<null>();
-  @Output() middleSelected: EventEmitter<null> = new EventEmitter<null>();
-  @Output() endSelected: EventEmitter<null> = new EventEmitter<null>();
+  @Output() primarySelected: EventEmitter<null> = new EventEmitter<null>();
+  @Output() secondarySelected: EventEmitter<null> = new EventEmitter<null>();
 
   isAndroid: boolean;
 
@@ -36,11 +36,11 @@ export class ToolbarComponent implements OnInit {
     this.back.emit();
   }
 
-  onMiddleSelected(): void {
-    this.middleSelected.emit();
+  onPrimarySelected(): void {
+    this.primarySelected.emit();
   }
 
-  onEndSelected(): void {
-    this.endSelected.emit();
+  onSecondarySelected(): void {
+    this.secondarySelected.emit();
   }
 }
