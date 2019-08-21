@@ -22,8 +22,10 @@
     border-radius: $border-radius;
     background-color: get-color('white');
 
-    &.padding {
-        padding: size('s');
+    .content-wrapper {
+        &.padding {
+            padding: size('s');
+        }
     }
 
     @each $color-name, $color-value in $main-colors {

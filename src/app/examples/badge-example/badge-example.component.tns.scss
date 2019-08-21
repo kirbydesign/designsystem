@@ -1,0 +1,6 @@
+@import '../../../kirby/scss/native-imports';
+
+.background {
+  background-color: get-color('background-color');
+  padding: size('s');
+}

@@ -3,8 +3,8 @@
 .background {
   background-color: get-color('background-color');
   padding: size('s');
-  // add vertical spacing of 'xs' between each card
-  * {
+  // add vertical spacing of 'xxs' between each card
+  > * {
     margin-bottom: size('xxs');
   }
 }
@@ -14,6 +14,12 @@ Label.h2 {
     margin-top: size('s');
 }
 
-.card-content {
-  padding: 0 size("m") size("m");
+.card-content-background-color {
+  padding: size('s');
+  background-color: get-color('light');
+}
+
+.bottom-rounded {
+  border-bottom-left-radius: $border-radius;
+  border-bottom-right-radius: $border-radius;
 }
