@@ -19,11 +19,11 @@ export class ToolbarExampleComponent {
     alert('backbutton clicked!');
   }
 
-  middleSelected(): void {
-    alert('middle clicked!');
+  primarySelected(): void {
+    alert('primary clicked!');
   }
 
-  endSelected(): void {
-    alert('end clicked!');
+  secondarySelected(): void {
+    alert('secondary clicked!');
   }
 }

@@ -1,6 +1,6 @@
-<kirby-toolbar title="Toolbar title" [themeColor]="color?.name" (back)="backButtonSelected()" (middleSelected)="middleSelected()" (endSelected)="endSelected()">
-  <kirby-icon middle size="md"></kirby-icon>
-  <kirby-icon end size="md" name="more"></kirby-icon>
+<kirby-toolbar title="Toolbar title" [themeColor]="color?.name" (back)="backButtonSelected()" (primarySelected)="primarySelected()" (secondarySelected)="secondarySelected()">
+  <kirby-icon primary size="md" name="search"></kirby-icon>
+  <kirby-icon secondary size="md" name="more"></kirby-icon>
 </kirby-toolbar>
 
 <p>Change color: </p>
