@@ -15,7 +15,7 @@ export class ToolbarExampleComponent {
     this.color = color;
   }
 
-  backButtonSelected(): void {
+  onBackButtonSelect(): void {
     alert('backbutton clicked!');
   }
 

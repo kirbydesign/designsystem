@@ -33,7 +33,7 @@ describe('ToolbarComponent', () => {
     it('should be called once', () => {
       spyOn(spectator.component.back, 'emit');
 
-      spectator.component.onBackButtonSelected();
+      spectator.component.onBackButtonSelect();
 
       expect(spectator.component.back.emit).toHaveBeenCalledTimes(1);
     });

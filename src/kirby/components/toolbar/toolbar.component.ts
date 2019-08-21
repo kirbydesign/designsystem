@@ -26,7 +26,7 @@ export class ToolbarComponent implements OnInit {
 
   ngOnInit() {}
 
-  onBackButtonSelected(): void {
+  onBackButtonSelect(): void {
     this.back.emit();
   }
 
