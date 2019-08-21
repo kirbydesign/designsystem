@@ -12,7 +12,7 @@ export class ToolbarShowcaseComponent implements OnInit {
       <!-- themeColor -->
       <kirby-toolbar themeColor="primary"></kirby-toolbar>
       <!-- back button -->
-      <kirby-toolbar hideBackButton="false" (back)="backButtonSelect()"></kirby-toolbar>
+      <kirby-toolbar hideBackButton="false" (back)="onBackButtonSelect()"></kirby-toolbar>
       <!-- primary and secondary elements -->
       <kirby-toolbar (primarySelect)="foo()" (secondarySelect)="bar()">
         <kirby-icon primary size="md" name="search"></kirby-icon>

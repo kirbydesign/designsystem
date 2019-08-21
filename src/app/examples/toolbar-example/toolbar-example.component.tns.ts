@@ -19,7 +19,7 @@ export class ToolbarExampleComponent {
     this.color = color;
   }
 
-  backButtonSelect(): void {
+  onBackButtonSelect(): void {
     this.router.backToPreviousPage();
   }
 
