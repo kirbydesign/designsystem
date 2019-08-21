@@ -6,7 +6,7 @@ import { ToolbarComponent } from './toolbar.component';
 
 import { IconComponent } from '../icon/icon.component';
 
-fdescribe('ToolbarComponent', () => {
+describe('ToolbarComponent', () => {
   const title = 'title';
   const hideBackButton = false;
 
