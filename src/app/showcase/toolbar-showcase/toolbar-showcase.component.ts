@@ -13,10 +13,10 @@ export class ToolbarShowcaseComponent implements OnInit {
       <kirby-toolbar themeColor="primary"></kirby-toolbar>
       <!-- back button -->
       <kirby-toolbar hideBackButton="false" (back)="backButtonSelected()"></kirby-toolbar>
-      <!-- Middle and end elements -->
-      <kirby-toolbar (middleSelected)="foo()" (endSelected)="bar()">
-        <kirby-icon middle size="md"></kirby-icon>
-        <kirby-icon end size="md" name="more"></kirby-icon>
+      <!-- primary and secondary elements -->
+      <kirby-toolbar (primarySelected)="foo()" (secondarySelected)="bar()">
+        <kirby-icon primary size="md" name="search"></kirby-icon>
+        <kirby-icon secondary size="md" name="more"></kirby-icon>
       </kirby-toolbar>
     `;
   constructor() {}
