@@ -36,11 +36,11 @@ export class ToolbarComponent implements OnInit {
     this.back.emit();
   }
 
-  onPrimarySelected(): void {
+  onPrimarySelect(): void {
     this.primarySelect.emit();
   }
 
-  onSecondarySelected(): void {
+  onSecondarySelect(): void {
     this.secondarySelect.emit();
   }
 }

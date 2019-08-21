@@ -39,21 +39,21 @@ describe('ToolbarComponent', () => {
     });
   });
 
-  describe('event: primarySelected', () => {
+  describe('event: primarySelect', () => {
     it('should be called once', () => {
       spyOn(spectator.component.primarySelect, 'emit');
 
-      spectator.component.onPrimarySelected();
+      spectator.component.onPrimarySelect();
 
       expect(spectator.component.primarySelect.emit).toHaveBeenCalledTimes(1);
     });
   });
 
-  describe('event: endSelected', () => {
+  describe('event: sencondarySelect', () => {
     it('should be called once', () => {
       spyOn(spectator.component.secondarySelect, 'emit');
 
-      spectator.component.onSecondarySelected();
+      spectator.component.onSecondarySelect();
 
       expect(spectator.component.secondarySelect.emit).toHaveBeenCalledTimes(1);
     });
