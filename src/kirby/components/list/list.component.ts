@@ -122,8 +122,10 @@ export class ListComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     if (this.swipeActions) {
-      this.listSwipeActionsHelper.setList(this.list);
       this.isSwipingDisabled = this.listSwipeActionsHelper.getIsSwipingDisabled();
+      if (this.isSwipingDisabled) {
+        this.listSwipeActionsHelper.closeSwipeActions(this.list);
+      }
     }
   }
 
@@ -210,6 +212,7 @@ export class ListComponent implements OnInit, OnChanges {
 
   onSwipeActionSelect(swipeAction: ListSwipeAction, item: any): void {
     this.listSwipeActionsHelper.onSwipeActionSelected(swipeAction, item);
+    this.listSwipeActionsHelper.closeSwipeActions(this.list);
   }
 
   // Web-only

@@ -1,19 +1,14 @@
 import { SwipeActionsEventData } from 'nativescript-ui-listview';
 import { RadListViewComponent } from 'nativescript-ui-listview/angular/listview-directives';
-import { View, ViewBase } from 'tns-core-modules/ui/page/page';
+import { View } from 'tns-core-modules/ui/page/page';
 
 import { ListSwipeAction } from './list-swipe-action';
 
 // TODO: Once https://github.com/NativeScript/nativescript-ui-feedback/issues/1168
 // is implemented, we have to revisit this file and redesign the full-swipe / part-swipe functionalities
 export class ListSwipeActionsHelper {
-  list: RadListViewComponent;
   swipeActionSelections = {};
   item: any;
-
-  setList(list: RadListViewComponent): void {
-    this.list = list;
-  }
 
   onSwipeCellStarted(args: SwipeActionsEventData): void {
     const swipeLimits = args.data.swipeLimits;
@@ -90,15 +85,16 @@ export class ListSwipeActionsHelper {
   onSwipeActionSelected(swipeAction: ListSwipeAction, _: any): void {
     swipeAction.onSelected(this.item);
     this.swipeActionSelections = {};
-    this.closeActionItems();
   }
 
   getIsSwipeActionSelected(swipeAction: ListSwipeAction, _: any): boolean {
     return this.item ? this.item[swipeAction.swipeActionFlag] : false;
   }
 
-  closeActionItems(): void {
-    this.list.listView.notifySwipeToExecuteFinished();
+  closeSwipeActions(list: RadListViewComponent): void {
+    if (list) {
+      list.listView.notifySwipeToExecuteFinished();
+    }
   }
 
   getIsSwipingDisabled(): boolean {
