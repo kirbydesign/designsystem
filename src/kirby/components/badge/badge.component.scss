@@ -11,6 +11,7 @@
     --padding-end: 5px;
     --padding-bottom: 4px;
     --padding-start: 5px;
+    box-sizing: border-box; //Fixes https://github.com/kirbydesign/designsystem/issues/537
     border-radius: 8px;
     min-width: 16px;
     min-height: 16px;
