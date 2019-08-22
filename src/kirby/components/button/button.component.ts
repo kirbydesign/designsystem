@@ -27,4 +27,7 @@ export class ButtonComponent {
     this.destructive = state;
   }
   @Input() expand?: 'full' | 'block';
+  @Input() iconName?: string;
+  @Input() iconPlacement?: 'left' | 'right' | 'replaceText' = 'replaceText';
+  @Input() text: string;
 }

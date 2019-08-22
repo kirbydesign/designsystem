@@ -40,6 +40,18 @@ export class ButtonShowcaseComponent {
       defaultValue: 'false',
       inputValues: ['true', 'false'],
     },
+    {
+      name: 'iconName',
+      description: '(Optional) Specify a kirby icon name, which will be shown inside the button.',
+      defaultValue: '',
+      inputValues: ['string'],
+    },
+    {
+      name: 'iconPlacement',
+      description: '(Optional) Specify the icon placement in relation to the text.',
+      defaultValue: 'replaceText',
+      inputValues: ['left', 'right', 'replaceText'],
+    },
   ];
 
   onChange(value) {
