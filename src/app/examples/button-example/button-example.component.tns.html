@@ -10,6 +10,12 @@
           <Button kirby-button text="Disabled Button" isEnabled="false"></Button>   
           <Button kirby-button text="Icon left of text" iconName="add" iconPlacement="left"></Button>
           <Button kirby-button text="Icon right of text" iconName="qr" iconPlacement="right"></Button>
+          <h2>Floating action buttons</h2>
+          <Button kirby-button [isFloating]="true" iconName="add"></Button>
+          <Button kirby-button [isFloating]="true" [hideShadow]="true" iconName="add"></Button>
+          <Button kirby-button [isFloating]="true" iconName="add" disabled></Button>
+          <Button kirby-button [isFloating]="true" iconName="close"></Button>
+          <Button kirby-button text="Icon replacing text" iconName="arrow-down" iconPlacement="replaceText"></Button>
       </ng-container>
       <ng-container *ngIf="activeTab === 'attention-level'">
           <kirby-card [themeColor]="themeColor" class="card">

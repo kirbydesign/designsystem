@@ -11,6 +11,12 @@
 <button kirby-button disabled>Disabled Button</button>
 <button kirby-button iconName="add" iconPlacement="left">Icon left of text</button>
 <button kirby-button iconName="qr" iconPlacement="right">Icon right of text</button>
+<h2>Floating action buttons</h2>
+<button kirby-button [isFloating]="true" iconName="add"></button>
+<button kirby-button [isFloating]="true" [hideShadow]="true" iconName="add"></button>
+<button kirby-button [isFloating]="true" iconName="add" disabled></button>
+<button kirby-button [isFloating]="true" iconName="close"></button>
+<button kirby-button [isIconButton]="true" iconName="close">Icon button</button>
 
 <h2>Button with attention level</h2>
 <kirby-card [themeColor]="themeColor">

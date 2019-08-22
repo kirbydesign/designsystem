@@ -113,4 +113,23 @@
       --kirby-button-color: #{get-color('white')};
     }
   }
+  
+  &.floating {
+    $fab-size: 64px;
+    width: $fab-size;
+    height: $fab-size;
+
+    &:not(:disabled):not(.hide-shadow) {
+      box-shadow: #{get-elevation(8)};
+    }
+  }
+
+  &.icon-button {
+    $icon-btn-size: #{size('xxl')};
+    width: $icon-btn-size;
+    height: $icon-btn-size;
+    --kirby-button-background-color: #{get-color('light')};
+    --kirby-button-border-color: #{get-color('light')};
+    --kirby-button-color: #{get-color('light-contrast')};
+  }
 }

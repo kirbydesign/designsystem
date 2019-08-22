@@ -52,6 +52,27 @@ export class ButtonShowcaseComponent {
       defaultValue: 'left',
       inputValues: ['left', 'right'],
     },
+    {
+      name: 'isFloating',
+      description:
+        '(Optional) Determine if the button is going to be a floating action button. Notes: Floating action buttons have an elevation of z8 by default. Floating action buttons have only an icon and no text. Floating action buttons always have a size of 64x64.',
+      defaultValue: 'false',
+      inputValues: ['boolean'],
+    },
+    {
+      name: 'hideShadow',
+      description:
+        '(Optional) Hides the floating action button shadow. Note: This property is not used on any other buttons, except FABs.',
+      defaultValue: 'false',
+      inputValues: ['boolean'],
+    },
+    {
+      name: 'isIconButton',
+      description:
+        '(Optional) Determine if the button is going to be an icon button. Notes: Icon buttons have only an icon and no text. Icon buttons always have a size of 48x48 corresponding to kirby size("xxl"). Icon buttons always have a light background color.',
+      defaultValue: 'false',
+      inputValues: ['boolean'],
+    },
   ];
 
   onChange(value) {
