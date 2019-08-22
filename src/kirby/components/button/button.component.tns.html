@@ -1,11 +1,5 @@
 <FormattedString>
-    <ng-container *ngIf="iconName && iconPlacement === 'left'">
-        <Span kirby-icon [name]="iconName.concat('-nb')"></Span>
-    </ng-container>
-    <ng-container *ngIf="text">
-        <Span text=" {{ text }} "></Span>
-    </ng-container>
-    <ng-container *ngIf="iconName && iconPlacement === 'right'">
-        <Span kirby-icon [name]="iconName.concat('-nb')"></Span>
-    </ng-container>
+    <Span *ngIf="iconName && iconPlacement === 'left'" kirby-icon [name]="iconName.concat('-nb')"></Span>
+    <Span *ngIf="text" text=" {{ text }} "></Span>
+    <Span *ngIf="iconName && iconPlacement === 'right'" kirby-icon [name]="iconName.concat('-nb')"></Span>
 </FormattedString>

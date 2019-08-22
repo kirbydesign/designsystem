@@ -1,11 +1,3 @@
-<ng-container>
-    <ng-container *ngIf="text">
-        <span>{{ text }}</span>
-    </ng-container>
-    <ng-container *ngIf="!text">
-        <ng-content></ng-content>
-    </ng-container>
-    <ng-container *ngIf="iconName">
-        <kirby-icon [name]="iconName"></kirby-icon>
-    </ng-container>
-</ng-container>
+<span *ngIf="text">{{ text }}</span>
+<ng-content *ngIf="!text"></ng-content>
+<kirby-icon *ngIf="iconName" [name]="iconName"></kirby-icon>
