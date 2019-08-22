@@ -1,4 +1,4 @@
-import { Component, Input, HostBinding, OnInit } from '@angular/core';
+import { Component, Input, HostBinding } from '@angular/core';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -6,7 +6,7 @@ import { Component, Input, HostBinding, OnInit } from '@angular/core';
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.scss'],
 })
-export class ButtonComponent implements OnInit {
+export class ButtonComponent {
   @HostBinding('class.attention-level1')
   isAttentionLevel1: boolean = true; // Default
   @HostBinding('class.attention-level2')
@@ -18,7 +18,9 @@ export class ButtonComponent implements OnInit {
   @HostBinding('class.destructive')
   destructive: boolean = false; // Default
   @HostBinding('class.icon-left')
-  isIconPlacedLeft: boolean = false;
+  public get isIconPlacedLeft(): boolean {
+    return this.iconPlacement === 'left';
+  }
 
   @Input() set attentionLevel(level: '1' | '2' | '3' | '4') {
     this.isAttentionLevel1 = level === '1';
@@ -31,12 +33,6 @@ export class ButtonComponent implements OnInit {
   }
   @Input() expand?: 'full' | 'block';
   @Input() iconName?: string;
-  @Input() iconPlacement?: 'left' | 'right' | 'replaceText' = 'replaceText';
+  @Input() iconPlacement?: 'left' | 'right' = 'left';
   @Input() text: string;
-
-  ngOnInit() {
-    if (this.iconPlacement === 'left') {
-      this.isIconPlacedLeft = true;
-    }
-  }
 }

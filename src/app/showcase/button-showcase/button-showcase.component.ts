@@ -49,8 +49,8 @@ export class ButtonShowcaseComponent {
     {
       name: 'iconPlacement',
       description: '(Optional) Specify the icon placement in relation to the text.',
-      defaultValue: 'replaceText',
-      inputValues: ['left', 'right', 'replaceText'],
+      defaultValue: 'left',
+      inputValues: ['left', 'right'],
     },
   ];
 

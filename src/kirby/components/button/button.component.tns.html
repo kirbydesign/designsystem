@@ -1,24 +1,11 @@
 <FormattedString>
     <ng-container *ngIf="iconName && iconPlacement === 'left'">
-        <ng-container *ngTemplateOutlet="icon; context: { iconName: iconName }"></ng-container>
-        <ng-container *ngTemplateOutlet="btnText; context: { text: text }"></ng-container>
+        <Span kirby-icon [name]="iconName.concat('-nb')"></Span>
     </ng-container>
-    <ng-container *ngIf="!iconName">
-        <ng-container *ngTemplateOutlet="btnText; context: { text: text }"></ng-container>
-    </ng-container>
-    <ng-container *ngIf="iconName && iconPlacement === 'replaceText'">
-        <ng-container *ngTemplateOutlet="icon; context: { iconName: iconName }"></ng-container>
+    <ng-container *ngIf="text">
+        <Span text=" {{ text }} "></Span>
     </ng-container>
     <ng-container *ngIf="iconName && iconPlacement === 'right'">
-        <ng-container *ngTemplateOutlet="btnText; context: { text: text }"></ng-container>
-        <ng-container *ngTemplateOutlet="icon; context: { iconName: iconName }"></ng-container>
+        <Span kirby-icon [name]="iconName.concat('-nb')"></Span>
     </ng-container>
 </FormattedString>
-
-<ng-template #icon let-iconName="iconName">
-    <Span kirby-icon [name]="iconName.concat('-nb')"></Span>
-</ng-template>
-
-<ng-template #btnText let-text="text">
-    <Span text=" {{ text }} "></Span>
-</ng-template>

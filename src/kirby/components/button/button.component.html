@@ -1,13 +1,11 @@
 <ng-container>
-    <ng-container *ngIf="!iconName || (iconName && iconPlacement !== 'replaceText')">
+    <ng-container *ngIf="text">
+        <span>{{ text }}</span>
+    </ng-container>
+    <ng-container *ngIf="!text">
         <ng-content></ng-content>
     </ng-container>
     <ng-container *ngIf="iconName">
-        <ng-container *ngTemplateOutlet="icon; context: { iconName: iconName }"></ng-container>
+        <kirby-icon [name]="iconName"></kirby-icon>
     </ng-container>
 </ng-container>
-
-<ng-template #icon let-iconName="iconName">
-    <kirby-icon [name]="iconName"></kirby-icon>
-</ng-template>
-
