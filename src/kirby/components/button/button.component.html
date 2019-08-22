@@ -1,20 +1,3 @@
-<!-- <ng-container>
-    <ng-container *ngIf="iconName && iconPlacement === 'left'">
-        <ng-container *ngTemplateOutlet="icon; context: { iconName: iconName }"></ng-container>
-        <ng-container *ngTemplateOutlet="btnText"></ng-container>
-    </ng-container>
-    <ng-container *ngIf="!iconName">
-        <ng-container *ngTemplateOutlet="btnText"></ng-container>
-    </ng-container>
-    <ng-container *ngIf="iconName && iconPlacement === 'replaceText'">
-        <ng-container *ngTemplateOutlet="icon; context: { iconName: iconName }"></ng-container>
-    </ng-container>
-    <ng-container *ngIf="iconName && iconPlacement === 'right'">
-        <ng-container *ngTemplateOutlet="btnText"></ng-container>
-        <ng-container *ngTemplateOutlet="icon; context: { iconName: iconName }"></ng-container>
-    </ng-container>
-</ng-container> -->
-
 <ng-container>
     <ng-container *ngIf="!iconName || (iconName && iconPlacement !== 'replaceText')">
         <ng-content></ng-content>
@@ -27,8 +10,4 @@
 <ng-template #icon let-iconName="iconName">
     <kirby-icon [name]="iconName"></kirby-icon>
 </ng-template>
-
-<!-- <ng-template #btnText>
-    <ng-content></ng-content>
-</ng-template> -->
 

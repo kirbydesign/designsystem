@@ -82,7 +82,7 @@ export class IconComponent implements OnChanges {
   }
 
   constructor(
-    private elRef: ElementRef,
+    elRef: ElementRef,
     @Optional() @Inject(ICON_SETTINGS) private iconSettings?: IconSettings
   ) {
     this.isSpanIcon = elRef.nativeElement.toString().indexOf('Span') > -1;
