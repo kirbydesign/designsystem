@@ -199,17 +199,6 @@ export class ListComponent implements OnInit, OnChanges {
       : swipeAction.title;
   }
 
-  onActionLongSwipeLeft(item: any): void {
-    const firstSwipeAction = this.getSwipeActionsSide('left')[0];
-    this.onSwipeActionSelect(firstSwipeAction, item);
-  }
-
-  onActionLongSwipeRight(item: any): void {
-    const swipeActionsRight = this.getSwipeActionsSide('right');
-    const lastSwipeAction = swipeActionsRight[swipeActionsRight.length - 1];
-    this.onSwipeActionSelect(lastSwipeAction, item);
-  }
-
   onSwipeActionSelect(swipeAction: ListSwipeAction, item: any): void {
     this.listSwipeActionsHelper.onSwipeActionSelected(swipeAction, item);
     this.listSwipeActionsHelper.closeSwipeActions(this.list);
@@ -231,12 +220,8 @@ export class ListComponent implements OnInit, OnChanges {
   }
 
   // {N}-only
-  onSwipeCellFinished(args: any): void {
-    this.listSwipeActionsHelper.onSwipeCellFinished(
-      args,
-      this.onActionLongSwipeLeft.bind(this),
-      this.onActionLongSwipeRight.bind(this)
-    );
+  onSwipeCellFinished(): void {
+    this.listSwipeActionsHelper.closeSwipeActions(this.list);
   }
 
   private createOrderMap(

@@ -1,7 +1,6 @@
 <GridLayout rows="*"> <!-- GridLayout kept for iOS compability -->
   <RadListView
     #list
-    (itemSwipeProgressEnded)="onSwipeCellFinished($event)"
     (itemSwipeProgressStarted)="onSwipeCellStarted($event)"
     (itemSwipeProgressChanged)="onCellSwiping($event)" 
     [swipeActions]="!isSwipingDisabled"

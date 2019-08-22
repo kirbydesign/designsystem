@@ -64,24 +64,6 @@ export class ListSwipeActionsHelper {
     }
   }
 
-  onSwipeCellFinished(
-    args: SwipeActionsEventData,
-    leftActionCallback: (item: any) => void,
-    rightActionCallback: (item: any) => void
-  ): void {
-    const swipeView = args.swipeView;
-    const leftView = <View>swipeView.getViewById('swipe-actions-left');
-    const rightView = <View>swipeView.getViewById('swipe-actions-right');
-
-    // TODO: Once full-swipe is implemented, we can call rtlCallback/ltrCallback
-
-    // both sides are shown by default on Android, hence we need to hide them explicitly
-    if (args.data.x === 0) {
-      leftView.visibility = 'hidden';
-      rightView.visibility = 'hidden';
-    }
-  }
-
   onSwipeActionSelected(swipeAction: ListSwipeAction, _: any): void {
     swipeAction.onSelected(this.item);
     this.swipeActionSelections = {};

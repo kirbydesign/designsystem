@@ -34,7 +34,4 @@ export class ListSwipeActionsHelper {
 
   // {N}-only
   onCellSwiping(_: any): void {}
-
-  // {N}-only
-  onSwipeCellFinished(___: any, __: any, _: any): void {}
 }
