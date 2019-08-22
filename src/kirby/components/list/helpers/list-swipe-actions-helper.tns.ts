@@ -40,13 +40,11 @@ export class ListSwipeActionsHelper {
     // apply custom styles to elements
     const child = mainView.getViewById('row');
     if (child.className.indexOf('first') > 0) {
-      console.log('first element swiped');
-      // swipeActionsContainerView. something = something
+      //TODO fix the rounded corner styling here if the list is not square.
     }
 
     if (child.className.indexOf('last') > 0) {
-      console.log('last element swiped');
-      // swipeActionsContainerView. something = something
+      //TODO fix the rounded corner styling here if the list is not square.
     }
   }
 

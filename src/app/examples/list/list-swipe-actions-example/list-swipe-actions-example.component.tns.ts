@@ -13,4 +13,13 @@ export class ListSwipeActionsExampleComponent extends BaseListComponent implemen
   ngOnInit(): void {
     this.swipeActions = ListSwipeActionsHelper.getInstance().getSwipeActions();
   }
+
+  getSectionName(item: any): string {
+    if (item.id < 5) return '1st section';
+    if (item.id < 10) return '2nd section';
+    if (item.id < 15) return '3rd section';
+    if (item.id < 30) return '4th section';
+    if (item.id < 60) return '5th section';
+    return 'Large section';
+  }
 }

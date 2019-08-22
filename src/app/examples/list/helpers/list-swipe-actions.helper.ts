@@ -25,7 +25,6 @@ export class ListSwipeActionsHelper {
       position: 'left',
       title: 'Archive',
       altTitle: 'Unarchive',
-      // iconName: 'verify',
       themeColor: 'warning',
       onSelected: this.onArchiveItem,
     });

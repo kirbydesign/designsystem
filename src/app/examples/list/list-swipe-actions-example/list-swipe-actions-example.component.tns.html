@@ -1,3 +1,11 @@
-<kirby-list [items]="items" showDivider="true" [swipeActions]="swipeActions">
+<kirby-list
+  [items]="itemsFullList"
+  [swipeActions]="swipeActions"
+  [getSectionName]="getSectionName"
+  (itemSelect)="onItemSelect($event)">
+  <kirby-list-section-header
+    *kirbyListSectionHeader="let section"
+    [title]="section"
+  ></kirby-list-section-header>
   <kirby-list-item *kirbyListItem="let item" [title]="item?.title" [amount]="item?.amount"></kirby-list-item>
 </kirby-list>
