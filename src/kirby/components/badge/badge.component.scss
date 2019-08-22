@@ -1,8 +1,8 @@
 @import "../../scss/web-imports";
 
 :host {
-  --kirby-badge-background-color: #{get-color('primary')};
-  --kirby-badge-color: #{get-color('primary-contrast')};
+  --kirby-badge-background-color: #{get-color('white')};
+  --kirby-badge-color: #{get-color('white-contrast')};
   --ion-color-base: var(--kirby-badge-background-color);
   --ion-color-contrast: var(--kirby-badge-color);
 
@@ -11,6 +11,7 @@
     --padding-end: 5px;
     --padding-bottom: 4px;
     --padding-start: 5px;
+    box-sizing: border-box; //Fixes https://github.com/kirbydesign/designsystem/issues/537
     border-radius: 8px;
     min-width: 16px;
     min-height: 16px;
@@ -26,7 +27,7 @@
   }
 }
 
-@each $color-name, $color-value in $main-colors {
+@each $color-name, $color-value in $notification-colors {
   :host(.#{$color-name}) {
     --kirby-badge-background-color: #{get-color($color-name)};
     --kirby-badge-color: #{get-color($color-name+'-contrast')};
@@ -35,4 +36,9 @@
 
 :host(.danger) {
   --kirby-badge-color: #{get-color('white')};
+}
+
+:host(.white) {
+  --kirby-badge-background-color: #{get-color('white')};
+  --kirby-badge-color: #{get-color('white-contrast')};
 }
