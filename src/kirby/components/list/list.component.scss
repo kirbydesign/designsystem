@@ -111,6 +111,7 @@ ion-item {
 }
 
 .swipe-action {
+  display: flex;
   color: #{get-color('primary-contrast')};
   @each $color-name, $color-value in $main-colors {
     .#{$color-name} {
@@ -130,11 +131,6 @@ ion-item {
     min-width: 70px;
     flex-direction: column;
 
-    kirby-icon {
-      width: 24px;
-      height: 24px;
-      margin: auto;
-    }
     ion-label {
       --background: unset;
       --color: unset;

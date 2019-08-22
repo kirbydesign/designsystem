@@ -78,15 +78,20 @@
 <ng-template #swipeAction let-item let-swipeActions="swipeActions">
   <div class="swipe-action">
     <ion-item-option
-        *ngFor="let swipeAction of swipeActions" 
-        [ngClass]="swipeAction.themeColor"
-        (click)="onSwipeActionSelect(swipeAction, item)"
-        >
-        <!-- expandable> -->
+      *ngFor="let swipeAction of swipeActions" 
+      [ngClass]="swipeAction.themeColor"
+      (click)="onSwipeActionSelect(swipeAction, item)"
+    >
       <div class="item-content">
-        <kirby-icon *ngIf="swipeAction.iconName" [name]="getSwipeActionIconName(swipeAction, item)">
+        <kirby-icon 
+          *ngIf="swipeAction.iconName" 
+          size="sm" 
+          [name]="getSwipeActionIconName(swipeAction, item)"
+        >
         </kirby-icon>
-        <ion-label>{{ getSwipeActionTitle(swipeAction, item) }}</ion-label>
+        <ion-label>
+          {{ getSwipeActionTitle(swipeAction, item) }}
+        </ion-label>
       </div>
     </ion-item-option>
   </div>
