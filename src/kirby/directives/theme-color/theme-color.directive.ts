@@ -31,6 +31,8 @@ export class ThemeColorDirective {
   private isMedium: boolean;
   @HostBinding('class.dark')
   private isDark: boolean;
+  @HostBinding('class.white')
+  private isWhite: boolean;
   @HostBinding('class.kirby-color-brightness-white')
   private isBrightnessWhite: boolean;
   @HostBinding('class.kirby-color-brightness-light')
@@ -48,6 +50,7 @@ export class ThemeColorDirective {
     this.isLight = value === 'light';
     this.isMedium = value === 'medium';
     this.isDark = value === 'dark';
+    this.isWhite = value === 'white';
     const colorBrightness = ColorHelper.getColorBrightness(value);
     this.isBrightnessWhite = colorBrightness === 'white';
     this.isBrightnessLight = colorBrightness === 'light';
