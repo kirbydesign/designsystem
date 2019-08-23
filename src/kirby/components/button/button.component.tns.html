@@ -1,5 +1,5 @@
 <FormattedString>
     <Span *ngIf="iconName && iconPlacement === 'left'" kirby-icon [name]="iconName.concat('-nb')"></Span>
-    <Span *ngIf="text" text=" {{ text }} "></Span>
+    <Span *ngIf="text" [text]="text"></Span>
     <Span *ngIf="iconName && iconPlacement === 'right'" kirby-icon [name]="iconName.concat('-nb')"></Span>
 </FormattedString>

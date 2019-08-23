@@ -17,9 +17,9 @@ export class ButtonComponent {
   isAttentionLevel4: boolean;
   @HostBinding('class.destructive')
   destructive: boolean = false; // Default
-  @HostBinding('class.icon-left')
-  public get isIconPlacedLeft(): boolean {
-    return this.iconPlacement === 'left';
+  @HostBinding('class.icon-right')
+  public get isIconPlacedRight(): boolean {
+    return this.iconPlacement === 'right';
   }
 
   @Input() set attentionLevel(level: '1' | '2' | '3' | '4') {
@@ -34,5 +34,5 @@ export class ButtonComponent {
   @Input() expand?: 'full' | 'block';
   @Input() iconName?: string;
   @Input() iconPlacement?: 'left' | 'right' = 'left';
-  @Input() text: string;
+  @Input() text?: string;
 }
