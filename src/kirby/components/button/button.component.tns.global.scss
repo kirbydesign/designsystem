@@ -77,6 +77,10 @@ Button[kirby-button] {
     background-color: get-color('light-tint');
     border-color: get-color('light-tint');
   }
+
+  Span.icon {
+    font-size: inherit;
+  }
 }
 
 .default Button.attention-level2 {

@@ -1,4 +1,6 @@
-import { Component, Input, HostBinding } from '@angular/core';
+import { Component, Input, HostBinding, ContentChild } from '@angular/core';
+
+import { IconComponent } from '../icon/icon.component';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -32,8 +34,8 @@ export class ButtonComponent {
     this.destructive = state;
   }
   @Input() expand?: 'full' | 'block';
-  @Input() iconName?: string;
-  @Input() customIconName?: string;
-  @Input() iconPlacement?: 'left' | 'right' = 'left';
   @Input() text?: string;
+  @Input() iconPlacement?: 'left' | 'right' = 'left';
+
+  @ContentChild(IconComponent) icon: IconComponent;
 }
