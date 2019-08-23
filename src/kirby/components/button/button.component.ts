@@ -33,6 +33,10 @@ export class ButtonComponent {
   public get isIconBtn(): boolean {
     return this.isIconButton;
   }
+  @HostBinding('attr.horizontalAlignment')
+  public get isAlignedHorizontally(): string {
+    return this.isFloating || this.isIconButton ? 'center' : null;
+  }
 
   @Input() set attentionLevel(level: '1' | '2' | '3' | '4') {
     this.isAttentionLevel1 = level === '1';

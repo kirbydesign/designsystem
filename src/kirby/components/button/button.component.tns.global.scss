@@ -77,6 +77,29 @@ Button[kirby-button] {
     background-color: get-color('light-tint');
     border-color: get-color('light-tint');
   }
+
+  &.floating, &.icon-button {
+    padding: 0;
+  }
+
+  &.floating {
+    $fab-size: 64;
+    width: $fab-size;
+    height: $fab-size;
+    android-elevation: 8;
+
+    &[isEnabled=false], &.hide-shadow {
+      android-elevation: 0;
+    }
+  }
+
+  &.icon-button {
+    $icon-btn-size: size('xxl');
+    width: $icon-btn-size;
+    height: $icon-btn-size;
+    background-color: get-color('light');
+    border-color: get-color('light');
+  }
 }
 
 .default Button.attention-level2 {

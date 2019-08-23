@@ -13,9 +13,9 @@
           <h2>Floating action buttons</h2>
           <Button kirby-button [isFloating]="true" iconName="add"></Button>
           <Button kirby-button [isFloating]="true" [hideShadow]="true" iconName="add"></Button>
-          <Button kirby-button [isFloating]="true" iconName="add" disabled></Button>
+          <Button kirby-button [isFloating]="true" iconName="add" [isEnabled]="false"></Button>
           <Button kirby-button [isFloating]="true" iconName="close"></Button>
-          <Button kirby-button text="Icon replacing text" iconName="arrow-down" iconPlacement="replaceText"></Button>
+          <Button kirby-button [isIconButton]="true" iconName="close" marginBottom="50"></Button>
       </ng-container>
       <ng-container *ngIf="activeTab === 'attention-level'">
           <kirby-card [themeColor]="themeColor" class="card">
