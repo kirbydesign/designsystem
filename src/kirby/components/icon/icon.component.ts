@@ -1,19 +1,10 @@
-import {
-  Component,
-  Inject,
-  Input,
-  OnChanges,
-  Optional,
-  SimpleChanges,
-  HostBinding,
-  ElementRef,
-} from '@angular/core';
+import { Component, Inject, Input, OnChanges, Optional, SimpleChanges } from '@angular/core';
 
 import { kirbyIconSettings } from './kirby-icon-settings';
 import { ICON_SETTINGS, Icon, IconSettings } from './icon-settings';
 
 @Component({
-  selector: 'kirby-icon, Span[kirby-icon]',
+  selector: 'kirby-icon',
   templateUrl: './icon.component.html',
   styleUrls: ['./icon.component.scss'],
   // Using host property decorator is fine for static values:
@@ -26,27 +17,9 @@ export class IconComponent implements OnChanges {
   defaultIcon: Icon = this.findIcon(kirbyIconSettings.icons, 'cog');
   fontFamily: string = kirbyIconSettings.fontfamily;
   private _icon = (this.icon = this.defaultIcon);
-  isSpanIcon: boolean;
 
   @Input() name: string;
   @Input() customName: string;
-
-  @HostBinding('style.fontFamily')
-  get spanFontFamily() {
-    return this.isSpanIcon ? this.fontFamily : '';
-  }
-
-  @HostBinding('attr.text')
-  get spanText() {
-    return this.isSpanIcon
-      ? String.fromCharCode(this.findIcon(kirbyIconSettings.icons, this.name).unicode)
-      : '';
-  }
-
-  @HostBinding('class.span-icon')
-  get spanClass() {
-    return this.isSpanIcon;
-  }
 
   get icon(): Icon {
     return this._icon;
@@ -81,12 +54,7 @@ export class IconComponent implements OnChanges {
     }
   }
 
-  constructor(
-    elRef: ElementRef,
-    @Optional() @Inject(ICON_SETTINGS) private iconSettings?: IconSettings
-  ) {
-    this.isSpanIcon = elRef.nativeElement.toString().indexOf('Span') > -1;
-  }
+  constructor(@Optional() @Inject(ICON_SETTINGS) private iconSettings?: IconSettings) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.name && changes.name.currentValue) {
