@@ -8,8 +8,15 @@
           <Button kirby-button text="Large Button" size="lg"></Button>
           <Button kirby-button text="Kirby Block Button" expand="block"></Button>
           <Button kirby-button text="Disabled Button" isEnabled="false"></Button>   
-          <Button kirby-button text="Icon left of text" iconName="add" iconPlacement="left"></Button>
-          <Button kirby-button text="Icon right of text" iconName="qr" iconPlacement="right"></Button>
+          <Button kirby-button text="Icon Left (default)">
+            <kirby-icon name="edit"></kirby-icon>
+          </Button>
+          <Button kirby-button text="Icon Right" iconPlacement="right">
+            <kirby-icon name="arrow-down"></kirby-icon>
+          </Button>
+          <Button kirby-button text="Custom Icon">
+            <kirby-icon customName="football"></kirby-icon>
+          </Button>
       </ng-container>
       <ng-container *ngIf="activeTab === 'attention-level'">
           <kirby-card [themeColor]="themeColor" class="card">
