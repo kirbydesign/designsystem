@@ -20,12 +20,14 @@
       </ng-container>
       <ng-container *ngIf="activeTab === 'attention-level'">
           <kirby-card [themeColor]="themeColor" class="card">
-            <Stacklayout>
-              <Button kirby-button attentionLevel="1" text="Attention Level 1"></Button>
-              <Button kirby-button attentionLevel="2" text="Attention Level 2"></Button>
-              <Button kirby-button attentionLevel="3" text="Attention Level 3"></Button>
-              <Button kirby-button attentionLevel="4" text="Attention Level 4"></Button>        
-            </Stacklayout>
+              <GridLayout columns="*">
+                <Stacklayout col="0" borderWidth="1" borderColor="red">
+                  <Button kirby-button attentionLevel="1" text="Attention Level 0" expand="block"></Button>
+                  <Button kirby-button attentionLevel="2" text="Attention Level 2" expand="block"></Button>
+                  <Button kirby-button attentionLevel="3" text="Attention Level 3" expand="block"></Button>
+                  <Button kirby-button attentionLevel="4" text="Attention Level 4" expand="block"></Button>        
+                </Stacklayout>
+              </GridLayout>
           </kirby-card>
           <ListPicker #themeColorPicker [items]="items"
             textField="text"
