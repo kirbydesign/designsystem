@@ -3,7 +3,8 @@
 .slide-button-container {
     width: 256;
     height: 56;
-    border-radius: 28;
+    $slider-button-container-radius: 28;
+    border-radius: $slider-button-container-radius;
     background-color: get-color("primary");
     margin: size('xxxs');
 
@@ -27,6 +28,8 @@
     .slide-button-text {
         color: get-color('primary-contrast');
         font-size: font-size('n');
-        margin-left: ($slide-button-width+$slide-button-margin*2)/2;
+        width: 100%;
+        text-align: center;
+        padding: 0 $slider-button-container-radius 0 $slide-button-width+$slide-button-margin*2;
     }
 }

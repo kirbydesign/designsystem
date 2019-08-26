@@ -1,5 +1,7 @@
 @import "web-imports";
 
+$slider-thumb-width: size('xxl');
+
 @mixin _slider-thumb() {
   -webkit-appearance: none;
   border-radius: 50%;
@@ -8,8 +10,8 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: size('m');
-  width: size('xxl');
-  height: size('xxl');
+  width: $slider-thumb-width;
+  height: $slider-thumb-width;
   border: none;
   cursor: pointer;
 }
@@ -25,17 +27,15 @@
   }
 
   $slide-button-padding: 2px;
-  .range-container {
-    $padding: $slide-button-padding;
-
+  $slider-button-container-radius: 28px;
+  .slide-button-container {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     background: get-color("primary");
-
-    height: size('xxl') + $padding * 2;
-    border-radius: 28px;
+    height: $slider-thumb-width + $slide-button-padding * 2;
+    border-radius: $slider-button-container-radius;
   }
 
   @for $i from 1 through 10 {
@@ -45,14 +45,16 @@
     }
   }
 
-  .range-text {
+  .slide-button-text {
     position: absolute;
     color: get-color('primary-contrast');
     font-size: font-size('n');
     margin: 0;
     line-height: 1;
     z-index: 1;
-    margin-left: (size('xxl')+$slide-button-padding)/2;
+    width: 100%;
+    text-align: center;
+    padding: 0 $slider-button-container-radius 0 $slider-thumb-width+$slide-button-padding*2;
   }
 
   .slide-button {
