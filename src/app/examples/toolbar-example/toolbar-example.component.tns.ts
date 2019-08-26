@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterExtensions } from 'nativescript-angular';
 
-import { Color, ColorHelper } from '@kirbydesign/designsystem/helpers/color-helper';
 import { ToastController, ToastConfig } from '@kirbydesign/designsystem';
 
 @Component({
@@ -10,14 +9,7 @@ import { ToastController, ToastConfig } from '@kirbydesign/designsystem';
   styleUrls: ['./toolbar-example.component.scss'],
 })
 export class ToolbarExampleComponent {
-  color: Color;
-  colors: Color[] = ColorHelper.getMainColors();
-
   constructor(private router: RouterExtensions, private toastController: ToastController) {}
-
-  changeColor(color: Color) {
-    this.color = color;
-  }
 
   onBackButtonSelect(): void {
     this.router.backToPreviousPage();
