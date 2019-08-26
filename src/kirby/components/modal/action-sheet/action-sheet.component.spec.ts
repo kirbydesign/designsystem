@@ -17,7 +17,6 @@ import { InfiniteScrollDirective } from '../../list/directives/infinite-scroll.d
 import { CardHeaderComponent } from '../../card/card-header/card-header.component';
 import { ListFlexItemComponent } from '../../list/list-flex-item/list-flex-item.component';
 import { ButtonComponent } from '../../button/button.component';
-import { IconComponent } from '../../icon/icon.component';
 
 describe('ActionSheetComponent', () => {
   let component: ActionSheetComponent;
@@ -56,7 +55,6 @@ describe('ActionSheetComponent', () => {
         SpinnerComponent,
         InfiniteScrollDirective,
         ButtonComponent,
-        MockComponent(IconComponent),
         MockComponent(ionic.IonList),
         MockComponent(ionic.IonListHeader),
         MockComponent(ionic.IonLabel),
