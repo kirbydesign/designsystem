@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Location } from '@angular/common';
+
+import { ToastController, ToastConfig } from '@kirbydesign/designsystem';
 
 @Component({
   selector: 'kirby-toolbar-example',
@@ -6,15 +9,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./toolbar-example.component.scss'],
 })
 export class ToolbarExampleComponent {
+  constructor(private location: Location, private toastController: ToastController) {}
   onBackButtonSelect(): void {
-    alert('backbutton clicked!');
+    this.location.back();
   }
 
   onPrimarySelect(): void {
-    alert('primary clicked!');
+    const config: ToastConfig = {
+      message: 'Primary tapped',
+      messageType: 'success',
+      durationInMs: 2000,
+    };
+    this.toastController.showToast(config);
   }
 
   onSecondarySelect(): void {
-    alert('secondary clicked!');
+    const config: ToastConfig = {
+      message: 'Secondary tapped',
+      messageType: 'success',
+      durationInMs: 2000,
+    };
+    this.toastController.showToast(config);
   }
 }
