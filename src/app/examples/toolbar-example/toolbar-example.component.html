@@ -1,15 +1,4 @@
-<kirby-toolbar title="Toolbar title" [themeColor]="color?.name" (back)="backButtonSelected()">
-  <kirby-icon secondary size="md"></kirby-icon>
-  <kirby-icon end size="md" name="more"></kirby-icon>
+<kirby-toolbar title="Toolbar title" (back)="onBackButtonSelect()" (primarySelect)="onPrimarySelect()" (secondarySelect)="onSecondarySelect()">
+  <kirby-icon primary size="md" name="search"></kirby-icon>
+  <kirby-icon secondary size="md" name="more"></kirby-icon>
 </kirby-toolbar>
-
-<p>Change color: </p>
-<div class="colors">
-    <button class="color-button" (click)="changeColor(color)" *ngFor="let color of colors">
-        <span class="color" [style.backgroundColor]="color.value.hex"></span>
-        <span class="color-button__txt">{{color.name}}</span>
-    </button>
-    <button class="color-button" (click)="changeColor(null)" >
-        <span class="color-button__txt">Standard</span>
-    </button>
-</div>
