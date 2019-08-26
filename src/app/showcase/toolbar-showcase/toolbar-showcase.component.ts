@@ -9,8 +9,6 @@ export class ToolbarShowcaseComponent implements OnInit {
   exampleHtml: string = `
       <!-- title -->
       <kirby-toolbar title="TITLE"></kirby-toolbar>
-      <!-- themeColor -->
-      <kirby-toolbar themeColor="primary"></kirby-toolbar>
       <!-- back button -->
       <kirby-toolbar hideBackButton="false" (back)="onBackButtonSelect()"></kirby-toolbar>
       <!-- primary and secondary elements -->
