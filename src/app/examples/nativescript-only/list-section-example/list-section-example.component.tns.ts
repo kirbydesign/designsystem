@@ -8,7 +8,6 @@ import { BaseListComponent } from '../../list/base-list.component';
   styleUrls: ['./list-section-example.component.tns.scss'],
 })
 export class ListSectionExampleComponent extends BaseListComponent {
-
   selectedItem: any;
 
   getSectionName(item: any): string {
