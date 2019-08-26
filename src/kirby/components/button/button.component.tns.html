@@ -1,1 +1,5 @@
-<ng-content></ng-content>
+<FormattedString *ngIf="icon">
+    <Span *ngIf="iconPlacement === 'left'" [style.font-family]="icon.fontFamily" [text]="icon.icon?.charCode" class="icon"></Span>
+    <Span *ngIf="text" text=" {{text}} "></Span>
+    <Span *ngIf="iconPlacement === 'right'" [style.font-family]="icon.fontFamily" [text]="icon.icon?.charCode"></Span>
+</FormattedString>
