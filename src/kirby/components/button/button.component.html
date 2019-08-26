@@ -1,3 +1,2 @@
-<span *ngIf="!isIconButton && text">{{ text }}</span>
-<ng-content *ngIf="!isIconButton && !text"></ng-content>
-<kirby-icon *ngIf="iconName" [name]="iconName"></kirby-icon>
+<span *ngIf="text">{{text}}</span>
+<ng-content></ng-content>

@@ -8,23 +8,42 @@
           <Button kirby-button text="Large Button" size="lg"></Button>
           <Button kirby-button text="Kirby Block Button" expand="block"></Button>
           <Button kirby-button text="Disabled Button" isEnabled="false"></Button>   
-          <Button kirby-button text="Icon left of text" iconName="add" iconPlacement="left"></Button>
-          <Button kirby-button text="Icon right of text" iconName="qr" iconPlacement="right"></Button>
+          <Button kirby-button text="Icon Left (default)">
+            <kirby-icon name="edit"></kirby-icon>
+          </Button>
+          <Button kirby-button text="Icon Right" iconPlacement="right">
+            <kirby-icon name="arrow-down"></kirby-icon>
+          </Button>
+          <Button kirby-button text="Custom Icon">
+            <kirby-icon customName="football"></kirby-icon>
+          </Button>
           <h2>Floating action buttons</h2>
-          <Button kirby-button [isFloating]="true" iconName="add"></Button>
-          <Button kirby-button [isFloating]="true" [hideShadow]="true" iconName="add"></Button>
-          <Button kirby-button [isFloating]="true" iconName="add" [isEnabled]="false"></Button>
-          <Button kirby-button [isFloating]="true" iconName="close"></Button>
-          <Button kirby-button [isIconButton]="true" iconName="close" marginBottom="50"></Button>
+          <Button kirby-button [isFloating]="true" iconName="add">
+            <kirby-icon name="add"></kirby-icon>
+          </Button>
+          <Button kirby-button [isFloating]="true" [hideShadow]="true">
+            <kirby-icon name="add"></kirby-icon>
+          </Button>
+          <Button kirby-button [isFloating]="true" [isEnabled]="false">
+            <kirby-icon name="add"></kirby-icon>
+          </Button>
+          <Button kirby-button [isFloating]="true">
+            <kirby-icon name="close"></kirby-icon>
+          </Button>
+          <Button kirby-button [isIconButton]="true" marginBottom="50">
+            <kirby-icon name="close"></kirby-icon>
+          </Button>
       </ng-container>
       <ng-container *ngIf="activeTab === 'attention-level'">
           <kirby-card [themeColor]="themeColor" class="card">
-            <Stacklayout>
-              <Button kirby-button attentionLevel="1" text="Attention Level 1"></Button>
-              <Button kirby-button attentionLevel="2" text="Attention Level 2"></Button>
-              <Button kirby-button attentionLevel="3" text="Attention Level 3"></Button>
-              <Button kirby-button attentionLevel="4" text="Attention Level 4"></Button>        
-            </Stacklayout>
+              <GridLayout columns="*">
+                <Stacklayout col="0">
+                  <Button kirby-button attentionLevel="1" text="Attention Level 1" expand="block"></Button>
+                  <Button kirby-button attentionLevel="2" text="Attention Level 2" expand="block"></Button>
+                  <Button kirby-button attentionLevel="3" text="Attention Level 3" expand="block"></Button>
+                  <Button kirby-button attentionLevel="4" text="Attention Level 4" expand="block"></Button>        
+                </Stacklayout>
+              </GridLayout>
           </kirby-card>
           <ListPicker #themeColorPicker [items]="items"
             textField="text"

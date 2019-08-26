@@ -41,8 +41,9 @@ export class ButtonShowcaseComponent {
       inputValues: ['true', 'false'],
     },
     {
-      name: 'iconName',
-      description: '(Optional) Specify a kirby icon name, which will be shown inside the button.',
+      name: 'text',
+      description:
+        '(Optional) The text of the button. On web this can also be specified inside the start and end tag.',
       defaultValue: '',
       inputValues: ['string'],
     },

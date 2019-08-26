@@ -10,7 +10,7 @@
   color: var(--kirby-button-color);
   cursor: pointer;
   transition: opacity 200ms linear;
-  position: relative;
+  position: relative; // TODO: needed ?
   display: inline-flex;
   flex-direction: row;
   align-items: center;
