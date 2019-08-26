@@ -1,13 +1,14 @@
-@import "../../scss/_native-imports";
+@import "native-imports";
+@import "slide-button.common";
 
-$slider-thumb-width: size('xxl');
+
 
 .slide-button-container {
-    width: 256;
+    width: $slide-button-container-width;
     height: $slider-thumb-width;
     $slide-button-container-radius: $slider-thumb-width/2;
     border-radius: $slide-button-container-radius;
-    background-color: get-color("primary");
+    background-color: $slide-button-container-bg-color;
     margin: size('xxxs');
 
     &.expand {
@@ -20,14 +21,14 @@ $slider-thumb-width: size('xxl');
         height: $slide-button-width;
         margin: $slide-button-margin;
         border-radius: 100;
-        background-color: get-color('white');
-        color: get-color('primary-contrast');
+        background-color: $slider-thumb-bg-color;
+        color: $slide-button-text-color;
         font-family: 'kirby';
         font-size: font-size('m');
     }
 
     .slide-button-text {
-        color: get-color('primary-contrast');
+        color: $slide-button-text-color;
         font-size: font-size('n');
         width: 100%;
         text-align: center;

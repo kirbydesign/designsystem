@@ -1,11 +1,10 @@
 @import "web-imports";
-
-$slider-thumb-width: size('xxl');
+@import "slide-button.common";
 
 @mixin _slider-thumb() {
   -webkit-appearance: none;
   border-radius: 50%;
-  background-color: get-color('white');
+  background-color: $slider-thumb-bg-color;
   background-image: url('../../icons/svg/arrow-more.svg');
   background-repeat: no-repeat;
   background-position: center;
@@ -19,7 +18,7 @@ $slider-thumb-width: size('xxl');
 :host {
   position: relative;
   display: inline-block;
-  width: 256px;
+  width: $slide-button-container-width;
 
   &[expand='block'] {
     display: block;
@@ -33,7 +32,7 @@ $slider-thumb-width: size('xxl');
     display: flex;
     justify-content: center;
     align-items: center;
-    background: get-color("primary");
+    background-color: $slide-button-container-bg-color;
     height: $slider-thumb-width + $slide-button-padding * 2;
     border-radius: $slide-button-container-radius;
   }
@@ -47,7 +46,7 @@ $slider-thumb-width: size('xxl');
 
   .slide-button-text {
     position: absolute;
-    color: get-color('primary-contrast');
+    color: $slide-button-text-color;
     font-size: font-size('n');
     margin: 0;
     line-height: 1;
