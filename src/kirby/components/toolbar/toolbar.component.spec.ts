@@ -49,7 +49,7 @@ describe('ToolbarComponent', () => {
     });
   });
 
-  describe('event: sencondarySelect', () => {
+  describe('event: secondarySelect', () => {
     it('should be called once', () => {
       spyOn(spectator.component.secondarySelect, 'emit');
 
