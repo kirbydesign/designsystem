@@ -50,7 +50,7 @@ export class ButtonComponent {
     this.destructive = state;
   }
   @Input() expand?: 'full' | 'block';
-  @Input() text: string;
+  @Input() text?: string;
   @Input() iconPlacement?: 'left' | 'right' = 'left';
   @Input() isFloating?: boolean = false;
   @Input() isIconButton?: boolean = false;
