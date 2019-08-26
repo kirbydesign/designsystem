@@ -1,25 +1,22 @@
 @import "native-imports";
 @import "slide-button.common";
 
-
-
 .slide-button-container {
     width: $slide-button-container-width;
-    height: $slider-thumb-width;
-    $slide-button-container-radius: $slider-thumb-width/2;
+    height: $slide-button-container-height;
+    $slide-button-container-radius: $slide-button-width/2;
     border-radius: $slide-button-container-radius;
     background-color: $slide-button-container-bg-color;
-    margin: size('xxxs');
+    margin: $slide-button-spacing;
 
     &.expand {
         width: 100%;
     }
 
-    $slide-button-margin: 2;
     .slide-button {
         width: $slide-button-width;
         height: $slide-button-width;
-        margin: $slide-button-margin;
+        margin: $slide-button-spacing;
         border-radius: 100;
         background-color: $slider-thumb-bg-color;
         color: $slide-button-text-color;
@@ -32,7 +29,7 @@
         font-size: font-size('n');
         width: 100%;
         text-align: center;
-        $total-slider-thumb-width: $slide-button-width+$slide-button-margin*2;
+        $total-slider-thumb-width: $slide-button-width+$slide-button-spacing*2;
         padding: 0 $slide-button-container-radius 0 $total-slider-thumb-width;
     }
 }
