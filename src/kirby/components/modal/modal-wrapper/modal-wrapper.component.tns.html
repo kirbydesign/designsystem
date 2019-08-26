@@ -46,21 +46,19 @@
 </ng-template>
 
 <ng-template #closeIcon let-icon="icon">
-    <kirby-floating-action-button 
-            [showShadow]="false" 
+    <button kirby-button [showShadow]="false" 
             (tap)="onModalDismiss()" 
-            [isFloating]="false">
+            [isIconButton]="true">
         <kirby-icon [name]="icon"></kirby-icon>
-    </kirby-floating-action-button>
+    </button>
 </ng-template>
 
 <ng-template #supplementaryButton let-btn="btn">
-    <kirby-floating-action-button
-        [showShadow]="false"
+    <button kirby-button [showShadow]="false"
         (tap)="btn.action($event)" 
-        [isFloating]="false">
+        [isIconButton]="true">
         <kirby-icon [name]="btn.iconName"></kirby-icon>
-    </kirby-floating-action-button>
+    </button>
 </ng-template>
 
 <ng-template #title let-horizontalAlignment="horizontalAlignment">

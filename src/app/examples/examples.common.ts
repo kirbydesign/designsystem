@@ -2,7 +2,6 @@ import { IconSettings, ICON_SETTINGS } from '@kirbydesign/designsystem';
 
 import { AvatarExampleComponent } from './avatar-example/avatar-example.component';
 import { ButtonExampleComponent } from './button-example/button-example.component';
-import { FloatingActionButtonExampleComponent } from './floating-action-button-example/floating-action-button-example.component';
 import { CardExampleComponent } from './card-example/card-example.component';
 import { CardThemecolorExampleComponent } from './card/card-themecolor-example/card-themecolor-example.component';
 import { CardElevationsExampleComponent } from './card/card-elevations-example/card-elevations-example.component';
@@ -50,7 +49,6 @@ export const iconSettings: IconSettings = {
 export const COMPONENT_DECLARATIONS: any[] = [
   ButtonExampleComponent,
   SlideButtonExampleComponent,
-  FloatingActionButtonExampleComponent,
   CardExampleComponent,
   CardThemecolorExampleComponent,
   CardElevationsExampleComponent,
