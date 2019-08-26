@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Color, ColorHelper } from '@kirbydesign/designsystem/helpers/color-helper';
-
 @Component({
   selector: 'kirby-toolbar-example',
   templateUrl: './toolbar-example.component.html',
