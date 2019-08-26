@@ -1,0 +1,15 @@
+@import '../../scss/native-imports';
+.toolbar {
+  background-color: get-color('background-color');
+  color: get-color('background-color-contrast');
+}
+
+.android .action-item-spacer {
+    
+    &-small {
+      width: size('xxxs');
+    }
+    &-large {
+      width: size('s');
+    }
+}
