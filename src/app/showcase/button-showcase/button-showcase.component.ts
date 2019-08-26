@@ -40,6 +40,19 @@ export class ButtonShowcaseComponent {
       defaultValue: 'false',
       inputValues: ['true', 'false'],
     },
+    {
+      name: 'text',
+      description:
+        '(Optional) The text of the button. On web this can also be specified inside the start and end tag.',
+      defaultValue: '',
+      inputValues: ['string'],
+    },
+    {
+      name: 'iconPlacement',
+      description: '(Optional) Specify the icon placement in relation to the text.',
+      defaultValue: 'left',
+      inputValues: ['left', 'right'],
+    },
   ];
 
   onChange(value) {
