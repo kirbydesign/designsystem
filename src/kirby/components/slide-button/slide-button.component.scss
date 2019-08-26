@@ -27,7 +27,7 @@ $slider-thumb-width: size('xxl');
   }
 
   $slide-button-padding: 2px;
-  $slider-button-container-radius: 28px;
+  $slide-button-container-radius: $slider-thumb-width/2;
   .slide-button-container {
     width: 100%;
     display: flex;
@@ -35,7 +35,7 @@ $slider-thumb-width: size('xxl');
     align-items: center;
     background: get-color("primary");
     height: $slider-thumb-width + $slide-button-padding * 2;
-    border-radius: $slider-button-container-radius;
+    border-radius: $slide-button-container-radius;
   }
 
   @for $i from 1 through 10 {
@@ -54,7 +54,8 @@ $slider-thumb-width: size('xxl');
     z-index: 1;
     width: 100%;
     text-align: center;
-    padding: 0 $slider-button-container-radius 0 $slider-thumb-width+$slide-button-padding*2;
+    $total-slider-thumb-width: $slider-thumb-width+$slide-button-padding*2;
+    padding: 0 $slide-button-container-radius 0 $total-slider-thumb-width;
   }
 
   .slide-button {

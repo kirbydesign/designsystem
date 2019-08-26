@@ -1,10 +1,12 @@
 @import "../../scss/_native-imports";
 
+$slider-thumb-width: size('xxl');
+
 .slide-button-container {
     width: 256;
-    height: 56;
-    $slider-button-container-radius: 28;
-    border-radius: $slider-button-container-radius;
+    height: $slider-thumb-width;
+    $slide-button-container-radius: $slider-thumb-width/2;
+    border-radius: $slide-button-container-radius;
     background-color: get-color("primary");
     margin: size('xxxs');
 
@@ -12,7 +14,6 @@
         width: 100%;
     }
 
-    $slide-button-width: 52;
     $slide-button-margin: 2;
     .slide-button {
         width: $slide-button-width;
@@ -30,6 +31,7 @@
         font-size: font-size('n');
         width: 100%;
         text-align: center;
-        padding: 0 $slider-button-container-radius 0 $slide-button-width+$slide-button-margin*2;
+        $total-slider-thumb-width: $slide-button-width+$slide-button-margin*2;
+        padding: 0 $slide-button-container-radius 0 $total-slider-thumb-width;
     }
 }
