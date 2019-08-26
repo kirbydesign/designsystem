@@ -186,12 +186,10 @@ export class ListComponent implements OnInit, OnChanges {
   }
 
   getSwipeActionIconName(swipeAction: ListSwipeAction, item: any): string {
-    if (this.listSwipeActionsHelper.getIsSwipeActionSelected(swipeAction, item)) {
-      if (swipeAction.altIconName || swipeAction.altIconName === null) {
-        return swipeAction.altIconName;
-      }
-    }
-    return swipeAction.iconName;
+    return this.listSwipeActionsHelper.getIsSwipeActionSelected(swipeAction, item) &&
+      swipeAction.altIconName
+      ? swipeAction.altIconName
+      : swipeAction.iconName;
   }
 
   getSwipeActionTitle(swipeAction: ListSwipeAction, item: any): string {

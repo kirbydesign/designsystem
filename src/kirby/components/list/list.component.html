@@ -84,7 +84,7 @@
     >
       <div class="item-content">
         <kirby-icon 
-          *ngIf="getSwipeActionIconName(swipeAction, item)" 
+          *ngIf="swipeAction.iconName" 
           size="sm" 
           [name]="getSwipeActionIconName(swipeAction, item)"
         >
