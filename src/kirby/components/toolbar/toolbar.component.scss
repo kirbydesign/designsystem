@@ -5,15 +5,6 @@
   --color: #{get-color('background-color-contrast')};
 }
 
-@each $color-name, $color-value in $main-colors {
-  :host(.#{$color-name}) {
-    ion-toolbar {
-      --background:  #{get-color($color-name)};
-      --color: #{get-color($color-name+'-contrast')};
-    }
-  }
-}
-
 .item {
 
   &-start {
@@ -21,12 +12,12 @@
     margin-right: size('s');
   }
 
-  &-middle {
+  &-primary {
     margin-left: size('s');
     margin-right: size('xxxs');
   }
 
-  &-end {
+  &-secondary {
     margin-left: size('xxxs');
     margin-right: size('s');
   }
