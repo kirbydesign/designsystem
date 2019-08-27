@@ -9,8 +9,6 @@ import { BaseListComponent } from '../../list/base-list.component';
 })
 export class ListSectionExampleComponent extends BaseListComponent {
   selectedItem: any;
-  @ViewChild('row') public row;
-  @ViewChild('check') public check;
 
   getSectionName(item: any): string {
     if (item.id < 5) return '1st section';
@@ -24,17 +22,5 @@ export class ListSectionExampleComponent extends BaseListComponent {
   onItemSelect(item) {
     this.selectedItem = item;
     super.onItemSelect(item);
-
-    debugger;
-
-    const row: UIView = this.row.nativeElement.nativeView;
-    row.setNeedsUpdateConstraints();
-    row.setNeedsLayout();
-    row.layoutIfNeeded();
-
-    const check: UIView = this.check.nativeElement.nativeView;
-    check.setNeedsUpdateConstraints();
-    check.setNeedsLayout();
-    check.layoutIfNeeded();
   }
 }

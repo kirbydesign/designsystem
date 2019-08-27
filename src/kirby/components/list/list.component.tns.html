@@ -1,5 +1,6 @@
 <GridLayout rows="*"> <!-- GridLayout kept for iOS compability -->
   <RadListView
+    #listViewRef
     loadOnDemandMode="Auto"
     (loadMoreDataRequested)="onLoadOnDemand($event)"
     [groupingFunction]="getSectionName"

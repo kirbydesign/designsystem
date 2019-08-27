@@ -7,16 +7,12 @@
 }
 
 .list-item {
-  // padding: 16;
+  padding: 16;
 }
 
 .check {
-  margin-right: 8;
   width: 24;
-  &.hide-check {
-    opacity: 0;
-    width: 0;
-  }
+  margin-right: 8;
 }
 
 
