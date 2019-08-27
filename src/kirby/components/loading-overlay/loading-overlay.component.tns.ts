@@ -1,15 +1,17 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
 import { isAndroid } from 'tns-core-modules/ui/page/page';
 import { LayoutBase, View } from 'tns-core-modules/ui/layouts/layout-base';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'kirby-loading-overlay',
   templateUrl: './loading-overlay.component.html',
   styleUrls: ['./loading-overlay.component.scss'],
 })
-export class LoadingOverlayComponent implements OnInit, AfterViewInit {
+export class LoadingOverlayComponent implements OnInit, AfterViewInit, OnDestroy {
   private isLoadingSubject = new BehaviorSubject(false);
+  private destroySubject = new Subject();
 
   private _isLoading: boolean;
   public get isLoading(): boolean {
@@ -31,15 +33,19 @@ export class LoadingOverlayComponent implements OnInit, AfterViewInit {
   ngOnInit() {}
 
   ngAfterViewInit(): void {
-    this.isLoadingSubject.subscribe((isLoading) => {
+    this.isLoadingSubject.pipe(takeUntil(this.destroySubject)).subscribe((isLoading) => {
       this.setControlInteractionState(<View>this.wrapperGrid.nativeElement, !isLoading);
     });
+  }
+
+  ngOnDestroy(): void {
+    this.destroySubject.next();
+    this.destroySubject.complete();
   }
 
   // recursively enable/disable interactions for controls as Android is not blocking tap events on overlay
   // https://stackoverflow.com/questions/40988124/nativescript-disable-all-controls-while-activityindicator-is-shown/42331788#42331788
   setControlInteractionState(view: View, isEnabled: boolean): void {
-    debugger;
     view.isUserInteractionEnabled = isEnabled;
     if (isAndroid) {
       if (view.android instanceof android.widget.EditText) {

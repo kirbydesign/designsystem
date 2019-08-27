@@ -1,18 +1,14 @@
-<GridLayout #overlayWrapperRef>
-    <StackLayout class="content-wrapper">
-        <ng-content></ng-content>
-    </StackLayout>
-    <FlexboxLayout
-    *ngIf="isLoading"
-    [class.backdrop]="showBackdrop"
-    class="spinner-wrapper"
-    justifyContent="center"
-    alignContent="center"
-    alignItems="center"
-    horizontalAlignment="center"
-    verticalAlignment="center"
-    background="transparent"
-  >
+<GridLayout #overlayWrapperRef
+  class="spinner-wrapper"
+  columns="*"
+  rows="auto auto auto" 
+  horizontalAlignment="center"
+>
+  <StackLayout class="content-wrapper">
+      <ng-content></ng-content>
+  </StackLayout>
+  <StackLayout [visibility]="isLoading ? 'visible' : 'collapse'" [class.backdrop]="showBackdrop" class="overlay"></StackLayout>
+  <StackLayout [visibility]="isLoading ? 'visible' : 'collapse'"verticalAlignment="center">
     <kirby-spinner class="spinner"></kirby-spinner>
-  </FlexboxLayout>
+  </StackLayout>
 </GridLayout>

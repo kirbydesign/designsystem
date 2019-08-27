@@ -1,13 +1,22 @@
 @import "native-imports";
 
 .spinner-wrapper {
-    height: 100%;
     width: 100%;
-    z-index: z(modal-overlay);
-    opacity: 0.8;
-    
-    &.backdrop {
-        background-color: get-color('background-color');
+    height: 100%;
+
+    .content-wrapper {
+        width: 100%;
+        height: 100%;
+    }
+
+    .overlay {
+        width: 100%;
+        height: 100%;
+        opacity: 0.8;
+
+        &.backdrop {
+            background-color: get-color('background-color');
+        }
     }
 
     .spinner {

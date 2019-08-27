@@ -12,6 +12,7 @@
         z-index: z(modal-overlay);
         opacity: 0.8;
         display: flex;
+        background: transparent;
         justify-content: center;
         align-items: center;
         justify-items: center;
@@ -21,7 +22,6 @@
         }
 
         .spinner {
-
             width: size(l);
             height: size(l);
         }
