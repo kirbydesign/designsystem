@@ -1,5 +1,5 @@
 @import "web-imports";
-@import "slide-button.common";
+@import "slide-button.component.shared";
 
 @mixin _slider-thumb() {
   -webkit-appearance: none;
@@ -52,7 +52,6 @@
     z-index: 1;
     width: 100%;
     text-align: center;
-    $total-slider-thumb-width: $slide-button-width+$slide-button-spacing*2;
     padding: 0 $slide-button-container-radius 0 $total-slider-thumb-width;
   }
 
