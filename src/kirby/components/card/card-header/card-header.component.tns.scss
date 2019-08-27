@@ -1,7 +1,9 @@
 @import '../../../scss/native-imports';
 
 .header {
-  margin: size("s");
+  padding: size("s");
+  border-top-left-radius: $border-radius;
+  border-top-right-radius: $border-radius;
 }
 
 .title {

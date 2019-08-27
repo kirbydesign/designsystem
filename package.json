@@ -9,7 +9,7 @@
       "version": "5.4.0"
     }
   },
-  "version": "0.0.259",
+  "version": "0.0.266",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

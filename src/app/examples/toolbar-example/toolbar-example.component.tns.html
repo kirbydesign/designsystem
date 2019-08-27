@@ -1,6 +1,6 @@
-<StackLayout>
-  <kirby-toolbar title="primary" themeColor="primary" (back)="backButtonSelected()">
-    <kirby-icon secondary size="md" name="cog"></kirby-icon>
-    <kirby-icon end size="md" name="more"></kirby-icon>
+<StackLayout class="background">
+  <kirby-toolbar title="toolbar" (back)="onBackButtonSelect()" (primarySelect)="onPrimarySelect()" (secondarySelect)="onSecondarySelect()">
+    <kirby-icon primary size="md" name="search" ></kirby-icon>
+    <kirby-icon secondary size="md" name="more"></kirby-icon>
   </kirby-toolbar>
-</StackLayout>;
+</StackLayout>
