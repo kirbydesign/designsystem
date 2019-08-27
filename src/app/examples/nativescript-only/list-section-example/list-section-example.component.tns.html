@@ -10,15 +10,29 @@
         [title]="section"
     ></kirby-list-section-header>
 
-    <GridLayout *kirbyListItem="let item" rows="*" columns="32, 3*, *, auto">
-        <StackLayout col="0" [ngClass]="{'hide-check': item !== selectedItem}">
+    <!-- <GridLayout *kirbyListItem="let item" rows="*" columns="32, 3*, *, auto">
+            <StackLayout col="0" [ngClass]="{'hide-check': item !== selectedItem}">
+                <kirby-icon name="verify"></kirby-icon>
+            </StackLayout>
+            <StackLayout col="1">
+                <Label [text]="item?.title" class="primary"></Label>
+                <Label [text]="item?.detail"></Label>
+            </StackLayout>
+            <Label col="2" [text]="item?.subTitle" verticalAlignment="top"></Label>
+            <Label col="3" [text]="item?.amount" class="primary" verticalAlignment="top"></Label>
+    </GridLayout> -->
+
+    <FlexboxLayout *kirbyListItem="let item" alignItems="center" justifyContent="space-between" class="list-item" justifyContent="center" #row>
+        <StackLayout class="check" [class.hide-check]="item !== selectedItem" #check>
             <kirby-icon name="verify"></kirby-icon>
         </StackLayout>
-        <StackLayout col="1">
+        <StackLayout width="201">
             <Label [text]="item?.title" class="primary"></Label>
             <Label [text]="item?.detail"></Label>
         </StackLayout>
-        <Label col="2" [text]="item?.subTitle" verticalAlignment="top"></Label>
-        <Label col="3" [text]="item?.amount" class="primary" verticalAlignment="top"></Label>
-    </GridLayout>
+        <StackLayout width="126">
+            <Label [text]="item?.subTitle" verticalAlignment="top" textAlignment="right"></Label>
+            <Label [text]="item?.amount" class="primary" verticalAlignment="top" textAlignment="right"></Label>
+        </StackLayout>
+    </FlexboxLayout>
 </kirby-list>

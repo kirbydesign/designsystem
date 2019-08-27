@@ -6,9 +6,19 @@
   margin-bottom: 10;
 }
 
-.hide-check {
-  opacity: 0;
+.list-item {
+  // padding: 16;
 }
+
+.check {
+  margin-right: 8;
+  width: 24;
+  &.hide-check {
+    opacity: 0;
+    width: 0;
+  }
+}
+
 
 Label {
   font-size: font-size('xs');
