@@ -1,6 +1,5 @@
 @import '../../scss/web-imports';
 
-$min-card-height: 170px;
 $min-card-width: 304px;
 
 :host{ 
@@ -18,7 +17,6 @@ $min-card-width: 304px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: $min-card-height;
   min-width: $min-card-width;
   overflow: hidden;
 
