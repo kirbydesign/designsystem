@@ -23,6 +23,9 @@
     background-color: get-color('white');
 
     .content-wrapper {
+        display: flex;
+        flex-direction: column;
+
         &.padding {
             padding: size('s');
         }
