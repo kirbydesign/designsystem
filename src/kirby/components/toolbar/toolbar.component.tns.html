@@ -1,7 +1,7 @@
-<ActionBar class="toolbar {{themeColor}}">
-  <NavigationButton  icon="~/assets/images/arrow-back.png" [visibility]="!hideBackButton && isAndroid ? 'visible' : 'collapsed'" (tap)="onBackButtonSelected()">
+<ActionBar class="toolbar">
+  <NavigationButton  icon="~/assets/images/arrow-back.png" [visibility]="!hideBackButton && isAndroid ? 'visible' : 'collapsed'" (tap)="onBackButtonSelect()">
   </NavigationButton>
-  <ActionItem *ngIf="!hideBackButton && !isAndroid" ios.position="left" (tap)="onBackButtonSelected()">
+  <ActionItem *ngIf="!hideBackButton && !isAndroid" ios.position="left" (tap)="onBackButtonSelect()">
   <StackLayout orientation="horizontal">
     <kirby-icon name="arrow-back" size="md"></kirby-icon>
   </StackLayout>
@@ -11,15 +11,15 @@
     <Label [text]="title"  class="toolbar-title kirby-text-normal"></Label>
   </StackLayout>
   
-  <ActionItem ios.position="right" >
+  <ActionItem ios.position="right" (tap)="onPrimarySelect()">
     <StackLayout orientation="horizontal">
-      <ng-content select="[secondary]"></ng-content>
+      <ng-content select="[primary]"></ng-content>
     </StackLayout>
   </ActionItem>
-  <ActionItem ios.position="right" >
+  <ActionItem ios.position="right" (tap)="onSecondarySelect()">
     <StackLayout orientation="horizontal">
       <Label text="" class="action-item-spacer-small"></Label>
-      <ng-content select="[end]]"></ng-content>
+      <ng-content select="[secondary]"></ng-content>
       <Label text="" class="action-item-spacer-large"></Label>
     </StackLayout>
   </ActionItem>

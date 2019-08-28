@@ -1,6 +1,6 @@
 <ScrollView>
     <Stacklayout class="wrapper">
-      <kirby-segmented-control [items]="[{ text: 'Default', id: 'default', checked: true }, { text: 'Attention Lvl', id: 'attention-level' }, { text: 'Destructive', id: 'destructive' }]" (segmentClick)="onSegmentClick($event)">
+      <kirby-segmented-control [items]="[{ text: 'Default', id: 'default', checked: true }, { text: 'Attention Lvl', id: 'attention-level' }, { text: 'Destructive', id: 'destructive' }]" (segmentSelect)="onSegmentSelect($event)">
       </kirby-segmented-control>
       <ng-container *ngIf="activeTab === 'default'">
           <Button kirby-button text="Small Button" size="sm"></Button>
@@ -8,15 +8,26 @@
           <Button kirby-button text="Large Button" size="lg"></Button>
           <Button kirby-button text="Kirby Block Button" expand="block"></Button>
           <Button kirby-button text="Disabled Button" isEnabled="false"></Button>   
+          <Button kirby-button text="Icon Left (default)">
+            <kirby-icon name="edit"></kirby-icon>
+          </Button>
+          <Button kirby-button text="Icon Right" iconPlacement="right">
+            <kirby-icon name="arrow-down"></kirby-icon>
+          </Button>
+          <Button kirby-button text="Custom Icon">
+            <kirby-icon customName="football"></kirby-icon>
+          </Button>
       </ng-container>
       <ng-container *ngIf="activeTab === 'attention-level'">
           <kirby-card [themeColor]="themeColor" class="card">
-            <Stacklayout>
-              <Button kirby-button attentionLevel="1" text="Attention Level 1"></Button>
-              <Button kirby-button attentionLevel="2" text="Attention Level 2"></Button>
-              <Button kirby-button attentionLevel="3" text="Attention Level 3"></Button>
-              <Button kirby-button attentionLevel="4" text="Attention Level 4"></Button>        
-            </Stacklayout>
+              <GridLayout columns="*">
+                <Stacklayout col="0">
+                  <Button kirby-button attentionLevel="1" text="Attention Level 1" expand="block"></Button>
+                  <Button kirby-button attentionLevel="2" text="Attention Level 2" expand="block"></Button>
+                  <Button kirby-button attentionLevel="3" text="Attention Level 3" expand="block"></Button>
+                  <Button kirby-button attentionLevel="4" text="Attention Level 4" expand="block"></Button>        
+                </Stacklayout>
+              </GridLayout>
           </kirby-card>
           <ListPicker #themeColorPicker [items]="items"
             textField="text"

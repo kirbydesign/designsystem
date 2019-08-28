@@ -2,7 +2,7 @@
   <StackLayout *ngIf="isDefaultMode" orientation="horizontal" horizontalAlignment="left" class="segment-control">
     <GridLayout columns="auto, auto" (tap)="onSegmentSelect(item)" *ngFor="let item of items">
       <FlexBoxLayout *ngIf="item.badge" class="segment-badge-wrapper" col="1" flexDirection="row" alignItems="center" justifyContent="flex-end">
-        <kirby-badge text="{{item.badge.content}}" themeColor="{{item.badge.type}}"></kirby-badge>
+        <kirby-badge [text]="item.badge.content" [themeColor]="item.badge.themeColor"></kirby-badge>
       </FlexBoxLayout>
       <StackLayout class="segment-item" col="0" colSpan="2" verticalAlignment="center" [ngClass]="{'is-checked': item.checked}">
         <Label [text]="item.text"></Label>

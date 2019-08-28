@@ -22,7 +22,7 @@ export class ButtonExampleComponent {
     }),
   ];
 
-  onSegmentClick(segment) {
+  onSegmentSelect(segment) {
     this.activeTab = segment.id;
   }
 }
