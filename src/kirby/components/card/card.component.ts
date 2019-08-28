@@ -21,9 +21,8 @@ export class CardComponent implements OnInit, OnDestroy, CardCommon {
   @Input() title: string;
   @Input() subtitle: string;
 
-  @HostBinding('class.padding')
   @Input()
-  hasPadding: boolean = true;
+  hasPadding: boolean;
 
   private sizesSortedByBreakpoint = this.sortSizesByBreakpoint({
     small: 360,

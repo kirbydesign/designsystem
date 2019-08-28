@@ -6,7 +6,9 @@
                    [class.padding]="hasPadding"
                    [ngClass]="themeColor">
         <ng-content select="kirby-card-header"></ng-content>
-        <ng-content></ng-content>
+        <FlexboxLayout class="content-wrapper" [class.padding]="hasPadding">
+            <ng-content></ng-content>
+        </FlexboxLayout>
         <ng-content select="kirby-card-footer"></ng-content>
     </FlexboxLayout>
 </FlexboxLayout>
