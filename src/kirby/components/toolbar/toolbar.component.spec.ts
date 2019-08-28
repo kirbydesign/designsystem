@@ -33,9 +33,29 @@ describe('ToolbarComponent', () => {
     it('should be called once', () => {
       spyOn(spectator.component.back, 'emit');
 
-      spectator.component.onBackButtonSelected();
+      spectator.component.onBackButtonSelect();
 
       expect(spectator.component.back.emit).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('event: primarySelect', () => {
+    it('should be called once', () => {
+      spyOn(spectator.component.primarySelect, 'emit');
+
+      spectator.component.onPrimarySelect();
+
+      expect(spectator.component.primarySelect.emit).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('event: secondarySelect', () => {
+    it('should be called once', () => {
+      spyOn(spectator.component.secondarySelect, 'emit');
+
+      spectator.component.onSecondarySelect();
+
+      expect(spectator.component.secondarySelect.emit).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -53,7 +73,7 @@ describe('ToolbarComponent', () => {
 
       spectator.setInput('hideBackButton', hide);
 
-      expect(spectator.query('.toolbar-item-left')).not.toBeTruthy();
+      expect(spectator.query('.toolbar-start')).not.toBeTruthy();
     });
 
     it('should render the back button', () => {
