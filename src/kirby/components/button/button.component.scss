@@ -10,6 +10,10 @@
   color: var(--kirby-button-color);
   cursor: pointer;
   transition: opacity 200ms linear;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   
   // we default to 'md' size.
   margin: size('xxxs');
@@ -17,6 +21,10 @@
   font-size: font-size('s');
   height: size('xl');
   line-height: line-height('xs');
+
+  &.icon-left {
+    flex-direction: row-reverse;
+  }
 
   &.sm {
     padding: size('xxxs') size('s') size('xxxs') size('s');
@@ -72,7 +80,6 @@
   }
 
   &[expand='block'] {
-    display: block;
     width: 100%;
   }
 

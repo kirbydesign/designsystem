@@ -7,4 +7,5 @@ export type ThemeColor =
   | 'danger'
   | 'light'
   | 'medium'
-  | 'dark';
+  | 'dark'
+  | 'white';
