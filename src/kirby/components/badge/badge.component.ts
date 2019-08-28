@@ -1,7 +1,5 @@
 import { Component, Input } from '@angular/core';
 
-import { ThemeColor } from '../../helpers/theme-color.type';
-
 @Component({
   selector: 'kirby-badge',
   templateUrl: './badge.component.html',
@@ -13,6 +11,5 @@ import { ThemeColor } from '../../helpers/theme-color.type';
   },
 })
 export class BadgeComponent {
-  @Input() themeColor: ThemeColor;
   @Input() text: string;
 }

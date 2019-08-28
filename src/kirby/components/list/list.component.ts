@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ContentChild,
   EventEmitter,
@@ -10,7 +9,6 @@ import {
   TemplateRef,
 } from '@angular/core';
 
-import { createGuid } from './../../helpers/guid-helper';
 import {
   ListFlexItemDirective,
   ListFooterDirective,
@@ -21,7 +19,6 @@ import {
 import { LoadOnDemandEvent, LoadOnDemandEventData } from './list.event';
 import { ListHelper } from './helpers/list-helper';
 import { GroupByPipe } from './pipes/group-by.pipe';
-import { ListItem } from './list-item/list-item.interface';
 
 export type ListShape = 'square' | 'rounded';
 
@@ -41,19 +38,8 @@ export class ListComponent implements OnChanges {
    * Provide items for the list to render. Items must be provided in the order you expect them to be rendered.
    */
 
-  private _items: ListItem[];
-  public get items(): ListItem[] {
-    return this._items;
-  }
   @Input()
-  public set items(items: ListItem[]) {
-    this._items = items.map((item) => {
-      return {
-        ...item,
-        _id: createGuid(),
-      };
-    });
-  }
+  public items: any[];
 
   /**
    * Callback to determine name of section. Sections will be ordered alphabetically.
@@ -110,7 +96,7 @@ export class ListComponent implements OnChanges {
   isLoading: boolean;
   isLoadOnDemandEnabled: boolean;
   groupedItems: any[];
-  selectedItem: ListItem;
+  selectedItem: any;
 
   private orderMap: WeakMap<any, { isFirst: boolean; isLast: boolean }>;
 
@@ -157,14 +143,7 @@ export class ListComponent implements OnChanges {
 
   onItemSelect(args: any) {
     this.selectedItem = this.listHelper.getSelectedItem(this.items, args);
-
-    const orgItem = {
-      ...this.selectedItem,
-    };
-
-    delete orgItem._id;
-
-    this.itemSelect.emit(orgItem);
+    this.itemSelect.emit(this.selectedItem);
   }
 
   onLoadOnDemand(event?: LoadOnDemandEventData) {
