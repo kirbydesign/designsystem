@@ -1,5 +1,5 @@
-<ModalStack class="action-sheet-wrapperz" dismissEnabled="true" (showingModally)="onShowingActionSheet($event)">
-    <GridLayout rows="*, auto, auto">
+<ModalStack dismissEnabled="true" (showingModally)="onShowingActionSheet($event)">
+    <GridLayout id="action-sheet" rows="*, auto, auto">
         <!-- TODO: onModalDismiss() is better off in the parent GridLayout, but that introduces a bug -->
         <Label row="0" (tap)="onModalDismiss()"></Label>
         <kirby-card row="1">
