@@ -6,17 +6,21 @@ $min-chip-width: 50;
   padding: 10 15;
   font-size: font-size('xs');
   min-width: $min-chip-width;
+  background: get-color("white");
+  color: get-color("black");
   &.is-selected {
-      background: get-color('medium');
+      background: get-color("black");
+      color: get-color("white");
   }
 }
 
 .dark, .kirby-color-brightness-dark {
   .chip {
+    background: transparent;
     color: get-color('white');
-      &.is-selected {
-        background-color: get-color("white");
-        color: get-color("black");
-      }
+    &.is-selected {
+      background-color: get-color("white");
+      color: get-color("black");
     }
+  }
 }
