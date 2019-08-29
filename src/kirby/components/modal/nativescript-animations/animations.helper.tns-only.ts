@@ -2,6 +2,8 @@ import { AnimationCurve } from 'tns-core-modules/ui/enums/enums';
 import { screen } from 'tns-core-modules/platform';
 import { View } from 'tns-core-modules/ui/page/page';
 
+import { ViewHelper } from '../../../helpers/view-helper.tns-only';
+
 export class NativeScriptAnimationHelper {
   animateSlideUpOnAndroid(view: View) {
     view
@@ -23,16 +25,7 @@ export class NativeScriptAnimationHelper {
   }
 
   animateSlideUpOnIOS(view: View) {
-    if (view.isLoaded) {
-      // modalContainer may sometimes be loaded before reaching on('loaded')
-      this._animateSlideUpOnIOS(view);
-    } else {
-      // modalContainer.on('loaded') prevents Error: Animation cancelled
-      view.on('loaded', () => {
-        this._animateSlideUpOnIOS(view);
-        view.off('loaded');
-      });
-    }
+    ViewHelper.invokeOnViewLoaded(view, this._animateSlideUpOnIOS.bind(this, view));
   }
 
   private _animateSlideUpOnIOS(view: View) {
