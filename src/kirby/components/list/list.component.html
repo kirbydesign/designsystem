@@ -20,7 +20,8 @@
                   [class.selected]="markSelectedRow && selectedItem && item._id === selectedItem._id"
                   [attr.role]="isSelectable ? 'button' : null"
                   [class.last-in-section]="idx === section.items.length - 1"
-                  (click)="onItemSelect(item)"
+                  (mousedown)="onItemMousedown($event)"
+                  (mouseup)="onItemSelect(item)"
                   tabindex="0"
                   keyHandler>
           <ng-container *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }"></ng-container>
@@ -36,7 +37,8 @@
               [class.selectable]="isSelectable"
               [class.selected]="markSelectedRow && item === selectedItem"
               [attr.role]="isSelectable ? 'button' : null"
-              (click)="onItemSelect(item)"
+              (mousedown)="onItemMousedown($event)"
+              (mouseup)="onItemSelect(item)"
               tabindex="0"
               keyHandler>
       <ng-container *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }"></ng-container>
