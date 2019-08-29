@@ -23,6 +23,7 @@ Button[kirby-button] {
   &.lg {
     font-size: font-size('s');
     height: size('xxl');
+    min-width: 220;
   }
 
   &.attention-level1 {

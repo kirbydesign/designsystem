@@ -3,9 +3,8 @@
                [ngClass]="cardSizeClass"
                [kirbyElevation]="elevation">
     <FlexboxLayout class="container"
-                   [ngClass]="themeColor"
-                   [class.elevation-2]="elevation === 2"
-                   [class.elevation-4]="elevation === 4">
+                   [class.padding]="hasPadding"
+                   [ngClass]="themeColor">
         <ng-content select="kirby-card-header"></ng-content>
         <FlexboxLayout class="content-wrapper" [class.padding]="hasPadding">
             <ng-content></ng-content>
