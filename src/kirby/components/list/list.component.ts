@@ -141,6 +141,11 @@ export class ListComponent implements OnChanges {
       : index === this.items.length - 1;
   }
 
+  onItemMousedown(event: Event) {
+    // prevent focus
+    event.preventDefault();
+  }
+
   onItemSelect(args: any) {
     this.selectedItem = this.listHelper.getSelectedItem(this.items, args);
     this.itemSelect.emit(this.selectedItem);
