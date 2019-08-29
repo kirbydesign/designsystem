@@ -64,6 +64,8 @@ export class ModalHelper {
         `translateY(${transformYFromTo[1]})`
       );
     } else {
+      // Ensure element is positioned at the correct starting position (top margin considered)
+      wrapperElem.style.transform = `translateY(${transformYFromTo[1]})`;
       // fade modals in/out
       backdropAnimation.fromTo('opacity', fadeBackdropFromTo[0], fadeBackdropFromTo[1]);
       wrapperAnimation.fromTo(`opacity`, fadeWrapperFromTo[0], fadeWrapperFromTo[1]);
