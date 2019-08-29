@@ -47,16 +47,16 @@
 
 <ng-template #closeIcon let-icon="icon">
     <button kirby-button [showShadow]="false" 
-            (tap)="onModalDismiss()" 
-            [isIconButton]="true">
+            attentionLevel="4"
+            (tap)="onModalDismiss()">
         <kirby-icon [name]="icon"></kirby-icon>
     </button>
 </ng-template>
 
 <ng-template #supplementaryButton let-btn="btn">
     <button kirby-button [showShadow]="false"
-        (tap)="btn.action($event)" 
-        [isIconButton]="true">
+        attentionLevel="2"
+        (tap)="btn.action($event)">
         <kirby-icon [name]="btn.iconName"></kirby-icon>
     </button>
 </ng-template>

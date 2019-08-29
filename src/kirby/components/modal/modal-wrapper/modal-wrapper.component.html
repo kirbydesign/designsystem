@@ -21,7 +21,8 @@
 </div>
 
 <ng-template #closeButton let-icon="icon">
-    <button kirby-button [isIconButton]="true"
+    <button kirby-button
+        attentionLevel="4"
         role="button"
         tabindex="0"
         class="close-button"
@@ -32,7 +33,8 @@
 </ng-template>
 
 <ng-template #supplementaryButton let-btn="btn">
-    <button  kirby-button [isIconButton]="true"
+    <button  kirby-button
+        attentionLevel="2"
         role="button"
         tabindex="0"
         class="supplementary-button"

@@ -124,11 +124,9 @@
   }
 
   &.icon-button {
-    $icon-btn-size: #{size('xxl')};
+    $icon-btn-size: #{size('l')};
     width: $icon-btn-size;
     height: $icon-btn-size;
-    --kirby-button-background-color: #{get-color('light')};
-    --kirby-button-border-color: #{get-color('light')};
-    --kirby-button-color: #{get-color('light-contrast')};
+    padding: 0;
   }
 }

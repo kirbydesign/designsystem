@@ -67,13 +67,6 @@ export class ButtonShowcaseComponent {
       defaultValue: 'false',
       inputValues: ['boolean'],
     },
-    {
-      name: 'isIconButton',
-      description:
-        '(Optional) Determine if the button is going to be an icon button. Notes: Icon buttons have only an icon and no text. Icon buttons always have a size of 48x48 corresponding to kirby size("xxl"). Icon buttons always have a light background color.',
-      defaultValue: 'false',
-      inputValues: ['boolean'],
-    },
   ];
 
   onChange(value) {

@@ -33,11 +33,11 @@ export class ButtonComponent {
   }
   @HostBinding('class.icon-button')
   public get isIconBtn(): boolean {
-    return this.isIconButton;
+    return !this.isFloating && this.icon && !this.text;
   }
   @HostBinding('attr.horizontalAlignment')
   public get isAlignedHorizontally(): string {
-    return this.isFloating || this.isIconButton ? 'center' : null;
+    return this.isFloating || (this.icon && !this.text) ? 'center' : null;
   }
 
   @Input() set attentionLevel(level: '1' | '2' | '3' | '4') {
@@ -53,7 +53,6 @@ export class ButtonComponent {
   @Input() text?: string;
   @Input() iconPlacement?: 'left' | 'right' = 'left';
   @Input() isFloating?: boolean = false;
-  @Input() isIconButton?: boolean = false;
   @Input() hideShadow?: boolean = false;
 
   @ContentChild(IconComponent) icon: IconComponent;

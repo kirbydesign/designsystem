@@ -94,11 +94,10 @@ Button[kirby-button] {
   }
 
   &.icon-button {
-    $icon-btn-size: size('xxl');
+    $icon-btn-size: size('l');
     width: $icon-btn-size;
     height: $icon-btn-size;
-    background-color: get-color('light');
-    border-color: get-color('light');
+    font-size: 24;
   }
   
   Span.icon {
