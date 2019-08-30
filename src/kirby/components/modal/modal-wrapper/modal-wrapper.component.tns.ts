@@ -2,17 +2,18 @@ import { Component, Injector, OnInit } from '@angular/core';
 import { ModalDialogParams } from 'nativescript-angular';
 import { ContentView, ShownModallyData, View } from 'tns-core-modules/ui/content-view';
 import { screen } from 'tns-core-modules/platform';
-import { AnimationCurve } from 'tns-core-modules/ui/enums';
 import * as application from 'tns-core-modules/application';
 declare const android;
 
 import { ModalConfig } from './config/modal-config';
-import { COMPONENT_PROPS, ModalConfigHelper } from './config/modal-config.helper';
+import { COMPONENT_PROPS } from './config/modal-config.helper';
 import { IModalController } from '../services/modal.controller.interface';
+import { NativeScriptAnimationHelper } from '../nativescript-animations/animations.helper.tns-only';
 
 @Component({
   templateUrl: './modal-wrapper.component.html',
   styleUrls: ['./modal-wrapper.component.scss'],
+  providers: [NativeScriptAnimationHelper],
 })
 export class ModalWrapperComponent extends ContentView implements OnInit {
   config: ModalConfig;
@@ -24,6 +25,7 @@ export class ModalWrapperComponent extends ContentView implements OnInit {
   constructor(
     private modalController: IModalController,
     private params: ModalDialogParams,
+    private animationHelper: NativeScriptAnimationHelper,
     injector: Injector
   ) {
     super();
@@ -64,48 +66,17 @@ export class ModalWrapperComponent extends ContentView implements OnInit {
   private animateModal(): void {
     if (this.view.android) {
       if (this.config.flavor === 'drawer') {
-        this.view
-          .animate({
-            translate: { x: 0, y: Number(this.view.height) },
-            duration: 0,
-          })
-          .then(() => {
-            this.view.animate({
-              translate: { x: 0, y: 0 },
-              duration: 200,
-            });
-          });
+        this.animationHelper.animateSlideUpOnAndroid(this.view);
       }
     } else if (this.view.ios) {
-      const viewController = this.view.viewController;
-      // modalTransitionStyle=2 is a fade-in animation
-      viewController.modalTransitionStyle = 2;
-      if (this.config.flavor === 'drawer') {
-        // TODO: the animation starting point should be dependent on the context - bottom of the opening element
-        const animationStartingY = screen.mainScreen.heightDIPs;
-        const modalContainer = <View>this.view.getViewById('modal');
+      // set fade-in transition
+      this.animationHelper.setTransitionStyleIOS(this.view, 2);
 
-        if (modalContainer.isLoaded) {
-          // modalContainer may sometimes be loaded before reaching on('loaded')
-          this.animateSlideUpOniOS(modalContainer, animationStartingY);
-        } else {
-          // modalContainer.on('loaded') prevents Error: Animation cancelled
-          modalContainer.on('loaded', () => {
-            this.animateSlideUpOniOS(modalContainer, animationStartingY);
-            modalContainer.off('loaded');
-          });
-        }
+      if (this.config.flavor === 'drawer') {
+        const modalContainer = <View>this.view.getViewById('modal');
+        this.animationHelper.animateSlideUpOnIOS(modalContainer);
       }
     }
-  }
-
-  private animateSlideUpOniOS(modalContainer: View, animationStartingY: number) {
-    modalContainer.translateY = animationStartingY;
-    modalContainer.animate({
-      translate: { x: 0, y: 0 },
-      curve: AnimationCurve.easeOut,
-      duration: 200,
-    });
   }
 
   getStatusBarHeight() {

@@ -35,6 +35,7 @@
   &.lg {
     font-size: font-size('s');
     height: size('xxl');
+    min-width: 220px;
   }
 
   &.attention-level1 {

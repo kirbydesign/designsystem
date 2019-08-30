@@ -24,7 +24,7 @@ export class ChipExampleComponent {
       }),
   ];
 
-  onSegmentClick(segment) {
+  onSegmentSelect(segment) {
     this.activeTab = segment.id;
   }
 }
