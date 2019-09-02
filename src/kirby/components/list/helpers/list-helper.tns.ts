@@ -1,12 +1,7 @@
 import { RadListView, ListViewEventData } from 'nativescript-ui-listview';
-import { isIOS } from 'tns-core-modules/platform';
-import { View, EventData } from 'tns-core-modules/ui/page/page';
 
 import { LoadOnDemandEventData } from '../list.event';
 import { ListComponent } from './../list.component';
-import { ScssHelper } from '../../../scss/scss-helper';
-
-declare const CGSizeMake: any;
 
 export class ListHelper {
   onLoadOnDemand(component: ListComponent, event: LoadOnDemandEventData) {

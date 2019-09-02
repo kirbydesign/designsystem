@@ -10,7 +10,6 @@ import {
   ViewChild,
 } from '@angular/core';
 import { RadListViewComponent } from 'nativescript-ui-listview/angular/listview-directives';
-import { isIOS } from 'tns-core-modules/platform';
 
 import {
   ListFlexItemDirective,
@@ -22,6 +21,7 @@ import {
 import { LoadOnDemandEvent, LoadOnDemandEventData } from './list.event';
 import { ListHelper } from './helpers/list-helper';
 import { GroupByPipe } from './pipes/group-by.pipe';
+import { isIOS } from '@kirbydesign/designsystem/services/platform/platform.service';
 
 export type ListShape = 'square' | 'rounded';
 
@@ -147,7 +147,6 @@ export class ListComponent implements OnChanges {
   onItemSelect(args: any) {
     this.selectedItem = this.listHelper.getSelectedItem(this.items, args);
     this.itemSelect.emit(this.selectedItem);
-
     if (isIOS) {
       this.listViewRef.listView.refresh(); // IOS needs this to repaint layout after the selected item has changed
     }
