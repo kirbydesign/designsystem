@@ -1,29 +1,34 @@
-@import "../../scss/_native-imports";
+@import "native-imports";
+@import "slide-button.component.shared";
 
 .slide-button-container {
-    width: 256;
-    height: 56;
-    border-radius: 28;
-    background-color: get-color("primary");
-    margin: size('xxxs');
+    width: $slide-button-container-width;
+    height: $slide-button-container-height;
+    $slide-button-container-radius: $slide-button-width/2;
+    border-radius: $slide-button-container-radius;
+    background-color: $slide-button-container-bg-color;
+    margin: $slide-button-spacing;
 
     &.expand {
         width: 100%;
     }
 
     .slide-button {
-        width: 52;
-        height: 52;
-        margin: 2;
+        width: $slide-button-width;
+        height: $slide-button-width;
+        margin: $slide-button-spacing;
         border-radius: 100;
-        background-color: get-color('white');
-        color: get-color('primary-contrast');
+        background-color: $slider-thumb-bg-color;
+        color: $slide-button-text-color;
         font-family: 'kirby';
         font-size: font-size('m');
     }
 
     .slide-button-text {
-        color: get-color('primary-contrast');
+        color: $slide-button-text-color;
         font-size: font-size('n');
+        width: 100%;
+        text-align: center;
+        padding: $slide-button-text-padding;
     }
 }

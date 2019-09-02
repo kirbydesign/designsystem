@@ -1,15 +1,16 @@
-@import "../../scss/web-imports";
+@import "web-imports";
+@import "slide-button.component.shared";
 
 @mixin _slider-thumb() {
   -webkit-appearance: none;
   border-radius: 50%;
-  background-color: get-color('white');
+  background-color: $slider-thumb-bg-color;
   background-image: url('../../icons/svg/arrow-more.svg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: size('m');
-  width: size('xxl');
-  height: size('xxl');
+  width: $slide-button-width;
+  height: $slide-button-width;
   border: none;
   cursor: pointer;
 }
@@ -17,42 +18,40 @@
 :host {
   position: relative;
   display: inline-block;
-  width: 256px;
+  width: $slide-button-container-width;
 
   &[expand='block'] {
     display: block;
     width: 100%;
   }
 
-  .range-container {
-    $padding: 2px;
-
+  .slide-button-container {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: get-color("primary");
-
-    height: size('xxl') + $padding * 2;
-    border-radius: 28px;
+    background-color: $slide-button-container-bg-color;
+    height: $slide-button-container-height;
+    border-radius: $slide-button-container-radius;
   }
 
   @for $i from 1 through 10 {
     $iTenth: $i*10;
     .slide-#{$iTenth}-pct {
-      transition: opacity 0.2s linear;
       opacity: 1-($i/10);
     }
   }
 
-  .range-text {
+  .slide-button-text {
     position: absolute;
-    color: get-color('primary-contrast');
+    color: $slide-button-text-color;
     font-size: font-size('n');
     margin: 0;
     line-height: 1;
     z-index: 1;
-    transition: opacity 0.5s;
+    width: 100%;
+    text-align: center;
+    padding: $slide-button-text-padding;
   }
 
   .slide-button {
