@@ -1,14 +1,15 @@
 <ion-toolbar class="toolbar">
-  <div slot="start" *ngIf="!hideBackButton" (click)="onBackButtonSelected()" class="item-start">
+  <div slot="start" *ngIf="!hideBackButton" (click)="onBackButtonSelect()" class="item-start">
     <kirby-icon name="arrow-back" size="md"></kirby-icon>
   </div>
-  <div slot="end" class="item-middle">
+  <div slot="end" class="item-primary" (click)="onPrimarySelect()">
+    <ng-content select="[primary]"></ng-content>
+    
+  </div>
+  <div slot="end" class="item-secondary" (click)="onSecondarySelect()">
     <ng-content select="[secondary]"></ng-content>
     
   </div>
-  <div slot="end" class="item-end">
-    <ng-content select="[end]"></ng-content>
-    
-  </div>
+  
   <ion-title>{{ title }}</ion-title>
 </ion-toolbar>

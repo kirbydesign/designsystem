@@ -13,23 +13,29 @@ $chip-height: 30px;
   border-radius: $chip-height;
   margin-right: 5px;
   cursor: pointer;
+  background-color: get-color("white");
+  color: get-color("black");
   &:hover,
   &.is-selected {
-    background-color: get-color("medium");
+    background-color: get-color("black");
+    color: get-color("white");
   } 
   
   :host-context(.default),
   :host-context(.kirby-color-brightness-white) {
+    background-color: get-color("white");
+    color: get-color("black");
     &:hover,
     &.is-selected {
-      background-color: get-color("medium");
+      background-color: get-color("black");
+      color: get-color("white");
     } 
   }
 
   :host-context(.kirby-color-brightness-dark) {
-
+    background-color: transparent;
     color: get-color("white");
-
+    
     &:hover,
     &.is-selected {
       background-color: get-color("white");

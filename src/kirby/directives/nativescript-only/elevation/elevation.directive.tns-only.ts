@@ -2,6 +2,7 @@ import { Directive, OnInit, Input, ElementRef, Renderer2 } from '@angular/core';
 import { isAndroid, isIOS } from 'tns-core-modules/platform';
 
 import { ScssHelper } from '../../../scss/scss-helper';
+import { ViewHelper } from '../../../helpers/view-helper.tns-only';
 
 declare const CGSizeMake: any;
 
@@ -18,14 +19,7 @@ export class NativeScriptElevationDirective implements OnInit {
     }
     // Due to a timing issue, the native element is not available initially on Android:
     // https://github.com/NativeScript/nativescript-angular/issues/848
-    if (this.elementRef.nativeElement.ios || this.elementRef.nativeElement.android) {
-      // if we have already loaded the native element, apply the elevation immediately
-      this.applyElevation();
-    } else {
-      this.elementRef.nativeElement.on('loaded', () => {
-        this.applyElevation();
-      });
-    }
+    ViewHelper.invokeOnViewLoaded(this.elementRef.nativeElement, this.applyElevation.bind(this));
   }
 
   private applyElevation() {
