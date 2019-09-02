@@ -1,5 +1,4 @@
-
 export interface LoadingOverlay {
-    showLoadingOverlay(): void;
-    hideLoadingOverlay(): void;
+  showLoadingOverlay(): void;
+  hideLoadingOverlay(): void;
 }
