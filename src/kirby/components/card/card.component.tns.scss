@@ -1,28 +1,22 @@
 @import 'native-imports';
 
-@mixin elevation-margin($value) {
-    margin: $value * (3/2);
-}
-
 .background, 
 .container {
     display: flex;
     flex-direction: column;
 }
 
-.container {    
-    &.elevation-2 {
-        @include elevation-margin(2);
-    }
-
-    &.elevation-4 {
-        @include elevation-margin(4);
-    }
-
+.container {
+    // the max elevation for cards (when highlighted)
+    $max-elevation: 4; 
+    margin: $max-elevation * (3/2) size('xxs');
     border-radius: $border-radius;
     background-color: get-color('white');
 
     .content-wrapper {
+        display: flex;
+        flex-direction: column;
+
         &.padding {
             padding: size('s');
         }
