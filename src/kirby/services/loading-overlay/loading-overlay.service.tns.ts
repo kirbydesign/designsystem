@@ -3,6 +3,7 @@ import { isIOS, isAndroid } from '@kirbydesign/designsystem/services/platform/pl
 import { Color } from 'tns-core-modules/color/color';
 import { LoadingOverlay } from './loading-overlay.interface';
 import { ios } from 'tns-core-modules/utils/utils';
+import { android as androidApplication } from 'tns-core-modules/application';
 import { topmost } from 'tns-core-modules/ui/frame';
 import { ColorHelper } from '@kirbydesign/designsystem/helpers/color-helper';
 
@@ -26,30 +27,36 @@ export class LoadingOverlayService implements LoadingOverlay {
     }
 
     if (isIOS) {
-        ios.getter(UIApplication, UIApplication.sharedApplication).beginIgnoringInteractionEvents();
+      ios.getter(UIApplication, UIApplication.sharedApplication).beginIgnoringInteractionEvents();
 
-        const currentView =  topmost().ios.controller.view;
-        loaderView = UIView.alloc().initWithFrame(CGRectMake(0, 0, 90, 90));
-        loaderView.center = currentView.center;
-        loaderView.layer.cornerRadius = 4;
+      const currentView = topmost().ios.controller.view;
+      loaderView = UIView.alloc().initWithFrame(CGRectMake(0, 0, 90, 90));
+      loaderView.center = currentView.center;
+      loaderView.layer.cornerRadius = 4;
 
-        const bgColor = ColorHelper.getThemeColor('background-color').hex.replace('#', '');
-        loaderView.backgroundColor = new Color("#CC"+bgColor).ios;
+      const bgColor = ColorHelper.getThemeColor('background-color').hex.replace('#', '');
+      loaderView.backgroundColor = new Color('#CC' + bgColor).ios;
 
-        const indicator = UIActivityIndicatorView.alloc().initWithActivityIndicatorStyle(UIActivityIndicatorViewStyle.WhiteLarge);
-        indicator.center = CGPointMake(45, 45);
+      const indicator = UIActivityIndicatorView.alloc().initWithActivityIndicatorStyle(
+        UIActivityIndicatorViewStyle.WhiteLarge
+      );
+      indicator.center = CGPointMake(45, 45);
 
-        const indicatorColor = ColorHelper.getThemeColor('primary').hex;
-        indicator.color = new Color(indicatorColor).ios;
+      const indicatorColor = ColorHelper.getThemeColor('primary').hex;
+      indicator.color = new Color(indicatorColor).ios;
 
-        loaderView.addSubview(indicator);
-        currentView.addSubview(loaderView);
+      loaderView.addSubview(indicator);
+      currentView.addSubview(loaderView);
 
-        indicator.startAnimating();
+      indicator.startAnimating();
     }
 
     if (isAndroid) {
-        loaderView = android.app.ProgressDialog.show(UIApplication.android.foregroundActivity, '', message);
+      loaderView = android.app.ProgressDialog.show(
+        androidApplication.foregroundActivity,
+        '',
+        message
+      );
     }
   }
 
@@ -59,12 +66,12 @@ export class LoadingOverlayService implements LoadingOverlay {
     }
 
     if (isIOS) {
-        loaderView.removeFromSuperview();
-        ios.getter(UIApplication, UIApplication.sharedApplication).endIgnoringInteractionEvents();
+      loaderView.removeFromSuperview();
+      ios.getter(UIApplication, UIApplication.sharedApplication).endIgnoringInteractionEvents();
     }
 
     if (isAndroid) {
-        loaderView.dismiss();
+      loaderView.dismiss();
     }
 
     loaderView = null;
