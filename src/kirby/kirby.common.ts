@@ -27,7 +27,6 @@ import {
   ListSectionHeaderDirective,
 } from './components/list/list.directive';
 import { GroupByPipe } from './components/list/pipes/group-by.pipe';
-import { LoadingOverlayComponent } from './components/loading-overlay/loading-overlay.component';
 import { ActionSheetComponent } from './components/modal/action-sheet/action-sheet.component';
 import { ModalWrapperComponent } from './components/modal/modal-wrapper/modal-wrapper.component';
 import { ActionSheetHelper } from './components/modal/services/action-sheet.helper';
@@ -83,7 +82,6 @@ export const declarations = [
   SlideButtonComponent,
   ToggleComponent,
   EmptyStateComponent,
-  LoadingOverlayComponent,
   ToolbarComponent,
 ];
 

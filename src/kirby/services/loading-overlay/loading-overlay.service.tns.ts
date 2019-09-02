@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { isIOS, isAndroid } from '@kirbydesign/designsystem/services/platform/platform.service';
 import { Color } from 'tns-core-modules/color/color';
-import { LoadingOverlay } from './loading-overlay.interface';
 import { ios } from 'tns-core-modules/utils/utils';
 import { android as androidApplication } from 'tns-core-modules/application';
 import { topmost } from 'tns-core-modules/ui/frame';
+
+import { isIOS, isAndroid } from '@kirbydesign/designsystem/services/platform/platform.service';
+import { LoadingOverlay } from './loading-overlay.interface';
 import { ColorHelper } from '@kirbydesign/designsystem/helpers/color-helper';
 
 declare var android,

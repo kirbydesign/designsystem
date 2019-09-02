@@ -18,7 +18,7 @@ export class LoadingOverlayExampleComponent {
   ) {}
 
   public showLoadingOverlay(showBackdrop: boolean) {
-    this.loadingOverlayService.showLoadingOverlay();
+    this.loadingOverlayService.showLoadingOverlay(showBackdrop);
 
     setTimeout(() => {
       this.loadingOverlayService.hideLoadingOverlay();
