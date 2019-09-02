@@ -21,7 +21,6 @@ export class LoadingOverlayService implements LoadingOverlay {
 
     // Create ComponentPortal that can be attached to a PortalHost
     const spinnerOverlayPortal = new ComponentPortal(LoadingOverlayComponent);
-    this.overlayRef.detachBackdrop();
     const component = this.overlayRef.attach(spinnerOverlayPortal); // Attach ComponentPortal to PortalHost
     component.instance.showBackdrop = showBackdrop;
   }
