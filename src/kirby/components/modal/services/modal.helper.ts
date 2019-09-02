@@ -64,6 +64,8 @@ export class ModalHelper {
         `translateY(${transformYFromTo[1]})`
       );
     } else {
+      // Reset the vertical modal placement to its starting position
+      wrapperElem.style.transform = `translateY(${transformYFromTo[1]})`;
       // fade modals in/out
       backdropAnimation.fromTo('opacity', fadeBackdropFromTo[0], fadeBackdropFromTo[1]);
       wrapperAnimation.fromTo(`opacity`, fadeWrapperFromTo[0], fadeWrapperFromTo[1]);

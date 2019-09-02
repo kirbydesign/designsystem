@@ -1,0 +1,10 @@
+$slide-button-container-width: get-unit-value(256);
+$slide-button-spacing: get-unit-value(2);
+$slide-button-width: get-unit-value(52);
+$slide-button-container-height: $slide-button-width+2*$slide-button-spacing;
+$slide-button-container-bg-color: get-color('primary');
+$slider-thumb-bg-color: get-color('white');
+$slide-button-text-color: get-color('primary-contrast');
+$total-slider-thumb-width: $slide-button-width+$slide-button-spacing*2;
+$slide-button-container-radius: $slide-button-width/2;
+$slide-button-text-padding: 0 $slide-button-container-radius 0 $total-slider-thumb-width;

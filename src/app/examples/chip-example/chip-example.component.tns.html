@@ -1,6 +1,6 @@
 <ScrollView>
     <Stacklayout class="wrapper">
-      <kirby-segmented-control [items]="[{ text: 'Default', id: 'default', checked: true }, { text: 'Themes', id: 'themes' }]" (segmentClick)="onSegmentClick($event)">
+      <kirby-segmented-control [items]="[{ text: 'Default', id: 'default', checked: true }, { text: 'Themes', id: 'themes' }]" (segmentSelect)="onSegmentSelect($event)">
       </kirby-segmented-control>
       <ng-container *ngIf="activeTab === 'default'">
           <WrapLayout orientation="horizontal" class="chip-example">
@@ -10,10 +10,10 @@
       </ng-container>
       <ng-container *ngIf="activeTab === 'themes'">
           <kirby-card [themeColor]="themeColor" class="card">
-          <Stacklayout orientation="horizontal">
+            <WrapLayout orientation="horizontal" margin="20">
               <kirby-chip text="kirby"></kirby-chip>
               <kirby-chip text="kirby" isSelected="true"></kirby-chip>    
-            </Stacklayout>
+            </WrapLayout>
           </kirby-card>
           <ListPicker #themeColorPicker [items]="items"
             textField="text"
