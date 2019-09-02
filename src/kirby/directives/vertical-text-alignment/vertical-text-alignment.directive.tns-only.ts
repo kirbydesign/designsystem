@@ -1,6 +1,8 @@
 import { ElementRef, Input, Directive, OnInit } from '@angular/core';
 import { isAndroid } from 'tns-core-modules/platform';
 
+import { ViewHelper } from '../../helpers/view-helper.tns-only';
+
 declare const android: any;
 
 @Directive({
@@ -15,9 +17,14 @@ export class VerticalTextAlignmentDirective implements OnInit {
 
   ngOnInit() {
     if (isAndroid) {
-      this.elementRef.nativeElement.on('loaded', () => {
-        this.elementRef.nativeElement.android.setGravity(android.view.Gravity.CENTER);
-      });
+      ViewHelper.invokeOnViewLoaded(
+        this.elementRef.nativeElement,
+        this.setGravityOnAndroid.bind(this)
+      );
     }
+  }
+
+  private setGravityOnAndroid() {
+    this.elementRef.nativeElement.android.setGravity(android.view.Gravity.CENTER);
   }
 }
