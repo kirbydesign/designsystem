@@ -106,7 +106,13 @@ Kirby comes bundled with a default set of icons. Make sure the `.svg` files used
           "glob": "**/*.svg",
           "input": "node_modules/ionicons/dist/ionicons/svg",
           "output": "./svg"
-        }
+        },
+        {
+          "glob": "**/*.png",
+          "input": "node_modules/@kirbydesign/designsystem/icons/img",
+          "output": "./assets/kirby/icons/img"
+        },
+   
         ...
       ],
     }

@@ -235,10 +235,10 @@ module.exports = (env) => {
             'nativescript-dev-webpack/style-hot-loader',
             { loader: 'css-loader', options: { url: false } },
             {
-                loader: 'sass-loader',
-                options: {
-                    includePaths: ['src/kirby/scss'],
-                }
+              loader: 'sass-loader',
+              options: {
+                includePaths: ['src/kirby/scss'],
+              },
             },
           ],
         },
@@ -255,9 +255,9 @@ module.exports = (env) => {
               loader: 'sass-loader',
               options: {
                 includePaths: ['src/kirby/scss'],
-              }
-            }
-          ]
+              },
+            },
+          ],
         },
         {
           test: /(?:\.ngfactory\.js|\.ngstyle\.js|\.ts)$/,
@@ -289,6 +289,7 @@ module.exports = (env) => {
         [
           { from: { glob: 'fonts/**' } },
           { from: { glob: 'kirby/icons/fonts/**' }, to: 'fonts', flatten: true },
+          { from: { glob: 'kirby/icons/img/**' }, to: 'assets/img', flatten: true },
           { from: { glob: '**/*.jpg' } },
           { from: { glob: '**/*.png' } },
           { from: 'kirby/components/chart/chart.webview.html', to: 'chart' },

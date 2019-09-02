@@ -1,5 +1,5 @@
 <ActionBar class="toolbar">
-  <NavigationButton  icon="~/assets/images/arrow-back.png" [visibility]="!hideBackButton && isAndroid ? 'visible' : 'collapsed'" (tap)="onBackButtonSelect()">
+  <NavigationButton  icon="~/assets/img/arrow-back.png" [visibility]="!hideBackButton && isAndroid ? 'visible' : 'collapsed'" (tap)="onBackButtonSelect()">
   </NavigationButton>
   <ActionItem *ngIf="!hideBackButton && !isAndroid" ios.position="left" (tap)="onBackButtonSelect()">
   <StackLayout orientation="horizontal">
