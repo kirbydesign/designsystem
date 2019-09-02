@@ -25,7 +25,6 @@
     width: 100%;
   }
 
-  $slide-button-container-radius: $slide-button-width/2;
   .slide-button-container {
     width: 100%;
     display: flex;
@@ -52,7 +51,7 @@
     z-index: 1;
     width: 100%;
     text-align: center;
-    padding: 0 $slide-button-container-radius 0 $total-slider-thumb-width;
+    padding: $slide-button-text-padding;
   }
 
   .slide-button {
