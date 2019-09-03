@@ -53,7 +53,8 @@ $z-layers: (
   default: 1,
   segmentBadge: 2,
   modal-overlay: 900,
-  modal: 901
+  modal: 901,
+  loading-overlay: 1001
 );
 
 $border-radius: get-unit-value(20);

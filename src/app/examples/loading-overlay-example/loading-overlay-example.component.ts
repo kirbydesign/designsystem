@@ -12,10 +12,7 @@ export class LoadingOverlayExampleComponent {
   public isLoading = false;
   public showBackdrop = false;
 
-  constructor(
-    private modalController: ModalController,
-    private loadingOverlayService: LoadingOverlayService
-  ) {}
+  constructor(private loadingOverlayService: LoadingOverlayService) {}
 
   public showWrapperLoadingOverlay(showBackdrop: boolean) {
     this.showBackdrop = showBackdrop;
@@ -26,7 +23,7 @@ export class LoadingOverlayExampleComponent {
     }, 5000);
   }
 
-  public showFullPageLoadingOverlay(showBackdrop: boolean) {
+  public showFullscreenLoadingOverlay(showBackdrop: boolean) {
     this.loadingOverlayService.showLoadingOverlay(showBackdrop);
 
     setTimeout(() => {

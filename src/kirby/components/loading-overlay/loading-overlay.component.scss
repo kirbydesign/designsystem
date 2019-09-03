@@ -9,7 +9,7 @@
         height: 100%;
         width: 100%;
         position: absolute;
-        z-index: z(modal-overlay);
+        z-index: z('loading-overlay');
         opacity: 0.8;
         display: flex;
         background: transparent;
