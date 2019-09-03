@@ -22,6 +22,7 @@ import { LoadOnDemandEvent, LoadOnDemandEventData } from './list.event';
 import { ListHelper } from './helpers/list-helper';
 import { GroupByPipe } from './pipes/group-by.pipe';
 import { ListSwipeAction } from './list-swipe-action';
+import { ThemeColor } from './../../helpers/theme-color.type';
 
 export type ListShape = 'square' | 'rounded';
 
@@ -158,20 +159,39 @@ export class ListComponent implements OnInit, OnChanges {
     return index;
   }
 
-  getSwipeActionsSide(side: 'left' | 'right'): ListSwipeAction[] {
-    return this.swipeActions.filter((sa) => sa.position === side);
+  getSwipeActionsSide(side: 'left' | 'right', item: any): ListSwipeAction[] {
+    return this.swipeActions.filter((sa) => {
+      if (sa.isDisabled instanceof Function && sa.isDisabled(item)) {
+        return false;
+      }
+      if (sa.isDisabled === true) {
+        return false;
+      }
+      return sa.position === side;
+    });
   }
 
   getSwipeActionIconName(swipeAction: ListSwipeAction, item: any): string {
-    return item[swipeAction.swipeActionFlag] && swipeAction.altIconName
-      ? swipeAction.altIconName
-      : swipeAction.iconName;
+    if (!swipeAction.iconName) return;
+
+    if (swipeAction.iconName instanceof Function) {
+      return swipeAction.iconName(item);
+    }
+    return swipeAction.iconName;
   }
 
   getSwipeActionTitle(swipeAction: ListSwipeAction, item: any): string {
-    return item[swipeAction.swipeActionFlag] && swipeAction.altTitle
-      ? swipeAction.altTitle
-      : swipeAction.title;
+    if (swipeAction.title instanceof Function) {
+      return swipeAction.title(item);
+    }
+    return swipeAction.title;
+  }
+
+  getSwipeActionThemeColor(swipeAction: ListSwipeAction, item: any): ThemeColor {
+    if (swipeAction.themeColor instanceof Function) {
+      return swipeAction.themeColor(item);
+    }
+    return swipeAction.themeColor;
   }
 
   onSwipeActionSelect(swipeAction: ListSwipeAction, item: any): void {

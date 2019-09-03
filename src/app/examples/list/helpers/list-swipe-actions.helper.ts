@@ -21,29 +21,27 @@ export class ListSwipeActionsHelper {
 
   private setUpSwipeActions() {
     this.swipeActions.push({
-      swipeActionFlag: 'archived',
       position: 'left',
       title: 'Archive',
-      altTitle: 'Unarchive',
       themeColor: 'warning',
       onSelected: this.onArchiveItem,
+      isDisabled: (item) => item.archived || item.id === 3,
     });
     this.swipeActions.push({
-      swipeActionFlag: 'flagged',
       position: 'left',
       title: 'Flag',
-      iconName: 'attach',
-      altIconName: 'moneybag',
+      iconName: (item) => (item.flagged ? null : 'attach'),
       themeColor: 'success',
       onSelected: this.onFlagItem,
+      isDisabled: (item) => item.id === 3,
     });
     this.swipeActions.push({
-      swipeActionFlag: 'deleted',
       position: 'right',
-      title: 'Delete',
+      title: (item) => (item.deleted ? 'UnDelete' : 'Delete'),
       iconName: 'trash',
-      themeColor: 'danger',
+      themeColor: (item) => (item.deleted ? 'warning' : 'danger'),
       onSelected: this.onDeleteItem,
+      isDisabled: (item) => item.id === 3,
     });
   }
 

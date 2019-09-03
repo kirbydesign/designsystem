@@ -16,7 +16,7 @@
       </ion-item-divider>
 
       <div class="list-items">
-        <ion-item-sliding *ngFor="let item of section.items; let idx = index;trackBy: trackByFn" [attr.disabled]="isSwipingDisabled">
+        <ion-item-sliding *ngFor="let item of section.items; let idx = index;trackBy: trackByFn" [disabled]="isSwipingDisabled">
           <ng-container *ngTemplateOutlet="swipeActions; context: { $implicit: item }"></ng-container>
           <ion-item [class.has-divider]="showDivider"
                     [class.selectable]="isSelectable"
@@ -35,7 +35,7 @@
   </ng-container>
  
   <ng-template #normalList>
-    <ion-item-sliding *ngFor="let item of items;trackBy: trackByFn" [attr.disabled]="isSwipingDisabled"> 
+    <ion-item-sliding *ngFor="let item of items;trackBy: trackByFn" [disabled]="isSwipingDisabled"> 
       <ng-container *ngTemplateOutlet="swipeActions; context: { $implicit: item }"></ng-container>
       <ion-item [class.has-divider]="showDivider"
                 [class.selectable]="isSelectable"
@@ -62,33 +62,34 @@
 
  <!-- Swipe Action templates -->
 <ng-template #swipeActions let-item>
-  <ion-item-options *ngIf="getSwipeActionsSide('left') && getSwipeActionsSide('left').length > 0" side="start"> 
-    <ng-container *ngTemplateOutlet="swipeAction; context: { $implicit: item, swipeActions: getSwipeActionsSide('left') }"></ng-container>
+  <ion-item-options *ngIf="getSwipeActionsSide('left', item) && getSwipeActionsSide('left', item).length > 0" side="start"> 
+    <ng-container *ngTemplateOutlet="swipeAction; context: { $implicit: item, swipeActions: getSwipeActionsSide('left', item) }"></ng-container>
   </ion-item-options>
   
-  <ion-item-options  *ngIf="getSwipeActionsSide('left') && getSwipeActionsSide('left').length > 0" side="end">
-    <ng-container *ngTemplateOutlet="swipeAction; context: { $implicit: item, swipeActions: getSwipeActionsSide('right') }"></ng-container>
+  <ion-item-options  *ngIf="getSwipeActionsSide('right', item) && getSwipeActionsSide('right', item).length > 0" side="end">
+    <ng-container *ngTemplateOutlet="swipeAction; context: { $implicit: item, swipeActions: getSwipeActionsSide('right', item) }"></ng-container>
   </ion-item-options>
 </ng-template>
 
 <ng-template #swipeAction let-item let-swipeActions="swipeActions">
   <div class="swipe-action">
-    <ion-item-option
-      *ngFor="let swipeAction of swipeActions" 
-      [ngClass]="swipeAction.themeColor"
-      (click)="onSwipeActionSelect(swipeAction, item)"
-    >
-      <div class="item-content">
-        <kirby-icon 
-          *ngIf="swipeAction.iconName" 
-          size="sm" 
-          [name]="getSwipeActionIconName(swipeAction, item)"
-        >
-        </kirby-icon>
-        <ion-label>
-          {{ getSwipeActionTitle(swipeAction, item) }}
-        </ion-label>
-      </div>
-    </ion-item-option>
+    <ng-container  *ngFor="let swipeAction of swipeActions" >
+      <ion-item-option
+        [ngClass]="getSwipeActionThemeColor(swipeAction, item)"
+        (click)="onSwipeActionSelect(swipeAction, item)"
+      >
+        <div class="item-content" >
+          <kirby-icon 
+            *ngIf="getSwipeActionIconName(swipeAction, item)" 
+            size="sm" 
+            [name]="getSwipeActionIconName(swipeAction, item)"
+          >
+          </kirby-icon>
+          <ion-label>
+            {{ getSwipeActionTitle(swipeAction, item) }}
+          </ion-label>
+        </div>
+      </ion-item-option>
+    </ng-container>
   </div>
 </ng-template>

@@ -1,12 +1,10 @@
 import { ThemeColor } from '../../helpers/theme-color.type';
 
 export interface ListSwipeAction {
-  swipeActionFlag: string;
   position: 'left' | 'right';
-  title: string;
-  altTitle?: string;
-  iconName?: string;
-  altIconName?: string;
-  themeColor?: ThemeColor;
+  title: ((item: any) => string) | string;
+  iconName?: ((item: any) => string) | string;
+  themeColor?: ((item: any) => ThemeColor) | ThemeColor;
   onSelected: (item: any) => void;
+  isDisabled?: ((item: any) => boolean) | boolean;
 }
