@@ -8,8 +8,6 @@ import {
   Output,
   TemplateRef,
 } from '@angular/core';
-import { ReplaySubject } from 'rxjs';
-import { first } from 'rxjs/operators';
 
 import {
   ListFlexItemDirective,
