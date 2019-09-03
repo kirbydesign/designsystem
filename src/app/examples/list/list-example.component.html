@@ -57,6 +57,19 @@
 
 <hr />
 
+<h2>List with colored items:</h2>
+<kirby-list [items]="items" (itemSelect)="onItemSelect($event)" showDivider="true">
+  <kirby-list-item
+    *kirbyListItem="let item"
+    [item]="item"
+    [title]="item.title"
+    [themeColor]="item.color"
+    [amount]="item.amount"
+  ></kirby-list-item>
+</kirby-list>
+
+ <hr />
+
 <h2>List with header and footer:</h2>
 <kirby-list [items]="items" (itemSelect)="onItemSelect($event)">
   

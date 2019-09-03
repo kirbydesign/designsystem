@@ -60,6 +60,20 @@ export class ListComponent implements OnChanges {
    * Determines if list row text should turn bold on selection
    */
   @Input() markSelectedRow = false;
+  
+  itemColorMap = new Map<number, string>();
+
+  setColorForItem(themeColor: string, item: any) {
+    const itemIdx = this.getIdxForItem(item);
+
+    setTimeout(() => {
+      this.itemColorMap.set(itemIdx, themeColor);
+    });
+  }
+
+  getIdxForItem(item: any) {
+    return this.items.findIndex((itemToFind) => itemToFind === item);
+  }
 
   /**
    * Determine outline shape of:

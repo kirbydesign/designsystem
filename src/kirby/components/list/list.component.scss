@@ -1,4 +1,4 @@
-@import '../../scss/web-imports';
+@import 'web-imports';
 
 $divider-color: get-color('background-color');
 $background-color-hover: get-color('background-color');
@@ -36,8 +36,20 @@ $shadow: get-elevation(2);
       margin-bottom: $outline-width;
       background-color: $background-color-hover;
     }
-  }
 
+    $list-colors: ('white', 'light');
+    @each $color-name, $color-value in $list-colors {
+       &.#{$color-name} {
+               background-color: #{get-color($color-name)};
+               &:hover {
+                   background-color: #{get-color($color-name+'-tint')};
+               }
+               &:focus {
+                   background-color: #{get-color($color-name+'-shade')};
+               }
+           }
+    }
+  }
 
   &.has-sections {
     ion-list {

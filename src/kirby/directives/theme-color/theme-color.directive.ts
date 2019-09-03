@@ -8,7 +8,8 @@ import { ColorHelper } from '../../helpers/color-helper';
   selector: `kirby-card[themeColor],
              kirby-badge[themeColor],
              kirby-icon[themeColor],
-             kirby-toolbar[themeColor]`,
+             kirby-toolbar[themeColor],
+             ion-item[themeColor]`,
 })
 export class ThemeColorDirective {
   @HostBinding('class.default')

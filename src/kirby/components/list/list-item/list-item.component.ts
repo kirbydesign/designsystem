@@ -1,11 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
 
+import { ListComponent } from '../list.component';
+
 @Component({
   selector: 'kirby-list-item',
   templateUrl: './list-item.component.html',
   styleUrls: ['./list-item.component.scss'],
 })
-export class ListItemComponent implements OnInit {
+export class ListItemComponent {
   @Input() item: any = {};
 
   @Input()
@@ -40,11 +42,25 @@ export class ListItemComponent implements OnInit {
     this.item.subTitle = s;
   }
 
+  private _themeColor: string;
+
+  get themeColor() {
+    return this._themeColor;
+  }
+
+  /*
+    Setting the color theme on the list component.
+    Needs to have item set for list component to identify item index.
+  */
+  @Input()
+  set themeColor(color: string) {
+    this._themeColor = color;
+    this.listComponent.setColorForItem(color, this.item);
+  }
+
   get subTitle(): string {
     return this.item.subTitle ? this.item.subTitle : null;
   }
 
-  constructor() {}
-
-  ngOnInit() {}
+  constructor(private listComponent: ListComponent) {}
 }
