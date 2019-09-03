@@ -1,6 +1,5 @@
 <GridLayout rows="*"> <!-- GridLayout kept for iOS compability -->
   <RadListView
-    #list
     loadOnDemandMode="Auto"
     (loadMoreDataRequested)="onLoadOnDemand($event)"
     [groupingFunction]="getSectionName"
@@ -9,7 +8,7 @@
     <!-- ITEM -->
     <ng-template tkListItemTemplate let-item="item" let-index="index">
       <StackLayout [kirbyElevation]="2" [iosMasksToBounds]="true">
-        <StackLayout id="row" class="row"
+        <StackLayout class="row"
           [class.divider]="showDivider"
           [class.rounded]="shape === 'rounded'"
           [class.first]="isFirstItem(item, index)"
@@ -24,7 +23,6 @@
         </StackLayout>
       </StackLayout>
     </ng-template>
-
 
     <!-- SECTION HEADER-->
     <ng-template let-section="category" tkGroupTemplate *ngIf="isSectionsEnabled">
@@ -51,45 +49,6 @@
     </ng-template>
     <ng-template tkListViewFooter *ngIf="listFooterTemplate">
       <ng-container *ngTemplateOutlet="listFooterTemplate"></ng-container>
-    </ng-template>
-
-    <!-- SWIPE ACTIONS -->
-    <ng-template tkListItemSwipeTemplate *ngIf="!isSwipingDisabled">
-      <GridLayout id="swipe-actions-container" columns="auto, *, auto">
-        <GridLayout id="swipe-actions-left" 
-          col="0" 
-          visibility="hidden"
-          [columns]="'auto,'.repeat(getSwipeActionsSide('left').length -1) + 'auto'" >
-          <ng-container *ngTemplateOutlet="swipeActionTemplate; context: { swipeActions: getSwipeActionsSide('left') }"></ng-container>
-        </GridLayout>
-        <GridLayout id="swipe-actions-right" 
-          col="2" 
-          visibility="hidden"
-          [columns]="'*,'.repeat(getSwipeActionsSide('right').length -1) + '*'">
-          <ng-container *ngTemplateOutlet="swipeActionTemplate; context: { swipeActions: getSwipeActionsSide('right') }"></ng-container>  
-        </GridLayout>
-      </GridLayout>
-    </ng-template>
-
-
-    <!-- SWIPE ACTION TEMPLATE -->
-    <ng-template #swipeActionTemplate let-swipeActions="swipeActions">
-      <GridLayout *ngFor="let swipeAction of swipeActions; let actionIndex = index" [col]="actionIndex" class="swipe-action" [ngClass]="swipeAction.themeColor">
-        <GridLayout  
-          rows="auto,auto"
-          columns="auto"
-          verticalAlignment="center" 
-          horizontalAlignment="center"
-          (tap)="onSwipeActionSelect(swipeAction, null)">
-          <kirby-icon *ngIf="swipeAction.iconName" row="0" 
-            [name]="getSwipeActionIconName(swipeAction, null)">
-          </kirby-icon>
-          <Label row="1" 
-            textWrap="true"
-            [text]="getSwipeActionTitle(swipeAction, null)">
-          </Label>
-        </GridLayout>
-      </GridLayout>
     </ng-template>
   </RadListView>
 </GridLayout>

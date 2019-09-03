@@ -56,18 +56,4 @@ $row-padding-top: size('s');
       }
     }
   }
-
-  .swipe-action {
-    background-color: #{get-color('primary')};
-    color: #{get-color('primary-contrast')};
-    text-align: center;
-    padding: 0 size('s');
-
-    @each $color-name, $color-value in $main-colors {
-        &.#{$color-name} {
-            background-color: #{get-color($color-name)};
-            color: #{get-color($color-name+'-contrast')};
-        }
-    }
-  }
 }
