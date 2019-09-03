@@ -8,6 +8,8 @@ import {
   Output,
   TemplateRef,
 } from '@angular/core';
+import { ReplaySubject } from 'rxjs';
+import { first } from 'rxjs/operators';
 
 import {
   ListFlexItemDirective,
@@ -19,6 +21,7 @@ import {
 import { LoadOnDemandEvent, LoadOnDemandEventData } from './list.event';
 import { ListHelper } from './helpers/list-helper';
 import { GroupByPipe } from './pipes/group-by.pipe';
+import { ThemeColor } from '@kirbydesign/designsystem/helpers/theme-color.type';
 
 export type ListShape = 'square' | 'rounded';
 
@@ -38,8 +41,28 @@ export class ListComponent implements OnChanges {
    * Provide items for the list to render. Items must be provided in the order you expect them to be rendered.
    */
 
+  private items$ = new ReplaySubject<any[]>(1);
+  private _items: any[];
+
+  get items() {
+    return this._items;
+  }
+
   @Input()
-  public items: any[];
+  set items(items) {
+    this._items = items;
+    this.items$.next(items);
+  }
+
+  @Input()
+  set itemColorCb(cb: (item: any) => ThemeColor) {
+    this.items$.pipe(first()).subscribe((items) => {
+      items.forEach((itm, idx) => {
+        const color = cb(itm);
+        this.itemColorMap.set(idx, color);
+      });
+    });
+  }
 
   /**
    * Callback to determine name of section. Sections will be ordered alphabetically.
@@ -61,7 +84,6 @@ export class ListComponent implements OnChanges {
    */
   @Input() markSelectedRow = false;
 
-  @Input()
   itemColorMap = new Map<number, string>();
 
   setColorForItem(themeColor: string, item: any) {

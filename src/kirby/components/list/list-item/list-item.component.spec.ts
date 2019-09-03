@@ -11,7 +11,7 @@ describe('ListItemComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ListItemComponent],
-      providers: [MockComponent(ListComponent)],
+      providers: [{ provide: ListComponent, useValue: MockComponent(ListComponent) }],
     }).compileComponents();
   }));
 
