@@ -6,6 +6,6 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./loading-overlay.component.scss'],
 })
 export class LoadingOverlayComponent {
-  @Input() showBackdrop = true;
-  constructor() {}
+  @Input() public isLoading = true;
+  @Input() public showBackdrop = true;
 }

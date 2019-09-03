@@ -1,5 +1,6 @@
-<div>
-  <button kirby-button expand="block" attentionLevel="3" (click)="showAlert()">Show alert</button>
-  <button kirby-button expand="block" attentionLevel="4" (click)="showLoadingOverlay(true)">Show loading overlay</button>
-  <button kirby-button expand="block" attentionLevel="4" (click)="showLoadingOverlay(false)">Show loading overlay without backdrop</button>
-</div>
+<kirby-loading-overlay [isLoading]="isLoading" [showBackdrop]="showBackdrop">
+  <button kirby-button size="lg" expand="block" (click)="showFullPageLoadingOverlay(true)">Show full page loading overlay</button>
+  <button kirby-button size="lg" expand="block" (click)="showFullPageLoadingOverlay(false)">Show full page loading overlay without backdrop</button>
+  <button kirby-button size="lg" expand="block" (click)="showWrapperLoadingOverlay(true)">Show wrapper loading overlay</button>
+  <button kirby-button size="lg" expand="block" (click)="showWrapperLoadingOverlay(false)">Show wrapper loading overlay without backdrop</button>
+</kirby-loading-overlay>

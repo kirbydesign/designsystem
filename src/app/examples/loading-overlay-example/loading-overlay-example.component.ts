@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { AlertConfig, ModalController } from '@kirbydesign/designsystem/modal';
-import { LoadingOverlayService } from '@kirbydesign/designsystem/services/loading-overlay/loading-overlay.service';
+import { LoadingOverlayService } from '@kirbydesign/designsystem/components/loading-overlay/fullscreen-loading-overlay/loading-overlay.service';
 
 @Component({
   selector: 'kirby-loading-overlay-example',
@@ -17,7 +17,16 @@ export class LoadingOverlayExampleComponent {
     private loadingOverlayService: LoadingOverlayService
   ) {}
 
-  public showLoadingOverlay(showBackdrop: boolean) {
+  public showWrapperLoadingOverlay(showBackdrop: boolean) {
+    this.showBackdrop = showBackdrop;
+    this.isLoading = true;
+
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 5000);
+  }
+
+  public showFullPageLoadingOverlay(showBackdrop: boolean) {
     this.loadingOverlayService.showLoadingOverlay(showBackdrop);
 
     setTimeout(() => {

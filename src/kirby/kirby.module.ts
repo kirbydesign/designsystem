@@ -9,18 +9,20 @@ import { InfiniteScrollDirective } from './components/list/directives/infinite-s
 import { ModalWrapperComponent } from './components/modal/modal-wrapper/modal-wrapper.component';
 import { ActionSheetComponent } from './components/modal/action-sheet/action-sheet.component';
 import { KeyHandlerDirective } from '@kirbydesign/designsystem/directives/key-handler/key-handler.directive';
-import { LoadingOverlayComponent } from './services/loading-overlay/loading-overlay/loading-overlay.component';
+import { FullscreenLoadingOverlayComponent } from './components/loading-overlay/fullscreen-loading-overlay/fullscreen-loading-overlay.component';
+import { LoadingOverlayComponent } from './components/loading-overlay/loading-overlay.component';
 
 @NgModule({
   imports: [CommonModule, RouterModule, OverlayModule, IonicModule.forRoot()],
   declarations: [
     InfiniteScrollDirective,
-    KeyHandlerDirective,
+    FullscreenLoadingOverlayComponent,
     LoadingOverlayComponent,
+    KeyHandlerDirective,
     ...declarations,
   ],
   providers: [...providerDeclarations],
-  entryComponents: [ModalWrapperComponent, ActionSheetComponent, LoadingOverlayComponent],
-  exports: [InfiniteScrollDirective, ...declarations],
+  entryComponents: [ModalWrapperComponent, ActionSheetComponent, FullscreenLoadingOverlayComponent],
+  exports: [InfiniteScrollDirective, LoadingOverlayComponent, ...declarations],
 })
 export class KirbyModule {}
