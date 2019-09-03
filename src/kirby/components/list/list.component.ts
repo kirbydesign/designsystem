@@ -60,7 +60,7 @@ export class ListComponent implements OnChanges {
    * Determines if list row text should turn bold on selection
    */
   @Input() markSelectedRow = false;
-  
+
   @Input()
   itemColorMap = new Map<number, string>();
 
