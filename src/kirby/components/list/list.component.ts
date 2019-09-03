@@ -61,6 +61,7 @@ export class ListComponent implements OnChanges {
    */
   @Input() markSelectedRow = false;
   
+  @Input()
   itemColorMap = new Map<number, string>();
 
   setColorForItem(themeColor: string, item: any) {
