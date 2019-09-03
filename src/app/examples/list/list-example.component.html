@@ -58,37 +58,24 @@
 <hr />
 
 <h2>List with colored items:</h2>
-<kirby-list [items]="items" (itemSelect)="onItemSelect($event)" showDivider="true">
+<kirby-list [items]="items" [itemColorCb]="itemColorCb" (itemSelect)="onItemSelect($event)" showDivider="true">
   <kirby-list-item
     *kirbyListItem="let item"
     [item]="item"
     [title]="item.title"
-    [themeColor]="item.color"
     [amount]="item.amount"
   ></kirby-list-item>
 </kirby-list>
 
  <hr />
 
- <h2>List with colored item with sections:</h2>
-<kirby-list [items]="items" (itemSelect)="onItemSelect($event)" showDivider="true">
-  <kirby-list-item
-    *kirbyListItem="let item"
-    [item]="item"
-    [title]="item.title"
-    [themeColor]="item.color"
-    [amount]="item.amount"
-  ></kirby-list-item>
-</kirby-list>
-
- <hr />
-
- <kirby-list
-  [items]="items"
-  (itemSelect)="onItemSelect($event)"
-  [getSectionName]="getSectionName"
-  [itemColorCb]="itemColorCb"
-  [showDivider]="true">
+ <h2>List with sections and colored items:</h2>
+  <kirby-list
+    [items]="items"
+    (itemSelect)="onItemSelect($event)"
+    [getSectionName]="getSectionName"
+    [itemColorCb]="itemColorCb"
+    [showDivider]="true">
   <!-- kirby-list-header is not supported in conjunction with *kirbyListSectionHeader due to a bug in RadListView on iOS -->
   <kirby-list-section-header
     *kirbyListSectionHeader="let section"

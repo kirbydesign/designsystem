@@ -41,28 +41,11 @@ export class ListComponent implements OnChanges {
    * Provide items for the list to render. Items must be provided in the order you expect them to be rendered.
    */
 
-  private items$ = new ReplaySubject<any[]>(1);
-  private _items: any[];
-
-  get items() {
-    return this._items;
-  }
+  @Input()
+  items: any[];
 
   @Input()
-  set items(items) {
-    this._items = items;
-    this.items$.next(items);
-  }
-
-  @Input()
-  set itemColorCb(cb: (item: any) => ThemeColor) {
-    this.items$.pipe(first()).subscribe((items) => {
-      items.forEach((itm, idx) => {
-        const color = cb(itm);
-        this.itemColorMap.set(idx, color);
-      });
-    });
-  }
+  itemColorCb: (item: any) => ThemeColor;
 
   /**
    * Callback to determine name of section. Sections will be ordered alphabetically.
@@ -83,20 +66,6 @@ export class ListComponent implements OnChanges {
    * Determines if list row text should turn bold on selection
    */
   @Input() markSelectedRow = false;
-
-  itemColorMap = new Map<number, string>();
-
-  setColorForItem(themeColor: string, item: any) {
-    const itemIdx = this.getIdxForItem(item);
-
-    setTimeout(() => {
-      this.itemColorMap.set(itemIdx, themeColor);
-    });
-  }
-
-  getIdxForItem(item: any) {
-    return this.items.findIndex((itemToFind) => itemToFind === item);
-  }
 
   /**
    * Determine outline shape of:

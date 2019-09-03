@@ -8,10 +8,16 @@ import { InfiniteScrollDirective } from './components/list/directives/infinite-s
 import { ModalWrapperComponent } from './components/modal/modal-wrapper/modal-wrapper.component';
 import { ActionSheetComponent } from './components/modal/action-sheet/action-sheet.component';
 import { KeyHandlerDirective } from '@kirbydesign/designsystem/directives/key-handler/key-handler.directive';
+import { ListItemColorDirective } from './components/list/list-item-color.directive';
 
 @NgModule({
   imports: [CommonModule, RouterModule, IonicModule.forRoot()],
-  declarations: [InfiniteScrollDirective, KeyHandlerDirective, ...declarations],
+  declarations: [
+    InfiniteScrollDirective,
+    ListItemColorDirective,
+    KeyHandlerDirective,
+    ...declarations,
+  ],
   providers: [...providerDeclarations],
   entryComponents: [ModalWrapperComponent, ActionSheetComponent],
   exports: [InfiniteScrollDirective, ...declarations],
