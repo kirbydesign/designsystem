@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { of } from 'rxjs';
 
 import { BaseListComponent } from '../base-list.component';
-import { LoadOnDemandEvent } from './../../../../kirby/components/list/list.event';
+import { LoadOnDemandEvent } from '../../../../kirby/components/list/list.event';
 
 @Component({
   selector: 'kirby-list-load-on-demand-example',

@@ -9,7 +9,6 @@ import { ListComponent } from './list.component';
 import { SpinnerComponent } from '../spinner/spinner.component';
 import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
 import { ListHelper } from './helpers/list-helper';
-import { ListSwipeActionsHelper } from './helpers/list-swipe-actions-helper';
 
 /**
  * We need an actual model item, since WeakMap can't use primitives for keys.
@@ -48,7 +47,7 @@ describe('ListComponent', () => {
       MockComponent(ionic.IonItemGroup),
       MockComponent(ionic.IonItemSliding),
     ],
-    providers: [ListHelper, ListSwipeActionsHelper, GroupByPipe],
+    providers: [ListHelper, GroupByPipe],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
   });
 

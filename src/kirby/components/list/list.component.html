@@ -61,15 +61,11 @@
 </div>
 
  <!-- Swipe Action templates -->
- <!-- TODO: Adding back the comments below ((ionSwipe)=... and adding expandable on ion-item-option) will re-enable full-swiping on each side.  -->
-<!-- They is temporarily disabled for consistency, as full-swiping is currently not implemented in {N} -->
 <ng-template #swipeActions let-item>
-  <!-- <ion-item-options *ngIf="getSwipeActionsSide('left') && getSwipeActionsSide('left').length > 0" side="start" (ionSwipe)="onActionLongSwipeLeft(item)">  -->
-  <ion-item-options *ngIf="getSwipeActionsSide('left') && getSwipeActionsSide('left').length > 0" side="start">
+  <ion-item-options *ngIf="getSwipeActionsSide('left') && getSwipeActionsSide('left').length > 0" side="start"> 
     <ng-container *ngTemplateOutlet="swipeAction; context: { $implicit: item, swipeActions: getSwipeActionsSide('left') }"></ng-container>
   </ion-item-options>
   
-  <!-- <ion-item-options  *ngIf="getSwipeActionsSide('left') && getSwipeActionsSide('left').length > 0" side="end" (ionSwipe)="onActionLongSwipeRight(item)"> -->
   <ion-item-options  *ngIf="getSwipeActionsSide('left') && getSwipeActionsSide('left').length > 0" side="end">
     <ng-container *ngTemplateOutlet="swipeAction; context: { $implicit: item, swipeActions: getSwipeActionsSide('right') }"></ng-container>
   </ion-item-options>

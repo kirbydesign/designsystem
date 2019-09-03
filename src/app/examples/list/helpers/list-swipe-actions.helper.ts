@@ -1,4 +1,4 @@
-import { ListSwipeAction } from '@kirbydesign/designsystem/components/list/helpers/list-swipe-action';
+import { ListSwipeAction } from '@kirbydesign/designsystem/components/list/list-swipe-action';
 
 export class ListSwipeActionsHelper {
   private static instance: ListSwipeActionsHelper;

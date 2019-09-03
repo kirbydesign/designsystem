@@ -20,17 +20,19 @@ import {
 } from './list.directive';
 import { LoadOnDemandEvent, LoadOnDemandEventData } from './list.event';
 import { ListHelper } from './helpers/list-helper';
-import { ListSwipeActionsHelper } from './helpers/list-swipe-actions-helper';
 import { GroupByPipe } from './pipes/group-by.pipe';
-import { ListSwipeAction } from './helpers/list-swipe-action';
+import { ListSwipeAction } from './list-swipe-action';
 
 export type ListShape = 'square' | 'rounded';
+
+declare var require: any;
+const style: any = require('sass-extract-loader!./list.component.scss');
 
 @Component({
   selector: 'kirby-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
-  providers: [ListHelper, ListSwipeActionsHelper, GroupByPipe],
+  providers: [ListHelper, GroupByPipe],
   // Using host property decorator is fine for static values:
   // tslint:disable-next-line:use-host-property-decorator
   host: {
@@ -114,19 +116,10 @@ export class ListComponent implements OnInit, OnChanges {
 
   private orderMap: WeakMap<any, { isFirst: boolean; isLast: boolean }>;
 
-  constructor(
-    private listHelper: ListHelper,
-    private listSwipeActionsHelper: ListSwipeActionsHelper,
-    private groupBy: GroupByPipe
-  ) {}
+  constructor(private listHelper: ListHelper, private groupBy: GroupByPipe) {}
 
   ngOnInit() {
-    if (this.swipeActions) {
-      this.isSwipingDisabled = this.listSwipeActionsHelper.getIsSwipingDisabled();
-      if (this.isSwipingDisabled) {
-        this.listSwipeActionsHelper.closeSwipeActions(this.list);
-      }
-    }
+    this.initialzeSwipeActions();
   }
 
   ngOnChanges(): void {
@@ -140,22 +133,6 @@ export class ListComponent implements OnInit, OnChanges {
     }
     this.isSelectable = this.itemSelect.observers.length > 0;
     this.isLoadOnDemandEnabled = this.loadOnDemand.observers.length > 0;
-  }
-
-  private getItemOrder(item: any): { isFirst: boolean; isLast: boolean } {
-    const defaultOrder = { isFirst: false, isLast: false };
-    if (!item) {
-      return defaultOrder;
-    }
-    if (!this.isSectionsEnabled) {
-      return defaultOrder;
-    }
-    const order = this.orderMap.get(item);
-    if (!order) {
-      console.warn('Order of list item within section not found!');
-      return defaultOrder;
-    }
-    return order;
   }
 
   isFirstItem(item: any, index: number) {
@@ -186,42 +163,24 @@ export class ListComponent implements OnInit, OnChanges {
   }
 
   getSwipeActionIconName(swipeAction: ListSwipeAction, item: any): string {
-    return this.listSwipeActionsHelper.getIsSwipeActionSelected(swipeAction, item) &&
-      swipeAction.altIconName
+    return item[swipeAction.swipeActionFlag] && swipeAction.altIconName
       ? swipeAction.altIconName
       : swipeAction.iconName;
   }
 
   getSwipeActionTitle(swipeAction: ListSwipeAction, item: any): string {
-    return this.listSwipeActionsHelper.getIsSwipeActionSelected(swipeAction, item) &&
-      swipeAction.altTitle
+    return item[swipeAction.swipeActionFlag] && swipeAction.altTitle
       ? swipeAction.altTitle
       : swipeAction.title;
   }
 
   onSwipeActionSelect(swipeAction: ListSwipeAction, item: any): void {
-    this.listSwipeActionsHelper.onSwipeActionSelected(swipeAction, item);
-    this.listSwipeActionsHelper.closeSwipeActions(this.list);
+    swipeAction.onSelected(item);
+    this.list.closeSlidingItems();
   }
 
-  // Web-only
   onResize(): void {
-    this.isSwipingDisabled = this.listSwipeActionsHelper.getIsSwipingDisabled();
-  }
-
-  // {N}-only
-  onSwipeCellStarted(args: any): void {
-    this.listSwipeActionsHelper.onSwipeCellStarted(args);
-  }
-
-  // {N}-only
-  onCellSwiping(args: any): void {
-    this.listSwipeActionsHelper.onCellSwiping(args);
-  }
-
-  // {N}-only
-  onSwipeCellFinished(): void {
-    this.listSwipeActionsHelper.closeSwipeActions(this.list);
+    this.initialzeSwipeActions();
   }
 
   private createOrderMap(
@@ -237,5 +196,31 @@ export class ListComponent implements OnInit, OnChanges {
       });
     });
     return orderMap;
+  }
+
+  private getItemOrder(item: any): { isFirst: boolean; isLast: boolean } {
+    const defaultOrder = { isFirst: false, isLast: false };
+    if (!item) {
+      return defaultOrder;
+    }
+    if (!this.isSectionsEnabled) {
+      return defaultOrder;
+    }
+    const order = this.orderMap.get(item);
+    if (!order) {
+      console.warn('Order of list item within section not found!');
+      return defaultOrder;
+    }
+    return order;
+  }
+
+  private initialzeSwipeActions(): void {
+    const large = style.global['$breakpoints'].value['large'].value;
+    if (this.swipeActions) {
+      this.isSwipingDisabled = window.innerWidth >= large;
+      if (this.isSwipingDisabled) {
+        this.list.closeSlidingItems();
+      }
+    }
   }
 }

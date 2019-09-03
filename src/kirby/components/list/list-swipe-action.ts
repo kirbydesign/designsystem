@@ -1,4 +1,4 @@
-import { ThemeColor } from '../../../helpers/theme-color.type';
+import { ThemeColor } from '../../helpers/theme-color.type';
 
 export interface ListSwipeAction {
   swipeActionFlag: string;

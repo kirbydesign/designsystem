@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { BaseListComponent } from './base-list.component';
-import { ListSwipeAction } from '../../../kirby/components/list/helpers/list-swipe-action';
+import { ListSwipeAction } from '../../../kirby/components/list/list-swipe-action';
 import { ListSwipeActionsHelper } from './helpers/list-swipe-actions.helper';
 
 @Component({
