@@ -33,18 +33,4 @@ export class LoadingOverlayExampleComponent {
       this.loadingOverlayService.hideLoadingOverlay();
     }, 5000);
   }
-
-  public showAlert() {
-    const config: AlertConfig = {
-      title: 'Your alert',
-      message: 'Your alert message',
-      okBtnText: 'Ok',
-      cancelBtnText: 'Cancel',
-    };
-    this.modalController.showAlert(config, this.onAlertClosed);
-  }
-
-  private onAlertClosed(selection: boolean) {
-    console.log(`Alert selection: ${selection}`);
-  }
 }
