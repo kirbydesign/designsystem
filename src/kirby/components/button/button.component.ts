@@ -1,4 +1,6 @@
-import { Component, Input, HostBinding } from '@angular/core';
+import { Component, Input, HostBinding, ContentChild } from '@angular/core';
+
+import { IconComponent } from '../icon/icon.component';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -17,6 +19,11 @@ export class ButtonComponent {
   isAttentionLevel4: boolean;
   @HostBinding('class.destructive')
   destructive: boolean = false; // Default
+  @HostBinding('class.icon-left')
+  public get isIconPlacedLeft(): boolean {
+    return this.iconPlacement === 'left';
+  }
+
   @Input() set attentionLevel(level: '1' | '2' | '3' | '4') {
     this.isAttentionLevel1 = level === '1';
     this.isAttentionLevel2 = level === '2';
@@ -27,4 +34,8 @@ export class ButtonComponent {
     this.destructive = state;
   }
   @Input() expand?: 'full' | 'block';
+  @Input() text?: string;
+  @Input() iconPlacement?: 'left' | 'right' = 'left';
+
+  @ContentChild(IconComponent) icon: IconComponent;
 }

@@ -10,12 +10,23 @@
 <button kirby-button attentionLevel="4" isDestructive="true">Destructive Level 4</button>
 <button kirby-button disabled>Disabled Button</button>
 
+<h2>Button with icon</h2>
+<button kirby-button text="Icon Left">
+  <kirby-icon name="edit"></kirby-icon>
+</button>
+<button kirby-button text="Icon Right" iconPlacement="right">
+  <kirby-icon name="arrow-down"></kirby-icon>
+</button>
+<button kirby-button text="Custom Icon">
+  <kirby-icon customName="football"></kirby-icon>
+</button>
+
 <h2>Button with attention level</h2>
 <kirby-card [themeColor]="themeColor">
-  <button kirby-button attentionLevel="1">Attention Level 1</button>
-  <button kirby-button attentionLevel="2">Attention Level 2</button>
-  <button kirby-button attentionLevel="3">Attention Level 3</button>
-  <button kirby-button attentionLevel="4">Attention Level 4</button>
+  <button kirby-button attentionLevel="1" expand="block">Attention Level 1</button>
+  <button kirby-button attentionLevel="2" expand="block">Attention Level 2</button>
+  <button kirby-button attentionLevel="3" expand="block">Attention Level 3</button>
+  <button kirby-button attentionLevel="4" expand="block">Attention Level 4</button>
 </kirby-card>
 
 
