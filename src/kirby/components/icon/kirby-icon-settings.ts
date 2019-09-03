@@ -46,7 +46,6 @@ export const kirbyIconSettings: IconSettings = {
     { name: 'verify', svg: 'assets/kirby/icons/svg/verify.svg', unicode: 0xe927 },
     { name: 'warning', svg: 'assets/kirby/icons/svg/warning.svg', unicode: 0xe928 },
     { name: 'write-message', svg: 'assets/kirby/icons/svg/write-message.svg', unicode: 0xe929 },
-    { name: 'accounts-outline', svg: 'assets/kirby/icons/svg/accounts-outline.svg', unicode: 0xe900 },
     { name: 'accounts', svg: 'assets/kirby/icons/svg/accounts.svg', unicode: 0xe901 },
     { name: 'backspace', svg: 'assets/kirby/icons/svg/backspace.svg', unicode: 0xee954 },
     { name: 'camera', svg: 'assets/kirby/icons/svg/camera.svg', unicode: 0xe955 },
