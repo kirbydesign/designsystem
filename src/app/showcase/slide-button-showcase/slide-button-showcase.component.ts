@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
+declare var require: any;
 
 @Component({
   selector: 'kirby-slide-button-showcase',
