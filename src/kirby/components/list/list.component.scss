@@ -12,13 +12,6 @@ $shadow: get-elevation(2);
     padding: 0;
   }
 
-  .selectable {
-    cursor: pointer;
-    &:hover {
-      background-color: $background-color-hover;
-    }
-  }
-
   ion-item {
     background-color: get-color('white');
     &:not(:last-of-type).has-divider {
@@ -37,13 +30,20 @@ $shadow: get-elevation(2);
       background-color: $background-color-hover;
     }
 
-    $list-colors: ('white', 'light');
+    &.selectable {
+      cursor: pointer;
+      &:hover {
+        background-color: $background-color-hover;
+      }
+    }
+
+    $list-colors: ('light');
     @each $color-name, $color-value in $list-colors {
        &.#{$color-name} {
                background-color: #{get-color($color-name)};
                color: #{get-color($color-name+'-contrast')};
-               &:hover {
-                   background-color: #{get-color($color-name+'-tint')};
+               &.selectable:hover {
+                 background-color: #{get-color($color-name+'-tint')};
                }
                &:focus {
                    background-color: #{get-color($color-name+'-shade')};
