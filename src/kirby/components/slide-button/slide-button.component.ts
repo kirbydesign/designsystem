@@ -1,5 +1,4 @@
 import { Component, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { TouchGestureEventData } from 'tns-core-modules/ui/gestures/gestures';
 
 import { SlideButtonCommon } from './slide-button.common';
 
