@@ -41,6 +41,7 @@ $shadow: get-elevation(2);
     @each $color-name, $color-value in $list-colors {
        &.#{$color-name} {
                background-color: #{get-color($color-name)};
+               color: #{get-color($color-name+'-contrast')};
                &:hover {
                    background-color: #{get-color($color-name+'-tint')};
                }

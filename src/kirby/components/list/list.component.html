@@ -22,8 +22,7 @@
                   [class.last-in-section]="idx === section.items.length - 1"
                   (click)="onItemSelect(item)"
                   tabindex="0"
-                  kirbyListItemColor
-                  [colorCb]="itemColorCb"
+                  [kirbyListItemColor]="getItemColor"
                   [item]="item"
                   keyHandler>
           <ng-container *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }"></ng-container>
@@ -34,15 +33,14 @@
   </ng-container>
 
   <ng-template #normalList>
-    <ion-item *ngFor="let item of items; let idx = index; trackBy: trackByFn"
+    <ion-item *ngFor="let item of items; trackBy: trackByFn"
               [class.has-divider]="showDivider"
               [class.selectable]="isSelectable"
               [class.selected]="markSelectedRow && item === selectedItem"
               [attr.role]="isSelectable ? 'button' : null"
               (click)="onItemSelect(item)"
               tabindex="0"
-              kirbyListItemColor
-              [colorCb]="itemColorCb"
+              [kirbyListItemColor]="getItemColor"
               [item]="item"
               keyHandler>
       <ng-container *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }"></ng-container>

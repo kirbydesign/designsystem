@@ -43,7 +43,7 @@ export class ListComponent implements OnChanges {
   items: any[];
 
   @Input()
-  itemColorCb: (item: any) => ThemeColor;
+  getItemColor: (item: any) => ThemeColor;
 
   /**
    * Callback to determine name of section. Sections will be ordered alphabetically.

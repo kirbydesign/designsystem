@@ -86,7 +86,6 @@ export class BaseListComponent {
       subTitle: '1799 pcs',
       amount: '18.442 DKK',
       detail: 86,
-      color: 'kirby-color-brightness-white',
     },
     {
       id: 11,
@@ -94,7 +93,6 @@ export class BaseListComponent {
       subTitle: '129 pcs',
       amount: '75.842 DKK',
       detail: -43,
-      color: 'bg-kirby-color-brightness-ligh',
     },
     {
       id: 12,
@@ -102,7 +100,6 @@ export class BaseListComponent {
       subTitle: '36 pcs',
       amount: '99.125 DKK',
       detail: -144,
-      color: 'kirby-color-brightness-dark',
     },
     {
       id: 13,

@@ -58,7 +58,7 @@
 <hr />
 
 <h2>List with colored items:</h2>
-<kirby-list [items]="items" [itemColorCb]="itemColorCb" (itemSelect)="onItemSelect($event)" showDivider="true">
+<kirby-list [items]="items" [getItemColor]="getItemColor" (itemSelect)="onItemSelect($event)" showDivider="true">
   <kirby-list-item
     *kirbyListItem="let item"
     [item]="item"
@@ -74,9 +74,8 @@
     [items]="items"
     (itemSelect)="onItemSelect($event)"
     [getSectionName]="getSectionName"
-    [itemColorCb]="itemColorCb"
+    [getItemColor]="getItemColor"
     [showDivider]="true">
-  <!-- kirby-list-header is not supported in conjunction with *kirbyListSectionHeader due to a bug in RadListView on iOS -->
   <kirby-list-section-header
     *kirbyListSectionHeader="let section"
     [title]="section"
@@ -141,7 +140,6 @@
   (itemSelect)="onItemSelect($event)"
   [getSectionName]="getSectionName"
   [showDivider]="true">
-  <!-- kirby-list-header is not supported in conjunction with *kirbyListSectionHeader due to a bug in RadListView on iOS -->
   <kirby-list-section-header
     *kirbyListSectionHeader="let section"
     [title]="section"

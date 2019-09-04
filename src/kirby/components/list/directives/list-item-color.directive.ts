@@ -5,18 +5,18 @@ import { Directive, Input, Renderer2, ElementRef, OnChanges, SimpleChanges } fro
 })
 export class ListItemColorDirective implements OnChanges {
   @Input()
-  colorCb: (item: any) => string;
+  kirbyListItemColor: (item: any) => string;
 
   @Input() item: any;
 
   constructor(private renderer: Renderer2, private elementRef: ElementRef) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (!this.colorCb || !this.item) {
+    if (!this.kirbyListItemColor || !this.item) {
       return;
     }
 
-    const color = this.colorCb(this.item);
-    this.renderer.addClass(this.elementRef.nativeElement, color);
+    const themeColor = this.kirbyListItemColor(this.item);
+    this.renderer.addClass(this.elementRef.nativeElement, themeColor);
   }
 }
