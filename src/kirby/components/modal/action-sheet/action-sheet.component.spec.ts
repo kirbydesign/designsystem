@@ -17,7 +17,7 @@ import { InfiniteScrollDirective } from '../../list/directives/infinite-scroll.d
 import { CardHeaderComponent } from '../../card/card-header/card-header.component';
 import { ListFlexItemComponent } from '../../list/list-flex-item/list-flex-item.component';
 import { ButtonComponent } from '../../button/button.component';
-import { ThemeColorDirective } from '@kirbydesign/designsystem/directives/theme-color/theme-color.directive';
+import { ListItemColorDirective } from '../../list/directives/list-item-color.directive';
 
 describe('ActionSheetComponent', () => {
   let component: ActionSheetComponent;
@@ -56,7 +56,7 @@ describe('ActionSheetComponent', () => {
         SpinnerComponent,
         InfiniteScrollDirective,
         ButtonComponent,
-        ThemeColorDirective,
+        ListItemColorDirective,
         MockComponent(ionic.IonList),
         MockComponent(ionic.IonListHeader),
         MockComponent(ionic.IonLabel),
