@@ -42,9 +42,6 @@ $shadow: get-elevation(2);
        &.#{$color-name} {
                background-color: #{get-color($color-name)};
                color: #{get-color($color-name+'-contrast')};
-               &.selectable:hover {
-                 background-color: #{get-color($color-name+'-tint')};
-               }
                &:focus {
                    background-color: #{get-color($color-name+'-shade')};
                }
