@@ -2,9 +2,8 @@ import { Component, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef } from
 
 import { SlideButtonCommon } from './slide-button.common';
 
-export const SLIDE_BUTTON_SELECTOR = 'kirby-slide-button';
 @Component({
-  selector: SLIDE_BUTTON_SELECTOR,
+  selector: 'kirby-slide-button',
   templateUrl: './slide-button.component.html',
   styleUrls: ['./slide-button.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
