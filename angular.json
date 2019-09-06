@@ -45,9 +45,6 @@
             "styles": [
               "src/styles.scss"
             ],
-            "stylePreprocessorOptions": {
-              "includePaths": ["src/kirby/scss"]
-            },
             "scripts": []
           },
           "configurations": {
@@ -107,9 +104,6 @@
                 "output": "./assets/kirby/icons/svg"
               }
             ],
-            "stylePreprocessorOptions": {
-              "includePaths": ["src/kirby/scss"]
-            },
             "sourceMap": true
           }
         },
