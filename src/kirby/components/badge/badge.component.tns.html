@@ -1,9 +1,0 @@
-<GridLayout 
-  class="badge" 
-  columns="*" 
-  rows="auto" 
-  horizontalAlignment="center" 
-  verticalAlignment="center">
-  <Label *ngIf="text" horizontalAlignment="center" [text]="text" class="badge-label"></Label>
-  <ng-content *ngIf="!text" select="kirby-icon"></ng-content>
-</GridLayout>
