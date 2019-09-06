@@ -25,9 +25,7 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/kirby/polyfills",
-              "src/kirby/components/calendar/calendar.webview.html",
-              "src/kirby/components/calendar/calendar.webview.css",
+              "src/kirby/polyfills"
               {
                 "glob": "**/*.svg",
                 "input": "src/kirby/icons/svg",
