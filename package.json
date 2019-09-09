@@ -1,15 +1,6 @@
 {
   "name": "designsystem",
-  "nativescript": {
-    "id": "dk.kirby.design.system",
-    "tns-ios": {
-      "version": "5.4.0"
-    },
-    "tns-android": {
-      "version": "5.4.0"
-    }
-  },
-  "version": "0.0.279",
+  "version": "0.7.2",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -21,18 +12,11 @@
     "lint:fix": "tslint './src/**/*.ts' --fix",
     "e2e": "ng e2e",
     "dist": "ng build --prod --aot --progress false",
-    "android": "tns run android",
-    "android-debug": "tns debug android",
-    "ios": "tns run ios",
-    "ios-debug": "tns debug ios --device 'iPhone X'",
-    "dist:ios": "tns build ios --for-device --provision dk.kirby.design.system --copy-to dist/designsystem.ipa",
-    "dist:android": "tns build android --for-device --copy-to dist/designsystem.apk",
     "pack-copy-to-dist-folder-watch": "cpx \"src\\kirby\\**\\!(*.spec.ts)\" dist-lib --watch",
-    "postinstall": "npm run build-polyfills && npm run transpile:tools && npm run transpile:styles",
+    "postinstall": "npm run build-polyfills && npm run transpile:tools",
     "postversion": "git push && git push --tags",
     "coverage-report": "cat ./coverage/lcov.info | coveralls",
-    "transpile:tools": "tsc -p tools/tslint-rules",
-    "transpile:styles": "sass --style=compressed --no-source-map src/kirby/components/calendar/calendar.webview.scss src/kirby/components/calendar/calendar.webview.css"
+    "transpile:tools": "tsc -p tools/tslint-rules"
   },
   "private": true,
   "dependencies": {
@@ -52,27 +36,15 @@
     "firebase": "6.2.4",
     "highcharts": "7.0.3",
     "moment": "2.24.0",
-    "nativescript-angular": "7.2.1",
-    "nativescript-checkbox": "3.0.3",
-    "nativescript-feedback": "1.3.9",
-    "nativescript-orientation": "2.2.1",
-    "nativescript-platform-css": "1.6.6",
-    "nativescript-theme-core": "1.0.4",
-    "nativescript-ui-chart": "3.11.1",
-    "nativescript-ui-listview": "6.4.2",
-    "nativescript-webview-interface": "1.4.3",
-    "nativescript-windowed-modal": "5.0.6",
     "prismjs": "1.15.0",
     "reflect-metadata": "0.1.8",
     "rxjs": "6.3.3",
-    "tns-core-modules": "5.4.0",
     "zone.js": "0.8.29"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "0.13.9",
     "@angular/cli": "7.3.8",
     "@angular/compiler-cli": "7.2.14",
-    "@nativescript/schematics": "0.5.2",
     "@netbasal/spectator": "3.8.2",
     "@types/jasmine": "2.8.6",
     "@types/jasminewd2": "2.0.3",
@@ -90,21 +62,15 @@
     "karma-jasmine-html-reporter": "0.2.2",
     "karma-junit-reporter": "1.2.0",
     "karma-spec-reporter": "0.0.32",
-    "nativescript": "5.4.0",
-    "nativescript-dev-sass": "1.7.0",
-    "nativescript-dev-typescript": "0.10.0",
-    "nativescript-dev-webpack": "0.24.1",
     "ng-mocks": "7.7.0",
     "prettier": "1.17.0",
-    "protractor": "5.3.0",
     "resize-observer-polyfill": "1.5.1",
-    "sass": "1.19.0",
     "sass-extract": "2.1.0",
     "sass-extract-loader": "1.1.0",
-    "tns-platform-declarations": "5.2.2",
     "ts-node": "5.0.1",
     "tslint": "5.9.1",
     "tslint-plugin-prettier": "2.0.1",
-    "typescript": "3.1.1"
+    "typescript": "3.1.1",
+    "webpack-cli": "^3.3.8"
   }
 }
