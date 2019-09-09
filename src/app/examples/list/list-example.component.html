@@ -102,7 +102,6 @@
   (itemSelect)="onItemSelect($event)"
   [getSectionName]="getSectionName"
   [showDivider]="true">
-  <!-- kirby-list-header is not supported in conjunction with *kirbyListSectionHeader due to a bug in RadListView on iOS -->
   <kirby-list-section-header
     *kirbyListSectionHeader="let section"
     [title]="section"

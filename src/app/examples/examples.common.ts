@@ -32,17 +32,14 @@ import { ToolbarExampleComponent } from './toolbar-example/toolbar-example.compo
 
 // Example of "custom" icons
 export const iconSettings: IconSettings = {
-  fontfamily: "'Ionicons', 'ionicons'",
   icons: [
     {
       name: 'football',
       svg: 'assets/icons/football.svg',
-      unicode: 0xf2f6,
     },
     {
       name: 'umbrella',
       svg: 'assets/icons/umbrella.svg',
-      unicode: 0xf25f,
     },
   ],
 };
