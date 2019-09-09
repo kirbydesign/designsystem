@@ -15,7 +15,6 @@
     // https://hackernoon.com/custom-tslint-rules-easier-than-you-think-1bd9c361d70c
     "disallow-http-client-module-import-in-specs": true,
     "disallow-specific-environment-import": true,
-    "disallow-tns-import": true,
     "import-line-spacing": true,
 
     // Codelyzer rules:

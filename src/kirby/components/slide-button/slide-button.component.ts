@@ -1,11 +1,9 @@
 import { Component, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { TouchGestureEventData } from 'tns-core-modules/ui/gestures/gestures';
 
 import { SlideButtonCommon } from './slide-button.common';
 
-export const SLIDE_BUTTON_SELECTOR = 'kirby-slide-button';
 @Component({
-  selector: SLIDE_BUTTON_SELECTOR,
+  selector: 'kirby-slide-button',
   templateUrl: './slide-button.component.html',
   styleUrls: ['./slide-button.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -43,8 +41,8 @@ export class SlideButtonComponent extends SlideButtonCommon implements OnDestroy
       this.handleSlideDone();
     } else {
       this.resetSliderIntervalTimer = setInterval(() => {
-        if (this.value !== 0) {
-          this.value--;
+        if (this.value >= 0) {
+          this.value -= 2;
         }
 
         this.changeDetectionRef.markForCheck();
