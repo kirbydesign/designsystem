@@ -54,20 +54,13 @@ export class ComponentStatusComponent implements OnInit, OnDestroy {
 
   private connectFirebase(): void {
     const componentsCollection$ = this.db
-      .collection<ComponentStatusItem>('component-status-items')
+      .collection<ComponentStatusItem>('componentStatusV2')
       .valueChanges();
 
-    const ghostComponentsCollection$ = this.db
-      .collection<GhostComponent>('component-status-ghost-items')
-      .valueChanges();
-
-    this.firebaseSubscription = combineLatest([
-      componentsCollection$,
-      ghostComponentsCollection$,
-    ]).subscribe(([components, ghostComponents]) => {
+    this.firebaseSubscription = componentsCollection$.subscribe((components: any) => {
       this.isLoading = true;
-      this.items = components;
-      this.ghostItems = ghostComponents;
+      this.items = components[0].items;
+      this.ghostItems = components[0].ghostItems;
       this.initializeGithubStatus();
     });
   }

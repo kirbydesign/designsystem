@@ -10,8 +10,9 @@ import { ChangelogVersion } from '~/app/changelog/changelog.interfaces';
   providedIn: 'root',
 })
 export class ChangelogService {
-  changelog = this.db.collection('changelog');
+  changelog = this.db.collection('changelogV2');
   changelog$ = this.changelog.valueChanges().pipe(
+    map((x) => Object.values(x[0])),
     map((x) => {
       return x.filter((release: any) => !!release.date).sort(this.sortByDate);
     })
@@ -22,7 +23,12 @@ export class ChangelogService {
   updateChangelog(fromVersion?: string, toVersion?: string) {
     this.getChangelog(fromVersion, toVersion).subscribe((release: ChangelogVersion) => {
       if (!this.github.useMocks) {
-        this.changelog.doc(release.name).set(release);
+        this.changelog.doc('versions').set(
+          {
+            [release.name]: release,
+          },
+          { merge: true }
+        );
       }
     });
   }
@@ -107,7 +113,10 @@ export class ChangelogService {
     fromVersion?: string,
     toVersion?: string
   ): Observable<{ versionsToUpdate: string[]; tags: string[] }> {
-    const changelog$ = this.changelog.valueChanges().pipe(take(1));
+    const changelog$ = this.changelog.valueChanges().pipe(
+      map((x) => Object.values(x[0])),
+      take(1)
+    );
     const tags$ = this.github.getAllTags();
 
     const versions$ = combineLatest(changelog$, tags$).pipe(

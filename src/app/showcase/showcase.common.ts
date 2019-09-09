@@ -9,10 +9,8 @@ import { ListShowcaseComponent } from './list-showcase/list-showcase.component';
 import { ListLoadOnDemandShowcaseComponent } from './list-load-on-demand-showcase/list-load-on-demand-showcase.component';
 import { ShowcaseComponent } from './showcase.component';
 import { ChartShowcaseComponent } from './chart-showcase/chart-showcase.component';
-import { DoughnutChartShowcaseComponent } from './doughnut-chart-showcase/doughnut-chart-showcase.component';
 import { ShowcaseRoutingModule } from './showcase-routing.module';
 import { ColorsShowcaseComponent } from './colors-showcase/colors-showcase.component';
-import { LineChartShowcaseComponent } from './line-chart-showcase/line-chart-showcase.component';
 import { SpinnerShowcaseComponent } from './spinner-showcase/spinner-showcase.component';
 import { ModalShowcaseComponent } from './modal-showcase/modal-showcase.component';
 import { SegmentedControlShowcaseComponent } from './segmented-control-showcase/segmented-control-showcase.component';
@@ -43,9 +41,7 @@ export const COMPONENT_EXPORTS: any[] = [
   GridShowcaseComponent,
   AvatarShowcaseComponent,
   ChartShowcaseComponent,
-  DoughnutChartShowcaseComponent,
   FontsShowcaseComponent,
-  LineChartShowcaseComponent,
   SpinnerShowcaseComponent,
   ModalShowcaseComponent,
   SegmentedControlShowcaseComponent,

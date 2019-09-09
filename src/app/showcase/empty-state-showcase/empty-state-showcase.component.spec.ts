@@ -4,6 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { ExamplesModule } from '../../examples/examples.module';
 import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
 import { EmptyStateShowcaseComponent } from './empty-state-showcase.component';
+import { ShowcasePropertiesComponent } from '~/app/shared/showcase-properties/showcase-properties.component';
 
 describe('EmptyStateShowcaseComponent', () => {
   let component: EmptyStateShowcaseComponent;
@@ -12,7 +13,7 @@ describe('EmptyStateShowcaseComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ExamplesModule, RouterTestingModule],
-      declarations: [EmptyStateShowcaseComponent, CodeViewerComponent],
+      declarations: [EmptyStateShowcaseComponent, CodeViewerComponent, ShowcasePropertiesComponent],
     }).compileComponents();
   }));
 
