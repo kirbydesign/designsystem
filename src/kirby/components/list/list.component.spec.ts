@@ -8,6 +8,7 @@ import { ListComponent } from './list.component';
 import { SpinnerComponent } from '../spinner/spinner.component';
 import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
 import { ListHelper } from './helpers/list-helper';
+import { ListItemColorDirective } from './directives/list-item-color.directive';
 
 /**
  * We need an actual model item, since WeakMap can't use primitives for keys.
@@ -38,6 +39,7 @@ describe('ListComponent', () => {
       GroupByPipe,
       SpinnerComponent,
       InfiniteScrollDirective,
+      ListItemColorDirective,
       MockComponent(ionic.IonList),
       MockComponent(ionic.IonListHeader),
       MockComponent(ionic.IonLabel),
