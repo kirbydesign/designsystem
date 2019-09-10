@@ -29,6 +29,7 @@ import { ToastExampleComponent } from './toast-example/toast-example.component';
 import { ToggleExampleComponent } from './toggle-example/toggle-example.component';
 import { EmptyStateExampleComponent } from './empty-state-example/empty-state-example.component';
 import { ToolbarExampleComponent } from './toolbar-example/toolbar-example.component';
+import { ListSwipeExampleComponent } from './list/swipe/list-swipe-example.component';
 
 // Example of "custom" icons
 export const iconSettings: IconSettings = {
@@ -53,6 +54,7 @@ export const COMPONENT_DECLARATIONS: any[] = [
   CardElevationsExampleComponent,
   ListExampleComponent,
   ListLoadOnDemandExampleComponent,
+  ListSwipeExampleComponent,
   GridExampleComponent,
   AvatarExampleComponent,
   ChartExampleComponent,

@@ -4,6 +4,7 @@ import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/t
 import { By } from '@angular/platform-browser';
 import { MockComponent } from 'ng-mocks';
 import * as ionic from '@ionic/angular';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { ActionSheetComponent } from './action-sheet.component';
 import { IModalController } from '../services/modal.controller.interface';
@@ -63,11 +64,14 @@ describe('ActionSheetComponent', () => {
         MockComponent(ionic.IonItem),
         MockComponent(ionic.IonItemDivider),
         MockComponent(ionic.IonItemGroup),
+        MockComponent(ionic.IonItemOptions),
+        MockComponent(ionic.IonItemSliding),
       ],
       providers: [
         { provide: IModalController, useValue: modalControllerSpy },
         { provide: NavParams, useValue: navParamsSpy },
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
     TestBed.overrideModule(BrowserDynamicTestingModule, {
       set: {
