@@ -1,6 +1,7 @@
 import { createTestComponentFactory, Spectator } from '@netbasal/spectator';
 import { MockComponent } from 'ng-mocks';
 import * as ionic from '@ionic/angular';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { LoadOnDemandEvent } from './list.event';
 import { GroupByPipe } from './pipes/group-by.pipe';
@@ -46,8 +47,10 @@ describe('ListComponent', () => {
       MockComponent(ionic.IonItem),
       MockComponent(ionic.IonItemDivider),
       MockComponent(ionic.IonItemGroup),
+      MockComponent(ionic.IonItemSliding),
     ],
     providers: [ListHelper, GroupByPipe],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
   });
 
   beforeEach(() => {
