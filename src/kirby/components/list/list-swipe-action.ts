@@ -1,4 +1,4 @@
-type ActionType = 'success' | 'warning' | 'danger';
+export type ActionType = 'success' | 'warning' | 'danger';
 
 export interface ListSwipeAction {
   position: 'left' | 'right';

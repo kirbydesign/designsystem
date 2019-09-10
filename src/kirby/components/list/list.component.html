@@ -16,19 +16,13 @@
       </ion-item-divider>
 
       <div class="list-items">
-        <ion-item-sliding *ngFor="let item of section.items; let idx = index;trackBy: trackByFn" [disabled]="isSwipingDisabled">
-          <ng-container *ngTemplateOutlet="swipeActions; context: { $implicit: item }"></ng-container>
-          <ng-container *ngTemplateOutlet="listItem; context: { $implicit: item }"></ng-container>
-        </ion-item-sliding>
+        <ng-container *ngTemplateOutlet="isSwipingDisabled ? listItems : slidingItems; context: { $implicit: section.items }"></ng-container>
       </div>
     </ion-item-group>
   </ng-container>
  
   <ng-template #normalList>
-    <ion-item-sliding *ngFor="let item of items;trackBy: trackByFn" [disabled]="isSwipingDisabled"> 
-      <ng-container *ngTemplateOutlet="swipeActions; context: { $implicit: item }"></ng-container>
-      <ng-container *ngTemplateOutlet="listItem; context: { $implicit: item }"></ng-container>
-    </ion-item-sliding>
+    <ng-container *ngTemplateOutlet="isSwipingDisabled ? listItems : slidingItems; context: { $implicit: items }"></ng-container>
   </ng-template>
 
   <div *ngIf="listFooterTemplate" class="footer">
@@ -42,6 +36,13 @@
 </div>
 
 <!-- Item template -->
+<ng-template #listItems let-items>
+  <ng-container *ngFor="let item of items;trackBy: trackByFn">
+    <ng-container *ngTemplateOutlet="listItem; context: { $implicit: item }"></ng-container>
+  </ng-container>
+</ng-template>
+
+
 <ng-template #listItem let-item>
   <ion-item [class.has-divider]="showDivider"
             [class.selectable]="isSelectable"
@@ -59,6 +60,15 @@
 
 
 <!-- Swipe Action templates -->
+
+<ng-template #slidingItems let-items>
+  <ion-item-sliding *ngFor="let item of items; let idx = index;trackBy: trackByFn">
+    <ng-container *ngTemplateOutlet="swipeActions; context: { $implicit: item }"></ng-container>
+    <ng-container *ngTemplateOutlet="listItem; context: { $implicit: item }"></ng-container>
+  </ion-item-sliding>
+</ng-template>
+
+
 <ng-template #swipeActions let-item>
   <ion-item-options *ngIf="getSwipeActionsSide('left', item) && getSwipeActionsSide('left', item).length > 0" side="start"> 
     <ng-container *ngTemplateOutlet="swipeAction; context: { $implicit: item, swipeActions: getSwipeActionsSide('left', item) }"></ng-container>
