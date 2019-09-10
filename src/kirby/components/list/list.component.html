@@ -37,7 +37,7 @@
 
 <!-- Item template -->
 <ng-template #listItems let-items>
-  <ng-container *ngFor="let item of items;trackBy: trackByFn">
+  <ng-container *ngFor="let item of items; trackBy: trackByFn">
     <ng-container *ngTemplateOutlet="listItem; context: { $implicit: item }"></ng-container>
   </ng-container>
 </ng-template>
