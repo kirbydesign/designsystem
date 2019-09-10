@@ -62,7 +62,7 @@
 <!-- Swipe Action templates -->
 
 <ng-template #slidingItems let-items>
-  <ion-item-sliding *ngFor="let item of items; let idx = index;trackBy: trackByFn">
+  <ion-item-sliding *ngFor="let item of items ;trackBy: trackByFn">
     <ng-container *ngTemplateOutlet="swipeActions; context: { $implicit: item }"></ng-container>
     <ng-container *ngTemplateOutlet="listItem; context: { $implicit: item }"></ng-container>
   </ion-item-sliding>
