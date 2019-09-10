@@ -73,14 +73,14 @@
   <div class="swipe-action">
     <ng-container  *ngFor="let swipeAction of swipeActions" >
       <ion-item-option
-        [ngClass]="getSwipeActionThemeColor(swipeAction, item)"
+        [ngClass]="getSwipeActionType(swipeAction, item)"
         (click)="onSwipeActionSelect(swipeAction, item)"
       >
         <div class="item-content" >
           <kirby-icon 
-            *ngIf="getSwipeActionIconName(swipeAction, item)" 
+            *ngIf="getSwipeActionIcon(swipeAction, item)" 
             size="sm" 
-            [name]="getSwipeActionIconName(swipeAction, item)"
+            [name]="getSwipeActionIcon(swipeAction, item)"
           >
           </kirby-icon>
           <ion-label>

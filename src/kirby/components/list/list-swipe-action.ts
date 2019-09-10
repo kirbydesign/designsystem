@@ -1,10 +1,10 @@
-import { ThemeColor } from '../../helpers/theme-color.type';
+type ActionType = 'success' | 'warning' | 'danger';
 
 export interface ListSwipeAction {
   position: 'left' | 'right';
   title: ((item: any) => string) | string;
-  iconName?: ((item: any) => string) | string;
-  themeColor?: ((item: any) => ThemeColor) | ThemeColor;
+  icon?: ((item: any) => string) | string;
+  type?: ((item: any) => ActionType) | ActionType;
   onSelected: (item: any) => void;
   isDisabled?: ((item: any) => boolean) | boolean;
 }

@@ -171,13 +171,13 @@ export class ListComponent implements OnInit, OnChanges {
     });
   }
 
-  getSwipeActionIconName(swipeAction: ListSwipeAction, item: any): string {
-    if (!swipeAction.iconName) return;
+  getSwipeActionIcon(swipeAction: ListSwipeAction, item: any): string {
+    if (!swipeAction.icon) return;
 
-    if (swipeAction.iconName instanceof Function) {
-      return swipeAction.iconName(item);
+    if (swipeAction.icon instanceof Function) {
+      return swipeAction.icon(item);
     }
-    return swipeAction.iconName;
+    return swipeAction.icon;
   }
 
   getSwipeActionTitle(swipeAction: ListSwipeAction, item: any): string {
@@ -187,11 +187,11 @@ export class ListComponent implements OnInit, OnChanges {
     return swipeAction.title;
   }
 
-  getSwipeActionThemeColor(swipeAction: ListSwipeAction, item: any): ThemeColor {
-    if (swipeAction.themeColor instanceof Function) {
-      return swipeAction.themeColor(item);
+  getSwipeActionType(swipeAction: ListSwipeAction, item: any): ThemeColor {
+    if (swipeAction.type instanceof Function) {
+      return swipeAction.type(item);
     }
-    return swipeAction.themeColor;
+    return swipeAction.type;
   }
 
   onSwipeActionSelect(swipeAction: ListSwipeAction, item: any): void {
