@@ -1,48 +1,42 @@
-import { ListSwipeAction } from '@kirbydesign/designsystem/components/list/list-swipe-action';
+import { Component } from '@angular/core';
 
-export class ListSwipeActionsHelper {
-  private static instance: ListSwipeActionsHelper;
-  private swipeActions: ListSwipeAction[] = [];
+import { BaseListComponent } from '../base-list.component';
+import { ListSwipeAction } from '@kirbydesign/designsystem/list';
 
-  private constructor() {
-    this.setUpSwipeActions();
-  }
-
-  public static getInstance(): ListSwipeActionsHelper {
-    if (!ListSwipeActionsHelper.instance) {
-      ListSwipeActionsHelper.instance = new ListSwipeActionsHelper();
-    }
-    return ListSwipeActionsHelper.instance;
-  }
-
-  public getSwipeActions() {
-    return this.swipeActions;
-  }
-
-  private setUpSwipeActions() {
-    this.swipeActions.push({
+@Component({
+  selector: 'kirby-list-swipe-example',
+  templateUrl: './list-swipe-example.component.html',
+  styleUrls: ['./list-swipe-example.component.scss'],
+})
+export class ListSwipeExampleComponent extends BaseListComponent {
+  swipeActions: ListSwipeAction[] = [
+    {
       position: 'left',
       title: 'Archive',
       themeColor: 'warning',
       onSelected: this.onArchiveItem,
       isDisabled: (item) => item.archived || item.id === 3,
-    });
-    this.swipeActions.push({
+    },
+    {
       position: 'left',
       title: 'Flag',
       iconName: (item) => (item.flagged ? null : 'attach'),
       themeColor: 'success',
       onSelected: this.onFlagItem,
       isDisabled: (item) => item.id === 3,
-    });
-    this.swipeActions.push({
+    },
+    {
       position: 'right',
       title: (item) => (item.deleted ? 'UnDelete' : 'Delete'),
       iconName: 'trash',
       themeColor: (item) => (item.deleted ? 'warning' : 'danger'),
       onSelected: this.onDeleteItem,
       isDisabled: (item) => item.id === 3,
-    });
+    },
+  ];
+
+  constructor() {
+    super();
   }
 
   private onArchiveItem(item: any): void {

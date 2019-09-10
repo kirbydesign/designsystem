@@ -26,9 +26,6 @@ import { ThemeColor } from '@kirbydesign/designsystem/helpers/theme-color.type';
 
 export type ListShape = 'square' | 'rounded';
 
-declare var require: any;
-const style: any = require('sass-extract-loader!./list.component.scss');
-
 @Component({
   selector: 'kirby-list',
   templateUrl: './list.component.html',
@@ -238,7 +235,7 @@ export class ListComponent implements OnInit, OnChanges {
   }
 
   private initialzeSwipeActions(): void {
-    const large = style.global['$breakpoints'].value['large'].value;
+    const large = 1025; //TODO this need to be refactored.
     if (this.swipeActions) {
       this.isSwipingDisabled = window.innerWidth >= large;
       if (this.isSwipingDisabled) {

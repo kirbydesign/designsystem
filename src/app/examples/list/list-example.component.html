@@ -24,19 +24,6 @@
 
 <hr />
 
-<h2>List with swipe actions:</h2>
-<kirby-list [items]="items" 
-  showDivider="true" 
-  [swipeActions]="swipeActions">
-  <kirby-list-item
-    *kirbyListItem="let item"
-    [title]="item.title"
-    [amount]="item.amount">
-  </kirby-list-item>
-</kirby-list>
-
-<hr />
-
 <h2>List with bold text on row selection</h2>
 <kirby-list [items]="items" [markSelectedRow]="true">
   <kirby-list-item
