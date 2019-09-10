@@ -18,19 +18,7 @@
       <div class="list-items">
         <ion-item-sliding *ngFor="let item of section.items; let idx = index;trackBy: trackByFn" [disabled]="isSwipingDisabled">
           <ng-container *ngTemplateOutlet="swipeActions; context: { $implicit: item }"></ng-container>
-          <ion-item [class.has-divider]="showDivider"
-                    [class.selectable]="isSelectable"
-                    [class.selected]="markSelectedRow && selectedItem && item._id === selectedItem._id"
-                    [attr.role]="isSelectable ? 'button' : null"
-                    [class.last-in-section]="idx === section.items.length - 1"
-                    (click)="onItemSelect(item)"
-                    tabindex="0"
-                    [kirbyListItemColor]="getItemColor"
-                    [item]="item"
-                    keyHandler>
-            <ng-container *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }"></ng-container>
-            <ng-container *ngTemplateOutlet="listFlexItemTemplate; context: { $implicit: item }"></ng-container>
-          </ion-item>
+          <ng-container *ngTemplateOutlet="listItem; context: { $implicit: item }"></ng-container>
         </ion-item-sliding>
       </div>
     </ion-item-group>
@@ -39,18 +27,7 @@
   <ng-template #normalList>
     <ion-item-sliding *ngFor="let item of items;trackBy: trackByFn" [disabled]="isSwipingDisabled"> 
       <ng-container *ngTemplateOutlet="swipeActions; context: { $implicit: item }"></ng-container>
-      <ion-item [class.has-divider]="showDivider"
-                [class.selectable]="isSelectable"
-                [class.selected]="markSelectedRow && item === selectedItem"
-                [attr.role]="isSelectable ? 'button' : null"
-                (click)="onItemSelect(item)"
-                tabindex="0"
-                [kirbyListItemColor]="getItemColor"
-                [item]="item"
-                keyHandler>
-        <ng-container *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }"></ng-container>
-        <ng-container *ngTemplateOutlet="listFlexItemTemplate; context: { $implicit: item }"></ng-container>
-      </ion-item>
+      <ng-container *ngTemplateOutlet="listItem; context: { $implicit: item }"></ng-container>
     </ion-item-sliding>
   </ng-template>
 
@@ -64,7 +41,24 @@
   <kirby-spinner></kirby-spinner>
 </div>
 
- <!-- Swipe Action templates -->
+<!-- Item template -->
+<ng-template #listItem let-item>
+  <ion-item [class.has-divider]="showDivider"
+            [class.selectable]="isSelectable"
+            [class.selected]="markSelectedRow && item === selectedItem"
+            [attr.role]="isSelectable ? 'button' : null"
+            (click)="onItemSelect(item)"
+            tabindex="0"
+            [kirbyListItemColor]="getItemColor"
+            [item]="item"
+            keyHandler>
+    <ng-container *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }"></ng-container>
+    <ng-container *ngTemplateOutlet="listFlexItemTemplate; context: { $implicit: item }"></ng-container>
+  </ion-item>
+</ng-template>
+
+
+<!-- Swipe Action templates -->
 <ng-template #swipeActions let-item>
   <ion-item-options *ngIf="getSwipeActionsSide('left', item) && getSwipeActionsSide('left', item).length > 0" side="start"> 
     <ng-container *ngTemplateOutlet="swipeAction; context: { $implicit: item, swipeActions: getSwipeActionsSide('left', item) }"></ng-container>
