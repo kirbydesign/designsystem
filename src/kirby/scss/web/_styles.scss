@@ -1,8 +1,6 @@
+@import "../web-imports";
 @import "./ionic";
-@import "./web-variables"; 
-@import './web-include-media';
 @import "./../base/typography"; 
-@import "./../themes/colors";
 
 :root { 
     --kirby-font-family: "Roboto";

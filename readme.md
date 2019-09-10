@@ -43,7 +43,7 @@ Include the Kirby Sass variables in your app:
 
 * Eg. in `src/styles.scss`:
   ```css
-  @import '~@kirbydesign/designsystem/scss/web/web-styles';
+  @import '~@kirbydesign/designsystem/scss/web/styles';
   ```
 
 As devDependencies don't get installed with the package in the target project, you also need to install `sass-extract` and `sass-extract-loader` via npm:
