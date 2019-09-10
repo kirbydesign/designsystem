@@ -45,19 +45,19 @@ code {
 
   &-header-1 {
     &::after {
-      content: "(#{font-size("l")})";
+      content: "(#{font-size("xl")})";
     }
   }
 
   &-header-2 {
     &::after {
-      content: "(#{font-size("m")})";
+      content: "(#{font-size("l")})";
     }
   }
 
   &-header-3 {
     &::after {
-      content: "(#{font-size("n")})";
+      content: "(#{font-size("m")})";
     }
   }
 

@@ -17,10 +17,9 @@ $sizes: (
   FONT SETTINGS 
 ****************************************************************************/
 $font-sizes: (
-  xxl: 48px, // Not usedpx, yet 
-  xl: 40px, // Not usedpx, yet
-  l:  32px,
-  m:  22px,
+  xl:  32px,
+  l:  22px,
+  m:  18px,
   n:  16px,
   s:  14px,
   xs: 12px,
@@ -28,14 +27,13 @@ $font-sizes: (
 ) !default;
 
 $line-height: (
-  xxl: 34px, // Not used in typography
-  xl: 38px, // h1 - Not decided yet..
-  l: 26px,  // Not used in typography
-  m: 21px,  // Not used in typography
-  n: 24px,  // h2, h3 and p all use this....(Weird rhythm?)
-  s: 20px,  // For text-small
-  xs: 14px, // For text-xsmall
-  xxs: 11px // For text-xxsmall
+  xl: 38px, // h1
+  l: 24px,  // h2
+  m: 24px,  // h3
+  n: 24px,  // p, h3 and h3 share the same line-height, added the sizes to "match" with font-size.
+  s: 20px,  // text-small
+  xs: 14px, // text-xsmall
+  xxs: 11px // text-xxsmall
 ) !default;
 
 $font-weight: (
