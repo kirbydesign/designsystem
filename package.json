@@ -1,6 +1,6 @@
 {
   "name": "designsystem",
-  "version": "0.7.1",
+  "version": "0.7.4",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -64,7 +64,6 @@
     "karma-spec-reporter": "0.0.32",
     "ng-mocks": "7.7.0",
     "prettier": "1.17.0",
-    "protractor": "5.3.0",
     "resize-observer-polyfill": "1.5.1",
     "sass-extract": "2.1.0",
     "sass-extract-loader": "1.1.0",

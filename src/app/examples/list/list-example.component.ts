@@ -11,6 +11,7 @@ import { ListSwipeActionsHelper } from './helpers/list-swipe-actions.helper';
   styleUrls: ['./list-example.component.scss'],
 })
 export class ListExampleComponent extends BaseListComponent implements OnInit {
+  getItemColor = (item) => item.color;
   swipeActions: ListSwipeAction[] = [];
 
   constructor(private router: Router) {

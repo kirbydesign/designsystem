@@ -22,7 +22,7 @@ import { LoadOnDemandEvent, LoadOnDemandEventData } from './list.event';
 import { ListHelper } from './helpers/list-helper';
 import { GroupByPipe } from './pipes/group-by.pipe';
 import { ListSwipeAction } from './list-swipe-action';
-import { ThemeColor } from './../../helpers/theme-color.type';
+import { ThemeColor } from '@kirbydesign/designsystem/helpers/theme-color.type';
 
 export type ListShape = 'square' | 'rounded';
 
@@ -48,7 +48,10 @@ export class ListComponent implements OnInit, OnChanges {
    */
 
   @Input()
-  public items: any[];
+  items: any[];
+
+  @Input()
+  getItemColor: (item: any) => ThemeColor;
 
   /**
    * Callback to determine name of section. Sections will be ordered alphabetically.

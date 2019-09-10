@@ -25,6 +25,8 @@
                     [class.last-in-section]="idx === section.items.length - 1"
                     (click)="onItemSelect(item)"
                     tabindex="0"
+                    [kirbyListItemColor]="getItemColor"
+                    [item]="item"
                     keyHandler>
             <ng-container *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }"></ng-container>
             <ng-container *ngTemplateOutlet="listFlexItemTemplate; context: { $implicit: item }"></ng-container>
@@ -43,6 +45,8 @@
                 [attr.role]="isSelectable ? 'button' : null"
                 (click)="onItemSelect(item)"
                 tabindex="0"
+                [kirbyListItemColor]="getItemColor"
+                [item]="item"
                 keyHandler>
         <ng-container *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }"></ng-container>
         <ng-container *ngTemplateOutlet="listFlexItemTemplate; context: { $implicit: item }"></ng-container>
