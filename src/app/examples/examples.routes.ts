@@ -24,6 +24,8 @@ import { ToastExampleComponent } from './toast-example/toast-example.component';
 import { ToggleExampleComponent } from './toggle-example/toggle-example.component';
 import { EmptyStateExampleComponent } from './empty-state-example/empty-state-example.component';
 import { ToolbarExampleComponent } from './toolbar-example/toolbar-example.component';
+import { ListSwipeExampleComponent } from './list/swipe/list-swipe-example.component';
+import { ListLoadOnDemandExampleComponent } from './list/load-on-demand/list-load-on-demand-example.component';
 
 export const routes: Routes = [
   {
@@ -49,6 +51,14 @@ export const routes: Routes = [
   {
     path: 'list',
     component: ListExampleComponent,
+  },
+  {
+    path: 'list-swipe',
+    component: ListSwipeExampleComponent,
+  },
+  {
+    path: 'list-load-on-demand',
+    component: ListLoadOnDemandExampleComponent,
   },
   {
     path: 'chart',
