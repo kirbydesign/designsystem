@@ -39,12 +39,17 @@ npm install @kirbydesign/designsystem
 
 ### Sass
 
-Include the Kirby Sass variables in your app:
+Include the Kirby global styles in your app:
 
 * Eg. in `src/styles.scss`:
   ```css
-  @import '~@kirbydesign/designsystem/scss/web/styles';
+  @import '~@kirbydesign/designsystem/scss/global-styles';
   ```
+And import Kirby utilities to get access to the different sass functions in Kirby:
+```css
+@import '~@kirbydesign/designsystem/scss/utils';
+```
+
 
 As devDependencies don't get installed with the package in the target project, you also need to install `sass-extract` and `sass-extract-loader` via npm:
 ```
