@@ -4,9 +4,11 @@ import {
   EventEmitter,
   HostBinding,
   Input,
+  OnInit,
   OnChanges,
   Output,
   TemplateRef,
+  ViewChild,
 } from '@angular/core';
 
 import {
@@ -19,6 +21,7 @@ import {
 import { LoadOnDemandEvent, LoadOnDemandEventData } from './list.event';
 import { ListHelper } from './helpers/list-helper';
 import { GroupByPipe } from './pipes/group-by.pipe';
+import { ListSwipeAction } from './list-swipe-action';
 import { ThemeColor } from '@kirbydesign/designsystem/helpers/theme-color.type';
 
 export type ListShape = 'square' | 'rounded';
@@ -34,7 +37,9 @@ export type ListShape = 'square' | 'rounded';
     class: 'kirby-list',
   },
 })
-export class ListComponent implements OnChanges {
+export class ListComponent implements OnInit, OnChanges {
+  @ViewChild('list') list: any;
+
   /**
    * Provide items for the list to render. Items must be provided in the order you expect them to be rendered.
    */
@@ -79,12 +84,19 @@ export class ListComponent implements OnChanges {
   }
 
   /**
+   * Determines if list items should have swipe actions or not
+   * - the order of swipe actions is used to determine edge actions,
+   * as well as their order of appearance on the screen.
+   */
+  @Input() swipeActions?: ListSwipeAction[] = [];
+
+  /**
    * Emitting event when more items are to be loaded.
    */
   @Output() loadOnDemand = new EventEmitter<LoadOnDemandEvent>();
 
   /**
-   * Emitting event when an item is selected (tab'ed on mobile, clicked on web)
+   * Emitting event when an item is selected (tapped on mobile, clicked on web)
    */
   @Output() itemSelect = new EventEmitter<any>();
 
@@ -96,6 +108,7 @@ export class ListComponent implements OnChanges {
   @ContentChild(ListFooterDirective, { read: TemplateRef }) listFooterTemplate;
 
   @HostBinding('class.has-sections') isSectionsEnabled: boolean;
+  isSwipingDisabled: boolean = false;
   isSelectable: boolean;
   isLoading: boolean;
   isLoadOnDemandEnabled: boolean;
@@ -105,6 +118,10 @@ export class ListComponent implements OnChanges {
   private orderMap: WeakMap<any, { isFirst: boolean; isLast: boolean }>;
 
   constructor(private listHelper: ListHelper, private groupBy: GroupByPipe) {}
+
+  ngOnInit() {
+    this.initialzeSwipeActions();
+  }
 
   ngOnChanges(): void {
     this.isSectionsEnabled = !!this.getSectionName;
@@ -117,22 +134,6 @@ export class ListComponent implements OnChanges {
     }
     this.isSelectable = this.itemSelect.observers.length > 0;
     this.isLoadOnDemandEnabled = this.loadOnDemand.observers.length > 0;
-  }
-
-  private getItemOrder(item: any): { isFirst: boolean; isLast: boolean } {
-    const defaultOrder = { isFirst: false, isLast: false };
-    if (!item) {
-      return defaultOrder;
-    }
-    if (!this.isSectionsEnabled) {
-      return defaultOrder;
-    }
-    const order = this.orderMap.get(item);
-    if (!order) {
-      console.warn('Order of list item within section not found!');
-      return defaultOrder;
-    }
-    return order;
   }
 
   isFirstItem(item: any, index: number) {
@@ -158,6 +159,50 @@ export class ListComponent implements OnChanges {
     return index;
   }
 
+  getSwipeActionsSide(side: 'left' | 'right', item: any): ListSwipeAction[] {
+    return this.swipeActions.filter((sa) => {
+      if (sa.isDisabled instanceof Function && sa.isDisabled(item)) {
+        return false;
+      }
+      if (sa.isDisabled === true) {
+        return false;
+      }
+      return sa.position === side;
+    });
+  }
+
+  getSwipeActionIcon(swipeAction: ListSwipeAction, item: any): string {
+    if (!swipeAction.icon) return;
+
+    if (swipeAction.icon instanceof Function) {
+      return swipeAction.icon(item);
+    }
+    return swipeAction.icon;
+  }
+
+  getSwipeActionTitle(swipeAction: ListSwipeAction, item: any): string {
+    if (swipeAction.title instanceof Function) {
+      return swipeAction.title(item);
+    }
+    return swipeAction.title;
+  }
+
+  getSwipeActionType(swipeAction: ListSwipeAction, item: any): ThemeColor {
+    if (swipeAction.type instanceof Function) {
+      return swipeAction.type(item);
+    }
+    return swipeAction.type;
+  }
+
+  onSwipeActionSelect(swipeAction: ListSwipeAction, item: any): void {
+    swipeAction.onSelected(item);
+    this.list.closeSlidingItems();
+  }
+
+  onResize(): void {
+    this.initialzeSwipeActions();
+  }
+
   private createOrderMap(
     groupedItems: { name: string; items: any[] }[]
   ): WeakMap<any, { isFirst: boolean; isLast: boolean }> {
@@ -171,5 +216,31 @@ export class ListComponent implements OnChanges {
       });
     });
     return orderMap;
+  }
+
+  private getItemOrder(item: any): { isFirst: boolean; isLast: boolean } {
+    const defaultOrder = { isFirst: false, isLast: false };
+    if (!item) {
+      return defaultOrder;
+    }
+    if (!this.isSectionsEnabled) {
+      return defaultOrder;
+    }
+    const order = this.orderMap.get(item);
+    if (!order) {
+      console.warn('Order of list item within section not found!');
+      return defaultOrder;
+    }
+    return order;
+  }
+
+  private initialzeSwipeActions(): void {
+    const large = 1025; //TODO this need to be refactored.
+    if (this.swipeActions) {
+      this.isSwipingDisabled = window.innerWidth >= large;
+      if (this.isSwipingDisabled) {
+        this.list.closeSlidingItems();
+      }
+    }
   }
 }

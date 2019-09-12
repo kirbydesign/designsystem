@@ -66,13 +66,13 @@ $shadow: get-elevation(2);
     border-radius: $border-radius;
   }
 
-  ion-list:not(.has-header) ion-item:first-of-type,
+  ion-list:not(.has-header) ion-item-sliding:first-of-type,
   ion-list-header {
     border-top-left-radius: $border-radius;
     border-top-right-radius: $border-radius;
   }
 
-  ion-list:not(.has-footer) ion-item:last-of-type,
+  ion-list:not(.has-footer) ion-item-sliding:last-of-type,
   .footer {
     border-bottom-left-radius: $border-radius;
     border-bottom-right-radius: $border-radius;
@@ -118,4 +118,32 @@ ion-item {
   display: flex;
   justify-content: space-between;
   border-top: 1px solid $divider-color;
+}
+
+.swipe-action {
+  display: flex;
+  color: #{get-color('primary-contrast')};
+  @each $color-name, $color-value in $main-colors {
+    .#{$color-name} {
+      background-color: #{get-color($color-name)};
+      color: #{get-color($color-name + '-contrast')};
+    }
+  }
+
+  ion-item-option {
+    height: 100%;
+    display: inline-block;
+    text-align: center;
+  }
+
+  .item-content {
+    display: inline-grid;
+    min-width: 70px;
+    flex-direction: column;
+
+    ion-label {
+      --background: unset;
+      --color: unset;
+    }
+  }
 }

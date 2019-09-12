@@ -6,6 +6,8 @@ export class BaseListComponent {
       subTitle: '2000 pcs',
       amount: '5.587.218.309 DKK',
       detail: 225,
+      archived: true,
+      flagged: false,
       color: 'default',
     },
     {
@@ -14,6 +16,8 @@ export class BaseListComponent {
       subTitle: '1827 pcs',
       amount: '76.980 DKK',
       detail: -3,
+      flagged: true,
+      deleted: true,
       color: 'light',
     },
     {
