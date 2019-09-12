@@ -1,8 +1,3 @@
-/*  
-    General imports for components
-    NOTICE: Must not contain anything that generates classes or else it will be generated for every component that imports this file.
-*/
-@import './base/functions';
-@import './base/settings';
-@import './base/include-media';
-@import './themes/colors';
+/* This is a temporary file - delete it when DRB is up to date */
+@import "utils";
+@warn "Import utils instead of web/web-imports"

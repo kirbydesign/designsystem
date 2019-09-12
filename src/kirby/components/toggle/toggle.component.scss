@@ -1,4 +1,4 @@
-@import '../../scss/web-imports';
+@import '../../scss/utils';
 
 .toggle-checked {
     --background-checked: #{get-color('success')};

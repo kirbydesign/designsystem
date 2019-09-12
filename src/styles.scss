@@ -2,11 +2,10 @@
   You can add global styles to this file, and also import other style files 
 */
 // Import common styles
-@import "./kirby/scss/web/styles";
+@import "./kirby/scss/global-styles";
 
 @import "~prismjs/themes/prism";
-@import "./kirby/scss/web-imports";
-@import "./kirby/scss/themes/colors";
+@import "./kirby/scss/utils";
 @import "./kirby/scss/base/typography"; 
 
 @font-face { 
