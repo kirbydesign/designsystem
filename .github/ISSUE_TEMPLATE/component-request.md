@@ -29,7 +29,7 @@ Add any other context or screenshots about the feature request here, e.g. a link
 - [ ] [Implement Examples and Showcase](https://cookbook.kirby.design/home/showcase/button)
 - [ ] Add link to showcase on Kirby Component Status (`component-status-items.ts => code.cookbookUrl`)
 - [ ] Also remove `githubIssueNo` and set `status` to `ItemCodeStatus.ready`
-- [ ] Added needed mock and fakes to the `KirbyTestingModule`
+- [ ] Add any required mock and fakes to the `KirbyTestingModule`
 - [ ] Push commits to GitHub
 ### Review:
 - [ ] Open a pull request (remember to add `closes #issueno` to the description) and ask @kirbydesign/kirby-guild for review
