@@ -60,7 +60,7 @@ $shadow: get-elevation(2);
   }
 }
 
-:host[shape=rounded] {
+:host(.rounded) {
   ion-list,
   .list-items {
     border-radius: $border-radius;
@@ -79,7 +79,7 @@ $shadow: get-elevation(2);
   }
 }
 
-:host[shape=none] {
+:host(.no-shape) {
   ion-list,
   ion-item-sliding {
     border: none;

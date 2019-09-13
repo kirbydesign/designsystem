@@ -24,6 +24,8 @@ import { GroupByPipe } from './pipes/group-by.pipe';
 import { ListSwipeAction } from './list-swipe-action';
 import { ThemeColor } from '@kirbydesign/designsystem/helpers/theme-color.type';
 
+export type ListShape = 'square' | 'rounded' | 'none';
+
 @Component({
   selector: 'kirby-list',
   templateUrl: './list.component.html',
@@ -67,6 +69,23 @@ export class ListComponent implements OnInit, OnChanges {
    * Determines if list row text should turn bold on selection
    */
   @Input() markSelectedRow = false;
+
+  /**
+   * Determine outline shape of:
+   * - list, if {@link #isSectionsEnabled} is `false`
+   * - section, if {@link #isSectionsEnabled} is `true`
+   *
+   * `square` means **without** rounded corners, `rounded` means **with** rounded corners.,  `none` means **without** padding, border, box-shadow and background.
+   */
+  @Input() shape: ListShape = 'rounded';
+  @HostBinding('class.rounded')
+  public get isRounded(): boolean {
+    return this.shape === 'rounded';
+  }
+  @HostBinding('class.no-shape')
+  public get isNoShape(): boolean {
+    return this.shape === 'none';
+  }
 
   /**
    * Determines if list items should have swipe actions or not
