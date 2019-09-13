@@ -36,7 +36,7 @@ import {
   ListSectionHeaderDirective,
 } from '@kirbydesign/designsystem/list';
 import createSpyObj = jasmine.createSpyObj;
-import { ModalController } from './modal';
+import { ModalController } from '../modal';
 
 /*
  * Fake components should be handled by the list of kirby
