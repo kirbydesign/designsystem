@@ -86,7 +86,7 @@ $shadow: get-elevation(2);
     box-shadow: none;
     background: none;
 
-    > ion-item {
+    & > ion-item {
       background: none;
       --padding-start: 0;
       --inner-padding-end: 0;
@@ -96,7 +96,7 @@ $shadow: get-elevation(2);
 }
 
 :host(.spaced) {
-  ion-list >  ion-item {
+  ion-list > ion-item {
     padding-bottom: size('s');
 
     &:last-child {
