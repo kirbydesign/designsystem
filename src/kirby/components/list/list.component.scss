@@ -60,7 +60,7 @@ $shadow: get-elevation(2);
   }
 }
 
-:host(.rounded) {
+:host[shape=rounded] {
   ion-list,
   .list-items {
     border-radius: $border-radius;
@@ -79,7 +79,7 @@ $shadow: get-elevation(2);
   }
 }
 
-:host(.no-shape) {
+:host[shape=none] {
   ion-list,
   ion-item-sliding {
     border: none;
@@ -95,12 +95,12 @@ $shadow: get-elevation(2);
   }
 }
 
-:host(.spaced) {
+:host[item-spacing=true] {
   ion-list > ion-item {
-    padding-bottom: size('s');
+    margin-bottom: size('s');
 
     &:last-child {
-      padding-bottom: inherit;
+      margin-bottom: inherit;
     }
   }
 }
