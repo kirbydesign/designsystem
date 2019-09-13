@@ -6,7 +6,8 @@
     "types": []
   },
   "exclude": [
-    "src/test.ts",
-    "**/*.spec.ts"
+    "./test.ts",
+    "**/*.spec.ts",
+    "./kirby/testing/**/*.*"
   ]
 }

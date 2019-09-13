@@ -1,26 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, NgModule } from '@angular/core';
 import { MockComponents, MockDirectives } from 'ng-mocks';
+import createSpyObj = jasmine.createSpyObj;
 
-import {
-  AvatarComponent,
-  BadgeComponent,
-  ButtonComponent,
-  CardComponent,
-  CardFooterComponent,
-  CardHeaderComponent,
-  ChipComponent,
-  EmptyStateComponent,
-  GridComponent,
-  IconComponent,
-  SegmentedControlComponent,
-  SpinnerComponent,
-} from '@kirbydesign/designsystem';
-import { ListItemColorDirective } from '@kirbydesign/designsystem/components/list/directives/list-item-color.directive';
-import { SlideButtonComponent } from '@kirbydesign/designsystem/components/slide-button/slide-button.component';
-import { ToastController } from '@kirbydesign/designsystem/components/toast/services/toast.controller';
-import { ToolbarComponent } from '@kirbydesign/designsystem/components/toolbar/toolbar.component';
-import { ThemeColorDirective } from '@kirbydesign/designsystem/directives/theme-color/theme-color.directive';
 import {
   InfiniteScrollDirective,
   ListCellComponent,
@@ -34,9 +16,27 @@ import {
   ListItemDirective,
   ListSectionHeaderComponent,
   ListSectionHeaderDirective,
-} from '@kirbydesign/designsystem/list';
-import createSpyObj = jasmine.createSpyObj;
+} from '../list';
 import { ModalController } from '../modal';
+import {
+  AvatarComponent,
+  BadgeComponent,
+  ButtonComponent,
+  CardComponent,
+  CardHeaderComponent,
+  CardFooterComponent,
+  ChipComponent,
+  EmptyStateComponent,
+  GridComponent,
+  IconComponent,
+  SpinnerComponent,
+  SegmentedControlComponent,
+  ToastController,
+} from '..';
+import { SlideButtonComponent } from '../components/slide-button/slide-button.component';
+import { ToolbarComponent } from '../components/toolbar/toolbar.component';
+import { ThemeColorDirective } from '../directives/theme-color/theme-color.directive';
+import { ListItemColorDirective } from '../components/list/directives/list-item-color.directive';
 
 /*
  * Fake components should be handled by the list of kirby
@@ -121,6 +121,7 @@ const MOCK_COMPONENTS = MockComponents(
   SegmentedControlComponent,
   EmptyStateComponent,
   SlideButtonComponent,
+  ToolbarComponent,
   FakeIonListComponent,
   FakeIonListHeaderComponent,
   FakeIonItemDividerComponent,
@@ -130,7 +131,6 @@ const MOCK_COMPONENTS = MockComponents(
   FakeIonItemOptionsComponent,
   FakeIonItemOptionComponent,
   FakeIonLabelComponent,
-  ToolbarComponent
 );
 
 /**
