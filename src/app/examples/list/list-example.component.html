@@ -182,3 +182,27 @@
     </kirby-list-cell>
   </kirby-list-flex-item>
 </kirby-list>
+
+<h2>List with no background shape:</h2>
+<h3>Removes background, border, shadow and padding from the list and the list item containers to provide flexibility</h3>
+<kirby-list [items]="items" shape="none" itemSpacing="t">
+    <kirby-list-flex-item *kirbyListFlexItem="let item">
+        <kirby-list-cell>
+          <section style="flex-direction: row; display: flex; padding-top: 10px;">
+            <kirby-avatar [imageSrc]="imageSrc" [size]="'small'">
+              <kirby-badge themeColor="danger">1</kirby-badge>
+            </kirby-avatar>
+            <div style="margin-left: 10px; flex-direction: column; display: flex;">
+              <kirby-list-cell-line [primary]="true" [text]="item.title"></kirby-list-cell-line>
+              <kirby-list-cell-line [text]="item.detail"></kirby-list-cell-line>
+            </div>
+          </section>
+        </kirby-list-cell>
+      
+        <kirby-list-cell
+            verticalAlignment="top"
+            horisontalAlignment="right">
+          <kirby-list-cell-line [primary]="true" [text]="item.amount"></kirby-list-cell-line>
+        </kirby-list-cell>
+      </kirby-list-flex-item>
+</kirby-list>
