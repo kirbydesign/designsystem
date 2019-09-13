@@ -24,7 +24,7 @@ import { GroupByPipe } from './pipes/group-by.pipe';
 import { ListSwipeAction } from './list-swipe-action';
 import { ThemeColor } from '@kirbydesign/designsystem/helpers/theme-color.type';
 
-export type ListShape = 'square' | 'rounded';
+export type ListShape = 'square' | 'rounded' | 'none';
 
 @Component({
   selector: 'kirby-list',
@@ -75,12 +75,28 @@ export class ListComponent implements OnInit, OnChanges {
    * - list, if {@link #isSectionsEnabled} is `false`
    * - section, if {@link #isSectionsEnabled} is `true`
    *
-   * `square` means **without** rounded corners, `rounded` means **with** rounded corners.
+   * `square` means **without** rounded corners, `rounded` means **with** rounded corners.,  `none` means **without** padding, border, box-shadow and background.
    */
   @Input() shape: ListShape = 'rounded';
   @HostBinding('class.rounded')
   public get isRounded(): boolean {
     return this.shape === 'rounded';
+  }
+  @HostBinding('class.no-shape')
+  public get isNoShape(): boolean {
+    return this.shape === 'none';
+  }
+
+  /**
+   * Determine spacing between list items:
+   * - list, if {@link #isSectionsEnabled} is `false`
+   *
+   * `true` means **with** space between list items, `false` means **without** any space between list items.
+   */
+  @Input() itemSpacing: boolean = false;
+  @HostBinding('class.spaced')
+  public get isSpacey(): boolean {
+    return this.itemSpacing;
   }
 
   /**

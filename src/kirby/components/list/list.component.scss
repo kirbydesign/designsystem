@@ -79,6 +79,32 @@ $shadow: get-elevation(2);
   }
 }
 
+:host(.no-shape) {
+  ion-list,
+  ion-item-sliding {
+    border: none;
+    box-shadow: none;
+    background: none;
+
+    > ion-item {
+      background: none;
+      --padding-start: 0;
+      --inner-padding-end: 0;
+      padding: 0;
+    }
+  }
+}
+
+:host(.spaced) {
+  ion-list >  ion-item {
+    padding-bottom: size('s');
+
+    &:last-child {
+      padding-bottom: inherit;
+    }
+  }
+}
+
 ion-list-header {
   background-color: get-color('white');
   border-bottom: 1px solid $divider-color;
