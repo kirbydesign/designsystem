@@ -1,4 +1,4 @@
-@import '../../../kirby/scss/web-imports';
+@import '../../../kirby/scss/utils';
 
 @each $color-name, $color-value in $kirby-colors {
   .#{$color-name} {
