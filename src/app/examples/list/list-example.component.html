@@ -185,24 +185,23 @@
 
 <h2>List with no background shape:</h2>
 <h3>Removes background, border, shadow and padding from the list and the list item containers to provide flexibility</h3>
-<kirby-list [items]="items" shape="none" item-spacing="true">
+<kirby-list [items]="items" shape="none" hasItemSpacing="true">
     <kirby-list-flex-item *kirbyListFlexItem="let item">
-        <kirby-list-cell>
-          <section style="flex-direction: row; display: flex; padding-top: 10px;">
-            <kirby-avatar [imageSrc]="imageSrc" [size]="'small'">
-              <kirby-badge themeColor="danger">1</kirby-badge>
-            </kirby-avatar>
-            <div style="margin-left: 10px; flex-direction: column; display: flex;">
-              <kirby-list-cell-line [primary]="true" [text]="item.title"></kirby-list-cell-line>
-              <kirby-list-cell-line [text]="item.detail"></kirby-list-cell-line>
-            </div>
-          </section>
-        </kirby-list-cell>
-      
-        <kirby-list-cell
-            verticalAlignment="top"
-            horisontalAlignment="right">
-          <kirby-list-cell-line [primary]="true" [text]="item.amount"></kirby-list-cell-line>
-        </kirby-list-cell>
+        <kirby-card style="width: 100%;">
+          <kirby-card-header style="background-color: orange;">Test</kirby-card-header>
+          <div class="card-content" style="padding: 10px;">
+            Test
+            <br>
+            Test 2
+          </div>
+        </kirby-card>
       </kirby-list-flex-item>
+</kirby-list>
+
+<kirby-list [items]="items" shape="none" hasItemSpacing="true">
+    <kirby-list-item
+    *kirbyListItem="let item"
+    [title]="item.title"
+    [amount]="item.amount">
+  </kirby-list-item>
 </kirby-list>

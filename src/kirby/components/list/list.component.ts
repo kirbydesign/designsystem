@@ -26,6 +26,8 @@ import { ThemeColor } from '@kirbydesign/designsystem/helpers/theme-color.type';
 
 export type ListShape = 'square' | 'rounded' | 'none';
 
+export type ItemSpacing = 'true' | 'false';
+
 @Component({
   selector: 'kirby-list',
   templateUrl: './list.component.html',
@@ -85,6 +87,12 @@ export class ListComponent implements OnInit, OnChanges {
   @HostBinding('class.no-shape')
   public get isNoShape(): boolean {
     return this.shape === 'none';
+  }
+
+  @Input() hasItemSpacing: ItemSpacing = 'false';
+  @HostBinding('class.item-spacing')
+  public get itemSpacing(): boolean {
+    return this.hasItemSpacing === 'true';
   }
 
   /**

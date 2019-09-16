@@ -85,19 +85,23 @@ $shadow: get-elevation(2);
     border: none;
     box-shadow: none;
     background: none;
+    padding: 0; // Set these with Ionic CSS variables
+    margin: 0;
 
-    & > ion-item {
+    ion-item {
       background: none;
       --padding-start: 0;
       --inner-padding-end: 0;
-      padding: 0;
+      padding: 0; // Set this with custom Ionic CSS variables
     }
   }
 }
 
-:host[item-spacing=true] {
-  ion-list > ion-item {
-    margin-bottom: size('s');
+:host(.item-spacing) {
+  ion-list {
+   > ion-item-sliding, > ion-item {
+      margin-bottom: size('s');
+    }
 
     &:last-child {
       margin-bottom: inherit;
