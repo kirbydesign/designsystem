@@ -103,7 +103,7 @@ export class ModalController implements IModalController {
      *  .subscribe((res) => console.log('The response from the modal is:', res);
      * ```
      *
-     * @param config the configuration (or Observable of configuration) to pass to the modal, controlling behaviour and content of modal
+     * @param config the configuration (or Observable of configuration) to pass to the modal
      */
     showModal: (config: ModalConfig | Observable<ModalConfig>) => (
       source: Observable<ComponentProps>
@@ -136,7 +136,7 @@ export class ModalController implements IModalController {
      *
      * - It determines the actions to display, based on the input of [ActionItem]s (array)
      * - It outputs based on the response (callback) from the action sheet (based on the selected action)
-     * - It completes the output Observable, when the user has made a selection (or discarded the)
+     * - It completes the output Observable, when the user has made a selection (or discarded the) action sheet
      *
      * Example usage:
      * ```ts
@@ -148,7 +148,7 @@ export class ModalController implements IModalController {
      *  .subscribe((res) => console.log('The response from the action sheet is:', res);
      * ```
      *
-     * @param config the configuration (or Observable of configuration) to pass to the action sheet, controlling behaviour and content of action sheet
+     * @param config the configuration (or Observable of configuration) to pass to the action sheet
      */
     showActionSheet: (config: ActionSheetConfig | Observable<ActionSheetConfig>) => (
       source: Observable<ActionSheetItem[]>
@@ -176,6 +176,23 @@ export class ModalController implements IModalController {
       });
     },
 
+    /**
+     * An RxJs-operator that can display an alert.
+     *
+     * - It outputs based on the response (callback) from the action sheet (based on the selected action)
+     * - It completes the output Observable, when the user has made a selection (or discarded the) alert
+     *
+     * Example usage:
+     * ```ts
+     * const obs$ = ... // some observable is constructed.
+     * obs$.pipe(
+     *     modalController.operators.showAlert(config)
+     *  )
+     *  .subscribe((res) => console.log('The response from the alert is:', res);
+     * ```
+     *
+     * @param config the configuration (or Observable of configuration) to pass to the alert
+     */
     showAlert: (config: AlertConfig | Observable<AlertConfig>) => (source: Observable<any>) => {
       const controller = this;
 
