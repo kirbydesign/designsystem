@@ -40,13 +40,13 @@ ion-item {
 
   $list-colors: ('light'); // add supported list item theme colors here
   @each $color-name, $color-value in $list-colors {
-     &.#{$color-name} {
-             background-color: #{get-color($color-name)};
-             color: #{get-color($color-name+'-contrast')};
-             &:focus {
-                 background-color: #{get-color($color-name+'-shade')};
-             }
-         }
+    &.#{$color-name} {
+      background-color: #{get-color($color-name)};
+      color: #{get-color($color-name+'-contrast')};
+      &:focus {
+        background-color: #{get-color($color-name+'-shade')};
+      }
+    }
   }
 }
 

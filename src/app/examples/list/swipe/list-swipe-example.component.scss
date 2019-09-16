@@ -5,28 +5,28 @@ $dot-size: size('xxs');
 $dot-margin: size('xxxs');
 
 :host {
-    display: block;
-    height: 100%;
-    padding: size('s');
-    background-color: get-color('background-color');
+  display: block;
+  height: 100%;
+  padding: size('s');
+  background-color: get-color('background-color');
 }
 
 kirby-list-flex-item {
-    &.flagged {
-        &::before {
-            content: "\00a0";
-            background-color: get-color('success');
-            position: absolute;
-            top: calc(50% - #{($dot-size / 2)});
-            margin-left: -($dot-size + $dot-margin);
-            width: $dot-size;
-            height: $dot-size;
-            border-radius: 50%;
-        }
+  &.flagged {
+    &::before {
+      content: "\00a0";
+      background-color: get-color('success');
+      position: absolute;
+      top: calc(50% - #{($dot-size / 2)});
+      margin-left: -($dot-size + $dot-margin);
+      width: $dot-size;
+      height: $dot-size;
+      border-radius: 50%;
     }
+  }
 }
 
 .amount {
-    white-space: nowrap;
-    font-weight: font-weight('bold');
+  white-space: nowrap;
+  font-weight: font-weight('bold');
 }
