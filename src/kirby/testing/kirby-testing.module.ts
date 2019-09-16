@@ -37,6 +37,7 @@ import { SlideButtonComponent } from '../components/slide-button/slide-button.co
 import { ToolbarComponent } from '../components/toolbar/toolbar.component';
 import { ThemeColorDirective } from '../directives/theme-color/theme-color.directive';
 import { ListItemColorDirective } from '../components/list/directives/list-item-color.directive';
+import { LoadingOverlayComponent } from '../components/loading-overlay/loading-overlay.component';
 
 /*
  * Fake components should be handled by the list of kirby
@@ -131,6 +132,7 @@ const MOCK_COMPONENTS = MockComponents(
   FakeIonItemOptionsComponent,
   FakeIonItemOptionComponent,
   FakeIonLabelComponent,
+  LoadingOverlayComponent
 );
 
 /**
