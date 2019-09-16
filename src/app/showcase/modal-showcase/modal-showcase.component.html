@@ -90,6 +90,20 @@ this.modalController.hideTopmost(returnData);</kirby-code-viewer>
     <p>Conclusion must be: If you want to open a second modal - let the first modal do it - just like the example above shows.</p>
     <p>To see the problem in action: <a href="https://play.nativescript.org/?template=play-ng&id=J3Gjbm&v=3">See Playground Example</a></p>
 
+    <h4>Showing a Modal from an RxJs Observable</h4>
+    <p>When using a modal, it would some times be useful to use it in an <code>Observable</code> stream (one example hereof would be using it in conjunction
+        with a state-management library, such as <b>NgRx</b>).
+    </p>
+    <p>To facilitate that, an operator is created, that can be put in the "pipe" of an <code>Observable</code>:</p>
+    <kirby-code-viewer language="ts"><![CDATA[const obs$ = ... // some observable is constructed.
+obs$.pipe(
+    // Map "value" to ComponentProps
+    map((value) => ({ data: value })),
+    // Displays and awaits interaction (modal is hidden / discarded)
+    modalController.operators.showModal(config)
+)
+.subscribe((res) => console.log('Modal response is:', res);]]></kirby-code-viewer>
+    <br>
 
     <h4>ModalConfig properties:</h4>
     <kirby-showcase-properties [properties]="properties"></kirby-showcase-properties>
