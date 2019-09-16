@@ -95,7 +95,10 @@ ion-item-divider {
 ion-item {
   display: flex;
   width: 100%;
-  padding: size('m') size('xxs');
+  --padding-top: #{size('xxs')};
+  --padding-bottom: #{size('xxs')};
+  --padding-start: #{size('s')};
+  --padding-end: #{size('s')};
   font-size: font-size('s');
   --inner-border-width: 0;
   --background: transparent;
