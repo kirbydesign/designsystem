@@ -46,7 +46,7 @@ export class CalendarShowcaseComponent {
     },
     {
       name: 'alwaysEnableCurrentDate',
-      description: '(Optional) Allows selection of current date regardless of disabled weekend.',
+      description: '(Optional) Allows selection of current date regardless of disabled weekends.',
       defaultValue: 'false',
       inputValues: ['true | false'],
     },
