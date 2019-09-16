@@ -48,18 +48,21 @@ ion-item {
   }
 }
 
-.footer {
-  background-color: get-color('white');
-  overflow: hidden;
-  display: flex;
-  justify-content: space-between;
-  border-top: 1px solid $divider-color;
-}
-
 ion-list-header {
   background-color: get-color('white');
   border-bottom: 1px solid $divider-color;
   padding: 0;
+}
+
+.footer {
+  background-color: get-color('white');
+  border-top: 1px solid $divider-color;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  
+
 }
 
 :host(.has-sections) {
