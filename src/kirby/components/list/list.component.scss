@@ -4,60 +4,84 @@ $divider-color: get-color('background-color');
 $background-color-hover: get-color('background-color');
 $shadow: get-elevation(2);
 
-:host {
-  ion-list {
-    box-shadow: $shadow;
-    background: transparent;
-    contain: inherit;
-    padding: 0;
+ion-list {
+  box-shadow: $shadow;
+  background: transparent;
+  contain: inherit;
+  padding: 0;
+}
+
+ion-item {
+  background-color: get-color('white');
+  &:not(:last-of-type).has-divider {
+    border-bottom: 1px solid $divider-color;
   }
 
-  ion-item {
-    background-color: get-color('white');
-    &:not(:last-of-type).has-divider {
-      border-bottom: 1px solid $divider-color;
-    }
+  &.selected ::ng-deep * {
+    font-weight: font-weight('bold');
+  }
+  &:focus {
+    $outline-width: 5px;
+    outline-color: var(--highlight-color-focused);
+    outline-style: auto;
+    outline-width: $outline-width;
+    margin-bottom: $outline-width;
+    background-color: $background-color-hover;
+  }
 
-    &.selected ::ng-deep * {
-      font-weight: font-weight('bold');
-    }
-    &:focus {
-      $outline-width: 5px;
-      outline-color: var(--highlight-color-focused);
-      outline-style: auto;
-      outline-width: $outline-width;
-      margin-bottom: $outline-width;
+  &.selectable {
+    cursor: pointer;
+    &:hover {
       background-color: $background-color-hover;
     }
-
-    &.selectable {
-      cursor: pointer;
-      &:hover {
-        background-color: $background-color-hover;
-      }
-    }
-
-    $list-colors: ('light'); // add supported list item theme colors here
-    @each $color-name, $color-value in $list-colors {
-       &.#{$color-name} {
-               background-color: #{get-color($color-name)};
-               color: #{get-color($color-name+'-contrast')};
-               &:focus {
-                   background-color: #{get-color($color-name+'-shade')};
-               }
-           }
-    }
   }
 
-  &.has-sections {
-    ion-list {
-      box-shadow: none;
-    }
-    .list-items {
-      box-shadow: $shadow;
-      border-radius: $border-radius;
-    }
+  $list-colors: ('light'); // add supported list item theme colors here
+  @each $color-name, $color-value in $list-colors {
+     &.#{$color-name} {
+             background-color: #{get-color($color-name)};
+             color: #{get-color($color-name+'-contrast')};
+             &:focus {
+                 background-color: #{get-color($color-name+'-shade')};
+             }
+         }
   }
+}
+
+.footer {
+  background-color: get-color('white');
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid $divider-color;
+}
+
+ion-list-header {
+  background-color: get-color('white');
+  border-bottom: 1px solid $divider-color;
+  padding: 0;
+}
+
+:host(.has-sections) {
+  ion-list {
+    box-shadow: none;
+  }
+
+  .list-items {
+    box-shadow: $shadow;
+    border-radius: $border-radius;
+  }
+
+  .footer {
+    background-color: transparent;
+    border-top: none;
+  }
+
+  ion-list-header {
+    background-color: transparent;
+    border-bottom: none;
+  }  
+  
 }
 
 :host(.rounded) {
@@ -66,23 +90,33 @@ $shadow: get-elevation(2);
     border-radius: $border-radius;
   }
 
-  ion-list:not(.has-header) ion-item-sliding:first-of-type,
+  ion-list ion-item:first-of-type,
+  ion-list ion-item-sliding:first-of-type,
   ion-list-header {
     border-top-left-radius: $border-radius;
     border-top-right-radius: $border-radius;
   }
+ 
+  ion-list ion-item-sliding > ion-item,
+  &:not(.has-sections) ion-list.has-header ion-item,
+  &:not(.has-sections) ion-list.has-header ion-item-sliding {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
 
-  ion-list:not(.has-footer) ion-item-sliding:last-of-type,
+  ion-list ion-item:last-of-type,
+  ion-list ion-item-sliding:last-of-type,
   .footer {
     border-bottom-left-radius: $border-radius;
     border-bottom-right-radius: $border-radius;
   }
-}
 
-ion-list-header {
-  background-color: get-color('white');
-  border-bottom: 1px solid $divider-color;
-  padding: 0;
+  ion-list ion-item-sliding > ion-item,
+  &:not(.has-sections) ion-list.has-footer ion-item,
+  &:not(.has-sections) ion-list.has-footer ion-item-sliding {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
 }
 
 ion-item-divider {
@@ -115,13 +149,6 @@ ion-item {
   width: 100%;
   padding: size('m');
   text-align: center;
-}
-
-.footer {
-  overflow: hidden;
-  display: flex;
-  justify-content: space-between;
-  border-top: 1px solid $divider-color;
 }
 
 .swipe-action {
