@@ -186,19 +186,6 @@
 <h2>List with no background shape:</h2>
 <h3>Removes background, border, shadow and padding from the list and the list item containers to provide flexibility</h3>
 <kirby-list [items]="items" shape="none" hasItemSpacing="true">
-    <kirby-list-flex-item *kirbyListFlexItem="let item">
-        <kirby-card style="width: 100%;">
-          <kirby-card-header style="background-color: orange;">Test</kirby-card-header>
-          <div class="card-content" style="padding: 10px;">
-            Test
-            <br>
-            Test 2
-          </div>
-        </kirby-card>
-      </kirby-list-flex-item>
-</kirby-list>
-
-<kirby-list [items]="items" shape="none" hasItemSpacing="true">
     <kirby-list-item
     *kirbyListItem="let item"
     [title]="item.title"
