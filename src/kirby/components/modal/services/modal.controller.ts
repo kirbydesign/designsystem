@@ -20,12 +20,11 @@ export class ModalController implements IModalController {
 
   public showModal(
     config: ModalConfig,
-    vcRef: ViewContainerRef,
+    vcRef?: ViewContainerRef,
     onCloseModal?: (data?: any) => void
   ): void {
     const modalCloseEvent: Promise<any> = this.modalHelper.showModalWindow(
       config,
-      vcRef,
       this.register.bind(this)
     );
     modalCloseEvent.then((data) => {
@@ -40,10 +39,10 @@ export class ModalController implements IModalController {
 
   public showActionSheet(
     config: ActionSheetConfig,
-    vcRef: ViewContainerRef,
+    vcRef?: ViewContainerRef,
     onCloseModal?: (data?: any) => void
   ): void {
-    this.actionSheetHelper.showActionSheet(config, vcRef, this.register.bind(this)).then((data) => {
+    this.actionSheetHelper.showActionSheet(config, this.register.bind(this)).then((data) => {
       this.forgetTopmost();
       if (onCloseModal) {
         onCloseModal(typeof data === 'object' && 'data' in data ? data.data : data);
