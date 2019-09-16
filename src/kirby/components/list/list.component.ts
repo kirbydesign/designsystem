@@ -80,12 +80,12 @@ export class ListComponent implements OnInit, OnChanges {
    * `square` means **without** rounded corners, `rounded` means **with** rounded corners.,  `none` means **without** padding, border, box-shadow and background.
    */
   @Input() shape: ListShape = 'rounded';
-  @HostBinding('class.rounded')
-  public get isRounded(): boolean {
+  @HostBinding('class.shape-rounded')
+  public get isShapeRounded(): boolean {
     return this.shape === 'rounded';
   }
-  @HostBinding('class.no-shape')
-  public get isNoShape(): boolean {
+  @HostBinding('class.shape-none')
+  public get isShapeNone(): boolean {
     return this.shape === 'none';
   }
 

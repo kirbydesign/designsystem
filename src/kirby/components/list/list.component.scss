@@ -89,7 +89,7 @@ ion-list-header {
   
 }
 
-:host(.rounded) {
+:host(.shape-rounded) {
   ion-list,
   .list-items {
     border-radius: $border-radius;
@@ -124,33 +124,41 @@ ion-list-header {
   }
 }
 
-:host(.no-shape) {
-  ion-list {
+:host(.shape-none) {
+  ion-list,
+  .list-items {
     box-shadow: none;
+    border-radius: unset;
+  }
 
-    ion-item, ion-item-sliding {
-    --padding-start: 0;
-    --padding-end: 0;
-    --padding-top: 0;
-    --padding-bottom: 0;
-    --inner-padding-start: 0;
-    --inner-padding-end: 0;
-    --inner-padding-top: 0;
-    --inner-padding-bottom: 0;
-    background: none;
+  ion-list {
+    ion-item,
+    ion-item-sliding {
+      --padding-start: 0;
+      --padding-end: 0;
+      --padding-top: 0;
+      --padding-bottom: 0;
+      --inner-padding-start: 0;
+      --inner-padding-end: 0;
+      --inner-padding-top: 0;
+      --inner-padding-bottom: 0;
+      background: none;
     }
   }
 }
 
 :host(.item-spacing) {
   ion-list {
-   > ion-item-sliding, > ion-item {
+    ion-item,
+    ion-item-sliding {
       margin-bottom: size('s');
 
+      & > ion-item,
       &:last-child {
-        margin-bottom: inherit;
+        margin-bottom: 0;
       }
     }
+
   }
 }
 
