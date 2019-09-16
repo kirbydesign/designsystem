@@ -17,7 +17,7 @@ kirby-list-flex-item {
             content: "\00a0";
             background-color: get-color('success');
             position: absolute;
-            margin-top: ($item-height / 2) - ($dot-size / 2);
+            top: calc(50% - #{($dot-size / 2)});
             margin-left: -($dot-size + $dot-margin);
             width: $dot-size;
             height: $dot-size;
