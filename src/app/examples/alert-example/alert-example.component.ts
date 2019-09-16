@@ -1,9 +1,8 @@
 import { Component, ViewContainerRef } from '@angular/core';
-
-import { ModalController } from '@kirbydesign/designsystem/modal';
-import { AlertConfig } from '@kirbydesign/designsystem/modal';
 import { of } from 'rxjs';
-import { delay, map, tap } from 'rxjs/operators';
+import { delay, tap } from 'rxjs/operators';
+
+import { AlertConfig, ModalController } from '@kirbydesign/designsystem/modal';
 
 @Component({
   selector: 'kirby-alert-example',
