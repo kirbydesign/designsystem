@@ -10,7 +10,6 @@ export class ActionSheetHelper {
 
   public async showActionSheet(
     config: ActionSheetConfig,
-    vcRef: ViewContainerRef,
     registerModal: (modal: { close: (data?: any) => {} }) => void
   ): Promise<any> {
     const modal = await this.ionicModalController.create({
