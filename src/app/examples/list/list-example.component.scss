@@ -24,3 +24,20 @@ h2 {
         margin: 0;
     }
 }
+
+kirby-card {
+    margin: 5px;
+    width: 330px;
+
+    @include media(">=large") {
+        width: 500px;
+    }
+
+    kirby-card-header {
+        padding: size('xxxs');
+        padding-bottom: 0;
+        background-color: get-color('warning');
+        color: get-color('warning-contrast');
+    }
+      
+}

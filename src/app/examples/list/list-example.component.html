@@ -186,9 +186,20 @@
 <h2>List with no background shape:</h2>
 <h3>Removes background, border, shadow and padding from the list and the list item containers to provide flexibility</h3>
 <kirby-list [items]="items" shape="none" hasItemSpacing="true">
-    <kirby-list-item
-    *kirbyListItem="let item"
-    [title]="item.title"
-    [amount]="item.amount">
-  </kirby-list-item>
+  <kirby-card *kirbyListItem="let item" hasPadding="true">
+    <kirby-card-header title="There is an issue with this item."></kirby-card-header>
+    <kirby-list-flex-item>
+      <kirby-list-cell
+        width="2">
+        {{item.title}}
+      </kirby-list-cell>
+      <kirby-list-cell
+        class="amount"
+        width="1"
+        verticalAlignment="center"
+        horisontalAlignment="right">
+        {{item.amount}}
+      </kirby-list-cell>
+    </kirby-list-flex-item>
+  </kirby-card>
 </kirby-list>
