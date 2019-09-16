@@ -12,8 +12,6 @@ $dot-margin: size('xxxs');
 }
 
 kirby-list-flex-item {
-    min-height: $item-height;
-
     &.flagged {
         &::before {
             content: "\00a0";

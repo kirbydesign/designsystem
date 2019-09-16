@@ -3,6 +3,7 @@
 $divider-color: get-color('background-color');
 $background-color-hover: get-color('background-color');
 $shadow: get-elevation(2);
+$item-height: size('xxxl');
 
 ion-list {
   box-shadow: $shadow;
@@ -12,6 +13,7 @@ ion-list {
 }
 
 ion-item {
+  min-height: $item-height;
   background-color: get-color('white');
   &:not(:last-of-type).has-divider {
     border-bottom: 1px solid $divider-color;
