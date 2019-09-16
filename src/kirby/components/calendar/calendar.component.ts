@@ -42,6 +42,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() disabledDates: Date[];
   @Input() minDate: Date;
   @Input() maxDate: Date;
+  @Input() alwaysEnableCurrentDate = false;
   public month: CalendarCell[][];
   public weekDays: string[];
   private activeMonth: moment.Moment;
@@ -213,7 +214,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
     return (
       !day.isDisabled &&
       day.isCurrentMonth &&
-      !(this.disableWeekends && day.isWeekend) &&
+      (!(this.disableWeekends && day.isWeekend) || this.alwaysEnableCurrentDate) &&
       !(this.disablePastDates && day.isPast) &&
       !(this.disableFutureDates && day.isFuture) &&
       !(this.minDate && date.isBefore(this.minDate, 'day')) &&
