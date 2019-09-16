@@ -11,11 +11,13 @@ import { ActionSheetComponent } from './components/modal/action-sheet/action-she
 import { KeyHandlerDirective } from '@kirbydesign/designsystem/directives/key-handler/key-handler.directive';
 import { FullscreenLoadingOverlayComponent } from './components/loading-overlay/fullscreen-loading-overlay/fullscreen-loading-overlay.component';
 import { LoadingOverlayComponent } from './components/loading-overlay/loading-overlay.component';
+import { ListItemColorDirective } from './components/list/directives/list-item-color.directive';
 
 @NgModule({
   imports: [CommonModule, RouterModule, OverlayModule, IonicModule.forRoot()],
   declarations: [
     InfiniteScrollDirective,
+    ListItemColorDirective,
     FullscreenLoadingOverlayComponent,
     LoadingOverlayComponent,
     KeyHandlerDirective,

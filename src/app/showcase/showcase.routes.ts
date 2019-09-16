@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 
+import { ListSwipeShowcaseComponent } from './list-swipe-showcase/list-swipe-showcase.component';
 import { AvatarShowcaseComponent } from './avatar-showcase/avatar-showcase.component';
 import { ButtonShowcaseComponent } from './button-showcase/button-showcase.component';
 import { FloatingActionButtonShowcaseComponent } from './floating-action-button-showcase/floating-action-button-showcase.component';
@@ -73,6 +74,10 @@ export const routes: Routes = [
       {
         path: 'list-load-on-demand',
         component: ListLoadOnDemandShowcaseComponent,
+      },
+      {
+        path: 'list-swipe',
+        component: ListSwipeShowcaseComponent,
       },
       {
         path: 'grid',

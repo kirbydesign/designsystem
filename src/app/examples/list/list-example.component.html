@@ -18,8 +18,8 @@
   <kirby-list-item
     *kirbyListItem="let item"
     [title]="item.title"
-    [amount]="item.amount"
-  ></kirby-list-item>
+    [amount]="item.amount">
+  </kirby-list-item>
 </kirby-list>
 
 <hr />
@@ -54,6 +54,44 @@
     [amount]="item.amount"
   ></kirby-list-item>
 </kirby-list>
+
+<hr />
+
+<h2>List with colored items:</h2>
+<kirby-list [items]="items" [getItemColor]="getItemColor" (itemSelect)="onItemSelect($event)" showDivider="true">
+  <kirby-list-item
+    *kirbyListItem="let item"
+    [item]="item"
+    [title]="item.title"
+    [amount]="item.amount"
+  ></kirby-list-item>
+</kirby-list>
+
+ <hr />
+
+ <h2>List with sections and colored items:</h2>
+  <kirby-list
+    [items]="items"
+    (itemSelect)="onItemSelect($event)"
+    [getSectionName]="getSectionName"
+    [getItemColor]="getItemColor"
+    [showDivider]="true">
+  <kirby-list-section-header
+    *kirbyListSectionHeader="let section"
+    [title]="section"
+  ></kirby-list-section-header>
+  <kirby-list-flex-item *kirbyListFlexItem="let item">
+    <kirby-list-cell>
+      <kirby-list-cell-line [primary]="true" [text]="item.title"></kirby-list-cell-line>
+      <kirby-list-cell-line [text]="item.detail"></kirby-list-cell-line>
+    </kirby-list-cell>
+    <kirby-list-cell
+      verticalAlignment="top"
+      horisontalAlignment="right">
+      <kirby-list-cell-line [primary]="true" [text]="item.amount"></kirby-list-cell-line>
+    </kirby-list-cell>
+  </kirby-list-flex-item>
+</kirby-list> 
 
 <hr />
 

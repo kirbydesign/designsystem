@@ -1,3 +1,4 @@
+import { ListSwipeShowcaseComponent } from './list-swipe-showcase/list-swipe-showcase.component';
 import { ExamplesModule } from '../examples/examples.module';
 import { AvatarShowcaseComponent } from './avatar-showcase/avatar-showcase.component';
 import { ButtonShowcaseComponent } from './button-showcase/button-showcase.component';
@@ -38,6 +39,7 @@ export const COMPONENT_EXPORTS: any[] = [
   FloatingActionButtonShowcaseComponent,
   ListShowcaseComponent,
   ListLoadOnDemandShowcaseComponent,
+  ListSwipeShowcaseComponent,
   GridShowcaseComponent,
   AvatarShowcaseComponent,
   ChartShowcaseComponent,

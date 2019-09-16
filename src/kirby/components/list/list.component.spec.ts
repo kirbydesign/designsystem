@@ -1,6 +1,7 @@
 import { createTestComponentFactory, Spectator } from '@netbasal/spectator';
 import { MockComponent } from 'ng-mocks';
 import * as ionic from '@ionic/angular';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { LoadOnDemandEvent } from './list.event';
 import { GroupByPipe } from './pipes/group-by.pipe';
@@ -8,6 +9,7 @@ import { ListComponent } from './list.component';
 import { SpinnerComponent } from '../spinner/spinner.component';
 import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
 import { ListHelper } from './helpers/list-helper';
+import { ListItemColorDirective } from './directives/list-item-color.directive';
 
 /**
  * We need an actual model item, since WeakMap can't use primitives for keys.
@@ -38,14 +40,17 @@ describe('ListComponent', () => {
       GroupByPipe,
       SpinnerComponent,
       InfiniteScrollDirective,
+      ListItemColorDirective,
       MockComponent(ionic.IonList),
       MockComponent(ionic.IonListHeader),
       MockComponent(ionic.IonLabel),
       MockComponent(ionic.IonItem),
       MockComponent(ionic.IonItemDivider),
       MockComponent(ionic.IonItemGroup),
+      MockComponent(ionic.IonItemSliding),
     ],
     providers: [ListHelper, GroupByPipe],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
   });
 
   beforeEach(() => {

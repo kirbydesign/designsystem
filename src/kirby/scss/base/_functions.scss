@@ -12,7 +12,7 @@
   @if ($negative) {
     $key: str-slice($key, 2, -1);
   }
-  $value: get-unit-value(_get-map-prop($sizes, $key));
+  $value: _get-map-prop($sizes, $key);
   @return if($negative, unquote('-' + $value), $value);
 }
 
@@ -24,19 +24,11 @@
   @if ($key == 'display') {
     @warn 'Display key is deprecated';
   }
-  @return get-unit-value(_get-map-prop($font-sizes, $key));
+  @return _get-map-prop($font-sizes, $key);
 }
 
 @function line-height($key: 'm') {
-  @return get-unit-value(_get-map-prop($line-height, $key));
-}
-
-@function get-unit-value($value) {
-  @if ($native == false) {
-    @return $value * 1px;
-  } @else {
-    @return $value;
-  }
+  @return _get-map-prop($line-height, $key);
 }
 
 @function font-weight($key: 'normal') {
@@ -45,7 +37,7 @@
 
 @function get-color($variant, $getValueOnly: false, $map: $kirby-colors) {
   $value: _get-map-prop($map, $variant);
-  @if $getValueOnly == true or $native == true {
+  @if $getValueOnly == true {
     @return $value;
   } @else {
     @return unquote('var(--kirby-' + $variant+ ')');

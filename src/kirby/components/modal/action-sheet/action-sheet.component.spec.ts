@@ -4,6 +4,7 @@ import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/t
 import { By } from '@angular/platform-browser';
 import { MockComponent } from 'ng-mocks';
 import * as ionic from '@ionic/angular';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { ActionSheetComponent } from './action-sheet.component';
 import { IModalController } from '../services/modal.controller.interface';
@@ -17,6 +18,7 @@ import { InfiniteScrollDirective } from '../../list/directives/infinite-scroll.d
 import { CardHeaderComponent } from '../../card/card-header/card-header.component';
 import { ListFlexItemComponent } from '../../list/list-flex-item/list-flex-item.component';
 import { ButtonComponent } from '../../button/button.component';
+import { ListItemColorDirective } from '../../list/directives/list-item-color.directive';
 
 describe('ActionSheetComponent', () => {
   let component: ActionSheetComponent;
@@ -55,17 +57,21 @@ describe('ActionSheetComponent', () => {
         SpinnerComponent,
         InfiniteScrollDirective,
         ButtonComponent,
+        ListItemColorDirective,
         MockComponent(ionic.IonList),
         MockComponent(ionic.IonListHeader),
         MockComponent(ionic.IonLabel),
         MockComponent(ionic.IonItem),
         MockComponent(ionic.IonItemDivider),
         MockComponent(ionic.IonItemGroup),
+        MockComponent(ionic.IonItemOptions),
+        MockComponent(ionic.IonItemSliding),
       ],
       providers: [
         { provide: IModalController, useValue: modalControllerSpy },
         { provide: NavParams, useValue: navParamsSpy },
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
     TestBed.overrideModule(BrowserDynamicTestingModule, {
       set: {
