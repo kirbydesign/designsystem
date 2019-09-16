@@ -38,6 +38,7 @@ import { ToolbarComponent } from '../components/toolbar/toolbar.component';
 import { ThemeColorDirective } from '../directives/theme-color/theme-color.directive';
 import { ListItemColorDirective } from '../components/list/directives/list-item-color.directive';
 import { LoadingOverlayComponent } from '../components/loading-overlay/loading-overlay.component';
+import { LoadingOverlayService } from '../components/loading-overlay/fullscreen-loading-overlay/loading-overlay.service';
 
 /*
  * Fake components should be handled by the list of kirby
@@ -86,21 +87,21 @@ class FakeIonItemGroupComponent {}
 })
 class FakeIonItemSlidingComponent {}
 
- @Component({
+@Component({
   // tslint:disable
   selector: 'ion-item-options',
   template: '<ng-content></ng-content>',
 })
 class FakeIonItemOptionsComponent {}
 
- @Component({
+@Component({
   // tslint:disable
   selector: 'ion-item-option',
   template: '<ng-content></ng-content>',
 })
 class FakeIonItemOptionComponent {}
 
- @Component({
+@Component({
   // tslint:disable
   selector: 'ion-label',
   template: '<ng-content></ng-content>',
@@ -153,7 +154,11 @@ const NON_MOCKED_COMPONENTS = [
   ListSectionHeaderDirective,
 ];
 
-const MOCK_DIRECTIVES = MockDirectives(InfiniteScrollDirective, ThemeColorDirective, ListItemColorDirective);
+const MOCK_DIRECTIVES = MockDirectives(
+  InfiniteScrollDirective,
+  ThemeColorDirective,
+  ListItemColorDirective
+);
 
 @NgModule({
   imports: [CommonModule],
@@ -173,6 +178,13 @@ const MOCK_DIRECTIVES = MockDirectives(InfiniteScrollDirective, ThemeColorDirect
     {
       provide: ToastController,
       useValue: createSpyObj('ToastController', ['showToast']),
+    },
+    {
+      provide: LoadingOverlayService,
+      useValue: createSpyObj<LoadingOverlayService>('LoadingOverlayService', [
+        'showLoadingOverlay',
+        'hideLoadingOverlay',
+      ]),
     },
   ],
 })
