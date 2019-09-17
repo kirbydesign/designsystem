@@ -30,6 +30,7 @@ import { ToggleExampleComponent } from './toggle-example/toggle-example.componen
 import { EmptyStateExampleComponent } from './empty-state-example/empty-state-example.component';
 import { ToolbarExampleComponent } from './toolbar-example/toolbar-example.component';
 import { ListSwipeExampleComponent } from './list/swipe/list-swipe-example.component';
+import { ListNoShapeExampleComponent } from './list/no-shape/list-no-shape-example.component';
 
 // Example of "custom" icons
 export const iconSettings: IconSettings = {
@@ -55,6 +56,7 @@ export const COMPONENT_DECLARATIONS: any[] = [
   ListExampleComponent,
   ListLoadOnDemandExampleComponent,
   ListSwipeExampleComponent,
+  ListNoShapeExampleComponent,
   GridExampleComponent,
   AvatarExampleComponent,
   ChartExampleComponent,

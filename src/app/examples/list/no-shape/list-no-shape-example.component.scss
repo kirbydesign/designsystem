@@ -1,0 +1,34 @@
+@import "../../../../kirby/scss/utils";
+
+kirby-card {
+  margin: 5px;
+  width: 330px;
+
+  @include media(">=large") {
+      width: 500px;
+  }
+
+  kirby-card-header {
+      padding: size('xxxs');
+      padding-bottom: 0;
+      background-color: get-color('warning');
+      color: get-color('warning-contrast');
+  }
+
+  kirby-list-flex-item {
+    box-sizing: border-box;
+    padding: size('xs');
+    border-bottom: 1px get-color('background-color') solid;
+
+    &:first-child {
+      font-weight: bold;
+      padding-top: size('s');
+      padding-bottom: size('s');
+    }
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+    
+}

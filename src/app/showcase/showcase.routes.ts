@@ -27,6 +27,7 @@ import { ToastShowcaseComponent } from './toast-showcase/toast-showcase.componen
 import { ToggleShowcaseComponent } from './toggle-showcase/toggle-showcase.component';
 import { EmptyStateShowcaseComponent } from './empty-state-showcase/empty-state-showcase.component';
 import { ToolbarShowcaseComponent } from './toolbar-showcase/toolbar-showcase.component';
+import { ListNoShapeShowcaseComponent } from './list-no-shape-showcase/list-no-shape-showcase.component';
 
 export const routes: Routes = [
   {
@@ -77,6 +78,10 @@ export const routes: Routes = [
       {
         path: 'list-swipe',
         component: ListSwipeShowcaseComponent,
+      },
+      {
+        path: 'list-no-shape',
+        component: ListNoShapeShowcaseComponent,
       },
       {
         path: 'grid',
