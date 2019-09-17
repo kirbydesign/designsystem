@@ -63,3 +63,29 @@ $breakpoints: (
   xlarge: 60em, 
   xxlarge: 80em 
 ) !default;
+
+/* Shadow properties 
+****************************************************************************/
+$shadow-offset-x: (
+  2: 0,
+  4: 0,
+  8: 0
+) !default;
+
+$shadow-offset-y: (
+  2: 5px,
+  4: 10px,
+  8: 20px,
+) !default;
+
+$shadow-blur: (
+  2: 10px,
+  4: 15px,
+  8: 30px,
+) !default;
+
+$shadow-spread: (
+  2: -10px,
+  4: -10px,
+  8: -15px,
+) !default;

@@ -1,11 +1,11 @@
 @import "../../../../kirby/scss/utils";
 
 kirby-card {
-  margin: 5px;
-  width: 330px;
+  margin: map-get($shadow-offset-y, 2);
+  width: map-get($breakpoints, small);;
 
   @include media(">=large") {
-      width: 500px;
+      width: map-get($breakpoints, medium);
   }
 
   kirby-card-header {

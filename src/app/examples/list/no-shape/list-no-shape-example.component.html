@@ -5,7 +5,7 @@
 
   <kirby-card *kirbyListItem="let item">
     <kirby-card-header *ngIf="item.amount < 0" title="Account is overdraft"></kirby-card-header>
-    <kirby-list-flex-item hasPadding="true">
+    <kirby-list-flex-item>
       <kirby-list-cell width="2">
         {{item.title}}
       </kirby-list-cell>

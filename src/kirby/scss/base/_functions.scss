@@ -45,10 +45,11 @@
 }
 
 @function get-elevation($value) {
-  $elevation-map: (
-    2: unquote('0 5px 10px -10px rgba(28, 28, 28, 0.3), 0 0 5px 0 rgba(28, 28, 28, 0.08)'),
-    4: unquote('0 10px 15px -10px rgba(28, 28, 28, 0.3), 0 0 5px 0 rgba(28, 28, 28, 0.08)'),
-    8: unquote('0 20px 30px -15px rgba(28, 28, 28, 0.3), 0 0 5px 0 rgba(28, 28, 28, 0.08)')
+  @return unquote(
+    map-get($shadow-offset-x, $value) + ' ' + 
+    map-get($shadow-offset-y, $value) + ' ' +
+    map-get($shadow-blur, $value) + ' ' +
+    map-get($shadow-spread, $value) + 
+    ' rgba(28, 28, 28, 0.3), 0 0 5px 0 rgba(28, 28, 28, 0.08)'
   );
-  @return map-get($elevation-map, $value);
 }
