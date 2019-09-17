@@ -9,10 +9,10 @@ kirby-card {
   }
 
   kirby-card-header {
-      padding: size('xxxs');
-      padding-bottom: 0;
-      background-color: get-color('warning');
-      color: get-color('warning-contrast');
+    padding: size('xxxs');
+    padding-bottom: 0;
+    background-color: get-color('warning');
+    color: get-color('warning-contrast');
   }
 
   kirby-list-flex-item {
