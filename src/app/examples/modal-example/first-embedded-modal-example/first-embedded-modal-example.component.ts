@@ -13,7 +13,7 @@ export class FirstEmbeddedModalExampleComponent {
 
   constructor(
     @Inject(COMPONENT_PROPS) private componentProps,
-    private modalController: ModalController,
+    private modalController: ModalController
   ) {
     this.props = componentProps;
   }
