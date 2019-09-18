@@ -1,4 +1,4 @@
-import { Component, Inject, ViewContainerRef } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 
 import { ModalController } from '@kirbydesign/designsystem/modal';
 import { ModalConfig } from '@kirbydesign/designsystem/modal';
@@ -14,7 +14,6 @@ export class FirstEmbeddedModalExampleComponent {
   constructor(
     @Inject(COMPONENT_PROPS) private componentProps,
     private modalController: ModalController,
-    private vcRef: ViewContainerRef
   ) {
     this.props = componentProps;
   }
@@ -27,7 +26,7 @@ export class FirstEmbeddedModalExampleComponent {
     };
 
     // supposing no callback needed for the second component
-    this.modalController.showModal(config, this.vcRef);
+    this.modalController.showModal(config);
   }
 
   async showNestedDrawer() {
@@ -42,7 +41,7 @@ export class FirstEmbeddedModalExampleComponent {
     };
 
     // supposing no callback needed for the second component
-    this.modalController.showModal(config, this.vcRef);
+    this.modalController.showModal(config);
   }
 
   onHideFirst() {
