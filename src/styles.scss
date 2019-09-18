@@ -42,7 +42,8 @@ body, html {
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   font-size: font-size("n");
-  color: get-color('black');  
+  color: get-color('black');
+  height: 100%;
 }
 
 *, 

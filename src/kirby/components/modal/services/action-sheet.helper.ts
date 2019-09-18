@@ -1,4 +1,4 @@
-import { Injectable, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { ModalController as IonicModalController } from '@ionic/angular';
 
 import { ActionSheetConfig } from '../action-sheet/config/action-sheet-config';
@@ -10,7 +10,6 @@ export class ActionSheetHelper {
 
   public async showActionSheet(
     config: ActionSheetConfig,
-    vcRef: ViewContainerRef,
     registerModal: (modal: { close: (data?: any) => {} }) => void
   ): Promise<any> {
     const modal = await this.ionicModalController.create({
