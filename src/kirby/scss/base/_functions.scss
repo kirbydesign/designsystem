@@ -45,11 +45,30 @@
 }
 
 @function get-elevation($value) {
-  @return unquote(
-    map-get($shadow-offset-x, $value) + ' ' + 
-    map-get($shadow-offset-y, $value) + ' ' +
-    map-get($shadow-blur, $value) + ' ' +
-    map-get($shadow-spread, $value) + 
-    ' rgba(28, 28, 28, 0.3), 0 0 5px 0 rgba(28, 28, 28, 0.08)'
+  @return map-get($elevations, $value);
+}
+
+@function get-shadow-size($elevation) {
+  $shadow-size: 0;
+  $shadow-list: map-get($elevations, $elevation);
+  @each $shadow in $shadow-list {
+    $offset-x: abs(_get-shadow-value($shadow, 'offset-x'));
+    $offset-y: abs(_get-shadow-value($shadow, 'offset-y'));
+    $blur-radius: _get-shadow-value($shadow, 'blur-radius');
+    $spread-radius: _get-shadow-value($shadow, 'spread-radius');
+    $current-shadow-size: max($offset-x, $offset-y) + $blur-radius + $spread-radius;
+    $shadow-size: max($shadow-size, $current-shadow-size);
+  }
+  @return $shadow-size;
+}
+
+@function _get-shadow-value($shadow, $valuekey) {
+  $shadow-value-map: (
+    'offset-x': 1,
+    'offset-y': 2,
+    'blur-radius': 3,
+    'spread-radius': 4,
   );
+  $value-index: map-get($shadow-value-map, $valuekey);
+  @return nth($shadow, $value-index);
 }

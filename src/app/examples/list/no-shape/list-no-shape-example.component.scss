@@ -1,8 +1,8 @@
 @import "../../../../kirby/scss/utils";
 
 kirby-card {
-  margin: map-get($shadow-offset-y, 2);
-  width: map-get($breakpoints, small);;
+  margin: get-shadow-size(2);
+  width: map-get($breakpoints, small);
 
   @include media(">=large") {
       width: map-get($breakpoints, medium);

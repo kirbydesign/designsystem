@@ -64,28 +64,10 @@ $breakpoints: (
   xxlarge: 80em 
 ) !default;
 
-/* Shadow properties 
+/* Elevation
 ****************************************************************************/
-$shadow-offset-x: (
-  2: 0,
-  4: 0,
-  8: 0
-) !default;
-
-$shadow-offset-y: (
-  2: 5px,
-  4: 10px,
-  8: 20px,
-) !default;
-
-$shadow-blur: (
-  2: 10px,
-  4: 15px,
-  8: 30px,
-) !default;
-
-$shadow-spread: (
-  2: -10px,
-  4: -10px,
-  8: -15px,
+$elevations: (
+  2: (0 5px 10px -10px rgba(28, 28, 28, 0.3), 0 0 5px 0 rgba(28, 28, 28, 0.08)),
+  4: (0 10px 15px -10px rgba(28, 28, 28, 0.3), 0 0 5px 0 rgba(28, 28, 28, 0.08)),
+  8: (0 20px 30px -15px rgba(28, 28, 28, 0.3), 0 0 5px 0 rgba(28, 28, 28, 0.08))
 ) !default;
