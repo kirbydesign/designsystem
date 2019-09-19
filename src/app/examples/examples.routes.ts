@@ -3,7 +3,6 @@ import { Routes } from '@angular/router';
 import { ListNoShapeExampleComponent } from './list/no-shape/list-no-shape-example.component';
 import { AvatarExampleComponent } from './avatar-example/avatar-example.component';
 import { ButtonExampleComponent } from './button-example/button-example.component';
-import { FloatingActionButtonExampleComponent } from './floating-action-button-example/floating-action-button-example.component';
 import { CardExampleComponent } from './card-example/card-example.component';
 import { GridExampleComponent } from './grid-example/grid-example.component';
 import { ListExampleComponent } from './list/list-example.component';
@@ -40,10 +39,6 @@ export const routes: Routes = [
   {
     path: 'slide-button',
     component: SlideButtonExampleComponent,
-  },
-  {
-    path: 'floating-action-button',
-    component: FloatingActionButtonExampleComponent,
   },
   {
     path: 'card',
