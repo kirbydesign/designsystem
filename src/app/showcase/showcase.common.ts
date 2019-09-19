@@ -1,3 +1,4 @@
+import { ListNoShapeShowcaseComponent } from './list-no-shape-showcase/list-no-shape-showcase.component';
 import { ListSwipeShowcaseComponent } from './list-swipe-showcase/list-swipe-showcase.component';
 import { ExamplesModule } from '../examples/examples.module';
 import { AvatarShowcaseComponent } from './avatar-showcase/avatar-showcase.component';
@@ -39,6 +40,7 @@ export const COMPONENT_EXPORTS: any[] = [
   ListShowcaseComponent,
   ListLoadOnDemandShowcaseComponent,
   ListSwipeShowcaseComponent,
+  ListNoShapeShowcaseComponent,
   GridShowcaseComponent,
   AvatarShowcaseComponent,
   ChartShowcaseComponent,
