@@ -56,7 +56,7 @@ export class ButtonShowcaseComponent {
     {
       name: 'isFloating',
       description:
-        '(Optional) Determine if the button is going to be a Floating Action Button (FAB). Notes: FABs have an elevation of z8 by default. FABs have only an icon and no text. FABs always have a size of 64x64.',
+        '(Optional) Determine if the button is going to be a Floating Action Button (FAB). Please note: FABs have an elevation of z8 by default. FABs have only an icon and no text. FABs always have a size of 64x64.',
       defaultValue: 'false',
       inputValues: ['boolean'],
     },
