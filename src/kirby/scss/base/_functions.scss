@@ -12,7 +12,7 @@
   @if ($negative) {
     $key: str-slice($key, 2, -1);
   }
-  $value: get-unit-value(_get-map-prop($sizes, $key));
+  $value: _get-map-prop($sizes, $key);
   @return if($negative, unquote('-' + $value), $value);
 }
 
@@ -24,19 +24,11 @@
   @if ($key == 'display') {
     @warn 'Display key is deprecated';
   }
-  @return get-unit-value(_get-map-prop($font-sizes, $key));
+  @return _get-map-prop($font-sizes, $key);
 }
 
 @function line-height($key: 'm') {
-  @return get-unit-value(_get-map-prop($line-height, $key));
-}
-
-@function get-unit-value($value) {
-  @if ($native == false) {
-    @return $value * 1px;
-  } @else {
-    @return $value;
-  }
+  @return _get-map-prop($line-height, $key);
 }
 
 @function font-weight($key: 'normal') {
@@ -45,7 +37,7 @@
 
 @function get-color($variant, $getValueOnly: false, $map: $kirby-colors) {
   $value: _get-map-prop($map, $variant);
-  @if $getValueOnly == true or $native == true {
+  @if $getValueOnly == true {
     @return $value;
   } @else {
     @return unquote('var(--kirby-' + $variant+ ')');
@@ -53,10 +45,30 @@
 }
 
 @function get-elevation($value) {
-  $elevation-map: (
-    2: unquote('0 5px 10px -10px rgba(28, 28, 28, 0.3), 0 0 5px 0 rgba(28, 28, 28, 0.08)'),
-    4: unquote('0 10px 15px -10px rgba(28, 28, 28, 0.3), 0 0 5px 0 rgba(28, 28, 28, 0.08)'),
-    8: unquote('0 20px 30px -15px rgba(28, 28, 28, 0.3), 0 0 5px 0 rgba(28, 28, 28, 0.08)')
+  @return map-get($elevations, $value);
+}
+
+@function get-shadow-size($elevation) {
+  $shadow-size: 0;
+  $shadow-list: map-get($elevations, $elevation);
+  @each $shadow in $shadow-list {
+    $offset-x: abs(_get-shadow-value($shadow, 'offset-x'));
+    $offset-y: abs(_get-shadow-value($shadow, 'offset-y'));
+    $blur-radius: _get-shadow-value($shadow, 'blur-radius');
+    $spread-radius: _get-shadow-value($shadow, 'spread-radius');
+    $current-shadow-size: max($offset-x, $offset-y) + $blur-radius + $spread-radius;
+    $shadow-size: max($shadow-size, $current-shadow-size);
+  }
+  @return $shadow-size;
+}
+
+@function _get-shadow-value($shadow, $valuekey) {
+  $shadow-value-map: (
+    'offset-x': 1,
+    'offset-y': 2,
+    'blur-radius': 3,
+    'spread-radius': 4,
   );
-  @return map-get($elevation-map, $value);
+  $value-index: map-get($shadow-value-map, $valuekey);
+  @return nth($shadow, $value-index);
 }

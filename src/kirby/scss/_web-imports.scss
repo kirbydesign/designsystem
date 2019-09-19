@@ -1,9 +1,0 @@
-/*  
-    General imports for components
-    NOTICE: Must not contain anything that generates classes or else it will be generated for every component that imports this file.
-*/
-$native: false;
-@import './base/settings';
-@import './web/web-variables';
-@import './web/web-include-media';
-@import './themes/colors';

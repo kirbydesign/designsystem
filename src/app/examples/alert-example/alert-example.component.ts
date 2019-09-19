@@ -1,4 +1,4 @@
-import { Component, ViewContainerRef } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { ModalController } from '@kirbydesign/designsystem/modal';
 import { AlertConfig } from '@kirbydesign/designsystem/modal';
@@ -8,7 +8,7 @@ import { AlertConfig } from '@kirbydesign/designsystem/modal';
   templateUrl: './alert-example.component.html',
 })
 export class AlertExampleComponent {
-  constructor(private modalController: ModalController, private vcRef: ViewContainerRef) {}
+  constructor(private modalController: ModalController) {}
 
   showAlert() {
     const config: AlertConfig = {

@@ -1,11 +1,11 @@
-@import '../../scss/web-imports';
+@import '../../scss/utils';
 
 $grid-item-min-height: 172px;
 $page-max-width: 1366px;
 
 :host {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
   grid-auto-rows: minmax($grid-item-min-height, auto);
   grid-column-gap: size('xxs');
   grid-row-gap: size('xxs');

@@ -6,14 +6,8 @@
     "types": []
   },
   "exclude": [
-    "src/test.ts",
+    "./test.ts",
     "**/*.spec.ts",
-    "**/*.tns.ts",
-    "**/*.tns-only.ts",
-    "**/*.android.ts",
-    "**/*.ios.ts",
-    "./main.ns.aot.ts",
-    "./main.ns.ts",
-    "./vendor.ts"
+    "./kirby/testing/**/*.*"
   ]
 }

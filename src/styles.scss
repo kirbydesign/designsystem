@@ -1,17 +1,11 @@
 /* 
   You can add global styles to this file, and also import other style files 
-
-  ******
-  NOTE: THIS FILE DOES NOT APPLY STYLES TO NATIVESCRIPT
-  ******
 */
-$native: false;
 // Import common styles
-@import "./kirby/scss/web/web-styles";
+@import "./kirby/scss/global-styles";
 
 @import "~prismjs/themes/prism";
-@import "./kirby/scss/web-imports";
-@import "./kirby/scss/themes/colors";
+@import "./kirby/scss/utils";
 @import "./kirby/scss/base/typography"; 
 
 @font-face { 
@@ -48,7 +42,8 @@ body, html {
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   font-size: font-size("n");
-  color: get-color('black');  
+  color: get-color('black');
+  height: 100%;
 }
 
 *, 

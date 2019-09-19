@@ -1,4 +1,4 @@
-import { Injectable, ViewContainerRef } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { ModalController as IonicModalController } from '@ionic/angular';
 import { Animation } from '@ionic/core';
 
@@ -11,7 +11,6 @@ export class ModalHelper {
 
   public async showModalWindow(
     config: ModalConfig,
-    _vcRef: ViewContainerRef,
     registerModal: (modal: { close: (data?: any) => {} }) => void
   ): Promise<any> {
     const modal = await this.ionicModalController.create({
@@ -44,7 +43,7 @@ export class ModalHelper {
 
     // Define animation transition values
     // TODO: Replace 40px with the respective kirby size
-    let transformYFromTo = [`${baseEl.clientHeight}px`, `40px`];
+    let transformYFromTo = [`${baseEl.clientHeight}px`, `0px`];
     let fadeBackdropFromTo = [0.01, 0.3];
     let fadeWrapperFromTo = [0.01, 1];
     if (!isAnimEnter) {

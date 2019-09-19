@@ -1,4 +1,4 @@
-# Building Node based application even for native
+# Building Node based application
 language: node_js
 node_js: "10.5"
 sudo: required
@@ -7,7 +7,7 @@ install:
   - pip install six
   - echo no | npm ci
 
-# Setting up the build matrix: web, iOS, Android
+# Setting up the build matrix: web
 matrix:
   include:
     # Running lint
@@ -21,67 +21,6 @@ matrix:
         - npm run lint
         - npm run ci-test
         - npm run coverage-report || true
-
-    # Running iOS build
-    - stage: "Build"
-      os: osx
-      osx_image: xcode9.4
-      cache:
-        - directories:
-            - $HOME/.npm
-        - cocoapods
-      before_script: ./scripts/setup-provisioning-profile.sh
-      script:
-        - npm run dist:ios
-      before_deploy:
-        - ./scripts/deploy.sh "$TRAVIS_TAG"
-      deploy:
-        - provider: releases
-          skip_cleanup: true
-          api_key:
-            secure: 0b53CEPSEfWkzKPzH5B8xCaqAN7BwlGCVlVSjwgey6xHoLU+SOZNA55D9Bi/co2XaGKqINeIGhpDhzOfQk/wmuWyk1y1IM1ntjxEwNmhw0ZWvf9gOkQqCLuQsCb0xYObxyhc18iqzZC6a63L0bhrrathu3Mn9Nx08WWANdROG9nG52qp8d6e6RFs3yASEyU6jhhO7TzW9aeOVgAc5XxS9765iIlaumEiweK8alVP9nRDk+qt/THnhccoURQ7GWzjYpk/gc2tzZnCdPRy6Ky08zVV+r9oKCsKT86oNimgijzIYJg+JsYOSflKRAwTntAseQi1bqtPalO0glmP3SY9MgO/f6FAd98iq6xlLo4/lO338jQKuKdGuYfqTZzWKn9OwqGN7/gnNjEspp6Cmh9GhL1jOLAoMiaUb1W9CR72qYCPcfnnQib3v2AgiO8bunaGt3mf3HU6o9ogiTrk8pItr0HHCfCYl7X38OEx3JpShm7L+rgDM5LKr7aFtdrpbleYGLD1oCQMZZNQPnQ5b94rPUj8tueRQOhASAm8wnri48xIHYaGl9/SRzCak3sweg3h+/ol/EoLiaARghMcuSVX2R66av+0VuzeYLs8y2xUWFKdBMaCB3JtOEwOcGew39Y0qNPpt+33WRqiYEfz1kYotKlI4tIIwwtfLTnoNVkqD4U=
-          file:
-            - $TRAVIS_BUILD_DIR/dist/designsystem.ipa
-            - $TRAVIS_BUILD_DIR/dist/manifest.plist
-          overwrite: true
-          on:
-            tags: true
-            condition: $TRAVIS_TAG =~ ^v[0-9]+\.[0-9]+
-
-    # Running Android build
-    - os: linux
-      language: android
-      jdk: oraclejdk8
-      before_cache:
-        - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-        - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-      cache:
-        - directories:
-            - $HOME/.gradle/caches/
-            - $HOME/.gradle/wrapper/
-            - $HOME/.android/build-cache
-            - $HOME/.npm
-      android:
-        components:
-          - build-tools-28.0.3
-          - platform-tools
-          - tools
-          - android-28
-          - extra-andoird-m2repository
-      before_install: nvm install 10.5
-      script:
-        - npm run dist:android 
-      deploy:
-        - provider: releases
-          skip_cleanup: true
-          api_key:
-            secure: 0b53CEPSEfWkzKPzH5B8xCaqAN7BwlGCVlVSjwgey6xHoLU+SOZNA55D9Bi/co2XaGKqINeIGhpDhzOfQk/wmuWyk1y1IM1ntjxEwNmhw0ZWvf9gOkQqCLuQsCb0xYObxyhc18iqzZC6a63L0bhrrathu3Mn9Nx08WWANdROG9nG52qp8d6e6RFs3yASEyU6jhhO7TzW9aeOVgAc5XxS9765iIlaumEiweK8alVP9nRDk+qt/THnhccoURQ7GWzjYpk/gc2tzZnCdPRy6Ky08zVV+r9oKCsKT86oNimgijzIYJg+JsYOSflKRAwTntAseQi1bqtPalO0glmP3SY9MgO/f6FAd98iq6xlLo4/lO338jQKuKdGuYfqTZzWKn9OwqGN7/gnNjEspp6Cmh9GhL1jOLAoMiaUb1W9CR72qYCPcfnnQib3v2AgiO8bunaGt3mf3HU6o9ogiTrk8pItr0HHCfCYl7X38OEx3JpShm7L+rgDM5LKr7aFtdrpbleYGLD1oCQMZZNQPnQ5b94rPUj8tueRQOhASAm8wnri48xIHYaGl9/SRzCak3sweg3h+/ol/EoLiaARghMcuSVX2R66av+0VuzeYLs8y2xUWFKdBMaCB3JtOEwOcGew39Y0qNPpt+33WRqiYEfz1kYotKlI4tIIwwtfLTnoNVkqD4U=
-          file:
-            - $TRAVIS_BUILD_DIR/dist/designsystem.apk
-          overwrite: true
-          on:
-            tags: true
-            condition: $TRAVIS_TAG =~ ^v[0-9]+\.[0-9]+
 
     # Running web build
     - os: linux

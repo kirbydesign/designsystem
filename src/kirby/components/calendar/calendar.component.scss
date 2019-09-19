@@ -1,4 +1,4 @@
-@import '../../scss/web-imports';
+@import '../../scss/utils';
 
 table.calendar-table {
   width: 100%;
@@ -56,7 +56,7 @@ table.calendar-table {
 }
 
 .month-and-year {
-  line-height: line-height('xxl');
+  line-height: line-height('xl');
   user-select: none;
 
   .month {

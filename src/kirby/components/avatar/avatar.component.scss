@@ -1,4 +1,4 @@
-@import "web-imports";
+@import "../../scss/utils";
 @import '../icon/icon.component.shared';
 
 $image-diameter-small:  40px;
@@ -111,7 +111,7 @@ $image-diameter-large:  96px;
     }
 
     .avatar-text {
-      font-size: font-size('l');
+      font-size: font-size('xl');
     }
   }
 

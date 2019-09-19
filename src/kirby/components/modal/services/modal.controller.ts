@@ -1,4 +1,4 @@
-import { Injectable, ViewContainerRef } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 import { IModalController } from './modal.controller.interface';
 import { ModalHelper } from './modal.helper';
@@ -18,14 +18,9 @@ export class ModalController implements IModalController {
     private alertHelper: AlertHelper
   ) {}
 
-  public showModal(
-    config: ModalConfig,
-    vcRef: ViewContainerRef,
-    onCloseModal?: (data?: any) => void
-  ): void {
+  public showModal(config: ModalConfig, onCloseModal?: (data?: any) => void): void {
     const modalCloseEvent: Promise<any> = this.modalHelper.showModalWindow(
       config,
-      vcRef,
       this.register.bind(this)
     );
     modalCloseEvent.then((data) => {
@@ -38,19 +33,16 @@ export class ModalController implements IModalController {
     });
   }
 
-  public showActionSheet(
-    config: ActionSheetConfig,
-    vcRef: ViewContainerRef,
-    onCloseModal?: (data?: any) => void
-  ): void {
-    this.actionSheetHelper.showActionSheet(config, vcRef, this.register.bind(this)).then((data) => {
+  public showActionSheet(config: ActionSheetConfig, onCloseModal?: (data?: any) => void): void {
+    this.actionSheetHelper.showActionSheet(config, this.register.bind(this)).then((data) => {
       this.forgetTopmost();
       if (onCloseModal) {
         onCloseModal(typeof data === 'object' && 'data' in data ? data.data : data);
       }
     });
   }
-  showAlert(config: AlertConfig, onCloseModal?: (result?: boolean) => void) {
+
+  public showAlert(config: AlertConfig, onCloseModal?: (result?: boolean) => void) {
     this.alertHelper.showAlert(config).then((result) => {
       if (onCloseModal) {
         onCloseModal(result);

@@ -1,7 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-import { PlatformService } from '@kirbydesign/designsystem/services/platform/platform.service';
-
 @Component({
   selector: 'kirby-toolbar',
   templateUrl: './toolbar.component.html',
@@ -15,11 +13,7 @@ export class ToolbarComponent implements OnInit {
   @Output() primarySelect = new EventEmitter();
   @Output() secondarySelect = new EventEmitter();
 
-  isAndroid: boolean;
-
-  constructor(private platform: PlatformService) {
-    this.isAndroid = this.platform.isAndroid;
-  }
+  constructor() {}
 
   ngOnInit() {}
 

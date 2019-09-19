@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 
+import { ListSwipeShowcaseComponent } from './list-swipe-showcase/list-swipe-showcase.component';
 import { AvatarShowcaseComponent } from './avatar-showcase/avatar-showcase.component';
 import { ButtonShowcaseComponent } from './button-showcase/button-showcase.component';
 import { CardShowcaseComponent } from './card-showcase/card-showcase.component';
@@ -8,7 +9,6 @@ import { ListShowcaseComponent } from './list-showcase/list-showcase.component';
 import { ListLoadOnDemandShowcaseComponent } from './list-load-on-demand-showcase/list-load-on-demand-showcase.component';
 import { ShowcaseComponent } from './showcase.component';
 import { ChartShowcaseComponent } from './chart-showcase/chart-showcase.component';
-import { DoughnutChartShowcaseComponent } from './doughnut-chart-showcase/doughnut-chart-showcase.component';
 import { FontsShowcaseComponent } from './fonts-showcase/fonts-showcase.component';
 import { ColorsShowcaseComponent } from './colors-showcase/colors-showcase.component';
 import { SpinnerShowcaseComponent } from './spinner-showcase/spinner-showcase.component';
@@ -26,6 +26,7 @@ import { ToastShowcaseComponent } from './toast-showcase/toast-showcase.componen
 import { ToggleShowcaseComponent } from './toggle-showcase/toggle-showcase.component';
 import { EmptyStateShowcaseComponent } from './empty-state-showcase/empty-state-showcase.component';
 import { ToolbarShowcaseComponent } from './toolbar-showcase/toolbar-showcase.component';
+import { ListNoShapeShowcaseComponent } from './list-no-shape-showcase/list-no-shape-showcase.component';
 
 export const routes: Routes = [
   {
@@ -68,6 +69,14 @@ export const routes: Routes = [
       {
         path: 'list-load-on-demand',
         component: ListLoadOnDemandShowcaseComponent,
+      },
+      {
+        path: 'list-swipe',
+        component: ListSwipeShowcaseComponent,
+      },
+      {
+        path: 'list-no-shape',
+        component: ListNoShapeShowcaseComponent,
       },
       {
         path: 'grid',
@@ -120,15 +129,6 @@ export const routes: Routes = [
       {
         path: 'calendar',
         component: CalendarShowcaseComponent,
-      },
-      {
-        path: 'nativescript-only',
-        children: [
-          {
-            path: 'doughnut-chart',
-            component: DoughnutChartShowcaseComponent,
-          },
-        ],
       },
       {
         path: 'segmented-control',

@@ -32,7 +32,7 @@ describe('SlideButtonComponent', () => {
       expect(component.slideDone.emit).toHaveBeenCalled();
     });
 
-    it('should decrease value with 1 if not 100', fakeAsync(() => {
+    it('should decrease value with 2 if not 100', fakeAsync(() => {
       spyOn(component.slideDone, 'emit');
 
       const initValue = 99;
@@ -43,7 +43,7 @@ describe('SlideButtonComponent', () => {
 
       tick(1);
       component.ngOnDestroy();
-      expect(component.value).toBe(initValue - 1);
+      expect(component.value).toBe(initValue - 2);
     }));
   });
 
@@ -69,7 +69,7 @@ describe('SlideButtonComponent', () => {
 
       component.onSliderMousedown();
 
-      expect(component.value).toBe(initVal - 1);
+      expect(component.value).toBe(initVal - 2);
     }));
   });
 });

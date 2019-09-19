@@ -28,20 +28,19 @@ import { ToastExampleComponent } from './toast-example/toast-example.component';
 import { ToggleExampleComponent } from './toggle-example/toggle-example.component';
 import { EmptyStateExampleComponent } from './empty-state-example/empty-state-example.component';
 import { ToolbarExampleComponent } from './toolbar-example/toolbar-example.component';
+import { ListSwipeExampleComponent } from './list/swipe/list-swipe-example.component';
+import { ListNoShapeExampleComponent } from './list/no-shape/list-no-shape-example.component';
 
 // Example of "custom" icons
 export const iconSettings: IconSettings = {
-  fontfamily: "'Ionicons', 'ionicons'",
   icons: [
     {
       name: 'football',
       svg: 'assets/icons/football.svg',
-      unicode: 0xf2f6,
     },
     {
       name: 'umbrella',
       svg: 'assets/icons/umbrella.svg',
-      unicode: 0xf25f,
     },
   ],
 };
@@ -54,6 +53,8 @@ export const COMPONENT_DECLARATIONS: any[] = [
   CardElevationsExampleComponent,
   ListExampleComponent,
   ListLoadOnDemandExampleComponent,
+  ListSwipeExampleComponent,
+  ListNoShapeExampleComponent,
   GridExampleComponent,
   AvatarExampleComponent,
   ChartExampleComponent,

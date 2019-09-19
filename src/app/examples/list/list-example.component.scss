@@ -1,4 +1,4 @@
-@import "../../../kirby/scss/web-imports";
+@import "../../../kirby/scss/utils";
 
 :host {
     padding: 2px;
@@ -15,10 +15,10 @@ h2 {
 
 .footer {
     display: flex;
-    width: 100%;
+    align-items: center;
     justify-content: space-between;
+    width: 100%;
     padding: size('s');
-    background-color: get-color('white');
 
     h2 {
         margin: 0;

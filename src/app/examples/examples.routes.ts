@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 
+import { ListNoShapeExampleComponent } from './list/no-shape/list-no-shape-example.component';
 import { AvatarExampleComponent } from './avatar-example/avatar-example.component';
 import { ButtonExampleComponent } from './button-example/button-example.component';
 import { CardExampleComponent } from './card-example/card-example.component';
@@ -23,6 +24,8 @@ import { ToastExampleComponent } from './toast-example/toast-example.component';
 import { ToggleExampleComponent } from './toggle-example/toggle-example.component';
 import { EmptyStateExampleComponent } from './empty-state-example/empty-state-example.component';
 import { ToolbarExampleComponent } from './toolbar-example/toolbar-example.component';
+import { ListSwipeExampleComponent } from './list/swipe/list-swipe-example.component';
+import { ListLoadOnDemandExampleComponent } from './list/load-on-demand/list-load-on-demand-example.component';
 
 export const routes: Routes = [
   {
@@ -44,6 +47,18 @@ export const routes: Routes = [
   {
     path: 'list',
     component: ListExampleComponent,
+  },
+  {
+    path: 'list-swipe',
+    component: ListSwipeExampleComponent,
+  },
+  {
+    path: 'list-no-shape',
+    component: ListNoShapeExampleComponent,
+  },
+  {
+    path: 'list-load-on-demand',
+    component: ListLoadOnDemandExampleComponent,
   },
   {
     path: 'chart',
