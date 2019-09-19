@@ -22,6 +22,10 @@
   height: size('xl');
   line-height: line-height('xs');
 
+  &.icon-only {
+    width: size('xl');
+  }
+
   &.icon-left {
     flex-direction: row-reverse;
   }
@@ -30,12 +34,20 @@
     padding: size('xxxs') size('s') size('xxxs') size('s');
     font-size: font-size('xs');
     height: size('l');
+
+    &.icon-only {
+      width: size('l');
+    }
   }
 
   &.lg {
     font-size: font-size('s');
     height: size('xxl');
     min-width: 220px;
+
+    &.icon-only {
+      width: size('xxl');
+    }
   }
 
   &.attention-level1 {
@@ -119,15 +131,12 @@
     width: $fab-size;
     height: $fab-size;
 
-    &:not(:disabled):not(.hide-shadow) {
-      box-shadow: #{get-elevation(8)};
+    &:not(:disabled) {
+      box-shadow: get-elevation(8);
     }
   }
 
-  &.icon-button {
-    $icon-btn-size: #{size('l')};
-    width: $icon-btn-size;
-    height: $icon-btn-size;
+  &.icon-only {
     padding: 0;
   }
 }

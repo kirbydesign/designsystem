@@ -27,13 +27,9 @@ export class ButtonComponent {
   public get isButtonFloating(): boolean {
     return this.isFloating;
   }
-  @HostBinding('class.hide-shadow')
-  public get isShadowHidden(): boolean {
-    return this.hideShadow;
-  }
-  @HostBinding('class.icon-button')
-  public get isIconBtn(): boolean {
-    return !this.isFloating && this.icon && !this.text;
+  @HostBinding('class.icon-only')
+  public get isIconOnly(): boolean {
+    return this.icon && !this.text;
   }
   @HostBinding('attr.horizontalAlignment')
   public get isAlignedHorizontally(): string {
@@ -53,7 +49,6 @@ export class ButtonComponent {
   @Input() text?: string;
   @Input() iconPlacement?: 'left' | 'right' = 'left';
   @Input() isFloating?: boolean = false;
-  @Input() hideShadow?: boolean = false;
 
   @ContentChild(IconComponent) icon: IconComponent;
 }

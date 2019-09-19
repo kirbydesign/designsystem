@@ -1,16 +1,82 @@
-<h2>Standalone button</h2>
-<button kirby-button>Kirby Button</button>
-<button kirby-button size="sm" expand="block">Small Button</button>
-<button kirby-button size="md" expand="block">Medium Button</button>
-<button kirby-button size="lg" expand="block">Large Button</button>
-<button kirby-button expand="block">Kirby Block Button</button>
+<h2>Sizes</h2>
+<button kirby-button size="sm">Small Button</button>
+<button kirby-button>Medium Button (default)</button>
+<button kirby-button size="lg">Large Button</button>
+<h2>Block button</h2>
+<button kirby-button expand="block">Block Button</button>
+<h2>Destructive Buttons</h2>
 <button kirby-button attentionLevel="1" isDestructive="true">Destructive Level 1</button>
 <button kirby-button attentionLevel="2" isDestructive="true">Destructive Level 2</button>
 <button kirby-button attentionLevel="3" isDestructive="true">Destructive Level 3</button>
 <button kirby-button attentionLevel="4" isDestructive="true">Destructive Level 4</button>
 <button kirby-button disabled>Disabled Button</button>
 
-<h2>Button with icon</h2>
+<h2>Button with icon only</h2>
+<h3>Small</h3>
+<div class="button-example-container">
+  <button kirby-button size="sm" size="sm">
+    <kirby-icon name="close"></kirby-icon>
+  </button>
+  <label>Attention Level 1<br/><em>(Default)</em></label>
+</div>
+<div class="button-example-container">
+  <button kirby-button size="sm" attentionLevel="2">
+    <kirby-icon name="close"></kirby-icon>
+  </button>
+  <label>Attention Level 2</label>
+</div>
+<div class="button-example-container">
+  <button kirby-button size="sm" attentionLevel="3">
+    <kirby-icon name="close"></kirby-icon>
+  </button>
+  <label>Attention Level 3</label>
+</div>
+<div class="button-example-container">
+  <button kirby-button size="sm" attentionLevel="4">
+    <kirby-icon name="close"></kirby-icon>
+  </button>
+  <label>Attention Level 4</label>
+</div>
+<div class="button-example-container">
+  <button kirby-button size="sm" disabled>
+    <kirby-icon name="close"></kirby-icon>
+  </button>
+  <label>Disabled</label>
+</div>
+
+<h3>Medium (default)</h3>
+<div class="button-example-container">
+  <button kirby-button>
+    <kirby-icon name="close"></kirby-icon>
+  </button>
+  <label>Attention Level 1<br/><em>(Default)</em></label>
+</div>
+<div class="button-example-container">
+  <button kirby-button attentionLevel="2">
+    <kirby-icon name="close"></kirby-icon>
+  </button>
+  <label>Attention Level 2</label>
+</div>
+<div class="button-example-container">
+  <button kirby-button attentionLevel="3">
+    <kirby-icon name="close"></kirby-icon>
+  </button>
+  <label>Attention Level 3</label>
+</div>
+<div class="button-example-container">
+  <button kirby-button attentionLevel="4">
+    <kirby-icon name="close"></kirby-icon>
+  </button>
+  <label>Attention Level 4</label>
+</div>
+<div class="button-example-container">
+  <button kirby-button disabled>
+    <kirby-icon name="close"></kirby-icon>
+  </button>
+  <label>Disabled</label>
+</div>
+
+<h2>Button with icon and text</h2>
 <button kirby-button text="Icon Left">
   <kirby-icon name="edit"></kirby-icon>
 </button>
@@ -21,22 +87,31 @@
   <kirby-icon customName="football"></kirby-icon>
 </button>
 
-<h2>Floating action buttons</h2>
-<button kirby-button [isFloating]="true">
-  <kirby-icon name="add"></kirby-icon>
-</button>
-<button kirby-button [isFloating]="true" [hideShadow]="true">
-  <kirby-icon name="add"></kirby-icon>
-</button>
-<button kirby-button [isFloating]="true" disabled>
-  <kirby-icon name="add"></kirby-icon>
-</button>
-<button kirby-button [isFloating]="true">
-  <kirby-icon name="close"></kirby-icon>
-</button>
-<button kirby-button>
-  <kirby-icon name="close"></kirby-icon>
-</button>
+<h2>Floating Action Buttons</h2>
+<div class="button-example-container">
+  <button kirby-button [isFloating]="true">
+    <kirby-icon name="add"></kirby-icon>
+  </button>
+  <label>Default</label>
+</div>
+<div class="button-example-container">
+  <button kirby-button [isFloating]="true" disabled>
+    <kirby-icon name="add"></kirby-icon>
+  </button>
+  <label>Disabled</label>
+</div>
+<div class="button-example-container">
+  <button kirby-button [isFloating]="true">
+    <kirby-icon name="close"></kirby-icon>
+  </button>
+  <label>Close</label>
+</div>
+<div class="button-example-container">
+  <button kirby-button [isFloating]="true" disabled>
+    <kirby-icon name="close"></kirby-icon>
+  </button>
+  <label>Close<br/>Disabled</label>
+</div>
 
 <h2>Button with attention level</h2>
 <kirby-card [themeColor]="themeColor">
