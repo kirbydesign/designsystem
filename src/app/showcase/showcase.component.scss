@@ -88,6 +88,6 @@ h4 {
 
 ::ng-deep :not(pre) > code[class*="language-"], 
 ::ng-deep pre[class*="language-"] {
-  background-color: get-color('light-tint');
-  border: 1px solid get-color('medium');
+  border: none;
+  border-radius: size('xs');
 }

@@ -1,69 +1,38 @@
+<p>
+  Font sizes can be set by either using the font classes, e.g. <code>.kirby-text-large</code>, or by using the
+  tags like <code>h1, h2 & h3</code>.
+</p>
+<p>Font can also be set with the font-size function directly on your own classes, e.g:</p>
 
-  <p>
-    The font sizes can be set by either using the font classes, e.g. <code>kirby-text-large</code>, or by using the
-    right tags like <code>h1, h2 & h3</code>
-  </p>
-  <p>Font can also be set with the font-size function directly on your own classes, e.g:</p>
-<pre>
-  .my-own-class {{'{'}}
-    font-size: font-size("l");
-    ...
-  {{'}'}}
-</pre>
-<div class="fonts">
-  <div>
-    <h1 class="sample-header-1 kirby-text-xlarge">h1 - Heading 1</h1>
-    <div class="info-box">
-      <code>font-size: font-size("xl");</code>
-      <code>font-weight: font-weight("bold");</code>
-      <code class="highlight">CLASS: h1 or .kirby-text-xlarge</code>
-    </div>
-
-    <h2 class="sample-header-2 kirby-text-large">h2 - Heading 2</h2>
-    <div class="info-box">
-      <code>font-size: font-size("l");</code>
-      <code>font-weight: font-weight("bold");</code>
-      <code class="highlight">CLASS: h2 or kirby-text-large</code>
-    </div>
-
-    <h3 class="sample-header-3 kirby-text-medium">h3 - Heading 3</h3>
-    <div class="info-box">
-      <code>font-size: font-size("n");</code>
-      <code>font-weight: font-weight("bold");</code>
-      <code class="highlight">CLASS: h3 or kirby-text-medium</code>
-    </div>
-
-    <p class="sample-body kirby-text-normal">p - Paragraph (Default body font)</p>
-    <div class="info-box">
-      <code>font-size: font-size("n");</code>
-      <code class="highlight">CLASS: kirby-text-normal</code>
-    </div>
-
-    <p class="sample-body-small kirby-text-small">Small text</p>
-    <div class="info-box">
-      <code>font-size: font-size("s");</code>
-      <code class="highlight">CLASS: kirby-text-small</code>
-    </div>
-
-    <p class="sample-body-small-light kirby-text-small-light">Small text - light</p>
-    <div class="info-box">
-      <code>font-size: font-size("s)"";</code>
-      <code>font-weight: font-weight("light");</code>
-      <code class="highlight">CLASS: kirby-text-small-light</code>
-    </div>
-
-    <p class="sample-body-xsmall kirby-text-xsmall">x-small text</p>
-    <div class="info-box">
-      <code>font-size: font-size("xs");</code>
-      <code class="highlight">CLASS: kirby-text-xsmall</code>
-    </div>
-
-    <p class="sample-body-xxsmall kirby-text-xxsmall">xx-small text</p>
-    <div class="info-box">
-      <code>font-size: font-size("xxs);</code>
-      <code class="highlight">CLASS: kirby-text-xxsmall</code>
-    </div>
-
-  </div>
-  <kirby-code-viewer [html]="exampleHtml"></kirby-code-viewer>
+<div class="fonts-examples">
+  <span class="kirby-text-muted kirby-text-small kirby-text-light kirby-text-mono sample-header-1">H1 | .kirby-text-xlarge</span>
+  <h1 class="sample">The quick brown fox jumps over the lazy dog</h1>
+  <span class="kirby-text-muted kirby-text-small kirby-text-light kirby-text-mono sample-header-2">H2 | .kirby-text-large</span>
+  <h2 class="sample">The quick brown fox jumps over the lazy dog</h2>
+  <span class="kirby-text-muted kirby-text-small kirby-text-light kirby-text-mono sample-header-3">H3 | .kirby-text-medium</span>
+  <h3 class="sample">The quick brown fox jumps over the lazy dog</h3>
+  <span class="kirby-text-muted kirby-text-small kirby-text-light kirby-text-mono sample-body">P | .kirby-text-normal</span>
+  <p class="sample">The quick brown fox jumps over the lazy dog</p>
+  <span class="kirby-text-muted kirby-text-small kirby-text-light kirby-text-mono sample-body-small">.kirby-text-small</span>
+  <p class="sample kirby-text-small">The quick brown fox jumps over the lazy dog</p>
+  <span class="kirby-text-muted kirby-text-small kirby-text-light kirby-text-mono sample-body-xsmall">.kirby-text-xsmall</span>
+  <p class="sample kirby-text-xsmall">The quick brown fox jumps over the lazy dog</p>
+  <span class="kirby-text-muted kirby-text-small kirby-text-light kirby-text-mono sample-body-xxsmall">.kirby-text-xxsmall</span>
+  <p class="sample kirby-text-xxsmall">The quick brown fox jumps over the lazy dog</p>
 </div>
+
+<code>
+<pre>
+$font-sizes: (
+  xl:  32px,
+  l:  22px,
+  m:  18px,
+  n:  16px,
+  s:  14px,
+  xs: 12px,
+  xxs: 10px
+) 
+</pre>
+</code>
+
+<kirby-code-viewer [html]="exampleHtml"></kirby-code-viewer>

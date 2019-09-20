@@ -1,36 +1,16 @@
 @import '../../../kirby/scss/utils';
 
-code {
-  background-color: get-color('medium');
-  color: get-color('black');
-  padding: 0.2rem 0.5rem;
-  border-radius: 2px;
-  white-space: nowrap;
-}
-
-.fonts {
-  display: flex;
-  flex-wrap: wrap;
-
-  kirby-code-viewer {
-    flex: 1;
-    flex-basis: 200px;
-  }
-
-  code {
-    padding: 0.25rem 0 0 0;
-    display: block;
-    color: get-color('dark');
-    background-color: transparent;
-  }
-
-  code.highlight {
-    color: get-color('black');
-    font-weight: font-weight('bold');
-  }
+.fonts-examples {
+  border: 1px solid get-color('semi-light');
+  background-color: get-color('white');
+  border-radius: size('xs');
+  padding: size('m');
 }
 
 .sample {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
   &-header-1,
   &-header-2,
   &-header-3,
@@ -41,6 +21,10 @@ code {
   &-body-xxsmall {
     margin-top: 1rem;
     margin-bottom: 1rem;
+    &::after {
+      margin-left: size('xxs');
+      color: get-color('danger');
+    }
   }
 
   &-header-1 {
@@ -86,15 +70,12 @@ code {
   }
 }
 
-[class^="sample-"]::after {
-  color: get-color('danger');
-  font-size: font-size("xs");
-  margin-left: size("m");
-}
 
-.info-box {
-  background-color: get-color('white');
-  padding: 0.5rem 1rem;
-  margin-right: 1rem;
-  border: 1px solid get-color('medium');
+/* AFTER REFACTOR */
+code {
+  background-color: get-color('medium');
+  color: get-color('black');
+  padding: 0.2rem 0.5rem;
+  border-radius: 2px;
+  white-space: nowrap;
 }
