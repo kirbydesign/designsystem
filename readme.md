@@ -27,6 +27,7 @@ The Kirby Cookbook, containing samples, status of components etc. can be accesse
   * [Typescript Configuration](#typescript-configuration)
   * [Ionic](#ionic)
   * [Icons](#icons)
+  * [Testing](#testing)
 * [Polyfills](#polyfills)
 * [Chart Components](#chart-components)
 
@@ -69,6 +70,17 @@ npm i sass-extract sass-extract-loader -D
 ...
 ```
 
+For testing purposes Kirby includes a [testing module](#testing). To **avoid** including this in your app, you need to add the following to your `src/tsconfig.app.json`:	
+```json	
+...	
+  "exclude": [	
+    ...	
+    "../node_modules/@kirbydesign/designsystem/testing/**/*.*"
+    ...	
+  ],	
+...	
+```
+
 ### Ionic
 The Kirby web components are build on top of [Ionic](https://ionicframework.com/docs/components). The [`@ionic/angular`](https://www.npmjs.com/package/@ionic/angular) package should automatically be installed as a dependency of Kirby. If not, please execute the following:
 ```bash
@@ -93,6 +105,21 @@ Kirby comes bundled with a default set of icons. Make sure the `.svg` files used
     }
   }
 }
+```
+
+### Testing
+Kirby includes a testing module for mocking out Kirby components in Unit Tests. Configure your test module with the following:
+
+```ts
+import { KirbyTestingModule } from '@kirbydesign/designsystem/testing';
+
+beforeEach(async(() => {
+  TestBed.configureTestingModule({
+    ...
+    imports: [KirbyTestingModule],
+    ...
+  }).compileComponents();
+}));
 ```
 
 ### Autocompletion
