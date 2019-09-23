@@ -6,8 +6,11 @@ declare var require: any;
 @Component({
   selector: 'kirby-fab-sheet-showcase',
   templateUrl: './fab-sheet-showcase.component.html',
+  styleUrls: ['./fab-sheet-showcase.component.scss'],
 })
 export class FabSheetShowcaseComponent {
+  disableFabSheet = false;
+
   exampleHtml: string = require('../../examples/fab-sheet-example/fab-sheet-example.component.html');
   properties: ShowcaseProperty[] = [
     {

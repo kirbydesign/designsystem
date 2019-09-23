@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { ActionSheetItem } from '@kirbydesign/designsystem/modal';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
@@ -9,6 +9,8 @@ import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
   styleUrls: ['./fab-sheet-example.component.scss'],
 })
 export class FabSheetExampleComponent {
+  @Input() disableFabSheet = false;
+
   items: ActionSheetItem[] = [
     { id: '1', text: 'Option 1' },
     { id: '2', text: 'Option 2' },
