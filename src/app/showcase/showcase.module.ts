@@ -11,7 +11,7 @@ import { FabSheetShowcaseComponent } from './fab-sheet-showcase/fab-sheet-showca
 
 @NgModule({
   imports: [...COMPONENT_IMPORTS, CommonModule, FormsModule, IonicModule.forRoot(), KirbyModule],
-  declarations: [...COMPONENT_DECLARATIONS, CodeViewerComponent, ShowcasePropertiesComponent, FabSheetShowcaseComponent],
+  declarations: [...COMPONENT_DECLARATIONS, CodeViewerComponent, ShowcasePropertiesComponent],
   exports: COMPONENT_EXPORTS,
 })
 export class ShowcaseModule {}
