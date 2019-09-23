@@ -5,7 +5,7 @@
     <h3>Inside the parent (caller) component:</h3>
     <p>
         To show the modal, create a <code>ModalConfig</code> and pass it to the <code>ModalController.showModal</code>:
-        <kirby-code-viewer language="ts">constructor(private modalController: ModalController, private vcRef: ViewContainerRef) {{ '{}' }}
+        <kirby-code-viewer language="ts">constructor(private modalController: ModalController) {{ '{}' }}
 
 showModal() {{ '{' }}
     const config: ModalConfig = {{ '{' }}
@@ -17,7 +17,7 @@ showModal() {{ '{' }}
             prop2: 'value2'
         {{ '}' }}
     {{ '}' }};
-    this.modalController.showModal(config, this.vcRef);
+    this.modalController.showModal(config);
 {{ '}' }}</kirby-code-viewer>
         <br /><br />
         The modal can have one of multiple flavors, used to determine the opening animation, the position of their titles and their close buttons.
@@ -37,7 +37,7 @@ showModal() {{ '{' }}
         {{ '}' }},
         component: YourEmbeddedDrawerComponent
     {{ '}' }};
-    this.modalController.showModal(config, this.vcRef);
+    this.modalController.showModal(config);
 {{ '}' }}
 
 private onSupplementaryActionSelect() {{ '{' }}
@@ -46,7 +46,7 @@ private onSupplementaryActionSelect() {{ '{' }}
         <br /><br />
         <em>(Optional)</em><br />
         If you need to obtain data back from the modal, you can pass a callback function:
-        <kirby-code-viewer language="ts">this.modalController.showModal(config, this.vcRef, myCallback);
+        <kirby-code-viewer language="ts">this.modalController.showModal(config, myCallback);
 
 myCallback(dataReturnedByModal: any) {{ '{' }}
     ...
@@ -65,7 +65,6 @@ myCallback(dataReturnedByModal: any) {{ '{' }}
     <kirby-code-viewer language="ts">constructor(
     @Inject(COMPONENT_PROPS) private componentProps,
     private modalController: ModalController,
-    private vcRef: ViewContainerRef
 ) {{ '{' }}
     this.props = componentProps;
 {{ '}' }}</kirby-code-viewer><br />
