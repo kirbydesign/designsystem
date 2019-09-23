@@ -20,26 +20,17 @@ ion-fab {
     right: size('s');
 }
 
-.backdrop {
-    visibility: hidden;
-    opacity: 0;
-    background-color: rgba($color: #000000, $alpha: 0.5);
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 1;
+ion-backdrop {
+    opacity: 0.4;
     transition: opacity 750ms;
-}
-
-:host(.is-open) .backdrop {
-    opacity: 1;
-    visibility: visible;
 
     @include media(">=medium") {
         opacity: 0;
-    }        
+    } 
+
+    &.backdrop-hide {
+        visibility: hidden;
+    }
 }
 
 ion-fab-list {
