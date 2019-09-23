@@ -9,7 +9,6 @@ import { ChartComponent } from './components/chart/chart.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { ChipComponent } from './components/chip/chip.component';
 import { EmptyStateComponent } from './components/empty-state/empty-state.component';
-import { FloatingActionButtonComponent } from './components/floating-action-button/floating-action-button.component';
 import { GridComponent } from './components/grid/grid.component';
 import { IconComponent } from './components/icon/icon.component';
 import { ListCellLineComponent } from './components/list/list-cell-line/list-cell-line.component';
@@ -50,7 +49,6 @@ export const declarations = [
   CardHeaderComponent,
   CardFooterComponent,
   ButtonComponent,
-  FloatingActionButtonComponent,
   ListComponent,
   ListItemDirective,
   ListFlexItemDirective,

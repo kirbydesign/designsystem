@@ -21,23 +21,23 @@
 </div>
 
 <ng-template #closeButton let-icon="icon">
-    <kirby-floating-action-button role="button"
-        class="close-button"
-        (click)="onModalDismiss($event)" 
-        (keydown)="onModalDismiss($event)" 
-        [isFloating]="false"
-        tabindex="0">
+    <button kirby-button
+        attentionLevel="4"
+        role="button"
+        tabindex="0"
+        (click)="onModalDismiss($event)"
+        (keydown)="onModalDismiss($event)">
         <kirby-icon [name]="icon"></kirby-icon>
-    </kirby-floating-action-button>
+    </button>
 </ng-template>
 
 <ng-template #supplementaryButton let-btn="btn">
-    <kirby-floating-action-button role="button"
-        class="supplementary-button"
-        (click)="btn.action($event)" 
-        (keydown)="btn.action($event)" 
-        [isFloating]="false"
-        tabindex="0">
+    <button kirby-button
+        attentionLevel="2"
+        role="button"
+        tabindex="0"
+        (click)="btn.action($event)"
+        (keydown)="btn.action($event)">
         <kirby-icon [name]="btn.iconName"></kirby-icon>
-    </kirby-floating-action-button>
+    </button>
 </ng-template>

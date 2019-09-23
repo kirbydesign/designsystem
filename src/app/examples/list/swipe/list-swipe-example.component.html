@@ -2,9 +2,19 @@
 <kirby-list [items]="items" 
   showDivider="true" 
   [swipeActions]="swipeActions">
-  <kirby-list-item
-    *kirbyListItem="let item"
-    [title]="item.title"
-    [amount]="item.amount">
-  </kirby-list-item>
+  <kirby-list-flex-item
+    [class.flagged]="item.flagged"
+    *kirbyListFlexItem="let item">
+    <kirby-list-cell
+      width="2">
+      {{item.title}}
+    </kirby-list-cell>
+    <kirby-list-cell
+      class="amount"
+      width="1"
+      verticalAlignment="center"
+      horisontalAlignment="right">
+      {{item.amount}}
+    </kirby-list-cell>
+  </kirby-list-flex-item>
 </kirby-list>
