@@ -2,7 +2,6 @@ import { IconSettings, ICON_SETTINGS } from '@kirbydesign/designsystem';
 
 import { AvatarExampleComponent } from './avatar-example/avatar-example.component';
 import { ButtonExampleComponent } from './button-example/button-example.component';
-import { FloatingActionButtonExampleComponent } from './floating-action-button-example/floating-action-button-example.component';
 import { CardExampleComponent } from './card-example/card-example.component';
 import { CardThemecolorExampleComponent } from './card/card-themecolor-example/card-themecolor-example.component';
 import { CardElevationsExampleComponent } from './card/card-elevations-example/card-elevations-example.component';
@@ -30,6 +29,7 @@ import { ToggleExampleComponent } from './toggle-example/toggle-example.componen
 import { EmptyStateExampleComponent } from './empty-state-example/empty-state-example.component';
 import { ToolbarExampleComponent } from './toolbar-example/toolbar-example.component';
 import { ListSwipeExampleComponent } from './list/swipe/list-swipe-example.component';
+import { ListNoShapeExampleComponent } from './list/no-shape/list-no-shape-example.component';
 
 // Example of "custom" icons
 export const iconSettings: IconSettings = {
@@ -48,13 +48,13 @@ export const iconSettings: IconSettings = {
 export const COMPONENT_DECLARATIONS: any[] = [
   ButtonExampleComponent,
   SlideButtonExampleComponent,
-  FloatingActionButtonExampleComponent,
   CardExampleComponent,
   CardThemecolorExampleComponent,
   CardElevationsExampleComponent,
   ListExampleComponent,
   ListLoadOnDemandExampleComponent,
   ListSwipeExampleComponent,
+  ListNoShapeExampleComponent,
   GridExampleComponent,
   AvatarExampleComponent,
   ChartExampleComponent,

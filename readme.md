@@ -23,37 +23,26 @@ The Kirby Cookbook, containing samples, status of components etc. can be accesse
 ## Table of Contents
 
 * [Installation](#installation)
-  * [Sass](#sass)
+  * [devDependencies](#devdependencies)
   * [Typescript Configuration](#typescript-configuration)
+  * [Sass](#sass)
   * [Ionic](#ionic)
   * [Icons](#icons)
+  * [Testing](#testing)
 * [Polyfills](#polyfills)
 * [Chart Components](#chart-components)
 
 ## Installation
 
-Install through NPM:
+Install through npm:
 ```bash
-npm install @kirbydesign/designsystem
+npm i @kirbydesign/designsystem
 ```
 
-### Sass
-
-Include the Kirby global styles in your app:
-
-* Eg. in `src/styles.scss`:
-  ```css
-  @import '~@kirbydesign/designsystem/scss/global-styles';
-  ```
-And import Kirby utilities to get access to the different sass functions in Kirby:
-```css
-@import '~@kirbydesign/designsystem/scss/utils';
+### devDependencies
+As devDependencies of the npm package doesn't automatically get installed, you also need to install `sass-extract`, `sass-extract-loader` and `ng-mocks` (_remember to include the `-D` flag_):
 ```
-
-
-As devDependencies don't get installed with the package in the target project, you also need to install `sass-extract` and `sass-extract-loader` via npm:
-```
-npm i sass-extract sass-extract-loader -D
+npm i sass-extract sass-extract-loader ng-mocks@7.7.0 -D
 ```
 
 ### Typescript Configuration
@@ -69,10 +58,45 @@ npm i sass-extract sass-extract-loader -D
 ...
 ```
 
+For testing purposes Kirby includes a [testing module](#testing). To **avoid** including this in your app, you need to add the following to your `src/tsconfig.app.json`:	
+```json	
+...	
+  "exclude": [	
+    ...	
+    "../node_modules/@kirbydesign/designsystem/testing/**/*.*",
+    ...	
+  ],	
+...	
+```
+
+To enable typescript compilation of the package in your unit tests, you need to add the following to your `src/tsconfig.spec.json`:
+
+```json
+...
+  "include": [
+    ...
+    "../node_modules/@kirbydesign/designsystem/**/*.ts",
+    ...
+  ],
+...
+```
+
+### Sass
+Include the Kirby global styles in your app:
+
+* Eg. in `src/styles.scss`:
+  ```css
+  @import '~@kirbydesign/designsystem/scss/global-styles';
+  ```
+In each `.scss` file where you need to access the Sass utility functions from Kirby (e.g. [colors](https://cookbook.kirby.design/home/showcase/colors) or [fonts](https://cookbook.kirby.design/home/showcase/fonts)) you must import the scss utilities:
+```css
+@import '~@kirbydesign/designsystem/scss/utils';
+```
+
 ### Ionic
 The Kirby web components are build on top of [Ionic](https://ionicframework.com/docs/components). The [`@ionic/angular`](https://www.npmjs.com/package/@ionic/angular) package should automatically be installed as a dependency of Kirby. If not, please execute the following:
 ```bash
-npm install @ionic/angular
+npm i @ionic/angular
 ```
 ### Icons
 Kirby comes bundled with a default set of icons. Make sure the `.svg` files used by Kirby are copied to your output folder by adding the following to `build > options > assets` in `angular.json`:
@@ -93,6 +117,21 @@ Kirby comes bundled with a default set of icons. Make sure the `.svg` files used
     }
   }
 }
+```
+
+### Testing
+Kirby includes a testing module for mocking out Kirby components in unit tests. To mock out Kirby in tests of components that use a `<kirby-` tag, you need to configure your testing module with the following:
+
+```ts
+import { KirbyTestingModule } from '@kirbydesign/designsystem/testing';
+
+beforeEach(async(() => {
+  TestBed.configureTestingModule({
+    ...
+    imports: [KirbyTestingModule],
+    ...
+  }).compileComponents();
+}));
 ```
 
 ### Autocompletion
