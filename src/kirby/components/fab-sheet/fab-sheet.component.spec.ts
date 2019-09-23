@@ -12,7 +12,7 @@ describe('FabSheetComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         FabSheetComponent,
-        MockComponents(ionic.IonFab, ionic.IonFabButton, ionic.IonFabList),
+        MockComponents(ionic.IonFab, ionic.IonFabButton, ionic.IonFabList, ionic.IonBackdrop),
       ],
     }).compileComponents();
   }));
