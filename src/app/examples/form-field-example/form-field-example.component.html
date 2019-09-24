@@ -1,0 +1,41 @@
+
+<kirby-form-field>
+  <!-- disabled -->
+  <kirby-input
+    disabled="true"
+    inputmode="search"
+    label="Disabled Input element"
+    type="search"
+  ></kirby-input>
+</kirby-form-field>
+<!-- error and messages -->
+<kirby-form-field>
+  <kirby-input
+    class="error"
+    label="Input element"
+    placeholder="This is a placeholder text"
+  ></kirby-input>
+  <kirby-form-field-message text="This is an error message"></kirby-form-field-message>
+  <kirby-form-field-message text="This is an other error message"></kirby-form-field-message>
+  <kirby-form-field-message text="This is a third error message"></kirby-form-field-message>
+</kirby-form-field>
+<!-- warning -->
+<kirby-form-field>
+  <kirby-textarea
+    class="warning"
+    label="Textarea element"
+    placeholder="This is a placeholder text"
+  ></kirby-textarea>
+  <kirby-form-field-message text="132/100" position="right"></kirby-form-field-message>
+</kirby-form-field>
+<!-- hint -->
+<kirby-form-field>
+  <kirby-textarea label="Textarea element"></kirby-textarea>
+  <kirby-form-field-message text="Some good hint" position="right"></kirby-form-field-message>
+  <kirby-form-field-message text="132/100" position="right"></kirby-form-field-message>
+</kirby-form-field>
+<!-- no label example -->
+<kirby-form-field>
+  <kirby-input name="human friendly name, as it has no label"></kirby-input>
+</kirby-form-field>
+

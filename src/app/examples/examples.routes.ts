@@ -26,6 +26,7 @@ import { EmptyStateExampleComponent } from './empty-state-example/empty-state-ex
 import { ToolbarExampleComponent } from './toolbar-example/toolbar-example.component';
 import { ListSwipeExampleComponent } from './list/swipe/list-swipe-example.component';
 import { ListLoadOnDemandExampleComponent } from './list/load-on-demand/list-load-on-demand-example.component';
+import { FormFieldExampleComponent } from './form-field-example/form-field-example.component';
 
 export const routes: Routes = [
   {
@@ -135,5 +136,9 @@ export const routes: Routes = [
   {
     path: 'toolbar',
     component: ToolbarExampleComponent,
+  },
+  {
+    path: 'form-field',
+    component: FormFieldExampleComponent,
   },
 ];

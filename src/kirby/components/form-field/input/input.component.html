@@ -1,0 +1,18 @@
+<label [for]="name" [id]="labelId">
+  {{label}}
+</label>
+<input
+  (blur)="onBlur()"
+  (focus)="onFocus()"
+  (input)="onInput($event)"
+  [attr.aria-labelledby]="labelId"
+  [attr.autocorrect]="autocorrect"
+  [attr.inputmode]="inputmode"
+  [autocomplete]="autocomplete"
+  [disabled]="disabled"
+  [id]="inputId"
+  [name]="name"
+  [placeholder]="placeholder || ''"
+  [type]="type"
+  [value]="value"
+/>

@@ -1,3 +1,4 @@
+import { FormFieldShowcaseComponent } from './form-field-showcase/form-field-showcase.component';
 import { ListSwipeShowcaseComponent } from './list-swipe-showcase/list-swipe-showcase.component';
 import { ExamplesModule } from '../examples/examples.module';
 import { AvatarShowcaseComponent } from './avatar-showcase/avatar-showcase.component';
@@ -57,6 +58,7 @@ export const COMPONENT_EXPORTS: any[] = [
   ToggleShowcaseComponent,
   EmptyStateShowcaseComponent,
   ToolbarShowcaseComponent,
+  FormFieldShowcaseComponent,
 ];
 
 export const COMPONENT_DECLARATIONS: any[] = [...COMPONENT_EXPORTS, ShowcaseComponent];

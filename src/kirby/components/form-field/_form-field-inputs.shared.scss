@@ -1,0 +1,48 @@
+@import '../../scss/utils';
+
+:host(.error) {
+  input,
+  textarea {
+    border-color: get-color('danger');
+  }
+}
+
+:host(.warning) {
+  input,
+  textarea {
+    border-color: get-color('warning');
+  }
+}
+
+label {
+  margin-bottom: size('xxxs');
+  padding: 0 size('s');
+  font-size: font-size('xs');
+}
+
+input,
+textarea {
+  width: 100%;
+  display: block;
+  background-color: get-color('white');
+  border-color: transparent;
+  border-style: solid;
+  border-width: 1px;
+  box-sizing: border-box;
+  color: get-color('black');
+  line-height: line-height('n');
+  border-radius: size('s');
+  font-size: font-size('n');
+  padding: size('s');
+  outline: none;
+
+  &::placeholder {
+    color: get-color('semi-dark');
+  }
+
+  // for the browsers that has partial support, see https://caniuse.com/#feat=css-placeholder
+  &::-webkit-input-placeholder,
+  &::-ms-input-placeholder {
+    color: get-color('semi-dark');
+  }
+}

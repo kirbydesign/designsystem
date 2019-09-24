@@ -1,3 +1,4 @@
+import { FormFieldExampleComponent } from './form-field-example/form-field-example.component';
 import { IconSettings, ICON_SETTINGS } from '@kirbydesign/designsystem';
 
 import { AvatarExampleComponent } from './avatar-example/avatar-example.component';
@@ -76,6 +77,7 @@ export const COMPONENT_DECLARATIONS: any[] = [
   ToggleExampleComponent,
   EmptyStateExampleComponent,
   ToolbarExampleComponent,
+  FormFieldExampleComponent,
 ];
 
 // Configure custom icons (used by example to show the usage of custom icons)

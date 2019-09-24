@@ -1,0 +1,28 @@
+@import '../../scss/utils';
+
+:host() {
+  display: block;
+  margin-bottom: size('s');
+}
+
+.texts {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  padding: 0 size('s');
+
+  .left {
+    flex: 75%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .right {
+    flex: 25%;
+    display: flex;
+    text-align: right;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+}
