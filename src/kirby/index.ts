@@ -19,3 +19,4 @@ export { LoadOnDemandEvent } from './components/list/list.event';
 export { EmptyStateComponent } from './components/empty-state/empty-state.component';
 export * from './components/toast';
 export { ToolbarComponent } from './components/toolbar/toolbar.component';
+export { FabSheetComponent } from './components/fab-sheet/fab-sheet.component';
