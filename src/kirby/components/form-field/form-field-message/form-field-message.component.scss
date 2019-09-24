@@ -1,1 +1,11 @@
-@import '../form-field-texts.shared';
+@import '../../../scss/utils';
+
+:host() {
+  font-style: italic;
+  font-size: font-size('xs');
+  font-weight: font-weight('normal');
+  font-stretch: normal;
+  line-height: line-height('xs');
+  letter-spacing: normal;
+  color: get-color('black');
+}
