@@ -1,10 +1,10 @@
 import {
   Directive,
-  ViewContainerRef,
   Input,
   ComponentFactoryResolver,
   OnInit,
   Renderer2,
+  ViewContainerRef,
 } from '@angular/core';
 
 import { ComponentConfiguration } from './component-configuration';

@@ -3,26 +3,21 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { ExamplesModule } from '../../examples/examples.module';
 import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
-import { ShowcasePropertiesComponent } from '../../shared/showcase-properties/showcase-properties.component';
-import { FloatingActionButtonShowcaseComponent } from './floating-action-button-showcase.component';
+import { ListNoShapeShowcaseComponent } from './list-no-shape-showcase.component';
 
-describe('FloatingActionButtonShowcaseComponent', () => {
-  let component: FloatingActionButtonShowcaseComponent;
-  let fixture: ComponentFixture<FloatingActionButtonShowcaseComponent>;
+describe('ListNoShapeShowcaseComponent', () => {
+  let component: ListNoShapeShowcaseComponent;
+  let fixture: ComponentFixture<ListNoShapeShowcaseComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ExamplesModule, RouterTestingModule],
-      declarations: [
-        FloatingActionButtonShowcaseComponent,
-        CodeViewerComponent,
-        ShowcasePropertiesComponent,
-      ],
+      declarations: [ListNoShapeShowcaseComponent, CodeViewerComponent],
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FloatingActionButtonShowcaseComponent);
+    fixture = TestBed.createComponent(ListNoShapeShowcaseComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

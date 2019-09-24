@@ -23,6 +23,14 @@ export class ButtonComponent {
   public get isIconPlacedLeft(): boolean {
     return this.iconPlacement === 'left';
   }
+  @HostBinding('class.floating')
+  public get isButtonFloating(): boolean {
+    return this.isFloating;
+  }
+  @HostBinding('class.icon-only')
+  public get isIconOnly(): boolean {
+    return this.icon && !this.text;
+  }
 
   @Input() set attentionLevel(level: '1' | '2' | '3' | '4') {
     this.isAttentionLevel1 = level === '1';
@@ -36,6 +44,7 @@ export class ButtonComponent {
   @Input() expand?: 'full' | 'block';
   @Input() text?: string;
   @Input() iconPlacement?: 'left' | 'right' = 'left';
+  @Input() isFloating?: boolean = false;
 
   @ContentChild(IconComponent) icon: IconComponent;
 }

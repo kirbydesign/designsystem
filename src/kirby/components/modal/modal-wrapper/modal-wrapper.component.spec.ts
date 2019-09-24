@@ -4,7 +4,7 @@ import { NavParams } from '@ionic/angular';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { By } from '@angular/platform-browser';
 
-import { FloatingActionButtonComponent } from '../../floating-action-button/floating-action-button.component';
+import { ButtonComponent } from '../../button/button.component';
 import { IconComponent } from '../../icon/icon.component';
 import { ModalWrapperComponent } from './modal-wrapper.component';
 import { IModalController } from '../services/modal.controller.interface';
@@ -32,7 +32,7 @@ describe('ModalWrapperComponent', () => {
       declarations: [
         ModalWrapperComponent,
         MockComponent(IconComponent),
-        MockComponent(FloatingActionButtonComponent),
+        MockComponent(ButtonComponent),
       ],
       providers: [
         { provide: IModalController, useValue: modalControllerSpy },
@@ -41,7 +41,7 @@ describe('ModalWrapperComponent', () => {
     }).compileComponents();
     TestBed.overrideModule(BrowserDynamicTestingModule, {
       set: {
-        entryComponents: [ModalWrapperComponent, FloatingActionButtonComponent],
+        entryComponents: [ModalWrapperComponent, ButtonComponent],
       },
     });
   }));

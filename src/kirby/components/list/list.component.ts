@@ -24,7 +24,7 @@ import { GroupByPipe } from './pipes/group-by.pipe';
 import { ListSwipeAction } from './list-swipe-action';
 import { ThemeColor } from '@kirbydesign/designsystem/helpers/theme-color.type';
 
-export type ListShape = 'square' | 'rounded';
+export type ListShape = 'square' | 'rounded' | 'none';
 
 @Component({
   selector: 'kirby-list',
@@ -75,13 +75,21 @@ export class ListComponent implements OnInit, OnChanges {
    * - list, if {@link #isSectionsEnabled} is `false`
    * - section, if {@link #isSectionsEnabled} is `true`
    *
-   * `square` means **without** rounded corners, `rounded` means **with** rounded corners.
+   * `square` means **without** rounded corners, `rounded` means **with** rounded corners.,  `none` means **without** padding, border, box-shadow and background.
    */
   @Input() shape: ListShape = 'rounded';
-  @HostBinding('class.rounded')
-  public get isRounded(): boolean {
+  @HostBinding('class.shape-rounded')
+  public get isShapeRounded(): boolean {
     return this.shape === 'rounded';
   }
+  @HostBinding('class.shape-none')
+  public get isShapeNone(): boolean {
+    return this.shape === 'none';
+  }
+
+  @HostBinding('class.item-spacing')
+  @Input()
+  hasItemSpacing: boolean;
 
   /**
    * Determines if list items should have swipe actions or not
