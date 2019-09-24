@@ -76,15 +76,58 @@
   <label>Disabled</label>
 </div>
 
+<h3>Custom Icon</h3>
+<div class="button-example-container">
+  <button kirby-button>
+    <kirby-icon customName="football"></kirby-icon>
+  </button>
+  <label>Attention Level 1<br/><em>(Default)</em></label>
+</div>
+<div class="button-example-container">
+  <button kirby-button attentionLevel="2">
+    <kirby-icon customName="football"></kirby-icon>
+  </button>
+  <label>Attention Level 2</label>
+</div>
+<div class="button-example-container">
+  <button kirby-button attentionLevel="3">
+    <kirby-icon customName="football"></kirby-icon>
+  </button>
+  <label>Attention Level 3</label>
+</div>
+<div class="button-example-container">
+  <button kirby-button attentionLevel="4">
+    <kirby-icon customName="football"></kirby-icon>
+  </button>
+  <label>Attention Level 4</label>
+</div>
+<div class="button-example-container">
+  <button kirby-button disabled>
+    <kirby-icon customName="football"></kirby-icon>
+  </button>
+  <label>Disabled</label>
+</div>
+
 <h2>Button with icon and text</h2>
-<button kirby-button text="Icon Left">
+<button kirby-button>
   <kirby-icon name="edit"></kirby-icon>
+  Icon Left
 </button>
-<button kirby-button text="Icon Right" iconPlacement="right">
+<button kirby-button>
+  Icon Right
   <kirby-icon name="arrow-down"></kirby-icon>
 </button>
-<button kirby-button text="Custom Icon">
+<button kirby-button>
+  <label>Label Left</label>
+  <kirby-icon name="arrow-down"></kirby-icon>
+</button>
+<button kirby-button>
+  <kirby-icon name="edit"></kirby-icon>
+  <label>Label Right</label>
+</button>
+<button kirby-button>
   <kirby-icon customName="football"></kirby-icon>
+  Custom Icon
 </button>
 
 <h2>Floating Action Button (FAB)</h2>

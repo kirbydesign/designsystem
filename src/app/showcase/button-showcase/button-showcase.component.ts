@@ -41,19 +41,6 @@ export class ButtonShowcaseComponent {
       inputValues: ['true', 'false'],
     },
     {
-      name: 'text',
-      description:
-        '(Optional) The text of the button. On web this can also be specified inside the start and end tag.',
-      defaultValue: '',
-      inputValues: ['string'],
-    },
-    {
-      name: 'iconPlacement',
-      description: '(Optional) Specify the icon placement in relation to the text.',
-      defaultValue: 'left',
-      inputValues: ['left', 'right'],
-    },
-    {
       name: 'isFloating',
       description:
         '(Optional) Determine if the button is going to be a Floating Action Button (FAB). Please note: FABs have an elevation of z8 by default. FABs have only an icon and no text. FABs always have a size of 64x64.',
