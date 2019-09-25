@@ -18,7 +18,7 @@
         <fieldset>
           <legend>Configuration</legend>
           <kirby-checkbox [checked]="disableWeekends" (checkedChange)="disableWeekends = $event;"></kirby-checkbox><label (click)="disableWeekends = !disableWeekends">Disable weekends</label><br/>
-          <kirby-checkbox [checked]="alwaysEnableCurrentDate" (checkedChange)="alwaysEnableCurrentDate = $event;"></kirby-checkbox><label (click)="alwaysEnableCurrentDate = !alwaysEnableCurrentDate">Always enable current date</label><br/>
+          <kirby-checkbox [checked]="alwaysEnableToday" (checkedChange)="alwaysEnableToday = $event;"></kirby-checkbox><label (click)="alwaysEnableToday = !alwaysEnableToday">Always enable current date</label><br/>
           <kirby-checkbox [checked]="disablePastDates" (checkedChange)="disablePastDates = $event;"></kirby-checkbox><label (click)="disablePastDates = !disablePastDates">Disable past dates</label><br/>
           <kirby-checkbox [checked]="disableFutureDates" (checkedChange)="disableFutureDates = $event;"></kirby-checkbox><label (click)="disableFutureDates = !disableFutureDates">Disable future dates</label><br/>
           <kirby-checkbox [checked]="setDisabledDates" (checkedChange)="setDisabledDates = $event;"></kirby-checkbox><label (click)="setDisabledDates = !setDisabledDates">Set disabled dates</label><br/>

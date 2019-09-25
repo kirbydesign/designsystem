@@ -11,7 +11,7 @@ declare var require: any;
 })
 export class CalendarShowcaseComponent {
   disableWeekends = false;
-  alwaysEnableCurrentDate = false;
+  alwaysEnableToday = false;
   disablePastDates = false;
   disableFutureDates = false;
   setMinDate = false;
@@ -45,7 +45,7 @@ export class CalendarShowcaseComponent {
       inputValues: ['true | false'],
     },
     {
-      name: 'alwaysEnableCurrentDate',
+      name: 'alwaysEnableToday',
       description: '(Optional) Allows selection of current date regardless of disabled weekends.',
       defaultValue: 'false',
       inputValues: ['true | false'],
