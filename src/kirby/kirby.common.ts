@@ -43,6 +43,7 @@ import { ToastHelper } from './components/toast/services/toast.helper';
 import { ToggleComponent } from './components/toggle/toggle.component';
 import { EmptyStateComponent } from './components/empty-state/empty-state.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { FabSheetComponent } from './components/fab-sheet/fab-sheet.component';
 
 export const declarations = [
   CardComponent,
@@ -81,6 +82,7 @@ export const declarations = [
   ToggleComponent,
   EmptyStateComponent,
   ToolbarComponent,
+  FabSheetComponent,
 ];
 
 export const providerDeclarations: any[] = [

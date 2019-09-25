@@ -27,6 +27,7 @@ import { ToastShowcaseComponent } from './toast-showcase/toast-showcase.componen
 import { ToggleShowcaseComponent } from './toggle-showcase/toggle-showcase.component';
 import { EmptyStateShowcaseComponent } from './empty-state-showcase/empty-state-showcase.component';
 import { ToolbarShowcaseComponent } from './toolbar-showcase/toolbar-showcase.component';
+import { FabSheetShowcaseComponent } from './fab-sheet-showcase/fab-sheet-showcase.component';
 
 export const COMPONENT_IMPORTS: any[] = [ExamplesModule, ShowcaseRoutingModule];
 
@@ -57,6 +58,7 @@ export const COMPONENT_EXPORTS: any[] = [
   ToggleShowcaseComponent,
   EmptyStateShowcaseComponent,
   ToolbarShowcaseComponent,
+  FabSheetShowcaseComponent,
 ];
 
 export const COMPONENT_DECLARATIONS: any[] = [...COMPONENT_EXPORTS, ShowcaseComponent];

@@ -1,8 +1,8 @@
 <kirby-card>
-    <kirby-card-header *ngIf="config.header" [title]="config.header" [isTitleBold]="true" [subtitle]="config.subheader">
+    <kirby-card-header *ngIf="header" [title]="header" [isTitleBold]="true" [subtitle]="subheader">
     </kirby-card-header>
     <div class="action-sheet-items">
-        <button (click)="onItemSelect(item)" *ngFor="let item of config.items">{{ item.text }}</button>
+        <button (click)="onItemSelect(item)" *ngFor="let item of items">{{ item.text }}</button>
     </div>
 </kirby-card>
-<button kirby-button class="cancel-btn" attentionLevel="2" (click)="onModalDismiss()">{{ cancelButtonText }}</button>
+<button *ngIf="!hideCancel" kirby-button class="cancel-btn" attentionLevel="2" (click)="onCancel()">{{ cancelButtonText }}</button>
