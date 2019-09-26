@@ -1,4 +1,6 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, Host } from '@angular/core';
+
+import { FormFieldComponent } from './../form-field.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -9,4 +11,7 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 export class FormFieldMessageComponent {
   @Input() text: string;
   @Input() position: 'left' | 'right' = 'left';
+
+  // Injecting FormFieldComponent, to ensure the this component is not used outside the context of a form-field.
+  constructor(@Host() private _: FormFieldComponent) {}
 }
