@@ -73,6 +73,12 @@ export class FormFieldShowcaseComponent {
       description: 'The type of control to display.',
       inputValues: ['date', 'email', 'number', 'password', 'search', 'tel', 'text', 'time', 'url'],
     },
+    {
+      name: 'value',
+      defaultValue: '``',
+      description: 'The value of the input.',
+      inputValues: ['null', 'string', 'undefined'],
+    },
   ];
   inputEvents: ShowcaseProperty[] = [
     {
@@ -131,6 +137,12 @@ export class FormFieldShowcaseComponent {
       defaultValue: undefined,
       description: 'The number of visible text lines for the control.',
       inputValues: ['number', 'undefined'],
+    },
+    {
+      name: 'value',
+      defaultValue: '``',
+      description: 'The value of the textarea.',
+      inputValues: ['null', 'string', 'undefined'],
     },
   ];
   textareaEventproperties: ShowcaseProperty[] = [

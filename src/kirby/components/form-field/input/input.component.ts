@@ -55,19 +55,18 @@ export class InputComponent implements ControlValueAccessor {
   @Input() name = this.inputId;
   @Input() placeholder: string;
   @Input() type: InputType = 'text';
-
-  @Output() blur = new EventEmitter<void>();
-  @Output() focus = new EventEmitter<void>();
+  @Input() set value(v: any) {
+    if (v !== this._innerValue) {
+      this._innerValue = v;
+    }
+  }
 
   get value(): any {
     return this._innerValue || '';
   }
 
-  set value(v: any) {
-    if (v !== this._innerValue) {
-      this._innerValue = v;
-    }
-  }
+  @Output() blur = new EventEmitter<void>();
+  @Output() focus = new EventEmitter<void>();
 
   private _propagateChange = (_: any) => {};
   private _innerValue: any;

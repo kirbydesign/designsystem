@@ -30,19 +30,18 @@ export class TextareaComponent implements ControlValueAccessor {
   @Input() name = this.textareaId;
   @Input() placeholder: string;
   @Input() rows: number;
-
-  @Output() blur = new EventEmitter<void>();
-  @Output() focus = new EventEmitter<void>();
+  @Input() set value(v: any) {
+    if (v !== this._innerValue) {
+      this._innerValue = v;
+    }
+  }
 
   get value(): any {
     return this._innerValue || '';
   }
 
-  set value(v: any) {
-    if (v !== this._innerValue) {
-      this._innerValue = v;
-    }
-  }
+  @Output() blur = new EventEmitter<void>();
+  @Output() focus = new EventEmitter<void>();
 
   private _propagateChange = (_: any) => {};
   private _innerValue: any;
