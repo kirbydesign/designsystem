@@ -40,7 +40,7 @@ textarea {
   width: 100%;
 
   &:disabled {
-    cursor: not-allowed;
+    background-color: get-color('light-tint');
   }
 
   &::placeholder {
