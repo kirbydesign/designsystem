@@ -15,13 +15,29 @@ export class ModalController implements IModalController {
   constructor(
     private modalHelper: ModalHelper,
     private actionSheetHelper: ActionSheetHelper,
-    private alertHelper: AlertHelper
-  ) {}
+    private alertHelper: AlertHelper,
+  ) {
+  }
 
   public showModal(config: ModalConfig, onCloseModal?: (data?: any) => void): void {
     const modalCloseEvent: Promise<any> = this.modalHelper.showModalWindow(
       config,
-      this.register.bind(this)
+      this.register.bind(this),
+    );
+    modalCloseEvent.then((data) => {
+      this.forgetTopmost();
+      if (onCloseModal) {
+        // Since Ionic wraps the return value in an object, which contains data as a property, we need to return data.data
+        // We don't expect this on native, hence we return just data
+        onCloseModal(typeof data === 'object' && 'data' in data ? data.data : data);
+      }
+    });
+  }
+
+  public showModalFadeIn(config: ModalConfig, onCloseModal?: (data?: any) => void): void {
+    const modalCloseEvent: Promise<any> = this.modalHelper.showModalWindowFadeIn(
+      config,
+      this.register.bind(this),
     );
     modalCloseEvent.then((data) => {
       this.forgetTopmost();

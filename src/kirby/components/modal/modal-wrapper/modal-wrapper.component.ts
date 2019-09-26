@@ -18,7 +18,7 @@ export class ModalWrapperComponent implements AfterViewInit {
   constructor(
     private params: NavParams,
     private modalController: IModalController,
-    injector: Injector
+    injector: Injector,
   ) {
     this.config = this.params.get('config');
     this.componentPropsInjector = Injector.create({

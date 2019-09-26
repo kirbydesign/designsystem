@@ -4,6 +4,7 @@ import { AlertConfig } from '../alert/config/alert-config';
 
 export abstract class IModalController {
   abstract showModal(config: ModalConfig, onCloseModal?: (data?: any) => any): void;
+  abstract showModalFadeIn(config: ModalConfig, onCloseModal?: (data?: any) => any): void;
   abstract showActionSheet(config: ActionSheetConfig, onCloseModal?: (data?: any) => any): void;
   abstract showAlert(config: AlertConfig, onCloseModal?: (result?: boolean) => boolean);
   abstract hideTopmost(data?: any): void;

@@ -4,14 +4,16 @@ import { Animation } from '@ionic/core';
 
 import { ModalConfig } from '../modal-wrapper/config/modal-config';
 import { ModalWrapperComponent } from '../modal-wrapper/modal-wrapper.component';
+import { modalFadeInAnimation } from '@kirbydesign/designsystem/components/modal/animations/modal-fade-in';
 
 @Injectable()
 export class ModalHelper {
-  constructor(private ionicModalController: IonicModalController) {}
+  constructor(private ionicModalController: IonicModalController) {
+  }
 
   public async showModalWindow(
     config: ModalConfig,
-    registerModal: (modal: { close: (data?: any) => {} }) => void
+    registerModal: (modal: { close: (data?: any) => {} }) => void,
   ): Promise<any> {
     const modal = await this.ionicModalController.create({
       component: ModalWrapperComponent,
@@ -27,11 +29,29 @@ export class ModalHelper {
     return modal.onDidDismiss();
   }
 
+  public async showModalWindowFadeIn(
+    config: ModalConfig,
+    registerModal: (modal: { close: (data?: any) => {} }) => void,
+  ): Promise<any> {
+    const modal = await this.ionicModalController.create({
+      component: ModalWrapperComponent,
+      cssClass: 'kirby-modal',
+      componentProps: { config: config },
+      enterAnimation: modalFadeInAnimation,
+      leaveAnimation: this.animate.bind(this, false, config.flavor),
+    });
+
+    registerModal({ close: modal.dismiss.bind(modal) });
+
+    modal.present();
+    return modal.onDidDismiss();
+  }
+
   private animate(
     isAnimEnter: boolean,
     flavor: any,
     AnimationC: Animation,
-    baseEl: HTMLElement
+    baseEl: HTMLElement,
   ): Promise<Animation> {
     // Set-up animated elements
     const baseAnimation = new AnimationC();
@@ -60,7 +80,7 @@ export class ModalHelper {
       wrapperAnimation.fromTo(
         `transform`,
         `translateY(${transformYFromTo[0]})`,
-        `translateY(${transformYFromTo[1]})`
+        `translateY(${transformYFromTo[1]})`,
       );
     } else {
       // Reset the vertical modal placement to its starting position
@@ -77,7 +97,7 @@ export class ModalHelper {
         .easing('easeOut')
         .duration(200)
         .add(wrapperAnimation)
-        .add(backdropAnimation)
+        .add(backdropAnimation),
     );
   }
 }
