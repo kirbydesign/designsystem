@@ -183,7 +183,7 @@ export class FormFieldShowcaseComponent {
       name: 'position',
       defaultValue: 'left',
       description:
-        'The position determines where the message is placed inside a form-field. OBS this field only works with static values and can not be dynamically bound.',
+        'The position determines where the message is placed inside a form-field. ATTENTION this field only works with static values and can not be dynamically bound.',
       inputValues: ['left', 'right'],
     },
   ];
