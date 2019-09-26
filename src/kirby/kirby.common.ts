@@ -1,4 +1,3 @@
-import { TextareaComponent } from './components/form-field/textarea/textarea.component';
 import { GroupByPipe } from './components/list/pipes/group-by.pipe';
 import { AvatarComponent } from './components/avatar/avatar.component';
 import { ButtonComponent } from './components/button/button.component';
@@ -44,10 +43,11 @@ import { ToastHelper } from './components/toast/services/toast.helper';
 import { ToggleComponent } from './components/toggle/toggle.component';
 import { EmptyStateComponent } from './components/empty-state/empty-state.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { FabSheetComponent } from './components/fab-sheet/fab-sheet.component';
 import { FormFieldComponent } from './components/form-field/form-field.component';
 import { FormFieldMessageComponent } from './components/form-field/form-field-message/form-field-message.component';
 import { InputComponent } from './components/form-field/input/input.component';
-import { FabSheetComponent } from './components/fab-sheet/fab-sheet.component';
+import { TextareaComponent } from './components/form-field/textarea/textarea.component';
 
 export const declarations = [
   CardComponent,
