@@ -27,6 +27,7 @@ import { ToolbarExampleComponent } from './toolbar-example/toolbar-example.compo
 import { ListSwipeExampleComponent } from './list/swipe/list-swipe-example.component';
 import { ListLoadOnDemandExampleComponent } from './list/load-on-demand/list-load-on-demand-example.component';
 import { FabSheetExampleComponent } from './fab-sheet-example/fab-sheet-example.component';
+import { PageExampleComponent } from '~/app/examples/page-example/page-example.component';
 
 export const routes: Routes = [
   {
@@ -68,6 +69,10 @@ export const routes: Routes = [
   {
     path: 'grid',
     component: GridExampleComponent,
+  },
+  {
+    path: 'page',
+    component: PageExampleComponent,
   },
   {
     path: 'chip',

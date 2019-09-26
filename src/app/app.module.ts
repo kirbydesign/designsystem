@@ -13,6 +13,7 @@ import { HeaderComponent } from './page/header/header.component';
 import { IntroComponent } from './intro/intro.component';
 import { KirbyModule } from '@kirbydesign/designsystem';
 import { FirebaseModule } from './shared/firebase/firebase.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 registerLocaleData(localeEn);
 
@@ -20,6 +21,7 @@ registerLocaleData(localeEn);
   declarations: [AppComponent, HomeComponent, SideNavComponent, HeaderComponent, IntroComponent],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,

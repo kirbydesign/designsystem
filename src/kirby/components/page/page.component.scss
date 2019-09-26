@@ -1,0 +1,86 @@
+@import '../../scss/utils';
+
+/*
+ * Page Header
+ */
+.page-header, .page-toolbar {
+  --background: #{get-color('background-color')};
+
+  @include media (">=large") {
+    display: none;
+  }
+}
+
+.page-toolbar {
+  --border-width: 0 !important;
+  --padding-start: #{size('xs')};
+  --padding-end: #{size('xs')};
+}
+
+.back-button {
+  --color: #{get-color('black')};
+  --icon-font-size: 24px;
+}
+
+ion-icon.sc-ion-back-button-ios {
+  width: 24px;
+}
+
+/*
+ * Page Title
+ */
+.page-title-container {
+  margin-left: size('xs');
+  margin-top: size('xxs');
+  margin-bottom: size('xl');
+
+  .page-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h1, h2, h3, h4, h5, h6 {
+      margin: 0;
+    }
+  }
+
+  .back-button {
+    width: 32px;
+    height: 32px;
+    background-color: #{get-color('light')};
+    margin-bottom: size('xxs');
+    border-radius: 50%;
+    display: none;
+
+    @include media (">=large") {
+      display: block;
+    }
+  }
+}
+
+/*
+ * Page Content
+ */
+.page-content {
+  --padding-start: #{size('xs')};
+  --padding-end: #{size('xs')};
+  --background: #{get-color('background-color')};
+}
+
+
+.page-content-inner, .page-fixed-content-inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/*
+ * Fixed content
+ */
+.page-fixed-content {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  .page-fixed-content-inner {
+    position: relative;
+  }
+}
