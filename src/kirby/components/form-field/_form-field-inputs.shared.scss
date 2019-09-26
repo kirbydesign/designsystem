@@ -1,29 +1,14 @@
-@import '../../scss/utils';
+@import '../../../scss/utils';
 
-:host(.error) {
-  input,
-  textarea {
-    border-color: get-color('danger');
-  }
+:host(.state-danger) {
+  border-color: get-color('danger');
 }
-
-:host(.warning) {
-  input,
-  textarea {
-    border-color: get-color('warning');
-  }
+  
+:host(.state-warning) {
+  border-color: get-color('warning');
 }
-
-label {
-  display: block;
-  font-size: font-size('s');
-  font-weight: font-weight('light');
-  margin-bottom: size('xxxs');
-  padding: 0 size('s');
-}
-
-input,
-textarea {
+  
+:host {
   background-color: get-color('white');
   border-color: transparent;
   border-radius: size('s');
