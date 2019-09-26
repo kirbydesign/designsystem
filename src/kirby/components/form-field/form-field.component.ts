@@ -1,4 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ContentChildren } from '@angular/core';
+
+import { FormFieldMessageComponent } from './form-field-message/form-field-message.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -6,4 +8,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./form-field.component.scss'],
   templateUrl: './form-field.component.html',
 })
-export class FormFieldComponent {}
+export class FormFieldComponent {
+  @Input() label: string;
+  @ContentChildren(FormFieldMessageComponent) messages;
+}

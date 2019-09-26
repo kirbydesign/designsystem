@@ -1,11 +1,21 @@
-<ng-content select="kirby-input"></ng-content>
-<ng-content select="kirby-textarea"></ng-content>
-<div class="texts">  
+<label *ngIf="label">
+  <span>{{label}}</span>
+  <ng-container *ngTemplateOutlet="slottedInput"></ng-container>
+</label>
+<ng-container *ngIf="!label">
+  <ng-container *ngTemplateOutlet="slottedInput"></ng-container>
+</ng-container>
+<div *ngIf="messages && messages.length > 0" class="texts">  
   <div class="right">
     <ng-content select="kirby-form-field-message[position=right]"></ng-content>
   </div>
   <div class="left">
-      <ng-content select="kirby-form-field-message[position=left]"></ng-content>
-      <ng-content select="kirby-form-field-message"></ng-content>
+    <ng-content select="kirby-form-field-message[position=left]"></ng-content>
+    <ng-content select="kirby-form-field-message"></ng-content>
   </div>
 </div>
+
+<ng-template #slottedInput>
+  <ng-content select="input[kirby-input]"></ng-content>
+  <ng-content select="textarea[kirby-textarea]"></ng-content>
+</ng-template>

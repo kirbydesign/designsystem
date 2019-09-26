@@ -26,3 +26,14 @@
     justify-content: flex-end;
   }
 }
+
+label {
+  display: block;
+
+  span {
+    font-size: font-size('s');
+    font-weight: font-weight('light');
+    margin-bottom: size('xxxs');
+    padding: 0 size('s');
+  }
+}
