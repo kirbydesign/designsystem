@@ -2,23 +2,36 @@ import { Component } from '@angular/core';
 
 import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
 
-declare var require: any;
-
 @Component({
   selector: 'kirby-form-field-showcase',
   templateUrl: './form-field-showcase.component.html',
   styleUrls: ['./form-field-showcase.component.scss'],
 })
 export class FormFieldShowcaseComponent {
-  exampleHtml: string = require('../../examples/form-field-example/form-field-example.component.html');
+  formFieldProperties: ShowcaseProperty[] = [
+    {
+      name: 'label',
+      defaultValue: undefined,
+      description:
+        'The label shown above the input. Clicking the label sets focus to the input/textarea.',
+      inputValues: ['string'],
+    },
+  ];
 
-  inputProperties: ShowcaseProperty[] = [
+  sharedProperties: ShowcaseProperty[] = [
     {
       name: 'autocomplete',
       defaultValue: 'off',
       description:
         'Indicates whether the value of the control can be automatically completed by the browser.',
       inputValues: ['on', 'off'],
+    },
+    {
+      name: 'autofocus',
+      defaultValue: 'false',
+      description:
+        'Specify that the input/textare should have input focus when the page loads. Only one element in a document can have this attribute.',
+      inputValues: ['true', 'false'],
     },
     {
       name: 'autocorrect',
@@ -34,30 +47,8 @@ export class FormFieldShowcaseComponent {
       inputValues: ['true', 'false'],
     },
     {
-      name: 'inputmode',
-      defaultValue: 'undefined',
-      description: 'A hint to the browser for which keyboard to display.',
-      inputValues: [
-        'none',
-        'text',
-        'decimal',
-        'numeric',
-        'tel',
-        'search',
-        'email',
-        'url',
-        'undefined',
-      ],
-    },
-    {
-      name: 'label',
-      defaultValue: undefined,
-      description: 'The label shown above the input.',
-      inputValues: ['string'],
-    },
-    {
       name: 'name',
-      defaultValue: 'this.inputId',
+      defaultValue: undefined,
       description: 'The name of the control, which is submitted with the form data.',
       inputValues: ['string'],
     },
@@ -65,8 +56,11 @@ export class FormFieldShowcaseComponent {
       name: 'placeholder',
       defaultValue: undefined,
       description: 'Instructional text that shows before the input has a value.',
-      inputValues: ['null', 'string', 'undefinded'],
+      inputValues: ['string'],
     },
+  ];
+
+  inputProperties: ShowcaseProperty[] = [
     {
       name: 'type',
       defaultValue: 'text',
@@ -75,12 +69,14 @@ export class FormFieldShowcaseComponent {
     },
     {
       name: 'value',
-      defaultValue: '``',
-      description: 'The value of the input.',
-      inputValues: ['null', 'string', 'undefined'],
+      defaultValue: undefined,
+      description:
+        'The value of the input. The type of the value is set through the `type` attribute.',
+      inputValues: ['string', 'number', 'email', 'telephone', 'date'],
     },
   ];
-  inputEvents: ShowcaseProperty[] = [
+
+  sharedEvents: ShowcaseProperty[] = [
     {
       name: 'blur',
       defaultValue: undefined,
@@ -109,70 +105,20 @@ export class FormFieldShowcaseComponent {
 
   textareaProperties: ShowcaseProperty[] = [
     {
-      name: 'disabled',
-      defaultValue: 'false',
-      description: 'If `true`, the user cannot interact with the input.',
-      inputValues: ['true', 'false'],
-    },
-    {
-      name: 'label',
-      defaultValue: undefined,
-      description: 'The label shown above the input.',
-      inputValues: ['string'],
-    },
-    {
-      name: 'name',
-      defaultValue: 'this.inputId',
-      description: 'The name of the control, which is submitted with the form data.',
-      inputValues: ['string'],
-    },
-    {
-      name: 'placeholder',
-      defaultValue: undefined,
-      description: 'Instructional text that shows before the input has a value.',
-      inputValues: ['null', 'string', 'undefinded'],
-    },
-    {
       name: 'rows',
       defaultValue: undefined,
       description: 'The number of visible text lines for the control.',
-      inputValues: ['number', 'undefined'],
+      inputValues: ['number'],
     },
     {
       name: 'value',
-      defaultValue: '``',
+      defaultValue: undefined,
       description: 'The value of the textarea.',
-      inputValues: ['null', 'string', 'undefined'],
-    },
-  ];
-  textareaEvents: ShowcaseProperty[] = [
-    {
-      name: 'blur',
-      defaultValue: undefined,
-      description: 'Emitted when the input loses focus.',
-      inputValues: [],
-    },
-    {
-      name: 'change',
-      defaultValue: undefined,
-      description: 'Emitted when the input value has changed.',
-      inputValues: [],
-    },
-    {
-      name: 'focus',
-      defaultValue: undefined,
-      description: 'Emitted when the input has focus.',
-      inputValues: [],
-    },
-    {
-      name: 'input',
-      defaultValue: undefined,
-      description: 'Emitted when a keyboard input ocurred.',
-      inputValues: [],
+      inputValues: ['string'],
     },
   ];
 
-  messageproperties: ShowcaseProperty[] = [
+  messageProperties: ShowcaseProperty[] = [
     {
       name: 'text',
       defaultValue: undefined,
@@ -183,7 +129,7 @@ export class FormFieldShowcaseComponent {
       name: 'position',
       defaultValue: 'left',
       description:
-        'The position determines where the message is placed inside a form-field. ATTENTION this field only works with static values and can not be dynamically bound.',
+        'The position determines where the message is placed inside a form-field. *PLEASE NOTE* this field only works with static values and can not be dynamically bound.',
       inputValues: ['left', 'right'],
     },
   ];
