@@ -1,7 +1,7 @@
 <ion-header class="page-header">
     <ion-toolbar class="page-toolbar">
         <ion-buttons slot="start">
-            <ion-back-button text="" default-href="" icon="arrow-back" class="back-button"></ion-back-button>
+            <ion-back-button text="" [defaultHref]="defaultBackHref" icon="arrow-back" class="back-button"></ion-back-button>
         </ion-buttons>
         <ion-title [@visibility]="pageHeaderTitleIsVisible ? 'visible' : 'hidden'">
             <ng-container [ngTemplateOutlet]="title"></ng-container>
@@ -18,9 +18,9 @@
 
     <div class="page-content-inner">
         <div class="page-title-container" *ngIf="!onlyShowPageTitleInHeader" #pageTitleContainer>
-            <ion-back-button default-href="/tabs" text="" class="back-button" icon="arrow-back"></ion-back-button>
+            <ion-back-button [defaultHref]="defaultBackHref" text="" class="back-button" icon="arrow-back" *ngIf="defaultBackHref"></ion-back-button>
             <div class="page-title">
-                <h1>
+                <h1 [style.textAlign]="pageTitleAlign">
                     <ng-container [ngTemplateOutlet]="title"></ng-container>
                 </h1>
                 <div class="page-title-actions">

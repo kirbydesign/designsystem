@@ -63,8 +63,9 @@ export class PageFixedContentDirective {}
   ],
 })
 export class PageComponent implements OnInit, OnDestroy, AfterViewInit {
-  @Input() pageTitleAlign: string;
+  @Input() pageTitleAlign?: 'left' | 'center' | 'right' = 'center';
   @Input() onlyShowPageTitleInHeader: boolean;
+  @Input() defaultBackHref: string;
 
   @ViewChild('pageTitleContainer', { read: ElementRef }) pageTitleContainer;
   @ContentChild(PageTitleDirective, { read: TemplateRef }) title;

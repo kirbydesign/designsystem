@@ -12,22 +12,23 @@ export class PageShowcaseComponent {
   exampleHtml: string = require('../../examples/page-example/page-example.component.html');
   properties: ShowcaseProperty[] = [
     {
-      name: 'checked',
-      description: 'If true, the page is selected.',
+      name: 'onlyShowPageTitleInHeader',
+      description: 'If true, page title and page title actions will only show in header',
       defaultValue: 'false',
       inputValues: ['true', 'false'],
     },
     {
-      name: 'disabled',
-      description: 'If true, the page is disabled.',
-      defaultValue: 'false',
-      inputValues: ['true', 'false'],
+      name: 'pageTitleAlign',
+      description: 'align page title in content',
+      defaultValue: 'left',
+      inputValues: ['left', 'center', 'right'],
     },
     {
-      name: 'checkedChange',
-      description: 'Emits the checked state of the page on change (true | false).',
-      defaultValue: '',
-      inputValues: ['event'],
+      name: 'defaultBackHref',
+      description:
+        'Back navigation only shows if any navigation has been done. To make it show even after page-reload provide the page with a default back href',
+      defaultValue: 'null',
+      inputValues: ['string'],
     },
   ];
 }
