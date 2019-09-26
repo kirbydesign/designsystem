@@ -1,11 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ExamplesModule } from '../../examples/examples.module';
 import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
 import { PageShowcaseComponent } from './page-showcase.component';
 import { ShowcasePropertiesComponent } from '~/app/shared/showcase-properties/showcase-properties.component';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('PageShowcaseComponent', () => {
   let component: PageShowcaseComponent;
