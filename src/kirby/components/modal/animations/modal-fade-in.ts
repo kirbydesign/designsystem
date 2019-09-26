@@ -23,6 +23,6 @@ export function modalFadeInAnimation(
       .duration(1000)
       .beforeAddClass('show-modal')
       .add(backdropAnimation)
-      .add(wrapperAnimation),
+      .add(wrapperAnimation)
   );
 }

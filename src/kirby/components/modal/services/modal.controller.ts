@@ -15,14 +15,13 @@ export class ModalController implements IModalController {
   constructor(
     private modalHelper: ModalHelper,
     private actionSheetHelper: ActionSheetHelper,
-    private alertHelper: AlertHelper,
-  ) {
-  }
+    private alertHelper: AlertHelper
+  ) {}
 
   public showModal(config: ModalConfig, onCloseModal?: (data?: any) => void): void {
     const modalCloseEvent: Promise<any> = this.modalHelper.showModalWindow(
       config,
-      this.register.bind(this),
+      this.register.bind(this)
     );
     modalCloseEvent.then((data) => {
       this.forgetTopmost();
@@ -37,7 +36,7 @@ export class ModalController implements IModalController {
   public showModalFadeIn(config: ModalConfig, onCloseModal?: (data?: any) => void): void {
     const modalCloseEvent: Promise<any> = this.modalHelper.showModalWindowFadeIn(
       config,
-      this.register.bind(this),
+      this.register.bind(this)
     );
     modalCloseEvent.then((data) => {
       this.forgetTopmost();
