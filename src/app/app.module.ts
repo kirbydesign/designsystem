@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { registerLocaleData } from '@angular/common';
 import localeEn from '@angular/common/locales/en-GB';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,7 +14,6 @@ import { HeaderComponent } from './page/header/header.component';
 import { IntroComponent } from './intro/intro.component';
 import { KirbyModule } from '@kirbydesign/designsystem';
 import { FirebaseModule } from './shared/firebase/firebase.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 registerLocaleData(localeEn);
 

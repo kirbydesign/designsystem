@@ -1,7 +1,8 @@
 import { Component, HostBinding } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
 import { ActionSheetItem } from '@kirbydesign/designsystem/components/modal/action-sheet/config/action-sheet-item';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'kirby-page-example',
