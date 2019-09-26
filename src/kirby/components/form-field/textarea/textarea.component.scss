@@ -1,5 +1,9 @@
 @import '../form-field-inputs.shared';
 
-textarea {
-  resize: vertical;
+:host {
+  resize: none;
+
+  @include media(">=medium") {
+    resize: vertical;
+  }
 }

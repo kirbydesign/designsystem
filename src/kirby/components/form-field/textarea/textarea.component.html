@@ -1,15 +1,2 @@
-<label [for]="name" [id]="labelId">
-  {{ label }}
-</label>
-<textarea
-  (blur)="onBlur()"
-  (focus)="onFocus()"
-  (input)="onInput($event)"
-  [attr.aria-labelledby]="labelId"
-  [disabled]="disabled"
-  [id]="textareaId"
-  [name]="name"
-  [placeholder]="placeholder || ''"
-  [rows]="rows"
-  >{{ value }}</textarea
->
+<ng-content *ngIf="!value"></ng-content>
+<ng-container *ngIf="value">{{value}}</ng-container>
