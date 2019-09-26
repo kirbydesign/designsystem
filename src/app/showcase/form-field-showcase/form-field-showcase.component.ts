@@ -145,7 +145,7 @@ export class FormFieldShowcaseComponent {
       inputValues: ['null', 'string', 'undefined'],
     },
   ];
-  textareaEventproperties: ShowcaseProperty[] = [
+  textareaEvents: ShowcaseProperty[] = [
     {
       name: 'blur',
       defaultValue: undefined,
