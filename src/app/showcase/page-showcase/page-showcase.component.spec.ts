@@ -3,16 +3,17 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { ExamplesModule } from '../../examples/examples.module';
 import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
-import { PageShowcaseComponent } from './toggle-showcase.component';
+import { PageShowcaseComponent } from './page-showcase.component';
 import { ShowcasePropertiesComponent } from '~/app/shared/showcase-properties/showcase-properties.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-describe('ToggleShowcaseComponent', () => {
+describe('PageShowcaseComponent', () => {
   let component: PageShowcaseComponent;
   let fixture: ComponentFixture<PageShowcaseComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ExamplesModule, RouterTestingModule],
+      imports: [ExamplesModule, RouterTestingModule, NoopAnimationsModule],
       declarations: [PageShowcaseComponent, CodeViewerComponent, ShowcasePropertiesComponent],
     }).compileComponents();
   }));

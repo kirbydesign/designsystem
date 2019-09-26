@@ -2,6 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PageComponent } from './page.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('PageComponent', () => {
   let component: PageComponent;
@@ -9,6 +10,7 @@ describe('PageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [NoopAnimationsModule],
       declarations: [PageComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();

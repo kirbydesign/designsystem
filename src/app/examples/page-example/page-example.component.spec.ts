@@ -3,6 +3,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { KirbyModule } from '../../../kirby/kirby.module';
 import { PageExampleComponent } from './page-example.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('PageExampleComponent', () => {
   let component: PageExampleComponent;
@@ -10,7 +11,7 @@ describe('PageExampleComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [KirbyModule, RouterTestingModule],
+      imports: [KirbyModule, RouterTestingModule, NoopAnimationsModule],
       declarations: [PageExampleComponent],
     }).compileComponents();
   }));
