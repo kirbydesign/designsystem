@@ -47,6 +47,7 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { FormFieldComponent } from './components/form-field/form-field.component';
 import { FormFieldMessageComponent } from './components/form-field/form-field-message/form-field-message.component';
 import { InputComponent } from './components/form-field/input/input.component';
+import { FabSheetComponent } from './components/fab-sheet/fab-sheet.component';
 
 export const declarations = [
   CardComponent,
@@ -89,6 +90,7 @@ export const declarations = [
   FormFieldMessageComponent,
   InputComponent,
   TextareaComponent,
+  FabSheetComponent,
 ];
 
 export const providerDeclarations: any[] = [

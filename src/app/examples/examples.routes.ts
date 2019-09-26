@@ -27,6 +27,7 @@ import { ToolbarExampleComponent } from './toolbar-example/toolbar-example.compo
 import { ListSwipeExampleComponent } from './list/swipe/list-swipe-example.component';
 import { ListLoadOnDemandExampleComponent } from './list/load-on-demand/list-load-on-demand-example.component';
 import { FormFieldExampleComponent } from './form-field-example/form-field-example.component';
+import { FabSheetExampleComponent } from './fab-sheet-example/fab-sheet-example.component';
 
 export const routes: Routes = [
   {
@@ -140,5 +141,9 @@ export const routes: Routes = [
   {
     path: 'form-field',
     component: FormFieldExampleComponent,
+  },
+  {
+    path: 'fab-sheet',
+    component: FabSheetExampleComponent,
   },
 ];
