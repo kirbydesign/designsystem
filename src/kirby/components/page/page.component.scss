@@ -5,10 +5,8 @@
  */
 .page-header, .page-toolbar {
   --background: #{get-color('background-color')};
-
-  @include media (">=large") {
-    display: none;
-  }
+  max-width: 768px;
+  margin: 0 auto;
 }
 
 .page-toolbar {

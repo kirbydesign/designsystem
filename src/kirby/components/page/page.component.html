@@ -18,7 +18,6 @@
 
     <div class="page-content-inner">
         <div class="page-title-container" *ngIf="!onlyShowPageTitleInHeader" #pageTitleContainer>
-            <ion-back-button [defaultHref]="defaultBackHref" text="" class="back-button" icon="arrow-back" *ngIf="defaultBackHref"></ion-back-button>
             <div class="page-title">
                 <h1 [style.textAlign]="pageTitleAlign">
                     <ng-container [ngTemplateOutlet]="title"></ng-container>
