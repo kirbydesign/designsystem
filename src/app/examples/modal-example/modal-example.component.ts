@@ -26,6 +26,20 @@ export class ModalExampleComponent {
     this.modalController.showModal(config, this.onModalClose);
   }
 
+  showModalFadeIn() {
+    const config: ModalConfig = {
+      title: 'My Modal Title',
+      flavor: 'modal',
+      component: FirstEmbeddedModalExampleComponent,
+      componentProps: {
+        prop1: 'value1',
+        prop2: 'value2',
+      },
+    };
+
+    this.modalController.showModalFadeIn(config, this.onModalClose);
+  }
+
   showDrawer() {
     const config: ModalConfig = {
       title: 'My Drawer Title',
