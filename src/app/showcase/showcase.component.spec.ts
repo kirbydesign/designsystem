@@ -12,6 +12,7 @@ import { ShowcaseRoutingModule } from './showcase-routing.module';
 import { CodeViewerComponent } from '../shared/code-viewer/code-viewer.component';
 import { ShowcasePropertiesComponent } from '../shared/showcase-properties/showcase-properties.component';
 import { ShowcaseComponent } from './showcase.component';
+import { ExampleViewerComponent } from '../shared/example-viewer/example-viewer.component';
 
 describe('ShowcaseComponent', () => {
   let component: ShowcaseComponent;
@@ -31,6 +32,7 @@ describe('ShowcaseComponent', () => {
         ShowcaseComponent,
         CodeViewerComponent,
         ShowcasePropertiesComponent,
+        MockComponent(ExampleViewerComponent),
         MockComponent(ionic.IonIcon),
       ],
     }).compileComponents();
