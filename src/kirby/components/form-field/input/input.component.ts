@@ -17,21 +17,10 @@ export class InputComponent {
     this._inputmode = InputComponent.typeToInputmodeMap[value];
   }
 
+  @HostBinding('class.error')
+  @Input()
+  hasError: boolean;
+
   @HostBinding('attr.inputmode')
   private _inputmode: string;
-
-  @HostBinding('class.state-success')
-  private _isSuccess: boolean;
-
-  @HostBinding('class.state-warning')
-  private _isWarning: boolean;
-
-  @HostBinding('class.state-danger')
-  private _isDanger: boolean;
-
-  @Input() set state(state: 'success' | 'warning' | 'danger') {
-    this._isSuccess = state === 'success';
-    this._isWarning = state === 'warning';
-    this._isDanger = state === 'danger';
-  }
 }

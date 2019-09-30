@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 
 const config = {
-  selector: 'kirby-form-field-input-state-warning-example',
+  selector: 'kirby-form-field-input-error-example',
   template: `<kirby-form-field label="Warning">
-  <input kirby-input state="warning" />
+  <input kirby-input hasError="true" />
 </kirby-form-field>`,
 };
 
@@ -11,6 +11,6 @@ const config = {
   selector: config.selector,
   template: config.template,
 })
-export class FormFieldInputStateWarningExampleComponent {
+export class FormFieldInputErrorExampleComponent {
   template: string = config.template;
 }

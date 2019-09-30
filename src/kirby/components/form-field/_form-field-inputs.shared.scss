@@ -1,13 +1,9 @@
 @import '../../../scss/utils';
 
-:host(.state-danger) {
+:host(.error) {
   border-color: get-color('danger');
 }
-  
-:host(.state-warning) {
-  border-color: get-color('warning');
-}
-  
+ 
 :host {
   background-color: get-color('white');
   border-color: transparent;

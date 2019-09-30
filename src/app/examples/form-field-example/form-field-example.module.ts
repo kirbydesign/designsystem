@@ -6,8 +6,7 @@ import { FormFieldInputLabelExampleComponent } from './examples/input/label';
 import { FormFieldInputLabelMessageExampleComponent } from './examples/input/label-message';
 import { FormFieldInputNumericExampleComponent } from './examples/input/numeric';
 import { FormFieldInputDisabledExampleComponent } from './examples/input/disabled';
-import { FormFieldInputStateWarningExampleComponent } from './examples/input/state-warning';
-import { FormFieldInputStateDangerExampleComponent } from './examples/input/state-danger';
+import { FormFieldInputErrorExampleComponent } from './examples/input/error';
 import { FormFieldTextareaDefaultExampleComponent } from './examples/textarea/default';
 import { FormFieldTextareaLabelExampleComponent } from './examples/textarea/label';
 
@@ -17,8 +16,7 @@ const COMPONENT_DECLARATIONS = [
   FormFieldInputLabelMessageExampleComponent,
   FormFieldInputNumericExampleComponent,
   FormFieldInputDisabledExampleComponent,
-  FormFieldInputStateWarningExampleComponent,
-  FormFieldInputStateDangerExampleComponent,
+  FormFieldInputErrorExampleComponent,
   FormFieldTextareaDefaultExampleComponent,
   FormFieldTextareaLabelExampleComponent,
 ];
