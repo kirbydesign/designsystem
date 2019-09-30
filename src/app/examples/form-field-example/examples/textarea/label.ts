@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-let config = {
+const config = {
   selector: 'kirby-form-field-textarea-label-example',
   template: `<kirby-form-field label="Textarea with label">
   <textarea kirby-textarea></textarea>
@@ -8,7 +8,10 @@ let config = {
 </kirby-form-field>`,
 };
 
-@Component(config)
+@Component({
+  selector: config.selector,
+  template: config.template,
+})
 export class FormFieldTextareaLabelExampleComponent {
   template: string = config.template;
 }

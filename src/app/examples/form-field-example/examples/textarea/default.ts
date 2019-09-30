@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-let config = {
+const config = {
   selector: 'kirby-form-field-textarea-example',
   template: `<kirby-form-field>
   <textarea kirby-textarea placeholder="Default textarea with placeholder text"></textarea>
@@ -8,7 +8,10 @@ let config = {
 </kirby-form-field>`,
 };
 
-@Component(config)
+@Component({
+  selector: config.selector,
+  template: config.template,
+})
 export class FormFieldTextareaDefaultExampleComponent {
   template: string = config.template;
 }

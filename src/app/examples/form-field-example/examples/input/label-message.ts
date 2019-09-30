@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-let config = {
+const config = {
   selector: 'kirby-form-field-input-label-message-example',
   template: `<kirby-form-field label="Input with label and messages">
   <input kirby-input />
@@ -8,7 +8,10 @@ let config = {
 </kirby-form-field>`,
 };
 
-@Component(config)
+@Component({
+  selector: config.selector,
+  template: config.template,
+})
 export class FormFieldInputLabelMessageExampleComponent {
   template: string = config.template;
 }
