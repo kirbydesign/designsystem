@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, Input, ContentChildren } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ContentChild } from '@angular/core';
 
-import { FormFieldMessageComponent } from './form-field-message/form-field-message.component';
+import { InputCounterComponent } from './input-counter/input-counter.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -12,5 +12,5 @@ export class FormFieldComponent {
   @Input() label: string;
   @Input() message: string;
 
-  @ContentChildren(FormFieldMessageComponent) messages;
+  @ContentChild(InputCounterComponent) counter;
 }
