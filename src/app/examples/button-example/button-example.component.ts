@@ -37,7 +37,6 @@ export class ButtonExampleComponent {
   ];
 
   onButtonSizeChange(value) {
-    console.log(value);
     this.buttonSize = value;
   }
 }
