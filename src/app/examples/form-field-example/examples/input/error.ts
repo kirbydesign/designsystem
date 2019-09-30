@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 const config = {
   selector: 'kirby-form-field-input-error-example',
-  template: `<kirby-form-field label="Warning">
+  template: `<kirby-form-field label="Error">
   <input kirby-input hasError="true" />
 </kirby-form-field>`,
 };
