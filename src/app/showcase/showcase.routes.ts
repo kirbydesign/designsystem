@@ -28,6 +28,7 @@ import { EmptyStateShowcaseComponent } from './empty-state-showcase/empty-state-
 import { LoadingOverlayShowcaseComponent } from './loading-overlay-showcase/loading-overlay-showcase.component';
 import { ToolbarShowcaseComponent } from './toolbar-showcase/toolbar-showcase.component';
 import { ListNoShapeShowcaseComponent } from './list-no-shape-showcase/list-no-shape-showcase.component';
+import { FabSheetShowcaseComponent } from './fab-sheet-showcase/fab-sheet-showcase.component';
 
 export const routes: Routes = [
   {
@@ -106,6 +107,10 @@ export const routes: Routes = [
       {
         path: 'action-sheet',
         component: ActionSheetShowcaseComponent,
+      },
+      {
+        path: 'fab-sheet',
+        component: FabSheetShowcaseComponent,
       },
       {
         path: 'alert',

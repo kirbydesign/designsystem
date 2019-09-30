@@ -14,6 +14,9 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  vertical-align: middle;
+  box-sizing: border-box;
+  white-space: nowrap;
   
   // we default to 'md' size.
   margin: size('xxxs');
@@ -24,10 +27,6 @@
 
   &.icon-only {
     width: size('xl');
-  }
-
-  &.icon-left {
-    flex-direction: row-reverse;
   }
 
   &.sm {
@@ -105,6 +104,7 @@
     background-color: get-color('light-tint');
     border-color: get-color('light-tint');
     pointer-events: none;
+    --kirby-button-color: #{get-color('semi-dark-shade')};
   }
 
   :host-context(.default),
