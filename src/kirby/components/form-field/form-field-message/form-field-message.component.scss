@@ -1,6 +1,6 @@
 @import '../../../scss/utils';
 
-:host() {
+:host {
   font-style: italic;
   font-size: font-size('xs');
   font-weight: font-weight('normal');
