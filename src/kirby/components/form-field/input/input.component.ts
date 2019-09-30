@@ -21,6 +21,14 @@ export class InputComponent {
   @Input()
   hasError: boolean;
 
+  @HostBinding('attr.autocomplete')
+  @Input()
+  autocomplete: 'on' | 'off' = 'off';
+
+  @HostBinding('attr.autocorrect')
+  @Input()
+  autocorrect: 'on' | 'off' = 'off';
+
   @HostBinding('attr.inputmode')
   private _inputmode: string;
 }
