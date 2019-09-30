@@ -3,11 +3,11 @@
         <ion-buttons slot="start">
             <ion-back-button text="" [defaultHref]="defaultBackHref" icon="arrow-back" class="back-button"></ion-back-button>
         </ion-buttons>
-        <ion-title [@visibility]="pageHeaderTitleIsVisible ? 'visible' : 'hidden'">
+        <ion-title [@visibility]="pageHeaderTitleIsVisibleState">
             <ng-container [ngTemplateOutlet]="title"></ng-container>
         </ion-title>
         <ion-buttons slot="primary">
-            <div [@visibility]="pageHeaderTitleIsVisible ? 'visible' : 'hidden'">
+            <div [@visibility]="pageHeaderTitleIsVisibleState" #pageHeaderButtons>
                 <ng-container [ngTemplateOutlet]="titleActions"></ng-container>
             </div>
         </ion-buttons>

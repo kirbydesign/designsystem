@@ -7,12 +7,19 @@
   --background: #{get-color('background-color')};
   max-width: 768px;
   margin: 0 auto;
+
 }
 
 .page-toolbar {
   --border-width: 0 !important;
   --padding-start: #{size('xs')};
   --padding-end: #{size('xs')};
+
+  ion-buttons {
+    // TODO: It's only possible to overwrite button background-color / border-color by changing kirby-white and kirby-medium, this should be changed in button component
+    --kirby-white: transparent;
+    --kirby-medium: transparent;
+  }
 }
 
 .back-button {

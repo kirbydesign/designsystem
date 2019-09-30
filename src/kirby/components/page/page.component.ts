@@ -68,12 +68,13 @@ export class PageComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() defaultBackHref: string;
 
   @ViewChild('pageTitleContainer', { read: ElementRef }) pageTitleContainer;
+  @ViewChild('pageHeaderButtons', { read: ElementRef }) pageHeaderButtons;
   @ContentChild(PageTitleDirective, { read: TemplateRef }) title;
   @ContentChild(PageTitleActionsDirective, { read: TemplateRef }) titleActions;
   @ContentChild(PageContentDirective, { read: TemplateRef }) content;
   @ContentChild(PageFixedContentDirective, { read: TemplateRef }) fixedContent;
 
-  pageHeaderTitleIsVisible: boolean;
+  pageHeaderTitleIsVisibleState: 'visible' | 'hidden' = 'hidden';
   private pageTitleObserver;
 
   constructor(private elementRef: ElementRef, private renderer: Renderer2) {}
@@ -86,8 +87,15 @@ export class PageComponent implements OnInit, OnDestroy, AfterViewInit {
     if (!this.onlyShowPageTitleInHeader) {
       this.pageTitleObserver = this.observePageTitle();
     } else {
-      this.pageHeaderTitleIsVisible = true;
+      this.pageHeaderTitleIsVisibleState = 'visible';
     }
+    this.setHeaderButtonsToSmall();
+  }
+
+  setHeaderButtonsToSmall() {
+    const buttons = this.pageHeaderButtons.nativeElement.querySelector('[kirby-button]');
+    this.renderer.addClass(buttons, 'sm');
+    this.renderer.removeClass(buttons, 'lg');
   }
 
   removeWrapper() {
@@ -109,9 +117,15 @@ export class PageComponent implements OnInit, OnDestroy, AfterViewInit {
     const options = {
       rootMargin: '0px',
     };
+    let initialized = false;
     const callback = (entries) => {
       entries.forEach((entry) => {
-        this.pageHeaderTitleIsVisible = !entry.isIntersecting;
+        // Ensures that page-title visibility won't flicker on load, because intersection observer triggers twice
+        if (initialized) {
+          this.pageHeaderTitleIsVisibleState = entry.isIntersecting ? 'hidden' : 'visible';
+        } else {
+          initialized = true;
+        }
       });
     };
     const observer = new IntersectionObserver(callback, options);
