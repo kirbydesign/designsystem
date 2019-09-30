@@ -26,6 +26,7 @@ import { ToastShowcaseComponent } from './toast-showcase/toast-showcase.componen
 import { ToggleShowcaseComponent } from './toggle-showcase/toggle-showcase.component';
 import { EmptyStateShowcaseComponent } from './empty-state-showcase/empty-state-showcase.component';
 import { ToolbarShowcaseComponent } from './toolbar-showcase/toolbar-showcase.component';
+import { FormFieldShowcaseComponent } from './form-field-showcase/form-field-showcase.component';
 import { ListNoShapeShowcaseComponent } from './list-no-shape-showcase/list-no-shape-showcase.component';
 import { FabSheetShowcaseComponent } from './fab-sheet-showcase/fab-sheet-showcase.component';
 
@@ -146,6 +147,10 @@ export const routes: Routes = [
       {
         path: 'toolbar',
         component: ToolbarShowcaseComponent,
+      },
+      {
+        path: 'form-field',
+        component: FormFieldShowcaseComponent,
       },
     ],
   },

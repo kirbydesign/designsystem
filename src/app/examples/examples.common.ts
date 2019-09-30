@@ -31,6 +31,7 @@ import { ToolbarExampleComponent } from './toolbar-example/toolbar-example.compo
 import { ListSwipeExampleComponent } from './list/swipe/list-swipe-example.component';
 import { ListNoShapeExampleComponent } from './list/no-shape/list-no-shape-example.component';
 import { FabSheetExampleComponent } from './fab-sheet-example/fab-sheet-example.component';
+import { FormFieldExampleComponent } from './form-field-example/form-field-example.component';
 
 // Example of "custom" icons
 export const iconSettings: IconSettings = {
@@ -78,6 +79,7 @@ export const COMPONENT_DECLARATIONS: any[] = [
   EmptyStateExampleComponent,
   ToolbarExampleComponent,
   FabSheetExampleComponent,
+  FormFieldExampleComponent,
 ];
 
 // Configure custom icons (used by example to show the usage of custom icons)
