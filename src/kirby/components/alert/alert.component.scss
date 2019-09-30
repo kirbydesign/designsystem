@@ -1,0 +1,32 @@
+@import "../../scss/utils";
+
+h3.title {
+  margin-top: size('m');
+  margin-bottom: size('m');
+}
+
+article{
+  overflow: hidden;
+  padding: size('s');
+  @include media("<small") {
+    padding: size('xxs');
+  }
+}
+
+.message{
+  margin-bottom: size('m');
+}
+
+.icon-outline {
+  $icon-size: size('xxl') * 2;
+  width: $icon-size;
+  height: $icon-size;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: size('m');
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 3px solid get-color('warning');
+  border-radius: 50%;
+}

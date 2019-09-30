@@ -46,6 +46,15 @@
     box-shadow: get-elevation(8) !important;
 }
 
+.kirby-alert{
+    position: fixed;
+    .modal-wrapper{
+        max-width: 330px;
+        height: auto;
+        text-align: center;
+    }
+}
+
 .kirby-alert-btn {
     cursor: pointer;
     --ion-color-primary: #{get-color('black')};

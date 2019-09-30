@@ -9,6 +9,7 @@ import { ModalWrapperComponent } from './components/modal/modal-wrapper/modal-wr
 import { ActionSheetComponent } from './components/modal/action-sheet/action-sheet.component';
 import { KeyHandlerDirective } from '@kirbydesign/designsystem/directives/key-handler/key-handler.directive';
 import { ListItemColorDirective } from './components/list/directives/list-item-color.directive';
+import { AlertComponent } from './components/alert/alert.component';
 
 @NgModule({
   imports: [CommonModule, RouterModule, IonicModule.forRoot()],
@@ -17,9 +18,10 @@ import { ListItemColorDirective } from './components/list/directives/list-item-c
     ListItemColorDirective,
     KeyHandlerDirective,
     ...declarations,
+    AlertComponent,
   ],
   providers: [...providerDeclarations],
-  entryComponents: [ModalWrapperComponent, ActionSheetComponent],
+  entryComponents: [ModalWrapperComponent, ActionSheetComponent, AlertComponent],
   exports: [InfiniteScrollDirective, ...declarations],
 })
 export class KirbyModule {}

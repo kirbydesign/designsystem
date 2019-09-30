@@ -25,10 +25,21 @@ export class AlertShowcaseComponent {
       inputValues: ['string'],
     },
     {
-      name: 'okBtnText',
-      description: 'The text that will appear on the ok button',
+      name: 'icon',
+      description: '(Optional) Icon to be shown below the title',
       defaultValue: '',
-      inputValues: ['string'],
+      inputValues: [
+        'undefined',
+        "{ 'iconName':string }",
+        "{ 'iconName':string, 'themeColor':string }",
+      ],
+    },
+    {
+      name: 'okBtn',
+      description:
+        'Defines the text that will appear on the OK button and if it should be destructive',
+      defaultValue: '',
+      inputValues: ["{ 'text':string }", "{ 'text':string, 'isDestructive':boolean }"],
     },
     {
       name: 'cancelBtnText',

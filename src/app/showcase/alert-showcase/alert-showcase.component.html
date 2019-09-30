@@ -6,7 +6,8 @@
         <kirby-code-viewer language="ts">const config: AlertConfig={{ '{' }}
     title: 'Your alert title',
     message: 'Your alert message',
-    okBtnText: string;
+    okBtn: {{ '{' }}'text': 'Button Text', 'isDestructive': false{{ '}' }}
+    icon: {{ '{' }}'iconName': 'warning', 'themeColor': 'danger'{{ '}' }}
     cancelBtnText: string;
 {{ '}' }};
 
