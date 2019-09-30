@@ -16,6 +16,11 @@
     <kirby-form-field-input-label-message-example #inputLabelMessageExample></kirby-form-field-input-label-message-example>
   </kirby-example-viewer>
   
+  <h3>Character counter</h3>
+  <kirby-example-viewer [html]="inputCounterExample.template">
+    <kirby-form-field-input-counter-example #inputCounterExample></kirby-form-field-input-counter-example>
+  </kirby-example-viewer>
+  
   <h3>Numeric</h3>
   <kirby-example-viewer [html]="inputNumericExample.template">
     <kirby-form-field-input-numeric-example #inputNumericExample></kirby-form-field-input-numeric-example>
@@ -62,7 +67,7 @@
   <h4>Properties:</h4>
   <kirby-showcase-properties [properties]="textareaProperties"></kirby-showcase-properties>
 
-  <h2>Form Field Message</h2>
+  <h2>Input Counter</h2>
   <h4>Properties:</h4>
-  <kirby-showcase-properties [properties]="messageProperties"></kirby-showcase-properties>
+  <kirby-showcase-properties [properties]="counterProperties"></kirby-showcase-properties>
 </div>

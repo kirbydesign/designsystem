@@ -33,6 +33,12 @@ export class FormFieldShowcaseComponent {
       inputValues: ['true', 'false'],
     },
     {
+      name: 'maxlength',
+      defaultValue: 'undefined',
+      description: 'Specifies the maximum number of characters that the user can enter.',
+      inputValues: ['number'],
+    },
+    {
       name: 'autocomplete',
       defaultValue: 'off',
       description:
@@ -131,19 +137,13 @@ export class FormFieldShowcaseComponent {
     },
   ];
 
-  messageProperties: ShowcaseProperty[] = [
+  counterProperties: ShowcaseProperty[] = [
     {
-      name: 'text',
+      name: 'listenTo',
       defaultValue: undefined,
-      description: 'The content of the message.',
-      inputValues: ['string'],
-    },
-    {
-      name: 'position',
-      defaultValue: 'left',
       description:
-        'The position determines where the message is placed inside a form-field. *PLEASE NOTE* this field only works with static values and can not be dynamically bound.',
-      inputValues: ['left', 'right'],
+        'Reference to the kirby-input component the counter should observe. Can be specified through a template reference variable, e.g.: #cityName. The current value and (optional) maxlength of the input will be displayed.',
+      inputValues: ['string'],
     },
   ];
 }
