@@ -10,5 +10,7 @@ import { FormFieldMessageComponent } from './form-field-message/form-field-messa
 })
 export class FormFieldComponent {
   @Input() label: string;
+  @Input() message: string;
+
   @ContentChildren(FormFieldMessageComponent) messages;
 }

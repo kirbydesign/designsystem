@@ -5,13 +5,11 @@
 <ng-container *ngIf="!label">
   <ng-container *ngTemplateOutlet="slottedInput"></ng-container>
 </ng-container>
-<div *ngIf="messages && messages.length > 0" class="texts">  
-  <div class="right">
-    <ng-content select="kirby-form-field-message[position=right]"></ng-content>
-  </div>
-  <div class="left">
-    <ng-content select="kirby-form-field-message[position=left]"></ng-content>
-    <ng-content select="kirby-form-field-message"></ng-content>
+<div *ngIf="message" class="texts">  
+  <kirby-form-field-message class="message" [text]="message"></kirby-form-field-message>
+
+  <div class="counter">
+    <ng-content select="kirby-input-counter"></ng-content>
   </div>
 </div>
 

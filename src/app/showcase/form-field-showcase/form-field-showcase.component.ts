@@ -13,7 +13,14 @@ export class FormFieldShowcaseComponent {
       name: 'label',
       defaultValue: undefined,
       description:
-        'The label shown above the input. Clicking the label sets focus to the input/textarea.',
+        '(Optional) The label shown above the input. Clicking the label sets focus to the input/textarea.',
+      inputValues: ['string'],
+    },
+    {
+      name: 'message',
+      defaultValue: undefined,
+      description:
+        '(Optional) Message shown below the input. Can be used for hints, error and/or validation messages.',
       inputValues: ['string'],
     },
   ];
