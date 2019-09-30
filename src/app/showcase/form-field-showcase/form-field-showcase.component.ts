@@ -20,6 +20,12 @@ export class FormFieldShowcaseComponent {
 
   sharedProperties: ShowcaseProperty[] = [
     {
+      name: 'hasError',
+      defaultValue: 'false',
+      description: 'Indicates whether the control is in an error state.',
+      inputValues: ['true', 'false'],
+    },
+    {
       name: 'autocomplete',
       defaultValue: 'off',
       description:
