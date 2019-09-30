@@ -26,7 +26,7 @@ export class AlertExampleComponent {
       message: 'This is a slightly longer alert message text than what was previously here',
       okBtn: { text: 'I agree' },
       cancelBtnText: 'Take me back',
-      icon: { iconName: 'warning', themeColor: 'danger' },
+      icon: { iconName: 'warning', themeColor: 'warning' },
     };
     this.modalController.showAlert(config, this.onAlertClosed);
   }
