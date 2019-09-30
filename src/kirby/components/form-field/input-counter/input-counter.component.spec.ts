@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { InputCounterComponent } from './input-counter.component';
+import { FormFieldMessageComponent } from '../form-field-message/form-field-message.component';
 
 describe('InputCounterComponent', () => {
   let component: InputCounterComponent;
@@ -8,7 +9,7 @@ describe('InputCounterComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [InputCounterComponent],
+      declarations: [InputCounterComponent, FormFieldMessageComponent],
     }).compileComponents();
   }));
 
