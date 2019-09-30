@@ -12,18 +12,23 @@ export class InputComponent {
     number: 'decimal',
     search: 'search',
   };
+
   @Input() set type(value: string) {
     this._inputmode = InputComponent.typeToInputmodeMap[value];
   }
+
   @HostBinding('attr.inputmode')
-  _inputmode: string;
+  private _inputmode: string;
 
   @HostBinding('class.state-success')
-  _isSuccess: boolean;
+  private _isSuccess: boolean;
+
   @HostBinding('class.state-warning')
-  _isWarning: boolean;
+  private _isWarning: boolean;
+
   @HostBinding('class.state-danger')
-  _isDanger: boolean;
+  private _isDanger: boolean;
+
   @Input() set state(state: 'success' | 'warning' | 'danger') {
     this._isSuccess = state === 'success';
     this._isWarning = state === 'warning';
