@@ -142,8 +142,9 @@
   
   &.floating {
     $fab-size: 64px;
-    width: $fab-size;
-    height: $fab-size;
+    width: $fab-size !important;
+    height: $fab-size !important;
+    min-width: unset;
 
     &:not(:disabled) {
       box-shadow: get-elevation(8);
@@ -152,5 +153,6 @@
 
   &.icon-only {
     padding: 0;
+    min-width: unset;
   }
 }
