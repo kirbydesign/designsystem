@@ -9,6 +9,7 @@ import {
   Output,
   TemplateRef,
   ViewChild,
+  TrackByFunction,
 } from '@angular/core';
 
 import {
@@ -54,6 +55,11 @@ export class ListComponent implements OnInit, OnChanges {
    * Callback to determine name of section. Sections will be ordered alphabetically.
    */
   @Input() getSectionName?: (item: any) => string;
+
+  /**
+   * Callback that defines how to track changes for items in the iterable.
+   */
+  @Input() trackBy?: TrackByFunction<any>;
 
   /**
    * Text to display when no more items can be loaded (used for "on demand"-loading).
@@ -163,7 +169,7 @@ export class ListComponent implements OnInit, OnChanges {
     this.listHelper.onLoadOnDemand(this, event);
   }
 
-  trackByFn(index) {
+  defaultTrackBy(index: number): any {
     return index;
   }
 
