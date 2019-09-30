@@ -6,6 +6,7 @@ $image-diameter-medium: 56px;
 $image-diameter-large:  96px;
 
 :host {
+  --kirby-badge-elevation: #{get-elevation(2)};
   position: relative;
 
   ::ng-deep kirby-badge {
@@ -76,8 +77,8 @@ $image-diameter-large:  96px;
   }
 
   ::ng-deep kirby-badge {
-    top: size('-xxs');
-    right: size('-xxs');
+    top: 0;
+    right: -4px;
   }
 }
 
@@ -96,7 +97,7 @@ $image-diameter-large:  96px;
   }
 
   ::ng-deep kirby-badge {
-    top: size('-xxs');
+    top: 0;
     right: 0;
   }
 }
@@ -117,7 +118,7 @@ $image-diameter-large:  96px;
 
   ::ng-deep kirby-badge {
     top: 0;
-    right: size('xxs');
+    right: 8px;
   }
 }
 

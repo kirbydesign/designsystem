@@ -1,6 +1,7 @@
 @import "../../scss/utils";
 
 :host {
+
   --kirby-badge-background-color: #{get-color('white')};
   --kirby-badge-color: #{get-color('white-contrast')};
   --ion-color-base: var(--kirby-badge-background-color);
@@ -17,6 +18,7 @@
     min-height: 16px;
     font-size: font-size('xxs');
     position: relative;
+    box-shadow: var(--kirby-badge-elevation);
   }
 
   ::ng-deep kirby-icon {
