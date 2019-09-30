@@ -45,9 +45,9 @@ import { EmptyStateComponent } from './components/empty-state/empty-state.compon
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { FabSheetComponent } from './components/fab-sheet/fab-sheet.component';
 import { FormFieldComponent } from './components/form-field/form-field.component';
-import { FormFieldMessageComponent } from './components/form-field/form-field-message/form-field-message.component';
 import { InputComponent } from './components/form-field/input/input.component';
 import { TextareaComponent } from './components/form-field/textarea/textarea.component';
+import { InputCounterComponent } from './components/form-field/input-counter/input-counter.component';
 
 export const declarations = [
   CardComponent,
@@ -87,8 +87,8 @@ export const declarations = [
   EmptyStateComponent,
   ToolbarComponent,
   FormFieldComponent,
-  FormFieldMessageComponent,
   InputComponent,
+  InputCounterComponent,
   TextareaComponent,
   FabSheetComponent,
 ];
