@@ -34,6 +34,10 @@ export class ButtonComponent implements AfterContentInit {
   public get isIconOnly(): boolean {
     return this.icon && !this._hasSlottedContent;
   }
+  @HostBinding('class.icon-left')
+  private _isIconLeft = false;
+  @HostBinding('class.icon-right')
+  private _isIconRight = false;
 
   @Input() set attentionLevel(level: '1' | '2' | '3' | '4') {
     this.isAttentionLevel1 = level === '1';
@@ -56,8 +60,15 @@ export class ButtonComponent implements AfterContentInit {
     if (this.iconDomNode && this.iconDomNode.nativeElement) {
       const prev = this.iconDomNode.nativeElement.previousSibling;
       const next = this.iconDomNode.nativeElement.nextSibling;
-      if ((prev && prev.nodeName !== '#comment') || (next && next.nodeName !== '#comment')) {
+      if (prev && prev.nodeName !== '#comment') {
         this._hasSlottedContent = true;
+        this._isIconLeft = false;
+        this._isIconRight = true;
+      }
+      if (next && next.nodeName !== '#comment') {
+        this._hasSlottedContent = true;
+        this._isIconLeft = true;
+        this._isIconRight = false;
       }
     }
   }
