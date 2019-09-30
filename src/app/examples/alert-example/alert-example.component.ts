@@ -12,22 +12,20 @@ export class AlertExampleComponent {
 
   showAlert() {
     const config: AlertConfig = {
-      title: 'Elektronisk post',
-      message:
-        'Vi anbefaler at du aktiverer elektronisk post, så du kan få det meste ud af dette samtykke. Vil du dette?',
-      okBtn: { text: 'Ja tak' },
-      cancelBtnText: 'Nej tak',
+      title: 'Your Alert',
+      message: 'This is a slightly longer alert message text than what was previously here',
+      okBtn: { text: 'I agree' },
+      cancelBtnText: 'Take me back',
     };
     this.modalController.showAlert(config, this.onAlertClosed);
   }
 
   showAlertWithIcon() {
     const config: AlertConfig = {
-      title: 'Elektronisk post',
-      message:
-        'Vi anbefaler at du aktiverer elektronisk post, så du kan få det meste ud af dette samtykke. Vil du dette?',
-      okBtn: { text: 'Ja tak' },
-      cancelBtnText: 'Nej tak',
+      title: 'Your Alert',
+      message: 'This is a slightly longer alert message text than what was previously here',
+      okBtn: { text: 'I agree' },
+      cancelBtnText: 'Take me back',
       icon: { iconName: 'warning', themeColor: 'danger' },
     };
     this.modalController.showAlert(config, this.onAlertClosed);
@@ -35,10 +33,9 @@ export class AlertExampleComponent {
 
   showAlertWithoutCancel() {
     const config: AlertConfig = {
-      title: 'Elektronisk post',
-      message:
-        'Vi anbefaler at du aktiverer elektronisk post, så du kan få det meste ud af dette samtykke. Vil du dette?',
-      okBtn: { text: 'Ja tak' },
+      title: 'Your Alert',
+      message: 'This is a slightly longer alert message text than what was previously here',
+      okBtn: { text: 'I agree' },
     };
     this.modalController.showAlert(config, this.onAlertClosed);
   }

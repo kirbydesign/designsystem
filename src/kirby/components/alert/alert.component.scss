@@ -27,6 +27,6 @@ article{
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border: 3px solid get-color('warning');
+  border: 3px solid get-color('warning'); // TODO: I need help getting this dynamically based on themeColor
   border-radius: 50%;
 }
