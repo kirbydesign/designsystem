@@ -89,13 +89,17 @@ export class PageComponent implements OnInit, OnDestroy, AfterViewInit {
     } else {
       this.pageHeaderTitleIsVisibleState = 'visible';
     }
-    this.setHeaderButtonsToSmall();
+    if (this.titleActions) {
+      this.setHeaderButtonsToSmall();
+    }
   }
 
   setHeaderButtonsToSmall() {
     const buttons = this.pageHeaderButtons.nativeElement.querySelector('[kirby-button]');
-    this.renderer.addClass(buttons, 'sm');
-    this.renderer.removeClass(buttons, 'lg');
+    if (buttons) {
+      this.renderer.addClass(buttons, 'sm');
+      this.renderer.removeClass(buttons, 'lg');
+    }
   }
 
   removeWrapper() {
