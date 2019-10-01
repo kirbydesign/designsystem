@@ -44,6 +44,10 @@ import { SizeDirective } from './directives/size/size.directive';
 import { ThemeColorDirective } from './directives/theme-color/theme-color.directive';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { FabSheetComponent } from './components/fab-sheet/fab-sheet.component';
+import { FormFieldComponent } from './components/form-field/form-field.component';
+import { InputComponent } from './components/form-field/input/input.component';
+import { TextareaComponent } from './components/form-field/textarea/textarea.component';
+import { InputCounterComponent } from './components/form-field/input-counter/input-counter.component';
 
 export const declarations = [
   CardComponent,
@@ -82,6 +86,10 @@ export const declarations = [
   ToggleComponent,
   EmptyStateComponent,
   ToolbarComponent,
+  FormFieldComponent,
+  InputComponent,
+  InputCounterComponent,
+  TextareaComponent,
   FabSheetComponent,
 ];
 

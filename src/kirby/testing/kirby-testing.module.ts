@@ -39,6 +39,10 @@ import { ThemeColorDirective } from '../directives/theme-color/theme-color.direc
 import { ListItemColorDirective } from '../components/list/directives/list-item-color.directive';
 import { LoadingOverlayComponent } from '../components/loading-overlay/loading-overlay.component';
 import { LoadingOverlayService } from '../components/loading-overlay/fullscreen-loading-overlay/loading-overlay.service';
+import { FormFieldComponent } from '../components/form-field/form-field.component';
+import { FormFieldMessageComponent } from '../components/form-field/form-field-message/form-field-message.component';
+import { InputComponent } from '../components/form-field/input/input.component';
+import { TextareaComponent } from '../components/form-field/textarea/textarea.component';
 
 /*
  * Fake components should be handled by the list of kirby
@@ -124,6 +128,10 @@ const MOCK_COMPONENTS = MockComponents(
   EmptyStateComponent,
   SlideButtonComponent,
   ToolbarComponent,
+  FormFieldComponent,
+  FormFieldMessageComponent,
+  InputComponent,
+  TextareaComponent,
   FakeIonListComponent,
   FakeIonListHeaderComponent,
   FakeIonItemDividerComponent,

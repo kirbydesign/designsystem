@@ -12,6 +12,7 @@ import { KeyHandlerDirective } from '@kirbydesign/designsystem/directives/key-ha
 import { FullscreenLoadingOverlayComponent } from './components/loading-overlay/fullscreen-loading-overlay/fullscreen-loading-overlay.component';
 import { LoadingOverlayComponent } from './components/loading-overlay/loading-overlay.component';
 import { ListItemColorDirective } from './components/list/directives/list-item-color.directive';
+import { FormFieldMessageComponent } from './components/form-field/form-field-message/form-field-message.component';
 
 @NgModule({
   imports: [CommonModule, RouterModule, OverlayModule, IonicModule.forRoot()],
@@ -21,6 +22,7 @@ import { ListItemColorDirective } from './components/list/directives/list-item-c
     FullscreenLoadingOverlayComponent,
     LoadingOverlayComponent,
     KeyHandlerDirective,
+    FormFieldMessageComponent,
     ...declarations,
   ],
   providers: [...providerDeclarations],

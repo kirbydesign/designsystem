@@ -1,3 +1,4 @@
+import { FormFieldShowcaseComponent } from './form-field-showcase/form-field-showcase.component';
 import { ListNoShapeShowcaseComponent } from './list-no-shape-showcase/list-no-shape-showcase.component';
 import { ListSwipeShowcaseComponent } from './list-swipe-showcase/list-swipe-showcase.component';
 import { ExamplesModule } from '../examples/examples.module';
@@ -60,6 +61,7 @@ export const COMPONENT_EXPORTS: any[] = [
   EmptyStateShowcaseComponent,
   LoadingOverlayShowcaseComponent,
   ToolbarShowcaseComponent,
+  FormFieldShowcaseComponent,
   FabSheetShowcaseComponent,
 ];
 
