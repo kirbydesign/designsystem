@@ -1,0 +1,9 @@
+@import '../../scss/utils';
+
+:host {
+  ion-tabs ion-tab-bar {
+    --background: #{get-color('background-color')};
+    --border: none;
+    --color: #{get-color('black')};
+  }
+}

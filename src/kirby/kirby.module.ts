@@ -10,9 +10,10 @@ import { ActionSheetComponent } from './components/modal/action-sheet/action-she
 import { KeyHandlerDirective } from '@kirbydesign/designsystem/directives/key-handler/key-handler.directive';
 import { ListItemColorDirective } from './components/list/directives/list-item-color.directive';
 import { FormFieldMessageComponent } from './components/form-field/form-field-message/form-field-message.component';
+import { TabsModule } from '@kirbydesign/designsystem/components/tabs/tabs.module';
 
 @NgModule({
-  imports: [CommonModule, RouterModule, IonicModule.forRoot()],
+  imports: [CommonModule, RouterModule, IonicModule.forRoot(), TabsModule],
   declarations: [
     InfiniteScrollDirective,
     ListItemColorDirective,
@@ -22,6 +23,6 @@ import { FormFieldMessageComponent } from './components/form-field/form-field-me
   ],
   providers: [...providerDeclarations],
   entryComponents: [ModalWrapperComponent, ActionSheetComponent],
-  exports: [InfiniteScrollDirective, ...declarations],
+  exports: [InfiniteScrollDirective, ...declarations, TabsModule],
 })
 export class KirbyModule {}
