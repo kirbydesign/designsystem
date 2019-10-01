@@ -10,7 +10,6 @@ import { IModalController } from '../modal/services/modal.controller.interface';
   styleUrls: ['./alert.component.scss'],
 })
 export class AlertComponent implements AfterViewInit, OnInit {
-
   @ViewChild('alertWrapper') alertWrapper: ElementRef;
   config: AlertConfig;
   scrollY: number = Math.abs(window.scrollY);

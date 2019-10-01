@@ -1,6 +1,3 @@
-import { deprecate } from 'util';
-import { DeprecatedCurrencyPipe } from '@angular/common';
-
 export interface AlertConfig {
   title: string;
   message?: string;
@@ -21,5 +18,4 @@ export interface AlertConfig {
     text: string;
     isDestructive?: boolean;
   };
-  iconName?: string;
 }

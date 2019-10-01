@@ -27,6 +27,17 @@ article{
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border: 3px solid get-color('warning'); // TODO: I need help getting this dynamically based on themeColor
+  border: 3px solid var(--kirby-medium); // TODO: I need help getting this dynamically based on themeColor
   border-radius: 50%;
+}
+
+@each $color-name, $color-value in $main-colors {
+  :host(.#{$color-name}) {
+    .icon-outline {
+      border-color: #{get-color($color-name)};
+    }
+    kirby-icon {
+      color: #{get-color($color-name)};
+    }
+  }
 }
