@@ -1,6 +1,6 @@
 @import '../../scss/utils';
 
-:host() {
+:host {
   display: block;
   margin-bottom: size('s');
 }
