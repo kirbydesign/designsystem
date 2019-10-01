@@ -170,6 +170,7 @@ const MOCK_DIRECTIVES = MockDirectives(InfiniteScrollDirective, ThemeColorDirect
       provide: ModalController,
       useValue: createSpyObj('ModalController', [
         'showModal',
+        'showModalFadeIn',
         'showActionSheet',
         'showAlert',
         'register',
