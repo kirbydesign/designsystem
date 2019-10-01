@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { AlertComponent } from './alert.component';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('AlertComponent', () => {
   let component: AlertComponent;
