@@ -1,6 +1,6 @@
 import { NavParams } from '@ionic/angular';
 
-import { Component, ElementRef, ViewChild, AfterViewInit, AfterContentInit } from '@angular/core';
+import { Component, ElementRef, ViewChild, AfterViewInit, OnInit } from '@angular/core';
 
 import { AlertConfig } from '../modal/alert/config/alert-config';
 import { IModalController } from '../modal/services/modal.controller.interface';
@@ -9,7 +9,8 @@ import { IModalController } from '../modal/services/modal.controller.interface';
   templateUrl: './alert.component.html',
   styleUrls: ['./alert.component.scss'],
 })
-export class AlertComponent implements AfterViewInit, AfterContentInit {
+export class AlertComponent implements AfterViewInit, OnInit {
+
   @ViewChild('alertWrapper') alertWrapper: ElementRef;
   config: AlertConfig;
   scrollY: number = Math.abs(window.scrollY);
@@ -25,7 +26,7 @@ export class AlertComponent implements AfterViewInit, AfterContentInit {
     this.config = this.params.get('config');
   }
 
-  ngAfterContentInit(): void {
+  ngOnInit(): void {
     this.title = this.config.title;
     this.message = this.config.message;
 
