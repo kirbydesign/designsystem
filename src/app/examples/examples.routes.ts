@@ -28,6 +28,7 @@ import { ListSwipeExampleComponent } from './list/swipe/list-swipe-example.compo
 import { ListLoadOnDemandExampleComponent } from './list/load-on-demand/list-load-on-demand-example.component';
 import { FormFieldExampleComponent } from './form-field-example/form-field-example.component';
 import { FabSheetExampleComponent } from './fab-sheet-example/fab-sheet-example.component';
+import { TabsExampleComponent } from '~/app/examples/tabs/tabs-example.component';
 
 export const routes: Routes = [
   {
@@ -145,5 +146,9 @@ export const routes: Routes = [
   {
     path: 'fab-sheet',
     component: FabSheetExampleComponent,
+  },
+  {
+    path: 'tabs',
+    component: TabsExampleComponent,
   },
 ];

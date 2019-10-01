@@ -29,6 +29,7 @@ import { ToggleShowcaseComponent } from './toggle-showcase/toggle-showcase.compo
 import { EmptyStateShowcaseComponent } from './empty-state-showcase/empty-state-showcase.component';
 import { ToolbarShowcaseComponent } from './toolbar-showcase/toolbar-showcase.component';
 import { FabSheetShowcaseComponent } from './fab-sheet-showcase/fab-sheet-showcase.component';
+import { TabsShowcaseComponent } from '~/app/showcase/tabs-showcase/tabs-showcase.component';
 
 export const COMPONENT_IMPORTS: any[] = [ExamplesModule, ShowcaseRoutingModule];
 
@@ -61,6 +62,7 @@ export const COMPONENT_EXPORTS: any[] = [
   ToolbarShowcaseComponent,
   FormFieldShowcaseComponent,
   FabSheetShowcaseComponent,
+  TabsShowcaseComponent,
 ];
 
 export const COMPONENT_DECLARATIONS: any[] = [...COMPONENT_EXPORTS, ShowcaseComponent];
