@@ -1,10 +1,36 @@
 @import '../../../kirby/scss/utils';
 
-.fonts-examples {
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-gap: size('s');
+  @include media('>=medium') {
+    grid-template-columns: minmax(0, 60%) minmax(320px, 40%);
+  }
+}
+
+.fonts-examples,
+.font-sizes {
   border: 1px solid get-color('semi-light');
   background-color: get-color('white');
   border-radius: size('xs');
   padding: size('m');
+}
+
+@each $name, $value in $font-sizes {
+  .size-#{$name} {
+    display: flex;
+    &::before {
+      content: '#{$name}:';
+      margin-left: size('s');
+      margin-right: size('s');
+      flex-basis: 40px;
+      font-weight: font-weight('bold');
+    }
+    &::after {
+      content: '#{$value},';
+    }
+  }
 }
 
 .sample {

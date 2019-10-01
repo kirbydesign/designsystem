@@ -2,37 +2,47 @@
   Font sizes can be set by either using the font classes, e.g. <code>.kirby-text-large</code>, or by using the
   tags like <code>h1, h2 & h3</code>.
 </p>
-<p>Font can also be set with the font-size function directly on your own classes, e.g:</p>
 
-<div class="fonts-examples">
-  <span class="kirby-text-muted kirby-text-small kirby-text-light kirby-text-mono sample-header-1">H1 | .kirby-text-xlarge</span>
-  <h1 class="sample">The quick brown fox jumps over the lazy dog</h1>
-  <span class="kirby-text-muted kirby-text-small kirby-text-light kirby-text-mono sample-header-2">H2 | .kirby-text-large</span>
-  <h2 class="sample">The quick brown fox jumps over the lazy dog</h2>
-  <span class="kirby-text-muted kirby-text-small kirby-text-light kirby-text-mono sample-header-3">H3 | .kirby-text-medium</span>
-  <h3 class="sample">The quick brown fox jumps over the lazy dog</h3>
-  <span class="kirby-text-muted kirby-text-small kirby-text-light kirby-text-mono sample-body">P | .kirby-text-normal</span>
-  <p class="sample">The quick brown fox jumps over the lazy dog</p>
-  <span class="kirby-text-muted kirby-text-small kirby-text-light kirby-text-mono sample-body-small">.kirby-text-small</span>
-  <p class="sample kirby-text-small">The quick brown fox jumps over the lazy dog</p>
-  <span class="kirby-text-muted kirby-text-small kirby-text-light kirby-text-mono sample-body-xsmall">.kirby-text-xsmall</span>
-  <p class="sample kirby-text-xsmall">The quick brown fox jumps over the lazy dog</p>
-  <span class="kirby-text-muted kirby-text-small kirby-text-light kirby-text-mono sample-body-xxsmall">.kirby-text-xxsmall</span>
-  <p class="sample kirby-text-xxsmall">The quick brown fox jumps over the lazy dog</p>
-</div>
-
-<code>
-<pre>
-$font-sizes: (
-  xl:  32px,
-  l:  22px,
-  m:  18px,
-  n:  16px,
-  s:  14px,
-  xs: 12px,
-  xxs: 10px
-) 
+<div class="grid">
+  <div class="fonts-examples">
+    <span class="kirby-text-muted kirby-text-small kirby-text-light kirby-text-mono sample-header-1">H1 | .kirby-text-xlarge</span>
+    <h1 class="sample">The quick brown fox jumps over the lazy dog</h1>
+    <span class="kirby-text-muted kirby-text-small kirby-text-light kirby-text-mono sample-header-2">H2 | .kirby-text-large</span>
+    <h2 class="sample">The quick brown fox jumps over the lazy dog</h2>
+    <span class="kirby-text-muted kirby-text-small kirby-text-light kirby-text-mono sample-header-3">H3 | .kirby-text-medium</span>
+    <h3 class="sample">The quick brown fox jumps over the lazy dog</h3>
+    <span class="kirby-text-muted kirby-text-small kirby-text-light kirby-text-mono sample-body">P | .kirby-text-normal</span>
+    <p class="sample">The quick brown fox jumps over the lazy dog</p>
+    <span class="kirby-text-muted kirby-text-small kirby-text-light kirby-text-mono sample-body-small">.kirby-text-small</span>
+    <p class="sample kirby-text-small">The quick brown fox jumps over the lazy dog</p>
+    <span class="kirby-text-muted kirby-text-small kirby-text-light kirby-text-mono sample-body-xsmall">.kirby-text-xsmall</span>
+    <p class="sample kirby-text-xsmall">The quick brown fox jumps over the lazy dog</p>
+    <span class="kirby-text-muted kirby-text-small kirby-text-light kirby-text-mono sample-body-xxsmall">.kirby-text-xxsmall</span>
+    <p class="sample kirby-text-xxsmall">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="font-sizes">
+    <h2>SCSS Variables</h2>
+    <div>
+      If you need a value from the font-size map directly, you can use the <code>font-size(value)</code> function:
+    </div>
+<pre class="kirby-text-mono">.some-class {{'{'}}
+  font-size: font-size('l');
+{{'}'}}
 </pre>
-</code>
+<h3 class="kirby-text-bold">Font-size map:</h3>
+
+<div class="kirby-text-mono">
+  $font-size: (
+  <span class="size-xl"></span>
+  <span class="size-l"></span>
+  <span class="size-m"></span>
+  <span class="size-n"></span>
+  <span class="size-s"></span>
+  <span class="size-xs"></span>
+  <span class="size-xxs"></span>
+  )
+</div> 
+  </div>
+</div>
 
 <kirby-code-viewer [html]="exampleHtml"></kirby-code-viewer>
