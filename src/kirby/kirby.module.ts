@@ -10,6 +10,7 @@ import { ActionSheetComponent } from './components/modal/action-sheet/action-she
 import { KeyHandlerDirective } from '@kirbydesign/designsystem/directives/key-handler/key-handler.directive';
 import { ListItemColorDirective } from './components/list/directives/list-item-color.directive';
 import { AlertComponent } from './components/alert/alert.component';
+import { FormFieldMessageComponent } from './components/form-field/form-field-message/form-field-message.component';
 
 @NgModule({
   imports: [CommonModule, RouterModule, IonicModule.forRoot()],
@@ -18,6 +19,7 @@ import { AlertComponent } from './components/alert/alert.component';
     ListItemColorDirective,
     KeyHandlerDirective,
     ...declarations,
+    FormFieldMessageComponent,
     AlertComponent,
   ],
   providers: [...providerDeclarations],
