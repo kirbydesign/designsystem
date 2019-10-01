@@ -10,32 +10,56 @@ import {
   Renderer2,
   TemplateRef,
   ViewChild,
+  ContentChildren,
+  QueryList,
+  AfterContentInit,
 } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
-@Directive({
-  // tslint:disable directive-selector
-  selector: '[kirby-page-title]',
-})
-export class PageTitleDirective {}
+import { ButtonComponent } from '../button/button.component';
 
 @Directive({
-  // tslint:disable directive-selector
-  selector: '[kirby-page-title-actions]',
+  selector: '[kirbyPageFloatingTitle]',
 })
-export class PageTitleActionsDirective {}
+export class PageFloatingTitleDirective {}
 
 @Directive({
-  // tslint:disable directive-selector
-  selector: '[kirby-page-content]',
+  selector: '[kirbyPageFloatingActions]',
+})
+export class PageFloatingActionsDirective {}
+
+@Directive({
+  selector: '[kirbyPageContent]',
 })
 export class PageContentDirective {}
 
 @Directive({
-  // tslint:disable directive-selector
-  selector: '[kirby-page-fixed-content]',
+  selector: '[kirbyPageContentFixed]',
 })
-export class PageFixedContentDirective {}
+export class PageContentFixedDirective {}
+
+@Component({
+  selector: 'kirby-page-content',
+  template: `
+    <ng-content></ng-content>
+  `,
+})
+export class PageContentComponent {}
+
+@Component({
+  selector: 'kirby-page-actions',
+  template: `
+    <ng-content></ng-content>
+  `,
+})
+export class PageActionsComponent implements AfterContentInit {
+  @ContentChildren(ButtonComponent) buttons: QueryList<ButtonComponent>;
+  ngAfterContentInit(): void {
+    this.buttons.forEach((button) => {
+      button.attentionLevel = '2';
+    });
+  }
+}
 
 @Component({
   selector: 'kirby-page',
@@ -63,18 +87,19 @@ export class PageFixedContentDirective {}
   ],
 })
 export class PageComponent implements OnInit, OnDestroy, AfterViewInit {
-  @Input() pageTitleAlign?: 'left' | 'center' | 'right' = 'center';
-  @Input() onlyShowPageTitleInHeader: boolean;
-  @Input() defaultBackHref: string;
+  @Input() title?: string;
+  @Input() titleAlignment?: 'left' | 'center' | 'right' = 'left';
+  @Input() headerOnly?: boolean;
+  @Input() defaultBackHref?: string;
 
-  @ViewChild('pageTitleContainer', { read: ElementRef }) pageTitleContainer;
-  @ViewChild('pageHeaderButtons', { read: ElementRef }) pageHeaderButtons;
-  @ContentChild(PageTitleDirective, { read: TemplateRef }) title;
-  @ContentChild(PageTitleActionsDirective, { read: TemplateRef }) titleActions;
-  @ContentChild(PageContentDirective, { read: TemplateRef }) content;
-  @ContentChild(PageFixedContentDirective, { read: TemplateRef }) fixedContent;
+  @ViewChild('pageTitle', { read: ElementRef }) pageTitle: ElementRef;
+  @ViewChild('headerButtons', { read: ElementRef }) headerButtons: ElementRef;
+  @ContentChild(PageFloatingTitleDirective, { read: TemplateRef }) titleTemplate: TemplateRef<any>;
+  @ContentChild(PageFloatingActionsDirective, { read: TemplateRef }) actionsTemplate: TemplateRef<any>;
+  @ContentChild(PageContentDirective, { read: TemplateRef }) contentTemplate: TemplateRef<any>;
+  @ContentChild(PageContentFixedDirective, { read: TemplateRef }) fixedContent: TemplateRef<any>;
 
-  pageHeaderTitleIsVisibleState: 'visible' | 'hidden' = 'hidden';
+  toolbarContentVisibility: 'visible' | 'hidden' = 'hidden';
   private pageTitleObserver;
 
   constructor(private elementRef: ElementRef, private renderer: Renderer2) {}
@@ -84,21 +109,23 @@ export class PageComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    if (!this.onlyShowPageTitleInHeader) {
+    if (!this.headerOnly) {
       this.pageTitleObserver = this.observePageTitle();
     } else {
-      this.pageHeaderTitleIsVisibleState = 'visible';
+      this.toolbarContentVisibility = 'visible';
     }
-    if (this.titleActions) {
+    if (this.actionsTemplate) {
       this.setHeaderButtonsToSmall();
     }
   }
 
   setHeaderButtonsToSmall() {
-    const buttons = this.pageHeaderButtons.nativeElement.querySelector('[kirby-button]');
-    if (buttons) {
-      this.renderer.addClass(buttons, 'sm');
-      this.renderer.removeClass(buttons, 'lg');
+    if (this.headerButtons && this.headerButtons.nativeElement) {
+      const buttons = this.headerButtons.nativeElement.querySelectorAll('[kirby-button]');
+      buttons.forEach((button) => {
+        this.renderer.addClass(button, 'sm');
+        this.renderer.removeClass(button, 'lg');
+      });
     }
   }
 
@@ -126,14 +153,14 @@ export class PageComponent implements OnInit, OnDestroy, AfterViewInit {
       entries.forEach((entry) => {
         // Ensures that page-title visibility won't flicker on load, because intersection observer triggers twice
         if (initialized) {
-          this.pageHeaderTitleIsVisibleState = entry.isIntersecting ? 'hidden' : 'visible';
+          this.toolbarContentVisibility = entry.isIntersecting ? 'hidden' : 'visible';
         } else {
           initialized = true;
         }
       });
     };
     const observer = new IntersectionObserver(callback, options);
-    observer.observe(this.pageTitleContainer.nativeElement);
+    observer.observe(this.pageTitle.nativeElement);
 
     return observer;
   }

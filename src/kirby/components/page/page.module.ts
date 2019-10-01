@@ -4,26 +4,32 @@ import { IonicModule } from '@ionic/angular';
 import {
   PageComponent,
   PageContentDirective,
-  PageFixedContentDirective,
-  PageTitleActionsDirective,
-  PageTitleDirective,
+  PageContentFixedDirective,
+  PageFloatingActionsDirective,
+  PageFloatingTitleDirective,
+  PageContentComponent,
+  PageActionsComponent,
 } from './page.component';
 
 @NgModule({
   declarations: [
     PageComponent,
-    PageTitleDirective,
-    PageTitleActionsDirective,
+    PageFloatingTitleDirective,
+    PageFloatingActionsDirective,
     PageContentDirective,
-    PageFixedContentDirective,
+    PageContentFixedDirective,
+    PageContentComponent,
+    PageActionsComponent,
   ],
   imports: [CommonModule, IonicModule],
   exports: [
     PageComponent,
-    PageTitleDirective,
-    PageTitleActionsDirective,
+    PageFloatingTitleDirective,
+    PageFloatingActionsDirective,
     PageContentDirective,
-    PageFixedContentDirective,
+    PageContentFixedDirective,
+    PageContentComponent,
+    PageActionsComponent,
   ],
 })
 export class PageModule {}

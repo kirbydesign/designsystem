@@ -1,39 +1,40 @@
-<ion-header class="page-header">
-    <ion-toolbar class="page-toolbar">
+<ion-header>
+    <ion-toolbar>
         <ion-buttons slot="start">
-            <ion-back-button text="" [defaultHref]="defaultBackHref" icon="arrow-back" class="back-button"></ion-back-button>
+            <ion-back-button text="" [defaultHref]="defaultBackHref" icon="arrow-back"></ion-back-button>
         </ion-buttons>
-        <ion-title [@visibility]="pageHeaderTitleIsVisibleState">
-            <ng-container [ngTemplateOutlet]="title"></ng-container>
+        <ion-title [@visibility]="toolbarContentVisibility">
+            <ng-container *ngTemplateOutlet="titleTemplate || simplePageTitle"></ng-container>
         </ion-title>
-        <ion-buttons slot="primary">
-            <div [@visibility]="pageHeaderTitleIsVisibleState" #pageHeaderButtons>
-                <ng-container [ngTemplateOutlet]="titleActions"></ng-container>
-            </div>
+        <ion-buttons slot="primary" [@visibility]="toolbarContentVisibility" #headerButtons>
+            <ng-container *ngTemplateOutlet="actionsTemplate"></ng-container>
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
-<ion-content class="page-content">
+<ion-content>
 
-    <div class="page-content-inner">
-        <div class="page-title-container" *ngIf="!onlyShowPageTitleInHeader" #pageTitleContainer>
-            <div class="page-title">
-                <h1 [style.textAlign]="pageTitleAlign">
-                    <ng-container [ngTemplateOutlet]="title"></ng-container>
-                </h1>
-                <div class="page-title-actions">
-                    <ng-container [ngTemplateOutlet]="titleActions"></ng-container>
-                </div>
+    <div class="content-inner">
+        <div class="page-title" *ngIf="!headerOnly" #pageTitle>
+            <h1 [style.textAlign]="titleAlignment">
+                <ng-container *ngTemplateOutlet="titleTemplate || simplePageTitle"></ng-container>
+            </h1>
+            <div *ngIf="actionsTemplate">
+                <ng-container *ngTemplateOutlet="actionsTemplate"></ng-container>
             </div>
+            <ng-content *ngIf="!actionsTemplate" select="kirby-page-actions"></ng-content>
+
         </div>
 
-        <ng-container [ngTemplateOutlet]="content"></ng-container>
+        <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
+        <ng-content *ngIf="!contentTemplate" select="kirby-page-content"></ng-content>
     </div>
 
-    <div slot="fixed" class="page-fixed-content" *ngIf="fixedContent">
-        <div class="page-fixed-content-inner">
-            <ng-container [ngTemplateOutlet]="fixedContent"></ng-container>
+    <div slot="fixed" class="fixed-content" *ngIf="fixedContent">
+        <div class="content-inner">
+            <ng-container *ngTemplateOutlet="fixedContent"></ng-container>
         </div>
     </div>
 </ion-content>
+
+<ng-template #simplePageTitle>{{title}}</ng-template>

@@ -3,14 +3,14 @@
 /*
  * Page Header
  */
-.page-header, .page-toolbar {
+ion-header, ion-toolbar {
   --background: #{get-color('background-color')};
   max-width: 768px;
   margin: 0 auto;
 
 }
 
-.page-toolbar {
+ion-toolbar {
   --border-width: 0 !important;
   --padding-start: #{size('xs')};
   --padding-end: #{size('xs')};
@@ -22,9 +22,19 @@
   }
 }
 
-.back-button {
+ion-back-button {
   --color: #{get-color('black')};
   --icon-font-size: 24px;
+  width: 32px;
+  height: 32px;
+  background-color: #{get-color('light')};
+  margin-bottom: size('xxs');
+  border-radius: 50%;
+  display: none;
+
+  @include media (">=large") {
+    display: block;
+  }
 }
 
 ion-icon.sc-ion-back-button-ios {
@@ -34,58 +44,42 @@ ion-icon.sc-ion-back-button-ios {
 /*
  * Page Title
  */
-.page-title-container {
+.page-title {
   margin-left: size('xs');
   margin-top: size('xxs');
   margin-bottom: size('xl');
 
-  .page-title {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-    h1, h2, h3, h4, h5, h6 {
-      margin: 0;
-    }
-  }
-
-  .back-button {
-    width: 32px;
-    height: 32px;
-    background-color: #{get-color('light')};
-    margin-bottom: size('xxs');
-    border-radius: 50%;
-    display: none;
-
-    @include media (">=large") {
-      display: block;
-    }
+  h1, h2, h3, h4, h5, h6 {
+    margin: 0;
   }
 }
 
 /*
  * Page Content
  */
-.page-content {
+ion-content {
   --padding-start: #{size('xs')};
   --padding-end: #{size('xs')};
   --background: #{get-color('background-color')};
-}
 
+  .content-inner {
+    max-width: 720px;
+    margin: 0 auto;
+  }  
 
-.page-content-inner, .page-fixed-content-inner {
-  max-width: 720px;
-  margin: 0 auto;
-}
-
-/*
- * Fixed content
- */
-.page-fixed-content {
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-  .page-fixed-content-inner {
-    position: relative;
+  /*
+  * Fixed content
+  */
+  .fixed-content {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    .content-inner {
+      position: relative;
+    }
   }
 }

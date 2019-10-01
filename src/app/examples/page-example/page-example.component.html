@@ -1,14 +1,26 @@
-<kirby-page defaultBackHref="/">
-    <ng-template kirby-page-title>Page title</ng-template>
-    <ng-template kirby-page-title-actions>
-        <button kirby-button attentionLevel="2">
+<kirby-page title="Page Title">
+    <!-- Custom Page Title: -->
+    <!--
+    <div *kirbyPageFloatingTitle style="display: flex;">
+        <kirby-icon name="moneybag"></kirby-icon>
+        Custom Title
+    </div>
+    -->
+    <kirby-page-actions *kirbyPageFloatingActions>
+        <button kirby-button>
             <kirby-icon name="cog"></kirby-icon>
         </button>
-        <button kirby-button attentionLevel="2">
+        <button kirby-button>
             <kirby-icon name="more"></kirby-icon>
-        </button>
-    </ng-template>
-    <ng-template kirby-page-content>
+        </button>        
+    </kirby-page-actions>
+    <!-- Page Content without kirby-page-content wrapper: -->
+    <!--
+    <ul *kirbyPageContent>
+        <li>If you need content without additional wrapper, use the <code>*kirbyPageContent</code> directive </li>
+    </ul>
+    -->
+    <kirby-page-content>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci animi aperiam deserunt dolore error esse
             laborum magni natus nihil optio perferendis placeat, quae sed, sequi sunt totam voluptatem! Dicta,
             quaerat!</p>
@@ -52,18 +64,14 @@
             nesciunt quas recusandae saepe soluta tempore velit, vitae! Aperiam distinctio exercitationem id incidunt
             ipsa repellendus similique sunt vero.</p>
         <h3>THE END</h3>
-    </ng-template>
-    <ng-template kirby-page-fixed-content>
-
-        <kirby-fab-sheet horizontalAlignment="right">
-            <kirby-icon name="write-message"></kirby-icon>
-            <kirby-action-sheet
-                    header="Your action sheet header"
-                    subheader="Your action sheet subheader"
-                    [items]="items"
-                    (itemSelect)="onItemSelect($event)">
-            </kirby-action-sheet>
-        </kirby-fab-sheet>
-
-    </ng-template>
+    </kirby-page-content>
+    <kirby-fab-sheet *kirbyPageContentFixed horizontalAlignment="right">
+        <kirby-icon name="write-message"></kirby-icon>
+        <kirby-action-sheet
+                header="Your action sheet header"
+                subheader="Your action sheet subheader"
+                [items]="items"
+                (itemSelect)="onItemSelect($event)">
+        </kirby-action-sheet>
+    </kirby-fab-sheet>
 </kirby-page>

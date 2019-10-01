@@ -12,14 +12,14 @@ export class PageShowcaseComponent {
   exampleHtml: string = require('../../examples/page-example/page-example.component.html');
   properties: ShowcaseProperty[] = [
     {
-      name: 'onlyShowPageTitleInHeader',
-      description: 'If true, page title and page title actions will only show in header',
+      name: 'headerOnly',
+      description: 'If true, page title and actions will only show in header',
       defaultValue: 'false',
       inputValues: ['true', 'false'],
     },
     {
-      name: 'pageTitleAlign',
-      description: 'align page title in content',
+      name: 'titleAlignment',
+      description: 'Horizontal alignment of the page title within the content pane',
       defaultValue: 'left',
       inputValues: ['left', 'center', 'right'],
     },
