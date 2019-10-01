@@ -12,8 +12,8 @@
 
 .page-toolbar {
   --border-width: 0 !important;
-  --padding-start: #{size('xs')};
-  --padding-end: #{size('xs')};
+  --padding-start: #{size('s')};
+  --padding-end: #{size('s')};
 
   ion-buttons {
     // TODO: It's only possible to overwrite button background-color / border-color by changing kirby-white and kirby-medium, this should be changed in button component
@@ -35,7 +35,7 @@ ion-icon.sc-ion-back-button-ios {
  * Page Title
  */
 .page-title-container {
-  margin-left: size('xs');
+  margin-left: size('s');
   margin-top: size('xxs');
   margin-bottom: size('xl');
 
@@ -64,14 +64,26 @@ ion-icon.sc-ion-back-button-ios {
 }
 
 /*
+ * Page title actions
+ */
+.page-title-actions {
+  button {
+    display: none;
+  }
+}
+
+/*
  * Page Content
  */
 .page-content {
-  --padding-start: #{size('xs')};
-  --padding-end: #{size('xs')};
+  --padding-start: #{size('s')};
+  --padding-end: #{size('s')};
   --background: #{get-color('background-color')};
 }
 
+.page-content-inner {
+  padding-bottom: size('xl');
+}
 
 .page-content-inner, .page-fixed-content-inner {
   max-width: 720px;
