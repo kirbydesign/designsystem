@@ -9,6 +9,7 @@ import { ModalWrapperComponent } from './components/modal/modal-wrapper/modal-wr
 import { ActionSheetComponent } from './components/modal/action-sheet/action-sheet.component';
 import { KeyHandlerDirective } from '@kirbydesign/designsystem/directives/key-handler/key-handler.directive';
 import { ListItemColorDirective } from './components/list/directives/list-item-color.directive';
+import { FormFieldMessageComponent } from './components/form-field/form-field-message/form-field-message.component';
 
 @NgModule({
   imports: [CommonModule, RouterModule, IonicModule.forRoot()],
@@ -16,6 +17,7 @@ import { ListItemColorDirective } from './components/list/directives/list-item-c
     InfiniteScrollDirective,
     ListItemColorDirective,
     KeyHandlerDirective,
+    FormFieldMessageComponent,
     ...declarations,
   ],
   providers: [...providerDeclarations],
