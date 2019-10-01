@@ -42,11 +42,10 @@ export class AlertExampleComponent {
 
   showDestructiveAlert() {
     const config: AlertConfig = {
-      title: 'Elektronisk post',
-      message:
-        'Vi anbefaler at du aktiverer elektronisk post, så du kan få det meste ud af dette samtykke. Vil du dette?',
-      cancelBtnText: 'Nej tak',
-      okBtn: { text: 'Bekræft', isDestructive: true },
+      title: 'Your Alert',
+      message: 'This is a slightly longer alert message text than what was previously here',
+      cancelBtnText: 'Get me out of here',
+      okBtn: { text: 'Confirm', isDestructive: true },
     };
     this.modalController.showAlert(config, this.onAlertClosed);
   }

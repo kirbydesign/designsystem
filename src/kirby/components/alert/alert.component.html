@@ -1,10 +1,10 @@
-<article  #alertWrapper>
+<article  #alertWrapper [ngClass]="iconThemeColor">
     <h3 class="title">{{ title }}</h3>
-    <div *ngIf="iconName" class="icon-outline" [ngClass]="iconThemeColor">
-        <kirby-icon [name]="iconName" [themeColor]="iconThemeColor" size="lg"></kirby-icon>
+    <div *ngIf="iconName" class="icon-outline">
+        <kirby-icon [name]="iconName" size="lg"></kirby-icon>
       </div>
   <div class="message">{{ message }}</div>
-    <div>
+    <div class="buttongroup">
         <button *ngIf="cancelBtnText" attentionLevel="3" kirby-button class="cancel-btn" (click)="onCancel()">{{ cancelBtnText }}</button>
         <button kirby-button class="ok-button" attentionLevel="1" [isDestructive]="okBtnIsDestructive" (click)="onOk()">{{ okBtnText }}</button>
     </div>

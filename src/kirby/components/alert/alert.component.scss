@@ -3,6 +3,7 @@
 h3.title {
   margin-top: size('m');
   margin-bottom: size('m');
+  font-weight: font-weight("bold");
 }
 
 article{
@@ -15,6 +16,17 @@ article{
 
 .message{
   margin-bottom: size('m');
+}
+
+.buttongroup{
+  display:flex;
+  justify-content:space-around;
+  
+  button {
+    width: 50%;
+    margin-left: 6px;
+    margin-right: 6px;
+  }
 }
 
 .icon-outline {
@@ -31,11 +43,13 @@ article{
   border-radius: 50%;
 }
 
-@each $color-name, $color-value in $main-colors {
-  :host(.#{$color-name}) {
+@each $color-name, $color-value in $notification-colors {
+  
+  &.#{$color-name} {
     .icon-outline {
       border-color: #{get-color($color-name)};
     }
+
     kirby-icon {
       color: #{get-color($color-name)};
     }

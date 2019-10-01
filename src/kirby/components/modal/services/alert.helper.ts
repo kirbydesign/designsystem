@@ -30,18 +30,4 @@ export class AlertHelper {
     await alert.present();
     return alert.onDidDismiss();
   }
-
-  private getButton(
-    text: string,
-    isCancelBtn: boolean,
-    resolve: (value?: {} | PromiseLike<{}>) => void
-  ): AlertButton {
-    return {
-      text: text,
-      cssClass: ['kirby-alert-btn', isCancelBtn ? 'cancel' : ''],
-      handler: () => {
-        resolve(!isCancelBtn);
-      },
-    };
-  }
 }
