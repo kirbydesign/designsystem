@@ -49,7 +49,7 @@ export class PageContentComponent {}
 @Component({
   selector: 'kirby-page-actions',
   template: `
-    <ng-content></ng-content>
+    <ng-content select="button[kirby-button]"></ng-content>
   `,
 })
 export class PageActionsComponent implements AfterContentInit {
