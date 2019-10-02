@@ -1,23 +1,10 @@
 import { Component, HostBinding } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { ActionSheetItem } from '@kirbydesign/designsystem/components/modal/action-sheet/config/action-sheet-item';
-import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
-
-@Component({
-  selector: 'kirby-page-example',
-  templateUrl: './page-example.component.html',
-  styleUrls: ['./page-example.component.scss'],
-})
-export class PageExampleComponent {
+@Component({})
+export class BasePageExampleComponent {
   @HostBinding('class') classList = 'ion-page';
   @HostBinding('class.demo') demoMode;
-
-  items: ActionSheetItem[] = [
-    { id: '1', text: 'Option 1' },
-    { id: '2', text: 'Option 2' },
-    { id: '3', text: 'Option 3' },
-  ];
 
   content = `<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci animi aperiam deserunt dolore error esse
             laborum magni natus nihil optio perferendis placeat, quae sed, sequi sunt totam voluptatem! Dicta,
@@ -63,16 +50,7 @@ export class PageExampleComponent {
             ipsa repellendus similique sunt vero.</p>
         <h3>THE END</h3>`;
 
-  constructor(private toastController: ToastController, route: ActivatedRoute) {
+  constructor(route: ActivatedRoute) {
     this.demoMode = route.snapshot.queryParams.mode === 'demo';
-  }
-
-  onItemSelect(item: ActionSheetItem) {
-    const config: ToastConfig = {
-      message: `'${item.text}' was selected.`,
-      messageType: 'success',
-      durationInMs: 1500,
-    };
-    this.toastController.showToast(config);
   }
 }

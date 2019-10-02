@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 
 import { ShowcaseProperty } from './../../shared/showcase-properties/showcase-property';
+import { PageSimpleExampleComponent } from '~/app/examples/page-example/simple/page-simple-example.component';
+import { PageAdvancedExampleComponent } from '~/app/examples/page-example/advanced/page-advanced-example.component';
 declare var require: any;
 
 @Component({
@@ -9,7 +11,8 @@ declare var require: any;
   styleUrls: ['./page-showcase.component.scss'],
 })
 export class PageShowcaseComponent {
-  exampleHtml: string = require('../../examples/page-example/page-example.component.html');
+  simpleExampleHtml: string = PageSimpleExampleComponent.template;
+  advancedExampleHtml: string = PageAdvancedExampleComponent.template;
   properties: ShowcaseProperty[] = [
     {
       name: 'headerOnly',

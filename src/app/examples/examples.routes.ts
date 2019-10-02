@@ -27,7 +27,8 @@ import { ToolbarExampleComponent } from './toolbar-example/toolbar-example.compo
 import { ListSwipeExampleComponent } from './list/swipe/list-swipe-example.component';
 import { ListLoadOnDemandExampleComponent } from './list/load-on-demand/list-load-on-demand-example.component';
 import { FabSheetExampleComponent } from './fab-sheet-example/fab-sheet-example.component';
-import { PageExampleComponent } from '~/app/examples/page-example/page-example.component';
+import { PageSimpleExampleComponent } from './page-example/simple/page-simple-example.component';
+import { PageAdvancedExampleComponent } from './page-example/advanced/page-advanced-example.component';
 
 export const routes: Routes = [
   {
@@ -72,7 +73,21 @@ export const routes: Routes = [
   },
   {
     path: 'page',
-    component: PageExampleComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: 'simple',
+        pathMatch: 'full',
+      },
+      {
+        path: 'simple',
+        component: PageSimpleExampleComponent,
+      },
+      {
+        path: 'advanced',
+        component: PageAdvancedExampleComponent,
+      },
+    ],
   },
   {
     path: 'chip',

@@ -1,3 +1,11 @@
+@import '../../../kirby/scss/utils';
+
+.page-example {
+  display: flex;
+  margin-top: size('xl');
+  margin-bottom: size('xl');
+}
+
 .docs-demo-device {
   --device-aspect-ratio: 2.125;
   --device-padding: 2rem;
@@ -123,8 +131,8 @@
 
 .docs-demo-device.md .docs-demo-device__md-bar {
   display: block;
-  fill: #090a0d;
-  opacity: 0.1;
+  fill: red;//#090a0d;
+  // opacity: 0.1;
   padding: 0.5rem 0.75rem;
   position: relative;
   width: 100%;

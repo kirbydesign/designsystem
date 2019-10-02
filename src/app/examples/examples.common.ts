@@ -31,7 +31,8 @@ import { ToolbarExampleComponent } from './toolbar-example/toolbar-example.compo
 import { ListSwipeExampleComponent } from './list/swipe/list-swipe-example.component';
 import { ListNoShapeExampleComponent } from './list/no-shape/list-no-shape-example.component';
 import { FabSheetExampleComponent } from './fab-sheet-example/fab-sheet-example.component';
-import { PageExampleComponent } from '~/app/examples/page-example/page-example.component';
+import { PageSimpleExampleComponent } from './page-example/simple/page-simple-example.component';
+import { PageAdvancedExampleComponent } from './page-example/advanced/page-advanced-example.component';
 
 // Example of "custom" icons
 export const iconSettings: IconSettings = {
@@ -79,7 +80,8 @@ export const COMPONENT_DECLARATIONS: any[] = [
   EmptyStateExampleComponent,
   ToolbarExampleComponent,
   FabSheetExampleComponent,
-  PageExampleComponent,
+  PageSimpleExampleComponent,
+  PageAdvancedExampleComponent,
 ];
 
 // Configure custom icons (used by example to show the usage of custom icons)
