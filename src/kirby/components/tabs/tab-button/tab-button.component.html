@@ -1,5 +1,11 @@
-<ion-tab-button [tab]="tab">
-    <ng-content select="kirby-icon"></ng-content>
+<ion-tab-button class="tab-button" [tab]="routerLink">
+    <div class="icon-container">
+        <div class="icon">
+            <ng-content select="kirby-icon"></ng-content>
+        </div>
+        <div class="badge">
+            <ng-content select="kirby-badge"></ng-content>
+        </div>
+    </div>
     <ion-label><ng-content></ng-content></ion-label>
-    <ng-content select="kirby-badge"></ng-content>
 </ion-tab-button>

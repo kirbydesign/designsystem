@@ -5,5 +5,9 @@
     --background: #{get-color('background-color')};
     --border: none;
     --color: #{get-color('black')};
+
+    @include media(">=large") {
+      order: -1;
+    }
   }
 }

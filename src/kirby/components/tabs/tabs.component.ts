@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'kirby-tabs',
+  selector: 'kirby-tab-bar',
   templateUrl: './tabs.component.html',
   styleUrls: ['./tabs.component.scss'],
 })

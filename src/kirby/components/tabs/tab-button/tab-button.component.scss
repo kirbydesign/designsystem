@@ -1,3 +1,37 @@
-kirby-badge {
-  position: absolute;
+@import '../../../scss/utils';
+
+:host {
+  height: 100%;
+  flex: 1 1 0%;
+  max-width: 168px;
+
+  @include media(">=large") {
+    flex: none;
+    padding: 0 size('xs');
+  }
 }
+
+.tab-button {
+  .badge {
+    left: calc(50% + 5px);
+    top: 0;
+    position: absolute;
+    z-index: 1;
+  }
+
+  @include media(">=large") {
+    flex-direction: row;
+
+    .icon-container {
+      position: relative;
+      margin-right: size('xxs');
+    }
+
+    .badge {
+      top: -5px;
+      right: -5px;
+      left: auto;
+    }
+  }
+}
+
