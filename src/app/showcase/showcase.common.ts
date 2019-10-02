@@ -27,6 +27,7 @@ import { SlideButtonShowcaseComponent } from './slide-button-showcase/slide-butt
 import { ToastShowcaseComponent } from './toast-showcase/toast-showcase.component';
 import { ToggleShowcaseComponent } from './toggle-showcase/toggle-showcase.component';
 import { EmptyStateShowcaseComponent } from './empty-state-showcase/empty-state-showcase.component';
+import { LoadingOverlayShowcaseComponent } from './loading-overlay-showcase/loading-overlay-showcase.component';
 import { ToolbarShowcaseComponent } from './toolbar-showcase/toolbar-showcase.component';
 import { FabSheetShowcaseComponent } from './fab-sheet-showcase/fab-sheet-showcase.component';
 
@@ -58,6 +59,7 @@ export const COMPONENT_EXPORTS: any[] = [
   ToastShowcaseComponent,
   ToggleShowcaseComponent,
   EmptyStateShowcaseComponent,
+  LoadingOverlayShowcaseComponent,
   ToolbarShowcaseComponent,
   FormFieldShowcaseComponent,
   FabSheetShowcaseComponent,

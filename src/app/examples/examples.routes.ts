@@ -23,6 +23,7 @@ import { SlideButtonExampleComponent } from './slide-button-example/slide-button
 import { ToastExampleComponent } from './toast-example/toast-example.component';
 import { ToggleExampleComponent } from './toggle-example/toggle-example.component';
 import { EmptyStateExampleComponent } from './empty-state-example/empty-state-example.component';
+import { LoadingOverlayExampleComponent } from './loading-overlay-example/loading-overlay-example.component';
 import { ToolbarExampleComponent } from './toolbar-example/toolbar-example.component';
 import { ListSwipeExampleComponent } from './list/swipe/list-swipe-example.component';
 import { ListLoadOnDemandExampleComponent } from './list/load-on-demand/list-load-on-demand-example.component';
@@ -89,6 +90,10 @@ export const routes: Routes = [
   {
     path: 'modal',
     component: ModalExampleComponent,
+  },
+  {
+    path: 'loading-overlay',
+    component: LoadingOverlayExampleComponent,
   },
   {
     path: 'action-sheet',
