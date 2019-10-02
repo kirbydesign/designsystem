@@ -20,7 +20,7 @@
         <li>If you need content without additional wrapper, use the <code>*kirbyPageContent</code> directive </li>
     </ul>
     -->
-    <kirby-page-content>{{content}}</kirby-page-content>
+    <kirby-page-content><div [innerHTML]="content"></div></kirby-page-content>
     <kirby-fab-sheet *kirbyPageContentFixed horizontalAlignment="right">
         <kirby-icon name="write-message"></kirby-icon>
         <kirby-action-sheet
