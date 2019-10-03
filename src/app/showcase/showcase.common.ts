@@ -1,3 +1,4 @@
+import { FormFieldShowcaseComponent } from './form-field-showcase/form-field-showcase.component';
 import { ListNoShapeShowcaseComponent } from './list-no-shape-showcase/list-no-shape-showcase.component';
 import { ListSwipeShowcaseComponent } from './list-swipe-showcase/list-swipe-showcase.component';
 import { ExamplesModule } from '../examples/examples.module';
@@ -26,6 +27,7 @@ import { SlideButtonShowcaseComponent } from './slide-button-showcase/slide-butt
 import { ToastShowcaseComponent } from './toast-showcase/toast-showcase.component';
 import { ToggleShowcaseComponent } from './toggle-showcase/toggle-showcase.component';
 import { EmptyStateShowcaseComponent } from './empty-state-showcase/empty-state-showcase.component';
+import { LoadingOverlayShowcaseComponent } from './loading-overlay-showcase/loading-overlay-showcase.component';
 import { ToolbarShowcaseComponent } from './toolbar-showcase/toolbar-showcase.component';
 import { FabSheetShowcaseComponent } from './fab-sheet-showcase/fab-sheet-showcase.component';
 import { PageShowcaseComponent } from '~/app/showcase/page-showcase/page-showcase.component';
@@ -58,7 +60,9 @@ export const COMPONENT_EXPORTS: any[] = [
   ToastShowcaseComponent,
   ToggleShowcaseComponent,
   EmptyStateShowcaseComponent,
+  LoadingOverlayShowcaseComponent,
   ToolbarShowcaseComponent,
+  FormFieldShowcaseComponent,
   FabSheetShowcaseComponent,
   PageShowcaseComponent,
 ];

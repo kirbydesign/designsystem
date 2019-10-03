@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 
 import { ActionSheetItem } from '@kirbydesign/designsystem/components/modal/action-sheet/config/action-sheet-item';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
@@ -52,8 +51,8 @@ export class PageAdvancedExampleComponent extends BasePageExampleComponent {
     { id: '3', text: 'Option 3' },
   ];
 
-  constructor(private toastController: ToastController, route: ActivatedRoute) {
-    super(route);
+  constructor(private toastController: ToastController) {
+    super();
   }
 
   onItemSelect(item: ActionSheetItem) {

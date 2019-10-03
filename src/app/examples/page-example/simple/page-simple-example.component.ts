@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 
 import { BasePageExampleComponent } from '../base-page-example.component';
 
@@ -17,7 +16,7 @@ const config = {
 export class PageSimpleExampleComponent extends BasePageExampleComponent {
   static readonly template = config.template.replace(' defaultBackHref="/"', '');
 
-  constructor(route: ActivatedRoute) {
-    super(route);
+  constructor() {
+    super();
   }
 }

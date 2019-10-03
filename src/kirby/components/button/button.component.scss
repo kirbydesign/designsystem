@@ -4,6 +4,8 @@
   --kirby-button-background-color: transparent;
   --kirby-button-border-color: transparent;
   --kirby-button-border-radius: 2rem;
+  --kirby-button-padding-left: #{size('m')};
+  --kirby-button-padding-right: #{size('m')};
   background-color: var(--kirby-button-background-color);
   border-radius: var(--kirby-button-border-radius);
   border: 1px solid var(--kirby-button-border-color);
@@ -15,13 +17,27 @@
   align-items: center;
   justify-content: center;
   vertical-align: middle;
+  box-sizing: border-box;
+  white-space: nowrap;
   
   // we default to 'md' size.
   margin: size('xxxs');
-  padding: size('xxs') size('m') size('xxs') size('m');
+  padding: size('xxs') var(--kirby-button-padding-right) size('xxs') var(--kirby-button-padding-left);
   font-size: font-size('s');
   height: size('xl');
   line-height: line-height('xs');
+
+  &.icon-left {
+    --kirby-icon-margin-right: #{size('xxs')};
+    --kirby-button-padding-left: #{size('xs')};
+    --kirby-button-padding-right: #{size('s')};
+  }
+  
+  &.icon-right {
+    --kirby-icon-margin-left: #{size('xxs')};
+    --kirby-button-padding-left: #{size('s')};
+    --kirby-button-padding-right: #{size('xs')};
+  }
 
   &.icon-only {
     width: size('xl');
@@ -126,8 +142,9 @@
   
   &.floating {
     $fab-size: 64px;
-    width: $fab-size;
-    height: $fab-size;
+    width: $fab-size !important;
+    height: $fab-size !important;
+    min-width: unset;
 
     &:not(:disabled) {
       box-shadow: get-elevation(8);
@@ -136,5 +153,6 @@
 
   &.icon-only {
     padding: 0;
+    min-width: unset;
   }
 }
