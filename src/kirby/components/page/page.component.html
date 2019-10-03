@@ -6,7 +6,7 @@
         <ion-title [@visibility]="toolbarContentVisibility">
             <ng-container *ngTemplateOutlet="toolbarTitleTemplate"></ng-container>
         </ion-title>
-        <ion-buttons slot="primary" [@visibility]="toolbarContentVisibility" #headerButtons>
+        <ion-buttons slot="primary" [@visibility]="toolbarContentVisibility" #toolbarButtons>
             <ng-container *ngTemplateOutlet="actionsTemplate"></ng-container>
         </ion-buttons>
     </ion-toolbar>

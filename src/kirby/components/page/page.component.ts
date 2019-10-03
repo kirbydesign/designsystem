@@ -94,8 +94,8 @@ export class PageComponent implements OnInit, OnDestroy, AfterContentInit, After
 
   @ViewChild('pageTitle', { read: ElementRef })
   private pageTitle: ElementRef;
-  @ViewChild('headerButtons', { read: ElementRef })
-  private headerButtons: ElementRef;
+  @ViewChild('toolbarButtons', { read: ElementRef })
+  private toolbarButtons: ElementRef;
   @ViewChild('simpleTitleTemplate', { read: TemplateRef })
   private simpleTitleTemplate: TemplateRef<any>;
   @ViewChild('simpleToolbarTitleTemplate', { read: TemplateRef })
@@ -136,16 +136,18 @@ export class PageComponent implements OnInit, OnDestroy, AfterContentInit, After
       this.pageTitleObserver = this.observePageTitle();
     }
     if (this.actionsTemplate) {
-      this.setHeaderButtonsToSmall();
+      this.styleToolbarButtons();
     }
   }
 
-  setHeaderButtonsToSmall() {
-    if (this.headerButtons && this.headerButtons.nativeElement) {
-      const buttons = this.headerButtons.nativeElement.querySelectorAll('[kirby-button]');
+  styleToolbarButtons() {
+    if (this.toolbarButtons && this.toolbarButtons.nativeElement) {
+      const buttons = this.toolbarButtons.nativeElement.querySelectorAll('[kirby-button]');
       buttons.forEach((button) => {
         this.renderer.addClass(button, 'sm');
         this.renderer.removeClass(button, 'lg');
+        this.renderer.addClass(button, 'attention-level4');
+        this.renderer.removeClass(button, 'attention-level2');
       });
     }
   }

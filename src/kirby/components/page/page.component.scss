@@ -14,12 +14,6 @@ ion-toolbar {
   --border-width: 0 !important;
   --padding-start: #{size('s')};
   --padding-end: #{size('s')};
-
-  ion-buttons {
-    // TODO: It's only possible to overwrite button background-color / border-color by changing kirby-white and kirby-medium, this should be changed in button component
-    --kirby-white: transparent;
-    --kirby-medium: transparent;
-  }
 }
 
 ion-back-button {
