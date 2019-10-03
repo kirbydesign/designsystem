@@ -25,18 +25,8 @@ ion-toolbar {
 ion-back-button {
   --color: #{get-color('black')};
   --icon-font-size: 24px;
-  width: 32px;
-  height: 32px;
-
-  @include media (">=large") {
-    border-radius: 50%;
-    margin-bottom: size('xxs');
-    background-color: #{get-color('light')};
-  }
-}
-
-ion-icon.sc-ion-back-button-ios {
   width: 24px;
+  height: 24px;
 }
 
 /*
