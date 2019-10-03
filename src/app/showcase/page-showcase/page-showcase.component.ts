@@ -34,4 +34,13 @@ export class PageShowcaseComponent {
       inputValues: ['string'],
     },
   ];
+
+  cssProperties: ShowcaseProperty[] = [
+    {
+      name: '--page-title-margin-bottom',
+      description: 'Spacing between page title and page content.',
+      defaultValue: 'xl',
+      inputValues: [],
+    },
+  ];
 }

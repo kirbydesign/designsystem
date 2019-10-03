@@ -2,13 +2,13 @@
     <thead>
         <th>Attribute</th>
         <th>Description</th>
-        <th>Type</th>
+        <th *ngIf="type !== 'css'">Type</th>
     </thead>
     <tbody>
         <tr *ngFor="let prop of properties">
             <td><code>{{ prop.name }}</code></td>
             <td>{{ prop.description }} <span *ngIf="prop.defaultValue">Default value is <code>{{ prop.defaultValue }}</code>.</span></td>
-            <td><code>{{ prop.inputValues.join(' | ') }}</code></td>
+            <td *ngIf="type !== 'css'"><code>{{ prop.inputValues.join(' | ') }}</code></td>
         </tr>
     </tbody>
 </table>

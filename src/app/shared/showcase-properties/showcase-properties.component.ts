@@ -8,4 +8,5 @@ import { ShowcaseProperty } from './showcase-property';
 })
 export class ShowcasePropertiesComponent {
   @Input() properties: ShowcaseProperty[];
+  @Input() type?: 'properties' | 'css' = 'properties';
 }
