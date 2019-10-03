@@ -31,9 +31,19 @@ ion-back-button {
   margin-top: size('xxs');
   margin-bottom: var(--page-title-margin-bottom, #{size('xl')});
 
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  &.has-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &.text-center {
+    text-align: center;
+  }
+  
+  &.text-right {
+    text-align: right;
+  }
 
   h1, h2, h3, h4, h5, h6 {
     margin: 0;

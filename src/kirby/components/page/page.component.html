@@ -15,8 +15,8 @@
 <ion-content>
 
     <div class="content-inner">
-        <div class="page-title" *ngIf="hasPageTitle" #pageTitle>
-            <h1 [style.textAlign]="titleAlignment">
+        <div class="page-title" [class.has-actions]="!!actionsTemplate" [ngClass]="{'text-center': titleAlignment === 'center', 'text-right': titleAlignment === 'right'}" *ngIf="hasPageTitle" #pageTitle>
+            <h1>
                 <ng-container *ngTemplateOutlet="this.titleTemplate"></ng-container>
             </h1>
             <div *ngIf="actionsTemplate">
