@@ -1,12 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MockModule } from 'ng-mocks';
 
 import { ExamplesModule } from '../../examples/examples.module';
 import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
 import { PageShowcaseComponent } from './page-showcase.component';
 import { ShowcasePropertiesComponent } from '~/app/shared/showcase-properties/showcase-properties.component';
-import { MockModule } from 'ng-mocks';
 import { IphoneModule } from '~/app/iphone/iphone.module';
 
 describe('PageShowcaseComponent', () => {
