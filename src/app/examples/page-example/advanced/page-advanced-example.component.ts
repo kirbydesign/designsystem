@@ -58,6 +58,9 @@ export class PageAdvancedExampleComponent extends BasePageExampleComponent {
   }
 
   onItemSelect(item: ActionSheetItem) {
+    if (!item) {
+      return;
+    }
     const config: ToastConfig = {
       message: `'${item.text}' was selected.`,
       messageType: 'success',
@@ -78,14 +81,8 @@ export class PageAdvancedExampleComponent extends BasePageExampleComponent {
   onMoreSelect() {
     const config: ActionSheetConfig = {
       header: 'Your action sheet header',
-      subheader: 'Your action sheet sub-header',
-      items: [
-        { id: '1', text: 'Option 1' },
-        { id: '2', text: 'Option 2' },
-        { id: '3', text: 'Option 3' },
-      ],
-      cancelButtonText: 'Custom cancel',
+      items: this.items,
     };
-    this.modalController.showActionSheet(config);
+    this.modalController.showActionSheet(config, this.onItemSelect.bind(this));
   }
 }
