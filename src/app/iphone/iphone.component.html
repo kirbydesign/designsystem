@@ -15,4 +15,7 @@
             <iframe loading="lazy" importance="low" [src]="trustedSrc" #iframe></iframe>
         </figure>
     </div>
+    <a *ngIf="showExternalLink" class="pop-out" [href]="trustedSrc">
+        Pop out
+    </a>
 </div>

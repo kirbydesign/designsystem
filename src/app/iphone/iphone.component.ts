@@ -19,6 +19,7 @@ import { ColorHelper } from '@kirbydesign/designsystem/helpers/color-helper';
 })
 export class IphoneComponent implements OnChanges, AfterViewInit {
   @Input() src: string;
+  @Input() showExternalLink: boolean;
   trustedSrc: SafeResourceUrl;
 
   @ViewChild('iframe', { read: ElementRef }) iframe: ElementRef;
