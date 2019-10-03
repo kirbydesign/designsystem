@@ -3,11 +3,8 @@
         <div *ngIf="config.flavor === 'drawer'">
             <ng-container *ngTemplateOutlet="closeButton; context: { icon: 'arrow-down' }"></ng-container>
         </div>
-        <span class="title"
-            [class.text-center]="config.flavor==='drawer'"
-            [class.text-left]="config.flavor==='modal'">
-            {{ config.title }}
-        </span>
+        <h2 class="title" *ngIf="config.flavor==='modal'">{{ config.title }}</h2>
+        <h3 class="title" *ngIf="config.flavor==='drawer'">{{ config.title }}</h3>
         <div *ngIf="config.flavor === 'modal'">
             <ng-container *ngTemplateOutlet="closeButton; context: { icon: 'close' }"></ng-container>
         </div>

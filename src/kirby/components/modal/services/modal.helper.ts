@@ -4,7 +4,6 @@ import { Animation } from '@ionic/core';
 
 import { ModalConfig } from '../modal-wrapper/config/modal-config';
 import { ModalWrapperComponent } from '../modal-wrapper/modal-wrapper.component';
-import { modalFadeInAnimation } from '@kirbydesign/designsystem/components/modal/animations/modal-fade-in';
 
 @Injectable()
 export class ModalHelper {
@@ -19,24 +18,6 @@ export class ModalHelper {
       cssClass: 'kirby-modal',
       componentProps: { config: config },
       enterAnimation: this.animate.bind(this, true, config.flavor),
-      leaveAnimation: this.animate.bind(this, false, config.flavor),
-    });
-
-    registerModal({ close: modal.dismiss.bind(modal) });
-
-    modal.present();
-    return modal.onDidDismiss();
-  }
-
-  public async showModalWindowFadeIn(
-    config: ModalConfig,
-    registerModal: (modal: { close: (data?: any) => {} }) => void
-  ): Promise<any> {
-    const modal = await this.ionicModalController.create({
-      component: ModalWrapperComponent,
-      cssClass: 'kirby-modal',
-      componentProps: { config: config },
-      enterAnimation: modalFadeInAnimation,
       leaveAnimation: this.animate.bind(this, false, config.flavor),
     });
 

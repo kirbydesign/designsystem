@@ -26,7 +26,7 @@ export class ModalExampleComponent {
     this.modalController.showModal(config, this.onModalClose);
   }
 
-  showModalFadeIn() {
+  showModalAnimateIn() {
     const config: ModalConfig = {
       title: 'My Modal Title',
       flavor: 'modal',
@@ -37,7 +37,7 @@ export class ModalExampleComponent {
       },
     };
 
-    this.modalController.showModalFadeIn(config, this.onModalClose);
+    this.modalController.showModalAnimateIn(config, 60, 60, 100, 80, this.onModalClose);
   }
 
   showDrawer() {

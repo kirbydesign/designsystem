@@ -33,8 +33,15 @@ export class ModalController implements IModalController {
     });
   }
 
-  public showModalFadeIn(config: ModalConfig, onCloseModal?: (data?: any) => void): void {
-    const modalCloseEvent: Promise<any> = this.modalHelper.showModalWindowFadeIn(
+  public showModalAnimateIn(
+    config: ModalConfig,
+    fromX: Number,
+    fromY: Number,
+    fromW: Number,
+    fromH: Number,
+    onCloseModal?: (data?: any) => void
+  ): void {
+    const modalCloseEvent: Promise<any> = this.modalHelper.showModalWindow(
       config,
       this.register.bind(this)
     );

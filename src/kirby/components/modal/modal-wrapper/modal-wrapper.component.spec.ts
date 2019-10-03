@@ -16,7 +16,7 @@ describe('ModalWrapperComponent', () => {
   beforeEach(async(() => {
     const modalControllerSpy = jasmine.createSpyObj('IModalController', [
       'showModal',
-      'showModalFadeIn',
+      'showModalAnimateIn',
       'hideModal',
       'registerModalCloseRef',
     ]);

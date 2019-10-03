@@ -177,7 +177,7 @@ const MOCK_DIRECTIVES = MockDirectives(
       provide: ModalController,
       useValue: createSpyObj('ModalController', [
         'showModal',
-        'showModalFadeIn',
+        'showModalAnimateIn',
         'showActionSheet',
         'showAlert',
         'register',
