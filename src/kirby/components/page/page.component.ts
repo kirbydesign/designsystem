@@ -155,7 +155,9 @@ export class PageComponent implements OnInit, OnDestroy, AfterContentInit, After
     if (this.customToolbarTitleTemplate) {
       this.toolbarTitleTemplate = this.customToolbarTitleTemplate;
     } else {
-      this.toolbarTitle ? this.simpleToolbarTitleTemplate : this.titleTemplate;
+      this.toolbarTitleTemplate = this.toolbarTitle
+        ? this.simpleToolbarTitleTemplate
+        : this.titleTemplate;
     }
   }
 
