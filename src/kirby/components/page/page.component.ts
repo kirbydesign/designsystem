@@ -86,19 +86,31 @@ export class PageActionsComponent implements AfterContentInit {
     ]),
   ],
 })
-export class PageComponent implements OnInit, OnDestroy, AfterViewInit {
+export class PageComponent implements OnInit, OnDestroy, AfterContentInit, AfterViewInit {
   @Input() title?: string;
+  @Input() toolbarTitle?: string;
   @Input() titleAlignment?: 'left' | 'center' | 'right' = 'left';
-  @Input() headerOnly?: boolean;
   @Input() defaultBackHref?: string;
 
-  @ViewChild('pageTitle', { read: ElementRef }) pageTitle: ElementRef;
-  @ViewChild('headerButtons', { read: ElementRef }) headerButtons: ElementRef;
-  @ContentChild(PageFloatingTitleDirective, { read: TemplateRef }) titleTemplate: TemplateRef<any>;
-  @ContentChild(PageFloatingActionsDirective, { read: TemplateRef }) actionsTemplate: TemplateRef<any>;
-  @ContentChild(PageContentDirective, { read: TemplateRef }) contentTemplate: TemplateRef<any>;
+  @ViewChild('pageTitle', { read: ElementRef })
+  private pageTitle: ElementRef;
+  @ViewChild('headerButtons', { read: ElementRef })
+  private headerButtons: ElementRef;
+  @ViewChild('simpleTitleTemplate', { read: TemplateRef })
+  private simpleTitleTemplate: TemplateRef<any>;
+  @ViewChild('simpleToolbarTitleTemplate', { read: TemplateRef })
+  private simpleToolbarTitleTemplate: TemplateRef<any>;
+  @ContentChild(PageFloatingTitleDirective, { read: TemplateRef })
+  private customTitleTemplate: TemplateRef<any>;
+  @ContentChild(PageFloatingActionsDirective, { read: TemplateRef })
+  actionsTemplate: TemplateRef<any>;
+  @ContentChild(PageContentDirective, { read: TemplateRef })
+  contentTemplate: TemplateRef<any>;
   @ContentChild(PageContentFixedDirective, { read: TemplateRef }) fixedContent: TemplateRef<any>;
 
+  hasPageTitle: boolean;
+  titleTemplate: TemplateRef<any>;
+  toolbarTitleTemplate: TemplateRef<any>;
   toolbarContentVisibility: 'visible' | 'hidden' = 'hidden';
   private pageTitleObserver;
 
@@ -108,11 +120,20 @@ export class PageComponent implements OnInit, OnDestroy, AfterViewInit {
     this.removeWrapper();
   }
 
-  ngAfterViewInit(): void {
-    if (!this.headerOnly) {
-      this.pageTitleObserver = this.observePageTitle();
-    } else {
+  ngAfterContentInit(): void {
+    this.hasPageTitle = !!this.title || !!this.customTitleTemplate;
+    if (!this.hasPageTitle) {
       this.toolbarContentVisibility = 'visible';
+    }
+    this.titleTemplate = this.customTitleTemplate || this.simpleTitleTemplate;
+    this.toolbarTitleTemplate = this.toolbarTitle
+      ? this.simpleToolbarTitleTemplate
+      : this.titleTemplate;
+  }
+
+  ngAfterViewInit(): void {
+    if (this.hasPageTitle) {
+      this.pageTitleObserver = this.observePageTitle();
     }
     if (this.actionsTemplate) {
       this.setHeaderButtonsToSmall();

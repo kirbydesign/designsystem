@@ -4,7 +4,7 @@
             <ion-back-button text="" [defaultHref]="defaultBackHref" icon="arrow-back"></ion-back-button>
         </ion-buttons>
         <ion-title [@visibility]="toolbarContentVisibility">
-            <ng-container *ngTemplateOutlet="titleTemplate || simplePageTitle"></ng-container>
+            <ng-container *ngTemplateOutlet="toolbarTitleTemplate"></ng-container>
         </ion-title>
         <ion-buttons slot="primary" [@visibility]="toolbarContentVisibility" #headerButtons>
             <ng-container *ngTemplateOutlet="actionsTemplate"></ng-container>
@@ -15,9 +15,9 @@
 <ion-content>
 
     <div class="content-inner">
-        <div class="page-title" *ngIf="!headerOnly" #pageTitle>
+        <div class="page-title" *ngIf="hasPageTitle" #pageTitle>
             <h1 [style.textAlign]="titleAlignment">
-                <ng-container *ngTemplateOutlet="titleTemplate || simplePageTitle"></ng-container>
+                <ng-container *ngTemplateOutlet="this.titleTemplate"></ng-container>
             </h1>
             <div *ngIf="actionsTemplate">
                 <ng-container *ngTemplateOutlet="actionsTemplate"></ng-container>
@@ -37,4 +37,5 @@
     </div>
 </ion-content>
 
-<ng-template #simplePageTitle>{{title}}</ng-template>
+<ng-template #simpleTitleTemplate>{{title}}</ng-template>
+<ng-template #simpleToolbarTitleTemplate>{{toolbarTitle}}</ng-template>
