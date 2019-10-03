@@ -8,13 +8,13 @@ import { BasePageExampleComponent } from '../base-page-example.component';
 const config = {
   template: `<kirby-page defaultBackHref="/">
 
-  <!-- Custom Page Title: -->
+  <!-- Custom Page Title -->
   <div *kirbyPageFloatingTitle style="display: inline-flex;">
     Custom
     <kirby-icon name="arrow-down"></kirby-icon>
   </div>
   
-  <!-- Page Actions : -->
+  <!-- Page Actions -->
   <kirby-page-actions *kirbyPageFloatingActions>
     <button kirby-button>
       <kirby-icon name="cog"></kirby-icon>
@@ -24,12 +24,10 @@ const config = {
     </button>
   </kirby-page-actions>
   
-  <!-- Content : -->
-  <kirby-page-content>
-    <div [innerHTML]="content"></div>
-  </kirby-page-content>
+  <!-- Content Template (without kirby-page-content wrapper) -->
+  <div *kirbyPageContent [innerHTML]="content"></div>
   
-  <!-- Fixed Content : -->
+  <!-- Fixed Content -->
   <kirby-fab-sheet *kirbyPageContentFixed horizontalAlignment="right">
     <kirby-icon name="write-message"></kirby-icon>
     <kirby-action-sheet
