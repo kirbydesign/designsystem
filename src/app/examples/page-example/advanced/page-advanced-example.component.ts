@@ -9,18 +9,19 @@ const config = {
   template: `<kirby-page defaultBackHref="/">
 
   <!-- Custom Page Title: -->
-  <div *kirbyPageFloatingTitle style="display: flex;">
-    <kirby-icon name="moneybag"></kirby-icon> Custom
+  <div *kirbyPageFloatingTitle style="display: inline-flex;">
+    Custom
+    <kirby-icon name="arrow-down"></kirby-icon>
   </div>
   
   <!-- Page Actions : -->
   <kirby-page-actions *kirbyPageFloatingActions>
-     <button kirby-button>
-       <kirby-icon name="cog"></kirby-icon>
-     </button>
-     <button kirby-button>
-       <kirby-icon name="more"></kirby-icon>
-     </button>
+    <button kirby-button>
+      <kirby-icon name="cog"></kirby-icon>
+    </button>
+    <button kirby-button>
+      <kirby-icon name="more"></kirby-icon>
+    </button>
   </kirby-page-actions>
   
   <!-- Content : -->
