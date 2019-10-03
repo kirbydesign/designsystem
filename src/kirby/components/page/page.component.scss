@@ -27,13 +27,11 @@ ion-back-button {
   --icon-font-size: 24px;
   width: 32px;
   height: 32px;
-  background-color: #{get-color('light')};
-  margin-bottom: size('xxs');
-  border-radius: 50%;
-  display: none;
 
   @include media (">=large") {
-    display: block;
+    border-radius: 50%;
+    margin-bottom: size('xxs');
+    background-color: #{get-color('light')};
   }
 }
 
@@ -47,7 +45,7 @@ ion-icon.sc-ion-back-button-ios {
 .page-title {
   margin-left: size('s');
   margin-top: size('xxs');
-  margin-bottom: size('xl');
+  margin-bottom: var(--page-title-margin-bottom, #{size('xl')});
 
   display: flex;
   justify-content: space-between;
