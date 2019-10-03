@@ -1,11 +1,4 @@
-import { Component, HostBinding } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-
-@Component({})
 export class BasePageExampleComponent {
-  @HostBinding('class') classList = 'ion-page';
-  @HostBinding('class.demo') demoMode;
-
   content = `<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci animi aperiam deserunt dolore error esse
             laborum magni natus nihil optio perferendis placeat, quae sed, sequi sunt totam voluptatem! Dicta,
             quaerat!</p>
@@ -50,7 +43,5 @@ export class BasePageExampleComponent {
             ipsa repellendus similique sunt vero.</p>
         <h3>THE END</h3>`;
 
-  constructor(route: ActivatedRoute) {
-    this.demoMode = route.snapshot.queryParams.mode === 'demo';
-  }
+  constructor() {}
 }

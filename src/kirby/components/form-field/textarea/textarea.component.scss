@@ -1,0 +1,11 @@
+@import '../form-field-inputs.shared';
+
+:host {
+  font-family: var(--kirby-font-family);
+
+  resize: none;
+
+  @include media(">=medium") {
+    resize: vertical;
+  }
+}
