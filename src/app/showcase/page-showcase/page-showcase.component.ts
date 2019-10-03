@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 import { ShowcaseProperty } from './../../shared/showcase-properties/showcase-property';
 import { PageSimpleExampleComponent } from '~/app/examples/page-example/simple/page-simple-example.component';
+import { PageAlignmentAndToolbarTitleExampleComponent } from '~/app/examples/page-example/alignment-and-toolbar-title/page-alignment-and-toolbar-title-example.component';
 import { PageAdvancedExampleComponent } from '~/app/examples/page-example/advanced/page-advanced-example.component';
 
 @Component({
@@ -11,6 +12,8 @@ import { PageAdvancedExampleComponent } from '~/app/examples/page-example/advanc
 })
 export class PageShowcaseComponent {
   simpleExampleHtml: string = PageSimpleExampleComponent.template;
+  alignmentAndToolbarTitleExampleHtml: string =
+    PageAlignmentAndToolbarTitleExampleComponent.template;
   advancedExampleHtml: string = PageAdvancedExampleComponent.template;
   properties: ShowcaseProperty[] = [
     {
@@ -23,7 +26,7 @@ export class PageShowcaseComponent {
     {
       name: 'toolbarTitle',
       description:
-        'An alternative text for the title in the toolbar. If `toolbarTitle` is specified instead of `title`, the page title and actions will only be shown in the toolbar.',
+        'An alternative text for the title in the toolbar. If `toolbarTitle` is specified instead of `title`, the page title and actions will only be shown in the toolbar and not on the page itself.',
       defaultValue: '',
       inputValues: ['string'],
     },
