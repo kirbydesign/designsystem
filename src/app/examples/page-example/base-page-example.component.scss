@@ -1,8 +1,0 @@
-@import '../../../kirby/scss/utils';
-
-:host {
-  background: get-color('background-color');
-  &.demo {
-    --ion-safe-area-top: 20px;
-  }
-}

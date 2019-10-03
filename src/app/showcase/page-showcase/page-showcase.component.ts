@@ -39,8 +39,8 @@ export class PageShowcaseComponent {
     {
       name: '--page-title-margin-bottom',
       description: 'Spacing between page title and page content.',
-      defaultValue: 'xl',
-      inputValues: [],
+      defaultValue: `size('xl')`,
+      inputValues: ['unit'],
     },
   ];
 }
