@@ -4,9 +4,9 @@
             <ion-back-button text="" [defaultHref]="defaultBackHref" icon="assets/icons/arrow-back.svg"></ion-back-button>
         </ion-buttons>
         <ion-title [@visibility]="toolbarContentVisibility">
-            <ng-container *ngTemplateOutlet="titleTemplate || simplePageTitle"></ng-container>
+            <ng-container *ngTemplateOutlet="toolbarTitleTemplate"></ng-container>
         </ion-title>
-        <ion-buttons slot="primary" [@visibility]="toolbarContentVisibility" #headerButtons>
+        <ion-buttons slot="primary" [@visibility]="toolbarContentVisibility" #toolbarButtons>
             <ng-container *ngTemplateOutlet="actionsTemplate"></ng-container>
         </ion-buttons>
     </ion-toolbar>
@@ -15,9 +15,9 @@
 <ion-content>
 
     <div class="content-inner">
-        <div class="page-title" *ngIf="!headerOnly" #pageTitle>
-            <h1 [style.textAlign]="titleAlignment">
-                <ng-container *ngTemplateOutlet="titleTemplate || simplePageTitle"></ng-container>
+        <div class="page-title" [class.has-actions]="!!actionsTemplate" [ngClass]="{'text-center': titleAlignment === 'center', 'text-right': titleAlignment === 'right'}" *ngIf="hasPageTitle" #pageTitle>
+            <h1>
+                <ng-container *ngTemplateOutlet="this.titleTemplate"></ng-container>
             </h1>
             <div *ngIf="actionsTemplate">
                 <ng-container *ngTemplateOutlet="actionsTemplate"></ng-container>
@@ -37,4 +37,5 @@
     </div>
 </ion-content>
 
-<ng-template #simplePageTitle>{{title}}</ng-template>
+<ng-template #simpleTitleTemplate>{{title}}</ng-template>
+<ng-template #simpleToolbarTitleTemplate>{{toolbarTitle}}</ng-template>

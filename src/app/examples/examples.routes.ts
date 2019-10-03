@@ -29,6 +29,7 @@ import { ListLoadOnDemandExampleComponent } from './list/load-on-demand/list-loa
 import { FabSheetExampleComponent } from './fab-sheet-example/fab-sheet-example.component';
 import { PageSimpleExampleComponent } from './page-example/simple/page-simple-example.component';
 import { PageAdvancedExampleComponent } from './page-example/advanced/page-advanced-example.component';
+import { PageAlignmentAndToolbarTitleExampleComponent } from './page-example/alignment-and-toolbar-title/page-alignment-and-toolbar-title-example.component';
 
 export const routes: Routes = [
   {
@@ -82,6 +83,10 @@ export const routes: Routes = [
       {
         path: 'simple',
         component: PageSimpleExampleComponent,
+      },
+      {
+        path: 'alignment-toolbar-title',
+        component: PageAlignmentAndToolbarTitleExampleComponent,
       },
       {
         path: 'advanced',

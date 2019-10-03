@@ -19,14 +19,19 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { ButtonComponent } from '../button/button.component';
 
 @Directive({
-  selector: '[kirbyPageFloatingTitle]',
+  selector: '[kirbyPageStickyTitle]',
 })
-export class PageFloatingTitleDirective {}
+export class PageStickyTitleDirective {}
 
 @Directive({
-  selector: '[kirbyPageFloatingActions]',
+  selector: '[kirbyPageStickyToolbarTitle]',
 })
-export class PageFloatingActionsDirective {}
+export class PageStickyToolbarTitleDirective {}
+
+@Directive({
+  selector: '[kirbyPageStickyActions]',
+})
+export class PageStickyActionsDirective {}
 
 @Directive({
   selector: '[kirbyPageContent]',
@@ -86,19 +91,33 @@ export class PageActionsComponent implements AfterContentInit {
     ]),
   ],
 })
-export class PageComponent implements OnInit, OnDestroy, AfterViewInit {
+export class PageComponent implements OnInit, OnDestroy, AfterContentInit, AfterViewInit {
   @Input() title?: string;
+  @Input() toolbarTitle?: string;
   @Input() titleAlignment?: 'left' | 'center' | 'right' = 'left';
-  @Input() headerOnly?: boolean;
   @Input() defaultBackHref?: string;
 
-  @ViewChild('pageTitle', { read: ElementRef }) pageTitle: ElementRef;
-  @ViewChild('headerButtons', { read: ElementRef }) headerButtons: ElementRef;
-  @ContentChild(PageFloatingTitleDirective, { read: TemplateRef }) titleTemplate: TemplateRef<any>;
-  @ContentChild(PageFloatingActionsDirective, { read: TemplateRef }) actionsTemplate: TemplateRef<any>;
-  @ContentChild(PageContentDirective, { read: TemplateRef }) contentTemplate: TemplateRef<any>;
+  @ViewChild('pageTitle', { read: ElementRef })
+  private pageTitle: ElementRef;
+  @ViewChild('toolbarButtons', { read: ElementRef })
+  private toolbarButtons: ElementRef;
+  @ViewChild('simpleTitleTemplate', { read: TemplateRef })
+  private simpleTitleTemplate: TemplateRef<any>;
+  @ViewChild('simpleToolbarTitleTemplate', { read: TemplateRef })
+  private simpleToolbarTitleTemplate: TemplateRef<any>;
+  @ContentChild(PageStickyTitleDirective, { read: TemplateRef })
+  private customTitleTemplate: TemplateRef<any>;
+  @ContentChild(PageStickyToolbarTitleDirective, { read: TemplateRef })
+  private customToolbarTitleTemplate: TemplateRef<any>;
+  @ContentChild(PageStickyActionsDirective, { read: TemplateRef })
+  actionsTemplate: TemplateRef<any>;
+  @ContentChild(PageContentDirective, { read: TemplateRef })
+  contentTemplate: TemplateRef<any>;
   @ContentChild(PageContentFixedDirective, { read: TemplateRef }) fixedContent: TemplateRef<any>;
 
+  hasPageTitle: boolean;
+  titleTemplate: TemplateRef<any>;
+  toolbarTitleTemplate: TemplateRef<any>;
   toolbarContentVisibility: 'visible' | 'hidden' = 'hidden';
   private pageTitleObserver;
 
@@ -108,34 +127,21 @@ export class PageComponent implements OnInit, OnDestroy, AfterViewInit {
     this.removeWrapper();
   }
 
-  ngAfterViewInit(): void {
-    if (!this.headerOnly) {
-      this.pageTitleObserver = this.observePageTitle();
-    } else {
+  ngAfterContentInit(): void {
+    this.hasPageTitle = !!this.title || !!this.customTitleTemplate;
+    if (!this.hasPageTitle) {
       this.toolbarContentVisibility = 'visible';
     }
+    this.setTitleTemplates();
+  }
+
+  ngAfterViewInit(): void {
+    if (this.hasPageTitle) {
+      this.pageTitleObserver = this.observePageTitle();
+    }
     if (this.actionsTemplate) {
-      this.setHeaderButtonsToSmall();
+      this.styleToolbarButtons();
     }
-  }
-
-  setHeaderButtonsToSmall() {
-    if (this.headerButtons && this.headerButtons.nativeElement) {
-      const buttons = this.headerButtons.nativeElement.querySelectorAll('[kirby-button]');
-      buttons.forEach((button) => {
-        this.renderer.addClass(button, 'sm');
-        this.renderer.removeClass(button, 'lg');
-      });
-    }
-  }
-
-  removeWrapper() {
-    const parent = this.elementRef.nativeElement.parentNode;
-    const header = this.elementRef.nativeElement.childNodes[0];
-    const content = this.elementRef.nativeElement.childNodes[1];
-    this.renderer.removeChild(parent, this.elementRef.nativeElement);
-    this.renderer.appendChild(parent, header);
-    this.renderer.appendChild(parent, content);
   }
 
   ngOnDestroy(): void {
@@ -144,7 +150,39 @@ export class PageComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  observePageTitle() {
+  private setTitleTemplates() {
+    this.titleTemplate = this.customTitleTemplate || this.simpleTitleTemplate;
+    if (this.customToolbarTitleTemplate) {
+      this.toolbarTitleTemplate = this.customToolbarTitleTemplate;
+    } else {
+      this.toolbarTitleTemplate = this.toolbarTitle
+        ? this.simpleToolbarTitleTemplate
+        : this.titleTemplate;
+    }
+  }
+
+  private styleToolbarButtons() {
+    if (this.toolbarButtons && this.toolbarButtons.nativeElement) {
+      const buttons = this.toolbarButtons.nativeElement.querySelectorAll('[kirby-button]');
+      buttons.forEach((button) => {
+        this.renderer.addClass(button, 'sm');
+        this.renderer.removeClass(button, 'lg');
+        this.renderer.addClass(button, 'attention-level4');
+        this.renderer.removeClass(button, 'attention-level2');
+      });
+    }
+  }
+
+  private removeWrapper() {
+    const parent = this.elementRef.nativeElement.parentNode;
+    const header = this.elementRef.nativeElement.childNodes[0];
+    const content = this.elementRef.nativeElement.childNodes[1];
+    this.renderer.removeChild(parent, this.elementRef.nativeElement);
+    this.renderer.appendChild(parent, header);
+    this.renderer.appendChild(parent, content);
+  }
+
+  private observePageTitle() {
     const options = {
       rootMargin: '0px',
     };
