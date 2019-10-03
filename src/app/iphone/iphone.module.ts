@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
-import { IphoneComponent } from '~/app/iphone/iphone.component';
+
+import { IphoneComponent } from './iphone.component';
 
 @NgModule({
   imports: [],

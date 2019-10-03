@@ -9,6 +9,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+
 import { ColorHelper } from '@kirbydesign/designsystem/helpers/color-helper';
 
 @Component({
@@ -17,7 +18,7 @@ import { ColorHelper } from '@kirbydesign/designsystem/helpers/color-helper';
   styleUrls: ['./iphone.component.scss'],
 })
 export class IphoneComponent implements OnChanges, AfterViewInit {
-  @Input('src') src: string;
+  @Input() src: string;
   trustedSrc: SafeResourceUrl;
 
   @ViewChild('iframe', { read: ElementRef }) iframe: ElementRef;
