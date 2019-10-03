@@ -1,6 +1,3 @@
-import { Component } from '@angular/core';
-
-@Component({})
 export class BasePageExampleComponent {
   content = `<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci animi aperiam deserunt dolore error esse
             laborum magni natus nihil optio perferendis placeat, quae sed, sequi sunt totam voluptatem! Dicta,
