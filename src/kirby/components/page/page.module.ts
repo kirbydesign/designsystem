@@ -5,8 +5,9 @@ import {
   PageComponent,
   PageContentDirective,
   PageContentFixedDirective,
-  PageFloatingActionsDirective,
-  PageFloatingTitleDirective,
+  PageStickyActionsDirective,
+  PageStickyTitleDirective,
+  PageStickyToolbarTitleDirective,
   PageContentComponent,
   PageActionsComponent,
 } from './page.component';
@@ -14,8 +15,9 @@ import {
 @NgModule({
   declarations: [
     PageComponent,
-    PageFloatingTitleDirective,
-    PageFloatingActionsDirective,
+    PageStickyTitleDirective,
+    PageStickyToolbarTitleDirective,
+    PageStickyActionsDirective,
     PageContentDirective,
     PageContentFixedDirective,
     PageContentComponent,
@@ -24,8 +26,9 @@ import {
   imports: [CommonModule, IonicModule],
   exports: [
     PageComponent,
-    PageFloatingTitleDirective,
-    PageFloatingActionsDirective,
+    PageStickyTitleDirective,
+    PageStickyToolbarTitleDirective,
+    PageStickyActionsDirective,
     PageContentDirective,
     PageContentFixedDirective,
     PageContentComponent,

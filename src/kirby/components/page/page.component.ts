@@ -19,14 +19,19 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { ButtonComponent } from '../button/button.component';
 
 @Directive({
-  selector: '[kirbyPageFloatingTitle]',
+  selector: '[kirbyPageStickyTitle]',
 })
-export class PageFloatingTitleDirective {}
+export class PageStickyTitleDirective {}
 
 @Directive({
-  selector: '[kirbyPageFloatingActions]',
+  selector: '[kirbyPageStickyToolbarTitle]',
 })
-export class PageFloatingActionsDirective {}
+export class PageStickyToolbarTitleDirective {}
+
+@Directive({
+  selector: '[kirbyPageStickyActions]',
+})
+export class PageStickyActionsDirective {}
 
 @Directive({
   selector: '[kirbyPageContent]',
@@ -100,9 +105,11 @@ export class PageComponent implements OnInit, OnDestroy, AfterContentInit, After
   private simpleTitleTemplate: TemplateRef<any>;
   @ViewChild('simpleToolbarTitleTemplate', { read: TemplateRef })
   private simpleToolbarTitleTemplate: TemplateRef<any>;
-  @ContentChild(PageFloatingTitleDirective, { read: TemplateRef })
+  @ContentChild(PageStickyTitleDirective, { read: TemplateRef })
   private customTitleTemplate: TemplateRef<any>;
-  @ContentChild(PageFloatingActionsDirective, { read: TemplateRef })
+  @ContentChild(PageStickyToolbarTitleDirective, { read: TemplateRef })
+  private customToolbarTitleTemplate: TemplateRef<any>;
+  @ContentChild(PageStickyActionsDirective, { read: TemplateRef })
   actionsTemplate: TemplateRef<any>;
   @ContentChild(PageContentDirective, { read: TemplateRef })
   contentTemplate: TemplateRef<any>;
@@ -125,10 +132,7 @@ export class PageComponent implements OnInit, OnDestroy, AfterContentInit, After
     if (!this.hasPageTitle) {
       this.toolbarContentVisibility = 'visible';
     }
-    this.titleTemplate = this.customTitleTemplate || this.simpleTitleTemplate;
-    this.toolbarTitleTemplate = this.toolbarTitle
-      ? this.simpleToolbarTitleTemplate
-      : this.titleTemplate;
+    this.setTitleTemplates();
   }
 
   ngAfterViewInit(): void {
@@ -140,7 +144,22 @@ export class PageComponent implements OnInit, OnDestroy, AfterContentInit, After
     }
   }
 
-  styleToolbarButtons() {
+  ngOnDestroy(): void {
+    if (this.pageTitleObserver) {
+      this.pageTitleObserver.disconnect();
+    }
+  }
+
+  private setTitleTemplates() {
+    this.titleTemplate = this.customTitleTemplate || this.simpleTitleTemplate;
+    if (this.customToolbarTitleTemplate) {
+      this.toolbarTitleTemplate = this.customToolbarTitleTemplate;
+    } else {
+      this.toolbarTitle ? this.simpleToolbarTitleTemplate : this.titleTemplate;
+    }
+  }
+
+  private styleToolbarButtons() {
     if (this.toolbarButtons && this.toolbarButtons.nativeElement) {
       const buttons = this.toolbarButtons.nativeElement.querySelectorAll('[kirby-button]');
       buttons.forEach((button) => {
@@ -152,7 +171,7 @@ export class PageComponent implements OnInit, OnDestroy, AfterContentInit, After
     }
   }
 
-  removeWrapper() {
+  private removeWrapper() {
     const parent = this.elementRef.nativeElement.parentNode;
     const header = this.elementRef.nativeElement.childNodes[0];
     const content = this.elementRef.nativeElement.childNodes[1];
@@ -161,13 +180,7 @@ export class PageComponent implements OnInit, OnDestroy, AfterContentInit, After
     this.renderer.appendChild(parent, content);
   }
 
-  ngOnDestroy(): void {
-    if (this.pageTitleObserver) {
-      this.pageTitleObserver.disconnect();
-    }
-  }
-
-  observePageTitle() {
+  private observePageTitle() {
     const options = {
       rootMargin: '0px',
     };
