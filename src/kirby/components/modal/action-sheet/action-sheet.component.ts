@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, HostBinding } from '@angular/core';
 
 import { ActionSheetItem } from './config/action-sheet-item';
 
@@ -16,6 +16,8 @@ export class ActionSheetComponent {
   @Input() items: Array<ActionSheetItem>;
   @Output() cancel = new EventEmitter();
   @Output() itemSelect: EventEmitter<ActionSheetItem> = new EventEmitter<ActionSheetItem>();
+
+  @HostBinding('class.ion-page') private _ionPageReset = false;
 
   onItemSelect(selection: ActionSheetItem) {
     this.itemSelect.emit(selection);
