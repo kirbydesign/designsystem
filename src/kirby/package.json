@@ -24,6 +24,7 @@
   "homepage": "https://github.com/kirbydesign/designsystem#readme",
   "types": "index.d.ts",
   "dependencies": {
+    "@angular/cdk": "7.3.7",
     "@ionic/angular": "4.6.2",
     "highcharts": "7.0.3",
     "moment": "2.24.0"
