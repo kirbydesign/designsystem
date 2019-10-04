@@ -54,12 +54,12 @@ ion-back-button {
  * Page Content
  */
 ion-content {
-  --padding-start: #{size('s')};
-  --padding-end: #{size('s')};
+  --padding-start: var(--page-content-padding-start, #{size('s')});
+  --padding-end: var(--page-content-padding-end, #{size('s')});;
   --background: #{get-color('background-color')};
 
   .content-inner {
-    max-width: 720px;
+    max-width: var(--page-content-max-width, 720px);
     margin: 0 auto;
     padding-bottom: size('xl');
   }  

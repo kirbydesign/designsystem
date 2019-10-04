@@ -36,6 +36,7 @@ import { PageSimpleExampleComponent } from './page-example/simple/page-simple-ex
 import { PageAlignmentAndToolbarTitleExampleComponent } from './page-example/alignment-and-toolbar-title/page-alignment-and-toolbar-title-example.component';
 import { PageAdvancedExampleComponent } from './page-example/advanced/page-advanced-example.component';
 import { FormFieldExampleComponent } from './form-field-example/form-field-example.component';
+import { ExamplesComponent } from './examples.component';
 
 // Example of "custom" icons
 export const iconSettings: IconSettings = {
@@ -52,6 +53,7 @@ export const iconSettings: IconSettings = {
 };
 
 export const COMPONENT_DECLARATIONS: any[] = [
+  ExamplesComponent,
   ButtonExampleComponent,
   SlideButtonExampleComponent,
   CardExampleComponent,

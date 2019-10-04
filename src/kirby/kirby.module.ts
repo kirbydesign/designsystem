@@ -14,6 +14,8 @@ import { LoadingOverlayComponent } from './components/loading-overlay/loading-ov
 import { ListItemColorDirective } from './components/list/directives/list-item-color.directive';
 import { PageModule } from '@kirbydesign/designsystem/components/page/page.module';
 import { FormFieldMessageComponent } from './components/form-field/form-field-message/form-field-message.component';
+import { AppModule } from '@kirbydesign/designsystem/components/app/app.module';
+import { RouterOutletModule } from '@kirbydesign/designsystem/components/router-outlet/router-outlet.module';
 
 @NgModule({
   imports: [
@@ -22,6 +24,8 @@ import { FormFieldMessageComponent } from './components/form-field/form-field-me
     IonicModule.forRoot({
       mode: 'ios',
     }),
+    AppModule,
+    RouterOutletModule,
     PageModule,
     OverlayModule,
   ],
@@ -36,6 +40,13 @@ import { FormFieldMessageComponent } from './components/form-field/form-field-me
   ],
   providers: [...providerDeclarations],
   entryComponents: [ModalWrapperComponent, ActionSheetComponent, FullscreenLoadingOverlayComponent],
-  exports: [InfiniteScrollDirective, LoadingOverlayComponent, PageModule, ...declarations],
+  exports: [
+    InfiniteScrollDirective,
+    LoadingOverlayComponent,
+    AppModule,
+    RouterOutletModule,
+    PageModule,
+    ...declarations,
+  ],
 })
 export class KirbyModule {}
