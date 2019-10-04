@@ -16,6 +16,10 @@ ion-toolbar {
   --padding-end: #{size('s')};
 }
 
+ion-title {
+  box-sizing: border-box;
+}
+
 ion-back-button {
   --color: #{get-color('black')};
   --icon-font-size: 24px;

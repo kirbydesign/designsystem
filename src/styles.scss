@@ -46,7 +46,7 @@ body, html {
   height: 100%;
 }
 
-*:not(ion-header):not(ion-toolbar):not(ion-title):not(ion-content),
+*,
 *:before, *:after {
   box-sizing: inherit;
 }
