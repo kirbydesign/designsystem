@@ -168,6 +168,27 @@ const MOCK_DIRECTIVES = MockDirectives(
   ListItemColorDirective
 );
 
+function modalControllerFactory() {
+  return createSpyObj('ModalController', [
+    'showModal',
+    'showActionSheet',
+    'showAlert',
+    'register',
+    'hideTopmost',
+  ]);
+}
+
+function toastControllerFactory() {
+  return createSpyObj('ToastController', ['showToast']);
+}
+
+function loadingOverlayServiceFactory() {
+  return createSpyObj<LoadingOverlayService>('LoadingOverlayService', [
+    'showLoadingOverlay',
+    'hideLoadingOverlay',
+  ]);
+}
+
 @NgModule({
   imports: [CommonModule],
   declarations: [NON_MOCKED_COMPONENTS, MOCK_COMPONENTS, MOCK_DIRECTIVES],
@@ -175,25 +196,15 @@ const MOCK_DIRECTIVES = MockDirectives(
   providers: [
     {
       provide: ModalController,
-      useValue: createSpyObj('ModalController', [
-        'showModal',
-        'showModalAnimateIn',
-        'showActionSheet',
-        'showAlert',
-        'register',
-        'hideTopmost',
-      ]),
+      useFactory: modalControllerFactory,
     },
     {
       provide: ToastController,
-      useValue: createSpyObj('ToastController', ['showToast']),
+      useFactory: toastControllerFactory,
     },
     {
       provide: LoadingOverlayService,
-      useValue: createSpyObj<LoadingOverlayService>('LoadingOverlayService', [
-        'showLoadingOverlay',
-        'hideLoadingOverlay',
-      ]),
+      useFactory: loadingOverlayServiceFactory,
     },
   ],
 })
