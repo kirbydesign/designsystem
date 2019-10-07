@@ -4,6 +4,7 @@ import { NavParams } from '@ionic/angular';
 import { ModalConfig } from './config/modal-config';
 import { COMPONENT_PROPS, ModalConfigHelper } from './config/modal-config.helper';
 import { IModalController } from '../services/modal.controller.interface';
+import { ModalHelper } from '@kirbydesign/designsystem/helpers/modal-helper';
 
 @Component({
   templateUrl: './modal-wrapper.component.html',
@@ -28,11 +29,7 @@ export class ModalWrapperComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    const el = this.modalWrapper.nativeElement;
-    setTimeout(() => {
-      el.focus();
-      el.blur();
-    }, 50);
+    ModalHelper.blurNativeWrapper(this.modalWrapper.nativeElement);
   }
 
   onFocusChange() {

@@ -4,6 +4,7 @@ import { Component, ElementRef, ViewChild, AfterViewInit, OnInit } from '@angula
 
 import { AlertConfig } from '../modal/alert/config/alert-config';
 import { IModalController } from '../modal/services/modal.controller.interface';
+import { ModalHelper } from '@kirbydesign/designsystem/helpers/modal-helper';
 
 @Component({
   templateUrl: './alert.component.html',
@@ -46,11 +47,7 @@ export class AlertComponent implements AfterViewInit, OnInit {
   }
 
   ngAfterViewInit(): void {
-    const el = this.alertWrapper.nativeElement;
-    setTimeout(() => {
-      el.focus();
-      el.blur();
-    }, 50);
+    ModalHelper.blurNativeWrapper(this.alertWrapper.nativeElement);
   }
 
   onFocusChange() {
