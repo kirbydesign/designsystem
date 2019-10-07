@@ -17,8 +17,6 @@ export class ActionSheetComponent {
   @Output() cancel = new EventEmitter();
   @Output() itemSelect: EventEmitter<ActionSheetItem> = new EventEmitter<ActionSheetItem>();
 
-  @HostBinding('class.ion-page') private _ionPageReset = false;
-
   onItemSelect(selection: ActionSheetItem) {
     this.itemSelect.emit(selection);
   }
