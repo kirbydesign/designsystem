@@ -12,6 +12,8 @@
 }
 
 .tab-button {
+  font-size: font-size('xxs');
+
   .badge {
     left: calc(50% + 5px);
     top: 0;
@@ -20,6 +22,7 @@
   }
 
   @include media(">=large") {
+    font-size: font-size('s');
     flex-direction: row;
 
     .icon-container {
