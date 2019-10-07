@@ -13,6 +13,10 @@ export class ColorHelper {
     });
   }
 
+  public static getBackgroundColor() {
+    return ColorHelper.getColor('background-color');
+  }
+
   public static getThemeColor(name: string) {
     return ColorHelper.getColor(name);
   }

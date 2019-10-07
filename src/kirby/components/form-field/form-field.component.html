@@ -1,0 +1,19 @@
+<label *ngIf="label">
+  <div class="text">{{label}}</div>
+  <ng-container *ngTemplateOutlet="slottedInput"></ng-container>
+</label>
+<ng-container *ngIf="!label">
+  <ng-container *ngTemplateOutlet="slottedInput"></ng-container>
+</ng-container>
+<div *ngIf="message || counter" class="texts">  
+  <kirby-form-field-message class="message" [text]="message"></kirby-form-field-message>
+
+  <div class="counter">
+    <ng-content select="kirby-input-counter"></ng-content>
+  </div>
+</div>
+
+<ng-template #slottedInput>
+  <ng-content select="input[kirby-input]"></ng-content>
+  <ng-content select="textarea[kirby-textarea]"></ng-content>
+</ng-template>
