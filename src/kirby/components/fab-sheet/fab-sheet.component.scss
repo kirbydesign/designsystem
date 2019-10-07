@@ -15,9 +15,13 @@ ion-fab-button {
 }
 
 ion-fab {
-    position: absolute;
+    position: fixed;
     bottom: size('s');
     right: size('s');
+}
+
+:host-context(.fixed-content) ion-fab {
+    position: absolute;
 }
 
 ion-backdrop {
