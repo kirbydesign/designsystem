@@ -6,14 +6,12 @@ $image-diameter-medium: 56px;
 $image-diameter-large:  96px;
 
 :host {
+  --kirby-badge-elevation: #{get-elevation(2)};
+  --kirby-badge-position: absolute;
+  --kirby-badge-right: -4px;
+  --kirby-badge-top: 0;
+  --kirby-badge-zindex: 2;
   position: relative;
-
-  ::ng-deep kirby-badge {
-    position: absolute;
-    z-index: 2;
-    top: size('-xxs');
-    right: size('-xxs');
-  }
 }
 
 .avatar {
@@ -74,14 +72,11 @@ $image-diameter-large:  96px;
       font-size: font-size('s');
     }
   }
-
-  ::ng-deep kirby-badge {
-    top: size('-xxs');
-    right: size('-xxs');
-  }
 }
 
 :host(.md){
+  --kirby-badge-right: 0;
+
   .avatar {
     width: $image-diameter-medium;
     height: $image-diameter-medium;
@@ -94,14 +89,12 @@ $image-diameter-large:  96px;
       font-size: font-size('m');
     }
   }
-
-  ::ng-deep kirby-badge {
-    top: size('-xxs');
-    right: 0;
-  }
 }
 
 :host(.lg){
+  --kirby-badge-right: 4px;
+  --kirby-badge-top: 8px;
+
   .avatar {
     width: $image-diameter-large;
     height: $image-diameter-large;
@@ -113,11 +106,6 @@ $image-diameter-large:  96px;
     .avatar-text {
       font-size: font-size('xl');
     }
-  }
-
-  ::ng-deep kirby-badge {
-    top: 0;
-    right: size('xxs');
   }
 }
 
