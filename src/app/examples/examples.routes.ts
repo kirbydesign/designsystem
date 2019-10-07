@@ -40,42 +40,6 @@ export const routes: Routes = [
     component: ExamplesComponent,
     children: [
       {
-        path: 'button',
-        component: ButtonExampleComponent,
-      },
-      {
-        path: 'slide-button',
-        component: SlideButtonExampleComponent,
-      },
-      {
-        path: 'card',
-        component: CardExampleComponent,
-      },
-      {
-        path: 'list',
-        component: ListExampleComponent,
-      },
-      {
-        path: 'list-swipe',
-        component: ListSwipeExampleComponent,
-      },
-      {
-        path: 'list-no-shape',
-        component: ListNoShapeExampleComponent,
-      },
-      {
-        path: 'list-load-on-demand',
-        component: ListLoadOnDemandExampleComponent,
-      },
-      {
-        path: 'chart',
-        component: ChartExampleComponent,
-      },
-      {
-        path: 'grid',
-        component: GridExampleComponent,
-      },
-      {
         path: 'page',
         children: [
           {
@@ -97,86 +61,122 @@ export const routes: Routes = [
           },
         ],
       },
-      {
-        path: 'chip',
-        component: ChipExampleComponent,
-      },
-      {
-        path: 'avatar',
-        component: AvatarExampleComponent,
-      },
-      {
-        path: 'fonts',
-        component: FontsExampleComponent,
-      },
-      {
-        path: 'spinner',
-        component: SpinnerExampleComponent,
-      },
-      {
-        path: 'modal',
-        component: ModalExampleComponent,
-      },
-      {
-        path: 'loading-overlay',
-        component: LoadingOverlayExampleComponent,
-      },
-      {
-        path: 'action-sheet',
-        component: ActionSheetExampleComponent,
-      },
-      {
-        path: 'alert',
-        component: AlertExampleComponent,
-      },
-      {
-        path: 'segmented-control',
-        component: SegmentedControlExampleComponent,
-      },
-      {
-        path: 'badge',
-        component: BadgeExampleComponent,
-      },
-      {
-        path: 'icon',
-        component: IconExampleComponent,
-      },
-      {
-        path: 'checkbox',
-        component: CheckboxExampleComponent,
-      },
-      {
-        path: 'toast',
-        component: ToastExampleComponent,
-      },
-      {
-        path: 'toggle',
-        component: ToggleExampleComponent,
-      },
-      {
-        path: 'calendar',
-        component: CalendarExampleComponent,
-      },
-      {
-        path: 'calendar-card',
-        component: CalendarCardExampleComponent,
-      },
-      {
-        path: 'empty-state',
-        component: EmptyStateExampleComponent,
-      },
-      {
-        path: 'toolbar',
-        component: ToolbarExampleComponent,
-      },
-      {
-        path: 'form-field',
-        component: FormFieldExampleComponent,
-      },
-      {
-        path: 'fab-sheet',
-        component: FabSheetExampleComponent,
-      },
     ],
+  },
+  {
+    path: 'button',
+    component: ButtonExampleComponent,
+  },
+  {
+    path: 'slide-button',
+    component: SlideButtonExampleComponent,
+  },
+  {
+    path: 'card',
+    component: CardExampleComponent,
+  },
+  {
+    path: 'list',
+    component: ListExampleComponent,
+  },
+  {
+    path: 'list-swipe',
+    component: ListSwipeExampleComponent,
+  },
+  {
+    path: 'list-no-shape',
+    component: ListNoShapeExampleComponent,
+  },
+  {
+    path: 'list-load-on-demand',
+    component: ListLoadOnDemandExampleComponent,
+  },
+  {
+    path: 'chart',
+    component: ChartExampleComponent,
+  },
+  {
+    path: 'grid',
+    component: GridExampleComponent,
+  },
+  {
+    path: 'chip',
+    component: ChipExampleComponent,
+  },
+  {
+    path: 'avatar',
+    component: AvatarExampleComponent,
+  },
+  {
+    path: 'fonts',
+    component: FontsExampleComponent,
+  },
+  {
+    path: 'spinner',
+    component: SpinnerExampleComponent,
+  },
+  {
+    path: 'modal',
+    component: ModalExampleComponent,
+  },
+  {
+    path: 'loading-overlay',
+    component: LoadingOverlayExampleComponent,
+  },
+  {
+    path: 'action-sheet',
+    component: ActionSheetExampleComponent,
+  },
+  {
+    path: 'alert',
+    component: AlertExampleComponent,
+  },
+  {
+    path: 'segmented-control',
+    component: SegmentedControlExampleComponent,
+  },
+  {
+    path: 'badge',
+    component: BadgeExampleComponent,
+  },
+  {
+    path: 'icon',
+    component: IconExampleComponent,
+  },
+  {
+    path: 'checkbox',
+    component: CheckboxExampleComponent,
+  },
+  {
+    path: 'toast',
+    component: ToastExampleComponent,
+  },
+  {
+    path: 'toggle',
+    component: ToggleExampleComponent,
+  },
+  {
+    path: 'calendar',
+    component: CalendarExampleComponent,
+  },
+  {
+    path: 'calendar-card',
+    component: CalendarCardExampleComponent,
+  },
+  {
+    path: 'empty-state',
+    component: EmptyStateExampleComponent,
+  },
+  {
+    path: 'toolbar',
+    component: ToolbarExampleComponent,
+  },
+  {
+    path: 'form-field',
+    component: FormFieldExampleComponent,
+  },
+  {
+    path: 'fab-sheet',
+    component: FabSheetExampleComponent,
   },
 ];
