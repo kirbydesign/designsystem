@@ -20,9 +20,15 @@ ion-fab {
     right: size('s');
 }
 
+:host-context(.fixed-content) ion-fab {
+    position: absolute;
+}
+
 ion-backdrop {
     opacity: 0;
     transition: opacity 750ms;
+    position: fixed;
+    z-index: 999;
 }
 
 :host(.backdrop-visible) ion-backdrop {

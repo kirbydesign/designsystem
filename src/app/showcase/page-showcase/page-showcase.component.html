@@ -1,0 +1,53 @@
+<div class="example">
+    <p>Page is a container element for a Kirby page. There should only be one <code>kirby-page</code> element per page. The page component gives you the following:</p>
+    <ul>
+        <li>Scrollable page title and actions</li>
+        <li>Back navigation</li>
+        <li>Default markup for page title</li>
+        <li>Spacing of content</li>
+    </ul>
+
+    <div class="page-example">
+        <div>
+            <h2>Simple Page</h2>
+            <p>For normal pages it's enough to just wrap the page content in a <code>kirby-page-content</code> tag,
+            which is wrapped in a <code>kirby-page</code> tag and supplied with an optional title:</p>   
+            <kirby-code-viewer [html]="simpleExampleHtml"></kirby-code-viewer>
+        </div>
+
+        <kirby-iphone src="/examples/page" showExternalLink="true"></kirby-iphone>
+    </div>
+    
+    <div class="page-example">
+        <div>
+            <h2>Title Alignment & Custom Toolbar Title</h2>
+            <p>Titles are default left aligned but can be centered (<code>titleAlignment="center"</code>) or right aligned (<code>titleAlignment="right"</code>).</p>
+            <p>It also possible to supply a custom toolbar title (<code>toolbarTitle="A Different Title"</code>) that is shown when the page title is scrolled above the toolbar.</p>
+            <p>If the <code>toolbarTitle</code> property is specified <em>instead</em> of <code>title</code>, the page title and actions will only be shown in the toolbar and not on the page itself.</p>
+            <kirby-code-viewer [html]="alignmentAndToolbarTitleExampleHtml"></kirby-code-viewer>
+        </div>
+
+        <div>
+            <kirby-iphone src="/examples/page/alignment-toolbar-title" showExternalLink="true"></kirby-iphone>
+        </div>
+    </div>
+
+    <div class="page-example">
+        <div>
+            <h2>Advanced Page</h2>
+            <p>For more advanced scenarios, you can supply a custom page title element, action buttons and fixed content:</p>
+            <kirby-code-viewer [html]="advancedExampleHtml"></kirby-code-viewer>
+        </div>
+
+        <kirby-iphone src="/examples/page/advanced" showExternalLink="true"></kirby-iphone>
+    </div>
+
+
+    <h2>Page properties:</h2>
+    <kirby-showcase-properties [properties]="properties"></kirby-showcase-properties>
+
+    <br />
+
+    <h2>CSS Custom Properties:</h2>
+    <kirby-showcase-properties [properties]="cssProperties"></kirby-showcase-properties>
+</div>

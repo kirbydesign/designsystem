@@ -37,8 +37,10 @@ import { SlideButtonComponent } from '../components/slide-button/slide-button.co
 import { ToolbarComponent } from '../components/toolbar/toolbar.component';
 import { ThemeColorDirective } from '../directives/theme-color/theme-color.directive';
 import { ListItemColorDirective } from '../components/list/directives/list-item-color.directive';
-import { FormFieldMessageComponent } from './../components/form-field/form-field-message/form-field-message.component';
+import { LoadingOverlayComponent } from '../components/loading-overlay/loading-overlay.component';
+import { LoadingOverlayService } from '../components/loading-overlay/fullscreen-loading-overlay/loading-overlay.service';
 import { FormFieldComponent } from '../components/form-field/form-field.component';
+import { FormFieldMessageComponent } from '../components/form-field/form-field-message/form-field-message.component';
 import { InputComponent } from '../components/form-field/input/input.component';
 import { TextareaComponent } from '../components/form-field/textarea/textarea.component';
 
@@ -89,21 +91,21 @@ class FakeIonItemGroupComponent {}
 })
 class FakeIonItemSlidingComponent {}
 
- @Component({
+@Component({
   // tslint:disable
   selector: 'ion-item-options',
   template: '<ng-content></ng-content>',
 })
 class FakeIonItemOptionsComponent {}
 
- @Component({
+@Component({
   // tslint:disable
   selector: 'ion-item-option',
   template: '<ng-content></ng-content>',
 })
 class FakeIonItemOptionComponent {}
 
- @Component({
+@Component({
   // tslint:disable
   selector: 'ion-label',
   template: '<ng-content></ng-content>',
@@ -139,6 +141,7 @@ const MOCK_COMPONENTS = MockComponents(
   FakeIonItemOptionsComponent,
   FakeIonItemOptionComponent,
   FakeIonLabelComponent,
+  LoadingOverlayComponent
 );
 
 /**
@@ -159,7 +162,32 @@ const NON_MOCKED_COMPONENTS = [
   ListSectionHeaderDirective,
 ];
 
-const MOCK_DIRECTIVES = MockDirectives(InfiniteScrollDirective, ThemeColorDirective, ListItemColorDirective);
+const MOCK_DIRECTIVES = MockDirectives(
+  InfiniteScrollDirective,
+  ThemeColorDirective,
+  ListItemColorDirective
+);
+
+function modalControllerFactory() {
+  return createSpyObj('ModalController', [
+    'showModal',
+    'showActionSheet',
+    'showAlert',
+    'register',
+    'hideTopmost',
+  ]);
+}
+
+function toastControllerFactory() {
+  return createSpyObj('ToastController', ['showToast']);
+}
+
+function loadingOverlayServiceFactory() {
+  return createSpyObj<LoadingOverlayService>('LoadingOverlayService', [
+    'showLoadingOverlay',
+    'hideLoadingOverlay',
+  ]);
+}
 
 @NgModule({
   imports: [CommonModule],
@@ -168,17 +196,15 @@ const MOCK_DIRECTIVES = MockDirectives(InfiniteScrollDirective, ThemeColorDirect
   providers: [
     {
       provide: ModalController,
-      useValue: createSpyObj('ModalController', [
-        'showModal',
-        'showActionSheet',
-        'showAlert',
-        'register',
-        'hideTopmost',
-      ]),
+      useFactory: modalControllerFactory,
     },
     {
       provide: ToastController,
-      useValue: createSpyObj('ToastController', ['showToast']),
+      useFactory: toastControllerFactory,
+    },
+    {
+      provide: LoadingOverlayService,
+      useFactory: loadingOverlayServiceFactory,
     },
   ],
 })
