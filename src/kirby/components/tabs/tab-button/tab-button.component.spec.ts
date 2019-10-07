@@ -1,6 +1,6 @@
 import { Spectator, createTestComponentFactory } from '@netbasal/spectator';
-import { MockComponent } from 'ng-mocks';
-import * as ionic from '@ionic/angular';
+import { MockModule } from 'ng-mocks';
+import { IonicModule } from '@ionic/angular';
 
 import { TabButtonComponent } from './tab-button.component';
 
@@ -8,8 +8,9 @@ describe('TabsComponent', () => {
   let spectator: Spectator<TabButtonComponent>;
 
   const createHost = createTestComponentFactory({
+    imports: [MockModule(IonicModule)],
     component: TabButtonComponent,
-    declarations: [MockComponent(ionic.IonToolbar), MockComponent(ionic.IonTitle)],
+    declarations: [],
   });
 
   beforeEach(() => {
