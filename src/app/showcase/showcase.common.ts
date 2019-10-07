@@ -30,6 +30,7 @@ import { EmptyStateShowcaseComponent } from './empty-state-showcase/empty-state-
 import { LoadingOverlayShowcaseComponent } from './loading-overlay-showcase/loading-overlay-showcase.component';
 import { ToolbarShowcaseComponent } from './toolbar-showcase/toolbar-showcase.component';
 import { FabSheetShowcaseComponent } from './fab-sheet-showcase/fab-sheet-showcase.component';
+import { PageShowcaseComponent } from '~/app/showcase/page-showcase/page-showcase.component';
 
 export const COMPONENT_IMPORTS: any[] = [ExamplesModule, ShowcaseRoutingModule];
 
@@ -63,6 +64,7 @@ export const COMPONENT_EXPORTS: any[] = [
   ToolbarShowcaseComponent,
   FormFieldShowcaseComponent,
   FabSheetShowcaseComponent,
+  PageShowcaseComponent,
 ];
 
 export const COMPONENT_DECLARATIONS: any[] = [...COMPONENT_EXPORTS, ShowcaseComponent];

@@ -3,12 +3,14 @@
         <th>Attribute</th>
         <th>Description</th>
         <th>Type</th>
+        <th>Default</th>
     </thead>
     <tbody>
         <tr *ngFor="let prop of properties">
             <td><code>{{ prop.name }}</code></td>
-            <td>{{ prop.description }} <span *ngIf="prop.defaultValue">Default value is <code>{{ prop.defaultValue }}</code>.</span></td>
-            <td><code>{{ prop.inputValues.join(' | ') }}</code></td>
+            <td>{{ prop.description }}</td>
+            <td>{{ prop.inputValues.join(' | ') }}</td>
+            <td>{{ prop.defaultValue }}</td>
         </tr>
     </tbody>
 </table>

@@ -12,10 +12,23 @@ import { KeyHandlerDirective } from '@kirbydesign/designsystem/directives/key-ha
 import { FullscreenLoadingOverlayComponent } from './components/loading-overlay/fullscreen-loading-overlay/fullscreen-loading-overlay.component';
 import { LoadingOverlayComponent } from './components/loading-overlay/loading-overlay.component';
 import { ListItemColorDirective } from './components/list/directives/list-item-color.directive';
+import { PageModule } from '@kirbydesign/designsystem/components/page/page.module';
 import { FormFieldMessageComponent } from './components/form-field/form-field-message/form-field-message.component';
+import { AppModule } from '@kirbydesign/designsystem/components/app/app.module';
+import { RouterOutletModule } from '@kirbydesign/designsystem/components/router-outlet/router-outlet.module';
 
 @NgModule({
-  imports: [CommonModule, RouterModule, OverlayModule, IonicModule.forRoot()],
+  imports: [
+    CommonModule,
+    RouterModule,
+    IonicModule.forRoot({
+      mode: 'ios',
+    }),
+    AppModule,
+    RouterOutletModule,
+    PageModule,
+    OverlayModule,
+  ],
   declarations: [
     InfiniteScrollDirective,
     ListItemColorDirective,
@@ -27,6 +40,13 @@ import { FormFieldMessageComponent } from './components/form-field/form-field-me
   ],
   providers: [...providerDeclarations],
   entryComponents: [ModalWrapperComponent, ActionSheetComponent, FullscreenLoadingOverlayComponent],
-  exports: [InfiniteScrollDirective, LoadingOverlayComponent, ...declarations],
+  exports: [
+    InfiniteScrollDirective,
+    LoadingOverlayComponent,
+    AppModule,
+    RouterOutletModule,
+    PageModule,
+    ...declarations,
+  ],
 })
 export class KirbyModule {}

@@ -30,6 +30,7 @@ import { ToolbarShowcaseComponent } from './toolbar-showcase/toolbar-showcase.co
 import { FormFieldShowcaseComponent } from './form-field-showcase/form-field-showcase.component';
 import { ListNoShapeShowcaseComponent } from './list-no-shape-showcase/list-no-shape-showcase.component';
 import { FabSheetShowcaseComponent } from './fab-sheet-showcase/fab-sheet-showcase.component';
+import { PageShowcaseComponent } from '~/app/showcase/page-showcase/page-showcase.component';
 
 export const routes: Routes = [
   {
@@ -80,6 +81,10 @@ export const routes: Routes = [
       {
         path: 'list-no-shape',
         component: ListNoShapeShowcaseComponent,
+      },
+      {
+        path: 'page',
+        component: PageShowcaseComponent,
       },
       {
         path: 'grid',

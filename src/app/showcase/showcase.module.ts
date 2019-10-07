@@ -8,9 +8,17 @@ import { COMPONENT_IMPORTS, COMPONENT_EXPORTS, COMPONENT_DECLARATIONS } from './
 import { CodeViewerComponent } from '../shared/code-viewer/code-viewer.component';
 import { ExampleViewerComponent } from '../shared/example-viewer/example-viewer.component';
 import { ShowcasePropertiesComponent } from '../shared/showcase-properties/showcase-properties.component';
+import { IphoneModule } from '../iphone/iphone.module';
 
 @NgModule({
-  imports: [...COMPONENT_IMPORTS, CommonModule, FormsModule, IonicModule.forRoot(), KirbyModule],
+  imports: [
+    ...COMPONENT_IMPORTS,
+    CommonModule,
+    FormsModule,
+    IonicModule.forRoot(),
+    KirbyModule,
+    IphoneModule,
+  ],
   declarations: [
     ...COMPONENT_DECLARATIONS,
     CodeViewerComponent,
