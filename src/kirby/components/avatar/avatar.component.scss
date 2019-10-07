@@ -92,7 +92,8 @@ $image-diameter-large:  96px;
 }
 
 :host(.lg){
-  --kirby-badge-right: 12px;
+  --kirby-badge-right: 4px;
+  --kirby-badge-top: 8px;
 
   .avatar {
     width: $image-diameter-large;
