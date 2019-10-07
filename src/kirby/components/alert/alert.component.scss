@@ -39,7 +39,7 @@ article{
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border: 3px solid var(--kirby-medium); // TODO: I need help getting this dynamically based on themeColor
+  border: 3px solid var(--kirby-medium);
   border-radius: 50%;
 }
 
