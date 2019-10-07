@@ -38,8 +38,12 @@ export class IphoneComponent implements OnChanges, AfterViewInit {
 
   onIframeLoaded() {
     let document = this.iframe.nativeElement.contentWindow.document;
-    let ngComponent = document.getElementsByTagName('ng-component')[0];
+    let ngComponent =
+      document.getElementsByTagName('ng-component')[0] ||
+      document.getElementsByTagName('ion-app')[0];
+
     ngComponent.style.setProperty('--ion-safe-area-top', '20px');
+    ngComponent.style.setProperty('--ion-safe-area-bottom', '22px');
     this.renderer.addClass(ngComponent, 'ion-page');
 
     const backgroundColor = ColorHelper.getBackgroundColor().hex;
