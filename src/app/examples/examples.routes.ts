@@ -67,8 +67,24 @@ export const routes: Routes = [
         component: TabsExampleComponent,
         children: [
           {
+            path: '',
+            redirectTo: 'simple',
+            pathMatch: 'full',
+          },
+          {
             path: 'simple',
             component: PageSimpleExampleComponent,
+            pathMatch: 'full',
+          },
+          {
+            path: 'alignment-toolbar-title',
+            component: PageAlignmentAndToolbarTitleExampleComponent,
+            pathMatch: 'full',
+          },
+          {
+            path: 'advanced',
+            component: PageAdvancedExampleComponent,
+            pathMatch: 'full',
           },
         ],
       },
