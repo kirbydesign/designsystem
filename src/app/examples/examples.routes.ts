@@ -23,15 +23,45 @@ import { SlideButtonExampleComponent } from './slide-button-example/slide-button
 import { ToastExampleComponent } from './toast-example/toast-example.component';
 import { ToggleExampleComponent } from './toggle-example/toggle-example.component';
 import { EmptyStateExampleComponent } from './empty-state-example/empty-state-example.component';
+import { LoadingOverlayExampleComponent } from './loading-overlay-example/loading-overlay-example.component';
 import { ToolbarExampleComponent } from './toolbar-example/toolbar-example.component';
 import { ListSwipeExampleComponent } from './list/swipe/list-swipe-example.component';
 import { ListLoadOnDemandExampleComponent } from './list/load-on-demand/list-load-on-demand-example.component';
+import { FormFieldExampleComponent } from './form-field-example/form-field-example.component';
 import { FabSheetExampleComponent } from './fab-sheet-example/fab-sheet-example.component';
+import { PageSimpleExampleComponent } from './page-example/simple/page-simple-example.component';
+import { PageAdvancedExampleComponent } from './page-example/advanced/page-advanced-example.component';
+import { PageAlignmentAndToolbarTitleExampleComponent } from './page-example/alignment-and-toolbar-title/page-alignment-and-toolbar-title-example.component';
+import { ExamplesComponent } from '~/app/examples/examples.component';
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'grid',
+    component: ExamplesComponent,
+    children: [
+      {
+        path: 'page',
+        children: [
+          {
+            path: '',
+            redirectTo: 'simple',
+            pathMatch: 'full',
+          },
+          {
+            path: 'simple',
+            component: PageSimpleExampleComponent,
+          },
+          {
+            path: 'alignment-toolbar-title',
+            component: PageAlignmentAndToolbarTitleExampleComponent,
+          },
+          {
+            path: 'advanced',
+            component: PageAdvancedExampleComponent,
+          },
+        ],
+      },
+    ],
   },
   {
     path: 'button',
@@ -90,6 +120,10 @@ export const routes: Routes = [
     component: ModalExampleComponent,
   },
   {
+    path: 'loading-overlay',
+    component: LoadingOverlayExampleComponent,
+  },
+  {
     path: 'action-sheet',
     component: ActionSheetExampleComponent,
   },
@@ -136,6 +170,10 @@ export const routes: Routes = [
   {
     path: 'toolbar',
     component: ToolbarExampleComponent,
+  },
+  {
+    path: 'form-field',
+    component: FormFieldExampleComponent,
   },
   {
     path: 'fab-sheet',

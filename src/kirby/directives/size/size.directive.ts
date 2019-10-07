@@ -13,18 +13,10 @@ export class SizeDirective {
   @HostBinding('class.lg')
   isLargeSize: boolean;
   @Input() set size(size: Sizes) {
-    if (size === 'sm') {
-      this.isSmallSize = true;
-    }
-    if (size === 'md') {
-      this.isMediumSize = true;
-    }
-    if (size === 'lg') {
-      this.isLargeSize = true;
-    }
+    this.isSmallSize = size === 'sm';
+    this.isMediumSize = size === 'md';
+    this.isLargeSize = size === 'lg';
   }
-
-  constructor() {}
 }
 
 export enum Sizes {
