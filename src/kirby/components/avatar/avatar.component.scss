@@ -4,12 +4,23 @@
 $image-diameter-small:  40px;
 $image-diameter-medium: 56px;
 $image-diameter-large:  96px;
+$badge-diameter: 16px;
+
+@function get-badge-position($avatar-diameter) {
+  $cos-to-45-degrees: 0.70710678118;
+  $avatar-radius: $avatar-diameter / 2;
+  $position-from-center: round($cos-to-45-degrees * $avatar-radius);
+  $position-from-edge: $avatar-radius - $position-from-center;
+  $badge-radius: $badge-diameter / 2;
+  $badge-position: $position-from-edge - $badge-radius; 
+  @return $badge-position;
+}
 
 :host {
   --kirby-badge-elevation: #{get-elevation(2)};
   --kirby-badge-position: absolute;
-  --kirby-badge-right: -4px;
-  --kirby-badge-top: 0;
+  --kirby-badge-right: #{get-badge-position($image-diameter-small)};
+  --kirby-badge-top: #{get-badge-position($image-diameter-small)};;
   --kirby-badge-zindex: 2;
   position: relative;
 }
@@ -75,7 +86,8 @@ $image-diameter-large:  96px;
 }
 
 :host(.md){
-  --kirby-badge-right: 0;
+  --kirby-badge-right: #{get-badge-position($image-diameter-medium)};
+  --kirby-badge-top: #{get-badge-position($image-diameter-medium)};;
 
   .avatar {
     width: $image-diameter-medium;
@@ -92,8 +104,8 @@ $image-diameter-large:  96px;
 }
 
 :host(.lg){
-  --kirby-badge-right: 4px;
-  --kirby-badge-top: 8px;
+  --kirby-badge-right: #{get-badge-position($image-diameter-large)};
+  --kirby-badge-top:  #{get-badge-position($image-diameter-large)};
 
   .avatar {
     width: $image-diameter-large;
@@ -108,4 +120,3 @@ $image-diameter-large:  96px;
     }
   }
 }
-
