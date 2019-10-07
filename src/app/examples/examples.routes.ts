@@ -65,6 +65,12 @@ export const routes: Routes = [
       {
         path: 'tabs',
         component: TabsExampleComponent,
+        children: [
+          {
+            path: 'simple',
+            component: PageSimpleExampleComponent,
+          },
+        ],
       },
     ],
   },
