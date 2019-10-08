@@ -46,7 +46,7 @@
     box-shadow: get-elevation(8) !important;
 }
 
-.kirby-alert{
+.kirby-alert {
     position: fixed;
     --border-radius: #{$border-radius};
     --box-shadow: #{get-elevation(8)};
