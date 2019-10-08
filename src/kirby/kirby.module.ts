@@ -21,6 +21,8 @@ import { FormFieldMessageComponent } from './components/form-field/form-field-me
     ...declarations,
     FormFieldMessageComponent,
     AlertComponent,
+    ...declarations,
+    AlertComponent,
   ],
   providers: [...providerDeclarations],
   entryComponents: [ModalWrapperComponent, ActionSheetComponent, AlertComponent],
