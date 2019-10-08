@@ -7,7 +7,12 @@ export interface AlertConfig {
    */
   okBtnText?: string;
 
+  /**
+   * @deprecated Will be deprecated in next major version. Use `cancelBtn` instead.
+   */
   cancelBtnText?: string;
+  
+  cancelBtn?: string;
 
   icon?: {
     iconName: string;
