@@ -3,7 +3,7 @@ export interface AlertConfig {
   message?: string;
 
   /**
-   * @deprecated Will be deprecated in next major version. Use okBtn instead.
+   * @deprecated Will be deprecated in next major version. Use `okBtn` instead.
    */
   okBtnText?: string;
 
