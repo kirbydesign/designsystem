@@ -1,41 +1,45 @@
 <ion-header>
-    <ion-toolbar>
-        <ion-buttons slot="start">
-            <ion-back-button text="" [defaultHref]="defaultBackHref" icon="assets/kirby/icons/svg/arrow-back.svg"></ion-back-button>
-        </ion-buttons>
-        <ion-title [@visibility]="toolbarContentVisibility">
-            <ng-container *ngTemplateOutlet="toolbarTitleTemplate"></ng-container>
-        </ion-title>
-        <ion-buttons slot="primary" [@visibility]="toolbarContentVisibility" #toolbarButtons>
-            <ng-container *ngTemplateOutlet="actionsTemplate"></ng-container>
-        </ion-buttons>
-    </ion-toolbar>
-</ion-header>
-
-<ion-content>
-
-    <div class="content-inner">
-        <div class="page-title" [class.has-actions]="!!actionsTemplate" [ngClass]="{'text-center': titleAlignment === 'center', 'text-right': titleAlignment === 'right'}" *ngIf="hasPageTitle" #pageTitle>
-            <h1>
-                <ng-container *ngTemplateOutlet="this.titleTemplate"></ng-container>
-            </h1>
-            <div *ngIf="actionsTemplate">
-                <ng-container *ngTemplateOutlet="actionsTemplate"></ng-container>
-            </div>
-            <ng-content *ngIf="!actionsTemplate" select="kirby-page-actions"></ng-content>
-
-        </div>
-
-        <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
-        <ng-content *ngIf="!contentTemplate" select="kirby-page-content"></ng-content>
-    </div>
-
-    <div slot="fixed" class="fixed-content" *ngIf="fixedContent">
+        <ion-toolbar>
+            <ion-buttons slot="start">
+                <ion-back-button text="" [defaultHref]="defaultBackHref" icon="assets/kirby/icons/svg/arrow-back.svg"></ion-back-button>
+            </ion-buttons>
+            <ion-title [@visibility]="toolbarTitleVisibility">
+                <ng-container *ngTemplateOutlet="toolbarTitleTemplate"></ng-container>
+            </ion-title>
+            <ion-buttons slot="primary" [@visibility]="toolbarActionsVisibility" #toolbarButtons>
+                <ng-container *ngIf="hasActionsInToolbar">
+                    <ng-container *ngTemplateOutlet="customActions.template"></ng-container>
+                </ng-container>
+            </ion-buttons>
+        </ion-toolbar>
+    </ion-header>
+    
+    <ion-content>
+    
         <div class="content-inner">
-            <ng-container *ngTemplateOutlet="fixedContent"></ng-container>
+            <div *ngIf="hasPageTitle" class="page-title" [class.has-actions]="hasActionsInPage" [ngClass]="{'text-center': titleAlignment === 'center', 'text-right': titleAlignment === 'right'}" #pageTitle>
+                <h1>
+                    <ng-container *ngTemplateOutlet="titleTemplate"></ng-container>
+                </h1>
+                <ng-container *ngIf="hasActionsInPage">
+                    <div *ngIf="customActions">
+                        <ng-container *ngTemplateOutlet="customActions.template"></ng-container>
+                    </div>
+                    <ng-content *ngIf="!customActions" select="kirby-page-actions"></ng-content>            
+                </ng-container>
+            </div>
+    
+            <ng-container *ngTemplateOutlet="customContentTemplate"></ng-container>
+            <ng-content *ngIf="!customContentTemplate" select="kirby-page-content"></ng-content>
         </div>
-    </div>
-</ion-content>
-
-<ng-template #simpleTitleTemplate>{{title}}</ng-template>
-<ng-template #simpleToolbarTitleTemplate>{{toolbarTitle}}</ng-template>
+    
+        <div slot="fixed" class="fixed-content" *ngIf="fixedContentTemplate">
+            <div class="content-inner">
+                <ng-container *ngTemplateOutlet="fixedContentTemplate"></ng-container>
+            </div>
+        </div>
+    </ion-content>
+    
+    <ng-template #simpleTitleTemplate>{{title}}</ng-template>
+    <ng-template #simpleToolbarTitleTemplate>{{toolbarTitle}}</ng-template>
+    
