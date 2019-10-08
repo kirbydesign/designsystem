@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class TabsExampleComponent {
   constructor() {}
+
+  openMenu() {
+    alert('Open menu');
+  }
 }

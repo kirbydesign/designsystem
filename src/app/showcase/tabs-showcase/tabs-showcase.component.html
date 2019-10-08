@@ -2,11 +2,17 @@
     <div>
         <h2>Tabs</h2>
         <p>Tabs are a top level navigation component to implement a tab-based navigation. The component is a container of individual content.</p>
-        <p>Content of tabs should be child of the tabs component in the route configuration, as this will be included by a router-outlet.</p>
         <kirby-code-viewer [html]="exampleHtml"></kirby-code-viewer>
     </div>
-    <kirby-iphone src="/examples/tabs/simple" showExternalLink="true"></kirby-iphone>
+    <kirby-iphone src="/examples/tabs" showExternalLink="true"></kirby-iphone>
 </div>
 
+<h2>Router integration:</h2>
+<p>When used with Angular's router the routerLink property of the kirby-tab-button should be a reference to the route path.</p>
+<p>Content of a tab will automatically be included by a router-outlet. Therefore you're tab should be a child of your "tabs page" component</p>
+<kirby-code-viewer [html]="exampleRouterHtml"></kirby-code-viewer>
+<kirby-code-viewer [js]="exampleRouterConfig"></kirby-code-viewer>
+
+<br />
 <h2>Tab button properties:</h2>
 <kirby-showcase-properties [properties]="properties"></kirby-showcase-properties>

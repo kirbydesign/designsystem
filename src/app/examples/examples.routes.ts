@@ -34,6 +34,7 @@ import { PageAdvancedExampleComponent } from './page-example/advanced/page-advan
 import { PageAlignmentAndToolbarTitleExampleComponent } from './page-example/alignment-and-toolbar-title/page-alignment-and-toolbar-title-example.component';
 import { ExamplesComponent } from '~/app/examples/examples.component';
 import { TabsExampleComponent } from '~/app/examples/tabs/tabs-example.component';
+import { TabExampleComponent } from '~/app/examples/tabs/tab/tab-example.component';
 
 export const routes: Routes = [
   {
@@ -68,23 +69,29 @@ export const routes: Routes = [
         children: [
           {
             path: '',
-            redirectTo: 'simple',
+            redirectTo: 'dashboard',
             pathMatch: 'full',
           },
           {
-            path: 'simple',
-            component: PageSimpleExampleComponent,
-            pathMatch: 'full',
+            path: 'dashboard',
+            component: TabExampleComponent,
+            data: {
+              title: 'Dashboard',
+            },
           },
           {
-            path: 'alignment-toolbar-title',
-            component: PageAlignmentAndToolbarTitleExampleComponent,
-            pathMatch: 'full',
+            path: 'account',
+            component: TabExampleComponent,
+            data: {
+              title: 'Account',
+            },
           },
           {
-            path: 'advanced',
-            component: PageAdvancedExampleComponent,
-            pathMatch: 'full',
+            path: 'inbox',
+            component: TabExampleComponent,
+            data: {
+              title: 'Inbox',
+            },
           },
         ],
       },
