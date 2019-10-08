@@ -14,7 +14,7 @@ export interface AlertConfig {
     themeColor?: string;
   };
 
-  okBtn?: {
+  okBtn?: string | {
     text: string;
     isDestructive?: boolean;
   };
