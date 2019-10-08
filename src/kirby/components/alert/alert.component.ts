@@ -14,9 +14,9 @@ export class AlertComponent implements AfterViewInit, OnInit {
   @ViewChild('alertWrapper') alertWrapper: ElementRef;
   config: AlertConfig;
   scrollY: number = Math.abs(window.scrollY);
-  okBtnText: string;
+  okBtn: string;
   okBtnIsDestructive: boolean;
-  cancelBtnText: string;
+  cancelBtn: string;
   title: string;
   message: string;
   iconName: string;
@@ -31,19 +31,30 @@ export class AlertComponent implements AfterViewInit, OnInit {
     this.message = this.config.message;
 
     if (this.config.icon) {
-      this.iconName = this.config.icon.iconName;
+      this.iconName = this.config.icon.name;
       this.iconThemeColor = this.config.icon.themeColor;
     }
 
     if (this.config.okBtnText) {
       console.warn('okBtnText will be deprecated on next major version. Please use okBtn instead.');
-      this.okBtnText = this.config.okBtnText;
+      this.okBtn = this.config.okBtnText;
     } else if (this.config.okBtn) {
-      this.okBtnText = this.config.okBtn.text;
-      this.okBtnIsDestructive = this.config.okBtn.isDestructive;
+      if (typeof this.config.okBtn === 'string') {
+        this.okBtn = this.config.okBtn;
+      } else {
+        this.okBtn = this.config.okBtn.text;
+        this.okBtnIsDestructive = this.config.okBtn.isDestructive;
+      }
     }
 
-    this.cancelBtnText = this.config.cancelBtnText;
+    if (this.config.cancelBtnText) {
+      console.warn(
+        'cancelBtnText will be deprecated on next major version. Please use cancelBtn instead.'
+      );
+      this.cancelBtn = this.config.cancelBtnText;
+    } else if (this.config.cancelBtn) {
+      this.cancelBtn = this.config.cancelBtn;
+    }
   }
 
   ngAfterViewInit(): void {

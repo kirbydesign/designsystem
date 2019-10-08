@@ -11,7 +11,7 @@ export interface AlertConfig {
    * @deprecated Will be deprecated in next major version. Use `cancelBtn` instead.
    */
   cancelBtnText?: string;
-  
+
   cancelBtn?: string;
 
   icon?: {
@@ -19,8 +19,10 @@ export interface AlertConfig {
     themeColor?: string;
   };
 
-  okBtn?: string | {
-    text: string;
-    isDestructive?: boolean;
-  };
+  okBtn?:
+    | string
+    | {
+        text: string;
+        isDestructive?: boolean;
+      };
 }

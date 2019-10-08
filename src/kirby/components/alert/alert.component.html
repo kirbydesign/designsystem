@@ -5,7 +5,7 @@
       </div>
   <div class="message">{{ message }}</div>
     <div class="buttongroup">
-        <button *ngIf="cancelBtnText" attentionLevel="3" kirby-button class="cancel-btn" (click)="onCancel()">{{ cancelBtnText }}</button>
-        <button kirby-button class="ok-button" [size]="cancelBtnText ? '' : 'lg'"  attentionLevel="1" [isDestructive]="okBtnIsDestructive" (click)="onOk()">{{ okBtnText }}</button>
+        <button *ngIf="cancelBtn" attentionLevel="3" kirby-button class="cancel-btn" (click)="onCancel()">{{ cancelBtn }}</button>
+        <button kirby-button class="ok-button" [size]="cancelBtn ? '' : 'lg'"  attentionLevel="1" [isDestructive]="okBtnIsDestructive" (click)="onOk()">{{ okBtn }}</button>
     </div>
 </article>

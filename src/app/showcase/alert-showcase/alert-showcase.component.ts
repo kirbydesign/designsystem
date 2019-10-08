@@ -28,10 +28,7 @@ export class AlertShowcaseComponent {
       name: 'icon',
       description: '(Optional) Icon to be shown below the title',
       defaultValue: '',
-      inputValues: [
-        "{ 'iconName':string }",
-        "{ 'iconName':string, 'themeColor':string }",
-      ],
+      inputValues: ["{ 'name':string }", "{ 'name':string, 'themeColor':string }"],
     },
     {
       name: 'okBtn',
@@ -41,7 +38,7 @@ export class AlertShowcaseComponent {
       inputValues: ["{ 'text':string }", "{ 'text':string, 'isDestructive':boolean }"],
     },
     {
-      name: 'cancelBtnText',
+      name: 'cancelBtn',
       description: '(Optional) The text that will appear on the cancel button',
       defaultValue: '',
       inputValues: ['string'],
