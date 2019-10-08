@@ -12,28 +12,23 @@
 }
 
 .tab-button {
-  font-size: font-size('xxs');
+  --kirby-badge-position: absolute;
+  --kirby-badge-left: calc(50% + 5px);
+  --kirby-badge-top: 0;
 
-  .badge {
-    left: calc(50% + 5px);
-    top: 0;
-    position: absolute;
-    z-index: 1;
-  }
+  font-size: font-size('xxs');
 
   @include media(">=large") {
     font-size: font-size('s');
     flex-direction: row;
 
+    --kirby-badge-top: -5px;
+    --kirby-badge-left: auto;
+    --kirby-badge-right: -5px;
+
     .icon-container {
       position: relative;
       margin-right: size('xxs');
-    }
-
-    .badge {
-      top: -5px;
-      right: -5px;
-      left: auto;
     }
   }
 }

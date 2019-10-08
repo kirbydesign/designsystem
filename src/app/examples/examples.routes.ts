@@ -32,9 +32,9 @@ import { FabSheetExampleComponent } from './fab-sheet-example/fab-sheet-example.
 import { PageSimpleExampleComponent } from './page-example/simple/page-simple-example.component';
 import { PageAdvancedExampleComponent } from './page-example/advanced/page-advanced-example.component';
 import { PageAlignmentAndToolbarTitleExampleComponent } from './page-example/alignment-and-toolbar-title/page-alignment-and-toolbar-title-example.component';
-import { ExamplesComponent } from '~/app/examples/examples.component';
-import { TabsExampleComponent } from '~/app/examples/tabs/tabs-example.component';
-import { TabExampleComponent } from '~/app/examples/tabs/tab/tab-example.component';
+import { ExamplesComponent } from './examples.component';
+import { TabsExampleComponent } from './tabs/tabs-example.component';
+import { TabExampleComponent } from './tabs/tab/tab-example.component';
 
 export const routes: Routes = [
   {
