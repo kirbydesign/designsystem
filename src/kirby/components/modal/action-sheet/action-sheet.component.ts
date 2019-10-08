@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, HostBinding } from '@angular/core';
 
 import { ActionSheetItem } from './config/action-sheet-item';
 

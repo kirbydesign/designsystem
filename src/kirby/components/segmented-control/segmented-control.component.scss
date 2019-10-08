@@ -42,6 +42,7 @@
     }
     
     kirby-badge {
+      --kirby-badge-elevation: #{get-elevation(2)};
       position: absolute;
       top: -#{size('xxs')};
       right: #{size('xxs')};
