@@ -16,7 +16,8 @@ export class PageShowcaseComponent {
   alignmentAndToolbarTitleExampleHtml: string =
     PageAlignmentAndToolbarTitleExampleComponent.template;
   fixedTitleAndActionsExampleHtml: string = PageFixedTitleAndActionsExampleComponent.template;
-  fixedCustomTitleExampleHtml: string = PageFixedTitleAndActionsExampleComponent.customTitleTemplate;
+  fixedCustomTitleExampleHtml: string =
+    PageFixedTitleAndActionsExampleComponent.customTitleTemplate;
   fixedActionsExampleHtml: string = PageFixedTitleAndActionsExampleComponent.fixedActionsTemplate;
   advancedExampleHtml: string = PageAdvancedExampleComponent.template;
   properties: ShowcaseProperty[] = [
