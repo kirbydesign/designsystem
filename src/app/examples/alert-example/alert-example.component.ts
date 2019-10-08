@@ -15,7 +15,7 @@ export class AlertExampleComponent {
       title: 'Your Alert',
       message: 'This is a slightly longer alert message text than what was previously here',
       okBtn: 'I agree',
-      cancelBtnText: 'Take me back',
+      cancelBtn: 'Take me back',
     };
     this.modalController.showAlert(config, this.onAlertClosed);
   }
