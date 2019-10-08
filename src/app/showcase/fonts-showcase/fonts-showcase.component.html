@@ -1,3 +1,6 @@
+
+<h2>Font sizes</h2>
+
 <p>
   Font sizes can be set by either using the font classes, e.g. <code>.kirby-text-large</code>, or by using the
   tags like <code>h1, h2 & h3</code>.
@@ -29,20 +32,30 @@
   font-size: font-size('l');
 {{'}'}}
 </pre>
-<h3 class="kirby-text-bold">Font-size map:</h3>
-
-<div class="kirby-text-mono">
-  $font-size: (
-  <span class="size-xl"></span>
-  <span class="size-l"></span>
-  <span class="size-m"></span>
-  <span class="size-n"></span>
-  <span class="size-s"></span>
-  <span class="size-xs"></span>
-  <span class="size-xxs"></span>
-  )
-</div> 
+    <h3 class="kirby-text-bold">Font-size map:</h3>
+    <div class="kirby-text-mono">
+      $font-size: (
+      <span class="size-xl"></span>
+      <span class="size-l"></span>
+      <span class="size-m"></span>
+      <span class="size-n"></span>
+      <span class="size-s"></span>
+      <span class="size-xs"></span>
+      <span class="size-xxs"></span>
+      )
+    </div> 
   </div>
 </div>
+
+<h2>Text Alignment</h2>
+<div class="fonts-examples">
+  <span class="kirby-text-muted kirby-text-small kirby-text-light kirby-text-mono">.kirby-text-left</span>
+  <p class="kirby-text-left">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum ipsa dignissimos quae repellendus eius excepturi, expedita consectetur autem quibusdam tempore.</p>
+  <span class="kirby-text-muted kirby-text-small kirby-text-light kirby-text-mono">.kirby-text-center</span>
+  <p class="kirby-text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+  <span class="kirby-text-muted kirby-text-small kirby-text-light kirby-text-mono">.kirby-text-right</span>
+  <p class="kirby-text-right">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolores obcaecati ipsum fugiat reiciendis, tempora doloremque sequi consequuntur hic aspernatur perferendis.</p>
+</div>
+
 
 <kirby-code-viewer [html]="exampleHtml"></kirby-code-viewer>
