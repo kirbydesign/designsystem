@@ -41,7 +41,12 @@ import { RouterOutletModule } from '@kirbydesign/designsystem/components/router-
     ...declarations,
   ],
   providers: [...providerDeclarations],
-  entryComponents: [ModalWrapperComponent, ActionSheetComponent, FullscreenLoadingOverlayComponent, AlertComponent],
+  entryComponents: [
+    ModalWrapperComponent,
+    ActionSheetComponent,
+    FullscreenLoadingOverlayComponent,
+    AlertComponent,
+  ],
   exports: [
     InfiniteScrollDirective,
     LoadingOverlayComponent,
