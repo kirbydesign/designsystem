@@ -15,7 +15,7 @@ export interface AlertConfig {
   cancelBtn?: string;
 
   icon?: {
-    iconName: string;
+    name: string;
     themeColor?: string;
   };
 
