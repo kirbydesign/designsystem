@@ -14,7 +14,7 @@ export class AlertExampleComponent {
     const config: AlertConfig = {
       title: 'Your Alert',
       message: 'This is a slightly longer alert message text than what was previously here',
-      okBtn: 'I agree',
+      okBtn: { text: 'I agree' },
       cancelBtn: 'Take me back',
     };
     this.modalController.showAlert(config, this.onAlertClosed);
@@ -25,7 +25,7 @@ export class AlertExampleComponent {
       title: 'Your Alert',
       message: 'This is a slightly longer alert message text than what was previously here',
       okBtn: { text: 'I agree' },
-      cancelBtnText: 'Take me back',
+      cancelBtn: 'Take me back',
       icon: { name: 'warning', themeColor: 'warning' },
     };
     this.modalController.showAlert(config, this.onAlertClosed);
@@ -44,7 +44,7 @@ export class AlertExampleComponent {
     const config: AlertConfig = {
       title: 'Your Alert',
       message: 'This is a slightly longer alert message text than what was previously here',
-      cancelBtnText: 'Get me out of here',
+      cancelBtn: 'Get me out of here',
       okBtn: { text: 'Confirm', isDestructive: true },
     };
     this.modalController.showAlert(config, this.onAlertClosed);
