@@ -29,7 +29,6 @@ export class AlertShowcaseComponent {
       description: '(Optional) Icon to be shown below the title',
       defaultValue: '',
       inputValues: [
-        'undefined',
         "{ 'iconName':string }",
         "{ 'iconName':string, 'themeColor':string }",
       ],
