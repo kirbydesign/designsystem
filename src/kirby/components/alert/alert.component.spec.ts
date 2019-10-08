@@ -90,6 +90,13 @@ describe('AlertComponent', () => {
       const cancelButton = fixture.debugElement.query(By.css('.cancel-btn'));
       expect(cancelButton.nativeElement.textContent).toEqual(expected);
     });
+
+    it('should not render when cancelBtn not set', () => {
+      component.cancelBtn = null;
+      fixture.detectChanges();
+      const cancelButton = fixture.debugElement.query(By.css('.cancel-btn'));
+      expect(cancelButton).toBeNull();
+    });
   });
 
   describe('icon', () => {
