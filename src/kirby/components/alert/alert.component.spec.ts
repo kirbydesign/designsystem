@@ -66,6 +66,13 @@ describe('AlertComponent', () => {
       expect(okButton).toBeDefined();
       expect(okButton.nativeElement.getAttribute('class')).not.toContain('destructive');
     });
+
+    it('should have large ok button when no cancel button', () => {
+      const okButton = fixture.debugElement.query(By.css('.ok-button'));
+      component.cancelBtn = null;
+      fixture.detectChanges();
+      expect(okButton.attributes['size'] === 'lg');
+    });
   });
 
   describe('cancel button', () => {
