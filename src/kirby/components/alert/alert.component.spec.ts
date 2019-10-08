@@ -34,7 +34,7 @@ describe('AlertComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AlertComponent);
     component = fixture.componentInstance;
-    component.okBtnText = 'Test OK Button Text';
+    component.okBtn = 'Test OK Button Text';
     fixture.detectChanges();
   });
 
@@ -47,7 +47,7 @@ describe('AlertComponent', () => {
       const expected = 'Test OK Button Text';
       const okButton = fixture.debugElement.query(By.css('.ok-button'));
 
-      expect(component.okBtnText).toEqual(expected);
+      expect(component.okBtn).toEqual(expected);
       expect(okButton.nativeElement.textContent).toEqual(expected);
     });
 
@@ -71,7 +71,7 @@ describe('AlertComponent', () => {
   describe('cancel button', () => {
     it('should render', () => {
       const expected = 'Test Cancel Button Text';
-      component.cancelBtnText = 'Test Cancel Button Text';
+      component.cancelBtn = 'Test Cancel Button Text';
       fixture.detectChanges();
       const cancelButton = fixture.debugElement.query(By.css('.cancel-btn'));
       expect(cancelButton.nativeElement.textContent).toEqual(expected);
