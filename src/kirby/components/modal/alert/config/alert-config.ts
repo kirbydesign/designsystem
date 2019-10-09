@@ -23,6 +23,6 @@ export interface AlertConfig {
     | string
     | {
         text: string;
-        isDestructive?: boolean;
+        isDestructive: boolean;
       };
 }
