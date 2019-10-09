@@ -14,7 +14,7 @@ export class AlertHelper {
   ): Promise<any> {
     const alert = await this.ionicModalController.create({
       component: AlertComponent,
-      componentProps: { config: config },
+      componentProps: this.getComponentProps(config),
       cssClass: 'kirby-alert',
       mode: 'ios',
       backdropDismiss: false,
@@ -24,5 +24,41 @@ export class AlertHelper {
 
     await alert.present();
     return alert.onDidDismiss();
+  }
+
+  private getComponentProps(config: AlertConfig) {
+    const okBtn = config.okBtn || {};
+    const icon = config.icon || {};
+    return {
+      ...config,
+      okBtnText: this.getOkBtnText(config),
+      cancelBtnText: this.getCancelBtnText(config),
+      okBtnIsDestructive: okBtn.isDestructive,
+      iconName: icon.name,
+      iconThemeColor: icon.themeColor,
+    };
+  }
+
+  private getOkBtnText(config: AlertConfig) {
+    let text: string;
+    if (config.okBtnText) {
+      console.warn(
+        '`okBtnText` will be deprecated on next major version. Please use `okBtn` instead.'
+      );
+      text = config.okBtnText;
+    }
+    if (config.okBtn) {
+      text = config.okBtn.text || config.okBtn;
+    }
+    return text;
+  }
+
+  private getCancelBtnText(config: AlertConfig) {
+    if (config.cancelBtnText) {
+      console.warn(
+        '`cancelBtnText` will be deprecated on next major version. Please use `cancelBtn` instead.'
+      );
+    }
+    return config.cancelBtn || config.cancelBtnText;
   }
 }

@@ -34,7 +34,7 @@ describe('AlertComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AlertComponent);
     component = fixture.componentInstance;
-    component.okBtn = 'Test OK Button Text';
+    component.okBtnText = 'Test OK Button Text';
     fixture.detectChanges();
   });
 
@@ -47,7 +47,7 @@ describe('AlertComponent', () => {
       const expected = 'Test OK Button Text';
       const okButton = fixture.debugElement.query(By.css('.ok-button'));
 
-      expect(component.okBtn).toEqual(expected);
+      expect(component.okBtnText).toEqual(expected);
       expect(okButton.nativeElement.textContent).toEqual(expected);
     });
 
@@ -69,14 +69,14 @@ describe('AlertComponent', () => {
 
     it('should have default size', () => {
       const okButton = fixture.debugElement.query(By.css('.ok-button'));
-      component.cancelBtn = null;
+      component.cancelBtnText = null;
       fixture.detectChanges();
       expect(okButton.attributes['size'] === '');
     });
 
     it('should have large ok button when no cancel button', () => {
       const okButton = fixture.debugElement.query(By.css('.ok-button'));
-      component.cancelBtn = null;
+      component.cancelBtnText = null;
       fixture.detectChanges();
       expect(okButton.attributes['size'] === 'lg');
     });
@@ -85,14 +85,14 @@ describe('AlertComponent', () => {
   describe('cancel button', () => {
     it('should render', () => {
       const expected = 'Test Cancel Button Text';
-      component.cancelBtn = 'Test Cancel Button Text';
+      component.cancelBtnText = 'Test Cancel Button Text';
       fixture.detectChanges();
       const cancelButton = fixture.debugElement.query(By.css('.cancel-btn'));
       expect(cancelButton.nativeElement.textContent).toEqual(expected);
     });
 
     it('should not render when cancelBtn not set', () => {
-      component.cancelBtn = null;
+      component.cancelBtnText = null;
       fixture.detectChanges();
       const cancelButton = fixture.debugElement.query(By.css('.cancel-btn'));
       expect(cancelButton).toBeNull();
