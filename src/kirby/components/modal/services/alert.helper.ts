@@ -27,15 +27,13 @@ export class AlertHelper {
   }
 
   private getComponentProps(config: AlertConfig) {
-    const okBtn = config.okBtn || {};
-    const icon = config.icon || {};
     return {
       ...config,
       okBtnText: this.getOkBtnText(config),
       cancelBtnText: this.getCancelBtnText(config),
-      okBtnIsDestructive: okBtn.isDestructive,
-      iconName: icon.name,
-      iconThemeColor: icon.themeColor,
+      okBtnIsDestructive: this.getOkBtnIsDestructive(config),
+      iconName: config.icon && config.icon.name,
+      iconThemeColor: config.icon && config.icon.themeColor,
     };
   }
 
@@ -48,9 +46,17 @@ export class AlertHelper {
       text = config.okBtnText;
     }
     if (config.okBtn) {
-      text = config.okBtn.text || config.okBtn;
+      if (typeof config.okBtn === 'string') {
+        text = config.okBtn;
+      } else {
+        text = config.okBtn.text;
+      }
     }
     return text;
+  }
+
+  getOkBtnIsDestructive(config) {
+    return typeof config.okBtn === 'object' ? config.okBtn.isDestructive : undefined;
   }
 
   private getCancelBtnText(config: AlertConfig) {
