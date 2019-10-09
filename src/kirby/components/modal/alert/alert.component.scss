@@ -1,0 +1,26 @@
+@import "../../../scss/utils";
+
+h3.title {
+  margin-top: size('m');
+  margin-bottom: size('m');
+  font-weight: font-weight("bold");
+}
+
+article {
+  overflow: hidden;
+  padding: size('s');
+  @include media("<small") {
+    padding: size('xxs');
+  }
+}
+
+.buttongroup {
+  display: flex;
+  justify-content: space-around;
+  
+  button {
+    width: 50%;
+    margin-left: 6px;
+    margin-right: 6px;
+  }
+}
