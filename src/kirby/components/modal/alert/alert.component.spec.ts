@@ -4,8 +4,8 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { NavParams } from '@ionic/angular';
 
 import { AlertComponent } from './alert.component';
-import { ButtonComponent } from '../button/button.component';
-import { IModalController } from '../modal/services/modal.controller.interface';
+import { ButtonComponent } from '../../button/button.component';
+import { IModalController } from '../services/modal.controller.interface';
 import { SizeDirective } from '@kirbydesign/designsystem/directives/size/size.directive';
 
 describe('AlertComponent', () => {

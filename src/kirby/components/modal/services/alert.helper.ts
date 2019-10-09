@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ModalController as IonicModalController } from '@ionic/angular';
 
 import { AlertConfig } from '../alert/config/alert-config';
-import { AlertComponent } from '../../alert/alert.component';
+import { AlertComponent } from '../alert/alert.component';
 
 @Injectable()
 export class AlertHelper {
