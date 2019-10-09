@@ -1,6 +1,6 @@
 import { NavParams } from '@ionic/angular';
 
-import { Component, ElementRef, ViewChild, AfterViewInit, OnInit } from '@angular/core';
+import { Component, ElementRef, ViewChild, AfterViewInit, OnInit, HostBinding } from '@angular/core';
 
 import { AlertConfig } from './config/alert-config';
 import { IModalController } from '../services/modal.controller.interface';
@@ -22,6 +22,8 @@ export class AlertComponent implements AfterViewInit, OnInit {
   message: string;
   iconName: string;
   iconThemeColor: string;
+
+  @HostBinding('class.ion-page') private _ionPageReset = false;
 
   constructor(
     private params: NavParams,
