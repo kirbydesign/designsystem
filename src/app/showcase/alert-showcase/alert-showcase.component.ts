@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 
 import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
-
-declare var require: any;
+import { AlertExampleComponent } from '~/app/examples/alert-example/alert-example.component';
 
 @Component({
   selector: 'kirby-alert-showcase',
@@ -10,7 +9,7 @@ declare var require: any;
   preserveWhitespaces: true,
 })
 export class AlertShowcaseComponent {
-  exampleHtml: string = require('../../examples/alert-example/alert-example.component.html');
+  exampleConfiguration: string = AlertExampleComponent.alertConfigWithIcon;
   properties: ShowcaseProperty[] = [
     {
       name: 'title',
@@ -19,7 +18,7 @@ export class AlertShowcaseComponent {
     },
     {
       name: 'message',
-      description: '(Optional) The message shown under the title',
+      description: '(Optional) The message shown under the title (or icon if specified)',
       inputValues: ['string'],
     },
     {
