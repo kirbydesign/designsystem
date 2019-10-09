@@ -6,7 +6,7 @@ h3.title {
   font-weight: font-weight("bold");
 }
 
-article{
+article {
   overflow: hidden;
   padding: size('s');
   @include media("<small") {
@@ -14,11 +14,7 @@ article{
   }
 }
 
-.message{
-  margin-bottom: size('m');
-}
-
-.buttongroup{
+.buttongroup {
   display: flex;
   justify-content: space-around;
   
@@ -26,32 +22,5 @@ article{
     width: 50%;
     margin-left: 6px;
     margin-right: 6px;
-  }
-}
-
-.icon-outline {
-  $icon-size: size('xxl') * 2;
-  width: $icon-size;
-  height: $icon-size;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: size('m');
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  border: 3px solid var(--kirby-medium);
-  border-radius: 50%;
-}
-
-@each $color-name, $color-value in $notification-colors {
-  
-  &.#{$color-name} {
-    .icon-outline {
-      border-color: #{get-color($color-name)};
-    }
-
-    kirby-icon {
-      color: #{get-color($color-name)};
-    }
   }
 }

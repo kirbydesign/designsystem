@@ -1,9 +1,6 @@
-<article #alertWrapper [class]="iconThemeColor">
+<article #alertWrapper>
     <h3 class="title">{{ title }}</h3>
-    <div *ngIf="iconName" class="icon-outline">
-        <kirby-icon [name]="iconName" size="lg"></kirby-icon>
-      </div>
-  <div class="message">{{ message }}</div>
+    <kirby-empty-state [iconName]="iconName" [themeColor]="iconThemeColor" [subtitle]="message"></kirby-empty-state>
     <div class="buttongroup">
         <button kirby-button *ngIf="cancelBtnText" attentionLevel="3" class="cancel-btn" (click)="onCancel()">{{ cancelBtnText }}</button>
         <button kirby-button [size]="cancelBtnText ? null : 'lg'" attentionLevel="1" class="ok-btn" [isDestructive]="okBtnIsDestructive" (click)="onOk()">{{ okBtnText }}</button>
