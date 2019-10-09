@@ -1,6 +1,12 @@
 import { NavParams } from '@ionic/angular';
-
-import { Component, ElementRef, ViewChild, AfterViewInit, OnInit, HostBinding } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  ViewChild,
+  AfterViewInit,
+  OnInit,
+  HostBinding,
+} from '@angular/core';
 
 import { AlertConfig } from './config/alert-config';
 import { IModalController } from '../services/modal.controller.interface';
