@@ -15,32 +15,29 @@ export class AlertShowcaseComponent {
     {
       name: 'title',
       description: 'The title of the alert',
-      defaultValue: '',
       inputValues: ['string'],
     },
     {
       name: 'message',
       description: '(Optional) The message shown under the title',
-      defaultValue: '',
       inputValues: ['string'],
     },
     {
       name: 'icon',
       description: '(Optional) Icon to be shown below the title',
-      defaultValue: '',
-      inputValues: ["{ 'name':string }", "{ 'name':string, 'themeColor':string }"],
+      inputValues: ['{ name: string }', '{ name: string, themeColor: string }'],
     },
     {
       name: 'okBtn',
       description:
-        'Defines the text that will appear on the OK button and if it should be destructive',
-      defaultValue: '',
-      inputValues: ["{ 'text':string }", "{ 'text':string, 'isDestructive':boolean }"],
+        '(Optional) Defines the text that will appear on the OK button and if it should be destructive',
+      defaultValue: 'OK',
+      inputValues: ['string', '{ text: string, isDestructive: boolean }'],
     },
     {
       name: 'cancelBtn',
-      description: '(Optional) The text that will appear on the cancel button',
-      defaultValue: '',
+      description:
+        '(Optional) The text that will appear on the cancel button. If not defined the cancel button will not be shown.',
       inputValues: ['string'],
     },
   ];
