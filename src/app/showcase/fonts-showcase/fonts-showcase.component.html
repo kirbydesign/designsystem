@@ -24,7 +24,7 @@
     <p class="sample kirby-text-xxsmall">The quick brown fox jumps over the lazy dog</p>
   </div>
   <div class="font-sizes">
-    <h2>SCSS Variables</h2>
+    <h2>SCSS Function</h2>
     <div>
       If you need a value from the font-size map directly, you can use the <code>font-size(value)</code> function:
     </div>
@@ -48,6 +48,7 @@
 </div>
 
 <h2>Text Alignment</h2>
+<div class="grid">
 <div class="fonts-examples">
   <span class="kirby-text-muted kirby-text-small kirby-text-light kirby-text-mono">.kirby-text-left</span>
   <p class="kirby-text-left">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum ipsa dignissimos quae repellendus eius excepturi, expedita consectetur autem quibusdam tempore.</p>
@@ -56,6 +57,34 @@
   <span class="kirby-text-muted kirby-text-small kirby-text-light kirby-text-mono">.kirby-text-right</span>
   <p class="kirby-text-right">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolores obcaecati ipsum fugiat reiciendis, tempora doloremque sequi consequuntur hic aspernatur perferendis.</p>
 </div>
+</div>
 
+<h2>Font Weight</h2>
+<div class="grid">
+  <div class="fonts-examples">
+    <span class="kirby-text-muted kirby-text-small kirby-text-light kirby-text-mono">.kirby-text-bold</span>
+    <p class="sample kirby-text-large kirby-text-bold">The quick brown fox jumps over the lazy dog</p>
+    <span class="kirby-text-muted kirby-text-small kirby-text-light kirby-text-mono">.kirby-text-light</span>
+    <p class="sample kirby-text-large kirby-text-light">The quick brown fox jumps over the lazy dog</p>
+  </div>
+  <div class="font-sizes">
+    <h2>SCSS Function</h2>
+    <div>
+      If you need a value from the font-weight map directly, you can use the <code>font-weight(value)</code> function:
+    </div>
+<pre class="kirby-text-mono">.some-class {{'{'}}
+  font-weight: font-weight('light');
+{{'}'}}
+</pre>
+    <h3 class="kirby-text-bold">Font-weight map:</h3>
+    <div class="kirby-text-mono">
+      $font-weight: (
+      <span class="weight-light"></span>
+      <span class="weight-normal"></span>
+      <span class="weight-bold"></span>
+      )
+    </div> 
+  </div>
+</div>
 
 <kirby-code-viewer [html]="exampleHtml"></kirby-code-viewer>

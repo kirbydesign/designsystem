@@ -34,6 +34,22 @@
   }
 }
 
+@each $name, $value in $font-weight {
+  .weight-#{$name} {
+    display: flex;
+    &::before {
+      content: '#{$name}:';
+      margin-left: size('s');
+      margin-right: size('s');
+      flex-basis: 40px;
+      font-weight: font-weight('bold');
+    }
+    &::after {
+      content: '#{$value},';
+    }
+  }
+}
+
 .sample {
   white-space: nowrap;
   text-overflow: ellipsis;
