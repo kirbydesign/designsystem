@@ -80,4 +80,11 @@ export class ModalHelper {
         .add(backdropAnimation)
     );
   }
+
+  public blurNativeWrapper(nativeElement: any) {
+    setTimeout(() => {
+      nativeElement.focus();
+      nativeElement.blur();
+    }, 50);
+  }
 }

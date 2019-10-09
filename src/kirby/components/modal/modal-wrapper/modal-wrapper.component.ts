@@ -2,9 +2,9 @@ import { Component, ElementRef, ViewChild, AfterViewInit, Injector } from '@angu
 import { NavParams } from '@ionic/angular';
 
 import { ModalConfig } from './config/modal-config';
-import { COMPONENT_PROPS, ModalConfigHelper } from './config/modal-config.helper';
+import { COMPONENT_PROPS } from './config/modal-config.helper';
 import { IModalController } from '../services/modal.controller.interface';
-import { ModalHelper } from '@kirbydesign/designsystem/helpers/modal-helper';
+import { ModalHelper } from '../services/modal.helper';
 
 @Component({
   templateUrl: './modal-wrapper.component.html',
@@ -19,6 +19,7 @@ export class ModalWrapperComponent implements AfterViewInit {
   constructor(
     private params: NavParams,
     private modalController: IModalController,
+    private modalHelper: ModalHelper,
     injector: Injector
   ) {
     this.config = this.params.get('config');
@@ -29,7 +30,7 @@ export class ModalWrapperComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    ModalHelper.blurNativeWrapper(this.modalWrapper.nativeElement);
+    this.modalHelper.blurNativeWrapper(this.modalWrapper.nativeElement);
   }
 
   onFocusChange() {

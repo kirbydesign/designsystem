@@ -4,7 +4,7 @@ import { Component, ElementRef, ViewChild, AfterViewInit, OnInit } from '@angula
 
 import { AlertConfig } from './config/alert-config';
 import { IModalController } from '../services/modal.controller.interface';
-import { ModalHelper } from '@kirbydesign/designsystem/helpers/modal-helper';
+import { ModalHelper } from '../services/modal.helper';
 
 @Component({
   selector: 'kirby-alert',
@@ -23,7 +23,11 @@ export class AlertComponent implements AfterViewInit, OnInit {
   iconName: string;
   iconThemeColor: string;
 
-  constructor(private params: NavParams, private modalController: IModalController) {
+  constructor(
+    private params: NavParams,
+    private modalController: IModalController,
+    private modalHelper: ModalHelper
+  ) {
     this.config = this.params.get('config');
   }
 
@@ -59,7 +63,7 @@ export class AlertComponent implements AfterViewInit, OnInit {
   }
 
   ngAfterViewInit(): void {
-    ModalHelper.blurNativeWrapper(this.alertWrapper.nativeElement);
+    this.modalHelper.blurNativeWrapper(this.alertWrapper.nativeElement);
   }
 
   onFocusChange() {
