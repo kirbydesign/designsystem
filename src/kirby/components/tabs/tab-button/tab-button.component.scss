@@ -1,24 +1,19 @@
 @import '../../../scss/utils';
 
-:host {
+.tab-button {
   height: 100%;
   flex: 1 1 0%;
   max-width: 168px;
+  font-size: font-size('xxs');
 
-  @include media(">=large") {
-    flex: none;
-    padding: 0 size('xs');
-  }
-}
-
-.tab-button {
   --kirby-badge-position: absolute;
   --kirby-badge-left: calc(50% + 5px);
   --kirby-badge-top: 0;
 
-  font-size: font-size('xxs');
-
   @include media(">=large") {
+    flex: none;
+    padding: 0 size('xs');
+
     font-size: font-size('s');
     flex-direction: row;
 
