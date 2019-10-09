@@ -13,7 +13,10 @@ describe('AlertComponent', () => {
   let fixture: ComponentFixture<AlertComponent>;
 
   beforeEach(async(() => {
-    const modalControllerSpy = jasmine.createSpyObj('IModalController', ['showAlert']);
+    const modalControllerSpy = jasmine.createSpyObj('IModalController', [
+      'showAlert',
+      'blurNativeWrapper',
+    ]);
 
     const navParamsSpy = jasmine.createSpyObj('NavParams', {
       get: {
@@ -45,7 +48,7 @@ describe('AlertComponent', () => {
   describe('ok button', () => {
     it('should render', () => {
       const expected = 'Test OK Button Text';
-      const okButton = fixture.debugElement.query(By.css('.ok-button'));
+      const okButton = fixture.debugElement.query(By.css('.ok-btn'));
 
       expect(component.okBtnText).toEqual(expected);
       expect(okButton.nativeElement.textContent).toEqual(expected);
@@ -54,28 +57,28 @@ describe('AlertComponent', () => {
     it('should support isDestructive', () => {
       component.okBtnIsDestructive = true;
       fixture.detectChanges();
-      const okButton = fixture.debugElement.query(By.css('.ok-button'));
+      const okButton = fixture.debugElement.query(By.css('.ok-btn'));
 
       expect(okButton).toBeDefined();
       expect(okButton.nativeElement.getAttribute('class')).toContain('destructive');
     });
 
     it('should default to not being destructive', () => {
-      const okButton = fixture.debugElement.query(By.css('.ok-button'));
+      const okButton = fixture.debugElement.query(By.css('.ok-btn'));
 
       expect(okButton).toBeDefined();
       expect(okButton.nativeElement.getAttribute('class')).not.toContain('destructive');
     });
 
     it('should have default size', () => {
-      const okButton = fixture.debugElement.query(By.css('.ok-button'));
+      const okButton = fixture.debugElement.query(By.css('.ok-btn'));
       component.cancelBtnText = null;
       fixture.detectChanges();
       expect(okButton.attributes['size'] === '');
     });
 
     it('should have large ok button when no cancel button', () => {
-      const okButton = fixture.debugElement.query(By.css('.ok-button'));
+      const okButton = fixture.debugElement.query(By.css('.ok-btn'));
       component.cancelBtnText = null;
       fixture.detectChanges();
       expect(okButton.attributes['size'] === 'lg');
