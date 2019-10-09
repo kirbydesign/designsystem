@@ -42,6 +42,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() disabledDates: Date[];
   @Input() minDate: Date;
   @Input() maxDate: Date;
+  @Input() alwaysEnableToday = false;
   public month: CalendarCell[][];
   public weekDays: string[];
   private activeMonth: moment.Moment;
@@ -211,13 +212,14 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
 
   private isSelectable(day: CalendarDay, date: moment.Moment) {
     return (
-      !day.isDisabled &&
-      day.isCurrentMonth &&
-      !(this.disableWeekends && day.isWeekend) &&
-      !(this.disablePastDates && day.isPast) &&
-      !(this.disableFutureDates && day.isFuture) &&
-      !(this.minDate && date.isBefore(this.minDate, 'day')) &&
-      !(this.maxDate && date.isAfter(this.maxDate, 'day'))
+      (this.alwaysEnableToday && day.isToday) ||
+      (!day.isDisabled &&
+        day.isCurrentMonth &&
+        !(this.disableWeekends && day.isWeekend) &&
+        !(this.disablePastDates && day.isPast) &&
+        !(this.disableFutureDates && day.isFuture) &&
+        !(this.minDate && date.isBefore(this.minDate, 'day')) &&
+        !(this.maxDate && date.isAfter(this.maxDate, 'day')))
     );
   }
 

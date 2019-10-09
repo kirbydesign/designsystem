@@ -17,13 +17,16 @@ $sizes: (
   FONT SETTINGS 
 ****************************************************************************/
 $font-sizes: (
-  xl:  32px,
-  l:  22px,
-  m:  18px,
-  n:  16px,
-  s:  14px,
-  xs: 12px,
-  xxs: 10px
+  xxxxl: 72px,
+  xxxl:  56px,
+  xxl:   40px,
+  xl:    32px,
+  l:     22px,
+  m:     18px,
+  n:     16px,
+  s:     14px,
+  xs:    12px,
+  xxs:   10px
 ) !default;
 
 $line-height: (
@@ -49,7 +52,8 @@ $z-layers: (
   default: 1,
   segmentBadge: 2,
   modal-overlay: 900,
-  modal: 901
+  modal: 901,
+  loading-overlay: 1001
 ) !default;
 
 $border-radius: 20px !default;
@@ -62,4 +66,12 @@ $breakpoints: (
   large: 1025px,
   xlarge: 60em, 
   xxlarge: 80em 
+) !default;
+
+/* Elevation
+****************************************************************************/
+$elevations: (
+  2: (0 5px 10px -10px rgba(28, 28, 28, 0.3), 0 0 5px 0 rgba(28, 28, 28, 0.08)),
+  4: (0 10px 15px -10px rgba(28, 28, 28, 0.3), 0 0 5px 0 rgba(28, 28, 28, 0.08)),
+  8: (0 20px 30px -15px rgba(28, 28, 28, 0.3), 0 0 5px 0 rgba(28, 28, 28, 0.08))
 ) !default;

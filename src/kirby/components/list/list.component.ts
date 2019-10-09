@@ -9,6 +9,7 @@ import {
   Output,
   TemplateRef,
   ViewChild,
+  TrackByFunction,
 } from '@angular/core';
 
 import {
@@ -24,7 +25,7 @@ import { GroupByPipe } from './pipes/group-by.pipe';
 import { ListSwipeAction } from './list-swipe-action';
 import { ThemeColor } from '@kirbydesign/designsystem/helpers/theme-color.type';
 
-export type ListShape = 'square' | 'rounded';
+export type ListShape = 'square' | 'rounded' | 'none';
 
 @Component({
   selector: 'kirby-list',
@@ -56,6 +57,11 @@ export class ListComponent implements OnInit, OnChanges {
   @Input() getSectionName?: (item: any) => string;
 
   /**
+   * Callback that defines how to track changes for items in the iterable.
+   */
+  @Input() trackBy?: TrackByFunction<any>;
+
+  /**
    * Text to display when no more items can be loaded (used for "on demand"-loading).
    */
   @Input() noMoreItemsText: string;
@@ -75,13 +81,21 @@ export class ListComponent implements OnInit, OnChanges {
    * - list, if {@link #isSectionsEnabled} is `false`
    * - section, if {@link #isSectionsEnabled} is `true`
    *
-   * `square` means **without** rounded corners, `rounded` means **with** rounded corners.
+   * `square` means **without** rounded corners, `rounded` means **with** rounded corners.,  `none` means **without** padding, border, box-shadow and background.
    */
   @Input() shape: ListShape = 'rounded';
-  @HostBinding('class.rounded')
-  public get isRounded(): boolean {
+  @HostBinding('class.shape-rounded')
+  public get isShapeRounded(): boolean {
     return this.shape === 'rounded';
   }
+  @HostBinding('class.shape-none')
+  public get isShapeNone(): boolean {
+    return this.shape === 'none';
+  }
+
+  @HostBinding('class.item-spacing')
+  @Input()
+  hasItemSpacing: boolean;
 
   /**
    * Determines if list items should have swipe actions or not
@@ -155,7 +169,7 @@ export class ListComponent implements OnInit, OnChanges {
     this.listHelper.onLoadOnDemand(this, event);
   }
 
-  trackByFn(index) {
+  defaultTrackBy(index: number): any {
     return index;
   }
 

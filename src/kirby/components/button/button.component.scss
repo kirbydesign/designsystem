@@ -4,6 +4,8 @@
   --kirby-button-background-color: transparent;
   --kirby-button-border-color: transparent;
   --kirby-button-border-radius: 2rem;
+  --kirby-button-padding-left: #{size('m')};
+  --kirby-button-padding-right: #{size('m')};
   background-color: var(--kirby-button-background-color);
   border-radius: var(--kirby-button-border-radius);
   border: 1px solid var(--kirby-button-border-color);
@@ -14,35 +16,58 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  
+  vertical-align: middle;
+  box-sizing: border-box;
+  white-space: nowrap;
+
   // we default to 'md' size.
   margin: size('xxxs');
-  padding: size('xxs') size('m') size('xxs') size('m');
+  padding: size('xxs') var(--kirby-button-padding-right) size('xxs') var(--kirby-button-padding-left);
   font-size: font-size('s');
   height: size('xl');
   line-height: line-height('xs');
 
   &.icon-left {
-    flex-direction: row-reverse;
+    --kirby-icon-margin-right: #{size('xxs')};
+    --kirby-button-padding-left: #{size('xs')};
+    --kirby-button-padding-right: #{size('s')};
+  }
+
+  &.icon-right {
+    --kirby-icon-margin-left: #{size('xxs')};
+    --kirby-button-padding-left: #{size('s')};
+    --kirby-button-padding-right: #{size('xs')};
+  }
+
+  &.icon-only {
+    width: size('xl');
   }
 
   &.sm {
     padding: size('xxxs') size('s') size('xxxs') size('s');
     font-size: font-size('xs');
     height: size('l');
+
+    &.icon-only {
+      width: size('l');
+    }
   }
 
   &.lg {
     font-size: font-size('s');
     height: size('xxl');
     min-width: 220px;
+
+    &.icon-only {
+      width: size('xxl');
+    }
   }
 
   &.attention-level1 {
     --kirby-button-background-color:#{get-color('primary')};
     --kirby-button-border-color: #{get-color('primary')};
     --kirby-button-color: #{get-color('primary-contrast')};
-  
+
     &.destructive {
       --kirby-button-background-color:#{get-color('danger')};
       --kirby-button-border-color: #{get-color('danger')};
@@ -93,14 +118,15 @@
     background-color: get-color('light-tint');
     border-color: get-color('light-tint');
     pointer-events: none;
+    --kirby-button-color: #{get-color('semi-dark-shade')};
   }
 
   :host-context(.default),
   :host-context(.kirby-color-brightness-white) {
     &.attention-level2 {
-      --kirby-button-background-color: #{get-color('light')};
-      --kirby-button-border-color: #{get-color('light')};
-      --kirby-button-color: #{get-color('light-contrast')};
+      --kirby-button-background-color: #{get-color('black')};
+      --kirby-button-border-color: #{get-color('black')};
+      --kirby-button-color: #{get-color('black-contrast')};
     }
   }
 
@@ -112,5 +138,21 @@
     &.attention-level4 {
       --kirby-button-color: #{get-color('white')};
     }
+  }
+
+  &.floating {
+    $fab-size: 64px;
+    width: $fab-size !important;
+    height: $fab-size !important;
+    min-width: unset;
+
+    &:not(:disabled) {
+      box-shadow: get-elevation(8);
+    }
+  }
+
+  &.icon-only {
+    padding: 0;
+    min-width: unset;
   }
 }

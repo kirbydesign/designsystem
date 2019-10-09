@@ -10,7 +10,7 @@
   </ion-list-header>
 
   <ng-container *ngIf="isSectionsEnabled; else normalList">
-    <ion-item-group *ngFor="let section of groupedItems;trackBy: trackByFn">
+    <ion-item-group *ngFor="let section of groupedItems;trackBy: defaultTrackBy">
       <ion-item-divider class="section-header">
         <ng-container *ngTemplateOutlet="sectionHeaderTemplate; context: { $implicit: section.name }"></ng-container>
       </ion-item-divider>
@@ -37,7 +37,7 @@
 
 <!-- Item template -->
 <ng-template #listItems let-items>
-  <ng-container *ngFor="let item of items; trackBy: trackByFn">
+  <ng-container *ngFor="let item of items; trackBy: (trackBy || defaultTrackBy)">
     <ng-container *ngTemplateOutlet="listItem; context: { $implicit: item }"></ng-container>
   </ng-container>
 </ng-template>
@@ -62,7 +62,7 @@
 <!-- Swipe Action templates -->
 
 <ng-template #slidingItems let-items>
-  <ion-item-sliding *ngFor="let item of items; trackBy: trackByFn">
+  <ion-item-sliding *ngFor="let item of items; trackBy: (trackBy || defaultTrackBy)">
     <ng-container *ngTemplateOutlet="swipeActions; context: { $implicit: item }"></ng-container>
     <ng-container *ngTemplateOutlet="listItem; context: { $implicit: item }"></ng-container>
   </ion-item-sliding>

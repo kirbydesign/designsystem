@@ -69,27 +69,38 @@
 
 <h2>Avatar with badge</h2>
 
-<div class="avatar-item-container">
-  <div class="avatar-item-inner-container">
-    <kirby-avatar size="lg" overlay="true" [imageSrc]="imageSrc" shadow="true"> 
-      <kirby-badge themeColor="danger">1</kirby-badge>
-    </kirby-avatar>
+  <kirby-card>
+  <div class="avatar-item-container">
+    <div class="avatar-item-inner-container">
+      <kirby-avatar size="lg" overlay="true">
+        <kirby-icon name="cog"></kirby-icon>
+        <kirby-badge>
+          <kirby-icon name="attach"></kirby-icon>
+        </kirby-badge>
+      </kirby-avatar>
+    </div>
   </div>
-</div>
-<div class="avatar-item-container">
-  <div class="avatar-item-inner-container">
-    <kirby-avatar size="md" overlay="true" [imageSrc]="imageSrc" shadow="true"> 
-      <kirby-badge themeColor="danger">1</kirby-badge>
-    </kirby-avatar>
+  <div class="avatar-item-container">
+    <div class="avatar-item-inner-container">
+      <kirby-avatar size="md" overlay="true"> 
+        <kirby-icon name="cog"></kirby-icon>
+        <kirby-badge>
+          <kirby-icon name="attach"></kirby-icon>
+        </kirby-badge>
+      </kirby-avatar>
+    </div>
   </div>
-</div>
-<div class="avatar-item-container">
-  <div class="avatar-item-inner-container">
-    <kirby-avatar size="sm" overlay="true" [imageSrc]="imageSrc" shadow="true"> 
-      <kirby-badge themeColor="danger">1</kirby-badge>
-    </kirby-avatar>
+  <div class="avatar-item-container">
+    <div class="avatar-item-inner-container">
+      <kirby-avatar size="sm" overlay="true"> 
+        <kirby-icon name="cog"></kirby-icon>
+        <kirby-badge>
+          <kirby-icon name="attach"></kirby-icon>
+        </kirby-badge>
+      </kirby-avatar>
+    </div>
   </div>
-</div>
+</kirby-card>
 
 <h2>Sizes</h2>
 

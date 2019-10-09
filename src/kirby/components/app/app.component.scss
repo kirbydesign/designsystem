@@ -1,0 +1,6 @@
+@import '../../scss/utils';
+
+.ion-page {
+  --kirby-app-background: #{get-color('background-color')};
+  background: var(--kirby-app-background, #{get-color('background-color')});
+}

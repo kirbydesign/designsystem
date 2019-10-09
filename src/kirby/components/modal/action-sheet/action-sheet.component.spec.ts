@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { NavParams } from '@ionic/angular';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { By } from '@angular/platform-browser';
 import { MockComponent } from 'ng-mocks';
@@ -7,7 +6,6 @@ import * as ionic from '@ionic/angular';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { ActionSheetComponent } from './action-sheet.component';
-import { IModalController } from '../services/modal.controller.interface';
 import { ListCellComponent } from '../../list/list-cell/list-cell.component';
 import { ListComponent } from '../../list/list.component';
 import { ListCellLineComponent } from '../../list/list-cell-line/list-cell-line.component';
@@ -25,25 +23,6 @@ describe('ActionSheetComponent', () => {
   let fixture: ComponentFixture<ActionSheetComponent>;
 
   beforeEach(async(() => {
-    const modalControllerSpy = jasmine.createSpyObj('IModalController', [
-      'showModal',
-      'hideModal',
-      'registerModalCloseRef',
-    ]);
-
-    const navParamsSpy = jasmine.createSpyObj('NavParams', {
-      get: {
-        header: 'Test header',
-        subheader: 'Test subheader',
-        items: [
-          { id: '1', text: 'Action 1' },
-          { id: '2', text: 'Action 2' },
-          { id: '3', text: 'Action 3' },
-        ],
-        cancelButtonText: 'Test cancel button text',
-      },
-    });
-
     TestBed.configureTestingModule({
       declarations: [
         ActionSheetComponent,
@@ -67,10 +46,6 @@ describe('ActionSheetComponent', () => {
         MockComponent(ionic.IonItemOptions),
         MockComponent(ionic.IonItemSliding),
       ],
-      providers: [
-        { provide: IModalController, useValue: modalControllerSpy },
-        { provide: NavParams, useValue: navParamsSpy },
-      ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
     TestBed.overrideModule(BrowserDynamicTestingModule, {
@@ -83,6 +58,14 @@ describe('ActionSheetComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ActionSheetComponent);
     component = fixture.componentInstance;
+    component.header = 'Test header';
+    component.subheader = 'Test subheader';
+    component.items = [
+      { id: '1', text: 'Action 1' },
+      { id: '2', text: 'Action 2' },
+      { id: '3', text: 'Action 3' },
+    ];
+    component.cancelButtonText = 'Test cancel button text';
     fixture.detectChanges();
   });
 
@@ -95,13 +78,13 @@ describe('ActionSheetComponent', () => {
       const expected = 'Test header';
       const rootElement: HTMLElement = fixture.debugElement.nativeElement;
       const header = rootElement.querySelector('kirby-card-header header').firstElementChild;
-      expect(component.config.header).toEqual(expected);
+      expect(component.header).toEqual(expected);
       expect(header.textContent).toEqual(expected);
     });
 
     it('should reflect changes in the UI', () => {
       const newHeader = 'Another header';
-      component.config.header = newHeader;
+      component.header = newHeader;
       fixture.detectChanges();
       const rootElement: HTMLElement = fixture.debugElement.nativeElement;
       const header = rootElement.querySelector('kirby-card-header header').firstElementChild;
@@ -114,13 +97,13 @@ describe('ActionSheetComponent', () => {
       const expected = 'Test subheader';
       const rootElement: HTMLElement = fixture.debugElement.nativeElement;
       const subheader = rootElement.querySelector('kirby-card-header header').lastElementChild;
-      expect(component.config.subheader).toEqual(expected);
+      expect(component.subheader).toEqual(expected);
       expect(subheader.textContent).toEqual(expected);
     });
 
     it('should reflect changes in the UI', () => {
       const newSubheader = 'Another subheader';
-      component.config.subheader = newSubheader;
+      component.subheader = newSubheader;
       fixture.detectChanges();
       const rootElement: HTMLElement = fixture.debugElement.nativeElement;
       const subheader = rootElement.querySelector('kirby-card-header header').lastElementChild;
@@ -139,7 +122,7 @@ describe('ActionSheetComponent', () => {
     });
 
     it('should reflect add/remove/edit changes of items', () => {
-      component.config.items = [
+      component.items = [
         { id: '1', text: 'New Action 1' },
         { id: '2', text: 'Action 2' },
         { id: '4', text: 'Action 4' },

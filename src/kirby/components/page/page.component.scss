@@ -1,0 +1,82 @@
+@import '../../scss/utils';
+
+/*
+ * Page Header
+ */
+ion-header, ion-toolbar {
+  --background: #{get-color('background-color')};
+  max-width: 768px;
+  margin: 0 auto;
+
+}
+
+ion-toolbar {
+  --border-width: 0 !important;
+  --padding-start: #{size('s')};
+  --padding-end: #{size('s')};
+}
+
+ion-title {
+  box-sizing: border-box;
+}
+
+ion-back-button {
+  --color: #{get-color('black')};
+  --icon-font-size: 24px;
+  width: 24px;
+  height: 24px;
+}
+
+/*
+ * Page Title
+ */
+.page-title {
+  margin-left: size('s');
+  margin-top: size('xxs');
+  margin-bottom: var(--kirby-page-title-margin-bottom, #{size('xl')});
+
+  &.has-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &.text-center {
+    text-align: center;
+  }
+  
+  &.text-right {
+    text-align: right;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+  }
+}
+
+/*
+ * Page Content
+ */
+ion-content {
+  --padding-start: var(--page-content-padding-start, #{size('s')});
+  --padding-end: var(--page-content-padding-end, #{size('s')});;
+  --background: #{get-color('background-color')};
+
+  .content-inner {
+    max-width: var(--page-content-max-width, 720px);
+    margin: 0 auto;
+    padding-bottom: size('xl');
+  }  
+
+  /*
+  * Fixed content
+  */
+  .fixed-content {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    .content-inner {
+      position: relative;
+    }
+  }
+}

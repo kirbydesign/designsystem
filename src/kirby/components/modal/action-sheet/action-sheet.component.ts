@@ -1,28 +1,27 @@
-import { Component } from '@angular/core';
-import { NavParams } from '@ionic/angular';
+import { Component, Input, Output, EventEmitter, HostBinding } from '@angular/core';
 
-import { ActionSheetConfig } from './config/action-sheet-config';
-import { IModalController } from '../services/modal.controller.interface';
 import { ActionSheetItem } from './config/action-sheet-item';
 
 @Component({
+  selector: 'kirby-action-sheet',
   templateUrl: './action-sheet.component.html',
   styleUrls: ['./action-sheet.component.scss'],
 })
 export class ActionSheetComponent {
-  config: ActionSheetConfig;
-  cancelButtonText: string;
-
-  constructor(private params: NavParams, private modalController: IModalController) {
-    this.config = this.params.get('config');
-    this.cancelButtonText = this.config.cancelButtonText || 'Cancel';
-  }
+  @Input() cancelButtonText = 'Cancel';
+  @Input() hideCancel?: boolean = false;
+  @Input() disabled?: boolean = false;
+  @Input() header?: string;
+  @Input() subheader?: string;
+  @Input() items: Array<ActionSheetItem>;
+  @Output() cancel = new EventEmitter();
+  @Output() itemSelect: EventEmitter<ActionSheetItem> = new EventEmitter<ActionSheetItem>();
 
   onItemSelect(selection: ActionSheetItem) {
-    this.modalController.hideTopmost(selection);
+    this.itemSelect.emit(selection);
   }
 
-  onModalDismiss() {
-    this.modalController.hideTopmost();
+  onCancel() {
+    this.cancel.emit();
   }
 }

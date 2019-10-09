@@ -2,7 +2,6 @@ import { IconSettings, ICON_SETTINGS } from '@kirbydesign/designsystem';
 
 import { AvatarExampleComponent } from './avatar-example/avatar-example.component';
 import { ButtonExampleComponent } from './button-example/button-example.component';
-import { FloatingActionButtonExampleComponent } from './floating-action-button-example/floating-action-button-example.component';
 import { CardExampleComponent } from './card-example/card-example.component';
 import { CardThemecolorExampleComponent } from './card/card-themecolor-example/card-themecolor-example.component';
 import { CardElevationsExampleComponent } from './card/card-elevations-example/card-elevations-example.component';
@@ -28,8 +27,17 @@ import { SlideButtonExampleComponent } from './slide-button-example/slide-button
 import { ToastExampleComponent } from './toast-example/toast-example.component';
 import { ToggleExampleComponent } from './toggle-example/toggle-example.component';
 import { EmptyStateExampleComponent } from './empty-state-example/empty-state-example.component';
+import { LoadingOverlayExampleComponent } from './loading-overlay-example/loading-overlay-example.component';
 import { ToolbarExampleComponent } from './toolbar-example/toolbar-example.component';
 import { ListSwipeExampleComponent } from './list/swipe/list-swipe-example.component';
+import { ListNoShapeExampleComponent } from './list/no-shape/list-no-shape-example.component';
+import { FabSheetExampleComponent } from './fab-sheet-example/fab-sheet-example.component';
+import { PageSimpleExampleComponent } from './page-example/simple/page-simple-example.component';
+import { PageAlignmentAndToolbarTitleExampleComponent } from './page-example/alignment-and-toolbar-title/page-alignment-and-toolbar-title-example.component';
+import { PageFixedTitleAndActionsExampleComponent } from './page-example/fixed-title-and-actions/page-fixed-title-and-actions-example.component';
+import { PageAdvancedExampleComponent } from './page-example/advanced/page-advanced-example.component';
+import { FormFieldExampleComponent } from './form-field-example/form-field-example.component';
+import { ExamplesComponent } from './examples.component';
 
 // Example of "custom" icons
 export const iconSettings: IconSettings = {
@@ -46,15 +54,16 @@ export const iconSettings: IconSettings = {
 };
 
 export const COMPONENT_DECLARATIONS: any[] = [
+  ExamplesComponent,
   ButtonExampleComponent,
   SlideButtonExampleComponent,
-  FloatingActionButtonExampleComponent,
   CardExampleComponent,
   CardThemecolorExampleComponent,
   CardElevationsExampleComponent,
   ListExampleComponent,
   ListLoadOnDemandExampleComponent,
   ListSwipeExampleComponent,
+  ListNoShapeExampleComponent,
   GridExampleComponent,
   AvatarExampleComponent,
   ChartExampleComponent,
@@ -75,7 +84,14 @@ export const COMPONENT_DECLARATIONS: any[] = [
   ToastExampleComponent,
   ToggleExampleComponent,
   EmptyStateExampleComponent,
+  LoadingOverlayExampleComponent,
   ToolbarExampleComponent,
+  FabSheetExampleComponent,
+  FormFieldExampleComponent,
+  PageSimpleExampleComponent,
+  PageAlignmentAndToolbarTitleExampleComponent,
+  PageFixedTitleAndActionsExampleComponent,
+  PageAdvancedExampleComponent,
 ];
 
 // Configure custom icons (used by example to show the usage of custom icons)

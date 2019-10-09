@@ -1,8 +1,9 @@
+import { FormFieldShowcaseComponent } from './form-field-showcase/form-field-showcase.component';
+import { ListNoShapeShowcaseComponent } from './list-no-shape-showcase/list-no-shape-showcase.component';
 import { ListSwipeShowcaseComponent } from './list-swipe-showcase/list-swipe-showcase.component';
 import { ExamplesModule } from '../examples/examples.module';
 import { AvatarShowcaseComponent } from './avatar-showcase/avatar-showcase.component';
 import { ButtonShowcaseComponent } from './button-showcase/button-showcase.component';
-import { FloatingActionButtonShowcaseComponent } from './floating-action-button-showcase/floating-action-button-showcase.component';
 import { CardShowcaseComponent } from './card-showcase/card-showcase.component';
 import { FontsShowcaseComponent } from './fonts-showcase/fonts-showcase.component';
 import { GridShowcaseComponent } from './grid-showcase/grid-showcase.component';
@@ -26,7 +27,10 @@ import { SlideButtonShowcaseComponent } from './slide-button-showcase/slide-butt
 import { ToastShowcaseComponent } from './toast-showcase/toast-showcase.component';
 import { ToggleShowcaseComponent } from './toggle-showcase/toggle-showcase.component';
 import { EmptyStateShowcaseComponent } from './empty-state-showcase/empty-state-showcase.component';
+import { LoadingOverlayShowcaseComponent } from './loading-overlay-showcase/loading-overlay-showcase.component';
 import { ToolbarShowcaseComponent } from './toolbar-showcase/toolbar-showcase.component';
+import { FabSheetShowcaseComponent } from './fab-sheet-showcase/fab-sheet-showcase.component';
+import { PageShowcaseComponent } from '~/app/showcase/page-showcase/page-showcase.component';
 
 export const COMPONENT_IMPORTS: any[] = [ExamplesModule, ShowcaseRoutingModule];
 
@@ -35,10 +39,10 @@ export const COMPONENT_EXPORTS: any[] = [
   ColorsShowcaseComponent,
   ButtonShowcaseComponent,
   SlideButtonShowcaseComponent,
-  FloatingActionButtonShowcaseComponent,
   ListShowcaseComponent,
   ListLoadOnDemandShowcaseComponent,
   ListSwipeShowcaseComponent,
+  ListNoShapeShowcaseComponent,
   GridShowcaseComponent,
   AvatarShowcaseComponent,
   ChartShowcaseComponent,
@@ -56,7 +60,11 @@ export const COMPONENT_EXPORTS: any[] = [
   ToastShowcaseComponent,
   ToggleShowcaseComponent,
   EmptyStateShowcaseComponent,
+  LoadingOverlayShowcaseComponent,
   ToolbarShowcaseComponent,
+  FormFieldShowcaseComponent,
+  FabSheetShowcaseComponent,
+  PageShowcaseComponent,
 ];
 
 export const COMPONENT_DECLARATIONS: any[] = [...COMPONENT_EXPORTS, ShowcaseComponent];

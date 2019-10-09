@@ -9,7 +9,6 @@ import { Color, ColorHelper } from '@kirbydesign/designsystem/helpers/color-help
   styleUrls: ['./button-example.component.scss'],
 })
 export class ButtonExampleComponent {
-  activeTab = 'default';
   @Input() themeColor: ThemeColor | '' = '';
   colors: Color[] = ColorHelper.getMainColors();
   items = [
@@ -21,8 +20,23 @@ export class ButtonExampleComponent {
       };
     }),
   ];
+  buttonSize = 'md';
+  buttonSizes = [
+    {
+      text: 'Small',
+      value: 'sm',
+    },
+    {
+      text: 'Medium (default)',
+      value: 'md',
+    },
+    {
+      text: 'Large',
+      value: 'lg',
+    },
+  ];
 
-  onSegmentSelect(segment) {
-    this.activeTab = segment.id;
+  onButtonSizeChange(value) {
+    this.buttonSize = value;
   }
 }

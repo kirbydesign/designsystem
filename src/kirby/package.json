@@ -24,12 +24,14 @@
   "homepage": "https://github.com/kirbydesign/designsystem#readme",
   "types": "index.d.ts",
   "dependencies": {
+    "@angular/cdk": "7.3.7",
     "@ionic/angular": "4.6.2",
     "highcharts": "7.0.3",
     "moment": "2.24.0"
   },
   "devDependencies": {
     "sass-extract": "2.1.0",
-    "sass-extract-loader": "1.1.0"
+    "sass-extract-loader": "1.1.0",
+    "ng-mocks": "7.7.0"
   }
 }
