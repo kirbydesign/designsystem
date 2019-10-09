@@ -19,7 +19,6 @@ export class ModalWrapperComponent implements AfterViewInit {
   constructor(
     private params: NavParams,
     private modalController: IModalController,
-    private modalHelper: ModalHelper,
     injector: Injector
   ) {
     this.config = this.params.get('config');
@@ -30,7 +29,7 @@ export class ModalWrapperComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.modalHelper.blurNativeWrapper(this.modalWrapper.nativeElement);
+    this.modalController.blurNativeWrapper(this.modalWrapper.nativeElement);
   }
 
   onFocusChange() {

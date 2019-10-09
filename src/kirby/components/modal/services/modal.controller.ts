@@ -59,6 +59,10 @@ export class ModalController implements IModalController {
     });
   }
 
+  public blurNativeWrapper(nativeElement: HTMLElement) {
+    this.modalHelper.blurNativeWrapper(nativeElement);
+  }
+
   public register(modal: { close: (data?: any) => {} }): void {
     this.modals.push(modal);
   }

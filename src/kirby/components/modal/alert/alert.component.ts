@@ -1,16 +1,6 @@
-import {
-  Component,
-  ElementRef,
-  ViewChild,
-  AfterViewInit,
-  OnInit,
-  HostBinding,
-  Input,
-} from '@angular/core';
+import { Component, ElementRef, ViewChild, AfterViewInit, HostBinding, Input } from '@angular/core';
 
-import { AlertConfig } from './config/alert-config';
 import { IModalController } from '../services/modal.controller.interface';
-import { ModalHelper } from '../services/modal.helper';
 
 @Component({
   selector: 'kirby-alert',
@@ -31,10 +21,10 @@ export class AlertComponent implements AfterViewInit {
 
   @HostBinding('class.ion-page') private _ionPageReset = false;
 
-  constructor(private modalController: IModalController, private modalHelper: ModalHelper) {}
+  constructor(private modalController: IModalController) {}
 
   ngAfterViewInit(): void {
-    this.modalHelper.blurNativeWrapper(this.alertWrapper.nativeElement);
+    this.modalController.blurNativeWrapper(this.alertWrapper.nativeElement);
   }
 
   onFocusChange() {
