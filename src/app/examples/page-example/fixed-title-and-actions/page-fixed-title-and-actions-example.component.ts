@@ -6,48 +6,45 @@ import { ModalController } from '@kirbydesign/designsystem/modal';
 
 import { BasePageExampleComponent } from '../base-page-example.component';
 
-const config = {
-  template: `<kirby-page defaultBackHref="/">
+const customTitleConfig = {
+  template: `<kirby-page>
+  <div *kirbyPageToolbarTitle>A Fixed Title</div>
+  ...
+</kirby-page>`,
+};
 
-  <!-- Custom Page Title -->
-  <div *kirbyPageTitle class="custom-page-title">
-    Custom
-    <kirby-icon name="arrow-down"></kirby-icon>
-  </div>
-  
-  <!-- Page Actions -->
+const fixedActionsConfig = {
+  template: `<kirby-page title="Normal Page Title">
+  <kirby-page-actions *kirbyPageActions="{fixed: true}">
+  ...
+  </kirby-page-actions>
+  ...
+</kirby-page>`,
+};
+
+const config = {
+  template: `<kirby-page toolbarTitle="A Fixed Title" defaultBackHref="/">
+  <!-- Fixed Page Actions -->
   <kirby-page-actions *kirbyPageActions>
-    <button kirby-button (click)="onCogSelect()">
-      <kirby-icon name="cog"></kirby-icon>
-    </button>
     <button kirby-button (click)="onMoreSelect()">
       <kirby-icon name="more"></kirby-icon>
     </button>
   </kirby-page-actions>
-  
-  <!-- Custom Content Template (without wrapper) -->
-  <div *kirbyPageContent [innerHTML]="content"></div>
-  
-  <!-- Fixed Content -->
-  <kirby-fab-sheet *kirbyPageContent="{fixed: true}" horizontalAlignment="right">
-    <kirby-icon name="write-message"></kirby-icon>
-    <kirby-action-sheet
-      header="Your action sheet header"
-      subheader="Your action sheet subheader"
-      [items]="items"
-      (itemSelect)="onItemSelect($event)">
-    </kirby-action-sheet>
-  </kirby-fab-sheet>
+  <!-- Page Content -->
+  <kirby-page-content>
+    <div [innerHTML]="content"></div>
+  </kirby-page-content>
 </kirby-page>`,
 };
 @Component({
   template: config.template,
-  styles: ['.custom-page-title { display: inline-flex; }'],
 })
-export class PageAdvancedExampleComponent extends BasePageExampleComponent {
+export class PageFixedTitleAndActionsExampleComponent extends BasePageExampleComponent {
   static readonly template = config.template
     .replace(' defaultBackHref="/"', '')
-    .replace(' [innerHTML]="content">', '>...');
+    .replace('<div [innerHTML]="content"></div>', '...');
+  static readonly customTitleTemplate = customTitleConfig.template;
+  static readonly fixedActionsTemplate = fixedActionsConfig.template;
 
   items: ActionSheetItem[] = [
     { id: '1', text: 'Option 1' },
