@@ -3,7 +3,10 @@ import { Component } from '@angular/core';
 import { BasePageExampleComponent } from '../base-page-example.component';
 
 const config = {
-  template: `<kirby-page title="Centered Title" titleAlignment="center" toolbarTitle="A Different Title" defaultBackHref="/">
+  template: `<kirby-page
+  titleAlignment="center"
+  title="Centered Title"
+  toolbarTitle="A Different Title" defaultBackHref="/">
   <kirby-page-content>
     <div [innerHTML]="content"></div>
   </kirby-page-content>
@@ -11,10 +14,11 @@ const config = {
 };
 @Component({
   template: config.template,
-  styleUrls: ['../base-page-example.component.scss'],
 })
 export class PageAlignmentAndToolbarTitleExampleComponent extends BasePageExampleComponent {
-  static readonly template = config.template.replace(' defaultBackHref="/"', '');
+  static readonly template = config.template
+    .replace(' defaultBackHref="/"', '')
+    .replace('<div [innerHTML]="content"></div>', '...');
 
   constructor() {
     super();

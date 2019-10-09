@@ -1,4 +1,4 @@
-export class BasePageExampleComponent {
+export abstract class BasePageExampleComponent {
   content = `<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci animi aperiam deserunt dolore error esse
             laborum magni natus nihil optio perferendis placeat, quae sed, sequi sunt totam voluptatem! Dicta,
             quaerat!</p>
@@ -42,6 +42,4 @@ export class BasePageExampleComponent {
             nesciunt quas recusandae saepe soluta tempore velit, vitae! Aperiam distinctio exercitationem id incidunt
             ipsa repellendus similique sunt vero.</p>
         <h3>THE END</h3>`;
-
-  constructor() {}
 }

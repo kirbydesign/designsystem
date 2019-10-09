@@ -1,16 +1,16 @@
 <table class="cookbook-properties">
     <thead>
-        <th>Attribute</th>
-        <th>Description</th>
-        <th>Type</th>
-        <th>Default</th>
+        <th *ngIf="columns.Name">{{columns.Name}}</th>
+        <th *ngIf="columns.Description">{{columns.Description}}</th>
+        <th *ngIf="columns.Type">{{columns.Type}}</th>
+        <th *ngIf="columns.Default">{{columns.Default}}</th>
     </thead>
     <tbody>
         <tr *ngFor="let prop of properties">
-            <td><code>{{ prop.name }}</code></td>
-            <td>{{ prop.description }}</td>
-            <td>{{ prop.inputValues.join(' | ') }}</td>
-            <td>{{ prop.defaultValue }}</td>
+            <td *ngIf="columns.Name"><code>{{ prop.name }}</code></td>
+            <td *ngIf="columns.Description">{{ prop.description }}</td>
+            <td *ngIf="columns.Type">{{ prop.inputValues ? prop.inputValues.join(' | '): '' }}</td>
+            <td *ngIf="columns.Default">{{ prop.defaultValue }}</td>
         </tr>
     </tbody>
 </table>
