@@ -8,6 +8,10 @@
     grid-template-columns: minmax(0, 60%) minmax(320px, 40%);
   }
   margin-bottom: size('m');
+
+  .block {
+    grid-column: span 2;
+  }
 }
 
 .fonts-examples,
@@ -50,25 +54,24 @@
   }
 }
 
+.class-example {
+  background-color: get-color('background-color');
+  display: inline-block;
+  color: get-color('dark');
+  border-radius: $border-radius;
+  padding: size('xxxs') size('xxs');
+  margin-bottom: size('xxs');
+  font-family: Lucida Console,Lucida Sans Typewriter,Monaco,monospace;
+  &::after {
+    margin-left: size('xxs');
+    color: get-color('danger');
+  }
+}
+
 .sample {
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-  &-header-1,
-  &-header-2,
-  &-header-3,
-  &-body,
-  &-body-small,
-  &-body-small-light,
-  &-body-xsmall,
-  &-body-xxsmall {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    &::after {
-      margin-left: size('xxs');
-      color: get-color('danger');
-    }
-  }
 
   &-header-1 {
     &::after {
@@ -113,12 +116,11 @@
   }
 }
 
-
-/* AFTER REFACTOR */
 code {
   background-color: get-color('medium');
   color: get-color('black');
   padding: 0.2rem 0.5rem;
   border-radius: 2px;
   white-space: nowrap;
+  font-family: Lucida Console,Lucida Sans Typewriter,Monaco,monospace;
 }
