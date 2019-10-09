@@ -82,9 +82,11 @@ export class ModalHelper {
   }
 
   public blurNativeWrapper(nativeElement: HTMLElement) {
-    setTimeout(() => {
-      nativeElement.focus();
-      nativeElement.blur();
-    }, 50);
+    if (nativeElement) {
+      setTimeout(() => {
+        nativeElement.focus();
+        nativeElement.blur();
+      }, 50);
+    }
   }
 }
