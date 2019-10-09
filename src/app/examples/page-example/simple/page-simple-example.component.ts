@@ -11,10 +11,11 @@ const config = {
 };
 @Component({
   template: config.template,
-  styleUrls: ['../base-page-example.component.scss'],
 })
 export class PageSimpleExampleComponent extends BasePageExampleComponent {
-  static readonly template = config.template.replace(' defaultBackHref="/"', '');
+  static readonly template = config.template
+    .replace(' defaultBackHref="/"', '')
+    .replace('<div [innerHTML]="content"></div>', '...');
 
   constructor() {
     super();

@@ -33,7 +33,7 @@ ion-back-button {
 .page-title {
   margin-left: size('s');
   margin-top: size('xxs');
-  margin-bottom: var(--page-title-margin-bottom, #{size('xl')});
+  margin-bottom: var(--kirby-page-title-margin-bottom, #{size('xl')});
 
   &.has-actions {
     display: flex;
