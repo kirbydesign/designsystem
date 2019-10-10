@@ -3,8 +3,10 @@ import {
   Component,
   ContentChild,
   ElementRef,
+  EventEmitter,
   Input,
   OnInit,
+  Output,
   Renderer2,
   ViewChild,
 } from '@angular/core';
@@ -24,6 +26,7 @@ interface TabButtonIcon {
 })
 export class TabButtonComponent implements OnInit, AfterViewInit {
   @Input() routerLink: string;
+  @Output() click = new EventEmitter();
   @ContentChild(IconComponent) iconRef: IconComponent;
   @ViewChild(IonTabButton) tabButton: IonTabButton;
 
@@ -52,6 +55,10 @@ export class TabButtonComponent implements OnInit, AfterViewInit {
     } else if (iconRef.customName) {
       this.customIcon = icon;
     }
+  }
+
+  onClick(e) {
+    this.click.emit(e);
   }
 
   private removeWrapper() {
