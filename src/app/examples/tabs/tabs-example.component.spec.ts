@@ -1,10 +1,10 @@
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Location } from '@angular/common';
-import { RouterTestingModule } from '@angular/router/testing';
+import { MockModule } from 'ng-mocks';
 
 import { TabsExampleComponent } from './tabs-example.component';
-import { KirbyModule } from '@kirbydesign/designsystem';
+import { KirbyTestingModule } from '@kirbydesign/designsystem/testing';
 
 describe('TabsExampleComponent', () => {
   let component: TabsExampleComponent;
@@ -12,7 +12,7 @@ describe('TabsExampleComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [KirbyModule, RouterTestingModule],
+      imports: [MockModule(KirbyTestingModule)],
       declarations: [TabsExampleComponent],
       providers: [Location],
     }).compileComponents();

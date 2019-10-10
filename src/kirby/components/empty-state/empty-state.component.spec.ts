@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MockComponents } from 'ng-mocks';
 
 import { EmptyStateComponent } from './empty-state.component';
-import { IconComponent } from '@kirbydesign/designsystem';
+import { IconComponent } from '@kirbydesign/designsystem/components/icon/icon.component';
 
 describe('EmptyStateComponent', () => {
   let component: EmptyStateComponent;

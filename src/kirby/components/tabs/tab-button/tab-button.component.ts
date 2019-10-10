@@ -44,6 +44,7 @@ export class TabButtonComponent implements OnInit, AfterViewInit {
   }
 
   private setIcon(iconRef: IconComponent) {
+    if (!iconRef) return;
     const defaultIcon = String(iconRef.name || iconRef.customName).replace('-outline', '');
     const icon: TabButtonIcon = {
       default: defaultIcon,
