@@ -10,7 +10,6 @@ import {
   TemplateRef,
   ViewChild,
   TrackByFunction,
-  SimpleChanges,
 } from '@angular/core';
 
 import {
