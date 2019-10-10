@@ -10,6 +10,7 @@ import {
   TemplateRef,
   ViewChild,
   TrackByFunction,
+  SimpleChanges,
 } from '@angular/core';
 
 import {
@@ -135,6 +136,8 @@ export class ListComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.initialzeSwipeActions();
+    this.isSelectable = this.itemSelect.observers.length > 0;
+    this.isLoadOnDemandEnabled = this.loadOnDemand.observers.length > 0;
   }
 
   ngOnChanges(): void {
@@ -146,8 +149,6 @@ export class ListComponent implements OnInit, OnChanges {
       this.groupedItems = null;
       this.orderMap = null;
     }
-    this.isSelectable = this.itemSelect.observers.length > 0;
-    this.isLoadOnDemandEnabled = this.loadOnDemand.observers.length > 0;
   }
 
   isFirstItem(item: any, index: number) {
