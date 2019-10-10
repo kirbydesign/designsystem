@@ -1,11 +1,12 @@
 <ion-tab-button class="tab-button" [tab]="routerLink" (click)="onClick($event)">
-    <div class="icon-container" *ngIf="icon">
-        <kirby-icon [name]="tabButton.selected ? icon?.default : icon?.outlined"
-                    [customName]="tabButton.selected ? customIcon?.default : customIcon?.outlined">
-        </kirby-icon>
-        <ng-content select="kirby-badge"></ng-content>
-    </div>
-    <ion-label><ng-content></ng-content></ion-label>
+  <div class="icon-container" *ngIf="icon">
+    <kirby-icon *ngIf="tabButton.selected" [name]="icon?.default" [customName]="customIcon?.default"></kirby-icon>
+    <kirby-icon *ngIf="!tabButton.selected" [name]="icon?.outlined" [customName]="customIcon?.outlined"></kirby-icon>
+    <ng-content select="kirby-badge"></ng-content>
+  </div>
+  <ion-label>
+    <ng-content></ng-content>
+  </ion-label>
 </ion-tab-button>
 
 <ng-template>
