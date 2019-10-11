@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 @Component({
   template: `
-    <kirby-page [title]="title" defaultBackHref="/">
+    <kirby-page [title]="title">
       <kirby-page-actions *kirbyPageActions>
         <button kirby-button (click)="onCogSelect()">
           <kirby-icon name="cog"></kirby-icon>
