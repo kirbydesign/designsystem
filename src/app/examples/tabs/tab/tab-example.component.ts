@@ -4,6 +4,14 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   template: `
     <kirby-page [title]="title" defaultBackHref="/">
+      <kirby-page-actions *kirbyPageActions>
+        <button kirby-button (click)="onCogSelect()">
+          <kirby-icon name="cog"></kirby-icon>
+        </button>
+        <button kirby-button (click)="onMoreSelect()">
+          <kirby-icon name="more"></kirby-icon>
+        </button>
+      </kirby-page-actions>
       <kirby-page-content>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt error minus odit
@@ -52,5 +60,13 @@ export class TabExampleComponent implements OnInit {
 
   ngOnInit(): void {
     this.title = this.route.snapshot.data.title;
+  }
+
+  onCogSelect() {
+    alert('On cog select');
+  }
+
+  onMoreSelect() {
+    alert('On more select');
   }
 }
