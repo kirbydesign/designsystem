@@ -1,37 +1,26 @@
 import {
-  AfterViewInit,
   Component,
-  ContentChild,
   ElementRef,
   EventEmitter,
   Input,
   OnInit,
   Output,
   Renderer2,
-  ViewChild,
+  QueryList,
+  ContentChildren,
 } from '@angular/core';
-import { IonTabButton } from '@ionic/angular';
 
 import { IconComponent } from '@kirbydesign/designsystem/components/icon/icon.component';
-
-interface TabButtonIcon {
-  default: string;
-  outlined: string;
-}
 
 @Component({
   selector: 'kirby-tab-button',
   templateUrl: './tab-button.component.html',
   styleUrls: ['./tab-button.component.scss'],
 })
-export class TabButtonComponent implements OnInit, AfterViewInit {
+export class TabButtonComponent implements OnInit {
   @Input() routerLink: string;
-  @Output() click = new EventEmitter();
-  @ContentChild(IconComponent) iconRef: IconComponent;
-  @ViewChild(IonTabButton) tabButton: IonTabButton;
-
-  icon: TabButtonIcon;
-  customIcon: TabButtonIcon;
+  @Output() click = new EventEmitter<Event>();
+  @ContentChildren(IconComponent) icons: QueryList<IconComponent>;
 
   constructor(private elementRef: ElementRef, private renderer: Renderer2) {}
 
@@ -39,27 +28,8 @@ export class TabButtonComponent implements OnInit, AfterViewInit {
     this.removeWrapper();
   }
 
-  ngAfterViewInit(): void {
-    this.setIcon(this.iconRef);
-  }
-
-  private setIcon(iconRef: IconComponent) {
-    if (!iconRef) return;
-    const defaultIcon = String(iconRef.name || iconRef.customName).replace('-outline', '');
-    const icon: TabButtonIcon = {
-      default: defaultIcon,
-      outlined: `${defaultIcon}-outline`,
-    };
-
-    if (iconRef.name) {
-      this.icon = icon;
-    } else if (iconRef.customName) {
-      this.customIcon = icon;
-    }
-  }
-
-  onClick(e) {
-    this.click.emit(e);
+  onClick(event: Event) {
+    this.click.emit(event);
   }
 
   private removeWrapper() {
