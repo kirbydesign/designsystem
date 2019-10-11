@@ -17,6 +17,8 @@ import {
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
 import { ButtonComponent } from '../button/button.component';
+import { NavigationEnd, Router, RouterEvent } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 type stickyConfig = { sticky: boolean };
 type fixedConfig = { fixed: boolean };
@@ -148,11 +150,23 @@ export class PageComponent implements OnInit, OnDestroy, AfterContentInit, After
   customContentTemplate: TemplateRef<any>;
   fixedContentTemplate: TemplateRef<any>;
   private pageTitleObserver;
+  private routerEventsSubscription: Subscription;
 
-  constructor(private elementRef: ElementRef, private renderer: Renderer2) {}
+  constructor(
+    private elementRef: ElementRef,
+    private renderer: Renderer2,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.removeWrapper();
+
+    this.routerEventsSubscription = this.router.events.subscribe((event: RouterEvent) => {
+      if (event instanceof NavigationEnd && this.pageTitleObserver) {
+        this.pageTitleObserver.disconnect();
+        this.pageTitleObserver = this.observePageTitle();
+      }
+    });
   }
 
   ngAfterContentInit(): void {
@@ -184,6 +198,9 @@ export class PageComponent implements OnInit, OnDestroy, AfterContentInit, After
   }
 
   ngOnDestroy(): void {
+    if (this.routerEventsSubscription) {
+      this.routerEventsSubscription.unsubscribe();
+    }
     if (this.pageTitleObserver) {
       this.pageTitleObserver.disconnect();
     }
@@ -197,8 +214,8 @@ export class PageComponent implements OnInit, OnDestroy, AfterContentInit, After
   private setToolbarTitleTemplate(defaultTitleTemplate: TemplateRef<any>) {
     // tslint:disable:prettier
     this.toolbarTitleTemplate = this.customToolbarTitleTemplate
-    ? this.customToolbarTitleTemplate
-    : this.toolbarTitle
+      ? this.customToolbarTitleTemplate
+      : this.toolbarTitle
       ? this.simpleToolbarTitleTemplate
       : defaultTitleTemplate;
     // tslint:enable:prettier
