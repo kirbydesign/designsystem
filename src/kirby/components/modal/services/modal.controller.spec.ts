@@ -31,5 +31,11 @@ describe('modalController', () => {
         modalController.hideTopmost();
       }).not.toThrow();
     });
+
+    it('should allow hideAll even if no modals are registered', () => {
+      expect(() => {
+        modalController.hideAll;
+      }).not.toThrow();
+    });
   });
 });

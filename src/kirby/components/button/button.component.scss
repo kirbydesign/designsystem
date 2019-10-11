@@ -19,7 +19,7 @@
   vertical-align: middle;
   box-sizing: border-box;
   white-space: nowrap;
-  
+
   // we default to 'md' size.
   margin: size('xxxs');
   padding: size('xxs') var(--kirby-button-padding-right) size('xxs') var(--kirby-button-padding-left);
@@ -32,7 +32,7 @@
     --kirby-button-padding-left: #{size('xs')};
     --kirby-button-padding-right: #{size('s')};
   }
-  
+
   &.icon-right {
     --kirby-icon-margin-left: #{size('xxs')};
     --kirby-button-padding-left: #{size('s')};
@@ -67,7 +67,7 @@
     --kirby-button-background-color:#{get-color('primary')};
     --kirby-button-border-color: #{get-color('primary')};
     --kirby-button-color: #{get-color('primary-contrast')};
-  
+
     &.destructive {
       --kirby-button-background-color:#{get-color('danger')};
       --kirby-button-border-color: #{get-color('danger')};
@@ -124,9 +124,9 @@
   :host-context(.default),
   :host-context(.kirby-color-brightness-white) {
     &.attention-level2 {
-      --kirby-button-background-color: #{get-color('light')};
-      --kirby-button-border-color: #{get-color('light')};
-      --kirby-button-color: #{get-color('light-contrast')};
+      --kirby-button-background-color: #{get-color('black')};
+      --kirby-button-border-color: #{get-color('black')};
+      --kirby-button-color: #{get-color('black-contrast')};
     }
   }
 
@@ -139,7 +139,7 @@
       --kirby-button-color: #{get-color('white')};
     }
   }
-  
+
   &.floating {
     $fab-size: 64px;
     width: $fab-size !important;

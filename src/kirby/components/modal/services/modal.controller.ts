@@ -42,12 +42,25 @@ export class ModalController implements IModalController {
     });
   }
 
-  public showAlert(config: AlertConfig, onCloseModal?: (result?: boolean) => void) {
-    this.alertHelper.showAlert(config).then((result) => {
+  public showAlert(config: AlertConfig, onCloseModal?: (result: boolean) => void): void {
+    const modalCloseEvent: Promise<boolean> = this.alertHelper.showAlert(
+      config,
+      this.register.bind(this)
+    );
+
+    modalCloseEvent.then((selection: any) => {
+      this.forgetTopmost();
+
       if (onCloseModal) {
-        onCloseModal(result);
+        onCloseModal(
+          typeof selection === 'object' && 'data' in selection ? selection.data : selection
+        );
       }
     });
+  }
+
+  public blurNativeWrapper(nativeElement: HTMLElement) {
+    this.modalHelper.blurNativeWrapper(nativeElement);
   }
 
   public register(modal: { close: (data?: any) => {} }): void {

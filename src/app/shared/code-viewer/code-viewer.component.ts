@@ -47,7 +47,7 @@ export class CodeViewerComponent implements OnChanges, AfterViewChecked {
   @Input()
   set ts(value: string) {
     this.code = value;
-    this.language = 'js'; // TODO: 'ts'
+    this.language = 'ts';
   }
 
   ngOnChanges(_: SimpleChanges): void {

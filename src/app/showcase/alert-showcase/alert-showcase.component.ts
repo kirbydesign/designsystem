@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 
 import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
-
-declare var require: any;
+import { AlertExampleComponent } from '~/app/examples/alert-example/alert-example.component';
 
 @Component({
   selector: 'kirby-alert-showcase',
@@ -10,30 +9,34 @@ declare var require: any;
   preserveWhitespaces: true,
 })
 export class AlertShowcaseComponent {
-  exampleHtml: string = require('../../examples/alert-example/alert-example.component.html');
+  exampleConfiguration: string = AlertExampleComponent.alertConfigWithIcon;
   properties: ShowcaseProperty[] = [
     {
       name: 'title',
       description: 'The title of the alert',
-      defaultValue: '',
       inputValues: ['string'],
     },
     {
       name: 'message',
-      description: '(Optional) The message shown under the title',
-      defaultValue: '',
+      description: '(Optional) The message shown under the title (or icon if specified)',
       inputValues: ['string'],
     },
     {
-      name: 'okBtnText',
-      description: 'The text that will appear on the ok button',
-      defaultValue: '',
-      inputValues: ['string'],
+      name: 'icon',
+      description: '(Optional) Icon to be shown below the title',
+      inputValues: ['{ name: string }', '{ name: string, themeColor: string }'],
     },
     {
-      name: 'cancelBtnText',
-      description: '(Optional) The text that will appear on the cancel button',
-      defaultValue: '',
+      name: 'okBtn',
+      description:
+        '(Optional) Defines the text that will appear on the OK button and if it should be destructive',
+      defaultValue: 'OK',
+      inputValues: ['string', '{ text: string, isDestructive: boolean }'],
+    },
+    {
+      name: 'cancelBtn',
+      description:
+        '(Optional) The text that will appear on the cancel button. If not defined the cancel button will not be shown.',
       inputValues: ['string'],
     },
   ];
