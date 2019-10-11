@@ -158,9 +158,9 @@ describe('ListComponent', () => {
 
   describe('function: ngOnInit', () => {
     it('should enable load more, if there is a subscriber to the loadMore event emitter', () => {
-      component.loadOnDemand.subscribe((loadMoreEvent: LoadOnDemandEvent) => {});
+      component.loadOnDemand.subscribe((_: LoadOnDemandEvent) => {});
 
-      runNgOnChanges();
+      component.ngOnInit();
 
       expect(component.isLoadOnDemandEnabled).toBeTruthy();
     });
