@@ -15,10 +15,10 @@ import {
   AfterContentInit,
 } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-
-import { ButtonComponent } from '../button/button.component';
 import { NavigationEnd, Router, RouterEvent } from '@angular/router';
 import { Subscription } from 'rxjs';
+
+import { ButtonComponent } from '../button/button.component';
 
 type stickyConfig = { sticky: boolean };
 type fixedConfig = { fixed: boolean };
