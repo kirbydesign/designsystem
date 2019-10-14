@@ -149,7 +149,7 @@ export class PageComponent implements OnInit, OnDestroy, AfterContentInit, After
   toolbarActionsVisibility: 'visible' | 'hidden' = 'hidden';
   customContentTemplate: TemplateRef<any>;
   fixedContentTemplate: TemplateRef<any>;
-  private pageTitleObserver;
+  private pageTitleObserver: IntersectionObserver;
   private routerEventsSubscription: Subscription;
 
   constructor(
