@@ -46,6 +46,7 @@ import { IconComponent } from '@kirbydesign/designsystem/components/icon/icon.co
 import { TabsModule } from '@kirbydesign/designsystem/components/tabs/tabs.module';
 import { TabsComponent } from '@kirbydesign/designsystem/components/tabs/tabs.component';
 import { TabButtonComponent } from '@kirbydesign/designsystem/components/tabs/tab-button/tab-button.component';
+import { ItemComponent } from '@kirbydesign/designsystem/components/item/item.component';
 
 /*
  * Fake components should be handled by the list of kirby
@@ -146,7 +147,8 @@ const MOCK_COMPONENTS = MockComponents(
   FakeIonLabelComponent,
   LoadingOverlayComponent,
   TabsComponent,
-  TabButtonComponent
+  TabButtonComponent,
+  ItemComponent
 );
 
 /**

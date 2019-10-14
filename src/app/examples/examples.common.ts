@@ -40,6 +40,7 @@ import { FormFieldExampleComponent } from './form-field-example/form-field-examp
 import { ExamplesComponent } from './examples.component';
 import { TabsExampleComponent } from './tabs/tabs-example.component';
 import { TabExampleComponent } from './tabs/tab/tab-example.component';
+import { ItemExampleComponent } from '~/app/examples/item/item-example.component';
 
 // Example of "custom" icons
 export const iconSettings: IconSettings = {
@@ -96,6 +97,7 @@ export const COMPONENT_DECLARATIONS: any[] = [
   PageAdvancedExampleComponent,
   TabsExampleComponent,
   TabExampleComponent,
+  ItemExampleComponent,
 ];
 
 // Configure custom icons (used by example to show the usage of custom icons)

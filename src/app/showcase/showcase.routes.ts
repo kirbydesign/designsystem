@@ -32,6 +32,7 @@ import { ListNoShapeShowcaseComponent } from './list-no-shape-showcase/list-no-s
 import { FabSheetShowcaseComponent } from './fab-sheet-showcase/fab-sheet-showcase.component';
 import { PageShowcaseComponent } from './page-showcase/page-showcase.component';
 import { TabsShowcaseComponent } from './tabs-showcase/tabs-showcase.component';
+import { ItemShowcaseComponent } from '~/app/showcase/item-showcase/item-showcase.component';
 
 export const routes: Routes = [
   {
@@ -42,6 +43,10 @@ export const routes: Routes = [
         path: '',
         redirectTo: 'button',
         pathMatch: 'full',
+      },
+      {
+        path: 'item',
+        component: ItemShowcaseComponent,
       },
       {
         path: 'button',
