@@ -20,11 +20,12 @@ describe('ChartComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ChartComponent);
     component = fixture.componentInstance;
-    component.data = this.data;
+    component.data = [];
     fixture.detectChanges();
   });
 
   it('should create', () => {
+    console.log(component.data);
     expect(component).toBeTruthy();
   });
 

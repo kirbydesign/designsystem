@@ -10,7 +10,8 @@ declare var require: any;
 })
 export class SegmentedControlShowcaseComponent implements OnInit {
   selectedMode: 'default' | 'chip';
-  exampleHtml: string = require('../../examples/segmented-control-example/segmented-control-example.component.html');
+  exampleHtml: string = require('!raw-loader!../../examples/segmented-control-example/segmented-control-example.component.html')
+    .default;
 
   properties: ShowcaseProperty[] = [
     {

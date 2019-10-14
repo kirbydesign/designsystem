@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, HostBinding } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { ScssHelper } from '../../scss/scss-helper';
@@ -23,7 +23,7 @@ class GridCard {
   selector: 'kirby-grid',
   templateUrl: './grid.component.html',
   styleUrls: ['./grid.component.scss'],
-  // tslint:disable-next-line:use-host-property-decorator
+  // tslint:disable-next-line
   host: { '[attr.max-columns]': 'maxColumns' },
 })
 export class GridComponent implements OnInit, OnDestroy {

@@ -9,7 +9,8 @@ declare var require: any;
   styleUrls: ['./badge-showcase.component.scss'],
 })
 export class BadgeShowcaseComponent {
-  exampleHtml: string = require('../../examples/badge-example/badge-example.component.html');
+  exampleHtml: string = require('!raw-loader!../../examples/badge-example/badge-example.component.html')
+    .default;
 
   properties: ShowcaseProperty[] = [
     {

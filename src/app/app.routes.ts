@@ -24,24 +24,26 @@ export const routes: Routes = [
       },
       {
         path: 'showcase',
-        loadChildren: './showcase/showcase.module#ShowcaseModule',
+        loadChildren: () => import('./showcase/showcase.module').then((m) => m.ShowcaseModule),
       },
       {
         path: 'component-status',
-        loadChildren: './component-status/component-status.module#ComponentStatusModule',
+        loadChildren: () =>
+          import('./component-status/component-status.module').then((m) => m.ComponentStatusModule),
       },
       {
         path: 'changelog',
-        loadChildren: './changelog/changelog.module#ChangelogModule',
+        loadChildren: () => import('./changelog/changelog.module').then((m) => m.ChangelogModule),
       },
     ],
   },
   {
     path: 'examples',
-    loadChildren: './examples/examples-routing.module#ExamplesRoutingModule',
+    loadChildren: () =>
+      import('./examples/examples-routing.module').then((m) => m.ExamplesRoutingModule),
   },
   {
     path: 'designer',
-    loadChildren: './designer/designer.module#DesignerModule',
+    loadChildren: () => import('./designer/designer.module').then((m) => m.DesignerModule),
   },
 ];

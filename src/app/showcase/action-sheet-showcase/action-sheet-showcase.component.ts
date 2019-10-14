@@ -10,7 +10,8 @@ declare var require: any;
   preserveWhitespaces: true,
 })
 export class ActionSheetShowcaseComponent {
-  exampleHtml: string = require('../../examples/action-sheet-example/action-sheet-example.component.html');
+  exampleHtml: string = require('!raw-loader!../../examples/action-sheet-example/action-sheet-example.component.html')
+    .default;
   properties: ShowcaseProperty[] = [
     {
       name: 'header',
@@ -37,4 +38,8 @@ export class ActionSheetShowcaseComponent {
       inputValues: ['string'],
     },
   ];
+
+  constructor() {
+    console.log(this.exampleHtml);
+  }
 }
