@@ -1,0 +1,19 @@
+@import '../../../kirby/scss/utils';
+
+:host {
+  display: block;
+  background: get-color('background-color');
+  height: 100%;
+}
+
+.logo {
+  display: none;
+  @include media(">=large") {
+    display: block;
+  }
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+}

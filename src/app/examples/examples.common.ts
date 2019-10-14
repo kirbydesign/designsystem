@@ -38,6 +38,8 @@ import { PageFixedTitleAndActionsExampleComponent } from './page-example/fixed-t
 import { PageAdvancedExampleComponent } from './page-example/advanced/page-advanced-example.component';
 import { FormFieldExampleComponent } from './form-field-example/form-field-example.component';
 import { ExamplesComponent } from './examples.component';
+import { TabsExampleComponent } from './tabs/tabs-example.component';
+import { TabExampleComponent } from './tabs/tab/tab-example.component';
 
 // Example of "custom" icons
 export const iconSettings: IconSettings = {
@@ -92,6 +94,8 @@ export const COMPONENT_DECLARATIONS: any[] = [
   PageAlignmentAndToolbarTitleExampleComponent,
   PageFixedTitleAndActionsExampleComponent,
   PageAdvancedExampleComponent,
+  TabsExampleComponent,
+  TabExampleComponent,
 ];
 
 // Configure custom icons (used by example to show the usage of custom icons)

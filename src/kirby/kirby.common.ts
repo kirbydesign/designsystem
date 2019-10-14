@@ -10,7 +10,6 @@ import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { ChipComponent } from './components/chip/chip.component';
 import { EmptyStateComponent } from './components/empty-state/empty-state.component';
 import { GridComponent } from './components/grid/grid.component';
-import { IconComponent } from './components/icon/icon.component';
 import { ListCellLineComponent } from './components/list/list-cell-line/list-cell-line.component';
 import { ListCellComponent } from './components/list/list-cell/list-cell.component';
 import { ListFlexItemComponent } from './components/list/list-flex-item/list-flex-item.component';
@@ -66,7 +65,6 @@ export const declarations = [
   ListHeaderDirective,
   ListHeaderComponent,
   ListFooterDirective,
-  IconComponent,
   ChartComponent,
   GridComponent,
   ComponentLoaderDirective,
