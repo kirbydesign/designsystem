@@ -217,7 +217,11 @@ export class PageComponent implements OnInit, OnDestroy, AfterContentInit, After
       ? this.customToolbarTitleTemplate
       : this.toolbarTitle
       ? this.simpleToolbarTitleTemplate
-      : defaultTitleTemplate;
+    this.toolbarTitleTemplate = this.customToolbarTitleTemplate
+      ? this.customToolbarTitleTemplate
+      : this.toolbarTitle
+        ? this.simpleToolbarTitleTemplate
+        : defaultTitleTemplate;
     // tslint:enable:prettier
   }
 
