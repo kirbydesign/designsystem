@@ -213,10 +213,7 @@ export class PageComponent implements OnInit, OnDestroy, AfterContentInit, After
 
   private setToolbarTitleTemplate(defaultTitleTemplate: TemplateRef<any>) {
     // tslint:disable:prettier
-    this.toolbarTitleTemplate = this.customToolbarTitleTemplate
-      ? this.customToolbarTitleTemplate
-      : this.toolbarTitle
-      ? this.simpleToolbarTitleTemplate
+    // prettier-ignore
     this.toolbarTitleTemplate = this.customToolbarTitleTemplate
       ? this.customToolbarTitleTemplate
       : this.toolbarTitle
