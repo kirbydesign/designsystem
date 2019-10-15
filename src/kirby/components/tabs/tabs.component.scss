@@ -1,5 +1,9 @@
 @import '../../scss/utils';
 
+:host {
+  --kirby-tab-bar-max-width: none;
+}
+
 ion-tabs {
 
   @include media(">=large") {
@@ -10,10 +14,10 @@ ion-tabs {
     --background: #{get-color('background-color')};
     --border: none;
     --color: #{get-color('black')};
+    max-width: var(--kirby-tab-bar-max-width);
   
     @include media(">=large") {
       width: 100%;
-      max-width: 1280px;
       margin: 0 auto;
       justify-content: flex-end;
     }
