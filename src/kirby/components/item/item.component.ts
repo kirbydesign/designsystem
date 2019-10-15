@@ -5,4 +5,6 @@ import { Component } from '@angular/core';
   templateUrl: './item.component.html',
   styleUrls: ['./item.component.scss'],
 })
-export class ItemComponent {}
+export class ItemComponent {
+  // SET FLEX WRAP IF THERE's a paragraph
+}

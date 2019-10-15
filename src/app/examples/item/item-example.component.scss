@@ -4,16 +4,9 @@
   display: block;
   background: get-color('background-color');
   height: 100%;
-}
+  padding: size('m');
 
-.logo {
-  display: none;
-  @include media(">=large") {
-    display: block;
+  kirby-item {
+    margin: size('m') 0;
   }
-}
-
-.container {
-  max-width: 1280px;
-  margin: 0 auto;
 }

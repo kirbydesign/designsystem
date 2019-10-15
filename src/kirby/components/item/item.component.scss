@@ -1,1 +1,76 @@
 @import '../../scss/utils';
+
+:host {
+  display: block;
+  .item-inner {
+    width: 100%;
+    display: flex;
+    //flex-wrap: wrap;
+    align-items: center;
+    background-color: #fff;
+    padding: size('xxs');
+
+    ::ng-deep kirby-avatar {
+      margin-right: size('xs');
+
+      + h1,
+      + h2,
+      + h3,
+      + h4,
+      + h5,
+      + h6 {
+        align-self: center !important;
+        text-align: left !important;
+      }
+    }
+
+    ::ng-deep {
+      *:not(kirby-avatar) > kirby-badge {
+        margin-right: size('xxxs');
+      }
+
+      > {
+        * {
+          display: flex;
+          flex-direction: column;
+        }
+
+        p {
+          flex: 0 0 100% !important;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+          &:last-of-type {
+            align-self: flex-start;
+          }
+        }
+      }
+    }
+
+    ::ng-deep > *:not(kirby-avatar):not(kirby-badge):not(:first-child) {
+      flex: 1 1 auto;
+      min-width: 0;
+      margin: 0;
+
+      > * {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin: 0;
+      }
+    }
+
+    ::ng-deep > h1:last-of-type,
+    ::ng-deep > h2:last-of-type,
+    ::ng-deep > h3:last-of-type,
+    ::ng-deep > h4:last-of-type,
+    ::ng-deep > h5:last-of-type,
+    ::ng-deep > h6:last-of-type {
+      text-align: right;
+    }
+
+    ::ng-deep > :last-child:not(p) {
+      text-align: right;
+    }
+  }
+}
