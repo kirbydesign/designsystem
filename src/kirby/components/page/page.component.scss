@@ -14,6 +14,10 @@ ion-toolbar {
   --border-width: 0 !important;
   --padding-start: #{size('s')};
   --padding-end: #{size('s')};
+
+  ion-buttons[slot='secondary'] {
+    order: 6;
+  }
 }
 
 ion-title {
@@ -38,7 +42,7 @@ ion-back-button {
   &.has-actions {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
   }
 
   &.text-center {

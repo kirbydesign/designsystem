@@ -121,8 +121,10 @@ export class PageComponent implements OnInit, OnDestroy, AfterContentInit, After
 
   @ViewChild('pageTitle', { read: ElementRef })
   private pageTitle: ElementRef;
-  @ViewChild('toolbarButtons', { read: ElementRef })
-  private toolbarButtons: ElementRef;
+  @ViewChild('stickyToolbarButtons', { read: ElementRef })
+  private stickyToolbarButtons: ElementRef;
+  @ViewChild('fixedToolbarButtons', { read: ElementRef })
+  private fixedToolbarButtons: ElementRef;
   @ViewChild('simpleTitleTemplate', { read: TemplateRef })
   private simpleTitleTemplate: TemplateRef<any>;
   @ViewChild('simpleToolbarTitleTemplate', { read: TemplateRef })
@@ -130,25 +132,25 @@ export class PageComponent implements OnInit, OnDestroy, AfterContentInit, After
   @ContentChild(PageToolbarTitleDirective, { read: TemplateRef })
   private customToolbarTitleTemplate: TemplateRef<any>;
   @ContentChild(PageTitleDirective, { read: TemplateRef })
-  private customTitleTemplate: TemplateRef<any>;
-  @ContentChild(PageActionsDirective)
-  customActions: PageActionsDirective;
+  customTitleTemplate: TemplateRef<any>;
+  @ContentChildren(PageActionsDirective)
+  customActions: QueryList<PageActionsDirective>;
   @ContentChild(PageActionsComponent)
   private actionsComponent: PageActionsComponent;
   @ContentChildren(PageContentDirective)
   private customContent: QueryList<PageContentDirective>;
 
   hasPageTitle: boolean;
-  hasFixedTitle: boolean;
-  hasFixedActions: boolean;
   hasActionsInPage: boolean;
-  hasActionsInToolbar: boolean;
-  titleTemplate: TemplateRef<any>;
   toolbarTitleTemplate: TemplateRef<any>;
   toolbarTitleVisibility: 'visible' | 'hidden' = 'hidden';
-  toolbarActionsVisibility: 'visible' | 'hidden' = 'hidden';
+  toolbarFixedActionsVisibility: 'visible' | 'hidden' = 'hidden';
+  toolbarStickyActionsVisibility: 'visible' | 'hidden' = 'hidden';
   customContentTemplate: TemplateRef<any>;
+  pageActionsTemplate: TemplateRef<any>;
   fixedContentTemplate: TemplateRef<any>;
+  stickyActionsTemplate: TemplateRef<any>;
+  fixedActionsTemplate: TemplateRef<any>;
   private pageTitleObserver: IntersectionObserver;
   private routerEventsSubscription: Subscription;
 
@@ -170,24 +172,9 @@ export class PageComponent implements OnInit, OnDestroy, AfterContentInit, After
   }
 
   ngAfterContentInit(): void {
-    this.hasPageTitle = !!this.title || !!this.customTitleTemplate;
-    if (!this.hasPageTitle) {
-      this.toolbarTitleVisibility = 'visible';
-      this.toolbarActionsVisibility = 'visible';
-      this.hasFixedTitle = !!this.toolbarTitle || !!this.customToolbarTitleTemplate;
-    }
-
-    this.hasActionsInPage = !!this.actionsComponent;
-    if (this.customActions) {
-      this.hasFixedActions = this.customActions.isFixed;
-      this.hasActionsInPage = !this.hasFixedActions;
-      this.hasActionsInToolbar = this.customActions.isFixed || this.customActions.isSticky;
-      if (this.hasFixedActions) {
-        this.toolbarActionsVisibility = 'visible';
-      }
-    }
-    this.setTitleTemplates();
-    this.setContentTemplates();
+    this.initializeTitle();
+    this.initializeActions();
+    this.initializeContent();
   }
 
   ngAfterViewInit(): void {
@@ -206,23 +193,39 @@ export class PageComponent implements OnInit, OnDestroy, AfterContentInit, After
     }
   }
 
-  private setTitleTemplates() {
-    this.titleTemplate = this.customTitleTemplate || this.simpleTitleTemplate;
-    this.setToolbarTitleTemplate(this.titleTemplate);
-  }
+  private initializeTitle() {
+    this.hasPageTitle = typeof this.title === 'string' || !!this.customTitleTemplate;
+    if (!this.hasPageTitle) {
+      this.toolbarTitleVisibility = 'visible';
+    }
 
-  private setToolbarTitleTemplate(defaultTitleTemplate: TemplateRef<any>) {
+    const defaultTitleTemplate = this.customTitleTemplate || this.simpleTitleTemplate;
     // tslint:disable:prettier
     // prettier-ignore
     this.toolbarTitleTemplate = this.customToolbarTitleTemplate
       ? this.customToolbarTitleTemplate
-      : this.toolbarTitle
+      : typeof this.toolbarTitle === 'string'
         ? this.simpleToolbarTitleTemplate
         : defaultTitleTemplate;
     // tslint:enable:prettier
   }
 
-  private setContentTemplates() {
+  private initializeActions() {
+    this.customActions.forEach((pageAction) => {
+      if (pageAction.isFixed) {
+        this.fixedActionsTemplate = pageAction.template;
+        this.toolbarFixedActionsVisibility = 'visible';
+      } else {
+        this.pageActionsTemplate = pageAction.template;
+        if (pageAction.isSticky) {
+          this.stickyActionsTemplate = pageAction.template;
+        }
+      }
+    });
+    this.hasActionsInPage = !!this.pageActionsTemplate || !!this.actionsComponent;
+  }
+
+  private initializeContent() {
     this.customContent.forEach((content) => {
       if (content.isFixed) {
         this.fixedContentTemplate = content.template;
@@ -233,8 +236,17 @@ export class PageComponent implements OnInit, OnDestroy, AfterContentInit, After
   }
 
   private styleToolbarButtons() {
-    if (this.toolbarButtons && this.toolbarButtons.nativeElement) {
-      const buttons = this.toolbarButtons.nativeElement.querySelectorAll('[kirby-button]');
+    if (this.stickyToolbarButtons && this.stickyToolbarButtons.nativeElement) {
+      const buttons = this.stickyToolbarButtons.nativeElement.querySelectorAll('[kirby-button]');
+      buttons.forEach((button) => {
+        this.renderer.addClass(button, 'sm');
+        this.renderer.removeClass(button, 'lg');
+        this.renderer.addClass(button, 'attention-level4');
+        this.renderer.removeClass(button, 'attention-level2');
+      });
+    }
+    if (this.fixedToolbarButtons && this.fixedToolbarButtons.nativeElement) {
+      const buttons = this.fixedToolbarButtons.nativeElement.querySelectorAll('[kirby-button]');
       buttons.forEach((button) => {
         this.renderer.addClass(button, 'sm');
         this.renderer.removeClass(button, 'lg');
@@ -263,9 +275,7 @@ export class PageComponent implements OnInit, OnDestroy, AfterContentInit, After
         // Ensures that page-title visibility won't flicker on load, because intersection observer triggers twice
         if (initialized) {
           this.toolbarTitleVisibility = entry.isIntersecting ? 'hidden' : 'visible';
-          if (!this.hasFixedActions) {
-            this.toolbarActionsVisibility = entry.isIntersecting ? 'hidden' : 'visible';
-          }
+          this.toolbarStickyActionsVisibility = entry.isIntersecting ? 'hidden' : 'visible';
         } else {
           initialized = true;
         }
