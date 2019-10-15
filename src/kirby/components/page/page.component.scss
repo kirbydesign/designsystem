@@ -20,7 +20,7 @@ ion-toolbar {
   * We would like the seconday actions to be to the far right after primary actions (usually as a falafel):
   */
   ion-buttons[slot='secondary'] {
-    order: 6; 
+    order: 6;
   }
 }
 
