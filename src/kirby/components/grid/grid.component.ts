@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy, HostBinding } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { ScssHelper } from '../../scss/scss-helper';
