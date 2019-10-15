@@ -38,8 +38,4 @@ export class ActionSheetShowcaseComponent {
       inputValues: ['string'],
     },
   ];
-
-  constructor() {
-    console.log(this.exampleHtml);
-  }
 }
