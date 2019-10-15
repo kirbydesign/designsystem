@@ -8,7 +8,8 @@ declare var require: any;
   templateUrl: './toggle-showcase.component.html',
 })
 export class ToggleShowcaseComponent {
-  exampleHtml: string = require('../../examples/toggle-example/toggle-example.component.html');
+  exampleHtml: string = require('!raw-loader!../../examples/toggle-example/toggle-example.component.html')
+    .default;
   properties: ShowcaseProperty[] = [
     {
       name: 'checked',

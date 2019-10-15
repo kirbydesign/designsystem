@@ -22,7 +22,7 @@ export class IphoneComponent implements OnChanges, AfterViewInit {
   @Input() showExternalLink: boolean;
   trustedSrc: SafeResourceUrl;
 
-  @ViewChild('iframe', { read: ElementRef }) iframe: ElementRef;
+  @ViewChild('iframe', { read: ElementRef, static: true }) iframe: ElementRef;
 
   constructor(private sanitizer: DomSanitizer, private renderer: Renderer2) {}
 

@@ -12,5 +12,5 @@ export class FormFieldComponent {
   @Input() label: string;
   @Input() message: string;
 
-  @ContentChild(InputCounterComponent) counter;
+  @ContentChild(InputCounterComponent, { static: false }) counter;
 }

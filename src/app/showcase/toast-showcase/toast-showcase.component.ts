@@ -9,7 +9,8 @@ declare var require: any;
   templateUrl: './toast-showcase.component.html',
 })
 export class ToastShowcaseComponent {
-  exampleHtml: string = require('../../examples/toast-example/toast-example.component.html');
+  exampleHtml: string = require('!raw-loader!../../examples/toast-example/toast-example.component.html')
+    .default;
   properties: ShowcaseProperty[] = [
     {
       name: 'message',

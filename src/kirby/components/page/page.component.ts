@@ -119,23 +119,23 @@ export class PageComponent implements OnInit, OnDestroy, AfterContentInit, After
   @Input() titleAlignment?: 'left' | 'center' | 'right' = 'left';
   @Input() defaultBackHref?: string;
 
-  @ViewChild('pageTitle', { read: ElementRef })
+  @ViewChild('pageTitle', { static: false, read: ElementRef })
   private pageTitle: ElementRef;
-  @ViewChild('stickyToolbarButtons', { read: ElementRef })
+  @ViewChild('stickyToolbarButtons', { static: true, read: ElementRef })
   private stickyToolbarButtons: ElementRef;
-  @ViewChild('fixedToolbarButtons', { read: ElementRef })
+  @ViewChild('fixedToolbarButtons', { static: true, read: ElementRef })
   private fixedToolbarButtons: ElementRef;
-  @ViewChild('simpleTitleTemplate', { read: TemplateRef })
+  @ViewChild('simpleTitleTemplate', { static: true, read: TemplateRef })
   private simpleTitleTemplate: TemplateRef<any>;
-  @ViewChild('simpleToolbarTitleTemplate', { read: TemplateRef })
+  @ViewChild('simpleToolbarTitleTemplate', { static: true, read: TemplateRef })
   private simpleToolbarTitleTemplate: TemplateRef<any>;
-  @ContentChild(PageToolbarTitleDirective, { read: TemplateRef })
+  @ContentChild(PageToolbarTitleDirective, { static: false, read: TemplateRef })
   private customToolbarTitleTemplate: TemplateRef<any>;
-  @ContentChild(PageTitleDirective, { read: TemplateRef })
+  @ContentChild(PageTitleDirective, { static: false, read: TemplateRef })
   customTitleTemplate: TemplateRef<any>;
   @ContentChildren(PageActionsDirective)
   customActions: QueryList<PageActionsDirective>;
-  @ContentChild(PageActionsComponent)
+  @ContentChild(PageActionsComponent, { static: false })
   private actionsComponent: PageActionsComponent;
   @ContentChildren(PageContentDirective)
   private customContent: QueryList<PageContentDirective>;

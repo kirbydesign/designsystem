@@ -9,7 +9,8 @@ declare var require: any;
   styleUrls: ['./slide-button-showcase.component.scss'],
 })
 export class SlideButtonShowcaseComponent {
-  exampleHtml: string = require('../../examples/slide-button-example/slide-button-example.component.html');
+  exampleHtml: string = require('!raw-loader!../../examples/slide-button-example/slide-button-example.component.html')
+    .default;
   properties: ShowcaseProperty[] = [
     {
       name: 'expand',
