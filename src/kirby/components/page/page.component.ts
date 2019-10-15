@@ -15,7 +15,7 @@ import {
   AfterContentInit,
 } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { NavigationEnd, Router, RouterEvent } from '@angular/router';
+import { NavigationStart, NavigationEnd, Router, RouterEvent } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { ButtonComponent } from '../button/button.component';
@@ -164,6 +164,10 @@ export class PageComponent implements OnInit, OnDestroy, AfterContentInit, After
     this.removeWrapper();
 
     this.routerEventsSubscription = this.router.events.subscribe((event: RouterEvent) => {
+      if (event instanceof NavigationStart) {
+        this.toolbarTitleVisibility = 'hidden';
+        this.toolbarStickyActionsVisibility = 'hidden';
+      }
       if (event instanceof NavigationEnd && this.pageTitleObserver) {
         this.pageTitleObserver.disconnect();
         this.pageTitleObserver = this.observePageTitle();
