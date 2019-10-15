@@ -25,7 +25,6 @@ describe('ChartComponent', () => {
   });
 
   it('should create', () => {
-    console.log(component.data);
     expect(component).toBeTruthy();
   });
 
