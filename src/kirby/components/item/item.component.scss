@@ -2,17 +2,16 @@
 
 :host {
   display: block;
+
   .item-inner {
     width: 100%;
     display: flex;
-    //flex-wrap: wrap;
+    flex-wrap: wrap;
     align-items: center;
     background-color: #fff;
     padding: size('xxs');
 
     ::ng-deep kirby-avatar {
-      margin-right: size('xs');
-
       + h1,
       + h2,
       + h3,
@@ -21,18 +20,44 @@
       + h6 {
         align-self: center !important;
         text-align: left !important;
+
+        + h1,
+        + h2,
+        + h3,
+        + h4,
+        + h5,
+        + h6 {
+          align-self: center !important;
+        }
       }
     }
 
     ::ng-deep {
+      kirby-avatar, > kirby-icon {
+        margin-right: size('xs');
+      }
+
       *:not(kirby-avatar) > kirby-badge {
         margin-right: size('xxxs');
       }
 
       > {
+        :last-child {
+          align-items: flex-end;
+        }
+
+        :first-child {
+          align-self: center !important;
+        }
+
+        kirby-icon + * {
+          align-self: center !important;
+        }
+
         * {
           display: flex;
           flex-direction: column;
+          margin: 0;
         }
 
         p {
@@ -47,10 +72,9 @@
       }
     }
 
-    ::ng-deep > *:not(kirby-avatar):not(kirby-badge):not(:first-child) {
+    ::ng-deep > *:not(kirby-avatar):not(kirby-badge):not(kirby-icon):not(:first-child) {
       flex: 1 1 auto;
       min-width: 0;
-      margin: 0;
 
       > * {
         white-space: nowrap;
@@ -60,12 +84,12 @@
       }
     }
 
-    ::ng-deep > h1:last-of-type,
-    ::ng-deep > h2:last-of-type,
-    ::ng-deep > h3:last-of-type,
-    ::ng-deep > h4:last-of-type,
-    ::ng-deep > h5:last-of-type,
-    ::ng-deep > h6:last-of-type {
+    ::ng-deep > h1:last-of-type:not(:first-of-type),
+    ::ng-deep > h2:last-of-type:not(:first-of-type),
+    ::ng-deep > h3:last-of-type:not(:first-of-type),
+    ::ng-deep > h4:last-of-type:not(:first-of-type),
+    ::ng-deep > h5:last-of-type:not(:first-of-type),
+    ::ng-deep > h6:last-of-type:not(:first-of-type) {
       text-align: right;
     }
 
