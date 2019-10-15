@@ -26,6 +26,8 @@ ion-toolbar {
 
 ion-title {
   box-sizing: border-box;
+  font-size: font-size('n');
+  font-weight: font-weight('normal');
 }
 
 ion-back-button {
