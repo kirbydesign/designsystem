@@ -32,14 +32,9 @@ export type ListShape = 'square' | 'rounded' | 'none';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
   providers: [ListHelper, GroupByPipe],
-  // Using host property decorator is fine for static values:
-  // tslint:disable-next-line:use-host-property-decorator
-  host: {
-    class: 'kirby-list',
-  },
 })
 export class ListComponent implements OnInit, OnChanges {
-  @ViewChild('list') list: any;
+  @ViewChild('list', { static: true }) list: any;
 
   /**
    * Provide items for the list to render. Items must be provided in the order you expect them to be rendered.
@@ -76,6 +71,7 @@ export class ListComponent implements OnInit, OnChanges {
    */
   @Input() markSelectedRow = false;
 
+  @HostBinding('class.kirby-list') true;
   /**
    * Determine outline shape of:
    * - list, if {@link #isSectionsEnabled} is `false`
@@ -115,11 +111,16 @@ export class ListComponent implements OnInit, OnChanges {
   @Output() itemSelect = new EventEmitter<any>();
 
   // The first element that matches ListItemDirective. As a structural directive it unfolds into a template. This is a reference to that.
-  @ContentChild(ListItemDirective, { read: TemplateRef }) listItemTemplate;
-  @ContentChild(ListFlexItemDirective, { read: TemplateRef }) listFlexItemTemplate;
-  @ContentChild(ListHeaderDirective, { read: TemplateRef }) listHeaderTemplate;
-  @ContentChild(ListSectionHeaderDirective, { read: TemplateRef }) sectionHeaderTemplate;
-  @ContentChild(ListFooterDirective, { read: TemplateRef }) listFooterTemplate;
+  @ContentChild(ListItemDirective, { static: false, read: TemplateRef })
+  listItemTemplate;
+  @ContentChild(ListFlexItemDirective, { static: false, read: TemplateRef })
+  listFlexItemTemplate;
+  @ContentChild(ListHeaderDirective, { static: false, read: TemplateRef })
+  listHeaderTemplate;
+  @ContentChild(ListSectionHeaderDirective, { static: false, read: TemplateRef })
+  sectionHeaderTemplate;
+  @ContentChild(ListFooterDirective, { static: false, read: TemplateRef })
+  listFooterTemplate;
 
   @HostBinding('class.has-sections') isSectionsEnabled: boolean;
   isSwipingDisabled: boolean = false;

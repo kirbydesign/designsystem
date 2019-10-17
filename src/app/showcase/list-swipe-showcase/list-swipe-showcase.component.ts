@@ -7,5 +7,6 @@ declare var require: any;
   styleUrls: ['./list-swipe-showcase.component.scss'],
 })
 export class ListSwipeShowcaseComponent {
-  exampleHtml: string = require('../../examples/list/swipe/list-swipe-example.component.html');
+  exampleHtml: string = require('!raw-loader!../../examples/list/swipe/list-swipe-example.component.html')
+    .default;
 }

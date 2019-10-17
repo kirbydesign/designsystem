@@ -33,7 +33,9 @@ import { PageSimpleExampleComponent } from './page-example/simple/page-simple-ex
 import { PageAlignmentAndToolbarTitleExampleComponent } from './page-example/alignment-and-toolbar-title/page-alignment-and-toolbar-title-example.component';
 import { PageFixedTitleAndActionsExampleComponent } from './page-example/fixed-title-and-actions/page-fixed-title-and-actions-example.component';
 import { PageAdvancedExampleComponent } from './page-example/advanced/page-advanced-example.component';
-import { ExamplesComponent } from '~/app/examples/examples.component';
+import { ExamplesComponent } from './examples.component';
+import { TabsExampleComponent } from './tabs/tabs-example.component';
+import { TabExampleComponent } from './tabs/tab/tab-example.component';
 
 export const routes: Routes = [
   {
@@ -63,6 +65,38 @@ export const routes: Routes = [
           {
             path: 'advanced',
             component: PageAdvancedExampleComponent,
+          },
+        ],
+      },
+      {
+        path: 'tabs',
+        component: TabsExampleComponent,
+        children: [
+          {
+            path: '',
+            redirectTo: 'dashboard',
+            pathMatch: 'full',
+          },
+          {
+            path: 'dashboard',
+            component: TabExampleComponent,
+            data: {
+              title: 'Dashboard',
+            },
+          },
+          {
+            path: 'account',
+            component: TabExampleComponent,
+            data: {
+              title: 'Account',
+            },
+          },
+          {
+            path: 'inbox',
+            component: TabExampleComponent,
+            data: {
+              title: 'Inbox',
+            },
           },
         ],
       },

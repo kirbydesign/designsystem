@@ -11,7 +11,8 @@ declare var require: any;
 export class FabSheetShowcaseComponent {
   disableFabSheet = false;
 
-  exampleHtml: string = require('../../examples/fab-sheet-example/fab-sheet-example.component.html');
+  exampleHtml: string = require('!raw-loader!../../examples/fab-sheet-example/fab-sheet-example.component.html')
+    .default;
   properties: ShowcaseProperty[] = [
     {
       name: 'disabled',

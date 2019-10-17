@@ -20,7 +20,7 @@ describe('ChartComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ChartComponent);
     component = fixture.componentInstance;
-    component.data = this.data;
+    component.data = [];
     fixture.detectChanges();
   });
 

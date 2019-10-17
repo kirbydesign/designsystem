@@ -1,0 +1,25 @@
+@import '../../scss/utils';
+
+:host {
+  --kirby-tab-bar-max-width: none;
+}
+
+ion-tabs {
+
+  @include media(">=large") {
+    flex-direction: column-reverse;
+  }
+
+  ion-tab-bar {
+    --background: #{get-color('background-color')};
+    --border: none;
+    --color: #{get-color('black')};
+    max-width: var(--kirby-tab-bar-max-width);
+  
+    @include media(">=large") {
+      width: 100%;
+      margin: 0 auto;
+      justify-content: flex-end;
+    }
+  } 
+}

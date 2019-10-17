@@ -5,6 +5,31 @@ $background-color-hover: get-color('background-color');
 $shadow: get-elevation(2);
 $item-height: size('xxxl');
 
+ion-list, .list-items {
+  > ion-item {
+    &:first-of-type {
+      --padding-top: #{size('s')};
+    }
+  
+    &:last-of-type {
+      --padding-bottom: #{size('s')};
+    }
+  }
+
+  ion-item-sliding {
+    &:first-of-type {
+      ion-item {
+        --padding-top: #{size('s')};
+      }
+    }
+    &:last-of-type {
+      ion-item {
+        --padding-bottom: #{size('s')};
+      }
+    }
+  }
+}
+
 ion-list {
   box-shadow: $shadow;
   background: transparent;
@@ -67,8 +92,6 @@ ion-list-header {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  
-
 }
 
 :host(.has-sections) {
@@ -176,6 +199,7 @@ ion-item-divider {
 ion-item {
   display: flex;
   width: 100%;
+  --ion-safe-area-right: 0;
   --padding-top: #{size('xxs')};
   --padding-bottom: #{size('xxs')};
   --padding-start: #{size('s')};
@@ -189,7 +213,7 @@ ion-item {
 
 .section-header {
   background-color: transparent;
-  padding: size('m');
+  padding: size('m') size('s') 0 size('s');
 }
 
 .no-more-items, .loading {
