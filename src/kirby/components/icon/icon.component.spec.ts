@@ -48,6 +48,7 @@ describe('IconComponent', () => {
   describe('color', () => {
     it('should be rendered with default text color by default', () => {
       const fixture = createTestComponent('<kirby-icon></kirby-icon>');
+      fixture.detectChanges();
       var el = fixture.debugElement.query(By.directive(IconComponent));
       expect(el.nativeElement.className).toBe('kirby-icon');
       const expectedColor = window.getComputedStyle(window.document.body)['color'];

@@ -8,7 +8,8 @@ declare var require: any;
   templateUrl: './loading-overlay-showcase.component.html',
 })
 export class LoadingOverlayShowcaseComponent {
-  exampleHtml: string = require('../../examples/loading-overlay-example/loading-overlay-example.component.html');
+  exampleHtml: string = require('!raw-loader!../../examples/loading-overlay-example/loading-overlay-example.component.html')
+    .default;
   properties: ShowcaseProperty[] = [
     {
       name: 'isLoading',

@@ -22,7 +22,7 @@ export class IphoneComponent implements OnChanges, AfterViewInit {
   @Input() showExternalLink: boolean;
   trustedSrc: SafeResourceUrl;
 
-  @ViewChild('iframe', { read: ElementRef }) iframe: ElementRef;
+  @ViewChild('iframe', { read: ElementRef, static: true }) iframe: ElementRef;
 
   constructor(private sanitizer: DomSanitizer, private renderer: Renderer2) {}
 
@@ -38,11 +38,12 @@ export class IphoneComponent implements OnChanges, AfterViewInit {
 
   onIframeLoaded() {
     let document = this.iframe.nativeElement.contentWindow.document;
-    let ngComponent = document.getElementsByTagName('ng-component')[0];
-    ngComponent.style.setProperty('--ion-safe-area-top', '20px');
-    this.renderer.addClass(ngComponent, 'ion-page');
+    let ionApp = document.getElementsByTagName('ion-app')[0];
+
+    ionApp.style.setProperty('--ion-safe-area-top', '20px');
+    ionApp.style.setProperty('--ion-safe-area-bottom', '22px');
 
     const backgroundColor = ColorHelper.getBackgroundColor().hex;
-    this.renderer.setStyle(ngComponent, 'background', backgroundColor);
+    this.renderer.setStyle(ionApp, 'background', backgroundColor);
   }
 }

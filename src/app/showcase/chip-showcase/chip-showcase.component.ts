@@ -9,7 +9,8 @@ declare var require: any;
 export class ChipShowcaseComponent implements OnInit {
   themeColors = ['light', 'dark'];
   themeColor = '';
-  exampleHtml: string = require('../../examples/chip-example/chip-example.component.html');
+  exampleHtml: string = require('!raw-loader!../../examples/chip-example/chip-example.component.html')
+    .default;
 
   constructor() {}
 

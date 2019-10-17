@@ -10,21 +10,35 @@ const config = {
   template: `<kirby-page defaultBackHref="/">
 
   <!-- Custom Page Title -->
-  <div *kirbyPageTitle class="custom-page-title">
-    Custom
-    <kirby-icon name="arrow-down"></kirby-icon>
-  </div>
+  <h1 *kirbyPageTitle>
+    <ng-container *ngTemplateOutlet="customTitle"></ng-container>
+  </h1>
+
+  <ng-template kirbyPageToolbarTitle>
+    <ng-container *ngTemplateOutlet="customTitle"></ng-container>
+  </ng-template>
+
+  <ng-template #customTitle>
+    <div class="custom-page-title">
+      Custom
+      <kirby-icon name="arrow-down"></kirby-icon>
+    </div>
+  </ng-template>
   
-  <!-- Page Actions -->
-  <kirby-page-actions *kirbyPageActions>
-    <button kirby-button (click)="onCogSelect()">
-      <kirby-icon name="cog"></kirby-icon>
-    </button>
+  <!-- Fixed Page Actions -->
+  <kirby-page-actions *kirbyPageActions="{fixed: true}">
     <button kirby-button (click)="onMoreSelect()">
       <kirby-icon name="more"></kirby-icon>
     </button>
   </kirby-page-actions>
-  
+
+  <!-- Sticky Page Actions -->
+  <kirby-page-actions *kirbyPageActions>
+    <button kirby-button (click)="onCogSelect()">
+      <kirby-icon name="cog"></kirby-icon>
+    </button>
+  </kirby-page-actions>
+
   <!-- Custom Content Template (without wrapper) -->
   <div *kirbyPageContent [innerHTML]="content"></div>
   

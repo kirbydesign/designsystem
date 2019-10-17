@@ -17,6 +17,8 @@ import { PageModule } from '@kirbydesign/designsystem/components/page/page.modul
 import { FormFieldMessageComponent } from './components/form-field/form-field-message/form-field-message.component';
 import { AppModule } from '@kirbydesign/designsystem/components/app/app.module';
 import { RouterOutletModule } from '@kirbydesign/designsystem/components/router-outlet/router-outlet.module';
+import { TabsModule } from '@kirbydesign/designsystem/components/tabs/tabs.module';
+import { IconModule } from '@kirbydesign/designsystem/components/icon/icon.module';
 
 @NgModule({
   imports: [
@@ -29,6 +31,8 @@ import { RouterOutletModule } from '@kirbydesign/designsystem/components/router-
     RouterOutletModule,
     PageModule,
     OverlayModule,
+    TabsModule,
+    IconModule,
   ],
   declarations: [
     InfiniteScrollDirective,
@@ -53,6 +57,8 @@ import { RouterOutletModule } from '@kirbydesign/designsystem/components/router-
     AppModule,
     RouterOutletModule,
     PageModule,
+    TabsModule,
+    IconModule,
     ...declarations,
   ],
 })

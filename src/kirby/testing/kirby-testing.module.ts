@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, NgModule } from '@angular/core';
-import { MockComponents, MockDirectives } from 'ng-mocks';
+import { MockComponents, MockDirectives, MockModule } from 'ng-mocks';
 import createSpyObj = jasmine.createSpyObj;
 
 import {
@@ -28,7 +28,6 @@ import {
   ChipComponent,
   EmptyStateComponent,
   GridComponent,
-  IconComponent,
   SpinnerComponent,
   SegmentedControlComponent,
   ToastController,
@@ -43,6 +42,18 @@ import { FormFieldComponent } from '../components/form-field/form-field.componen
 import { FormFieldMessageComponent } from '../components/form-field/form-field-message/form-field-message.component';
 import { InputComponent } from '../components/form-field/input/input.component';
 import { TextareaComponent } from '../components/form-field/textarea/textarea.component';
+import { IconComponent } from '../components/icon/icon.component';
+import { TabsComponent } from '../components/tabs/tabs.component';
+import { TabButtonComponent } from '../components/tabs/tab-button/tab-button.component';
+import {
+  PageComponent,
+  PageActionsComponent,
+  PageContentComponent,
+  PageTitleDirective,
+  PageToolbarTitleDirective,
+  PageActionsDirective,
+  PageContentDirective,
+} from '../components/page/page.component';
 
 /*
  * Fake components should be handled by the list of kirby
@@ -141,7 +152,12 @@ const MOCK_COMPONENTS = MockComponents(
   FakeIonItemOptionsComponent,
   FakeIonItemOptionComponent,
   FakeIonLabelComponent,
-  LoadingOverlayComponent
+  LoadingOverlayComponent,
+  TabsComponent,
+  TabButtonComponent,
+  PageComponent,
+  PageActionsComponent,
+  PageContentComponent
 );
 
 /**
@@ -165,7 +181,11 @@ const NON_MOCKED_COMPONENTS = [
 const MOCK_DIRECTIVES = MockDirectives(
   InfiniteScrollDirective,
   ThemeColorDirective,
-  ListItemColorDirective
+  ListItemColorDirective,
+  PageTitleDirective,
+  PageToolbarTitleDirective,
+  PageActionsDirective,
+  PageContentDirective
 );
 
 function modalControllerFactory() {
