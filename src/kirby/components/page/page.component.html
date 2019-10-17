@@ -15,7 +15,7 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content scrollEvents="true">
 
     <div class="content-inner">
         <div *ngIf="hasPageTitle" class="page-title" [class.has-actions]="hasActionsInPage" [ngClass]="{'text-center': titleAlignment === 'center', 'text-right': titleAlignment === 'right'}" #pageTitle>
