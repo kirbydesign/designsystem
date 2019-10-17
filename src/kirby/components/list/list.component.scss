@@ -79,6 +79,10 @@ ion-list-header {
   background-color: get-color('white');
   border-bottom: 1px solid $divider-color;
   padding: 0;
+  text-transform: inherit;
+  letter-spacing: inherit;
+  font-weight: inherit;
+  font-size: inherit;
 }
 
 .footer {
