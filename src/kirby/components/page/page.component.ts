@@ -121,9 +121,9 @@ export class PageComponent implements OnInit, OnDestroy, AfterContentInit, After
 
   @ViewChild('pageTitle', { static: false, read: ElementRef })
   private pageTitle: ElementRef;
-  @ViewChild('stickyToolbarButtons', { static: true, read: ElementRef })
+  @ViewChild('stickyToolbarButtons', { static: false, read: ElementRef })
   private stickyToolbarButtons: ElementRef;
-  @ViewChild('fixedToolbarButtons', { static: true, read: ElementRef })
+  @ViewChild('fixedToolbarButtons', { static: false, read: ElementRef })
   private fixedToolbarButtons: ElementRef;
   @ViewChild('simpleTitleTemplate', { static: true, read: TemplateRef })
   private simpleTitleTemplate: TemplateRef<any>;
