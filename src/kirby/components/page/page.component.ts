@@ -162,17 +162,17 @@ export class PageComponent implements OnInit, OnDestroy, AfterContentInit, After
 
   ngOnInit(): void {
     this.removeWrapper();
-
-    this.routerEventsSubscription = this.router.events.subscribe((event: RouterEvent) => {
-      if (event instanceof NavigationStart) {
-        this.toolbarTitleVisibility = 'hidden';
-        this.toolbarStickyActionsVisibility = 'hidden';
-      }
-      if (event instanceof NavigationEnd && this.pageTitleObserver) {
-        this.pageTitleObserver.disconnect();
-        this.pageTitleObserver = this.observePageTitle();
-      }
-    });
+    // TODO JEO / AFL Fix page title observer...
+    // this.routerEventsSubscription = this.router.events.subscribe((event: RouterEvent) => {
+    //   if (event instanceof NavigationStart) {
+    //     this.toolbarTitleVisibility = 'hidden';
+    //     this.toolbarStickyActionsVisibility = 'hidden';
+    //   }
+    //   if (event instanceof NavigationEnd && this.pageTitleObserver) {
+    //     this.pageTitleObserver.disconnect();
+    //     this.pageTitleObserver = this.observePageTitle();
+    //   }
+    // });
   }
 
   ngAfterContentInit(): void {
