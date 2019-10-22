@@ -165,10 +165,20 @@ export class PageComponent implements OnInit, OnDestroy, AfterContentInit, After
     this.url = this.router.url;
     this.removeWrapper();
     this.routerEventsSubscription = this.router.events.subscribe((event: RouterEvent) => {
-      if (event instanceof NavigationStart && event.url !== this.url && this.pageTitleObserver) {
+      if (
+        event instanceof NavigationStart &&
+        event.url !== this.url &&
+        this.pageTitleObserver &&
+        this.pageTitle
+      ) {
         this.pageTitleObserver.unobserve(this.pageTitle.nativeElement);
       }
-      if (event instanceof NavigationEnd && event.url === this.url && this.pageTitleObserver) {
+      if (
+        event instanceof NavigationEnd &&
+        event.url === this.url &&
+        this.pageTitleObserver &&
+        this.pageTitle
+      ) {
         this.pageTitleObserver.observe(this.pageTitle.nativeElement);
       }
     });
