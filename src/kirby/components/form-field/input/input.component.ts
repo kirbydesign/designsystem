@@ -54,9 +54,9 @@ export class InputComponent {
   @Input()
   inputmode: string;
 
-  @HostListener('keyup', ['$event'])
-  private _onKeyUp(event: Event) {
-    this.kirbyChange.emit(event.target['value']);
+  @HostListener('keyup', ['$event.target.value'])
+  private _onKeyUp(value: string) {
+    this.kirbyChange.emit(value);
   }
 
   @HostListener('paste', ['$event.target'])
