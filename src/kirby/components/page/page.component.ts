@@ -13,6 +13,8 @@ import {
   ContentChildren,
   QueryList,
   AfterContentInit,
+  OnChanges,
+  SimpleChanges,
 } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { NavigationStart, NavigationEnd, Router, RouterEvent } from '@angular/router';
@@ -113,7 +115,8 @@ export class PageActionsComponent implements AfterContentInit {
     ]),
   ],
 })
-export class PageComponent implements OnInit, OnDestroy, AfterContentInit, AfterViewInit {
+export class PageComponent
+  implements OnInit, OnChanges, OnDestroy, AfterContentInit, AfterViewInit {
   @Input() title?: string;
   @Input() toolbarTitle?: string;
   @Input() titleAlignment?: 'left' | 'center' | 'right' = 'left';
@@ -153,6 +156,7 @@ export class PageComponent implements OnInit, OnDestroy, AfterContentInit, After
   fixedActionsTemplate: TemplateRef<any>;
   private pageTitleObserver: IntersectionObserver;
   private routerEventsSubscription: Subscription;
+  private url: string;
 
   constructor(
     private elementRef: ElementRef,
@@ -161,30 +165,41 @@ export class PageComponent implements OnInit, OnDestroy, AfterContentInit, After
   ) {}
 
   ngOnInit(): void {
+    this.url = this.router.url;
+
     this.removeWrapper();
     // TODO JEO / AFL Fix page title observer...
-    // this.routerEventsSubscription = this.router.events.subscribe((event: RouterEvent) => {
-    //   if (event instanceof NavigationStart) {
-    //     this.toolbarTitleVisibility = 'hidden';
-    //     this.toolbarStickyActionsVisibility = 'hidden';
-    //   }
-    //   if (event instanceof NavigationEnd && this.pageTitleObserver) {
-    //     this.pageTitleObserver.disconnect();
-    //     this.pageTitleObserver = this.observePageTitle();
-    //   }
-    // });
+    this.routerEventsSubscription = this.router.events.subscribe((event: RouterEvent) => {
+      if (event instanceof NavigationStart && event.url !== this.url) {
+        this.pageTitleObserver.unobserve(this.pageTitle.nativeElement);
+      }
+      if (event instanceof NavigationEnd && event.url === this.url) {
+        this.pageTitleObserver.observe(this.pageTitle.nativeElement);
+      }
+    });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.title) {
+      this.initializeTitle();
+    }
   }
 
   ngAfterContentInit(): void {
+    console.log('CONTENT INIT');
     this.initializeTitle();
     this.initializeActions();
     this.initializeContent();
   }
 
   ngAfterViewInit(): void {
-    if (this.hasPageTitle) {
+    if (this.hasPageTitle && !this.pageTitleObserver) {
       this.pageTitleObserver = this.observePageTitle();
+    } else {
+      this.toolbarTitleVisibility = 'visible';
     }
+
+    this.initializeTitle();
     this.styleToolbarButtons();
   }
 
@@ -193,15 +208,13 @@ export class PageComponent implements OnInit, OnDestroy, AfterContentInit, After
       this.routerEventsSubscription.unsubscribe();
     }
     if (this.pageTitleObserver) {
+      console.log('DESTROY');
       this.pageTitleObserver.disconnect();
     }
   }
 
   private initializeTitle() {
-    this.hasPageTitle = typeof this.title === 'string' || !!this.customTitleTemplate;
-    if (!this.hasPageTitle) {
-      this.toolbarTitleVisibility = 'visible';
-    }
+    this.hasPageTitle = this.title !== undefined || !!this.customTitleTemplate;
 
     const defaultTitleTemplate = this.customTitleTemplate || this.simpleTitleTemplate;
     // tslint:disable:prettier
@@ -211,7 +224,6 @@ export class PageComponent implements OnInit, OnDestroy, AfterContentInit, After
       : typeof this.toolbarTitle === 'string'
         ? this.simpleToolbarTitleTemplate
         : defaultTitleTemplate;
-    // tslint:enable:prettier
   }
 
   private initializeActions() {
@@ -270,13 +282,18 @@ export class PageComponent implements OnInit, OnDestroy, AfterContentInit, After
   }
 
   private observePageTitle() {
+    console.log('WHAT', this.pageTitle);
+
+    if (!this.pageTitle) return;
+
     const options = {
       rootMargin: '0px',
     };
+
     let initialized = false;
     const callback = (entries) => {
       entries.forEach((entry) => {
-        // Ensures that page-title visibility won't flicker on load, because intersection observer triggers twice
+        console.log('INTERSECTION');
         if (initialized) {
           this.toolbarTitleVisibility = entry.isIntersecting ? 'hidden' : 'visible';
           this.toolbarStickyActionsVisibility = entry.isIntersecting ? 'hidden' : 'visible';
