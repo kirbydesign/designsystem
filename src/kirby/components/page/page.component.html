@@ -3,19 +3,25 @@
         <ion-buttons slot="start">
             <ion-back-button text="" [defaultHref]="defaultBackHref" icon="assets/kirby/icons/svg/arrow-back.svg"></ion-back-button>
         </ion-buttons>
-        <ion-title [@visibility]="toolbarTitleVisibility">
-            <ng-container *ngTemplateOutlet="toolbarTitleTemplate"></ng-container>
+        <ion-title>
+            <div [@visibility]="toolbarTitleVisibility">
+                <ng-container *ngTemplateOutlet="toolbarTitleTemplate"></ng-container>
+            </div>
         </ion-title>
-        <ion-buttons *ngIf="stickyActionsTemplate" slot="primary" [@visibility]="toolbarStickyActionsVisibility" #stickyToolbarButtons>
-            <ng-container *ngTemplateOutlet="stickyActionsTemplate"></ng-container>
+        <ion-buttons *ngIf="stickyActionsTemplate" slot="primary" #stickyToolbarButtons>
+            <div [@visibility]="toolbarStickyActionsVisibility">
+                <ng-container *ngTemplateOutlet="stickyActionsTemplate"></ng-container>
+            </div>
         </ion-buttons>
-        <ion-buttons *ngIf="fixedActionsTemplate" slot="secondary" [@visibility]="toolbarFixedActionsVisibility" #fixedToolbarButtons>
-            <ng-container *ngTemplateOutlet="fixedActionsTemplate"></ng-container>
+        <ion-buttons *ngIf="fixedActionsTemplate" slot="secondary" #fixedToolbarButtons>
+            <div [@visibility]="toolbarFixedActionsVisibility">
+                <ng-container *ngTemplateOutlet="fixedActionsTemplate"></ng-container>
+            </div>
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content scrollEvents="true">
 
     <div class="content-inner">
         <div *ngIf="hasPageTitle" class="page-title" [class.has-actions]="hasActionsInPage" [ngClass]="{'text-center': titleAlignment === 'center', 'text-right': titleAlignment === 'right'}" #pageTitle>
