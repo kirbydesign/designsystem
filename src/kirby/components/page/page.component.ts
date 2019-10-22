@@ -278,14 +278,14 @@ export class PageComponent implements OnInit, OnDestroy, AfterContentInit, After
 
     let initialized = false;
     const callback = (entries) => {
-      entries.forEach((entry) => {
-        if (initialized) {
+      if (initialized) {
+        entries.forEach((entry) => {
           this.toolbarTitleVisibility = entry.isIntersecting ? 'hidden' : 'visible';
           this.toolbarStickyActionsVisibility = entry.isIntersecting ? 'hidden' : 'visible';
-        } else {
-          initialized = true;
-        }
-      });
+        });
+      } else {
+        initialized = true;
+      }
     };
     const observer = new IntersectionObserver(callback, options);
     observer.observe(this.pageTitle.nativeElement);
