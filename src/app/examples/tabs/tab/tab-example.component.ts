@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable, of } from 'rxjs';
 
 @Component({
   template: `
-    <kirby-page [title]="title">
+    <kirby-page [title]="title | async">
       <kirby-page-actions *kirbyPageActions>
         <button kirby-button (click)="onCogSelect()">
           <kirby-icon name="cog"></kirby-icon>
@@ -54,12 +55,14 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: [],
 })
 export class TabExampleComponent implements OnInit {
-  title: string;
+  title: Observable<string>;
 
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.title = this.route.snapshot.data.title;
+    setTimeout(() => {
+      this.title = of(this.route.snapshot.data.title);
+    }, 300);
   }
 
   onCogSelect() {
