@@ -6,7 +6,6 @@ $page-header-height: 7rem;
 $page-header-height-small: 4rem;
 $page-gutter: 1rem;
 $page-side-nav-width: 16.625rem;
-$page-max-width: 1366px;
 
 
 $sårt: #1C1C1C;
@@ -26,7 +25,7 @@ header {
   align-items: center;
   height: $page-header-height-small;
   margin: 0 auto;
-  max-width: $page-max-width;
+  max-width: var(--kirby-page-max-width);
   padding: 0 $page-gutter 0 0;
   color: $hvii;
   @include media (">=large") {

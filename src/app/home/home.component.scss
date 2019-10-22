@@ -5,7 +5,6 @@ $page-header-color: #F4F1E8;
 $page-header-height: 7rem;
 $page-gutter: 1rem;
 $page-side-nav-width: 16.625rem;
-$page-max-width: 1366px;
 
 :host {
   position: relative;
@@ -19,7 +18,7 @@ main {
   flex-direction: row;
   flex-grow: 1;
   width: 100%;
-  max-width: $page-max-width;
+  max-width: var(--kirby-page-max-width);
   margin: 0 auto;
   @include media(">=large") {
     padding-right: $page-gutter;
