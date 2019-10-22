@@ -186,7 +186,6 @@ export class PageComponent
   }
 
   ngAfterContentInit(): void {
-    console.log('CONTENT INIT');
     this.initializeTitle();
     this.initializeActions();
     this.initializeContent();
@@ -208,7 +207,6 @@ export class PageComponent
       this.routerEventsSubscription.unsubscribe();
     }
     if (this.pageTitleObserver) {
-      console.log('DESTROY');
       this.pageTitleObserver.disconnect();
     }
   }
@@ -282,8 +280,6 @@ export class PageComponent
   }
 
   private observePageTitle() {
-    console.log('WHAT', this.pageTitle);
-
     if (!this.pageTitle) return;
 
     const options = {
@@ -293,7 +289,6 @@ export class PageComponent
     let initialized = false;
     const callback = (entries) => {
       entries.forEach((entry) => {
-        console.log('INTERSECTION');
         if (initialized) {
           this.toolbarTitleVisibility = entry.isIntersecting ? 'hidden' : 'visible';
           this.toolbarStickyActionsVisibility = entry.isIntersecting ? 'hidden' : 'visible';
