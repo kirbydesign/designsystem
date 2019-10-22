@@ -13,8 +13,6 @@ import {
   ContentChildren,
   QueryList,
   AfterContentInit,
-  OnChanges,
-  SimpleChanges,
 } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { NavigationStart, NavigationEnd, Router, RouterEvent } from '@angular/router';
@@ -115,8 +113,7 @@ export class PageActionsComponent implements AfterContentInit {
     ]),
   ],
 })
-export class PageComponent
-  implements OnInit, OnChanges, OnDestroy, AfterContentInit, AfterViewInit {
+export class PageComponent implements OnInit, OnDestroy, AfterContentInit, AfterViewInit {
   @Input() title?: string;
   @Input() toolbarTitle?: string;
   @Input() titleAlignment?: 'left' | 'center' | 'right' = 'left';
@@ -166,23 +163,15 @@ export class PageComponent
 
   ngOnInit(): void {
     this.url = this.router.url;
-
     this.removeWrapper();
-    // TODO JEO / AFL Fix page title observer...
     this.routerEventsSubscription = this.router.events.subscribe((event: RouterEvent) => {
-      if (event instanceof NavigationStart && event.url !== this.url) {
+      if (event instanceof NavigationStart && event.url !== this.url && this.pageTitleObserver) {
         this.pageTitleObserver.unobserve(this.pageTitle.nativeElement);
       }
-      if (event instanceof NavigationEnd && event.url === this.url) {
+      if (event instanceof NavigationEnd && event.url === this.url && this.pageTitleObserver) {
         this.pageTitleObserver.observe(this.pageTitle.nativeElement);
       }
     });
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.title) {
-      this.initializeTitle();
-    }
   }
 
   ngAfterContentInit(): void {
@@ -192,13 +181,6 @@ export class PageComponent
   }
 
   ngAfterViewInit(): void {
-    if (this.hasPageTitle && !this.pageTitleObserver) {
-      this.pageTitleObserver = this.observePageTitle();
-    } else {
-      this.toolbarTitleVisibility = 'visible';
-    }
-
-    this.initializeTitle();
     this.styleToolbarButtons();
   }
 
@@ -213,6 +195,14 @@ export class PageComponent
 
   private initializeTitle() {
     this.hasPageTitle = this.title !== undefined || !!this.customTitleTemplate;
+
+    if (this.hasPageTitle && !this.pageTitleObserver) {
+      setTimeout(() => {
+        this.pageTitleObserver = this.observePageTitle();
+      });
+    } else if (!this.hasPageTitle) {
+      this.toolbarTitleVisibility = 'visible';
+    }
 
     const defaultTitleTemplate = this.customTitleTemplate || this.simpleTitleTemplate;
     // tslint:disable:prettier
