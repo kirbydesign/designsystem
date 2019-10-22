@@ -16,15 +16,18 @@ import {
   template: '',
 })
 export class InputComponent {
-  @Output() change = new EventEmitter<string>();
-
   private static typeToInputmodeMap = {
     number: 'decimal',
     search: 'search',
   };
 
+  kirbyChange = new EventEmitter<string>();
+
   @Input() set type(value: string) {
-    this._inputmode = InputComponent.typeToInputmodeMap[value];
+    const mappedValue = InputComponent.typeToInputmodeMap[value];
+    if (mappedValue && !this.inputmode) {
+      this.inputmode = mappedValue;
+    }
   }
 
   @HostBinding('class.error')
@@ -48,17 +51,18 @@ export class InputComponent {
   maxlength: number;
 
   @HostBinding('attr.inputmode')
-  private _inputmode: string;
+  @Input()
+  inputmode: string;
 
   @HostListener('keyup', ['$event.target.value'])
   private _onKeyUp(value: string) {
-    this.change.emit(value);
+    this.kirbyChange.emit(value);
   }
 
   @HostListener('paste', ['$event.target'])
   @HostListener('cut', ['$event.target'])
   private _onCutPaste(target: HTMLInputElement) {
     //Value of input element is updated after cut/paste:
-    setTimeout(() => this.change.emit(target.value));
+    setTimeout(() => this.kirbyChange.emit(target.value));
   }
 }
