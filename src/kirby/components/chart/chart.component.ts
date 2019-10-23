@@ -24,7 +24,7 @@ export class ChartComponent implements OnInit, OnChanges {
   @Input() type: ChartType = ChartType.PIE;
   @Input() description = '';
   @Input() showDataLabels = true;
-  @ViewChild('chartContainer') chartContainer: ElementRef;
+  @ViewChild('chartContainer', { static: true }) chartContainer: ElementRef;
   options: Options = {};
 
   constructor(

@@ -42,11 +42,18 @@ import { FormFieldComponent } from '../components/form-field/form-field.componen
 import { FormFieldMessageComponent } from '../components/form-field/form-field-message/form-field-message.component';
 import { InputComponent } from '../components/form-field/input/input.component';
 import { TextareaComponent } from '../components/form-field/textarea/textarea.component';
-import { IconComponent } from '@kirbydesign/designsystem/components/icon/icon.component';
-import { TabsModule } from '@kirbydesign/designsystem/components/tabs/tabs.module';
-import { TabsComponent } from '@kirbydesign/designsystem/components/tabs/tabs.component';
-import { TabButtonComponent } from '@kirbydesign/designsystem/components/tabs/tab-button/tab-button.component';
-import { ItemComponent } from '@kirbydesign/designsystem/components/item/item.component';
+import { IconComponent } from '../components/icon/icon.component';
+import { TabsComponent } from '../components/tabs/tabs.component';
+import { TabButtonComponent } from '../components/tabs/tab-button/tab-button.component';
+import {
+  PageComponent,
+  PageActionsComponent,
+  PageContentComponent,
+  PageTitleDirective,
+  PageToolbarTitleDirective,
+  PageActionsDirective,
+  PageContentDirective,
+} from '../components/page/page.component';
 
 /*
  * Fake components should be handled by the list of kirby
@@ -148,7 +155,9 @@ const MOCK_COMPONENTS = MockComponents(
   LoadingOverlayComponent,
   TabsComponent,
   TabButtonComponent,
-  ItemComponent
+  PageComponent,
+  PageActionsComponent,
+  PageContentComponent
 );
 
 /**
@@ -172,7 +181,11 @@ const NON_MOCKED_COMPONENTS = [
 const MOCK_DIRECTIVES = MockDirectives(
   InfiniteScrollDirective,
   ThemeColorDirective,
-  ListItemColorDirective
+  ListItemColorDirective,
+  PageTitleDirective,
+  PageToolbarTitleDirective,
+  PageActionsDirective,
+  PageContentDirective
 );
 
 function modalControllerFactory() {

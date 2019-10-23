@@ -18,7 +18,7 @@ export class InputCounterComponent implements OnInit, OnDestroy {
     if (this.listenTo) {
       this.length = this.listenTo.value ? this.listenTo.value.length : 0;
       this.maxlength = this.listenTo.maxlength;
-      this._inputChangeSubscription = this.listenTo.change.subscribe((value) => {
+      this._inputChangeSubscription = this.listenTo.kirbyChange.subscribe((value) => {
         this.length = value.length;
       });
     }

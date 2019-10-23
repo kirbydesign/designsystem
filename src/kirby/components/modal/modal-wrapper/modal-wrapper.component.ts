@@ -11,7 +11,7 @@ import { ModalHelper } from '../services/modal.helper';
   styleUrls: ['./modal-wrapper.component.scss'],
 })
 export class ModalWrapperComponent implements AfterViewInit {
-  @ViewChild('modalWrapper') modalWrapper: ElementRef;
+  @ViewChild('modalWrapper', { static: true }) modalWrapper: ElementRef;
   scrollY: number = Math.abs(window.scrollY);
   config: ModalConfig;
   componentPropsInjector: Injector;

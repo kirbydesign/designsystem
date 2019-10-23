@@ -34,7 +34,7 @@ interface CalendarDay {
   providers: [CalendarHelper],
 })
 export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
-  @ViewChild('calendarContainer') calendarContainer: ElementRef;
+  @ViewChild('calendarContainer', { static: false }) calendarContainer: ElementRef;
   @Output() dateChange = new EventEmitter<Date>();
   @Input() disableWeekends = false;
   @Input() disablePastDates = false;

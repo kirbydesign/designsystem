@@ -1,39 +1,43 @@
 import { ElementRef } from '@angular/core';
 import { fakeAsync, tick } from '@angular/core/testing';
+import { SpyObject } from '@netbasal/spectator';
 
 import { WindowRef } from './../../shared/window-ref/window-ref.service';
 import { InfiniteScrollDirective, INFINITE_SCROLL_DEBOUNCE } from './infinite-scroll.directive';
 
 describe('InfiniteScrollDirective', () => {
-  let nativeElement: any;
+  let nativeElement: SpyObject<any>;
+  let document: SpyObject<Document>;
+
+  const createDirective = (scrollPercentage: number): InfiniteScrollDirective => {
+    const height = 800;
+    const bottom = height * (1 - scrollPercentage);
+    const viewHeight = 0;
+
+    nativeElement.getBoundingClientRect.and.returnValue({ height, bottom });
+    document.getElementsByTagName.and.returnValue([]);
+
+    const directive = new InfiniteScrollDirective(
+      { nativeElement } as ElementRef,
+      { nativeWindow: { innerHeight: viewHeight, document: document as Document } } as WindowRef
+    );
+    spyOn(directive.scrollEnd, 'emit');
+    directive.ngAfterViewInit();
+
+    return directive;
+  };
 
   beforeEach(() => {
     nativeElement = jasmine.createSpyObj('nativeElement', ['getBoundingClientRect']);
+    document = jasmine.createSpyObj('document', ['getElementsByTagName']);
   });
 
   it('should create an instance', () => {
-    const directive = new InfiniteScrollDirective(null, null);
-    directive.ngAfterViewInit();
+    const directive = createDirective(0);
     expect(directive).toBeTruthy();
   });
 
   describe('event: scrollEnd', () => {
-    function createDirective(scrollPercentage: number): InfiniteScrollDirective {
-      const height = 800;
-      const bottom = height * (1 - scrollPercentage);
-      const viewHeight = 0;
-
-      nativeElement.getBoundingClientRect.and.returnValue({ height, bottom });
-      const directive = new InfiniteScrollDirective(
-        { nativeElement } as ElementRef,
-        { nativeWindow: { innerHeight: viewHeight } } as WindowRef
-      );
-      spyOn(directive.scrollEnd, 'emit');
-      directive.ngAfterViewInit();
-
-      return directive;
-    }
-
     it('should emit event when 80% of the element has been scrolled', fakeAsync(() => {
       const directive = createDirective(0.8);
 

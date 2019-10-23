@@ -9,11 +9,11 @@ import {
   ElementRef,
   Inject,
 } from '@angular/core';
-import { Subject } from 'rxjs';
-import { debounceTime, takeUntil, filter } from 'rxjs/operators';
+import { Subject, fromEvent } from 'rxjs';
+import { debounceTime, takeUntil, filter, map } from 'rxjs/operators';
 
-import { Scroll } from './scroll.model';
 import { WINDOW_PROVIDER, WINDOW_REF, WindowRef } from '../../shared/window-ref/window-ref.service';
+import { Scroll } from './scroll.model';
 
 /**
  * Specify debounce duration in ms
@@ -52,6 +52,8 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
    */
   private offset = 0.8;
 
+  private ionContent: HTMLIonContentElement;
+
   constructor(private elementRef: ElementRef, @Inject(WINDOW_REF) private windowRef: WindowRef) {}
 
   ngAfterViewInit(): void {
@@ -75,6 +77,26 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
       .subscribe(() => {
         this.scrollEnd.emit();
       });
+
+    this.ionContent = this.windowRef.nativeWindow.document.getElementsByTagName('ion-content')[0];
+    if (this.ionContent) {
+      fromEvent<any>(this.ionContent, 'ionScroll')
+        .pipe(
+          takeUntil(this.ngUnsubscribe$),
+          debounceTime(INFINITE_SCROLL_DEBOUNCE),
+          filter(() => !this.disabled),
+          map(() => this.getScroll()),
+          filter((scroll) => {
+            return (
+              scroll.elementHeight * (1 - this.offset) >=
+              scroll.distanceToViewBottom - scroll.viewHeight
+            );
+          })
+        )
+        .subscribe(() => {
+          this.scrollEnd.emit();
+        });
+    }
   }
 
   /**
@@ -83,14 +105,8 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
   @HostListener('window:scroll')
   onScroll(): void {
     if (this.disabled) return;
-    const element = this.elementRef.nativeElement as HTMLElement;
-    const boundindClientRect = element.getBoundingClientRect();
-
-    const distanceToViewBottom = boundindClientRect.bottom;
-    const elementHeight = boundindClientRect.height;
-    const viewHeight = this.windowRef.nativeWindow.innerHeight;
-
-    this.scroll$.next({ distanceToViewBottom, elementHeight, viewHeight });
+    const scroll = this.getScroll();
+    this.scroll$.next(scroll);
   }
 
   /**
@@ -99,5 +115,16 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     this.ngUnsubscribe$.next();
     this.ngUnsubscribe$.complete();
+  }
+
+  private getScroll(): Scroll {
+    const element = this.elementRef.nativeElement as HTMLElement;
+    const boundindClientRect = element.getBoundingClientRect();
+
+    const distanceToViewBottom = boundindClientRect.bottom;
+    const elementHeight = boundindClientRect.height;
+    const viewHeight = this.windowRef.nativeWindow.innerHeight;
+
+    return { distanceToViewBottom, elementHeight, viewHeight };
   }
 }
