@@ -30,6 +30,11 @@ ion-list, .list-items {
   }
 }
 
+.list-header {
+  //min-height: 0;
+  background-color: green !important;
+}
+
 ion-list {
   box-shadow: $shadow;
   background: transparent;

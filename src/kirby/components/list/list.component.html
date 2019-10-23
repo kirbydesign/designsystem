@@ -5,7 +5,7 @@
           [class.has-header]="listHeaderTemplate"
           [class.has-footer]="listFooterTemplate"
           (window:resize)="onResize()">
-  <ion-list-header *ngIf="listHeaderTemplate">
+  <ion-list-header *ngIf="listHeaderTemplate" class="list-header">
     <ng-container *ngTemplateOutlet="listHeaderTemplate"></ng-container>
   </ion-list-header>
 
