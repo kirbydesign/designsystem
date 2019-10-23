@@ -49,7 +49,7 @@ export class PageShowcaseComponent {
   events: ShowcaseProperty[] = [
     {
       name: 'enter',
-      description: 'Emitted when the page is entered',
+      description: 'Emitted when the page has animated into view',
       inputValues: ['func'],
     },
     {
