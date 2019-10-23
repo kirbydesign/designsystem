@@ -5,12 +5,13 @@ $background-color-hover: get-color('background-color');
 $shadow: get-elevation(2);
 $item-height: size('xxxl');
 
-ion-list, .list-items {
+ion-list,
+.list-items {
   > ion-item {
     &:first-of-type {
       --padding-top: #{size('s')};
     }
-  
+
     &:last-of-type {
       --padding-bottom: #{size('s')};
     }
@@ -67,9 +68,9 @@ ion-item {
   @each $color-name, $color-value in $list-colors {
     &.#{$color-name} {
       background-color: #{get-color($color-name)};
-      color: #{get-color($color-name+'-contrast')};
+      color: #{get-color($color-name + '-contrast')};
       &:focus {
-        background-color: #{get-color($color-name+'-shade')};
+        background-color: #{get-color($color-name + '-shade')};
       }
     }
   }
@@ -112,8 +113,7 @@ ion-list-header {
   ion-list-header {
     background-color: transparent;
     border-bottom: none;
-  }  
-  
+  }
 }
 
 :host(.shape-rounded) {
@@ -128,7 +128,7 @@ ion-list-header {
     border-top-left-radius: $border-radius;
     border-top-right-radius: $border-radius;
   }
- 
+
   ion-list ion-item-sliding > ion-item,
   &:not(.has-sections) ion-list.has-header ion-item,
   &:not(.has-sections) ion-list.has-header ion-item-sliding {
@@ -185,7 +185,6 @@ ion-list-header {
         margin-bottom: 0;
       }
     }
-
   }
 }
 
@@ -216,7 +215,8 @@ ion-item {
   padding: size('m') size('s') 0 size('s');
 }
 
-.no-more-items, .loading {
+.no-more-items,
+.loading {
   width: 100%;
   padding: size('m');
   text-align: center;

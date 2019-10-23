@@ -1,20 +1,16 @@
 <h2>List with swipe actions:</h2>
-<kirby-list [items]="items" 
-  showDivider="true" 
-  [swipeActions]="swipeActions">
-  <kirby-list-flex-item
-    [class.flagged]="item.flagged"
-    *kirbyListFlexItem="let item">
-    <kirby-list-cell
-      width="2">
-      {{item.title}}
+<kirby-list [items]="items" showDivider="true" [swipeActions]="swipeActions">
+  <kirby-list-flex-item [class.flagged]="item.flagged" *kirbyListFlexItem="let item">
+    <kirby-list-cell width="2">
+      {{ item.title }}
     </kirby-list-cell>
     <kirby-list-cell
       class="amount"
       width="1"
       verticalAlignment="center"
-      horisontalAlignment="right">
-      {{item.amount}}
+      horisontalAlignment="right"
+    >
+      {{ item.amount }}
     </kirby-list-cell>
   </kirby-list-flex-item>
 </kirby-list>

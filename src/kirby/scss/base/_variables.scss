@@ -3,14 +3,14 @@
 ****************************************************************************/
 $sizes: (
   xxxl: 56px,
-  xxl:  48px,
-  xl:   40px,
-  l:    32px,
-  m:    24px,
-  s:    16px,
-  xs:   12px,
-  xxs:   8px, 
-  xxxs:  4px
+  xxl: 48px,
+  xl: 40px,
+  l: 32px,
+  m: 24px,
+  s: 16px,
+  xs: 12px,
+  xxs: 8px,
+  xxxs: 4px,
 ) !default;
 
 /*
@@ -18,31 +18,37 @@ $sizes: (
 ****************************************************************************/
 $font-sizes: (
   xxxxl: 72px,
-  xxxl:  56px,
-  xxl:   40px,
-  xl:    32px,
-  l:     22px,
-  m:     18px,
-  n:     16px,
-  s:     14px,
-  xs:    12px,
-  xxs:   10px
+  xxxl: 56px,
+  xxl: 40px,
+  xl: 32px,
+  l: 22px,
+  m: 18px,
+  n: 16px,
+  s: 14px,
+  xs: 12px,
+  xxs: 10px,
 ) !default;
 
 $line-height: (
-  xl: 38px, // h1
-  l: 24px,  // h2
-  m: 24px,  // h3
-  n: 24px,  // p, h3 and h3 share the same line-height, added the sizes to "match" with font-size.
-  s: 20px,  // text-small
-  xs: 14px, // text-xsmall
-  xxs: 11px // text-xxsmall
+  xl: 38px,
+  // h1
+    l: 24px,
+  // h2
+    m: 24px,
+  // h3
+    n: 24px,
+  // p, h3 and h3 share the same line-height, added the sizes to "match" with font-size.
+    s: 20px,
+  // text-small
+    xs: 14px,
+  // text-xsmall
+    xxs: 11px // text-xxsmall,,,,
 ) !default;
 
 $font-weight: (
   light: 300,
   normal: 400,
-  bold: 700
+  bold: 700,
 ) !default;
 
 /*
@@ -53,7 +59,7 @@ $z-layers: (
   segmentBadge: 2,
   modal-overlay: 900,
   modal: 901,
-  loading-overlay: 1001
+  loading-overlay: 1001,
 ) !default;
 
 $border-radius: 20px !default;
@@ -61,17 +67,26 @@ $border-radius: 20px !default;
 /* Breakpoints
 ****************************************************************************/
 $breakpoints: (
-  small: 361px, 
-  medium: 721px, 
+  small: 361px,
+  medium: 721px,
   large: 1025px,
-  xlarge: 60em, 
-  xxlarge: 80em 
+  xlarge: 60em,
+  xxlarge: 80em,
 ) !default;
 
 /* Elevation
 ****************************************************************************/
 $elevations: (
-  2: (0 5px 10px -10px rgba(28, 28, 28, 0.3), 0 0 5px 0 rgba(28, 28, 28, 0.08)),
-  4: (0 10px 15px -10px rgba(28, 28, 28, 0.3), 0 0 5px 0 rgba(28, 28, 28, 0.08)),
-  8: (0 20px 30px -15px rgba(28, 28, 28, 0.3), 0 0 5px 0 rgba(28, 28, 28, 0.08))
+  2: (
+    0 5px 10px -10px rgba(28, 28, 28, 0.3),
+    0 0 5px 0 rgba(28, 28, 28, 0.08),
+  ),
+  4: (
+    0 10px 15px -10px rgba(28, 28, 28, 0.3),
+    0 0 5px 0 rgba(28, 28, 28, 0.08),
+  ),
+  8: (
+    0 20px 30px -15px rgba(28, 28, 28, 0.3),
+    0 0 5px 0 rgba(28, 28, 28, 0.08),
+  ),
 ) !default;

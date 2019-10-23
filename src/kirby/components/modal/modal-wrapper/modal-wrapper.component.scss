@@ -1,4 +1,4 @@
-@import "../../../scss/utils";
+@import '../../../scss/utils';
 
 // Global modal styling can be found at scss/base/_ionic.scss
 
@@ -17,9 +17,9 @@
       flex-direction: column;
       justify-content: center;
       width: 100%;
-      font-weight: font-weight("bold");
+      font-weight: font-weight('bold');
     }
-    
+
     .text-left {
       text-align: left;
     }

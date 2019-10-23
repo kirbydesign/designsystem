@@ -1,11 +1,11 @@
 <label *ngIf="label">
-  <div class="text">{{label}}</div>
+  <div class="text">{{ label }}</div>
   <ng-container *ngTemplateOutlet="slottedInput"></ng-container>
 </label>
 <ng-container *ngIf="!label">
   <ng-container *ngTemplateOutlet="slottedInput"></ng-container>
 </ng-container>
-<div *ngIf="message || counter" class="texts">  
+<div *ngIf="message || counter" class="texts">
   <kirby-form-field-message class="message" [text]="message"></kirby-form-field-message>
 
   <div class="counter">

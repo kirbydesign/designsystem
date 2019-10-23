@@ -1,17 +1,17 @@
 @import '../../../scss/utils';
 
 .spinner-wrapper {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    top: 0;
-    left: 0;
-    opacity: 0.8;
-    z-index: z('loading-overlay');
-    &.backdrop {
-        background-color: get-color('background-color');
-    }
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  opacity: 0.8;
+  z-index: z('loading-overlay');
+  &.backdrop {
+    background-color: get-color('background-color');
+  }
 }

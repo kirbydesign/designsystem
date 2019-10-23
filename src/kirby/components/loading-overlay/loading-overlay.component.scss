@@ -1,29 +1,29 @@
 @import '../../scss/utils';
 
 .overlay-wrapper {
+  height: 100%;
+  width: 100%;
+  position: relative;
+
+  .spinner-wrapper {
     height: 100%;
     width: 100%;
-    position: relative;
+    position: absolute;
+    z-index: z('loading-overlay');
+    opacity: 0.8;
+    display: flex;
+    background: transparent;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
 
-    .spinner-wrapper {
-        height: 100%;
-        width: 100%;
-        position: absolute;
-        z-index: z('loading-overlay');
-        opacity: 0.8;
-        display: flex;
-        background: transparent;
-        justify-content: center;
-        align-items: center;
-        justify-items: center;
-        
-        &.backdrop {
-            background-color: get-color('background-color');
-        }
-
-        .spinner {
-            width: size(l);
-            height: size(l);
-        }
+    &.backdrop {
+      background-color: get-color('background-color');
     }
+
+    .spinner {
+      width: size(l);
+      height: size(l);
+    }
+  }
 }

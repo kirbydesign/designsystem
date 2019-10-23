@@ -1,15 +1,15 @@
 @import '../../../kirby/scss/utils';
 
 a {
-    display: block;
-    color: get-color('black');
-    text-decoration: none;
+  display: block;
+  color: get-color('black');
+  text-decoration: none;
 
-    &:hover {
-        color: get-color('primary');
-    }
+  &:hover {
+    color: get-color('primary');
+  }
 }
 
 .note {
-    color: get-color('danger');
+  color: get-color('danger');
 }

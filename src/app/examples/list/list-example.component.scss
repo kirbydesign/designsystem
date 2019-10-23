@@ -1,26 +1,26 @@
-@import "../../../kirby/scss/utils";
+@import '../../../kirby/scss/utils';
 
 :host {
-    padding: 2px;
-    width: 100%;
+  padding: 2px;
+  width: 100%;
 }
 
 hr {
-    visibility: hidden;
+  visibility: hidden;
 }
 
 h2 {
-    margin-top: size('xl');
+  margin-top: size('xl');
 }
 
 .footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    padding: size('s');
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: size('s');
 
-    h2 {
-        margin: 0;
-    }
+  h2 {
+    margin: 0;
+  }
 }

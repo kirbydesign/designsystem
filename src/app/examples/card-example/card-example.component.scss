@@ -24,43 +24,43 @@ kirby-card-footer {
 }
 
 .card-content {
-  padding: size("s");
+  padding: size('s');
   background-color: get-color('light');
 }
 
 kirby-card.show-size {
   &::before {
-      background-color: #ccc;
-      color: white;
-      content: "-"; //"\00a0";
-      font-size: .8em;
-      font-weight: 700;
-      letter-spacing: .1em;
-      position: absolute;
-      text-align: center;
-      margin-top: 0.9em;
-      margin-left: -0.9em;
-      transform: rotate(-45deg);
-      transform-origin: center bottom;
-      width: 6em;
-      border-top-left-radius: 25%;
-      border-top-right-radius: 25%;
-      box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.3);
+    background-color: #ccc;
+    color: white;
+    content: '-'; //"\00a0";
+    font-size: 0.8em;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    position: absolute;
+    text-align: center;
+    margin-top: 0.9em;
+    margin-left: -0.9em;
+    transform: rotate(-45deg);
+    transform-origin: center bottom;
+    width: 6em;
+    border-top-left-radius: 25%;
+    border-top-right-radius: 25%;
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.3);
   }
 
   --cardSmallBackgroundColor: #8dabee;
   --cardMediumBackgroundColor: #d2a2ee;
   --cardLargeBackgroundColor: #d8b280;
-  &[size="<small"]::before,
-  &[size="small"]::before {
+  &[size='<small']::before,
+  &[size='small']::before {
     content: 'SM';
     background-color: var(--cardSmallBackgroundColor);
   }
-  &[size="medium"]::before {
+  &[size='medium']::before {
     content: 'MD';
     background-color: var(--cardMediumBackgroundColor);
   }
-  &[size="large"]::before {
+  &[size='large']::before {
     content: 'LG';
     background-color: var(--cardLargeBackgroundColor);
   }

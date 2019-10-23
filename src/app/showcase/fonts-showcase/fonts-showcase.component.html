@@ -1,14 +1,13 @@
-
-  <p>
-    The font sizes can be set by either using the font classes, e.g. <code>kirby-text-large</code>, or by using the
-    right tags like <code>h1, h2 & h3</code>
-  </p>
-  <p>Font can also be set with the font-size function directly on your own classes, e.g:</p>
+<p>
+  The font sizes can be set by either using the font classes, e.g. <code>kirby-text-large</code>, or
+  by using the right tags like <code>h1, h2 & h3</code>
+</p>
+<p>Font can also be set with the font-size function directly on your own classes, e.g:</p>
 <pre>
-  .my-own-class {{'{'}}
+  .my-own-class {{ '{' }}
     font-size: font-size("l");
     ...
-  {{'}'}}
+  {{ '}' }}
 </pre>
 <div class="fonts">
   <div>
@@ -63,7 +62,6 @@
       <code>font-size: font-size("xxs);</code>
       <code class="highlight">CLASS: kirby-text-xxsmall</code>
     </div>
-
   </div>
   <kirby-code-viewer [html]="exampleHtml"></kirby-code-viewer>
 </div>

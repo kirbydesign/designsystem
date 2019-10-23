@@ -15,10 +15,10 @@
     align-self: flex-start;
 
     &:after {
-      content: "";
+      content: '';
       height: 2px;
       background-color: currentColor;
-      width: calc(100% - 2rem); 
+      width: calc(100% - 2rem);
       position: absolute;
       bottom: -1rem;
       left: 0;
@@ -27,7 +27,7 @@
 }
 
 h4 {
-  margin-top: size("s");
+  margin-top: size('s');
 }
 
 .showcase-cta-box {
@@ -37,7 +37,7 @@ h4 {
   background-color: get-color('white');
   box-shadow: 0 20px 30px -15px rgba(45, 50, 48, 0.2);
   padding: 0.5rem 1rem;
-  margin-top: size("s");
+  margin-top: size('s');
   border-radius: 10px;
   z-index: 1;
   position: relative;
@@ -73,21 +73,22 @@ h4 {
     background-color: get-color('light-tint');
   }
   th {
-    font-weight: font-weight("normal");
+    font-weight: font-weight('normal');
     border: none;
     text-align: left;
-    height: size("xl");
+    height: size('xl');
     border-bottom: none;
   }
-  td, th {
+  td,
+  th {
     border: 1px solid get-color('medium');
     border-width: 1px 1px 1px 1px;
     padding: 0.5rem 1rem;
   }
 }
 
-::ng-deep :not(pre) > code[class*="language-"], 
-::ng-deep pre[class*="language-"] {
+::ng-deep :not(pre) > code[class*='language-'],
+::ng-deep pre[class*='language-'] {
   background-color: get-color('light-tint');
   border: 1px solid get-color('medium');
 }

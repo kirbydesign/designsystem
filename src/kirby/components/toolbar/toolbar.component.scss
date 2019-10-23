@@ -1,12 +1,11 @@
 @import '../../scss/utils';
 
 .toolbar {
-  --background:  #{get-color('background-color')};
+  --background: #{get-color('background-color')};
   --color: #{get-color('background-color-contrast')};
 }
 
 .item {
-
   &-start {
     margin-left: size('s');
     margin-right: size('s');

@@ -1,80 +1,133 @@
 <div class="example">
-    <p>Page is a layout container for a Kirby page. There should only be one <code>&lt;kirby-page&gt;</code> layout container per page.<br/>
-        The page component gives you the following:</p>
-    <ul>
-        <li>Scrollable page title and actions:
-            <ul>
-                <li>Sticks to the toolbar by default, when scrolling the page below the title</li>
-                <li>Also supports fixed page title and actions</li>
-            </ul>
-        </li>
-        <li>Back navigation</li>
-        <li>Simple configuration for basic page title and actions</li>
-        <li>Support for advanced page title and actions template</li>
-        <li>Support for fixed page content (e.g. a Floating Action Button)</li>
-        <li>Spacing of content</li>
-    </ul>
+  <p>
+    Page is a layout container for a Kirby page. There should only be one
+    <code>&lt;kirby-page&gt;</code> layout container per page.<br />
+    The page component gives you the following:
+  </p>
+  <ul>
+    <li>
+      Scrollable page title and actions:
+      <ul>
+        <li>Sticks to the toolbar by default, when scrolling the page below the title</li>
+        <li>Also supports fixed page title and actions</li>
+      </ul>
+    </li>
+    <li>Back navigation</li>
+    <li>Simple configuration for basic page title and actions</li>
+    <li>Support for advanced page title and actions template</li>
+    <li>Support for fixed page content (e.g. a Floating Action Button)</li>
+    <li>Spacing of content</li>
+  </ul>
 
-    <div class="page-example">
-        <div>
-            <h2>Simple Page</h2>
-            <p>For normal pages it's enough to just wrap the page content in a <code>kirby-page-content</code> tag,
-            which is wrapped in a <code>kirby-page</code> tag and supplied with an optional title - <em>which will be sticky by default</em>:</p>
-            <kirby-code-viewer [html]="simpleExampleHtml"></kirby-code-viewer>
-        </div>
-
-        <kirby-iphone src="/examples/page" showExternalLink="true"></kirby-iphone>
-    </div>
-    
-    <div class="page-example">
-        <div>
-            <h2>Title Alignment & Alternative Toolbar Title</h2>
-            <p>Titles are default left aligned but can be centered (<code>titleAlignment="center"</code>) or right aligned (<code>titleAlignment="right"</code>).</p>
-            <p>It also possible to supply an alternative toolbar title (<code>toolbarTitle="A Different Title"</code>) - <em>that is shown instead of the page title</em> - when the page title is scrolled above the toolbar.</p>
-            <p>This can also be achieved through the <code>*kirbyPageToolbarTitle</code> directive.</p>
-            <kirby-code-viewer [html]="alignmentAndToolbarTitleExampleHtml"></kirby-code-viewer>
-        </div>
-
-        <div>
-            <kirby-iphone src="/examples/page/alignment-toolbar-title" showExternalLink="true"></kirby-iphone>
-        </div>
+  <div class="page-example">
+    <div>
+      <h2>Simple Page</h2>
+      <p>
+        For normal pages it's enough to just wrap the page content in a
+        <code>kirby-page-content</code> tag, which is wrapped in a <code>kirby-page</code> tag and
+        supplied with an optional title - <em>which will be sticky by default</em>:
+      </p>
+      <kirby-code-viewer [html]="simpleExampleHtml"></kirby-code-viewer>
     </div>
 
-    <div class="page-example">
-        <div>
-            <h2>Advanced Page</h2>
-            <p>For more advanced scenarios, you can supply a custom page title element, action buttons and fixed content with the <code>*kirbyPage</code>-directives</p>
-            <p><em><strong>*Please note:</strong> When supplying a custom page title element you must supply both a page title and a toolbar title. You should also ensure the page title is wrapped in a <code>h1</code> tag. See example below on how to reuse a template for both titles.</em></p>
-            <kirby-code-viewer [html]="advancedExampleHtml"></kirby-code-viewer>
-        </div>
+    <kirby-iphone src="/examples/page" showExternalLink="true"></kirby-iphone>
+  </div>
 
-        <kirby-iphone src="/examples/page/advanced" showExternalLink="true"></kirby-iphone>
+  <div class="page-example">
+    <div>
+      <h2>Title Alignment & Alternative Toolbar Title</h2>
+      <p>
+        Titles are default left aligned but can be centered (<code>titleAlignment="center"</code>)
+        or right aligned (<code>titleAlignment="right"</code>).
+      </p>
+      <p>
+        It also possible to supply an alternative toolbar title (<code
+          >toolbarTitle="A Different Title"</code
+        >) - <em>that is shown instead of the page title</em> - when the page title is scrolled
+        above the toolbar.
+      </p>
+      <p>This can also be achieved through the <code>*kirbyPageToolbarTitle</code> directive.</p>
+      <kirby-code-viewer [html]="alignmentAndToolbarTitleExampleHtml"></kirby-code-viewer>
     </div>
 
-    <div class="page-example">
-        <div>
-            <h2>Fixed Title & Actions</h2>
-            <p>If the <code>toolbarTitle</code> property is specified <em>instead</em> of the <code>title</code> property, the page title and actions will be <em>fixed</em> and shown only in the toolbar and not on the page itself.</p>
-            <p><em><strong>*Please note:</strong> Always apply the <code>*kirbyPageActions</code> directive to the action buttons host element to ensure the actions are shown in the toolbar. This is especially important when using fixed titles:</em></p>
-            <kirby-code-viewer [html]="fixedTitleAndActionsExampleHtml"></kirby-code-viewer>
-            <p>For more advanced toolbar title scenarios, you can supply a custom toolbar title element through the <code>*kirbyPageToolbarTitle</code> directive:</p>
-            <kirby-code-viewer [html]="fixedCustomTitleExampleHtml"></kirby-code-viewer>
-            <p>You can also have only the action button(s) <em>fixed</em> by configuring the <code>*kirbyPageActions</code> directive with <code>{{ '{' }}fixed: true{{ '}' }}</code>:</p>
-            <kirby-code-viewer [html]="fixedActionsExampleHtml"></kirby-code-viewer>
-        </div>
+    <div>
+      <kirby-iphone
+        src="/examples/page/alignment-toolbar-title"
+        showExternalLink="true"
+      ></kirby-iphone>
+    </div>
+  </div>
 
-        <kirby-iphone src="/examples/page/fixed" showExternalLink="true"></kirby-iphone>
+  <div class="page-example">
+    <div>
+      <h2>Advanced Page</h2>
+      <p>
+        For more advanced scenarios, you can supply a custom page title element, action buttons and
+        fixed content with the <code>*kirbyPage</code>-directives
+      </p>
+      <p>
+        <em
+          ><strong>*Please note:</strong> When supplying a custom page title element you must supply
+          both a page title and a toolbar title. You should also ensure the page title is wrapped in
+          a <code>h1</code> tag. See example below on how to reuse a template for both titles.</em
+        >
+      </p>
+      <kirby-code-viewer [html]="advancedExampleHtml"></kirby-code-viewer>
     </div>
 
-        <h2>Page Properties:</h2>
-    <kirby-showcase-properties [properties]="properties"></kirby-showcase-properties>
+    <kirby-iphone src="/examples/page/advanced" showExternalLink="true"></kirby-iphone>
+  </div>
 
-    <h2>Page Layouts:</h2>
-    <kirby-showcase-properties [columns]="layoutColumns" [properties]="layouts"></kirby-showcase-properties>
+  <div class="page-example">
+    <div>
+      <h2>Fixed Title & Actions</h2>
+      <p>
+        If the <code>toolbarTitle</code> property is specified <em>instead</em> of the
+        <code>title</code> property, the page title and actions will be <em>fixed</em> and shown
+        only in the toolbar and not on the page itself.
+      </p>
+      <p>
+        <em
+          ><strong>*Please note:</strong> Always apply the <code>*kirbyPageActions</code> directive
+          to the action buttons host element to ensure the actions are shown in the toolbar. This is
+          especially important when using fixed titles:</em
+        >
+      </p>
+      <kirby-code-viewer [html]="fixedTitleAndActionsExampleHtml"></kirby-code-viewer>
+      <p>
+        For more advanced toolbar title scenarios, you can supply a custom toolbar title element
+        through the <code>*kirbyPageToolbarTitle</code> directive:
+      </p>
+      <kirby-code-viewer [html]="fixedCustomTitleExampleHtml"></kirby-code-viewer>
+      <p>
+        You can also have only the action button(s) <em>fixed</em> by configuring the
+        <code>*kirbyPageActions</code> directive with <code>{{ '{' }}fixed: true{{ '}' }}</code
+        >:
+      </p>
+      <kirby-code-viewer [html]="fixedActionsExampleHtml"></kirby-code-viewer>
+    </div>
 
-    <h2>Page Directives:</h2>
-    <kirby-showcase-properties [columns]="directiveColumns" [properties]="directives"></kirby-showcase-properties>
+    <kirby-iphone src="/examples/page/fixed" showExternalLink="true"></kirby-iphone>
+  </div>
 
-    <h2>CSS Custom Properties:</h2>
-    <kirby-showcase-properties [columns]="cssColumns" [properties]="cssProperties"></kirby-showcase-properties>
+  <h2>Page Properties:</h2>
+  <kirby-showcase-properties [properties]="properties"></kirby-showcase-properties>
+
+  <h2>Page Layouts:</h2>
+  <kirby-showcase-properties
+    [columns]="layoutColumns"
+    [properties]="layouts"
+  ></kirby-showcase-properties>
+
+  <h2>Page Directives:</h2>
+  <kirby-showcase-properties
+    [columns]="directiveColumns"
+    [properties]="directives"
+  ></kirby-showcase-properties>
+
+  <h2>CSS Custom Properties:</h2>
+  <kirby-showcase-properties
+    [columns]="cssColumns"
+    [properties]="cssProperties"
+  ></kirby-showcase-properties>
 </div>

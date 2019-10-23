@@ -1,84 +1,84 @@
-@import "utils";
-@import "./base/ionic";
-@import "./base/typography"; 
+@import 'utils';
+@import './base/ionic';
+@import './base/typography';
 
-:root { 
-    --kirby-font-family: "Roboto";
-    font-family: var(--kirby-font-family);
-    @each $color, $color-name in $kirby-colors {
-        --kirby-#{$color}: #{$color-name};
-    }
-    --kirby-page-max-width: 1366px;
-    --kirby-statusbar-padding: var(--ion-statusbar-padding);
-    --kirby-safe-area-top: var(--ion-safe-area-top);
-    --kirby-safe-area-right: var(--ion-safe-area-right);
-    --kirby-safe-area-bottom: var(--ion-safe-area-bottom);
-    --kirby-safe-area-left: var(--ion-safe-area-left);
-    --kirby-tab-bar-height: 50px;
+:root {
+  --kirby-font-family: 'Roboto';
+  font-family: var(--kirby-font-family);
+  @each $color, $color-name in $kirby-colors {
+    --kirby-#{$color}: #{$color-name};
+  }
+  --kirby-page-max-width: 1366px;
+  --kirby-statusbar-padding: var(--ion-statusbar-padding);
+  --kirby-safe-area-top: var(--ion-safe-area-top);
+  --kirby-safe-area-right: var(--ion-safe-area-right);
+  --kirby-safe-area-bottom: var(--ion-safe-area-bottom);
+  --kirby-safe-area-left: var(--ion-safe-area-left);
+  --kirby-tab-bar-height: 50px;
 }
 
 .kirby-modal {
-    --background: #{get-color('background-color')};
-    --border-radius: #{$border-radius};
-    --box-shadow: #{get-elevation(8)};
-    position: fixed;
+  --background: #{get-color('background-color')};
+  --border-radius: #{$border-radius};
+  --box-shadow: #{get-elevation(8)};
+  position: fixed;
 
-    @include media(">=medium") {
-        //TODO Hardcoded magic numbers: Jakob + Jonathan, revisit!!!
-        --width: 720px;
-        --height: 647px;
-    }
+  @include media('>=medium') {
+    //TODO Hardcoded magic numbers: Jakob + Jonathan, revisit!!!
+    --width: 720px;
+    --height: 647px;
+  }
 }
 
 .backdrop-no-scroll {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 .kirby-action-sheet {
-    --background: transparent;
-    --width: 100%;
-    --height: 100%;
-    position: fixed;
-  
-    .modal-wrapper {
-        pointer-events: none; //Fix clickable backdrop of modal
-        display: flex;
-        justify-content: center;
-        align-items: flex-end;
-    }  
+  --background: transparent;
+  --width: 100%;
+  --height: 100%;
+  position: fixed;
+
+  .modal-wrapper {
+    pointer-events: none; //Fix clickable backdrop of modal
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }
 }
 
 .alert-wrapper {
-    box-shadow: get-elevation(8) !important;
+  box-shadow: get-elevation(8) !important;
 }
 
 .kirby-alert {
-    position: fixed;
-    --border-radius: #{$border-radius};
-    --box-shadow: #{get-elevation(8)};
-    
-    .modal-wrapper {
-        max-width: 330px;
-        height: auto;
-        text-align: center;
-    }
+  position: fixed;
+  --border-radius: #{$border-radius};
+  --box-shadow: #{get-elevation(8)};
+
+  .modal-wrapper {
+    max-width: 330px;
+    height: auto;
+    text-align: center;
+  }
 }
 
 .kirby-toast {
-    position: fixed;
-    
-    // Set default colors
-    --background: #{get-color('success')};
-    --color: #{get-color('success-contrast')};
-    --button-color: #{get-color('success-contrast')};
+  position: fixed;
 
-    @each $color-name, $color-value in $main-colors {
-        @if ($color-name == 'success' or $color-name == 'warning' or $color-name == 'danger') {
-            &.#{$color-name} {
-                --background: #{get-color($color-name)};
-                --color: #{get-color($color-name+'-contrast')};
-                --button-color: #{get-color($color-name+'-contrast')};
-            }
-        }
+  // Set default colors
+  --background: #{get-color('success')};
+  --color: #{get-color('success-contrast')};
+  --button-color: #{get-color('success-contrast')};
+
+  @each $color-name, $color-value in $main-colors {
+    @if ($color-name == 'success' or $color-name == 'warning' or $color-name == 'danger') {
+      &.#{$color-name} {
+        --background: #{get-color($color-name)};
+        --color: #{get-color($color-name + '-contrast')};
+        --button-color: #{get-color($color-name + '-contrast')};
+      }
     }
+  }
 }
