@@ -30,11 +30,20 @@ ion-list, .list-items {
   }
 }
 
+ion-item-group {
+  padding-bottom: size('xl');
+}
+
 ion-list {
   box-shadow: $shadow;
   background: transparent;
   contain: inherit;
   padding: 0;
+}
+
+.input-wrapper {
+  background-color: teal !important;
+  color: purple !important;
 }
 
 ion-item {
@@ -215,7 +224,7 @@ ion-item {
 
 .section-header {
   background-color: transparent;
-  padding: size('m') size('s') size('xxs') size('s');
+  padding: 0 size('s') size('xxs') size('s');
   min-height: 0;
 }
 
