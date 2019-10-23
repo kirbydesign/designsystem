@@ -9,7 +9,7 @@ declare var require: any;
   styleUrls: ['./item-showcase.component.scss'],
 })
 export class ItemShowcaseComponent implements OnInit {
-  exampleHtml: string = require('../../examples/item/item-example.component.html');
+  exampleHtml: string = require('!raw-loader!../../examples/item/item-example.component.html');
 
   properties: ShowcaseProperty[] = [];
 
