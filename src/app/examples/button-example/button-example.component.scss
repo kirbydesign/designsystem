@@ -2,8 +2,10 @@
 
 kirby-card {
   margin-bottom: size("m");
-  max-width: size("m");
-  padding: size("m");
+
+  &.attention-levels {
+    max-width: map-get($breakpoints, 'small');
+  }
 }
 
 h2:not(:first-child) {
