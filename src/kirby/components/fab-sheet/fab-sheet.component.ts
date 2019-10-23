@@ -18,7 +18,7 @@ export class FabSheetComponent implements AfterContentInit {
   @HostBinding('class.backdrop-visible')
   private _isBackdropVisible: boolean = false;
 
-  @ContentChild(ActionSheetComponent) actionSheet: ActionSheetComponent;
+  @ContentChild(ActionSheetComponent, { static: false }) actionSheet: ActionSheetComponent;
 
   ngAfterContentInit(): void {
     if (this.actionSheet) {

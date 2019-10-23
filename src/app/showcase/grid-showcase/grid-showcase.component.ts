@@ -7,7 +7,8 @@ declare var require: any;
   styleUrls: ['./grid-showcase.component.scss'],
 })
 export class GridShowcaseComponent implements OnInit {
-  exampleHtml: string = require('../../examples/grid-example/grid-example.component.html');
+  exampleHtml: string = require('!raw-loader!../../examples/grid-example/grid-example.component.html')
+    .default;
 
   constructor() {}
 

@@ -1,5 +1,7 @@
 @import '../../../kirby/scss/utils';
 
+$app-header-max-width: 1024px;
+
 :host {
   display: block;
   background: get-color('background-color');
@@ -16,4 +18,13 @@
 .container {
   max-width: 1280px;
   margin: 0 auto;
+}
+
+.app-header {
+  margin: 0 auto;
+  max-width: $app-header-max-width;
+}
+
+kirby-tab-bar {
+  --kirby-tab-bar-max-width: #{$app-header-max-width};
 }

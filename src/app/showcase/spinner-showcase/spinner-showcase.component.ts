@@ -7,7 +7,8 @@ declare var require: any;
   styleUrls: ['./spinner-showcase.component.scss'],
 })
 export class SpinnerShowcaseComponent implements OnInit {
-  exampleHtml: string = require('../../examples/spinner-example/spinner-example.component.html');
+  exampleHtml: string = require('!raw-loader!../../examples/spinner-example/spinner-example.component.html')
+    .default;
 
   constructor() {}
 

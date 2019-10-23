@@ -1,15 +1,21 @@
 @import '../../scss/utils';
 
-ion-tabs ion-tab-bar {
-  --background: #{get-color('background-color')};
-  --border: none;
-  --color: #{get-color('black')};
+ion-tabs {
 
   @include media(">=large") {
-    order: -1;
-    width: 100%;
-    max-width: 1280px;
-    margin: 0 auto;
-    justify-content: flex-end;
+    flex-direction: column-reverse;
   }
+
+  ion-tab-bar {
+    --background: #{get-color('background-color')};
+    --border: none;
+    --color: #{get-color('black')};
+    max-width: var(--kirby-tab-bar-max-width, none);
+  
+    @include media(">=large") {
+      width: 100%;
+      margin: 0 auto;
+      justify-content: flex-end;
+    }
+  } 
 }

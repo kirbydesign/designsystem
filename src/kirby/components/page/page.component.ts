@@ -15,7 +15,7 @@ import {
   AfterContentInit,
 } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { NavigationEnd, Router, RouterEvent } from '@angular/router';
+import { NavigationStart, NavigationEnd, Router, RouterEvent } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { ButtonComponent } from '../button/button.component';
@@ -119,38 +119,41 @@ export class PageComponent implements OnInit, OnDestroy, AfterContentInit, After
   @Input() titleAlignment?: 'left' | 'center' | 'right' = 'left';
   @Input() defaultBackHref?: string;
 
-  @ViewChild('pageTitle', { read: ElementRef })
+  @ViewChild('pageTitle', { static: false, read: ElementRef })
   private pageTitle: ElementRef;
-  @ViewChild('toolbarButtons', { read: ElementRef })
-  private toolbarButtons: ElementRef;
-  @ViewChild('simpleTitleTemplate', { read: TemplateRef })
+  @ViewChild('stickyToolbarButtons', { static: false, read: ElementRef })
+  private stickyToolbarButtons: ElementRef;
+  @ViewChild('fixedToolbarButtons', { static: false, read: ElementRef })
+  private fixedToolbarButtons: ElementRef;
+  @ViewChild('simpleTitleTemplate', { static: true, read: TemplateRef })
   private simpleTitleTemplate: TemplateRef<any>;
-  @ViewChild('simpleToolbarTitleTemplate', { read: TemplateRef })
+  @ViewChild('simpleToolbarTitleTemplate', { static: true, read: TemplateRef })
   private simpleToolbarTitleTemplate: TemplateRef<any>;
-  @ContentChild(PageToolbarTitleDirective, { read: TemplateRef })
+  @ContentChild(PageToolbarTitleDirective, { static: false, read: TemplateRef })
   private customToolbarTitleTemplate: TemplateRef<any>;
-  @ContentChild(PageTitleDirective, { read: TemplateRef })
-  private customTitleTemplate: TemplateRef<any>;
-  @ContentChild(PageActionsDirective)
-  customActions: PageActionsDirective;
-  @ContentChild(PageActionsComponent)
+  @ContentChild(PageTitleDirective, { static: false, read: TemplateRef })
+  customTitleTemplate: TemplateRef<any>;
+  @ContentChildren(PageActionsDirective)
+  customActions: QueryList<PageActionsDirective>;
+  @ContentChild(PageActionsComponent, { static: false })
   private actionsComponent: PageActionsComponent;
   @ContentChildren(PageContentDirective)
   private customContent: QueryList<PageContentDirective>;
 
   hasPageTitle: boolean;
-  hasFixedTitle: boolean;
-  hasFixedActions: boolean;
   hasActionsInPage: boolean;
-  hasActionsInToolbar: boolean;
-  titleTemplate: TemplateRef<any>;
   toolbarTitleTemplate: TemplateRef<any>;
   toolbarTitleVisibility: 'visible' | 'hidden' = 'hidden';
-  toolbarActionsVisibility: 'visible' | 'hidden' = 'hidden';
+  toolbarFixedActionsVisibility: 'visible' | 'hidden' = 'hidden';
+  toolbarStickyActionsVisibility: 'visible' | 'hidden' = 'hidden';
   customContentTemplate: TemplateRef<any>;
+  pageActionsTemplate: TemplateRef<any>;
   fixedContentTemplate: TemplateRef<any>;
+  stickyActionsTemplate: TemplateRef<any>;
+  fixedActionsTemplate: TemplateRef<any>;
   private pageTitleObserver: IntersectionObserver;
   private routerEventsSubscription: Subscription;
+  private url: string;
 
   constructor(
     private elementRef: ElementRef,
@@ -159,41 +162,35 @@ export class PageComponent implements OnInit, OnDestroy, AfterContentInit, After
   ) {}
 
   ngOnInit(): void {
+    this.url = this.router.url;
     this.removeWrapper();
-
     this.routerEventsSubscription = this.router.events.subscribe((event: RouterEvent) => {
-      if (event instanceof NavigationEnd && this.pageTitleObserver) {
-        this.pageTitleObserver.disconnect();
-        this.pageTitleObserver = this.observePageTitle();
+      if (
+        event instanceof NavigationStart &&
+        event.url !== this.url &&
+        this.pageTitleObserver &&
+        this.pageTitle
+      ) {
+        this.pageTitleObserver.unobserve(this.pageTitle.nativeElement);
+      }
+      if (
+        event instanceof NavigationEnd &&
+        event.url === this.url &&
+        this.pageTitleObserver &&
+        this.pageTitle
+      ) {
+        this.pageTitleObserver.observe(this.pageTitle.nativeElement);
       }
     });
   }
 
   ngAfterContentInit(): void {
-    this.hasPageTitle = !!this.title || !!this.customTitleTemplate;
-    if (!this.hasPageTitle) {
-      this.toolbarTitleVisibility = 'visible';
-      this.toolbarActionsVisibility = 'visible';
-      this.hasFixedTitle = !!this.toolbarTitle || !!this.customToolbarTitleTemplate;
-    }
-
-    this.hasActionsInPage = !!this.actionsComponent;
-    if (this.customActions) {
-      this.hasFixedActions = this.customActions.isFixed;
-      this.hasActionsInPage = !this.hasFixedActions;
-      this.hasActionsInToolbar = this.customActions.isFixed || this.customActions.isSticky;
-      if (this.hasFixedActions) {
-        this.toolbarActionsVisibility = 'visible';
-      }
-    }
-    this.setTitleTemplates();
-    this.setContentTemplates();
+    this.initializeTitle();
+    this.initializeActions();
+    this.initializeContent();
   }
 
   ngAfterViewInit(): void {
-    if (this.hasPageTitle) {
-      this.pageTitleObserver = this.observePageTitle();
-    }
     this.styleToolbarButtons();
   }
 
@@ -206,23 +203,43 @@ export class PageComponent implements OnInit, OnDestroy, AfterContentInit, After
     }
   }
 
-  private setTitleTemplates() {
-    this.titleTemplate = this.customTitleTemplate || this.simpleTitleTemplate;
-    this.setToolbarTitleTemplate(this.titleTemplate);
-  }
+  private initializeTitle() {
+    this.hasPageTitle = this.title !== undefined || !!this.customTitleTemplate;
 
-  private setToolbarTitleTemplate(defaultTitleTemplate: TemplateRef<any>) {
+    if (this.hasPageTitle && !this.pageTitleObserver) {
+      setTimeout(() => {
+        this.pageTitleObserver = this.observePageTitle();
+      });
+    } else if (!this.hasPageTitle) {
+      this.toolbarTitleVisibility = 'visible';
+    }
+
+    const defaultTitleTemplate = this.customTitleTemplate || this.simpleTitleTemplate;
     // tslint:disable:prettier
     // prettier-ignore
     this.toolbarTitleTemplate = this.customToolbarTitleTemplate
       ? this.customToolbarTitleTemplate
-      : this.toolbarTitle
+      : typeof this.toolbarTitle === 'string'
         ? this.simpleToolbarTitleTemplate
         : defaultTitleTemplate;
-    // tslint:enable:prettier
   }
 
-  private setContentTemplates() {
+  private initializeActions() {
+    this.customActions.forEach((pageAction) => {
+      if (pageAction.isFixed) {
+        this.fixedActionsTemplate = pageAction.template;
+        this.toolbarFixedActionsVisibility = 'visible';
+      } else {
+        this.pageActionsTemplate = pageAction.template;
+        if (pageAction.isSticky) {
+          this.stickyActionsTemplate = pageAction.template;
+        }
+      }
+    });
+    this.hasActionsInPage = !!this.pageActionsTemplate || !!this.actionsComponent;
+  }
+
+  private initializeContent() {
     this.customContent.forEach((content) => {
       if (content.isFixed) {
         this.fixedContentTemplate = content.template;
@@ -233,8 +250,17 @@ export class PageComponent implements OnInit, OnDestroy, AfterContentInit, After
   }
 
   private styleToolbarButtons() {
-    if (this.toolbarButtons && this.toolbarButtons.nativeElement) {
-      const buttons = this.toolbarButtons.nativeElement.querySelectorAll('[kirby-button]');
+    if (this.stickyToolbarButtons && this.stickyToolbarButtons.nativeElement) {
+      const buttons = this.stickyToolbarButtons.nativeElement.querySelectorAll('[kirby-button]');
+      buttons.forEach((button) => {
+        this.renderer.addClass(button, 'sm');
+        this.renderer.removeClass(button, 'lg');
+        this.renderer.addClass(button, 'attention-level4');
+        this.renderer.removeClass(button, 'attention-level2');
+      });
+    }
+    if (this.fixedToolbarButtons && this.fixedToolbarButtons.nativeElement) {
+      const buttons = this.fixedToolbarButtons.nativeElement.querySelectorAll('[kirby-button]');
       buttons.forEach((button) => {
         this.renderer.addClass(button, 'sm');
         this.renderer.removeClass(button, 'lg');
@@ -254,22 +280,22 @@ export class PageComponent implements OnInit, OnDestroy, AfterContentInit, After
   }
 
   private observePageTitle() {
+    if (!this.pageTitle) return;
+
     const options = {
       rootMargin: '0px',
     };
+
     let initialized = false;
     const callback = (entries) => {
-      entries.forEach((entry) => {
-        // Ensures that page-title visibility won't flicker on load, because intersection observer triggers twice
-        if (initialized) {
+      if (initialized) {
+        entries.forEach((entry) => {
           this.toolbarTitleVisibility = entry.isIntersecting ? 'hidden' : 'visible';
-          if (!this.hasFixedActions) {
-            this.toolbarActionsVisibility = entry.isIntersecting ? 'hidden' : 'visible';
-          }
-        } else {
-          initialized = true;
-        }
-      });
+          this.toolbarStickyActionsVisibility = entry.isIntersecting ? 'hidden' : 'visible';
+        });
+      } else {
+        initialized = true;
+      }
     };
     const observer = new IntersectionObserver(callback, options);
     observer.observe(this.pageTitle.nativeElement);

@@ -7,6 +7,12 @@ p, .p {
   margin-bottom: size("s");
 }
 
+kirby-app .page-title {
+  > h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+  }
+}
+
 h1,
 .h1,
 .kirby-text-xlarge {

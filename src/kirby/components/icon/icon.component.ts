@@ -1,4 +1,12 @@
-import { Component, Inject, Input, OnChanges, Optional, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  HostBinding,
+  Inject,
+  Input,
+  OnChanges,
+  Optional,
+  SimpleChanges,
+} from '@angular/core';
 
 import { kirbyIconSettings } from './kirby-icon-settings';
 import { ICON_SETTINGS, Icon, IconSettings } from './icon-settings';
@@ -7,13 +15,9 @@ import { ICON_SETTINGS, Icon, IconSettings } from './icon-settings';
   selector: 'kirby-icon',
   templateUrl: './icon.component.html',
   styleUrls: ['./icon.component.scss'],
-  // Using host property decorator is fine for static values:
-  // tslint:disable-next-line:use-host-property-decorator
-  host: {
-    class: 'kirby-icon',
-  },
 })
 export class IconComponent implements OnChanges {
+  @HostBinding('class.kirby-icon') true;
   defaultIcon: Icon = this.findIcon(kirbyIconSettings.icons, 'cog');
   private _icon = (this.icon = this.defaultIcon);
 

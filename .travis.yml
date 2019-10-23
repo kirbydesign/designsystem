@@ -1,6 +1,6 @@
 # Building Node based application
 language: node_js
-node_js: "10.5"
+node_js: "10.16"
 sudo: required
 
 install:

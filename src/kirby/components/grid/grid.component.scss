@@ -1,23 +1,17 @@
 @import '../../scss/utils';
 
-$grid-item-min-height: 172px;
-$page-max-width: 1366px;
-
 :host {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  grid-auto-rows: minmax($grid-item-min-height, auto);
+  grid-auto-rows: minmax(var(--kirby-grid-item-min-height, auto), auto);
   grid-column-gap: size('xxs');
   grid-row-gap: size('xxs');
-  max-width: $page-max-width;
-  margin: size('xxs') auto;
-  padding: 0 size('xxs');
-  
+  max-width: var(--kirby-page-max-width);
+  margin: 0 auto;
+
   @include media(">=small") {
     grid-column-gap: size("s");
     grid-row-gap: size("s");  
-    margin: size("s") auto;
-    padding: 0 size("s");  
   }
 
   @include media(">=medium") {
@@ -36,4 +30,3 @@ $page-max-width: 1366px;
     }
   }
 }
-    

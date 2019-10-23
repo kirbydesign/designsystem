@@ -52,8 +52,9 @@ export class ButtonComponent implements AfterContentInit {
   @Input() text?: string;
   @Input() isFloating?: boolean = false;
 
-  @ContentChild(IconComponent) icon: IconComponent;
-  @ContentChild(IconComponent, { read: ElementRef }) iconDomNode: ElementRef;
+  @ContentChild(IconComponent, { static: false }) icon: IconComponent;
+  @ContentChild(IconComponent, { static: false, read: ElementRef })
+  iconDomNode: ElementRef;
   private _hasSlottedContent = false;
 
   ngAfterContentInit(): void {

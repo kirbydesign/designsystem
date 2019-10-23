@@ -8,7 +8,7 @@ import { IModalController } from '../services/modal.controller.interface';
   styleUrls: ['./alert.component.scss'],
 })
 export class AlertComponent implements AfterViewInit {
-  @ViewChild('alertWrapper') private alertWrapper: ElementRef;
+  @ViewChild('alertWrapper', { static: true }) private alertWrapper: ElementRef;
   private scrollY: number = Math.abs(window.scrollY);
 
   @Input() title: string;

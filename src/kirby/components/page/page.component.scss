@@ -14,10 +14,20 @@ ion-toolbar {
   --border-width: 0 !important;
   --padding-start: #{size('s')};
   --padding-end: #{size('s')};
+
+  /*
+  * This overrides Ionic's default ios styling for the position of secondary action buttons which are to the left of content: https://ionicframework.com/docs/api/toolbar#buttons
+  * We would like the seconday actions to be to the far right after primary actions (usually as a falafel):
+  */
+  ion-buttons[slot='secondary'] {
+    order: 6;
+  }
 }
 
 ion-title {
   box-sizing: border-box;
+  font-size: font-size('n');
+  font-weight: font-weight('normal');
 }
 
 ion-back-button {
@@ -38,7 +48,7 @@ ion-back-button {
   &.has-actions {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
   }
 
   &.text-center {
