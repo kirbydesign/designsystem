@@ -15,6 +15,9 @@
         <li>Spacing of content</li>
     </ul>
 
+    <h2>Life-cycle hooks</h2>
+    <p>Be aware that using page with kirby-router-outlet, causes the views are being stacked instead of replaced. This means that you can't trust onInit and onDestroy. Instead you can trust the page events (enter) or (leave) instead.</p>
+
     <div class="page-example">
         <div>
             <h2>Simple Page</h2>
@@ -66,8 +69,11 @@
         <kirby-iphone src="/examples/page/fixed" showExternalLink="true"></kirby-iphone>
     </div>
 
-        <h2>Page Properties:</h2>
+    <h2>Page Properties:</h2>
     <kirby-showcase-properties [properties]="properties"></kirby-showcase-properties>
+
+    <h2>Page Events:</h2>
+    <kirby-showcase-properties [properties]="events"></kirby-showcase-properties>
 
     <h2>Page Layouts:</h2>
     <kirby-showcase-properties [columns]="layoutColumns" [properties]="layouts"></kirby-showcase-properties>
