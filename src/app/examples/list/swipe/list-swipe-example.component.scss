@@ -1,4 +1,4 @@
-@import "../../../../kirby/scss/utils";
+@import '../../../../kirby/scss/utils';
 
 $item-height: size('xxxl');
 $dot-size: size('xxs');
@@ -14,7 +14,7 @@ $dot-margin: size('xxxs');
 kirby-list-flex-item {
   &.flagged {
     &::before {
-      content: "\00a0";
+      content: '\00a0';
       background-color: get-color('success');
       position: absolute;
       top: calc(50% - #{($dot-size / 2)});

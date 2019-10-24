@@ -1,6 +1,6 @@
 <ng-content></ng-content>
-<button kirby-button size="sm" attentionLevel="3" (click)="expanded = !expanded">   
-    {{ expanded ? 'Hide Code' : 'View Code' }}
-    <kirby-icon [name]="expanded ? 'arrow-up' : 'arrow-down'"></kirby-icon>
+<button kirby-button size="sm" attentionLevel="3" (click)="expanded = !expanded">
+  {{ expanded ? 'Hide Code' : 'View Code' }}
+  <kirby-icon [name]="expanded ? 'arrow-up' : 'arrow-down'"></kirby-icon>
 </button>
 <kirby-code-viewer *ngIf="expanded" [html]="html"></kirby-code-viewer>

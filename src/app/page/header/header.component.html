@@ -1,18 +1,26 @@
 <header>
-  <button class="menu-button menu-button--align-right menu-button--only-mobile" (click)="onToggleMenu()">
+  <button
+    class="menu-button menu-button--align-right menu-button--only-mobile"
+    (click)="onToggleMenu()"
+  >
     <svg class="icon"><use xlink:href="../../assets/icons/icon-sprite.svg#icon-burger"></use></svg>
   </button>
-  
+
   <div class="block-container">
     <div class="block block--large"></div>
     <div class="block block--medium"></div>
     <div class="block block--small"></div>
     <div class="title">Kirby_</div>
-  </div>  
+  </div>
   <nav>
     <ul class="header-nav">
       <li class="header-nav__item" *ngFor="let item of items">
-        <a href="javascript:void(0)" class="header-nav__item-link" [ngClass]="{'is-selected': item.selected}">{{item.name}}</a>
+        <a
+          href="javascript:void(0)"
+          class="header-nav__item-link"
+          [ngClass]="{ 'is-selected': item.selected }"
+          >{{ item.name }}</a
+        >
       </li>
     </ul>
   </nav>

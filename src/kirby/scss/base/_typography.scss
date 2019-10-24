@@ -1,14 +1,24 @@
-h1, .h1,
-h2, .h2,
-h3, .h3,
-h4, .h4,
-p, .p {
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+p,
+.p {
   margin: 0;
-  margin-bottom: size("s");
+  margin-bottom: size('s');
 }
 
 kirby-app .page-title {
-  > h1, h2, h3, h4, h5, h6 {
+  > h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     margin: 0;
   }
 }
@@ -16,55 +26,55 @@ kirby-app .page-title {
 h1,
 .h1,
 .kirby-text-xlarge {
-  font-size: font-size("xl");
-  font-weight: font-weight("bold");
-  line-height: line-height("xl"); 
+  font-size: font-size('xl');
+  font-weight: font-weight('bold');
+  line-height: line-height('xl');
 }
 
 h2,
 .h2,
 .kirby-text-large {
-  font-size: font-size("l");
-  font-weight: font-weight("bold");
-  line-height: line-height("l");
+  font-size: font-size('l');
+  font-weight: font-weight('bold');
+  line-height: line-height('l');
 }
 
 h3,
 .h3,
 .kirby-text-medium {
-  font-size: font-size("m");
-  font-weight: font-weight("normal");
-  line-height: line-height("m");
+  font-size: font-size('m');
+  font-weight: font-weight('normal');
+  line-height: line-height('m');
 }
 
 p,
 .p,
 .kirby-text-normal {
-  font-size: font-size("n");
-  line-height: line-height("n");
+  font-size: font-size('n');
+  line-height: line-height('n');
 }
 
 .kirby-text-small {
-  font-size: font-size("s");
-  line-height: line-height("s");
+  font-size: font-size('s');
+  line-height: line-height('s');
 }
 
 .kirby-text-small-light {
-  font-size: font-size("s");
-  font-weight: font-weight("light");
-  line-height: line-height("s");
+  font-size: font-size('s');
+  font-weight: font-weight('light');
+  line-height: line-height('s');
 }
 
 .kirby-text-xsmall {
-  font-size: font-size("xs");
-  line-height: line-height("xs");
+  font-size: font-size('xs');
+  line-height: line-height('xs');
 }
 
 .kirby-text-xxsmall {
-  font-size: font-size("xxs");
-  line-height: line-height("xxs");
+  font-size: font-size('xxs');
+  line-height: line-height('xxs');
 }
 
 .kirby-text-bold {
-  font-weight: font-weight("bold");
+  font-weight: font-weight('bold');
 }

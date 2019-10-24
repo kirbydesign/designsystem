@@ -1,6 +1,6 @@
-<div class="avatar" [ngClass]="{'shadow': shadow, 'overlay': overlay}">
-  <img *ngIf="imageSrc"[src]="imageSrc" [attr.alt]="altText" />
+<div class="avatar" [ngClass]="{ shadow: shadow, overlay: overlay }">
+  <img *ngIf="imageSrc" [src]="imageSrc" [attr.alt]="altText" />
   <ng-content *ngIf="!text" select="kirby-icon"></ng-content>
-  <span class="avatar-text" *ngIf="text">{{text}}</span>
+  <span class="avatar-text" *ngIf="text">{{ text }}</span>
 </div>
 <ng-content select="kirby-badge"></ng-content>

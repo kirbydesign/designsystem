@@ -1,12 +1,8 @@
 <div class="overlay-wrapper">
-    <div
-        *ngIf="isLoading"
-        [class.backdrop]="showBackdrop"
-        class="spinner-wrapper"
-    >
-        <kirby-spinner class="spinner"></kirby-spinner>
-    </div>
-    <div class="content-wrapper">
-        <ng-content></ng-content>
-    </div>
+  <div *ngIf="isLoading" [class.backdrop]="showBackdrop" class="spinner-wrapper">
+    <kirby-spinner class="spinner"></kirby-spinner>
+  </div>
+  <div class="content-wrapper">
+    <ng-content></ng-content>
+  </div>
 </div>

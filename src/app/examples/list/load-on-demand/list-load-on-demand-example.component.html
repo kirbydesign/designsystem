@@ -15,24 +15,18 @@
   Further more, if any is given, the `noMoreItemsText` will be shown.
 
 -->
-<kirby-list 
-  [items]="items"
-  (loadOnDemand)="onLoadDemand($event)"
-  noMoreItemsText="No more items">
+<kirby-list [items]="items" (loadOnDemand)="onLoadDemand($event)" noMoreItemsText="No more items">
   <kirby-list-flex-item *kirbyListFlexItem="let account">
-    <kirby-list-cell
-      width="2">
+    <kirby-list-cell width="2">
       <kirby-list-cell-line [primary]="true" [text]="account.title"></kirby-list-cell-line>
-      <kirby-list-cell-line [text]="account.detail === 0 ? null : account.detail"></kirby-list-cell-line>
+      <kirby-list-cell-line
+        [text]="account.detail === 0 ? null : account.detail"
+      ></kirby-list-cell-line>
     </kirby-list-cell>
-    <kirby-list-cell
-      width="0.5"
-      horisontalAlignment="right">
+    <kirby-list-cell width="0.5" horisontalAlignment="right">
       <kirby-list-cell-line [primary]="true" [text]="account.subTitle"></kirby-list-cell-line>
     </kirby-list-cell>
-    <kirby-list-cell
-      verticalAlignment="center"
-      horisontalAlignment="right">
+    <kirby-list-cell verticalAlignment="center" horisontalAlignment="right">
       <kirby-list-cell-line [primary]="true" [text]="account.amount"></kirby-list-cell-line>
     </kirby-list-cell>
   </kirby-list-flex-item>

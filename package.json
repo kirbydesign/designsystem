@@ -8,8 +8,11 @@
     "build-polyfills": "webpack --config webpack.polyfills.config.js",
     "test": "ng test",
     "ci-test": "ng test --progress false --watch false --code-coverage",
-    "lint": "tslint './src/**/*.ts'",
-    "lint:fix": "tslint './src/**/*.ts' --fix",
+    "lint": "npm run lint:ts && npm run lint:css",
+    "lint:ts": "tslint './src/**/*.ts'",
+    "lint:ts:fix": "npm run lint:ts -- --fix",
+    "lint:css": "stylelint './src/**/*.scss'",
+    "lint:css:fix": "npm run lint:css -- --fix",
     "e2e": "ng e2e",
     "dist": "ng build --prod --aot --progress false",
     "pack-copy-to-dist-folder-watch": "cpx \"src\\kirby\\**\\!(*.spec.ts)\" dist-lib --watch",
@@ -52,6 +55,7 @@
     "codelyzer": "^5.0.1",
     "coveralls": "3.0.2",
     "cpx": "1.5.0",
+    "husky": "^3.0.9",
     "is-docker": "1.1.0",
     "jasmine-core": "2.99.1",
     "jasmine-spec-reporter": "4.2.1",
@@ -62,17 +66,28 @@
     "karma-jasmine-html-reporter": "0.2.2",
     "karma-junit-reporter": "1.2.0",
     "karma-spec-reporter": "0.0.32",
+    "lint-staged": "^9.4.2",
     "ng-mocks": "7.7.0",
     "node-sass": "^4.12.0",
+    "post-npm-install": "^2.0.0",
     "prettier": "1.17.0",
     "raw-loader": "^3.1.0",
     "resize-observer-polyfill": "1.5.1",
     "sass-extract": "2.1.0",
     "sass-extract-loader": "1.1.0",
+    "stylelint": "^11.1.1",
+    "stylelint-config-prettier": "^6.0.0",
+    "stylelint-prettier": "^1.1.1",
     "ts-node": "5.0.1",
     "tslint": "5.9.1",
     "tslint-plugin-prettier": "2.0.1",
     "typescript": "3.5.3",
     "webpack-cli": "^3.3.8"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "post-merge": "post-npm-install"
+    }
   }
 }

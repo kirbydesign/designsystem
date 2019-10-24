@@ -1,7 +1,7 @@
 $brand-colors: (
   'primary': #00e89a,
   'secondary': #005c3c,
-  'tertiary': #01352c,  
+  'tertiary': #01352c,
 );
 
 $notification-colors: (
@@ -11,28 +11,31 @@ $notification-colors: (
 );
 
 $system-colors: (
-  'background-color': #f6f6f6,  
-  'white': #ffffff,  
+  'background-color': #f6f6f6,
+  'white': #ffffff,
   'light': #f2f2f2,
   'semi-light': #ebebeb,
   'medium': #d1d1d1,
   'semi-dark': #767676,
-  'dark': #353535,  
+  'dark': #353535,
   'black': #1c1c1c,
 );
 
 @function getAllColors() {
-  @return 
-    map-merge(
-      map-merge($brand-colors, $notification-colors),
-      $system-colors
-    );
+  @return map-merge(map-merge($brand-colors, $notification-colors), $system-colors);
 }
 
 $_color-palette: getAllColors();
 
-// TODO Deprecated variable, used to generate colors in some components - don't use it anymore! 
-$main-colors: map-remove($_color-palette, 'background-color', 'black', 'white', 'semi-light', 'semi-dark');
+// TODO Deprecated variable, used to generate colors in some components - don't use it anymore!
+$main-colors: map-remove(
+  $_color-palette,
+  'background-color',
+  'black',
+  'white',
+  'semi-light',
+  'semi-dark'
+);
 
 @function _get-color-contrast($color) {
   $contrast-light: map-get($system-colors, 'white');
@@ -81,7 +84,7 @@ $main-colors: map-remove($_color-palette, 'background-color', 'black', 'white', 
 @function generate-colors($colors: $_color-palette) {
   $color-list: ();
   @each $color-name, $color-value in $colors {
-      $color-list: map-merge(
+    $color-list: map-merge(
       (
         $color-name: $color-value,
         #{$color-name}-rgb: #{_get-rgb-values($color-value)},
@@ -90,8 +93,9 @@ $main-colors: map-remove($_color-palette, 'background-color', 'black', 'white', 
         #{$color-name}-shade: #{_get-shade-value($color-value)},
         #{$color-name}-tint: #{_get-tint-value($color-value)},
         #{$color-name}-color-brightness: #{_get-color-brightness($color-value)},
-      )
-      , $color-list)
+      ),
+      $color-list
+    );
   }
   @return $color-list;
 }

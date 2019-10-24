@@ -1,4 +1,4 @@
-@import "../../../kirby/scss/utils";
+@import '../../../kirby/scss/utils';
 
 h2 {
   margin-top: size('l');
@@ -29,7 +29,7 @@ h2 {
   display: block;
   max-width: 112px;
   font-size: 12px;
-  color: rgba(0,0,0,.6);
+  color: rgba(0, 0, 0, 0.6);
   white-space: nowrap;
 }
 
@@ -74,4 +74,3 @@ kirby-icon {
     background-color: get-color($color-name);
   }
 }
-

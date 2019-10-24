@@ -1,24 +1,43 @@
 <div class="kirby-card-config">
-  <kirby-card-example [ngClass]="{
-    'show-background': showCardBackground,
-    'dim-background': dimCardBackground,
-    'hide-foreground': hideCardForeground
-    }"></kirby-card-example>
+  <kirby-card-example
+    [ngClass]="{
+      'show-background': showCardBackground,
+      'dim-background': dimCardBackground,
+      'hide-foreground': hideCardForeground
+    }"
+  ></kirby-card-example>
   <section class="card-settings">
     <header>Settings</header>
     <main>
       <div>
-          <input id="show-card-background" type="checkbox" [checked]="showCardBackground" (change)="showCardBackground = !showCardBackground" />
-          <label for="show-card-background">Show Card Background</label>   
+        <input
+          id="show-card-background"
+          type="checkbox"
+          [checked]="showCardBackground"
+          (change)="showCardBackground = !showCardBackground"
+        />
+        <label for="show-card-background">Show Card Background</label>
       </div>
       <div [class.disabled]="!showCardBackground">
-          <input id="dim-card-background" type="checkbox" [checked]="dimCardBackground" (change)="dimCardBackground = !dimCardBackground" [disabled]="!showCardBackground" />
-          <label for="dim-card-background">Dim Card Background</label>   
+        <input
+          id="dim-card-background"
+          type="checkbox"
+          [checked]="dimCardBackground"
+          (change)="dimCardBackground = !dimCardBackground"
+          [disabled]="!showCardBackground"
+        />
+        <label for="dim-card-background">Dim Card Background</label>
       </div>
       <hr />
       <div [class.disabled]="!showCardBackground">
-          <input id="hide-card-foreground" type="checkbox" [checked]="hideCardForeground" (change)="hideCardForeground = !hideCardForeground" [disabled]="!showCardBackground" />
-          <label for="hide-card-foreground">Hide Card Foreground</label>   
+        <input
+          id="hide-card-foreground"
+          type="checkbox"
+          [checked]="hideCardForeground"
+          (change)="hideCardForeground = !hideCardForeground"
+          [disabled]="!showCardBackground"
+        />
+        <label for="hide-card-foreground">Hide Card Foreground</label>
       </div>
     </main>
   </section>

@@ -1,5 +1,5 @@
-@import "../../scss/utils";
-@import "slide-button.component.shared";
+@import '../../scss/utils';
+@import 'slide-button.component.shared';
 
 @mixin _slider-thumb() {
   -webkit-appearance: none;
@@ -36,9 +36,9 @@
   }
 
   @for $i from 1 through 10 {
-    $iTenth: $i*10;
+    $iTenth: $i * 10;
     .slide-#{$iTenth}-pct {
-      opacity: 1-($i/10);
+      opacity: 1- ($i/10);
     }
   }
 
@@ -71,7 +71,7 @@
   }
 
   .slide-done {
-    transition: all .3s ease-in-out;
+    transition: all 0.3s ease-in-out;
     opacity: 0;
     height: 0;
     transform: scale(0);

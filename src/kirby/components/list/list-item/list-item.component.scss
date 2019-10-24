@@ -4,36 +4,35 @@ $middle-column: 2;
 $right-column: 3;
 
 :host {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 40% 20% 40%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 40% 20% 40%;
 }
 
 .title-container {
-    
-    grid-column-start: $left-column;
-    grid-column-end: $left-column;
-    text-align: left;
+  grid-column-start: $left-column;
+  grid-column-end: $left-column;
+  text-align: left;
 
-    .title {
-        flex: 1;
-    }
+  .title {
+    flex: 1;
+  }
 
-    .subTitle {
-        flex: 1;
-        color: #a0a0a0;
-    }
+  .subTitle {
+    flex: 1;
+    color: #a0a0a0;
+  }
 }
 
 .details-container {
-    grid-column-start: $middle-column;
-    grid-column-end: $middle-column;
-    text-align: center;
+  grid-column-start: $middle-column;
+  grid-column-end: $middle-column;
+  text-align: center;
 }
 
 .amount-container {
-    grid-column-start: $right-column;
-    grid-column-end: $right-column;
-    text-align: right;
-    font-weight: bold;
+  grid-column-start: $right-column;
+  grid-column-end: $right-column;
+  text-align: right;
+  font-weight: bold;
 }

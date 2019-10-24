@@ -1,10 +1,9 @@
 ---
 name: Enhancement request
 about: Suggest an idea for this project
-title: "[Enhancement]"
+title: '[Enhancement]'
 labels: enhancement
 assignees: ''
-
 ---
 
 **Is your enhancement request related to a problem? Please describe.**

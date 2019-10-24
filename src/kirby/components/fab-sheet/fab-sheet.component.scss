@@ -3,44 +3,44 @@
 // Ionic fab can be customized by using the css properties listed in the CSS Custom Properties section of the below docs page:
 // https://ionicframework.com/docs/api/fab-button
 ion-fab-button {
-    --box-shadow: #{get-elevation(8)};
-    width: 64px;
-    height: 64px;
+  --box-shadow: #{get-elevation(8)};
+  width: 64px;
+  height: 64px;
 
-    &[disabled] {
-        --background: #{get-color('semi-light')};
-        --box-shadow: none;
-        opacity: 1;
-    }
+  &[disabled] {
+    --background: #{get-color('semi-light')};
+    --box-shadow: none;
+    opacity: 1;
+  }
 }
 
 ion-fab {
-    position: fixed;
-    bottom: size('s');
-    right: size('s');
+  position: fixed;
+  bottom: size('s');
+  right: size('s');
 }
 
 :host-context(.fixed-content) ion-fab {
-    position: absolute;
+  position: absolute;
 }
 
 ion-backdrop {
-    opacity: 0;
-    transition: opacity 750ms;
-    position: fixed;
-    z-index: 999;
+  opacity: 0;
+  transition: opacity 750ms;
+  position: fixed;
+  z-index: 999;
 }
 
 :host(.backdrop-visible) ion-backdrop {
-    opacity: 0.4;
+  opacity: 0.4;
 
-    @include media(">=medium") {
-        opacity: 0;
-    }
+  @include media('>=medium') {
+    opacity: 0;
+  }
 }
 
 ion-fab-list {
-    margin-top: 76px;
-    margin-bottom: 76px;
-    right: 0;
+  margin-top: 76px;
+  margin-bottom: 76px;
+  right: 0;
 }

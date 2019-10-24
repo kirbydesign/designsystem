@@ -1,7 +1,7 @@
 @import '../../kirby/scss/utils';
 
-$page-header-bg: #1C1C1C;
-$page-header-color: #F4F1E8;
+$page-header-bg: #1c1c1c;
+$page-header-color: #f4f1e8;
 $page-header-height: 7rem;
 $page-gutter: 1rem;
 $page-side-nav-width: 16.625rem;
@@ -20,7 +20,7 @@ main {
   width: 100%;
   max-width: var(--kirby-page-max-width);
   margin: 0 auto;
-  @include media(">=large") {
+  @include media('>=large') {
     padding-right: $page-gutter;
   }
 }
@@ -29,7 +29,7 @@ section {
   flex-grow: 1;
   background-color: get-color('background-color');
   margin: 2rem 0;
-  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   padding: 1rem 2rem;
   overflow: hidden;
 }

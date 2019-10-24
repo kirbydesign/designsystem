@@ -1,6 +1,7 @@
 @import '../../kirby/scss/utils';
 
-.changelog, .pull-requests {
+.changelog,
+.pull-requests {
   list-style: none;
   margin-bottom: size('m');
 
@@ -9,7 +10,8 @@
   }
 }
 
-.version-title, a {
+.version-title,
+a {
   color: get-color('black');
   text-decoration: none;
   display: inline-block;

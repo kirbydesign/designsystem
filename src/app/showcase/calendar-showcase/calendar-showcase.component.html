@@ -7,23 +7,31 @@
   <h2 class="custom-example">Wrapped in card + custom buttons integration:</h2>
   <div class="calendar-example">
     <div class="example-wrapper">
-        <kirby-calendar-card-example
-          [disableWeekends]="disableWeekends"
-          [disablePastDates]="disablePastDates"
-          [disableFutureDates]="disableFutureDates"
-          [setDisabledDates]="setDisabledDates"
-          [setMinDate]="setMinDate"
-          [setMaxDate]="setMaxDate"
-        ></kirby-calendar-card-example>     
-        <fieldset>
+      <kirby-calendar-card-example
+        [disableWeekends]="disableWeekends"
+        [disablePastDates]="disablePastDates"
+        [disableFutureDates]="disableFutureDates"
+        [setDisabledDates]="setDisabledDates"
+        [setMinDate]="setMinDate"
+        [setMaxDate]="setMaxDate"
+      ></kirby-calendar-card-example>
+      <!-- prettier-ignore -->
+      <fieldset>
           <legend>Configuration</legend>
-          <kirby-checkbox [checked]="disableWeekends" (checkedChange)="disableWeekends = $event;"></kirby-checkbox><label (click)="disableWeekends = !disableWeekends">Disable weekends</label><br/>
-          <kirby-checkbox [checked]="alwaysEnableToday" (checkedChange)="alwaysEnableToday = $event;"></kirby-checkbox><label (click)="alwaysEnableToday = !alwaysEnableToday">Always enable current date</label><br/>
-          <kirby-checkbox [checked]="disablePastDates" (checkedChange)="disablePastDates = $event;"></kirby-checkbox><label (click)="disablePastDates = !disablePastDates">Disable past dates</label><br/>
-          <kirby-checkbox [checked]="disableFutureDates" (checkedChange)="disableFutureDates = $event;"></kirby-checkbox><label (click)="disableFutureDates = !disableFutureDates">Disable future dates</label><br/>
-          <kirby-checkbox [checked]="setDisabledDates" (checkedChange)="setDisabledDates = $event;"></kirby-checkbox><label (click)="setDisabledDates = !setDisabledDates">Set disabled dates</label><br/>
-          <kirby-checkbox [checked]="setMinDate" (checkedChange)="setMinDate = $event;"></kirby-checkbox><label (click)="setMinDate = !setMinDate">Set min date ({{minDate | date:'dd-MM-yyyy'}})</label><br/>
-          <kirby-checkbox [checked]="setMaxDate" (checkedChange)="setMaxDate = $event;"></kirby-checkbox><label (click)="setMaxDate = !setMaxDate">Set max date ({{maxDate | date:'dd-MM-yyyy'}})</label>  
+          <kirby-checkbox [checked]="disableWeekends" (checkedChange)="disableWeekends = $event;"></kirby-checkbox>
+          <label (click)="disableWeekends = !disableWeekends">Disable weekends</label><br/>
+          <kirby-checkbox [checked]="alwaysEnableToday" (checkedChange)="alwaysEnableToday = $event;"></kirby-checkbox>
+          <label (click)="alwaysEnableToday = !alwaysEnableToday">Always enable current date</label><br/>
+          <kirby-checkbox [checked]="disablePastDates" (checkedChange)="disablePastDates = $event;"></kirby-checkbox>
+          <label (click)="disablePastDates = !disablePastDates">Disable past dates</label><br/>
+          <kirby-checkbox [checked]="disableFutureDates" (checkedChange)="disableFutureDates = $event;"></kirby-checkbox>
+          <label (click)="disableFutureDates = !disableFutureDates">Disable future dates</label><br/>
+          <kirby-checkbox [checked]="setDisabledDates" (checkedChange)="setDisabledDates = $event;"></kirby-checkbox>
+          <label (click)="setDisabledDates = !setDisabledDates">Set disabled dates</label><br/>
+          <kirby-checkbox [checked]="setMinDate" (checkedChange)="setMinDate = $event;"></kirby-checkbox>
+          <label (click)="setMinDate = !setMinDate">Set min date ({{minDate | date:'dd-MM-yyyy'}})</label><br/>
+          <kirby-checkbox [checked]="setMaxDate" (checkedChange)="setMaxDate = $event;"></kirby-checkbox>
+          <label (click)="setMaxDate = !setMaxDate">Set max date ({{maxDate | date:'dd-MM-yyyy'}})</label>  
         </fieldset>
     </div>
     <kirby-code-viewer [html]="exampleWithCardHtml"></kirby-code-viewer>

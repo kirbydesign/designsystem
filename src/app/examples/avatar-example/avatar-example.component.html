@@ -1,6 +1,6 @@
 <h2>Avatar with image</h2>
 
-<div class="avatar-item-container" >
+<div class="avatar-item-container">
   <div class="avatar-item-inner-container">
     <kirby-avatar [imageSrc]="imageSrc" [altText]="altText" size="lg"></kirby-avatar>
   </div>
@@ -8,7 +8,7 @@
 
 <h2>Avatar with overlay</h2>
 
-<div class="avatar-item-container" >
+<div class="avatar-item-container">
   <div class="avatar-item-inner-container">
     <kirby-avatar [imageSrc]="imageSrc" [altText]="altText" size="lg" overlay="true"></kirby-avatar>
   </div>
@@ -16,7 +16,7 @@
 
 <h2>Avatar with shadow</h2>
 
-<div class="avatar-item-container" >
+<div class="avatar-item-container">
   <div class="avatar-item-inner-container">
     <kirby-avatar [imageSrc]="imageSrc" [altText]="altText" size="lg" shadow="true"></kirby-avatar>
   </div>
@@ -26,20 +26,17 @@
 
 <div class="avatar-item-container">
   <div class="avatar-item-inner-container">
-    <kirby-avatar size="lg" overlay="true" text="C"> 
-    </kirby-avatar>
+    <kirby-avatar size="lg" overlay="true" text="C"> </kirby-avatar>
   </div>
 </div>
 <div class="avatar-item-container">
   <div class="avatar-item-inner-container">
-    <kirby-avatar size="md" overlay="true" text="C">
-    </kirby-avatar>
+    <kirby-avatar size="md" overlay="true" text="C"> </kirby-avatar>
   </div>
 </div>
 <div class="avatar-item-container">
   <div class="avatar-item-inner-container">
-    <kirby-avatar size="sm" overlay="true" text="C">
-    </kirby-avatar>
+    <kirby-avatar size="sm" overlay="true" text="C"> </kirby-avatar>
   </div>
 </div>
 
@@ -47,7 +44,7 @@
 
 <div class="avatar-item-container">
   <div class="avatar-item-inner-container">
-    <kirby-avatar size="lg" overlay="true"> 
+    <kirby-avatar size="lg" overlay="true">
       <kirby-icon name="qr"></kirby-icon>
     </kirby-avatar>
   </div>
@@ -69,7 +66,7 @@
 
 <h2>Avatar with badge</h2>
 
-  <kirby-card>
+<kirby-card>
   <div class="avatar-item-container">
     <div class="avatar-item-inner-container">
       <kirby-avatar size="lg" overlay="true">
@@ -82,7 +79,7 @@
   </div>
   <div class="avatar-item-container">
     <div class="avatar-item-inner-container">
-      <kirby-avatar size="md" overlay="true"> 
+      <kirby-avatar size="md" overlay="true">
         <kirby-icon name="cog"></kirby-icon>
         <kirby-badge>
           <kirby-icon name="attach"></kirby-icon>
@@ -92,7 +89,7 @@
   </div>
   <div class="avatar-item-container">
     <div class="avatar-item-inner-container">
-      <kirby-avatar size="sm" overlay="true"> 
+      <kirby-avatar size="sm" overlay="true">
         <kirby-icon name="cog"></kirby-icon>
         <kirby-badge>
           <kirby-icon name="attach"></kirby-icon>
@@ -106,7 +103,13 @@
 
 <div class="avatar-item-container" *ngFor="let size of sizes | keyvalue">
   <div class="avatar-item-inner-container">
-    <kirby-avatar [imageSrc]="imageSrc" [altText]="altText" [size]="size.value" overlay="true" shadow="true"></kirby-avatar>
-    <span class="avatar-item-title">{{size.value}}</span>
+    <kirby-avatar
+      [imageSrc]="imageSrc"
+      [altText]="altText"
+      [size]="size.value"
+      overlay="true"
+      shadow="true"
+    ></kirby-avatar>
+    <span class="avatar-item-title">{{ size.value }}</span>
   </div>
 </div>

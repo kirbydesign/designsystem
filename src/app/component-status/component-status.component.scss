@@ -1,157 +1,147 @@
 @import '../../kirby/scss/utils';
 
 :host {
-    a {
-        color: #000;
-    }
+  a {
+    color: #000;
+  }
 }
 
 .search {
-    margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 
 .github-error {
-    font-style: italic;
-    ion-icon[name="alert"] {
-        font-size: 24px;
-        vertical-align: text-bottom;   
-    }
+  font-style: italic;
+  ion-icon[name='alert'] {
+    font-size: 24px;
+    vertical-align: text-bottom;
+  }
 }
 
 .component-status {
-    width: 100%;
-    border-collapse: collapse;
-    border-spacing: 0;
-    margin-left: 1rem;
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin-left: 1rem;
 
-    thead {
-        text-align: left;
+  thead {
+    text-align: left;
 
-        th {
-            font-weight: 500;
-            line-height: 1.6;
-            text-transform: uppercase;
-            letter-spacing: .1rem;
-            padding: 1rem;
-            font-size: 1.3rem;
+    th {
+      font-weight: 500;
+      line-height: 1.6;
+      text-transform: uppercase;
+      letter-spacing: 0.1rem;
+      padding: 1rem;
+      font-size: 1.3rem;
 
-            &:first-child {
-                padding-left: 0;
-            }
+      &:first-child {
+        padding-left: 0;
+      }
+    }
+  }
+
+  tr {
+    &.component {
+      vertical-align: middle;
+
+      .component {
+        ion-icon {
+          cursor: pointer;
+          display: block;
+          position: absolute;
+          margin-left: -2rem;
+          font-size: 24px;
         }
+      }
+
+      & ~ .subcomponent,
+      & ~ .enhancement-subcomponent {
+        display: none;
+      }
+
+      &.expanded ~ .subcomponent,
+      &.expanded ~ .enhancement-subcomponent {
+        display: table-row;
+      }
     }
 
-    tr {
-
-        &.component {
-            vertical-align: middle;
-    
-            .component {
-                    
-                ion-icon {
-                    cursor: pointer;
-                    display: block;
-                    position: absolute;
-                    margin-left: -2rem;
-                    font-size: 24px;
-                }
-            }
-   
-            & ~ .subcomponent,
-            & ~ .enhancement-subcomponent
-            {
-                display: none;
-            }
-    
-            &.expanded ~ .subcomponent,
-            &.expanded ~ .enhancement-subcomponent
-            {
-                display: table-row;
-            }
-    
-        }
-       
-        &.component
-        {
-            border-top: .1rem solid get-color('medium');
-        }
-
-        &.subcomponent,
-        &.enhancement {
-            vertical-align: middle;
-            border-top: .1rem dashed get-color('medium');
-            color: get-color('dark-tint');
-            font-size: font-size("s");
-    
-            td {
-    
-                &:first-child {
-                    padding-left: 1rem;
-                }
-            }
-    
-            a {
-                color: get-color('dark-tint');
-            }
-
-            .vnext {
-                font-style: normal;
-            }
-            
-        }
-
-        &.enhancement {
-            td {
-                padding-top: 0.5rem;
-                padding-bottom: 0.5rem;
-            }
-
-            &-subcomponent td:first-child {
-                padding-left: 2rem;
-
-            }
-            ion-icon[name="add-circle"] {
-                font-size: 16px;
-                vertical-align: sub;
-            }       
-        }
-
-        &.someday-maybe,
-        &.someday-maybe td a {
-            color: get-color('dark-tint');
-            font-style: italic;
-        }   
-    
+    &.component {
+      border-top: 0.1rem solid get-color('medium');
     }
 
-    td {
-        padding: 1rem;
+    &.subcomponent,
+    &.enhancement {
+      vertical-align: middle;
+      border-top: 0.1rem dashed get-color('medium');
+      color: get-color('dark-tint');
+      font-size: font-size('s');
 
+      td {
         &:first-child {
-            padding-left: 0;
+          padding-left: 1rem;
         }
+      }
 
-        &.component {
-            font-weight: font-weight("bold");
-        }
+      a {
+        color: get-color('dark-tint');
+      }
+
+      .vnext {
+        font-style: normal;
+      }
     }
 
-    a[href^="https://"] ion-icon {
+    &.enhancement {
+      td {
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+      }
+
+      &-subcomponent td:first-child {
+        padding-left: 2rem;
+      }
+      ion-icon[name='add-circle'] {
+        font-size: 16px;
         vertical-align: sub;
-        font-size: 18px;
-
-        &[name="open"] {
-            color: get-color('dark-tint');
-        }
+      }
     }
-    
-    kirby-badge {
-        vertical-align: sub;
 
-        &.version {
-            margin-left: 0.5rem;
-            --ion-color-base: #{get-color('semi-dark')};
-            --ion-color-contrast: #{get-color('white')};   
-        }
+    &.someday-maybe,
+    &.someday-maybe td a {
+      color: get-color('dark-tint');
+      font-style: italic;
     }
+  }
+
+  td {
+    padding: 1rem;
+
+    &:first-child {
+      padding-left: 0;
+    }
+
+    &.component {
+      font-weight: font-weight('bold');
+    }
+  }
+
+  a[href^="https://"] ion-icon {
+    vertical-align: sub;
+    font-size: 18px;
+
+    &[name='open'] {
+      color: get-color('dark-tint');
+    }
+  }
+
+  kirby-badge {
+    vertical-align: sub;
+
+    &.version {
+      margin-left: 0.5rem;
+      --ion-color-base: #{get-color('semi-dark')};
+      --ion-color-contrast: #{get-color('white')};
+    }
+  }
 }

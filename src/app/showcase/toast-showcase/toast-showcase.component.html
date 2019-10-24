@@ -1,9 +1,11 @@
 <div class="example">
   <kirby-toast-example></kirby-toast-example>
   <kirby-code-viewer [html]="exampleHtml"></kirby-code-viewer>
-  To show the toast, create a <code>ToastConfig</code> and pass it to <code>toastController.showToast</code>
+  To show the toast, create a <code>ToastConfig</code> and pass it to
+  <code>toastController.showToast</code>
 
-    <kirby-code-viewer language="ts">const config: ToastConfig = 
+  <!-- prettier-ignore -->
+  <kirby-code-viewer language="ts">const config: ToastConfig = 
       <pre>{{ '{' }}
   message: 'Your toast message',
   messageType: 'success';
@@ -13,11 +15,13 @@ this.toastController.showToast(config);
 </pre>
     </kirby-code-viewer>
   (Optional) if you need to know when the toast is dismissed, you can pass a callback function:
+  <!-- prettier-ignore -->
   <kirby-code-viewer language="ts">this.toastController.showToast(config, myCallback);</kirby-code-viewer>
   where <code>myCallback</code> can be e.g.:
+  <!-- prettier-ignore -->
   <kirby-code-viewer language="ts">myCallback() {{ '{' }}
 ...
 {{ '}' }}</kirby-code-viewer>
-    <h4>Toast config properties:</h4>
-    <kirby-showcase-properties [properties]="properties"></kirby-showcase-properties>
+  <h4>Toast config properties:</h4>
+  <kirby-showcase-properties [properties]="properties"></kirby-showcase-properties>
 </div>
