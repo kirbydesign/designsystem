@@ -3,11 +3,11 @@
 /*
  * Page Header
  */
-ion-header, ion-toolbar {
+ion-header,
+ion-toolbar {
   --background: #{get-color('background-color')};
   max-width: 768px;
   margin: 0 auto;
-
 }
 
 ion-toolbar {
@@ -54,12 +54,17 @@ ion-back-button {
   &.text-center {
     text-align: center;
   }
-  
+
   &.text-right {
     text-align: right;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     margin: 0;
   }
 }
@@ -69,14 +74,14 @@ ion-back-button {
  */
 ion-content {
   --padding-start: var(--page-content-padding-start, #{size('s')});
-  --padding-end: var(--page-content-padding-end, #{size('s')});;
+  --padding-end: var(--page-content-padding-end, #{size('s')});
   --background: #{get-color('background-color')};
 
   .content-inner {
     max-width: var(--page-content-max-width, 720px);
     margin: 0 auto;
     padding-bottom: size('xl');
-  }  
+  }
 
   /*
   * Fixed content

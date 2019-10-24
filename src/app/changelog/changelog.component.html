@@ -1,20 +1,32 @@
 <h1>Changelog</h1>
 
 <ul *ngIf="changelog; else loading" class="changelog">
-    <li *ngFor="let version of changelog; let i = index; trackBy: trackByFn">
-        <a [href]="version.compareLink" class="version-title" target="_blank"><h2>{{version.name}} <span>({{version.date | date}})</span></h2></a>
-        <ul class="pull-requests">
-           <li *ngFor="let pullRequest of version.associatedPullRequests;">
-               <a class="pull-request" href="https://github.com/kirbydesign/designsystem/pull/{{pullRequest.number}}" target="_blank">
-                   <span>{{pullRequest.title}}</span>
-                   <kirby-badge [text]="label.name" *ngFor="let label of pullRequest.labels" [attr.style]="getBadgeStyle(label?.color)"></kirby-badge>
-               </a>
-           </li>
-        </ul>
-        <button kirby-button attentionLevel="3" (click)="onRefreshVersion(version)">refresh</button>
-    </li>
+  <li *ngFor="let version of changelog; let i = index; trackBy: trackByFn">
+    <a [href]="version.compareLink" class="version-title" target="_blank"
+      ><h2>
+        {{ version.name }} <span>({{ version.date | date }})</span>
+      </h2></a
+    >
+    <ul class="pull-requests">
+      <li *ngFor="let pullRequest of version.associatedPullRequests">
+        <a
+          class="pull-request"
+          href="https://github.com/kirbydesign/designsystem/pull/{{ pullRequest.number }}"
+          target="_blank"
+        >
+          <span>{{ pullRequest.title }}</span>
+          <kirby-badge
+            [text]="label.name"
+            *ngFor="let label of pullRequest.labels"
+            [attr.style]="getBadgeStyle(label?.color)"
+          ></kirby-badge>
+        </a>
+      </li>
+    </ul>
+    <button kirby-button attentionLevel="3" (click)="onRefreshVersion(version)">refresh</button>
+  </li>
 </ul>
 
 <ng-template #loading>
-    <kirby-spinner></kirby-spinner>
+  <kirby-spinner></kirby-spinner>
 </ng-template>

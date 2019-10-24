@@ -3,7 +3,10 @@
     <kirby-icon name="arrow-back"></kirby-icon>
   </button>
 
-  <div class="month-and-year"><span class="month">{{ activeMonthName }}</span><span class="year">{{ activeYear }}</span></div>
+  <div class="month-and-year">
+    <span class="month">{{ activeMonthName }}</span
+    ><span class="year">{{ activeYear }}</span>
+  </div>
 
   <button [disabled]="!canNavigateForward" (click)="changeMonth(1)">
     <kirby-icon name="arrow-more"></kirby-icon>
@@ -14,16 +17,20 @@
   <thead class="calendar-table-header">
     <th *ngFor="let weekDay of weekDays">{{ weekDay }}</th>
   </thead>
-    
+
   <tbody>
     <tr *ngFor="let week of month">
       <td *ngFor="let day of week">
-        <div (click)="onDateSelected(day)" class="{{day.cssClasses}}" [class.selected]="day.isSelected">
+        <div
+          (click)="onDateSelected(day)"
+          class="{{ day.cssClasses }}"
+          [class.selected]="day.isSelected"
+        >
           {{ day.date }}
         </div>
       </td>
     </tr>
   </tbody>
 </table>
-  
+
 <!-- <iframe src="kirby/components/calendar/calendar.webview.html" #calendarContainer style="width: 320px; height: 304px; border: 0"> -->

@@ -22,7 +22,8 @@
 
   // we default to 'md' size.
   margin: size('xxxs');
-  padding: size('xxs') var(--kirby-button-padding-right) size('xxs') var(--kirby-button-padding-left);
+  padding: size('xxs') var(--kirby-button-padding-right) size('xxs')
+    var(--kirby-button-padding-left);
   font-size: font-size('s');
   height: size('xl');
   line-height: line-height('xs');
@@ -64,24 +65,24 @@
   }
 
   &.attention-level1 {
-    --kirby-button-background-color:#{get-color('primary')};
+    --kirby-button-background-color: #{get-color('primary')};
     --kirby-button-border-color: #{get-color('primary')};
     --kirby-button-color: #{get-color('primary-contrast')};
 
     &.destructive {
-      --kirby-button-background-color:#{get-color('danger')};
+      --kirby-button-background-color: #{get-color('danger')};
       --kirby-button-border-color: #{get-color('danger')};
       --kirby-button-color: #{get-color('danger-contrast')};
     }
   }
 
   &.attention-level2 {
-    --kirby-button-background-color:#{get-color('white')};
+    --kirby-button-background-color: #{get-color('white')};
     --kirby-button-border-color: #{get-color('white')};
     --kirby-button-color: #{get-color('white-contrast')};
 
     &.destructive {
-      --kirby-button-background-color:#{get-color('light')};
+      --kirby-button-background-color: #{get-color('light')};
       --kirby-button-border-color: #{get-color('light')};
       --kirby-button-color: #{get-color('danger')};
     }

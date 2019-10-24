@@ -17,21 +17,23 @@ table.calendar-table {
       text-align: center;
     }
   }
-  
+
   tbody {
     padding: 0.5em;
   }
 
-  tr, td {
+  tr,
+  td {
     border-style: none;
     padding: 0;
     line-height: 2em;
     height: 0;
   }
-
 }
 
-.header, th, td {
+.header,
+th,
+td {
   background-color: transparent;
 }
 
@@ -40,7 +42,7 @@ table.calendar-table {
   flex-direction: row;
   justify-content: space-between;
   padding: 0.5em;
-  
+
   button {
     background-color: transparent;
     outline: none;
@@ -52,7 +54,6 @@ table.calendar-table {
     opacity: 0.5;
     pointer-events: none;
   }
-
 }
 
 .month-and-year {

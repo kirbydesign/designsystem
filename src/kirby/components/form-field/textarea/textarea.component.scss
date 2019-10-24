@@ -5,7 +5,7 @@
 
   resize: none;
 
-  @include media(">=medium") {
+  @include media('>=medium') {
     resize: vertical;
   }
 }

@@ -1,154 +1,230 @@
-
 <div class="hero">
-    <h1>Component Status</h1>
+  <h1>Component Status</h1>
 </div>
-<p>The latest component updates and changes. If you have a suggestion for a new
-    component not listed here,
-    <a [href]="newIssueUrl">create an issue on GitHub</a></p>
+<p>
+  The latest component updates and changes. If you have a suggestion for a new component not listed
+  here, <a [href]="newIssueUrl">create an issue on GitHub</a>
+</p>
 
-<p *ngIf="milestone$ | async as milestone">Current milestone: <a [href]="milestone.html_url">{{milestone.title}}</a></p>
+<p *ngIf="milestone$ | async as milestone">
+  Current milestone: <a [href]="milestone.html_url">{{ milestone.title }}</a>
+</p>
 
-<p>You can follow working progress <a href="https://github.com/kirbydesign/designsystem/projects/1">here - Kirby kan-ban board</a></p>
+<p>
+  You can follow working progress
+  <a href="https://github.com/kirbydesign/designsystem/projects/1">here - Kirby kan-ban board</a>
+</p>
 
 <h2>Versioning of components</h2>
 <table>
-    <tr>
-        <td>v1.0</td>
-        <td>Production ready</td>
-    </tr>
-    <tr>
-        <td>v0.9</td>
-        <td>Almost ready</td>
-    </tr>
-    <tr>
-        <td>v0.5</td>
-        <td>Halfway ready for production</td>
-    </tr>
-    <tr>
-        <td>v0.1</td>
-        <td>Walking Skeleton</td>
-    </tr>
+  <tr>
+    <td>v1.0</td>
+    <td>Production ready</td>
+  </tr>
+  <tr>
+    <td>v0.9</td>
+    <td>Almost ready</td>
+  </tr>
+  <tr>
+    <td>v0.5</td>
+    <td>Halfway ready for production</td>
+  </tr>
+  <tr>
+    <td>v0.1</td>
+    <td>Walking Skeleton</td>
+  </tr>
 </table>
 
 <br /><br />
 
-<div class="search">Search Component(s): <input autofocus type="text" (keyup)="searchTerm$.next($event.target.value)"></div>
+<div class="search">
+  Search Component(s):
+  <input autofocus type="text" (keyup)="searchTerm$.next($event.target.value)" />
+</div>
 
 <div *ngIf="gitHubError" class="github-error">
-    <ion-icon name="alert" color="danger"></ion-icon> Couldn't fetch component status from GitHub. The status shown below might not be up-to-date.</div>
+  <ion-icon name="alert" color="danger"></ion-icon> Couldn't fetch component status from GitHub. The
+  status shown below might not be up-to-date.
+</div>
 
 <div class="filter">
-    <ion-item>
-        <ion-label>Only show components in progress:</ion-label>
-        <ion-toggle [value]="[codeStatusEnum.ready,codeStatusEnum.notCurrentlyPlanned]" (ionChange)="toggleExcluded($event)"></ion-toggle>
+  <ion-item>
+    <ion-label>Only show components in progress:</ion-label>
+    <ion-toggle
+      [value]="[codeStatusEnum.ready, codeStatusEnum.notCurrentlyPlanned]"
+      (ionChange)="toggleExcluded($event)"
+    ></ion-toggle>
   </ion-item>
 </div>
 
 <table class="component-status" *ngIf="!isLoading; else loading">
-    <thead>
-        <tr>
-            <th>Component</th>
-            <th>UX</th>
-            <th>Code</th>
-        </tr>
-    </thead>
-    <ng-container *ngFor="let item of items$ | async as items">
-        <tbody>
-            <ng-container *ngTemplateOutlet="itemTemplate; context: {$implicit: item, cssClass: 'component'}"></ng-container>
-            <ng-container *ngFor="let subitem of item.children">
-                <ng-container *ngTemplateOutlet="itemTemplate; context: {$implicit: subitem, cssClass: 'subcomponent'}"></ng-container>
-            </ng-container>
-        </tbody>
-    </ng-container>
+  <thead>
+    <tr>
+      <th>Component</th>
+      <th>UX</th>
+      <th>Code</th>
+    </tr>
+  </thead>
+  <ng-container *ngFor="let item of items$ | async as items">
+    <tbody>
+      <ng-container
+        *ngTemplateOutlet="itemTemplate; context: { $implicit: item, cssClass: 'component' }"
+      ></ng-container>
+      <ng-container *ngFor="let subitem of item.children">
+        <ng-container
+          *ngTemplateOutlet="
+            itemTemplate;
+            context: { $implicit: subitem, cssClass: 'subcomponent' }
+          "
+        ></ng-container>
+      </ng-container>
+    </tbody>
+  </ng-container>
 </table>
 
 <ng-template #itemTemplate let-item let-cssClass="cssClass">
-    <tr [class]="cssClass" [class.someday-maybe]="isUnderConsiderationOrNotPlanned(item)" [class.has-enhancements]="item.code.enhancements" #componentrow>
-        <td [class]="cssClass">
-            <ion-icon *ngIf="item.children?.length > 0" [name]="componentrow.classList.contains('expanded') ? 'folder-open' : 'folder'" (click)="componentrow.classList.toggle('expanded');" color="medium"></ion-icon>
-            <ng-container *ngTemplateOutlet="componentTemplate; context: {$implicit: item}"></ng-container>
-        </td>
-        <td>
-            <ng-container *ngTemplateOutlet="uxTemplate; context: {$implicit: item.ux}"></ng-container>
-        </td>
-        <td>
-            <ng-container *ngTemplateOutlet="codeTemplate; context: {$implicit: item.code}"></ng-container>
-        </td>
-    </tr>
-    <ng-container *ngTemplateOutlet="enhancementTemplate; context: {$implicit: item, cssClass: cssClass}"></ng-container>
+  <tr
+    [class]="cssClass"
+    [class.someday-maybe]="isUnderConsiderationOrNotPlanned(item)"
+    [class.has-enhancements]="item.code.enhancements"
+    #componentrow
+  >
+    <td [class]="cssClass">
+      <ion-icon
+        *ngIf="item.children?.length > 0"
+        [name]="componentrow.classList.contains('expanded') ? 'folder-open' : 'folder'"
+        (click)="componentrow.classList.toggle('expanded')"
+        color="medium"
+      ></ion-icon>
+      <ng-container
+        *ngTemplateOutlet="componentTemplate; context: { $implicit: item }"
+      ></ng-container>
+    </td>
+    <td>
+      <ng-container *ngTemplateOutlet="uxTemplate; context: { $implicit: item.ux }"></ng-container>
+    </td>
+    <td>
+      <ng-container
+        *ngTemplateOutlet="codeTemplate; context: { $implicit: item.code }"
+      ></ng-container>
+    </td>
+  </tr>
+  <ng-container
+    *ngTemplateOutlet="enhancementTemplate; context: { $implicit: item, cssClass: cssClass }"
+  ></ng-container>
 </ng-template>
 
 <ng-template #enhancementTemplate let-item let-cssClass="cssClass">
-    <tr class="enhancement enhancement-{{cssClass}}" [class.someday-maybe]="isUnderConsiderationOrNotPlanned(enhancement)" *ngFor="let enhancement of item.code.enhancements">
-        <td>
-            <kirby-badge themeColor="warning" class="vnext">vNext</kirby-badge>
-            {{enhancement.title}}
-        </td>
-        <td>
-            <ng-container *ngTemplateOutlet="uxTemplate; context: {$implicit: enhancement.ux}"></ng-container>
-        </td>
-        <td>
-            <ng-container *ngTemplateOutlet="codeTemplate; context: {$implicit: enhancement.code}"></ng-container>
-        </td>
-    </tr>
+  <tr
+    class="enhancement enhancement-{{ cssClass }}"
+    [class.someday-maybe]="isUnderConsiderationOrNotPlanned(enhancement)"
+    *ngFor="let enhancement of item.code.enhancements"
+  >
+    <td>
+      <kirby-badge themeColor="warning" class="vnext">vNext</kirby-badge>
+      {{ enhancement.title }}
+    </td>
+    <td>
+      <ng-container
+        *ngTemplateOutlet="uxTemplate; context: { $implicit: enhancement.ux }"
+      ></ng-container>
+    </td>
+    <td>
+      <ng-container
+        *ngTemplateOutlet="codeTemplate; context: { $implicit: enhancement.code }"
+      ></ng-container>
+    </td>
+  </tr>
 </ng-template>
 
 <ng-template #componentTemplate let-item>
-    <a *ngIf="item.code?.cookbookUrl" routerLink="../../{{item.code?.cookbookUrl}}">
-        {{item.title}}
-        <ng-container *ngTemplateOutlet="versionTemplate; context: {$implicit: item.code?.version}"></ng-container>
-    </a>
-    <ng-container *ngIf="!item.code?.cookbookUrl">
-        <span [innerHTML]="item.title"></span>
-    </ng-container>
+  <a *ngIf="item.code?.cookbookUrl" routerLink="../../{{ item.code?.cookbookUrl }}">
+    {{ item.title }}
+    <ng-container
+      *ngTemplateOutlet="versionTemplate; context: { $implicit: item.code?.version }"
+    ></ng-container>
+  </a>
+  <ng-container *ngIf="!item.code?.cookbookUrl">
+    <span [innerHTML]="item.title"></span>
+  </ng-container>
 </ng-template>
 
 <ng-template #codeTemplate let-code>
-    <ng-container *ngTemplateOutlet="codeStatusTemplate; context: {$implicit: code?.status}"></ng-container>
-    <a *ngIf="code?.githubIssueNo" [href]="getGithubIssueUrl(code.githubIssueNo)">
-        {{code?.status}}
-        <ion-icon *ngIf="code?.githubIssueNo" name="open"></ion-icon>
-    </a>
-    <span *ngIf="!code?.githubIssueNo">
-        {{code?.status}}
-    </span>
-    <ng-container *ngTemplateOutlet="versionTemplate; context: {$implicit: code?.version}"></ng-container>
+  <ng-container
+    *ngTemplateOutlet="codeStatusTemplate; context: { $implicit: code?.status }"
+  ></ng-container>
+  <a *ngIf="code?.githubIssueNo" [href]="getGithubIssueUrl(code.githubIssueNo)">
+    {{ code?.status }}
+    <ion-icon *ngIf="code?.githubIssueNo" name="open"></ion-icon>
+  </a>
+  <span *ngIf="!code?.githubIssueNo">
+    {{ code?.status }}
+  </span>
+  <ng-container
+    *ngTemplateOutlet="versionTemplate; context: { $implicit: code?.version }"
+  ></ng-container>
 </ng-template>
 
 <ng-template #uxTemplate let-ux>
-    <ng-container *ngTemplateOutlet="uxStatusTemplate; context: {$implicit: ux?.status}"></ng-container>
-    <a *ngIf="ux?.wireFrameUrl" [href]="ux?.wireFrameUrl">
-        {{ux?.status}}
-        <ion-icon *ngIf="ux?.wireFrameUrl" name="open"></ion-icon>
-    </a>
-    <ng-container *ngIf="!ux?.wireFrameUrl">
-        {{ux?.status}}
-    </ng-container>
-    <ng-container *ngTemplateOutlet="versionTemplate; context: {$implicit: ux?.version}"></ng-container>
+  <ng-container
+    *ngTemplateOutlet="uxStatusTemplate; context: { $implicit: ux?.status }"
+  ></ng-container>
+  <a *ngIf="ux?.wireFrameUrl" [href]="ux?.wireFrameUrl">
+    {{ ux?.status }}
+    <ion-icon *ngIf="ux?.wireFrameUrl" name="open"></ion-icon>
+  </a>
+  <ng-container *ngIf="!ux?.wireFrameUrl">
+    {{ ux?.status }}
+  </ng-container>
+  <ng-container
+    *ngTemplateOutlet="versionTemplate; context: { $implicit: ux?.version }"
+  ></ng-container>
 </ng-template>
 
 <ng-template #versionTemplate let-version>
-    <ng-container *ngIf="version"><kirby-badge class="version">{{version | number: '1.1-2'}}</kirby-badge></ng-container>
+  <ng-container *ngIf="version"
+    ><kirby-badge class="version">{{ version | number: '1.1-2' }}</kirby-badge></ng-container
+  >
 </ng-template>
 
 <ng-template #uxStatusTemplate let-status>
-    <!-- TODO: Replace with kirby-icon -->
-    <ion-icon *ngIf="status === uxStatusEnum.underConsideration" color="medium" name="heart-empty"></ion-icon>
-    <ion-icon *ngIf="status === uxStatusEnum.planned" color="success" name="heart-empty"></ion-icon>
-    <ion-icon *ngIf="status === uxStatusEnum.inProgress" color="success" name="heart-half"></ion-icon>
-    <ion-icon *ngIf="status === uxStatusEnum.ready" name="heart" color="success"></ion-icon>
-    <ion-icon *ngIf="status === uxStatusEnum.notCurrentlyPlanned" color="medium" name="heart-dislike"></ion-icon>
+  <!-- TODO: Replace with kirby-icon -->
+  <ion-icon
+    *ngIf="status === uxStatusEnum.underConsideration"
+    color="medium"
+    name="heart-empty"
+  ></ion-icon>
+  <ion-icon *ngIf="status === uxStatusEnum.planned" color="success" name="heart-empty"></ion-icon>
+  <ion-icon *ngIf="status === uxStatusEnum.inProgress" color="success" name="heart-half"></ion-icon>
+  <ion-icon *ngIf="status === uxStatusEnum.ready" name="heart" color="success"></ion-icon>
+  <ion-icon
+    *ngIf="status === uxStatusEnum.notCurrentlyPlanned"
+    color="medium"
+    name="heart-dislike"
+  ></ion-icon>
 </ng-template>
 
 <ng-template #codeStatusTemplate let-status>
-    <!-- TODO: Replace with kirby-icon -->
-    <ion-icon *ngIf="status === codeStatusEnum.underConsideration" color="medium" name="heart-empty"></ion-icon>
-    <ion-icon *ngIf="status === codeStatusEnum.planned" color="success" name="heart-empty"></ion-icon>
-    <ion-icon *ngIf="status === codeStatusEnum.inProgress" color="success" name="heart-half"></ion-icon>
-    <ion-icon *ngIf="status === codeStatusEnum.ready" name="heart" color="success"></ion-icon>
-    <ion-icon *ngIf="status === codeStatusEnum.notCurrentlyPlanned" color="medium" name="heart-dislike"></ion-icon>
+  <!-- TODO: Replace with kirby-icon -->
+  <ion-icon
+    *ngIf="status === codeStatusEnum.underConsideration"
+    color="medium"
+    name="heart-empty"
+  ></ion-icon>
+  <ion-icon *ngIf="status === codeStatusEnum.planned" color="success" name="heart-empty"></ion-icon>
+  <ion-icon
+    *ngIf="status === codeStatusEnum.inProgress"
+    color="success"
+    name="heart-half"
+  ></ion-icon>
+  <ion-icon *ngIf="status === codeStatusEnum.ready" name="heart" color="success"></ion-icon>
+  <ion-icon
+    *ngIf="status === codeStatusEnum.notCurrentlyPlanned"
+    color="medium"
+    name="heart-dislike"
+  ></ion-icon>
 </ng-template>
 
 <ng-template #loading>
-    <kirby-spinner></kirby-spinner>
+  <kirby-spinner></kirby-spinner>
 </ng-template>

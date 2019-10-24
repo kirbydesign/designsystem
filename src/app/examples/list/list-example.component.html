@@ -15,10 +15,7 @@
 
 <h2>Default list:</h2>
 <kirby-list [items]="items">
-  <kirby-list-item
-    *kirbyListItem="let item"
-    [title]="item.title"
-    [amount]="item.amount">
+  <kirby-list-item *kirbyListItem="let item" [title]="item.title" [amount]="item.amount">
   </kirby-list-item>
 </kirby-list>
 
@@ -58,7 +55,12 @@
 <hr />
 
 <h2>List with colored items:</h2>
-<kirby-list [items]="items" [getItemColor]="getItemColor" (itemSelect)="onItemSelect($event)" showDivider="true">
+<kirby-list
+  [items]="items"
+  [getItemColor]="getItemColor"
+  (itemSelect)="onItemSelect($event)"
+  showDivider="true"
+>
   <kirby-list-item
     *kirbyListItem="let item"
     [item]="item"
@@ -67,15 +69,16 @@
   ></kirby-list-item>
 </kirby-list>
 
- <hr />
+<hr />
 
- <h2>List with sections and colored items:</h2>
-  <kirby-list
-    [items]="items"
-    (itemSelect)="onItemSelect($event)"
-    [getSectionName]="getSectionName"
-    [getItemColor]="getItemColor"
-    [showDivider]="true">
+<h2>List with sections and colored items:</h2>
+<kirby-list
+  [items]="items"
+  (itemSelect)="onItemSelect($event)"
+  [getSectionName]="getSectionName"
+  [getItemColor]="getItemColor"
+  [showDivider]="true"
+>
   <kirby-list-section-header
     *kirbyListSectionHeader="let section"
     [title]="section"
@@ -85,19 +88,16 @@
       <kirby-list-cell-line [primary]="true" [text]="item.title"></kirby-list-cell-line>
       <kirby-list-cell-line [text]="item.detail"></kirby-list-cell-line>
     </kirby-list-cell>
-    <kirby-list-cell
-      verticalAlignment="top"
-      horisontalAlignment="right">
+    <kirby-list-cell verticalAlignment="top" horisontalAlignment="right">
       <kirby-list-cell-line [primary]="true" [text]="item.amount"></kirby-list-cell-line>
     </kirby-list-cell>
   </kirby-list-flex-item>
-</kirby-list> 
+</kirby-list>
 
 <hr />
 
 <h2>List with header and footer:</h2>
 <kirby-list [items]="items" (itemSelect)="onItemSelect($event)">
-  
   <!-- HEADER-->
   <kirby-list-header *kirbyListHeader>
     <kirby-list-flex-item>
@@ -107,7 +107,7 @@
       <kirby-list-cell horisontalAlignment="right">Value</kirby-list-cell>
     </kirby-list-flex-item>
   </kirby-list-header>
-  
+
   <!-- BODY -->
   <kirby-list-flex-item *kirbyListFlexItem="let item">
     <kirby-list-cell>
@@ -116,9 +116,7 @@
     </kirby-list-cell>
     <!-- you can make custom cells using the kirbyListCell directive -->
     <div style="width: 150px; text-align: right">{{ item.subTitle }}</div>
-    <kirby-list-cell
-            verticalAlignment="top"
-      horisontalAlignment="right">
+    <kirby-list-cell verticalAlignment="top" horisontalAlignment="right">
       <kirby-list-cell-line [primary]="true" [text]="item.amount"></kirby-list-cell-line>
     </kirby-list-cell>
   </kirby-list-flex-item>
@@ -130,7 +128,7 @@
       <button kirby-button>Click me!</button>
     </div>
   </ng-container>
-</kirby-list> 
+</kirby-list>
 
 <hr />
 
@@ -139,7 +137,8 @@
   [items]="items"
   (itemSelect)="onItemSelect($event)"
   [getSectionName]="getSectionName"
-  [showDivider]="true">
+  [showDivider]="true"
+>
   <kirby-list-section-header
     *kirbyListSectionHeader="let section"
     [title]="section"
@@ -149,13 +148,11 @@
       <kirby-list-cell-line [primary]="true" [text]="item.title"></kirby-list-cell-line>
       <kirby-list-cell-line [text]="item.detail"></kirby-list-cell-line>
     </kirby-list-cell>
-    <kirby-list-cell
-      verticalAlignment="top"
-      horisontalAlignment="right">
+    <kirby-list-cell verticalAlignment="top" horisontalAlignment="right">
       <kirby-list-cell-line [primary]="true" [text]="item.amount"></kirby-list-cell-line>
     </kirby-list-cell>
   </kirby-list-flex-item>
-</kirby-list> 
+</kirby-list>
 
 <hr />
 
@@ -174,10 +171,8 @@
         </div>
       </section>
     </kirby-list-cell>
-  
-    <kirby-list-cell
-        verticalAlignment="top"
-        horisontalAlignment="right">
+
+    <kirby-list-cell verticalAlignment="top" horisontalAlignment="right">
       <kirby-list-cell-line [primary]="true" [text]="item.amount"></kirby-list-cell-line>
     </kirby-list-cell>
   </kirby-list-flex-item>

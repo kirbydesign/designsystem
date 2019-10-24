@@ -1,9 +1,9 @@
-@import "../../../kirby/scss/utils";
+@import '../../../kirby/scss/utils';
 
 .badge-examples {
   display: inline-flex;
   kirby-badge + kirby-badge {
-    margin-left: size("s");
+    margin-left: size('s');
   }
 }
 

@@ -13,7 +13,8 @@ export class Rule extends Rules.AbstractRule {
   };
 
   // tslint:disable-next-line:prettier
-  static readonly FAILURE_STRING = 'Do not import HttpClientModule in spec files. Use HttpClientTestingModule instead';
+  static readonly FAILURE_STRING =
+    'Do not import HttpClientModule in spec files. Use HttpClientTestingModule instead';
   static readonly DISALLOWED_MODULES = ['HttpClientModule'];
   static readonly FILE_EXTENSIONS_TO_APPLY_RULE_FOR = ['.spec.ts'];
 

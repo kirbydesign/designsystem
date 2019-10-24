@@ -3,7 +3,7 @@
 :host(.error) {
   border-color: get-color('danger');
 }
- 
+
 :host {
   background-color: get-color('white');
   border-color: transparent;
@@ -19,6 +19,7 @@
   outline: none;
   padding: size('s');
   width: 100%;
+  -webkit-appearance: none;
 
   &:disabled {
     background-color: get-color('light-tint');

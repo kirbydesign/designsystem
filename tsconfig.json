@@ -1,40 +1,23 @@
 {
-    "compileOnSave": false,
-    "compilerOptions": {
+  "compileOnSave": false,
+  "compilerOptions": {
     "downlevelIteration": true,
     "module": "esnext",
-        "outDir": "./dist/out-tsc",
-        "declaration": false,
-        "moduleResolution": "node",
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "target": "es2015",
-        "typeRoots": [
-            "node_modules/@types"
-        ],
-        "lib": [
-            "es2017",
-            "dom",
-            "es6",
-            "es2015.iterable"
-        ],
-        "baseUrl": ".",
-        "paths": {
-            "~/app/*": [
-                "src/app/*"
-            ],
-            "~/environments/*": [
-                "src/environments/*"
-            ],
-            "@kirbydesign/designsystem": [
-                "src/kirby/index.ts"
-            ],
-            "@kirbydesign/designsystem/*": [
-                "src/kirby/*"
-            ],
-            "~/*": [
-                "tilde-imports-are-not-allowed-as-it-breaks-compilation-in-target-project"
-            ]
-        }
+    "outDir": "./dist/out-tsc",
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "es2015",
+    "typeRoots": ["node_modules/@types"],
+    "lib": ["es2017", "dom", "es6", "es2015.iterable"],
+    "baseUrl": ".",
+    "paths": {
+      "~/app/*": ["src/app/*"],
+      "~/environments/*": ["src/environments/*"],
+      "@kirbydesign/designsystem": ["src/kirby/index.ts"],
+      "@kirbydesign/designsystem/*": ["src/kirby/*"],
+      "~/*": ["tilde-imports-are-not-allowed-as-it-breaks-compilation-in-target-project"]
     }
+  }
 }

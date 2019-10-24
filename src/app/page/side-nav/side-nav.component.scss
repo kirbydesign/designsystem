@@ -1,7 +1,7 @@
 @import '../../../kirby/scss/utils';
 
-$page-header-bg: #1C1C1C;
-$page-header-color: #F4F1E8;
+$page-header-bg: #1c1c1c;
+$page-header-color: #f4f1e8;
 $page-header-height: 7rem;
 $page-gutter: 1rem;
 $page-side-nav-width: 16.625rem;
@@ -10,12 +10,12 @@ $page-side-nav-width: 16.625rem;
   display: none;
   width: $page-side-nav-width;
   background-color: white;
-  box-shadow: 0 0 2px 2px rgba(0,0,0,0.2);
+  box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.2);
   position: absolute;
   top: 0;
   bottom: 0;
   z-index: 900;
-  @include media(">=large") {
+  @include media('>=large') {
     display: block;
     position: static;
     background-color: transparent;
@@ -40,11 +40,11 @@ $page-side-nav-width: 16.625rem;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    @include media(">=large") { 
+    @include media('>=large') {
       display: none;
     }
   }
-}  
+}
 
 .side-nav {
   list-style: none;
@@ -96,11 +96,11 @@ $page-side-nav-width: 16.625rem;
   }
 }
 
-.icon, kirby-icon {
+.icon,
+kirby-icon {
   width: 2rem;
   height: 2rem;
   margin-right: 0.5rem;
   color: currentColor;
   fill: currentColor;
 }
-
