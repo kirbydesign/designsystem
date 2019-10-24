@@ -19,7 +19,6 @@
   outline: none;
   padding: size('s');
   width: 100%;
-  -webkit-appearance: none;
 
   &:disabled {
     background-color: get-color('light-tint');
