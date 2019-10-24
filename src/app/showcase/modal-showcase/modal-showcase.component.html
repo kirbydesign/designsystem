@@ -6,15 +6,21 @@
   <p>
     To show the modal, create a <code>ModalConfig</code> and pass it to the
     <code>ModalController.showModal</code>:
-    <kirby-code-viewer language="ts"
-      >constructor(private modalController: ModalController) {{ '{}' }}
+    <!-- prettier-ignore -->
+    <kirby-code-viewer language="ts">constructor(private modalController: ModalController) {{ '{}' }}
 
-      showModal() {{ '{' }} const config: ModalConfig = {{ '{' }} title: 'Your Modal Title', flavor:
-      'modal', component: YourEmbeddedModalComponent, componentProps: {{ '{' }}
-      prop1: 'value1', prop2: 'value2'
-      {{ '}' }}
-      {{ '}' }}; this.modalController.showModal(config); {{ '}' }}</kirby-code-viewer
-    >
+showModal() {{ '{' }}
+    const config: ModalConfig = {{ '{' }}
+        title: 'Your Modal Title',
+        flavor: 'modal',
+        component: YourEmbeddedModalComponent,
+        componentProps: {{ '{' }}
+            prop1: 'value1',
+            prop2: 'value2'
+        {{ '}' }}
+    {{ '}' }};
+    this.modalController.showModal(config);
+{{ '}' }}</kirby-code-viewer>
     <br /><br />
     The modal can have one of multiple flavors, used to determine the opening animation, the
     position of their titles and their close buttons. With the <code>modal</code> flavor, the dialog
@@ -26,27 +32,32 @@
     corner (see the example below). The <code>drawerSupplementaryAction</code> option takes an
     <code>iconName: string</code> which corresponds to an icon of the kirby font, and
     <code>action: Function</code>, which is invoked when the supplementary button is selected.
-    <kirby-code-viewer language="ts"
-      >showModal() {{ '{' }} const config: ModalConfig = {{ '{' }} title: 'Your Drawer Title',
-      flavor: 'drawer', drawerSupplementaryAction: {{ '{' }}
-      iconName: 'qr', action: this.onSupplementaryActionSelect,
-      {{ '}' }}, component: YourEmbeddedDrawerComponent {{ '}' }};
-      this.modalController.showModal(config);
-      {{ '}' }}
+    <!-- prettier-ignore -->
+    <kirby-code-viewer language="ts">showModal() {{ '{' }}
+    const config: ModalConfig = {{ '{' }}
+        title: 'Your Drawer Title',
+        flavor: 'drawer',
+        drawerSupplementaryAction: {{ '{' }}
+            iconName: 'qr',
+            action: this.onSupplementaryActionSelect,
+        {{ '}' }},
+        component: YourEmbeddedDrawerComponent
+    {{ '}' }};
+    this.modalController.showModal(config);
+{{ '}' }}
 
-      private onSupplementaryActionSelect() {{ '{' }}
-      console.log('Supplementary action selected');
-      {{ '}' }}</kirby-code-viewer
-    >
+private onSupplementaryActionSelect() {{ '{' }}
+    console.log('Supplementary action selected');
+{{ '}' }}</kirby-code-viewer>
     <br /><br />
     <em>(Optional)</em><br />
     If you need to obtain data back from the modal, you can pass a callback function:
-    <kirby-code-viewer language="ts"
-      >this.modalController.showModal(config, myCallback); myCallback(dataReturnedByModal: any)
-      {{ '{' }}
-      ...
-      {{ '}' }}</kirby-code-viewer
-    >
+    <!-- prettier-ignore -->
+    <kirby-code-viewer language="ts">this.modalController.showModal(config, myCallback);
+
+myCallback(dataReturnedByModal: any) {{ '{' }}
+    ...
+{{ '}' }}</kirby-code-viewer>
   </p>
   <br />
   <h3>Inside the embedded component:</h3>
@@ -66,25 +77,26 @@
     To access data passed into the embedded component, inject the COMPONENT_PROPS inside the
     embedded components constructor:
   </p>
-  <kirby-code-viewer language="ts"
-    >constructor( @Inject(COMPONENT_PROPS) private componentProps, private modalController:
-    ModalController, ) {{ '{' }}
+  <!-- prettier-ignore -->
+  <kirby-code-viewer language="ts">constructor(
+    @Inject(COMPONENT_PROPS) private componentProps,
+    private modalController: ModalController,
+) {{ '{' }}
     this.props = componentProps;
-    {{ '}' }}</kirby-code-viewer
+{{ '}' }}</kirby-code-viewer
   ><br />
   <p>
     In order to hide a modal from within your embedded component (and destroy its component), you
     can use:
-    <kirby-code-viewer language="ts"
-      >constructor(private modalController: ModalController)
-      {{ '{}' }} this.modalController.hideTopmost();</kirby-code-viewer
-    >
+    <!-- prettier-ignore -->
+    <kirby-code-viewer language="ts">constructor(private modalController: ModalController) {{ '{}' }}
+this.modalController.hideTopmost();</kirby-code-viewer>
     <br /><br />
     <em>(Optional)</em><br />
     You can additionally pass data, which will be available in your callback:
-    <kirby-code-viewer language="ts"
-      >let returnData = ...; this.modalController.hideTopmost(returnData);</kirby-code-viewer
-    >
+    <!-- prettier-ignore -->
+    <kirby-code-viewer language="ts">let returnData = ...;
+this.modalController.hideTopmost(returnData);</kirby-code-viewer>
     It is possible to nest more modals from within your embedded components, <br />
     by using the same services and principles as above.
   </p>
