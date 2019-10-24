@@ -19,15 +19,18 @@
     <li>Spacing of content</li>
   </ul>
 
-  <div class="page-example">
-    <div>
-      <h2>Simple Page</h2>
-      <p>
-        For normal pages it's enough to just wrap the page content in a
-        <code>kirby-page-content</code> tag, which is wrapped in a <code>kirby-page</code> tag and
-        supplied with an optional title - <em>which will be sticky by default</em>:
-      </p>
-      <kirby-code-viewer [html]="simpleExampleHtml"></kirby-code-viewer>
+    <h2>Life-cycle hooks</h2>
+    <p>Be aware that using page with <code>kirby-router-outlet</code>, causes the views to be stacked instead of replaced. This means that you can't trust <code>onInit</code> and <code>onDestroy</code>. Instead you can trust the <code>kirby-page</code> events <code>(enter)</code> and <code>(leave)</code> instead.</p>
+
+    <div class="page-example">
+        <div>
+            <h2>Simple Page</h2>
+            <p>For normal pages it's enough to just wrap the page content in a <code>kirby-page-content</code> tag,
+            which is wrapped in a <code>kirby-page</code> tag and supplied with an optional title - <em>which will be sticky by default</em>:</p>
+            <kirby-code-viewer [html]="simpleExampleHtml"></kirby-code-viewer>
+        </div>
+
+        <kirby-iphone src="/examples/page" showExternalLink="true"></kirby-iphone>
     </div>
 
     <kirby-iphone src="/examples/page" showExternalLink="true"></kirby-iphone>
@@ -107,17 +110,14 @@
       <kirby-code-viewer [html]="fixedActionsExampleHtml"></kirby-code-viewer>
     </div>
 
-    <kirby-iphone src="/examples/page/fixed" showExternalLink="true"></kirby-iphone>
-  </div>
+    <h2>Page Properties:</h2>
+    <kirby-showcase-properties [properties]="properties"></kirby-showcase-properties>
 
-  <h2>Page Properties:</h2>
-  <kirby-showcase-properties [properties]="properties"></kirby-showcase-properties>
+    <h2>Page Events:</h2>
+    <kirby-showcase-properties [properties]="events"></kirby-showcase-properties>
 
-  <h2>Page Layouts:</h2>
-  <kirby-showcase-properties
-    [columns]="layoutColumns"
-    [properties]="layouts"
-  ></kirby-showcase-properties>
+    <h2>Page Layouts:</h2>
+    <kirby-showcase-properties [columns]="layoutColumns" [properties]="layouts"></kirby-showcase-properties>
 
   <h2>Page Directives:</h2>
   <kirby-showcase-properties

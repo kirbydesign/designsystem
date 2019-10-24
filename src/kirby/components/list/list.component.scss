@@ -84,6 +84,8 @@ ion-list-header {
   letter-spacing: inherit;
   font-weight: inherit;
   font-size: inherit;
+  min-height: 0;
+  overflow: inherit;
 }
 
 .footer {
@@ -212,7 +214,8 @@ ion-item {
 
 .section-header {
   background-color: transparent;
-  padding: size('m') size('s') 0 size('s');
+  padding: size('m') size('s') size('xxs') size('s');
+  min-height: 0;
 }
 
 .no-more-items,
