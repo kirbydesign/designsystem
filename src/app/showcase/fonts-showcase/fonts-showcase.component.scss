@@ -30,6 +30,7 @@ code {
   }
 }
 
+/* prettier-ignore */
 .sample {
   &-header-1,
   &-header-2,
@@ -45,44 +46,44 @@ code {
 
   &-header-1 {
     &::after {
-      content: '(#{font-size(' xl ')})';
+      content: '(#{font-size('xl')})';
     }
   }
 
   &-header-2 {
     &::after {
-      content: '(#{font-size(' l ')})';
+      content: '(#{font-size('l')})';
     }
   }
 
   &-header-3 {
     &::after {
-      content: '(#{font-size(' m ')})';
+      content: '(#{font-size('m')})';
     }
   }
 
   &-body {
     &::after {
-      content: '(#{font-size(' n ')})';
-    }
+      content: '(#{font-size('n')})';
+    }    
   }
 
   &-body-small {
     &::after {
-      content: '(#{font-size(' s ')})';
-    }
+      content: '(#{font-size('s')})';
+    }    
   }
 
   &-body-xsmall {
     &::after {
-      content: '(#{font-size(' xs ')})';
-    }
+      content: '(#{font-size('xs')})';
+    }    
   }
 
   &-body-xxsmall {
     &::after {
-      content: '(#{font-size(' xxs ')})';
-    }
+      content: '(#{font-size('xxs')})';
+    }    
   }
 }
 
