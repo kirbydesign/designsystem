@@ -77,7 +77,7 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
       });
 
     const allIonContents = this.windowRef.nativeWindow.document.getElementsByTagName('ion-content');
-    if (allIonContents) {
+    if (allIonContents && allIonContents.length > 0) {
       const closetsIonContent = allIonContents[allIonContents.length - 1];
       fromEvent<any>(closetsIonContent, 'ionScroll')
         .pipe(
