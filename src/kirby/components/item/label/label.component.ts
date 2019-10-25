@@ -7,14 +7,25 @@ import { Component, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
 })
 export class LabelComponent implements OnInit {
   @Input() slot?: 'start' | 'end' | 'title';
-  @Input() position?: 'stacked';
   @Input() truncate: boolean = true;
   @Input() expand: boolean = false;
+
+  position: 'stacked' | '';
 
   constructor(private elementRef: ElementRef, private renderer: Renderer2) {}
 
   ngOnInit(): void {
     this.removeWrapper();
+    this.isStacking();
+  }
+
+  private isStacking() {
+    const sibling = this.elementRef.nativeElement.previousElementSibling;
+    this.position =
+      sibling.tagName.toLocaleLowerCase() === 'kirby-label' &&
+      sibling.getAttribute('expand') !== null
+        ? 'stacked'
+        : '';
   }
 
   private removeWrapper(): void {
