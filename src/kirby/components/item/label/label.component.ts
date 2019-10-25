@@ -20,10 +20,10 @@ export class LabelComponent implements OnInit {
   }
 
   private isStacking() {
-    const sibling = this.elementRef.nativeElement.previousElementSibling;
+    const previousSibling = this.elementRef.nativeElement.previousElementSibling;
     this.position =
-      sibling.tagName.toLocaleLowerCase() === 'kirby-label' &&
-      sibling.getAttribute('expand') !== null
+      previousSibling.tagName.toLocaleLowerCase() === 'kirby-label' &&
+      previousSibling.getAttribute('expand') !== null
         ? 'stacked'
         : '';
   }
