@@ -2,14 +2,14 @@ import { Spectator, createTestComponentFactory } from '@netbasal/spectator';
 import { MockModule } from 'ng-mocks';
 import { IonicModule } from '@ionic/angular';
 
-import { ItemComponent } from './item.component';
+import { TitleComponent } from './title.component';
 
-describe('ItemComponent', () => {
-  let spectator: Spectator<ItemComponent>;
+describe('TitleComponent', () => {
+  let spectator: Spectator<TitleComponent>;
 
   const createHost = createTestComponentFactory({
     imports: [MockModule(IonicModule)],
-    component: ItemComponent,
+    component: TitleComponent,
     declarations: [],
   });
 

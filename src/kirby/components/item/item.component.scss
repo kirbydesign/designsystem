@@ -1,142 +1,26 @@
 @import '../../scss/utils';
 
-:host {
-  display: block;
 
-  .item-inner ::ng-deep {
-    h1,h2,h3,h4,h5,h6 {
-      display: inline-block;
-      margin: 0;
-      &:last-child {
-        text-align: right;
-      }
-    }
+:host ::ng-deep {
+  h1,h2,h3,h4,h5,h6 {
+    margin: 0;
+  }
+  ion-label {
+    margin: 0;
 
-    p {
-      margin: 0;
-      width: 100%;
-    }
-
-    kirby-avatar {
-      flex: inherit;
-      margin-right: 8px;
-    }
-
-    > *  {
-      flex: 1 1;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-
-
+    &:last-child {
+      flex-basis: auto;
+      flex-direction: row;
+      flex-grow: 0;
+      flex-shrink: 1;
+      flex-wrap: nowrap;
     }
   }
 
-  .item-inner {
+  ion-label[expand='true'] {
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
+    width: 100%;
   }
 }
-
-
-//:host {
-//  display: block;
-//
-//  .item-inner {
-//    width: 100%;
-//    display: flex;
-//    flex-wrap: wrap;
-//    align-items: center;
-//    background-color: #fff;
-//    padding: size('xxs');
-//
-//    ::ng-deep kirby-avatar {
-//      + h1,
-//      + h2,
-//      + h3,
-//      + h4,
-//      + h5,
-//      + h6 {
-//        align-self: center !important;
-//        text-align: left !important;
-//
-//        + h1,
-//        + h2,
-//        + h3,
-//        + h4,
-//        + h5,
-//        + h6 {
-//          align-self: center !important;
-//        }
-//      }
-//    }
-//
-//    ::ng-deep {
-//      kirby-avatar, > kirby-icon {
-//        margin-right: size('xs');
-//      }
-//
-//      *:not(kirby-avatar) > kirby-badge {
-//        margin-right: size('xxxs');
-//      }
-//
-//      > {
-//        :last-child {
-//          align-items: flex-end;
-//        }
-//
-//        :first-child {
-//          align-self: center !important;
-//        }
-//
-//        kirby-icon + * {
-//          align-self: center !important;
-//        }
-//
-//        * {
-//          display: flex;
-//          flex-direction: column;
-//          margin: 0;
-//        }
-//
-//        p {
-//          flex: 0 0 100% !important;
-//        }
-//
-//        h1, h2, h3, h4, h5, h6 {
-//          &:last-of-type {
-//            align-self: flex-start;
-//          }
-//        }
-//      }
-//    }
-//
-//    ::ng-deep > *:not(kirby-avatar):not(kirby-badge):not(kirby-icon):not(:first-child) {
-//      flex: 1 1 auto;
-//      min-width: 0;
-//
-//      > * {
-//        white-space: nowrap;
-//        overflow: hidden;
-//        text-overflow: ellipsis;
-//        margin: 0;
-//      }
-//    }
-//
-//    ::ng-deep > h1:last-of-type:not(:first-of-type),
-//    ::ng-deep > h2:last-of-type:not(:first-of-type),
-//    ::ng-deep > h3:last-of-type:not(:first-of-type),
-//    ::ng-deep > h4:last-of-type:not(:first-of-type),
-//    ::ng-deep > h5:last-of-type:not(:first-of-type),
-//    ::ng-deep > h6:last-of-type:not(:first-of-type) {
-//      text-align: right;
-//    }
-//
-//    ::ng-deep > :last-child:not(p) {
-//      text-align: right;
-//    }
-//  }
-//}
