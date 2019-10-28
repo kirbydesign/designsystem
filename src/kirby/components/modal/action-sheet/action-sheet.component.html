@@ -1,9 +1,16 @@
 <kirby-card>
   <kirby-card-header *ngIf="header" [title]="header" [isTitleBold]="true" [subtitle]="subheader">
   </kirby-card-header>
-  <div class="action-sheet-items">
-    <button (click)="onItemSelect(item)" *ngFor="let item of items">{{ item.text }}</button>
-  </div>
+  <button
+    kirby-button
+    expand="block"
+    size="lg"
+    attentionLevel="4"
+    (click)="onItemSelect(item)"
+    *ngFor="let item of items"
+  >
+    {{ item.text }}
+  </button>
 </kirby-card>
 <button
   *ngIf="!hideCancel"

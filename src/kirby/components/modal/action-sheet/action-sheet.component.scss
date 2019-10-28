@@ -30,21 +30,10 @@ kirby-card {
   pointer-events: auto;
   box-shadow: get-elevation(8);
 
-  .action-sheet-items {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
-    button {
-      cursor: pointer;
-      flex: 0 0 auto;
-      border: none;
-      height: size('xxl');
-      border-top: 1px solid get-color('background-color');
-      background-color: transparent;
-      font-size: font-size('s');
-    }
+  button[kirby-button] {
+    margin: 0;
+    border-radius: 0;
+    border-top: 1px solid get-color('background-color');
   }
 }
 
