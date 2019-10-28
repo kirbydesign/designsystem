@@ -173,7 +173,7 @@ export class PageComponent implements OnInit, OnDestroy, AfterContentInit, After
     this.routerEventsSubscription = this.router.events.subscribe((event: RouterEvent) => {
       if (
         event instanceof NavigationStart &&
-        event.url !== this.url &&
+        !event.url.startsWith(this.url) &&
         this.pageTitleObserver &&
         this.pageTitle
       ) {
@@ -182,7 +182,7 @@ export class PageComponent implements OnInit, OnDestroy, AfterContentInit, After
       }
       if (
         event instanceof NavigationEnd &&
-        event.url === this.url &&
+        event.url.startsWith(this.url) &&
         this.pageTitleObserver &&
         this.pageTitle
       ) {

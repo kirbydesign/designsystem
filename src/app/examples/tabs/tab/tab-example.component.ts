@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 
 @Component({
@@ -49,6 +49,7 @@ import { Observable, of } from 'rxjs';
           officia officiis quo tempora ut velit voluptate. Aliquid ea, earum facilis hic in libero
           obcaecati odit quia soluta!
         </p>
+        <button kirby-button (click)="navigateToAccountSub()">Go to account sub</button>
       </kirby-page-content>
     </kirby-page>
   `,
@@ -57,12 +58,16 @@ import { Observable, of } from 'rxjs';
 export class TabExampleComponent implements OnInit {
   title: Observable<string>;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
     setTimeout(() => {
       this.title = of(this.route.snapshot.data.title);
     }, 300);
+  }
+
+  navigateToAccountSub() {
+    this.router.navigate(['sub'], { relativeTo: this.route });
   }
 
   onCogSelect() {
