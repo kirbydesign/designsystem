@@ -5,6 +5,13 @@
     <button (click)="onItemSelect(item)" *ngFor="let item of items">{{ item.text }}</button>
   </div>
 </kirby-card>
-<button *ngIf="!hideCancel" kirby-button class="cancel-btn" attentionLevel="2" (click)="onCancel()">
+<button
+  *ngIf="!hideCancel"
+  kirby-button
+  class="cancel-btn"
+  size="lg"
+  attentionLevel="2"
+  (click)="onCancel()"
+>
   {{ cancelButtonText }}
 </button>
