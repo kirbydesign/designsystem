@@ -182,7 +182,7 @@ export class PageComponent implements OnInit, OnDestroy, AfterContentChecked {
       }
       if (
         event instanceof NavigationEnd &&
-        event.url === this.url &&
+        event.urlAfterRedirects === this.url &&
         this.pageTitleObserver &&
         this.pageTitle
       ) {
