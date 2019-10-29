@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DividerShowcaseComponent } from './divider-showcase.component';
+import { ExamplesModule } from '~/app/examples/examples.module';
+import { RouterTestingModule } from '@angular/router/testing';
+import { CodeViewerComponent } from '~/app/shared/code-viewer/code-viewer.component';
 
 describe('DividerShowcaseComponent', () => {
   let component: DividerShowcaseComponent;
@@ -8,7 +11,8 @@ describe('DividerShowcaseComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [DividerShowcaseComponent],
+      imports: [ExamplesModule, RouterTestingModule],
+      declarations: [DividerShowcaseComponent, CodeViewerComponent],
     }).compileComponents();
   }));
 
