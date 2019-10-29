@@ -8,9 +8,8 @@ describe('DividerShowcaseComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DividerShowcaseComponent ]
-    })
-    .compileComponents();
+      declarations: [DividerShowcaseComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
