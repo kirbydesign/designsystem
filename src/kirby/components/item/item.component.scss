@@ -54,6 +54,7 @@
   kirby-label[expand]:first-of-type + kirby-label {
     @include margin (0 0px);
     width: 100%;
+    text-align: left;
   }
 
   kirby-label {
