@@ -28,6 +28,10 @@
   }
   ion-item {
     box-sizing: border-box;
+
+    &.item-label-stacked .item-inner {
+      background: red;
+    }
   }
 
   kirby-avatar {
@@ -52,6 +56,7 @@
   kirby-label:first-of-type + kirby-icon {
     @include margin (0 8px);
   }
+
   kirby-label[expand]:first-of-type + kirby-label {
     @include margin (0 0px);
     width: 100%;
@@ -70,23 +75,25 @@
       flex-wrap: nowrap;
     }
 
-    &:last-child:not(&:first-child) {
-      text-align: right;
+    &:last-child {
+      &:not(:first-of-type) {
+        text-align: right;
+      }
     }
 
     [expand='true'] {
       text-align: left;
       margin-left: 0;
     }
-
-  
   }
 
   kirby-label[expand] {
-   width: 100%;
+    flex: none;
+    width: 100%;
     display: flex;
     align-items: center;
-    
+    align-self: center;
+
     ion-label {
       width: 100%;
       display: flex;
