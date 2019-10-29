@@ -6,6 +6,7 @@
   --kirby-button-border-radius: 2rem;
   --kirby-button-padding-left: #{size('m')};
   --kirby-button-padding-right: #{size('m')};
+  font-family: var(--kirby-font-family);
   background-color: var(--kirby-button-background-color);
   border-radius: var(--kirby-button-border-radius);
   border: 1px solid var(--kirby-button-border-color);
@@ -55,7 +56,7 @@
   }
 
   &.lg {
-    font-size: font-size('s');
+    font-size: font-size('n');
     height: size('xxl');
     min-width: 220px;
 
