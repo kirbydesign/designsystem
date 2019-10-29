@@ -48,6 +48,7 @@
   }
   kirby-label[expand]:first-of-type + kirby-label {
     @include margin (0 0px);
+    width: 100%;
   }
 
   kirby-label {
@@ -73,7 +74,7 @@
   }
 
   kirby-label[expand] {
-    width: 100%;
+   width: 100%;
     display: flex;
     align-items: center;
     
@@ -84,9 +85,4 @@
       justify-content: space-between;
     } 
   }
-
-  
-
-
-
 }

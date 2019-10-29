@@ -1,7 +1,9 @@
 @import '../../../scss/utils';
-ion-label {
-    ::ng-deep {
-        h1,h2,h3,h4,h5,h6 {
+
+:host {
+   overflow: hidden;
+    ::ng-deep ion-label { 
+        h1,h2,h3,h4,h5,h6,p {
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
