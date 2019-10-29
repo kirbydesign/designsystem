@@ -86,22 +86,10 @@ export const routes: Routes = [
           },
           {
             path: 'account',
-            children: [
-              {
-                path: '',
-                component: TabExampleComponent,
-                data: {
-                  title: 'Account',
-                },
-              },
-              {
-                path: 'sub',
-                component: TabExampleComponent,
-                data: {
-                  title: 'Account Sub',
-                },
-              },
-            ],
+            component: TabExampleComponent,
+            data: {
+              title: 'Account',
+            },
           },
           {
             path: 'inbox',
