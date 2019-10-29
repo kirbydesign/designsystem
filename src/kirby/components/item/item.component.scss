@@ -13,7 +13,12 @@
 :host {
   display: block;
   padding: 8px 0;
-  background-color:white; 
+  background-color:white;
+
+  ion-item {
+    --padding-start: 16px;
+    --inner-padding-end: 16px;
+  }
 }
 
 :host ::ng-deep {
