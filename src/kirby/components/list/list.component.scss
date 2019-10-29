@@ -5,6 +5,13 @@ $background-color-hover: get-color('background-color');
 $shadow: get-elevation(2);
 $item-height: size('xxxl');
 
+ion-list.has-divider {
+  &:not(:last-of-type) ion-item-sliding,
+  ion-item {
+    border-bottom: 1px solid $divider-color;
+  }
+}
+
 ion-list,
 .list-items {
   > ion-item {
@@ -41,9 +48,6 @@ ion-list {
 ion-item {
   min-height: $item-height;
   background-color: get-color('white');
-  &:not(:last-of-type).has-divider {
-    border-bottom: 1px solid $divider-color;
-  }
 
   &.selected ::ng-deep * {
     font-weight: font-weight('bold');

@@ -116,30 +116,26 @@ describe('ListComponent', () => {
   });
 
   describe('divider', () => {
-    it('should set class "divider" on all items elements when showDivider is true', () => {
+    it('should set class "divider" on list element when showDivider is true', () => {
       spectator.setInput({
         items: Item.createItems(1, 2, 3),
         showDivider: true,
       });
       runNgOnChanges();
 
-      const liElements = spectator.queryAll('ion-item');
-      liElements.forEach((liElement) => {
-        expect(liElement.getAttribute('class')).toContain('divider');
-      });
+      const list = spectator.query('ion-list');
+      expect(list.getAttribute('class')).toContain('divider');
     });
 
-    it('should not set class "divider" on any item elements when showDivider is false', () => {
+    it('should not set class "divider" on list element when showDivider is false', () => {
       spectator.setInput({
         items: Item.createItems(1, 2, 3),
         showDivider: false,
       });
       runNgOnChanges();
 
-      const liElements = spectator.queryAll('ion-item');
-      liElements.forEach((liElement) => {
-        expect(liElement.getAttribute('class')).not.toContain('divider');
-      });
+      const list = spectator.query('ion-list');
+      expect(list.getAttribute('class')).not.toContain('divider');
     });
   });
 
