@@ -1,6 +1,6 @@
 {
   "name": "designsystem",
-  "version": "0.8.22",
+  "version": "0.8.23",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
