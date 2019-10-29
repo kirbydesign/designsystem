@@ -1,5 +1,11 @@
 @import '../../scss/utils';
 
+$fab-sheet-margin: size('s');
+
+:host {
+  --kirby-action-sheet-margin-horizontal: #{$fab-sheet-margin};
+}
+
 // Ionic fab can be customized by using the css properties listed in the CSS Custom Properties section of the below docs page:
 // https://ionicframework.com/docs/api/fab-button
 ion-fab-button {
@@ -16,8 +22,8 @@ ion-fab-button {
 
 ion-fab {
   position: fixed;
-  bottom: size('s');
-  right: size('s');
+  bottom: $fab-sheet-margin;
+  right: $fab-sheet-margin;
 }
 
 :host-context(.fixed-content) ion-fab {
