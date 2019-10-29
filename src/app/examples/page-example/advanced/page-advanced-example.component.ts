@@ -61,7 +61,8 @@ const config = {
 export class PageAdvancedExampleComponent extends BasePageExampleComponent {
   static readonly template = config.template
     .replace(' defaultBackHref="/"', '')
-    .replace(' [innerHTML]="content">', '>...');
+    .replace(' [innerHTML]="content">', '>...')
+    .replace(' *ngIf="true"', '');
 
   items: ActionSheetItem[] = [
     { id: '1', text: 'Option 1' },
