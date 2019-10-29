@@ -12,10 +12,9 @@ export class LabelComponent implements OnInit {
 
   position: 'stacked' | '';
 
-  constructor(private elementRef: ElementRef, private renderer: Renderer2) {}
+  constructor(private elementRef: ElementRef) {}
 
   ngOnInit(): void {
-    this.removeWrapper();
     this.isStacking();
   }
 
@@ -27,15 +26,5 @@ export class LabelComponent implements OnInit {
       previousSibling.getAttribute('expand') !== null
         ? 'stacked'
         : '';
-  }
-
-  private removeWrapper(): void {
-    const parent = this.elementRef.nativeElement.parentNode;
-    const label = this.elementRef.nativeElement.childNodes[0];
-
-    if (label && parent) {
-      this.renderer.removeChild(parent, this.elementRef.nativeElement);
-      this.renderer.appendChild(parent, label);
-    }
   }
 }

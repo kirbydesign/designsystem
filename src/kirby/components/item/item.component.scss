@@ -1,16 +1,57 @@
 @import '../../scss/utils';
 
+@mixin margin($val) {
+  margin: $val;
+  &:first-child {
+    margin-left: 0;
+  }
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
 :host {
   display: block;
+  padding: 8px 0;
+  background-color:white; 
 }
 
 :host ::ng-deep {
   h1,h2,h3,h4,h5,h6 {
     margin: 0;
-
+  }
+  ion-item {
+    box-sizing: border-box;
   }
 
-  ion-label {
+  kirby-avatar {
+    align-self: center;
+    @include margin(0 6px);
+  }
+  kirby-icon {
+    @include margin(0 3px);
+  }
+  kirby-label:first-of-type {
+    @include margin (0 0);
+  }
+  kirby-label:first-of-type + * {
+    @include margin (0 16px);
+  }
+  kirby-label:first-of-type + time {
+    @include margin (0 12px);
+  }
+  kirby-label:first-of-type + kirby-icon {
+    @include margin (0 8px);
+  }
+  kirby-label:first-of-type + kirby-icon {
+    @include margin (0 8px);
+  }
+  kirby-label[expand]:first-of-type + kirby-label {
+    @include margin (0 0px);
+  }
+
+  kirby-label {
+    flex: 1;
     margin: 0;
 
     &:last-child {
@@ -19,22 +60,33 @@
       flex-grow: 0;
       flex-shrink: 1;
       flex-wrap: nowrap;
+    }
+
+    &:last-child:not(&:first-child) {
       text-align: right;
     }
 
-    &[expand='true'] + ion-label {
+    [expand='true'] {
       text-align: left;
+      margin-left: 0;
     }
   }
 
-  ion-label[expand='true'] {
+  kirby-label[expand] {
+    width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    width: 100%;
+    
+    ion-label {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    } 
   }
 
-  .bold {
-    font-weight: 600;
-  }
+  
+
+
+
 }
