@@ -77,6 +77,8 @@
       text-align: left;
       margin-left: 0;
     }
+
+  
   }
 
   kirby-label[expand] {
@@ -90,5 +92,9 @@
       align-items: center;
       justify-content: space-between;
     } 
+  }
+
+  kirby-label kirby-badge {
+    display: block;
   }
 }
