@@ -18,6 +18,7 @@
   ion-item {
     --padding-start: 16px;
     --inner-padding-end: 16px;
+    
   }
 }
 
@@ -97,4 +98,18 @@
   kirby-label kirby-badge {
     display: block;
   }
+  
+  kirby-label[badges] {
+    height: 100%;
+    position: absolute;
+    left: 0px;
+    display: flex;
+    align-items: center;
+
+    ion-label > *:not(:last-child) {
+      margin-bottom: 2px;
+    }
+  }
+
+  
 }
