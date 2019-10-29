@@ -9,7 +9,8 @@ declare var require: any;
 export class DividerShowcaseComponent {
   themeColors = ['white', 'light'];
   themeColor = 'white';
-  exampleHtml: string = require('../../examples/divider-example/divider-example.component.html');
+  exampleHtml: string = require('!raw-loader!../../examples/divider-example/divider-example.component.html')
+    .default;
 
   onThemeChange(themeColor) {
     this.themeColor = themeColor;
