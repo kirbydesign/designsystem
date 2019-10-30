@@ -12,31 +12,57 @@
 
 :host {
   display: block;
-  padding: 8px 0;
+  padding: size('xxs') 0;
   background-color:white;
 
   ion-item {
-    --padding-start: 16px;
-    --inner-padding-end: 16px;
-    
+    --padding-start: #{size('s')};
+    --inner-padding-end: #{size('s')};
+  }
+
+  .item-inner {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
   }
 }
 
 :host ::ng-deep {
-  h1,h2,h3,h4,h5,h6 {
-    margin: 0;
+  kirby-label {
+    &:last-of-type:not(:first-of-type) {
+      * {
+        font-weight: font-weight('normal');
+      }
+    }
   }
-  ion-item {
-    box-sizing: border-box;
 
-    &.item-label-stacked .item-inner {
-      background: red;
+  [slot="end"]:last-child {
+    margin-right: 0;
+  }
+
+  ion-label {
+    h1,h2,h3,h4,h5,h6 {
+      margin: 0;
+      color: get-color('black');
+      font-size: font-size('n');
+      font-weight: font-weight('bold');
+
+      &:not(:first-child) {
+        font-size: font-size('xs');
+        font-weight: font-weight('normal');
+        color: get-color('semi-dark');
+
+        &:not(:last-child) {
+          color: get-color('black');
+        }
+      }
     }
   }
 
   kirby-avatar {
     align-self: center;
-    @include margin(0 6px);
+    @include margin(0 12px);
   }
   kirby-icon {
     @include margin(0 3px);
