@@ -29,14 +29,6 @@
 }
 
 :host ::ng-deep {
-  kirby-label {
-    &:last-of-type:not(:first-of-type) {
-      * {
-        font-weight: font-weight('normal');
-      }
-    }
-  }
-
   [slot="end"]:last-child {
     margin-right: 0;
   }
@@ -46,11 +38,9 @@
       margin: 0;
       color: get-color('black');
       font-size: font-size('n');
-      font-weight: font-weight('bold');
-
+   
       &:not(:first-child) {
         font-size: font-size('xs');
-        font-weight: font-weight('normal');
         color: get-color('semi-dark');
 
         &:not(:last-child) {
@@ -74,6 +64,7 @@
     @include margin (0 16px);
   }
   kirby-label:first-of-type + time {
+    
     @include margin (0 12px);
   }
   kirby-label:first-of-type + kirby-icon {
