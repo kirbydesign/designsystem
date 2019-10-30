@@ -124,7 +124,7 @@ describe('ListComponent', () => {
       runNgOnChanges();
 
       const list = spectator.query('ion-list');
-      expect(list.getAttribute('class')).toContain('has-divider');
+      expect(list.classList).toContain('has-divider');
     });
 
     it('should not set class "has-divider" on list element when showDivider is false', () => {
@@ -135,7 +135,7 @@ describe('ListComponent', () => {
       runNgOnChanges();
 
       const list = spectator.query('ion-list');
-      expect(list.getAttribute('class')).not.toContain('has-divider');
+      expect(list.classList).not.toContain('has-divider');
     });
   });
 
