@@ -54,6 +54,7 @@
 
 .kirby-alert {
   position: fixed;
+  --background: #{get-color('background-color')};
   --border-radius: #{$border-radius};
   --box-shadow: #{get-elevation(8)};
 

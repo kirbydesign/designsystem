@@ -32,6 +32,7 @@ import { ListNoShapeShowcaseComponent } from './list-no-shape-showcase/list-no-s
 import { FabSheetShowcaseComponent } from './fab-sheet-showcase/fab-sheet-showcase.component';
 import { PageShowcaseComponent } from './page-showcase/page-showcase.component';
 import { TabsShowcaseComponent } from './tabs-showcase/tabs-showcase.component';
+import { DividerShowcaseComponent } from './divider-showcase/divider-showcase.component';
 
 export const routes: Routes = [
   {
@@ -54,6 +55,10 @@ export const routes: Routes = [
       {
         path: 'chip',
         component: ChipShowcaseComponent,
+      },
+      {
+        path: 'divider',
+        component: DividerShowcaseComponent,
       },
       {
         path: 'avatar',
