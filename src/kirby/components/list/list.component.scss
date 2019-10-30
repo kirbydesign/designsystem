@@ -5,13 +5,6 @@ $background-color-hover: get-color('background-color');
 $shadow: get-elevation(2);
 $item-height: size('xxxl');
 
-ion-list.has-divider {
-  &:not(:last-of-type) ion-item-sliding,
-  ion-item {
-    border-bottom: 1px solid $divider-color;
-  }
-}
-
 ion-list,
 .list-items {
   > ion-item {
@@ -39,6 +32,13 @@ ion-list,
 }
 
 ion-list {
+  &.has-divider {
+    &:not(:last-of-type) ion-item-sliding,
+    ion-item {
+      border-bottom: 1px solid $divider-color;
+    }
+  }
+
   box-shadow: $shadow;
   background: transparent;
   contain: inherit;
