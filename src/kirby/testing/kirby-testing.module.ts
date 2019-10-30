@@ -32,6 +32,7 @@ import {
   SpinnerComponent,
   SegmentedControlComponent,
   ToastController,
+  FabSheetComponent,
 } from '..';
 import { SlideButtonComponent } from '../components/slide-button/slide-button.component';
 import { ToolbarComponent } from '../components/toolbar/toolbar.component';
@@ -55,6 +56,9 @@ import {
   PageActionsDirective,
   PageContentDirective,
 } from '../components/page/page.component';
+import { ActionSheetComponent } from '@kirbydesign/designsystem/components/modal/action-sheet/action-sheet.component';
+import { RouterOutletComponent } from '@kirbydesign/designsystem/components/router-outlet/router-outlet.component';
+import { AppComponent } from '@kirbydesign/designsystem/components/app/app.component';
 
 /*
  * Fake components should be handled by the list of kirby
@@ -159,7 +163,11 @@ const MOCK_COMPONENTS = MockComponents(
   TabButtonComponent,
   PageComponent,
   PageActionsComponent,
-  PageContentComponent
+  PageContentComponent,
+  ActionSheetComponent,
+  FabSheetComponent,
+  RouterOutletComponent,
+  AppComponent
 );
 
 /**
