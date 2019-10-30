@@ -34,7 +34,7 @@ ion-list,
 ion-list {
   &.has-divider {
     &:not(:last-of-type) ion-item-sliding,
-    ion-item {
+    &:not(:last-of-type) ion-item {
       border-bottom: 1px solid $divider-color;
     }
   }

@@ -116,7 +116,7 @@ describe('ListComponent', () => {
   });
 
   describe('divider', () => {
-    it('should set class "divider" on list element when showDivider is true', () => {
+    it('should set class "has-divider" on list element when showDivider is true', () => {
       spectator.setInput({
         items: Item.createItems(1, 2, 3),
         showDivider: true,
@@ -124,10 +124,10 @@ describe('ListComponent', () => {
       runNgOnChanges();
 
       const list = spectator.query('ion-list');
-      expect(list.getAttribute('class')).toContain('divider');
+      expect(list.getAttribute('class')).toContain('has-divider');
     });
 
-    it('should not set class "divider" on list element when showDivider is false', () => {
+    it('should not set class "has-divider" on list element when showDivider is false', () => {
       spectator.setInput({
         items: Item.createItems(1, 2, 3),
         showDivider: false,
@@ -135,7 +135,7 @@ describe('ListComponent', () => {
       runNgOnChanges();
 
       const list = spectator.query('ion-list');
-      expect(list.getAttribute('class')).not.toContain('divider');
+      expect(list.getAttribute('class')).not.toContain('has-divider');
     });
   });
 
