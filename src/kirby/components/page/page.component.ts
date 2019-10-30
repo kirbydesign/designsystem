@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   Component,
   ContentChild,
   Directive,
@@ -15,6 +14,7 @@ import {
   AfterContentInit,
   Output,
   EventEmitter,
+  AfterContentChecked,
 } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { NavigationStart, NavigationEnd, Router, RouterEvent } from '@angular/router';
@@ -115,7 +115,7 @@ export class PageActionsComponent implements AfterContentInit {
     ]),
   ],
 })
-export class PageComponent implements OnInit, OnDestroy, AfterContentInit, AfterViewInit {
+export class PageComponent implements OnInit, OnDestroy, AfterContentChecked {
   @Input() title?: string;
   @Input() toolbarTitle?: string;
   @Input() titleAlignment?: 'left' | 'center' | 'right' = 'left';
@@ -182,7 +182,7 @@ export class PageComponent implements OnInit, OnDestroy, AfterContentInit, After
       }
       if (
         event instanceof NavigationEnd &&
-        event.url === this.url &&
+        event.urlAfterRedirects === this.url &&
         this.pageTitleObserver &&
         this.pageTitle
       ) {
@@ -192,13 +192,10 @@ export class PageComponent implements OnInit, OnDestroy, AfterContentInit, After
     });
   }
 
-  ngAfterContentInit(): void {
+  ngAfterContentChecked(): void {
     this.initializeTitle();
     this.initializeActions();
     this.initializeContent();
-  }
-
-  ngAfterViewInit(): void {
     this.styleToolbarButtons();
   }
 
