@@ -1,0 +1,5 @@
+@import '../../../scss/utils';
+
+:host-context(kirby-item) {
+  font-weight: font-weight('bold');
+}
