@@ -36,7 +36,7 @@ import { PageAdvancedExampleComponent } from './page-example/advanced/page-advan
 import { ExamplesComponent } from './examples.component';
 import { TabsExampleComponent } from './tabs/tabs-example.component';
 import { TabExampleComponent } from './tabs/tab/tab-example.component';
-import { ItemExampleComponent } from '~/app/examples/item/item-example.component';
+import { ItemExampleComponent } from '~/app/examples/item-example/item-example.component';
 
 export const routes: Routes = [
   {
