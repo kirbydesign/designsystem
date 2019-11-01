@@ -5,6 +5,7 @@
   [disabled]="!isLoadOnDemandEnabled"
   [class.has-header]="listHeaderTemplate"
   [class.has-footer]="listFooterTemplate"
+  [class.has-divider]="showDivider"
   (window:resize)="onResize()"
 >
   <ion-list-header *ngIf="listHeaderTemplate">
@@ -58,7 +59,6 @@
 
 <ng-template #listItem let-item>
   <ion-item
-    [class.has-divider]="showDivider"
     [class.selectable]="isSelectable"
     [class.selected]="markSelectedRow && item === selectedItem"
     [attr.role]="isSelectable ? 'button' : null"
