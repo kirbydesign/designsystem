@@ -3,7 +3,12 @@
   <div>
     <select (change)="onThemeChange($event.target.value)">
       <option value="">Card color: None</option>
-      <option *ngFor="let color of themeColors" value="{{color}}" [attr.selected]="themeColor === color ? true : null">Card color: {{ color }}</option>
+      <option
+        *ngFor="let color of themeColors"
+        value="{{ color }}"
+        [attr.selected]="themeColor === color ? true : null"
+        >Card color: {{ color }}</option
+      >
     </select>
   </div>
   <kirby-code-viewer [html]="exampleHtml"></kirby-code-viewer>
