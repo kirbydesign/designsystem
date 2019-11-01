@@ -52,8 +52,6 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
    */
   private offset = 0.8;
 
-  private ionContent: HTMLIonContentElement;
-
   constructor(private elementRef: ElementRef, @Inject(WINDOW_REF) private windowRef: WindowRef) {}
 
   ngAfterViewInit(): void {
@@ -78,9 +76,10 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
         this.scrollEnd.emit();
       });
 
-    this.ionContent = this.windowRef.nativeWindow.document.getElementsByTagName('ion-content')[0];
-    if (this.ionContent) {
-      fromEvent<any>(this.ionContent, 'ionScroll')
+    const allIonContents = this.windowRef.nativeWindow.document.getElementsByTagName('ion-content');
+    if (allIonContents && allIonContents.length > 0) {
+      const closetsIonContent = allIonContents[allIonContents.length - 1];
+      fromEvent<any>(closetsIonContent, 'ionScroll')
         .pipe(
           takeUntil(this.ngUnsubscribe$),
           debounceTime(INFINITE_SCROLL_DEBOUNCE),
