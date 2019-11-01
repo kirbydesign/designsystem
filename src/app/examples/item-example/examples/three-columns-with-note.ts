@@ -12,7 +12,7 @@ const config = {
   </kirby-avatar>
   <kirby-label expand>
     <h3>Køb af bolig fordi jeg</h3>
-    <h6>i dag</h6>
+    <time>i dag</time>
   </kirby-label>
   <kirby-label>
     <p>Hey Marvin, så er der nye papire klar til

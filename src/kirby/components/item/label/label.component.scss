@@ -2,12 +2,23 @@
 
 :host {
   display: block;
-   overflow: hidden;
-    ::ng-deep ion-label { 
-        h1,h2,h3,h4,h5,h6,p {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-    }
+  overflow: hidden;
+
+  &[expand] ::ng-deep ion-label {
+      *:last-child {
+        flex-shrink: 0;
+      }
+  }
+
+  ::ng-deep  ion-label { 
+    * {
+       white-space: nowrap;
+       overflow: hidden;
+       text-overflow: ellipsis;
+    }  
+  }
 }
+
+
+
+

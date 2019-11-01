@@ -26,6 +26,10 @@
     align-items: center;
     flex-wrap: wrap;
   }
+
+  &[disablded] {
+
+  }
 }
 
 :host ::ng-deep {
@@ -33,15 +37,25 @@
     margin-right: 0;
   }
 
-  ion-label {
-    h1,h2,h3,h4,h5,h6 {
+  time,
+  kirby-label time {
+    font-size: font-size("xs");
+    color: get-color('semi-dark');
+    line-height: line-height('xs');
+  }
+
+
+  kirby-label {
+    * {
       margin: 0;
       color: get-color('black');
       font-size: font-size('n');
+      line-height: line-height('l');
    
       &:not(:first-child) {
         font-size: font-size('xs');
         color: get-color('semi-dark');
+        line-height: line-height('xs');
 
         &:not(:last-child) {
           color: get-color('black');
@@ -101,6 +115,7 @@
     [expand='true'] {
       text-align: left;
       margin-left: 0;
+
     }
   }
 
@@ -117,6 +132,15 @@
       align-items: center;
       justify-content: space-between;
     } 
+  }
+
+  kirby-label[expand] + kirby-label {
+    * {
+      font-size: font-size('xs');
+      color: get-color('black');
+      line-height: line-height('s')
+    }
+    
   }
 
   kirby-label kirby-badge {

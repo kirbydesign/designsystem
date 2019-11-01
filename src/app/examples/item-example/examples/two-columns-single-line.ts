@@ -5,11 +5,9 @@ const config = {
   template: `
     <kirby-item>
         <kirby-label>
-            <h3>Title</h3>
+            <font>Title</font>
         </kirby-label>
-        <kirby-value>
-            Value
-        </kirby-value>
+       <time>12.12.1212</time>
     </kirby-item>
     `,
 };

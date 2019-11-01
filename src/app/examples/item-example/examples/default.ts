@@ -13,7 +13,7 @@ const config = {
     <h4>Subtitle</h4>
   </kirby-label>
   <kirby-label>
-    <h3>Value</h3>
+    <kirby-value>Value</kirby-value>
     <h4>Subvalue</h4>
   </kirby-label>
 </kirby-item>`,

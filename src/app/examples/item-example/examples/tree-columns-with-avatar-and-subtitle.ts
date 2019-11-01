@@ -9,7 +9,7 @@ const config = {
   </kirby-avatar>
   <kirby-label>
     <h3>Mad og indkøb</h3>
-    <h6>16.07.2019</h6>
+    <h6><time>16.07.2019</time></h6>
   </kirby-label>
   <kirby-value>
     Value
