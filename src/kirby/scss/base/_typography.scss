@@ -23,6 +23,24 @@ kirby-app .page-title {
   }
 }
 
+.display-1 {
+  font-size: font-size('xxxxl');
+  font-weight: font-weight('light');
+  line-height: line-height('xl');
+}
+
+.display-2 {
+  font-size: font-size('xxxl');
+  font-weight: font-weight('light');
+  line-height: line-height('xl');
+}
+
+.display-3 {
+  font-size: font-size('xxl');
+  font-weight: font-weight('light');
+  line-height: line-height('xl');
+}
+
 h1,
 .h1,
 .kirby-text-xlarge {
