@@ -1,84 +1,91 @@
 <h2>Item</h2>
+<h3>Description:</h3>
+<p>
+The item-component consists of three possible columns. First column only used with kirby-avatars, kirby-icons and such. Placement happens automatically.
+If no avatars or icons is present first column will not be show.
+</p>
+<p>Content in Column #2 should <u>always</u> be contained within a kirby-label. </p>
+<p><i>kirby-label</i> stacks content vertically (multi lines)</p>
+<p> Values should be contained in a <i>kirby-value</i> (though not sub-values)</p>
+<p> Third column content need not be contained in a kirby-label unless multiple lines is needed
+</p>
+<hr />
+<br />
 <h3>Default</h3>
-<p><em><strong>Please note</strong>, you should always strive to...</em></p>
+<p><em><strong>Please note</strong>, the flags outside left boundary is yet to come</em></p>
 <kirby-example-viewer [html]="defaultExample.template">
   <kirby-item-example #defaultExample></kirby-item-example>
 </kirby-example-viewer>
 <hr />
 <h3>Two Columns Single Line</h3>
-<p><em><strong>Please note</strong>, you should always strive to...</em></p>
 <kirby-example-viewer [html]="twoColSingleLineExample.template">
   <kirby-item-ex2 #twoColSingleLineExample></kirby-item-ex2>
 </kirby-example-viewer>
 <hr />
 <h3>Two Columns Two Lines</h3>
-<p><em><strong>Please note</strong>, you should always strive to...</em></p>
 <kirby-example-viewer [html]="twoColTwoRowsExample.template">
   <kirby-item-ex5 #twoColTwoRowsExample></kirby-item-ex5>
 </kirby-example-viewer>
 <hr />
 <h3>Two Columns Single Line With Toggle</h3>
-<p><em><strong>Please note</strong>, you should always strive to...</em></p>
 <kirby-example-viewer [html]="twoColSingleLineExampleWithToggle.template">
   <kirby-item-ex3 #twoColSingleLineExampleWithToggle></kirby-item-ex3>
 </kirby-example-viewer>
 <hr />
+<h3>Two Columns Single Line With Toggle - Disabled</h3>
+<p><em><strong>Please note</strong>, 'disabled' added to kirby-item will disable the whole item including buttons, toggles etc</em></p>
+<kirby-example-viewer [html]="twoColSingleLineExampleWithToggleDisabled.template">
+  <kirby-item-ex3-disabled #twoColSingleLineExampleWithToggleDisabled></kirby-item-ex3-disabled>
+</kirby-example-viewer>
+<hr />
 <h3>Two Columns With Button</h3>
-<p><em><strong>Please note</strong>, you should always strive to...</em></p>
 <kirby-example-viewer [html]="twoColWithButtonExample.template">
   <kirby-item-ex4 #twoColWithButtonExample></kirby-item-ex4>
 </kirby-example-viewer>
 <hr />
 <h3>Two Columns With Avatar</h3>
-<p><em><strong>Please note</strong>, you should always strive to...</em></p>
 <kirby-example-viewer [html]="twoColWithAvatarExample.template">
   <kirby-item-ex6 #twoColWithAvatarExample></kirby-item-ex6>
 </kirby-example-viewer>
 <hr />
 <h3>Three Columns With Avatar</h3>
-<p><em><strong>Please note</strong>, you should always strive to...</em></p>
 <kirby-example-viewer [html]="threeColWithAvatarExample.template">
   <kirby-item-ex7 #threeColWithAvatarExample></kirby-item-ex7>
 </kirby-example-viewer>
 <hr />
 <h3>Three Columns With Avatar and Subtitle</h3>
-<p><em><strong>Please note</strong>, you should always strive to...</em></p>
+<p><em><strong>Please note</strong>, content within the time-tag will always be formatted as seen, no matter where placed</em></p>
 <kirby-example-viewer [html]="threeColWithAvatarAndSubtitleExample.template">
   <kirby-item-ex8 #threeColWithAvatarAndSubtitleExample></kirby-item-ex8>
 </kirby-example-viewer>
 <hr />
 <h3>Two Columns With Avatar, Subtitle and Details</h3>
-<p><em><strong>Please note</strong>, you should always strive to...</em></p>
 <kirby-example-viewer [html]="twoColWithAvatarSubtitleAndDetailsExample.template">
   <kirby-item-ex9 #twoColWithAvatarSubtitleAndDetailsExample></kirby-item-ex9>
 </kirby-example-viewer>
 <hr />
 <h3>Three Columns With Avatar, Subtitle and Details</h3>
-<p><em><strong>Please note</strong>, you should always strive to...</em></p>
 <kirby-example-viewer [html]="twoColWithAvatarSubtitleAndDetailsExample.template">
   <kirby-item-ex10 #twoColWithAvatarSubtitleAndDetailsExample></kirby-item-ex10>
 </kirby-example-viewer>
 <hr />
 <h3>Three Columns With Avatar and Button</h3>
-<p><em><strong>Please note</strong>, you should always strive to...</em></p>
 <kirby-example-viewer [html]="threeColWithAvatarAndButton.template">
   <kirby-item-ex11 #threeColWithAvatarAndButton></kirby-item-ex11>
 </kirby-example-viewer>
 <hr />
 <h3>Three Columns Selected</h3>
-<p><em><strong>Please note</strong>, you should always strive to...</em></p>
 <kirby-example-viewer [html]="threeColSelected.template">
   <kirby-item-ex12 #threeColSelected></kirby-item-ex12>
 </kirby-example-viewer>
 <hr />
 <h3>Three Columns With Avatar and Checkmark</h3>
-<p><em><strong>Please note</strong>, you should always strive to...</em></p>
 <kirby-example-viewer [html]="threeColWithAvatarAndCheckmark.template">
   <kirby-item-ex13 #threeColWithAvatarAndCheckmark></kirby-item-ex13>
 </kirby-example-viewer>
 <hr />
 <h3>Three Columns With Note</h3>
-<p><em><strong>Please note</strong>, you should always strive to...</em></p>
+<p><em><strong>Please note</strong>, this is a special case - 2nd row will span column #2 and #3 if extended is added to the kirby-item</em></p>
 <kirby-example-viewer [html]="threeColWithNote.template">
   <kirby-item-ex14 #threeColWithNote></kirby-item-ex14>
 </kirby-example-viewer>

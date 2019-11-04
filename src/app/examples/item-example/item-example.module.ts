@@ -16,6 +16,7 @@ import { ItemThreeColumnsWithAvatarAndButtonComponent } from './examples/three-c
 import { ItemThreeColumnsCheckedComponent } from './examples/three-columns-selected';
 import { ItemThreeColumnsWithAvatarAndCheckmarkComponent } from './examples/three-columns-with-avatar-and-checkmark';
 import { ItemThreeColumnsWithNoteComponent } from './examples/three-columns-with-note';
+import { ItemTwoColumnsSingleLineWithToggleDisabledComponent } from './examples/two-columns-single-line-with-toggle-disabled';
 
 const COMPONENT_DECLARATIONS = [
   ItemDefaultExampleComponent,
@@ -32,6 +33,7 @@ const COMPONENT_DECLARATIONS = [
   ItemThreeColumnsCheckedComponent,
   ItemThreeColumnsWithAvatarAndCheckmarkComponent,
   ItemThreeColumnsWithNoteComponent,
+  ItemTwoColumnsSingleLineWithToggleDisabledComponent,
 ];
 
 @NgModule({

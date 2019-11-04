@@ -27,8 +27,14 @@
     flex-wrap: wrap;
   }
 
-  &[disablded] {
-
+  &[disabled]  {
+    cursor: not-allowed;
+    .item-inner {
+      pointer-events: none;
+      ::ng-deep * {
+        color: get-color('semi-dark');
+      }
+    }
   }
 }
 
