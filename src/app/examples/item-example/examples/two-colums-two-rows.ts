@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 const config = {
   selector: 'kirby-item-ex5',
   template: `
-  <kirby-item disabled>
+  <kirby-item>
   <kirby-label>
     <h3>Title</h3>
     <h4>Subtitle</h4>
