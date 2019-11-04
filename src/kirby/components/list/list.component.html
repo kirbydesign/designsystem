@@ -14,7 +14,7 @@
 
   <ng-container *ngIf="isSectionsEnabled; else normalList">
     <ion-item-group *ngFor="let section of groupedItems; trackBy: defaultTrackBy">
-      <ion-item-divider class="section-header">
+      <ion-item-divider>
         <ng-container
           *ngTemplateOutlet="sectionHeaderTemplate; context: { $implicit: section.name }"
         ></ng-container>

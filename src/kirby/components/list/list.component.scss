@@ -194,11 +194,20 @@ ion-list-header {
   }
 }
 
+ion-item-group {
+  margin-bottom: size('m');
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
 ion-item-divider {
-  background-color: get-color('white');
-  border-color: transparent;
-  padding: 0;
   --color: unset;
+  background-color: transparent;
+  border-color: transparent;
+  min-height: 0;
+  padding: 0 size('s') size('xxs') size('s');
 }
 
 ion-item {
@@ -214,12 +223,6 @@ ion-item {
   --background: transparent;
   --min-height: unset;
   overflow: visible;
-}
-
-.section-header {
-  background-color: transparent;
-  padding: size('m') size('s') size('xxs') size('s');
-  min-height: 0;
 }
 
 .no-more-items,
