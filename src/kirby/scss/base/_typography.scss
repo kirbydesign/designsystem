@@ -23,6 +23,24 @@ kirby-app .page-title {
   }
 }
 
+.kirby-text-display-1 {
+  font-size: font-size('xxxxl');
+  font-weight: font-weight('light');
+  line-height: normal;
+}
+
+.kirby-text-display-2 {
+  font-size: font-size('xxxl');
+  font-weight: font-weight('light');
+  line-height: normal;
+}
+
+.kirby-text-display-3 {
+  font-size: font-size('xxl');
+  font-weight: font-weight('light');
+  line-height: normal;
+}
+
 h1,
 .h1,
 .kirby-text-xlarge {
@@ -43,7 +61,7 @@ h3,
 .h3,
 .kirby-text-medium {
   font-size: font-size('m');
-  font-weight: font-weight('normal');
+  font-weight: font-weight('bold');
   line-height: line-height('m');
 }
 
