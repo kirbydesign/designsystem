@@ -45,9 +45,33 @@ ion-list {
   padding: 0;
 }
 
-ion-item {
-  min-height: $item-height;
+ion-list-header {
   background-color: get-color('white');
+  border-bottom: 1px solid $divider-color;
+  padding: 0;
+  text-transform: inherit;
+  letter-spacing: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+  min-height: 0;
+  overflow: inherit;
+}
+
+ion-item {
+  --background: transparent;
+  --inner-border-width: 0;
+  --ion-safe-area-right: 0;
+  --min-height: $item-height;
+  --padding-bottom: #{size('xxs')};
+  --padding-end: #{size('s')};
+  --padding-start: #{size('s')};
+  --padding-top: #{size('xxs')};
+  background-color: get-color('white');
+  display: flex;
+  font-size: font-size('s');
+  min-height: $item-height;
+  overflow: visible;
+  width: 100%;
 
   &.selected ::ng-deep * {
     font-weight: font-weight('bold');
@@ -80,16 +104,20 @@ ion-item {
   }
 }
 
-ion-list-header {
-  background-color: get-color('white');
-  border-bottom: 1px solid $divider-color;
-  padding: 0;
-  text-transform: inherit;
-  letter-spacing: inherit;
-  font-weight: inherit;
-  font-size: inherit;
+ion-item-group {
+  margin-bottom: size('m');
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+ion-item-divider {
+  --color: unset;
+  background-color: transparent;
+  border-color: transparent;
   min-height: 0;
-  overflow: inherit;
+  padding: 0 size('s') size('xxs') size('s');
 }
 
 .footer {
@@ -99,6 +127,41 @@ ion-list-header {
   align-items: center;
   justify-content: space-between;
   width: 100%;
+}
+
+.no-more-items,
+.loading {
+  width: 100%;
+  padding: size('m');
+  text-align: center;
+}
+
+.swipe-action {
+  display: flex;
+  color: #{get-color('primary-contrast')};
+  @each $color-name, $color-value in $main-colors {
+    .#{$color-name} {
+      background-color: #{get-color($color-name)};
+      color: #{get-color($color-name + '-contrast')};
+    }
+  }
+
+  ion-item-option {
+    height: 100%;
+    display: inline-block;
+    text-align: center;
+  }
+
+  .item-content {
+    display: inline-grid;
+    min-width: 70px;
+    flex-direction: column;
+
+    ion-label {
+      --background: unset;
+      --color: unset;
+    }
+  }
 }
 
 :host(.has-sections) {
@@ -190,72 +253,6 @@ ion-list-header {
       &:last-child {
         margin-bottom: 0;
       }
-    }
-  }
-}
-
-ion-item-group {
-  margin-bottom: size('m');
-
-  &:last-of-type {
-    margin-bottom: 0;
-  }
-}
-
-ion-item-divider {
-  --color: unset;
-  background-color: transparent;
-  border-color: transparent;
-  min-height: 0;
-  padding: 0 size('s') size('xxs') size('s');
-}
-
-ion-item {
-  display: flex;
-  width: 100%;
-  --ion-safe-area-right: 0;
-  --padding-top: #{size('xxs')};
-  --padding-bottom: #{size('xxs')};
-  --padding-start: #{size('s')};
-  --padding-end: #{size('s')};
-  font-size: font-size('s');
-  --inner-border-width: 0;
-  --background: transparent;
-  --min-height: unset;
-  overflow: visible;
-}
-
-.no-more-items,
-.loading {
-  width: 100%;
-  padding: size('m');
-  text-align: center;
-}
-
-.swipe-action {
-  display: flex;
-  color: #{get-color('primary-contrast')};
-  @each $color-name, $color-value in $main-colors {
-    .#{$color-name} {
-      background-color: #{get-color($color-name)};
-      color: #{get-color($color-name + '-contrast')};
-    }
-  }
-
-  ion-item-option {
-    height: 100%;
-    display: inline-block;
-    text-align: center;
-  }
-
-  .item-content {
-    display: inline-grid;
-    min-width: 70px;
-    flex-direction: column;
-
-    ion-label {
-      --background: unset;
-      --color: unset;
     }
   }
 }
