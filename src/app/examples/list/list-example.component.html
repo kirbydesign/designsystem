@@ -13,6 +13,16 @@
   True or false. Default is false
 -->
 
+<h2>List with kirby-items</h2>
+<kirby-list>
+  <kirby-item *ngFor="let item of items; let first = first" [lines]="first ? 'inset' : 'full'">
+    <kirby-label>{{ item.title }}</kirby-label>
+    <kirby-value>{{ item.amount }}</kirby-value>
+  </kirby-item>
+</kirby-list>
+
+<hr />
+
 <h2>Default list:</h2>
 <kirby-list [items]="items">
   <kirby-list-item *kirbyListItem="let item" [title]="item.title" [amount]="item.amount">

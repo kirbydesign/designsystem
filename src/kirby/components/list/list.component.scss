@@ -256,3 +256,15 @@ ion-item-divider {
     }
   }
 }
+
+:host(.has-kirby-items) {
+  display: block;
+  ion-list {
+    border-radius: $border-radius;
+    overflow: hidden;
+  }
+
+  ion-list ::ng-deep > kirby-item:last-child {
+    --item-border-color: transparent;
+  }
+}

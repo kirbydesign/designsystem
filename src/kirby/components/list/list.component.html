@@ -1,5 +1,6 @@
 <ion-list
   #list
+  *ngIf="items; else listWithKirbyItems"
   kirbyInfiniteScroll
   (scrollEnd)="onLoadOnDemand()"
   [disabled]="!isLoadOnDemandEnabled"
@@ -131,4 +132,10 @@
       </ion-item-option>
     </ng-container>
   </div>
+</ng-template>
+
+<ng-template #listWithKirbyItems>
+  <ion-list>
+    <ng-content></ng-content>
+  </ion-list>
 </ng-template>

@@ -12,12 +12,35 @@
 
 :host {
   display: block;
-  padding: size('xxs') 0;
-  background-color:white;
+  background-color: white;
 
   ion-item {
-    --padding-start: #{size('s')};
-    --inner-padding-end: #{size('s')};
+    --min-height: 56px;
+    --padding-top: 0;
+    --padding-bottom: 0;
+    --padding-start: #{size('xxs')};
+    --padding-end: #{size('xxs')};
+    --inner-padding-start: #{size('xxs')};
+    --inner-padding-end: #{size('xxs')};
+
+    .item-inner {
+      padding: size('xxs') 0;
+    }
+
+    &.item-lines-inset,
+    &.item-lines-full {
+      //--ion-item-border-color: #{get-color('background-color')};
+      --ion-item-border-color: var(--item-border-color, red);
+    }
+
+    &.item-lines-inset {
+      --inner-border-width: 0 0 1px 0;
+      --border-width: 0;
+    }
+
+    &.item-lines-full {
+      --border-width: 0 0 1px 0;
+    }
   }
 
   .item-inner {
@@ -29,16 +52,21 @@
 }
 
 :host ::ng-deep {
-  [slot="end"]:last-child {
+  [slot='end']:last-child {
     margin-right: 0;
   }
 
   ion-label {
-    h1,h2,h3,h4,h5,h6 {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
       margin: 0;
       color: get-color('black');
       font-size: font-size('n');
-   
+
       &:not(:first-child) {
         font-size: font-size('xs');
         color: get-color('semi-dark');
@@ -58,24 +86,23 @@
     @include margin(0 3px);
   }
   kirby-label:first-of-type {
-    @include margin (0 0);
+    @include margin(0 0);
   }
   kirby-label:first-of-type + * {
-    @include margin (0 16px);
+    @include margin(0 16px);
   }
   kirby-label:first-of-type + time {
-    
-    @include margin (0 12px);
+    @include margin(0 12px);
   }
   kirby-label:first-of-type + kirby-icon {
-    @include margin (0 8px);
+    @include margin(0 8px);
   }
   kirby-label:first-of-type + kirby-icon {
-    @include margin (0 8px);
+    @include margin(0 8px);
   }
 
   kirby-label[expand]:first-of-type + kirby-label {
-    @include margin (0 0px);
+    @include margin(0 0px);
     width: 100%;
     text-align: left;
   }
@@ -116,13 +143,13 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-    } 
+    }
   }
 
   kirby-label kirby-badge {
     display: block;
   }
-  
+
   kirby-label[badges] {
     height: 100%;
     position: absolute;
@@ -134,6 +161,4 @@
       margin-bottom: 2px;
     }
   }
-
-  
 }
