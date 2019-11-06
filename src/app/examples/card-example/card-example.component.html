@@ -1,11 +1,22 @@
 <kirby-card [hasPadding]="hasPadding" [class.show-size]="showSize">
-  <kirby-card-header *ngIf="hasHeader" [title]="title" [subtitle]="subtitle" [class.bg-color]="hasHeaderFooterBgColor"></kirby-card-header>
+  <kirby-card-header
+    *ngIf="hasHeader"
+    [title]="title"
+    [subtitle]="subtitle"
+    [class.bg-color]="hasHeaderFooterBgColor"
+  ></kirby-card-header>
 
   <!-- Card content example: -->
   <div class="card-content">
     <p><b>Example content (with background color)</b></p>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia facere molestias recusandae necessitatibus ab veniam repellendus doloremque culpa quam libero, est quo accusamus cumque, in quia itaque cupiditate ratione repellat!</p>
+    <p>
+      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia facere molestias recusandae
+      necessitatibus ab veniam repellendus doloremque culpa quam libero, est quo accusamus cumque,
+      in quia itaque cupiditate ratione repellat!
+    </p>
   </div>
 
-  <kirby-card-footer *ngIf="hasFooter" [class.bg-color]="hasHeaderFooterBgColor">Footer</kirby-card-footer>
+  <kirby-card-footer *ngIf="hasFooter" [class.bg-color]="hasHeaderFooterBgColor"
+    >Footer</kirby-card-footer
+  >
 </kirby-card>

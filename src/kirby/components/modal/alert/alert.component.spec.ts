@@ -51,7 +51,7 @@ describe('AlertComponent', () => {
       const okButton = fixture.debugElement.query(By.css('.ok-btn'));
 
       expect(component.okBtnText).toEqual(expected);
-      expect(okButton.nativeElement.textContent).toEqual(expected);
+      expect(okButton.nativeElement.innerText).toEqual(expected);
     });
 
     it('should support isDestructive', () => {
@@ -91,7 +91,7 @@ describe('AlertComponent', () => {
       component.cancelBtnText = 'Test Cancel Button Text';
       fixture.detectChanges();
       const cancelButton = fixture.debugElement.query(By.css('.cancel-btn'));
-      expect(cancelButton.nativeElement.textContent).toEqual(expected);
+      expect(cancelButton.nativeElement.innerText).toEqual(expected);
     });
 
     it('should not render when cancelBtn not set', () => {

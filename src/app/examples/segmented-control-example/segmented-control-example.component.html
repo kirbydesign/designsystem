@@ -1,8 +1,12 @@
-<kirby-segmented-control [mode]="mode" [items]="items" (segmentSelect)="onSegmentSelect($event)"></kirby-segmented-control>
+<kirby-segmented-control
+  [mode]="mode"
+  [items]="items"
+  (segmentSelect)="onSegmentSelect($event)"
+></kirby-segmented-control>
 
 <ng-container>
   <div class="segment-data">
-    <h2>Content for {{activeSegment.text}} segment</h2>
+    <h2>Content for {{ activeSegment.text }} segment</h2>
     <p>The selected segment has text "{{ activeSegment.text }}" and id "{{ activeSegment.id }}"</p>
   </div>
 </ng-container>

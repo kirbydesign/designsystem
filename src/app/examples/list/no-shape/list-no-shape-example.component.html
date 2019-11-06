@@ -1,26 +1,36 @@
 <h2>List with no background shape:</h2>
-<h3>Removes background, border, shadow and padding from the list and the list item containers to provide flexibility
+<h3>
+  Removes background, border, shadow and padding from the list and the list item containers to
+  provide flexibility
 </h3>
 <kirby-list [items]="items" shape="none" hasItemSpacing="true">
-
   <kirby-card *kirbyListItem="let item">
     <kirby-card-header *ngIf="item.amount < 0" title="Account is overdraft"></kirby-card-header>
     <kirby-list-flex-item>
       <kirby-list-cell width="2">
-        {{item.title}}
+        {{ item.title }}
       </kirby-list-cell>
-      <kirby-list-cell class="amount" width="1" verticalAlignment="center" horisontalAlignment="right">
-        {{item.amount | currency}}
+      <kirby-list-cell
+        class="amount"
+        width="1"
+        verticalAlignment="center"
+        horisontalAlignment="right"
+      >
+        {{ item.amount | currency }}
       </kirby-list-cell>
     </kirby-list-flex-item>
     <kirby-list-flex-item *ngFor="let shadowAccount of item.shadowAccounts">
       <kirby-list-cell width="2">
-        {{shadowAccount.title}}
+        {{ shadowAccount.title }}
       </kirby-list-cell>
-      <kirby-list-cell class="amount" width="1" verticalAlignment="center" horisontalAlignment="right">
-        {{shadowAccount.amount | currency}}
+      <kirby-list-cell
+        class="amount"
+        width="1"
+        verticalAlignment="center"
+        horisontalAlignment="right"
+      >
+        {{ shadowAccount.amount | currency }}
       </kirby-list-cell>
     </kirby-list-flex-item>
   </kirby-card>
-
 </kirby-list>

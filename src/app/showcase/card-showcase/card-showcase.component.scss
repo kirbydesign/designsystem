@@ -1,16 +1,15 @@
 @import '../../../kirby/scss/utils';
 
 h4 {
-    padding-top: size("s");
+  padding-top: size('s');
 }
 
-
 .card-grid {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    grid-gap: size("s");
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: size('s');
 
-    @include media(">=medium") {
-        grid-template-columns: repeat(2, 1fr);
-    }
+  @include media('>=medium') {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }

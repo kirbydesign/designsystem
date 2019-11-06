@@ -1,9 +1,13 @@
-<ion-backdrop *ngIf="actionSheet && isFabSheetOpen" (ionBackdropTap)="hideActions(fab)" (click)="hideActions(fab)"></ion-backdrop>
+<ion-backdrop
+  *ngIf="actionSheet && isFabSheetOpen"
+  (ionBackdropTap)="hideActions(fab)"
+  (click)="hideActions(fab)"
+></ion-backdrop>
 <ion-fab #fab (click)="disabled || onFabClick(fab)">
-    <ion-fab-button [disabled]="disabled" [attr.disabled]="disabled ? true : null" tabindex="-1">
-        <ng-content select="kirby-icon"></ng-content>
-    </ion-fab-button>   
-    <ion-fab-list *ngIf="actionSheet" side="top" class="{{horizontalAlignment}}">
-        <ng-content select="kirby-action-sheet"></ng-content>
-    </ion-fab-list>
+  <ion-fab-button [disabled]="disabled" [attr.disabled]="disabled ? true : null" tabindex="-1">
+    <ng-content select="kirby-icon"></ng-content>
+  </ion-fab-button>
+  <ion-fab-list *ngIf="actionSheet" side="top" class="{{ horizontalAlignment }}">
+    <ng-content select="kirby-action-sheet"></ng-content>
+  </ion-fab-list>
 </ion-fab>

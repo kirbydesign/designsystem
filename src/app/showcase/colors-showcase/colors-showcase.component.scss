@@ -2,7 +2,7 @@
 
 @each $color-name, $color-value in $kirby-colors {
   .#{$color-name} {
-    background-color: get-color($color-name); 
+    background-color: get-color($color-name);
   }
 }
 
@@ -21,14 +21,14 @@
   position: relative;
   height: size('xxxl');
   width: size('xxxl');
-  max-width: size('xxxl');  
+  max-width: size('xxxl');
   margin-right: size('xl');
-  margin-bottom: size('xl');;
+  margin-bottom: size('xl');
   flex: 1 0 auto;
 }
 
 .color-sample {
-  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
   height: 100%;
   width: 100%;
   margin-top: auto;
@@ -96,9 +96,9 @@
   color: get-color('semi-dark');
   flex: 0 0 100px;
   margin-top: 0;
-  dt:first-of-type, 
+  dt:first-of-type,
   dd:first-of-type {
-    color: get-color('black');  
+    color: get-color('black');
   }
 }
 
@@ -119,16 +119,15 @@
     cursor: pointer;
     &:hover {
       transform: translateY(-2px);
-      box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
     }
   }
 }
 
 .color-sample-wrapper {
   background-color: get-color('white');
-  border: 1px solid get-color('medium');  
+  border: 1px solid get-color('medium');
   padding: size('s');
   overflow-x: auto;
   margin-bottom: size('s');
 }
-

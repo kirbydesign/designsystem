@@ -5,21 +5,21 @@
   border-top-left-radius: $border-radius;
   border-top-right-radius: $border-radius;
   text-align: center;
-  padding: size("s");
+  padding: size('s');
   background-color: transparent;
 }
 
 h2 {
-  font-size: font-size("n");
-  font-weight: font-weight("normal");
+  font-size: font-size('n');
+  font-weight: font-weight('normal');
   margin: 0 0 size('xxs');
   &.bold {
-    font-weight: font-weight("bold");
+    font-weight: font-weight('bold');
   }
 }
 
 h4 {
-  font-size: font-size("s");
-  margin: 0 0 size('xxs');
-  font-weight: font-weight("normal");
+  font-size: font-size('s');
+  margin: 0;
+  font-weight: font-weight('normal');
 }

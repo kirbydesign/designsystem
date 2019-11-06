@@ -1,11 +1,13 @@
 <div class="example">
-    <kirby-modal-example></kirby-modal-example>
-    <kirby-code-viewer [html]="exampleHtml"></kirby-code-viewer>
-    <br />
-    <h3>Inside the parent (caller) component:</h3>
-    <p>
-        To show the modal, create a <code>ModalConfig</code> and pass it to the <code>ModalController.showModal</code>:
-        <kirby-code-viewer language="ts">constructor(private modalController: ModalController) {{ '{}' }}
+  <kirby-modal-example></kirby-modal-example>
+  <kirby-code-viewer [html]="exampleHtml"></kirby-code-viewer>
+  <br />
+  <h3>Inside the parent (caller) component:</h3>
+  <p>
+    To show the modal, create a <code>ModalConfig</code> and pass it to the
+    <code>ModalController.showModal</code>:
+    <!-- prettier-ignore -->
+    <kirby-code-viewer language="ts">constructor(private modalController: ModalController) {{ '{}' }}
 
 showModal() {{ '{' }}
     const config: ModalConfig = {{ '{' }}
@@ -19,15 +21,19 @@ showModal() {{ '{' }}
     {{ '}' }};
     this.modalController.showModal(config);
 {{ '}' }}</kirby-code-viewer>
-        <br /><br />
-        The modal can have one of multiple flavors, used to determine the opening animation, the position of their titles and their close buttons.
-        With the <code>modal</code> flavor, the dialog opens with a fade-in animation, its title is aligned to the left and its close button
-        is placed in the top right corner. When a <code>drawer</code> flavor is used, the dialog opens with a slide-up animation, its title
-        is centered and its close button is placed in the top left corner. Additionally, with the <code>drawer</code> flavor, users can specify a
-        <code>drawerSupplementaryAction</code>, which is an additional button rendered in the top right corner (see the example below). The
-        <code>drawerSupplementaryAction</code> option takes an <code>iconName: string</code> which corresponds to an icon of the kirby font, and 
-        <code>action: Function</code>, which is invoked when the supplementary button is selected. 
-        <kirby-code-viewer language="ts">showModal() {{ '{' }}
+    <br /><br />
+    The modal can have one of multiple flavors, used to determine the opening animation, the
+    position of their titles and their close buttons. With the <code>modal</code> flavor, the dialog
+    opens with a fade-in animation, its title is aligned to the left and its close button is placed
+    in the top right corner. When a <code>drawer</code> flavor is used, the dialog opens with a
+    slide-up animation, its title is centered and its close button is placed in the top left corner.
+    Additionally, with the <code>drawer</code> flavor, users can specify a
+    <code>drawerSupplementaryAction</code>, which is an additional button rendered in the top right
+    corner (see the example below). The <code>drawerSupplementaryAction</code> option takes an
+    <code>iconName: string</code> which corresponds to an icon of the kirby font, and
+    <code>action: Function</code>, which is invoked when the supplementary button is selected.
+    <!-- prettier-ignore -->
+    <kirby-code-viewer language="ts">showModal() {{ '{' }}
     const config: ModalConfig = {{ '{' }}
         title: 'Your Drawer Title',
         flavor: 'drawer',
@@ -43,57 +49,93 @@ showModal() {{ '{' }}
 private onSupplementaryActionSelect() {{ '{' }}
     console.log('Supplementary action selected');
 {{ '}' }}</kirby-code-viewer>
-        <br /><br />
-        <em>(Optional)</em><br />
-        If you need to obtain data back from the modal, you can pass a callback function:
-        <kirby-code-viewer language="ts">this.modalController.showModal(config, myCallback);
+    <br /><br />
+    <em>(Optional)</em><br />
+    If you need to obtain data back from the modal, you can pass a callback function:
+    <!-- prettier-ignore -->
+    <kirby-code-viewer language="ts">this.modalController.showModal(config, myCallback);
 
 myCallback(dataReturnedByModal: any) {{ '{' }}
     ...
 {{ '}' }}</kirby-code-viewer>
-    </p>
-    <br />
-    <h3>Inside the embedded component:</h3>
-    <p>To create a embedded component, ensure:</p>
-    <ol>
-        <li>the embedded component must be declared (module file, or inside your <code>@Component</code> decorator)</li>
-        <li>the embedded component must be listed in your <code>entryComponents</code> (module file)</li>
-    </ol>
-    <br />
-    <em>(Optional)</em><br />
-    <p>To access data passed into the embedded component, inject the COMPONENT_PROPS inside the embedded components constructor:</p>
-    <kirby-code-viewer language="ts">constructor(
+  </p>
+  <br />
+  <h3>Inside the embedded component:</h3>
+  <p>To create a embedded component, ensure:</p>
+  <ol>
+    <li>
+      the embedded component must be declared (module file, or inside your
+      <code>@Component</code> decorator)
+    </li>
+    <li>
+      the embedded component must be listed in your <code>entryComponents</code> (module file)
+    </li>
+  </ol>
+  <br />
+  <em>(Optional)</em><br />
+  <p>
+    To access data passed into the embedded component, inject the COMPONENT_PROPS inside the
+    embedded components constructor:
+  </p>
+  <!-- prettier-ignore -->
+  <kirby-code-viewer language="ts">constructor(
     @Inject(COMPONENT_PROPS) private componentProps,
     private modalController: ModalController,
 ) {{ '{' }}
     this.props = componentProps;
-{{ '}' }}</kirby-code-viewer><br />
-    <p>
-        In order to hide a modal from within your embedded component (and destroy its component), you can use:
-        <kirby-code-viewer language="ts">constructor(private modalController: ModalController) {{ '{}' }}
+{{ '}' }}</kirby-code-viewer
+
+  ><br />
+  <p>
+    In order to hide a modal from within your embedded component (and destroy its component), you
+    can use:
+    <!-- prettier-ignore -->
+    <kirby-code-viewer language="ts">constructor(private modalController: ModalController) {{ '{}' }}
 this.modalController.hideTopmost();</kirby-code-viewer>
-        <br /><br />
-        <em>(Optional)</em><br />
-        You can additionally pass data, which will be available in your callback:
-        <kirby-code-viewer language="ts">let returnData = ...;
+    <br /><br />
+    <em>(Optional)</em><br />
+    You can additionally pass data, which will be available in your callback:
+    <!-- prettier-ignore -->
+    <kirby-code-viewer language="ts">let returnData = ...;
 this.modalController.hideTopmost(returnData);</kirby-code-viewer>
-        It is possible to nest more modals from within your embedded components, <br />
-        by using the same services and principles as above.
-    </p>
+    It is possible to nest more modals from within your embedded components, <br />
+    by using the same services and principles as above.
+  </p>
 
-    <h4 id="multipleModalsFromSameView">Opening multiple modals from the same view</h4>
-    <p><i>In response to issue <a href="https://github.com/kirbydesign/designsystem/issues/385" target="_blank">#385.</a></i>
-    It might seem compelling to use callbacks from a modal to instruct the "parent" component (the one launching the modal) to launch a secondary modal
-        - this way you would be able to control multiple modals from the same parent-component, which would be nice, but sadly - its not possible.
-    </p>
-    <p>Conclusion must be: If you want to open a second modal - let the first modal do it - just like the example above shows.</p>
-    <p>To see the problem in action: <a href="https://play.nativescript.org/?template=play-ng&id=J3Gjbm&v=3">See Playground Example</a></p>
+  <h4 id="multipleModalsFromSameView">Opening multiple modals from the same view</h4>
+  <p>
+    <i
+      >In response to issue
+      <a href="https://github.com/kirbydesign/designsystem/issues/385" target="_blank">#385.</a></i
+    >
+    It might seem compelling to use callbacks from a modal to instruct the "parent" component (the
+    one launching the modal) to launch a secondary modal - this way you would be able to control
+    multiple modals from the same parent-component, which would be nice, but sadly - its not
+    possible.
+  </p>
+  <p>
+    Conclusion must be: If you want to open a second modal - let the first modal do it - just like
+    the example above shows.
+  </p>
+  <p>
+    To see the problem in action:
+    <a href="https://play.nativescript.org/?template=play-ng&id=J3Gjbm&v=3"
+      >See Playground Example</a
+    >
+  </p>
 
-
-    <h4>ModalConfig properties:</h4>
-    <kirby-showcase-properties [properties]="properties"></kirby-showcase-properties>
-    <br>
-    <p><ion-icon name="information-circle" style="color: #3880ff"></ion-icon>
-        <em>For more details concerning the technical implementation of the modal component, see <a target="_blank" href="https://github.com/kirbydesign/designsystem/tree/master/src/app/showcase/modal-showcase/readme.md">this flow diagram</a></em>
-    </p>
+  <h4>ModalConfig properties:</h4>
+  <kirby-showcase-properties [properties]="properties"></kirby-showcase-properties>
+  <br />
+  <p>
+    <ion-icon name="information-circle" style="color: #3880ff"></ion-icon>
+    <em
+      >For more details concerning the technical implementation of the modal component, see
+      <a
+        target="_blank"
+        href="https://github.com/kirbydesign/designsystem/tree/master/src/app/showcase/modal-showcase/readme.md"
+        >this flow diagram</a
+      ></em
+    >
+  </p>
 </div>

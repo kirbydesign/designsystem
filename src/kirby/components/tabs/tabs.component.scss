@@ -1,8 +1,7 @@
 @import '../../scss/utils';
 
 ion-tabs {
-
-  @include media(">=large") {
+  @include media('>=large') {
     flex-direction: column-reverse;
   }
 
@@ -11,11 +10,11 @@ ion-tabs {
     --border: none;
     --color: #{get-color('black')};
     max-width: var(--kirby-tab-bar-max-width, none);
-  
-    @include media(">=large") {
+
+    @include media('>=large') {
       width: 100%;
       margin: 0 auto;
       justify-content: flex-end;
     }
-  } 
+  }
 }

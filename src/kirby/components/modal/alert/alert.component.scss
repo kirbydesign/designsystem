@@ -1,15 +1,15 @@
-@import "../../../scss/utils";
+@import '../../../scss/utils';
 
 h3.title {
   margin-top: size('m');
   margin-bottom: size('m');
-  font-weight: font-weight("bold");
+  font-weight: font-weight('bold');
 }
 
 article {
   overflow: hidden;
   padding: size('s');
-  @include media("<small") {
+  @include media('<small') {
     padding: size('xxs');
   }
 }
@@ -17,7 +17,7 @@ article {
 .buttongroup {
   display: flex;
   justify-content: space-around;
-  
+
   button {
     width: 50%;
     margin-left: 6px;

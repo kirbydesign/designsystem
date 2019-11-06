@@ -1,4 +1,4 @@
-<ul class="side-nav side-menu" [ngClass]="{'is-open': isMenuOpen}" (click)="onToggleMenu()">
+<ul class="side-nav side-menu" [ngClass]="{ 'is-open': isMenuOpen }" (click)="onToggleMenu()">
   <button class="side-menu__close-btn">
     <kirby-icon name="close" size="large"></kirby-icon>
   </button>
@@ -6,8 +6,12 @@
     <a routerLink="/home/intro" [routerLinkActive]="'is-selected'" class="side-nav__item">Intro</a>
   </li>
   <li>
-    <a class="side-nav__item side-nav-header" routerLink="/home/component-status" [routerLinkActive]="'is-selected'"
-      [routerLinkActiveOptions]="{exact: false}">
+    <a
+      class="side-nav__item side-nav-header"
+      routerLink="/home/component-status"
+      [routerLinkActive]="'is-selected'"
+      [routerLinkActiveOptions]="{ exact: false }"
+    >
       <svg class="icon">
         <use xlink:href="../../assets/icons/icon-sprite.svg#icon-make-group"></use>
       </svg>
@@ -15,31 +19,38 @@
     </a>
   </li>
   <li>
-    <a class="side-nav__item side-nav-header" routerLink="/home/changelog" [routerLinkActive]="'is-selected'"
-       [routerLinkActiveOptions]="{exact: false}">
+    <a
+      class="side-nav__item side-nav-header"
+      routerLink="/home/changelog"
+      [routerLinkActive]="'is-selected'"
+      [routerLinkActiveOptions]="{ exact: false }"
+    >
       <kirby-icon name="pension" size="md"></kirby-icon>
       Changelog
     </a>
   </li>
-  <li routerLinkActive="is-selected" [routerLinkActiveOptions]="{exact: false}">
-    <a class="side-nav__item side-nav-header" [routerLinkActive]="'is-selected'"
-      [routerLinkActiveOptions]="{exact: false}">
+  <li routerLinkActive="is-selected" [routerLinkActiveOptions]="{ exact: false }">
+    <a
+      class="side-nav__item side-nav-header"
+      [routerLinkActive]="'is-selected'"
+      [routerLinkActiveOptions]="{ exact: false }"
+    >
       <svg class="icon">
         <use xlink:href="../../assets/icons/icon-sprite.svg#icon-point-down"></use>
       </svg>
       Actions
     </a>
+    <!-- prettier-ignore -->
     <ul class="side-nav side-nav--sub">
-      <li><a routerLink="showcase/action-sheet" [routerLinkActive]="'is-selected'" class="side-nav__item">Action
-          Sheet</a></li>
-      <li><a routerLink="showcase/fab-sheet" [routerLinkActive]="'is-selected'" class="side-nav__item">FAB
-          Sheet</a></li>
+      <li><a routerLink="showcase/action-sheet" [routerLinkActive]="'is-selected'" class="side-nav__item">Action Sheet</a></li>
+      <li><a routerLink="showcase/fab-sheet" [routerLinkActive]="'is-selected'" class="side-nav__item">FAB Sheet</a></li>
       <li><a routerLink="showcase/alert" [routerLinkActive]="'is-selected'" class="side-nav__item">Alert</a></li>
       <li><a routerLink="showcase/button" [routerLinkActive]="'is-selected'" class="side-nav__item">Button</a></li>
       <li><a routerLink="showcase/slide-button" [routerLinkActive]="'is-selected'" class="side-nav__item">Slide Button</a></li>
       <li><a routerLink="showcase/card" [routerLinkActive]="'is-selected'" class="side-nav__item">Card</a></li>
       <li><a routerLink="showcase/checkbox" [routerLinkActive]="'is-selected'" class="side-nav__item">Checkbox</a></li>
       <li><a routerLink="showcase/chip" [routerLinkActive]="'is-selected'" class="side-nav__item">Chip</a></li>
+      <li><a routerLink="showcase/divider" [routerLinkActive]="'is-selected'" class="side-nav__item">Divider</a></li>
       <li><a routerLink="showcase/empty-state" [routerLinkActive]="'is-selected'" class="side-nav__item">Empty State</a></li>
       <li><a routerLink="showcase/list" [routerLinkActive]="'is-selected'" class="side-nav__item">List</a></li>
       <li><a routerLink="showcase/list-load-on-demand" [routerLinkActive]="'is-selected'" class="side-nav__item">List - load on demand</a></li>
@@ -52,13 +63,14 @@
       <li><a routerLink="showcase/toggle" [routerLinkActive]="'is-selected'" class="side-nav__item">Toggle</a></li>
     </ul>
   </li>
-  <li routerLinkActive="is-selected" [routerLinkActiveOptions]="{exact: false}">
+  <li routerLinkActive="is-selected" [routerLinkActiveOptions]="{ exact: false }">
     <a class="side-nav__item side-nav-header">
       <svg class="icon">
         <use xlink:href="../../assets/icons/icon-sprite.svg#icon-insert-template"></use>
       </svg>
       Structure
     </a>
+    <!-- prettier-ignore -->
     <ul class="side-nav side-nav--sub">
       <li><a routerLink="showcase/page" [routerLinkActive]="'is-selected'" class="side-nav__item">Page</a></li>
       <li><a routerLink="showcase/grid" [routerLinkActive]="'is-selected'" class="side-nav__item">Grid</a></li>
@@ -67,13 +79,14 @@
       <li><a routerLink="showcase/tabs" [routerLinkActive]="'is-selected'" class="side-nav__item">Tabs</a></li>
     </ul>
   </li>
-  <li routerLinkActive="is-selected" [routerLinkActiveOptions]="{exact: false}">
+  <li routerLinkActive="is-selected" [routerLinkActiveOptions]="{ exact: false }">
     <a class="side-nav__item side-nav-header">
       <svg class="icon">
         <use xlink:href="../../assets/icons/icon-sprite.svg#icon-sleepy"></use>
       </svg>
       Other
     </a>
+    <!-- prettier-ignore -->
     <ul class="side-nav side-nav--sub">
       <li><a routerLink="showcase/avatar" [routerLinkActive]="'is-selected'" class="side-nav__item">Avatar</a></li>
       <li><a routerLink="showcase/badge" [routerLinkActive]="'is-selected'" class="side-nav__item">Badge</a></li>
@@ -85,13 +98,14 @@
       <li><a routerLink="showcase/form-field" [routerLinkActive]="'is-selected'" class="side-nav__item">Form Field</a></li>
     </ul>
   </li>
-  <li routerLinkActive="is-selected" [routerLinkActiveOptions]="{exact: false}">
+  <li routerLinkActive="is-selected" [routerLinkActiveOptions]="{ exact: false }">
     <a class="side-nav__item side-nav-header">
       <svg class="icon">
         <use xlink:href="../../assets/icons/icon-sprite.svg#icon-font-size"></use>
       </svg>
       Typography
     </a>
+    <!-- prettier-ignore -->
     <ul class="side-nav side-nav--sub">
       <li><a routerLink="showcase/fonts" [routerLinkActive]="'is-selected'" class="side-nav__item">Font sizes</a></li>
     </ul>

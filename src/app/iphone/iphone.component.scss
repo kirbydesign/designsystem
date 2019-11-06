@@ -21,7 +21,7 @@
 
 .docs-demo-device > figure {
   border-radius: 32px;
-  box-shadow: 0 0 0 14px #090a0d, 0 0 0 17px #9fa3a8, 0 0 34px 17px rgba(0,0,0,0.2);
+  box-shadow: 0 0 0 14px #090a0d, 0 0 0 17px #9fa3a8, 0 0 34px 17px rgba(0, 0, 0, 0.2);
   height: 0;
   margin: 0;
   max-width: 320px;
@@ -29,7 +29,9 @@
   overflow: hidden;
   padding-bottom: 680px;
   position: relative;
-  width: calc((100vh - var(--header-height) - var(--device-padding) * 2) / var(--device-aspect-ratio));
+  width: calc(
+    (100vh - var(--header-height) - var(--device-padding) * 2) / var(--device-aspect-ratio)
+  );
   z-index: 1;
 }
 
@@ -107,10 +109,10 @@
 }
 
 .docs-demo-device.ios figure:after {
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.5);
   border-radius: 2px;
   bottom: 6px;
-  content: "";
+  content: '';
   display: none;
   height: 4px;
   left: 50%;
@@ -124,7 +126,6 @@
 .docs-demo-device.ios figure:after {
   display: block;
 }
-
 
 .docs-demo-device.md figure {
   border-radius: 20px;

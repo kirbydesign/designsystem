@@ -1,0 +1,10 @@
+@import '../../scss/utils';
+
+:host-context(.kirby-color-brightness-light) {
+  --kirby-divider-color: #{get-color('medium')};
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--kirby-divider-color, get-color('background-color'));
+}

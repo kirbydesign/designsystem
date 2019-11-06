@@ -1,10 +1,12 @@
 <div class="example">
-    <kirby-action-sheet-example></kirby-action-sheet-example>
-    <kirby-code-viewer [html]="exampleHtml"></kirby-code-viewer>
-    <p>
-        To show the action sheet, create an <code>ActionSheetConfig</code> and pass it to <code>modalController.showActionSheet</code>.
-        Each item must to be of type <code>ActionSheetItem</code>.
-        <kirby-code-viewer language="ts">const config: ActionSheetConfig={{ '{' }}
+  <kirby-action-sheet-example></kirby-action-sheet-example>
+  <kirby-code-viewer [html]="exampleHtml"></kirby-code-viewer>
+  <p>
+    To show the action sheet, create an <code>ActionSheetConfig</code> and pass it to
+    <code>modalController.showActionSheet</code>. Each item must to be of type
+    <code>ActionSheetItem</code>.
+    <!-- prettier-ignore -->
+    <kirby-code-viewer language="ts">const config: ActionSheetConfig={{ '{' }}
     header: 'Your action sheet header',
     subheader: 'Your action sheet sub-header',
     items: [
@@ -15,13 +17,17 @@
     cancelButtonText: 'Custom cancel',
 {{ '}' }};
 this.modalController.showActionSheet(config);</kirby-code-viewer>
-        (Optional) if you need to obtain data back from the action sheet, you can pass a callback function:
-        <kirby-code-viewer language="ts">this.modalController.showActionSheet(config, onItemSelect);</kirby-code-viewer>
-        where <code>onItemSelect</code> can be e.g.:
-        <kirby-code-viewer language="ts">onItemSelect(item: ActionSheetItem) {{ '{' }}...{{ '}' }}</kirby-code-viewer>
-        We can use <code>modalController.hideTopmost</code> to hide (and destroy its component) the topmost action sheet.
-        We can pass an optional result parameter to it, which is then going to be available inside the callback
-    </p>
-    <h4>Action sheet properties:</h4>
-    <kirby-showcase-properties [properties]="properties"></kirby-showcase-properties>
+    (Optional) if you need to obtain data back from the action sheet, you can pass a callback
+    function:
+    <!-- prettier-ignore -->
+    <kirby-code-viewer language="ts">this.modalController.showActionSheet(config, onItemSelect);</kirby-code-viewer>
+    where <code>onItemSelect</code> can be e.g.:
+    <!-- prettier-ignore -->
+    <kirby-code-viewer language="ts">onItemSelect(item: ActionSheetItem) {{ '{' }}...{{ '}' }}</kirby-code-viewer>
+    We can use <code>modalController.hideTopmost</code> to hide (and destroy its component) the
+    topmost action sheet. We can pass an optional result parameter to it, which is then going to be
+    available inside the callback
+  </p>
+  <h4>Action sheet properties:</h4>
+  <kirby-showcase-properties [properties]="properties"></kirby-showcase-properties>
 </div>

@@ -27,14 +27,14 @@ const config = {
   
   <!-- Fixed Page Actions -->
   <kirby-page-actions *kirbyPageActions="{fixed: true}">
-    <button kirby-button (click)="onMoreSelect()">
+    <button *ngIf="true" kirby-button (click)="onMoreSelect()">
       <kirby-icon name="more"></kirby-icon>
     </button>
   </kirby-page-actions>
 
   <!-- Sticky Page Actions -->
   <kirby-page-actions *kirbyPageActions>
-    <button kirby-button (click)="onCogSelect()">
+    <button *ngIf="true" kirby-button (click)="onCogSelect()">
       <kirby-icon name="cog"></kirby-icon>
     </button>
   </kirby-page-actions>
@@ -61,7 +61,8 @@ const config = {
 export class PageAdvancedExampleComponent extends BasePageExampleComponent {
   static readonly template = config.template
     .replace(' defaultBackHref="/"', '')
-    .replace(' [innerHTML]="content">', '>...');
+    .replace(' [innerHTML]="content">', '>...')
+    .replace(' *ngIf="true"', '');
 
   items: ActionSheetItem[] = [
     { id: '1', text: 'Option 1' },
