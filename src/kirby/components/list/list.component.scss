@@ -264,7 +264,10 @@ ion-item-divider {
     overflow: hidden;
   }
 
-  ion-list ::ng-deep > kirby-item:last-child {
-    --item-border-color: transparent;
+  ion-list ::ng-deep > {
+    kirby-item:last-child,
+    kirby-item-sliding:last-child {
+      --item-border-color: transparent;
+    }
   }
 }
