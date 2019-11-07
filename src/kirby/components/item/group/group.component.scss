@@ -16,7 +16,7 @@
 
   .group-inner {
     ::ng-deep kirby-item-sliding:last-child {
-      --item-border-color: green;
+      --item-border-color: transparent;
     }
   }
 }

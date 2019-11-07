@@ -15,25 +15,55 @@
 
 <h2>List with kirby-items</h2>
 <kirby-list>
-  <kirby-item-sliding *ngFor="let item of items; let first = first">
-    <kirby-item-options side="start">
-      <kirby-item-option>Favorite</kirby-item-option>
-      <kirby-item-option themeColor="danger">Share</kirby-item-option>
-    </kirby-item-options>
+  <kirby-item-group>
+    <kirby-item-divider>
+      <h2>WHAT</h2>
+    </kirby-item-divider>
+    <kirby-item-sliding *ngFor="let item of items; let first = first">
+      <kirby-item-options side="start">
+        <kirby-item-option>Favorite</kirby-item-option>
+        <kirby-item-option themeColor="danger">Share</kirby-item-option>
+      </kirby-item-options>
 
-    <kirby-item [lines]="first ? 'inset' : 'full'">
-      <kirby-label>{{ item.title }}</kirby-label>
-      <kirby-label>
-        <kirby-value>{{ item.amount }}</kirby-value>
-        <h3 *ngIf="first">{{ item.amount }}</h3>
-      </kirby-label>
-    </kirby-item>
+      <kirby-item [lines]="first ? 'inset' : 'full'">
+        <kirby-label>{{ item.title }}</kirby-label>
+        <kirby-label>
+          <kirby-value>{{ item.amount }}</kirby-value>
+          <h3 *ngIf="first">{{ item.amount }}</h3>
+        </kirby-label>
+      </kirby-item>
 
-    <kirby-item-options side="end">
-      <kirby-item-option themeColor="warning">Favorite</kirby-item-option>
-      <kirby-item-option>Share</kirby-item-option>
-    </kirby-item-options>
-  </kirby-item-sliding>
+      <kirby-item-options side="end">
+        <kirby-item-option themeColor="warning">Favorite</kirby-item-option>
+        <kirby-item-option>Share</kirby-item-option>
+      </kirby-item-options>
+    </kirby-item-sliding>
+  </kirby-item-group>
+
+  <kirby-item-group>
+    <kirby-item-divider>
+      <h2>WHAT</h2>
+    </kirby-item-divider>
+    <kirby-item-sliding *ngFor="let item of items; let first = first">
+      <kirby-item-options side="start">
+        <kirby-item-option>Favorite</kirby-item-option>
+        <kirby-item-option themeColor="danger">Share</kirby-item-option>
+      </kirby-item-options>
+
+      <kirby-item [lines]="first ? 'inset' : 'full'">
+        <kirby-label>{{ item.title }}</kirby-label>
+        <kirby-label>
+          <kirby-value>{{ item.amount }}</kirby-value>
+          <h3 *ngIf="first">{{ item.amount }}</h3>
+        </kirby-label>
+      </kirby-item>
+
+      <kirby-item-options side="end">
+        <kirby-item-option themeColor="warning">Favorite</kirby-item-option>
+        <kirby-item-option>Share</kirby-item-option>
+      </kirby-item-options>
+    </kirby-item-sliding>
+  </kirby-item-group>
 </kirby-list>
 
 <hr />

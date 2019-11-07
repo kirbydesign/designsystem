@@ -28,6 +28,7 @@ import { GroupByPipe } from './pipes/group-by.pipe';
 import { ListSwipeAction } from './list-swipe-action';
 import { ThemeColor } from '@kirbydesign/designsystem/helpers/theme-color.type';
 import { ItemComponent } from '@kirbydesign/designsystem/components/item/item.component';
+import { ItemGroupComponent } from '@kirbydesign/designsystem/components/item/group/group.component';
 
 export type ListShape = 'square' | 'rounded' | 'none';
 
@@ -127,9 +128,12 @@ export class ListComponent implements OnInit, OnChanges, AfterContentInit {
   listFooterTemplate;
   @ContentChildren(ItemComponent, { read: ElementRef })
   itemRef;
+  @ContentChildren(ItemGroupComponent, { read: ElementRef })
+  itemGroupRef;
 
   @HostBinding('class.has-sections') isSectionsEnabled: boolean;
   @HostBinding('class.has-kirby-items') hasItems: boolean;
+  @HostBinding('class.has-kirby-item-groups') hasGroups: boolean;
   isSwipingDisabled: boolean = false;
   isSelectable: boolean;
   isLoading: boolean;
@@ -148,7 +152,8 @@ export class ListComponent implements OnInit, OnChanges, AfterContentInit {
   }
 
   ngAfterContentInit(): void {
-    this.hasItems = !!this.itemRef;
+    this.hasItems = this.itemRef.length > 0;
+    this.hasGroups = this.itemGroupRef.length > 0;
   }
 
   ngOnChanges(): void {

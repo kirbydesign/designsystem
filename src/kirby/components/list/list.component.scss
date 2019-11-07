@@ -271,3 +271,9 @@ ion-item-divider {
     }
   }
 }
+
+:host(.has-kirby-item-groups) {
+  ion-list {
+    box-shadow: none;
+  }
+}
