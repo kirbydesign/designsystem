@@ -18,7 +18,7 @@
   <kirby-item-sliding *ngFor="let item of items; let first = first">
     <kirby-item-options side="start">
       <kirby-item-option>Favorite</kirby-item-option>
-      <kirby-item-option>Share</kirby-item-option>
+      <kirby-item-option themeColor="danger">Share</kirby-item-option>
     </kirby-item-options>
 
     <kirby-item [lines]="first ? 'inset' : 'full'">
@@ -30,7 +30,7 @@
     </kirby-item>
 
     <kirby-item-options side="end">
-      <kirby-item-option>Favorite</kirby-item-option>
+      <kirby-item-option themeColor="warning">Favorite</kirby-item-option>
       <kirby-item-option>Share</kirby-item-option>
     </kirby-item-options>
   </kirby-item-sliding>
