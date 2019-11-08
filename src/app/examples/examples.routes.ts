@@ -36,6 +36,15 @@ import { PageAdvancedExampleComponent } from './page-example/advanced/page-advan
 import { ExamplesComponent } from './examples.component';
 import { TabsExampleComponent } from './tabs/tabs-example.component';
 import { TabExampleComponent } from './tabs/tab/tab-example.component';
+import { ListDefaultExampleComponent } from '~/app/examples/list/default/default';
+import { ListBoldTextOnRowSelectionExampleComponent } from '~/app/examples/list/bold-text-on-row-selection/bold-text-on-row-selection';
+import { ListWithDividersExampleComponent } from '~/app/examples/list/dividers/dividers';
+import { ListSelectableItemsExampleComponent } from '~/app/examples/list/selectable-items/selectable-items';
+import { ListWithSectionsAndColoredItemsExampleComponent } from '~/app/examples/list/sections-and-colored-items/sections-and-colored-items';
+import { ListColoredItemsExampleComponent } from '~/app/examples/list/colored-items/colored-items';
+import { ListWithHeaderAndFooterExampleComponent } from '~/app/examples/list/header-and-footer/header-and-footer';
+import { ListWithSectionsExampleComponent } from '~/app/examples/list/sections/sections';
+import { ListWithCustomContentExampleComponent } from '~/app/examples/list/custom-content/custom-content';
 
 export const routes: Routes = [
   {
@@ -129,6 +138,44 @@ export const routes: Routes = [
   {
     path: 'list',
     component: ListExampleComponent,
+    children: [
+      {
+        path: 'default',
+        component: ListDefaultExampleComponent,
+      },
+      {
+        path: 'bold-text-on-row-selection',
+        component: ListBoldTextOnRowSelectionExampleComponent,
+      },
+      {
+        path: 'with-dividers',
+        component: ListWithDividersExampleComponent,
+      },
+      {
+        path: 'with-selectable-items',
+        component: ListSelectableItemsExampleComponent,
+      },
+      {
+        path: 'with-colored-items',
+        component: ListColoredItemsExampleComponent,
+      },
+      {
+        path: 'with-sections-and-colored-items',
+        component: ListWithSectionsAndColoredItemsExampleComponent,
+      },
+      {
+        path: 'with-header-and-footer',
+        component: ListWithHeaderAndFooterExampleComponent,
+      },
+      {
+        path: 'with-sections',
+        component: ListWithSectionsExampleComponent,
+      },
+      {
+        path: 'with-custom-content',
+        component: ListWithCustomContentExampleComponent,
+      },
+    ],
   },
   {
     path: 'list-swipe',

@@ -1,179 +1,180 @@
-<!-- 
-  kirby-list-cell supports the attributes:
-  - width: 
-  A relative number. A width of 1.5, will be 1.5 times the width of the default width.
-  Default is 1.
-  - horisontalAlignment: 
-  Supported values are 'left', 'center', 'right', 'space-between', 'space-around'.
-  Default is 'left' 
-  - verticalAlignment: 
-  Supported values are 'top', 'center', 'bottom', 'stretch', 'baseline'.
-  Default is 'center' 
-  - showDivider:
-  True or false. Default is false
--->
+<kirby-router-outlet></kirby-router-outlet>
+<!--&lt;!&ndash; -->
+<!--  kirby-list-cell supports the attributes:-->
+<!--  - width: -->
+<!--  A relative number. A width of 1.5, will be 1.5 times the width of the default width.-->
+<!--  Default is 1.-->
+<!--  - horisontalAlignment: -->
+<!--  Supported values are 'left', 'center', 'right', 'space-between', 'space-around'.-->
+<!--  Default is 'left' -->
+<!--  - verticalAlignment: -->
+<!--  Supported values are 'top', 'center', 'bottom', 'stretch', 'baseline'.-->
+<!--  Default is 'center' -->
+<!--  - showDivider:-->
+<!--  True or false. Default is false-->
+<!--&ndash;&gt;-->
 
-<h2>Default list:</h2>
-<kirby-list [items]="items">
-  <kirby-list-item *kirbyListItem="let item" [title]="item.title" [amount]="item.amount">
-  </kirby-list-item>
-</kirby-list>
+<!--<h2>Default list:</h2>-->
+<!--<kirby-list [items]="items">-->
+<!--  <kirby-list-item *kirbyListItem="let item" [title]="item.title" [amount]="item.amount">-->
+<!--  </kirby-list-item>-->
+<!--</kirby-list>-->
 
-<hr />
+<!--<hr />-->
 
-<h2>List with bold text on row selection</h2>
-<kirby-list [items]="items" [markSelectedRow]="true">
-  <kirby-list-item
-    *kirbyListItem="let item"
-    [title]="item.title"
-    [amount]="item.amount"
-  ></kirby-list-item>
-</kirby-list>
+<!--<h2>List with bold text on row selection</h2>-->
+<!--<kirby-list [items]="items" [markSelectedRow]="true">-->
+<!--  <kirby-list-item-->
+<!--    *kirbyListItem="let item"-->
+<!--    [title]="item.title"-->
+<!--    [amount]="item.amount"-->
+<!--  ></kirby-list-item>-->
+<!--</kirby-list>-->
 
-<hr />
+<!--<hr />-->
 
-<h2>List with dividers:</h2>
-<kirby-list [items]="items" showDivider="true">
-  <kirby-list-item
-    *kirbyListItem="let item"
-    [title]="item.title"
-    [amount]="item.amount"
-  ></kirby-list-item>
-</kirby-list>
+<!--<h2>List with dividers:</h2>-->
+<!--<kirby-list [items]="items" showDivider="true">-->
+<!--  <kirby-list-item-->
+<!--    *kirbyListItem="let item"-->
+<!--    [title]="item.title"-->
+<!--    [amount]="item.amount"-->
+<!--  ></kirby-list-item>-->
+<!--</kirby-list>-->
 
-<hr />
+<!--<hr />-->
 
-<h2>List with selectable items:</h2>
-<kirby-list [items]="items" (itemSelect)="onItemSelect($event)" showDivider="true">
-  <kirby-list-item
-    *kirbyListItem="let item"
-    [title]="item.title"
-    [amount]="item.amount"
-  ></kirby-list-item>
-</kirby-list>
+<!--<h2>List with selectable items:</h2>-->
+<!--<kirby-list [items]="items" (itemSelect)="onItemSelect($event)" showDivider="true">-->
+<!--  <kirby-list-item-->
+<!--    *kirbyListItem="let item"-->
+<!--    [title]="item.title"-->
+<!--    [amount]="item.amount"-->
+<!--  ></kirby-list-item>-->
+<!--</kirby-list>-->
 
-<hr />
+<!--<hr />-->
 
-<h2>List with colored items:</h2>
-<kirby-list
-  [items]="items"
-  [getItemColor]="getItemColor"
-  (itemSelect)="onItemSelect($event)"
-  showDivider="true"
->
-  <kirby-list-item
-    *kirbyListItem="let item"
-    [item]="item"
-    [title]="item.title"
-    [amount]="item.amount"
-  ></kirby-list-item>
-</kirby-list>
+<!--<h2>List with colored items:</h2>-->
+<!--<kirby-list-->
+<!--  [items]="items"-->
+<!--  [getItemColor]="getItemColor"-->
+<!--  (itemSelect)="onItemSelect($event)"-->
+<!--  showDivider="true"-->
+<!--&gt;-->
+<!--  <kirby-list-item-->
+<!--    *kirbyListItem="let item"-->
+<!--    [item]="item"-->
+<!--    [title]="item.title"-->
+<!--    [amount]="item.amount"-->
+<!--  ></kirby-list-item>-->
+<!--</kirby-list>-->
 
-<hr />
+<!--<hr />-->
 
-<h2>List with sections and colored items:</h2>
-<kirby-list
-  [items]="items"
-  (itemSelect)="onItemSelect($event)"
-  [getSectionName]="getSectionName"
-  [getItemColor]="getItemColor"
-  [showDivider]="true"
->
-  <kirby-list-section-header
-    *kirbyListSectionHeader="let section"
-    [title]="section"
-  ></kirby-list-section-header>
-  <kirby-list-flex-item *kirbyListFlexItem="let item">
-    <kirby-list-cell>
-      <kirby-list-cell-line [primary]="true" [text]="item.title"></kirby-list-cell-line>
-      <kirby-list-cell-line [text]="item.detail"></kirby-list-cell-line>
-    </kirby-list-cell>
-    <kirby-list-cell verticalAlignment="top" horisontalAlignment="right">
-      <kirby-list-cell-line [primary]="true" [text]="item.amount"></kirby-list-cell-line>
-    </kirby-list-cell>
-  </kirby-list-flex-item>
-</kirby-list>
+<!--<h2>List with sections and colored items:</h2>-->
+<!--<kirby-list-->
+<!--  [items]="items"-->
+<!--  (itemSelect)="onItemSelect($event)"-->
+<!--  [getSectionName]="getSectionName"-->
+<!--  [getItemColor]="getItemColor"-->
+<!--  [showDivider]="true"-->
+<!--&gt;-->
+<!--  <kirby-list-section-header-->
+<!--    *kirbyListSectionHeader="let section"-->
+<!--    [title]="section"-->
+<!--  ></kirby-list-section-header>-->
+<!--  <kirby-list-flex-item *kirbyListFlexItem="let item">-->
+<!--    <kirby-list-cell>-->
+<!--      <kirby-list-cell-line [primary]="true" [text]="item.title"></kirby-list-cell-line>-->
+<!--      <kirby-list-cell-line [text]="item.detail"></kirby-list-cell-line>-->
+<!--    </kirby-list-cell>-->
+<!--    <kirby-list-cell verticalAlignment="top" horisontalAlignment="right">-->
+<!--      <kirby-list-cell-line [primary]="true" [text]="item.amount"></kirby-list-cell-line>-->
+<!--    </kirby-list-cell>-->
+<!--  </kirby-list-flex-item>-->
+<!--</kirby-list>-->
 
-<hr />
+<!--<hr />-->
 
-<h2>List with header and footer:</h2>
-<kirby-list [items]="items" (itemSelect)="onItemSelect($event)">
-  <!-- HEADER-->
-  <kirby-list-header *kirbyListHeader>
-    <kirby-list-flex-item>
-      <kirby-list-cell>Name</kirby-list-cell>
-      <!-- Headers doesn't have to be kirby-list-cell components. -->
-      <div style="width: 150px; text-align: right">Amount</div>
-      <kirby-list-cell horisontalAlignment="right">Value</kirby-list-cell>
-    </kirby-list-flex-item>
-  </kirby-list-header>
+<!--<h2>List with header and footer:</h2>-->
+<!--<kirby-list [items]="items" (itemSelect)="onItemSelect($event)">-->
+<!--  &lt;!&ndash; HEADER&ndash;&gt;-->
+<!--  <kirby-list-header *kirbyListHeader>-->
+<!--    <kirby-list-flex-item>-->
+<!--      <kirby-list-cell>Name</kirby-list-cell>-->
+<!--      &lt;!&ndash; Headers doesn't have to be kirby-list-cell components. &ndash;&gt;-->
+<!--      <div style="width: 150px; text-align: right">Amount</div>-->
+<!--      <kirby-list-cell horisontalAlignment="right">Value</kirby-list-cell>-->
+<!--    </kirby-list-flex-item>-->
+<!--  </kirby-list-header>-->
 
-  <!-- BODY -->
-  <kirby-list-flex-item *kirbyListFlexItem="let item">
-    <kirby-list-cell>
-      <kirby-list-cell-line [primary]="true" [text]="item.title"></kirby-list-cell-line>
-      <kirby-list-cell-line [text]="item.detail"></kirby-list-cell-line>
-    </kirby-list-cell>
-    <!-- you can make custom cells using the kirbyListCell directive -->
-    <div style="width: 150px; text-align: right">{{ item.subTitle }}</div>
-    <kirby-list-cell verticalAlignment="top" horisontalAlignment="right">
-      <kirby-list-cell-line [primary]="true" [text]="item.amount"></kirby-list-cell-line>
-    </kirby-list-cell>
-  </kirby-list-flex-item>
+<!--  &lt;!&ndash; BODY &ndash;&gt;-->
+<!--  <kirby-list-flex-item *kirbyListFlexItem="let item">-->
+<!--    <kirby-list-cell>-->
+<!--      <kirby-list-cell-line [primary]="true" [text]="item.title"></kirby-list-cell-line>-->
+<!--      <kirby-list-cell-line [text]="item.detail"></kirby-list-cell-line>-->
+<!--    </kirby-list-cell>-->
+<!--    &lt;!&ndash; you can make custom cells using the kirbyListCell directive &ndash;&gt;-->
+<!--    <div style="width: 150px; text-align: right">{{ item.subTitle }}</div>-->
+<!--    <kirby-list-cell verticalAlignment="top" horisontalAlignment="right">-->
+<!--      <kirby-list-cell-line [primary]="true" [text]="item.amount"></kirby-list-cell-line>-->
+<!--    </kirby-list-cell>-->
+<!--  </kirby-list-flex-item>-->
 
-  <!-- Footer -->
-  <ng-container *kirbyListFooter>
-    <div class="footer">
-      <h2>An appropriate footer</h2>
-      <button kirby-button>Click me!</button>
-    </div>
-  </ng-container>
-</kirby-list>
+<!--  &lt;!&ndash; Footer &ndash;&gt;-->
+<!--  <ng-container *kirbyListFooter>-->
+<!--    <div class="footer">-->
+<!--      <h2>An appropriate footer</h2>-->
+<!--      <button kirby-button>Click me!</button>-->
+<!--    </div>-->
+<!--  </ng-container>-->
+<!--</kirby-list>-->
 
-<hr />
+<!--<hr />-->
 
-<h2>List with sections:</h2>
-<kirby-list
-  [items]="items"
-  (itemSelect)="onItemSelect($event)"
-  [getSectionName]="getSectionName"
-  [showDivider]="true"
->
-  <kirby-list-section-header
-    *kirbyListSectionHeader="let section"
-    [title]="section"
-  ></kirby-list-section-header>
-  <kirby-list-flex-item *kirbyListFlexItem="let item">
-    <kirby-list-cell>
-      <kirby-list-cell-line [primary]="true" [text]="item.title"></kirby-list-cell-line>
-      <kirby-list-cell-line [text]="item.detail"></kirby-list-cell-line>
-    </kirby-list-cell>
-    <kirby-list-cell verticalAlignment="top" horisontalAlignment="right">
-      <kirby-list-cell-line [primary]="true" [text]="item.amount"></kirby-list-cell-line>
-    </kirby-list-cell>
-  </kirby-list-flex-item>
-</kirby-list>
+<!--<h2>List with sections:</h2>-->
+<!--<kirby-list-->
+<!--  [items]="items"-->
+<!--  (itemSelect)="onItemSelect($event)"-->
+<!--  [getSectionName]="getSectionName"-->
+<!--  [showDivider]="true"-->
+<!--&gt;-->
+<!--  <kirby-list-section-header-->
+<!--    *kirbyListSectionHeader="let section"-->
+<!--    [title]="section"-->
+<!--  ></kirby-list-section-header>-->
+<!--  <kirby-list-flex-item *kirbyListFlexItem="let item">-->
+<!--    <kirby-list-cell>-->
+<!--      <kirby-list-cell-line [primary]="true" [text]="item.title"></kirby-list-cell-line>-->
+<!--      <kirby-list-cell-line [text]="item.detail"></kirby-list-cell-line>-->
+<!--    </kirby-list-cell>-->
+<!--    <kirby-list-cell verticalAlignment="top" horisontalAlignment="right">-->
+<!--      <kirby-list-cell-line [primary]="true" [text]="item.amount"></kirby-list-cell-line>-->
+<!--    </kirby-list-cell>-->
+<!--  </kirby-list-flex-item>-->
+<!--</kirby-list>-->
 
-<hr />
+<!--<hr />-->
 
-<h2>List with custom content:</h2>
-<kirby-list [items]="items" (itemSelect)="onItemSelect($event)">
-  <!-- Cells can also take arbitrary markup (client specific) as cell-lines -->
-  <kirby-list-flex-item *kirbyListFlexItem="let item">
-    <kirby-list-cell>
-      <section style="flex-direction: row; display: flex; padding-top: 10px;">
-        <kirby-avatar [imageSrc]="imageSrc" [size]="'small'">
-          <kirby-badge themeColor="danger">1</kirby-badge>
-        </kirby-avatar>
-        <div style="margin-left: 10px; flex-direction: column; display: flex;">
-          <kirby-list-cell-line [primary]="true" [text]="item.title"></kirby-list-cell-line>
-          <kirby-list-cell-line [text]="item.detail"></kirby-list-cell-line>
-        </div>
-      </section>
-    </kirby-list-cell>
+<!--<h2>List with custom content:</h2>-->
+<!--<kirby-list [items]="items" (itemSelect)="onItemSelect($event)">-->
+<!--  &lt;!&ndash; Cells can also take arbitrary markup (client specific) as cell-lines &ndash;&gt;-->
+<!--  <kirby-list-flex-item *kirbyListFlexItem="let item">-->
+<!--    <kirby-list-cell>-->
+<!--      <section style="flex-direction: row; display: flex; padding-top: 10px;">-->
+<!--        <kirby-avatar [imageSrc]="imageSrc" [size]="'small'">-->
+<!--          <kirby-badge themeColor="danger">1</kirby-badge>-->
+<!--        </kirby-avatar>-->
+<!--        <div style="margin-left: 10px; flex-direction: column; display: flex;">-->
+<!--          <kirby-list-cell-line [primary]="true" [text]="item.title"></kirby-list-cell-line>-->
+<!--          <kirby-list-cell-line [text]="item.detail"></kirby-list-cell-line>-->
+<!--        </div>-->
+<!--      </section>-->
+<!--    </kirby-list-cell>-->
 
-    <kirby-list-cell verticalAlignment="top" horisontalAlignment="right">
-      <kirby-list-cell-line [primary]="true" [text]="item.amount"></kirby-list-cell-line>
-    </kirby-list-cell>
-  </kirby-list-flex-item>
-</kirby-list>
+<!--    <kirby-list-cell verticalAlignment="top" horisontalAlignment="right">-->
+<!--      <kirby-list-cell-line [primary]="true" [text]="item.amount"></kirby-list-cell-line>-->
+<!--    </kirby-list-cell>-->
+<!--  </kirby-list-flex-item>-->
+<!--</kirby-list>-->

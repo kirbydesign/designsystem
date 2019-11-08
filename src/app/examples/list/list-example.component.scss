@@ -3,6 +3,9 @@
 :host {
   padding: 2px;
   width: 100%;
+  background: get-color('background-color');
+  height: 100%;
+  display: block;
 }
 
 hr {

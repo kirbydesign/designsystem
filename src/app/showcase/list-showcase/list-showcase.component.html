@@ -1,7 +1,117 @@
 <div class="example">
-  <kirby-list-example></kirby-list-example>
-  <kirby-code-viewer [html]="exampleHtml"></kirby-code-viewer>
-  <br />
-  <br />
-  <kirby-code-viewer [html]="sectionHeaderExampleHtml"></kirby-code-viewer>
+  <p>
+    Lists are made up of multiple rows of items which can contain text, buttons, toggles, icons,
+    thumbnails, and much more. Lists generally contain items with similar data content, such as
+    images and text.
+  </p>
+  <p>
+    Lists support several interactions including swiping items to reveal options, dragging to
+    reorder items within the list, and deleting items.
+  </p>
+
+  <div class="page-example">
+    <div>
+      <h2>Default list</h2>
+      <kirby-code-viewer [html]="defaultTemplate"></kirby-code-viewer>
+    </div>
+
+    <kirby-iphone src="/examples/list/default" showExternalLink="true"></kirby-iphone>
+  </div>
+</div>
+
+<div class="page-example">
+  <div>
+    <h2>List with bold text on row selection</h2>
+    <kirby-code-viewer [html]="boldTextOnRowSelectionExampleTemplate"></kirby-code-viewer>
+  </div>
+
+  <div>
+    <kirby-iphone
+      src="/examples/list/bold-text-on-row-selection"
+      showExternalLink="true"
+    ></kirby-iphone>
+  </div>
+</div>
+
+<div class="page-example">
+  <div>
+    <h2>List with dividers:</h2>
+    <kirby-code-viewer [html]="dividersExampleTemplate"></kirby-code-viewer>
+  </div>
+
+  <div>
+    <kirby-iphone src="/examples/list/with-dividers" showExternalLink="true"></kirby-iphone>
+  </div>
+</div>
+
+<div class="page-example">
+  <div>
+    <h2>List with selectable items:</h2>
+    <kirby-code-viewer [html]="selectableItemsExampleTemplate"></kirby-code-viewer>
+  </div>
+
+  <div>
+    <kirby-iphone src="/examples/list/with-selectable-items" showExternalLink="true"></kirby-iphone>
+  </div>
+</div>
+
+<div class="page-example">
+  <div>
+    <h2>List with colored items:</h2>
+    <kirby-code-viewer [html]="coloredItemsExampleTemplate"></kirby-code-viewer>
+  </div>
+
+  <div>
+    <kirby-iphone src="/examples/list/with-colored-items" showExternalLink="true"></kirby-iphone>
+  </div>
+</div>
+
+<div class="page-example">
+  <div>
+    <h2>List with sections and colored items:</h2>
+    <kirby-code-viewer [html]="sectionsAndColoredItemsExampleTemplate"></kirby-code-viewer>
+  </div>
+
+  <div>
+    <kirby-iphone
+      src="/examples/list/with-sections-and-colored-items"
+      showExternalLink="true"
+    ></kirby-iphone>
+  </div>
+</div>
+
+<div class="page-example">
+  <div>
+    <h2>List with header and footer:</h2>
+    <kirby-code-viewer [html]="headerAndFooterExampleTemplate"></kirby-code-viewer>
+  </div>
+
+  <div>
+    <kirby-iphone
+      src="/examples/list/with-header-and-footer"
+      showExternalLink="true"
+    ></kirby-iphone>
+  </div>
+</div>
+
+<div class="page-example">
+  <div>
+    <h2>List with sections:</h2>
+    <kirby-code-viewer [html]="sectionsExampleTemplate"></kirby-code-viewer>
+  </div>
+
+  <div>
+    <kirby-iphone src="/examples/list/with-sections" showExternalLink="true"></kirby-iphone>
+  </div>
+</div>
+
+<div class="page-example">
+  <div>
+    <h2>List with custom content:</h2>
+    <kirby-code-viewer [html]="customContentExampleTemplate"></kirby-code-viewer>
+  </div>
+
+  <div>
+    <kirby-iphone src="/examples/list/with-custom-content" showExternalLink="true"></kirby-iphone>
+  </div>
 </div>
