@@ -34,4 +34,8 @@ export const ListWithCustomContentExampleTemplate = `<kirby-list [items]="items"
     </kirby-page>
   `,
 })
-export class ListWithCustomContentExampleComponent extends BaseListComponent {}
+export class ListWithCustomContentExampleComponent extends BaseListComponent {
+  imageSrc =
+    'https://www.jyskebank.dk/portletcontext-employeesuggest/EmployeePictureServlet' +
+    '?large=true&employeeId=40501db73fd6677b9671ebb934f3f2e0';
+}

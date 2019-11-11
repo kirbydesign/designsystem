@@ -34,4 +34,8 @@ export const ListWithSectionsExampleTemplate = `<kirby-list
     </kirby-page>
   `,
 })
-export class ListWithSectionsExampleComponent extends BaseListComponent {}
+export class ListWithSectionsExampleComponent extends BaseListComponent {
+  getSectionName(item: any): string {
+    return item.detail > 0 ? 'Positive' : 'Negative';
+  }
+}
