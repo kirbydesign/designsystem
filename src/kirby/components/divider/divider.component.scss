@@ -1,10 +1,18 @@
 @import '../../scss/utils';
 
+:host-context(kirby-card) {
+  --kirby-divider-color: #{get-color('background-color')};
+}
+
+:host-context(.kirby-color-brightness-white) {
+  --kirby-divider-color: #{get-color('background-color')};
+}
+
 :host-context(.kirby-color-brightness-light) {
   --kirby-divider-color: #{get-color('medium')};
 }
 
 hr {
   border: 0;
-  border-top: 1px solid var(--kirby-divider-color, get-color('background-color'));
+  border-top: 1px solid var(--kirby-divider-color, get-color('medium'));
 }
