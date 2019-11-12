@@ -156,3 +156,7 @@
     min-width: unset;
   }
 }
+
+:host-context(kirby-item)[slot="end"] {
+  margin-inline-start: size('s');
+}
