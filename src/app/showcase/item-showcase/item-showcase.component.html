@@ -1,11 +1,11 @@
-<p>The item component consists of three possible columns: the default, which spans the entire item, and optionally the 'start' and 'end' columns (aka 'slots').</p>
-<p>The <em>start column</em> is usually only used with avatars, icons and such. Placement happens automatically when used with <code>slot="start"</code>.
-If no content is placed into the 'start' slot, the first column will not be shown.</p>
+<p>The <code>kirby-item</code> component consists of three possible columns: <em>the default</em>, which spans the entire item, and optionally the <code>'start'</code> and <code>'end'</code> columns (aka <code>'slots'</code>).</p>
 <p>The <em>default column</em> is usually contained within a <code>kirby-label</code>.<br/>
-By default <code>kirby-label</code> stacks content vertically (multi lines), but can optinally be configued to stack horizontally:<br/>
+By default the <code>kirby-label</code> stacks content vertically (multi lines), but can optinally be configued to stack horizontally:<br/>
 <code>&lt;kirby-label direction="horizontal"&gt;...&lt;/kirby-label&gt;</code></p>
-<p>The <em>end column</em> content need not be contained in a kirby-label unless multiple lines is needed. Placement happens automatically when used with <code>slot="end"</code></p>
-<p>Values can optionally be contained in a <code>time</code> or <code>data</code> tag.</p>
+<p class="comment"><strong>Please note</strong>, if you need a label to span a title and a value, you can wrap the title and value in another <code>kirby-label</code> as in <a href="#" (click)="scrollTo(message);">this example</a></p>
+<p>The <em>start column</em> is usually only used with avatars, icons and such. To place content in the start column specify the <code>slot="start"</code> attribute on your content. If no content is placed into the 'start' slot, the first column will not be shown.</p>
+<p>The <em>end column</em> content need not be contained in a <code>kirby-label</code> unless multiple lines is needed. To place content in the end column specify the <code>slot="end"</code> attribute on your content.</p>
+<p>Values can optionally be contained in a <code>time</code> or <code>data</code> tag as in <a href="#" (click)="scrollTo(avatarWithDate);">this example</a>.</p>
 
 <h2>Simple</h2>
 <h3>Default</h3>
@@ -58,6 +58,7 @@ By default <code>kirby-label</code> stacks content vertically (multi lines), but
 <kirby-example-viewer [html]="settingsDisabledExample.template">
   <kirby-item-example-settings-disabled #settingsDisabledExample></kirby-item-example-settings-disabled>
 </kirby-example-viewer>
+<p class="comment small"><em><strong>Please note</strong>, setting the <code>disabled</code> attribute on <code>kirby-item</code> will disable the entire item including buttons, toggles etc.</em></p>
 
 <h2>Flagged</h2>
 <kirby-example-viewer [html]="flaggedExample.template">
@@ -69,7 +70,7 @@ By default <code>kirby-label</code> stacks content vertically (multi lines), but
 <kirby-example-viewer [html]="avatarDefaultExample.template">
   <kirby-item-example-avatar #avatarDefaultExample></kirby-item-example-avatar>
 </kirby-example-viewer>
-<h3>Avatar with date</h3>
+<h3 #avatarWithDate>Avatar with date</h3>
 <kirby-example-viewer [html]="avatarDateExample.template">
   <kirby-item-example-avatar-date #avatarDateExample></kirby-item-example-avatar-date>
 </kirby-example-viewer>
@@ -82,7 +83,7 @@ By default <code>kirby-label</code> stacks content vertically (multi lines), but
   <kirby-item-example-avatar-flagged-three-lines #avatarFlaggedThreeLinesExample></kirby-item-example-avatar-flagged-three-lines>
 </kirby-example-viewer>
 
-<h2>Message</h2>
+<h2 #message>Message</h2>
 <kirby-example-viewer [html]="messagesExample.template">
   <kirby-item-example-horizontal #messagesExample></kirby-item-example-horizontal>
 </kirby-example-viewer>
@@ -91,83 +92,3 @@ By default <code>kirby-label</code> stacks content vertically (multi lines), but
 <kirby-example-viewer [html]="buttonExample.template">
   <kirby-item-example-button #buttonExample></kirby-item-example-button>
 </kirby-example-viewer>
-
-
-<!-- <h3>Default</h3>
-<p><em><strong>Please note</strong>, the flags outside left boundary is yet to come</em></p>
-<kirby-example-viewer [html]="defaultExample.template">
-  <kirby-item-example-flagged #defaultExample></kirby-item-example-flagged>
-</kirby-example-viewer>
-<hr />
-<h3>Two Columns Single Line</h3>
-<kirby-example-viewer [html]="twoColSingleLineExample.template">
-  <kirby-item-ex2 #twoColSingleLineExample></kirby-item-ex2>
-</kirby-example-viewer>
-<hr />
-<h3>Two Columns Two Lines</h3>
-<kirby-example-viewer [html]="twoColTwoRowsExample.template">
-  <kirby-item-example-picker-default #twoColTwoRowsExample></kirby-item-example-picker-default>
-</kirby-example-viewer>
-<hr />
-<h3>Two Columns Single Line With Toggle</h3>
-<kirby-example-viewer [html]="twoColSingleLineExampleWithToggle.template">
-  <kirby-item-example-settings #twoColSingleLineExampleWithToggle></kirby-item-example-settings>
-</kirby-example-viewer>
-<hr />
-<h3>Two Columns Single Line With Toggle - Disabled</h3>
-<p><em><strong>Please note</strong>, 'disabled' added to kirby-item will disable the whole item including buttons, toggles etc</em></p>
-<kirby-example-viewer [html]="twoColSingleLineExampleWithToggleDisabled.template">
-  <kirby-item-ex3-disabled #twoColSingleLineExampleWithToggleDisabled></kirby-item-ex3-disabled>
-</kirby-example-viewer>
-<hr />
-<h3>Two Columns With Button</h3>
-<kirby-example-viewer [html]="twoColWithButtonExample.template">
-  <kirby-item-example-button #twoColWithButtonExample></kirby-item-example-button>
-</kirby-example-viewer>
-<hr />
-<h3>Two Columns With Avatar</h3>
-<kirby-example-viewer [html]="twoColWithAvatarExample.template">
-  <kirby-item-ex6 #twoColWithAvatarExample></kirby-item-ex6>
-</kirby-example-viewer>
-<hr />
-<h3>Three Columns With Avatar</h3>
-<kirby-example-viewer [html]="threeColWithAvatarExample.template">
-  <kirby-item-ex7 #threeColWithAvatarExample></kirby-item-ex7>
-</kirby-example-viewer>
-<hr />
-<h3>Three Columns With Avatar and Subtitle</h3>
-<p><em><strong>Please note</strong>, content within the time-tag will always be formatted as seen, no matter where placed</em></p>
-<kirby-example-viewer [html]="threeColWithAvatarAndSubtitleExample.template">
-  <kirby-item-ex8 #threeColWithAvatarAndSubtitleExample></kirby-item-ex8>
-</kirby-example-viewer>
-<hr />
-<h3>Two Columns With Avatar, Subtitle and Details</h3>
-<kirby-example-viewer [html]="twoColWithAvatarSubtitleAndDetailsExample.template">
-  <kirby-item-ex9 #twoColWithAvatarSubtitleAndDetailsExample></kirby-item-ex9>
-</kirby-example-viewer>
-<hr />
-<h3>Three Columns With Avatar, Subtitle and Details</h3>
-<kirby-example-viewer [html]="twoColWithAvatarSubtitleAndDetailsExample.template">
-  <kirby-item-ex10 #twoColWithAvatarSubtitleAndDetailsExample></kirby-item-ex10>
-</kirby-example-viewer>
-<hr />
-<h3>Three Columns With Avatar and Button</h3>
-<kirby-example-viewer [html]="threeColWithAvatarAndButton.template">
-  <kirby-item-ex11 #threeColWithAvatarAndButton></kirby-item-ex11>
-</kirby-example-viewer>
-<hr />
-<h3>Three Columns Selected</h3>
-<kirby-example-viewer [html]="threeColSelected.template">
-  <kirby-item-example-picker-default-selected #threeColSelected></kirby-item-example-picker-default-selected>
-</kirby-example-viewer>
-<hr />
-<h3>Three Columns With Avatar and Checkmark</h3>
-<kirby-example-viewer [html]="threeColWithAvatarAndCheckmark.template">
-  <kirby-item-ex13 #threeColWithAvatarAndCheckmark></kirby-item-ex13>
-</kirby-example-viewer>
-<hr />
-<h3>Three Columns With Note</h3>
-<p><em><strong>Please note</strong>, this is a special case - 2nd row will span column #2 and #3 if extended is added to the kirby-label</em></p>
-<kirby-example-viewer [html]="threeColWithNote.template">
-  <kirby-item-ex14 #threeColWithNote></kirby-item-ex14>
-</kirby-example-viewer> -->

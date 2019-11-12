@@ -13,7 +13,7 @@ const config = {
       <h3>Lorem ipsum quam notem andamus gepulowitzh onga bonga bimmelon sid est insula</h3>
       <time>20.12.2017</time>
     </kirby-label>
-    <p>Die Marvin, your papers have arrived and you should be able to sign these within 1 week from today.</p>
+    <p>Die Marvin, your papers have arrived and you should be able to sign these within 1 week from today if you follow the instructions below.</p>
   </kirby-label>
 </kirby-item>`,
 };

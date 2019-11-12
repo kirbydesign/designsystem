@@ -14,3 +14,13 @@
     margin-bottom: size("xxxs");
   }
 }
+
+.comment {
+  font-style: italic;
+  color: get-color('semi-dark');
+
+  &.small {
+    font-size: smaller;
+  }
+}
+
