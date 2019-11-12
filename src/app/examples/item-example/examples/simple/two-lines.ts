@@ -1,25 +1,22 @@
 import { Component } from '@angular/core';
 
 const config = {
-  selector: 'kirby-item-ex5',
-  template: `
-  <kirby-item>
+  selector: 'kirby-item-example-simple-two-lines',
+  template: `<kirby-item>
   <kirby-label>
     <h3>Title</h3>
-    <h4>Subtitle</h4>
+    <p subtitle>Subtitle</p>
   </kirby-label>
-  <kirby-label>
-    <kirby-value>Value</kirby-value>
-    <h4>Subvalue</h4>
+  <kirby-label slot="end">
+    <data>Value</data>
   </kirby-label>
-</kirby-item>
-    `,
+</kirby-item>`,
 };
 
 @Component({
   selector: config.selector,
   template: config.template,
 })
-export class ItemTwoColumnsTwoRowsComponent {
+export class ItemExampleSimpleTwoLinesComponent {
   template: string = config.template;
 }

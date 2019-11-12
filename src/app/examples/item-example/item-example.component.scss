@@ -3,10 +3,18 @@
 :host {
   display: block;
   background: get-color('background-color');
-  height: 100%;
   padding: size('m');
 
-  kirby-item {
+  > h2 {
+    font-size: font-size('xs');
+    color: get-color('semi-dark');
+    text-transform: uppercase;
+    margin-top: size("m");
+    margin-bottom: size("xs");
+  }
+ 
+  > * {
+    display: block;
     margin: 10px 0;
   }
 }

@@ -1,21 +1,19 @@
 import { Component } from '@angular/core';
 
 const config = {
-  selector: 'kirby-item-ex3-disabled',
-  template: `
-  <kirby-item disabled>
+  selector: 'kirby-item-example-settings',
+  template: `<kirby-item>
   <kirby-label>
     <h3>Title</h3>
   </kirby-label>
-  <kirby-toggle></kirby-toggle>
-</kirby-item>
-    `,
+  <kirby-toggle slot="end" checked="true"></kirby-toggle>
+</kirby-item>`,
 };
 
 @Component({
   selector: config.selector,
   template: config.template,
 })
-export class ItemTwoColumnsSingleLineWithToggleDisabledComponent {
+export class ItemExampleSettingsComponent {
   template: string = config.template;
 }
