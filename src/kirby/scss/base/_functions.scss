@@ -72,3 +72,11 @@
   $value-index: map-get($shadow-value-map, $valuekey);
   @return nth($shadow, $value-index);
 }
+
+@mixin slotted($selectors...) {
+  ::ng-deep > {
+    #{$selectors} {
+      @content;
+    }
+  }
+}

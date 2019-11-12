@@ -1,13 +1,13 @@
-import { Component, Input, OnChanges, SimpleChanges} from '@angular/core';
+import { Component, Input, HostBinding } from '@angular/core';
 
 @Component({
   selector: 'kirby-item',
   templateUrl: './item.component.html',
   styleUrls: ['./item.component.scss'],
 })
-export class ItemComponent implements OnChanges {
-  ngOnChanges(changes: SimpleChanges): void {
-    
-  }
+export class ItemComponent {
   @Input() disabled;
+  @HostBinding('class.selected')
+  @Input()
+  selected;
 }

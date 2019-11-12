@@ -1,30 +1,47 @@
 @import '../../scss/utils';
 
-@mixin margin($val) {
-  margin: $val;
-  &:first-child {
-    margin-left: 0;
-  }
-  &:last-child {
-    margin-right: 0;
-  }
-}
-
 :host {
   display: block;
-  padding: size('xxs') 0;
-  background-color:white;
+  position: relative;
 
   ion-item {
+    font-size: font-size("s");
     --padding-start: #{size('s')};
     --inner-padding-end: #{size('s')};
+    --padding-top: #{size('xxs')};
+    --padding-bottom: #{size('xxs')};
+    --background: white;
+
+    @include slotted('[slot="end"]') {
+      margin-inline-end: 0;
+      text-align: right;
+    }
+    
+    @include slotted('time') {
+      font-size: font-size('xs');
+      color: get-color('semi-dark');
+      &[slot='end'] {
+        margin-inline-start: size('xs');
+      }
+    }
+
+  }
+
+  .outside {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: size('s');
   }
 
   .item-inner {
     width: 100%;
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
   }
 
   &[disabled]  {
@@ -36,134 +53,4 @@
       }
     }
   }
-}
-
-:host ::ng-deep {
-  [slot="end"]:last-child {
-    margin-right: 0;
-  }
-
-  time,
-  kirby-label time {
-    font-size: font-size("xs");
-    color: get-color('semi-dark');
-    line-height: line-height('xs');
-  }
-
-
-  kirby-label {
-    * {
-      margin: 0;
-      color: get-color('black');
-      font-size: font-size('n');
-      line-height: line-height('l');
-   
-      &:not(:first-child) {
-        font-size: font-size('xs');
-        color: get-color('semi-dark');
-        line-height: line-height('xs');
-
-        &:not(:last-child) {
-          color: get-color('black');
-        }
-      }
-    }
-  }
-
-  kirby-avatar {
-    align-self: center;
-    @include margin(0 12px);
-  }
-  kirby-icon {
-    @include margin(0 3px);
-  }
-  kirby-label:first-of-type {
-    @include margin (0 0);
-  }
-  kirby-label:first-of-type + * {
-    @include margin (0 16px);
-  }
-  kirby-label:first-of-type + time {
-    
-    @include margin (0 12px);
-  }
-  kirby-label:first-of-type + kirby-icon {
-    @include margin (0 8px);
-  }
-  kirby-label:first-of-type + kirby-icon {
-    @include margin (0 8px);
-  }
-
-  kirby-label[expand]:first-of-type + kirby-label {
-    @include margin (0 0px);
-    width: 100%;
-    text-align: left;
-  }
-
-  kirby-label {
-    flex: 1;
-    margin: 0;
-
-    &:last-child {
-      flex-basis: auto;
-      flex-direction: row;
-      flex-grow: 0;
-      flex-shrink: 1;
-      flex-wrap: nowrap;
-    }
-
-    &:last-child {
-      &:not(:first-of-type) {
-        text-align: right;
-      }
-    }
-
-    [expand='true'] {
-      text-align: left;
-      margin-left: 0;
-
-    }
-  }
-
-  kirby-label[expand] {
-    flex: none;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    align-self: center;
-
-    ion-label {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    } 
-  }
-
-  kirby-label[expand] + kirby-label {
-    * {
-      font-size: font-size('s');
-      color: get-color('black');
-      line-height: line-height('s')
-    }
-    
-  }
-
-  kirby-label kirby-badge {
-    display: block;
-  }
-  
-  kirby-label[badges] {
-    height: 100%;
-    position: absolute;
-    left: 0px;
-    display: flex;
-    align-items: center;
-
-    ion-label > *:not(:last-child) {
-      margin-bottom: 2px;
-    }
-  }
-
-  
 }
