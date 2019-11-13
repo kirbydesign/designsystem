@@ -1,4 +1,5 @@
 @import '../../scss/utils';
+@import 'item.utils';
 
 :host {
   display: block;
@@ -16,14 +17,8 @@
       margin-inline-end: 0;
       text-align: right;
     }
-    
-    @include slotted('time') {
-      font-size: font-size('xs');
-      color: get-color('semi-dark');
-      &[slot='end'] {
-        margin-inline-start: size('xs');
-      }
-    }
+
+    @include item-typography();
 
   }
 
@@ -40,8 +35,12 @@
     width: size('s');
   }
 
-  .item-inner {
-    width: 100%;
+  &.selected {
+    ion-item {
+      @include slotted(h1,h2,h3,h4,h5,h6,p,data) {
+        font-weight: font-weight('bold');
+      }
+    }
   }
 
   &[disabled]  {
