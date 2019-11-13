@@ -15,6 +15,16 @@
   }
 }
 
+.item-illustration {
+  display: flex;
+  justify-content: center;
+  margin-bottom: size('xs');
+
+  svg {
+    max-width: 600px;
+  }
+}
+
 .comment {
   font-style: italic;
   color: get-color('semi-dark');
