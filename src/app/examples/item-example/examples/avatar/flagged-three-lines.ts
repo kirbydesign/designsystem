@@ -12,7 +12,7 @@ const config = {
   </kirby-avatar>
   <kirby-label>
     <h3>Jake The Snake Insurance</h3>
-    <p>Basic Insurance</p>
+    <p subtitle class="black">Basic Insurance</p>
     <p subtitle>Account - Budget Account</p>
   </kirby-label>
   <data slot="end" class="kirby-text-bold" value="value">Value</data>
@@ -31,6 +31,9 @@ const config = {
     }`,
     `.flag:not(:last-child) {
       margin-bottom: 2px;
+    }`,
+    `[subtitle].black {
+      color: var(--kirby-black);
     }`,
   ],
 };
