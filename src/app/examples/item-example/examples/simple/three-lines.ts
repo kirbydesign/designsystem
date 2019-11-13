@@ -8,9 +8,7 @@ const config = {
     <p>Paragraph</p>
     <p subtitle>Subtitle</p>
   </kirby-label>
-  <kirby-label slot="end">
-    <data class="kirby-text-bold" value="value">Value</data>
-  </kirby-label>
+  <data slot="end" class="kirby-text-bold" value="value">Value</data>
 </kirby-item>`,
 };
 

@@ -7,7 +7,7 @@ const config = {
     <h3>Title</h3>
     <p subtitle>Subtitle</p>
   </kirby-label>
-  <button kirby-button size="sm" slot="end">Small Button</button>
+  <button slot="end" kirby-button size="sm">Small Button</button>
 </kirby-item>`,
 };
 

@@ -3,9 +3,7 @@ import { Component } from '@angular/core';
 const config = {
   selector: 'kirby-item-example-settings',
   template: `<kirby-item>
-  <kirby-label>
-    <h3>Title</h3>
-  </kirby-label>
+  <h3>Title</h3>
   <kirby-toggle slot="end" checked="true"></kirby-toggle>
 </kirby-item>`,
 };

@@ -15,9 +15,7 @@ const config = {
     <p>Basic Insurance</p>
     <p subtitle>Account - Budget Account</p>
   </kirby-label>
-  <kirby-label slot="end">
-    <data class="kirby-text-bold" value="value">Value</data>
-  </kirby-label>
+  <data slot="end" class="kirby-text-bold" value="value">Value</data>
 </kirby-item>`,
   styles: [
     `.flag {

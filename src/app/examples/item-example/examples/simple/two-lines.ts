@@ -7,9 +7,7 @@ const config = {
     <h3>Title</h3>
     <p subtitle>Subtitle</p>
   </kirby-label>
-  <kirby-label slot="end">
-    <data>Value</data>
-  </kirby-label>
+  <data slot="end">Value</data>
 </kirby-item>`,
 };
 

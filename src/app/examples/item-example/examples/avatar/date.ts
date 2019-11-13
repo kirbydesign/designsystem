@@ -10,9 +10,7 @@ const config = {
     <h3>Title</h3>
     <time subtitle>10.04.2020</time>
   </kirby-label>
-  <kirby-label slot="end">
-    <data value="-849.00">-849,00</data>
-  </kirby-label>
+  <data slot="end" value="-849.00">-849,00</data>
 </kirby-item>`,
 };
 

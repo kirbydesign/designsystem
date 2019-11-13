@@ -3,9 +3,7 @@ import { Component } from '@angular/core';
 const config = {
   selector: 'kirby-item-example-settings-disabled',
   template: `<kirby-item disabled>
-  <kirby-label>
-    <h3>Disabled</h3>
-  </kirby-label>
+  <h3>Disabled</h3>
   <kirby-toggle slot="end"></kirby-toggle>
 </kirby-item>`,
 };

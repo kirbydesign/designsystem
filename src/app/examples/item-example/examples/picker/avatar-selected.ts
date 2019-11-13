@@ -6,10 +6,8 @@ const config = {
   <kirby-avatar overlay="true" slot="start">
     <kirby-icon name="moneybag"></kirby-icon>
   </kirby-avatar>
-  <kirby-label>
-    <h3>Title</h3>
-  </kirby-label>
-  <kirby-icon name="checkmark-selected" slot="end"></kirby-icon>
+  <h3>Title</h3>
+  <kirby-icon slot="end" name="checkmark-selected"></kirby-icon>
 </kirby-item>`,
 };
 

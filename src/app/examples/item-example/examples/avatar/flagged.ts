@@ -17,9 +17,7 @@ const config = {
     <h3>Lorem ipsum quam notem andamus gepulowitzh onga bonga bimmelon sid est insula</h3>
     <p subtitle>Phone, Internet, Streaming services og other</p>
   </kirby-label>
-  <kirby-label slot="end">
-    <data value="300.00">EUR 300,00</data>
-  </kirby-label>
+  <data slot="end" value="300.00">EUR 300,00</data>
 </kirby-item>`,
   styles: [
     `.flag {
