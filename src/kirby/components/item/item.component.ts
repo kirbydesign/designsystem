@@ -6,7 +6,7 @@ import { Component, Input, HostBinding } from '@angular/core';
   styleUrls: ['./item.component.scss'],
 })
 export class ItemComponent {
-  @Input() disabled;
+  @Input() disabled: boolean;
   @HostBinding('class.selected')
   @Input()
   selected;
