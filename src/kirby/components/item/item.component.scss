@@ -20,6 +20,10 @@
 
     @include item-typography();
 
+    @include slotted(':not([slot])') {
+      width: 100%;
+    }
+
   }
 
   .outside {
