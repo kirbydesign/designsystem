@@ -1,6 +1,6 @@
 <p>The <code>kirby-item</code> component consists of three possible columns: <em>the default</em>, which spans the entire item, and optionally the <code>'start'</code> and <code>'end'</code> columns (aka <code>'slots'</code>).</p>
-<p>The <em>default column</em> is usually contained within a <code>kirby-label</code>.<br/>
-By default the <code>kirby-label</code> stacks content vertically (multi lines), but can optinally be configued to stack horizontally:<br/>
+<p>The <em>default column</em> is the content that isn't slotted into either <code>'start'</code> or <code>'end'</code>.<br/>
+ If there are more than one line of content it can be contained within a <code>kirby-label</code> that by default stacks content vertically (multi lines). It can optinally be configued to stack horizontally:<br/>
 <code>&lt;kirby-label direction="horizontal"&gt;...&lt;/kirby-label&gt;</code></p>
 <p class="comment"><strong>Please note</strong>, if you need a label to span a title and a value, you can wrap the title and value in another <code>kirby-label</code> as in <a href="#" (click)="scrollTo(message);">this example</a></p>
 <p>The <em>start column</em> is usually only used with avatars, icons and such. To place content in the start column specify the <code>slot="start"</code> attribute on your content. If no content is placed into the 'start' slot, the first column will not be shown.</p>
