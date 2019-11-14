@@ -10,6 +10,7 @@ import { ItemExampleSimpleThreeLinesComponent } from './examples/simple/three-li
 import { ItemExamplePickerDefaultComponent } from './examples/picker/default';
 import { ItemExamplePickerDefaultSelectedComponent } from './examples/picker/default-selected';
 import { ItemExamplePickerAvatarSelectedComponent } from './examples/picker/avatar-selected';
+import { ItemExamplePickerCheckboxComponent } from './examples/picker/checkbox';
 import { ItemExampleFabMenuComponent } from './examples/fab-menu';
 import { ItemExampleAttachmentComponent } from './examples/attachment';
 import { ItemExampleSettingsComponent } from './examples/settings/settings';
@@ -31,6 +32,7 @@ const COMPONENT_DECLARATIONS = [
   ItemExamplePickerDefaultComponent,
   ItemExamplePickerDefaultSelectedComponent,
   ItemExamplePickerAvatarSelectedComponent,
+  ItemExamplePickerCheckboxComponent,
   ItemExampleFabMenuComponent,
   ItemExampleAttachmentComponent,
   ItemExampleSettingsComponent,
