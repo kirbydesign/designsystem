@@ -5,11 +5,11 @@ const config = {
   template: `<kirby-item>
   <kirby-label>
     <h3 class="kirby-text-bold">Title</h3>
-    <p subtitle>Subtitle</p>
+    <p detail>Detail</p>
   </kirby-label>
   <kirby-label slot="end">
     <data>Value</data>
-    <data subtitle>Sub detail</data>
+    <data detail>Detail</data>
   </kirby-label>
 </kirby-item>`,
 };

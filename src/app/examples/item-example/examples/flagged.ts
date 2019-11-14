@@ -9,7 +9,7 @@ const config = {
   </div>
   <kirby-label>
     <h3 class="kirby-text-bold">Title</h3>
-    <p subtitle>Subtitle</p>
+    <p detail>Detail</p>
   </kirby-label>
   <kirby-label slot="end">
     <data value="60.0">60</data>
