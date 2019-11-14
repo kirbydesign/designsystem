@@ -1,14 +1,15 @@
 @import '../../scss/utils';
 
 @mixin item-typography() {
-  @include slotted(h1,h2,h3,h4,h5,h6,p) {
+  @include slotted(h1,h2,h3,h4,h5,h6,p,data) {
     font-size: font-size('n');
-    color: get-color('black');
     line-height: line-height('n');
+    color: get-color('black');
+    display: block;
     margin: 0;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: inherit;
+    text-overflow: ellipsis;
     font-weight: normal;
   
     &.kirby-text-bold {
@@ -20,26 +21,17 @@
     font-size: font-size('s');
   }
 
-  @include slotted('[subtitle]', time) {
+  @include slotted('[subtitle]', '[detail]') {
     font-size: font-size('xs');
-    color: get-color('semi-dark');
     line-height: line-height('xs');
   }
 
-  @include slotted(data) {
-    display: block;
-    font-size: font-size('n');
-    color: get-color('black');
-    line-height: line-height('n');
-    white-space: nowrap;
+  @include slotted('[subtitle]:not(:last-child)') {
+    margin-bottom: size('xxxs');
   }
 
-  @include slotted(time) {
-    font-size: font-size('xs');
+  @include slotted('[detail]') {
     color: get-color('semi-dark');
-    &[slot='end'] {
-      margin-inline-start: size('xs');
-    }
   }
 
 }
