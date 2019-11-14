@@ -11,4 +11,6 @@ export interface ModalConfig {
   drawerSupplementaryAction?: DrawerSupplementaryAction;
   durationIn?: KirbyAnimation.Duration;
   durationOut?: KirbyAnimation.Duration;
+  easingIn?: KirbyAnimation.Easing;
+  easingOut?: KirbyAnimation.Easing;
 }

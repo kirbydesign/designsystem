@@ -22,15 +22,47 @@ export class ModalHelper {
       dim: conf.dim == null ? ModalConfigHelper.defaultDim : conf.dim,
       componentProps: conf.componentProps,
       drawerSupplementaryAction: conf.drawerSupplementaryAction,
-      durationIn: conf.durationIn == null ? KirbyAnimation.Duration.SHORT : conf.durationIn,
-      durationOut: conf.durationOut == null ? KirbyAnimation.Duration.SHORT : conf.durationOut,
+      durationIn:
+        conf.durationIn == null
+          ? conf.flavor == 'modal'
+            ? KirbyAnimation.Duration.SHORT
+            : KirbyAnimation.Duration.LONG
+          : conf.durationIn,
+      durationOut:
+        conf.durationOut == null
+          ? conf.flavor == 'modal'
+            ? KirbyAnimation.Duration.SHORT
+            : KirbyAnimation.Duration.LONG
+          : conf.durationOut,
+      easingIn:
+        conf.easingIn == null
+          ? conf.flavor == 'modal'
+            ? KirbyAnimation.Easing.STATIC
+            : KirbyAnimation.Easing.SOFT
+          : conf.easingIn,
+      easingOut:
+        conf.easingOut == null
+          ? conf.flavor == 'modal'
+            ? KirbyAnimation.Easing.STATIC
+            : KirbyAnimation.Easing.SOFT
+          : conf.easingOut,
     };
     const modal = await this.ionicModalController.create({
       component: ModalWrapperComponent,
       cssClass: 'kirby-modal',
       componentProps: { config: config },
-      enterAnimation: this.animateIn.bind(this, config.flavor, config.durationIn),
-      leaveAnimation: this.animateOut.bind(this, config.flavor, config.durationOut),
+      enterAnimation: ModalHelper.animateIn.bind(
+        this,
+        config.flavor,
+        config.durationIn,
+        config.easingIn
+      ),
+      leaveAnimation: ModalHelper.animateOut.bind(
+        this,
+        config.flavor,
+        config.durationOut,
+        config.easingOut
+      ),
     });
 
     registerModal({ close: modal.dismiss.bind(modal) });
@@ -39,9 +71,10 @@ export class ModalHelper {
     return modal.onDidDismiss();
   }
 
-  private animateIn(
+  private static animateIn(
     flavor: any,
     duration: KirbyAnimation.Duration,
+    easing: KirbyAnimation.Easing,
     AnimationC: Animation,
     baseEl: HTMLElement
   ): Promise<Animation> {
@@ -80,16 +113,17 @@ export class ModalHelper {
     return Promise.resolve(
       baseAnimation
         .addElement(baseEl)
-        .easing('ease-in')
+        .easing(easing)
         .duration(duration)
         .add(wrapperAnimation)
         .add(backdropAnimation)
     );
   }
 
-  private animateOut(
+  private static animateOut(
     flavor: any,
     duration: KirbyAnimation.Duration,
+    easing: KirbyAnimation.Easing,
     AnimationC: Animation,
     baseEl: HTMLElement
   ): Promise<Animation> {
@@ -126,7 +160,7 @@ export class ModalHelper {
     return Promise.resolve(
       baseAnimation
         .addElement(baseEl)
-        .easing('ease-out')
+        .easing(easing)
         .duration(duration)
         .add(wrapperAnimation)
         .add(backdropAnimation)

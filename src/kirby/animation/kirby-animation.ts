@@ -6,4 +6,10 @@ export namespace KirbyAnimation {
     LONG = 500,
     TEST = 1000,
   }
+
+  export enum Easing {
+    STATIC = 'linear',
+    SOFT = 'ease-out',
+    MOTION = 'cubic-bezier(.25, .1, .25, 1)',
+  }
 }
