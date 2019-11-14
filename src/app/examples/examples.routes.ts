@@ -36,6 +36,7 @@ import { PageAdvancedExampleComponent } from './page-example/advanced/page-advan
 import { ExamplesComponent } from './examples.component';
 import { TabsExampleComponent } from './tabs/tabs-example.component';
 import { TabExampleComponent } from './tabs/tab/tab-example.component';
+import { ItemExampleComponent } from './item-example/item-example.component';
 
 export const routes: Routes = [
   {
@@ -113,6 +114,10 @@ export const routes: Routes = [
         ],
       },
     ],
+  },
+  {
+    path: 'item',
+    component: ItemExampleComponent,
   },
   {
     path: 'button',

@@ -13,6 +13,8 @@
     "lint:ts:fix": "npm run lint:ts -- --fix",
     "lint:css": "stylelint './src/**/*.scss'",
     "lint:css:fix": "npm run lint:css -- --fix",
+    "prettier": "npx prettier --check \"src/**/*.{ts,json,md,scss,html}\"",
+    "prettier:fix": "npx prettier --write \"src/**/*.{ts,json,md,scss,html}\"",
     "e2e": "ng e2e",
     "dist": "ng build --prod --aot --progress false",
     "pack-copy-to-dist-folder-watch": "cpx \"src\\kirby\\**\\!(*.spec.ts)\" dist-lib --watch",
