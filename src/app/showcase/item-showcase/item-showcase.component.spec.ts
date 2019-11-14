@@ -9,6 +9,7 @@ import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.compon
 import { IphoneModule } from '../../iphone/iphone.module';
 import { KirbyModule } from '@kirbydesign/designsystem';
 import { ShowcasePropertiesComponent } from '../../shared/showcase-properties/showcase-properties.component';
+import { ExampleViewerComponent } from '~/app/shared/example-viewer/example-viewer.component';
 
 describe('ItemShowcaseComponent', () => {
   let component: ItemShowcaseComponent;
@@ -25,6 +26,7 @@ describe('ItemShowcaseComponent', () => {
       declarations: [
         ItemShowcaseComponent,
         MockComponent(CodeViewerComponent),
+        MockComponent(ExampleViewerComponent),
         MockComponent(ShowcasePropertiesComponent),
       ],
     }).compileComponents();
