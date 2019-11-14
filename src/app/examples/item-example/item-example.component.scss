@@ -9,10 +9,10 @@
     font-size: font-size('xs');
     color: get-color('semi-dark');
     text-transform: uppercase;
-    margin-top: size("m");
-    margin-bottom: size("xs");
+    margin-top: size('m');
+    margin-bottom: size('xs');
   }
- 
+
   > * {
     display: block;
     margin: 10px 0;

@@ -6,7 +6,7 @@
   position: relative;
 
   ion-item {
-    font-size: font-size("s");
+    font-size: font-size('s');
     --padding-start: #{size('s')};
     --inner-padding-end: #{size('s')};
     --padding-top: #{size('xxs')};
@@ -21,18 +21,17 @@
 
     @include slotted('time[slot="end"]') {
       margin-inline-start: size('xs');
-    }  
-    
+    }
+
     @include slotted('data[slot="end"]', '[detail][slot="end"]') {
       margin-inline-start: size('s');
-    }  
+    }
 
     @include item-typography();
 
     @include slotted(':not([slot])') {
       width: 100%;
     }
-
   }
 
   .outside {
@@ -50,10 +49,9 @@
 
   &.selected {
     ion-item {
-      @include slotted(h1,h2,h3,h4,h5,h6,p,data) {
+      @include slotted(h1, h2, h3, h4, h5, h6, p, data) {
         font-weight: font-weight('bold');
       }
     }
   }
-
 }

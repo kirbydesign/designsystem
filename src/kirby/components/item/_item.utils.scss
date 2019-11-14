@@ -1,7 +1,7 @@
 @import '../../scss/utils';
 
 @mixin item-typography() {
-  @include slotted(h1,h2,h3,h4,h5,h6,p,data) {
+  @include slotted(h1, h2, h3, h4, h5, h6, p, data) {
     font-size: font-size('n');
     line-height: line-height('n');
     color: get-color('black');
@@ -11,7 +11,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     font-weight: normal;
-  
+
     &.kirby-text-bold {
       font-weight: font-weight('bold');
     }
@@ -33,5 +33,4 @@
   @include slotted('[detail]') {
     color: get-color('semi-dark');
   }
-
 }
