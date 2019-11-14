@@ -22,24 +22,24 @@ export class ModalHelper {
       dim: conf.dim == null ? ModalConfigHelper.defaultDim : conf.dim,
       componentProps: conf.componentProps,
       drawerSupplementaryAction: conf.drawerSupplementaryAction,
-      durationIn:
-        conf.durationIn == null
+      durationOn:
+        conf.durationOn == null
           ? conf.flavor == 'modal'
             ? KirbyAnimation.Duration.SHORT
             : KirbyAnimation.Duration.LONG
-          : conf.durationIn,
-      durationOut:
-        conf.durationOut == null
+          : conf.durationOn,
+      durationOff:
+        conf.durationOff == null
           ? conf.flavor == 'modal'
             ? KirbyAnimation.Duration.SHORT
             : KirbyAnimation.Duration.LONG
-          : conf.durationOut,
-      easingIn:
-        conf.easingIn == null
+          : conf.durationOff,
+      easingOn:
+        conf.easingOn == null
           ? conf.flavor == 'modal'
             ? KirbyAnimation.Easing.STATIC
             : KirbyAnimation.Easing.SOFT
-          : conf.easingIn,
+          : conf.easingOn,
       easingOut:
         conf.easingOut == null
           ? conf.flavor == 'modal'
@@ -54,13 +54,13 @@ export class ModalHelper {
       enterAnimation: ModalHelper.animateIn.bind(
         this,
         config.flavor,
-        config.durationIn,
-        config.easingIn
+        config.durationOn,
+        config.easingOn
       ),
       leaveAnimation: ModalHelper.animateOut.bind(
         this,
         config.flavor,
-        config.durationOut,
+        config.durationOff,
         config.easingOut
       ),
     });

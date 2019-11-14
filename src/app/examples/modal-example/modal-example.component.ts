@@ -36,8 +36,8 @@ export class ModalExampleComponent {
         prop1: 'value1',
         prop2: 'value2',
       },
-      durationIn: KirbyAnimation.Duration.TEST,
-      durationOut: KirbyAnimation.Duration.TEST,
+      durationOn: KirbyAnimation.Duration.TEST,
+      durationOff: KirbyAnimation.Duration.TEST,
     };
 
     this.modalController.showModal(config, this.onModalClose);
