@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { KirbyModule } from '@kirbydesign/designsystem';
 import { ItemExampleSimpleComponent } from './examples/simple/default';
+import { ItemExampleLongTitleComponent } from './examples/simple/long-title';
 import { ItemExampleSimpleTwoLinesComponent } from './examples/simple/two-lines';
 import { ItemExampleSimpleTwoValueLinesComponent } from './examples/simple/two-value-lines';
 import { ItemExampleSimpleThreeLinesComponent } from './examples/simple/three-lines';
@@ -23,6 +24,7 @@ import { ItemExampleButtonComponent } from './examples/button';
 
 const COMPONENT_DECLARATIONS = [
   ItemExampleSimpleComponent,
+  ItemExampleLongTitleComponent,
   ItemExampleSimpleTwoLinesComponent,
   ItemExampleSimpleThreeLinesComponent,
   ItemExampleSimpleTwoValueLinesComponent,
