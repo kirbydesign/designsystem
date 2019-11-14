@@ -14,9 +14,18 @@
     --background: white;
 
     @include slotted('[slot="end"]') {
+      margin-inline-start: 0;
       margin-inline-end: 0;
       text-align: right;
     }
+
+    @include slotted('time[slot="end"]') {
+      margin-inline-start: size('xs');
+    }  
+    
+    @include slotted('data[slot="end"]', '[detail][slot="end"]') {
+      margin-inline-start: size('s');
+    }  
 
     @include item-typography();
 

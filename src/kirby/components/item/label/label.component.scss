@@ -25,6 +25,12 @@
   @include item-typography();
 }
 
+:host([slot="end"]) {
+  @include slotted(data, '[detail]') {
+    margin-inline-start: size('s');
+  }
+}
+
 :host-context(kirby-item.selected) {
   @include slotted(h1,h2,h3,h4,h5,h6,p,data) {
     font-weight: font-weight('bold');
