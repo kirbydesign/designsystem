@@ -40,7 +40,7 @@ import { FormFieldExampleComponent } from './form-field-example/form-field-examp
 import { ExamplesComponent } from './examples.component';
 import { TabsExampleComponent } from './tabs/tabs-example.component';
 import { TabExampleComponent } from './tabs/tab/tab-example.component';
-import { ItemExampleComponent } from '~/app/examples/item-example/item-example.component';
+import { ItemExampleComponent } from './item-example/item-example.component';
 import { DividerExampleComponent } from './divider-example/divider-example.component';
 
 // Example of "custom" icons

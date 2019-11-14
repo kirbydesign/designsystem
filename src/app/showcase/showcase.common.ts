@@ -32,8 +32,8 @@ import { ToolbarShowcaseComponent } from './toolbar-showcase/toolbar-showcase.co
 import { FabSheetShowcaseComponent } from './fab-sheet-showcase/fab-sheet-showcase.component';
 import { PageShowcaseComponent } from './page-showcase/page-showcase.component';
 import { TabsShowcaseComponent } from './tabs-showcase/tabs-showcase.component';
-import { ItemShowcaseComponent } from '~/app/showcase/item-showcase/item-showcase.component';
-import { DividerShowcaseComponent } from '~/app/showcase/divider-showcase/divider-showcase.component';
+import { ItemShowcaseComponent } from '../showcase/item-showcase/item-showcase.component';
+import { DividerShowcaseComponent } from '../showcase/divider-showcase/divider-showcase.component';
 
 export const COMPONENT_IMPORTS: any[] = [ExamplesModule, ShowcaseRoutingModule];
 
