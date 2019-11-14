@@ -12,7 +12,7 @@ ion-tab-button {
   --kirby-badge-left: calc(50% + 5px);
   --kirby-badge-top: 0;
 
-  @include media(">=large") {
+  @include media('>=large') {
     flex: none;
     padding: 0 size('xs');
 
@@ -29,4 +29,3 @@ ion-tab-button {
     }
   }
 }
-

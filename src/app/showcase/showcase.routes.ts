@@ -33,6 +33,7 @@ import { FabSheetShowcaseComponent } from './fab-sheet-showcase/fab-sheet-showca
 import { PageShowcaseComponent } from './page-showcase/page-showcase.component';
 import { TabsShowcaseComponent } from './tabs-showcase/tabs-showcase.component';
 import { ItemShowcaseComponent } from '~/app/showcase/item-showcase/item-showcase.component';
+import { DividerShowcaseComponent } from './divider-showcase/divider-showcase.component';
 
 export const routes: Routes = [
   {
@@ -59,6 +60,10 @@ export const routes: Routes = [
       {
         path: 'chip',
         component: ChipShowcaseComponent,
+      },
+      {
+        path: 'divider',
+        component: DividerShowcaseComponent,
       },
       {
         path: 'avatar',

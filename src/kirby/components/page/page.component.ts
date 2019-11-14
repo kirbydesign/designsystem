@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   Component,
   ContentChild,
   Directive,
@@ -13,6 +12,9 @@ import {
   ContentChildren,
   QueryList,
   AfterContentInit,
+  Output,
+  EventEmitter,
+  AfterContentChecked,
 } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { NavigationStart, NavigationEnd, Router, RouterEvent } from '@angular/router';
@@ -113,11 +115,14 @@ export class PageActionsComponent implements AfterContentInit {
     ]),
   ],
 })
-export class PageComponent implements OnInit, OnDestroy, AfterContentInit, AfterViewInit {
+export class PageComponent implements OnInit, OnDestroy, AfterContentChecked {
   @Input() title?: string;
   @Input() toolbarTitle?: string;
   @Input() titleAlignment?: 'left' | 'center' | 'right' = 'left';
   @Input() defaultBackHref?: string;
+
+  @Output() enter = new EventEmitter<void>();
+  @Output() leave = new EventEmitter<void>();
 
   @ViewChild('pageTitle', { static: false, read: ElementRef })
   private pageTitle: ElementRef;
@@ -163,6 +168,7 @@ export class PageComponent implements OnInit, OnDestroy, AfterContentInit, After
 
   ngOnInit(): void {
     this.url = this.router.url;
+    this.enter.emit();
     this.removeWrapper();
     this.routerEventsSubscription = this.router.events.subscribe((event: RouterEvent) => {
       if (
@@ -171,26 +177,25 @@ export class PageComponent implements OnInit, OnDestroy, AfterContentInit, After
         this.pageTitleObserver &&
         this.pageTitle
       ) {
+        this.leave.emit();
         this.pageTitleObserver.unobserve(this.pageTitle.nativeElement);
       }
       if (
         event instanceof NavigationEnd &&
-        event.url === this.url &&
+        event.urlAfterRedirects === this.url &&
         this.pageTitleObserver &&
         this.pageTitle
       ) {
+        this.enter.emit();
         this.pageTitleObserver.observe(this.pageTitle.nativeElement);
       }
     });
   }
 
-  ngAfterContentInit(): void {
+  ngAfterContentChecked(): void {
     this.initializeTitle();
     this.initializeActions();
     this.initializeContent();
-  }
-
-  ngAfterViewInit(): void {
     this.styleToolbarButtons();
   }
 

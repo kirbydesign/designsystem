@@ -1,21 +1,24 @@
-@import "../../../kirby/scss/utils";
+@import '../../../kirby/scss/utils';
 
 kirby-card {
-  margin-bottom: size("m");
-  max-width: size("m");
-  padding: size("m");
+  margin-bottom: size('m');
+
+  &.attention-levels {
+    max-width: map-get($breakpoints, 'small');
+  }
 }
 
 h2:not(:first-child) {
-  margin-top: size("xl");
+  margin-top: size('xl');
 }
 
 h3 {
-  margin-top: size("s");
+  margin-top: size('s');
 }
 
-h2, h3 {
-  margin-bottom: size("xxs");
+h2,
+h3 {
+  margin-bottom: size('xxs');
 }
 
 .button-example-container {

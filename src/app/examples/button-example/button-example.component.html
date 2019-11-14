@@ -6,17 +6,30 @@
 <fieldset>
   <legend>Button size for examples below<kirby-icon name="arrow-down"></kirby-icon></legend>
   <select (change)="onButtonSizeChange($event.target.value)">
-    <option *ngFor="let size of buttonSizes" value="{{size.value}}" [attr.selected]="buttonSize === size.value ? true : null">{{ size.text }}</option>
+    <option
+      *ngFor="let size of buttonSizes"
+      value="{{ size.value }}"
+      [attr.selected]="buttonSize === size.value ? true : null"
+      >{{ size.text }}</option
+    >
   </select>
 </fieldset>
 
 <h2>Block button</h2>
 <button kirby-button [size]="buttonSize" expand="block">Block Button</button>
 <h2>Destructive Button</h2>
-<button kirby-button [size]="buttonSize" attentionLevel="1" isDestructive="true">Destructive Level 1</button>
-<button kirby-button [size]="buttonSize" attentionLevel="2" isDestructive="true">Destructive Level 2</button>
-<button kirby-button [size]="buttonSize" attentionLevel="3" isDestructive="true">Destructive Level 3</button>
-<button kirby-button [size]="buttonSize" attentionLevel="4" isDestructive="true">Destructive Level 4</button>
+<button kirby-button [size]="buttonSize" attentionLevel="1" isDestructive="true">
+  Destructive Level 1
+</button>
+<button kirby-button [size]="buttonSize" attentionLevel="2" isDestructive="true">
+  Destructive Level 2
+</button>
+<button kirby-button [size]="buttonSize" attentionLevel="3" isDestructive="true">
+  Destructive Level 3
+</button>
+<button kirby-button [size]="buttonSize" attentionLevel="4" isDestructive="true">
+  Destructive Level 4
+</button>
 <button kirby-button [size]="buttonSize" disabled>Disabled Button</button>
 
 <h2>Button with icon only</h2>
@@ -24,7 +37,7 @@
   <button kirby-button [size]="buttonSize">
     <kirby-icon name="close"></kirby-icon>
   </button>
-  <label>Attention Level 1<br/><em>(Default)</em></label>
+  <label>Attention Level 1<br /><em>(Default)</em></label>
 </div>
 <div class="button-example-container">
   <button kirby-button [size]="buttonSize" attentionLevel="2">
@@ -56,7 +69,7 @@
   <button kirby-button [size]="buttonSize">
     <kirby-icon customName="football"></kirby-icon>
   </button>
-  <label>Attention Level 1<br/><em>(Default)</em></label>
+  <label>Attention Level 1<br /><em>(Default)</em></label>
 </div>
 <div class="button-example-container">
   <button kirby-button [size]="buttonSize" attentionLevel="2">
@@ -134,15 +147,21 @@
   <button kirby-button [size]="buttonSize" [isFloating]="true" disabled>
     <kirby-icon name="close"></kirby-icon>
   </button>
-  <label>Close<br/>Disabled</label>
+  <label>Close<br />Disabled</label>
 </div>
 
 <h2>Button with attention level</h2>
-<kirby-card [themeColor]="themeColor">
-  <button kirby-button [size]="buttonSize" attentionLevel="1" expand="block">Attention Level 1</button>
-  <button kirby-button [size]="buttonSize" attentionLevel="2" expand="block">Attention Level 2</button>
-  <button kirby-button [size]="buttonSize" attentionLevel="3" expand="block">Attention Level 3</button>
-  <button kirby-button [size]="buttonSize" attentionLevel="4" expand="block">Attention Level 4</button>
+<kirby-card hasPadding="true" class="attention-levels" [themeColor]="themeColor">
+  <button kirby-button [size]="buttonSize" attentionLevel="1" expand="block">
+    Attention Level 1
+  </button>
+  <button kirby-button [size]="buttonSize" attentionLevel="2" expand="block">
+    Attention Level 2
+  </button>
+  <button kirby-button [size]="buttonSize" attentionLevel="3" expand="block">
+    Attention Level 3
+  </button>
+  <button kirby-button [size]="buttonSize" attentionLevel="4" expand="block">
+    Attention Level 4
+  </button>
 </kirby-card>
-
-

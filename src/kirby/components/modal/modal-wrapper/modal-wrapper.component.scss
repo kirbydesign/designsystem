@@ -1,4 +1,4 @@
-@import "../../../scss/utils";
+@import '../../../scss/utils';
 
 // Global modal styling can be found at scss/base/_ionic.scss
 
@@ -6,30 +6,28 @@
   display: flex;
   flex-flow: column;
   height: 100%;
+  transform-origin: top center;
 
   .modal-header {
-    display: flex;
+    display: grid;
     justify-content: flex-end;
-    padding: size('s');
+    grid-template-columns: [start]#{size('xl')} [title]1fr [end]#{size('xl')};
+    padding: 0 size('s');
 
     .title {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      width: 100%;
-      font-weight: font-weight("bold");
-    }
-    
-    .text-left {
-      text-align: left;
-    }
-
-    .text-center {
+      grid-area: title;
       text-align: center;
+      margin: size('m') 0;
     }
 
-    .text-right {
-      text-align: right;
+    > *:first-child:not(.title) {
+      grid-area: start;
+      align-self: center;
+    }
+
+    > *:last-child:not(.title) {
+      grid-area: end;
+      align-self: center;
     }
   }
 

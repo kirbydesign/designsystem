@@ -1,9 +1,9 @@
-@import "../../scss/utils";
+@import '../../scss/utils';
 @import '../icon/icon.component.shared';
 
-$image-diameter-small:  40px;
+$image-diameter-small: 40px;
 $image-diameter-medium: 56px;
-$image-diameter-large:  96px;
+$image-diameter-large: 96px;
 $badge-diameter: 16px;
 
 @function get-badge-position($avatar-diameter) {
@@ -12,7 +12,7 @@ $badge-diameter: 16px;
   $position-from-center: round($cos-to-45-degrees * $avatar-radius);
   $position-from-edge: $avatar-radius - $position-from-center;
   $badge-radius: $badge-diameter / 2;
-  $badge-position: $position-from-edge - $badge-radius; 
+  $badge-position: $position-from-edge - $badge-radius;
   @return $badge-position;
 }
 
@@ -20,7 +20,7 @@ $badge-diameter: 16px;
   --kirby-badge-elevation: #{get-elevation(2)};
   --kirby-badge-position: absolute;
   --kirby-badge-right: #{get-badge-position($image-diameter-small)};
-  --kirby-badge-top: #{get-badge-position($image-diameter-small)};;
+  --kirby-badge-top: #{get-badge-position($image-diameter-small)};
   --kirby-badge-zindex: 2;
   position: relative;
 }
@@ -42,7 +42,7 @@ $badge-diameter: 16px;
   }
 
   &.overlay::before {
-    content: "";
+    content: '';
     background-color: #333;
     opacity: 0.05;
     width: 100%;
@@ -70,7 +70,7 @@ $badge-diameter: 16px;
   }
 }
 
-:host(.sm){
+:host(.sm) {
   .avatar {
     width: $image-diameter-small;
     height: $image-diameter-small;
@@ -85,9 +85,9 @@ $badge-diameter: 16px;
   }
 }
 
-:host(.md){
+:host(.md) {
   --kirby-badge-right: #{get-badge-position($image-diameter-medium)};
-  --kirby-badge-top: #{get-badge-position($image-diameter-medium)};;
+  --kirby-badge-top: #{get-badge-position($image-diameter-medium)};
 
   .avatar {
     width: $image-diameter-medium;
@@ -103,9 +103,9 @@ $badge-diameter: 16px;
   }
 }
 
-:host(.lg){
+:host(.lg) {
   --kirby-badge-right: #{get-badge-position($image-diameter-large)};
-  --kirby-badge-top:  #{get-badge-position($image-diameter-large)};
+  --kirby-badge-top: #{get-badge-position($image-diameter-large)};
 
   .avatar {
     width: $image-diameter-large;

@@ -1,21 +1,21 @@
 @import '../../../kirby/scss/utils';
 
 .performance {
-    margin-top: 20px;
+  margin-top: 20px;
 
-    .title {
-        display: flex;
+  .title {
+    display: flex;
 
-        ion-icon {
-            color: #3880ff;
-        }
-
-        h4 {
-            margin-left: 5px;
-        }
+    ion-icon {
+      color: #3880ff;
     }
 
-    .info {
-        font-style: italic;
+    h4 {
+      margin-left: 5px;
     }
+  }
+
+  .info {
+    font-style: italic;
+  }
 }

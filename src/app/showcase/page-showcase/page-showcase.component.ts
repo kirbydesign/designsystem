@@ -46,6 +46,18 @@ export class PageShowcaseComponent {
       inputValues: ['string'],
     },
   ];
+  events: ShowcaseProperty[] = [
+    {
+      name: 'enter',
+      description: 'Emitted when the page has animated into view',
+      inputValues: ['func'],
+    },
+    {
+      name: 'leave',
+      description: 'Emitted when leaving the page',
+      inputValues: ['func'],
+    },
+  ];
 
   layoutColumns = {
     Name: 'Tag',

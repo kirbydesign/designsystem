@@ -1,13 +1,34 @@
 <div class="example">
   <div class="card-grid">
-      <kirby-card-example [showSize]="false" [hasPadding]="false" title="Default Card"></kirby-card-example>
-      <kirby-card-example [showSize]="false" title="Card with padding" subtitle='HTML: hasPadding="true"'></kirby-card-example>
-      <kirby-card-example [showSize]="false" [hasPadding]="false" [hasHeaderFooterBgColor]="true" title="Card with header background" subtitle="CSS: kirby-card-header { background-color: #000}"></kirby-card-example>        
-      <kirby-card-example [showSize]="false" [hasPadding]="false" [hasFooter]="true" [hasHeaderFooterBgColor]="true" title="Card with header and footer" subtitle=""></kirby-card-example>        
+    <kirby-card-example
+      [showSize]="false"
+      [hasPadding]="false"
+      title="Default Card"
+    ></kirby-card-example>
+    <kirby-card-example
+      [showSize]="false"
+      title="Card with padding"
+      subtitle='HTML: hasPadding="true"'
+    ></kirby-card-example>
+    <kirby-card-example
+      [showSize]="false"
+      [hasPadding]="false"
+      [hasHeaderFooterBgColor]="true"
+      title="Card with header background"
+      subtitle="CSS: kirby-card-header { background-color: #000}"
+    ></kirby-card-example>
+    <kirby-card-example
+      [showSize]="false"
+      [hasPadding]="false"
+      [hasFooter]="true"
+      [hasHeaderFooterBgColor]="true"
+      title="Card with header and footer"
+      subtitle=""
+    ></kirby-card-example>
   </div>
   <kirby-code-viewer [html]="exampleHtml"></kirby-code-viewer>
   <h4>Properties:</h4>
-  <kirby-showcase-properties [properties]="properties"></kirby-showcase-properties> 
+  <kirby-showcase-properties [properties]="properties"></kirby-showcase-properties>
   <h4>Colors:</h4>
   <kirby-card-themecolor-example></kirby-card-themecolor-example>
   <h4>Elevation:</h4>

@@ -1,15 +1,26 @@
 <div class="example">
-  <p><em><strong>Please note:</strong> The floating action button is placed at the bottom right corner of the page.</em></p>
+  <p>
+    <em
+      ><strong>Please note:</strong> The floating action button is placed at the bottom right corner
+      of the page.</em
+    >
+  </p>
   <fieldset>
     <legend>Configuration</legend>
-    <kirby-checkbox [checked]="disableFabSheet" (checkedChange)="disableFabSheet = $event;"></kirby-checkbox><label (click)="disableFabSheet = !disableFabSheet">Disable FAB</label>
+    <kirby-checkbox
+      [checked]="disableFabSheet"
+      (checkedChange)="disableFabSheet = $event"
+    ></kirby-checkbox
+    ><label (click)="disableFabSheet = !disableFabSheet">Disable FAB</label>
   </fieldset>
   <kirby-fab-sheet-example [disableFabSheet]="disableFabSheet"></kirby-fab-sheet-example>
   <kirby-code-viewer [html]="exampleHtml"></kirby-code-viewer>
   (Optional) if you need to obtain data back from the fab sheet, you can pass a callback function:
+  <!-- prettier-ignore -->
   <kirby-code-viewer language="html">(itemSelect)="onItemSelect($event)"</kirby-code-viewer>
   where <code>onItemSelect</code> can be e.g.:
+  <!-- prettier-ignore -->
   <kirby-code-viewer language="ts">onItemSelect(item: ActionSheetItem) {{ '{' }}...{{ '}' }}</kirby-code-viewer>
-    <h4>Fab sheet properties:</h4>
+  <h4>Fab sheet properties:</h4>
   <kirby-showcase-properties [properties]="properties"></kirby-showcase-properties>
 </div>

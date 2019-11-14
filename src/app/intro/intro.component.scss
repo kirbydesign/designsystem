@@ -1,19 +1,18 @@
 .hero {
+  h1 {
+    margin: 0;
+    padding: 1em;
+    font-size: 1000%;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    background: url('/assets/kirby/hero-image.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
 
-    h1 {
-        margin: 0;
-        padding: 1em;
-        font-size: 1000%;
-        color: white;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        text-align: center;
-        background: url('/assets/kirby/hero-image.png');
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
-
-    img {
-        width: 100%;
-        z-index: 1;
-    }
+  img {
+    width: 100%;
+    z-index: 1;
+  }
 }

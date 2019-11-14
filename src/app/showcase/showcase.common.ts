@@ -33,6 +33,7 @@ import { FabSheetShowcaseComponent } from './fab-sheet-showcase/fab-sheet-showca
 import { PageShowcaseComponent } from './page-showcase/page-showcase.component';
 import { TabsShowcaseComponent } from './tabs-showcase/tabs-showcase.component';
 import { ItemShowcaseComponent } from '~/app/showcase/item-showcase/item-showcase.component';
+import { DividerShowcaseComponent } from '~/app/showcase/divider-showcase/divider-showcase.component';
 
 export const COMPONENT_IMPORTS: any[] = [ExamplesModule, ShowcaseRoutingModule];
 
@@ -69,6 +70,7 @@ export const COMPONENT_EXPORTS: any[] = [
   PageShowcaseComponent,
   TabsShowcaseComponent,
   ItemShowcaseComponent,
+  DividerShowcaseComponent,
 ];
 
 export const COMPONENT_DECLARATIONS: any[] = [...COMPONENT_EXPORTS, ShowcaseComponent];

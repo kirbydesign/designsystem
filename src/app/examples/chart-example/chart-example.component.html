@@ -1,98 +1,115 @@
 <kirby-card>
-    <kirby-card-header [title]="'Donut'"></kirby-card-header>
-    <kirby-chart [height]="320" [type]="'donut'" [showDataLabels]="true"
-                 [description]="'Accessibility description goes here'"
-                 [data]="[
-        {
-            name: 'Boomerangs 25%',
-            y: 25,
-            label: '25%'
-        },
-        {
-            name: 'Bubbles 41%',
-            y: 41,
-            label: '41%'
-        },
-        {
-            name: 'Jumping 33%',
-            y: 33,
-            label: '33%'
-        },
-        {
-            name: 'Christmas < 1%',
-            y: 1,
-            label: '< 1%'
-        }]">
-    </kirby-chart>
+  <kirby-card-header [title]="'Donut'"></kirby-card-header>
+  <kirby-chart
+    [height]="320"
+    [type]="'donut'"
+    [showDataLabels]="true"
+    [description]="'Accessibility description goes here'"
+    [data]="[
+      {
+        name: 'Boomerangs 25%',
+        y: 25,
+        label: '25%'
+      },
+      {
+        name: 'Bubbles 41%',
+        y: 41,
+        label: '41%'
+      },
+      {
+        name: 'Jumping 33%',
+        y: 33,
+        label: '33%'
+      },
+      {
+        name: 'Christmas < 1%',
+        y: 1,
+        label: '< 1%'
+      }
+    ]"
+  >
+  </kirby-chart>
 </kirby-card>
 
 <kirby-card>
-    <kirby-card-header [title]="'Pie'"></kirby-card-header>
-    <kirby-chart [height]="320" [type]="'pie'" [showDataLabels]="false"
-                 [description]="'Accessibility description goes here'"
-                 [data]="[
-            {
-                name: 'Boomerangs 25%',
-                y: 25,
-                label: '25%'
-            },
-            {
-                name: 'Bubbles 41%',
-                y: 41,
-                label: '41%'
-            },
-            {
-                name: 'Jumping 33%',
-                y: 33,
-                label: '33%'
-            },
-            {
-                name: 'Christmas < 1%',
-                y: 1,
-                label: '< 1%'
-            }
-        ]"></kirby-chart>
+  <kirby-card-header [title]="'Pie'"></kirby-card-header>
+  <kirby-chart
+    [height]="320"
+    [type]="'pie'"
+    [showDataLabels]="false"
+    [description]="'Accessibility description goes here'"
+    [data]="[
+      {
+        name: 'Boomerangs 25%',
+        y: 25,
+        label: '25%'
+      },
+      {
+        name: 'Bubbles 41%',
+        y: 41,
+        label: '41%'
+      },
+      {
+        name: 'Jumping 33%',
+        y: 33,
+        label: '33%'
+      },
+      {
+        name: 'Christmas < 1%',
+        y: 1,
+        label: '< 1%'
+      }
+    ]"
+  ></kirby-chart>
 </kirby-card>
 
 <kirby-card>
-    <kirby-card-header [title]="'Areaspline'"></kirby-card-header>
-    <kirby-chart [height]="240" [type]="'areaspline'" [description]="'Accessibility description goes here'"
-                 [data]="data">
-        <!-- data = [1600.90, 1710.50, 1060.40, 1290.20, 1440.00, 1460.00, 1350.60, 1480.50, 1800.40, 1940.10, 1950.60, 1700.40, 1600.90, 1710.50, 1060.40, 1290.20, 1440.00, 1460.00, 1350.60, 1480.50, 1800.40, 1940.10, 1950.60, 1700.40] -->
-    </kirby-chart>
-    <kirby-card-footer>
-        <!-- example period selector -->
-        <div>
-            <span (click)="data = [200, 100, 300, 100, 200, 300, 200]">Jan </span>
-            <span (click)="data = [100, 100, 100, 400, 200, 200, 200]">Feb </span>
-            <span (click)="data = [500, 400, 300, 200, 100, 200, 300]">Mar </span>
-        </div>
-    </kirby-card-footer>
-</kirby-card>
-
-<kirby-card>
-    <kirby-card-header [title]="'Activity-Gauge'">
-    </kirby-card-header>
-    <div style="background: url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80') no-repeat fixed center;">
-        <kirby-chart [height]="258"
-                     [type]="'activitygauge'"
-                     [showDataLabels]="false"
-                     [description]="'Accessibility description goes here'"
-                     [data]="[{
-                                 title: '1.234.567',
-                                 subtitle: 'Afdraget',
-                                 series: [{
-                                    color: {
-                                        linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
-                                        stops: [
-                                            [1, '#00e89a'],
-                                            [0, '#00a76f']
-                                        ]
-                                    },
-                                    radius: '112%',
-                                    innerRadius: '88%',
-                                    y: 25
-                                  }]}]"
-        ></kirby-chart>
+  <kirby-card-header [title]="'Areaspline'"></kirby-card-header>
+  <kirby-chart
+    [height]="240"
+    [type]="'areaspline'"
+    [description]="'Accessibility description goes here'"
+    [data]="data"
+  >
+    <!-- data = [1600.90, 1710.50, 1060.40, 1290.20, 1440.00, 1460.00, 1350.60, 1480.50, 1800.40, 1940.10, 1950.60, 1700.40, 1600.90, 1710.50, 1060.40, 1290.20, 1440.00, 1460.00, 1350.60, 1480.50, 1800.40, 1940.10, 1950.60, 1700.40] -->
+  </kirby-chart>
+  <kirby-card-footer>
+    <!-- example period selector -->
+    <div>
+      <span (click)="data = [200, 100, 300, 100, 200, 300, 200]">Jan </span>
+      <span (click)="data = [100, 100, 100, 400, 200, 200, 200]">Feb </span>
+      <span (click)="data = [500, 400, 300, 200, 100, 200, 300]">Mar </span>
     </div>
+  </kirby-card-footer>
+</kirby-card>
+
+<kirby-card>
+  <kirby-card-header [title]="'Activity-Gauge'"> </kirby-card-header>
+  <div
+    style="background: url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80') no-repeat fixed center;"
+  >
+    <kirby-chart
+      [height]="258"
+      [type]="'activitygauge'"
+      [showDataLabels]="false"
+      [description]="'Accessibility description goes here'"
+      [data]="[
+        {
+          title: '1.234.567',
+          subtitle: 'Afdraget',
+          series: [
+            {
+              color: {
+                linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
+                stops: [[1, '#00e89a'], [0, '#00a76f']]
+              },
+              radius: '112%',
+              innerRadius: '88%',
+              y: 25
+            }
+          ]
+        }
+      ]"
+    ></kirby-chart>
+  </div>
 </kirby-card>

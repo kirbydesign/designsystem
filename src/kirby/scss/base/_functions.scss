@@ -40,7 +40,7 @@
   @if $getValueOnly == true {
     @return $value;
   } @else {
-    @return unquote('var(--kirby-' + $variant+ ')');
+    @return unquote('var(--kirby-' + $variant + ')');
   }
 }
 

@@ -1,7 +1,7 @@
 @import '../../scss/utils';
 
-:host{ 
-  --kirby-card-header-background-color:  #{get-color('white')};
+:host {
+  --kirby-card-header-background-color: #{get-color('white')};
   --kirby-card-header-color: #{get-color('primary-contrast')};
   --kirby-card-main-background-color: #{get-color('white')};
   --kirby-card-main-color: #{get-color('primary-contrast')};
@@ -19,10 +19,10 @@
 
   .content-wrapper {
     &.padding {
-        padding: size('s');
-        @include media("<small") {
-          padding: size('xxs');
-        }
+      padding: size('s');
+      @include media('<small') {
+        padding: size('xxs');
+      }
     }
   }
 
@@ -33,12 +33,11 @@
   &.flat {
     box-shadow: none;
   }
-
 }
 
 @each $color-name, $color-value in $main-colors {
-    :host(.#{$color-name}) {
-      --kirby-card-main-background-color: #{get-color($color-name)};
-      --kirby-card-main-color: #{get-color($color-name+'-contrast')};
-    }
+  :host(.#{$color-name}) {
+    --kirby-card-main-background-color: #{get-color($color-name)};
+    --kirby-card-main-color: #{get-color($color-name + '-contrast')};
+  }
 }

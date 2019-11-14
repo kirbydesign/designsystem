@@ -1,4 +1,4 @@
-@import "../../scss/utils";
+@import '../../scss/utils';
 
 :root {
   --kirby-badge-elevation: none;
@@ -46,7 +46,7 @@
 @each $color-name, $color-value in $notification-colors {
   :host(.#{$color-name}) {
     --kirby-badge-background-color: #{get-color($color-name)};
-    --kirby-badge-color: #{get-color($color-name+'-contrast')};
+    --kirby-badge-color: #{get-color($color-name + '-contrast')};
   }
 }
 

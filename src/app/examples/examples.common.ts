@@ -1,4 +1,4 @@
-import { IconSettings, ICON_SETTINGS } from '@kirbydesign/designsystem';
+import { ICON_SETTINGS, IconSettings } from '@kirbydesign/designsystem';
 
 import { AvatarExampleComponent } from './avatar-example/avatar-example.component';
 import { ButtonExampleComponent } from './button-example/button-example.component';
@@ -41,6 +41,7 @@ import { ExamplesComponent } from './examples.component';
 import { TabsExampleComponent } from './tabs/tabs-example.component';
 import { TabExampleComponent } from './tabs/tab/tab-example.component';
 import { ItemExampleComponent } from '~/app/examples/item-example/item-example.component';
+import { DividerExampleComponent } from './divider-example/divider-example.component';
 
 // Example of "custom" icons
 export const iconSettings: IconSettings = {
@@ -98,6 +99,7 @@ export const COMPONENT_DECLARATIONS: any[] = [
   TabsExampleComponent,
   TabExampleComponent,
   ItemExampleComponent,
+  DividerExampleComponent,
 ];
 
 // Configure custom icons (used by example to show the usage of custom icons)

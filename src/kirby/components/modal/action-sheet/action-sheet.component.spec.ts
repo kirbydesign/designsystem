@@ -3,7 +3,7 @@ import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/t
 import { By } from '@angular/platform-browser';
 import { MockComponent } from 'ng-mocks';
 import * as ionic from '@ionic/angular';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, DebugElement } from '@angular/core';
 
 import { ActionSheetComponent } from './action-sheet.component';
 import { ListCellComponent } from '../../list/list-cell/list-cell.component';
@@ -113,11 +113,13 @@ describe('ActionSheetComponent', () => {
 
   describe('actions', () => {
     it('should contain each item', () => {
-      const rootElement: HTMLElement = fixture.debugElement.nativeElement;
-      const actionSheetItems = rootElement.querySelector('.action-sheet-items');
-      expect(actionSheetItems.children.length).toBe(3);
-      Array.from(actionSheetItems.children).forEach((item, index) => {
-        expect(item.textContent).toEqual(`Action ${index + 1}`);
+      const rootElement: DebugElement = fixture.debugElement;
+      const actionSheetItems = rootElement
+        .query(By.directive(CardComponent))
+        .queryAll(By.directive(ButtonComponent));
+      expect(actionSheetItems.length).toBe(3);
+      Array.from(actionSheetItems).forEach((item, index) => {
+        expect(item.nativeElement.innerText).toEqual(`Action ${index + 1}`);
       });
     });
 
@@ -129,10 +131,12 @@ describe('ActionSheetComponent', () => {
       ];
 
       fixture.detectChanges();
-      const rootElement: HTMLElement = fixture.debugElement.nativeElement;
-      const actionSheetItems = rootElement.querySelector('.action-sheet-items');
-      const actionSheetItemsText = Array.from(actionSheetItems.children).map((item) => {
-        return item.textContent;
+      const rootElement: DebugElement = fixture.debugElement;
+      const actionSheetItems = rootElement
+        .query(By.directive(CardComponent))
+        .queryAll(By.directive(ButtonComponent));
+      const actionSheetItemsText = Array.from(actionSheetItems).map((item) => {
+        return item.nativeElement.innerText;
       });
       expect(actionSheetItemsText).not.toContain('Action 1');
       expect(actionSheetItemsText).toContain('New Action 1');
@@ -146,9 +150,9 @@ describe('ActionSheetComponent', () => {
     it('should render', () => {
       const expected = 'Test cancel button text';
       fixture.detectChanges();
-      const cancelButton = fixture.debugElement.query(By.directive(ButtonComponent));
+      const cancelButton = fixture.debugElement.query(By.css('.cancel-btn'));
       expect(component.cancelButtonText).toEqual(expected);
-      expect(cancelButton.nativeElement.textContent).toEqual(expected);
+      expect(cancelButton.nativeElement.innerText).toEqual(expected);
     });
   });
 });
