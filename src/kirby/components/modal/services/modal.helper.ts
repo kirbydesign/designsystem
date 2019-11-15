@@ -16,6 +16,7 @@ export class ModalHelper {
     registerModal: (modal: { close: (data?: any) => {} }) => void
   ): Promise<any> {
     const mergedConfig = this.mergeDefaultConfig(config);
+    console.log('mergedConfig', mergedConfig);
     const modal = await this.ionicModalController.create({
       component: ModalWrapperComponent,
       cssClass: 'kirby-modal',
@@ -153,30 +154,30 @@ export class ModalHelper {
     const modalConfig: ModalConfig = {
       title: config.title,
       component: config.component,
-      flavor: config.flavor === null ? 'modal' : config.flavor,
-      dim: config.dim === null ? ModalConfigHelper.defaultDim : config.dim,
+      flavor: config.flavor == null ? 'modal' : config.flavor,
+      dim: config.dim == null ? ModalConfigHelper.defaultDim : config.dim,
       componentProps: config.componentProps,
       drawerSupplementaryAction: config.drawerSupplementaryAction,
       enterDuration:
-        config.enterDuration === null
+        config.enterDuration === undefined
           ? config.flavor === 'modal'
             ? KirbyAnimation.Duration.SHORT
             : KirbyAnimation.Duration.LONG
           : config.enterDuration,
       leaveDuration:
-        config.leaveDuration === null
+        config.leaveDuration === undefined
           ? config.flavor === 'modal'
             ? KirbyAnimation.Duration.SHORT
             : KirbyAnimation.Duration.LONG
           : config.leaveDuration,
       easingIn:
-        config.easingIn === null
+        config.easingIn === undefined
           ? config.flavor === 'modal'
             ? KirbyAnimation.Easing.STATIC
             : KirbyAnimation.Easing.ENTER
           : config.easingIn,
       easingOut:
-        config.easingOut === null
+        config.easingOut === undefined
           ? config.flavor === 'modal'
             ? KirbyAnimation.Easing.STATIC
             : KirbyAnimation.Easing.EXIT

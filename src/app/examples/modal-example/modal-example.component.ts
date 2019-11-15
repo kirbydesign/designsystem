@@ -14,7 +14,6 @@ export class ModalExampleComponent {
   showModal() {
     const config: ModalConfig = {
       title: 'My Modal Title',
-      flavor: 'modal',
       component: FirstEmbeddedModalExampleComponent,
       componentProps: {
         prop1: 'value1',
