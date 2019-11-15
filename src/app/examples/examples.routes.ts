@@ -140,7 +140,7 @@ export const routes: Routes = [
     component: ListExampleComponent,
     children: [
       {
-        path: 'default',
+        path: '',
         component: ListDefaultExampleComponent,
       },
       {
