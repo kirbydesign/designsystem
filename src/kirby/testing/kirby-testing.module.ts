@@ -60,6 +60,8 @@ import { ActionSheetComponent } from '@kirbydesign/designsystem/components/modal
 import { RouterOutletComponent } from '@kirbydesign/designsystem/components/router-outlet/router-outlet.component';
 import { AppComponent } from '@kirbydesign/designsystem/components/app/app.component';
 import { CalendarComponent } from '@kirbydesign/designsystem/components/calendar/calendar.component';
+import { ItemComponent } from '../components/item/item.component';
+import { LabelComponent } from '../components/item/label/label.component';
 
 /*
  * Fake components should be handled by the list of kirby
@@ -169,7 +171,9 @@ const MOCK_COMPONENTS = MockComponents(
   ActionSheetComponent,
   FabSheetComponent,
   RouterOutletComponent,
-  AppComponent
+  AppComponent,
+  ItemComponent,
+  LabelComponent
 );
 
 /**

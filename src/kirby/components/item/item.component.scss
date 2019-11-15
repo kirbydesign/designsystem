@@ -1,0 +1,57 @@
+@import '../../scss/utils';
+@import 'item.utils';
+
+:host {
+  display: block;
+  position: relative;
+
+  ion-item {
+    font-size: font-size('s');
+    --padding-start: #{size('s')};
+    --inner-padding-end: #{size('s')};
+    --padding-top: #{size('xxs')};
+    --padding-bottom: #{size('xxs')};
+    --background: white;
+
+    @include slotted('[slot="end"]') {
+      margin-inline-start: 0;
+      margin-inline-end: 0;
+      text-align: right;
+    }
+
+    @include slotted('time[slot="end"]') {
+      margin-inline-start: size('xs');
+    }
+
+    @include slotted('data[slot="end"]', '[detail][slot="end"]') {
+      margin-inline-start: size('s');
+    }
+
+    @include item-typography();
+
+    @include slotted(':not([slot])') {
+      width: 100%;
+    }
+  }
+
+  .outside {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: size('s');
+  }
+
+  &.selected {
+    ion-item {
+      @include slotted(h1, h2, h3, h4, h5, h6, p, data) {
+        font-weight: font-weight('bold');
+      }
+    }
+  }
+}
