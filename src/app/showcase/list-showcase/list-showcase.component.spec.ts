@@ -1,9 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { MockComponent } from 'ng-mocks';
 
 import { ExamplesModule } from '../../examples/examples.module';
 import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
 import { ListShowcaseComponent } from './list-showcase.component';
+import { IphoneComponent } from '~/app/iphone/iphone.component';
 
 describe('ListShowcaseComponent', () => {
   let component: ListShowcaseComponent;
@@ -12,7 +14,7 @@ describe('ListShowcaseComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ExamplesModule, RouterTestingModule],
-      declarations: [ListShowcaseComponent, CodeViewerComponent],
+      declarations: [ListShowcaseComponent, CodeViewerComponent, MockComponent(IphoneComponent)],
     }).compileComponents();
   }));
 
