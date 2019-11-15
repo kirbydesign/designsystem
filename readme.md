@@ -46,10 +46,10 @@ npm i @kirbydesign/designsystem
 
 ### devDependencies
 
-As devDependencies of the npm package doesn't automatically get installed, you also need to install `sass-extract`, `sass-extract-loader` and `ng-mocks` (_remember to include the `-D` flag_):
+As devDependencies of the npm package doesn't automatically get installed, you also need to install `node-sass`, `sass-extract`, `sass-extract-loader` and `ng-mocks` (_remember to include the `-D` flag_):
 
 ```
-npm i sass-extract sass-extract-loader ng-mocks@7.7.0 -D
+npm i node-sass sass-extract sass-extract-loader ng-mocks@7.7.0 -D
 ```
 
 ### Typescript Configuration
