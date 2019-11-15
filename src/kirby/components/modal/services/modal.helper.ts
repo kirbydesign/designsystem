@@ -12,56 +12,25 @@ export class ModalHelper {
   constructor(private ionicModalController: IonicModalController) {}
 
   public async showModalWindow(
-    conf: ModalConfig,
+    config: ModalConfig,
     registerModal: (modal: { close: (data?: any) => {} }) => void
   ): Promise<any> {
-    const config: ModalConfig = {
-      title: conf.title,
-      component: conf.component,
-      flavor: conf.flavor,
-      dim: conf.dim == null ? ModalConfigHelper.defaultDim : conf.dim,
-      componentProps: conf.componentProps,
-      drawerSupplementaryAction: conf.drawerSupplementaryAction,
-      durationOn:
-        conf.durationOn == null
-          ? conf.flavor == 'modal'
-            ? KirbyAnimation.Duration.SHORT
-            : KirbyAnimation.Duration.LONG
-          : conf.durationOn,
-      durationOff:
-        conf.durationOff == null
-          ? conf.flavor == 'modal'
-            ? KirbyAnimation.Duration.SHORT
-            : KirbyAnimation.Duration.LONG
-          : conf.durationOff,
-      easingOn:
-        conf.easingOn == null
-          ? conf.flavor == 'modal'
-            ? KirbyAnimation.Easing.STATIC
-            : KirbyAnimation.Easing.ENTER
-          : conf.easingOn,
-      easingOut:
-        conf.easingOut == null
-          ? conf.flavor == 'modal'
-            ? KirbyAnimation.Easing.STATIC
-            : KirbyAnimation.Easing.EXIT
-          : conf.easingOut,
-    };
+    const mergedConfig = this.mergeDefaultConfig(config);
     const modal = await this.ionicModalController.create({
       component: ModalWrapperComponent,
       cssClass: 'kirby-modal',
-      componentProps: { config: config },
+      componentProps: { config: mergedConfig },
       enterAnimation: ModalHelper.animateIn.bind(
         this,
-        config.flavor,
-        config.durationOn,
-        config.easingOn
+        mergedConfig.flavor,
+        mergedConfig.enterDuration,
+        mergedConfig.easingIn
       ),
       leaveAnimation: ModalHelper.animateOut.bind(
         this,
-        config.flavor,
-        config.durationOff,
-        config.easingOut
+        mergedConfig.flavor,
+        mergedConfig.leaveDuration,
+        mergedConfig.easingOut
       ),
     });
 
@@ -178,5 +147,41 @@ export class ModalHelper {
         nativeElement.blur();
       }, 50);
     }
+  }
+
+  private mergeDefaultConfig(config: ModalConfig): ModalConfig {
+    const modalConfig: ModalConfig = {
+      title: config.title,
+      component: config.component,
+      flavor: config.flavor === null ? 'modal' : config.flavor,
+      dim: config.dim === null ? ModalConfigHelper.defaultDim : config.dim,
+      componentProps: config.componentProps,
+      drawerSupplementaryAction: config.drawerSupplementaryAction,
+      enterDuration:
+        config.enterDuration === null
+          ? config.flavor === 'modal'
+            ? KirbyAnimation.Duration.SHORT
+            : KirbyAnimation.Duration.LONG
+          : config.enterDuration,
+      leaveDuration:
+        config.leaveDuration === null
+          ? config.flavor === 'modal'
+            ? KirbyAnimation.Duration.SHORT
+            : KirbyAnimation.Duration.LONG
+          : config.leaveDuration,
+      easingIn:
+        config.easingIn === null
+          ? config.flavor === 'modal'
+            ? KirbyAnimation.Easing.STATIC
+            : KirbyAnimation.Easing.ENTER
+          : config.easingIn,
+      easingOut:
+        config.easingOut === null
+          ? config.flavor === 'modal'
+            ? KirbyAnimation.Easing.STATIC
+            : KirbyAnimation.Easing.EXIT
+          : config.easingOut,
+    };
+    return modalConfig;
   }
 }

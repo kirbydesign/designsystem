@@ -4,13 +4,13 @@ import { KirbyAnimation } from '@kirbydesign/designsystem/animation/kirby-animat
 export interface ModalConfig {
   title: string;
   component: any;
-  flavor: 'modal' | 'drawer';
+  flavor?: 'modal' | 'drawer';
   dim?: number;
   componentProps?: { [key: string]: any };
   // the supplementary action is only available in the drawer
   drawerSupplementaryAction?: DrawerSupplementaryAction;
-  durationOn?: KirbyAnimation.Duration;
-  durationOff?: KirbyAnimation.Duration;
-  easingOn?: KirbyAnimation.Easing;
+  enterDuration?: KirbyAnimation.Duration;
+  leaveDuration?: KirbyAnimation.Duration;
+  easingIn?: KirbyAnimation.Easing;
   easingOut?: KirbyAnimation.Easing;
 }
