@@ -1,19 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { ShowcaseProperty } from '../../shared/showcase-properties/showcase-property';
-declare var require: any;
 
 @Component({
   selector: 'kirby-item-showcase',
   templateUrl: './item-showcase.component.html',
   styleUrls: ['./item-showcase.component.scss'],
 })
-export class ItemShowcaseComponent implements OnInit {
-  // exampleHtml: string = require('!raw-loader!../../examples/item/item-example.component.html');
-
+export class ItemShowcaseComponent {
   properties: ShowcaseProperty[] = [];
 
-  constructor() {}
-
-  ngOnInit() {}
+  scrollTo(target: Element) {
+    // debugger;
+    target.scrollIntoView({ behavior: 'smooth' });
+    return false;
+  }
 }

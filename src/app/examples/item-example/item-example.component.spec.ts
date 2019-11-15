@@ -5,14 +5,15 @@ import { MockModule } from 'ng-mocks';
 
 import { ItemExampleComponent } from './item-example.component';
 import { KirbyTestingModule } from '@kirbydesign/designsystem/testing';
+import { ItemExampleModule } from './item-example.module';
 
-describe('TabsExampleComponent', () => {
+describe('ItemsExampleComponent', () => {
   let component: ItemExampleComponent;
   let fixture: ComponentFixture<ItemExampleComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [MockModule(KirbyTestingModule)],
+      imports: [MockModule(KirbyTestingModule), ItemExampleModule],
       declarations: [ItemExampleComponent],
       providers: [Location],
     }).compileComponents();

@@ -1,13 +1,38 @@
 @import '../../../scss/utils';
+@import '../item.utils';
 
 :host {
   display: block;
-   overflow: hidden;
-    ::ng-deep ion-label { 
-        h1,h2,h3,h4,h5,h6,p {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
+  box-sizing: border-box;
+  font-size: inherit;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+
+  &.horizontal {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    @include slotted(':not(:first-child)') {
+      margin-left: size('xs');
     }
+  }
+}
+
+:host-context(kirby-item) {
+  @include item-typography();
+}
+
+:host([slot='end']) {
+  @include slotted(data, '[detail]') {
+    margin-inline-start: size('s');
+  }
+}
+
+:host-context(kirby-item.selected) {
+  @include slotted(h1, h2, h3, h4, h5, h6, p, data) {
+    font-weight: font-weight('bold');
+  }
 }

@@ -2,36 +2,48 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { KirbyModule } from '@kirbydesign/designsystem';
-import { ItemDefaultExampleComponent } from './examples/default';
-import { ItemTwoColumnsSingleLineComponent } from './examples/two-columns-single-line';
-import { ItemTwoColumnsTwoRowsComponent } from './examples/two-colums-two-rows';
-import { ItemTwoColumnsSingleLineWithToggleComponent } from './examples/two-columns-single-line-with-toggle';
-import { ItemTwoColumnsWithButtonComponent } from './examples/two-columns-with-button';
-import { ItemTwoColumnsWithAvatarComponent } from './examples/two-columns-with-avatar';
-import { ItemThreeColumnsWithAvatarComponent } from './examples/three-columns-with-avatar';
-import { ItemThreeColumnsWithAvatarAndSubTitleComponent } from './examples/tree-columns-with-avatar-and-subtitle';
-import { ItemTwoColumnsWithAvatarSubtitleAndDetailsComponent } from './examples/two-columns-with-avatar-subtitle-and-details';
-import { ItemThreeColumnsWithSubtitleAndDetailsComponent } from './examples/three-column-with-avatar-subtitle-and-details';
-import { ItemThreeColumnsWithAvatarAndButtonComponent } from './examples/three-columns-with-avatar-and-button';
-import { ItemThreeColumnsCheckedComponent } from './examples/three-columns-selected';
-import { ItemThreeColumnsWithAvatarAndCheckmarkComponent } from './examples/three-columns-with-avatar-and-checkmark';
-import { ItemThreeColumnsWithNoteComponent } from './examples/three-columns-with-note';
+import { ItemExampleSimpleComponent } from './examples/simple/default';
+import { ItemExampleLongTitleComponent } from './examples/simple/long-title';
+import { ItemExampleSimpleTwoLinesComponent } from './examples/simple/two-lines';
+import { ItemExampleSimpleTwoValueLinesComponent } from './examples/simple/two-value-lines';
+import { ItemExampleSimpleThreeLinesComponent } from './examples/simple/three-lines';
+import { ItemExamplePickerDefaultComponent } from './examples/picker/default';
+import { ItemExamplePickerDefaultSelectedComponent } from './examples/picker/default-selected';
+import { ItemExamplePickerAvatarSelectedComponent } from './examples/picker/avatar-selected';
+import { ItemExamplePickerCheckboxComponent } from './examples/picker/checkbox';
+import { ItemExampleFabMenuComponent } from './examples/fab-menu';
+import { ItemExampleAttachmentComponent } from './examples/attachment';
+import { ItemExampleSettingsComponent } from './examples/settings/settings';
+import { ItemExampleSettingsDisabledComponent } from './examples/settings/settings-disabled';
+import { ItemExampleFlaggedComponent } from './examples/flagged';
+import { ItemExampleAvatarComponent } from './examples/avatar/default';
+import { ItemExampleAvatarDateComponent } from './examples/avatar/date';
+import { ItemExampleAvatarFlaggedComponent } from './examples/avatar/flagged';
+import { ItemExampleAvatarFlaggedThreeLinesComponent } from './examples/avatar/flagged-three-lines';
+import { ItemExampleHorizontalComponent } from './examples/horizontal';
+import { ItemExampleButtonComponent } from './examples/button';
 
 const COMPONENT_DECLARATIONS = [
-  ItemDefaultExampleComponent,
-  ItemTwoColumnsSingleLineComponent,
-  ItemTwoColumnsTwoRowsComponent,
-  ItemTwoColumnsSingleLineWithToggleComponent,
-  ItemTwoColumnsWithButtonComponent,
-  ItemTwoColumnsWithAvatarComponent,
-  ItemThreeColumnsWithAvatarComponent,
-  ItemThreeColumnsWithAvatarAndSubTitleComponent,
-  ItemTwoColumnsWithAvatarSubtitleAndDetailsComponent,
-  ItemThreeColumnsWithSubtitleAndDetailsComponent,
-  ItemThreeColumnsWithAvatarAndButtonComponent,
-  ItemThreeColumnsCheckedComponent,
-  ItemThreeColumnsWithAvatarAndCheckmarkComponent,
-  ItemThreeColumnsWithNoteComponent,
+  ItemExampleSimpleComponent,
+  ItemExampleLongTitleComponent,
+  ItemExampleSimpleTwoLinesComponent,
+  ItemExampleSimpleThreeLinesComponent,
+  ItemExampleSimpleTwoValueLinesComponent,
+  ItemExamplePickerDefaultComponent,
+  ItemExamplePickerDefaultSelectedComponent,
+  ItemExamplePickerAvatarSelectedComponent,
+  ItemExamplePickerCheckboxComponent,
+  ItemExampleFabMenuComponent,
+  ItemExampleAttachmentComponent,
+  ItemExampleSettingsComponent,
+  ItemExampleSettingsDisabledComponent,
+  ItemExampleFlaggedComponent,
+  ItemExampleAvatarComponent,
+  ItemExampleAvatarDateComponent,
+  ItemExampleAvatarFlaggedComponent,
+  ItemExampleAvatarFlaggedThreeLinesComponent,
+  ItemExampleButtonComponent,
+  ItemExampleHorizontalComponent,
 ];
 
 @NgModule({

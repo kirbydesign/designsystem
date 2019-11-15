@@ -1,164 +1,57 @@
 @import '../../scss/utils';
-
-@mixin margin($val) {
-  margin: $val;
-  &:first-child {
-    margin-left: 0;
-  }
-  &:last-child {
-    margin-right: 0;
-  }
-}
+@import 'item.utils';
 
 :host {
   display: block;
-  background-color: white;
+  position: relative;
 
   ion-item {
-    --min-height: 56px;
-    --padding-top: 0;
-    --padding-bottom: 0;
-    --padding-start: #{size('xxs')};
-    --padding-end: #{size('xxs')};
-    --inner-padding-start: #{size('xxs')};
-    --inner-padding-end: #{size('xxs')};
+    font-size: font-size('s');
+    --padding-start: #{size('s')};
+    --inner-padding-end: #{size('s')};
+    --padding-top: #{size('xxs')};
+    --padding-bottom: #{size('xxs')};
+    --background: white;
 
-    .item-inner {
-      padding: size('xxs') 0;
+    @include slotted('[slot="end"]') {
+      margin-inline-start: 0;
+      margin-inline-end: 0;
+      text-align: right;
     }
 
-    &.item-lines-inset,
-    &.item-lines-full {
-      //--ion-item-border-color: #{get-color('background-color')};
-      --ion-item-border-color: var(--item-border-color, red);
+    @include slotted('time[slot="end"]') {
+      margin-inline-start: size('xs');
     }
 
-    &.item-lines-inset {
-      --inner-border-width: 0 0 1px 0;
-      --border-width: 0;
+    @include slotted('data[slot="end"]', '[detail][slot="end"]') {
+      margin-inline-start: size('s');
     }
 
-    &.item-lines-full {
-      --border-width: 0 0 1px 0;
-    }
-  }
+    @include item-typography();
 
-  .item-inner {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-}
-
-:host ::ng-deep {
-  [slot='end']:last-child {
-    margin-right: 0;
-  }
-
-  ion-label {
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      margin: 0;
-      color: get-color('black');
-      font-size: font-size('n');
-
-      &:not(:first-child) {
-        font-size: font-size('xs');
-        color: get-color('semi-dark');
-
-        &:not(:last-child) {
-          color: get-color('black');
-        }
-      }
-    }
-  }
-
-  kirby-avatar {
-    align-self: center;
-    @include margin(0 12px);
-  }
-  kirby-icon {
-    @include margin(0 3px);
-  }
-  kirby-label:first-of-type {
-    @include margin(0 0);
-  }
-  kirby-label:first-of-type + * {
-    @include margin(0 16px);
-  }
-  kirby-label:first-of-type + time {
-    @include margin(0 12px);
-  }
-  kirby-label:first-of-type + kirby-icon {
-    @include margin(0 8px);
-  }
-  kirby-label:first-of-type + kirby-icon {
-    @include margin(0 8px);
-  }
-
-  kirby-label[expand]:first-of-type + kirby-label {
-    @include margin(0 0px);
-    width: 100%;
-    text-align: left;
-  }
-
-  kirby-label {
-    flex: 1;
-    margin: 0;
-
-    &:last-child {
-      flex-basis: auto;
-      flex-direction: row;
-      flex-grow: 0;
-      flex-shrink: 1;
-      flex-wrap: nowrap;
-    }
-
-    &:last-child {
-      &:not(:first-of-type) {
-        text-align: right;
-      }
-    }
-
-    [expand='true'] {
-      text-align: left;
-      margin-left: 0;
-    }
-  }
-
-  kirby-label[expand] {
-    flex: none;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    align-self: center;
-
-    ion-label {
+    @include slotted(':not([slot])') {
       width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
     }
   }
 
-  kirby-label kirby-badge {
-    display: block;
+  .outside {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: size('s');
   }
 
-  kirby-label[badges] {
-    height: 100%;
-    position: absolute;
-    left: 0px;
-    display: flex;
-    align-items: center;
-
-    ion-label > *:not(:last-child) {
-      margin-bottom: 2px;
+  &.selected {
+    ion-item {
+      @include slotted(h1, h2, h3, h4, h5, h6, p, data) {
+        font-weight: font-weight('bold');
+      }
     }
   }
 }

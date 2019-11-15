@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, HostBinding } from '@angular/core';
 
 @Component({
   selector: 'kirby-item',
@@ -6,5 +6,8 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./item.component.scss'],
 })
 export class ItemComponent {
-  @Input() lines: 'full' | 'inset' | 'none' = 'none';
+  @Input() disabled: boolean;
+  @HostBinding('class.selected')
+  @Input()
+  selected;
 }

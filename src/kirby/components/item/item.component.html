@@ -1,7 +1,6 @@
-<ion-item [lines]="lines">
-  <ng-content select="[slot='start']"></ng-content>
-  <div class="item-inner">
-    <ng-content></ng-content>
-  </div>
-  <ng-content select="[slot='end']"></ng-content>
+<div class="outside">
+  <ng-content select="[slot='outside']"></ng-content>
+</div>
+<ion-item lines="none" [attr.disabled]="disabled">
+  <ng-content></ng-content>
 </ion-item>

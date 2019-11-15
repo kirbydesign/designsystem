@@ -7,7 +7,7 @@ import { CardThemecolorExampleComponent } from './card/card-themecolor-example/c
 import { CardElevationsExampleComponent } from './card/card-elevations-example/card-elevations-example.component';
 import { GridExampleComponent } from './grid-example/grid-example.component';
 import { ListExampleComponent } from './list/list-example.component';
-import { ListLoadOnDemandExampleComponent } from './list/load-on-demand/list-load-on-demand-example.component';
+import { ListLoadOnDemandExampleComponent } from './list/components/load-on-demand/list-load-on-demand-example.component';
 import { ChartExampleComponent } from './chart-example/chart-example.component';
 import { FontsExampleComponent } from './fonts-example/fonts-example.component';
 import { SpinnerExampleComponent } from './spinner-example/spinner-example.component';
@@ -29,8 +29,8 @@ import { ToggleExampleComponent } from './toggle-example/toggle-example.componen
 import { EmptyStateExampleComponent } from './empty-state-example/empty-state-example.component';
 import { LoadingOverlayExampleComponent } from './loading-overlay-example/loading-overlay-example.component';
 import { ToolbarExampleComponent } from './toolbar-example/toolbar-example.component';
-import { ListSwipeExampleComponent } from './list/swipe/list-swipe-example.component';
-import { ListNoShapeExampleComponent } from './list/no-shape/list-no-shape-example.component';
+import { ListSwipeExampleComponent } from './list/components/swipe/list-swipe-example.component';
+import { ListNoShapeExampleComponent } from './list/components/no-shape/list-no-shape-example.component';
 import { FabSheetExampleComponent } from './fab-sheet-example/fab-sheet-example.component';
 import { PageSimpleExampleComponent } from './page-example/simple/page-simple-example.component';
 import { PageAlignmentAndToolbarTitleExampleComponent } from './page-example/alignment-and-toolbar-title/page-alignment-and-toolbar-title-example.component';
@@ -40,7 +40,7 @@ import { FormFieldExampleComponent } from './form-field-example/form-field-examp
 import { ExamplesComponent } from './examples.component';
 import { TabsExampleComponent } from './tabs/tabs-example.component';
 import { TabExampleComponent } from './tabs/tab/tab-example.component';
-import { ItemExampleComponent } from '~/app/examples/item-example/item-example.component';
+import { ItemExampleComponent } from './item-example/item-example.component';
 import { DividerExampleComponent } from './divider-example/divider-example.component';
 
 // Example of "custom" icons
@@ -98,8 +98,8 @@ export const COMPONENT_DECLARATIONS: any[] = [
   PageAdvancedExampleComponent,
   TabsExampleComponent,
   TabExampleComponent,
-  DividerExampleComponent,
   ItemExampleComponent,
+  DividerExampleComponent,
 ];
 
 // Configure custom icons (used by example to show the usage of custom icons)
