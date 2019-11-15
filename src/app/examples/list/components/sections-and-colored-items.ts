@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 
-import { BaseListComponent } from '../base-list.component';
+import { BaseListComponent } from './base-list.component';
 
-export const ListWithSectionsExampleTemplate = `<kirby-list
+export const ListWithSectionsAndColoredItemsExampleTemplate = `<kirby-list
   [items]="items"
   (itemSelect)="onItemSelect($event)"
   [getSectionName]="getSectionName"
+  [getItemColor]="getItemColor"
   [showDivider]="true"
 >
   <kirby-list-section-header
@@ -25,16 +26,18 @@ export const ListWithSectionsExampleTemplate = `<kirby-list
 
 @Component({
   // tslint:disable-next-line
-  selector: 'list-with-sections-example',
+  selector: 'list-with-sections-and-colored-items-example',
   template: `
-    <kirby-page title="List with sections">
+    <kirby-page title="List with sections and colored items">
       <kirby-page-content>
-        ${ListWithSectionsExampleTemplate}
+        ${ListWithSectionsAndColoredItemsExampleTemplate}
       </kirby-page-content>
     </kirby-page>
   `,
 })
-export class ListWithSectionsExampleComponent extends BaseListComponent {
+export class ListWithSectionsAndColoredItemsExampleComponent extends BaseListComponent {
+  getItemColor = (item) => item.color;
+
   getSectionName(item: any): string {
     return item.detail > 0 ? 'Positive' : 'Negative';
   }

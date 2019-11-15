@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 
-import { ListNoShapeExampleComponent } from './list/no-shape/list-no-shape-example.component';
+import { ListNoShapeExampleComponent } from './list/components/no-shape/list-no-shape-example.component';
 import { AvatarExampleComponent } from './avatar-example/avatar-example.component';
 import { ButtonExampleComponent } from './button-example/button-example.component';
 import { CardExampleComponent } from './card-example/card-example.component';
@@ -25,8 +25,8 @@ import { ToggleExampleComponent } from './toggle-example/toggle-example.componen
 import { EmptyStateExampleComponent } from './empty-state-example/empty-state-example.component';
 import { LoadingOverlayExampleComponent } from './loading-overlay-example/loading-overlay-example.component';
 import { ToolbarExampleComponent } from './toolbar-example/toolbar-example.component';
-import { ListSwipeExampleComponent } from './list/swipe/list-swipe-example.component';
-import { ListLoadOnDemandExampleComponent } from './list/load-on-demand/list-load-on-demand-example.component';
+import { ListSwipeExampleComponent } from './list/components/swipe/list-swipe-example.component';
+import { ListLoadOnDemandExampleComponent } from './list/components/load-on-demand/list-load-on-demand-example.component';
 import { FormFieldExampleComponent } from './form-field-example/form-field-example.component';
 import { FabSheetExampleComponent } from './fab-sheet-example/fab-sheet-example.component';
 import { PageSimpleExampleComponent } from './page-example/simple/page-simple-example.component';
@@ -36,15 +36,15 @@ import { PageAdvancedExampleComponent } from './page-example/advanced/page-advan
 import { ExamplesComponent } from './examples.component';
 import { TabsExampleComponent } from './tabs/tabs-example.component';
 import { TabExampleComponent } from './tabs/tab/tab-example.component';
-import { ListDefaultExampleComponent } from './list/default/default';
-import { ListBoldTextOnRowSelectionExampleComponent } from '~/app/examples/list/bold-text-on-row-selection/bold-text-on-row-selection';
-import { ListWithDividersExampleComponent } from '~/app/examples/list/dividers/dividers';
-import { ListSelectableItemsExampleComponent } from '~/app/examples/list/selectable-items/selectable-items';
-import { ListWithSectionsAndColoredItemsExampleComponent } from '~/app/examples/list/sections-and-colored-items/sections-and-colored-items';
-import { ListColoredItemsExampleComponent } from '~/app/examples/list/colored-items/colored-items';
-import { ListWithHeaderAndFooterExampleComponent } from '~/app/examples/list/header-and-footer/header-and-footer';
-import { ListWithSectionsExampleComponent } from '~/app/examples/list/sections/sections';
-import { ListWithCustomContentExampleComponent } from '~/app/examples/list/custom-content/custom-content';
+import { ListDefaultExampleComponent } from './list/components/default';
+import { ListBoldTextOnRowSelectionExampleComponent } from '~/app/examples/list/components/bold-text-on-row-selection';
+import { ListWithDividersExampleComponent } from '~/app/examples/list/components/dividers';
+import { ListSelectableItemsExampleComponent } from '~/app/examples/list/components/selectable-items';
+import { ListWithSectionsAndColoredItemsExampleComponent } from '~/app/examples/list/components/sections-and-colored-items';
+import { ListColoredItemsExampleComponent } from '~/app/examples/list/components/colored-items';
+import { ListWithHeaderAndFooterExampleComponent } from '~/app/examples/list/components/header-and-footer';
+import { ListWithSectionsExampleComponent } from '~/app/examples/list/components/sections';
+import { ListWithCustomContentExampleComponent } from '~/app/examples/list/components/custom-content';
 
 export const routes: Routes = [
   {

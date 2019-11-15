@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ListDefaultExampleTemplate } from '../../examples/list/default/default';
-import { ListBoldTextOnRowSelectionExampleTemplate } from '../../examples/list/bold-text-on-row-selection/bold-text-on-row-selection';
-import { ListWithDividersExampleTemplate } from '~/app/examples/list/dividers/dividers';
-import { ListSelectableItemsExampleTemplate } from '~/app/examples/list/selectable-items/selectable-items';
-import { ListColoredItemsExampleTemplate } from '~/app/examples/list/colored-items/colored-items';
-import { ListWithSectionsAndColoredItemsExampleTemplate } from '~/app/examples/list/sections-and-colored-items/sections-and-colored-items';
-import { ListWithHeaderAndFooterExampleTemplate } from '~/app/examples/list/header-and-footer/header-and-footer';
-import { ListWithSectionsExampleTemplate } from '~/app/examples/list/sections/sections';
-import { ListWithCustomContentExampleTemplate } from '~/app/examples/list/custom-content/custom-content';
+import { ListDefaultExampleTemplate } from '../../examples/list/components/default';
+import { ListBoldTextOnRowSelectionExampleTemplate } from '../../examples/list/components/bold-text-on-row-selection';
+import { ListWithDividersExampleTemplate } from '~/app/examples/list/components/dividers';
+import { ListSelectableItemsExampleTemplate } from '~/app/examples/list/components/selectable-items';
+import { ListColoredItemsExampleTemplate } from '~/app/examples/list/components/colored-items';
+import { ListWithSectionsAndColoredItemsExampleTemplate } from '~/app/examples/list/components/sections-and-colored-items';
+import { ListWithHeaderAndFooterExampleTemplate } from '~/app/examples/list/components/header-and-footer';
+import { ListWithSectionsExampleTemplate } from '~/app/examples/list/components/sections';
+import { ListWithCustomContentExampleTemplate } from '~/app/examples/list/components/custom-content';
 
 declare var require: any;
 

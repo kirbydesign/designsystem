@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { BaseListComponent } from '../base-list.component';
+import { BaseListComponent } from './base-list.component';
 
 export const ListWithCustomContentExampleTemplate = `<kirby-list [items]="items" (itemSelect)="onItemSelect($event)">
   <!-- Cells can also take arbitrary markup (client specific) as cell-lines -->

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { BaseListComponent } from '../base-list.component';
+import { BaseListComponent } from './base-list.component';
 
 export const ListWithDividersExampleTemplate = `<kirby-list [items]="items" showDivider="true">
   <kirby-list-item
