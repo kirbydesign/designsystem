@@ -38,13 +38,13 @@ export class ModalHelper {
         conf.easingOn == null
           ? conf.flavor == 'modal'
             ? KirbyAnimation.Easing.STATIC
-            : KirbyAnimation.Easing.SOFT
+            : KirbyAnimation.Easing.ENTER
           : conf.easingOn,
       easingOut:
         conf.easingOut == null
           ? conf.flavor == 'modal'
             ? KirbyAnimation.Easing.STATIC
-            : KirbyAnimation.Easing.SOFT
+            : KirbyAnimation.Easing.EXIT
           : conf.easingOut,
     };
     const modal = await this.ionicModalController.create({
@@ -86,6 +86,9 @@ export class ModalHelper {
     const wrapperElem = baseEl.querySelector('.modal-wrapper') as HTMLElement;
     wrapperAnimation.addElement(wrapperElem);
 
+    backdropAnimation.easing(KirbyAnimation.Easing.STATIC);
+    wrapperAnimation.easing(easing);
+
     // Define animation transition values
     let transformYFromTo = [`${baseEl.clientHeight}px`, `0px`];
     let fadeBackdropFromTo = [0.01, 0.3];
@@ -113,7 +116,6 @@ export class ModalHelper {
     return Promise.resolve(
       baseAnimation
         .addElement(baseEl)
-        .easing(easing)
         .duration(duration)
         .add(wrapperAnimation)
         .add(backdropAnimation)

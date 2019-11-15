@@ -9,7 +9,8 @@ export namespace KirbyAnimation {
 
   export enum Easing {
     STATIC = 'linear',
-    SOFT = 'ease-out',
+    ENTER = 'ease-out',
+    EXIT = 'ease-in',
     MOTION = 'cubic-bezier(.25, .1, .25, 1)',
   }
 }
