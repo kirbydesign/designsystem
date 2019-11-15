@@ -137,6 +137,9 @@ export class ModalHelper {
     const wrapperElem = baseEl.querySelector('.modal-wrapper') as HTMLElement;
     wrapperAnimation.addElement(wrapperElem);
 
+    backdropAnimation.easing(KirbyAnimation.Easing.STATIC);
+    wrapperAnimation.easing(easing);
+
     // Define animation transition values
     let transformYFromTo = [`0px`, `${baseEl.clientHeight}px`];
     let fadeBackdropFromTo = [0.3, 0.01];
@@ -162,7 +165,6 @@ export class ModalHelper {
     return Promise.resolve(
       baseAnimation
         .addElement(baseEl)
-        .easing(easing)
         .duration(duration)
         .add(wrapperAnimation)
         .add(backdropAnimation)
