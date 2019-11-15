@@ -65,6 +65,17 @@ npm i node-sass sass-extract sass-extract-loader ng-mocks@7.7.0 -D
 ...
 ```
 
+_**Please also note:** If you overwrite `include` in `tsconfig.app.json` you need to add the configuration to this file as well - pay attention to the additional folder level (`../`):_
+
+```json
+...
+  "include": [
+    ...,
+    "../node_modules/@kirbydesign/designsystem/**/*.ts"
+  ],
+...
+```
+
 For testing purposes Kirby includes a [testing module](#testing). To **avoid** including this in your app, you need to add the following to your `src/tsconfig.app.json`:
 
 ```json
