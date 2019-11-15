@@ -78,9 +78,6 @@
           }
         },
         "test": {
-          "codeCoverage": {
-            "exclude": ["src/kirby/components/modal/modal-wrapper/services/**/*"]
-          },
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "src/test.ts",
@@ -98,7 +95,8 @@
                 "output": "./assets/kirby/icons/svg"
               }
             ],
-            "sourceMap": true
+            "sourceMap": true,
+            "codeCoverageExclude": ["src/kirby/components/modal/modal-wrapper/services/**/*"]
           }
         },
         "lint": {
