@@ -95,8 +95,7 @@
                 "output": "./assets/kirby/icons/svg"
               }
             ],
-            "sourceMap": true,
-            "codeCoverageExclude": ["src/kirby/components/modal/modal-wrapper/services/**/*"]
+            "sourceMap": true
           }
         },
         "lint": {
