@@ -11,8 +11,6 @@ import {
   ViewChild,
   TrackByFunction,
   ElementRef,
-  ContentChildren,
-  AfterContentInit,
 } from '@angular/core';
 
 import {
@@ -28,7 +26,6 @@ import { GroupByPipe } from './pipes/group-by.pipe';
 import { ListSwipeAction } from './list-swipe-action';
 import { ThemeColor } from '@kirbydesign/designsystem/helpers/theme-color.type';
 import { ItemComponent } from '@kirbydesign/designsystem/components/item/item.component';
-import { ItemGroupComponent } from '@kirbydesign/designsystem/components/item/group/group.component';
 
 export type ListShape = 'square' | 'rounded' | 'none';
 
@@ -38,7 +35,7 @@ export type ListShape = 'square' | 'rounded' | 'none';
   styleUrls: ['./list.component.scss'],
   providers: [ListHelper, GroupByPipe],
 })
-export class ListComponent implements OnInit, OnChanges, AfterContentInit {
+export class ListComponent implements OnInit, OnChanges {
   @ViewChild('list', { static: true }) list: any;
 
   /**
@@ -126,14 +123,11 @@ export class ListComponent implements OnInit, OnChanges, AfterContentInit {
   sectionHeaderTemplate;
   @ContentChild(ListFooterDirective, { static: false, read: TemplateRef })
   listFooterTemplate;
-  @ContentChildren(ItemComponent, { read: ElementRef })
-  itemRef;
-  @ContentChildren(ItemGroupComponent, { read: ElementRef })
-  itemGroupRef;
+
+  @ContentChild(ItemComponent, { static: false, read: ElementRef }) itemRef;
 
   @HostBinding('class.has-sections') isSectionsEnabled: boolean;
-  @HostBinding('class.has-kirby-items') hasItems: boolean;
-  @HostBinding('class.has-kirby-item-groups') hasGroups: boolean;
+  @HostBinding('class.has-items') hasItems: boolean;
   isSwipingDisabled: boolean = false;
   isSelectable: boolean;
   isLoading: boolean;
@@ -149,11 +143,11 @@ export class ListComponent implements OnInit, OnChanges, AfterContentInit {
     this.initialzeSwipeActions();
     this.isSelectable = this.itemSelect.observers.length > 0;
     this.isLoadOnDemandEnabled = this.loadOnDemand.observers.length > 0;
-  }
 
-  ngAfterContentInit(): void {
-    this.hasItems = this.itemRef.length > 0;
-    this.hasGroups = this.itemGroupRef.length > 0;
+    // Needs to be in setTimeout, otherwise element aren't found (neither in ngAfterViewInit)
+    setTimeout(() => {
+      this.hasItems = !!this.itemRef;
+    });
   }
 
   ngOnChanges(): void {

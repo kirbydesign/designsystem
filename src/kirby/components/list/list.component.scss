@@ -257,23 +257,10 @@ ion-item-divider {
   }
 }
 
-:host(.has-kirby-items) {
+:host(.has-items) {
   display: block;
   ion-list {
     border-radius: $border-radius;
     overflow: hidden;
-  }
-
-  ion-list ::ng-deep > {
-    kirby-item:last-child,
-    kirby-item-sliding:last-child {
-      --item-border-color: transparent;
-    }
-  }
-}
-
-:host(.has-kirby-item-groups) {
-  ion-list {
-    box-shadow: none;
   }
 }

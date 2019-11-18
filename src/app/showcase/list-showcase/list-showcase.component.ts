@@ -9,6 +9,7 @@ import { ListWithSectionsAndColoredItemsExampleTemplate } from '~/app/examples/l
 import { ListWithHeaderAndFooterExampleTemplate } from '~/app/examples/list/components/header-and-footer';
 import { ListWithSectionsExampleTemplate } from '~/app/examples/list/components/sections';
 import { ListWithCustomContentExampleTemplate } from '~/app/examples/list/components/custom-content';
+import { ListItemsExampleTemplate } from '../../examples/list/components/items';
 
 declare var require: any;
 
@@ -27,6 +28,7 @@ export class ListShowcaseComponent implements OnInit {
   headerAndFooterExampleTemplate: string = ListWithHeaderAndFooterExampleTemplate;
   sectionsExampleTemplate: string = ListWithSectionsExampleTemplate;
   customContentExampleTemplate: string = ListWithCustomContentExampleTemplate;
+  items: string = ListItemsExampleTemplate;
 
   exampleHtml: string = require('!raw-loader!../../examples/list/list-example.component.html')
     .default;

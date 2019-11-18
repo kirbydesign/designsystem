@@ -1,6 +1,5 @@
 <ion-list
   #list
-  *ngIf="items; else listWithKirbyItems"
   kirbyInfiniteScroll
   (scrollEnd)="onLoadOnDemand()"
   [disabled]="!isLoadOnDemandEnabled"
@@ -51,14 +50,26 @@
   <kirby-spinner></kirby-spinner>
 </div>
 
-<!-- Item template -->
+<!-- Items template -->
 <ng-template #listItems let-items>
   <ng-container *ngFor="let item of items; trackBy: trackBy || defaultTrackBy">
     <ng-container *ngTemplateOutlet="listItem; context: { $implicit: item }"></ng-container>
   </ng-container>
 </ng-template>
 
+<!-- Item templates -->
 <ng-template #listItem let-item>
+  <ng-container *ngIf="hasItems">
+    <ng-container *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }"></ng-container>
+  </ng-container>
+  <ng-container *ngIf="!hasItems">
+    <ng-container
+      *ngTemplateOutlet="deprecatedListItem; context: { $implicit: item }"
+    ></ng-container>
+  </ng-container>
+</ng-template>
+
+<ng-template #deprecatedListItem let-item>
   <ion-item
     [class.selectable]="isSelectable"
     [class.selected]="markSelectedRow && item === selectedItem"
@@ -132,10 +143,4 @@
       </ion-item-option>
     </ng-container>
   </div>
-</ng-template>
-
-<ng-template #listWithKirbyItems>
-  <ion-list>
-    <ng-content></ng-content>
-  </ion-list>
 </ng-template>
