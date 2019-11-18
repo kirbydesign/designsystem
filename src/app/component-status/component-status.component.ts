@@ -134,7 +134,6 @@ export class ComponentStatusComponent implements OnInit, OnDestroy {
 
   private getStatusItemsFromGithubIssues() {
     const flattenedItems = this.flattenItems(this.items);
-    console.log(flattenedItems);
 
     const hasStatusItem = (issue) =>
       !!flattenedItems.find((item) => item.code.githubIssueNo === issue.number);
