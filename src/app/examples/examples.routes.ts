@@ -37,16 +37,15 @@ import { ExamplesComponent } from './examples.component';
 import { TabsExampleComponent } from './tabs/tabs-example.component';
 import { TabExampleComponent } from './tabs/tab/tab-example.component';
 import { ItemExampleComponent } from './item-example/item-example.component';
-import { ListDefaultExampleComponent } from './list/components/default';
-import { ListBoldTextOnRowSelectionExampleComponent } from '~/app/examples/list/components/bold-text-on-row-selection';
-import { ListWithDividersExampleComponent } from '~/app/examples/list/components/dividers';
-import { ListSelectableItemsExampleComponent } from '~/app/examples/list/components/selectable-items';
-import { ListWithSectionsAndColoredItemsExampleComponent } from '~/app/examples/list/components/sections-and-colored-items';
-import { ListColoredItemsExampleComponent } from '~/app/examples/list/components/colored-items';
-import { ListWithHeaderAndFooterExampleComponent } from '~/app/examples/list/components/header-and-footer';
-import { ListWithSectionsExampleComponent } from '~/app/examples/list/components/sections';
-import { ListWithCustomContentExampleComponent } from '~/app/examples/list/components/custom-content';
-import { ListItemsExampleComponent } from '~/app/examples/list/components/items';
+import { ListBoldTextOnRowSelectionExampleComponent } from './list/components/bold-text-on-row-selection';
+import { ListWithDividersExampleComponent } from './list/components/dividers';
+import { ListSelectableItemsExampleComponent } from './list/components/selectable-items';
+import { ListWithSectionsAndColoredItemsExampleComponent } from './list/components/sections-and-colored-items';
+import { ListColoredItemsExampleComponent } from './list/components/colored-items';
+import { ListWithHeaderAndFooterExampleComponent } from './list/components/header-and-footer';
+import { ListWithSectionsExampleComponent } from './list/components/sections';
+import { ListWithCustomContentExampleComponent } from './list/components/custom-content';
+import { ListItemsExampleComponent } from './list/components/items';
 
 export const routes: Routes = [
   {
@@ -147,7 +146,7 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        component: ListDefaultExampleComponent,
+        redirectTo: 'with-items',
       },
       {
         path: 'bold-text-on-row-selection',

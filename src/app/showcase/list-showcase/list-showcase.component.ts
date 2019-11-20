@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ListDefaultExampleTemplate } from '../../examples/list/components/default';
 import { ListBoldTextOnRowSelectionExampleTemplate } from '../../examples/list/components/bold-text-on-row-selection';
 import { ListWithDividersExampleTemplate } from '~/app/examples/list/components/dividers';
 import { ListSelectableItemsExampleTemplate } from '~/app/examples/list/components/selectable-items';
@@ -19,7 +18,6 @@ declare var require: any;
   styleUrls: ['./list-showcase.component.scss'],
 })
 export class ListShowcaseComponent implements OnInit {
-  defaultTemplate: string = ListDefaultExampleTemplate;
   boldTextOnRowSelectionExampleTemplate: string = ListBoldTextOnRowSelectionExampleTemplate;
   dividersExampleTemplate: string = ListWithDividersExampleTemplate;
   selectableItemsExampleTemplate: string = ListSelectableItemsExampleTemplate;
