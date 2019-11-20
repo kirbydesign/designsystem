@@ -112,15 +112,15 @@ export class ListComponent implements OnInit, OnChanges {
 
   // The first element that matches ListItemDirective. As a structural directive it unfolds into a template. This is a reference to that.
   @ContentChild(ListItemDirective, { static: true, read: TemplateRef })
-  listItemTemplate: TemplateRef<any>;
+  itemTemplate: TemplateRef<any>;
   @ContentChild(ListFlexItemDirective, { static: true, read: TemplateRef })
-  listFlexItemTemplate: TemplateRef<any>;
+  flexItemTemplate: TemplateRef<any>;
   @ContentChild(ListHeaderDirective, { static: false, read: TemplateRef })
-  listHeaderTemplate: TemplateRef<any>;
+  headerTemplate: TemplateRef<any>;
   @ContentChild(ListSectionHeaderDirective, { static: false, read: TemplateRef })
   sectionHeaderTemplate: TemplateRef<any>;
   @ContentChild(ListFooterDirective, { static: false, read: TemplateRef })
-  listFooterTemplate: TemplateRef<any>;
+  footerTemplate: TemplateRef<any>;
 
   @HostBinding('class.has-sections') isSectionsEnabled: boolean;
   @HostBinding('class.has-deprecated-item-template') hasDeprecatedItemTemplate: boolean;
@@ -143,7 +143,7 @@ export class ListComponent implements OnInit, OnChanges {
   }
 
   private checkForDeprecatedItemTemplates(): void {
-    const template = this.listItemTemplate || this.listFlexItemTemplate;
+    const template = this.itemTemplate || this.flexItemTemplate;
     if (template) {
       const embeddedView = template.createEmbeddedView({});
       const rootNode = embeddedView.rootNodes[0];

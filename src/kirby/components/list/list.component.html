@@ -3,13 +3,13 @@
   kirbyInfiniteScroll
   (scrollEnd)="onLoadOnDemand()"
   [disabled]="!isLoadOnDemandEnabled"
-  [class.has-header]="listHeaderTemplate"
-  [class.has-footer]="listFooterTemplate"
+  [class.has-header]="headerTemplate"
+  [class.has-footer]="footerTemplate"
   [class.has-divider]="showDivider"
   (window:resize)="onResize()"
 >
-  <ion-list-header *ngIf="listHeaderTemplate">
-    <ng-container *ngTemplateOutlet="listHeaderTemplate"></ng-container>
+  <ion-list-header *ngIf="headerTemplate">
+    <ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
   </ion-list-header>
 
   <ng-container *ngIf="isSectionsEnabled; else normalList">
@@ -40,8 +40,8 @@
     ></ng-container>
   </ng-template>
 
-  <div *ngIf="listFooterTemplate" class="footer">
-    <ng-container *ngTemplateOutlet="listFooterTemplate"></ng-container>
+  <div *ngIf="footerTemplate" class="footer">
+    <ng-container *ngTemplateOutlet="footerTemplate"></ng-container>
   </div>
 </ion-list>
 
@@ -61,7 +61,7 @@
 <ng-template #listItem let-item>
   <ng-container
     *ngTemplateOutlet="
-      hasDeprecatedItemTemplate ? deprecatedItemTemplate : listItemTemplate;
+      hasDeprecatedItemTemplate ? deprecatedItemTemplate : itemTemplate;
       context: { $implicit: item }
     "
   ></ng-container>
@@ -78,10 +78,8 @@
     [item]="item"
     keyHandler
   >
-    <ng-container *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }"></ng-container>
-    <ng-container
-      *ngTemplateOutlet="listFlexItemTemplate; context: { $implicit: item }"
-    ></ng-container>
+    <ng-container *ngTemplateOutlet="itemTemplate; context: { $implicit: item }"></ng-container>
+    <ng-container *ngTemplateOutlet="flexItemTemplate; context: { $implicit: item }"></ng-container>
   </ion-item>
 </ng-template>
 
