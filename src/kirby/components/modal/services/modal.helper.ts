@@ -16,7 +16,6 @@ export class ModalHelper {
     registerModal: (modal: { close: (data?: any) => {} }) => void
   ): Promise<any> {
     const mergedConfig = this.mergeDefaultConfig(config);
-    console.log('mergedConfig', mergedConfig);
     const modal = await this.ionicModalController.create({
       component: ModalWrapperComponent,
       cssClass: 'kirby-modal',
@@ -42,7 +41,7 @@ export class ModalHelper {
   }
 
   private static animateIn(
-    flavor: any,
+    flavor: 'modal' | 'drawer',
     duration: KirbyAnimation.Duration,
     easing: KirbyAnimation.Easing,
     AnimationC: Animation,
@@ -60,14 +59,16 @@ export class ModalHelper {
     wrapperAnimation.easing(easing);
 
     // Define animation transition values
-    let transformYFromTo = [`${baseEl.clientHeight}px`, `0px`];
-    let fadeBackdropFromTo = [0.01, 0.3];
-    let fadeWrapperFromTo = [0.01, 1];
+    const transformYFromTo = [`${baseEl.clientHeight}px`, `0px`];
+    const fadeBackdropFrom = 0.01;
+    const fadeBackdropTo = 0.3;
+    const fadeWrapperFrom = 1;
+    const fadeWrapperTo = 1;
 
     // Define animations
     if (flavor === 'drawer') {
       // slide drawers up/down
-      backdropAnimation.fromTo('opacity', fadeBackdropFromTo[0], fadeBackdropFromTo[1]);
+      backdropAnimation.fromTo('opacity', fadeBackdropFrom, fadeBackdropTo);
       wrapperAnimation.beforeStyles({ opacity: 1 });
       wrapperAnimation.fromTo(
         `transform`,
@@ -78,8 +79,8 @@ export class ModalHelper {
       // Reset the vertical modal placement to its starting position
       wrapperElem.style.transform = `translateY(${transformYFromTo[1]})`;
       // fade modals in/out
-      backdropAnimation.fromTo('opacity', fadeBackdropFromTo[0], fadeBackdropFromTo[1]);
-      wrapperAnimation.fromTo(`opacity`, fadeWrapperFromTo[0], fadeWrapperFromTo[1]);
+      backdropAnimation.fromTo('opacity', fadeBackdropFrom, fadeBackdropTo);
+      wrapperAnimation.fromTo(`opacity`, fadeWrapperFrom, fadeWrapperTo);
     }
 
     // Run animations
@@ -93,7 +94,7 @@ export class ModalHelper {
   }
 
   private static animateOut(
-    flavor: any,
+    flavor: 'modal' | 'drawer',
     duration: KirbyAnimation.Duration,
     easing: KirbyAnimation.Easing,
     AnimationC: Animation,
@@ -111,14 +112,16 @@ export class ModalHelper {
     wrapperAnimation.easing(easing);
 
     // Define animation transition values
-    let transformYFromTo = [`0px`, `${baseEl.clientHeight}px`];
-    let fadeBackdropFromTo = [0.3, 0.01];
-    let fadeWrapperFromTo = [1, 0.01];
+    const transformYFromTo = [`0px`, `${baseEl.clientHeight}px`];
+    const fadeBackdropFrom = 0.3;
+    const fadeBackdropTo = 0.01;
+    const fadeWrapperFrom = 1;
+    const fadeWrapperTo = 0.01;
 
     // Define animations
     if (flavor === 'drawer') {
       // slide drawers up/down
-      backdropAnimation.fromTo('opacity', fadeBackdropFromTo[0], fadeBackdropFromTo[1]);
+      backdropAnimation.fromTo('opacity', fadeBackdropFrom, fadeBackdropTo);
       wrapperAnimation.beforeStyles({ opacity: 1 });
       wrapperAnimation.fromTo(
         `transform`,
@@ -127,8 +130,8 @@ export class ModalHelper {
       );
     } else {
       // fade modals in/out
-      backdropAnimation.fromTo('opacity', fadeBackdropFromTo[0], fadeBackdropFromTo[1]);
-      wrapperAnimation.fromTo(`opacity`, fadeWrapperFromTo[0], fadeWrapperFromTo[1]);
+      backdropAnimation.fromTo('opacity', fadeBackdropFrom, fadeBackdropTo);
+      wrapperAnimation.fromTo(`opacity`, fadeWrapperFrom, fadeWrapperTo);
     }
 
     // Run animations
@@ -151,38 +154,26 @@ export class ModalHelper {
   }
 
   private mergeDefaultConfig(config: ModalConfig): ModalConfig {
-    const modalConfig: ModalConfig = {
-      title: config.title,
-      component: config.component,
-      flavor: config.flavor == null ? 'modal' : config.flavor,
-      dim: config.dim == null ? ModalConfigHelper.defaultDim : config.dim,
-      componentProps: config.componentProps,
-      drawerSupplementaryAction: config.drawerSupplementaryAction,
-      enterDuration:
-        config.enterDuration === undefined
-          ? config.flavor === 'modal'
-            ? KirbyAnimation.Duration.SHORT
-            : KirbyAnimation.Duration.LONG
-          : config.enterDuration,
-      leaveDuration:
-        config.leaveDuration === undefined
-          ? config.flavor === 'modal'
-            ? KirbyAnimation.Duration.SHORT
-            : KirbyAnimation.Duration.LONG
-          : config.leaveDuration,
-      easingIn:
-        config.easingIn === undefined
-          ? config.flavor === 'modal'
-            ? KirbyAnimation.Easing.STATIC
-            : KirbyAnimation.Easing.ENTER
-          : config.easingIn,
-      easingOut:
-        config.easingOut === undefined
-          ? config.flavor === 'modal'
-            ? KirbyAnimation.Easing.STATIC
-            : KirbyAnimation.Easing.EXIT
-          : config.easingOut,
-    };
-    return modalConfig;
+    let defaults;
+
+    if (config.flavor === 'drawer') {
+      defaults = {
+        enterDuration: KirbyAnimation.Duration.LONG,
+        leaveDuration: KirbyAnimation.Duration.LONG,
+        easingIn: KirbyAnimation.Easing.ENTER,
+        easingOut: KirbyAnimation.Easing.EXIT,
+      };
+    } else {
+      defaults = {
+        flavor: 'modal',
+        dim: ModalConfigHelper.defaultDim,
+        enterDuration: KirbyAnimation.Duration.SHORT,
+        leaveDuration: KirbyAnimation.Duration.SHORT,
+        easingIn: KirbyAnimation.Easing.STATIC,
+        easingOut: KirbyAnimation.Easing.STATIC,
+      };
+    }
+
+    return { ...defaults, ...config };
   }
 }
