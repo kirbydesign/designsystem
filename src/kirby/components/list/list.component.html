@@ -23,7 +23,7 @@
       <div class="list-items">
         <ng-container
           *ngTemplateOutlet="
-            isSwipingDisabled ? listItems : slidingItems;
+            swipeActions ? slidingItemsTemplate : listItemsTemplate;
             context: { $implicit: section.items }
           "
         ></ng-container>
@@ -34,7 +34,7 @@
   <ng-template #normalList>
     <ng-container
       *ngTemplateOutlet="
-        isSwipingDisabled ? listItems : slidingItems;
+        swipeActions ? slidingItemsTemplate : listItemsTemplate;
         context: { $implicit: items }
       "
     ></ng-container>
@@ -51,7 +51,7 @@
 </div>
 
 <!-- Items template -->
-<ng-template #listItems let-items>
+<ng-template #listItemsTemplate let-items>
   <ng-container *ngFor="let item of items; trackBy: trackBy || defaultTrackBy">
     <ng-container *ngTemplateOutlet="listItem; context: { $implicit: item }"></ng-container>
   </ng-container>
@@ -85,8 +85,11 @@
 
 <!-- Swipe Action templates -->
 
-<ng-template #slidingItems let-items>
-  <ion-item-sliding *ngFor="let item of items; trackBy: trackBy || defaultTrackBy">
+<ng-template #slidingItemsTemplate let-items>
+  <ion-item-sliding
+    *ngFor="let item of items; trackBy: trackBy || defaultTrackBy"
+    [disabled]="isSwipingEnabled ? null : true"
+  >
     <ng-container *ngTemplateOutlet="swipeActions; context: { $implicit: item }"></ng-container>
     <ng-container *ngTemplateOutlet="listItem; context: { $implicit: item }"></ng-container>
   </ion-item-sliding>

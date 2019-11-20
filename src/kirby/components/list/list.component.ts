@@ -124,7 +124,7 @@ export class ListComponent implements OnInit, OnChanges {
 
   @HostBinding('class.has-sections') isSectionsEnabled: boolean;
   @HostBinding('class.has-deprecated-item-template') hasDeprecatedItemTemplate: boolean;
-  isSwipingDisabled: boolean = false;
+  isSwipingEnabled: boolean = false;
   isSelectable: boolean;
   isLoading: boolean;
   isLoadOnDemandEnabled: boolean;
@@ -265,8 +265,8 @@ export class ListComponent implements OnInit, OnChanges {
   private initializeSwipeActions(): void {
     const large = 1025; //TODO this need to be refactored.
     if (this.swipeActions) {
-      this.isSwipingDisabled = window.innerWidth >= large;
-      if (this.list && this.isSwipingDisabled) {
+      this.isSwipingEnabled = window.innerWidth < large;
+      if (this.list && !this.isSwipingEnabled) {
         this.list.closeSlidingItems();
       }
     }
