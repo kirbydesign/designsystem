@@ -5,6 +5,14 @@ $background-color-hover: get-color('background-color');
 $shadow: get-elevation(2);
 $item-height: size('xxxl');
 
+:host {
+  display: block;
+}
+
+ion-list {
+  overflow: hidden;
+}
+
 ion-list,
 .list-items {
   > ion-item {
@@ -254,13 +262,5 @@ ion-item-divider {
         margin-bottom: 0;
       }
     }
-  }
-}
-
-:host(.has-items) {
-  display: block;
-  ion-list {
-    border-radius: $border-radius;
-    overflow: hidden;
   }
 }

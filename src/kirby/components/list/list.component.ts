@@ -10,7 +10,6 @@ import {
   TemplateRef,
   ViewChild,
   TrackByFunction,
-  ElementRef,
 } from '@angular/core';
 
 import {
@@ -25,7 +24,6 @@ import { ListHelper } from './helpers/list-helper';
 import { GroupByPipe } from './pipes/group-by.pipe';
 import { ListSwipeAction } from './list-swipe-action';
 import { ThemeColor } from '@kirbydesign/designsystem/helpers/theme-color.type';
-import { ItemComponent } from '@kirbydesign/designsystem/components/item/item.component';
 
 export type ListShape = 'square' | 'rounded' | 'none';
 
@@ -113,21 +111,19 @@ export class ListComponent implements OnInit, OnChanges {
   @Output() itemSelect = new EventEmitter<any>();
 
   // The first element that matches ListItemDirective. As a structural directive it unfolds into a template. This is a reference to that.
-  @ContentChild(ListItemDirective, { static: false, read: TemplateRef })
-  listItemTemplate;
-  @ContentChild(ListFlexItemDirective, { static: false, read: TemplateRef })
-  listFlexItemTemplate;
+  @ContentChild(ListItemDirective, { static: true, read: TemplateRef })
+  listItemTemplate: TemplateRef<any>;
+  @ContentChild(ListFlexItemDirective, { static: true, read: TemplateRef })
+  listFlexItemTemplate: TemplateRef<any>;
   @ContentChild(ListHeaderDirective, { static: false, read: TemplateRef })
-  listHeaderTemplate;
+  listHeaderTemplate: TemplateRef<any>;
   @ContentChild(ListSectionHeaderDirective, { static: false, read: TemplateRef })
-  sectionHeaderTemplate;
+  sectionHeaderTemplate: TemplateRef<any>;
   @ContentChild(ListFooterDirective, { static: false, read: TemplateRef })
-  listFooterTemplate;
-
-  @ContentChild(ItemComponent, { static: false, read: ElementRef }) itemRef;
+  listFooterTemplate: TemplateRef<any>;
 
   @HostBinding('class.has-sections') isSectionsEnabled: boolean;
-  @HostBinding('class.has-items') hasItems: boolean;
+  @HostBinding('class.has-deprecated-item-template') hasDeprecatedItemTemplate: boolean;
   isSwipingDisabled: boolean = false;
   isSelectable: boolean;
   isLoading: boolean;
@@ -140,14 +136,21 @@ export class ListComponent implements OnInit, OnChanges {
   constructor(private listHelper: ListHelper, private groupBy: GroupByPipe) {}
 
   ngOnInit() {
+    this.checkForDeprecatedItemTemplates();
     this.initialzeSwipeActions();
     this.isSelectable = this.itemSelect.observers.length > 0;
     this.isLoadOnDemandEnabled = this.loadOnDemand.observers.length > 0;
+  }
 
-    // Needs to be in setTimeout, otherwise element aren't found (neither in ngAfterViewInit)
-    setTimeout(() => {
-      this.hasItems = !!this.itemRef;
-    });
+  private checkForDeprecatedItemTemplates(): void {
+    const template = this.listItemTemplate || this.listFlexItemTemplate;
+    if (template) {
+      const embeddedView = template.createEmbeddedView({});
+      const rootNode = embeddedView.rootNodes[0];
+      this.hasDeprecatedItemTemplate =
+        rootNode &&
+        (rootNode.tagName === 'KIRBY-LIST-ITEM' || rootNode.tagName === 'KIRBY-LIST-FLEX-ITEM');
+    }
   }
 
   ngOnChanges(): void {
@@ -263,7 +266,7 @@ export class ListComponent implements OnInit, OnChanges {
     const large = 1025; //TODO this need to be refactored.
     if (this.swipeActions) {
       this.isSwipingDisabled = window.innerWidth >= large;
-      if (this.isSwipingDisabled) {
+      if (this.list && this.isSwipingDisabled) {
         this.list.closeSlidingItems();
       }
     }
