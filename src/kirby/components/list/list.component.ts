@@ -137,7 +137,7 @@ export class ListComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.checkForDeprecatedItemTemplates();
-    this.initialzeSwipeActions();
+    this.initializeSwipeActions();
     this.isSelectable = this.itemSelect.observers.length > 0;
     this.isLoadOnDemandEnabled = this.loadOnDemand.observers.length > 0;
   }
@@ -228,7 +228,7 @@ export class ListComponent implements OnInit, OnChanges {
   }
 
   onResize(): void {
-    this.initialzeSwipeActions();
+    this.initializeSwipeActions();
   }
 
   private createOrderMap(
@@ -262,7 +262,7 @@ export class ListComponent implements OnInit, OnChanges {
     return order;
   }
 
-  private initialzeSwipeActions(): void {
+  private initializeSwipeActions(): void {
     const large = 1025; //TODO this need to be refactored.
     if (this.swipeActions) {
       this.isSwipingDisabled = window.innerWidth >= large;
