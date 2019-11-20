@@ -131,8 +131,6 @@ export class ListComponent implements OnInit, OnChanges {
   groupedItems: any[];
   selectedItem: any;
 
-  private orderMap: WeakMap<any, { isFirst: boolean; isLast: boolean }>;
-
   constructor(private listHelper: ListHelper, private groupBy: GroupByPipe) {}
 
   ngOnInit() {
@@ -157,21 +155,9 @@ export class ListComponent implements OnInit, OnChanges {
     this.isSectionsEnabled = !!this.getSectionName;
     if (this.isSectionsEnabled && this.items) {
       this.groupedItems = this.groupBy.transform(this.items, this.getSectionName);
-      this.orderMap = this.createOrderMap(this.groupedItems);
     } else {
       this.groupedItems = null;
-      this.orderMap = null;
     }
-  }
-
-  isFirstItem(item: any, index: number) {
-    return this.isSectionsEnabled ? this.getItemOrder(item).isFirst : index === 0;
-  }
-
-  isLastItem(item: any, index: number) {
-    return this.isSectionsEnabled
-      ? this.getItemOrder(item).isLast
-      : index === this.items.length - 1;
   }
 
   onItemSelect(args: any) {
@@ -229,37 +215,6 @@ export class ListComponent implements OnInit, OnChanges {
 
   onResize(): void {
     this.initializeSwipeActions();
-  }
-
-  private createOrderMap(
-    groupedItems: { name: string; items: any[] }[]
-  ): WeakMap<any, { isFirst: boolean; isLast: boolean }> {
-    const orderMap = new WeakMap<any, { isFirst: boolean; isLast: boolean }>();
-    groupedItems.forEach((group) => {
-      const lastIndexInGroup = group.items.length - 1;
-      group.items.forEach((item, index) => {
-        const isFirst = index === 0;
-        const isLast = index === lastIndexInGroup;
-        orderMap.set(item, { isFirst, isLast });
-      });
-    });
-    return orderMap;
-  }
-
-  private getItemOrder(item: any): { isFirst: boolean; isLast: boolean } {
-    const defaultOrder = { isFirst: false, isLast: false };
-    if (!item) {
-      return defaultOrder;
-    }
-    if (!this.isSectionsEnabled) {
-      return defaultOrder;
-    }
-    const order = this.orderMap.get(item);
-    if (!order) {
-      console.warn('Order of list item within section not found!');
-      return defaultOrder;
-    }
-    return order;
   }
 
   private initializeSwipeActions(): void {
