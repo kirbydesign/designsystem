@@ -41,8 +41,7 @@ ion-list,
 
 ion-list {
   &.has-divider {
-    ion-item-sliding:not(:last-of-type),
-    ion-item:not(:last-of-type) {
+    ion-item-sliding:not(:last-of-type) {
       border-bottom: 1px solid $divider-color;
     }
   }
@@ -66,7 +65,10 @@ ion-list-header {
 }
 
 ion-item {
-  --background: transparent;
+  --background: #{get-color('white')};
+  --background-activated: #{get-color('white-shade')};
+  --background-hover: #{get-color('background-color')};
+  --background-focused: #{get-color('background-color')};
   --inner-border-width: 0;
   --ion-safe-area-right: 0;
   --min-height: $item-height;
@@ -74,39 +76,23 @@ ion-item {
   --padding-end: #{size('s')};
   --padding-start: #{size('s')};
   --padding-top: #{size('xxs')};
-  background-color: get-color('white');
   display: flex;
   font-size: font-size('s');
   min-height: $item-height;
   overflow: visible;
   width: 100%;
+}
 
-  &.selected ::ng-deep * {
-    font-weight: font-weight('bold');
-  }
-  &:focus {
-    $outline-width: 5px;
-    outline-color: var(--highlight-color-focused);
-    outline-style: auto;
-    outline-width: $outline-width;
-    margin-bottom: $outline-width;
-    background-color: $background-color-hover;
-  }
-
-  &.selectable {
-    cursor: pointer;
-    &:hover {
-      background-color: $background-color-hover;
-    }
-  }
-
+ion-item-sliding {
   $list-colors: ('light'); // add supported list item theme colors here
   @each $color-name, $color-value in $list-colors {
     &.#{$color-name} {
-      background-color: #{get-color($color-name)};
-      color: #{get-color($color-name + '-contrast')};
-      &:focus {
-        background-color: #{get-color($color-name + '-shade')};
+      ion-item {
+        --background: #{get-color($color-name)};
+        --color: #{get-color($color-name + '-contrast')};
+        --background-activated: #{get-color($color-name + '-shade')};
+        --background-focused: #{get-color($color-name + '-shade')};
+        --background-hover: #{get-color($color-name + '-tint')};
       }
     }
   }

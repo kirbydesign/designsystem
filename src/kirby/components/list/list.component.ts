@@ -10,6 +10,9 @@ import {
   TemplateRef,
   ViewChild,
   TrackByFunction,
+  ContentChildren,
+  AfterViewInit,
+  ElementRef,
 } from '@angular/core';
 
 import {
@@ -24,6 +27,7 @@ import { ListHelper } from './helpers/list-helper';
 import { GroupByPipe } from './pipes/group-by.pipe';
 import { ListSwipeAction } from './list-swipe-action';
 import { ThemeColor } from '@kirbydesign/designsystem/helpers/theme-color.type';
+import { ItemComponent } from '../item/item.component';
 
 export type ListShape = 'square' | 'rounded' | 'none';
 
@@ -33,7 +37,7 @@ export type ListShape = 'square' | 'rounded' | 'none';
   styleUrls: ['./list.component.scss'],
   providers: [ListHelper, GroupByPipe],
 })
-export class ListComponent implements OnInit, OnChanges {
+export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   @ViewChild('list', { static: true }) list: any;
 
   /**
@@ -113,6 +117,8 @@ export class ListComponent implements OnInit, OnChanges {
   // The first element that matches ListItemDirective. As a structural directive it unfolds into a template. This is a reference to that.
   @ContentChild(ListItemDirective, { static: true, read: TemplateRef })
   itemTemplate: TemplateRef<any>;
+  @ContentChildren(ItemComponent)
+  kirbyItems: ItemComponent[];
   @ContentChild(ListFlexItemDirective, { static: true, read: TemplateRef })
   flexItemTemplate: TemplateRef<any>;
   @ContentChild(ListHeaderDirective, { static: false, read: TemplateRef })
@@ -138,6 +144,16 @@ export class ListComponent implements OnInit, OnChanges {
     this.initializeSwipeActions();
     this.isSelectable = this.itemSelect.observers.length > 0;
     this.isLoadOnDemandEnabled = this.loadOnDemand.observers.length > 0;
+  }
+
+  ngAfterViewInit(): void {
+    if (this.isSelectable) {
+      setTimeout(() => {
+        this.kirbyItems.forEach((item) => {
+          item.selectable = true;
+        });
+      });
+    }
   }
 
   private checkForDeprecatedItemTemplates(): void {

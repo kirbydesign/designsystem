@@ -13,7 +13,10 @@
   </ion-list-header>
 
   <ng-container
-    *ngTemplateOutlet="isSectionsEnabled ? groupedListTemplate : defaultListTemplate"
+    *ngTemplateOutlet="
+      isSectionsEnabled ? groupedListTemplate : slidingItemsTemplate;
+      context: { $implicit: items }
+    "
   ></ng-container>
 
   <div *ngIf="footerTemplate" class="footer">
@@ -26,16 +29,6 @@
   <kirby-spinner></kirby-spinner>
 </div>
 
-<!-- List templates -->
-<ng-template #defaultListTemplate>
-  <ng-container
-    *ngTemplateOutlet="
-      swipeActions ? slidingItemsTemplate : defaultItemsTemplate;
-      context: { $implicit: items }
-    "
-  ></ng-container>
-</ng-template>
-
 <ng-template #groupedListTemplate>
   <ion-item-group *ngFor="let section of groupedItems; trackBy: defaultTrackBy">
     <ion-item-divider>
@@ -46,22 +39,10 @@
 
     <div class="list-items">
       <ng-container
-        *ngTemplateOutlet="
-          swipeActions ? slidingItemsTemplate : defaultItemsTemplate;
-          context: { $implicit: section.items }
-        "
+        *ngTemplateOutlet="slidingItemsTemplate; context: { $implicit: section.items }"
       ></ng-container>
     </div>
   </ion-item-group>
-</ng-template>
-
-<!-- Items template -->
-<ng-template #defaultItemsTemplate let-items>
-  <ng-container *ngFor="let item of items; trackBy: trackBy || defaultTrackBy">
-    <ng-container
-      *ngTemplateOutlet="defaultItemTemplate; context: { $implicit: item }"
-    ></ng-container>
-  </ng-container>
 </ng-template>
 
 <!-- Item templates -->
@@ -76,14 +57,9 @@
 
 <ng-template #deprecatedItemTemplate let-item>
   <ion-item
-    [class.selectable]="isSelectable"
-    [class.selected]="markSelectedRow && item === selectedItem"
-    [attr.role]="isSelectable ? 'button' : null"
-    (click)="onItemSelect(item)"
-    tabindex="0"
-    [kirbyListItemColor]="getItemColor"
-    [item]="item"
-    keyHandler
+    [button]="isSelectable ? true : null"
+    [attr.tabindex]="isSelectable ? null : 0"
+    detail="false"
   >
     <ng-container *ngTemplateOutlet="itemTemplate; context: { $implicit: item }"></ng-container>
     <ng-container *ngTemplateOutlet="flexItemTemplate; context: { $implicit: item }"></ng-container>
@@ -94,7 +70,12 @@
 <ng-template #slidingItemsTemplate let-items>
   <ion-item-sliding
     *ngFor="let item of items; trackBy: trackBy || defaultTrackBy"
+    [class.selected]="isSelectable && item === selectedItem"
+    [kirbyListItemColor]="getItemColor"
+    [item]="item"
     [disabled]="isSwipingEnabled ? null : true"
+    keyHandler
+    (click)="isSelectable ? onItemSelect(item) : null"
   >
     <ng-container
       *ngTemplateOutlet="swipeActionsTemplate; context: { $implicit: item }"
