@@ -82,6 +82,10 @@ ion-item-sliding {
   $list-colors: ('light'); // add supported list item theme colors here
   @each $color-name, $color-value in $list-colors {
     &.#{$color-name} {
+      --kirby-item-background: #{get-color($color-name)};
+      --kirby-item-background-activated: #{get-color($color-name + '-shade')};
+      --kirby-item-background-focused: #{get-color($color-name + '-shade')};
+      --kirby-item-background-hover: #{get-color($color-name + '-tint')};
       ion-item {
         --background: #{get-color($color-name)};
         --color: #{get-color($color-name + '-contrast')};

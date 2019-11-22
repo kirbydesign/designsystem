@@ -11,10 +11,10 @@
     --inner-padding-end: #{size('s')};
     --padding-top: #{size('xxs')};
     --padding-bottom: #{size('xxs')};
-    --background: #{get-color('white')};
-    --background-activated: #{get-color('white-shade')};
-    --background-focused: get-color('background-color');
-    --background-hover: get-color('background-color');
+    --background: var(--kirby-item-background, #{get-color('white')});
+    --background-activated: var(--kirby-item-background-activated, #{get-color('white-shade')});
+    --background-focused: var(--kirby-item-background-focused, #{get-color('background-color')});
+    --background-hover: var(--kirby-item-background-hover, #{get-color('background-color')});
 
     @include slotted('[slot="end"]') {
       margin-inline-start: 0;
