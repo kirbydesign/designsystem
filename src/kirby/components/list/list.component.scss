@@ -231,7 +231,10 @@ ion-item-divider {
       --inner-padding-end: 0;
       --inner-padding-top: 0;
       --inner-padding-bottom: 0;
-      background: none;
+      --background: none;
+      --background-activated: none;
+      --background-hover: none;
+      --background-focused: none;
     }
   }
 }
