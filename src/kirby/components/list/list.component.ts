@@ -21,6 +21,7 @@ import {
   ListHeaderDirective,
   ListItemDirective,
   ListSectionHeaderDirective,
+  ListItemTemplateDirective,
 } from './list.directive';
 import { LoadOnDemandEvent, LoadOnDemandEventData } from './list.event';
 import { ListHelper } from './helpers/list-helper';
@@ -115,12 +116,14 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   @Output() itemSelect = new EventEmitter<any>();
 
   // The first element that matches ListItemDirective. As a structural directive it unfolds into a template. This is a reference to that.
-  @ContentChild(ListItemDirective, { static: true, read: TemplateRef })
+  @ContentChild(ListItemTemplateDirective, { static: true, read: TemplateRef })
   itemTemplate: TemplateRef<any>;
+  @ContentChild(ListItemDirective, { static: true, read: TemplateRef })
+  legacyItemTemplate: TemplateRef<any>;
   @ContentChildren(ItemComponent)
   kirbyItems: ItemComponent[];
   @ContentChild(ListFlexItemDirective, { static: true, read: TemplateRef })
-  flexItemTemplate: TemplateRef<any>;
+  legacyFlexItemTemplate: TemplateRef<any>;
   @ContentChild(ListHeaderDirective, { static: false, read: TemplateRef })
   headerTemplate: TemplateRef<any>;
   @ContentChild(ListSectionHeaderDirective, { static: false, read: TemplateRef })
@@ -140,7 +143,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   constructor(private listHelper: ListHelper, private groupBy: GroupByPipe) {}
 
   ngOnInit() {
-    this.checkForDeprecatedItemTemplates();
+    this.hasDeprecatedItemTemplate = !!this.legacyItemTemplate || !!this.legacyFlexItemTemplate;
     this.initializeSwipeActions();
     this.isSelectable = this.itemSelect.observers.length > 0;
     this.isLoadOnDemandEnabled = this.loadOnDemand.observers.length > 0;
@@ -153,17 +156,6 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
           item.selectable = true;
         });
       });
-    }
-  }
-
-  private checkForDeprecatedItemTemplates(): void {
-    const template = this.itemTemplate || this.flexItemTemplate;
-    if (template) {
-      const embeddedView = template.createEmbeddedView({});
-      const rootNode = embeddedView.rootNodes[0];
-      this.hasDeprecatedItemTemplate =
-        rootNode &&
-        (rootNode.tagName === 'KIRBY-LIST-ITEM' || rootNode.tagName === 'KIRBY-LIST-FLEX-ITEM');
     }
   }
 
