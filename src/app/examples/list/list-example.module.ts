@@ -9,7 +9,6 @@ import { ListColoredItemsExampleComponent } from './components/colored-items';
 import { ListWithSectionsAndColoredItemsExampleComponent } from './components/sections-and-colored-items';
 import { ListWithHeaderAndFooterExampleComponent } from './components/header-and-footer';
 import { ListWithSectionsExampleComponent } from './components/sections';
-import { ListWithCustomContentExampleComponent } from './components/custom-content';
 import { ListItemsExampleComponent } from './components/items';
 
 const listExamples = [
@@ -20,7 +19,6 @@ const listExamples = [
   ListWithSectionsAndColoredItemsExampleComponent,
   ListWithHeaderAndFooterExampleComponent,
   ListWithSectionsExampleComponent,
-  ListWithCustomContentExampleComponent,
   ListItemsExampleComponent,
 ];
 

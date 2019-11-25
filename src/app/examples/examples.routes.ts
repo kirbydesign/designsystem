@@ -44,7 +44,6 @@ import { ListWithSectionsAndColoredItemsExampleComponent } from './list/componen
 import { ListColoredItemsExampleComponent } from './list/components/colored-items';
 import { ListWithHeaderAndFooterExampleComponent } from './list/components/header-and-footer';
 import { ListWithSectionsExampleComponent } from './list/components/sections';
-import { ListWithCustomContentExampleComponent } from './list/components/custom-content';
 import { ListItemsExampleComponent } from './list/components/items';
 
 export const routes: Routes = [
@@ -175,10 +174,6 @@ export const routes: Routes = [
       {
         path: 'with-sections',
         component: ListWithSectionsExampleComponent,
-      },
-      {
-        path: 'with-custom-content',
-        component: ListWithCustomContentExampleComponent,
       },
       {
         path: 'with-items',

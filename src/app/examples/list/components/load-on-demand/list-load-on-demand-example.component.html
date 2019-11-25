@@ -16,18 +16,14 @@
 
 -->
 <kirby-list [items]="items" (loadOnDemand)="onLoadDemand($event)" noMoreItemsText="No more items">
-  <kirby-list-flex-item *kirbyListFlexItem="let account">
-    <kirby-list-cell width="2">
-      <kirby-list-cell-line [primary]="true" [text]="account.title"></kirby-list-cell-line>
-      <kirby-list-cell-line
-        [text]="account.detail === 0 ? null : account.detail"
-      ></kirby-list-cell-line>
-    </kirby-list-cell>
-    <kirby-list-cell width="0.5" horisontalAlignment="right">
-      <kirby-list-cell-line [primary]="true" [text]="account.subTitle"></kirby-list-cell-line>
-    </kirby-list-cell>
-    <kirby-list-cell verticalAlignment="center" horisontalAlignment="right">
-      <kirby-list-cell-line [primary]="true" [text]="account.amount"></kirby-list-cell-line>
-    </kirby-list-cell>
-  </kirby-list-flex-item>
+  <kirby-item *kirbyListItemTemplate="let item">
+    <kirby-label>
+      <h3>{{ item.title }}</h3>
+      <p subtitle>{{ item.subTitle }}</p>
+    </kirby-label>
+    <kirby-label slot="end">
+      <data [value]="item.amount">{{ item.amount }}</data>
+      <data [value]="item.detail" detail>{{ item.detail }}</data>
+    </kirby-label>
+  </kirby-item>
 </kirby-list>
