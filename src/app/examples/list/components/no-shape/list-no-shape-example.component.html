@@ -4,7 +4,7 @@
   provide flexibility
 </h3>
 <kirby-list [items]="items" shape="none" hasItemSpacing="true">
-  <kirby-card *kirbyListItem="let item">
+  <kirby-card *kirbyListItemTemplate="let item">
     <kirby-card-header *ngIf="item.amount < 0" title="Account is overdraft"></kirby-card-header>
     <kirby-list-flex-item>
       <kirby-list-cell width="2">

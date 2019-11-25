@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { BaseListComponent } from './base-list.component';
 
 export const ListBoldTextOnRowSelectionExampleTemplate = `<kirby-list [items]="items" (itemSelect)="onItemSelect($event)">
-  <kirby-item *kirbyListItem="let item">
+  <kirby-item *kirbyListItemTemplate="let item">
     <h3>{{item.title}}</h3>
     <data [value]="item.amount" slot="end">{{item.amount}}</data>
   </kirby-item>

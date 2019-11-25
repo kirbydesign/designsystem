@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { BaseListComponent } from './base-list.component';
 
 export const ListItemsExampleTemplate = `<kirby-list [items]="items">
-  <kirby-item *kirbyListItem="let item">
+  <kirby-item *kirbyListItemTemplate="let item">
     <h3>{{item.title}}</h3>
     <data slot="end">{{item.amount}}</data>
   </kirby-item>

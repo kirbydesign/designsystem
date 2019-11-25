@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { BaseListComponent } from './base-list.component';
 
 export const ListSelectableItemsExampleTemplate = `<kirby-list [items]="items" (itemSelect)="onItemSelect($event)" showDivider="true">
-  <kirby-item *kirbyListItem="let item">
+  <kirby-item *kirbyListItemTemplate="let item">
     <h3>{{item.title}}</h3>
     <data slot="end" class="kirby-text-bold">{{item.amount}}</data>
   </kirby-item>
