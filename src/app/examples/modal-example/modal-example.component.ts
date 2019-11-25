@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 
-import { ModalConfig } from '@kirbydesign/designsystem/modal';
-import { ModalController } from '@kirbydesign/designsystem/modal';
+import { ModalConfig, ModalController } from '@kirbydesign/designsystem/modal';
 import { FirstEmbeddedModalExampleComponent } from './first-embedded-modal-example/first-embedded-modal-example.component';
 
 @Component({
@@ -15,7 +14,6 @@ export class ModalExampleComponent {
   showModal() {
     const config: ModalConfig = {
       title: 'My Modal Title',
-      flavor: 'modal',
       component: FirstEmbeddedModalExampleComponent,
       componentProps: {
         prop1: 'value1',
