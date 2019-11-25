@@ -1,7 +1,6 @@
 @import '../../../../../kirby/scss/utils';
 
 kirby-card {
-  margin: get-shadow-size(2);
   width: map-get($breakpoints, small);
 
   @include media('>=large') {
