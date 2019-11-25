@@ -51,6 +51,10 @@
   }
 }
 
+:host-context(kirby-list .item-sliding-active-slide) .outside {
+  display: none;
+}
+
 :host(.selected),
 :host-context(kirby-list .selected) {
   ion-item {
