@@ -182,6 +182,9 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   getSwipeActionsSide(side: 'left' | 'right', item: any): ListSwipeAction[] {
+    if (!Array.isArray(this.swipeActions)) {
+      return [];
+    }
     return this.swipeActions.filter((sa) => {
       if (sa.isDisabled instanceof Function && sa.isDisabled(item)) {
         return false;
