@@ -20,4 +20,8 @@ export const ListBoldTextOnRowSelectionExampleTemplate = `<kirby-list [items]="i
     </kirby-page>
   `,
 })
-export class ListBoldTextOnRowSelectionExampleComponent extends BaseListComponent {}
+export class ListBoldTextOnRowSelectionExampleComponent extends BaseListComponent {
+  onItemSelect(item: any) {
+    console.log(`You have clicked the row [${item.title} ${item.amount}]`);
+  }
+}
