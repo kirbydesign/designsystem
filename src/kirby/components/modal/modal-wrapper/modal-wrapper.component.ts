@@ -37,4 +37,14 @@ export class ModalWrapperComponent {
   onClose() {
     this.modalController.hideTopmost();
   }
+
+  // This prevents Ionic from setting --keyboard-offset on ion-content inside modal:
+  @HostListener('focusin', ['$event'])
+  @HostListener('focusout', ['$event'])
+  checkFocusTarget(event: FocusEvent) {
+    const input = event.target as HTMLElement;
+    if (input.tagName === 'INPUT' && input.closest('ion-modal')) {
+      event.stopPropagation();
+    }
+  }
 }
