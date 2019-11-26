@@ -11,16 +11,21 @@ export class ListItemDirective {}
 export class ListFlexItemDirective {}
 
 @Directive({
-  selector: '[kirbyListHeader]',
+  selector: '[kirbyListItemTemplate]',
+})
+export class ListItemTemplateDirective {}
+
+@Directive({
+  selector: '[kirbyListHeader], [kirbyListHeaderTemplate]',
 })
 export class ListHeaderDirective {}
 
 @Directive({
-  selector: '[kirbyListSectionHeader]',
+  selector: '[kirbyListSectionHeader], [kirbyListSectionHeaderTemplate]',
 })
 export class ListSectionHeaderDirective {}
 
 @Directive({
-  selector: '[kirbyListFooter]',
+  selector: '[kirbyListFooter], [kirbyListFooterTemplate]',
 })
 export class ListFooterDirective {}

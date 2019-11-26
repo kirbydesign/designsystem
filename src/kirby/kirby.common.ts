@@ -22,6 +22,7 @@ import {
   ListFooterDirective,
   ListHeaderDirective,
   ListItemDirective,
+  ListItemTemplateDirective,
   ListSectionHeaderDirective,
 } from './components/list/list.directive';
 import { GroupByPipe } from './components/list/pipes/group-by.pipe';
@@ -57,6 +58,7 @@ export const declarations = [
   ListComponent,
   ListItemDirective,
   ListFlexItemDirective,
+  ListItemTemplateDirective,
   ListItemComponent,
   ListFlexItemComponent,
   ListCellComponent,
