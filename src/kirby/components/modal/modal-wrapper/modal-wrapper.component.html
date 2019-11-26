@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title [class.drawer]="config.flavor === 'drawer'">Hest</ion-title>
+    <ion-title [class.drawer]="config.flavor === 'drawer'">{{ config.title }}</ion-title>
     <ion-buttons slot="start" *ngIf="config.flavor === 'drawer'">
       <ng-container *ngTemplateOutlet="closeButton; context: { icon: 'arrow-down' }"></ng-container>
     </ion-buttons>
