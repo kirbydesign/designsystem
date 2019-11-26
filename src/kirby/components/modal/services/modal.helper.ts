@@ -62,7 +62,7 @@ export class ModalHelper {
     const transformYFromTo = [`${baseEl.clientHeight}px`, `0px`];
     const fadeBackdropFrom = 0.01;
     const fadeBackdropTo = 0.3;
-    const fadeWrapperFrom = 1;
+    const fadeWrapperFrom = 0.01;
     const fadeWrapperTo = 1;
 
     // Define animations
