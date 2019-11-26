@@ -1,40 +1,32 @@
 @import '../../../scss/utils';
 
-// Global modal styling can be found at scss/base/_ionic.scss
+// // Global modal styling can be found at scss/base/_ionic.scss
 
-.modal-wrapper {
-  display: flex;
-  flex-flow: column;
-  height: 100%;
-  transform-origin: top center;
+ion-toolbar {
+  --border-width: 0 !important;
+}
 
-  .modal-header {
-    display: grid;
-    justify-content: flex-end;
-    grid-template-columns: [start]#{size('xl')} [title]1fr [end]#{size('xl')};
-    padding: 0 size('s');
+ion-title {
+  box-sizing: border-box;
+  padding-inline-start: calc(48px + var(--padding-start));
+  padding-inline-end: calc(48px + var(--padding-end));
+  font-size: font-size('l');
+  font-weight: font-weight('bold');
+  &.drawer {
+    font-size: font-size('m');
+  }
+}
 
-    .title {
-      grid-area: title;
-      text-align: center;
-      margin: size('m') 0;
-    }
-
-    > *:first-child:not(.title) {
-      grid-area: start;
-      align-self: center;
-    }
-
-    > *:last-child:not(.title) {
-      grid-area: end;
-      align-self: center;
-    }
+ion-content {
+  @include slotted('*') {
+    box-sizing: border-box;
   }
 
-  .modal-content {
-    height: 100%;
-    overflow-y: auto;
-    padding-left: size('s');
-    padding-right: size('s');
+  --padding-start: #{size('s')};
+  --padding-end: #{size('s')};
+
+  @include media('>=medium') {
+    --padding-start: #{size('xxxl')};
+    --padding-end: #{size('xxxl')};
   }
 }

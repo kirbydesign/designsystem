@@ -1,16 +1,15 @@
-import { Component, ElementRef, ViewChild, AfterViewInit, Injector } from '@angular/core';
+import { Component, ElementRef, ViewChild, Injector, HostListener } from '@angular/core';
 import { NavParams } from '@ionic/angular';
 
 import { ModalConfig } from './config/modal-config';
 import { COMPONENT_PROPS } from './config/modal-config.helper';
 import { IModalController } from '../services/modal.controller.interface';
-import { ModalHelper } from '../services/modal.helper';
 
 @Component({
   templateUrl: './modal-wrapper.component.html',
   styleUrls: ['./modal-wrapper.component.scss'],
 })
-export class ModalWrapperComponent implements AfterViewInit {
+export class ModalWrapperComponent {
   @ViewChild('modalWrapper', { static: true }) modalWrapper: ElementRef;
   scrollY: number = Math.abs(window.scrollY);
   config: ModalConfig;
@@ -28,21 +27,14 @@ export class ModalWrapperComponent implements AfterViewInit {
     });
   }
 
-  ngAfterViewInit(): void {
-    this.modalController.blurNativeWrapper(this.modalWrapper.nativeElement);
-  }
-
+  @HostListener('window:focus')
+  @HostListener('window:focusout')
   onFocusChange() {
-    // This fixes an undesired scroll behaviour occurring on keyboard-tabbing
+    // This fixes an undesired scroll behaviour occurring on keyboard-tabbing backwards (with shift+tab):
     window.scrollTo({ top: this.scrollY });
   }
 
-  onModalDismiss(e: any) {
-    // Handle key press, due to:
-    // https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/button_role#Required_JavaScript_Features
-    if (e && e.keyCode && e.keyCode !== 32 && e.keyCode !== 13) {
-      return;
-    }
+  onClose() {
     this.modalController.hideTopmost();
   }
 }
