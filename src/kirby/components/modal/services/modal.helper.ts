@@ -15,7 +15,7 @@ export class ModalHelper {
   ): Promise<any> {
     const modal = await this.ionicModalController.create({
       component: ModalWrapperComponent,
-      cssClass: 'kirby-modal',
+      cssClass: ['kirby-modal', config.flavor === 'drawer' ? 'kirby-drawer' : null],
       componentProps: { config: config },
       enterAnimation: this.animate.bind(this, true, config.flavor),
       leaveAnimation: this.animate.bind(this, false, config.flavor),
