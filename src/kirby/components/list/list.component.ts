@@ -10,6 +10,9 @@ import {
   TemplateRef,
   ViewChild,
   TrackByFunction,
+  ContentChildren,
+  AfterViewInit,
+  ElementRef,
 } from '@angular/core';
 
 import {
@@ -18,12 +21,14 @@ import {
   ListHeaderDirective,
   ListItemDirective,
   ListSectionHeaderDirective,
+  ListItemTemplateDirective,
 } from './list.directive';
 import { LoadOnDemandEvent, LoadOnDemandEventData } from './list.event';
 import { ListHelper } from './helpers/list-helper';
 import { GroupByPipe } from './pipes/group-by.pipe';
 import { ListSwipeAction } from './list-swipe-action';
 import { ThemeColor } from '@kirbydesign/designsystem/helpers/theme-color.type';
+import { ItemComponent } from '../item/item.component';
 
 export type ListShape = 'square' | 'rounded' | 'none';
 
@@ -33,7 +38,7 @@ export type ListShape = 'square' | 'rounded' | 'none';
   styleUrls: ['./list.component.scss'],
   providers: [ListHelper, GroupByPipe],
 })
-export class ListComponent implements OnInit, OnChanges {
+export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   @ViewChild('list', { static: true }) list: any;
 
   /**
@@ -111,54 +116,56 @@ export class ListComponent implements OnInit, OnChanges {
   @Output() itemSelect = new EventEmitter<any>();
 
   // The first element that matches ListItemDirective. As a structural directive it unfolds into a template. This is a reference to that.
-  @ContentChild(ListItemDirective, { static: false, read: TemplateRef })
-  listItemTemplate;
-  @ContentChild(ListFlexItemDirective, { static: false, read: TemplateRef })
-  listFlexItemTemplate;
+  @ContentChild(ListItemTemplateDirective, { static: true, read: TemplateRef })
+  itemTemplate: TemplateRef<any>;
+  @ContentChild(ListItemDirective, { static: true, read: TemplateRef })
+  legacyItemTemplate: TemplateRef<any>;
+  @ContentChildren(ItemComponent)
+  kirbyItems: ItemComponent[];
+  @ContentChild(ListFlexItemDirective, { static: true, read: TemplateRef })
+  legacyFlexItemTemplate: TemplateRef<any>;
   @ContentChild(ListHeaderDirective, { static: false, read: TemplateRef })
-  listHeaderTemplate;
+  headerTemplate: TemplateRef<any>;
   @ContentChild(ListSectionHeaderDirective, { static: false, read: TemplateRef })
-  sectionHeaderTemplate;
+  sectionHeaderTemplate: TemplateRef<any>;
   @ContentChild(ListFooterDirective, { static: false, read: TemplateRef })
-  listFooterTemplate;
+  footerTemplate: TemplateRef<any>;
 
   @HostBinding('class.has-sections') isSectionsEnabled: boolean;
-  isSwipingDisabled: boolean = false;
+  @HostBinding('class.has-deprecated-item-template') hasDeprecatedItemTemplate: boolean;
+  isSwipingEnabled: boolean = false;
   isSelectable: boolean;
   isLoading: boolean;
   isLoadOnDemandEnabled: boolean;
   groupedItems: any[];
   selectedItem: any;
 
-  private orderMap: WeakMap<any, { isFirst: boolean; isLast: boolean }>;
-
   constructor(private listHelper: ListHelper, private groupBy: GroupByPipe) {}
 
   ngOnInit() {
-    this.initialzeSwipeActions();
+    this.hasDeprecatedItemTemplate = !!this.legacyItemTemplate || !!this.legacyFlexItemTemplate;
+    this.initializeSwipeActions();
     this.isSelectable = this.itemSelect.observers.length > 0;
     this.isLoadOnDemandEnabled = this.loadOnDemand.observers.length > 0;
+  }
+
+  ngAfterViewInit(): void {
+    if (this.isSelectable) {
+      setTimeout(() => {
+        this.kirbyItems.forEach((item) => {
+          item.selectable = true;
+        });
+      });
+    }
   }
 
   ngOnChanges(): void {
     this.isSectionsEnabled = !!this.getSectionName;
     if (this.isSectionsEnabled && this.items) {
       this.groupedItems = this.groupBy.transform(this.items, this.getSectionName);
-      this.orderMap = this.createOrderMap(this.groupedItems);
     } else {
       this.groupedItems = null;
-      this.orderMap = null;
     }
-  }
-
-  isFirstItem(item: any, index: number) {
-    return this.isSectionsEnabled ? this.getItemOrder(item).isFirst : index === 0;
-  }
-
-  isLastItem(item: any, index: number) {
-    return this.isSectionsEnabled
-      ? this.getItemOrder(item).isLast
-      : index === this.items.length - 1;
   }
 
   onItemSelect(args: any) {
@@ -175,6 +182,9 @@ export class ListComponent implements OnInit, OnChanges {
   }
 
   getSwipeActionsSide(side: 'left' | 'right', item: any): ListSwipeAction[] {
+    if (!Array.isArray(this.swipeActions)) {
+      return [];
+    }
     return this.swipeActions.filter((sa) => {
       if (sa.isDisabled instanceof Function && sa.isDisabled(item)) {
         return false;
@@ -215,45 +225,14 @@ export class ListComponent implements OnInit, OnChanges {
   }
 
   onResize(): void {
-    this.initialzeSwipeActions();
+    this.initializeSwipeActions();
   }
 
-  private createOrderMap(
-    groupedItems: { name: string; items: any[] }[]
-  ): WeakMap<any, { isFirst: boolean; isLast: boolean }> {
-    const orderMap = new WeakMap<any, { isFirst: boolean; isLast: boolean }>();
-    groupedItems.forEach((group) => {
-      const lastIndexInGroup = group.items.length - 1;
-      group.items.forEach((item, index) => {
-        const isFirst = index === 0;
-        const isLast = index === lastIndexInGroup;
-        orderMap.set(item, { isFirst, isLast });
-      });
-    });
-    return orderMap;
-  }
-
-  private getItemOrder(item: any): { isFirst: boolean; isLast: boolean } {
-    const defaultOrder = { isFirst: false, isLast: false };
-    if (!item) {
-      return defaultOrder;
-    }
-    if (!this.isSectionsEnabled) {
-      return defaultOrder;
-    }
-    const order = this.orderMap.get(item);
-    if (!order) {
-      console.warn('Order of list item within section not found!');
-      return defaultOrder;
-    }
-    return order;
-  }
-
-  private initialzeSwipeActions(): void {
+  private initializeSwipeActions(): void {
     const large = 1025; //TODO this need to be refactored.
     if (this.swipeActions) {
-      this.isSwipingDisabled = window.innerWidth >= large;
-      if (this.isSwipingDisabled) {
+      this.isSwipingEnabled = window.innerWidth < large;
+      if (this.list && !this.isSwipingEnabled) {
         this.list.closeSlidingItems();
       }
     }

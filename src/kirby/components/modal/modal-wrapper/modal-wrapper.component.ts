@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, Injector, HostListener } from '@angular/core';
+import { Component, ElementRef, HostListener, Injector, ViewChild } from '@angular/core';
 import { NavParams } from '@ionic/angular';
 
 import { ModalConfig } from './config/modal-config';

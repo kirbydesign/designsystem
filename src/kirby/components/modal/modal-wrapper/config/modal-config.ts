@@ -1,13 +1,16 @@
-import { ModalConfigHelper } from './modal-config.helper';
-
 import { DrawerSupplementaryAction } from './drawer-supplementary-action';
+import { KirbyAnimation } from '@kirbydesign/designsystem/animation/kirby-animation';
 
-export class ModalConfig {
+export interface ModalConfig {
   title: string;
   component: any;
-  flavor: 'modal' | 'drawer' = 'modal';
-  dim?: number = ModalConfigHelper.defaultDim;
+  flavor?: 'modal' | 'drawer';
+  dim?: number;
   componentProps?: { [key: string]: any };
   // the supplementary action is only available in the drawer
   drawerSupplementaryAction?: DrawerSupplementaryAction;
+  enterDuration?: KirbyAnimation.Duration;
+  leaveDuration?: KirbyAnimation.Duration;
+  easingIn?: KirbyAnimation.Easing;
+  easingOut?: KirbyAnimation.Easing;
 }
