@@ -2,12 +2,11 @@ import { Component } from '@angular/core';
 
 import { BaseListComponent } from './base-list.component';
 
-export const ListBoldTextOnRowSelectionExampleTemplate = `<kirby-list [items]="items" [markSelectedRow]="true">
-  <kirby-list-item
-    *kirbyListItem="let item"
-    [title]="item.title"
-    [amount]="item.amount"
-  ></kirby-list-item>
+export const ListBoldTextOnRowSelectionExampleTemplate = `<kirby-list [items]="items" (itemSelect)="onItemSelect($event)">
+  <kirby-item *kirbyListItemTemplate="let item">
+    <h3>{{item.title}}</h3>
+    <data [value]="item.amount" slot="end">{{item.amount}}</data>
+  </kirby-item>
 </kirby-list>`;
 
 @Component({
@@ -21,4 +20,8 @@ export const ListBoldTextOnRowSelectionExampleTemplate = `<kirby-list [items]="i
     </kirby-page>
   `,
 })
-export class ListBoldTextOnRowSelectionExampleComponent extends BaseListComponent {}
+export class ListBoldTextOnRowSelectionExampleComponent extends BaseListComponent {
+  onItemSelect(item: any) {
+    console.log(`You have clicked the row [${item.title} ${item.amount}]`);
+  }
+}

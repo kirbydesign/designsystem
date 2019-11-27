@@ -3,11 +3,10 @@ import { Component } from '@angular/core';
 import { BaseListComponent } from './base-list.component';
 
 export const ListWithDividersExampleTemplate = `<kirby-list [items]="items" showDivider="true">
-  <kirby-list-item
-    *kirbyListItem="let item"
-    [title]="item.title"
-    [amount]="item.amount"
-  ></kirby-list-item>
+  <kirby-item *kirbyListItemTemplate="let item">
+    <h3>{{item.title}}</h3>
+    <data slot="end" class="kirby-text-bold">{{item.amount}}</data>
+  </kirby-item>
 </kirby-list>`;
 
 @Component({
