@@ -18,7 +18,7 @@ export class ModalHelper {
     const mergedConfig = this.mergeDefaultConfig(config);
     const modal = await this.ionicModalController.create({
       component: ModalWrapperComponent,
-      cssClass: 'kirby-modal',
+      cssClass: ['kirby-modal', config.flavor === 'drawer' ? 'kirby-drawer' : null],
       componentProps: { config: mergedConfig },
       enterAnimation: ModalHelper.animateIn.bind(
         this,

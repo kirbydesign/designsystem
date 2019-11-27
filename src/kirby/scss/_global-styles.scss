@@ -18,15 +18,30 @@
 }
 
 .kirby-modal {
+  box-sizing: border-box;
   --background: #{get-color('background-color')};
-  --border-radius: #{$border-radius};
-  --box-shadow: #{get-elevation(8)};
+  --border-radius: 0;
   position: fixed;
+
+  &.kirby-drawer {
+    padding-top: size('m');
+
+    .modal-wrapper {
+      border-top-left-radius: #{$border-radius};
+      border-top-right-radius: #{$border-radius};
+    }
+  }
 
   @include media('>=medium') {
     //TODO Hardcoded magic numbers: Jakob + Jonathan, revisit!!!
     --width: 720px;
     --height: 647px;
+    --border-radius: #{$border-radius};
+    --box-shadow: #{get-elevation(8)};
+
+    &.kirby-drawer {
+      padding-top: unset;
+    }
   }
 }
 
