@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, Injector, ViewChild } from '@angular/core';
+import { Component, HostListener, Injector } from '@angular/core';
 import { NavParams } from '@ionic/angular';
 
 import { ModalConfig } from './config/modal-config';
@@ -10,19 +10,14 @@ import { IModalController } from '../services/modal.controller.interface';
   styleUrls: ['./modal-wrapper.component.scss'],
 })
 export class ModalWrapperComponent {
-  @ViewChild('modalWrapper', { static: true }) modalWrapper: ElementRef;
   scrollY: number = Math.abs(window.scrollY);
   config: ModalConfig;
   componentPropsInjector: Injector;
 
-  constructor(
-    private params: NavParams,
-    private modalController: IModalController,
-    injector: Injector
-  ) {
-    this.config = this.params.get('config');
+  constructor(params: NavParams, private modalController: IModalController, injector: Injector) {
+    this.config = params.get('config');
     this.componentPropsInjector = Injector.create({
-      providers: [{ provide: COMPONENT_PROPS, useValue: this.params.get('config').componentProps }],
+      providers: [{ provide: COMPONENT_PROPS, useValue: this.config.componentProps }],
       parent: injector,
     });
   }
