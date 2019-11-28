@@ -75,6 +75,7 @@
     "prettier": "1.17.0",
     "raw-loader": "^3.1.0",
     "resize-observer-polyfill": "1.5.1",
+    "intersection-observer": "0.7.0",
     "sass-extract": "2.1.0",
     "sass-extract-loader": "1.1.0",
     "stylelint": "^11.1.1",
