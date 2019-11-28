@@ -7,7 +7,10 @@ ion-header ion-toolbar {
   --background: #{get-color('background-color')};
 }
 
-:host-context(.kirby-drawer) ion-header ion-toolbar {
+// Prevent iOS safe-area padding-top as this is
+// already applied on the top-level modal itself
+// in /scss/_global-styles.scss:
+:host(.drawer) ion-header ion-toolbar {
   padding-top: 0;
 }
 
@@ -17,9 +20,10 @@ ion-title {
   padding-inline-end: calc(48px + var(--padding-end));
   font-size: font-size('l');
   font-weight: font-weight('bold');
-  &.drawer {
-    font-size: font-size('m');
-  }
+}
+
+:host(.drawer) ion-title {
+  font-size: font-size('m');
 }
 
 ion-content {
