@@ -4,6 +4,7 @@
 
 ion-toolbar {
   --border-width: 0 !important;
+  --background: #{get-color('background-color')};
 }
 
 ion-title {
@@ -18,6 +19,8 @@ ion-title {
 }
 
 ion-content {
+  --background: #{get-color('background-color')};
+
   @include slotted('*') {
     box-sizing: border-box;
   }
