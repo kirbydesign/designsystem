@@ -2,7 +2,7 @@
     // A technique for loading polyfills only when needed. Details here:
     // https://philipwalton.com/articles/loading-polyfills-only-when-needed/
     if (polyfillNeeded()) {
-      // Browsers at larger breakpoints that don't support all
+      // Browsers that doesn't support IntersectionObserver must load the polyfills first:
       // required features must load the polyfills first:
       var script = document.createElement('script');
       script.src = 'kirby/polyfills/intersection-observer-polyfill.min.js';
