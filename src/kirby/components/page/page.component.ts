@@ -241,7 +241,7 @@ export class PageComponent implements OnInit, OnDestroy, AfterContentChecked {
         }
       }
     });
-    this.hasActionsInPage = !!this.pageActionsTemplate || !!this.actionsComponent;
+    this.hasActionsInPage = !!this.pageActionsTemplate;
   }
 
   private initializeContent() {
