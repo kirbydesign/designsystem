@@ -2,9 +2,13 @@
 
 // Global modal styling can be found at scss/base/_ionic.scss
 
-ion-toolbar {
-  --border-width: 0 !important;
+ion-header ion-toolbar {
+  --border-width: 0;
   --background: #{get-color('background-color')};
+}
+
+:host-context(.kirby-drawer) ion-header ion-toolbar {
+  padding-top: 0;
 }
 
 ion-title {
