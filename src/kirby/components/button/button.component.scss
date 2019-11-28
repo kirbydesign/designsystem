@@ -3,7 +3,7 @@
 :host {
   --kirby-button-background-color: transparent;
   --kirby-button-border-color: transparent;
-  --kirby-button-border-radius: 2rem;
+  --kirby-button-border-radius: #{$border-radius-round};
   --kirby-button-padding-left: #{size('m')};
   --kirby-button-padding-right: #{size('m')};
   font-family: var(--kirby-font-family);
