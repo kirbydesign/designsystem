@@ -120,6 +120,7 @@ export class PageComponent implements OnInit, OnDestroy, AfterContentChecked {
   @Input() toolbarTitle?: string;
   @Input() titleAlignment?: 'left' | 'center' | 'right' = 'left';
   @Input() defaultBackHref?: string;
+  @Input() hideBackButton?: boolean;
 
   @Output() enter = new EventEmitter<void>();
   @Output() leave = new EventEmitter<void>();
