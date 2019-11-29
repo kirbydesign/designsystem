@@ -45,6 +45,12 @@ export class PageShowcaseComponent {
         'Back navigation only shows if any navigation has been done. To make it show even after page-reload provide the page with a `defaultBackHref` e.g. "/".',
       inputValues: ['string'],
     },
+    {
+      name: 'hideBackButton',
+      description: 'Hides the back button in the toolbar.',
+      defaultValue: 'false',
+      inputValues: ['true', 'false'],
+    },
   ];
   events: ShowcaseProperty[] = [
     {
