@@ -37,6 +37,7 @@ ion-content {
     box-sizing: border-box;
   }
 
+  --padding-top: #{size('m')};
   --padding-start: #{size('s')};
   --padding-end: #{size('s')};
 
