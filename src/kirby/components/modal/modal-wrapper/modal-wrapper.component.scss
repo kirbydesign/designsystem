@@ -2,9 +2,13 @@
 
 // Global modal styling can be found at scss/base/_ionic.scss
 
+:host {
+  padding-top: size('s');
+}
+
 ion-header ion-toolbar {
   --border-width: 0;
-  --background: #{get-color('background-color')};
+  --background: transparent;
 }
 
 // Prevent iOS safe-area padding-top as this is
@@ -27,7 +31,7 @@ ion-title {
 }
 
 ion-content {
-  --background: #{get-color('background-color')};
+  --background: transparent;
 
   @include slotted('*') {
     box-sizing: border-box;
