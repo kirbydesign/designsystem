@@ -1,4 +1,4 @@
-import { Component, HostListener, Injector, HostBinding } from '@angular/core';
+import { Component, HostListener, Injector, HostBinding, Input } from '@angular/core';
 import { NavParams } from '@ionic/angular';
 
 import { ModalConfig } from './config/modal-config';
@@ -16,11 +16,12 @@ export class ModalWrapperComponent {
   componentPropsInjector: Injector;
 
   @HostBinding('class.drawer')
-  private readonly _isDrawer;
+  private get _isDrawer() {
+    return this.config.flavor === 'drawer';
+  }
 
   constructor(params: NavParams, private modalController: IModalController, injector: Injector) {
     this.config = params.get('config');
-    this._isDrawer = this.config.flavor === 'drawer';
     this.componentPropsInjector = Injector.create({
       providers: [{ provide: COMPONENT_PROPS, useValue: this.config.componentProps }],
       parent: injector,
