@@ -157,6 +157,10 @@ ion-item-divider {
   }
 }
 
+ion-item-options[side='end'] {
+  border-bottom-width: 0;
+}
+
 :host(.has-sections) {
   ion-list {
     box-shadow: none;
