@@ -55,6 +55,26 @@
   display: none;
 }
 
+:host-context(kirby-list ion-item-sliding:first-of-type) {
+  .outside {
+    // Add half of item padding to align vertically:
+    padding-top: size('xxs');
+  }
+  ion-item {
+    --padding-top: #{size('s')};
+  }
+}
+
+:host-context(kirby-list ion-item-sliding:last-of-type) {
+  .outside {
+    // Add half of item padding to align vertically:
+    padding-bottom: size('xxs');
+  }
+  ion-item {
+    --padding-bottom: #{size('s')};
+  }
+}
+
 :host(.selected),
 :host-context(kirby-list .selected) {
   ion-item {
