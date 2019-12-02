@@ -1,6 +1,17 @@
 import { CommonModule } from '@angular/common';
-import { Component, NgModule } from '@angular/core';
-import { MockComponents, MockDirectives, MockModule } from 'ng-mocks';
+import { NgModule } from '@angular/core';
+import {
+  IonList,
+  IonListHeader,
+  IonItemDivider,
+  IonItem,
+  IonItemGroup,
+  IonItemSliding,
+  IonItemOptions,
+  IonItemOption,
+  IonLabel,
+} from '@ionic/angular';
+import { MockComponents, MockDirectives } from 'ng-mocks';
 import createSpyObj = jasmine.createSpyObj;
 
 import {
@@ -63,74 +74,6 @@ import { CalendarComponent } from '@kirbydesign/designsystem/components/calendar
 import { ItemComponent } from '../components/item/item.component';
 import { LabelComponent } from '../components/item/label/label.component';
 
-/*
- * Fake components should be handled by the list of kirby
- */
-@Component({
-  // tslint:disable
-  selector: 'ion-list',
-  template: '<ng-content></ng-content>',
-})
-class FakeIonListComponent {
-  closeSlidingItems() {}
-}
-
-@Component({
-  // tslint:disable
-  selector: 'ion-list-header',
-  template: '<ng-content></ng-content>',
-})
-class FakeIonListHeaderComponent {}
-
-@Component({
-  // tslint:disable
-  selector: 'ion-item-divider',
-  template: '<ng-content></ng-content>',
-})
-class FakeIonItemDividerComponent {}
-
-@Component({
-  // tslint:disable
-  selector: 'ion-item',
-  template: '<ng-content></ng-content>',
-})
-class FakeIonItemComponent {}
-
-@Component({
-  // tslint:disable
-  selector: 'ion-item-group',
-  template: '<ng-content></ng-content>',
-})
-class FakeIonItemGroupComponent {}
-
-@Component({
-  // tslint:disable
-  selector: 'ion-item-sliding',
-  template: '<ng-content></ng-content>',
-})
-class FakeIonItemSlidingComponent {}
-
-@Component({
-  // tslint:disable
-  selector: 'ion-item-options',
-  template: '<ng-content></ng-content>',
-})
-class FakeIonItemOptionsComponent {}
-
-@Component({
-  // tslint:disable
-  selector: 'ion-item-option',
-  template: '<ng-content></ng-content>',
-})
-class FakeIonItemOptionComponent {}
-
-@Component({
-  // tslint:disable
-  selector: 'ion-label',
-  template: '<ng-content></ng-content>',
-})
-class FakeIonLabelComponent {}
-
 const MOCK_COMPONENTS = MockComponents(
   AvatarComponent,
   BadgeComponent,
@@ -153,15 +96,15 @@ const MOCK_COMPONENTS = MockComponents(
   FormFieldMessageComponent,
   InputComponent,
   TextareaComponent,
-  FakeIonListComponent,
-  FakeIonListHeaderComponent,
-  FakeIonItemDividerComponent,
-  FakeIonItemComponent,
-  FakeIonItemGroupComponent,
-  FakeIonItemSlidingComponent,
-  FakeIonItemOptionsComponent,
-  FakeIonItemOptionComponent,
-  FakeIonLabelComponent,
+  IonList,
+  IonListHeader,
+  IonItemDivider,
+  IonItem,
+  IonItemGroup,
+  IonItemSliding,
+  IonItemOptions,
+  IonItemOption,
+  IonLabel,
   LoadingOverlayComponent,
   TabsComponent,
   TabButtonComponent,
@@ -227,8 +170,8 @@ function loadingOverlayServiceFactory() {
 
 @NgModule({
   imports: [CommonModule],
-  declarations: [NON_MOCKED_COMPONENTS, MOCK_COMPONENTS, MOCK_DIRECTIVES],
-  exports: [NON_MOCKED_COMPONENTS, MOCK_COMPONENTS, MOCK_DIRECTIVES],
+  declarations: [MOCK_COMPONENTS, MOCK_DIRECTIVES, NON_MOCKED_COMPONENTS],
+  exports: [MOCK_COMPONENTS, MOCK_DIRECTIVES, NON_MOCKED_COMPONENTS],
   providers: [
     {
       provide: ModalController,

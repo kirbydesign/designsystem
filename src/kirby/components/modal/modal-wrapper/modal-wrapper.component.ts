@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Injector, ViewChild } from '@angular/core';
+import { Component, HostListener, Injector, HostBinding, Input } from '@angular/core';
 import { NavParams } from '@ionic/angular';
 
 import { ModalConfig } from './config/modal-config';
@@ -6,42 +6,46 @@ import { COMPONENT_PROPS } from './config/modal-config.helper';
 import { IModalController } from '../services/modal.controller.interface';
 
 @Component({
+  selector: 'kirby-modal-wrapper',
   templateUrl: './modal-wrapper.component.html',
   styleUrls: ['./modal-wrapper.component.scss'],
 })
-export class ModalWrapperComponent implements AfterViewInit {
-  @ViewChild('modalWrapper', { static: true }) modalWrapper: ElementRef;
+export class ModalWrapperComponent {
   scrollY: number = Math.abs(window.scrollY);
   config: ModalConfig;
   componentPropsInjector: Injector;
 
-  constructor(
-    private params: NavParams,
-    private modalController: IModalController,
-    injector: Injector
-  ) {
-    this.config = this.params.get('config');
+  @HostBinding('class.drawer')
+  private get _isDrawer() {
+    return this.config.flavor === 'drawer';
+  }
+
+  constructor(params: NavParams, private modalController: IModalController, injector: Injector) {
+    this.config = params.get('config');
     this.componentPropsInjector = Injector.create({
-      providers: [{ provide: COMPONENT_PROPS, useValue: this.params.get('config').componentProps }],
+      providers: [{ provide: COMPONENT_PROPS, useValue: this.config.componentProps }],
       parent: injector,
     });
   }
 
-  ngAfterViewInit(): void {
-    this.modalController.blurNativeWrapper(this.modalWrapper.nativeElement);
-  }
-
+  @HostListener('window:focus')
+  @HostListener('window:focusout')
   onFocusChange() {
-    // This fixes an undesired scroll behaviour occurring on keyboard-tabbing
+    // This fixes an undesired scroll behaviour occurring on keyboard-tabbing backwards (with shift+tab):
     window.scrollTo({ top: this.scrollY });
   }
 
-  onModalDismiss(e: any) {
-    // Handle key press, due to:
-    // https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/button_role#Required_JavaScript_Features
-    if (e && e.keyCode && e.keyCode !== 32 && e.keyCode !== 13) {
-      return;
-    }
+  onClose() {
     this.modalController.hideTopmost();
+  }
+
+  // This prevents Ionic from setting --keyboard-offset on ion-content inside modal:
+  @HostListener('focusin', ['$event'])
+  @HostListener('focusout', ['$event'])
+  checkFocusTarget(event: FocusEvent) {
+    const input = event.target as HTMLElement;
+    if (input.tagName === 'INPUT' && input.closest('ion-modal')) {
+      event.stopPropagation();
+    }
   }
 }

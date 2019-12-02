@@ -18,7 +18,7 @@ export class ModalHelper {
     const mergedConfig = this.mergeDefaultConfig(config);
     const modal = await this.ionicModalController.create({
       component: ModalWrapperComponent,
-      cssClass: 'kirby-modal',
+      cssClass: ['kirby-modal', config.flavor === 'drawer' ? 'kirby-drawer' : null],
       componentProps: { config: mergedConfig },
       enterAnimation: ModalHelper.animateIn.bind(
         this,
@@ -62,7 +62,7 @@ export class ModalHelper {
     const transformYFromTo = [`${baseEl.clientHeight}px`, `0px`];
     const fadeBackdropFrom = 0.01;
     const fadeBackdropTo = 0.3;
-    const fadeWrapperFrom = 1;
+    const fadeWrapperFrom = 0.01;
     const fadeWrapperTo = 1;
 
     // Define animations
