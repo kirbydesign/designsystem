@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 const config = {
   selector: 'kirby-item-example-picker-checkbox',
-  template: `<kirby-item>
+  template: `<kirby-item selectable="true">
   <kirby-checkbox slot="start"></kirby-checkbox>
   <kirby-label>
     <h3>Title</h3>

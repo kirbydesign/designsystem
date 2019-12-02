@@ -13,15 +13,15 @@ export const ListWithSectionsAndColoredItemsExampleTemplate = `<kirby-list
     *kirbyListSectionHeader="let section"
     [title]="section"
   ></kirby-list-section-header>
-  <kirby-list-flex-item *kirbyListFlexItem="let item">
-    <kirby-list-cell>
-      <kirby-list-cell-line [primary]="true" [text]="item.title"></kirby-list-cell-line>
-      <kirby-list-cell-line [text]="item.detail"></kirby-list-cell-line>
-    </kirby-list-cell>
-    <kirby-list-cell verticalAlignment="top" horisontalAlignment="right">
-      <kirby-list-cell-line [primary]="true" [text]="item.amount"></kirby-list-cell-line>
-    </kirby-list-cell>
-  </kirby-list-flex-item>
+  <kirby-item *kirbyListItemTemplate="let item">
+    <kirby-label>
+      <h3>{{ item.title }}</h3>
+      <data [value]="item.detail" detail>{{ item.detail }}</data>
+    </kirby-label>
+    <kirby-label slot="end">
+      <data [value]="item.amount">{{ item.amount }}</data>
+    </kirby-label>
+  </kirby-item> 
 </kirby-list>`;
 
 @Component({

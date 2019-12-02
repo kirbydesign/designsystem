@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 const config = {
   selector: 'kirby-item-example-picker-avatar-selected',
-  template: `<kirby-item selected="true">
+  template: `<kirby-item selectable="true" selected="true">
   <kirby-avatar overlay="true" slot="start">
     <kirby-icon name="moneybag"></kirby-icon>
   </kirby-avatar>

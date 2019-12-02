@@ -1,7 +1,6 @@
 @import '../../../../../kirby/scss/utils';
 
 kirby-card {
-  margin: get-shadow-size(2);
   width: map-get($breakpoints, small);
 
   @include media('>=large') {
@@ -15,19 +14,7 @@ kirby-card {
     color: get-color('warning-contrast');
   }
 
-  kirby-list-flex-item {
-    box-sizing: border-box;
-    padding: size('xs');
+  kirby-item:not(:last-child) {
     border-bottom: 1px get-color('background-color') solid;
-
-    &:first-child {
-      font-weight: bold;
-      padding-top: size('s');
-      padding-bottom: size('s');
-    }
-
-    &:last-child {
-      border-bottom: none;
-    }
   }
 }

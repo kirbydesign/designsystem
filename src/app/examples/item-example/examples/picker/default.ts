@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 const config = {
   selector: 'kirby-item-example-picker-default',
-  template: `<kirby-item>
+  template: `<kirby-item selectable="true">
   <kirby-label>
     <h3 class="kirby-text-bold">Title</h3>
     <p detail>Detail</p>
