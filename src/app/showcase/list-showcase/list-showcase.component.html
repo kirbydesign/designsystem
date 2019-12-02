@@ -8,15 +8,15 @@
     Lists support several interactions including swiping items to reveal options, dragging to
     reorder items within the list, and deleting items.
   </p>
+</div>
 
-  <div class="page-example">
-    <div>
-      <h2>Default list</h2>
-      <kirby-code-viewer [html]="defaultTemplate"></kirby-code-viewer>
-    </div>
-
-    <kirby-iphone src="/examples/list" showExternalLink="true"></kirby-iphone>
+<div class="page-example">
+  <div>
+    <h2>With items</h2>
+    <kirby-code-viewer [html]="items"></kirby-code-viewer>
   </div>
+
+  <kirby-iphone src="/examples/list/with-items" showExternalLink="true"></kirby-iphone>
 </div>
 
 <div class="page-example">
@@ -102,16 +102,5 @@
 
   <div>
     <kirby-iphone src="/examples/list/with-sections" showExternalLink="true"></kirby-iphone>
-  </div>
-</div>
-
-<div class="page-example">
-  <div>
-    <h2>List with custom content:</h2>
-    <kirby-code-viewer [html]="customContentExampleTemplate"></kirby-code-viewer>
-  </div>
-
-  <div>
-    <kirby-iphone src="/examples/list/with-custom-content" showExternalLink="true"></kirby-iphone>
   </div>
 </div>

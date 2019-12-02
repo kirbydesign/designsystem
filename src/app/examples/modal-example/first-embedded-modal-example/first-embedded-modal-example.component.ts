@@ -1,9 +1,9 @@
 import { Component, Inject } from '@angular/core';
 
 import { ModalController } from '@kirbydesign/designsystem/modal';
-import { ModalConfig } from '@kirbydesign/designsystem/modal';
+import { ModalConfig, COMPONENT_PROPS } from '@kirbydesign/designsystem/modal';
+import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
 import { SecondEmbeddedModalExampleComponent } from '../second-embedded-modal-example/second-embedded-modal-example.component';
-import { COMPONENT_PROPS } from '@kirbydesign/designsystem/modal';
 
 @Component({
   templateUrl: './first-embedded-modal-example.component.html',
@@ -12,8 +12,9 @@ export class FirstEmbeddedModalExampleComponent {
   props: { [key: string]: any };
 
   constructor(
-    @Inject(COMPONENT_PROPS) private componentProps,
-    private modalController: ModalController
+    @Inject(COMPONENT_PROPS) componentProps,
+    private modalController: ModalController,
+    private toastController: ToastController
   ) {
     this.props = componentProps;
   }
@@ -34,8 +35,8 @@ export class FirstEmbeddedModalExampleComponent {
       title: 'Embedded Drawer Title',
       flavor: 'drawer',
       drawerSupplementaryAction: {
-        iconName: 'qr',
-        action: this.onSupplementaryActionSelect,
+        iconName: 'edit',
+        action: this.onSupplementaryActionSelect.bind(this),
       },
       component: SecondEmbeddedModalExampleComponent,
     };
@@ -50,6 +51,11 @@ export class FirstEmbeddedModalExampleComponent {
   }
 
   onSupplementaryActionSelect(args: any) {
-    console.log('Supplementary action selected');
+    const config: ToastConfig = {
+      message: `Supplementary action selected`,
+      messageType: 'success',
+      durationInMs: 1500,
+    };
+    this.toastController.showToast(config);
   }
 }

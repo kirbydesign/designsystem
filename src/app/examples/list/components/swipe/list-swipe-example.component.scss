@@ -11,22 +11,19 @@ $dot-margin: size('xxxs');
   background-color: get-color('background-color');
 }
 
-kirby-list-flex-item {
-  &.flagged {
-    &::before {
-      content: '\00a0';
-      background-color: get-color('success');
-      position: absolute;
-      top: calc(50% - #{($dot-size / 2)});
-      margin-left: -($dot-size + $dot-margin);
-      width: $dot-size;
-      height: $dot-size;
-      border-radius: 50%;
-    }
-  }
-}
+.flag {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
 
-.amount {
-  white-space: nowrap;
-  font-weight: font-weight('bold');
+  &.success {
+    background: var(--kirby-success);
+  }
+  &.warning {
+    background: var(--kirby-warning);
+  }
+
+  &:not(:last-child) {
+    margin-bottom: 2px;
+  }
 }
