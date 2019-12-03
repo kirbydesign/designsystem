@@ -8,7 +8,7 @@
 .texts {
   display: flex;
   justify-content: space-between;
-  padding: 0 size('s');
+  padding: 2px size('s') 0 size('s');
 
   .message {
     flex: 75%;
