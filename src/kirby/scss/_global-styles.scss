@@ -24,7 +24,7 @@
   position: fixed;
 
   &.kirby-drawer {
-    padding-top: size('m');
+    padding-top: calc(var(--ion-safe-area-top, 0) + #{size('m')});
 
     .modal-wrapper {
       border-top-left-radius: #{$border-radius};
@@ -82,6 +82,7 @@
 
 .kirby-toast {
   position: fixed;
+  user-select: none;
 
   // Set default colors
   --background: #{get-color('success')};

@@ -1,6 +1,8 @@
 @import '../../scss/utils';
 
 :host {
+  user-select: none;
+
   &.default-mode {
     display: inline-block;
 

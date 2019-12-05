@@ -71,8 +71,15 @@ describe('ModalWrapperComponent', () => {
       component.config.flavor = 'drawer';
       fixture.detectChanges();
       const rootElement: HTMLElement = fixture.debugElement.nativeElement;
+      expect(rootElement.classList).toContain('drawer');
+    });
+
+    it('should have font size "m" when drawer flavor is used', () => {
+      component.config.flavor = 'drawer';
+      fixture.detectChanges();
+      const rootElement: HTMLElement = fixture.debugElement.nativeElement;
       const title = rootElement.querySelector('ion-title');
-      expect(title.classList).toContain('drawer');
+      expect(window.getComputedStyle(title).fontSize).toEqual('18px');
     });
   });
 

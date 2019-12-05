@@ -20,6 +20,7 @@
   vertical-align: middle;
   box-sizing: border-box;
   white-space: nowrap;
+  user-select: none;
 
   // we default to 'md' size.
   margin: size('xxxs');

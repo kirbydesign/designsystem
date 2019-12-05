@@ -219,9 +219,10 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
     return swipeAction.type;
   }
 
-  onSwipeActionSelect(swipeAction: ListSwipeAction, item: any): void {
+  onSwipeActionSelect(swipeAction: ListSwipeAction, item: any, event: Event): void {
     swipeAction.onSelected(item);
     this.list.closeSlidingItems();
+    event.stopPropagation();
   }
 
   onResize(): void {

@@ -121,7 +121,7 @@
     <ng-container *ngFor="let swipeAction of swipeActions">
       <ion-item-option
         [ngClass]="getSwipeActionType(swipeAction, item)"
-        (click)="onSwipeActionSelect(swipeAction, item)"
+        (click)="onSwipeActionSelect(swipeAction, item, $event)"
       >
         <div class="item-content">
           <kirby-icon
