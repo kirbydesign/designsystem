@@ -24,7 +24,7 @@
     <ion-buttons
       class="hide"
       slot="secondary"
-      [classfade-in]="toolbarFixedActionsVisible && fixedActionsTemplate"
+      [class.fade-in]="toolbarFixedActionsVisible && fixedActionsTemplate"
       #fixedToolbarButtons
     >
       <ng-container *ngTemplateOutlet="fixedActionsTemplate"></ng-container>
