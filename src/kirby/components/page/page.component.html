@@ -5,7 +5,7 @@
         text=""
         [defaultHref]="defaultBackHref"
         icon="assets/kirby/icons/svg/arrow-back.svg"
-        [style.visibility]="!hideBackButton ? 'visible' : 'hidden'"
+        [style.visibility]="hideBackButton ? 'hidden' : null"
       ></ion-back-button>
     </ion-buttons>
     <ion-title>
