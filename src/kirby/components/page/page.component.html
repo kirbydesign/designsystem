@@ -17,7 +17,7 @@
       class="hide"
       slot="primary"
       #stickyToolbarButtons
-      [ngClass]="{ 'fade-in': toolbarStickyActionsVisible && stickyActionsTemplate }"
+      [class.fade-in]="toolbarStickyActionsVisible && stickyActionsTemplate"
     >
       <ng-container *ngTemplateOutlet="stickyActionsTemplate"></ng-container>
     </ion-buttons>
