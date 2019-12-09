@@ -19,6 +19,7 @@
   position: relative;
   display: inline-block;
   width: $slide-button-container-width;
+  user-select: none;
 
   &[expand='block'] {
     display: block;

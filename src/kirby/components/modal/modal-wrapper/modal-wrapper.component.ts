@@ -1,4 +1,4 @@
-import { Component, HostListener, Injector } from '@angular/core';
+import { Component, HostListener, Injector, HostBinding, Input } from '@angular/core';
 import { NavParams } from '@ionic/angular';
 
 import { ModalConfig } from './config/modal-config';
@@ -6,6 +6,7 @@ import { COMPONENT_PROPS } from './config/modal-config.helper';
 import { IModalController } from '../services/modal.controller.interface';
 
 @Component({
+  selector: 'kirby-modal-wrapper',
   templateUrl: './modal-wrapper.component.html',
   styleUrls: ['./modal-wrapper.component.scss'],
 })
@@ -13,6 +14,11 @@ export class ModalWrapperComponent {
   scrollY: number = Math.abs(window.scrollY);
   config: ModalConfig;
   componentPropsInjector: Injector;
+
+  @HostBinding('class.drawer')
+  private get _isDrawer() {
+    return this.config.flavor === 'drawer';
+  }
 
   constructor(params: NavParams, private modalController: IModalController, injector: Injector) {
     this.config = params.get('config');

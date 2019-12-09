@@ -1,7 +1,9 @@
-import { Directive, ElementRef, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, Input, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 
 import { ResizeObserverService } from '@kirbydesign/designsystem/components/shared/resize-observer/resize-observer.service';
 import { ResizeObserverEntry } from '@kirbydesign/designsystem/components/shared/resize-observer/types/resize-observer-entry';
+
+declare var require: any;
 
 interface Size {
   name: string;
@@ -9,36 +11,40 @@ interface Size {
   lineHeight: string;
 }
 
+export interface FitHeaderConfig {
+  maxLines: number;
+}
+
 @Directive({
-  selector: `h1[kirbyFitText],h2[kirbyFitText],h3[kirbyFitText]`,
+  selector: `h1[kirbyFitHeader],h2[kirbyFitHeader],h3[kirbyFitHeader]`,
 })
 export class FitHeaderDirective implements OnInit, OnDestroy {
-  // TODO: Should be configurable
-  maxLines: number = 1;
+  // tslint:disable-next-line:no-input-rename
+  @Input('kirbyFitHeader') config?: FitHeaderConfig = {
+    maxLines: 2,
+  };
+
   private lineHeight: number;
   private height: number;
   private width: number;
   private clone: Element;
-  private scalingHeader: boolean;
-
-  /*
-   * TODO: GET SIZES FROM _variables.scss
-   */
+  private scalingHeader: boolean; // used to prevent resizeObserver to trigger on font scaling by this.scaleHeader()
+  private scssVariables: any = require('sass-extract-loader!../../scss/base/_variables.scss');
   private sizes: Size[] = [
     {
       name: 'h1',
-      fontSize: '32px',
-      lineHeight: '38px',
+      fontSize: this.getFontSize('xl'),
+      lineHeight: this.getLineHeight('xl'),
     },
     {
       name: 'h2',
-      fontSize: '22px',
-      lineHeight: '28px',
+      fontSize: this.getFontSize('l'),
+      lineHeight: this.getLineHeight('l'),
     },
     {
       name: 'h3',
-      fontSize: '18px',
-      lineHeight: '24px',
+      fontSize: this.getFontSize('m'),
+      lineHeight: this.getLineHeight('m'),
     },
   ];
 
@@ -55,6 +61,30 @@ export class FitHeaderDirective implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.resizeObserverService.unobserve(this.elementRef);
     this.renderer.removeChild(this.elementRef.nativeElement, this.clone);
+  }
+
+  private getFontSize(size): string {
+    if (
+      this.scssVariables['global'] &&
+      this.scssVariables['global']['$font-sizes'] &&
+      this.scssVariables['global']['$font-sizes']['value'] &&
+      this.scssVariables['global']['$font-sizes']['value'][size]
+    ) {
+      const fontSize = this.scssVariables['global']['$font-sizes']['value'][size];
+      return `${fontSize.value}${fontSize.unit}`;
+    }
+  }
+
+  private getLineHeight(size): string {
+    if (
+      this.scssVariables['global'] &&
+      this.scssVariables['global']['$line-height'] &&
+      this.scssVariables['global']['$line-height']['value'] &&
+      this.scssVariables['global']['$line-height']['value'][size]
+    ) {
+      const fontSize = this.scssVariables['global']['$line-height']['value'][size];
+      return `${fontSize.value}${fontSize.unit}`;
+    }
   }
 
   private observeResize(): void {
@@ -80,15 +110,8 @@ export class FitHeaderDirective implements OnInit, OnDestroy {
       window.getComputedStyle(this.elementRef.nativeElement).getPropertyValue('line-height')
     );
 
-    // TODO: DONT TRIGGER IF SMALLEST IF DOING DOWN OR LARGEST IF GOING UP
     const lines = this.height / this.lineHeight;
-    if (lines > this.maxLines) {
-      return true;
-    } else if (this.width < el.clientWidth) {
-      return true;
-    } else {
-      return false;
-    }
+    return lines > this.config.maxLines || this.width < el.clientWidth;
   }
 
   private scaleHeader(): void {
@@ -105,7 +128,7 @@ export class FitHeaderDirective implements OnInit, OnDestroy {
       this.sizes.filter((size: Size) => {
         this.setSize(this.clone, size);
         const lines = this.clone.clientHeight / parseInt(size.lineHeight);
-        return lines <= this.maxLines;
+        return lines <= this.config.maxLines;
       })[0] || this.sizes[this.sizes.length - 1];
 
     this.setSize(this.elementRef.nativeElement, fittedSize);

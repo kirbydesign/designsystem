@@ -31,6 +31,7 @@ import { FitHeaderModule } from '@kirbydesign/designsystem/directives/fit-header
     PageContentDirective,
     PageTitleDirective,
     PageToolbarTitleDirective,
+    FitHeaderModule,
   ],
 })
 export class PageModule {}

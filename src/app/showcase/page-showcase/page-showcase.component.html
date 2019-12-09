@@ -17,6 +17,10 @@
     <li>Support for advanced page title and actions template</li>
     <li>Support for fixed page content (e.g. a Floating Action Button)</li>
     <li>Spacing of content</li>
+    <li>
+      Automatically scales page header between style of h1 -> h3 depending on max-lines (default 2
+      lines)
+    </li>
   </ul>
 
   <h2>Life-cycle hooks</h2>
@@ -25,6 +29,13 @@
     instead of replaced. This means that you can't trust <code>onInit</code> and
     <code>onDestroy</code>. Instead you can trust the <code>kirby-page</code> events
     <code>(enter)</code> and <code>(leave)</code> instead.
+  </p>
+
+  <h2>Scaling of header</h2>
+  <p>
+    Page automatically scales the page header size & line-height between h1 -> h3 depending on
+    maximum of lines (default 2 lines) This can be configured by setting
+    <code>headerMaxLines="NUMBER OF MAXIMUM LINES"</code>
   </p>
 
   <div class="page-example">
@@ -79,6 +90,13 @@
         ><strong>*Please note:</strong> When supplying a custom page title element you must supply
         both a page title and a toolbar title. You should also ensure the page title is wrapped in a
         <code>h1</code> tag. See example below on how to reuse a template for both titles.</em
+      >
+    </p>
+    <p>
+      <em
+        ><strong>*Please note:</strong> If custom header is used you will need to add
+        <code>fitKirbyHeader</code> directive at your header-tag (h1,h2,h3) to take advantage of the
+        automatic scaling.</em
       >
     </p>
     <kirby-code-viewer [html]="advancedExampleHtml"></kirby-code-viewer>
