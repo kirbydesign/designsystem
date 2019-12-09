@@ -10,6 +10,7 @@ import {
   PageTitleDirective,
   PageToolbarTitleDirective,
 } from './page.component';
+import { FitHeaderModule } from '@kirbydesign/designsystem/directives/fit-header/fit-header.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,7 @@ import {
     PageTitleDirective,
     PageToolbarTitleDirective,
   ],
-  imports: [CommonModule, IonicModule],
+  imports: [CommonModule, IonicModule, FitHeaderModule],
   exports: [
     PageComponent,
     PageActionsComponent,

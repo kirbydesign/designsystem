@@ -39,7 +39,7 @@
       #pageTitle
     >
       <ng-container *ngTemplateOutlet="customTitleTemplate"></ng-container>
-      <h1 *ngIf="!customTitleTemplate">
+      <h1 *ngIf="!customTitleTemplate" kirbyFitText>
         <ng-container *ngTemplateOutlet="simpleTitleTemplate"></ng-container>
       </h1>
       <div *ngIf="pageActionsTemplate">
