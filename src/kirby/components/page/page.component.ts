@@ -1,5 +1,4 @@
 import {
-  AfterContentChecked,
   AfterContentInit,
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -11,7 +10,6 @@ import {
   ElementRef,
   EventEmitter,
   Input,
-  NgZone,
   OnDestroy,
   OnInit,
   Output,
@@ -22,8 +20,11 @@ import {
 } from '@angular/core';
 import { NavigationEnd, NavigationStart, Router, RouterEvent } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { IonContent } from '@ionic/angular';
 
 import { ButtonComponent } from '../button/button.component';
+import { tabClicked } from '../tabs/tab-button/tab-button.events';
+import { KirbyAnimation } from '@kirbydesign/designsystem/animation/kirby-animation';
 
 type stickyConfig = { sticky: boolean };
 type fixedConfig = { fixed: boolean };
@@ -109,6 +110,7 @@ export class PageComponent implements OnInit, OnDestroy, AfterViewInit {
   @Output() enter = new EventEmitter<void>();
   @Output() leave = new EventEmitter<void>();
 
+  @ViewChild('content', { static: true }) private content: IonContent;
   @ViewChild('pageTitle', { static: false, read: ElementRef })
   private pageTitle: ElementRef;
   @ViewChild('stickyToolbarButtons', { static: false, read: ElementRef })
@@ -175,6 +177,10 @@ export class PageComponent implements OnInit, OnDestroy, AfterViewInit {
         this.onEnter();
       }
     });
+
+    addEventListener(tabClicked, () => {
+      this.content.scrollToTop(KirbyAnimation.Duration.LONG);
+    });
   }
 
   ngOnDestroy(): void {
@@ -182,6 +188,7 @@ export class PageComponent implements OnInit, OnDestroy, AfterViewInit {
       this.routerEventsSubscription.unsubscribe();
     }
     this.pageTitleIntersectionObserverRef.disconnect();
+    removeEventListener(tabClicked, null);
   }
 
   private onEnter() {
