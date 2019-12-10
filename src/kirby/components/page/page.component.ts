@@ -180,6 +180,9 @@ export class PageComponent implements OnInit, OnDestroy, AfterViewInit, AfterCon
 
   private onEnter() {
     this.enter.emit();
+    if (this.pageTitle) {
+      this.pageTitleIntersectionObserverRef.observe(this.pageTitle.nativeElement);
+    }
   }
 
   private onLeave() {
