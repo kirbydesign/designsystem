@@ -21,8 +21,6 @@ import {
 import { NavigationEnd, NavigationStart, Router, RouterEvent } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { ButtonComponent } from '../button/button.component';
-
 type stickyConfig = { sticky: boolean };
 type fixedConfig = { fixed: boolean };
 
@@ -82,9 +80,7 @@ export class PageContentComponent {}
     <ng-content select="button[kirby-button]"></ng-content>
   `,
 })
-export class PageActionsComponent {
-  @ContentChildren(ButtonComponent) buttons: QueryList<ButtonComponent>;
-}
+export class PageActionsComponent {}
 
 @Component({
   selector: 'kirby-page',
