@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 
 import { IconComponent } from '@kirbydesign/designsystem/components/icon/icon.component';
-import { tabClicked } from './tab-button.events';
+import { selectedTabClickEvent } from './tab-button.events';
 
 @Component({
   selector: 'kirby-tab-button',
@@ -33,7 +33,7 @@ export class TabButtonComponent implements OnInit {
     this.click.emit(event);
 
     if (isSelected) {
-      const clickEvent = new CustomEvent(tabClicked);
+      const clickEvent = new CustomEvent(selectedTabClickEvent);
       dispatchEvent(clickEvent);
     }
   }

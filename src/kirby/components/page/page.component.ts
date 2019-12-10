@@ -23,7 +23,7 @@ import { Subscription } from 'rxjs';
 import { IonContent } from '@ionic/angular';
 
 import { ButtonComponent } from '../button/button.component';
-import { tabClicked } from '../tabs/tab-button/tab-button.events';
+import { selectedTabClickEvent } from '../tabs/tab-button/tab-button.events';
 import { KirbyAnimation } from '@kirbydesign/designsystem/animation/kirby-animation';
 
 type stickyConfig = { sticky: boolean };
@@ -178,7 +178,7 @@ export class PageComponent implements OnInit, OnDestroy, AfterViewInit {
       }
     });
 
-    window.addEventListener(tabClicked, () => {
+    window.addEventListener(selectedTabClickEvent, () => {
       this.content.scrollToTop(KirbyAnimation.Duration.LONG);
     });
   }
@@ -188,7 +188,7 @@ export class PageComponent implements OnInit, OnDestroy, AfterViewInit {
       this.routerEventsSubscription.unsubscribe();
     }
     this.pageTitleIntersectionObserverRef.disconnect();
-    window.removeEventListener(tabClicked, () => {
+    window.removeEventListener(selectedTabClickEvent, () => {
       this.content.scrollToTop(KirbyAnimation.Duration.LONG);
     });
   }

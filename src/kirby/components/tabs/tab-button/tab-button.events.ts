@@ -1,1 +1,1 @@
-export const tabClicked = 'kirbySelectedTabClick';
+export const selectedTabClickEvent = 'kirbySelectedTabClick';
