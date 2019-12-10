@@ -43,6 +43,8 @@ export class SlideButtonComponent extends SlideButtonCommon implements OnDestroy
       this.resetSliderIntervalTimer = setInterval(() => {
         if (this.value >= 0) {
           this.value -= 2;
+        } else {
+          clearInterval(this.resetSliderIntervalTimer);
         }
 
         this.changeDetectionRef.markForCheck();
