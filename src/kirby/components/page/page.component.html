@@ -44,7 +44,9 @@
         'text-right': titleAlignment === 'right'
       }"
     >
-      <ng-container *ngTemplateOutlet="customTitleTemplate"></ng-container>
+      <ng-container
+        *ngTemplateOutlet="customTitleTemplate || defaultPageTitleTemplate"
+      ></ng-container>
       <ng-container
         *ngTemplateOutlet="pageActionsTemplate || defaultPageActionsTemplate"
       ></ng-container>
