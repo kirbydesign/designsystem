@@ -1,8 +1,79 @@
 @import '../../scss/utils';
 
-:host {
+@mixin button-reset {
   --kirby-button-background-color: transparent;
   --kirby-button-border-color: transparent;
+
+  &.destructive {
+    --kirby-button-background-color: transparent;
+    --kirby-button-border-color: transparent;
+  }
+}
+
+@mixin button-sm {
+  padding: size('xxxs') size('s') size('xxxs') size('s');
+  font-size: font-size('xs');
+  height: size('l');
+
+  &.icon-only {
+    width: size('l');
+  }
+}
+
+@mixin button-lg {
+  font-size: font-size('n');
+  height: size('xxl');
+  min-width: 220px;
+
+  &.icon-only {
+    width: size('xxl');
+  }
+}
+
+@mixin button-attentionlevel1 {
+  --kirby-button-background-color: #{get-color('primary')};
+  --kirby-button-border-color: #{get-color('primary')};
+  --kirby-button-color: #{get-color('primary-contrast')};
+
+  &.destructive {
+    --kirby-button-background-color: #{get-color('danger')};
+    --kirby-button-border-color: #{get-color('danger')};
+    --kirby-button-color: #{get-color('danger-contrast')};
+  }
+}
+
+@mixin button-attentionlevel2 {
+  --kirby-button-background-color: #{get-color('white')};
+  --kirby-button-border-color: #{get-color('white')};
+  --kirby-button-color: #{get-color('white-contrast')};
+
+  &.destructive {
+    --kirby-button-background-color: #{get-color('light')};
+    --kirby-button-border-color: #{get-color('light')};
+    --kirby-button-color: #{get-color('danger')};
+  }
+}
+
+@mixin button-attentionlevel3 {
+  --kirby-button-border-color: #{get-color('medium')};
+  --kirby-button-color: #{get-color('medium-contrast')};
+
+  &.destructive {
+    --kirby-button-border-color: #{get-color('medium')};
+    --kirby-button-color: #{get-color('danger')};
+  }
+}
+
+@mixin button-attentionlevel4 {
+  --kirby-button-color: #{get-color('primary-contrast')};
+
+  &.destructive {
+    --kirby-button-color: #{get-color('danger')};
+  }
+}
+
+:host {
+  @include button-reset;
   --kirby-button-border-radius: #{$border-radius-round};
   --kirby-button-padding-left: #{size('m')};
   --kirby-button-padding-right: #{size('m')};
@@ -47,65 +118,27 @@
   }
 
   &.sm {
-    padding: size('xxxs') size('s') size('xxxs') size('s');
-    font-size: font-size('xs');
-    height: size('l');
-
-    &.icon-only {
-      width: size('l');
-    }
+    @include button-sm;
   }
 
   &.lg {
-    font-size: font-size('n');
-    height: size('xxl');
-    min-width: 220px;
-
-    &.icon-only {
-      width: size('xxl');
-    }
+    @include button-lg;
   }
 
   &.attention-level1 {
-    --kirby-button-background-color: #{get-color('primary')};
-    --kirby-button-border-color: #{get-color('primary')};
-    --kirby-button-color: #{get-color('primary-contrast')};
-
-    &.destructive {
-      --kirby-button-background-color: #{get-color('danger')};
-      --kirby-button-border-color: #{get-color('danger')};
-      --kirby-button-color: #{get-color('danger-contrast')};
-    }
+    @include button-attentionlevel1;
   }
 
   &.attention-level2 {
-    --kirby-button-background-color: #{get-color('white')};
-    --kirby-button-border-color: #{get-color('white')};
-    --kirby-button-color: #{get-color('white-contrast')};
-
-    &.destructive {
-      --kirby-button-background-color: #{get-color('light')};
-      --kirby-button-border-color: #{get-color('light')};
-      --kirby-button-color: #{get-color('danger')};
-    }
+    @include button-attentionlevel2;
   }
 
   &.attention-level3 {
-    --kirby-button-border-color: #{get-color('medium')};
-    --kirby-button-color: #{get-color('medium-contrast')};
-
-    &.destructive {
-      --kirby-button-border-color: #{get-color('medium')};
-      --kirby-button-color: #{get-color('danger')};
-    }
+    @include button-attentionlevel3;
   }
 
   &.attention-level4 {
-    --kirby-button-color: #{get-color('primary-contrast')};
-
-    &.destructive {
-      --kirby-button-color: #{get-color('danger')};
-    }
+    @include button-attentionlevel4;
   }
 
   &[expand='block'] {
@@ -162,4 +195,25 @@
 
 :host-context(kirby-item)[slot='end'] {
   margin-inline-start: size('s');
+}
+
+:host-context(ion-toolbar kirby-page-actions) {
+  &.attention-level1,
+  &.attention-level2,
+  &.attention-level3,
+  &.attention-level4 {
+    @include button-reset;
+    @include button-attentionlevel4;
+    @include button-sm;
+  }
+}
+
+:host-context(ion-content kirby-page-actions) {
+  &.attention-level1,
+  &.attention-level2,
+  &.attention-level3,
+  &.attention-level4 {
+    @include button-reset;
+    @include button-attentionlevel2;
+  }
 }
