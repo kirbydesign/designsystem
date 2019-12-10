@@ -32,7 +32,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content scrollEvents="false" forceOverscroll="false">
+<ion-content scrollEvents="true" forceOverscroll="false">
   <div class="content-inner">
     <div
       class="page-title"
@@ -44,13 +44,12 @@
         'text-right': titleAlignment === 'right'
       }"
     >
-      <ng-container
-        *ngTemplateOutlet="customTitleTemplate || defaultPageTitleTemplate"
-      ></ng-container>
+      <ng-container *ngTemplateOutlet="customTitleTemplate"></ng-container>
       <ng-container
         *ngTemplateOutlet="pageActionsTemplate || defaultPageActionsTemplate"
       ></ng-container>
     </div>
+    <!-- Content -->
     <ng-container
       *ngTemplateOutlet="customContentTemplate || defaultContentTemplate"
     ></ng-container>

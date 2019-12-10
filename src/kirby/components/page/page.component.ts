@@ -1,6 +1,5 @@
 import {
   AfterContentChecked,
-  AfterContentInit,
   AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -11,7 +10,6 @@ import {
   ElementRef,
   EventEmitter,
   Input,
-  NgZone,
   OnDestroy,
   OnInit,
   Output,
@@ -84,13 +82,8 @@ export class PageContentComponent {}
     <ng-content select="button[kirby-button]"></ng-content>
   `,
 })
-export class PageActionsComponent implements AfterContentInit {
+export class PageActionsComponent {
   @ContentChildren(ButtonComponent) buttons: QueryList<ButtonComponent>;
-  ngAfterContentInit(): void {
-    this.buttons.forEach((button) => {
-      button.attentionLevel = '2';
-    });
-  }
 }
 
 @Component({
@@ -99,7 +92,7 @@ export class PageActionsComponent implements AfterContentInit {
   styleUrls: ['./page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PageComponent implements OnInit, OnDestroy, AfterViewInit {
+export class PageComponent implements OnInit, OnDestroy, AfterViewInit, AfterContentChecked {
   @Input() title?: string;
   @Input() toolbarTitle?: string;
   @Input() titleAlignment?: 'left' | 'center' | 'right' = 'left';
@@ -159,12 +152,6 @@ export class PageComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.initializeTitle();
-    this.initializeActions();
-    this.styleToolbarButtons();
-    this.initializeContent();
-    this.changeDetectorRef.detectChanges();
-
     this.onEnter();
 
     this.routerEventsSubscription = this.router.events.subscribe((event: RouterEvent) => {
@@ -177,6 +164,13 @@ export class PageComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   }
 
+  ngAfterContentChecked(): void {
+    this.initializeTitle();
+    this.initializeActions();
+    this.initializeContent();
+    this.changeDetectorRef.detectChanges();
+  }
+
   ngOnDestroy(): void {
     if (this.routerEventsSubscription) {
       this.routerEventsSubscription.unsubscribe();
@@ -186,9 +180,6 @@ export class PageComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private onEnter() {
     this.enter.emit();
-    if (this.pageTitle) {
-      this.pageTitleIntersectionObserverRef.observe(this.pageTitle.nativeElement);
-    }
   }
 
   private onLeave() {
@@ -199,9 +190,16 @@ export class PageComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private initializeTitle() {
+    // Ensures initializeTitle() won't run, if already initialized
+    if (this.hasPageTitle) return;
+
     this.hasPageTitle = this.title !== undefined || !!this.customTitleTemplate;
-    if (!this.hasPageTitle) {
-      this.toolbarTitleVisible = true;
+    this.toolbarTitleVisible = !this.hasPageTitle;
+
+    if (this.hasPageTitle) {
+      setTimeout(() => {
+        this.pageTitleIntersectionObserverRef.observe(this.pageTitle.nativeElement);
+      });
     }
 
     const defaultTitleTemplate = this.customTitleTemplate || this.simpleTitleTemplate;
@@ -237,27 +235,6 @@ export class PageComponent implements OnInit, OnDestroy, AfterViewInit {
         this.customContentTemplate = content.template;
       }
     });
-  }
-
-  private styleToolbarButtons() {
-    if (this.stickyToolbarButtons && this.stickyToolbarButtons.nativeElement) {
-      const buttons = this.stickyToolbarButtons.nativeElement.querySelectorAll('[kirby-button]');
-      buttons.forEach((button) => {
-        this.renderer.addClass(button, 'sm');
-        this.renderer.removeClass(button, 'lg');
-        this.renderer.addClass(button, 'attention-level4');
-        this.renderer.removeClass(button, 'attention-level2');
-      });
-    }
-    if (this.fixedToolbarButtons && this.fixedToolbarButtons.nativeElement) {
-      const buttons = this.fixedToolbarButtons.nativeElement.querySelectorAll('[kirby-button]');
-      buttons.forEach((button) => {
-        this.renderer.addClass(button, 'sm');
-        this.renderer.removeClass(button, 'lg');
-        this.renderer.addClass(button, 'attention-level4');
-        this.renderer.removeClass(button, 'attention-level2');
-      });
-    }
   }
 
   private removeWrapper() {
