@@ -110,7 +110,7 @@ export class PageComponent implements OnInit, OnDestroy, AfterViewInit {
   @Output() enter = new EventEmitter<void>();
   @Output() leave = new EventEmitter<void>();
 
-  @ViewChild('content', { static: true }) private content: IonContent;
+  @ViewChild(IonContent, { static: true }) private content: IonContent;
   @ViewChild('pageTitle', { static: false, read: ElementRef })
   private pageTitle: ElementRef;
   @ViewChild('stickyToolbarButtons', { static: false, read: ElementRef })
@@ -178,7 +178,7 @@ export class PageComponent implements OnInit, OnDestroy, AfterViewInit {
       }
     });
 
-    addEventListener(tabClicked, () => {
+    window.addEventListener(tabClicked, () => {
       this.content.scrollToTop(KirbyAnimation.Duration.LONG);
     });
   }
@@ -188,7 +188,9 @@ export class PageComponent implements OnInit, OnDestroy, AfterViewInit {
       this.routerEventsSubscription.unsubscribe();
     }
     this.pageTitleIntersectionObserverRef.disconnect();
-    removeEventListener(tabClicked, null);
+    window.removeEventListener(tabClicked, () => {
+      this.content.scrollToTop(KirbyAnimation.Duration.LONG);
+    });
   }
 
   private onEnter() {

@@ -29,10 +29,10 @@ export class TabButtonComponent implements OnInit {
     this.removeWrapper();
   }
 
-  onClick(event: Event, clickedSelected: boolean) {
+  onClick(event: Event, isSelected: boolean) {
     this.click.emit(event);
 
-    if (clickedSelected) {
+    if (isSelected) {
       const clickEvent = new CustomEvent(tabClicked);
       dispatchEvent(clickEvent);
     }
