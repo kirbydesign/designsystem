@@ -138,7 +138,8 @@ export class PageComponent implements OnInit, OnDestroy, AfterViewInit, AfterCon
   fixedActionsTemplate: TemplateRef<any>;
   private pageTitleIntersectionObserverRef: IntersectionObserver = this.pageTitleIntersectionObserver();
   private routerEventsSubscription: Subscription;
-  private url: string;
+  private urls: string[] = [];
+  private hasEntered: boolean;
 
   constructor(
     private elementRef: ElementRef,
@@ -148,18 +149,16 @@ export class PageComponent implements OnInit, OnDestroy, AfterViewInit, AfterCon
   ) {}
 
   ngOnInit(): void {
-    this.url = this.router.url;
     this.removeWrapper();
   }
 
   ngAfterViewInit(): void {
-    this.onEnter();
-
     this.routerEventsSubscription = this.router.events.subscribe((event: RouterEvent) => {
-      if (event instanceof NavigationStart && event.url !== this.url) {
+      if (event instanceof NavigationStart && this.urls.indexOf(event.url) === -1) {
         this.onLeave();
       }
-      if (event instanceof NavigationEnd && event.urlAfterRedirects === this.url) {
+
+      if (event instanceof NavigationEnd && this.urls.indexOf(event.urlAfterRedirects) > -1) {
         this.onEnter();
       }
     });
@@ -170,6 +169,11 @@ export class PageComponent implements OnInit, OnDestroy, AfterViewInit, AfterCon
   }
 
   ngAfterContentChecked(): void {
+    if (this.urls.indexOf(this.router.url) === -1) {
+      this.urls.push(this.router.url);
+      this.onEnter();
+    }
+
     this.initializeTitle();
     this.initializeActions();
     this.initializeContent();
@@ -187,6 +191,9 @@ export class PageComponent implements OnInit, OnDestroy, AfterViewInit, AfterCon
   }
 
   private onEnter() {
+    if (this.hasEntered) return;
+    this.hasEntered = true;
+
     this.enter.emit();
     if (this.pageTitle) {
       this.pageTitleIntersectionObserverRef.observe(this.pageTitle.nativeElement);
@@ -198,6 +205,7 @@ export class PageComponent implements OnInit, OnDestroy, AfterViewInit, AfterCon
     if (this.pageTitle) {
       this.pageTitleIntersectionObserverRef.unobserve(this.pageTitle.nativeElement);
     }
+    this.hasEntered = false;
   }
 
   private initializeTitle() {
