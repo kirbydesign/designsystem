@@ -66,6 +66,16 @@ this.modalController.showAlert(config);`;
     this.modalController.showAlert(config, this.onAlertDestructiveClosed.bind(this));
   }
 
+  showAlertWithNewline() {
+    const config: AlertConfig = {
+      title: 'Alert with newline',
+      message: 'This is message one,\n\nthis is message two\n\nand this is      message three',
+      okBtn: 'I agree',
+      cancelBtn: 'Take me back',
+    };
+    this.modalController.showAlert(config, this.onAlertClosed.bind(this));
+  }
+
   private onAlertClosed(result?: boolean) {
     const config: ToastConfig = {
       message: `Alert selection: ${result}`,
