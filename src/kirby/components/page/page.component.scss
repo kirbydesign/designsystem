@@ -31,6 +31,17 @@ ion-toolbar {
   }
 }
 
+.hide {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.25ms linear;
+
+  &.fade-in {
+    visibility: inherit;
+    opacity: 1;
+  }
+}
+
 ion-title {
   box-sizing: border-box;
   font-size: font-size('n');

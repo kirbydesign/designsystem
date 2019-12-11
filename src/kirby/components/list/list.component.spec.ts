@@ -92,27 +92,6 @@ describe('ListComponent', () => {
 
       expect(spectator.component.isSectionsEnabled).toBeTruthy();
     });
-
-    it('should render one item element for each item, if the list is not sectioned', () => {
-      spectator.setInput({
-        items: Item.createItems(1, 2, 3),
-      });
-      runNgOnChanges();
-
-      const liElements = spectator.queryAll('ion-item');
-      expect(liElements.length).toEqual(component.items.length);
-    });
-
-    it('should render one ion-item for each ion-item-group and one for each section, if sections are enabled', () => {
-      spectator.setInput({
-        items: Item.createItems(1, 2, 3),
-        getSectionName: (item: Item) => (item.value % 2 === 0 ? 'even' : 'odd'),
-      });
-      runNgOnChanges();
-
-      const liElements = spectator.queryAll('ion-item');
-      expect(liElements.length).toEqual(component.items.length);
-    });
   });
 
   describe('divider', () => {
@@ -165,43 +144,6 @@ describe('ListComponent', () => {
       runNgOnChanges();
 
       expect(component.isLoadOnDemandEnabled).toBeFalsy();
-    });
-  });
-
-  describe('first/last in section', () => {
-    it('should return true for sectioned list with rounded corners and a single entry', () => {
-      const items = Item.createItems(1);
-      spectator.setInput({
-        items,
-        shape: 'rounded',
-        getSectionName: () => 'bob',
-      });
-      runNgOnChanges();
-
-      expect(component.isFirstItem(component.items[0], 0)).toEqual(true);
-      expect(component.isLastItem(component.items[0], 0)).toEqual(true);
-    });
-
-    it('should return true for sectioned list with rounded corners and multiple entries', () => {
-      const items = Item.createItems(1, 2, 3, 4);
-      spectator.setInput({
-        items,
-        shape: 'rounded',
-        getSectionName: (item: Item) => (item.value % 2 == 0 ? 'even' : 'odd'),
-      });
-      runNgOnChanges();
-
-      expect(component.isFirstItem(component.items[0], 0)).toEqual(true);
-      expect(component.isLastItem(component.items[0], 0)).toEqual(false);
-
-      expect(component.isFirstItem(component.items[1], 1)).toEqual(true);
-      expect(component.isLastItem(component.items[1], 1)).toEqual(false);
-
-      expect(component.isFirstItem(component.items[2], 2)).toEqual(false);
-      expect(component.isLastItem(component.items[2], 2)).toEqual(true);
-
-      expect(component.isFirstItem(component.items[3], 3)).toEqual(false);
-      expect(component.isLastItem(component.items[3], 3)).toEqual(true);
     });
   });
 });

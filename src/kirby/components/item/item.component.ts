@@ -10,4 +10,6 @@ export class ItemComponent {
   @HostBinding('class.selected')
   @Input()
   selected;
+  @Input()
+  selectable: boolean;
 }

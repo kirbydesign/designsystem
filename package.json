@@ -1,6 +1,6 @@
 {
   "name": "designsystem",
-  "version": "0.8.38",
+  "version": "0.8.59",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -58,6 +58,7 @@
     "coveralls": "3.0.2",
     "cpx": "1.5.0",
     "husky": "^3.0.9",
+    "intersection-observer": "0.7.0",
     "is-docker": "1.1.0",
     "jasmine-core": "2.99.1",
     "jasmine-spec-reporter": "4.2.1",
@@ -69,7 +70,7 @@
     "karma-junit-reporter": "1.2.0",
     "karma-spec-reporter": "0.0.32",
     "lint-staged": "^9.4.2",
-    "ng-mocks": "7.7.0",
+    "ng-mocks": "8.1.0",
     "node-sass": "^4.12.0",
     "post-npm-install": "^2.0.0",
     "prettier": "1.17.0",

@@ -1,26 +1,29 @@
 import {
+  AfterContentChecked,
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ContentChild,
+  ContentChildren,
   Directive,
   ElementRef,
+  EventEmitter,
   Input,
   OnDestroy,
   OnInit,
+  Output,
+  QueryList,
   Renderer2,
   TemplateRef,
   ViewChild,
-  ContentChildren,
-  QueryList,
-  AfterContentInit,
-  Output,
-  EventEmitter,
-  AfterContentChecked,
 } from '@angular/core';
-import { animate, state, style, transition, trigger } from '@angular/animations';
-import { NavigationStart, NavigationEnd, Router, RouterEvent } from '@angular/router';
+import { NavigationEnd, NavigationStart, Router, RouterEvent } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { IonContent } from '@ionic/angular';
 
-import { ButtonComponent } from '../button/button.component';
+import { selectedTabClickEvent } from '../tabs/tab-button/tab-button.events';
+import { KirbyAnimation } from '@kirbydesign/designsystem/animation/kirby-animation';
 
 type stickyConfig = { sticky: boolean };
 type fixedConfig = { fixed: boolean };
@@ -81,49 +84,25 @@ export class PageContentComponent {}
     <ng-content select="button[kirby-button]"></ng-content>
   `,
 })
-export class PageActionsComponent implements AfterContentInit {
-  @ContentChildren(ButtonComponent) buttons: QueryList<ButtonComponent>;
-  ngAfterContentInit(): void {
-    this.buttons.forEach((button) => {
-      button.attentionLevel = '2';
-    });
-  }
-}
+export class PageActionsComponent {}
 
 @Component({
   selector: 'kirby-page',
   templateUrl: './page.component.html',
   styleUrls: ['./page.component.scss'],
-  animations: [
-    trigger('visibility', [
-      state(
-        'visible',
-        style({
-          opacity: 1,
-          visibility: 'inherit',
-        })
-      ),
-      state(
-        'hidden',
-        style({
-          opacity: 0,
-          visibility: 'hidden',
-        })
-      ),
-      transition('visible => hidden', [animate('100ms')]),
-      transition('hidden => visible', [animate('250ms')]),
-    ]),
-  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PageComponent implements OnInit, OnDestroy, AfterContentChecked {
+export class PageComponent implements OnInit, OnDestroy, AfterViewInit, AfterContentChecked {
   @Input() title?: string;
   @Input() toolbarTitle?: string;
   @Input() titleAlignment?: 'left' | 'center' | 'right' = 'left';
   @Input() defaultBackHref?: string;
+  @Input() hideBackButton?: boolean;
 
   @Output() enter = new EventEmitter<void>();
   @Output() leave = new EventEmitter<void>();
 
+  @ViewChild(IonContent, { static: true }) private content: IonContent;
   @ViewChild('pageTitle', { static: false, read: ElementRef })
   private pageTitle: ElementRef;
   @ViewChild('stickyToolbarButtons', { static: false, read: ElementRef })
@@ -147,76 +126,99 @@ export class PageComponent implements OnInit, OnDestroy, AfterContentChecked {
 
   hasPageTitle: boolean;
   hasActionsInPage: boolean;
+  toolbarTitleVisible: boolean;
+  toolbarFixedActionsVisible: boolean;
+  toolbarStickyActionsVisible: boolean;
+
   toolbarTitleTemplate: TemplateRef<any>;
-  toolbarTitleVisibility: 'visible' | 'hidden' = 'hidden';
-  toolbarFixedActionsVisibility: 'visible' | 'hidden' = 'hidden';
-  toolbarStickyActionsVisibility: 'visible' | 'hidden' = 'hidden';
   customContentTemplate: TemplateRef<any>;
   pageActionsTemplate: TemplateRef<any>;
   fixedContentTemplate: TemplateRef<any>;
   stickyActionsTemplate: TemplateRef<any>;
   fixedActionsTemplate: TemplateRef<any>;
-  private pageTitleObserver: IntersectionObserver;
+  private pageTitleIntersectionObserverRef: IntersectionObserver = this.pageTitleIntersectionObserver();
   private routerEventsSubscription: Subscription;
-  private url: string;
+  private urls: string[] = [];
+  private hasEntered: boolean;
 
   constructor(
     private elementRef: ElementRef,
     private renderer: Renderer2,
-    private router: Router
+    private router: Router,
+    private changeDetectorRef: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
-    this.url = this.router.url;
-    this.enter.emit();
     this.removeWrapper();
+  }
+
+  ngAfterViewInit(): void {
     this.routerEventsSubscription = this.router.events.subscribe((event: RouterEvent) => {
-      if (
-        event instanceof NavigationStart &&
-        event.url !== this.url &&
-        this.pageTitleObserver &&
-        this.pageTitle
-      ) {
-        this.leave.emit();
-        this.pageTitleObserver.unobserve(this.pageTitle.nativeElement);
+      if (event instanceof NavigationStart && this.urls.indexOf(event.url) === -1) {
+        this.onLeave();
       }
-      if (
-        event instanceof NavigationEnd &&
-        event.urlAfterRedirects === this.url &&
-        this.pageTitleObserver &&
-        this.pageTitle
-      ) {
-        this.enter.emit();
-        this.pageTitleObserver.observe(this.pageTitle.nativeElement);
+
+      if (event instanceof NavigationEnd && this.urls.indexOf(event.urlAfterRedirects) > -1) {
+        this.onEnter();
       }
+    });
+
+    window.addEventListener(selectedTabClickEvent, () => {
+      this.content.scrollToTop(KirbyAnimation.Duration.LONG);
     });
   }
 
   ngAfterContentChecked(): void {
+    if (this.urls.indexOf(this.router.url) === -1) {
+      this.urls.push(this.router.url);
+      this.onEnter();
+    }
+
     this.initializeTitle();
     this.initializeActions();
     this.initializeContent();
-    this.styleToolbarButtons();
+    this.changeDetectorRef.detectChanges();
   }
 
   ngOnDestroy(): void {
     if (this.routerEventsSubscription) {
       this.routerEventsSubscription.unsubscribe();
     }
-    if (this.pageTitleObserver) {
-      this.pageTitleObserver.disconnect();
+    this.pageTitleIntersectionObserverRef.disconnect();
+    window.removeEventListener(selectedTabClickEvent, () => {
+      this.content.scrollToTop(KirbyAnimation.Duration.LONG);
+    });
+  }
+
+  private onEnter() {
+    if (this.hasEntered) return;
+    this.hasEntered = true;
+
+    this.enter.emit();
+    if (this.pageTitle) {
+      this.pageTitleIntersectionObserverRef.observe(this.pageTitle.nativeElement);
     }
   }
 
-  private initializeTitle() {
-    this.hasPageTitle = this.title !== undefined || !!this.customTitleTemplate;
+  private onLeave() {
+    this.leave.emit();
+    if (this.pageTitle) {
+      this.pageTitleIntersectionObserverRef.unobserve(this.pageTitle.nativeElement);
+    }
+    this.hasEntered = false;
+  }
 
-    if (this.hasPageTitle && !this.pageTitleObserver) {
+  private initializeTitle() {
+    // Ensures initializeTitle() won't run, if already initialized
+    if (this.hasPageTitle) return;
+
+    this.hasPageTitle = this.title !== undefined || !!this.customTitleTemplate;
+    this.toolbarTitleVisible = !this.hasPageTitle;
+
+    if (this.hasPageTitle) {
       setTimeout(() => {
-        this.pageTitleObserver = this.observePageTitle();
+        this.pageTitleIntersectionObserverRef.observe(this.pageTitle.nativeElement);
       });
-    } else if (!this.hasPageTitle) {
-      this.toolbarTitleVisibility = 'visible';
     }
 
     const defaultTitleTemplate = this.customTitleTemplate || this.simpleTitleTemplate;
@@ -233,7 +235,7 @@ export class PageComponent implements OnInit, OnDestroy, AfterContentChecked {
     this.customActions.forEach((pageAction) => {
       if (pageAction.isFixed) {
         this.fixedActionsTemplate = pageAction.template;
-        this.toolbarFixedActionsVisibility = 'visible';
+        this.toolbarFixedActionsVisible = true;
       } else {
         this.pageActionsTemplate = pageAction.template;
         if (pageAction.isSticky) {
@@ -241,7 +243,7 @@ export class PageComponent implements OnInit, OnDestroy, AfterContentChecked {
         }
       }
     });
-    this.hasActionsInPage = !!this.pageActionsTemplate || !!this.actionsComponent;
+    this.hasActionsInPage = !!this.pageActionsTemplate;
   }
 
   private initializeContent() {
@@ -254,27 +256,6 @@ export class PageComponent implements OnInit, OnDestroy, AfterContentChecked {
     });
   }
 
-  private styleToolbarButtons() {
-    if (this.stickyToolbarButtons && this.stickyToolbarButtons.nativeElement) {
-      const buttons = this.stickyToolbarButtons.nativeElement.querySelectorAll('[kirby-button]');
-      buttons.forEach((button) => {
-        this.renderer.addClass(button, 'sm');
-        this.renderer.removeClass(button, 'lg');
-        this.renderer.addClass(button, 'attention-level4');
-        this.renderer.removeClass(button, 'attention-level2');
-      });
-    }
-    if (this.fixedToolbarButtons && this.fixedToolbarButtons.nativeElement) {
-      const buttons = this.fixedToolbarButtons.nativeElement.querySelectorAll('[kirby-button]');
-      buttons.forEach((button) => {
-        this.renderer.addClass(button, 'sm');
-        this.renderer.removeClass(button, 'lg');
-        this.renderer.addClass(button, 'attention-level4');
-        this.renderer.removeClass(button, 'attention-level2');
-      });
-    }
-  }
-
   private removeWrapper() {
     const parent = this.elementRef.nativeElement.parentNode;
     const header = this.elementRef.nativeElement.childNodes[0];
@@ -284,9 +265,7 @@ export class PageComponent implements OnInit, OnDestroy, AfterContentChecked {
     this.renderer.appendChild(parent, content);
   }
 
-  private observePageTitle() {
-    if (!this.pageTitle) return;
-
+  private pageTitleIntersectionObserver() {
     const options = {
       rootMargin: '0px',
     };
@@ -294,17 +273,13 @@ export class PageComponent implements OnInit, OnDestroy, AfterContentChecked {
     let initialized = false;
     const callback = (entries) => {
       if (initialized) {
-        entries.forEach((entry) => {
-          this.toolbarTitleVisibility = entry.isIntersecting ? 'hidden' : 'visible';
-          this.toolbarStickyActionsVisibility = entry.isIntersecting ? 'hidden' : 'visible';
-        });
+        this.toolbarTitleVisible = !entries[0].isIntersecting;
+        this.toolbarStickyActionsVisible = !entries[0].isIntersecting;
+        this.changeDetectorRef.detectChanges();
       } else {
         initialized = true;
       }
     };
-    const observer = new IntersectionObserver(callback, options);
-    observer.observe(this.pageTitle.nativeElement);
-
-    return observer;
+    return new IntersectionObserver(callback, options);
   }
 }

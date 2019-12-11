@@ -8,12 +8,16 @@ export const ListColoredItemsExampleTemplate = `<kirby-list
   (itemSelect)="onItemSelect($event)"
   showDivider="true"
 >
-  <kirby-list-item
-    *kirbyListItem="let item"
-    [item]="item"
-    [title]="item.title"
-    [amount]="item.amount"
-  ></kirby-list-item>
+  <kirby-item *kirbyListItemTemplate="let item">
+    <kirby-label>
+      <h3>{{item.title}}</h3>
+      <p subtitle>{{item.subTitle}}</p>
+    </kirby-label>
+    <kirby-label slot="end">
+      <data [value]="item.amount">{{item.amount}}</data>
+      <data [value]="item.detail" detail>{{item.detail}}</data>
+    </kirby-label>
+  </kirby-item>
 </kirby-list>`;
 
 @Component({

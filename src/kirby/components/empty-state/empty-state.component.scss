@@ -19,8 +19,12 @@ article {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border: 3px solid var(--kirby-medium);
+  border: 3px solid get-color('medium');
   border-radius: 50%;
+}
+
+kirby-icon {
+  color: get-color('medium');
 }
 
 h3.title {
@@ -29,6 +33,7 @@ h3.title {
 
 p.subtitle {
   margin-bottom: size('m');
+  white-space: pre-wrap;
 }
 
 @each $color-name, $color-value in $main-colors {

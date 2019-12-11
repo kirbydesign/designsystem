@@ -12,6 +12,7 @@ ion-fab-button {
   --box-shadow: #{get-elevation(8)};
   width: 64px;
   height: 64px;
+  user-select: none;
 
   &[disabled] {
     --background: #{get-color('semi-light')};

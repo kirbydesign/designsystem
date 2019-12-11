@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MockComponent } from 'ng-mocks';
-import { NavParams } from '@ionic/angular';
+import { NavParams, IonToolbar, IonHeader, IonTitle, IonButtons, IonContent } from '@ionic/angular';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { By } from '@angular/platform-browser';
 
@@ -34,6 +34,11 @@ describe('ModalWrapperComponent', () => {
         ModalWrapperComponent,
         MockComponent(IconComponent),
         MockComponent(ButtonComponent),
+        MockComponent(IonHeader),
+        MockComponent(IonToolbar),
+        MockComponent(IonTitle),
+        MockComponent(IonButtons),
+        MockComponent(IonContent),
       ],
       providers: [
         { provide: IModalController, useValue: modalControllerSpy },
@@ -62,18 +67,19 @@ describe('ModalWrapperComponent', () => {
       expect(component.config.title).toEqual('Test title');
     });
 
-    it('should be aligned left by default', () => {
-      const rootElement: HTMLElement = fixture.debugElement.nativeElement;
-      const title = rootElement.querySelector('span');
-      expect(title.classList).toContain('text-left');
-    });
-
-    it('should be aligned center when drawer flavor is used', () => {
+    it('should have css class "drawer" when drawer flavor is used', () => {
       component.config.flavor = 'drawer';
       fixture.detectChanges();
       const rootElement: HTMLElement = fixture.debugElement.nativeElement;
-      const title = rootElement.querySelector('span');
-      expect(title.classList).toContain('text-center');
+      expect(rootElement.classList).toContain('drawer');
+    });
+
+    it('should have font size "m" when drawer flavor is used', () => {
+      component.config.flavor = 'drawer';
+      fixture.detectChanges();
+      const rootElement: HTMLElement = fixture.debugElement.nativeElement;
+      const title = rootElement.querySelector('ion-title');
+      expect(window.getComputedStyle(title).fontSize).toEqual('18px');
     });
   });
 

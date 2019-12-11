@@ -5,34 +5,27 @@ import { BaseListComponent } from './base-list.component';
 export const ListWithHeaderAndFooterExampleTemplate = `<kirby-list [items]="items" (itemSelect)="onItemSelect($event)">
   <!-- HEADER-->
   <kirby-list-header *kirbyListHeader>
-    <kirby-list-flex-item>
-      <kirby-list-cell>Name</kirby-list-cell>
-      <!-- Headers doesn't have to be kirby-list-cell components. -->
-      <div style="width: 150px; text-align: right">Amount</div>
-      <kirby-list-cell horisontalAlignment="right">Value</kirby-list-cell>
-    </kirby-list-flex-item>
+    <p>Name</p>
+    <p>Value</p>
   </kirby-list-header>
 
   <!-- BODY -->
-  <kirby-list-flex-item *kirbyListFlexItem="let item">
-    <kirby-list-cell>
-      <kirby-list-cell-line [primary]="true" [text]="item.title"></kirby-list-cell-line>
-      <kirby-list-cell-line [text]="item.detail"></kirby-list-cell-line>
-    </kirby-list-cell>
-    <!-- you can make custom cells using the kirbyListCell directive -->
-    <div style="width: 150px; text-align: right">{{ item.subTitle }}</div>
-    <kirby-list-cell verticalAlignment="top" horisontalAlignment="right">
-      <kirby-list-cell-line [primary]="true" [text]="item.amount"></kirby-list-cell-line>
-    </kirby-list-cell>
-  </kirby-list-flex-item>
+  <kirby-item *kirbyListItemTemplate="let item">
+    <kirby-label>
+      <h3>{{item.title}}</h3>
+      <p subtitle>{{item.subTitle}}</p>
+    </kirby-label>
+    <kirby-label slot="end">
+      <data [value]="item.amount">{{item.amount}}</data>
+      <data [value]="item.detail" detail>{{item.detail}}</data>
+    </kirby-label>
+  </kirby-item>
 
   <!-- Footer -->
-  <ng-container *kirbyListFooter>
-    <div class="footer">
-      <h2>An appropriate footer</h2>
-      <button kirby-button>Click me!</button>
-    </div>
-  </ng-container>
+  <div class="footer" *kirbyListFooter>
+    <p>An appropriate footer</p>
+    <button kirby-button>Click me!</button>
+  </div>
 </kirby-list>`;
 
 @Component({
@@ -45,5 +38,6 @@ export const ListWithHeaderAndFooterExampleTemplate = `<kirby-list [items]="item
       </kirby-page-content>
     </kirby-page>
   `,
+  styles: ['p { margin: 0; }', '.footer { text-align: center; width: 100%; }'],
 })
 export class ListWithHeaderAndFooterExampleComponent extends BaseListComponent {}

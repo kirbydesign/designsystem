@@ -18,7 +18,8 @@ export class AlertShowcaseComponent {
     },
     {
       name: 'message',
-      description: '(Optional) The message shown under the title (or icon if specified)',
+      description:
+        "(Optional) The message shown under the title (or icon if specified). Use '\\n' for newline.",
       inputValues: ['string'],
     },
     {
