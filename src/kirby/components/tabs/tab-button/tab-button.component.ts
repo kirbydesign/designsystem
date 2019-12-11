@@ -11,6 +11,7 @@ import {
 } from '@angular/core';
 
 import { IconComponent } from '@kirbydesign/designsystem/components/icon/icon.component';
+import { selectedTabClickEvent } from './tab-button.events';
 
 @Component({
   selector: 'kirby-tab-button',
@@ -28,8 +29,13 @@ export class TabButtonComponent implements OnInit {
     this.removeWrapper();
   }
 
-  onClick(event: Event) {
+  onClick(event: Event, isSelected: boolean) {
     this.click.emit(event);
+
+    if (isSelected) {
+      const clickEvent = new CustomEvent(selectedTabClickEvent);
+      dispatchEvent(clickEvent);
+    }
   }
 
   private removeWrapper() {
