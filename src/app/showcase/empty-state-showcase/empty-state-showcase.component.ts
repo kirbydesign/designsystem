@@ -27,7 +27,7 @@ export class EmptyStateShowcaseComponent {
     },
     {
       name: 'subtitle',
-      description: 'The text beneath the title.',
+      description: "The text beneath the title. Use '\\n' for newline",
       defaultValue: 'null',
       inputValues: ['string'],
     },
