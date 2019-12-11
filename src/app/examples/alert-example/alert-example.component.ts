@@ -69,7 +69,7 @@ this.modalController.showAlert(config);`;
   showAlertWithNewline() {
     const config: AlertConfig = {
       title: 'Alert with newline',
-      message: 'This is message one,\n\nthis is message two\n\nand this is      message three',
+      message: 'This is message one.\n\nThis is message two.',
       okBtn: 'I agree',
       cancelBtn: 'Take me back',
     };
