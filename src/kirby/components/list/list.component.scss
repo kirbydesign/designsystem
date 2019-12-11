@@ -106,6 +106,7 @@ ion-item-group {
 }
 
 ion-item-divider {
+  --inner-padding-end: 0;
   --color: unset;
   background-color: transparent;
   border-color: transparent;
