@@ -105,6 +105,10 @@ export class PageComponent implements OnInit, OnDestroy, AfterViewInit, AfterCon
   @ViewChild(IonContent, { static: true }) private content: IonContent;
   @ViewChild('pageTitle', { static: false, read: ElementRef })
   private pageTitle: ElementRef;
+  @ViewChild('stickyToolbarButtons', { static: false, read: ElementRef })
+  private stickyToolbarButtons: ElementRef;
+  @ViewChild('fixedToolbarButtons', { static: false, read: ElementRef })
+  private fixedToolbarButtons: ElementRef;
   @ViewChild('simpleTitleTemplate', { static: true, read: TemplateRef })
   private simpleTitleTemplate: TemplateRef<any>;
   @ViewChild('simpleToolbarTitleTemplate', { static: true, read: TemplateRef })
@@ -115,6 +119,8 @@ export class PageComponent implements OnInit, OnDestroy, AfterViewInit, AfterCon
   customTitleTemplate: TemplateRef<any>;
   @ContentChildren(PageActionsDirective)
   customActions: QueryList<PageActionsDirective>;
+  @ContentChild(PageActionsComponent, { static: false })
+  private actionsComponent: PageActionsComponent;
   @ContentChildren(PageContentDirective)
   private customContent: QueryList<PageContentDirective>;
 
