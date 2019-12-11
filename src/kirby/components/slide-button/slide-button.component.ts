@@ -41,8 +41,10 @@ export class SlideButtonComponent extends SlideButtonCommon implements OnDestroy
       this.handleSlideDone();
     } else {
       this.resetSliderIntervalTimer = setInterval(() => {
-        if (this.value >= 0) {
+        if (this.value > 0) {
           this.value -= 2;
+        } else {
+          clearInterval(this.resetSliderIntervalTimer);
         }
 
         this.changeDetectionRef.markForCheck();
