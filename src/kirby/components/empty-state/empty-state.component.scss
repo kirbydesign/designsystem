@@ -33,6 +33,7 @@ h3.title {
 
 p.subtitle {
   margin-bottom: size('m');
+  white-space: pre-wrap;
 }
 
 @each $color-name, $color-value in $main-colors {
