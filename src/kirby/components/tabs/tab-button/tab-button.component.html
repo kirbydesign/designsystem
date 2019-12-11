@@ -1,4 +1,4 @@
-<ion-tab-button #ionTabButton [tab]="routerLink" (click)="onClick($event)">
+<ion-tab-button #ionTabButton [tab]="routerLink" (click)="onClick($event, ionTabButton.selected)">
   <div class="icon-container" *ngIf="icons.length">
     <ng-content
       *ngIf="icons.length === 1 || !ionTabButton.selected"

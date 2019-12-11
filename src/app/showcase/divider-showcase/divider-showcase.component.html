@@ -1,5 +1,5 @@
 <div class="example">
-  <kirby-divider-example [themeColor]="themeColor"></kirby-divider-example>
+  <kirby-divider-example [themeColor]="themeColor" [hasMargin]="hasMargin"></kirby-divider-example>
   <div>
     <select (change)="onThemeChange($event.target.value)">
       <option value="">Card color: None</option>
@@ -9,6 +9,12 @@
         [attr.selected]="themeColor === color ? true : null"
         >Card color: {{ color }}</option
       >
+    </select>
+  </div>
+  <div>
+    <select (change)="onMarginChange($event.target.value)">
+      <option value="" selected>Margin: Off</option>
+      <option value="true" [attr.selected]="hasMargin ? true : null">Margin: On</option>
     </select>
   </div>
   <kirby-code-viewer [html]="exampleHtml"></kirby-code-viewer>
