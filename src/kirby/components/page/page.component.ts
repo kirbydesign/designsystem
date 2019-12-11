@@ -10,7 +10,6 @@ import {
   ElementRef,
   EventEmitter,
   Input,
-  NgZone,
   OnChanges,
   OnDestroy,
   OnInit,
@@ -25,7 +24,6 @@ import { NavigationEnd, NavigationStart, Router, RouterEvent } from '@angular/ro
 import { Subscription } from 'rxjs';
 import { IonContent } from '@ionic/angular';
 
-import { ButtonComponent } from '../button/button.component';
 import { FitHeaderConfig } from '@kirbydesign/designsystem/directives/fit-header/fit-header.directive';
 import { selectedTabClickEvent } from '../tabs/tab-button/tab-button.events';
 import { KirbyAnimation } from '@kirbydesign/designsystem/animation/kirby-animation';
