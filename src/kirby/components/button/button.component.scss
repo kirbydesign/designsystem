@@ -197,7 +197,7 @@
   margin-inline-start: size('s');
 }
 
-:host-context(ion-toolbar kirby-page-actions) {
+:host-context(ion-toolbar) {
   &.attention-level1,
   &.attention-level2,
   &.attention-level3,
@@ -208,7 +208,7 @@
   }
 }
 
-:host-context(ion-content kirby-page-actions) {
+:host-context(.page-title) {
   &.attention-level1,
   &.attention-level2,
   &.attention-level3,
