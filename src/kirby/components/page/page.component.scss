@@ -22,6 +22,17 @@ ion-toolbar {
   ion-buttons[slot='secondary'] {
     order: 6;
   }
+
+  ion-title {
+    .toolbar-title {
+      @include slotted('*') {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        pointer-events: auto;
+        overflow: hidden;
+      }
+    }
+  }
 }
 
 .hide {
@@ -64,6 +75,7 @@ ion-back-button {
 
   &.text-center {
     text-align: center;
+    margin-left: 0;
   }
 
   &.text-right {
