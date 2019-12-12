@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { ActionSheetItem, ActionSheetConfig } from '@kirbydesign/designsystem/modal';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
@@ -10,42 +10,37 @@ const config = {
   template: `<kirby-page defaultBackHref="/">
 
   <!-- Custom Page Title -->
-  <ng-container *ngIf="showTitle">
-    <h1 *kirbyPageTitle>
+  <div *kirbyPageTitle>
+    <h1>
       <ng-container *ngTemplateOutlet="customTitle"></ng-container>
     </h1>
-  </ng-container>  
+    <ng-container *ngTemplateOutlet="customSubTitle"></ng-container>
+  </div>
 
-  <ng-container *ngIf="showTitle">
-    <ng-template kirbyPageToolbarTitle>
-      <ng-container *ngTemplateOutlet="customTitle"></ng-container>
-    </ng-template>
-  </ng-container>
+  <ng-template kirbyPageToolbarTitle>
+    <ng-container *ngTemplateOutlet="customTitle"></ng-container>
+  </ng-template>
 
   <ng-template #customTitle>
-    <div class="custom-page-title">
-      Custom
-      <kirby-icon name="arrow-down"></kirby-icon>
-    </div>
+    <span>Custom Title with a very long name</span>
+  </ng-template>
+  <ng-template #customSubTitle>
+    <span>Custom subtitle explaining something</span>
   </ng-template>
   
   <!-- Fixed Page Actions -->
-  <ng-container *ngIf="showActions">
-    <kirby-page-actions *kirbyPageActions="{fixed: true}">
-      <button *ngIf="true" kirby-button (click)="onMoreSelect()">
-        <kirby-icon name="more"></kirby-icon>
-      </button>
-    </kirby-page-actions>
-  </ng-container>
+  <kirby-page-actions *kirbyPageActions="{fixed: true}">
+    <button kirby-button (click)="onMoreSelect()">
+      <kirby-icon name="more"></kirby-icon>
+    </button>
+  </kirby-page-actions>
 
   <!-- Sticky Page Actions -->
-  <ng-container *ngIf="showActions">
-    <kirby-page-actions *kirbyPageActions>
-      <button *ngIf="true" kirby-button (click)="onCogSelect()">
-        <kirby-icon name="cog"></kirby-icon>
-      </button>
-    </kirby-page-actions>
-  </ng-container>
+  <kirby-page-actions *kirbyPageActions>
+    <button kirby-button (click)="onCogSelect()">
+      <kirby-icon name="cog"></kirby-icon>
+    </button>
+  </kirby-page-actions>
   
   <!-- Custom Content Template (without wrapper) -->
   <div *kirbyPageContent [innerHTML]="content"></div>
@@ -66,11 +61,10 @@ const config = {
   template: config.template,
   styles: ['.custom-page-title { display: inline-flex; }'],
 })
-export class PageAdvancedExampleComponent extends BasePageExampleComponent implements OnInit {
+export class PageAdvancedExampleComponent extends BasePageExampleComponent {
   static readonly template = config.template
     .replace(' defaultBackHref="/"', '')
-    .replace(' [innerHTML]="content">', '>...')
-    .replace(' *ngIf="true"', '');
+    .replace(' [innerHTML]="content">', '>...');
 
   items: ActionSheetItem[] = [
     { id: '1', text: 'Option 1' },
@@ -78,18 +72,8 @@ export class PageAdvancedExampleComponent extends BasePageExampleComponent imple
     { id: '3', text: 'Option 3' },
   ];
 
-  showActions: boolean;
-  showTitle: boolean;
-
   constructor(private toastController: ToastController, private modalController: ModalController) {
     super();
-  }
-
-  ngOnInit(): void {
-    setTimeout(() => {
-      this.showTitle = true;
-      this.showActions = true;
-    }, 500);
   }
 
   onItemSelect(item: ActionSheetItem) {
