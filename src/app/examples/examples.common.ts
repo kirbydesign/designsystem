@@ -35,6 +35,7 @@ import { FabSheetExampleComponent } from './fab-sheet-example/fab-sheet-example.
 import { PageSimpleExampleComponent } from './page-example/simple/page-simple-example.component';
 import { PageAlignmentAndToolbarTitleExampleComponent } from './page-example/alignment-and-toolbar-title/page-alignment-and-toolbar-title-example.component';
 import { PageFixedTitleAndActionsExampleComponent } from './page-example/fixed-title-and-actions/page-fixed-title-and-actions-example.component';
+import { PageCustomTitleExampleComponent } from './page-example/advanced/page-custom-title-example.component';
 import { PageAdvancedExampleComponent } from './page-example/advanced/page-advanced-example.component';
 import { FormFieldExampleComponent } from './form-field-example/form-field-example.component';
 import { ExamplesComponent } from './examples.component';
@@ -95,6 +96,7 @@ export const COMPONENT_DECLARATIONS: any[] = [
   PageSimpleExampleComponent,
   PageAlignmentAndToolbarTitleExampleComponent,
   PageFixedTitleAndActionsExampleComponent,
+  PageCustomTitleExampleComponent,
   PageAdvancedExampleComponent,
   TabsExampleComponent,
   TabExampleComponent,

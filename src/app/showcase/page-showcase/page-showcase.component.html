@@ -69,16 +69,41 @@
 
 <div class="page-example">
   <div>
-    <h2>Advanced Page</h2>
+    <h2>Custom Title</h2>
     <p>
-      For more advanced scenarios, you can supply a custom page title element, action buttons and
-      fixed content with the <code>*kirbyPage</code>-directives
+      If you need to supply a custom page title element you can do that with the
+      <code>*kirbyPageTitle</code> and <code>*kirbyPageToolbarTitle</code> directives.
     </p>
     <p>
       <em
         ><strong>*Please note:</strong> When supplying a custom page title element you must supply
         both a page title and a toolbar title. You should also ensure the page title is wrapped in a
-        <code>h1</code> tag. See example below on how to reuse a template for both titles.</em
+        <code>h1</code> tag. See code example below on how to reuse a template for both titles.<br />
+        <strong>*Custom page title wrapper:</strong> If you wrap your custom title (e.g. in a
+        flex-container) you have to ensure the title is truncated (setting <code>overflow</code> and
+        <code>text-overflow</code> css properties). See code example below.</em
+      >
+    </p>
+    <kirby-code-viewer [html]="customTitleExampleHtml"></kirby-code-viewer>
+  </div>
+
+  <kirby-iphone src="/examples/page/custom-title" showExternalLink="true"></kirby-iphone>
+</div>
+
+<div class="page-example">
+  <div>
+    <h2>Advanced Page</h2>
+    <p>
+      For more advanced scenarios, you can supply a custom page title element, action buttons and
+      fixed content with the <code>*kirbyPage</code>-directives.
+    </p>
+    <p>
+      <em
+        ><strong>*Please note:</strong> When supplying a custom page title element you must supply
+        both a page title and a toolbar title. You should also ensure the page title is wrapped in a
+        <code>h1</code> tag. See example below on how to reuse a template for both titles.<br />
+        <strong>*Custom page title wrapper:</strong> If you wrap your custom title (e.g. in a
+        flex-container) you have to ensure the title is truncated. See "Custom Title" example.</em
       >
     </p>
     <kirby-code-viewer [html]="advancedExampleHtml"></kirby-code-viewer>
