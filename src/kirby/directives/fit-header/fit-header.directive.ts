@@ -16,7 +16,7 @@ export interface FitHeaderConfig {
 }
 
 @Directive({
-  selector: `h1[kirbyFitHeader],h2[kirbyFitHeader],h3[kirbyFitHeader]`,
+  selector: `h1[kirbyFitHeading],h2[kirbyFitHeading],h3[kirbyFitHeading]`,
 })
 export class FitHeaderDirective implements OnInit, OnDestroy {
   // tslint:disable-next-line:no-input-rename
