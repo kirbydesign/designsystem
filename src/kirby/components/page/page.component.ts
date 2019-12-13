@@ -102,7 +102,7 @@ export class PageComponent
   @Input() titleAlignment?: 'left' | 'center' | 'right' = 'left';
   @Input() defaultBackHref?: string;
   @Input() hideBackButton?: boolean;
-  @Input() headerMaxLines?: number = 2;
+  @Input() titleMaxLines?: number = 2;
 
   @Output() enter = new EventEmitter<void>();
   @Output() leave = new EventEmitter<void>();
