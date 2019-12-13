@@ -20,7 +20,7 @@ export interface FitHeaderConfig {
 })
 export class FitHeadingDirective implements OnInit, OnDestroy {
   // tslint:disable-next-line:no-input-rename
-  @Input('kirbyFitHeader') config?: FitHeaderConfig = {
+  @Input('kirbyFitHeading') config?: FitHeadingConfig = {
     maxLines: 2,
   };
 
