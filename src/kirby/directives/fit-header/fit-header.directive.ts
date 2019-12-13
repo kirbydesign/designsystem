@@ -18,7 +18,7 @@ export interface FitHeaderConfig {
 @Directive({
   selector: `h1[kirbyFitHeading],h2[kirbyFitHeading],h3[kirbyFitHeading]`,
 })
-export class FitHeaderDirective implements OnInit, OnDestroy {
+export class FitHeadingDirective implements OnInit, OnDestroy {
   // tslint:disable-next-line:no-input-rename
   @Input('kirbyFitHeader') config?: FitHeaderConfig = {
     maxLines: 2,
