@@ -96,7 +96,7 @@ export class FitHeaderDirective implements OnInit, OnDestroy {
   private handleResize(entry: ResizeObserverEntry) {
     if (!this.shouldScale(entry.target)) return;
 
-    // Set width to detirmine at next resize if header should be scaled up again
+    // Set width to determine at next resize if header should be scaled up again
     this.width = entry.target.clientWidth;
     this.scaleHeader();
   }
