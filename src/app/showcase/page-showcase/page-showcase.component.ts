@@ -4,6 +4,7 @@ import { ShowcaseProperty } from './../../shared/showcase-properties/showcase-pr
 import { PageSimpleExampleComponent } from '~/app/examples/page-example/simple/page-simple-example.component';
 import { PageAlignmentAndToolbarTitleExampleComponent } from '~/app/examples/page-example/alignment-and-toolbar-title/page-alignment-and-toolbar-title-example.component';
 import { PageFixedTitleAndActionsExampleComponent } from '~/app/examples/page-example/fixed-title-and-actions/page-fixed-title-and-actions-example.component';
+import { PageCustomTitleExampleComponent } from '~/app/examples/page-example/advanced/page-custom-title-example.component';
 import { PageAdvancedExampleComponent } from '~/app/examples/page-example/advanced/page-advanced-example.component';
 
 @Component({
@@ -19,6 +20,7 @@ export class PageShowcaseComponent {
   fixedCustomTitleExampleHtml: string =
     PageFixedTitleAndActionsExampleComponent.customTitleTemplate;
   fixedActionsExampleHtml: string = PageFixedTitleAndActionsExampleComponent.fixedActionsTemplate;
+  customTitleExampleHtml: string = PageCustomTitleExampleComponent.template;
   advancedExampleHtml: string = PageAdvancedExampleComponent.template;
   properties: ShowcaseProperty[] = [
     {
