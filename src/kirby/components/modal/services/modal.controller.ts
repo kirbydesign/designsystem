@@ -7,11 +7,18 @@ import { ActionSheetHelper } from './action-sheet.helper';
 import { ModalConfig } from '../modal-wrapper/config/modal-config';
 import { ActionSheetConfig } from '../action-sheet/config/action-sheet-config';
 import { AlertConfig } from '../alert/config/alert-config';
+import { KirbyAnimation } from '@kirbydesign/designsystem/animation/kirby-animation';
 
 @Injectable()
 export class ModalController implements IModalController {
+  // These are set in the ModalWrapperComponent
+  scrollToTop: (duration?: KirbyAnimation.Duration) => void = () => {
+    throw new Error('No modal windows are currently registered');
+  };
+  scrollToBottom: (duration?: KirbyAnimation.Duration) => void = () => {
+    throw new Error('No modal windows are currently registered');
+  };
   private modals: { close: (data?: any) => {} }[] = [];
-
   constructor(
     private modalHelper: ModalHelper,
     private actionSheetHelper: ActionSheetHelper,

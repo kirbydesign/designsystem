@@ -8,6 +8,8 @@ import { ButtonComponent } from '../../button/button.component';
 import { IconComponent } from '../../icon/icon.component';
 import { ModalWrapperComponent } from './modal-wrapper.component';
 import { IModalController } from '../services/modal.controller.interface';
+import { KirbyAnimation } from '@kirbydesign/designsystem/animation/kirby-animation';
+import { ModalController } from '@kirbydesign/designsystem/modal';
 
 describe('ModalWrapperComponent', () => {
   let component: ModalWrapperComponent;
@@ -19,6 +21,8 @@ describe('ModalWrapperComponent', () => {
       'hideModal',
       'registerModalCloseRef',
       'blurNativeWrapper',
+      'scrollToTop',
+      'scrollToBottom',
     ]);
 
     const navParamsSpy = jasmine.createSpyObj('NavParams', {
@@ -130,6 +134,42 @@ describe('ModalWrapperComponent', () => {
       expect(elements[1].componentInstance.name).toBe('qr');
       elements[1].parent.triggerEventHandler('click', 'test');
       expect(component.config.drawerSupplementaryAction.action).toHaveBeenCalledWith('test');
+    });
+  });
+
+  describe('scrollToTop', () => {
+    it('should scroll to top with no scroll animation duration', () => {
+      const modalControllerSpy = TestBed.get(IModalController);
+
+      component.scrollToTop();
+
+      expect(modalControllerSpy.scrollToTop).toHaveBeenCalledWith();
+    });
+    it('should scroll to top with provided scroll animation duration', () => {
+      const modalControllerSpy = TestBed.get(IModalController);
+      const animationDuration = KirbyAnimation.Duration.LONG;
+
+      component.scrollToTop(animationDuration);
+
+      expect(modalControllerSpy.scrollToTop).toHaveBeenCalledWith(animationDuration);
+    });
+  });
+
+  describe('scrollToBottom', () => {
+    it('should scroll to bottom with no scroll animation duration', () => {
+      const modalControllerSpy = TestBed.get(IModalController);
+
+      component.scrollToBottom();
+
+      expect(modalControllerSpy.scrollToBottom).toHaveBeenCalledWith();
+    });
+    it('should scroll to bottom with provided scroll animation duration', () => {
+      const modalControllerSpy = TestBed.get(IModalController);
+      const animationDuration = KirbyAnimation.Duration.LONG;
+
+      component.scrollToBottom(animationDuration);
+
+      expect(modalControllerSpy.scrollToBottom).toHaveBeenCalledWith(animationDuration);
     });
   });
 });

@@ -37,5 +37,21 @@ describe('modalController', () => {
         modalController.hideAll;
       }).not.toThrow();
     });
+
+    describe('scrollToTop', () => {
+      it('should throw an error when scrolling to top, when no modals have been opened', () => {
+        expect(() => {
+          modalController.hideTopmost();
+        }).toThrow(expectedError);
+      });
+    });
+
+    describe('scrollToBottom', () => {
+      it('should throw an error when scrolling to bottom, when no modals have been opened', () => {
+        expect(() => {
+          modalController.hideTopmost();
+        }).toThrow(expectedError);
+      });
+    });
   });
 });

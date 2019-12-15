@@ -1,9 +1,10 @@
-import { Component, HostListener, Injector, HostBinding, Input } from '@angular/core';
-import { NavParams } from '@ionic/angular';
+import { Component, HostListener, Injector, HostBinding, Input, ViewChild } from '@angular/core';
+import { NavParams, IonContent } from '@ionic/angular';
 
 import { ModalConfig } from './config/modal-config';
 import { COMPONENT_PROPS } from './config/modal-config.helper';
 import { IModalController } from '../services/modal.controller.interface';
+import { KirbyAnimation } from '@kirbydesign/designsystem/animation/kirby-animation';
 
 @Component({
   selector: 'kirby-modal-wrapper',
@@ -14,6 +15,7 @@ export class ModalWrapperComponent {
   scrollY: number = Math.abs(window.scrollY);
   config: ModalConfig;
   componentPropsInjector: Injector;
+  @ViewChild(IonContent, { static: true }) ionContent: IonContent;
 
   @HostBinding('class.drawer')
   private get _isDrawer() {
@@ -26,6 +28,17 @@ export class ModalWrapperComponent {
       providers: [{ provide: COMPONENT_PROPS, useValue: this.config.componentProps }],
       parent: injector,
     });
+
+    modalController.scrollToTop = this.scrollToTop.bind(this);
+    modalController.scrollToBottom = this.scrollToBottom.bind(this);
+  }
+
+  scrollToTop(scrollDuration?: KirbyAnimation.Duration) {
+    this.ionContent.scrollToTop(scrollDuration || 0);
+  }
+
+  scrollToBottom(scrollDuration?: KirbyAnimation.Duration) {
+    this.ionContent.scrollToBottom(scrollDuration || 0);
   }
 
   @HostListener('window:focus')
