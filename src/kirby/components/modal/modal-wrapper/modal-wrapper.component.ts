@@ -1,4 +1,4 @@
-import { Component, HostListener, Injector, HostBinding, Input, ViewChild } from '@angular/core';
+import { Component, HostListener, Injector, HostBinding, ViewChild } from '@angular/core';
 import { NavParams, IonContent } from '@ionic/angular';
 
 import { ModalConfig } from './config/modal-config';
@@ -15,7 +15,7 @@ export class ModalWrapperComponent {
   scrollY: number = Math.abs(window.scrollY);
   config: ModalConfig;
   componentPropsInjector: Injector;
-  @ViewChild(IonContent, { static: true }) ionContent: IonContent;
+  @ViewChild(IonContent, { static: true }) private ionContent: IonContent;
 
   @HostBinding('class.drawer')
   private get _isDrawer() {

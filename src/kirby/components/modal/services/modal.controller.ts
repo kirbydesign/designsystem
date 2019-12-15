@@ -9,15 +9,15 @@ import { ActionSheetConfig } from '../action-sheet/config/action-sheet-config';
 import { AlertConfig } from '../alert/config/alert-config';
 import { KirbyAnimation } from '@kirbydesign/designsystem/animation/kirby-animation';
 
+export const modalScrollPlaceholderFunction = () => {
+  throw new Error('No modal windows are currently registered');
+};
+
 @Injectable()
 export class ModalController implements IModalController {
   // These are set in the ModalWrapperComponent
-  scrollToTop: (duration?: KirbyAnimation.Duration) => void = () => {
-    throw new Error('No modal windows are currently registered');
-  };
-  scrollToBottom: (duration?: KirbyAnimation.Duration) => void = () => {
-    throw new Error('No modal windows are currently registered');
-  };
+  scrollToTop: (duration?: KirbyAnimation.Duration) => void = modalScrollPlaceholderFunction;
+  scrollToBottom: (duration?: KirbyAnimation.Duration) => void = modalScrollPlaceholderFunction;
   private modals: { close: (data?: any) => {} }[] = [];
   constructor(
     private modalHelper: ModalHelper,
@@ -84,6 +84,11 @@ export class ModalController implements IModalController {
 
   private forgetTopmost(): void {
     this.modals.pop();
+
+    if (this.modals.length === 0) {
+      this.scrollToTop = modalScrollPlaceholderFunction;
+      this.scrollToBottom = modalScrollPlaceholderFunction;
+    }
   }
 
   public hideAll(): void {

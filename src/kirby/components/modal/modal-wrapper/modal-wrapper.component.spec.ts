@@ -21,8 +21,6 @@ describe('ModalWrapperComponent', () => {
       'hideModal',
       'registerModalCloseRef',
       'blurNativeWrapper',
-      'scrollToTop',
-      'scrollToBottom',
     ]);
 
     const navParamsSpy = jasmine.createSpyObj('NavParams', {
@@ -139,37 +137,45 @@ describe('ModalWrapperComponent', () => {
 
   describe('scrollToTop', () => {
     it('should scroll to top with no scroll animation duration', () => {
-      const modalControllerSpy = TestBed.get(IModalController);
+      const ionContentElm = fixture.debugElement.query(By.css('ion-content'));
+      const ionContent: IonContent = ionContentElm.componentInstance;
+      spyOn(ionContent, 'scrollToTop');
 
       component.scrollToTop();
 
-      expect(modalControllerSpy.scrollToTop).toHaveBeenCalledWith();
+      expect(ionContent.scrollToTop).toHaveBeenCalledWith(0);
     });
     it('should scroll to top with provided scroll animation duration', () => {
-      const modalControllerSpy = TestBed.get(IModalController);
       const animationDuration = KirbyAnimation.Duration.LONG;
+      const ionContentElm = fixture.debugElement.query(By.css('ion-content'));
+      const ionContent: IonContent = ionContentElm.componentInstance;
+      spyOn(ionContent, 'scrollToTop');
 
       component.scrollToTop(animationDuration);
 
-      expect(modalControllerSpy.scrollToTop).toHaveBeenCalledWith(animationDuration);
+      expect(ionContent.scrollToTop).toHaveBeenCalledWith(animationDuration);
     });
   });
 
   describe('scrollToBottom', () => {
     it('should scroll to bottom with no scroll animation duration', () => {
-      const modalControllerSpy = TestBed.get(IModalController);
+      const ionContentElm = fixture.debugElement.query(By.css('ion-content'));
+      const ionContent: IonContent = ionContentElm.componentInstance;
+      spyOn(ionContent, 'scrollToBottom');
 
       component.scrollToBottom();
 
-      expect(modalControllerSpy.scrollToBottom).toHaveBeenCalledWith();
+      expect(ionContent.scrollToBottom).toHaveBeenCalledWith(0);
     });
     it('should scroll to bottom with provided scroll animation duration', () => {
-      const modalControllerSpy = TestBed.get(IModalController);
       const animationDuration = KirbyAnimation.Duration.LONG;
+      const ionContentElm = fixture.debugElement.query(By.css('ion-content'));
+      const ionContent: IonContent = ionContentElm.componentInstance;
+      spyOn(ionContent, 'scrollToBottom');
 
       component.scrollToBottom(animationDuration);
 
-      expect(modalControllerSpy.scrollToBottom).toHaveBeenCalledWith(animationDuration);
+      expect(ionContent.scrollToBottom).toHaveBeenCalledWith(animationDuration);
     });
   });
 });
