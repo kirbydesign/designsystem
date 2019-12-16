@@ -82,9 +82,11 @@ this.modalController.showAlert(config);`;
 
   showAlertWithDynamicValues() {
     const countdownTimeInSeconds = 60;
-    const toRemainingSeconds = (count: number) => countdownTimeInSeconds - count;
+    const countdownTimeInMs = countdownTimeInSeconds * 1000;
+    const intervalInMs = 1000;
+    const toRemainingSeconds = (count: number) => (countdownTimeInMs - count * intervalInMs) / 1000;
 
-    const remainingSeconds$ = timer(0, 1000).pipe(
+    const remainingSeconds$ = timer(0, intervalInMs).pipe(
       map(toRemainingSeconds),
       takeUntil(this.alertClose$),
       takeWhile((countdownTimeInSeconds) => countdownTimeInSeconds >= 0)
@@ -92,8 +94,8 @@ this.modalController.showAlert(config);`;
 
     const title$ = of('Need more time?');
     const message$ = combineLatest(of('Time remaining: '), remainingSeconds$).pipe(
-      map(([message, remainignSeconds]) => {
-        return message + remainignSeconds;
+      map(([message, remainingSeconds]) => {
+        return message + remainingSeconds;
       })
     );
     const config: AlertConfig = {
