@@ -87,7 +87,7 @@ this.modalController.showAlert(config);`;
     const remainingSeconds$ = timer(0, 1000).pipe(
       map(toRemainingSeconds),
       takeUntil(this.alertClose$),
-      takeWhile((counterTime) => counterTime >= 0)
+      takeWhile((countdownTime) => countdownTime >= 0)
     );
 
     const title$ = of('Need more time?');
