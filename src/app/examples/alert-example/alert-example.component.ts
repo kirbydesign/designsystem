@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { BehaviorSubject, timer, NEVER, of, combineLatest, Subject } from 'rxjs';
+import { BehaviorSubject, timer, NEVER, of, combineLatest, Subject, interval } from 'rxjs';
 import { map, takeWhile, switchMap, takeUntil } from 'rxjs/operators';
 
 import { ModalController } from '@kirbydesign/designsystem/modal';
@@ -81,11 +81,10 @@ this.modalController.showAlert(config);`;
   }
 
   showAlertWithDynamicValues() {
-    const updateInterval = 1000;
-    const countdownTime = (60 * 1000) / updateInterval;
-    const toRemainingSeconds = (timeElapsed: number) => countdownTime - timeElapsed;
+    const countdownTime = 60;
+    const toRemainingSeconds = (count: number) => countdownTime - count;
 
-    const remainingSeconds$ = timer(0, updateInterval).pipe(
+    const remainingSeconds$ = timer(0, 1000).pipe(
       map(toRemainingSeconds),
       takeUntil(this.alertClose$),
       takeWhile((counterTime) => counterTime >= 0)

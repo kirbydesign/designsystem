@@ -19,7 +19,6 @@ export class AlertComponent implements AfterViewInit {
   }
 
   message$: Observable<string>;
-
   @Input()
   set message(message: string & Observable<string>) {
     this.message$ = typeof message === 'string' ? of(message) : message;
