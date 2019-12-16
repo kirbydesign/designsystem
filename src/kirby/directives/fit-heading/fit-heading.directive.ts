@@ -5,7 +5,7 @@ import { ResizeObserverEntry } from '@kirbydesign/designsystem/components/shared
 
 declare var require: any;
 
-interface Size {
+interface HeadingSize {
   name: string;
   fontSize: string;
   lineHeight: string;
@@ -28,7 +28,7 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
   private clone: Element;
   private scalingHeader: boolean; // used to prevent resizeObserver to trigger on font scaling by this.scaleHeader()
   private scssVariables: any = require('sass-extract-loader!../../scss/base/_variables.scss');
-  private sizes: Size[] = [
+  private sizes: HeadingSize[] = [
     {
       name: 'h1',
       fontSize: this.getFontSize('xl'),
@@ -123,8 +123,8 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
 
     this.renderer.setStyle(this.clone, 'width', `${this.elementRef.nativeElement.clientWidth}px`);
 
-    const fittedSize: Size =
-      this.sizes.filter((size: Size) => {
+    const fittedSize: HeadingSize =
+      this.sizes.filter((size: HeadingSize) => {
         this.setSize(this.clone, size);
         const lines = this.clone.clientHeight / parseInt(size.lineHeight);
         return lines <= this.config.maxLines;
@@ -141,7 +141,7 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
     return clone;
   }
 
-  private setSize(el: Element, size: Size): void {
+  private setSize(el: Element, size: HeadingSize): void {
     this.renderer.setStyle(el, 'font-size', size.fontSize);
     this.renderer.setStyle(el, 'line-height', size.lineHeight);
   }
