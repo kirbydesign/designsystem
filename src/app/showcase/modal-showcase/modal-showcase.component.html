@@ -59,6 +59,28 @@ myCallback(dataReturnedByModal: any) {{ '{' }}
     ...
 {{ '}' }}</kirby-code-viewer>
   </p>
+  <h3>
+    Scrolling
+  </h3>
+  <p>
+    The <code>ModalController</code> support scrolling to the top and bottom of the modal using the
+    methods <code>scrollToTop</code> and <code>scrollToBottom</code>. They accept
+    <code>KirbyAnimation.Duration</code> as optional param. If not provided the scrolling will
+    happen instantaneously.
+    <br />
+    <br />
+
+    <code>scrollToTop</code> example (with long scroll animation):
+    <kirby-code-viewer language="ts">
+      this.modalController.scrollToTop(KirbyAnimation.Duration.LONG);
+    </kirby-code-viewer>
+    <br />
+
+    <code>scrollToBottom</code> example:
+    <kirby-code-viewer language="ts">
+      this.modalController.scrollToBottom();
+    </kirby-code-viewer>
+  </p>
   <br />
   <h3>Inside the embedded component:</h3>
   <p>To create a embedded component, ensure:</p>
@@ -84,6 +106,8 @@ myCallback(dataReturnedByModal: any) {{ '{' }}
 ) {{ '{' }}
     this.props = componentProps;
 {{ '}' }}</kirby-code-viewer
+
+
 
 
 
