@@ -11,7 +11,6 @@ export class ItemShowcaseComponent {
   properties: ShowcaseProperty[] = [];
 
   scrollTo(target: Element) {
-    // debugger;
     target.scrollIntoView({ behavior: 'smooth' });
     return false;
   }

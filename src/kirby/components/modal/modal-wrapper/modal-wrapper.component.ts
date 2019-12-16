@@ -29,6 +29,14 @@ export class ModalWrapperComponent {
       parent: injector,
     });
 
+    this.setModalScrollable(modalController);
+
+    params.data.config.setModalScrollableCB = () => {
+      this.setModalScrollable(modalController);
+    };
+  }
+
+  private setModalScrollable(modalController: IModalController) {
     modalController.scrollToTop = this.scrollToTop.bind(this);
     modalController.scrollToBottom = this.scrollToBottom.bind(this);
   }

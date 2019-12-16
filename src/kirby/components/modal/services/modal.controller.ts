@@ -13,12 +13,14 @@ export const modalScrollNoop = () => {
   throw new Error('No modal windows are currently registered');
 };
 
+export type modal = { close: (data?: any) => {}; config: ModalConfig };
+
 @Injectable()
 export class ModalController implements IModalController {
   // These are set in the ModalWrapperComponent
   scrollToTop: (duration?: KirbyAnimation.Duration) => void = modalScrollNoop;
   scrollToBottom: (duration?: KirbyAnimation.Duration) => void = modalScrollNoop;
-  private modals: { close: (data?: any) => {} }[] = [];
+  private modals: modal[] = [];
   constructor(
     private modalHelper: ModalHelper,
     private actionSheetHelper: ActionSheetHelper,
@@ -70,7 +72,7 @@ export class ModalController implements IModalController {
     this.modalHelper.blurNativeWrapper(nativeElement);
   }
 
-  public register(modal: { close: (data?: any) => {} }): void {
+  public register(modal: modal): void {
     this.modals.push(modal);
   }
 
@@ -88,7 +90,11 @@ export class ModalController implements IModalController {
     if (this.modals.length === 0) {
       this.scrollToTop = modalScrollNoop;
       this.scrollToBottom = modalScrollNoop;
+      return;
     }
+
+    const newTopmostModal = this.modals[this.modals.length - 1];
+    newTopmostModal.config.setModalScrollableCB();
   }
 
   public hideAll(): void {

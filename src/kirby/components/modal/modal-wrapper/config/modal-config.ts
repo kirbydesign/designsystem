@@ -6,6 +6,7 @@ export interface ModalConfig {
   component: any;
   flavor?: 'modal' | 'drawer';
   dim?: number;
+  setModalScrollableCB?: () => void;
   componentProps?: { [key: string]: any };
   // the supplementary action is only available in the drawer
   drawerSupplementaryAction?: DrawerSupplementaryAction;

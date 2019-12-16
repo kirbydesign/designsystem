@@ -6,6 +6,7 @@ import { ModalConfig } from '../modal-wrapper/config/modal-config';
 import { ModalWrapperComponent } from '../modal-wrapper/modal-wrapper.component';
 import { KirbyAnimation } from '@kirbydesign/designsystem/animation/kirby-animation';
 import { ModalConfigHelper } from '../modal-wrapper/config/modal-config.helper';
+import { modal } from './modal.controller';
 
 @Injectable()
 export class ModalHelper {
@@ -13,9 +14,14 @@ export class ModalHelper {
 
   public async showModalWindow(
     config: ModalConfig,
-    registerModal: (modal: { close: (data?: any) => {} }) => void
+    registerModal: (modal: modal) => void
   ): Promise<any> {
+    const setModalScrollableCB = () => {
+      throw new Error('No modal to make scrollable');
+    };
+
     const mergedConfig = this.mergeDefaultConfig(config);
+    mergedConfig.setModalScrollableCB = setModalScrollableCB;
     const modal = await this.ionicModalController.create({
       component: ModalWrapperComponent,
       cssClass: ['kirby-modal', config.flavor === 'drawer' ? 'kirby-drawer' : null],
@@ -34,7 +40,10 @@ export class ModalHelper {
       ),
     });
 
-    registerModal({ close: modal.dismiss.bind(modal) });
+    registerModal({
+      close: modal.dismiss.bind(modal),
+      config: mergedConfig,
+    });
 
     modal.present();
     return modal.onDidDismiss();
