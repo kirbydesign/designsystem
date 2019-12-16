@@ -6,6 +6,7 @@ import { PageAlignmentAndToolbarTitleExampleComponent } from '~/app/examples/pag
 import { PageFixedTitleAndActionsExampleComponent } from '~/app/examples/page-example/fixed-title-and-actions/page-fixed-title-and-actions-example.component';
 import { PageCustomTitleExampleComponent } from '~/app/examples/page-example/advanced/page-custom-title-example.component';
 import { PageAdvancedExampleComponent } from '~/app/examples/page-example/advanced/page-advanced-example.component';
+import { PageFitHeadingExampleComponent } from '~/app/examples/page-example/fit-heading/fit-heading-example.component';
 
 @Component({
   selector: 'kirby-page-showcase',
@@ -16,6 +17,7 @@ export class PageShowcaseComponent {
   simpleExampleHtml: string = PageSimpleExampleComponent.template;
   alignmentAndToolbarTitleExampleHtml: string =
     PageAlignmentAndToolbarTitleExampleComponent.template;
+  fitHeadingExampleHtml: string = PageFitHeadingExampleComponent.template;
   fixedTitleAndActionsExampleHtml: string = PageFixedTitleAndActionsExampleComponent.template;
   fixedCustomTitleExampleHtml: string =
     PageFixedTitleAndActionsExampleComponent.customTitleTemplate;
@@ -137,4 +139,9 @@ export class PageShowcaseComponent {
       inputValues: ['unit'],
     },
   ];
+
+  scrollTo(target: Element) {
+    target.scrollIntoView({ behavior: 'smooth' });
+    return false;
+  }
 }
