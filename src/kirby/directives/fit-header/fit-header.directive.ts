@@ -11,7 +11,7 @@ interface Size {
   lineHeight: string;
 }
 
-export interface FitHeaderConfig {
+export interface FitHeadingConfig {
   maxLines: number;
 }
 
