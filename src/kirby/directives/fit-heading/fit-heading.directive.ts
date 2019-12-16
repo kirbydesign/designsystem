@@ -20,9 +20,7 @@ export interface FitHeadingConfig {
 })
 export class FitHeadingDirective implements OnInit, OnDestroy {
   // tslint:disable-next-line:no-input-rename
-  @Input('kirbyFitHeading') config?: FitHeadingConfig = {
-    maxLines: 2,
-  };
+  @Input('kirbyFitHeading') config?: FitHeadingConfig;
 
   private previousWidth: number;
   private clone: Element;
@@ -53,7 +51,9 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.observeResize();
+    if (this.config && this.config.maxLines) {
+      this.observeResize();
+    }
   }
 
   ngOnDestroy(): void {

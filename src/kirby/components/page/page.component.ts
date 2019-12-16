@@ -102,7 +102,7 @@ export class PageComponent
   @Input() titleAlignment?: 'left' | 'center' | 'right' = 'left';
   @Input() defaultBackHref?: string;
   @Input() hideBackButton?: boolean;
-  @Input() titleMaxLines?: number = 2;
+  @Input() titleMaxLines?: number;
 
   @Output() enter = new EventEmitter<void>();
   @Output() leave = new EventEmitter<void>();
@@ -135,9 +135,7 @@ export class PageComponent
   toolbarFixedActionsVisible: boolean;
   toolbarStickyActionsVisible: boolean;
 
-  fitHeadingConfig: FitHeadingConfig = {
-    maxLines: this.titleMaxLines,
-  };
+  fitHeadingConfig: FitHeadingConfig;
 
   toolbarTitleTemplate: TemplateRef<any>;
   customContentTemplate: TemplateRef<any>;
@@ -162,10 +160,10 @@ export class PageComponent
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.headerMaxLines) {
+    if (changes.titleMaxLines) {
       this.fitHeadingConfig = {
         ...this.fitHeadingConfig,
-        maxLines: changes.headerMaxLines.currentValue,
+        maxLines: changes.titleMaxLines.currentValue,
       };
     }
   }
