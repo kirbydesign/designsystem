@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { BehaviorSubject, timer, NEVER, of, combineLatest } from 'rxjs';
-import { map, takeWhile, switchMap } from 'rxjs/operators';
+import { Component, OnDestroy } from '@angular/core';
+import { BehaviorSubject, timer, NEVER, of, combineLatest, Subject } from 'rxjs';
+import { map, takeWhile, switchMap, takeUntil } from 'rxjs/operators';
 
 import { ModalController } from '@kirbydesign/designsystem/modal';
 import { AlertConfig } from '@kirbydesign/designsystem/modal';
@@ -19,7 +19,7 @@ const alertConfigWithIcon = {
   templateUrl: './alert-example.component.html',
   styles: [':host { display: block; }'],
 })
-export class AlertExampleComponent {
+export class AlertExampleComponent implements OnDestroy {
   static readonly alertConfigWithIcon = `const config: AlertConfig = ${AlertExampleComponent.stringify(
     alertConfigWithIcon
   )}
@@ -32,9 +32,13 @@ this.modalController.showAlert(config);`;
       .replace(/"/g, "'");
   }
 
-  toggleCountdownTimer$ = new BehaviorSubject<boolean>(true);
+  private destroy$ = new Subject();
 
   constructor(private modalController: ModalController, private toastController: ToastController) {}
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+  }
 
   showAlert() {
     const config: AlertConfig = {
@@ -85,11 +89,9 @@ this.modalController.showAlert(config);`;
     const currentInterval = () => (60 * 1000) / updateInterval;
     const toRemainingSeconds = (t: number) => currentInterval() - t;
 
-    const remainingSeconds$ = this.toggleCountdownTimer$.pipe(
-      switchMap((running: boolean) => {
-        return running ? timer(0, updateInterval) : NEVER;
-      }),
+    const remainingSeconds$ = timer(0, updateInterval).pipe(
       map(toRemainingSeconds),
+      takeUntil(this.destroy$),
       takeWhile((t) => t >= 0)
     );
 
