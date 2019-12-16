@@ -26,7 +26,7 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
 
   private width: number;
   private clone: Element;
-  private scalingHeader: boolean; // used to prevent resizeObserver to trigger on font scaling by this.scaleHeader()
+  private isScalingHeader: boolean; // used to prevent resizeObserver to trigger on font scaling by this.scaleHeader()
   private scssVariables: any = require('sass-extract-loader!../../scss/base/_variables.scss');
   private sizes: HeadingSize[] = [
     {
@@ -103,7 +103,7 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
   private shouldScale(el: Element): boolean {
     const height = el.clientHeight;
 
-    if (height === 0 || this.scalingHeader) return false;
+    if (height === 0 || this.isScalingHeader) return false;
 
     const lineHeight = parseInt(
       window.getComputedStyle(this.elementRef.nativeElement).getPropertyValue('line-height')
@@ -114,7 +114,7 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
   }
 
   private scaleHeader(): void {
-    this.scalingHeader = true;
+    this.isScalingHeader = true;
 
     if (!this.clone) {
       this.clone = this.generateClone();
@@ -123,15 +123,17 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
 
     this.renderer.setStyle(this.clone, 'width', `${this.elementRef.nativeElement.clientWidth}px`);
 
-    const fittedSize: HeadingSize =
-      this.sizes.filter((size: HeadingSize) => {
-        this.setSize(this.clone, size);
-        const lines = this.clone.clientHeight / parseInt(size.lineHeight);
-        return lines <= this.config.maxLines;
-      })[0] || this.sizes[this.sizes.length - 1];
+    const fallbackSize = this.sizes[this.sizes.length - 1];
+    const fittedSize = this.sizes.find(this.canFitHeading.bind(this)) || fallbackSize;
 
     this.setSize(this.elementRef.nativeElement, fittedSize);
-    this.scalingHeader = false;
+    this.isScalingHeader = false;
+  }
+
+  private canFitHeading(size: HeadingSize) {
+    this.setSize(this.clone, size);
+    const lines = this.clone.clientHeight / parseInt(size.lineHeight);
+    return lines <= this.config.maxLines;
   }
 
   private generateClone(): Element {
