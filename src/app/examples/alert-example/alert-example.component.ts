@@ -24,7 +24,6 @@ export class AlertExampleComponent {
     alertConfigWithIcon
   )}
   
-
 this.modalController.showAlert(config);`;
 
   private static stringify(value: any): string {
