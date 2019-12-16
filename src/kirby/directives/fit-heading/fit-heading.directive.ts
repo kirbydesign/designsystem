@@ -24,11 +24,11 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
     maxLines: 2,
   };
 
-  private width: number;
+  private previousWidth: number;
   private clone: Element;
   private isScalingHeader: boolean; // used to prevent resizeObserver to trigger on font scaling by this.scaleHeader()
   private scssVariables: any = require('sass-extract-loader!../../scss/base/_variables.scss');
-  private sizes: HeadingSize[] = [
+  private headingSizes: HeadingSize[] = [
     {
       name: 'h1',
       fontSize: this.getFontSize('xl'),
@@ -96,7 +96,7 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
     if (!this.shouldScale(entry.target)) return;
 
     // Set width to determine at next resize if header should be scaled up again
-    this.width = entry.target.clientWidth;
+    this.previousWidth = entry.target.clientWidth;
     this.scaleHeader();
   }
 
@@ -110,7 +110,7 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
     );
 
     const lines = height / lineHeight;
-    return lines > this.config.maxLines || this.width < el.clientWidth;
+    return lines > this.config.maxLines || this.previousWidth < el.clientWidth;
   }
 
   private scaleHeader(): void {
@@ -123,8 +123,8 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
 
     this.renderer.setStyle(this.clone, 'width', `${this.elementRef.nativeElement.clientWidth}px`);
 
-    const fallbackSize = this.sizes[this.sizes.length - 1];
-    const fittedSize = this.sizes.find(this.canFitHeading.bind(this)) || fallbackSize;
+    const fallbackSize = this.headingSizes[this.headingSizes.length - 1];
+    const fittedSize = this.headingSizes.find(this.canFitHeading.bind(this)) || fallbackSize;
 
     this.setSize(this.elementRef.nativeElement, fittedSize);
     this.isScalingHeader = false;
