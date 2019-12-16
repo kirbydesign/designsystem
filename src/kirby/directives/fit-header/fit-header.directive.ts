@@ -24,8 +24,6 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
     maxLines: 2,
   };
 
-  private lineHeight: number;
-  private height: number;
   private width: number;
   private clone: Element;
   private scalingHeader: boolean; // used to prevent resizeObserver to trigger on font scaling by this.scaleHeader()
@@ -64,27 +62,28 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
   }
 
   private getFontSize(size): string {
-    if (
-      this.scssVariables['global'] &&
-      this.scssVariables['global']['$font-sizes'] &&
-      this.scssVariables['global']['$font-sizes']['value'] &&
-      this.scssVariables['global']['$font-sizes']['value'][size]
-    ) {
-      const fontSize = this.scssVariables['global']['$font-sizes']['value'][size];
+    const fontSize = this.getScssValue(['global', '$font-sizes', 'value', size]);
+    if (fontSize) {
       return `${fontSize.value}${fontSize.unit}`;
     }
   }
 
   private getLineHeight(size): string {
-    if (
-      this.scssVariables['global'] &&
-      this.scssVariables['global']['$line-height'] &&
-      this.scssVariables['global']['$line-height']['value'] &&
-      this.scssVariables['global']['$line-height']['value'][size]
-    ) {
-      const fontSize = this.scssVariables['global']['$line-height']['value'][size];
-      return `${fontSize.value}${fontSize.unit}`;
+    const lineHeight = this.getScssValue(['global', '$line-height', 'value', size]);
+    if (lineHeight) {
+      return `${lineHeight.value}${lineHeight.unit}`;
     }
+  }
+
+  private getScssValue(path: string[]) {
+    let node = this.scssVariables;
+    for (let step of path) {
+      node = node[step];
+      if (!node) {
+        break;
+      }
+    }
+    return node;
   }
 
   private observeResize(): void {
@@ -102,15 +101,15 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
   }
 
   private shouldScale(el: Element): boolean {
-    this.height = el.clientHeight;
+    const height = el.clientHeight;
 
-    if (this.height === 0 || this.scalingHeader) return false;
+    if (height === 0 || this.scalingHeader) return false;
 
-    this.lineHeight = parseInt(
+    const lineHeight = parseInt(
       window.getComputedStyle(this.elementRef.nativeElement).getPropertyValue('line-height')
     );
 
-    const lines = this.height / this.lineHeight;
+    const lines = height / lineHeight;
     return lines > this.config.maxLines || this.width < el.clientWidth;
   }
 
