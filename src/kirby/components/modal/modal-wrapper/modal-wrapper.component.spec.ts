@@ -14,6 +14,7 @@ import { ModalController } from '@kirbydesign/designsystem/modal';
 describe('ModalWrapperComponent', () => {
   let component: ModalWrapperComponent;
   let fixture: ComponentFixture<ModalWrapperComponent>;
+  let navParamsSpy: jasmine.SpyObj<NavParams>;
 
   beforeEach(async(() => {
     const modalControllerSpy = jasmine.createSpyObj('IModalController', [
@@ -23,13 +24,17 @@ describe('ModalWrapperComponent', () => {
       'blurNativeWrapper',
     ]);
 
-    const navParamsSpy = jasmine.createSpyObj('NavParams', {
+    navParamsSpy = jasmine.createSpyObj('NavParams', {
       get: {
         title: 'Test title',
         component: undefined,
         flavor: 'modal',
       },
     });
+
+    navParamsSpy.data = {
+      config: {},
+    } as any;
 
     TestBed.configureTestingModule({
       declarations: [

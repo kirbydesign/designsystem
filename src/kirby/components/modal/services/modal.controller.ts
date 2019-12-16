@@ -13,7 +13,7 @@ export const modalScrollNoop = () => {
   throw new Error('No modal windows are currently registered');
 };
 
-export type modal = { close: (data?: any) => {}; config: ModalConfig };
+export type modal = { close: (data?: any) => {}; config?: ModalConfig };
 
 @Injectable()
 export class ModalController implements IModalController {
