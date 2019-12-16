@@ -34,6 +34,25 @@ this.modalController.showAlert(config);`;
 
   private alertClose$ = new Subject();
 
+  static readonly alertConfigWithDynamicValues = `
+  const title$ = of('Need more time?');
+  const message$ = combineLatest(of('Time remaining: '), remainingSeconds$).pipe(
+    map(([message, remainignSeconds]) => {
+      return message + remainignSeconds;
+    })
+  );
+  const config: AlertConfig = {
+    title: title$,
+    icon: {
+      name: 'clock',
+      themeColor: 'warning',
+    },
+    message: message$,
+    okBtn: 'Logout',
+    cancelBtn: 'Take me back',
+  };
+  this.modalController.showAlert(config, this.onAlertClosed.bind(this));
+  `;
   constructor(private modalController: ModalController, private toastController: ToastController) {}
 
   showAlert() {
