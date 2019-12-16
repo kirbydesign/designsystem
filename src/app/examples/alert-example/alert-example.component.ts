@@ -19,7 +19,7 @@ const alertConfigWithIcon = {
   templateUrl: './alert-example.component.html',
   styles: [':host { display: block; }'],
 })
-export class AlertExampleComponent implements OnDestroy {
+export class AlertExampleComponent {
   static readonly alertConfigWithIcon = `const config: AlertConfig = ${AlertExampleComponent.stringify(
     alertConfigWithIcon
   )}
@@ -32,13 +32,9 @@ this.modalController.showAlert(config);`;
       .replace(/"/g, "'");
   }
 
-  private destroy$ = new Subject();
+  private alertClose$ = new Subject();
 
   constructor(private modalController: ModalController, private toastController: ToastController) {}
-
-  ngOnDestroy(): void {
-    this.destroy$.next();
-  }
 
   showAlert() {
     const config: AlertConfig = {
@@ -91,7 +87,7 @@ this.modalController.showAlert(config);`;
 
     const remainingSeconds$ = timer(0, updateInterval).pipe(
       map(toRemainingSeconds),
-      takeUntil(this.destroy$),
+      takeUntil(this.alertClose$),
       takeWhile((t) => t >= 0)
     );
 
@@ -121,6 +117,7 @@ this.modalController.showAlert(config);`;
       durationInMs: 1500,
     };
     this.toastController.showToast(config);
+    this.alertClose$.next();
   }
 
   private onAlertDestructiveClosed(result?: boolean) {
