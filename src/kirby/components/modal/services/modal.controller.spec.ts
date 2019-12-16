@@ -41,7 +41,7 @@ describe('modalController', () => {
     describe('scrollToTop', () => {
       it('should throw an error when scrolling to top, when no modals have been opened', () => {
         expect(() => {
-          modalController.hideTopmost();
+          modalController.scrollToTop();
         }).toThrow(expectedError);
       });
     });
@@ -49,7 +49,7 @@ describe('modalController', () => {
     describe('scrollToBottom', () => {
       it('should throw an error when scrolling to bottom, when no modals have been opened', () => {
         expect(() => {
-          modalController.hideTopmost();
+          modalController.scrollToBottom();
         }).toThrow(expectedError);
       });
     });
