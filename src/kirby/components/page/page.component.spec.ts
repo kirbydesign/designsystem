@@ -5,7 +5,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { MockDirective } from 'ng-mocks';
 
 import { PageComponent } from './page.component';
-import { FitHeaderDirective } from '@kirbydesign/designsystem/directives/fit-header/fit-header.directive';
+import { FitHeadingDirective } from '@kirbydesign/designsystem/directives/fit-heading/fit-heading.directive';
 
 describe('PageComponent', () => {
   let component: PageComponent;
@@ -14,7 +14,7 @@ describe('PageComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [NoopAnimationsModule, RouterTestingModule],
-      declarations: [PageComponent, MockDirective(FitHeaderDirective)],
+      declarations: [PageComponent, MockDirective(FitHeadingDirective)],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   }));

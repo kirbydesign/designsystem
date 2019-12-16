@@ -24,7 +24,7 @@ import { NavigationEnd, NavigationStart, Router, RouterEvent } from '@angular/ro
 import { Subscription } from 'rxjs';
 import { IonContent } from '@ionic/angular';
 
-import { FitHeadingConfig } from '@kirbydesign/designsystem/directives/fit-header/fit-header.directive';
+import { FitHeadingConfig } from '@kirbydesign/designsystem/directives/fit-heading/fit-heading.directive';
 import { selectedTabClickEvent } from '../tabs/tab-button/tab-button.events';
 import { KirbyAnimation } from '@kirbydesign/designsystem/animation/kirby-animation';
 

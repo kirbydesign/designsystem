@@ -10,7 +10,7 @@ import {
   PageTitleDirective,
   PageToolbarTitleDirective,
 } from './page.component';
-import { FitHeaderModule } from '@kirbydesign/designsystem/directives/fit-header/fit-header.module';
+import { FitHeaderModule } from '@kirbydesign/designsystem/directives/fit-heading/fit-heading.module';
 
 @NgModule({
   declarations: [
