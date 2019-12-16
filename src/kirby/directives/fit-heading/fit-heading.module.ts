@@ -6,4 +6,4 @@ import { FitHeadingDirective } from '@kirbydesign/designsystem/directives/fit-he
   declarations: [FitHeadingDirective],
   exports: [FitHeadingDirective],
 })
-export class FitHeaderModule {}
+export class FitHeadingModule {}
