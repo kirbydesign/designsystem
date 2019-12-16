@@ -1,6 +1,6 @@
-import { Component, OnDestroy } from '@angular/core';
-import { BehaviorSubject, timer, NEVER, of, combineLatest, Subject, interval } from 'rxjs';
-import { map, takeWhile, switchMap, takeUntil } from 'rxjs/operators';
+import { Component } from '@angular/core';
+import { timer, of, combineLatest, Subject } from 'rxjs';
+import { map, takeWhile, takeUntil } from 'rxjs/operators';
 
 import { ModalController } from '@kirbydesign/designsystem/modal';
 import { AlertConfig } from '@kirbydesign/designsystem/modal';
