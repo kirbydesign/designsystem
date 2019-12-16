@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { BehaviorSubject, timer, NEVER, of, combineLatest } from 'rxjs';
+import { map, takeWhile, switchMap } from 'rxjs/operators';
 
 import { ModalController } from '@kirbydesign/designsystem/modal';
 import { AlertConfig } from '@kirbydesign/designsystem/modal';
@@ -21,6 +23,7 @@ export class AlertExampleComponent {
   static readonly alertConfigWithIcon = `const config: AlertConfig = ${AlertExampleComponent.stringify(
     alertConfigWithIcon
   )}
+  
 
 this.modalController.showAlert(config);`;
 
@@ -29,6 +32,8 @@ this.modalController.showAlert(config);`;
       .replace(/"(\w+)\":/g, '$1:')
       .replace(/"/g, "'");
   }
+
+  toggleCountdownTimer$ = new BehaviorSubject<boolean>(true);
 
   constructor(private modalController: ModalController, private toastController: ToastController) {}
 
@@ -71,6 +76,38 @@ this.modalController.showAlert(config);`;
       title: 'Alert with newline',
       message: 'This is message one.\n\nThis is message two.',
       okBtn: 'I agree',
+      cancelBtn: 'Take me back',
+    };
+    this.modalController.showAlert(config, this.onAlertClosed.bind(this));
+  }
+
+  showAlertWithDynamicValues() {
+    const updateInterval = 1000;
+    const currentInterval = () => (60 * 1000) / updateInterval;
+    const toRemainingSeconds = (t: number) => currentInterval() - t;
+
+    const remainingSeconds$ = this.toggleCountdownTimer$.pipe(
+      switchMap((running: boolean) => {
+        return running ? timer(0, updateInterval) : NEVER;
+      }),
+      map(toRemainingSeconds),
+      takeWhile((t) => t >= 0)
+    );
+
+    const title$ = of('Need more time?');
+    const message$ = combineLatest(of('Time remaining: '), remainingSeconds$).pipe(
+      map(([message, remainignSeconds]) => {
+        return message + remainignSeconds;
+      })
+    );
+    const config: AlertConfig = {
+      title: title$,
+      icon: {
+        name: 'clock',
+        themeColor: 'warning',
+      },
+      message: message$,
+      okBtn: 'Logout',
       cancelBtn: 'Take me back',
     };
     this.modalController.showAlert(config, this.onAlertClosed.bind(this));
