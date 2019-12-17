@@ -37,8 +37,8 @@ this.modalController.showAlert(config);`;
   static readonly alertConfigWithDynamicValues = `
   const title$ = of('Need more time?');
   const message$ = combineLatest(of('Time remaining: '), remainingSeconds$).pipe(
-    map(([message, remainignSeconds]) => {
-      return message + remainignSeconds;
+    map(([message, remainingSeconds]) => {
+      return message + remainingSeconds;
     })
   );
   const config: AlertConfig = {
