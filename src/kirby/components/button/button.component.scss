@@ -197,7 +197,9 @@
   margin-inline-start: size('s');
 }
 
-:host-context(ion-toolbar) {
+// Temp fix for https://github.com/angular/angular-cli/issues/13854#issuecomment-470831308
+/* clean-css ignore:start */
+:host-context(ion-toolbar kirby-page-actions) {
   &.attention-level1,
   &.attention-level2,
   &.attention-level3,
@@ -207,8 +209,11 @@
     @include button-sm;
   }
 }
+/* clean-css ignore:end */
 
-:host-context(kirby-page-actions) {
+// Temp fix for https://github.com/angular/angular-cli/issues/13854#issuecomment-470831308
+/* clean-css ignore:start */
+:host-context(.page-title kirby-page-actions) {
   &.attention-level1,
   &.attention-level2,
   &.attention-level3,
@@ -217,3 +222,4 @@
     @include button-attentionlevel2;
   }
 }
+/* clean-css ignore:end */
