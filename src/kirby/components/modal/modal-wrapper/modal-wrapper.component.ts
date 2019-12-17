@@ -31,7 +31,7 @@ export class ModalWrapperComponent {
 
     this.setModalScrollable(modalController);
 
-    params.data.config.setModalScrollableCB = () => {
+    params.data.config.modalScrollableCallback = () => {
       this.setModalScrollable(modalController);
     };
   }

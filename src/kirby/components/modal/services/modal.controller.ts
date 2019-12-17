@@ -4,23 +4,22 @@ import { IModalController } from './modal.controller.interface';
 import { ModalHelper } from './modal.helper';
 import { AlertHelper } from './alert.helper';
 import { ActionSheetHelper } from './action-sheet.helper';
-import { ModalConfig } from '../modal-wrapper/config/modal-config';
 import { ActionSheetConfig } from '../action-sheet/config/action-sheet-config';
 import { AlertConfig } from '../alert/config/alert-config';
 import { KirbyAnimation } from '@kirbydesign/designsystem/animation/kirby-animation';
+import { ModalConfig } from '@kirbydesign/designsystem/modal';
+import { Modal } from './modal.model';
 
-export const modalScrollNoop = () => {
+export const defaultModalScrollCallback = () => {
   throw new Error('No modal windows are currently registered');
 };
-
-export type modal = { close: (data?: any) => {}; config?: ModalConfig };
 
 @Injectable()
 export class ModalController implements IModalController {
   // These are set in the ModalWrapperComponent
-  scrollToTop: (duration?: KirbyAnimation.Duration) => void = modalScrollNoop;
-  scrollToBottom: (duration?: KirbyAnimation.Duration) => void = modalScrollNoop;
-  private modals: modal[] = [];
+  scrollToTop: (duration?: KirbyAnimation.Duration) => void = defaultModalScrollCallback;
+  scrollToBottom: (duration?: KirbyAnimation.Duration) => void = defaultModalScrollCallback;
+  private modals: Modal[] = [];
   constructor(
     private modalHelper: ModalHelper,
     private actionSheetHelper: ActionSheetHelper,
@@ -72,7 +71,7 @@ export class ModalController implements IModalController {
     this.modalHelper.blurNativeWrapper(nativeElement);
   }
 
-  public register(modal: modal): void {
+  public register(modal: Modal): void {
     this.modals.push(modal);
   }
 
@@ -88,13 +87,13 @@ export class ModalController implements IModalController {
     this.modals.pop();
 
     if (this.modals.length === 0) {
-      this.scrollToTop = modalScrollNoop;
-      this.scrollToBottom = modalScrollNoop;
+      this.scrollToTop = defaultModalScrollCallback;
+      this.scrollToBottom = defaultModalScrollCallback;
       return;
     }
 
     const newTopmostModal = this.modals[this.modals.length - 1];
-    newTopmostModal.config.setModalScrollableCB();
+    newTopmostModal.config.modalScrollableCallback();
   }
 
   public hideAll(): void {

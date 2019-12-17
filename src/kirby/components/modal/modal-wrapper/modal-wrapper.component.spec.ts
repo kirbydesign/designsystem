@@ -142,18 +142,19 @@ describe('ModalWrapperComponent', () => {
 
   describe('scrollToTop', () => {
     it('should scroll to top with no scroll animation duration', () => {
-      const ionContentElm = fixture.debugElement.query(By.css('ion-content'));
-      const ionContent: IonContent = ionContentElm.componentInstance;
+      const ionContentElement = fixture.debugElement.query(By.css('ion-content'));
+      const ionContent: IonContent = ionContentElement.componentInstance;
       spyOn(ionContent, 'scrollToTop');
 
       component.scrollToTop();
 
       expect(ionContent.scrollToTop).toHaveBeenCalledWith(0);
     });
+
     it('should scroll to top with provided scroll animation duration', () => {
       const animationDuration = KirbyAnimation.Duration.LONG;
-      const ionContentElm = fixture.debugElement.query(By.css('ion-content'));
-      const ionContent: IonContent = ionContentElm.componentInstance;
+      const ionContentElement = fixture.debugElement.query(By.css('ion-content'));
+      const ionContent: IonContent = ionContentElement.componentInstance;
       spyOn(ionContent, 'scrollToTop');
 
       component.scrollToTop(animationDuration);
@@ -164,18 +165,19 @@ describe('ModalWrapperComponent', () => {
 
   describe('scrollToBottom', () => {
     it('should scroll to bottom with no scroll animation duration', () => {
-      const ionContentElm = fixture.debugElement.query(By.css('ion-content'));
-      const ionContent: IonContent = ionContentElm.componentInstance;
+      const ionContentElement = fixture.debugElement.query(By.css('ion-content'));
+      const ionContent: IonContent = ionContentElement.componentInstance;
       spyOn(ionContent, 'scrollToBottom');
 
       component.scrollToBottom();
 
       expect(ionContent.scrollToBottom).toHaveBeenCalledWith(0);
     });
+
     it('should scroll to bottom with provided scroll animation duration', () => {
       const animationDuration = KirbyAnimation.Duration.LONG;
-      const ionContentElm = fixture.debugElement.query(By.css('ion-content'));
-      const ionContent: IonContent = ionContentElm.componentInstance;
+      const ionContentElement = fixture.debugElement.query(By.css('ion-content'));
+      const ionContent: IonContent = ionContentElement.componentInstance;
       spyOn(ionContent, 'scrollToBottom');
 
       component.scrollToBottom(animationDuration);
