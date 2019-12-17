@@ -208,7 +208,7 @@
   }
 }
 
-:host-context(.page-title) {
+:host-context(kirby-page-actions) {
   &.attention-level1,
   &.attention-level2,
   &.attention-level3,
