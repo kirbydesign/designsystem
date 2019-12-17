@@ -16,13 +16,14 @@ export class ModalHelper {
     config: ModalConfig,
     registerModal: (modal: Modal) => void
   ): Promise<any> {
-    const modalScrollableCallback = () => {
-      throw new Error('No modal to make scrollable');
+    const modal: Modal = {
+      close: (data?: any) => null,
+      scrollToTop: () => null,
+      scrollToBottom: () => null,
     };
-
     const mergedConfig = this.mergeDefaultConfig(config);
-    mergedConfig.modalScrollableCallback = modalScrollableCallback;
-    const modal = await this.ionicModalController.create({
+    mergedConfig.modal = modal;
+    const ionModal = await this.ionicModalController.create({
       component: ModalWrapperComponent,
       cssClass: ['kirby-modal', config.flavor === 'drawer' ? 'kirby-drawer' : null],
       componentProps: { config: mergedConfig },
@@ -40,13 +41,11 @@ export class ModalHelper {
       ),
     });
 
-    registerModal({
-      close: modal.dismiss.bind(modal),
-      config: mergedConfig,
-    });
+    modal.close = ionModal.dismiss.bind(ionModal);
+    registerModal(modal);
 
-    modal.present();
-    return modal.onDidDismiss();
+    ionModal.present();
+    return ionModal.onDidDismiss();
   }
 
   private static animateIn(

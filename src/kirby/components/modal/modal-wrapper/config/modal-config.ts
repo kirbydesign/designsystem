@@ -1,12 +1,13 @@
 import { DrawerSupplementaryAction } from './drawer-supplementary-action';
 import { KirbyAnimation } from '@kirbydesign/designsystem/animation/kirby-animation';
+import { Modal } from '../../services/modal.model';
 
 export interface ModalConfig {
+  modal: Modal;
   title: string;
   component: any;
   flavor?: 'modal' | 'drawer';
   dim?: number;
-  modalScrollableCallback?: () => void;
   componentProps?: { [key: string]: any };
   // the supplementary action is only available in the drawer
   drawerSupplementaryAction?: DrawerSupplementaryAction;

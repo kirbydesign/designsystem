@@ -5,6 +5,7 @@ import { ModalConfig } from './config/modal-config';
 import { COMPONENT_PROPS } from './config/modal-config.helper';
 import { IModalController } from '../services/modal.controller.interface';
 import { KirbyAnimation } from '@kirbydesign/designsystem/animation/kirby-animation';
+import { Modal } from '../services/modal.model';
 
 @Component({
   selector: 'kirby-modal-wrapper',
@@ -28,24 +29,19 @@ export class ModalWrapperComponent {
       providers: [{ provide: COMPONENT_PROPS, useValue: this.config.componentProps }],
       parent: injector,
     });
-
-    this.setModalScrollable(modalController);
-
-    params.data.config.modalScrollableCallback = () => {
-      this.setModalScrollable(modalController);
-    };
+    this.registerScrolling(this.config.modal);
   }
 
-  private setModalScrollable(modalController: IModalController) {
-    modalController.scrollToTop = this.scrollToTop.bind(this);
-    modalController.scrollToBottom = this.scrollToBottom.bind(this);
+  private registerScrolling(modal: Modal) {
+    modal.scrollToTop = this.scrollToTop.bind(this);
+    modal.scrollToBottom = this.scrollToBottom.bind(this);
   }
 
-  scrollToTop(scrollDuration?: KirbyAnimation.Duration) {
+  private scrollToTop(scrollDuration?: KirbyAnimation.Duration) {
     this.ionContent.scrollToTop(scrollDuration || 0);
   }
 
-  scrollToBottom(scrollDuration?: KirbyAnimation.Duration) {
+  private scrollToBottom(scrollDuration?: KirbyAnimation.Duration) {
     this.ionContent.scrollToBottom(scrollDuration || 0);
   }
 

@@ -10,15 +10,8 @@ import { KirbyAnimation } from '@kirbydesign/designsystem/animation/kirby-animat
 import { ModalConfig } from '@kirbydesign/designsystem/modal';
 import { Modal } from './modal.model';
 
-export const defaultModalScrollCallback = () => {
-  throw new Error('No modal windows are currently registered');
-};
-
 @Injectable()
 export class ModalController implements IModalController {
-  // These are set in the ModalWrapperComponent
-  scrollToTop: (duration?: KirbyAnimation.Duration) => void = defaultModalScrollCallback;
-  scrollToBottom: (duration?: KirbyAnimation.Duration) => void = defaultModalScrollCallback;
   private modals: Modal[] = [];
   constructor(
     private modalHelper: ModalHelper,
@@ -83,17 +76,24 @@ export class ModalController implements IModalController {
     modal.close(data);
   }
 
+  public scrollToTop(duration?: KirbyAnimation.Duration) {
+    const modal = this.modals[this.modals.length - 1];
+    if (!modal) {
+      throw new Error('No modal windows are currently registered');
+    }
+    modal.scrollToTop(duration);
+  }
+
+  public scrollToBottom(duration?: KirbyAnimation.Duration) {
+    const modal = this.modals[this.modals.length - 1];
+    if (!modal) {
+      throw new Error('No modal windows are currently registered');
+    }
+    modal.scrollToBottom(duration);
+  }
+
   private forgetTopmost(): void {
     this.modals.pop();
-
-    if (this.modals.length === 0) {
-      this.scrollToTop = defaultModalScrollCallback;
-      this.scrollToBottom = defaultModalScrollCallback;
-      return;
-    }
-
-    const newTopmostModal = this.modals[this.modals.length - 1];
-    newTopmostModal.config.modalScrollableCallback();
   }
 
   public hideAll(): void {
