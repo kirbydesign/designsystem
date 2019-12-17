@@ -9,12 +9,17 @@ import { IconComponent } from '../../icon/icon.component';
 import { ModalWrapperComponent } from './modal-wrapper.component';
 import { IModalController } from '../services/modal.controller.interface';
 import { KirbyAnimation } from '@kirbydesign/designsystem/animation/kirby-animation';
-import { ModalController } from '@kirbydesign/designsystem/modal';
+import { Modal } from '../services/modal.model';
 
 describe('ModalWrapperComponent', () => {
   let component: ModalWrapperComponent;
   let fixture: ComponentFixture<ModalWrapperComponent>;
   let navParamsSpy: jasmine.SpyObj<NavParams>;
+  const modal = {
+    close: () => {},
+    scrollToTop: () => {},
+    scrollToBottom: () => {},
+  } as Modal;
 
   beforeEach(async(() => {
     const modalControllerSpy = jasmine.createSpyObj('IModalController', [
@@ -29,6 +34,7 @@ describe('ModalWrapperComponent', () => {
         title: 'Test title',
         component: undefined,
         flavor: 'modal',
+        modal,
       },
     });
 
@@ -146,7 +152,7 @@ describe('ModalWrapperComponent', () => {
       const ionContent: IonContent = ionContentElement.componentInstance;
       spyOn(ionContent, 'scrollToTop');
 
-      component.scrollToTop();
+      modal.scrollToTop();
 
       expect(ionContent.scrollToTop).toHaveBeenCalledWith(0);
     });
@@ -157,7 +163,7 @@ describe('ModalWrapperComponent', () => {
       const ionContent: IonContent = ionContentElement.componentInstance;
       spyOn(ionContent, 'scrollToTop');
 
-      component.scrollToTop(animationDuration);
+      modal.scrollToTop(animationDuration);
 
       expect(ionContent.scrollToTop).toHaveBeenCalledWith(animationDuration);
     });
@@ -169,7 +175,7 @@ describe('ModalWrapperComponent', () => {
       const ionContent: IonContent = ionContentElement.componentInstance;
       spyOn(ionContent, 'scrollToBottom');
 
-      component.scrollToBottom();
+      modal.scrollToBottom();
 
       expect(ionContent.scrollToBottom).toHaveBeenCalledWith(0);
     });
@@ -180,7 +186,7 @@ describe('ModalWrapperComponent', () => {
       const ionContent: IonContent = ionContentElement.componentInstance;
       spyOn(ionContent, 'scrollToBottom');
 
-      component.scrollToBottom(animationDuration);
+      modal.scrollToBottom(animationDuration);
 
       expect(ionContent.scrollToBottom).toHaveBeenCalledWith(animationDuration);
     });

@@ -3,9 +3,9 @@ import { KirbyAnimation } from '@kirbydesign/designsystem/animation/kirby-animat
 import { Modal } from '../../services/modal.model';
 
 export interface ModalConfig {
-  modal: Modal;
   title: string;
   component: any;
+  modal?: Modal;
   flavor?: 'modal' | 'drawer';
   dim?: number;
   componentProps?: { [key: string]: any };

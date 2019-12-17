@@ -26,7 +26,11 @@ describe('modalController', () => {
     });
 
     it('should succesfully invoke a registered callback', () => {
-      modalController.register({ close: mockCallback });
+      modalController.register({
+        close: mockCallback,
+        scrollToTop: () => {},
+        scrollToBottom: () => {},
+      });
       expect(() => {
         modalController.hideTopmost();
       }).not.toThrow();
