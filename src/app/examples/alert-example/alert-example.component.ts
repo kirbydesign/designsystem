@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { timer, of, combineLatest, Subject } from 'rxjs';
+import { timer, of, Subject } from 'rxjs';
 import { map, takeWhile, takeUntil } from 'rxjs/operators';
 
 import { ModalController } from '@kirbydesign/designsystem/modal';
@@ -34,13 +34,11 @@ this.modalController.showAlert(config);`;
 
   private alertClose$ = new Subject();
 
-  static readonly alertConfigWithDynamicValues = `
-  const title$ = of('Need more time?');
-  const message$ = combineLatest(of('Time remaining: '), remainingSeconds$).pipe(
-    map(([message, remainingSeconds]) => {
-      return message + remainingSeconds;
-    })
+  static readonly alertConfigWithDynamicValues = `const title$ = of('Need more time?');
+  const message$ = remainingSeconds$.pipe(
+    map((remainingSeconds) => \`Time remaining: \${remainingSeconds}\`)
   );
+
   const config: AlertConfig = {
     title: title$,
     icon: {
@@ -51,8 +49,8 @@ this.modalController.showAlert(config);`;
     okBtn: 'Logout',
     cancelBtn: 'Take me back',
   };
-  this.modalController.showAlert(config, this.onAlertClosed.bind(this));
-  `;
+  
+  this.modalController.showAlert(config);`;
   constructor(private modalController: ModalController, private toastController: ToastController) {}
 
   showAlert() {
@@ -103,19 +101,18 @@ this.modalController.showAlert(config);`;
     const countdownTimeInSeconds = 60;
     const countdownTimeInMs = countdownTimeInSeconds * 1000;
     const intervalInMs = 1000;
-    const toRemainingSeconds = (count: number) => (countdownTimeInMs - count * intervalInMs) / 1000;
+    const toRemainingTimeInMs = (count: number) => countdownTimeInMs - count * intervalInMs;
+    const toSeconds = (timeInMs: number) => Math.ceil(timeInMs / 1000);
 
-    const remainingSeconds$ = timer(0, intervalInMs).pipe(
-      map(toRemainingSeconds),
+    const remainingTime$ = timer(0, intervalInMs).pipe(
+      map(toRemainingTimeInMs),
       takeUntil(this.alertClose$),
-      takeWhile((countdownTimeInSeconds) => countdownTimeInSeconds >= 0)
+      takeWhile((countdownTimeInMs) => countdownTimeInMs >= 0)
     );
 
     const title$ = of('Need more time?');
-    const message$ = combineLatest(of('Time remaining: '), remainingSeconds$).pipe(
-      map(([message, remainingSeconds]) => {
-        return message + remainingSeconds;
-      })
+    const message$ = remainingTime$.pipe(
+      map((remainingTimeInMs) => `Time remaining: ${toSeconds(remainingTimeInMs)}`)
     );
     const config: AlertConfig = {
       title: title$,
