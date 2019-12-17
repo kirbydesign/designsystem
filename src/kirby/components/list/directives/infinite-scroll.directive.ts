@@ -76,26 +76,27 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
         this.scrollEnd.emit();
       });
 
-    const allIonContents = this.windowRef.nativeWindow.document.getElementsByTagName('ion-content');
-    if (allIonContents && allIonContents.length > 0) {
-      const closetsIonContent = allIonContents[allIonContents.length - 1];
-      fromEvent<any>(closetsIonContent, 'ionScroll')
-        .pipe(
-          takeUntil(this.ngUnsubscribe$),
-          debounceTime(INFINITE_SCROLL_DEBOUNCE),
-          filter(() => !this.disabled),
-          map(() => this.getScroll()),
-          filter((scroll) => {
-            return (
-              scroll.elementHeight * (1 - this.offset) >=
-              scroll.distanceToViewBottom - scroll.viewHeight
-            );
-          })
-        )
-        .subscribe(() => {
-          this.scrollEnd.emit();
-        });
-    }
+    setTimeout(() => {
+      const ionContent = this.elementRef.nativeElement.closest('ion-content');
+      if (ionContent) {
+        fromEvent<any>(ionContent, 'ionScroll')
+          .pipe(
+            takeUntil(this.ngUnsubscribe$),
+            debounceTime(INFINITE_SCROLL_DEBOUNCE),
+            filter(() => !this.disabled),
+            map(() => this.getScroll()),
+            filter((scroll) => {
+              return (
+                scroll.elementHeight * (1 - this.offset) >=
+                scroll.distanceToViewBottom - scroll.viewHeight
+              );
+            })
+          )
+          .subscribe(() => {
+            this.scrollEnd.emit();
+          });
+      }
+    });
   }
 
   /**

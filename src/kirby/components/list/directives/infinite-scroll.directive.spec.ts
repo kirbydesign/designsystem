@@ -15,6 +15,7 @@ describe('InfiniteScrollDirective', () => {
     const viewHeight = 0;
 
     nativeElement.getBoundingClientRect.and.returnValue({ height, bottom });
+    nativeElement.closest.and.returnValue(null);
     document.getElementsByTagName.and.returnValue([]);
 
     const directive = new InfiniteScrollDirective(
@@ -28,7 +29,7 @@ describe('InfiniteScrollDirective', () => {
   };
 
   beforeEach(() => {
-    nativeElement = jasmine.createSpyObj('nativeElement', ['getBoundingClientRect']);
+    nativeElement = jasmine.createSpyObj('nativeElement', ['getBoundingClientRect', 'closest']);
     document = jasmine.createSpyObj('document', ['getElementsByTagName']);
   });
 
