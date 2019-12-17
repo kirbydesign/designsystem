@@ -6,17 +6,36 @@
   </p>
   <ul>
     <li>
+      Simple configuration for
+      <a href="#" (click)="scrollTo(simple)">basic page title and actions</a>
+    </li>
+    <li>Back navigation</li>
+    <li>Spacing of content</li>
+    <li>
       Scrollable page title and actions:
       <ul>
         <li>Sticks to the toolbar by default, when scrolling the page below the title</li>
-        <li>Also supports fixed page title and actions</li>
+        <li>
+          Also supports
+          <a href="#" (click)="scrollTo(fixedTitleAndActions)">fixed page title and actions</a>
+        </li>
       </ul>
     </li>
-    <li>Back navigation</li>
-    <li>Simple configuration for basic page title and actions</li>
-    <li>Support for advanced page title and actions template</li>
-    <li>Support for fixed page content (e.g. a Floating Action Button)</li>
-    <li>Spacing of content</li>
+    <li>
+      (Optional)
+      <a href="#" (click)="scrollTo(alignment)"
+        >Alignment of page title and alternative toolbar title</a
+      >
+    </li>
+    <li>(Optional) <a href="#" (click)="scrollTo(autoscale)">Scaling of page title</a></li>
+    <li>
+      Support for
+      <a href="#" (click)="scrollTo(advanced)">advanced page title and actions template</a>
+    </li>
+    <li>
+      Support for <a href="#" (click)="scrollTo(advanced)">fixed page content</a> (e.g. a Floating
+      Action Button)
+    </li>
   </ul>
 
   <h2>Life-cycle hooks</h2>
@@ -29,7 +48,7 @@
 
   <div class="page-example">
     <div>
-      <h2>Simple Page</h2>
+      <h2 #simple>Simple Page</h2>
       <p>
         For normal pages it's enough to just wrap the page content in a
         <code>kirby-page-content</code> tag, which is wrapped in a <code>kirby-page</code> tag and
@@ -44,7 +63,7 @@
 
 <div class="page-example">
   <div>
-    <h2>Title Alignment & Alternative Toolbar Title</h2>
+    <h2 #alignment>Title Alignment & Alternative Toolbar Title</h2>
     <p>
       Titles are default left aligned but can be centered (<code>titleAlignment="center"</code>) or
       right aligned (<code>titleAlignment="right"</code>).
@@ -69,20 +88,47 @@
 
 <div class="page-example">
   <div>
-    <h2>Custom Title</h2>
+    <h2 #autoscale>Scaling of Page Title</h2>
+    <p>Titles are default rendered as <code>h1</code>.</p>
+    <p>
+      It's possible to enable auto-scaling of the page title. This will scale both font-size &
+      line-height between h1 -> h3 depending on amount of text and maximum number of lines
+      configured. This can be configured by setting the
+      <code>titleMaxLines="NUMBER OF MAXIMUM LINES"</code> attribute of <code>kirby-page</code>.
+    </p>
+    <p>
+      This can also be achieved through the <code>*kirbyFitHeading</code> directive for
+      <a href="#" (click)="scrollTo(customTitle)">custom titles</a>.
+    </p>
+    <kirby-code-viewer [html]="fitHeadingExampleHtml"></kirby-code-viewer>
+  </div>
+
+  <div>
+    <kirby-iphone src="/examples/page/fit-heading" showExternalLink="true"></kirby-iphone>
+  </div>
+</div>
+
+<div class="page-example">
+  <div>
+    <h2 #customTitle>Custom Title</h2>
     <p>
       If you need to supply a custom page title element you can do that with the
       <code>*kirbyPageTitle</code> and <code>*kirbyPageToolbarTitle</code> directives.
     </p>
     <p>
-      <em
-        ><strong>*Please note:</strong> When supplying a custom page title element you must supply
-        both a page title and a toolbar title. You should also ensure the page title is wrapped in a
-        <code>h1</code> tag. See code example below on how to reuse a template for both titles.<br />
-        <strong>*Custom page title wrapper:</strong> If you wrap your custom title (e.g. in a
-        flex-container) you have to ensure the title is truncated (setting <code>overflow</code> and
-        <code>text-overflow</code> css properties). See code example below.</em
-      >
+      <strong>*Please note:</strong> When supplying a custom page title element you must supply both
+      a page title and a toolbar title. You should also ensure the page title is wrapped in a
+      <code>h1</code> tag. See code example below on how to reuse a template for both titles.
+    </p>
+    <p>
+      <strong>*Auto-scale page title:</strong> If a custom page title is used you will need to add
+      <code>kirbyFitHeading</code> directive at your heading-tag (h1) to take advantage of the
+      automatic scaling.
+    </p>
+    <p>
+      <strong>*Custom page title wrapper:</strong> If you wrap your custom title (e.g. in a
+      flex-container) you have to ensure the title is truncated (setting <code>overflow</code> and
+      <code>text-overflow</code> css properties). See code example below.
     </p>
     <kirby-code-viewer [html]="customTitleExampleHtml"></kirby-code-viewer>
   </div>
@@ -92,7 +138,7 @@
 
 <div class="page-example">
   <div>
-    <h2>Advanced Page</h2>
+    <h2 #advanced>Advanced Page</h2>
     <p>
       For more advanced scenarios, you can supply a custom page title element, action buttons and
       fixed content with the <code>*kirbyPage</code>-directives.
@@ -114,7 +160,7 @@
 
 <div class="page-example">
   <div>
-    <h2>Fixed Title & Actions</h2>
+    <h2 #fixedTitleAndActions>Fixed Title & Actions</h2>
     <p>
       If the <code>toolbarTitle</code> property is specified <em>instead</em> of the
       <code>title</code> property, the page title and actions will be <em>fixed</em> and shown only

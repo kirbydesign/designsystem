@@ -10,11 +10,13 @@ import {
   ElementRef,
   EventEmitter,
   Input,
+  OnChanges,
   OnDestroy,
   OnInit,
   Output,
   QueryList,
   Renderer2,
+  SimpleChanges,
   TemplateRef,
   ViewChild,
 } from '@angular/core';
@@ -22,6 +24,7 @@ import { NavigationEnd, NavigationStart, Router, RouterEvent } from '@angular/ro
 import { Subscription } from 'rxjs';
 import { IonContent } from '@ionic/angular';
 
+import { FitHeadingConfig } from '@kirbydesign/designsystem/directives/fit-heading/fit-heading.directive';
 import { selectedTabClickEvent } from '../tabs/tab-button/tab-button.events';
 import { KirbyAnimation } from '@kirbydesign/designsystem/animation/kirby-animation';
 
@@ -92,12 +95,14 @@ export class PageActionsComponent {}
   styleUrls: ['./page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PageComponent implements OnInit, OnDestroy, AfterViewInit, AfterContentChecked {
+export class PageComponent
+  implements OnInit, OnDestroy, AfterViewInit, AfterContentChecked, OnChanges {
   @Input() title?: string;
   @Input() toolbarTitle?: string;
   @Input() titleAlignment?: 'left' | 'center' | 'right' = 'left';
   @Input() defaultBackHref?: string;
   @Input() hideBackButton?: boolean;
+  @Input() titleMaxLines?: number;
 
   @Output() enter = new EventEmitter<void>();
   @Output() leave = new EventEmitter<void>();
@@ -130,6 +135,8 @@ export class PageComponent implements OnInit, OnDestroy, AfterViewInit, AfterCon
   toolbarFixedActionsVisible: boolean;
   toolbarStickyActionsVisible: boolean;
 
+  fitHeadingConfig: FitHeadingConfig;
+
   toolbarTitleTemplate: TemplateRef<any>;
   customContentTemplate: TemplateRef<any>;
   pageActionsTemplate: TemplateRef<any>;
@@ -150,6 +157,15 @@ export class PageComponent implements OnInit, OnDestroy, AfterViewInit, AfterCon
 
   ngOnInit(): void {
     this.removeWrapper();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.titleMaxLines) {
+      this.fitHeadingConfig = {
+        ...this.fitHeadingConfig,
+        maxLines: changes.titleMaxLines.currentValue,
+      };
+    }
   }
 
   ngAfterViewInit(): void {

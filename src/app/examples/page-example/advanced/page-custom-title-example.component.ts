@@ -10,7 +10,7 @@ const config = {
   template: `<kirby-page defaultBackHref="/">
 
   <!-- Custom Page Title -->
-  <h1 *kirbyPageTitle>
+  <h1 *kirbyPageTitle [kirbyFitHeading]="{ maxLines: 2 }">
     <ng-container *ngTemplateOutlet="customTitle"></ng-container>
   </h1>
 
