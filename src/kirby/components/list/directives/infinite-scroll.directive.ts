@@ -1,4 +1,3 @@
-import { IonContent } from '@ionic/angular';
 import {
   Directive,
   AfterViewInit,
