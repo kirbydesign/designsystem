@@ -13,6 +13,8 @@ import { Modal } from './modal.model';
 @Injectable()
 export class ModalController implements IModalController {
   private modals: Modal[] = [];
+  private readonly notModalRegisteredErrorMessage = 'No modal windows are currently registered';
+
   constructor(
     private modalHelper: ModalHelper,
     private actionSheetHelper: ActionSheetHelper,
@@ -71,7 +73,7 @@ export class ModalController implements IModalController {
   public hideTopmost(data?: any): void {
     const modal = this.modals[this.modals.length - 1];
     if (!modal) {
-      throw new Error('No modal windows are currently registered');
+      throw new Error(this.notModalRegisteredErrorMessage);
     }
     modal.close(data);
   }
@@ -79,7 +81,7 @@ export class ModalController implements IModalController {
   public scrollToTop(duration?: KirbyAnimation.Duration) {
     const modal = this.modals[this.modals.length - 1];
     if (!modal) {
-      throw new Error('No modal windows are currently registered');
+      throw new Error(this.notModalRegisteredErrorMessage);
     }
     modal.scrollToTop(duration);
   }
@@ -87,7 +89,7 @@ export class ModalController implements IModalController {
   public scrollToBottom(duration?: KirbyAnimation.Duration) {
     const modal = this.modals[this.modals.length - 1];
     if (!modal) {
-      throw new Error('No modal windows are currently registered');
+      throw new Error(this.notModalRegisteredErrorMessage);
     }
     modal.scrollToBottom(duration);
   }
