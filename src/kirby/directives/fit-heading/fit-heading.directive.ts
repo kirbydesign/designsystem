@@ -22,6 +22,7 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
   // tslint:disable-next-line:no-input-rename
   @Input('kirbyFitHeading') config?: FitHeadingConfig;
 
+  private isObservingHostElement: boolean;
   private hostElementClone: Element;
   private previousWidth: number;
   private isScalingHeader: boolean; // used to prevent resizeObserver to trigger on font scaling by this.scaleHeader()
@@ -53,12 +54,17 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
   ngOnInit(): void {
     if (this.config && this.config.maxLines) {
       this.observeResize();
+      this.isObservingHostElement = true;
     }
   }
 
   ngOnDestroy(): void {
-    this.resizeObserverService.unobserve(this.elementRef);
-    this.renderer.removeChild(this.elementRef.nativeElement, this.hostElementClone);
+    if (this.isObservingHostElement) {
+      this.resizeObserverService.unobserve(this.elementRef);
+      if (this.hostElementClone) {
+        this.renderer.removeChild(this.elementRef.nativeElement, this.hostElementClone);
+      }
+    }
   }
 
   private getFontSize(size): string {
