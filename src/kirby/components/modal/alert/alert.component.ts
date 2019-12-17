@@ -1,4 +1,5 @@
 import { Component, ElementRef, ViewChild, AfterViewInit, HostBinding, Input } from '@angular/core';
+import { Observable, of } from 'rxjs';
 
 import { IModalController } from '../services/modal.controller.interface';
 
@@ -11,8 +12,18 @@ export class AlertComponent implements AfterViewInit {
   @ViewChild('alertWrapper', { static: true }) private alertWrapper: ElementRef;
   private scrollY: number = Math.abs(window.scrollY);
 
-  @Input() title: string;
-  @Input() message: string;
+  title$: Observable<string>;
+  @Input()
+  set title(title: string | Observable<string>) {
+    this.title$ = typeof title === 'string' ? of(title) : title;
+  }
+
+  message$: Observable<string>;
+  @Input()
+  set message(message: string & Observable<string>) {
+    this.message$ = typeof message === 'string' ? of(message) : message;
+  }
+
   @Input() iconName: string;
   @Input() iconThemeColor: string;
   @Input() okBtnText: string;

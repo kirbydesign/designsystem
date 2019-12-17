@@ -1,6 +1,8 @@
+import { Observable } from 'rxjs';
+
 export interface AlertConfig {
-  title: string;
-  message?: string;
+  title: string | Observable<string>;
+  message?: string | Observable<string>;
 
   /**
    * @deprecated Will be deprecated in next major version. Use `okBtn` instead.

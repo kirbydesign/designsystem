@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
+
+import { FitHeadingModule } from '@kirbydesign/designsystem/directives/fit-heading/fit-heading.module';
 import {
   PageComponent,
   PageActionsComponent,
@@ -21,7 +23,7 @@ import {
     PageTitleDirective,
     PageToolbarTitleDirective,
   ],
-  imports: [CommonModule, IonicModule],
+  imports: [CommonModule, IonicModule, FitHeadingModule],
   exports: [
     PageComponent,
     PageActionsComponent,
@@ -30,6 +32,7 @@ import {
     PageContentDirective,
     PageTitleDirective,
     PageToolbarTitleDirective,
+    FitHeadingModule,
   ],
 })
 export class PageModule {}

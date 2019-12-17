@@ -9,18 +9,19 @@ import { AlertExampleComponent } from '~/app/examples/alert-example/alert-exampl
   preserveWhitespaces: true,
 })
 export class AlertShowcaseComponent {
-  exampleConfiguration: string = AlertExampleComponent.alertConfigWithIcon;
+  alertConfigWithIcon: string = AlertExampleComponent.alertConfigWithIcon;
+  alertConfigWithDynamicValues: string = AlertExampleComponent.alertConfigWithDynamicValues;
   properties: ShowcaseProperty[] = [
     {
       name: 'title',
       description: 'The title of the alert',
-      inputValues: ['string'],
+      inputValues: ['string | Observable<string>'],
     },
     {
       name: 'message',
       description:
         "(Optional) The message shown under the title (or icon if specified). Use '\\n' for newline.",
-      inputValues: ['string'],
+      inputValues: ['string | Observable<string>'],
     },
     {
       name: 'icon',

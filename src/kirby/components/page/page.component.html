@@ -65,7 +65,7 @@
 </ion-content>
 
 <ng-template #defaultPageTitleTemplate>
-  <h1>
+  <h1 [kirbyFitHeading]="fitHeadingConfig">
     <ng-container *ngTemplateOutlet="simpleTitleTemplate"></ng-container>
   </h1>
 </ng-template>
