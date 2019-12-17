@@ -15,13 +15,13 @@ export class AlertShowcaseComponent {
     {
       name: 'title',
       description: 'The title of the alert',
-      inputValues: ['string | Observable(string)'],
+      inputValues: ['string | Observable<string>'],
     },
     {
       name: 'message',
       description:
         "(Optional) The message shown under the title (or icon if specified). Use '\\n' for newline.",
-      inputValues: ['string | Observable(string)'],
+      inputValues: ['string | Observable<string>'],
     },
     {
       name: 'icon',
