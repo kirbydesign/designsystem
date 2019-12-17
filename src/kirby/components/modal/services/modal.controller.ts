@@ -4,13 +4,16 @@ import { IModalController } from './modal.controller.interface';
 import { ModalHelper } from './modal.helper';
 import { AlertHelper } from './alert.helper';
 import { ActionSheetHelper } from './action-sheet.helper';
-import { ModalConfig } from '../modal-wrapper/config/modal-config';
 import { ActionSheetConfig } from '../action-sheet/config/action-sheet-config';
 import { AlertConfig } from '../alert/config/alert-config';
+import { KirbyAnimation } from '@kirbydesign/designsystem/animation/kirby-animation';
+import { ModalConfig } from '@kirbydesign/designsystem/modal';
+import { Modal } from './modal.model';
 
 @Injectable()
 export class ModalController implements IModalController {
-  private modals: { close: (data?: any) => {} }[] = [];
+  private modals: Modal[] = [];
+  private readonly noModalRegisteredErrorMessage = 'No modal windows are currently registered';
 
   constructor(
     private modalHelper: ModalHelper,
@@ -63,16 +66,32 @@ export class ModalController implements IModalController {
     this.modalHelper.blurNativeWrapper(nativeElement);
   }
 
-  public register(modal: { close: (data?: any) => {} }): void {
+  public register(modal: Modal): void {
     this.modals.push(modal);
   }
 
   public hideTopmost(data?: any): void {
     const modal = this.modals[this.modals.length - 1];
     if (!modal) {
-      throw new Error('No modal windows are currently registered');
+      throw new Error(this.noModalRegisteredErrorMessage);
     }
     modal.close(data);
+  }
+
+  public scrollToTop(duration?: KirbyAnimation.Duration) {
+    const modal = this.modals[this.modals.length - 1];
+    if (!modal) {
+      throw new Error(this.noModalRegisteredErrorMessage);
+    }
+    modal.scrollToTop(duration);
+  }
+
+  public scrollToBottom(duration?: KirbyAnimation.Duration) {
+    const modal = this.modals[this.modals.length - 1];
+    if (!modal) {
+      throw new Error(this.noModalRegisteredErrorMessage);
+    }
+    modal.scrollToBottom(duration);
   }
 
   private forgetTopmost(): void {

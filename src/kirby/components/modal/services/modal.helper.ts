@@ -6,6 +6,7 @@ import { ModalConfig } from '../modal-wrapper/config/modal-config';
 import { ModalWrapperComponent } from '../modal-wrapper/modal-wrapper.component';
 import { KirbyAnimation } from '@kirbydesign/designsystem/animation/kirby-animation';
 import { ModalConfigHelper } from '../modal-wrapper/config/modal-config.helper';
+import { Modal } from './modal.model';
 
 @Injectable()
 export class ModalHelper {
@@ -13,10 +14,16 @@ export class ModalHelper {
 
   public async showModalWindow(
     config: ModalConfig,
-    registerModal: (modal: { close: (data?: any) => {} }) => void
+    registerModal: (modal: Modal) => void
   ): Promise<any> {
+    const modal: Modal = {
+      close: (data?: any) => null,
+      scrollToTop: () => null,
+      scrollToBottom: () => null,
+    };
     const mergedConfig = this.mergeDefaultConfig(config);
-    const modal = await this.ionicModalController.create({
+    mergedConfig.modal = modal;
+    const ionModal = await this.ionicModalController.create({
       component: ModalWrapperComponent,
       cssClass: ['kirby-modal', config.flavor === 'drawer' ? 'kirby-drawer' : null],
       componentProps: { config: mergedConfig },
@@ -34,10 +41,11 @@ export class ModalHelper {
       ),
     });
 
-    registerModal({ close: modal.dismiss.bind(modal) });
+    modal.close = ionModal.dismiss.bind(ionModal);
+    registerModal(modal);
 
-    modal.present();
-    return modal.onDidDismiss();
+    ionModal.present();
+    return ionModal.onDidDismiss();
   }
 
   private static animateIn(

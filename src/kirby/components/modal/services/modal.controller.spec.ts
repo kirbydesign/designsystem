@@ -26,7 +26,11 @@ describe('modalController', () => {
     });
 
     it('should succesfully invoke a registered callback', () => {
-      modalController.register({ close: mockCallback });
+      modalController.register({
+        close: mockCallback,
+        scrollToTop: () => {},
+        scrollToBottom: () => {},
+      });
       expect(() => {
         modalController.hideTopmost();
       }).not.toThrow();
@@ -36,6 +40,22 @@ describe('modalController', () => {
       expect(() => {
         modalController.hideAll;
       }).not.toThrow();
+    });
+
+    describe('scrollToTop', () => {
+      it('should throw an error when scrolling to top, when no modals have been opened', () => {
+        expect(() => {
+          modalController.scrollToTop();
+        }).toThrow(expectedError);
+      });
+    });
+
+    describe('scrollToBottom', () => {
+      it('should throw an error when scrolling to bottom, when no modals have been opened', () => {
+        expect(() => {
+          modalController.scrollToBottom();
+        }).toThrow(expectedError);
+      });
     });
   });
 });

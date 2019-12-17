@@ -8,10 +8,18 @@ import { ButtonComponent } from '../../button/button.component';
 import { IconComponent } from '../../icon/icon.component';
 import { ModalWrapperComponent } from './modal-wrapper.component';
 import { IModalController } from '../services/modal.controller.interface';
+import { KirbyAnimation } from '@kirbydesign/designsystem/animation/kirby-animation';
+import { Modal } from '../services/modal.model';
 
 describe('ModalWrapperComponent', () => {
   let component: ModalWrapperComponent;
   let fixture: ComponentFixture<ModalWrapperComponent>;
+  let navParamsSpy: jasmine.SpyObj<NavParams>;
+  const modal = {
+    close: () => {},
+    scrollToTop: () => {},
+    scrollToBottom: () => {},
+  } as Modal;
 
   beforeEach(async(() => {
     const modalControllerSpy = jasmine.createSpyObj('IModalController', [
@@ -21,13 +29,18 @@ describe('ModalWrapperComponent', () => {
       'blurNativeWrapper',
     ]);
 
-    const navParamsSpy = jasmine.createSpyObj('NavParams', {
+    navParamsSpy = jasmine.createSpyObj('NavParams', {
       get: {
         title: 'Test title',
         component: undefined,
         flavor: 'modal',
+        modal,
       },
     });
+
+    navParamsSpy.data = {
+      config: {},
+    } as any;
 
     TestBed.configureTestingModule({
       declarations: [
@@ -130,6 +143,52 @@ describe('ModalWrapperComponent', () => {
       expect(elements[1].componentInstance.name).toBe('qr');
       elements[1].parent.triggerEventHandler('click', 'test');
       expect(component.config.drawerSupplementaryAction.action).toHaveBeenCalledWith('test');
+    });
+  });
+
+  describe('scrollToTop', () => {
+    it('should scroll to top with no scroll animation duration', () => {
+      const ionContentElement = fixture.debugElement.query(By.css('ion-content'));
+      const ionContent: IonContent = ionContentElement.componentInstance;
+      spyOn(ionContent, 'scrollToTop');
+
+      modal.scrollToTop();
+
+      expect(ionContent.scrollToTop).toHaveBeenCalledWith(0);
+    });
+
+    it('should scroll to top with provided scroll animation duration', () => {
+      const animationDuration = KirbyAnimation.Duration.LONG;
+      const ionContentElement = fixture.debugElement.query(By.css('ion-content'));
+      const ionContent: IonContent = ionContentElement.componentInstance;
+      spyOn(ionContent, 'scrollToTop');
+
+      modal.scrollToTop(animationDuration);
+
+      expect(ionContent.scrollToTop).toHaveBeenCalledWith(animationDuration);
+    });
+  });
+
+  describe('scrollToBottom', () => {
+    it('should scroll to bottom with no scroll animation duration', () => {
+      const ionContentElement = fixture.debugElement.query(By.css('ion-content'));
+      const ionContent: IonContent = ionContentElement.componentInstance;
+      spyOn(ionContent, 'scrollToBottom');
+
+      modal.scrollToBottom();
+
+      expect(ionContent.scrollToBottom).toHaveBeenCalledWith(0);
+    });
+
+    it('should scroll to bottom with provided scroll animation duration', () => {
+      const animationDuration = KirbyAnimation.Duration.LONG;
+      const ionContentElement = fixture.debugElement.query(By.css('ion-content'));
+      const ionContent: IonContent = ionContentElement.componentInstance;
+      spyOn(ionContent, 'scrollToBottom');
+
+      modal.scrollToBottom(animationDuration);
+
+      expect(ionContent.scrollToBottom).toHaveBeenCalledWith(animationDuration);
     });
   });
 });

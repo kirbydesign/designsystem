@@ -1,9 +1,11 @@
 import { DrawerSupplementaryAction } from './drawer-supplementary-action';
 import { KirbyAnimation } from '@kirbydesign/designsystem/animation/kirby-animation';
+import { Modal } from '../../services/modal.model';
 
 export interface ModalConfig {
   title: string;
   component: any;
+  modal?: Modal;
   flavor?: 'modal' | 'drawer';
   dim?: number;
   componentProps?: { [key: string]: any };
