@@ -22,8 +22,8 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
   // tslint:disable-next-line:no-input-rename
   @Input('kirbyFitHeading') config?: FitHeadingConfig;
 
+  private hostElementClone: Element;
   private previousWidth: number;
-  private clone: Element;
   private isScalingHeader: boolean; // used to prevent resizeObserver to trigger on font scaling by this.scaleHeader()
   private scssVariables: any = require('sass-extract-loader!../../scss/base/_variables.scss');
   private headingSizes: HeadingSize[] = [
@@ -58,7 +58,7 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.resizeObserverService.unobserve(this.elementRef);
-    this.renderer.removeChild(this.elementRef.nativeElement, this.clone);
+    this.renderer.removeChild(this.elementRef.nativeElement, this.hostElementClone);
   }
 
   private getFontSize(size): string {
@@ -116,12 +116,16 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
   private scaleHeader(): void {
     this.isScalingHeader = true;
 
-    if (!this.clone) {
-      this.clone = this.generateClone();
-      this.renderer.appendChild(this.elementRef.nativeElement, this.clone);
+    if (!this.hostElementClone) {
+      this.hostElementClone = this.generateHostElementClone();
+      this.renderer.appendChild(this.elementRef.nativeElement, this.hostElementClone);
     }
 
-    this.renderer.setStyle(this.clone, 'width', `${this.elementRef.nativeElement.clientWidth}px`);
+    this.renderer.setStyle(
+      this.hostElementClone,
+      'width',
+      `${this.elementRef.nativeElement.clientWidth}px`
+    );
 
     const fallbackSize = this.headingSizes[this.headingSizes.length - 1];
     const fittedSize = this.headingSizes.find(this.canFitHeading.bind(this)) || fallbackSize;
@@ -131,12 +135,12 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
   }
 
   private canFitHeading(size: HeadingSize) {
-    this.setSize(this.clone, size);
-    const lines = this.clone.clientHeight / parseInt(size.lineHeight);
+    this.setSize(this.hostElementClone, size);
+    const lines = this.hostElementClone.clientHeight / parseInt(size.lineHeight);
     return lines <= this.config.maxLines;
   }
 
-  private generateClone(): Element {
+  private generateHostElementClone(): Element {
     const clone = this.elementRef.nativeElement.cloneNode(true);
     this.renderer.setStyle(clone, 'position', 'absolute');
     this.renderer.setStyle(clone, 'visibility', 'hidden');
