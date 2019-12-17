@@ -73,6 +73,7 @@ import { AppComponent } from '@kirbydesign/designsystem/components/app/app.compo
 import { CalendarComponent } from '@kirbydesign/designsystem/components/calendar/calendar.component';
 import { ItemComponent } from '../components/item/item.component';
 import { LabelComponent } from '../components/item/label/label.component';
+import { FitHeadingDirective } from '@kirbydesign/designsystem/directives/fit-heading/fit-heading.directive';
 
 const MOCK_COMPONENTS = MockComponents(
   AvatarComponent,
@@ -144,7 +145,8 @@ const MOCK_DIRECTIVES = MockDirectives(
   PageTitleDirective,
   PageToolbarTitleDirective,
   PageActionsDirective,
-  PageContentDirective
+  PageContentDirective,
+  FitHeadingDirective
 );
 
 function modalControllerFactory() {

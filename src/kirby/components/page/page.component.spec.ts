@@ -2,8 +2,10 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
+import { MockDirective } from 'ng-mocks';
 
 import { PageComponent } from './page.component';
+import { FitHeadingDirective } from '@kirbydesign/designsystem/directives/fit-heading/fit-heading.directive';
 
 describe('PageComponent', () => {
   let component: PageComponent;
@@ -12,7 +14,7 @@ describe('PageComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [NoopAnimationsModule, RouterTestingModule],
-      declarations: [PageComponent],
+      declarations: [PageComponent, MockDirective(FitHeadingDirective)],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   }));
