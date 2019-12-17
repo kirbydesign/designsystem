@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { timer, of, Subject } from 'rxjs';
+import { map, takeWhile, takeUntil } from 'rxjs/operators';
 
 import { ModalController } from '@kirbydesign/designsystem/modal';
 import { AlertConfig } from '@kirbydesign/designsystem/modal';
@@ -21,7 +23,7 @@ export class AlertExampleComponent {
   static readonly alertConfigWithIcon = `const config: AlertConfig = ${AlertExampleComponent.stringify(
     alertConfigWithIcon
   )}
-
+  
 this.modalController.showAlert(config);`;
 
   private static stringify(value: any): string {
@@ -30,6 +32,25 @@ this.modalController.showAlert(config);`;
       .replace(/"/g, "'");
   }
 
+  private alertClose$ = new Subject();
+
+  static readonly alertConfigWithDynamicValues = `const title$ = of('Need more time?');
+  const message$ = remainingSeconds$.pipe(
+    map((remainingSeconds) => \`Time remaining: \${remainingSeconds}\`)
+  );
+
+  const config: AlertConfig = {
+    title: title$,
+    icon: {
+      name: 'clock',
+      themeColor: 'warning',
+    },
+    message: message$,
+    okBtn: 'Logout',
+    cancelBtn: 'Take me back',
+  };
+  
+  this.modalController.showAlert(config);`;
   constructor(private modalController: ModalController, private toastController: ToastController) {}
 
   showAlert() {
@@ -76,6 +97,36 @@ this.modalController.showAlert(config);`;
     this.modalController.showAlert(config, this.onAlertClosed.bind(this));
   }
 
+  showAlertWithDynamicValues() {
+    const countdownTimeInSeconds = 60;
+    const countdownTimeInMs = countdownTimeInSeconds * 1000;
+    const intervalInMs = 1000;
+    const toRemainingTimeInMs = (count: number) => countdownTimeInMs - count * intervalInMs;
+    const toSeconds = (timeInMs: number) => Math.ceil(timeInMs / 1000);
+
+    const remainingTime$ = timer(0, intervalInMs).pipe(
+      map(toRemainingTimeInMs),
+      takeUntil(this.alertClose$),
+      takeWhile((countdownTimeInMs) => countdownTimeInMs >= 0)
+    );
+
+    const title$ = of('Need more time?');
+    const message$ = remainingTime$.pipe(
+      map((remainingTimeInMs) => `Time remaining: ${toSeconds(remainingTimeInMs)}`)
+    );
+    const config: AlertConfig = {
+      title: title$,
+      icon: {
+        name: 'clock',
+        themeColor: 'warning',
+      },
+      message: message$,
+      okBtn: 'Logout',
+      cancelBtn: 'Take me back',
+    };
+    this.modalController.showAlert(config, this.onAlertClosed.bind(this));
+  }
+
   private onAlertClosed(result?: boolean) {
     const config: ToastConfig = {
       message: `Alert selection: ${result}`,
@@ -83,6 +134,7 @@ this.modalController.showAlert(config);`;
       durationInMs: 1500,
     };
     this.toastController.showToast(config);
+    this.alertClose$.next();
   }
 
   private onAlertDestructiveClosed(result?: boolean) {

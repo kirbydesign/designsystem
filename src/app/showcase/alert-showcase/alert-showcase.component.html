@@ -4,7 +4,16 @@
   <p>
     To show an alert, inject the Kirby <code>modalController</code> in your constructor, create an
     <code>AlertConfig</code> and pass it to <code>modalController.showAlert</code>.
-    <kirby-code-viewer [ts]="exampleConfiguration"></kirby-code-viewer>
+    <kirby-code-viewer [ts]="alertConfigWithIcon"></kirby-code-viewer>
+  </p>
+  <p>
+    <code>title</code> and <code>message</code> properties in <code>AlertConfig</code> also accept
+    an Observable for dynamic values:<br />
+    <em
+      >(see "Example on github" for implementation details of the
+      <code>remainingSeconds$</code> timer)</em
+    >:
+    <kirby-code-viewer [ts]="alertConfigWithDynamicValues"></kirby-code-viewer>
   </p>
   <p>
     <em>[Optional]</em> If you need to obtain data back from the alert, you can pass a callback

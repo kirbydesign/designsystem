@@ -1,9 +1,9 @@
 <article #alertWrapper>
-  <h3 class="title">{{ title }}</h3>
+  <h3 class="title">{{ title$ | async }}</h3>
   <kirby-empty-state
     [iconName]="iconName"
     [themeColor]="iconThemeColor"
-    [subtitle]="message"
+    [subtitle]="message$ | async"
   ></kirby-empty-state>
   <div class="buttongroup">
     <button
