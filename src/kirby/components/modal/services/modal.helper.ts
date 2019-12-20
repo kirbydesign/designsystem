@@ -4,6 +4,7 @@ import { Animation } from '@ionic/core';
 
 import { ModalConfig } from '../modal-wrapper/config/modal-config';
 import { ModalWrapperComponent } from '../modal-wrapper/modal-wrapper.component';
+import { ModalCompactWrapperComponent } from '../modal-wrapper/compact/modal-compact-wrapper.component';
 import { KirbyAnimation } from '@kirbydesign/designsystem/animation/kirby-animation';
 import { ModalConfigHelper } from '../modal-wrapper/config/modal-config.helper';
 import { Modal } from './modal.model';
@@ -24,8 +25,13 @@ export class ModalHelper {
     const mergedConfig = this.mergeDefaultConfig(config);
     mergedConfig.modal = modal;
     const ionModal = await this.ionicModalController.create({
-      component: ModalWrapperComponent,
-      cssClass: ['kirby-modal', config.flavor === 'drawer' ? 'kirby-drawer' : null],
+      component: config.flavor === 'compact' ? ModalCompactWrapperComponent : ModalWrapperComponent,
+      cssClass: [
+        'kirby-modal',
+        config.flavor === 'drawer' ? 'kirby-drawer' : null,
+        config.flavor === 'compact' ? 'kirby-modal-compact' : null,
+      ],
+      backdropDismiss: config.flavor === 'compact' ? false : true,
       componentProps: { config: mergedConfig },
       enterAnimation: ModalHelper.animateIn.bind(
         this,

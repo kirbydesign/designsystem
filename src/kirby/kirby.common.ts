@@ -28,6 +28,7 @@ import {
 import { GroupByPipe } from './components/list/pipes/group-by.pipe';
 import { ActionSheetComponent } from './components/modal/action-sheet/action-sheet.component';
 import { ModalWrapperComponent } from './components/modal/modal-wrapper/modal-wrapper.component';
+import { ModalCompactWrapperComponent } from './components/modal/modal-wrapper/compact/modal-compact-wrapper.component';
 import { ActionSheetHelper } from './components/modal/services/action-sheet.helper';
 import { AlertHelper } from './components/modal/services/alert.helper';
 import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
@@ -77,6 +78,7 @@ export const declarations = [
   CalendarComponent,
   CheckboxComponent,
   ModalWrapperComponent,
+  ModalCompactWrapperComponent,
   ActionSheetComponent,
   SegmentedControlComponent,
   ChipComponent,

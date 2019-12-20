@@ -23,6 +23,14 @@
   --border-radius: 0;
   position: fixed;
 
+  &.kirby-modal-compact {
+    .modal-wrapper {
+      max-width: $compact-modal-max-width;
+      height: auto;
+      text-align: center;
+    }
+  }
+
   &.kirby-drawer {
     padding-top: calc(var(--ion-safe-area-top, 0) + #{size('m')});
 
@@ -74,7 +82,7 @@
   --box-shadow: #{get-elevation(8)};
 
   .modal-wrapper {
-    max-width: 330px;
+    max-width: $alert-max-width;
     height: auto;
     text-align: center;
   }
