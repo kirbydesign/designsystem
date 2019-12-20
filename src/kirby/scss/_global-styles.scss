@@ -24,6 +24,8 @@
   position: fixed;
 
   &.kirby-modal-compact {
+    --border-radius: #{$border-radius};
+
     .modal-wrapper {
       max-width: $compact-modal-max-width;
       height: auto;
