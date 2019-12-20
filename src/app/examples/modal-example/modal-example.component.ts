@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 import { ModalConfig, ModalController } from '@kirbydesign/designsystem/modal';
 import { FirstEmbeddedModalExampleComponent } from './first-embedded-modal-example/first-embedded-modal-example.component';
+import { ModalCompactExampleComponent } from './compact-example/modal-compact-example.component';
 
 @Component({
   selector: 'kirby-modal-example',
@@ -19,6 +20,16 @@ export class ModalExampleComponent {
         prop1: 'value1',
         prop2: 'value2',
       },
+    };
+
+    this.modalController.showModal(config, this.onModalClose);
+  }
+
+  showCompact() {
+    const config: ModalConfig = {
+      title: null,
+      flavor: 'compact',
+      component: ModalCompactExampleComponent,
     };
 
     this.modalController.showModal(config, this.onModalClose);

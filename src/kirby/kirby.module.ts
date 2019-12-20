@@ -7,6 +7,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { declarations, providerDeclarations } from './kirby.common';
 import { InfiniteScrollDirective } from './components/list/directives/infinite-scroll.directive';
 import { ModalWrapperComponent } from './components/modal/modal-wrapper/modal-wrapper.component';
+import { ModalCompactWrapperComponent } from './components/modal/modal-wrapper/compact/modal-compact-wrapper.component';
 import { ActionSheetComponent } from './components/modal/action-sheet/action-sheet.component';
 import { KeyHandlerDirective } from '@kirbydesign/designsystem/directives/key-handler/key-handler.directive';
 import { FullscreenLoadingOverlayComponent } from './components/loading-overlay/fullscreen-loading-overlay/fullscreen-loading-overlay.component';
@@ -49,6 +50,7 @@ import { ItemModule } from '@kirbydesign/designsystem/components/item/item.modul
   providers: [...providerDeclarations],
   entryComponents: [
     ModalWrapperComponent,
+    ModalCompactWrapperComponent,
     ActionSheetComponent,
     FullscreenLoadingOverlayComponent,
     AlertComponent,

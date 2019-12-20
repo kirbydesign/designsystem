@@ -28,9 +28,9 @@ export class ModalShowcaseComponent {
     {
       name: 'flavor',
       description:
-        "The flavor of the modal. Modals with 'modal' flavor fade-in/out and have a close button placed in the top right corner. Modals with a 'drawer' flavor slide-up/down and have a arrow-down button placed in the top left corner.",
+        "The flavor of the modal. Modals with 'modal' flavor fade-in/out and have a close button placed in the top right corner. Modals with a 'compact' flavor simply render the specified component, similar to alerts. As there a toolbar or close button, you should handle closing the modal yourself. Modals with a 'drawer' flavor slide-up/down and have a arrow-down button placed in the top left corner.",
       defaultValue: 'modal',
-      inputValues: ['modal', 'drawer'],
+      inputValues: ['modal', 'drawer', 'compact'],
     },
     {
       name: 'drawerSupplementaryAction',

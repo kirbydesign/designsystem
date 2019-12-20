@@ -1,0 +1,8 @@
+@import '../../../../scss/utils';
+
+// Global modal styling can be found at scss/base/_ionic.scss
+
+:host {
+  display: block;
+  padding: size('m') size('s');
+}

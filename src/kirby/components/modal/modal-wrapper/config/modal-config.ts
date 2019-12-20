@@ -6,7 +6,7 @@ export interface ModalConfig {
   title: string;
   component: any;
   modal?: Modal;
-  flavor?: 'modal' | 'drawer';
+  flavor?: 'modal' | 'drawer' | 'compact';
   dim?: number;
   componentProps?: { [key: string]: any };
   // the supplementary action is only available in the drawer
