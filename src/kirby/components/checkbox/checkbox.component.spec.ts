@@ -1,4 +1,4 @@
-import { Spectator, createTestComponentFactory } from '@ngneat/spectator';
+import { Spectator, createComponentFactory } from '@ngneat/spectator';
 import { IonCheckbox } from '@ionic/angular';
 
 import { MockComponent } from 'ng-mocks';
@@ -14,7 +14,7 @@ describe('CheckboxComponent', () => {
 
   let spectator: Spectator<CheckboxComponent>;
 
-  const createHost = createTestComponentFactory({
+  const createHost = createComponentFactory({
     component: CheckboxComponent,
     declarations: [MockComponent(ionic.IonCheckbox)],
   });

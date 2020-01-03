@@ -1,4 +1,4 @@
-import { createTestComponentFactory, Spectator } from '@ngneat/spectator';
+import { createComponentFactory, Spectator } from '@ngneat/spectator';
 import { MockComponent } from 'ng-mocks';
 import * as ionic from '@ionic/angular';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -33,7 +33,7 @@ describe('ListComponent', () => {
     spectator.detectChanges();
   }
 
-  const createHost = createTestComponentFactory({
+  const createHost = createComponentFactory({
     component: ListComponent,
     declarations: [
       ListComponent,

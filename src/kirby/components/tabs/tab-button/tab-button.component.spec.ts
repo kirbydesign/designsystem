@@ -1,4 +1,4 @@
-import { Spectator, createTestComponentFactory } from '@ngneat/spectator';
+import { Spectator, createComponentFactory } from '@ngneat/spectator';
 import { MockComponent, MockModule } from 'ng-mocks';
 import { IonicModule } from '@ionic/angular';
 
@@ -8,7 +8,7 @@ import { IconComponent } from '@kirbydesign/designsystem/components/icon/icon.co
 describe('TabsComponent', () => {
   let spectator: Spectator<TabButtonComponent>;
 
-  const createHost = createTestComponentFactory({
+  const createHost = createComponentFactory({
     imports: [MockModule(IonicModule)],
     component: TabButtonComponent,
     declarations: [MockComponent(IconComponent)],
