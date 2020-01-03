@@ -1,4 +1,4 @@
-import { Spectator, createTestComponentFactory } from '@netbasal/spectator';
+import { Spectator, createTestComponentFactory } from '@ngneat/spectator';
 import { MockComponent, MockModule } from 'ng-mocks';
 import { IonicModule } from '@ionic/angular';
 
