@@ -43,7 +43,7 @@ export class IphoneComponent implements OnChanges, AfterViewInit {
     ionApp.style.setProperty('--ion-safe-area-top', '20px');
     ionApp.style.setProperty('--ion-safe-area-bottom', '22px');
 
-    const backgroundColor = ColorHelper.getBackgroundColor().hex;
+    const backgroundColor = ColorHelper.getBackgroundColorRgbString();
     this.renderer.setStyle(ionApp, 'background', backgroundColor);
   }
 }
