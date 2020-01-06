@@ -68,6 +68,17 @@
   <a href="#" (click)="scrollTo(flagged)">this example</a>.
 </p>
 
+<h2>Sizes</h2>
+<kirby-example-viewer [html]="simpleExampleLarge.template">
+  <kirby-item-example-simple #simpleExampleLarge></kirby-item-example-simple>
+</kirby-example-viewer>
+<kirby-example-viewer [html]="simpleExampleMedium.template">
+  <kirby-item-example-simple-md #simpleExampleMedium></kirby-item-example-simple-md>
+</kirby-example-viewer>
+<kirby-example-viewer [html]="simpleExampleSmall.template">
+  <kirby-item-example-simple-sm #simpleExampleSmall></kirby-item-example-simple-sm>
+</kirby-example-viewer>
+
 <h2>Simple</h2>
 <h3>Default</h3>
 <kirby-example-viewer [html]="simpleExample.template">
