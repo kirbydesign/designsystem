@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 
 const config = {
-  selector: 'kirby-item-example-simple-medium',
-  template: `<kirby-item [size]="md">
-  <h3>Title</h3>
-  <data slot="end">Value</data>
+  selector: 'kirby-item-example-simple-tiny',
+  template: `<kirby-item [size]="tiny">
+  <h3>Size</h3>
+  <data slot="end">Tiny</data>
 </kirby-item>`,
 };
 
@@ -12,6 +12,6 @@ const config = {
   selector: config.selector,
   template: config.template,
 })
-export class ItemExampleSimpleMediumComponent {
+export class ItemExampleSimpleTinyComponent {
   template: string = config.template;
 }
