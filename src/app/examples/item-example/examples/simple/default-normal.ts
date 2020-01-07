@@ -4,7 +4,7 @@ const config = {
   selector: 'kirby-item-example-simple-normal',
   template: `<kirby-item size="normal">
   <h3>Size</h3>
-  <data slot="end">Normal</data>
+  <data slot="end">Normal (default)</data>
 </kirby-item>`,
 };
 
