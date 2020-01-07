@@ -7,10 +7,9 @@
 
   ion-item {
     font-size: font-size('s');
+    --min-height: 0;
     --padding-start: #{size('s')};
     --inner-padding-end: #{size('s')};
-    --padding-top: #{size('xxs')};
-    --padding-bottom: #{size('xxs')};
     --background: var(--kirby-item-background, #{get-color('white')});
     --background-activated: var(--kirby-item-background-activated, #{get-color('white-shade')});
     --background-focused: var(--kirby-item-background-focused, #{get-color('background-color')});
@@ -35,6 +34,21 @@
     @include slotted(':not([slot])') {
       width: 100%;
     }
+  }
+
+  ion-item.normal {
+    --padding-top: #{size('s')};
+    --padding-bottom: #{size('s')};
+  }
+
+  ion-item.small {
+    --padding-top: #{size('xxs')};
+    --padding-bottom: #{size('xxs')};
+  }
+
+  ion-item.tiny {
+    --padding-top: #{size('xxxs')};
+    --padding-bottom: #{size('xxxs')};
   }
 
   .outside {
