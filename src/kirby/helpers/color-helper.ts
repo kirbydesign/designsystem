@@ -43,7 +43,10 @@ export class ColorHelper {
     }
   }
 
-  private static colorStringToRgbString(color: string) {
+  public static colorStringToRgbString(color: string) {
+    if (color.indexOf('rgb') === 0) {
+      return color;
+    }
     if (color.indexOf('#') === 0) {
       return ColorHelper.hexToRGB(color);
     }
@@ -53,7 +56,10 @@ export class ColorHelper {
     if (color.split(',').length === 4) {
       return `rgba(${color})`;
     }
-    return undefined;
+    const ctx = document.createElement('canvas').getContext('2d');
+    ctx.fillStyle = color;
+    const renderedColor = ctx.fillStyle.toString();
+    return ColorHelper.colorStringToRgbString(renderedColor);
   }
 
   private static rgbToRgbString(color: RgbColor) {
