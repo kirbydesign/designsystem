@@ -9,3 +9,5 @@ export type ThemeColor =
   | 'medium'
   | 'dark'
   | 'white';
+
+export type ThemeColorVariant = 'tint' | 'shade' | 'contrast';
