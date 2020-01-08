@@ -1,15 +1,5 @@
 @import '../../scss/utils';
 
-@mixin button-reset {
-  --kirby-button-background-color: transparent;
-  --kirby-button-border-color: transparent;
-
-  &.destructive {
-    --kirby-button-background-color: transparent;
-    --kirby-button-border-color: transparent;
-  }
-}
-
 @mixin button-sm {
   padding: size('xxxs') size('s') size('xxxs') size('s');
   font-size: font-size('xs');
@@ -65,6 +55,8 @@
 }
 
 @mixin button-attentionlevel4 {
+  --kirby-button-background-color: transparent;
+  --kirby-button-border-color: transparent;
   --kirby-button-color: #{get-color('primary-contrast')};
 
   &.destructive {
@@ -73,7 +65,6 @@
 }
 
 :host {
-  @include button-reset;
   --kirby-button-border-radius: #{$border-radius-round};
   --kirby-button-padding-left: #{size('m')};
   --kirby-button-padding-right: #{size('m')};
@@ -204,7 +195,6 @@
   &.attention-level2,
   &.attention-level3,
   &.attention-level4 {
-    @include button-reset;
     @include button-attentionlevel4;
     @include button-sm;
   }
@@ -218,7 +208,6 @@
   &.attention-level2,
   &.attention-level3,
   &.attention-level4 {
-    @include button-reset;
     @include button-attentionlevel2;
   }
 }
