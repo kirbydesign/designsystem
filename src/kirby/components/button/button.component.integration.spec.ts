@@ -1,7 +1,11 @@
+/// <reference path="../../testing/element-css-custom-matchers.d.ts"/>
+
 import { RouterTestingModule } from '@angular/router/testing';
 import { SpectatorHost, createHostFactory } from '@ngneat/spectator';
 import { IonicModule } from '@ionic/angular';
 
+import { TestHelper } from '../../testing/test-helper';
+import { ElementCssCustomMatchers } from '../../testing/element-css-custom-matchers';
 import {
   PageComponent,
   PageContentComponent,
@@ -12,10 +16,8 @@ import {
 } from '../page/page.component';
 import { FitHeadingDirective } from '../../directives/fit-heading/fit-heading.directive';
 import { ButtonComponent } from './button.component';
-import { ColorHelper } from '../../helpers/color-helper';
-import { TestHelper } from '../../testing/test-helper';
 
-fdescribe('ButtonComponent in Kirby Page', () => {
+describe('ButtonComponent in Kirby Page', () => {
   let spectator: SpectatorHost<PageComponent>;
   const createHost = createHostFactory({
     component: PageComponent,
@@ -33,6 +35,7 @@ fdescribe('ButtonComponent in Kirby Page', () => {
   });
 
   beforeEach(() => {
+    jasmine.addMatchers(ElementCssCustomMatchers);
     spectator = createHost<PageComponent>(
       `<kirby-page>
         <ng-template kirbyPageTitle>
@@ -70,18 +73,19 @@ fdescribe('ButtonComponent in Kirby Page', () => {
       expect(actionButtonInHeader).toBeTruthy();
     });
 
-    it('should render with correct background-color', async () => {
+    it('should render with no background-color', async () => {
       await TestHelper.whenHydrated(ionToolbar);
-      const expectedBgColor = ColorHelper.getTransparentColorRgbString();
-      const actualBgColor = TestHelper.getCssProperty(actionButtonInHeader, 'background-color');
-      expect(actualBgColor).toEqual(expectedBgColor);
+      expect(actionButtonInHeader).toHaveBackgroundColor('transparent');
+    });
+
+    it('should render with no border-color', async () => {
+      await TestHelper.whenHydrated(ionToolbar);
+      expect(actionButtonInHeader).toHaveBorderColor('transparent');
     });
 
     it('should render with correct color', async () => {
       await TestHelper.whenHydrated(ionToolbar);
-      const expectedColor = ColorHelper.getThemeColorRgbString('primary-contrast');
-      const actualColor = TestHelper.getCssProperty(actionButtonInHeader, 'color');
-      expect(actualColor).toEqual(expectedColor);
+      expect(actionButtonInHeader).toHaveThemeColor('primary', 'contrast');
     });
   });
 
@@ -102,16 +106,17 @@ fdescribe('ButtonComponent in Kirby Page', () => {
 
     it('should render with correct background-color', async () => {
       await TestHelper.whenHydrated(ionContent);
-      const expectedBgColor = ColorHelper.getThemeColorRgbString('white');
-      const actualBgColor = TestHelper.getCssProperty(actionButtonInPage, 'background-color');
-      expect(actualBgColor).toEqual(expectedBgColor);
+      expect(actionButtonInPage).toHaveThemeBackgroundColor('white');
+    });
+
+    it('should render with correct border-color', async () => {
+      await TestHelper.whenHydrated(ionContent);
+      expect(actionButtonInPage).toHaveThemeBorderColor('white');
     });
 
     it('should render with correct color', async () => {
       await TestHelper.whenHydrated(ionContent);
-      const expectedColor = ColorHelper.getThemeColorRgbString('white-contrast');
-      const actualColor = TestHelper.getCssProperty(actionButtonInPage, 'color');
-      expect(actualColor).toEqual(expectedColor);
+      expect(actionButtonInPage).toHaveThemeColor('white', 'contrast');
     });
   });
 
@@ -130,16 +135,17 @@ fdescribe('ButtonComponent in Kirby Page', () => {
 
     it('should render with correct background-color', async () => {
       await TestHelper.whenHydrated(ionContent);
-      const expectedBgColor = ColorHelper.getThemeColorRgbString('primary');
-      const actualBgColor = TestHelper.getCssProperty(normalButtonInPage, 'background-color');
-      expect(actualBgColor).toEqual(expectedBgColor);
+      expect(normalButtonInPage).toHaveThemeBackgroundColor('primary');
+    });
+
+    it('should render with correct border-color', async () => {
+      await TestHelper.whenHydrated(ionContent);
+      expect(normalButtonInPage).toHaveThemeBorderColor('primary');
     });
 
     it('should render with correct color', async () => {
       await TestHelper.whenHydrated(ionContent);
-      const expectedColor = ColorHelper.getThemeColorRgbString('primary-contrast');
-      const actualColor = TestHelper.getCssProperty(normalButtonInPage, 'color');
-      expect(actualColor).toEqual(expectedColor);
+      expect(normalButtonInPage).toHaveThemeColor('primary', 'contrast');
     });
   });
 });

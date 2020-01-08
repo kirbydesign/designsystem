@@ -3,9 +3,9 @@
 import { MockComponent } from 'ng-mocks';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
-import { ButtonComponent } from './button.component';
+import { ElementCssCustomMatchers } from '../../testing/element-css-custom-matchers';
 import { IconComponent } from '../icon/icon.component';
-import { ElementCssCustomMatchers } from '@kirbydesign/designsystem/testing/element-css-custom-matchers';
+import { ButtonComponent } from './button.component';
 
 describe('ButtonComponent', () => {
   let spectator: SpectatorHost<ButtonComponent>;
@@ -18,10 +18,10 @@ describe('ButtonComponent', () => {
   });
 
   beforeEach(() => {
+    jasmine.addMatchers(ElementCssCustomMatchers);
     spectator = createHost('<button kirby-button>Test</button>');
     component = spectator.component;
     element = spectator.element as HTMLButtonElement;
-    jasmine.addMatchers(ElementCssCustomMatchers);
   });
 
   it('should create', () => {
@@ -30,6 +30,10 @@ describe('ButtonComponent', () => {
 
   it('should render with correct background-color', () => {
     expect(element).toHaveThemeBackgroundColor('primary');
+  });
+
+  it('should render with correct border-color', () => {
+    expect(element).toHaveThemeBorderColor('primary');
   });
 
   it('should render with correct color', () => {
@@ -43,6 +47,10 @@ describe('ButtonComponent', () => {
 
     it('should render with correct background-color', () => {
       expect(element).toHaveThemeBackgroundColor('light', 'tint');
+    });
+
+    it('should render with correct border-color', () => {
+      expect(element).toHaveThemeBorderColor('light', 'tint');
     });
 
     it('should render with correct color', () => {
@@ -60,6 +68,10 @@ describe('ButtonComponent', () => {
       expect(element).toHaveThemeBackgroundColor('primary');
     });
 
+    it('should render with correct border-color', () => {
+      expect(element).toHaveThemeBorderColor('primary');
+    });
+
     it('should render with correct color', () => {
       expect(element).toHaveThemeColor('white', 'contrast');
     });
@@ -75,38 +87,50 @@ describe('ButtonComponent', () => {
       expect(element).toHaveThemeBackgroundColor('white');
     });
 
+    it('should render with correct border-color', () => {
+      expect(element).toHaveThemeBorderColor('white');
+    });
+
     it('should render with correct color', () => {
       expect(element).toHaveThemeColor('white', 'contrast');
     });
   });
 
-  // xdescribe('when configured with attentionlevel 3', () => {
-  //   beforeEach(() => {
-  //     spectator.component.attentionLevel = '3';
-  //     spectator.detectChanges();
-  //   });
+  describe('when configured with attentionlevel 3', () => {
+    beforeEach(() => {
+      spectator.component.attentionLevel = '3';
+      spectator.detectChanges();
+    });
 
-  //   it('should render with correct background-color', () => {
-  //     expect(element).toHaveThemeBackgroundColor('medium');
-  //   });
+    it('should render with no background-color', () => {
+      expect(element).toHaveBackgroundColor('transparent');
+    });
 
-  //   it('should render with correct color', () => {
-  //     expect(element).toHaveThemeColor('medium', 'contrast');
-  //   });
-  // });
+    it('should render with correct border-color', () => {
+      expect(element).toHaveThemeBorderColor('medium');
+    });
 
-  // xdescribe('when configured with attentionlevel 4', () => {
-  //   beforeEach(() => {
-  //     spectator.component.attentionLevel = '4';
-  //     spectator.detectChanges();
-  //   });
+    it('should render with correct color', () => {
+      expect(element).toHaveThemeColor('medium', 'contrast');
+    });
+  });
 
-  //   it('should render with correct background-color', () => {
-  //     expect(element).toHaveBackgroundColor('transparent');
-  //   });
+  describe('when configured with attentionlevel 4', () => {
+    beforeEach(() => {
+      spectator.component.attentionLevel = '4';
+      spectator.detectChanges();
+    });
 
-  //   it('should render with correct color', () => {
-  //     expect(element).toHaveThemeColor('primary', 'contrast');
-  //   });
-  // });
+    it('should render with no background-color', () => {
+      expect(element).toHaveBackgroundColor('transparent');
+    });
+
+    it('should render with no border-color', () => {
+      expect(element).toHaveBorderColor('transparent');
+    });
+
+    it('should render with correct color', () => {
+      expect(element).toHaveThemeColor('primary', 'contrast');
+    });
+  });
 });
