@@ -15,7 +15,13 @@ export const ElementCssCustomMatchers: CustomMatcherFactories = {
   ): CustomMatcher {
     return {
       compare: (element: Element, expectedColor: string): CustomMatcherResult =>
-        compareCssProperty(util, customEqualityTesters, element, 'color', expectedColor),
+        compareCssProperty(
+          util,
+          customEqualityTesters,
+          element,
+          'color',
+          ColorHelper.colorStringToRgbString(expectedColor)
+        ),
     };
   },
   toHaveBackgroundColor: function(
@@ -24,7 +30,28 @@ export const ElementCssCustomMatchers: CustomMatcherFactories = {
   ): CustomMatcher {
     return {
       compare: (element: Element, expectedColor: string): CustomMatcherResult =>
-        compareCssProperty(util, customEqualityTesters, element, 'background-color', expectedColor),
+        compareCssProperty(
+          util,
+          customEqualityTesters,
+          element,
+          'background-color',
+          ColorHelper.colorStringToRgbString(expectedColor)
+        ),
+    };
+  },
+  toHaveBorderColor: function(
+    util: MatchersUtil,
+    customEqualityTesters: CustomEqualityTester[]
+  ): CustomMatcher {
+    return {
+      compare: (element: Element, expectedColor: string): CustomMatcherResult =>
+        compareCssProperty(
+          util,
+          customEqualityTesters,
+          element,
+          'border-color',
+          ColorHelper.colorStringToRgbString(expectedColor)
+        ),
     };
   },
   toHaveThemeColor: (
@@ -35,6 +62,10 @@ export const ElementCssCustomMatchers: CustomMatcherFactories = {
     util: MatchersUtil,
     customEqualityTesters: CustomEqualityTester[]
   ): CustomMatcher => themeColorMatcher(util, customEqualityTesters, 'background-color'),
+  toHaveThemeBorderColor: (
+    util: MatchersUtil,
+    customEqualityTesters: CustomEqualityTester[]
+  ): CustomMatcher => themeColorMatcher(util, customEqualityTesters, 'border-color'),
 };
 
 function themeColorMatcher(

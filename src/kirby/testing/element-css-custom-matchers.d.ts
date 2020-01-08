@@ -1,6 +1,7 @@
 declare namespace jasmine {
   interface Matchers<T> {
     toHaveBackgroundColor(expected: string): boolean;
+    toHaveBorderColor(expected: string): boolean;
     toHaveColor(expected: string): boolean;
     toHaveThemeColor(
       expectedColor:
@@ -11,6 +12,14 @@ declare namespace jasmine {
       expectedVariant?: import('../helpers/theme-color.type').ThemeColorVariant
     ): boolean;
     toHaveThemeBackgroundColor(
+      expectedColor:
+        | import('../helpers/theme-color.type').ThemeColor
+        | 'black'
+        | 'semi-light'
+        | 'semi-dark',
+      expectedVariant?: import('../helpers/theme-color.type').ThemeColorVariant
+    ): boolean;
+    toHaveThemeBorderColor(
       expectedColor:
         | import('../helpers/theme-color.type').ThemeColor
         | 'black'
