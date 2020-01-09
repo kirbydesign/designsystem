@@ -49,7 +49,6 @@
   --kirby-button-color: #{get-color('medium-contrast')};
 
   &.destructive {
-    --kirby-button-border-color: #{get-color('medium')};
     --kirby-button-color: #{get-color('danger')};
   }
 }
