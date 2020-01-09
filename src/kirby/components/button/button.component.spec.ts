@@ -8,9 +8,11 @@ import { ElementCssCustomMatchers } from '../../testing/element-css-custom-match
 import { IconComponent } from '../icon/icon.component';
 import { ButtonComponent } from './button.component';
 
-fdescribe('ButtonComponent', () => {
+const size = DesignTokenHelper.size;
+const fontSize = DesignTokenHelper.fontSize;
+
+describe('ButtonComponent', () => {
   let spectator: SpectatorHost<ButtonComponent>;
-  let component: ButtonComponent;
   let element: HTMLButtonElement;
 
   const createHost = createHostFactory({
@@ -21,12 +23,11 @@ fdescribe('ButtonComponent', () => {
   beforeEach(() => {
     jasmine.addMatchers(ElementCssCustomMatchers);
     spectator = createHost('<button kirby-button>Test</button>');
-    component = spectator.component;
     element = spectator.element as HTMLButtonElement;
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(spectator.component).toBeTruthy();
   });
 
   it('should render with correct background-color', () => {
@@ -42,8 +43,20 @@ fdescribe('ButtonComponent', () => {
   });
 
   it('should render with correct border-radius', () => {
-    const expected = DesignTokenHelper.borderRadiusRound(true);
+    const expected = DesignTokenHelper.borderRadiusRound();
     expect(element).toHaveStyle({ 'border-radius': expected });
+  });
+
+  it('should render with correct font-size', () => {
+    expect(element).toHaveStyle({ 'font-size': fontSize('s') });
+  });
+
+  it('should render with correct height', () => {
+    expect(element).toHaveStyle({ height: size('xl') });
+  });
+
+  it('should render with correct margin', () => {
+    expect(element).toHaveStyle({ margin: size('xxxs') });
   });
 
   describe('when disabled', () => {
