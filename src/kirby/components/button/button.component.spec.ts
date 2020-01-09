@@ -3,11 +3,12 @@
 import { MockComponent } from 'ng-mocks';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
+import { DesignTokenHelper } from '../../helpers/design-token-helper';
 import { ElementCssCustomMatchers } from '../../testing/element-css-custom-matchers';
 import { IconComponent } from '../icon/icon.component';
 import { ButtonComponent } from './button.component';
 
-describe('ButtonComponent', () => {
+fdescribe('ButtonComponent', () => {
   let spectator: SpectatorHost<ButtonComponent>;
   let component: ButtonComponent;
   let element: HTMLButtonElement;
@@ -38,6 +39,11 @@ describe('ButtonComponent', () => {
 
   it('should render with correct color', () => {
     expect(element).toHaveThemeColor('primary', 'contrast');
+  });
+
+  it('should render with correct border-radius', () => {
+    const expected = DesignTokenHelper.borderRadiusRound(true);
+    expect(element).toHaveStyle({ 'border-radius': expected });
   });
 
   describe('when disabled', () => {
