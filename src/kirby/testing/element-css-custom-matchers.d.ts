@@ -1,5 +1,6 @@
 declare namespace jasmine {
   interface Matchers<T> {
+    toHaveStyle(styles: { [styleKey: string]: string }): boolean;
     toHaveBackgroundColor(expected: string): boolean;
     toHaveBorderColor(expected: string): boolean;
     toHaveColor(expected: string): boolean;

@@ -66,7 +66,46 @@ export const ElementCssCustomMatchers: CustomMatcherFactories = {
     util: MatchersUtil,
     customEqualityTesters: CustomEqualityTester[]
   ): CustomMatcher => themeColorMatcher(util, customEqualityTesters, 'border-color'),
+  toHaveStyle: (util: MatchersUtil, customEqualityTesters: CustomEqualityTester[]) =>
+    cssPropertyMatcher(util, customEqualityTesters),
 };
+
+function cssPropertyMatcher(util: MatchersUtil, customEqualityTesters: CustomEqualityTester[]) {
+  return {
+    compare: (element: Element, styles: { [styleKey: string]: string }) => {
+      let allPassed = Object.keys(styles).length !== 0;
+      let messages = [];
+      Object.keys(styles).forEach((cssProperty) => {
+        let expectedValue = styles[cssProperty];
+        let expectedValueAlias;
+        if (cssProperty.indexOf('color') != -1) {
+          expectedValueAlias = expectedValue;
+          expectedValue = ColorHelper.colorStringToRgbString(expectedValue);
+          if (expectedValue === expectedValueAlias) {
+            expectedValueAlias = undefined;
+          }
+        }
+        let { pass, message } = compareCssProperty(
+          util,
+          customEqualityTesters,
+          element,
+          cssProperty,
+          expectedValue,
+          expectedValueAlias
+        );
+        allPassed = allPassed && pass;
+        if (message) {
+          messages.push(message);
+        }
+      });
+      const result = {
+        pass: allPassed,
+        message: messages.join('\n'),
+      };
+      return result;
+    },
+  };
+}
 
 function themeColorMatcher(
   util: MatchersUtil,
