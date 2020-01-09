@@ -75,6 +75,25 @@ describe('ButtonComponent', () => {
     it('should render with correct color', () => {
       expect(element).toHaveThemeColor('white', 'contrast');
     });
+
+    describe('and is destructive', () => {
+      beforeEach(() => {
+        spectator.component.isDestructive = true;
+        spectator.detectChanges();
+      });
+
+      it('should render with correct background-color', () => {
+        expect(element).toHaveThemeBackgroundColor('danger');
+      });
+
+      it('should render with correct border-color', () => {
+        expect(element).toHaveThemeBorderColor('danger');
+      });
+
+      it('should render with correct color', () => {
+        expect(element).toHaveThemeColor('danger', 'contrast');
+      });
+    });
   });
 
   describe('when configured with attentionlevel 2', () => {
@@ -93,6 +112,25 @@ describe('ButtonComponent', () => {
 
     it('should render with correct color', () => {
       expect(element).toHaveThemeColor('white', 'contrast');
+    });
+
+    describe('and is destructive', () => {
+      beforeEach(() => {
+        spectator.component.isDestructive = true;
+        spectator.detectChanges();
+      });
+
+      it('should render with correct background-color', () => {
+        expect(element).toHaveThemeBackgroundColor('light');
+      });
+
+      it('should render with correct border-color', () => {
+        expect(element).toHaveThemeBorderColor('light');
+      });
+
+      it('should render with correct color', () => {
+        expect(element).toHaveThemeColor('danger');
+      });
     });
   });
 
@@ -113,6 +151,25 @@ describe('ButtonComponent', () => {
     it('should render with correct color', () => {
       expect(element).toHaveThemeColor('medium', 'contrast');
     });
+
+    describe('and is destructive', () => {
+      beforeEach(() => {
+        spectator.component.isDestructive = true;
+        spectator.detectChanges();
+      });
+
+      it('should render with correct background-color', () => {
+        expect(element).toHaveBackgroundColor('transparent');
+      });
+
+      it('should render with correct border-color', () => {
+        expect(element).toHaveThemeBorderColor('medium');
+      });
+
+      it('should render with correct color', () => {
+        expect(element).toHaveThemeColor('danger');
+      });
+    });
   });
 
   describe('when configured with attentionlevel 4', () => {
@@ -131,6 +188,25 @@ describe('ButtonComponent', () => {
 
     it('should render with correct color', () => {
       expect(element).toHaveThemeColor('primary', 'contrast');
+    });
+
+    describe('and is destructive', () => {
+      beforeEach(() => {
+        spectator.component.isDestructive = true;
+        spectator.detectChanges();
+      });
+
+      it('should render with no background-color', () => {
+        expect(element).toHaveBackgroundColor('transparent');
+      });
+
+      it('should render with no border-color', () => {
+        expect(element).toHaveBorderColor('transparent');
+      });
+
+      it('should render with correct color', () => {
+        expect(element).toHaveThemeColor('danger');
+      });
     });
   });
 });
