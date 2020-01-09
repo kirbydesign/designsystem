@@ -3,7 +3,9 @@
 import { RouterTestingModule } from '@angular/router/testing';
 import { SpectatorHost, createHostFactory } from '@ngneat/spectator';
 import { IonicModule } from '@ionic/angular';
+import { MockComponent } from 'ng-mocks';
 
+import { DesignTokenHelper } from '../../helpers/design-token-helper';
 import { TestHelper } from '../../testing/test-helper';
 import { ElementCssCustomMatchers } from '../../testing/element-css-custom-matchers';
 import {
@@ -15,7 +17,11 @@ import {
   PageToolbarTitleDirective,
 } from '../page/page.component';
 import { FitHeadingDirective } from '../../directives/fit-heading/fit-heading.directive';
+import { SizeDirective } from '../../directives/size/size.directive';
 import { ButtonComponent } from './button.component';
+import { IconComponent } from '../icon/icon.component';
+
+const size = DesignTokenHelper.size;
 
 describe('ButtonComponent in Kirby Page', () => {
   let spectator: SpectatorHost<PageComponent>;
@@ -146,6 +152,103 @@ describe('ButtonComponent in Kirby Page', () => {
     it('should render with correct color', async () => {
       await TestHelper.whenHydrated(ionContent);
       expect(normalButtonInPage).toHaveThemeColor('primary', 'contrast');
+    });
+  });
+});
+
+describe('ButtonComponent with size directive', () => {
+  let spectator: SpectatorHost<ButtonComponent>;
+  let element: HTMLButtonElement;
+  const createHost = createHostFactory({
+    component: ButtonComponent,
+    declarations: [ButtonComponent, SizeDirective, MockComponent(IconComponent)],
+  });
+
+  beforeEach(() => {
+    jasmine.addMatchers(ElementCssCustomMatchers);
+  });
+
+  describe('when configured with size = SM', () => {
+    beforeEach(() => {
+      spectator = createHost('<button kirby-button size="sm">Test</button>');
+      element = spectator.element as HTMLButtonElement;
+    });
+
+    it('should render with correct font-size', () => {
+      const expected = DesignTokenHelper.fontSize('xs', true);
+      expect(element).toHaveStyle({ 'font-size': expected });
+    });
+
+    it('should render with correct height', () => {
+      const expected = DesignTokenHelper.size('l', true);
+      expect(element).toHaveStyle({ height: expected });
+    });
+  });
+
+  describe('when configured with size = LG', () => {
+    beforeEach(() => {
+      spectator = createHost('<button kirby-button size="lg">Test</button>');
+      element = spectator.element as HTMLButtonElement;
+    });
+
+    it('should render with correct font-size', () => {
+      const expected = DesignTokenHelper.fontSize('n', true);
+      expect(element).toHaveStyle({ 'font-size': expected });
+    });
+
+    it('should render with correct height', () => {
+      expect(element).toHaveStyle({ height: size('xxl') });
+    });
+
+    it('should render with correct min-width', () => {
+      expect(element).toHaveStyle({ 'min-width': '220px' });
+    });
+  });
+});
+
+describe('ButtonComponent configured with icon only', () => {
+  let spectator: SpectatorHost<ButtonComponent>;
+  let element: HTMLButtonElement;
+  const createHost = createHostFactory({
+    component: ButtonComponent,
+    declarations: [ButtonComponent, SizeDirective, MockComponent(IconComponent)],
+  });
+
+  beforeEach(() => {
+    jasmine.addMatchers(ElementCssCustomMatchers);
+  });
+
+  it('should render with correct width', () => {
+    spectator = createHost(
+      `<button kirby-button>
+        <kirby-icon name="edit">
+      </kirby-icon></button>`
+    );
+    element = spectator.element as HTMLButtonElement;
+    expect(element).toHaveStyle({ width: size('xl') });
+  });
+
+  describe('and size directive with size = SM', () => {
+    it('should render with correct width', () => {
+      spectator = createHost(
+        `<button kirby-button size="sm">
+          <kirby-icon name="edit">
+        </kirby-icon></button>`
+      );
+      element = spectator.element as HTMLButtonElement;
+      expect(element).toHaveStyle({ width: size('l') });
+    });
+  });
+
+  describe('and size directive with size = LG', () => {
+    it('should render with correct width', () => {
+      spectator = createHost(
+        `<button kirby-button size="lg">
+          <kirby-icon name="edit">
+        </kirby-icon></button>`
+      );
+      element = spectator.element as HTMLButtonElement;
+      expect(element).toHaveStyle({ width: size('xxl') });
     });
   });
 });
