@@ -24,7 +24,7 @@ import { IconComponent } from '../icon/icon.component';
 const getColor = DesignTokenHelper.getColor;
 const size = DesignTokenHelper.size;
 
-fdescribe('ButtonComponent in Kirby Page', () => {
+describe('ButtonComponent in Kirby Page', () => {
   let spectator: SpectatorHost<PageComponent>;
   const createHost = createHostFactory({
     component: PageComponent,
