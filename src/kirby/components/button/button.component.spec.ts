@@ -8,10 +8,11 @@ import { ElementCssCustomMatchers } from '../../testing/element-css-custom-match
 import { IconComponent } from '../icon/icon.component';
 import { ButtonComponent } from './button.component';
 
+const getColor = DesignTokenHelper.getColor;
 const size = DesignTokenHelper.size;
 const fontSize = DesignTokenHelper.fontSize;
 
-describe('ButtonComponent', () => {
+fdescribe('ButtonComponent', () => {
   let spectator: SpectatorHost<ButtonComponent>;
   let element: HTMLButtonElement;
 
@@ -31,15 +32,19 @@ describe('ButtonComponent', () => {
   });
 
   it('should render with correct background-color', () => {
-    expect(element).toHaveThemeBackgroundColor('primary');
+    expect(element).toHaveThemeColorStyle({
+      'background-color': getColor('primary'),
+    });
   });
 
   it('should render with correct border-color', () => {
-    expect(element).toHaveThemeBorderColor('primary');
+    expect(element).toHaveThemeColorStyle({
+      'border-color': getColor('primary'),
+    });
   });
 
   it('should render with correct color', () => {
-    expect(element).toHaveThemeColor('primary', 'contrast');
+    expect(element).toHaveThemeColorStyle({ color: getColor('primary', 'contrast') });
   });
 
   it('should render with correct border-radius', () => {
@@ -65,15 +70,21 @@ describe('ButtonComponent', () => {
     });
 
     it('should render with correct background-color', () => {
-      expect(element).toHaveThemeBackgroundColor('light', 'tint');
+      expect(element).toHaveThemeColorStyle({
+        'background-color': getColor('light', 'tint'),
+      });
     });
 
     it('should render with correct border-color', () => {
-      expect(element).toHaveThemeBorderColor('light', 'tint');
+      expect(element).toHaveThemeColorStyle({
+        'border-color': getColor('light', 'tint'),
+      });
     });
 
     it('should render with correct color', () => {
-      expect(element).toHaveThemeColor('semi-dark', 'shade');
+      expect(element).toHaveThemeColorStyle({
+        color: getColor('semi-dark', 'shade'),
+      });
     });
   });
 
@@ -84,15 +95,21 @@ describe('ButtonComponent', () => {
     });
 
     it('should render with correct background-color', () => {
-      expect(element).toHaveThemeBackgroundColor('primary');
+      expect(element).toHaveThemeColorStyle({
+        'background-color': getColor('primary'),
+      });
     });
 
     it('should render with correct border-color', () => {
-      expect(element).toHaveThemeBorderColor('primary');
+      expect(element).toHaveThemeColorStyle({
+        'border-color': getColor('primary'),
+      });
     });
 
     it('should render with correct color', () => {
-      expect(element).toHaveThemeColor('white', 'contrast');
+      expect(element).toHaveThemeColorStyle({
+        color: getColor('white', 'contrast'),
+      });
     });
 
     describe('and is destructive', () => {
@@ -102,15 +119,21 @@ describe('ButtonComponent', () => {
       });
 
       it('should render with correct background-color', () => {
-        expect(element).toHaveThemeBackgroundColor('danger');
+        expect(element).toHaveThemeColorStyle({
+          'background-color': getColor('danger'),
+        });
       });
 
       it('should render with correct border-color', () => {
-        expect(element).toHaveThemeBorderColor('danger');
+        expect(element).toHaveThemeColorStyle({
+          'border-color': getColor('danger'),
+        });
       });
 
       it('should render with correct color', () => {
-        expect(element).toHaveThemeColor('danger', 'contrast');
+        expect(element).toHaveThemeColorStyle({
+          color: getColor('danger', 'contrast'),
+        });
       });
     });
   });
@@ -122,15 +145,21 @@ describe('ButtonComponent', () => {
     });
 
     it('should render with correct background-color', () => {
-      expect(element).toHaveThemeBackgroundColor('white');
+      expect(element).toHaveThemeColorStyle({
+        'background-color': getColor('white'),
+      });
     });
 
     it('should render with correct border-color', () => {
-      expect(element).toHaveThemeBorderColor('white');
+      expect(element).toHaveThemeColorStyle({
+        'border-color': getColor('white'),
+      });
     });
 
     it('should render with correct color', () => {
-      expect(element).toHaveThemeColor('white', 'contrast');
+      expect(element).toHaveThemeColorStyle({
+        color: getColor('white', 'contrast'),
+      });
     });
 
     describe('and is destructive', () => {
@@ -140,15 +169,21 @@ describe('ButtonComponent', () => {
       });
 
       it('should render with correct background-color', () => {
-        expect(element).toHaveThemeBackgroundColor('light');
+        expect(element).toHaveThemeColorStyle({
+          'background-color': getColor('light'),
+        });
       });
 
       it('should render with correct border-color', () => {
-        expect(element).toHaveThemeBorderColor('light');
+        expect(element).toHaveThemeColorStyle({
+          'border-color': getColor('light'),
+        });
       });
 
       it('should render with correct color', () => {
-        expect(element).toHaveThemeColor('danger');
+        expect(element).toHaveThemeColorStyle({
+          color: getColor('danger'),
+        });
       });
     });
   });
@@ -160,15 +195,19 @@ describe('ButtonComponent', () => {
     });
 
     it('should render with no background-color', () => {
-      expect(element).toHaveBackgroundColor('transparent');
+      expect(element).toHaveStyle({ 'background-color': 'transparent' });
     });
 
     it('should render with correct border-color', () => {
-      expect(element).toHaveThemeBorderColor('medium');
+      expect(element).toHaveThemeColorStyle({
+        'border-color': getColor('medium'),
+      });
     });
 
     it('should render with correct color', () => {
-      expect(element).toHaveThemeColor('medium', 'contrast');
+      expect(element).toHaveThemeColorStyle({
+        color: getColor('medium', 'contrast'),
+      });
     });
 
     describe('and is destructive', () => {
@@ -178,15 +217,19 @@ describe('ButtonComponent', () => {
       });
 
       it('should render with correct background-color', () => {
-        expect(element).toHaveBackgroundColor('transparent');
+        expect(element).toHaveStyle({ 'background-color': 'transparent' });
       });
 
       it('should render with correct border-color', () => {
-        expect(element).toHaveThemeBorderColor('medium');
+        expect(element).toHaveThemeColorStyle({
+          'border-color': getColor('medium'),
+        });
       });
 
       it('should render with correct color', () => {
-        expect(element).toHaveThemeColor('danger');
+        expect(element).toHaveThemeColorStyle({
+          color: getColor('danger'),
+        });
       });
     });
   });
@@ -198,15 +241,17 @@ describe('ButtonComponent', () => {
     });
 
     it('should render with no background-color', () => {
-      expect(element).toHaveBackgroundColor('transparent');
+      expect(element).toHaveStyle({ 'background-color': 'transparent' });
     });
 
     it('should render with no border-color', () => {
-      expect(element).toHaveBorderColor('transparent');
+      expect(element).toHaveStyle({ 'border-color': 'transparent' });
     });
 
     it('should render with correct color', () => {
-      expect(element).toHaveThemeColor('primary', 'contrast');
+      expect(element).toHaveThemeColorStyle({
+        color: getColor('primary', 'contrast'),
+      });
     });
 
     describe('and is destructive', () => {
@@ -216,15 +261,15 @@ describe('ButtonComponent', () => {
       });
 
       it('should render with no background-color', () => {
-        expect(element).toHaveBackgroundColor('transparent');
+        expect(element).toHaveStyle({ 'background-color': 'transparent' });
       });
 
       it('should render with no border-color', () => {
-        expect(element).toHaveBorderColor('transparent');
+        expect(element).toHaveStyle({ 'border-color': 'transparent' });
       });
 
       it('should render with correct color', () => {
-        expect(element).toHaveThemeColor('danger');
+        expect(element).toHaveThemeColorStyle({ color: getColor('danger') });
       });
     });
   });

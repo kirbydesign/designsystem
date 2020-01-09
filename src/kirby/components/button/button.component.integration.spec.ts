@@ -21,9 +21,10 @@ import { SizeDirective } from '../../directives/size/size.directive';
 import { ButtonComponent } from './button.component';
 import { IconComponent } from '../icon/icon.component';
 
+const getColor = DesignTokenHelper.getColor;
 const size = DesignTokenHelper.size;
 
-describe('ButtonComponent in Kirby Page', () => {
+fdescribe('ButtonComponent in Kirby Page', () => {
   let spectator: SpectatorHost<PageComponent>;
   const createHost = createHostFactory({
     component: PageComponent,
@@ -81,17 +82,19 @@ describe('ButtonComponent in Kirby Page', () => {
 
     it('should render with no background-color', async () => {
       await TestHelper.whenHydrated(ionToolbar);
-      expect(actionButtonInHeader).toHaveBackgroundColor('transparent');
+      expect(actionButtonInHeader).toHaveStyle({ 'background-color': 'transparent' });
     });
 
     it('should render with no border-color', async () => {
       await TestHelper.whenHydrated(ionToolbar);
-      expect(actionButtonInHeader).toHaveBorderColor('transparent');
+      expect(actionButtonInHeader).toHaveStyle({ 'border-color': 'transparent' });
     });
 
     it('should render with correct color', async () => {
       await TestHelper.whenHydrated(ionToolbar);
-      expect(actionButtonInHeader).toHaveThemeColor('primary', 'contrast');
+      expect(actionButtonInHeader).toHaveThemeColorStyle({
+        color: getColor('primary', 'contrast'),
+      });
     });
   });
 
@@ -112,17 +115,23 @@ describe('ButtonComponent in Kirby Page', () => {
 
     it('should render with correct background-color', async () => {
       await TestHelper.whenHydrated(ionContent);
-      expect(actionButtonInPage).toHaveThemeBackgroundColor('white');
+      expect(actionButtonInPage).toHaveThemeColorStyle({
+        'background-color': getColor('white'),
+      });
     });
 
     it('should render with correct border-color', async () => {
       await TestHelper.whenHydrated(ionContent);
-      expect(actionButtonInPage).toHaveThemeBorderColor('white');
+      expect(actionButtonInPage).toHaveThemeColorStyle({
+        'border-color': getColor('white'),
+      });
     });
 
     it('should render with correct color', async () => {
       await TestHelper.whenHydrated(ionContent);
-      expect(actionButtonInPage).toHaveThemeColor('white', 'contrast');
+      expect(actionButtonInPage).toHaveThemeColorStyle({
+        color: getColor('white', 'contrast'),
+      });
     });
   });
 
@@ -141,17 +150,23 @@ describe('ButtonComponent in Kirby Page', () => {
 
     it('should render with correct background-color', async () => {
       await TestHelper.whenHydrated(ionContent);
-      expect(normalButtonInPage).toHaveThemeBackgroundColor('primary');
+      expect(normalButtonInPage).toHaveThemeColorStyle({
+        'background-color': getColor('primary'),
+      });
     });
 
     it('should render with correct border-color', async () => {
       await TestHelper.whenHydrated(ionContent);
-      expect(normalButtonInPage).toHaveThemeBorderColor('primary');
+      expect(normalButtonInPage).toHaveThemeColorStyle({
+        'border-color': getColor('primary'),
+      });
     });
 
     it('should render with correct color', async () => {
       await TestHelper.whenHydrated(ionContent);
-      expect(normalButtonInPage).toHaveThemeColor('primary', 'contrast');
+      expect(normalButtonInPage).toHaveThemeColorStyle({
+        color: getColor('primary', 'contrast'),
+      });
     });
   });
 });
