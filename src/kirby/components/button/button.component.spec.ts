@@ -49,7 +49,7 @@ describe('ButtonComponent', () => {
   });
 
   it('should render with correct font-size', () => {
-    expect(element).toHaveComputedStyle({ 'font-size': fontSize('n') });
+    expect(element).toHaveComputedStyle({ 'font-size': fontSize('s') });
   });
 
   it('should render with correct height', () => {
