@@ -1,5 +1,3 @@
-/// <reference path="../../testing/element-css-custom-matchers.d.ts"/>
-
 import { MockComponent } from 'ng-mocks';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 

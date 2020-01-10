@@ -1,5 +1,3 @@
-/// <reference path="../../testing/element-css-custom-matchers.d.ts"/>
-
 import { RouterTestingModule } from '@angular/router/testing';
 import { SpectatorHost, createHostFactory } from '@ngneat/spectator';
 import { IonicModule } from '@ionic/angular';
