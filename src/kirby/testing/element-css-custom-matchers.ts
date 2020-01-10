@@ -1,6 +1,5 @@
 import CustomMatcherFactories = jasmine.CustomMatcherFactories;
 import CustomEqualityTester = jasmine.CustomEqualityTester;
-import CustomMatcher = jasmine.CustomMatcher;
 import CustomMatcherResult = jasmine.CustomMatcherResult;
 import MatchersUtil = jasmine.MatchersUtil;
 
@@ -9,12 +8,8 @@ import { ColorHelper } from '../helpers/color-helper';
 import { ThemeColorDefinition } from '../helpers/design-token-helper';
 
 export const ElementCssCustomMatchers: CustomMatcherFactories = {
-  toHaveStyle: (util: MatchersUtil, customEqualityTesters: CustomEqualityTester[]) =>
+  toHaveComputedStyle: (util: MatchersUtil, customEqualityTesters: CustomEqualityTester[]) =>
     cssPropertyMatcher(util, customEqualityTesters),
-  toHaveThemeColorStyle: (
-    util: MatchersUtil,
-    customEqualityTesters: CustomEqualityTester[]
-  ): CustomMatcher => cssPropertyMatcher(util, customEqualityTesters),
 };
 
 function cssPropertyMatcher(util: MatchersUtil, customEqualityTesters: CustomEqualityTester[]) {
