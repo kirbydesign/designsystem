@@ -20,19 +20,19 @@ export class DesignTokenHelper {
   }
 
   public static size(key: string): string {
-    return DesignTokenHelper.designTokens.global['$sizes'][key];
+    return DesignTokenHelper.designTokens.global['$sizes'][key] + 'px';
   }
 
   public static fontSize(key: string): string {
-    return DesignTokenHelper.designTokens.global['$font-sizes'][key];
+    return DesignTokenHelper.designTokens.global['$font-sizes'][key] + 'px';
   }
 
   public static borderRadius(): string {
-    return DesignTokenHelper.designTokens.global['$border-radius'];
+    return DesignTokenHelper.designTokens.global['$border-radius'] + 'px';
   }
 
   public static borderRadiusRound(): string {
-    return DesignTokenHelper.designTokens.global['$border-radius-round'];
+    return DesignTokenHelper.designTokens.global['$border-radius-round'] + 'px';
   }
 }
 
