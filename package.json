@@ -7,6 +7,8 @@
     "build": "ng build",
     "build-polyfills": "webpack --config webpack.polyfills.config.js",
     "test": "ng test",
+    "test:headless-browser": "ng test --browsers=ChromeCustom",
+    "test:headless-browser:single": "npm run test:headless-browser -- --watch=false",
     "ci-test": "ng test --progress false --watch false --code-coverage",
     "lint": "npm run lint:ts && npm run lint:css",
     "lint:ts": "tslint './src/**/*.ts'",
@@ -50,7 +52,7 @@
     "@angular-devkit/build-angular": "~0.803.9",
     "@angular/cli": "8.3.9",
     "@angular/compiler-cli": "8.2.10",
-    "@netbasal/spectator": "3.8.2",
+    "@ngneat/spectator": "^4.10.0",
     "@types/jasmine": "2.8.6",
     "@types/jasminewd2": "2.0.3",
     "@types/node": "8.9.4",
@@ -90,6 +92,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
+      "pre-push": "npm run test:headless-browser:single",
       "post-merge": "post-npm-install"
     }
   }

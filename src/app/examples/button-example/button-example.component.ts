@@ -10,16 +10,6 @@ import { Color, ColorHelper } from '@kirbydesign/designsystem/helpers/color-help
 })
 export class ButtonExampleComponent {
   @Input() themeColor: ThemeColor | '' = '';
-  colors: Color[] = ColorHelper.getMainColors();
-  items = [
-    { text: 'Card color: None', value: '' },
-    ...this.colors.map((color) => {
-      return {
-        text: `Card color: ${color.name}`,
-        value: color.name,
-      };
-    }),
-  ];
   buttonSize = 'md';
   buttonSizes = [
     {

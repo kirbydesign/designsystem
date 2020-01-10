@@ -1,4 +1,4 @@
-import { Spectator, createTestComponentFactory } from '@netbasal/spectator';
+import { Spectator, createComponentFactory } from '@ngneat/spectator';
 import { MockComponent } from 'ng-mocks';
 import * as ionic from '@ionic/angular';
 
@@ -12,7 +12,7 @@ describe('ToolbarComponent', () => {
 
   let spectator: Spectator<ToolbarComponent>;
 
-  const createHost = createTestComponentFactory({
+  const createHost = createComponentFactory({
     component: ToolbarComponent,
     declarations: [
       MockComponent(ionic.IonToolbar),
@@ -22,7 +22,7 @@ describe('ToolbarComponent', () => {
   });
 
   beforeEach(() => {
-    spectator = createHost({ title, hideBackButton });
+    spectator = createHost({ props: { title, hideBackButton } });
   });
 
   it('should create', () => {

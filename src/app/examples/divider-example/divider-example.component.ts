@@ -11,13 +11,4 @@ import { Color, ColorHelper } from '@kirbydesign/designsystem/helpers/color-help
 export class DividerExampleComponent {
   @Input() themeColor: ThemeColor = 'white';
   @Input() hasMargin: boolean = true;
-  colors: Color[] = ColorHelper.getMainColors();
-  items = this.colors
-    .filter((color) => ['white', 'light'].includes(color.name))
-    .map((color) => {
-      return {
-        text: `Card color: ${color.name}`,
-        value: color.name,
-      };
-    });
 }

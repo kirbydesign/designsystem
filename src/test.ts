@@ -7,6 +7,8 @@ import {
   platformBrowserDynamicTesting,
 } from '@angular/platform-browser-dynamic/testing';
 
+import { ElementCssCustomMatchers } from './kirby/testing/element-css-custom-matchers';
+
 // Unfortunately there's no typing for the `__karma__` variable. Just declare it as any.
 declare const __karma__: any;
 declare const require: any;
@@ -24,6 +26,10 @@ const kirbyContext = require.context('./kirby', true, /^((?!(\.tns|\.d\.ts)).)*\
 // And load the modules.
 appContext.keys().map(appContext);
 kirbyContext.keys().map(kirbyContext);
+
+beforeAll(() => {
+  jasmine.addMatchers(ElementCssCustomMatchers);
+});
 
 // Finally, start Karma to run the tests.
 __karma__.start();
