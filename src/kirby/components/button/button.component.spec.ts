@@ -4,7 +4,6 @@ import { MockComponent } from 'ng-mocks';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
 import { DesignTokenHelper } from '../../helpers/design-token-helper';
-import { ElementCssCustomMatchers } from '../../testing/element-css-custom-matchers';
 import { IconComponent } from '../icon/icon.component';
 import { ButtonComponent } from './button.component';
 
@@ -22,7 +21,6 @@ describe('ButtonComponent', () => {
   });
 
   beforeEach(() => {
-    jasmine.addMatchers(ElementCssCustomMatchers);
     spectator = createHost('<button kirby-button>Test</button>');
     element = spectator.element as HTMLButtonElement;
   });

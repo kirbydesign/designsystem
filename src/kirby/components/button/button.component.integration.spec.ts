@@ -7,7 +7,6 @@ import { MockComponent } from 'ng-mocks';
 
 import { DesignTokenHelper } from '../../helpers/design-token-helper';
 import { TestHelper } from '../../testing/test-helper';
-import { ElementCssCustomMatchers } from '../../testing/element-css-custom-matchers';
 import {
   PageComponent,
   PageContentComponent,
@@ -42,7 +41,6 @@ describe('ButtonComponent in Kirby Page', () => {
   });
 
   beforeEach(() => {
-    jasmine.addMatchers(ElementCssCustomMatchers);
     spectator = createHost<PageComponent>(
       `<kirby-page>
         <ng-template kirbyPageTitle>
@@ -179,10 +177,6 @@ describe('ButtonComponent with size directive', () => {
     declarations: [ButtonComponent, SizeDirective, MockComponent(IconComponent)],
   });
 
-  beforeEach(() => {
-    jasmine.addMatchers(ElementCssCustomMatchers);
-  });
-
   describe('when configured with size = SM', () => {
     beforeEach(() => {
       spectator = createHost('<button kirby-button size="sm">Test</button>');
@@ -227,10 +221,6 @@ describe('ButtonComponent configured with icon only', () => {
   const createHost = createHostFactory({
     component: ButtonComponent,
     declarations: [ButtonComponent, SizeDirective, MockComponent(IconComponent)],
-  });
-
-  beforeEach(() => {
-    jasmine.addMatchers(ElementCssCustomMatchers);
   });
 
   it('should render with correct width', () => {
