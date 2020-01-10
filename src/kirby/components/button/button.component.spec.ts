@@ -29,13 +29,13 @@ describe('ButtonComponent', () => {
 
   fit('should render with correct background-color', () => {
     expect(element).toHaveComputedStyle({
-      'background-color': getColor('secondary'),
+      'background-color': getColor('primary'),
     });
   });
 
   fit('should render with correct border-color', () => {
     expect(element).toHaveComputedStyle({
-      'border-color': getColor('secondary'),
+      'border-color': getColor('primary'),
     });
   });
 

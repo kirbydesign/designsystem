@@ -182,12 +182,12 @@ describe('ButtonComponent with size directive', () => {
     });
 
     it('should render with correct font-size', () => {
-      const expected = DesignTokenHelper.fontSize('xs', true);
+      const expected = DesignTokenHelper.fontSize('xs');
       expect(element).toHaveComputedStyle({ 'font-size': expected });
     });
 
     it('should render with correct height', () => {
-      const expected = DesignTokenHelper.size('l', true);
+      const expected = DesignTokenHelper.size('l');
       expect(element).toHaveComputedStyle({ height: expected });
     });
   });
@@ -199,7 +199,7 @@ describe('ButtonComponent with size directive', () => {
     });
 
     it('should render with correct font-size', () => {
-      const expected = DesignTokenHelper.fontSize('n', true);
+      const expected = DesignTokenHelper.fontSize('n');
       expect(element).toHaveComputedStyle({ 'font-size': expected });
     });
 
