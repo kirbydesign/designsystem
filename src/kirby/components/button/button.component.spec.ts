@@ -27,13 +27,13 @@ describe('ButtonComponent', () => {
     expect(spectator.component).toBeTruthy();
   });
 
-  fit('should render with correct background-color', () => {
+  it('should render with correct background-color', () => {
     expect(element).toHaveComputedStyle({
       'background-color': getColor('primary'),
     });
   });
 
-  fit('should render with correct border-color', () => {
+  it('should render with correct border-color', () => {
     expect(element).toHaveComputedStyle({
       'border-color': getColor('primary'),
     });
