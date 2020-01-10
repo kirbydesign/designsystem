@@ -31,37 +31,37 @@ describe('ButtonComponent', () => {
     expect(spectator.component).toBeTruthy();
   });
 
-  it('should render with correct background-color', () => {
-    expect(element).toHaveThemeColorStyle({
-      'background-color': getColor('primary'),
+  fit('should render with correct background-color', () => {
+    expect(element).toHaveComputedStyle({
+      'background-color': getColor('secondary'),
     });
   });
 
-  it('should render with correct border-color', () => {
-    expect(element).toHaveThemeColorStyle({
-      'border-color': getColor('primary'),
+  fit('should render with correct border-color', () => {
+    expect(element).toHaveComputedStyle({
+      'border-color': getColor('secondary'),
     });
   });
 
   it('should render with correct color', () => {
-    expect(element).toHaveThemeColorStyle({ color: getColor('primary', 'contrast') });
+    expect(element).toHaveComputedStyle({ color: getColor('primary', 'contrast') });
   });
 
   it('should render with correct border-radius', () => {
     const expected = DesignTokenHelper.borderRadiusRound();
-    expect(element).toHaveStyle({ 'border-radius': expected });
+    expect(element).toHaveComputedStyle({ 'border-radius': expected });
   });
 
   it('should render with correct font-size', () => {
-    expect(element).toHaveStyle({ 'font-size': fontSize('s') });
+    expect(element).toHaveComputedStyle({ 'font-size': fontSize('n') });
   });
 
   it('should render with correct height', () => {
-    expect(element).toHaveStyle({ height: size('xl') });
+    expect(element).toHaveComputedStyle({ height: size('xl') });
   });
 
   it('should render with correct margin', () => {
-    expect(element).toHaveStyle({ margin: size('xxxs') });
+    expect(element).toHaveComputedStyle({ margin: size('xxxs') });
   });
 
   describe('when disabled', () => {
@@ -70,19 +70,19 @@ describe('ButtonComponent', () => {
     });
 
     it('should render with correct background-color', () => {
-      expect(element).toHaveThemeColorStyle({
+      expect(element).toHaveComputedStyle({
         'background-color': getColor('light', 'tint'),
       });
     });
 
     it('should render with correct border-color', () => {
-      expect(element).toHaveThemeColorStyle({
+      expect(element).toHaveComputedStyle({
         'border-color': getColor('light', 'tint'),
       });
     });
 
     it('should render with correct color', () => {
-      expect(element).toHaveThemeColorStyle({
+      expect(element).toHaveComputedStyle({
         color: getColor('semi-dark', 'shade'),
       });
     });
@@ -95,19 +95,19 @@ describe('ButtonComponent', () => {
     });
 
     it('should render with correct background-color', () => {
-      expect(element).toHaveThemeColorStyle({
+      expect(element).toHaveComputedStyle({
         'background-color': getColor('primary'),
       });
     });
 
     it('should render with correct border-color', () => {
-      expect(element).toHaveThemeColorStyle({
+      expect(element).toHaveComputedStyle({
         'border-color': getColor('primary'),
       });
     });
 
     it('should render with correct color', () => {
-      expect(element).toHaveThemeColorStyle({
+      expect(element).toHaveComputedStyle({
         color: getColor('white', 'contrast'),
       });
     });
@@ -119,19 +119,19 @@ describe('ButtonComponent', () => {
       });
 
       it('should render with correct background-color', () => {
-        expect(element).toHaveThemeColorStyle({
+        expect(element).toHaveComputedStyle({
           'background-color': getColor('danger'),
         });
       });
 
       it('should render with correct border-color', () => {
-        expect(element).toHaveThemeColorStyle({
+        expect(element).toHaveComputedStyle({
           'border-color': getColor('danger'),
         });
       });
 
       it('should render with correct color', () => {
-        expect(element).toHaveThemeColorStyle({
+        expect(element).toHaveComputedStyle({
           color: getColor('danger', 'contrast'),
         });
       });
@@ -145,19 +145,19 @@ describe('ButtonComponent', () => {
     });
 
     it('should render with correct background-color', () => {
-      expect(element).toHaveThemeColorStyle({
+      expect(element).toHaveComputedStyle({
         'background-color': getColor('white'),
       });
     });
 
     it('should render with correct border-color', () => {
-      expect(element).toHaveThemeColorStyle({
+      expect(element).toHaveComputedStyle({
         'border-color': getColor('white'),
       });
     });
 
     it('should render with correct color', () => {
-      expect(element).toHaveThemeColorStyle({
+      expect(element).toHaveComputedStyle({
         color: getColor('white', 'contrast'),
       });
     });
@@ -169,19 +169,19 @@ describe('ButtonComponent', () => {
       });
 
       it('should render with correct background-color', () => {
-        expect(element).toHaveThemeColorStyle({
+        expect(element).toHaveComputedStyle({
           'background-color': getColor('light'),
         });
       });
 
       it('should render with correct border-color', () => {
-        expect(element).toHaveThemeColorStyle({
+        expect(element).toHaveComputedStyle({
           'border-color': getColor('light'),
         });
       });
 
       it('should render with correct color', () => {
-        expect(element).toHaveThemeColorStyle({
+        expect(element).toHaveComputedStyle({
           color: getColor('danger'),
         });
       });
@@ -195,17 +195,17 @@ describe('ButtonComponent', () => {
     });
 
     it('should render with no background-color', () => {
-      expect(element).toHaveStyle({ 'background-color': 'transparent' });
+      expect(element).toHaveComputedStyle({ 'background-color': 'transparent' });
     });
 
     it('should render with correct border-color', () => {
-      expect(element).toHaveThemeColorStyle({
+      expect(element).toHaveComputedStyle({
         'border-color': getColor('medium'),
       });
     });
 
     it('should render with correct color', () => {
-      expect(element).toHaveThemeColorStyle({
+      expect(element).toHaveComputedStyle({
         color: getColor('medium', 'contrast'),
       });
     });
@@ -217,17 +217,17 @@ describe('ButtonComponent', () => {
       });
 
       it('should render with correct background-color', () => {
-        expect(element).toHaveStyle({ 'background-color': 'transparent' });
+        expect(element).toHaveComputedStyle({ 'background-color': 'transparent' });
       });
 
       it('should render with correct border-color', () => {
-        expect(element).toHaveThemeColorStyle({
+        expect(element).toHaveComputedStyle({
           'border-color': getColor('medium'),
         });
       });
 
       it('should render with correct color', () => {
-        expect(element).toHaveThemeColorStyle({
+        expect(element).toHaveComputedStyle({
           color: getColor('danger'),
         });
       });
@@ -241,15 +241,15 @@ describe('ButtonComponent', () => {
     });
 
     it('should render with no background-color', () => {
-      expect(element).toHaveStyle({ 'background-color': 'transparent' });
+      expect(element).toHaveComputedStyle({ 'background-color': 'transparent' });
     });
 
     it('should render with no border-color', () => {
-      expect(element).toHaveStyle({ 'border-color': 'transparent' });
+      expect(element).toHaveComputedStyle({ 'border-color': 'transparent' });
     });
 
     it('should render with correct color', () => {
-      expect(element).toHaveThemeColorStyle({
+      expect(element).toHaveComputedStyle({
         color: getColor('primary', 'contrast'),
       });
     });
@@ -261,15 +261,15 @@ describe('ButtonComponent', () => {
       });
 
       it('should render with no background-color', () => {
-        expect(element).toHaveStyle({ 'background-color': 'transparent' });
+        expect(element).toHaveComputedStyle({ 'background-color': 'transparent' });
       });
 
       it('should render with no border-color', () => {
-        expect(element).toHaveStyle({ 'border-color': 'transparent' });
+        expect(element).toHaveComputedStyle({ 'border-color': 'transparent' });
       });
 
       it('should render with correct color', () => {
-        expect(element).toHaveThemeColorStyle({ color: getColor('danger') });
+        expect(element).toHaveComputedStyle({ color: getColor('danger') });
       });
     });
   });

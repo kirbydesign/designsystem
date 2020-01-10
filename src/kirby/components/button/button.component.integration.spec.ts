@@ -82,17 +82,17 @@ describe('ButtonComponent in Kirby Page', () => {
 
     it('should render with no background-color', async () => {
       await TestHelper.whenHydrated(ionToolbar);
-      expect(actionButtonInHeader).toHaveStyle({ 'background-color': 'transparent' });
+      expect(actionButtonInHeader).toHaveComputedStyle({ 'background-color': 'transparent' });
     });
 
     it('should render with no border-color', async () => {
       await TestHelper.whenHydrated(ionToolbar);
-      expect(actionButtonInHeader).toHaveStyle({ 'border-color': 'transparent' });
+      expect(actionButtonInHeader).toHaveComputedStyle({ 'border-color': 'transparent' });
     });
 
     it('should render with correct color', async () => {
       await TestHelper.whenHydrated(ionToolbar);
-      expect(actionButtonInHeader).toHaveThemeColorStyle({
+      expect(actionButtonInHeader).toHaveComputedStyle({
         color: getColor('primary', 'contrast'),
       });
     });
@@ -115,21 +115,21 @@ describe('ButtonComponent in Kirby Page', () => {
 
     it('should render with correct background-color', async () => {
       await TestHelper.whenHydrated(ionContent);
-      expect(actionButtonInPage).toHaveThemeColorStyle({
+      expect(actionButtonInPage).toHaveComputedStyle({
         'background-color': getColor('white'),
       });
     });
 
     it('should render with correct border-color', async () => {
       await TestHelper.whenHydrated(ionContent);
-      expect(actionButtonInPage).toHaveThemeColorStyle({
+      expect(actionButtonInPage).toHaveComputedStyle({
         'border-color': getColor('white'),
       });
     });
 
     it('should render with correct color', async () => {
       await TestHelper.whenHydrated(ionContent);
-      expect(actionButtonInPage).toHaveThemeColorStyle({
+      expect(actionButtonInPage).toHaveComputedStyle({
         color: getColor('white', 'contrast'),
       });
     });
@@ -150,21 +150,21 @@ describe('ButtonComponent in Kirby Page', () => {
 
     it('should render with correct background-color', async () => {
       await TestHelper.whenHydrated(ionContent);
-      expect(normalButtonInPage).toHaveThemeColorStyle({
+      expect(normalButtonInPage).toHaveComputedStyle({
         'background-color': getColor('primary'),
       });
     });
 
     it('should render with correct border-color', async () => {
       await TestHelper.whenHydrated(ionContent);
-      expect(normalButtonInPage).toHaveThemeColorStyle({
+      expect(normalButtonInPage).toHaveComputedStyle({
         'border-color': getColor('primary'),
       });
     });
 
     it('should render with correct color', async () => {
       await TestHelper.whenHydrated(ionContent);
-      expect(normalButtonInPage).toHaveThemeColorStyle({
+      expect(normalButtonInPage).toHaveComputedStyle({
         color: getColor('primary', 'contrast'),
       });
     });
@@ -191,12 +191,12 @@ describe('ButtonComponent with size directive', () => {
 
     it('should render with correct font-size', () => {
       const expected = DesignTokenHelper.fontSize('xs', true);
-      expect(element).toHaveStyle({ 'font-size': expected });
+      expect(element).toHaveComputedStyle({ 'font-size': expected });
     });
 
     it('should render with correct height', () => {
       const expected = DesignTokenHelper.size('l', true);
-      expect(element).toHaveStyle({ height: expected });
+      expect(element).toHaveComputedStyle({ height: expected });
     });
   });
 
@@ -208,15 +208,15 @@ describe('ButtonComponent with size directive', () => {
 
     it('should render with correct font-size', () => {
       const expected = DesignTokenHelper.fontSize('n', true);
-      expect(element).toHaveStyle({ 'font-size': expected });
+      expect(element).toHaveComputedStyle({ 'font-size': expected });
     });
 
     it('should render with correct height', () => {
-      expect(element).toHaveStyle({ height: size('xxl') });
+      expect(element).toHaveComputedStyle({ height: size('xxl') });
     });
 
     it('should render with correct min-width', () => {
-      expect(element).toHaveStyle({ 'min-width': '220px' });
+      expect(element).toHaveComputedStyle({ 'min-width': '220px' });
     });
   });
 });
@@ -240,7 +240,7 @@ describe('ButtonComponent configured with icon only', () => {
       </kirby-icon></button>`
     );
     element = spectator.element as HTMLButtonElement;
-    expect(element).toHaveStyle({ width: size('xl') });
+    expect(element).toHaveComputedStyle({ width: size('xl') });
   });
 
   describe('and size directive with size = SM', () => {
@@ -251,7 +251,7 @@ describe('ButtonComponent configured with icon only', () => {
         </kirby-icon></button>`
       );
       element = spectator.element as HTMLButtonElement;
-      expect(element).toHaveStyle({ width: size('l') });
+      expect(element).toHaveComputedStyle({ width: size('l') });
     });
   });
 
@@ -263,7 +263,7 @@ describe('ButtonComponent configured with icon only', () => {
         </kirby-icon></button>`
       );
       element = spectator.element as HTMLButtonElement;
-      expect(element).toHaveStyle({ width: size('xxl') });
+      expect(element).toHaveComputedStyle({ width: size('xxl') });
     });
   });
 });
