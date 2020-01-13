@@ -1,4 +1,4 @@
-import { Spectator, createTestComponentFactory } from '@netbasal/spectator';
+import { Spectator, createComponentFactory } from '@ngneat/spectator';
 import { MockModule } from 'ng-mocks';
 import { IonicModule } from '@ionic/angular';
 
@@ -7,7 +7,7 @@ import { LabelComponent } from './label.component';
 describe('LabelComponent', () => {
   let spectator: Spectator<LabelComponent>;
 
-  const createHost = createTestComponentFactory({
+  const createHost = createComponentFactory({
     imports: [MockModule(IonicModule)],
     component: LabelComponent,
     declarations: [],

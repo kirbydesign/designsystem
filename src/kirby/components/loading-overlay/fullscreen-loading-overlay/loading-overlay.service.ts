@@ -18,8 +18,10 @@ export class LoadingOverlayService {
     }
 
     const spinnerOverlayPortal = new ComponentPortal(FullscreenLoadingOverlayComponent);
-    const component = this.overlayRef.attach(spinnerOverlayPortal);
-    component.instance.showBackdrop = showBackdrop;
+    if (!this.overlayRef.hasAttached()) {
+      const component = this.overlayRef.attach(spinnerOverlayPortal);
+      component.instance.showBackdrop = showBackdrop;
+    }
   }
 
   hideLoadingOverlay(): void {

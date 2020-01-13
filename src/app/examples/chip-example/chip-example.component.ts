@@ -1,7 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { ThemeColor } from '@kirbydesign/designsystem/helpers/theme-color.type';
-import { Color, ColorHelper } from '@kirbydesign/designsystem/helpers/color-helper';
 
 @Component({
   selector: 'kirby-chip-example',
@@ -11,18 +10,6 @@ import { Color, ColorHelper } from '@kirbydesign/designsystem/helpers/color-help
 export class ChipExampleComponent {
   activeTab = 'default';
   @Input() themeColor: ThemeColor | '' = '';
-  colors: Color[] = ColorHelper.getMainColors();
-  items = [
-    { text: 'Card color: None', value: '' },
-    ...this.colors
-      .filter((color) => ['light', 'dark'].includes(color.name))
-      .map((color) => {
-        return {
-          text: `Card color: ${color.name}`,
-          value: color.name,
-        };
-      }),
-  ];
 
   onSegmentSelect(segment) {
     this.activeTab = segment.id;

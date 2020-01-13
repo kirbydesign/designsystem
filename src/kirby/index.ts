@@ -21,3 +21,6 @@ export * from './components/toast';
 export { ToolbarComponent } from './components/toolbar/toolbar.component';
 export { FabSheetComponent } from './components/fab-sheet/fab-sheet.component';
 export { CheckboxComponent } from './components/checkbox/checkbox.component';
+export {
+  LoadingOverlayService,
+} from './components/loading-overlay/fullscreen-loading-overlay/loading-overlay.service';
