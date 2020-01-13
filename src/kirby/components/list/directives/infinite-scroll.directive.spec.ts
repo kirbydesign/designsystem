@@ -1,6 +1,6 @@
 import { ElementRef } from '@angular/core';
 import { fakeAsync, tick } from '@angular/core/testing';
-import { SpyObject } from '@netbasal/spectator';
+import { SpyObject } from '@ngneat/spectator';
 
 import { WindowRef } from './../../shared/window-ref/window-ref.service';
 import { InfiniteScrollDirective, INFINITE_SCROLL_DEBOUNCE } from './infinite-scroll.directive';

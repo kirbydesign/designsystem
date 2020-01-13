@@ -1,15 +1,5 @@
 @import '../../scss/utils';
 
-@mixin button-reset {
-  --kirby-button-background-color: transparent;
-  --kirby-button-border-color: transparent;
-
-  &.destructive {
-    --kirby-button-background-color: transparent;
-    --kirby-button-border-color: transparent;
-  }
-}
-
 @mixin button-sm {
   padding: size('xxxs') size('s') size('xxxs') size('s');
   font-size: font-size('xs');
@@ -59,12 +49,13 @@
   --kirby-button-color: #{get-color('medium-contrast')};
 
   &.destructive {
-    --kirby-button-border-color: #{get-color('medium')};
     --kirby-button-color: #{get-color('danger')};
   }
 }
 
 @mixin button-attentionlevel4 {
+  --kirby-button-background-color: transparent;
+  --kirby-button-border-color: transparent;
   --kirby-button-color: #{get-color('primary-contrast')};
 
   &.destructive {
@@ -73,7 +64,6 @@
 }
 
 :host {
-  @include button-reset;
   --kirby-button-border-radius: #{$border-radius-round};
   --kirby-button-padding-left: #{size('m')};
   --kirby-button-padding-right: #{size('m')};
@@ -197,23 +187,27 @@
   margin-inline-start: size('s');
 }
 
-:host-context(ion-toolbar) {
+// Temp fix for https://github.com/angular/angular-cli/issues/13854#issuecomment-470831308
+/* clean-css ignore:start */
+:host-context(ion-toolbar kirby-page-actions) {
   &.attention-level1,
   &.attention-level2,
   &.attention-level3,
   &.attention-level4 {
-    @include button-reset;
     @include button-attentionlevel4;
     @include button-sm;
   }
 }
+/* clean-css ignore:end */
 
-:host-context(kirby-page-actions) {
+// Temp fix for https://github.com/angular/angular-cli/issues/13854#issuecomment-470831308
+/* clean-css ignore:start */
+:host-context(.page-title kirby-page-actions) {
   &.attention-level1,
   &.attention-level2,
   &.attention-level3,
   &.attention-level4 {
-    @include button-reset;
     @include button-attentionlevel2;
   }
 }
+/* clean-css ignore:end */
