@@ -141,8 +141,8 @@
   }
 
   &:disabled {
-    background-color: get-color('light-tint');
-    border-color: get-color('light-tint');
+    background-color: get-color('semi-light');
+    border-color: get-color('semi-light');
     pointer-events: none;
     --kirby-button-color: #{get-color('semi-dark-shade')};
   }
