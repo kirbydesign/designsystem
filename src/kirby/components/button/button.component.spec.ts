@@ -67,13 +67,13 @@ describe('ButtonComponent', () => {
 
     it('should render with correct background-color', () => {
       expect(element).toHaveComputedStyle({
-        'background-color': getColor('light', 'tint'),
+        'background-color': getColor('semi-light'),
       });
     });
 
     it('should render with correct border-color', () => {
       expect(element).toHaveComputedStyle({
-        'border-color': getColor('light', 'tint'),
+        'border-color': getColor('semi-light'),
       });
     });
 
