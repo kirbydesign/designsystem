@@ -156,8 +156,12 @@ function modalControllerFactory() {
     'showModal',
     'showActionSheet',
     'showAlert',
+    'blurNativeWrapper',
     'register',
     'hideTopmost',
+    'scrollToTop',
+    'scrollToBottom',
+    'hideAll',
   ]);
 }
 
