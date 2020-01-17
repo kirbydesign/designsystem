@@ -4,8 +4,9 @@ import {
   Input,
   HostBinding,
   HostListener,
-  Output,
   EventEmitter,
+  SimpleChanges,
+  OnChanges,
 } from '@angular/core';
 
 @Component({
@@ -15,7 +16,7 @@ import {
   styleUrls: ['./input.component.scss'],
   template: '',
 })
-export class InputComponent {
+export class InputComponent implements OnChanges {
   private static typeToInputmodeMap = {
     number: 'decimal',
     search: 'search',
@@ -64,5 +65,11 @@ export class InputComponent {
   private _onCutPaste(target: HTMLInputElement) {
     //Value of input element is updated after cut/paste:
     setTimeout(() => this.kirbyChange.emit(target.value));
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.value) {
+      this.kirbyChange.emit(changes.value.currentValue);
+    }
   }
 }
