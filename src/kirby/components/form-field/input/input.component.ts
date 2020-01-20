@@ -57,7 +57,8 @@ export class InputComponent implements OnChanges {
 
   @HostListener('keyup', ['$event.target.value'])
   private _onKeyUp(value: string) {
-    this.kirbyChange.emit(value);
+    const slicedValue = value.slice(0, this.maxlength);
+    this.kirbyChange.emit(slicedValue);
   }
 
   @HostListener('paste', ['$event.target'])
