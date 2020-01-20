@@ -8,6 +8,7 @@ import {
   Output,
   ElementRef,
   Inject,
+  NgZone,
 } from '@angular/core';
 import { Subject, fromEvent } from 'rxjs';
 import { debounceTime, takeUntil, filter, map } from 'rxjs/operators';
@@ -52,7 +53,11 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
    */
   private offset = 0.8;
 
-  constructor(private elementRef: ElementRef, @Inject(WINDOW_REF) private windowRef: WindowRef) {}
+  constructor(
+    private elementRef: ElementRef,
+    @Inject(WINDOW_REF) private windowRef: WindowRef,
+    private zone: NgZone
+  ) {}
 
   ngAfterViewInit(): void {
     if (this.disabled) return;
@@ -77,24 +82,28 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
       });
 
     setTimeout(() => {
-      const ionContent = this.elementRef.nativeElement.closest('ion-content');
+      const ionContent: HTMLElement = this.elementRef.nativeElement.closest('ion-content');
       if (ionContent) {
-        fromEvent<any>(ionContent, 'ionScroll')
-          .pipe(
-            takeUntil(this.ngUnsubscribe$),
-            debounceTime(INFINITE_SCROLL_DEBOUNCE),
-            filter(() => !this.disabled),
-            map(() => this.getScroll()),
-            filter((scroll) => {
-              return (
-                scroll.elementHeight * (1 - this.offset) >=
-                scroll.distanceToViewBottom - scroll.viewHeight
-              );
-            })
-          )
-          .subscribe(() => {
-            this.scrollEnd.emit();
-          });
+        // we run the 'ionScroll' event outside angular, as it would trigger change detection on each scroll
+        this.zone.runOutsideAngular(() => {
+          fromEvent<any>(ionContent, 'ionScroll')
+            .pipe(
+              takeUntil(this.ngUnsubscribe$),
+              debounceTime(INFINITE_SCROLL_DEBOUNCE),
+              filter(() => !this.disabled),
+              map(() => this.getScroll()),
+              filter((scroll) => {
+                return (
+                  scroll.elementHeight * (1 - this.offset) >=
+                  scroll.distanceToViewBottom - scroll.viewHeight
+                );
+              })
+            )
+            .subscribe(() => {
+              // we make sure to emit the event inside angular again. As we want to show the spinner and need change detection for that.
+              this.zone.run(() => this.scrollEnd.emit());
+            });
+        });
       }
     });
   }
