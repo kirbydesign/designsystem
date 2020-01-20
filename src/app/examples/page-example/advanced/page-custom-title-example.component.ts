@@ -9,10 +9,10 @@ import { BasePageExampleComponent } from '../base-page-example.component';
 const config = {
   template: `<kirby-page defaultBackHref="/">
 
-  <!-- Custom Page Title -->
-  <h1 *kirbyPageTitle [kirbyFitHeading]="{ maxLines: 2 }">
+  <!-- Custom Page Title! -->
+  <div *kirbyPageTitle>
     <ng-container *ngTemplateOutlet="customTitle"></ng-container>
-  </h1>
+  </div>
 
   <ng-template kirbyPageToolbarTitle>
     <ng-container *ngTemplateOutlet="customTitle"></ng-container>
@@ -20,9 +20,7 @@ const config = {
 
   <ng-template #customTitle>
     <div style="display: flex;">
-      <div style="overflow: hidden; text-overflow: ellipsis;">
-        Custom Title With a very long name
-      </div>
+      <h1 style="overflow: hidden; text-overflow: ellipsis;" [kirbyFitHeading]="{ maxLines: 2, truncate: true }">Custom Title With a very very very very very very very very very very very very long name</h1>
       <kirby-icon name="arrow-down"></kirby-icon>
     </div>
   </ng-template>

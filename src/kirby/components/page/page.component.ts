@@ -99,10 +99,11 @@ export class PageComponent
   implements OnInit, OnDestroy, AfterViewInit, AfterContentChecked, OnChanges {
   @Input() title?: string;
   @Input() toolbarTitle?: string;
-  @Input() titleAlignment?: 'left' | 'center' | 'right' = 'left';
   @Input() defaultBackHref?: string;
   @Input() hideBackButton?: boolean;
+  @Input() titleAlignment?: 'left' | 'center' | 'right' = 'left';
   @Input() titleMaxLines?: number;
+  @Input() titleTruncate?: boolean;
 
   @Output() enter = new EventEmitter<void>();
   @Output() leave = new EventEmitter<void>();
@@ -164,6 +165,15 @@ export class PageComponent
       this.fitHeadingConfig = {
         ...this.fitHeadingConfig,
         maxLines: changes.titleMaxLines.currentValue,
+      };
+    }
+
+    if (changes.titleTruncate) {
+      const shouldTruncate = changes.titleTruncate.currentValue;
+
+      this.fitHeadingConfig = {
+        ...this.fitHeadingConfig,
+        truncate: (shouldTruncate === 'boolean' && shouldTruncate) || shouldTruncate === 'true',
       };
     }
   }
@@ -231,6 +241,8 @@ export class PageComponent
     this.hasPageTitle = this.title !== undefined || !!this.customTitleTemplate;
     this.toolbarTitleVisible = !this.hasPageTitle;
 
+    console.log(this.hasPageTitle);
+
     if (this.hasPageTitle) {
       setTimeout(() => {
         this.pageTitleIntersectionObserverRef.observe(this.pageTitle.nativeElement);
@@ -245,6 +257,8 @@ export class PageComponent
       : typeof this.toolbarTitle === 'string'
         ? this.simpleToolbarTitleTemplate
         : defaultTitleTemplate;
+
+    console.log(this.toolbarTitleTemplate);
   }
 
   private initializeActions() {

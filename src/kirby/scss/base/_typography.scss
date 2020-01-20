@@ -23,6 +23,19 @@ kirby-app .page-title {
   }
 }
 
+kirby-app .toolbar-title {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-size: font-size('n');
+    font-weight: font-weight('normal');
+    margin: 0;
+  }
+}
+
 .kirby-text-display-1 {
   font-size: font-size('xxxxl');
   font-weight: font-weight('light');

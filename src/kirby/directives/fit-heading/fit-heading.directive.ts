@@ -1,4 +1,12 @@
-import { Directive, ElementRef, Input, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import {
+  AfterViewInit,
+  Directive,
+  ElementRef,
+  Input,
+  OnDestroy,
+  OnInit,
+  Renderer2,
+} from '@angular/core';
 
 import { ResizeObserverService } from '@kirbydesign/designsystem/components/shared/resize-observer/resize-observer.service';
 import { ResizeObserverEntry } from '@kirbydesign/designsystem/components/shared/resize-observer/types/resize-observer-entry';
@@ -13,6 +21,7 @@ interface HeadingSize {
 
 export interface FitHeadingConfig {
   maxLines: number;
+  truncate: boolean;
 }
 
 @Directive({
@@ -136,8 +145,31 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
     const fallbackSize = this.headingSizes[this.headingSizes.length - 1];
     const fittedSize = this.headingSizes.find(this.canFitHeading.bind(this)) || fallbackSize;
 
+    if (fittedSize.fontSize === fallbackSize.fontSize && this.config.truncate) {
+      this.truncate();
+    } else {
+      this.resetTruncation();
+    }
+
     this.setSize(this.elementRef.nativeElement, fittedSize);
+
     this.isScalingHeader = false;
+  }
+
+  private truncate() {
+    this.renderer.setStyle(this.elementRef.nativeElement, 'display', '-webkit-box');
+    this.renderer.setStyle(
+      this.elementRef.nativeElement,
+      '-webkit-line-clamp',
+      this.config.maxLines
+    );
+    this.renderer.setStyle(this.elementRef.nativeElement, '-webkit-box-orient', 'vertical');
+    this.renderer.setStyle(this.elementRef.nativeElement, 'overflow', 'hidden');
+    this.renderer.setStyle(this.elementRef.nativeElement, 'visibility', 'visible');
+  }
+
+  private resetTruncation() {
+    this.renderer.setStyle(this.elementRef.nativeElement, '-webkit-line-clamp', 'initial');
   }
 
   private canFitHeading(size: HeadingSize) {

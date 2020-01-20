@@ -25,11 +25,17 @@ ion-toolbar {
 
   ion-title {
     .toolbar-title {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      pointer-events: auto;
+      overflow: hidden;
+
       @include slotted('*') {
         text-overflow: ellipsis;
         white-space: nowrap;
         pointer-events: auto;
         overflow: hidden;
+        display: block;
       }
     }
   }

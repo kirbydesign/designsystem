@@ -45,6 +45,7 @@ import { TabsExampleComponent } from './tabs/tabs-example.component';
 import { TabExampleComponent } from './tabs/tab/tab-example.component';
 import { ItemExampleComponent } from './item-example/item-example.component';
 import { DividerExampleComponent } from './divider-example/divider-example.component';
+import { PageTruncateHeadingExampleComponent } from '~/app/examples/page-example/truncate-heading/truncate-heading-example.component';
 
 // Example of "custom" icons
 export const iconSettings: IconSettings = {
@@ -99,6 +100,7 @@ export const COMPONENT_DECLARATIONS: any[] = [
   PageSimpleExampleComponent,
   PageAlignmentAndToolbarTitleExampleComponent,
   PageFitHeadingExampleComponent,
+  PageTruncateHeadingExampleComponent,
   PageFixedTitleAndActionsExampleComponent,
   PageCustomTitleExampleComponent,
   PageAdvancedExampleComponent,

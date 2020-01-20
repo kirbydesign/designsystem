@@ -7,6 +7,7 @@ import { PageFixedTitleAndActionsExampleComponent } from '~/app/examples/page-ex
 import { PageCustomTitleExampleComponent } from '~/app/examples/page-example/advanced/page-custom-title-example.component';
 import { PageAdvancedExampleComponent } from '~/app/examples/page-example/advanced/page-advanced-example.component';
 import { PageFitHeadingExampleComponent } from '~/app/examples/page-example/fit-heading/fit-heading-example.component';
+import { PageTruncateHeadingExampleComponent } from '~/app/examples/page-example/truncate-heading/truncate-heading-example.component';
 
 @Component({
   selector: 'kirby-page-showcase',
@@ -18,6 +19,7 @@ export class PageShowcaseComponent {
   alignmentAndToolbarTitleExampleHtml: string =
     PageAlignmentAndToolbarTitleExampleComponent.template;
   fitHeadingExampleHtml: string = PageFitHeadingExampleComponent.template;
+  truncateHeadingExampleHtml: string = PageTruncateHeadingExampleComponent.template;
   fixedTitleAndActionsExampleHtml: string = PageFixedTitleAndActionsExampleComponent.template;
   fixedCustomTitleExampleHtml: string =
     PageFixedTitleAndActionsExampleComponent.customTitleTemplate;

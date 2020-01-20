@@ -47,6 +47,7 @@ import { ListColoredItemsExampleComponent } from './list/components/colored-item
 import { ListWithHeaderAndFooterExampleComponent } from './list/components/header-and-footer';
 import { ListWithSectionsExampleComponent } from './list/components/sections';
 import { ListItemsExampleComponent } from './list/components/items';
+import { PageTruncateHeadingExampleComponent } from '~/app/examples/page-example/truncate-heading/truncate-heading-example.component';
 
 export const routes: Routes = [
   {
@@ -72,6 +73,10 @@ export const routes: Routes = [
           {
             path: 'fit-heading',
             component: PageFitHeadingExampleComponent,
+          },
+          {
+            path: 'truncate-heading',
+            component: PageTruncateHeadingExampleComponent,
           },
           {
             path: 'fixed',
