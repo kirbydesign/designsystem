@@ -1,11 +1,10 @@
-/// <reference path="../../testing/element-css-custom-matchers.d.ts"/>
-
 import { RouterTestingModule } from '@angular/router/testing';
 import { SpectatorHost, createHostFactory } from '@ngneat/spectator';
 import { IonicModule } from '@ionic/angular';
+import { MockComponent } from 'ng-mocks';
 
+import { DesignTokenHelper } from '../../helpers/design-token-helper';
 import { TestHelper } from '../../testing/test-helper';
-import { ElementCssCustomMatchers } from '../../testing/element-css-custom-matchers';
 import {
   PageComponent,
   PageContentComponent,
@@ -15,7 +14,12 @@ import {
   PageToolbarTitleDirective,
 } from '../page/page.component';
 import { FitHeadingDirective } from '../../directives/fit-heading/fit-heading.directive';
+import { SizeDirective } from '../../directives/size/size.directive';
 import { ButtonComponent } from './button.component';
+import { IconComponent } from '../icon/icon.component';
+
+const getColor = DesignTokenHelper.getColor;
+const size = DesignTokenHelper.size;
 
 describe('ButtonComponent in Kirby Page', () => {
   let spectator: SpectatorHost<PageComponent>;
@@ -35,7 +39,6 @@ describe('ButtonComponent in Kirby Page', () => {
   });
 
   beforeEach(() => {
-    jasmine.addMatchers(ElementCssCustomMatchers);
     spectator = createHost<PageComponent>(
       `<kirby-page>
         <ng-template kirbyPageTitle>
@@ -75,17 +78,19 @@ describe('ButtonComponent in Kirby Page', () => {
 
     it('should render with no background-color', async () => {
       await TestHelper.whenHydrated(ionToolbar);
-      expect(actionButtonInHeader).toHaveBackgroundColor('transparent');
+      expect(actionButtonInHeader).toHaveComputedStyle({ 'background-color': 'transparent' });
     });
 
     it('should render with no border-color', async () => {
       await TestHelper.whenHydrated(ionToolbar);
-      expect(actionButtonInHeader).toHaveBorderColor('transparent');
+      expect(actionButtonInHeader).toHaveComputedStyle({ 'border-color': 'transparent' });
     });
 
     it('should render with correct color', async () => {
       await TestHelper.whenHydrated(ionToolbar);
-      expect(actionButtonInHeader).toHaveThemeColor('primary', 'contrast');
+      expect(actionButtonInHeader).toHaveComputedStyle({
+        color: getColor('primary', 'contrast'),
+      });
     });
   });
 
@@ -106,17 +111,23 @@ describe('ButtonComponent in Kirby Page', () => {
 
     it('should render with correct background-color', async () => {
       await TestHelper.whenHydrated(ionContent);
-      expect(actionButtonInPage).toHaveThemeBackgroundColor('white');
+      expect(actionButtonInPage).toHaveComputedStyle({
+        'background-color': getColor('white'),
+      });
     });
 
     it('should render with correct border-color', async () => {
       await TestHelper.whenHydrated(ionContent);
-      expect(actionButtonInPage).toHaveThemeBorderColor('white');
+      expect(actionButtonInPage).toHaveComputedStyle({
+        'border-color': getColor('white'),
+      });
     });
 
     it('should render with correct color', async () => {
       await TestHelper.whenHydrated(ionContent);
-      expect(actionButtonInPage).toHaveThemeColor('white', 'contrast');
+      expect(actionButtonInPage).toHaveComputedStyle({
+        color: getColor('white', 'contrast'),
+      });
     });
   });
 
@@ -135,17 +146,112 @@ describe('ButtonComponent in Kirby Page', () => {
 
     it('should render with correct background-color', async () => {
       await TestHelper.whenHydrated(ionContent);
-      expect(normalButtonInPage).toHaveThemeBackgroundColor('primary');
+      expect(normalButtonInPage).toHaveComputedStyle({
+        'background-color': getColor('primary'),
+      });
     });
 
     it('should render with correct border-color', async () => {
       await TestHelper.whenHydrated(ionContent);
-      expect(normalButtonInPage).toHaveThemeBorderColor('primary');
+      expect(normalButtonInPage).toHaveComputedStyle({
+        'border-color': getColor('primary'),
+      });
     });
 
     it('should render with correct color', async () => {
       await TestHelper.whenHydrated(ionContent);
-      expect(normalButtonInPage).toHaveThemeColor('primary', 'contrast');
+      expect(normalButtonInPage).toHaveComputedStyle({
+        color: getColor('primary', 'contrast'),
+      });
+    });
+  });
+});
+
+describe('ButtonComponent with size directive', () => {
+  let spectator: SpectatorHost<ButtonComponent>;
+  let element: HTMLButtonElement;
+  const createHost = createHostFactory({
+    component: ButtonComponent,
+    declarations: [ButtonComponent, SizeDirective, MockComponent(IconComponent)],
+  });
+
+  describe('when configured with size = SM', () => {
+    beforeEach(() => {
+      spectator = createHost('<button kirby-button size="sm">Test</button>');
+      element = spectator.element as HTMLButtonElement;
+    });
+
+    it('should render with correct font-size', () => {
+      const expected = DesignTokenHelper.fontSize('xs');
+      expect(element).toHaveComputedStyle({ 'font-size': expected });
+    });
+
+    it('should render with correct height', () => {
+      const expected = DesignTokenHelper.size('l');
+      expect(element).toHaveComputedStyle({ height: expected });
+    });
+  });
+
+  describe('when configured with size = LG', () => {
+    beforeEach(() => {
+      spectator = createHost('<button kirby-button size="lg">Test</button>');
+      element = spectator.element as HTMLButtonElement;
+    });
+
+    it('should render with correct font-size', () => {
+      const expected = DesignTokenHelper.fontSize('n');
+      expect(element).toHaveComputedStyle({ 'font-size': expected });
+    });
+
+    it('should render with correct height', () => {
+      expect(element).toHaveComputedStyle({ height: size('xxl') });
+    });
+
+    it('should render with correct min-width', () => {
+      expect(element).toHaveComputedStyle({ 'min-width': '220px' });
+    });
+  });
+});
+
+describe('ButtonComponent configured with icon only', () => {
+  let spectator: SpectatorHost<ButtonComponent>;
+  let element: HTMLButtonElement;
+  const createHost = createHostFactory({
+    component: ButtonComponent,
+    declarations: [ButtonComponent, SizeDirective, MockComponent(IconComponent)],
+  });
+
+  it('should render with correct width', () => {
+    spectator = createHost(
+      `<button kirby-button>
+        <kirby-icon name="edit">
+      </kirby-icon></button>`
+    );
+    element = spectator.element as HTMLButtonElement;
+    expect(element).toHaveComputedStyle({ width: size('xl') });
+  });
+
+  describe('and size directive with size = SM', () => {
+    it('should render with correct width', () => {
+      spectator = createHost(
+        `<button kirby-button size="sm">
+          <kirby-icon name="edit">
+        </kirby-icon></button>`
+      );
+      element = spectator.element as HTMLButtonElement;
+      expect(element).toHaveComputedStyle({ width: size('l') });
+    });
+  });
+
+  describe('and size directive with size = LG', () => {
+    it('should render with correct width', () => {
+      spectator = createHost(
+        `<button kirby-button size="lg">
+          <kirby-icon name="edit">
+        </kirby-icon></button>`
+      );
+      element = spectator.element as HTMLButtonElement;
+      expect(element).toHaveComputedStyle({ width: size('xxl') });
     });
   });
 });

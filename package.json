@@ -1,12 +1,14 @@
 {
   "name": "designsystem",
-  "version": "0.8.71",
+  "version": "0.8.80",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "build-polyfills": "webpack --config webpack.polyfills.config.js",
     "test": "ng test",
+    "test:headless-browser": "ng test --browsers=ChromeCustom",
+    "test:headless-browser:single": "npm run test:headless-browser -- --watch=false",
     "ci-test": "ng test --progress false --watch false --code-coverage",
     "lint": "npm run lint:ts && npm run lint:css",
     "lint:ts": "tslint './src/**/*.ts'",
@@ -90,6 +92,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
+      "pre-push": "npm run test:headless-browser:single",
       "post-merge": "post-npm-install"
     }
   }

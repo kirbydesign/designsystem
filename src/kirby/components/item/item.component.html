@@ -1,6 +1,3 @@
-<div class="outside">
-  <ng-content select="[slot='outside']"></ng-content>
-</div>
 <ion-item
   lines="none"
   [attr.disabled]="disabled"
@@ -8,5 +5,8 @@
   [attr.tabindex]="selectable ? null : 0"
   detail="false"
 >
+  <div class="outside" slot="start">
+    <ng-content select="[slot='outside']"></ng-content>
+  </div>
   <ng-content></ng-content>
 </ion-item>

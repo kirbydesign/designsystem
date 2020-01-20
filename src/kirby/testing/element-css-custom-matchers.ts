@@ -1,99 +1,77 @@
 import CustomMatcherFactories = jasmine.CustomMatcherFactories;
 import CustomEqualityTester = jasmine.CustomEqualityTester;
-import CustomMatcher = jasmine.CustomMatcher;
 import CustomMatcherResult = jasmine.CustomMatcherResult;
 import MatchersUtil = jasmine.MatchersUtil;
 
 import { TestHelper } from './test-helper';
 import { ColorHelper } from '../helpers/color-helper';
-import { ThemeColor } from '../helpers/theme-color.type';
+import { ThemeColorDefinition } from '../helpers/design-token-helper';
 
 export const ElementCssCustomMatchers: CustomMatcherFactories = {
-  toHaveColor: function(
-    util: MatchersUtil,
-    customEqualityTesters: CustomEqualityTester[]
-  ): CustomMatcher {
-    return {
-      compare: (element: Element, expectedColor: string): CustomMatcherResult =>
-        compareCssProperty(
-          util,
-          customEqualityTesters,
-          element,
-          'color',
-          ColorHelper.colorStringToRgbString(expectedColor)
-        ),
-    };
-  },
-  toHaveBackgroundColor: function(
-    util: MatchersUtil,
-    customEqualityTesters: CustomEqualityTester[]
-  ): CustomMatcher {
-    return {
-      compare: (element: Element, expectedColor: string): CustomMatcherResult =>
-        compareCssProperty(
-          util,
-          customEqualityTesters,
-          element,
-          'background-color',
-          ColorHelper.colorStringToRgbString(expectedColor)
-        ),
-    };
-  },
-  toHaveBorderColor: function(
-    util: MatchersUtil,
-    customEqualityTesters: CustomEqualityTester[]
-  ): CustomMatcher {
-    return {
-      compare: (element: Element, expectedColor: string): CustomMatcherResult =>
-        compareCssProperty(
-          util,
-          customEqualityTesters,
-          element,
-          'border-color',
-          ColorHelper.colorStringToRgbString(expectedColor)
-        ),
-    };
-  },
-  toHaveThemeColor: (
-    util: MatchersUtil,
-    customEqualityTesters: CustomEqualityTester[]
-  ): CustomMatcher => themeColorMatcher(util, customEqualityTesters, 'color'),
-  toHaveThemeBackgroundColor: (
-    util: MatchersUtil,
-    customEqualityTesters: CustomEqualityTester[]
-  ): CustomMatcher => themeColorMatcher(util, customEqualityTesters, 'background-color'),
-  toHaveThemeBorderColor: (
-    util: MatchersUtil,
-    customEqualityTesters: CustomEqualityTester[]
-  ): CustomMatcher => themeColorMatcher(util, customEqualityTesters, 'border-color'),
+  toHaveComputedStyle: (util: MatchersUtil, customEqualityTesters: CustomEqualityTester[]) =>
+    cssPropertyMatcher(util, customEqualityTesters),
 };
 
-function themeColorMatcher(
-  util: MatchersUtil,
-  customEqualityTesters: CustomEqualityTester[],
-  cssProperty: string
-): CustomMatcher {
+function cssPropertyMatcher(util: MatchersUtil, customEqualityTesters: CustomEqualityTester[]) {
   return {
     compare: (
       element: Element,
-      expectedColorName: ThemeColor | 'black' | 'semi-light' | 'semi-dark',
-      expectedVariant?: 'shade' | 'tint' | 'contrast'
-    ): CustomMatcherResult => {
-      const variantSuffix = expectedVariant ? `-${expectedVariant}` : '';
-      const expectedColorVariant = `${expectedColorName}${variantSuffix}`;
-      const expectedColor = ColorHelper.getThemeColorRgbString(expectedColorVariant);
-      if (expectedColor === undefined) {
-        throw new Error(`'${expectedColorName}' is not a Kirby Theme Color!!!`);
-      }
-      return compareCssProperty(
-        util,
-        customEqualityTesters,
-        element,
-        cssProperty,
-        expectedColor,
-        expectedColorVariant
-      );
+      expectedStyles: { [cssProperty: string]: string | ThemeColorDefinition }
+    ) => {
+      let allPassed = Object.keys(expectedStyles).length !== 0;
+      let messages = [];
+      Object.keys(expectedStyles).forEach((cssProperty) => {
+        const expectedValue = expectedStyles[cssProperty];
+        const { expectedStringValue, expectedValueAlias } = getExpectedStringValueAndAlias(
+          cssProperty,
+          expectedValue
+        );
+        const { pass, message } = compareCssProperty(
+          util,
+          customEqualityTesters,
+          element,
+          cssProperty,
+          expectedStringValue,
+          expectedValueAlias
+        );
+        allPassed = allPassed && pass;
+        if (message) {
+          messages.push(message);
+        }
+      });
+      const result = {
+        pass: allPassed,
+        message: messages.join('\n'),
+      };
+      return result;
     },
+  };
+}
+
+function getExpectedStringValueAndAlias(
+  cssProperty: string,
+  expectedValue: string | ThemeColorDefinition
+) {
+  let expectedStringValue;
+  let expectedValueAlias;
+
+  if (typeof expectedValue === 'string') {
+    expectedStringValue = expectedValue;
+    if (cssProperty.indexOf('color') != -1) {
+      expectedValueAlias = expectedValue;
+      expectedStringValue = ColorHelper.colorStringToRgbString(expectedValue);
+      if (expectedValue === expectedValueAlias) {
+        expectedValueAlias = undefined;
+      }
+    }
+  } else {
+    expectedStringValue = expectedValue.value;
+    expectedValueAlias = expectedValue.fullname;
+  }
+
+  return {
+    expectedStringValue,
+    expectedValueAlias,
   };
 }
 
