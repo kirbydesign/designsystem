@@ -37,6 +37,7 @@ import {
   CardHeaderComponent,
   CardFooterComponent,
   ChipComponent,
+  CheckboxComponent,
   DividerComponent,
   EmptyStateComponent,
   GridComponent,
@@ -83,6 +84,7 @@ const MOCK_COMPONENTS = MockComponents(
   CardComponent,
   CardHeaderComponent,
   CardFooterComponent,
+  CheckboxComponent,
   ChipComponent,
   DividerComponent,
   EmptyStateComponent,
@@ -154,8 +156,12 @@ function modalControllerFactory() {
     'showModal',
     'showActionSheet',
     'showAlert',
+    'blurNativeWrapper',
     'register',
     'hideTopmost',
+    'scrollToTop',
+    'scrollToBottom',
+    'hideAll',
   ]);
 }
 

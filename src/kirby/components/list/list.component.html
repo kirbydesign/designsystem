@@ -30,7 +30,7 @@
 </div>
 
 <ng-template #groupedListTemplate>
-  <ion-item-group *ngFor="let section of groupedItems; trackBy: defaultTrackBy">
+  <ion-item-group *ngFor="let section of groupedItems; trackBy: sectionTrackBy">
     <ion-item-divider>
       <ng-container
         *ngTemplateOutlet="sectionHeaderTemplate; context: { $implicit: section.name }"

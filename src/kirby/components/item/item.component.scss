@@ -52,40 +52,11 @@
   }
 
   .outside {
+    left: size('xxxs');
+    margin: 0;
     position: absolute;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
     width: size('s');
-  }
-}
-
-:host-context(kirby-list .item-sliding-active-slide) .outside {
-  display: none;
-}
-
-:host-context(kirby-list ion-item-sliding:first-of-type) {
-  .outside {
-    // Add half of item padding to align vertically:
-    padding-top: size('xxs');
-  }
-  ion-item {
-    --padding-top: #{size('s')};
-  }
-}
-
-:host-context(kirby-list ion-item-sliding:last-of-type) {
-  .outside {
-    // Add half of item padding to align vertically:
-    padding-bottom: size('xxs');
-  }
-  ion-item {
-    --padding-bottom: #{size('s')};
+    z-index: 1;
   }
 }
 
