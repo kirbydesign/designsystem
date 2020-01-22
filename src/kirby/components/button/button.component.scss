@@ -1,12 +1,22 @@
 @import '../../scss/utils';
 
 @mixin button-sm {
-  padding: size('xxxs') size('s') size('xxxs') size('s');
   font-size: font-size('xs');
   height: size('l');
+  --kirby-button-padding-left: #{size('s')};
+  --kirby-button-padding-right: #{size('s')};
+  --kirby-button-padding-top: #{size('xxxs')};
+  --kirby-button-padding-bottom: #{size('xxxs')};
 
   &.icon-only {
     width: size('l');
+  }
+
+  &.icon-left,
+  &.icon-right {
+    ::ng-deep kirby-icon {
+      --kirby-icon-font-size: #{font-size('n')};
+    }
   }
 }
 
@@ -45,6 +55,7 @@
 }
 
 @mixin button-attentionlevel3 {
+  --kirby-button-border-width: 1px;
   --kirby-button-border-color: #{get-color('medium')};
   --kirby-button-color: #{get-color('medium-contrast')};
 
@@ -67,45 +78,32 @@
   --kirby-button-border-radius: #{$border-radius-round};
   --kirby-button-padding-left: #{size('m')};
   --kirby-button-padding-right: #{size('m')};
-  font-family: var(--kirby-font-family);
+  --kirby-button-padding-top: 0;
+  --kirby-button-padding-bottom: 0;
+  --kirby-button-border-width: 0;
+  align-items: center;
   background-color: var(--kirby-button-background-color);
   border-radius: var(--kirby-button-border-radius);
-  border: 1px solid var(--kirby-button-border-color);
+  border: var(--kirby-button-border-width) solid var(--kirby-button-border-color);
+  box-sizing: border-box;
   color: var(--kirby-button-color);
   cursor: pointer;
-  transition: opacity 200ms linear;
   display: inline-flex;
   flex-direction: row;
-  align-items: center;
+  font-family: var(--kirby-font-family);
   justify-content: center;
-  vertical-align: middle;
-  box-sizing: border-box;
-  white-space: nowrap;
+  transition: opacity 200ms linear;
   user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
 
   // we default to 'md' size.
   margin: size('xxxs');
-  padding: size('xxs') var(--kirby-button-padding-right) size('xxs')
-    var(--kirby-button-padding-left);
+  padding: var(--kirby-button-padding-top) var(--kirby-button-padding-right)
+    var(--kirby-button-padding-bottom) var(--kirby-button-padding-left);
   font-size: font-size('s');
   height: size('xl');
-  line-height: line-height('xs');
-
-  &.icon-left {
-    --kirby-icon-margin-right: #{size('xxs')};
-    --kirby-button-padding-left: #{size('xs')};
-    --kirby-button-padding-right: #{size('s')};
-  }
-
-  &.icon-right {
-    --kirby-icon-margin-left: #{size('xxs')};
-    --kirby-button-padding-left: #{size('s')};
-    --kirby-button-padding-right: #{size('xs')};
-  }
-
-  &.icon-only {
-    width: size('xl');
-  }
+  line-height: line-height('s');
 
   &.sm {
     @include button-sm;
@@ -129,6 +127,30 @@
 
   &.attention-level4 {
     @include button-attentionlevel4;
+  }
+
+  &.icon-left {
+    --kirby-button-padding-left: #{size('xxs')};
+    --kirby-button-padding-right: #{size('s')};
+
+    ::ng-deep kirby-icon {
+      --kirby-icon-margin-right: #{size('xxs')};
+    }
+  }
+
+  &.icon-right {
+    --kirby-button-padding-left: #{size('s')};
+    --kirby-button-padding-right: #{size('xxs')};
+
+    ::ng-deep kirby-icon {
+      --kirby-icon-margin-left: #{size('xxs')};
+    }
+  }
+
+  &.icon-only {
+    width: size('xl');
+    padding: 0;
+    min-width: unset;
   }
 
   &[expand='block'] {
@@ -159,6 +181,7 @@
   :host-context(.kirby-color-brightness-dark) {
     &.attention-level3 {
       --kirby-button-border-color: #{get-color('white')};
+      --kirby-button-border-width: 1px;
       --kirby-button-color: #{get-color('white')};
     }
     &.attention-level4 {
@@ -175,11 +198,6 @@
     &:not(:disabled) {
       box-shadow: get-elevation(8);
     }
-  }
-
-  &.icon-only {
-    padding: 0;
-    min-width: unset;
   }
 }
 
