@@ -20,6 +20,7 @@ import { IconComponent } from '../icon/icon.component';
 
 const getColor = DesignTokenHelper.getColor;
 const size = DesignTokenHelper.size;
+const fontSize = DesignTokenHelper.fontSize;
 
 describe('ButtonComponent in Kirby Page', () => {
   let spectator: SpectatorHost<PageComponent>;
@@ -176,9 +177,14 @@ describe('ButtonComponent with size directive', () => {
   });
 
   describe('when configured with size = SM', () => {
+    let kirbyIcon: Element;
+
     beforeEach(() => {
-      spectator = createHost('<button kirby-button size="sm">Test</button>');
+      spectator = createHost(
+        '<button kirby-button size="sm"><span>Text Left</span><kirby-icon name="arrow-down"></kirby-icon></button>'
+      );
       element = spectator.element as HTMLButtonElement;
+      kirbyIcon = element.getElementsByTagName('kirby-icon')[0];
     });
 
     it('should render with correct font-size', () => {
@@ -252,6 +258,37 @@ describe('ButtonComponent configured with icon only', () => {
       );
       element = spectator.element as HTMLButtonElement;
       expect(element).toHaveComputedStyle({ width: size('xxl') });
+    });
+  });
+});
+
+describe('ButtonComponent configured with icon and text', () => {
+  let kirbyIcon: Element;
+  let spectator: SpectatorHost<ButtonComponent>;
+  let element: HTMLButtonElement;
+  const createHost = createHostFactory({
+    component: ButtonComponent,
+    declarations: [ButtonComponent, SizeDirective, MockComponent(IconComponent)],
+  });
+
+  describe('and size directive with size = SM', () => {
+    beforeEach(() => {
+      spectator = createHost(
+        `
+        <button kirby-button size="sm">
+            <span>Text Left</span>
+            <kirby-icon name="arrow-down">
+          </kirby-icon>
+        </button>
+        `
+      );
+
+      element = spectator.element as HTMLButtonElement;
+      kirbyIcon = element.getElementsByTagName('kirby-icon')[0];
+    });
+
+    it('should render with correct icon font-size', () => {
+      expect(kirbyIcon).toHaveComputedStyle({ '--kirby-icon-font-size': ` ${size('s')}` });
     });
   });
 });

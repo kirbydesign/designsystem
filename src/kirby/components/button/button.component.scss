@@ -15,7 +15,7 @@
   &.icon-left,
   &.icon-right {
     ::ng-deep kirby-icon {
-      --kirby-icon-font-size: #{font-size('n')};
+      --kirby-icon-font-size: #{size('s')};
     }
   }
 }
