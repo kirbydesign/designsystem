@@ -181,6 +181,10 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
     return index;
   }
 
+  sectionTrackBy(_: number, section: { name: string }): string {
+    return section.name;
+  }
+
   getSwipeActionsSide(side: 'left' | 'right', item: any): ListSwipeAction[] {
     if (!Array.isArray(this.swipeActions)) {
       return [];

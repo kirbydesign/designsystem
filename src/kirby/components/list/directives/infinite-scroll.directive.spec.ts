@@ -1,4 +1,4 @@
-import { ElementRef } from '@angular/core';
+import { ElementRef, NgZone } from '@angular/core';
 import { fakeAsync, tick } from '@angular/core/testing';
 import { SpyObject } from '@ngneat/spectator';
 
@@ -18,9 +18,18 @@ describe('InfiniteScrollDirective', () => {
     nativeElement.closest.and.returnValue(null);
     document.getElementsByTagName.and.returnValue([]);
 
+    const mockNgZone: SpyObject<NgZone> = jasmine.createSpyObj('ngZone', [
+      'runOutsideAngular',
+      'run',
+    ]);
+
+    mockNgZone.run.and.callFake((fn) => fn());
+    mockNgZone.runOutsideAngular.and.callFake((fn) => fn());
+
     const directive = new InfiniteScrollDirective(
       { nativeElement } as ElementRef,
-      { nativeWindow: { innerHeight: viewHeight, document: document as Document } } as WindowRef
+      { nativeWindow: { innerHeight: viewHeight, document: document as Document } } as WindowRef,
+      mockNgZone
     );
     spyOn(directive.scrollEnd, 'emit');
     directive.ngAfterViewInit();
