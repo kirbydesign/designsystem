@@ -7,6 +7,7 @@ import {
   EventEmitter,
   SimpleChanges,
   OnChanges,
+  ElementRef,
 } from '@angular/core';
 
 @Component({
@@ -22,7 +23,14 @@ export class InputComponent implements OnChanges {
     search: 'search',
   };
 
+  private element;
+  private previousValue: any;
+
   kirbyChange = new EventEmitter<string>();
+
+  constructor(private el: ElementRef) {
+    this.element = this.el.nativeElement;
+  }
 
   @Input() set type(value: string) {
     const mappedValue = InputComponent.typeToInputmodeMap[value];
@@ -57,8 +65,18 @@ export class InputComponent implements OnChanges {
 
   @HostListener('keyup', ['$event.target.value'])
   private _onKeyUp(value: string) {
-    const slicedValue = value.slice(0, this.maxlength);
-    this.kirbyChange.emit(slicedValue);
+    let currentValue = value;
+
+    if (currentValue.length > this.maxlength) {
+      currentValue = this.previousValue;
+      this.element.value = currentValue;
+    }
+
+    if (currentValue.length <= this.maxlength) {
+      this.previousValue = currentValue;
+    }
+
+    this.kirbyChange.emit(currentValue);
   }
 
   @HostListener('paste', ['$event.target'])
