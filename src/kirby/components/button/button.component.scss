@@ -211,3 +211,10 @@
   }
 }
 /* clean-css ignore:end */
+
+// Temp fix for https://github.com/angular/angular-cli/issues/13854#issuecomment-470831308
+/* clean-css ignore:start */
+:host-context(kirby-empty-state .content) {
+  @include button-lg;
+}
+/* clean-css ignore:end */
