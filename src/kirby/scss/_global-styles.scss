@@ -93,7 +93,7 @@
 .kirby-toast {
   position: fixed;
   user-select: none;
-  // text-align: center;
+  text-align: center;
 
   // Set default colors
   --background: #{get-color('success')};
