@@ -49,6 +49,7 @@
       top: -#{size('xxs')};
       right: #{size('xxs')};
       z-index: z('segmentBadge');
+      display: flex;
     }
   }
 
