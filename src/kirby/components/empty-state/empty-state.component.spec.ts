@@ -1,9 +1,9 @@
 import { MockComponent } from 'ng-mocks';
 import { SpectatorHost, createHostFactory } from '@ngneat/spectator';
 
+import { DesignTokenHelper } from './../../helpers/design-token-helper';
 import { IconComponent } from '../icon/icon.component';
 import { EmptyStateComponent } from './empty-state.component';
-import { DesignTokenHelper } from './../../../../dist-lib/helpers/design-token-helper';
 
 const size = DesignTokenHelper.size;
 
