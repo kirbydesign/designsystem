@@ -9,7 +9,7 @@ import { DesignTokenHelper } from '../../helpers/design-token-helper';
 
 const size = DesignTokenHelper.size;
 
-fdescribe('FormFieldComponent', () => {
+describe('FormFieldComponent', () => {
   let spectator: SpectatorHost<FormFieldComponent>;
   let element: HTMLButtonElement;
 
