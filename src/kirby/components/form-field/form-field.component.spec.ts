@@ -1,25 +1,57 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { SpectatorHost, createHostFactory } from '@ngneat/spectator';
 
+import { InputCounterComponent } from './input-counter/input-counter.component';
 import { FormFieldComponent } from './form-field.component';
 import { FormFieldMessageComponent } from './form-field-message/form-field-message.component';
+import { InputComponent } from './input/input.component';
+import { TextareaComponent } from './textarea/textarea.component';
+import { DesignTokenHelper } from '../../helpers/design-token-helper';
 
-describe('FormFieldComponent', () => {
-  let component: FormFieldComponent;
-  let fixture: ComponentFixture<FormFieldComponent>;
+const size = DesignTokenHelper.size;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [FormFieldComponent, FormFieldMessageComponent],
-    }).compileComponents();
-  }));
+fdescribe('FormFieldComponent', () => {
+  let spectator: SpectatorHost<FormFieldComponent>;
+  let element: HTMLButtonElement;
+
+  const createHost = createHostFactory({
+    component: FormFieldComponent,
+    declarations: [
+      FormFieldComponent,
+      FormFieldMessageComponent,
+      InputComponent,
+      TextareaComponent,
+      InputCounterComponent,
+    ],
+  });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FormFieldComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    spectator = createHost(
+      '<kirby-form-field><input kirby-input placeholder="Default input with placeholder text"/></kirby-form-field>'
+    );
+    element = spectator.element as HTMLButtonElement;
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(spectator.component).toBeTruthy();
+  });
+
+  describe('when containing an input element', () => {
+    let inputElement: HTMLInputElement;
+
+    beforeEach(() => {
+      inputElement = element.getElementsByTagName('input')[0] as HTMLInputElement;
+    });
+
+    it('should render with correct height', () => {
+      expect(inputElement).toHaveComputedStyle({ height: size('xxxl') });
+    });
+
+    it('should render with correct box-sizing', () => {
+      expect(inputElement).toHaveComputedStyle({ 'box-sizing': 'border-box' });
+    });
+
+    it('should render with correct border-width', () => {
+      expect(inputElement).toHaveComputedStyle({ 'border-width': '1px' });
+    });
   });
 });
