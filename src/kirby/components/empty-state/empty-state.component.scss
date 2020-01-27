@@ -19,7 +19,7 @@ article {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border: 4px solid get-color('medium');
+  border: size('xxxs') solid get-color('medium');
   border-radius: 50%;
 }
 
