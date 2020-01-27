@@ -1,26 +1,40 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MockComponents } from 'ng-mocks';
+import { MockComponent } from 'ng-mocks';
+import { SpectatorHost, createHostFactory } from '@ngneat/spectator';
 
+import { IconComponent } from '../icon/icon.component';
 import { EmptyStateComponent } from './empty-state.component';
-import { IconComponent } from '@kirbydesign/designsystem/components/icon/icon.component';
+import { DesignTokenHelper } from './../../../../dist-lib/helpers/design-token-helper';
+
+const size = DesignTokenHelper.size;
 
 describe('EmptyStateComponent', () => {
-  let component: EmptyStateComponent;
-  let fixture: ComponentFixture<EmptyStateComponent>;
+  let spectator: SpectatorHost<EmptyStateComponent>;
+  let element: HTMLElement;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [EmptyStateComponent, MockComponents(IconComponent)],
-    }).compileComponents();
-  }));
+  const createHost = createHostFactory({
+    component: EmptyStateComponent,
+    declarations: [EmptyStateComponent, MockComponent(IconComponent)],
+  });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EmptyStateComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    spectator = createHost(`
+    <kirby-empty-state
+      iconName="help"
+      title="No items"
+      subtitle="You don't have any items. Call support to add some items to your account."
+    >
+      <button kirby-button>Call support</button>
+    </kirby-empty-state>
+    `);
+    element = spectator.element;
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(spectator.component).toBeTruthy();
+  });
+
+  it('should render with the correct border width', () => {
+    const outlineElement = element.getElementsByClassName('icon-outline')[0];
+    expect(outlineElement).toHaveComputedStyle({ 'border-width': size('xxxs') });
   });
 });
