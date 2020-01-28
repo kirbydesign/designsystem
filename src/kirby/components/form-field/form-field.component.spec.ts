@@ -11,7 +11,7 @@ const size = DesignTokenHelper.size;
 
 describe('FormFieldComponent', () => {
   let spectator: SpectatorHost<FormFieldComponent>;
-  let element: HTMLButtonElement;
+  let element: HTMLElement;
 
   const createHost = createHostFactory({
     component: FormFieldComponent,
@@ -28,7 +28,7 @@ describe('FormFieldComponent', () => {
     spectator = createHost(
       '<kirby-form-field><input kirby-input placeholder="Default input with placeholder text"/></kirby-form-field>'
     );
-    element = spectator.element as HTMLButtonElement;
+    element = spectator.element as HTMLElement;
   });
 
   it('should create', () => {
