@@ -1,1 +1,17 @@
 @import '../form-field-inputs.shared';
+
+:host() {
+  &[type='number'] {
+    //fallback
+    appearance: textfield;
+    //Firefox
+    -moz-appearance: textfield;
+  }
+
+  //Chrome, Safari, Edge, Opera */
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
