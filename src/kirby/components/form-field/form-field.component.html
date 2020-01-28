@@ -5,7 +5,7 @@
 <ng-container *ngIf="!label">
   <ng-container *ngTemplateOutlet="slottedInput"></ng-container>
 </ng-container>
-<div *ngIf="message || counter" class="texts">
+<div *ngIf="message || counter" class="texts" [class.message-only]="message && !counter">
   <kirby-form-field-message class="message" [text]="message"></kirby-form-field-message>
 
   <div class="counter">
