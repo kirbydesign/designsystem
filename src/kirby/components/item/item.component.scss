@@ -9,6 +9,8 @@
     font-size: font-size('s');
     --min-height: 0;
     --padding-start: #{size('s')};
+    --padding-top: #{size('s')};
+    --padding-bottom: #{size('s')};
     --inner-padding-end: #{size('s')};
     --background: var(--kirby-item-background, #{get-color('white')});
     --background-activated: var(--kirby-item-background-activated, #{get-color('white-shade')});
@@ -36,17 +38,12 @@
     }
   }
 
-  ion-item.normal {
-    --padding-top: #{size('s')};
-    --padding-bottom: #{size('s')};
-  }
-
-  ion-item.small {
+  &.sm ion-item {
     --padding-top: #{size('xxs')};
     --padding-bottom: #{size('xxs')};
   }
 
-  ion-item.tiny {
+  &.xs ion-item {
     --padding-top: #{size('xxxs')};
     --padding-bottom: #{size('xxxs')};
   }

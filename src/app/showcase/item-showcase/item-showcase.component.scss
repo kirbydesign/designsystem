@@ -25,6 +25,10 @@
   }
 }
 
+.sizes kirby-example-viewer {
+  margin-top: size('xs');
+}
+
 .comment {
   font-style: italic;
   color: get-color('semi-dark');

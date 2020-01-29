@@ -68,16 +68,18 @@
   <a href="#" (click)="scrollTo(flagged)">this example</a>.
 </p>
 
-<h2>Sizes</h2>
-<kirby-example-viewer [html]="simpleExampleNormal.template">
-  <kirby-item-example-simple-normal #simpleExampleNormal></kirby-item-example-simple-normal>
-</kirby-example-viewer>
-<kirby-example-viewer [html]="simpleExampleSmall.template">
-  <kirby-item-example-simple-small #simpleExampleSmall></kirby-item-example-simple-small>
-</kirby-example-viewer>
-<kirby-example-viewer [html]="simpleExampleTiny.template">
-  <kirby-item-example-simple-tiny #simpleExampleTiny></kirby-item-example-simple-tiny>
-</kirby-example-viewer>
+<section class="sizes">
+  <h2>Sizes</h2>
+  <kirby-example-viewer [html]="simpleExampleMedium.template">
+    <kirby-item-example-simple-md #simpleExampleMedium></kirby-item-example-simple-md>
+  </kirby-example-viewer>
+  <kirby-example-viewer [html]="simpleExampleSmall.template">
+    <kirby-item-example-simple-sm #simpleExampleSmall></kirby-item-example-simple-sm>
+  </kirby-example-viewer>
+  <kirby-example-viewer [html]="simpleExampleExtraSmall.template">
+    <kirby-item-example-simple-xs #simpleExampleExtraSmall></kirby-item-example-simple-xs>
+  </kirby-example-viewer>
+</section>
 
 <h2>Simple</h2>
 <h3>Default</h3>

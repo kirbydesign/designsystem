@@ -12,6 +12,4 @@ export class ItemComponent {
   selected;
   @Input()
   selectable: boolean;
-  @Input()
-  size: 'normal' | 'small' | 'tiny' = 'normal';
 }
