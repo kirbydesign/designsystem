@@ -7,11 +7,12 @@
 
   ion-item {
     font-size: font-size('s');
-    --min-height: 0;
+    --min-height: 56px;
     --padding-start: #{size('s')};
-    --padding-top: #{size('s')};
-    --padding-bottom: #{size('s')};
+    --inner-padding-top: #{size('xxs')};
+    --inner-padding-bottom: #{size('xxs')};
     --inner-padding-end: #{size('s')};
+
     --background: var(--kirby-item-background, #{get-color('white')});
     --background-activated: var(--kirby-item-background-activated, #{get-color('white-shade')});
     --background-focused: var(--kirby-item-background-focused, #{get-color('background-color')});
@@ -39,13 +40,13 @@
   }
 
   &.sm ion-item {
-    --padding-top: #{size('xxs')};
-    --padding-bottom: #{size('xxs')};
+    --min-height: 44px;
   }
 
   &.xs ion-item {
-    --padding-top: #{size('xxxs')};
-    --padding-bottom: #{size('xxxs')};
+    --min-height: 32px;
+    --inner-padding-top: #{size('xxxs')};
+    --inner-padding-bottom: #{size('xxxs')};
   }
 
   .outside {
