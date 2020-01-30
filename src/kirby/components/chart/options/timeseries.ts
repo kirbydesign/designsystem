@@ -1,9 +1,14 @@
 import { Options } from 'highcharts';
 import { InjectionToken } from '@angular/core';
+import * as Highcharts from 'highcharts';
 
 export const TIMESERIES_OPTIONS = new InjectionToken<Options>('TimeSeriesOptions');
 export const TimeSeriesOptions: Options = {
   chart: {
+    backgroundColor: {
+      linearGradient: [0, 0, 0, 600],
+      stops: [[0, 'rgb(246 , 246, 246)'], [1, 'rgb(128, 128, 128)']],
+    },
     zoomType: 'x',
     type: 'timeseries',
     borderWidth: 0,
@@ -19,11 +24,18 @@ export const TimeSeriesOptions: Options = {
   },
   tooltip: {
     shadow: false,
+    formatter: function() {
+      // @ts-ignore
+      return Highcharts.dateFormat('%e. %b', new Date(this.x)) + '.' + '<br/><b>' + this.y + '</b>';
+    },
+    //xDateFormat: '%d/%m',
+    positioner: function(labelWidth, labelHeight, point) {
+      return { x: point.plotX, y: 0 };
+    },
     borderWidth: 0,
-    split: true,
   },
   xAxis: {
-    visible: true,
+    visible: false,
     lineColor: '#FFFFFF',
     tickColor: '#FFFFFF',
     labels: {
