@@ -47,6 +47,7 @@ import { ListColoredItemsExampleComponent } from './list/components/colored-item
 import { ListWithHeaderAndFooterExampleComponent } from './list/components/header-and-footer';
 import { ListWithSectionsExampleComponent } from './list/components/sections';
 import { ListItemsExampleComponent } from './list/components/items';
+import { DropdownExampleComponent } from '~/app/examples/dropdown-example/dropdown-example.component';
 
 export const routes: Routes = [
   {
@@ -290,5 +291,9 @@ export const routes: Routes = [
   {
     path: 'fab-sheet',
     component: FabSheetExampleComponent,
+  },
+  {
+    path: 'dropdown',
+    component: DropdownExampleComponent,
   },
 ];

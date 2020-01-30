@@ -21,6 +21,7 @@ import { RouterOutletModule } from '@kirbydesign/designsystem/components/router-
 import { TabsModule } from '@kirbydesign/designsystem/components/tabs/tabs.module';
 import { IconModule } from '@kirbydesign/designsystem/components/icon/icon.module';
 import { ItemModule } from '@kirbydesign/designsystem/components/item/item.module';
+import { DropdownModule } from '@kirbydesign/designsystem/components/dropdown/dropdown.module';
 
 @NgModule({
   imports: [
@@ -36,6 +37,7 @@ import { ItemModule } from '@kirbydesign/designsystem/components/item/item.modul
     TabsModule,
     IconModule,
     ItemModule,
+    DropdownModule,
   ],
   declarations: [
     InfiniteScrollDirective,
@@ -64,6 +66,7 @@ import { ItemModule } from '@kirbydesign/designsystem/components/item/item.modul
     TabsModule,
     IconModule,
     ItemModule,
+    DropdownModule,
     ...declarations,
   ],
 })
