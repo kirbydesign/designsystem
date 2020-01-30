@@ -2,7 +2,7 @@ import { Spectator, createComponentFactory } from '@ngneat/spectator';
 
 import { DropdownComponent } from './dropdown.component';
 
-describe('ItemComponent', () => {
+describe('DropdownComponent', () => {
   let spectator: Spectator<DropdownComponent>;
 
   const createHost = createComponentFactory({

@@ -4,7 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { KirbyModule } from '../../../kirby/kirby.module';
 import { DropdownExampleComponent } from './dropdown-example.component';
 
-describe('AlertExampleComponent', () => {
+describe('DropdownExampleComponent', () => {
   let component: DropdownExampleComponent;
   let fixture: ComponentFixture<DropdownExampleComponent>;
 

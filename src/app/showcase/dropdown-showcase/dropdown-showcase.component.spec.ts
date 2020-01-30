@@ -3,10 +3,10 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { ExamplesModule } from '../../examples/examples.module';
 import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
-import { DropdownShowcaseComponent } from './avatar-showcase.component';
+import { DropdownShowcaseComponent } from './dropdown-showcase.component';
 import { ShowcasePropertiesComponent } from '~/app/shared/showcase-properties/showcase-properties.component';
 
-describe('AvatarShowcaseComponent', () => {
+describe('DropdownShowcaseComponent', () => {
   let component: DropdownShowcaseComponent;
   let fixture: ComponentFixture<DropdownShowcaseComponent>;
 
