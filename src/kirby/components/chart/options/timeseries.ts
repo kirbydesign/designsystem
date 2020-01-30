@@ -6,8 +6,8 @@ export const TIMESERIES_OPTIONS = new InjectionToken<Options>('TimeSeriesOptions
 export const TimeSeriesOptions: Options = {
   chart: {
     backgroundColor: {
-      linearGradient: [0, 0, 0, 600],
-      stops: [[0, 'rgb(246 , 246, 246)'], [1, 'rgb(128, 128, 128)']],
+      linearGradient: { x1: 0, x2: 0, y1: 0, y2: 3 },
+      stops: [[0, '#F6F6F6'], [1, '#808080']],
     },
     zoomType: 'x',
     type: 'timeseries',
