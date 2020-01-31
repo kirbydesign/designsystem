@@ -75,6 +75,11 @@ export const TimeSeriesOptions: Options = {
       },
       threshold: null,
     },
+    series: {
+      marker: {
+        enabledThreshold: 50,
+      },
+    },
   },
   series: [
     {
