@@ -68,7 +68,10 @@ export class InputComponent implements OnChanges {
     let currentValue = value;
 
     if (currentValue.length > this.maxlength) {
-      currentValue = this.previousValue;
+      currentValue =
+        this.previousValue === undefined
+          ? currentValue.slice(0, this.maxlength)
+          : this.previousValue;
       this.element.value = currentValue;
     }
 
@@ -76,6 +79,7 @@ export class InputComponent implements OnChanges {
       this.previousValue = currentValue;
     }
 
+    this.element.value = currentValue;
     this.kirbyChange.emit(currentValue);
   }
 
