@@ -2,7 +2,7 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
 import { InputComponent } from './input.component';
 
-fdescribe('InputComponent', () => {
+describe('InputComponent', () => {
   let spectator: SpectatorHost<InputComponent>;
   const createHost = createHostFactory(InputComponent);
 
