@@ -1,6 +1,7 @@
 @import '../../scss/utils';
 @import '../icon/icon.component.shared';
 
+$image-diameter-xsmall: 32px;
 $image-diameter-small: 40px;
 $image-diameter-medium: 56px;
 $image-diameter-large: 96px;
@@ -67,6 +68,22 @@ $badge-diameter: 16px;
     align-items: center;
     //default to icon size 'sm'
     @include _icon-size('sm');
+  }
+}
+
+:host(.xs) {
+  .avatar {
+    width: $image-diameter-xsmall;
+    height: $image-diameter-xsmall;
+    border-radius: 8px;
+
+    ::ng-deep kirby-icon {
+      @include _icon-size('sm');
+    }
+
+    .avatar-text {
+      font-size: font-size('s');
+    }
   }
 }
 
