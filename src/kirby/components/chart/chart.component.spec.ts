@@ -45,25 +45,6 @@ describe('ChartComponent', () => {
     });
   });
 
-  describe('width', () => {
-    const expectedDefaultWidth = null;
-
-    it('should have correct default width input', () => {
-      expect(component.width).toBe(expectedDefaultWidth);
-    });
-
-    it('should set correct default chart width', () => {
-      expect(component.options.chart.width).toBe(expectedDefaultWidth);
-    });
-
-    it('should set correct non-default chart width', () => {
-      const expectedWidth = 400;
-      component.width = expectedWidth;
-      component.ngOnInit();
-      expect(component.options.chart.width).toBe(expectedWidth);
-    });
-  });
-
   it('should have correct default chart type', () => {
     expect((component.type = ChartType.PIE));
     expect(component.options.chart.type).toBe(ChartType.PIE);

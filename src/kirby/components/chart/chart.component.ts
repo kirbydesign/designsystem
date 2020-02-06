@@ -23,7 +23,6 @@ import { ChartType } from './chart-type';
 export class ChartComponent implements OnInit, OnChanges {
   @Input() data = [];
   @Input() height: number | string = 300;
-  @Input() width: number | string = null;
   @Input() type: ChartType = ChartType.PIE;
   @Input() description = '';
   @Input() showDataLabels = true;
@@ -84,7 +83,6 @@ export class ChartComponent implements OnInit, OnChanges {
   updateProperties() {
     if (this.options.chart) {
       this.options.chart.height = this.height;
-      this.options.chart.width = this.width;
       if (this.options.accessibility) {
         this.options.accessibility.description = this.description;
       }
