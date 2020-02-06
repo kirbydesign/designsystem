@@ -65,13 +65,13 @@ describe('ChartComponent', () => {
   });
 
   it('should have dataLabels enabled as default', () => {
-    expect(component.options.plotOptions.pie.dataLabels.enabled).toBe(true);
+    expect(component.options.plotOptions.series.dataLabels).toBe({ enabled: true });
   });
 
   it('should disable dataLabels when false', () => {
     component.showDataLabels = false;
     component.ngOnInit();
-    expect(component.options.plotOptions.pie.dataLabels.enabled).toBe(false);
+    expect(component.options.plotOptions.series.dataLabels).toBe({ enabled: false });
   });
 
   it('should set correct input data in chart series', () => {
