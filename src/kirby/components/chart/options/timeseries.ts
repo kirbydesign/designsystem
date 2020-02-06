@@ -16,6 +16,9 @@ export const TimeSeriesOptions: Options = {
     margin: 0,
     marginTop: 48,
   },
+  accessibility: {
+    description: '',
+  },
   title: {
     text: '',
   },
@@ -85,7 +88,7 @@ export const TimeSeriesOptions: Options = {
     {
       type: 'area',
       name: 'USD to EUR',
-      data: (this === undefined ? [] : this.data) as Array<Highcharts.SeriesAreaDataOptions>,
+      data: this === undefined ? [] : this.data,
     },
   ],
 };

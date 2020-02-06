@@ -22,7 +22,8 @@ import { ChartType } from './chart-type';
 })
 export class ChartComponent implements OnInit, OnChanges {
   @Input() data = [];
-  @Input() height = 300;
+  @Input() height: number | string = 300;
+  @Input() width: number | string = null;
   @Input() type: ChartType = ChartType.PIE;
   @Input() description = '';
   @Input() showDataLabels = true;
@@ -83,16 +84,19 @@ export class ChartComponent implements OnInit, OnChanges {
   updateProperties() {
     if (this.options.chart) {
       this.options.chart.height = this.height;
-      this.options.chart.description = this.description;
+      this.options.chart.width = this.width;
+      if (this.options.accessibility) {
+        this.options.accessibility.description = this.description;
+      }
       switch (this.options.chart.type) {
         case ChartType.PIE:
-          this.options.plotOptions.pie.dataLabels.enabled = this.showDataLabels;
+          this.options.plotOptions.series.dataLabels = { enabled: this.showDataLabels };
         /* falls through */
         case ChartType.DONUT: {
           this.options.series = [
             {
               type: 'pie',
-              data: this.data as Array<Highcharts.SeriesPieDataOptions>,
+              data: this.data,
             },
           ];
           break;
@@ -101,7 +105,7 @@ export class ChartComponent implements OnInit, OnChanges {
           this.options.series = [
             {
               type: 'areaspline',
-              data: this.data as Array<Highcharts.SeriesAreasplineDataOptions>,
+              data: this.data,
             },
           ];
           break;
@@ -110,7 +114,7 @@ export class ChartComponent implements OnInit, OnChanges {
           this.options.series = [
             {
               type: 'area',
-              data: this.data as Array<Highcharts.SeriesAreaDataOptions>,
+              data: this.data,
             },
           ];
           break;
@@ -136,10 +140,9 @@ export class ChartComponent implements OnInit, OnChanges {
           this.options.series = [
             {
               type: 'solidgauge',
-              data: data.series as Array<Highcharts.SeriesGaugeDataOptions>,
+              data: data.series,
             },
           ];
-
           break;
         }
       }

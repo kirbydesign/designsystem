@@ -10,6 +10,8 @@ export const DonutOptions: Options = {
     },
     backgroundColor: 'transparent',
     type: '',
+  },
+  accessibility: {
     description: '',
   },
   title: {
@@ -65,7 +67,7 @@ export const DonutOptions: Options = {
     {
       name: '',
       type: 'pie',
-      data: (this === undefined ? [] : this.data) as Array<Highcharts.SeriesPieDataOptions>,
+      data: this === undefined ? [] : this.data,
     },
   ],
   credits: {
