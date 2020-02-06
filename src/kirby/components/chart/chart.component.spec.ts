@@ -9,8 +9,6 @@ describe('ChartComponent', () => {
   let component: ChartComponent;
   let fixture: ComponentFixture<ChartComponent>;
 
-  const expectedDefaultHeight = 300;
-
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ChartComponent],
@@ -28,19 +26,42 @@ describe('ChartComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should have correct default height input', () => {
-    expect(component.height).toBe(expectedDefaultHeight);
+  describe('height', () => {
+    const expectedDefaultHeight = 300;
+
+    it('should have correct default height input', () => {
+      expect(component.height).toBe(expectedDefaultHeight);
+    });
+
+    it('should set correct default chart height', () => {
+      expect(component.options.chart.height).toBe(expectedDefaultHeight);
+    });
+
+    it('should set correct non-default chart height', () => {
+      const expectedHeight = 400;
+      component.height = expectedHeight;
+      component.ngOnInit();
+      expect(component.options.chart.height).toBe(expectedHeight);
+    });
   });
 
-  it('should set correct default chart height', () => {
-    expect(component.options.chart.height).toBe(expectedDefaultHeight);
-  });
+  describe('width', () => {
+    const expectedDefaultWidth = null;
 
-  it('should set correct non-default chart height', () => {
-    const expectedHeight = 400;
-    component.height = expectedHeight;
-    component.ngOnInit();
-    expect(component.options.chart.height).toBe(expectedHeight);
+    it('should have correct default width input', () => {
+      expect(component.width).toBe(expectedDefaultWidth);
+    });
+
+    it('should set correct default chart width', () => {
+      expect(component.options.chart.width).toBe(expectedDefaultWidth);
+    });
+
+    it('should set correct non-default chart width', () => {
+      const expectedWidth = 400;
+      component.width = expectedWidth;
+      component.ngOnInit();
+      expect(component.options.chart.width).toBe(expectedWidth);
+    });
   });
 
   it('should have correct default chart type', () => {
