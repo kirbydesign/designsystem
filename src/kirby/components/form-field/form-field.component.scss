@@ -11,11 +11,11 @@
   padding: 2px size('s') 0 size('s');
 
   .message {
-    flex: 75%;
+    flex: auto;
   }
 
   .counter {
-    flex: 25%;
+    flex: none;
     text-align: right;
   }
 }
