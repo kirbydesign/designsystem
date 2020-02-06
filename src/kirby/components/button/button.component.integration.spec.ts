@@ -1,6 +1,6 @@
 import { RouterTestingModule } from '@angular/router/testing';
 import { SpectatorHost, createHostFactory } from '@ngneat/spectator';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, IonIcon } from '@ionic/angular';
 import { MockComponent } from 'ng-mocks';
 
 import { DesignTokenHelper } from '../../helpers/design-token-helper';
@@ -20,8 +20,9 @@ import { IconComponent } from '../icon/icon.component';
 
 const getColor = DesignTokenHelper.getColor;
 const size = DesignTokenHelper.size;
+const fontSize = DesignTokenHelper.fontSize;
 
-fdescribe('ButtonComponent in Kirby Page', () => {
+describe('ButtonComponent in Kirby Page', () => {
   let spectator: SpectatorHost<PageComponent>;
   const createHost = createHostFactory({
     component: PageComponent,
@@ -187,13 +188,11 @@ describe('ButtonComponent with size directive', () => {
     });
 
     it('should render with correct font-size', () => {
-      const expected = DesignTokenHelper.fontSize('xs');
-      expect(element).toHaveComputedStyle({ 'font-size': expected });
+      expect(element).toHaveComputedStyle({ 'font-size': fontSize('xs') });
     });
 
     it('should render with correct height', () => {
-      const expected = DesignTokenHelper.size('l');
-      expect(element).toHaveComputedStyle({ height: expected });
+      expect(element).toHaveComputedStyle({ height: size('l') });
     });
   });
 
@@ -204,8 +203,7 @@ describe('ButtonComponent with size directive', () => {
     });
 
     it('should render with correct font-size', () => {
-      const expected = DesignTokenHelper.fontSize('n');
-      expect(element).toHaveComputedStyle({ 'font-size': expected });
+      expect(element).toHaveComputedStyle({ 'font-size': fontSize('n') });
     });
 
     it('should render with correct height', () => {
@@ -261,33 +259,113 @@ describe('ButtonComponent configured with icon only', () => {
   });
 });
 
-describe('ButtonComponent configured with icon and text', () => {
+describe('ButtonComponent configured with text and icon', () => {
   let kirbyIcon: Element;
   let spectator: SpectatorHost<ButtonComponent>;
   let element: HTMLButtonElement;
   const createHost = createHostFactory({
     component: ButtonComponent,
-    declarations: [ButtonComponent, SizeDirective, MockComponent(IconComponent)],
+    declarations: [ButtonComponent, SizeDirective, IconComponent, MockComponent(IonIcon)],
   });
 
-  describe('and size directive with size = SM', () => {
+  it('should render with correct icon font-size', () => {
+    spectator = createHost(
+      `<button kirby-button>
+        <span>Text</span>
+        <kirby-icon name="arrow-down"></kirby-icon>
+      </button>`
+    );
+
+    element = spectator.element as HTMLButtonElement;
+    kirbyIcon = element.getElementsByTagName('kirby-icon')[0];
+
+    expect(kirbyIcon).toHaveComputedStyle({ 'font-size': size('m') });
+  });
+
+  describe('when icon left', () => {
     beforeEach(() => {
       spectator = createHost(
-        `
-        <button kirby-button size="sm">
-            <span>Text Left</span>
-            <kirby-icon name="arrow-down">
-          </kirby-icon>
-        </button>
-        `
+        `<button kirby-button>
+          <kirby-icon name="arrow-down"></kirby-icon>
+          <span>Icon Left, Text Right</span>
+        </button>`
       );
 
       element = spectator.element as HTMLButtonElement;
       kirbyIcon = element.getElementsByTagName('kirby-icon')[0];
     });
 
+    it('should render with correct padding', () => {
+      expect(element).toHaveComputedStyle({
+        'padding-left': size('xxs'),
+        'padding-right': size('s'),
+      });
+    });
+
+    it('should render with correct icon margin', () => {
+      expect(kirbyIcon).toHaveComputedStyle({
+        'margin-left': '0px',
+        'margin-right': size('xxs'),
+      });
+    });
+  });
+
+  describe('when icon right', () => {
+    beforeEach(() => {
+      spectator = createHost(
+        `<button kirby-button>
+          <span>Text Left, Icon Right</span>
+          <kirby-icon name="arrow-down"></kirby-icon>
+        </button>`
+      );
+
+      element = spectator.element as HTMLButtonElement;
+      kirbyIcon = element.getElementsByTagName('kirby-icon')[0];
+    });
+
+    it('should render with correct padding', () => {
+      expect(element).toHaveComputedStyle({
+        'padding-left': size('s'),
+        'padding-right': size('xxs'),
+      });
+    });
+    it('should render with correct icon margin', () => {
+      expect(kirbyIcon).toHaveComputedStyle({
+        'margin-left': size('xxs'),
+        'margin-right': '0px',
+      });
+    });
+  });
+
+  describe('and size directive with size = SM', () => {
     it('should render with correct icon font-size', () => {
-      expect(kirbyIcon).toHaveComputedStyle({ '--kirby-icon-font-size': ` ${size('s')}` });
+      spectator = createHost(
+        `<button kirby-button size="sm">
+          <span>Text</span>
+          <kirby-icon name="arrow-down"></kirby-icon>
+        </button>`
+      );
+
+      element = spectator.element as HTMLButtonElement;
+      kirbyIcon = element.getElementsByTagName('kirby-icon')[0];
+
+      expect(kirbyIcon).toHaveComputedStyle({ 'font-size': size('s') });
+    });
+  });
+
+  describe('and size directive with size = LG', () => {
+    it('should render with correct icon font-size', () => {
+      spectator = createHost(
+        `<button kirby-button size="lg">
+          <span>Text</span>
+          <kirby-icon name="arrow-down"></kirby-icon>
+        </button>`
+      );
+
+      element = spectator.element as HTMLButtonElement;
+      kirbyIcon = element.getElementsByTagName('kirby-icon')[0];
+
+      expect(kirbyIcon).toHaveComputedStyle({ 'font-size': size('m') });
     });
   });
 });
