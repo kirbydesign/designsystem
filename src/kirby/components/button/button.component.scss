@@ -32,32 +32,27 @@
 
 @mixin button-attentionlevel1 {
   --kirby-button-background-color: #{get-color('primary')};
-  --kirby-button-border-color: #{get-color('primary')};
   --kirby-button-color: #{get-color('primary-contrast')};
 
   &.destructive {
     --kirby-button-background-color: #{get-color('danger')};
-    --kirby-button-border-color: #{get-color('danger')};
     --kirby-button-color: #{get-color('danger-contrast')};
   }
 }
 
 @mixin button-attentionlevel2 {
   --kirby-button-background-color: #{get-color('white')};
-  --kirby-button-border-color: #{get-color('white')};
   --kirby-button-color: #{get-color('white-contrast')};
 
   &.destructive {
     --kirby-button-background-color: #{get-color('light')};
-    --kirby-button-border-color: #{get-color('light')};
     --kirby-button-color: #{get-color('danger')};
   }
 }
 
 @mixin button-attentionlevel3 {
-  --kirby-button-border-width: 1px;
-  --kirby-button-border-color: #{get-color('medium')};
   --kirby-button-color: #{get-color('medium-contrast')};
+  border: 1px solid var(--kirby-button-border-color, #{get-color('medium')});
 
   &.destructive {
     --kirby-button-color: #{get-color('danger')};
@@ -66,7 +61,6 @@
 
 @mixin button-attentionlevel4 {
   --kirby-button-background-color: transparent;
-  --kirby-button-border-color: transparent;
   --kirby-button-color: #{get-color('primary-contrast')};
 
   &.destructive {
@@ -80,11 +74,10 @@
   --kirby-button-padding-right: #{size('m')};
   --kirby-button-padding-top: 0;
   --kirby-button-padding-bottom: 0;
-  --kirby-button-border-width: 0;
   align-items: center;
   background-color: var(--kirby-button-background-color);
   border-radius: var(--kirby-button-border-radius);
-  border: var(--kirby-button-border-width) solid var(--kirby-button-border-color);
+  border: none;
   box-sizing: border-box;
   color: var(--kirby-button-color);
   cursor: pointer;
@@ -173,7 +166,6 @@
   :host-context(.kirby-color-brightness-white) {
     &.attention-level2 {
       --kirby-button-background-color: #{get-color('black')};
-      --kirby-button-border-color: #{get-color('black')};
       --kirby-button-color: #{get-color('black-contrast')};
     }
   }
@@ -181,7 +173,6 @@
   :host-context(.kirby-color-brightness-dark) {
     &.attention-level3 {
       --kirby-button-border-color: #{get-color('white')};
-      --kirby-button-border-width: 1px;
       --kirby-button-color: #{get-color('white')};
     }
     &.attention-level4 {

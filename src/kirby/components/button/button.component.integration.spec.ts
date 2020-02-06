@@ -20,9 +20,8 @@ import { IconComponent } from '../icon/icon.component';
 
 const getColor = DesignTokenHelper.getColor;
 const size = DesignTokenHelper.size;
-const fontSize = DesignTokenHelper.fontSize;
 
-describe('ButtonComponent in Kirby Page', () => {
+fdescribe('ButtonComponent in Kirby Page', () => {
   let spectator: SpectatorHost<PageComponent>;
   const createHost = createHostFactory({
     component: PageComponent,
@@ -77,20 +76,23 @@ describe('ButtonComponent in Kirby Page', () => {
       expect(actionButtonInHeader).toBeTruthy();
     });
 
-    it('should render with no background-color', async () => {
+    it('should render without background-color', async () => {
       await TestHelper.whenHydrated(ionToolbar);
       expect(actionButtonInHeader).toHaveComputedStyle({ 'background-color': 'transparent' });
-    });
-
-    it('should render with no border-color', async () => {
-      await TestHelper.whenHydrated(ionToolbar);
-      expect(actionButtonInHeader).toHaveComputedStyle({ 'border-color': 'transparent' });
     });
 
     it('should render with correct color', async () => {
       await TestHelper.whenHydrated(ionToolbar);
       expect(actionButtonInHeader).toHaveComputedStyle({
         color: getColor('primary', 'contrast'),
+      });
+    });
+
+    it('should render without border', async () => {
+      await TestHelper.whenHydrated(ionToolbar);
+      expect(actionButtonInHeader).toHaveComputedStyle({
+        'border-width': '0px',
+        'border-style': 'none',
       });
     });
   });
@@ -117,17 +119,18 @@ describe('ButtonComponent in Kirby Page', () => {
       });
     });
 
-    it('should render with correct border-color', async () => {
-      await TestHelper.whenHydrated(ionContent);
-      expect(actionButtonInPage).toHaveComputedStyle({
-        'border-color': getColor('white'),
-      });
-    });
-
     it('should render with correct color', async () => {
       await TestHelper.whenHydrated(ionContent);
       expect(actionButtonInPage).toHaveComputedStyle({
         color: getColor('white', 'contrast'),
+      });
+    });
+
+    it('should render without border', async () => {
+      await TestHelper.whenHydrated(ionContent);
+      expect(actionButtonInPage).toHaveComputedStyle({
+        'border-width': '0px',
+        'border-style': 'none',
       });
     });
   });
@@ -152,10 +155,11 @@ describe('ButtonComponent in Kirby Page', () => {
       });
     });
 
-    it('should render with correct border-color', async () => {
+    it('should render without border', async () => {
       await TestHelper.whenHydrated(ionContent);
       expect(normalButtonInPage).toHaveComputedStyle({
-        'border-color': getColor('primary'),
+        'border-width': '0px',
+        'border-style': 'none',
       });
     });
 
@@ -177,14 +181,9 @@ describe('ButtonComponent with size directive', () => {
   });
 
   describe('when configured with size = SM', () => {
-    let kirbyIcon: Element;
-
     beforeEach(() => {
-      spectator = createHost(
-        '<button kirby-button size="sm"><span>Text Left</span><kirby-icon name="arrow-down"></kirby-icon></button>'
-      );
+      spectator = createHost('<button kirby-button size="sm"><span>Text Left</span></button>');
       element = spectator.element as HTMLButtonElement;
-      kirbyIcon = element.getElementsByTagName('kirby-icon')[0];
     });
 
     it('should render with correct font-size', () => {
