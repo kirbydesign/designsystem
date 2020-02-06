@@ -12,13 +12,25 @@
       <tbody>
         <tr>
           <td><code>height</code></td>
-          <td>The height of the chart in px for web and dp for native</td>
-          <td><code>number</code></td>
+          <td>
+            If a number, the height is given in pixels. If given a percentage string (for example
+            '56%'), the height is given as the percentage of the actual chart width. This allows for
+            preserving the aspect ratio across responsive sizes.
+          </td>
+          <td><code>number | string</code></td>
+        </tr>
+        <tr>
+          <td><code>width</code></td>
+          <td>
+            An explicit width for the chart in pixels. By default (when null) the width is
+            calculated from the offset width of the containing element.
+          </td>
+          <td><code>number | string</code></td>
         </tr>
         <tr>
           <td><code>type</code></td>
           <td>The type of chart</td>
-          <td><code>donut | pie | areaspline</code></td>
+          <td><code>donut | pie | areaspline | timeseries | activitygauge</code></td>
         </tr>
         <tr>
           <td><code>showDataLabels</code></td>
