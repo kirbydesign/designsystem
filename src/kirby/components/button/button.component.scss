@@ -125,19 +125,13 @@
   &.icon-left {
     --kirby-button-padding-left: #{size('xxs')};
     --kirby-button-padding-right: #{size('s')};
-
-    ::ng-deep kirby-icon {
-      --kirby-icon-margin-right: #{size('xxs')};
-    }
+    --kirby-icon-margin-right: #{size('xxs')};
   }
 
   &.icon-right {
     --kirby-button-padding-left: #{size('s')};
     --kirby-button-padding-right: #{size('xxs')};
-
-    ::ng-deep kirby-icon {
-      --kirby-icon-margin-left: #{size('xxs')};
-    }
+    --kirby-icon-margin-left: #{size('xxs')};
   }
 
   &.icon-only {

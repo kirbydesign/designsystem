@@ -4,15 +4,13 @@
 :host {
   //default to icon size 'sm'
   @include _icon-size('sm');
-  --kirby-icon-margin-left: unset;
-  --kirby-icon-margin-right: unset;
 
   display: inline-flex;
   align-items: center;
   justify-content: center;
   font-size: var(--kirby-icon-font-size);
-  margin-left: var(--kirby-icon-margin-left);
-  margin-right: var(--kirby-icon-margin-right);
+  margin-left: var(--kirby-icon-margin-left, unset);
+  margin-right: var(--kirby-icon-margin-right, unset);
 
   svg path {
     fill: currentColor;
