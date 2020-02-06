@@ -9,7 +9,7 @@ const getColor = DesignTokenHelper.getColor;
 const size = DesignTokenHelper.size;
 const fontSize = DesignTokenHelper.fontSize;
 
-fdescribe('ButtonComponent', () => {
+describe('ButtonComponent', () => {
   let spectator: SpectatorHost<ButtonComponent>;
   let element: HTMLButtonElement;
 
