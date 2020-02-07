@@ -196,6 +196,21 @@ describe('ButtonComponent with size directive', () => {
     });
   });
 
+  describe('when configured with size = MD', () => {
+    beforeEach(() => {
+      spectator = createHost('<button kirby-button size="md"><span>Text Left</span></button>');
+      element = spectator.element as HTMLButtonElement;
+    });
+
+    it('should render with correct font-size', () => {
+      expect(element).toHaveComputedStyle({ 'font-size': fontSize('s') });
+    });
+
+    it('should render with correct height', () => {
+      expect(element).toHaveComputedStyle({ height: size('xl') });
+    });
+  });
+
   describe('when configured with size = LG', () => {
     beforeEach(() => {
       spectator = createHost('<button kirby-button size="lg">Test</button>');
@@ -290,6 +305,37 @@ describe('ButtonComponent configured with icon only', () => {
             expect(element).toHaveComputedStyle({
               width: iconButtonSizeSM,
               height: iconButtonSizeSM,
+            });
+          }
+        );
+      });
+    });
+  });
+
+  describe('and size directive with size = MD', () => {
+    const iconButtonSizeMD = size('xl');
+    beforeEach(() => {
+      spectator = createHost(
+        `<button kirby-button size="md">
+          <kirby-icon name="edit">
+        </kirby-icon></button>`
+      );
+      element = spectator.element as HTMLButtonElement;
+    });
+    it('should render with correct width and height', () => {
+      expect(element).toHaveComputedStyle({ width: iconButtonSizeMD, height: iconButtonSizeMD });
+    });
+
+    describe('and configured with attentionlevel', () => {
+      attentionLevels.forEach((attentionLevel: AttentionLevel) => {
+        it(
+          'should render with correct width and height for attentionlevel = ' + attentionLevel,
+          () => {
+            spectator.component.attentionLevel = attentionLevel;
+            spectator.detectChanges();
+            expect(element).toHaveComputedStyle({
+              width: iconButtonSizeMD,
+              height: iconButtonSizeMD,
             });
           }
         );
@@ -420,6 +466,22 @@ describe('ButtonComponent configured with text and icon', () => {
       kirbyIcon = element.getElementsByTagName('kirby-icon')[0];
 
       expect(kirbyIcon).toHaveComputedStyle({ 'font-size': size('s') });
+    });
+  });
+
+  describe('and size directive with size = MD', () => {
+    it('should render with correct icon font-size', () => {
+      spectator = createHost(
+        `<button kirby-button size="md">
+          <span>Text</span>
+          <kirby-icon name="arrow-down"></kirby-icon>
+        </button>`
+      );
+
+      element = spectator.element as HTMLButtonElement;
+      kirbyIcon = element.getElementsByTagName('kirby-icon')[0];
+
+      expect(kirbyIcon).toHaveComputedStyle({ 'font-size': size('m') });
     });
   });
 
