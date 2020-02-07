@@ -68,7 +68,7 @@
 :host {
   font-family: var(--kirby-font-family);
   background-color: var(--kirby-button-background-color);
-  border-radius: var(--kirby-button-border-radius, #{$border-radius-round});
+  border-radius: $border-radius-round;
   border: none;
   box-sizing: border-box;
   color: var(--kirby-button-color);
