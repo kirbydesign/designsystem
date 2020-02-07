@@ -224,37 +224,107 @@ describe('ButtonComponent configured with icon only', () => {
     declarations: [ButtonComponent, SizeDirective, MockComponent(IconComponent)],
   });
 
-  it('should render with correct width', () => {
+  const attentionLevels = ['1', '2', '3', '4'];
+  type AttentionLevel = '1' | '2' | '3' | '4';
+
+  const iconButtonSizeDefault = size('xl');
+
+  it('should render with correct width and height', () => {
     spectator = createHost(
       `<button kirby-button>
         <kirby-icon name="edit">
       </kirby-icon></button>`
     );
     element = spectator.element as HTMLButtonElement;
-    expect(element).toHaveComputedStyle({ width: size('xl') });
+    expect(element).toHaveComputedStyle({
+      width: iconButtonSizeDefault,
+      height: iconButtonSizeDefault,
+    });
+  });
+
+  describe('and configured with attentionlevel', () => {
+    beforeEach(() => {
+      spectator = createHost(
+        `<button kirby-button>
+          <kirby-icon name="edit">
+        </kirby-icon></button>`
+      );
+      element = spectator.element as HTMLButtonElement;
+    });
+    attentionLevels.forEach((attentionLevel: AttentionLevel) => {
+      it(
+        'should render with correct width and height for attentionlevel = ' + attentionLevel,
+        () => {
+          spectator.component.attentionLevel = attentionLevel;
+          spectator.detectChanges();
+          expect(element).toHaveComputedStyle({
+            width: iconButtonSizeDefault,
+            height: iconButtonSizeDefault,
+          });
+        }
+      );
+    });
   });
 
   describe('and size directive with size = SM', () => {
-    it('should render with correct width', () => {
+    const iconButtonSizeSM = size('l');
+    beforeEach(() => {
       spectator = createHost(
         `<button kirby-button size="sm">
           <kirby-icon name="edit">
         </kirby-icon></button>`
       );
       element = spectator.element as HTMLButtonElement;
-      expect(element).toHaveComputedStyle({ width: size('l') });
+    });
+    it('should render with correct width and height', () => {
+      expect(element).toHaveComputedStyle({ width: iconButtonSizeSM, height: iconButtonSizeSM });
+    });
+
+    describe('and configured with attentionlevel', () => {
+      attentionLevels.forEach((attentionLevel: AttentionLevel) => {
+        it(
+          'should render with correct width and height for attentionlevel = ' + attentionLevel,
+          () => {
+            spectator.component.attentionLevel = attentionLevel;
+            spectator.detectChanges();
+            expect(element).toHaveComputedStyle({
+              width: iconButtonSizeSM,
+              height: iconButtonSizeSM,
+            });
+          }
+        );
+      });
     });
   });
 
   describe('and size directive with size = LG', () => {
-    it('should render with correct width', () => {
+    const iconButtonSizeLG = size('xxl');
+    beforeEach(() => {
       spectator = createHost(
         `<button kirby-button size="lg">
           <kirby-icon name="edit">
         </kirby-icon></button>`
       );
       element = spectator.element as HTMLButtonElement;
-      expect(element).toHaveComputedStyle({ width: size('xxl') });
+    });
+    it('should render with correct width and height', () => {
+      expect(element).toHaveComputedStyle({ width: iconButtonSizeLG, height: iconButtonSizeLG });
+    });
+
+    describe('and configured with attentionlevel', () => {
+      attentionLevels.forEach((attentionLevel: AttentionLevel) => {
+        it(
+          'should render with correct width and height for attentionlevel = ' + attentionLevel,
+          () => {
+            spectator.component.attentionLevel = attentionLevel;
+            spectator.detectChanges();
+            expect(element).toHaveComputedStyle({
+              width: iconButtonSizeLG,
+              height: iconButtonSizeLG,
+            });
+          }
+        );
+      });
     });
   });
 });

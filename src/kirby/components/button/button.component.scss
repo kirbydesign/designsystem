@@ -3,8 +3,11 @@
 @mixin button-sm {
   font-size: font-size('xs');
   height: size('l');
-  padding-left: size('s');
-  padding-right: size('s');
+
+  &:not(.icon-only) {
+    padding-left: size('s');
+    padding-right: size('s');
+  }
 
   &.icon-only {
     width: size('l');
