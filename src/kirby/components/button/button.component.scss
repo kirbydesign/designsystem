@@ -93,14 +93,14 @@
   line-height: line-height('s');
 
   &.icon-left {
-    padding-left: size('xxs');
+    padding-left: size('xs');
     padding-right: size('s');
     --kirby-icon-margin-right: #{size('xxs')};
   }
 
   &.icon-right {
     padding-left: size('s');
-    padding-right: size('xxs');
+    padding-right: size('xs');
     --kirby-icon-margin-left: #{size('xxs')};
   }
 

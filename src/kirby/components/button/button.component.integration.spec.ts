@@ -413,7 +413,7 @@ describe('ButtonComponent configured with text and icon', () => {
 
     it('should render with correct padding', () => {
       expect(element).toHaveComputedStyle({
-        'padding-left': size('xxs'),
+        'padding-left': size('xs'),
         'padding-right': size('s'),
       });
     });
@@ -442,7 +442,7 @@ describe('ButtonComponent configured with text and icon', () => {
     it('should render with correct padding', () => {
       expect(element).toHaveComputedStyle({
         'padding-left': size('s'),
-        'padding-right': size('xxs'),
+        'padding-right': size('xs'),
       });
     });
     it('should render with correct icon margin', () => {
