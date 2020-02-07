@@ -3,8 +3,8 @@
 @mixin button-sm {
   font-size: font-size('xs');
   height: size('l');
-  --kirby-button-padding-left: #{size('s')};
-  --kirby-button-padding-right: #{size('s')};
+  padding-left: size('s');
+  padding-right: size('s');
 
   &.icon-only {
     width: size('l');
@@ -86,22 +86,20 @@
 
   // we default to 'md' size.
   margin: size('xxxs');
-  padding: 0;
-  padding-left: var(--kirby-button-padding-left, #{size('m')});
-  padding-right: var(--kirby-button-padding-right, #{size('m')});
+  padding: 0 size('m');
   font-size: font-size('s');
   height: size('xl');
   line-height: line-height('s');
 
   &.icon-left {
-    --kirby-button-padding-left: #{size('xxs')};
-    --kirby-button-padding-right: #{size('s')};
+    padding-left: size('xxs');
+    padding-right: size('s');
     --kirby-icon-margin-right: #{size('xxs')};
   }
 
   &.icon-right {
-    --kirby-button-padding-left: #{size('s')};
-    --kirby-button-padding-right: #{size('xxs')};
+    padding-left: size('s');
+    padding-right: size('xxs');
     --kirby-icon-margin-left: #{size('xxs')};
   }
 
