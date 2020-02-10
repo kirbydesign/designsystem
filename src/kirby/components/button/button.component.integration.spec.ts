@@ -198,7 +198,7 @@ describe('ButtonComponent in kirby empty state', () => {
 
   it('should render with correct font-size', () => {
     expect(actionButtonInEmptyState).toHaveComputedStyle({
-      'font-size': DesignTokenHelper.fontSize('n'),
+      'font-size': fontSize('n'),
     });
   });
 
