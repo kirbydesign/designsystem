@@ -12,6 +12,7 @@ export class ToastHelper {
 
   public async showToast(config: ToastConfig): Promise<any> {
     const toast = await this.toastController.create({
+      animated: config.animated,
       message: config.message,
       position: 'top',
       duration: config.durationInMs ? config.durationInMs : ToastHelper.DURATION_IN_MS,
