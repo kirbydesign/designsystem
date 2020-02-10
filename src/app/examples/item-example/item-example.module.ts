@@ -22,9 +22,15 @@ import { ItemExampleAvatarFlaggedComponent } from './examples/avatar/flagged';
 import { ItemExampleAvatarFlaggedThreeLinesComponent } from './examples/avatar/flagged-three-lines';
 import { ItemExampleHorizontalComponent } from './examples/horizontal';
 import { ItemExampleButtonComponent } from './examples/button';
+import { ItemExampleSimpleMediumComponent } from './examples/simple/default-md';
+import { ItemExampleSimpleSmallComponent } from './examples/simple/default-sm';
+import { ItemExampleSimpleExtraSmallComponent } from './examples/simple/default-xs';
 
 const COMPONENT_DECLARATIONS = [
   ItemExampleSimpleComponent,
+  ItemExampleSimpleMediumComponent,
+  ItemExampleSimpleSmallComponent,
+  ItemExampleSimpleExtraSmallComponent,
   ItemExampleLongTitleComponent,
   ItemExampleSimpleTwoLinesComponent,
   ItemExampleSimpleThreeLinesComponent,

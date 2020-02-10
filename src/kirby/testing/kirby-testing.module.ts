@@ -75,6 +75,7 @@ import { CalendarComponent } from '@kirbydesign/designsystem/components/calendar
 import { ItemComponent } from '../components/item/item.component';
 import { LabelComponent } from '../components/item/label/label.component';
 import { FitHeadingDirective } from '@kirbydesign/designsystem/directives/fit-heading/fit-heading.directive';
+import { ChartComponent } from '@kirbydesign/designsystem/components/chart/chart.component';
 
 const MOCK_COMPONENTS = MockComponents(
   AvatarComponent,
@@ -119,7 +120,8 @@ const MOCK_COMPONENTS = MockComponents(
   RouterOutletComponent,
   AppComponent,
   ItemComponent,
-  LabelComponent
+  LabelComponent,
+  ChartComponent
 );
 
 /**
