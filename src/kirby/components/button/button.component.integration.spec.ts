@@ -17,6 +17,7 @@ import { FitHeadingDirective } from '../../directives/fit-heading/fit-heading.di
 import { SizeDirective } from '../../directives/size/size.directive';
 import { ButtonComponent } from './button.component';
 import { IconComponent } from '../icon/icon.component';
+import { EmptyStateComponent } from '../empty-state/empty-state.component';
 
 const getColor = DesignTokenHelper.getColor;
 const size = DesignTokenHelper.size;
@@ -170,6 +171,43 @@ describe('ButtonComponent in Kirby Page', () => {
         color: getColor('primary', 'contrast'),
       });
     });
+  });
+});
+
+describe('ButtonComponent in kirby empty state', () => {
+  let spectator: SpectatorHost<EmptyStateComponent>;
+  let actionButtonInEmptyState: HTMLButtonElement;
+  const createHost = createHostFactory({
+    component: EmptyStateComponent,
+    imports: [IonicModule.forRoot(), RouterTestingModule],
+    declarations: [ButtonComponent, EmptyStateComponent, IconComponent],
+  });
+
+  beforeEach(() => {
+    spectator = createHost<PageComponent>(
+      `
+      <kirby-empty-state
+        title="No items"
+        subtitle="You don't have any items. Call support to add some items to your account."
+      >
+        <button kirby-button>Call support</button>
+      </kirby-empty-state>`
+    );
+    actionButtonInEmptyState = spectator.queryHost('.content button[kirby-button]');
+  });
+
+  it('should render with correct font-size', () => {
+    expect(actionButtonInEmptyState).toHaveComputedStyle({
+      'font-size': fontSize('n'),
+    });
+  });
+
+  it('should render with correct height', () => {
+    expect(actionButtonInEmptyState).toHaveComputedStyle({ height: size('xxl') });
+  });
+
+  it('should render with correct min-width', () => {
+    expect(actionButtonInEmptyState).toHaveComputedStyle({ 'min-width': '220px' });
   });
 });
 
