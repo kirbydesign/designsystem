@@ -4,7 +4,6 @@ import { DesignTokenHelper } from '../../../helpers/design-token-helper';
 import { TextareaComponent } from './textarea.component';
 
 const getColor = DesignTokenHelper.getColor;
-const size = DesignTokenHelper.size;
 
 fdescribe('TextareaComponent', () => {
   let spectator: SpectatorHost<TextareaComponent>;
