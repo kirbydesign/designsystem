@@ -12,6 +12,10 @@
 
   .message {
     flex: 75%;
+
+    &:only-child {
+      flex-basis: auto;
+    }
   }
 
   .counter {

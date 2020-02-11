@@ -1,7 +1,12 @@
 export class TestHelper {
   /** Checks for the Ionic Web Component being hydrated, ie. the Shadow DOM is ready for query */
-  public static whenHydrated(node: Node, timeout: number = 2000): Promise<void> {
+  public static whenHydrated(node: HTMLElement, timeout: number = 2000): Promise<void> {
     return new Promise((resolve, reject) => {
+      // Check if already hydrated:
+      if (node.classList.contains('hydrated')) {
+        resolve();
+        return;
+      }
       const timeoutId = setTimeout(() => {
         reject('Timed out when waiting for hydrated element...');
       }, timeout);

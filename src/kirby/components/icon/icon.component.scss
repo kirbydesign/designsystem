@@ -2,17 +2,12 @@
 @import './icon.component.shared';
 
 :host {
-  //default to icon size 'sm'
-  @include _icon-size('sm');
-  --kirby-icon-margin-left: unset;
-  --kirby-icon-margin-right: unset;
-
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: var(--kirby-icon-font-size);
-  margin-left: var(--kirby-icon-margin-left);
-  margin-right: var(--kirby-icon-margin-right);
+  font-size: var(--kirby-icon-font-size, icon-font-size('sm'));
+  margin-left: var(--kirby-icon-margin-left, unset);
+  margin-right: var(--kirby-icon-margin-right, unset);
 
   svg path {
     fill: currentColor;
@@ -21,15 +16,15 @@
 }
 
 :host(.sm) {
-  @include _icon-size('sm');
+  --kirby-icon-font-size: #{icon-font-size('sm')};
 }
 
 :host(.md) {
-  @include _icon-size('md');
+  --kirby-icon-font-size: #{icon-font-size('md')};
 }
 
 :host(.lg) {
-  @include _icon-size('lg');
+  --kirby-icon-font-size: #{icon-font-size('lg')};
 }
 
 @each $color-name, $color-value in $main-colors {

@@ -64,6 +64,17 @@
 </kirby-card>
 
 <kirby-card>
+  <kirby-card-header [title]="'Timeseries'"></kirby-card-header>
+  <kirby-chart
+    [height]="240"
+    [type]="'timeseries'"
+    [description]="'Accessibility description goes here'"
+    [data]="rates"
+  >
+  </kirby-chart>
+</kirby-card>
+
+<kirby-card>
   <kirby-card-header [title]="'Areaspline'"></kirby-card-header>
   <kirby-chart
     [height]="240"
