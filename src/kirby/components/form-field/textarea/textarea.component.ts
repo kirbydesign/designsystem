@@ -1,4 +1,13 @@
-import { ChangeDetectionStrategy, Component, Input, HostBinding } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  HostBinding,
+  EventEmitter,
+  HostListener,
+  SimpleChanges,
+  OnChanges,
+} from '@angular/core';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -7,7 +16,9 @@ import { ChangeDetectionStrategy, Component, Input, HostBinding } from '@angular
   styleUrls: ['./textarea.component.scss'],
   templateUrl: './textarea.component.html',
 })
-export class TextareaComponent {
+export class TextareaComponent implements OnChanges {
+  kirbyChange = new EventEmitter<string>();
+
   @Input() value: string;
 
   @HostBinding('class.error')
@@ -21,4 +32,26 @@ export class TextareaComponent {
   @HostBinding('attr.autocorrect')
   @Input()
   autocorrect: 'on' | 'off' = 'off';
+
+  @HostBinding('attr.maxlength')
+  @Input()
+  maxlength: number;
+
+  @HostListener('keyup', ['$event.target.value'])
+  private _onKeyUp(value: string) {
+    this.kirbyChange.emit(value);
+  }
+
+  @HostListener('paste', ['$event.target'])
+  @HostListener('cut', ['$event.target'])
+  private _onCutPaste(target: HTMLInputElement) {
+    //Value of textarea element is updated after cut/paste:
+    setTimeout(() => this.kirbyChange.emit(target.value));
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.value) {
+      this.kirbyChange.emit(changes.value.currentValue);
+    }
+  }
 }
