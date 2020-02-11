@@ -1,11 +1,12 @@
 import { SpectatorHost, createHostFactory } from '@ngneat/spectator';
+import { fakeAsync, tick } from '@angular/core/testing';
 
 import { DesignTokenHelper } from '../../../helpers/design-token-helper';
 import { TextareaComponent } from './textarea.component';
 
 const getColor = DesignTokenHelper.getColor;
 
-fdescribe('TextareaComponent', () => {
+describe('TextareaComponent', () => {
   let spectator: SpectatorHost<TextareaComponent>;
   let element: HTMLTextAreaElement;
 
@@ -49,6 +50,26 @@ fdescribe('TextareaComponent', () => {
     const expected = DesignTokenHelper.borderRadius();
     expect(element).toHaveComputedStyle({ 'border-radius': expected });
   });
+
+  it('should emit change on cut event', fakeAsync(() => {
+    const onChangeSpy = spyOn(spectator.component.kirbyChange, 'emit');
+    const testValue = 'Test 123';
+    element.value = testValue;
+    spectator.debugElement.triggerEventHandler('cut', { target: element });
+    tick();
+    expect(onChangeSpy).toHaveBeenCalledTimes(1);
+    expect(onChangeSpy).toHaveBeenCalledWith(testValue);
+  }));
+
+  it('should emit change on paste event', fakeAsync(() => {
+    const onChangeSpy = spyOn(spectator.component.kirbyChange, 'emit');
+    const testValue = 'Test 123';
+    element.value = testValue;
+    spectator.debugElement.triggerEventHandler('paste', { target: element });
+    tick();
+    expect(onChangeSpy).toHaveBeenCalledTimes(1);
+    expect(onChangeSpy).toHaveBeenCalledWith(testValue);
+  }));
 
   describe('when hasError', () => {
     beforeEach(() => {
