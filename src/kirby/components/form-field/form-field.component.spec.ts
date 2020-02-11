@@ -1,6 +1,7 @@
 import { SpectatorHost, createHostFactory } from '@ngneat/spectator';
 
 import { DesignTokenHelper } from '../../helpers/design-token-helper';
+import { TestHelper } from '../../testing/test-helper';
 import { InputCounterComponent } from './input-counter/input-counter.component';
 import { FormFieldComponent } from './form-field.component';
 import { FormFieldMessageComponent } from './form-field-message/form-field-message.component';
@@ -112,15 +113,30 @@ describe('FormFieldComponent', () => {
       });
     });
 
+    const getAvailableTextWidth = () => {
+      const componentWidth = spectator.element.getBoundingClientRect().width;
+      const textWrapperElement = spectator.queryHost('.texts');
+      const paddingLeft = parseInt(TestHelper.getCssProperty(textWrapperElement, 'padding-left'));
+      const paddingRight = parseInt(TestHelper.getCssProperty(textWrapperElement, 'padding-right'));
+      const availableTextWidth = componentWidth - paddingLeft - paddingRight;
+      return availableTextWidth;
+    };
+
     describe('when having no counter', () => {
-      it('should render the message with the correct flex', () => {
+      let messageElement: HTMLElement;
+      beforeEach(() => {
         spectator = createHost(
           `<kirby-form-field message="This is additional info that will be shown below the input">
              <input kirby-input />
            </kirby-form-field>`
         );
-        const messageElement = spectator.queryHost('kirby-form-field-message');
-        expect(messageElement).toHaveComputedStyle({ 'flex-basis': '100%' });
+        messageElement = spectator.queryHost('kirby-form-field-message');
+      });
+
+      it('should render the message full width', () => {
+        const messageWidth = messageElement.getBoundingClientRect().width;
+        const availableTextWidth = getAvailableTextWidth();
+        expect(messageWidth).toEqual(availableTextWidth);
       });
     });
 
@@ -138,12 +154,18 @@ describe('FormFieldComponent', () => {
         counterWrapperElement = spectator.queryHost('.counter');
       });
 
-      it('should render the message with the correct flex', () => {
-        expect(messageElement).toHaveComputedStyle({ 'flex-basis': '75%' });
+      it('should render the message with correct width', () => {
+        const availableTextWidth = getAvailableTextWidth();
+        const expectedMessageWidth = availableTextWidth * 0.75;
+        const messageWidth = messageElement.getBoundingClientRect().width;
+        expect(messageWidth).toEqual(expectedMessageWidth);
       });
 
-      it('should render the counter with the correct flex', () => {
-        expect(counterWrapperElement).toHaveComputedStyle({ 'flex-basis': '25%' });
+      it('should render the counter with correct width', () => {
+        const availableTextWidth = getAvailableTextWidth();
+        const expectedCounterWidth = availableTextWidth * 0.25;
+        const counterWidth = counterWrapperElement.getBoundingClientRect().width;
+        expect(counterWidth).toEqual(expectedCounterWidth);
       });
     });
   });
