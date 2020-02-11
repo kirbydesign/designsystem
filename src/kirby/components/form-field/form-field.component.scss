@@ -12,21 +12,15 @@
 
   .message {
     flex: 75%;
+
+    &:only-child {
+      flex-basis: auto;
+    }
   }
 
   .counter {
     flex: 25%;
     text-align: right;
-  }
-
-  &.message-only {
-    .message {
-      flex: 100%;
-    }
-
-    .counter {
-      flex: 0;
-    }
   }
 }
 
