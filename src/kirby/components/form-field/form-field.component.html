@@ -6,9 +6,13 @@
   <ng-container *ngTemplateOutlet="slottedInput"></ng-container>
 </ng-container>
 <div *ngIf="message || counter" class="texts">
-  <kirby-form-field-message class="message" [text]="message"></kirby-form-field-message>
+  <kirby-form-field-message
+    *ngIf="message"
+    class="message"
+    [text]="message"
+  ></kirby-form-field-message>
 
-  <div class="counter">
+  <div *ngIf="counter" class="counter">
     <ng-content select="kirby-input-counter"></ng-content>
   </div>
 </div>

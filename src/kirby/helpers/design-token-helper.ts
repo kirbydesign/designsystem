@@ -27,6 +27,14 @@ export class DesignTokenHelper {
     return DesignTokenHelper.designTokens.global['$font-sizes'][key] + 'px';
   }
 
+  public static fontWeight(key: string): string {
+    return DesignTokenHelper.designTokens.global['$font-weight'][key] + '';
+  }
+
+  public static lineHeight(key: string): string {
+    return DesignTokenHelper.designTokens.global['$line-height'][key] + 'px';
+  }
+
   public static borderRadius(): string {
     return DesignTokenHelper.designTokens.global['$border-radius'] + 'px';
   }
