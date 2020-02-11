@@ -1,1 +1,5 @@
 @import '../form-field-inputs.shared';
+
+:host() {
+  height: size('xxxl');
+}

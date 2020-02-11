@@ -1,15 +1,13 @@
 @import '../../../scss/utils';
 
 :host(.error) {
-  border-color: get-color('danger');
+  border: 1px solid get-color('danger');
 }
 
 :host {
   background-color: get-color('white');
-  border-color: transparent;
+  border: none;
   border-radius: size('s');
-  border-style: solid;
-  border-width: 1px;
   box-shadow: get-elevation(2);
   box-sizing: border-box;
   color: get-color('black');
