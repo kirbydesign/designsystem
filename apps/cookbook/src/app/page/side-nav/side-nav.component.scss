@@ -1,0 +1,106 @@
+@import './libs/designsystem/src/lib/scss/utils';
+
+$page-header-bg: #1c1c1c;
+$page-header-color: #f4f1e8;
+$page-header-height: 7rem;
+$page-gutter: 1rem;
+$page-side-nav-width: 16.625rem;
+
+.side-menu {
+  display: none;
+  width: $page-side-nav-width;
+  background-color: white;
+  box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 900;
+  @include media('>=large') {
+    display: block;
+    position: static;
+    background-color: transparent;
+    box-shadow: none;
+  }
+  &.is-open {
+    display: block;
+  }
+
+  &__close-btn {
+    color: black;
+    text-decoration: none;
+    appearance: none;
+    border: none;
+    background: none;
+    font-size: 0.7rem;
+    margin: -1rem 0 1rem -0.5rem;
+    width: 42px;
+    height: 42px;
+    padding: 0.5rem;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    @include media('>=large') {
+      display: none;
+    }
+  }
+}
+
+.side-nav {
+  list-style: none;
+  padding: 2rem $page-gutter;
+  margin: 0;
+
+  &--sub {
+    overflow: hidden;
+    font-size: 0.85rem;
+    transition: 0.15s transform ease-in-out;
+    transform-origin: 0 0;
+    will-change: height, transform;
+    margin-left: -1rem;
+    padding: 0;
+
+    &.is-selected {
+      height: auto;
+      transform: scaleY(1);
+    }
+  }
+
+  &__item {
+    text-decoration: none;
+    color: get-color('black');
+    font-weight: 200;
+    padding: 0.75rem 0 0.75rem 0.75rem;
+    margin-left: -1rem;
+    display: block;
+    font-size: 1.2em;
+    display: flex;
+    align-items: center;
+    //border-top: 1px solid red;
+    &:hover,
+    &:focus {
+      background-color: get-color('medium');
+    }
+    &.is-selected {
+      color: get-color('primary');
+      font-weight: bold;
+    }
+  }
+
+  .is-selected > &-header {
+    font-weight: bold;
+  }
+
+  &--sub &__item {
+    padding-left: 4.25rem; //Magic... :)
+  }
+}
+
+.icon,
+kirby-icon {
+  width: 2rem;
+  height: 2rem;
+  margin-right: 0.5rem;
+  color: currentColor;
+  fill: currentColor;
+}

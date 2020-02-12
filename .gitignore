@@ -6,6 +6,7 @@
 /out-tsc
 /dist-lib
 /test-reports
+*.scss.json
 
 # dependencies
 /node_modules
@@ -48,7 +49,7 @@ Thumbs.db
 
 scripts/manifest.plist
 scripts/install-ipa.html
-src/kirby/polyfills
 
-# ts-lint
+# tools (tslint, sass-to-json etc.)
 /tools/tslint-rules/dist
+/tools/sass-to-json/dist

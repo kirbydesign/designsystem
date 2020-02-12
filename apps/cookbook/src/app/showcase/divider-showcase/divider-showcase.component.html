@@ -1,0 +1,24 @@
+<div class="example">
+  <cookbook-divider-example
+    [themeColor]="themeColor"
+    [hasMargin]="hasMargin"
+  ></cookbook-divider-example>
+  <div>
+    <select (change)="onThemeChange($event.target.value)">
+      <option value="">Card color: None</option>
+      <option
+        *ngFor="let color of themeColors"
+        value="{{ color }}"
+        [attr.selected]="themeColor === color ? true : null"
+        >Card color: {{ color }}</option
+      >
+    </select>
+  </div>
+  <div>
+    <select (change)="onMarginChange($event.target.value)">
+      <option value="" selected>Margin: Off</option>
+      <option value="true" [attr.selected]="hasMargin ? true : null">Margin: On</option>
+    </select>
+  </div>
+  <cookbook-code-viewer [html]="exampleHtml"></cookbook-code-viewer>
+</div>

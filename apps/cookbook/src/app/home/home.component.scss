@@ -1,0 +1,35 @@
+@import './libs/designsystem/src/lib/scss/utils';
+
+$page-header-bg: #1c1c1c;
+$page-header-color: #f4f1e8;
+$page-header-height: 7rem;
+$page-gutter: 1rem;
+$page-side-nav-width: 16.625rem;
+
+:host {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  width: 100%;
+  max-width: var(--kirby-page-max-width);
+  margin: 0 auto;
+  @include media('>=large') {
+    padding-right: $page-gutter;
+  }
+}
+
+section {
+  flex-grow: 1;
+  background-color: get-color('background-color');
+  margin: 2rem 0;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  padding: 1rem 2rem;
+  overflow: hidden;
+}

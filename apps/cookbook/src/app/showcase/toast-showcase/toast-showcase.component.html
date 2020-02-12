@@ -1,0 +1,27 @@
+<div class="example">
+  <cookbook-toast-example></cookbook-toast-example>
+  <cookbook-code-viewer [html]="exampleHtml"></cookbook-code-viewer>
+  To show the toast, create a <code>ToastConfig</code> and pass it to
+  <code>toastController.showToast</code>
+
+  <!-- prettier-ignore -->
+  <cookbook-code-viewer language="ts">const config: ToastConfig =
+      <pre>{{ '{' }}
+  message: 'Your toast message',
+  messageType: 'success';
+  durationInMs: 5000,
+{{ '}' }};
+this.toastController.showToast(config);
+</pre>
+    </cookbook-code-viewer>
+  (Optional) if you need to know when the toast is dismissed, you can pass a callback function:
+  <!-- prettier-ignore -->
+  <cookbook-code-viewer language="ts">this.toastController.showToast(config, myCallback);</cookbook-code-viewer>
+  where <code>myCallback</code> can be e.g.:
+  <!-- prettier-ignore -->
+  <cookbook-code-viewer language="ts">myCallback() {{ '{' }}
+...
+{{ '}' }}</cookbook-code-viewer>
+  <h4>Toast config properties:</h4>
+  <cookbook-showcase-properties [properties]="properties"></cookbook-showcase-properties>
+</div>

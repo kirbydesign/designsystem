@@ -1,0 +1,37 @@
+@import '../../scss/utils';
+
+:host(.error) {
+  border-color: get-color('danger');
+}
+
+:host {
+  background-color: get-color('white');
+  border-color: transparent;
+  border-radius: size('s');
+  border-style: solid;
+  border-width: 1px;
+  box-shadow: get-elevation(2);
+  box-sizing: border-box;
+  color: get-color('black');
+  display: block;
+  font-size: font-size('n');
+  line-height: line-height('n');
+  outline: none;
+  padding: size('s');
+  width: 100%;
+  -webkit-appearance: none;
+
+  &:disabled {
+    background-color: get-color('light-tint');
+  }
+
+  &::placeholder {
+    color: get-color('semi-dark');
+  }
+
+  // for the browsers that has partial support, see https://caniuse.com/#feat=css-placeholder
+  &::-webkit-input-placeholder,
+  &::-ms-input-placeholder {
+    color: get-color('semi-dark');
+  }
+}

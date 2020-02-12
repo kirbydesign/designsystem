@@ -1,0 +1,26 @@
+@import './libs/designsystem/src/lib/scss/utils';
+
+.changelog,
+.pull-requests {
+  list-style: none;
+  margin-bottom: size('m');
+
+  li {
+    margin-bottom: size('xxs');
+  }
+}
+
+.version-title,
+a {
+  color: get-color('black');
+  text-decoration: none;
+  display: inline-block;
+
+  &:hover {
+    color: get-color('primary');
+  }
+}
+
+kirby-badge {
+  margin-left: size('xxs');
+}

@@ -1,0 +1,29 @@
+@import './libs/designsystem/src/lib/scss/utils';
+
+:host {
+  padding: 2px;
+  width: 100%;
+  background: get-color('background-color');
+  height: 100%;
+  display: block;
+}
+
+hr {
+  visibility: hidden;
+}
+
+h2 {
+  margin-top: size('xl');
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: size('s');
+
+  h2 {
+    margin: 0;
+  }
+}

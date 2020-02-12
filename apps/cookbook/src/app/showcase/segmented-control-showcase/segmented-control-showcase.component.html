@@ -1,0 +1,29 @@
+<div class="example">
+  <div>
+    <select (change)="onModeChange($event.target.value)">
+      <option value="default" [attr.selected]="selectedMode === 'default' ? true : null"
+        >Mode: 'default'</option
+      >
+      <option value="chip" [attr.selected]="selectedMode === 'chip' ? true : null"
+        >Mode: 'chip'</option
+      >
+    </select>
+  </div>
+  <br />
+  <cookbook-segmented-control-example [mode]="selectedMode"></cookbook-segmented-control-example>
+  <cookbook-code-viewer [html]="exampleHtml"></cookbook-code-viewer>
+  <h4>Properties:</h4>
+  <cookbook-showcase-properties [properties]="properties"></cookbook-showcase-properties>
+
+  <div class="badge-note">
+    <p>
+      <sup>*</sup> If you want a badge on the segment-item then you add a badge object in the
+      SegmentItem array. Note that badges are only applied when the mode is 'default'.See the
+      interface
+      <a
+        href="https://github.com/kirbydesign/designsystem/blob/master/src/kirby/components/segmented-control/segment-item.ts"
+        >here</a
+      >.
+    </p>
+  </div>
+</div>

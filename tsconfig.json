@@ -12,12 +12,12 @@
     "typeRoots": ["node_modules/@types"],
     "lib": ["es2017", "dom", "es6", "es2015.iterable"],
     "baseUrl": ".",
+    "resolveJsonModule": true,
     "paths": {
-      "~/app/*": ["src/app/*"],
-      "~/environments/*": ["src/environments/*"],
-      "@kirbydesign/designsystem": ["src/kirby/index.ts"],
-      "@kirbydesign/designsystem/*": ["src/kirby/*"],
-      "~/*": ["tilde-imports-are-not-allowed-as-it-breaks-compilation-in-target-project"]
+      "~/app/*": ["apps/cookbook/src/app/*"],
+      "~/environments/*": ["apps/cookbook/src/environments/*"],
+      "@kirbydesign/designsystem": ["libs/designsystem/src/lib/index.ts"],
+      "@kirbydesign/designsystem/*": ["libs/designsystem/src/lib/*"]
     }
   }
 }

@@ -1,0 +1,16 @@
+<div class="example">
+  <cookbook-button-example [themeColor]="themeColor"></cookbook-button-example>
+  <div>
+    <select (change)="onChange($event.target.value)">
+      <option value="">Card color: None</option>
+      <option
+        *ngFor="let color of themeColors"
+        value="{{ color }}"
+        [attr.selected]="themeColor === color ? true : null"
+        >Card color: {{ color }}</option
+      >
+    </select>
+  </div>
+  <cookbook-code-viewer [html]="exampleHtml"></cookbook-code-viewer>
+  <cookbook-showcase-properties [properties]="properties"></cookbook-showcase-properties>
+</div>
