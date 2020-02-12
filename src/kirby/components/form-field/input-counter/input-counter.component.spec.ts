@@ -1,22 +1,21 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { Spectator, createComponentFactory } from '@ngneat/spectator';
+import { MockComponent } from 'ng-mocks';
 
 import { InputCounterComponent } from './input-counter.component';
 import { FormFieldMessageComponent } from '../form-field-message/form-field-message.component';
 
-describe('InputCounterComponent', () => {
+fdescribe('InputCounterComponent', () => {
   let component: InputCounterComponent;
-  let fixture: ComponentFixture<InputCounterComponent>;
+  let spectator: Spectator<InputCounterComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [InputCounterComponent, FormFieldMessageComponent],
-    }).compileComponents();
-  }));
+  const createHost = createComponentFactory({
+    component: InputCounterComponent,
+    declarations: [FormFieldMessageComponent],
+  });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(InputCounterComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    spectator = createHost();
+    component = spectator.component;
   });
 
   it('should create', () => {
@@ -29,15 +28,14 @@ describe('InputCounterComponent', () => {
     });
 
     it('should render counter correctly', () => {
-      expect((fixture.nativeElement as Element).textContent).toEqual('');
+      expect(spectator.element.textContent).toEqual('');
     });
   });
 
   describe('when configured with length and no maxlength', () => {
     const expectedText = '10';
     beforeEach(() => {
-      component.length = 10;
-      fixture.detectChanges();
+      spectator.setInput('length', 10);
     });
 
     it('should have correct text', () => {
@@ -45,16 +43,15 @@ describe('InputCounterComponent', () => {
     });
 
     it('should render text correctly', () => {
-      expect((fixture.nativeElement as Element).textContent).toEqual(expectedText);
+      expect(spectator.element.textContent).toEqual(expectedText);
     });
   });
 
   describe('when configured with length and maxlength = 0', () => {
     const expectedText = '10';
     beforeEach(() => {
-      component.length = 10;
-      component.maxlength = 0;
-      fixture.detectChanges();
+      spectator.setInput('length', 10);
+      spectator.setInput('maxlength', 0);
     });
 
     it('should have correct text', () => {
@@ -62,16 +59,15 @@ describe('InputCounterComponent', () => {
     });
 
     it('should render text correctly', () => {
-      expect((fixture.nativeElement as Element).textContent).toEqual(expectedText);
+      expect(spectator.element.textContent).toEqual(expectedText);
     });
   });
 
   describe('when configured with length and maxlength', () => {
     const expectedText = '10/20';
     beforeEach(() => {
-      component.length = 10;
-      component.maxlength = 20;
-      fixture.detectChanges();
+      spectator.setInput('length', 10);
+      spectator.setInput('maxlength', 20);
     });
 
     it('should have correct text', () => {
@@ -79,7 +75,7 @@ describe('InputCounterComponent', () => {
     });
 
     it('should render text correctly', () => {
-      expect((fixture.nativeElement as Element).textContent).toEqual(expectedText);
+      expect(spectator.element.textContent).toEqual(expectedText);
     });
   });
 });
