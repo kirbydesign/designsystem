@@ -7,7 +7,7 @@
     "start": "ng serve",
     "build": "ng build",
     "build-polyfills": "webpack --config webpack.polyfills.config.js",
-    "test": "npm run test:designsystem",
+    "test": "ng test",
     "test:cookbook": "ng test cookbook",
     "test:designsystem": "ng test designsystem",
     "test:headless-browser": "ng test --browsers=ChromeCustom",

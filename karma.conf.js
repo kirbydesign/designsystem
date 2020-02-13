@@ -38,6 +38,7 @@ module.exports = () => {
     logLevel: constants.LOG_INFO,
     autoWatch: true,
     browsers: isDocker || process.env.CI === 'true' ? ['ChromeCustom'] : ['Chrome'],
-    singleRun: false
+    singleRun: false,
+    failOnEmptyTestSuite: false
   };
 };
