@@ -11,7 +11,7 @@ assignees: ''
 In order to ensure steady progress and quality of Kirby, please follow our outlined process. By default three labels are added to new component issues and enhancements. To help Kirby please follow these steps, and remove the labels from the issue when done.
 
 *NOT Prioritized*
-- [ ] Describe any deadlines for the issue - eg. X needs this done by Y date, to be used in Z sprint. Suggest a milestone for the issue. The Not Prioritized will be removed by the Kirby team. 
+- [ ] Describe any deadlines for the issue - eg. X needs this done by Y date, to be used in Z sprint. Suggest a milestone for the issue. The `Not Prioritized` label will be removed by the Kirby team. 
 
 *NOT UX Refined*
 - [ ] Make sure the new Component, has a name, can be found in Zeplin, and is used in minimum one reviewed screen. Remove NOT UX Refined label and add links to Zeplin.
