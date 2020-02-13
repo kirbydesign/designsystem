@@ -15,6 +15,14 @@ export class InputCounterComponent implements OnInit, OnDestroy {
   maxlength: number;
   private _inputChangeSubscription: Subscription;
 
+  get text(): string {
+    if (this.length === undefined) {
+      return undefined;
+    }
+    const ofMaxlength = this.maxlength ? `/${this.maxlength}` : '';
+    return `${this.length}${ofMaxlength}`;
+  }
+
   ngOnInit(): void {
     if (this.listenTo) {
       this.length = this.listenTo.value ? this.listenTo.value.length : 0;
