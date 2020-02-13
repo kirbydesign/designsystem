@@ -14,7 +14,7 @@ In order to ensure steady progress and quality of Kirby, please follow our outli
 - [ ] Describe any deadlines for the issue - eg. X needs this done by Y date, to be used in Z sprint. Suggest a milestone for the issue. The `Not Prioritized` label will be removed by the Kirby team. 
 
 *NOT UX Refined*
-- [ ] Make sure the new Component, has a name, can be found in Zeplin, and is used in minimum one reviewed screen. Remove NOT UX Refined label and add links to Zeplin.
+- [ ] Make sure the new Component, has a name, can be found in Zeplin, and is used in minimum one reviewed screen. Remove the `NOT UX Refined` label and add links to Zeplin.
 
 *NOT Tech Refined*
 - [ ] Sketch a solution in technical terms, that is how will the component by build - eg. build it from scratch or build using X Ionic component. Call for a brief meeting or spend enough time with someone from @kirbydesign/kirby-guild to get a "go ahead". Remove NOT Tech Refined label.
