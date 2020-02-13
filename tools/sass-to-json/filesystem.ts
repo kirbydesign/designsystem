@@ -48,7 +48,7 @@ export abstract class SassToJsonFileSystem {
     return walk(this.getProjectRoot(), filter);
   }
 
-  resolve(target: string, origin: string): string {
+  resolve(target: string, origin: string, globs: string[]): string {
     const originPath = path.dirname(origin);
     const targetPath = target.match('\\.s?css$') ? target : `${target}.scss`;
     const parsed = path.parse(targetPath);
@@ -80,7 +80,6 @@ export abstract class SassToJsonFileSystem {
     let resolved;
     if (targetPath.startsWith('~')) {
       resolved = path.resolve(this.getProjectRoot(), 'node_modules', targetPath.substr(1));
-      console.log('>> ', resolved);
       if (!fs.existsSync(resolved)) {
         resolved = null;
       }
@@ -96,8 +95,10 @@ export abstract class SassToJsonFileSystem {
 
     if (!resolved) {
       throw new Error(`Unable to resolve dependencies from target: ${target}, origin: ${origin}`);
+    } else {
+      const allowed = multimatch(this.makeRelative(resolved), globs).length > 0;
+      return allowed ? resolved : null;
     }
-    return resolved;
   }
 
   makeAbsolute = (relative: string) => path.resolve(path.join(this.getProjectRoot(), relative));

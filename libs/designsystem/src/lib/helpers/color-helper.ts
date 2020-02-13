@@ -1,12 +1,13 @@
-import * as colors from './color-helper.scss.json';
+declare var require;
+const colors = require('./color-helper.scss.json');
 
 export class ColorHelper {
   public static getMainColors() {
-    const mainColors = colors['$main-colors'];
-    return Object.entries(mainColors).map((color: [string, RgbColor]) => {
+    const mainColors = colors['$main-colors'].value;
+    return Object.entries(mainColors).map((color: [string, { value: RgbColor }]) => {
       return {
         name: color[0],
-        value: color[1],
+        value: color[1].value,
       };
     });
   }

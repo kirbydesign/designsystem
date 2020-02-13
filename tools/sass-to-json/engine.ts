@@ -2,7 +2,11 @@ import { render } from 'sass-extract';
 
 import { SassToJsonFileSystem } from './filesystem';
 
+declare type SassImportResolveCallback = (resolve: { file: string } | null) => void;
+
 export class SassToJsonEngine {
+  constructor(private sassFileGlobs: string[]) {}
+
   public async transform(files: string[], fileSystem: SassToJsonFileSystem): Promise<any> {
     return Promise.all(files.map((filename) => this.transformAndWrite(filename, fileSystem)));
   }
@@ -20,16 +24,16 @@ export class SassToJsonEngine {
   private async extractGlobalVariables(pathToFile: string, fileSystem: SassToJsonFileSystem) {
     const compileOptions = {
       file: pathToFile,
-      importer: (url, prev, resolve) => {
-        resolve({ file: fileSystem.resolve(url, prev) });
+      importer: (url: string, prev: string, resolve: SassImportResolveCallback) => {
+        const resolved = fileSystem.resolve(url, prev, this.sassFileGlobs);
+        resolve(resolved ? { file: resolved } : null);
       },
     };
-    const extractOptions = { plugins: ['compact'] };
+    const extractOptions = { plugins: [] };
     let result;
     try {
       result = await render(compileOptions, extractOptions);
     } catch (err) {
-      console.error(err);
       result = { vars: { global: {} } };
     }
     const globalVariables = result.vars.global;

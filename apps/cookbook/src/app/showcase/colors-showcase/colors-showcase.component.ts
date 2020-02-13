@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 
 import { SassColor } from '@kirbydesign/designsystem/scss/scss-helper';
 
-import * as style from './colors-showcase.component.scss.json';
+declare var require;
+const style = require('./colors-showcase.component.scss.json');
 
 @Component({
   selector: 'cookbook-colors-showcase',
@@ -30,7 +31,7 @@ export class ColorsShowcaseComponent {
   private getColors(colorType: string) {
     const colors = [];
     const mainColors = style[colorType].value;
-    const generatedColors = style['$kirby-colors'];
+    const generatedColors = style['$kirby-colors'].value;
     for (const [value, type] of Object.entries(mainColors)) {
       const sassColor = <SassColor>type;
       sassColor.name = value;

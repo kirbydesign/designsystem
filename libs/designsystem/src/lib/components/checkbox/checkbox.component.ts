@@ -10,7 +10,8 @@ import {
   SimpleChanges,
 } from '@angular/core';
 
-import * as style from './checkbox.component.scss.json';
+declare var require;
+const style = require('./checkbox.component.scss.json');
 
 @Component({
   selector: 'kirby-checkbox',
@@ -38,7 +39,7 @@ export class CheckboxComponent implements OnInit, OnChanges {
   ngOnInit() {}
 
   getThemeColor(name: string) {
-    const globalValue = style['$kirby-colors'][name];
+    const globalValue = style['$kirby-colors'].value[name];
     const styleVar = globalValue.hex;
     return styleVar;
   }

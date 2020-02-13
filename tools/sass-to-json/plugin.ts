@@ -17,7 +17,7 @@ export class SassToJsonWebpackPlugin implements Plugin {
   constructor(private options: SassToJsonWebpackPluginOptions = {}) {
     validateOptions(SCHEMA, options, 'SASS to JSON Plugin');
 
-    this.engine = new SassToJsonEngine();
+    this.engine = new SassToJsonEngine(options.sassFiles);
     this.startTime = Date.now();
     this.prevTimestamps = new Map<string, number>();
   }

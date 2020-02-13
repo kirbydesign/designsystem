@@ -60,7 +60,9 @@
                 "sassFiles": [
                   "/apps/cookbook/src/app/**/*.scss",
                   "/libs/designsystem/src/lib/**/*.scss",
-                  "!/libs/designsystem/src/lib/scss/(_global-styles.scss|base/_ionic.scss)"
+                  "!/libs/designsystem/src/lib/scss/_global-styles.scss",
+                  "!/libs/designsystem/src/lib/scss/base/_ionic.scss",
+                  "!/libs/designsystem/src/lib/scss/base/_include-media.scss"
                 ]
               }
             },
@@ -77,15 +79,15 @@
               {
                 "glob": "**/*.svg",
                 "input": "libs/designsystem/src/lib/icons/svg",
-                "output": "apps/cookbook/src/assets/kirby/icons/svg"
+                "output": "./assets/kirby/icons/svg"
               },
               {
                 "glob": "**/*.svg",
                 "input": "node_modules/ionicons/dist/ionicons/svg",
-                "output": "apps/cookbook/src/assets/svg"
+                "output": "./svg"
               }
             ],
-            "styles": ["apps/cookbook/src/styles.scss"],
+            "styles": ["apps/cookbook/src/styles.scss", "node_modules/prismjs/themes/prism.css"],
             "scripts": []
           },
           "configurations": {
@@ -127,11 +129,13 @@
               "path": "./webpack.sass-to-json.config.ts",
               "sassToJson": {
                 "sassFiles": [
-                  "./apps/cookbook/src/app/**/*.scss",
-                  "./libs/designsystem/src/lib/**/*.scss"
+                  "/apps/cookbook/src/app/**/*.scss",
+                  "/libs/designsystem/src/lib/**/*.scss",
+                  "!/libs/designsystem/src/lib/scss/_global-styles.scss",
+                  "!/libs/designsystem/src/lib/scss/base/_ionic.scss",
+                  "!/libs/designsystem/src/lib/scss/base/_include-media.scss"
                 ]
-              },
-              "sassExclude": ["_global-styles.scss", "_ionic.scss"]
+              }
             },
             "browserTarget": "cookbook:build"
           },
