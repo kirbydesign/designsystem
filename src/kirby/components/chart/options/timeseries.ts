@@ -50,6 +50,7 @@ export const TimeSeriesOptions: Options = {
       color: '#00E89A',
     },
     type: 'datetime',
+    tickInterval: 1,
   },
   yAxis: {
     visible: false,

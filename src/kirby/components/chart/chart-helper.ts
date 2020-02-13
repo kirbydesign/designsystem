@@ -10,6 +10,7 @@ import * as accessibility from 'highcharts/modules/accessibility';
 declare var require: any;
 require('highcharts/highcharts-more')(Highcharts);
 require('highcharts/modules/solid-gauge')(Highcharts);
+require('highcharts/modules/broken-axis')(Highcharts);
 
 export class ChartHelper {
   chartContainer: ElementRef;
