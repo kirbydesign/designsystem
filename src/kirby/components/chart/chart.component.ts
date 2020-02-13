@@ -22,7 +22,7 @@ import { ChartType } from './chart-type';
 })
 export class ChartComponent implements OnInit, OnChanges {
   @Input() data = [];
-  @Input() breaks: Array<Highcharts.XAxisBreaksOptions>;
+  @Input() breaks: Array<Highcharts.XAxisBreaksOptions> = [];
   @Input() height = 300;
   @Input() type: ChartType = ChartType.PIE;
   @Input() description = '';
