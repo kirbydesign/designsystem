@@ -22,6 +22,7 @@ import { ChartType } from './chart-type';
 })
 export class ChartComponent implements OnInit, OnChanges {
   @Input() data = [];
+  @Input() breaks: Array<Highcharts.XAxisBreaksOptions> = [];
   @Input() height = 300;
   @Input() type: ChartType = ChartType.PIE;
   @Input() description = '';
@@ -113,6 +114,10 @@ export class ChartComponent implements OnInit, OnChanges {
               data: this.data as Array<Highcharts.SeriesAreaDataOptions>,
             },
           ];
+          this.options.xAxis = {
+            ...this.options.xAxis,
+            breaks: this.breaks,
+          };
           break;
         }
         case ChartType.ACTIVITYGAUGE: {
