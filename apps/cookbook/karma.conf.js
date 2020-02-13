@@ -11,6 +11,9 @@ module.exports = function(config) {
     coverageIstanbulReporter: {
       ...baseConfig.coverageIstanbulReporter,
       dir: join(__dirname, '../../coverage/apps/cookbook')
-    }
+    },
+    junitReporter: {
+      outputDir: require('path').join(__dirname, '../../test-reports/apps/cookbook'),
+    },
   });
 };

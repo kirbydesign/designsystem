@@ -109,7 +109,8 @@ export class ColorHelper {
   }
 
   private static getColor(name: string): string | RgbColor {
-    return colors['$kirby-colors'][name];
+    const found = colors['$kirby-colors'].value[name];
+    return found ? found.value : null;
   }
 }
 

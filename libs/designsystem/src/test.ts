@@ -9,6 +9,7 @@ import {
   BrowserDynamicTestingModule,
   platformBrowserDynamicTesting,
 } from '@angular/platform-browser-dynamic/testing';
+import { ElementCssCustomMatchers } from '@kirbydesign/designsystem/testing/element-css-custom-matchers';
 
 declare const require: any;
 
@@ -18,3 +19,7 @@ getTestBed().initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDyn
 const context = require.context('./', true, /\.spec\.ts$/);
 // And load the modules.
 context.keys().map(context);
+
+beforeAll(() => {
+  jasmine.addMatchers(ElementCssCustomMatchers);
+});

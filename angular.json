@@ -30,7 +30,8 @@
           "options": {
             "main": "libs/designsystem/src/test.ts",
             "tsConfig": "libs/designsystem/tsconfig.spec.json",
-            "karmaConfig": "libs/designsystem/karma.conf.js"
+            "karmaConfig": "libs/designsystem/karma.conf.js",
+            "styles": []
           }
         }
       },
@@ -59,10 +60,7 @@
               "sassToJson": {
                 "sassFiles": [
                   "/apps/cookbook/src/app/**/*.scss",
-                  "/libs/designsystem/src/lib/**/*.scss",
-                  "!/libs/designsystem/src/lib/scss/_global-styles.scss",
-                  "!/libs/designsystem/src/lib/scss/base/_ionic.scss",
-                  "!/libs/designsystem/src/lib/scss/base/_include-media.scss"
+                  "/libs/designsystem/src/lib/**/*.scss"
                 ]
               }
             },
@@ -87,7 +85,10 @@
                 "output": "./svg"
               }
             ],
-            "styles": ["apps/cookbook/src/styles.scss", "node_modules/prismjs/themes/prism.css"],
+            "styles": [
+              "apps/cookbook/src/styles.scss",
+              "node_modules/prismjs/themes/prism.css"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -130,10 +131,7 @@
               "sassToJson": {
                 "sassFiles": [
                   "/apps/cookbook/src/app/**/*.scss",
-                  "/libs/designsystem/src/lib/**/*.scss",
-                  "!/libs/designsystem/src/lib/scss/_global-styles.scss",
-                  "!/libs/designsystem/src/lib/scss/base/_ionic.scss",
-                  "!/libs/designsystem/src/lib/scss/base/_include-media.scss"
+                  "/libs/designsystem/src/lib/**/*.scss"
                 ]
               }
             },

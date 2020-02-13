@@ -11,6 +11,9 @@ module.exports = function(config) {
     coverageIstanbulReporter: {
       ...baseConfig.coverageIstanbulReporter,
       dir: join(__dirname, '../../coverage/libs/designsystem')
-    }
+    },
+    junitReporter: {
+      outputDir: require('path').join(__dirname, '../../test-reports/libs/designsystem'),
+    },
   });
 };
