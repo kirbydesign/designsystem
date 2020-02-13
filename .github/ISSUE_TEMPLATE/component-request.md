@@ -2,7 +2,7 @@
 name: Component request
 about: Suggest a new component for Kirby Design System
 title: '[COMPONENT] '
-labels: component
+labels: NOT Tech refined, NOT UX refined, component
 assignees: ''
 ---
 

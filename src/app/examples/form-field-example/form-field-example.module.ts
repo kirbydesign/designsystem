@@ -11,6 +11,7 @@ import { FormFieldInputDisabledExampleComponent } from './examples/input/disable
 import { FormFieldInputErrorExampleComponent } from './examples/input/error';
 import { FormFieldTextareaDefaultExampleComponent } from './examples/textarea/default';
 import { FormFieldTextareaLabelExampleComponent } from './examples/textarea/label';
+import { FormFieldTextareaCounterExampleComponent } from './examples/textarea/counter';
 
 const COMPONENT_DECLARATIONS = [
   FormFieldInputDefaultExampleComponent,
@@ -22,6 +23,7 @@ const COMPONENT_DECLARATIONS = [
   FormFieldInputErrorExampleComponent,
   FormFieldTextareaDefaultExampleComponent,
   FormFieldTextareaLabelExampleComponent,
+  FormFieldTextareaCounterExampleComponent,
 ];
 
 @NgModule({
