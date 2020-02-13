@@ -1,10 +1,11 @@
 import { Spectator, createComponentFactory } from '@ngneat/spectator';
-import { MockComponent } from 'ng-mocks';
 
 import { InputCounterComponent } from './input-counter.component';
 import { FormFieldMessageComponent } from '../form-field-message/form-field-message.component';
+import { InputComponent } from '../input/input.component';
+import { TextareaComponent } from '../textarea/textarea.component';
 
-fdescribe('InputCounterComponent', () => {
+describe('InputCounterComponent', () => {
   let component: InputCounterComponent;
   let spectator: Spectator<InputCounterComponent>;
 
@@ -76,6 +77,108 @@ fdescribe('InputCounterComponent', () => {
 
     it('should render text correctly', () => {
       expect(spectator.element.textContent).toEqual(expectedText);
+    });
+  });
+
+  describe('when configured with listenTo = input', () => {
+    describe('and input does not have initial value and maxlength', () => {
+      const input = new InputComponent();
+      beforeEach(() => {
+        component.listenTo = input;
+        component.ngOnInit();
+      });
+
+      it('should have initial length = 0', () => {
+        expect(component.length).toEqual(0);
+      });
+
+      it('should not have maxlength', () => {
+        expect(component.maxlength).toBeUndefined();
+      });
+
+      it('should get updated length from kirbyChange event', () => {
+        const testValue = 'Test 123';
+        input.kirbyChange.emit(testValue);
+        expect(component.length).toEqual(testValue.length);
+      });
+    });
+
+    describe('and input has initial value and maxlength', () => {
+      const initialValue = 'Test 123';
+      const updatedValue = 'Test 123456';
+      const maxlength = 99;
+      const input = new InputComponent();
+      input.value = initialValue;
+      input.maxlength = maxlength;
+      beforeEach(() => {
+        component.listenTo = input;
+        component.ngOnInit();
+      });
+
+      it('should get initial length from input value', () => {
+        expect(component.length).toEqual(initialValue.length);
+      });
+
+      it('should get maxlength from input', () => {
+        expect(component.maxlength).toEqual(maxlength);
+      });
+
+      it('should get updated length from kirbyChange event', () => {
+        expect(component.length).toEqual(initialValue.length);
+        input.kirbyChange.emit(updatedValue);
+        expect(component.length).toEqual(updatedValue.length);
+      });
+    });
+  });
+
+  describe('when configured with listenTo = textarea', () => {
+    describe('and textarea does not have initial value and maxlength', () => {
+      const textarea = new TextareaComponent();
+      beforeEach(() => {
+        component.listenTo = textarea;
+        component.ngOnInit();
+      });
+
+      it('should have initial length = 0', () => {
+        expect(component.length).toEqual(0);
+      });
+
+      it('should not have maxlength', () => {
+        expect(component.maxlength).toBeUndefined();
+      });
+
+      it('should get updated length from kirbyChange event', () => {
+        const testValue = 'Test 123';
+        textarea.kirbyChange.emit(testValue);
+        expect(component.length).toEqual(testValue.length);
+      });
+    });
+
+    describe('and textarea has initial value and maxlength', () => {
+      const initialValue = 'Test 123';
+      const updatedValue = 'Test 123456';
+      const maxlength = 99;
+      const textarea = new TextareaComponent();
+      textarea.value = initialValue;
+      textarea.maxlength = maxlength;
+      beforeEach(() => {
+        component.listenTo = textarea;
+        component.ngOnInit();
+      });
+
+      it('should get initial length from textarea value', () => {
+        expect(component.length).toEqual(initialValue.length);
+      });
+
+      it('should get maxlength from textarea', () => {
+        expect(component.maxlength).toEqual(maxlength);
+      });
+
+      it('should get updated length from kirbyChange event', () => {
+        expect(component.length).toEqual(initialValue.length);
+        textarea.kirbyChange.emit(updatedValue);
+        expect(component.length).toEqual(updatedValue.length);
+      });
     });
   });
 });
