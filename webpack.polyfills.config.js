@@ -1,23 +1,24 @@
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-module.exports = (env) => {
+module.exports = () => {
+  console.log('>> ', path.resolve(__dirname, 'apps/cookbook/src/polyfills/'));
   const config = {
     mode: 'production',
     entry: {
-      'resize-observer-polyfill': './src/polyfills/resize-observer-polyfill.js',
-      'resize-observer-polyfill-loader': './src/polyfills/resize-observer-polyfill-loader',
-      'intersection-observer-polyfill': './src/polyfills/intersection-observer-polyfill.js',
-      'intersection-observer-polyfill-loader': './src/polyfills/intersection-observer-polyfill-loader',
+      'resize-observer-polyfill': './libs/designsystem/src/lib/polyfills/resize-observer-polyfill.js',
+      'resize-observer-polyfill-loader': './libs/designsystem/src/lib/polyfills/resize-observer-polyfill-loader',
+      'intersection-observer-polyfill': './libs/designsystem/src/lib/polyfills/intersection-observer-polyfill.js',
+      'intersection-observer-polyfill-loader': './libs/designsystem/src/lib/polyfills/intersection-observer-polyfill-loader',
     },
     output: {
       filename: '[name].min.js',
-      path: path.resolve(__dirname, 'src/kirby/polyfills/'),
+      path: path.resolve(__dirname, 'apps/cookbook/src/polyfills/'),
     },
     plugins: [
       new CopyWebpackPlugin([
-        { from: './src/polyfills/resize-observer-polyfill-loader.js' },
-        { from: './src/polyfills/intersection-observer-polyfill-loader.js' }
+        { from: './libs/designsystem/src/lib/polyfills/resize-observer-polyfill-loader.js' },
+        { from: './libs/designsystem/src/lib/polyfills/intersection-observer-polyfill-loader.js' }
       ]),
     ],
   };
