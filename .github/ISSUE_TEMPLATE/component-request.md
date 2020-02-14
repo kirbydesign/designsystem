@@ -17,7 +17,7 @@ In order to ensure steady progress and quality of Kirby, please follow our outli
 - [ ] Make sure the new Component, has a name, can be found in Zeplin, and is used in minimum one reviewed screen. Remove the `NOT UX Refined` label and add links to Zeplin.
 
 *NOT Tech Refined*
-- [ ] Sketch a solution in technical terms, that is how will the component by build - eg. build it from scratch or build using X Ionic component. Call for a brief meeting or spend enough time with someone from @kirbydesign/kirby-guild to get a "go ahead". Remove the `NOT Tech Refined` label.
+- [ ] Sketch a solution in technical terms, that is how will the component be build - eg. build it from scratch or build using X Ionic component. Call for a brief meeting or spend enough time with someone from @kirbydesign/kirby-guild to get a "go ahead". Remove the `NOT Tech Refined` label.
 
 **Describe the solution you'd like**
 A clear and concise description of what you want to happen.
