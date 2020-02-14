@@ -7,7 +7,7 @@ declare type SassImportResolveCallback = (resolve: { file: string } | null) => v
 export class SassToJsonEngine {
   constructor(private sassFileGlobs: string[]) {}
 
-  public async transform(files: string[], fileSystem: SassToJsonFileSystem): Promise<any> {
+  public async transform(files: string[], fileSystem: SassToJsonFileSystem): Promise<string[]> {
     return Promise.all(files.map((filename) => this.transformAndWrite(filename, fileSystem)));
   }
 
@@ -16,9 +16,10 @@ export class SassToJsonEngine {
     if (globalVariables) {
       const data = JSON.stringify(globalVariables, null, 2);
       const outputFile = `${file}.json`;
-      return fileSystem.writeFile(outputFile, data);
+      await fileSystem.writeFile(outputFile, data);
+      return outputFile;
     }
-    return true;
+    return null;
   }
 
   private async extractGlobalVariables(pathToFile: string, fileSystem: SassToJsonFileSystem) {

@@ -8,6 +8,19 @@ import * as path from 'path';
 const readdirAsync = util.promisify(fs.readdir);
 const statAsync = util.promisify(fs.stat);
 
+export function findPathOf(context: string, filename: string): string {
+  do {
+    const root = path.resolve(context, filename);
+    if (fs.existsSync(root)) {
+      return context;
+    }
+    context = path.resolve(context, '..');
+    if (!fs.existsSync(context)) {
+      context = null;
+    }
+  } while (context);
+}
+
 /**
  * Traverses a path (directory) recursively to find files using a filter (or all files if filter is omitted).
  * @param root the directory to traverse for finding files
@@ -122,15 +135,6 @@ export class WebpackFilesystem extends SassToJsonFileSystem {
 
   getProjectRoot(): string {
     let context = this.compiler.context;
-    do {
-      const root = path.resolve(context, 'angular.json');
-      if (fs.existsSync(root)) {
-        return context;
-      }
-      context = path.resolve(context, '..');
-      if (!fs.existsSync(context)) {
-        context = null;
-      }
-    } while (context);
+    return findPathOf(context, 'angular.json');
   }
 }
