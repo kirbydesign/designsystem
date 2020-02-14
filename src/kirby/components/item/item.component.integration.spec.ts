@@ -90,7 +90,7 @@ describe('ItemComponent in Kirby List', () => {
       expect(itemsInList).toBeTruthy();
     });
 
-    fit(`should render first with padding top 0px and last item with padding bottom 0px`, async () => {
+    it(`should render first with padding top 0px and last item with padding bottom 0px`, async () => {
       const firstItem = itemsInList[0].shadowRoot.querySelector('.item-native');
       const lastItem = itemsInList[itemsInList.length - 1].shadowRoot.querySelector('.item-native');
       expect(firstItem).toHaveComputedStyle({ 'padding-top': '0px' });
