@@ -34,10 +34,17 @@ export class ButtonComponent implements AfterContentInit {
   public get isIconOnly(): boolean {
     return this.icon && !this._hasSlottedContent;
   }
-  @HostBinding('class.icon-left')
   private _isIconLeft = false;
-  @HostBinding('class.icon-right')
+  @HostBinding('class.icon-left')
+  public get isIconLeft() {
+    return this._isIconLeft;
+  }
+
   private _isIconRight = false;
+  @HostBinding('class.icon-right')
+  public get isIconRight() {
+    return this._isIconRight;
+  }
 
   @Input() set attentionLevel(level: '1' | '2' | '3' | '4') {
     this.isAttentionLevel1 = level === '1';

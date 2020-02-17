@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { DynamicComponent } from '@kirbydesign/designsystem/components/shared/dynamic-component';
+import { DynamicComponent } from '@kirbydesign/designsystem';
 
 @Component({
   selector: 'cookbook-card-example',

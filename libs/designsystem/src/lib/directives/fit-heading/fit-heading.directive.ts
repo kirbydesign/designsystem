@@ -1,7 +1,7 @@
 import { Directive, ElementRef, Input, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 
-import { ResizeObserverService } from '@kirbydesign/designsystem/components/shared/resize-observer/resize-observer.service';
-import { ResizeObserverEntry } from '@kirbydesign/designsystem/components/shared/resize-observer/types/resize-observer-entry';
+import { ResizeObserverService } from '../../components/shared/resize-observer/resize-observer.service';
+import { ResizeObserverEntry } from '../../components/shared/resize-observer/types/resize-observer-entry';
 
 declare var require: any;
 

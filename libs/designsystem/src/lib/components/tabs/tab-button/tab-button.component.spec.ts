@@ -3,7 +3,7 @@ import { MockComponent, MockModule } from 'ng-mocks';
 import { IonicModule } from '@ionic/angular';
 
 import { TabButtonComponent } from './tab-button.component';
-import { IconComponent } from '@kirbydesign/designsystem/components/icon/icon.component';
+import { IconComponent } from '../../icon/icon.component';
 
 describe('TabsComponent', () => {
   let spectator: Spectator<TabButtonComponent>;

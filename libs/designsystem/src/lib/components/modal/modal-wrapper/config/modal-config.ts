@@ -1,5 +1,5 @@
 import { DrawerSupplementaryAction } from './drawer-supplementary-action';
-import { KirbyAnimation } from '@kirbydesign/designsystem/animation/kirby-animation';
+import { KirbyAnimation } from '../../../../animation/kirby-animation';
 import { Modal } from '../../services/modal.model';
 
 export interface ModalConfig {

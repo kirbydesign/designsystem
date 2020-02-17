@@ -12,7 +12,7 @@ import {
   LOCALE_ID,
   Inject,
 } from '@angular/core';
-import * as moment from 'moment';
+import moment from 'moment';
 
 import { CalendarHelper } from './helpers/calendar.helper';
 import { CalendarOptions } from './helpers/calendar-options.model';
@@ -263,7 +263,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
     this.calendarHelper.setSelectedDay(newDate.getDate());
   }
 
-  private onDateSelected(newDay: CalendarCell) {
+  onDateSelected(newDay: CalendarCell) {
     if (newDay.isSelectable && newDay.date) {
       const selectedDate = this.activeMonth
         .clone()

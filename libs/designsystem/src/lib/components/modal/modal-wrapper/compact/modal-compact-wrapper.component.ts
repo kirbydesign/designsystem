@@ -15,6 +15,12 @@ export class ModalCompactWrapperComponent {
   config: ModalConfig;
   componentPropsInjector: Injector;
 
+  private _ionPageReset = false;
+  @HostBinding('class.ion-page')
+  get ionPageReset() {
+    return this._ionPageReset;
+  }
+
   constructor(params: NavParams, injector: Injector) {
     this.config = params.get('config');
     this.componentPropsInjector = Injector.create({
@@ -23,8 +29,6 @@ export class ModalCompactWrapperComponent {
     });
     this.registerScrolling(this.config.modal);
   }
-
-  @HostBinding('class.ion-page') private _ionPageReset = false;
 
   private registerScrolling(modal: Modal) {
     modal.scrollToTop = () => {};

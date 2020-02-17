@@ -2,7 +2,6 @@ const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = () => {
-  console.log('>> ', path.resolve(__dirname, 'apps/cookbook/src/polyfills/'));
   const config = {
     mode: 'production',
     entry: {

@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { ActionSheetItem } from '@kirbydesign/designsystem/modal';
+import { ActionSheetItem } from '@kirbydesign/designsystem';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
 
 @Component({

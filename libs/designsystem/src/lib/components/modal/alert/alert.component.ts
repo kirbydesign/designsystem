@@ -30,7 +30,11 @@ export class AlertComponent implements AfterViewInit {
   @Input() okBtnIsDestructive: boolean;
   @Input() cancelBtnText: string;
 
-  @HostBinding('class.ion-page') private _ionPageReset = false;
+  private _ionPageReset = false;
+  @HostBinding('class.ion-page')
+  get ionPageReset() {
+    return this._ionPageReset;
+  }
 
   constructor(private modalController: IModalController) {}
 

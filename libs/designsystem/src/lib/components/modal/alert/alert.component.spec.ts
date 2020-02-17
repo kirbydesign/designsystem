@@ -6,7 +6,7 @@ import { NavParams } from '@ionic/angular';
 import { AlertComponent } from './alert.component';
 import { ButtonComponent } from '../../button/button.component';
 import { IModalController } from '../services/modal.controller.interface';
-import { SizeDirective } from '@kirbydesign/designsystem/directives/size/size.directive';
+import { SizeDirective } from '../../../directives/size/size.directive';
 
 describe('AlertComponent', () => {
   let component: AlertComponent;

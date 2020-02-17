@@ -29,12 +29,23 @@ export class ListCellComponent implements OnInit {
   @Input() verticalAlignment: verticalAlignment = defaultVerticalAlignment;
   @Input() width: number = defaultWidth;
 
-  @HostBinding('style.flex-basis')
   private _flexBasisHost: string;
-  @HostBinding('style.align-items')
+  @HostBinding('style.flex-basis')
+  get flexBasisHost() {
+    return this._flexBasisHost;
+  }
+
   private _flexAlignHost: string;
-  @HostBinding('style.justify-content')
+  @HostBinding('style.align-items')
+  get flexAlignHost() {
+    return this._flexAlignHost;
+  }
+
   private _flexJustifyHost: string;
+  @HostBinding('style.justify-content')
+  get flexJustifyHost() {
+    return this._flexJustifyHost;
+  }
 
   constructor() {}
 

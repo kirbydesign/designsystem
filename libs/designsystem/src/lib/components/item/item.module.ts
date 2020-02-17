@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 
-import { ItemComponent } from '@kirbydesign/designsystem/components/item/item.component';
-import { LabelComponent } from '@kirbydesign/designsystem/components/item/label/label.component';
+import { ItemComponent } from './item.component';
+import { LabelComponent } from './label/label.component';
 
 @NgModule({
   imports: [IonicModule, CommonModule],

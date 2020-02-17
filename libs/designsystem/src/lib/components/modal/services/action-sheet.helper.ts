@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 
 import { ActionSheetConfig } from '../action-sheet/config/action-sheet-config';
 import { ActionSheetComponent } from '../action-sheet/action-sheet.component';
-import { ActionSheetItem } from '@kirbydesign/designsystem/modal';
+import { ActionSheetItem } from '../action-sheet/config/action-sheet-item';
 
 @Injectable()
 export class ActionSheetHelper {

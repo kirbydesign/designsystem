@@ -5,7 +5,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { MockDirective } from 'ng-mocks';
 
 import { PageComponent } from './page.component';
-import { FitHeadingDirective } from '@kirbydesign/designsystem/directives/fit-heading/fit-heading.directive';
+import { FitHeadingDirective } from '../../directives/fit-heading/fit-heading.directive';
 
 describe('PageComponent', () => {
   let component: PageComponent;

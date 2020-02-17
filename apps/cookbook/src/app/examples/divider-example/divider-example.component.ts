@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
-import { ThemeColor } from '@kirbydesign/designsystem/helpers/theme-color.type';
-import { Color, ColorHelper } from '@kirbydesign/designsystem/helpers/color-helper';
+import { ThemeColor } from '@kirbydesign/designsystem';
+import { Color, ColorHelper } from '@kirbydesign/designsystem';
 
 @Component({
   selector: 'cookbook-divider-example',

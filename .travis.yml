@@ -19,7 +19,7 @@ matrix:
         chrome: stable
       script: 
         - npm run lint
-        - npm run ci-test
+        - npm run test:ci
         - npm run coverage-report || true
 
     # Running web build

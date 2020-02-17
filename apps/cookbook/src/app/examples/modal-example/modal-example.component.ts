@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { ModalConfig, ModalController } from '@kirbydesign/designsystem/modal';
+import { ModalConfig, ModalController } from '@kirbydesign/designsystem';
 import { FirstEmbeddedModalExampleComponent } from './first-embedded-modal-example/first-embedded-modal-example.component';
 import { ModalCompactExampleComponent } from './compact-example/modal-compact-example.component';
 

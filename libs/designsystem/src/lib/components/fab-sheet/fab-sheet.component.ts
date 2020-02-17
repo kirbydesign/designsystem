@@ -23,11 +23,17 @@ export class FabSheetComponent implements AfterContentInit, AfterViewInit {
   @Input() disabled?: boolean = false;
   @Input() horizontalAlignment?: 'left' | 'center' | 'right' = 'right';
 
+  private _isFabSheetOpen: boolean = false;
   @HostBinding('class.is-open')
-  isFabSheetOpen: boolean = false;
+  get isFabSheetOpen() {
+    return this._isFabSheetOpen;
+  }
 
-  @HostBinding('class.backdrop-visible')
   private _isBackdropVisible: boolean = false;
+  @HostBinding('class.backdrop-visible')
+  get isBackdropVisible() {
+    return this._isBackdropVisible;
+  }
 
   @ContentChild(ActionSheetComponent, { static: false }) actionSheet: ActionSheetComponent;
 
@@ -70,12 +76,12 @@ export class FabSheetComponent implements AfterContentInit, AfterViewInit {
 
   hideActions(fab: IonFab) {
     fab.close();
-    this.isFabSheetOpen = false;
+    this._isFabSheetOpen = false;
     this._isBackdropVisible = false;
   }
 
   onFabClick(fab: IonFab) {
-    this.isFabSheetOpen = !fab.activated;
+    this._isFabSheetOpen = !fab.activated;
     setTimeout(() => (this._isBackdropVisible = this.isFabSheetOpen));
   }
 }

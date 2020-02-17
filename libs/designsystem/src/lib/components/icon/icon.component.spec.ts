@@ -4,8 +4,8 @@ import * as ionic from '@ionic/angular';
 import { By } from '@angular/platform-browser';
 import { Component, OnInit } from '@angular/core';
 
-import { ThemeColorDirective } from '@kirbydesign/designsystem/directives/theme-color/theme-color.directive';
-import { ColorHelper } from '@kirbydesign/designsystem/helpers/color-helper';
+import { ThemeColorDirective } from '../../directives/theme-color/theme-color.directive';
+import { ColorHelper } from '../../helpers/color-helper';
 import { IconComponent } from './icon.component';
 
 describe('IconComponent', () => {

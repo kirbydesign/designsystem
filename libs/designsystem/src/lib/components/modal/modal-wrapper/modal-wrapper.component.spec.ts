@@ -8,7 +8,7 @@ import { ButtonComponent } from '../../button/button.component';
 import { IconComponent } from '../../icon/icon.component';
 import { ModalWrapperComponent } from './modal-wrapper.component';
 import { IModalController } from '../services/modal.controller.interface';
-import { KirbyAnimation } from '@kirbydesign/designsystem/animation/kirby-animation';
+import { KirbyAnimation } from '../../../animation/kirby-animation';
 import { Modal } from '../services/modal.model';
 
 describe('ModalWrapperComponent', () => {

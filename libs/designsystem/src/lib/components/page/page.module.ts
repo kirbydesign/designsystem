@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 
-import { FitHeadingModule } from '@kirbydesign/designsystem/directives/fit-heading/fit-heading.module';
+import { FitHeadingModule } from '../../directives/fit-heading/fit-heading.module';
 import {
   PageComponent,
   PageActionsComponent,

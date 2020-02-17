@@ -5,7 +5,7 @@ import { Animation } from '@ionic/core';
 import { ModalConfig } from '../modal-wrapper/config/modal-config';
 import { ModalWrapperComponent } from '../modal-wrapper/modal-wrapper.component';
 import { ModalCompactWrapperComponent } from '../modal-wrapper/compact/modal-compact-wrapper.component';
-import { KirbyAnimation } from '@kirbydesign/designsystem/animation/kirby-animation';
+import { KirbyAnimation } from '../../../animation/kirby-animation';
 import { ModalConfigHelper } from '../modal-wrapper/config/modal-config.helper';
 import { Modal } from './modal.model';
 

@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
-import { ColorHelper } from '@kirbydesign/designsystem/helpers/color-helper';
+import { ColorHelper } from '@kirbydesign/designsystem';
 
 @Component({
   selector: 'kirby-iphone',

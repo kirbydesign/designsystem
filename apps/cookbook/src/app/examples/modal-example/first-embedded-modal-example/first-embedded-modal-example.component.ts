@@ -1,10 +1,10 @@
 import { Component, Inject } from '@angular/core';
 
-import { ModalController } from '@kirbydesign/designsystem/modal';
-import { ModalConfig, COMPONENT_PROPS } from '@kirbydesign/designsystem/modal';
+import { ModalController } from '@kirbydesign/designsystem';
+import { ModalConfig, COMPONENT_PROPS } from '@kirbydesign/designsystem';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
 import { SecondEmbeddedModalExampleComponent } from '../second-embedded-modal-example/second-embedded-modal-example.component';
-import { KirbyAnimation } from '@kirbydesign/designsystem/animation/kirby-animation';
+import { KirbyAnimation } from '@kirbydesign/designsystem';
 
 @Component({
   templateUrl: './first-embedded-modal-example.component.html',

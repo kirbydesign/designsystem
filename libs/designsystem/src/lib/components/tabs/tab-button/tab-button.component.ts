@@ -10,7 +10,7 @@ import {
   ContentChildren,
 } from '@angular/core';
 
-import { IconComponent } from '@kirbydesign/designsystem/components/icon/icon.component';
+import { IconComponent } from '../../icon/icon.component';
 import { selectedTabClickEvent } from './tab-button.events';
 
 @Component({

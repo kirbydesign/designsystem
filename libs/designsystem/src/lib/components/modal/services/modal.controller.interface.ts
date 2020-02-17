@@ -1,7 +1,7 @@
 import { ModalConfig } from '../modal-wrapper/config/modal-config';
 import { ActionSheetConfig } from '../action-sheet/config/action-sheet-config';
 import { AlertConfig } from '../alert/config/alert-config';
-import { KirbyAnimation } from '@kirbydesign/designsystem/animation/kirby-animation';
+import { KirbyAnimation } from '../../../animation/kirby-animation';
 import { Modal } from './modal.model';
 
 export abstract class IModalController {

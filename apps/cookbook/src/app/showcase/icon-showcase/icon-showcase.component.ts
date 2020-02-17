@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
 
-import { icons } from '@kirbydesign/designsystem/components/icon/icon.component';
+import { icons, Sizes } from '@kirbydesign/designsystem';
 
 import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
-import { Sizes } from '@kirbydesign/designsystem/directives/size/size.directive';
-
-declare var require: any;
 
 @Component({
   selector: 'cookbook-icon-showcase',

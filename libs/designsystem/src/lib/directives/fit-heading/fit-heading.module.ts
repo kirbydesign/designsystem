@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { FitHeadingDirective } from '@kirbydesign/designsystem/directives/fit-heading/fit-heading.directive';
+import { FitHeadingDirective } from './fit-heading.directive';
 
 @NgModule({
   declarations: [FitHeadingDirective],

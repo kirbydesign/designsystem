@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { SassColor } from '@kirbydesign/designsystem/scss/scss-helper';
+import { SassColor } from '@kirbydesign/designsystem';
 
 declare var require;
 const style = require('./colors-showcase.component.scss.json');

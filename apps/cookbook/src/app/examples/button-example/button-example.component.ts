@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { ThemeColor } from '@kirbydesign/designsystem/helpers/theme-color.type';
+import { ThemeColor } from '@kirbydesign/designsystem';
 
 @Component({
   selector: 'cookbook-button-example',

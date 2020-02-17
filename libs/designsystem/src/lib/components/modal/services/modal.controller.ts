@@ -6,8 +6,8 @@ import { AlertHelper } from './alert.helper';
 import { ActionSheetHelper } from './action-sheet.helper';
 import { ActionSheetConfig } from '../action-sheet/config/action-sheet-config';
 import { AlertConfig } from '../alert/config/alert-config';
-import { KirbyAnimation } from '@kirbydesign/designsystem/animation/kirby-animation';
-import { ModalConfig } from '@kirbydesign/designsystem/modal';
+import { KirbyAnimation } from '../../../animation/kirby-animation';
+import { ModalConfig } from '../modal-wrapper/config/modal-config';
 import { Modal } from './modal.model';
 
 @Injectable()

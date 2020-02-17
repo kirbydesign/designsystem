@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { ListSwipeAction } from '@kirbydesign/designsystem/list';
+import { ListSwipeAction } from '@kirbydesign/designsystem';
 import { ToastController, ToastConfig } from '@kirbydesign/designsystem';
 
 @Component({

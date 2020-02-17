@@ -4,7 +4,7 @@ import { NavParams, IonContent } from '@ionic/angular';
 import { ModalConfig } from './config/modal-config';
 import { COMPONENT_PROPS } from './config/modal-config.helper';
 import { IModalController } from '../services/modal.controller.interface';
-import { KirbyAnimation } from '@kirbydesign/designsystem/animation/kirby-animation';
+import { KirbyAnimation } from '../../../animation/kirby-animation';
 import { Modal } from '../services/modal.model';
 
 @Component({
@@ -19,7 +19,7 @@ export class ModalWrapperComponent {
   @ViewChild(IonContent, { static: true }) private ionContent: IonContent;
 
   @HostBinding('class.drawer')
-  private get _isDrawer() {
+  get _isDrawer() {
     return this.config.flavor === 'drawer';
   }
 

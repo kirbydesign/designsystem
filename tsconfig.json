@@ -13,11 +13,5 @@
     "lib": ["es2017", "dom", "es6", "es2015.iterable"],
     "baseUrl": ".",
     "resolveJsonModule": true,
-    "paths": {
-      "~/app/*": ["apps/cookbook/src/app/*"],
-      "~/environments/*": ["apps/cookbook/src/environments/*"],
-      "@kirbydesign/designsystem": ["libs/designsystem/src/lib/index.ts"],
-      "@kirbydesign/designsystem/*": ["libs/designsystem/src/lib/*"]
-    }
   }
 }

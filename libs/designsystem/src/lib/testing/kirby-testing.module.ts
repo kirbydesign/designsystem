@@ -27,8 +27,8 @@ import {
   ListItemDirective,
   ListSectionHeaderComponent,
   ListSectionHeaderDirective,
-} from '../list';
-import { ModalController } from '../modal';
+} from '../components/list';
+import { ModalController } from '../components/modal';
 import {
   AvatarComponent,
   BadgeComponent,
@@ -41,13 +41,13 @@ import {
   DividerComponent,
   EmptyStateComponent,
   GridComponent,
+  SlideButtonComponent,
   SpinnerComponent,
   SegmentedControlComponent,
   ToastController,
+  ToolbarComponent,
   FabSheetComponent,
 } from '..';
-import { SlideButtonComponent } from '../components/slide-button/slide-button.component';
-import { ToolbarComponent } from '../components/toolbar/toolbar.component';
 import { ThemeColorDirective } from '../directives/theme-color/theme-color.directive';
 import { ListItemColorDirective } from '../components/list/directives/list-item-color.directive';
 import { LoadingOverlayComponent } from '../components/loading-overlay/loading-overlay.component';
@@ -68,14 +68,14 @@ import {
   PageActionsDirective,
   PageContentDirective,
 } from '../components/page/page.component';
-import { ActionSheetComponent } from '@kirbydesign/designsystem/components/modal/action-sheet/action-sheet.component';
-import { RouterOutletComponent } from '@kirbydesign/designsystem/components/router-outlet/router-outlet.component';
-import { AppComponent } from '@kirbydesign/designsystem/components/app/app.component';
-import { CalendarComponent } from '@kirbydesign/designsystem/components/calendar/calendar.component';
+import { ActionSheetComponent } from '../components/modal/action-sheet/action-sheet.component';
+import { RouterOutletComponent } from '../components/router-outlet/router-outlet.component';
+import { AppComponent } from '../components/app/app.component';
+import { CalendarComponent } from '../components/calendar/calendar.component';
 import { ItemComponent } from '../components/item/item.component';
 import { LabelComponent } from '../components/item/label/label.component';
-import { FitHeadingDirective } from '@kirbydesign/designsystem/directives/fit-heading/fit-heading.directive';
-import { ChartComponent } from '@kirbydesign/designsystem/components/chart/chart.component';
+import { FitHeadingDirective } from '../directives/fit-heading/fit-heading.directive';
+import { ChartComponent } from '../components/chart/chart.component';
 
 const MOCK_COMPONENTS = MockComponents(
   AvatarComponent,

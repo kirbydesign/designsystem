@@ -9,7 +9,7 @@ import {
   BrowserDynamicTestingModule,
   platformBrowserDynamicTesting,
 } from '@angular/platform-browser-dynamic/testing';
-import { ElementCssCustomMatchers } from '@kirbydesign/designsystem/testing/element-css-custom-matchers';
+import { ElementCssCustomMatchers } from './lib/testing/element-css-custom-matchers';
 
 declare const require: any;
 

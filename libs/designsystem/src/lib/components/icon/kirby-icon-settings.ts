@@ -1,4 +1,4 @@
-import { IconSettings } from '@kirbydesign/designsystem/components/icon/icon-settings';
+import { IconSettings } from './icon-settings';
 
 // tslint:disable:prettier
 export const kirbyIconSettings: IconSettings = {

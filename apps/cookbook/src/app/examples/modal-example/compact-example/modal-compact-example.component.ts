@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { ModalController } from '@kirbydesign/designsystem/modal';
+import { ModalController } from '@kirbydesign/designsystem';
 
 @Component({
   templateUrl: './modal-compact-example.component.html',

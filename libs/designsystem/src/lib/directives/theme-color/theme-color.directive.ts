@@ -12,49 +12,105 @@ import { ColorHelper } from '../../helpers/color-helper';
              kirby-empty-state[themeColor]`,
 })
 export class ThemeColorDirective {
+  private _isDefault = true;
   @HostBinding('class.default')
-  private isDefault = true;
+  get isDefault() {
+    return this._isDefault;
+  }
+
+  private _isPrimary: boolean;
   @HostBinding('class.primary')
-  private isPrimary: boolean;
+  get isPrimary() {
+    return this._isPrimary;
+  }
+
+  private _isSecondary: boolean;
   @HostBinding('class.secondary')
-  private isSecondary: boolean;
+  get isSecondary() {
+    return this._isSecondary;
+  }
+
+  private _isTertiary: boolean;
   @HostBinding('class.tertiary')
-  private isTertiary: boolean;
+  get isTertiary() {
+    return this._isTertiary;
+  }
+
+  private _isSuccess: boolean;
   @HostBinding('class.success')
-  private isSuccess: boolean;
+  get isSuccess() {
+    return this._isSuccess;
+  }
+
+  private _isWarning: boolean;
   @HostBinding('class.warning')
-  private isWarning: boolean;
+  get isWarning() {
+    return this._isWarning;
+  }
+
+  private _isDanger: boolean;
   @HostBinding('class.danger')
-  private isDanger: boolean;
+  get isDanger() {
+    return this._isDanger;
+  }
+
+  private _isLight: boolean;
   @HostBinding('class.light')
-  private isLight: boolean;
+  get isLight() {
+    return this._isLight;
+  }
+
+  private _isMedium: boolean;
   @HostBinding('class.medium')
-  private isMedium: boolean;
+  get isMedium() {
+    return this._isMedium;
+  }
+
+  private _isDark: boolean;
   @HostBinding('class.dark')
-  private isDark: boolean;
+  get isDark() {
+    return this._isDark;
+  }
+
+  private _isWhite: boolean;
   @HostBinding('class.white')
-  private isWhite: boolean;
+  get isWhite() {
+    return this._isWhite;
+  }
+
+  private _isBrightnessWhite: boolean;
   @HostBinding('class.kirby-color-brightness-white')
-  private isBrightnessWhite: boolean;
+  get isBrightnessWhite() {
+    return this._isBrightnessWhite;
+  }
+
+  private _isBrightnessLight: boolean;
   @HostBinding('class.kirby-color-brightness-light')
-  private isBrightnessLight: boolean;
+  get isBrightnessLight() {
+    return this._isBrightnessLight;
+  }
+
+  private _isBrightnessDark: boolean;
   @HostBinding('class.kirby-color-brightness-dark')
-  private isBrightnessDark: boolean;
+  get isBrightnessDark() {
+    return this._isBrightnessDark;
+  }
+
   @Input() set themeColor(value: ThemeColor) {
-    this.isDefault = !value;
-    this.isPrimary = value === 'primary';
-    this.isSecondary = value === 'secondary';
-    this.isTertiary = value === 'tertiary';
-    this.isSuccess = value === 'success';
-    this.isWarning = value === 'warning';
-    this.isDanger = value === 'danger';
-    this.isLight = value === 'light';
-    this.isMedium = value === 'medium';
-    this.isDark = value === 'dark';
-    this.isWhite = value === 'white';
+    this._isDefault = !value;
+    this._isPrimary = value === 'primary';
+    this._isSecondary = value === 'secondary';
+    this._isTertiary = value === 'tertiary';
+    this._isSuccess = value === 'success';
+    this._isWarning = value === 'warning';
+    this._isDanger = value === 'danger';
+    this._isLight = value === 'light';
+    this._isMedium = value === 'medium';
+    this._isDark = value === 'dark';
+    this._isWhite = value === 'white';
     const colorBrightness = ColorHelper.getColorBrightness(value);
-    this.isBrightnessWhite = colorBrightness === 'white';
-    this.isBrightnessLight = colorBrightness === 'light';
-    this.isBrightnessDark = colorBrightness === 'dark';
+    this._isBrightnessWhite = colorBrightness === 'white';
+    this._isBrightnessLight = colorBrightness === 'light';
+    this._isBrightnessDark = colorBrightness === 'dark';
   }
 }
