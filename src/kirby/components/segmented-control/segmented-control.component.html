@@ -8,9 +8,13 @@
     >
       {{ item.text }}
     </ion-segment-button>
-    <span *ngIf="item.badge" role="text" [attr.aria-label]="item.badge.description">
-      <kirby-badge [themeColor]="item.badge.themeColor">{{ item.badge.content }}</kirby-badge>
-    </span>
+    <kirby-badge
+      *ngIf="item.badge"
+      role="text"
+      [attr.aria-label]="item.badge.description"
+      [themeColor]="item.badge.themeColor"
+      >{{ item.badge.content }}</kirby-badge
+    >
   </div>
 </ion-segment>
 
