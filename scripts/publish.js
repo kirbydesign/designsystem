@@ -82,11 +82,7 @@ function publish() {
   }
 }
 
-const onlyScssFiles = (input) => {
-  const result = ['', '.scss'].includes(path.extname(input));
-  console.log(`Filter(input: ${input}) => extension: ${path.extname(input)}, result: ${result}`);
-  return result;
-};
+const onlyScssFiles = (input) => ['', '.scss'].includes(path.extname(input));
 
 remove(distTarget)
   .then(() =>

@@ -10,7 +10,7 @@ install:
 # Setting up the build matrix: web
 matrix:
   include:
-    # Running lint
+    # Running lint and unit test
     - stage: "Lint and unittest"
       cache:
         - directories:
@@ -22,13 +22,13 @@ matrix:
         - npm run test:ci
         - npm run coverage-report || true
 
-    # Running web build
+    # Running designsystem build
     - os: linux
       cache:
         - directories:
             - $HOME/.npm
       script:
-        - npm run dist
+        - npm run dist:designsystem
       before_deploy:
         - echo '//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}' > ~/.npmrc
       deploy:
