@@ -13,7 +13,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ColorHelper } from '@kirbydesign/designsystem';
 
 @Component({
-  selector: 'kirby-iphone',
+  selector: 'cookbook-iphone',
   templateUrl: './iphone.component.html',
   styleUrls: ['./iphone.component.scss'],
 })

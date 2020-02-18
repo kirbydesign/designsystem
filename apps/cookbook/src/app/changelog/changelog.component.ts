@@ -7,7 +7,7 @@ import { ColorService } from '~/app/shared/color/color.service';
 import { ChangelogVersion } from '~/app/changelog/changelog.interfaces';
 
 @Component({
-  selector: 'kirby-changelog',
+  selector: 'cookbook-changelog',
   templateUrl: './changelog.component.html',
   styleUrls: ['./changelog.component.scss'],
 })

@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
 @Component({
-  selector: 'kirby-showcase',
+  selector: 'cookbook-showcase',
   templateUrl: './showcase.component.html',
   styleUrls: ['./showcase.component.scss'],
 })

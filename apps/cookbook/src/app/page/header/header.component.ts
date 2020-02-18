@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'kirby-header',
+  selector: 'cookbook-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })

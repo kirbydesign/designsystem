@@ -20,7 +20,7 @@ export interface GhostComponent {
 }
 
 @Component({
-  selector: 'kirby-component-status',
+  selector: 'cookbook-component-status',
   templateUrl: './component-status.component.html',
   styleUrls: ['./component-status.component.scss'],
 })

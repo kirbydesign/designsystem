@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'kirby-card-designer',
+  selector: 'cookbook-card-designer',
   templateUrl: './card-designer.component.html',
   styleUrls: ['./card-designer.component.scss'],
 })

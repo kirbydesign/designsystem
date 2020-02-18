@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'kirby-intro',
+  selector: 'cookbook-intro',
   templateUrl: './intro.component.html',
   styleUrls: ['./intro.component.scss'],
 })
