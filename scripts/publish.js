@@ -2,6 +2,24 @@
 
 'use strict';
 
+// Publish script.
+// ---------------
+// Serves two distinct purposes:
+//
+// 1. Produces a distribution bundle (npm package) for publishing to NPM.js
+//
+//    The created bundle contains:
+//    - Transpiled distribution bundle
+//    - Required polyfills (by kirby)
+//    - README.md file
+//    - SCSS sources files (containing utilities exposed by kirby)
+//
+// or
+//
+// 2. Produces a npm package tarball (gzipped) that can be installed using "npm install <path to tarball>"
+//
+// NOTICE: This script automatically determines if running on CI, or a local developer machine.
+
 const cp = require('child_process');
 const fs = require('fs-extra');
 const path = require('path');
@@ -36,12 +54,28 @@ function npm(args, options) {
   });
 }
 
-function remove(path) {
-  if (fs.existsSync(path)) {
-    console.log(`Removing contents of "${path}"`);
-    return fs.remove(path);
+function cleanDistribution() {
+  if (!isCI && fs.existsSync(distTarget)) {
+    console.log(`Removing contents of "${distTarget}"`);
+    return fs.remove(distTarget);
   } else {
     return Promise.resolve();
+  }
+}
+
+function buildPolyfills() {
+  return npm(['run', 'build-polyfills'], {
+    onFailMessage: 'Unable to build polyfills',
+  });
+}
+
+function buildDesignsystem() {
+  if (isCI) {
+    return Promise.resolve();
+  } else {
+    return npm(['run', 'dist:designsystem'], {
+      onFailMessage: 'Unable to build designsystem package (with ng-packagr)',
+    });
   }
 }
 
@@ -58,6 +92,15 @@ function enhancePackageJson() {
     console.log(`Writing new package.json (to: ${distPackageJson}):\n\n${json}`);
     return fs.writeJson(distPackageJson, destPackageJson);
   });
+}
+
+function copyReadme() {
+  return fs.copy('readme.md', path.resolve(distTarget, 'readme.md'));
+}
+
+function copyScssFiles() {
+  const onlyScssFiles = (input) => ['', '.scss'].includes(path.extname(input));
+  return fs.copy(`${libDir}/scss`, `${distTarget}/scss`, { filter: onlyScssFiles });
 }
 
 function publish() {
@@ -82,20 +125,11 @@ function publish() {
   }
 }
 
-const onlyScssFiles = (input) => ['', '.scss'].includes(path.extname(input));
-
-remove(distTarget)
-  .then(() =>
-    npm(['run', 'build-polyfills'], {
-      onFailMessage: 'Unable to build polyfills',
-    })
-  )
-  .then(() =>
-    npm(['run', 'dist:designsystem'], {
-      onFailMessage: 'Unable to build designsystem package (with ng-packagr)',
-    })
-  )
-  .then(() => enhancePackageJson())
-  .then(() => fs.copy('readme.md', path.resolve(distTarget, 'readme.md')))
-  .then(() => fs.copy(`${libDir}/scss`, `${distTarget}/scss`, { filter: onlyScssFiles }))
-  .then(() => publish());
+// Actual execution of script!
+cleanDistribution()
+  .then(buildPolyfills)
+  .then(buildDesignsystem)
+  .then(enhancePackageJson)
+  .then(copyReadme)
+  .then(copyScssFiles)
+  .then(publish);
