@@ -10,9 +10,10 @@
 //
 //    The created bundle contains:
 //    - Transpiled distribution bundle
-//    - Required polyfills (by kirby)
-//    - README.md file
+//    - Polyfills (required by kirby)
 //    - SCSS sources files (containing utilities exposed by kirby)
+//    - SVG Icons (icons provided / used by kirby)
+//    - README.md file
 //
 // or
 //
@@ -103,6 +104,11 @@ function copyScssFiles() {
   return fs.copy(`${libDir}/scss`, `${distTarget}/scss`, { filter: onlyScssFiles });
 }
 
+function copyIcons() {
+  const onlySvgFiles = (input) => ['', '.svg'].includes(path.extname(input));
+  return fs.copy(`${libDir}/icons/svg`, `${distTarget}/svg`, { filter: onlySvgFiles });
+}
+
 function publish() {
   const findTarball = (files) =>
     files.find(
@@ -132,4 +138,5 @@ cleanDistribution()
   .then(enhancePackageJson)
   .then(copyReadme)
   .then(copyScssFiles)
+  .then(copyIcons)
   .then(publish);
