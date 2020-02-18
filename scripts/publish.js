@@ -72,6 +72,8 @@ function buildPolyfills() {
 
 function buildDesignsystem() {
   if (isCI) {
+    // We're relying on the fact that CI has performed the build (run the "dist:designsystem"-target)
+    // - hence, we'll immediately resolve this (and skip executing the "dist:designsystem"-target)
     return Promise.resolve();
   } else {
     return npm(['run', 'dist:designsystem'], {
@@ -91,7 +93,7 @@ function enhancePackageJson() {
     // (over-)write destination package.json file
     const json = JSON.stringify(destPackageJson, null, 2);
     console.log(`Writing new package.json (to: ${distPackageJson}):\n\n${json}`);
-    return fs.writeJson(distPackageJson, destPackageJson);
+    return fs.writeJson(distPackageJson, destPackageJson, { spaces: 2 });
   });
 }
 
