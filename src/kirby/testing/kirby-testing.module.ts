@@ -76,6 +76,7 @@ import { ItemComponent } from '../components/item/item.component';
 import { LabelComponent } from '../components/item/label/label.component';
 import { FitHeadingDirective } from '@kirbydesign/designsystem/directives/fit-heading/fit-heading.directive';
 import { ChartComponent } from '@kirbydesign/designsystem/components/chart/chart.component';
+import { ToggleComponent } from './../components/toggle/toggle.component';
 
 const MOCK_COMPONENTS = MockComponents(
   AvatarComponent,
@@ -121,7 +122,8 @@ const MOCK_COMPONENTS = MockComponents(
   AppComponent,
   ItemComponent,
   LabelComponent,
-  ChartComponent
+  ChartComponent,
+  ToggleComponent
 );
 
 /**
