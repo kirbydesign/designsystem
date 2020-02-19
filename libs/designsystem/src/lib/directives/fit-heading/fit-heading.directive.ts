@@ -3,7 +3,7 @@ import { Directive, ElementRef, Input, OnDestroy, OnInit, Renderer2 } from '@ang
 import { ResizeObserverService } from '../../components/shared/resize-observer/resize-observer.service';
 import { ResizeObserverEntry } from '../../components/shared/resize-observer/types/resize-observer-entry';
 
-declare var require: any;
+import scssVariables from '../../scss/base/_variables.scss.json';
 
 interface HeadingSize {
   name: string;
@@ -26,7 +26,7 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
   private hostElementClone: Element;
   private previousWidth: number;
   private isScalingHeader: boolean; // used to prevent resizeObserver to trigger on font scaling by this.scaleHeader()
-  private scssVariables: any = require('../../scss/base/_variables.scss');
+
   private headingSizes: HeadingSize[] = [
     {
       name: 'h1',
@@ -81,8 +81,8 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
     }
   }
 
-  private getScssValue(path: string[]) {
-    let node = this.scssVariables;
+  private getScssValue(path: string[]): any {
+    let node = scssVariables;
     for (let step of path) {
       node = node[step];
       if (!node) {

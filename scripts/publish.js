@@ -27,6 +27,7 @@ const path = require('path');
 const isCI = require('is-ci');
 
 const libDir = 'libs/designsystem/src/lib';
+const cookbookDir = 'apps/cookbook/src/';
 const dist = `dist`;
 const distTarget = `${dist}/libs/designsystem`;
 const distPackageJson = `${distTarget}/package.json`;
@@ -98,17 +99,25 @@ function enhancePackageJson() {
 }
 
 function copyReadme() {
+  console.log('Copying README.md file...');
   return fs.copy('readme.md', path.resolve(distTarget, 'readme.md'));
 }
 
 function copyScssFiles() {
+  console.log('Copying SCSS files...');
   const onlyScssFiles = (input) => ['', '.scss'].includes(path.extname(input));
   return fs.copy(`${libDir}/scss`, `${distTarget}/scss`, { filter: onlyScssFiles });
 }
 
 function copyIcons() {
+  console.log('Copying Icons...');
   const onlySvgFiles = (input) => ['', '.svg'].includes(path.extname(input));
   return fs.copy(`${libDir}/icons/svg`, `${distTarget}/svg`, { filter: onlySvgFiles });
+}
+
+function copyPolyfills() {
+  console.log('Copying Polyfills...');
+  return fs.copy(`${cookbookDir}/polyfills`, path.resolve(distTarget, 'polyfills'));
 }
 
 function publish() {
@@ -141,4 +150,5 @@ cleanDistribution()
   .then(copyReadme)
   .then(copyScssFiles)
   .then(copyIcons)
+  .then(copyPolyfills)
   .then(publish);

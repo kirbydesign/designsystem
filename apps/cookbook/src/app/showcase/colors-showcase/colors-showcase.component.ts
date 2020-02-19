@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 
 import { SassColor } from '@kirbydesign/designsystem';
 
-declare var require;
-const style = require('./colors-showcase.component.scss.json');
+import * as style from './colors-showcase.component.scss.json';
 
 @Component({
   selector: 'cookbook-colors-showcase',

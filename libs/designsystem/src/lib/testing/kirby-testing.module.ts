@@ -1,21 +1,44 @@
+/// <reference path="../../../../../node_modules/@types/jasmine/index.d.ts" />
+
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import {
+  IonItem,
+  IonItemDivider,
+  IonItemGroup,
+  IonItemOption,
+  IonItemOptions,
+  IonItemSliding,
+  IonLabel,
   IonList,
   IonListHeader,
-  IonItemDivider,
-  IonItem,
-  IonItemGroup,
-  IonItemSliding,
-  IonItemOptions,
-  IonItemOption,
-  IonLabel,
 } from '@ionic/angular';
 import { MockComponents, MockDirectives } from 'ng-mocks';
-import createSpyObj = jasmine.createSpyObj;
 
 import {
+  ActionSheetComponent,
+  AppComponent,
+  AvatarComponent,
+  BadgeComponent,
+  ButtonComponent,
+  CalendarComponent,
+  CardComponent,
+  CardFooterComponent,
+  CardHeaderComponent,
+  ChartComponent,
+  CheckboxComponent,
+  ChipComponent,
+  DividerComponent,
+  EmptyStateComponent,
+  FabSheetComponent,
+  FormFieldComponent,
+  FormFieldMessageComponent,
+  GridComponent,
+  IconComponent,
   InfiniteScrollDirective,
+  InputComponent,
+  ItemComponent,
+  LabelComponent,
   ListCellComponent,
   ListCellLineComponent,
   ListComponent,
@@ -23,59 +46,32 @@ import {
   ListFlexItemDirective,
   ListHeaderComponent,
   ListHeaderDirective,
+  ListItemColorDirective,
   ListItemComponent,
   ListItemDirective,
   ListSectionHeaderComponent,
   ListSectionHeaderDirective,
-} from '../components/list';
-import { ModalController } from '../components/modal';
-import {
-  AvatarComponent,
-  BadgeComponent,
-  ButtonComponent,
-  CardComponent,
-  CardHeaderComponent,
-  CardFooterComponent,
-  ChipComponent,
-  CheckboxComponent,
-  DividerComponent,
-  EmptyStateComponent,
-  GridComponent,
-  SlideButtonComponent,
-  SpinnerComponent,
-  SegmentedControlComponent,
-  ToastController,
-  ToolbarComponent,
-  FabSheetComponent,
-} from '..';
-import { ThemeColorDirective } from '../directives/theme-color/theme-color.directive';
-import { ListItemColorDirective } from '../components/list/directives/list-item-color.directive';
-import { LoadingOverlayComponent } from '../components/loading-overlay/loading-overlay.component';
-import { LoadingOverlayService } from '../components/loading-overlay/fullscreen-loading-overlay/loading-overlay.service';
-import { FormFieldComponent } from '../components/form-field/form-field.component';
-import { FormFieldMessageComponent } from '../components/form-field/form-field-message/form-field-message.component';
-import { InputComponent } from '../components/form-field/input/input.component';
-import { TextareaComponent } from '../components/form-field/textarea/textarea.component';
-import { IconComponent } from '../components/icon/icon.component';
-import { TabsComponent } from '../components/tabs/tabs.component';
-import { TabButtonComponent } from '../components/tabs/tab-button/tab-button.component';
-import {
-  PageComponent,
+  LoadingOverlayComponent,
+  LoadingOverlayService,
+  ModalController,
   PageActionsComponent,
+  PageActionsDirective,
+  PageComponent,
   PageContentComponent,
+  PageContentDirective,
   PageTitleDirective,
   PageToolbarTitleDirective,
-  PageActionsDirective,
-  PageContentDirective,
-} from '../components/page/page.component';
-import { ActionSheetComponent } from '../components/modal/action-sheet/action-sheet.component';
-import { RouterOutletComponent } from '../components/router-outlet/router-outlet.component';
-import { AppComponent } from '../components/app/app.component';
-import { CalendarComponent } from '../components/calendar/calendar.component';
-import { ItemComponent } from '../components/item/item.component';
-import { LabelComponent } from '../components/item/label/label.component';
-import { FitHeadingDirective } from '../directives/fit-heading/fit-heading.directive';
-import { ChartComponent } from '../components/chart/chart.component';
+  RouterOutletComponent,
+  SegmentedControlComponent,
+  SlideButtonComponent,
+  SpinnerComponent,
+  TabButtonComponent,
+  TabsComponent,
+  TextareaComponent,
+  ToastController,
+  ToolbarComponent,
+} from '../components';
+import { FitHeadingDirective, ThemeColorDirective } from '../directives';
 
 const MOCK_COMPONENTS = MockComponents(
   AvatarComponent,
@@ -153,8 +149,8 @@ const MOCK_DIRECTIVES = MockDirectives(
   FitHeadingDirective
 );
 
-function modalControllerFactory() {
-  return createSpyObj('ModalController', [
+export function modalControllerFactory() {
+  return jasmine.createSpyObj('ModalController', [
     'showModal',
     'showActionSheet',
     'showAlert',
@@ -167,12 +163,12 @@ function modalControllerFactory() {
   ]);
 }
 
-function toastControllerFactory() {
-  return createSpyObj('ToastController', ['showToast']);
+export function toastControllerFactory() {
+  return jasmine.createSpyObj('ToastController', ['showToast']);
 }
 
-function loadingOverlayServiceFactory() {
-  return createSpyObj<LoadingOverlayService>('LoadingOverlayService', [
+export function loadingOverlayServiceFactory() {
+  return jasmine.createSpyObj<LoadingOverlayService>('LoadingOverlayService', [
     'showLoadingOverlay',
     'hideLoadingOverlay',
   ]);

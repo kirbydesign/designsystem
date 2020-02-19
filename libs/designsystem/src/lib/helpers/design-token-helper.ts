@@ -1,8 +1,7 @@
 import { ThemeColor } from './theme-color.type';
 import { ColorHelper } from './color-helper';
 
-declare var require;
-const designTokens = require('./design-token-helper.scss.json');
+import * as designTokens from './design-token-helper.scss.json';
 
 export class DesignTokenHelper {
   public static getColor(

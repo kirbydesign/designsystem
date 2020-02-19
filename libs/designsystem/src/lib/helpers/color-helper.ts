@@ -1,5 +1,4 @@
-declare var require;
-const colors = require('./color-helper.scss.json');
+import * as colors from './color-helper.scss.json';
 
 export class ColorHelper {
   public static getMainColors() {

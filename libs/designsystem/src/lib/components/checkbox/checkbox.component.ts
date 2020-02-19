@@ -10,8 +10,7 @@ import {
   SimpleChanges,
 } from '@angular/core';
 
-declare var require;
-const style = require('./checkbox.component.scss.json');
+import * as style from './checkbox.component.scss.json';
 
 @Component({
   selector: 'kirby-checkbox',

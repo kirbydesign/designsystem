@@ -2,7 +2,10 @@
   "name": "@kirbydesign/designsystem",
   "version": "0.0.1",
   "peerDependencies": {
+    "@angular/cdk": "^8.2.3",
     "@angular/common": "^8.2.11",
-    "@angular/core": "^8.2.11"
+    "@angular/core": "^8.2.11",
+    "@ionic/angular": "^4.11.0",
+    "highcharts": "^7.0.3"
   }
 }
