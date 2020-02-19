@@ -21,6 +21,12 @@ $system-colors: (
   'black': #1c1c1c,
 );
 
+$text-colors: (
+  'white': #ffffff,
+  'semi-dark': #707070,
+  'black': #1c1c1c,
+);
+
 @function getAllColors() {
   @return map-merge(map-merge($brand-colors, $notification-colors), $system-colors);
 }

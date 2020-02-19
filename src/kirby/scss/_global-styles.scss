@@ -8,6 +8,9 @@
   @each $color, $color-name in $kirby-colors {
     --kirby-#{$color}: #{$color-name};
   }
+  @each $color, $color-name in $text-colors {
+    --kirby-text-#{$color}: #{$color-name};
+  }
   --kirby-page-max-width: 1366px;
   --kirby-statusbar-padding: var(--ion-statusbar-padding);
   --kirby-safe-area-top: var(--ion-safe-area-top);

@@ -10,7 +10,7 @@
   border-radius: size('s');
   box-shadow: get-elevation(2);
   box-sizing: border-box;
-  color: get-color('black');
+  color: get-text-color('black');
   display: block;
   font-size: font-size('n');
   line-height: line-height('n');
@@ -24,12 +24,12 @@
   }
 
   &::placeholder {
-    color: get-color('semi-dark');
+    color: get-text-color('semi-dark');
   }
 
   // for the browsers that has partial support, see https://caniuse.com/#feat=css-placeholder
   &::-webkit-input-placeholder,
   &::-ms-input-placeholder {
-    color: get-color('semi-dark');
+    color: get-text-color('semi-dark');
   }
 }
