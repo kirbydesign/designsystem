@@ -4,6 +4,7 @@ import { Options } from 'highcharts';
 import { ChartHelper } from './chart-helper';
 import { DonutOptions, DONUT_OPTIONS } from './options/donut';
 import { AreaSplineOptions, AREASPLINE_OPTIONS } from './options/areaspline';
+import { TimeSeriesOptions, TIMESERIES_OPTIONS } from './options/timeseries';
 import { ACTIVITYGAUGE_OPTIONS, ActivityGaugeOptions } from './options/activitygauge';
 import { ChartType } from './chart-type';
 
@@ -15,11 +16,13 @@ import { ChartType } from './chart-type';
     ChartHelper,
     { provide: DONUT_OPTIONS, useValue: DonutOptions },
     { provide: AREASPLINE_OPTIONS, useValue: AreaSplineOptions },
+    { provide: TIMESERIES_OPTIONS, useValue: TimeSeriesOptions },
     { provide: ACTIVITYGAUGE_OPTIONS, useValue: ActivityGaugeOptions },
   ],
 })
 export class ChartComponent implements OnInit, OnChanges {
   @Input() data = [];
+  @Input() breaks: Array<Highcharts.XAxisBreaksOptions> = [];
   @Input() height = 300;
   @Input() type: ChartType = ChartType.PIE;
   @Input() description = '';
@@ -31,6 +34,7 @@ export class ChartComponent implements OnInit, OnChanges {
     private chartHelper: ChartHelper,
     @Inject(DONUT_OPTIONS) public donutOptions: Options,
     @Inject(AREASPLINE_OPTIONS) public areasplineOptions: Options,
+    @Inject(TIMESERIES_OPTIONS) public timeSeriesOptions: Options,
     @Inject(ACTIVITYGAUGE_OPTIONS) public activitygaugeOptions: Options
   ) {}
 
@@ -61,6 +65,11 @@ export class ChartComponent implements OnInit, OnChanges {
       }
       case ChartType.AREASPLINE: {
         this.options = this.areasplineOptions;
+        this.options.chart.type = this.type;
+        break;
+      }
+      case ChartType.TIMESERIES: {
+        this.options = this.timeSeriesOptions;
         this.options.chart.type = this.type;
         break;
       }
@@ -96,6 +105,19 @@ export class ChartComponent implements OnInit, OnChanges {
               data: this.data as Array<Highcharts.SeriesAreasplineDataOptions>,
             },
           ];
+          break;
+        }
+        case ChartType.TIMESERIES: {
+          this.options.series = [
+            {
+              type: 'area',
+              data: this.data as Array<Highcharts.SeriesAreaDataOptions>,
+            },
+          ];
+          this.options.xAxis = {
+            ...this.options.xAxis,
+            breaks: this.breaks,
+          };
           break;
         }
         case ChartType.ACTIVITYGAUGE: {

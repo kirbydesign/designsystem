@@ -48,6 +48,7 @@ export class SegmentedControlExampleComponent implements OnInit, OnChanges {
         id: 'first',
         badge: {
           content: '4',
+          description: '4 unread messages',
           themeColor: 'warning',
         },
       });
