@@ -112,7 +112,7 @@ function copyScssFiles() {
 function copyIcons() {
   console.log('Copying Icons...');
   const onlySvgFiles = (input) => ['', '.svg'].includes(path.extname(input));
-  return fs.copy(`${libDir}/icons/svg`, `${distTarget}/svg`, { filter: onlySvgFiles });
+  return fs.copy(`${libDir}/icons/svg`, `${distTarget}/icons/svg`, { filter: onlySvgFiles });
 }
 
 function copyPolyfills() {

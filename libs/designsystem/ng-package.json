@@ -8,5 +8,6 @@
       "highcharts": "highcharts",
       "@ionic/angular": "ionic"
     }
-  }
+  },
+  "whitelistedNonPeerDependencies": ["@angular/cdk", "@ionic/angular"]
 }
