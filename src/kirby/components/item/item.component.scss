@@ -58,6 +58,7 @@
   }
 }
 
+/* clean-css ignore:start */
 :host-context(kirby-list ion-item-sliding:first-of-type) {
   ion-item {
     --padding-top: #{size('xxs')};
@@ -81,6 +82,7 @@
     --padding-bottom: 0;
   }
 }
+/* clean-css ignore:end */
 
 :host(.selected),
 :host-context(kirby-list .selected) {

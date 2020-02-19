@@ -52,13 +52,11 @@ describe('ItemComponent in Kirby List', () => {
       expect(spectator).toBeTruthy();
     });
 
-    it('should items in list', () => {
+    it('should create items in list', () => {
       expect(itemsInList).toBeTruthy();
     });
 
-    it(`should render first with padding top ${size(
-      'xxs'
-    )} and last item with padding bottom ${size('xxs')}`, async () => {
+    it('should render first and last item with correct padding', async () => {
       const firstItem = itemsInList[0].shadowRoot.querySelector('.item-native');
       const lastItem = itemsInList[itemsInList.length - 1].shadowRoot.querySelector('.item-native');
       expect(firstItem).toHaveComputedStyle({ 'padding-top': size('xxs') });
@@ -90,7 +88,7 @@ describe('ItemComponent in Kirby List', () => {
       expect(itemsInList).toBeTruthy();
     });
 
-    it(`should render first with padding top 0px and last item with padding bottom 0px`, async () => {
+    it('should render first and last item without padding top/bottom', async () => {
       const firstItem = itemsInList[0].shadowRoot.querySelector('.item-native');
       const lastItem = itemsInList[itemsInList.length - 1].shadowRoot.querySelector('.item-native');
       expect(firstItem).toHaveComputedStyle({ 'padding-top': '0px' });
