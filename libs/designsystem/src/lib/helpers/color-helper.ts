@@ -8,7 +8,7 @@ export class ColorHelper {
   }
 
   public static getBackgroundColorRgbString() {
-    return ColorHelper.getRgbString(ColorHelper.getColor('background_color'));
+    return ColorHelper.getRgbString(ColorHelper.getColor('background-color'));
   }
 
   private static getThemeColor(name: string) {
@@ -16,7 +16,7 @@ export class ColorHelper {
   }
 
   public static getColorBrightness(name: string) {
-    return ColorHelper.getColor(name + '_color_brightness');
+    return ColorHelper.getColor(name + '-color-brightness');
   }
 
   public static getThemeColorRgbString(name: string) {
@@ -104,8 +104,8 @@ export class ColorHelper {
   }
 
   private static getColor(name: string): string | RgbColor {
-    const found = colors.$kirby_colors[name];
-    return found ? found.value : null;
+    const found = colors.$kirby_colors[name.replace(/-/g, '_')];
+    return found || null;
   }
 }
 

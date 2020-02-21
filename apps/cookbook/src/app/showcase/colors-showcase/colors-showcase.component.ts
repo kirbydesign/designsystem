@@ -21,6 +21,11 @@ export class ColorsShowcaseComponent {
     this.brandColors = this.getColors('$brand_colors');
     this.systemColors = this.getColors('$system_colors');
     this.notificationColors = this.getColors('$notification_colors');
+    console.log({
+      brandColors: this.brandColors,
+      systemColors: this.systemColors,
+      notificationColors: this.notificationColors,
+    });
   }
 
   onColorClick(sassColor: SassColor) {
@@ -31,21 +36,24 @@ export class ColorsShowcaseComponent {
   private getColors(colorType: string) {
     const mainColors = style[colorType];
     const generatedColors = style.$kirby_colors;
-    return Object.entries(mainColors).map(([name, value]) => ({
-      name,
-      value,
-      tint: {
-        name: name + '-tint',
-        hex: generatedColors[name + '_tint'],
-      },
-      shade: {
-        name: name + '-shade',
-        hex: generatedColors[name + '_shade'],
-      },
-      contrast: {
-        name: name + '-contrast',
-        hex: generatedColors[name + '_contrast'],
-      },
-    }));
+    return Object.entries(mainColors).map(([variableName, value]) => {
+      const scssName = variableName.replace(/_/g, '-');
+      return {
+        name: scssName,
+        value,
+        tint: {
+          name: `${scssName}-tint`,
+          hex: generatedColors[`${variableName}_tint`],
+        },
+        shade: {
+          name: `${scssName}-shade`,
+          hex: generatedColors[`${variableName}_shade`],
+        },
+        contrast: {
+          name: `${scssName}-contrast`,
+          hex: generatedColors[`${variableName}_contrast`],
+        },
+      };
+    });
   }
 }
