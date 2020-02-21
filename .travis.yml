@@ -17,8 +17,9 @@ matrix:
             - $HOME/.npm
       addons:
         chrome: stable
-      script: 
+      script:
         - npm run lint
+        - npm run extract-scss-variables
         - npm run test:ci
         - npm run coverage-report || true
 
