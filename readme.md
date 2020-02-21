@@ -27,12 +27,14 @@ The Kirby Cookbook, containing samples, status of components etc. can be accesse
 ## Table of Contents
 
 - [Installation](#installation)
-  - [devDependencies](#devdependencies)
-  - [Typescript Configuration](#typescript-configuration)
   - [Sass](#sass)
   - [Ionic](#ionic)
   - [Icons](#icons)
-  - [Testing](#testing)
+- [Folder Structure](#folder-structure)
+- [Scripts](#scripts)
+- [Developing new features in Kirby](#developing-new-features-in-kirby)
+  - ["New feature"-process](#new-feature-process)
+  - [Testing new features](#testing-new-features)
 - [Polyfills](#polyfills)
 - [Chart Components](#chart-components)
 
@@ -44,75 +46,21 @@ Install through npm:
 npm i @kirbydesign/designsystem
 ```
 
-### devDependencies
-
-As devDependencies of the npm package doesn't automatically get installed, you also need to install `node-sass`, `sass-extract`, `sass-extract-loader` and `ng-mocks` (_remember to include the `-D` flag_):
-
-```
-npm i node-sass sass-extract sass-extract-loader ng-mocks@8.1.0 -D
-```
-
-### Typescript Configuration
-
-**Please note:** To enable typescript compilation of the package in your project, you need to add the following to your `tsconfig.json`:
-
-```json
-...
-  "include": [
-    "./src/**/*",
-    "./node_modules/@kirbydesign/designsystem/**/*.ts"
-  ],
-...
-```
-
-_**Please also note:** If you overwrite `include` in `tsconfig.app.json` you need to add the configuration to this file as well - pay attention to the additional folder level (`../`):_
-
-```json
-...
-  "include": [
-    ...,
-    "../node_modules/@kirbydesign/designsystem/**/*.ts"
-  ],
-...
-```
-
-For testing purposes Kirby includes a [testing module](#testing). To **avoid** including this in your app, you need to add the following to your `src/tsconfig.app.json`:
-
-```json
-...
-  "exclude": [
-    ...
-    "../node_modules/@kirbydesign/designsystem/testing/**/*.*",
-    ...
-  ],
-...
-```
-
-To enable typescript compilation of the package in your unit tests, you need to add the following to your `src/tsconfig.spec.json`:
-
-```json
-...
-  "include": [
-    ...
-    "../node_modules/@kirbydesign/designsystem/**/*.ts",
-    ...
-  ],
-...
-```
-
 ### Sass
 
 Include the Kirby global styles in your app:
 
 - Eg. in `src/styles.scss`:
+
   ```css
   @import '~@kirbydesign/designsystem/scss/global-styles';
   ```
+
   In each `.scss` file where you need to access the Sass utility functions from Kirby (e.g. [colors](https://cookbook.kirby.design/home/showcase/colors) or [fonts](https://cookbook.kirby.design/home/showcase/fonts)) you must import the scss utilities:
 
-```css
-@import '~@kirbydesign/designsystem/scss/utils';
-```
+  ```css
+  @import '~@kirbydesign/designsystem/scss/utils';
+  ```
 
 ### Ionic
 
@@ -145,22 +93,6 @@ Kirby comes bundled with a default set of icons. Make sure the `.svg` files used
 }
 ```
 
-### Testing
-
-Kirby includes a testing module for mocking out Kirby components in unit tests. To mock out Kirby in tests of components that use a `<kirby-` tag, you need to configure your testing module with the following:
-
-```ts
-import { KirbyTestingModule } from '@kirbydesign/designsystem/testing';
-
-beforeEach(async(() => {
-  TestBed.configureTestingModule({
-    ...
-    imports: [KirbyTestingModule],
-    ...
-  }).compileComponents();
-}));
-```
-
 ### Autocompletion
 
 To enable autocompletion (e.g. in VS Code), you need to add the following line to your `reference.d.ts`:
@@ -168,6 +100,79 @@ To enable autocompletion (e.g. in VS Code), you need to add the following line t
 ```ts
 /// <reference path="./node_modules/@kirbydesign/designsystem/index.d.ts" /> Needed for autocompletion and compilation.
 ```
+
+## Folder Structure
+
+The folder structure of the repository is based on [Nrwl](https://nrwl.io/)'s [NX](https://nx.dev/angular) mono-repository project.
+
+A basic walkthrough is outlined in the structure below:
+
+```
+@kirbydesign/designsystem
+├── apps                    # Contains source code for applications
+|  ├── cookbook             # - Cookbook application (showcase and examples)
+|  └── cookbook-e2e         # - End-to-end tests for Cookbook application
+├── config
+|  └── helm
+├── dist                    # Contains output files when building artifacts (for distribution)
+|  ├── apps
+|  └── libs
+├── libs                    # Contains source code for libraries
+|  └── designsystem         # - Actual implementation of library (designsystem)
+├── scripts                 # Scripts for building artifacts
+└── tools                   # Contains various tools
+   ├── sass-to-json         # - CLI and Webpack plugin for extract global variables from SASS to JSON / TS
+   ├── schematics           # - Angular schematics
+   └── tslint-rules         # - Custom lintiong rules
+```
+
+## Scripts
+
+Below is an overview of most widely used scripts, available for this project.  
+Use them in your terminal like: `npm run <script>`:
+
+| Command           | Description                                                                                  |
+| ----------------- | -------------------------------------------------------------------------------------------- |
+| start             | Starts the development server, providing a means of running (and developing on the Cookbook) |
+| lint              | Lints the entire project (both TypeScript and SCSS source code)                              |
+| lint:cookbook     | Lints the Cookbook application (both TypeScript and SCSS source code)                        |
+| lint:designsystem | Lints the Designsystem library (both TypeScript and SCSS source code)                        |
+| dist:cookbook     | Builds a distribution folder of the Cookbook application                                     |
+| dist:designsystem | Builds a distribution folder of the Designsystem library                                     |
+
+## Developing new features in Kirby
+
+When developing new features in the Kirby Designsystem library, please follow the process described below:
+
+### "New feature"-process
+
+TBD
+
+### Testing new features
+
+Developing new features should also include that they should be tested.
+
+1. Make sure that the code is unit tested.
+2. Make sure that examples and showcases are added for the new features (in the cookbook)
+
+   ... this will also act as documentation for users of the Designsystem library.
+
+3. Test the new features in your own application
+
+   The easiest way to do this is to build a distribution package, and install it in your own project.
+
+   ```
+   # 1. From the root of this repository, execute (this may take a minute or two):
+   ./scripts/publish.js
+
+   # Them, from the root of your application, execute:
+   <path-to-root-of-designsystem>/dist/kirbydesign-designsystem-<version>.tgz
+
+   # ... where <path-to-root-of-designsystem> is replaced with the real path
+   #     and <version> is the version of designsystem that was build (in the previous step)
+
+   # You do NOT want to commit the changes made to package.json and package-lock.json to your code base!
+   ```
 
 ## Polyfills
 

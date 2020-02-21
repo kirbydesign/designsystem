@@ -39,7 +39,6 @@ Add any other context or screenshots about the feature request here, e.g. a link
 
 - [ ] Create Feature Branch
 - [ ] Implement Skeleton Component
-- [ ] Add any required mock and fakes to the `KirbyTestingModule`
 - Ask UX for review:
   - [ ] Ensure implementation is correct in relation to UX design
   - [ ] Define the version of the implementation + steps needed to reach version 1.0 (create [enhancement requests](https://github.com/kirbydesign/designsystem/issues/new?assignees=&labels=enhancement&template=enhancement-request.md&title=%5BEnhancement%5D))
