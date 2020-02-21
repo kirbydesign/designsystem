@@ -38,13 +38,13 @@ export class TextareaComponent implements OnChanges {
   maxlength: number;
 
   @HostListener('keyup', ['$event.target.value'])
-  private _onKeyUp(value: string) {
+  _onKeyUp(value: string) {
     this.kirbyChange.emit(value);
   }
 
   @HostListener('paste', ['$event.target'])
   @HostListener('cut', ['$event.target'])
-  private _onCutPaste(target: HTMLInputElement) {
+  _onCutPaste(target: HTMLInputElement) {
     //Value of textarea element is updated after cut/paste:
     setTimeout(() => this.kirbyChange.emit(target.value));
   }
