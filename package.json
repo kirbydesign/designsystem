@@ -35,7 +35,7 @@
     "transpile:tools": "npm run transpile:tslint-rules && npm run transpile:sass-to-json",
     "transpile:tslint-rules": "tsc -p tools/tslint-rules",
     "transpile:sass-to-json": "tsc -p tools/sass-to-json",
-    "extract-scss-variables": "node ./tools/sass-to-json/dist/index.js",
+    "extract-scss-variables": "node ./tools/sass-to-json/dist/index.js -- --format=ts",
     "affected:apps": "nx affected:apps",
     "affected:libs": "nx affected:libs",
     "affected:build": "nx affected:build",

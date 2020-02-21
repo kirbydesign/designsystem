@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 
 import { SassColor } from '@kirbydesign/designsystem';
 
-import * as style from './colors-showcase.component.scss.json';
+// @ts-ignore
+import { data as style } from './colors-showcase.component.styling';
 
 @Component({
   selector: 'cookbook-colors-showcase',
@@ -17,9 +18,9 @@ export class ColorsShowcaseComponent {
   notificationColors = [];
 
   constructor() {
-    this.brandColors = this.getColors('$brand-colors');
-    this.systemColors = this.getColors('$system-colors');
-    this.notificationColors = this.getColors('$notification-colors');
+    this.brandColors = this.getColors('$brand_colors');
+    this.systemColors = this.getColors('$system_colors');
+    this.notificationColors = this.getColors('$notification_colors');
   }
 
   onColorClick(sassColor: SassColor) {
@@ -28,26 +29,23 @@ export class ColorsShowcaseComponent {
   }
 
   private getColors(colorType: string) {
-    const colors = [];
-    const mainColors = style[colorType].value;
-    const generatedColors = style['$kirby-colors'].value;
-    for (const [value, type] of Object.entries(mainColors)) {
-      const sassColor = <SassColor>type;
-      sassColor.name = value;
-      sassColor.tint = {
-        name: value + '-tint',
-        hex: generatedColors[sassColor.name + '-tint'].value,
-      };
-      sassColor.shade = {
-        name: value + '-shade',
-        hex: generatedColors[sassColor.name + '-shade'].value,
-      };
-      sassColor.contrast = {
-        name: value + '-contrast',
-        hex: generatedColors[sassColor.name + '-contrast'].value,
-      };
-      colors.push(sassColor);
-    }
-    return colors;
+    const mainColors = style[colorType];
+    const generatedColors = style.$kirby_colors;
+    return Object.entries(mainColors).map(([name, value]) => ({
+      name,
+      value,
+      tint: {
+        name: name + '-tint',
+        hex: generatedColors[name + '_tint'],
+      },
+      shade: {
+        name: name + '-shade',
+        hex: generatedColors[name + '_shade'],
+      },
+      contrast: {
+        name: name + '-contrast',
+        hex: generatedColors[name + '_contrast'],
+      },
+    }));
   }
 }

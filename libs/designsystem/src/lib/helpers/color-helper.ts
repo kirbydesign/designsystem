@@ -1,18 +1,14 @@
-import * as colors from './color-helper.scss.json';
+// @ts-ignore
+import { data as colors } from './color-helper.styling';
 
 export class ColorHelper {
   public static getMainColors() {
-    const mainColors = colors['$main-colors'].value;
-    return Object.entries(mainColors).map((color: [string, { value: RgbColor }]) => {
-      return {
-        name: color[0],
-        value: color[1].value,
-      };
-    });
+    const mainColors = colors.$main_colors;
+    return Object.entries(mainColors).map(([name, value]) => ({ name, value }));
   }
 
   public static getBackgroundColorRgbString() {
-    return ColorHelper.getRgbString(ColorHelper.getColor('background-color'));
+    return ColorHelper.getRgbString(ColorHelper.getColor('background_color'));
   }
 
   private static getThemeColor(name: string) {
@@ -20,7 +16,7 @@ export class ColorHelper {
   }
 
   public static getColorBrightness(name: string) {
-    return ColorHelper.getColor(name + '-color-brightness');
+    return ColorHelper.getColor(name + '_color_brightness');
   }
 
   public static getThemeColorRgbString(name: string) {
@@ -108,7 +104,7 @@ export class ColorHelper {
   }
 
   private static getColor(name: string): string | RgbColor {
-    const found = colors['$kirby-colors'].value[name];
+    const found = colors.$kirby_colors[name];
     return found ? found.value : null;
   }
 }

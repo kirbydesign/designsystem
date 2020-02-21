@@ -45,7 +45,7 @@ async function walk(root: string, filter: (string) => boolean): Promise<string[]
     .filter((each) => !!each);
 }
 
-export abstract class SassToJsonFileSystem {
+export abstract class SassFileSystem {
   abstract getProjectRoot(): string;
 
   writeFile(path: string, data: string): Promise<unknown> {
@@ -118,7 +118,7 @@ export abstract class SassToJsonFileSystem {
   makeRelative = (absolute: string) => absolute.replace(this.getProjectRoot(), '');
 }
 
-export class NodeFilesystem extends SassToJsonFileSystem {
+export class NodeFilesystem extends SassFileSystem {
   constructor(private projectRoot: string) {
     super();
   }
@@ -128,7 +128,7 @@ export class NodeFilesystem extends SassToJsonFileSystem {
   }
 }
 
-export class WebpackFilesystem extends SassToJsonFileSystem {
+export class WebpackFilesystem extends SassFileSystem {
   constructor(private compiler: Compiler) {
     super();
   }

@@ -3,21 +3,24 @@ import * as validateOptions from 'schema-utils';
 import * as multimatch from 'multimatch';
 
 import { SassToJsonWebpackPluginOptions, SCHEMA } from './schema';
-import { SassToJsonEngine } from './engine';
-import { SassToJsonFileSystem, WebpackFilesystem } from './filesystem';
+import { SassToJsonEngine, SassToTypescriptEngine } from './engine';
+import { SassFileSystem, WebpackFilesystem } from './filesystem';
 
 export class SassToJsonWebpackPlugin implements Plugin {
   static readonly NAME = 'SassToJsonWebpackPlugin';
 
-  fileSystem: SassToJsonFileSystem;
+  fileSystem: SassFileSystem;
   engine: SassToJsonEngine;
   startTime: number;
   prevTimestamps: Map<string, number>;
 
-  constructor(private options: SassToJsonWebpackPluginOptions = {}) {
+  constructor(private options: SassToJsonWebpackPluginOptions = { format: 'json' }) {
     validateOptions(SCHEMA, options, 'SASS to JSON Plugin');
 
-    this.engine = new SassToJsonEngine(options.sassFiles);
+    this.engine =
+      options.format === 'ts'
+        ? new SassToTypescriptEngine(options.sassFiles)
+        : new SassToJsonEngine(options.sassFiles);
     this.startTime = Date.now();
     this.prevTimestamps = new Map<string, number>();
   }
@@ -27,6 +30,7 @@ export class SassToJsonWebpackPlugin implements Plugin {
 
     // Do initial processing of "all" SCSS files
     if (compiler.options.watch) {
+      console.log('Initial Compile!');
       this.fileSystem
         .findFiles(this.options.sassFiles)
         .then((files) => this.engine.transform(files, this.fileSystem));

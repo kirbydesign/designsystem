@@ -1,7 +1,8 @@
 import { ThemeColor } from './theme-color.type';
 import { ColorHelper } from './color-helper';
 
-import * as designTokens from './design-token-helper.scss.json';
+// @ts-ignore
+import { data as designTokens } from './design-token-helper.styling';
 
 export class DesignTokenHelper {
   public static getColor(
@@ -19,19 +20,23 @@ export class DesignTokenHelper {
   }
 
   public static size(key: string): string {
-    return designTokens.$sizes[key] + 'px';
+    return DesignTokenHelper.sizeValue(designTokens.$sizes[key]);
   }
 
   public static fontSize(key: string): string {
-    return designTokens['$font-sizes'][key] + 'px';
+    return DesignTokenHelper.sizeValue(designTokens.$font_sizes[key]);
   }
 
   public static borderRadius(): string {
-    return designTokens['$border-radius'] + 'px';
+    return DesignTokenHelper.sizeValue(designTokens.$border_radius);
   }
 
   public static borderRadiusRound(): string {
-    return designTokens['$border-radius-round'] + 'px';
+    return DesignTokenHelper.sizeValue(designTokens.$border_radius_round);
+  }
+
+  private static sizeValue(entry: { value: number; unit: string }): string {
+    return entry.value + entry.unit;
   }
 }
 

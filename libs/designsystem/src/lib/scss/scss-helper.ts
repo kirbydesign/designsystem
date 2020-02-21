@@ -9,7 +9,6 @@ export class ScssHelper {
 
 export interface SassColor {
   name: string;
-  type: string;
   value: {
     hex: string;
   };

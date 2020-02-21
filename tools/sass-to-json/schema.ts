@@ -5,9 +5,13 @@ export const SCHEMA = {
     sassFiles: {
       type: 'array',
     },
+    format: {
+      type: 'string',
+    },
   },
 };
 
 export interface SassToJsonWebpackPluginOptions {
+  format: 'ts' | 'json';
   sassFiles?: string[];
 }

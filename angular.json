@@ -58,6 +58,7 @@
             "customWebpackConfig": {
               "path": "./webpack.sass-to-json.config.ts",
               "sassToJson": {
+                "format": "ts",
                 "sassFiles": [
                   "/apps/cookbook/src/app/**/*.scss",
                   "/libs/designsystem/src/lib/**/*.scss"
@@ -85,10 +86,7 @@
                 "output": "./svg"
               }
             ],
-            "styles": [
-              "apps/cookbook/src/styles.scss",
-              "node_modules/prismjs/themes/prism.css"
-            ],
+            "styles": ["apps/cookbook/src/styles.scss", "node_modules/prismjs/themes/prism.css"],
             "scripts": []
           },
           "configurations": {
@@ -129,6 +127,7 @@
             "customWebpackConfig": {
               "path": "./webpack.sass-to-json.config.ts",
               "sassToJson": {
+                "format": "ts",
                 "sassFiles": [
                   "/apps/cookbook/src/app/**/*.scss",
                   "/libs/designsystem/src/lib/**/*.scss"
