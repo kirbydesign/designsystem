@@ -67,7 +67,7 @@ $badge-diameter: 16px;
     justify-content: center;
     align-items: center;
     //default to icon size 'sm'
-    @include _icon-size('sm');
+    --kirby-icon-font-size: #{icon-font-size('sm')};
   }
 }
 
@@ -76,10 +76,6 @@ $badge-diameter: 16px;
     width: $image-diameter-xsmall;
     height: $image-diameter-xsmall;
     border-radius: 8px;
-
-    ::ng-deep kirby-icon {
-      @include _icon-size('sm');
-    }
 
     .avatar-text {
       font-size: font-size('s');
@@ -91,10 +87,6 @@ $badge-diameter: 16px;
   .avatar {
     width: $image-diameter-small;
     height: $image-diameter-small;
-
-    ::ng-deep kirby-icon {
-      @include _icon-size('sm');
-    }
 
     .avatar-text {
       font-size: font-size('s');
@@ -110,9 +102,7 @@ $badge-diameter: 16px;
     width: $image-diameter-medium;
     height: $image-diameter-medium;
 
-    ::ng-deep kirby-icon {
-      @include _icon-size('md');
-    }
+    --kirby-icon-font-size: #{icon-font-size('md')};
 
     .avatar-text {
       font-size: font-size('m');
@@ -128,9 +118,7 @@ $badge-diameter: 16px;
     width: $image-diameter-large;
     height: $image-diameter-large;
 
-    ::ng-deep kirby-icon {
-      @include _icon-size('lg');
-    }
+    --kirby-icon-font-size: #{icon-font-size('lg')};
 
     .avatar-text {
       font-size: font-size('xl');

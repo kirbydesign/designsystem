@@ -25,7 +25,7 @@ export class SegmentedControlShowcaseComponent implements OnInit {
       description: 'Array of SegmentItem controls',
       defaultValue: '',
       inputValues: [
-        '[{ text: string, id: string, checked: boolean, badge?: {content: string, themeColor: ThemeColor}}]',
+        '[{ text: string, id: string, checked: boolean, badge?: {content: string, description?: string, themeColor: ThemeColor}}]',
       ],
     },
   ];

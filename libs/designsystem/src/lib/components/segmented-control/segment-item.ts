@@ -6,6 +6,7 @@ export interface SegmentItem {
   checked?: boolean;
   badge?: {
     content: string;
+    description?: string;
     themeColor: ThemeColor;
   };
 }

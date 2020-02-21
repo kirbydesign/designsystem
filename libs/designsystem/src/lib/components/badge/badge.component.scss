@@ -20,6 +20,8 @@
   right: var(--kirby-badge-right);
   top: var(--kirby-badge-top);
   z-index: var(--kirby-badge-zindex);
+  font-size: font-size('xxs');
+  line-height: 1;
 
   ion-badge {
     --padding-top: 3px;
@@ -30,7 +32,7 @@
     border-radius: 8px;
     min-width: 16px;
     min-height: 16px;
-    font-size: font-size('xxs');
+    font-size: inherit;
     position: relative;
     box-shadow: var(--kirby-badge-elevation);
   }

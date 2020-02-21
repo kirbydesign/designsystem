@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
+import { TextareaComponent } from './../textarea/textarea.component';
 import { InputComponent } from '../input/input.component';
 
 @Component({
@@ -9,10 +10,18 @@ import { InputComponent } from '../input/input.component';
   styleUrls: ['./input-counter.component.scss'],
 })
 export class InputCounterComponent implements OnInit, OnDestroy {
-  @Input() listenTo: InputComponent;
+  @Input() listenTo: InputComponent | TextareaComponent;
   length: number;
   maxlength: number;
   private _inputChangeSubscription: Subscription;
+
+  get text(): string {
+    if (this.length === undefined) {
+      return undefined;
+    }
+    const ofMaxlength = this.maxlength ? `/${this.maxlength}` : '';
+    return `${this.length}${ofMaxlength}`;
+  }
 
   ngOnInit(): void {
     if (this.listenTo) {

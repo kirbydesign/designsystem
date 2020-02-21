@@ -8,32 +8,6 @@ $item-height: size('xxxl');
   display: block;
 }
 
-ion-list,
-.list-items {
-  > ion-item {
-    &:first-of-type {
-      --padding-top: #{size('s')};
-    }
-
-    &:last-of-type {
-      --padding-bottom: #{size('s')};
-    }
-  }
-
-  ion-item-sliding {
-    &:first-of-type {
-      ion-item {
-        --padding-top: #{size('s')};
-      }
-    }
-    &:last-of-type {
-      ion-item {
-        --padding-bottom: #{size('s')};
-      }
-    }
-  }
-}
-
 ion-list {
   &.has-divider {
     ion-item-sliding:not(:last-of-type) {
