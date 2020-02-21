@@ -4,7 +4,6 @@ import { SpectatorHost, createHostFactory } from '@ngneat/spectator';
 import { DesignTokenHelper } from './../../helpers/design-token-helper';
 import { IconComponent } from '../icon/icon.component';
 import { EmptyStateComponent } from './empty-state.component';
-import { IconComponent } from '../icon/icon.component';
 
 describe('EmptyStateComponent', () => {
   let spectator: SpectatorHost<EmptyStateComponent>;
@@ -34,6 +33,6 @@ describe('EmptyStateComponent', () => {
 
   it('should render with the correct border width', () => {
     const outlineElement = element.getElementsByClassName('icon-outline')[0];
-    expect(outlineElement).toHaveComputedStyle({ 'border-width': size('xxxs') });
+    expect(outlineElement).toHaveComputedStyle({ 'border-width': DesignTokenHelper.size('xxxs') });
   });
 });

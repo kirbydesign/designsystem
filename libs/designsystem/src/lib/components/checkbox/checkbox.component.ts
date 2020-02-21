@@ -10,8 +10,7 @@ import {
   SimpleChanges,
 } from '@angular/core';
 
-// @ts-ignore
-import { data as style } from './checkbox.component.styling';
+import { ColorHelper } from '../../helpers';
 
 @Component({
   selector: 'kirby-checkbox',
@@ -39,9 +38,8 @@ export class CheckboxComponent implements OnInit, OnChanges {
   ngOnInit() {}
 
   getThemeColor(name: string) {
-    const globalValue = style.$kirby_colors[name];
-    const styleVar = globalValue.hex;
-    return styleVar;
+    const globalValue = ColorHelper.getThemeColorRgbString(name);
+    return globalValue.hex;
   }
 
   ngOnChanges(changes: SimpleChanges): void {

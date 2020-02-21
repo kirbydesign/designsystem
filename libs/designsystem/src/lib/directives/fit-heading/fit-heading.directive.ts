@@ -3,7 +3,6 @@ import { Directive, ElementRef, Input, OnDestroy, OnInit, Renderer2 } from '@ang
 import { ResizeObserverService } from '../../components/shared/resize-observer/resize-observer.service';
 import { ResizeObserverEntry } from '../../components/shared/resize-observer/types/resize-observer-entry';
 
-// @ts-ignore
 import { data as scssVariables } from '../../scss/base/_variables.styling';
 
 interface HeadingSize {

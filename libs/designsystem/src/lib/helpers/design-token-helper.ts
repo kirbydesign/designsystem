@@ -1,7 +1,6 @@
 import { ThemeColor } from './theme-color.type';
 import { ColorHelper } from './color-helper';
 
-// @ts-ignore
 import { data as designTokens } from './design-token-helper.styling';
 
 export class DesignTokenHelper {
@@ -28,11 +27,11 @@ export class DesignTokenHelper {
   }
 
   public static fontWeight(key: string): string {
-    return DesignTokenHelper.designTokens.global['$font-weight'][key] + '';
+    return designTokens.$font_weight[key] + '';
   }
 
   public static lineHeight(key: string): string {
-    return DesignTokenHelper.designTokens.global['$line-height'][key] + 'px';
+    return DesignTokenHelper.sizeValue(designTokens.$line_height[key]);
   }
 
   public static borderRadius(): string {

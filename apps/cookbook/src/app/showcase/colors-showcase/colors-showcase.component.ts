@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 
 import { SassColor } from '@kirbydesign/designsystem';
 
-// @ts-ignore
 import { data as style } from './colors-showcase.component.styling';
 
 @Component({
@@ -21,11 +20,6 @@ export class ColorsShowcaseComponent {
     this.brandColors = this.getColors('$brand_colors');
     this.systemColors = this.getColors('$system_colors');
     this.notificationColors = this.getColors('$notification_colors');
-    console.log({
-      brandColors: this.brandColors,
-      systemColors: this.systemColors,
-      notificationColors: this.notificationColors,
-    });
   }
 
   onColorClick(sassColor: SassColor) {

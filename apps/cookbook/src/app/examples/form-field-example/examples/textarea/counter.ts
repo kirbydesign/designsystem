@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 const config = {
-  selector: 'kirby-form-field-textarea-counter-example',
+  selector: 'cookbook-form-field-textarea-counter-example',
   template: `<kirby-form-field>
   <textarea kirby-textarea placeholder="Tweet your message (max 140 chars)" #tweet maxlength="140"></textarea>
   <kirby-input-counter [listenTo]="tweet"></kirby-input-counter>

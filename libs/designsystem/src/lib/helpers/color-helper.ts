@@ -1,4 +1,3 @@
-// @ts-ignore
 import { data as colors } from './color-helper.styling';
 
 export class ColorHelper {

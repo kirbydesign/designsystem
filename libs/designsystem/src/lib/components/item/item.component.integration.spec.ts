@@ -1,16 +1,18 @@
-import { SpectatorHost, createHostFactory } from '@ngneat/spectator';
+import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { IonicModule } from '@ionic/angular';
 
 import { TestHelper } from '../../testing/test-helper';
-import { DesignTokenHelper } from '../../helpers/design-token-helper';
+import { DesignTokenHelper } from '../../helpers';
+import { ItemComponent } from './item.component';
 import {
   ListComponent,
   InfiniteScrollDirective,
   ListItemTemplateDirective,
-} from '@kirbydesign/designsystem/list';
-import { ItemComponent } from './item.component';
-import { SpinnerComponent, IconComponent, CardComponent } from '@kirbydesign/designsystem';
-import { ListItemColorDirective } from '../list/directives/list-item-color.directive';
+  ListItemColorDirective,
+  SpinnerComponent,
+  IconComponent,
+  CardComponent,
+} from '..';
 
 const size = DesignTokenHelper.size;
 
