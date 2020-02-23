@@ -1,8 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { MockModule } from 'ng-mocks';
 
-import { KirbyModule } from '../../../kirby/kirby.module';
 import { DropdownExampleComponent } from './dropdown-example.component';
+import { DropdownExampleModule } from './dropdown-example.module';
+import { KirbyTestingModule } from '@kirbydesign/designsystem/testing';
 
 describe('DropdownExampleComponent', () => {
   let component: DropdownExampleComponent;
@@ -10,7 +11,7 @@ describe('DropdownExampleComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [KirbyModule, RouterTestingModule],
+      imports: [MockModule(KirbyTestingModule), DropdownExampleModule],
       declarations: [DropdownExampleComponent],
     }).compileComponents();
   }));
