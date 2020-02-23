@@ -214,7 +214,7 @@ describe('ButtonComponent in kirby empty state', () => {
   });
 });
 
-fdescribe('ButtonComponent in Kirby dropdown', () => {
+describe('ButtonComponent in Kirby dropdown', () => {
   let spectator: SpectatorHost<DropdownComponent>;
   const createHost = createHostFactory({
     component: DropdownComponent,
