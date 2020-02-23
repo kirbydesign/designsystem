@@ -1,1 +1,50 @@
 @import '../../scss/utils';
+
+$item-height: 56px;
+$dropdown-max-height: 5 * $item-height;
+
+:host {
+  display: inline-block;
+  position: relative;
+
+  &.expand {
+    display: block;
+  }
+}
+
+:host > button {
+  outline: none;
+  width: 100%;
+  transition: box-shadow 0.5s;
+}
+
+kirby-card {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+  position: absolute;
+  width: 100%;
+  min-width: 343px;
+  max-height: $dropdown-max-height;
+  margin-top: size('xxxs');
+  overflow-y: auto;
+  box-shadow: get-elevation(8);
+  z-index: 1;
+}
+
+:host(.is-opening) {
+  kirby-card {
+    display: block;
+  }
+}
+
+:host(.is-open) {
+  & > button {
+    box-shadow: get-elevation(8);
+  }
+
+  kirby-card {
+    display: block;
+    opacity: 1;
+  }
+}
