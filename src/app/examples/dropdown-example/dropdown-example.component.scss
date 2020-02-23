@@ -1,0 +1,24 @@
+@import '../../../kirby/scss/utils';
+
+:host {
+  display: block;
+  background: get-color('background-color');
+  padding: size('m');
+
+  > h2 {
+    font-size: font-size('m');
+    text-transform: uppercase;
+    margin-top: size('m');
+  }
+
+  > h3 {
+    font-size: font-size('xs');
+    color: get-color('semi-dark');
+    text-transform: uppercase;
+    margin-bottom: size('xs');
+  }
+
+  > * {
+    margin: 10px 0;
+  }
+}
