@@ -1,7 +1,7 @@
 import { RouterTestingModule } from '@angular/router/testing';
 import { SpectatorHost, createHostFactory } from '@ngneat/spectator';
 import { IonicModule, IonIcon } from '@ionic/angular';
-import { MockComponent } from 'ng-mocks';
+import { MockComponent, MockComponents } from 'ng-mocks';
 
 import { DesignTokenHelper } from '../../helpers/design-token-helper';
 import { TestHelper } from '../../testing/test-helper';
@@ -18,6 +18,9 @@ import { SizeDirective } from '../../directives/size/size.directive';
 import { ButtonComponent } from './button.component';
 import { IconComponent } from '../icon/icon.component';
 import { EmptyStateComponent } from '../empty-state/empty-state.component';
+import { DropdownComponent } from '../dropdown/dropdown.component';
+import { CardComponent } from '../card/card.component';
+import { ItemComponent } from '../item/item.component';
 
 const getColor = DesignTokenHelper.getColor;
 const size = DesignTokenHelper.size;
@@ -208,6 +211,23 @@ describe('ButtonComponent in kirby empty state', () => {
 
   it('should render with correct min-width', () => {
     expect(actionButtonInEmptyState).toHaveComputedStyle({ 'min-width': '220px' });
+  });
+});
+
+fdescribe('ButtonComponent in Kirby dropdown', () => {
+  let spectator: SpectatorHost<DropdownComponent>;
+  const createHost = createHostFactory({
+    component: DropdownComponent,
+    declarations: [ButtonComponent, MockComponents(CardComponent, ItemComponent, IconComponent)],
+  });
+
+  it('should render with space between text and icon', () => {
+    spectator = createHost<DropdownComponent>(
+      `<kirby-dropdown>
+      </kirby-dropdown>`
+    );
+    let button = spectator.queryHost('button[kirby-button]');
+    expect(button).toHaveComputedStyle({ 'justify-content': 'space-between' });
   });
 });
 
