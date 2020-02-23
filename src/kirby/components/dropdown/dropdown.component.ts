@@ -11,19 +11,20 @@ import {
   ViewChildren,
   QueryList,
   ViewChild,
+  AfterContentChecked,
+  Renderer2,
 } from '@angular/core';
 
 import { ListItemTemplateDirective } from '../list/list.directive';
 import { ItemComponent } from '../item/item.component';
 import { CardComponent } from '../card/card.component';
 
-type ItemType = { text: string; value: string };
 @Component({
   selector: 'kirby-dropdown',
   templateUrl: './dropdown.component.html',
   styleUrls: ['./dropdown.component.scss'],
 })
-export class DropdownComponent implements OnInit {
+export class DropdownComponent implements OnInit, AfterContentChecked {
   @ContentChild(ListItemTemplateDirective, { static: true, read: TemplateRef })
   itemTemplate: TemplateRef<any>;
 
@@ -54,10 +55,13 @@ export class DropdownComponent implements OnInit {
   selectedIndex: number;
 
   @Input()
-  items: ItemType[] | string[] = [];
+  items: string[] | any[] = [];
 
   @Input()
-  selectedItem: ItemType | string;
+  itemTextProperty = 'text';
+
+  @Input()
+  selectedItem: string | any;
 
   @Input()
   placeholder = 'Please select:';
@@ -75,7 +79,7 @@ export class DropdownComponent implements OnInit {
     return this.expand === 'block';
   }
 
-  constructor(private elementRef: ElementRef<HTMLElement>) {}
+  constructor(private renderer: Renderer2, private elementRef: ElementRef<HTMLElement>) {}
 
   onToggle() {
     if (!this.isOpen) {
@@ -95,6 +99,16 @@ export class DropdownComponent implements OnInit {
 
   ngOnInit() {
     this.setSelectedText();
+  }
+
+  ngAfterContentChecked() {
+    if (this.kirbyItemsSlotted.length) {
+      this.kirbyItemsSlotted.forEach((kirbyItem, index) => {
+        this.renderer.listen(kirbyItem.nativeElement, 'click', () => {
+          this.onItemSelect(index);
+        });
+      });
+    }
   }
 
   open() {
@@ -134,8 +148,8 @@ export class DropdownComponent implements OnInit {
     this.selectedText = selectedText;
   }
 
-  getTextFromItem(item: ItemType | string) {
-    return typeof item === 'string' ? item : item.text;
+  getTextFromItem(item: string | any) {
+    return typeof item === 'string' ? item : item[this.itemTextProperty];
   }
 
   scrollItemIntoView(index: number) {
