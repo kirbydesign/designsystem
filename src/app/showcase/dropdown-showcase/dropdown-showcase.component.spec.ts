@@ -1,10 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { MockComponents } from 'ng-mocks';
 
+import { DropdownShowcaseComponent } from './dropdown-showcase.component';
 import { ExamplesModule } from '../../examples/examples.module';
 import { CodeViewerComponent } from '../../shared/code-viewer/code-viewer.component';
-import { DropdownShowcaseComponent } from './dropdown-showcase.component';
-import { ShowcasePropertiesComponent } from '~/app/shared/showcase-properties/showcase-properties.component';
+import { ShowcasePropertiesComponent } from '../../shared/showcase-properties/showcase-properties.component';
+import { ExampleViewerComponent } from '../../shared/example-viewer/example-viewer.component';
 
 describe('DropdownShowcaseComponent', () => {
   let component: DropdownShowcaseComponent;
@@ -13,7 +15,10 @@ describe('DropdownShowcaseComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ExamplesModule, RouterTestingModule],
-      declarations: [DropdownShowcaseComponent, CodeViewerComponent, ShowcasePropertiesComponent],
+      declarations: [
+        DropdownShowcaseComponent,
+        MockComponents(CodeViewerComponent, ExampleViewerComponent, ShowcasePropertiesComponent),
+      ],
     }).compileComponents();
   }));
 
