@@ -58,6 +58,32 @@
   }
 }
 
+/* clean-css ignore:start */
+:host-context(kirby-list ion-item-sliding:first-of-type) {
+  ion-item {
+    --padding-top: #{size('xxs')};
+  }
+}
+
+:host-context(kirby-list ion-item-sliding:first-of-type kirby-card) {
+  ion-item {
+    --padding-top: 0;
+  }
+}
+
+:host-context(kirby-list ion-item-sliding:last-of-type) {
+  ion-item {
+    --padding-bottom: #{size('xxs')};
+  }
+}
+
+:host-context(kirby-list ion-item-sliding:last-of-type kirby-card) {
+  ion-item {
+    --padding-bottom: 0;
+  }
+}
+/* clean-css ignore:end */
+
 :host(.selected),
 :host-context(kirby-list .selected) {
   ion-item {
