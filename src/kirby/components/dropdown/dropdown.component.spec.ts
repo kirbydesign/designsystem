@@ -11,7 +11,13 @@ import { ItemComponent } from '../item/item.component';
 
 describe('DropdownComponent', () => {
   let spectator: Spectator<DropdownComponent>;
-  const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'];
+  const items = [
+    { text: 'Item 1', value: 1 },
+    { text: 'Item 2', value: 2 },
+    { text: 'Item 3', value: 3 },
+    { text: 'Item 4', value: 4 },
+    { text: 'Item 5', value: 5 },
+  ];
 
   const createHost = createComponentFactory({
     imports: [],
@@ -49,6 +55,134 @@ describe('DropdownComponent', () => {
   it('should render button with default attentionLevel', () => {
     const button = spectator.query(ButtonComponent);
     expect(button.attentionLevel).toEqual('3');
+  });
+
+  describe('when setting selected index', () => {
+    it('should have correct selected item', () => {
+      expect(spectator.component.selectedIndex).toBeUndefined();
+      const newSelectedIndex = 2;
+      const expectedItem = items[newSelectedIndex];
+      spectator.setInput('selectedIndex', newSelectedIndex);
+      spectator.detectChanges();
+      expect(spectator.component.selectedItem).toEqual(expectedItem);
+    });
+
+    it('should have selected text from new selected item', () => {
+      expect(spectator.component.selectedIndex).toBeUndefined();
+      const newSelectedIndex = 2;
+      const expectedText = items[newSelectedIndex].text;
+      spectator.setInput('selectedIndex', newSelectedIndex);
+      spectator.detectChanges();
+      expect(spectator.component.selectedText).toEqual(expectedText);
+      expect(spectator.element).toHaveText(expectedText);
+    });
+  });
+
+  describe('when configured with selected index', () => {
+    const defaultSelectedIndex = 2;
+    const expectedItem = items[defaultSelectedIndex];
+    const expectedText = expectedItem.text;
+    beforeEach(() => {
+      spectator = createHost({
+        props: {
+          items: items,
+          selectedIndex: defaultSelectedIndex,
+        },
+      });
+    });
+
+    it('should have selected item', () => {
+      expect(spectator.component.selectedItem).toEqual(expectedItem);
+    });
+
+    it('should have selected text from selected item', () => {
+      expect(spectator.component.selectedText).toEqual(expectedText);
+      expect(spectator.element).toHaveText(expectedText);
+    });
+
+    describe('when changing selected index', () => {
+      it('should have correct new selected item', () => {
+        const newSelectedIndex = 0;
+        const expectedItem = items[newSelectedIndex];
+        spectator.setInput('selectedIndex', newSelectedIndex);
+        spectator.detectChanges();
+        expect(spectator.component.selectedItem).toEqual(expectedItem);
+      });
+
+      it('should have selected text from new selected item', () => {
+        const newSelectedIndex = 0;
+        const expectedText = items[newSelectedIndex].text;
+        spectator.setInput('selectedIndex', newSelectedIndex);
+        spectator.detectChanges();
+        expect(spectator.component.selectedText).toEqual(expectedText);
+        expect(spectator.element).toHaveText(expectedText);
+      });
+    });
+  });
+
+  describe('onItemSelect', () => {
+    describe('when no selected index', () => {
+      const newSelectedIndex = 2;
+      const expectedItem = items[newSelectedIndex];
+      const expectedText = expectedItem.text;
+
+      it('should have correct new selected index', () => {
+        spectator.component.onItemSelect(newSelectedIndex);
+        expect(spectator.component.selectedIndex).toEqual(newSelectedIndex);
+      });
+
+      it('should have correct new selected item', () => {
+        spectator.component.onItemSelect(newSelectedIndex);
+        expect(spectator.component.selectedItem).toEqual(expectedItem);
+      });
+
+      it('should have selected text from new selected item', () => {
+        spectator.component.onItemSelect(newSelectedIndex);
+        expect(spectator.component.selectedText).toEqual(expectedText);
+        expect(spectator.element).toHaveText(expectedText);
+      });
+
+      it('should emit itemSelect event with new selected item', () => {
+        const onChangeSpy = spyOn(spectator.component.itemSelect, 'emit');
+        spectator.component.onItemSelect(newSelectedIndex);
+        expect(onChangeSpy).toHaveBeenCalledTimes(1);
+        expect(onChangeSpy).toHaveBeenCalledWith(expectedItem);
+      });
+    });
+
+    describe('when having selected index', () => {
+      beforeEach(() => {
+        spectator.setInput('selectedIndex', 2);
+        spectator.detectChanges();
+      });
+
+      const newSelectedIndex = 4;
+      const expectedItem = items[newSelectedIndex];
+      const expectedText = expectedItem.text;
+
+      it('should have correct new selected index', () => {
+        spectator.component.onItemSelect(newSelectedIndex);
+        expect(spectator.component.selectedIndex).toEqual(newSelectedIndex);
+      });
+
+      it('should have correct new selected item', () => {
+        spectator.component.onItemSelect(newSelectedIndex);
+        expect(spectator.component.selectedItem).toEqual(expectedItem);
+      });
+
+      it('should have selected text from new selected item', () => {
+        spectator.component.onItemSelect(newSelectedIndex);
+        expect(spectator.component.selectedText).toEqual(expectedText);
+        expect(spectator.element).toHaveText(expectedText);
+      });
+
+      it('should emit itemSelect event with new selected item', () => {
+        const onChangeSpy = spyOn(spectator.component.itemSelect, 'emit');
+        spectator.component.onItemSelect(newSelectedIndex);
+        expect(onChangeSpy).toHaveBeenCalledTimes(1);
+        expect(onChangeSpy).toHaveBeenCalledWith(expectedItem);
+      });
+    });
   });
 
   describe('when configured with attentionLevel', () => {
