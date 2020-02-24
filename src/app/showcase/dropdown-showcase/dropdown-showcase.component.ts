@@ -9,5 +9,4 @@ import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-prop
 })
 export class DropdownShowcaseComponent {
   properties: ShowcaseProperty[] = [];
-  constructor() {}
 }
