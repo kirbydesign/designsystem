@@ -8,5 +8,85 @@ import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-prop
   styleUrls: ['./dropdown-showcase.component.scss'],
 })
 export class DropdownShowcaseComponent {
-  properties: ShowcaseProperty[] = [];
+  properties: ShowcaseProperty[] = [
+    {
+      name: 'items',
+      description: 'The items rendered within the dropdown.',
+      defaultValue: '[ ]',
+      inputValues: ['Array<string> | Array<any>'],
+    },
+    {
+      name: 'selectedIndex',
+      description: 'The index of the selected item within the `items` array.',
+      defaultValue: 'undefined',
+      inputValues: ['number'],
+    },
+    {
+      name: 'selectedItem',
+      description: 'The currently selected item (readonly).',
+      defaultValue: 'undefined',
+      inputValues: ['string | any'],
+    },
+    {
+      name: 'itemTextProperty',
+      description:
+        'The property to use for the text representation of items when configured with `Array<any>`.',
+      defaultValue: 'text',
+      inputValues: ['string'],
+    },
+    {
+      name: 'placeholder',
+      defaultValue: 'Please select:',
+      description: 'Instructional text to show before the dropdown has a selected option.',
+      inputValues: ['string'],
+    },
+    {
+      name: 'attentionLevel',
+      description:
+        'Sets the attention level for the button of the dropdown. Button color will be updated automatically depending on host color.',
+      defaultValue: '3',
+      inputValues: ['1', '2', '3', '4'],
+    },
+    {
+      name: 'expand',
+      description:
+        'If the dropdown needs to expand to full width of its parent container, then use expand.',
+      defaultValue: 'undefined',
+      inputValues: ['block'],
+    },
+  ];
+
+  methods: ShowcaseProperty[] = [
+    {
+      name: 'toggle()',
+      description: 'Toggles the open/closed state of the dropdown.',
+    },
+    {
+      name: 'open()',
+      description: 'Opens the dropdown.',
+    },
+    {
+      name: 'close()',
+      description: 'Closes the dropdown.',
+    },
+  ];
+
+  methodColumns = {
+    Name: 'Name',
+    Description: 'Description',
+  };
+
+  events: ShowcaseProperty[] = [
+    {
+      name: 'itemSelect',
+      description: 'Emitted when an item is selected (tap on mobile, click/keypress on web)',
+      inputValues: ['(item: string | any) => void'],
+    },
+  ];
+
+  eventColumns = {
+    Name: 'Name',
+    Description: 'Description',
+    Type: 'Signature',
+  };
 }
