@@ -1,7 +1,6 @@
 import {
   Component,
   HostBinding,
-  OnInit,
   Input,
   TemplateRef,
   ContentChild,
