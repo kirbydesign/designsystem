@@ -25,30 +25,6 @@ import { CardComponent } from '../card/card.component';
   styleUrls: ['./dropdown.component.scss'],
 })
 export class DropdownComponent implements OnInit, AfterContentChecked {
-  @ContentChild(ListItemTemplateDirective, { static: true, read: TemplateRef })
-  itemTemplate: TemplateRef<any>;
-
-  @ContentChildren(ListItemTemplateDirective, { read: ElementRef })
-  slottedItems: QueryList<ElementRef<HTMLElement>>;
-
-  @ViewChild(CardComponent, { static: true, read: ElementRef })
-  cardElement: ElementRef<HTMLElement>;
-
-  @ViewChildren(ItemComponent, { read: ElementRef })
-  kirbyItemsDefault: QueryList<ElementRef<HTMLElement>>;
-
-  @ContentChildren(ItemComponent, { read: ElementRef })
-  kirbyItemsSlotted: QueryList<ElementRef<HTMLElement>>;
-
-  @HostBinding('attr.role') private _role = 'listbox';
-  @HostBinding('attr.tabindex') private _tabIndex = '0';
-
-  @HostBinding('class.is-opening')
-  private _isOpening: boolean;
-
-  @HostBinding('class.is-open')
-  isOpen = false;
-
   selectedText: string;
 
   @Input()
@@ -68,7 +44,6 @@ export class DropdownComponent implements OnInit, AfterContentChecked {
 
   @Input()
   attentionLevel: '1' | '2' | '3' | '4' = '3';
-
   readonly attentionLevelOpen = '2';
 
   @Input()
@@ -78,6 +53,25 @@ export class DropdownComponent implements OnInit, AfterContentChecked {
   private get _isBlockLevel() {
     return this.expand === 'block';
   }
+
+  @HostBinding('attr.role') private _role = 'listbox';
+  @HostBinding('attr.tabindex') private _tabIndex = '0';
+  @HostBinding('class.is-opening')
+  private _isOpening: boolean;
+
+  @HostBinding('class.is-open')
+  isOpen = false;
+
+  @ContentChild(ListItemTemplateDirective, { static: true, read: TemplateRef })
+  itemTemplate: TemplateRef<any>;
+  @ContentChildren(ListItemTemplateDirective, { read: ElementRef })
+  slottedItems: QueryList<ElementRef<HTMLElement>>;
+  @ViewChild(CardComponent, { static: true, read: ElementRef })
+  cardElement: ElementRef<HTMLElement>;
+  @ViewChildren(ItemComponent, { read: ElementRef })
+  kirbyItemsDefault: QueryList<ElementRef<HTMLElement>>;
+  @ContentChildren(ItemComponent, { read: ElementRef })
+  kirbyItemsSlotted: QueryList<ElementRef<HTMLElement>>;
 
   constructor(private renderer: Renderer2, private elementRef: ElementRef<HTMLElement>) {}
 
