@@ -21,12 +21,19 @@ const config = {
     </kirby-label>
   </kirby-item>
 </kirby-dropdown>
-<p><em>Selected item: {{ dropdown.selectedItem?.title }}</em></p>`,
+<p class="selection"><em>Selected item: {{ dropdown.selectedItem?.title }}</em></p>`,
+  styles: [
+    `.selection {
+    margin-left: 12px;
+    font-size: 12px;
+  }`,
+  ],
 };
 
 @Component({
   selector: config.selector,
   template: config.template,
+  styles: config.styles,
 })
 export class DropdownExampleCustomItemTemplateComponent {
   template: string = config.template;
