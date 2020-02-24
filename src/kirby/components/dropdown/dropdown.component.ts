@@ -104,6 +104,7 @@ export class DropdownComponent implements OnInit, AfterContentChecked {
   ngAfterContentChecked() {
     if (this.kirbyItemsSlotted.length) {
       this.kirbyItemsSlotted.forEach((kirbyItem, index) => {
+        this.renderer.setAttribute(kirbyItem.nativeElement, 'role', 'option');
         this.renderer.listen(kirbyItem.nativeElement, 'click', () => {
           this.onItemSelect(index);
         });

@@ -20,7 +20,7 @@
 </kirby-card>
 
 <ng-template #defaultItemTemplate let-item let-selected="selected" let-index="index">
-  <kirby-item [selectable]="true" [selected]="selected" (click)="onItemSelect(index)">
+  <kirby-item [selectable]="true" [selected]="selected" (click)="onItemSelect(index)" role="option">
     <h3>{{ getTextFromItem(item) }}</h3>
     <kirby-icon *ngIf="selected" name="checkmark-selected" slot="end"></kirby-icon>
   </kirby-item>
