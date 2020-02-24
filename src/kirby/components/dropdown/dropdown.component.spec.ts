@@ -43,8 +43,19 @@ describe('DropdownComponent', () => {
     expect(spectator.component.isOpen).toBeFalsy();
   });
 
+  it('should not have value', () => {
+    expect(spectator.component.value).toBeNull();
+  });
+
+  it('should not have selected text', () => {
+    expect(spectator.component.selectedText).toBeNull();
+  });
+
+  it('should have selected index = -1', () => {
+    expect(spectator.component.selectedIndex).toEqual(-1);
+  });
+
   it('should have default placeholder text', () => {
-    expect(spectator.component.selectedText).toEqual(spectator.component.placeholder);
     expect(spectator.element).toHaveText(spectator.component.placeholder);
   });
 
@@ -59,7 +70,7 @@ describe('DropdownComponent', () => {
 
   describe('when setting selected index', () => {
     it('should have correct selected item', () => {
-      expect(spectator.component.selectedIndex).toBeUndefined();
+      expect(spectator.component.selectedIndex).toEqual(-1);
       const newSelectedIndex = 2;
       const expectedItem = items[newSelectedIndex];
       spectator.setInput('selectedIndex', newSelectedIndex);
@@ -68,7 +79,7 @@ describe('DropdownComponent', () => {
     });
 
     it('should have selected text from new selected item', () => {
-      expect(spectator.component.selectedIndex).toBeUndefined();
+      expect(spectator.component.selectedIndex).toEqual(-1);
       const newSelectedIndex = 2;
       const expectedText = items[newSelectedIndex].text;
       spectator.setInput('selectedIndex', newSelectedIndex);

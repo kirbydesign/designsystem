@@ -5,7 +5,7 @@
   (click)="onToggle()"
   (mousedown)="onButtonMouseEvent($event)"
 >
-  {{ selectedText }}
+  {{ selectedText || placeholder }}
   <kirby-icon [name]="isOpen ? 'arrow-up' : 'arrow-down'"></kirby-icon>
 </button>
 <kirby-card>

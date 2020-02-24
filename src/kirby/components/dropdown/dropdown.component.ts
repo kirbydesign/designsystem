@@ -30,7 +30,7 @@ export class DropdownComponent implements AfterContentChecked, OnDestroy {
   @Input()
   items: string[] | any[] = [];
 
-  private _selectedIndex: number;
+  private _selectedIndex: number = -1;
   get selectedIndex(): number {
     return this._selectedIndex;
   }
@@ -60,13 +60,13 @@ export class DropdownComponent implements AfterContentChecked, OnDestroy {
    */
   @Output() itemSelect: EventEmitter<string | any> = new EventEmitter<string | any>();
 
-  private _value: string | any;
+  private _value: string | any = null;
   get value(): string | any {
     return this._value;
   }
 
   get selectedText(): string {
-    return this.value ? this.getTextFromItem(this.value) : this.placeholder;
+    return this.getTextFromItem(this.value);
   }
 
   @HostBinding('class.expand')
@@ -153,6 +153,9 @@ export class DropdownComponent implements AfterContentChecked, OnDestroy {
   }
 
   getTextFromItem(item: string | any) {
+    if (!item) {
+      return null;
+    }
     return typeof item === 'string' ? item : item[this.itemTextProperty];
   }
 
