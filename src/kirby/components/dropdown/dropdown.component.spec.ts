@@ -64,7 +64,7 @@ describe('DropdownComponent', () => {
       const expectedItem = items[newSelectedIndex];
       spectator.setInput('selectedIndex', newSelectedIndex);
       spectator.detectChanges();
-      expect(spectator.component.selectedItem).toEqual(expectedItem);
+      expect(spectator.component.value).toEqual(expectedItem);
     });
 
     it('should have selected text from new selected item', () => {
@@ -92,7 +92,7 @@ describe('DropdownComponent', () => {
     });
 
     it('should have selected item', () => {
-      expect(spectator.component.selectedItem).toEqual(expectedItem);
+      expect(spectator.component.value).toEqual(expectedItem);
     });
 
     it('should have selected text from selected item', () => {
@@ -106,7 +106,7 @@ describe('DropdownComponent', () => {
         const expectedItem = items[newSelectedIndex];
         spectator.setInput('selectedIndex', newSelectedIndex);
         spectator.detectChanges();
-        expect(spectator.component.selectedItem).toEqual(expectedItem);
+        expect(spectator.component.value).toEqual(expectedItem);
       });
 
       it('should have selected text from new selected item', () => {
@@ -133,7 +133,7 @@ describe('DropdownComponent', () => {
 
       it('should have correct new selected item', () => {
         spectator.component.onItemSelect(newSelectedIndex);
-        expect(spectator.component.selectedItem).toEqual(expectedItem);
+        expect(spectator.component.value).toEqual(expectedItem);
       });
 
       it('should have selected text from new selected item', () => {
@@ -167,7 +167,7 @@ describe('DropdownComponent', () => {
 
       it('should have correct new selected item', () => {
         spectator.component.onItemSelect(newSelectedIndex);
-        expect(spectator.component.selectedItem).toEqual(expectedItem);
+        expect(spectator.component.value).toEqual(expectedItem);
       });
 
       it('should have selected text from new selected item', () => {
@@ -451,7 +451,7 @@ describe('DropdownComponent', () => {
               spectator.dispatchKeyboardEvent(spectator.element, 'keydown', keyEvent.key);
             }
             expect(spectator.component.selectedIndex).toEqual(scenario.expectedIndex);
-            expect(spectator.component.selectedItem).toEqual(items[scenario.expectedIndex]);
+            expect(spectator.component.value).toEqual(items[scenario.expectedIndex]);
           });
         });
       });
@@ -643,7 +643,7 @@ describe('DropdownComponent', () => {
               spectator.dispatchKeyboardEvent(spectator.element, 'keydown', keyEvent.key);
             }
             expect(spectator.component.selectedIndex).toEqual(scenario.expectedIndex);
-            expect(spectator.component.selectedItem).toEqual(items[scenario.expectedIndex]);
+            expect(spectator.component.value).toEqual(items[scenario.expectedIndex]);
           });
         });
       });
