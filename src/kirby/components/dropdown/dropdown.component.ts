@@ -14,6 +14,7 @@ import {
   Renderer2,
   Output,
   EventEmitter,
+  OnDestroy,
 } from '@angular/core';
 
 import { ListItemTemplateDirective } from '../list/list.directive';
@@ -25,7 +26,7 @@ import { CardComponent } from '../card/card.component';
   templateUrl: './dropdown.component.html',
   styleUrls: ['./dropdown.component.scss'],
 })
-export class DropdownComponent implements AfterContentChecked {
+export class DropdownComponent implements AfterContentChecked, OnDestroy {
   @Input()
   items: string[] | any[] = [];
 
@@ -92,6 +93,8 @@ export class DropdownComponent implements AfterContentChecked {
   @ContentChildren(ItemComponent, { read: ElementRef })
   kirbyItemsSlotted: QueryList<ElementRef<HTMLElement>>;
 
+  private itemClickUnlisten: () => void;
+
   constructor(private renderer: Renderer2, private elementRef: ElementRef<HTMLElement>) {}
 
   onToggle() {
@@ -114,7 +117,7 @@ export class DropdownComponent implements AfterContentChecked {
     if (this.kirbyItemsSlotted.length) {
       this.kirbyItemsSlotted.forEach((kirbyItem, index) => {
         this.renderer.setAttribute(kirbyItem.nativeElement, 'role', 'option');
-        this.renderer.listen(kirbyItem.nativeElement, 'click', () => {
+        this.itemClickUnlisten = this.renderer.listen(kirbyItem.nativeElement, 'click', () => {
           this.onItemSelect(index);
         });
       });
@@ -252,6 +255,12 @@ export class DropdownComponent implements AfterContentChecked {
     }
     if (newIndex > -1) {
       this.selectItem(newIndex);
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.itemClickUnlisten) {
+      this.itemClickUnlisten();
     }
   }
 }
