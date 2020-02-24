@@ -13,6 +13,8 @@ import {
   ViewChild,
   AfterContentChecked,
   Renderer2,
+  Output,
+  EventEmitter,
 } from '@angular/core';
 
 import { ListItemTemplateDirective } from '../list/list.directive';
@@ -24,20 +26,24 @@ import { CardComponent } from '../card/card.component';
   templateUrl: './dropdown.component.html',
   styleUrls: ['./dropdown.component.scss'],
 })
-export class DropdownComponent implements OnInit, AfterContentChecked {
-  selectedText: string;
-
-  @Input()
-  selectedIndex: number;
-
+export class DropdownComponent implements AfterContentChecked {
   @Input()
   items: string[] | any[] = [];
 
-  @Input()
-  itemTextProperty = 'text';
+  private _selectedIndex: number;
+  get selectedIndex(): number {
+    return this._selectedIndex;
+  }
+
+  @Input() set selectedIndex(value: number) {
+    if (this._selectedIndex != value) {
+      this._selectedIndex = value;
+      this._selectedItem = this.items[this.selectedIndex];
+    }
+  }
 
   @Input()
-  selectedItem: string | any;
+  itemTextProperty = 'text';
 
   @Input()
   placeholder = 'Please select:';
@@ -48,6 +54,20 @@ export class DropdownComponent implements OnInit, AfterContentChecked {
 
   @Input()
   expand?: 'block';
+
+  /**
+   * Emitted when an item is selected (tap on mobile, click/keypress on web)
+   */
+  @Output() itemSelect: EventEmitter<string | any> = new EventEmitter<string | any>();
+
+  private _selectedItem: string | any;
+  get selectedItem(): string | any {
+    return this._selectedItem;
+  }
+
+  get selectedText(): string {
+    return this.selectedItem ? this.getTextFromItem(this.selectedItem) : this.placeholder;
+  }
 
   @HostBinding('class.expand')
   private get _isBlockLevel() {
@@ -91,10 +111,6 @@ export class DropdownComponent implements OnInit, AfterContentChecked {
     event.preventDefault();
   }
 
-  ngOnInit() {
-    this.setSelectedText();
-  }
-
   ngAfterContentChecked() {
     if (this.kirbyItemsSlotted.length) {
       this.kirbyItemsSlotted.forEach((kirbyItem, index) => {
@@ -130,17 +146,8 @@ export class DropdownComponent implements OnInit, AfterContentChecked {
 
   private selectItem(index: number) {
     this.selectedIndex = index;
-    this.selectedItem = this.items[index];
-    this.setSelectedText();
+    this.itemSelect.emit(this.selectedItem);
     this.scrollItemIntoView(index);
-  }
-
-  private setSelectedText() {
-    let selectedText = this.placeholder;
-    if (this.selectedItem) {
-      selectedText = this.getTextFromItem(this.selectedItem);
-    }
-    this.selectedText = selectedText;
   }
 
   getTextFromItem(item: string | any) {
