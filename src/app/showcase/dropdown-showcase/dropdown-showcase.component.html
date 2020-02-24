@@ -31,6 +31,12 @@
     ></kirby-dropdown-example-attention-level>
   </div>
 </kirby-example-viewer>
+<h3>Event handler</h3>
+<kirby-example-viewer [html]="itemSelectExample.template">
+  <div>
+    <kirby-dropdown-example-item-select #itemSelectExample></kirby-dropdown-example-item-select>
+  </div>
+</kirby-example-viewer>
 <h2>Custom Item template</h2>
 <kirby-example-viewer [html]="customItemTemplateExample.template">
   <div>
@@ -39,5 +45,5 @@
     ></kirby-dropdown-example-custom-item-template>
   </div>
 </kirby-example-viewer>
-<h4>Properties:</h4>
+<h2>Properties:</h2>
 <kirby-showcase-properties [properties]="properties"></kirby-showcase-properties>
