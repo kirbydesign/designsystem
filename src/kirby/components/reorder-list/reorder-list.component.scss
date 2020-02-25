@@ -1,0 +1,61 @@
+@import '../../scss/utils';
+
+ion-backdrop {
+  opacity: 0.3;
+  z-index: 101;
+}
+
+.reorder-selected {
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  opacity: 1;
+  z-index: 104;
+
+  kirby-card {
+    -ms-transform: scale(1.05, 1.05); /* IE 9 */
+    -webkit-transform: scale(1.05, 1.05); /* Safari */
+    transform: scale(1.05, 1.05);
+  }
+
+  @include slotted('kirby-item') {
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+
+    -ms-transform: scale(1.05, 1.05); /* IE 9 */
+    -webkit-transform: scale(1.05, 1.05); /* Safari */
+    transform: scale(1.05, 1.05);
+  }
+}
+
+.reorder-list-active {
+  & > * {
+    position: relative;
+    z-index: 103;
+  }
+  & > .reorder-selected {
+    z-index: 104;
+  }
+}
+
+kirby-card {
+  margin-bottom: 20px;
+  width: map-get($breakpoints, small);
+  overflow: inherit;
+
+  @include media('>=large') {
+    width: map-get($breakpoints, medium);
+  }
+
+  @include slotted('div kirby-item:last-child, div kirby-item:first-child') {
+    border-radius: $border-radius;
+    overflow: hidden;
+  }
+
+  @include slotted('div .reorder-list-active kirby-item') {
+    z-index: 103;
+  }
+
+  & div:first-child {
+    border-top: 1px solid var(--kirby-background-color);
+  }
+}
