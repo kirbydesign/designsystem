@@ -2,7 +2,7 @@
 
 code {
   background-color: get-color('medium');
-  color: get-color('black');
+  color: get-text-color('black');
   padding: 0.2rem 0.5rem;
   border-radius: 2px;
   white-space: nowrap;
@@ -20,12 +20,12 @@ code {
   code {
     padding: 0.25rem 0 0 0;
     display: block;
-    color: get-color('dark');
+    color: get-text-color('dark');
     background-color: transparent;
   }
 
   code.highlight {
-    color: get-color('black');
+    color: get-text-color('black');
     font-weight: font-weight('bold');
   }
 }

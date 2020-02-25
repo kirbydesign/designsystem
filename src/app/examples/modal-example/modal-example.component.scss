@@ -2,7 +2,7 @@
 
 a {
   display: block;
-  color: get-color('black');
+  color: get-text-color('black');
   text-decoration: none;
 
   &:hover {
