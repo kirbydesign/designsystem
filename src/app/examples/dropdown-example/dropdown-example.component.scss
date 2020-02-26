@@ -13,4 +13,9 @@
     margin-top: size('xs');
     margin-bottom: size('xxxs');
   }
+
+  > * {
+    display: block;
+    margin: size('xxs') 0;
+  }
 }
