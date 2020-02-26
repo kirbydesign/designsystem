@@ -13,6 +13,7 @@ $dropdown-max-height: 5 * $item-height;
 }
 
 :host > button {
+  margin: 0;
   outline: none;
   width: 100%;
   transition: box-shadow 0.2s, border-color 0.2s;
