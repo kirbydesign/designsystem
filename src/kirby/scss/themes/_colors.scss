@@ -24,8 +24,8 @@ $system-colors: (
 $text-colors: (
   'white': #ffffff,
   'semi-dark': #707070,
-  'dark': #353535,
   'black': #1c1c1c,
+  'danger': #ee0d0d,
 );
 
 @function getAllColors() {

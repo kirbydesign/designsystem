@@ -20,7 +20,7 @@ code {
   code {
     padding: 0.25rem 0 0 0;
     display: block;
-    color: get-text-color('dark');
+    color: get-color('dark');
     background-color: transparent;
   }
 
@@ -88,7 +88,7 @@ code {
 }
 
 [class^='sample-']::after {
-  color: get-color('danger');
+  color: get-text-color('danger');
   font-size: font-size('xs');
   margin-left: size('m');
 }
