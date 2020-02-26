@@ -105,3 +105,19 @@
     </dl>
   </li>
 </ul>
+
+<h2>Text colors</h2>
+<ul class="text-color-palette">
+  <li *ngFor="let entry of textColors" class="text-color-box">
+    <div class="text-color-samples">
+      <div class="color-sample {{ entry.name }}"></div>
+    </div>
+    <div>
+      <h2 class="color-name">{{ entry.name }}</h2>
+      <dl class="kirby-text-xsmall color-values">
+        <dt>Value</dt>
+        <dd>{{ entry.value.hex }}</dd>
+      </dl>
+    </div>
+  </li>
+</ul>
