@@ -48,8 +48,6 @@ export class DropdownComponent implements AfterContentChecked, OnDestroy, Contro
     if (this._selectedIndex != value) {
       this._selectedIndex = value;
       this._value = this.items[this.selectedIndex];
-      this.change.emit(this.value);
-      this._onChange(this.value);
     }
   }
 
@@ -234,12 +232,14 @@ export class DropdownComponent implements AfterContentChecked, OnDestroy, Contro
   private selectItem(index: number) {
     if (index != this.selectedIndex) {
       this.selectedIndex = index;
+      this.change.emit(this.value);
+      this._onChange(this.value);
       this.scrollItemIntoView(index);
     }
   }
 
   private _selectItemByValue(value: string | any) {
-    this.selectItem(this.items.indexOf(value));
+    this.selectedIndex = this.items.indexOf(value);
   }
 
   getTextFromItem(item: string | any) {
