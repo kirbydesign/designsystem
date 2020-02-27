@@ -217,7 +217,7 @@ describe('DropdownComponent', () => {
 
     it('should render button with full width', () => {
       const button = spectator.query('button[kirby-button]');
-      const componentWidth = spectator.element.getBoundingClientRect().width;
+      const componentWidth = spectator.element.clientWidth;
       const buttonWidth = button.getBoundingClientRect().width;
       expect(buttonWidth).toEqual(componentWidth);
     });
@@ -226,7 +226,7 @@ describe('DropdownComponent', () => {
       spectator.component.isOpen = true;
       spectator.detectChanges();
       const card = spectator.query('kirby-card');
-      const componentWidth = spectator.element.getBoundingClientRect().width;
+      const componentWidth = spectator.element.clientWidth;
       const cardWidth = card.getBoundingClientRect().width;
       expect(cardWidth).toEqual(componentWidth);
     });

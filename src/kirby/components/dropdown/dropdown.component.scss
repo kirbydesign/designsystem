@@ -6,9 +6,15 @@ $dropdown-max-height: 5 * $item-height;
 :host {
   display: inline-block;
   position: relative;
+  border: 1px solid transparent;
 
   &.expand {
     display: block;
+  }
+
+  &.error,
+  &.ng-touched.ng-invalid {
+    border-color: get-color('danger');
   }
 }
 
