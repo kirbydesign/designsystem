@@ -65,11 +65,11 @@ export class DropdownComponent implements AfterContentChecked, OnDestroy, Contro
   expand?: 'block';
 
   @Input()
-  disabled: boolean;
+  disabled = false;
 
   @HostBinding('attr.disabled')
   private get _isDisabled() {
-    return this.disabled ? true : null;
+    return this.disabled ? 'disabled' : null;
   }
 
   @HostBinding('class.error')
