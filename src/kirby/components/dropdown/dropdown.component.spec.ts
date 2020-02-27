@@ -68,6 +68,31 @@ describe('DropdownComponent', () => {
     expect(button.attentionLevel).toEqual('3');
   });
 
+  it('should not render disabled attribute', () => {
+    expect(spectator.element.attributes['disabled']).toBeUndefined();
+  });
+
+  it('should render button as enabled ', () => {
+    const button = spectator.query<HTMLButtonElement>('button');
+    expect(button.disabled).toBeFalsy();
+  });
+
+  it('should not render disabled attribute on button', () => {
+    const button = spectator.query<HTMLButtonElement>('button');
+    expect(button.attributes['disabled']).toBeUndefined();
+  });
+
+  it('should recieve focus', () => {
+    spectator.element.focus();
+    spectator.detectChanges();
+    expect(spectator.element).toBeFocused();
+  });
+
+  it('should recieve focus on button click', () => {
+    spectator.click('button');
+    expect(spectator.element).toBeFocused();
+  });
+
   describe('when setting selected index', () => {
     it('should have correct selected item', () => {
       expect(spectator.component.selectedIndex).toEqual(-1);
@@ -245,7 +270,7 @@ describe('DropdownComponent', () => {
 
     describe('and button is clicked', () => {
       beforeEach(fakeAsync(() => {
-        spectator.dispatchMouseEvent('button', 'click');
+        spectator.click('button');
         spectator.detectChanges();
         tick();
       }));
@@ -481,11 +506,10 @@ describe('DropdownComponent', () => {
     });
 
     describe('and button is clicked', () => {
-      beforeEach(fakeAsync(() => {
-        spectator.dispatchMouseEvent('button', 'click');
+      beforeEach(() => {
+        spectator.click('button');
         spectator.detectChanges();
-        tick();
-      }));
+      });
       it('should close dropdown', () => {
         expect(spectator.component.isOpen).toBeFalsy();
       });
@@ -656,6 +680,79 @@ describe('DropdownComponent', () => {
             expect(spectator.component.selectedIndex).toEqual(scenario.expectedIndex);
             expect(spectator.component.value).toEqual(items[scenario.expectedIndex]);
           });
+        });
+      });
+    });
+  });
+
+  describe('when disabled', () => {
+    beforeEach(() => {
+      spectator.component.disabled = true;
+      spectator.detectChanges();
+    });
+
+    it('should render disabled attribute', () => {
+      expect(spectator.element.attributes['disabled']).toBeDefined();
+    });
+
+    it('should render button as disabled ', () => {
+      const button = spectator.query<HTMLButtonElement>('button');
+      expect(button.disabled).toBeTruthy();
+    });
+
+    it('should render disabled attribute on button', () => {
+      const button = spectator.query<HTMLButtonElement>('button');
+      expect(button.attributes['disabled']).toBeDefined();
+    });
+
+    it('should not open', fakeAsync(() => {
+      spectator.component.open();
+      tick();
+      expect(spectator.component.isOpen).toBeFalsy();
+    }));
+
+    it('should not toggle', fakeAsync(() => {
+      spectator.component.toggle();
+      tick();
+      expect(spectator.component.isOpen).toBeFalsy();
+    }));
+
+    it('should not recieve focus on button click', () => {
+      spectator.click('button');
+      spectator.detectChanges();
+      expect(spectator.element).not.toBeFocused();
+    });
+
+    describe('on keypress', () => {
+      const selectedIndex = 2;
+      const expectedItem = items[selectedIndex];
+      let onChangeSpy: any;
+      const keys = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'];
+
+      beforeEach(() => {
+        onChangeSpy = spyOn(spectator.component.change, 'emit');
+        spectator.setInput('selectedIndex', selectedIndex);
+        spectator.detectChanges();
+      });
+
+      it('should not open dropdown when Space key is pressed', fakeAsync(() => {
+        spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'Space');
+        tick();
+        expect(spectator.component.isOpen).toBeFalsy();
+      }));
+
+      it('should not open dropdown when Enter key is pressed', fakeAsync(() => {
+        spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'Enter');
+        tick();
+        expect(spectator.component.isOpen).toBeFalsy();
+      }));
+
+      keys.forEach((key) => {
+        it(`should not change selected item when ${key} key is pressed`, () => {
+          spectator.dispatchKeyboardEvent(spectator.element, 'keydown', key);
+          expect(spectator.component.selectedIndex).toEqual(selectedIndex);
+          expect(spectator.component.value).toEqual(expectedItem);
+          expect(onChangeSpy).not.toHaveBeenCalled();
         });
       });
     });
