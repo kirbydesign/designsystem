@@ -21,11 +21,12 @@ const config = {
     </kirby-label>
   </kirby-item>
 </kirby-dropdown>
-<p class="selection"><em>Selected item: {{ dropdown.selectedItem?.title }}</em></p>`,
+<p class="selection">Selected item: {{ dropdown.value | json }}</p>`,
   styles: [
     `.selection {
     margin-left: 12px;
     font-size: 12px;
+    font-style: italic;
   }`,
   ],
 };
