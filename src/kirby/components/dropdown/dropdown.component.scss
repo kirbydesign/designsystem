@@ -29,7 +29,7 @@ kirby-card {
   margin-top: size('xxxs');
   overflow-y: auto;
   box-shadow: get-elevation(8);
-  z-index: 1;
+  z-index: z('dropdown');
 }
 
 :host(.is-opening) {
