@@ -72,7 +72,7 @@ describe('DropdownComponent', () => {
     expect(spectator.element.attributes['disabled']).toBeUndefined();
   });
 
-  it('should render button as enabled ', () => {
+  it('should not render button as disabled ', () => {
     const button = spectator.query<HTMLButtonElement>('button');
     expect(button.disabled).toBeFalsy();
   });
@@ -726,7 +726,7 @@ describe('DropdownComponent', () => {
     describe('on keypress', () => {
       const selectedIndex = 2;
       const expectedItem = items[selectedIndex];
-      let onChangeSpy: any;
+      let onChangeSpy: jasmine.Spy;
       const keys = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'];
 
       beforeEach(() => {
@@ -754,6 +754,49 @@ describe('DropdownComponent', () => {
           expect(spectator.component.value).toEqual(expectedItem);
           expect(onChangeSpy).not.toHaveBeenCalled();
         });
+      });
+    });
+  });
+
+  describe('implementing ControlValueAccessor interface', () => {
+    it('should select item when writeValue() function is invoked', () => {
+      const selectedIndex = 2;
+      const expectedItem = items[selectedIndex];
+      const onChangeSpy = spyOn(spectator.component.change, 'emit');
+      spectator.component.writeValue(expectedItem);
+      expect(spectator.component.selectedIndex).toEqual(selectedIndex);
+      expect(spectator.component.value).toEqual(expectedItem);
+      expect(onChangeSpy).toHaveBeenCalledWith(expectedItem);
+    });
+
+    it('should invoke callback from registerOnChange() function on change', () => {
+      const selectedIndex = 2;
+      const expectedItem = items[selectedIndex];
+      const onChangeSpy = jasmine.createSpy('_onChange');
+      spectator.component.registerOnChange(onChangeSpy);
+      spectator.setInput('selectedIndex', selectedIndex);
+      expect(onChangeSpy).toHaveBeenCalledWith(expectedItem);
+    });
+
+    it('should invoke callback from registerOnTouched() function on blur', () => {
+      const onTouchedSpy = jasmine.createSpy('_onTouched');
+      spectator.component.registerOnTouched(onTouchedSpy);
+      spectator.blur();
+      spectator.detectChanges();
+      expect(onTouchedSpy).toHaveBeenCalled();
+    });
+
+    describe('when setDisabledState() function is invoked', () => {
+      it('should set disabled = false when invoked with false', () => {
+        spectator.component.disabled = true;
+        spectator.component.setDisabledState(false);
+        expect(spectator.component.disabled).toBeFalsy();
+      });
+
+      it('should set disabled = true when invoked with true', () => {
+        spectator.component.disabled = false;
+        spectator.component.setDisabledState(true);
+        expect(spectator.component.disabled).toBeTruthy();
       });
     });
   });
