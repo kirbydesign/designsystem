@@ -88,7 +88,7 @@ describe('DropdownComponent', () => {
     expect(spectator.element).toBeFocused();
   });
 
-  it('should recieve focus on button click', () => {
+  it('should receive focus on button click', () => {
     spectator.click('button');
     expect(spectator.element).toBeFocused();
   });
