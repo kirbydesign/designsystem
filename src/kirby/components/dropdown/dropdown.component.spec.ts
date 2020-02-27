@@ -112,6 +112,15 @@ describe('DropdownComponent', () => {
       expect(spectator.component.selectedText).toEqual(expectedText);
       expect(spectator.element).toHaveText(expectedText);
     });
+
+    it('should not emit change event', () => {
+      expect(spectator.component.selectedIndex).toEqual(-1);
+      const newSelectedIndex = 2;
+      const onChangeSpy = spyOn(spectator.component.change, 'emit');
+      spectator.setInput('selectedIndex', newSelectedIndex);
+      spectator.detectChanges();
+      expect(onChangeSpy).not.toHaveBeenCalled();
+    });
   });
 
   describe('when configured with selected index', () => {
@@ -152,6 +161,14 @@ describe('DropdownComponent', () => {
         spectator.detectChanges();
         expect(spectator.component.selectedText).toEqual(expectedText);
         expect(spectator.element).toHaveText(expectedText);
+      });
+
+      it('should not emit change event', () => {
+        const newSelectedIndex = 0;
+        const onChangeSpy = spyOn(spectator.component.change, 'emit');
+        spectator.setInput('selectedIndex', newSelectedIndex);
+        spectator.detectChanges();
+        expect(onChangeSpy).not.toHaveBeenCalled();
       });
     });
   });
@@ -759,14 +776,20 @@ describe('DropdownComponent', () => {
   });
 
   describe('implementing ControlValueAccessor interface', () => {
-    it('should select item when writeValue() function is invoked', () => {
-      const selectedIndex = 2;
-      const expectedItem = items[selectedIndex];
-      const onChangeSpy = spyOn(spectator.component.change, 'emit');
-      spectator.component.writeValue(expectedItem);
-      expect(spectator.component.selectedIndex).toEqual(selectedIndex);
-      expect(spectator.component.value).toEqual(expectedItem);
-      expect(onChangeSpy).toHaveBeenCalledWith(expectedItem);
+    describe('when writeValue() function is invoked', () => {
+      it('should select the item', () => {
+        const selectedIndex = 2;
+        const expectedItem = items[selectedIndex];
+        spectator.component.writeValue(expectedItem);
+        expect(spectator.component.selectedIndex).toEqual(selectedIndex);
+        expect(spectator.component.value).toEqual(expectedItem);
+      });
+
+      it('should not emit change event', () => {
+        const onChangeSpy = spyOn(spectator.component.change, 'emit');
+        spectator.component.writeValue(items[2]);
+        expect(onChangeSpy).not.toHaveBeenCalled();
+      });
     });
 
     it('should invoke callback from registerOnChange() function on change', () => {
@@ -774,7 +797,7 @@ describe('DropdownComponent', () => {
       const expectedItem = items[selectedIndex];
       const onChangeSpy = jasmine.createSpy('_onChange');
       spectator.component.registerOnChange(onChangeSpy);
-      spectator.setInput('selectedIndex', selectedIndex);
+      spectator.component.onItemSelect(selectedIndex);
       expect(onChangeSpy).toHaveBeenCalledWith(expectedItem);
     });
 
