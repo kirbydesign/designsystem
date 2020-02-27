@@ -37,12 +37,19 @@
     <kirby-dropdown-example-item-select #itemSelectExample></kirby-dropdown-example-item-select>
   </div>
 </kirby-example-viewer>
-<h2>Custom Item template</h2>
+<h2>Advanced</h2>
+<h3>Custom Item template</h3>
 <kirby-example-viewer [html]="customItemTemplateExample.template">
   <div>
     <kirby-dropdown-example-custom-item-template
       #customItemTemplateExample
     ></kirby-dropdown-example-custom-item-template>
+  </div>
+</kirby-example-viewer>
+<h3>Forms</h3>
+<kirby-example-viewer [html]="formsExample.template" [ts]="formsExample.codeSnippet">
+  <div>
+    <kirby-dropdown-example-ng-forms #formsExample></kirby-dropdown-example-ng-forms>
   </div>
 </kirby-example-viewer>
 <h2>Properties:</h2>
