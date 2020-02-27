@@ -2,8 +2,9 @@
   kirby-button
   [attentionLevel]="isOpen ? attentionLevelOpen : attentionLevel"
   tabindex="-1"
-  (click)="onToggle()"
+  (click)="onToggle($event)"
   (mousedown)="onButtonMouseEvent($event)"
+  [disabled]="disabled"
 >
   {{ selectedText || placeholder }}
   <kirby-icon [name]="isOpen ? 'arrow-up' : 'arrow-down'"></kirby-icon>

@@ -15,7 +15,9 @@ import {
   Output,
   EventEmitter,
   OnDestroy,
+  forwardRef,
 } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { ListItemTemplateDirective } from '../list/list.directive';
 import { ItemComponent } from '../item/item.component';
@@ -25,8 +27,15 @@ import { CardComponent } from '../card/card.component';
   selector: 'kirby-dropdown',
   templateUrl: './dropdown.component.html',
   styleUrls: ['./dropdown.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => DropdownComponent),
+      multi: true,
+    },
+  ],
 })
-export class DropdownComponent implements AfterContentChecked, OnDestroy {
+export class DropdownComponent implements AfterContentChecked, OnDestroy, ControlValueAccessor {
   @Input()
   items: string[] | any[] = [];
 
@@ -55,6 +64,26 @@ export class DropdownComponent implements AfterContentChecked, OnDestroy {
   @Input()
   expand?: 'block';
 
+  @Input()
+  disabled: boolean;
+
+  @HostBinding('attr.disabled')
+  private get _isDisabled() {
+    return this.disabled ? true : null;
+  }
+
+  @HostBinding('class.error')
+  @Input()
+  hasError: boolean;
+
+  @Input()
+  tabindex = 0;
+
+  @HostBinding('attr.tabindex')
+  private get _tabindex() {
+    return this.disabled ? -1 : this.tabindex;
+  }
+
   /**
    * Emitted when an item is selected (tap on mobile, click/keypress on web)
    */
@@ -75,7 +104,6 @@ export class DropdownComponent implements AfterContentChecked, OnDestroy {
   }
 
   @HostBinding('attr.role') private _role = 'listbox';
-  @HostBinding('attr.tabindex') private _tabIndex = '0';
   @HostBinding('class.is-opening')
   private _isOpening: boolean;
 
@@ -97,7 +125,8 @@ export class DropdownComponent implements AfterContentChecked, OnDestroy {
 
   constructor(private renderer: Renderer2, private elementRef: ElementRef<HTMLElement>) {}
 
-  onToggle() {
+  onToggle(event: Event) {
+    event.stopPropagation();
     if (!this.isOpen) {
       this.elementRef.nativeElement.focus();
     }
@@ -105,6 +134,9 @@ export class DropdownComponent implements AfterContentChecked, OnDestroy {
   }
 
   toggle() {
+    if (this.disabled) {
+      return;
+    }
     this.isOpen ? this.close() : this.open();
   }
 
@@ -125,6 +157,9 @@ export class DropdownComponent implements AfterContentChecked, OnDestroy {
   }
 
   open() {
+    if (this.disabled) {
+      return;
+    }
     if (!this.isOpen) {
       this._isOpening = true;
       setTimeout(() => {
@@ -135,9 +170,13 @@ export class DropdownComponent implements AfterContentChecked, OnDestroy {
   }
 
   close() {
+    if (this.disabled) {
+      return;
+    }
     if (this.isOpen) {
       this._isOpening = false;
       this.isOpen = false;
+      this._onTouched();
     }
   }
 
@@ -146,10 +185,60 @@ export class DropdownComponent implements AfterContentChecked, OnDestroy {
     this.close();
   }
 
+  private _onChange: (value: any) => void = () => {};
+  private _onTouched = () => {};
+
+  /**
+   * Sets the select's value. Part of the ControlValueAccessor interface
+   * required to integrate with Angular's core forms API.
+   *
+   * @param value New value to be written to the model.
+   */
+  writeValue(value: any): void {
+    this._selectItemByValue(value);
+  }
+
+  /**
+   * Saves a callback function to be invoked when the select's value
+   * changes from user input. Part of the ControlValueAccessor interface
+   * required to integrate with Angular's core forms API.
+   *
+   * @param fn Callback to be triggered when the value changes.
+   */
+  registerOnChange(fn: any): void {
+    this._onChange = fn;
+  }
+
+  /**
+   * Saves a callback function to be invoked when the select is blurred
+   * by the user. Part of the ControlValueAccessor interface required
+   * to integrate with Angular's core forms API.
+   *
+   * @param fn Callback to be triggered when the component has been touched.
+   */
+  registerOnTouched(fn: any): void {
+    this._onTouched = fn;
+  }
+
+  /**
+   * Disables the select. Part of the ControlValueAccessor interface required
+   * to integrate with Angular's core forms API.
+   *
+   * @param isDisabled Sets whether the component is disabled.
+   */
+  setDisabledState?(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+  }
+
   private selectItem(index: number) {
     this.selectedIndex = index;
     this.itemSelect.emit(this.value);
+    this._onChange(this.value);
     this.scrollItemIntoView(index);
+  }
+
+  private _selectItemByValue(value: string | any) {
+    this.selectItem(this.items.indexOf(value));
   }
 
   getTextFromItem(item: string | any) {
@@ -160,10 +249,11 @@ export class DropdownComponent implements AfterContentChecked, OnDestroy {
   }
 
   scrollItemIntoView(index: number) {
-    const kirbyItems = this.kirbyItemsSlotted.length
-      ? this.kirbyItemsSlotted
-      : this.kirbyItemsDefault;
-    if (kirbyItems.length) {
+    const kirbyItems =
+      this.kirbyItemsSlotted && this.kirbyItemsSlotted.length
+        ? this.kirbyItemsSlotted
+        : this.kirbyItemsDefault;
+    if (kirbyItems && kirbyItems.length) {
       const selectedKirbyItem = kirbyItems.toArray()[index];
       if (selectedKirbyItem && selectedKirbyItem.nativeElement) {
         const itemElement = selectedKirbyItem.nativeElement;
@@ -189,12 +279,32 @@ export class DropdownComponent implements AfterContentChecked, OnDestroy {
     }
   }
 
+  @HostListener('mousedown', ['$event'])
+  private _onMouseDown(event: MouseEvent) {
+    if (this.disabled) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+    }
+  }
+
+  @HostListener('focus', ['$event'])
+  private _onFocus(event: Event) {
+    if (this.disabled) {
+      this.elementRef.nativeElement.blur();
+    }
+  }
+
   @HostListener('keydown.enter')
   @HostListener('keydown.escape')
   @HostListener('blur')
   private _onBlur() {
+    if (this.disabled) {
+      return;
+    }
     if (this.isOpen) {
       this.close();
+    } else {
+      this._onTouched;
     }
   }
 
@@ -219,6 +329,9 @@ export class DropdownComponent implements AfterContentChecked, OnDestroy {
   @HostListener('keydown.arrowleft', ['$event'])
   @HostListener('keydown.arrowright', ['$event'])
   private _onArrowKeys(event: KeyboardEvent) {
+    if (this.disabled) {
+      return;
+    }
     if (this.isOpen && (event.key === 'ArrowLeft' || event.key === 'ArrowRight')) {
       // Mirror default HTML5 select behaviour - prevent left/right arrows when open:
       return;
@@ -247,6 +360,9 @@ export class DropdownComponent implements AfterContentChecked, OnDestroy {
   @HostListener('keydown.end', ['$event'])
   private _onHomeEndKeys(event: KeyboardEvent) {
     event.preventDefault();
+    if (this.disabled) {
+      return;
+    }
     let newIndex = -1;
     if (event.key === 'Home') {
       // Select first item:
