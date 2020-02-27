@@ -16,27 +16,33 @@ export class DropdownShowcaseComponent {
       inputValues: ['Array<string> | Array<any>'],
     },
     {
+      name: 'itemTextProperty',
+      description:
+        'The property to use for the text representation of items when configured with `Array<any>`.',
+      defaultValue: `'text'`,
+      inputValues: ['string'],
+    },
+    {
+      name: 'value',
+      description: 'The currently selected item (readonly).',
+      defaultValue: 'undefined',
+      inputValues: ['string | any'],
+    },
+    {
       name: 'selectedIndex',
       description: 'The index of the selected item within the `items` array.',
       defaultValue: 'undefined',
       inputValues: ['number'],
     },
     {
-      name: 'selectedItem',
-      description: 'The currently selected item (readonly).',
-      defaultValue: 'undefined',
-      inputValues: ['string | any'],
-    },
-    {
-      name: 'itemTextProperty',
-      description:
-        'The property to use for the text representation of items when configured with `Array<any>`.',
-      defaultValue: 'text',
-      inputValues: ['string'],
+      name: 'disabled',
+      description: 'Disables the dropdown so the the user cannot interact with it.',
+      defaultValue: 'false',
+      inputValues: ['true', 'false'],
     },
     {
       name: 'placeholder',
-      defaultValue: 'Please select:',
+      defaultValue: `'Please select:'`,
       description: 'Instructional text to show before the dropdown has a selected option.',
       inputValues: ['string'],
     },
@@ -78,7 +84,7 @@ export class DropdownShowcaseComponent {
 
   events: ShowcaseProperty[] = [
     {
-      name: 'itemSelect',
+      name: 'change',
       description: 'Emitted when an item is selected (tap on mobile, click/keypress on web)',
       inputValues: ['(item: string | any) => void'],
     },
