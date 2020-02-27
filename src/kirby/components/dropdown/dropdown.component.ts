@@ -87,7 +87,7 @@ export class DropdownComponent implements AfterContentChecked, OnDestroy, Contro
   /**
    * Emitted when an item is selected (tap on mobile, click/keypress on web)
    */
-  @Output() itemSelect: EventEmitter<string | any> = new EventEmitter<string | any>();
+  @Output() change: EventEmitter<string | any> = new EventEmitter<string | any>();
 
   private _value: string | any = null;
   get value(): string | any {
@@ -232,7 +232,7 @@ export class DropdownComponent implements AfterContentChecked, OnDestroy, Contro
 
   private selectItem(index: number) {
     this.selectedIndex = index;
-    this.itemSelect.emit(this.value);
+    this.change.emit(this.value);
     this._onChange(this.value);
     this.scrollItemIntoView(index);
   }

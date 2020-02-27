@@ -7,7 +7,7 @@ const config = {
   template: `<kirby-dropdown
   placeholder="Dropdown with event handler"
   [items]="items"
-  (itemSelect)="onItemSelect($event)"
+  (change)="onItemSelect($event)"
 ></kirby-dropdown>`,
 };
 

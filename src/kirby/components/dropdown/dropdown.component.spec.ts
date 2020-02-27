@@ -153,8 +153,8 @@ describe('DropdownComponent', () => {
         expect(spectator.element).toHaveText(expectedText);
       });
 
-      it('should emit itemSelect event with new selected item', () => {
-        const onChangeSpy = spyOn(spectator.component.itemSelect, 'emit');
+      it('should emit change event with new selected item', () => {
+        const onChangeSpy = spyOn(spectator.component.change, 'emit');
         spectator.component.onItemSelect(newSelectedIndex);
         expect(onChangeSpy).toHaveBeenCalledTimes(1);
         expect(onChangeSpy).toHaveBeenCalledWith(expectedItem);
@@ -187,8 +187,8 @@ describe('DropdownComponent', () => {
         expect(spectator.element).toHaveText(expectedText);
       });
 
-      it('should emit itemSelect event with new selected item', () => {
-        const onChangeSpy = spyOn(spectator.component.itemSelect, 'emit');
+      it('should emit change event with new selected item', () => {
+        const onChangeSpy = spyOn(spectator.component.change, 'emit');
         spectator.component.onItemSelect(newSelectedIndex);
         expect(onChangeSpy).toHaveBeenCalledTimes(1);
         expect(onChangeSpy).toHaveBeenCalledWith(expectedItem);
