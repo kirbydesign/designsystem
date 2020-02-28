@@ -9,7 +9,7 @@
     --kirby-#{$color}: #{$color-name};
   }
   @each $color, $color-name in $text-colors {
-    --kirby-text-#{$color}: #{$color-name};
+    --kirby-text-color-#{$color}: #{$color-name};
   }
   --kirby-page-max-width: 1366px;
   --kirby-statusbar-padding: var(--ion-statusbar-padding);
