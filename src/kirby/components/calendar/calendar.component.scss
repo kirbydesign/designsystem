@@ -79,24 +79,19 @@ td {
   cursor: pointer;
 }
 
-.day.past,
-.day.weekend {
-  color: get-color('medium-shade');
-}
-
 .day.disabled,
 .day:not(.selectable) {
-  color: get-color('light-shade');
+  color: get-text-color('semi-dark');
 }
 
 .day.today {
   color: get-color('medium-contrast');
-  background-color: get-color('medium-shade');
+  background-color: get-color('medium');
 }
 
 .day.selected {
-  color: get-color('black');
-  background-color: get-color('primary');
+  color: get-color('black-contrast');
+  background-color: get-color('black');
   pointer-events: none;
 }
 

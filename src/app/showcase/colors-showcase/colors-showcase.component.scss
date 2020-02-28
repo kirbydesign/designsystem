@@ -17,6 +17,13 @@
   border: 1px solid get-color('medium');
 }
 
+.text-color-box {
+  @extend .color-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
 .color-samples {
   position: relative;
   height: size('xxxl');
@@ -25,6 +32,12 @@
   margin-right: size('xl');
   margin-bottom: size('xl');
   flex: 1 0 auto;
+}
+
+.text-color-samples {
+  @extend .color-samples;
+  margin-right: size('s');
+  margin-bottom: 0;
 }
 
 .color-sample {
@@ -121,6 +134,19 @@
       transform: translateY(-2px);
       box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
     }
+  }
+}
+
+.text-color-palette {
+  @extend .color-palette;
+
+  li {
+    cursor: inherit;
+  }
+
+  li:hover {
+    transform: inherit;
+    box-shadow: inherit;
   }
 }
 
