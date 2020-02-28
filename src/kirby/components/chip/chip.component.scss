@@ -14,23 +14,23 @@ $chip-height: 30px;
   margin-right: 5px;
   cursor: pointer;
   background-color: get-color('white');
-  color: get-text-color('black');
+  color: get-color('white-contrast');
   user-select: none;
 
   &:hover,
   &.is-selected {
     background-color: get-color('black');
-    color: get-text-color('white');
+    color: get-color('black-contrast');
   }
 
   :host-context(.default),
   :host-context(.kirby-color-brightness-white) {
     background-color: get-color('white');
-    color: get-text-color('black');
+    color: get-color('white-contrast');
     &:hover,
     &.is-selected {
       background-color: get-color('black');
-      color: get-text-color('white');
+      color: get-color('black-contrast');
     }
   }
 
@@ -41,7 +41,7 @@ $chip-height: 30px;
     &:hover,
     &.is-selected {
       background-color: get-color('white');
-      color: get-text-color('black');
+      color: get-color('white-contrast');
     }
   }
 }
