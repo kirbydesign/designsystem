@@ -46,7 +46,7 @@
 
 @function get-text-color($variant) {
   $value: _get-map-prop($text-colors, $variant);
-  @return unquote('var(--kirby-text-' + $variant + ')');
+  @return unquote('var(--kirby-text-color-' + $variant + ')');
 }
 
 @function get-elevation($value) {
