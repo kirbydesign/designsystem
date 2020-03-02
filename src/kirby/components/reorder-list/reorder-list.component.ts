@@ -5,12 +5,11 @@ import {
   Input,
   ContentChild,
   TemplateRef,
-  AfterViewInit,
   OnDestroy,
-  ViewChild,
   ElementRef,
   ViewChildren,
   QueryList,
+  OnChanges,
 } from '@angular/core';
 
 import { ListItemTemplateDirective } from '../list/list.directive';
@@ -20,7 +19,7 @@ import { ListItemTemplateDirective } from '../list/list.directive';
   templateUrl: './reorder-list.component.html',
   styleUrls: ['./reorder-list.component.scss'],
 })
-export class ReorderListComponent implements AfterViewInit, OnDestroy {
+export class ReorderListComponent implements OnChanges, OnDestroy {
   @Input() items: any[];
   @Input() subItemsName: string;
 
@@ -34,8 +33,12 @@ export class ReorderListComponent implements AfterViewInit, OnDestroy {
   private observer: MutationObserver;
   reorderActive: boolean = false;
 
-  ngAfterViewInit() {
-    this.setupDomListener();
+  ngOnChanges(): void {
+    if (this.items.length > 0) {
+      setTimeout(() => {
+        this.setupDomListener();
+      });
+    }
   }
 
   private setupDomListener() {

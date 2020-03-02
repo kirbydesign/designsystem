@@ -3,6 +3,10 @@
 ion-backdrop {
   opacity: 0.3;
   z-index: 101;
+  position: fixed;
+}
+.section-header {
+  padding: 0 size('s') size('xxs') size('s');
 }
 
 .reorder-selected {
@@ -24,6 +28,8 @@ ion-backdrop {
     -ms-transform: scale(1.05, 1.05); /* IE 9 */
     -webkit-transform: scale(1.05, 1.05); /* Safari */
     transform: scale(1.05, 1.05);
+    border-radius: $border-radius;
+    overflow: hidden;
   }
 }
 
@@ -34,6 +40,9 @@ ion-backdrop {
   }
   & > .reorder-selected {
     z-index: 104;
+  }
+  & div:first-child {
+    border-top: none;
   }
 }
 
@@ -46,7 +55,7 @@ kirby-card {
     width: map-get($breakpoints, medium);
   }
 
-  @include slotted('div kirby-item:last-child, div kirby-item:first-child') {
+  @include slotted('div:last-child kirby-item, div:first-child kirby-item') {
     border-radius: $border-radius;
     overflow: hidden;
   }
