@@ -4,9 +4,12 @@ $item-height: 56px;
 $dropdown-max-height: 5 * $item-height;
 
 :host {
+  --kirby_internal_margin-horizontal-total: calc(2 * #{size('s')});
+
   display: inline-block;
   position: relative;
   border: 1px solid transparent;
+  max-width: calc(100vw - var(--kirby_internal_margin-horizontal-total));
 
   &.expand {
     display: block;
@@ -23,6 +26,11 @@ $dropdown-max-height: 5 * $item-height;
   outline: none;
   width: 100%;
   transition: box-shadow 0.2s, border-color 0.2s;
+
+  .text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 
 kirby-card {

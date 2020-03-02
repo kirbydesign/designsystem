@@ -6,7 +6,7 @@
   (mousedown)="onButtonMouseEvent($event)"
   [disabled]="disabled"
 >
-  {{ selectedText || placeholder }}
+  <span class="text">{{ selectedText || placeholder }}</span>
   <kirby-icon [name]="isOpen ? 'arrow-up' : 'arrow-down'"></kirby-icon>
 </button>
 <kirby-card>
