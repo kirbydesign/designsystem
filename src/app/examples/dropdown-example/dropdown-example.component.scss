@@ -4,7 +4,11 @@
   display: block;
   height: 100%;
   background: get-color('background-color');
-  padding: size('m');
+  padding: size('s');
+
+  @include media('>=medium') {
+    padding: size('l');
+  }
 
   h3 {
     font-size: font-size('xs');
