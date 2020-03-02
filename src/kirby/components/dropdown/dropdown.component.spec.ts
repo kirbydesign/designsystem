@@ -82,13 +82,13 @@ describe('DropdownComponent', () => {
     expect(button.attributes['disabled']).toBeUndefined();
   });
 
-  it('should recieve focus', () => {
+  it('should receive focus', () => {
     spectator.element.focus();
     spectator.detectChanges();
     expect(spectator.element).toBeFocused();
   });
 
-  it('should recieve focus on button click', () => {
+  it('should receive focus on button click', () => {
     spectator.click('button');
     expect(spectator.element).toBeFocused();
   });
