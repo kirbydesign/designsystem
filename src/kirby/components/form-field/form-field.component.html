@@ -5,6 +5,7 @@
 <ng-container *ngIf="!label">
   <ng-container *ngTemplateOutlet="slottedInput"></ng-container>
 </ng-container>
+<ng-content select="kirby-dropdown"></ng-content>
 <div *ngIf="message || counter" class="texts">
   <kirby-form-field-message
     *ngIf="message"

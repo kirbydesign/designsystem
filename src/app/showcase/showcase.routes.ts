@@ -34,6 +34,7 @@ import { PageShowcaseComponent } from './page-showcase/page-showcase.component';
 import { TabsShowcaseComponent } from './tabs-showcase/tabs-showcase.component';
 import { ItemShowcaseComponent } from '../showcase/item-showcase/item-showcase.component';
 import { DividerShowcaseComponent } from './divider-showcase/divider-showcase.component';
+import { DropdownShowcaseComponent } from '~/app/showcase/dropdown-showcase/dropdown-showcase.component';
 
 export const routes: Routes = [
   {
@@ -176,6 +177,10 @@ export const routes: Routes = [
       {
         path: 'form-field',
         component: FormFieldShowcaseComponent,
+      },
+      {
+        path: 'dropdown',
+        component: DropdownShowcaseComponent,
       },
     ],
   },

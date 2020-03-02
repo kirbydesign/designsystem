@@ -1,0 +1,77 @@
+@import '../../scss/utils';
+
+$item-height: 56px;
+$dropdown-max-height: 5 * $item-height;
+
+:host {
+  --kirby_internal_min-screen-width: 320px;
+  @include media('>=small') {
+    --kirby_internal_min-screen-width: 375px;
+  }
+  --kirby_internal_margin-horizontal-total: calc(2 * #{size('s')});
+
+  display: inline-block;
+  position: relative;
+  border: 1px solid transparent;
+  max-width: calc(100vw - var(--kirby_internal_margin-horizontal-total));
+
+  &.expand {
+    display: block;
+  }
+
+  &:not(.expand) {
+    kirby-card {
+      max-width: calc(100vw - var(--kirby_internal_margin-horizontal-total));
+    }
+  }
+
+  &.error,
+  &.ng-touched.ng-invalid {
+    border-color: get-color('danger');
+  }
+}
+
+:host > button {
+  margin: 0;
+  outline: none;
+  width: 100%;
+  transition: box-shadow 0.2s, border-color 0.2s;
+
+  .text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+kirby-card {
+  display: none;
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+  min-width: calc(
+    var(--kirby_internal_min-screen-width) - var(--kirby_internal_margin-horizontal-total)
+  );
+  max-height: $dropdown-max-height;
+  margin-top: size('xxxs');
+  overflow-y: auto;
+  box-shadow: get-elevation(8);
+  z-index: z('dropdown');
+}
+
+:host(.is-opening) {
+  kirby-card {
+    display: block;
+  }
+}
+
+:host(.is-open) {
+  & > button {
+    box-shadow: get-elevation(8);
+    border: 1px solid transparent;
+  }
+
+  kirby-card {
+    display: block;
+    opacity: 1;
+  }
+}
