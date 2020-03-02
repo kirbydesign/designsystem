@@ -4,6 +4,10 @@ $item-height: 56px;
 $dropdown-max-height: 5 * $item-height;
 
 :host {
+  --kirby_internal_min-screen-width: 320px;
+  @include media('>=small') {
+    --kirby_internal_min-screen-width: 375px;
+  }
   --kirby_internal_margin-horizontal-total: calc(2 * #{size('s')});
 
   display: inline-block;
@@ -13,6 +17,12 @@ $dropdown-max-height: 5 * $item-height;
 
   &.expand {
     display: block;
+  }
+
+  &:not(.expand) {
+    kirby-card {
+      max-width: calc(100vw - var(--kirby_internal_margin-horizontal-total));
+    }
   }
 
   &.error,
@@ -38,7 +48,9 @@ kirby-card {
   opacity: 0;
   position: absolute;
   width: 100%;
-  min-width: 343px;
+  min-width: calc(
+    var(--kirby_internal_min-screen-width) - var(--kirby_internal_margin-horizontal-total)
+  );
   max-height: $dropdown-max-height;
   margin-top: size('xxxs');
   overflow-y: auto;
