@@ -88,6 +88,7 @@
     "@types/jasminewd2": "2.0.3",
     "@types/node": "8.9.4",
     "@types/webpack": "^4.41.6",
+    "chokidar": "^3.3.1",
     "codelyzer": "^5.0.1",
     "coveralls": "3.0.2",
     "cypress": "^3.8.2",
