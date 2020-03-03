@@ -68,7 +68,7 @@ $page-side-nav-width: 16.625rem;
 
   &__item {
     text-decoration: none;
-    color: get-color('black');
+    color: get-text-color('black');
     font-weight: 200;
     padding: 0.75rem 0 0.75rem 0.75rem;
     margin-left: -1rem;

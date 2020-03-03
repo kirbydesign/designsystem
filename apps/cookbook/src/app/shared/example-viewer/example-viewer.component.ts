@@ -7,5 +7,6 @@ import { Component, Input } from '@angular/core';
 })
 export class ExampleViewerComponent {
   @Input() html: string;
+  @Input() ts: string;
   @Input() expanded: boolean;
 }

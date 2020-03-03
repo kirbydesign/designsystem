@@ -2,7 +2,7 @@
 
 a {
   display: block;
-  color: get-color('black');
+  color: get-text-color('black');
   text-decoration: none;
 
   &:hover {
@@ -11,5 +11,5 @@ a {
 }
 
 .note {
-  color: get-color('danger');
+  color: get-text-color('danger');
 }

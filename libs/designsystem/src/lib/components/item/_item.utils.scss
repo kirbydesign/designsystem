@@ -4,7 +4,7 @@
   @include slotted(h1, h2, h3, h4, h5, h6, p, data) {
     font-size: font-size('n');
     line-height: line-height('n');
-    color: get-color('black');
+    color: get-text-color('black');
     display: block;
     margin: 0;
     white-space: nowrap;
@@ -31,6 +31,6 @@
   }
 
   @include slotted('[detail]') {
-    color: get-color('semi-dark');
+    color: get-text-color('semi-dark');
   }
 }

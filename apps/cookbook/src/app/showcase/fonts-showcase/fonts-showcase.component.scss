@@ -2,7 +2,7 @@
 
 code {
   background-color: get-color('medium');
-  color: get-color('black');
+  color: get-color('medium-contrast');
   padding: 0.2rem 0.5rem;
   border-radius: 2px;
   white-space: nowrap;
@@ -25,7 +25,6 @@ code {
   }
 
   code.highlight {
-    color: get-color('black');
     font-weight: font-weight('bold');
   }
 }
@@ -88,7 +87,7 @@ code {
 }
 
 [class^='sample-']::after {
-  color: get-color('danger');
+  color: get-text-color('danger');
   font-size: font-size('xs');
   margin-left: size('m');
 }

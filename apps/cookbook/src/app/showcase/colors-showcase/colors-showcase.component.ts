@@ -15,11 +15,13 @@ export class ColorsShowcaseComponent {
   brandColors = [];
   systemColors = [];
   notificationColors = [];
+  textColors = [];
 
   constructor() {
     this.brandColors = this.getColors('$brand_colors');
     this.systemColors = this.getColors('$system_colors');
     this.notificationColors = this.getColors('$notification_colors');
+    this.textColors = this.getColors('$text_colors');
   }
 
   onColorClick(sassColor: SassColor) {
