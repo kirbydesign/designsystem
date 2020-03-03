@@ -6,7 +6,12 @@ ion-backdrop {
   position: fixed;
 }
 .section-header {
-  padding: 0 size('s') size('xxs') size('s');
+  padding: 0 size('xxs') size('xxs') size('xxs');
+  display: flex;
+  justify-content: flex-end;
+  span {
+    padding-left: size('s');
+  }
 }
 
 .reorder-selected {
@@ -48,11 +53,11 @@ ion-backdrop {
 
 kirby-card {
   margin-bottom: 20px;
-  width: map-get($breakpoints, small);
+  // width: map-get($breakpoints, small);
   overflow: inherit;
 
   @include media('>=large') {
-    width: map-get($breakpoints, medium);
+    // width: map-get($breakpoints, medium);
   }
 
   @include slotted('div:last-child kirby-item, div:first-child kirby-item') {

@@ -50,8 +50,6 @@ export class ReorderListExampleComponent {
     },
   ];
 
-  items2: any[] = [...this.items.filter((item) => item.shadowAccounts != null)];
-
   constructor() {}
 
   doReorderItem(ev: any) {
