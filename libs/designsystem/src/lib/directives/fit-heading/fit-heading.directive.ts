@@ -3,7 +3,10 @@ import { Directive, ElementRef, Input, OnDestroy, OnInit, Renderer2 } from '@ang
 import { ResizeObserverService } from '../../components/shared/resize-observer/resize-observer.service';
 import { ResizeObserverEntry } from '../../components/shared/resize-observer/types/resize-observer-entry';
 
-import { data as scssVariables } from '../../scss/base/_variables.styling';
+import { DesignTokenHelper } from '../../helpers/design-token-helper';
+
+const fontSize = DesignTokenHelper.fontSize;
+const lineHeight = DesignTokenHelper.lineHeight;
 
 interface HeadingSize {
   name: string;
@@ -30,18 +33,18 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
   private headingSizes: HeadingSize[] = [
     {
       name: 'h1',
-      fontSize: this.getFontSize('xl'),
-      lineHeight: this.getLineHeight('xl'),
+      fontSize: fontSize('xl'),
+      lineHeight: lineHeight('xl'),
     },
     {
       name: 'h2',
-      fontSize: this.getFontSize('l'),
-      lineHeight: this.getLineHeight('l'),
+      fontSize: fontSize('l'),
+      lineHeight: lineHeight('l'),
     },
     {
       name: 'h3',
-      fontSize: this.getFontSize('m'),
-      lineHeight: this.getLineHeight('m'),
+      fontSize: fontSize('m'),
+      lineHeight: lineHeight('m'),
     },
   ];
 
@@ -65,31 +68,6 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
         this.renderer.removeChild(this.elementRef.nativeElement, this.hostElementClone);
       }
     }
-  }
-
-  private getFontSize(size): string {
-    const fontSize = this.getScssValue(['$font-sizes', 'value', size]);
-    if (fontSize) {
-      return `${fontSize.value}${fontSize.unit}`;
-    }
-  }
-
-  private getLineHeight(size): string {
-    const lineHeight = this.getScssValue(['$line-height', 'value', size]);
-    if (lineHeight) {
-      return `${lineHeight.value}${lineHeight.unit}`;
-    }
-  }
-
-  private getScssValue(path: string[]): any {
-    let node = scssVariables;
-    for (let step of path) {
-      node = node[step];
-      if (!node) {
-        break;
-      }
-    }
-    return node;
   }
 
   private observeResize(): void {
