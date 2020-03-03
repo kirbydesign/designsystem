@@ -26,7 +26,7 @@ function compactObject(objectValue) {
   Object.keys(objectValue).forEach((key) => {
     const compactKey = sassKeyToCamelCase(key);
     const entry = objectValue[key];
-    compactedObject[compactKey] = compactValue(entry.value, entry.unit);
+    compactedObject[compactKey] = compactValue(entry.value, entry.unit, entry.type);
   });
 
   return compactedObject;
@@ -40,8 +40,11 @@ function sassKeyToCamelCase(key: string) {
     .join('');
 }
 
-function compactValue(value, unit?) {
+function compactValue(value, unit?, type?) {
   if (isPrimitive(value)) {
+    if (type === 'SassString') {
+      return value;
+    }
     return unit
       ? {
           value,
