@@ -38,6 +38,9 @@ $badge-diameter: 16px;
   justify-content: center;
   align-items: center;
 
+  //default to icon size 'sm'
+  --kirby-icon-font-size: #{icon-font-size('sm')};
+
   &.shadow {
     box-shadow: 0px 2px 4px 2px rgba(113, 113, 113, 0.4);
   }
@@ -58,16 +61,6 @@ $badge-diameter: 16px;
     max-width: 100%;
     height: 100%;
     width: 100%;
-  }
-
-  ::ng-deep kirby-icon {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    //default to icon size 'sm'
-    --kirby-icon-font-size: #{icon-font-size('sm')};
   }
 }
 
