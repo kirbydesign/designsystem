@@ -68,7 +68,7 @@ export class DropdownComponent implements AfterContentChecked, OnDestroy, Contro
   disabled = false;
 
   @HostBinding('attr.disabled')
-  private get _isDisabled() {
+  get _isDisabled() {
     return this.disabled ? 'disabled' : null;
   }
 
@@ -80,7 +80,7 @@ export class DropdownComponent implements AfterContentChecked, OnDestroy, Contro
   tabindex = 0;
 
   @HostBinding('attr.tabindex')
-  private get _tabindex() {
+  get _tabindex() {
     return this.disabled ? -1 : this.tabindex;
   }
 
@@ -99,13 +99,15 @@ export class DropdownComponent implements AfterContentChecked, OnDestroy, Contro
   }
 
   @HostBinding('class.expand')
-  private get _isBlockLevel() {
+  get _isBlockLevel() {
     return this.expand === 'block';
   }
 
-  @HostBinding('attr.role') private _role = 'listbox';
+  @HostBinding('attr.role')
+  _role = 'listbox';
+
   @HostBinding('class.is-opening')
-  private _isOpening: boolean;
+  _isOpening: boolean;
 
   @HostBinding('class.is-open')
   isOpen = false;
@@ -273,7 +275,7 @@ export class DropdownComponent implements AfterContentChecked, OnDestroy, Contro
   }
 
   @HostListener('keydown.tab', ['$event'])
-  private _onTab(event: KeyboardEvent) {
+  _onTab(event: KeyboardEvent) {
     if (this.isOpen) {
       event.preventDefault();
       this.close();
@@ -281,7 +283,7 @@ export class DropdownComponent implements AfterContentChecked, OnDestroy, Contro
   }
 
   @HostListener('mousedown', ['$event'])
-  private _onMouseDown(event: MouseEvent) {
+  _onMouseDown(event: MouseEvent) {
     if (this.disabled) {
       event.preventDefault();
       event.stopImmediatePropagation();
@@ -289,7 +291,7 @@ export class DropdownComponent implements AfterContentChecked, OnDestroy, Contro
   }
 
   @HostListener('focus', ['$event'])
-  private _onFocus(event: Event) {
+  _onFocus(event: Event) {
     if (this.disabled) {
       this.elementRef.nativeElement.blur();
     }
@@ -298,7 +300,7 @@ export class DropdownComponent implements AfterContentChecked, OnDestroy, Contro
   @HostListener('keydown.enter')
   @HostListener('keydown.escape')
   @HostListener('blur')
-  private _onBlur() {
+  _onBlur() {
     if (this.disabled) {
       return;
     }
@@ -309,7 +311,7 @@ export class DropdownComponent implements AfterContentChecked, OnDestroy, Contro
   }
 
   @HostListener('keydown.space', ['$event'])
-  private _onSpace(event: KeyboardEvent) {
+  _onSpace(event: KeyboardEvent) {
     event.preventDefault();
     event.stopPropagation();
     if (!this.isOpen) {
@@ -318,7 +320,7 @@ export class DropdownComponent implements AfterContentChecked, OnDestroy, Contro
   }
 
   @HostListener('keydown.enter', ['$event'])
-  private _onEnter(event: KeyboardEvent) {
+  _onEnter(event: KeyboardEvent) {
     event.preventDefault();
     event.stopPropagation();
     this.toggle();
@@ -328,7 +330,7 @@ export class DropdownComponent implements AfterContentChecked, OnDestroy, Contro
   @HostListener('keydown.arrowdown', ['$event'])
   @HostListener('keydown.arrowleft', ['$event'])
   @HostListener('keydown.arrowright', ['$event'])
-  private _onArrowKeys(event: KeyboardEvent) {
+  _onArrowKeys(event: KeyboardEvent) {
     if (this.disabled) {
       return;
     }
@@ -358,7 +360,7 @@ export class DropdownComponent implements AfterContentChecked, OnDestroy, Contro
 
   @HostListener('keydown.home', ['$event'])
   @HostListener('keydown.end', ['$event'])
-  private _onHomeEndKeys(event: KeyboardEvent) {
+  _onHomeEndKeys(event: KeyboardEvent) {
     event.preventDefault();
     if (this.disabled) {
       return;
