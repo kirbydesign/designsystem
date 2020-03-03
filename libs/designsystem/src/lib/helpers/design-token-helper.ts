@@ -1,7 +1,7 @@
 import { ThemeColor } from './theme-color.type';
 import { ColorHelper } from './color-helper';
 
-import { data as designTokens } from './design-token-helper.styling';
+import { styles } from './design-token-helper.styles';
 
 export class DesignTokenHelper {
   public static getColor(
@@ -19,31 +19,31 @@ export class DesignTokenHelper {
   }
 
   public static size(key: string): string {
-    return DesignTokenHelper.sizeValue(designTokens.$sizes[key]);
+    return DesignTokenHelper.sizeValue(styles.sizes[key]);
   }
 
   public static fontSize(key: string): string {
-    return DesignTokenHelper.sizeValue(designTokens.$font_sizes[key]);
+    return DesignTokenHelper.sizeValue(styles.fontSizes[key]);
   }
 
   public static fontWeight(key: string): string {
-    return designTokens.$font_weight[key] + '';
+    return styles.fontWeight[key].value + '';
   }
 
   public static lineHeight(key: string): string {
-    return DesignTokenHelper.sizeValue(designTokens.$line_height[key]);
+    return DesignTokenHelper.sizeValue(styles.lineHeight[key]);
   }
 
   public static borderRadius(): string {
-    return DesignTokenHelper.sizeValue(designTokens.$border_radius);
+    return DesignTokenHelper.sizeValue(styles.borderRadius);
   }
 
   public static borderRadiusRound(): string {
-    return DesignTokenHelper.sizeValue(designTokens.$border_radius_round);
+    return DesignTokenHelper.sizeValue(styles.borderRadiusRound);
   }
 
   private static sizeValue(entry: { value: number; unit: string }): string {
-    return entry.value + entry.unit;
+    return entry.value + (entry.unit || '');
   }
 }
 

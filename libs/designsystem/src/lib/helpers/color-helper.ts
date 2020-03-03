@@ -1,8 +1,8 @@
-import { data as colors } from './color-helper.styling';
+import { styles } from './color-helper.styles';
 
 export class ColorHelper {
   public static getMainColors() {
-    const mainColors = colors.$main_colors;
+    const mainColors = styles.mainColors;
     return Object.entries(mainColors).map(([name, value]) => ({ name, value }));
   }
 
@@ -103,8 +103,16 @@ export class ColorHelper {
   }
 
   private static getColor(name: string): string | RgbColor {
-    const found = colors.$kirby_colors[name.replace(/-/g, '_')];
+    const camelCaseKey = ColorHelper.kebabToCamelCase(name);
+    const found = styles.kirbyColors[camelCaseKey];
     return found || null;
+  }
+
+  private static kebabToCamelCase(key: string) {
+    return key
+      .split('-')
+      .map((part, index) => (index === 0 ? part : part[0].toUpperCase() + part.substr(1)))
+      .join('');
   }
 }
 
