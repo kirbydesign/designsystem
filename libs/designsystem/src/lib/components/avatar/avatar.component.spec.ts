@@ -1,8 +1,8 @@
 import { IonicModule } from '@ionic/angular';
 import { SpectatorHost, createHostFactory } from '@ngneat/spectator';
 
-import { TestHelper } from '@kirbydesign/designsystem/testing/test-helper';
-import { DesignTokenHelper } from '@kirbydesign/designsystem/helpers/design-token-helper';
+import { TestHelper } from '../../testing/test-helper';
+import { DesignTokenHelper } from '../../helpers/design-token-helper';
 
 import { IconComponent } from '../icon/icon.component';
 import { AvatarComponent } from './avatar.component';
