@@ -25,6 +25,12 @@ export class ReorderShowcaseComponent {
       defaultValue: '',
       inputValues: ['string'],
     },
+    {
+      name: 'headerTexts',
+      description: 'Array of strings to be displayed in the header',
+      defaultValue: '[ ]',
+      inputValues: ['Array<string>'],
+    },
   ];
 
   events: ShowcaseProperty[] = [

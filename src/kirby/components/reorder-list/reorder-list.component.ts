@@ -22,13 +22,12 @@ import { ListItemTemplateDirective } from '../list/list.directive';
 export class ReorderListComponent implements OnChanges, OnDestroy {
   @Input() items: any[];
   @Input() subItemsName: string;
+  @Input() headerTexts: string[];
 
   @Output() itemReorder = new EventEmitter<any>();
   @Output() subItemReorder = new EventEmitter<any>();
   @ContentChild(ListItemTemplateDirective, { static: true, read: TemplateRef })
   itemTemplate: TemplateRef<any>;
-  @ContentChild(ListItemTemplateDirective, { static: true, read: TemplateRef })
-  headerTemplate: TemplateRef<any>;
   @ViewChildren('reorderGroupContainer')
   reorderGroupContainer: QueryList<ElementRef>;
 

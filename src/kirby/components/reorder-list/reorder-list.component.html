@@ -1,7 +1,10 @@
 <ion-backdrop *ngIf="reorderActive" [tappable]="false" [visible]="true" [stopPropagation]="false">
 </ion-backdrop>
 <header class="section-header">
-  <ng-container *ngTemplateOutlet="defaultHeaderTemplate"></ng-container>
+  <span class="kirby-text-small-light" *ngFor="let headerText of headerTexts">{{
+    headerText
+  }}</span>
+  <span class="kirby-text-small-light">flyt</span>
 </header>
 <ion-reorder-group (ionItemReorder)="doReorder($event)" disabled="false">
   <div *ngFor="let reorderItem of items">
@@ -29,9 +32,4 @@
   <kirby-item [reorderable]="true">
     <h3>{{ getTextFromItem(item) }}</h3>
   </kirby-item>
-</ng-template>
-
-<ng-template #defaultHeaderTemplate>
-  <span class="kirby-text-small-light">skjul/vis</span>
-  <span class="kirby-text-small-light">flyt</span>
 </ng-template>
