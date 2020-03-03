@@ -100,7 +100,9 @@ export class SassToTypescriptEngine extends SassEngine {
   async _transformAndWrite(file: string, fileSystem: SassFileSystem) {
     const globalVariables = await this.extractGlobalVariables(file, fileSystem);
     if (globalVariables) {
-      const data = `export const data = ${this.asSource(globalVariables)};`;
+      const data = `/* tslint:disable */
+export const data = ${this.asSource(globalVariables)};
+/* tslint:enable */\n`;
       const inputFile = path.parse(file);
       const outputFile = `${path.join(inputFile.dir, inputFile.name)}.styling.ts`;
       await fileSystem.writeFile(outputFile, data);
