@@ -56,12 +56,15 @@
           "builder": "@angular-builders/custom-webpack:browser",
           "options": {
             "customWebpackConfig": {
-              "path": "./webpack.sass-to-json.config.ts",
-              "sassToJson": {
-                "format": "ts",
-                "sassFiles": [
-                  "/apps/cookbook/src/app/**/*.scss",
-                  "/libs/designsystem/src/lib/**/*.scss"
+              "path": "./webpack.sass-to-ts.config.ts",
+              "sassToTs": {
+                "watchGlob": [
+                  "libs/designsystem/src/lib/helpers/**/*.scss",
+                  "libs/designsystem/src/lib/scss/**/*.scss"
+                ],
+                "transform": [
+                  "libs/designsystem/src/lib/helpers/color-helper.scss",
+                  "libs/designsystem/src/lib/helpers/design-token-helper.scss"
                 ]
               }
             },
@@ -125,12 +128,15 @@
           "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
             "customWebpackConfig": {
-              "path": "./webpack.sass-to-json.config.ts",
-              "sassToJson": {
-                "format": "ts",
-                "sassFiles": [
-                  "/apps/cookbook/src/app/**/*.scss",
-                  "/libs/designsystem/src/lib/**/*.scss"
+              "path": "./webpack.sass-to-ts.config.ts",
+              "sassToTs": {
+                "watchGlob": [
+                  "libs/designsystem/src/lib/helpers/**/*.scss",
+                  "libs/designsystem/src/lib/scss/**/*.scss"
+                ],
+                "transform": [
+                  "libs/designsystem/src/lib/helpers/color-helper.scss",
+                  "libs/designsystem/src/lib/helpers/design-token-helper.scss"
                 ]
               }
             },

@@ -6,8 +6,7 @@
 /out-tsc
 /dist-lib
 /test-reports
-*.scss.json
-*.styling.ts
+*.styles.ts
 /apps/cookbook/src/polyfills
 
 # dependencies
@@ -55,3 +54,4 @@ scripts/install-ipa.html
 # tools (tslint, sass-to-json etc.)
 /tools/tslint-rules/dist
 /tools/sass-to-json/dist
+/tools/sass-to-ts/dist
