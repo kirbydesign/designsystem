@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 
 import { SassColor } from '@kirbydesign/designsystem';
 
-import { data as style } from './colors-showcase.component.styling';
+declare var require;
+const style = require('sass-extract-loader!./colors-showcase.component.scss');
 
 @Component({
   selector: 'cookbook-colors-showcase',
@@ -18,10 +19,10 @@ export class ColorsShowcaseComponent {
   textColors = [];
 
   constructor() {
-    this.brandColors = this.getColors('$brand_colors');
-    this.systemColors = this.getColors('$system_colors');
-    this.notificationColors = this.getColors('$notification_colors');
-    this.textColors = this.getColors('$text_colors');
+    this.brandColors = this.getColors('$brand-colors');
+    this.systemColors = this.getColors('$system-colors');
+    this.notificationColors = this.getColors('$notification-colors');
+    this.textColors = this.getColors('$text-colors');
   }
 
   onColorClick(sassColor: SassColor) {
@@ -30,26 +31,26 @@ export class ColorsShowcaseComponent {
   }
 
   private getColors(colorType: string) {
-    const mainColors = style[colorType];
-    const generatedColors = style.$kirby_colors;
-    return Object.entries(mainColors).map(([variableName, value]) => {
-      const scssName = variableName.replace(/_/g, '-');
-      return {
-        name: scssName,
-        value,
-        tint: {
-          name: `${scssName}-tint`,
-          hex: generatedColors[`${variableName}_tint`],
-        },
-        shade: {
-          name: `${scssName}-shade`,
-          hex: generatedColors[`${variableName}_shade`],
-        },
-        contrast: {
-          name: `${scssName}-contrast`,
-          hex: generatedColors[`${variableName}_contrast`],
-        },
+    const colors = [];
+    const mainColors = style.global[colorType].value;
+    const generatedColors = style.global['$kirby-colors'].value;
+    for (const [value, type] of Object.entries(mainColors)) {
+      const sassColor = <SassColor>type;
+      sassColor.name = value;
+      sassColor.tint = {
+        name: value + '-tint',
+        hex: generatedColors[sassColor.name + '-tint'].value,
       };
-    });
+      sassColor.shade = {
+        name: value + '-shade',
+        hex: generatedColors[sassColor.name + '-shade'].value,
+      };
+      sassColor.contrast = {
+        name: value + '-contrast',
+        hex: generatedColors[sassColor.name + '-contrast'].value,
+      };
+      colors.push(sassColor);
+    }
+    return colors;
   }
 }
