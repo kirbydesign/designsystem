@@ -26,6 +26,7 @@ export class ReorderListComponent implements OnChanges, OnDestroy {
 
   @Output() itemReorder = new EventEmitter<any>();
   @Output() subItemReorder = new EventEmitter<any>();
+
   @ContentChild(ListItemTemplateDirective, { static: true, read: TemplateRef })
   itemTemplate: TemplateRef<any>;
   @ViewChildren('reorderGroupContainer')
@@ -79,8 +80,8 @@ export class ReorderListComponent implements OnChanges, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.observer) {
-      this.observer.disconnect();
-    }
+    //clean up the observer
+    this.observer && this.observer.disconnect();
+    delete this.observer;
   }
 }

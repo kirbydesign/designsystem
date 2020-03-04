@@ -28,7 +28,7 @@
   </div>
 </ion-reorder-group>
 
-<ng-template #defaultItemTemplate let-item>
+<ng-template #defaultItemTemplate let-item let-isSubItem>
   <kirby-item [reorderable]="true">
     <h3>{{ getTextFromItem(item) }}</h3>
   </kirby-item>
