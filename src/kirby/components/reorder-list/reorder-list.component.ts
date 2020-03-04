@@ -23,6 +23,7 @@ export class ReorderListComponent implements OnChanges, OnDestroy {
   @Input() items: any[];
   @Input() subItemsName: string;
   @Input() headerTexts: string[];
+  @Input() getItemTextDefault?: (item: any) => string;
 
   @Output() itemReorder = new EventEmitter<any>();
   @Output() subItemReorder = new EventEmitter<any>();
@@ -75,9 +76,9 @@ export class ReorderListComponent implements OnChanges, OnDestroy {
     this.subItemReorder.emit(ev);
   }
 
-  getTextFromItem(item: string | any) {
-    return typeof item === 'string' ? item : item.title;
-  }
+  // getTextFromItem(item: string | any) {
+  //   return typeof item === 'string' ? item : item.title;
+  // }
 
   ngOnDestroy() {
     //clean up the observer

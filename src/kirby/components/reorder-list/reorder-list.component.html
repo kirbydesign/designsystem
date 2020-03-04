@@ -4,14 +4,14 @@
   <span class="kirby-text-small-light" *ngFor="let headerText of headerTexts">{{
     headerText
   }}</span>
-  <span class="kirby-text-small-light">flyt</span>
 </header>
 <ion-reorder-group (ionItemReorder)="doReorder($event)" disabled="false">
   <div *ngFor="let reorderItem of items">
     <kirby-card>
       <ng-container
         *ngTemplateOutlet="itemTemplate || defaultItemTemplate; context: { $implicit: reorderItem }"
-      ></ng-container>
+      >
+      </ng-container>
       <div *ngIf="reorderItem[subItemsName]" #reorderGroupContainer>
         <ion-reorder-group (ionItemReorder)="doSubReorder($event, reorderItem)" disabled="false">
           <div *ngFor="let subItem of reorderItem[subItemsName]">
@@ -30,6 +30,6 @@
 
 <ng-template #defaultItemTemplate let-item let-isSubItem>
   <kirby-item [reorderable]="true">
-    <h3>{{ getTextFromItem(item) }}</h3>
+    <h3>{{ getItemTextDefault(item) }}</h3>
   </kirby-item>
 </ng-template>
