@@ -4,17 +4,19 @@ import * as compactUnitPlugin from './sass-exctract-compact-unit.plugin';
 const fs = require('fs').promises;
 
 export class SassToTypescriptEngine {
-  constructor() {}
-
   async transform(...files: string[]) {
     return Promise.all(files.map((filename) => this._transformAndWrite(filename)));
+  }
+
+  getTargetFileName(filename: string) {
+    return filename.replace('.scss', '.styles.ts');
   }
 
   private async _transformAndWrite(filename) {
     const rendered = await sassExtract.render({ file: filename }, { plugins: [compactUnitPlugin] });
     const data = this._serialize(rendered.vars.global);
     const content = `export const styles = ${data};`;
-    const newFilename = filename.replace('.scss', '.styles.ts');
+    const newFilename = this.getTargetFileName(filename);
     return fs.writeFile(newFilename, content);
   }
 
