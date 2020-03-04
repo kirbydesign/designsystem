@@ -51,7 +51,6 @@ Thumbs.db
 scripts/manifest.plist
 scripts/install-ipa.html
 
-# tools (tslint, sass-to-json etc.)
+# tools (tslint, sass-to-ts etc.)
 /tools/tslint-rules/dist
-/tools/sass-to-json/dist
 /tools/sass-to-ts/dist

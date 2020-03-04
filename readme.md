@@ -121,7 +121,7 @@ A basic walkthrough is outlined in the structure below:
 |  └── designsystem         # - Actual implementation of library (designsystem)
 ├── scripts                 # Scripts for building artifacts
 └── tools                   # Contains various tools
-   ├── sass-to-json         # - CLI and Webpack plugin for extract global variables from SASS to JSON / TS
+   ├── sass-to-ts         # - CLI and Webpack plugin for extract global variables from SASS to TS
    ├── schematics           # - Angular schematics
    └── tslint-rules         # - Custom lintiong rules
 ```
