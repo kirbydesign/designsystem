@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
 
-import { SassColor } from '@kirbydesign/designsystem';
-
-declare var require;
-const style = require('sass-extract-loader!./colors-showcase.component.scss');
+import { ColorHelper, GroupedColors, RgbColor, SassColor } from '@kirbydesign/designsystem';
 
 @Component({
   selector: 'cookbook-colors-showcase',
@@ -13,16 +10,16 @@ const style = require('sass-extract-loader!./colors-showcase.component.scss');
 export class ColorsShowcaseComponent {
   selectedColor = 'primary';
   selectedOnColor = 'primary-contrast';
-  brandColors = [];
-  systemColors = [];
-  notificationColors = [];
-  textColors = [];
+  brandColors: SassColor[];
+  systemColors: SassColor[];
+  notificationColors: SassColor[];
+  textColors: SassColor[];
 
   constructor() {
-    this.brandColors = this.getColors('$brand-colors');
-    this.systemColors = this.getColors('$system-colors');
-    this.notificationColors = this.getColors('$notification-colors');
-    this.textColors = this.getColors('$text-colors');
+    this.brandColors = this.getColors(ColorHelper.getBrandColors());
+    this.systemColors = this.getColors(ColorHelper.getSystemColors());
+    this.notificationColors = this.getColors(ColorHelper.getNotificationColors());
+    this.textColors = this.getColors(ColorHelper.getTextColors());
   }
 
   onColorClick(sassColor: SassColor) {
@@ -30,26 +27,32 @@ export class ColorsShowcaseComponent {
     this.selectedOnColor = sassColor.name + '-contrast';
   }
 
-  private getColors(colorType: string) {
-    const colors = [];
-    const mainColors = style.global[colorType].value;
-    const generatedColors = style.global['$kirby-colors'].value;
-    for (const [value, type] of Object.entries(mainColors)) {
-      const sassColor = <SassColor>type;
-      sassColor.name = value;
-      sassColor.tint = {
-        name: value + '-tint',
-        hex: generatedColors[sassColor.name + '-tint'].value,
-      };
-      sassColor.shade = {
-        name: value + '-shade',
-        hex: generatedColors[sassColor.name + '-shade'].value,
-      };
-      sassColor.contrast = {
-        name: value + '-contrast',
-        hex: generatedColors[sassColor.name + '-contrast'].value,
-      };
-      colors.push(sassColor);
+  private getColors(groupedColors: GroupedColors): SassColor[] {
+    const colors: SassColor[] = [];
+    const generatedColors = ColorHelper.getGeneratedColors();
+
+    for (const [key, color] of Object.entries(groupedColors)) {
+      const kebabCaseKey = ColorHelper.camelToKebabCase(key);
+      const tint = generatedColors[`${key}Tint`];
+      const shade = generatedColors[`${key}Shade`];
+      const contrast = generatedColors[`${key}Contrast`];
+
+      colors.push({
+        name: kebabCaseKey,
+        hex: typeof color === 'string' ? color : color.hex,
+        tint: {
+          name: `${kebabCaseKey}-tint`,
+          hex: typeof tint === 'string' ? tint : tint.hex,
+        },
+        shade: {
+          name: `${kebabCaseKey}-shade`,
+          hex: typeof shade === 'string' ? shade : shade.hex,
+        },
+        contrast: {
+          name: `${kebabCaseKey}-contrast`,
+          hex: typeof contrast === 'string' ? contrast : contrast.hex,
+        },
+      });
     }
     return colors;
   }

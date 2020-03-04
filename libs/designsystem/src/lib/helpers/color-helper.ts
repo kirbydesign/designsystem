@@ -1,7 +1,9 @@
 import { styles } from './color-helper.styles';
 
+export type GroupedColors = { [key: string]: string | RgbColor };
+
 export class ColorHelper {
-  public static getMainColors() {
+  public static getMainColors(): Color[] {
     const mainColors = styles.mainColors;
     // Do not remove the `named` const, since it'll break the ngpackagr build, for more info see:
     // https://github.com/ng-packagr/ng-packagr/issues/696
@@ -9,16 +11,36 @@ export class ColorHelper {
     return named;
   }
 
+  public static getBrandColors(): Readonly<GroupedColors> {
+    return styles.brandColors;
+  }
+
+  public static getSystemColors(): Readonly<GroupedColors> {
+    return styles.systemColors;
+  }
+
+  public static getNotificationColors(): Readonly<GroupedColors> {
+    return styles.notificationColors;
+  }
+
+  public static getTextColors(): Readonly<GroupedColors> {
+    return styles.textColors;
+  }
+
+  public static getGeneratedColors(): Readonly<GroupedColors> {
+    return styles.kirbyColors;
+  }
+
   public static getBackgroundColorRgbString() {
-    return ColorHelper.getRgbString(ColorHelper.getColor('background-color'));
+    return ColorHelper.getRgbString(ColorHelper.getGeneratedColor('background-color'));
   }
 
   private static getThemeColor(name: string) {
-    return ColorHelper.getColor(name);
+    return ColorHelper.getGeneratedColor(name);
   }
 
   public static getColorBrightness(name: string) {
-    return ColorHelper.getColor(name + '-color-brightness');
+    return ColorHelper.getGeneratedColor(name + '-color-brightness');
   }
 
   public static getThemeColorRgbString(name: string) {
@@ -27,17 +49,6 @@ export class ColorHelper {
 
   public static getTransparentColorRgbString() {
     return 'rgba(0, 0, 0, 0)';
-  }
-
-  private static getRgbString(color: RgbColor | string) {
-    if (!color) {
-      return undefined;
-    }
-    if (typeof color === 'string') {
-      return ColorHelper.colorStringToRgbString(color);
-    } else {
-      return ColorHelper.rgbToRgbString(color);
-    }
   }
 
   public static colorStringToRgbString(color: string) {
@@ -59,14 +70,25 @@ export class ColorHelper {
     return ColorHelper.colorStringToRgbString(renderedColor);
   }
 
-  private static rgbToRgbString(color: RgbColor) {
+  private static getRgbString(color: RgbColor | string): string {
+    if (!color) {
+      return undefined;
+    }
+    if (typeof color === 'string') {
+      return ColorHelper.colorStringToRgbString(color);
+    } else {
+      return ColorHelper.rgbToRgbString(color);
+    }
+  }
+
+  private static rgbToRgbString(color: RgbColor): string {
     const hasAlpha = color.a != 1;
     return hasAlpha
       ? `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`
       : `rgb(${color.r}, ${color.g}, ${color.b})`;
   }
 
-  private static RGBToHex(rgb: string) {
+  private static RGBToHex(rgb: string): string {
     // Turn "rgb(r,g,b)" into [r,g,b]
     const rgbArray = rgb
       .substr(4)
@@ -84,7 +106,7 @@ export class ColorHelper {
     return '#' + r + g + b;
   }
 
-  private static hexToRGB(hex: string) {
+  private static hexToRGB(hex: string): string {
     let r = '0',
       g = '0',
       b = '0';
@@ -105,23 +127,37 @@ export class ColorHelper {
     return `rgb(${+r}, ${+g}, ${+b})`;
   }
 
-  private static getColor(name: string): string | RgbColor {
+  private static getGeneratedColor(name: string): string | RgbColor {
+    return ColorHelper.getColor(ColorHelper.getGeneratedColors(), name);
+  }
+
+  private static getColor(group: GroupedColors, name: string): string | RgbColor {
     const camelCaseKey = ColorHelper.kebabToCamelCase(name);
-    const found = styles.kirbyColors[camelCaseKey];
+    const found = group[camelCaseKey];
     return found || null;
   }
 
-  private static kebabToCamelCase(key: string) {
+  public static kebabToCamelCase(key: string) {
     // Do not remove the `keyInCamelCase` const, since it'll break the ngpackagr build, for more info see:
     // https://github.com/ng-packagr/ng-packagr/issues/696
     const keyInCamelCase = key
       .split('-')
-      // Use of function (instead of lambda) to allow ngpackagr to bundle ColorHelper!
-      .map(function(part, index) {
-        return index === 0 ? part : part[0].toUpperCase() + part.substr(1);
-      })
+      .map((part, index) => (index === 0 ? part : part[0].toUpperCase() + part.substr(1)))
       .join('');
     return keyInCamelCase;
+  }
+
+  public static camelToKebabCase(key: string) {
+    // Do not remove the `keyInKebabCase` const, since it'll break the ngpackagr build, for more info see:
+    // https://github.com/ng-packagr/ng-packagr/issues/696
+    let keyInKebabCase = key
+      .split('')
+      .map((char) => {
+        const isUppercase = char.toUpperCase() === char;
+        return isUppercase ? `-${char.toLowerCase()}` : char;
+      })
+      .join('');
+    return keyInKebabCase;
   }
 }
 

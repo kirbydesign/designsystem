@@ -9,9 +9,7 @@ export class ScssHelper {
 
 export interface SassColor {
   name: string;
-  value: {
-    hex: string;
-  };
+  hex: string;
   tint: {
     name: string;
     hex: string;
