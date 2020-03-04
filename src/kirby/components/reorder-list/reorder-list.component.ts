@@ -76,10 +76,6 @@ export class ReorderListComponent implements OnChanges, OnDestroy {
     this.subItemReorder.emit(ev);
   }
 
-  // getTextFromItem(item: string | any) {
-  //   return typeof item === 'string' ? item : item.title;
-  // }
-
   ngOnDestroy() {
     //clean up the observer
     this.observer && this.observer.disconnect();
