@@ -50,7 +50,7 @@ fdescribe('ReorderListComponent', () => {
   });
 
   describe('headerTexts', () => {
-    it('should show input headerTexts plus the mandatory ´move´ text', () => {
+    it('should show input headerTexts', () => {
       expect(spectator.queryAll('.section-header span').length).toBe(headerTexts.length);
     });
   });
@@ -68,17 +68,34 @@ fdescribe('ReorderListComponent', () => {
 
       expect(spectator.component.items).toBe(null);
     });
+  });
 
-    // it('should emit reorder event when reordering item', () => {
-    //   let firstReorder = spectator.query('ion-reorder ion-icon');
+  describe('event: itemReorder', () => {
+    it('should emit event', () => {
+      spyOn(spectator.component.itemReorder, 'emit');
 
-    //   spectator.dispatchMouseEvent(firstReorder, 'mousedown', 50,75);
+      let customEvent = new CustomEvent('itemReorder test', { detail: {} });
 
-    //   spectator.dispatchMouseEvent(firstReorder, 'mouseup');
-    //   spectator.detectChanges();
+      spectator.component.doReorder(customEvent);
 
-    //   expect(spectator.component.items).toBe(null);
-    // });
+      expect(spectator.component.itemReorder.emit).toHaveBeenCalledTimes(1);
+      expect(spectator.component.itemReorder.emit).toHaveBeenCalledWith(customEvent);
+    });
+  });
+
+  describe('event: subItemReorder', () => {
+    it('should emit event with parentItem', () => {
+      spyOn(spectator.component.subItemReorder, 'emit');
+
+      let customEvent = new CustomEvent('subItemReorder test', { detail: {} });
+
+      spectator.component.doSubReorder(customEvent, items[0]);
+
+      expect(spectator.component.subItemReorder.emit).toHaveBeenCalledTimes(1);
+      expect(spectator.component.subItemReorder.emit).toHaveBeenCalledWith(customEvent);
+      let arg: any = (spectator.component.subItemReorder.emit as any).calls.mostRecent().args[0];
+      expect(arg.detail.parentItem).toEqual(items[0]);
+    });
   });
 
   describe('subItems', () => {
