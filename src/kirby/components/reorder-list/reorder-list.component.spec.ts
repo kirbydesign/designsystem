@@ -7,7 +7,7 @@ import { ReorderListComponent } from './reorder-list.component';
 import { CardComponent } from '@kirbydesign/designsystem';
 import { ItemComponent } from './../item/item.component';
 
-fdescribe('ReorderListComponent', () => {
+describe('ReorderListComponent', () => {
   let spectator: Spectator<ReorderListComponent>;
   let component: ReorderListComponent;
   const items = [
