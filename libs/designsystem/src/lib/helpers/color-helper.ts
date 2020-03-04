@@ -3,7 +3,10 @@ import { styles } from './color-helper.styles';
 export class ColorHelper {
   public static getMainColors() {
     const mainColors = styles.mainColors;
-    return Object.entries(mainColors).map(([name, value]) => ({ name, value }));
+    // Do not remove the `named` const, since it'll break the ngpackagr build, for more info see:
+    // https://github.com/ng-packagr/ng-packagr/issues/696
+    const named = Object.entries(mainColors).map(([name, value]) => ({ name, value }));
+    return named;
   }
 
   public static getBackgroundColorRgbString() {
@@ -109,10 +112,16 @@ export class ColorHelper {
   }
 
   private static kebabToCamelCase(key: string) {
-    return key
+    // Do not remove the `keyInCamelCase` const, since it'll break the ngpackagr build, for more info see:
+    // https://github.com/ng-packagr/ng-packagr/issues/696
+    const keyInCamelCase = key
       .split('-')
-      .map((part, index) => (index === 0 ? part : part[0].toUpperCase() + part.substr(1)))
+      // Use of function (instead of lambda) to allow ngpackagr to bundle ColorHelper!
+      .map(function(part, index) {
+        return index === 0 ? part : part[0].toUpperCase() + part.substr(1);
+      })
       .join('');
+    return keyInCamelCase;
   }
 }
 
