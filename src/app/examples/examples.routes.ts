@@ -48,6 +48,7 @@ import { ListWithHeaderAndFooterExampleComponent } from './list/components/heade
 import { ListWithSectionsExampleComponent } from './list/components/sections';
 import { ListItemsExampleComponent } from './list/components/items';
 import { ReorderListExampleComponent } from './reorder/reorder-list-example.component';
+import { DropdownExampleComponent } from '~/app/examples/dropdown-example/dropdown-example.component';
 
 export const routes: Routes = [
   {
@@ -295,5 +296,9 @@ export const routes: Routes = [
   {
     path: 'fab-sheet',
     component: FabSheetExampleComponent,
+  },
+  {
+    path: 'dropdown',
+    component: DropdownExampleComponent,
   },
 ];

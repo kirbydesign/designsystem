@@ -10,6 +10,7 @@ import { ModalCompactExampleComponent } from './modal-example/compact-example/mo
 import { FormFieldExamplesModule } from './form-field-example/form-field-example.module';
 import { ListExamplesModule } from './list/list-example.module';
 import { ItemExampleModule } from './item-example/item-example.module';
+import { DropdownExampleModule } from './dropdown-example/dropdown-example.module';
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import { ItemExampleModule } from './item-example/item-example.module';
     FormFieldExamplesModule,
     ItemExampleModule,
     ListExamplesModule,
+    DropdownExampleModule,
   ],
   declarations: COMPONENT_DECLARATIONS,
   exports: [
@@ -25,6 +27,7 @@ import { ItemExampleModule } from './item-example/item-example.module';
     FormFieldExamplesModule,
     ItemExampleModule,
     ListExamplesModule,
+    DropdownExampleModule,
   ],
   providers: [PROVIDER_DECLARATIONS],
   entryComponents: [

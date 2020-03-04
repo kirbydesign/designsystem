@@ -1,3 +1,5 @@
+This PR closes # (reference issue number here)
+
 ## PR Checklist
 
 Please check if your PR fulfills the following requirements:

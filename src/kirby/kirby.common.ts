@@ -51,6 +51,7 @@ import { InputComponent } from './components/form-field/input/input.component';
 import { TextareaComponent } from './components/form-field/textarea/textarea.component';
 import { InputCounterComponent } from './components/form-field/input-counter/input-counter.component';
 import { DividerComponent } from './components/divider/divider.component';
+import { DropdownComponent } from './components/dropdown/dropdown.component';
 
 export const declarations = [
   CardComponent,
@@ -97,6 +98,7 @@ export const declarations = [
   FabSheetComponent,
   DividerComponent,
   ReorderListComponent,
+  DropdownComponent,
 ];
 
 export const providerDeclarations: any[] = [

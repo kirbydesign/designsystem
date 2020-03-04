@@ -417,10 +417,12 @@ export class ComponentStatusComponent implements OnInit, OnDestroy {
   private getGithubProjectStatus() {
     const todoColumnId = 4590936;
     const inProgressColumnId = 4590937;
+    const inReviewColumnId = 5890332;
     const doneColumnId = 4590938;
     return forkJoin(
       this.getGithubProjectCards(todoColumnId, ItemCodeStatus.planned),
       this.getGithubProjectCards(inProgressColumnId, ItemCodeStatus.inProgress),
+      this.getGithubProjectCards(inReviewColumnId, ItemCodeStatus.inProgress),
       this.getGithubProjectCards(doneColumnId, ItemCodeStatus.ready)
     ).pipe(
       map(([cards1, cards2, cards3]) => {

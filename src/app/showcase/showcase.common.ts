@@ -35,6 +35,7 @@ import { PageShowcaseComponent } from './page-showcase/page-showcase.component';
 import { TabsShowcaseComponent } from './tabs-showcase/tabs-showcase.component';
 import { ItemShowcaseComponent } from '../showcase/item-showcase/item-showcase.component';
 import { DividerShowcaseComponent } from '../showcase/divider-showcase/divider-showcase.component';
+import { DropdownShowcaseComponent } from '~/app/showcase/dropdown-showcase/dropdown-showcase.component';
 
 export const COMPONENT_IMPORTS: any[] = [ExamplesModule, ShowcaseRoutingModule];
 
@@ -73,6 +74,7 @@ export const COMPONENT_EXPORTS: any[] = [
   ItemShowcaseComponent,
   DividerShowcaseComponent,
   ReorderShowcaseComponent,
+  DropdownShowcaseComponent,
 ];
 
 export const COMPONENT_DECLARATIONS: any[] = [...COMPONENT_EXPORTS, ShowcaseComponent];
