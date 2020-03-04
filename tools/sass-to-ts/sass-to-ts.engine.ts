@@ -1,6 +1,8 @@
 import * as sassExtract from 'sass-extract';
+import * as prettier from 'prettier';
 
 import * as compactUnitPlugin from './sass-exctract-compact-unit.plugin';
+
 const fs = require('fs').promises;
 
 export class SassToTypescriptEngine {
@@ -16,8 +18,9 @@ export class SassToTypescriptEngine {
     const rendered = await sassExtract.render({ file: filename }, { plugins: [compactUnitPlugin] });
     const data = this._serialize(rendered.vars.global);
     const content = `export const styles = ${data};`;
+    const formatted = await this.formatWithPrettier(content);
     const newFilename = this.getTargetFileName(filename);
-    return fs.writeFile(newFilename, content);
+    return fs.writeFile(newFilename, formatted);
   }
 
   private _serialize(input: any): string {
@@ -41,5 +44,11 @@ export class SassToTypescriptEngine {
           return input;
       }
     }
+  }
+
+  private async formatWithPrettier(code: string) {
+    const filePath = await prettier.resolveConfigFile();
+    const options = await prettier.resolveConfig(filePath);
+    return prettier.format(code, { ...options, parser: 'babel' });
   }
 }
