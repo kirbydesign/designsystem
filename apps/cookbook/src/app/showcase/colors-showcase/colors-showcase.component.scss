@@ -1,14 +1,15 @@
 @import '../../../../../../libs/designsystem/src/lib/scss/utils';
 
-@each $color-name, $color-value in $kirby-colors {
-  .#{$color-name} {
-    background-color: get-color($color-name);
-  }
-}
-
 @each $color-name, $color-value in getAllColors() {
   .#{$color-name} {
+    background-color: get-color($color-name);
     color: get-color($color-name + '-contrast');
+  }
+  .#{$color-name}-tint {
+    background-color: get-color($color-name + '-tint');
+  }
+  .#{$color-name}-shade {
+    background-color: get-color($color-name + '-shade');
   }
 }
 

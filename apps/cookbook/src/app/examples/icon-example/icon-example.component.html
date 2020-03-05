@@ -5,7 +5,7 @@
   <p>Change color:</p>
   <div class="colors">
     <button class="color-button" (click)="changeColor(color)" *ngFor="let color of colors">
-      <span class="color" [style.backgroundColor]="color.value.hex"></span>
+      <span class="color" [style.backgroundColor]="color.value"></span>
       <span class="color-button__txt">{{ color.name }}</span>
     </button>
   </div>

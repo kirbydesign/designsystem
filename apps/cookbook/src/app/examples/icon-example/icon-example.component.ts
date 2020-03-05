@@ -14,7 +14,7 @@ export class IconExampleComponent {
   icons: Icon[] = icons;
   sizes = Sizes;
   color: Color;
-  colors: Color[] = ColorHelper.getMainColors();
+  colors: Color[] = ColorHelper.mainColors;
 
   changeColor(color: Color) {
     this.color = color;

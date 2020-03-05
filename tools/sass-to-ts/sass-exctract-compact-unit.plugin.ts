@@ -7,9 +7,7 @@ class SassExctractCompactUnitPlugin {
    * Use duck typing to distinguish between map and color objects
    */
   private isColor(value: any) {
-    return (
-      value.r != null && value.g != null && value.b != null && value.a != null && value.hex != null
-    );
+    return 'hex' in value;
   }
 
   private compactArray(arrayValue: Array<any>) {
@@ -20,7 +18,7 @@ class SassExctractCompactUnitPlugin {
 
   private compactObject(objectValue: any) {
     if (this.isColor(objectValue)) {
-      return objectValue;
+      return objectValue.hex;
     }
 
     const compactedObject = {};
