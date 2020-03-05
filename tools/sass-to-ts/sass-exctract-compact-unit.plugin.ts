@@ -1,62 +1,64 @@
-function isPrimitive(value) {
-  return Object(value) !== value;
-}
-
-/**
- * Use duck typing to distinguish between map and color objects
- */
-function isColor(value) {
-  return (
-    value.r != null && value.g != null && value.b != null && value.a != null && value.hex != null
-  );
-}
-
-function compactArray(arrayValue) {
-  return arrayValue.map((element) => {
-    return compactValue(element.value, element.unit);
-  });
-}
-
-function compactObject(objectValue) {
-  if (isColor(objectValue)) {
-    return objectValue;
+class SassExctractCompactUnitPlugin {
+  private isPrimitive(value) {
+    return Object(value) !== value;
   }
 
-  const compactedObject = {};
-  Object.keys(objectValue).forEach((key) => {
-    const compactKey = sassKeyToCamelCase(key);
-    const entry = objectValue[key];
-    compactedObject[compactKey] = compactValue(entry.value, entry.unit, entry.type);
-  });
+  /**
+   * Use duck typing to distinguish between map and color objects
+   */
+  private isColor(value) {
+    return (
+      value.r != null && value.g != null && value.b != null && value.a != null && value.hex != null
+    );
+  }
 
-  return compactedObject;
-}
+  private compactArray(arrayValue) {
+    return arrayValue.map((element) => {
+      return this.compactValue(element.value, element.unit);
+    });
+  }
 
-function sassKeyToCamelCase(key: string) {
-  return key
-    .replace('$', '')
-    .split('-')
-    .map((part, index) => (index === 0 ? part : part[0].toUpperCase() + part.substr(1)))
-    .join('');
-}
-
-function compactValue(value, unit?, type?) {
-  if (isPrimitive(value)) {
-    if (type === 'SassString') {
-      return value;
+  private compactObject(objectValue) {
+    if (this.isColor(objectValue)) {
+      return objectValue;
     }
-    return unit
-      ? {
-          value,
-          unit,
-        }
-      : {
-          value,
-        };
-  } else if (Array.isArray(value)) {
-    return compactArray(value);
-  } else {
-    return compactObject(value);
+
+    const compactedObject = {};
+    Object.keys(objectValue).forEach((key) => {
+      const compactKey = this.sassKeyToCamelCase(key);
+      const entry = objectValue[key];
+      compactedObject[compactKey] = this.compactValue(entry.value, entry.unit, entry.type);
+    });
+
+    return compactedObject;
+  }
+
+  private sassKeyToCamelCase(key: string) {
+    return key
+      .replace('$', '')
+      .split('-')
+      .map((part, index) => (index === 0 ? part : part[0].toUpperCase() + part.substr(1)))
+      .join('');
+  }
+
+  compactValue(value, unit?, type?) {
+    if (this.isPrimitive(value)) {
+      if (type === 'SassString') {
+        return value;
+      }
+      return unit
+        ? {
+            value,
+            unit,
+          }
+        : {
+            value,
+          };
+    } else if (Array.isArray(value)) {
+      return this.compactArray(value);
+    } else {
+      return this.compactObject(value);
+    }
   }
 }
 
@@ -65,13 +67,12 @@ function compactValue(value, unit?, type?) {
  * Lists and maps are collapsed into their respective elements
  */
 export function run() {
+  const plugin = new SassExctractCompactUnitPlugin();
   return {
     postExtract: (extractedVariables) => {
       const compactedVariables = {
-        global: compactValue(extractedVariables.global),
+        global: plugin.compactValue(extractedVariables.global),
       };
-      // console.warn('extractedVariables', extractedVariables);
-
       return compactedVariables;
     },
   };
