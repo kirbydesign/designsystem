@@ -5,8 +5,10 @@ import { By } from '@angular/platform-browser';
 import { Component, OnInit } from '@angular/core';
 
 import { ThemeColorDirective } from '../../directives/theme-color/theme-color.directive';
-import { ColorHelper } from '../../helpers/color-helper';
+import { DesignTokenHelper } from '../../helpers/design-token-helper';
 import { IconComponent } from './icon.component';
+
+const getColor = DesignTokenHelper.getColor;
 
 describe('IconComponent', () => {
   beforeEach(async(() => {
@@ -52,68 +54,63 @@ describe('IconComponent', () => {
       const el = fixture.debugElement.query(By.directive(IconComponent));
       expect(el.nativeElement.className).toBe('kirby-icon');
       const expectedColor = window.getComputedStyle(window.document.body)['color'];
-      const actualColor = window.getComputedStyle(el.nativeElement)['color'];
-      expect(actualColor).toBe(expectedColor);
+      expect(el.nativeElement).toHaveComputedStyle({
+        color: expectedColor,
+      });
     });
 
     it('should be rendered with primary color when theme color is set to primary', () => {
       const fixture = createTestComponent('<kirby-icon [themeColor]="\'primary\'"></kirby-icon>');
       fixture.detectChanges();
       const el = fixture.debugElement.query(By.directive(IconComponent));
-      expect(el.nativeElement.classList).toContain('primary');
-      const expectedColor = ColorHelper.getThemeColorRgbString('primary');
-      const actualColor = window.getComputedStyle(el.nativeElement)['color'];
-      expect(actualColor).toBe(expectedColor);
+      expect(el.nativeElement).toHaveComputedStyle({
+        color: getColor('primary'),
+      });
     });
 
     it('should be rendered with secondary color when theme color is set to secondary', () => {
       const fixture = createTestComponent('<kirby-icon themeColor="secondary"></kirby-icon>');
       fixture.detectChanges();
       const el = fixture.debugElement.query(By.directive(IconComponent));
-      expect(el.nativeElement.classList).toContain('secondary');
-      const expectedColor = ColorHelper.getThemeColorRgbString('secondary');
-      const actualColor = window.getComputedStyle(el.nativeElement)['color'];
-      expect(actualColor).toBe(expectedColor);
+      expect(el.nativeElement).toHaveComputedStyle({
+        color: getColor('secondary'),
+      });
     });
 
     it('should be rendered with tertiary color when theme color is set to tertiary', () => {
       const fixture = createTestComponent('<kirby-icon themeColor="tertiary"></kirby-icon>');
       fixture.detectChanges();
       const el = fixture.debugElement.query(By.directive(IconComponent));
-      expect(el.nativeElement.classList).toContain('tertiary');
-      const expectedColor = ColorHelper.getThemeColorRgbString('tertiary');
-      const actualColor = window.getComputedStyle(el.nativeElement)['color'];
-      expect(actualColor).toBe(expectedColor);
+      expect(el.nativeElement).toHaveComputedStyle({
+        color: getColor('tertiary'),
+      });
     });
 
     it('should be rendered with warning color when theme color is set to warning', () => {
       const fixture = createTestComponent('<kirby-icon themeColor="warning"></kirby-icon>');
       fixture.detectChanges();
       const el = fixture.debugElement.query(By.directive(IconComponent));
-      expect(el.nativeElement.classList).toContain('warning');
-      const expectedColor = ColorHelper.getThemeColorRgbString('warning');
-      const actualColor = window.getComputedStyle(el.nativeElement)['color'];
-      expect(actualColor).toBe(expectedColor);
+      expect(el.nativeElement).toHaveComputedStyle({
+        color: getColor('warning'),
+      });
     });
 
     it('should be rendered with success color when theme color is set to success', () => {
       const fixture = createTestComponent('<kirby-icon themeColor="success"></kirby-icon>');
       fixture.detectChanges();
       const el = fixture.debugElement.query(By.directive(IconComponent));
-      expect(el.nativeElement.classList).toContain('success');
-      const expectedColor = ColorHelper.getThemeColorRgbString('success');
-      const actualColor = window.getComputedStyle(el.nativeElement)['color'];
-      expect(actualColor).toBe(expectedColor);
+      expect(el.nativeElement).toHaveComputedStyle({
+        color: getColor('success'),
+      });
     });
 
     it('should be rendered with danger color when theme color is set to danger', () => {
       const fixture = createTestComponent('<kirby-icon themeColor="danger"></kirby-icon>');
       fixture.detectChanges();
       const el = fixture.debugElement.query(By.directive(IconComponent));
-      expect(el.nativeElement.classList).toContain('danger');
-      const expectedColor = ColorHelper.getThemeColorRgbString('danger');
-      const actualColor = window.getComputedStyle(el.nativeElement)['color'];
-      expect(actualColor).toBe(expectedColor);
+      expect(el.nativeElement).toHaveComputedStyle({
+        color: getColor('danger'),
+      });
     });
   });
 });
