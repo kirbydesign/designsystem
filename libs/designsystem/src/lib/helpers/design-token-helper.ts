@@ -19,31 +19,27 @@ export class DesignTokenHelper {
   }
 
   public static size(key: string): string {
-    return DesignTokenHelper.sizeValue(styles.sizes[key]);
+    return styles.sizes[key];
   }
 
   public static fontSize(key: string): string {
-    return DesignTokenHelper.sizeValue(styles.fontSizes[key]);
+    return styles.fontSizes[key];
   }
 
   public static fontWeight(key: string): string {
-    return styles.fontWeight[key].value + '';
+    return styles.fontWeight[key];
   }
 
   public static lineHeight(key: string): string {
-    return DesignTokenHelper.sizeValue(styles.lineHeight[key]);
+    return styles.lineHeight[key];
   }
 
   public static borderRadius(): string {
-    return DesignTokenHelper.sizeValue(styles.borderRadius);
+    return styles.borderRadius;
   }
 
   public static borderRadiusRound(): string {
-    return DesignTokenHelper.sizeValue(styles.borderRadiusRound);
-  }
-
-  private static sizeValue(entry: { value: number; unit: string }): string {
-    return entry.value + (entry.unit || '');
+    return styles.borderRadiusRound;
   }
 }
 

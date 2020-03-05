@@ -27,7 +27,7 @@ class SassExctractCompactUnitPlugin {
     Object.keys(objectValue).forEach((key) => {
       const compactKey = this.sassKeyToCamelCase(key);
       const entry = objectValue[key];
-      compactedObject[compactKey] = this.compactValue(entry.value, entry.unit, entry.type);
+      compactedObject[compactKey] = this.compactValue(entry.value, entry.unit);
     });
 
     return compactedObject;
@@ -41,19 +41,9 @@ class SassExctractCompactUnitPlugin {
       .join('');
   }
 
-  compactValue(value, unit?, type?) {
+  compactValue(value, unit = '') {
     if (this.isPrimitive(value)) {
-      if (type === 'SassString') {
-        return value;
-      }
-      return unit
-        ? {
-            value,
-            unit,
-          }
-        : {
-            value,
-          };
+      return value + unit;
     } else if (Array.isArray(value)) {
       return this.compactArray(value);
     } else {
