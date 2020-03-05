@@ -1,24 +1,24 @@
 class SassExctractCompactUnitPlugin {
-  private isPrimitive(value) {
+  private isPrimitive(value: any) {
     return Object(value) !== value;
   }
 
   /**
    * Use duck typing to distinguish between map and color objects
    */
-  private isColor(value) {
+  private isColor(value: any) {
     return (
       value.r != null && value.g != null && value.b != null && value.a != null && value.hex != null
     );
   }
 
-  private compactArray(arrayValue) {
+  private compactArray(arrayValue: Array<any>) {
     return arrayValue.map((element) => {
       return this.compactValue(element.value, element.unit);
     });
   }
 
-  private compactObject(objectValue) {
+  private compactObject(objectValue: any) {
     if (this.isColor(objectValue)) {
       return objectValue;
     }
@@ -41,7 +41,7 @@ class SassExctractCompactUnitPlugin {
       .join('');
   }
 
-  compactValue(value, unit = '') {
+  compactValue(value: any, unit = '') {
     if (this.isPrimitive(value)) {
       return value + unit;
     } else if (Array.isArray(value)) {
@@ -59,7 +59,7 @@ class SassExctractCompactUnitPlugin {
 export function run() {
   const plugin = new SassExctractCompactUnitPlugin();
   return {
-    postExtract: (extractedVariables) => {
+    postExtract: (extractedVariables: { global: { [key: string]: any } }) => {
       const compactedVariables = {
         global: plugin.compactValue(extractedVariables.global),
       };
