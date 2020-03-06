@@ -10,15 +10,13 @@ export class ColorHelper {
   static readonly mainColors = ColorHelper.getMainColors();
 
   private static getMainColors(): Color[] {
-    // Do not remove the `named` const, since it'll break the ngpackagr build, for more info see:
+    // Do not remove the `colorArray` const, since it'll break the ngpackagr build, for more info see:
     // https://github.com/ng-packagr/ng-packagr/issues/696
-    const named = Object.entries(styles.mainColors).map(([name, value]) => ({ name, value }));
-    return named;
+    const colorArray = Object.entries(styles.mainColors).map(([name, value]) => ({ name, value }));
+    return colorArray;
   }
 
   private static mapToKirbyColorArray(colors: KirbyColorGroup): KirbyColor[] {
-    // Do not remove the `named` const, since it'll break the ngpackagr build, for more info see:
-    // https://github.com/ng-packagr/ng-packagr/issues/696
     const TINT = 'Tint';
     const SHADE = 'Shade';
     const CONTRAST = 'Contrast';
@@ -39,6 +37,8 @@ export class ColorHelper {
         name: ColorHelper.camelToKebabCase(name + CONTRAST),
       },
     }));
+    // Do not remove the `colorArray` const, since it'll break the ngpackagr build, for more info see:
+    // https://github.com/ng-packagr/ng-packagr/issues/696
     return colorArray;
   }
 
@@ -118,7 +118,7 @@ export class ColorHelper {
   private static camelToKebabCase(key: string) {
     // Do not remove the `keyInKebabCase` const, since it'll break the ngpackagr build, for more info see:
     // https://github.com/ng-packagr/ng-packagr/issues/696
-    let keyInKebabCase = key
+    const keyInKebabCase = key
       .split('')
       .map((char) => {
         const isUppercase = char.toUpperCase() === char;
