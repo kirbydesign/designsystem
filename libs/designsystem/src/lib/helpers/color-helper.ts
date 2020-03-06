@@ -131,6 +131,9 @@ export class ColorHelper {
 
 export interface Color {
   name: string;
+  /**
+   * The color value in either hex (#ff0000), rgb(255,0,0) or rgba(255,0,0,1)
+   */
   value: string;
 }
 
