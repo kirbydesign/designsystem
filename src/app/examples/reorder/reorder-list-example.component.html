@@ -2,11 +2,15 @@
 <h3>
   Shows reordering.
 </h3>
+<header class="section-header">
+  <span class="kirby-text-small-light" *ngFor="let headerText of headerTexts">{{
+    headerText
+  }}</span>
+</header>
 <kirby-reorder-list
   (itemReorder)="doReorderItem($event)"
   (subItemReorder)="doReorderShadowAccount($event)"
   subItemsName="shadowAccounts"
-  [headerTexts]="headerTexts"
   [items]="items"
 >
   <kirby-item

@@ -22,7 +22,6 @@ import { ListItemTemplateDirective } from '../list/list.directive';
 export class ReorderListComponent implements OnChanges, OnDestroy {
   @Input() items: any[];
   @Input() subItemsName: string;
-  @Input() headerTexts: string[];
   @Input() getItemTextDefault?: (item: any) => string;
 
   @Output() itemReorder = new EventEmitter<any>();

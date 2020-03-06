@@ -1,18 +1,10 @@
-// @import '../../../kirby/scss/utils';
+@import '../../../kirby/scss/utils';
 
-// kirby-card {
-//   margin-bottom: 20px;
-//   width: map-get($breakpoints, small);
-
-//   @include media('>=large') {
-//     width: map-get($breakpoints, medium);
-//   }
-
-//   kirby-item:not(:last-child) {
-//     border-bottom: 1px get-color('background-color') solid;
-//   }
-// }
-
-// :host{
-//     display: block;
-// }
+.section-header {
+  padding: 0 size('s') size('xxs') size('xxs');
+  display: flex;
+  justify-content: flex-end;
+  span {
+    padding-left: size('s');
+  }
+}

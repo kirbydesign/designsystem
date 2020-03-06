@@ -1,10 +1,5 @@
 <ion-backdrop *ngIf="reorderActive" [tappable]="false" [visible]="true" [stopPropagation]="false">
 </ion-backdrop>
-<header class="section-header">
-  <span class="kirby-text-small-light" *ngFor="let headerText of headerTexts">{{
-    headerText
-  }}</span>
-</header>
 <ion-reorder-group (ionItemReorder)="doReorder($event)" disabled="false">
   <div *ngFor="let reorderItem of items">
     <kirby-card>

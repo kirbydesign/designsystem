@@ -1,5 +1,4 @@
 import { Spectator, createComponentFactory } from '@ngneat/spectator';
-import { MockModule } from 'ng-mocks';
 import { IonicModule } from '@ionic/angular';
 
 import { IconModule } from '@kirbydesign/designsystem/components/icon/icon.module';
@@ -26,7 +25,7 @@ describe('ReorderListComponent', () => {
   }
 
   const createHost = createComponentFactory({
-    imports: [MockModule(IonicModule), IconModule],
+    imports: [IonicModule.forRoot(), IconModule],
     component: ReorderListComponent,
     declarations: [CardComponent, ItemComponent],
   });
@@ -36,7 +35,7 @@ describe('ReorderListComponent', () => {
       props: {
         items: items,
         subItemsName: 'subItems',
-        headerTexts: headerTexts,
+        // headerTexts: headerTexts,
         getItemTextDefault: (item: any) => {
           return item.title;
         },
@@ -47,12 +46,6 @@ describe('ReorderListComponent', () => {
 
   it('should create', () => {
     expect(spectator.component).toBeTruthy();
-  });
-
-  describe('headerTexts', () => {
-    it('should show input headerTexts', () => {
-      expect(spectator.queryAll('.section-header span').length).toBe(headerTexts.length);
-    });
   });
 
   describe('items', () => {

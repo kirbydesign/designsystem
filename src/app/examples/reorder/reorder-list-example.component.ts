@@ -49,7 +49,7 @@ export class ReorderListExampleComponent {
       ],
     },
   ];
-  headerTexts = ['skjul/vis'];
+  headerTexts = ['skjul/vis', 'flyt'];
 
   constructor() {}
 
