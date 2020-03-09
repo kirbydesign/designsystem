@@ -30,6 +30,7 @@
     "dist:cookbook": "ng build cookbook --prod --aot --progress false",
     "predist:designsystem": "npm run extract-scss-variables",
     "dist:designsystem": "ng build designsystem",
+    "dist:testing": "ng build testing",
     "postinstall": "npm run build-polyfills && npm run transpile:tools",
     "postversion": "git push && git push --tags",
     "coverage-report": "cat ./coverage/lcov.info | coveralls",
