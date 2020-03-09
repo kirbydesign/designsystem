@@ -57,8 +57,8 @@ export class ReorderShowcaseComponent {
     {
       name: 'complete()',
       description:
-        'Completes the reorder operation. Must be called by the (itemReorder | subItemReorder) event. If a list of items is passed, the list will be reordered and returned in the proper order. If no parameters are passed or if true is passed in, the reorder will complete and the item will remain in the position it was dragged to. If false is passed, the reorder will complete and the item will bounce back to its original position.',
-      inputValues: ['complete(listOrReorder?: boolean | any[] | undefined) => Promise<any>'],
+        'Completes the reorder operation. Must be called by the (itemReorder | subItemReorder) event. If a list of items is passed, the list will be reordered and returned in the proper order. If no parameters are passed or if true is passed in, the reorder will complete and the item will remain in the position it was dragged to. If an empty object is passed, the reorder will complete and the item will bounce back to its original position.',
+      inputValues: ['complete(listOrReorder?: any | any[] | undefined) => Promise<any>'],
     },
   ];
 
