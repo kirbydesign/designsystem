@@ -54,3 +54,4 @@ scripts/install-ipa.html
 # tools (tslint, sass-to-ts etc.)
 /tools/tslint-rules/dist
 /tools/sass-to-ts/dist
+/tools/generate-mocks/dist
