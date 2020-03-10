@@ -115,16 +115,6 @@ p,
   }
 }
 
-.kirby-text-xxsmall {
-  font-size: font-size('xxs');
-  line-height: line-height('xxs');
-
-  @supports (font: -apple-system-caption1) {
-    font: -apple-system-caption1;
-    font-family: var(--kirby-font-family);
-  }
-}
-
 .kirby-text-bold {
   font-weight: font-weight('bold');
 }

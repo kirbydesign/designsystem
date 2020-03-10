@@ -37,8 +37,7 @@ code {
   &-body,
   &-body-small,
   &-body-small-light,
-  &-body-xsmall,
-  &-body-xxsmall {
+  &-body-xsmall {
     margin-top: 1rem;
     margin-bottom: 1rem;
   }
@@ -76,12 +75,6 @@ code {
   &-body-xsmall {
     &::after {
       content: '(#{font-size('xs')})';
-    }    
-  }
-
-  &-body-xxsmall {
-    &::after {
-      content: '(#{font-size('xxs')})';
     }    
   }
 }
