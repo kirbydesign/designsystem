@@ -35,7 +35,6 @@ describe('ReorderListComponent', () => {
       props: {
         items: items,
         subItemsName: 'subItems',
-        // headerTexts: headerTexts,
         getItemTextDefault: (item: any) => {
           return item.title;
         },

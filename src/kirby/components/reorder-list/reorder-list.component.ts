@@ -10,6 +10,7 @@ import {
   ViewChildren,
   QueryList,
   OnChanges,
+  TrackByFunction,
 } from '@angular/core';
 
 import { ListItemTemplateDirective } from '../list/list.directive';
@@ -44,11 +45,10 @@ export class ReorderListComponent implements OnChanges, OnDestroy {
   }
 
   private setupDomListener() {
-    let that = this;
-    const callback = function(mutationsList: any) {
+    const callback = (mutationsList: any) => {
       for (let mutation of mutationsList) {
         if (mutation.oldValue !== mutation.target['className']) {
-          that.reorderActive = mutation.target['className'].includes('reorder-list-active');
+          this.reorderActive = mutation.target['className'].includes('reorder-list-active');
         }
       }
     };

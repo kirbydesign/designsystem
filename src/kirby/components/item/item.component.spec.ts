@@ -9,7 +9,7 @@ describe('ItemComponent', () => {
   let spectator: Spectator<ItemComponent>;
 
   const createHost = createComponentFactory({
-    imports: [MockModule(IonicModule), IconModule],
+    imports: [MockModule(IonicModule), MockModule(IconModule)],
     component: ItemComponent,
     declarations: [],
   });

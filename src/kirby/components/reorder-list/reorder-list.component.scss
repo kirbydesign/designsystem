@@ -8,22 +8,19 @@ ion-backdrop {
 
 .reorder-selected {
   box-shadow: none;
-  -webkit-box-shadow: none;
   opacity: 1;
   z-index: 104;
 
   kirby-card {
-    -ms-transform: scale(1.05, 1.05); /* IE 9 */
-    -webkit-transform: scale(1.05, 1.05); /* Safari */
     transform: scale(1.05, 1.05);
+
+    & div:first-child {
+      border-top: 1px solid var(--kirby-background-color);
+    }
   }
 
   @include slotted('kirby-item') {
-    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
-
-    -ms-transform: scale(1.05, 1.05); /* IE 9 */
-    -webkit-transform: scale(1.05, 1.05); /* Safari */
     transform: scale(1.05, 1.05);
     border-radius: $border-radius;
     overflow: hidden;
@@ -50,11 +47,7 @@ ion-backdrop {
 
   .reorder-selected {
     @include slotted('kirby-item') {
-      -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
-
-      -ms-transform: scale(1.05, 1.05); /* IE 9 */
-      -webkit-transform: scale(1.05, 1.05); /* Safari */
       transform: scale(1.05, 1.05);
       border-radius: $border-radius;
       overflow: hidden;
