@@ -45,52 +45,77 @@ h1,
 .h1,
 .kirby-text-xlarge {
   font-size: font-size('xl');
+  @supports (font: -apple-system-headline) {
+    font: -apple-system-headline;
+    font-family: var(--kirby-font-family);
+    font-size: 1.4em;
+  }
   font-weight: font-weight('bold');
-  line-height: line-height('xl');
 }
 
 h2,
 .h2,
 .kirby-text-large {
   font-size: font-size('l');
+  @supports (font: -apple-system-headline) {
+    font: -apple-system-headline;
+    font-family: var(--kirby-font-family);
+    font-size: 1.2em;
+  }
   font-weight: font-weight('bold');
-  line-height: line-height('l');
 }
 
 h3,
 .h3,
 .kirby-text-medium {
   font-size: font-size('m');
+  @supports (font: -apple-system-headline) {
+    font: -apple-system-headline;
+    font-family: var(--kirby-font-family);
+    font-size: 1.1em;
+  }
   font-weight: font-weight('bold');
-  line-height: line-height('m');
 }
 
 p,
 .p,
 .kirby-text-normal {
   font-size: font-size('n');
-  line-height: line-height('n');
+  @supports (font: -apple-system-body) {
+    font: -apple-system-body;
+    font-family: var(--kirby-font-family);
+  }
 }
 
 .kirby-text-small {
   font-size: font-size('s');
-  line-height: line-height('s');
+  @supports (font: -apple-system-subheadline) {
+    font: -apple-system-subheadline;
+    font-family: var(--kirby-font-family);
+  }
 }
 
 .kirby-text-small-light {
-  font-size: font-size('s');
+  @extend .kirby-text-small;
   font-weight: font-weight('light');
-  line-height: line-height('s');
 }
 
 .kirby-text-xsmall {
   font-size: font-size('xs');
-  line-height: line-height('xs');
+  @supports (font: -apple-system-caption1) {
+    font: -apple-system-caption1;
+    font-family: var(--kirby-font-family);
+  }
 }
 
 .kirby-text-xxsmall {
   font-size: font-size('xxs');
   line-height: line-height('xxs');
+
+  @supports (font: -apple-system-caption1) {
+    font: -apple-system-caption1;
+    font-family: var(--kirby-font-family);
+  }
 }
 
 .kirby-text-bold {

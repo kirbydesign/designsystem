@@ -37,7 +37,8 @@ html {
   background-color: get-color('white');
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
-  font-size: font-size('n');
+  font: -apple-system-body;
+  font-family: var(--kirby-font-family);
   color: get-color('black');
   height: 100%;
 }
