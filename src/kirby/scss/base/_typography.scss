@@ -41,6 +41,9 @@ kirby-app .page-title {
   line-height: normal;
 }
 
+$apple-headline-size: 17px;
+$apple-body-size: 17px;
+
 h1,
 .h1,
 .kirby-text-xlarge {
@@ -48,7 +51,8 @@ h1,
   @supports (font: -apple-system-headline) {
     font: -apple-system-headline;
     font-family: var(--kirby-font-family);
-    font-size: 1.4em;
+    font-size: (font-size('xl') / $apple-headline-size) * 1em;
+    font-weight: font-weight('bold');
   }
   font-weight: font-weight('bold');
 }
@@ -60,7 +64,7 @@ h2,
   @supports (font: -apple-system-headline) {
     font: -apple-system-headline;
     font-family: var(--kirby-font-family);
-    font-size: 1.2em;
+    font-size: (font-size('l') / $apple-headline-size) * 1em;
   }
   font-weight: font-weight('bold');
 }
@@ -72,7 +76,7 @@ h3,
   @supports (font: -apple-system-headline) {
     font: -apple-system-headline;
     font-family: var(--kirby-font-family);
-    font-size: 1.1em;
+    font-size: (font-size('m') / $apple-headline-size) * 1em;
   }
   font-weight: font-weight('bold');
 }
@@ -84,14 +88,16 @@ p,
   @supports (font: -apple-system-body) {
     font: -apple-system-body;
     font-family: var(--kirby-font-family);
+    font-size: (font-size('n') / $apple-body-size) * 1em;
   }
 }
 
 .kirby-text-small {
   font-size: font-size('s');
-  @supports (font: -apple-system-subheadline) {
-    font: -apple-system-subheadline;
+  @supports (font: -apple-system-body) {
+    font: -apple-system-body;
     font-family: var(--kirby-font-family);
+    font-size: (font-size('s') / $apple-body-size) * 1em;
   }
 }
 
@@ -102,9 +108,10 @@ p,
 
 .kirby-text-xsmall {
   font-size: font-size('xs');
-  @supports (font: -apple-system-caption1) {
-    font: -apple-system-caption1;
+  @supports (font: -apple-system-body) {
+    font: -apple-system-body;
     font-family: var(--kirby-font-family);
+    font-size: (font-size('xs') / $apple-body-size) * 1em;
   }
 }
 
