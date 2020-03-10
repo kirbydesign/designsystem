@@ -20,9 +20,6 @@
     "cookbook-e2e": {
       "tags": [],
       "implicitDependencies": ["cookbook"]
-    },
-    "testing": {
-      "tags": []
     }
   }
 }

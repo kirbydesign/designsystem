@@ -11,6 +11,7 @@ type ComponentMetaData = {
 };
 
 export class GenerateMocks {
+  private readonly outputPath = './libs/designsystem/testing/src/lib';
   async renderMocks(rootPath) {
     const classMap = new Map<string, string[]>();
     await this.traverseFolder(rootPath, classMap);
@@ -22,14 +23,14 @@ export class GenerateMocks {
       .map((keyValue) => {
         const path = keyValue[0];
         const classNames = keyValue[1];
-        const relativePath = path.replace('./libs/testing/src/lib/', './').replace('.ts', '');
+        const relativePath = path.replace(this.outputPath, '.').replace('.ts', '');
         return `import { ${classNames.join(', ')} } from '${relativePath}';`;
       })
       .join('\n');
     const components = Array.from(classMap.values())
       .map((classNames) => classNames.join(',\n  '))
       .join(',\n  ');
-    const filename = './libs/testing/src/lib/mock-components.ts';
+    const filename = `${this.outputPath}/mock-components.ts`;
     const content = `${imports}
 
 export const MOCK_COMPONENTS = [
@@ -51,7 +52,7 @@ export const MOCK_COMPONENTS = [
         if (fileOrFolder.endsWith('.component.ts')) {
           // console.log('Rendering mock for: ', fullPath);
           const mockFileName = 'mock.' + fullPath.substr(fullPath.lastIndexOf('/') + 1);
-          const mockFilePath = './libs/testing/src/lib/components/';
+          const mockFilePath = `${this.outputPath}/components/`;
           const newFilename = mockFilePath + mockFileName;
           const classNames = await this.renderMock(fullPath, newFilename);
           if (classNames) {
