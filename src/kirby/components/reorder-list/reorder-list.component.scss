@@ -41,18 +41,38 @@ ion-backdrop {
   & div:first-child {
     border-top: none;
   }
+
+  @include slotted('div:last-child kirby-item') {
+    border-bottom-left-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
+    overflow: hidden;
+  }
+
+  .reorder-selected {
+    @include slotted('kirby-item') {
+      -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+
+      -ms-transform: scale(1.05, 1.05); /* IE 9 */
+      -webkit-transform: scale(1.05, 1.05); /* Safari */
+      transform: scale(1.05, 1.05);
+      border-radius: $border-radius;
+      overflow: hidden;
+    }
+  }
 }
 
 kirby-card {
   margin-bottom: 20px;
-  // width: map-get($breakpoints, small);
   overflow: inherit;
 
-  @include media('>=large') {
-    // width: map-get($breakpoints, medium);
+  @include slotted('div:last-child ion-reorder-group div:last-child>kirby-item') {
+    border-bottom-left-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
+    overflow: hidden;
   }
 
-  @include slotted('div:last-child kirby-item, div:first-child kirby-item') {
+  @include slotted('div:first-child>kirby-item') {
     border-radius: $border-radius;
     overflow: hidden;
   }
