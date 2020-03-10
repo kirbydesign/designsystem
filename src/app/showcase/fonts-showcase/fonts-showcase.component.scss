@@ -42,6 +42,24 @@ code {
     margin-bottom: 1rem;
   }
 
+  &-display-1 {
+    &::after {
+      content: '(#{font-size('xxxxl')})';
+    }
+  }
+
+  &-display-2 {
+    &::after {
+      content: '(#{font-size('xxxl')})';
+    }
+  }
+
+  &-display-3 {
+    &::after {
+      content: '(#{font-size('xxl')})';
+    }
+  }
+
   &-header-1 {
     &::after {
       content: '(#{font-size('xl')})';
@@ -82,7 +100,7 @@ code {
 [class^='sample-']::after {
   color: get-text-color('danger');
   font-size: font-size('xs');
-  margin-left: size('m');
+  margin-left: size('s');
 }
 
 .info-box {
