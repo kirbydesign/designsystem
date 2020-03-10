@@ -1,3 +1,6 @@
 const { GenerateMocks } = require('../tools/generate-mocks/dist/generate-mocks');
 
-new GenerateMocks().renderMocks('./libs/designsystem/src/lib/components/');
+const inputPath = './libs/designsystem/src/lib/';
+const outputPath = './libs/designsystem/testing/src/lib/';
+const subFolder = '/components/';
+new GenerateMocks().renderMocks(inputPath, outputPath, subFolder);

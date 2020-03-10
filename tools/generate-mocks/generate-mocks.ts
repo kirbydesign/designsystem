@@ -1,6 +1,8 @@
 import * as ts from 'typescript';
 import * as prettier from 'prettier';
 
+import { posix as path } from 'path';
+
 import { readFileSync, writeFileSync, readdirSync, statSync, existsSync } from 'fs';
 
 type ComponentMetaData = {
@@ -11,26 +13,30 @@ type ComponentMetaData = {
 };
 
 export class GenerateMocks {
-  private readonly outputPath = './libs/designsystem/testing/src/lib';
-  async renderMocks(rootPath) {
+  async renderMocks(rootPath: string, outputPath: string, subPath: string) {
+    const inputPath = path.join(rootPath, subPath);
+    const outputPathNormalized = path.normalize(outputPath);
     const classMap = new Map<string, string[]>();
-    await this.traverseFolder(rootPath, classMap);
-    await this.renderMockComponentDeclaration(classMap);
+    await this.traverseFolder(inputPath, outputPathNormalized, subPath, classMap);
+    await this.renderMockComponentDeclaration(classMap, outputPathNormalized);
   }
 
-  private async renderMockComponentDeclaration(classMap: Map<string, string[]>) {
+  private async renderMockComponentDeclaration(
+    classMap: Map<string, string[]>,
+    outputPath: string
+  ) {
     const imports = Array.from(classMap.entries())
       .map((keyValue) => {
-        const path = keyValue[0];
+        const filepath = keyValue[0];
         const classNames = keyValue[1];
-        const relativePath = path.replace(this.outputPath, '.').replace('.ts', '');
+        const relativePath = filepath.replace(outputPath, './').replace('.ts', '');
         return `import { ${classNames.join(', ')} } from '${relativePath}';`;
       })
       .join('\n');
     const components = Array.from(classMap.values())
       .map((classNames) => classNames.join(',\n  '))
       .join(',\n  ');
-    const filename = `${this.outputPath}/mock-components.ts`;
+    const filename = path.join(outputPath, '/mock-components.ts');
     const content = `${imports}
 
 export const MOCK_COMPONENTS = [
@@ -41,19 +47,22 @@ export const MOCK_COMPONENTS = [
     writeFileSync(filename, formatted);
   }
 
-  private async traverseFolder(path: string, classMap: Map<string, string[]>) {
-    const folderContent = readdirSync(path);
+  private async traverseFolder(
+    folderpath: string,
+    outputPath: string,
+    subPath: string,
+    classMap: Map<string, string[]>
+  ) {
+    const folderContent = readdirSync(folderpath);
     for (const fileOrFolder of folderContent) {
-      const fullPath = path + fileOrFolder;
+      const fullPath = path.join(folderpath, fileOrFolder);
       const ent = statSync(fullPath);
       if (ent.isDirectory()) {
-        await this.traverseFolder(fullPath + '/', classMap);
+        await this.traverseFolder(fullPath, outputPath, subPath, classMap);
       } else {
         if (fileOrFolder.endsWith('.component.ts')) {
           // console.log('Rendering mock for: ', fullPath);
-          const mockFileName = 'mock.' + fullPath.substr(fullPath.lastIndexOf('/') + 1);
-          const mockFilePath = `${this.outputPath}/components/`;
-          const newFilename = mockFilePath + mockFileName;
+          const newFilename = path.join(outputPath, subPath, 'mock.' + fileOrFolder);
           const classNames = await this.renderMock(fullPath, newFilename);
           if (classNames) {
             classMap.set(newFilename, classNames);
