@@ -48,6 +48,15 @@ export class ReorderListExampleComponent {
         },
       ],
     },
+    {
+      title: '5',
+      isOwnAccount: true,
+      shadowAccounts: [
+        {
+          title: '5a',
+        },
+      ],
+    },
   ];
   headerTexts = ['skjul/vis', 'flyt'];
 

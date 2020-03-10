@@ -1,26 +1,26 @@
-<h2>Reorder:</h2>
-<h3>
-  Shows reordering.
-</h3>
-<header class="section-header">
-  <span class="kirby-text-small-light" *ngFor="let headerText of headerTexts">{{
-    headerText
-  }}</span>
-</header>
-<kirby-reorder-list
-  (itemReorder)="doReorderItem($event)"
-  (subItemReorder)="doReorderShadowAccount($event)"
-  subItemsName="shadowAccounts"
-  [items]="items"
->
-  <kirby-item
-    *kirbyListItemTemplate="let reorderItem; let isSubItem = isSubItem"
-    reorderable="true"
-  >
-    <kirby-label>
-      <h3 [ngClass]="{ 'kirby-text-bold': !isSubItem }">{{ reorderItem.title }}</h3>
-      <p *ngIf="!reorderItem.isOwnAccount" detail>{{ reorderItem.ownerName }}</p>
-    </kirby-label>
-    <kirby-toggle slot="end" checked="true"></kirby-toggle>
-  </kirby-item>
-</kirby-reorder-list>
+<kirby-page title="Reorder">
+  <kirby-page-content>
+    <header class="section-header">
+      <span class="kirby-text-small-light" *ngFor="let headerText of headerTexts">{{
+        headerText
+      }}</span>
+    </header>
+    <kirby-reorder-list
+      (itemReorder)="doReorderItem($event)"
+      (subItemReorder)="doReorderShadowAccount($event)"
+      subItemsName="shadowAccounts"
+      [items]="items"
+    >
+      <kirby-item
+        *kirbyListItemTemplate="let reorderItem; let isSubItem = isSubItem"
+        reorderable="true"
+      >
+        <kirby-label>
+          <h3 [ngClass]="{ 'kirby-text-bold': !isSubItem }">{{ reorderItem.title }}</h3>
+          <p *ngIf="!reorderItem.isOwnAccount" detail>{{ reorderItem.ownerName }}</p>
+        </kirby-label>
+        <kirby-toggle slot="end" checked="true"></kirby-toggle>
+      </kirby-item>
+    </kirby-reorder-list>
+  </kirby-page-content>
+</kirby-page>
