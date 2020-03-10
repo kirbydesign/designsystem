@@ -1,4 +1,5 @@
 export { ListComponent } from './list.component';
+export { ListShape } from './list.component';
 export { ListCellComponent } from './list-cell/list-cell.component';
 export { ListCellLineComponent } from './list-cell-line/list-cell-line.component';
 export { ListFlexItemComponent } from './list-flex-item/list-flex-item.component';
