@@ -1,13 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-export enum ChartType {
-  PIE = 'pie',
-  DONUT = 'donut',
-  AREASPLINE = 'areaspline',
-  TIMESERIES = 'timeseries',
-  ACTIVITYGAUGE = 'activitygauge',
-  // SOLIDGAUGE = 'solidgauge',
-}
+import { ChartType } from '@kirbydesign/designsystem';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
@@ -16,7 +9,7 @@ export enum ChartType {
 })
 export class MockChartComponent {
   @Input() data;
-  // @Input() breaks: Array<Highcharts.XAxisBreaksOptions>;
+  @Input() breaks: Array<Highcharts.XAxisBreaksOptions>;
   @Input() height;
   @Input() type: ChartType;
   @Input() description;
