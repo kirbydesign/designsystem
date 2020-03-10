@@ -15,8 +15,7 @@
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true,
     "enableResourceInlining": true,
-    "inlineSourceMap": true,
-    "enableIvy": false
+    "inlineSourceMap": true
   },
   "exclude": ["src/test.ts", "**/*.spec.ts"]
 }
