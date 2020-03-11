@@ -9,4 +9,7 @@
     <ng-content select="[slot='outside']"></ng-content>
   </div>
   <ng-content></ng-content>
+  <ion-reorder slot="end" *ngIf="reorderable">
+    <kirby-icon name="reorder"></kirby-icon>
+  </ion-reorder>
 </ion-item>
