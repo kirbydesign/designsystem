@@ -6,10 +6,10 @@ declare var require: any;
 
 @Component({
   selector: 'kirby-reorder-showcase',
-  templateUrl: './reorder-showcase.component.html',
-  styleUrls: ['./reorder-showcase.component.scss'],
+  templateUrl: './reorder-list-showcase.component.html',
+  styleUrls: ['./reorder-list-showcase.component.scss'],
 })
-export class ReorderShowcaseComponent {
+export class ReorderListShowcaseComponent {
   exampleHtml: string = require('!raw-loader!../../examples/reorder/reorder-list-example.component.html')
     .default;
 
