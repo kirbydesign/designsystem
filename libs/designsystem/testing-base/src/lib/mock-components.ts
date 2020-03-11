@@ -22,11 +22,7 @@ import { MockGridComponent } from './components/mock.grid.component';
 import { MockIconComponent } from './components/mock.icon.component';
 import { MockItemComponent } from './components/mock.item.component';
 import { MockLabelComponent } from './components/mock.label.component';
-import { MockListCellComponent } from './components/mock.list-cell.component';
-import { MockListCellLineComponent } from './components/mock.list-cell-line.component';
-import { MockListFlexItemComponent } from './components/mock.list-flex-item.component';
 import { MockListHeaderComponent } from './components/mock.list-header.component';
-import { MockListItemComponent } from './components/mock.list-item.component';
 import { MockListSectionHeaderComponent } from './components/mock.list-section-header.component';
 import { MockListComponent } from './components/mock.list.component';
 import { MockFullscreenLoadingOverlayComponent } from './components/mock.fullscreen-loading-overlay.component';
@@ -78,11 +74,7 @@ export const MOCK_COMPONENTS = [
   MockIconComponent,
   MockItemComponent,
   MockLabelComponent,
-  MockListCellComponent,
-  MockListCellLineComponent,
-  MockListFlexItemComponent,
   MockListHeaderComponent,
-  MockListItemComponent,
   MockListSectionHeaderComponent,
   MockListComponent,
   MockFullscreenLoadingOverlayComponent,
