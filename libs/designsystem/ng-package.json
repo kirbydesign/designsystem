@@ -9,5 +9,5 @@
       "@ionic/angular": "ionic"
     }
   },
-  "whitelistedNonPeerDependencies": ["@angular/cdk", "@ionic/angular"]
+  "whitelistedNonPeerDependencies": ["@angular/cdk", "@ionic/angular", "highcharts", "moment"]
 }
