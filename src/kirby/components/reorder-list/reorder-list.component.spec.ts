@@ -1,5 +1,6 @@
 import { Spectator, createComponentFactory } from '@ngneat/spectator';
 import { IonicModule } from '@ionic/angular';
+import { MockComponent } from 'ng-mocks';
 
 import { IconModule } from '@kirbydesign/designsystem/components/icon/icon.module';
 import { ReorderListComponent } from './reorder-list.component';
@@ -27,7 +28,7 @@ describe('ReorderListComponent', () => {
   const createHost = createComponentFactory({
     imports: [IonicModule.forRoot(), IconModule],
     component: ReorderListComponent,
-    declarations: [CardComponent, ItemComponent],
+    declarations: [MockComponent(CardComponent), MockComponent(ItemComponent)],
   });
 
   beforeEach(() => {
