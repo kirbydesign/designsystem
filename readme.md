@@ -28,8 +28,10 @@ The Kirby Cookbook, containing samples, status of components etc. can be accesse
 
 - [Installation](#installation)
   - [Sass](#sass)
-  - [Ionic](#ionic)
+  - [Include Module](#include-module)
   - [Icons](#icons)
+  - [Testing](#testing)
+  - [Migration Guide](#migration-guide)
 - [Folder Structure](#folder-structure)
 - [Scripts](#scripts)
 - [Developing new features in Kirby](#developing-new-features-in-kirby)
@@ -62,13 +64,91 @@ Include the Kirby global styles in your app:
   @import '~@kirbydesign/designsystem/scss/utils';
   ```
 
-### Ionic
+### Include module
 
-The Kirby web components are build on top of [Ionic](https://ionicframework.com/docs/components). The [`@ionic/angular`](https://www.npmjs.com/package/@ionic/angular) package should automatically be installed as a dependency of Kirby. If not, please execute the following:
+Import the `KirbyModule` in your `AppModule`:
 
-```bash
-npm i @ionic/angular
+```ts
+import { KirbyModule } from '@kirbydesign/designsystem';
+
+...
+
+@NgModule({
+    imports: [
+        ...
+        KirbyModule
+    ],
+    ...
+})
+export class AppModule {}
 ```
+
+### Testing
+
+To unit-test Applications using Kirby's Components, we recommend importing one of the following modules:
+
+- When using [jasmine](Jasmine), then import `KirbyTestingModule` from `@kirbydesign/designsystem/testing-jasmine`
+- When using [jest](Jest) then import `KirbyTestingModule` from `@kirbydesign/designsystem/testing-jest`
+
+It's highly recommended (for performance reasons) to utilize these modules, since they provide a template-less implementation
+of the Components (by Kirby), but still provide `@Input`-decorated properties and `@Output`-decorated `EventEmitter`s, without
+having the reflow the DOM, execute component logic etc.
+
+### Migration Guide
+
+To upgrade, please perform the following tasks:
+
+- `v0.x.x` -> `v1.0.0`
+
+  #### Change package structure
+
+  Import `@kirbydesign/designsystem` instead of `@kirbydesign/designsystem/list` or `@kirbydesign/designsystem/modal`. This can be done
+  by the following command (executed on Mac / Linux terminal):
+
+  ```sh
+  cd <folder of your application>
+  find . -name "*.ts" ! -name "*.spec.ts" -type f -exec sed -i ’s/from \'@kirbydesign\/designsystem\/.*\';$'/from \'@kirbydesign/designsystem\';/g’ {} \;
+  ```
+
+  If you've utilized the `KirbyTestingModule`, you can update the imports with the following command (executed on Mac / Linux terminal):
+
+  For [Jasmine](jasmine), use:
+
+  ```sh
+  cd <folder of your application>
+  find . -name "*.spec.ts" -type f -exec sed -i ’s/from \'@kirbydesign\/designsystem\/testing';$\'/from \'@kirbydesign/designsystem/testing-jasmine\';/g’ {} \;
+  ```
+
+  For [Jest](jest), use:
+
+  ```sh
+  cd <folder of your application>
+  find . -name "*.spec.ts" -type f -exec sed -i ’s/from \'@kirbydesign\/designsystem\/testing';$\'/from \'@kirbydesign/designsystem/testing-jest\';/g’ {} \;
+  ```
+
+  #### Change TypeScript configuration
+
+  Due to Kirby not being distributed as a source-distribution package any more, changes to `tsconfig.json`, `tsconfig.app.json` as well as `tsconfig.spec.json` should be reverted:
+
+  In `tsconfig.json`:
+
+  - Remove the line `"./node_modules/@kirbydesign/designsystem/**/*.ts"` from the `includes`-array
+
+  In `tsconfig.app.json`:
+
+  - Remove the line `"./node_modules/@kirbydesign/designsystem/**/*.ts"` from the `includes`-array
+  - Remove the line `"../node_modules/@kirbydesign/designsystem/testing/**/*.*"` from the `excludes`-array
+
+  In `tsconfig.spec.json`:
+
+  - Remove the line `"../node_modules/@kirbydesign/designsystem/**/*.ts",` from the `includes`-array
+
+  #### Changed dependencies
+
+  Remove all dependencies (in `package.json`) upon `sass-extract`- as well as `sass-extract-loader` and `ng-mocks`-npm packages (unless otherwise used in your application),
+  this can be done by the following command:
+
+  `npm rm --save-dev sass-extract sass-extract-loader ng-mocks`
 
 ### Icons
 
@@ -91,14 +171,6 @@ Kirby comes bundled with a default set of icons. Make sure the `.svg` files used
     }
   }
 }
-```
-
-### Autocompletion
-
-To enable autocompletion (e.g. in VS Code), you need to add the following line to your `reference.d.ts`:
-
-```ts
-/// <reference path="./node_modules/@kirbydesign/designsystem/index.d.ts" /> Needed for autocompletion and compilation.
 ```
 
 ## Folder Structure
@@ -215,3 +287,5 @@ _**Please note:** If you don't want the additional http request for the polyfill
 ## Chart Components
 
 The Kirby chart components use Highcharts. Note that this is a licensed product.
+[jasmine]: https://jasmine.github.io/
+[jest]: https://jestjs.io/
