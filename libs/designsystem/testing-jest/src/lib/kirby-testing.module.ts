@@ -1,4 +1,4 @@
-/// <reference path='../../../../../node_modules/@types/jasmine/index.d.ts' />
+/// <reference path='../../../../../node_modules/@types/jest/index.d.ts' />
 
 import { NgModule } from '@angular/core';
 
@@ -6,28 +6,30 @@ import { LoadingOverlayService, ModalController, ToastController } from '@kirbyd
 import { KirbyTestingBaseModule } from '@kirbydesign/designsystem/testing-base';
 
 export function modalControllerFactory() {
-  return jasmine.createSpyObj('ModalController', [
-    'showModal',
-    'showActionSheet',
-    'showAlert',
-    'blurNativeWrapper',
-    'register',
-    'hideTopmost',
-    'scrollToTop',
-    'scrollToBottom',
-    'hideAll',
-  ]);
+  return {
+    showModal: jest.fn(),
+    showActionSheet: jest.fn(),
+    showAlert: jest.fn(),
+    blurNativeWrapper: jest.fn(),
+    register: jest.fn(),
+    hideTopmost: jest.fn(),
+    scrollToTop: jest.fn(),
+    scrollToBottom: jest.fn(),
+    hideAll: jest.fn(),
+  };
 }
 
 export function toastControllerFactory() {
-  return jasmine.createSpyObj('ToastController', ['showToast']);
+  return {
+    showToast: jest.fn(),
+  };
 }
 
 export function loadingOverlayServiceFactory() {
-  return jasmine.createSpyObj<LoadingOverlayService>('LoadingOverlayService', [
-    'showLoadingOverlay',
-    'hideLoadingOverlay',
-  ]);
+  return {
+    showLoadingOverlay: jest.fn(),
+    hideLoadingOverlay: jest.fn(),
+  };
 }
 
 @NgModule({
