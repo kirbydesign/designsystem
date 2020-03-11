@@ -3,12 +3,24 @@ import { Directive } from '@angular/core';
 @Directive({
   selector: '[kirbyListItem]',
 })
-export class ListItemDirective {}
+export class ListItemDirective {
+  constructor() {
+    console.warn(
+      '*kirbyListItem directive is deprecated - please use *kirbyListItemTemplate directive instead.'
+    );
+  }
+}
 
 @Directive({
   selector: '[kirbyListFlexItem]',
 })
-export class ListFlexItemDirective {}
+export class ListFlexItemDirective {
+  constructor() {
+    console.warn(
+      '*kirbyListFlexItem directive is deprecated - please use *kirbyListItemTemplate directive instead.'
+    );
+  }
+}
 
 @Directive({
   selector: '[kirbyListItemTemplate]',
