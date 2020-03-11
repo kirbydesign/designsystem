@@ -87,8 +87,8 @@ export class AppModule {}
 
 To unit-test Applications using Kirby's Components, we recommend importing one of the following modules:
 
-- When using [jasmine](Jasmine), then import `KirbyTestingModule` from `@kirbydesign/designsystem/testing-jasmine`
-- When using [jest](Jest) then import `KirbyTestingModule` from `@kirbydesign/designsystem/testing-jest`
+- When using [jasmine][jasmine], then import `KirbyTestingModule` from `@kirbydesign/designsystem/testing-jasmine`
+- When using [jest][jest] then import `KirbyTestingModule` from `@kirbydesign/designsystem/testing-jest`
 
 It's highly recommended (for performance reasons) to utilize these modules, since they provide a template-less implementation
 of the Components (by Kirby), but still provide `@Input`-decorated properties and `@Output`-decorated `EventEmitter`s, without
@@ -112,14 +112,14 @@ To upgrade, please perform the following tasks:
 
   If you've utilized the `KirbyTestingModule`, you can update the imports with the following command (executed on Mac / Linux / Cygwin terminal):
 
-  For [Jasmine](jasmine), use:
+  For [Jasmine][jasmine], use:
 
   ```sh
   cd <folder of your application>
   find . -name "*.spec.ts" -type f -exec sed -i '' -e "s|from '@kirbydesign/designsystem/testing';$|from '@kirbydesign/designsystem/testing-jasmine';|g" {} \;
   ```
 
-  For [Jest](jest), use:
+  For [Jest][jest], use:
 
   ```sh
   cd <folder of your application>
