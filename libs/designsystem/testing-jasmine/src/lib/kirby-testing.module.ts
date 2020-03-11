@@ -1,9 +1,9 @@
-/// <reference path='../../../../../../node_modules/@types/jasmine/index.d.ts' />
+/// <reference path='../../../../../node_modules/@types/jasmine/index.d.ts' />
 
 import { NgModule } from '@angular/core';
 
 import { LoadingOverlayService, ModalController, ToastController } from '@kirbydesign/designsystem';
-import { KirbyTestingModule } from '@kirbydesign/designsystem/testing';
+import { KirbyTestingBaseModule } from '@kirbydesign/designsystem/testing-base';
 
 export function modalControllerFactory() {
   return jasmine.createSpyObj('ModalController', [
@@ -31,8 +31,8 @@ export function loadingOverlayServiceFactory() {
 }
 
 @NgModule({
-  imports: [KirbyTestingModule],
-  exports: [KirbyTestingModule],
+  imports: [KirbyTestingBaseModule],
+  exports: [KirbyTestingBaseModule],
   providers: [
     {
       provide: ModalController,
@@ -48,4 +48,4 @@ export function loadingOverlayServiceFactory() {
     },
   ],
 })
-export class KirbyTestingJasmineModule {}
+export class KirbyTestingModule {}

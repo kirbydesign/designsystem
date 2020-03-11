@@ -6,4 +6,4 @@ import { MOCK_COMPONENTS } from './mock-components';
   declarations: [MOCK_COMPONENTS],
   exports: [MOCK_COMPONENTS],
 })
-export class KirbyTestingModule {}
+export class KirbyTestingBaseModule {}
