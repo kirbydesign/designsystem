@@ -287,5 +287,6 @@ _**Please note:** If you don't want the additional http request for the polyfill
 ## Chart Components
 
 The Kirby chart components use Highcharts. Note that this is a licensed product.
+
 [jasmine]: https://jasmine.github.io/
 [jest]: https://jestjs.io/
