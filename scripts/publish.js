@@ -35,7 +35,7 @@ const distPackageJson = `${distTarget}/package.json`;
 function npm(args, options) {
   return new Promise((resolve, reject) => {
     console.log(`Spawning "npm ${args.join(' ')}"...`);
-    const result = cp.spawn('npm', args);
+    const result = cp.spawn(/^win/.test(process.platform) ? 'npm.cmd' : 'npm', args);
 
     result.stdout.on('data', (data) => {
       console.log(data.toString());
