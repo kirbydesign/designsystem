@@ -103,27 +103,27 @@ To upgrade, please perform the following tasks:
   #### Change package structure
 
   Import `@kirbydesign/designsystem` instead of `@kirbydesign/designsystem/list` or `@kirbydesign/designsystem/modal`. This can be done
-  by the following command (executed on Mac / Linux terminal):
+  by the following command (executed on Mac / Linux / Cygwin terminal):
 
   ```sh
   cd <folder of your application>
-  find . -name "*.ts" ! -name "*.spec.ts" -type f -exec sed -i ’s/from \'@kirbydesign\/designsystem\/.*\';$'/from \'@kirbydesign/designsystem\';/g’ {} \;
+  find . -name "*.ts" ! -name "*.spec.ts" -type f -exec sed -i '' -e "s|from '@kirbydesign/designsystem/.*';$|from '@kirbydesign/designsystem';|g" {} \;
   ```
 
-  If you've utilized the `KirbyTestingModule`, you can update the imports with the following command (executed on Mac / Linux terminal):
+  If you've utilized the `KirbyTestingModule`, you can update the imports with the following command (executed on Mac / Linux / Cygwin terminal):
 
   For [Jasmine](jasmine), use:
 
   ```sh
   cd <folder of your application>
-  find . -name "*.spec.ts" -type f -exec sed -i ’s/from \'@kirbydesign\/designsystem\/testing';$\'/from \'@kirbydesign/designsystem/testing-jasmine\';/g’ {} \;
+  find . -name "*.spec.ts" -type f -exec sed -i '' -e "s|from '@kirbydesign/designsystem/testing';$|from '@kirbydesign/designsystem/testing-jasmine';|g" {} \;
   ```
 
   For [Jest](jest), use:
 
   ```sh
   cd <folder of your application>
-  find . -name "*.spec.ts" -type f -exec sed -i ’s/from \'@kirbydesign\/designsystem\/testing';$\'/from \'@kirbydesign/designsystem/testing-jest\';/g’ {} \;
+  find . -name "*.spec.ts" -type f -exec sed -i '' -e "s|from '@kirbydesign/designsystem/testing';$|from '@kirbydesign/designsystem/testing-jest';|g" {} \;
   ```
 
   #### Change TypeScript configuration
