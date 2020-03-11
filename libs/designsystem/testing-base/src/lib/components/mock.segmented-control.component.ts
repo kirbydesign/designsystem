@@ -10,7 +10,7 @@ import { SegmentItem } from '@kirbydesign/designsystem';
 export class MockSegmentedControlComponent {
   @Output() segmentSelect = new EventEmitter();
   @Input() items: SegmentItem[];
-  @Input() mode;
+  @Input() mode: 'default' | 'chip';
 }
 
 // #endregion

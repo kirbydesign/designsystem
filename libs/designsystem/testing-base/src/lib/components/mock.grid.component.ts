@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 
+import { GridCardConfiguration } from '@kirbydesign/designsystem';
+
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
   selector: 'kirby-grid',
@@ -7,7 +9,7 @@ import { Component, Input } from '@angular/core';
 })
 export class MockGridComponent {
   @Input() maxColumns: number;
-  @Input() cardConfigurations;
+  @Input() cardConfigurations: GridCardConfiguration[];
 }
 
 // #endregion

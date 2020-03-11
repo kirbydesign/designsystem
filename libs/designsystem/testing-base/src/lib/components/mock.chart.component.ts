@@ -8,12 +8,12 @@ import { ChartType } from '@kirbydesign/designsystem';
   template: '<ng-content></ng-content>',
 })
 export class MockChartComponent {
-  @Input() data;
+  @Input() data: [];
   @Input() breaks: Array<Highcharts.XAxisBreaksOptions>;
-  @Input() height;
+  @Input() height: number;
   @Input() type: ChartType;
-  @Input() description;
-  @Input() showDataLabels;
+  @Input() description: string;
+  @Input() showDataLabels: boolean;
 }
 
 // #endregion

@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Observable } from 'rxjs';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
@@ -6,8 +7,8 @@ import { Component, Input } from '@angular/core';
   template: '<ng-content></ng-content>',
 })
 export class MockAlertComponent {
-  @Input() title;
-  @Input() message;
+  @Input() title: string | Observable<string>;
+  @Input() message: string & Observable<string>;
   @Input() iconName: string;
   @Input() iconThemeColor: string;
   @Input() okBtnText: string;

@@ -5,7 +5,7 @@ import { Component, Input } from '@angular/core';
   template: '<ng-content></ng-content>',
 })
 export class MockFullscreenLoadingOverlayComponent {
-  @Input() showBackdrop;
+  @Input() showBackdrop: boolean;
 }
 
 // #endregion

@@ -8,7 +8,7 @@ import { ActionSheetItem } from '@kirbydesign/designsystem';
   template: '<ng-content></ng-content>',
 })
 export class MockActionSheetComponent {
-  @Input() cancelButtonText;
+  @Input() cancelButtonText: string;
   @Input() hideCancel: boolean;
   @Input() disabled: boolean;
   @Input() header: string;

@@ -7,14 +7,14 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 })
 export class MockCalendarComponent {
   @Output() dateChange = new EventEmitter<Date>();
-  @Input() disableWeekends;
-  @Input() disablePastDates;
-  @Input() disableFutureDates;
+  @Input() disableWeekends: boolean;
+  @Input() disablePastDates: boolean;
+  @Input() disableFutureDates: boolean;
   @Input() disabledDates: Date[];
   @Input() minDate: Date;
   @Input() maxDate: Date;
-  @Input() alwaysEnableToday;
-  @Input() selectedDate;
+  @Input() alwaysEnableToday: boolean;
+  @Input() selectedDate: Date;
 }
 
 // #endregion

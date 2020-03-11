@@ -18,8 +18,8 @@ export class MockListComponent {
   @Input() getSectionName: (item: any) => string;
   @Input() trackBy: TrackByFunction<any>;
   @Input() noMoreItemsText: string;
-  @Input() showDivider;
-  @Input() markSelectedRow;
+  @Input() showDivider: boolean;
+  @Input() markSelectedRow: boolean;
   @Input() shape: ListShape;
   @Input() swipeActions: ListSwipeAction[];
   @Output() loadOnDemand = new EventEmitter<LoadOnDemandEvent>();

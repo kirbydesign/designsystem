@@ -9,8 +9,8 @@ export class MockCardComponent {
   @Input() title: string;
   @Input() subtitle: string;
   @Input() hasPadding: boolean;
-  @Input() sizes;
-  @Input() mode;
+  @Input() sizes: { [size: string]: number };
+  @Input() mode: 'flat' | 'highlighted';
 }
 
 // #endregion

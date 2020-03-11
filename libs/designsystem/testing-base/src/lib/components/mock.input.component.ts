@@ -7,7 +7,7 @@ import { Component, Input } from '@angular/core';
   template: '<ng-content></ng-content>',
 })
 export class MockInputComponent {
-  @Input() type;
+  @Input() type: string;
 }
 
 // #endregion

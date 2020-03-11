@@ -6,8 +6,8 @@ import { Component, Input } from '@angular/core';
   template: '<ng-content></ng-content>',
 })
 export class MockLoadingOverlayComponent {
-  @Input() isLoading;
-  @Input() showBackdrop;
+  @Input() isLoading: boolean;
+  @Input() showBackdrop: boolean;
 }
 
 // #endregion
