@@ -1,4 +1,13 @@
-import { Component, Directive, Input, Output, EventEmitter } from '@angular/core';
+import { forwardRef, Component, Directive, Input, Output, EventEmitter } from '@angular/core';
+import {
+  PageTitleDirective,
+  PageToolbarTitleDirective,
+  PageActionsDirective,
+  PageContentDirective,
+  PageContentComponent,
+  PageActionsComponent,
+  PageComponent,
+} from '@kirbydesign/designsystem';
 
 type stickyConfig = { sticky: boolean };
 type fixedConfig = { fixed: boolean };
@@ -6,16 +15,34 @@ type fixedConfig = { fixed: boolean };
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Directive({
   selector: '[kirbyPageTitle]',
+  providers: [
+    {
+      provide: PageTitleDirective,
+      useExisting: forwardRef(() => MockPageTitleDirective),
+    },
+  ],
 })
 export class MockPageTitleDirective {}
 
 @Directive({
   selector: '[kirbyPageToolbarTitle]',
+  providers: [
+    {
+      provide: PageToolbarTitleDirective,
+      useExisting: forwardRef(() => MockPageToolbarTitleDirective),
+    },
+  ],
 })
 export class MockPageToolbarTitleDirective {}
 
 @Directive({
   selector: '[kirbyPageActions]',
+  providers: [
+    {
+      provide: PageActionsDirective,
+      useExisting: forwardRef(() => MockPageActionsDirective),
+    },
+  ],
 })
 export class MockPageActionsDirective {
   @Input() config: stickyConfig | fixedConfig;
@@ -23,6 +50,12 @@ export class MockPageActionsDirective {
 
 @Directive({
   selector: '[kirbyPageContent]',
+  providers: [
+    {
+      provide: PageContentDirective,
+      useExisting: forwardRef(() => MockPageContentDirective),
+    },
+  ],
 })
 export class MockPageContentDirective {
   @Input() config: fixedConfig;
@@ -31,18 +64,36 @@ export class MockPageContentDirective {
 @Component({
   selector: 'kirby-page-content',
   template: '<ng-content></ng-content>',
+  providers: [
+    {
+      provide: PageContentComponent,
+      useExisting: forwardRef(() => MockPageContentComponent),
+    },
+  ],
 })
 export class MockPageContentComponent {}
 
 @Component({
   selector: 'kirby-page-actions',
   template: '<ng-content></ng-content>',
+  providers: [
+    {
+      provide: PageActionsComponent,
+      useExisting: forwardRef(() => MockPageActionsComponent),
+    },
+  ],
 })
 export class MockPageActionsComponent {}
 
 @Component({
   selector: 'kirby-page',
   template: '<ng-content></ng-content>',
+  providers: [
+    {
+      provide: PageComponent,
+      useExisting: forwardRef(() => MockPageComponent),
+    },
+  ],
 })
 export class MockPageComponent {
   @Input() title: string;

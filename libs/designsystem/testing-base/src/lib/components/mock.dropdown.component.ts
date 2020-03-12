@@ -1,9 +1,17 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { forwardRef, Component, Input, Output, EventEmitter } from '@angular/core';
+
+import { DropdownComponent } from '@kirbydesign/designsystem';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
   selector: 'kirby-dropdown',
   template: '<ng-content></ng-content>',
+  providers: [
+    {
+      provide: DropdownComponent,
+      useExisting: forwardRef(() => MockDropdownComponent),
+    },
+  ],
 })
 export class MockDropdownComponent {
   @Input() items: string[] | any[];

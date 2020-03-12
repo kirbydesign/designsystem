@@ -1,11 +1,17 @@
-import { Component, Input } from '@angular/core';
+import { forwardRef, Component, Input } from '@angular/core';
 
-import { GridCardConfiguration } from '@kirbydesign/designsystem';
+import { GridComponent, GridCardConfiguration } from '@kirbydesign/designsystem';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
   selector: 'kirby-grid',
   template: '<ng-content></ng-content>',
+  providers: [
+    {
+      provide: GridComponent,
+      useExisting: forwardRef(() => MockGridComponent),
+    },
+  ],
 })
 export class MockGridComponent {
   @Input() maxColumns: number;

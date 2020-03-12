@@ -1,9 +1,17 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { forwardRef, Component, Input, Output, EventEmitter } from '@angular/core';
+
+import { CalendarComponent } from '@kirbydesign/designsystem';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
   selector: 'kirby-calendar',
   template: '<ng-content></ng-content>',
+  providers: [
+    {
+      provide: CalendarComponent,
+      useExisting: forwardRef(() => MockCalendarComponent),
+    },
+  ],
 })
 export class MockCalendarComponent {
   @Output() dateChange = new EventEmitter<Date>();

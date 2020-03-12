@@ -1,9 +1,17 @@
-import { Component, Input } from '@angular/core';
+import { forwardRef, Component, Input } from '@angular/core';
+
+import { CardComponent } from '@kirbydesign/designsystem';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
   selector: 'kirby-card',
   template: '<ng-content></ng-content>',
+  providers: [
+    {
+      provide: CardComponent,
+      useExisting: forwardRef(() => MockCardComponent),
+    },
+  ],
 })
 export class MockCardComponent {
   @Input() title: string;

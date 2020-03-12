@@ -1,11 +1,17 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { forwardRef, Component, Input, Output, EventEmitter } from '@angular/core';
 
-import { ActionSheetItem } from '@kirbydesign/designsystem';
+import { ActionSheetComponent, ActionSheetItem } from '@kirbydesign/designsystem';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
   selector: 'kirby-action-sheet',
   template: '<ng-content></ng-content>',
+  providers: [
+    {
+      provide: ActionSheetComponent,
+      useExisting: forwardRef(() => MockActionSheetComponent),
+    },
+  ],
 })
 export class MockActionSheetComponent {
   @Input() cancelButtonText: string;
