@@ -16,6 +16,10 @@ import { TextareaComponent } from '@kirbydesign/designsystem';
 })
 export class MockTextareaComponent {
   @Input() value: string;
+  @Input() hasError: boolean;
+  @Input() autocomplete: 'on' | 'off';
+  @Input() autocorrect: 'on' | 'off';
+  @Input() maxlength: number;
 }
 
 // #endregion

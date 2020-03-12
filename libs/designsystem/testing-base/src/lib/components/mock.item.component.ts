@@ -15,6 +15,7 @@ import { ItemComponent } from '@kirbydesign/designsystem';
 })
 export class MockItemComponent {
   @Input() disabled: boolean;
+  @Input() selected: boolean;
   @Input() selectable: boolean;
   @Input() reorderable: boolean;
 }

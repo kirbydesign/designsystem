@@ -21,6 +21,7 @@ export class MockDropdownComponent {
   @Input() attentionLevel: '1' | '2' | '3' | '4';
   @Input() expand: 'block';
   @Input() disabled: boolean;
+  @Input() hasError: boolean;
   @Input() tabindex: number;
   @Output() change = new EventEmitter<string | any>();
 }

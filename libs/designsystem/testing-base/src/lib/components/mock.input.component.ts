@@ -16,6 +16,12 @@ import { InputComponent } from '@kirbydesign/designsystem';
 })
 export class MockInputComponent {
   @Input() type: string;
+  @Input() hasError: boolean;
+  @Input() autocomplete: 'on' | 'off';
+  @Input() autocorrect: 'on' | 'off';
+  @Input() value: string;
+  @Input() maxlength: number;
+  @Input() inputmode: string;
 }
 
 // #endregion
