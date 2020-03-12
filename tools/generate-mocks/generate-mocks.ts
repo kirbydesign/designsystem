@@ -1,10 +1,9 @@
 import * as ts from 'typescript';
 import * as prettier from 'prettier';
 
-import { posix as path } from 'path';
+import { posix as path, resolve } from 'path';
 
 import { readFileSync, writeFileSync, readdirSync, statSync, existsSync } from 'fs';
-const { resolve } = require('path');
 const { readdir, readFile } = require('fs').promises;
 
 type ComponentMetaData = {
