@@ -165,6 +165,22 @@ To upgrade, please perform the following tasks:
 
   `npm uninstall --save-dev sass-extract sass-extract-loader ng-mocks`
 
+  #### Deprecation
+
+  The following legacy components has been removed:
+
+  - `ListItemComponent` (`<kirby-list-item>`)
+  - `ListFlexItemComponent` (`<kirby-list-flex-item>`)
+  - `ListCellComponent` (`<kirby-list-cell>`)
+  - `ListCellLineComponent` (`<kirby-list-cell-line>`)
+
+  The following directives has been deprecated and will be removed in future versions:
+
+  - `ListItemDirective` (`[kirbyListItem]`)
+  - `ListFlexItemDirective` (`[kirbyListFlexItem]`)
+
+  _Please see the [list documentation][kirby.cookbook.list] on how to use the list component(s) and directives._
+
 ### Icons
 
 Kirby comes bundled with a default set of icons. Make sure the `.svg` files used by Kirby are copied to your output folder by adding the following to `build > options > assets` in `angular.json`:
@@ -312,3 +328,4 @@ The Kirby chart components use Highcharts. Note that this is a licensed product.
 [kirby.cookbook]: https://cookbook.kirby.design
 [kirby.cookbook.fonts]: https://cookbook.kirby.design/home/showcase/fonts
 [kirby.cookbook.colors]: https://cookbook.kirby.design/home/showcase/colors
+[kirby.cookbook.list]: https://cookbook.kirby.design/home/showcase/list
