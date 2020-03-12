@@ -15,17 +15,15 @@
 
 Kirby Design System is a UX Component library implementing the [Kirby Design Philosophy][kirby.design].
 
-<!-- Read more at: https://kirby.design -->
-
 Kirby Components are built on top of [Angular][angular] and can be used in Angular projects.
 
-The Kirby Cookbook, containing samples, status of components etc. can be accessed from [https://cookbook.kirby.design](kirby.cookbook).
+The Kirby Cookbook, containing samples, status of components etc. can be accessed from [https://cookbook.kirby.design][kirby.cookbook].
 
 ## Table of Contents
 
 - [Installation](#installation)
+  - [Include KirbyModule](#include-kirbymodule)
   - [Sass](#sass)
-  - [Include Module](#include-module)
   - [Icons](#icons)
   - [Testing](#testing)
   - [Migration Guide](#migration-guide)
@@ -45,23 +43,7 @@ Install through npm:
 npm i @kirbydesign/designsystem
 ```
 
-### Sass
-
-Include the Kirby global styles in your app:
-
-- Eg. in `src/styles.scss`:
-
-  ```css
-  @import '~@kirbydesign/designsystem/scss/global-styles';
-  ```
-
-  In each `.scss` file where you need to access the Sass utility functions from Kirby (e.g. [colors](https://cookbook.kirby.design/home/showcase/colors) or [fonts](https://cookbook.kirby.design/home/showcase/fonts)) you must import the scss utilities:
-
-  ```css
-  @import '~@kirbydesign/designsystem/scss/utils';
-  ```
-
-### Include module
+### Include KirbyModule
 
 Import the `KirbyModule` in your `AppModule`:
 
@@ -72,7 +54,7 @@ import { KirbyModule } from '@kirbydesign/designsystem';
 
 @NgModule({
     imports: [
-        ...
+        ...,
         KirbyModule
     ],
     ...
@@ -80,48 +62,84 @@ import { KirbyModule } from '@kirbydesign/designsystem';
 export class AppModule {}
 ```
 
+### Sass
+
+Include the Kirby global styles in your app:
+
+- Eg. in `src/styles.scss`:
+
+  ```css
+  @import '~@kirbydesign/designsystem/scss/global-styles';
+  ```
+
+  In each `.scss` file where you need to access the Sass utility functions from Kirby (e.g. [colors][kirby.cookbook.colors] or [fonts][kirby.cookbook.fonts]) you must import the scss utilities:
+
+  ```css
+  @import '~@kirbydesign/designsystem/scss/utils';
+  ```
+
 ### Testing
 
-To unit-test Applications using Kirby's Components, we recommend importing one of the following modules:
+To unit-test applications using Kirby's Components, we recommend importing one of the following modules:
 
-- When using [jasmine][jasmine], then import `KirbyTestingModule` from `@kirbydesign/designsystem/testing-jasmine`
-- When using [jest][jest] then import `KirbyTestingModule` from `@kirbydesign/designsystem/testing-jest`
+- When using [jasmine][jasmine]: `import { KirbyTestingModule } from '@kirbydesign/designsystem/`**`testing-jasmine'`**`;`
+- When using [jest][jest]: `import { KirbyTestingModule } from '@kirbydesign/designsystem/`**`testing-jest'`**`;`
 
-It's highly recommended (for performance reasons) to utilize these modules, since they provide a template-less implementation
-of the Components (by Kirby), but still provide `@Input`-decorated properties and `@Output`-decorated `EventEmitter`s, without
-having the reflow the DOM, execute component logic etc.
+Example:
+
+```ts
+import { KirbyTestingModule } from '@kirbydesign/designsystem/testing-jasmine';
+
+describe('AppComponent', () => {
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      imports: [KirbyTestingModule],
+      declarations: [AppComponent]
+    }).compileComponents();
+  }));
+
+  ...
+
+});
+```
+
+For unit test performance reasons it's highly recommended to utilize these modules, since they provide a template-less implementation of the Kirby Components, but still translude content through `<ng-content></ng-content>` and provide `@Input`-decorated properties and `@Output`-decorated `EventEmitter`s, without
+having to reflow the DOM, execute component logic etc.
 
 ### Migration Guide
 
 To upgrade, please perform the following tasks:
 
-- `v0.x.x` -> `v1.0.0`
+- `v0.x.x` => `v1.0.0`
 
-  #### Change package structure
+  #### Simplified namespaces
 
-  Import `@kirbydesign/designsystem` instead of `@kirbydesign/designsystem/list` or `@kirbydesign/designsystem/modal`. This can be done
-  by the following command (executed on Mac / Linux / Cygwin terminal):
+  Import `@kirbydesign/designsystem` instead of `@kirbydesign/designsystem/list` or `@kirbydesign/designsystem/modal`. This can be done by executing the following commands (Mac/Linux and Windows respectively):
+
+  ##### Mac / Linux
 
   ```sh
-  cd <folder of your application>
+  cd <root folder of your application>
   find . -name "*.ts" ! -name "*.spec.ts" -type f -exec sed -i '' -e "s|from '@kirbydesign/designsystem/.*';$|from '@kirbydesign/designsystem';|g" {} \;
-  ```
 
-  If you've utilized the `KirbyTestingModule`, you can update the imports with the following command (executed on Mac / Linux / Cygwin terminal):
-
-  For [Jasmine][jasmine], use:
-
-  ```sh
-  cd <folder of your application>
   find . -name "*.spec.ts" -type f -exec sed -i '' -e "s|from '@kirbydesign/designsystem/testing';$|from '@kirbydesign/designsystem/testing-jasmine';|g" {} \;
   ```
 
-  For [Jest][jest], use:
+  _Note: If you're using `jest` you should replace with `@kirbydesign/designsystem/testing-jest` instead._
+
+  ##### Windows
 
   ```sh
-  cd <folder of your application>
-  find . -name "*.spec.ts" -type f -exec sed -i '' -e "s|from '@kirbydesign/designsystem/testing';$|from '@kirbydesign/designsystem/testing-jest';|g" {} \;
+  cd <root folder of your application>
+  Get-ChildItem "*.ts" -Recurse | ForEach {
+  (Get-Content $_ | ForEach  { $_ `
+    -replace "from '@kirbydesign/designsystem/((?!testing).)*';$", "from '@kirbydesign/designsystem';" `
+    -replace "from '@kirbydesign/designsystem/testing';$", "from '@kirbydesign/designsystem/testing-jasmine';" `
+  }) | Set-Content $_
+  }
   ```
+
+  _Note: If you're using `jest` you should replace with `@kirbydesign/designsystem/testing-jest` instead._
 
   #### Change TypeScript configuration
 
@@ -142,10 +160,10 @@ To upgrade, please perform the following tasks:
 
   #### Changed dependencies
 
-  Remove all dependencies (in `package.json`) upon `sass-extract`- as well as `sass-extract-loader` and `ng-mocks`-npm packages (unless otherwise used in your application),
-  this can be done by the following command:
+  Remove any previously installed dev-dependencies for `sass-extract`, `sass-extract-loader` and `ng-mocks` _(unless otherwise used in your application)_.
+  This can be done by the following command:
 
-  `npm rm --save-dev sass-extract sass-extract-loader ng-mocks`
+  `npm uninstall --save-dev sass-extract sass-extract-loader ng-mocks`
 
 ### Icons
 
@@ -157,7 +175,7 @@ Kirby comes bundled with a default set of icons. Make sure the `.svg` files used
   "build": {
     "options": {
       "assets": [
-        ...
+        ...,
         {
           "glob": "**/*.svg",
           "input": "node_modules/@kirbydesign/designsystem/icons/svg",
@@ -257,7 +275,7 @@ Add the following to `build > options > assets` in `angular.json`:
   "build": {
     "options": {
       "assets": [
-        ...
+        ...,
         {
           "glob": "**/*",
           "input": "./node_modules/@kirbydesign/designsystem/polyfills",
@@ -292,3 +310,5 @@ The Kirby chart components use Highcharts. Note that this is a licensed product.
 [nx]: https://nx.dev/angular
 [kirby.design]: https://kirby.design/
 [kirby.cookbook]: https://cookbook.kirby.design
+[kirby.cookbook.fonts]: https://cookbook.kirby.design/home/showcase/fonts
+[kirby.cookbook.colors]: https://cookbook.kirby.design/home/showcase/colors
