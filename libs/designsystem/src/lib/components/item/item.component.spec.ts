@@ -2,7 +2,7 @@ import { Spectator, createComponentFactory } from '@ngneat/spectator';
 import { MockModule } from 'ng-mocks';
 import { IonicModule } from '@ionic/angular';
 
-import { IconModule } from '../icon';
+import { IconModule } from '../icon/icon.module';
 import { ItemComponent } from './item.component';
 
 describe('ItemComponent', () => {
