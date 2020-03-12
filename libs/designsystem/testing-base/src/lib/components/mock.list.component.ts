@@ -1,4 +1,5 @@
 import { forwardRef, Component, Input, Output, EventEmitter, TrackByFunction } from '@angular/core';
+
 import {
   ListComponent,
   ListSwipeAction,
