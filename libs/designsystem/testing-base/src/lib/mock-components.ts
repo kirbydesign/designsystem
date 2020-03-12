@@ -6,7 +6,6 @@ import { MockCalendarComponent } from './components/mock.calendar.component';
 import { MockCardFooterComponent } from './components/mock.card-footer.component';
 import { MockCardHeaderComponent } from './components/mock.card-header.component';
 import { MockCardComponent } from './components/mock.card.component';
-import { MockChartComponent } from './components/mock.chart.component';
 import { MockCheckboxComponent } from './components/mock.checkbox.component';
 import { MockChipComponent } from './components/mock.chip.component';
 import { MockDividerComponent } from './components/mock.divider.component';
@@ -25,12 +24,8 @@ import { MockLabelComponent } from './components/mock.label.component';
 import { MockListHeaderComponent } from './components/mock.list-header.component';
 import { MockListSectionHeaderComponent } from './components/mock.list-section-header.component';
 import { MockListComponent } from './components/mock.list.component';
-import { MockFullscreenLoadingOverlayComponent } from './components/mock.fullscreen-loading-overlay.component';
 import { MockLoadingOverlayComponent } from './components/mock.loading-overlay.component';
 import { MockActionSheetComponent } from './components/mock.action-sheet.component';
-import { MockAlertComponent } from './components/mock.alert.component';
-import { MockModalCompactWrapperComponent } from './components/mock.modal-compact-wrapper.component';
-import { MockModalWrapperComponent } from './components/mock.modal-wrapper.component';
 import {
   MockPageTitleDirective,
   MockPageToolbarTitleDirective,
@@ -59,7 +54,6 @@ export const MOCK_COMPONENTS = [
   MockCardFooterComponent,
   MockCardHeaderComponent,
   MockCardComponent,
-  MockChartComponent,
   MockCheckboxComponent,
   MockChipComponent,
   MockDividerComponent,
@@ -78,12 +72,8 @@ export const MOCK_COMPONENTS = [
   MockListHeaderComponent,
   MockListSectionHeaderComponent,
   MockListComponent,
-  MockFullscreenLoadingOverlayComponent,
   MockLoadingOverlayComponent,
   MockActionSheetComponent,
-  MockAlertComponent,
-  MockModalCompactWrapperComponent,
-  MockModalWrapperComponent,
   MockPageTitleDirective,
   MockPageToolbarTitleDirective,
   MockPageActionsDirective,

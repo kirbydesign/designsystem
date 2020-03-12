@@ -4,6 +4,8 @@ import * as prettier from 'prettier';
 import { posix as path } from 'path';
 
 import { readFileSync, writeFileSync, readdirSync, statSync, existsSync } from 'fs';
+const { resolve } = require('path');
+const { readdir, readFile } = require('fs').promises;
 
 type ComponentMetaData = {
   className: string;
@@ -17,7 +19,14 @@ export class GenerateMocks {
     const inputPath = path.join(rootPath, subPath);
     const outputPathNormalized = path.normalize(outputPath);
     const classMap = new Map<string, string[]>();
-    await this.traverseFolder(inputPath, outputPathNormalized, subPath, classMap);
+    const exportedComponents = await this.getExportedComponents(inputPath);
+    await this.traverseFolder(
+      inputPath,
+      outputPathNormalized,
+      subPath,
+      classMap,
+      exportedComponents
+    );
     await this.renderMockComponentDeclaration(classMap, outputPathNormalized);
   }
 
@@ -47,23 +56,61 @@ export const MOCK_COMPONENTS = [
     writeFileSync(filename, formatted);
   }
 
+  private async getExportedComponents(folderpath: string): Promise<string[]> {
+    const files = await this.getBarrelFiles(folderpath);
+    const exportedTypes = await Promise.all(
+      files.map(async (file) => {
+        const fileContent = await readFile(file, 'utf8');
+        const typesInFile = [];
+        const exportRegEx = /^export \{ *(.*) *\} from '\.\//;
+        const exportRegExGlobal = new RegExp(exportRegEx, 'gm');
+        // "|| []" prevents having to check for undefined:
+        (fileContent.match(exportRegExGlobal) || []).forEach((matchedLine) => {
+          // "slice(1)" skips the full match:
+          (matchedLine.match(exportRegEx) || []).slice(1).forEach((exported) => {
+            // Split multiple entries, trim away whitespace and add:
+            typesInFile.push(...exported.split(',').map((entry) => entry.trim()));
+          });
+        });
+        return typesInFile;
+      })
+    );
+    return Array.prototype.concat(...exportedTypes);
+  }
+
+  private async getBarrelFiles(folderpath: string) {
+    const dirents = await readdir(folderpath, { withFileTypes: true });
+    const files = await Promise.all(
+      dirents
+        .filter((dirent) => {
+          return dirent.isDirectory() || dirent.name.endsWith('index.ts');
+        })
+        .map((dirent) => {
+          const res = resolve(folderpath, dirent.name);
+          return dirent.isDirectory() ? this.getBarrelFiles(res) : res;
+        })
+    );
+    return Array.prototype.concat(...files);
+  }
+
   private async traverseFolder(
     folderpath: string,
     outputPath: string,
     subPath: string,
-    classMap: Map<string, string[]>
+    classMap: Map<string, string[]>,
+    exportedComponents: string[]
   ) {
     const folderContent = readdirSync(folderpath);
     for (const fileOrFolder of folderContent) {
       const fullPath = path.join(folderpath, fileOrFolder);
       const ent = statSync(fullPath);
       if (ent.isDirectory()) {
-        await this.traverseFolder(fullPath, outputPath, subPath, classMap);
+        await this.traverseFolder(fullPath, outputPath, subPath, classMap, exportedComponents);
       } else {
         if (fileOrFolder.endsWith('.component.ts')) {
           // console.log('Rendering mock for: ', fullPath);
           const newFilename = path.join(outputPath, subPath, 'mock.' + fileOrFolder);
-          const classNames = await this.renderMock(fullPath, newFilename);
+          const classNames = await this.renderMock(fullPath, newFilename, exportedComponents);
           if (classNames) {
             classMap.set(newFilename, classNames);
           }
@@ -72,9 +119,13 @@ export const MOCK_COMPONENTS = [
     }
   }
 
-  private async renderMock(fileName: string, newFilename: string) {
+  private async renderMock(fileName: string, newFilename: string, exportedComponents: string[]) {
     const components = this.generateMetaData(fileName);
     if (!components.find((metaData) => metaData.decorator)) {
+      // Nothing to generate:
+      return;
+    }
+    if (!components.some((metaData) => exportedComponents.indexOf(metaData.className) > -1)) {
       // Nothing to generate:
       return;
     }
@@ -83,7 +134,7 @@ export const MOCK_COMPONENTS = [
     components.forEach((metaData) => {
       const mockClassName = 'Mock' + metaData.className;
       classNames.push(mockClassName);
-      const classDeclaration = this.renderClass(mockClassName, metaData);
+      const classDeclaration = this.renderClass(metaData.className, mockClassName, metaData);
       rendered.push(classDeclaration);
     });
 
@@ -106,7 +157,11 @@ ${endRegion}
     return classNames;
   }
 
-  private renderClass(className: string, componentMetaData: ComponentMetaData): string {
+  private renderClass(
+    className: string,
+    mockClassName: string,
+    componentMetaData: ComponentMetaData
+  ): string {
     const propertiesString = this.renderProperties(componentMetaData.properties);
     const validSelector =
       componentMetaData.selector &&
@@ -117,22 +172,31 @@ ${endRegion}
         ? `\n  // tslint:disable-next-line: component-selector`
         : '';
     const selector = componentMetaData.selector
-      ? `\n  selector: ${componentMetaData.selector},`
+      ? `${tsLintDisableSelector}\n  selector: ${componentMetaData.selector},`
       : '';
     const template =
       componentMetaData.decorator === 'Component'
         ? `\n  template: '<ng-content></ng-content>',`
         : '';
-    const content = `@${componentMetaData.decorator}({${tsLintDisableSelector}${selector}${template}
-})
-export class ${className} {${propertiesString}}
+    const providers = `
+providers: [
+    {
+      provide: ${className},
+      useExisting: forwardRef(() => ${mockClassName}),
+    },
+  ],
+`;
+
+    const config = `{${selector}${template}${providers}}`;
+    const content = `@${componentMetaData.decorator}(${config})
+export class ${mockClassName} {${propertiesString}}
 `;
     return content;
   }
 
   private getImports(components: ComponentMetaData[]): string[] {
     const importStatements = [];
-    const angularCoreImports = [];
+    const angularCoreImports = ['forwardRef'];
     if (components.some((metaData) => metaData.decorator === 'Component')) {
       angularCoreImports.push('Component');
     }
@@ -158,6 +222,11 @@ export class ${className} {${propertiesString}}
     ) {
       importStatements.push(`import { Observable } from 'rxjs';`);
     }
+
+    const kirbyImports = components.map((metaData) => metaData.className);
+    importStatements.push(
+      `import { ${kirbyImports.join(', ')} } from '@kirbydesign/designsystem';`
+    );
 
     return importStatements;
   }

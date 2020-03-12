@@ -1,3 +1,2 @@
-export * from './icon.component';
-export { IconModule } from './icon.module';
-export * from './icon-settings';
+export { IconComponent } from './icon.component';
+export { IconSettings, ICON_SETTINGS, Icon } from './icon-settings';

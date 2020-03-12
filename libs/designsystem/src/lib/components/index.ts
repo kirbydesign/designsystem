@@ -12,6 +12,8 @@ export { ChipComponent } from './chip/chip.component';
 
 export { DividerComponent } from './divider/divider.component';
 
+export { DropdownComponent } from './dropdown/dropdown.component';
+
 export { EmptyStateComponent } from './empty-state/empty-state.component';
 
 export * from './form-field';
