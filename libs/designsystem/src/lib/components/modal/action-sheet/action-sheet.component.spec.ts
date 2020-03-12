@@ -6,15 +6,12 @@ import * as ionic from '@ionic/angular';
 import { CUSTOM_ELEMENTS_SCHEMA, DebugElement } from '@angular/core';
 
 import { ActionSheetComponent } from './action-sheet.component';
-import { ListCellComponent } from '../../list/list-cell/list-cell.component';
 import { ListComponent } from '../../list/list.component';
-import { ListCellLineComponent } from '../../list/list-cell-line/list-cell-line.component';
 import { CardComponent } from '../../card/card.component';
 import { GroupByPipe } from '../../list/pipes/group-by.pipe';
 import { SpinnerComponent } from '../../spinner/spinner.component';
 import { InfiniteScrollDirective } from '../../list/directives/infinite-scroll.directive';
 import { CardHeaderComponent } from '../../card/card-header/card-header.component';
-import { ListFlexItemComponent } from '../../list/list-flex-item/list-flex-item.component';
 import { ButtonComponent } from '../../button/button.component';
 import { ListItemColorDirective } from '../../list/directives/list-item-color.directive';
 
@@ -27,11 +24,8 @@ describe('ActionSheetComponent', () => {
       declarations: [
         ActionSheetComponent,
         ListComponent,
-        ListCellComponent,
-        ListFlexItemComponent,
         CardComponent,
         CardHeaderComponent,
-        ListCellLineComponent,
         GroupByPipe,
         SpinnerComponent,
         InfiniteScrollDirective,
