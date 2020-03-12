@@ -19,6 +19,12 @@ Kirby Components are built on top of [Angular][angular] and can be used in Angul
 
 The Kirby Cookbook, containing samples, status of components etc. can be accessed from [https://cookbook.kirby.design][kirby.cookbook].
 
+---
+
+## 💥 Kirby v. `1.0.0` has landed! Please see the [Migration Guide](#migration-guide) if you're upgrading from `<= 0.8.x`
+
+---
+
 ## Table of Contents
 
 - [Installation](#installation)
