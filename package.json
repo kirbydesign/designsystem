@@ -20,7 +20,7 @@
     "lint:cookbook:css": "stylelint './apps/cookbook/src/**/*.scss'",
     "lint:cookbook:css:fix": "npm run lint:cookbook:css -- --fix",
     "lint:designsystem": "npm run lint:designsystem:ts && npm run lint:designsystem:css",
-    "lint:designsystem:ts": "tslint './libs/designsystem/src/**/*.ts'",
+    "lint:designsystem:ts": "tslint './libs/designsystem/**/*.ts'",
     "lint:designsystem:ts:fix": "npm run lint:designsystem:ts -- --fix",
     "lint:designsystem:css": "stylelint './libs/designsystem/src/**/*.scss'",
     "lint:designsystem:css:fix": "npm run lint:designsystem:css -- --fix",
