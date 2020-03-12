@@ -185,14 +185,11 @@ export class ${className} {${propertiesString}}
     );
     const components = [];
     sourceFile.forEachChild((node) => {
-      switch (node.kind) {
-        case ts.SyntaxKind.ClassDeclaration: {
-          const componentMetaData = { className: '', decorator: '', selector: '', properties: [] };
-          this.visitTree(node, componentMetaData);
-          if (componentMetaData.decorator) {
-            components.push(componentMetaData);
-          }
-          break;
+      if (ts.isClassDeclaration(node)) {
+        const componentMetaData = { className: '', decorator: '', selector: '', properties: [] };
+        this.visitTree(node, componentMetaData);
+        if (componentMetaData.decorator) {
+          components.push(componentMetaData);
         }
       }
     });
@@ -200,17 +197,11 @@ export class ${className} {${propertiesString}}
   }
 
   private visitTree(node: ts.Node, componentMetaData?: ComponentMetaData) {
-    switch (node.kind) {
-      case ts.SyntaxKind.ClassDeclaration: {
-        this.visitClassDeclaration(node as ts.ClassDeclaration, componentMetaData);
-        break;
-      }
-      case ts.SyntaxKind.PropertyDeclaration:
-      case ts.SyntaxKind.SetAccessor: {
-        const propertyDeclaration = node as (ts.SetAccessorDeclaration | ts.PropertyDeclaration);
-        this.visitPropertyDeclaration(propertyDeclaration, componentMetaData);
-        break;
-      }
+    if (ts.isClassDeclaration(node)) {
+      this.visitClassDeclaration(node, componentMetaData);
+    }
+    if (ts.isPropertyDeclaration(node) || ts.isSetAccessorDeclaration(node)) {
+      this.visitPropertyDeclaration(node, componentMetaData);
     }
     ts.forEachChild(node, (node) => this.visitTree(node, componentMetaData));
   }
@@ -223,27 +214,23 @@ export class ${className} {${propertiesString}}
     componentMetaData.className = className;
     if (classDeclaration && classDeclaration.decorators) {
       classDeclaration.decorators.forEach((decorator) => {
-        switch (decorator.expression.kind) {
-          case ts.SyntaxKind.CallExpression:
-            const decoratorExpression = decorator.expression as ts.CallExpression;
-            switch (decoratorExpression.expression.kind) {
-              case ts.SyntaxKind.Identifier:
-                const identifier = decoratorExpression.expression as ts.Identifier;
-                const decoratorName = identifier.getText();
-                if (decoratorName === 'Component' || decoratorName === 'Directive') {
-                  componentMetaData.decorator = decoratorName;
-                  const args = decoratorExpression.arguments[0] as ts.ObjectLiteralExpression;
-                  const selectorArg = args.properties.find(
-                    (prop) => prop.name.getText() === 'selector'
-                  ) as ts.PropertyAssignment;
-                  if (selectorArg) {
-                    const selector = selectorArg.initializer.getText();
-                    componentMetaData.selector = selector;
-                  }
+        if (ts.isCallExpression(decorator.expression)) {
+          if (ts.isIdentifier(decorator.expression.expression)) {
+            const decoratorName = decorator.expression.expression.getText();
+            if (decoratorName === 'Component' || decoratorName === 'Directive') {
+              componentMetaData.decorator = decoratorName;
+              const decoratorArg = decorator.expression.arguments[0];
+              if (ts.isObjectLiteralExpression(decoratorArg)) {
+                const selectorProp = decoratorArg.properties.find(
+                  (prop) => prop.name.getText() === 'selector'
+                );
+                if (selectorProp && ts.isPropertyAssignment(selectorProp)) {
+                  const selector = selectorProp.initializer.getText();
+                  componentMetaData.selector = selector;
                 }
-                break;
+              }
             }
-            break;
+          }
         }
       });
     }
