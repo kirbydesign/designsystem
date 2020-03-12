@@ -8,6 +8,7 @@ import { Component, Input } from '@angular/core';
 export class MockItemComponent {
   @Input() disabled: boolean;
   @Input() selectable: boolean;
+  @Input() reorderable: boolean;
 }
 
 // #endregion

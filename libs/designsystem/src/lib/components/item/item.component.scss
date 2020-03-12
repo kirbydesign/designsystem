@@ -28,7 +28,7 @@
       margin-inline-start: size('xs');
     }
 
-    @include slotted('data[slot="end"]', '[detail][slot="end"]') {
+    @include slotted('data[slot="end"]', '[detail][slot="end"], ion-reorder[slot="end"]') {
       margin-inline-start: size('s');
     }
 

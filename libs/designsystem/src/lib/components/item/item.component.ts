@@ -12,4 +12,6 @@ export class ItemComponent {
   selected;
   @Input()
   selectable: boolean;
+  @Input()
+  reorderable: boolean;
 }
