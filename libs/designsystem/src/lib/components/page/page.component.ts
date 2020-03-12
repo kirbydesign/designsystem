@@ -97,12 +97,12 @@ export class PageActionsComponent {}
 })
 export class PageComponent
   implements OnInit, OnDestroy, AfterViewInit, AfterContentChecked, OnChanges {
-  @Input() title?: string;
-  @Input() toolbarTitle?: string;
-  @Input() titleAlignment?: 'left' | 'center' | 'right' = 'left';
-  @Input() defaultBackHref?: string;
-  @Input() hideBackButton?: boolean;
-  @Input() titleMaxLines?: number;
+  @Input() title: string;
+  @Input() toolbarTitle: string;
+  @Input() titleAlignment: 'left' | 'center' | 'right' = 'left';
+  @Input() defaultBackHref: string;
+  @Input() hideBackButton: boolean;
+  @Input() titleMaxLines: number;
 
   @Output() enter = new EventEmitter<void>();
   @Output() leave = new EventEmitter<void>();

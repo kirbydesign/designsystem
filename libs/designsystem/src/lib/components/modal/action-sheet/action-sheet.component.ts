@@ -9,10 +9,10 @@ import { ActionSheetItem } from './config/action-sheet-item';
 })
 export class ActionSheetComponent {
   @Input() cancelButtonText = 'Cancel';
-  @Input() hideCancel?: boolean = false;
-  @Input() disabled?: boolean = false;
-  @Input() header?: string;
-  @Input() subheader?: string;
+  @Input() hideCancel: boolean = false;
+  @Input() disabled: boolean = false;
+  @Input() header: string;
+  @Input() subheader: string;
   @Input() items: Array<ActionSheetItem>;
   @Output() cancel = new EventEmitter();
   @Output() itemSelect: EventEmitter<ActionSheetItem> = new EventEmitter<ActionSheetItem>();

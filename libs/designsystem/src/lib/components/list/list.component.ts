@@ -54,12 +54,12 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   /**
    * Callback to determine name of section. Sections will be ordered alphabetically.
    */
-  @Input() getSectionName?: (item: any) => string;
+  @Input() getSectionName: (item: any) => string;
 
   /**
    * Callback that defines how to track changes for items in the iterable.
    */
-  @Input() trackBy?: TrackByFunction<any>;
+  @Input() trackBy: TrackByFunction<any>;
 
   /**
    * Text to display when no more items can be loaded (used for "on demand"-loading).
@@ -103,7 +103,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
    * - the order of swipe actions is used to determine edge actions,
    * as well as their order of appearance on the screen.
    */
-  @Input() swipeActions?: ListSwipeAction[] = [];
+  @Input() swipeActions: ListSwipeAction[] = [];
 
   /**
    * Emitting event when more items are to be loaded.

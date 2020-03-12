@@ -20,8 +20,8 @@ import { Icon } from '../icon/icon-settings';
   styleUrls: ['./fab-sheet.component.scss'],
 })
 export class FabSheetComponent implements AfterContentInit, AfterViewInit {
-  @Input() disabled?: boolean = false;
-  @Input() horizontalAlignment?: 'left' | 'center' | 'right' = 'right';
+  @Input() disabled: boolean = false;
+  @Input() horizontalAlignment: 'left' | 'center' | 'right' = 'right';
 
   private _isFabSheetOpen: boolean = false;
   @HostBinding('class.is-open')

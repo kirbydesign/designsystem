@@ -8,7 +8,7 @@ import { Component, Input } from '@angular/core';
 export class MockAvatarComponent {
   @Input() imageSrc: string;
   @Input() altText: string;
-  @Input() shadow: false;
+  @Input() shadow: boolean;
   @Input() text: string;
   @Input() overlay: true;
 }

@@ -55,9 +55,9 @@ export class ButtonComponent implements AfterContentInit {
   @Input() set isDestructive(state: boolean) {
     this.destructive = state;
   }
-  @Input() expand?: 'full' | 'block';
-  @Input() text?: string;
-  @Input() isFloating?: boolean = false;
+  @Input() expand: 'full' | 'block';
+  @Input() text: string;
+  @Input() isFloating: boolean = false;
 
   @ContentChild(IconComponent, { static: false }) icon: IconComponent;
   @ContentChild(IconComponent, { static: false, read: ElementRef })
