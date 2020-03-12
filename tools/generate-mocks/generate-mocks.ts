@@ -204,8 +204,8 @@ export class ${mockClassName} {${propertiesString}}
     }
     const hasInputOutput = (metaData: ComponentMetaData, direction: string) =>
       metaData.properties.some((prop) => prop.direction === direction);
-    const hasInput = (metaData) => hasInputOutput(metaData, 'input');
-    const hasOutput = (metaData) => hasInputOutput(metaData, 'output');
+    const hasInput = (metaData) => hasInputOutput(metaData, 'Input');
+    const hasOutput = (metaData) => hasInputOutput(metaData, 'Output');
     if (components.some(hasInput)) {
       angularCoreImports.push('Input');
     }
@@ -233,10 +233,11 @@ export class ${mockClassName} {${propertiesString}}
   private renderProperties(properties: any[]) {
     let renderedProps = properties.map((prop) => {
       switch (prop.direction) {
-        case 'input':
+        case 'Input':
           const typeDeclaration = prop.type ? `: ${prop.type}` : '';
-          return `@Input() ${prop.name}${typeDeclaration};`;
-        case 'output':
+          const bindingProperty = prop.bindingProperty || '';
+          return `@Input(${bindingProperty}) ${prop.name}${typeDeclaration};`;
+        case 'Output':
           return `@Output() ${prop.name} = ${prop.initializer};`;
       }
     });
@@ -308,10 +309,9 @@ export class ${mockClassName} {${propertiesString}}
     propertyDeclaration: ts.SetAccessorDeclaration | ts.PropertyDeclaration,
     componentMetaData: ComponentMetaData
   ) {
-    const propertyDeclarationText = propertyDeclaration.getText();
-    const isInput = propertyDeclarationText.startsWith('@Input');
-    const isOutput = propertyDeclarationText.startsWith('@Output');
-    if (!(isInput || isOutput)) {
+    const inputOutputDecorator = this.getInputOutputDecorator(propertyDeclaration);
+    if (!inputOutputDecorator.type) {
+      // Only render Input/Output properties:
       return;
     }
     const name = propertyDeclaration.name.getText();
@@ -320,7 +320,7 @@ export class ${mockClassName} {${propertiesString}}
     if (ts.isPropertyDeclaration(propertyDeclaration)) {
       if (propertyDeclaration.initializer) {
         initializer = propertyDeclaration.initializer.getText();
-      } else if (isOutput) {
+      } else if (inputOutputDecorator.type === 'Input') {
         initializer = `new ${type || 'EventEmitter'}()`;
       }
     }
@@ -328,10 +328,34 @@ export class ${mockClassName} {${propertiesString}}
       name,
       type,
       initializer,
-      direction: isInput ? 'input' : isOutput ? 'output' : undefined,
+      direction: inputOutputDecorator.type,
+      bindingProperty: inputOutputDecorator.bindingProperty,
     };
 
     componentMetaData.properties.push(prop);
+  }
+
+  private getInputOutputDecorator(
+    propertyDeclaration: ts.SetAccessorDeclaration | ts.PropertyDeclaration
+  ): { type: 'Input' | 'Output'; bindingProperty: string } {
+    const inputOutputDecorator = { type: undefined, bindingProperty: undefined };
+    if (propertyDeclaration && propertyDeclaration.decorators) {
+      propertyDeclaration.decorators.forEach((decorator) => {
+        if (ts.isCallExpression(decorator.expression)) {
+          if (ts.isIdentifier(decorator.expression.expression)) {
+            const decoratorName = decorator.expression.expression.getText();
+            if (decoratorName === 'Input' || decoratorName === 'Output') {
+              inputOutputDecorator.type = decoratorName;
+              const bindingPropertyArg = decorator.expression.arguments[0];
+              if (bindingPropertyArg && ts.isStringLiteral(bindingPropertyArg)) {
+                inputOutputDecorator.bindingProperty = bindingPropertyArg.getText();
+              }
+            }
+          }
+        }
+      });
+    }
+    return inputOutputDecorator;
   }
 
   private getPropertyType(
