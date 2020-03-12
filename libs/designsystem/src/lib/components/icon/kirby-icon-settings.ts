@@ -52,5 +52,6 @@ export const kirbyIconSettings: IconSettings = {
     { name: 'verify', svg: 'assets/kirby/icons/svg/verify.svg' },
     { name: 'warning', svg: 'assets/kirby/icons/svg/warning.svg' },
     { name: 'write-message', svg: 'assets/kirby/icons/svg/write-message.svg' },
+    { name: 'reorder', svg: 'assets/kirby/icons/svg/reorder.svg' },
   ],
 };

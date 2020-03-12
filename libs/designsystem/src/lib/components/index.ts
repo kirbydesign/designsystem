@@ -31,6 +31,7 @@ export * from './modal';
 export * from './page';
 
 export * from './router-outlet';
+export { ReorderListComponent } from './reorder-list/reorder-list.component';
 
 export * from './shared';
 export { SegmentedControlComponent } from './segmented-control/segmented-control.component';

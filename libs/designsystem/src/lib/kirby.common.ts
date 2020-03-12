@@ -1,3 +1,4 @@
+import { ReorderListComponent } from './components/reorder-list/reorder-list.component';
 import { AvatarComponent } from './components/avatar/avatar.component';
 import { BadgeComponent } from './components/badge/badge.component';
 import { ButtonComponent } from './components/button/button.component';
@@ -88,6 +89,7 @@ export const declarations = [
   TextareaComponent,
   FabSheetComponent,
   DividerComponent,
+  ReorderListComponent,
   DropdownComponent,
 ];
 

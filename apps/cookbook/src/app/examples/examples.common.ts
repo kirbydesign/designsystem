@@ -45,6 +45,7 @@ import { TabsExampleComponent } from './tabs/tabs-example.component';
 import { TabExampleComponent } from './tabs/tab/tab-example.component';
 import { ItemExampleComponent } from './item-example/item-example.component';
 import { DividerExampleComponent } from './divider-example/divider-example.component';
+import { ReorderListExampleComponent } from './reorder-list/reorder-list-example.component';
 import { DropdownExampleComponent } from '~/app/examples/dropdown-example/dropdown-example.component';
 
 // Example of "custom" icons
@@ -107,6 +108,7 @@ export const COMPONENT_DECLARATIONS: any[] = [
   TabExampleComponent,
   ItemExampleComponent,
   DividerExampleComponent,
+  ReorderListExampleComponent,
   DropdownExampleComponent,
 ];
 
