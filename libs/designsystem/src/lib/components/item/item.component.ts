@@ -9,7 +9,7 @@ export class ItemComponent {
   @Input() disabled: boolean;
   @HostBinding('class.selected')
   @Input()
-  selected;
+  selected: boolean;
   @Input()
   selectable: boolean;
   @Input()
