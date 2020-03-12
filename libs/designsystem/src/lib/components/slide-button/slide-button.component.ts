@@ -1,6 +1,12 @@
-import { Component, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-
-import { SlideButtonCommon } from './slide-button.common';
+import {
+  Component,
+  OnDestroy,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Input,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 
 @Component({
   selector: 'kirby-slide-button',
@@ -8,7 +14,16 @@ import { SlideButtonCommon } from './slide-button.common';
   styleUrls: ['./slide-button.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SlideButtonComponent extends SlideButtonCommon implements OnDestroy {
+export class SlideButtonComponent implements OnDestroy {
+  @Input() text = '';
+  @Input() expand: 'block';
+
+  @Output() slideDone = new EventEmitter();
+  @Output() slidingPercentageChanged = new EventEmitter<number>();
+
+  readonly slideDoneFadeTime = 500;
+  readonly slideResetTime = 100;
+
   isSlideDone = false;
   pctInTens = 0;
 
@@ -26,9 +41,7 @@ export class SlideButtonComponent extends SlideButtonCommon implements OnDestroy
     this.pctInTens = Math.ceil(this.value / 10) * 10;
   }
 
-  constructor(private changeDetectionRef: ChangeDetectorRef) {
-    super();
-  }
+  constructor(private changeDetectionRef: ChangeDetectorRef) {}
 
   ngOnDestroy(): void {
     if (this.resetSliderIntervalTimer) {
