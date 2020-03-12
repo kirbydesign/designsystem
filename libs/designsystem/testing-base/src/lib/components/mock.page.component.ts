@@ -46,7 +46,7 @@ export class MockPageToolbarTitleDirective {}
   ],
 })
 export class MockPageActionsDirective {
-  @Input() config: stickyConfig | fixedConfig;
+  @Input('kirbyPageActions') config: stickyConfig | fixedConfig;
 }
 
 @Directive({
@@ -59,7 +59,7 @@ export class MockPageActionsDirective {
   ],
 })
 export class MockPageContentDirective {
-  @Input() config: fixedConfig;
+  @Input('kirbyPageContent') config: fixedConfig;
 }
 
 @Component({
