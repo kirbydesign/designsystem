@@ -166,14 +166,14 @@ To upgrade, please perform the following tasks:
 
   #### Deprecation
 
-  The following legacy components has been removed:
+  The following legacy components have been removed:
 
   - `ListItemComponent` (`<kirby-list-item>`)
   - `ListFlexItemComponent` (`<kirby-list-flex-item>`)
   - `ListCellComponent` (`<kirby-list-cell>`)
   - `ListCellLineComponent` (`<kirby-list-cell-line>`)
 
-  The following directives has been deprecated and will be removed in future versions:
+  The following directives have been deprecated and will be removed in future versions:
 
   - `ListItemDirective` (`[kirbyListItem]`)
   - `ListFlexItemDirective` (`[kirbyListFlexItem]`)
