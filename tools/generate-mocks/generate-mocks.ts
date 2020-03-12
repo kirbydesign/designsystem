@@ -166,8 +166,7 @@ export class ${className} {${propertiesString}}
     let renderedProps = properties.map((prop) => {
       switch (prop.direction) {
         case 'input':
-          const nullable = ''; // prop.nullable ? '?' : '';
-          const typeDeclaration = prop.type ? `${nullable}: ${prop.type}` : '';
+          const typeDeclaration = prop.type ? `: ${prop.type}` : '';
           return `@Input() ${prop.name}${typeDeclaration};`;
         case 'output':
           return `@Output() ${prop.name} = ${prop.initializer};`;
@@ -248,7 +247,6 @@ export class ${className} {${propertiesString}}
       return;
     }
     const name = propertyDeclaration.name.getText();
-    const nullable = !!propertyDeclaration.questionToken;
     const type = this.getPropertyType(name, propertyDeclaration, componentMetaData);
     let initializer: string;
     if (ts.isPropertyDeclaration(propertyDeclaration)) {
@@ -260,7 +258,6 @@ export class ${className} {${propertiesString}}
     }
     const prop = {
       name,
-      nullable,
       type,
       initializer,
       direction: isInput ? 'input' : isOutput ? 'output' : undefined,
