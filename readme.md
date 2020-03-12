@@ -223,7 +223,9 @@ A basic walkthrough is outlined in the structure below:
 |  └── designsystem         # - Actual implementation of library (designsystem)
 ├── scripts                 # Scripts for building artifacts
 └── tools                   # Contains various tools
-   ├── sass-to-ts         # - CLI and Webpack plugin for extract global variables from SASS to TS
+   ├── generate-mocks       # - CLI utility for generating mocks for `@kirbydesign/designsystem/testing-jasmine`
+   |                        #   and `@kirbydesign/designsystem/testing-jest` entry points.
+   ├── sass-to-ts           # - CLI and Webpack plugin for extract global variables from SASS to TS
    ├── schematics           # - Angular schematics
    └── tslint-rules         # - Custom lintiong rules
 ```
@@ -233,14 +235,15 @@ A basic walkthrough is outlined in the structure below:
 Below is an overview of most widely used scripts, available for this project.  
 Use them in your terminal like: `npm run <script>`:
 
-| Command           | Description                                                                                  |
-| ----------------- | -------------------------------------------------------------------------------------------- |
-| start             | Starts the development server, providing a means of running (and developing on the Cookbook) |
-| lint              | Lints the entire project (both TypeScript and SCSS source code)                              |
-| lint:cookbook     | Lints the Cookbook application (both TypeScript and SCSS source code)                        |
-| lint:designsystem | Lints the Designsystem library (both TypeScript and SCSS source code)                        |
-| dist:cookbook     | Builds a distribution folder of the Cookbook application                                     |
-| dist:designsystem | Builds a distribution folder of the Designsystem library                                     |
+| Command           | Description                                                                                                                                            |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| start             | Starts the development server, providing a means of running (and developing on the Cookbook)                                                           |
+| lint              | Lints the entire project (both TypeScript and SCSS source code)                                                                                        |
+| lint:cookbook     | Lints the Cookbook application (both TypeScript and SCSS source code)                                                                                  |
+| lint:designsystem | Lints the Designsystem library (both TypeScript and SCSS source code)                                                                                  |
+| dist:cookbook     | Builds a distribution folder of the Cookbook application                                                                                               |
+| dist:designsystem | Builds a distribution folder of the Designsystem library                                                                                               |
+| transpile:tools   | Transpiles tools, required to produce library distribution (this is done as a `post-install` hook, but may have value if altering tool implementation) |
 
 ## Developing new features in Kirby
 
