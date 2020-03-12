@@ -13,17 +13,13 @@
 
 ## About
 
-Kirby Design System is a UX Component library implementing the [Kirby Design Philosophy](https://kirby.design/).
+Kirby Design System is a UX Component library implementing the [Kirby Design Philosophy][kirby.design].
 
 <!-- Read more at: https://kirby.design -->
 
-Kirby Components are built on top of [Angular](https://angular.io) and can be used in Angular projects.
+Kirby Components are built on top of [Angular][angular] and can be used in Angular projects.
 
-The Kirby Cookbook, containing samples, status of components etc. can be accessed from [https://cookbook.kirby.design](https://cookbook.kirby.design).
-
-## Note
-
-**Please note:** The package currently contains the _uncompiled_ typescript (.ts), markup (.html) and styling (.scss) source code. See the [Installation](#installation) section below on how to enable typescript compilation of the package in your project.
+The Kirby Cookbook, containing samples, status of components etc. can be accessed from [https://cookbook.kirby.design](kirby.cookbook).
 
 ## Table of Contents
 
@@ -176,7 +172,7 @@ Kirby comes bundled with a default set of icons. Make sure the `.svg` files used
 
 ## Folder Structure
 
-The folder structure of the repository is based on [Nrwl](https://nrwl.io/)'s [NX](https://nx.dev/angular) mono-repository project.
+The folder structure of the repository is based on [Nrwl][nrwl]'s [NX][nx] mono-repository project.
 
 A basic walkthrough is outlined in the structure below:
 
@@ -289,5 +285,10 @@ _**Please note:** If you don't want the additional http request for the polyfill
 
 The Kirby chart components use Highcharts. Note that this is a licensed product.
 
+[angular]: https://angular.io
 [jasmine]: https://jasmine.github.io/
 [jest]: https://jestjs.io/
+[nrwl]: https://nrwl.io/
+[nx]: https://nx.dev/angular
+[kirby.design]: https://kirby.design/
+[kirby.cookbook]: https://cookbook.kirby.design
