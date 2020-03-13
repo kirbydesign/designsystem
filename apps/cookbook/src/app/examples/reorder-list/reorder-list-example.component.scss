@@ -1,0 +1,10 @@
+@import './libs/designsystem/src/lib/scss/utils';
+
+.section-header {
+  padding: 0 size('s') size('xxs') size('xxs');
+  display: flex;
+  justify-content: flex-end;
+  span {
+    padding-left: size('s');
+  }
+}

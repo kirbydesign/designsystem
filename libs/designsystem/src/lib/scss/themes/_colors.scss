@@ -1,0 +1,112 @@
+$brand-colors: (
+  'primary': #00e89a,
+  'secondary': #005c3c,
+  'tertiary': #01352c,
+);
+
+$notification-colors: (
+  'success': #2cf287,
+  'warning': #ffca3a,
+  'danger': #ff595e,
+);
+
+$system-colors: (
+  'background-color': #f6f6f6,
+  'white': #ffffff,
+  'light': #f2f2f2,
+  'semi-light': #ebebeb,
+  'medium': #d1d1d1,
+  'semi-dark': #8e8e8e,
+  'dark': #353535,
+  'black': #1c1c1c,
+);
+
+$text-colors: (
+  'white': #ffffff,
+  'semi-dark': #707070,
+  'black': #1c1c1c,
+  'danger': #ee0d0d,
+);
+
+@function getAllColors() {
+  @return map-merge(map-merge($brand-colors, $notification-colors), $system-colors);
+}
+
+$_color-palette: getAllColors();
+
+// TODO Deprecated variable, used to generate colors in some components - don't use it anymore!
+$main-colors: map-remove(
+  $_color-palette,
+  'background-color',
+  'black',
+  'white',
+  'semi-light',
+  'semi-dark'
+);
+
+@function _get-color-contrast($color) {
+  $contrast-light: map-get($system-colors, 'white');
+  $contrast-dark: map-get($system-colors, 'black');
+  $color-brightness: _get-color-brightness($color);
+  @if $color-brightness == 'dark' {
+    @return $contrast-light;
+  } @else {
+    @return $contrast-dark;
+  }
+}
+
+@function _get-color-brightness($color) {
+  $red: red($color);
+  $green: green($color);
+  $blue: blue($color);
+  /*
+    Color brightness is determined by the following formula:
+    ((Red value X 299) + (Green value X 587) + (Blue value X 114)) / 1000
+  */
+  $color-brightness: (($red * 299) + ($green * 587) + ($blue * 114)) / 1000;
+  /* The range for color brightness difference is 125 */
+  $color-range: 128;
+
+  @if $color-brightness == 255 {
+    @return 'white';
+  } @else if $color-brightness >= $color-range {
+    @return 'light';
+  } @else {
+    @return 'dark';
+  }
+}
+
+@function _get-tint-value($color, $weight: 10) {
+  @return mix(white, $color, $weight);
+}
+
+@function _get-shade-value($color, $weight: 12) {
+  @return mix(black, $color, $weight);
+}
+
+@function _get-rgb-values($color) {
+  @return red($color), green($color), blue($color);
+}
+
+@function generate-colors($colors: $_color-palette) {
+  $color-list: ();
+  @each $color-name, $color-value in $colors {
+    $color-list: map-merge(
+      (
+        $color-name: $color-value,
+        #{$color-name}-rgb: #{_get-rgb-values($color-value)},
+        #{$color-name}-contrast: #{_get-color-contrast($color-value)},
+        #{$color-name}-contrast-rgb: #{_get-rgb-values(_get-color-contrast($color-value))},
+        #{$color-name}-shade: #{_get-shade-value($color-value)},
+        #{$color-name}-shade-rgb: #{_get-rgb-values(_get-shade-value($color-value))},
+        #{$color-name}-tint: #{_get-tint-value($color-value)},
+        #{$color-name}-tint-rgb: #{_get-rgb-values(_get-tint-value($color-value))},
+        #{$color-name}-color-brightness: #{_get-color-brightness($color-value)},
+      ),
+      $color-list
+    );
+  }
+  @return $color-list;
+}
+
+$kirby-colors: generate-colors();

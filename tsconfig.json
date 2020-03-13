@@ -12,12 +12,6 @@
     "typeRoots": ["node_modules/@types"],
     "lib": ["es2017", "dom", "es6", "es2015.iterable"],
     "baseUrl": ".",
-    "paths": {
-      "~/app/*": ["src/app/*"],
-      "~/environments/*": ["src/environments/*"],
-      "@kirbydesign/designsystem": ["src/kirby/index.ts"],
-      "@kirbydesign/designsystem/*": ["src/kirby/*"],
-      "~/*": ["tilde-imports-are-not-allowed-as-it-breaks-compilation-in-target-project"]
-    }
+    "resolveJsonModule": true,
   }
 }

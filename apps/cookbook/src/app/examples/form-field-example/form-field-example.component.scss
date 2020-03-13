@@ -1,0 +1,15 @@
+@import './libs/designsystem/src/lib/scss/utils';
+
+:host {
+  display: block;
+  padding: size('s');
+  background-color: get-color('background-color');
+
+  > * {
+    display: block;
+  }
+
+  > * + * {
+    margin-top: size('m');
+  }
+}

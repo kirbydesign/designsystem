@@ -50,7 +50,6 @@ In order to fix bugs in a timely fashion please follow these few steps when rele
 - [ ] Move issue from "Ready to do" -> "in progress" on our [project board](https://github.com/kirbydesign/designsystem/projects/1)
 - [ ] Create Fix Branch
 - [ ] Create test reproducing the error
-- [ ] Add any required mock and fakes to the `KirbyTestingModule`
 - [ ] Fix
 - [ ] If relevant [Update Examples and Showcase](https://cookbook.kirby.design/home/showcase/button)
 - [ ] Push commits to GitHub

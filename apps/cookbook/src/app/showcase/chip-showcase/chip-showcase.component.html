@@ -1,0 +1,35 @@
+<div class="example">
+  <cookbook-chip-example [themeColor]="themeColor"></cookbook-chip-example>
+  <div>
+    <select (change)="onThemeChange($event.target.value)">
+      <option value="">Card color: None</option>
+      <option
+        *ngFor="let color of themeColors"
+        value="{{ color }}"
+        [attr.selected]="themeColor === color ? true : null"
+        >Card color: {{ color }}</option
+      >
+    </select>
+  </div>
+  <cookbook-code-viewer [html]="exampleHtml"></cookbook-code-viewer>
+  <h4>Properties:</h4>
+  <table class="cookbook-properties">
+    <thead>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Input values</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>text</code></td>
+        <td>The text displayed inside the chip.</td>
+        <td><code>string</code></td>
+      </tr>
+      <tr>
+        <td><code>isSelected</code></td>
+        <td>show chip as selected</td>
+        <td><code>boolean</code></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

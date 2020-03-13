@@ -1,0 +1,6 @@
+<ng-content></ng-content>
+<button kirby-button size="sm" attentionLevel="3" (click)="expanded = !expanded">
+  {{ expanded ? 'Hide Code' : 'View Code' }}
+</button>
+<cookbook-code-viewer *ngIf="expanded && html" [html]="html"></cookbook-code-viewer>
+<cookbook-code-viewer *ngIf="expanded && ts" [ts]="ts"></cookbook-code-viewer>

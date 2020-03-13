@@ -1,0 +1,7 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist",
+    "types": ["node"],
+    "lib": ["es2017"]
+  }
+}

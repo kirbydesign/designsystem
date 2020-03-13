@@ -1,0 +1,13 @@
+@import './libs/designsystem/src/lib/scss/utils';
+
+kirby-segmented-control {
+  margin-bottom: size('m');
+}
+
+.segment-data {
+  margin-top: 30px;
+  padding-top: 80px;
+  height: 200px;
+  text-align: center;
+  background: get-color('white');
+}

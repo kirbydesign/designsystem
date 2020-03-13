@@ -1,0 +1,15 @@
+@import './libs/designsystem/src/lib/scss/utils';
+
+a {
+  display: block;
+  color: get-text-color('black');
+  text-decoration: none;
+
+  &:hover {
+    color: get-color('primary');
+  }
+}
+
+.note {
+  color: get-text-color('danger');
+}
