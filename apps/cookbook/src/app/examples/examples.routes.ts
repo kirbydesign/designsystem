@@ -133,6 +133,10 @@ export const routes: Routes = [
           },
         ],
       },
+      {
+        path: 'reorder-list',
+        component: ReorderListExampleComponent,
+      },
     ],
   },
   {
@@ -236,10 +240,6 @@ export const routes: Routes = [
   {
     path: 'loading-overlay',
     component: LoadingOverlayExampleComponent,
-  },
-  {
-    path: 'reorder',
-    component: ReorderListExampleComponent,
   },
   {
     path: 'action-sheet',
