@@ -77,7 +77,11 @@
             "assets": [
               "apps/cookbook/src/favicon.ico",
               "apps/cookbook/src/assets",
-              "libs/designsystem/src/lib/polyfills",
+              {
+                "glob": "**/*.js",
+                "input": "libs/designsystem/src/lib/polyfills",
+                "output": "./kirby/polyfills"
+              },
               {
                 "glob": "**/*.svg",
                 "input": "libs/designsystem/src/lib/icons/svg",
