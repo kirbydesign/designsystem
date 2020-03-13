@@ -13,8 +13,6 @@ export class ReorderListShowcaseComponent {
   exampleHtml: string = require('!raw-loader!../../examples/reorder-list/reorder-list-example.component.html')
     .default;
 
-  remarks: string = 'The component only works correctly, when it is used inside ion-content.';
-
   properties: ShowcaseProperty[] = [
     {
       name: 'items',
