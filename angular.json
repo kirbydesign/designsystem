@@ -77,7 +77,7 @@
             "assets": [
               "apps/cookbook/src/favicon.ico",
               "apps/cookbook/src/assets",
-              "apps/cookbook/src/polyfills",
+              "libs/designsystem/src/lib/polyfills",
               {
                 "glob": "**/*.svg",
                 "input": "libs/designsystem/src/lib/icons/svg",

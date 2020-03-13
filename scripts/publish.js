@@ -27,7 +27,6 @@ const path = require('path');
 const isCI = require('is-ci');
 
 const libDir = 'libs/designsystem/src/lib';
-const cookbookDir = 'apps/cookbook/src/';
 const dist = `dist`;
 const distTarget = `${dist}/libs/designsystem`;
 const distPackageJsonPath = `${distTarget}/package.json`;
@@ -132,7 +131,11 @@ function copyIcons() {
 
 function copyPolyfills() {
   console.log('Copying Polyfills...');
-  return fs.copy(`${cookbookDir}/polyfills`, path.resolve(distTarget, 'polyfills'));
+  const onlyLoadersAndMinified = (input) =>
+    path.extname(input) === '' || input.endsWith('-loader.js') || input.endsWith('.min.js');
+  return fs.copy(`${libDir}/polyfills`, `${distTarget}/polyfills`, {
+    filter: onlyLoadersAndMinified,
+  });
 }
 
 function publish() {
