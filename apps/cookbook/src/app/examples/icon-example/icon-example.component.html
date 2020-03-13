@@ -13,8 +13,8 @@
 
 <div class="icon-item-container" *ngFor="let icon of icons">
   <div class="icon-item-inner-container">
-    <kirby-icon [name]="icon.name" [title]="icon.name" [themeColor]="color?.name"></kirby-icon>
-    <span class="icon-item-title">{{ icon.name }}</span>
+    <kirby-icon [name]="icon" [title]="icon" [themeColor]="color?.name"></kirby-icon>
+    <span class="icon-item-title">{{ icon }}</span>
   </div>
 </div>
 

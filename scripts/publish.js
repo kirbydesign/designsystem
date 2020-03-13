@@ -27,10 +27,20 @@ const path = require('path');
 const isCI = require('is-ci');
 
 const libDir = 'libs/designsystem/src/lib';
-const cookbookDir = 'apps/cookbook/src/';
 const dist = `dist`;
 const distTarget = `${dist}/libs/designsystem`;
-const distPackageJson = `${distTarget}/package.json`;
+const distPackageJsonPath = `${distTarget}/package.json`;
+
+const {
+  version,
+  description,
+  repository,
+  keywords,
+  author,
+  license,
+  bugs,
+  homepage,
+} = require('../package.json');
 
 function npm(args, options) {
   return new Promise((resolve, reject) => {
@@ -84,23 +94,27 @@ function buildDesignsystem() {
 }
 
 function enhancePackageJson() {
-  return Promise.all([
-    fs.readJson('package.json', 'utf-8'),
-    fs.readJson(distPackageJson, 'utf-8'),
-  ]).then(([rootPackageJson, destPackageJson]) => {
+  return fs.readJson(distPackageJsonPath, 'utf-8').then((distPackageJson) => {
     // Modify contents
-    destPackageJson.version = rootPackageJson.version;
+    distPackageJson.version = version;
+    distPackageJson.description = description;
+    distPackageJson.repository = repository;
+    distPackageJson.keywords = keywords;
+    distPackageJson.author = author;
+    distPackageJson.license = license;
+    distPackageJson.bugs = bugs;
+    distPackageJson.homepage = homepage;
 
     // (over-)write destination package.json file
-    const json = JSON.stringify(destPackageJson, null, 2);
-    console.log(`Writing new package.json (to: ${distPackageJson}):\n\n${json}`);
-    return fs.writeJson(distPackageJson, destPackageJson, { spaces: 2 });
+    const json = JSON.stringify(distPackageJson, null, 2);
+    console.log(`Writing new package.json (to: ${distPackageJsonPath}):\n\n${json}`);
+    return fs.writeJson(distPackageJsonPath, distPackageJson, { spaces: 2 });
   });
 }
 
 function copyReadme() {
   console.log('Copying README.md file...');
-  return fs.copy('readme.md', path.resolve(distTarget, 'readme.md'));
+  return fs.copy('readme.md', `${distTarget}/readme.md`);
 }
 
 function copyScssFiles() {
@@ -117,7 +131,11 @@ function copyIcons() {
 
 function copyPolyfills() {
   console.log('Copying Polyfills...');
-  return fs.copy(`${cookbookDir}/polyfills`, path.resolve(distTarget, 'polyfills'));
+  const onlyLoadersAndMinified = (input) =>
+    path.extname(input) === '' || input.endsWith('-loader.js') || input.endsWith('.min.js');
+  return fs.copy(`${libDir}/polyfills`, `${distTarget}/polyfills`, {
+    filter: onlyLoadersAndMinified,
+  });
 }
 
 function publish() {

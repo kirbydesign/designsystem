@@ -7,7 +7,7 @@
 /dist-lib
 /test-reports
 *.styles.ts
-/apps/cookbook/src/polyfills
+/libs/designsystem/src/lib/polyfills/*.min.js
 
 # dependencies
 /node_modules

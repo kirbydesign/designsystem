@@ -12,7 +12,7 @@ module.exports = () => {
     },
     output: {
       filename: '[name].min.js',
-      path: path.resolve(__dirname, 'apps/cookbook/src/polyfills/'),
+      path: path.resolve(__dirname, 'libs/designsystem/src/lib/polyfills/'),
     },
     plugins: [
       new CopyWebpackPlugin([

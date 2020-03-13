@@ -1,6 +1,23 @@
 {
   "name": "designsystem",
   "version": "1.0.1",
+  "description": "Kirby Design Components",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kirbydesign/designsystem.git"
+  },
+  "keywords": [
+    "Angular",
+    "Angular2",
+    "Library",
+    "Kirby"
+  ],
+  "author": "bdyjeo@bankdata.dk",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kirbydesign/designsystem/issues"
+  },
+  "homepage": "https://cookbook.kirby.design",
   "scripts": {
     "ng": "ng",
     "nx": "nx",
@@ -27,6 +44,7 @@
     "prettier": "npx prettier --check \"src/**/*.{ts,json,md,scss,html}\"",
     "prettier:fix": "npx prettier --write \"src/**/*.{ts,json,md,scss,html}\"",
     "e2e": "ng e2e",
+    "dist": "npm run dist:cookbook",
     "dist:cookbook": "ng build cookbook --prod --aot --progress false",
     "predist:designsystem": "npm run extract-scss-variables",
     "dist:designsystem": "ng build designsystem",
