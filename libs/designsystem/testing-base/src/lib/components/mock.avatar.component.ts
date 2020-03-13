@@ -18,7 +18,7 @@ export class MockAvatarComponent {
   @Input() altText: string;
   @Input() shadow: boolean;
   @Input() text: string;
-  @Input() overlay: true;
+  @Input() overlay: boolean;
 }
 
 // #endregion
