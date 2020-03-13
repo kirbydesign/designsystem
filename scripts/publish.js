@@ -114,7 +114,7 @@ function enhancePackageJson() {
 
 function copyReadme() {
   console.log('Copying README.md file...');
-  return fs.copy('readme.md', path.resolve(distTarget, 'readme.md'));
+  return fs.copy('readme.md', `${distTarget}/readme.md`);
 }
 
 function copyScssFiles() {
