@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 
-import { icons } from '@kirbydesign/designsystem';
-import { Icon } from '@kirbydesign/designsystem';
+import { defaultIcons } from '@kirbydesign/designsystem';
 import { Sizes } from '@kirbydesign/designsystem';
 import { Color, ColorHelper } from '@kirbydesign/designsystem';
 
@@ -11,7 +10,7 @@ import { Color, ColorHelper } from '@kirbydesign/designsystem';
   styleUrls: ['./icon-example.component.scss'],
 })
 export class IconExampleComponent {
-  icons: Icon[] = icons;
+  icons = defaultIcons;
   sizes = Sizes;
   color: Color;
   colors: Color[] = ColorHelper.mainColors;

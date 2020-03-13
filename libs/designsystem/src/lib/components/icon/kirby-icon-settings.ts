@@ -55,3 +55,5 @@ export const kirbyIconSettings: IconSettings = {
     { name: 'reorder', svg: 'assets/kirby/icons/svg/reorder.svg' },
   ],
 };
+
+export const defaultIcons = kirbyIconSettings.icons.map((icon) => icon.name);

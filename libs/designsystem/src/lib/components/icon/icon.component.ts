@@ -68,5 +68,3 @@ export class IconComponent implements OnChanges {
     return icons.find((icon) => icon.name === name);
   }
 }
-
-export const icons: Icon[] = [...kirbyIconSettings.icons];

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { icons, Sizes } from '@kirbydesign/designsystem';
+import { defaultIcons, Sizes } from '@kirbydesign/designsystem';
 
 import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
 
@@ -18,7 +18,6 @@ export class IconShowcaseComponent {
 <!-- Size -->
 <kirby-icon size="SIZE"></kirby-icon>
     `;
-  iconNames: Array<string> = icons.map((x) => x.name);
   sizes = Sizes;
 
   properties: ShowcaseProperty[] = [
@@ -26,7 +25,7 @@ export class IconShowcaseComponent {
       name: 'name',
       description: 'Name of the icon that you want to show.',
       defaultValue: 'cog',
-      inputValues: this.iconNames,
+      inputValues: defaultIcons,
     },
     {
       name: 'size',
