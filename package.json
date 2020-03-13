@@ -132,7 +132,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged",
+      "pre-commit": "npm run generate-mocks && lint-staged",
       "pre-push": "npm run test:headless-browser:single",
       "post-merge": "post-npm-install"
     }
