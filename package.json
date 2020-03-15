@@ -133,7 +133,7 @@
     "multimatch": "^4.0.0",
     "ng-mocks": "8.1.0",
     "ng-packagr": "^5.4.0",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.13.1",
     "post-npm-install": "^2.0.0",
     "prettier": "1.17.0",
     "raw-loader": "^3.1.0",
