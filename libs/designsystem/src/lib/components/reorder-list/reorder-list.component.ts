@@ -13,6 +13,7 @@ import {
 } from '@angular/core';
 
 import { ListItemTemplateDirective } from '../list/list.directive';
+import { ReorderEvent } from './reorder-event';
 
 @Component({
   selector: 'kirby-reorder-list',
@@ -24,8 +25,8 @@ export class ReorderListComponent implements OnChanges, OnDestroy {
   @Input() subItemsName: string;
   @Input() getItemTextDefault: (item: any) => string;
 
-  @Output() itemReorder = new EventEmitter<any>();
-  @Output() subItemReorder = new EventEmitter<any>();
+  @Output() itemReorder = new EventEmitter<ReorderEvent>();
+  @Output() subItemReorder = new EventEmitter<ReorderEvent>();
 
   @ContentChild(ListItemTemplateDirective, { static: true, read: TemplateRef })
   itemTemplate: TemplateRef<any>;
@@ -64,14 +65,14 @@ export class ReorderListComponent implements OnChanges, OnDestroy {
     });
   }
 
-  doReorder(ev: any) {
-    this.itemReorder.emit(ev);
+  doReorder(ev: CustomEvent) {
+    let reorderEvent: ReorderEvent = new ReorderEvent(ev);
+    this.itemReorder.emit(reorderEvent);
   }
 
-  doSubReorder(ev: any, parentItem: any) {
-    ev.cancelBubble = true;
-    ev.detail.parentItem = parentItem;
-    this.subItemReorder.emit(ev);
+  doSubReorder(ev: CustomEvent, parentItem: any) {
+    let reorderEvent: ReorderEvent = new ReorderEvent(ev, parentItem);
+    this.subItemReorder.emit(reorderEvent);
   }
 
   ngOnDestroy() {
