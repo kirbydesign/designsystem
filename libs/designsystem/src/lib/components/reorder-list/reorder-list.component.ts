@@ -66,13 +66,11 @@ export class ReorderListComponent implements OnChanges, OnDestroy {
   }
 
   doReorder(ev: CustomEvent) {
-    let reorderEvent: ReorderEvent = new ReorderEvent(ev);
-    this.itemReorder.emit(reorderEvent);
+    this.itemReorder.emit(new ReorderEvent(ev));
   }
 
   doSubReorder(ev: CustomEvent, parentItem: any) {
-    let reorderEvent: ReorderEvent = new ReorderEvent(ev, parentItem);
-    this.subItemReorder.emit(reorderEvent);
+    this.subItemReorder.emit(new ReorderEvent(ev, parentItem));
   }
 
   ngOnDestroy() {
