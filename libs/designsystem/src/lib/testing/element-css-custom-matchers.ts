@@ -103,7 +103,5 @@ function getErrorMessage(
   expectedValueAlias?: string
 ) {
   const expectedColorNameSuffix = expectedValueAlias ? ` (${expectedValueAlias})` : '';
-  return `Expected [${cssProperty}] of ${
-    element.tagName
-  } '${actualValue}' to equal '${expectedValue}'${expectedColorNameSuffix}`;
+  return `Expected [${cssProperty}] of ${element.tagName} '${actualValue}' to equal '${expectedValue}'${expectedColorNameSuffix}`;
 }
