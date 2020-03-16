@@ -30,7 +30,7 @@
     "test:headless-browser": "npm run test -- --browsers=ChromeCustom",
     "test:headless-browser:single": "npm run test:headless-browser -- --watch=false",
     "ci-test": "npm run test:ci",
-    "test:ci": "ng test --progress false --watch false --code-coverage",
+    "test:ci": "ng test designsystem --progress false --watch false --code-coverage",
     "lint": "npm run lint:cookbook && npm run lint:designsystem",
     "lint:cookbook": "npm run lint:cookbook:ts && npm run lint:cookbook:css",
     "lint:cookbook:ts": "tslint './apps/cookbook/src/**/*.ts'",
