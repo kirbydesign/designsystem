@@ -8,7 +8,7 @@
     "moment": "2.24.0"
   },
   "peerDependencies": {
-    "@angular/common": "^8.2.11",
-    "@angular/core": "^8.2.11"
+    "@angular/common": "8.x",
+    "@angular/core": "8.x"
   }
 }

@@ -24,6 +24,7 @@ import { MockLabelComponent } from './components/mock.label.component';
 import { MockListHeaderComponent } from './components/mock.list-header.component';
 import { MockListSectionHeaderComponent } from './components/mock.list-section-header.component';
 import { MockListComponent } from './components/mock.list.component';
+import { MockFullscreenLoadingOverlayComponent } from './components/mock.fullscreen-loading-overlay.component';
 import { MockLoadingOverlayComponent } from './components/mock.loading-overlay.component';
 import { MockActionSheetComponent } from './components/mock.action-sheet.component';
 import {
@@ -72,6 +73,7 @@ export const MOCK_COMPONENTS = [
   MockListHeaderComponent,
   MockListSectionHeaderComponent,
   MockListComponent,
+  MockFullscreenLoadingOverlayComponent,
   MockLoadingOverlayComponent,
   MockActionSheetComponent,
   MockPageTitleDirective,

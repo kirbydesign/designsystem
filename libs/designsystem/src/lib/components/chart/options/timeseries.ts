@@ -7,7 +7,10 @@ export const TimeSeriesOptions: Options = {
   chart: {
     backgroundColor: {
       linearGradient: { x1: 0, x2: 0, y1: 0, y2: 3 },
-      stops: [[0, '#F6F6F6'], [1, '#808080']],
+      stops: [
+        [0, '#F6F6F6'],
+        [1, '#808080'],
+      ],
     },
     zoomType: 'x',
     type: 'timeseries',

@@ -9,7 +9,10 @@ export class HeaderComponent implements OnInit {
   @Input() isMenuOpen = false;
   @Output() menuToggle = new EventEmitter<boolean>();
 
-  items = [{ name: 'Design', selected: false }, { name: 'Components', selected: true }];
+  items = [
+    { name: 'Design', selected: false },
+    { name: 'Components', selected: true },
+  ];
 
   constructor() {}
 

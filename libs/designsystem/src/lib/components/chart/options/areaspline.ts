@@ -57,7 +57,10 @@ export const AreaSplineOptions: Options = {
       showInLegend: false,
       fillColor: {
         linearGradient: { x1: 0, x2: 0, y1: 0, y2: 0.8 },
-        stops: [[0, '#C9E5C9'], [1, '#FFFFFF']],
+        stops: [
+          [0, '#C9E5C9'],
+          [1, '#FFFFFF'],
+        ],
       },
       lineColor: '#177E17',
       lineWidth: 2,
