@@ -17,8 +17,8 @@ export class MockReorderListComponent {
   @Input() items: any[];
   @Input() subItemsName: string;
   @Input() getItemTextDefault: (item: any) => string;
-  @Output() itemReorder = new EventEmitter<any>();
-  @Output() subItemReorder = new EventEmitter<any>();
+  @Output() itemReorder = new EventEmitter<ReorderEvent>();
+  @Output() subItemReorder = new EventEmitter<ReorderEvent>();
 }
 
 // #endregion
