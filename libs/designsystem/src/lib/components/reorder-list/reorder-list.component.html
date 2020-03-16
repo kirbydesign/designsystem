@@ -1,7 +1,7 @@
 <ion-backdrop *ngIf="reorderActive" [tappable]="false" [visible]="true" [stopPropagation]="false">
 </ion-backdrop>
 <ion-reorder-group (ionItemReorder)="doReorder($event)" disabled="false">
-  <div *ngFor="let reorderItem of items">
+  <div *ngFor="let reorderItem of items" class="outerGroup">
     <kirby-card>
       <ng-container
         *ngTemplateOutlet="itemTemplate || defaultItemTemplate; context: { $implicit: reorderItem }"

@@ -55,8 +55,11 @@ ion-backdrop {
   }
 }
 
+.outerGroup {
+  border-bottom: 20px transparent solid;
+}
+
 kirby-card {
-  margin-bottom: 20px;
   overflow: inherit;
 
   @include slotted('div:last-child ion-reorder-group div:last-child>kirby-item') {
