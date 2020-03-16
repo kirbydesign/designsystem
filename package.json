@@ -49,7 +49,7 @@
     "dist:cookbook": "ng build cookbook --prod --aot --progress false",
     "predist:designsystem": "npm run extract-scss-variables",
     "dist:designsystem": "ng build designsystem",
-    "postinstall": "npm run build-polyfills && npm run transpile:tools && npm run extract-scss-variables",
+    "postinstall": "npm run ngcc && npm npm run build-polyfills && npm run transpile:tools && npm run extract-scss-variables",
     "postversion": "git push && git push --tags",
     "coverage-report": "cat ./coverage/lcov.info | coveralls",
     "transpile:tools": "npm run transpile:tslint-rules && npm run transpile:sass-to-ts && npm run transpile:generate-mocks",
@@ -72,7 +72,8 @@
     "update": "ng update @nrwl/workspace",
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
-    "help": "nx help"
+    "help": "nx help",
+    "ngcc": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points"
   },
   "private": true,
   "dependencies": {
