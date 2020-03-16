@@ -45,6 +45,8 @@ import { AppModule } from './components/app/app.module';
     KeyHandlerDirective,
     FormFieldMessageComponent,
     AlertComponent,
+    ModalWrapperComponent,
+    ModalCompactWrapperComponent,
     ...declarations,
   ],
   providers: [...providerDeclarations],
