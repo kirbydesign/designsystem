@@ -146,7 +146,7 @@
     "tsickle": "^0.37.0",
     "tslint": "5.9.1",
     "tslint-plugin-prettier": "2.0.1",
-    "typescript": "3.5.3",
+    "typescript": "^3.7.5",
     "webpack-cli": "^3.3.8"
   },
   "husky": {
