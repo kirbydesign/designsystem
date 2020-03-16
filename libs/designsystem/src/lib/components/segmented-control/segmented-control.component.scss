@@ -28,10 +28,6 @@
       --padding-start: #{size('m')};
       --padding-end: #{size('m')};
 
-      &.segment-button-checked:hover {
-        --background-hover: #{get-color('black')};
-      }
-
       &:focus-within {
         outline-color: -webkit-focus-ring-color;
         outline-style: auto;
