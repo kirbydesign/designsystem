@@ -24,6 +24,8 @@
       text-transform: none;
       border-radius: $border-radius-round;
       position: relative;
+      transition: 100ms background-color linear;
+      --transition: none;
       --border-style: none;
       --padding-start: #{size('m')};
       --padding-end: #{size('m')};
