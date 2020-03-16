@@ -27,7 +27,7 @@
     "test": "ng test",
     "test:cookbook": "ng test cookbook",
     "test:designsystem": "ng test designsystem",
-    "test:headless-browser": "ng test --browsers=ChromeCustom",
+    "test:headless-browser": "npm run test -- --browsers=ChromeCustom",
     "test:headless-browser:single": "npm run test:headless-browser -- --watch=false",
     "ci-test": "npm run test:ci",
     "test:ci": "ng test --progress false --watch false --code-coverage",
