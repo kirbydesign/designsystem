@@ -4,8 +4,10 @@ import { MockComponent } from 'ng-mocks';
 
 import { IconModule } from '../icon/icon.module';
 import { ReorderListComponent } from './reorder-list.component';
+
 import { CardComponent } from '../card';
 import { ItemComponent } from '../item';
+import { ReorderEvent } from './reorder-event';
 
 describe('ReorderListComponent', () => {
   let spectator: Spectator<ReorderListComponent>;
@@ -70,7 +72,7 @@ describe('ReorderListComponent', () => {
       spectator.component.doReorder(customEvent);
 
       expect(spectator.component.itemReorder.emit).toHaveBeenCalledTimes(1);
-      expect(spectator.component.itemReorder.emit).toHaveBeenCalledWith(customEvent);
+      expect(spectator.component.itemReorder.emit).toHaveBeenCalledWith(jasmine.any(ReorderEvent));
     });
   });
 
@@ -79,13 +81,14 @@ describe('ReorderListComponent', () => {
       spyOn(spectator.component.subItemReorder, 'emit');
 
       let customEvent = new CustomEvent('subItemReorder test', { detail: {} });
-
       spectator.component.doSubReorder(customEvent, items[0]);
 
       expect(spectator.component.subItemReorder.emit).toHaveBeenCalledTimes(1);
-      expect(spectator.component.subItemReorder.emit).toHaveBeenCalledWith(customEvent);
+      expect(spectator.component.subItemReorder.emit).toHaveBeenCalledWith(
+        jasmine.any(ReorderEvent)
+      );
       let arg: any = (spectator.component.subItemReorder.emit as any).calls.mostRecent().args[0];
-      expect(arg.detail.parentItem).toEqual(items[0]);
+      expect(arg.parentItem).toEqual(items[0]);
     });
   });
 

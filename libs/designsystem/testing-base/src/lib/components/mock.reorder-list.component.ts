@@ -1,6 +1,7 @@
 import { forwardRef, Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { ReorderListComponent } from '@kirbydesign/designsystem';
+import { ReorderEvent } from '@kirbydesign/designsystem';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
@@ -17,8 +18,8 @@ export class MockReorderListComponent {
   @Input() items: any[];
   @Input() subItemsName: string;
   @Input() getItemTextDefault: (item: any) => string;
-  @Output() itemReorder = new EventEmitter<any>();
-  @Output() subItemReorder = new EventEmitter<any>();
+  @Output() itemReorder = new EventEmitter<ReorderEvent>();
+  @Output() subItemReorder = new EventEmitter<ReorderEvent>();
 }
 
 // #endregion
