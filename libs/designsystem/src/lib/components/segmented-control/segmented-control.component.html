@@ -1,13 +1,15 @@
-<ion-segment mode="ios" *ngIf="isDefaultMode">
-  <div class="segment-btn-wrapper" *ngFor="let item of items" role="group">
-    <ion-segment-button
-      [value]="item"
-      class="kirby-text-small"
-      [checked]="item.checked"
-      (ionSelect)="onSegmentSelect(item)"
-    >
-      {{ item.text }}
-    </ion-segment-button>
+<ion-segment
+  *ngIf="isDefaultMode"
+  [value]="activeSegment"
+  (ionChange)="onSegmentSelect($event.detail.value)"
+>
+  <div
+    *ngFor="let item of items"
+    class="segment-btn-wrapper"
+    role="group"
+    (click)="$event.stopPropagation()"
+  >
+    <ion-segment-button [value]="item">{{ item.text }}</ion-segment-button>
     <kirby-badge
       *ngIf="item.badge"
       role="text"

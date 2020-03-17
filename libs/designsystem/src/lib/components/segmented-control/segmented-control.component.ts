@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Output, Input, HostBinding } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Output,
+  Input,
+  HostBinding,
+  SimpleChanges,
+  OnChanges,
+} from '@angular/core';
 
 import { SegmentItem } from './segment-item';
 
@@ -7,7 +15,7 @@ import { SegmentItem } from './segment-item';
   templateUrl: './segmented-control.component.html',
   styleUrls: ['./segmented-control.component.scss'],
 })
-export class SegmentedControlComponent {
+export class SegmentedControlComponent implements OnChanges {
   @Output() segmentSelect: EventEmitter<SegmentItem> = new EventEmitter();
 
   @HostBinding('class.default-mode')
@@ -29,5 +37,11 @@ export class SegmentedControlComponent {
     this.activeSegment = item;
     this.items.forEach((segment) => (segment.checked = this.activeSegment.id === segment.id));
     this.segmentSelect.emit(this.activeSegment);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.items) {
+      this.activeSegment = this.items.find((item) => item.checked);
+    }
   }
 }
