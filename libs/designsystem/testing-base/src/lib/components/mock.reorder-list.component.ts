@@ -1,6 +1,7 @@
 import { forwardRef, Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { ReorderListComponent } from '@kirbydesign/designsystem';
+import { ReorderEvent } from '@kirbydesign/designsystem';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
