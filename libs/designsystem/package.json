@@ -2,7 +2,7 @@
   "name": "@kirbydesign/designsystem",
   "version": "0.0.0",
   "dependencies": {
-    "@angular/cdk": "9.1.3",
+    "@angular/cdk": "8.2.3",
     "@ionic/angular": "5.0.5",
     "highcharts": "7.0.3",
     "moment": "2.24.0"
