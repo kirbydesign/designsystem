@@ -50,7 +50,10 @@ export const ActivityGaugeOptions: Options = {
       {
         backgroundColor: {
           linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
-          stops: [[1, 'rgba(255, 255, 255, 0.3)'], [0, 'rgba(255, 255, 255, 0.3)']],
+          stops: [
+            [1, 'rgba(255, 255, 255, 0.3)'],
+            [0, 'rgba(255, 255, 255, 0.3)'],
+          ],
         },
         outerRadius: '112%',
         innerRadius: '88%',

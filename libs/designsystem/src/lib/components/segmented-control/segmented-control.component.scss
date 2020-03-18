@@ -24,18 +24,11 @@
       text-transform: none;
       border-radius: $border-radius-round;
       position: relative;
+      transition: 100ms background-color linear;
+      --transition: none;
       --border-style: none;
       --padding-start: #{size('m')};
       --padding-end: #{size('m')};
-
-      &.segment-button-checked:hover {
-        --background-hover: #{get-color('black')};
-      }
-
-      &:focus-within {
-        outline-color: -webkit-focus-ring-color;
-        outline-style: auto;
-      }
     }
 
     .segment-btn-wrapper {
@@ -70,5 +63,12 @@
         padding-bottom: 50px;
       }
     }
+  }
+}
+
+:host-context(.plt-desktop) {
+  ion-segment-button:focus-within {
+    outline-color: -webkit-focus-ring-color;
+    outline-style: auto;
   }
 }

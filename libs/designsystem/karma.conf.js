@@ -13,7 +13,8 @@ module.exports = function(config) {
       dir: join(__dirname, '../../coverage/libs/designsystem')
     },
     junitReporter: {
-      outputDir: require('path').join(__dirname, '../../test-reports/libs/designsystem'),
+      outputDir: require('path').join(__dirname, '../../test-reports')
     },
+    reporters: ['kjhtml', 'junit', 'spec'],
   });
 };

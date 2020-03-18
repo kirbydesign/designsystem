@@ -27,13 +27,13 @@ export * from './item';
 
 export * from './loading-overlay';
 export * from './list';
+export * from './reorder-list';
 
 export * from './modal';
 
 export * from './page';
 
 export * from './router-outlet';
-export { ReorderListComponent } from './reorder-list/reorder-list.component';
 
 export * from './shared';
 export { SegmentedControlComponent } from './segmented-control/segmented-control.component';

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { ReorderEvent } from '@kirbydesign/designsystem/components/reorder-list/reorder-event';
+
 @Component({
   selector: 'cookbook-reorder-list-example',
   templateUrl: './reorder-list-example.component.html',
@@ -62,12 +64,12 @@ export class ReorderListExampleComponent {
 
   constructor() {}
 
-  doReorderItem(ev: any) {
-    ev.detail.complete(this.items);
+  doReorderItem(ev: ReorderEvent) {
+    ev.complete(this.items);
   }
 
-  doReorderShadowAccount(ev: any) {
-    ev.detail.complete(ev.detail.parentItem.shadowAccounts);
+  doReorderShadowAccount(ev: ReorderEvent) {
+    ev.complete(ev.parentItem.shadowAccounts);
   }
 
   trackByFn(index, item) {

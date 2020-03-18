@@ -495,9 +495,7 @@ describe('DropdownComponent', () => {
 
     testMatrix.forEach((keyEvent) => {
       keyEvent.scenario.forEach((scenario) => {
-        describe(`and selected item = ${scenario.selectedIndex} and ${
-          keyEvent.key
-        } key is pressed ${scenario.keypressCount} time(s)`, () => {
+        describe(`and selected item = ${scenario.selectedIndex} and ${keyEvent.key} key is pressed ${scenario.keypressCount} time(s)`, () => {
           it(`should set selected item = ${scenario.expectedIndex}`, () => {
             spectator.setInput('selectedIndex', scenario.selectedIndex);
             for (let counter = 0; counter < scenario.keypressCount; counter++) {
@@ -686,9 +684,7 @@ describe('DropdownComponent', () => {
 
     testMatrix.forEach((keyEvent) => {
       keyEvent.scenario.forEach((scenario) => {
-        describe(`and selected item = ${scenario.selectedIndex} and ${
-          keyEvent.key
-        } key is pressed ${scenario.keypressCount} time(s)`, () => {
+        describe(`and selected item = ${scenario.selectedIndex} and ${keyEvent.key} key is pressed ${scenario.keypressCount} time(s)`, () => {
           it(`should set selected item = ${scenario.expectedIndex}`, () => {
             spectator.setInput('selectedIndex', scenario.selectedIndex);
             for (let counter = 0; counter < scenario.keypressCount; counter++) {
