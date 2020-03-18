@@ -46,6 +46,10 @@ import { TextareaComponent } from './components/form-field/textarea/textarea.com
 import { InputCounterComponent } from './components/form-field/input-counter/input-counter.component';
 import { DividerComponent } from './components/divider/divider.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
+import { BreakpointHelperService } from './components/grid/breakpoint-helper.service';
+import { LoadingOverlayService } from './components/loading-overlay/fullscreen-loading-overlay/loading-overlay.service';
+import { ResizeObserverFactory } from './components/shared/resize-observer/resize-observer.factory';
+import { ResizeObserverService } from './components/shared/resize-observer/resize-observer.service';
 
 export const declarations = [
   CardComponent,
@@ -98,4 +102,8 @@ export const providerDeclarations: any[] = [
   AlertHelper,
   ToastHelper,
   ToastController,
+  BreakpointHelperService,
+  LoadingOverlayService,
+  ResizeObserverFactory,
+  ResizeObserverService,
 ];
