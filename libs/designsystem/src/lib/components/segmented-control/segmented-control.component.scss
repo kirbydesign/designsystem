@@ -20,7 +20,7 @@
       text-transform: none;
       --border-radius: #{$border-radius-round};
       --border-style: none;
-      --background: #{get-color('white')};
+      --background: none;
       --color: #{get-color('white-contrast')};
       --indicator-color: #{get-color('black')};
       --color-checked: #{get-color('black-contrast')};
