@@ -169,8 +169,8 @@ export class ModalHelper {
 
     if (config.flavor === 'drawer') {
       defaults = {
-        enterDuration: KirbyAnimation.Duration.LONG,
-        leaveDuration: KirbyAnimation.Duration.LONG,
+        enterDuration: KirbyAnimation.Duration.SHORT,
+        leaveDuration: KirbyAnimation.Duration.SHORT,
         easingIn: KirbyAnimation.Easing.ENTER,
         easingOut: KirbyAnimation.Easing.EXIT,
       };
