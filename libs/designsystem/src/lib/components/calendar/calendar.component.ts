@@ -40,6 +40,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() disablePastDates = false;
   @Input() disableFutureDates = false;
   @Input() disabledDates: Date[];
+  @Input() todayDate: Date;
   @Input() minDate: Date;
   @Input() maxDate: Date;
   @Input() alwaysEnableToday = false;
@@ -99,7 +100,8 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
       changes.disableFutureDates ||
       changes.disabledDates ||
       changes.minDate ||
-      changes.maxDate
+      changes.maxDate ||
+      changes.todayDate
     ) {
       this.refreshActiveMonth();
       this.calendarHelper.update(this.getHelperOptions());
@@ -171,7 +173,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
     const startOfFirstWeek = monthStart.clone().startOf('isoWeek');
     const endOfLastWeek = monthEnd.clone().endOf('isoWeek');
     const totalDayCount = endOfLastWeek.diff(startOfFirstWeek, 'days') + 1;
-    const today = moment().startOf('day');
+    const today = moment(this.todayDate ? this.todayDate : undefined).startOf('day');
     const daysArray = Array.from(Array(totalDayCount).keys());
 
     const days: CalendarCell[] = daysArray.map((number) => {

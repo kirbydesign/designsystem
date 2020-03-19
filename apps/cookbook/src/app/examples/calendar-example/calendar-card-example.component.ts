@@ -13,9 +13,11 @@ export class CalendarCardExampleComponent {
   @Input() setDisabledDates = false;
   @Input() setMinDate = false;
   @Input() setMaxDate = false;
+  @Input() setTodayDate = false;
 
   minDate: Date;
   maxDate: Date;
+  todayDate: Date;
   disabledDates: Date[] = [];
 
   constructor() {
@@ -25,6 +27,8 @@ export class CalendarCardExampleComponent {
     this.minDate.setDate(today.getDate() - 60);
     this.maxDate = new Date();
     this.maxDate.setDate(today.getDate() + 60);
+    this.todayDate = new Date();
+    this.todayDate.setDate(today.getDate() + 3);
 
     const date1 = new Date();
     date1.setDate(today.getDate() + 3);

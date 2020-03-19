@@ -14,6 +14,7 @@
         [setDisabledDates]="setDisabledDates"
         [setMinDate]="setMinDate"
         [setMaxDate]="setMaxDate"
+        [setTodayDate]="setTodayDate"
       ></cookbook-calendar-card-example>
       <!-- prettier-ignore -->
       <fieldset>
@@ -31,7 +32,9 @@
           <kirby-checkbox [checked]="setMinDate" (checkedChange)="setMinDate = $event;"></kirby-checkbox>
           <label (click)="setMinDate = !setMinDate">Set min date ({{minDate | date:'dd-MM-yyyy'}})</label><br/>
           <kirby-checkbox [checked]="setMaxDate" (checkedChange)="setMaxDate = $event;"></kirby-checkbox>
-          <label (click)="setMaxDate = !setMaxDate">Set max date ({{maxDate | date:'dd-MM-yyyy'}})</label>  
+          <label (click)="setMaxDate = !setMaxDate">Set max date ({{maxDate | date:'dd-MM-yyyy'}})</label><br/>
+          <kirby-checkbox [checked]="setTodayDate" (checkedChange)="setTodayDate = $event;"></kirby-checkbox>
+          <label (click)="setTodayDate = !setTodayDate">Set today date ({{todayDate | date:'dd-MM-yyyy'}})</label>  
         </fieldset>
     </div>
     <cookbook-code-viewer [html]="exampleWithCardHtml"></cookbook-code-viewer>

@@ -16,9 +16,11 @@ export class CalendarShowcaseComponent {
   disableFutureDates = false;
   setMinDate = false;
   setMaxDate = false;
+  setTodayDate = false;
   setDisabledDates = false;
   minDate: Date;
   maxDate: Date;
+  todayDate: Date;
 
   constructor() {
     const today = new Date();
@@ -27,6 +29,8 @@ export class CalendarShowcaseComponent {
     this.minDate.setDate(today.getDate() - 60);
     this.maxDate = new Date();
     this.maxDate.setDate(today.getDate() + 60);
+    this.todayDate = new Date();
+    this.todayDate.setDate(today.getDate() + 3);
   }
 
   exampleHtml: string = require('!raw-loader!../../examples/calendar-example/calendar-example.component.html')
@@ -64,6 +68,13 @@ export class CalendarShowcaseComponent {
       description: '(Optional) Disables selection of dates later than the current date.',
       defaultValue: 'false',
       inputValues: ['true | false'],
+    },
+    {
+      name: 'todayDate',
+      description:
+        '(Optional) The date to be marked as today. If omitted, will use current date in browser timezone.',
+      defaultValue: 'null',
+      inputValues: ['Date'],
     },
     {
       name: 'minDate',
