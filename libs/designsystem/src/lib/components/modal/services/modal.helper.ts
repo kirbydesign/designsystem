@@ -36,18 +36,20 @@ export class ModalHelper {
       ],
       backdropDismiss: config.flavor === 'compact' ? false : true,
       componentProps: { config: mergedConfig },
-      enterAnimation: this.animateIn.bind(
-        this,
-        mergedConfig.flavor,
-        mergedConfig.enterDuration,
-        mergedConfig.easingIn
-      ),
-      leaveAnimation: this.animateOut.bind(
-        this,
-        mergedConfig.flavor,
-        mergedConfig.leaveDuration,
-        mergedConfig.easingOut
-      ),
+      swipeToClose: true,
+      presentingElement: config.presentingElement,
+      // enterAnimation: this.animateIn.bind(
+      //   this,
+      //   'drawer', //mergedConfig.flavor,
+      //   mergedConfig.enterDuration,
+      //   mergedConfig.easingIn
+      // ),
+      // leaveAnimation: this.animateOut.bind(
+      //   this,
+      //   'drawer', // mergedConfig.flavor,
+      //   mergedConfig.leaveDuration,
+      //   mergedConfig.easingOut
+      // ),
     });
 
     modal.close = ionModal.dismiss.bind(ionModal);
