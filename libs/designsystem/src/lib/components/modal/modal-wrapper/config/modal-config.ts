@@ -15,4 +15,5 @@ export interface ModalConfig {
   leaveDuration?: KirbyAnimation.Duration;
   easingIn?: KirbyAnimation.Easing;
   easingOut?: KirbyAnimation.Easing;
+  presentingElement?: HTMLElement;
 }
