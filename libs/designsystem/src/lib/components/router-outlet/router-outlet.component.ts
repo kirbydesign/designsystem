@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'kirby-router-outlet',
@@ -7,5 +7,9 @@ import { Component, Input } from '@angular/core';
 })
 export class RouterOutletComponent {
   @Input() main: boolean;
-  constructor() {}
+  get nativeEl() {
+    return this.elementRef.nativeElement;
+  }
+
+  constructor(private elementRef: ElementRef) {}
 }
