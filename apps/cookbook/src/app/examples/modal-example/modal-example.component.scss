@@ -1,5 +1,9 @@
 @import './libs/designsystem/src/lib/scss/utils';
 
+:host {
+  display: block;
+}
+
 a {
   display: block;
   color: get-text-color('black');
