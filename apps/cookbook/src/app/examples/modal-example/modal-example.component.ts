@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { ModalConfig, ModalController } from '@kirbydesign/designsystem';
+import { ModalConfig, ModalController, RouterOutletComponent } from '@kirbydesign/designsystem';
 import { FirstEmbeddedModalExampleComponent } from './first-embedded-modal-example/first-embedded-modal-example.component';
 import { ModalCompactExampleComponent } from './compact-example/modal-compact-example.component';
 
@@ -10,7 +10,10 @@ import { ModalCompactExampleComponent } from './compact-example/modal-compact-ex
   styleUrls: ['./modal-example.component.scss'],
 })
 export class ModalExampleComponent {
-  constructor(private modalController: ModalController) {}
+  constructor(
+    private modalController: ModalController,
+    private routerOutlet: RouterOutletComponent
+  ) {}
 
   showModal() {
     const config: ModalConfig = {
@@ -20,6 +23,7 @@ export class ModalExampleComponent {
         prop1: 'value1',
         prop2: 'value2',
       },
+      presentingElement: this.routerOutlet.nativeEl,
     };
 
     this.modalController.showModal(config, this.onModalClose);
