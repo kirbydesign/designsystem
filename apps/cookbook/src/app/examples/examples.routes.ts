@@ -137,6 +137,10 @@ export const routes: Routes = [
         path: 'reorder-list',
         component: ReorderListExampleComponent,
       },
+      {
+        path: 'modal',
+        component: ModalExampleComponent,
+      },
     ],
   },
   {
@@ -232,10 +236,6 @@ export const routes: Routes = [
   {
     path: 'spinner',
     component: SpinnerExampleComponent,
-  },
-  {
-    path: 'modal',
-    component: ModalExampleComponent,
   },
   {
     path: 'loading-overlay',
