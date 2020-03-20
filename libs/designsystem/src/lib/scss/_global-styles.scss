@@ -36,6 +36,20 @@
     }
   }
 
+  &.modal-card {
+    .modal-wrapper {
+      height: 100% !important;
+      border-top-left-radius: 0 !important;
+      border-top-right-radius: 0 !important;
+
+      @include media('>=medium') {
+        height: 647px !important;
+        border-top-left-radius: #{$border-radius} !important;
+        border-top-right-radius: #{$border-radius} !important;
+      }
+    }
+  }
+
   &.kirby-drawer {
     padding-top: calc(var(--ion-safe-area-top, 0) + #{size('m')});
 
