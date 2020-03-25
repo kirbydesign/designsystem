@@ -44,6 +44,7 @@ $margin-horizontal-total: 2 * size('s');
 }
 
 :host > button {
+  position: relative;
   margin: 0;
   outline: none;
   width: 100%;
@@ -93,5 +94,19 @@ kirby-card {
 :host(.align-end) {
   kirby-card {
     right: 0;
+  }
+}
+
+// TODO: UI refine style and behaviour when open upwards...
+:host(.align-top) {
+  kirby-card {
+    top: 0;
+    margin-top: -#{size('xxxs')};
+    transform: translateY(-100%);
+  }
+
+  > button {
+    //Move button on top of card's shadow:
+    z-index: z('dropdown') + 1;
   }
 }

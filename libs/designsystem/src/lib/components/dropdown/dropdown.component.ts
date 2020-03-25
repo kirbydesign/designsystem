@@ -39,6 +39,8 @@ import { CardComponent } from '../card/card.component';
 })
 export class DropdownComponent
   implements AfterContentChecked, AfterViewInit, OnDestroy, ControlValueAccessor {
+  static readonly OPEN_DELAY_IN_MS = 15;
+
   @Input()
   items: string[] | any[] = [];
 
@@ -121,8 +123,11 @@ export class DropdownComponent
   @HostBinding('class.align-top')
   _alignTop: boolean;
 
-  private set _horizontal(value: 'start' | 'end' | null) {
+  private set _horizontal(value: 'start' | 'end') {
     this._alignEnd = value === 'end';
+  }
+  private set _vertical(value: 'up' | 'down') {
+    this._alignTop = value === 'up';
   }
 
   @ContentChild(ListItemTemplateDirective, { static: true, read: TemplateRef })
@@ -186,6 +191,10 @@ export class DropdownComponent
         rootMargin: '0px',
       };
       const callback: IntersectionObserverCallback = (entries) => {
+        // Only apply alignment when opening:
+        if (!this._isOpening) {
+          return;
+        }
         const entry = entries[0];
         const isVisible = entry.boundingClientRect.width > 0;
         if (isVisible && entry.intersectionRatio < 1) {
@@ -198,6 +207,24 @@ export class DropdownComponent
             //     entry.intersectionRect.right} px`
             // );
             this._horizontal = 'end';
+          }
+          if (entry.boundingClientRect.top < 0) {
+            // console.log(
+            //   `entry is cut off at the top by  ${entry.boundingClientRect.top} px`
+            // );
+            this._vertical = 'down';
+          }
+          if (entry.boundingClientRect.bottom > entry.rootBounds.bottom) {
+            // console.log(
+            //   `entry is cut off at the bottom by  ${entry.boundingClientRect.bottom -
+            //     entry.intersectionRect.bottom} px`
+            // );
+            const containerOffsetTop = this.elementRef.nativeElement.getBoundingClientRect().top;
+            const spacing = 5; //TODO: Get from SCSS
+            // Check if the card can fit on top of button:
+            if (containerOffsetTop > entry.target.clientHeight + spacing) {
+              this._vertical = 'up';
+            }
           }
           this.changeDetectorRef.detectChanges();
         }
@@ -215,10 +242,9 @@ export class DropdownComponent
       this._isOpening = true;
       setTimeout(() => {
         this.isOpen = true;
-        setTimeout(() => {
-          this.scrollItemIntoView(this.selectedIndex);
-        }, 5);
-      }, 10);
+        this._isOpening = false;
+        this.scrollItemIntoView(this.selectedIndex);
+      }, DropdownComponent.OPEN_DELAY_IN_MS);
     }
   }
 
