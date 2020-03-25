@@ -199,30 +199,23 @@ export class DropdownComponent
         const isVisible = entry.boundingClientRect.width > 0;
         if (isVisible && entry.intersectionRatio < 1) {
           // entry not fully showing:
-          // console.log('entry not fully showing:', entry);
-
           if (entry.boundingClientRect.right > entry.rootBounds.right) {
-            // console.log(
-            //   `entry is cut off to the right by ${entry.boundingClientRect.right -
-            //     entry.intersectionRect.right} px`
-            // );
+            // entry is cut off to the right by ${entry.boundingClientRect.right - entry.intersectionRect.right}px
+            // align to the end:
             this._horizontal = 'end';
           }
           if (entry.boundingClientRect.top < 0) {
-            // console.log(
-            //   `entry is cut off at the top by  ${entry.boundingClientRect.top} px`
-            // );
+            // entry is cut off at the top by ${entry.boundingClientRect.top}px
+            // open downwards:
             this._vertical = 'down';
           }
           if (entry.boundingClientRect.bottom > entry.rootBounds.bottom) {
-            // console.log(
-            //   `entry is cut off at the bottom by  ${entry.boundingClientRect.bottom -
-            //     entry.intersectionRect.bottom} px`
-            // );
+            // entry is cut off at the bottom by ${entry.boundingClientRect.bottom - entry.intersectionRect.bottom}px
             const containerOffsetTop = this.elementRef.nativeElement.getBoundingClientRect().top;
             const spacing = 5; //TODO: Get from SCSS
             // Check if the card can fit on top of button:
             if (containerOffsetTop > entry.target.clientHeight + spacing) {
+              // open upwards:
               this._vertical = 'up';
             }
           }
