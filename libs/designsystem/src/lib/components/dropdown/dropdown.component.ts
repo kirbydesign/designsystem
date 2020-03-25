@@ -16,6 +16,8 @@ import {
   EventEmitter,
   OnDestroy,
   forwardRef,
+  AfterViewInit,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -35,7 +37,8 @@ import { CardComponent } from '../card/card.component';
     },
   ],
 })
-export class DropdownComponent implements AfterContentChecked, OnDestroy, ControlValueAccessor {
+export class DropdownComponent
+  implements AfterContentChecked, AfterViewInit, OnDestroy, ControlValueAccessor {
   @Input()
   items: string[] | any[] = [];
 
@@ -112,6 +115,16 @@ export class DropdownComponent implements AfterContentChecked, OnDestroy, Contro
   @HostBinding('class.is-open')
   isOpen = false;
 
+  @HostBinding('class.align-end')
+  _alignEnd: boolean;
+
+  @HostBinding('class.align-top')
+  _alignTop: boolean;
+
+  private set _horizontal(value: 'start' | 'end' | null) {
+    this._alignEnd = value === 'end';
+  }
+
   @ContentChild(ListItemTemplateDirective, { static: true, read: TemplateRef })
   itemTemplate: TemplateRef<any>;
   @ContentChildren(ListItemTemplateDirective, { read: ElementRef })
@@ -124,8 +137,13 @@ export class DropdownComponent implements AfterContentChecked, OnDestroy, Contro
   kirbyItemsSlotted: QueryList<ElementRef<HTMLElement>>;
 
   private itemClickUnlisten: () => void;
+  private intersectionObserverRef: IntersectionObserver;
 
-  constructor(private renderer: Renderer2, private elementRef: ElementRef<HTMLElement>) {}
+  constructor(
+    private renderer: Renderer2,
+    private elementRef: ElementRef<HTMLElement>,
+    private changeDetectorRef: ChangeDetectorRef
+  ) {}
 
   onToggle(event: Event) {
     event.stopPropagation();
@@ -158,6 +176,37 @@ export class DropdownComponent implements AfterContentChecked, OnDestroy, Contro
     }
   }
 
+  ngAfterViewInit() {
+    this.initializeAlignment();
+  }
+
+  private initializeAlignment() {
+    if (!this.intersectionObserverRef) {
+      const options = {
+        rootMargin: '0px',
+      };
+      const callback: IntersectionObserverCallback = (entries) => {
+        const entry = entries[0];
+        const isVisible = entry.boundingClientRect.width > 0;
+        if (isVisible && entry.intersectionRatio < 1) {
+          // entry not fully showing:
+          // console.log('entry not fully showing:', entry);
+
+          if (entry.boundingClientRect.right > entry.rootBounds.right) {
+            // console.log(
+            //   `entry is cut off to the right by ${entry.boundingClientRect.right -
+            //     entry.intersectionRect.right} px`
+            // );
+            this._horizontal = 'end';
+          }
+          this.changeDetectorRef.detectChanges();
+        }
+      };
+      this.intersectionObserverRef = new IntersectionObserver(callback, options);
+      this.intersectionObserverRef.observe(this.cardElement.nativeElement);
+    }
+  }
+
   open() {
     if (this.disabled) {
       return;
@@ -166,8 +215,10 @@ export class DropdownComponent implements AfterContentChecked, OnDestroy, Contro
       this._isOpening = true;
       setTimeout(() => {
         this.isOpen = true;
-        this.scrollItemIntoView(this.selectedIndex);
-      });
+        setTimeout(() => {
+          this.scrollItemIntoView(this.selectedIndex);
+        }, 5);
+      }, 10);
     }
   }
 
@@ -382,6 +433,9 @@ export class DropdownComponent implements AfterContentChecked, OnDestroy, Contro
   ngOnDestroy(): void {
     if (this.itemClickUnlisten) {
       this.itemClickUnlisten();
+    }
+    if (this.intersectionObserverRef) {
+      this.intersectionObserverRef.disconnect();
     }
   }
 }

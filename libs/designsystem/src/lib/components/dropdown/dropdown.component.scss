@@ -89,3 +89,9 @@ kirby-card {
     opacity: 1;
   }
 }
+
+:host(.align-end) {
+  kirby-card {
+    right: 0;
+  }
+}
