@@ -105,8 +105,10 @@ kirby-card {
     transform: translateY(-100%);
   }
 
-  > button {
-    //Move button on top of card's shadow:
-    z-index: z('dropdown') + 1;
+  &.is-open {
+    > button {
+      //Move button on top of card's shadow:
+      z-index: z('dropdown') + 1;
+    }
   }
 }
