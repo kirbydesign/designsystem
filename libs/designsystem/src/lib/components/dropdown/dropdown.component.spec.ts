@@ -18,6 +18,7 @@ describe('DropdownComponent', () => {
     { text: 'Item 4', value: 4 },
     { text: 'Item 5', value: 5 },
   ];
+  const openDelayInMs = DropdownComponent.OPEN_DELAY_IN_MS;
 
   const createHost = createComponentFactory({
     imports: [],
@@ -289,7 +290,7 @@ describe('DropdownComponent', () => {
       beforeEach(fakeAsync(() => {
         spectator.click('button');
         spectator.detectChanges();
-        tick();
+        tick(openDelayInMs);
       }));
       it('should open dropdown', () => {
         expect(spectator.component.isOpen).toBeTruthy();
@@ -302,7 +303,7 @@ describe('DropdownComponent', () => {
     describe('and Space key is pressed', () => {
       beforeEach(fakeAsync(() => {
         spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'Space');
-        tick();
+        tick(openDelayInMs);
       }));
       it('should open dropdown', () => {
         expect(spectator.component.isOpen).toBeTruthy();
@@ -312,7 +313,7 @@ describe('DropdownComponent', () => {
     describe('and Enter key is pressed', () => {
       beforeEach(fakeAsync(() => {
         spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'Enter');
-        tick();
+        tick(openDelayInMs);
       }));
       it('should open dropdown', () => {
         expect(spectator.component.isOpen).toBeTruthy();
@@ -720,13 +721,13 @@ describe('DropdownComponent', () => {
 
     it('should not open', fakeAsync(() => {
       spectator.component.open();
-      tick();
+      tick(openDelayInMs);
       expect(spectator.component.isOpen).toBeFalsy();
     }));
 
     it('should not toggle', fakeAsync(() => {
       spectator.component.toggle();
-      tick();
+      tick(openDelayInMs);
       expect(spectator.component.isOpen).toBeFalsy();
     }));
 
@@ -750,13 +751,13 @@ describe('DropdownComponent', () => {
 
       it('should not open dropdown when Space key is pressed', fakeAsync(() => {
         spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'Space');
-        tick();
+        tick(openDelayInMs);
         expect(spectator.component.isOpen).toBeFalsy();
       }));
 
       it('should not open dropdown when Enter key is pressed', fakeAsync(() => {
         spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'Enter');
-        tick();
+        tick(openDelayInMs);
         expect(spectator.component.isOpen).toBeFalsy();
       }));
 
