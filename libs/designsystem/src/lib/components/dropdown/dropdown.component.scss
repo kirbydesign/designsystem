@@ -25,9 +25,21 @@ $margin-horizontal-total: 2 * size('s');
     }
   }
 
+  // Outline is applied on button border instead,
+  // to keep the rounded shape:
+  outline: none;
+  &:focus {
+    > button,
+    > button.attention-level2 {
+      border: 1px solid $focus-ring-color;
+    }
+  }
+
   &.error,
   &.ng-touched.ng-invalid {
-    border-color: get-color('danger');
+    > button {
+      border-color: get-color('danger');
+    }
   }
 }
 
