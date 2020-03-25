@@ -272,6 +272,7 @@ describe('DropdownComponent', () => {
       const componentWidth = spectator.element.clientWidth;
       const cardWidth = card.getBoundingClientRect().width;
       expect(cardWidth).toEqual(componentWidth);
+      expect(card).toHaveComputedStyle({ 'min-width': '0px', 'max-width': 'none' });
     });
   });
 
@@ -696,6 +697,20 @@ describe('DropdownComponent', () => {
           });
         });
       });
+    });
+  });
+
+  describe('when aligned to right side of viewport', () => {
+    it('should align the dropdown to the right side of button and component container ', (done) => {
+      spectator.element.style.cssFloat = 'right';
+      spectator.component.open();
+      spectator.detectChanges();
+      setTimeout(() => {
+        spectator.detectChanges();
+        const card = spectator.query('kirby-card');
+        expect(card).toHaveComputedStyle({ right: '0px' });
+        done();
+      }, DropdownComponent.OPEN_DELAY_IN_MS);
     });
   });
 
