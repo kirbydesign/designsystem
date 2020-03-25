@@ -28,10 +28,15 @@ $margin-horizontal-total: 2 * size('s');
   // Outline is applied on button border instead,
   // to keep the rounded shape:
   outline: none;
-  &:focus {
-    > button,
-    > button.attention-level2 {
-      border: 1px solid $focus-ring-color;
+
+  // Only apply focus ring if pointer device can hover
+  // (effectively desktop/mouse devices):
+  @media (hover: hover) {
+    &:focus {
+      > button,
+      > button.attention-level2 {
+        border-color: $focus-ring-color;
+      }
     }
   }
 
