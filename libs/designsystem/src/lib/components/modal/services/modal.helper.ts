@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ModalController as IonicModalController } from '@ionic/angular';
+import { ModalController, AnimationController } from '@ionic/angular';
 import { Animation } from '@ionic/core';
 
 import { ModalConfig } from '../modal-wrapper/config/modal-config';
@@ -11,7 +11,10 @@ import { Modal } from './modal.model';
 
 @Injectable()
 export class ModalHelper {
-  constructor(private ionicModalController: IonicModalController) {}
+  constructor(
+    private ionicModalController: ModalController,
+    private animationController: AnimationController
+  ) {}
 
   public async showModalWindow(
     config: ModalConfig,
@@ -33,13 +36,13 @@ export class ModalHelper {
       ],
       backdropDismiss: config.flavor === 'compact' ? false : true,
       componentProps: { config: mergedConfig },
-      enterAnimation: ModalHelper.animateIn.bind(
+      enterAnimation: this.animateIn.bind(
         this,
         mergedConfig.flavor,
         mergedConfig.enterDuration,
         mergedConfig.easingIn
       ),
-      leaveAnimation: ModalHelper.animateOut.bind(
+      leaveAnimation: this.animateOut.bind(
         this,
         mergedConfig.flavor,
         mergedConfig.leaveDuration,
@@ -54,18 +57,17 @@ export class ModalHelper {
     return ionModal.onDidDismiss();
   }
 
-  private static animateIn(
+  private animateIn(
     flavor: 'modal' | 'drawer',
     duration: KirbyAnimation.Duration,
     easing: KirbyAnimation.Easing,
-    AnimationC: Animation,
     baseEl: HTMLElement
-  ): Promise<Animation> {
+  ): Animation {
     // Set-up animated elements
-    const baseAnimation = new AnimationC();
-    const backdropAnimation = new AnimationC();
+    const baseAnimation = this.animationController.create();
+    const backdropAnimation = this.animationController.create();
     backdropAnimation.addElement(baseEl.querySelector('ion-backdrop'));
-    const wrapperAnimation = new AnimationC();
+    const wrapperAnimation = this.animationController.create();
     const wrapperElem = baseEl.querySelector('.modal-wrapper') as HTMLElement;
     wrapperAnimation.addElement(wrapperElem);
 
@@ -98,27 +100,24 @@ export class ModalHelper {
     }
 
     // Run animations
-    return Promise.resolve(
-      baseAnimation
-        .addElement(baseEl)
-        .duration(duration)
-        .add(wrapperAnimation)
-        .add(backdropAnimation)
-    );
+    return baseAnimation
+      .addElement(baseEl)
+      .duration(duration)
+      .addAnimation(wrapperAnimation)
+      .addAnimation(backdropAnimation);
   }
 
-  private static animateOut(
+  private animateOut(
     flavor: 'modal' | 'drawer',
     duration: KirbyAnimation.Duration,
     easing: KirbyAnimation.Easing,
-    AnimationC: Animation,
     baseEl: HTMLElement
-  ): Promise<Animation> {
+  ): Animation {
     // Set-up animated elements
-    const baseAnimation = new AnimationC();
-    const backdropAnimation = new AnimationC();
+    const baseAnimation = this.animationController.create();
+    const backdropAnimation = this.animationController.create();
     backdropAnimation.addElement(baseEl.querySelector('ion-backdrop'));
-    const wrapperAnimation = new AnimationC();
+    const wrapperAnimation = this.animationController.create();
     const wrapperElem = baseEl.querySelector('.modal-wrapper') as HTMLElement;
     wrapperAnimation.addElement(wrapperElem);
 
@@ -149,13 +148,11 @@ export class ModalHelper {
     }
 
     // Run animations
-    return Promise.resolve(
-      baseAnimation
-        .addElement(baseEl)
-        .duration(duration)
-        .add(wrapperAnimation)
-        .add(backdropAnimation)
-    );
+    return baseAnimation
+      .addElement(baseEl)
+      .duration(duration)
+      .addAnimation(wrapperAnimation)
+      .addAnimation(backdropAnimation);
   }
 
   public blurNativeWrapper(nativeElement: HTMLElement) {

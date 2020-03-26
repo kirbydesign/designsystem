@@ -1,22 +1,13 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, EventEmitter, NO_ERRORS_SCHEMA, Output } from '@angular/core';
 import { By } from '@angular/platform-browser';
+import { MockComponents, MockDirective } from 'ng-mocks';
+import { IonSegment, IonSegmentButton } from '@ionic/angular';
 
 import { SegmentedControlComponent } from './segmented-control.component';
 import { SegmentItem } from './segment-item';
 import { BadgeComponent } from '../badge/badge.component';
-
-// We were attempting to manipulate the shadow dom of IonSegmentButton to write a test
-// that failed gloriously when changing unrelated code... creating a "good 'ol" Angular stub instead
-@Component({
-  // tslint:disable-next-line:component-selector
-  selector: 'ion-segment-button',
-  template: '',
-})
-class MockIonSegmentButtonComponent {
-  @Output()
-  ionSelect: EventEmitter<any> = new EventEmitter();
-}
+import { ThemeColorDirective } from '../../directives';
+import { ChipComponent } from '../chip/chip.component';
 
 describe('SegmentedControlComponent', () => {
   let component: SegmentedControlComponent;
@@ -40,8 +31,12 @@ describe('SegmentedControlComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      schemas: [NO_ERRORS_SCHEMA],
-      declarations: [SegmentedControlComponent, BadgeComponent, MockIonSegmentButtonComponent],
+      declarations: [
+        SegmentedControlComponent,
+        IonSegment,
+        MockComponents(ChipComponent, BadgeComponent, IonSegmentButton),
+        MockDirective(ThemeColorDirective),
+      ],
     }).compileComponents();
   }));
 
@@ -70,17 +65,22 @@ describe('SegmentedControlComponent', () => {
       expect(fixture.nativeElement.querySelectorAll('kirby-chip').length).toBe(0);
     });
 
-    it('should call onSegmentSelect when clicking a segment button', () => {
+    it('should call onSegmentSelect when ionChange event fires', () => {
       spyOn(component, 'onSegmentSelect');
-      const segmentBtn = fixture.debugElement.query(By.css('ion-segment-button'));
-      const button = segmentBtn.componentInstance as MockIonSegmentButtonComponent;
-      button.ionSelect.emit();
-      expect(component.onSegmentSelect).toHaveBeenCalled();
+      const segmentElm = fixture.debugElement.query(By.css('ion-segment'));
+      segmentElm.triggerEventHandler(
+        'ionChange',
+        new CustomEvent('ionChange', { detail: { value: items[1] } })
+      );
+      expect(component.onSegmentSelect).toHaveBeenCalledWith(items[1]);
     });
 
-    it('should set activeSegment to second segmentItem', () => {
-      const segmentElm = fixture.debugElement.queryAll(By.css('ion-segment-button'))[1];
-      segmentElm.triggerEventHandler('ionSelect', null);
+    it('should set activeSegment to second segmentItem when ionChange event fires', () => {
+      const segmentElm = fixture.debugElement.query(By.css('ion-segment'));
+      segmentElm.triggerEventHandler(
+        'ionChange',
+        new CustomEvent('ionChange', { detail: { value: items[1] } })
+      );
       expect(component.activeSegment).toBe(items[1]);
     });
   });

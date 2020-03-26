@@ -15,8 +15,11 @@
 
     --background: var(--kirby-item-background, #{get-color('white')});
     --background-activated: var(--kirby-item-background-activated, #{get-color('white-shade')});
+    --background-activated-opacity: 1;
     --background-focused: var(--kirby-item-background-focused, #{get-color('background-color')});
+    --background-focused-opacity: 1;
     --background-hover: var(--kirby-item-background-hover, #{get-color('background-color')});
+    --background-hover-opacity: 1;
 
     @include slotted('[slot="end"]') {
       margin-inline-start: 0;

@@ -41,8 +41,15 @@ export class DropdownComponent
   implements AfterContentChecked, AfterViewInit, OnDestroy, ControlValueAccessor {
   static readonly OPEN_DELAY_IN_MS = 15;
 
-  @Input()
-  items: string[] | any[] = [];
+  private _items: string[] | any[] = [];
+  get items(): string[] | any[] {
+    return this._items;
+  }
+
+  @Input() set items(value: string[] | any[]) {
+    this._items = value;
+    this._value = this.items[this.selectedIndex] || null;
+  }
 
   private _selectedIndex: number = -1;
   get selectedIndex(): number {
@@ -52,7 +59,7 @@ export class DropdownComponent
   @Input() set selectedIndex(value: number) {
     if (this._selectedIndex != value) {
       this._selectedIndex = value;
-      this._value = this.items[this.selectedIndex];
+      this._value = this.items[this.selectedIndex] || null;
     }
   }
 

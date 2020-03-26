@@ -20,6 +20,13 @@
   --kirby-tab-bar-height: 50px;
 }
 
+.kirby-modal,
+.kirby-alert {
+  .modal-shadow {
+    display: none;
+  }
+}
+
 .kirby-modal {
   box-sizing: border-box;
   --background: #{get-color('background-color')};
