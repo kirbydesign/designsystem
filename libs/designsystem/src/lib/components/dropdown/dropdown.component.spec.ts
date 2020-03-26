@@ -29,7 +29,6 @@ describe('DropdownComponent', () => {
     let buttonElement: HTMLButtonElement;
 
     const createComponent = createComponentFactory({
-      imports: [],
       component: DropdownComponent,
       declarations: [
         MockComponents(ButtonComponent, CardComponent, ItemComponent, IconComponent, IonItem),
