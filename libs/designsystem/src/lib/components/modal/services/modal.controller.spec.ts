@@ -30,6 +30,7 @@ describe('modalController', () => {
         close: mockCallback,
         scrollToTop: () => {},
         scrollToBottom: () => {},
+        toggleScrollY: () => {},
       });
       expect(() => {
         modalController.hideTopmost();
@@ -54,6 +55,14 @@ describe('modalController', () => {
       it('should throw an error when scrolling to bottom, when no modals have been opened', () => {
         expect(() => {
           modalController.scrollToBottom();
+        }).toThrow(expectedError);
+      });
+    });
+
+    describe('toggleScrollY', () => {
+      it('should throw an error when toggle scrollY, when no modals have been opened', () => {
+        expect(() => {
+          modalController.toggleScrollY();
         }).toThrow(expectedError);
       });
     });
