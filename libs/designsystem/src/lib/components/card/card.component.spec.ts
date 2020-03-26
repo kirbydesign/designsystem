@@ -9,7 +9,6 @@ describe('CardComponent', () => {
 
   const createHost = createHostFactory({
     component: CardComponent,
-    declarations: [CardComponent],
     imports: [IonicModule.forRoot({ _testing: true })],
   });
 

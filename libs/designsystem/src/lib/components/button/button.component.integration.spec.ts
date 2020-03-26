@@ -33,7 +33,6 @@ describe('ButtonComponent in Kirby Page', () => {
     imports: [IonicModule.forRoot(), RouterTestingModule],
     declarations: [
       ButtonComponent,
-      PageComponent,
       PageContentComponent,
       PageActionsComponent,
       PageActionsDirective,
@@ -183,7 +182,7 @@ describe('ButtonComponent in kirby empty state', () => {
   const createHost = createHostFactory({
     component: EmptyStateComponent,
     imports: [IonicModule.forRoot(), RouterTestingModule],
-    declarations: [ButtonComponent, EmptyStateComponent, IconComponent],
+    declarations: [ButtonComponent, IconComponent],
   });
 
   beforeEach(() => {
@@ -236,7 +235,7 @@ describe('ButtonComponent with size directive', () => {
   let element: HTMLButtonElement;
   const createHost = createHostFactory({
     component: ButtonComponent,
-    declarations: [ButtonComponent, SizeDirective, MockComponent(IconComponent)],
+    declarations: [SizeDirective, MockComponent(IconComponent)],
   });
 
   describe('when configured with size = SM', () => {
@@ -294,7 +293,7 @@ describe('ButtonComponent configured with icon only', () => {
   let element: HTMLButtonElement;
   const createHost = createHostFactory({
     component: ButtonComponent,
-    declarations: [ButtonComponent, SizeDirective, MockComponent(IconComponent)],
+    declarations: [SizeDirective, MockComponent(IconComponent)],
   });
 
   const attentionLevels = ['1', '2', '3', '4'];
@@ -439,7 +438,7 @@ describe('ButtonComponent configured with text and icon', () => {
   let element: HTMLButtonElement;
   const createHost = createHostFactory({
     component: ButtonComponent,
-    declarations: [ButtonComponent, SizeDirective, IconComponent, MockComponent(IonIcon)],
+    declarations: [SizeDirective, IconComponent, MockComponent(IonIcon)],
   });
 
   it('should render with correct icon font-size', () => {

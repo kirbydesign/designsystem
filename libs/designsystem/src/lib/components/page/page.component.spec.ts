@@ -30,7 +30,7 @@ describe('PageComponent', () => {
 
   const createHost = createHostFactory({
     component: PageComponent,
-    declarations: [PageComponent, PageContentComponent, MockDirective(FitHeadingDirective)],
+    declarations: [PageContentComponent, MockDirective(FitHeadingDirective)],
     imports: [IonicModule.forRoot({ mode: 'ios' }), NoopAnimationsModule, RouterTestingModule],
   });
 

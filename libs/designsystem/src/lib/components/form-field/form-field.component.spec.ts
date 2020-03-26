@@ -19,7 +19,6 @@ describe('FormFieldComponent', () => {
   const createHost = createHostFactory({
     component: FormFieldComponent,
     declarations: [
-      FormFieldComponent,
       FormFieldMessageComponent,
       InputComponent,
       TextareaComponent,
