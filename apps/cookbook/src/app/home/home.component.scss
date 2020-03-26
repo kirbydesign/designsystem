@@ -30,6 +30,9 @@ section {
   background-color: get-color('background-color');
   margin: 2rem 0;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  padding: 1rem 2rem;
+  padding: 1rem 1rem;
+  @include media('>=small') {
+    padding: 1rem 2rem;
+  }
   overflow: hidden;
 }

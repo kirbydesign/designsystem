@@ -7,6 +7,7 @@ import { DropdownExampleDefaultComponent } from './examples/default';
 import { DropdownExampleScrollComponent } from './examples/scroll';
 import { DropdownExamplePreSelectedComponent } from './examples/pre-selected';
 import { DropdownExampleExpandComponent } from './examples/expand';
+import { DropdownExampleRightAlignedComponent } from './examples/right-aligned';
 import { DropdownExampleAttentionLevelComponent } from './examples/attention-level';
 import { DropdownExampleItemSelectComponent } from './examples/item-select';
 import { DropdownExampleCustomItemTemplateComponent } from './examples/custom-item-template';
@@ -17,6 +18,7 @@ const COMPONENT_DECLARATIONS = [
   DropdownExampleScrollComponent,
   DropdownExamplePreSelectedComponent,
   DropdownExampleExpandComponent,
+  DropdownExampleRightAlignedComponent,
   DropdownExampleAttentionLevelComponent,
   DropdownExampleItemSelectComponent,
   DropdownExampleCustomItemTemplateComponent,

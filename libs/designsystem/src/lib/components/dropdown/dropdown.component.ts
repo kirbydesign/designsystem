@@ -16,6 +16,8 @@ import {
   EventEmitter,
   OnDestroy,
   forwardRef,
+  AfterViewInit,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -35,7 +37,10 @@ import { CardComponent } from '../card/card.component';
     },
   ],
 })
-export class DropdownComponent implements AfterContentChecked, OnDestroy, ControlValueAccessor {
+export class DropdownComponent
+  implements AfterContentChecked, AfterViewInit, OnDestroy, ControlValueAccessor {
+  static readonly OPEN_DELAY_IN_MS = 15;
+
   @Input()
   items: string[] | any[] = [];
 
@@ -112,6 +117,19 @@ export class DropdownComponent implements AfterContentChecked, OnDestroy, Contro
   @HostBinding('class.is-open')
   isOpen = false;
 
+  @HostBinding('class.align-end')
+  _alignEnd: boolean;
+
+  @HostBinding('class.align-top')
+  _alignTop: boolean;
+
+  private set _horizontal(value: 'start' | 'end') {
+    this._alignEnd = value === 'end';
+  }
+  private set _vertical(value: 'up' | 'down') {
+    this._alignTop = value === 'up';
+  }
+
   @ContentChild(ListItemTemplateDirective, { static: true, read: TemplateRef })
   itemTemplate: TemplateRef<any>;
   @ContentChildren(ListItemTemplateDirective, { read: ElementRef })
@@ -124,8 +142,13 @@ export class DropdownComponent implements AfterContentChecked, OnDestroy, Contro
   kirbyItemsSlotted: QueryList<ElementRef<HTMLElement>>;
 
   private itemClickUnlisten: () => void;
+  private intersectionObserverRef: IntersectionObserver;
 
-  constructor(private renderer: Renderer2, private elementRef: ElementRef<HTMLElement>) {}
+  constructor(
+    private renderer: Renderer2,
+    private elementRef: ElementRef<HTMLElement>,
+    private changeDetectorRef: ChangeDetectorRef
+  ) {}
 
   onToggle(event: Event) {
     event.stopPropagation();
@@ -158,6 +181,52 @@ export class DropdownComponent implements AfterContentChecked, OnDestroy, Contro
     }
   }
 
+  ngAfterViewInit() {
+    this.initializeAlignment();
+  }
+
+  private initializeAlignment() {
+    if (!this.intersectionObserverRef) {
+      const options = {
+        rootMargin: '0px',
+      };
+      const callback: IntersectionObserverCallback = (entries) => {
+        // Only apply alignment when opening:
+        if (!this._isOpening) {
+          return;
+        }
+        const entry = entries[0];
+        const isVisible = entry.boundingClientRect.width > 0;
+        if (isVisible && entry.intersectionRatio < 1) {
+          // entry not fully showing:
+          if (entry.boundingClientRect.right > entry.rootBounds.right) {
+            // entry is cut off to the right by ${entry.boundingClientRect.right - entry.intersectionRect.right}px
+            // align to the end:
+            this._horizontal = 'end';
+          }
+          if (entry.boundingClientRect.top < 0) {
+            // entry is cut off at the top by ${entry.boundingClientRect.top}px
+            // open downwards:
+            this._vertical = 'down';
+          }
+          if (entry.boundingClientRect.bottom > entry.rootBounds.bottom) {
+            // entry is cut off at the bottom by ${entry.boundingClientRect.bottom - entry.intersectionRect.bottom}px
+            const containerOffsetTop = this.elementRef.nativeElement.getBoundingClientRect().top;
+            const spacing = 5; //TODO: Get from SCSS
+            // Check if the card can fit on top of button:
+            if (containerOffsetTop > entry.target.clientHeight + spacing) {
+              // open upwards:
+              this._vertical = 'up';
+            }
+          }
+          this.changeDetectorRef.detectChanges();
+        }
+      };
+      this.intersectionObserverRef = new IntersectionObserver(callback, options);
+      this.intersectionObserverRef.observe(this.cardElement.nativeElement);
+    }
+  }
+
   open() {
     if (this.disabled) {
       return;
@@ -166,8 +235,9 @@ export class DropdownComponent implements AfterContentChecked, OnDestroy, Contro
       this._isOpening = true;
       setTimeout(() => {
         this.isOpen = true;
+        this._isOpening = false;
         this.scrollItemIntoView(this.selectedIndex);
-      });
+      }, DropdownComponent.OPEN_DELAY_IN_MS);
     }
   }
 
@@ -382,6 +452,9 @@ export class DropdownComponent implements AfterContentChecked, OnDestroy, Contro
   ngOnDestroy(): void {
     if (this.itemClickUnlisten) {
       this.itemClickUnlisten();
+    }
+    if (this.intersectionObserverRef) {
+      this.intersectionObserverRef.disconnect();
     }
   }
 }
