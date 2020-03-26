@@ -8,5 +8,6 @@ import { Component, Input } from '@angular/core';
 export class ExampleViewerComponent {
   @Input() html: string;
   @Input() ts: string;
+  @Input() css: string;
   @Input() expanded: boolean;
 }
