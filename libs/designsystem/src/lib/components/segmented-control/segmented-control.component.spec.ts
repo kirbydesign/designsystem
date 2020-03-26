@@ -7,6 +7,7 @@ import { SegmentedControlComponent } from './segmented-control.component';
 import { SegmentItem } from './segment-item';
 import { BadgeComponent } from '../badge/badge.component';
 import { ThemeColorDirective } from '../../directives';
+import { ChipComponent } from '../chip/chip.component';
 
 describe('SegmentedControlComponent', () => {
   let component: SegmentedControlComponent;
@@ -33,7 +34,7 @@ describe('SegmentedControlComponent', () => {
       declarations: [
         SegmentedControlComponent,
         IonSegment,
-        MockComponents(BadgeComponent, IonSegmentButton),
+        MockComponents(ChipComponent, BadgeComponent, IonSegmentButton),
         MockDirective(ThemeColorDirective),
       ],
     }).compileComponents();
