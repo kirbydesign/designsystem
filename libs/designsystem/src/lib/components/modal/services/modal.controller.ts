@@ -94,6 +94,14 @@ export class ModalController implements IModalController {
     modal.scrollToBottom(duration);
   }
 
+  public toggleScrollY() {
+    const modal = this.modals[this.modals.length - 1];
+    if (!modal) {
+      throw new Error(this.noModalRegisteredErrorMessage);
+    }
+    modal.toggleScrollY();
+  }
+
   private forgetTopmost(): void {
     this.modals.pop();
   }

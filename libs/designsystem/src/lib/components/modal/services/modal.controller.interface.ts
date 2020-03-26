@@ -7,6 +7,7 @@ import { Modal } from './modal.model';
 export abstract class IModalController {
   abstract scrollToTop: (duration?: KirbyAnimation.Duration) => void;
   abstract scrollToBottom: (duration?: KirbyAnimation.Duration) => void;
+  abstract toggleScrollY: () => void;
   abstract showModal(config: ModalConfig, onCloseModal?: (data?: any) => any): void;
   abstract showActionSheet(config: ActionSheetConfig, onCloseModal?: (data?: any) => any): void;
   abstract showAlert(config: AlertConfig, onCloseModal?: (result?: boolean) => boolean);

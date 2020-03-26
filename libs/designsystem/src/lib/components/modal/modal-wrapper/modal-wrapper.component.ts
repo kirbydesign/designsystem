@@ -35,6 +35,11 @@ export class ModalWrapperComponent {
   private registerScrolling(modal: Modal) {
     modal.scrollToTop = this.scrollToTop.bind(this);
     modal.scrollToBottom = this.scrollToBottom.bind(this);
+    modal.toggleScrollY = this.toggleScrollY.bind(this);
+  }
+
+  private toggleScrollY() {
+    this.ionContent.scrollY = !this.ionContent.scrollY;
   }
 
   private scrollToTop(scrollDuration?: KirbyAnimation.Duration) {

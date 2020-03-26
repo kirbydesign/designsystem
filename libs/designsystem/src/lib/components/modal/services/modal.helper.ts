@@ -21,6 +21,7 @@ export class ModalHelper {
       close: (data?: any) => null,
       scrollToTop: () => null,
       scrollToBottom: () => null,
+      toggleScrollY: () => null,
     };
     const mergedConfig = this.mergeDefaultConfig(config);
     mergedConfig.modal = modal;

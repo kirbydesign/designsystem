@@ -4,4 +4,5 @@ export interface Modal {
   close: (data?: any) => void;
   scrollToTop: (scrollDuration?: KirbyAnimation.Duration) => void;
   scrollToBottom: (scrollDuration?: KirbyAnimation.Duration) => void;
+  toggleScrollY: () => void;
 }

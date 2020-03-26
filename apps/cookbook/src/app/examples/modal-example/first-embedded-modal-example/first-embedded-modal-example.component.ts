@@ -54,6 +54,10 @@ export class FirstEmbeddedModalExampleComponent {
     this.modalController.scrollToTop(KirbyAnimation.Duration.LONG);
   }
 
+  toggleScrollY() {
+    this.modalController.toggleScrollY();
+  }
+
   onHideFirst() {
     let someTestData: number = Math.PI;
     this.modalController.hideTopmost(someTestData);

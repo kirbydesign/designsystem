@@ -71,7 +71,7 @@ myCallback(dataReturnedByModal: any) {{ '{' }}
     The <code>ModalController</code> support scrolling to the top and bottom of the modal using the
     methods <code>scrollToTop</code> and <code>scrollToBottom</code>. They accept
     <code>KirbyAnimation.Duration</code> as optional param. If not provided the scrolling will
-    happen instantaneously.
+    happen instantaneously.You can also disable / enable scrollY with <code>toggleScrollY</code>
   </p>
   <br />
 
@@ -88,6 +88,14 @@ myCallback(dataReturnedByModal: any) {{ '{' }}
     <cookbook-code-viewer language="ts">this.modalController.scrollToBottom();</cookbook-code-viewer>
   </p>
   <br />
+
+  <p>
+    <code>toggleScrollY</code> example:
+    <!-- prettier-ignore -->
+    <cookbook-code-viewer language="ts">this.modalController.toggleScrollY();</cookbook-code-viewer>
+  </p>
+  <br />
+
   <h3>Inside the embedded component:</h3>
   <p>To create a embedded component, ensure:</p>
   <ol>
@@ -112,6 +120,7 @@ myCallback(dataReturnedByModal: any) {{ '{' }}
 ) {{ '{' }}
     this.props = componentProps;
 {{ '}' }}</cookbook-code-viewer
+
 
   ><br />
   <p>
