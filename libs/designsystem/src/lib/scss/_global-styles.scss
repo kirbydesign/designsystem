@@ -3,8 +3,12 @@
 @import './base/typography';
 
 // HACK to circumvent only having a single (first) overlay for modals
-.sc-ion-modal-ios-h {
-  --backdrop-opacity: var(--ion-backdrop-opacity, 0.4) !important;
+.kirby-modal,
+.kirby-alert,
+.kirby-action-sheet {
+  .sc-ion-modal-ios {
+    --backdrop-opacity: var(--ion-backdrop-opacity, 0.4) !important;
+  }
 }
 // end of hack!
 
