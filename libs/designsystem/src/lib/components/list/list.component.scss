@@ -52,6 +52,10 @@ ion-item {
   width: 100%;
 }
 
+ion-item-divider {
+  font-weight: inherit;
+}
+
 ion-item-sliding {
   // backface-visibility and transform, to fix clipping issue on iOS see https://stackoverflow.com/a/16681137 and https://github.com/kirbydesign/designsystem/issues/863
   backface-visibility: hidden;
