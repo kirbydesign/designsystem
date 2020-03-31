@@ -2,6 +2,12 @@
 @import './base/ionic';
 @import './base/typography';
 
+// HACK to circumvent only having a single (first) overlay for modals
+.sc-ion-modal-ios-h {
+  --backdrop-opacity: var(--ion-backdrop-opacity, 0.4) !important;
+}
+// end of hack!
+
 :root {
   --kirby-font-family: 'Roboto';
   font-family: var(--kirby-font-family);
