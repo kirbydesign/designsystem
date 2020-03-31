@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 
-import { ModalController } from '@kirbydesign/designsystem';
+import { ModalController, AlertConfig, ActionSheetConfig } from '@kirbydesign/designsystem';
 import { ModalConfig, COMPONENT_PROPS } from '@kirbydesign/designsystem';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
 import { SecondEmbeddedModalExampleComponent } from '../second-embedded-modal-example/second-embedded-modal-example.component';
@@ -20,7 +20,7 @@ export class FirstEmbeddedModalExampleComponent {
     this.props = componentProps;
   }
 
-  async showNestedModal() {
+  showNestedModal() {
     const config: ModalConfig = {
       title: 'Embedded Modal Title',
       flavor: 'modal',
@@ -31,7 +31,7 @@ export class FirstEmbeddedModalExampleComponent {
     this.modalController.showModal(config);
   }
 
-  async showNestedDrawer() {
+  showNestedDrawer() {
     const config: ModalConfig = {
       title: 'Embedded Drawer Title',
       flavor: 'drawer',
@@ -44,6 +44,30 @@ export class FirstEmbeddedModalExampleComponent {
 
     // supposing no callback needed for the second component
     this.modalController.showModal(config);
+  }
+
+  showNestedAlert() {
+    const config: AlertConfig = {
+      title: 'Embedded Alert',
+      message: 'The default alert is just a title, a message, an OK and (optional) cancel button',
+      okBtn: 'I agree',
+      cancelBtn: 'Take me back',
+    };
+    this.modalController.showAlert(config);
+  }
+
+  showNestedActionSheet() {
+    const config: ActionSheetConfig = {
+      header: 'Nested action sheet',
+      subheader: 'Action sheet subheader',
+      items: [
+        { id: '1', text: 'Option 1' },
+        { id: '2', text: 'Option 2' },
+        { id: '3', text: 'Option 3' },
+      ],
+      cancelButtonText: 'Custom cancel',
+    };
+    this.modalController.showActionSheet(config);
   }
 
   scrollToBottom() {
