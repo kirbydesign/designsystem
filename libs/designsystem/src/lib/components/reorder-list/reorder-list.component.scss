@@ -68,7 +68,7 @@ kirby-card {
     overflow: hidden;
   }
 
-  @include slotted('div>kirby-item') {
+  @include slotted('div kirby-item') {
     z-index: 1; // for showing rounded corners on ios devices
   }
 
