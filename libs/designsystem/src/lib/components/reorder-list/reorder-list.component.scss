@@ -73,7 +73,7 @@ kirby-card {
   }
 
   @include slotted('div:first-child>kirby-item') {
-    border-radius: $border-radius $border-radius 0 0;
+    border-radius: $border-radius;
     overflow: hidden;
   }
 
