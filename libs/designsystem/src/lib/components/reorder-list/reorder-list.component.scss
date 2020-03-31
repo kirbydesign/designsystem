@@ -68,8 +68,12 @@ kirby-card {
     overflow: hidden;
   }
 
+  @include slotted('div>kirby-item') {
+    z-index: 1; // for showing rounded corners on ios devices
+  }
+
   @include slotted('div:first-child>kirby-item') {
-    border-radius: $border-radius;
+    border-radius: $border-radius 0;
     overflow: hidden;
   }
 
