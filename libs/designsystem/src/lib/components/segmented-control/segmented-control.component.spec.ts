@@ -63,10 +63,6 @@ describe('SegmentedControlComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should not emit segmentSelect when created', () => {
-    expect(onSegmentSelectSpy).not.toHaveBeenCalled();
-  });
-
   it('should have checked item as activeSegment when created', () => {
     expect(component.activeSegment).toBe(items[1]);
   });
