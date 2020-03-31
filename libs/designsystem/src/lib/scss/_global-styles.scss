@@ -2,15 +2,17 @@
 @import './base/ionic';
 @import './base/typography';
 
-// HACK to circumvent only having a single (first) overlay for modals
-.kirby-modal,
-.kirby-alert,
-.kirby-action-sheet {
-  .sc-ion-modal-ios {
-    --backdrop-opacity: var(--ion-backdrop-opacity, 0.4) !important;
+// Show backdrop on every modal, as Ionic 5 only applies --backdrop-opacity to :first-of-type:
+// See https://github.com/ionic-team/ionic/commit/253cd96164914a803f6bb42ff95ca74880c940d0
+// and https://github.com/ionic-team/ionic/issues/20800#issuecomment-606670762
+ion-modal,
+ion-modal:first-of-type {
+  &.kirby-modal,
+  &.kirby-alert,
+  &.kirby-action-sheet {
+    --backdrop-opacity: var(--ion-backdrop-opacity, 0.4);
   }
 }
-// end of hack!
 
 :root {
   --kirby-font-family: 'Roboto';
