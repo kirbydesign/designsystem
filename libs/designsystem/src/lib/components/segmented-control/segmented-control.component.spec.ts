@@ -118,8 +118,7 @@ describe('SegmentedControlComponent', () => {
 
   describe('chip mode', () => {
     beforeEach(() => {
-      component.mode = 'chip';
-      spectator.detectChanges();
+      spectator.setInput('mode', 'chip');
     });
 
     it("should have a 'chip' mode when created", () => {
