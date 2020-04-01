@@ -1,4 +1,13 @@
 @import './libs/designsystem/src/lib/scss/utils';
+
+cookbook-segmented-control-example {
+  padding: 0;
+}
+
+h2:not(:first-child) {
+  margin-top: size('l');
+}
+
 .badge-note {
   margin-top: size('s');
 }
