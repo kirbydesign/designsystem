@@ -1,6 +1,7 @@
 @import '../../scss/utils';
 
 :host {
+  display: block;
   user-select: none;
 
   &.default-mode {

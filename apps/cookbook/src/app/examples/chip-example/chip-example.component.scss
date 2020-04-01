@@ -1,12 +1,3 @@
-:host {
-  display: flex;
-
-  ::ng-deep .chip-card {
-    flex-direction: initial;
-    height: initial;
-    justify-content: initial;
-    min-height: initial;
-    min-width: initial;
-    padding: 25px;
-  }
+kirby-card {
+  display: inline-flex;
 }

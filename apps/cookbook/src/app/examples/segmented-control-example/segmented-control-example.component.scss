@@ -1,13 +1,28 @@
 @import './libs/designsystem/src/lib/scss/utils';
 
+:host {
+  display: block;
+  height: 100%;
+  background: get-color('background-color');
+  padding: size('s');
+
+  @include media('>=medium') {
+    padding: size('l');
+  }
+}
+
 kirby-segmented-control {
   margin-bottom: size('m');
 }
 
 .segment-data {
-  margin-top: 30px;
-  padding-top: 80px;
-  height: 200px;
+  padding: size('xxl');
   text-align: center;
   background: get-color('white');
+}
+
+fieldset {
+  display: inline-block;
+  margin-top: size('l');
+  margin-bottom: size('s');
 }

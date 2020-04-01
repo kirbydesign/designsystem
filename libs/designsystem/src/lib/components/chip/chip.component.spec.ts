@@ -1,24 +1,76 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
+import { DesignTokenHelper } from '../../helpers/design-token-helper';
 import { ChipComponent } from './chip.component';
 
-describe('ChipComponent', () => {
-  let component: ChipComponent;
-  let fixture: ComponentFixture<ChipComponent>;
+const getColor = DesignTokenHelper.getColor;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ChipComponent],
-    }).compileComponents();
-  }));
+describe('ChipComponent', () => {
+  let spectator: SpectatorHost<ChipComponent>;
+
+  const createHost = createHostFactory({
+    component: ChipComponent,
+  });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ChipComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    spectator = createHost(`<kirby-chip></kirby-chip>`, {
+      props: { text: 'Test' },
+    });
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(spectator.component).toBeTruthy();
+  });
+
+  it('should have the configured text', () => {
+    const expectedText = 'Test';
+    expect(spectator.component.text).toEqual(expectedText);
+    expect(spectator.element).toHaveText(expectedText, true);
+  });
+
+  it('should not be selected', () => {
+    expect(spectator.component.isSelected).toBeFalsy();
+  });
+
+  it('should render with correct theme-color', () => {
+    expect(spectator.element).toHaveComputedStyle({
+      'background-color': getColor('white'),
+      color: getColor('white', 'contrast'),
+    });
+  });
+
+  describe('when selected', () => {
+    it('should render with correct theme-color', () => {
+      spectator.setInput('isSelected', true);
+      spectator.detectChanges();
+      expect(spectator.element).toHaveComputedStyle({
+        'background-color': getColor('black'),
+        color: getColor('black', 'contrast'),
+      });
+    });
+  });
+
+  describe('inside host with .kirby-color-brightness-dark class', () => {
+    beforeEach(() => {
+      spectator.hostElement.className = 'kirby-color-brightness-dark';
+    });
+
+    it('should render with correct theme-color', () => {
+      expect(spectator.element).toHaveComputedStyle({
+        'background-color': 'transparent',
+        color: getColor('white'),
+      });
+    });
+
+    describe('when selected', () => {
+      it('should render with correct theme-color', () => {
+        spectator.setInput('isSelected', true);
+        spectator.detectChanges();
+        expect(spectator.element).toHaveComputedStyle({
+          'background-color': getColor('white'),
+          color: getColor('white', 'contrast'),
+        });
+      });
+    });
   });
 });
