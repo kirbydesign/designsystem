@@ -31,12 +31,10 @@ $margin-horizontal-total: 2 * size('s');
 
   // Only apply focus ring if pointer device can hover
   // (effectively desktop/mouse devices):
-  @media (hover: hover) {
-    &:focus {
-      > button,
-      > button.attention-level2 {
-        border-color: $focus-ring-color;
-      }
+  @include focus() {
+    > button,
+    > button.attention-level2 {
+      border-color: $focus-ring-color;
     }
   }
 
