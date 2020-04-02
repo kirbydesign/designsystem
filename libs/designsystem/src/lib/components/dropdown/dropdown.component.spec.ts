@@ -4,6 +4,7 @@ import {
   createHostFactory,
   SpectatorHost,
 } from '@ngneat/spectator';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { fakeAsync, tick } from '@angular/core/testing';
 import { MockComponents } from 'ng-mocks';
 import { IonItem } from '@ionic/angular';
@@ -13,6 +14,12 @@ import { ButtonComponent } from '../button/button.component';
 import { IconComponent } from '../icon/icon.component';
 import { CardComponent } from '../card/card.component';
 import { ItemComponent } from '../item/item.component';
+
+@Component({
+  template: '<ng-content></ng-content>',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class OnPushHostComponent {}
 
 describe('DropdownComponent', () => {
   const items = [
@@ -929,6 +936,53 @@ describe('DropdownComponent', () => {
           expect(onChangeSpy).not.toHaveBeenCalled();
         });
       });
+    });
+  });
+
+  describe('when inside host component with ChangeDetectionStrategy.OnPush', () => {
+    let spectator: SpectatorHost<DropdownComponent>;
+    let buttonElement: HTMLButtonElement;
+    let cardElement: HTMLElement;
+
+    const createHost = createHostFactory({
+      component: DropdownComponent,
+      declarations: [
+        MockComponents(ButtonComponent, CardComponent, ItemComponent, IconComponent, IonItem),
+      ],
+      host: OnPushHostComponent,
+    });
+
+    beforeEach(() => {
+      spectator = createHost(`<kirby-dropdown></kirby-dropdown>`, {
+        props: {
+          items: items,
+        },
+      });
+      buttonElement = spectator.query('button[kirby-button]');
+    });
+
+    beforeEach(fakeAsync(() => {
+      cardElement = spectator.query('kirby-card');
+      // Assert that card is initially hidden:
+      expect(cardElement).toBeHidden();
+      expect(cardElement).toHaveComputedStyle({ opacity: '0' });
+      // Act:
+      spectator.click('button');
+      tick(openDelayInMs);
+      spectator.detectChanges();
+    }));
+
+    it('should open dropdown', () => {
+      expect(spectator.component.isOpen).toBeTruthy();
+    });
+
+    it(`should have '.is-open' css class`, () => {
+      expect(spectator.element).toHaveClass('is-open');
+    });
+
+    it('options should be visible', () => {
+      expect(cardElement).toBeVisible();
+      expect(cardElement).toHaveComputedStyle({ opacity: '1' });
     });
   });
 });
