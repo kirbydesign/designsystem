@@ -244,6 +244,7 @@ export class DropdownComponent
         this.isOpen = true;
         this._isOpening = false;
         this.scrollItemIntoView(this.selectedIndex);
+        this.changeDetectorRef.markForCheck();
       }, DropdownComponent.OPEN_DELAY_IN_MS);
     }
   }
