@@ -13,7 +13,7 @@ import { Modal } from './modal.model';
 export class ModalHelper {
   constructor(
     private ionicModalController: ModalController,
-    private animationCtrl: AnimationController
+    private animationController: AnimationController
   ) {}
 
   public async showModalWindow(
@@ -66,10 +66,10 @@ export class ModalHelper {
     baseEl: HTMLElement
   ): Animation {
     // Set-up animated elements
-    const baseAnimation = this.animationCtrl.create();
-    const backdropAnimation = this.animationCtrl.create();
+    const baseAnimation = this.animationController.create();
+    const backdropAnimation = this.animationController.create();
     backdropAnimation.addElement(baseEl.querySelector('ion-backdrop'));
-    const wrapperAnimation = this.animationCtrl.create();
+    const wrapperAnimation = this.animationController.create();
     const wrapperElem = baseEl.querySelector('.modal-wrapper') as HTMLElement;
     wrapperAnimation.addElement(wrapperElem);
 
@@ -116,10 +116,10 @@ export class ModalHelper {
     baseEl: HTMLElement
   ): Animation {
     // Set-up animated elements
-    const baseAnimation = this.animationCtrl.create();
-    const backdropAnimation = this.animationCtrl.create();
+    const baseAnimation = this.animationController.create();
+    const backdropAnimation = this.animationController.create();
     backdropAnimation.addElement(baseEl.querySelector('ion-backdrop'));
-    const wrapperAnimation = this.animationCtrl.create();
+    const wrapperAnimation = this.animationController.create();
     const wrapperElem = baseEl.querySelector('.modal-wrapper') as HTMLElement;
     wrapperAnimation.addElement(wrapperElem);
 

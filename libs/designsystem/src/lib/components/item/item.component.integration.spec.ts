@@ -26,7 +26,6 @@ describe('ItemComponent in Kirby List', () => {
     imports: [IonicModule.forRoot()],
     declarations: [
       ItemComponent,
-      ListComponent,
       SpinnerComponent,
       IconComponent,
       CardComponent,

@@ -12,7 +12,6 @@ describe('TextareaComponent', () => {
 
   const createHost = createHostFactory({
     component: TextareaComponent,
-    declarations: [TextareaComponent],
   });
 
   beforeEach(() => {

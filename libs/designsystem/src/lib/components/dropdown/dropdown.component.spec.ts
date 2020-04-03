@@ -4,6 +4,7 @@ import {
   createHostFactory,
   SpectatorHost,
 } from '@ngneat/spectator';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { fakeAsync, tick } from '@angular/core/testing';
 import { MockComponents } from 'ng-mocks';
 import { IonItem } from '@ionic/angular';
@@ -14,6 +15,12 @@ import { IconComponent } from '../icon/icon.component';
 import { CardComponent } from '../card/card.component';
 import { ItemComponent } from '../item/item.component';
 
+@Component({
+  template: '<ng-content></ng-content>',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class OnPushHostComponent {}
+
 describe('DropdownComponent', () => {
   const items = [
     { text: 'Item 1', value: 1 },
@@ -22,13 +29,13 @@ describe('DropdownComponent', () => {
     { text: 'Item 4', value: 4 },
     { text: 'Item 5', value: 5 },
   ];
+  const openDelayInMs = DropdownComponent.OPEN_DELAY_IN_MS;
 
   describe('by default', () => {
     let spectator: Spectator<DropdownComponent>;
     let buttonElement: HTMLButtonElement;
 
     const createComponent = createComponentFactory({
-      imports: [],
       component: DropdownComponent,
       declarations: [
         MockComponents(ButtonComponent, CardComponent, ItemComponent, IconComponent, IonItem),
@@ -259,6 +266,7 @@ describe('DropdownComponent', () => {
         const componentWidth = spectator.element.clientWidth;
         const cardWidth = card.getBoundingClientRect().width;
         expect(cardWidth).toEqual(componentWidth);
+        expect(card).toHaveComputedStyle({ 'min-width': '0px', 'max-width': 'none' });
       });
     });
 
@@ -277,7 +285,7 @@ describe('DropdownComponent', () => {
         beforeEach(fakeAsync(() => {
           spectator.click('button');
           spectator.detectChanges();
-          tick();
+          tick(openDelayInMs);
         }));
         it('should open dropdown', () => {
           expect(spectator.component.isOpen).toBeTruthy();
@@ -290,7 +298,7 @@ describe('DropdownComponent', () => {
       describe('and Space key is pressed', () => {
         beforeEach(fakeAsync(() => {
           spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'Space');
-          tick();
+          tick(openDelayInMs);
         }));
         it('should open dropdown', () => {
           expect(spectator.component.isOpen).toBeTruthy();
@@ -300,7 +308,7 @@ describe('DropdownComponent', () => {
       describe('and Enter key is pressed', () => {
         beforeEach(fakeAsync(() => {
           spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'Enter');
-          tick();
+          tick(openDelayInMs);
         }));
         it('should open dropdown', () => {
           expect(spectator.component.isOpen).toBeTruthy();
@@ -686,6 +694,20 @@ describe('DropdownComponent', () => {
       });
     });
 
+    describe('when aligned to right side of viewport', () => {
+      it('should align the dropdown to the right side of button and component container ', (done) => {
+        spectator.element.style.cssFloat = 'right';
+        spectator.component.open();
+        spectator.detectChanges();
+        setTimeout(() => {
+          spectator.detectChanges();
+          const card = spectator.query('kirby-card');
+          expect(card).toHaveComputedStyle({ right: '0px' });
+          done();
+        }, openDelayInMs);
+      });
+    });
+
     describe('when disabled', () => {
       beforeEach(() => {
         spectator.component.disabled = true;
@@ -706,13 +728,13 @@ describe('DropdownComponent', () => {
 
       it('should not open', fakeAsync(() => {
         spectator.component.open();
-        tick();
+        tick(openDelayInMs);
         expect(spectator.component.isOpen).toBeFalsy();
       }));
 
       it('should not toggle', fakeAsync(() => {
         spectator.component.toggle();
-        tick();
+        tick(openDelayInMs);
         expect(spectator.component.isOpen).toBeFalsy();
       }));
 
@@ -736,13 +758,13 @@ describe('DropdownComponent', () => {
 
         it('should not open dropdown when Space key is pressed', fakeAsync(() => {
           spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'Space');
-          tick();
+          tick(openDelayInMs);
           expect(spectator.component.isOpen).toBeFalsy();
         }));
 
         it('should not open dropdown when Enter key is pressed', fakeAsync(() => {
           spectator.dispatchKeyboardEvent(spectator.element, 'keydown', 'Enter');
-          tick();
+          tick(openDelayInMs);
           expect(spectator.component.isOpen).toBeFalsy();
         }));
 
@@ -914,6 +936,53 @@ describe('DropdownComponent', () => {
           expect(onChangeSpy).not.toHaveBeenCalled();
         });
       });
+    });
+  });
+
+  describe('when inside host component with ChangeDetectionStrategy.OnPush', () => {
+    let spectator: SpectatorHost<DropdownComponent>;
+    let buttonElement: HTMLButtonElement;
+    let cardElement: HTMLElement;
+
+    const createHost = createHostFactory({
+      component: DropdownComponent,
+      declarations: [
+        MockComponents(ButtonComponent, CardComponent, ItemComponent, IconComponent, IonItem),
+      ],
+      host: OnPushHostComponent,
+    });
+
+    beforeEach(() => {
+      spectator = createHost(`<kirby-dropdown></kirby-dropdown>`, {
+        props: {
+          items: items,
+        },
+      });
+      buttonElement = spectator.query('button[kirby-button]');
+    });
+
+    beforeEach(fakeAsync(() => {
+      cardElement = spectator.query('kirby-card');
+      // Assert that card is initially hidden:
+      expect(cardElement).toBeHidden();
+      expect(cardElement).toHaveComputedStyle({ opacity: '0' });
+      // Act:
+      spectator.click('button');
+      tick(openDelayInMs);
+      spectator.detectChanges();
+    }));
+
+    it('should open dropdown', () => {
+      expect(spectator.component.isOpen).toBeTruthy();
+    });
+
+    it(`should have '.is-open' css class`, () => {
+      expect(spectator.element).toHaveClass('is-open');
+    });
+
+    it('options should be visible', () => {
+      expect(cardElement).toBeVisible();
+      expect(cardElement).toHaveComputedStyle({ opacity: '1' });
     });
   });
 });

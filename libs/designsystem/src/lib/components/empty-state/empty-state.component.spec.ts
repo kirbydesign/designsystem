@@ -11,7 +11,7 @@ describe('EmptyStateComponent', () => {
 
   const createHost = createHostFactory({
     component: EmptyStateComponent,
-    declarations: [EmptyStateComponent, MockComponent(IconComponent)],
+    declarations: [MockComponent(IconComponent)],
   });
 
   beforeEach(() => {

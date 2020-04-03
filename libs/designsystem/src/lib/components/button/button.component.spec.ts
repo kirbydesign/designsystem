@@ -15,7 +15,7 @@ describe('ButtonComponent', () => {
 
   const createHost = createHostFactory({
     component: ButtonComponent,
-    declarations: [ButtonComponent, MockComponent(IconComponent)],
+    declarations: [MockComponent(IconComponent)],
   });
 
   beforeEach(() => {

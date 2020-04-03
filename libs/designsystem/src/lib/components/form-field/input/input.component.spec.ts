@@ -13,7 +13,6 @@ describe('InputComponent', () => {
 
   const createHost = createHostFactory({
     component: InputComponent,
-    declarations: [InputComponent],
   });
 
   beforeEach(() => {

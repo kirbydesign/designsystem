@@ -23,8 +23,8 @@
 <div class="scrollable" role="group" *ngIf="isChipMode">
   <kirby-chip
     [text]="item.text"
-    [isSelected]="item.checked"
-    [attr.aria-selected]="item.checked"
+    [isSelected]="item.id === activeSegment?.id"
+    [attr.aria-selected]="item.id === activeSegment?.id"
     (click)="onSegmentSelect(item)"
     *ngFor="let item of items"
     role="button"
