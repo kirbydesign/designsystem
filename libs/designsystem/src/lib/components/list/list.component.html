@@ -12,16 +12,15 @@
   [disabled]="!isLoadOnDemandEnabled"
   [class.has-header]="headerTemplate"
   [headerFn]="headerFn"
+  [footerFn]="footerFn"
   [class.has-footer]="footerTemplate"
   [class.has-divider]="showDivider"
   (window:resize)="onResize()"
   #list
 >
-  <ng-container *virtualHeader="let header">
-    <ion-list-header>
-      <ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
-    </ion-list-header>
-  </ng-container>
+  <ion-list-header *virtualHeader="let header">
+    <ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
+  </ion-list-header>
 
   <ion-item-sliding
     *virtualItem="let item"
@@ -40,16 +39,14 @@
     ></ng-container>
   </ion-item-sliding>
 
-  <ng-container *virtualFooter="let footer">
-    <div class="footer">
-      <ng-container *ngTemplateOutlet="footerTemplate"></ng-container>
-    </div>
-  </ng-container>
+  <div *virtualFooter="let footer" class="footer">
+    <ng-container *ngTemplateOutlet="footerTemplate"></ng-container>
+  </div>
 </ion-virtual-scroll>
 
 <ion-virtual-scroll
-  *ngIf="isSectionsEnabled"
-  [items]="items"
+  *ngIf="isSectionsEnabled && sortedItems"
+  [items]="sortedItems"
   class="list"
   approxItemHeight="56px"
   approxHeaderHeight="64px"
