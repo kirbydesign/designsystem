@@ -9,7 +9,7 @@ export interface GroupedItem {
   name: 'groupBy',
 })
 export class GroupByPipe implements PipeTransform {
-  transform(items: any[], getGroupName?: (item: any) => string): GroupedItem[] {
+  transform(items: any[], getGroupName?: (item: any) => string): GroupedItem[] | any[] {
     if (!items) {
       return null;
     }
