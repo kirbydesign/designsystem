@@ -159,6 +159,14 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
     }
   }
 
+  headerFn(item: any, index: number, items: any[]) {
+    return index === 0 ? true : null;
+  }
+
+  footerFn(item: any, index: number, items: any[]) {
+    return items && items.length > 0 && items.length - 1 === index ? true : null;
+  }
+
   ngOnChanges(): void {
     this.isSectionsEnabled = !!this.getSectionName;
     if (this.isSectionsEnabled && this.items) {
