@@ -79,6 +79,7 @@ ion-item-sliding {
   }
 }
 
+// remove
 ion-item-group {
   margin-bottom: size('m');
 
@@ -90,6 +91,7 @@ ion-item-group {
 ion-item-divider {
   --inner-padding-end: 0;
   --color: unset;
+  --inner-padding-top: #{size('m')};
   background-color: transparent;
   border-color: transparent;
   min-height: 0;
@@ -173,7 +175,8 @@ ion-item-options[side='end'] {
 
   .list ion-item:first-of-type,
   .list ion-item-sliding:first-of-type,
-  ion-list-header {
+  ion-list-header,
+  .first-in-section {
     border-top-left-radius: $border-radius;
     border-top-right-radius: $border-radius;
   }

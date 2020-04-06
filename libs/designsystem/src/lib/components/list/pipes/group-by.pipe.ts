@@ -1,10 +1,15 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
+export interface GroupedItem {
+  name: string;
+  items: any[];
+}
+
 @Pipe({
   name: 'groupBy',
 })
 export class GroupByPipe implements PipeTransform {
-  transform(items: any[], getGroupName?: (item: any) => string): any[] {
+  transform(items: any[], getGroupName?: (item: any) => string): GroupedItem[] {
     if (!items) {
       return null;
     }

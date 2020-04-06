@@ -163,14 +163,40 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
     return index === 0 ? true : null;
   }
 
+  sectionNameMap = new Map<number, string>();
+  private _sectionHeaderFn = (item: any, index: number, items: any[]) => {
+    return this.sectionNameMap.get(index);
+  };
+
+  sectionHeaderFn = this._sectionHeaderFn.bind(this);
+
   footerFn(item: any, index: number, items: any[]) {
     return items && items.length > 0 && items.length - 1 === index ? true : null;
+  }
+
+  itemHeightFn(item: any, index: number) {
+    return 56;
   }
 
   ngOnChanges(): void {
     this.isSectionsEnabled = !!this.getSectionName;
     if (this.isSectionsEnabled && this.items) {
-      this.groupedItems = this.groupBy.transform(this.items, this.getSectionName);
+      const groupedItems = this.groupBy.transform(this.items, this.getSectionName);
+      this.items = groupedItems.reduce((prev, cur) => [...prev, ...cur.items], []);
+
+      this.sectionNameMap = new Map<number, string>();
+      const groupsSet = new Set<string>();
+      // calculate section name for each item and add them to a index, section name | null map,
+      this.items.forEach((item: any, index) => {
+        const sectionName = this.getSectionName(item);
+        // TODO: extract to method
+        if (groupsSet.has(sectionName)) {
+          this.sectionNameMap.set(index, null);
+        } else {
+          this.sectionNameMap.set(index, sectionName);
+          groupsSet.add(sectionName);
+        }
+      });
     } else {
       this.groupedItems = null;
     }

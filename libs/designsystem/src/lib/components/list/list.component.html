@@ -1,23 +1,17 @@
-<!-- <ion-virtual-scroll [items]="items" approxItemHeight="110px">
-  <ion-card *virtualItem="let item">
-  <ion-card-header>
-    <ion-card-title>Some name</ion-card-title>
-  </ion-card-header>
-  <ion-card-content>Lala some content</ion-card-content>
-  </ion-card>
-</ion-virtual-scroll> -->
-
 <ion-virtual-scroll
   [items]="items"
+  *ngIf="!isSectionsEnabled"
   class="list"
-  approxItemHeight="64px"
+  approxItemHeight="56px"
+  approxHeaderHeight="64px"
+  approxFooterHeight="64px"
   [trackBy]="trackBy || defaultTrackBy"
   kirbyInfiniteScroll
+  [itemHeight]="itemHeightFn"
   (scrollEnd)="onLoadOnDemand()"
   [disabled]="!isLoadOnDemandEnabled"
   [class.has-header]="headerTemplate"
   [headerFn]="headerFn"
-  [footerFn]="footerFn"
   [class.has-footer]="footerTemplate"
   [class.has-divider]="showDivider"
   (window:resize)="onResize()"
@@ -46,12 +40,58 @@
     ></ng-container>
   </ion-item-sliding>
 
-  <!-- <ng-container
-  *ngTemplateOutlet="
-    isSectionsEnabled ? groupedListTemplate : slidingItemsTemplate;
-    context: { $implicit: items }
-  "
-></ng-container> -->
+  <ng-container *virtualFooter="let footer">
+    <div class="footer">
+      <ng-container *ngTemplateOutlet="footerTemplate"></ng-container>
+    </div>
+  </ng-container>
+</ion-virtual-scroll>
+
+<ion-virtual-scroll
+  *ngIf="isSectionsEnabled"
+  [items]="items"
+  class="list"
+  approxItemHeight="56px"
+  approxHeaderHeight="64px"
+  approxFooterHeight="64px"
+  [itemHeight]="itemHeightFn"
+  [trackBy]="trackBy || defaultTrackBy"
+  kirbyInfiniteScroll
+  (scrollEnd)="onLoadOnDemand()"
+  [disabled]="!isLoadOnDemandEnabled"
+  [class.has-header]="headerTemplate"
+  [headerFn]="sectionHeaderFn"
+  [footerFn]="footerFn"
+  [class.has-footer]="footerTemplate"
+  [class.has-divider]="showDivider"
+  (window:resize)="onResize()"
+  #list
+>
+  <ng-container *virtualHeader="let header">
+    <ion-item-divider>
+      <ng-container
+        *ngTemplateOutlet="sectionHeaderTemplate; context: { $implicit: header }"
+      ></ng-container>
+    </ion-item-divider>
+  </ng-container>
+
+  <ion-item-sliding
+    *virtualItem="let item; let index = index"
+    [class.selected]="isSelectable && item === selectedItem"
+    [kirbyListItemColor]="getItemColor"
+    [class.first-in-section]="sectionHeaderFn(item, index - 1) !== null"
+    [item]="item"
+    [disabled]="isSwipingEnabled ? null : true"
+    keyHandler
+    (click)="isSelectable ? onItemSelect(item) : null"
+  >
+    <ng-container
+      *ngTemplateOutlet="swipeActionsTemplate; context: { $implicit: item }"
+    ></ng-container>
+    <ng-container
+      *ngTemplateOutlet="defaultItemTemplate; context: { $implicit: item }"
+    ></ng-container>
+  </ion-item-sliding>
 
   <ng-container *virtualFooter="let footer">
     <div class="footer">
