@@ -1,8 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, ContentChild, ElementRef, AfterContentInit } from '@angular/core';
+
+import { RouterOutletComponent } from '../router-outlet';
+import { ModalController } from '../modal';
 
 @Component({
   selector: 'kirby-app',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {}
+export class AppComponent implements AfterContentInit {
+  @ContentChild(RouterOutletComponent, { static: false, read: ElementRef })
+  private routerOutlet?: ElementRef<HTMLElement>;
+
+  constructor(private modalController: ModalController) {}
+
+  ngAfterContentInit(): void {
+    if (this.routerOutlet && this.routerOutlet.nativeElement) {
+      this.modalController.registerPresentingElement(this.routerOutlet.nativeElement);
+    }
+  }
+}

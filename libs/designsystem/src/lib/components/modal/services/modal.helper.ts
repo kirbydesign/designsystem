@@ -18,7 +18,8 @@ export class ModalHelper {
 
   public async showModalWindow(
     config: ModalConfig,
-    registerModal: (modal: Modal) => void
+    registerModal: (modal: Modal) => void,
+    presentingElement?: HTMLElement
   ): Promise<any> {
     const modal: Modal = {
       close: (data?: any) => null,
@@ -27,6 +28,11 @@ export class ModalHelper {
     };
     const mergedConfig = this.mergeDefaultConfig(config);
     mergedConfig.modal = modal;
+    let modalPresentingElement;
+    if (mergedConfig.flavor === 'modal') {
+      const topMostModal = await this.ionicModalController.getTop();
+      modalPresentingElement = topMostModal || presentingElement;
+    }
     const ionModal = await this.ionicModalController.create({
       component: config.flavor === 'compact' ? ModalCompactWrapperComponent : ModalWrapperComponent,
       cssClass: [
@@ -36,8 +42,8 @@ export class ModalHelper {
       ],
       backdropDismiss: config.flavor === 'compact' ? false : true,
       componentProps: { config: mergedConfig },
-      swipeToClose: true,
-      presentingElement: config.presentingElement,
+      swipeToClose: config.flavor != 'compact',
+      presentingElement: modalPresentingElement,
       // enterAnimation: this.animateIn.bind(
       //   this,
       //   'drawer', //mergedConfig.flavor,
