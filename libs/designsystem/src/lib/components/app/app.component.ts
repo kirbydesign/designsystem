@@ -1,7 +1,7 @@
 import { Component, ContentChild, ElementRef, AfterContentInit } from '@angular/core';
 
-import { RouterOutletComponent } from '../router-outlet';
-import { ModalController } from '../modal';
+import { RouterOutletComponent } from '../router-outlet/router-outlet.component';
+import { ModalController } from '../modal/services/modal.controller';
 
 @Component({
   selector: 'kirby-app',
