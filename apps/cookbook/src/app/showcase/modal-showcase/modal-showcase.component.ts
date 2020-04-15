@@ -40,13 +40,6 @@ export class ModalShowcaseComponent {
       inputValues: ['{iconName: string, action: Function}'],
     },
     {
-      name: 'dim',
-      description:
-        'The transparency of the background of the modal. 0 is fully transparent, while 1 is fully visible.',
-      defaultValue: '0.5',
-      inputValues: ['number (0..1)'],
-    },
-    {
       name: 'componentProps',
       description: 'The data to pass to the modal component.',
       defaultValue: '',

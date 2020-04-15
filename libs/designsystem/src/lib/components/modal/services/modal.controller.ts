@@ -22,6 +22,9 @@ export class ModalController implements IModalController {
   ) {}
 
   public showModal(config: ModalConfig, onCloseModal?: (data?: any) => void): void {
+    if (config.dim != undefined) {
+      console.warn('ModalConfig.dim is deprecated - please remove from your configuration.');
+    }
     const modalCloseEvent: Promise<any> = this.modalHelper.showModalWindow(
       config,
       this.register.bind(this)
