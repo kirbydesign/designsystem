@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, AfterViewInit } from '@angular/core';
 
+import { ModalController } from '@kirbydesign/designsystem';
 import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
 
 @Component({
@@ -8,7 +9,18 @@ import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-prop
   styleUrls: ['./modal-showcase.component.scss'],
   preserveWhitespaces: true,
 })
-export class ModalShowcaseComponent {
+export class ModalShowcaseComponent implements AfterViewInit {
+  constructor(
+    private elementRef: ElementRef<HTMLElement>,
+    private modalController: ModalController
+  ) {}
+
+  ngAfterViewInit(): void {
+    this.modalController.registerPresentingElement(
+      this.elementRef.nativeElement.closest('cookbook-home')
+    );
+  }
+
   properties: ShowcaseProperty[] = [
     {
       name: 'title',
