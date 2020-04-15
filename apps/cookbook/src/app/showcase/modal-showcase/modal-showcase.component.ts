@@ -2,16 +2,13 @@ import { Component } from '@angular/core';
 
 import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
 
-declare var require: any;
-
 @Component({
   selector: 'cookbook-modal-showcase',
   templateUrl: './modal-showcase.component.html',
+  styleUrls: ['./modal-showcase.component.scss'],
   preserveWhitespaces: true,
 })
 export class ModalShowcaseComponent {
-  exampleHtml: string = require('!raw-loader!../../examples/modal-example/modal-example.component.html')
-    .default;
   properties: ShowcaseProperty[] = [
     {
       name: 'title',

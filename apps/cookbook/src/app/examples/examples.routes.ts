@@ -9,7 +9,7 @@ import { ListExampleComponent } from './list/list-example.component';
 import { ChartExampleComponent } from './chart-example/chart-example.component';
 import { FontsExampleComponent } from './fonts-example/fonts-example.component';
 import { SpinnerExampleComponent } from './spinner-example/spinner-example.component';
-import { ModalExampleComponent } from './modal-example/modal-example.component';
+import { ModalExamplePopoutComponent } from './modal-example/modal-example-popout.component';
 import { SegmentedControlExampleComponent } from './segmented-control-example/segmented-control-example.component';
 import { ChipExampleComponent } from './chip-example/chip-example.component';
 import { BadgeExampleComponent } from './badge-example/badge-example.component';
@@ -139,7 +139,7 @@ export const routes: Routes = [
       },
       {
         path: 'modal',
-        component: ModalExampleComponent,
+        component: ModalExamplePopoutComponent,
       },
     ],
   },
