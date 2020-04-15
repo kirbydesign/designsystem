@@ -12,12 +12,8 @@ import { Modal } from './modal.model';
 
 @Injectable()
 export class ModalController implements IModalController {
-  registerPresentingElement(element: HTMLElement) {
-    this.presentingElement = element;
-  }
   private modals: Modal[] = [];
   private readonly noModalRegisteredErrorMessage = 'No modal windows are currently registered';
-  private presentingElement: HTMLElement;
 
   constructor(
     private modalHelper: ModalHelper,
@@ -28,8 +24,7 @@ export class ModalController implements IModalController {
   public showModal(config: ModalConfig, onCloseModal?: (data?: any) => void): void {
     const modalCloseEvent: Promise<any> = this.modalHelper.showModalWindow(
       config,
-      this.register.bind(this),
-      this.presentingElement
+      this.register.bind(this)
     );
     modalCloseEvent.then((data) => {
       this.forgetTopmost();
@@ -73,6 +68,10 @@ export class ModalController implements IModalController {
 
   public register(modal: Modal): void {
     this.modals.push(modal);
+  }
+
+  public registerPresentingElement(element: HTMLElement) {
+    this.modalHelper.registerPresentingElement(element);
   }
 
   public hideTopmost(data?: any): void {
