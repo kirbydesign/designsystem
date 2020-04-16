@@ -8,7 +8,9 @@ import { Modal } from './modal.model';
 
 @Injectable()
 export class ModalHelper {
-  private presentingElement: HTMLElement;
+  // TODO: Make presentingElement an instance field when
+  // forRoot()/singleton services has been solved:
+  private static presentingElement: HTMLElement = null;
 
   constructor(private ionicModalController: ModalController) {}
 
@@ -53,7 +55,7 @@ export class ModalHelper {
   }
 
   public registerPresentingElement(element: HTMLElement) {
-    this.presentingElement = element;
+    ModalHelper.presentingElement = element;
   }
 
   private async getPresentingElement(flavor?: string) {
@@ -61,7 +63,7 @@ export class ModalHelper {
     if (!flavor || flavor === 'modal') {
       const topMostModal = await this.ionicModalController.getTop();
       if (!topMostModal) {
-        modalPresentingElement = this.presentingElement;
+        modalPresentingElement = ModalHelper.presentingElement;
       } else if (!topMostModal.classList.contains('kirby-drawer')) {
         modalPresentingElement = topMostModal;
       }
