@@ -23,7 +23,7 @@ export class ModalHelper {
       scrollToTop: () => null,
       scrollToBottom: () => null,
     };
-    config.modal = modal;
+    config = { flavor: 'modal', modal, ...config };
     let modalPresentingElement = await this.getPresentingElement(config.flavor);
     const ionModal = await this.ionicModalController.create({
       component: config.flavor === 'compact' ? ModalCompactWrapperComponent : ModalWrapperComponent,
