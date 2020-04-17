@@ -55,6 +55,17 @@ ion-modal:first-of-type {
     }
   }
 
+  // Reset Ionic Card style height + top border radius:
+  @include media('<=medium') {
+    &.modal-card {
+      .modal-wrapper {
+        height: 100% !important;
+        border-top-left-radius: 0 !important;
+        border-top-right-radius: 0 !important;
+      }
+    }
+  }
+
   &.kirby-drawer {
     padding-top: calc(var(--ion-safe-area-top, 0) + #{size('m')});
 

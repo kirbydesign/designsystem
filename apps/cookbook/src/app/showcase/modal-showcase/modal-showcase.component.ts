@@ -1,17 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, AfterViewInit } from '@angular/core';
 
+import { ModalController } from '@kirbydesign/designsystem';
 import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
-
-declare var require: any;
 
 @Component({
   selector: 'cookbook-modal-showcase',
   templateUrl: './modal-showcase.component.html',
+  styleUrls: ['./modal-showcase.component.scss'],
   preserveWhitespaces: true,
 })
-export class ModalShowcaseComponent {
-  exampleHtml: string = require('!raw-loader!../../examples/modal-example/modal-example.component.html')
-    .default;
+export class ModalShowcaseComponent implements AfterViewInit {
+  constructor(
+    private elementRef: ElementRef<HTMLElement>,
+    private modalController: ModalController
+  ) {}
+
+  ngAfterViewInit(): void {
+    this.modalController.registerPresentingElement(
+      this.elementRef.nativeElement.closest('cookbook-home')
+    );
+  }
+
   properties: ShowcaseProperty[] = [
     {
       name: 'title',
@@ -38,13 +47,6 @@ export class ModalShowcaseComponent {
         "(Optional) Allows placing a supplementary button in the top right corner of drawers. Note that this is only available on modals with a 'drawer' flavor",
       defaultValue: '',
       inputValues: ['{iconName: string, action: Function}'],
-    },
-    {
-      name: 'dim',
-      description:
-        'The transparency of the background of the modal. 0 is fully transparent, while 1 is fully visible.',
-      defaultValue: '0.5',
-      inputValues: ['number (0..1)'],
     },
     {
       name: 'componentProps',

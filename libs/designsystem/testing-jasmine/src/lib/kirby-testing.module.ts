@@ -16,6 +16,7 @@ export function modalControllerFactory() {
     'scrollToTop',
     'scrollToBottom',
     'hideAll',
+    'registerPresentingElement',
   ]);
 }
 

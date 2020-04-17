@@ -22,6 +22,9 @@ export class ModalController implements IModalController {
   ) {}
 
   public showModal(config: ModalConfig, onCloseModal?: (data?: any) => void): void {
+    if (config.hasOwnProperty('dim')) {
+      console.warn('ModalConfig.dim is deprecated - please remove from your configuration.');
+    }
     const modalCloseEvent: Promise<any> = this.modalHelper.showModalWindow(
       config,
       this.register.bind(this)
@@ -68,6 +71,10 @@ export class ModalController implements IModalController {
 
   public register(modal: Modal): void {
     this.modals.push(modal);
+  }
+
+  public registerPresentingElement(element: HTMLElement) {
+    this.modalHelper.registerPresentingElement(element);
   }
 
   public hideTopmost(data?: any): void {

@@ -1,147 +1,107 @@
-<div class="example">
-  <cookbook-modal-example></cookbook-modal-example>
-  <cookbook-code-viewer [html]="exampleHtml"></cookbook-code-viewer>
-  <br />
-  <h3>Inside the parent (caller) component:</h3>
-  <p>
-    To show the modal, create a <code>ModalConfig</code> and pass it to the
-    <code>ModalController.showModal</code>:
-    <!-- prettier-ignore -->
-    <cookbook-code-viewer language="ts">constructor(private modalController: ModalController) {{ '{}' }}
-
-showModal() {{ '{' }}
-    const config: ModalConfig = {{ '{' }}
-        title: 'Your Modal Title',
-        flavor: 'modal',
-        component: YourEmbeddedModalComponent,
-        componentProps: {{ '{' }}
-            prop1: 'value1',
-            prop2: 'value2'
-        {{ '}' }}
-    {{ '}' }};
-    this.modalController.showModal(config);
-{{ '}' }}</cookbook-code-viewer>
-  </p>
-  <h3>Modal flavors:</h3>
-  <p>
-    The modal can have one of multiple flavors, used to determine the opening animation, the
-    position of their titles and their close buttons. <br />
-    With the <strong><code>modal</code></strong> flavor, the dialog opens with a fade-in animation,
-    its title is aligned to the left and its close button is placed in the top right corner.<br />
-    The <strong><code>compact</code></strong> flavor renders a stripped-down version with no
-    heading, toolbar or close button and no content scrolling.<br />
-    When a <strong><code>drawer</code></strong> flavor is used, the dialog opens with a slide-up
-    animation, its title is centered and its close button is placed in the top left corner.
-    Additionally, with the <code>drawer</code> flavor, users can specify a
-    <code>drawerSupplementaryAction</code>, which is an additional button rendered in the top right
-    corner (see the example below). The <code>drawerSupplementaryAction</code> option takes an
-    <code>iconName: string</code> which corresponds to an icon of the kirby font, and
-    <code>action: Function</code>, which is invoked when the supplementary button is selected.
-    <!-- prettier-ignore -->
-    <cookbook-code-viewer language="ts">showModal() {{ '{' }}
-    const config: ModalConfig = {{ '{' }}
-        title: 'Your Drawer Title',
-        flavor: 'drawer',
-        drawerSupplementaryAction: {{ '{' }}
-            iconName: 'qr',
-            action: this.onSupplementaryActionSelect,
-        {{ '}' }},
-        component: YourEmbeddedDrawerComponent
-    {{ '}' }};
-    this.modalController.showModal(config);
-{{ '}' }}
-
-private onSupplementaryActionSelect() {{ '{' }}
-    console.log('Supplementary action selected');
-{{ '}' }}</cookbook-code-viewer>
-    <br /><br />
-    <em>(Optional)</em><br />
-    If you need to obtain data back from the modal, you can pass a callback function:
-    <!-- prettier-ignore -->
-    <cookbook-code-viewer language="ts">this.modalController.showModal(config, myCallback);
-
-myCallback(dataReturnedByModal: any) {{ '{' }}
-    ...
-{{ '}' }}</cookbook-code-viewer>
-  </p>
-  <h3>
-    Scrolling
-  </h3>
-  <p>
-    The <code>ModalController</code> support scrolling to the top and bottom of the modal using the
-    methods <code>scrollToTop</code> and <code>scrollToBottom</code>. They accept
-    <code>KirbyAnimation.Duration</code> as optional param. If not provided the scrolling will
-    happen instantaneously.
-  </p>
-  <br />
-
-  <p>
-    <code>scrollToTop</code> example (with long scroll animation):
-    <!-- prettier-ignore -->
-    <cookbook-code-viewer language="ts">this.modalController.scrollToTop(KirbyAnimation.Duration.LONG);</cookbook-code-viewer>
-  </p>
-  <br />
-
-  <p>
-    <code>scrollToBottom</code> example:
-    <!-- prettier-ignore -->
-    <cookbook-code-viewer language="ts">this.modalController.scrollToBottom();</cookbook-code-viewer>
-  </p>
-  <br />
-  <h3>Inside the embedded component:</h3>
-  <p>To create a embedded component, ensure:</p>
-  <ol>
-    <li>
-      the embedded component must be declared (module file, or inside your
-      <code>@Component</code> decorator)
-    </li>
-    <li>
-      the embedded component must be listed in your <code>entryComponents</code> (module file)
-    </li>
-  </ol>
-  <br />
-  <em>(Optional)</em><br />
-  <p>
-    To access data passed into the embedded component, inject the COMPONENT_PROPS inside the
-    embedded components constructor:
-  </p>
-  <!-- prettier-ignore -->
-  <cookbook-code-viewer language="ts">constructor(
-    @Inject(COMPONENT_PROPS) private componentProps,
-    private modalController: ModalController,
-) {{ '{' }}
-    this.props = componentProps;
-{{ '}' }}</cookbook-code-viewer
-
-  ><br />
-  <p>
-    In order to hide a modal from within your embedded component (and destroy its component), you
-    can use:
-    <!-- prettier-ignore -->
-    <cookbook-code-viewer language="ts">constructor(private modalController: ModalController) {{ '{}' }}
-this.modalController.hideTopmost();</cookbook-code-viewer>
-    <br /><br />
-    <em>(Optional)</em><br />
-    You can additionally pass data, which will be available in your callback:
-    <!-- prettier-ignore -->
-    <cookbook-code-viewer language="ts">let returnData = ...;
-this.modalController.hideTopmost(returnData);</cookbook-code-viewer>
-    It is possible to nest more modals from within your embedded components, <br />
-    by using the same services and principles as above.
-  </p>
-
-  <h4>ModalConfig properties:</h4>
-  <cookbook-showcase-properties [properties]="properties"></cookbook-showcase-properties>
-  <br />
-  <p>
-    <ion-icon name="information-circle" style="color: #3880ff"></ion-icon>
-    <em
-      >For more details concerning the technical implementation of the modal component, see
-      <a
-        target="_blank"
-        href="https://github.com/kirbydesign/designsystem/tree/master/src/app/showcase/modal-showcase/readme.md"
-        >this flow diagram</a
-      ></em
-    >
-  </p>
+<div class="example-wrapper">
+  <div>
+    <h2><span class="desktop">Desktop:</span><span class="mobile">Mobile:</span></h2>
+    <cookbook-modal-example #example></cookbook-modal-example>
+    <cookbook-code-viewer [html]="example.template"></cookbook-code-viewer>
+    <h2>Inside the parent (caller) component:</h2>
+    <p>
+      To show the modal, create a <code>ModalConfig</code> and pass it to the
+      <code>ModalController.showModal</code> method:
+      <cookbook-code-viewer [ts]="example.defaultCodeSnippet"></cookbook-code-viewer>
+    </p>
+  </div>
+  <cookbook-iphone src="/examples/modal" showExternalLink="true"></cookbook-iphone>
 </div>
+<h2>Modal flavors:</h2>
+<p>
+  The modal can have one of multiple flavors, used to determine the opening animation, the position
+  of the title and the close button.
+</p>
+<h3>Modal (default)</h3>
+<p>
+  With the <strong><code>modal</code></strong> flavor, the dialog opens with a slide-up animation,
+  it's title is aligned to the left and it's close button is placed in the top right corner. The
+  modal includes a gesture to drag the modal down to close it.<br />
+  On mobile/small screens the presenting page will be pushed back in a card-like style (when used
+  inside a <code>kirby-app</code>). Any additional modals with the <code>modal</code> flavor opened
+  on top will also scale/push back the existing modal, similar to a card stack.
+</p>
+<h3>Compact</h3>
+<p>
+  The <strong><code>compact</code></strong> flavor renders a stripped-down version with no heading,
+  toolbar or close button and no content scrolling. Can be used for <em>out-of-order</em> style
+  modals.
+</p>
+<h3>Drawer</h3>
+<p>
+  When a <strong><code>drawer</code></strong> flavor is used, the dialog opens with a slide-up
+  animation, it's title is centered and it's close button is placed in the top left corner.
+  Additionally, with the <code>drawer</code> flavor, users can specify a
+  <code>drawerSupplementaryAction</code>, which is an additional button rendered in the top right
+  corner (see the example below). The <code>drawerSupplementaryAction</code> option takes an
+  <code>iconName: string</code> which corresponds to the name of a kirby icon, and
+  <code>action: Function</code>, which is invoked when the supplementary button is selected.
+  <cookbook-code-viewer [ts]="example.drawerCodeSnippet" language="ts"></cookbook-code-viewer>
+</p>
+<h2>Close event handler <em>(optional)</em>:</h2>
+<p>
+  If you want to be notified when the modal closes, you can pass a callback function:
+  <cookbook-code-viewer [ts]="example.callbackCodeSnippet" language="ts"></cookbook-code-viewer>
+</p>
+<h2>Return data from the modal <em>(optional)</em>:</h2>
+<p>
+  If you need to obtain data back from the modal, you can pass a callback function:
+  <cookbook-code-viewer
+    [ts]="example.callbackWithDataCodeSnippet"
+    language="ts"
+  ></cookbook-code-viewer>
+</p>
+
+<h2>Inside the embedded component:</h2>
+<p>To create an embedded component, ensure:</p>
+<ol>
+  <li>
+    the embedded component must be declared (module file, or inside your
+    <code>@Component</code> decorator)
+  </li>
+  <li>the embedded component must be listed in your <code>entryComponents</code> (module file)</li>
+</ol>
+<br />
+<em>(Optional)</em><br />
+<p>
+  To access data passed into the embedded component, inject the
+  <code>COMPONENT_PROPS</code> inside the embedded component's constructor:
+</p>
+<cookbook-code-viewer [ts]="example.embeddedCodeSnippet"></cookbook-code-viewer><br />
+<p>
+  In order to hide a modal from within your embedded component (and destroy it's component), you can
+  use:
+  <cookbook-code-viewer [ts]="example.hideTopmostCodeSnippet"></cookbook-code-viewer>
+  It is possible to nest more modals from within your embedded components, by using the same
+  services and principles as above.
+</p>
+
+<h2>Scrolling</h2>
+<p>
+  The <code>ModalController</code> support scrolling to the top and bottom of the modal using the
+  methods <code>scrollToTop</code> and <code>scrollToBottom</code>. They accept
+  <code>KirbyAnimation.Duration</code> as optional param. If not provided the scrolling will happen
+  instantaneously.
+</p>
+<cookbook-code-viewer [ts]="example.scrollingCodeSnippet" language="ts"></cookbook-code-viewer>
+
+<h2>Properties:</h2>
+<h3><code>ModalConfig</code></h3>
+<cookbook-showcase-properties [properties]="properties"></cookbook-showcase-properties>
+<br />
+<p>
+  <ion-icon name="information-circle" style="color: #3880ff"></ion-icon>
+  <em
+    >For more details concerning the technical implementation of the modal component, see
+    <a
+      target="_blank"
+      href="https://github.com/kirbydesign/designsystem/tree/master/src/app/showcase/modal-showcase/readme.md"
+      >this flow diagram</a
+    ></em
+  >
+</p>
