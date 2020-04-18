@@ -1,4 +1,13 @@
-import { Component, HostListener, Injector, HostBinding, ViewChild } from '@angular/core';
+import {
+  Component,
+  HostListener,
+  Injector,
+  HostBinding,
+  ViewChild,
+  AfterViewInit,
+  ElementRef,
+  Renderer2,
+} from '@angular/core';
 import { NavParams, IonContent } from '@ionic/angular';
 
 import { ModalConfig } from './config/modal-config';
@@ -12,24 +21,37 @@ import { Modal } from '../services/modal.model';
   templateUrl: './modal-wrapper.component.html',
   styleUrls: ['./modal-wrapper.component.scss'],
 })
-export class ModalWrapperComponent {
+export class ModalWrapperComponent implements AfterViewInit {
   scrollY: number = Math.abs(window.scrollY);
   config: ModalConfig;
   componentPropsInjector: Injector;
   @ViewChild(IonContent, { static: true }) private ionContent: IonContent;
+  @ViewChild(IonContent, { static: true, read: ElementRef }) private ionContentElement: ElementRef<
+    HTMLIonContentElement
+  >;
 
   @HostBinding('class.drawer')
   get _isDrawer() {
     return this.config.flavor === 'drawer';
   }
 
-  constructor(params: NavParams, private modalController: IModalController, injector: Injector) {
+  constructor(
+    params: NavParams,
+    private modalController: IModalController,
+    injector: Injector,
+    private elementRef: ElementRef<HTMLElement>,
+    private renderer: Renderer2
+  ) {
     this.config = params.get('config');
     this.componentPropsInjector = Injector.create({
       providers: [{ provide: COMPONENT_PROPS, useValue: this.config.componentProps }],
       parent: injector,
     });
     this.registerScrolling(this.config.modal);
+  }
+
+  ngAfterViewInit(): void {
+    this.renderFooter();
   }
 
   private registerScrolling(modal: Modal) {
@@ -63,6 +85,15 @@ export class ModalWrapperComponent {
     const input = event.target as HTMLElement;
     if (input.tagName === 'INPUT' && input.closest('ion-modal')) {
       event.stopPropagation();
+    }
+  }
+
+  private renderFooter() {
+    const embeddedFooter = this.ionContentElement.nativeElement.querySelector('kirby-modal-footer');
+    if (embeddedFooter) {
+      // Move embedded footer out of content for fixed rendering of footer:
+      this.renderer.removeChild(embeddedFooter.parentElement, embeddedFooter);
+      this.renderer.appendChild(this.elementRef.nativeElement, embeddedFooter);
     }
   }
 }
