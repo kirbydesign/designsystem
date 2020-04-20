@@ -12,12 +12,12 @@ import { Modal } from '../services/modal.model';
 describe('ModalWrapperComponent', () => {
   let spectator: Spectator<ModalWrapperComponent>;
   let component: ModalWrapperComponent;
-  let navParamsSpy: jasmine.SpyObj<NavParams>;
   const modal = {
     close: () => {},
     scrollToTop: () => {},
     scrollToBottom: () => {},
   } as Modal;
+  const modalControllerSpy = jasmine.createSpyObj('IModalController', ['hideTopmost']);
 
   const createComponent = createComponentFactory({
     component: ModalWrapperComponent,
@@ -32,38 +32,30 @@ describe('ModalWrapperComponent', () => {
         IonContent
       ),
     ],
+    providers: [
+      { provide: IModalController, useValue: modalControllerSpy },
+      {
+        provide: NavParams,
+        useFactory: () => ({
+          get: () => ({
+            title: 'Test title',
+            component: undefined,
+            flavor: 'modal',
+            modal,
+          }),
+        }),
+      },
+    ],
   });
 
   beforeEach(() => {
-    const modalControllerSpy = jasmine.createSpyObj('IModalController', [
-      'showModal',
-      'hideModal',
-      'blurNativeWrapper',
-      'hideTopmost',
-    ]);
-    navParamsSpy = jasmine.createSpyObj('NavParams', {
-      get: {
-        title: 'Test title',
-        component: undefined,
-        flavor: 'modal',
-        modal,
-      },
-    });
-
-    navParamsSpy.data = {
-      config: {},
-    } as any;
-    spectator = createComponent({
-      providers: [
-        { provide: IModalController, useValue: modalControllerSpy },
-        { provide: NavParams, useValue: navParamsSpy },
-      ],
-    });
+    spectator = createComponent();
     component = spectator.component;
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+    component.config.title = 'hest';
   });
 
   describe('title', () => {
