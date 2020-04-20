@@ -7,6 +7,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { InfiniteScrollDirective } from './components/list/directives/infinite-scroll.directive';
 import { ModalWrapperComponent } from './components/modal/modal-wrapper/modal-wrapper.component';
 import { ModalCompactWrapperComponent } from './components/modal/modal-wrapper/compact/modal-compact-wrapper.component';
+import { ModalFooterComponent } from './components/modal/footer/modal-footer.component';
 import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';
 import { FullscreenLoadingOverlayComponent } from './components/loading-overlay/fullscreen-loading-overlay/fullscreen-loading-overlay.component';
 import { LoadingOverlayComponent } from './components/loading-overlay/loading-overlay.component';
@@ -95,6 +96,7 @@ const exportedDeclarations = [
   CalendarComponent,
   CheckboxComponent,
   ActionSheetComponent,
+  ModalFooterComponent,
   SegmentedControlComponent,
   ChipComponent,
   BadgeComponent,

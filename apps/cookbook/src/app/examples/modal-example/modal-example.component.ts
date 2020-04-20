@@ -3,12 +3,19 @@ import { Component } from '@angular/core';
 import { ModalConfig, ModalController } from '@kirbydesign/designsystem';
 import { FirstEmbeddedModalExampleComponent } from './first-embedded-modal-example/first-embedded-modal-example.component';
 import { ModalCompactExampleComponent } from './compact-example/modal-compact-example.component';
+import { ModalWithFooterExampleComponent } from './modal-with-footer-example/modal-with-footer-example.component';
 
 const config = {
   selector: 'cookbook-modal-example',
   template: `<button kirby-button (click)="showModal()">Show modal</button>
 <button kirby-button (click)="showDrawer()">Show drawer</button>
-<button kirby-button (click)="showCompact()">Show compact</button>`,
+<button kirby-button (click)="showCompact()">Show compact</button>
+<button kirby-button (click)="showModalWithFooter()">Show modal with footer</button>`,
+  footerTemplate: `<p>Some content of the embedded component</p>
+...
+<kirby-modal-footer>
+  <button kirby-button (click)="scrollToBottom()">Scroll to bottom</button>
+</kirby-modal-footer>`,
   defaultCodeSnippet: `constructor(private modalController: ModalController) {}
 
 showModal() {
@@ -100,6 +107,7 @@ export class EmbeddedComponent() {
 })
 export class ModalExampleComponent {
   template = config.template;
+  footerTemplate = config.footerTemplate;
   defaultCodeSnippet = config.defaultCodeSnippet;
   drawerCodeSnippet = config.drawerCodeSnippet;
   callbackCodeSnippet = config.callbackCodeSnippet;
@@ -144,6 +152,18 @@ export class ModalExampleComponent {
     };
 
     this.modalController.showModal(config, this.onDrawerClose);
+  }
+
+  showModalWithFooter() {
+    const config: ModalConfig = {
+      title: 'Modal with footer',
+      component: ModalWithFooterExampleComponent,
+      componentProps: {
+        prop1: 'value1',
+        prop2: 'value2',
+      },
+    };
+    this.modalController.showModal(config, this.onModalClose);
   }
 
   onModalClose(data: any): void {

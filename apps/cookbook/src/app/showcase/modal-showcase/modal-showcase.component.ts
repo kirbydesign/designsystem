@@ -21,6 +21,11 @@ export class ModalShowcaseComponent implements AfterViewInit {
     );
   }
 
+  scrollTo(target: Element) {
+    target.scrollIntoView({ behavior: 'smooth' });
+    return false;
+  }
+
   properties: ShowcaseProperty[] = [
     {
       name: 'title',

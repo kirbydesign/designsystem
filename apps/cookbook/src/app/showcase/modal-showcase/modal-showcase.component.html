@@ -1,23 +1,49 @@
 <div class="example-wrapper">
   <div>
+    <p>
+      A Modal is a dialog that appears on top of the app's content, and must be dismissed by the app
+      before interaction can resume. It is useful as a select component when there are a lot of
+      options to choose from, or when filtering items in a list, as well as many other use cases.
+    </p>
+    <ul>
+      <li>
+        A modal can be opened through
+        <a href="#" (click)="scrollTo(modalController)"><code>ModalController</code></a>
+      </li>
+      <li>
+        The modal comes in 3 different <a href="#" (click)="scrollTo(modalFlavors)">flavors</a>:
+        <ul>
+          <li><a href="#" (click)="scrollTo(modalFlavorsModal)">Modal (default)</a></li>
+          <li><a href="#" (click)="scrollTo(modalFlavorsCompact)">Compact</a></li>
+          <li><a href="#" (click)="scrollTo(modalFlavorsDrawer)">Drawer</a></li>
+        </ul>
+      </li>
+      <li>Support for handling the <a href="#" (click)="scrollTo(closeEvent)">close event</a></li>
+      <li>
+        Support for <a href="#" (click)="scrollTo(returnData)">returning data</a> from the modal to
+        the parent/caller component
+      </li>
+      <li>Support for <a href="#" (click)="scrollTo(scrolling)">scrolling</a></li>
+      <li>(Optional) <a href="#" (click)="scrollTo(footer)">Fixed footer</a></li>
+    </ul>
     <h2><span class="desktop">Desktop:</span><span class="mobile">Mobile:</span></h2>
     <cookbook-modal-example #example></cookbook-modal-example>
     <cookbook-code-viewer [html]="example.template"></cookbook-code-viewer>
-    <h2>Inside the parent (caller) component:</h2>
-    <p>
-      To show the modal, create a <code>ModalConfig</code> and pass it to the
-      <code>ModalController.showModal</code> method:
-      <cookbook-code-viewer [ts]="example.defaultCodeSnippet"></cookbook-code-viewer>
-    </p>
   </div>
   <cookbook-iphone src="/examples/modal" showExternalLink="true"></cookbook-iphone>
 </div>
-<h2>Modal flavors:</h2>
+<h2 #modalController>Inside the parent (caller) component:</h2>
+<p>
+  To show the modal, create a <code>ModalConfig</code> and pass it to the
+  <code>ModalController.showModal</code> method:
+  <cookbook-code-viewer [ts]="example.defaultCodeSnippet"></cookbook-code-viewer>
+</p>
+<h2 #modalFlavors>Modal flavors:</h2>
 <p>
   The modal can have one of multiple flavors, used to determine the opening animation, the position
   of the title and the close button.
 </p>
-<h3>Modal (default)</h3>
+<h3 #modalFlavorsModal>Modal (default)</h3>
 <p>
   With the <strong><code>modal</code></strong> flavor, the dialog opens with a slide-up animation,
   it's title is aligned to the left and it's close button is placed in the top right corner. The
@@ -26,13 +52,13 @@
   inside a <code>kirby-app</code>). Any additional modals with the <code>modal</code> flavor opened
   on top will also scale/push back the existing modal, similar to a card stack.
 </p>
-<h3>Compact</h3>
+<h3 #modalFlavorsCompact>Compact</h3>
 <p>
   The <strong><code>compact</code></strong> flavor renders a stripped-down version with no heading,
   toolbar or close button and no content scrolling. Can be used for <em>out-of-order</em> style
   modals.
 </p>
-<h3>Drawer</h3>
+<h3 #modalFlavorsDrawer>Drawer</h3>
 <p>
   When a <strong><code>drawer</code></strong> flavor is used, the dialog opens with a slide-up
   animation, it's title is centered and it's close button is placed in the top left corner.
@@ -41,20 +67,17 @@
   corner (see the example below). The <code>drawerSupplementaryAction</code> option takes an
   <code>iconName: string</code> which corresponds to the name of a kirby icon, and
   <code>action: Function</code>, which is invoked when the supplementary button is selected.
-  <cookbook-code-viewer [ts]="example.drawerCodeSnippet" language="ts"></cookbook-code-viewer>
+  <cookbook-code-viewer [ts]="example.drawerCodeSnippet"></cookbook-code-viewer>
 </p>
-<h2>Close event handler <em>(optional)</em>:</h2>
+<h2 #closeEvent>Close event handler <em>(optional)</em>:</h2>
 <p>
   If you want to be notified when the modal closes, you can pass a callback function:
-  <cookbook-code-viewer [ts]="example.callbackCodeSnippet" language="ts"></cookbook-code-viewer>
+  <cookbook-code-viewer [ts]="example.callbackCodeSnippet"></cookbook-code-viewer>
 </p>
-<h2>Return data from the modal <em>(optional)</em>:</h2>
+<h2 #returnData>Return data from the modal <em>(optional)</em>:</h2>
 <p>
   If you need to obtain data back from the modal, you can pass a callback function:
-  <cookbook-code-viewer
-    [ts]="example.callbackWithDataCodeSnippet"
-    language="ts"
-  ></cookbook-code-viewer>
+  <cookbook-code-viewer [ts]="example.callbackWithDataCodeSnippet"></cookbook-code-viewer>
 </p>
 
 <h2>Inside the embedded component:</h2>
@@ -81,14 +104,21 @@
   services and principles as above.
 </p>
 
-<h2>Scrolling</h2>
+<h2 #scrolling>Scrolling</h2>
 <p>
   The <code>ModalController</code> support scrolling to the top and bottom of the modal using the
   methods <code>scrollToTop</code> and <code>scrollToBottom</code>. They accept
   <code>KirbyAnimation.Duration</code> as optional param. If not provided the scrolling will happen
   instantaneously.
 </p>
-<cookbook-code-viewer [ts]="example.scrollingCodeSnippet" language="ts"></cookbook-code-viewer>
+<cookbook-code-viewer [ts]="example.scrollingCodeSnippet"></cookbook-code-viewer>
+
+<h2 #footer>Footer</h2>
+<p>
+  To render a fixed footer at the bottom of the modal include a
+  <code>kirby-modal-footer</code> inside the embedded component:
+</p>
+<cookbook-code-viewer [html]="example.footerTemplate"></cookbook-code-viewer>
 
 <h2>Properties:</h2>
 <h3><code>ModalConfig</code></h3>

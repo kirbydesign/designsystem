@@ -27,6 +27,7 @@ import { MockListComponent } from './components/mock.list.component';
 import { MockFullscreenLoadingOverlayComponent } from './components/mock.fullscreen-loading-overlay.component';
 import { MockLoadingOverlayComponent } from './components/mock.loading-overlay.component';
 import { MockActionSheetComponent } from './components/mock.action-sheet.component';
+import { MockModalFooterComponent } from './components/mock.modal-footer.component';
 import {
   MockPageTitleDirective,
   MockPageToolbarTitleDirective,
@@ -76,6 +77,7 @@ export const MOCK_COMPONENTS = [
   MockFullscreenLoadingOverlayComponent,
   MockLoadingOverlayComponent,
   MockActionSheetComponent,
+  MockModalFooterComponent,
   MockPageTitleDirective,
   MockPageToolbarTitleDirective,
   MockPageActionsDirective,
