@@ -5,6 +5,7 @@ import {
   HostBinding,
   ViewChild,
   AfterViewInit,
+  OnDestroy,
   ElementRef,
   Renderer2,
 } from '@angular/core';
@@ -21,7 +22,7 @@ import { Modal } from '../services/modal.model';
   templateUrl: './modal-wrapper.component.html',
   styleUrls: ['./modal-wrapper.component.scss'],
 })
-export class ModalWrapperComponent implements AfterViewInit {
+export class ModalWrapperComponent implements AfterViewInit, OnDestroy {
   scrollY: number = Math.abs(window.scrollY);
   config: ModalConfig;
   componentPropsInjector: Injector;
@@ -29,6 +30,7 @@ export class ModalWrapperComponent implements AfterViewInit {
   @ViewChild(IonContent, { static: true, read: ElementRef }) private ionContentElement: ElementRef<
     HTMLIonContentElement
   >;
+  private observer: MutationObserver;
 
   @HostBinding('class.drawer')
   get _isDrawer() {
@@ -51,7 +53,7 @@ export class ModalWrapperComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.renderFooter();
+    this.checkForEmbeddedFooter();
   }
 
   private registerScrolling(modal: Modal) {
@@ -88,12 +90,48 @@ export class ModalWrapperComponent implements AfterViewInit {
     }
   }
 
-  private renderFooter() {
-    const embeddedFooter = this.ionContentElement.nativeElement.querySelector('kirby-modal-footer');
-    if (embeddedFooter) {
-      // Move embedded footer out of content for fixed rendering of footer:
-      this.renderer.removeChild(embeddedFooter.parentElement, embeddedFooter);
-      this.renderer.appendChild(this.elementRef.nativeElement, embeddedFooter);
+  private checkForEmbeddedFooter() {
+    const embeddedComponentElement = this.ionContentElement.nativeElement.firstElementChild;
+    if (embeddedComponentElement) {
+      const embeddedFooter = embeddedComponentElement.querySelector('kirby-modal-footer');
+      if (embeddedFooter) {
+        this.moveEmbeddedFooter(embeddedFooter);
+      }
+      this.observeEmbeddedFooter(embeddedComponentElement);
     }
+  }
+
+  private moveEmbeddedFooter(footer: Node) {
+    if (footer) {
+      // Move embedded footer out of content for fixed rendering of footer:
+      this.renderer.removeChild(footer.parentElement, footer);
+      this.renderer.appendChild(this.elementRef.nativeElement, footer);
+    }
+  }
+
+  private observeEmbeddedFooter(embeddedComponentElement: Node) {
+    const callback = (mutations: MutationRecord[]) => {
+      const addedFooter = mutations
+        .filter((mutation) => mutation.type === 'childList') // Filter for mutation to the tree of nodes
+        .map((mutation) => {
+          // Only check for addedNodes as removal is handled by the Angular renderer:
+          return Array.from(mutation.addedNodes).find(
+            (node) => node.nodeName === 'KIRBY-MODAL-FOOTER'
+          );
+        })[0];
+      if (addedFooter) {
+        this.moveEmbeddedFooter(addedFooter);
+      }
+    };
+    this.observer = new MutationObserver(callback);
+    this.observer.observe(embeddedComponentElement, {
+      childList: true, // Listen for addition or removal of child nodes
+    });
+  }
+
+  ngOnDestroy() {
+    //clean up the observer
+    this.observer && this.observer.disconnect();
+    delete this.observer;
   }
 }

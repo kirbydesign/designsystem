@@ -1,6 +1,7 @@
 import { Spectator, createComponentFactory } from '@ngneat/spectator';
 import { MockComponents } from 'ng-mocks';
 import { NavParams, IonToolbar, IonHeader, IonTitle, IonButtons, IonContent } from '@ionic/angular';
+import { Component } from '@angular/core';
 
 import { ButtonComponent } from '../../button/button.component';
 import { IconComponent } from '../../icon/icon.component';
@@ -8,6 +9,30 @@ import { ModalWrapperComponent } from './modal-wrapper.component';
 import { IModalController } from '../services/modal.controller.interface';
 import { KirbyAnimation } from '../../../animation/kirby-animation';
 import { Modal } from '../services/modal.model';
+import { ModalFooterComponent } from '../footer/modal-footer.component';
+
+@Component({
+  template: `
+    <div>Some test content</div>
+    <kirby-modal-footer>
+      <button kirby-button>Test</button>
+    </kirby-modal-footer>
+  `,
+})
+class StaticFooterEmbeddedComponent {}
+
+@Component({
+  template: `
+    <div>Some test content</div>
+    <kirby-modal-footer *ngIf="showFooter" [class.enabled]="isEnabled">
+      <button kirby-button>Test</button>
+    </kirby-modal-footer>
+  `,
+})
+class DynamicFooterEmbeddedComponent {
+  showFooter = false;
+  isEnabled = false;
+}
 
 describe('ModalWrapperComponent', () => {
   let spectator: Spectator<ModalWrapperComponent>;
@@ -21,10 +46,12 @@ describe('ModalWrapperComponent', () => {
 
   const createComponent = createComponentFactory({
     component: ModalWrapperComponent,
+    entryComponents: [StaticFooterEmbeddedComponent, DynamicFooterEmbeddedComponent],
     declarations: [
       MockComponents(
         IconComponent,
         ButtonComponent,
+        ModalFooterComponent,
         IonHeader,
         IonToolbar,
         IonTitle,
@@ -163,6 +190,105 @@ describe('ModalWrapperComponent', () => {
       modal.scrollToBottom(animationDuration);
 
       expect(ionContent.scrollToBottom).toHaveBeenCalledWith(animationDuration);
+    });
+  });
+
+  describe('with embedded component with static footer', () => {
+    beforeEach(() => {
+      spectator = createComponent({
+        props: {
+          config: {
+            title: 'Modal with static footer',
+            component: StaticFooterEmbeddedComponent,
+          },
+        },
+      });
+      component = spectator.component;
+    });
+    it('should move embedded footer to wrapper component', () => {
+      const ionContentElement = spectator.query('ion-content');
+      const embeddedComponentElement = ionContentElement.firstElementChild;
+      const embeddedFooter = embeddedComponentElement.querySelector('kirby-modal-footer');
+      expect(embeddedFooter).toBeNull();
+      const footerAsWrapperChild = spectator.element.querySelector(':scope > kirby-modal-footer');
+      expect(footerAsWrapperChild).not.toBeNull();
+    });
+  });
+
+  describe('with embedded component with dynamic footer', () => {
+    beforeEach(() => {
+      spectator = createComponent({
+        props: {
+          config: {
+            title: 'Modal with dynamic footer',
+            component: DynamicFooterEmbeddedComponent,
+          },
+        },
+      });
+      component = spectator.component;
+    });
+
+    it('should move embedded footer to wrapper component when rendered', (done) => {
+      const footer = spectator.element.querySelector('kirby-modal-footer');
+      expect(footer).toBeNull();
+
+      const embeddedComponent = spectator.query(DynamicFooterEmbeddedComponent);
+      embeddedComponent.showFooter = true;
+      spectator.detectChanges();
+
+      setTimeout(() => {
+        const ionContentElement = spectator.query('ion-content');
+        const embeddedComponentElement = ionContentElement.firstElementChild;
+        const embeddedFooter = embeddedComponentElement.querySelector('kirby-modal-footer');
+        expect(embeddedFooter).toBeNull();
+        const footerAsWrapperChild = spectator.element.querySelector(':scope > kirby-modal-footer');
+        expect(footerAsWrapperChild).not.toBeNull();
+        done();
+      });
+    });
+
+    it('should remove embedded footer from wrapper component when not rendered', (done) => {
+      const footer = spectator.element.querySelector('kirby-modal-footer');
+      expect(footer).toBeNull();
+
+      const embeddedComponent = spectator.query(DynamicFooterEmbeddedComponent);
+      embeddedComponent.showFooter = true;
+      spectator.detectChanges();
+
+      setTimeout(() => {
+        const footerAsWrapperChild = spectator.element.querySelector(':scope > kirby-modal-footer');
+        expect(footerAsWrapperChild).not.toBeNull();
+
+        embeddedComponent.showFooter = false;
+        spectator.detectChanges();
+
+        setTimeout(() => {
+          const footer = spectator.element.querySelector('kirby-modal-footer');
+          expect(footer).toBeNull();
+          done();
+        });
+      });
+    });
+
+    it('should render changes to embedded footer inside wrapper component', (done) => {
+      const footer = spectator.element.querySelector('kirby-modal-footer');
+      expect(footer).not.toHaveClass('enabled');
+      const embeddedComponent = spectator.query(DynamicFooterEmbeddedComponent);
+      embeddedComponent.showFooter = true;
+      spectator.detectChanges();
+      setTimeout(() => {
+        const ionContentElement = spectator.query('ion-content');
+        const embeddedComponentElement = ionContentElement.firstElementChild;
+        const embeddedFooter = embeddedComponentElement.querySelector('kirby-modal-footer');
+        expect(embeddedFooter).toBeNull();
+        const footerAsWrapperChild = spectator.element.querySelector(':scope > kirby-modal-footer');
+        expect(footerAsWrapperChild).not.toBeNull();
+
+        embeddedComponent.isEnabled = true;
+        spectator.detectChanges();
+        expect(footerAsWrapperChild).toHaveClass('enabled');
+        done();
+      });
     });
   });
 });
