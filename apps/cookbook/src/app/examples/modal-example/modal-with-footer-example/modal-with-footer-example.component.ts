@@ -85,7 +85,7 @@ export class ModalWithFooterExampleComponent {
     this.modalController.scrollToTop(KirbyAnimation.Duration.LONG);
   }
 
-  onClose() {
+  onHideFirst() {
     this.modalController.hideTopmost();
   }
 
