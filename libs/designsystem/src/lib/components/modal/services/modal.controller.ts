@@ -48,7 +48,7 @@ export class ModalController {
     const overlay = await showOverlay();
     this.overlays.push(overlay);
     overlay.onDidDismiss.then((event) => {
-      this.forgetTopmost();
+      this.overlays.pop();
       if (onCloseOverlay) {
         onCloseOverlay(event.data);
       }
@@ -87,10 +87,6 @@ export class ModalController {
       throw new Error(this.noOverlayRegisteredErrorMessage);
     }
     this.modalHelper.scrollToBottom(this.noOverlayRegisteredErrorMessage, duration);
-  }
-
-  private forgetTopmost(): void {
-    this.overlays.pop();
   }
 
   public async hideAll(): Promise<void> {
