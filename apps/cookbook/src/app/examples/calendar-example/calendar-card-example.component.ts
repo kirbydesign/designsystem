@@ -1,11 +1,12 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import moment from 'moment';
 
 @Component({
   selector: 'cookbook-calendar-card-example',
   templateUrl: './calendar-card-example.component.html',
   styleUrls: ['./calendar-card-example.component.scss'],
 })
-export class CalendarCardExampleComponent {
+export class CalendarCardExampleComponent implements OnChanges {
   selectedDate: Date;
   @Input() disableWeekends = false;
   @Input() disablePastDates = false;
@@ -14,39 +15,33 @@ export class CalendarCardExampleComponent {
   @Input() setMinDate = false;
   @Input() setMaxDate = false;
   @Input() setTodayDate = false;
+  @Input() useTimezoneUTC = false;
 
   minDate: Date;
   maxDate: Date;
   todayDate: Date;
-  disabledDates: Date[] = [];
+  disabledDates: Date[];
 
   constructor() {
-    const today = new Date();
+    this.updateInputDates();
+  }
 
-    this.minDate = new Date();
-    this.minDate.setDate(today.getDate() - 60);
-    this.maxDate = new Date();
-    this.maxDate.setDate(today.getDate() + 60);
-    this.todayDate = new Date();
-    this.todayDate.setDate(today.getDate() + 3);
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.useTimezoneUTC) {
+      this.updateInputDates();
 
-    const date1 = new Date();
-    date1.setDate(today.getDate() + 3);
-    const date2 = new Date();
-    date2.setDate(today.getDate() + 5);
-    const date3 = new Date();
-    date3.setDate(today.getDate() + 7);
-    const date4 = new Date();
-    date4.setDate(today.getDate() + 10);
-    const date5 = new Date();
-    date5.setDate(today.getDate() + 15);
-    const date6 = new Date();
-    date6.setDate(today.getDate() + 25);
-    const date7 = new Date();
-    date7.setDate(today.getDate() + 28);
-    const date8 = new Date();
-    date8.setDate(today.getDate() + 35);
-    this.disabledDates.push(date1, date2, date3, date4, date5, date6, date7, date8);
+      if (this.selectedDate) {
+        // realign selectedDate with the timezone that is now used, or the rendered date will
+        // be midleading and confusing
+        if (this.useTimezoneUTC) {
+          // realign local -> UTC
+          this.selectedDate = moment.utc(moment(this.selectedDate).format('YYYY-MM-DD')).toDate();
+        } else {
+          // realign UTC -> local
+          this.selectedDate = moment(moment.utc(this.selectedDate).format('YYYY-MM-DD')).toDate();
+        }
+      }
+    }
   }
 
   onDateChange(selectedDate: Date) {
@@ -61,5 +56,29 @@ export class CalendarCardExampleComponent {
 
   selectToday() {
     this.selectedDate = new Date();
+  }
+
+  private updateInputDates() {
+    const todayMoment = (this.useTimezoneUTC ? moment.utc() : moment()).startOf('day');
+
+    this.minDate = todayMoment
+      .clone()
+      .subtract(60, 'days')
+      .toDate();
+    this.maxDate = todayMoment
+      .clone()
+      .add(60, 'days')
+      .toDate();
+    this.todayDate = todayMoment
+      .clone()
+      .add(3, 'days')
+      .toDate(); // artificial but works for demo
+
+    this.disabledDates = [3, 5, 7, 10, 15, 25, 28, 35].map((daysFomToday) =>
+      todayMoment
+        .clone()
+        .add(daysFomToday, 'days')
+        .toDate()
+    );
   }
 }

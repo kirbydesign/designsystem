@@ -18,6 +18,7 @@ export class CalendarShowcaseComponent {
   setMaxDate = false;
   setTodayDate = false;
   setDisabledDates = false;
+  useTimezoneUTC = false;
   minDate: Date;
   maxDate: Date;
   todayDate: Date;
@@ -93,6 +94,13 @@ export class CalendarShowcaseComponent {
       description: '(Optional) Array of dates that should not be selectable.',
       defaultValue: 'null',
       inputValues: ['Date[]'],
+    },
+    {
+      name: 'timezone',
+      description:
+        '(Optional) Specify timezone for aligning Date objects. Emitted Date objects will be constructed to point to midnight in the given timezone. Input Date objects may be in either of the two timezones but we highly recommend aligning them with midnight.',
+      defaultValue: '"local"',
+      inputValues: ['"local" | "UTC"'],
     },
   ];
 }

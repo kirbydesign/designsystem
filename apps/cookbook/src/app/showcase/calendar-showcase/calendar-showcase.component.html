@@ -15,6 +15,7 @@
         [setMinDate]="setMinDate"
         [setMaxDate]="setMaxDate"
         [setTodayDate]="setTodayDate"
+        [useTimezoneUTC]="useTimezoneUTC"
       ></cookbook-calendar-card-example>
       <!-- prettier-ignore -->
       <fieldset>
@@ -30,11 +31,13 @@
           <kirby-checkbox [checked]="setDisabledDates" (checkedChange)="setDisabledDates = $event;"></kirby-checkbox>
           <label (click)="setDisabledDates = !setDisabledDates">Set disabled dates</label><br/>
           <kirby-checkbox [checked]="setMinDate" (checkedChange)="setMinDate = $event;"></kirby-checkbox>
-          <label (click)="setMinDate = !setMinDate">Set min date ({{minDate | date:'dd-MM-yyyy'}})</label><br/>
+          <label (click)="setMinDate = !setMinDate">Set min date ({{minDate | date:'dd-MM-yyyy':(useTimezoneUTC ? 'UTC' : undefined)}})</label><br/>
           <kirby-checkbox [checked]="setMaxDate" (checkedChange)="setMaxDate = $event;"></kirby-checkbox>
-          <label (click)="setMaxDate = !setMaxDate">Set max date ({{maxDate | date:'dd-MM-yyyy'}})</label><br/>
+          <label (click)="setMaxDate = !setMaxDate">Set max date ({{maxDate | date:'dd-MM-yyyy':(useTimezoneUTC ? 'UTC' : undefined)}})</label><br/>
           <kirby-checkbox [checked]="setTodayDate" (checkedChange)="setTodayDate = $event;"></kirby-checkbox>
-          <label (click)="setTodayDate = !setTodayDate">Set today date ({{todayDate | date:'dd-MM-yyyy'}})</label>  
+          <label (click)="setTodayDate = !setTodayDate">Set today date ({{todayDate | date:'dd-MM-yyyy':(useTimezoneUTC ? 'UTC' : undefined)}})</label><br/>  
+          <kirby-checkbox [checked]="" (checkedChange)="useTimezoneUTC = $event;"></kirby-checkbox>
+          <label (click)="useTimezoneUTC = !useTimezoneUTC">Use UTC instead of local time</label>  
         </fieldset>
     </div>
     <cookbook-code-viewer [html]="exampleWithCardHtml"></cookbook-code-viewer>
