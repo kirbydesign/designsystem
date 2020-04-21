@@ -26,7 +26,7 @@ export class ModalHelper {
         config.flavor === 'compact' ? 'kirby-modal-compact' : null,
       ],
       backdropDismiss: config.flavor === 'compact' ? false : true,
-      componentProps: { config: config.componentProps },
+      componentProps: { config: config },
       swipeToClose: config.flavor != 'compact',
       presentingElement: modalPresentingElement,
     });
