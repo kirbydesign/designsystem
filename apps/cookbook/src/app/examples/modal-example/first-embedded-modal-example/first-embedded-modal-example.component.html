@@ -66,5 +66,11 @@
       to secure other greater pleasures, or else he endures pains to avoid worse pains."
     </p>
   </div>
-  <button kirby-button (click)="scrollToTop()">Scroll to top</button>
+  <button *ngIf="!showFooter" kirby-button (click)="scrollToTop()">Scroll to top</button>
 </div>
+<kirby-modal-footer *ngIf="showFooter">
+  <button attentionLevel="3" style="flex-grow: 1;" kirby-button (click)="scrollToTop()">
+    To top
+  </button>
+  <button style="flex-grow: 1;" kirby-button (click)="close()">Close</button>
+</kirby-modal-footer>
