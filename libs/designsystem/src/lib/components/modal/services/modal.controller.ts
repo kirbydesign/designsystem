@@ -68,9 +68,12 @@ export class ModalController {
   }
 
   /**
-   * @deprecated Will be removed in next major version. Inject Modal and use Modal.scrollToTop instead.
+   * @deprecated Will be removed in next major version. Inject Modal in embedded component and use Modal.scrollToTop instead.
    */
   public scrollToTop(duration?: KirbyAnimation.Duration) {
+    console.warn(
+      'ModalController.scrollToTop is deprecated - please inject Modal in embedded component and use Modal.scrollToTop instead.'
+    );
     const overlay = this.overlays[this.overlays.length - 1];
     if (!overlay) {
       throw new Error(this.noOverlayRegisteredErrorMessage);
@@ -79,9 +82,12 @@ export class ModalController {
   }
 
   /**
-   * @deprecated Will be removed in next major version. Inject Modal and use Modal.scrollToBottom instead.
+   * @deprecated Will be removed in next major version. Inject Modal in embedded component and use Modal.scrollToBottom instead.
    */
   public scrollToBottom(duration?: KirbyAnimation.Duration) {
+    console.warn(
+      'ModalController.scrollToBottom is deprecated - please inject Modal in embedded component and use Modal.scrollToBottom instead.'
+    );
     const overlay = this.overlays[this.overlays.length - 1];
     if (!overlay) {
       throw new Error(this.noOverlayRegisteredErrorMessage);
