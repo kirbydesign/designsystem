@@ -50,7 +50,6 @@ import { ActionSheetHelper } from './components/modal/services/action-sheet.help
 import { AlertHelper } from './components/modal/services/alert.helper';
 import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
 import { ModalController } from './components/modal/services/modal.controller';
-import { IModalController } from './components/modal/services/modal.controller.interface';
 import { ModalHelper } from './components/modal/services/modal.helper';
 import { ComponentLoaderDirective } from './components/shared/component-loader.directive';
 import { SlideButtonComponent } from './components/slide-button/slide-button.component';
@@ -144,8 +143,6 @@ const importedModules = [...exportedModules, OverlayModule];
 
 const providers = [
   ModalController,
-  // the provider below is used to prevent a cyclic reference problem in our modal components
-  { provide: IModalController, useExisting: ModalController },
   ActionSheetHelper,
   ModalHelper,
   AlertHelper,

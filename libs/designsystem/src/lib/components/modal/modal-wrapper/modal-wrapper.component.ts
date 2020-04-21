@@ -8,23 +8,25 @@ import {
   OnDestroy,
   ElementRef,
   Renderer2,
+  Input,
+  OnInit,
 } from '@angular/core';
-import { NavParams, IonContent } from '@ionic/angular';
+import { IonContent } from '@ionic/angular';
 
+import { KirbyAnimation } from '../../../animation/kirby-animation';
 import { ModalConfig } from './config/modal-config';
 import { COMPONENT_PROPS } from './config/modal-config.helper';
-import { IModalController } from '../services/modal.controller.interface';
-import { KirbyAnimation } from '../../../animation/kirby-animation';
 import { Modal } from '../services/modal.model';
 
 @Component({
   selector: 'kirby-modal-wrapper',
   templateUrl: './modal-wrapper.component.html',
   styleUrls: ['./modal-wrapper.component.scss'],
+  providers: [{ provide: Modal, useExisting: ModalWrapperComponent }],
 })
-export class ModalWrapperComponent implements AfterViewInit, OnDestroy {
+export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDestroy {
   scrollY: number = Math.abs(window.scrollY);
-  config: ModalConfig;
+  @Input() config: ModalConfig;
   componentPropsInjector: Injector;
   @ViewChild(IonContent, { static: true }) private ionContent: IonContent;
   @ViewChild(IonContent, { static: true, read: ElementRef }) private ionContentElement: ElementRef<
@@ -38,35 +40,33 @@ export class ModalWrapperComponent implements AfterViewInit, OnDestroy {
   }
 
   constructor(
-    params: NavParams,
-    private modalController: IModalController,
-    injector: Injector,
+    private injector: Injector,
     private elementRef: ElementRef<HTMLElement>,
     private renderer: Renderer2
-  ) {
-    this.config = params.get('config');
+  ) {}
+
+  ngOnInit(): void {
     this.componentPropsInjector = Injector.create({
       providers: [{ provide: COMPONENT_PROPS, useValue: this.config.componentProps }],
-      parent: injector,
+      parent: this.injector,
     });
-    this.registerScrolling(this.config.modal);
   }
 
   ngAfterViewInit(): void {
     this.checkForEmbeddedFooter();
   }
 
-  private registerScrolling(modal: Modal) {
-    modal.scrollToTop = this.scrollToTop.bind(this);
-    modal.scrollToBottom = this.scrollToBottom.bind(this);
-  }
-
-  private scrollToTop(scrollDuration?: KirbyAnimation.Duration) {
+  public scrollToTop(scrollDuration?: KirbyAnimation.Duration) {
     this.ionContent.scrollToTop(scrollDuration || 0);
   }
 
-  private scrollToBottom(scrollDuration?: KirbyAnimation.Duration) {
+  public scrollToBottom(scrollDuration?: KirbyAnimation.Duration) {
     this.ionContent.scrollToBottom(scrollDuration || 0);
+  }
+
+  public close(data?: any) {
+    const ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
+    ionModalElement && ionModalElement.dismiss(data);
   }
 
   @HostListener('window:focus')
@@ -74,10 +74,6 @@ export class ModalWrapperComponent implements AfterViewInit, OnDestroy {
   onFocusChange() {
     // This fixes an undesired scroll behaviour occurring on keyboard-tabbing backwards (with shift+tab):
     window.scrollTo({ top: this.scrollY });
-  }
-
-  onClose() {
-    this.modalController.hideTopmost();
   }
 
   // This prevents Ionic from setting --keyboard-offset on ion-content inside modal:

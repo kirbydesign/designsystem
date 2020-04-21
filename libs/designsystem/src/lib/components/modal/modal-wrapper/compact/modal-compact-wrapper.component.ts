@@ -1,5 +1,12 @@
-import { Component, HostListener, Injector, HostBinding } from '@angular/core';
-import { NavParams } from '@ionic/angular';
+import {
+  Component,
+  HostListener,
+  Injector,
+  HostBinding,
+  ElementRef,
+  Input,
+  OnInit,
+} from '@angular/core';
 
 import { ModalConfig } from '../config/modal-config';
 import { COMPONENT_PROPS } from '../config/modal-config.helper';
@@ -9,10 +16,11 @@ import { Modal } from '../../services/modal.model';
   selector: 'kirby-modal-compact-wrapper',
   templateUrl: './modal-compact-wrapper.component.html',
   styleUrls: ['./modal-compact-wrapper.component.scss'],
+  providers: [{ provide: Modal, useExisting: ModalCompactWrapperComponent }],
 })
-export class ModalCompactWrapperComponent {
+export class ModalCompactWrapperComponent implements Modal, OnInit {
   scrollY: number = Math.abs(window.scrollY);
-  config: ModalConfig;
+  @Input() config: ModalConfig;
   componentPropsInjector: Injector;
 
   private _ionPageReset = false;
@@ -21,19 +29,22 @@ export class ModalCompactWrapperComponent {
     return this._ionPageReset;
   }
 
-  constructor(params: NavParams, injector: Injector) {
-    this.config = params.get('config');
+  constructor(private injector: Injector, private elementRef: ElementRef<HTMLElement>) {}
+
+  ngOnInit(): void {
     this.componentPropsInjector = Injector.create({
       providers: [{ provide: COMPONENT_PROPS, useValue: this.config.componentProps }],
-      parent: injector,
+      parent: this.injector,
     });
-    this.registerScrolling(this.config.modal);
   }
 
-  private registerScrolling(modal: Modal) {
-    modal.scrollToTop = () => {};
-    modal.scrollToBottom = () => {};
+  public close(data?: any) {
+    const ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
+    ionModalElement && ionModalElement.dismiss(data);
   }
+
+  scrollToTop: (_?: any) => void;
+  scrollToBottom: (_?: any) => void;
 
   @HostListener('window:focus')
   @HostListener('window:focusout')

@@ -5,19 +5,17 @@ import { Subscription } from 'rxjs';
 import { ActionSheetConfig } from '../action-sheet/config/action-sheet-config';
 import { ActionSheetComponent } from '../action-sheet/action-sheet.component';
 import { ActionSheetItem } from '../action-sheet/config/action-sheet-item';
+import { IModal } from './modal.model';
 
 @Injectable()
 export class ActionSheetHelper {
   constructor(private ionicModalController: IonicModalController) {}
 
-  public async showActionSheet(
-    config: ActionSheetConfig,
-    registerModal: (modal: { close: (data?: any) => {} }) => void
-  ): Promise<any> {
+  public async showActionSheet(config: ActionSheetConfig): Promise<IModal> {
     const cancel = new EventEmitter();
     const itemSelect = new EventEmitter<ActionSheetItem>();
 
-    const modal = await this.ionicModalController.create({
+    const ionModal = await this.ionicModalController.create({
       component: ActionSheetComponent,
       cssClass: 'kirby-action-sheet',
       componentProps: {
@@ -27,19 +25,17 @@ export class ActionSheetHelper {
       },
     });
 
-    const cancelSubscription: Subscription = cancel.subscribe(() => modal.dismiss());
+    const cancelSubscription: Subscription = cancel.subscribe(() => ionModal.dismiss());
     const itemSelectSubscription: Subscription = itemSelect.subscribe((item) =>
-      modal.dismiss(item)
+      ionModal.dismiss(item)
     );
-    const onDidDismiss = modal.onDidDismiss();
+    const onDidDismiss = ionModal.onDidDismiss();
     onDidDismiss.then((_) => {
       cancelSubscription.unsubscribe();
       itemSelectSubscription.unsubscribe();
     });
 
-    registerModal({ close: modal.dismiss.bind(modal) });
-
-    modal.present();
-    return onDidDismiss;
+    await ionModal.present();
+    return { close: ionModal.dismiss.bind(ionModal), onClose: ionModal.onDidDismiss() };
   }
 }

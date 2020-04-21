@@ -1,8 +1,6 @@
 import { Component, ElementRef, ViewChild, AfterViewInit, HostBinding, Input } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { IModalController } from '../services/modal.controller.interface';
-
 @Component({
   selector: 'kirby-alert',
   templateUrl: './alert.component.html',
@@ -36,10 +34,13 @@ export class AlertComponent implements AfterViewInit {
     return this._ionPageReset;
   }
 
-  constructor(private modalController: IModalController) {}
+  constructor(private elementRef: ElementRef<HTMLElement>) {}
 
   ngAfterViewInit(): void {
-    this.modalController.blurNativeWrapper(this.alertWrapper.nativeElement);
+    setTimeout(() => {
+      this.alertWrapper.nativeElement.focus();
+      this.alertWrapper.nativeElement.blur();
+    }, 50);
   }
 
   onFocusChange() {
@@ -48,10 +49,12 @@ export class AlertComponent implements AfterViewInit {
   }
 
   onCancel() {
-    this.modalController.hideTopmost(false);
+    const ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
+    ionModalElement && ionModalElement.dismiss(false);
   }
 
   onOk() {
-    this.modalController.hideTopmost(true);
+    const ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
+    ionModalElement && ionModalElement.dismiss(true);
   }
 }
