@@ -20,28 +20,25 @@ export class ModalController {
     private alertHelper: AlertHelper
   ) {}
 
-  public async showModal(config: ModalConfig, onCloseModal?: (data?: any) => void): Promise<void> {
+  public async showModal(config: ModalConfig, onClose?: (data?: any) => void): Promise<void> {
     if (config.hasOwnProperty('dim')) {
       console.warn('ModalConfig.dim is deprecated - please remove from your configuration.');
     }
-    await this.showAndRegisterOverlay(() => this.modalHelper.showModalWindow(config), onCloseModal);
+    await this.showAndRegisterOverlay(() => this.modalHelper.showModalWindow(config), onClose);
   }
 
   public async showActionSheet(
     config: ActionSheetConfig,
-    onCloseModal?: (data?: any) => void
+    onClose?: (data?: any) => void
   ): Promise<void> {
     await this.showAndRegisterOverlay(
       () => this.actionSheetHelper.showActionSheet(config),
-      onCloseModal
+      onClose
     );
   }
 
-  public async showAlert(
-    config: AlertConfig,
-    onCloseModal?: (result: boolean) => void
-  ): Promise<void> {
-    await this.showAndRegisterOverlay(() => this.alertHelper.showAlert(config), onCloseModal);
+  public async showAlert(config: AlertConfig, onClose?: (result: boolean) => void): Promise<void> {
+    await this.showAndRegisterOverlay(() => this.alertHelper.showAlert(config), onClose);
   }
 
   private async showAndRegisterOverlay(
