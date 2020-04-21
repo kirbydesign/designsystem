@@ -2,16 +2,33 @@ import { Component, Input } from '@angular/core';
 
 import { ThemeColor } from '@kirbydesign/designsystem';
 
+const config = {
+  template: `<kirby-card hasPadding="true" [themeColor]="themeColor">
+  <kirby-chip
+    text="kirby"
+    (click)="onChipSelect(0)"
+    [isSelected]="selectedIndex === 0"
+  ></kirby-chip>
+  <kirby-chip
+    text="kirby"
+    (click)="onChipSelect(1)"
+    [isSelected]="selectedIndex === 1"
+  ></kirby-chip>
+</kirby-card>`,
+};
+
 @Component({
   selector: 'cookbook-chip-example',
-  templateUrl: './chip-example.component.html',
+  template: config.template,
   styleUrls: ['./chip-example.component.scss'],
 })
 export class ChipExampleComponent {
-  activeTab = 'default';
+  template: string = config.template;
+
+  selectedIndex = 0;
   @Input() themeColor: ThemeColor | '' = '';
 
-  onSegmentSelect(segment) {
-    this.activeTab = segment.id;
+  onChipSelect(index: number) {
+    this.selectedIndex = index;
   }
 }

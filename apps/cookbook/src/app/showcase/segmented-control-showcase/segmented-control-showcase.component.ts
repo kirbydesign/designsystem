@@ -1,18 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
 
-declare var require: any;
 @Component({
   selector: 'cookbook-segmented-control-showcase',
   templateUrl: './segmented-control-showcase.component.html',
   styleUrls: ['./segmented-control-showcase.component.scss'],
 })
-export class SegmentedControlShowcaseComponent implements OnInit {
-  selectedMode: 'default' | 'chip';
-  exampleHtml: string = require('!raw-loader!../../examples/segmented-control-example/segmented-control-example.component.html')
-    .default;
-
+export class SegmentedControlShowcaseComponent {
   properties: ShowcaseProperty[] = [
     {
       name: 'mode',
@@ -29,12 +24,4 @@ export class SegmentedControlShowcaseComponent implements OnInit {
       ],
     },
   ];
-
-  ngOnInit(): void {
-    this.selectedMode = 'default';
-  }
-
-  onModeChange(mode: any) {
-    this.selectedMode = mode;
-  }
 }

@@ -16,6 +16,7 @@ export function modalControllerFactory() {
     scrollToTop: jest.fn(),
     scrollToBottom: jest.fn(),
     hideAll: jest.fn(),
+    registerPresentingElement: jest.fn(),
   };
 }
 

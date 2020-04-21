@@ -1,0 +1,10 @@
+@import '../../../scss/utils';
+
+ion-footer {
+  box-shadow: get-elevation(8);
+  display: flex;
+  padding: size('s');
+  justify-content: center;
+  align-items: center;
+  background-color: get-color('white');
+}

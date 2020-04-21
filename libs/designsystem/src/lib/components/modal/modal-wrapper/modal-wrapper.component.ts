@@ -1,4 +1,14 @@
-import { Component, HostListener, Injector, HostBinding, ViewChild } from '@angular/core';
+import {
+  Component,
+  HostListener,
+  Injector,
+  HostBinding,
+  ViewChild,
+  AfterViewInit,
+  OnDestroy,
+  ElementRef,
+  Renderer2,
+} from '@angular/core';
 import { NavParams, IonContent } from '@ionic/angular';
 
 import { ModalConfig } from './config/modal-config';
@@ -12,24 +22,38 @@ import { Modal } from '../services/modal.model';
   templateUrl: './modal-wrapper.component.html',
   styleUrls: ['./modal-wrapper.component.scss'],
 })
-export class ModalWrapperComponent {
+export class ModalWrapperComponent implements AfterViewInit, OnDestroy {
   scrollY: number = Math.abs(window.scrollY);
   config: ModalConfig;
   componentPropsInjector: Injector;
   @ViewChild(IonContent, { static: true }) private ionContent: IonContent;
+  @ViewChild(IonContent, { static: true, read: ElementRef }) private ionContentElement: ElementRef<
+    HTMLIonContentElement
+  >;
+  private observer: MutationObserver;
 
   @HostBinding('class.drawer')
   get _isDrawer() {
     return this.config.flavor === 'drawer';
   }
 
-  constructor(params: NavParams, private modalController: IModalController, injector: Injector) {
+  constructor(
+    params: NavParams,
+    private modalController: IModalController,
+    injector: Injector,
+    private elementRef: ElementRef<HTMLElement>,
+    private renderer: Renderer2
+  ) {
     this.config = params.get('config');
     this.componentPropsInjector = Injector.create({
       providers: [{ provide: COMPONENT_PROPS, useValue: this.config.componentProps }],
       parent: injector,
     });
     this.registerScrolling(this.config.modal);
+  }
+
+  ngAfterViewInit(): void {
+    this.checkForEmbeddedFooter();
   }
 
   private registerScrolling(modal: Modal) {
@@ -64,5 +88,50 @@ export class ModalWrapperComponent {
     if (input.tagName === 'INPUT' && input.closest('ion-modal')) {
       event.stopPropagation();
     }
+  }
+
+  private checkForEmbeddedFooter() {
+    const embeddedComponentElement = this.ionContentElement.nativeElement.firstElementChild;
+    if (embeddedComponentElement) {
+      const embeddedFooter = embeddedComponentElement.querySelector('kirby-modal-footer');
+      if (embeddedFooter) {
+        this.moveEmbeddedFooter(embeddedFooter);
+      }
+      this.observeEmbeddedFooter(embeddedComponentElement);
+    }
+  }
+
+  private moveEmbeddedFooter(footer: Node) {
+    if (footer) {
+      // Move embedded footer out of content for fixed rendering of footer:
+      this.renderer.removeChild(footer.parentElement, footer);
+      this.renderer.appendChild(this.elementRef.nativeElement, footer);
+    }
+  }
+
+  private observeEmbeddedFooter(embeddedComponentElement: Node) {
+    const callback = (mutations: MutationRecord[]) => {
+      const addedFooter = mutations
+        .filter((mutation) => mutation.type === 'childList') // Filter for mutation to the tree of nodes
+        .map((mutation) => {
+          // Only check for addedNodes as removal is handled by the Angular renderer:
+          return Array.from(mutation.addedNodes).find(
+            (node) => node.nodeName === 'KIRBY-MODAL-FOOTER'
+          );
+        })[0];
+      if (addedFooter) {
+        this.moveEmbeddedFooter(addedFooter);
+      }
+    };
+    this.observer = new MutationObserver(callback);
+    this.observer.observe(embeddedComponentElement, {
+      childList: true, // Listen for addition or removal of child nodes
+    });
+  }
+
+  ngOnDestroy() {
+    //clean up the observer
+    this.observer && this.observer.disconnect();
+    delete this.observer;
   }
 }

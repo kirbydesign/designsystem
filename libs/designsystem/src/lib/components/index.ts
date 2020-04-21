@@ -1,4 +1,5 @@
-export { AppComponent } from './app/app.component';
+export * from './app';
+
 export { AvatarComponent } from './avatar/avatar.component';
 
 export { BadgeComponent } from './badge/badge.component';

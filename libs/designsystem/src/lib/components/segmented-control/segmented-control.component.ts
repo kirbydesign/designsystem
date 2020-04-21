@@ -1,4 +1,13 @@
-import { Component, EventEmitter, Output, Input, HostBinding } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Output,
+  Input,
+  HostBinding,
+  SimpleChanges,
+  OnChanges,
+  AfterViewChecked,
+} from '@angular/core';
 
 import { SegmentItem } from './segment-item';
 
@@ -7,7 +16,7 @@ import { SegmentItem } from './segment-item';
   templateUrl: './segmented-control.component.html',
   styleUrls: ['./segmented-control.component.scss'],
 })
-export class SegmentedControlComponent {
+export class SegmentedControlComponent implements OnChanges, AfterViewChecked {
   @Output() segmentSelect: EventEmitter<SegmentItem> = new EventEmitter();
 
   @HostBinding('class.default-mode')
@@ -25,9 +34,25 @@ export class SegmentedControlComponent {
 
   activeSegment: SegmentItem;
 
+  private isInitializing = false;
+
   onSegmentSelect(item: SegmentItem) {
-    this.activeSegment = item;
-    this.items.forEach((segment) => (segment.checked = this.activeSegment.id === segment.id));
-    this.segmentSelect.emit(this.activeSegment);
+    if (!this.isInitializing) {
+      this.activeSegment = item;
+      this.segmentSelect.emit(this.activeSegment);
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.items) {
+      // Flag to prevent emitting onSegmentSelect event if previous items exists
+      // Is cleared in ngAfterViewChecked
+      this.isInitializing = true;
+      this.activeSegment = (this.items || []).find((item) => item.checked);
+    }
+  }
+
+  ngAfterViewChecked(): void {
+    this.isInitializing = false;
   }
 }

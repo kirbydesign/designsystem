@@ -1,0 +1,7 @@
+@import './libs/designsystem/src/lib/scss/utils';
+
+@include media('>medium') {
+  .mobile {
+    display: none;
+  }
+}

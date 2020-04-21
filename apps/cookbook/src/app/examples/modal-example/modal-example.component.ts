@@ -3,13 +3,119 @@ import { Component } from '@angular/core';
 import { ModalConfig, ModalController } from '@kirbydesign/designsystem';
 import { FirstEmbeddedModalExampleComponent } from './first-embedded-modal-example/first-embedded-modal-example.component';
 import { ModalCompactExampleComponent } from './compact-example/modal-compact-example.component';
+import { ModalWithFooterExampleComponent } from './modal-with-footer-example/modal-with-footer-example.component';
+
+const config = {
+  selector: 'cookbook-modal-example',
+  template: `<button kirby-button (click)="showModal()">Show modal</button>
+<button kirby-button (click)="showDrawer()">Show drawer</button>
+<button kirby-button (click)="showCompact()">Show compact</button>
+<button kirby-button (click)="showModalWithFooter()">Show modal with footer</button>`,
+  footerTemplate: `<p>Some content of the embedded component</p>
+...
+<kirby-modal-footer>
+  <button kirby-button (click)="scrollToBottom()">Scroll to bottom</button>
+</kirby-modal-footer>`,
+  defaultCodeSnippet: `constructor(private modalController: ModalController) {}
+
+showModal() {
+  const config: ModalConfig = {
+    title: 'Your Modal Title',
+    flavor: 'modal',
+    component: YourEmbeddedModalComponent,
+    componentProps: {
+      prop1: 'value1',
+      prop2: 'value2'
+    }
+  };
+  this.modalController.showModal(config);
+}`,
+  drawerCodeSnippet: `showModal() {
+  const config: ModalConfig = {
+    title: 'Your Drawer Title',
+    flavor: 'drawer',
+    drawerSupplementaryAction: {
+      iconName: 'qr',
+      action: this.onSupplementaryActionSelect.bind(this),
+    },
+    component: YourEmbeddedDrawerComponent
+  };
+  this.modalController.showModal(config);
+}
+
+private onSupplementaryActionSelect() {
+  console.log('Supplementary action selected');
+}`,
+  callbackCodeSnippet: `this.modalController.showModal(config, onClose);
+
+onClose() {
+  ...
+}`,
+  callbackWithDataCodeSnippet: `// Inside the parent (caller) component:
+@Component()
+export class ParentComponent() {
+  this.modalController.showModal(config, onClose);
+
+  onClose(dataReturnedByModal: CustomDataType) {
+    ...
+  }
+}
+
+// Inside the embedded component:
+// Pass the data, which will be available in the parent callback:
+@Component()
+export class EmbeddedComponent() {
+  const returnData: CustomDataType = {...};
+  this.modalController.hideTopmost(returnData);
+}`,
+  scrollingCodeSnippet: `// scrollToTop example - with long scroll animation:
+this.modalController.scrollToTop(KirbyAnimation.Duration.LONG);
+
+// scrollToBottom example:
+this.modalController.scrollToBottom();`,
+  embeddedCodeSnippet: `import { COMPONENT_PROPS, ModalController } from '@kirbydesign/designsystem';
+
+@Component()
+export class EmbeddedComponent() {
+  constructor(
+    @Inject(COMPONENT_PROPS) private componentProps,
+    private modalController: ModalController,
+  ) {
+    this.props = componentProps;
+  }
+}`,
+  hideTopmostCodeSnippet: `@Component()
+export class EmbeddedComponent() {
+
+  constructor(private modalController: ModalController) {}
+
+  onDismiss() {
+    this.modalController.hideTopmost();
+  }
+    
+  // (Optional) You can additionally pass data, which will be available in the parent callback:
+  onDismiss() {
+    const returnData = {...};
+    this.modalController.hideTopmost(returnData);
+  }
+}`,
+};
 
 @Component({
-  selector: 'cookbook-modal-example',
-  templateUrl: './modal-example.component.html',
-  styleUrls: ['./modal-example.component.scss'],
+  selector: config.selector,
+  template: config.template,
 })
 export class ModalExampleComponent {
+  template = config.template;
+  footerTemplate = config.footerTemplate;
+  defaultCodeSnippet = config.defaultCodeSnippet;
+  drawerCodeSnippet = config.drawerCodeSnippet;
+  callbackCodeSnippet = config.callbackCodeSnippet;
+  callbackWithDataCodeSnippet = config.callbackWithDataCodeSnippet;
+  scrollingCodeSnippet = config.scrollingCodeSnippet;
+  embeddedCodeSnippet = config.embeddedCodeSnippet;
+  hideTopmostCodeSnippet = config.hideTopmostCodeSnippet;
+
   constructor(private modalController: ModalController) {}
 
   showModal() {
@@ -21,7 +127,6 @@ export class ModalExampleComponent {
         prop2: 'value2',
       },
     };
-
     this.modalController.showModal(config, this.onModalClose);
   }
 
@@ -47,6 +152,18 @@ export class ModalExampleComponent {
     };
 
     this.modalController.showModal(config, this.onDrawerClose);
+  }
+
+  showModalWithFooter() {
+    const config: ModalConfig = {
+      title: 'Modal with footer',
+      component: ModalWithFooterExampleComponent,
+      componentProps: {
+        prop1: 'value1',
+        prop2: 'value2',
+      },
+    };
+    this.modalController.showModal(config, this.onModalClose);
   }
 
   onModalClose(data: any): void {

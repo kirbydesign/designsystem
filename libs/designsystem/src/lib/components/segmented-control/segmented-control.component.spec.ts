@@ -1,26 +1,17 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, EventEmitter, NO_ERRORS_SCHEMA, Output } from '@angular/core';
-import { By } from '@angular/platform-browser';
+import { MockComponents, MockDirective } from 'ng-mocks';
+import { IonicModule } from '@ionic/angular';
+import { SpectatorHost, createHostFactory } from '@ngneat/spectator';
 
+import { TestHelper } from '../../testing/test-helper';
+import { ThemeColorDirective } from '../../directives';
+import { BadgeComponent } from '../badge/badge.component';
+import { ChipComponent } from '../chip/chip.component';
 import { SegmentedControlComponent } from './segmented-control.component';
 import { SegmentItem } from './segment-item';
-import { BadgeComponent } from '../badge/badge.component';
-
-// We were attempting to manipulate the shadow dom of IonSegmentButton to write a test
-// that failed gloriously when changing unrelated code... creating a "good 'ol" Angular stub instead
-@Component({
-  // tslint:disable-next-line:component-selector
-  selector: 'ion-segment-button',
-  template: '',
-})
-class MockIonSegmentButtonComponent {
-  @Output()
-  ionSelect: EventEmitter<any> = new EventEmitter();
-}
 
 describe('SegmentedControlComponent', () => {
   let component: SegmentedControlComponent;
-  let fixture: ComponentFixture<SegmentedControlComponent>;
+  let onSegmentSelectSpy: jasmine.Spy;
   let items: SegmentItem[] = [
     {
       text: 'First item',
@@ -36,24 +27,44 @@ describe('SegmentedControlComponent', () => {
       checked: true,
       id: 'second',
     },
+    {
+      text: 'Third item',
+      checked: false,
+      id: 'third',
+    },
   ];
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      schemas: [NO_ERRORS_SCHEMA],
-      declarations: [SegmentedControlComponent, BadgeComponent, MockIonSegmentButtonComponent],
-    }).compileComponents();
-  }));
+  let spectator: SpectatorHost<SegmentedControlComponent>;
+
+  const createHost = createHostFactory({
+    component: SegmentedControlComponent,
+    declarations: [
+      MockComponents(ChipComponent, BadgeComponent),
+      MockDirective(ThemeColorDirective),
+    ],
+    imports: [IonicModule.forRoot({ mode: 'ios' })],
+  });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SegmentedControlComponent);
-    component = fixture.componentInstance;
-    component.items = items;
-    fixture.detectChanges();
+    spectator = createHost(
+      `<kirby-segmented-control [items]="items">
+       </kirby-segmented-control>`,
+      {
+        hostProps: {
+          items: items,
+        },
+      }
+    );
+    component = spectator.component;
+    onSegmentSelectSpy = spyOn(component.segmentSelect, 'emit');
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should have checked item as activeSegment when created', () => {
+    expect(component.activeSegment).toBe(items[1]);
   });
 
   describe('default mode', () => {
@@ -62,33 +73,48 @@ describe('SegmentedControlComponent', () => {
       expect(component.isChipMode).toBeFalsy();
     });
 
-    it('should have 2 segments buttons', () => {
-      expect(fixture.nativeElement.querySelectorAll('ion-segment-button').length).toBe(2);
+    it('should have a segment button per item', () => {
+      expect(spectator.queryHostAll('ion-segment-button').length).toBe(items.length);
     });
 
     it('should not have any segmented chips', () => {
-      expect(fixture.nativeElement.querySelectorAll('kirby-chip').length).toBe(0);
+      expect(spectator.queryHostAll('kirby-chip').length).toBe(0);
     });
 
-    it('should call onSegmentSelect when clicking a segment button', () => {
-      spyOn(component, 'onSegmentSelect');
-      const segmentBtn = fixture.debugElement.query(By.css('ion-segment-button'));
-      const button = segmentBtn.componentInstance as MockIonSegmentButtonComponent;
-      button.ionSelect.emit();
-      expect(component.onSegmentSelect).toHaveBeenCalled();
-    });
-
-    it('should set activeSegment to second segmentItem', () => {
-      const segmentElm = fixture.debugElement.queryAll(By.css('ion-segment-button'))[1];
-      segmentElm.triggerEventHandler('ionSelect', null);
+    it('should call onSegmentSelect when ionChange event fires', async () => {
       expect(component.activeSegment).toBe(items[1]);
+      const ionSegmentElement = spectator.queryHost<HTMLIonSegmentElement>('ion-segment');
+      await TestHelper.whenHydrated(ionSegmentElement);
+      spyOn(component, 'onSegmentSelect');
+      const changeEvent = new CustomEvent('ionChange', { detail: { value: items[0] } });
+      ionSegmentElement.dispatchEvent(changeEvent);
+      expect(component.onSegmentSelect).toHaveBeenCalledWith(items[0]);
+    });
+
+    it('should set activeSegment to event.detail.value when ionChange event fires', async () => {
+      expect(component.activeSegment).toBe(items[1]);
+      const ionSegmentElement = spectator.queryHost<HTMLIonSegmentElement>('ion-segment');
+      await TestHelper.whenHydrated(ionSegmentElement);
+      const changeEvent = new CustomEvent('ionChange', { detail: { value: items[2] } });
+      ionSegmentElement.dispatchEvent(changeEvent);
+      expect(component.activeSegment).toBe(items[2]);
+    });
+
+    describe('when updating items', () => {
+      it('should not emit segmentSelect event', async () => {
+        const ionSegmentElement = spectator.queryHost<HTMLIonSegmentElement>('ion-segment');
+        await TestHelper.whenHydrated(ionSegmentElement);
+
+        const clonedItems = JSON.parse(JSON.stringify(items));
+        spectator.setHostInput({ items: clonedItems });
+        expect(onSegmentSelectSpy).not.toHaveBeenCalled();
+      });
     });
   });
 
   describe('chip mode', () => {
     beforeEach(() => {
-      component.mode = 'chip';
-      fixture.detectChanges();
+      spectator.setInput('mode', 'chip');
     });
 
     it("should have a 'chip' mode when created", () => {
@@ -96,23 +122,29 @@ describe('SegmentedControlComponent', () => {
       expect(component.isChipMode).toBeTruthy();
     });
 
+    it('should not have an ion-segment control', () => {
+      expect(spectator.queryHost('ion-segment')).toBeNull();
+    });
+
     it('should not have any segments buttons', () => {
-      expect(fixture.nativeElement.querySelectorAll('ion-segment-button').length).toBe(0);
+      expect(spectator.queryHostAll('ion-segment-button').length).toBe(0);
     });
 
-    it('should have 2 segmented chips', () => {
-      expect(fixture.nativeElement.querySelectorAll('kirby-chip').length).toBe(2);
+    it('should have a segment chip per item', () => {
+      expect(spectator.queryHostAll('kirby-chip').length).toBe(items.length);
     });
 
-    it('should call onSegmentSelect when clicking a segment chip', () => {
+    it('should call onSegmentSelect when clicking a different segment chip', () => {
+      expect(component.activeSegment).toBe(items[1]);
       spyOn(component, 'onSegmentSelect');
-      fixture.debugElement.query(By.css('kirby-chip')).nativeElement.click();
+      spectator.dispatchMouseEvent('kirby-chip:first-of-type', 'click');
       expect(component.onSegmentSelect).toHaveBeenCalled();
     });
 
-    it('should set activeSegment to second segmentItem', () => {
-      fixture.debugElement.queryAll(By.css('kirby-chip'))[1].nativeElement.click();
+    it('should set activeSegment when clicking a different segment chip', () => {
       expect(component.activeSegment).toBe(items[1]);
+      spectator.dispatchMouseEvent('kirby-chip:last-of-type', 'click');
+      expect(component.activeSegment).toBe(items[2]);
     });
   });
 });

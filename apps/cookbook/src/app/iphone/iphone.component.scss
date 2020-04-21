@@ -89,10 +89,9 @@
   margin-right: 5px;
 }
 
-@media (max-width: 1160px) {
+@include media('<medium') {
   .docs-demo-device,
-  .docs-demo-mode-toggle,
-  .docs-demo-source {
+  .pop-out {
     display: none;
   }
 }

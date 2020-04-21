@@ -1,0 +1,10 @@
+@import './libs/designsystem/src/lib/scss/utils';
+
+fieldset {
+  display: inline-block;
+  margin-top: size('l');
+}
+
+h2:not(:first-child) {
+  margin-top: size('l');
+}

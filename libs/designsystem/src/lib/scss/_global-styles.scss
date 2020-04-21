@@ -2,6 +2,18 @@
 @import './base/ionic';
 @import './base/typography';
 
+// Show backdrop on every modal, as Ionic 5 only applies --backdrop-opacity to :first-of-type:
+// See https://github.com/ionic-team/ionic/commit/253cd96164914a803f6bb42ff95ca74880c940d0
+// and https://github.com/ionic-team/ionic/issues/20800#issuecomment-606670762
+ion-modal,
+ion-modal:first-of-type {
+  &.kirby-modal,
+  &.kirby-alert,
+  &.kirby-action-sheet {
+    --backdrop-opacity: var(--ion-backdrop-opacity, 0.4);
+  }
+}
+
 :root {
   --kirby-font-family: 'Roboto';
   font-family: var(--kirby-font-family);
@@ -20,6 +32,13 @@
   --kirby-tab-bar-height: 50px;
 }
 
+.kirby-modal,
+.kirby-alert {
+  .modal-shadow {
+    display: none;
+  }
+}
+
 .kirby-modal {
   box-sizing: border-box;
   --background: #{get-color('background-color')};
@@ -33,6 +52,17 @@
       max-width: $compact-modal-max-width;
       height: auto;
       text-align: center;
+    }
+  }
+
+  // Reset Ionic Card style height + top border radius:
+  @include media('<=medium') {
+    &.modal-card {
+      .modal-wrapper {
+        height: 100% !important;
+        border-top-left-radius: 0 !important;
+        border-top-right-radius: 0 !important;
+      }
     }
   }
 

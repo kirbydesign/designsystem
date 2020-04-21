@@ -4,13 +4,10 @@ import {
   ElementRef,
   Input,
   OnChanges,
-  Renderer2,
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-
-import { ColorHelper } from '@kirbydesign/designsystem';
 
 @Component({
   selector: 'cookbook-iphone',
@@ -24,7 +21,7 @@ export class IphoneComponent implements OnChanges, AfterViewInit {
 
   @ViewChild('iframe', { read: ElementRef, static: true }) iframe: ElementRef;
 
-  constructor(private sanitizer: DomSanitizer, private renderer: Renderer2) {}
+  constructor(private sanitizer: DomSanitizer) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.src) {
@@ -42,8 +39,5 @@ export class IphoneComponent implements OnChanges, AfterViewInit {
 
     ionApp.style.setProperty('--ion-safe-area-top', '20px');
     ionApp.style.setProperty('--ion-safe-area-bottom', '22px');
-
-    const backgroundColor = ColorHelper.getBackgroundColor();
-    this.renderer.setStyle(ionApp, 'background', backgroundColor);
   }
 }
