@@ -56,15 +56,15 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     this.checkForEmbeddedFooter();
   }
 
-  public scrollToTop(scrollDuration?: KirbyAnimation.Duration) {
+  scrollToTop(scrollDuration?: KirbyAnimation.Duration) {
     this.ionContent.scrollToTop(scrollDuration || 0);
   }
 
-  public scrollToBottom(scrollDuration?: KirbyAnimation.Duration) {
+  scrollToBottom(scrollDuration?: KirbyAnimation.Duration) {
     this.ionContent.scrollToBottom(scrollDuration || 0);
   }
 
-  public close(data?: any) {
+  close(data?: any) {
     const ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
     ionModalElement && ionModalElement.dismiss(data);
   }
