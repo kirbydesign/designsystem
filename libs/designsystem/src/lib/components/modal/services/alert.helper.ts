@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ModalController as IonicModalController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 
 import { AlertConfig } from '../alert/config/alert-config';
 import { AlertComponent } from '../alert/alert.component';
@@ -7,7 +7,7 @@ import { Overlay } from './modal.interfaces';
 
 @Injectable()
 export class AlertHelper {
-  constructor(private ionicModalController: IonicModalController) {}
+  constructor(private ionicModalController: ModalController) {}
 
   public async showAlert(config: AlertConfig): Promise<Overlay> {
     const ionModal = await this.ionicModalController.create({

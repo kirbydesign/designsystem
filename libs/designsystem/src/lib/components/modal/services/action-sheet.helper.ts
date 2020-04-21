@@ -1,5 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { ModalController as IonicModalController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 
 import { ActionSheetConfig } from '../action-sheet/config/action-sheet-config';
@@ -9,7 +9,7 @@ import { Overlay } from './modal.interfaces';
 
 @Injectable()
 export class ActionSheetHelper {
-  constructor(private ionicModalController: IonicModalController) {}
+  constructor(private ionicModalController: ModalController) {}
 
   public async showActionSheet(config: ActionSheetConfig): Promise<Overlay> {
     const cancel = new EventEmitter();
