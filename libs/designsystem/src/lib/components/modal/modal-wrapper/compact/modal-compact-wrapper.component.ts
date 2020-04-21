@@ -38,7 +38,7 @@ export class ModalCompactWrapperComponent implements Modal, OnInit {
     });
   }
 
-  public close(data?: any) {
+  close(data?: any) {
     const ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
     ionModalElement && ionModalElement.dismiss(data);
   }
