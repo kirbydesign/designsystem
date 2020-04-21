@@ -1,4 +1,4 @@
-export { Modal } from './services/modal.model';
+export { Modal } from './services/modal.interfaces';
 export { ModalController } from './services/modal.controller';
 export { ModalConfig } from './modal-wrapper/config/modal-config';
 export { ModalFooterComponent } from './footer/modal-footer.component';

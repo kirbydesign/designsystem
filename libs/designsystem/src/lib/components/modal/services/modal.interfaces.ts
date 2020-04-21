@@ -1,8 +1,8 @@
 import { KirbyAnimation } from '../../../animation/kirby-animation';
 
-export interface IModal {
-  close: (data?: any) => Promise<boolean>;
-  onClose: Promise<any>;
+export interface Overlay {
+  dismiss: (data?: any) => Promise<boolean>;
+  onDidDismiss: Promise<any>;
 }
 
 export abstract class Modal {

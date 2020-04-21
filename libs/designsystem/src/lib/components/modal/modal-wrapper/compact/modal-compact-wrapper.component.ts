@@ -10,7 +10,7 @@ import {
 
 import { ModalConfig } from '../config/modal-config';
 import { COMPONENT_PROPS } from '../config/modal-config.helper';
-import { Modal } from '../../services/modal.model';
+import { Modal } from '../../services/modal.interfaces';
 
 @Component({
   selector: 'kirby-modal-compact-wrapper',

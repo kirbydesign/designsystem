@@ -3,13 +3,13 @@ import { ModalController as IonicModalController } from '@ionic/angular';
 
 import { AlertConfig } from '../alert/config/alert-config';
 import { AlertComponent } from '../alert/alert.component';
-import { IModal } from './modal.model';
+import { Overlay } from './modal.interfaces';
 
 @Injectable()
 export class AlertHelper {
   constructor(private ionicModalController: IonicModalController) {}
 
-  public async showAlert(config: AlertConfig): Promise<IModal> {
+  public async showAlert(config: AlertConfig): Promise<Overlay> {
     const ionModal = await this.ionicModalController.create({
       component: AlertComponent,
       componentProps: this.getComponentProps(config),
@@ -19,7 +19,7 @@ export class AlertHelper {
     });
 
     await ionModal.present();
-    return { close: ionModal.dismiss.bind(ionModal), onClose: ionModal.onDidDismiss() };
+    return { dismiss: ionModal.dismiss.bind(ionModal), onDidDismiss: ionModal.onDidDismiss() };
   }
 
   private getComponentProps(config: AlertConfig) {

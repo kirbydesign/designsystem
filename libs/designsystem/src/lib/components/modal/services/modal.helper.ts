@@ -4,7 +4,7 @@ import { ModalController } from '@ionic/angular';
 import { ModalConfig } from '../modal-wrapper/config/modal-config';
 import { ModalWrapperComponent } from '../modal-wrapper/modal-wrapper.component';
 import { ModalCompactWrapperComponent } from '../modal-wrapper/compact/modal-compact-wrapper.component';
-import { IModal } from './modal.model';
+import { Overlay } from './modal.interfaces';
 import { KirbyAnimation } from '../../../animation/kirby-animation';
 
 @Injectable()
@@ -15,7 +15,7 @@ export class ModalHelper {
 
   constructor(private ionicModalController: ModalController) {}
 
-  public async showModalWindow(config: ModalConfig): Promise<IModal> {
+  public async showModalWindow(config: ModalConfig): Promise<Overlay> {
     config.flavor = config.flavor || 'modal';
     let modalPresentingElement = await this.getPresentingElement(config.flavor);
     const ionModal = await this.ionicModalController.create({
@@ -33,7 +33,7 @@ export class ModalHelper {
 
     await ionModal.present();
 
-    return { close: ionModal.dismiss.bind(ionModal), onClose: ionModal.onDidDismiss() };
+    return { dismiss: ionModal.dismiss.bind(ionModal), onDidDismiss: ionModal.onDidDismiss() };
   }
 
   public registerPresentingElement(element: HTMLElement) {

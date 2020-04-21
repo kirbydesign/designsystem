@@ -5,13 +5,13 @@ import { Subscription } from 'rxjs';
 import { ActionSheetConfig } from '../action-sheet/config/action-sheet-config';
 import { ActionSheetComponent } from '../action-sheet/action-sheet.component';
 import { ActionSheetItem } from '../action-sheet/config/action-sheet-item';
-import { IModal } from './modal.model';
+import { Overlay } from './modal.interfaces';
 
 @Injectable()
 export class ActionSheetHelper {
   constructor(private ionicModalController: IonicModalController) {}
 
-  public async showActionSheet(config: ActionSheetConfig): Promise<IModal> {
+  public async showActionSheet(config: ActionSheetConfig): Promise<Overlay> {
     const cancel = new EventEmitter();
     const itemSelect = new EventEmitter<ActionSheetItem>();
 
@@ -36,6 +36,6 @@ export class ActionSheetHelper {
     });
 
     await ionModal.present();
-    return { close: ionModal.dismiss.bind(ionModal), onClose: ionModal.onDidDismiss() };
+    return { dismiss: ionModal.dismiss.bind(ionModal), onDidDismiss: ionModal.onDidDismiss() };
   }
 }
