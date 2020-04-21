@@ -7,6 +7,7 @@ import { Observable, of } from 'rxjs';
   styleUrls: ['./alert.component.scss'],
 })
 export class AlertComponent implements AfterViewInit {
+  readonly BLUR_WRAPPER_DELAY_IN_MS = 50;
   @ViewChild('alertWrapper', { static: true }) private alertWrapper: ElementRef;
   private scrollY: number = Math.abs(window.scrollY);
 
@@ -40,7 +41,7 @@ export class AlertComponent implements AfterViewInit {
     setTimeout(() => {
       this.alertWrapper.nativeElement.focus();
       this.alertWrapper.nativeElement.blur();
-    }, 50);
+    }, this.BLUR_WRAPPER_DELAY_IN_MS);
   }
 
   onFocusChange() {
