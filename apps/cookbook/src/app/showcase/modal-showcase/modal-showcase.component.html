@@ -98,7 +98,7 @@
 <cookbook-code-viewer [ts]="example.embeddedCodeSnippet"></cookbook-code-viewer><br />
 <p>
   In order to hide a modal from within your embedded component (and destroy it's component), you can
-  use:
+  inject the modal window that your component is displayed within:
   <cookbook-code-viewer [ts]="example.hideTopmostCodeSnippet"></cookbook-code-viewer>
   It is possible to nest more modals from within your embedded components, by using the same
   services and principles as above.
@@ -106,8 +106,8 @@
 
 <h2 #scrolling>Scrolling</h2>
 <p>
-  The <code>ModalController</code> support scrolling to the top and bottom of the modal using the
-  methods <code>scrollToTop</code> and <code>scrollToBottom</code>. They accept
+  The <code>Modal</code> supports scrolling to the top and bottom of the modal using the methods
+  <code>scrollToTop</code> and <code>scrollToBottom</code>. They accept
   <code>KirbyAnimation.Duration</code> as optional param. If not provided the scrolling will happen
   instantaneously.
 </p>
