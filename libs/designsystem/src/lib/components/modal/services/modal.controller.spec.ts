@@ -1,6 +1,6 @@
 import { Subject } from 'rxjs';
 
-import { Overlay } from './modal.interfaces';
+import { Overlay, OverlayEventDetail } from './modal.interfaces';
 import { ModalController } from './modal.controller';
 import { ModalHelper } from './modal.helper';
 import { ActionSheetHelper } from './action-sheet.helper';
@@ -38,24 +38,24 @@ describe('modalController', () => {
     });
 
     it('should close all opened overlays', async () => {
-      const overlaySpy1: jasmine.SpyObj<Overlay> = jasmine.createSpyObj('overlay', ['close']);
-      const onDidDismiss1$ = new Subject<any>();
+      const overlaySpy1: jasmine.SpyObj<Overlay> = jasmine.createSpyObj('overlay', ['dismiss']);
+      const onDidDismiss1$ = new Subject<OverlayEventDetail>();
       overlaySpy1.onDidDismiss = onDidDismiss1$.toPromise();
       overlaySpy1.dismiss.and.callFake((data) => {
         onDidDismiss1$.next();
         onDidDismiss1$.complete();
         return Promise.resolve(true);
       });
-      const overlaySpy2: jasmine.SpyObj<Overlay> = jasmine.createSpyObj('overlay', ['close']);
-      const onDidDismiss2$ = new Subject<any>();
+      const overlaySpy2: jasmine.SpyObj<Overlay> = jasmine.createSpyObj('overlay', ['dismiss']);
+      const onDidDismiss2$ = new Subject<OverlayEventDetail>();
       overlaySpy2.onDidDismiss = onDidDismiss2$.toPromise();
       overlaySpy2.dismiss.and.callFake((data) => {
         onDidDismiss2$.next();
         onDidDismiss2$.complete();
         return Promise.resolve(true);
       });
-      const overlaySpy3: jasmine.SpyObj<Overlay> = jasmine.createSpyObj('overlay', ['close']);
-      const onDidDismiss3$ = new Subject<any>();
+      const overlaySpy3: jasmine.SpyObj<Overlay> = jasmine.createSpyObj('overlay', ['dismiss']);
+      const onDidDismiss3$ = new Subject<OverlayEventDetail>();
       overlaySpy3.onDidDismiss = onDidDismiss3$.toPromise();
       overlaySpy3.dismiss.and.callFake((data) => {
         onDidDismiss3$.next();
@@ -85,11 +85,11 @@ describe('modalController', () => {
   describe('showModal', () => {
     let overlaySpy: jasmine.SpyObj<Overlay>;
     beforeEach(() => {
-      overlaySpy = jasmine.createSpyObj('overlay', ['close']);
-      const onDidDismiss$ = new Subject<any>();
+      overlaySpy = jasmine.createSpyObj('overlay', ['dismiss']);
+      const onDidDismiss$ = new Subject<OverlayEventDetail>();
       overlaySpy.onDidDismiss = onDidDismiss$.toPromise();
       overlaySpy.dismiss.and.callFake((data: any) => {
-        onDidDismiss$.next(data);
+        onDidDismiss$.next({ data: data });
         onDidDismiss$.complete();
         return Promise.resolve(true);
       });
@@ -119,11 +119,11 @@ describe('modalController', () => {
   describe('showActionSheet', () => {
     let overlaySpy: jasmine.SpyObj<Overlay>;
     beforeEach(() => {
-      overlaySpy = jasmine.createSpyObj('overlay', ['close']);
-      const onDidDismiss$ = new Subject<any>();
+      overlaySpy = jasmine.createSpyObj('overlay', ['dismiss']);
+      const onDidDismiss$ = new Subject<OverlayEventDetail>();
       overlaySpy.onDidDismiss = onDidDismiss$.toPromise();
       overlaySpy.dismiss.and.callFake((data: any) => {
-        onDidDismiss$.next(data);
+        onDidDismiss$.next({ data: data });
         onDidDismiss$.complete();
         return Promise.resolve(true);
       });
@@ -153,11 +153,11 @@ describe('modalController', () => {
   describe('showAlert', () => {
     let overlaySpy: jasmine.SpyObj<Overlay>;
     beforeEach(() => {
-      overlaySpy = jasmine.createSpyObj('overlay', ['close']);
-      const onDidDismiss$ = new Subject<any>();
+      overlaySpy = jasmine.createSpyObj('overlay', ['dismiss']);
+      const onDidDismiss$ = new Subject<OverlayEventDetail>();
       overlaySpy.onDidDismiss = onDidDismiss$.toPromise();
       overlaySpy.dismiss.and.callFake((data: any) => {
-        onDidDismiss$.next(data);
+        onDidDismiss$.next({ data: data });
         onDidDismiss$.complete();
         return Promise.resolve(true);
       });

@@ -1,8 +1,13 @@
 import { KirbyAnimation } from '../../../animation/kirby-animation';
 
+export interface OverlayEventDetail<T = any> {
+  data?: T;
+  role?: string;
+}
+
 export interface Overlay {
   dismiss: (data?: any) => Promise<boolean>;
-  onDidDismiss: Promise<any>;
+  onDidDismiss: Promise<OverlayEventDetail>;
 }
 
 export abstract class Modal {

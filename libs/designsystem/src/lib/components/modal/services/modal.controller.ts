@@ -47,11 +47,10 @@ export class ModalController {
   ) {
     const overlay = await showOverlay();
     this.overlays.push(overlay);
-    overlay.onDidDismiss.then((data) => {
+    overlay.onDidDismiss.then((event) => {
       this.forgetTopmost();
       if (onCloseOverlay) {
-        // Since Ionic wraps the return value in an object, which contains data as a property, we need to return data.data
-        onCloseOverlay(typeof data === 'object' && 'data' in data ? data.data : data);
+        onCloseOverlay(event.data);
       }
     });
   }
