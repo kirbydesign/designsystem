@@ -4,8 +4,9 @@ import { SegmentItem } from '@kirbydesign/designsystem';
 
 const config = {
   template: `<kirby-segmented-control
-  [mode]="mode"
   [items]="items"
+  [mode]="mode"
+  [size]="size"
   (segmentSelect)="onSegmentSelect($event)"
 ></kirby-segmented-control>
 
@@ -15,27 +16,55 @@ const config = {
 </kirby-card>
 
 <fieldset>
-  <legend>Segmented Control - mode</legend>
-  <label>
-    <input
-      type="radio"
-      name="mode"
-      value="default"
-      [checked]="mode === 'default'"
-      (change)="setMode($event.target.value)"
-    />
-    Default
-  </label>
-  <label>
-    <input
-      type="radio"
-      name="mode"
-      value="chip"
-      [checked]="mode === 'chip'"
-      (change)="setMode($event.target.value)"
-    />
-    Chip
-  </label>
+  <legend>Configuration</legend>
+  <p>
+    <strong>Mode:</strong><br/>
+    <label>
+      <input
+        type="radio"
+        name="mode"
+        value="default"
+        [checked]="mode === 'default'"
+        (change)="setMode($event.target.value)"
+      />
+      Default
+    </label>
+    <label>
+      <input
+        type="radio"
+        name="mode"
+        value="chip"
+        [checked]="mode === 'chip'"
+        (change)="setMode($event.target.value)"
+      />
+      Chip
+    </label>
+  </p>
+  <p>
+    <strong>Size:</strong><em *ngIf="mode === 'chip'"> (only applies to <code>default</code> mode)</em><br/>  
+    <label>
+      <input
+        type="radio"
+        name="size"
+        value="sm"
+        [checked]="size === 'sm'"
+        (change)="setSize($event.target.value)"
+        [disabled]="mode === 'chip'"
+      />
+      Small (<code>sm</code>)
+    </label>
+    <label>
+      <input
+        type="radio"
+        name="size"
+        value="md"
+        [checked]="size === 'md'"
+        (change)="setSize($event.target.value)"
+        [disabled]="mode === 'chip'"
+      />
+      Medium (<code>md</code>) - default
+    </label>
+    </p>
 </fieldset>
 `,
   codeSnippet: `onSegmentSelect(segment: SegmentItem) {
@@ -51,11 +80,13 @@ export class SegmentedControlExampleDefaultComponent implements OnInit {
   get template(): string {
     return config.template
       .split('<fieldset>')[0] // Remove config part of the template
-      .replace('[mode]="mode"', `mode="${this.mode}"`);
+      .replace('[mode]="mode"', `mode="${this.mode}"`)
+      .replace('[size]="size"', `size="${this.size}"`);
   }
   codeSnippet = config.codeSnippet;
 
   mode: 'default' | 'chip' = 'default';
+  size: 'sm' | 'md' = 'md';
   selectedSegment: SegmentItem;
 
   private defaultItems = [
@@ -90,5 +121,9 @@ export class SegmentedControlExampleDefaultComponent implements OnInit {
   setMode(mode: 'default' | 'chip') {
     this.mode = mode;
     this.selectedSegment = this.items[0];
+  }
+
+  setSize(size: 'sm' | 'md') {
+    this.size = size;
   }
 }
