@@ -72,7 +72,7 @@ export class SegmentedControlComponent {
 
   @Output() segmentSelect: EventEmitter<SegmentItem> = new EventEmitter();
 
-  onSegmentSelect(selectedId: string, event: Event) {
+  onSegmentSelect(selectedId: string) {
     const selectedItemIndex = this.items.findIndex((item) => selectedId === item.id);
     if (selectedItemIndex !== this.selectedIndex) {
       this.selectedIndex = selectedItemIndex;
