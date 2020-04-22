@@ -19,7 +19,7 @@
   display: inline-flex;
   align-items: center;
   border-radius: $border-radius-round;
-  margin-right: 5px;
+  margin: size('xxxs');
   cursor: pointer;
   user-select: none;
   @include theme-background('white');
