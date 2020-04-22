@@ -17,10 +17,12 @@
     display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
-    // Hide scrollbar:
-    scrollbar-width: none; /* Firefox */
-    &::-webkit-scrollbar {
-      display: none;
+    // Hide scrollbar on touch device:
+    @media (pointer: coarse) and (hover: none) {
+      scrollbar-width: none; /* Firefox */
+      &::-webkit-scrollbar {
+        display: none;
+      }
     }
   }
 }
