@@ -30,6 +30,13 @@ export class SegmentedControlComponent implements OnChanges, AfterViewChecked {
     this.isChipMode = mode === 'chip';
   }
 
+  @HostBinding('class.sm')
+  isSmallSize: boolean;
+
+  @Input() set size(size: 'sm' | 'md') {
+    this.isSmallSize = size === 'sm';
+  }
+
   activeSegment: SegmentItem;
 
   private isInitializing = false;

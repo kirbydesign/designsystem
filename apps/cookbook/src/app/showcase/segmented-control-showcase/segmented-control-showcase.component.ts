@@ -16,6 +16,12 @@ export class SegmentedControlShowcaseComponent {
       inputValues: ['default', 'chip'],
     },
     {
+      name: 'size',
+      description: 'Sets the size of the segmented control. Only applies to `default` mode.',
+      defaultValue: 'md',
+      inputValues: ['sm', 'md'],
+    },
+    {
       name: 'segmentItems',
       description: 'Array of SegmentItem controls',
       defaultValue: '',

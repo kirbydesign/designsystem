@@ -17,6 +17,7 @@ export class MockSegmentedControlComponent {
   @Output() segmentSelect = new EventEmitter();
   @Input() items: SegmentItem[];
   @Input() mode: 'default' | 'chip';
+  @Input() size: 'sm' | 'md';
 }
 
 // #endregion

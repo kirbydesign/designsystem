@@ -4,6 +4,15 @@
   display: block;
   user-select: none;
 
+  &.sm {
+    ion-segment-button {
+      min-height: size('l');
+      font-size: font-size('xs');
+      --padding-start: #{size('s')};
+      --padding-end: #{size('s')};
+    }
+  }
+
   &.chip-mode {
     display: flex;
     flex-wrap: nowrap;
