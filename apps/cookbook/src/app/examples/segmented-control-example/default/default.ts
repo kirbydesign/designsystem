@@ -10,8 +10,8 @@ const config = {
 ></kirby-segmented-control>
 
 <kirby-card hasPadding="true">
-  <h2>Content for {{ activeSegment.text }} segment</h2>
-  <p>The selected segment has text "{{ activeSegment.text }}" and id "{{ activeSegment.id }}"</p>
+  <h2>Content for {{ selectedSegment.text }} segment</h2>
+  <p>The selected segment has text "{{ selectedSegment.text }}" and id "{{ selectedSegment.id }}"</p>
 </kirby-card>
 
 <fieldset>
@@ -38,6 +38,9 @@ const config = {
   </label>
 </fieldset>
 `,
+  codeSnippet: `onSegmentSelect(segment: SegmentItem) {
+  this.selectedSegment = segment;
+}`,
 };
 @Component({
   selector: 'cookbook-segmented-control-example-default',
@@ -45,50 +48,47 @@ const config = {
   styleUrls: ['./default.scss'],
 })
 export class SegmentedControlExampleDefaultComponent implements OnInit {
-  template: string = config.template.split('<fieldset>')[0]; // Remove config part of the template
+  get template(): string {
+    return config.template
+      .split('<fieldset>')[0] // Remove config part of the template
+      .replace('[mode]="mode"', `mode="${this.mode}"`);
+  }
+  codeSnippet = config.codeSnippet;
 
   mode: 'default' | 'chip' = 'default';
-  protected activeSegment: SegmentItem;
+  selectedSegment: SegmentItem;
 
-  items: SegmentItem[] = this.getSegmentedItems();
+  private defaultItems = [
+    {
+      text: 'First item',
+      checked: true,
+      id: 'first',
+      badge: {
+        content: '4',
+        description: '4 unread messages',
+        themeColor: 'warning',
+      },
+    },
+    { text: 'Second item', id: 'second' },
+  ];
+  private chipItems = [...'123456'].map((i) => ({ text: `Chip-${i}`, id: i }));
+
+  get items(): SegmentItem[] {
+    return this.mode === 'default' ? this.defaultItems : this.chipItems;
+  }
 
   ngOnInit() {
     const checkedSegment = this.items.find((segment) => segment.checked === true);
-    this.activeSegment = checkedSegment;
+    this.selectedSegment = checkedSegment;
   }
 
-  onSegmentSelect(selectedSegment: SegmentItem) {
-    console.log('selectedSegment', selectedSegment);
-    this.activeSegment = selectedSegment;
+  onSegmentSelect(segment: SegmentItem) {
+    console.log('selectedSegment', segment);
+    this.selectedSegment = segment;
   }
 
   setMode(mode: 'default' | 'chip') {
     this.mode = mode;
-    this.items = this.getSegmentedItems();
-    this.activeSegment = this.items[0];
-  }
-
-  private getSegmentedItems(): SegmentItem[] {
-    let segmentedItems = [];
-    if (this.mode === 'chip') {
-      segmentedItems.push({ text: 'Chip-1', checked: true, id: '1' });
-      // Add additional chips for testing
-      Array.from('23456'.split('')).forEach((i: string) => {
-        segmentedItems.push({ text: 'Chip-'.concat(i), id: i });
-      });
-    } else {
-      segmentedItems.push({
-        text: 'First item',
-        checked: true,
-        id: 'first',
-        badge: {
-          content: '4',
-          description: '4 unread messages',
-          themeColor: 'warning',
-        },
-      });
-      segmentedItems.push({ text: 'Second item', id: 'second' });
-    }
-    return segmentedItems;
+    this.selectedSegment = this.items[0];
   }
 }
