@@ -22,6 +22,7 @@
   margin: size('xxxs');
   cursor: pointer;
   user-select: none;
+  -webkit-tap-highlight-color: transparent;
   @include theme-background('white');
   @include selected-and-hover('black');
 
