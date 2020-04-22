@@ -26,6 +26,8 @@
 }
 
 ion-segment {
+  display: inline-flex; //The segmented control itself is block-level, but we don't want the background to stretch
+  width: auto; //The segmented control itself is block-level, but we don't want the background to stretch
   overflow: visible; //Ensures the badge is not cut off
   contain: unset; //Ensures the badge is not cut off
   --background: #{get-color('white')};
