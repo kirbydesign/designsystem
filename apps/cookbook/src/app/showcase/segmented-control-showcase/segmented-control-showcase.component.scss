@@ -1,6 +1,7 @@
 @import './libs/designsystem/src/lib/scss/utils';
 
-h2:not(:first-child) {
+h2:not(:first-child),
+h3:not(:first-child) {
   margin-top: size('l');
 }
 

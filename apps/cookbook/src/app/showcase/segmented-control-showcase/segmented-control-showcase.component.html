@@ -5,6 +5,16 @@
       #example
     ></cookbook-segmented-control-example-default>
   </cookbook-example-viewer>
+  <h3>Grouped</h3>
+  <cookbook-example-viewer
+    [html]="groupedExample.template"
+    [ts]="groupedExample.codeSnippet"
+    [css]="groupedExample.styles"
+  >
+    <cookbook-segmented-control-example-grouped
+      #groupedExample
+    ></cookbook-segmented-control-example-grouped>
+  </cookbook-example-viewer>
 
   <h2>Properties:</h2>
   <cookbook-showcase-properties [properties]="properties"></cookbook-showcase-properties>
