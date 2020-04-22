@@ -10,6 +10,14 @@ import { SegmentItem } from './segment-item';
   host: { role: 'group' },
 })
 export class SegmentedControlComponent {
+  preventWrapperClick(event: Event) {
+    if (event.target instanceof HTMLElement) {
+      if (event.target.classList.contains('segment-btn-wrapper')) {
+        event.stopImmediatePropagation();
+      }
+    }
+  }
+
   @HostBinding('class.chip-mode')
   isChipMode: boolean;
 
@@ -64,7 +72,7 @@ export class SegmentedControlComponent {
 
   @Output() segmentSelect: EventEmitter<SegmentItem> = new EventEmitter();
 
-  onSegmentSelect(selectedId: string) {
+  onSegmentSelect(selectedId: string, event: Event) {
     const selectedItemIndex = this.items.findIndex((item) => selectedId === item.id);
     if (selectedItemIndex !== this.selectedIndex) {
       this.selectedIndex = selectedItemIndex;
