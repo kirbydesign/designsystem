@@ -63,13 +63,12 @@ describe('SegmentedControlComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should have checked item as activeSegment when created', () => {
-    expect(component.activeSegment).toBe(items[1]);
+  it('should have checked item as value when created', () => {
+    expect(component.value).toBe(items[1]);
   });
 
   describe('default mode', () => {
     it("should have a 'default' mode when created", () => {
-      expect(component.isDefaultMode).toBeTruthy();
       expect(component.isChipMode).toBeFalsy();
     });
 
@@ -82,7 +81,7 @@ describe('SegmentedControlComponent', () => {
     });
 
     it('should call onSegmentSelect when ionChange event fires', async () => {
-      expect(component.activeSegment).toBe(items[1]);
+      expect(component.value).toBe(items[1]);
       const ionSegmentElement = spectator.queryHost<HTMLIonSegmentElement>('ion-segment');
       await TestHelper.whenHydrated(ionSegmentElement);
       spyOn(component, 'onSegmentSelect');
@@ -91,13 +90,13 @@ describe('SegmentedControlComponent', () => {
       expect(component.onSegmentSelect).toHaveBeenCalledWith(items[0]);
     });
 
-    it('should set activeSegment to event.detail.value when ionChange event fires', async () => {
-      expect(component.activeSegment).toBe(items[1]);
+    it('should set value to event.detail.value when ionChange event fires', async () => {
+      expect(component.value).toBe(items[1]);
       const ionSegmentElement = spectator.queryHost<HTMLIonSegmentElement>('ion-segment');
       await TestHelper.whenHydrated(ionSegmentElement);
       const changeEvent = new CustomEvent('ionChange', { detail: { value: items[2] } });
       ionSegmentElement.dispatchEvent(changeEvent);
-      expect(component.activeSegment).toBe(items[2]);
+      expect(component.value).toBe(items[2]);
     });
 
     describe('when updating items', () => {
@@ -118,7 +117,6 @@ describe('SegmentedControlComponent', () => {
     });
 
     it("should have a 'chip' mode when created", () => {
-      expect(component.isDefaultMode).toBeFalsy();
       expect(component.isChipMode).toBeTruthy();
     });
 
@@ -135,16 +133,16 @@ describe('SegmentedControlComponent', () => {
     });
 
     it('should call onSegmentSelect when clicking a different segment chip', () => {
-      expect(component.activeSegment).toBe(items[1]);
+      expect(component.value).toBe(items[1]);
       spyOn(component, 'onSegmentSelect');
       spectator.dispatchMouseEvent('kirby-chip:first-of-type', 'click');
       expect(component.onSegmentSelect).toHaveBeenCalled();
     });
 
-    it('should set activeSegment when clicking a different segment chip', () => {
-      expect(component.activeSegment).toBe(items[1]);
+    it('should set value when clicking a different segment chip', () => {
+      expect(component.value).toBe(items[1]);
       spectator.dispatchMouseEvent('kirby-chip:last-of-type', 'click');
-      expect(component.activeSegment).toBe(items[2]);
+      expect(component.value).toBe(items[2]);
     });
   });
 });
