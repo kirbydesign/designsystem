@@ -1,7 +1,5 @@
 @import '../../scss/utils';
 
-$chip-height: 30px;
-
 @mixin selected-and-hover($background-color) {
   &.is-selected {
     @include theme-background($background-color);
@@ -15,12 +13,12 @@ $chip-height: 30px;
 :host {
   white-space: nowrap;
   padding: 0 size('s');
-  height: $chip-height;
-  font-size: font-size('s');
+  height: size('l');
+  font-size: font-size('xs');
   line-height: 1;
   display: inline-flex;
   align-items: center;
-  border-radius: $chip-height;
+  border-radius: $border-radius-round;
   margin-right: 5px;
   cursor: pointer;
   user-select: none;
