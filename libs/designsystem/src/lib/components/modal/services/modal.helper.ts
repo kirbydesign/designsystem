@@ -4,7 +4,8 @@ import { ModalController } from '@ionic/angular';
 import { ModalConfig } from '../modal-wrapper/config/modal-config';
 import { ModalWrapperComponent } from '../modal-wrapper/modal-wrapper.component';
 import { ModalCompactWrapperComponent } from '../modal-wrapper/compact/modal-compact-wrapper.component';
-import { Modal } from './modal.model';
+import { Overlay } from './modal.interfaces';
+import { KirbyAnimation } from '../../../animation/kirby-animation';
 
 @Injectable()
 export class ModalHelper {
@@ -14,16 +15,8 @@ export class ModalHelper {
 
   constructor(private ionicModalController: ModalController) {}
 
-  public async showModalWindow(
-    config: ModalConfig,
-    registerModal: (modal: Modal) => void
-  ): Promise<any> {
-    const modal: Modal = {
-      close: (data?: any) => null,
-      scrollToTop: () => null,
-      scrollToBottom: () => null,
-    };
-    config = { flavor: 'modal', modal, ...config };
+  public async showModalWindow(config: ModalConfig): Promise<Overlay> {
+    config.flavor = config.flavor || 'modal';
     let modalPresentingElement = await this.getPresentingElement(config.flavor);
     const ionModal = await this.ionicModalController.create({
       component: config.flavor === 'compact' ? ModalCompactWrapperComponent : ModalWrapperComponent,
@@ -38,20 +31,9 @@ export class ModalHelper {
       presentingElement: modalPresentingElement,
     });
 
-    modal.close = ionModal.dismiss.bind(ionModal);
-    registerModal(modal);
+    await ionModal.present();
 
-    ionModal.present();
-    return ionModal.onDidDismiss();
-  }
-
-  public blurNativeWrapper(nativeElement: HTMLElement) {
-    if (nativeElement) {
-      setTimeout(() => {
-        nativeElement.focus();
-        nativeElement.blur();
-      }, 50);
-    }
+    return { dismiss: ionModal.dismiss.bind(ionModal), onDidDismiss: ionModal.onDidDismiss() };
   }
 
   public registerPresentingElement(element: HTMLElement) {
@@ -69,5 +51,27 @@ export class ModalHelper {
       }
     }
     return modalPresentingElement;
+  }
+
+  public async scrollToTop(
+    noModalRegisteredErrorMessage: string,
+    duration?: KirbyAnimation.Duration
+  ) {
+    const modal = await this.ionicModalController.getTop();
+    if (!modal || !(modal.component instanceof ModalWrapperComponent)) {
+      throw new Error(noModalRegisteredErrorMessage);
+    }
+    modal.component.scrollToTop(duration);
+  }
+
+  public async scrollToBottom(
+    noModalRegisteredErrorMessage: string,
+    duration?: KirbyAnimation.Duration
+  ) {
+    const modal = await this.ionicModalController.getTop();
+    if (!modal || !(modal.component instanceof ModalWrapperComponent)) {
+      throw new Error(noModalRegisteredErrorMessage);
+    }
+    modal.component.scrollToBottom(duration);
   }
 }

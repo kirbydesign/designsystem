@@ -1,11 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { NavParams } from '@ionic/angular';
 
 import { AlertComponent } from './alert.component';
 import { ButtonComponent } from '../../button/button.component';
-import { IModalController } from '../services/modal.controller.interface';
 import { SizeDirective } from '../../../directives/size/size.directive';
 
 describe('AlertComponent', () => {
@@ -13,24 +11,9 @@ describe('AlertComponent', () => {
   let fixture: ComponentFixture<AlertComponent>;
 
   beforeEach(async(() => {
-    const modalControllerSpy = jasmine.createSpyObj('IModalController', [
-      'showAlert',
-      'blurNativeWrapper',
-    ]);
-
-    const navParamsSpy = jasmine.createSpyObj('NavParams', {
-      get: {
-        title: 'Test title',
-      },
-    });
-
     TestBed.configureTestingModule({
       declarations: [AlertComponent, ButtonComponent, SizeDirective],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      providers: [
-        { provide: IModalController, useValue: modalControllerSpy },
-        { provide: NavParams, useValue: navParamsSpy },
-      ],
     }).compileComponents();
   }));
 

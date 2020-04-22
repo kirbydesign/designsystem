@@ -1,10 +1,8 @@
 import { DrawerSupplementaryAction } from './drawer-supplementary-action';
-import { Modal } from '../../services/modal.model';
 
 export interface ModalConfig {
   title: string;
   component: any;
-  modal?: Modal;
   flavor?: 'modal' | 'drawer' | 'compact';
   /**
    * @deprecated Will be removed in next major version.

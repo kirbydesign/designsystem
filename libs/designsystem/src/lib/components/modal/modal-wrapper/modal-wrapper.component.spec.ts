@@ -1,14 +1,12 @@
 import { Spectator, createComponentFactory } from '@ngneat/spectator';
 import { MockComponents } from 'ng-mocks';
-import { NavParams, IonToolbar, IonHeader, IonTitle, IonButtons, IonContent } from '@ionic/angular';
+import { IonToolbar, IonHeader, IonTitle, IonButtons, IonContent } from '@ionic/angular';
 import { Component } from '@angular/core';
 
 import { ButtonComponent } from '../../button/button.component';
 import { IconComponent } from '../../icon/icon.component';
 import { ModalWrapperComponent } from './modal-wrapper.component';
-import { IModalController } from '../services/modal.controller.interface';
 import { KirbyAnimation } from '../../../animation/kirby-animation';
-import { Modal } from '../services/modal.model';
 import { ModalFooterComponent } from '../footer/modal-footer.component';
 
 @Component({
@@ -37,12 +35,6 @@ class DynamicFooterEmbeddedComponent {
 describe('ModalWrapperComponent', () => {
   let spectator: Spectator<ModalWrapperComponent>;
   let component: ModalWrapperComponent;
-  const modal = {
-    close: () => {},
-    scrollToTop: () => {},
-    scrollToBottom: () => {},
-  } as Modal;
-  const modalControllerSpy = jasmine.createSpyObj('IModalController', ['hideTopmost']);
 
   const createComponent = createComponentFactory({
     component: ModalWrapperComponent,
@@ -59,24 +51,18 @@ describe('ModalWrapperComponent', () => {
         IonContent
       ),
     ],
-    providers: [
-      { provide: IModalController, useValue: modalControllerSpy },
-      {
-        provide: NavParams,
-        useFactory: () => ({
-          get: () => ({
-            title: 'Test title',
-            component: undefined,
-            flavor: 'modal',
-            modal,
-          }),
-        }),
-      },
-    ],
   });
 
   beforeEach(() => {
-    spectator = createComponent();
+    spectator = createComponent({
+      props: {
+        config: {
+          title: 'Test title',
+          component: undefined,
+          flavor: 'modal',
+        },
+      },
+    });
     component = spectator.component;
   });
 
@@ -157,7 +143,7 @@ describe('ModalWrapperComponent', () => {
     it('should scroll to top with no scroll animation duration', () => {
       const ionContent: IonContent = spectator.query(IonContent);
       spyOn(ionContent, 'scrollToTop');
-      modal.scrollToTop();
+      spectator.component.scrollToTop();
       expect(ionContent.scrollToTop).toHaveBeenCalledWith(0);
     });
 
@@ -166,7 +152,7 @@ describe('ModalWrapperComponent', () => {
       const ionContent: IonContent = spectator.query(IonContent);
       spyOn(ionContent, 'scrollToTop');
 
-      modal.scrollToTop(animationDuration);
+      spectator.component.scrollToTop(animationDuration);
 
       expect(ionContent.scrollToTop).toHaveBeenCalledWith(animationDuration);
     });
@@ -177,7 +163,7 @@ describe('ModalWrapperComponent', () => {
       const ionContent: IonContent = spectator.query(IonContent);
       spyOn(ionContent, 'scrollToBottom');
 
-      modal.scrollToBottom();
+      spectator.component.scrollToBottom();
 
       expect(ionContent.scrollToBottom).toHaveBeenCalledWith(0);
     });
@@ -187,7 +173,7 @@ describe('ModalWrapperComponent', () => {
       const ionContent: IonContent = spectator.query(IonContent);
       spyOn(ionContent, 'scrollToBottom');
 
-      modal.scrollToBottom(animationDuration);
+      spectator.component.scrollToBottom(animationDuration);
 
       expect(ionContent.scrollToBottom).toHaveBeenCalledWith(animationDuration);
     });
