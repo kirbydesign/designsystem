@@ -5,21 +5,13 @@
   user-select: none;
 
   &.chip-mode {
-    /* @Polyfill
-    * This is the way to hide scrollbar
-    * Firefox, IE, Chrome
-    * */
-    overflow: hidden;
-    .scrollable {
-      display: flex;
-      flex-wrap: nowrap;
-      overflow-x: auto;
-      margin-bottom: -30px;
-      padding-bottom: 30px;
-      @include media('>=medium') {
-        margin-bottom: -50px;
-        padding-bottom: 50px;
-      }
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    // Hide scrollbar:
+    scrollbar-width: none; /* Firefox */
+    &::-webkit-scrollbar {
+      display: none;
     }
   }
 }

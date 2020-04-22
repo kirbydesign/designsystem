@@ -15,6 +15,8 @@ import { SegmentItem } from './segment-item';
   selector: 'kirby-segmented-control',
   templateUrl: './segmented-control.component.html',
   styleUrls: ['./segmented-control.component.scss'],
+  // tslint:disable-next-line: no-host-metadata-property
+  host: { role: 'group' },
 })
 export class SegmentedControlComponent implements OnChanges, AfterViewChecked {
   @Output() segmentSelect: EventEmitter<SegmentItem> = new EventEmitter();
