@@ -17,7 +17,6 @@
       margin-bottom: -30px;
       padding-bottom: 30px;
       @include media('>=medium') {
-        justify-content: center;
         margin-bottom: -50px;
         padding-bottom: 50px;
       }
