@@ -1,6 +1,10 @@
-<ion-segment *ngIf="!isChipMode" [value]="value" (ionChange)="onSegmentSelect($event.detail.value)">
+<ion-segment
+  *ngIf="!isChipMode"
+  [value]="value?.id"
+  (ionChange)="onSegmentSelect($event.detail.value)"
+>
   <div *ngFor="let item of items" class="segment-btn-wrapper" (click)="$event.stopPropagation()">
-    <ion-segment-button [value]="item">{{ item.text }}</ion-segment-button>
+    <ion-segment-button [value]="item.id">{{ item.text }}</ion-segment-button>
     <kirby-badge
       *ngIf="item.badge"
       role="text"
@@ -16,7 +20,7 @@
     *ngFor="let item of items; let index = index"
     [text]="item.text"
     [isSelected]="index === selectedIndex"
-    (click)="onSegmentSelect(item)"
+    (click)="onSegmentSelect(item.id)"
     role="button"
   ></kirby-chip>
 </ng-container>

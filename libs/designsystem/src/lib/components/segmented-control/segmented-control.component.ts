@@ -1,11 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  Output,
-  Input,
-  HostBinding,
-  AfterViewChecked,
-} from '@angular/core';
+import { Component, EventEmitter, Output, Input, HostBinding } from '@angular/core';
 
 import { SegmentItem } from './segment-item';
 
@@ -16,9 +9,7 @@ import { SegmentItem } from './segment-item';
   // tslint:disable-next-line: no-host-metadata-property
   host: { role: 'group' },
 })
-export class SegmentedControlComponent implements AfterViewChecked {
-  private isInitializing = false;
-
+export class SegmentedControlComponent {
   @HostBinding('class.chip-mode')
   isChipMode: boolean;
 
@@ -28,9 +19,6 @@ export class SegmentedControlComponent implements AfterViewChecked {
   }
 
   @Input() set items(value: SegmentItem[]) {
-    // Flag to prevent emitting onSegmentSelect event if previous items exists
-    // Is cleared in ngAfterViewChecked
-    this.isInitializing = true;
     this._items = value || [];
     const checkedItemIndex = this.items.findIndex((item) => item.checked);
     if (checkedItemIndex > -1) {
@@ -76,16 +64,11 @@ export class SegmentedControlComponent implements AfterViewChecked {
 
   @Output() segmentSelect: EventEmitter<SegmentItem> = new EventEmitter();
 
-  onSegmentSelect(item: SegmentItem) {
-    if (!this.isInitializing) {
-      if (item !== this.value) {
-        this.value = item;
-        this.segmentSelect.emit(this.value);
-      }
+  onSegmentSelect(selectedId: string) {
+    const selectedItemIndex = this.items.findIndex((item) => selectedId === item.id);
+    if (selectedItemIndex !== this.selectedIndex) {
+      this.selectedIndex = selectedItemIndex;
+      this.segmentSelect.emit(this.value);
     }
-  }
-
-  ngAfterViewChecked(): void {
-    this.isInitializing = false;
   }
 }

@@ -85,16 +85,16 @@ describe('SegmentedControlComponent', () => {
       const ionSegmentElement = spectator.queryHost<HTMLIonSegmentElement>('ion-segment');
       await TestHelper.whenHydrated(ionSegmentElement);
       spyOn(component, 'onSegmentSelect');
-      const changeEvent = new CustomEvent('ionChange', { detail: { value: items[0] } });
+      const changeEvent = new CustomEvent('ionChange', { detail: { value: items[0].id } });
       ionSegmentElement.dispatchEvent(changeEvent);
-      expect(component.onSegmentSelect).toHaveBeenCalledWith(items[0]);
+      expect(component.onSegmentSelect).toHaveBeenCalledWith(items[0].id);
     });
 
     it('should set value to event.detail.value when ionChange event fires', async () => {
       expect(component.value).toBe(items[1]);
       const ionSegmentElement = spectator.queryHost<HTMLIonSegmentElement>('ion-segment');
       await TestHelper.whenHydrated(ionSegmentElement);
-      const changeEvent = new CustomEvent('ionChange', { detail: { value: items[2] } });
+      const changeEvent = new CustomEvent('ionChange', { detail: { value: items[2].id } });
       ionSegmentElement.dispatchEvent(changeEvent);
       expect(component.value).toBe(items[2]);
     });
