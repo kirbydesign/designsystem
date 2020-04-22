@@ -12,6 +12,7 @@ import { FormFieldExamplesModule } from './form-field-example/form-field-example
 import { ListExamplesModule } from './list/list-example.module';
 import { ItemExampleModule } from './item-example/item-example.module';
 import { DropdownExampleModule } from './dropdown-example/dropdown-example.module';
+import { SegmentedControlExampleModule } from './segmented-control-example/segmented-control-example.module';
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import { DropdownExampleModule } from './dropdown-example/dropdown-example.modul
     ItemExampleModule,
     ListExamplesModule,
     DropdownExampleModule,
+    SegmentedControlExampleModule,
   ],
   declarations: COMPONENT_DECLARATIONS,
   exports: [
@@ -29,6 +31,7 @@ import { DropdownExampleModule } from './dropdown-example/dropdown-example.modul
     ItemExampleModule,
     ListExamplesModule,
     DropdownExampleModule,
+    SegmentedControlExampleModule,
   ],
   providers: [PROVIDER_DECLARATIONS],
   entryComponents: [

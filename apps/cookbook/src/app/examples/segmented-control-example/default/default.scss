@@ -1,0 +1,11 @@
+@import './libs/designsystem/src/lib/scss/utils';
+@import '../_segmented-control-example.shared';
+
+kirby-chip,
+kirby-segmented-control {
+  min-height: size('xl');
+}
+
+fieldset {
+  display: inline-block;
+}
