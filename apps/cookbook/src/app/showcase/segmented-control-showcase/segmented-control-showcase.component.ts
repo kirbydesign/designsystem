@@ -30,7 +30,6 @@ export class SegmentedControlShowcaseComponent {
         `[{
   id: string,
   text: string,
-  checked: boolean,
   badge?: {
     content: string,
     description?: string,
@@ -42,14 +41,14 @@ export class SegmentedControlShowcaseComponent {
     {
       name: 'value',
       description:
-        'The selected segment. Returns the selected segment if there is one, otherwise `undefined``.',
+        'Gets/sets the selected segment. Returns the selected segment if there is one, otherwise `undefined``.',
       defaultValue: 'undefined',
       inputValues: ['SegmentItem'],
     },
     {
       name: 'selectedIndex',
       description:
-        'The index of the selected segment within the `segmentItems` array. The value -1 indicates no element is selected.',
+        'Gets/sets the index of the selected segment within the `segmentItems` array. The value -1 indicates no element is selected.',
       defaultValue: 'undefined',
       inputValues: ['number'],
     },

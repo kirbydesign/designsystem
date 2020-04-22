@@ -34,6 +34,9 @@ export class SegmentedControlComponent implements AfterViewChecked {
     this._items = value || [];
     const checkedItemIndex = this.items.findIndex((item) => item.checked);
     if (checkedItemIndex > -1) {
+      console.warn(
+        'SegmentItem.checked is deprecated - please remove from your `items` configuration. Use `selectedIndex` or `value` on `<kirby-segmented-control>` instead '
+      );
       this._selectedIndex = checkedItemIndex;
     }
     this._value = this.items[this.selectedIndex];

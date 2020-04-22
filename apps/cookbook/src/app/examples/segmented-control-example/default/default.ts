@@ -5,6 +5,7 @@ import { SegmentItem } from '@kirbydesign/designsystem';
 const config = {
   template: `<kirby-segmented-control
   [items]="items"
+  [value]="selectedSegment"
   [mode]="mode"
   [size]="size"
   (segmentSelect)="onSegmentSelect($event)"
@@ -92,7 +93,6 @@ export class SegmentedControlExampleDefaultComponent implements OnInit {
   private defaultItems = [
     {
       text: 'First item',
-      checked: true,
       id: 'first',
       badge: {
         content: '4',
@@ -109,8 +109,7 @@ export class SegmentedControlExampleDefaultComponent implements OnInit {
   }
 
   ngOnInit() {
-    const checkedSegment = this.items.find((segment) => segment.checked === true);
-    this.selectedSegment = checkedSegment;
+    this.selectedSegment = this.items[0];
   }
 
   onSegmentSelect(segment: SegmentItem) {
