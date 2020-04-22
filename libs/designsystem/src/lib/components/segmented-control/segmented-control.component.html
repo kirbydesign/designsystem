@@ -1,8 +1,4 @@
-<ion-segment
-  *ngIf="isDefaultMode"
-  [value]="activeSegment"
-  (ionChange)="onSegmentSelect($event.detail.value)"
->
+<ion-segment *ngIf="!isChipMode" [value]="value" (ionChange)="onSegmentSelect($event.detail.value)">
   <div
     *ngFor="let item of items"
     class="segment-btn-wrapper"
@@ -20,7 +16,7 @@
   </div>
 </ion-segment>
 
-<div class="scrollable" role="group" *ngIf="isChipMode">
+<div *ngIf="isChipMode" class="scrollable" role="group">
   <kirby-chip
     [text]="item.text"
     [isSelected]="item.id === activeSegment?.id"

@@ -19,16 +19,12 @@ import { SegmentItem } from './segment-item';
 export class SegmentedControlComponent implements OnChanges, AfterViewChecked {
   @Output() segmentSelect: EventEmitter<SegmentItem> = new EventEmitter();
 
-  @HostBinding('class.default-mode')
-  isDefaultMode: boolean = true; // Default
-
   @HostBinding('class.chip-mode')
   isChipMode: boolean;
 
   @Input() items: SegmentItem[];
 
   @Input() set mode(mode: 'default' | 'chip') {
-    this.isDefaultMode = mode === 'default';
     this.isChipMode = mode === 'chip';
   }
 
