@@ -15,7 +15,6 @@
   <kirby-chip
     [text]="item.text"
     [isSelected]="item.id === activeSegment?.id"
-    [attr.aria-selected]="item.id === activeSegment?.id"
     (click)="onSegmentSelect(item)"
     *ngFor="let item of items"
     role="button"
