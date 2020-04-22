@@ -18,7 +18,7 @@
     flex-wrap: nowrap;
     overflow-x: auto;
     // Hide scrollbar on touch device:
-    @media (pointer: coarse) and (hover: none) {
+    @include touch() {
       scrollbar-width: none; /* Firefox */
       &::-webkit-scrollbar {
         display: none;
