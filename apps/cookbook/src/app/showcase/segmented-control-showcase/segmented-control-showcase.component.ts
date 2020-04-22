@@ -22,12 +22,36 @@ export class SegmentedControlShowcaseComponent {
       inputValues: ['sm', 'md'],
     },
     {
-      name: 'segmentItems',
-      description: 'Array of SegmentItem controls',
+      name: 'items',
+      description:
+        'An array of `SegmentItem[]` representing the set of segment elements within the control.',
       defaultValue: '',
       inputValues: [
-        '[{ text: string, id: string, checked: boolean, badge?: {content: string, description?: string, themeColor: ThemeColor}}]',
+        `[{
+  id: string,
+  text: string,
+  checked: boolean,
+  badge?: {
+    content: string,
+    description?: string,
+    themeColor: ThemeColor
+  }
+}]`,
       ],
+    },
+    {
+      name: 'value',
+      description:
+        'The selected segment. Returns the selected segment if there is one, otherwise `undefined``.',
+      defaultValue: 'undefined',
+      inputValues: ['SegmentItem'],
+    },
+    {
+      name: 'selectedIndex',
+      description:
+        'The index of the selected segment within the `segmentItems` array. The value -1 indicates no element is selected.',
+      defaultValue: 'undefined',
+      inputValues: ['number'],
     },
   ];
 }

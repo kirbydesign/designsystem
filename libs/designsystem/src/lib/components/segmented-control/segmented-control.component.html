@@ -13,10 +13,10 @@
 
 <ng-container *ngIf="isChipMode">
   <kirby-chip
+    *ngFor="let item of items; let index = index"
     [text]="item.text"
-    [isSelected]="item.id === activeSegment?.id"
+    [isSelected]="index === selectedIndex"
     (click)="onSegmentSelect(item)"
-    *ngFor="let item of items"
     role="button"
   ></kirby-chip>
 </ng-container>
