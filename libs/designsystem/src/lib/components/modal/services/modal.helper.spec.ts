@@ -4,7 +4,7 @@ import { createService } from '@ngneat/spectator';
 import { ModalHelper } from './modal.helper';
 import { Overlay } from './modal.interfaces';
 
-fdescribe('ModalHelper', () => {
+describe('ModalHelper', () => {
   let modalHelper: ModalHelper;
 
   const spectator = createService({
