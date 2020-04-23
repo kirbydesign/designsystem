@@ -6,7 +6,7 @@
 // See https://github.com/ionic-team/ionic/commit/253cd96164914a803f6bb42ff95ca74880c940d0
 // and https://github.com/ionic-team/ionic/issues/20800#issuecomment-606670762
 ion-modal,
-ion-modal:first-of-type {
+ion-modal.modal-card:first-of-type {
   &.kirby-modal,
   &.kirby-alert,
   &.kirby-action-sheet {
