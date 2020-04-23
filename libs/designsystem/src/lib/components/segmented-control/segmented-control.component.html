@@ -2,8 +2,9 @@
   *ngIf="!isChipMode"
   [value]="value?.id"
   (ionChange)="onSegmentSelect($event.detail.value)"
+  (click)="preventWrapperClick($event)"
 >
-  <div *ngFor="let item of items" class="segment-btn-wrapper" (click)="$event.stopPropagation()">
+  <div *ngFor="let item of items" class="segment-btn-wrapper">
     <ion-segment-button [value]="item.id">{{ item.text }}</ion-segment-button>
     <kirby-badge
       *ngIf="item.badge"
