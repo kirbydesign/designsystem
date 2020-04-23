@@ -1,11 +1,21 @@
 @import './libs/designsystem/src/lib/scss/utils';
-@import '../_segmented-control-example.shared';
 
-kirby-chip,
+:host {
+  display: block;
+}
+
 kirby-segmented-control {
-  min-height: size('xl');
+  margin-bottom: size('l');
+}
+
+kirby-card {
+  margin-bottom: size('s');
 }
 
 fieldset {
   display: inline-block;
+
+  .disabled {
+    color: get-text-color('semi-dark');
+  }
 }

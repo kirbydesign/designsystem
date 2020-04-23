@@ -41,8 +41,8 @@ const config = {
       Chip
     </label>
   </p>
-  <p>
-    <strong>Size:</strong><em *ngIf="mode === 'chip'"> (only applies to <code>default</code> mode)</em><br/>  
+  <p [class.disabled]="mode === 'chip'">
+    <strong>Size:</strong><em class="kirby-text-small-light"> (only applies in 'default' mode)</em><br/>  
     <label>
       <input
         type="radio"

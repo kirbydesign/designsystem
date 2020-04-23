@@ -9,6 +9,11 @@ h3 {
   border-bottom: 1px dotted get-color('medium');
 }
 
+cookbook-segmented-control-example-default,
+cookbook-segmented-control-example-grouped {
+  margin-bottom: size('xs');
+}
+
 .badge-note {
   margin-top: size('s');
 }

@@ -18,8 +18,7 @@
     margin-bottom: size('xxxs');
   }
 
-  > * {
-    display: block;
-    margin: size('xxs') 0;
+  .example {
+    margin-bottom: size('s');
   }
 }

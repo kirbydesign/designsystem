@@ -39,7 +39,9 @@ kirby-segmented-control {
   margin-right: 8px;
 }
 `,
-    ``,
+    `:host {
+  display: block
+}`,
   ],
 
   codeSnippet: `selectedIndex = 0;
@@ -72,8 +74,7 @@ onSegmentSelect(segment: SegmentItem) {
 })
 export class SegmentedControlExampleGroupedComponent implements OnInit {
   template: string = config.template;
-  styles: string = config.styles.join(`
-`);
+  styles: string = config.styles[0];
   codeSnippet: string = config.codeSnippet;
 
   selectedSegment: SegmentItem;
