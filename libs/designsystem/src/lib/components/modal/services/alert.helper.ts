@@ -1,18 +1,16 @@
 import { Injectable } from '@angular/core';
-import { ModalController as IonicModalController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 
 import { AlertConfig } from '../alert/config/alert-config';
 import { AlertComponent } from '../alert/alert.component';
+import { Overlay } from './modal.interfaces';
 
 @Injectable()
 export class AlertHelper {
-  constructor(private ionicModalController: IonicModalController) {}
+  constructor(private ionicModalController: ModalController) {}
 
-  public async showAlert(
-    config: AlertConfig,
-    registerModal: (modal: { close: (selection: boolean) => {} }) => void
-  ): Promise<any> {
-    const alert = await this.ionicModalController.create({
+  public async showAlert(config: AlertConfig): Promise<Overlay> {
+    const ionModal = await this.ionicModalController.create({
       component: AlertComponent,
       componentProps: this.getComponentProps(config),
       cssClass: 'kirby-alert',
@@ -20,10 +18,8 @@ export class AlertHelper {
       backdropDismiss: false,
     });
 
-    registerModal({ close: alert.dismiss.bind(alert) });
-
-    await alert.present();
-    return alert.onDidDismiss();
+    await ionModal.present();
+    return { dismiss: ionModal.dismiss.bind(ionModal), onDidDismiss: ionModal.onDidDismiss() };
   }
 
   private getComponentProps(config: AlertConfig) {

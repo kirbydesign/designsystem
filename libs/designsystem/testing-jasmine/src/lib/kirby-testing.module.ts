@@ -10,7 +10,6 @@ export function modalControllerFactory() {
     'showModal',
     'showActionSheet',
     'showAlert',
-    'blurNativeWrapper',
     'register',
     'hideTopmost',
     'scrollToTop',

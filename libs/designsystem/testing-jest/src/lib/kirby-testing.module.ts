@@ -10,7 +10,6 @@ export function modalControllerFactory() {
     showModal: jest.fn(),
     showActionSheet: jest.fn(),
     showAlert: jest.fn(),
-    blurNativeWrapper: jest.fn(),
     register: jest.fn(),
     hideTopmost: jest.fn(),
     scrollToTop: jest.fn(),
