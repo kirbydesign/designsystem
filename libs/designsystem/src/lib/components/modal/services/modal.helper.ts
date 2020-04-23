@@ -11,13 +11,13 @@ import { KirbyAnimation } from '../../../animation/kirby-animation';
 export class ModalHelper {
   // TODO: Make presentingElement an instance field when
   // forRoot()/singleton services has been solved:
-  private static presentingElement: HTMLElement = null;
+  private static presentingElement: HTMLElement = undefined;
 
   constructor(private ionicModalController: ModalController) {}
 
   public async showModalWindow(config: ModalConfig): Promise<Overlay> {
     config.flavor = config.flavor || 'modal';
-    let modalPresentingElement = await this.getPresentingElement(config.flavor);
+    const modalPresentingElement = await this.getPresentingElement(config.flavor);
     const ionModal = await this.ionicModalController.create({
       component: config.flavor === 'compact' ? ModalCompactWrapperComponent : ModalWrapperComponent,
       cssClass: [
@@ -41,7 +41,7 @@ export class ModalHelper {
   }
 
   private async getPresentingElement(flavor?: string) {
-    let modalPresentingElement: HTMLElement;
+    let modalPresentingElement: HTMLElement = undefined;
     if (!flavor || flavor === 'modal') {
       const topMostModal = await this.ionicModalController.getTop();
       if (!topMostModal) {
