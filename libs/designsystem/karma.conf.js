@@ -28,6 +28,7 @@ module.exports = function(config) {
     ],
     proxies: {
       '/assets/kirby/icons/svg/': '/base/src/lib/icons/svg/',
+      '/svg/': '/base/src/lib/icons/svg/',
     },
   });
 };
