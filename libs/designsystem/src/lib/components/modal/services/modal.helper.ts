@@ -42,9 +42,13 @@ export class ModalHelper {
 
   private async getPresentingElement(flavor?: string) {
     let modalPresentingElement: HTMLElement = undefined;
-    if (['modal', 'drawer'].includes(flavor)) {
+    if (!flavor || flavor === 'modal') {
       const topMostModal = await this.ionicModalController.getTop();
-      modalPresentingElement = topMostModal || ModalHelper.presentingElement;
+      if (!topMostModal) {
+        modalPresentingElement = ModalHelper.presentingElement;
+      } else if (!topMostModal.classList.contains('kirby-drawer')) {
+        modalPresentingElement = topMostModal;
+      }
     }
     return modalPresentingElement;
   }
