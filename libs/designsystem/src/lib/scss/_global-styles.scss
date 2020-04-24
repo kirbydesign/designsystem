@@ -108,6 +108,8 @@ ion-modal.kirby-overlay {
       display: flex;
       justify-content: center;
       align-items: flex-end;
+      --max-width: auto;
+      --max-height: auto;
     }
   }
 
