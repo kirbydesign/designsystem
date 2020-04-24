@@ -20,12 +20,11 @@ describe('ModalHelper', () => {
     modalHelper = spectator.service;
   });
 
-  describe('showModal', () => {
+  describe('showModalWindow', () => {
     let overlay: Overlay;
     let ionModal: HTMLIonModalElement;
     let backdrop: HTMLIonBackdropElement;
     let ionModalController: IonicModalController;
-    const backdropOpacity = '0.4';
 
     beforeEach(async () => {
       ionModalController = spectator.inject(IonicModalController);
@@ -87,7 +86,7 @@ describe('ModalHelper', () => {
   });
 
   describe('on small screens', () => {
-    describe('showModal', () => {
+    describe('showModalWindow', () => {
       let overlay: Overlay;
       let ionModal: HTMLIonModalElement;
       let backdrop: HTMLIonBackdropElement;
