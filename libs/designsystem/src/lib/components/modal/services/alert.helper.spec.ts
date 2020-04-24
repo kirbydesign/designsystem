@@ -1,0 +1,67 @@
+import { IonicModule, ModalController as IonicModalController } from '@ionic/angular';
+import { createService } from '@ngneat/spectator';
+
+import { AlertHelper } from './alert.helper';
+import { ModalHelper } from './modal.helper';
+import { Overlay } from './modal.interfaces';
+
+describe('AlertHelper', () => {
+  let alertHelper: AlertHelper;
+  const backdropOpacity = '0.4';
+
+  const spectator = createService({
+    service: AlertHelper,
+    imports: [IonicModule.forRoot({ mode: 'ios', _testing: true })],
+    providers: [ModalHelper],
+  });
+
+  beforeEach(() => {
+    alertHelper = spectator.service;
+  });
+
+  describe('showAlert', () => {
+    let overlay: Overlay;
+    let ionModal: HTMLIonModalElement;
+    let backdrop: HTMLIonBackdropElement;
+    let ionModalController: IonicModalController;
+
+    beforeEach(async () => {
+      ionModalController = spectator.inject(IonicModalController);
+      overlay = await alertHelper.showAlert({ title: 'Alert' });
+      ionModal = await ionModalController.getTop();
+      expect(ionModal).toBeTruthy();
+      backdrop = ionModal.querySelector('ion-backdrop');
+      expect(backdrop).toBeTruthy();
+    });
+
+    afterEach(async () => {
+      await overlay.dismiss();
+    });
+
+    it('alert should have correct backdrop style', () => {
+      expect(backdrop).toHaveComputedStyle({ opacity: backdropOpacity });
+    });
+
+    it('modal wrapper should have correct max width', () => {
+      const modalWrapper = ionModal.querySelector(':scope > .modal-wrapper');
+      expect(modalWrapper).toHaveComputedStyle({ 'max-width': '359px' });
+    });
+
+    it('alert should have correct backdrop style when opened on top of a modal', async () => {
+      await overlay.dismiss();
+      const modalHelper = spectator.inject(ModalHelper);
+      const modalOverlay = await modalHelper.showModalWindow({
+        title: 'Modal',
+        component: undefined,
+      });
+      const modalIonModal = await ionModalController.getTop();
+      expect(modalIonModal).toBeTruthy();
+      overlay = await alertHelper.showAlert({ title: 'Alert on top of modal' });
+      ionModal = await ionModalController.getTop();
+      expect(ionModal).toBeTruthy();
+      backdrop = ionModal.querySelector('ion-backdrop');
+      expect(backdrop).toHaveComputedStyle({ opacity: backdropOpacity });
+      await modalOverlay.dismiss();
+    });
+  });
+});
