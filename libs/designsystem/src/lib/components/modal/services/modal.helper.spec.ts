@@ -101,7 +101,7 @@ describe('ModalHelper', () => {
           (window.frameElement as HTMLIFrameElement).style.width = smallScreenWidth;
           (window.frameElement as HTMLIFrameElement).style.height = smallScreenHeight;
           // Ensure window has resized before executing:
-          setTimeout(done, 1);
+          setTimeout(done, 10);
         }
       });
 
