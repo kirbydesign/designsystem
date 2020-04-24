@@ -17,12 +17,13 @@ export class ActionSheetHelper {
 
     const ionModal = await this.ionicModalController.create({
       component: ActionSheetComponent,
-      cssClass: 'kirby-action-sheet',
+      cssClass: ['kirby-overlay', 'kirby-action-sheet'],
       componentProps: {
         ...config,
         cancel: cancel,
         itemSelect: itemSelect,
       },
+      backdropDismiss: false,
     });
 
     const cancelSubscription: Subscription = cancel.subscribe(() => ionModal.dismiss());

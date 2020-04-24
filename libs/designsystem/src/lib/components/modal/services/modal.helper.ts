@@ -21,6 +21,7 @@ export class ModalHelper {
     const ionModal = await this.ionicModalController.create({
       component: config.flavor === 'compact' ? ModalCompactWrapperComponent : ModalWrapperComponent,
       cssClass: [
+        'kirby-overlay',
         'kirby-modal',
         config.flavor === 'drawer' ? 'kirby-drawer' : null,
         config.flavor === 'compact' ? 'kirby-modal-compact' : null,

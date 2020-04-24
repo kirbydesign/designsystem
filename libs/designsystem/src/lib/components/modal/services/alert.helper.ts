@@ -13,7 +13,7 @@ export class AlertHelper {
     const ionModal = await this.ionicModalController.create({
       component: AlertComponent,
       componentProps: this.getComponentProps(config),
-      cssClass: 'kirby-alert',
+      cssClass: ['kirby-overlay', 'kirby-alert'],
       mode: 'ios',
       backdropDismiss: false,
     });
