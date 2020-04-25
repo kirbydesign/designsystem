@@ -113,7 +113,7 @@ describe('ModalHelper', () => {
       });
 
       it('modal should have correct backdrop style', () => {
-        expect(backdrop).toHaveComputedStyle({ opacity: ionicTransparentBackdropOpacity });
+        expect(backdrop).toHaveComputedStyle({ opacity: backdropOpacity });
       });
 
       it('modal should have correct backdrop style when opened on presenting element', async () => {
