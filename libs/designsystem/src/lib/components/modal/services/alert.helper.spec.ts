@@ -1,6 +1,7 @@
 import { IonicModule, ModalController as IonicModalController } from '@ionic/angular';
 import { createService } from '@ngneat/spectator';
 
+import { DesignTokenHelper } from '../../../helpers';
 import { AlertHelper } from './alert.helper';
 import { ModalHelper } from './modal.helper';
 import { Overlay } from './modal.interfaces';
@@ -39,12 +40,16 @@ describe('AlertHelper', () => {
     });
 
     it('alert should have correct backdrop style', () => {
+      const modalShadow = ionModal.querySelector<HTMLElement>(':scope > .modal-shadow');
+      expect(modalShadow).toHaveComputedStyle({ display: 'none' });
       expect(backdrop).toHaveComputedStyle({ opacity: backdropOpacity });
     });
 
     it('modal wrapper should have correct max width', () => {
       const modalWrapper = ionModal.querySelector(':scope > .modal-wrapper');
-      expect(modalWrapper).toHaveComputedStyle({ 'max-width': '359px' });
+      expect(modalWrapper).toHaveComputedStyle({
+        'max-width': DesignTokenHelper.compactModalMaxWidth(),
+      });
     });
 
     it('alert should have correct backdrop style when opened on top of a modal', async () => {

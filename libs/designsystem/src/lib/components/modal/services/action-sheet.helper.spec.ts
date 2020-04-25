@@ -39,6 +39,8 @@ describe('ActionSheetHelper', () => {
     });
 
     it('action-sheet should have correct backdrop style', () => {
+      const modalShadow = ionModal.querySelector<HTMLElement>(':scope > .modal-shadow');
+      expect(modalShadow).toHaveComputedStyle({ display: 'none' });
       expect(backdrop).toHaveComputedStyle({ opacity: backdropOpacity });
     });
 
