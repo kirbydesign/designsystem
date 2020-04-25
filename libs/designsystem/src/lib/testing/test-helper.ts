@@ -30,6 +30,13 @@ export class TestHelper {
     return window.getComputedStyle(element).getPropertyValue(propertyName);
   }
 
+  public static screensize = {
+    phonesmall: { width: '320px', height: '568px' },
+    phone: { width: '375px', height: '667px' },
+    tablet: { width: '768px', height: '1024px' },
+    desktop: { width: '1024px', height: '1366px' },
+  };
+
   public static resizeTestWindow(size: { width?: string; height?: string }): Promise<void> {
     return new Promise((resolve, reject) => {
       if (!window.frameElement) {
