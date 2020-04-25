@@ -1,6 +1,7 @@
 import { IonicModule, ModalController as IonicModalController } from '@ionic/angular';
 import { createService } from '@ngneat/spectator';
 
+import { TestHelper } from '../../../testing/test-helper';
 import { ModalHelper } from './modal.helper';
 import { Overlay } from './modal.interfaces';
 
@@ -8,8 +9,6 @@ describe('ModalHelper', () => {
   let modalHelper: ModalHelper;
   const backdropOpacity = '0.4';
   const ionicTransparentBackdropOpacity = '0.01';
-  const smallScreenWidth = '375px';
-  const smallScreenHeight = '667px';
 
   const spectator = createService({
     service: ModalHelper,
@@ -92,24 +91,12 @@ describe('ModalHelper', () => {
       let backdrop: HTMLIonBackdropElement;
       let ionModalController: IonicModalController;
 
-      beforeAll((done) => {
-        if (window.frameElement) {
-          console.log(
-            `Set test window width and height to: ${smallScreenWidth} x ${smallScreenHeight}`
-          );
-          (window.frameElement as HTMLIFrameElement).style.width = smallScreenWidth;
-          (window.frameElement as HTMLIFrameElement).style.height = smallScreenHeight;
-          // Ensure window has resized before executing:
-          setTimeout(done, 10);
-        }
+      beforeAll(async () => {
+        await TestHelper.resizeTestWindow(TestHelper.screensize.phone);
       });
 
       afterAll(() => {
-        if (window.frameElement) {
-          console.log('Resetting test window width');
-          (window.frameElement as HTMLIFrameElement).style.width = null;
-          (window.frameElement as HTMLIFrameElement).style.height = null;
-        }
+        TestHelper.resetTestWindow();
       });
 
       beforeEach(async () => {
