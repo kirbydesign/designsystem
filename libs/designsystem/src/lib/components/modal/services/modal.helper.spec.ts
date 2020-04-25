@@ -8,7 +8,7 @@ import { Overlay } from './modal.interfaces';
 describe('ModalHelper', () => {
   let modalHelper: ModalHelper;
   const backdropOpacity = '0.4';
-  const ionicTransparentBackdropOpacity = '0.01';
+  const backdropDefaultOpacity = '0.01';
 
   const spectator = createService({
     service: ModalHelper,
@@ -128,7 +128,7 @@ describe('ModalHelper', () => {
         expect(ionModal).toBeTruthy();
         backdrop = ionModal.querySelector('ion-backdrop');
         expect(backdrop).toBeTruthy();
-        expect(backdrop).toHaveComputedStyle({ opacity: ionicTransparentBackdropOpacity });
+        expect(backdrop).toHaveComputedStyle({ opacity: backdropDefaultOpacity });
         modalHelper.registerPresentingElement(undefined);
       });
 
@@ -141,7 +141,7 @@ describe('ModalHelper', () => {
         expect(secondIonModal).toBeTruthy();
         const secondBackdrop = secondIonModal.querySelector('ion-backdrop');
         expect(secondBackdrop).toBeTruthy();
-        expect(secondBackdrop).toHaveComputedStyle({ opacity: ionicTransparentBackdropOpacity });
+        expect(secondBackdrop).toHaveComputedStyle({ opacity: backdropDefaultOpacity });
         await secondOverlay.dismiss();
       });
 
