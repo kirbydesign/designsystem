@@ -54,6 +54,7 @@ describe('ModalHelper', () => {
       backdrop = ionModal.querySelector('ion-backdrop');
       expect(backdrop).toBeTruthy();
       expect(backdrop).toHaveComputedStyle({ opacity: backdropOpacity });
+      modalHelper.registerPresentingElement(undefined);
     });
 
     it('modal should have no visible backdrop when opened on another modal', async () => {
@@ -128,6 +129,7 @@ describe('ModalHelper', () => {
         backdrop = ionModal.querySelector('ion-backdrop');
         expect(backdrop).toBeTruthy();
         expect(backdrop).toHaveComputedStyle({ opacity: ionicTransparentBackdropOpacity });
+        modalHelper.registerPresentingElement(undefined);
       });
 
       it('modal should have no visible backdrop when opened on another modal', async () => {
