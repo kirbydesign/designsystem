@@ -16,7 +16,7 @@ import { DividerShowcaseComponent } from './divider-showcase/divider-showcase.co
     ...COMPONENT_IMPORTS,
     CommonModule,
     FormsModule,
-    IonicModule.forRoot(),
+    IonicModule,
     KirbyModule,
     IphoneModule,
   ],

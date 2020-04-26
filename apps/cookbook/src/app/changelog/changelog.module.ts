@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
 
 import { KirbyModule } from '@kirbydesign/designsystem';
 import { ChangelogComponent } from './changelog.component';
@@ -15,7 +14,6 @@ import { ChangelogComponent } from './changelog.component';
         component: ChangelogComponent,
       },
     ]),
-    IonicModule.forRoot(),
     KirbyModule,
   ],
   declarations: [ChangelogComponent],
