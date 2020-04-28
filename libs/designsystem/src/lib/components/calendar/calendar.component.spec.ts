@@ -32,7 +32,7 @@ describe('CalendarComponent', () => {
     expect(spectator.query('.day.today')).toHaveText(currentDayMoment.format('D'));
   });
 
-  it('should initially render the month of that date if selectedDate is specified', () => {
+  it('should initially render the month of selectedDate if specified', () => {
     spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
 
     verifyMonthAndYear('August 1997');
