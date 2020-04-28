@@ -1,5 +1,5 @@
 <div class="header">
-  <button class="previous-month-button" [disabled]="!canNavigateBack" (click)="changeMonth(-1)">
+  <button [disabled]="!canNavigateBack" (click)="changeMonth(-1)">
     <kirby-icon name="arrow-back"></kirby-icon>
   </button>
 
@@ -8,7 +8,7 @@
     ><span class="year">{{ activeYear }}</span>
   </div>
 
-  <button class="next-month-button" [disabled]="!canNavigateForward" (click)="changeMonth(1)">
+  <button [disabled]="!canNavigateForward" (click)="changeMonth(1)">
     <kirby-icon name="arrow-more"></kirby-icon>
   </button>
 </div>

@@ -58,23 +58,12 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
     return this._selectedDate;
   }
 
-  @Input() set selectedDate(value: Date) {
+  @Input() set selectedDate(valueLocalOrUTC: Date) {
+    const value = this.normalizeDate(valueLocalOrUTC);
     this.setActiveMonth(value);
     if (this.hasDateChanged(value, this._selectedDate)) {
       this.onSelectedDateChange(value);
-      this._selectedDate = this.normalizeDate(value);
-
-      if (!this._selectedDate || this.timezone === 'local') {
-        // emit as local time midnight
-        this.dateChange.emit(this._selectedDate);
-      } else {
-        // emit as equivalent date in utc midnight
-        const utcMidnightDate = moment
-          .utc(moment(this._selectedDate).format('YYYY-MM-DD'))
-          .toDate();
-
-        this.dateChange.emit(utcMidnightDate);
-      }
+      this._selectedDate = value;
     }
   }
 
@@ -350,7 +339,17 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
         .clone()
         .date(newDay.date)
         .toDate();
-      this.selectedDate = selectedDate;
+      this.onSelectedDateChange(selectedDate);
+      this._selectedDate = selectedDate;
+
+      if (this.timezone === 'local') {
+        // emit as local time midnight
+        this.dateChange.emit(selectedDate);
+      } else {
+        // emit as equivalent date in utc midnight
+        const utcMidnightDate = moment.utc(moment(selectedDate).format('YYYY-MM-DD')).toDate();
+        this.dateChange.emit(utcMidnightDate);
+      }
     }
   }
 

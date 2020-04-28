@@ -15,14 +15,16 @@ import { CalendarComponent } from '@kirbydesign/designsystem';
 })
 export class MockCalendarComponent {
   @Output() dateChange = new EventEmitter<Date>();
+  @Input() timezone: 'local' | 'UTC';
   @Input() disableWeekends: boolean;
   @Input() disablePastDates: boolean;
   @Input() disableFutureDates: boolean;
-  @Input() disabledDates: Date[];
-  @Input() minDate: Date;
-  @Input() maxDate: Date;
   @Input() alwaysEnableToday: boolean;
   @Input() selectedDate: Date;
+  @Input() disabledDates: Date[];
+  @Input() todayDate: Date;
+  @Input() minDate: Date;
+  @Input() maxDate: Date;
 }
 
 // #endregion

@@ -101,6 +101,14 @@ describe('CalendarComponent', () => {
     expect(captured.event).toEqual(localMidnightDate('1997-08-14'));
   });
 
+  it('should not emit a dateChange event when selectedDate is changed from the outside', () => {
+    const captured = captureDateChangeEvents();
+
+    spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
+
+    expect(captured.event).toBeUndefined();
+  });
+
   it('should not emit a dateChange event if disableWeekends is true and a weekend date is clicked', () => {
     spectator.setInput('disableWeekends', true);
     spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
@@ -201,8 +209,8 @@ describe('CalendarComponent', () => {
 
   // constants and utility functions
 
-  const SEL_NAV_BACK = '.previous-month-button';
-  const SEL_NAV_FORWARD = '.next-month-button';
+  const SEL_NAV_BACK = '.header button:first-of-type';
+  const SEL_NAV_FORWARD = '.header button:last-of-type';
 
   function localMidnightDate(yyyyMMdd) {
     return moment(yyyyMMdd).toDate();
@@ -217,7 +225,7 @@ describe('CalendarComponent', () => {
   }
 
   function trimmedTexts(selector: string) {
-    return spectator.queryAll(selector).map((_) => _.textContent.trim());
+    return spectator.queryAll<HTMLElement>(selector).map((_) => _.innerText);
   }
 
   function verifyMonthAndYear(monthAndYearText: string) {
