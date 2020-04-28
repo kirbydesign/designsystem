@@ -1,4 +1,4 @@
-import { Options } from 'highcharts';
+import { Options, SeriesPieOptions } from 'highcharts';
 import { InjectionToken } from '@angular/core';
 
 export const DONUT_OPTIONS = new InjectionToken<Options>('DonutOptions');
@@ -10,7 +10,7 @@ export const DonutOptions: Options = {
     },
     backgroundColor: 'transparent',
     type: '',
-    description: '',
+    // description: '',
   },
   title: {
     text: '',
@@ -65,7 +65,7 @@ export const DonutOptions: Options = {
     {
       name: '',
       type: 'pie',
-      data: (this === undefined ? [] : this.data) as Array<Highcharts.SeriesPieDataOptions>,
+      // data: (this === undefined ? [] : this.data) as Array<SeriesPieOptions>,
     },
   ],
   credits: {

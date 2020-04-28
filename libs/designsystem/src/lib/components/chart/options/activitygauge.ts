@@ -10,7 +10,7 @@ export const ActivityGaugeOptions: Options = {
     },
     backgroundColor: 'transparent',
     type: 'solidgauge',
-    description: '',
+    // description: '',
     height: '110%',
   },
   title: {
@@ -80,7 +80,7 @@ export const ActivityGaugeOptions: Options = {
   series: [
     {
       type: 'solidgauge',
-      data: (this === undefined ? [] : this.data) as Array<Highcharts.SeriesGaugeDataOptions>,
+      // data: (this === undefined ? [] : this.data) as Array<Highcharts.SeriesGaugeDataOptions>,
     },
   ],
 };

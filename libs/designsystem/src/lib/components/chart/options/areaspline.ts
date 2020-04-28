@@ -1,4 +1,4 @@
-import { Options } from 'highcharts';
+import { Options, SeriesAreasplineOptions } from 'highcharts';
 import { InjectionToken } from '@angular/core';
 
 export const AREASPLINE_OPTIONS = new InjectionToken<Options>('AreasplineOptions');
@@ -87,7 +87,7 @@ export const AreaSplineOptions: Options = {
   series: [
     {
       type: 'areaspline',
-      data: (this === undefined ? [] : this.data) as Array<Highcharts.SeriesAreasplineDataOptions>,
+      // data: (this === undefined ? [] : this.data) as Array<SeriesAreasplineOptions>,
     },
   ],
 };
