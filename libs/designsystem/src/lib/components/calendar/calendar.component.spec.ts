@@ -156,7 +156,7 @@ describe('CalendarComponent', () => {
     expect(captured.event).toEqual(today);
   });
 
-  it('should emit dateChange event as UTC midnights when when timezone is set to UTC', () => {
+  it('should emit dateChange event as UTC midnights when timezone is set to UTC', () => {
     spectator.setInput('timezone', 'UTC');
     spectator.setInput('selectedDate', utcMidnightDate('1997-08-29'));
 
