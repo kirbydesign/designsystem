@@ -39,7 +39,7 @@ import { CardComponent } from '../card/card.component';
 })
 export class DropdownComponent
   implements AfterContentChecked, AfterViewInit, OnDestroy, ControlValueAccessor {
-  static readonly OPEN_DELAY_IN_MS = 15;
+  static readonly OPEN_DELAY_IN_MS = 50;
 
   private _items: string[] | any[] = [];
   get items(): string[] | any[] {
