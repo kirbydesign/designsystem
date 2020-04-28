@@ -284,6 +284,52 @@ describe('ModalHelper', () => {
           expect(ionBackdrop).toHaveComputedStyle({ opacity: backdropOpacity });
           await overlay.dismiss();
         });
+
+        describe('when iOS safe-area is present', () => {
+          const safeAreaTop = '20px';
+          beforeAll(() => {
+            window.document.body.style.setProperty('--ion-safe-area-top', safeAreaTop);
+          });
+
+          afterAll(() => {
+            window.document.body.style.removeProperty('--ion-safe-area-top');
+          });
+
+          it('modal toolbar should respect iOS safe-area', async () => {
+            overlay = await modalHelper.showModalWindow({
+              title: 'Modal On Presenting Element',
+              component: undefined,
+            });
+            ionModal = await ionModalController.getTop();
+            const ionToolbar = ionModal.querySelector('ion-header > ion-toolbar');
+            expect(ionToolbar).toHaveComputedStyle({ 'padding-top': safeAreaTop });
+            await overlay.dismiss();
+          });
+
+          it('drawer should respect iOS safe-area', async () => {
+            overlay = await modalHelper.showModalWindow({
+              title: 'Modal On Presenting Element',
+              component: undefined,
+              flavor: 'drawer',
+            });
+            ionModal = await ionModalController.getTop();
+            const expectedPaddingTop = `${parseInt(size('m')) + parseInt(safeAreaTop)}px`;
+            expect(ionModal).toHaveComputedStyle({ 'padding-top': expectedPaddingTop });
+            await overlay.dismiss();
+          });
+
+          it('drawer toolbar should not have additional padding', async () => {
+            overlay = await modalHelper.showModalWindow({
+              title: 'Modal On Presenting Element',
+              component: undefined,
+              flavor: 'drawer',
+            });
+            ionModal = await ionModalController.getTop();
+            const ionToolbar = ionModal.querySelector('ion-header > ion-toolbar');
+            expect(ionToolbar).toHaveComputedStyle({ 'padding-top': '0px' });
+            await overlay.dismiss();
+          });
+        });
       });
 
       describe(`with default flavor ('modal')`, () => {
@@ -409,6 +455,52 @@ describe('ModalHelper', () => {
           expect(secondBackdrop).toBeTruthy();
           expect(secondBackdrop).toHaveComputedStyle({ opacity: backdropOpacity });
           await secondOverlay.dismiss();
+        });
+      });
+
+      describe('when iOS safe-area is present', () => {
+        const safeAreaTop = '20px';
+        beforeAll(() => {
+          window.document.body.style.setProperty('--ion-safe-area-top', safeAreaTop);
+        });
+
+        afterAll(() => {
+          window.document.body.style.removeProperty('--ion-safe-area-top');
+        });
+
+        it('modal toolbar should respect iOS safe-area', async () => {
+          overlay = await modalHelper.showModalWindow({
+            title: 'Modal On Presenting Element',
+            component: undefined,
+          });
+          ionModal = await ionModalController.getTop();
+          const ionToolbar = ionModal.querySelector('ion-header > ion-toolbar');
+          expect(ionToolbar).toHaveComputedStyle({ 'padding-top': safeAreaTop });
+          await overlay.dismiss();
+        });
+
+        it('drawer should respect iOS safe-area', async () => {
+          overlay = await modalHelper.showModalWindow({
+            title: 'Modal On Presenting Element',
+            component: undefined,
+            flavor: 'drawer',
+          });
+          ionModal = await ionModalController.getTop();
+          const expectedPaddingTop = `${parseInt(size('m')) + parseInt(safeAreaTop)}px`;
+          expect(ionModal).toHaveComputedStyle({ 'padding-top': expectedPaddingTop });
+          await overlay.dismiss();
+        });
+
+        it('drawer toolbar should not have additional padding', async () => {
+          overlay = await modalHelper.showModalWindow({
+            title: 'Modal On Presenting Element',
+            component: undefined,
+            flavor: 'drawer',
+          });
+          ionModal = await ionModalController.getTop();
+          const ionToolbar = ionModal.querySelector('ion-header > ion-toolbar');
+          expect(ionToolbar).toHaveComputedStyle({ 'padding-top': '0px' });
+          await overlay.dismiss();
         });
       });
     });
