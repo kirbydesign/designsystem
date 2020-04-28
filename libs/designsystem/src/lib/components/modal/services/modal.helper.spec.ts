@@ -241,18 +241,16 @@ describe('ModalHelper', () => {
         await secondOverlay.dismiss();
       });
     });
-  });
 
-  describe('on small screens', () => {
-    beforeAll(async () => {
-      await TestHelper.resizeTestWindow(TestHelper.screensize.phone);
-    });
+    describe('on small screens', () => {
+      beforeAll(async () => {
+        await TestHelper.resizeTestWindow(TestHelper.screensize.phone);
+      });
 
-    afterAll(() => {
-      TestHelper.resetTestWindow();
-    });
+      afterAll(() => {
+        TestHelper.resetTestWindow();
+      });
 
-    describe('showModalWindow', () => {
       describe(`when opened on presenting element`, () => {
         beforeEach(() => {
           modalHelper.registerPresentingElement(dummyPresentingElement);
