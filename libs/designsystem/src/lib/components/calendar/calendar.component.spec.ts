@@ -6,7 +6,7 @@ import { CalendarComponent, IconComponent } from '..';
 
 // NOTE: when specifying multiple input properties, set selectedDate
 // as the last one. This makes the component update without the need to
-// explicitly call spectatir.comlponent.ngOnChanges()
+// explicitly call spectator.component.ngOnChanges()
 
 describe('CalendarComponent', () => {
   let spectator: SpectatorHost<CalendarComponent>;
