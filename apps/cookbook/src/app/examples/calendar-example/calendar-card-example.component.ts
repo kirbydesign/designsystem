@@ -32,7 +32,7 @@ export class CalendarCardExampleComponent implements OnChanges {
 
       if (this.selectedDate) {
         // realign selectedDate with the timezone that is now used, or the rendered date will
-        // be midleading and confusing
+        // be misleading and confusing
         if (this.useTimezoneUTC) {
           // realign local -> UTC
           this.selectedDate = moment.utc(moment(this.selectedDate).format('YYYY-MM-DD')).toDate();
