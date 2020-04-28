@@ -86,6 +86,12 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     }
   }
 
+  blurActiveElement() {
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
+  }
+
   private checkForEmbeddedFooter() {
     const embeddedComponentElement = this.ionContentElement.nativeElement.firstElementChild;
     if (embeddedComponentElement) {
