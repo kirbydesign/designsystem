@@ -13,6 +13,7 @@ describe('ModalHelper', () => {
   let ionModal: HTMLIonModalElement;
   let ionBackdrop: HTMLIonBackdropElement;
   let ionModalWrapper: HTMLElement;
+  let dummyPresentingElement: HTMLElement;
 
   const backdropOpacity = '0.4';
   const backdropDefaultOpacity = '0.01';
@@ -25,6 +26,22 @@ describe('ModalHelper', () => {
     imports: [IonicModule.forRoot({ mode: 'ios', _testing: true })],
   });
 
+  beforeAll(() => {
+    dummyPresentingElement = window.document.createElement('div');
+    dummyPresentingElement.innerHTML = '<h1>Dummy Presenting Element</h1>';
+    dummyPresentingElement.style.position = 'absolute';
+    dummyPresentingElement.style.top = '0px';
+    dummyPresentingElement.style.right = '0px';
+    dummyPresentingElement.style.bottom = '0px';
+    dummyPresentingElement.style.left = '0px';
+    dummyPresentingElement.style.backgroundColor = DesignTokenHelper.backgroundColor();
+    window.document.body.append(dummyPresentingElement);
+  });
+
+  afterAll(() => {
+    dummyPresentingElement.remove();
+  });
+
   beforeEach(() => {
     modalHelper = spectator.service;
     ionModalController = spectator.inject(IonicModalController);
@@ -32,8 +49,15 @@ describe('ModalHelper', () => {
 
   describe('showModalWindow', () => {
     describe(`when opened on presenting element`, () => {
+      beforeEach(() => {
+        modalHelper.registerPresentingElement(dummyPresentingElement);
+      });
+
+      afterEach(() => {
+        modalHelper.registerPresentingElement(undefined);
+      });
+
       it('modal should have correct backdrop style', async () => {
-        modalHelper.registerPresentingElement(window.document.body);
         overlay = await modalHelper.showModalWindow({
           title: 'Modal On Presenting Element',
           component: undefined,
@@ -42,11 +66,9 @@ describe('ModalHelper', () => {
         ionBackdrop = ionModal.querySelector(':scope > ion-backdrop');
         expect(ionBackdrop).toHaveComputedStyle({ opacity: backdropOpacity });
         await overlay.dismiss();
-        modalHelper.registerPresentingElement(undefined);
       });
 
       it('drawer should have correct backdrop style', async () => {
-        modalHelper.registerPresentingElement(window.document.body);
         overlay = await modalHelper.showModalWindow({
           title: 'Drawer On Presenting Element',
           component: undefined,
@@ -56,7 +78,6 @@ describe('ModalHelper', () => {
         ionBackdrop = ionModal.querySelector(':scope > ion-backdrop');
         expect(ionBackdrop).toHaveComputedStyle({ opacity: backdropOpacity });
         await overlay.dismiss();
-        modalHelper.registerPresentingElement(undefined);
       });
     });
 
@@ -233,8 +254,15 @@ describe('ModalHelper', () => {
 
     describe('showModalWindow', () => {
       describe(`when opened on presenting element`, () => {
+        beforeEach(() => {
+          modalHelper.registerPresentingElement(dummyPresentingElement);
+        });
+
+        afterEach(() => {
+          modalHelper.registerPresentingElement(undefined);
+        });
+
         it('modal should have correct backdrop style', async () => {
-          modalHelper.registerPresentingElement(window.document.body);
           overlay = await modalHelper.showModalWindow({
             title: 'Modal On Presenting Element',
             component: undefined,
@@ -243,11 +271,9 @@ describe('ModalHelper', () => {
           ionBackdrop = ionModal.querySelector(':scope > ion-backdrop');
           expect(ionBackdrop).toHaveComputedStyle({ opacity: backdropDefaultOpacity });
           await overlay.dismiss();
-          modalHelper.registerPresentingElement(undefined);
         });
 
         it('drawer should have correct backdrop style', async () => {
-          modalHelper.registerPresentingElement(window.document.body);
           overlay = await modalHelper.showModalWindow({
             title: 'Drawer On Presenting Element',
             component: undefined,
@@ -257,7 +283,6 @@ describe('ModalHelper', () => {
           ionBackdrop = ionModal.querySelector(':scope > ion-backdrop');
           expect(ionBackdrop).toHaveComputedStyle({ opacity: backdropOpacity });
           await overlay.dismiss();
-          modalHelper.registerPresentingElement(undefined);
         });
       });
 
