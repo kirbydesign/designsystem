@@ -16,9 +16,12 @@ export class CalendarShowcaseComponent {
   disableFutureDates = false;
   setMinDate = false;
   setMaxDate = false;
+  setTodayDate = false;
   setDisabledDates = false;
+  useTimezoneUTC = false;
   minDate: Date;
   maxDate: Date;
+  todayDate: Date;
 
   constructor() {
     const today = new Date();
@@ -27,6 +30,8 @@ export class CalendarShowcaseComponent {
     this.minDate.setDate(today.getDate() - 60);
     this.maxDate = new Date();
     this.maxDate.setDate(today.getDate() + 60);
+    this.todayDate = new Date();
+    this.todayDate.setDate(today.getDate() + 3);
   }
 
   exampleHtml: string = require('!raw-loader!../../examples/calendar-example/calendar-example.component.html')
@@ -66,6 +71,13 @@ export class CalendarShowcaseComponent {
       inputValues: ['true | false'],
     },
     {
+      name: 'todayDate',
+      description:
+        '(Optional) The date to be marked as today. If omitted, will use current date in browser timezone.',
+      defaultValue: 'null',
+      inputValues: ['Date'],
+    },
+    {
       name: 'minDate',
       description: '(Optional) The earliest date that should be selectable.',
       defaultValue: 'null',
@@ -82,6 +94,13 @@ export class CalendarShowcaseComponent {
       description: '(Optional) Array of dates that should not be selectable.',
       defaultValue: 'null',
       inputValues: ['Date[]'],
+    },
+    {
+      name: 'timezone',
+      description:
+        '(Optional) Specify timezone for aligning Date objects. Emitted Date objects will be constructed to point to midnight in the given timezone. Input Date objects may be in either of the two timezones but we highly recommend aligning them with midnight.',
+      defaultValue: '"local"',
+      inputValues: ['"local" | "UTC"'],
     },
   ];
 }
