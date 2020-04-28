@@ -1,0 +1,7 @@
+@import '../scss/global-styles';
+
+// Hide svg's from Karma that has to be included as 'dom' filetype
+// See: https://github.com/karma-runner/karma/issues/3271#issuecomment-465622874
+body > svg {
+  display: none;
+}

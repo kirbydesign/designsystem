@@ -1,11 +1,17 @@
 @import './libs/designsystem/src/lib/scss/utils';
 
-cookbook-segmented-control-example {
-  padding: 0;
+h2:not(:first-child),
+h3:not(:first-child) {
+  margin-top: size('l');
 }
 
-h2:not(:first-child) {
-  margin-top: size('l');
+h3 {
+  border-bottom: 1px dotted get-color('medium');
+}
+
+cookbook-segmented-control-example-default,
+cookbook-segmented-control-example-grouped {
+  margin-bottom: size('xs');
 }
 
 .badge-note {

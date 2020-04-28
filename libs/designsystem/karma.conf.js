@@ -10,11 +10,25 @@ module.exports = function(config) {
     ...baseConfig,
     coverageIstanbulReporter: {
       ...baseConfig.coverageIstanbulReporter,
-      dir: join(__dirname, '../../coverage/libs/designsystem')
+      dir: join(__dirname, '../../coverage/libs/designsystem'),
     },
     junitReporter: {
-      outputDir: require('path').join(__dirname, '../../test-reports')
+      outputDir: require('path').join(__dirname, '../../test-reports'),
     },
     reporters: ['kjhtml', 'junit', 'spec'],
+    files: [
+      {
+        pattern: './src/lib/icons/svg/*.svg',
+        type: 'dom',
+        watched: false,
+        include: false,
+        served: true,
+        nocache: false,
+      },
+    ],
+    proxies: {
+      '/assets/kirby/icons/svg/': '/base/src/lib/icons/svg/',
+      '/svg/': '/base/src/lib/icons/svg/',
+    },
   });
 };

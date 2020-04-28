@@ -1,8 +1,20 @@
 <div class="example">
-  <cookbook-example-viewer [html]="example.template">
-    <div>
-      <cookbook-segmented-control-example #example></cookbook-segmented-control-example>
-    </div>
+  <h3>Default</h3>
+  <cookbook-example-viewer [html]="example.template" [ts]="example.codeSnippet">
+    <cookbook-segmented-control-example-default
+      #example
+    ></cookbook-segmented-control-example-default>
+  </cookbook-example-viewer>
+
+  <h3>Grouped</h3>
+  <cookbook-example-viewer
+    [html]="groupedExample.template"
+    [ts]="groupedExample.codeSnippet"
+    [css]="groupedExample.styles"
+  >
+    <cookbook-segmented-control-example-grouped
+      #groupedExample
+    ></cookbook-segmented-control-example-grouped>
   </cookbook-example-viewer>
 
   <h2>Properties:</h2>

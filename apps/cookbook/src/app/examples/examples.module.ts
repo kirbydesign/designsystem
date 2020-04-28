@@ -7,11 +7,11 @@ import { CardExampleComponent } from './card-example/card-example.component';
 import { FirstEmbeddedModalExampleComponent } from './modal-example/first-embedded-modal-example/first-embedded-modal-example.component';
 import { SecondEmbeddedModalExampleComponent } from './modal-example/second-embedded-modal-example/second-embedded-modal-example.component';
 import { ModalCompactExampleComponent } from './modal-example/compact-example/modal-compact-example.component';
-import { ModalWithFooterExampleComponent } from './modal-example/modal-with-footer-example/modal-with-footer-example.component';
 import { FormFieldExamplesModule } from './form-field-example/form-field-example.module';
 import { ListExamplesModule } from './list/list-example.module';
 import { ItemExampleModule } from './item-example/item-example.module';
 import { DropdownExampleModule } from './dropdown-example/dropdown-example.module';
+import { SegmentedControlExampleModule } from './segmented-control-example/segmented-control-example.module';
 
 @NgModule({
   imports: [
@@ -21,6 +21,7 @@ import { DropdownExampleModule } from './dropdown-example/dropdown-example.modul
     ItemExampleModule,
     ListExamplesModule,
     DropdownExampleModule,
+    SegmentedControlExampleModule,
   ],
   declarations: COMPONENT_DECLARATIONS,
   exports: [
@@ -29,6 +30,7 @@ import { DropdownExampleModule } from './dropdown-example/dropdown-example.modul
     ItemExampleModule,
     ListExamplesModule,
     DropdownExampleModule,
+    SegmentedControlExampleModule,
   ],
   providers: [PROVIDER_DECLARATIONS],
   entryComponents: [
@@ -36,7 +38,6 @@ import { DropdownExampleModule } from './dropdown-example/dropdown-example.modul
     FirstEmbeddedModalExampleComponent,
     SecondEmbeddedModalExampleComponent,
     ModalCompactExampleComponent,
-    ModalWithFooterExampleComponent,
   ],
 })
 export class ExamplesModule {}

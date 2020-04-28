@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 import { ModalConfig, ModalController } from '@kirbydesign/designsystem';
 import { FirstEmbeddedModalExampleComponent } from './first-embedded-modal-example/first-embedded-modal-example.component';
 import { ModalCompactExampleComponent } from './compact-example/modal-compact-example.component';
-import { ModalWithFooterExampleComponent } from './modal-with-footer-example/modal-with-footer-example.component';
 
 const config = {
   selector: 'cookbook-modal-example',
@@ -65,38 +64,44 @@ export class ParentComponent() {
 // Pass the data, which will be available in the parent callback:
 @Component()
 export class EmbeddedComponent() {
+  constructor(@Optional() @SkipSelf() private modal: Modal) {}
+
   const returnData: CustomDataType = {...};
-  this.modalController.hideTopmost(returnData);
+  this.modal.close(returnData);
 }`,
-  scrollingCodeSnippet: `// scrollToTop example - with long scroll animation:
-this.modalController.scrollToTop(KirbyAnimation.Duration.LONG);
+  scrollingCodeSnippet: `import { KirbyAnimation, Modal } from '@kirbydesign/designsystem';
+...
+constructor(@Optional() @SkipSelf() private modal: Modal) {}
+
+// scrollToTop example - with long scroll animation:
+this.modal.scrollToTop(KirbyAnimation.Duration.LONG);
 
 // scrollToBottom example:
-this.modalController.scrollToBottom();`,
-  embeddedCodeSnippet: `import { COMPONENT_PROPS, ModalController } from '@kirbydesign/designsystem';
+this.modal.scrollToBottom();`,
+  embeddedCodeSnippet: `import { Component, Inject } from '@angular/core';
+import { COMPONENT_PROPS } from '@kirbydesign/designsystem';
 
 @Component()
 export class EmbeddedComponent() {
-  constructor(
-    @Inject(COMPONENT_PROPS) private componentProps,
-    private modalController: ModalController,
-  ) {
+  constructor(@Inject(COMPONENT_PROPS) private componentProps) {
     this.props = componentProps;
   }
 }`,
-  hideTopmostCodeSnippet: `@Component()
-export class EmbeddedComponent() {
+  hideTopmostCodeSnippet: `import { Component, Optional, SkipSelf } from '@angular/core';
+import { Modal } from '@kirbydesign/designsystem';
 
-  constructor(private modalController: ModalController) {}
+@Component()
+export class EmbeddedComponent() {
+  constructor(@Optional() @SkipSelf() private modal: Modal) {}
 
   onDismiss() {
-    this.modalController.hideTopmost();
+    this.modal.close();
   }
     
   // (Optional) You can additionally pass data, which will be available in the parent callback:
   onDismiss() {
     const returnData = {...};
-    this.modalController.hideTopmost(returnData);
+    this.modal.close(returnData);
   }
 }`,
 };
@@ -118,13 +123,14 @@ export class ModalExampleComponent {
 
   constructor(private modalController: ModalController) {}
 
-  showModal() {
+  showModal(showFooter = false) {
     const config: ModalConfig = {
       title: 'My Modal Title',
       component: FirstEmbeddedModalExampleComponent,
       componentProps: {
         prop1: 'value1',
         prop2: 'value2',
+        showFooter: showFooter,
       },
     };
     this.modalController.showModal(config, this.onModalClose);
@@ -155,15 +161,7 @@ export class ModalExampleComponent {
   }
 
   showModalWithFooter() {
-    const config: ModalConfig = {
-      title: 'Modal with footer',
-      component: ModalWithFooterExampleComponent,
-      componentProps: {
-        prop1: 'value1',
-        prop2: 'value2',
-      },
-    };
-    this.modalController.showModal(config, this.onModalClose);
+    this.showModal(true);
   }
 
   onModalClose(data: any): void {
