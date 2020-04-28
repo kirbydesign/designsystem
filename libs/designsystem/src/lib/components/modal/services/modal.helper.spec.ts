@@ -11,8 +11,8 @@ describe('ModalHelper', () => {
   let ionModalController: IonicModalController;
   let overlay: Overlay;
   let ionModal: HTMLIonModalElement;
-  let backdrop: HTMLIonBackdropElement;
-  let modalWrapper: HTMLElement;
+  let ionBackdrop: HTMLIonBackdropElement;
+  let ionModalWrapper: HTMLElement;
 
   const backdropOpacity = '0.4';
   const backdropDefaultOpacity = '0.01';
@@ -39,8 +39,8 @@ describe('ModalHelper', () => {
           component: undefined,
         });
         ionModal = await ionModalController.getTop();
-        backdrop = ionModal.querySelector(':scope > ion-backdrop');
-        expect(backdrop).toHaveComputedStyle({ opacity: backdropOpacity });
+        ionBackdrop = ionModal.querySelector(':scope > ion-backdrop');
+        expect(ionBackdrop).toHaveComputedStyle({ opacity: backdropOpacity });
         await overlay.dismiss();
         modalHelper.registerPresentingElement(undefined);
       });
@@ -53,8 +53,8 @@ describe('ModalHelper', () => {
           flavor: 'drawer',
         });
         ionModal = await ionModalController.getTop();
-        backdrop = ionModal.querySelector(':scope > ion-backdrop');
-        expect(backdrop).toHaveComputedStyle({ opacity: backdropOpacity });
+        ionBackdrop = ionModal.querySelector(':scope > ion-backdrop');
+        expect(ionBackdrop).toHaveComputedStyle({ opacity: backdropOpacity });
         await overlay.dismiss();
         modalHelper.registerPresentingElement(undefined);
       });
@@ -65,10 +65,10 @@ describe('ModalHelper', () => {
         overlay = await modalHelper.showModalWindow({ title: 'Modal', component: undefined });
         ionModal = await ionModalController.getTop();
         expect(ionModal).toBeTruthy();
-        modalWrapper = ionModal.querySelector(':scope > .modal-wrapper');
-        expect(modalWrapper).toBeTruthy();
-        backdrop = ionModal.querySelector(':scope > ion-backdrop');
-        expect(backdrop).toBeTruthy();
+        ionModalWrapper = ionModal.querySelector(':scope > .modal-wrapper');
+        expect(ionModalWrapper).toBeTruthy();
+        ionBackdrop = ionModal.querySelector(':scope > ion-backdrop');
+        expect(ionBackdrop).toBeTruthy();
       });
 
       afterEach(async () => {
@@ -78,11 +78,11 @@ describe('ModalHelper', () => {
       it('modal should have correct backdrop style', () => {
         const modalShadow = ionModal.querySelector<HTMLElement>(':scope > .modal-shadow');
         expect(modalShadow).toHaveComputedStyle({ display: 'none' });
-        expect(backdrop).toHaveComputedStyle({ opacity: backdropOpacity });
+        expect(ionBackdrop).toHaveComputedStyle({ opacity: backdropOpacity });
       });
 
       it('modal wrapper should have correct style', () => {
-        expect(modalWrapper).toHaveComputedStyle({
+        expect(ionModalWrapper).toHaveComputedStyle({
           'background-color': backgroundColor,
           'border-radius': defaultBorderRadius,
         });
@@ -125,10 +125,10 @@ describe('ModalHelper', () => {
         });
         ionModal = await ionModalController.getTop();
         expect(ionModal).toBeTruthy();
-        modalWrapper = ionModal.querySelector(':scope > .modal-wrapper');
-        expect(modalWrapper).toBeTruthy();
-        backdrop = ionModal.querySelector(':scope > ion-backdrop');
-        expect(backdrop).toBeTruthy();
+        ionModalWrapper = ionModal.querySelector(':scope > .modal-wrapper');
+        expect(ionModalWrapper).toBeTruthy();
+        ionBackdrop = ionModal.querySelector(':scope > ion-backdrop');
+        expect(ionBackdrop).toBeTruthy();
       });
 
       afterEach(async () => {
@@ -138,11 +138,11 @@ describe('ModalHelper', () => {
       it('modal should have correct backdrop style', () => {
         const modalShadow = ionModal.querySelector<HTMLElement>(':scope > .modal-shadow');
         expect(modalShadow).toHaveComputedStyle({ display: 'none' });
-        expect(backdrop).toHaveComputedStyle({ opacity: backdropOpacity });
+        expect(ionBackdrop).toHaveComputedStyle({ opacity: backdropOpacity });
       });
 
       it('modal wrapper should have correct style', () => {
-        expect(modalWrapper).toHaveComputedStyle({
+        expect(ionModalWrapper).toHaveComputedStyle({
           'background-color': backgroundColor,
           'border-radius': defaultBorderRadius,
         });
@@ -176,10 +176,10 @@ describe('ModalHelper', () => {
         });
         ionModal = await ionModalController.getTop();
         expect(ionModal).toBeTruthy();
-        modalWrapper = ionModal.querySelector(':scope > .modal-wrapper');
-        expect(modalWrapper).toBeTruthy();
-        backdrop = ionModal.querySelector(':scope > ion-backdrop');
-        expect(backdrop).toBeTruthy();
+        ionModalWrapper = ionModal.querySelector(':scope > .modal-wrapper');
+        expect(ionModalWrapper).toBeTruthy();
+        ionBackdrop = ionModal.querySelector(':scope > ion-backdrop');
+        expect(ionBackdrop).toBeTruthy();
       });
 
       afterEach(async () => {
@@ -189,17 +189,17 @@ describe('ModalHelper', () => {
       it('modal should have correct backdrop style', () => {
         const modalShadow = ionModal.querySelector<HTMLElement>(':scope > .modal-shadow');
         expect(modalShadow).toHaveComputedStyle({ display: 'none' });
-        expect(backdrop).toHaveComputedStyle({ opacity: backdropOpacity });
+        expect(ionBackdrop).toHaveComputedStyle({ opacity: backdropOpacity });
       });
 
       it('modal wrapper should have correct style', () => {
-        expect(modalWrapper).toHaveComputedStyle({
+        expect(ionModalWrapper).toHaveComputedStyle({
           'background-color': backgroundColor,
           'border-radius': defaultBorderRadius,
           'max-width': DesignTokenHelper.compactModalMaxWidth(),
           'text-align': 'center',
         });
-        expect(modalWrapper.style.height).toEqual('');
+        expect(ionModalWrapper.style.height).toEqual('');
       });
 
       it('modal should have correct padding-top', () => {
@@ -240,8 +240,8 @@ describe('ModalHelper', () => {
             component: undefined,
           });
           ionModal = await ionModalController.getTop();
-          backdrop = ionModal.querySelector(':scope > ion-backdrop');
-          expect(backdrop).toHaveComputedStyle({ opacity: backdropDefaultOpacity });
+          ionBackdrop = ionModal.querySelector(':scope > ion-backdrop');
+          expect(ionBackdrop).toHaveComputedStyle({ opacity: backdropDefaultOpacity });
           await overlay.dismiss();
           modalHelper.registerPresentingElement(undefined);
         });
@@ -254,8 +254,8 @@ describe('ModalHelper', () => {
             flavor: 'drawer',
           });
           ionModal = await ionModalController.getTop();
-          backdrop = ionModal.querySelector(':scope > ion-backdrop');
-          expect(backdrop).toHaveComputedStyle({ opacity: backdropOpacity });
+          ionBackdrop = ionModal.querySelector(':scope > ion-backdrop');
+          expect(ionBackdrop).toHaveComputedStyle({ opacity: backdropOpacity });
           await overlay.dismiss();
           modalHelper.registerPresentingElement(undefined);
         });
@@ -267,10 +267,10 @@ describe('ModalHelper', () => {
           overlay = await modalHelper.showModalWindow({ title: 'Modal', component: undefined });
           ionModal = await ionModalController.getTop();
           expect(ionModal).toBeTruthy();
-          modalWrapper = ionModal.querySelector(':scope > .modal-wrapper');
-          expect(modalWrapper).toBeTruthy();
-          backdrop = ionModal.querySelector(':scope > ion-backdrop');
-          expect(backdrop).toBeTruthy();
+          ionModalWrapper = ionModal.querySelector(':scope > .modal-wrapper');
+          expect(ionModalWrapper).toBeTruthy();
+          ionBackdrop = ionModal.querySelector(':scope > ion-backdrop');
+          expect(ionBackdrop).toBeTruthy();
         });
 
         afterEach(async () => {
@@ -280,11 +280,11 @@ describe('ModalHelper', () => {
         it('modal should have correct backdrop style', () => {
           const modalShadow = ionModal.querySelector<HTMLElement>(':scope > .modal-shadow');
           expect(modalShadow).toHaveComputedStyle({ display: 'none' });
-          expect(backdrop).toHaveComputedStyle({ opacity: backdropOpacity });
+          expect(ionBackdrop).toHaveComputedStyle({ opacity: backdropOpacity });
         });
 
         it('modal wrapper should have correct style', () => {
-          expect(modalWrapper).toHaveComputedStyle({
+          expect(ionModalWrapper).toHaveComputedStyle({
             'background-color': backgroundColor,
             'border-radius': '0px',
           });
@@ -315,7 +315,7 @@ describe('ModalHelper', () => {
           });
 
           it('modal wrapper should have correct style', () => {
-            expect(modalWrapper).toHaveComputedStyle({ 'border-radius': '0px' });
+            expect(ionModalWrapper).toHaveComputedStyle({ 'border-radius': '0px' });
           });
         });
 
@@ -343,10 +343,10 @@ describe('ModalHelper', () => {
           });
           ionModal = await ionModalController.getTop();
           expect(ionModal).toBeTruthy();
-          modalWrapper = ionModal.querySelector(':scope > .modal-wrapper');
-          expect(modalWrapper).toBeTruthy();
-          backdrop = ionModal.querySelector(':scope > ion-backdrop');
-          expect(backdrop).toBeTruthy();
+          ionModalWrapper = ionModal.querySelector(':scope > .modal-wrapper');
+          expect(ionModalWrapper).toBeTruthy();
+          ionBackdrop = ionModal.querySelector(':scope > ion-backdrop');
+          expect(ionBackdrop).toBeTruthy();
         });
 
         afterEach(async () => {
@@ -354,11 +354,11 @@ describe('ModalHelper', () => {
         });
 
         it('drawer should have correct backdrop style', () => {
-          expect(backdrop).toHaveComputedStyle({ opacity: backdropOpacity });
+          expect(ionBackdrop).toHaveComputedStyle({ opacity: backdropOpacity });
         });
 
         it('drawer wrapper should have correct style', () => {
-          expect(modalWrapper).toHaveComputedStyle({
+          expect(ionModalWrapper).toHaveComputedStyle({
             'background-color': backgroundColor,
 
             'border-top-left-radius': defaultBorderRadius,
