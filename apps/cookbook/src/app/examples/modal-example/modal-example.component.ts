@@ -87,7 +87,7 @@ export class EmbeddedComponent() {
     this.props = componentProps;
   }
 }`,
-  hideTopmostCodeSnippet: `import { Component, Optional, SkipSelf } from '@angular/core';
+  closeModalCodeSnippet: `import { Component, Optional, SkipSelf } from '@angular/core';
 import { Modal } from '@kirbydesign/designsystem';
 
 @Component()
@@ -125,7 +125,7 @@ export class ModalExampleComponent {
   callbackWithDataCodeSnippet = config.callbackWithDataCodeSnippet;
   scrollingCodeSnippet = config.scrollingCodeSnippet;
   embeddedCodeSnippet = config.embeddedCodeSnippet;
-  hideTopmostCodeSnippet = config.hideTopmostCodeSnippet;
+  closeModalCodeSnippet = config.closeModalCodeSnippet;
 
   constructor(private modalController: ModalController) {}
 
