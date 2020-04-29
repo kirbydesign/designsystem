@@ -107,16 +107,16 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   }
 
   @HostListener('window:keyboardWillShow')
-  protected onKeyboardWillShow() {
+  _onKeyboardWillShow() {
     this.keyboardVisible = true;
   }
 
   @HostListener('window:keyboardWillHide')
-  protected onKeyboardWillHide() {
+  _onKeyboardWillHide() {
     this.keyboardVisible = false;
   }
 
-  protected blurActiveElement() {
+  blurActiveElement() {
     if (document.activeElement instanceof HTMLElement) {
       document.activeElement.blur();
     }
