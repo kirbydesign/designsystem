@@ -100,7 +100,6 @@ export class ChartExampleComponent implements OnInit {
       },
       series: {
         color: getColor('secondary').value,
-        dashStyle: 'ShortDash',
         states: {
           hover: {
             enabled: false,
