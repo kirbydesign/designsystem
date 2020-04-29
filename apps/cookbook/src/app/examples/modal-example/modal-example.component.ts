@@ -97,6 +97,12 @@ export class EmbeddedComponent() {
   onDismiss() {
     this.modal.close();
   }
+
+  // (Optional) If you need to wait for the modal to close:
+  async onDismiss() {
+    await this.modal.close();
+    // Do something...
+  }
     
   // (Optional) You can additionally pass data, which will be available in the parent callback:
   onDismiss() {
