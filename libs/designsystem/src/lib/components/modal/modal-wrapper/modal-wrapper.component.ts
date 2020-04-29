@@ -25,6 +25,8 @@ import { Modal } from '../services/modal.interfaces';
   providers: [{ provide: Modal, useExisting: ModalWrapperComponent }],
 })
 export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDestroy {
+  static readonly KEYBOARD_HIDE_DELAY_IN_MS = 25;
+
   scrollY: number = Math.abs(window.scrollY);
   @Input() config: ModalConfig;
   componentPropsInjector: Injector;
@@ -81,11 +83,10 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     // then dismiss modal and return:
     this.blurActiveElement();
     return new Promise((resolve) => {
-      const keyboardHideDelayInMs = 25;
       setTimeout(async () => {
         await ionModalElement.dismiss(data);
         resolve();
-      }, keyboardHideDelayInMs);
+      }, ModalWrapperComponent.KEYBOARD_HIDE_DELAY_IN_MS);
     });
   }
 
