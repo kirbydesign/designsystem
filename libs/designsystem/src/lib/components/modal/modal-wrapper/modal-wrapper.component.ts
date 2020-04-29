@@ -64,9 +64,11 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     this.ionContent.scrollToBottom(scrollDuration || 0);
   }
 
-  close(data?: any) {
+  async close(data?: any): Promise<void> {
     const ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
-    ionModalElement && ionModalElement.dismiss(data);
+    if (ionModalElement) {
+      await ionModalElement.dismiss(data);
+    }
   }
 
   @HostListener('window:focus')
@@ -86,7 +88,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     }
   }
 
-  blurActiveElement() {
+  protected blurActiveElement() {
     if (document.activeElement instanceof HTMLElement) {
       document.activeElement.blur();
     }
