@@ -39,7 +39,7 @@ import { CardComponent } from '../card/card.component';
 })
 export class DropdownComponent
   implements AfterContentChecked, AfterViewInit, OnDestroy, ControlValueAccessor {
-  static readonly OPEN_DELAY_IN_MS = 50;
+  static readonly OPEN_DELAY_IN_MS = 100;
 
   private _items: string[] | any[] = [];
   get items(): string[] | any[] {
@@ -150,6 +150,7 @@ export class DropdownComponent
 
   private itemClickUnlisten: () => void;
   private intersectionObserverRef: IntersectionObserver;
+  private showDropdownTimeout;
 
   constructor(
     private renderer: Renderer2,
@@ -202,6 +203,10 @@ export class DropdownComponent
         if (!this._isOpening) {
           return;
         }
+        if (!this.isOpen) {
+          clearTimeout(this.showDropdownTimeout);
+          this.showDropdown();
+        }
         const entry = entries[0];
         const isVisible = entry.boundingClientRect.width > 0;
         if (isVisible && entry.intersectionRatio < 1) {
@@ -240,13 +245,19 @@ export class DropdownComponent
     }
     if (!this.isOpen) {
       this._isOpening = true;
-      setTimeout(() => {
-        this.isOpen = true;
-        this._isOpening = false;
-        this.scrollItemIntoView(this.selectedIndex);
-        this.changeDetectorRef.markForCheck();
-      }, DropdownComponent.OPEN_DELAY_IN_MS);
+      // ensures that the dropdown is opened in case the IntersectionObserverCallback isn't invoked
+      this.showDropdownTimeout = setTimeout(
+        () => this.showDropdown(),
+        DropdownComponent.OPEN_DELAY_IN_MS
+      );
     }
+  }
+
+  private showDropdown() {
+    this.isOpen = true;
+    this._isOpening = false;
+    this.scrollItemIntoView(this.selectedIndex);
+    this.changeDetectorRef.markForCheck();
   }
 
   close() {
