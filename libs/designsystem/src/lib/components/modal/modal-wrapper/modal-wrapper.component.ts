@@ -33,6 +33,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     HTMLIonContentElement
   >;
   private observer: MutationObserver;
+  private keyboardVisible = false;
 
   @HostBinding('class.drawer')
   get _isDrawer() {
@@ -66,9 +67,26 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
 
   async close(data?: any): Promise<void> {
     const ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
-    if (ionModalElement) {
-      await ionModalElement.dismiss(data);
+    if (!ionModalElement) {
+      return;
     }
+    if (!this.keyboardVisible) {
+      // No keyboard visible:
+      // Dismiss modal and return:
+      await ionModalElement.dismiss(data);
+      return;
+    }
+    // Keyboard visible:
+    // Blur active element and wait for keyboard to hide,
+    // then dismiss modal and return:
+    this.blurActiveElement();
+    return new Promise((resolve) => {
+      const keyboardHideDelayInMs = 25;
+      setTimeout(async () => {
+        await ionModalElement.dismiss(data);
+        resolve();
+      }, keyboardHideDelayInMs);
+    });
   }
 
   @HostListener('window:focus')
@@ -86,6 +104,16 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     if (input.tagName === 'INPUT' && input.closest('ion-modal')) {
       event.stopPropagation();
     }
+  }
+
+  @HostListener('window:keyboardWillShow')
+  protected onKeyboardWillShow() {
+    this.keyboardVisible = true;
+  }
+
+  @HostListener('window:keyboardWillHide')
+  protected onKeyboardWillHide() {
+    this.keyboardVisible = false;
   }
 
   protected blurActiveElement() {
