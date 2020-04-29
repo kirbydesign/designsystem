@@ -83,12 +83,8 @@ export class FirstEmbeddedModalExampleComponent {
   }
 
   close() {
-    this.modal.close();
-  }
-
-  onHideFirst() {
     let someTestData: number = Math.PI;
-    this.modalController.hideTopmost(someTestData);
+    this.modal.close(someTestData);
   }
 
   onSupplementaryActionSelect(args: any) {
