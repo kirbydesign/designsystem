@@ -4,6 +4,7 @@ import { Options, SeriesClickCallbackFunction, SeriesClickEventObject } from 'hi
 import { DesignTokenHelper, ModalController } from '@kirbydesign/designsystem';
 
 const getColor = DesignTokenHelper.getColor;
+const fontSize = DesignTokenHelper.fontSize;
 
 function colorPoints() {
   var series = this.series;
@@ -26,7 +27,7 @@ function colorPoints() {
   styleUrls: ['./chart-example.component.scss'],
 })
 export class ChartExampleComponent implements OnInit {
-  private monthlyExpenseData = [10, 1400, 300, 500, 100, 1000, 1100, 450, 1350, 1200, 1250, 600];
+  private monthlyExpenseData = [30, 1400, 300, 500, 100, 1000, 1100, 450, 1350, 1200, 1250, 600];
   private monthlyOverviewClick: SeriesClickCallbackFunction = (ev: SeriesClickEventObject) => {
     this.modalController.showAlert({
       title: 'Clicked chart',
@@ -36,6 +37,11 @@ export class ChartExampleComponent implements OnInit {
   };
   monthlyOverviewOptions: Options = {
     chart: {
+      animation: {
+        duration: 500,
+      },
+      height: 150,
+      backgroundColor: 'transparent',
       type: 'column',
       events: {
         load: colorPoints,
@@ -43,7 +49,7 @@ export class ChartExampleComponent implements OnInit {
       },
     },
     title: {
-      text: 'February 2020',
+      text: '',
     },
     xAxis: {
       categories: [
@@ -60,6 +66,13 @@ export class ChartExampleComponent implements OnInit {
         'jan',
         'feb',
       ],
+      labels: {
+        style: {
+          fontSize: fontSize('xxs'),
+          fontFamily: 'roboto',
+          color: getColor('black').value,
+        },
+      },
       lineWidth: 0,
       minorGridLineWidth: 0,
       lineColor: 'transparent',
@@ -73,9 +86,10 @@ export class ChartExampleComponent implements OnInit {
       plotLines: [
         {
           width: 1,
-          color: getColor('secondary').value,
+          color: getColor('semi-dark').value,
           dashStyle: 'Dash',
           value: 872,
+          zIndex: 10,
         },
       ],
       labels: {
