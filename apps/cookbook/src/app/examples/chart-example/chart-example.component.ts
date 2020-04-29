@@ -60,6 +60,11 @@ export class ChartExampleComponent implements OnInit {
         'jan',
         'feb',
       ],
+      lineWidth: 0,
+      minorGridLineWidth: 0,
+      lineColor: 'transparent',
+      minorTickLength: 0,
+      tickLength: 0,
     },
     yAxis: {
       title: {
@@ -67,21 +72,22 @@ export class ChartExampleComponent implements OnInit {
       },
       plotLines: [
         {
-          width: 2,
+          width: 1,
           color: getColor('secondary').value,
           dashStyle: 'Dash',
           value: 872,
         },
       ],
       labels: {
-        padding: 0,
-        overflow: 'justify',
-        x: 30,
-        y: -10,
+        enabled: false,
       },
       min: 0,
-      tickAmount: 2,
-      showLastLabel: true,
+      lineWidth: 0,
+      minorGridLineWidth: 0,
+      gridLineColor: 'transparent',
+      minorTickLength: 0,
+      tickLength: 0,
+      showLastLabel: false,
       showFirstLabel: false,
       tickPositioner: function() {
         var positions = [0, 1400];
