@@ -1,11 +1,13 @@
 <kirby-card>
   <kirby-calendar
+    [timezone]="useTimezoneUTC ? 'UTC' : 'local'"
     [disableWeekends]="disableWeekends"
     [disablePastDates]="disablePastDates"
     [disableFutureDates]="disableFutureDates"
     [disabledDates]="setDisabledDates ? disabledDates : null"
     [minDate]="setMinDate ? minDate : null"
     [maxDate]="setMaxDate ? maxDate : null"
+    [todayDate]="setTodayDate ? todayDate : null"
     [selectedDate]="selectedDate"
     (dateChange)="onDateChange($event)"
   >
@@ -17,4 +19,6 @@
   </div>
 </kirby-card>
 
-<div *ngIf="selectedDate">Selected Date: {{ selectedDate | date }}</div>
+<div *ngIf="selectedDate">
+  Selected Date: {{ selectedDate | date: 'MMM d, y z':(useTimezoneUTC ? 'UTC' : undefined) }}
+</div>
