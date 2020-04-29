@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Options } from 'highcharts';
+import { Options, SeriesClickCallbackFunction, SeriesClickEventObject } from 'highcharts';
 
-import { DesignTokenHelper } from '@kirbydesign/designsystem';
+import { DesignTokenHelper, ModalController } from '@kirbydesign/designsystem';
 
 const getColor = DesignTokenHelper.getColor;
 
@@ -26,8 +26,14 @@ function colorPoints() {
   styleUrls: ['./chart-example.component.scss'],
 })
 export class ChartExampleComponent implements OnInit {
-  constructor() {}
-
+  private monthlyExpenseData = [10, 1400, 300, 500, 100, 1000, 1100, 450, 1350, 1200, 1250, 600];
+  private monthlyOverviewClick: SeriesClickCallbackFunction = (ev: SeriesClickEventObject) => {
+    this.modalController.showAlert({
+      title: 'Clicked chart',
+      message: 'You clicked on column: ' + ev.point.category,
+      okBtnText: 'Ok',
+    });
+  };
   monthlyOverviewOptions: Options = {
     chart: {
       type: 'column',
@@ -55,23 +61,78 @@ export class ChartExampleComponent implements OnInit {
         'feb',
       ],
     },
+    yAxis: {
+      title: {
+        text: '',
+      },
+      plotLines: [
+        {
+          width: 2,
+          color: getColor('secondary').value,
+          dashStyle: 'Dash',
+          value: 872,
+        },
+      ],
+      labels: {
+        padding: 0,
+        overflow: 'justify',
+        x: 30,
+        y: -10,
+      },
+      min: 0,
+      tickAmount: 2,
+      showLastLabel: true,
+      showFirstLabel: false,
+      tickPositioner: function() {
+        var positions = [0, 1400];
+
+        return positions;
+      },
+    },
     credits: {
       enabled: false,
     },
     plotOptions: {
+      column: {
+        events: {
+          click: this.monthlyOverviewClick.bind(this),
+        },
+      },
       series: {
         color: getColor('secondary').value,
+        dashStyle: 'ShortDash',
+        states: {
+          hover: {
+            enabled: false,
+          },
+          inactive: {
+            opacity: 1,
+          },
+        },
       },
+      line: {
+        className: 'avg-line',
+        marker: {
+          enabled: false,
+        },
+        allowPointSelect: false,
+      },
+    },
+    tooltip: {
+      enabled: false,
+    },
+    legend: {
+      enabled: false,
     },
     series: [
       {
-        data: [10, 1400, 300, 500, 100, 1000, 1100, 450, 1350, 1200, 1250, 600],
+        type: 'column',
+        data: this.monthlyExpenseData,
       },
-    ] as any,
+    ],
   };
-  // TODO: avg line
-  // TODO: click alert when click a column
-  // Remove axis texts
+
+  constructor(private modalController: ModalController) {}
 
   ngOnInit() {}
 }
