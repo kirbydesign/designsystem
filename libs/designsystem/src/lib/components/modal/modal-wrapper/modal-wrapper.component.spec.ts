@@ -36,7 +36,10 @@ class DynamicFooterEmbeddedComponent {
 
 @Component({
   template: `
+    <h2>Embedded Input</h2>
     <input />
+    <textarea></textarea>
+    <button>Test Button</button>
   `,
 })
 class InputEmbeddedComponent {}
@@ -302,6 +305,90 @@ describe('ModalWrapperComponent', () => {
     });
   });
 
+  describe(`onHeaderTouchStart`, () => {
+    let ionContent: HTMLIonContentElement;
+    let input: HTMLInputElement;
+
+    beforeEach(async () => {
+      spectator = createComponent({
+        props: {
+          config: {
+            title: 'Test title',
+            flavor: 'drawer',
+            component: InputEmbeddedComponent,
+          },
+        },
+      });
+      component = spectator.component;
+      // Ensure ion-content gets height
+      // or embedded component won't be visible:
+      spectator.element.classList.add('ion-page');
+      ionContent = spectator.query('ion-content');
+      await TestHelper.whenReady(ionContent);
+      input = ionContent.querySelector('input');
+      spyOn(input, 'blur');
+    });
+
+    describe(`when keyboard is NOT visible`, () => {
+      beforeEach(() => {
+        expect(document.activeElement).not.toEqual(input);
+        spectator.dispatchFakeEvent(window, 'keyboardWillHide');
+      });
+
+      it('should not call blurActiveElement', () => {
+        const blurActiveElementSpy = spyOn(spectator.component, 'blurActiveElement');
+        spectator.dispatchTouchEvent('ion-header', 'touchstart');
+        expect(blurActiveElementSpy).not.toHaveBeenCalled();
+      });
+    });
+
+    describe(`when keyboard is visible`, () => {
+      beforeEach(() => {
+        input.focus();
+        expect(document.activeElement).toEqual(input);
+        spectator.dispatchFakeEvent(window, 'keyboardWillShow');
+      });
+
+      it('should blur document.activeElement when it is an input', () => {
+        spectator.dispatchTouchEvent('ion-header', 'touchstart');
+        expect(input.blur).toHaveBeenCalled();
+      });
+
+      it('should blur document.activeElement when it is a textarea', () => {
+        const textarea = ionContent.querySelector('textarea');
+        spyOn(textarea, 'blur');
+        textarea.focus();
+        expect(document.activeElement).toEqual(textarea);
+        spectator.dispatchTouchEvent('ion-header', 'touchstart');
+        expect(textarea.blur).toHaveBeenCalled();
+      });
+
+      it('should not blur document.activeElement if not input or textarea', () => {
+        const button = ionContent.querySelector('button');
+        button.focus();
+        expect(document.activeElement).toEqual(button);
+        spectator.dispatchTouchEvent('ion-header', 'touchstart');
+        expect(input.blur).not.toHaveBeenCalled();
+      });
+
+      it('should not blur document.activeElement if event is from toolbar button', () => {
+        spectator.dispatchTouchEvent(
+          'ion-header > ion-toolbar > ion-buttons > button',
+          'touchstart'
+        );
+        expect(input.blur).not.toHaveBeenCalled();
+      });
+
+      it('should not blur document.activeElement if event is from toolbar button child node', () => {
+        spectator.dispatchTouchEvent(
+          'ion-header > ion-toolbar > ion-buttons > button > kirby-icon',
+          'touchstart'
+        );
+        expect(input.blur).not.toHaveBeenCalled();
+      });
+    });
+  });
+
   describe(`close()`, () => {
     let ionModalSpy: jasmine.SpyObj<HTMLIonModalElement>;
     beforeEach(() => {
@@ -336,7 +423,7 @@ describe('ModalWrapperComponent', () => {
         const ionContent = spectator.query('ion-content');
         await TestHelper.whenReady(ionContent);
         const input = ionContent.querySelector('input');
-        input.blur = jasmine.createSpy('blur');
+        spyOn(input, 'blur');
         input.focus();
         expect(document.activeElement).toEqual(input);
 
