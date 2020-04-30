@@ -155,7 +155,7 @@ export class DropdownComponent
 
   private itemClickUnlisten: () => void;
   private intersectionObserverRef: IntersectionObserver;
-  private showDropdownTimeout;
+  private showDropdownTimeoutId;
 
   constructor(
     private renderer: Renderer2,
@@ -210,7 +210,7 @@ export class DropdownComponent
         }
 
         // Cancel any pending timer to show dropdown:
-        clearTimeout(this.showDropdownTimeout);
+        clearTimeout(this.showDropdownTimeoutId);
 
         const entry = entries[0];
         const isVisible = entry.boundingClientRect.width > 0;
@@ -252,7 +252,7 @@ export class DropdownComponent
     if (!this.isOpen) {
       this.state = 'opening';
       // ensures that the dropdown is opened in case the IntersectionObserverCallback isn't invoked
-      this.showDropdownTimeout = setTimeout(
+      this.showDropdownTimeoutId = setTimeout(
         () => this.showDropdown(),
         DropdownComponent.OPEN_DELAY_IN_MS
       );
