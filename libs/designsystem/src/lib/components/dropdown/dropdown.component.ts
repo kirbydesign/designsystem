@@ -208,10 +208,8 @@ export class DropdownComponent
         if (this.state !== 'opening') {
           return;
         }
-        if (!this.isOpen) {
-          clearTimeout(this.showDropdownTimeout);
-          this.showDropdown();
-        }
+        clearTimeout(this.showDropdownTimeout);
+        this.showDropdown();
         const entry = entries[0];
         const isVisible = entry.boundingClientRect.width > 0;
         if (isVisible && entry.intersectionRatio < 1) {
