@@ -25,6 +25,8 @@ import { Modal } from '../services/modal.interfaces';
   providers: [{ provide: Modal, useExisting: ModalWrapperComponent }],
 })
 export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDestroy {
+  static readonly KEYBOARD_HIDE_DELAY_IN_MS = 25;
+
   scrollY: number = Math.abs(window.scrollY);
   @Input() config: ModalConfig;
   componentPropsInjector: Injector;
@@ -33,6 +35,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     HTMLIonContentElement
   >;
   private observer: MutationObserver;
+  private keyboardVisible = false;
 
   @HostBinding('class.drawer')
   get _isDrawer() {
@@ -64,9 +67,27 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     this.ionContent.scrollToBottom(scrollDuration || 0);
   }
 
-  close(data?: any) {
+  async close(data?: any): Promise<void> {
     const ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
-    ionModalElement && ionModalElement.dismiss(data);
+    if (!ionModalElement) {
+      return;
+    }
+    if (!this.keyboardVisible) {
+      // No keyboard visible:
+      // Dismiss modal and return:
+      await ionModalElement.dismiss(data);
+      return;
+    }
+    // Keyboard visible:
+    // Blur active element and wait for keyboard to hide,
+    // then dismiss modal and return:
+    this.blurActiveElement();
+    return new Promise((resolve) => {
+      setTimeout(async () => {
+        await ionModalElement.dismiss(data);
+        resolve();
+      }, ModalWrapperComponent.KEYBOARD_HIDE_DELAY_IN_MS);
+    });
   }
 
   @HostListener('window:focus')
@@ -83,6 +104,22 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     const input = event.target as HTMLElement;
     if (input.tagName === 'INPUT' && input.closest('ion-modal')) {
       event.stopPropagation();
+    }
+  }
+
+  @HostListener('window:keyboardWillShow')
+  _onKeyboardWillShow() {
+    this.keyboardVisible = true;
+  }
+
+  @HostListener('window:keyboardWillHide')
+  _onKeyboardWillHide() {
+    this.keyboardVisible = false;
+  }
+
+  blurActiveElement() {
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
     }
   }
 
