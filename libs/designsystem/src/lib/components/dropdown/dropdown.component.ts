@@ -40,6 +40,7 @@ import { CardComponent } from '../card/card.component';
 export class DropdownComponent
   implements AfterContentChecked, AfterViewInit, OnDestroy, ControlValueAccessor {
   static readonly OPEN_DELAY_IN_MS = 100;
+  private state: 'closed' | 'opening' | 'open' = 'closed';
 
   private _items: string[] | any[] = [];
   get items(): string[] | any[] {
@@ -119,10 +120,14 @@ export class DropdownComponent
   _role = 'listbox';
 
   @HostBinding('class.is-opening')
-  _isOpening: boolean;
+  get _isOpening(): boolean {
+    return this.state === 'opening';
+  }
 
   @HostBinding('class.is-open')
-  isOpen = false;
+  get isOpen(): boolean {
+    return this.state === 'open';
+  }
 
   @HostBinding('class.align-end')
   _alignEnd: boolean;
@@ -200,7 +205,7 @@ export class DropdownComponent
       };
       const callback: IntersectionObserverCallback = (entries) => {
         // Only apply alignment when opening:
-        if (!this._isOpening) {
+        if (this.state !== 'opening') {
           return;
         }
         if (!this.isOpen) {
@@ -244,7 +249,7 @@ export class DropdownComponent
       return;
     }
     if (!this.isOpen) {
-      this._isOpening = true;
+      this.state = 'opening';
       // ensures that the dropdown is opened in case the IntersectionObserverCallback isn't invoked
       this.showDropdownTimeout = setTimeout(
         () => this.showDropdown(),
@@ -254,8 +259,7 @@ export class DropdownComponent
   }
 
   private showDropdown() {
-    this.isOpen = true;
-    this._isOpening = false;
+    this.state = 'open';
     this.scrollItemIntoView(this.selectedIndex);
     this.changeDetectorRef.markForCheck();
   }
@@ -265,8 +269,7 @@ export class DropdownComponent
       return;
     }
     if (this.isOpen) {
-      this._isOpening = false;
-      this.isOpen = false;
+      this.state = 'closed';
     }
   }
 
