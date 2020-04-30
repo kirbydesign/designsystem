@@ -278,11 +278,11 @@ Developing new features should also include that they should be tested.
    The easiest way to do this is to build a distribution package, and install it in your own project.
 
    ```
-   # 1. From the root of this repository, execute (this may take a minute or two):
-   ./scripts/publish.js
+   # 1. From the root of this repository, run (this may take a minute or two):
+   npm run publish
 
-   # Them, from the root of your application, execute:
-   <path-to-root-of-designsystem>/dist/kirbydesign-designsystem-<version>.tgz
+   # Then, from the root of your application, execute:
+   npm i <path-to-root-of-designsystem>/dist/kirbydesign-designsystem-<version>.tgz
 
    # ... where <path-to-root-of-designsystem> is replaced with the real path
    #     and <version> is the version of designsystem that was build (in the previous step)
