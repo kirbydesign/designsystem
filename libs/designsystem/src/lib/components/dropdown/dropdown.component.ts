@@ -260,9 +260,11 @@ export class DropdownComponent
   }
 
   private showDropdown() {
-    this.state = 'open';
-    this.scrollItemIntoView(this.selectedIndex);
-    this.changeDetectorRef.markForCheck();
+    if (this.state === 'opening') {
+      this.state = 'open';
+      this.scrollItemIntoView(this.selectedIndex);
+      this.changeDetectorRef.markForCheck();
+    }
   }
 
   close() {
