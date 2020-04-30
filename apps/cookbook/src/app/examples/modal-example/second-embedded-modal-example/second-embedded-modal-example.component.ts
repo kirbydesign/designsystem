@@ -1,14 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, Optional, SkipSelf } from '@angular/core';
 
-import { ModalController } from '@kirbydesign/designsystem';
+import { Modal } from '@kirbydesign/designsystem';
 
 @Component({
   templateUrl: './second-embedded-modal-example.component.html',
 })
 export class SecondEmbeddedModalExampleComponent {
-  constructor(private modalController: ModalController) {}
+  constructor(@Optional() @SkipSelf() private modal: Modal) {}
 
-  onHideSecond() {
-    this.modalController.hideTopmost();
+  close() {
+    this.modal.close();
   }
 }
