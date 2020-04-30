@@ -38,9 +38,11 @@ export class ModalCompactWrapperComponent implements Modal, OnInit {
     });
   }
 
-  close(data?: any) {
+  async close(data?: any): Promise<void> {
     const ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
-    ionModalElement && ionModalElement.dismiss(data);
+    if (ionModalElement) {
+      await ionModalElement.dismiss(data);
+    }
   }
 
   scrollToTop: (_?: any) => void;
