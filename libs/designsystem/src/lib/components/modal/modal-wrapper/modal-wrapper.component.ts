@@ -10,6 +10,8 @@ import {
   Renderer2,
   Input,
   OnInit,
+  ViewChildren,
+  QueryList,
 } from '@angular/core';
 import { IonContent } from '@ionic/angular';
 
@@ -17,6 +19,7 @@ import { KirbyAnimation } from '../../../animation/kirby-animation';
 import { ModalConfig } from './config/modal-config';
 import { COMPONENT_PROPS } from './config/modal-config.helper';
 import { Modal } from '../services/modal.interfaces';
+import { ButtonComponent } from '../../button/button.component';
 
 @Component({
   selector: 'kirby-modal-wrapper',
@@ -30,12 +33,17 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   scrollY: number = Math.abs(window.scrollY);
   @Input() config: ModalConfig;
   componentPropsInjector: Injector;
+
+  @ViewChildren(ButtonComponent, { read: ElementRef }) private toolbarButtonsQuery: QueryList<
+    ElementRef<HTMLButtonElement>
+  >;
   @ViewChild(IonContent, { static: true }) private ionContent: IonContent;
   @ViewChild(IonContent, { static: true, read: ElementRef }) private ionContentElement: ElementRef<
     HTMLIonContentElement
   >;
   private observer: MutationObserver;
   private keyboardVisible = false;
+  private toolbarButtons: HTMLButtonElement[] = [];
 
   @HostBinding('class.drawer')
   get _isDrawer() {
@@ -56,6 +64,9 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   }
 
   ngAfterViewInit(): void {
+    if (this.toolbarButtonsQuery) {
+      this.toolbarButtons = this.toolbarButtonsQuery.map((buttonRef) => buttonRef.nativeElement);
+    }
     this.checkForEmbeddedFooter();
   }
 
@@ -117,9 +128,31 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     this.keyboardVisible = false;
   }
 
+  onHeaderTouchStart(event: TouchEvent) {
+    if (this.keyboardVisible) {
+      const isToolbarButtonTouch = this.toolbarButtons.some((button) => {
+        return (
+          event.target instanceof HTMLElement &&
+          (event.target === button || button.contains(event.target))
+        );
+      });
+      // Prevent blur if event target is a toolbar button
+      // (to allow tap event to fire):
+      if (!isToolbarButtonTouch) {
+        this.blurActiveElement();
+      }
+    }
+  }
+
   blurActiveElement() {
-    if (document.activeElement instanceof HTMLElement) {
-      document.activeElement.blur();
+    const BLUR_TARGET_SELECTOR = 'input, textarea';
+    if (this.keyboardVisible) {
+      if (
+        document.activeElement instanceof HTMLElement &&
+        document.activeElement.matches(BLUR_TARGET_SELECTOR)
+      ) {
+        document.activeElement.blur();
+      }
     }
   }
 
