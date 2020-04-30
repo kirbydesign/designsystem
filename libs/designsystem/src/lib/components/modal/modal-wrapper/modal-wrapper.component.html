@@ -1,4 +1,4 @@
-<ion-header (touchstart)="blurActiveElement()">
+<ion-header (touchstart)="onHeaderTouchStart($event)">
   <ion-toolbar>
     <ion-title>{{ config.title }}</ion-title>
     <ion-buttons slot="start" *ngIf="config.flavor === 'drawer'">
