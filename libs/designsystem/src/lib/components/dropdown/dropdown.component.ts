@@ -208,8 +208,10 @@ export class DropdownComponent
         if (this.state !== 'opening') {
           return;
         }
+
+        // Cancel any pending timer to show dropdown:
         clearTimeout(this.showDropdownTimeout);
-        this.showDropdown();
+
         const entry = entries[0];
         const isVisible = entry.boundingClientRect.width > 0;
         if (isVisible && entry.intersectionRatio < 1) {
@@ -234,6 +236,7 @@ export class DropdownComponent
               this._vertical = 'up';
             }
           }
+          this.showDropdown();
           this.changeDetectorRef.detectChanges();
         }
       };
