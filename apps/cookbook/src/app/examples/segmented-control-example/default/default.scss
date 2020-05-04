@@ -1,0 +1,21 @@
+@import './libs/designsystem/src/lib/scss/utils';
+
+:host {
+  display: block;
+}
+
+kirby-segmented-control {
+  margin-bottom: size('l');
+}
+
+kirby-card {
+  margin-bottom: size('s');
+}
+
+fieldset {
+  display: inline-block;
+
+  .disabled {
+    color: get-text-color('semi-dark');
+  }
+}

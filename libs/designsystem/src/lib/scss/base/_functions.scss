@@ -1,0 +1,132 @@
+@function _get-map-prop($map, $key) {
+  @if map-has-key($map, $key) {
+    @return map-get($map, $key);
+  }
+
+  @error 'Unknown key `#{$key}`.';
+  @return null;
+}
+
+@function size($key: 'm') {
+  $negative: str-index($key, '-') == 1;
+  @if ($negative) {
+    $key: str-slice($key, 2, -1);
+  }
+  $value: _get-map-prop($sizes, $key);
+  @return if($negative, unquote('-' + $value), $value);
+}
+
+@function z($key) {
+  @return _get-map-prop($z-layers, $key);
+}
+
+@function font-size($key: 'n') {
+  @if ($key == 'display') {
+    @warn 'Display key is deprecated';
+  }
+  @return _get-map-prop($font-sizes, $key);
+}
+
+@function line-height($key: 'm') {
+  @return _get-map-prop($line-height, $key);
+}
+
+@function font-weight($key: 'normal') {
+  @return _get-map-prop($font-weight, $key);
+}
+
+@function get-color($variant, $getValueOnly: false, $map: $kirby-colors) {
+  $value: _get-map-prop($map, $variant);
+  @if $getValueOnly == true {
+    @return $value;
+  } @else {
+    @return unquote('var(--kirby-' + $variant + ')');
+  }
+}
+
+@function get-text-color($variant) {
+  $value: _get-map-prop($text-colors, $variant);
+  @return unquote('var(--kirby-text-color-' + $variant + ')');
+}
+
+@function get-elevation($value) {
+  @return map-get($elevations, $value);
+}
+
+@function get-shadow-size($elevation) {
+  $shadow-size: 0;
+  $shadow-list: map-get($elevations, $elevation);
+  @each $shadow in $shadow-list {
+    $offset-x: abs(_get-shadow-value($shadow, 'offset-x'));
+    $offset-y: abs(_get-shadow-value($shadow, 'offset-y'));
+    $blur-radius: _get-shadow-value($shadow, 'blur-radius');
+    $spread-radius: _get-shadow-value($shadow, 'spread-radius');
+    $current-shadow-size: max($offset-x, $offset-y) + $blur-radius + $spread-radius;
+    $shadow-size: max($shadow-size, $current-shadow-size);
+  }
+  @return $shadow-size;
+}
+
+@function _get-shadow-value($shadow, $valuekey) {
+  $shadow-value-map: (
+    'offset-x': 1,
+    'offset-y': 2,
+    'blur-radius': 3,
+    'spread-radius': 4,
+  );
+  $value-index: map-get($shadow-value-map, $valuekey);
+  @return nth($shadow, $value-index);
+}
+
+@mixin slotted($selectors...) {
+  ::ng-deep > {
+    #{$selectors} {
+      @content;
+    }
+  }
+}
+
+@mixin theme-background($variant, $text-variant-override: null) {
+  $background-color: null;
+  $text-color: null;
+  @if $variant == transparent {
+    $background-color: transparent;
+    $text-color: get-text-color('black');
+  } @else {
+    $background-color: get-color($variant);
+    $text-color: get-color($variant + '-contrast');
+  }
+  @if ($text-variant-override != null) {
+    $text-color: get-text-color($text-variant-override);
+  }
+  background-color: $background-color;
+  color: $text-color;
+}
+
+/// Only apply the :hover selector and styles if pointer device can hover
+/// (effectively desktop/mouse devices):
+@mixin hover() {
+  @media (hover: hover) {
+    &:hover {
+      @content;
+    }
+  }
+}
+
+// Only apply the :focus selector and styles if pointer device can hover
+// (effectively desktop/mouse devices):
+@mixin focus() {
+  @media (hover: hover) {
+    &:focus {
+      @content;
+    }
+  }
+}
+
+// Only apply the styles on touch devices
+// (coarse pointer and cannot hover):
+@mixin touch() {
+  @media (pointer: coarse) and (hover: none) {
+    @content;
+  }
+}

@@ -1,0 +1,33 @@
+@import '../../scss/utils';
+
+@mixin selected-and-hover($background-color) {
+  &.is-selected {
+    @include theme-background($background-color);
+  }
+
+  @include hover() {
+    @include theme-background($background-color);
+  }
+}
+
+:host {
+  white-space: nowrap;
+  padding: 0 size('s');
+  height: size('l');
+  font-size: font-size('xs');
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  border-radius: $border-radius-round;
+  margin: size('xxxs');
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  @include theme-background('white');
+  @include selected-and-hover('black');
+
+  :host-context(.kirby-color-brightness-dark) {
+    @include theme-background(transparent, 'white');
+    @include selected-and-hover('white');
+  }
+}

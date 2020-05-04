@@ -1,0 +1,78 @@
+<h2>Simple</h2>
+<h3>Default</h3>
+<cookbook-example-viewer [html]="defaultExample.template">
+  <div>
+    <cookbook-dropdown-example-default #defaultExample></cookbook-dropdown-example-default>
+  </div>
+</cookbook-example-viewer>
+<h3>Scroll</h3>
+<cookbook-example-viewer [html]="scrollExample.template">
+  <div>
+    <cookbook-dropdown-example-scroll #scrollExample></cookbook-dropdown-example-scroll>
+  </div>
+</cookbook-example-viewer>
+<h3>Pre-selected</h3>
+<cookbook-example-viewer [html]="preSelectedExample.template">
+  <div>
+    <cookbook-dropdown-example-pre-selected
+      #preSelectedExample
+    ></cookbook-dropdown-example-pre-selected>
+  </div>
+</cookbook-example-viewer>
+<h3>Block level</h3>
+<cookbook-example-viewer [html]="expandExample.template">
+  <div>
+    <cookbook-dropdown-example-expand #expandExample></cookbook-dropdown-example-expand>
+  </div>
+</cookbook-example-viewer>
+<h3>Right aligned</h3>
+<cookbook-example-viewer [html]="rightAlignedExample.template" [css]="rightAlignedExample.styles">
+  <div>
+    <cookbook-dropdown-example-right-aligned
+      #rightAlignedExample
+    ></cookbook-dropdown-example-right-aligned>
+  </div>
+</cookbook-example-viewer>
+<h3>Attention level</h3>
+<cookbook-example-viewer [html]="attentionLevelExample.template">
+  <div>
+    <cookbook-dropdown-example-attention-level
+      #attentionLevelExample
+    ></cookbook-dropdown-example-attention-level>
+  </div>
+</cookbook-example-viewer>
+<h3>Event handler</h3>
+<cookbook-example-viewer [html]="itemSelectExample.template">
+  <div>
+    <cookbook-dropdown-example-item-select
+      #itemSelectExample
+    ></cookbook-dropdown-example-item-select>
+  </div>
+</cookbook-example-viewer>
+<h2>Advanced</h2>
+<h3>Custom Item template</h3>
+<cookbook-example-viewer [html]="customItemTemplateExample.template">
+  <div>
+    <cookbook-dropdown-example-custom-item-template
+      #customItemTemplateExample
+    ></cookbook-dropdown-example-custom-item-template>
+  </div>
+</cookbook-example-viewer>
+<h3>Forms</h3>
+<cookbook-example-viewer [html]="formsExample.template" [ts]="formsExample.codeSnippet">
+  <div>
+    <cookbook-dropdown-example-ng-forms #formsExample></cookbook-dropdown-example-ng-forms>
+  </div>
+</cookbook-example-viewer>
+<h2>Properties:</h2>
+<cookbook-showcase-properties [properties]="properties"></cookbook-showcase-properties>
+<h2>Events:</h2>
+<cookbook-showcase-properties
+  [properties]="events"
+  [columns]="eventColumns"
+></cookbook-showcase-properties>
+<h2>Methods:</h2>
+<cookbook-showcase-properties
+  [properties]="methods"
+  [columns]="methodColumns"
+></cookbook-showcase-properties>

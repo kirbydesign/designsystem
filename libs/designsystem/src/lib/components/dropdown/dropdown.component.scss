@@ -1,0 +1,117 @@
+@import '../../scss/utils';
+
+$item-height: 56px;
+$dropdown-max-height: 5 * $item-height;
+$margin-horizontal-total: 2 * size('s');
+
+:host {
+  --kirby_internal_min-screen-width: 320px;
+  @include media('>=small') {
+    --kirby_internal_min-screen-width: 375px;
+  }
+
+  display: inline-block;
+  position: relative;
+  max-width: calc(100vw - #{$margin-horizontal-total});
+
+  &.expand {
+    display: block;
+  }
+
+  &:not(.expand) {
+    kirby-card {
+      min-width: calc(var(--kirby_internal_min-screen-width) - #{$margin-horizontal-total});
+      max-width: calc(100vw - #{$margin-horizontal-total});
+    }
+  }
+
+  // Outline is applied on button border instead,
+  // to keep the rounded shape:
+  outline: none;
+
+  // Only apply focus ring if pointer device can hover
+  // (effectively desktop/mouse devices):
+  @include focus() {
+    > button,
+    > button.attention-level2 {
+      border-color: $focus-ring-color;
+    }
+  }
+
+  &.error,
+  &.ng-touched.ng-invalid {
+    > button {
+      border-color: get-color('danger');
+    }
+  }
+}
+
+:host > button {
+  position: relative;
+  margin: 0;
+  outline: none;
+  width: 100%;
+  transition: box-shadow 0.2s, border-color 0.2s;
+
+  // Temporary fix for button-width as attention level 3 has border,
+  // and attention level 2 does not:
+  &.attention-level2 {
+    border: 1px solid transparent;
+  }
+
+  .text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+kirby-card {
+  display: none;
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+  max-height: $dropdown-max-height;
+  margin-top: size('xxxs');
+  overflow-y: auto;
+  box-shadow: get-elevation(8);
+  z-index: z('dropdown');
+}
+
+:host(.is-opening) {
+  kirby-card {
+    display: block;
+  }
+}
+
+:host(.is-open) {
+  & > button {
+    box-shadow: get-elevation(8);
+  }
+
+  kirby-card {
+    display: block;
+    opacity: 1;
+  }
+}
+
+:host(.align-end) {
+  kirby-card {
+    right: 0;
+  }
+}
+
+// TODO: UI refine style and behaviour when open upwards...
+:host(.align-top) {
+  kirby-card {
+    top: 0;
+    margin-top: -#{size('xxxs')};
+    transform: translateY(-100%);
+  }
+
+  &.is-open {
+    > button {
+      //Move button on top of card's shadow:
+      z-index: z('dropdown') + 1;
+    }
+  }
+}

@@ -1,0 +1,146 @@
+@import 'utils';
+@import './base/ionic';
+@import './base/typography';
+
+:root {
+  --kirby-font-family: 'Roboto';
+  font-family: var(--kirby-font-family);
+  @each $color, $color-name in $kirby-colors {
+    --kirby-#{$color}: #{$color-name};
+  }
+  @each $color, $color-name in $text-colors {
+    --kirby-text-color-#{$color}: #{$color-name};
+  }
+  --kirby-page-max-width: 1366px;
+  --kirby-statusbar-padding: var(--ion-statusbar-padding);
+  --kirby-safe-area-top: var(--ion-safe-area-top);
+  --kirby-safe-area-right: var(--ion-safe-area-right);
+  --kirby-safe-area-bottom: var(--ion-safe-area-bottom);
+  --kirby-safe-area-left: var(--ion-safe-area-left);
+  --kirby-tab-bar-height: 50px;
+}
+
+ion-modal.kirby-overlay {
+  position: fixed;
+
+  // Ensure consistent backdrop on overlays, as Ionic 5 only applies --backdrop-opacity to :first-of-type:
+  // See https://github.com/ionic-team/ionic/commit/253cd96164914a803f6bb42ff95ca74880c940d0
+  // and https://github.com/ionic-team/ionic/issues/20800#issuecomment-606670762
+  /* RULES:
+  * Always show backdrop on first opened overlay
+  * Always show backdrop on alert and action-sheet (also nested)
+  * Show backdrop on drawer on small screens only
+  */
+  &:first-of-type,
+  &.modal-card:first-of-type,
+  &.kirby-alert,
+  &.kirby-action-sheet {
+    --backdrop-opacity: 0.4;
+  }
+  @include media('<medium') {
+    // Only apply backdrop on stacking drawers on small screens:
+    &.kirby-drawer {
+      --backdrop-opacity: 0.4;
+      ion-backdrop {
+        opacity: var(--backdrop-opacity);
+      }
+    }
+  }
+
+  .modal-shadow {
+    display: none;
+  }
+
+  &.kirby-modal {
+    box-sizing: border-box;
+    --background: #{get-color('background-color')};
+    --border-radius: 0;
+
+    &.kirby-modal-compact {
+      --border-radius: #{$border-radius};
+
+      .modal-wrapper {
+        max-width: $compact-modal-max-width;
+        height: auto;
+        text-align: center;
+      }
+    }
+
+    // Reset Ionic Card style height + top border radius:
+    @include media('<medium') {
+      &.modal-card:not(.kirby-drawer) {
+        .modal-wrapper {
+          height: 100%;
+          border-top-left-radius: 0;
+          border-top-right-radius: 0;
+        }
+      }
+    }
+
+    &.kirby-drawer {
+      padding-top: calc(var(--ion-safe-area-top, 0) + #{size('m')});
+
+      .modal-wrapper {
+        border-top-left-radius: #{$border-radius};
+        border-top-right-radius: #{$border-radius};
+      }
+    }
+
+    @include media('>=medium') {
+      //TODO Hardcoded magic numbers: Jakob + Jonathan, revisit!!!
+      --width: 720px;
+      --height: 647px;
+      --border-radius: #{$border-radius};
+      --box-shadow: #{get-elevation(8)};
+
+      &.kirby-drawer {
+        padding-top: unset;
+      }
+    }
+  }
+
+  &.kirby-action-sheet {
+    --background: transparent;
+    --width: 100%;
+    --height: 100%;
+
+    .modal-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      --max-width: auto;
+      --max-height: auto;
+    }
+  }
+
+  &.kirby-alert {
+    --background: #{get-color('background-color')};
+    --border-radius: #{$border-radius};
+    --box-shadow: #{get-elevation(8)};
+
+    .modal-wrapper {
+      max-width: $alert-max-width;
+      height: auto;
+      text-align: center;
+    }
+  }
+}
+
+.kirby-toast {
+  position: fixed;
+  user-select: none;
+  text-align: center;
+
+  // Set default colors
+  --background: #{get-color('success')};
+  --color: #{get-color('success-contrast')};
+  --button-color: #{get-color('success-contrast')};
+
+  @each $color-name, $color-value in $notification-colors {
+    &.#{$color-name} {
+      --background: #{get-color($color-name)};
+      --color: #{get-color($color-name + '-contrast')};
+      --button-color: #{get-color($color-name + '-contrast')};
+    }
+  }
+}

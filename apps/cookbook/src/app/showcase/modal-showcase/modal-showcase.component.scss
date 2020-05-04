@@ -1,0 +1,23 @@
+@import './libs/designsystem/src/lib/scss/utils';
+
+h2 {
+  margin-top: size('l');
+}
+
+.example-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.desktop {
+  display: none;
+}
+
+@include media('>medium') {
+  .mobile {
+    display: none;
+  }
+  .desktop {
+    display: initial;
+  }
+}

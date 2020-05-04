@@ -1,0 +1,87 @@
+@import '../../scss/utils';
+
+ion-backdrop {
+  opacity: 0.3;
+  z-index: 101;
+  position: fixed;
+}
+
+.reorder-selected {
+  box-shadow: none;
+  opacity: 1;
+  z-index: 104;
+
+  kirby-card {
+    transform: scale(1.05, 1.05);
+
+    & div:first-child {
+      border-top: 1px solid var(--kirby-background-color);
+    }
+  }
+
+  @include slotted('kirby-item') {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    transform: scale(1.05, 1.05);
+    border-radius: $border-radius;
+    overflow: hidden;
+  }
+}
+
+.reorder-list-active {
+  & > * {
+    position: relative;
+    z-index: 103;
+  }
+  & > .reorder-selected {
+    z-index: 104;
+  }
+  & div:first-child {
+    border-top: none;
+  }
+
+  @include slotted('div:last-child kirby-item') {
+    border-bottom-left-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
+    overflow: hidden;
+  }
+
+  .reorder-selected {
+    @include slotted('kirby-item') {
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+      transform: scale(1.05, 1.05);
+      border-radius: $border-radius;
+      overflow: hidden;
+    }
+  }
+}
+
+.outerGroup {
+  border-bottom: 20px transparent solid;
+}
+
+kirby-card {
+  overflow: inherit;
+
+  @include slotted('div:last-child ion-reorder-group div:last-child>kirby-item') {
+    border-bottom-left-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
+    overflow: hidden;
+  }
+
+  @include slotted('div kirby-item') {
+    z-index: 1; // for showing rounded corners on ios devices
+  }
+
+  @include slotted('div:first-child>kirby-item') {
+    border-radius: $border-radius;
+    overflow: hidden;
+  }
+
+  @include slotted('div .reorder-list-active kirby-item') {
+    z-index: 103;
+  }
+
+  & div:first-child {
+    border-top: 1px solid var(--kirby-background-color);
+  }
+}

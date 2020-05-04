@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "types": ["jasmine"],
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "paths": {
+      "~/app/*": ["apps/cookbook/src/app/*"],
+      "~/environments/*": ["apps/cookbook/src/environments/*"],
+      "@kirbydesign/designsystem": ["libs/designsystem/src/lib/index.ts"],
+      "@kirbydesign/designsystem/*": ["libs/designsystem/src/lib/*"]
+    }
+  },
+  "include": ["**/*.ts"]
+}

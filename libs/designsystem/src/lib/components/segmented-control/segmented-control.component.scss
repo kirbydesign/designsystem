@@ -1,0 +1,78 @@
+@import '../../scss/utils';
+
+:host {
+  display: block;
+  user-select: none;
+
+  &.sm {
+    ion-segment-button {
+      min-height: size('l');
+      font-size: font-size('xs');
+      --padding-start: #{size('s')};
+      --padding-end: #{size('s')};
+    }
+  }
+
+  &.chip-mode {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    // Hide scrollbar on touch device:
+    @include touch() {
+      scrollbar-width: none; /* Firefox */
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+  }
+}
+
+ion-segment {
+  display: inline-flex; //The segmented control itself is block-level, but we don't want the background to stretch
+  width: auto; //The segmented control itself is block-level, but we don't want the background to stretch
+  overflow: visible; //Ensures the badge is not cut off
+  contain: unset; //Ensures the badge is not cut off
+  --background: #{get-color('white')};
+  border-radius: $border-radius-round;
+}
+
+ion-segment-button {
+  min-height: size('xl');
+  font-weight: font-weight('normal');
+  font-size: font-size('s');
+  text-transform: none;
+  --border-radius: #{$border-radius-round};
+  --border-style: none;
+  --background: none;
+  --color: #{get-color('white-contrast')};
+  --indicator-color: #{get-color('black')};
+  --color-checked: #{get-color('black-contrast')};
+  --color-hover: #{get-color('black-tint')};
+  --indicator-box-shadow: none;
+  --padding-start: #{size('m')};
+  --padding-end: #{size('m')};
+  --margin-bottom: 0;
+  --margin-end: 0;
+  --margin-start: 0;
+  --margin-top: 0;
+  margin: 0;
+}
+
+.segment-btn-wrapper {
+  position: relative;
+}
+
+kirby-badge {
+  --kirby-badge-elevation: #{get-elevation(2)};
+  position: absolute;
+  top: -#{size('xxs')};
+  right: #{size('xxs')};
+  z-index: z('segmentBadge');
+}
+
+:host-context(.plt-desktop) {
+  ion-segment-button:focus-within {
+    outline-color: -webkit-focus-ring-color;
+    outline-style: auto;
+  }
+}

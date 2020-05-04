@@ -1,0 +1,124 @@
+@import '../../scss/utils';
+
+/*
+ * Page Header
+ */
+ion-header,
+ion-toolbar {
+  --background: #{get-color('background-color')};
+  max-width: 768px;
+  margin: 0 auto;
+}
+
+ion-toolbar {
+  --border-width: 0 !important;
+  --padding-start: #{size('xxs')};
+  --padding-end: #{size('xxs')};
+  --padding-top: 0;
+  --padding-bottom: #{size('xxxs')};
+
+  /*
+  * This overrides Ionic's default ios styling for the position of secondary action buttons which are to the left of content: https://ionicframework.com/docs/api/toolbar#buttons
+  * We would like the seconday actions to be to the far right after primary actions (usually as a falafel):
+  */
+  ion-buttons[slot='secondary'] {
+    order: 6;
+  }
+
+  ion-title {
+    padding-bottom: var(--padding-bottom);
+
+    .toolbar-title {
+      @include slotted('*') {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        pointer-events: auto;
+        overflow: hidden;
+      }
+    }
+  }
+}
+
+.hide {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 100ms linear;
+
+  &.fade-in {
+    visibility: inherit;
+    opacity: 1;
+  }
+}
+
+ion-title {
+  box-sizing: border-box;
+  font-size: font-size('n');
+  font-weight: font-weight('normal');
+}
+
+ion-back-button {
+  --color: #{get-color('black')};
+  --icon-font-size: 24px;
+  width: 24px;
+  height: 24px;
+}
+
+/*
+ * Page Title
+ */
+.page-title {
+  margin-left: size('s');
+  margin-top: size('xxs');
+  margin-bottom: var(--kirby-page-title-margin-bottom, #{size('xl')});
+
+  &.has-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  &.text-center {
+    text-align: center;
+    margin-left: 0;
+  }
+
+  &.text-right {
+    text-align: right;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 0;
+  }
+}
+
+/*
+ * Page Content
+ */
+ion-content {
+  --padding-start: var(--page-content-padding-start, #{size('s')});
+  --padding-end: var(--page-content-padding-end, #{size('s')});
+  --background: #{get-color('background-color')};
+
+  .content-inner {
+    max-width: var(--page-content-max-width, 720px);
+    margin: 0 auto;
+    padding-bottom: size('xl');
+  }
+
+  /*
+  * Fixed content
+  */
+  .fixed-content {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    .content-inner {
+      position: relative;
+    }
+  }
+}

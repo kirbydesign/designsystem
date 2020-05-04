@@ -6,6 +6,8 @@
 /out-tsc
 /dist-lib
 /test-reports
+*.styles.ts
+/libs/designsystem/src/lib/polyfills/*.min.js
 
 # dependencies
 /node_modules
@@ -48,7 +50,8 @@ Thumbs.db
 
 scripts/manifest.plist
 scripts/install-ipa.html
-src/kirby/polyfills
 
-# ts-lint
+# tools (tslint, sass-to-ts etc.)
 /tools/tslint-rules/dist
+/tools/sass-to-ts/dist
+/tools/generate-mocks/dist

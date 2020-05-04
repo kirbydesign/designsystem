@@ -1,0 +1,4 @@
+<ion-badge color="none">
+  <ng-content *ngIf="!text"></ng-content>
+  <ng-container *ngIf="text">{{ text }}</ng-container>
+</ion-badge>

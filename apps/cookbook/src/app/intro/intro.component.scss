@@ -1,0 +1,8 @@
+@import './libs/designsystem/src/lib/scss/utils';
+
+img {
+  max-width: 100%;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: size('xxl');
+}

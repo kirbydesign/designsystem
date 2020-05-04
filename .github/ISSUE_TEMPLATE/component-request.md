@@ -7,17 +7,18 @@ assignees: ''
 
 ---
 
-**Mandatory steps to ensure alignment between stakeholders and the progression of Kirby**
-In order to ensure steady progress and quality of Kirby, please follow our outlined process. By default three labels are added to new component issues and enhancements. To help Kirby please follow these steps, and remove the labels from the issue when done.
+<!--**Mandatory steps to ensure alignment between stakeholders and the progression of Kirby**-->
 
-*NOT Prioritized*
-- [ ] Describe any deadlines for the issue - eg. X needs this done by Y date, to be used in Z sprint. Suggest a milestone for the issue. The `Not Prioritized` label will be removed by the Kirby team. 
+<!--In order to ensure steady progress and quality of Kirby, please follow our outlined process. By default three labels are added to new component issues and enhancements. To help Kirby please follow these steps, and remove the labels from the issue when done.-->
 
-*NOT UX Refined*
-- [ ] Make sure the new Component, has a name, can be found in Zeplin, and is used in minimum one reviewed screen. Remove the `NOT UX Refined` label and add links to Zeplin.
+<!--*NOT Prioritized*-->
+<!--Describe any deadlines for the issue - eg. X needs this done by Y date, to be used in Z sprint. Suggest a milestone for the issue. The `Not Prioritized` label will be removed by the Kirby team. -->
 
-*NOT Tech Refined*
-- [ ] Sketch a solution in technical terms, that is how will the component be build - eg. build it from scratch or build using X Ionic component. Call for a brief meeting or spend enough time with someone from @kirbydesign/kirby-guild to get a "go ahead". Remove the `NOT Tech Refined` label.
+<!--*NOT UX Refined*-->
+<!--Make sure the new Component, has a name, can be found in Zeplin, and is used in minimum one reviewed screen. Remove the `NOT UX Refined` label and add links to Zeplin.-->
+
+<!--*NOT Tech Refined*
+<!--Sketch a solution in technical terms, that is how will the component be build - eg. build it from scratch or build using X Ionic component. Call for a brief meeting or spend enough time with someone from @kirbydesign/kirby-guild to get a "go ahead". Remove the `NOT Tech Refined` label.-->
 
 **Describe the solution you'd like**
 A clear and concise description of what you want to happen.
@@ -39,7 +40,6 @@ Add any other context or screenshots about the feature request here, e.g. a link
 
 - [ ] Create Feature Branch
 - [ ] Implement Skeleton Component
-- [ ] Add any required mock and fakes to the `KirbyTestingModule`
 - Ask UX for review:
   - [ ] Ensure implementation is correct in relation to UX design
   - [ ] Define the version of the implementation + steps needed to reach version 1.0 (create [enhancement requests](https://github.com/kirbydesign/designsystem/issues/new?assignees=&labels=enhancement&template=enhancement-request.md&title=%5BEnhancement%5D))

@@ -1,0 +1,15 @@
+<ion-item
+  lines="none"
+  [attr.disabled]="disabled"
+  [attr.button]="selectable ? true : null"
+  [attr.tabindex]="selectable ? null : 0"
+  detail="false"
+>
+  <div class="outside" slot="start">
+    <ng-content select="[slot='outside']"></ng-content>
+  </div>
+  <ng-content></ng-content>
+  <ion-reorder slot="end" *ngIf="reorderable">
+    <kirby-icon name="reorder"></kirby-icon>
+  </ion-reorder>
+</ion-item>

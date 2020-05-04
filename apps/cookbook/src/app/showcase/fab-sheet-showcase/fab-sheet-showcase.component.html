@@ -1,0 +1,26 @@
+<div class="example">
+  <p>
+    <em
+      ><strong>Please note:</strong> The floating action button is placed at the bottom right corner
+      of the page.</em
+    >
+  </p>
+  <fieldset>
+    <legend>Configuration</legend>
+    <kirby-checkbox
+      [checked]="disableFabSheet"
+      (checkedChange)="disableFabSheet = $event"
+    ></kirby-checkbox
+    ><label (click)="disableFabSheet = !disableFabSheet">Disable FAB</label>
+  </fieldset>
+  <cookbook-fab-sheet-example [disableFabSheet]="disableFabSheet"></cookbook-fab-sheet-example>
+  <cookbook-code-viewer [html]="exampleHtml"></cookbook-code-viewer>
+  (Optional) if you need to obtain data back from the fab sheet, you can pass a callback function:
+  <!-- prettier-ignore -->
+  <cookbook-code-viewer language="html">(itemSelect)="onItemSelect($event)"</cookbook-code-viewer>
+  where <code>onItemSelect</code> can be e.g.:
+  <!-- prettier-ignore -->
+  <cookbook-code-viewer language="ts">onItemSelect(item: ActionSheetItem) {{ '{' }}...{{ '}' }}</cookbook-code-viewer>
+  <h4>Fab sheet properties:</h4>
+  <cookbook-showcase-properties [properties]="properties"></cookbook-showcase-properties>
+</div>

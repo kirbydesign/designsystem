@@ -1,0 +1,39 @@
+@import './libs/designsystem/src/lib/scss/utils';
+
+:host {
+  > h2:not(:first-child) {
+    margin-top: size('l');
+    border-bottom: 1px dotted get-color('medium');
+  }
+
+  > h3 {
+    font-size: font-size('xs');
+    color: get-text-color('semi-dark');
+    text-transform: uppercase;
+    margin-top: size('xs');
+    margin-bottom: size('xxxs');
+  }
+}
+
+.item-illustration {
+  display: flex;
+  justify-content: center;
+  margin-bottom: size('xs');
+
+  svg {
+    max-width: 600px;
+  }
+}
+
+.sizes cookbook-example-viewer {
+  margin-top: size('xs');
+}
+
+.comment {
+  font-style: italic;
+  color: get-text-color('semi-dark');
+
+  &.small {
+    font-size: smaller;
+  }
+}

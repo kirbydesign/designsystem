@@ -1,0 +1,18 @@
+{
+  "name": "@kirbydesign/designsystem",
+  "version": "0.0.0",
+  "dependencies": {
+    "@angular/cdk": "8.2.3",
+    "@ionic/angular": "5.0.6",
+    "highcharts": "7.0.3",
+    "moment": "2.24.0"
+  },
+  "peerDependencies": {
+    "@angular/common": ">=8.2.7",
+    "@angular/core": ">=8.2.7",
+    "@angular/forms": ">=8.2.7",
+    "@angular/router": ">=8.2.7",
+    "rxjs": ">=6.2.0",
+    "zone.js": ">=0.8.26"
+  }
+}

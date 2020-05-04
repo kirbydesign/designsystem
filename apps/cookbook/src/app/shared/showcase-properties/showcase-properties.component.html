@@ -1,0 +1,22 @@
+<table class="cookbook-properties">
+  <thead>
+    <th *ngIf="columns.Name">{{ columns.Name }}</th>
+    <th *ngIf="columns.Description">{{ columns.Description }}</th>
+    <th *ngIf="columns.Type">{{ columns.Type }}</th>
+    <th *ngIf="columns.Default">{{ columns.Default }}</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let prop of properties">
+      <td *ngIf="columns.Name">
+        <code>{{ prop.name }}</code>
+      </td>
+      <td *ngIf="columns.Description">{{ prop.description }}</td>
+      <td *ngIf="columns.Type">
+        <pre><code>{{ prop.inputValues ? prop.inputValues.join(' | ') : '' }}</code></pre>
+      </td>
+      <td *ngIf="columns.Default">
+        <code>{{ prop.defaultValue }}</code>
+      </td>
+    </tr>
+  </tbody>
+</table>

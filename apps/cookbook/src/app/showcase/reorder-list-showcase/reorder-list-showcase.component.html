@@ -1,0 +1,24 @@
+<div class="example">
+  <p>
+    <em
+      ><strong>Please note:</strong> The <code>kirby-reorder-list</code> component needs to be
+      wrapped in a <code><a routerLink="../page">kirby-page</a></code> to function correctly.</em
+    >
+  </p>
+  <div class="example-wrapper">
+    <cookbook-code-viewer [html]="exampleHtml"></cookbook-code-viewer>
+    <cookbook-iphone src="/examples/reorder-list" showExternalLink="true"></cookbook-iphone>
+  </div>
+  <h2>Properties:</h2>
+  <cookbook-showcase-properties [properties]="properties"></cookbook-showcase-properties>
+  <h2>Events:</h2>
+  <cookbook-showcase-properties
+    [properties]="events"
+    [columns]="eventColumns"
+  ></cookbook-showcase-properties>
+  <h2>Methods:</h2>
+  <cookbook-showcase-properties
+    [properties]="methods"
+    [columns]="methodColumns"
+  ></cookbook-showcase-properties>
+</div>

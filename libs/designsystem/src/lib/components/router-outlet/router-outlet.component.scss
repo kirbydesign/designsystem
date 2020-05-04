@@ -1,0 +1,13 @@
+@import '../../scss/utils';
+
+:host {
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  position: absolute;
+  contain: size layout style;
+  z-index: 0;
+  overflow: hidden;
+  background-color: get-color('background-color');
+}
