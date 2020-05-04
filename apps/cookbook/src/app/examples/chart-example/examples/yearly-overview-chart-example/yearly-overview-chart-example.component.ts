@@ -26,7 +26,7 @@ function colorPoints() {
   styleUrls: ['./yearly-overview-chart-example.component.scss'],
 })
 export class YearlyOverviewChartExampleComponent implements OnInit {
-  height = 200;
+  height = 150;
 
   private wholeYearExpensesData = [960, 8761, 7760];
   private currentTimeData = [0, 1000, 800];
@@ -44,7 +44,7 @@ export class YearlyOverviewChartExampleComponent implements OnInit {
     chart: {
       type: 'bar',
       animation: {
-        duration: 500,
+        duration: 150,
       },
       height: this.height,
       backgroundColor: 'transparent',
