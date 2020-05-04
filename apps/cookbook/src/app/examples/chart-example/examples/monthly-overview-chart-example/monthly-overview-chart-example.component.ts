@@ -27,7 +27,14 @@ function colorPoints() {
   styleUrls: ['./monthly-overview-chart-example.component.scss'],
 })
 export class MonthlyOverviewChartExampleComponent implements OnInit {
-  private monthlyExpenseData = [30, 1400, 300, 500, 100, 1000, 1100, 450, 1350, 1200, 1250, 600];
+  private monthlyExpenseData = [0, 1400, 300, 500, 100, 1000, 1100, 450, 1350, 1200, 1250, 600];
+
+  // lower limit is shown as 2% of max value for UX reasons
+  private lowerLimit = Math.max(...this.monthlyExpenseData) * 0.02;
+  private adjustedMonthlyExpenseData = this.monthlyExpenseData.map((data) =>
+    this.lowerLimit >= data ? this.lowerLimit : data
+  );
+
   private monthlyOverviewClick: SeriesClickCallbackFunction = (ev: SeriesClickEventObject) => {
     this.modalController.showAlert({
       title: 'Clicked chart',
@@ -89,7 +96,6 @@ export class MonthlyOverviewChartExampleComponent implements OnInit {
           color: getColor('semi-dark').value,
           dashStyle: 'Dash',
           value: 872,
-          zIndex: 10,
         },
       ],
       labels: {
@@ -103,8 +109,8 @@ export class MonthlyOverviewChartExampleComponent implements OnInit {
       tickLength: 0,
       showLastLabel: false,
       showFirstLabel: false,
-      tickPositioner: function() {
-        var positions = [0, 1400];
+      tickPositioner: () => {
+        var positions = [0, Math.max(...this.adjustedMonthlyExpenseData)];
 
         return positions;
       },
@@ -146,7 +152,7 @@ export class MonthlyOverviewChartExampleComponent implements OnInit {
     series: [
       {
         type: 'column',
-        data: this.monthlyExpenseData,
+        data: this.adjustedMonthlyExpenseData,
       },
     ],
   };
