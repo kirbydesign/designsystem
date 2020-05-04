@@ -32,12 +32,6 @@ export class YearlyOverviewChartExampleComponent implements OnInit {
   private currentTimeData = [0, 1000, 800];
   private years = [2018, 2019, 2020].reverse();
 
-  // lower limit is shown as 2% of max value for UX reasons
-  // private lowerLimit = Math.max(...this.YearlyExpenseData) * 0.02;
-  // private adjustedYearlyExpenseData = this.YearlyExpenseData.map((data) =>
-  //   this.lowerLimit >= data ? this.lowerLimit : data
-  // );
-
   private yearlyOverviewClick: SeriesClickCallbackFunction = (ev: SeriesClickEventObject) => {
     this.modalController.showAlert({
       title: 'Clicked chart',
