@@ -15,6 +15,8 @@ function colorPoints() {
         if (j === points.length - 1) {
           points[j].graphic.element.style.fill = getColor('primary').value;
           points[j].graphic.element.style.stroke = getColor('primary').value;
+        } else {
+          points[j].graphic.element.style.stroke = getColor('secondary').value;
         }
       }
     }
@@ -128,6 +130,7 @@ export class MonthlyOverviewChartExampleComponent implements OnInit {
       },
       series: {
         color: getColor('secondary').value,
+        zIndex: 10,
         states: {
           hover: {
             enabled: false,
