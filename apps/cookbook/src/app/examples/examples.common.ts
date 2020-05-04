@@ -49,6 +49,7 @@ import { DividerExampleComponent } from './divider-example/divider-example.compo
 import { ReorderListExampleComponent } from './reorder-list/reorder-list-example.component';
 import { DropdownExampleComponent } from '~/app/examples/dropdown-example/dropdown-example.component';
 import { MonthlyOverviewChartExampleComponent } from './chart-example/examples/monthly-overview-chart-example/monthly-overview-chart-example.component';
+import { YearlyOverviewChartExampleComponent } from './chart-example/examples/yearly-overview-chart-example/yearly-overview-chart-example.component';
 
 // Example of "custom" icons
 export const iconSettings: IconSettings = {
@@ -79,6 +80,7 @@ export const COMPONENT_DECLARATIONS: any[] = [
   AvatarExampleComponent,
   ChartExampleComponent,
   MonthlyOverviewChartExampleComponent,
+  YearlyOverviewChartExampleComponent,
   FontsExampleComponent,
   SpinnerExampleComponent,
   ModalExampleComponent,
