@@ -32,6 +32,7 @@ export class MonthlyOverviewChartExampleComponent implements OnInit {
   height = 150;
 
   private monthlyExpenseData = [0, 1400, 300, 500, 100, 1000, 1100, 450, 1350, 1200, 1250, 600];
+  private maxValue = Math.max(...this.monthlyExpenseData);
 
   // lower limit is shown as 2% of max value for UX reasons
   private lowerLimit = Math.max(...this.monthlyExpenseData) * 0.02;
@@ -114,7 +115,7 @@ export class MonthlyOverviewChartExampleComponent implements OnInit {
       showLastLabel: false,
       showFirstLabel: false,
       tickPositioner: () => {
-        var positions = [0, Math.max(...this.adjustedMonthlyExpenseData)];
+        var positions = [0, this.maxValue];
 
         return positions;
       },
@@ -124,6 +125,7 @@ export class MonthlyOverviewChartExampleComponent implements OnInit {
     },
     plotOptions: {
       column: {
+        stacking: 'normal',
         events: {
           click: this.monthlyOverviewClick.bind(this),
         },
@@ -155,6 +157,14 @@ export class MonthlyOverviewChartExampleComponent implements OnInit {
       enabled: false,
     },
     series: [
+      {
+        type: 'column',
+        name: 'InvisibleClickReceiver',
+        data: this.adjustedMonthlyExpenseData.map(
+          (_, idx) => this.maxValue - this.adjustedMonthlyExpenseData[idx]
+        ),
+        opacity: 0,
+      },
       {
         type: 'column',
         data: this.adjustedMonthlyExpenseData,

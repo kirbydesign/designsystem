@@ -28,9 +28,15 @@ function colorPoints() {
 export class YearlyOverviewChartExampleComponent implements OnInit {
   height = 150;
 
-  private wholeYearExpensesData = [960, 8761, 7760];
+  private yearExpensesData = [0, 8761, 7760];
   private currentTimeData = [0, 1000, 800];
+  private maxValue = Math.max(...this.yearExpensesData) + Math.max(...this.currentTimeData);
   private years = [2018, 2019, 2020].reverse();
+  private lowerLimit = Math.max(...this.yearExpensesData) * 0.01;
+  // lower limit is shown as 2% of max value for UX reasons
+  private adjustedYearExpensesData = this.yearExpensesData.map((data) =>
+    this.lowerLimit >= data ? this.lowerLimit : data
+  );
 
   private yearlyOverviewClick: SeriesClickCallbackFunction = (ev: SeriesClickEventObject) => {
     this.modalController.showAlert({
@@ -97,7 +103,7 @@ export class YearlyOverviewChartExampleComponent implements OnInit {
       },
       series: {
         color: getColor('secondary').value,
-        stacking: 'overlap',
+        stacking: 'normal',
         states: {
           hover: {
             enabled: false,
@@ -116,9 +122,16 @@ export class YearlyOverviewChartExampleComponent implements OnInit {
     },
     series: [
       {
+        name: 'InvisibleClickReceiver',
+        data: this.adjustedYearExpensesData.map(
+          (wholeYearData, idx) => this.maxValue - (wholeYearData + this.currentTimeData[idx])
+        ),
+        edgeColor: 'rgb(255, 255, 255, 0)',
+        opacity: 0,
+      },
+      {
         name: 'WholeYearExpenses',
-        data: this.wholeYearExpensesData,
-        color: getColor('secondary').value,
+        data: this.adjustedYearExpensesData,
       },
       {
         name: 'CurrentTimeExpsenses',
