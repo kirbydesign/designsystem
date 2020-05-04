@@ -20,6 +20,8 @@ import { ModalConfig } from './config/modal-config';
 import { COMPONENT_PROPS } from './config/modal-config.helper';
 import { Modal } from '../services/modal.interfaces';
 import { ButtonComponent } from '../../button/button.component';
+import { ResizeObserverService } from '../../shared/resize-observer/resize-observer.service';
+import { ResizeObserverEntry } from '../../shared/resize-observer/types/resize-observer-entry';
 
 @Component({
   selector: 'kirby-modal-wrapper',
@@ -28,7 +30,7 @@ import { ButtonComponent } from '../../button/button.component';
   providers: [{ provide: Modal, useExisting: ModalWrapperComponent }],
 })
 export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDestroy {
-  static readonly KEYBOARD_HIDE_DELAY_IN_MS = 25;
+  static readonly KEYBOARD_HIDE_DELAY_IN_MS = 100;
 
   scrollY: number = Math.abs(window.scrollY);
   @Input() config: ModalConfig;
@@ -44,6 +46,9 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   private observer: MutationObserver;
   private keyboardVisible = false;
   private toolbarButtons: HTMLButtonElement[] = [];
+  private delayedClose = () => {};
+  private delayedCloseTimeoutId;
+  private initialViewportHeight: number;
 
   @HostBinding('class.drawer')
   get _isDrawer() {
@@ -53,8 +58,11 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   constructor(
     private injector: Injector,
     private elementRef: ElementRef<HTMLElement>,
-    private renderer: Renderer2
-  ) {}
+    private renderer: Renderer2,
+    private resizeObserverService: ResizeObserverService
+  ) {
+    this.observeViewportResize();
+  }
 
   ngOnInit(): void {
     this.componentPropsInjector = Injector.create({
@@ -83,21 +91,28 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     if (!ionModalElement) {
       return;
     }
+
     if (!this.keyboardVisible) {
       // No keyboard visible:
       // Dismiss modal and return:
+      clearTimeout(this.delayedCloseTimeoutId);
       await ionModalElement.dismiss(data);
       return;
     }
+
     // Keyboard visible:
     // Blur active element and wait for keyboard to hide,
     // then dismiss modal and return:
     this.blurActiveElement();
     return new Promise((resolve) => {
-      setTimeout(async () => {
+      this.delayedClose = async () => {
         await ionModalElement.dismiss(data);
         resolve();
-      }, ModalWrapperComponent.KEYBOARD_HIDE_DELAY_IN_MS);
+      };
+      this.delayedCloseTimeoutId = setTimeout(
+        this.delayedClose,
+        ModalWrapperComponent.KEYBOARD_HIDE_DELAY_IN_MS
+      );
     });
   }
 
@@ -140,6 +155,25 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
       // (to allow tap event to fire):
       if (!isToolbarButtonTouch) {
         this.blurActiveElement();
+      }
+    }
+  }
+
+  private observeViewportResize() {
+    this.resizeObserverService.observe(window.document.body, this.onViewportResize.bind(this));
+  }
+
+  private onViewportResize(entry: ResizeObserverEntry) {
+    if (!this.initialViewportHeight) {
+      // Initial observe callback, register initial height:
+      this.initialViewportHeight = entry.contentRect.height;
+      return;
+    }
+    if (entry.contentRect.height === this.initialViewportHeight) {
+      // We are back to initial body height, check for pending close func:
+      if (this.delayedCloseTimeoutId) {
+        clearTimeout(this.delayedCloseTimeoutId);
+        this.delayedClose();
       }
     }
   }
@@ -199,5 +233,6 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     //clean up the observer
     this.observer && this.observer.disconnect();
     delete this.observer;
+    this.resizeObserverService && this.resizeObserverService.unobserve(window.document.body);
   }
 }
