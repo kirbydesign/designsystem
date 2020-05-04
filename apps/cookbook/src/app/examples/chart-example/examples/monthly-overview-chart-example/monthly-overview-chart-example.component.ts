@@ -27,6 +27,8 @@ function colorPoints() {
   styleUrls: ['./monthly-overview-chart-example.component.scss'],
 })
 export class MonthlyOverviewChartExampleComponent implements OnInit {
+  height = 150;
+
   private monthlyExpenseData = [0, 1400, 300, 500, 100, 1000, 1100, 450, 1350, 1200, 1250, 600];
 
   // lower limit is shown as 2% of max value for UX reasons
@@ -47,7 +49,7 @@ export class MonthlyOverviewChartExampleComponent implements OnInit {
       animation: {
         duration: 500,
       },
-      height: 150,
+      height: this.height,
       backgroundColor: 'transparent',
       type: 'column',
       events: {
