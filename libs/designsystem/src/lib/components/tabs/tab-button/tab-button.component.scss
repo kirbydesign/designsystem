@@ -5,6 +5,7 @@ ion-tab-button {
   flex: 1 1 0%;
   max-width: 168px;
   font-size: font-size('xxs');
+  -webkit-tap-highlight-color: transparent;
 
   --color-selected: get-color('black');
 
