@@ -260,7 +260,7 @@ describe('DropdownComponent', () => {
       });
 
       it('should render dropdown with full width', () => {
-        spectator.component.isOpen = true;
+        spectator.component['state'] = 'open';
         spectator.detectChanges();
         const card = spectator.query('kirby-card');
         const componentWidth = spectator.element.clientWidth;
@@ -272,7 +272,7 @@ describe('DropdownComponent', () => {
 
     describe('when closed', () => {
       beforeEach(() => {
-        spectator.component.isOpen = false;
+        spectator.component['state'] = 'closed';
         spectator.detectChanges();
       });
 
@@ -507,7 +507,7 @@ describe('DropdownComponent', () => {
 
     describe('when open', () => {
       beforeEach(() => {
-        spectator.component.isOpen = true;
+        spectator.component['state'] = 'open';
         spectator.detectChanges();
       });
 

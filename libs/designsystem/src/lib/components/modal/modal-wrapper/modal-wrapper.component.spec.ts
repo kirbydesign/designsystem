@@ -1,13 +1,15 @@
-import { Spectator, createComponentFactory } from '@ngneat/spectator';
-import { MockComponents } from 'ng-mocks';
-import { IonToolbar, IonHeader, IonTitle, IonButtons, IonContent } from '@ionic/angular';
 import { Component } from '@angular/core';
+import { tick, fakeAsync } from '@angular/core/testing';
+import { IonToolbar, IonHeader, IonTitle, IonButtons, IonContent } from '@ionic/angular';
+import { MockComponents } from 'ng-mocks';
+import { createComponentFactory, Spectator } from '@ngneat/spectator';
 
+import { KirbyAnimation } from '../../../animation/kirby-animation';
+import { TestHelper } from '../../../testing/test-helper';
 import { ButtonComponent } from '../../button/button.component';
 import { IconComponent } from '../../icon/icon.component';
-import { ModalWrapperComponent } from './modal-wrapper.component';
-import { KirbyAnimation } from '../../../animation/kirby-animation';
 import { ModalFooterComponent } from '../footer/modal-footer.component';
+import { ModalWrapperComponent } from './modal-wrapper.component';
 
 @Component({
   template: `
@@ -32,13 +34,27 @@ class DynamicFooterEmbeddedComponent {
   isEnabled = false;
 }
 
+@Component({
+  template: `
+    <h2>Embedded Input</h2>
+    <input />
+    <textarea></textarea>
+    <button>Test Button</button>
+  `,
+})
+class InputEmbeddedComponent {}
+
 describe('ModalWrapperComponent', () => {
   let spectator: Spectator<ModalWrapperComponent>;
   let component: ModalWrapperComponent;
 
   const createComponent = createComponentFactory({
     component: ModalWrapperComponent,
-    entryComponents: [StaticFooterEmbeddedComponent, DynamicFooterEmbeddedComponent],
+    entryComponents: [
+      StaticFooterEmbeddedComponent,
+      DynamicFooterEmbeddedComponent,
+      InputEmbeddedComponent,
+    ],
     declarations: [
       MockComponents(
         IconComponent,
@@ -275,6 +291,154 @@ describe('ModalWrapperComponent', () => {
         expect(footerAsWrapperChild).toHaveClass('enabled');
         done();
       });
+    });
+  });
+
+  describe(`on keyboard show/hide events`, () => {
+    it('should set keyboardVisible to true on window:keyboardWillShow', () => {
+      spectator.dispatchFakeEvent(window, 'keyboardWillShow');
+      expect(component['keyboardVisible']).toBeTrue();
+    });
+    it('should set keyboardVisible to false on window:keyboardWillHide', () => {
+      spectator.dispatchFakeEvent(window, 'keyboardWillHide');
+      expect(component['keyboardVisible']).toBeFalse();
+    });
+  });
+
+  describe(`onHeaderTouchStart`, () => {
+    let ionContent: HTMLIonContentElement;
+    let input: HTMLInputElement;
+
+    beforeEach(async () => {
+      spectator = createComponent({
+        props: {
+          config: {
+            title: 'Test title',
+            flavor: 'drawer',
+            component: InputEmbeddedComponent,
+          },
+        },
+      });
+      component = spectator.component;
+      // Ensure ion-content gets height
+      // or embedded component won't be visible:
+      spectator.element.classList.add('ion-page');
+      ionContent = spectator.query('ion-content');
+      await TestHelper.whenReady(ionContent);
+      input = ionContent.querySelector('input');
+      spyOn(input, 'blur');
+    });
+
+    describe(`when keyboard is NOT visible`, () => {
+      beforeEach(() => {
+        expect(document.activeElement).not.toEqual(input);
+        spectator.dispatchFakeEvent(window, 'keyboardWillHide');
+      });
+
+      it('should not call blurActiveElement', () => {
+        const blurActiveElementSpy = spyOn(spectator.component, 'blurActiveElement');
+        spectator.dispatchTouchEvent('ion-header', 'touchstart');
+        expect(blurActiveElementSpy).not.toHaveBeenCalled();
+      });
+    });
+
+    describe(`when keyboard is visible`, () => {
+      beforeEach(() => {
+        input.focus();
+        expect(document.activeElement).toEqual(input);
+        spectator.dispatchFakeEvent(window, 'keyboardWillShow');
+      });
+
+      it('should blur document.activeElement when it is an input', () => {
+        spectator.dispatchTouchEvent('ion-header', 'touchstart');
+        expect(input.blur).toHaveBeenCalled();
+      });
+
+      it('should blur document.activeElement when it is a textarea', () => {
+        const textarea = ionContent.querySelector('textarea');
+        spyOn(textarea, 'blur');
+        textarea.focus();
+        expect(document.activeElement).toEqual(textarea);
+        spectator.dispatchTouchEvent('ion-header', 'touchstart');
+        expect(textarea.blur).toHaveBeenCalled();
+      });
+
+      it('should not blur document.activeElement if not input or textarea', () => {
+        const button = ionContent.querySelector('button');
+        button.focus();
+        expect(document.activeElement).toEqual(button);
+        spectator.dispatchTouchEvent('ion-header', 'touchstart');
+        expect(input.blur).not.toHaveBeenCalled();
+      });
+
+      it('should not blur document.activeElement if event is from toolbar button', () => {
+        spectator.dispatchTouchEvent(
+          'ion-header > ion-toolbar > ion-buttons > button',
+          'touchstart'
+        );
+        expect(input.blur).not.toHaveBeenCalled();
+      });
+
+      it('should not blur document.activeElement if event is from toolbar button child node', () => {
+        spectator.dispatchTouchEvent(
+          'ion-header > ion-toolbar > ion-buttons > button > kirby-icon',
+          'touchstart'
+        );
+        expect(input.blur).not.toHaveBeenCalled();
+      });
+    });
+  });
+
+  describe(`close()`, () => {
+    let ionModalSpy: jasmine.SpyObj<HTMLIonModalElement>;
+    beforeEach(() => {
+      spectator = createComponent({
+        props: {
+          config: {
+            title: 'Test title',
+            component: InputEmbeddedComponent,
+          },
+        },
+      });
+      component = spectator.component;
+      // Ensure ion-content gets height
+      // or embedded component won't be visible:
+      spectator.element.classList.add('ion-page');
+      ionModalSpy = jasmine.createSpyObj('ion-modal spy', ['dismiss']);
+      // Inject the modal spy through modal-wrapper's element.closest method:
+      spectator.element.closest = () => ionModalSpy;
+    });
+
+    it(`should call wrapping ion-modal's dismiss() method immediately`, () => {
+      spectator.component.close('test data');
+      expect(ionModalSpy.dismiss).toHaveBeenCalledWith('test data');
+    });
+
+    describe(`when keyboard is visible`, () => {
+      beforeEach(() => {
+        spectator.dispatchFakeEvent(window, 'keyboardWillShow');
+      });
+
+      it(`should blur document.activeElement before calling wrapping ion-modal's dismiss() method`, async () => {
+        const ionContent = spectator.query('ion-content');
+        await TestHelper.whenReady(ionContent);
+        const input = ionContent.querySelector('input');
+        spyOn(input, 'blur');
+        input.focus();
+        expect(document.activeElement).toEqual(input);
+
+        const didClose = spectator.component.close('test data');
+        expect(input.blur).toHaveBeenCalled();
+        expect(ionModalSpy.dismiss).not.toHaveBeenCalled();
+        await didClose;
+      });
+
+      it(`should delay before calling wrapping ion-modal's dismiss() method`, fakeAsync(() => {
+        spectator.component.close('test data');
+        expect(ionModalSpy.dismiss).not.toHaveBeenCalled();
+        tick(ModalWrapperComponent.KEYBOARD_HIDE_DELAY_IN_MS);
+        expect(ionModalSpy.dismiss).toHaveBeenCalledWith('test data');
+      }));
     });
   });
 });
