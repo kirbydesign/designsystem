@@ -1,3 +1,4 @@
+import { CircularProgressComponent } from './circular-progress/circular-progress.component';
 export * from './app';
 
 export { AvatarComponent } from './avatar/avatar.component';
@@ -46,3 +47,5 @@ export * from './tabs';
 export * from './toast';
 export { ToggleComponent } from './toggle/toggle.component';
 export { ToolbarComponent } from './toolbar/toolbar.component';
+
+export { CircularProgressComponent } from './circular-progress/circular-progress.component';
