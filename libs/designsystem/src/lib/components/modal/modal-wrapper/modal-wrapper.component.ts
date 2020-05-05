@@ -14,6 +14,7 @@ import {
   QueryList,
 } from '@angular/core';
 import { IonContent } from '@ionic/angular';
+import { Subject } from 'rxjs';
 
 import { KirbyAnimation } from '../../../animation/kirby-animation';
 import { ModalConfig } from './config/modal-config';
@@ -52,6 +53,8 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   private viewportResized = false;
 
   private ionModalElement: HTMLIonModalElement;
+  private readonly ionModalDidPresent = new Subject<void>();
+  readonly didPresent = this.ionModalDidPresent.toPromise();
 
   @HostBinding('class.drawer')
   get _isDrawer() {
@@ -69,6 +72,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
 
   ngOnInit(): void {
     this.ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
+    this.listenForIonModalDidPresent();
     this.componentPropsInjector = Injector.create({
       providers: [{ provide: COMPONENT_PROPS, useValue: this.config.componentProps }],
       parent: this.injector,
@@ -80,6 +84,15 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
       this.toolbarButtons = this.toolbarButtonsQuery.map((buttonRef) => buttonRef.nativeElement);
     }
     this.checkForEmbeddedFooter();
+  }
+
+  private listenForIonModalDidPresent() {
+    if (this.ionModalElement) {
+      this.ionModalElement.addEventListener('ionModalDidPresent', () => {
+        this.ionModalDidPresent.next();
+        this.ionModalDidPresent.complete();
+      });
+    }
   }
 
   scrollToTop(scrollDuration?: KirbyAnimation.Duration) {
