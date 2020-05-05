@@ -13,6 +13,7 @@ ion-fab-button {
   width: 64px;
   height: 64px;
   user-select: none;
+  -webkit-tap-highlight-color: transparent;
 
   &[disabled] {
     --background: #{get-color('semi-light')};
