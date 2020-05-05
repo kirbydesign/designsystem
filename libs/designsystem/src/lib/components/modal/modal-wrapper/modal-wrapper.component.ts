@@ -49,6 +49,9 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   private delayedClose = () => {};
   private delayedCloseTimeoutId;
   private initialViewportHeight: number;
+  private viewportResized = false;
+
+  private ionModalElement: HTMLIonModalElement;
 
   @HostBinding('class.drawer')
   get _isDrawer() {
@@ -65,6 +68,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   }
 
   ngOnInit(): void {
+    this.ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
     this.componentPropsInjector = Injector.create({
       providers: [{ provide: COMPONENT_PROPS, useValue: this.config.componentProps }],
       parent: this.injector,
@@ -87,16 +91,15 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   }
 
   async close(data?: any): Promise<void> {
-    const ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
-    if (!ionModalElement) {
+    if (!this.ionModalElement) {
       return;
     }
 
-    if (!this.keyboardVisible) {
-      // No keyboard visible:
+    if (!this.keyboardVisible || !this.viewportResized) {
+      // No keyboard visible or viewport not resized:
       // Dismiss modal and return:
       clearTimeout(this.delayedCloseTimeoutId);
-      await ionModalElement.dismiss(data);
+      await this.ionModalElement.dismiss(data);
       return;
     }
 
@@ -106,7 +109,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     this.blurActiveElement();
     return new Promise((resolve) => {
       this.delayedClose = async () => {
-        await ionModalElement.dismiss(data);
+        await this.ionModalElement.dismiss(data);
         resolve();
       };
       this.delayedCloseTimeoutId = setTimeout(
@@ -169,8 +172,9 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
       this.initialViewportHeight = entry.contentRect.height;
       return;
     }
-    if (entry.contentRect.height === this.initialViewportHeight) {
-      // We are back to initial body height, check for pending close func:
+    this.viewportResized = entry.contentRect.height !== this.initialViewportHeight;
+    if (!this.viewportResized) {
+      // We are back to initial view port height, check for pending close func:
       if (this.delayedCloseTimeoutId) {
         clearTimeout(this.delayedCloseTimeoutId);
         this.delayedClose();
