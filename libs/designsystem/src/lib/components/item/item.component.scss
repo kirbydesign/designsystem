@@ -4,6 +4,7 @@
 :host {
   display: block;
   position: relative;
+  -webkit-tap-highlight-color: transparent;
 
   ion-item {
     font-size: font-size('s');
