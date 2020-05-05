@@ -139,19 +139,15 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     window.scrollTo({ top: this.scrollY });
   }
 
-  // This prevents Ionic from setting --keyboard-offset on ion-content inside modal:
-  @HostListener('focusin', ['$event'])
-  @HostListener('focusout', ['$event'])
-  checkFocusTarget(event: FocusEvent) {
-    const input = event.target as HTMLElement;
-    if (input.tagName === 'INPUT' && input.closest('ion-modal')) {
-      event.stopPropagation();
-    }
-  }
-
-  @HostListener('window:keyboardWillShow')
-  _onKeyboardWillShow() {
+  @HostListener('window:keyboardWillShow', ['$event'])
+  _onKeyboardWillShow(info?: { keyboardHeight: number }) {
     this.keyboardVisible = true;
+    if (info && info.keyboardHeight) {
+      this.ionContentElement.nativeElement.style.setProperty(
+        '--keyboard-offset',
+        `${info.keyboardHeight}px`
+      );
+    }
   }
 
   @HostListener('window:keyboardWillHide')
