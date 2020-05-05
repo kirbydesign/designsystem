@@ -6,20 +6,22 @@ import { ModalController, DesignTokenHelper } from '@kirbydesign/designsystem';
 const getColor = DesignTokenHelper.getColor;
 const fontSize = DesignTokenHelper.fontSize;
 
-function colorPoints() {
-  var series = this.series;
-  for (var i = 0, ie = series.length; i < ie; ++i) {
-    var points = series[i].data;
-    for (var j = 0, je = points.length; j < je; ++j) {
-      if (points[j].graphic) {
-        if (points[j].category === '2019') {
-          points[j].graphic.element.style.fill = getColor('primary').value;
-        }
+function colorPoints(selectedYear: string) {
+  return function() {
+    var series = this.series;
+    for (var i = 0, ie = series.length; i < ie; ++i) {
+      var points = series[i].data;
+      for (var j = 0, je = points.length; j < je; ++j) {
+        if (points[j].graphic) {
+          if (points[j].category === selectedYear) {
+            points[j].graphic.element.style.fill = getColor('primary').value;
+          }
 
-        points[j].graphic.element.style.stroke = getColor('background-color').value;
+          points[j].graphic.element.style.stroke = getColor('background-color').value;
+        }
       }
     }
-  }
+  };
 }
 
 @Component({
@@ -34,6 +36,8 @@ export class YearlyOverviewChartExampleComponent implements OnInit {
   private currentTimeData = [0, 1000, 800];
   private maxValue = Math.max(...this.yearExpensesData) + Math.max(...this.currentTimeData);
   private years = [2018, 2019, 2020].reverse();
+  private yearsStr = this.years.map((year) => year.toString());
+  private selectedYear = this.yearsStr[0];
   private lowerLimit = Math.max(...this.yearExpensesData) * 0.01;
   // lower limit is shown as 2% of max value for UX reasons
   private adjustedYearExpensesData = this.yearExpensesData.map((data) =>
@@ -46,6 +50,12 @@ export class YearlyOverviewChartExampleComponent implements OnInit {
       message: 'You clicked on year: ' + ev.point.category,
       okBtnText: 'Ok',
     });
+
+    this.selectedYear = ev.point.category;
+    this.yearlyOverviewOptions.plotOptions.series.animation = false;
+    this.yearlyOverviewOptions.chart.events.load = colorPoints(this.selectedYear);
+    this.yearlyOverviewOptions.chart.events.redraw = colorPoints(this.selectedYear);
+    this.yearlyOverviewOptions = { ...this.yearlyOverviewOptions };
   };
 
   yearlyOverviewOptions: Options = {
@@ -57,8 +67,8 @@ export class YearlyOverviewChartExampleComponent implements OnInit {
       height: this.height,
       backgroundColor: 'transparent',
       events: {
-        load: colorPoints,
-        redraw: colorPoints,
+        load: colorPoints(this.selectedYear),
+        redraw: colorPoints(this.selectedYear),
       },
     },
     credits: {
@@ -68,7 +78,7 @@ export class YearlyOverviewChartExampleComponent implements OnInit {
       text: '',
     },
     xAxis: {
-      categories: this.years.map((year) => year.toString()),
+      categories: this.yearsStr,
       labels: {
         style: {
           fontSize: fontSize('xxs'),

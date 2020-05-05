@@ -1,26 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Options, SeriesClickCallbackFunction, SeriesClickEventObject } from 'highcharts';
 
-import { ModalController, DesignTokenHelper } from '@kirbydesign/designsystem';
+import { ModalController, DesignTokenHelper, ChartComponent } from '@kirbydesign/designsystem';
 
 const getColor = DesignTokenHelper.getColor;
 const fontSize = DesignTokenHelper.fontSize;
 
-function colorPoints() {
-  var series = this.series;
-  for (var i = 0, ie = series.length; i < ie; ++i) {
-    var points = series[i].data;
-    for (var j = 0, je = points.length; j < je; ++j) {
-      if (points[j].graphic) {
-        if (j === points.length - 1) {
-          points[j].graphic.element.style.fill = getColor('primary').value;
-          points[j].graphic.element.style.stroke = getColor('primary').value;
-        } else {
-          points[j].graphic.element.style.stroke = getColor('secondary').value;
+function colorPoints(selectedIdx) {
+  return function() {
+    var series = this.series;
+    for (var i = 0, ie = series.length; i < ie; ++i) {
+      var points = series[i].data;
+      for (var j = 0, je = points.length; j < je; ++j) {
+        if (points[j].graphic) {
+          if (j === selectedIdx) {
+            points[j].graphic.element.style.fill = getColor('primary').value;
+            points[j].graphic.element.style.stroke = getColor('primary').value;
+          } else {
+            points[j].graphic.element.style.stroke = getColor('secondary').value;
+          }
         }
       }
     }
-  }
+  };
 }
 
 @Component({
@@ -29,10 +31,26 @@ function colorPoints() {
   styleUrls: ['./monthly-overview-chart-example.component.scss'],
 })
 export class MonthlyOverviewChartExampleComponent implements OnInit {
+  @ViewChild(ChartComponent) chart: ChartComponent;
   height = 150;
 
+  private categories = [
+    'mar',
+    'apr',
+    'maj',
+    'jun',
+    'jul',
+    'aug',
+    'sep',
+    'okt',
+    'nov',
+    'dec',
+    'jan',
+    'feb',
+  ];
   private monthlyExpenseData = [0, 1400, 300, 500, 100, 1000, 1100, 450, 1350, 1200, 1250, 600];
   private maxValue = Math.max(...this.monthlyExpenseData);
+  private selectedIdx = 0;
 
   // lower limit is shown as 2% of max value for UX reasons
   private lowerLimit = Math.max(...this.monthlyExpenseData) * 0.02;
@@ -46,6 +64,12 @@ export class MonthlyOverviewChartExampleComponent implements OnInit {
       message: 'You clicked on column: ' + ev.point.category,
       okBtnText: 'Ok',
     });
+
+    this.selectedIdx = this.categories.indexOf(ev.point.category);
+    this.monthlyOverviewOptions.plotOptions.series.animation = false;
+    this.monthlyOverviewOptions.chart.events.load = colorPoints(this.selectedIdx);
+    this.monthlyOverviewOptions.chart.events.redraw = colorPoints(this.selectedIdx);
+    this.monthlyOverviewOptions = { ...this.monthlyOverviewOptions };
   };
   monthlyOverviewOptions: Options = {
     chart: {
@@ -56,28 +80,14 @@ export class MonthlyOverviewChartExampleComponent implements OnInit {
       backgroundColor: 'transparent',
       type: 'column',
       events: {
-        load: colorPoints,
-        redraw: colorPoints,
+        load: colorPoints(this.selectedIdx),
+        redraw: colorPoints(this.selectedIdx),
       },
     },
     title: {
       text: '',
     },
     xAxis: {
-      categories: [
-        'mar',
-        'apr',
-        'maj',
-        'jun',
-        'jul',
-        'aug',
-        'sep',
-        'okt',
-        'nov',
-        'dec',
-        'jan',
-        'feb',
-      ],
       labels: {
         style: {
           fontSize: fontSize('xxs'),
@@ -85,6 +95,7 @@ export class MonthlyOverviewChartExampleComponent implements OnInit {
           color: getColor('black').value,
         },
       },
+      categories: this.categories,
       lineWidth: 0,
       minorGridLineWidth: 0,
       lineColor: 'transparent',
