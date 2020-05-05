@@ -15,6 +15,8 @@ function colorPoints() {
         if (points[j].category === '2019') {
           points[j].graphic.element.style.fill = getColor('primary').value;
         }
+
+        points[j].graphic.element.style.stroke = getColor('background-color').value;
       }
     }
   }
