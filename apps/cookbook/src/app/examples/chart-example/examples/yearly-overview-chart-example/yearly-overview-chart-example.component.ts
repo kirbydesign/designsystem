@@ -81,7 +81,7 @@ export class YearlyOverviewChartExampleComponent implements OnInit {
       categories: this.yearsStr,
       labels: {
         style: {
-          fontSize: fontSize('xxs'),
+          fontSize: fontSize('s'),
           fontFamily: 'roboto',
           color: getColor('black').value,
         },
