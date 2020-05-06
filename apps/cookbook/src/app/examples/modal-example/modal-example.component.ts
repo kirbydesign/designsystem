@@ -78,6 +78,13 @@ this.modal.scrollToTop(KirbyAnimation.Duration.LONG);
 
 // scrollToBottom example:
 this.modal.scrollToBottom();`,
+  didPresentCodeSnippet: `constructor(@Optional() @SkipSelf() private modal: Modal) {}
+
+@ViewChild('nameInput', { static: false, read: ElementRef }) private nameInputElement: ElementRef<HTMLInputElement>;
+
+ngOnInit() {
+  this.modal.didPresent.then(() => this.nameInputElement.nativeElement.focus());
+}`,
   embeddedCodeSnippet: `import { Component, Inject } from '@angular/core';
 import { COMPONENT_PROPS } from '@kirbydesign/designsystem';
 
@@ -123,6 +130,7 @@ export class ModalExampleComponent {
   drawerCodeSnippet = config.drawerCodeSnippet;
   callbackCodeSnippet = config.callbackCodeSnippet;
   callbackWithDataCodeSnippet = config.callbackWithDataCodeSnippet;
+  didPresentCodeSnippet = config.didPresentCodeSnippet;
   scrollingCodeSnippet = config.scrollingCodeSnippet;
   embeddedCodeSnippet = config.embeddedCodeSnippet;
   closeModalCodeSnippet = config.closeModalCodeSnippet;
