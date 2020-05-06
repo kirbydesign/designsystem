@@ -458,6 +458,10 @@ describe('ModalWrapperComponent', () => {
           await new Promise((resolve) => setTimeout(resolve));
           const keyboardHeight = 300;
           //Mimic native keyboard taking height of window:
+          const heightWidthKeyboard = window.innerHeight - keyboardHeight;
+          console.log(
+            `Mimic native keyboard: (window.innerHeight - keyboardHeight) = (${window.innerHeight} - ${keyboardHeight}) = ${heightWidthKeyboard}px`
+          );
           await TestHelper.resizeTestWindow({ height: `${window.innerHeight - keyboardHeight}px` });
           // Ensure resizeObserver triggers and onViewportResize fires:
           await new Promise((resolve) => setTimeout(resolve));
