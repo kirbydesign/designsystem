@@ -44,7 +44,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   @ViewChild(IonContent, { static: true, read: ElementRef }) private ionContentElement: ElementRef<
     HTMLIonContentElement
   >;
-  private observer: MutationObserver;
+  private mutationObserver: MutationObserver;
   private keyboardVisible = false;
   private toolbarButtons: HTMLButtonElement[] = [];
   private delayedClose = () => {};
@@ -236,16 +236,16 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
         this.moveEmbeddedFooter(addedFooter);
       }
     };
-    this.observer = new MutationObserver(callback);
-    this.observer.observe(embeddedComponentElement, {
+    this.mutationObserver = new MutationObserver(callback);
+    this.mutationObserver.observe(embeddedComponentElement, {
       childList: true, // Listen for addition or removal of child nodes
     });
   }
 
   ngOnDestroy() {
     //clean up the observer
-    this.observer && this.observer.disconnect();
-    delete this.observer;
+    this.mutationObserver && this.mutationObserver.disconnect();
+    delete this.mutationObserver;
     this.resizeObserverService && this.resizeObserverService.unobserve(window.document.body);
   }
 }
