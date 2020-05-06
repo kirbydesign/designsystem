@@ -60,4 +60,18 @@ export class ModalShowcaseComponent implements AfterViewInit {
       inputValues: ['undefined | { [key: string]: any; }'],
     },
   ];
+
+  events: ShowcaseProperty[] = [
+    {
+      name: 'didPresent',
+      description: 'Emitted when the modal is ready and the enter animation has finished',
+      inputValues: ['Promise<void>'],
+    },
+  ];
+
+  eventColumns = {
+    Name: 'Name',
+    Description: 'Description',
+    Type: 'Signature',
+  };
 }
