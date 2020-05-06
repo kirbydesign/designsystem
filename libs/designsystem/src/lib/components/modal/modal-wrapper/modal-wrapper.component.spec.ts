@@ -481,10 +481,11 @@ describe('ModalWrapperComponent', () => {
           input.focus();
           expect(document.activeElement).toEqual(input);
 
-          const didClose = spectator.component.close('test data');
-          expect(input.blur).toHaveBeenCalled();
+          spectator.component.close('test data');
           expect(ionModalSpy.dismiss).not.toHaveBeenCalled();
-          await didClose;
+          expect(input.blur).toHaveBeenCalled();
+          tick(ModalWrapperComponent.KEYBOARD_HIDE_DELAY_IN_MS);
+          expect(ionModalSpy.dismiss).toHaveBeenCalled();
         });
 
         it(`should delay before calling wrapping ion-modal's dismiss() method`, fakeAsync(() => {
