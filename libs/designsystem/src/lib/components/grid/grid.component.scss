@@ -4,15 +4,9 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   grid-auto-rows: minmax(var(--kirby-grid-item-min-height, auto), auto);
-  grid-column-gap: size('xxs');
-  grid-row-gap: size('xxs');
+  gap: size('m');
   max-width: var(--kirby-page-max-width);
   margin: 0 auto;
-
-  @include media('>=small') {
-    grid-column-gap: size('s');
-    grid-row-gap: size('s');
-  }
 
   @include media('>=medium') {
     @for $i from 1 through 10 {
