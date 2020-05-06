@@ -392,6 +392,10 @@ describe('ModalWrapperComponent', () => {
   describe(`close()`, () => {
     let ionModalSpy: jasmine.SpyObj<HTMLIonModalElement>;
     beforeEach(() => {
+      if (spectator.component) {
+        // Ensure any observers are destroyed:
+        spectator.component.ngOnDestroy();
+      }
       spectator = createComponent({
         props: {
           config: {
@@ -404,9 +408,11 @@ describe('ModalWrapperComponent', () => {
       // Ensure ion-content gets height
       // or embedded component won't be visible:
       spectator.element.classList.add('ion-page');
-      ionModalSpy = jasmine.createSpyObj('ion-modal spy', ['dismiss']);
+      ionModalSpy = jasmine.createSpyObj('ion-modal spy', ['dismiss', 'addEventListener']);
       // Inject the modal spy through modal-wrapper's element.closest method:
+      console.warn('injecting ion-modal Spy...');
       spectator.element.closest = () => ionModalSpy;
+      spectator.component.ngOnInit();
     });
 
     it(`should call wrapping ion-modal's dismiss() method immediately`, () => {
@@ -419,26 +425,51 @@ describe('ModalWrapperComponent', () => {
         spectator.dispatchFakeEvent(window, 'keyboardWillShow');
       });
 
-      it(`should blur document.activeElement before calling wrapping ion-modal's dismiss() method`, async () => {
-        const ionContent = spectator.query('ion-content');
-        await TestHelper.whenReady(ionContent);
-        const input = ionContent.querySelector('input');
-        spyOn(input, 'blur');
-        input.focus();
-        expect(document.activeElement).toEqual(input);
-
-        const didClose = spectator.component.close('test data');
-        expect(input.blur).toHaveBeenCalled();
-        expect(ionModalSpy.dismiss).not.toHaveBeenCalled();
-        await didClose;
+      describe(`when viewport is not rezized`, () => {
+        it(`should call wrapping ion-modal's dismiss() method immediately`, () => {
+          spectator.component.close('test data');
+          expect(ionModalSpy.dismiss).toHaveBeenCalledWith('test data');
+        });
       });
 
-      it(`should delay before calling wrapping ion-modal's dismiss() method`, fakeAsync(() => {
-        spectator.component.close('test data');
-        expect(ionModalSpy.dismiss).not.toHaveBeenCalled();
-        tick(ModalWrapperComponent.KEYBOARD_HIDE_DELAY_IN_MS);
-        expect(ionModalSpy.dismiss).toHaveBeenCalledWith('test data');
-      }));
+      describe(`when viewport is rezized`, () => {
+        beforeEach(async () => {
+          // Ensure initialViewportHeight is set:
+          await new Promise((resolve) => setTimeout(resolve));
+          const keyboardHeight = 300;
+          //Mimic native keyboard taking height of window:
+          await TestHelper.resizeTestWindow({ height: `${window.innerHeight - keyboardHeight}px` });
+          // Ensure onViewportResize fires:
+          await new Promise((resolve) => setTimeout(resolve));
+        });
+
+        afterEach(() => {
+          // Ensure any observers are destroyed:
+          spectator.component.ngOnDestroy();
+          TestHelper.resetTestWindow();
+        });
+
+        it(`should blur document.activeElement before calling wrapping ion-modal's dismiss() method`, async () => {
+          const ionContent = spectator.query('ion-content');
+          await TestHelper.whenReady(ionContent);
+          const input = ionContent.querySelector('input');
+          spyOn(input, 'blur');
+          input.focus();
+          expect(document.activeElement).toEqual(input);
+
+          const didClose = spectator.component.close('test data');
+          expect(input.blur).toHaveBeenCalled();
+          expect(ionModalSpy.dismiss).not.toHaveBeenCalled();
+          await didClose;
+        });
+
+        it(`should delay before calling wrapping ion-modal's dismiss() method`, fakeAsync(() => {
+          spectator.component.close('test data');
+          expect(ionModalSpy.dismiss).not.toHaveBeenCalled();
+          tick(ModalWrapperComponent.KEYBOARD_HIDE_DELAY_IN_MS);
+          expect(ionModalSpy.dismiss).toHaveBeenCalledWith('test data');
+        }));
+      });
     });
   });
 });
