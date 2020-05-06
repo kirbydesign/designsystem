@@ -309,11 +309,11 @@ describe('ModalWrapperComponent', () => {
   describe(`on keyboard show/hide events`, () => {
     it('should set keyboardVisible to true on window:keyboardWillShow', () => {
       spectator.dispatchFakeEvent(window, 'keyboardWillShow');
-      expect(component['keyboardVisible']).toBeTrue();
+      expect(spectator.component['keyboardVisible']).toBeTrue();
     });
     it('should set keyboardVisible to false on window:keyboardWillHide', () => {
       spectator.dispatchFakeEvent(window, 'keyboardWillHide');
-      expect(component['keyboardVisible']).toBeFalse();
+      expect(spectator.component['keyboardVisible']).toBeFalse();
     });
   });
 
