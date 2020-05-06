@@ -425,22 +425,22 @@ describe('ModalWrapperComponent', () => {
         spectator.dispatchFakeEvent(window, 'keyboardWillShow');
       });
 
-      describe(`when viewport is not rezized`, () => {
+      describe(`and viewport is not rezized`, () => {
         it(`should call wrapping ion-modal's dismiss() method immediately`, () => {
           spectator.component.close('test data');
           expect(ionModalSpy.dismiss).toHaveBeenCalledWith('test data');
         });
       });
 
-      describe(`when viewport is rezized`, () => {
+      describe(`and viewport is rezized`, () => {
         beforeEach(async () => {
-          // Ensure initialViewportHeight is set:
-          await new Promise((resolve) => setTimeout(resolve));
+          // Ensure resizeObserver triggers and initialViewportHeight is set:
+          await new Promise((resolve) => setTimeout(resolve, 1));
           const keyboardHeight = 300;
           //Mimic native keyboard taking height of window:
           await TestHelper.resizeTestWindow({ height: `${window.innerHeight - keyboardHeight}px` });
-          // Ensure onViewportResize fires:
-          await new Promise((resolve) => setTimeout(resolve));
+          // Ensure resizeObserver triggers and onViewportResize fires:
+          await new Promise((resolve) => setTimeout(resolve, 1));
         });
 
         afterEach(() => {
