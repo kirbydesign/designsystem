@@ -46,7 +46,6 @@ class InputEmbeddedComponent {}
 
 describe('ModalWrapperComponent', () => {
   let spectator: Spectator<ModalWrapperComponent>;
-  let component: ModalWrapperComponent;
 
   const createComponent = createComponentFactory({
     component: ModalWrapperComponent,
@@ -79,28 +78,32 @@ describe('ModalWrapperComponent', () => {
         },
       },
     });
-    component = spectator.component;
+  });
+
+  afterEach(() => {
+    // Ensure any observers are destroyed:
+    spectator.component.ngOnDestroy();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-    component.config.title = 'hest';
+    expect(spectator.component).toBeTruthy();
+    spectator.component.config.title = 'hest';
   });
 
   describe('title', () => {
     it('should render', () => {
-      expect(component.config.title).toEqual('Test title');
+      expect(spectator.component.config.title).toEqual('Test title');
     });
 
     it('should have css class "drawer" when drawer flavor is used', () => {
-      component.config.flavor = 'drawer';
+      spectator.component.config.flavor = 'drawer';
       spectator.detectChanges();
       const rootElement: HTMLElement = spectator.element;
       expect(rootElement.classList).toContain('drawer');
     });
 
     it('should have font size "m" when drawer flavor is used', () => {
-      component.config.flavor = 'drawer';
+      spectator.component.config.flavor = 'drawer';
       spectator.detectChanges();
       const rootElement: HTMLElement = spectator.element;
       const title = rootElement.querySelector('ion-title');
@@ -115,7 +118,7 @@ describe('ModalWrapperComponent', () => {
     });
 
     it("should render arrow-down when flavor is set to 'drawer'", () => {
-      component.config.flavor = 'drawer';
+      spectator.component.config.flavor = 'drawer';
       spectator.detectChanges();
       var el = spectator.query(IconComponent);
       expect(el.name).toBe('arrow-down');
@@ -124,7 +127,7 @@ describe('ModalWrapperComponent', () => {
 
   describe('supplementary button', () => {
     it('should not render if an icon was provided, but the flavor is modal', () => {
-      component.config.drawerSupplementaryAction = { iconName: 'qr', action: undefined };
+      spectator.component.config.drawerSupplementaryAction = { iconName: 'qr', action: undefined };
       spectator.detectChanges();
       const elements = spectator.queryAll(IconComponent);
       expect(elements.length).toBe(1);
@@ -132,8 +135,8 @@ describe('ModalWrapperComponent', () => {
     });
 
     it('should render as the provided icon when flavor is drawer', () => {
-      component.config.flavor = 'drawer';
-      component.config.drawerSupplementaryAction = { iconName: 'qr', action: undefined };
+      spectator.component.config.flavor = 'drawer';
+      spectator.component.config.drawerSupplementaryAction = { iconName: 'qr', action: undefined };
       spectator.detectChanges();
       const elements = spectator.queryAll(IconComponent);
       expect(elements.length).toBe(2);
@@ -142,16 +145,16 @@ describe('ModalWrapperComponent', () => {
     });
 
     it('should invoke the provided callback on select', () => {
-      component.config.flavor = 'drawer';
-      component.config.drawerSupplementaryAction = {
+      spectator.component.config.flavor = 'drawer';
+      spectator.component.config.drawerSupplementaryAction = {
         iconName: 'qr',
         action: (_: any) => {},
       };
-      spyOn(component.config.drawerSupplementaryAction, 'action');
+      spyOn(spectator.component.config.drawerSupplementaryAction, 'action');
 
       spectator.detectChanges();
       spectator.dispatchMouseEvent('ion-buttons[slot="end"] button[kirby-button]', 'click');
-      expect(component.config.drawerSupplementaryAction.action).toHaveBeenCalled();
+      expect(spectator.component.config.drawerSupplementaryAction.action).toHaveBeenCalled();
     });
   });
 
@@ -205,8 +208,13 @@ describe('ModalWrapperComponent', () => {
           },
         },
       });
-      component = spectator.component;
     });
+
+    afterEach(() => {
+      // Ensure any observers are destroyed:
+      spectator.component.ngOnDestroy();
+    });
+
     it('should move embedded footer to wrapper component', () => {
       const ionContentElement = spectator.query('ion-content');
       const embeddedComponentElement = ionContentElement.firstElementChild;
@@ -227,7 +235,11 @@ describe('ModalWrapperComponent', () => {
           },
         },
       });
-      component = spectator.component;
+    });
+
+    afterEach(() => {
+      // Ensure any observers are destroyed:
+      spectator.component.ngOnDestroy();
     });
 
     it('should move embedded footer to wrapper component when rendered', (done) => {
@@ -319,7 +331,6 @@ describe('ModalWrapperComponent', () => {
           },
         },
       });
-      component = spectator.component;
       // Ensure ion-content gets height
       // or embedded component won't be visible:
       spectator.element.classList.add('ion-page');
@@ -327,6 +338,11 @@ describe('ModalWrapperComponent', () => {
       await TestHelper.whenReady(ionContent);
       input = ionContent.querySelector('input');
       spyOn(input, 'blur');
+    });
+
+    afterEach(() => {
+      // Ensure any observers are destroyed:
+      spectator.component.ngOnDestroy();
     });
 
     describe(`when keyboard is NOT visible`, () => {
@@ -404,7 +420,6 @@ describe('ModalWrapperComponent', () => {
           },
         },
       });
-      component = spectator.component;
       // Ensure ion-content gets height
       // or embedded component won't be visible:
       spectator.element.classList.add('ion-page');
@@ -413,6 +428,11 @@ describe('ModalWrapperComponent', () => {
       console.warn('injecting ion-modal Spy...');
       spectator.element.closest = () => ionModalSpy;
       spectator.component.ngOnInit();
+    });
+
+    afterEach(() => {
+      // Ensure any observers are destroyed:
+      spectator.component.ngOnDestroy();
     });
 
     it(`should call wrapping ion-modal's dismiss() method immediately`, () => {
