@@ -473,7 +473,8 @@ describe('ModalWrapperComponent', () => {
           TestHelper.resetTestWindow();
         });
 
-        it(`should blur document.activeElement before calling wrapping ion-modal's dismiss() method`, async () => {
+        it(`should blur document.activeElement before calling wrapping ion-modal's dismiss() method`, fakeAsync(async () => {
+          console.warn('*******************************');
           const ionContent = spectator.query('ion-content');
           await TestHelper.whenReady(ionContent);
           const input = ionContent.querySelector('input');
@@ -486,7 +487,7 @@ describe('ModalWrapperComponent', () => {
           expect(input.blur).toHaveBeenCalled();
           tick(ModalWrapperComponent.KEYBOARD_HIDE_DELAY_IN_MS);
           expect(ionModalSpy.dismiss).toHaveBeenCalled();
-        });
+        }));
 
         it(`should delay before calling wrapping ion-modal's dismiss() method`, fakeAsync(() => {
           spectator.component.close('test data');

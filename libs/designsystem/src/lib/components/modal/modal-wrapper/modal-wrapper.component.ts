@@ -109,12 +109,20 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     }
 
     if (!this.keyboardVisible || !this.viewportResized) {
+      console.warn(
+        'EXIT RIGHT AWAY!!! this.keyboardVisible:',
+        this.keyboardVisible,
+        'this.viewportResized: ',
+        this.viewportResized
+      );
       // No keyboard visible or viewport not resized:
       // Dismiss modal and return:
       clearTimeout(this.delayedCloseTimeoutId);
       await this.ionModalElement.dismiss(data);
       return;
     }
+
+    console.warn('Delayed close...');
 
     // Keyboard visible:
     // Blur active element and wait for keyboard to hide,
@@ -182,9 +190,11 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
       return;
     }
     this.viewportResized = entry.contentRect.height !== this.initialViewportHeight;
+    console.warn('onViewportResize - this.viewportResized:', this.viewportResized);
     if (!this.viewportResized) {
       // We are back to initial view port height, check for pending close func:
       if (this.delayedCloseTimeoutId) {
+        console.warn('onViewportResize - no longer resized, clear delayed and close NOW!');
         clearTimeout(this.delayedCloseTimeoutId);
         this.delayedClose();
       }
