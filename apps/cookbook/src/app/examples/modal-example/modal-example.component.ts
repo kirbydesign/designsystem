@@ -67,23 +67,23 @@ export class EmbeddedComponent() {
   constructor(@Optional() @SkipSelf() private modal: Modal) {}
 
   const returnData: CustomDataType = {...};
-  this.modal.close(returnData);
+  this.modal?.close(returnData);
 }`,
   scrollingCodeSnippet: `import { KirbyAnimation, Modal } from '@kirbydesign/designsystem';
 ...
 constructor(@Optional() @SkipSelf() private modal: Modal) {}
 
 // scrollToTop example - with long scroll animation:
-this.modal.scrollToTop(KirbyAnimation.Duration.LONG);
+this.modal?.scrollToTop(KirbyAnimation.Duration.LONG);
 
 // scrollToBottom example:
-this.modal.scrollToBottom();`,
+this.modal?.scrollToBottom();`,
   didPresentCodeSnippet: `constructor(@Optional() @SkipSelf() private modal: Modal) {}
 
 @ViewChild('nameInput', { static: false, read: ElementRef }) private nameInputElement: ElementRef<HTMLInputElement>;
 
 ngOnInit() {
-  this.modal.didPresent.then(() => this.nameInputElement.nativeElement.focus());
+  this.modal?.didPresent.then(() => this.nameInputElement?.nativeElement.focus());
 }`,
   embeddedCodeSnippet: `import { Component, Inject } from '@angular/core';
 import { COMPONENT_PROPS } from '@kirbydesign/designsystem';
@@ -102,19 +102,19 @@ export class EmbeddedComponent() {
   constructor(@Optional() @SkipSelf() private modal: Modal) {}
 
   onDismiss() {
-    this.modal.close();
+    this.modal?.close();
   }
 
   // (Optional) If you need to wait for the modal to close:
   async onDismiss() {
-    await this.modal.close();
+    await this.modal?.close();
     // Do something...
   }
     
   // (Optional) You can additionally pass data, which will be available in the parent callback:
   onDismiss() {
     const returnData = {...};
-    this.modal.close(returnData);
+    this.modal?.close(returnData);
   }
 }`,
 };
