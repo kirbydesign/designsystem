@@ -18,6 +18,10 @@
           <li><a href="#" (click)="scrollTo(modalFlavorsDrawer)">Drawer</a></li>
         </ul>
       </li>
+      <li>
+        Support for handling the
+        <a href="#" (click)="scrollTo(didPresentEvent)">didPresent event</a>
+      </li>
       <li>Support for handling the <a href="#" (click)="scrollTo(closeEvent)">close event</a></li>
       <li>
         Support for <a href="#" (click)="scrollTo(returnData)">returning data</a> from the modal to
@@ -104,6 +108,14 @@
   services and principles as above.
 </p>
 
+<h2 #didPresentEvent>Modal presented</h2>
+<p>
+  The <code>Modal</code> fires the <code>didPresent</code> event, when the modal is ready and the
+  enter animation has finished. This is a good place to hook up any visual initialization of the
+  embedded component, e.g. setting focus in an input field:
+</p>
+<cookbook-code-viewer [ts]="example.didPresentCodeSnippet"></cookbook-code-viewer>
+
 <h2 #scrolling>Scrolling</h2>
 <p>
   The <code>Modal</code> supports scrolling to the top and bottom of the modal using the methods
@@ -123,3 +135,10 @@
 <h2>Properties:</h2>
 <h3><code>ModalConfig</code></h3>
 <cookbook-showcase-properties [properties]="properties"></cookbook-showcase-properties>
+
+<h2>Events:</h2>
+<h3><code>Modal</code></h3>
+<cookbook-showcase-properties
+  [properties]="events"
+  [columns]="eventColumns"
+></cookbook-showcase-properties>

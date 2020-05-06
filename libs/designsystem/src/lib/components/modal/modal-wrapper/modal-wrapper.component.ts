@@ -14,12 +14,15 @@ import {
   QueryList,
 } from '@angular/core';
 import { IonContent } from '@ionic/angular';
+import { Subject } from 'rxjs';
 
 import { KirbyAnimation } from '../../../animation/kirby-animation';
 import { ModalConfig } from './config/modal-config';
 import { COMPONENT_PROPS } from './config/modal-config.helper';
 import { Modal } from '../services/modal.interfaces';
 import { ButtonComponent } from '../../button/button.component';
+import { ResizeObserverService } from '../../shared/resize-observer/resize-observer.service';
+import { ResizeObserverEntry } from '../../shared/resize-observer/types/resize-observer-entry';
 
 @Component({
   selector: 'kirby-modal-wrapper',
@@ -28,7 +31,7 @@ import { ButtonComponent } from '../../button/button.component';
   providers: [{ provide: Modal, useExisting: ModalWrapperComponent }],
 })
 export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDestroy {
-  static readonly KEYBOARD_HIDE_DELAY_IN_MS = 25;
+  static readonly KEYBOARD_HIDE_DELAY_IN_MS = 100;
 
   scrollY: number = Math.abs(window.scrollY);
   @Input() config: ModalConfig;
@@ -41,9 +44,17 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   @ViewChild(IonContent, { static: true, read: ElementRef }) private ionContentElement: ElementRef<
     HTMLIonContentElement
   >;
-  private observer: MutationObserver;
+  private mutationObserver: MutationObserver;
   private keyboardVisible = false;
   private toolbarButtons: HTMLButtonElement[] = [];
+  private delayedClose = () => {};
+  private delayedCloseTimeoutId;
+  private initialViewportHeight: number;
+  private viewportResized = false;
+
+  private ionModalElement: HTMLIonModalElement;
+  private readonly ionModalDidPresent = new Subject<void>();
+  readonly didPresent = this.ionModalDidPresent.toPromise();
 
   @HostBinding('class.drawer')
   get _isDrawer() {
@@ -53,10 +64,15 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   constructor(
     private injector: Injector,
     private elementRef: ElementRef<HTMLElement>,
-    private renderer: Renderer2
-  ) {}
+    private renderer: Renderer2,
+    private resizeObserverService: ResizeObserverService
+  ) {
+    this.observeViewportResize();
+  }
 
   ngOnInit(): void {
+    this.ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
+    this.listenForIonModalDidPresent();
     this.componentPropsInjector = Injector.create({
       providers: [{ provide: COMPONENT_PROPS, useValue: this.config.componentProps }],
       parent: this.injector,
@@ -70,6 +86,15 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     this.checkForEmbeddedFooter();
   }
 
+  private listenForIonModalDidPresent() {
+    if (this.ionModalElement) {
+      this.ionModalElement.addEventListener('ionModalDidPresent', () => {
+        this.ionModalDidPresent.next();
+        this.ionModalDidPresent.complete();
+      });
+    }
+  }
+
   scrollToTop(scrollDuration?: KirbyAnimation.Duration) {
     this.ionContent.scrollToTop(scrollDuration || 0);
   }
@@ -79,25 +104,31 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   }
 
   async close(data?: any): Promise<void> {
-    const ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
-    if (!ionModalElement) {
+    if (!this.ionModalElement) {
       return;
     }
-    if (!this.keyboardVisible) {
-      // No keyboard visible:
+
+    if (!this.keyboardVisible || !this.viewportResized) {
+      // No keyboard visible or viewport not resized:
       // Dismiss modal and return:
-      await ionModalElement.dismiss(data);
+      clearTimeout(this.delayedCloseTimeoutId);
+      await this.ionModalElement.dismiss(data);
       return;
     }
+
     // Keyboard visible:
     // Blur active element and wait for keyboard to hide,
     // then dismiss modal and return:
     this.blurActiveElement();
     return new Promise((resolve) => {
-      setTimeout(async () => {
-        await ionModalElement.dismiss(data);
+      this.delayedClose = async () => {
+        await this.ionModalElement.dismiss(data);
         resolve();
-      }, ModalWrapperComponent.KEYBOARD_HIDE_DELAY_IN_MS);
+      };
+      this.delayedCloseTimeoutId = setTimeout(
+        this.delayedClose,
+        ModalWrapperComponent.KEYBOARD_HIDE_DELAY_IN_MS
+      );
     });
   }
 
@@ -108,19 +139,15 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     window.scrollTo({ top: this.scrollY });
   }
 
-  // This prevents Ionic from setting --keyboard-offset on ion-content inside modal:
-  @HostListener('focusin', ['$event'])
-  @HostListener('focusout', ['$event'])
-  checkFocusTarget(event: FocusEvent) {
-    const input = event.target as HTMLElement;
-    if (input.tagName === 'INPUT' && input.closest('ion-modal')) {
-      event.stopPropagation();
-    }
-  }
-
-  @HostListener('window:keyboardWillShow')
-  _onKeyboardWillShow() {
+  @HostListener('window:keyboardWillShow', ['$event'])
+  _onKeyboardWillShow(info?: { keyboardHeight: number }) {
     this.keyboardVisible = true;
+    if (info && info.keyboardHeight) {
+      this.ionContentElement.nativeElement.style.setProperty(
+        '--keyboard-offset',
+        `${info.keyboardHeight}px`
+      );
+    }
   }
 
   @HostListener('window:keyboardWillHide')
@@ -140,6 +167,26 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
       // (to allow tap event to fire):
       if (!isToolbarButtonTouch) {
         this.blurActiveElement();
+      }
+    }
+  }
+
+  private observeViewportResize() {
+    this.resizeObserverService.observe(window.document.body, this.onViewportResize.bind(this));
+  }
+
+  private onViewportResize(entry: ResizeObserverEntry) {
+    if (!this.initialViewportHeight) {
+      // Initial observe callback, register initial height:
+      this.initialViewportHeight = entry.contentRect.height;
+      return;
+    }
+    this.viewportResized = entry.contentRect.height !== this.initialViewportHeight;
+    if (!this.viewportResized) {
+      // We are back to initial view port height, check for pending close func:
+      if (this.delayedCloseTimeoutId) {
+        clearTimeout(this.delayedCloseTimeoutId);
+        this.delayedClose();
       }
     }
   }
@@ -189,15 +236,16 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
         this.moveEmbeddedFooter(addedFooter);
       }
     };
-    this.observer = new MutationObserver(callback);
-    this.observer.observe(embeddedComponentElement, {
+    this.mutationObserver = new MutationObserver(callback);
+    this.mutationObserver.observe(embeddedComponentElement, {
       childList: true, // Listen for addition or removal of child nodes
     });
   }
 
   ngOnDestroy() {
     //clean up the observer
-    this.observer && this.observer.disconnect();
-    delete this.observer;
+    this.mutationObserver && this.mutationObserver.disconnect();
+    delete this.mutationObserver;
+    this.resizeObserverService && this.resizeObserverService.unobserve(window.document.body);
   }
 }
