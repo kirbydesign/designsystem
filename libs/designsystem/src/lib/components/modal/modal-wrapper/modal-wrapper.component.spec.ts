@@ -456,6 +456,11 @@ describe('ModalWrapperComponent', () => {
         beforeEach(async () => {
           // Ensure resizeObserver triggers and initialViewportHeight is set:
           await new Promise((resolve) => setTimeout(resolve));
+          if (!spectator.component['initialViewportHeight']) {
+            await new Promise((resolve) => setTimeout(resolve, 25));
+          }
+          expect(spectator.component['initialViewportHeight']).toBeGreaterThan(0);
+
           const keyboardHeight = 300;
           //Mimic native keyboard taking height of window:
           const heightWidthKeyboard = window.innerHeight - keyboardHeight;
@@ -463,6 +468,7 @@ describe('ModalWrapperComponent', () => {
             `Mimic native keyboard: (window.innerHeight - keyboardHeight) = (${window.innerHeight} - ${keyboardHeight}) = ${heightWidthKeyboard}px`
           );
           await TestHelper.resizeTestWindow({ height: `${window.innerHeight - keyboardHeight}px` });
+
           // Ensure resizeObserver triggers and onViewportResize fires:
           await new Promise((resolve) => setTimeout(resolve));
           if (!spectator.component['viewportResized']) {
