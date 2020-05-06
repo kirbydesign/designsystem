@@ -425,7 +425,6 @@ describe('ModalWrapperComponent', () => {
       spectator.element.classList.add('ion-page');
       ionModalSpy = jasmine.createSpyObj('ion-modal spy', ['dismiss', 'addEventListener']);
       // Inject the modal spy through modal-wrapper's element.closest method:
-      console.warn('injecting ion-modal Spy...');
       spectator.element.closest = () => ionModalSpy;
       spectator.component.ngOnInit();
     });
@@ -484,7 +483,6 @@ describe('ModalWrapperComponent', () => {
         });
 
         it(`should blur document.activeElement before calling wrapping ion-modal's dismiss() method`, fakeAsync(async () => {
-          console.warn('*******************************');
           const ionContent = spectator.query('ion-content');
           await TestHelper.whenReady(ionContent);
           const input = ionContent.querySelector('input');
