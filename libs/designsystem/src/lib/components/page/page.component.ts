@@ -9,6 +9,7 @@ import {
   Directive,
   ElementRef,
   EventEmitter,
+  HostListener,
   Input,
   OnChanges,
   OnDestroy,
@@ -108,6 +109,9 @@ export class PageComponent
   @Output() leave = new EventEmitter<void>();
 
   @ViewChild(IonContent, { static: true }) private content: IonContent;
+  @ViewChild(IonContent, { static: true, read: ElementRef })
+  private ionContentElement: ElementRef<HTMLIonContentElement>;
+
   @ViewChild('pageTitle', { static: false, read: ElementRef })
   private pageTitle: ElementRef;
   @ViewChild('stickyToolbarButtons', { static: false, read: ElementRef })
@@ -297,5 +301,20 @@ export class PageComponent
       }
     };
     return new IntersectionObserver(callback, options);
+  }
+
+  @HostListener('window:keyboardWillShow', ['$event'])
+  _onKeyboardWillShow(info?: { keyboardHeight: number }) {
+    if (info && info.keyboardHeight) {
+      this.ionContentElement.nativeElement.style.setProperty(
+        '--keyboard-offset',
+        `${info.keyboardHeight}px`
+      );
+    }
+  }
+
+  @HostListener('window:keyboardWillHide')
+  _onKeyboardWillHide() {
+    this.ionContentElement.nativeElement.style.setProperty('--keyboard-offset', '0px');
   }
 }
