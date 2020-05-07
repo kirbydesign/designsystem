@@ -92,7 +92,7 @@
     "@nrwl/angular": "^9.1.2",
     "@types/prismjs": "1.9.0",
     "firebase": "6.2.4",
-    "highcharts": "7.2.1",
+    "highcharts": "7.0.3",
     "moment": "2.24.0",
     "prismjs": "1.15.0",
     "reflect-metadata": "0.1.8",

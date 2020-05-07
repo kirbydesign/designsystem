@@ -78,9 +78,9 @@ export class HighstockChartComponent {
         false
       );
       // Remove the annotations.
-      this.chart.removeAnnotation('minmax');
+      //this.chart.removeAnnotation('minmax');
       // Add the new annotations.
-      this.chart.addAnnotation(annotations(this.locale), false);
+      //this.chart.addAnnotation(annotations(this.locale), false);
       // And finally redraw the graph with all the changes.
       this.chart.redraw();
     }
