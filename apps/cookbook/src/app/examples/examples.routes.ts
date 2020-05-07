@@ -49,6 +49,7 @@ import { ListWithSectionsExampleComponent } from './list/components/sections';
 import { ListItemsExampleComponent } from './list/components/items';
 import { ReorderListExampleComponent } from './reorder-list/reorder-list-example.component';
 import { DropdownExampleComponent } from '~/app/examples/dropdown-example/dropdown-example.component';
+import { HighstockChartExampleComponent } from '~/app/examples/highstock-chart-example/highstock-chart-example.component';
 
 export const routes: Routes = [
   {
@@ -216,6 +217,10 @@ export const routes: Routes = [
   {
     path: 'chart',
     component: ChartExampleComponent,
+  },
+  {
+    path: 'highstock-chart',
+    component: HighstockChartExampleComponent,
   },
   {
     path: 'grid',

@@ -71,6 +71,7 @@ import { BreakpointHelperService } from './components/grid/breakpoint-helper.ser
 import { LoadingOverlayService } from './components/loading-overlay/fullscreen-loading-overlay/loading-overlay.service';
 import { ResizeObserverFactory } from './components/shared/resize-observer/resize-observer.factory';
 import { ResizeObserverService } from './components/shared/resize-observer/resize-observer.service';
+import { HighstockChartComponent } from './components/highstock-chart/highstock-chart.component';
 
 const exportedDeclarations = [
   CardComponent,
@@ -115,6 +116,7 @@ const exportedDeclarations = [
   DropdownComponent,
   InfiniteScrollDirective,
   LoadingOverlayComponent,
+  HighstockChartComponent,
 ];
 
 const declarations = [
