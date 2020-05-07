@@ -153,6 +153,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   @HostListener('window:keyboardWillHide')
   _onKeyboardWillHide() {
     this.keyboardVisible = false;
+    this.ionContentElement.nativeElement.style.setProperty('--keyboard-offset', '0px');
   }
 
   onHeaderTouchStart(event: TouchEvent) {
