@@ -33,7 +33,9 @@ kirby-card {
   button[kirby-button] {
     margin: 0;
     border-radius: 0;
-    border-top: 1px solid get-color('background-color');
+    &:not(:focus) {
+      border-top: 1px solid get-color('background-color');
+    }
   }
 }
 
