@@ -62,7 +62,7 @@ export class HighstockChartComponent {
           series: [],
         },
         false,
-        true
+        false
       );
       // Then update the chart with new series data.
       this.chart.update(
@@ -75,7 +75,7 @@ export class HighstockChartComponent {
           ],
         },
         false,
-        true
+        false
       );
       // Remove the annotations.
       this.chart.removeAnnotation('minmax');

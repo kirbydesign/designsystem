@@ -15,9 +15,12 @@ import {
 export class HighstockChartExampleComponent implements OnInit {
   constructor(@Inject(LOCALE_ID) private locale: string) {
     this.options = stockChartOptions(locale, 300);
+    this.height = 300;
+    this.options = stockChartOptions(locale, this.height);
   }
 
   options: Options;
+  height: number;
 
   data: HighstockDataPoint[] = [
     { x: 1198914890000, y: 0.6809, id: '' },
