@@ -1,0 +1,22 @@
+<svg class="progress-ring" [attr.width]="diameter" [attr.height]="diameter">
+  <circle
+    class="circle"
+    [attr.stroke-width]="strokeWidth"
+    fill="transparent"
+    [attr.r]="innerRadius"
+    [attr.cx]="radius"
+    [attr.cy]="radius"
+  />
+  <circle
+    class="progress"
+    [attr.stroke-width]="strokeWidth"
+    fill="transparent"
+    [attr.r]="innerRadius"
+    [attr.cx]="radius"
+    [attr.cy]="radius"
+    stroke-linecap="round"
+    [attr.stroke-dashoffset]="offset"
+    [attr.stroke-dasharray]="innerCircumference"
+    (click)="changeValue()"
+  />
+</svg>
