@@ -10,7 +10,6 @@ import { GridShowcaseComponent } from './grid-showcase/grid-showcase.component';
 import { ListShowcaseComponent } from './list-showcase/list-showcase.component';
 import { ListLoadOnDemandShowcaseComponent } from './list-load-on-demand-showcase/list-load-on-demand-showcase.component';
 import { ShowcaseComponent } from './showcase.component';
-import { ChartShowcaseComponent } from './chart-showcase/chart-showcase.component';
 import { ShowcaseRoutingModule } from './showcase-routing.module';
 import { ColorsShowcaseComponent } from './colors-showcase/colors-showcase.component';
 import { SpinnerShowcaseComponent } from './spinner-showcase/spinner-showcase.component';
@@ -51,7 +50,6 @@ export const COMPONENT_EXPORTS: any[] = [
   ListNoShapeShowcaseComponent,
   GridShowcaseComponent,
   AvatarShowcaseComponent,
-  ChartShowcaseComponent,
   FontsShowcaseComponent,
   SpinnerShowcaseComponent,
   ModalShowcaseComponent,

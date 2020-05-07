@@ -6,7 +6,6 @@ import { ButtonExampleComponent } from './button-example/button-example.componen
 import { CardExampleComponent } from './card-example/card-example.component';
 import { GridExampleComponent } from './grid-example/grid-example.component';
 import { ListExampleComponent } from './list/list-example.component';
-import { ChartExampleComponent } from './chart-example/chart-example.component';
 import { FontsExampleComponent } from './fonts-example/fonts-example.component';
 import { SpinnerExampleComponent } from './spinner-example/spinner-example.component';
 import { ModalExamplePopoutComponent } from './modal-example/modal-example-popout.component';
@@ -213,10 +212,6 @@ export const routes: Routes = [
   {
     path: 'list-load-on-demand',
     component: ListLoadOnDemandExampleComponent,
-  },
-  {
-    path: 'chart',
-    component: ChartExampleComponent,
   },
   {
     path: 'highstock-chart',

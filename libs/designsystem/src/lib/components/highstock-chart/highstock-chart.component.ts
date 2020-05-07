@@ -37,7 +37,6 @@ export class HighstockChartComponent {
     return this._height;
   }
   @Input() description = '';
-  @Input() showDataLabels = true;
 
   @ViewChild('chartContainer', { static: true }) chartContainer: ElementRef;
 
@@ -62,7 +61,7 @@ export class HighstockChartComponent {
           series: [],
         },
         false,
-        true
+        false
       );
       // Then update the chart with new series data.
       this.chart.update(
@@ -75,7 +74,7 @@ export class HighstockChartComponent {
           ],
         },
         false,
-        true
+        false
       );
       // Remove the annotations.
       this.chart.removeAnnotation('minmax');

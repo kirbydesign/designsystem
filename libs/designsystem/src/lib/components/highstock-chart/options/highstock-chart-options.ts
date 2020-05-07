@@ -44,7 +44,7 @@ export function stockChartOptions(locale: string, height: number) {
     lineColor: ColorHelper.getThemeColorRgbString('medium'),
     labels: {
       style: {
-        color: transparentColor,
+        color: ColorHelper.getThemeColorRgbString('semi-dark-tint'),
       },
     },
   };
@@ -60,6 +60,8 @@ export function stockChartOptions(locale: string, height: number) {
     },
   };
 
+  /*
+  Temporarily removed because of a Highstock chart bug.
   // Using a function instead of a lamdba-expression because of a reference to this.
   options.plotOptions.area.events.mouseOver = function() {
     const transparentColor = 'rgba(255,255,255,0)';
@@ -86,6 +88,7 @@ export function stockChartOptions(locale: string, height: number) {
       },
     });
   };
+   */
 
   return options;
 }
@@ -175,7 +178,7 @@ const defaultOptions = (locale: string) => {
         },
          */
     },
-    // annotations: [annotations(locale)],
+    annotations: [annotations(locale)],
     legend: {
       enabled: false,
     },
