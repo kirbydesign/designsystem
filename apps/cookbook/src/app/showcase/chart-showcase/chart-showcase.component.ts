@@ -7,7 +7,9 @@ declare var require: any;
   styleUrls: ['./chart-showcase.component.scss'],
 })
 export class ChartShowcaseComponent implements OnInit {
-  exampleHtml: string = require('!raw-loader!../../examples/chart-example/chart-example.component.html')
+  monthlyChartHtml: string = require('!raw-loader!../../examples/chart-example/examples/monthly-overview-chart-example/monthly-overview-chart-example.component.html')
+    .default;
+  yearlyChartHtml: string = require('!raw-loader!../../examples/chart-example/examples/yearly-overview-chart-example/yearly-overview-chart-example.component.html')
     .default;
 
   constructor() {}
