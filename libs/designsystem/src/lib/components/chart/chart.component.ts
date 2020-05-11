@@ -1,23 +1,25 @@
-import { Component, OnInit, Input, OnChanges, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, ElementRef, HostBinding } from '@angular/core';
 import { Options } from 'highcharts';
 
 import { ChartHelper } from './chart-helper';
 
 @Component({
   selector: 'kirby-chart',
-  templateUrl: './chart.component.html',
+  template: '',
   styleUrls: ['./chart.component.scss'],
   providers: [ChartHelper],
 })
 export class ChartComponent implements OnInit, OnChanges {
-  @Input() height = 300;
-  @Input() options: Options = {};
-  @ViewChild('chartContainer', { static: true }) chartContainer: ElementRef;
+  @HostBinding('style.height')
+  @Input()
+  height = 300;
 
-  constructor(private chartHelper: ChartHelper) {}
+  @Input() options: Options = {};
+
+  constructor(private chartHelper: ChartHelper, private hostElement: ElementRef) {}
 
   ngOnInit() {
-    this.chartHelper.init(this.options, this.chartContainer);
+    this.chartHelper.init(this.options, this.hostElement);
   }
 
   ngOnChanges() {
