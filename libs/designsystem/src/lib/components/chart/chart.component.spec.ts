@@ -30,7 +30,7 @@ describe('ChartComponent', () => {
   it('should set correct height', () => {
     spectator.setHostInput({ height: 200 });
 
-    const chartElm = spectator.query('[data-test=chart]'); // TODO: get height
+    const chartElm = spectator.element.firstChild;
     expect(chartElm).toHaveComputedStyle({ height: '200px' });
   });
 

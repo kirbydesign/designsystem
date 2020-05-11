@@ -1,8 +1,26 @@
 <div class="example">
-  <cookbook-chart-example></cookbook-chart-example>
   <div class="code-example">
-    <cookbook-code-viewer [html]="monthlyChartHtml"></cookbook-code-viewer>
-    <cookbook-code-viewer [html]="yearlyChartHtml"></cookbook-code-viewer>
+    <h3>Monthly overview</h3>
+    <cookbook-example-viewer
+      [html]="monthlyOverviewExample.template"
+      [ts]="monthlyOverviewExample.codeSnippet"
+    >
+      <cookbook-chart-example-monthly-overview
+        #monthlyOverviewExample
+      ></cookbook-chart-example-monthly-overview>
+    </cookbook-example-viewer>
+
+    <br />
+    <h3>Yearly overview</h3>
+    <cookbook-example-viewer
+      [html]="yearlyOverviewExample.template"
+      [ts]="yearlyOverviewExample.codeSnippet"
+    >
+      <cookbook-chart-example-yearly-overview
+        #yearlyOverviewExample
+      ></cookbook-chart-example-yearly-overview>
+    </cookbook-example-viewer>
+
     <h4>Properties:</h4>
     <table class="cookbook-properties">
       <thead>
@@ -18,9 +36,9 @@
         </tr>
         <tr>
           <td><code>options</code></td>
-          <td>The highcharts options to render the chart with</td>
+          <td>The Highcharts options to configure the chart with</td>
           <td>
-            Read highcharts options docs
+            See Highcharts options docs
             <a href="https://api.highcharts.com/highcharts/" target="_blank">here</a>
           </td>
         </tr>

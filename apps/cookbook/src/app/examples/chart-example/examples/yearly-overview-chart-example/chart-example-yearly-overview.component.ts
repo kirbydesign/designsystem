@@ -24,12 +24,113 @@ function colorPoints(selectedYear: string) {
   };
 }
 
+const config = {
+  selector: 'cookbook-chart-example-yearly-overview',
+  template: `<kirby-chart [height]="height" [options]="yearlyOverviewOptions"> </kirby-chart>`,
+  codeSnippet: `
+  yearlyOverviewOptions: Options = {
+    chart: {
+      type: 'bar',
+      animation: {
+        duration: 150,
+      },
+      height: this.height,
+      backgroundColor: 'transparent',
+      events: {
+        load: colorPoints(this.selectedYear),
+        redraw: colorPoints(this.selectedYear),
+      },
+    },
+    credits: {
+      enabled: false,
+    },
+    title: {
+      text: '',
+    },
+    xAxis: {
+      categories: this.yearsStr,
+      labels: {
+        style: {
+          fontSize: fontSize('s'),
+          fontFamily: 'roboto',
+          color: getColor('black').value,
+        },
+      },
+      min: 0,
+      lineColor: 'transparent',
+    },
+    yAxis: {
+      title: {
+        text: '',
+      },
+      labels: {
+        enabled: false,
+      },
+      min: 0,
+      lineWidth: 0,
+      minorGridLineWidth: 0,
+      gridLineColor: 'transparent',
+      minorTickLength: 0,
+      tickLength: 0,
+      maxPadding: 0,
+      endOnTick: false,
+      showLastLabel: false,
+      showFirstLabel: false,
+    },
+    plotOptions: {
+      bar: {
+        events: {
+          click: this.yearlyOverviewClick.bind(this),
+        },
+      },
+      series: {
+        color: getColor('secondary').value,
+        stacking: 'normal',
+        states: {
+          hover: {
+            enabled: false,
+          },
+          inactive: {
+            opacity: 1,
+          },
+        },
+      },
+    },
+    tooltip: {
+      enabled: false,
+    },
+    legend: {
+      enabled: false,
+    },
+    series: [
+      {
+        name: 'InvisibleClickReceiver',
+        data: this.adjustedYearExpensesData.map(
+          (wholeYearData, idx) => this.maxValue - (wholeYearData + this.currentTimeData[idx])
+        ),
+        edgeColor: 'rgb(255, 255, 255, 0)',
+        opacity: 0,
+      },
+      {
+        name: 'WholeYearExpenses',
+        data: this.adjustedYearExpensesData,
+      },
+      {
+        name: 'CurrentTimeExpsenses',
+        data: this.currentTimeData,
+      },
+    ] as any,
+  };
+  `,
+};
+
 @Component({
-  selector: 'cookbook-yearly-overview-chart-example',
-  templateUrl: './yearly-overview-chart-example.component.html',
-  styleUrls: ['./yearly-overview-chart-example.component.scss'],
+  selector: config.selector,
+  templateUrl: config.template,
 })
-export class YearlyOverviewChartExampleComponent implements OnInit {
+export class ChartExampleYearlyOverviewComponent {
+  template: string = config.template;
+  codeSnippet: string = config.codeSnippet;
   height = 150;
 
   private yearExpensesData = [0, 8761, 7760];
@@ -153,6 +254,4 @@ export class YearlyOverviewChartExampleComponent implements OnInit {
   };
 
   constructor(private modalController: ModalController) {}
-
-  ngOnInit() {}
 }

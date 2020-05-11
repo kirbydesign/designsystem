@@ -25,13 +25,131 @@ function colorPoints(selectedIdx) {
   };
 }
 
+const config = {
+  selector: 'cookbook-chart-example-monthly-overview',
+  template: `<kirby-chart [height]="height" [options]="monthlyOverviewOptions"> </kirby-chart>`,
+  codeSnippet: `
+  monthlyOverviewOptions: Options = {
+    chart: {
+      animation: {
+        duration: 500,
+      },
+      height: this.height,
+      backgroundColor: 'transparent',
+      type: 'column',
+      events: {
+        load: colorPoints(this.selectedIdx),
+        redraw: colorPoints(this.selectedIdx),
+      },
+    },
+    title: {
+      text: '',
+    },
+    xAxis: {
+      labels: {
+        style: {
+          fontSize: fontSize('xxs'),
+          fontFamily: 'roboto',
+          color: getColor('black').value,
+        },
+      },
+      categories: this.categories,
+      lineWidth: 0,
+      minorGridLineWidth: 0,
+      lineColor: 'transparent',
+      minorTickLength: 0,
+      tickLength: 0,
+    },
+    yAxis: {
+      title: {
+        text: '',
+      },
+      plotLines: [
+        {
+          width: 1,
+          color: getColor('semi-dark').value,
+          dashStyle: 'Dash',
+          value: 872,
+        },
+      ],
+      labels: {
+        enabled: false,
+      },
+      min: 0,
+      lineWidth: 0,
+      minorGridLineWidth: 0,
+      gridLineColor: 'transparent',
+      minorTickLength: 0,
+      tickLength: 0,
+      showLastLabel: false,
+      showFirstLabel: false,
+      tickPositioner: () => {
+        var positions = [0, this.maxValue];
+
+        return positions;
+      },
+    },
+    credits: {
+      enabled: false,
+    },
+    plotOptions: {
+      column: {
+        stacking: 'normal',
+        events: {
+          click: this.monthlyOverviewClick.bind(this),
+        },
+      },
+      series: {
+        color: getColor('secondary').value,
+        zIndex: 10,
+        states: {
+          hover: {
+            enabled: false,
+          },
+          inactive: {
+            opacity: 1,
+          },
+        },
+      },
+      line: {
+        className: 'avg-line',
+        marker: {
+          enabled: false,
+        },
+        allowPointSelect: false,
+      },
+    },
+    tooltip: {
+      enabled: false,
+    },
+    legend: {
+      enabled: false,
+    },
+    series: [
+      {
+        type: 'column',
+        name: 'InvisibleClickReceiver',
+        data: this.adjustedMonthlyExpenseData.map(
+          (_, idx) => this.maxValue - this.adjustedMonthlyExpenseData[idx]
+        ),
+        opacity: 0,
+      },
+      {
+        type: 'column',
+        data: this.adjustedMonthlyExpenseData,
+      },
+    ],
+  };
+  `,
+};
+
 @Component({
-  selector: 'cookbook-monthly-overview-chart-example',
-  templateUrl: './monthly-overview-chart-example.component.html',
-  styleUrls: ['./monthly-overview-chart-example.component.scss'],
+  selector: config.selector,
+  template: config.template,
 })
-export class MonthlyOverviewChartExampleComponent implements OnInit {
-  @ViewChild(ChartComponent) chart: ChartComponent;
+export class ChartExampleMonthlyOverviewComponent {
+  template: string = config.template;
+  codeSnippet: string = config.codeSnippet;
   height = 150;
 
   private categories = [
@@ -184,6 +302,4 @@ export class MonthlyOverviewChartExampleComponent implements OnInit {
   };
 
   constructor(private modalController: ModalController) {}
-
-  ngOnInit() {}
 }
