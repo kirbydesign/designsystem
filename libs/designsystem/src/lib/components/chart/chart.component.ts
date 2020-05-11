@@ -10,9 +10,12 @@ import { ChartHelper } from './chart-helper';
   providers: [ChartHelper],
 })
 export class ChartComponent implements OnInit, OnChanges {
-  @HostBinding('style.height')
   @Input()
-  height = 300;
+  set height(height: number) {
+    if (this.options.chart) {
+      this.options.chart.height = height;
+    }
+  }
 
   @Input() options: Options = {};
 
