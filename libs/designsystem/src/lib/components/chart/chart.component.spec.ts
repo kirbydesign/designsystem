@@ -28,10 +28,10 @@ describe('ChartComponent', () => {
   });
 
   it('should set correct height', () => {
+    spectator.setHostInput({ options: { chart: {} } });
     spectator.setHostInput({ height: 200 });
 
-    const chartElm = spectator.element;
-    expect(chartElm).toHaveComputedStyle({ height: '200px' });
+    expect(spectator.component.options.chart.height).toBe(200);
   });
 
   it('should render chart with provided options', async(() => {
