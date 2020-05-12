@@ -48,6 +48,7 @@ import { ListWithSectionsExampleComponent } from './list/components/sections';
 import { ListItemsExampleComponent } from './list/components/items';
 import { ReorderListExampleComponent } from './reorder-list/reorder-list-example.component';
 import { DropdownExampleComponent } from '~/app/examples/dropdown-example/dropdown-example.component';
+import { ChartExampleComponent } from './chart-example/chart-example.component';
 
 export const routes: Routes = [
   {
@@ -211,6 +212,10 @@ export const routes: Routes = [
   {
     path: 'list-load-on-demand',
     component: ListLoadOnDemandExampleComponent,
+  },
+  {
+    path: 'chart',
+    component: ChartExampleComponent,
   },
   {
     path: 'grid',
