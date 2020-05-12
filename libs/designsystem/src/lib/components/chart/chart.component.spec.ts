@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Options } from 'highcharts';
+import { Options, PlotSeriesDataLabelsOptions } from 'highcharts';
 
 import { ChartComponent } from './chart.component';
 import { ChartType } from './chart-type';
@@ -65,13 +65,17 @@ describe('ChartComponent', () => {
   });
 
   it('should have dataLabels enabled as default', () => {
-    expect(component.options.plotOptions.pie.dataLabels.enabled).toBe(true);
+    expect(
+      (component.options.plotOptions.pie.dataLabels as PlotSeriesDataLabelsOptions).enabled
+    ).toBe(true);
   });
 
   it('should disable dataLabels when false', () => {
     component.showDataLabels = false;
     component.ngOnInit();
-    expect(component.options.plotOptions.pie.dataLabels.enabled).toBe(false);
+    expect(
+      (component.options.plotOptions.pie.dataLabels as PlotSeriesDataLabelsOptions).enabled
+    ).toBe(false);
   });
 
   it('should set correct input data in chart series', () => {

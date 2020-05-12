@@ -10,6 +10,9 @@ export const AreaSplineOptions: Options = {
     margin: 0,
     marginTop: 48,
   },
+  accessibility: {
+    description: '',
+  },
   title: {
     text: '',
   },
@@ -87,7 +90,7 @@ export const AreaSplineOptions: Options = {
   series: [
     {
       type: 'areaspline',
-      data: (this === undefined ? [] : this.data) as Array<Highcharts.SeriesAreasplineDataOptions>,
+      data: this === undefined ? [] : this.data,
     },
   ],
 };
