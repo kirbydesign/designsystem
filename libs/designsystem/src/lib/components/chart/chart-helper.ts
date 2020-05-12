@@ -27,6 +27,8 @@ export class ChartHelper {
   }
 
   private renderChart(options: Options) {
-    Highcharts.chart(this.chartContainer.nativeElement, options);
+    if (this.chartContainer) {
+      Highcharts.chart(this.chartContainer.nativeElement, options);
+    }
   }
 }
