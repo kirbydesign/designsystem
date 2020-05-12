@@ -28,7 +28,7 @@ const config = {
   selector: 'cookbook-chart-example-yearly-overview',
   template: `
   <kirby-card>
-    <kirby-card-header [title]="'Yearly'"></kirby-card-header>
+    <kirby-card-header [title]="'Bar'"></kirby-card-header>
     <kirby-chart [height]="height" [type]="'bar'" [categories]="categories" [options]="yearlyOverviewOptions"> </kirby-chart>
   </kirby-card>
   `,
