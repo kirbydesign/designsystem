@@ -1,5 +1,17 @@
 @import './libs/designsystem/src/lib/scss/utils';
 
-kirby-circular-progress {
+:host > kirby-circular-progress {
   margin: size('m');
+}
+
+kirby-card .content {
+  :first-child {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  display: flex;
+  flex-direction: row;
 }

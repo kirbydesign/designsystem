@@ -1,4 +1,6 @@
-<kirby-circular-progress value="50">
+<kirby-circular-progress value="100"> </kirby-circular-progress>
+
+<kirby-circular-progress themeColor="warning" value="50">
   2/4
 </kirby-circular-progress>
 
@@ -9,3 +11,19 @@
 <kirby-circular-progress [themeColor]="themeColor" [value]="progress" radius="80">
   {{ progress | number: '1.1-1' }}%
 </kirby-circular-progress>
+
+<br />
+
+<kirby-card themeColor="dark" hasPadding="true" class="content-card">
+  <div class="content">
+    <div>
+      Your investment savings
+      <span class="kirby-text-large">
+        {{ 2435034 | currency }}
+      </span>
+    </div>
+    <kirby-circular-progress themeColor="success" value="37">
+      <kirby-icon name="moneybag" size="md"></kirby-icon>
+    </kirby-circular-progress>
+  </div>
+</kirby-card>
