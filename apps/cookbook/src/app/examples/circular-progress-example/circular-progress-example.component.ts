@@ -8,22 +8,19 @@ import { ThemeColor } from './../../../../../../libs/designsystem/src/lib/helper
 })
 export class CircularProgressExampleComponent implements OnInit {
   progress: number = 0;
-  themeColor: ThemeColor = 'primary';
+  themeColor: ThemeColor;
 
   constructor() {}
   ngOnInit(): void {
-    setInterval(() => this.updateProgress(), 1000);
+    setInterval(this.updateProgress, 2000);
   }
 
   private updateProgress = () => {
-    this.progress = this.progress + 10;
-    if (this.progress > 100) {
-      this.progress = 0;
-    }
+    this.progress = Math.random() * 100;
 
-    if (this.progress >= 100) {
+    if (this.progress > 66.666) {
       this.themeColor = 'success';
-    } else if (this.progress > 40) {
+    } else if (this.progress > 33.333) {
       this.themeColor = 'warning';
     } else {
       this.themeColor = 'danger';

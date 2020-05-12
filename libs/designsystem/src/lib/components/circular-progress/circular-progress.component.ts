@@ -10,7 +10,7 @@ import { ThemeColor } from './../../helpers/theme-color.type';
 })
 export class CircularProgressComponent implements OnInit {
   @Input() radius: number = 40;
-  @Input() value: number;
+  @Input() value: number = 0;
 
   @Input() themeColor: ThemeColor;
 
