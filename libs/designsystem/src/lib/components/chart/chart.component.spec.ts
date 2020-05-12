@@ -24,10 +24,6 @@ describe('ChartComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
   it('should have correct default height input', () => {
     expect(component.height).toBe(expectedDefaultHeight);
   });
@@ -189,6 +185,29 @@ describe('ChartComponent', () => {
       ];
       component.ngOnInit();
       expect(component.options.chart.type).toBe(ChartType.ACTIVITYGAUGE);
+    });
+  });
+
+  describe('override options', () => {
+    it('should override options', () => {
+      component.type = ChartType.PIE;
+      component.data = [
+        {
+          data: [1, 1],
+        },
+      ];
+      component.ngOnInit();
+
+      component.optionsForOverride = {
+        series: [
+          {
+            data: [2, 2],
+          } as any,
+        ],
+      };
+      component.ngOnChanges();
+
+      expect((component.options.series[0] as any).data).toEqual([2, 2]);
     });
   });
 });

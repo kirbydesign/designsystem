@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Options, SeriesClickCallbackFunction, SeriesClickEventObject } from 'highcharts';
 
 import { ModalController, DesignTokenHelper } from '@kirbydesign/designsystem';
+import { Example } from '../../example.interface';
 
 const getColor = DesignTokenHelper.getColor;
 const fontSize = DesignTokenHelper.fontSize;
@@ -26,7 +27,12 @@ function colorPoints(selectedYear: string) {
 
 const config = {
   selector: 'cookbook-chart-example-yearly-overview',
-  template: `<kirby-chart [height]="height" [options]="yearlyOverviewOptions"> </kirby-chart>`,
+  template: `
+  <kirby-card>
+    <kirby-card-header [title]="'Custom chart - Yearly overview'"></kirby-card-header>
+    <kirby-chart [height]="height" [type]="'custom'" [options]="yearlyOverviewOptions"> </kirby-chart>
+  </kirby-card>
+  `,
   codeSnippet: `
   yearlyOverviewOptions: Options = {
     chart: {
@@ -128,7 +134,7 @@ const config = {
   selector: config.selector,
   templateUrl: config.template,
 })
-export class ChartExampleYearlyOverviewComponent {
+export class ChartExampleYearlyOverviewComponent implements Example {
   template: string = config.template;
   codeSnippet: string = config.codeSnippet;
   height = 150;

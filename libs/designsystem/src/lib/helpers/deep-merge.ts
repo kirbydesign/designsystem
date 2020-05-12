@@ -1,28 +1,34 @@
 /**
  * Performs a deep merge of objects and returns new object. Does not modify
- * objects (immutable) and merges arrays via concatenation.
- *
- * @param {...object} objects - Objects to merge, it merges from into object to the left
+ * objects (immutable).
+ * It merges from into object to the left
  *  eg. mergeDeep({a: 'will be overridden', b: 'some val'}, {a: 'new val'}) =>  {a: 'new val', b: 'some val'}
+ *
+ * @param toOverride object - Object to override,
+ * @param overrides object - Object to override "toOverride" values with
+ * @param config object - Configuration for how to merge.
+ *  mergeArrays determines if it should merge or override arrays
  * @returns {object} New object with merged key/values
  */
-export function mergeDeep(...objects) {
+export function mergeDeep(toOverride, overrides, config = { mergeArrays: false }) {
   const isObject = (obj) => obj && typeof obj === 'object';
 
-  return objects.reverse().reduce((prev, obj) => {
+  return [toOverride, overrides].reduce((combinedObject, obj) => {
     Object.keys(obj).forEach((key) => {
-      const pVal = prev[key];
-      const oVal = obj[key];
+      const combinedObjectValue = combinedObject[key];
+      const currentObjectValue = obj[key];
 
-      if (Array.isArray(pVal) && Array.isArray(oVal)) {
-        prev[key] = pVal.concat(...oVal);
-      } else if (isObject(pVal) && isObject(oVal)) {
-        prev[key] = mergeDeep(pVal, oVal);
+      if (Array.isArray(combinedObjectValue) && Array.isArray(currentObjectValue)) {
+        combinedObject[key] = config.mergeArrays
+          ? combinedObjectValue.concat(currentObjectValue)
+          : [...currentObjectValue];
+      } else if (isObject(combinedObjectValue) && isObject(currentObjectValue)) {
+        combinedObject[key] = mergeDeep(combinedObjectValue, currentObjectValue);
       } else {
-        prev[key] = oVal;
+        combinedObject[key] = currentObjectValue;
       }
     });
 
-    return prev;
+    return combinedObject;
   }, {});
 }

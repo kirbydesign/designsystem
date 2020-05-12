@@ -1,4 +1,4 @@
-import { Options } from 'highcharts';
+import { Options, chart } from 'highcharts';
 import * as Highcharts from 'highcharts';
 import { ElementRef } from '@angular/core';
 
@@ -28,7 +28,7 @@ export class ChartHelper {
 
   private renderChart(options: Options) {
     if (this.chartContainer) {
-      Highcharts.chart(this.chartContainer.nativeElement, options);
+      chart(this.chartContainer.nativeElement, options);
     }
   }
 }

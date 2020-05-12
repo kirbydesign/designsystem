@@ -1,7 +1,44 @@
 <div class="example">
-  <cookbook-chart-example></cookbook-chart-example>
+  <cookbook-example-viewer [html]="donut.template">
+    <div>
+      <cookbook-chart-example-donut #donut> </cookbook-chart-example-donut>
+    </div>
+  </cookbook-example-viewer>
+  <cookbook-example-viewer [html]="pie.template">
+    <div>
+      <cookbook-chart-example-pie #pie> </cookbook-chart-example-pie>
+    </div>
+  </cookbook-example-viewer>
+  <cookbook-example-viewer [html]="timeseries.template">
+    <div>
+      <cookbook-chart-example-timeseries #timeseries> </cookbook-chart-example-timeseries>
+    </div>
+  </cookbook-example-viewer>
+  <cookbook-example-viewer [html]="areaspline.template">
+    <div>
+      <cookbook-chart-example-areaspline #areaspline> </cookbook-chart-example-areaspline>
+    </div>
+  </cookbook-example-viewer>
+  <cookbook-example-viewer [html]="activityGauge.template">
+    <div>
+      <cookbook-chart-example-activity-gauge #activityGauge>
+      </cookbook-chart-example-activity-gauge>
+    </div>
+  </cookbook-example-viewer>
+
+  <cookbook-example-viewer [html]="monthlyOverview.template" [ts]="monthlyOverview.codeSnippet">
+    <div>
+      <cookbook-chart-example-monthly-overview #monthlyOverview>
+      </cookbook-chart-example-monthly-overview>
+    </div>
+  </cookbook-example-viewer>
+  <cookbook-example-viewer [html]="yearlyOverview.template" [ts]="yearlyOverview.codeSnippet">
+    <div>
+      <cookbook-chart-example-yearly-overview #yearlyOverview>
+      </cookbook-chart-example-yearly-overview>
+    </div>
+  </cookbook-example-viewer>
   <div class="code-example">
-    <cookbook-code-viewer [html]="exampleHtml"></cookbook-code-viewer>
     <h4>Properties:</h4>
     <table class="cookbook-properties">
       <thead>

@@ -28,8 +28,11 @@ export class ChartComponent implements OnInit, OnChanges {
   @Input() type: ChartType = ChartType.PIE;
   @Input() description = '';
   @Input() showDataLabels = true;
-  @Input() options: Options = {};
-  private _options: Options = {};
+  // tslint:disable-next-line: no-input-rename
+  @Input('options') optionsForOverride: Options;
+  options: Options = {
+    accessibility: {},
+  };
 
   constructor(
     private chartHelper: ChartHelper,
@@ -43,57 +46,57 @@ export class ChartComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.setupChartType();
     this.updateProperties();
-    this.chartHelper.init(this._options, this.hostElement);
+    this.chartHelper.init(this.options, this.hostElement);
   }
 
   ngOnChanges() {
     this.updateProperties();
-    this.chartHelper.updateChart(this._options);
+    this.chartHelper.updateChart(this.options);
   }
 
   setupChartType() {
     switch (this.type) {
       case ChartType.DONUT: {
-        this._options = this.donutOptions;
-        this._options.chart.type = ChartType.PIE;
-        this._options.plotOptions.pie.innerSize = '50%';
+        this.options = this.donutOptions;
+        this.options.chart.type = ChartType.PIE;
+        this.options.plotOptions.pie.innerSize = '50%';
         break;
       }
       case ChartType.PIE: {
-        this._options = this.donutOptions;
-        this._options.chart.type = this.type;
-        this._options.plotOptions.pie.innerSize = '0%';
+        this.options = this.donutOptions;
+        this.options.chart.type = this.type;
+        this.options.plotOptions.pie.innerSize = '0%';
         break;
       }
       case ChartType.AREASPLINE: {
-        this._options = this.areasplineOptions;
-        this._options.chart.type = this.type;
+        this.options = this.areasplineOptions;
+        this.options.chart.type = this.type;
         break;
       }
       case ChartType.TIMESERIES: {
-        this._options = this.timeSeriesOptions;
-        this._options.chart.type = this.type;
+        this.options = this.timeSeriesOptions;
+        this.options.chart.type = this.type;
         break;
       }
       case ChartType.ACTIVITYGAUGE: {
-        this._options = this.activitygaugeOptions;
-        this._options.chart.type = this.type;
+        this.options = this.activitygaugeOptions;
+        this.options.chart.type = this.type;
         break;
       }
     }
   }
 
   updateProperties() {
-    if (this._options.chart) {
-      this._options.chart.height = this.height;
-      this._options.accessibility.description = this.description;
-      switch (this._options.chart.type) {
+    if (this.options.chart) {
+      this.options.chart.height = this.height;
+      this.options.accessibility.description = this.description;
+      switch (this.options.chart.type) {
         case ChartType.PIE:
-          (this._options.plotOptions.pie
+          (this.options.plotOptions.pie
             .dataLabels as PlotSeriesDataLabelsOptions).enabled = this.showDataLabels;
         /* falls through */
         case ChartType.DONUT: {
-          this._options.series = [
+          this.options.series = [
             {
               type: 'pie',
               data: this.data,
@@ -102,7 +105,7 @@ export class ChartComponent implements OnInit, OnChanges {
           break;
         }
         case ChartType.AREASPLINE: {
-          this._options.series = [
+          this.options.series = [
             {
               type: 'areaspline',
               data: this.data,
@@ -111,14 +114,14 @@ export class ChartComponent implements OnInit, OnChanges {
           break;
         }
         case ChartType.TIMESERIES: {
-          this._options.series = [
+          this.options.series = [
             {
               type: 'area',
               data: this.data,
             },
           ];
-          this._options.xAxis = {
-            ...this._options.xAxis,
+          this.options.xAxis = {
+            ...this.options.xAxis,
             breaks: this.breaks,
           };
           break;
@@ -126,22 +129,22 @@ export class ChartComponent implements OnInit, OnChanges {
         case ChartType.ACTIVITYGAUGE: {
           const data = this.data[0];
 
-          this._options.title.text = data.title;
-          this._options.subtitle.text = data.subtitle;
+          this.options.title.text = data.title;
+          this.options.subtitle.text = data.subtitle;
 
           if (data.paneBackgroundColor) {
-            this._options.pane.background = [
+            this.options.pane.background = [
               {
-                ...this._options.pane.background[0],
+                ...this.options.pane.background[0],
                 backgroundColor: data.paneBackgroundColor,
               },
             ];
           }
           if (data.color) {
-            this._options.title.style.color = data.color;
-            this._options.subtitle.style.color = data.color;
+            this.options.title.style.color = data.color;
+            this.options.subtitle.style.color = data.color;
           }
-          this._options.series = [
+          this.options.series = [
             {
               type: 'solidgauge',
               data: data.series,
@@ -151,8 +154,9 @@ export class ChartComponent implements OnInit, OnChanges {
           break;
         }
       }
-
-      this._options = mergeDeep(this._options, this.options);
+    }
+    if (!!this.optionsForOverride) {
+      this.options = mergeDeep(this.options, this.optionsForOverride);
     }
   }
 }
