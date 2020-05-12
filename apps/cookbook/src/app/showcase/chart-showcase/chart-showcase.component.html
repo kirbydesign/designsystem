@@ -1,26 +1,7 @@
 <div class="example">
+  <cookbook-chart-example></cookbook-chart-example>
   <div class="code-example">
-    <h3>Monthly overview</h3>
-    <cookbook-example-viewer
-      [html]="monthlyOverviewExample.template"
-      [ts]="monthlyOverviewExample.codeSnippet"
-    >
-      <cookbook-chart-example-monthly-overview
-        #monthlyOverviewExample
-      ></cookbook-chart-example-monthly-overview>
-    </cookbook-example-viewer>
-
-    <br />
-    <h3>Yearly overview</h3>
-    <cookbook-example-viewer
-      [html]="yearlyOverviewExample.template"
-      [ts]="yearlyOverviewExample.codeSnippet"
-    >
-      <cookbook-chart-example-yearly-overview
-        #yearlyOverviewExample
-      ></cookbook-chart-example-yearly-overview>
-    </cookbook-example-viewer>
-
+    <cookbook-code-viewer [html]="exampleHtml"></cookbook-code-viewer>
     <h4>Properties:</h4>
     <table class="cookbook-properties">
       <thead>
@@ -41,6 +22,27 @@
             See Highcharts options docs
             <a href="https://api.highcharts.com/highcharts/" target="_blank">here</a>
           </td>
+        </tr>
+
+        <tr>
+          <td><code>type</code></td>
+          <td>The type of chart</td>
+          <td><code>donut | pie | areaspline</code></td>
+        </tr>
+        <tr>
+          <td><code>showDataLabels</code></td>
+          <td>Enable or disable labels around pie/donut charts (default: true)</td>
+          <td><code>true, false</code></td>
+        </tr>
+        <tr>
+          <td><code>description</code></td>
+          <td>Description of chart for accessibility</td>
+          <td><code>string - e.g. "Distribution of assets in custody account"</code></td>
+        </tr>
+        <tr>
+          <td><code>data</code></td>
+          <td>Data input for chart</td>
+          <td><code>See examples above for exact format</code></td>
         </tr>
       </tbody>
     </table>

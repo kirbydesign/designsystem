@@ -47,8 +47,7 @@ import { ItemExampleComponent } from './item-example/item-example.component';
 import { DividerExampleComponent } from './divider-example/divider-example.component';
 import { ReorderListExampleComponent } from './reorder-list/reorder-list-example.component';
 import { DropdownExampleComponent } from '~/app/examples/dropdown-example/dropdown-example.component';
-import { ChartExampleMonthlyOverviewComponent } from './chart-example/examples/monthly-overview-chart-example/chart-example-monthly-overview.component';
-import { ChartExampleYearlyOverviewComponent } from './chart-example/examples/yearly-overview-chart-example/chart-example-yearly-overview.component';
+import { ChartExampleComponent } from './chart-example/chart-example.component';
 
 // Example of "custom" icons
 export const iconSettings: IconSettings = {
@@ -77,8 +76,7 @@ export const COMPONENT_DECLARATIONS: any[] = [
   ListNoShapeExampleComponent,
   GridExampleComponent,
   AvatarExampleComponent,
-  ChartExampleMonthlyOverviewComponent,
-  ChartExampleYearlyOverviewComponent,
+  ChartExampleComponent,
   FontsExampleComponent,
   SpinnerExampleComponent,
   ModalExampleComponent,

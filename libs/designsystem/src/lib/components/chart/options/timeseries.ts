@@ -1,6 +1,5 @@
-import { Options } from 'highcharts';
+import { Options, dateFormat } from 'highcharts';
 import { InjectionToken } from '@angular/core';
-import * as Highcharts from 'highcharts';
 
 export const TIMESERIES_OPTIONS = new InjectionToken<Options>('TimeSeriesOptions');
 export const TimeSeriesOptions: Options = {
@@ -19,6 +18,9 @@ export const TimeSeriesOptions: Options = {
     margin: 0,
     marginTop: 48,
   },
+  accessibility: {
+    description: '',
+  },
   title: {
     text: '',
   },
@@ -29,11 +31,11 @@ export const TimeSeriesOptions: Options = {
     shadow: false,
     formatter: function() {
       // @ts-ignore
-      return Highcharts.dateFormat('%e. %b', new Date(this.x)) + '.' + '<br/><b>' + this.y + '</b>';
+      return dateFormat('%e. %b', new Date(this.x)) + '.' + '<br/><b>' + this.y + '</b>';
     },
     //xDateFormat: '%d/%m',
     positioner: function(labelWidth, labelHeight, point) {
-      return { x: point.plotX, y: 0 };
+      return { x: point.x, y: 0 };
     },
     borderWidth: 0,
   },
@@ -89,7 +91,7 @@ export const TimeSeriesOptions: Options = {
     {
       type: 'area',
       name: 'USD to EUR',
-      data: (this === undefined ? [] : this.data) as Array<Highcharts.SeriesAreaDataOptions>,
+      data: this === undefined ? [] : this.data,
     },
   ],
 };

@@ -6,6 +6,8 @@ declare var require: any;
   templateUrl: './chart-showcase.component.html',
 })
 export class ChartShowcaseComponent implements OnInit {
+  exampleHtml: string = require('!raw-loader!../../examples/chart-example/chart-example.component.html')
+    .default;
   constructor() {}
 
   ngOnInit() {}

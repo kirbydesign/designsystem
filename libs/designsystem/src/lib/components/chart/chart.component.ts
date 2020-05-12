@@ -1,13 +1,5 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  OnChanges,
-  ElementRef,
-  HostBinding,
-  Inject,
-} from '@angular/core';
-import { Options } from 'highcharts';
+import { Component, OnInit, Input, OnChanges, ElementRef, Inject } from '@angular/core';
+import { Options, PlotSeriesDataLabelsOptions } from 'highcharts';
 
 import { ChartHelper } from './chart-helper';
 import { ChartType } from './chart-type';
@@ -29,17 +21,13 @@ import { ACTIVITYGAUGE_OPTIONS, ActivityGaugeOptions } from './options/activityg
   ],
 })
 export class ChartComponent implements OnInit, OnChanges {
-  @Input() options: Options = { chart: {} } as Options;
-  @Input()
-  set height(height: number) {
-    this.options.chart.height = height;
-  }
-
   @Input() data = [];
   @Input() breaks: Array<Highcharts.XAxisBreaksOptions> = [];
+  @Input() height = 300;
   @Input() type: ChartType = ChartType.PIE;
   @Input() description = '';
   @Input() showDataLabels = true;
+  options: Options = {};
 
   constructor(
     private chartHelper: ChartHelper,
@@ -96,16 +84,17 @@ export class ChartComponent implements OnInit, OnChanges {
   updateProperties() {
     if (this.options.chart) {
       this.options.chart.height = this.height;
-      // this.options.chart.description = this.description;
+      this.options.accessibility.description = this.description;
       switch (this.options.chart.type) {
         case ChartType.PIE:
-        // this.options.plotOptions.pie.dataLabels.enabled = this.showDataLabels;
+          (this.options.plotOptions.series
+            .dataLabels as PlotSeriesDataLabelsOptions).enabled = this.showDataLabels;
         /* falls through */
         case ChartType.DONUT: {
           this.options.series = [
             {
               type: 'pie',
-              // data: this.data as Array<Highcharts.SeriesPieDataOptions>,
+              data: this.data,
             },
           ];
           break;
@@ -114,7 +103,7 @@ export class ChartComponent implements OnInit, OnChanges {
           this.options.series = [
             {
               type: 'areaspline',
-              // data: this.data as Array<Highcharts.SeriesAreasplineDataOptions>,
+              data: this.data,
             },
           ];
           break;
@@ -123,7 +112,7 @@ export class ChartComponent implements OnInit, OnChanges {
           this.options.series = [
             {
               type: 'area',
-              // data: this.data as Array<Highcharts.SeriesAreaDataOptions>,
+              data: this.data,
             },
           ];
           this.options.xAxis = {
@@ -153,7 +142,7 @@ export class ChartComponent implements OnInit, OnChanges {
           this.options.series = [
             {
               type: 'solidgauge',
-              // data: data.series as Array<Highcharts.SeriesGaugeDataOptions>,
+              data: data.series,
             },
           ];
 
