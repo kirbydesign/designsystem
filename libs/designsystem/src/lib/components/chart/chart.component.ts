@@ -1,8 +1,20 @@
-import { Component, OnInit, Input, OnChanges, ElementRef, HostBinding } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  OnChanges,
+  ElementRef,
+  HostBinding,
+  Inject,
+} from '@angular/core';
 import { Options } from 'highcharts';
 
 import { ChartHelper } from './chart-helper';
 import { ChartType } from './chart-type';
+import { DONUT_OPTIONS, DonutOptions } from './options/donut';
+import { AREASPLINE_OPTIONS, AreaSplineOptions } from './options/areaspline';
+import { TIMESERIES_OPTIONS, TimeSeriesOptions } from './options/timeseries';
+import { ACTIVITYGAUGE_OPTIONS, ActivityGaugeOptions } from './options/activitygauge';
 
 @Component({
   selector: 'kirby-chart',
