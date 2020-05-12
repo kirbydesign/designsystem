@@ -8,6 +8,7 @@ import { CardElevationsExampleComponent } from './card/card-elevations-example/c
 import { GridExampleComponent } from './grid-example/grid-example.component';
 import { ListExampleComponent } from './list/list-example.component';
 import { ListLoadOnDemandExampleComponent } from './list/components/load-on-demand/list-load-on-demand-example.component';
+import { ChartExampleComponent } from './chart-example/chart-example.component';
 import { FontsExampleComponent } from './fonts-example/fonts-example.component';
 import { SpinnerExampleComponent } from './spinner-example/spinner-example.component';
 import { ModalExampleComponent } from './modal-example/modal-example.component';
@@ -47,7 +48,6 @@ import { ItemExampleComponent } from './item-example/item-example.component';
 import { DividerExampleComponent } from './divider-example/divider-example.component';
 import { ReorderListExampleComponent } from './reorder-list/reorder-list-example.component';
 import { DropdownExampleComponent } from '~/app/examples/dropdown-example/dropdown-example.component';
-import { ChartExampleComponent } from './chart-example/chart-example.component';
 
 // Example of "custom" icons
 export const iconSettings: IconSettings = {
