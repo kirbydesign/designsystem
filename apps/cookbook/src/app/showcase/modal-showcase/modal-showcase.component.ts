@@ -67,6 +67,11 @@ export class ModalShowcaseComponent implements AfterViewInit {
       description: 'Emitted when the modal is ready and the enter animation has finished',
       inputValues: ['Promise<void>'],
     },
+    {
+      name: 'willDismiss',
+      description: 'Emitted when the modal receives a dismiss (close) command',
+      inputValues: ['Promise<void>'],
+    },
   ];
 
   eventColumns = {
