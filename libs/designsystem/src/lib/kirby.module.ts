@@ -72,6 +72,7 @@ import { LoadingOverlayService } from './components/loading-overlay/fullscreen-l
 import { ResizeObserverFactory } from './components/shared/resize-observer/resize-observer.factory';
 import { ResizeObserverService } from './components/shared/resize-observer/resize-observer.service';
 import { CircularProgressComponent } from './components/circular-progress/circular-progress.component';
+import { CircularProgressRingComponent } from './components/circular-progress/circular-progress-ring.component';
 
 const exportedDeclarations = [
   CardComponent,
@@ -128,6 +129,7 @@ const declarations = [
   AlertComponent,
   ModalWrapperComponent,
   ModalCompactWrapperComponent,
+  CircularProgressRingComponent,
 ];
 
 const exportedModules = [

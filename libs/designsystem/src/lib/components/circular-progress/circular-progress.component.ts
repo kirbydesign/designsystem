@@ -1,32 +1,26 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy, HostBinding } from '@angular/core';
+
+import { ThemeColor } from './../../helpers/theme-color.type';
 
 @Component({
   selector: 'kirby-circular-progress',
-  templateUrl: './circular-progress.component.svg',
+  templateUrl: './circular-progress.component.html',
   styleUrls: ['./circular-progress.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CircularProgressComponent implements OnInit {
   @Input() radius: number = 40;
   @Input() value: number;
 
-  strokeWidth: number = 4;
-  innerRadius: number;
-  diameter: number;
-  innerCircumference: number;
+  @Input() themeColor: ThemeColor;
+
+  @HostBinding('style.width.px')
+  @HostBinding('style.height.px')
+  get diameter(): number {
+    return this.radius * 2;
+  }
 
   constructor() {}
 
-  ngOnInit() {
-    this.innerRadius = this.radius - this.strokeWidth;
-    this.diameter = this.radius * 2;
-    this.innerCircumference = this.innerRadius * 2 * Math.PI;
-  }
-
-  public changeValue() {
-    this.value = Math.random() * 100;
-  }
-
-  get offset(): number {
-    return this.innerCircumference - this.innerCircumference * (this.value / 100);
-  }
+  ngOnInit() {}
 }

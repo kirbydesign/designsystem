@@ -1,3 +1,11 @@
-<kirby-circular-progress value="25"></kirby-circular-progress>
-<kirby-circular-progress value="33" radius="60"></kirby-circular-progress>
-<kirby-circular-progress value="50" radius="80"></kirby-circular-progress>
+<kirby-circular-progress value="50">
+  2/4
+</kirby-circular-progress>
+
+<kirby-circular-progress themeColor="danger" value="33" radius="60">
+  <kirby-icon name="pension" size="lg"></kirby-icon>
+</kirby-circular-progress>
+
+<kirby-circular-progress [themeColor]="themeColor" [value]="progress" radius="80">
+  {{ progress }}%
+</kirby-circular-progress>

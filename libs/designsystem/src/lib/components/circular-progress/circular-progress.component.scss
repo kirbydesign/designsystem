@@ -1,9 +1,16 @@
-.circle {
-  stroke: white;
+@import '../../scss/utils';
+
+:host {
+  display: inline-block;
 }
-.progress {
-  transition: stroke-dashoffset 1s;
-  transform: rotate(-90deg);
-  transform-origin: 50% 50%;
-  stroke: green;
+
+.content,
+kirby-circular-progress-ring {
+  position: absolute;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

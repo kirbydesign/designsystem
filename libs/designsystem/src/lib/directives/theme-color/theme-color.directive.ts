@@ -9,7 +9,8 @@ import { ColorHelper } from '../../helpers/color-helper';
              kirby-badge[themeColor],
              kirby-icon[themeColor],
              kirby-toolbar[themeColor]
-             kirby-empty-state[themeColor]`,
+             kirby-empty-state[themeColor],
+             kirby-circular-progress-ring[themeColor]`,
 })
 export class ThemeColorDirective {
   private _isDefault = true;

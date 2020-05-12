@@ -1,0 +1,27 @@
+@import '../../scss/utils';
+.circle {
+  stroke: #{get-color('white')};
+}
+.progress {
+  transition: stroke-dashoffset 1s;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+  stroke: var(--stroke-color);
+}
+
+:host {
+  @mixin theme-color($color) {
+    &.#{$color} svg {
+      --stroke-color: #{get-color($color)};
+    }
+  }
+
+  --stroke-color: #{get-color('primary')};
+
+  @include theme-color('primary');
+  @include theme-color('secondary');
+  @include theme-color('tertiary');
+  @include theme-color('warning');
+  @include theme-color('success');
+  @include theme-color('danger');
+}
