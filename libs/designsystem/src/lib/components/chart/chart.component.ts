@@ -87,7 +87,7 @@ export class ChartComponent implements OnInit, OnChanges {
       this.options.accessibility.description = this.description;
       switch (this.options.chart.type) {
         case ChartType.PIE:
-          (this.options.plotOptions.series
+          (this.options.plotOptions.pie
             .dataLabels as PlotSeriesDataLabelsOptions).enabled = this.showDataLabels;
         /* falls through */
         case ChartType.DONUT: {

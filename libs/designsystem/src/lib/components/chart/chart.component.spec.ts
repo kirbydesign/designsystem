@@ -66,7 +66,7 @@ describe('ChartComponent', () => {
 
   it('should have dataLabels enabled as default', () => {
     expect(
-      (component.options.plotOptions.series.dataLabels as PlotSeriesDataLabelsOptions).enabled
+      (component.options.plotOptions.pie.dataLabels as PlotSeriesDataLabelsOptions).enabled
     ).toBe(true);
   });
 
@@ -74,7 +74,7 @@ describe('ChartComponent', () => {
     component.showDataLabels = false;
     component.ngOnInit();
     expect(
-      (component.options.plotOptions.series.dataLabels as PlotSeriesDataLabelsOptions).enabled
+      (component.options.plotOptions.pie.dataLabels as PlotSeriesDataLabelsOptions).enabled
     ).toBe(false);
   });
 
