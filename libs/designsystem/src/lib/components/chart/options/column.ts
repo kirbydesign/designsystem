@@ -6,17 +6,15 @@ const getColor = DesignTokenHelper.getColor;
 const fontSize = DesignTokenHelper.fontSize;
 
 function colorPoints() {
-  return function() {
-    var series = this.series;
-    for (var i = 0, ie = series.length; i < ie; ++i) {
-      var points = series[i].data;
-      for (var j = 0, je = points.length; j < je; ++j) {
-        if (points[j].graphic) {
-          points[j].graphic.element.style.stroke = getColor('secondary').value;
-        }
+  var series = this.series;
+  for (var i = 0, ie = series.length; i < ie; ++i) {
+    var points = series[i].data;
+    for (var j = 0, je = points.length; j < je; ++j) {
+      if (points[j].graphic) {
+        points[j].graphic.element.style.stroke = getColor('secondary').value;
       }
     }
-  };
+  }
 }
 
 export const getColumnOptions = (data: number[], categories: string[]) =>
@@ -28,8 +26,8 @@ export const getColumnOptions = (data: number[], categories: string[]) =>
       backgroundColor: 'transparent',
       type: 'column',
       events: {
-        load: colorPoints(),
-        redraw: colorPoints(),
+        load: colorPoints,
+        redraw: colorPoints,
       },
     },
     title: {
