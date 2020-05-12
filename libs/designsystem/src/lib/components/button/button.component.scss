@@ -52,7 +52,9 @@
 
 @mixin button-attentionlevel3 {
   --kirby-button-color: #{get-color('medium-contrast')};
-  border: 1px solid var(--kirby-button-border-color, #{get-color('medium')});
+  &:not(:focus):not(:disabled) {
+    border-color: var(--kirby-button-border-color, #{get-color('medium')});
+  }
 
   &.destructive {
     --kirby-button-color: #{get-color('danger')};
@@ -71,9 +73,8 @@
 :host {
   font-family: var(--kirby-font-family);
   background-color: var(--kirby-button-background-color);
-  border: none;
   border-radius: $border-radius-round;
-  box-sizing: border-box;
+  box-sizing: border-box; // Ensure border is not added to button height
   color: var(--kirby-button-color);
   cursor: pointer;
   display: inline-flex;
@@ -91,6 +92,18 @@
   font-size: font-size('s');
   height: size('xl');
   line-height: line-height('s');
+
+  // Outline is applied on button border instead,
+  // to keep the rounded shape:
+  outline: none;
+  border: 1px solid var(--kirby-button-border-color, transparent);
+
+  // Only apply focus ring if pointer device can hover
+  // (effectively desktop/mouse devices):
+  // @include focus() {
+  &:focus {
+    border-color: $focus-ring-color;
+  }
 
   &.icon-left {
     padding-left: size('xs');
@@ -144,7 +157,7 @@
 
   &:disabled {
     background-color: get-color('semi-light');
-    border-color: get-color('semi-light');
+    border-color: transparent;
     pointer-events: none;
     --kirby-button-color: #{get-color('semi-dark-shade')};
   }

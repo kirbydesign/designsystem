@@ -7,6 +7,7 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
+import { Subject } from 'rxjs';
 
 import { ModalConfig } from '../config/modal-config';
 import { COMPONENT_PROPS } from '../config/modal-config.helper';
@@ -23,6 +24,10 @@ export class ModalCompactWrapperComponent implements Modal, OnInit {
   @Input() config: ModalConfig;
   componentPropsInjector: Injector;
 
+  private ionModalElement: HTMLIonModalElement;
+  private readonly ionModalDidPresent = new Subject<void>();
+  readonly didPresent = this.ionModalDidPresent.toPromise();
+
   private _ionPageReset = false;
   @HostBinding('class.ion-page')
   get ionPageReset() {
@@ -32,10 +37,21 @@ export class ModalCompactWrapperComponent implements Modal, OnInit {
   constructor(private injector: Injector, private elementRef: ElementRef<HTMLElement>) {}
 
   ngOnInit(): void {
+    this.ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
+    this.listenForIonModalDidPresent();
     this.componentPropsInjector = Injector.create({
       providers: [{ provide: COMPONENT_PROPS, useValue: this.config.componentProps }],
       parent: this.injector,
     });
+  }
+
+  private listenForIonModalDidPresent() {
+    if (this.ionModalElement) {
+      this.ionModalElement.addEventListener('ionModalDidPresent', () => {
+        this.ionModalDidPresent.next();
+        this.ionModalDidPresent.complete();
+      });
+    }
   }
 
   async close(data?: any): Promise<void> {

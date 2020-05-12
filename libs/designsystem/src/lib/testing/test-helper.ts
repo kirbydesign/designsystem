@@ -72,7 +72,7 @@ export class TestHelper {
               resolve();
             }
           };
-          console.log(`Awaiting media query to match: to: ${mediaQuery.media}`);
+          console.log(`Awaiting media query to match: ${mediaQuery.media}`);
         }
       }
     });
