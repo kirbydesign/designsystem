@@ -34,6 +34,7 @@ export * from './modal';
 
 export * from './page';
 
+export * from './radio-button';
 export * from './router-outlet';
 
 export * from './shared';

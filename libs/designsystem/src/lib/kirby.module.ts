@@ -71,6 +71,7 @@ import { BreakpointHelperService } from './components/grid/breakpoint-helper.ser
 import { LoadingOverlayService } from './components/loading-overlay/fullscreen-loading-overlay/loading-overlay.service';
 import { ResizeObserverFactory } from './components/shared/resize-observer/resize-observer.factory';
 import { ResizeObserverService } from './components/shared/resize-observer/resize-observer.service';
+import { RadioButtonComponent, RadioButtonGroupComponent } from './components';
 
 const exportedDeclarations = [
   CardComponent,
@@ -115,6 +116,7 @@ const exportedDeclarations = [
   DropdownComponent,
   InfiniteScrollDirective,
   LoadingOverlayComponent,
+  RadioButtonComponent,
 ];
 
 const declarations = [
@@ -171,9 +173,9 @@ const entryComponents = [
     }),
     ...importedModules,
   ],
-  declarations: declarations,
+  declarations: [declarations, RadioButtonGroupComponent],
   providers: providers,
   entryComponents: entryComponents,
-  exports: exports,
+  exports: [exports, RadioButtonGroupComponent],
 })
 export class KirbyModule {}

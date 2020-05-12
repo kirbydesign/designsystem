@@ -37,6 +37,8 @@ import {
   MockPageActionsComponent,
   MockPageComponent,
 } from './components/mock.page.component';
+import { MockRadioButtonGroupComponent } from './components/mock.radio-button-group.component';
+import { MockRadioButtonComponent } from './components/mock.radio-button.component';
 import { MockReorderListComponent } from './components/mock.reorder-list.component';
 import { MockRouterOutletComponent } from './components/mock.router-outlet.component';
 import { MockSegmentedControlComponent } from './components/mock.segmented-control.component';
@@ -85,6 +87,8 @@ export const MOCK_COMPONENTS = [
   MockPageContentComponent,
   MockPageActionsComponent,
   MockPageComponent,
+  MockRadioButtonGroupComponent,
+  MockRadioButtonComponent,
   MockReorderListComponent,
   MockRouterOutletComponent,
   MockSegmentedControlComponent,
