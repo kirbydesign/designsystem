@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges, ElementRef, Inject } from '@angular/core';
-import { Options, PlotSeriesDataLabelsOptions, XAxisBreaksOptions } from 'highcharts';
+import { Options, PlotSeriesDataLabelsOptions, XAxisBreaksOptions, XAxisOptions } from 'highcharts';
 
 import { ChartHelper } from './chart-helper';
 import { ChartType } from './chart-type';
@@ -8,6 +8,8 @@ import { AREASPLINE_OPTIONS, AreaSplineOptions } from './options/areaspline';
 import { TIMESERIES_OPTIONS, TimeSeriesOptions } from './options/timeseries';
 import { ACTIVITYGAUGE_OPTIONS, ActivityGaugeOptions } from './options/activitygauge';
 import { mergeDeep } from '../../helpers/deep-merge';
+import { getColumnOptions } from './options/column';
+import { getBarOptions } from './options/bar';
 
 @Component({
   selector: 'kirby-chart',
@@ -23,6 +25,7 @@ import { mergeDeep } from '../../helpers/deep-merge';
 })
 export class ChartComponent implements OnInit, OnChanges {
   @Input() data = [];
+  @Input() categories: string[] = [];
   @Input() breaks: Array<XAxisBreaksOptions> = [];
   @Input() height = 300;
   @Input() type: ChartType = ChartType.PIE;
@@ -80,6 +83,16 @@ export class ChartComponent implements OnInit, OnChanges {
       }
       case ChartType.ACTIVITYGAUGE: {
         this.options = this.activitygaugeOptions;
+        this.options.chart.type = this.type;
+        break;
+      }
+      case ChartType.COLUMN: {
+        this.options = getColumnOptions(this.data, this.categories);
+        this.options.chart.type = this.type;
+        break;
+      }
+      case ChartType.BAR: {
+        this.options = getBarOptions(this.data, this.categories);
         this.options.chart.type = this.type;
         break;
       }
@@ -153,10 +166,30 @@ export class ChartComponent implements OnInit, OnChanges {
 
           break;
         }
+        case ChartType.COLUMN: {
+          this.options.series = [
+            {
+              type: 'column',
+              data: this.data,
+            },
+          ];
+          (this.options.xAxis as XAxisOptions).categories = this.categories;
+          break;
+        }
+        case ChartType.BAR: {
+          this.options.series = [
+            {
+              type: 'bar',
+              data: this.data,
+            },
+          ];
+          (this.options.xAxis as XAxisOptions).categories = this.categories;
+          break;
+        }
       }
-    }
-    if (!!this.optionsForOverride) {
-      this.options = mergeDeep(this.options, this.optionsForOverride);
+      if (!!this.optionsForOverride) {
+        this.options = mergeDeep(this.options, this.optionsForOverride);
+      }
     }
   }
 }

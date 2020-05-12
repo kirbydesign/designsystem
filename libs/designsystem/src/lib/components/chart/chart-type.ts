@@ -5,4 +5,6 @@ export enum ChartType {
   TIMESERIES = 'timeseries',
   ACTIVITYGAUGE = 'activitygauge',
   Custom = 'custom',
+  BAR = 'bar',
+  COLUMN = 'column',
 }

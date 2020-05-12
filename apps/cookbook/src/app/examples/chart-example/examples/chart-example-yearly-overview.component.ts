@@ -5,7 +5,6 @@ import { ModalController, DesignTokenHelper } from '@kirbydesign/designsystem';
 import { Example } from '../../example.interface';
 
 const getColor = DesignTokenHelper.getColor;
-const fontSize = DesignTokenHelper.fontSize;
 
 function colorPoints(selectedYear: string) {
   return function() {
@@ -29,84 +28,39 @@ const config = {
   selector: 'cookbook-chart-example-yearly-overview',
   template: `
   <kirby-card>
-    <kirby-card-header [title]="'Custom chart - Yearly overview'"></kirby-card-header>
-    <kirby-chart [height]="height" [type]="'custom'" [options]="yearlyOverviewOptions"> </kirby-chart>
+    <kirby-card-header [title]="'Yearly'"></kirby-card-header>
+    <kirby-chart [height]="height" [type]="'bar'" [categories]="categories" [options]="yearlyOverviewOptions"> </kirby-chart>
   </kirby-card>
   `,
   codeSnippet: `
+  private yearlyOverviewClick: SeriesClickCallbackFunction = (ev: SeriesClickEventObject) => {
+    this.modalController.showAlert({
+      title: 'Clicked chart',
+      message: 'You clicked on year: ' + ev.point.category,
+      okBtnText: 'Ok',
+    });
+
+    this.selectedYear = ev.point.category;
+    this.yearlyOverviewOptions.plotOptions.series.animation = false;
+    this.yearlyOverviewOptions.chart.events.load = colorPoints(this.selectedYear);
+    this.yearlyOverviewOptions.chart.events.redraw = colorPoints(this.selectedYear);
+    this.yearlyOverviewOptions = { ...this.yearlyOverviewOptions };
+  };
+
   yearlyOverviewOptions: Options = {
     chart: {
-      type: 'bar',
-      animation: {
-        duration: 150,
-      },
-      height: this.height,
-      backgroundColor: 'transparent',
       events: {
         load: colorPoints(this.selectedYear),
         redraw: colorPoints(this.selectedYear),
       },
     },
-    credits: {
-      enabled: false,
-    },
-    title: {
-      text: '',
-    },
-    xAxis: {
-      categories: this.yearsStr,
-      labels: {
-        style: {
-          fontSize: fontSize('s'),
-          fontFamily: 'roboto',
-          color: getColor('black').value,
-        },
-      },
-      min: 0,
-      lineColor: 'transparent',
-    },
-    yAxis: {
-      title: {
-        text: '',
-      },
-      labels: {
-        enabled: false,
-      },
-      min: 0,
-      lineWidth: 0,
-      minorGridLineWidth: 0,
-      gridLineColor: 'transparent',
-      minorTickLength: 0,
-      tickLength: 0,
-      maxPadding: 0,
-      endOnTick: false,
-      showLastLabel: false,
-      showFirstLabel: false,
-    },
     plotOptions: {
+      series: {},
       bar: {
         events: {
           click: this.yearlyOverviewClick.bind(this),
         },
       },
-      series: {
-        color: getColor('secondary').value,
-        stacking: 'normal',
-        states: {
-          hover: {
-            enabled: false,
-          },
-          inactive: {
-            opacity: 1,
-          },
-        },
-      },
-    },
-    tooltip: {
-      enabled: false,
-    },
-    legend: {
-      enabled: false,
     },
     series: [
       {
@@ -143,8 +97,8 @@ export class ChartExampleYearlyOverviewComponent implements Example {
   private currentTimeData = [0, 1000, 800];
   private maxValue = Math.max(...this.yearExpensesData) + Math.max(...this.currentTimeData);
   private years = [2018, 2019, 2020].reverse();
-  private yearsStr = this.years.map((year) => year.toString());
-  private selectedYear = this.yearsStr[0];
+  private categories = this.years.map((year) => year.toString());
+  private selectedYear = this.categories[0];
   private lowerLimit = Math.max(...this.yearExpensesData) * 0.01;
   // lower limit is shown as 2% of max value for UX reasons
   private adjustedYearExpensesData = this.yearExpensesData.map((data) =>
@@ -167,77 +121,18 @@ export class ChartExampleYearlyOverviewComponent implements Example {
 
   yearlyOverviewOptions: Options = {
     chart: {
-      type: 'bar',
-      animation: {
-        duration: 150,
-      },
-      height: this.height,
-      backgroundColor: 'transparent',
       events: {
         load: colorPoints(this.selectedYear),
         redraw: colorPoints(this.selectedYear),
       },
     },
-    credits: {
-      enabled: false,
-    },
-    title: {
-      text: '',
-    },
-    xAxis: {
-      categories: this.yearsStr,
-      labels: {
-        style: {
-          fontSize: fontSize('s'),
-          fontFamily: 'roboto',
-          color: getColor('black').value,
-        },
-      },
-      min: 0,
-      lineColor: 'transparent',
-    },
-    yAxis: {
-      title: {
-        text: '',
-      },
-      labels: {
-        enabled: false,
-      },
-      min: 0,
-      lineWidth: 0,
-      minorGridLineWidth: 0,
-      gridLineColor: 'transparent',
-      minorTickLength: 0,
-      tickLength: 0,
-      maxPadding: 0,
-      endOnTick: false,
-      showLastLabel: false,
-      showFirstLabel: false,
-    },
     plotOptions: {
+      series: {},
       bar: {
         events: {
           click: this.yearlyOverviewClick.bind(this),
         },
       },
-      series: {
-        color: getColor('secondary').value,
-        stacking: 'normal',
-        states: {
-          hover: {
-            enabled: false,
-          },
-          inactive: {
-            opacity: 1,
-          },
-        },
-      },
-    },
-    tooltip: {
-      enabled: false,
-    },
-    legend: {
-      enabled: false,
     },
     series: [
       {

@@ -1,9 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Options, PlotSeriesDataLabelsOptions } from 'highcharts';
+import { Options, PlotSeriesDataLabelsOptions, XAxisOptions } from 'highcharts';
 
 import { ChartComponent } from './chart.component';
 import { ChartType } from './chart-type';
+import { getColumnOptions } from './options/column';
 
 describe('ChartComponent', () => {
   let component: ChartComponent;
@@ -185,6 +186,40 @@ describe('ChartComponent', () => {
       ];
       component.ngOnInit();
       expect(component.options.chart.type).toBe(ChartType.ACTIVITYGAUGE);
+    });
+  });
+
+  describe('column', () => {
+    it('should set inputs correct', () => {
+      component.type = ChartType.COLUMN;
+      component.data = [1, 2, 3];
+      component.categories = ['jan', 'feb', 'mar'];
+      component.ngOnInit();
+      expect(component.options.series as any).toEqual([
+        {
+          type: 'column',
+          data: component.data,
+        },
+      ]);
+
+      expect((component.options.xAxis as XAxisOptions).categories).toEqual(component.categories);
+    });
+  });
+
+  describe('bar', () => {
+    it('should set inputs correct', () => {
+      component.type = ChartType.BAR;
+      component.data = [1, 2, 3];
+      component.categories = ['jan', 'feb', 'mar'];
+      component.ngOnInit();
+      expect(component.options.series as any).toEqual([
+        {
+          type: 'bar',
+          data: component.data,
+        },
+      ]);
+
+      expect((component.options.xAxis as XAxisOptions).categories).toEqual(component.categories);
     });
   });
 
