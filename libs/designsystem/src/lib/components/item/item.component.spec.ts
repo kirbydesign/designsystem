@@ -2,15 +2,14 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { IonicModule } from '@ionic/angular';
 
 import { DesignTokenHelper } from '../../helpers/design-token-helper';
+import { TestHelper } from '../../testing/test-helper';
+import { ItemComponent } from './item.component';
 
 const getTextColor = DesignTokenHelper.getTextColor;
 const size = DesignTokenHelper.size;
 const fontSize = DesignTokenHelper.fontSize;
 const fontWeight = DesignTokenHelper.fontWeight;
 const lineHeight = DesignTokenHelper.lineHeight;
-
-import { ItemComponent } from './item.component';
-import { TestHelper } from '../../testing/test-helper';
 
 describe('ItemComponent', () => {
   let spectator: SpectatorHost<ItemComponent>;
