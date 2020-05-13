@@ -116,10 +116,8 @@ export class ChartComponent implements OnChanges {
     this.mergedOptions.accessibility.description = this.description;
     switch (this.mergedOptions.chart.type) {
       case ChartType.PIE:
-        this.setPieInput();
-        break;
       case ChartType.DONUT: {
-        this.setSeries('pie');
+        this.setPieInput();
         break;
       }
       case ChartType.AREASPLINE: {
