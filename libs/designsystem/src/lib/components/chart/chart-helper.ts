@@ -15,19 +15,12 @@ require('highcharts/modules/broken-axis')(Highcharts);
 export class ChartHelper {
   chartContainer: ElementRef;
 
-  public init(options: Options, chartContainer: ElementRef) {
+  public init(chartContainer: ElementRef) {
     this.chartContainer = chartContainer;
-    this.renderChart(options);
   }
 
-  public updateChart(options: Options) {
-    if (options.chart) {
-      this.renderChart(options);
-    }
-  }
-
-  private renderChart(options: Options) {
-    if (this.chartContainer) {
+  public renderChart(options: Options) {
+    if (this.chartContainer && options.chart) {
       chart(this.chartContainer.nativeElement, options);
     }
   }

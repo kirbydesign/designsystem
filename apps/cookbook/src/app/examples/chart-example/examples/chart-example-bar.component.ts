@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Options, SeriesClickCallbackFunction, SeriesClickEventObject } from 'highcharts';
 
 import { ModalController, DesignTokenHelper } from '@kirbydesign/designsystem';
-import { Example } from '../../example.interface';
 
 const getColor = DesignTokenHelper.getColor;
 
@@ -88,7 +87,7 @@ const config = {
   selector: config.selector,
   templateUrl: config.template,
 })
-export class ChartExampleBarComponent implements Example {
+export class ChartExampleBarComponent {
   template: string = config.template;
   codeSnippet: string = config.codeSnippet;
   height = 150;

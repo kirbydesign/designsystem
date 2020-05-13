@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Example } from '../../example.interface';
-
 const config = {
   selector: 'cookbook-chart-example-timeseries',
   template: `
@@ -19,7 +17,7 @@ const config = {
   `,
 };
 @Component(config)
-export class ChartExampleTimeseriesComponent implements Example {
+export class ChartExampleTimeseriesComponent {
   template = config.template;
   breaks = [
     {

@@ -17,91 +17,77 @@ function colorPoints() {
   }
 }
 
-export const getBarOptions = (data: number[], categories: string[]) =>
-  ({
-    chart: {
-      type: 'bar',
-      animation: {
-        duration: 150,
+export const barOptions: Options = {
+  chart: {
+    type: 'bar',
+    animation: {
+      duration: 150,
+    },
+    backgroundColor: 'transparent',
+    events: {
+      load: colorPoints,
+      redraw: colorPoints,
+    },
+  },
+  accessibility: {
+    description: 'Bar chart',
+  },
+  credits: {
+    enabled: false,
+  },
+  title: {
+    text: '',
+  },
+  xAxis: {
+    labels: {
+      style: {
+        fontSize: fontSize('s'),
+        fontFamily: 'roboto',
+        color: getColor('black').value,
       },
-      backgroundColor: 'transparent',
-      events: {
-        load: colorPoints,
-        redraw: colorPoints,
-      },
     },
-    accessibility: {
-      description: 'Bar chart',
-    },
-    credits: {
-      enabled: false,
-    },
+    min: 0,
+    lineColor: 'transparent',
+  },
+  yAxis: {
     title: {
       text: '',
     },
-    xAxis: {
-      categories,
-      labels: {
-        style: {
-          fontSize: fontSize('s'),
-          fontFamily: 'roboto',
-          color: getColor('black').value,
+    labels: {
+      enabled: false,
+    },
+    min: 0,
+    lineWidth: 0,
+    minorGridLineWidth: 0,
+    gridLineColor: 'transparent',
+    minorTickLength: 0,
+    tickLength: 0,
+    maxPadding: 0,
+    endOnTick: false,
+    showLastLabel: false,
+    showFirstLabel: false,
+  },
+  plotOptions: {
+    bar: {
+      events: {},
+    },
+    series: {
+      color: getColor('secondary').value,
+      stacking: 'normal',
+      states: {
+        hover: {
+          enabled: false,
         },
-      },
-      min: 0,
-      lineColor: 'transparent',
-    },
-    yAxis: {
-      title: {
-        text: '',
-      },
-      labels: {
-        enabled: false,
-      },
-      min: 0,
-      lineWidth: 0,
-      minorGridLineWidth: 0,
-      gridLineColor: 'transparent',
-      minorTickLength: 0,
-      tickLength: 0,
-      maxPadding: 0,
-      endOnTick: false,
-      showLastLabel: false,
-      showFirstLabel: false,
-    },
-    plotOptions: {
-      bar: {
-        events: {},
-      },
-      series: {
-        color: getColor('secondary').value,
-        stacking: 'normal',
-        states: {
-          hover: {
-            enabled: false,
-          },
-          inactive: {
-            opacity: 1,
-          },
+        inactive: {
+          opacity: 1,
         },
       },
     },
-    tooltip: {
-      enabled: false,
-    },
-    legend: {
-      enabled: false,
-    },
-    series: [
-      {
-        name: 'InvisibleClickReceiver',
-        data: data.map((dataEntry, idx) => Math.max(...data) - dataEntry),
-        edgeColor: 'rgb(255, 255, 255, 0)',
-        opacity: 0,
-      },
-      {
-        name: 'WholeYearExpenses',
-        data: data,
-      },
-    ] as any,
-  } as Options);
+  },
+  tooltip: {
+    enabled: false,
+  },
+  legend: {
+    enabled: false,
+  },
+};

@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 
-import { Example } from '../../example.interface';
-
 const config = {
   selector: 'cookbook-chart-example-activity-gauge',
   template: `
@@ -41,6 +39,6 @@ const config = {
   `,
 };
 @Component(config)
-export class ChartExampleActivityGaugeComponent implements Example {
+export class ChartExampleActivityGaugeComponent {
   template = config.template;
 }

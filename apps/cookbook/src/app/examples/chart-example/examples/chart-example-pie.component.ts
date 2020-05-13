@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 
-import { Example } from '../../example.interface';
-
 const config = {
   selector: 'cookbook-chart-example-pie',
   template: `
@@ -39,6 +37,6 @@ const config = {
   `,
 };
 @Component(config)
-export class ChartExamplePieComponent implements Example {
+export class ChartExamplePieComponent {
   template = config.template;
 }

@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 
-import { Example } from '../../example.interface';
-
 const config = {
   selector: 'cookbook-chart-example-areaspline',
   template: `
@@ -27,7 +25,7 @@ const config = {
   `,
 };
 @Component(config)
-export class ChartExampleAreasplineComponent implements Example {
+export class ChartExampleAreasplineComponent {
   template = config.template;
 
   data = [

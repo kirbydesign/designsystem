@@ -17,103 +17,85 @@ function colorPoints() {
   }
 }
 
-export const getColumnOptions = (data: number[], categories: string[]) =>
-  ({
-    chart: {
-      animation: {
-        duration: 500,
-      },
-      backgroundColor: 'transparent',
-      type: 'column',
-      events: {
-        load: colorPoints,
-        redraw: colorPoints,
+export const columnOptions: Options = {
+  chart: {
+    animation: {
+      duration: 500,
+    },
+    backgroundColor: 'transparent',
+    type: 'column',
+    events: {
+      load: colorPoints,
+      redraw: colorPoints,
+    },
+  },
+  title: {
+    text: '',
+  },
+  accessibility: {
+    description: 'Column chart',
+  },
+  xAxis: {
+    labels: {
+      style: {
+        fontSize: fontSize('xxs'),
+        fontFamily: 'roboto',
+        color: getColor('black').value,
       },
     },
+    lineWidth: 0,
+    minorGridLineWidth: 0,
+    lineColor: 'transparent',
+    minorTickLength: 0,
+    tickLength: 0,
+  },
+  yAxis: {
     title: {
       text: '',
     },
-    accessibility: {
-      description: 'Column chart',
-    },
-    xAxis: {
-      categories,
-      labels: {
-        style: {
-          fontSize: fontSize('xxs'),
-          fontFamily: 'roboto',
-          color: getColor('black').value,
-        },
-      },
-      lineWidth: 0,
-      minorGridLineWidth: 0,
-      lineColor: 'transparent',
-      minorTickLength: 0,
-      tickLength: 0,
-    },
-    yAxis: {
-      title: {
-        text: '',
-      },
-      labels: {
-        enabled: false,
-      },
-      min: 0,
-      lineWidth: 0,
-      minorGridLineWidth: 0,
-      gridLineColor: 'transparent',
-      minorTickLength: 0,
-      tickLength: 0,
-      showLastLabel: false,
-      showFirstLabel: false,
-      tickPositioner: () => {
-        var positions = [0, Math.max(...data)];
-        return positions;
-      },
-    },
-    credits: {
+    labels: {
       enabled: false,
     },
-    plotOptions: {
-      column: {
-        stacking: 'normal',
-      },
-      series: {
-        color: getColor('secondary').value,
-        zIndex: 10,
-        states: {
-          hover: {
-            enabled: false,
-          },
-          inactive: {
-            opacity: 1,
-          },
-        },
-      },
-      line: {
-        className: 'avg-line',
-        marker: {
+    min: 0,
+    lineWidth: 0,
+    minorGridLineWidth: 0,
+    gridLineColor: 'transparent',
+    minorTickLength: 0,
+    tickLength: 0,
+    showLastLabel: false,
+    showFirstLabel: false,
+  },
+  credits: {
+    enabled: false,
+  },
+  plotOptions: {
+    column: {
+      stacking: 'normal',
+    },
+    series: {
+      color: getColor('secondary').value,
+      zIndex: 10,
+      states: {
+        hover: {
           enabled: false,
         },
-        allowPointSelect: false,
+        inactive: {
+          opacity: 1,
+        },
       },
     },
-    tooltip: {
-      enabled: false,
-    },
-    legend: {
-      enabled: false,
-    },
-    series: [
-      {
-        type: 'column',
-        name: 'InvisibleClickReceiver',
-        data: data.map((_, idx) => Math.max(...data) - data[idx]),
-        opacity: 0,
+    line: {
+      className: 'avg-line',
+      marker: {
+        enabled: false,
       },
-      {
-        type: 'column',
-        data: data,
-      },
-    ],
-  } as Options);
+      allowPointSelect: false,
+    },
+  },
+  tooltip: {
+    enabled: false,
+  },
+  legend: {
+    enabled: false,
+  },
+};
