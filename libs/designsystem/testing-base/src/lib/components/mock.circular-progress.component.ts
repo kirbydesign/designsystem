@@ -1,19 +1,19 @@
 import { forwardRef, Component, Input } from '@angular/core';
 
-import { CircularProgressComponent } from '@kirbydesign/designsystem';
+import { ProgressCircleComponent } from '@kirbydesign/designsystem';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
-  selector: 'kirby-circular-progress',
+  selector: 'kirby-progress-circle',
   template: '<ng-content></ng-content>',
   providers: [
     {
-      provide: CircularProgressComponent,
-      useExisting: forwardRef(() => MockCircularProgressComponent),
+      provide: ProgressCircleComponent,
+      useExisting: forwardRef(() => MockProgressCircleComponent),
     },
   ],
 })
-export class MockCircularProgressComponent {
+export class MockProgressCircleComponent {
   @Input() value: number;
   @Input() size: 'sm' | 'md' | 'lg';
   @Input() themeColor: ThemeColor;

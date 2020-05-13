@@ -1,5 +1,5 @@
 <div class="example">
-  <cookbook-circular-progress-example></cookbook-circular-progress-example>
+  <cookbook-progress-circle-example></cookbook-progress-circle-example>
   <cookbook-code-viewer [html]="exampleHtml"></cookbook-code-viewer>
   <h4>Properties:</h4>
   <table class="cookbook-properties">
@@ -17,10 +17,16 @@
         <td>0</td>
       </tr>
       <tr>
-        <td><code>radius</code></td>
-        <td>Sets the outer radius of the circle</td>
-        <td><code>number</code><br />[10-]</td>
-        <td>40</td>
+        <td><code>size</code></td>
+        <td>Sets the size of the circle</td>
+        <td><code>'sm' | 'md' | 'lg' </code></td>
+        <td>md</td>
+      </tr>
+      <tr>
+        <td><code>themeColor</code></td>
+        <td>The color of the progress stroke</td>
+        <td><code>'success' | 'warning' | 'danger' </code></td>
+        <td>success</td>
       </tr>
     </tbody>
   </table>

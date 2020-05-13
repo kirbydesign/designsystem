@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ThemeColor } from './../../../../../../libs/designsystem/src/lib/helpers/theme-color.type';
+import { ThemeColor } from '../../../../../../libs/designsystem/src/lib/helpers/theme-color.type';
 @Component({
-  selector: 'cookbook-circular-progress-example',
-  templateUrl: './circular-progress-example.component.html',
-  styleUrls: ['./circular-progress-example.component.scss'],
+  selector: 'cookbook-progress-circle-example',
+  templateUrl: './progress-circle-example.component.html',
+  styleUrls: ['./progress-circle-example.component.scss'],
 })
-export class CircularProgressExampleComponent implements OnInit {
+export class ProgressCircleExampleComponent implements OnInit {
   progress: number = 0;
   themeColor: ThemeColor;
 

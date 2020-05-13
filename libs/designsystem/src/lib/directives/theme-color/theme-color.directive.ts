@@ -10,7 +10,7 @@ import { ColorHelper } from '../../helpers/color-helper';
              kirby-icon[themeColor],
              kirby-toolbar[themeColor]
              kirby-empty-state[themeColor],
-             kirby-circular-progress-ring[themeColor]`,
+             kirby-progress-circle-ring[themeColor]`,
 })
 export class ThemeColorDirective {
   private _isDefault = true;

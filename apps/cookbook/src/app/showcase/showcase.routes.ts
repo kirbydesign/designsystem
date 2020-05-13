@@ -36,7 +36,7 @@ import { ItemShowcaseComponent } from '../showcase/item-showcase/item-showcase.c
 import { DividerShowcaseComponent } from './divider-showcase/divider-showcase.component';
 import { DropdownShowcaseComponent } from '~/app/showcase/dropdown-showcase/dropdown-showcase.component';
 import { ReorderListShowcaseComponent } from './reorder-list-showcase/reorder-list-showcase.component';
-import { CircularProgressShowcaseComponent } from './circular-progress-showcase/circular-progress-showcase.component';
+import { ProgressCircleShowcaseComponent } from './progress-circle-showcase/progress-circle-showcase.component';
 
 export const routes: Routes = [
   {
@@ -189,8 +189,8 @@ export const routes: Routes = [
         component: DropdownShowcaseComponent,
       },
       {
-        path: 'circular-progress',
-        component: CircularProgressShowcaseComponent,
+        path: 'progress-circle',
+        component: ProgressCircleShowcaseComponent,
       },
     ],
   },

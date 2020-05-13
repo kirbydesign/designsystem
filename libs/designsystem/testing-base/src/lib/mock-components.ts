@@ -8,7 +8,7 @@ import { MockCardHeaderComponent } from './components/mock.card-header.component
 import { MockCardComponent } from './components/mock.card.component';
 import { MockCheckboxComponent } from './components/mock.checkbox.component';
 import { MockChipComponent } from './components/mock.chip.component';
-import { MockCircularProgressComponent } from './components/mock.circular-progress.component';
+import { MockProgressCircleComponent } from './components/mock.progress-circle.component';
 import { MockDividerComponent } from './components/mock.divider.component';
 import { MockDropdownComponent } from './components/mock.dropdown.component';
 import { MockEmptyStateComponent } from './components/mock.empty-state.component';
@@ -59,7 +59,7 @@ export const MOCK_COMPONENTS = [
   MockCardComponent,
   MockCheckboxComponent,
   MockChipComponent,
-  MockCircularProgressComponent,
+  MockProgressCircleComponent,
   MockDividerComponent,
   MockDropdownComponent,
   MockEmptyStateComponent,

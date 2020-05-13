@@ -1,4 +1,4 @@
-import { CircularProgressExampleComponent } from './circular-progress-example/circular-progress-example.component';
+import { ProgressCircleExampleComponent } from './progress-circle-example/progress-circle-example.component';
 import { ICON_SETTINGS, IconSettings } from '@kirbydesign/designsystem';
 
 import { AvatarExampleComponent } from './avatar-example/avatar-example.component';
@@ -113,7 +113,7 @@ export const COMPONENT_DECLARATIONS: any[] = [
   DividerExampleComponent,
   ReorderListExampleComponent,
   DropdownExampleComponent,
-  CircularProgressExampleComponent,
+  ProgressCircleExampleComponent,
 ];
 
 // Configure custom icons (used by example to show the usage of custom icons)

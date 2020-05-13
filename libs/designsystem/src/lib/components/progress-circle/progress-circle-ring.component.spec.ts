@@ -1,12 +1,12 @@
 import { Spectator, createComponentFactory } from '@ngneat/spectator';
 
-import { CircularProgressComponent } from './circular-progress.component';
+import { ProgressCircleComponent } from './progress-circle.component';
 
-describe('CircularProgressComponent', () => {
-  let spectator: Spectator<CircularProgressComponent>;
+describe('ProgressCircleRingComponent', () => {
+  let spectator: Spectator<ProgressCircleComponent>;
 
   const createHost = createComponentFactory({
-    component: CircularProgressComponent,
+    component: ProgressCircleComponent,
     declarations: [],
   });
 

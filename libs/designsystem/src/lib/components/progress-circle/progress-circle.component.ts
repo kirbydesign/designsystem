@@ -8,7 +8,7 @@ import {
   ChangeDetectorRef,
 } from '@angular/core';
 
-import { ThemeColor } from './../../helpers/theme-color.type';
+import { ThemeColor } from '../../helpers/theme-color.type';
 
 const RADIUS_MAP = {
   sm: 20,
@@ -16,15 +16,13 @@ const RADIUS_MAP = {
   lg: 48,
 };
 
-const STROKE_WIDTH = 4;
-
 @Component({
-  selector: 'kirby-circular-progress',
-  templateUrl: './circular-progress.component.html',
-  styleUrls: ['./circular-progress.component.scss'],
+  selector: 'kirby-progress-circle',
+  templateUrl: './progress-circle.component.html',
+  styleUrls: ['./progress-circle.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CircularProgressComponent implements AfterViewInit {
+export class ProgressCircleComponent implements AfterViewInit {
   @Input() value: number = 0;
 
   @Input() size: 'sm' | 'md' | 'lg';
@@ -67,9 +65,5 @@ export class CircularProgressComponent implements AfterViewInit {
     } else {
       return RADIUS_MAP.md;
     }
-  }
-
-  get strokeWidth() {
-    return STROKE_WIDTH;
   }
 }

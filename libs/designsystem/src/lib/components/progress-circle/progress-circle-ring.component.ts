@@ -5,12 +5,12 @@ import { ThemeColor } from '../../helpers/theme-color.type';
 const STROKE_WIDTH = 4;
 
 @Component({
-  selector: 'kirby-circular-progress-ring',
-  templateUrl: './circular-progress-ring.component.svg',
-  styleUrls: ['./circular-progress-ring.component.scss'],
+  selector: 'kirby-progress-circle-ring',
+  templateUrl: './progress-circle-ring.component.svg',
+  styleUrls: ['./progress-circle-ring.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CircularProgressRingComponent {
+export class ProgressCircleRingComponent {
   @Input() radius: number;
   @Input() value: number;
   @Input() themeColor: ThemeColor;
