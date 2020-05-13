@@ -6,5 +6,5 @@ export enum ChartType {
   ACTIVITYGAUGE = 'activitygauge',
   BAR = 'bar',
   COLUMN = 'column',
-  Custom = 'custom',
+  CUSTOM = 'custom',
 }

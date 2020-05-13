@@ -127,7 +127,6 @@ export class ChartComponent implements OnChanges {
         break;
       }
       case ChartType.TIMESERIES: {
-        // TODO: extract to reusable function
         this.setTimeseriesInput();
         break;
       }
