@@ -14,8 +14,8 @@ import { CircularProgressComponent } from '@kirbydesign/designsystem';
   ],
 })
 export class MockCircularProgressComponent {
-  @Input() radius: number;
   @Input() value: number;
+  @Input() size: 'sm' | 'md' | 'lg';
   @Input() themeColor: ThemeColor;
 }
 
