@@ -142,6 +142,10 @@ export const routes: Routes = [
         path: 'modal',
         component: ModalExamplePopoutComponent,
       },
+      {
+        path: 'radiobutton',
+        component: RadioButtonExampleComponent,
+      },
     ],
   },
   {
@@ -265,10 +269,6 @@ export const routes: Routes = [
   {
     path: 'checkbox',
     component: CheckboxExampleComponent,
-  },
-  {
-    path: 'radiobutton',
-    component: RadioButtonExampleComponent,
   },
   {
     path: 'toast',
