@@ -3,7 +3,7 @@
   stroke: #{get-color('white')};
 }
 .progress {
-  transition: stroke-dashoffset 1s; // TODO: Clarify: Is this animation OK?
+  transition: stroke-dashoffset 1s, stroke 1s;
   transform: rotate(-90deg);
   transform-origin: 50% 50%;
   stroke: var(--stroke-color);
@@ -16,12 +16,9 @@
     }
   }
 
-  --stroke-color: #{get-color('primary')};
+  --stroke-color: #{get-color('success')};
 
-  @include theme-color('primary');
-  @include theme-color('secondary');
-  @include theme-color('tertiary');
-  @include theme-color('warning');
-  @include theme-color('success');
-  @include theme-color('danger');
+  @each $color-name, $color-value in $notification-colors {
+    @include theme-color($color-name);
+  }
 }

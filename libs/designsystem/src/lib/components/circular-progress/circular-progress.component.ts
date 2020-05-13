@@ -6,10 +6,17 @@ import {
   ElementRef,
   AfterViewInit,
   ChangeDetectorRef,
-  ViewContainerRef,
 } from '@angular/core';
 
 import { ThemeColor } from './../../helpers/theme-color.type';
+
+const RADIUS_MAP = {
+  sm: 20,
+  md: 28,
+  lg: 48,
+};
+
+const STROKE_WIDTH = 4;
 
 @Component({
   selector: 'kirby-circular-progress',
@@ -18,8 +25,9 @@ import { ThemeColor } from './../../helpers/theme-color.type';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CircularProgressComponent implements AfterViewInit {
-  @Input() radius: number = 40; // TODO: Clarify: Should size be picked from a set of predefined Kirby sizes instead? I.e. sm, md, lg
   @Input() value: number = 0;
+
+  @Input() size: 'sm' | 'md' | 'lg';
 
   @Input() themeColor: ThemeColor;
 
@@ -31,7 +39,6 @@ export class CircularProgressComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.observer = new IntersectionObserver(this.onElementVisible);
-    // TODO: Only trigger this when user actually sees it in view (If possible and needed?)
     this.observer.observe(this.elementRef.nativeElement);
   }
 
@@ -52,5 +59,17 @@ export class CircularProgressComponent implements AfterViewInit {
   get shownValue() {
     // This is needed to make an animation [0 -> value] when element is shown to the user
     return this.hasElementBeenVisible ? this.value : 0;
+  }
+
+  get radius() {
+    if (this.size) {
+      return RADIUS_MAP[this.size];
+    } else {
+      return RADIUS_MAP.md;
+    }
+  }
+
+  get strokeWidth() {
+    return STROKE_WIDTH;
   }
 }

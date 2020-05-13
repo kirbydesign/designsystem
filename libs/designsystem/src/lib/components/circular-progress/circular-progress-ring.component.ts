@@ -2,6 +2,8 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
 import { ThemeColor } from '../../helpers/theme-color.type';
 
+const STROKE_WIDTH = 4;
+
 @Component({
   selector: 'kirby-circular-progress-ring',
   templateUrl: './circular-progress-ring.component.svg',
@@ -30,7 +32,6 @@ export class CircularProgressRingComponent {
   }
 
   get strokeWidth(): number {
-    // TODO: Add stroke width breakpoints
-    return 4;
+    return STROKE_WIDTH;
   }
 }

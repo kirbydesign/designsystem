@@ -1,6 +1,6 @@
-import { CircularProgressComponent } from './circular-progress.component';
-
 import { Spectator, createComponentFactory } from '@ngneat/spectator';
+
+import { CircularProgressComponent } from './circular-progress.component';
 
 describe('CircularProgressComponent', () => {
   let spectator: Spectator<CircularProgressComponent>;

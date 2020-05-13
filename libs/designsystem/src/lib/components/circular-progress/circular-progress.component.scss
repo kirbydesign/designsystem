@@ -9,8 +9,13 @@ kirby-circular-progress-ring {
   position: absolute;
 }
 
+kirby-circular-progress-ring {
+  z-index: z('default') + 1;
+}
+
 .transcluded-content {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: z('default');
 }
