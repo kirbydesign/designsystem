@@ -39,7 +39,7 @@ export const columnOptions: Options = {
     labels: {
       style: {
         fontSize: fontSize('xxs'),
-        fontFamily: 'roboto',
+        fontFamily: 'Roboto',
         color: getColor('black').value,
       },
     },

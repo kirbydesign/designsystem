@@ -42,7 +42,7 @@ export const barOptions: Options = {
     labels: {
       style: {
         fontSize: fontSize('s'),
-        fontFamily: 'roboto',
+        fontFamily: 'Roboto',
         color: getColor('black').value,
       },
     },

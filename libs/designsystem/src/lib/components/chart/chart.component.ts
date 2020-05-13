@@ -62,7 +62,7 @@ export class ChartComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['type']) {
+    if (changes.type) {
       this.setupChartType();
     }
     this.updateProperties();
