@@ -8,7 +8,7 @@
  * @param overrideObject object - Object to override "toOverride" values with
  * @param config object - Configuration for how to merge.
  *  mergeArrays determines if it should merge or override arrays
- * @returns {object} New object with merged key/values
+ * @returns object - New object with merged key/values
  */
 export function mergeDeep(originalObject, overrideObject, config = { mergeArrays: false }) {
   const isObject = (obj) => obj && typeof obj === 'object';
