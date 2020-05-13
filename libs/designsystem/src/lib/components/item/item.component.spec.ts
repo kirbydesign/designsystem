@@ -40,8 +40,8 @@ describe('ItemComponent', () => {
 
         const expectedFontSize = tag === 'p' ? fontSize('s') : fontSize('n');
 
-        const heading = spectator.query(`${tag}:not(.outside)`);
-        expect(heading).toHaveComputedStyle({
+        const textElement = spectator.query(`${tag}:not(.outside)`);
+        expect(textElement).toHaveComputedStyle({
           'font-size': expectedFontSize,
           'font-weight': fontWeight('normal'),
           'line-height': lineHeight('n'),
@@ -68,8 +68,8 @@ describe('ItemComponent', () => {
         const ionItem = spectator.query<HTMLIonItemElement>('ion-item');
         await TestHelper.whenHydrated(ionItem);
 
-        const heading = spectator.query(`${tag}:not(.outside)`);
-        expect(heading).toHaveComputedStyle({
+        const textElement = spectator.query(`${tag}:not(.outside)`);
+        expect(textElement).toHaveComputedStyle({
           'font-size': fontSize('xs'),
           'line-height': lineHeight('xs'),
         });
@@ -86,8 +86,8 @@ describe('ItemComponent', () => {
           const ionItem = spectator.query<HTMLIonItemElement>('ion-item');
           await TestHelper.whenHydrated(ionItem);
 
-          const heading = spectator.query(`${tag}:not(.outside)`);
-          expect(heading).toHaveComputedStyle({
+          const textElement = spectator.query(`${tag}:not(.outside)`);
+          expect(textElement).toHaveComputedStyle({
             'margin-bottom': size('xxxs'),
           });
         });
@@ -104,8 +104,8 @@ describe('ItemComponent', () => {
         const ionItem = spectator.query<HTMLIonItemElement>('ion-item');
         await TestHelper.whenHydrated(ionItem);
 
-        const heading = spectator.query(`${tag}:not(.outside)`);
-        expect(heading).toHaveComputedStyle({
+        const textElement = spectator.query(`${tag}:not(.outside)`);
+        expect(textElement).toHaveComputedStyle({
           'font-size': fontSize('xs'),
           'line-height': lineHeight('xs'),
           color: getTextColor('semi-dark'),
