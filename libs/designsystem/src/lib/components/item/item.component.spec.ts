@@ -53,6 +53,40 @@ describe('ItemComponent', () => {
           'text-overflow': 'ellipsis',
         });
       });
+
+      describe(`in a selected item`, () => {
+        it('should render with correct font-weight', async () => {
+          spectator = createHost(
+            `<kirby-item selected="true">
+               <${tag}>Test</${tag}>
+            </kirby-item>`
+          );
+          const ionItem = spectator.query<HTMLIonItemElement>('ion-item');
+          await TestHelper.whenHydrated(ionItem);
+
+          const textElement = spectator.query(`${tag}:not(.outside)`);
+          expect(textElement).toHaveComputedStyle({
+            'font-weight': fontWeight('bold'),
+          });
+        });
+      });
+
+      describe(`with '.kirby-text-bold' class`, () => {
+        it('should render with correct font-weight', async () => {
+          spectator = createHost(
+            `<kirby-item>
+               <${tag} class="kirby-text-bold">Test</${tag}>
+            </kirby-item>`
+          );
+          const ionItem = spectator.query<HTMLIonItemElement>('ion-item');
+          await TestHelper.whenHydrated(ionItem);
+
+          const textElement = spectator.query(`${tag}:not(.outside)`);
+          expect(textElement).toHaveComputedStyle({
+            'font-weight': fontWeight('bold'),
+          });
+        });
+      });
     });
 
     describe(`when slotting a '${tag}' text element inside a 'kirby-label'`, () => {
@@ -80,6 +114,45 @@ describe('ItemComponent', () => {
           'white-space': 'nowrap',
           overflow: 'hidden',
           'text-overflow': 'ellipsis',
+        });
+      });
+
+      describe(`in a selected item`, () => {
+        it('should render with correct font-weight', async () => {
+          spectator = createHost(
+            `<kirby-item selected="true">
+               <kirby-label>
+                 <${tag}>Test</${tag}>
+               </kirby-label>
+             </kirby-item>`
+          );
+          const ionItem = spectator.query<HTMLIonItemElement>('ion-item');
+          await TestHelper.whenHydrated(ionItem);
+
+          const textElement = spectator.query(`kirby-label > ${tag}`);
+          expect(textElement).toHaveComputedStyle({
+            'font-weight': fontWeight('bold'),
+          });
+        });
+      });
+
+      describe(`with '.kirby-text-bold' class`, () => {
+        it('should render with correct font-weight', async () => {
+          spectator = createHost(
+            `<kirby-item>
+               <kirby-label>
+                 <${tag} class="kirby-text-bold">Test</${tag}>
+               </kirby-label>
+             </kirby-item>`
+          );
+
+          const ionItem = spectator.query<HTMLIonItemElement>('ion-item');
+          await TestHelper.whenHydrated(ionItem);
+
+          const textElement = spectator.query(`kirby-label > ${tag}`);
+          expect(textElement).toHaveComputedStyle({
+            'font-weight': fontWeight('bold'),
+          });
         });
       });
     });
