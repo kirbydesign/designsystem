@@ -12,7 +12,7 @@ export const DonutOptions: Options = {
     type: '',
   },
   accessibility: {
-    description: '',
+    description: 'Donut chart',
   },
   title: {
     text: '',
