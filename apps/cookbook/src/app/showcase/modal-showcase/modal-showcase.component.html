@@ -116,13 +116,13 @@
 </p>
 <cookbook-code-viewer [ts]="example.didPresentCodeSnippet"></cookbook-code-viewer>
 
-<h2 #willDismissEvent>Modal Dismissing</h2>
+<h2 #willCloseEvent>Modal Closing</h2>
 <p>
-  The <code>Modal</code> fires the <code>willDismiss</code> event, when the modal is starting to
+  The <code>Modal</code> fires the <code>willClose</code> event, when the modal is starting to
   dismiss/close before any animations occurs. This gives you a slot to execute your exceptional code
   just when the modal starts closing but before its actually done:
 </p>
-<cookbook-code-viewer [ts]="example.willDismissCodeSnippet"></cookbook-code-viewer>
+<cookbook-code-viewer [ts]="example.willCloseCodeSnippet"></cookbook-code-viewer>
 
 <h2 #scrolling>Scrolling</h2>
 <p>

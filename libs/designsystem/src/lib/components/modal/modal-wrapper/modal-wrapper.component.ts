@@ -56,7 +56,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   private readonly ionModalDidPresent = new Subject<void>();
   readonly didPresent = this.ionModalDidPresent.toPromise();
   private readonly ionModalWillDismiss = new Subject<void>();
-  readonly willDismiss = this.ionModalWillDismiss.toPromise();
+  readonly willClose = this.ionModalWillDismiss.toPromise();
 
   @HostBinding('class.drawer')
   get _isDrawer() {
@@ -76,7 +76,6 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     this.ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
     this.listenForIonModalDidPresent();
     this.listenForIonModalWillDismiss();
-
     this.componentPropsInjector = Injector.create({
       providers: [{ provide: COMPONENT_PROPS, useValue: this.config.componentProps }],
       parent: this.injector,

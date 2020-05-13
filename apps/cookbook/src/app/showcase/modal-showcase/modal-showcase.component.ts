@@ -68,8 +68,8 @@ export class ModalShowcaseComponent implements AfterViewInit {
       inputValues: ['Promise<void>'],
     },
     {
-      name: 'willDismiss',
-      description: 'Emitted when the modal receives a dismiss (close) command',
+      name: 'willClose',
+      description: 'Emitted when the user closes the modal or modal.close() method is called',
       inputValues: ['Promise<void>'],
     },
   ];

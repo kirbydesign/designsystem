@@ -83,12 +83,12 @@ this.modal?.scrollToBottom();`,
 @ViewChild('nameInput', { static: false, read: ElementRef }) private nameInputElement: ElementRef<HTMLInputElement>;
 
 ngOnInit() {
-  this.modal?.didPresent.then(() => this.nameInputElement?.nativeElement.focus(); 
+  this.modal?.didPresent.then(() => this.nameInputElement?.nativeElement.focus()); 
 }`,
-  willDismissCodeSnippet: `constructor(@Optional() @SkipSelf() private modal: Modal) {}
+  willCloseCodeSnippet: `constructor(@Optional() @SkipSelf() private modal: Modal) {}
 
   ngOnInit() {
-    this.modal?.willDismiss.then(() => console.log('this modal is about to close'));
+    this.modal?.willClose.then(() => console.log('this modal is about to close'));
   }`,
   embeddedCodeSnippet: `import { Component, Inject } from '@angular/core';
 import { COMPONENT_PROPS } from '@kirbydesign/designsystem';
@@ -136,7 +136,7 @@ export class ModalExampleComponent {
   callbackCodeSnippet = config.callbackCodeSnippet;
   callbackWithDataCodeSnippet = config.callbackWithDataCodeSnippet;
   didPresentCodeSnippet = config.didPresentCodeSnippet;
-  willDismissCodeSnippet = config.willDismissCodeSnippet;
+  willCloseCodeSnippet = config.willCloseCodeSnippet;
   scrollingCodeSnippet = config.scrollingCodeSnippet;
   embeddedCodeSnippet = config.embeddedCodeSnippet;
   closeModalCodeSnippet = config.closeModalCodeSnippet;

@@ -28,7 +28,7 @@ export class ModalCompactWrapperComponent implements Modal, OnInit {
   private readonly ionModalDidPresent = new Subject<void>();
   private readonly ionModalWillDismiss = new Subject<void>();
   readonly didPresent = this.ionModalDidPresent.toPromise();
-  readonly willDismiss = this.ionModalWillDismiss.toPromise();
+  readonly willClose = this.ionModalWillDismiss.toPromise();
 
   private _ionPageReset = false;
   @HostBinding('class.ion-page')
