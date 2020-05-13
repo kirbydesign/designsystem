@@ -55,6 +55,11 @@ export class ColorHelper {
     return `rgb(${rgbValue})`;
   }
 
+  public static getThemeTextColorRgbString(name: string) {
+    const rgbValue = ColorHelper.hexToRGB(ColorHelper.getTextColor(name));
+    return rgbValue;
+  }
+
   public static getTransparentColorRgbString() {
     return 'rgba(0, 0, 0, 0)';
   }
@@ -102,6 +107,12 @@ export class ColorHelper {
   private static getColor(name: string): string {
     const camelCaseKey = ColorHelper.kebabToCamelCase(name);
     const found = styles.kirbyColors[camelCaseKey];
+    return found || null;
+  }
+
+  private static getTextColor(name: string): string {
+    const camelCaseKey = ColorHelper.kebabToCamelCase(name);
+    const found = styles.textColors[camelCaseKey];
     return found || null;
   }
 
