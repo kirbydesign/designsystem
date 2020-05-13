@@ -30,40 +30,40 @@ describe('ChartComponent', () => {
   });
 
   it('should set correct default chart height', () => {
-    expect(component.options.chart.height).toBe(expectedDefaultHeight);
+    expect(component.mergedOptions.chart.height).toBe(expectedDefaultHeight);
   });
 
   it('should set correct non-default chart height', () => {
     const expectedHeight = 400;
     component.height = expectedHeight;
     component.ngOnInit();
-    expect(component.options.chart.height).toBe(expectedHeight);
+    expect(component.mergedOptions.chart.height).toBe(expectedHeight);
   });
 
   it('should have correct default chart type', () => {
     expect((component.type = ChartType.PIE));
-    expect(component.options.chart.type).toBe(ChartType.PIE);
-    expect(component.options.plotOptions.pie.innerSize).toBe('0%');
+    expect(component.mergedOptions.chart.type).toBe(ChartType.PIE);
+    expect(component.mergedOptions.plotOptions.pie.innerSize).toBe('0%');
   });
 
   it('should convert donut chart type to highcharts pie with 50% innerSize', () => {
     component.type = ChartType.DONUT;
     component.ngOnInit();
     expect((component.type = ChartType.DONUT));
-    expect(component.options.chart.type).toBe(ChartType.PIE);
-    expect(component.options.plotOptions.pie.innerSize).toBe('50%');
+    expect(component.mergedOptions.chart.type).toBe(ChartType.PIE);
+    expect(component.mergedOptions.plotOptions.pie.innerSize).toBe('50%');
   });
 
   it('should set areaspline chart type', () => {
     component.type = ChartType.AREASPLINE;
     component.ngOnInit();
     expect((component.type = ChartType.AREASPLINE));
-    expect(component.options.chart.type).toBe(ChartType.AREASPLINE);
+    expect(component.mergedOptions.chart.type).toBe(ChartType.AREASPLINE);
   });
 
   it('should have dataLabels enabled as default', () => {
     expect(
-      (component.options.plotOptions.pie.dataLabels as PlotSeriesDataLabelsOptions).enabled
+      (component.mergedOptions.plotOptions.pie.dataLabels as PlotSeriesDataLabelsOptions).enabled
     ).toBe(true);
   });
 
@@ -71,7 +71,7 @@ describe('ChartComponent', () => {
     component.showDataLabels = false;
     component.ngOnInit();
     expect(
-      (component.options.plotOptions.pie.dataLabels as PlotSeriesDataLabelsOptions).enabled
+      (component.mergedOptions.plotOptions.pie.dataLabels as PlotSeriesDataLabelsOptions).enabled
     ).toBe(false);
   });
 
@@ -89,7 +89,7 @@ describe('ChartComponent', () => {
       },
     ];
     component.ngOnInit();
-    const data = (component.options.series[0] as Highcharts.SeriesAreasplineOptions).data;
+    const data = (component.mergedOptions.series[0] as Highcharts.SeriesAreasplineOptions).data;
     expect(data.length).toBe(2);
     expect(data[0]['name']).toBe('Boomerangs 20%');
   });
@@ -107,8 +107,8 @@ describe('ChartComponent', () => {
 
       component.ngOnInit();
 
-      expect(component.options.title.text).toBe('1.234.567');
-      expect(component.options.subtitle.text).toBe('Afdraget');
+      expect(component.mergedOptions.title.text).toBe('1.234.567');
+      expect(component.mergedOptions.subtitle.text).toBe('Afdraget');
     });
 
     it('should add backgroundColor to optionsarray', () => {
@@ -132,7 +132,7 @@ describe('ChartComponent', () => {
         },
       };
 
-      component.options = ActivityGaugeOptions;
+      component.mergedOptions = ActivityGaugeOptions;
 
       component.data = [
         {
@@ -142,7 +142,7 @@ describe('ChartComponent', () => {
 
       component.ngOnInit();
 
-      expect(component.options.pane.background[0].backgroundColor).toEqual(
+      expect(component.mergedOptions.pane.background[0].backgroundColor).toEqual(
         component.data[0].paneBackgroundColor
       );
     });
@@ -158,8 +158,8 @@ describe('ChartComponent', () => {
 
       component.ngOnInit();
 
-      expect(component.options.title.style.color).toEqual(expected);
-      expect(component.options.subtitle.style.color).toEqual(expected);
+      expect(component.mergedOptions.title.style.color).toEqual(expected);
+      expect(component.mergedOptions.subtitle.style.color).toEqual(expected);
     });
 
     it('should set type to solidgauge when ACTIVITYGAUGE is chosen', () => {
@@ -173,7 +173,7 @@ describe('ChartComponent', () => {
 
       component.ngOnInit();
 
-      expect(component.options.series[0].type).toEqual('solidgauge');
+      expect(component.mergedOptions.series[0].type).toEqual('solidgauge');
     });
 
     it('should set activitygauge chart type', () => {
@@ -185,7 +185,7 @@ describe('ChartComponent', () => {
         },
       ];
       component.ngOnInit();
-      expect(component.options.chart.type).toBe(ChartType.ACTIVITYGAUGE);
+      expect(component.mergedOptions.chart.type).toBe(ChartType.ACTIVITYGAUGE);
     });
   });
 
@@ -195,14 +195,16 @@ describe('ChartComponent', () => {
       component.data = [1, 2, 3];
       component.categories = ['jan', 'feb', 'mar'];
       component.ngOnInit();
-      expect(component.options.series as any).toEqual([
+      expect(component.mergedOptions.series as any).toEqual([
         {
           type: 'column',
           data: component.data,
         },
       ]);
 
-      expect((component.options.xAxis as XAxisOptions).categories).toEqual(component.categories);
+      expect((component.mergedOptions.xAxis as XAxisOptions).categories).toEqual(
+        component.categories
+      );
     });
   });
 
@@ -212,14 +214,16 @@ describe('ChartComponent', () => {
       component.data = [1, 2, 3];
       component.categories = ['jan', 'feb', 'mar'];
       component.ngOnInit();
-      expect(component.options.series as any).toEqual([
+      expect(component.mergedOptions.series as any).toEqual([
         {
           type: 'bar',
           data: component.data,
         },
       ]);
 
-      expect((component.options.xAxis as XAxisOptions).categories).toEqual(component.categories);
+      expect((component.mergedOptions.xAxis as XAxisOptions).categories).toEqual(
+        component.categories
+      );
     });
   });
 
@@ -233,7 +237,7 @@ describe('ChartComponent', () => {
       ];
       component.ngOnInit();
 
-      component.optionsForOverride = {
+      component.options = {
         series: [
           {
             data: [2, 2],
@@ -242,7 +246,7 @@ describe('ChartComponent', () => {
       };
       component.ngOnChanges();
 
-      expect((component.options.series[0] as any).data).toEqual([2, 2]);
+      expect((component.mergedOptions.series[0] as any).data).toEqual([2, 2]);
     });
   });
 });

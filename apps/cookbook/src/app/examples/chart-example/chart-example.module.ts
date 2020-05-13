@@ -1,31 +1,30 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { KirbyModule } from '@kirbydesign/designsystem';
 import { ChartExampleAreasplineComponent } from './examples/chart-example-areaspline.component';
 import { ChartExampleActivityGaugeComponent } from './examples/chart-example-activity-gauge.component';
 import { ChartExampleDonutComponent } from './examples/chart-example-donut.component';
-import { ChartExampleMonthlyOverviewComponent } from './examples/chart-example-monthly-overview.component';
+import { ChartExampleColumnComponent } from './examples/chart-example-column.component';
 import { ChartExamplePieComponent } from './examples/chart-example-pie.component';
 import { ChartExampleTimeseriesComponent } from './examples/chart-example-timeseries.component';
-import { ChartExampleYearlyOverviewComponent } from './examples/chart-example-yearly-overview.component';
+import { ChartExampleBarComponent } from './examples/chart-example-bar.component';
 import { ChartExampleComponent } from './chart-example.component';
-import { KirbyModule } from '@kirbydesign/designsystem';
 
-const DECLARATIONS = [
+const COMPONENT_DECLARATIONS = [
   ChartExampleComponent,
   ChartExampleActivityGaugeComponent,
   ChartExampleAreasplineComponent,
   ChartExampleDonutComponent,
-  ChartExampleMonthlyOverviewComponent,
+  ChartExampleColumnComponent,
   ChartExamplePieComponent,
   ChartExampleTimeseriesComponent,
-  ChartExampleYearlyOverviewComponent,
+  ChartExampleBarComponent,
 ];
 
 @NgModule({
-  declarations: DECLARATIONS,
+  declarations: COMPONENT_DECLARATIONS,
   imports: [CommonModule, KirbyModule],
-  exports: DECLARATIONS,
-  providers: [],
+  exports: COMPONENT_DECLARATIONS,
 })
 export class ChartExampleModule {}

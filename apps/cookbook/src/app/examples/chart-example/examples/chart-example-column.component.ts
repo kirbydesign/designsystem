@@ -25,11 +25,11 @@ function colorPoints(selectedIdx) {
 }
 
 const config = {
-  selector: 'cookbook-chart-example-monthly-overview',
+  selector: 'cookbook-chart-example-column',
   template: `
   <kirby-card>
-  <kirby-card-header [title]="'Column'"></kirby-card-header>
-  <kirby-chart [height]="height" [categories]="categories" [type]="'column'" [data]="adjustedMonthlyExpenseData" [options]="monthlyOverviewOptions"> </kirby-chart>
+  <kirby-card-header title="Column"></kirby-card-header>
+  <kirby-chart [height]="height" [categories]="categories" type="column" [data]="adjustedMonthlyExpenseData" [options]="monthlyOverviewOptions"> </kirby-chart>
   </kirby-card>
   `,
   codeSnippet: `
@@ -74,7 +74,7 @@ const config = {
   selector: config.selector,
   template: config.template,
 })
-export class ChartExampleMonthlyOverviewComponent implements Example {
+export class ChartExampleColumnComponent implements Example {
   template: string = config.template;
   codeSnippet: string = config.codeSnippet;
   height = 150;
@@ -82,12 +82,12 @@ export class ChartExampleMonthlyOverviewComponent implements Example {
   private categories = [
     'mar',
     'apr',
-    'maj',
+    'may',
     'jun',
     'jul',
     'aug',
     'sep',
-    'okt',
+    'oct',
     'nov',
     'dec',
     'jan',

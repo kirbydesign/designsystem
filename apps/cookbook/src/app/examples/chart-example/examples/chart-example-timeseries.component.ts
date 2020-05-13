@@ -1,17 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Example } from '../../example.interface';
-import { ChartExampleComponent } from '../chart-example.component';
 
 const config = {
   selector: 'cookbook-chart-example-timeseries',
   template: `
   <kirby-card>
-    <kirby-card-header [title]="'Timeseries'"></kirby-card-header>
+    <kirby-card-header title="Timeseries"></kirby-card-header>
     <kirby-chart
         [height]="240"
-        [type]="'timeseries'"
-        [description]="'Accessibility description goes here'"
+        type="timeseries"
+        description="Accessibility description goes here"
         [data]="rates"
         [breaks]="breaks"
     >

@@ -6,11 +6,11 @@ const config = {
   selector: 'cookbook-chart-example-areaspline',
   template: `
     <kirby-card>
-        <kirby-card-header [title]="'Areaspline'"></kirby-card-header>
+        <kirby-card-header title="Areaspline"></kirby-card-header>
         <kirby-chart
             [height]="240"
-            [type]="'areaspline'"
-            [description]="'Accessibility description goes here'"
+            type="areaspline"
+            description="Accessibility description goes here"
             [data]="data"
         >
             <!-- data = [1600.90, 1710.50, 1060.40, 1290.20, 1440.00, 1460.00, 1350.60, 1480.50, 1800.40, 1940.10, 1950.60, 1700.40, 1600.90, 1710.50, 1060.40, 1290.20, 1440.00, 1460.00, 1350.60, 1480.50, 1800.40, 1940.10, 1950.60, 1700.40] -->

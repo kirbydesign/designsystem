@@ -4,7 +4,7 @@ export enum ChartType {
   AREASPLINE = 'areaspline',
   TIMESERIES = 'timeseries',
   ACTIVITYGAUGE = 'activitygauge',
-  Custom = 'custom',
   BAR = 'bar',
   COLUMN = 'column',
+  Custom = 'custom',
 }

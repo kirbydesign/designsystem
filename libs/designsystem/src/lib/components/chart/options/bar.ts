@@ -95,7 +95,7 @@ export const getBarOptions = (data: number[], categories: string[]) =>
     series: [
       {
         name: 'InvisibleClickReceiver',
-        data: data.map((wholeYearData, idx) => Math.max(...data) - wholeYearData),
+        data: data.map((dataEntry, idx) => Math.max(...data) - dataEntry),
         edgeColor: 'rgb(255, 255, 255, 0)',
         opacity: 0,
       },

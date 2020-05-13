@@ -25,11 +25,11 @@ function colorPoints(selectedYear: string) {
 }
 
 const config = {
-  selector: 'cookbook-chart-example-yearly-overview',
+  selector: 'cookbook-chart-example-bar',
   template: `
   <kirby-card>
-    <kirby-card-header [title]="'Bar'"></kirby-card-header>
-    <kirby-chart [height]="height" [type]="'bar'" [categories]="categories" [options]="yearlyOverviewOptions"> </kirby-chart>
+    <kirby-card-header title="Bar"></kirby-card-header>
+    <kirby-chart [height]="height" type="bar" [categories]="categories" [options]="yearlyOverviewOptions"> </kirby-chart>
   </kirby-card>
   `,
   codeSnippet: `
@@ -88,7 +88,7 @@ const config = {
   selector: config.selector,
   templateUrl: config.template,
 })
-export class ChartExampleYearlyOverviewComponent implements Example {
+export class ChartExampleBarComponent implements Example {
   template: string = config.template;
   codeSnippet: string = config.codeSnippet;
   height = 150;

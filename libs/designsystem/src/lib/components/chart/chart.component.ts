@@ -31,9 +31,8 @@ export class ChartComponent implements OnInit, OnChanges {
   @Input() type: ChartType = ChartType.PIE;
   @Input() description = '';
   @Input() showDataLabels = true;
-  // tslint:disable-next-line: no-input-rename
-  @Input('options') optionsForOverride: Options;
-  options: Options = {
+  @Input() options: Options;
+  mergedOptions: Options = {
     accessibility: {},
   };
 
@@ -49,67 +48,67 @@ export class ChartComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.setupChartType();
     this.updateProperties();
-    this.chartHelper.init(this.options, this.hostElement);
+    this.chartHelper.init(this.mergedOptions, this.hostElement);
   }
 
   ngOnChanges() {
     this.updateProperties();
-    this.chartHelper.updateChart(this.options);
+    this.chartHelper.updateChart(this.mergedOptions);
   }
 
   setupChartType() {
     switch (this.type) {
       case ChartType.DONUT: {
-        this.options = this.donutOptions;
-        this.options.chart.type = ChartType.PIE;
-        this.options.plotOptions.pie.innerSize = '50%';
+        this.mergedOptions = this.donutOptions;
+        this.mergedOptions.chart.type = ChartType.PIE;
+        this.mergedOptions.plotOptions.pie.innerSize = '50%';
         break;
       }
       case ChartType.PIE: {
-        this.options = this.donutOptions;
-        this.options.chart.type = this.type;
-        this.options.plotOptions.pie.innerSize = '0%';
+        this.mergedOptions = this.donutOptions;
+        this.mergedOptions.chart.type = this.type;
+        this.mergedOptions.plotOptions.pie.innerSize = '0%';
         break;
       }
       case ChartType.AREASPLINE: {
-        this.options = this.areasplineOptions;
-        this.options.chart.type = this.type;
+        this.mergedOptions = this.areasplineOptions;
+        this.mergedOptions.chart.type = this.type;
         break;
       }
       case ChartType.TIMESERIES: {
-        this.options = this.timeSeriesOptions;
-        this.options.chart.type = this.type;
+        this.mergedOptions = this.timeSeriesOptions;
+        this.mergedOptions.chart.type = this.type;
         break;
       }
       case ChartType.ACTIVITYGAUGE: {
-        this.options = this.activitygaugeOptions;
-        this.options.chart.type = this.type;
+        this.mergedOptions = this.activitygaugeOptions;
+        this.mergedOptions.chart.type = this.type;
         break;
       }
       case ChartType.COLUMN: {
-        this.options = getColumnOptions(this.data, this.categories);
-        this.options.chart.type = this.type;
+        this.mergedOptions = getColumnOptions(this.data, this.categories);
+        this.mergedOptions.chart.type = this.type;
         break;
       }
       case ChartType.BAR: {
-        this.options = getBarOptions(this.data, this.categories);
-        this.options.chart.type = this.type;
+        this.mergedOptions = getBarOptions(this.data, this.categories);
+        this.mergedOptions.chart.type = this.type;
         break;
       }
     }
   }
 
   updateProperties() {
-    if (this.options.chart) {
-      this.options.chart.height = this.height;
-      this.options.accessibility.description = this.description;
-      switch (this.options.chart.type) {
+    if (this.mergedOptions.chart) {
+      this.mergedOptions.chart.height = this.height;
+      this.mergedOptions.accessibility.description = this.description;
+      switch (this.mergedOptions.chart.type) {
         case ChartType.PIE:
-          (this.options.plotOptions.pie
+          (this.mergedOptions.plotOptions.pie
             .dataLabels as PlotSeriesDataLabelsOptions).enabled = this.showDataLabels;
         /* falls through */
         case ChartType.DONUT: {
-          this.options.series = [
+          this.mergedOptions.series = [
             {
               type: 'pie',
               data: this.data,
@@ -118,7 +117,7 @@ export class ChartComponent implements OnInit, OnChanges {
           break;
         }
         case ChartType.AREASPLINE: {
-          this.options.series = [
+          this.mergedOptions.series = [
             {
               type: 'areaspline',
               data: this.data,
@@ -127,14 +126,14 @@ export class ChartComponent implements OnInit, OnChanges {
           break;
         }
         case ChartType.TIMESERIES: {
-          this.options.series = [
+          this.mergedOptions.series = [
             {
               type: 'area',
               data: this.data,
             },
           ];
-          this.options.xAxis = {
-            ...this.options.xAxis,
+          this.mergedOptions.xAxis = {
+            ...this.mergedOptions.xAxis,
             breaks: this.breaks,
           };
           break;
@@ -142,22 +141,22 @@ export class ChartComponent implements OnInit, OnChanges {
         case ChartType.ACTIVITYGAUGE: {
           const data = this.data[0];
 
-          this.options.title.text = data.title;
-          this.options.subtitle.text = data.subtitle;
+          this.mergedOptions.title.text = data.title;
+          this.mergedOptions.subtitle.text = data.subtitle;
 
           if (data.paneBackgroundColor) {
-            this.options.pane.background = [
+            this.mergedOptions.pane.background = [
               {
-                ...this.options.pane.background[0],
+                ...this.mergedOptions.pane.background[0],
                 backgroundColor: data.paneBackgroundColor,
               },
             ];
           }
           if (data.color) {
-            this.options.title.style.color = data.color;
-            this.options.subtitle.style.color = data.color;
+            this.mergedOptions.title.style.color = data.color;
+            this.mergedOptions.subtitle.style.color = data.color;
           }
-          this.options.series = [
+          this.mergedOptions.series = [
             {
               type: 'solidgauge',
               data: data.series,
@@ -167,28 +166,28 @@ export class ChartComponent implements OnInit, OnChanges {
           break;
         }
         case ChartType.COLUMN: {
-          this.options.series = [
+          this.mergedOptions.series = [
             {
               type: 'column',
               data: this.data,
             },
           ];
-          (this.options.xAxis as XAxisOptions).categories = this.categories;
+          (this.mergedOptions.xAxis as XAxisOptions).categories = this.categories;
           break;
         }
         case ChartType.BAR: {
-          this.options.series = [
+          this.mergedOptions.series = [
             {
               type: 'bar',
               data: this.data,
             },
           ];
-          (this.options.xAxis as XAxisOptions).categories = this.categories;
+          (this.mergedOptions.xAxis as XAxisOptions).categories = this.categories;
           break;
         }
       }
-      if (!!this.optionsForOverride) {
-        this.options = mergeDeep(this.options, this.optionsForOverride);
+      if (!!this.options) {
+        this.mergedOptions = mergeDeep(this.mergedOptions, this.options);
       }
     }
   }

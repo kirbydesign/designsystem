@@ -6,12 +6,12 @@ const config = {
   selector: 'cookbook-chart-example-donut',
   template: `
     <kirby-card>
-        <kirby-card-header [title]="'Donut'"></kirby-card-header>
+        <kirby-card-header title="Donut"></kirby-card-header>
             <kirby-chart
                 [height]="320"
-                [type]="'donut'"
+                type="donut"
                 [showDataLabels]="true"
-                [description]="'Accessibility description goes here'"
+                description="Accessibility description goes here"
                 [data]="[
                 {
                     name: 'Boomerangs 25%',
