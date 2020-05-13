@@ -21,7 +21,7 @@ export function mergeDeep(toOverride, overrides, config = { mergeArrays: false }
       if (Array.isArray(combinedObjectValue) && Array.isArray(currentObjectValue)) {
         combinedObject[key] = config.mergeArrays
           ? combinedObjectValue.concat(currentObjectValue)
-          : [...currentObjectValue];
+          : currentObjectValue;
       } else if (isObject(combinedObjectValue) && isObject(currentObjectValue)) {
         combinedObject[key] = mergeDeep(combinedObjectValue, currentObjectValue);
       } else {
