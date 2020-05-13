@@ -1,16 +1,16 @@
-import { Component, OnInit, Input, OnChanges, ElementRef, ViewChild, Inject } from '@angular/core';
-import { Options } from 'highcharts';
+import { Component, OnInit, Input, OnChanges, ElementRef, Inject } from '@angular/core';
+import { Options, PlotSeriesDataLabelsOptions } from 'highcharts';
 
 import { ChartHelper } from './chart-helper';
-import { DonutOptions, DONUT_OPTIONS } from './options/donut';
-import { AreaSplineOptions, AREASPLINE_OPTIONS } from './options/areaspline';
-import { TimeSeriesOptions, TIMESERIES_OPTIONS } from './options/timeseries';
-import { ACTIVITYGAUGE_OPTIONS, ActivityGaugeOptions } from './options/activitygauge';
 import { ChartType } from './chart-type';
+import { DONUT_OPTIONS, DonutOptions } from './options/donut';
+import { AREASPLINE_OPTIONS, AreaSplineOptions } from './options/areaspline';
+import { TIMESERIES_OPTIONS, TimeSeriesOptions } from './options/timeseries';
+import { ACTIVITYGAUGE_OPTIONS, ActivityGaugeOptions } from './options/activitygauge';
 
 @Component({
   selector: 'kirby-chart',
-  templateUrl: './chart.component.html',
+  template: '',
   styleUrls: ['./chart.component.scss'],
   providers: [
     ChartHelper,
@@ -27,11 +27,11 @@ export class ChartComponent implements OnInit, OnChanges {
   @Input() type: ChartType = ChartType.PIE;
   @Input() description = '';
   @Input() showDataLabels = true;
-  @ViewChild('chartContainer', { static: true }) chartContainer: ElementRef;
   options: Options = {};
 
   constructor(
     private chartHelper: ChartHelper,
+    private hostElement: ElementRef,
     @Inject(DONUT_OPTIONS) public donutOptions: Options,
     @Inject(AREASPLINE_OPTIONS) public areasplineOptions: Options,
     @Inject(TIMESERIES_OPTIONS) public timeSeriesOptions: Options,
@@ -41,7 +41,7 @@ export class ChartComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.setupChartType();
     this.updateProperties();
-    this.chartHelper.init(this.options, this.chartContainer);
+    this.chartHelper.init(this.options, this.hostElement);
   }
 
   ngOnChanges() {
@@ -84,16 +84,17 @@ export class ChartComponent implements OnInit, OnChanges {
   updateProperties() {
     if (this.options.chart) {
       this.options.chart.height = this.height;
-      this.options.chart.description = this.description;
+      this.options.accessibility.description = this.description;
       switch (this.options.chart.type) {
         case ChartType.PIE:
-          this.options.plotOptions.pie.dataLabels.enabled = this.showDataLabels;
+          (this.options.plotOptions.pie
+            .dataLabels as PlotSeriesDataLabelsOptions).enabled = this.showDataLabels;
         /* falls through */
         case ChartType.DONUT: {
           this.options.series = [
             {
               type: 'pie',
-              data: this.data as Array<Highcharts.SeriesPieDataOptions>,
+              data: this.data,
             },
           ];
           break;
@@ -102,7 +103,7 @@ export class ChartComponent implements OnInit, OnChanges {
           this.options.series = [
             {
               type: 'areaspline',
-              data: this.data as Array<Highcharts.SeriesAreasplineDataOptions>,
+              data: this.data,
             },
           ];
           break;
@@ -111,7 +112,7 @@ export class ChartComponent implements OnInit, OnChanges {
           this.options.series = [
             {
               type: 'area',
-              data: this.data as Array<Highcharts.SeriesAreaDataOptions>,
+              data: this.data,
             },
           ];
           this.options.xAxis = {
@@ -141,7 +142,7 @@ export class ChartComponent implements OnInit, OnChanges {
           this.options.series = [
             {
               type: 'solidgauge',
-              data: data.series as Array<Highcharts.SeriesGaugeDataOptions>,
+              data: data.series,
             },
           ];
 
