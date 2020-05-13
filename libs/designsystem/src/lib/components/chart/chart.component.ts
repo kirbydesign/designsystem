@@ -117,7 +117,7 @@ export class ChartComponent implements OnChanges {
     switch (this.mergedOptions.chart.type) {
       case ChartType.PIE:
         this.setPieInput();
-      /* falls through */
+        break;
       case ChartType.DONUT: {
         this.setSeries('pie');
         break;
@@ -151,6 +151,7 @@ export class ChartComponent implements OnChanges {
   private setPieInput() {
     (this.mergedOptions.plotOptions.pie
       .dataLabels as PlotSeriesDataLabelsOptions).enabled = this.showDataLabels;
+    this.setSeries('pie');
   }
 
   private setBarInput() {
