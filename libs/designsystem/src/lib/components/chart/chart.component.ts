@@ -155,18 +155,20 @@ export class ChartComponent implements OnChanges {
   }
 
   private setBarInput() {
+    const dataMaxValue = Math.max(...this.data);
     this.mergedOptions.series = [
       {
+        type: 'bar',
         name: 'InvisibleClickReceiver',
-        data: this.data.map((dataEntry, idx) => Math.max(...this.data) - dataEntry),
+        data: this.data.map((dataEntry, idx) => dataMaxValue - dataEntry),
         edgeColor: 'rgb(255, 255, 255, 0)',
         opacity: 0,
       },
       {
-        name: 'data',
+        type: 'bar',
         data: this.data,
       },
-    ] as any;
+    ];
     (this.mergedOptions.xAxis as XAxisOptions).categories = this.categories;
   }
 
@@ -177,16 +179,16 @@ export class ChartComponent implements OnChanges {
         data: this.data,
       },
     ];
-    const dataMax = Math.max(...this.data);
+    const dataMaxValue = Math.max(...this.data);
     ((this.mergedOptions.yAxis as YAxisOptions).tickPositioner = () => {
-      var positions = [0, dataMax];
+      var positions = [0, dataMaxValue];
       return positions;
     }),
       (this.mergedOptions.series = [
         {
           type: 'column',
           name: 'InvisibleClickReceiver',
-          data: this.data.map((_, idx) => dataMax - this.data[idx]),
+          data: this.data.map((_, idx) => dataMaxValue - this.data[idx]),
           opacity: 0,
         },
         {
