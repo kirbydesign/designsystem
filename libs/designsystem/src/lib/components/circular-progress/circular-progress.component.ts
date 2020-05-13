@@ -6,6 +6,7 @@ import {
   ElementRef,
   AfterViewInit,
   ChangeDetectorRef,
+  ViewContainerRef,
 } from '@angular/core';
 
 import { ThemeColor } from './../../helpers/theme-color.type';
@@ -34,10 +35,12 @@ export class CircularProgressComponent implements AfterViewInit {
     this.observer.observe(this.elementRef.nativeElement);
   }
 
-  onElementVisible = () => {
-    this.observer.unobserve(this.elementRef.nativeElement);
-    this.hasElementBeenVisible = true;
-    this.changeDetectorRef.markForCheck();
+  onElementVisible = (entries: IntersectionObserverEntry[]) => {
+    if (entries && entries.length === 1 && entries[0].isIntersecting) {
+      this.observer.unobserve(this.elementRef.nativeElement);
+      this.hasElementBeenVisible = true;
+      this.changeDetectorRef.markForCheck();
+    }
   };
 
   @HostBinding('style.width.px')
