@@ -17,7 +17,7 @@ import { ThemeColor } from './../../helpers/theme-color.type';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CircularProgressComponent implements AfterViewInit {
-  @Input() radius: number = 40;
+  @Input() radius: number = 40; // TODO: Clarify: Should size be picked from a set of predefined Kirby sizes instead? I.e. sm, md, lg
   @Input() value: number = 0;
 
   @Input() themeColor: ThemeColor;
@@ -30,6 +30,7 @@ export class CircularProgressComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.observer = new IntersectionObserver(this.onElementVisible);
+    // TODO: Only trigger this when user actually sees it in view (If possible and needed?)
     this.observer.observe(this.elementRef.nativeElement);
   }
 
@@ -46,7 +47,7 @@ export class CircularProgressComponent implements AfterViewInit {
   }
 
   get shownValue() {
-    // This is needed to make an animation when element is shown to the user
+    // This is needed to make an animation [0 -> value] when element is shown to the user
     return this.hasElementBeenVisible ? this.value : 0;
   }
 }

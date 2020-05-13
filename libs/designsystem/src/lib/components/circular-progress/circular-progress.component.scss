@@ -4,12 +4,12 @@
   display: inline-block;
 }
 
-.content,
+.transcluded-content,
 kirby-circular-progress-ring {
   position: absolute;
 }
 
-.content {
+.transcluded-content {
   display: flex;
   justify-content: center;
   align-items: center;

@@ -13,8 +13,6 @@ export class CircularProgressRingComponent {
   @Input() value: number;
   @Input() themeColor: ThemeColor;
 
-  protected strokeWidth: number = 4;
-
   get offset(): number {
     return this.innerCircumference - this.innerCircumference * (this.value / 100);
   }
@@ -29,5 +27,10 @@ export class CircularProgressRingComponent {
 
   get innerCircumference(): number {
     return this.innerRadius * 2 * Math.PI;
+  }
+
+  get strokeWidth(): number {
+    // TODO: Add stroke width breakpoints
+    return 4;
   }
 }
