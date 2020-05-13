@@ -10,19 +10,23 @@
   overflow: hidden;
 
   &.horizontal {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+    ion-label {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
 
-    @include slotted(':not(:first-child)') {
-      margin-left: size('xs');
+      @include slotted(':not(:first-child)') {
+        margin-left: size('xs');
+      }
     }
   }
 }
 
 :host-context(kirby-item) {
-  @include item-typography();
+  ion-label {
+    @include item-typography();
+  }
 }
 
 :host([slot='end']) {
@@ -32,7 +36,9 @@
 }
 
 :host-context(kirby-item.selected) {
-  @include slotted(h1, h2, h3, h4, h5, h6, p, data) {
-    font-weight: font-weight('bold');
+  ion-label {
+    @include slotted(h1, h2, h3, h4, h5, h6, p, data) {
+      font-weight: font-weight('bold');
+    }
   }
 }

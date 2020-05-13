@@ -103,7 +103,7 @@ describe('ItemComponent', () => {
 
         const expectedFontSize = tag === 'p' ? fontSize('s') : fontSize('n');
 
-        const textElement = spectator.query(`kirby-label > ${tag}`);
+        const textElement = spectator.query(`kirby-label ${tag}`);
         expect(textElement).toHaveComputedStyle({
           'font-size': expectedFontSize,
           'font-weight': fontWeight('normal'),
@@ -129,7 +129,7 @@ describe('ItemComponent', () => {
           const ionItem = spectator.query<HTMLIonItemElement>('ion-item');
           await TestHelper.whenHydrated(ionItem);
 
-          const textElement = spectator.query(`kirby-label > ${tag}`);
+          const textElement = spectator.query(`kirby-label ${tag}`);
           expect(textElement).toHaveComputedStyle({
             'font-weight': fontWeight('bold'),
           });
@@ -149,7 +149,7 @@ describe('ItemComponent', () => {
           const ionItem = spectator.query<HTMLIonItemElement>('ion-item');
           await TestHelper.whenHydrated(ionItem);
 
-          const textElement = spectator.query(`kirby-label > ${tag}`);
+          const textElement = spectator.query(`kirby-label ${tag}`);
           expect(textElement).toHaveComputedStyle({
             'font-weight': fontWeight('bold'),
           });
