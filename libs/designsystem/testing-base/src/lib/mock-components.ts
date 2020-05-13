@@ -8,7 +8,6 @@ import { MockCardHeaderComponent } from './components/mock.card-header.component
 import { MockCardComponent } from './components/mock.card.component';
 import { MockCheckboxComponent } from './components/mock.checkbox.component';
 import { MockChipComponent } from './components/mock.chip.component';
-import { MockProgressCircleComponent } from './components/mock.progress-circle.component';
 import { MockDividerComponent } from './components/mock.divider.component';
 import { MockDropdownComponent } from './components/mock.dropdown.component';
 import { MockEmptyStateComponent } from './components/mock.empty-state.component';
@@ -38,6 +37,7 @@ import {
   MockPageActionsComponent,
   MockPageComponent,
 } from './components/mock.page.component';
+import { MockProgressCircleComponent } from './components/mock.progress-circle.component';
 import { MockReorderListComponent } from './components/mock.reorder-list.component';
 import { MockRouterOutletComponent } from './components/mock.router-outlet.component';
 import { MockSegmentedControlComponent } from './components/mock.segmented-control.component';
@@ -59,7 +59,6 @@ export const MOCK_COMPONENTS = [
   MockCardComponent,
   MockCheckboxComponent,
   MockChipComponent,
-  MockProgressCircleComponent,
   MockDividerComponent,
   MockDropdownComponent,
   MockEmptyStateComponent,
@@ -87,6 +86,7 @@ export const MOCK_COMPONENTS = [
   MockPageContentComponent,
   MockPageActionsComponent,
   MockPageComponent,
+  MockProgressCircleComponent,
   MockReorderListComponent,
   MockRouterOutletComponent,
   MockSegmentedControlComponent,
