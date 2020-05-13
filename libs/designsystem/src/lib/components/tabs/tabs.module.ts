@@ -9,7 +9,6 @@ import { IconModule } from '../icon/icon.module';
 @NgModule({
   imports: [IonicModule, IconModule, CommonModule],
   declarations: [TabsComponent, TabButtonComponent],
-  providers: [],
   exports: [TabsComponent, TabButtonComponent],
 })
 export class TabsModule {}
