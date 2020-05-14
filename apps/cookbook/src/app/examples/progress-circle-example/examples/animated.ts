@@ -1,16 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ThemeColor } from '../../../../../../libs/designsystem/src/lib/helpers/theme-color.type';
+import { ThemeColor } from '@kirbydesign/designsystem';
+
+const config = {
+  selector: 'cookbook-progress-circle-example-animated',
+  template: `<kirby-progress-circle [themeColor]="themeColor" [value]="progress" size="lg">
+  {{ progress | number: '1.1-1' }}%
+</kirby-progress-circle>`,
+};
+
 @Component({
-  selector: 'cookbook-progress-circle-example',
-  templateUrl: './progress-circle-example.component.html',
-  styleUrls: ['./progress-circle-example.component.scss'],
+  selector: config.selector,
+  template: config.template,
 })
-export class ProgressCircleExampleComponent implements OnInit {
+export class ProgressCircleExampleAnimatedComponent implements OnInit {
+  template: string = config.template;
   progress: number = 0;
   themeColor: ThemeColor;
 
-  constructor() {}
   ngOnInit(): void {
     setInterval(this.updateProgress, 2000);
   }

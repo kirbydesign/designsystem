@@ -1,0 +1,13 @@
+@import './libs/designsystem/src/lib/scss/utils';
+
+h3:not(:first-child) {
+  margin-top: size('l');
+}
+
+cookbook-example-viewer {
+  margin-bottom: size('l');
+
+  > div {
+    margin-bottom: size('s');
+  }
+}

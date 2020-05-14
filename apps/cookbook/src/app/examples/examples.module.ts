@@ -12,6 +12,7 @@ import { ListExamplesModule } from './list/list-example.module';
 import { ItemExampleModule } from './item-example/item-example.module';
 import { DropdownExampleModule } from './dropdown-example/dropdown-example.module';
 import { SegmentedControlExampleModule } from './segmented-control-example/segmented-control-example.module';
+import { ProgressCircleExampleModule } from './progress-circle-example/progress-circle-example.module';
 
 @NgModule({
   imports: [
@@ -22,6 +23,7 @@ import { SegmentedControlExampleModule } from './segmented-control-example/segme
     ListExamplesModule,
     DropdownExampleModule,
     SegmentedControlExampleModule,
+    ProgressCircleExampleModule,
   ],
   declarations: COMPONENT_DECLARATIONS,
   exports: [
@@ -31,6 +33,7 @@ import { SegmentedControlExampleModule } from './segmented-control-example/segme
     ListExamplesModule,
     DropdownExampleModule,
     SegmentedControlExampleModule,
+    ProgressCircleExampleModule,
   ],
   providers: [PROVIDER_DECLARATIONS],
   entryComponents: [

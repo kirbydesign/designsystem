@@ -4,7 +4,7 @@
     class="circle"
     fill="transparent"
     [attr.stroke-width]="strokeWidth"
-    [attr.r]="innerRadius"
+    [attr.r]="centerRadius"
     [attr.cx]="radius"
     [attr.cy]="radius"
   />
@@ -14,10 +14,10 @@
     fill="transparent"
     stroke-linecap="round"
     [attr.stroke-width]="strokeWidth"
-    [attr.r]="innerRadius"
+    [attr.r]="centerRadius"
     [attr.cx]="radius"
     [attr.cy]="radius"
     [attr.stroke-dashoffset]="offset"
-    [attr.stroke-dasharray]="innerCircumference"
+    [attr.stroke-dasharray]="centerCircumference"
   />
 </svg>

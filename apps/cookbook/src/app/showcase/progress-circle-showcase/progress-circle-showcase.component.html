@@ -1,7 +1,60 @@
 <div class="example">
-  <cookbook-progress-circle-example></cookbook-progress-circle-example>
-  <cookbook-code-viewer [html]="exampleHtml"></cookbook-code-viewer>
-  <h4>Properties:</h4>
+  <h3>Default</h3>
+  <cookbook-example-viewer [html]="defaultExample.template">
+    <div>
+      <cookbook-progress-circle-example-default
+        #defaultExample
+      ></cookbook-progress-circle-example-default>
+    </div>
+  </cookbook-example-viewer>
+  <cookbook-example-viewer [html]="defaultLargeExample.template">
+    <div>
+      <cookbook-progress-circle-example-default-large
+        #defaultLargeExample
+      ></cookbook-progress-circle-example-default-large>
+    </div>
+  </cookbook-example-viewer>
+
+  <h3>With content</h3>
+  <cookbook-example-viewer [html]="contentStepsExample.template">
+    <div>
+      <cookbook-progress-circle-example-content-steps
+        #contentStepsExample
+      ></cookbook-progress-circle-example-content-steps>
+    </div>
+  </cookbook-example-viewer>
+  <cookbook-example-viewer [html]="contentIconExample.template">
+    <div>
+      <cookbook-progress-circle-example-content-icon
+        #contentIconExample
+      ></cookbook-progress-circle-example-content-icon>
+    </div>
+  </cookbook-example-viewer>
+  <cookbook-example-viewer [html]="contentPercentExample.template">
+    <div>
+      <cookbook-progress-circle-example-content-percent
+        #contentPercentExample
+      ></cookbook-progress-circle-example-content-percent>
+    </div>
+  </cookbook-example-viewer>
+
+  <h3>Dynamic</h3>
+  <cookbook-example-viewer [html]="animatedExample.template">
+    <div>
+      <cookbook-progress-circle-example-animated
+        #animatedExample
+      ></cookbook-progress-circle-example-animated>
+    </div>
+  </cookbook-example-viewer>
+
+  <h3>In card</h3>
+  <cookbook-example-viewer [html]="cardExample.template">
+    <div>
+      <cookbook-progress-circle-example-card #cardExample></cookbook-progress-circle-example-card>
+    </div>
+  </cookbook-example-viewer>
+
+  <h3>Properties</h3>
   <table class="cookbook-properties">
     <thead>
       <th>Name</th>
