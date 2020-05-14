@@ -1,0 +1,13 @@
+@import './libs/designsystem/src/lib/scss/utils';
+
+:host {
+  padding: size('l');
+  background-color: get-color('background-color');
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  * {
+    margin-bottom: size('l');
+  }
+}
