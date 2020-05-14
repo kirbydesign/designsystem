@@ -1,7 +1,26 @@
 <div class="example">
-  <cookbook-chart-example></cookbook-chart-example>
+  <cookbook-example-viewer [html]="donut.template">
+    <cookbook-chart-example-donut #donut> </cookbook-chart-example-donut>
+  </cookbook-example-viewer>
+  <cookbook-example-viewer [html]="pie.template">
+    <cookbook-chart-example-pie #pie> </cookbook-chart-example-pie>
+  </cookbook-example-viewer>
+  <cookbook-example-viewer [html]="timeseries.template">
+    <cookbook-chart-example-timeseries #timeseries> </cookbook-chart-example-timeseries>
+  </cookbook-example-viewer>
+  <cookbook-example-viewer [html]="areaspline.template">
+    <cookbook-chart-example-areaspline #areaspline> </cookbook-chart-example-areaspline>
+  </cookbook-example-viewer>
+  <cookbook-example-viewer [html]="activityGauge.template">
+    <cookbook-chart-example-activity-gauge #activityGauge> </cookbook-chart-example-activity-gauge>
+  </cookbook-example-viewer>
+  <cookbook-example-viewer [html]="column.template" [ts]="column.codeSnippet">
+    <cookbook-chart-example-column #column> </cookbook-chart-example-column>
+  </cookbook-example-viewer>
+  <cookbook-example-viewer [html]="bar.template" [ts]="bar.codeSnippet">
+    <cookbook-chart-example-bar #bar> </cookbook-chart-example-bar>
+  </cookbook-example-viewer>
   <div class="code-example">
-    <cookbook-code-viewer [html]="exampleHtml"></cookbook-code-viewer>
     <h4>Properties:</h4>
     <table class="cookbook-properties">
       <thead>
@@ -34,6 +53,17 @@
           <td><code>data</code></td>
           <td>Data input for chart</td>
           <td><code>See examples above for exact format</code></td>
+        </tr>
+        <tr>
+          <td><code>options</code></td>
+          <td>
+            The Highcharts options to configure the chart with (will override existing options using
+            a deep merge)
+          </td>
+          <td>
+            See Highcharts options docs
+            <a href="https://api.highcharts.com/highcharts/" target="_blank">here</a>
+          </td>
         </tr>
       </tbody>
     </table>

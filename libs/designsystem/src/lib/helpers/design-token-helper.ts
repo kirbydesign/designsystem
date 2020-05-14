@@ -55,7 +55,12 @@ export class DesignTokenHelper {
   }
 }
 
-export type ThemeColorExtended = ThemeColor | 'black' | 'semi-light' | 'semi-dark';
+export type ThemeColorExtended =
+  | ThemeColor
+  | 'black'
+  | 'semi-light'
+  | 'semi-dark'
+  | 'background-color';
 
 export type ThemeColorVariant = 'tint' | 'shade' | 'contrast';
 
