@@ -78,22 +78,8 @@ export class ChartExampleColumnComponent {
   codeSnippet: string = config.codeSnippet;
   height = 150;
 
-  private categories = [
-    'mar',
-    'apr',
-    'may',
-    'jun',
-    'jul',
-    'aug',
-    'sep',
-    'oct',
-    'nov',
-    'dec',
-    'jan',
-    'feb',
-  ];
+  categories = ['mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec', 'jan', 'feb'];
   private monthlyExpenseData = [0, 1400, 300, 500, 100, 1000, 1100, 450, 1350, 1200, 1250, 600];
-  private maxValue = Math.max(...this.monthlyExpenseData);
   private selectedIdx = 0;
 
   // lower limit is shown as 2% of max value for UX reasons
