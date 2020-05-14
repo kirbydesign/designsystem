@@ -73,7 +73,6 @@ export class ReorderListExampleComponent {
   }
 
   trackByFn(index, item) {
-    debugger;
     return item.title;
   }
 }

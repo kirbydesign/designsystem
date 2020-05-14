@@ -55,6 +55,8 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   private ionModalElement: HTMLIonModalElement;
   private readonly ionModalDidPresent = new Subject<void>();
   readonly didPresent = this.ionModalDidPresent.toPromise();
+  private readonly ionModalWillDismiss = new Subject<void>();
+  readonly willClose = this.ionModalWillDismiss.toPromise();
 
   @HostBinding('class.drawer')
   get _isDrawer() {
@@ -73,6 +75,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   ngOnInit(): void {
     this.ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
     this.listenForIonModalDidPresent();
+    this.listenForIonModalWillDismiss();
     this.componentPropsInjector = Injector.create({
       providers: [{ provide: COMPONENT_PROPS, useValue: this.config.componentProps }],
       parent: this.injector,
@@ -91,6 +94,15 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
       this.ionModalElement.addEventListener('ionModalDidPresent', () => {
         this.ionModalDidPresent.next();
         this.ionModalDidPresent.complete();
+      });
+    }
+  }
+
+  private listenForIonModalWillDismiss() {
+    if (this.ionModalElement) {
+      this.ionModalElement.addEventListener('ionModalWillDismiss', () => {
+        this.ionModalWillDismiss.next();
+        this.ionModalWillDismiss.complete();
       });
     }
   }
@@ -153,6 +165,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   @HostListener('window:keyboardWillHide')
   _onKeyboardWillHide() {
     this.keyboardVisible = false;
+    this.ionContentElement.nativeElement.style.setProperty('--keyboard-offset', '0px');
   }
 
   onHeaderTouchStart(event: TouchEvent) {
