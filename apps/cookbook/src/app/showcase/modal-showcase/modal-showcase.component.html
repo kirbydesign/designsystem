@@ -28,6 +28,9 @@
         the parent/caller component
       </li>
       <li>Support for <a href="#" (click)="scrollTo(scrolling)">scrolling</a></li>
+      <li>
+        Support for <a href="#" (click)="scrollTo(disableScrolling)">disabling of scrolling</a>
+      </li>
       <li>(Optional) <a href="#" (click)="scrollTo(footer)">Fixed footer</a></li>
     </ul>
     <h2><span class="desktop">Desktop:</span><span class="mobile">Mobile:</span></h2>
@@ -132,6 +135,13 @@
   instantaneously.
 </p>
 <cookbook-code-viewer [ts]="example.scrollingCodeSnippet"></cookbook-code-viewer>
+
+<h3 #disableScrolling>Disable scrolling</h3>
+<p>
+  The <code>Modal</code> supports disabling of scrolling Y by setting the property
+  <code>scrollDisabled = true</code>
+</p>
+<cookbook-code-viewer [ts]="example.disableScrollingCodeSnippet"></cookbook-code-viewer>
 
 <h2 #footer>Footer</h2>
 <p>

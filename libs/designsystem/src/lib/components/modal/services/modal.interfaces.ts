@@ -11,6 +11,7 @@ export interface Overlay {
 }
 
 export abstract class Modal {
+  scrollDisabled: boolean;
   didPresent: Promise<void>;
   willClose: Promise<void>;
   close: (data?: any) => Promise<void>;
