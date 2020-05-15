@@ -4,17 +4,17 @@ import { Options } from 'highcharts';
 import * as Highcharts from 'highcharts/highstock';
 import AnnotationsModule from 'highcharts/modules/annotations';
 
-import { annotations, StockChartDataPoint } from './options/chart-stock-options';
+import { annotations, StockChartDataPoint } from './options/stock-chart-options';
 
 // @ts-ignore
 AnnotationsModule(Highcharts);
 
 @Component({
-  selector: 'kirby-chart-stock',
+  selector: 'kirby-stock-chart',
   template: '',
-  styleUrls: ['./chart-stock.component.scss'],
+  styleUrls: ['./stock-chart.component.scss'],
 })
-export class ChartStockComponent {
+export class StockChartComponent {
   chartContainer: ElementRef;
   private _data: StockChartDataPoint[];
   @Input() set data(val: StockChartDataPoint[]) {

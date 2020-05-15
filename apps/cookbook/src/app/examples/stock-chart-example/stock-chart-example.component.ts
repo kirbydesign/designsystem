@@ -5,11 +5,11 @@ import { Options } from 'highcharts';
 import { StockChartDataPoint, stockChartOptions } from '@kirbydesign/designsystem';
 
 @Component({
-  selector: 'cookbook-chart-example-stock',
-  templateUrl: './chart-example-stock.component.html',
-  styleUrls: ['./chart-example-stock.component.scss'],
+  selector: 'cookbook-stock-chart-example',
+  templateUrl: './stock-chart-example.component.html',
+  styleUrls: ['./stock-chart-example.component.scss'],
 })
-export class ChartExampleStockComponent implements OnInit {
+export class StockChartExampleComponent implements OnInit {
   constructor(@Inject(LOCALE_ID) private locale: string) {
     this.height = 300;
     this.options = stockChartOptions(locale, this.height);
