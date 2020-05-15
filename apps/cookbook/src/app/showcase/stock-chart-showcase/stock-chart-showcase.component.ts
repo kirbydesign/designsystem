@@ -7,9 +7,6 @@ declare var require: any;
   styleUrls: ['./stock-chart-showcase.component.scss'],
 })
 export class StockChartShowcaseComponent implements OnInit {
-  exampleHtml: string = require('!raw-loader!../../examples/stock-chart-example/stock-chart-example.component.html')
-    .default;
-
   constructor() {}
 
   ngOnInit() {}

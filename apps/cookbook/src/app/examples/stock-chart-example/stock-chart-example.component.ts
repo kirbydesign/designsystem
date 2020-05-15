@@ -4,12 +4,22 @@ import { Options } from 'highcharts';
 
 import { StockChartDataPoint, stockChartOptions } from '@kirbydesign/designsystem';
 
-@Component({
+const config = {
   selector: 'cookbook-stock-chart-example',
-  templateUrl: './stock-chart-example.component.html',
-  styleUrls: ['./stock-chart-example.component.scss'],
-})
+  template: `
+    <kirby-stock-chart
+      description="Accessibility description goes here"
+      [options]="options"
+      [data]="data"
+      [height]="height"
+    >
+    </kirby-stock-chart>
+  `,
+};
+
+@Component(config)
 export class StockChartExampleComponent implements OnInit {
+  template = config.template;
   constructor(@Inject(LOCALE_ID) private locale: string) {
     this.height = 300;
     this.options = stockChartOptions(locale, this.height);

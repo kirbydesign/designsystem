@@ -1,7 +1,7 @@
 <div class="example">
-  <cookbook-stock-chart-example></cookbook-stock-chart-example>
+  <cookbook-stock-chart-example #example></cookbook-stock-chart-example>
+  <cookbook-code-viewer [html]="example.template"></cookbook-code-viewer>
   <div class="code-example">
-    <cookbook-code-viewer [html]="exampleHtml"></cookbook-code-viewer>
     <h4>Properties:</h4>
     <table class="cookbook-properties">
       <thead>

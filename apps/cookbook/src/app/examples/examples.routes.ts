@@ -49,7 +49,7 @@ import { ListWithSectionsExampleComponent } from './list/components/sections';
 import { ListItemsExampleComponent } from './list/components/items';
 import { ReorderListExampleComponent } from './reorder-list/reorder-list-example.component';
 import { DropdownExampleComponent } from '~/app/examples/dropdown-example/dropdown-example.component';
-import { StockChartExampleComponent } from '~/app/examples/stock-chart-example/stock-chart-example.component';
+import { StockChartExampleComponent } from './stock-chart-example/stock-chart-example.component';
 
 export const routes: Routes = [
   {
