@@ -34,6 +34,10 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   static readonly KEYBOARD_HIDE_DELAY_IN_MS = 100;
 
   scrollY: number = Math.abs(window.scrollY);
+  set scrollDisabled(disabled: boolean) {
+    this.ionContent.scrollY = !disabled;
+  }
+
   @Input() config: ModalConfig;
   componentPropsInjector: Injector;
 
@@ -51,7 +55,6 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   private delayedCloseTimeoutId;
   private initialViewportHeight: number;
   private viewportResized = false;
-
   private ionModalElement: HTMLIonModalElement;
   private readonly ionModalDidPresent = new Subject<void>();
   readonly didPresent = this.ionModalDidPresent.toPromise();
