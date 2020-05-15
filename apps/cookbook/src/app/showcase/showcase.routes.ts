@@ -36,7 +36,7 @@ import { ItemShowcaseComponent } from '../showcase/item-showcase/item-showcase.c
 import { DividerShowcaseComponent } from './divider-showcase/divider-showcase.component';
 import { DropdownShowcaseComponent } from '~/app/showcase/dropdown-showcase/dropdown-showcase.component';
 import { ReorderListShowcaseComponent } from './reorder-list-showcase/reorder-list-showcase.component';
-import { RadiobuttonShowcaseComponent } from '~/app/showcase/radiobutton-showcase/radiobutton-showcase.component';
+import { RadioButtonShowcaseComponent } from '~/app/showcase/radio-button-showcase/radio-button-showcase.component';
 
 export const routes: Routes = [
   {
@@ -190,7 +190,7 @@ export const routes: Routes = [
       },
       {
         path: 'radiobutton',
-        component: RadiobuttonShowcaseComponent,
+        component: RadioButtonShowcaseComponent,
       },
     ],
   },

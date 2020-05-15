@@ -1,0 +1,104 @@
+<p>
+  The purpose of a radio button is to select either 0-1 (zero to one) values, amongst a set of
+  options.
+</p>
+<p>
+  This behaviour is very similar to that of the
+  <a routerLink="/home/showcase/dropdown">Dropdown</a>, but where as a dropdown can contain several
+  options, a radio button is usually only used where a limited set is options are to be selected
+  amongst.
+</p>
+
+<h3>Simple</h3>
+<p>
+  This example is using the <code>kirby-radio-button-group</code> and
+  <code>kirby-radio-button</code> Components by binding to the components using simple property
+  (<code>@Input</code>) and event bindings.
+</p>
+<cookbook-example-viewer [html]="bindingExample.template" [ts]="bindingExample.codeSnippet">
+  <div>
+    <cookbook-radio-button-example-binding #bindingExample></cookbook-radio-button-example-binding>
+  </div>
+</cookbook-example-viewer>
+
+<h3>Template-driven Forms</h3>
+<p>
+  This example is using the <code>kirby-radio-button-group</code> and
+  <code>kirby-radio-button</code> Components by binding the components using Angular's
+  <a href="https://angular.io/guide/forms" target="_blank">template-driven forms</a>
+  (<code>[ngModel]="..."</code>, <code>(ngModelChange)="..."</code> or
+  <code>[(ngModel)]="..."</code>).
+</p>
+<cookbook-example-viewer
+  [html]="templateDrivenExample.template"
+  [ts]="templateDrivenExample.codeSnippet"
+>
+  <div>
+    <cookbook-radio-button-example-template-driven-forms
+      #templateDrivenExample
+    ></cookbook-radio-button-example-template-driven-forms>
+  </div>
+</cookbook-example-viewer>
+
+<h3>Reactive Forms</h3>
+<p>
+  This example is using the <code>kirby-radio-button-group</code> and
+  <code>kirby-radio-button</code> Components by binding the components using Angular's
+  <a href="https://angular.io/guide/reactive-forms" target="_blank">reactive forms</a>
+  (<code>formControlName="..."</code> or <code>[formControl]="..."</code>)
+</p>
+<cookbook-example-viewer
+  [html]="reactiveFormsExample.template"
+  [ts]="reactiveFormsExample.codeSnippet"
+>
+  <div>
+    <cookbook-radio-button-example-reactive-forms
+      #reactiveFormsExample
+    ></cookbook-radio-button-example-reactive-forms>
+  </div>
+</cookbook-example-viewer>
+
+<h2>Properties</h2>
+<p>
+  <b>Notice:</b> these properties target the <code>kirby-radio-button</code> or
+  <code>kirby-radio-button-group</code> Components.
+</p>
+
+<h3>Radio Button:</h3>
+<cookbook-showcase-properties [properties]="buttonProperties"></cookbook-showcase-properties>
+
+<h3>Radio Button Group:</h3>
+<p>
+  In addition to the properties mentioned below, the <code>kirby-radio-button-group</code> also
+  supports bindings to Angular's
+  <a href="https://angular.io/guide/forms" target="_blank">template-driven forms</a>
+  (<code>[ngModel]="..."</code>) and
+  <a href="https://angular.io/guide/reactive-forms" target="_blank">reactive forms</a>
+  (<code>formControlName="..."</code> or <code>[formControl]="..."</code>).
+</p>
+<cookbook-showcase-properties [properties]="groupProperties"></cookbook-showcase-properties>
+
+<h2>Events</h2>
+<p>
+  <b>Notice:</b> these events target the <code>kirby-radio-button</code> or
+  <code>kirby-radio-button-group</code> Components.
+</p>
+
+<h3>Radio Button:</h3>
+<cookbook-showcase-properties
+  [properties]="buttonEvents"
+  [columns]="eventColumns"
+></cookbook-showcase-properties>
+
+<h3>Radio Button Group:</h3>
+<p>
+  In addition to the events mentioned below, the <code>kirby-radio-button-group</code> also supports
+  bindings to Angular's
+  <a href="https://angular.io/guide/forms" target="_blank">template-driven forms</a>
+  (<code>(ngModelChange)="..."</code>).
+</p>
+
+<cookbook-showcase-properties
+  [properties]="groupEvents"
+  [columns]="eventColumns"
+></cookbook-showcase-properties>

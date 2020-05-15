@@ -36,7 +36,7 @@ import { ItemShowcaseComponent } from '../showcase/item-showcase/item-showcase.c
 import { DividerShowcaseComponent } from '../showcase/divider-showcase/divider-showcase.component';
 import { DropdownShowcaseComponent } from '~/app/showcase/dropdown-showcase/dropdown-showcase.component';
 import { ReorderListShowcaseComponent } from '../showcase/reorder-list-showcase/reorder-list-showcase.component';
-import { RadiobuttonShowcaseComponent } from '~/app/showcase/radiobutton-showcase/radiobutton-showcase.component';
+import { RadioButtonShowcaseComponent } from '~/app/showcase/radio-button-showcase/radio-button-showcase.component';
 
 export const COMPONENT_IMPORTS: any[] = [ExamplesModule, ShowcaseRoutingModule];
 
@@ -76,7 +76,7 @@ export const COMPONENT_EXPORTS: any[] = [
   DividerShowcaseComponent,
   ReorderListShowcaseComponent,
   DropdownShowcaseComponent,
-  RadiobuttonShowcaseComponent,
+  RadioButtonShowcaseComponent,
 ];
 
 export const COMPONENT_DECLARATIONS: any[] = [...COMPONENT_EXPORTS, ShowcaseComponent];

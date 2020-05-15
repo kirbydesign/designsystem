@@ -1,1 +1,8 @@
-<ion-radio [value]="value" mode="md" tabindex="0"></ion-radio>
+<ion-radio
+  [value]="value"
+  [disabled]="disabled"
+  (ionFocus)="this.focusChange.emit(true)"
+  (ionBlur)="this.focusChange.emit(false)"
+  mode="md"
+  tabindex="0"
+></ion-radio>

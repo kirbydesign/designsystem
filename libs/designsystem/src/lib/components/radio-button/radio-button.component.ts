@@ -1,4 +1,13 @@
-import { Component, ElementRef, HostListener, Input, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { IonFabButton, IonRadio } from '@ionic/angular';
 
 @Component({
@@ -9,6 +18,12 @@ import { IonFabButton, IonRadio } from '@ionic/angular';
 export class RadioButtonComponent {
   @Input()
   value: any;
+
+  @Input()
+  disabled: any;
+
+  @Output()
+  focusChange = new EventEmitter<boolean>();
 
   @ViewChild(IonRadio, { static: true, read: ElementRef }) ionRadio: ElementRef<HTMLElement>;
 

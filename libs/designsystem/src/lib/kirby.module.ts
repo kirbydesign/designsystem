@@ -71,7 +71,7 @@ import { BreakpointHelperService } from './components/grid/breakpoint-helper.ser
 import { LoadingOverlayService } from './components/loading-overlay/fullscreen-loading-overlay/loading-overlay.service';
 import { ResizeObserverFactory } from './components/shared/resize-observer/resize-observer.factory';
 import { ResizeObserverService } from './components/shared/resize-observer/resize-observer.service';
-import { RadioButtonComponent, RadioButtonGroupComponent } from './components';
+import { RadioButtonComponent, RadioButtonGroupComponent } from './components/radio-button';
 
 const exportedDeclarations = [
   CardComponent,
