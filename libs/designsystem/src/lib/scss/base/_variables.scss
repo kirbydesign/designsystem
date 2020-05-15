@@ -98,3 +98,23 @@ $elevations: (
 ****************************************************************************/
 $alert-max-width: 359px;
 $compact-modal-max-width: 359px;
+
+/* Transitions
+****************************************************************************/
+
+// Duration in milliseconds
+$transition-duration: (
+  quick: '200ms',
+  short: '300ms',
+  long: '500ms',
+  extra-long: '1000ms',
+);
+
+// Easing function
+$transition-easing: (
+  static: 'linear',
+  enter: 'ease-out',
+  exit: 'ease-in',
+  enter-exit: 'ease',
+  motion: 'cubic-bezier(.25, .1, .25, 1)',
+);
