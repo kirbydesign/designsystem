@@ -2,9 +2,12 @@ import { Component, ElementRef, Inject, Input, LOCALE_ID, ViewChild } from '@ang
 
 import { Options } from 'highcharts';
 import * as Highcharts from 'highcharts/highstock';
-import * as AnnotationsModule from 'highcharts/modules/annotations';
+import AnnotationsModule from 'highcharts/modules/annotations';
 
 import { annotations, HighstockDataPoint } from './options/highstock-chart-options';
+
+// @ts-ignore
+AnnotationsModule(Highcharts);
 
 @Component({
   selector: 'kirby-highstock-chart',
@@ -43,10 +46,7 @@ export class HighstockChartComponent {
 
   chart: Highcharts.Chart;
 
-  constructor(@Inject(LOCALE_ID) private locale: string) {
-    // @ts-ignore
-    AnnotationsModule(Highcharts);
-  }
+  constructor(@Inject(LOCALE_ID) private locale: string) {}
 
   onOptionsChanges(options: Options) {
     this._options = options;
