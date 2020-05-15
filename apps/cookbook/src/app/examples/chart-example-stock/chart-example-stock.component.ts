@@ -2,17 +2,14 @@ import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
 
 import { Options } from 'highcharts';
 
-import {
-  HighstockDataPoint,
-  stockChartOptions,
-} from '@kirbydesign/designsystem/components/highstock-chart/options/highstock-chart-options';
+import { StockChartDataPoint, stockChartOptions } from '@kirbydesign/designsystem';
 
 @Component({
-  selector: 'cookbook-highstock-chart-example',
-  templateUrl: './highstock-chart-example.component.html',
-  styleUrls: ['./highstock-chart-example.component.scss'],
+  selector: 'cookbook-chart-example-stock',
+  templateUrl: './chart-example-stock.component.html',
+  styleUrls: ['./chart-example-stock.component.scss'],
 })
-export class HighstockChartExampleComponent implements OnInit {
+export class ChartExampleStockComponent implements OnInit {
   constructor(@Inject(LOCALE_ID) private locale: string) {
     this.height = 300;
     this.options = stockChartOptions(locale, this.height);
@@ -21,7 +18,7 @@ export class HighstockChartExampleComponent implements OnInit {
   options: Options;
   height: number;
 
-  data: HighstockDataPoint[] = [
+  data: StockChartDataPoint[] = [
     { x: 1198914890000, y: 0.6809, id: '' },
     { x: 1199232000000, y: 0.6809, id: '' },
     { x: 1199318400000, y: 0.6779, id: '' },

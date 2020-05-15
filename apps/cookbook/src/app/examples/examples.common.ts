@@ -47,7 +47,7 @@ import { ItemExampleComponent } from './item-example/item-example.component';
 import { DividerExampleComponent } from './divider-example/divider-example.component';
 import { ReorderListExampleComponent } from './reorder-list/reorder-list-example.component';
 import { DropdownExampleComponent } from '~/app/examples/dropdown-example/dropdown-example.component';
-import { HighstockChartExampleComponent } from '~/app/examples/highstock-chart-example/highstock-chart-example.component';
+import { ChartExampleStockComponent } from '~/app/examples/chart-example-stock/chart-example-stock.component';
 
 // Example of "custom" icons
 export const iconSettings: IconSettings = {
@@ -111,7 +111,7 @@ export const COMPONENT_DECLARATIONS: any[] = [
   DividerExampleComponent,
   ReorderListExampleComponent,
   DropdownExampleComponent,
-  HighstockChartExampleComponent,
+  ChartExampleStockComponent,
 ];
 
 // Configure custom icons (used by example to show the usage of custom icons)

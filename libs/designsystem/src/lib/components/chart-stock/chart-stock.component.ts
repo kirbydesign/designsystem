@@ -4,19 +4,20 @@ import { Options } from 'highcharts';
 import * as Highcharts from 'highcharts/highstock';
 import AnnotationsModule from 'highcharts/modules/annotations';
 
-import { annotations, HighstockDataPoint } from './options/highstock-chart-options';
+import { annotations, StockChartDataPoint } from './options/chart-stock-options';
 
 // @ts-ignore
 AnnotationsModule(Highcharts);
 
 @Component({
-  selector: 'kirby-highstock-chart',
-  templateUrl: './highstock-chart.component.html',
-  styleUrls: ['./highstock-chart.component.scss'],
+  selector: 'kirby-chart-stock',
+  template: '',
+  styleUrls: ['./chart-stock.component.scss'],
 })
-export class HighstockChartComponent {
-  private _data: HighstockDataPoint[];
-  @Input() set data(val: HighstockDataPoint[]) {
+export class ChartStockComponent {
+  chartContainer: ElementRef;
+  private _data: StockChartDataPoint[];
+  @Input() set data(val: StockChartDataPoint[]) {
     this.onDataChanges(val);
   }
   get data() {
@@ -42,18 +43,18 @@ export class HighstockChartComponent {
   @Input() description = '';
   @Input() showDataLabels = true;
 
-  @ViewChild('chartContainer', { static: true }) chartContainer: ElementRef;
-
   chart: Highcharts.Chart;
 
-  constructor(@Inject(LOCALE_ID) private locale: string) {}
+  constructor(private hostElement: ElementRef, @Inject(LOCALE_ID) private locale: string) {
+    this.chartContainer = hostElement;
+  }
 
   onOptionsChanges(options: Options) {
     this._options = options;
     this.chart = Highcharts.stockChart(this.chartContainer.nativeElement, this._options);
   }
 
-  onDataChanges(data: HighstockDataPoint[]) {
+  onDataChanges(data: StockChartDataPoint[]) {
     this._data = data;
     if (this.chart != null) {
       // First delete all points in the previous series.

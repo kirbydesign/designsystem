@@ -29,6 +29,7 @@ import { CardFooterComponent } from './components/card/card-footer/card-footer.c
 import { CardHeaderComponent } from './components/card/card-header/card-header.component';
 import { CardComponent } from './components/card/card.component';
 import { ChartComponent } from './components/chart/chart.component';
+import { ChartStockComponent } from './components/chart-stock/chart-stock.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { ChipComponent } from './components/chip/chip.component';
 import { EmptyStateComponent } from './components/empty-state/empty-state.component';
@@ -71,7 +72,6 @@ import { BreakpointHelperService } from './components/grid/breakpoint-helper.ser
 import { LoadingOverlayService } from './components/loading-overlay/fullscreen-loading-overlay/loading-overlay.service';
 import { ResizeObserverFactory } from './components/shared/resize-observer/resize-observer.factory';
 import { ResizeObserverService } from './components/shared/resize-observer/resize-observer.service';
-import { HighstockChartComponent } from './components/highstock-chart/highstock-chart.component';
 
 const exportedDeclarations = [
   CardComponent,
@@ -88,6 +88,7 @@ const exportedDeclarations = [
   ListHeaderComponent,
   ListFooterDirective,
   ChartComponent,
+  ChartStockComponent,
   GridComponent,
   ComponentLoaderDirective,
   AvatarComponent,
@@ -116,7 +117,6 @@ const exportedDeclarations = [
   DropdownComponent,
   InfiniteScrollDirective,
   LoadingOverlayComponent,
-  HighstockChartComponent,
 ];
 
 const declarations = [

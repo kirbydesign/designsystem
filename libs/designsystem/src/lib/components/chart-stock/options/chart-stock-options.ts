@@ -1,17 +1,17 @@
 import { formatNumber } from '@angular/common';
 
 import { Options } from 'highcharts';
-import * as Highcharts from 'highcharts/highstock';
+import { dateFormat } from 'highcharts/highstock';
 
 import { ColorHelper } from '../../../helpers';
 
-export interface HighstockDataPoint {
+export interface StockChartDataPoint {
   x: number;
   y: number;
   id: 'min' | 'max' | '';
 }
 
-export function stockChartOptions(locale: string, height: number) {
+export const stockChartOptions = (locale: string, height: number) => {
   const options: Options = defaultOptions(locale) as Options;
   const transparentColor = 'rgba(255,255,255,0)';
   options.chart.backgroundColor = transparentColor;
@@ -23,7 +23,7 @@ export function stockChartOptions(locale: string, height: number) {
     return (
       '<div class="kirby-text-xsmall">' +
       // @ts-ignore
-      Highcharts.dateFormat('%e. %b', new Date(this.x)) +
+      dateFormat('%e. %b', new Date(this.x)) +
       '</div><br/><div class="kirby-text-small kirby-text-bold">' +
       formatNumber(this.y, locale) +
       '</div>'
@@ -90,9 +90,9 @@ export function stockChartOptions(locale: string, height: number) {
    */
 
   return options;
-}
+};
 
-export function annotations(locale: string): Highcharts.AnnotationsOptions {
+export const annotations = (locale: string): Highcharts.AnnotationsOptions => {
   return {
     id: 'minmax',
     zIndex: 2,
@@ -127,7 +127,7 @@ export function annotations(locale: string): Highcharts.AnnotationsOptions {
       allowOverlap: true,
     },
   };
-}
+};
 
 const defaultOptions = (locale: string) => {
   return {
