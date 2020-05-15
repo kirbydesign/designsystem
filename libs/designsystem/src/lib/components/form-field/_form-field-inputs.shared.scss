@@ -4,6 +4,13 @@
   border: 1px solid get-color('danger');
 }
 
+:host(.cloned-input) {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 :host {
   background-color: get-color('white');
   color: get-color('white-contrast');
