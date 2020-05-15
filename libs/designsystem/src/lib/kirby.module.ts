@@ -63,6 +63,7 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { FabSheetComponent } from './components/fab-sheet/fab-sheet.component';
 import { FormFieldComponent } from './components/form-field/form-field.component';
 import { InputComponent } from './components/form-field/input/input.component';
+import { InputWrapperComponent } from './components/form-field/input/input-wrapper.component';
 import { TextareaComponent } from './components/form-field/textarea/textarea.component';
 import { InputCounterComponent } from './components/form-field/input-counter/input-counter.component';
 import { DividerComponent } from './components/divider/divider.component';
@@ -107,6 +108,7 @@ const exportedDeclarations = [
   ToolbarComponent,
   FormFieldComponent,
   InputComponent,
+  InputWrapperComponent,
   InputCounterComponent,
   TextareaComponent,
   FabSheetComponent,
@@ -168,6 +170,8 @@ const entryComponents = [
     RouterModule,
     IonicModule.forRoot({
       mode: 'ios',
+      inputShims: true,
+      scrollAssist: true,
     }),
     ...importedModules,
   ],
