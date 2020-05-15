@@ -12,7 +12,7 @@ const STROKE_WIDTH = 4;
 })
 export class ProgressCircleRingComponent {
   @Input() radius: number; // The desired outer radius of the SVG circle
-  @Input() value: number;
+  @Input() value: number = 0;
   @Input() themeColor: ThemeColor;
 
   get offset(): number {
