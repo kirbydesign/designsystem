@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 const config = {
   selector: 'cookbook-chart-example-timeseries',
@@ -16,7 +16,10 @@ const config = {
   </kirby-card>
   `,
 };
-@Component(config)
+@Component({
+  selector: config.selector,
+  template: config.template,
+})
 export class ChartExampleTimeseriesComponent {
   template = config.template;
   breaks = [
