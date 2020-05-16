@@ -96,7 +96,7 @@ export class ChartExampleBarComponent {
   private currentTimeData = [0, 1000, 800];
   private maxValue = Math.max(...this.yearExpensesData) + Math.max(...this.currentTimeData);
   private years = [2018, 2019, 2020].reverse();
-  private categories = this.years.map((year) => year.toString());
+  categories = this.years.map((year) => year.toString());
   private selectedYear = this.categories[0];
   private lowerLimit = Math.max(...this.yearExpensesData) * 0.01;
   // lower limit is shown as 2% of max value for UX reasons
