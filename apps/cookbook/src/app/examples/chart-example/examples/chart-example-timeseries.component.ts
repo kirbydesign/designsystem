@@ -3,16 +3,16 @@ import { Component } from '@angular/core';
 const config = {
   selector: 'cookbook-chart-example-timeseries',
   template: `<kirby-card>
-    <kirby-card-header title="Timeseries"></kirby-card-header>
-    <kirby-chart
-        [height]="240"
-        type="timeseries"
-        description="Accessibility description goes here"
-        [data]="rates"
-        [breaks]="breaks"
-    >
-    </kirby-chart>
-  </kirby-card>`,
+  <kirby-card-header title="Timeseries"></kirby-card-header>
+  <kirby-chart
+    [height]="240"
+    type="timeseries"
+    description="Accessibility description goes here"
+    [data]="rates"
+    [breaks]="breaks"
+  >
+  </kirby-chart>
+</kirby-card>`,
 };
 @Component({
   selector: config.selector,
