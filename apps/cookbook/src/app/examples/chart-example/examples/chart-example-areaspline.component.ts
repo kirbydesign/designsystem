@@ -24,7 +24,10 @@ const config = {
     </kirby-card>
   `,
 };
-@Component(config)
+@Component({
+  selector: config.selector,
+  template: config.template,
+})
 export class ChartExampleAreasplineComponent {
   template = config.template;
 

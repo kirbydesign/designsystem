@@ -85,7 +85,7 @@ const config = {
 
 @Component({
   selector: config.selector,
-  templateUrl: config.template,
+  template: config.template,
 })
 export class ChartExampleBarComponent {
   template: string = config.template;

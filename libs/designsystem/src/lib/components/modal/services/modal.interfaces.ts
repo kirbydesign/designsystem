@@ -16,4 +16,5 @@ export abstract class Modal {
   close: (data?: any) => Promise<void>;
   scrollToTop: (scrollDuration?: KirbyAnimation.Duration) => void;
   scrollToBottom: (scrollDuration?: KirbyAnimation.Duration) => void;
+  scrollDisabled: boolean;
 }
