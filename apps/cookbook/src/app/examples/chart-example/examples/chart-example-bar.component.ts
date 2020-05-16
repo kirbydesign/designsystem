@@ -25,14 +25,11 @@ function colorPoints(selectedYear: string) {
 
 const config = {
   selector: 'cookbook-chart-example-bar',
-  template: `
-  <kirby-card>
+  template: `<kirby-card>
     <kirby-card-header title="Bar"></kirby-card-header>
     <kirby-chart [height]="height" type="bar" [categories]="categories" [options]="yearlyOverviewOptions"> </kirby-chart>
-  </kirby-card>
-  `,
-  codeSnippet: `
-  private yearlyOverviewClick: SeriesClickCallbackFunction = (ev: SeriesClickEventObject) => {
+  </kirby-card>`,
+  codeSnippet: `private yearlyOverviewClick: SeriesClickCallbackFunction = (ev: SeriesClickEventObject) => {
     this.modalController.showAlert({
       title: 'Clicked chart',
       message: 'You clicked on year: ' + ev.point.category,
@@ -79,8 +76,7 @@ const config = {
         data: this.currentTimeData,
       },
     ] as any,
-  };
-  `,
+  };`,
 };
 
 @Component({

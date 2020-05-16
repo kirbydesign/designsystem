@@ -25,14 +25,11 @@ function colorPoints(selectedIdx) {
 
 const config = {
   selector: 'cookbook-chart-example-column',
-  template: `
-  <kirby-card>
+  template: `<kirby-card>
   <kirby-card-header title="Column"></kirby-card-header>
   <kirby-chart [height]="height" [categories]="categories" type="column" [data]="adjustedMonthlyExpenseData" [options]="monthlyOverviewOptions"> </kirby-chart>
-  </kirby-card>
-  `,
-  codeSnippet: `
-  private monthlyOverviewClick: SeriesClickCallbackFunction = (ev: SeriesClickEventObject) => {
+  </kirby-card>`,
+  codeSnippet: `private monthlyOverviewClick: SeriesClickCallbackFunction = (ev: SeriesClickEventObject) => {
     this.modalController.showAlert({
       title: 'Clicked chart',
       message: 'You clicked on column: ' + ev.point.category,
@@ -65,8 +62,7 @@ const config = {
         },
       ],
     },
-  };
-  `,
+  };`,
 };
 
 @Component({

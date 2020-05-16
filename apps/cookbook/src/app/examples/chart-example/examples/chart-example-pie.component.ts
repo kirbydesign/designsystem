@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 
 const config = {
   selector: 'cookbook-chart-example-pie',
-  template: `
-    <kirby-card>
+  template: `<kirby-card>
         <kirby-card-header title="Pie"></kirby-card-header>
         <kirby-chart
             [height]="320"
@@ -33,8 +32,7 @@ const config = {
             }
             ]"
         ></kirby-chart>
-    </kirby-card>
-  `,
+    </kirby-card>`,
 };
 @Component({
   selector: config.selector,

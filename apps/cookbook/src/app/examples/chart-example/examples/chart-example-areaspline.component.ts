@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 
 const config = {
   selector: 'cookbook-chart-example-areaspline',
-  template: `
-    <kirby-card>
+  template: `<kirby-card>
         <kirby-card-header title="Areaspline"></kirby-card-header>
         <kirby-chart
             [height]="240"
@@ -21,8 +20,7 @@ const config = {
             <span (click)="data = [500, 400, 300, 200, 100, 200, 300]">Mar </span>
             </div>
         </kirby-card-footer>
-    </kirby-card>
-  `,
+    </kirby-card>`,
 };
 @Component({
   selector: config.selector,
