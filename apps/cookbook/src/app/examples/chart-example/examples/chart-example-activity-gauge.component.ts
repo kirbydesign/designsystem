@@ -38,7 +38,10 @@ const config = {
     </kirby-card>
   `,
 };
-@Component(config)
+@Component({
+  selector: config.selector,
+  template: config.template,
+})
 export class ChartExampleActivityGaugeComponent {
   template = config.template;
 }
