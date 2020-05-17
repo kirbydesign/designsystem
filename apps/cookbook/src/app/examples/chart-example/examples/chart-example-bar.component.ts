@@ -25,62 +25,63 @@ function colorPoints(selectedYear: string) {
 
 const config = {
   selector: 'cookbook-chart-example-bar',
-  template: `
-  <kirby-card>
-    <kirby-card-header title="Bar"></kirby-card-header>
-    <kirby-chart [height]="height" type="bar" [categories]="categories" [options]="yearlyOverviewOptions"> </kirby-chart>
-  </kirby-card>
-  `,
-  codeSnippet: `
-  private yearlyOverviewClick: SeriesClickCallbackFunction = (ev: SeriesClickEventObject) => {
-    this.modalController.showAlert({
-      title: 'Clicked chart',
-      message: 'You clicked on year: ' + ev.point.category,
-      okBtnText: 'Ok',
-    });
+  template: `<kirby-card>
+  <kirby-card-header title="Bar"></kirby-card-header>
+  <kirby-chart
+    [height]="height"
+    type="bar"
+    [categories]="categories"
+    [options]="yearlyOverviewOptions">
+  </kirby-chart>
+</kirby-card>`,
+  codeSnippet: `private yearlyOverviewClick: SeriesClickCallbackFunction = (ev: SeriesClickEventObject) => {
+  this.modalController.showAlert({
+    title: 'Clicked chart',
+    message: 'You clicked on year: ' + ev.point.category,
+    okBtnText: 'Ok',
+  });
 
-    this.selectedYear = ev.point.category;
-    this.yearlyOverviewOptions.plotOptions.series.animation = false;
-    this.yearlyOverviewOptions.chart.events.load = colorPoints(this.selectedYear);
-    this.yearlyOverviewOptions.chart.events.redraw = colorPoints(this.selectedYear);
-    this.yearlyOverviewOptions = { ...this.yearlyOverviewOptions };
-  };
+  this.selectedYear = ev.point.category;
+  this.yearlyOverviewOptions.plotOptions.series.animation = false;
+  this.yearlyOverviewOptions.chart.events.load = colorPoints(this.selectedYear);
+  this.yearlyOverviewOptions.chart.events.redraw = colorPoints(this.selectedYear);
+  this.yearlyOverviewOptions = { ...this.yearlyOverviewOptions };
+};
 
-  yearlyOverviewOptions: Options = {
-    chart: {
+yearlyOverviewOptions: Options = {
+  chart: {
+    events: {
+      load: colorPoints(this.selectedYear),
+      redraw: colorPoints(this.selectedYear),
+    },
+  },
+  plotOptions: {
+    series: {},
+    bar: {
       events: {
-        load: colorPoints(this.selectedYear),
-        redraw: colorPoints(this.selectedYear),
+        click: this.yearlyOverviewClick.bind(this),
       },
     },
-    plotOptions: {
-      series: {},
-      bar: {
-        events: {
-          click: this.yearlyOverviewClick.bind(this),
-        },
-      },
+  },
+  series: [
+    {
+      name: 'InvisibleClickReceiver',
+      data: this.adjustedYearExpensesData.map(
+        (wholeYearData, idx) => this.maxValue - (wholeYearData + this.currentTimeData[idx])
+      ),
+      edgeColor: 'rgb(255, 255, 255, 0)',
+      opacity: 0,
     },
-    series: [
-      {
-        name: 'InvisibleClickReceiver',
-        data: this.adjustedYearExpensesData.map(
-          (wholeYearData, idx) => this.maxValue - (wholeYearData + this.currentTimeData[idx])
-        ),
-        edgeColor: 'rgb(255, 255, 255, 0)',
-        opacity: 0,
-      },
-      {
-        name: 'WholeYearExpenses',
-        data: this.adjustedYearExpensesData,
-      },
-      {
-        name: 'CurrentTimeExpsenses',
-        data: this.currentTimeData,
-      },
-    ] as any,
-  };
-  `,
+    {
+      name: 'WholeYearExpenses',
+      data: this.adjustedYearExpensesData,
+    },
+    {
+      name: 'CurrentTimeExpsenses',
+      data: this.currentTimeData,
+    },
+  ] as any,
+};`,
 };
 
 @Component({
