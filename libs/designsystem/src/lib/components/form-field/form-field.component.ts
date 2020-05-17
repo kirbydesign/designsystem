@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, Input, ContentChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  ContentChild,
+  AfterViewInit,
+  OnDestroy,
+  ElementRef,
+} from '@angular/core';
 
 import { InputCounterComponent } from './input-counter/input-counter.component';
 
@@ -8,9 +16,27 @@ import { InputCounterComponent } from './input-counter/input-counter.component';
   styleUrls: ['./form-field.component.scss'],
   templateUrl: './form-field.component.html',
 })
-export class FormFieldComponent {
+export class FormFieldComponent implements AfterViewInit, OnDestroy {
   @Input() label: string;
   @Input() message: string;
 
   @ContentChild(InputCounterComponent, { static: false }) counter;
+
+  constructor(private elementRef: ElementRef<HTMLElement>) {}
+
+  ngAfterViewInit(): void {
+    document.dispatchEvent(
+      new CustomEvent('ionInputDidLoad', {
+        detail: this.elementRef.nativeElement,
+      })
+    );
+  }
+
+  ngOnDestroy(): void {
+    document.dispatchEvent(
+      new CustomEvent('ionInputDidUnload', {
+        detail: this.elementRef.nativeElement,
+      })
+    );
+  }
 }

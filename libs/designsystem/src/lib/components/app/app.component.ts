@@ -23,10 +23,10 @@ export class AppComponent implements AfterContentInit {
       this.modalController.registerPresentingElement(this.routerOutlet.nativeElement);
     }
 
-    this.ionAppElement.nativeElement.componentOnReady().then(() => this.appDidLoad());
+    this.ionAppElement.nativeElement.componentOnReady().then(() => this.registerInputs());
   }
 
-  appDidLoad() {
+  registerInputs() {
     // Input might be already loaded in the DOM before ion-device-hacks did.
     // At this point we need to look for all of the inputs not registered yet
     // and register them.
@@ -34,13 +34,15 @@ export class AppComponent implements AfterContentInit {
     // to ensure ion-device-hacks has run:
     const ensureIonicDeviceHacksDelay = 250;
     setTimeout(() => {
-      document.querySelectorAll('kirby-input, kirby-textarea').forEach((input) => {
-        document.dispatchEvent(
-          new CustomEvent('ionInputDidLoad', {
-            detail: input,
-          })
-        );
-      });
+      document
+        .querySelectorAll('kirby-input, kirby-textarea, kirby-form-field')
+        .forEach((input) => {
+          document.dispatchEvent(
+            new CustomEvent('ionInputDidLoad', {
+              detail: input,
+            })
+          );
+        });
     }, ensureIonicDeviceHacksDelay);
   }
 }
