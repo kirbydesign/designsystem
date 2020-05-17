@@ -1,5 +1,7 @@
 @import '../../scss/utils';
 
+$form-field-label-height: 20px;
+
 :host(.error) {
   border: 1px solid get-color('danger');
 }
@@ -9,6 +11,12 @@
   position: absolute;
   top: 0;
   left: 0;
+}
+
+:host-context(label) {
+  :host(.cloned-input) {
+    top: $form-field-label-height;
+  }
 }
 
 :host {
