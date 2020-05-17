@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, AfterViewInit, ElementRef } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  AfterViewInit,
+  ElementRef,
+  OnDestroy,
+} from '@angular/core';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -8,12 +14,20 @@ import { ChangeDetectionStrategy, Component, AfterViewInit, ElementRef } from '@
     <ng-content select="input[kirby-input], textarea[kirby-textarea]"></ng-content>
   `,
 })
-export class InputWrapperComponent implements AfterViewInit {
+export class InputWrapperComponent implements AfterViewInit, OnDestroy {
   constructor(private elementRef: ElementRef<HTMLElement>) {}
 
   ngAfterViewInit(): void {
     document.dispatchEvent(
       new CustomEvent('ionInputDidLoad', {
+        detail: this.elementRef.nativeElement,
+      })
+    );
+  }
+
+  ngOnDestroy(): void {
+    document.dispatchEvent(
+      new CustomEvent('ionInputDidUnload', {
         detail: this.elementRef.nativeElement,
       })
     );
