@@ -26,7 +26,7 @@ export class ModalShowcaseComponent implements AfterViewInit {
     return false;
   }
 
-  properties: ShowcaseProperty[] = [
+  configProperties: ShowcaseProperty[] = [
     {
       name: 'title',
       description: 'The header of the modal',
@@ -58,6 +58,15 @@ export class ModalShowcaseComponent implements AfterViewInit {
       description: 'The data to pass to the modal component.',
       defaultValue: '',
       inputValues: ['undefined | { [key: string]: any; }'],
+    },
+  ];
+
+  properties: ShowcaseProperty[] = [
+    {
+      name: 'scrollDisabled',
+      description: 'Disable scrolling of the modal',
+      inputValues: ['true', 'false'],
+      defaultValue: 'false',
     },
   ];
 

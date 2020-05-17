@@ -198,6 +198,14 @@ describe('ModalWrapperComponent', () => {
     });
   });
 
+  describe('disable scroll Y', () => {
+    it('should disable scroll Y', () => {
+      const ionContent: IonContent = spectator.query(IonContent);
+      spectator.component.scrollDisabled = true;
+      expect(ionContent.scrollY).toBeFalse;
+    });
+  });
+
   describe('with embedded component with static footer', () => {
     beforeEach(() => {
       spectator = createComponent({
