@@ -6,8 +6,4 @@ declare var require: any;
   templateUrl: './stock-chart-showcase.component.html',
   styleUrls: ['./stock-chart-showcase.component.scss'],
 })
-export class StockChartShowcaseComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit() {}
-}
+export class StockChartShowcaseComponent {}

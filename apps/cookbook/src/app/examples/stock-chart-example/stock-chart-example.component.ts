@@ -6,18 +6,18 @@ import { StockChartDataPoint, stockChartOptions } from '@kirbydesign/designsyste
 
 const config = {
   selector: 'cookbook-stock-chart-example',
-  template: `
-    <kirby-stock-chart
+  template: `<kirby-stock-chart
       description="Accessibility description goes here"
       [options]="options"
       [data]="data"
-      [height]="height"
-    >
-    </kirby-stock-chart>
-  `,
+      [height]="height">
+    </kirby-stock-chart>`,
 };
 
-@Component(config)
+@Component({
+  selector: config.selector,
+  template: config.template,
+})
 export class StockChartExampleComponent implements OnInit {
   template = config.template;
   constructor(@Inject(LOCALE_ID) private locale: string) {
