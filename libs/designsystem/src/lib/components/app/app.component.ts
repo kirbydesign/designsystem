@@ -34,15 +34,13 @@ export class AppComponent implements AfterContentInit {
     // to ensure ion-device-hacks has run:
     const ensureIonicDeviceHacksDelay = 250;
     setTimeout(() => {
-      document
-        .querySelectorAll('kirby-input, kirby-textarea, kirby-form-field')
-        .forEach((input) => {
-          document.dispatchEvent(
-            new CustomEvent('ionInputDidLoad', {
-              detail: input,
-            })
-          );
-        });
+      document.querySelectorAll('kirby-form-field').forEach((input) => {
+        document.dispatchEvent(
+          new CustomEvent('ionInputDidLoad', {
+            detail: input,
+          })
+        );
+      });
     }, ensureIonicDeviceHacksDelay);
   }
 }
