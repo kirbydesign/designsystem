@@ -221,9 +221,8 @@ export class VirtualScrollListComponent implements OnInit, OnChanges, AfterViewI
   }
 
   onLoadOnDemand(event?: LoadOnDemandEventData) {
-    this.listHelper.onLoadOnDemand(this, event);
+    this.listHelper.onLoadOnDemand(this as any, event);
   }
-
   defaultTrackBy(index: number): any {
     return index;
   }
