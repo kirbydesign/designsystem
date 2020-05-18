@@ -25,48 +25,50 @@ function colorPoints(selectedIdx) {
 
 const config = {
   selector: 'cookbook-chart-example-column',
-  template: `
-  <kirby-card>
+  template: `<kirby-card>
   <kirby-card-header title="Column"></kirby-card-header>
-  <kirby-chart [height]="height" [categories]="categories" type="column" [data]="adjustedMonthlyExpenseData" [options]="monthlyOverviewOptions"> </kirby-chart>
-  </kirby-card>
-  `,
-  codeSnippet: `
-  private monthlyOverviewClick: SeriesClickCallbackFunction = (ev: SeriesClickEventObject) => {
-    this.modalController.showAlert({
-      title: 'Clicked chart',
-      message: 'You clicked on column: ' + ev.point.category,
-      okBtnText: 'Ok',
-    });
+  <kirby-chart
+    [height]="height"
+    [categories]="categories"
+    type="column"
+    [data]="adjustedMonthlyExpenseData"
+    [options]="monthlyOverviewOptions">
+  </kirby-chart>
+</kirby-card>`,
+  codeSnippet: `private monthlyOverviewClick: SeriesClickCallbackFunction = (ev: SeriesClickEventObject) => {
+      this.modalController.showAlert({
+    title: 'Clicked chart',
+    message: 'You clicked on column: ' + ev.point.category,
+    okBtnText: 'Ok',
+  });
 
-    this.selectedIdx = this.categories.indexOf(ev.point.category);
-    this.monthlyOverviewOptions.plotOptions.series.animation = false;
-    this.monthlyOverviewOptions.chart.events.load = colorPoints(this.selectedIdx);
-    this.monthlyOverviewOptions.chart.events.redraw = colorPoints(this.selectedIdx);
-    this.monthlyOverviewOptions = { ...this.monthlyOverviewOptions };
-  };
-  monthlyOverviewOptions: Options = {
-    chart: { events: {} },
-    plotOptions: {
-      series: {},
-      column: {
-        events: {
-          click: this.monthlyOverviewClick.bind(this),
-        },
+  this.selectedIdx = this.categories.indexOf(ev.point.category);
+  this.monthlyOverviewOptions.plotOptions.series.animation = false;
+  this.monthlyOverviewOptions.chart.events.load = colorPoints(this.selectedIdx);
+  this.monthlyOverviewOptions.chart.events.redraw = colorPoints(this.selectedIdx);
+  this.monthlyOverviewOptions = { ...this.monthlyOverviewOptions };
+};
+monthlyOverviewOptions: Options = {
+  chart: { events: {} },
+  plotOptions: {
+    series: {},
+    column: {
+      events: {
+        click: this.monthlyOverviewClick.bind(this),
       },
     },
-    yAxis: {
-      plotLines: [
-        {
-          width: 1,
-          color: getColor('semi-dark').value,
-          dashStyle: 'Dash',
-          value: 872,
-        },
-      ],
-    },
-  };
-  `,
+  },
+  yAxis: {
+    plotLines: [
+      {
+        width: 1,
+        color: getColor('semi-dark').value,
+        dashStyle: 'Dash',
+        value: 872,
+      },
+    ],
+  },
+};`,
 };
 
 @Component({
@@ -78,22 +80,8 @@ export class ChartExampleColumnComponent {
   codeSnippet: string = config.codeSnippet;
   height = 150;
 
-  private categories = [
-    'mar',
-    'apr',
-    'may',
-    'jun',
-    'jul',
-    'aug',
-    'sep',
-    'oct',
-    'nov',
-    'dec',
-    'jan',
-    'feb',
-  ];
+  categories = ['mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec', 'jan', 'feb'];
   private monthlyExpenseData = [0, 1400, 300, 500, 100, 1000, 1100, 450, 1350, 1200, 1250, 600];
-  private maxValue = Math.max(...this.monthlyExpenseData);
   private selectedIdx = 0;
 
   // lower limit is shown as 2% of max value for UX reasons

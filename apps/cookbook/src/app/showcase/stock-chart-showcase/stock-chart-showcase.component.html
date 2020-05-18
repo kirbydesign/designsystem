@@ -1,0 +1,35 @@
+<cookbook-example-viewer [html]="example.template">
+  <cookbook-stock-chart-example #example></cookbook-stock-chart-example>
+</cookbook-example-viewer>
+<div class="code-example">
+  <h4>Properties:</h4>
+  <table class="cookbook-properties">
+    <thead>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Input values</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>description</code></td>
+        <td>Description of Highstock Chart for accessibility</td>
+        <td><code>string - e.g. "Microsoft Stock (NASDAQ: MSFT) today"</code></td>
+      </tr>
+      <tr>
+        <td><code>options</code></td>
+        <td>Options input for Highstock Chart</td>
+        <td><code>Options</code></td>
+      </tr>
+      <tr>
+        <td><code>data</code></td>
+        <td>Data input for Highstock Chart</td>
+        <td><code>StockChartDataPoint[]</code></td>
+      </tr>
+      <tr>
+        <td><code>height</code></td>
+        <td>The height of the Highstock Chart in px for web and dp for native</td>
+        <td><code>number</code></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

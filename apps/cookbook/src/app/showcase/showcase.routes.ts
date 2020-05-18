@@ -36,6 +36,7 @@ import { ItemShowcaseComponent } from '../showcase/item-showcase/item-showcase.c
 import { DividerShowcaseComponent } from './divider-showcase/divider-showcase.component';
 import { DropdownShowcaseComponent } from '~/app/showcase/dropdown-showcase/dropdown-showcase.component';
 import { ReorderListShowcaseComponent } from './reorder-list-showcase/reorder-list-showcase.component';
+import { StockChartShowcaseComponent } from './stock-chart-showcase/stock-chart-showcase.component';
 import { ProgressCircleShowcaseComponent } from './progress-circle-showcase/progress-circle-showcase.component';
 
 export const routes: Routes = [
@@ -111,6 +112,10 @@ export const routes: Routes = [
       {
         path: 'chart',
         component: ChartShowcaseComponent,
+      },
+      {
+        path: 'stock-chart',
+        component: StockChartShowcaseComponent,
       },
       {
         path: 'fonts',

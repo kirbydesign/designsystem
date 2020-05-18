@@ -1,22 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 const config = {
   selector: 'cookbook-chart-example-timeseries',
-  template: `
-  <kirby-card>
-    <kirby-card-header title="Timeseries"></kirby-card-header>
-    <kirby-chart
-        [height]="240"
-        type="timeseries"
-        description="Accessibility description goes here"
-        [data]="rates"
-        [breaks]="breaks"
-    >
-    </kirby-chart>
-  </kirby-card>
-  `,
+  template: `<kirby-card>
+  <kirby-card-header title="Timeseries"></kirby-card-header>
+  <kirby-chart
+    [height]="240"
+    type="timeseries"
+    description="Accessibility description goes here"
+    [data]="rates"
+    [breaks]="breaks"
+  >
+  </kirby-chart>
+</kirby-card>`,
 };
-@Component(config)
+@Component({
+  selector: config.selector,
+  template: config.template,
+})
 export class ChartExampleTimeseriesComponent {
   template = config.template;
   breaks = [
