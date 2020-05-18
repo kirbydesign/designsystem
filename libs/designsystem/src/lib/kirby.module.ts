@@ -29,6 +29,7 @@ import { CardFooterComponent } from './components/card/card-footer/card-footer.c
 import { CardHeaderComponent } from './components/card/card-header/card-header.component';
 import { CardComponent } from './components/card/card.component';
 import { ChartComponent } from './components/chart/chart.component';
+import { StockChartComponent } from './components/stock-chart/stock-chart.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { ChipComponent } from './components/chip/chip.component';
 import { EmptyStateComponent } from './components/empty-state/empty-state.component';
@@ -87,6 +88,7 @@ const exportedDeclarations = [
   ListHeaderComponent,
   ListFooterDirective,
   ChartComponent,
+  StockChartComponent,
   GridComponent,
   ComponentLoaderDirective,
   AvatarComponent,
