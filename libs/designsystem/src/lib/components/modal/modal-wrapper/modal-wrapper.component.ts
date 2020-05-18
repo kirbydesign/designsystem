@@ -34,6 +34,10 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   static readonly KEYBOARD_HIDE_DELAY_IN_MS = 100;
 
   scrollY: number = Math.abs(window.scrollY);
+  set scrollDisabled(disabled: boolean) {
+    this.ionContent.scrollY = !disabled;
+  }
+
   @Input() config: ModalConfig;
   componentPropsInjector: Injector;
 
@@ -51,10 +55,11 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   private delayedCloseTimeoutId;
   private initialViewportHeight: number;
   private viewportResized = false;
-
   private ionModalElement: HTMLIonModalElement;
   private readonly ionModalDidPresent = new Subject<void>();
   readonly didPresent = this.ionModalDidPresent.toPromise();
+  private readonly ionModalWillDismiss = new Subject<void>();
+  readonly willClose = this.ionModalWillDismiss.toPromise();
 
   @HostBinding('class.drawer')
   get _isDrawer() {
@@ -73,6 +78,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   ngOnInit(): void {
     this.ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
     this.listenForIonModalDidPresent();
+    this.listenForIonModalWillDismiss();
     this.componentPropsInjector = Injector.create({
       providers: [{ provide: COMPONENT_PROPS, useValue: this.config.componentProps }],
       parent: this.injector,
@@ -91,6 +97,15 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
       this.ionModalElement.addEventListener('ionModalDidPresent', () => {
         this.ionModalDidPresent.next();
         this.ionModalDidPresent.complete();
+      });
+    }
+  }
+
+  private listenForIonModalWillDismiss() {
+    if (this.ionModalElement) {
+      this.ionModalElement.addEventListener('ionModalWillDismiss', () => {
+        this.ionModalWillDismiss.next();
+        this.ionModalWillDismiss.complete();
       });
     }
   }

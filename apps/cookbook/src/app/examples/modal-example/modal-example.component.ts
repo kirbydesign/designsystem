@@ -78,13 +78,26 @@ this.modal?.scrollToTop(KirbyAnimation.Duration.LONG);
 
 // scrollToBottom example:
 this.modal?.scrollToBottom();`,
+
+  disableScrollingCodeSnippet: `import { KirbyAnimation, Modal } from '@kirbydesign/designsystem';
+...
+constructor(@Optional() @SkipSelf() private modal: Modal) {}
+
+// Disable scroll Y
+this.modal?.scrollDisabled = true;`,
+
   didPresentCodeSnippet: `constructor(@Optional() @SkipSelf() private modal: Modal) {}
 
 @ViewChild('nameInput', { static: false, read: ElementRef }) private nameInputElement: ElementRef<HTMLInputElement>;
 
 ngOnInit() {
-  this.modal?.didPresent.then(() => this.nameInputElement?.nativeElement.focus());
+  this.modal?.didPresent.then(() => this.nameInputElement?.nativeElement.focus()); 
 }`,
+  willCloseCodeSnippet: `constructor(@Optional() @SkipSelf() private modal: Modal) {}
+
+  ngOnInit() {
+    this.modal?.willClose.then(() => console.log('this modal is about to close'));
+  }`,
   embeddedCodeSnippet: `import { Component, Inject } from '@angular/core';
 import { COMPONENT_PROPS } from '@kirbydesign/designsystem';
 
@@ -131,7 +144,9 @@ export class ModalExampleComponent {
   callbackCodeSnippet = config.callbackCodeSnippet;
   callbackWithDataCodeSnippet = config.callbackWithDataCodeSnippet;
   didPresentCodeSnippet = config.didPresentCodeSnippet;
+  willCloseCodeSnippet = config.willCloseCodeSnippet;
   scrollingCodeSnippet = config.scrollingCodeSnippet;
+  disableScrollingCodeSnippet = config.disableScrollingCodeSnippet;
   embeddedCodeSnippet = config.embeddedCodeSnippet;
   closeModalCodeSnippet = config.closeModalCodeSnippet;
 

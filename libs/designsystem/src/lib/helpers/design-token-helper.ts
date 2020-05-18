@@ -18,20 +18,6 @@ export class DesignTokenHelper {
     };
   }
 
-  public static getTextColor(
-    name: ThemeTextColor,
-    variant?: ThemeColorVariant
-  ): ThemeColorDefinition {
-    const variantSuffix = variant ? `-${variant}` : '';
-    const colorVariant = `${name}${variantSuffix}`;
-    return {
-      name: name,
-      variant: variant,
-      fullname: colorVariant,
-      value: ColorHelper.getThemeTextColorRgbString(colorVariant),
-    };
-  }
-
   public static size(key: string): string {
     return styles.sizes[key];
   }
@@ -69,8 +55,12 @@ export class DesignTokenHelper {
   }
 }
 
-export type ThemeColorExtended = ThemeColor | 'black' | 'semi-light' | 'semi-dark';
-export type ThemeTextColor = 'white' | 'semi-dark' | 'black' | 'danger';
+export type ThemeColorExtended =
+  | ThemeColor
+  | 'black'
+  | 'semi-light'
+  | 'semi-dark'
+  | 'background-color';
 
 export type ThemeColorVariant = 'tint' | 'shade' | 'contrast';
 

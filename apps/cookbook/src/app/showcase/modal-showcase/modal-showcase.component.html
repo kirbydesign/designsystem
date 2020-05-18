@@ -28,6 +28,9 @@
         the parent/caller component
       </li>
       <li>Support for <a href="#" (click)="scrollTo(scrolling)">scrolling</a></li>
+      <li>
+        Support for <a href="#" (click)="scrollTo(disableScrolling)">disabling of scrolling</a>
+      </li>
       <li>(Optional) <a href="#" (click)="scrollTo(footer)">Fixed footer</a></li>
     </ul>
     <h2><span class="desktop">Desktop:</span><span class="mobile">Mobile:</span></h2>
@@ -116,6 +119,14 @@
 </p>
 <cookbook-code-viewer [ts]="example.didPresentCodeSnippet"></cookbook-code-viewer>
 
+<h2 #willCloseEvent>Modal Closing</h2>
+<p>
+  The <code>Modal</code> fires the <code>willClose</code> event, when the modal is starting to
+  dismiss/close before any animations occurs. This gives you a slot to execute your exceptional code
+  just when the modal starts closing but before its actually done:
+</p>
+<cookbook-code-viewer [ts]="example.willCloseCodeSnippet"></cookbook-code-viewer>
+
 <h2 #scrolling>Scrolling</h2>
 <p>
   The <code>Modal</code> supports scrolling to the top and bottom of the modal using the methods
@@ -125,6 +136,13 @@
 </p>
 <cookbook-code-viewer [ts]="example.scrollingCodeSnippet"></cookbook-code-viewer>
 
+<h3 #disableScrolling>Disable scrolling</h3>
+<p>
+  The <code>Modal</code> supports disabling of scrolling by setting the property
+  <code>scrollDisabled = true</code>
+</p>
+<cookbook-code-viewer [ts]="example.disableScrollingCodeSnippet"></cookbook-code-viewer>
+
 <h2 #footer>Footer</h2>
 <p>
   To render a fixed footer at the bottom of the modal include a
@@ -132,8 +150,10 @@
 </p>
 <cookbook-code-viewer [html]="example.footerTemplate"></cookbook-code-viewer>
 
-<h2>Properties:</h2>
-<h3><code>ModalConfig</code></h3>
+<h2>Modal config:</h2>
+<cookbook-showcase-properties [properties]="configProperties"></cookbook-showcase-properties>
+
+<h2>Modal properties:</h2>
 <cookbook-showcase-properties [properties]="properties"></cookbook-showcase-properties>
 
 <h2>Events:</h2>

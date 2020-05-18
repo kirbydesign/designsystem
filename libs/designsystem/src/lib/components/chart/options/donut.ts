@@ -10,7 +10,9 @@ export const DonutOptions: Options = {
     },
     backgroundColor: 'transparent',
     type: '',
-    description: '',
+  },
+  accessibility: {
+    description: 'Donut chart',
   },
   title: {
     text: '',
@@ -59,13 +61,22 @@ export const DonutOptions: Options = {
     },
     series: {
       animation: true,
+      dataLabels: {},
+      states: {
+        hover: {
+          enabled: false,
+        },
+        inactive: {
+          opacity: 1,
+        },
+      },
     },
   },
   series: [
     {
       name: '',
       type: 'pie',
-      data: (this === undefined ? [] : this.data) as Array<Highcharts.SeriesPieDataOptions>,
+      data: this === undefined ? [] : this.data,
     },
   ],
   credits: {

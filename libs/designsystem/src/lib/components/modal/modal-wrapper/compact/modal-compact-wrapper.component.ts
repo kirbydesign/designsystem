@@ -21,12 +21,15 @@ import { Modal } from '../../services/modal.interfaces';
 })
 export class ModalCompactWrapperComponent implements Modal, OnInit {
   scrollY: number = Math.abs(window.scrollY);
+  scrollDisabled = false;
   @Input() config: ModalConfig;
   componentPropsInjector: Injector;
 
   private ionModalElement: HTMLIonModalElement;
   private readonly ionModalDidPresent = new Subject<void>();
+  private readonly ionModalWillDismiss = new Subject<void>();
   readonly didPresent = this.ionModalDidPresent.toPromise();
+  readonly willClose = this.ionModalWillDismiss.toPromise();
 
   private _ionPageReset = false;
   @HostBinding('class.ion-page')
@@ -39,6 +42,7 @@ export class ModalCompactWrapperComponent implements Modal, OnInit {
   ngOnInit(): void {
     this.ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
     this.listenForIonModalDidPresent();
+    this.listenForIonModalWillDismiss();
     this.componentPropsInjector = Injector.create({
       providers: [{ provide: COMPONENT_PROPS, useValue: this.config.componentProps }],
       parent: this.injector,
@@ -50,6 +54,15 @@ export class ModalCompactWrapperComponent implements Modal, OnInit {
       this.ionModalElement.addEventListener('ionModalDidPresent', () => {
         this.ionModalDidPresent.next();
         this.ionModalDidPresent.complete();
+      });
+    }
+  }
+
+  private listenForIonModalWillDismiss() {
+    if (this.ionModalElement) {
+      this.ionModalElement.addEventListener('ionModalWillDismiss', () => {
+        this.ionModalWillDismiss.next();
+        this.ionModalWillDismiss.complete();
       });
     }
   }

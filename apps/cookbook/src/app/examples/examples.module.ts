@@ -13,6 +13,7 @@ import { ItemExampleModule } from './item-example/item-example.module';
 import { DropdownExampleModule } from './dropdown-example/dropdown-example.module';
 import { SegmentedControlExampleModule } from './segmented-control-example/segmented-control-example.module';
 import { RadioButtonExampleModule } from './radio-button-example/radio-button-example.module';
+import { ChartExampleModule } from './chart-example/chart-example.module';
 
 @NgModule({
   imports: [
@@ -24,6 +25,7 @@ import { RadioButtonExampleModule } from './radio-button-example/radio-button-ex
     DropdownExampleModule,
     SegmentedControlExampleModule,
     RadioButtonExampleModule,
+    ChartExampleModule,
   ],
   declarations: COMPONENT_DECLARATIONS,
   exports: [
@@ -34,6 +36,7 @@ import { RadioButtonExampleModule } from './radio-button-example/radio-button-ex
     DropdownExampleModule,
     SegmentedControlExampleModule,
     RadioButtonExampleModule,
+    ChartExampleModule,
   ],
   providers: [PROVIDER_DECLARATIONS],
   entryComponents: [

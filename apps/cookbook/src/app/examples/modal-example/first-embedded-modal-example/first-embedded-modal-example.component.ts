@@ -82,6 +82,14 @@ export class FirstEmbeddedModalExampleComponent {
     this.modal.scrollToTop(KirbyAnimation.Duration.LONG);
   }
 
+  disableScroll() {
+    this.modal.scrollDisabled = true;
+  }
+
+  enableScroll() {
+    this.modal.scrollDisabled = false;
+  }
+
   close() {
     let someTestData: number = Math.PI;
     this.modal.close(someTestData);
