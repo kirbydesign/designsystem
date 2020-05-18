@@ -24,14 +24,11 @@ const RADIUS_MAP = {
 })
 export class ProgressCircleComponent implements AfterViewInit {
   @Input() value: number = 0;
-
   @Input() size: 'sm' | 'md' | 'lg';
-
   @Input() themeColor: ThemeColor;
 
   private hasElementBeenVisible = false;
-
-  observer: IntersectionObserver;
+  private observer: IntersectionObserver;
 
   constructor(private elementRef: ElementRef, private changeDetectorRef: ChangeDetectorRef) {}
 
