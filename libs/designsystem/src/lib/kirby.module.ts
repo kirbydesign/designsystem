@@ -7,6 +7,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { InfiniteScrollDirective } from './components/list/directives/infinite-scroll.directive';
 import { ModalWrapperComponent } from './components/modal/modal-wrapper/modal-wrapper.component';
 import { ModalCompactWrapperComponent } from './components/modal/modal-wrapper/compact/modal-compact-wrapper.component';
+import { ModalFooterComponent } from './components/modal/footer/modal-footer.component';
 import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';
 import { FullscreenLoadingOverlayComponent } from './components/loading-overlay/fullscreen-loading-overlay/fullscreen-loading-overlay.component';
 import { LoadingOverlayComponent } from './components/loading-overlay/loading-overlay.component';
@@ -28,6 +29,7 @@ import { CardFooterComponent } from './components/card/card-footer/card-footer.c
 import { CardHeaderComponent } from './components/card/card-header/card-header.component';
 import { CardComponent } from './components/card/card.component';
 import { ChartComponent } from './components/chart/chart.component';
+import { StockChartComponent } from './components/stock-chart/stock-chart.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { ChipComponent } from './components/chip/chip.component';
 import { EmptyStateComponent } from './components/empty-state/empty-state.component';
@@ -49,7 +51,6 @@ import { ActionSheetHelper } from './components/modal/services/action-sheet.help
 import { AlertHelper } from './components/modal/services/alert.helper';
 import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
 import { ModalController } from './components/modal/services/modal.controller';
-import { IModalController } from './components/modal/services/modal.controller.interface';
 import { ModalHelper } from './components/modal/services/modal.helper';
 import { ComponentLoaderDirective } from './components/shared/component-loader.directive';
 import { SlideButtonComponent } from './components/slide-button/slide-button.component';
@@ -88,6 +89,7 @@ const exportedDeclarations = [
   ListHeaderComponent,
   ListFooterDirective,
   ChartComponent,
+  StockChartComponent,
   GridComponent,
   ComponentLoaderDirective,
   AvatarComponent,
@@ -96,6 +98,7 @@ const exportedDeclarations = [
   CalendarComponent,
   CheckboxComponent,
   ActionSheetComponent,
+  ModalFooterComponent,
   SegmentedControlComponent,
   ChipComponent,
   BadgeComponent,
@@ -144,8 +147,6 @@ const importedModules = [...exportedModules, OverlayModule];
 
 const providers = [
   ModalController,
-  // the provider below is used to prevent a cyclic reference problem in our modal components
-  { provide: IModalController, useExisting: ModalController },
   ActionSheetHelper,
   ModalHelper,
   AlertHelper,

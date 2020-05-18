@@ -14,6 +14,18 @@ ion-fab-button {
   height: 64px;
   user-select: none;
 
+  // Outline is applied on button border instead,
+  // to keep the rounded shape:
+  outline: none;
+
+  // Only apply focus ring if pointer device can hover
+  // (effectively desktop/mouse devices):
+  @include focus() {
+    --border-width: 1px;
+    --border-style: solid;
+    --border-color: #{$focus-ring-color};
+  }
+
   &[disabled] {
     --background: #{get-color('semi-light')};
     --box-shadow: none;

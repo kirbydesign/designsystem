@@ -1,22 +1,22 @@
 import {
-  Component,
-  ViewChild,
-  ElementRef,
-  Input,
-  Output,
-  EventEmitter,
-  OnInit,
   AfterViewInit,
-  OnChanges,
-  SimpleChanges,
-  LOCALE_ID,
+  Component,
+  ElementRef,
+  EventEmitter,
   Inject,
+  Input,
+  LOCALE_ID,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+  ViewChild,
 } from '@angular/core';
 import moment from 'moment';
 
-import { CalendarHelper } from './helpers/calendar.helper';
-import { CalendarOptions } from './helpers/calendar-options.model';
 import { CalendarCell } from './helpers/calendar-cell.model';
+import { CalendarOptions } from './helpers/calendar-options.model';
+import { CalendarHelper } from './helpers/calendar.helper';
 
 interface CalendarDay {
   isCurrentMonth: boolean;
@@ -36,30 +36,67 @@ interface CalendarDay {
 export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   @ViewChild('calendarContainer', { static: false }) calendarContainer: ElementRef;
   @Output() dateChange = new EventEmitter<Date>();
+  @Input() timezone: 'local' | 'UTC' = 'local';
   @Input() disableWeekends = false;
   @Input() disablePastDates = false;
   @Input() disableFutureDates = false;
-  @Input() disabledDates: Date[];
-  @Input() minDate: Date;
-  @Input() maxDate: Date;
   @Input() alwaysEnableToday = false;
   public month: CalendarCell[][];
   public weekDays: string[];
-  private activeMonth: moment.Moment;
   private selectedDay: CalendarCell;
+  // NOTE: Internally, all objects wrapping timestamps (i.e. Date and moment.Moment)
+  // are normalized to point to local timezone midnight, regardless of the timezone
+  // setting.
+  private activeMonth: moment.Moment;
   private _selectedDate: Date;
+  private _disabledDates: Date[];
+  private _todayDate: Date;
+  private _minDate: Date;
+  private _maxDate: Date;
 
   get selectedDate(): Date {
     return this._selectedDate;
   }
 
-  @Input() set selectedDate(value: Date) {
+  @Input() set selectedDate(valueLocalOrUTC: Date) {
+    const value = this.normalizeDate(valueLocalOrUTC);
     this.setActiveMonth(value);
     if (this.hasDateChanged(value, this._selectedDate)) {
       this.onSelectedDateChange(value);
       this._selectedDate = value;
-      this.dateChange.emit(this._selectedDate);
     }
+  }
+
+  get disabledDates(): Date[] {
+    return this._disabledDates;
+  }
+
+  @Input() set disabledDates(value: Date[]) {
+    this._disabledDates = this.normalizeDates(value);
+  }
+
+  get todayDate(): Date {
+    return this._todayDate;
+  }
+
+  @Input() set todayDate(value: Date) {
+    this._todayDate = this.normalizeDate(value);
+  }
+
+  get minDate(): Date {
+    return this._minDate;
+  }
+
+  @Input() set minDate(value: Date) {
+    this._minDate = this.normalizeDate(value);
+  }
+
+  get maxDate(): Date {
+    return this._maxDate;
+  }
+
+  @Input() set maxDate(value: Date) {
+    this._maxDate = this.normalizeDate(value);
   }
 
   get activeMonthName(): string {
@@ -99,7 +136,9 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
       changes.disableFutureDates ||
       changes.disabledDates ||
       changes.minDate ||
-      changes.maxDate
+      changes.maxDate ||
+      changes.todayDate ||
+      changes.timezone
     ) {
       this.refreshActiveMonth();
       this.calendarHelper.update(this.getHelperOptions());
@@ -111,6 +150,37 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
       this.activeMonth = moment(date).startOf('month');
       this.refreshActiveMonth();
       this.calendarHelper.update(this.getHelperOptions());
+    }
+  }
+
+  // For leniency, the component will accept any Date that points to either UTC midnight
+  // or to local timezone midnight although we will internally normalize the representation
+  // of all received dates to point to local timezone midnight.
+  // We currently log no warnings if the date doesn't match the timezone setting or
+  // if it doesn't point to midnight.
+  private normalizeDate(dateLocalOrUTC: Date) {
+    if (dateLocalOrUTC) {
+      // prettier-ignore
+      if (moment(dateLocalOrUTC).startOf('day').isSame(moment(dateLocalOrUTC))) {
+        // date is local timezone midnight
+        return dateLocalOrUTC;
+      
+      // prettier-ignore
+      } else if (moment.utc(dateLocalOrUTC).startOf('day').isSame(moment.utc(dateLocalOrUTC))) {
+        // the date is a utc midnight; create the equivalent local timezone midnight date
+        const utcMidnightMoment = moment.utc(dateLocalOrUTC);
+        return moment(utcMidnightMoment.format('YYYY-MM-DD')).toDate();
+      
+      } else {
+        // does not point to midnight so best assumption is to chop off the time part
+        return moment(dateLocalOrUTC).startOf('day').toDate();
+      }
+    }
+  }
+
+  private normalizeDates(datesLocalOrUTC: Date[]) {
+    if (datesLocalOrUTC) {
+      return datesLocalOrUTC.map(this.normalizeDate);
     }
   }
 
@@ -171,7 +241,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
     const startOfFirstWeek = monthStart.clone().startOf('isoWeek');
     const endOfLastWeek = monthEnd.clone().endOf('isoWeek');
     const totalDayCount = endOfLastWeek.diff(startOfFirstWeek, 'days') + 1;
-    const today = moment().startOf('day');
+    const today = moment(this.todayDate ? this.todayDate : undefined).startOf('day');
     const daysArray = Array.from(Array(totalDayCount).keys());
 
     const days: CalendarCell[] = daysArray.map((number) => {
@@ -269,7 +339,17 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
         .clone()
         .date(newDay.date)
         .toDate();
-      this.selectedDate = selectedDate;
+      this.onSelectedDateChange(selectedDate);
+      this._selectedDate = selectedDate;
+
+      if (this.timezone === 'local') {
+        // emit as local time midnight
+        this.dateChange.emit(selectedDate);
+      } else {
+        // emit as equivalent date in utc midnight
+        const utcMidnightDate = moment.utc(moment(selectedDate).format('YYYY-MM-DD')).toDate();
+        this.dateChange.emit(utcMidnightDate);
+      }
     }
   }
 
@@ -280,10 +360,6 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
 
   public changeMonth(index: number) {
     this.changeActiveView(index, 'months');
-  }
-
-  public changeYear(index: number) {
-    this.changeActiveView(index, 'year');
   }
 
   private changeActiveView(index: number, unit: moment.unitOfTime.Base) {

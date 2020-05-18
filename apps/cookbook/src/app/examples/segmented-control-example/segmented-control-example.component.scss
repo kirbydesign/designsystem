@@ -2,27 +2,23 @@
 
 :host {
   display: block;
-  height: 100%;
+  min-height: 100%;
   background: get-color('background-color');
   padding: size('s');
 
   @include media('>=medium') {
     padding: size('l');
   }
-}
 
-kirby-segmented-control {
-  margin-bottom: size('m');
-}
+  h3 {
+    font-size: font-size('xs');
+    color: get-color('semi-dark');
+    text-transform: uppercase;
+    margin-top: size('xs');
+    margin-bottom: size('xxxs');
+  }
 
-.segment-data {
-  padding: size('xxl');
-  text-align: center;
-  background: get-color('white');
-}
-
-fieldset {
-  display: inline-block;
-  margin-top: size('l');
-  margin-bottom: size('s');
+  .example {
+    margin-bottom: size('s');
+  }
 }

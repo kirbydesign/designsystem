@@ -1,18 +1,22 @@
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
+import { ModalController } from '../modal';
 
 describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
 
   beforeEach(async(() => {
+    const modalControllerSpy = jasmine.createSpyObj('ModalController', [
+      'registerPresentingElement',
+    ]);
+
     TestBed.configureTestingModule({
       imports: [NoopAnimationsModule],
       declarations: [AppComponent],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      providers: [{ provide: ModalController, useValue: modalControllerSpy }],
     }).compileComponents();
   }));
 

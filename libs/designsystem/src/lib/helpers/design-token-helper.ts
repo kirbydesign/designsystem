@@ -34,6 +34,10 @@ export class DesignTokenHelper {
     return styles.lineHeight[key];
   }
 
+  public static backgroundColor(): string {
+    return ColorHelper.getBackgroundColor();
+  }
+
   public static borderRadius(): string {
     return styles.borderRadius;
   }
@@ -41,9 +45,22 @@ export class DesignTokenHelper {
   public static borderRadiusRound(): string {
     return styles.borderRadiusRound;
   }
+
+  public static alertMaxWidth(): string {
+    return styles.alertMaxWidth;
+  }
+
+  public static compactModalMaxWidth(): string {
+    return styles.compactModalMaxWidth;
+  }
 }
 
-export type ThemeColorExtended = ThemeColor | 'black' | 'semi-light' | 'semi-dark';
+export type ThemeColorExtended =
+  | ThemeColor
+  | 'black'
+  | 'semi-light'
+  | 'semi-dark'
+  | 'background-color';
 
 export type ThemeColorVariant = 'tint' | 'shade' | 'contrast';
 

@@ -1,16 +1,33 @@
-import { Component, OnInit, Input, OnChanges, ElementRef, ViewChild, Inject } from '@angular/core';
-import { Options } from 'highcharts';
+import {
+  Component,
+  OnInit,
+  Input,
+  OnChanges,
+  ElementRef,
+  Inject,
+  SimpleChanges,
+} from '@angular/core';
+import {
+  Options,
+  PlotSeriesDataLabelsOptions,
+  XAxisBreaksOptions,
+  XAxisOptions,
+  YAxisOptions,
+} from 'highcharts';
 
 import { ChartHelper } from './chart-helper';
-import { DonutOptions, DONUT_OPTIONS } from './options/donut';
-import { AreaSplineOptions, AREASPLINE_OPTIONS } from './options/areaspline';
-import { TimeSeriesOptions, TIMESERIES_OPTIONS } from './options/timeseries';
-import { ACTIVITYGAUGE_OPTIONS, ActivityGaugeOptions } from './options/activitygauge';
 import { ChartType } from './chart-type';
+import { DONUT_OPTIONS, DonutOptions } from './options/donut';
+import { AREASPLINE_OPTIONS, AreaSplineOptions } from './options/areaspline';
+import { TIMESERIES_OPTIONS, TimeSeriesOptions } from './options/timeseries';
+import { ACTIVITYGAUGE_OPTIONS, ActivityGaugeOptions } from './options/activitygauge';
+import { mergeDeep } from '../../helpers/deep-merge';
+import { columnOptions } from './options/column';
+import { barOptions } from './options/bar';
 
 @Component({
   selector: 'kirby-chart',
-  templateUrl: './chart.component.html',
+  template: '',
   styleUrls: ['./chart.component.scss'],
   providers: [
     ChartHelper,
@@ -20,134 +37,204 @@ import { ChartType } from './chart-type';
     { provide: ACTIVITYGAUGE_OPTIONS, useValue: ActivityGaugeOptions },
   ],
 })
-export class ChartComponent implements OnInit, OnChanges {
+export class ChartComponent implements OnChanges {
   @Input() data = [];
-  @Input() breaks: Array<Highcharts.XAxisBreaksOptions> = [];
+  @Input() categories: string[] = [];
+  @Input() breaks: Array<XAxisBreaksOptions> = [];
   @Input() height = 300;
   @Input() type: ChartType = ChartType.PIE;
   @Input() description = '';
   @Input() showDataLabels = true;
-  @ViewChild('chartContainer', { static: true }) chartContainer: ElementRef;
-  options: Options = {};
+  @Input() options: Options;
+  mergedOptions: Options = {
+    accessibility: {},
+  };
 
   constructor(
     private chartHelper: ChartHelper,
+    private hostElement: ElementRef,
     @Inject(DONUT_OPTIONS) public donutOptions: Options,
     @Inject(AREASPLINE_OPTIONS) public areasplineOptions: Options,
     @Inject(TIMESERIES_OPTIONS) public timeSeriesOptions: Options,
     @Inject(ACTIVITYGAUGE_OPTIONS) public activitygaugeOptions: Options
-  ) {}
-
-  ngOnInit() {
-    this.setupChartType();
-    this.updateProperties();
-    this.chartHelper.init(this.options, this.chartContainer);
+  ) {
+    this.chartHelper.init(this.hostElement);
   }
 
-  ngOnChanges() {
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.type) {
+      this.setupChartType();
+    }
     this.updateProperties();
-    this.chartHelper.updateChart(this.options);
+    this.chartHelper.renderChart(this.mergedOptions);
   }
 
   setupChartType() {
     switch (this.type) {
       case ChartType.DONUT: {
-        this.options = this.donutOptions;
-        this.options.chart.type = ChartType.PIE;
-        this.options.plotOptions.pie.innerSize = '50%';
+        this.mergedOptions = this.donutOptions;
+        this.mergedOptions.chart.type = ChartType.PIE;
+        this.mergedOptions.plotOptions.pie.innerSize = '50%';
         break;
       }
       case ChartType.PIE: {
-        this.options = this.donutOptions;
-        this.options.chart.type = this.type;
-        this.options.plotOptions.pie.innerSize = '0%';
+        this.mergedOptions = this.donutOptions;
+        this.mergedOptions.chart.type = this.type;
+        this.mergedOptions.plotOptions.pie.innerSize = '0%';
         break;
       }
       case ChartType.AREASPLINE: {
-        this.options = this.areasplineOptions;
-        this.options.chart.type = this.type;
+        this.mergedOptions = this.areasplineOptions;
+        this.mergedOptions.chart.type = this.type;
         break;
       }
       case ChartType.TIMESERIES: {
-        this.options = this.timeSeriesOptions;
-        this.options.chart.type = this.type;
+        this.mergedOptions = this.timeSeriesOptions;
+        this.mergedOptions.chart.type = this.type;
         break;
       }
       case ChartType.ACTIVITYGAUGE: {
-        this.options = this.activitygaugeOptions;
-        this.options.chart.type = this.type;
+        this.mergedOptions = this.activitygaugeOptions;
+        this.mergedOptions.chart.type = this.type;
+        break;
+      }
+      case ChartType.COLUMN: {
+        this.mergedOptions = columnOptions;
+        this.mergedOptions.chart.type = this.type;
+        break;
+      }
+      case ChartType.BAR: {
+        this.mergedOptions = barOptions;
+        this.mergedOptions.chart.type = this.type;
         break;
       }
     }
   }
 
   updateProperties() {
-    if (this.options.chart) {
-      this.options.chart.height = this.height;
-      this.options.chart.description = this.description;
-      switch (this.options.chart.type) {
-        case ChartType.PIE:
-          this.options.plotOptions.pie.dataLabels.enabled = this.showDataLabels;
-        /* falls through */
-        case ChartType.DONUT: {
-          this.options.series = [
-            {
-              type: 'pie',
-              data: this.data as Array<Highcharts.SeriesPieDataOptions>,
-            },
-          ];
-          break;
-        }
-        case ChartType.AREASPLINE: {
-          this.options.series = [
-            {
-              type: 'areaspline',
-              data: this.data as Array<Highcharts.SeriesAreasplineDataOptions>,
-            },
-          ];
-          break;
-        }
-        case ChartType.TIMESERIES: {
-          this.options.series = [
-            {
-              type: 'area',
-              data: this.data as Array<Highcharts.SeriesAreaDataOptions>,
-            },
-          ];
-          this.options.xAxis = {
-            ...this.options.xAxis,
-            breaks: this.breaks,
-          };
-          break;
-        }
-        case ChartType.ACTIVITYGAUGE: {
-          const data = this.data[0];
-
-          this.options.title.text = data.title;
-          this.options.subtitle.text = data.subtitle;
-
-          if (data.paneBackgroundColor) {
-            this.options.pane.background = [
-              {
-                ...this.options.pane.background[0],
-                backgroundColor: data.paneBackgroundColor,
-              },
-            ];
-          }
-          if (data.color) {
-            this.options.title.style.color = data.color;
-            this.options.subtitle.style.color = data.color;
-          }
-          this.options.series = [
-            {
-              type: 'solidgauge',
-              data: data.series as Array<Highcharts.SeriesGaugeDataOptions>,
-            },
-          ];
-
-          break;
-        }
+    this.mergedOptions.chart.height = this.height;
+    this.mergedOptions.accessibility.description = this.description;
+    switch (this.mergedOptions.chart.type) {
+      case ChartType.PIE:
+      case ChartType.DONUT: {
+        this.setPieInput();
+        break;
+      }
+      case ChartType.AREASPLINE: {
+        this.setSeries('areaspline');
+        break;
+      }
+      case ChartType.TIMESERIES: {
+        this.setTimeseriesInput();
+        break;
+      }
+      case ChartType.ACTIVITYGAUGE: {
+        this.setActivitygaugeInput();
+        break;
+      }
+      case ChartType.COLUMN: {
+        this.setColumnInput();
+        break;
+      }
+      case ChartType.BAR: {
+        this.setBarInput();
+        break;
       }
     }
+    if (!!this.options) {
+      this.mergedOptions = mergeDeep(this.mergedOptions, this.options);
+    }
+  }
+
+  private setPieInput() {
+    (this.mergedOptions.plotOptions.pie
+      .dataLabels as PlotSeriesDataLabelsOptions).enabled = this.showDataLabels;
+    this.setSeries('pie');
+  }
+
+  private setBarInput() {
+    const dataMaxValue = Math.max(...this.data);
+    this.mergedOptions.series = [
+      {
+        type: 'bar',
+        name: 'InvisibleClickReceiver',
+        data: this.data.map((dataEntry, idx) => dataMaxValue - dataEntry),
+        edgeColor: 'rgb(255, 255, 255, 0)',
+        opacity: 0,
+      },
+      {
+        type: 'bar',
+        data: this.data,
+      },
+    ];
+    (this.mergedOptions.xAxis as XAxisOptions).categories = this.categories;
+  }
+
+  private setColumnInput() {
+    this.mergedOptions.series = [
+      {
+        type: 'column',
+        data: this.data,
+      },
+    ];
+    const dataMaxValue = Math.max(...this.data);
+    ((this.mergedOptions.yAxis as YAxisOptions).tickPositioner = () => {
+      var positions = [0, dataMaxValue];
+      return positions;
+    }),
+      (this.mergedOptions.series = [
+        {
+          type: 'column',
+          name: 'InvisibleClickReceiver',
+          data: this.data.map((_, idx) => dataMaxValue - this.data[idx]),
+          opacity: 0,
+        },
+        {
+          type: 'column',
+          data: this.data,
+        },
+      ]);
+    (this.mergedOptions.xAxis as XAxisOptions).categories = this.categories;
+  }
+
+  private setActivitygaugeInput() {
+    const data = this.data[0];
+    this.mergedOptions.title.text = data.title;
+    this.mergedOptions.subtitle.text = data.subtitle;
+    if (data.paneBackgroundColor) {
+      this.mergedOptions.pane.background = [
+        {
+          ...this.mergedOptions.pane.background[0],
+          backgroundColor: data.paneBackgroundColor,
+        },
+      ];
+    }
+    if (data.color) {
+      this.mergedOptions.title.style.color = data.color;
+      this.mergedOptions.subtitle.style.color = data.color;
+    }
+    this.mergedOptions.series = [
+      {
+        type: 'solidgauge',
+        data: data.series,
+      },
+    ];
+  }
+
+  private setTimeseriesInput() {
+    this.setSeries('area');
+    this.mergedOptions.xAxis = {
+      ...this.mergedOptions.xAxis,
+      breaks: this.breaks,
+    };
+  }
+
+  private setSeries(type) {
+    this.mergedOptions.series = [
+      {
+        type,
+        data: this.data,
+      },
+    ];
   }
 }

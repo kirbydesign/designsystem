@@ -39,7 +39,8 @@ import { CardComponent } from '../card/card.component';
 })
 export class DropdownComponent
   implements AfterContentChecked, AfterViewInit, OnDestroy, ControlValueAccessor {
-  static readonly OPEN_DELAY_IN_MS = 15;
+  static readonly OPEN_DELAY_IN_MS = 100;
+  private state: 'closed' | 'opening' | 'open' = 'closed';
 
   private _items: string[] | any[] = [];
   get items(): string[] | any[] {
@@ -119,10 +120,14 @@ export class DropdownComponent
   _role = 'listbox';
 
   @HostBinding('class.is-opening')
-  _isOpening: boolean;
+  get _isOpening(): boolean {
+    return this.state === 'opening';
+  }
 
   @HostBinding('class.is-open')
-  isOpen = false;
+  get isOpen(): boolean {
+    return this.state === 'open';
+  }
 
   @HostBinding('class.align-end')
   _alignEnd: boolean;
@@ -150,6 +155,7 @@ export class DropdownComponent
 
   private itemClickUnlisten: () => void;
   private intersectionObserverRef: IntersectionObserver;
+  private showDropdownTimeoutId;
 
   constructor(
     private renderer: Renderer2,
@@ -199,9 +205,13 @@ export class DropdownComponent
       };
       const callback: IntersectionObserverCallback = (entries) => {
         // Only apply alignment when opening:
-        if (!this._isOpening) {
+        if (this.state !== 'opening') {
           return;
         }
+
+        // Cancel any pending timer to show dropdown:
+        clearTimeout(this.showDropdownTimeoutId);
+
         const entry = entries[0];
         const isVisible = entry.boundingClientRect.width > 0;
         if (isVisible && entry.intersectionRatio < 1) {
@@ -226,6 +236,7 @@ export class DropdownComponent
               this._vertical = 'up';
             }
           }
+          this.showDropdown();
           this.changeDetectorRef.detectChanges();
         }
       };
@@ -239,13 +250,20 @@ export class DropdownComponent
       return;
     }
     if (!this.isOpen) {
-      this._isOpening = true;
-      setTimeout(() => {
-        this.isOpen = true;
-        this._isOpening = false;
-        this.scrollItemIntoView(this.selectedIndex);
-        this.changeDetectorRef.markForCheck();
-      }, DropdownComponent.OPEN_DELAY_IN_MS);
+      this.state = 'opening';
+      // ensures that the dropdown is opened in case the IntersectionObserverCallback isn't invoked
+      this.showDropdownTimeoutId = setTimeout(
+        () => this.showDropdown(),
+        DropdownComponent.OPEN_DELAY_IN_MS
+      );
+    }
+  }
+
+  private showDropdown() {
+    if (this.state === 'opening') {
+      this.state = 'open';
+      this.scrollItemIntoView(this.selectedIndex);
+      this.changeDetectorRef.markForCheck();
     }
   }
 
@@ -254,8 +272,7 @@ export class DropdownComponent
       return;
     }
     if (this.isOpen) {
-      this._isOpening = false;
-      this.isOpen = false;
+      this.state = 'closed';
     }
   }
 

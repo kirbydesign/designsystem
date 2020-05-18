@@ -30,7 +30,7 @@ describe('ButtonComponent in Kirby Page', () => {
   let spectator: SpectatorHost<PageComponent>;
   const createHost = createHostFactory({
     component: PageComponent,
-    imports: [IonicModule.forRoot(), RouterTestingModule],
+    imports: [IonicModule.forRoot({ mode: 'ios', _testing: true }), RouterTestingModule],
     declarations: [
       ButtonComponent,
       PageContentComponent,
@@ -92,11 +92,12 @@ describe('ButtonComponent in Kirby Page', () => {
       });
     });
 
-    it('should render without border', async () => {
+    it('should render with transparent border', async () => {
       await TestHelper.whenHydrated(ionToolbar);
       expect(actionButtonInHeader).toHaveComputedStyle({
-        'border-width': '0px',
-        'border-style': 'none',
+        'border-width': '1px',
+        'border-style': 'solid',
+        'border-color': 'transparent',
       });
     });
   });
@@ -130,11 +131,12 @@ describe('ButtonComponent in Kirby Page', () => {
       });
     });
 
-    it('should render without border', async () => {
+    it('should render with transparent border', async () => {
       await TestHelper.whenHydrated(ionContent);
       expect(actionButtonInPage).toHaveComputedStyle({
-        'border-width': '0px',
-        'border-style': 'none',
+        'border-width': '1px',
+        'border-style': 'solid',
+        'border-color': 'transparent',
       });
     });
   });
@@ -159,11 +161,12 @@ describe('ButtonComponent in Kirby Page', () => {
       });
     });
 
-    it('should render without border', async () => {
+    it('should render with transparent border', async () => {
       await TestHelper.whenHydrated(ionContent);
       expect(normalButtonInPage).toHaveComputedStyle({
-        'border-width': '0px',
-        'border-style': 'none',
+        'border-width': '1px',
+        'border-style': 'solid',
+        'border-color': 'transparent',
       });
     });
 
@@ -181,7 +184,7 @@ describe('ButtonComponent in kirby empty state', () => {
   let actionButtonInEmptyState: HTMLButtonElement;
   const createHost = createHostFactory({
     component: EmptyStateComponent,
-    imports: [IonicModule.forRoot(), RouterTestingModule],
+    imports: [IonicModule.forRoot({ mode: 'ios', _testing: true }), RouterTestingModule],
     declarations: [ButtonComponent, IconComponent],
   });
 

@@ -57,9 +57,11 @@ ion-item-divider {
 }
 
 ion-item-sliding {
-  // backface-visibility and transform, to fix clipping issue on iOS see https://stackoverflow.com/a/16681137 and https://github.com/kirbydesign/designsystem/issues/863
-  backface-visibility: hidden;
-  transform: translate3d(0, 0, 0);
+  &.item-sliding-active-slide {
+    // backface-visibility and transform, to fix clipping issue on iOS see https://stackoverflow.com/a/16681137 and https://github.com/kirbydesign/designsystem/issues/863
+    backface-visibility: hidden;
+    transform: translate3d(0, 0, 0);
+  }
 
   $list-colors: ('light'); // add supported list item theme colors here
   @each $color-name, $color-value in $list-colors {

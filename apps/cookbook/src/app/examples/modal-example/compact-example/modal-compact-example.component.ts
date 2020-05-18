@@ -1,14 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, Optional, SkipSelf } from '@angular/core';
 
-import { ModalController } from '@kirbydesign/designsystem';
+import { Modal } from '@kirbydesign/designsystem';
 
 @Component({
   templateUrl: './modal-compact-example.component.html',
 })
 export class ModalCompactExampleComponent {
-  constructor(private modalController: ModalController) {}
+  constructor(@Optional() @SkipSelf() private modal: Modal) {}
 
   onHideModal() {
-    this.modalController.hideTopmost();
+    this.modal.close();
   }
 }

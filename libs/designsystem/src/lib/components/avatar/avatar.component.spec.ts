@@ -16,7 +16,7 @@ describe('AvatarComponent', () => {
   const createHost = createHostFactory({
     component: AvatarComponent,
     declarations: [IconComponent, SizeDirective],
-    imports: [IonicModule.forRoot()],
+    imports: [IonicModule.forRoot({ mode: 'ios', _testing: true })],
   });
 
   it('should create', () => {

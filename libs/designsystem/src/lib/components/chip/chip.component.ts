@@ -7,8 +7,9 @@ import { Component, Input, HostBinding } from '@angular/core';
 })
 export class ChipComponent {
   @Input() text: string;
+
   @Input()
+  @HostBinding('attr.aria-selected')
   @HostBinding('class.is-selected')
   isSelected: boolean;
-  constructor() {}
 }

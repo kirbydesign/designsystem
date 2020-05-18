@@ -1,18 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, AfterViewInit } from '@angular/core';
 
+import { ModalController } from '@kirbydesign/designsystem';
 import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
-
-declare var require: any;
 
 @Component({
   selector: 'cookbook-modal-showcase',
   templateUrl: './modal-showcase.component.html',
+  styleUrls: ['./modal-showcase.component.scss'],
   preserveWhitespaces: true,
 })
-export class ModalShowcaseComponent {
-  exampleHtml: string = require('!raw-loader!../../examples/modal-example/modal-example.component.html')
-    .default;
-  properties: ShowcaseProperty[] = [
+export class ModalShowcaseComponent implements AfterViewInit {
+  constructor(
+    private elementRef: ElementRef<HTMLElement>,
+    private modalController: ModalController
+  ) {}
+
+  ngAfterViewInit(): void {
+    this.modalController.registerPresentingElement(
+      this.elementRef.nativeElement.closest('cookbook-home')
+    );
+  }
+
+  scrollTo(target: Element) {
+    target.scrollIntoView({ behavior: 'smooth' });
+    return false;
+  }
+
+  configProperties: ShowcaseProperty[] = [
     {
       name: 'title',
       description: 'The header of the modal',
@@ -40,17 +54,38 @@ export class ModalShowcaseComponent {
       inputValues: ['{iconName: string, action: Function}'],
     },
     {
-      name: 'dim',
-      description:
-        'The transparency of the background of the modal. 0 is fully transparent, while 1 is fully visible.',
-      defaultValue: '0.5',
-      inputValues: ['number (0..1)'],
-    },
-    {
       name: 'componentProps',
       description: 'The data to pass to the modal component.',
       defaultValue: '',
       inputValues: ['undefined | { [key: string]: any; }'],
     },
   ];
+
+  properties: ShowcaseProperty[] = [
+    {
+      name: 'scrollDisabled',
+      description: 'Disable scrolling of the modal',
+      inputValues: ['true', 'false'],
+      defaultValue: 'false',
+    },
+  ];
+
+  events: ShowcaseProperty[] = [
+    {
+      name: 'didPresent',
+      description: 'Emitted when the modal is ready and the enter animation has finished',
+      inputValues: ['Promise<void>'],
+    },
+    {
+      name: 'willClose',
+      description: 'Emitted when the user closes the modal or modal.close() method is called',
+      inputValues: ['Promise<void>'],
+    },
+  ];
+
+  eventColumns = {
+    Name: 'Name',
+    Description: 'Description',
+    Type: 'Signature',
+  };
 }

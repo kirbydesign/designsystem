@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 
-import { IModalController } from './modal.controller.interface';
 import { ModalHelper } from './modal.helper';
 import { AlertHelper } from './alert.helper';
 import { ActionSheetHelper } from './action-sheet.helper';
@@ -8,12 +7,12 @@ import { ActionSheetConfig } from '../action-sheet/config/action-sheet-config';
 import { AlertConfig } from '../alert/config/alert-config';
 import { KirbyAnimation } from '../../../animation/kirby-animation';
 import { ModalConfig } from '../modal-wrapper/config/modal-config';
-import { Modal } from './modal.model';
+import { Overlay } from './modal.interfaces';
 
 @Injectable()
-export class ModalController implements IModalController {
-  private modals: Modal[] = [];
-  private readonly noModalRegisteredErrorMessage = 'No modal windows are currently registered';
+export class ModalController {
+  private overlays: Overlay[] = [];
+  private readonly noOverlayRegisteredErrorMessage = 'No modal overlays are currently registered';
 
   constructor(
     private modalHelper: ModalHelper,
@@ -21,84 +20,86 @@ export class ModalController implements IModalController {
     private alertHelper: AlertHelper
   ) {}
 
-  public showModal(config: ModalConfig, onCloseModal?: (data?: any) => void): void {
-    const modalCloseEvent: Promise<any> = this.modalHelper.showModalWindow(
-      config,
-      this.register.bind(this)
-    );
-    modalCloseEvent.then((data) => {
-      this.forgetTopmost();
-      if (onCloseModal) {
-        // Since Ionic wraps the return value in an object, which contains data as a property, we need to return data.data
-        // We don't expect this on native, hence we return just data
-        onCloseModal(typeof data === 'object' && 'data' in data ? data.data : data);
-      }
-    });
-  }
-
-  public showActionSheet(config: ActionSheetConfig, onCloseModal?: (data?: any) => void): void {
-    this.actionSheetHelper.showActionSheet(config, this.register.bind(this)).then((data) => {
-      this.forgetTopmost();
-      if (onCloseModal) {
-        onCloseModal(typeof data === 'object' && 'data' in data ? data.data : data);
-      }
-    });
-  }
-
-  public showAlert(config: AlertConfig, onCloseModal?: (result: boolean) => void): void {
-    const modalCloseEvent: Promise<boolean> = this.alertHelper.showAlert(
-      config,
-      this.register.bind(this)
-    );
-
-    modalCloseEvent.then((selection: any) => {
-      this.forgetTopmost();
-
-      if (onCloseModal) {
-        onCloseModal(
-          typeof selection === 'object' && 'data' in selection ? selection.data : selection
-        );
-      }
-    });
-  }
-
-  public blurNativeWrapper(nativeElement: HTMLElement) {
-    this.modalHelper.blurNativeWrapper(nativeElement);
-  }
-
-  public register(modal: Modal): void {
-    this.modals.push(modal);
-  }
-
-  public hideTopmost(data?: any): void {
-    const modal = this.modals[this.modals.length - 1];
-    if (!modal) {
-      throw new Error(this.noModalRegisteredErrorMessage);
+  public async showModal(config: ModalConfig, onClose?: (data?: any) => void): Promise<void> {
+    if (config.hasOwnProperty('dim')) {
+      console.warn('ModalConfig.dim is deprecated - please remove from your configuration.');
     }
-    modal.close(data);
+    await this.showAndRegisterOverlay(() => this.modalHelper.showModalWindow(config), onClose);
   }
 
+  public async showActionSheet(
+    config: ActionSheetConfig,
+    onClose?: (data?: any) => void
+  ): Promise<void> {
+    await this.showAndRegisterOverlay(
+      () => this.actionSheetHelper.showActionSheet(config),
+      onClose
+    );
+  }
+
+  public async showAlert(config: AlertConfig, onClose?: (result: boolean) => void): Promise<void> {
+    await this.showAndRegisterOverlay(() => this.alertHelper.showAlert(config), onClose);
+  }
+
+  private async showAndRegisterOverlay(
+    showOverlay: () => Promise<Overlay>,
+    onCloseOverlay?: (data?: any) => void
+  ) {
+    const overlay = await showOverlay();
+    this.overlays.push(overlay);
+    overlay.onDidDismiss.then((event) => {
+      this.overlays.pop();
+      if (onCloseOverlay) {
+        onCloseOverlay(event.data);
+      }
+    });
+  }
+
+  public registerPresentingElement(element: HTMLElement) {
+    this.modalHelper.registerPresentingElement(element);
+  }
+
+  public async hideTopmost(data?: any): Promise<boolean> {
+    const overlay = this.overlays[this.overlays.length - 1];
+    if (!overlay) {
+      throw new Error(this.noOverlayRegisteredErrorMessage);
+    }
+    return overlay.dismiss(data);
+  }
+
+  /**
+   * @deprecated Will be removed in next major version. Inject Modal in embedded component and use Modal.scrollToTop instead.
+   */
   public scrollToTop(duration?: KirbyAnimation.Duration) {
-    const modal = this.modals[this.modals.length - 1];
-    if (!modal) {
-      throw new Error(this.noModalRegisteredErrorMessage);
+    console.warn(
+      'ModalController.scrollToTop is deprecated - please inject Modal in embedded component and use Modal.scrollToTop instead.'
+    );
+    const overlay = this.overlays[this.overlays.length - 1];
+    if (!overlay) {
+      throw new Error(this.noOverlayRegisteredErrorMessage);
     }
-    modal.scrollToTop(duration);
+    this.modalHelper.scrollToTop(this.noOverlayRegisteredErrorMessage, duration);
   }
 
+  /**
+   * @deprecated Will be removed in next major version. Inject Modal in embedded component and use Modal.scrollToBottom instead.
+   */
   public scrollToBottom(duration?: KirbyAnimation.Duration) {
-    const modal = this.modals[this.modals.length - 1];
-    if (!modal) {
-      throw new Error(this.noModalRegisteredErrorMessage);
+    console.warn(
+      'ModalController.scrollToBottom is deprecated - please inject Modal in embedded component and use Modal.scrollToBottom instead.'
+    );
+    const overlay = this.overlays[this.overlays.length - 1];
+    if (!overlay) {
+      throw new Error(this.noOverlayRegisteredErrorMessage);
     }
-    modal.scrollToBottom(duration);
+    this.modalHelper.scrollToBottom(this.noOverlayRegisteredErrorMessage, duration);
   }
 
-  private forgetTopmost(): void {
-    this.modals.pop();
-  }
-
-  public hideAll(): void {
-    this.modals.forEach((modal) => modal.close());
+  public async hideAll(): Promise<void> {
+    await Promise.all(
+      this.overlays.map(async (overlay) => {
+        await overlay.dismiss();
+      })
+    );
   }
 }

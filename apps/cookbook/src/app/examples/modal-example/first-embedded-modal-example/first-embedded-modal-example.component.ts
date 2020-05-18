@@ -1,23 +1,27 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, Optional, SkipSelf } from '@angular/core';
 
-import { ModalController, AlertConfig, ActionSheetConfig } from '@kirbydesign/designsystem';
+import { AlertConfig, ActionSheetConfig, Modal, ModalController } from '@kirbydesign/designsystem';
 import { ModalConfig, COMPONENT_PROPS } from '@kirbydesign/designsystem';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
 import { SecondEmbeddedModalExampleComponent } from '../second-embedded-modal-example/second-embedded-modal-example.component';
 import { KirbyAnimation } from '@kirbydesign/designsystem';
 
 @Component({
+  selector: 'cookbook-first-embedded-modal-example',
   templateUrl: './first-embedded-modal-example.component.html',
 })
 export class FirstEmbeddedModalExampleComponent {
   props: { [key: string]: any };
+  showFooter: boolean = true;
 
   constructor(
     @Inject(COMPONENT_PROPS) componentProps,
     private modalController: ModalController,
-    private toastController: ToastController
+    private toastController: ToastController,
+    @Optional() @SkipSelf() private modal: Modal
   ) {
     this.props = componentProps;
+    this.showFooter = this.props.showFooter;
   }
 
   showNestedModal() {
@@ -53,7 +57,7 @@ export class FirstEmbeddedModalExampleComponent {
       okBtn: 'I agree',
       cancelBtn: 'Take me back',
     };
-    this.modalController.showAlert(config);
+    this.modalController.showAlert(config, this.onAlertClose);
   }
 
   showNestedActionSheet() {
@@ -71,16 +75,24 @@ export class FirstEmbeddedModalExampleComponent {
   }
 
   scrollToBottom() {
-    this.modalController.scrollToBottom();
+    this.modal.scrollToBottom();
   }
 
   scrollToTop() {
-    this.modalController.scrollToTop(KirbyAnimation.Duration.LONG);
+    this.modal.scrollToTop(KirbyAnimation.Duration.LONG);
   }
 
-  onHideFirst() {
+  disableScroll() {
+    this.modal.scrollDisabled = true;
+  }
+
+  enableScroll() {
+    this.modal.scrollDisabled = false;
+  }
+
+  close() {
     let someTestData: number = Math.PI;
-    this.modalController.hideTopmost(someTestData);
+    this.modal.close(someTestData);
   }
 
   onSupplementaryActionSelect(args: any) {
@@ -90,5 +102,9 @@ export class FirstEmbeddedModalExampleComponent {
       durationInMs: 1500,
     };
     this.toastController.showToast(config);
+  }
+
+  onAlertClose(result?: boolean): void {
+    console.log(`Alert closed: ${result}`);
   }
 }

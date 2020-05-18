@@ -1,14 +1,13 @@
 import { Component, ElementRef, ViewChild, AfterViewInit, HostBinding, Input } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { IModalController } from '../services/modal.controller.interface';
-
 @Component({
   selector: 'kirby-alert',
   templateUrl: './alert.component.html',
   styleUrls: ['./alert.component.scss'],
 })
 export class AlertComponent implements AfterViewInit {
+  readonly BLUR_WRAPPER_DELAY_IN_MS = 50;
   @ViewChild('alertWrapper', { static: true }) private alertWrapper: ElementRef;
   private scrollY: number = Math.abs(window.scrollY);
 
@@ -36,10 +35,13 @@ export class AlertComponent implements AfterViewInit {
     return this._ionPageReset;
   }
 
-  constructor(private modalController: IModalController) {}
+  constructor(private elementRef: ElementRef<HTMLElement>) {}
 
   ngAfterViewInit(): void {
-    this.modalController.blurNativeWrapper(this.alertWrapper.nativeElement);
+    setTimeout(() => {
+      this.alertWrapper.nativeElement.focus();
+      this.alertWrapper.nativeElement.blur();
+    }, this.BLUR_WRAPPER_DELAY_IN_MS);
   }
 
   onFocusChange() {
@@ -48,10 +50,12 @@ export class AlertComponent implements AfterViewInit {
   }
 
   onCancel() {
-    this.modalController.hideTopmost(false);
+    const ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
+    ionModalElement && ionModalElement.dismiss(false);
   }
 
   onOk() {
-    this.modalController.hideTopmost(true);
+    const ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
+    ionModalElement && ionModalElement.dismiss(true);
   }
 }

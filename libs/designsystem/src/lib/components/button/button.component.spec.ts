@@ -37,10 +37,18 @@ describe('ButtonComponent', () => {
     expect(element).toHaveComputedStyle({ color: getColor('primary', 'contrast') });
   });
 
-  it('should render without border', () => {
+  it('should render with transparent border', () => {
     expect(element).toHaveComputedStyle({
-      'border-width': '0px',
-      'border-style': 'none',
+      'border-width': '1px',
+      'border-style': 'solid',
+      'border-color': 'transparent',
+    });
+  });
+
+  it('should render without outline', () => {
+    expect(element).toHaveComputedStyle({
+      'outline-width': '0px',
+      'outline-style': 'none',
     });
   });
 
@@ -78,10 +86,11 @@ describe('ButtonComponent', () => {
       });
     });
 
-    it('should render without border', () => {
+    it('should render with transparent border', () => {
       expect(element).toHaveComputedStyle({
-        'border-width': '0px',
-        'border-style': 'none',
+        'border-width': '1px',
+        'border-style': 'solid',
+        'border-color': 'transparent',
       });
     });
   });
@@ -104,10 +113,11 @@ describe('ButtonComponent', () => {
       });
     });
 
-    it('should render without border', () => {
+    it('should render with transparent border', () => {
       expect(element).toHaveComputedStyle({
-        'border-width': '0px',
-        'border-style': 'none',
+        'border-width': '1px',
+        'border-style': 'solid',
+        'border-color': 'transparent',
       });
     });
 
@@ -129,10 +139,11 @@ describe('ButtonComponent', () => {
         });
       });
 
-      it('should render without border', () => {
+      it('should render with transparent border', () => {
         expect(element).toHaveComputedStyle({
-          'border-width': '0px',
-          'border-style': 'none',
+          'border-width': '1px',
+          'border-style': 'solid',
+          'border-color': 'transparent',
         });
       });
     });
@@ -156,10 +167,11 @@ describe('ButtonComponent', () => {
       });
     });
 
-    it('should render without border', () => {
+    it('should render with transparent border', () => {
       expect(element).toHaveComputedStyle({
-        'border-width': '0px',
-        'border-style': 'none',
+        'border-width': '1px',
+        'border-style': 'solid',
+        'border-color': 'transparent',
       });
     });
 
@@ -181,10 +193,11 @@ describe('ButtonComponent', () => {
         });
       });
 
-      it('should render without border', () => {
+      it('should render with transparent border', () => {
         expect(element).toHaveComputedStyle({
-          'border-width': '0px',
-          'border-style': 'none',
+          'border-width': '1px',
+          'border-style': 'solid',
+          'border-color': 'transparent',
         });
       });
     });
@@ -236,6 +249,20 @@ describe('ButtonComponent', () => {
         });
       });
     });
+
+    describe('and is disabled', () => {
+      beforeEach(() => {
+        element.disabled = true;
+      });
+
+      it('should render with transparent border', () => {
+        expect(element).toHaveComputedStyle({
+          'border-width': '1px',
+          'border-style': 'solid',
+          'border-color': 'transparent',
+        });
+      });
+    });
   });
 
   describe('when configured with attentionlevel 4', () => {
@@ -248,10 +275,11 @@ describe('ButtonComponent', () => {
       expect(element).toHaveComputedStyle({ 'background-color': 'transparent' });
     });
 
-    it('should render without border', () => {
+    it('should render with transparent border', () => {
       expect(element).toHaveComputedStyle({
-        'border-width': '0px',
-        'border-style': 'none',
+        'border-width': '1px',
+        'border-style': 'solid',
+        'border-color': 'transparent',
       });
     });
 
@@ -271,10 +299,11 @@ describe('ButtonComponent', () => {
         expect(element).toHaveComputedStyle({ 'background-color': 'transparent' });
       });
 
-      it('should render without border', () => {
+      it('should render with transparent border', () => {
         expect(element).toHaveComputedStyle({
-          'border-width': '0px',
-          'border-style': 'none',
+          'border-width': '1px',
+          'border-style': 'solid',
+          'border-color': 'transparent',
         });
       });
 
