@@ -16,7 +16,7 @@ import { ProgressCircleComponent } from '@kirbydesign/designsystem';
 export class MockProgressCircleComponent {
   @Input() value: number;
   @Input() size: 'sm' | 'md' | 'lg';
-  @Input() themeColor: ThemeColor;
+  @Input() themeColor: 'success' | 'warning' | 'danger';
 }
 
 // #endregion
