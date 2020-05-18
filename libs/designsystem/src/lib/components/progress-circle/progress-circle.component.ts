@@ -8,8 +8,6 @@ import {
   ChangeDetectorRef,
 } from '@angular/core';
 
-import { ThemeColor } from '../../helpers/theme-color.type';
-
 const RADIUS_MAP = {
   sm: 20,
   md: 28,
@@ -25,7 +23,7 @@ const RADIUS_MAP = {
 export class ProgressCircleComponent implements AfterViewInit {
   @Input() value: number = 0;
   @Input() size: 'sm' | 'md' | 'lg';
-  @Input() themeColor: ThemeColor;
+  @Input() themeColor: 'success' | 'warning' | 'danger';
 
   private hasElementBeenVisible = false;
   private observer: IntersectionObserver;
