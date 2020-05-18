@@ -1,44 +1,41 @@
 import {
   Component,
-  ContentChild,
-  EventEmitter,
-  HostBinding,
-  Input,
   OnInit,
   OnChanges,
-  Output,
-  TemplateRef,
   ViewChild,
-  TrackByFunction,
-  ContentChildren,
   AfterViewInit,
-  ElementRef,
+  Input,
+  TrackByFunction,
+  HostBinding,
+  Output,
+  EventEmitter,
+  ContentChild,
+  TemplateRef,
+  ContentChildren,
 } from '@angular/core';
 
+import { ListShape } from '../../list.component';
+import { ThemeColor } from 'libs/designsystem/src';
 import {
-  ListFlexItemDirective,
-  ListFooterDirective,
-  ListHeaderDirective,
-  ListItemDirective,
-  ListSectionHeaderDirective,
+  ListSwipeAction,
+  LoadOnDemandEvent,
   ListItemTemplateDirective,
-} from './list.directive';
-import { LoadOnDemandEvent, LoadOnDemandEventData } from './list.event';
-import { ListHelper } from './helpers/list-helper';
-import { GroupByPipe } from './pipes/group-by.pipe';
-import { ListSwipeAction } from './list-swipe-action';
-import { ThemeColor } from '../../helpers/theme-color.type';
-import { ItemComponent } from '../item/item.component';
-
-export type ListShape = 'square' | 'rounded' | 'none';
+  ListItemDirective,
+  ListFlexItemDirective,
+  ListHeaderDirective,
+  ListSectionHeaderDirective,
+  ListFooterDirective,
+  GroupByPipe,
+} from '../..';
+import { ItemComponent } from '../../..';
+import { ListHelper } from '../../helpers/list-helper';
+import { LoadOnDemandEventData } from '../../list.event';
 
 @Component({
-  selector: 'kirby-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss'],
-  providers: [ListHelper, GroupByPipe],
+  selector: 'kirby-virtual-scroll-list',
+  templateUrl: './virtual-scroll-list.component.html',
 })
-export class ListComponent implements OnInit, AfterViewInit, OnChanges {
+export class VirtualScrollListComponent implements OnInit, OnChanges, AfterViewInit {
   @ViewChild('list', { static: true }) list: any;
 
   /**
@@ -47,6 +44,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
 
   @Input()
   items: any[];
+  sortedItems: any[];
 
   @Input()
   getItemColor: (item: any) => ThemeColor;
@@ -67,16 +65,16 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() noMoreItemsText: string;
 
   /**
+   * Determines if dividers should be shown or not.
+   */
+  @Input() showDivider = false;
+
+  /**
    * Determines if virtual scroll is enabled
    * NOTE: This comes with the following limitations:
    * - You can't have both a list header/footer and a section header/footer at the same time
    */
   @Input() isVirtualScrollEnabled = false;
-
-  /**
-   * Determines if dividers should be shown or not.
-   */
-  @Input() showDivider = false;
 
   /**
    * Determines if list row text should turn bold on selection
@@ -166,10 +164,52 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
     }
   }
 
+  private _headerFn(item: any, index: number, items: any[]) {
+    return this.headerTemplate && index === 0 ? true : null;
+  }
+
+  headerFn = this._headerFn.bind(this);
+
+  sectionNameMap = new Map<number, string>();
+  private _sectionHeaderFn = (item: any, index: number, items: any[]) => {
+    return this.sectionNameMap.get(index);
+  };
+
+  sectionHeaderFn = this._sectionHeaderFn.bind(this);
+
+  private _footerFn(item: any, index: number, items: any[]) {
+    return this.footerTemplate && items && items.length > 0 && items.length - 1 === index
+      ? true
+      : null;
+  }
+
+  footerFn = this._footerFn.bind(this);
+
+  private _itemHeightFn(item: any, index: number) {
+    return 56;
+  }
+
+  itemHeightFn = this._itemHeightFn.bind(this);
+
   ngOnChanges(): void {
     this.isSectionsEnabled = !!this.getSectionName;
     if (this.isSectionsEnabled && this.items) {
-      this.groupedItems = this.groupBy.transform(this.items, this.getSectionName);
+      const groupedItems = this.groupBy.transform(this.items, this.getSectionName);
+      this.sortedItems = groupedItems.reduce((prev, cur) => [...prev, ...cur.items], []);
+
+      this.sectionNameMap = new Map<number, string>();
+      const groupsSet = new Set<string>();
+      // calculate section name for each item and add them to a index, section name | null map,
+      this.sortedItems.forEach((item: any, index) => {
+        const sectionName = this.getSectionName(item);
+        // TODO: extract to method
+        if (groupsSet.has(sectionName)) {
+          this.sectionNameMap.set(index, null);
+        } else {
+          this.sectionNameMap.set(index, sectionName);
+          groupsSet.add(sectionName);
+        }
+      });
     } else {
       this.groupedItems = null;
     }

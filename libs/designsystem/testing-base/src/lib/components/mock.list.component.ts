@@ -25,6 +25,7 @@ export class MockListComponent {
   @Input() getSectionName: (item: any) => string;
   @Input() trackBy: TrackByFunction<any>;
   @Input() noMoreItemsText: string;
+  @Input() isVirtualScrollEnabled: boolean;
   @Input() showDivider: boolean;
   @Input() markSelectedRow: boolean;
   @Input() shape: ListShape;
