@@ -7,11 +7,11 @@ import { StockChartDataPoint, stockChartOptions } from '@kirbydesign/designsyste
 const config = {
   selector: 'cookbook-stock-chart-example',
   template: `<kirby-stock-chart
-      description="Accessibility description goes here"
-      [options]="options"
-      [data]="data"
-      [height]="height">
-    </kirby-stock-chart>`,
+  description="Accessibility description goes here"
+  [options]="options"
+  [data]="data"
+  [height]="height">
+</kirby-stock-chart>`,
 };
 
 @Component({
