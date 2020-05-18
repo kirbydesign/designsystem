@@ -78,6 +78,14 @@ this.modal?.scrollToTop(KirbyAnimation.Duration.LONG);
 
 // scrollToBottom example:
 this.modal?.scrollToBottom();`,
+
+  disableScrollingCodeSnippet: `import { KirbyAnimation, Modal } from '@kirbydesign/designsystem';
+...
+constructor(@Optional() @SkipSelf() private modal: Modal) {}
+
+// Disable scroll Y
+this.modal?.scrollDisabled = true;`,
+
   didPresentCodeSnippet: `constructor(@Optional() @SkipSelf() private modal: Modal) {}
 
 @ViewChild('nameInput', { static: false, read: ElementRef }) private nameInputElement: ElementRef<HTMLInputElement>;
@@ -138,6 +146,7 @@ export class ModalExampleComponent {
   didPresentCodeSnippet = config.didPresentCodeSnippet;
   willCloseCodeSnippet = config.willCloseCodeSnippet;
   scrollingCodeSnippet = config.scrollingCodeSnippet;
+  disableScrollingCodeSnippet = config.disableScrollingCodeSnippet;
   embeddedCodeSnippet = config.embeddedCodeSnippet;
   closeModalCodeSnippet = config.closeModalCodeSnippet;
 

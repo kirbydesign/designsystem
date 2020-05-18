@@ -21,6 +21,7 @@ import { Modal } from '../../services/modal.interfaces';
 })
 export class ModalCompactWrapperComponent implements Modal, OnInit {
   scrollY: number = Math.abs(window.scrollY);
+  scrollDisabled = false;
   @Input() config: ModalConfig;
   componentPropsInjector: Injector;
 
