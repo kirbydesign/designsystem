@@ -1,8 +1,27 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { IonApp } from '@ionic/angular';
+import { Component, ElementRef, forwardRef } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { ModalController } from '../modal';
+
+@Component({
+  // tslint:disable-next-line:component-selector
+  selector: 'ion-app',
+  template: '<ng-content></ng-content>',
+  providers: [
+    {
+      provide: IonApp,
+      useExisting: forwardRef(() => IonAppMockComponent),
+    },
+  ],
+})
+export class IonAppMockComponent {
+  constructor(private elementRef: ElementRef) {
+    this.elementRef.nativeElement.componentOnReady = () => Promise.resolve();
+  }
+}
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -15,7 +34,7 @@ describe('AppComponent', () => {
 
     TestBed.configureTestingModule({
       imports: [NoopAnimationsModule],
-      declarations: [AppComponent],
+      declarations: [AppComponent, IonAppMockComponent],
       providers: [{ provide: ModalController, useValue: modalControllerSpy }],
     }).compileComponents();
   }));
