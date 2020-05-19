@@ -3,7 +3,7 @@ import { ElementRef, ChangeDetectorRef } from '@angular/core';
 
 import { ProgressCircleComponent } from './progress-circle.component';
 
-describe('ProgressCircleComponent', () => {
+fdescribe('ProgressCircleComponent', () => {
   let spectator: Spectator<ProgressCircleComponent>;
   let changeDetectorRef: ChangeDetectorRef;
   let intersectionObserverConstructorSpy;
@@ -26,6 +26,7 @@ describe('ProgressCircleComponent', () => {
     return spyOn(window as any, 'IntersectionObserver').and.returnValue({
       observe: jasmine.createSpy('observe()'),
       unobserve: jasmine.createSpy('unobserve()'),
+      disconnect: jasmine.createSpy('disconnect'),
     });
   }
 
@@ -218,24 +219,58 @@ describe('ProgressCircleComponent', () => {
 
     it('should unsubscribe observer when elements are intersecting', () => {
       // Arrange
+      spectator.component['disconnectObserver'] = jasmine.createSpy('disconnectObserver');
       const entries: Partial<IntersectionObserverEntry>[] = [{ isIntersecting: true }];
 
       // Act
       spectator.component.onElementVisible(entries as IntersectionObserverEntry[]);
 
       // Assert
-      expect(spectator.component['observer'].unobserve).toHaveBeenCalled();
+      expect(spectator.component['disconnectObserver']).toHaveBeenCalled();
     });
 
     it('should not unsubscribe observer if elements are not intersecting', () => {
       // Arrange
+      spectator.component['disconnectObserver'] = jasmine.createSpy('disconnectObserver');
       const entries: Partial<IntersectionObserverEntry>[] = [{ isIntersecting: false }];
 
       // Act
       spectator.component.onElementVisible(entries as IntersectionObserverEntry[]);
 
       // Assert
-      expect(spectator.component['observer'].unobserve).not.toHaveBeenCalled();
+      expect(spectator.component['disconnectObserver']).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('disconnectObserver', () => {
+    it('should handle observer being undefined (in case view init has not happened yet)', () => {
+      spectator.component['observer'] = undefined;
+
+      expect(() => {
+        spectator.component['disconnectObserver']();
+      }).not.toThrowError();
+    });
+
+    it('should call unobserve when disconnecting', () => {
+      spectator.component['disconnectObserver']();
+
+      expect(spectator.component['observer'].unobserve).toHaveBeenCalledWith(
+        spectator.debugElement.nativeElement
+      );
+    });
+
+    it('should call disconnect when disconnecting', () => {
+      spectator.component['disconnectObserver']();
+
+      expect(spectator.component['observer'].disconnect).toHaveBeenCalled();
+    });
+
+    it('should be able disconnect function to be missing (some browsers do not suppport it)', () => {
+      spectator.component['observer'].disconnect = undefined;
+
+      expect(() => {
+        spectator.component['disconnectObserver']();
+      }).not.toThrowError();
     });
   });
 });

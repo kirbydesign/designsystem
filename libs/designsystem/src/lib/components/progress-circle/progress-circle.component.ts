@@ -6,6 +6,7 @@ import {
   ElementRef,
   AfterViewInit,
   ChangeDetectorRef,
+  OnDestroy,
 } from '@angular/core';
 
 const RADIUS_MAP = {
@@ -20,7 +21,7 @@ const RADIUS_MAP = {
   styleUrls: ['./progress-circle.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProgressCircleComponent implements AfterViewInit {
+export class ProgressCircleComponent implements AfterViewInit, OnDestroy {
   @Input() value: number = 0;
   @Input() size: 'sm' | 'md' | 'lg';
   @Input() themeColor: 'success' | 'warning' | 'danger';
@@ -37,10 +38,14 @@ export class ProgressCircleComponent implements AfterViewInit {
     this.observer.observe(this.elementRef.nativeElement);
   }
 
+  ngOnDestroy(): void {
+    this.disconnectObserver();
+  }
+
   onElementVisible = (entries: IntersectionObserverEntry[]) => {
     if (entries && entries.some((entry) => entry.isIntersecting)) {
-      this.observer.unobserve(this.elementRef.nativeElement);
       this.hasElementBeenVisible = true;
+      this.disconnectObserver();
       this.changeDetectorRef.markForCheck();
     }
   };
@@ -61,6 +66,16 @@ export class ProgressCircleComponent implements AfterViewInit {
       return RADIUS_MAP[this.size];
     } else {
       return RADIUS_MAP.md;
+    }
+  }
+
+  private disconnectObserver() {
+    if (this.observer) {
+      this.observer.unobserve(this.elementRef.nativeElement);
+      // Safari does not support "disconnect", see: https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API#Browser_compatibility
+      if (typeof this.observer.disconnect === 'function') {
+        this.observer.disconnect();
+      }
     }
   }
 }
