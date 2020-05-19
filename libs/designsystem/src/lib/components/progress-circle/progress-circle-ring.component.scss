@@ -1,6 +1,7 @@
 @import '../../scss/utils';
+
 .circle {
-  stroke: #{get-color('white')};
+  stroke: get-color('white');
 }
 .progress {
   transition-property: stroke-dashoffset, stroke;
@@ -12,15 +13,11 @@
 }
 
 :host {
-  @mixin theme-color($color) {
-    &.#{$color} svg {
-      --stroke-color: #{get-color($color)};
-    }
-  }
-
   --stroke-color: #{get-color('success')};
 
   @each $color-name, $color-value in $notification-colors {
-    @include theme-color($color-name);
+    &.#{$color-name} {
+      --stroke-color: #{$color-value};
+    }
   }
 }

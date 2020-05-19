@@ -23,7 +23,7 @@ const RADIUS_MAP = {
 })
 export class ProgressCircleComponent implements AfterViewInit, OnDestroy {
   @Input() value: number = 0;
-  @Input() size: 'sm' | 'md' | 'lg';
+  @Input() size: 'sm' | 'md' | 'lg' = 'md';
   @Input() themeColor: 'success' | 'warning' | 'danger';
 
   private hasElementBeenVisible = false;
@@ -62,11 +62,7 @@ export class ProgressCircleComponent implements AfterViewInit, OnDestroy {
   }
 
   get radius() {
-    if (this.size) {
-      return RADIUS_MAP[this.size];
-    } else {
-      return RADIUS_MAP.md;
-    }
+    return RADIUS_MAP[this.size];
   }
 
   private disconnectObserver() {
