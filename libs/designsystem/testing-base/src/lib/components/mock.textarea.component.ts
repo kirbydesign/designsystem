@@ -16,7 +16,7 @@ import { TextareaComponent } from '@kirbydesign/designsystem';
 })
 export class MockTextareaComponent {
   @Input() value: string;
-  @Input() noStyle: boolean;
+  @Input() borderless: boolean;
   @Input() hasError: boolean;
   @Input() autocomplete: 'on' | 'off';
   @Input() autocorrect: 'on' | 'off';
