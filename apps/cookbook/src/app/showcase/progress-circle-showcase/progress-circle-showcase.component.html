@@ -1,86 +1,45 @@
 <div class="example">
   <h3>Default</h3>
   <cookbook-example-viewer [html]="defaultExample.template">
-    <div>
-      <cookbook-progress-circle-example-default
-        #defaultExample
-      ></cookbook-progress-circle-example-default>
-    </div>
+    <cookbook-progress-circle-example-default
+      #defaultExample
+    ></cookbook-progress-circle-example-default>
   </cookbook-example-viewer>
   <cookbook-example-viewer [html]="defaultLargeExample.template">
-    <div>
-      <cookbook-progress-circle-example-default-large
-        #defaultLargeExample
-      ></cookbook-progress-circle-example-default-large>
-    </div>
+    <cookbook-progress-circle-example-default-large
+      #defaultLargeExample
+    ></cookbook-progress-circle-example-default-large>
   </cookbook-example-viewer>
 
   <h3>With content</h3>
   <cookbook-example-viewer [html]="contentStepsExample.template">
-    <div>
-      <cookbook-progress-circle-example-content-steps
-        #contentStepsExample
-      ></cookbook-progress-circle-example-content-steps>
-    </div>
+    <cookbook-progress-circle-example-content-steps
+      #contentStepsExample
+    ></cookbook-progress-circle-example-content-steps>
   </cookbook-example-viewer>
   <cookbook-example-viewer [html]="contentIconExample.template">
-    <div>
-      <cookbook-progress-circle-example-content-icon
-        #contentIconExample
-      ></cookbook-progress-circle-example-content-icon>
-    </div>
+    <cookbook-progress-circle-example-content-icon
+      #contentIconExample
+    ></cookbook-progress-circle-example-content-icon>
   </cookbook-example-viewer>
   <cookbook-example-viewer [html]="contentPercentExample.template">
-    <div>
-      <cookbook-progress-circle-example-content-percent
-        #contentPercentExample
-      ></cookbook-progress-circle-example-content-percent>
-    </div>
+    <cookbook-progress-circle-example-content-percent
+      #contentPercentExample
+    ></cookbook-progress-circle-example-content-percent>
   </cookbook-example-viewer>
 
   <h3>Dynamic</h3>
   <cookbook-example-viewer [html]="animatedExample.template">
-    <div>
-      <cookbook-progress-circle-example-animated
-        #animatedExample
-      ></cookbook-progress-circle-example-animated>
-    </div>
+    <cookbook-progress-circle-example-animated
+      #animatedExample
+    ></cookbook-progress-circle-example-animated>
   </cookbook-example-viewer>
 
   <h3>In card</h3>
   <cookbook-example-viewer [html]="cardExample.template">
-    <div>
-      <cookbook-progress-circle-example-card #cardExample></cookbook-progress-circle-example-card>
-    </div>
+    <cookbook-progress-circle-example-card #cardExample></cookbook-progress-circle-example-card>
   </cookbook-example-viewer>
 
   <h3>Properties</h3>
-  <table class="cookbook-properties">
-    <thead>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Input values</th>
-      <th>Default</th>
-    </thead>
-    <tbody>
-      <tr>
-        <td><code>value</code></td>
-        <td>Sets the progress percentage</td>
-        <td><code>number</code><br />[0-100]</td>
-        <td>0</td>
-      </tr>
-      <tr>
-        <td><code>size</code></td>
-        <td>Sets the size of the circle</td>
-        <td><code>'sm' | 'md' | 'lg' </code></td>
-        <td>md</td>
-      </tr>
-      <tr>
-        <td><code>themeColor</code></td>
-        <td>The color of the progress stroke</td>
-        <td><code>'success' | 'warning' | 'danger' </code></td>
-        <td>success</td>
-      </tr>
-    </tbody>
-  </table>
+  <cookbook-showcase-properties [properties]="properties"></cookbook-showcase-properties>
 </div>

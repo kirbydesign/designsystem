@@ -4,6 +4,8 @@ import { ProgressCircleRingComponent } from './progress-circle-ring.component';
 import { DesignTokenHelper } from './../../helpers/design-token-helper';
 import { ThemeColor } from './../../helpers/theme-color.type';
 
+const getColor = DesignTokenHelper.getColor;
+
 describe('ProgressCircleRingComponent', () => {
   let spectator: Spectator<ProgressCircleRingComponent>;
 
@@ -64,11 +66,12 @@ describe('ProgressCircleRingComponent', () => {
 
     it('computed size should equal 2*radius', () => {
       const radius = 33;
+      const expectedSize = `${2 * radius}px`;
       spectator.setInput({ radius });
       spectator.detectChanges();
       expect(spectator.element).toHaveComputedStyle({
-        width: `${2 * radius}px`,
-        height: `${2 * radius}px`,
+        width: expectedSize,
+        height: expectedSize,
       });
     });
 
@@ -78,21 +81,21 @@ describe('ProgressCircleRingComponent', () => {
       spectator.element.style.transition = 'none';
       spectator.detectChanges();
       expect(spectator.query('circle.progress')).toHaveComputedStyle({
-        stroke: DesignTokenHelper.getColor(themeColor),
+        stroke: getColor(themeColor),
       });
     });
 
     it('should render progress stroke with success color when themeColor class is not set', () => {
       spectator.detectChanges();
       expect(spectator.query('circle.progress')).toHaveComputedStyle({
-        stroke: DesignTokenHelper.getColor('success'),
+        stroke: getColor('success'),
       });
     });
 
     it('should render background stroke in white', () => {
       spectator.detectChanges();
       expect(spectator.query('circle.circle')).toHaveComputedStyle({
-        stroke: DesignTokenHelper.getColor('white'),
+        stroke: getColor('semi-light'),
       });
     });
 

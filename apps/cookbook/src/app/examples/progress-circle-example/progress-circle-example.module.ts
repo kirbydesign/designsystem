@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
 
 import { KirbyModule } from '@kirbydesign/designsystem';
 import { ProgressCircleExampleDefaultComponent } from './examples/default';
@@ -22,7 +21,7 @@ const COMPONENT_DECLARATIONS = [
 ];
 
 @NgModule({
-  imports: [CommonModule, KirbyModule, ReactiveFormsModule],
+  imports: [CommonModule, KirbyModule],
   declarations: COMPONENT_DECLARATIONS,
   exports: COMPONENT_DECLARATIONS,
 })

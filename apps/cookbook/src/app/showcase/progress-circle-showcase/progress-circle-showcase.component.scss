@@ -7,7 +7,8 @@ h3:not(:first-child) {
 cookbook-example-viewer {
   margin-bottom: size('l');
 
-  > div {
+  > * {
+    display: block;
     margin-bottom: size('s');
   }
 }
