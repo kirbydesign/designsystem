@@ -31,6 +31,10 @@ export class InputComponent implements OnChanges {
     }
   }
 
+  @HostBinding('class.no-style')
+  @Input()
+  noStyle: boolean;
+
   @HostBinding('class.error')
   @Input()
   hasError: boolean;

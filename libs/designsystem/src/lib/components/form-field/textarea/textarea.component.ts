@@ -21,6 +21,10 @@ export class TextareaComponent implements OnChanges {
 
   @Input() value: string;
 
+  @HostBinding('class.no-style')
+  @Input()
+  noStyle: boolean;
+
   @HostBinding('class.error')
   @Input()
   hasError: boolean;

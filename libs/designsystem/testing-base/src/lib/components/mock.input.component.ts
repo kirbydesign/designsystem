@@ -16,6 +16,7 @@ import { InputComponent } from '@kirbydesign/designsystem';
 })
 export class MockInputComponent {
   @Input() type: string;
+  @Input() noStyle: boolean;
   @Input() hasError: boolean;
   @Input() autocomplete: 'on' | 'off';
   @Input() autocorrect: 'on' | 'off';
