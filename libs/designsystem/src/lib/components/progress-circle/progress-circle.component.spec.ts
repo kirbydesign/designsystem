@@ -76,17 +76,20 @@ describe('ProgressCircleComponent', () => {
       expect(spectator.component.shownValue).toBe(50);
     });
   });
+
   describe('diameter', () => {
     it('should calculate diameter as 2*radius', () => {
       spectator.setInput({ size: 'sm' }); // 20px radius
       expect(spectator.component.diameter).toBe(40);
     });
   });
+
   describe('ngAfterViewInit', () => {
     it('should instantiate IntersectionObserver with onElementVisible as callback', () => {
       spectator.component.ngAfterViewInit();
       expect(intersectionObserverConstructorSpy).toHaveBeenCalledWith(
-        spectator.component.onElementVisible
+        spectator.component.onElementVisible,
+        jasmine.any(Object)
       );
     });
 
