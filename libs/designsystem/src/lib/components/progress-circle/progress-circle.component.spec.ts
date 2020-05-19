@@ -42,7 +42,6 @@ describe('ProgressCircleComponent', () => {
 
   describe('radius', () => {
     it('should default to 28px', () => {
-      spectator.setInput({ size: undefined });
       spectator.detectChanges();
       expect(spectator.component.radius).toBe(28);
     });
