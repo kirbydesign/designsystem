@@ -28,7 +28,11 @@ export class FormFieldComponent implements AfterContentChecked, OnDestroy {
 
   ngAfterContentChecked(): void {
     const element = this.elementRef.nativeElement;
-    if (!this.isRegistered && element.isConnected && element.querySelectorAll('input, textarea')) {
+    if (
+      !this.isRegistered &&
+      element.isConnected &&
+      element.querySelectorAll('input, textarea').length > 0
+    ) {
       // Host is connected to dom and slotted input/textarea is present:
       this.isRegistered = true;
       document.dispatchEvent(
