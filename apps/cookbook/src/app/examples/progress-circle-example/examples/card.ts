@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 const config = {
   selector: 'cookbook-progress-circle-example-card',
-  template: `<kirby-card themeColor="dark" hasPadding="true" class="content-card">
+  template: `<kirby-card themeColor="dark" hasPadding="true">
   <div class="content">
     <div>
       Your investment savings
