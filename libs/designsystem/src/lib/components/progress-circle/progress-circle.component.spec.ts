@@ -114,6 +114,48 @@ describe('ProgressCircleComponent', () => {
       expect(spectator.component['hasElementBeenVisible']).toBe(true);
     });
 
+    it('should mark element as visible if several entries are returned when observer is called and all are intersecting', () => {
+      // Arrange
+      const entries: Partial<IntersectionObserverEntry>[] = [
+        { isIntersecting: true },
+        { isIntersecting: true },
+      ];
+
+      // Act
+      spectator.component.onElementVisible(entries as IntersectionObserverEntry[]);
+
+      // Assert
+      expect(spectator.component['hasElementBeenVisible']).toBe(true);
+    });
+
+    it('should mark element as visible if several entries are returned when observer is called and any is intersecting', () => {
+      // Arrange
+      const entries: Partial<IntersectionObserverEntry>[] = [
+        { isIntersecting: true },
+        { isIntersecting: false },
+      ];
+
+      // Act
+      spectator.component.onElementVisible(entries as IntersectionObserverEntry[]);
+
+      // Assert
+      expect(spectator.component['hasElementBeenVisible']).toBe(true);
+    });
+
+    it('should not mark element as visible if several entries are returned when observer is called but none are intersecting', () => {
+      // Arrange
+      const entries: Partial<IntersectionObserverEntry>[] = [
+        { isIntersecting: false },
+        { isIntersecting: false },
+      ];
+
+      // Act
+      spectator.component.onElementVisible(entries as IntersectionObserverEntry[]);
+
+      // Assert
+      expect(spectator.component['hasElementBeenVisible']).toBe(false);
+    });
+
     it('should not mark element as visible if elements are not intersecting when observer is called (on init)', () => {
       // Arrange
       const entries: Partial<IntersectionObserverEntry>[] = [{ isIntersecting: false }];

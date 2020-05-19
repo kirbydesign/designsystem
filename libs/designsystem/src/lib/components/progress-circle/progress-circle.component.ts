@@ -31,7 +31,9 @@ export class ProgressCircleComponent implements AfterViewInit {
   constructor(private elementRef: ElementRef, private changeDetectorRef: ChangeDetectorRef) {}
 
   ngAfterViewInit() {
-    this.observer = new IntersectionObserver(this.onElementVisible);
+    this.observer = new IntersectionObserver(this.onElementVisible, {
+      threshold: 0.5,
+    });
     this.observer.observe(this.elementRef.nativeElement);
   }
 
