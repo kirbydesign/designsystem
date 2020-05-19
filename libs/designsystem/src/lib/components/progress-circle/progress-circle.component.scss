@@ -18,4 +18,6 @@ kirby-progress-circle-ring {
   justify-content: center;
   align-items: center;
   z-index: z('default');
+  border-radius: 50%;
+  overflow: hidden;
 }

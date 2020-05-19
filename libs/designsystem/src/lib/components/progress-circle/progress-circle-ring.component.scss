@@ -1,7 +1,7 @@
 @import '../../scss/utils';
 
 .circle {
-  stroke: get-color('white');
+  stroke: get-color('semi-light');
 }
 .progress {
   transition-property: stroke-dashoffset, stroke;
