@@ -88,7 +88,7 @@ describe('ProgressCircleComponent', () => {
     it('should instantiate IntersectionObserver with onElementVisible as callback', () => {
       spectator.component.ngAfterViewInit();
       expect(intersectionObserverConstructorSpy).toHaveBeenCalledWith(
-        spectator.component.onElementVisible,
+        spectator.component['onElementVisible'],
         jasmine.any(Object)
       );
     });
@@ -111,7 +111,7 @@ describe('ProgressCircleComponent', () => {
       const entries: Partial<IntersectionObserverEntry>[] = [{ isIntersecting: true }];
 
       // Act
-      spectator.component.onElementVisible(entries as IntersectionObserverEntry[]);
+      spectator.component['onElementVisible'](entries as IntersectionObserverEntry[]);
 
       // Assert
       expect(spectator.component['hasElementBeenVisible']).toBe(true);
@@ -125,7 +125,7 @@ describe('ProgressCircleComponent', () => {
       ];
 
       // Act
-      spectator.component.onElementVisible(entries as IntersectionObserverEntry[]);
+      spectator.component['onElementVisible'](entries as IntersectionObserverEntry[]);
 
       // Assert
       expect(spectator.component['hasElementBeenVisible']).toBe(true);
@@ -139,7 +139,7 @@ describe('ProgressCircleComponent', () => {
       ];
 
       // Act
-      spectator.component.onElementVisible(entries as IntersectionObserverEntry[]);
+      spectator.component['onElementVisible'](entries as IntersectionObserverEntry[]);
 
       // Assert
       expect(spectator.component['hasElementBeenVisible']).toBe(true);
@@ -153,7 +153,7 @@ describe('ProgressCircleComponent', () => {
       ];
 
       // Act
-      spectator.component.onElementVisible(entries as IntersectionObserverEntry[]);
+      spectator.component['onElementVisible'](entries as IntersectionObserverEntry[]);
 
       // Assert
       expect(spectator.component['hasElementBeenVisible']).toBe(false);
@@ -164,7 +164,7 @@ describe('ProgressCircleComponent', () => {
       const entries: Partial<IntersectionObserverEntry>[] = [{ isIntersecting: false }];
 
       // Act
-      spectator.component.onElementVisible(entries as IntersectionObserverEntry[]);
+      spectator.component['onElementVisible'](entries as IntersectionObserverEntry[]);
 
       // Assert
       expect(spectator.component['hasElementBeenVisible']).toBe(false);
@@ -175,7 +175,7 @@ describe('ProgressCircleComponent', () => {
       const entries: Partial<IntersectionObserverEntry>[] = undefined;
 
       // Act
-      spectator.component.onElementVisible(entries as IntersectionObserverEntry[]);
+      spectator.component['onElementVisible'](entries as IntersectionObserverEntry[]);
 
       // Assert
       expect(spectator.component['hasElementBeenVisible']).toBe(false);
@@ -186,7 +186,7 @@ describe('ProgressCircleComponent', () => {
       const entries: Partial<IntersectionObserverEntry>[] = [];
 
       // Act
-      spectator.component.onElementVisible(entries as IntersectionObserverEntry[]);
+      spectator.component['onElementVisible'](entries as IntersectionObserverEntry[]);
 
       // Assert
       expect(spectator.component['hasElementBeenVisible']).toBe(false);
@@ -198,7 +198,7 @@ describe('ProgressCircleComponent', () => {
       const entries: Partial<IntersectionObserverEntry>[] = [{ isIntersecting: false }];
 
       // Act
-      spectator.component.onElementVisible(entries as IntersectionObserverEntry[]);
+      spectator.component['onElementVisible'](entries as IntersectionObserverEntry[]);
 
       // Assert
       expect(changeDetectorRef.markForCheck).not.toHaveBeenCalled();
@@ -210,7 +210,7 @@ describe('ProgressCircleComponent', () => {
       const entries: Partial<IntersectionObserverEntry>[] = [{ isIntersecting: true }];
 
       // Act
-      spectator.component.onElementVisible(entries as IntersectionObserverEntry[]);
+      spectator.component['onElementVisible'](entries as IntersectionObserverEntry[]);
 
       // Assert
       expect(changeDetectorRef.markForCheck).toHaveBeenCalled();
@@ -218,26 +218,26 @@ describe('ProgressCircleComponent', () => {
 
     it('should unsubscribe observer when elements are intersecting', () => {
       // Arrange
-      spectator.component['disconnectObserver'] = jasmine.createSpy('disconnectObserver');
+      spectator.component['unobserve'] = jasmine.createSpy('disconnectObserver');
       const entries: Partial<IntersectionObserverEntry>[] = [{ isIntersecting: true }];
 
       // Act
-      spectator.component.onElementVisible(entries as IntersectionObserverEntry[]);
+      spectator.component['onElementVisible'](entries as IntersectionObserverEntry[]);
 
       // Assert
-      expect(spectator.component['disconnectObserver']).toHaveBeenCalled();
+      expect(spectator.component['unobserve']).toHaveBeenCalled();
     });
 
     it('should not unsubscribe observer if elements are not intersecting', () => {
       // Arrange
-      spectator.component['disconnectObserver'] = jasmine.createSpy('disconnectObserver');
+      spectator.component['unobserve'] = jasmine.createSpy('disconnectObserver');
       const entries: Partial<IntersectionObserverEntry>[] = [{ isIntersecting: false }];
 
       // Act
-      spectator.component.onElementVisible(entries as IntersectionObserverEntry[]);
+      spectator.component['onElementVisible'](entries as IntersectionObserverEntry[]);
 
       // Assert
-      expect(spectator.component['disconnectObserver']).not.toHaveBeenCalled();
+      expect(spectator.component['unobserve']).not.toHaveBeenCalled();
     });
   });
 
@@ -246,12 +246,12 @@ describe('ProgressCircleComponent', () => {
       spectator.component['observer'] = undefined;
 
       expect(() => {
-        spectator.component['disconnectObserver']();
+        spectator.component['unobserve']();
       }).not.toThrowError();
     });
 
     it('should call unobserve when disconnecting', () => {
-      spectator.component['disconnectObserver']();
+      spectator.component['unobserve']();
 
       expect(spectator.component['observer'].unobserve).toHaveBeenCalledWith(
         spectator.debugElement.nativeElement
@@ -259,7 +259,7 @@ describe('ProgressCircleComponent', () => {
     });
 
     it('should call disconnect when disconnecting', () => {
-      spectator.component['disconnectObserver']();
+      spectator.component['unobserve']();
 
       expect(spectator.component['observer'].disconnect).toHaveBeenCalled();
     });
@@ -268,18 +268,18 @@ describe('ProgressCircleComponent', () => {
       spectator.component['observer'].disconnect = undefined;
 
       expect(() => {
-        spectator.component['disconnectObserver']();
+        spectator.component['unobserve']();
       }).not.toThrowError();
     });
   });
 
   describe('ngOnDestroy', () => {
     it('should call disconnectObserver', () => {
-      spectator.component['disconnectObserver'] = jasmine.createSpy('disconnectObserver');
+      spectator.component['unobserve'] = jasmine.createSpy('disconnectObserver');
 
       spectator.component.ngOnDestroy();
 
-      expect(spectator.component['disconnectObserver']).toHaveBeenCalled();
+      expect(spectator.component['unobserve']).toHaveBeenCalled();
     });
   });
 });
