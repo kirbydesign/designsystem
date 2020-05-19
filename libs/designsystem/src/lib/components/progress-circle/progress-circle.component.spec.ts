@@ -3,7 +3,7 @@ import { ElementRef, ChangeDetectorRef } from '@angular/core';
 
 import { ProgressCircleComponent } from './progress-circle.component';
 
-fdescribe('ProgressCircleComponent', () => {
+describe('ProgressCircleComponent', () => {
   let spectator: Spectator<ProgressCircleComponent>;
   let changeDetectorRef: ChangeDetectorRef;
   let intersectionObserverConstructorSpy;
@@ -271,6 +271,16 @@ fdescribe('ProgressCircleComponent', () => {
       expect(() => {
         spectator.component['disconnectObserver']();
       }).not.toThrowError();
+    });
+  });
+
+  describe('ngOnDestroy', () => {
+    it('should call disconnectObserver', () => {
+      spectator.component['disconnectObserver'] = jasmine.createSpy('disconnectObserver');
+
+      spectator.component.ngOnDestroy();
+
+      expect(spectator.component['disconnectObserver']).toHaveBeenCalled();
     });
   });
 });
