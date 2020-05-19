@@ -63,7 +63,7 @@ export class StockChartComponent {
           series: [],
         },
         false,
-        false
+        true
       );
       // Then update the chart with new series data.
       this.chart.update(
@@ -76,7 +76,7 @@ export class StockChartComponent {
           ],
         },
         false,
-        false
+        true
       );
       // Remove the annotations.
       this.chart.removeAnnotation('minmax');
