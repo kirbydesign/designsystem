@@ -36,7 +36,7 @@ export class ProgressCircleComponent implements AfterViewInit {
   }
 
   onElementVisible = (entries: IntersectionObserverEntry[]) => {
-    if (entries && entries.length === 1 && entries[0].isIntersecting) {
+    if (entries && entries.some((entry) => entry.isIntersecting)) {
       this.observer.unobserve(this.elementRef.nativeElement);
       this.hasElementBeenVisible = true;
       this.changeDetectorRef.markForCheck();
