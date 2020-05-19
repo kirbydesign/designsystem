@@ -30,6 +30,7 @@ export class ModalHelper {
       componentProps: { config: config },
       swipeToClose: config.flavor != 'compact',
       presentingElement: modalPresentingElement,
+      keyboardClose: false,
     });
 
     await ionModal.present();
