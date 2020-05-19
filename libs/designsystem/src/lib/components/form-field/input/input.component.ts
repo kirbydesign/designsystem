@@ -31,9 +31,9 @@ export class InputComponent implements OnChanges {
     }
   }
 
-  @HostBinding('class.no-style')
+  @HostBinding('class.borderless')
   @Input()
-  noStyle: boolean;
+  borderless: boolean;
 
   @HostBinding('class.error')
   @Input()

@@ -31,7 +31,7 @@ $form-field-label-height: 24px;
   margin: 0;
   -webkit-appearance: none;
 
-  &:not(.no-style) {
+  &:not(.borderless) {
     border-radius: size('s');
     box-shadow: get-elevation(2);
     padding: size('s');
