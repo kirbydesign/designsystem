@@ -18,26 +18,28 @@ import { InputCounterComponent } from './input-counter/input-counter.component';
 })
 export class FormFieldComponent implements AfterContentChecked, OnDestroy {
   private isRegistered = false;
+  private element: HTMLElement;
 
   @Input() label: string;
   @Input() message: string;
 
   @ContentChild(InputCounterComponent, { static: false }) counter: InputCounterComponent;
 
-  constructor(private elementRef: ElementRef<HTMLElement>) {}
+  constructor(elementRef: ElementRef<HTMLElement>) {
+    this.element = elementRef.nativeElement;
+  }
 
   ngAfterContentChecked(): void {
-    const element = this.elementRef.nativeElement;
     if (
       !this.isRegistered &&
-      element.isConnected &&
-      element.querySelectorAll('input, textarea').length > 0
+      this.element.isConnected &&
+      this.element.querySelectorAll('input, textarea').length > 0
     ) {
       // Host is connected to dom and slotted input/textarea is present:
       this.isRegistered = true;
       document.dispatchEvent(
         new CustomEvent('ionInputDidLoad', {
-          detail: element,
+          detail: this.element,
         })
       );
     }
@@ -46,7 +48,7 @@ export class FormFieldComponent implements AfterContentChecked, OnDestroy {
   ngOnDestroy(): void {
     document.dispatchEvent(
       new CustomEvent('ionInputDidUnload', {
-        detail: this.elementRef.nativeElement,
+        detail: this.element,
       })
     );
   }
