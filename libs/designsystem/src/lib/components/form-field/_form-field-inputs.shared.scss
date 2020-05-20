@@ -6,6 +6,7 @@ $form-field-label-height: 24px;
   border: 1px solid get-color('danger');
 }
 
+// Ensures correct position of cloned input when Ionic scrollAssist is enabled
 :host(.cloned-input) {
   pointer-events: none;
   position: absolute;
@@ -13,6 +14,7 @@ $form-field-label-height: 24px;
   left: 0;
 }
 
+// Ensures correct position of cloned input when Ionic scrollAssist is enabled
 :host-context(label) {
   &.cloned-input {
     top: $form-field-label-height;

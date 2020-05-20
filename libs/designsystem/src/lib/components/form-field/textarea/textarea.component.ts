@@ -21,6 +21,9 @@ export class TextareaComponent implements OnChanges {
 
   @Input() value: string;
 
+  /**
+   * Removes padding, width, rounded borders and drop-shadow when set to `true`.
+   */
   @HostBinding('class.borderless')
   @Input()
   borderless: boolean;
