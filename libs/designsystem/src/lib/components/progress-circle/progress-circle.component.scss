@@ -2,6 +2,7 @@
 
 :host {
   display: inline-block;
+  position: relative;
 }
 
 .transcluded-content,
@@ -14,6 +15,8 @@ kirby-progress-circle-ring {
 }
 
 .transcluded-content {
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
