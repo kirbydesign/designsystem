@@ -295,11 +295,23 @@ describe('ProgressCircleComponent', () => {
   describe('changing of shown value when elements comes into viewport to trigger animation', () => {
     const value = 50;
 
+    function moveOutsideViewPort() {
+      spectator.element.style.position = 'fixed';
+      spectator.element.style.top = '-500px';
+      spectator.element.style.left = '-500px';
+    }
+
+    function moveIntoViewPort() {
+      spectator.element.style.position = 'fixed';
+      spectator.element.style.top = '0px';
+      spectator.element.style.left = '0px';
+    }
+
     beforeEach(() => {
       spectator.setInput({ value });
 
       // Placing element outside of viewport
-      spectator.element.style.marginTop = '4000px';
+      moveOutsideViewPort();
 
       // Resetting after element has been placed outside viewport
       spectator.component['hasElementBeenVisible'] = false;
@@ -320,7 +332,7 @@ describe('ProgressCircleComponent', () => {
 
     it('should show actual value once element becomes visible to the user', (done) => {
       // Act
-      spectator.element.scrollIntoView();
+      moveIntoViewPort();
       spectator.detectChanges();
 
       // Assert
