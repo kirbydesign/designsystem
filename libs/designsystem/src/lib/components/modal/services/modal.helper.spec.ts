@@ -14,7 +14,7 @@ import { Overlay, Modal } from './modal.interfaces';
   `,
 })
 class InputEmbeddedComponent implements OnInit {
-  @ViewChild('input', { static: false, read: ElementRef })
+  @ViewChild('input', { static: true, read: ElementRef })
   input: ElementRef;
 
   constructor(@Optional() private modal?: Modal) {}
