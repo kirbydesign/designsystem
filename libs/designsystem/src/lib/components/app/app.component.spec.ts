@@ -1,7 +1,7 @@
+import { Component, ElementRef, forwardRef } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { IonApp } from '@ionic/angular';
-import { Component, ElementRef, forwardRef } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { ModalController } from '../modal';
