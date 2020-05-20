@@ -6,7 +6,6 @@ import { ProgressCircleComponent } from './progress-circle.component';
 describe('ProgressCircleComponent', () => {
   let spectator: Spectator<ProgressCircleComponent>;
   let changeDetectorRef: ChangeDetectorRef;
-  let intersectionObserverConstructorSpy;
 
   const createHost = createComponentFactory({
     component: ProgressCircleComponent,
@@ -21,17 +20,7 @@ describe('ProgressCircleComponent', () => {
     ],
   });
 
-  function setupIntersectionObserverMock() {
-    // IntersectionObserver not exposed in the DOM lib for TS. See: https://github.com/microsoft/TypeScript/pull/18110
-    return spyOn(window as any, 'IntersectionObserver').and.returnValue({
-      observe: jasmine.createSpy('observe()'),
-      unobserve: jasmine.createSpy('unobserve()'),
-      disconnect: jasmine.createSpy('disconnect'),
-    });
-  }
-
   beforeEach(() => {
-    intersectionObserverConstructorSpy = setupIntersectionObserverMock();
     spectator = createHost({ props: { value: 30 } });
     changeDetectorRef = (spectator as any).instance.changeDetectorRef;
   });
@@ -85,6 +74,21 @@ describe('ProgressCircleComponent', () => {
   });
 
   describe('ngAfterViewInit', () => {
+    let intersectionObserverConstructorSpy;
+
+    function setupIntersectionObserverMock() {
+      // IntersectionObserver not exposed in the DOM lib for TS. See: https://github.com/microsoft/TypeScript/pull/18110
+      return spyOn(window as any, 'IntersectionObserver').and.returnValue({
+        observe: jasmine.createSpy('observe()'),
+        unobserve: jasmine.createSpy('unobserve()'),
+        disconnect: jasmine.createSpy('disconnect'),
+      });
+    }
+
+    beforeEach(() => {
+      intersectionObserverConstructorSpy = setupIntersectionObserverMock();
+    });
+
     it('should instantiate IntersectionObserver with onElementVisible as callback', () => {
       spectator.component.ngAfterViewInit();
       expect(intersectionObserverConstructorSpy).toHaveBeenCalledWith(
@@ -242,6 +246,11 @@ describe('ProgressCircleComponent', () => {
   });
 
   describe('disconnectObserver', () => {
+    beforeEach(() => {
+      spyOn(spectator.component['observer'], 'disconnect').and.stub();
+      spyOn(spectator.component['observer'], 'unobserve').and.stub();
+    });
+
     it('should handle observer being undefined (in case view init has not happened yet)', () => {
       spectator.component['observer'] = undefined;
 
@@ -280,6 +289,45 @@ describe('ProgressCircleComponent', () => {
       spectator.component.ngOnDestroy();
 
       expect(spectator.component['unobserve']).toHaveBeenCalled();
+    });
+  });
+
+  describe('changing of shown value when elements comes into viewport to trigger animation', () => {
+    const value = 50;
+
+    beforeEach(() => {
+      spectator.setInput({ value });
+
+      // Placing element outside of viewport
+      spectator.element.style.marginTop = '4000px';
+
+      // Resetting after element has been placed outside viewport
+      spectator.component['hasElementBeenVisible'] = false;
+      spectator.component.ngAfterViewInit();
+      spectator.detectChanges();
+    });
+
+    afterEach(() => {
+      spectator.component.ngOnDestroy();
+    });
+
+    it('should show 0 if element has not been visible to the user yet', (done) => {
+      setTimeout(() => {
+        expect(spectator.component.shownValue).toBe(0);
+        done();
+      });
+    });
+
+    it('should show actual value once element becomes visible to the user', (done) => {
+      // Act
+      spectator.element.scrollIntoView();
+      spectator.detectChanges();
+
+      // Assert
+      setTimeout(() => {
+        expect(spectator.component.shownValue).toBe(value);
+        done();
+      });
     });
   });
 });
