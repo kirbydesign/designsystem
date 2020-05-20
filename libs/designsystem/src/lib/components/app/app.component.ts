@@ -34,10 +34,10 @@ export class AppComponent implements AfterContentInit {
     // to ensure ion-device-hacks has run:
     const ensureIonicDeviceHacksDelay = 250;
     setTimeout(() => {
-      document.querySelectorAll('kirby-form-field').forEach((input) => {
+      document.querySelectorAll('kirby-form-field').forEach((formField) => {
         document.dispatchEvent(
           new CustomEvent('ionInputDidLoad', {
-            detail: input,
+            detail: formField,
           })
         );
       });
