@@ -174,6 +174,8 @@ const entryComponents = [
     RouterModule,
     IonicModule.forRoot({
       mode: 'ios',
+      inputShims: true,
+      scrollAssist: true,
     }),
     ...importedModules,
   ],
