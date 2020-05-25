@@ -11,6 +11,7 @@ import { CardComponent } from '../card/card.component';
 import { ItemComponent } from '../item/item.component';
 import { TestHelper } from '../../testing/test-helper';
 import { ListItemTemplateDirective } from '../list';
+import { DesignTokenHelper } from '../../helpers';
 
 @Component({
   template: '<ng-content></ng-content>',
@@ -98,7 +99,9 @@ describe('DropdownComponent', () => {
       const itemElements = spectator.queryAll<HTMLElement>('kirby-item');
       expect(itemElements).toHaveLength(items.length);
       itemElements.forEach((item) => {
-        expect(item.querySelector('ion-item')).toHaveComputedStyle({ '--min-height': '44px' });
+        expect(item.querySelector('ion-item')).toHaveComputedStyle({
+          '--min-height': DesignTokenHelper.dropdownItemHeight(),
+        });
       });
     });
 
@@ -1020,7 +1023,9 @@ describe('DropdownComponent', () => {
       const itemElements = spectator.queryAll<HTMLElement>('kirby-item');
       expect(itemElements).toHaveLength(items.length);
       itemElements.forEach((item) => {
-        expect(item.querySelector('ion-item')).toHaveComputedStyle({ '--min-height': '44px' });
+        expect(item.querySelector('ion-item')).toHaveComputedStyle({
+          '--min-height': DesignTokenHelper.dropdownItemHeight(),
+        });
       });
     });
 
