@@ -20,6 +20,15 @@ describe('ProgressCircleComponent', () => {
     ],
   });
 
+  function setupIntersectionObserverMock() {
+    // IntersectionObserver not exposed in the DOM lib for TS. See: https://github.com/microsoft/TypeScript/pull/18110
+    return spyOn(window as any, 'IntersectionObserver').and.returnValue({
+      observe: jasmine.createSpy('observe()'),
+      unobserve: jasmine.createSpy('unobserve()'),
+      disconnect: jasmine.createSpy('disconnect'),
+    });
+  }
+
   beforeEach(() => {
     spectator = createHost({ props: { value: 30 } });
     changeDetectorRef = (spectator as any).instance.changeDetectorRef;
@@ -75,15 +84,6 @@ describe('ProgressCircleComponent', () => {
 
   describe('ngAfterViewInit', () => {
     let intersectionObserverConstructorSpy;
-
-    function setupIntersectionObserverMock() {
-      // IntersectionObserver not exposed in the DOM lib for TS. See: https://github.com/microsoft/TypeScript/pull/18110
-      return spyOn(window as any, 'IntersectionObserver').and.returnValue({
-        observe: jasmine.createSpy('observe()'),
-        unobserve: jasmine.createSpy('unobserve()'),
-        disconnect: jasmine.createSpy('disconnect'),
-      });
-    }
 
     beforeEach(() => {
       intersectionObserverConstructorSpy = setupIntersectionObserverMock();
@@ -294,48 +294,41 @@ describe('ProgressCircleComponent', () => {
 
   describe('changing of shown value when elements comes into viewport to trigger animation', () => {
     const value = 50;
+    let intersectionObserverConstructorSpy: jasmine.Spy;
 
-    function moveOutsideViewPort() {
-      spectator.element.style.marginTop = '5000px';
-    }
-
-    function moveIntoViewPort() {
-      spectator.element.scrollIntoView();
+    function simulateMoveIntoViewPort() {
+      const intersectionCallback = intersectionObserverConstructorSpy.calls.argsFor(
+        0
+      )[0] as IntersectionObserverCallback;
+      intersectionCallback(
+        [{ isIntersecting: true } as IntersectionObserverEntry],
+        spectator.component['observer']
+      );
     }
 
     beforeEach(() => {
       spectator.setInput({ value });
+      intersectionObserverConstructorSpy = setupIntersectionObserverMock();
 
-      // Placing element outside of viewport
-      moveOutsideViewPort();
-
-      // Resetting after element has been placed outside viewport
+      // Resetting to be able to call ngAfterViewInit after IntersectionObserver constructor mock has been set up
       spectator.component['hasElementBeenVisible'] = false;
       spectator.component.ngAfterViewInit();
-      spectator.detectChanges();
     });
 
     afterEach(() => {
       spectator.component.ngOnDestroy();
     });
 
-    it('should show 0 if element has not been visible to the user yet', (done) => {
-      setTimeout(() => {
-        expect(spectator.component.shownValue).toBe(0);
-        done();
-      });
+    it('should show 0 if element has not been visible to the user yet', () => {
+      expect(spectator.component.shownValue).toBe(0);
     });
 
-    it('should show actual value once element becomes visible to the user', (done) => {
+    it('should show actual value once element becomes visible to the user', () => {
       // Act
-      moveIntoViewPort();
-      spectator.detectChanges();
+      simulateMoveIntoViewPort();
 
       // Assert
-      setTimeout(() => {
-        expect(spectator.component.shownValue).toBe(value);
-        done();
-      });
+      expect(spectator.component.shownValue).toBe(value);
     });
   });
 });
