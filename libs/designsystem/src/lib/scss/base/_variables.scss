@@ -101,7 +101,7 @@ $compact-modal-max-width: 359px;
 
 /* Item
 ****************************************************************************/
-$item-sizes: (
+$item-heights: (
   m: 56px,
   s: 44px,
   xs: 32px,
@@ -109,4 +109,4 @@ $item-sizes: (
 
 /* Dropdown
 ****************************************************************************/
-$dropdown-item-height: map-get($item-sizes, 's');
+$dropdown-item-height: map-get($item-heights, 's');

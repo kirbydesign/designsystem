@@ -7,7 +7,7 @@
 
   ion-item {
     font-size: font-size('s');
-    --min-height: #{map-get($item-sizes, 'm')};
+    --min-height: #{map-get($item-heights, 'm')};
     --padding-start: #{size('s')};
     --inner-padding-top: #{size('xxs')};
     --inner-padding-bottom: #{size('xxs')};
@@ -43,11 +43,11 @@
   }
 
   &.sm ion-item {
-    --min-height: #{map-get($item-sizes, 's')};
+    --min-height: #{map-get($item-heights, 's')};
   }
 
   &.xs ion-item {
-    --min-height: #{map-get($item-sizes, 'xs')};
+    --min-height: #{map-get($item-heights, 'xs')};
     --inner-padding-top: #{size('xxxs')};
     --inner-padding-bottom: #{size('xxxs')};
   }
