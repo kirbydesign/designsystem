@@ -236,9 +236,9 @@ export class DropdownComponent
               this._vertical = 'up';
             }
           }
-          this.showDropdown();
-          this.changeDetectorRef.detectChanges();
         }
+        this.showDropdown();
+        this.changeDetectorRef.detectChanges();
       };
       this.intersectionObserverRef = new IntersectionObserver(callback, options);
       this.intersectionObserverRef.observe(this.cardElement.nativeElement);

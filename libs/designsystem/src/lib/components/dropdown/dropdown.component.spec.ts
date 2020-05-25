@@ -14,6 +14,7 @@ import { ButtonComponent } from '../button/button.component';
 import { IconComponent } from '../icon/icon.component';
 import { CardComponent } from '../card/card.component';
 import { ItemComponent } from '../item/item.component';
+import { TestHelper } from '../../testing/test-helper';
 
 @Component({
   template: '<ng-content></ng-content>',
@@ -98,7 +99,6 @@ describe('DropdownComponent', () => {
 
     it('should receive focus', () => {
       spectator.element.focus();
-      spectator.detectChanges();
       expect(spectator.element).toBeFocused();
     });
 
@@ -116,7 +116,6 @@ describe('DropdownComponent', () => {
       beforeEach(() => {
         onChangeSpy = spyOn(spectator.component.change, 'emit');
         spectator.setInput('selectedIndex', newSelectedIndex);
-        spectator.detectChanges();
       });
 
       it('should have correct selected item', () => {
@@ -282,16 +281,17 @@ describe('DropdownComponent', () => {
       });
 
       describe('and button is clicked', () => {
-        beforeEach(fakeAsync(() => {
+        it('should open and focus dropdown', fakeAsync(() => {
           spectator.click('button');
-          spectator.detectChanges();
           tick(openDelayInMs);
-        }));
-        it('should open dropdown', () => {
           expect(spectator.component.isOpen).toBeTruthy();
-        });
-        it('should recieve focus', () => {
           expect(spectator.element).toBeFocused();
+        }));
+
+        it('should open dropdown within actual delay', async () => {
+          spectator.click('button');
+          await TestHelper.whenTrue(() => spectator.component.isOpen, openDelayInMs);
+          expect(spectator.component.isOpen).toBeTruthy();
         });
       });
 

@@ -33,7 +33,7 @@ $margin-horizontal-total: 2 * size('s');
   // (effectively desktop/mouse devices):
   @include focus() {
     > button,
-    > button.attention-level2 {
+    > button.attention-level3 {
       border-color: $focus-ring-color;
     }
   }
