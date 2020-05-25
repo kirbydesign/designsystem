@@ -107,8 +107,6 @@ $item-sizes: (
   xs: 32px,
 ) !default;
 
-$item-size-default: map-get($item-sizes, 's');
-
 /* Dropdown
 ****************************************************************************/
-$dropdown-item-height: $item-size-default;
+$dropdown-item-height: map-get($item-sizes, 's');

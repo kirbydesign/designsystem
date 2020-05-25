@@ -62,7 +62,7 @@
 }
 
 :host-context(kirby-dropdown) ion-item {
-  --min-height: #{map-get($item-sizes, 's')};
+  --min-height: #{$dropdown-item-height};
 }
 
 /* clean-css ignore:start */
