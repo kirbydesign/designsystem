@@ -34,7 +34,7 @@ describe('toastHelper', () => {
           animated: false,
         });
         ionToast = window.document.getElementsByTagName('ion-toast')[0];
-        await TestHelper.whenHydrated(ionToast);
+        await TestHelper.whenReady(ionToast);
         toastMessage = ionToast.shadowRoot.querySelector('.toast-message');
       });
 
@@ -74,7 +74,7 @@ describe('toastHelper', () => {
             const ionToast = window.document.getElementsByTagName('ion-toast')[0];
             expect(ionToast).toBeTruthy();
 
-            await TestHelper.whenHydrated(ionToast);
+            await TestHelper.whenReady(ionToast);
             const toastWrapper = ionToast.shadowRoot.querySelector('.toast-wrapper');
             expect(toastWrapper).toHaveComputedStyle({
               'background-color': getColor(notificationColor),

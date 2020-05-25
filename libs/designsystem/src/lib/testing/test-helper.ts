@@ -1,18 +1,22 @@
 export class TestHelper {
   /** Checks for the Ionic Web Component being hydrated, ie. the Shadow DOM is ready for query */
-  public static whenHydrated(node: HTMLElement, timeout: number = 2000): Promise<void> {
+  public static whenHasCssClass(
+    node: HTMLElement,
+    cssClass: string,
+    timeout: number = 2000
+  ): Promise<void> {
     return new Promise((resolve, reject) => {
       // Check if already hydrated:
-      if (node.classList.contains('hydrated')) {
+      if (node.classList.contains(cssClass)) {
         resolve();
         return;
       }
       const timeoutId = setTimeout(() => {
-        reject('Timed out when waiting for hydrated element...');
+        reject('Timed out when waiting for css class on element...');
       }, timeout);
       const mutationCallback = (mutations, observer) => {
         const isHydrated = mutations.some((mutation) => {
-          return mutation.type === 'attributes' && mutation.target.classList.contains('hydrated');
+          return mutation.type === 'attributes' && mutation.target.classList.contains(cssClass);
         });
         if (isHydrated) {
           observer.disconnect();
@@ -26,10 +30,15 @@ export class TestHelper {
     });
   }
 
+  /** Checks for the Ionic Web Component being hydrated, ie. the Shadow DOM is ready for query */
   public static async whenReady(element: Element): Promise<void> {
     const componentOnReady = (element as any).componentOnReady;
     if (typeof componentOnReady === 'function') {
       await componentOnReady.bind(element);
+    } else {
+      return Promise.reject(
+        '`element.componentOnReady` is not a function - `whenReady()` can only be used on Ionic elements (`ion-`)'
+      );
     }
   }
 

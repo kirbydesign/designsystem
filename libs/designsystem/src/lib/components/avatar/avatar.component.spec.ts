@@ -37,7 +37,7 @@ describe('AvatarComponent', () => {
       `);
 
       const ionIcon = spectator.queryHost<HTMLElement>('ion-icon');
-      await TestHelper.whenHydrated(ionIcon);
+      await TestHelper.whenReady(ionIcon);
 
       expect(ionIcon).toHaveComputedStyle({ width: size('m'), height: size('m') });
     });
@@ -50,7 +50,7 @@ describe('AvatarComponent', () => {
       `);
 
       const ionIcon = spectator.queryHost<HTMLElement>('ion-icon');
-      await TestHelper.whenHydrated(ionIcon);
+      await TestHelper.whenReady(ionIcon);
 
       expect(ionIcon).toHaveComputedStyle({ width: size('l'), height: size('l') });
     });
@@ -63,7 +63,7 @@ describe('AvatarComponent', () => {
       `);
 
       const ionIcon = spectator.queryHost<HTMLElement>('ion-icon');
-      await TestHelper.whenHydrated(ionIcon);
+      await TestHelper.whenReady(ionIcon);
 
       expect(ionIcon).toHaveComputedStyle({ width: size('xxxl'), height: size('xxxl') });
     });

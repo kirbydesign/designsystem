@@ -45,7 +45,7 @@ describe('ItemComponent in Kirby List', () => {
         `
       );
       ionList = spectator.queryHost('ion-list');
-      await TestHelper.whenHydrated(ionList);
+      await TestHelper.whenReady(ionList);
       itemsInList = spectator.queryAll('ion-list ion-item');
     });
 
@@ -77,7 +77,7 @@ describe('ItemComponent in Kirby List', () => {
         `
       );
       ionList = spectator.queryHost('ion-list');
-      await TestHelper.whenHydrated(ionList);
+      await TestHelper.whenReady(ionList);
       itemsInList = spectator.queryAll('ion-list ion-item');
     });
 
