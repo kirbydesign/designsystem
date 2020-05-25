@@ -177,7 +177,7 @@ const defaultOptions = (locale: string) => {
         },
          */
     },
-    annotations: [annotations(locale)],
+    // annotations: [annotations(locale)],
     legend: {
       enabled: false,
     },
