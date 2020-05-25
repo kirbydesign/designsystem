@@ -15,6 +15,7 @@ AnnotationsModule(Highcharts);
   styleUrls: ['./stock-chart.component.scss'],
 })
 export class StockChartComponent {
+  @ViewChild('chartContainer', { static: true }) chartContainer: ElementRef;
   private _data: StockChartDataPoint[];
   @Input() set data(val: StockChartDataPoint[]) {
     this.onDataChanges(val);
@@ -41,7 +42,7 @@ export class StockChartComponent {
   }
   @Input() description = '';
   @Input() showDataLabels = true;
-  @ViewChild('chartContainer', { static: true }) chartContainer: ElementRef;
+
   chart: Highcharts.Chart;
 
   constructor(@Inject(LOCALE_ID) private locale: string) {}
