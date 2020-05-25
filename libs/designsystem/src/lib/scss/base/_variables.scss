@@ -98,3 +98,17 @@ $elevations: (
 ****************************************************************************/
 $alert-max-width: 359px;
 $compact-modal-max-width: 359px;
+
+/* Item
+****************************************************************************/
+$item-sizes: (
+  m: 56px,
+  s: 44px,
+  xs: 32px,
+) !default;
+
+$item-size-default: map-get($item-sizes, 's');
+
+/* Dropdown
+****************************************************************************/
+$dropdown-item-height: $item-size-default;
