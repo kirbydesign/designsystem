@@ -41,9 +41,7 @@ export class StockChartComponent {
   }
   @Input() description = '';
   @Input() showDataLabels = true;
-
   @ViewChild('chartContainer', { static: true }) chartContainer: ElementRef;
-
   chart: Highcharts.Chart;
 
   constructor(@Inject(LOCALE_ID) private locale: string) {}
