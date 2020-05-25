@@ -1,7 +1,6 @@
 @import '../../scss/utils';
 
-$item-height: 56px;
-$dropdown-max-height: 5 * $item-height;
+$dropdown-max-height: 5 * $dropdown-item-height;
 $margin-horizontal-total: 2 * size('s');
 
 :host {
