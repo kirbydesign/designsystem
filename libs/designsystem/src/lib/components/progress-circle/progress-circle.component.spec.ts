@@ -296,15 +296,11 @@ describe('ProgressCircleComponent', () => {
     const value = 50;
 
     function moveOutsideViewPort() {
-      spectator.element.style.position = 'fixed';
-      spectator.element.style.top = '-500px';
-      spectator.element.style.left = '-500px';
+      spectator.element.style.marginTop = '5000px';
     }
 
     function moveIntoViewPort() {
-      spectator.element.style.position = 'fixed';
-      spectator.element.style.top = '0px';
-      spectator.element.style.left = '0px';
+      spectator.element.scrollIntoView();
     }
 
     beforeEach(() => {
