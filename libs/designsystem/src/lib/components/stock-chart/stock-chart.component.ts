@@ -11,11 +11,10 @@ AnnotationsModule(Highcharts);
 
 @Component({
   selector: 'kirby-stock-chart',
-  template: '',
+  templateUrl: './stock-chart.component.html',
   styleUrls: ['./stock-chart.component.scss'],
 })
 export class StockChartComponent {
-  chartContainer: ElementRef;
   private _data: StockChartDataPoint[];
   @Input() set data(val: StockChartDataPoint[]) {
     this.onDataChanges(val);
@@ -43,11 +42,11 @@ export class StockChartComponent {
   @Input() description = '';
   @Input() showDataLabels = true;
 
+  @ViewChild('chartContainer', { static: true }) chartContainer: ElementRef;
+
   chart: Highcharts.Chart;
 
-  constructor(private hostElement: ElementRef, @Inject(LOCALE_ID) private locale: string) {
-    this.chartContainer = hostElement;
-  }
+  constructor(@Inject(LOCALE_ID) private locale: string) {}
 
   onOptionsChanges(options: Options) {
     this._options = options;
@@ -56,6 +55,7 @@ export class StockChartComponent {
 
   onDataChanges(data: StockChartDataPoint[]) {
     this._data = data;
+
     if (this.chart != null) {
       // First delete all points in the previous series.
       this.chart.update(
@@ -65,6 +65,8 @@ export class StockChartComponent {
         false,
         true
       );
+      // Remove the annotations.
+      this.chart.removeAnnotation('minmax');
       // Then update the chart with new series data.
       this.chart.update(
         {
@@ -78,8 +80,6 @@ export class StockChartComponent {
         false,
         true
       );
-      // Remove the annotations.
-      this.chart.removeAnnotation('minmax');
       // Add the new annotations.
       this.chart.addAnnotation(annotations(this.locale), false);
       // And finally redraw the graph with all the changes.
