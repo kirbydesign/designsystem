@@ -1019,7 +1019,7 @@ describe('DropdownComponent', () => {
       );
     });
 
-    it('should have correct item size xxxx', () => {
+    it('should have correct item size', () => {
       const itemElements = spectator.queryAll<HTMLElement>('kirby-item');
       expect(itemElements).toHaveLength(items.length);
       itemElements.forEach((item) => {
