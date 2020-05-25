@@ -1,5 +1,9 @@
 export class TestHelper {
-  /** Checks for the Ionic Web Component being hydrated, ie. the Shadow DOM is ready for query */
+  /*
+   * Returns a promise that is either
+   * resolved when the element has the expected CSS class
+   * or rejected if timed out
+   * */
   public static whenHasCssClass(
     node: HTMLElement,
     cssClass: string,
@@ -30,7 +34,7 @@ export class TestHelper {
     });
   }
 
-  /** Checks for the Ionic Web Component being hydrated, ie. the Shadow DOM is ready for query */
+  /** Checks for the Ionic Web Component being ready, ie. the Shadow DOM is ready for query */
   public static async whenReady(element: Element): Promise<void> {
     const componentOnReady = (element as any).componentOnReady;
     if (typeof componentOnReady === 'function') {
