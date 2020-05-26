@@ -53,6 +53,10 @@ export class DesignTokenHelper {
   public static compactModalMaxWidth(): string {
     return styles.compactModalMaxWidth;
   }
+
+  public static dropdownItemHeight(): string {
+    return styles.dropdownItemHeight;
+  }
 }
 
 export type ThemeColorExtended =

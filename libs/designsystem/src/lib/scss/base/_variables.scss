@@ -99,9 +99,20 @@ $elevations: (
 $alert-max-width: 359px;
 $compact-modal-max-width: 359px;
 
+/* Item
+****************************************************************************/
+$item-heights: (
+  m: 56px,
+  s: 44px,
+  xs: 32px,
+) !default;
+
+/* Dropdown
+****************************************************************************/
+$dropdown-item-height: map-get($item-heights, 's');
+
 /* Transitions
 ****************************************************************************/
-
 $transition-duration: (
   quick: '200ms',
   short: '300ms',

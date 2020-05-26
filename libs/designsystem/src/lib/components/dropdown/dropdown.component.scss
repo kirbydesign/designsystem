@@ -1,7 +1,6 @@
 @import '../../scss/utils';
 
-$item-height: 56px;
-$dropdown-max-height: 5 * $item-height;
+$dropdown-max-height: 8 * $dropdown-item-height;
 $margin-horizontal-total: 2 * size('s');
 
 :host {
@@ -33,7 +32,7 @@ $margin-horizontal-total: 2 * size('s');
   // (effectively desktop/mouse devices):
   @include focus() {
     > button,
-    > button.attention-level2 {
+    > button.attention-level3 {
       border-color: $focus-ring-color;
     }
   }
