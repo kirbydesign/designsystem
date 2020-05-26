@@ -245,7 +245,7 @@ describe('ProgressCircleComponent', () => {
     });
   });
 
-  describe('disconnectObserver', () => {
+  describe('unobserve', () => {
     beforeEach(() => {
       spyOn(spectator.component['observer'], 'disconnect').and.stub();
       spyOn(spectator.component['observer'], 'unobserve').and.stub();
@@ -283,8 +283,8 @@ describe('ProgressCircleComponent', () => {
   });
 
   describe('ngOnDestroy', () => {
-    it('should call disconnectObserver', () => {
-      spectator.component['unobserve'] = jasmine.createSpy('disconnectObserver');
+    it('should call unobserve', () => {
+      spectator.component['unobserve'] = jasmine.createSpy('unobserve');
 
       spectator.component.ngOnDestroy();
 
@@ -313,10 +313,6 @@ describe('ProgressCircleComponent', () => {
       // Resetting to be able to call ngAfterViewInit after IntersectionObserver constructor mock has been set up
       spectator.component['hasElementBeenVisible'] = false;
       spectator.component.ngAfterViewInit();
-    });
-
-    afterEach(() => {
-      spectator.component.ngOnDestroy();
     });
 
     it('should show 0 if element has not been visible to the user yet', () => {
