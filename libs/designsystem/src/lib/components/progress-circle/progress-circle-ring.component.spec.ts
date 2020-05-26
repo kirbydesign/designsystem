@@ -92,7 +92,7 @@ describe('ProgressCircleRingComponent', () => {
       });
     });
 
-    it('should render background stroke in white', () => {
+    it('should render background stroke in semi-light', () => {
       spectator.detectChanges();
       expect(spectator.query('circle.circle')).toHaveComputedStyle({
         stroke: getColor('semi-light'),
