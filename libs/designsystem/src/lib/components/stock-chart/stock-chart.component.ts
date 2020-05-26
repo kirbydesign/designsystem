@@ -1,4 +1,4 @@
-import { Component, ElementRef, Inject, Input, LOCALE_ID, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, Input, LOCALE_ID } from '@angular/core';
 import { Options } from 'highcharts';
 import * as Highcharts from 'highcharts/highstock';
 import AnnotationsModule from 'highcharts/modules/annotations';
@@ -10,11 +10,11 @@ AnnotationsModule(Highcharts);
 
 @Component({
   selector: 'kirby-stock-chart',
-  templateUrl: './stock-chart.component.html',
+  template: '',
   styleUrls: ['./stock-chart.component.scss'],
 })
 export class StockChartComponent {
-  @ViewChild('chartContainer', { static: true }) chartContainer: ElementRef;
+  chartContainer: ElementRef;
   private _data: StockChartDataPoint[];
   @Input() set data(val: StockChartDataPoint[]) {
     this.onDataChanges(val);
@@ -44,7 +44,9 @@ export class StockChartComponent {
 
   chart: Highcharts.Chart;
 
-  constructor(@Inject(LOCALE_ID) private locale: string) {}
+  constructor(private hostElement: ElementRef, @Inject(LOCALE_ID) private locale: string) {
+    this.chartContainer = hostElement;
+  }
 
   onOptionsChanges(options: Options) {
     this._options = options;
