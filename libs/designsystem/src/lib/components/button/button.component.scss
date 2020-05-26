@@ -100,8 +100,7 @@
 
   // Only apply focus ring if pointer device can hover
   // (effectively desktop/mouse devices):
-  // @include focus() {
-  &:focus {
+  @include focus() {
     border-color: $focus-ring-color;
   }
 
