@@ -1,23 +1,44 @@
 @import '../../scss/utils';
 
+$form-field-label-height: 24px;
+
 :host(.error) {
   border: 1px solid get-color('danger');
+}
+
+// Ensures correct position of cloned input when Ionic scrollAssist is enabled
+:host(.cloned-input) {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+// Ensures correct position of cloned input when Ionic scrollAssist is enabled
+:host-context(label) {
+  &.cloned-input {
+    top: $form-field-label-height;
+  }
 }
 
 :host {
   background-color: get-color('white');
   color: get-color('white-contrast');
   border: none;
-  border-radius: size('s');
-  box-shadow: get-elevation(2);
   box-sizing: border-box;
   display: block;
   font-size: font-size('n');
   line-height: line-height('n');
   outline: none;
-  padding: size('s');
-  width: 100%;
+  margin: 0;
   -webkit-appearance: none;
+
+  &:not(.borderless) {
+    border-radius: size('s');
+    box-shadow: get-elevation(2);
+    padding: size('s');
+    width: 100%;
+  }
 
   &:disabled {
     background-color: get-color('light-tint');
