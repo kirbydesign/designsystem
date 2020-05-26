@@ -1,4 +1,4 @@
-import { Component, ElementRef, Inject, Input, LOCALE_ID } from '@angular/core';
+import { Component, ElementRef, Inject, Input, LOCALE_ID, ViewChild } from '@angular/core';
 import { Options } from 'highcharts';
 import * as Highcharts from 'highcharts/highstock';
 import AnnotationsModule from 'highcharts/modules/annotations';
