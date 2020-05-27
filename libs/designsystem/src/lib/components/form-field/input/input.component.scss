@@ -16,4 +16,12 @@
   }
 
   height: size('xxxl');
+
+  &[currencyInput='true'] {
+    text-align: right;
+    height: size('xl');
+    font-weight: font-weight('bold');
+    width: 110px;
+    padding: 0;
+  }
 }

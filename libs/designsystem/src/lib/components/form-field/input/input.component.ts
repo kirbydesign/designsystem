@@ -62,6 +62,14 @@ export class InputComponent implements OnChanges {
   @Input()
   inputmode: string;
 
+  @HostBinding('attr.pattern')
+  @Input()
+  pattern: string | RegExp;
+
+  @HostBinding('attr.currencyInput')
+  @Input()
+  currencyInput: boolean;
+
   @HostListener('keyup', ['$event.target.value'])
   _onKeyUp(value: string) {
     this.kirbyChange.emit(value);

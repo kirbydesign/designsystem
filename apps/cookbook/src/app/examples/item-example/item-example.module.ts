@@ -25,6 +25,7 @@ import { ItemExampleButtonComponent } from './examples/button';
 import { ItemExampleSimpleMediumComponent } from './examples/simple/default-md';
 import { ItemExampleSimpleSmallComponent } from './examples/simple/default-sm';
 import { ItemExampleSimpleExtraSmallComponent } from './examples/simple/default-xs';
+import { ItemExampleInputDefaultComponent } from './examples/input/default';
 
 const COMPONENT_DECLARATIONS = [
   ItemExampleSimpleComponent,
@@ -50,6 +51,7 @@ const COMPONENT_DECLARATIONS = [
   ItemExampleAvatarFlaggedThreeLinesComponent,
   ItemExampleButtonComponent,
   ItemExampleHorizontalComponent,
+  ItemExampleInputDefaultComponent,
 ];
 
 @NgModule({
