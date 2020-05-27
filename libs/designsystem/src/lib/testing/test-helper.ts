@@ -29,7 +29,7 @@ export class TestHelper {
   public static async whenReady(element: Element): Promise<void> {
     const componentOnReady = (element as any).componentOnReady;
     if (typeof componentOnReady === 'function') {
-      await componentOnReady.bind(element);
+      await componentOnReady.bind(element)();
     }
   }
 
