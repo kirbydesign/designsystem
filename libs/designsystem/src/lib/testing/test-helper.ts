@@ -55,6 +55,10 @@ export class TestHelper {
     });
   }
 
+  public static async setTimeoutAsync(ms?: number): Promise<void> {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
   public static getCssProperty(element: Element, propertyName: string) {
     return window
       .getComputedStyle(element)
