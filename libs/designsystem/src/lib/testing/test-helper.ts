@@ -26,10 +26,23 @@ export class TestHelper {
     });
   }
 
-  public static async whenReady(element: Element): Promise<void> {
-    const componentOnReady = (element as any).componentOnReady;
-    if (typeof componentOnReady === 'function') {
-      await componentOnReady.bind(element)();
+  public static async whenReady(
+    elementOrNodeList: Element | NodeListOf<Element> | Element[],
+    retrying = false
+  ): Promise<void> {
+    if (elementOrNodeList instanceof Element) {
+      const componentOnReady = (elementOrNodeList as any).componentOnReady;
+      if (typeof componentOnReady === 'function') {
+        await componentOnReady.bind(elementOrNodeList)();
+      } else if (componentOnReady === undefined && !retrying) {
+        // Sometimes the element's componentOnReady hasn't been registered yet - retry after a tick:
+        await TestHelper.setTimeoutAsync();
+        await TestHelper.whenReady(elementOrNodeList, true);
+      }
+    } else {
+      await Promise.all(
+        Array.from(elementOrNodeList).map(async (element) => await TestHelper.whenReady(element))
+      );
     }
   }
 
