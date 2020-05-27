@@ -1,6 +1,6 @@
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, IonRadioGroup } from '@ionic/angular';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
 import { RadioButtonGroupComponent } from './radio-button-group.component';
@@ -24,6 +24,8 @@ describe('RadioButtonGroupComponent', () => {
       RadioButtonGroupComponent,
       { items: string[]; selected: string; disabled: boolean }
     >;
+    let ionRadioGroup: IonRadioGroup;
+    let ionRadioElements: HTMLIonRadioElement[];
 
     beforeEach(async () => {
       spectator = createHost(
@@ -42,8 +44,20 @@ describe('RadioButtonGroupComponent', () => {
         }
       );
 
-      const ionRadioGroupElement = spectator.query<HTMLElement>('ion-radio-group');
-      await TestHelper.whenHydrated(ionRadioGroupElement);
+      ionRadioGroup = spectator.query(IonRadioGroup);
+      const ionRadioGroupElement = spectator.query('ion-radio-group');
+      await TestHelper.whenReady(ionRadioGroupElement);
+      await TestHelper.setTimeoutAsync(); // Wait a tick for IonRadioGroup.value to be updated
+      // Assert initial state:
+      expect(ionRadioGroup.value).toBe('Curly');
+
+      ionRadioElements = spectator.queryAll('ion-radio');
+      expect(ionRadioElements).toHaveLength(3);
+      await TestHelper.whenReady(ionRadioElements);
+      // Assert initial state:
+      expect(ionRadioElements[0].getAttribute('aria-checked')).toBe('false');
+      expect(ionRadioElements[1].getAttribute('aria-checked')).toBe('true');
+      expect(ionRadioElements[2].getAttribute('aria-checked')).toBe('false');
     });
 
     describe('selection', () => {
@@ -53,21 +67,14 @@ describe('RadioButtonGroupComponent', () => {
         expect(spectator.hostComponent.selected).toEqual('Larry');
       });
 
-      it('should update the selected kirby-radio-button when the value of the bound field is updated', () => {
-        // TODO: This test needs to be implemented, but I've tried EVERYTHING... well, everything except what's
-        //       needed for me to have this test pass. Please help me, oh great divine power (known as Jakob)!
-        //
-        //       The problem I'm encountering is that I can't seem to get the ionic-elements to update, regardless of
-        //       using fakeAsync / tick, detectChanges, waiting for hydration of web components et. al.
-        expect(true).toBe(true);
-        /*
+      it('should update the selected kirby-radio-button when the value of the bound field is updated', async () => {
         spectator.setHostInput('selected', 'Moe');
+        await TestHelper.setTimeoutAsync(); // Wait a tick for IonRadioGroup.value to be updated
 
-        const radioButtons = spectator.queryAll(RadioButtonComponent);
-        expect(radioButtons[0].ionRadio.nativeElement.getAttribute('aria-checked')).toBe('false');
-        expect(radioButtons[1].ionRadio.nativeElement.getAttribute('aria-checked')).toBe('false');
-        expect(radioButtons[2].ionRadio.nativeElement.getAttribute('aria-checked')).toBe('true');
-         */
+        expect(ionRadioGroup.value).toEqual('Moe');
+        expect(ionRadioElements[0].getAttribute('aria-checked')).toBe('false');
+        expect(ionRadioElements[1].getAttribute('aria-checked')).toBe('false');
+        expect(ionRadioElements[2].getAttribute('aria-checked')).toBe('true');
       });
     });
 
@@ -88,6 +95,8 @@ describe('RadioButtonGroupComponent', () => {
 
   describe('used with template-driven form', () => {
     let spectator: SpectatorHost<RadioButtonGroupComponent, { items: string[]; selected: string }>;
+    let ionRadioGroup: IonRadioGroup;
+    let ionRadioElements: HTMLIonRadioElement[];
 
     beforeEach(async () => {
       spectator = createHost(
@@ -105,8 +114,20 @@ describe('RadioButtonGroupComponent', () => {
         }
       );
 
-      const ionRadioGroupElement = spectator.query<HTMLElement>('ion-radio-group');
-      await TestHelper.whenHydrated(ionRadioGroupElement);
+      ionRadioGroup = spectator.query(IonRadioGroup);
+      const ionRadioGroupElement = spectator.query('ion-radio-group');
+      await TestHelper.whenReady(ionRadioGroupElement);
+      await TestHelper.setTimeoutAsync(); // Wait a tick for IonRadioGroup.value to be set
+      // Assert initial state:
+      expect(ionRadioGroup.value).toBe('Curly');
+
+      ionRadioElements = spectator.queryAll('ion-radio');
+      expect(ionRadioElements).toHaveLength(3);
+      await TestHelper.whenReady(ionRadioElements);
+      // Assert initial state:
+      expect(ionRadioElements[0].getAttribute('aria-checked')).toBe('false');
+      expect(ionRadioElements[1].getAttribute('aria-checked')).toBe('true');
+      expect(ionRadioElements[2].getAttribute('aria-checked')).toBe('false');
     });
 
     describe('selection', () => {
@@ -116,27 +137,22 @@ describe('RadioButtonGroupComponent', () => {
         expect(spectator.hostComponent.selected).toEqual('Larry');
       });
 
-      it('should update the selected kirby-radio-button when the value of the form is updated', () => {
-        // TODO: This test needs to be implemented, but I've tried EVERYTHING... well, everything except what's
-        //       needed for me to have this test pass. Please help me, oh great divine power (known as Jakob)!
-        //
-        //       The problem I'm encountering is that I can't seem to get the ionic-elements to update, regardless of
-        //       using fakeAsync / tick, detectChanges, waiting for hydration of web components et. al.
-        expect(true).toBe(true);
-        /*
+      it('should update the selected kirby-radio-button when the value of the form is updated', async () => {
         spectator.setHostInput('selected', 'Moe');
+        await TestHelper.setTimeoutAsync(); // Wait a tick for IonRadioGroup.value to be updated
 
-        const radioButtons = spectator.queryAll(RadioButtonComponent);
-        expect(radioButtons[0].ionRadio.nativeElement.getAttribute('aria-checked')).toBe('false');
-        expect(radioButtons[1].ionRadio.nativeElement.getAttribute('aria-checked')).toBe('false');
-        expect(radioButtons[2].ionRadio.nativeElement.getAttribute('aria-checked')).toBe('true');
-         */
+        expect(ionRadioGroup.value).toEqual('Moe');
+        expect(ionRadioElements[0].getAttribute('aria-checked')).toBe('false');
+        expect(ionRadioElements[1].getAttribute('aria-checked')).toBe('false');
+        expect(ionRadioElements[2].getAttribute('aria-checked')).toBe('true');
       });
     });
   });
 
   describe('used with reactive form', () => {
     let spectator: SpectatorHost<RadioButtonGroupComponent, { form: FormGroup; items: string[] }>;
+    let ionRadioGroup: IonRadioGroup;
+    let ionRadioElements: HTMLIonRadioElement[];
     let control: FormControl;
 
     beforeEach(async () => {
@@ -160,32 +176,37 @@ describe('RadioButtonGroupComponent', () => {
         }
       );
 
-      const ionRadioGroupElement = spectator.query<HTMLElement>('ion-radio-group');
-      await TestHelper.whenHydrated(ionRadioGroupElement);
+      ionRadioGroup = spectator.query(IonRadioGroup);
+      const ionRadioGroupElement = spectator.query('ion-radio-group');
+      await TestHelper.whenReady(ionRadioGroupElement);
+      await TestHelper.setTimeoutAsync(); // Wait a tick for IonRadioGroup.value to be set
+      // Assert initial state:
+      expect(ionRadioGroup.value).toBeNull();
+
+      ionRadioElements = spectator.queryAll('ion-radio');
+      expect(ionRadioElements).toHaveLength(3);
+      await TestHelper.whenReady(ionRadioElements);
+      // Assert initial state:
+      expect(ionRadioElements[0].getAttribute('aria-checked')).toBe('false');
+      expect(ionRadioElements[1].getAttribute('aria-checked')).toBe('false');
+      expect(ionRadioElements[2].getAttribute('aria-checked')).toBe('false');
     });
 
     describe('selection', () => {
-      it('should update the form control value when clicking upon a kirby-radio-button', () => {
+      it('should update the form control value when clicking upon a kirby-radio-button', async () => {
         const radioButtons = spectator.queryAll('kirby-radio-button');
         spectator.click(radioButtons[0]);
-        expect(control.value).toEqual('Larry');
+
+        expect(control.value).toBe('Larry');
       });
 
-      it('should update the selected kirby-radio-button when the value of the form control is updated', () => {
-        // TODO: This test needs to be implemented, but I've tried EVERYTHING... well, everything except what's
-        //       needed for me to have this test pass. Please help me, oh great divine power (known as Jakob)!
-        //
-        //       The problem I'm encountering is that I can't seem to get the ionic-elements to update, regardless of
-        //       using fakeAsync / tick, detectChanges, waiting for hydration of web components et. al.
-        expect(true).toBe(true);
-        /*
+      it('should update the selected kirby-radio-button when the value of the form control is updated', async () => {
         control.setValue('Moe');
+        await TestHelper.setTimeoutAsync(); // Wait a tick for IonRadioGroup.value to be set
 
-        const radioButtons = spectator.queryAll(RadioButtonComponent);
-        expect(radioButtons[0].ionRadio.nativeElement.getAttribute('aria-checked')).toBe('false');
-        expect(radioButtons[1].ionRadio.nativeElement.getAttribute('aria-checked')).toBe('false');
-        expect(radioButtons[2].ionRadio.nativeElement.getAttribute('aria-checked')).toBe('true');
-         */
+        expect(ionRadioElements[0].getAttribute('aria-checked')).toBe('false');
+        expect(ionRadioElements[1].getAttribute('aria-checked')).toBe('false');
+        expect(ionRadioElements[2].getAttribute('aria-checked')).toBe('true');
       });
     });
 
