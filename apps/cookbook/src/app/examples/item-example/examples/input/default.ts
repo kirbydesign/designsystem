@@ -12,7 +12,7 @@ const config = {
       type="number"
       kirby-input
       borderless="true"
-      currencyInput="true"/>
+      currencyInput="true" />
   </kirby-form-field>
 </kirby-item>`,
 };
