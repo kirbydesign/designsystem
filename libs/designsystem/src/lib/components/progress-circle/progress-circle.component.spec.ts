@@ -1,15 +1,17 @@
-import { Spectator, createComponentFactory } from '@ngneat/spectator';
+import { SpectatorHost, createHostFactory } from '@ngneat/spectator';
 import { ElementRef, ChangeDetectorRef } from '@angular/core';
 
 import { ProgressCircleComponent } from './progress-circle.component';
+import { TestHelper } from '../../testing/test-helper';
+import { ProgressCircleRingComponent } from './progress-circle-ring.component';
 
 describe('ProgressCircleComponent', () => {
-  let spectator: Spectator<ProgressCircleComponent>;
+  let spectator: SpectatorHost<ProgressCircleComponent>;
   let changeDetectorRef: ChangeDetectorRef;
 
-  const createHost = createComponentFactory({
+  const createHost = createHostFactory({
     component: ProgressCircleComponent,
-    declarations: [],
+    declarations: [ProgressCircleRingComponent],
     providers: [
       {
         provide: ElementRef,
@@ -30,7 +32,9 @@ describe('ProgressCircleComponent', () => {
   }
 
   beforeEach(() => {
-    spectator = createHost({ props: { value: 30 } });
+    spectator = createHost('<kirby-progress-circle></kirby-progress-circle>', {
+      props: { value: 30 },
+    });
     changeDetectorRef = (spectator as any).instance.changeDetectorRef;
   });
 
@@ -107,7 +111,7 @@ describe('ProgressCircleComponent', () => {
 
   describe('onElementVisible', () => {
     it('should not have been visible before onElementVisible has been called', () => {
-      expect(spectator.component['hasElementBeenVisible']).toBe(false);
+      expect(spectator.component['hasElementBeenVisible']).toBeFalsy();
     });
 
     it('should mark element as visible if element is intersecting when observer is called', () => {
@@ -171,7 +175,7 @@ describe('ProgressCircleComponent', () => {
       spectator.component['onElementVisible'](entries as IntersectionObserverEntry[]);
 
       // Assert
-      expect(spectator.component['hasElementBeenVisible']).toBe(false);
+      expect(spectator.component['hasElementBeenVisible']).toBeFalsy();
     });
 
     it('should not mark element as visible if elements array is undefined', () => {
@@ -182,7 +186,7 @@ describe('ProgressCircleComponent', () => {
       spectator.component['onElementVisible'](entries as IntersectionObserverEntry[]);
 
       // Assert
-      expect(spectator.component['hasElementBeenVisible']).toBe(false);
+      expect(spectator.component['hasElementBeenVisible']).toBeFalsy();
     });
 
     it('should not mark element as visible if elements array is empty', () => {
@@ -292,39 +296,25 @@ describe('ProgressCircleComponent', () => {
     });
   });
 
-  describe('changing of shown value when elements comes into viewport to trigger animation', () => {
+  describe('usage of real IntersectionObserver to make sure animation is triggered when elements enters ViewPort', () => {
     const value = 50;
-    let intersectionObserverConstructorSpy: jasmine.Spy;
-
-    function simulateMoveIntoViewPort() {
-      const intersectionCallback = intersectionObserverConstructorSpy.calls.argsFor(
-        0
-      )[0] as IntersectionObserverCallback;
-      intersectionCallback(
-        [{ isIntersecting: true } as IntersectionObserverEntry],
-        spectator.component['observer']
-      );
-    }
 
     beforeEach(() => {
       spectator.setInput({ value });
-      intersectionObserverConstructorSpy = setupIntersectionObserverMock();
-
-      // Resetting to be able to call ngAfterViewInit after IntersectionObserver constructor mock has been set up
-      spectator.component['hasElementBeenVisible'] = false;
-      spectator.component.ngAfterViewInit();
     });
 
-    it('should show 0 if element has not been visible to the user yet', () => {
-      expect(spectator.component.shownValue).toBe(0);
-    });
+    it('should set hasElementBeenVisible after scrolled into view', async () => {
+      expect(spectator.component['hasElementBeenVisible']).toBeUndefined();
+      const paddingTop = window.innerHeight; // Ensure the element is below the fold
+      (spectator.hostElement as HTMLElement).style.paddingTop = `${paddingTop}px`;
+      await TestHelper.whenTrue(() => spectator.component['hasElementBeenVisible'] === false); // Await IntersectionObserver to fire
+      expect(spectator.component['hasElementBeenVisible']).toBeFalse();
 
-    it('should show actual value once element becomes visible to the user', () => {
       // Act
-      simulateMoveIntoViewPort();
+      spectator.element.scrollIntoView();
 
-      // Assert
-      expect(spectator.component.shownValue).toBe(value);
+      await TestHelper.whenTrue(() => spectator.component['hasElementBeenVisible'] === true); // Await IntersectionObserver to fire
+      expect(spectator.component['hasElementBeenVisible']).toBeTrue();
     });
   });
 });

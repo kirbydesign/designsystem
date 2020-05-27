@@ -26,7 +26,7 @@ export class ProgressCircleComponent implements AfterViewInit, OnDestroy {
   @Input() size: 'sm' | 'md' | 'lg' = 'md';
   @Input() themeColor: 'success' | 'warning' | 'danger';
 
-  private hasElementBeenVisible = false;
+  private hasElementBeenVisible: boolean | undefined;
   private observer: IntersectionObserver;
 
   constructor(private elementRef: ElementRef, private changeDetectorRef: ChangeDetectorRef) {}
@@ -43,8 +43,8 @@ export class ProgressCircleComponent implements AfterViewInit, OnDestroy {
   }
 
   private onElementVisible = (entries: IntersectionObserverEntry[]) => {
-    if (entries && entries.some((entry) => entry.isIntersecting)) {
-      this.hasElementBeenVisible = true;
+    this.hasElementBeenVisible = entries && entries.some((entry) => entry.isIntersecting);
+    if (this.hasElementBeenVisible) {
       this.unobserve();
       this.changeDetectorRef.markForCheck();
     }
