@@ -11,7 +11,6 @@ const config = {
     <input
       type="number"
       kirby-input
-      pattern="^[0-9]+(,[0-9]{1,2})?$"
       borderless="true"
       currencyInput="true"/>
   </kirby-form-field>
