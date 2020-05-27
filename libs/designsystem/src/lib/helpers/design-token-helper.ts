@@ -55,7 +55,8 @@ export class DesignTokenHelper {
   }
 
   public static dropdownItemHeight(): string {
-    return styles.dropdownItemHeight;
+    return '44px';
+    //return styles.dropdownItemHeight;
   }
 }
 

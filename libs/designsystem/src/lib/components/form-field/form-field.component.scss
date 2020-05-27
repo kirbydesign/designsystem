@@ -4,9 +4,11 @@
   display: block;
   position: relative; // Ensures correct position of cloned child input when Ionic scrollAssist is enabled
 
-  &:not(:host-context(kirby-item)) {
-    margin-bottom: size('s');
-  }
+  margin-bottom: size('s');
+}
+
+:host-context(kirby-item) {
+  margin-bottom: 0;
 }
 
 .texts {

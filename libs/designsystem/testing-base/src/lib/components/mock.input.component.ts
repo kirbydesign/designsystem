@@ -23,6 +23,8 @@ export class MockInputComponent {
   @Input() value: string;
   @Input() maxlength: number;
   @Input() inputmode: string;
+  @Input() pattern: string | RegExp;
+  @Input() currencyInput: boolean;
 }
 
 // #endregion
