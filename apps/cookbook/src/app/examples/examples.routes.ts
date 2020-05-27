@@ -50,6 +50,7 @@ import { ListItemsExampleComponent } from './list/components/items';
 import { ReorderListExampleComponent } from './reorder-list/reorder-list-example.component';
 import { DropdownExampleComponent } from '~/app/examples/dropdown-example/dropdown-example.component';
 import { RadioButtonExampleComponent } from './radio-button-example/radio-button-example.component';
+import { StockChartExampleComponent } from './stock-chart-example/stock-chart-example.component';
 
 export const routes: Routes = [
   {
@@ -221,6 +222,10 @@ export const routes: Routes = [
   {
     path: 'chart',
     component: ChartExampleComponent,
+  },
+  {
+    path: 'stock-chart',
+    component: StockChartExampleComponent,
   },
   {
     path: 'grid',
