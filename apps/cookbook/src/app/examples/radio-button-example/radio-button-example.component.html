@@ -1,0 +1,30 @@
+<h3>Simple</h3>
+<cookbook-example-viewer [html]="bindingExample.template" [ts]="bindingExample.codeSnippet">
+  <div>
+    <cookbook-radio-button-example-binding #bindingExample></cookbook-radio-button-example-binding>
+  </div>
+</cookbook-example-viewer>
+
+<h3>Template-driven Forms</h3>
+<cookbook-example-viewer
+  [html]="templateDrivenExample.template"
+  [ts]="templateDrivenExample.codeSnippet"
+>
+  <div>
+    <cookbook-radio-button-example-template-driven-forms
+      #templateDrivenExample
+    ></cookbook-radio-button-example-template-driven-forms>
+  </div>
+</cookbook-example-viewer>
+
+<h3>Reactive Forms</h3>
+<cookbook-example-viewer
+  [html]="reactiveFormsExample.template"
+  [ts]="reactiveFormsExample.codeSnippet"
+>
+  <div>
+    <cookbook-radio-button-example-reactive-forms
+      #reactiveFormsExample
+    ></cookbook-radio-button-example-reactive-forms>
+  </div>
+</cookbook-example-viewer>
