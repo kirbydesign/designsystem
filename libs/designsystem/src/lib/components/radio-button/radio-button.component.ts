@@ -7,7 +7,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { IonFabButton, IonRadio } from '@ionic/angular';
+import { IonRadio } from '@ionic/angular';
 
 @Component({
   selector: 'kirby-radio-button',
