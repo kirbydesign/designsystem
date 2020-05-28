@@ -83,6 +83,23 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
       providers: [{ provide: COMPONENT_PROPS, useValue: this.config.componentProps }],
       parent: this.injector,
     });
+
+    // const observer = new MutationObserver((mutations) => {
+    //   mutations.forEach((mutation) => {
+    //     const key = '--keyboard-offset';
+    //     const value = this.ionContentElement.nativeElement.style.getPropertyValue(key);
+    //     const kirbyModalFooter = this.elementRef.nativeElement.querySelector('kirby-modal-footer');
+
+    //     if (value.length && kirbyModalFooter) {
+    //       kirbyModalFooter.setAttribute('style', `${key}: ${value}`);
+    //     }
+    //   });
+    // });
+    // observer.observe(this.ionContentElement.nativeElement, {
+    //   attributes: true,
+    //   childList: true,
+    //   characterData: true,
+    // });
   }
 
   ngAfterViewInit(): void {
@@ -158,17 +175,23 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   _onKeyboardWillShow(info?: { keyboardHeight: number }) {
     this.keyboardVisible = true;
     if (info && info.keyboardHeight) {
-      this.ionContentElement.nativeElement.style.setProperty(
-        '--keyboard-offset',
-        `${info.keyboardHeight}px`
-      );
+      this.setKeyboardOffset(`${info.keyboardHeight}px`);
     }
   }
 
   @HostListener('window:keyboardWillHide')
   _onKeyboardWillHide() {
     this.keyboardVisible = false;
-    this.ionContentElement.nativeElement.style.setProperty('--keyboard-offset', '0px');
+    this.setKeyboardOffset('0px');
+  }
+
+  private setKeyboardOffset(value: string) {
+    this.ionContentElement.nativeElement.style.setProperty('--keyboard-offset', value);
+
+    const kirbyModalFooter = this.elementRef.nativeElement.querySelector('kirby-modal-footer');
+    if (kirbyModalFooter) {
+      kirbyModalFooter.setAttribute('style', `--keyboard-offset: ${value}`);
+    }
   }
 
   onHeaderTouchStart(event: TouchEvent) {
