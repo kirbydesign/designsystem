@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 
 const config = {
-  selector: 'cookbook-item-example-input-default',
+  selector: 'cookbook-item-example-input-numeric',
   template: `<kirby-item>
   <kirby-avatar overlay="true" slot="start">
     <kirby-icon name="moneybag"></kirby-icon>
   </kirby-avatar>
   <h3>Title</h3>
   <kirby-form-field slot="end">
-    <input type="text" kirby-input borderless="true" item-input="true" value="Tekst kan skrives her"/>
+    <input type="number" kirby-input borderless="true" item-input="true" value="100.00" />
   </kirby-form-field>
 </kirby-item>`,
 };
@@ -17,6 +17,6 @@ const config = {
   selector: config.selector,
   template: config.template,
 })
-export class ItemExampleInputDefaultComponent {
+export class ItemExampleInputNumericComponent {
   template: string = config.template;
 }

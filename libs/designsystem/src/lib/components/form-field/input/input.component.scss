@@ -1,6 +1,8 @@
 @import '../form-field-inputs.shared';
 
 :host() {
+  text-align: inherit;
+
   &[type='number'] {
     //fallback
     appearance: textfield;
@@ -17,11 +19,12 @@
 
   height: size('xxxl');
 
-  &[currencyInput='true'] {
-    text-align: right;
+  &[item-input='true'] {
     height: size('xl');
-    font-weight: font-weight('bold');
-    max-width: 110px;
-    padding: 0;
+
+    &[type='number'] {
+      font-weight: font-weight('bold');
+      max-width: 112px;
+    }
   }
 }
