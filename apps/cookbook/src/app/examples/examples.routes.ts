@@ -143,10 +143,6 @@ export const routes: Routes = [
         path: 'modal',
         component: ModalExamplePopoutComponent,
       },
-      {
-        path: 'radiobutton',
-        component: RadioButtonExampleComponent,
-      },
     ],
   },
   {
@@ -310,5 +306,9 @@ export const routes: Routes = [
   {
     path: 'dropdown',
     component: DropdownExampleComponent,
+  },
+  {
+    path: 'radiobutton',
+    component: RadioButtonExampleComponent,
   },
 ];
