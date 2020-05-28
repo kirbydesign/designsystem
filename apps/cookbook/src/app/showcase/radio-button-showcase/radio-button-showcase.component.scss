@@ -1,4 +1,10 @@
-cookbook-example-viewer,
-cookbook-showcase-properties {
-  margin-bottom: 1rem;
+@import './libs/designsystem/src/lib/scss/utils';
+
+h2:not(:first-child),
+h3 {
+  margin-top: size('l');
+}
+
+cookbook-example-viewer {
+  margin-bottom: size('l');
 }
