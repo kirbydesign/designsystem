@@ -4,16 +4,20 @@ const config = {
   selector: 'cookbook-radio-button-example-template-driven-forms',
   template: `<kirby-radio-button-group #group="ngModel" [(ngModel)]="selected" required>
   <kirby-item *ngFor="let item of items" selectable="true">
-    <kirby-radio-button [value]="item.value" slot="start"></kirby-radio-button>
+    <kirby-radio-button [value]="item" slot="start"></kirby-radio-button>
     <kirby-label>{{item.title}}</kirby-label>
   </kirby-item>
 </kirby-radio-button-group>
-<section>
-    <b>Selected:</b> {{selected | json}}
-    <span class="required" *ngIf="group.errors?.required">Missing selection</span>
-    <button kirby-button size="sm" *ngIf="selected" (click)="selected = null">Clear</button>
-</section>
-`,
+<fieldset>
+  <legend>Configuration</legend>
+  <button kirby-button size="sm" attentionLevel="2" [disabled]="selected === null" (click)="selected = null">Clear</button>
+  <p class="selection">
+    <b>Selected:</b> {{selected | json}}<br />
+    <b>Form state:</b>:
+      <span [class.state-true]="group.valid">valid: {{ group.valid }}</span>
+      <span [class.state-true]="group.touched">touched: {{ group.touched }}</span>    
+  </p>
+</fieldset>`,
   codeSnippet: `
 items = [
   { title: 'Bacon', value: 1 },
@@ -22,13 +26,31 @@ items = [
   { title: 'Tongue', value: 4 },
   { title: 'Drumstick', value: 5 },
 ];
-selected = this.items[2].value;`,
+selected = this.items[2];`,
   styles: [
     `span.required {
       background-color: #ff595e;
       margin-right: 4px;
       padding: 0px 2px;
       border-radius: 4px;
+    }
+    
+    .selection {
+      margin: 0;
+      font-size: 12px;
+      line-height: 16px;
+      font-style: italic;
+    }
+    
+    span {
+      background-color: #ff595e;
+      margin-right: 4px;
+      padding: 0px 2px;
+      border-radius: 4px;
+    }
+    
+    span.state-true {
+      background-color: #2cf287;
     }`,
   ],
 };
@@ -39,7 +61,7 @@ selected = this.items[2].value;`,
   styles: config.styles,
 })
 export class RadioButtonExampleTemplateDrivenFormsComponent {
-  template: string = config.template.split('<section>')[0]; // Remove status part of the template
+  template: string = config.template.split('<fieldset>')[0]; // Remove status part of the template
   codeSnippet: string = config.codeSnippet.trim();
 
   items = [

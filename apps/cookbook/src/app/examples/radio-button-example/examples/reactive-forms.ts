@@ -6,13 +6,14 @@ const config = {
   template: `<form [formGroup]="form">
   <kirby-radio-button-group formControlName="favoriteFood">
     <kirby-item *ngFor="let item of items" selectable="true">
-      <kirby-radio-button [value]="item.value" slot="start"></kirby-radio-button>
+      <kirby-radio-button [value]="item" slot="start"></kirby-radio-button>
       <kirby-label>{{item.title}}</kirby-label>
     </kirby-item>
   </kirby-radio-button-group>
 </form>
 <fieldset>
   <legend>Configuration</legend>
+  <button kirby-button size="sm" attentionLevel="2" [disabled]="favoriteFoodControl.value === null" (click)="clearForm()">Clear</button>
   <kirby-checkbox [checked]="canSelectFavorite" (checkedChange)="toggleEnabled($event)"></kirby-checkbox>
   <label (click)="toggleEnabled(!canSelectFavorite)">Form field enabled</label><br />
   <kirby-checkbox [checked]="favoriteRequired" (checkedChange)="toggleRequired($event)"></kirby-checkbox>
@@ -44,27 +45,35 @@ toggleRequired(required: boolean) {
   favoriteFoodControl.updateValueAndValidity();
 }`,
   styles: [
-    `label {
+    `button[kirby-button] {
+      display: block;
+      margin-bottom: 12px;
+    }
+    
+    label {
       cursor: pointer;
       font-size: 14px;
       font-weight: 300;
       line-height: 20px;
       padding-left: 4px;
       transform: translateY(-4px);
-    }`,
-    `.selection {
+    }
+    
+    .selection {
       margin: 0;
       font-size: 12px;
       line-height: 16px;
       font-style: italic;
-    }`,
-    `span {
+    }
+    
+    span {
       background-color: #ff595e;
       margin-right: 4px;
       padding: 0px 2px;
       border-radius: 4px;
-    }`,
-    `span.state-true {
+    }
+    
+    span.state-true {
       background-color: #2cf287;
     }`,
   ],
@@ -112,7 +121,7 @@ export class RadioButtonExampleReactiveFormsComponent implements OnInit {
 
   private buildForm() {
     this.favoriteFoodControl = new FormControl(
-      this.items[2].value,
+      this.items[2],
       this.favoriteRequired ? Validators.required : null
     );
     if (!this.canSelectFavorite) {
@@ -121,5 +130,9 @@ export class RadioButtonExampleReactiveFormsComponent implements OnInit {
     this.form = new FormGroup({
       favoriteFood: this.favoriteFoodControl,
     });
+  }
+
+  clearForm() {
+    this.favoriteFoodControl.setValue(null);
   }
 }
