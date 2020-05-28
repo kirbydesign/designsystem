@@ -24,10 +24,13 @@ export class RadioButtonComponent {
   @Output()
   focusChange = new EventEmitter<boolean>();
 
-  @ViewChild(IonRadio, { static: true, read: ElementRef }) ionRadio: ElementRef<HTMLElement>;
+  @ViewChild(IonRadio, { static: true, read: ElementRef })
+  private ionRadio: ElementRef<HTMLIonRadioElement>;
 
-  @HostListener('click')
-  hostElementClicked() {
-    this.ionRadio.nativeElement.click();
+  @HostListener('click', ['$event'])
+  hostElementClicked(event: Event) {
+    if (event.target !== this.ionRadio.nativeElement) {
+      this.ionRadio.nativeElement.click();
+    }
   }
 }
