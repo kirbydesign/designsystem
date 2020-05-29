@@ -1,5 +1,5 @@
 <div class="example">
-  <h3>Default</h3>
+  <h2>Default usage</h2>
   <cookbook-example-viewer [html]="defaultSmallExample.template">
     <cookbook-progress-circle-example-default-small
       #defaultSmallExample
@@ -16,7 +16,7 @@
     ></cookbook-progress-circle-example-default-large>
   </cookbook-example-viewer>
 
-  <h3>With content</h3>
+  <h2>With content</h2>
   <cookbook-example-viewer [html]="contentStepsExample.template">
     <cookbook-progress-circle-example-content-steps
       #contentStepsExample
@@ -33,18 +33,18 @@
     ></cookbook-progress-circle-example-content-percent>
   </cookbook-example-viewer>
 
-  <h3>Dynamic</h3>
+  <h2>Dynamic</h2>
   <cookbook-example-viewer [html]="animatedExample.template" [ts]="animatedExample.codeSnippet">
     <cookbook-progress-circle-example-animated
       #animatedExample
     ></cookbook-progress-circle-example-animated>
   </cookbook-example-viewer>
 
-  <h3>In card</h3>
+  <h2>In card</h2>
   <cookbook-example-viewer [html]="cardExample.template" [css]="cardExample.styles">
     <cookbook-progress-circle-example-card #cardExample></cookbook-progress-circle-example-card>
   </cookbook-example-viewer>
 
-  <h3>Properties</h3>
+  <h2>Properties</h2>
   <cookbook-showcase-properties [properties]="properties"></cookbook-showcase-properties>
 </div>
