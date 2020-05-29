@@ -85,11 +85,8 @@ describe('ProgressCircleRingComponent', () => {
       });
     });
 
-    it('should render progress stroke with success color when themeColor class is not set', () => {
-      spectator.detectChanges();
-      expect(spectator.query('circle.progress')).toHaveComputedStyle({
-        stroke: getColor('success'),
-      });
+    it('should have default themeColor when themeColor is not set from outside', () => {
+      expect(spectator.component.themeColor).toBe('success');
     });
 
     it('should render background stroke in semi-light', () => {
