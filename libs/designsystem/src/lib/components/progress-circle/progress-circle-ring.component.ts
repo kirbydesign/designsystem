@@ -11,7 +11,7 @@ import { ThemeColor } from '../../helpers/theme-color.type';
 export class ProgressCircleRingComponent {
   @Input() radius: number; // The desired outer radius of the SVG circle
   @Input() value: number = 0;
-  @Input() themeColor: ThemeColor;
+  @Input() themeColor: 'success' | 'warning' | 'danger' = 'success';
 
   readonly strokeWidth = 4;
 
