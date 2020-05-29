@@ -1,5 +1,5 @@
 import { SpectatorHost, createHostFactory } from '@ngneat/spectator';
-import { ElementRef, ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectorRef } from '@angular/core';
 
 import { ProgressCircleComponent } from './progress-circle.component';
 import { TestHelper } from '../../testing/test-helper';
@@ -12,14 +12,6 @@ describe('ProgressCircleComponent', () => {
   const createHost = createHostFactory({
     component: ProgressCircleComponent,
     declarations: [ProgressCircleRingComponent],
-    providers: [
-      {
-        provide: ElementRef,
-        useValue: {
-          nativeElement: 'Provided native element',
-        },
-      },
-    ],
   });
 
   function setupIntersectionObserverMock() {
