@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 const config = {
   selector: 'cookbook-progress-circle-example-default-large',
-  template: `<kirby-progress-circle size="lg" value="58" themeColor="warning"></kirby-progress-circle>`,
+  template: `<kirby-progress-circle size="lg" value="58" themeColor="danger"></kirby-progress-circle>`,
 };
 
 @Component({
