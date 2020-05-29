@@ -113,7 +113,7 @@ $dropdown-item-height: map-get($item-heights, 's');
 
 /* Transitions
 ****************************************************************************/
-$transition-duration: (
+$transition-durations: (
   quick: '200ms',
   short: '300ms',
   long: '500ms',
@@ -121,7 +121,7 @@ $transition-duration: (
 );
 
 // Easing function
-$transition-easing: (
+$transition-easings: (
   static: 'linear',
   enter: 'ease-out',
   exit: 'ease-in',
