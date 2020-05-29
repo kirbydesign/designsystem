@@ -9,12 +9,6 @@ import {
   OnDestroy,
 } from '@angular/core';
 
-const DIAMETER_MAP = {
-  sm: 40,
-  md: 56,
-  lg: 96,
-};
-
 @Component({
   selector: 'kirby-progress-circle',
   templateUrl: './progress-circle.component.html',
@@ -22,6 +16,12 @@ const DIAMETER_MAP = {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProgressCircleComponent implements AfterContentChecked, OnDestroy {
+  static readonly DIAMETER_MAP = {
+    sm: 40,
+    md: 56,
+    lg: 96,
+  };
+
   @Input() value: number = 0;
   @Input() size: 'sm' | 'md' | 'lg' = 'md';
   @Input() themeColor: 'success' | 'warning' | 'danger' = 'success';
@@ -69,7 +69,7 @@ export class ProgressCircleComponent implements AfterContentChecked, OnDestroy {
   @HostBinding('style.width.px')
   @HostBinding('style.height.px')
   get diameter(): number {
-    return DIAMETER_MAP[this.size];
+    return ProgressCircleComponent.DIAMETER_MAP[this.size];
   }
 
   get shownValue() {
