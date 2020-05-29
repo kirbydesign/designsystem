@@ -54,11 +54,11 @@
 }
 
 @function get-transition-duration($value) {
-  @return map-get($transition-duration, $value);
+  @return map-get($transition-durations, $value);
 }
 
 @function get-transition-easing($value) {
-  @return map-get($transition-easing, $value);
+  @return map-get($transition-easings, $value);
 }
 
 @function get-shadow-size($elevation) {

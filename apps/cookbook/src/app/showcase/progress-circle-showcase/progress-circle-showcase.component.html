@@ -1,9 +1,14 @@
 <div class="example">
   <h3>Default</h3>
-  <cookbook-example-viewer [html]="defaultExample.template">
-    <cookbook-progress-circle-example-default
-      #defaultExample
-    ></cookbook-progress-circle-example-default>
+  <cookbook-example-viewer [html]="defaultSmallExample.template">
+    <cookbook-progress-circle-example-default-small
+      #defaultSmallExample
+    ></cookbook-progress-circle-example-default-small>
+  </cookbook-example-viewer>
+  <cookbook-example-viewer [html]="defaultMediumExample.template">
+    <cookbook-progress-circle-example-default-medium
+      #defaultMediumExample
+    ></cookbook-progress-circle-example-default-medium>
   </cookbook-example-viewer>
   <cookbook-example-viewer [html]="defaultLargeExample.template">
     <cookbook-progress-circle-example-default-large
@@ -36,7 +41,7 @@
   </cookbook-example-viewer>
 
   <h3>In card</h3>
-  <cookbook-example-viewer [html]="cardExample.template">
+  <cookbook-example-viewer [html]="cardExample.template" [css]="cardExample.styles">
     <cookbook-progress-circle-example-card #cardExample></cookbook-progress-circle-example-card>
   </cookbook-example-viewer>
 

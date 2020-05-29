@@ -24,7 +24,7 @@ const RADIUS_MAP = {
 export class ProgressCircleComponent implements AfterContentChecked, OnDestroy {
   @Input() value: number = 0;
   @Input() size: 'sm' | 'md' | 'lg' = 'md';
-  @Input() themeColor: 'success' | 'warning' | 'danger';
+  @Input() themeColor: 'success' | 'warning' | 'danger' = 'success';
 
   private hasElementBeenVisible: boolean | undefined;
   private observer: IntersectionObserver;

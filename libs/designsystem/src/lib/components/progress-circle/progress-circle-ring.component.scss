@@ -13,8 +13,6 @@
 }
 
 :host {
-  --stroke-color: #{get-color('success')};
-
   @each $color-name, $color-value in $notification-colors {
     &.#{$color-name} {
       --stroke-color: #{$color-value};
