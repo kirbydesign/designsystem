@@ -37,7 +37,7 @@ export class ProgressCircleComponent implements AfterContentChecked, OnDestroy {
   ngAfterContentChecked(): void {
     // Ensure element is connected before observing:
     if (!this.observer && this.elementRef.nativeElement.isConnected) {
-      this.observer = new IntersectionObserver(this.onElementVisible, {
+      this.observer = new IntersectionObserver(this.onIntersectionChange, {
         threshold: 0.5,
       });
       this.observer.observe(this.elementRef.nativeElement);
@@ -48,7 +48,7 @@ export class ProgressCircleComponent implements AfterContentChecked, OnDestroy {
     this.unobserve();
   }
 
-  private onElementVisible = (entries: IntersectionObserverEntry[]) => {
+  private onIntersectionChange = (entries: IntersectionObserverEntry[]) => {
     this.hasElementBeenVisible = entries && entries.some((entry) => entry.isIntersecting);
     if (this.hasElementBeenVisible) {
       this.unobserve();
