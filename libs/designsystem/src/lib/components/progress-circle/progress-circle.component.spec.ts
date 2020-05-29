@@ -42,25 +42,25 @@ describe('ProgressCircleComponent', () => {
       expect(spectator.component).toBeTruthy();
     });
 
-    describe('radius', () => {
-      it('should default to 28px', () => {
+    describe('diameter', () => {
+      it('should default to 56px', () => {
         spectator.detectChanges();
-        expect(spectator.component.radius).toBe(28);
+        expect(spectator.component.diameter).toBe(56);
       });
-      it('should map sm to 20px', () => {
+      it('should map sm to 40px', () => {
         spectator.setInput({ size: 'sm' });
         spectator.detectChanges();
-        expect(spectator.component.radius).toBe(20);
+        expect(spectator.component.diameter).toBe(40);
       });
-      it('should map md to 28px', () => {
+      it('should map md to 56px', () => {
         spectator.setInput({ size: 'md' });
         spectator.detectChanges();
-        expect(spectator.component.radius).toBe(28);
+        expect(spectator.component.diameter).toBe(56);
       });
-      it('should map lg to 48px', () => {
+      it('should map lg to 96px', () => {
         spectator.setInput({ size: 'lg' });
         spectator.detectChanges();
-        expect(spectator.component.radius).toBe(48);
+        expect(spectator.component.diameter).toBe(96);
       });
     });
 
@@ -79,10 +79,10 @@ describe('ProgressCircleComponent', () => {
       });
     });
 
-    describe('diameter', () => {
-      it('should calculate diameter as 2*radius', () => {
-        spectator.setInput({ size: 'sm' }); // 20px radius
-        expect(spectator.component.diameter).toBe(40);
+    describe('radius', () => {
+      it('should calculate radius as diameter / 2', () => {
+        spectator.setInput({ size: 'sm' }); // 40px radius
+        expect(spectator.component.diameter).toBe(20);
       });
     });
 

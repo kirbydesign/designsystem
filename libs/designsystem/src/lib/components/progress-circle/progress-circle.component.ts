@@ -9,10 +9,10 @@ import {
   OnDestroy,
 } from '@angular/core';
 
-const RADIUS_MAP = {
-  sm: 20,
-  md: 28,
-  lg: 48,
+const DIAMETER_MAP = {
+  sm: 40,
+  md: 56,
+  lg: 96,
 };
 
 @Component({
@@ -26,7 +26,7 @@ export class ProgressCircleComponent implements AfterContentChecked, OnDestroy {
   @Input() size: 'sm' | 'md' | 'lg' = 'md';
   @Input() themeColor: 'success' | 'warning' | 'danger' = 'success';
 
-  private hasElementBeenVisible: boolean | undefined;
+  private hasElementBeenVisible?: boolean;
   private observer: IntersectionObserver;
 
   constructor(
@@ -69,7 +69,7 @@ export class ProgressCircleComponent implements AfterContentChecked, OnDestroy {
   @HostBinding('style.width.px')
   @HostBinding('style.height.px')
   get diameter(): number {
-    return this.radius * 2;
+    return DIAMETER_MAP[this.size];
   }
 
   get shownValue() {
@@ -78,6 +78,6 @@ export class ProgressCircleComponent implements AfterContentChecked, OnDestroy {
   }
 
   get radius() {
-    return RADIUS_MAP[this.size];
+    return this.diameter / 2;
   }
 }

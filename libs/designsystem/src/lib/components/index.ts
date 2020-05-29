@@ -1,4 +1,3 @@
-import { ProgressCircleComponent } from './progress-circle/progress-circle.component';
 export * from './app';
 
 export { AvatarComponent } from './avatar/avatar.component';
