@@ -16,7 +16,8 @@
   flex-direction: column;
   justify-content: space-between;
   overflow: hidden;
-  z-index: 1;
+  position: relative;
+  z-index: z('default');
 
   .content-wrapper {
     &.padding {
