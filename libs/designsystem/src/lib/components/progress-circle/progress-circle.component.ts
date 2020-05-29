@@ -4,7 +4,7 @@ import {
   ChangeDetectionStrategy,
   HostBinding,
   ElementRef,
-  AfterViewInit,
+  AfterContentChecked,
   ChangeDetectorRef,
   OnDestroy,
 } from '@angular/core';
@@ -21,7 +21,7 @@ const RADIUS_MAP = {
   styleUrls: ['./progress-circle.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProgressCircleComponent implements AfterViewInit, OnDestroy {
+export class ProgressCircleComponent implements AfterContentChecked, OnDestroy {
   @Input() value: number = 0;
   @Input() size: 'sm' | 'md' | 'lg' = 'md';
   @Input() themeColor: 'success' | 'warning' | 'danger' = 'success';
@@ -29,13 +29,19 @@ export class ProgressCircleComponent implements AfterViewInit, OnDestroy {
   private hasElementBeenVisible: boolean | undefined;
   private observer: IntersectionObserver;
 
-  constructor(private elementRef: ElementRef, private changeDetectorRef: ChangeDetectorRef) {}
+  constructor(
+    private elementRef: ElementRef<HTMLElement>,
+    private changeDetectorRef: ChangeDetectorRef
+  ) {}
 
-  ngAfterViewInit() {
-    this.observer = new IntersectionObserver(this.onElementVisible, {
-      threshold: 0.5,
-    });
-    this.observer.observe(this.elementRef.nativeElement);
+  ngAfterContentChecked(): void {
+    // Ensure element is connected before observing:
+    if (!this.observer && this.elementRef.nativeElement.isConnected) {
+      this.observer = new IntersectionObserver(this.onElementVisible, {
+        threshold: 0.5,
+      });
+      this.observer.observe(this.elementRef.nativeElement);
+    }
   }
 
   ngOnDestroy(): void {
