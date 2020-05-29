@@ -1,25 +1,15 @@
 <div class="example">
+  <h2>Default</h2>
+  <cookbook-example-viewer [html]="defaultExample.template">
+    <cookbook-progress-circle-example-default
+      #defaultExample
+    ></cookbook-progress-circle-example-default>
+  </cookbook-example-viewer>
+
   <h2>Sizes</h2>
 
-  <h3>Small</h3>
-  <cookbook-example-viewer [html]="defaultSmallExample.template">
-    <cookbook-progress-circle-example-default-small
-      #defaultSmallExample
-    ></cookbook-progress-circle-example-default-small>
-  </cookbook-example-viewer>
-
-  <h3>Medium</h3>
-  <cookbook-example-viewer [html]="defaultMediumExample.template">
-    <cookbook-progress-circle-example-default-medium
-      #defaultMediumExample
-    ></cookbook-progress-circle-example-default-medium>
-  </cookbook-example-viewer>
-
-  <h3>Large</h3>
-  <cookbook-example-viewer [html]="defaultLargeExample.template">
-    <cookbook-progress-circle-example-default-large
-      #defaultLargeExample
-    ></cookbook-progress-circle-example-default-large>
+  <cookbook-example-viewer [html]="sizesExample.template">
+    <cookbook-progress-circle-example-sizes #sizesExample></cookbook-progress-circle-example-sizes>
   </cookbook-example-viewer>
 
   <h2>With content</h2>
