@@ -1,15 +1,21 @@
 <div class="example">
-  <h2>Default usage</h2>
+  <h2>Sizes</h2>
+
+  <h3>Small</h3>
   <cookbook-example-viewer [html]="defaultSmallExample.template">
     <cookbook-progress-circle-example-default-small
       #defaultSmallExample
     ></cookbook-progress-circle-example-default-small>
   </cookbook-example-viewer>
+
+  <h3>Medium</h3>
   <cookbook-example-viewer [html]="defaultMediumExample.template">
     <cookbook-progress-circle-example-default-medium
       #defaultMediumExample
     ></cookbook-progress-circle-example-default-medium>
   </cookbook-example-viewer>
+
+  <h3>Large</h3>
   <cookbook-example-viewer [html]="defaultLargeExample.template">
     <cookbook-progress-circle-example-default-large
       #defaultLargeExample
@@ -17,16 +23,22 @@
   </cookbook-example-viewer>
 
   <h2>With content</h2>
+
+  <h3>Steps</h3>
   <cookbook-example-viewer [html]="contentStepsExample.template">
     <cookbook-progress-circle-example-content-steps
       #contentStepsExample
     ></cookbook-progress-circle-example-content-steps>
   </cookbook-example-viewer>
+
+  <h3>Icon and background color</h3>
   <cookbook-example-viewer [html]="contentIconExample.template" [css]="contentIconExample.styles">
     <cookbook-progress-circle-example-content-icon
       #contentIconExample
     ></cookbook-progress-circle-example-content-icon>
   </cookbook-example-viewer>
+
+  <h3>Percent</h3>
   <cookbook-example-viewer [html]="contentPercentExample.template">
     <cookbook-progress-circle-example-content-percent
       #contentPercentExample
