@@ -15,13 +15,25 @@ const config = {
     </kirby-progress-circle>
   </div>
 </kirby-card>`,
+  styles: `kirby-card .content {
+  display: flex;
+  flex-direction: row;
+}
+  
+kirby-card .content .information {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}`,
 };
 
 @Component({
   selector: config.selector,
   template: config.template,
-  styleUrls: ['./card.scss'],
+  styles: [config.styles],
 })
 export class ProgressCircleExampleCardComponent {
   template: string = config.template;
+  styles: string = config.styles;
 }
