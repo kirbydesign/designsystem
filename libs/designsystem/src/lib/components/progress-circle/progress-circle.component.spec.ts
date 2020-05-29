@@ -45,7 +45,7 @@ describe('ProgressCircleComponent', () => {
     describe('diameter', () => {
       it('should default to md (56px)', () => {
         spectator.detectChanges();
-        expect(spectator.component.diameter).toBe(ProgressCircleComponent.DIAMETER_MAP.lg);
+        expect(spectator.component.diameter).toBe(ProgressCircleComponent.DIAMETER_MAP.md);
       });
       it('should map sm to 40px', () => {
         spectator.setInput({ size: 'sm' });
