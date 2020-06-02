@@ -37,6 +37,8 @@ $badge-diameter: 16px;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: get-color('light');
+  color: get-color('light-contrast');
 
   //default to icon size 'sm'
   --kirby-icon-font-size: #{icon-font-size('sm')};
@@ -47,7 +49,7 @@ $badge-diameter: 16px;
 
   &.overlay::before {
     content: '';
-    background-color: #333;
+    background-color: get-color('black');
     opacity: 0.05;
     width: 100%;
     height: 100%;
@@ -121,4 +123,21 @@ $badge-diameter: 16px;
 
 :host-context(kirby-item)[slot='start'] {
   margin-inline-end: size('xs');
+}
+
+@each $color-name,
+  $color-value
+    in map-merge(
+      $main-colors,
+      (
+        'white': #ffffff,
+      )
+    )
+{
+  :host(.#{$color-name}) {
+    .avatar {
+      background-color: get-color($color-name);
+      color: get-color($color-name + '-contrast');
+    }
+  }
 }
