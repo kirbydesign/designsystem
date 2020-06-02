@@ -10,7 +10,7 @@ const config = {
 </kirby-avatar>
 
 <kirby-avatar size="sm">
-  <kirby-icon name="qr"></kirby-icon>
+  <kirby-icon name="kirby"></kirby-icon>
   <kirby-badge>
     <kirby-icon name="attach"></kirby-icon>
   </kirby-badge>
