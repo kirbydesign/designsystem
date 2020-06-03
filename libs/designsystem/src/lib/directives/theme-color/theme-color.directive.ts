@@ -9,6 +9,7 @@ import { ColorHelper } from '../../helpers/color-helper';
              kirby-card[themeColor],
              kirby-badge[themeColor],
              kirby-icon[themeColor],
+             kirby-progress-circle-ring[themeColor],
              kirby-toolbar[themeColor],
              kirby-empty-state[themeColor]`,
 })

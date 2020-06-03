@@ -1,0 +1,23 @@
+<svg [attr.width]="diameter" [attr.height]="diameter">
+  <circle
+    shape-rendering="geometricPrecision"
+    class="circle"
+    fill="transparent"
+    [attr.stroke-width]="strokeWidth"
+    [attr.r]="centerRadius"
+    [attr.cx]="radius"
+    [attr.cy]="radius"
+  />
+  <circle
+    shape-rendering="geometricPrecision"
+    class="progress"
+    fill="transparent"
+    stroke-linecap="round"
+    [attr.stroke-width]="strokeWidth"
+    [attr.r]="centerRadius"
+    [attr.cx]="radius"
+    [attr.cy]="radius"
+    [attr.stroke-dashoffset]="offset"
+    [attr.stroke-dasharray]="centerCircumference"
+  />
+</svg>

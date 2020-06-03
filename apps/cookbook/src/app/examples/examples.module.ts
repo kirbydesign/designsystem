@@ -13,6 +13,7 @@ import { ItemExampleModule } from './item-example/item-example.module';
 import { DropdownExampleModule } from './dropdown-example/dropdown-example.module';
 import { SegmentedControlExampleModule } from './segmented-control-example/segmented-control-example.module';
 import { ChartExampleModule } from './chart-example/chart-example.module';
+import { ProgressCircleExampleModule } from './progress-circle-example/progress-circle-example.module';
 import { AvatarExampleModule } from './avatar-example/avatar-example.module';
 
 @NgModule({
@@ -25,6 +26,7 @@ import { AvatarExampleModule } from './avatar-example/avatar-example.module';
     DropdownExampleModule,
     SegmentedControlExampleModule,
     ChartExampleModule,
+    ProgressCircleExampleModule,
     AvatarExampleModule,
   ],
   declarations: COMPONENT_DECLARATIONS,
@@ -36,6 +38,7 @@ import { AvatarExampleModule } from './avatar-example/avatar-example.module';
     DropdownExampleModule,
     SegmentedControlExampleModule,
     ChartExampleModule,
+    ProgressCircleExampleModule,
     AvatarExampleModule,
   ],
   providers: [PROVIDER_DECLARATIONS],
