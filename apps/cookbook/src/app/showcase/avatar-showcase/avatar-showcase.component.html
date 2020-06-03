@@ -1,6 +1,37 @@
 <div class="example">
-  <cookbook-avatar-example></cookbook-avatar-example>
-  <cookbook-code-viewer [html]="exampleHtml"></cookbook-code-viewer>
-  <h4>Properties:</h4>
+  <h2>Default</h2>
+  <cookbook-example-viewer [html]="defaultExample.template">
+    <cookbook-avatar-example-default #defaultExample></cookbook-avatar-example-default>
+  </cookbook-example-viewer>
+
+  <h2>Colors</h2>
+  <cookbook-example-viewer [html]="colorsExample.template">
+    <cookbook-avatar-example-colors #colorsExample></cookbook-avatar-example-colors>
+  </cookbook-example-viewer>
+
+  <h2>Avatar with text</h2>
+  <cookbook-example-viewer [html]="textExample.template">
+    <cookbook-avatar-example-text #textExample></cookbook-avatar-example-text>
+  </cookbook-example-viewer>
+
+  <h2>Avatar with icon</h2>
+  <cookbook-example-viewer [html]="iconExample.template">
+    <cookbook-avatar-example-icon #iconExample></cookbook-avatar-example-icon>
+  </cookbook-example-viewer>
+
+  <h2>Avatar with badge</h2>
+  <cookbook-example-viewer [html]="badgeExample.template">
+    <cookbook-avatar-example-badge #badgeExample></cookbook-avatar-example-badge>
+  </cookbook-example-viewer>
+
+  <h2>Avatar with image</h2>
+  <cookbook-example-viewer [html]="imageExample.template">
+    <cookbook-avatar-example-image #imageExample></cookbook-avatar-example-image>
+  </cookbook-example-viewer>
+  <cookbook-example-viewer [html]="imageSizeExample.template">
+    <cookbook-avatar-example-image-size #imageSizeExample></cookbook-avatar-example-image-size>
+  </cookbook-example-viewer>
+
+  <h2>Properties:</h2>
   <cookbook-showcase-properties [properties]="properties"></cookbook-showcase-properties>
 </div>

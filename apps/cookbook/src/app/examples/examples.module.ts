@@ -13,6 +13,7 @@ import { ItemExampleModule } from './item-example/item-example.module';
 import { DropdownExampleModule } from './dropdown-example/dropdown-example.module';
 import { SegmentedControlExampleModule } from './segmented-control-example/segmented-control-example.module';
 import { ChartExampleModule } from './chart-example/chart-example.module';
+import { AvatarExampleModule } from './avatar-example/avatar-example.module';
 
 @NgModule({
   imports: [
@@ -24,6 +25,7 @@ import { ChartExampleModule } from './chart-example/chart-example.module';
     DropdownExampleModule,
     SegmentedControlExampleModule,
     ChartExampleModule,
+    AvatarExampleModule,
   ],
   declarations: COMPONENT_DECLARATIONS,
   exports: [
@@ -34,6 +36,7 @@ import { ChartExampleModule } from './chart-example/chart-example.module';
     DropdownExampleModule,
     SegmentedControlExampleModule,
     ChartExampleModule,
+    AvatarExampleModule,
   ],
   providers: [PROVIDER_DECLARATIONS],
   entryComponents: [
