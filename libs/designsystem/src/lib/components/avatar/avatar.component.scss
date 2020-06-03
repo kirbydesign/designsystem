@@ -126,6 +126,10 @@ $badge-diameter: $avatar-badge-size;
 
 :host-context(kirby-item)[slot='start'] {
   margin-inline-end: size('xs');
+
+  &.xs {
+    margin-inline-end: size('s');
+  }
 }
 
 @each $color-name,
