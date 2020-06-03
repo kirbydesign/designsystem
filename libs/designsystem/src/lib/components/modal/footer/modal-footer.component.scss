@@ -7,6 +7,6 @@ ion-footer {
   justify-content: center;
   align-items: center;
   background-color: get-color('white');
-  padding-bottom: calc(#{size('s')} + var(--keyboard-offset, 0px));
+  padding-bottom: calc(#{size('s')} + var(--keyboard-offset, 0));
   transition: padding-bottom $soft-keyboard-transition;
 }
