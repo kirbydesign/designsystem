@@ -56,6 +56,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   private initialViewportHeight: number;
   private viewportResized = false;
   private ionModalElement: HTMLIonModalElement;
+  private embeddedFooter: HTMLElement;
   private readonly ionModalDidPresent = new Subject<void>();
   readonly didPresent = this.ionModalDidPresent.toPromise();
   private readonly ionModalWillDismiss = new Subject<void>();
@@ -83,23 +84,6 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
       providers: [{ provide: COMPONENT_PROPS, useValue: this.config.componentProps }],
       parent: this.injector,
     });
-
-    // const observer = new MutationObserver((mutations) => {
-    //   mutations.forEach((mutation) => {
-    //     const key = '--keyboard-offset';
-    //     const value = this.ionContentElement.nativeElement.style.getPropertyValue(key);
-    //     const kirbyModalFooter = this.elementRef.nativeElement.querySelector('kirby-modal-footer');
-
-    //     if (value.length && kirbyModalFooter) {
-    //       kirbyModalFooter.setAttribute('style', `${key}: ${value}`);
-    //     }
-    //   });
-    // });
-    // observer.observe(this.ionContentElement.nativeElement, {
-    //   attributes: true,
-    //   childList: true,
-    //   characterData: true,
-    // });
   }
 
   ngAfterViewInit(): void {
@@ -175,22 +159,21 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   _onKeyboardWillShow(info?: { keyboardHeight: number }) {
     this.keyboardVisible = true;
     if (info && info.keyboardHeight) {
-      this.setKeyboardOffset(`${info.keyboardHeight}px`);
+      this.setKeyboardOffset(info.keyboardHeight);
     }
   }
 
   @HostListener('window:keyboardWillHide')
   _onKeyboardWillHide() {
     this.keyboardVisible = false;
-    this.setKeyboardOffset('0px');
+    this.setKeyboardOffset(0);
   }
 
-  private setKeyboardOffset(value: string) {
-    this.ionContentElement.nativeElement.style.setProperty('--keyboard-offset', value);
-
-    const kirbyModalFooter = this.elementRef.nativeElement.querySelector('kirby-modal-footer');
-    if (kirbyModalFooter) {
-      kirbyModalFooter.setAttribute('style', `--keyboard-offset: ${value}`);
+  private setKeyboardOffset(pixels: number) {
+    const [key, value] = ['--keyboard-offset', `${pixels}px`];
+    this.ionContentElement.nativeElement.style.setProperty(key, value);
+    if (this.embeddedFooter) {
+      this.embeddedFooter.style.setProperty(key, value);
     }
   }
 
@@ -245,9 +228,11 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   private checkForEmbeddedFooter() {
     const embeddedComponentElement = this.ionContentElement.nativeElement.firstElementChild;
     if (embeddedComponentElement) {
-      const embeddedFooter = embeddedComponentElement.querySelector('kirby-modal-footer');
-      if (embeddedFooter) {
-        this.moveEmbeddedFooter(embeddedFooter);
+      this.embeddedFooter = this.ionContentElement.nativeElement.querySelector(
+        'kirby-modal-footer'
+      );
+      if (this.embeddedFooter) {
+        this.moveEmbeddedFooter(this.embeddedFooter);
       }
       this.observeEmbeddedFooter(embeddedComponentElement);
     }
@@ -272,6 +257,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
           );
         })[0];
       if (addedFooter) {
+        this.embeddedFooter = <HTMLElement>addedFooter;
         this.moveEmbeddedFooter(addedFooter);
       }
     };

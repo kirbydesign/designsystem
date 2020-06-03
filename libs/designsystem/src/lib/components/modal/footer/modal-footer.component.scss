@@ -8,5 +8,5 @@ ion-footer {
   align-items: center;
   background-color: get-color('white');
   padding-bottom: calc(#{size('s')} + var(--keyboard-offset, 0px));
-  transition: padding-bottom 250ms ease-out;
+  transition: padding-bottom $soft-keyboard-transition;
 }
