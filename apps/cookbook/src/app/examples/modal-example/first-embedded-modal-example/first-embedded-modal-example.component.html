@@ -2,6 +2,11 @@
   <h4>Component properties:</h4>
   <p>prop 1: {{ props.prop1 }}</p>
   <p>prop 2: {{ props.prop2 }}</p>
+  <p>
+    <kirby-form-field>
+      <input kirby-input placeholder="Focus me on device to see keyboard" />
+    </kirby-form-field>
+  </p>
   <p>Hello from pay and transfer modal content example component</p>
   <button kirby-button (click)="close()">Hide me</button>
   <button kirby-button (click)="showNestedModal()">Show nested modal</button>
@@ -11,6 +16,7 @@
   <button kirby-button (click)="scrollToBottom()">Scroll to bottom</button>
   <button kirby-button (click)="disableScroll()">Disable scroll</button>
   <button kirby-button (click)="enableScroll()">Enable scroll</button>
+  <button kirby-button (click)="toggleFooter()">Toggle footer</button>
   <div>
     <h4>The standard Lorem Ipsum passage, used since the 1500s</h4>
     <p>

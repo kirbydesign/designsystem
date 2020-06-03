@@ -56,6 +56,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   private initialViewportHeight: number;
   private viewportResized = false;
   private ionModalElement: HTMLIonModalElement;
+  private embeddedFooterElement: HTMLElement;
   private readonly ionModalDidPresent = new Subject<void>();
   readonly didPresent = this.ionModalDidPresent.toPromise();
   private readonly ionModalWillDismiss = new Subject<void>();
@@ -158,17 +159,22 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   _onKeyboardWillShow(info?: { keyboardHeight: number }) {
     this.keyboardVisible = true;
     if (info && info.keyboardHeight) {
-      this.ionContentElement.nativeElement.style.setProperty(
-        '--keyboard-offset',
-        `${info.keyboardHeight}px`
-      );
+      this.setKeyboardOffset(info.keyboardHeight);
     }
   }
 
   @HostListener('window:keyboardWillHide')
   _onKeyboardWillHide() {
     this.keyboardVisible = false;
-    this.ionContentElement.nativeElement.style.setProperty('--keyboard-offset', '0px');
+    this.setKeyboardOffset(0);
+  }
+
+  private setKeyboardOffset(value: number) {
+    const [key, pixelValue] = ['--keyboard-offset', `${value}px`];
+    this.ionContentElement.nativeElement.style.setProperty(key, pixelValue);
+    if (this.embeddedFooterElement) {
+      this.embeddedFooterElement.style.setProperty(key, pixelValue);
+    }
   }
 
   onHeaderTouchStart(event: TouchEvent) {
@@ -222,19 +228,20 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   private checkForEmbeddedFooter() {
     const embeddedComponentElement = this.ionContentElement.nativeElement.firstElementChild;
     if (embeddedComponentElement) {
-      const embeddedFooter = embeddedComponentElement.querySelector('kirby-modal-footer');
-      if (embeddedFooter) {
-        this.moveEmbeddedFooter(embeddedFooter);
-      }
+      this.embeddedFooterElement = embeddedComponentElement.querySelector('kirby-modal-footer');
+      this.moveEmbeddedFooter();
       this.observeEmbeddedFooter(embeddedComponentElement);
     }
   }
 
-  private moveEmbeddedFooter(footer: Node) {
-    if (footer) {
+  private moveEmbeddedFooter() {
+    if (this.embeddedFooterElement) {
       // Move embedded footer out of content for fixed rendering of footer:
-      this.renderer.removeChild(footer.parentElement, footer);
-      this.renderer.appendChild(this.elementRef.nativeElement, footer);
+      this.renderer.removeChild(
+        this.embeddedFooterElement.parentElement,
+        this.embeddedFooterElement
+      );
+      this.renderer.appendChild(this.elementRef.nativeElement, this.embeddedFooterElement);
     }
   }
 
@@ -248,9 +255,8 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
             (node) => node.nodeName === 'KIRBY-MODAL-FOOTER'
           );
         })[0];
-      if (addedFooter) {
-        this.moveEmbeddedFooter(addedFooter);
-      }
+      this.embeddedFooterElement = <HTMLElement>addedFooter;
+      this.moveEmbeddedFooter();
     };
     this.mutationObserver = new MutationObserver(callback);
     this.mutationObserver.observe(embeddedComponentElement, {

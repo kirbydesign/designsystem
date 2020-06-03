@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { KirbyModule } from '@kirbydesign/designsystem';
+
 import { COMPONENT_DECLARATIONS, PROVIDER_DECLARATIONS } from './examples.common';
 import { CardExampleComponent } from './card-example/card-example.component';
 import { FirstEmbeddedModalExampleComponent } from './modal-example/first-embedded-modal-example/first-embedded-modal-example.component';

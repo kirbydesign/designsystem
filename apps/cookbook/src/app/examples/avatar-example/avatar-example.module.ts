@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { KirbyModule } from '@kirbydesign/designsystem';
+
 import { AvatarExampleDefaultComponent } from './examples/default';
 import { AvatarExampleColorsComponent } from './examples/colors';
 import { AvatarExampleTextComponent } from './examples/text';

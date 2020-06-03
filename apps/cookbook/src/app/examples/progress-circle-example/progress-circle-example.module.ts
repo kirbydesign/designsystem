@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { KirbyModule } from '@kirbydesign/designsystem';
+
 import { ProgressCircleExampleDefaultComponent } from './examples/default';
 import { ProgressCircleExampleSizesComponent } from './examples/sizes';
 import { ProgressCircleExampleContentStepsComponent } from './examples/content-steps';
