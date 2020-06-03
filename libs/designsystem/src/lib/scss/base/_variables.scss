@@ -124,9 +124,11 @@ $dropdown-item-height: map-get($item-heights, 's');
 
 /* Transitions
 ****************************************************************************/
+$soft-keyboard-transition: 250ms ease-out;
+
 $transition-durations: (
   quick: 200ms,
-  keyboard-enter: 250ms,
+  keyboard: 250ms,
   short: 300ms,
   long: 500ms,
   extra-long: 1000ms,
