@@ -229,18 +229,19 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     const embeddedComponentElement = this.ionContentElement.nativeElement.firstElementChild;
     if (embeddedComponentElement) {
       this.embeddedFooterElement = embeddedComponentElement.querySelector('kirby-modal-footer');
-      if (this.embeddedFooterElement) {
-        this.moveEmbeddedFooter(this.embeddedFooterElement);
-      }
+      this.moveEmbeddedFooter();
       this.observeEmbeddedFooter(embeddedComponentElement);
     }
   }
 
-  private moveEmbeddedFooter(footer: Node) {
-    if (footer) {
+  private moveEmbeddedFooter() {
+    if (this.embeddedFooterElement) {
       // Move embedded footer out of content for fixed rendering of footer:
-      this.renderer.removeChild(footer.parentElement, footer);
-      this.renderer.appendChild(this.elementRef.nativeElement, footer);
+      this.renderer.removeChild(
+        this.embeddedFooterElement.parentElement,
+        this.embeddedFooterElement
+      );
+      this.renderer.appendChild(this.elementRef.nativeElement, this.embeddedFooterElement);
     }
   }
 
@@ -254,10 +255,8 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
             (node) => node.nodeName === 'KIRBY-MODAL-FOOTER'
           );
         })[0];
-      if (addedFooter) {
-        this.embeddedFooterElement = <HTMLElement>addedFooter;
-        this.moveEmbeddedFooter(addedFooter);
-      }
+      this.embeddedFooterElement = <HTMLElement>addedFooter;
+      this.moveEmbeddedFooter();
     };
     this.mutationObserver = new MutationObserver(callback);
     this.mutationObserver.observe(embeddedComponentElement, {
