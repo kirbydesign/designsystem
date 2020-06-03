@@ -169,8 +169,8 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     this.setKeyboardOffset(0);
   }
 
-  private setKeyboardOffset(pixels: number) {
-    const [key, value] = ['--keyboard-offset', `${pixels}px`];
+  private setKeyboardOffset(value: number) {
+    const [key, pixelValue] = ['--keyboard-offset', `${value}px`];
     this.ionContentElement.nativeElement.style.setProperty(key, value);
     if (this.embeddedFooter) {
       this.embeddedFooter.style.setProperty(key, value);
