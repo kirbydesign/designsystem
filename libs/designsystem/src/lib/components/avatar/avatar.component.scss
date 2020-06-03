@@ -1,11 +1,11 @@
 @import '../../scss/utils';
 @import '../icon/icon.component.shared';
 
-$image-diameter-xsmall: 32px;
-$image-diameter-small: 40px;
-$image-diameter-medium: 56px;
-$image-diameter-large: 96px;
-$badge-diameter: 16px;
+$image-diameter-xsmall: map-get($avatar-sizes, 'xs');
+$image-diameter-small: map-get($avatar-sizes, 's');
+$image-diameter-medium: map-get($avatar-sizes, 'm');
+$image-diameter-large: map-get($avatar-sizes, 'l');
+$badge-diameter: $avatar-badge-size;
 
 @function get-badge-position($avatar-diameter) {
   $cos-to-45-degrees: 0.70710678118;

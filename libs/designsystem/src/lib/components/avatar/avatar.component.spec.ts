@@ -13,6 +13,7 @@ import { ProgressCircleComponent } from '../progress-circle/progress-circle.comp
 
 const getColor = DesignTokenHelper.getColor;
 const size = DesignTokenHelper.size;
+const avatarSize = DesignTokenHelper.avatarSize;
 
 describe('AvatarComponent', () => {
   let spectator: SpectatorHost<AvatarComponent>;
@@ -60,26 +61,26 @@ describe('AvatarComponent', () => {
       const ionIcon = spectator.queryHost<HTMLElement>('ion-icon');
       await TestHelper.whenHydrated(ionIcon);
 
-      expect(avatar).toHaveComputedStyle({ width: '40px', height: '40px' });
+      expect(avatar).toHaveComputedStyle({ width: avatarSize('s'), height: avatarSize('s') });
       expect(ionIcon).toHaveComputedStyle({ width: size('m'), height: size('m') });
     });
 
     it(`should have correct size when size = 'sm'`, () => {
       spectator = createHost(`<kirby-avatar size="sm"></kirby-avatar>`);
       const avatar = spectator.queryHost<HTMLElement>('.avatar');
-      expect(avatar).toHaveComputedStyle({ width: '40px', height: '40px' });
+      expect(avatar).toHaveComputedStyle({ width: avatarSize('s'), height: avatarSize('s') });
     });
 
     it(`should have correct size when size = 'md'`, () => {
       spectator = createHost(`<kirby-avatar size="md"></kirby-avatar>`);
       const avatar = spectator.queryHost<HTMLElement>('.avatar');
-      expect(avatar).toHaveComputedStyle({ width: '56px', height: '56px' });
+      expect(avatar).toHaveComputedStyle({ width: avatarSize('m'), height: avatarSize('m') });
     });
 
     it(`should have correct size when size = 'lg'`, () => {
       spectator = createHost(`<kirby-avatar size="lg"></kirby-avatar>`);
       const avatar = spectator.queryHost<HTMLElement>('.avatar');
-      expect(avatar).toHaveComputedStyle({ width: '96px', height: '96px' });
+      expect(avatar).toHaveComputedStyle({ width: avatarSize('l'), height: avatarSize('l') });
     });
   });
 
@@ -138,7 +139,7 @@ describe('AvatarComponent', () => {
       const ionIcon = spectator.queryHost<HTMLElement>('ion-icon');
       await TestHelper.whenHydrated(ionIcon);
 
-      expect(avatar).toHaveComputedStyle({ width: '40px', height: '40px' });
+      expect(avatar).toHaveComputedStyle({ width: avatarSize('s'), height: avatarSize('s') });
       expect(ionIcon).toHaveComputedStyle({ width: size('m'), height: size('m') });
     });
 
@@ -155,7 +156,7 @@ describe('AvatarComponent', () => {
       const ionIcon = spectator.queryHost<HTMLElement>('ion-icon');
       await TestHelper.whenHydrated(ionIcon);
 
-      expect(avatar).toHaveComputedStyle({ width: '56px', height: '56px' });
+      expect(avatar).toHaveComputedStyle({ width: avatarSize('m'), height: avatarSize('m') });
       expect(ionIcon).toHaveComputedStyle({ width: size('l'), height: size('l') });
     });
 
@@ -172,7 +173,7 @@ describe('AvatarComponent', () => {
       const ionIcon = spectator.queryHost<HTMLElement>('ion-icon');
       await TestHelper.whenHydrated(ionIcon);
 
-      expect(avatar).toHaveComputedStyle({ width: '96px', height: '96px' });
+      expect(avatar).toHaveComputedStyle({ width: avatarSize('l'), height: avatarSize('l') });
       expect(ionIcon).toHaveComputedStyle({ width: size('xxxl'), height: size('xxxl') });
     });
   });
