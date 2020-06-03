@@ -78,6 +78,7 @@ $badge-diameter: 16px;
   }
 }
 
+:host-context(kirby-progress-circle.sm),
 :host(.sm) {
   .avatar {
     width: $image-diameter-small;
@@ -89,6 +90,7 @@ $badge-diameter: 16px;
   }
 }
 
+:host-context(kirby-progress-circle.md),
 :host(.md) {
   --kirby-badge-right: #{get-badge-position($image-diameter-medium)};
   --kirby-badge-top: #{get-badge-position($image-diameter-medium)};
@@ -105,6 +107,7 @@ $badge-diameter: 16px;
   }
 }
 
+:host-context(kirby-progress-circle.lg),
 :host(.lg) {
   --kirby-badge-right: #{get-badge-position($image-diameter-large)};
   --kirby-badge-top: #{get-badge-position($image-diameter-large)};
