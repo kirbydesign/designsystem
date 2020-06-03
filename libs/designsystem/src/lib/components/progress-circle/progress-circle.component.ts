@@ -26,6 +26,11 @@ export class ProgressCircleComponent implements AfterContentChecked, OnDestroy {
   @Input() size: 'sm' | 'md' | 'lg' = 'md';
   @Input() themeColor: 'success' | 'warning' | 'danger' = 'success';
 
+  @HostBinding('class')
+  get _cssSize() {
+    return this.size;
+  }
+
   private hasElementBeenVisible?: boolean;
   private observer: IntersectionObserver;
 
