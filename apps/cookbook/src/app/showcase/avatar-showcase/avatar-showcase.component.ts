@@ -11,8 +11,6 @@ declare var require: any;
   styleUrls: ['./avatar-showcase.component.scss'],
 })
 export class AvatarShowcaseComponent implements OnInit {
-  exampleHtml: string = require('!raw-loader!../../examples/avatar-example/avatar-example.component.html')
-    .default;
   properties: ShowcaseProperty[] = [
     {
       name: 'imageSrc',

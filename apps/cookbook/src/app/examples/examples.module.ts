@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { KirbyModule } from '@kirbydesign/designsystem';
+
 import { COMPONENT_DECLARATIONS, PROVIDER_DECLARATIONS } from './examples.common';
 import { CardExampleComponent } from './card-example/card-example.component';
 import { FirstEmbeddedModalExampleComponent } from './modal-example/first-embedded-modal-example/first-embedded-modal-example.component';
@@ -13,6 +14,8 @@ import { ItemExampleModule } from './item-example/item-example.module';
 import { DropdownExampleModule } from './dropdown-example/dropdown-example.module';
 import { SegmentedControlExampleModule } from './segmented-control-example/segmented-control-example.module';
 import { ChartExampleModule } from './chart-example/chart-example.module';
+import { ProgressCircleExampleModule } from './progress-circle-example/progress-circle-example.module';
+import { AvatarExampleModule } from './avatar-example/avatar-example.module';
 
 @NgModule({
   imports: [
@@ -24,6 +27,8 @@ import { ChartExampleModule } from './chart-example/chart-example.module';
     DropdownExampleModule,
     SegmentedControlExampleModule,
     ChartExampleModule,
+    ProgressCircleExampleModule,
+    AvatarExampleModule,
   ],
   declarations: COMPONENT_DECLARATIONS,
   exports: [
@@ -34,6 +39,8 @@ import { ChartExampleModule } from './chart-example/chart-example.module';
     DropdownExampleModule,
     SegmentedControlExampleModule,
     ChartExampleModule,
+    ProgressCircleExampleModule,
+    AvatarExampleModule,
   ],
   providers: [PROVIDER_DECLARATIONS],
   entryComponents: [

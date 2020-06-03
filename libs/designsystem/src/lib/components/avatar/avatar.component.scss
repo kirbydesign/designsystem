@@ -1,11 +1,11 @@
 @import '../../scss/utils';
 @import '../icon/icon.component.shared';
 
-$image-diameter-xsmall: 32px;
-$image-diameter-small: 40px;
-$image-diameter-medium: 56px;
-$image-diameter-large: 96px;
-$badge-diameter: 16px;
+$diameter-xsmall: map-get($avatar-sizes, 'xs');
+$diameter-small: map-get($avatar-sizes, 's');
+$diameter-medium: map-get($avatar-sizes, 'm');
+$diameter-large: map-get($avatar-sizes, 'l');
+$badge-diameter: $avatar-badge-size;
 
 @function get-badge-position($avatar-diameter) {
   $cos-to-45-degrees: 0.70710678118;
@@ -20,16 +20,16 @@ $badge-diameter: 16px;
 :host {
   --kirby-badge-elevation: #{get-elevation(2)};
   --kirby-badge-position: absolute;
-  --kirby-badge-right: #{get-badge-position($image-diameter-small)};
-  --kirby-badge-top: #{get-badge-position($image-diameter-small)};
+  --kirby-badge-right: #{get-badge-position($diameter-small)};
+  --kirby-badge-top: #{get-badge-position($diameter-small)};
   --kirby-badge-zindex: 2;
   position: relative;
 }
 
 .avatar {
   //default to size 'sm'
-  width: $image-diameter-small;
-  height: $image-diameter-small;
+  width: $diameter-small;
+  height: $diameter-small;
   border-radius: 50%;
   overflow: hidden;
   position: relative;
@@ -37,6 +37,8 @@ $badge-diameter: 16px;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: get-color('light');
+  color: get-color('light-contrast');
 
   //default to icon size 'sm'
   --kirby-icon-font-size: #{icon-font-size('sm')};
@@ -47,7 +49,7 @@ $badge-diameter: 16px;
 
   &.overlay::before {
     content: '';
-    background-color: #333;
+    background-color: get-color('black');
     opacity: 0.05;
     width: 100%;
     height: 100%;
@@ -66,8 +68,8 @@ $badge-diameter: 16px;
 
 :host(.xs) {
   .avatar {
-    width: $image-diameter-xsmall;
-    height: $image-diameter-xsmall;
+    width: $diameter-xsmall;
+    height: $diameter-xsmall;
     border-radius: 8px;
 
     .avatar-text {
@@ -76,10 +78,11 @@ $badge-diameter: 16px;
   }
 }
 
+:host-context(kirby-progress-circle.sm),
 :host(.sm) {
   .avatar {
-    width: $image-diameter-small;
-    height: $image-diameter-small;
+    width: $diameter-small;
+    height: $diameter-small;
 
     .avatar-text {
       font-size: font-size('s');
@@ -87,13 +90,14 @@ $badge-diameter: 16px;
   }
 }
 
+:host-context(kirby-progress-circle.md),
 :host(.md) {
-  --kirby-badge-right: #{get-badge-position($image-diameter-medium)};
-  --kirby-badge-top: #{get-badge-position($image-diameter-medium)};
+  --kirby-badge-right: #{get-badge-position($diameter-medium)};
+  --kirby-badge-top: #{get-badge-position($diameter-medium)};
 
   .avatar {
-    width: $image-diameter-medium;
-    height: $image-diameter-medium;
+    width: $diameter-medium;
+    height: $diameter-medium;
 
     --kirby-icon-font-size: #{icon-font-size('md')};
 
@@ -103,13 +107,14 @@ $badge-diameter: 16px;
   }
 }
 
+:host-context(kirby-progress-circle.lg),
 :host(.lg) {
-  --kirby-badge-right: #{get-badge-position($image-diameter-large)};
-  --kirby-badge-top: #{get-badge-position($image-diameter-large)};
+  --kirby-badge-right: #{get-badge-position($diameter-large)};
+  --kirby-badge-top: #{get-badge-position($diameter-large)};
 
   .avatar {
-    width: $image-diameter-large;
-    height: $image-diameter-large;
+    width: $diameter-large;
+    height: $diameter-large;
 
     --kirby-icon-font-size: #{icon-font-size('lg')};
 
@@ -121,4 +126,25 @@ $badge-diameter: 16px;
 
 :host-context(kirby-item)[slot='start'] {
   margin-inline-end: size('xs');
+
+  &.xs {
+    margin-inline-end: size('s');
+  }
+}
+
+@each $color-name,
+  $color-value
+    in map-merge(
+      $main-colors,
+      (
+        'white': #ffffff,
+      )
+    )
+{
+  :host(.#{$color-name}) {
+    .avatar {
+      background-color: get-color($color-name);
+      color: get-color($color-name + '-contrast');
+    }
+  }
 }
