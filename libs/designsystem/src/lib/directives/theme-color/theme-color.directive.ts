@@ -5,12 +5,13 @@ import { ColorHelper } from '../../helpers/color-helper';
 
 @Directive({
   // tslint:disable-next-line:directive-selector
-  selector: `kirby-card[themeColor],
+  selector: `kirby-avatar[themeColor],
+             kirby-card[themeColor],
              kirby-badge[themeColor],
              kirby-icon[themeColor],
-             kirby-toolbar[themeColor]
-             kirby-empty-state[themeColor],
-             kirby-progress-circle-ring[themeColor]`,
+             kirby-progress-circle-ring[themeColor],
+             kirby-toolbar[themeColor],
+             kirby-empty-state[themeColor]`,
 })
 export class ThemeColorDirective {
   private _isDefault = true;
