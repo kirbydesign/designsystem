@@ -228,7 +228,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   private checkForEmbeddedFooter() {
     const embeddedComponentElement = this.ionContentElement.nativeElement.firstElementChild;
     if (embeddedComponentElement) {
-      this.embeddedFooter = this.ionContentElement.nativeElement.querySelector(
+      this.embeddedFooter = embeddedComponentElement.querySelector(
         'kirby-modal-footer'
       );
       if (this.embeddedFooter) {
