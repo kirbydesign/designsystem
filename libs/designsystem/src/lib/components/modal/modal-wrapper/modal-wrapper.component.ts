@@ -56,7 +56,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   private initialViewportHeight: number;
   private viewportResized = false;
   private ionModalElement: HTMLIonModalElement;
-  private embeddedFooter: HTMLElement;
+  private embeddedFooterElement: HTMLElement;
   private readonly ionModalDidPresent = new Subject<void>();
   readonly didPresent = this.ionModalDidPresent.toPromise();
   private readonly ionModalWillDismiss = new Subject<void>();
