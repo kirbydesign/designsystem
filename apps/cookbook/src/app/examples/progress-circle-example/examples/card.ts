@@ -14,12 +14,29 @@ const config = {
       <kirby-icon name="moneybag" size="md"></kirby-icon>
     </kirby-progress-circle>
   </kirby-item>
+</kirby-card>
+
+<kirby-card hasPadding="true">
+  <kirby-item>
+    <kirby-progress-circle themeColor="success" value="37" slot="start">
+      <kirby-icon name="moneybag" size="md"></kirby-icon>
+    </kirby-progress-circle>
+    <h2>Your investment savings</h2>
+    <data slot="end" class="kirby-text-bold">{{ 2435034 | currency }}</data>
+  </kirby-item>
 </kirby-card>`,
 };
 
 @Component({
   selector: config.selector,
   template: config.template,
+  styles: [
+    `
+      kirby-card:not(:first-of-type) {
+        margin-top: 12px;
+      }
+    `,
+  ],
 })
 export class ProgressCircleExampleCardComponent {
   template: string = config.template;

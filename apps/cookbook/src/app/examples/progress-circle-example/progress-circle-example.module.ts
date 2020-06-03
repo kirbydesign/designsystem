@@ -5,7 +5,7 @@ import { KirbyModule } from '@kirbydesign/designsystem';
 import { ProgressCircleExampleDefaultComponent } from './examples/default';
 import { ProgressCircleExampleSizesComponent } from './examples/sizes';
 import { ProgressCircleExampleContentStepsComponent } from './examples/content-steps';
-import { ProgressCircleExampleContentIconComponent } from './examples/content-icon';
+import { ProgressCircleExampleContentAvatarComponent } from './examples/avatar';
 import { ProgressCircleExampleContentPercentComponent } from './examples/content-percent';
 import { ProgressCircleExampleAnimatedComponent } from './examples/animated';
 import { ProgressCircleExampleCardComponent } from './examples/card';
@@ -14,7 +14,7 @@ const COMPONENT_DECLARATIONS = [
   ProgressCircleExampleDefaultComponent,
   ProgressCircleExampleSizesComponent,
   ProgressCircleExampleContentStepsComponent,
-  ProgressCircleExampleContentIconComponent,
+  ProgressCircleExampleContentAvatarComponent,
   ProgressCircleExampleContentPercentComponent,
   ProgressCircleExampleAnimatedComponent,
   ProgressCircleExampleCardComponent,
