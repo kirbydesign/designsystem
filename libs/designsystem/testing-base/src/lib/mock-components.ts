@@ -37,6 +37,7 @@ import {
   MockPageActionsComponent,
   MockPageComponent,
 } from './components/mock.page.component';
+import { MockProgressCircleComponent } from './components/mock.progress-circle.component';
 import { MockReorderListComponent } from './components/mock.reorder-list.component';
 import { MockRouterOutletComponent } from './components/mock.router-outlet.component';
 import { MockSegmentedControlComponent } from './components/mock.segmented-control.component';
@@ -85,6 +86,7 @@ export const MOCK_COMPONENTS = [
   MockPageContentComponent,
   MockPageActionsComponent,
   MockPageComponent,
+  MockProgressCircleComponent,
   MockReorderListComponent,
   MockRouterOutletComponent,
   MockSegmentedControlComponent,

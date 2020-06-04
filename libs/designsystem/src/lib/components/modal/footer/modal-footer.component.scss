@@ -3,8 +3,10 @@
 ion-footer {
   box-shadow: get-elevation(8);
   display: flex;
-  padding: size('s');
   justify-content: center;
   align-items: center;
   background-color: get-color('white');
+  padding: size('s');
+  padding-bottom: calc(#{size('s')} + var(--keyboard-offset, 0px));
+  transition: padding-bottom $soft-keyboard-transition;
 }

@@ -1,0 +1,28 @@
+@import '../../scss/utils';
+
+:host {
+  display: inline-block;
+  position: relative;
+}
+
+.transcluded-content,
+kirby-progress-circle-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+kirby-progress-circle-ring {
+  z-index: z('default') + 1;
+}
+
+.transcluded-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: z('default');
+  border-radius: 50%;
+  overflow: hidden;
+}
