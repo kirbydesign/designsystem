@@ -54,7 +54,7 @@ $form-field-label-height: 24px;
     color: get-text-color('semi-dark');
   }
 }
-
+// TODO: !important used to overrule &:not(.borderless) - May need refactoring
 :host-context(kirby-item) {
   border-radius: 0 !important;
   box-shadow: none !important;

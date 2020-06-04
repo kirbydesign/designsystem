@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 const config = {
   selector: 'cookbook-item-example-input-numeric',
   template: `<kirby-item>
-  <kirby-avatar overlay="true" slot="start">
+  <kirby-avatar slot="start">
     <kirby-icon name="moneybag"></kirby-icon>
   </kirby-avatar>
   <h3>Title</h3>
