@@ -90,7 +90,7 @@ describe('InputComponent', () => {
       spectator.detectChanges();
     });
 
-    it('should render default padding', () => {
+    it('should render with default padding', () => {
       expect(element).toHaveComputedStyle({
         padding: '1px 2px',
       });
