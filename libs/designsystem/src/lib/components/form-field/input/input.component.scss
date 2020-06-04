@@ -1,8 +1,6 @@
 @import '../form-field-inputs.shared';
 
 :host() {
-  text-align: inherit;
-
   &[type='number'] {
     //fallback
     appearance: textfield;
@@ -18,13 +16,14 @@
   }
 
   height: size('xxxl');
+}
 
-  &[item-input='true'] {
-    height: size('xl');
+/* clean-css ignore:start */
+:host-context(kirby-item kirby-form-field[slot='end']) {
+  text-align: right;
 
-    &[type='number'] {
-      font-weight: font-weight('bold');
-      max-width: 112px;
-    }
+  &[type='number'] {
+    font-weight: font-weight('bold');
   }
 }
+/* clean-css ignore:end */

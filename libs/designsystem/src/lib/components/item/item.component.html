@@ -4,6 +4,7 @@
   [attr.button]="selectable ? true : null"
   [attr.tabindex]="selectable ? null : 0"
   detail="false"
+  (mousedown)="onMouseDown($event)"
 >
   <div class="outside" slot="start">
     <ng-content select="[slot='outside']"></ng-content>

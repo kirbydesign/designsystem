@@ -54,3 +54,10 @@ $form-field-label-height: 24px;
     color: get-text-color('semi-dark');
   }
 }
+
+:host-context(kirby-item) {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 1px 2px !important;
+  width: auto !important;
+}

@@ -264,4 +264,23 @@ describe('FormFieldComponent', () => {
       });
     });
   });
+
+  describe('When nested inside a kirby-item', () => {
+    beforeEach(() => {
+      spectator = createHost(
+        `<kirby-item>
+          <kirby-form-field>
+            <input kirby-input />
+          </kirby-form-field>
+        </kirby-item>`
+      );
+    });
+
+    it('should render with no bottom margin', () => {
+      const formFieldElement = spectator.queryHost('kirby-form-field');
+      expect(formFieldElement).toHaveComputedStyle({
+        'margin-bottom': '0px',
+      });
+    });
+  });
 });

@@ -8,7 +8,7 @@ const config = {
   </kirby-avatar>
   <h3>Title</h3>
   <kirby-form-field slot="end">
-    <input type="number" kirby-input borderless="true" item-input="true" value="100.00" />
+    <input type="number" kirby-input value="100.00" />
   </kirby-form-field>
 </kirby-item>`,
 };
