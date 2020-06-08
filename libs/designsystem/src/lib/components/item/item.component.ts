@@ -15,7 +15,7 @@ export class ItemComponent {
   @Input()
   reorderable: boolean;
 
-  // Only prevent default when target is kirby-dropdown
+  // Prevent default when inside kirby-dropdown to avoid blurring dropdown:
   onMouseDown(event: MouseEvent) {
     if (
       event.currentTarget instanceof HTMLElement &&
