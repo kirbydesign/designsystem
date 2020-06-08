@@ -58,13 +58,13 @@ ion-title {
 
 ion-back-button {
   --color: #{get-color('black')};
-  $fatFingerSize: 44px;
-  $paddingStart: #{size('xxs')};
-  $iconWidth: 24px;
-  --icon-font-size: $iconWidth;
-  --min-height: $fatFingerSize;
-  --padding-start: $paddingStart;
-  --padding-end: #{$fatFingerSize - $paddingStart, $iconWidth};
+  --icon-font-size: 24px;
+  $fatFingerSize: 44;
+  $paddingStart: 8;
+  $iconWidth: 24;
+  --min-height: #{$fatFingerSize}px;
+  --padding-start: #{$paddingStart}px;
+  --padding-end: #{$fatFingerSize - $paddingStart - 15}px;
 }
 
 /*
