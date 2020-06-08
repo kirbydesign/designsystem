@@ -61,10 +61,10 @@ ion-back-button {
   --icon-font-size: 24px;
   $fatFingerSize: 44;
   $paddingStart: 8;
-  $iconWidth: 24;
+  $iconWidth: 15;
   --min-height: #{$fatFingerSize}px;
   --padding-start: #{$paddingStart}px;
-  --padding-end: #{$fatFingerSize - $paddingStart - 15}px;
+  --padding-end: #{$fatFingerSize - $paddingStart - $iconWidth}px;
 }
 
 /*
