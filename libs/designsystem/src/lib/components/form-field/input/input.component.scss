@@ -17,3 +17,13 @@
 
   height: size('xxxl');
 }
+
+/* clean-css ignore:start */
+:host-context(kirby-item kirby-form-field[slot='end']) {
+  text-align: right;
+
+  &[type='number'] {
+    font-weight: font-weight('bold');
+  }
+}
+/* clean-css ignore:end */
