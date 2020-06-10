@@ -157,6 +157,8 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
 
   @HostListener('window:keyboardWillShow', ['$event'])
   _onKeyboardWillShow(info?: { keyboardHeight: number }) {
+    console.log('_onKeyboardWillShow', info);
+
     this.keyboardVisible = true;
     if (info && info.keyboardHeight) {
       this.setKeyboardOffset(info.keyboardHeight);
