@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-declare var require: any;
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'cookbook-highstock-chart-showcase',

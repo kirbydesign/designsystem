@@ -3,8 +3,9 @@ import { Component, Inject, Optional, SkipSelf } from '@angular/core';
 import { AlertConfig, ActionSheetConfig, Modal, ModalController } from '@kirbydesign/designsystem';
 import { ModalConfig, COMPONENT_PROPS } from '@kirbydesign/designsystem';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
-import { SecondEmbeddedModalExampleComponent } from '../second-embedded-modal-example/second-embedded-modal-example.component';
 import { KirbyAnimation } from '@kirbydesign/designsystem';
+
+import { SecondEmbeddedModalExampleComponent } from '../second-embedded-modal-example/second-embedded-modal-example.component';
 
 @Component({
   selector: 'cookbook-first-embedded-modal-example',
@@ -88,6 +89,10 @@ export class FirstEmbeddedModalExampleComponent {
 
   enableScroll() {
     this.modal.scrollDisabled = false;
+  }
+
+  toggleFooter() {
+    this.showFooter = !this.showFooter;
   }
 
   close() {

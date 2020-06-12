@@ -1,5 +1,4 @@
-import { Component, ElementRef, Inject, Input, LOCALE_ID, ViewChild } from '@angular/core';
-
+import { Component, ElementRef, Inject, Input, LOCALE_ID } from '@angular/core';
 import { Options } from 'highcharts';
 import * as Highcharts from 'highcharts/highstock';
 import AnnotationsModule from 'highcharts/modules/annotations';
@@ -56,6 +55,7 @@ export class StockChartComponent {
 
   onDataChanges(data: StockChartDataPoint[]) {
     this._data = data;
+
     if (this.chart != null) {
       // First delete all points in the previous series.
       this.chart.update(
@@ -63,8 +63,10 @@ export class StockChartComponent {
           series: [],
         },
         false,
-        false
+        true
       );
+      // Remove the annotations.
+      this.chart.removeAnnotation('minmax');
       // Then update the chart with new series data.
       this.chart.update(
         {
@@ -76,10 +78,8 @@ export class StockChartComponent {
           ],
         },
         false,
-        false
+        true
       );
-      // Remove the annotations.
-      this.chart.removeAnnotation('minmax');
       // Add the new annotations.
       this.chart.addAnnotation(annotations(this.locale), false);
       // And finally redraw the graph with all the changes.

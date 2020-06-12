@@ -5,7 +5,6 @@ import { AvatarExampleComponent } from './avatar-example/avatar-example.componen
 import { ButtonExampleComponent } from './button-example/button-example.component';
 import { CardExampleComponent } from './card-example/card-example.component';
 import { GridExampleComponent } from './grid-example/grid-example.component';
-import { ListExampleComponent } from './list/list-example.component';
 import { ChartExampleComponent } from './chart-example/chart-example.component';
 import { FontsExampleComponent } from './fonts-example/fonts-example.component';
 import { SpinnerExampleComponent } from './spinner-example/spinner-example.component';
@@ -39,19 +38,12 @@ import { ExamplesComponent } from './examples.component';
 import { TabsExampleComponent } from './tabs/tabs-example.component';
 import { TabExampleComponent } from './tabs/tab/tab-example.component';
 import { ItemExampleComponent } from './item-example/item-example.component';
-import { ListBoldTextOnRowSelectionExampleComponent } from './list/components/bold-text-on-row-selection';
-import { ListWithDividersExampleComponent } from './list/components/dividers';
-import { ListSelectableItemsExampleComponent } from './list/components/selectable-items';
-import { ListWithSectionsAndColoredItemsExampleComponent } from './list/components/sections-and-colored-items';
-import { ListColoredItemsExampleComponent } from './list/components/colored-items';
-import { ListWithHeaderAndFooterExampleComponent } from './list/components/header-and-footer';
-import { ListWithSectionsExampleComponent } from './list/components/sections';
-import { ListItemsExampleComponent } from './list/components/items';
 import { ReorderListExampleComponent } from './reorder-list/reorder-list-example.component';
 import { DropdownExampleComponent } from '~/app/examples/dropdown-example/dropdown-example.component';
 import { StockChartExampleComponent } from './stock-chart-example/stock-chart-example.component';
 import { listRoutes } from './list/list-example.routes';
 import { listVirtualScrollRoutes } from './list/list-virtual-scroll.example.routes';
+import { ProgressCircleExampleComponent } from './progress-circle-example/progress-circle-example.component';
 
 export const routes: Routes = [
   {
@@ -267,5 +259,9 @@ export const routes: Routes = [
   {
     path: 'dropdown',
     component: DropdownExampleComponent,
+  },
+  {
+    path: 'progress-circle',
+    component: ProgressCircleExampleComponent,
   },
 ];

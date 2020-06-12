@@ -73,6 +73,8 @@ import { LoadingOverlayService } from './components/loading-overlay/fullscreen-l
 import { ResizeObserverFactory } from './components/shared/resize-observer/resize-observer.factory';
 import { ResizeObserverService } from './components/shared/resize-observer/resize-observer.service';
 import { VirtualScrollListComponent } from './components/list/virtual-scroll-list/virtual-scroll-list.component';
+import { ProgressCircleComponent } from './components/progress-circle/progress-circle.component';
+import { ProgressCircleRingComponent } from './components/progress-circle/progress-circle-ring.component';
 
 const exportedDeclarations = [
   CardComponent,
@@ -80,6 +82,7 @@ const exportedDeclarations = [
   CardFooterComponent,
   ButtonComponent,
   ListComponent,
+  VirtualScrollListComponent,
   ListItemDirective,
   ListFlexItemDirective,
   ListItemTemplateDirective,
@@ -118,6 +121,7 @@ const exportedDeclarations = [
   DropdownComponent,
   InfiniteScrollDirective,
   LoadingOverlayComponent,
+  ProgressCircleComponent,
 ];
 
 const declarations = [
@@ -129,7 +133,7 @@ const declarations = [
   AlertComponent,
   ModalWrapperComponent,
   ModalCompactWrapperComponent,
-  VirtualScrollListComponent,
+  ProgressCircleRingComponent,
 ];
 
 const exportedModules = [
@@ -172,6 +176,8 @@ const entryComponents = [
     RouterModule,
     IonicModule.forRoot({
       mode: 'ios',
+      inputShims: true,
+      scrollAssist: true,
     }),
     ...importedModules,
   ],

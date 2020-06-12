@@ -38,6 +38,7 @@ import { DropdownShowcaseComponent } from '~/app/showcase/dropdown-showcase/drop
 import { ReorderListShowcaseComponent } from './reorder-list-showcase/reorder-list-showcase.component';
 import { StockChartShowcaseComponent } from './stock-chart-showcase/stock-chart-showcase.component';
 import { ListVirtualScrollShowcaseComponent } from './list-virtual-scroll-showcase/list-virtual-scroll-showcase.component';
+import { ProgressCircleShowcaseComponent } from './progress-circle-showcase/progress-circle-showcase.component';
 
 export const routes: Routes = [
   {
@@ -196,6 +197,10 @@ export const routes: Routes = [
       {
         path: 'dropdown',
         component: DropdownShowcaseComponent,
+      },
+      {
+        path: 'progress-circle',
+        component: ProgressCircleShowcaseComponent,
       },
     ],
   },

@@ -1,10 +1,28 @@
+import { Component, Optional, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { IonicModule, ModalController as IonicModalController } from '@ionic/angular';
 import { createService } from '@ngneat/spectator';
 
 import { DesignTokenHelper } from '../../../helpers/design-token-helper';
 import { TestHelper } from '../../../testing/test-helper';
 import { ModalHelper } from './modal.helper';
-import { Overlay } from './modal.interfaces';
+import { Overlay, Modal } from './modal.interfaces';
+
+@Component({
+  template: `
+    <h2>Embedded Input</h2>
+    <input #input />
+  `,
+})
+class InputEmbeddedComponent implements OnInit {
+  @ViewChild('input', { static: true, read: ElementRef })
+  input: ElementRef;
+
+  constructor(@Optional() private modal?: Modal) {}
+
+  ngOnInit() {
+    this.modal && this.modal.didPresent.then(() => this.input.nativeElement.focus());
+  }
+}
 
 describe('ModalHelper', () => {
   let modalHelper: ModalHelper;
@@ -24,6 +42,7 @@ describe('ModalHelper', () => {
   const spectator = createService({
     service: ModalHelper,
     imports: [IonicModule.forRoot({ mode: 'ios', _testing: true })],
+    entryComponents: [InputEmbeddedComponent],
   });
 
   beforeAll(() => {
@@ -84,7 +103,10 @@ describe('ModalHelper', () => {
 
       describe(`with default flavor ('modal')`, () => {
         beforeEach(async () => {
-          overlay = await modalHelper.showModalWindow({ title: 'Modal', component: undefined });
+          overlay = await modalHelper.showModalWindow({
+            title: 'Modal',
+            component: InputEmbeddedComponent,
+          });
           ionModal = await ionModalController.getTop();
           expect(ionModal).toBeTruthy();
           ionModalWrapper = ionModal.querySelector(':scope > .modal-wrapper');
@@ -108,6 +130,14 @@ describe('ModalHelper', () => {
             'background-color': backgroundColor,
             'border-radius': defaultBorderRadius,
           });
+        });
+
+        it('modal window should not take focus from embedded input after opening', async () => {
+          const ionContent = ionModal.querySelector<HTMLElement>('ion-content');
+          await TestHelper.whenReady(ionContent);
+          const input: HTMLInputElement = ionContent.querySelector<HTMLInputElement>('input');
+          expect(input).toBeDefined();
+          expect(document.activeElement).toEqual(input);
         });
 
         it('modal should have no visible backdrop when opened on another modal', async () => {

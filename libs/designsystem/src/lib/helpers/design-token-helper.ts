@@ -53,6 +53,14 @@ export class DesignTokenHelper {
   public static compactModalMaxWidth(): string {
     return styles.compactModalMaxWidth;
   }
+
+  public static dropdownItemHeight(): string {
+    return styles.dropdownItemHeight;
+  }
+
+  public static avatarSize(key: 'xs' | 's' | 'm' | 'l'): string {
+    return styles.avatarSizes[key];
+  }
 }
 
 export type ThemeColorExtended =
