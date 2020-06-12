@@ -42,7 +42,7 @@ describe('AvatarComponent', () => {
 
     const avatar = spectator.queryHost<HTMLElement>('.avatar');
     expect(avatar).toHaveComputedStyle({
-      'background-color': getColor('light'),
+      'background-color': getColor('white'),
       color: getColor('light', 'contrast'),
     });
   });
