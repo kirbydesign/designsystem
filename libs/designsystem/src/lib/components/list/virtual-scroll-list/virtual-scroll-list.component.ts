@@ -7,33 +7,20 @@ import {
   Input,
   TrackByFunction,
   HostBinding,
-  Output,
-  EventEmitter,
-  ContentChild,
   TemplateRef,
-  ContentChildren,
 } from '@angular/core';
 
-import { ListShape } from '../../list.component';
+import { ListShape, ListComponent } from '../list.component';
 import { ThemeColor } from 'libs/designsystem/src';
-import {
-  ListSwipeAction,
-  LoadOnDemandEvent,
-  ListItemTemplateDirective,
-  ListItemDirective,
-  ListFlexItemDirective,
-  ListHeaderDirective,
-  ListSectionHeaderDirective,
-  ListFooterDirective,
-  GroupByPipe,
-} from '../..';
-import { ItemComponent } from '../../..';
-import { ListHelper } from '../../helpers/list-helper';
-import { LoadOnDemandEventData } from '../../list.event';
+import { ListSwipeAction, GroupByPipe } from '..';
+import { ItemComponent } from '../..';
+import { ListHelper } from '../helpers/list-helper';
+import { LoadOnDemandEventData } from '../list.event';
 
 @Component({
   selector: 'kirby-virtual-scroll-list',
   templateUrl: './virtual-scroll-list.component.html',
+  styleUrls: ['./virtual-scroll-list.component.scss'],
 })
 export class VirtualScrollListComponent implements OnInit, OnChanges, AfterViewInit {
   @ViewChild('list', { static: true }) list: any;
@@ -42,44 +29,37 @@ export class VirtualScrollListComponent implements OnInit, OnChanges, AfterViewI
    * Provide items for the list to render. Items must be provided in the order you expect them to be rendered.
    */
 
-  @Input()
-  items: any[];
+  items: any[] = this.listComponent.items;
   sortedItems: any[];
 
   @Input()
-  getItemColor: (item: any) => ThemeColor;
+  getItemColor: (item: any) => ThemeColor = this.listComponent.getItemColor;
 
   /**
    * Callback to determine name of section. Sections will be ordered alphabetically.
    */
-  @Input() getSectionName: (item: any) => string;
+  @Input() getSectionName: (item: any) => string = this.listComponent.getSectionName;
 
   /**
    * Callback that defines how to track changes for items in the iterable.
    */
-  @Input() trackBy: TrackByFunction<any>;
+  @Input() trackBy: TrackByFunction<any> = this.listComponent.trackBy;
 
   /**
    * Text to display when no more items can be loaded (used for "on demand"-loading).
    */
-  @Input() noMoreItemsText: string;
+  @Input() noMoreItemsText: string = this.listComponent.noMoreItemsText;
 
   /**
    * Determines if dividers should be shown or not.
    */
-  @Input() showDivider = false;
-
-  /**
-   * Determines if virtual scroll is enabled
-   * NOTE: This comes with the following limitations:
-   * - You can't have both a list header/footer and a section header/footer at the same time
-   */
-  @Input() isVirtualScrollEnabled = false;
+  @Input() showDivider = this.listComponent.showDivider;
 
   /**
    * Determines if list row text should turn bold on selection
    */
-  @Input() markSelectedRow = false;
+  @Input() markSelectedRow = this.listComponent.markSelectedRow;
+  @Input() shape: ListShape = 'rounded';
 
   @HostBinding('class.kirby-list') true;
   /**
@@ -89,7 +69,6 @@ export class VirtualScrollListComponent implements OnInit, OnChanges, AfterViewI
    *
    * `square` means **without** rounded corners, `rounded` means **with** rounded corners.,  `none` means **without** padding, border, box-shadow and background.
    */
-  @Input() shape: ListShape = 'rounded';
   @HostBinding('class.shape-rounded')
   public get isShapeRounded(): boolean {
     return this.shape === 'rounded';
@@ -100,41 +79,33 @@ export class VirtualScrollListComponent implements OnInit, OnChanges, AfterViewI
   }
 
   @HostBinding('class.item-spacing')
-  @Input()
-  hasItemSpacing: boolean;
+  hasItemSpacing: boolean = this.listComponent.hasItemSpacing;
 
   /**
    * Determines if list items should have swipe actions or not
    * - the order of swipe actions is used to determine edge actions,
    * as well as their order of appearance on the screen.
    */
-  @Input() swipeActions: ListSwipeAction[] = [];
+  swipeActions: ListSwipeAction[] = this.listComponent.swipeActions;
 
   /**
    * Emitting event when more items are to be loaded.
    */
-  @Output() loadOnDemand = new EventEmitter<LoadOnDemandEvent>();
+  loadOnDemand = this.listComponent.loadOnDemand;
 
   /**
    * Emitting event when an item is selected (tapped on mobile, clicked on web)
    */
-  @Output() itemSelect = new EventEmitter<any>();
+  itemSelect = this.listComponent.itemSelect;
 
   // The first element that matches ListItemDirective. As a structural directive it unfolds into a template. This is a reference to that.
-  @ContentChild(ListItemTemplateDirective, { static: true, read: TemplateRef })
-  itemTemplate: TemplateRef<any>;
-  @ContentChild(ListItemDirective, { static: true, read: TemplateRef })
-  legacyItemTemplate: TemplateRef<any>;
-  @ContentChildren(ItemComponent)
-  kirbyItems: ItemComponent[];
-  @ContentChild(ListFlexItemDirective, { static: true, read: TemplateRef })
-  legacyFlexItemTemplate: TemplateRef<any>;
-  @ContentChild(ListHeaderDirective, { static: false, read: TemplateRef })
-  headerTemplate: TemplateRef<any>;
-  @ContentChild(ListSectionHeaderDirective, { static: false, read: TemplateRef })
-  sectionHeaderTemplate: TemplateRef<any>;
-  @ContentChild(ListFooterDirective, { static: false, read: TemplateRef })
-  footerTemplate: TemplateRef<any>;
+  itemTemplate: TemplateRef<any> = this.listComponent.itemTemplate;
+  legacyItemTemplate: TemplateRef<any> = this.listComponent.legacyItemTemplate;
+  kirbyItems: ItemComponent[] = this.listComponent.kirbyItems;
+  legacyFlexItemTemplate: TemplateRef<any> = this.listComponent.legacyFlexItemTemplate;
+  headerTemplate: TemplateRef<any> = this.listComponent.headerTemplate;
+  sectionHeaderTemplate: TemplateRef<any> = this.listComponent.sectionHeaderTemplate;
+  footerTemplate: TemplateRef<any> = this.listComponent.footerTemplate;
 
   @HostBinding('class.has-sections') isSectionsEnabled: boolean;
   @HostBinding('class.has-deprecated-item-template') hasDeprecatedItemTemplate: boolean;
@@ -145,7 +116,11 @@ export class VirtualScrollListComponent implements OnInit, OnChanges, AfterViewI
   groupedItems: any[];
   selectedItem: any;
 
-  constructor(private listHelper: ListHelper, private groupBy: GroupByPipe) {}
+  constructor(
+    private listHelper: ListHelper,
+    private groupBy: GroupByPipe,
+    private listComponent: ListComponent
+  ) {}
 
   ngOnInit() {
     this.hasDeprecatedItemTemplate = !!this.legacyItemTemplate || !!this.legacyFlexItemTemplate;
@@ -164,20 +139,20 @@ export class VirtualScrollListComponent implements OnInit, OnChanges, AfterViewI
     }
   }
 
-  private _headerFn(item: any, index: number, items: any[]) {
+  private _headerFn(index: number) {
     return this.headerTemplate && index === 0 ? true : null;
   }
 
   headerFn = this._headerFn.bind(this);
 
   sectionNameMap = new Map<number, string>();
-  private _sectionHeaderFn = (item: any, index: number, items: any[]) => {
+  private _sectionHeaderFn = (item: any, index: number) => {
     return this.sectionNameMap.get(index);
   };
 
   sectionHeaderFn = this._sectionHeaderFn.bind(this);
 
-  private _footerFn(item: any, index: number, items: any[]) {
+  private _footerFn(index: number, items: any[]) {
     return this.footerTemplate && items && items.length > 0 && items.length - 1 === index
       ? true
       : null;
@@ -185,7 +160,7 @@ export class VirtualScrollListComponent implements OnInit, OnChanges, AfterViewI
 
   footerFn = this._footerFn.bind(this);
 
-  private _itemHeightFn(item: any, index: number) {
+  private _itemHeightFn() {
     return 56;
   }
 

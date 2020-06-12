@@ -37,6 +37,7 @@ import { DividerShowcaseComponent } from './divider-showcase/divider-showcase.co
 import { DropdownShowcaseComponent } from '~/app/showcase/dropdown-showcase/dropdown-showcase.component';
 import { ReorderListShowcaseComponent } from './reorder-list-showcase/reorder-list-showcase.component';
 import { StockChartShowcaseComponent } from './stock-chart-showcase/stock-chart-showcase.component';
+import { ListVirtualScrollShowcaseComponent } from './list-virtual-scroll-showcase/list-virtual-scroll-showcase.component';
 
 export const routes: Routes = [
   {
@@ -83,6 +84,10 @@ export const routes: Routes = [
       {
         path: 'list',
         component: ListShowcaseComponent,
+      },
+      {
+        path: 'list-virtual-scroll',
+        component: ListVirtualScrollShowcaseComponent,
       },
       {
         path: 'list-load-on-demand',

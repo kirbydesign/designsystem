@@ -72,7 +72,7 @@ import { BreakpointHelperService } from './components/grid/breakpoint-helper.ser
 import { LoadingOverlayService } from './components/loading-overlay/fullscreen-loading-overlay/loading-overlay.service';
 import { ResizeObserverFactory } from './components/shared/resize-observer/resize-observer.factory';
 import { ResizeObserverService } from './components/shared/resize-observer/resize-observer.service';
-import { VirtualScrollListComponent } from './components/list/virtual scroll/virtual-scroll-list/virtual-scroll-list.component';
+import { VirtualScrollListComponent } from './components/list/virtual-scroll-list/virtual-scroll-list.component';
 
 const exportedDeclarations = [
   CardComponent,

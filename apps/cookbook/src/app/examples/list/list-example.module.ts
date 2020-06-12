@@ -10,8 +10,16 @@ import { ListWithSectionsAndColoredItemsExampleComponent } from './components/se
 import { ListWithHeaderAndFooterExampleComponent } from './components/header-and-footer';
 import { ListWithSectionsExampleComponent } from './components/sections';
 import { ListItemsExampleComponent } from './components/items';
+import { ListVirtualScrollBoldTextOnRowSelectionExampleComponent } from './components/virtual-scroll/bold-text-on-row-selection';
+import { ListVirtualScrollColoredItemsExampleComponent } from './components/virtual-scroll/colored-items';
+import { ListVirtualScrollWithDividersExampleComponent } from './components/virtual-scroll/dividers';
+import { ListVirtualScrollWithHeaderAndFooterExampleComponent } from './components/virtual-scroll/header-and-footer';
+import { ListVirtualScrollItemsExampleComponent } from './components/virtual-scroll/items';
+import { ListVirtualScrollWithSectionsExampleComponent } from './components/virtual-scroll/sections';
+import { ListVirtualScrollWithSectionsAndColoredItemsExampleComponent } from './components/virtual-scroll/sections-and-colored-items';
+import { ListVirtualScrollSelectableItemsExampleComponent } from './components/virtual-scroll/selectable-items';
 
-const listExamples = [
+const declarations = [
   ListBoldTextOnRowSelectionExampleComponent,
   ListWithDividersExampleComponent,
   ListSelectableItemsExampleComponent,
@@ -20,11 +28,19 @@ const listExamples = [
   ListWithHeaderAndFooterExampleComponent,
   ListWithSectionsExampleComponent,
   ListItemsExampleComponent,
+  ListVirtualScrollBoldTextOnRowSelectionExampleComponent,
+  ListVirtualScrollColoredItemsExampleComponent,
+  ListVirtualScrollWithDividersExampleComponent,
+  ListVirtualScrollWithHeaderAndFooterExampleComponent,
+  ListVirtualScrollItemsExampleComponent,
+  ListVirtualScrollWithSectionsExampleComponent,
+  ListVirtualScrollWithSectionsAndColoredItemsExampleComponent,
+  ListVirtualScrollSelectableItemsExampleComponent,
 ];
 
 @NgModule({
   imports: [CommonModule, KirbyModule],
-  declarations: [...listExamples],
-  exports: [...listExamples],
+  declarations: [...declarations],
+  exports: [...declarations],
 })
 export class ListExamplesModule {}

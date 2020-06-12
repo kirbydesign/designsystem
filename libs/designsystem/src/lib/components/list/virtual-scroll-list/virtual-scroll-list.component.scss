@@ -1,4 +1,4 @@
-@import '../../scss/utils';
+@import '../../../scss/utils';
 
 $divider-color: get-color('background-color');
 $shadow: get-elevation(2);
@@ -8,7 +8,7 @@ $item-height: size('xxxl');
   display: block;
 }
 
-ion-list {
+.list {
   &.has-divider {
     ion-item-sliding:not(:last-of-type) {
       border-bottom: 1px solid $divider-color;
@@ -81,6 +81,7 @@ ion-item-sliding {
   }
 }
 
+// remove
 ion-item-group {
   margin-bottom: size('m');
 
@@ -92,6 +93,7 @@ ion-item-group {
 ion-item-divider {
   --inner-padding-end: 0;
   --color: unset;
+  --inner-padding-top: #{size('m')};
   background-color: transparent;
   border-color: transparent;
   min-height: 0;
@@ -147,7 +149,7 @@ ion-item-options[side='end'] {
 }
 
 :host(.has-sections) {
-  ion-list {
+  .list {
     box-shadow: none;
   }
 
@@ -168,48 +170,49 @@ ion-item-options[side='end'] {
 }
 
 :host(.shape-rounded) {
-  ion-list,
+  .list,
   .list-items {
     border-radius: $border-radius;
   }
 
-  ion-list ion-item:first-of-type,
-  ion-list ion-item-sliding:first-of-type,
-  ion-list-header {
+  .list ion-item:first-of-type,
+  .list ion-item-sliding:first-of-type,
+  ion-list-header,
+  .first-in-section {
     border-top-left-radius: $border-radius;
     border-top-right-radius: $border-radius;
   }
 
-  ion-list ion-item-sliding > ion-item,
-  &:not(.has-sections) ion-list.has-header ion-item,
-  &:not(.has-sections) ion-list.has-header ion-item-sliding {
+  .list ion-item-sliding > ion-item,
+  &:not(.has-sections) .list.has-header ion-item,
+  &:not(.has-sections) .list.has-header ion-item-sliding {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
   }
 
-  ion-list ion-item:last-of-type,
-  ion-list ion-item-sliding:last-of-type,
+  .list ion-item:last-of-type,
+  .list ion-item-sliding:last-of-type,
   .footer {
     border-bottom-left-radius: $border-radius;
     border-bottom-right-radius: $border-radius;
   }
 
-  ion-list ion-item-sliding > ion-item,
-  &:not(.has-sections) ion-list.has-footer ion-item,
-  &:not(.has-sections) ion-list.has-footer ion-item-sliding {
+  .list ion-item-sliding > ion-item,
+  &:not(.has-sections) .list.has-footer ion-item,
+  &:not(.has-sections) .list.has-footer ion-item-sliding {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
   }
 }
 
 :host(.shape-none) {
-  ion-list,
+  .list,
   .list-items {
     box-shadow: none;
     border-radius: unset;
   }
 
-  ion-list {
+  .list {
     ion-item,
     ion-item-sliding {
       --padding-start: 0;
@@ -230,7 +233,7 @@ ion-item-options[side='end'] {
 }
 
 :host(.item-spacing) {
-  ion-list {
+  .list {
     ion-item,
     ion-item-sliding {
       margin-bottom: size('s');

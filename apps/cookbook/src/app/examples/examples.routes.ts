@@ -50,6 +50,8 @@ import { ListItemsExampleComponent } from './list/components/items';
 import { ReorderListExampleComponent } from './reorder-list/reorder-list-example.component';
 import { DropdownExampleComponent } from '~/app/examples/dropdown-example/dropdown-example.component';
 import { StockChartExampleComponent } from './stock-chart-example/stock-chart-example.component';
+import { listRoutes } from './list/list-example.routes';
+import { listVirtualScrollRoutes } from './list/list-virtual-scroll.example.routes';
 
 export const routes: Routes = [
   {
@@ -160,48 +162,8 @@ export const routes: Routes = [
     path: 'card',
     component: CardExampleComponent,
   },
-  {
-    path: 'list',
-    component: ListExampleComponent,
-    children: [
-      {
-        path: '',
-        redirectTo: 'with-items',
-      },
-      {
-        path: 'bold-text-on-row-selection',
-        component: ListBoldTextOnRowSelectionExampleComponent,
-      },
-      {
-        path: 'with-dividers',
-        component: ListWithDividersExampleComponent,
-      },
-      {
-        path: 'with-selectable-items',
-        component: ListSelectableItemsExampleComponent,
-      },
-      {
-        path: 'with-colored-items',
-        component: ListColoredItemsExampleComponent,
-      },
-      {
-        path: 'with-sections-and-colored-items',
-        component: ListWithSectionsAndColoredItemsExampleComponent,
-      },
-      {
-        path: 'with-header-and-footer',
-        component: ListWithHeaderAndFooterExampleComponent,
-      },
-      {
-        path: 'with-sections',
-        component: ListWithSectionsExampleComponent,
-      },
-      {
-        path: 'with-items',
-        component: ListItemsExampleComponent,
-      },
-    ],
-  },
+  listRoutes,
+  listVirtualScrollRoutes,
   {
     path: 'list-swipe',
     component: ListSwipeExampleComponent,
