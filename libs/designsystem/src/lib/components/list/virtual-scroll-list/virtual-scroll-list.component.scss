@@ -175,8 +175,8 @@ ion-item-options[side='end'] {
     border-radius: $border-radius;
   }
 
-  .list ion-item:first-of-type,
-  .list ion-item-sliding:first-of-type,
+  .list ion-item.first,
+  .list ion-item-sliding.first,
   ion-list-header,
   .first-in-section {
     border-top-left-radius: $border-radius;
@@ -190,8 +190,8 @@ ion-item-options[side='end'] {
     border-top-right-radius: 0;
   }
 
-  .list ion-item:last-of-type,
-  .list ion-item-sliding:last-of-type,
+  .list ion-item.last,
+  .list ion-item-sliding.last,
   .footer {
     border-bottom-left-radius: $border-radius;
     border-bottom-right-radius: $border-radius;

@@ -25,6 +25,8 @@
   <ion-item-sliding
     *virtualItem="let item"
     [class.selected]="isSelectable && item === selectedItem"
+    [class.first]="isFirst(item)"
+    [class.last]="isLast(item)"
     [kirbyListItemColor]="getItemColor"
     [item]="item"
     [disabled]="isSwipingEnabled ? null : true"

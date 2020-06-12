@@ -139,6 +139,13 @@ export class VirtualScrollListComponent implements OnInit, OnChanges, AfterViewI
     }
   }
 
+  isFirst(item: any) {
+    return this.items.indexOf(item) === 0;
+  }
+  isLast(item: any) {
+    return this.items.indexOf(item) === this.items.length - 1;
+  }
+
   private _headerFn(index: number) {
     return this.headerTemplate && index === 0 ? true : null;
   }
