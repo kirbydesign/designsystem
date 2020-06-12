@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, ChildrenOutletContexts, Router } from '@angular/router';
 
 import { ModalConfig, ModalController } from '@kirbydesign/designsystem';
 import { FirstEmbeddedModalExampleComponent } from './first-embedded-modal-example/first-embedded-modal-example.component';
@@ -9,7 +10,8 @@ const config = {
   template: `<button kirby-button (click)="showModal()">Show modal</button>
 <button kirby-button (click)="showDrawer()">Show drawer</button>
 <button kirby-button (click)="showCompact()">Show compact</button>
-<button kirby-button (click)="showModalWithFooter()">Show modal with footer</button>`,
+<button kirby-button (click)="showModalWithFooter()">Show modal with footer</button>
+`,
   footerTemplate: `<p>Some content of the embedded component</p>
 ...
 <kirby-modal-footer>
@@ -136,7 +138,7 @@ export class EmbeddedComponent() {
   selector: config.selector,
   template: config.template,
 })
-export class ModalExampleComponent {
+export class ModalExampleComponent implements OnInit {
   template = config.template;
   footerTemplate = config.footerTemplate;
   defaultCodeSnippet = config.defaultCodeSnippet;
@@ -150,7 +152,14 @@ export class ModalExampleComponent {
   embeddedCodeSnippet = config.embeddedCodeSnippet;
   closeModalCodeSnippet = config.closeModalCodeSnippet;
 
-  constructor(private modalController: ModalController) {}
+  constructor(
+    private modalController: ModalController,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private parentContexts: ChildrenOutletContexts
+  ) {}
+
+  ngOnInit() {}
 
   showModal(showFooter = false) {
     const config: ModalConfig = {

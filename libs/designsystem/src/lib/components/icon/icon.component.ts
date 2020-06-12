@@ -59,7 +59,7 @@ export class IconComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.name && changes.name.currentValue) {
       this.icon = this.findIcon(kirbyIconSettings.icons, changes.name.currentValue);
-    } else if (changes.customName && changes.customName.currentValue) {
+    } else if (changes.customName && changes.customName.currentValue && this.iconSettings) {
       this.icon = this.findIcon(this.iconSettings.icons, changes.customName.currentValue);
     }
   }
