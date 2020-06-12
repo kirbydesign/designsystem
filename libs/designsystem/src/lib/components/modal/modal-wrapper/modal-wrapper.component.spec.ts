@@ -231,6 +231,12 @@ describe('ModalWrapperComponent', () => {
       const footerAsWrapperChild = spectator.element.querySelector(':scope > kirby-modal-footer');
       expect(footerAsWrapperChild).not.toBeNull();
     });
+
+    it('should define custom CSS property --keyboard-offset on embedded footer', () => {
+      const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
+      spectator.component._onKeyboardWillShow({ keyboardHeight: 200 });
+      expect(kirbyModalFooter).toHaveStyle({ '--keyboard-offset': '200px' });
+    });
   });
 
   describe('with embedded component with dynamic footer', () => {
@@ -309,6 +315,19 @@ describe('ModalWrapperComponent', () => {
         embeddedComponent.isEnabled = true;
         spectator.detectChanges();
         expect(footerAsWrapperChild).toHaveClass('enabled');
+        done();
+      });
+    });
+
+    it('should define custom CSS property --keyboard-offset on embedded footer', (done) => {
+      const embeddedComponent = spectator.query(DynamicFooterEmbeddedComponent);
+      embeddedComponent.showFooter = true;
+      spectator.detectChanges();
+
+      setTimeout(() => {
+        const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
+        spectator.component._onKeyboardWillShow({ keyboardHeight: 200 });
+        expect(kirbyModalFooter).toHaveStyle({ '--keyboard-offset': '200px' });
         done();
       });
     });
