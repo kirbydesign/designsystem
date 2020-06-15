@@ -25,7 +25,7 @@ import {
 } from './list.directive';
 import { LoadOnDemandEvent, LoadOnDemandEventData } from './list.event';
 import { ListHelper } from './helpers/list-helper';
-import { GroupByPipe } from './pipes/group-by.pipe';
+import { GroupByPipe, GroupedItem } from './pipes/group-by.pipe';
 import { ListSwipeAction } from './list-swipe-action';
 import { ThemeColor } from '../../helpers/theme-color.type';
 import { ItemComponent } from '../item/item.component';
@@ -47,6 +47,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
 
   @Input()
   items: any[];
+  sortedItems: any[];
 
   @Input()
   getItemColor: (item: any) => ThemeColor;
@@ -144,7 +145,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   isSelectable: boolean;
   isLoading: boolean;
   isLoadOnDemandEnabled: boolean;
-  groupedItems: any[];
+  groupedItems: GroupedItem[];
   selectedItem: any;
 
   constructor(private listHelper: ListHelper, private groupBy: GroupByPipe) {}
@@ -166,10 +167,69 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
     }
   }
 
+  private _headerFn(item: any, index: number, items: any[]) {
+    return this.headerTemplate && index === 0 ? true : null;
+  }
+
+  headerFn = this._headerFn.bind(this);
+
+  sectionNameMap = new Map<number, string>();
+  private _sectionHeaderFn = (item: any, index: number, items: any[]) => {
+    return this.sectionNameMap.get(index);
+  };
+
+  sectionHeaderFn = this._sectionHeaderFn.bind(this);
+
+  private _footerFn(item: any, index: number, items: any[]) {
+    return this.footerTemplate && items && items.length > 0 && items.length - 1 === index
+      ? true
+      : null;
+  }
+
+  footerFn = this._footerFn.bind(this);
+
+  private _itemHeightFn(item: any, index: number) {
+    return 56;
+  }
+
+  itemHeightFn = this._itemHeightFn.bind(this);
+
+  // PERF: cache with map
+  isFirst(item: any) {
+    if (this.isSectionsEnabled) {
+      return this.groupedItems.some((groupedItem) => groupedItem.items.indexOf(item) === 0);
+    }
+
+    return this.items.indexOf(item) === 0;
+  }
+  isLast(item: any) {
+    if (this.isSectionsEnabled) {
+      return this.groupedItems.some(
+        (groupedItem) => groupedItem.items.indexOf(item) === groupedItem.items.length - 1
+      );
+    }
+    return this.items.indexOf(item) === this.items.length - 1;
+  }
+
   ngOnChanges(): void {
     this.isSectionsEnabled = !!this.getSectionName;
     if (this.isSectionsEnabled && this.items) {
       this.groupedItems = this.groupBy.transform(this.items, this.getSectionName);
+      this.sortedItems = this.groupedItems.reduce((prev, cur) => [...prev, ...cur.items], []);
+
+      this.sectionNameMap = new Map<number, string>();
+      const groupsSet = new Set<string>();
+      // calculate section name for each item and add them to a index, section name | null map,
+      this.sortedItems.forEach((item: any, index) => {
+        const sectionName = this.getSectionName(item);
+        // TODO: extract to method
+        if (groupsSet.has(sectionName)) {
+          this.sectionNameMap.set(index, null);
+        } else {
+          this.sectionNameMap.set(index, sectionName);
+          groupsSet.add(sectionName);
+        }
+      });
     } else {
       this.groupedItems = null;
     }
