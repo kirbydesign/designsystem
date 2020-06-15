@@ -177,8 +177,7 @@ ion-item-options[side='end'] {
 
   .list ion-item.first,
   .list ion-item-sliding.first,
-  ion-list-header,
-  .first-in-section {
+  ion-list-header {
     border-top-left-radius: $border-radius;
     border-top-right-radius: $border-radius;
   }

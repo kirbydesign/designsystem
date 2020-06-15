@@ -76,7 +76,6 @@
     *virtualItem="let item; let index = index"
     [class.selected]="isSelectable && item === selectedItem"
     [kirbyListItemColor]="getItemColor"
-    [class.first-in-section]="sectionHeaderFn(item, index - 1) !== null"
     [item]="item"
     [disabled]="isSwipingEnabled ? null : true"
     keyHandler

@@ -189,7 +189,8 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   footerFn = this._footerFn.bind(this);
 
   private _itemHeightFn(item: any, index: number) {
-    return 56;
+    const itemHeight = 56;
+    return itemHeight;
   }
 
   itemHeightFn = this._itemHeightFn.bind(this);
@@ -217,22 +218,25 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
       this.groupedItems = this.groupBy.transform(this.items, this.getSectionName);
       this.sortedItems = this.groupedItems.reduce((prev, cur) => [...prev, ...cur.items], []);
 
-      this.sectionNameMap = new Map<number, string>();
-      const groupsSet = new Set<string>();
-      // calculate section name for each item and add them to a index, section name | null map,
-      this.sortedItems.forEach((item: any, index) => {
-        const sectionName = this.getSectionName(item);
-        // TODO: extract to method
-        if (groupsSet.has(sectionName)) {
-          this.sectionNameMap.set(index, null);
-        } else {
-          this.sectionNameMap.set(index, sectionName);
-          groupsSet.add(sectionName);
-        }
-      });
+      this.calculateSectionNameMap();
     } else {
       this.groupedItems = null;
     }
+  }
+
+  private calculateSectionNameMap() {
+    this.sectionNameMap = new Map<number, string>();
+    const groupsSet = new Set<string>();
+    // calculate section name for each item and add them to a index, section name | null map,
+    this.sortedItems.forEach((item: any, index) => {
+      const sectionName = this.getSectionName(item);
+      if (groupsSet.has(sectionName)) {
+        this.sectionNameMap.set(index, null);
+      } else {
+        this.sectionNameMap.set(index, sectionName);
+        groupsSet.add(sectionName);
+      }
+    });
   }
 
   onItemSelect(args: any) {
