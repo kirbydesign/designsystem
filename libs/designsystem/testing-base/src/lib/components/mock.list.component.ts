@@ -30,6 +30,7 @@ export class MockListComponent {
   @Input() markSelectedRow: boolean;
   @Input() shape: ListShape;
   @Input() hasItemSpacing: boolean;
+  @Input() itemHeightFn: (item: any, index: number) => number;
   @Input() swipeActions: ListSwipeAction[];
   @Output() loadOnDemand = new EventEmitter<LoadOnDemandEvent>();
   @Output() itemSelect = new EventEmitter<any>();
