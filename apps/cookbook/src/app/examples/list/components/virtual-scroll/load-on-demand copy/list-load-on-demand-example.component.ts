@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { BaseListComponent } from '../base-list.component';
+import { BaseListComponent } from '../../base-list.component';
 import { LoadOnDemandEvent } from '@kirbydesign/designsystem';
 
 @Component({

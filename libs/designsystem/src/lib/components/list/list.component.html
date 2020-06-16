@@ -1,8 +1,8 @@
 <!-- VIRTUAL SCROLL LIST -->
 <ng-container *ngIf="isVirtualScrollEnabled">
   <ion-virtual-scroll
-    [items]="items"
     *ngIf="!isSectionsEnabled"
+    [items]="items"
     class="list"
     [trackBy]="trackBy || defaultTrackBy"
     kirbyInfiniteScroll
@@ -49,9 +49,9 @@
     *ngIf="isSectionsEnabled && sortedItems"
     [items]="sortedItems"
     class="list"
-    [itemHeight]="itemHeightFn"
     [trackBy]="trackBy || defaultTrackBy"
     kirbyInfiniteScroll
+    [itemHeight]="itemHeightFn"
     (scrollEnd)="onLoadOnDemand()"
     [disabled]="!isLoadOnDemandEnabled"
     [class.has-header]="headerTemplate"

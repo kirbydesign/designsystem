@@ -8,6 +8,7 @@ import { ListWithSectionsAndColoredItemsExampleTemplate } from '~/app/examples/l
 import { ListWithHeaderAndFooterExampleTemplate } from '~/app/examples/list/components/virtual-scroll/header-and-footer';
 import { ListWithSectionsExampleTemplate } from '~/app/examples/list/components/virtual-scroll/sections';
 import { ListItemsExampleTemplate } from '../../examples/list/components/virtual-scroll/items';
+import { loadOnDemandExampleTemplate } from '~/app/examples/list/components/virtual-scroll/list-load-on-demand';
 
 declare var require: any;
 
@@ -24,6 +25,7 @@ export class ListVirtualScrollShowcaseComponent implements OnInit {
   sectionsAndColoredItemsExampleTemplate: string = ListWithSectionsAndColoredItemsExampleTemplate;
   headerAndFooterExampleTemplate: string = ListWithHeaderAndFooterExampleTemplate;
   sectionsExampleTemplate: string = ListWithSectionsExampleTemplate;
+  loadOnDemandExampleTemplate: string = loadOnDemandExampleTemplate;
   items: string = ListItemsExampleTemplate;
 
   exampleHtml: string = require('!raw-loader!../../examples/list/list-example.component.html')

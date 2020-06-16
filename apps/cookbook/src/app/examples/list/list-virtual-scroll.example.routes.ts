@@ -7,6 +7,7 @@ import { ListVirtualScrollWithSectionsAndColoredItemsExampleComponent } from './
 import { ListVirtualScrollWithHeaderAndFooterExampleComponent } from './components/virtual-scroll/header-and-footer';
 import { ListVirtualScrollWithSectionsExampleComponent } from './components/virtual-scroll/sections';
 import { ListVirtualScrollItemsExampleComponent } from './components/virtual-scroll/items';
+import { ListLoadOnDemandExampleComponent } from './components/virtual-scroll/list-load-on-demand';
 
 export const listVirtualScrollRoutes = {
   path: 'list-virtual-scroll',
@@ -47,6 +48,10 @@ export const listVirtualScrollRoutes = {
     {
       path: 'with-items',
       component: ListVirtualScrollItemsExampleComponent,
+    },
+    {
+      path: 'list-load-on-demand',
+      component: ListLoadOnDemandExampleComponent,
     },
   ],
 };

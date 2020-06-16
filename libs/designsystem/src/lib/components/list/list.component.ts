@@ -192,6 +192,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
 
   private kirbyItemHeightFn(item: any, index: number) {
     const dividerHeight = 1;
+    // TODO: use variables
     if (this.isFirst(item) || this.isLast(item)) {
       const edgeHeight = 64;
       return this.showDivider ? edgeHeight + dividerHeight : edgeHeight;
