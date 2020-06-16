@@ -106,6 +106,8 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   @Input()
   hasItemSpacing: boolean;
 
+  @Input() itemHeightFn: (item: any, index: number) => number = this.kirbyItemHeightFn.bind(this);
+
   /**
    * Determines if list items should have swipe actions or not
    * - the order of swipe actions is used to determine edge actions,
@@ -188,15 +190,13 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
 
   footerFn = this._footerFn.bind(this);
 
-  private _itemHeightFn(item: any, index: number) {
+  private kirbyItemHeightFn(item: any, index: number) {
     if (this.isFirst(item) || this.isLast(item)) {
       return 64;
     }
 
     return 56;
   }
-
-  itemHeightFn = this._itemHeightFn.bind(this);
 
   // PERF: cache with map
   isFirst(item: any) {
