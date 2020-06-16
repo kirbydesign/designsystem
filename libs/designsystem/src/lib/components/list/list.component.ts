@@ -189,8 +189,11 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   footerFn = this._footerFn.bind(this);
 
   private _itemHeightFn(item: any, index: number) {
-    const itemHeight = 56;
-    return itemHeight;
+    if (this.isFirst(item) || this.isLast(item)) {
+      return 64;
+    }
+
+    return 56;
   }
 
   itemHeightFn = this._itemHeightFn.bind(this);

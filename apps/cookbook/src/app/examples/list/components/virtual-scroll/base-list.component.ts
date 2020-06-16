@@ -719,7 +719,7 @@ export class BaseListComponent {
     },
   ];
 
-  public items: any[] = this.itemsFullList.slice(0, 20);
+  public items: any[] = this.itemsFullList.slice(0, 100);
 
   onItemSelect(item: any) {
     alert(`You have clicked the row [${item.title} ${item.amount}]`);
