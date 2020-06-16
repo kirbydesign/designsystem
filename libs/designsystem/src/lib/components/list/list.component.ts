@@ -191,11 +191,14 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   footerFn = this._footerFn.bind(this);
 
   private kirbyItemHeightFn(item: any, index: number) {
+    const dividerHeight = 1;
     if (this.isFirst(item) || this.isLast(item)) {
-      return 64;
+      const edgeHeight = 64;
+      return this.showDivider ? edgeHeight + dividerHeight : edgeHeight;
     }
 
-    return 56;
+    const itemHeight = 56;
+    return this.showDivider ? itemHeight + dividerHeight : itemHeight;
   }
 
   // PERF: cache with map
