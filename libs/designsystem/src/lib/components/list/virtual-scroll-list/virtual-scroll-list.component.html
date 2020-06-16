@@ -25,6 +25,8 @@
     [kirbyListItemColor]="getItemColor"
     [item]="item"
     [disabled]="isSwipingEnabled ? null : true"
+    [class.first]="isFirst(item)"
+    [class.last]="isLast(item)"
     keyHandler
     (click)="isSelectable ? onItemSelect(item) : null"
   >
@@ -72,6 +74,8 @@
     [kirbyListItemColor]="getItemColor"
     [item]="item"
     [disabled]="isSwipingEnabled ? null : true"
+    [class.first]="isFirst(item)"
+    [class.last]="isLast(item)"
     keyHandler
     (click)="isSelectable ? onItemSelect(item) : null"
   >
@@ -90,28 +94,6 @@
   </ng-container>
 </ion-virtual-scroll>
 
-<p *ngIf="!isLoadOnDemandEnabled && noMoreItemsText" class="no-more-items">{{ noMoreItemsText }}</p>
-<div *ngIf="isLoading" class="loading">
-  <kirby-spinner></kirby-spinner>
-</div>
-
-<ng-template #groupedListTemplate>
-  <ion-item-group *ngFor="let section of groupedItems; trackBy: sectionTrackBy">
-    <ion-item-divider>
-      <ng-container
-        *ngTemplateOutlet="sectionHeaderTemplate; context: { $implicit: section.name }"
-      ></ng-container>
-    </ion-item-divider>
-
-    <div class="list-items">
-      <ng-container
-        *ngTemplateOutlet="slidingItemsTemplate; context: { $implicit: section.items }"
-      ></ng-container>
-    </div>
-  </ion-item-group>
-</ng-template>
-
-<!-- Item templates -->
 <ng-template #defaultItemTemplate let-item>
   <ng-container
     *ngTemplateOutlet="
@@ -139,11 +121,13 @@
 <!-- Swipe Action templates -->
 <ng-template #slidingItemsTemplate let-items>
   <ion-item-sliding
-    *virtualItem="let item"
+    *ngFor="let item of items; trackBy: trackBy || defaultTrackBy"
     [class.selected]="isSelectable && item === selectedItem"
     [kirbyListItemColor]="getItemColor"
     [item]="item"
     [disabled]="isSwipingEnabled ? null : true"
+    [class.first]="isFirst(item)"
+    [class.last]="isLast(item)"
     keyHandler
     (click)="isSelectable ? onItemSelect(item) : null"
   >

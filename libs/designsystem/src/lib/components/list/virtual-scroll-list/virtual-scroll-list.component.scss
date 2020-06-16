@@ -10,7 +10,7 @@ $item-height: size('xxxl');
 
 .list {
   &.has-divider {
-    ion-item-sliding:not(.last) {
+    ion-item-sliding:not(:last-of-type) {
       border-bottom: 1px solid $divider-color;
     }
   }
@@ -173,6 +173,13 @@ ion-item-options[side='end'] {
   .list,
   .list-items {
     border-radius: $border-radius;
+  }
+
+  .list ion-item.first,
+  .list ion-item-sliding.first,
+  ion-list-header {
+    border-top-left-radius: $border-radius;
+    border-top-right-radius: $border-radius;
   }
 
   .list ion-item-sliding > ion-item,

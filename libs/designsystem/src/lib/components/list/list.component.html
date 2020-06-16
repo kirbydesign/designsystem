@@ -4,9 +4,6 @@
     [items]="items"
     *ngIf="!isSectionsEnabled"
     class="list"
-    approxItemHeight="56px"
-    approxHeaderHeight="64px"
-    approxFooterHeight="64px"
     [trackBy]="trackBy || defaultTrackBy"
     kirbyInfiniteScroll
     [itemHeight]="itemHeightFn"
@@ -52,9 +49,6 @@
     *ngIf="isSectionsEnabled && sortedItems"
     [items]="sortedItems"
     class="list"
-    approxItemHeight="56px"
-    approxHeaderHeight="64px"
-    approxFooterHeight="64px"
     [itemHeight]="itemHeightFn"
     [trackBy]="trackBy || defaultTrackBy"
     kirbyInfiniteScroll
