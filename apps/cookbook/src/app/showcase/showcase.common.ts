@@ -39,6 +39,7 @@ import { DropdownShowcaseComponent } from '~/app/showcase/dropdown-showcase/drop
 import { ReorderListShowcaseComponent } from '../showcase/reorder-list-showcase/reorder-list-showcase.component';
 import { StockChartShowcaseComponent } from './stock-chart-showcase/stock-chart-showcase.component';
 import { ListVirtualScrollShowcaseComponent } from './list-virtual-scroll-showcase/list-virtual-scroll-showcase.component';
+import { VirtualScrollListLoadOnDemandShowcaseComponent } from './virtual-list-load-on-demand-showcase/virtual-scroll-list-load-on-demand-showcase.component';
 
 export const COMPONENT_IMPORTS: any[] = [ExamplesModule, ShowcaseRoutingModule];
 
@@ -50,6 +51,7 @@ export const COMPONENT_EXPORTS: any[] = [
   ListShowcaseComponent,
   ListVirtualScrollShowcaseComponent,
   ListLoadOnDemandShowcaseComponent,
+  VirtualScrollListLoadOnDemandShowcaseComponent,
   ListSwipeShowcaseComponent,
   ListNoShapeShowcaseComponent,
   GridShowcaseComponent,

@@ -18,7 +18,6 @@ import { ListVirtualScrollItemsExampleComponent } from './components/virtual-scr
 import { ListVirtualScrollWithSectionsExampleComponent } from './components/virtual-scroll/sections';
 import { ListVirtualScrollWithSectionsAndColoredItemsExampleComponent } from './components/virtual-scroll/sections-and-colored-items';
 import { ListVirtualScrollSelectableItemsExampleComponent } from './components/virtual-scroll/selectable-items';
-import { ListLoadOnDemandExampleComponent } from './components/virtual-scroll/list-load-on-demand';
 
 const declarations = [
   ListBoldTextOnRowSelectionExampleComponent,
@@ -37,7 +36,6 @@ const declarations = [
   ListVirtualScrollWithSectionsExampleComponent,
   ListVirtualScrollWithSectionsAndColoredItemsExampleComponent,
   ListVirtualScrollSelectableItemsExampleComponent,
-  ListLoadOnDemandExampleComponent,
 ];
 
 @NgModule({

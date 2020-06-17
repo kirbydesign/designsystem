@@ -39,6 +39,7 @@ import { ReorderListShowcaseComponent } from './reorder-list-showcase/reorder-li
 import { StockChartShowcaseComponent } from './stock-chart-showcase/stock-chart-showcase.component';
 import { ListVirtualScrollShowcaseComponent } from './list-virtual-scroll-showcase/list-virtual-scroll-showcase.component';
 import { ProgressCircleShowcaseComponent } from './progress-circle-showcase/progress-circle-showcase.component';
+import { VirtualScrollListLoadOnDemandShowcaseComponent } from './virtual-list-load-on-demand-showcase/virtual-scroll-list-load-on-demand-showcase.component';
 
 export const routes: Routes = [
   {
@@ -93,6 +94,10 @@ export const routes: Routes = [
       {
         path: 'list-load-on-demand',
         component: ListLoadOnDemandShowcaseComponent,
+      },
+      {
+        path: 'virtual-scroll-list-load-on-demand',
+        component: VirtualScrollListLoadOnDemandShowcaseComponent,
       },
       {
         path: 'list-swipe',

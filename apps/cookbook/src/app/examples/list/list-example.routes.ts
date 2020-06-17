@@ -7,6 +7,7 @@ import { ListWithSectionsAndColoredItemsExampleComponent } from './components/se
 import { ListWithHeaderAndFooterExampleComponent } from './components/header-and-footer';
 import { ListWithSectionsExampleComponent } from './components/sections';
 import { ListItemsExampleComponent } from './components/items';
+import { ListLoadOnDemandExampleComponent } from './components/load-on-demand/list-load-on-demand-example.component';
 
 export const listRoutes = {
   path: 'list',

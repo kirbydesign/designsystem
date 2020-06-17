@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+
+import { config } from '~/app/examples/list/components/load-on-demand/list-load-on-demand-example.component';
 declare var require: any;
 
 @Component({
@@ -7,6 +9,5 @@ declare var require: any;
   styleUrls: ['./list-load-on-demand-showcase.component.scss'],
 })
 export class ListLoadOnDemandShowcaseComponent {
-  exampleHtml: string = require('!raw-loader!../../examples/list/components/load-on-demand/list-load-on-demand-example.component.html')
-    .default;
+  exampleHtml: string = config.template;
 }

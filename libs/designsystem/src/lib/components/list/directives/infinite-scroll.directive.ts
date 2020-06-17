@@ -15,11 +15,14 @@ import { debounceTime, takeUntil, filter, map } from 'rxjs/operators';
 
 import { WINDOW_PROVIDER, WINDOW_REF, WindowRef } from '../../shared/window-ref/window-ref.service';
 import { Scroll } from './scroll.model';
+import { ListComponent } from '../list.component';
 
 /**
  * Specify debounce duration in ms
  */
 export const INFINITE_SCROLL_DEBOUNCE = 100;
+export const INSTANT = 0;
+export const VIRTUAL_SCROLL_INITIALZATION = 1000;
 
 @Directive({
   selector: '[kirbyInfiniteScroll]',
@@ -36,6 +39,8 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
    * If true then {@link scrollEnd} event should NOT be emitted
    */
   @Input() disabled = false;
+
+  @Input() isVirtualScrollEnabled = false;
 
   /**
    * Emits a new value on element scroll event
@@ -56,7 +61,8 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
   constructor(
     private elementRef: ElementRef,
     @Inject(WINDOW_REF) private windowRef: WindowRef,
-    private zone: NgZone
+    private zone: NgZone,
+    private listComponent: ListComponent
   ) {}
 
   ngAfterViewInit(): void {
@@ -65,28 +71,39 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
      * Subscribe to {@link scroll$} observable and emit {@link scrollEnd} event
      * when element scroll position has surpassed the offset.
      */
-    this.scroll$
-      .pipe(
-        takeUntil(this.ngUnsubscribe$),
-        debounceTime(INFINITE_SCROLL_DEBOUNCE),
-        filter(() => !this.disabled),
-        filter((scroll) => {
-          return (
-            scroll.elementHeight * (1 - this.offset) >=
-            scroll.distanceToViewBottom - scroll.viewHeight
-          );
-        })
-      )
-      .subscribe(() => {
-        this.scrollEnd.emit();
-      });
 
+    debugger;
+    if (!this.listComponent.isVirtualScrollEnabled) {
+      this.scroll$
+        .pipe(
+          takeUntil(this.ngUnsubscribe$),
+          debounceTime(INFINITE_SCROLL_DEBOUNCE),
+          filter(() => !this.disabled),
+          filter((scroll) => {
+            return (
+              scroll.elementHeight * (1 - this.offset) >=
+              scroll.distanceToViewBottom - scroll.viewHeight
+            );
+          })
+        )
+        .subscribe(() => {
+          this.scrollEnd.emit();
+        });
+    }
+
+    const timeoutTime = !this.listComponent.isVirtualScrollEnabled
+      ? INSTANT
+      : VIRTUAL_SCROLL_INITIALZATION;
     setTimeout(() => {
       const ionContent: HTMLElement = this.elementRef.nativeElement.closest('ion-content');
       if (ionContent) {
-        // we run the 'ionScroll' event outside angular, as it would trigger change detection on each scroll
+        const getInnerScrollElm = () => ionContent.shadowRoot.querySelector('.inner-scroll');
+        const scrollEvent = this.listComponent.isVirtualScrollEnabled
+          ? fromEvent<any>(getInnerScrollElm(), 'scroll')
+          : fromEvent<any>(ionContent, 'ionScroll');
+        // we run scroll event outside angular, as it would trigger change detection on each scroll
         this.zone.runOutsideAngular(() => {
-          fromEvent<any>(ionContent, 'ionScroll')
+          scrollEvent
             .pipe(
               takeUntil(this.ngUnsubscribe$),
               debounceTime(INFINITE_SCROLL_DEBOUNCE),
@@ -105,7 +122,7 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
             });
         });
       }
-    });
+    }, timeoutTime);
   }
 
   /**
