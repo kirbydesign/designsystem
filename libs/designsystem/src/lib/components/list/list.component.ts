@@ -149,6 +149,8 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   isLoadOnDemandEnabled: boolean;
   groupedItems: GroupedItem[];
   selectedItem: any;
+  private orderMap: WeakMap<any, { isFirst: boolean; isLast: boolean }> = new WeakMap();
+  private sectionNameMap: WeakMap<any, string> = new WeakMap();
 
   constructor(private listHelper: ListHelper, private groupBy: GroupByPipe) {}
 
@@ -175,9 +177,8 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
 
   headerFn = this._headerFn.bind(this);
 
-  sectionNameMap = new Map<number, string>();
   private _sectionHeaderFn = (item: any, index: number, items: any[]) => {
-    return this.sectionNameMap.get(index);
+    return this.sectionNameMap.get(item);
   };
 
   sectionHeaderFn = this._sectionHeaderFn.bind(this);
@@ -202,21 +203,11 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
     return this.showDivider ? itemHeight + dividerHeight : itemHeight;
   }
 
-  // PERF: cache with map
   isFirst(item: any) {
-    if (this.isSectionsEnabled) {
-      return this.groupedItems.some((groupedItem) => groupedItem.items.indexOf(item) === 0);
-    }
-
-    return this.items.indexOf(item) === 0;
+    return this.orderMap.get(item) && this.orderMap.get(item).isFirst;
   }
   isLast(item: any) {
-    if (this.isSectionsEnabled) {
-      return this.groupedItems.some(
-        (groupedItem) => groupedItem.items.indexOf(item) === groupedItem.items.length - 1
-      );
-    }
-    return this.items.indexOf(item) === this.items.length - 1;
+    return this.orderMap.get(item) && this.orderMap.get(item).isLast;
   }
 
   ngOnChanges(): void {
@@ -224,26 +215,49 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
     if (this.isSectionsEnabled && this.items) {
       this.groupedItems = this.groupBy.transform(this.items, this.getSectionName);
       this.sortedItems = this.groupedItems.reduce((prev, cur) => [...prev, ...cur.items], []);
-
-      this.calculateSectionNameMap();
+      this.sectionNameMap = this.createSectionNameMap();
     } else {
       this.groupedItems = null;
     }
+    this.orderMap = this.createOrderMap();
   }
 
-  private calculateSectionNameMap() {
-    this.sectionNameMap = new Map<number, string>();
+  private createSectionNameMap() {
+    const sectionNameMap = new WeakMap<any, string>();
     const groupsSet = new Set<string>();
     // calculate section name for each item and add them to a index, section name | null map,
     this.sortedItems.forEach((item: any, index) => {
       const sectionName = this.getSectionName(item);
       if (groupsSet.has(sectionName)) {
-        this.sectionNameMap.set(index, null);
+        this.sectionNameMap.set(item, null);
       } else {
-        this.sectionNameMap.set(index, sectionName);
+        this.sectionNameMap.set(item, sectionName);
         groupsSet.add(sectionName);
       }
     });
+    return sectionNameMap;
+  }
+
+  private createOrderMap(): WeakMap<any, { isFirst: boolean; isLast: boolean }> {
+    const orderMap = new WeakMap<any, { isFirst: boolean; isLast: boolean }>();
+    if (this.isSectionsEnabled && this.items) {
+      this.groupedItems.forEach((group) => {
+        const lastIndexInGroup = group.items.length - 1;
+        group.items.forEach((item, index) => {
+          const isFirst = index === 0;
+          const isLast = index === lastIndexInGroup;
+          orderMap.set(item, { isFirst, isLast });
+        });
+      });
+    } else {
+      const lastIndexInGroup = this.items.length - 1;
+      this.items.forEach((item, index) => {
+        const isFirst = index === 0;
+        const isLast = index === lastIndexInGroup;
+        orderMap.set(item, { isFirst, isLast });
+      });
+    }
+    return orderMap;
   }
 
   onItemSelect(args: any) {
