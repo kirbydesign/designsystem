@@ -41,11 +41,16 @@ export class ProgressCircleComponent implements AfterContentChecked, OnDestroy {
 
   ngAfterContentChecked(): void {
     // Ensure element is connected before observing:
-    if (!this.observer && this.elementRef.nativeElement.isConnected) {
-      this.observer = new IntersectionObserver(this.onIntersectionChange, {
-        threshold: 0.5,
-      });
-      this.observer.observe(this.elementRef.nativeElement);
+    if (!this.observer) {
+      if (this.elementRef.nativeElement.isConnected) {
+        this.observer = new IntersectionObserver(this.onIntersectionChange, {
+          threshold: 0.5,
+        });
+        this.observer.observe(this.elementRef.nativeElement);
+      } else {
+        // Recursive until the element is connected to the DOM
+        setTimeout(() => this.ngAfterContentChecked(), 50);
+      }
     }
   }
 
