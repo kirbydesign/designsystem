@@ -70,28 +70,24 @@
 }
 
 /* clean-css ignore:start */
-:host-context(kirby-list ion-item-sliding:first-of-type),
 :host-context(kirby-list ion-item-sliding.first) {
   ion-item {
     --padding-top: #{size('xxs')};
   }
 }
 
-:host-context(kirby-list ion-item-sliding:first-of-type kirby-card),
 :host-context(kirby-list ion-item-sliding.first kirby-card) {
   ion-item {
     --padding-top: 0;
   }
 }
 
-:host-context(kirby-list ion-item-sliding:last-of-type),
 :host-context(kirby-list ion-item-sliding.last) {
   ion-item {
     --padding-bottom: #{size('xxs')};
   }
 }
 
-:host-context(kirby-list ion-item-sliding:last-of-type),
 :host-context(kirby-list ion-item-sliding.last kirby-card) {
   ion-item {
     --padding-bottom: 0;
