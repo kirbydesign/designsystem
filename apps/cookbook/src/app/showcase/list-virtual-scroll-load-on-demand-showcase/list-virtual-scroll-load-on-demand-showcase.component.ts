@@ -4,9 +4,9 @@ import { config } from '~/app/examples/list/components/virtual-scroll/list-load-
 declare var require: any;
 
 @Component({
-  selector: 'cookbook-list-load-on-demand-showcase',
-  templateUrl: './virtual-scroll-list-load-on-demand-showcase.component.html',
+  selector: 'cookbook-list-virtual-scroll-load-on-demand-showcase',
+  templateUrl: './list-virtual-scroll-load-on-demand-showcase.component.html',
 })
-export class VirtualScrollListLoadOnDemandShowcaseComponent {
+export class ListVirtualScrollLoadOnDemandShowcaseComponent {
   exampleHtml: string = config.template;
 }

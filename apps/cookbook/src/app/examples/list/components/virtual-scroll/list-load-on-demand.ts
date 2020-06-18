@@ -4,7 +4,7 @@ import { BaseListComponent } from '../base-list.component';
 import { LoadOnDemandEvent } from '@kirbydesign/designsystem';
 
 export const config = {
-  selector: 'cookbook-virtual-scroll-list-load-on-demand-example',
+  selector: 'cookbook-list-virtual-scroll-load-on-demand-example',
   template: `<ion-content style="height:800px"><kirby-list [items]="items" (loadOnDemand)="onLoadDemand($event)" [isVirtualScrollEnabled]="true" noMoreItemsText="No more items">
   <kirby-item *kirbyListItemTemplate="let item">
     <kirby-label>
