@@ -72,7 +72,6 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
      * when element scroll position has surpassed the offset.
      */
 
-    debugger;
     if (!this.listComponent.isVirtualScrollEnabled) {
       this.scroll$
         .pipe(

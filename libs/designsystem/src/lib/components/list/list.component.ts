@@ -12,7 +12,6 @@ import {
   TrackByFunction,
   ContentChildren,
   AfterViewInit,
-  ElementRef,
 } from '@angular/core';
 
 import {
@@ -29,6 +28,7 @@ import { GroupByPipe, GroupedItem } from './pipes/group-by.pipe';
 import { ListSwipeAction } from './list-swipe-action';
 import { ThemeColor } from '../../helpers/theme-color.type';
 import { ItemComponent } from '../item/item.component';
+import { DesignTokenHelper } from '../../helpers/design-token-helper';
 
 export type ListShape = 'square' | 'rounded' | 'none';
 
@@ -181,7 +181,11 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
     return this.sectionNameMap.get(item);
   };
 
-  sectionHeaderFn = this._sectionHeaderFn.bind(this);
+  sectionHeaderFn: (
+    item: any,
+    index: number,
+    items: any[]
+  ) => string | null = this._sectionHeaderFn.bind(this);
 
   private _footerFn(item: any, index: number, items: any[]) {
     return this.footerTemplate && items && items.length > 0 && items.length - 1 === index
@@ -193,13 +197,13 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
 
   private kirbyItemHeightFn(item: any, index: number) {
     const dividerHeight = 1;
-    // TODO: use variables
     if (this.isFirst(item) || this.isLast(item)) {
-      const edgeHeight = 64;
+      const edgeHeight =
+        +DesignTokenHelper.itemHeight().split('px')[0] + +DesignTokenHelper.size('xxs')[0];
       return this.showDivider ? edgeHeight + dividerHeight : edgeHeight;
     }
 
-    const itemHeight = 56;
+    const itemHeight = +DesignTokenHelper.itemHeight().split('px')[0];
     return this.showDivider ? itemHeight + dividerHeight : itemHeight;
   }
 
@@ -224,15 +228,16 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
 
   private createSectionNameMap() {
     const sectionNameMap = new WeakMap<any, string>();
-    const groupsSet = new Set<string>();
+    const sectionNameSet = new Set<string>();
     // calculate section name for each item and add them to a index, section name | null map,
     this.sortedItems.forEach((item: any, index) => {
       const sectionName = this.getSectionName(item);
-      if (groupsSet.has(sectionName)) {
-        this.sectionNameMap.set(item, null);
+      if (sectionNameSet.has(sectionName)) {
+        // if sectionname is already added to map, add null for other items
+        sectionNameMap.set(item, null);
       } else {
-        this.sectionNameMap.set(item, sectionName);
-        groupsSet.add(sectionName);
+        sectionNameMap.set(item, sectionName);
+        sectionNameSet.add(sectionName);
       }
     });
     return sectionNameMap;
@@ -249,7 +254,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
           orderMap.set(item, { isFirst, isLast });
         });
       });
-    } else {
+    } else if (this.items) {
       const lastIndexInGroup = this.items.length - 1;
       this.items.forEach((item, index) => {
         const isFirst = index === 0;

@@ -10,6 +10,7 @@ import { SpinnerComponent } from '../spinner/spinner.component';
 import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
 import { ListHelper } from './helpers/list-helper';
 import { ListItemColorDirective } from './directives/list-item-color.directive';
+import { DesignTokenHelper } from '../../helpers';
 
 /**
  * We need an actual model item, since WeakMap can't use primitives for keys.
@@ -144,6 +145,177 @@ describe('ListComponent', () => {
       runNgOnChanges();
 
       expect(component.isLoadOnDemandEnabled).toBeFalsy();
+    });
+  });
+
+  describe('function: isFirst', () => {
+    it('should return true if item is first', () => {
+      const items = Item.createItems(1, 2, 3);
+      spectator.setInput({
+        items,
+      });
+      runNgOnChanges();
+
+      const isFirst = spectator.component.isFirst(items[0]);
+
+      expect(isFirst).toBe(true);
+    });
+    it('should return true if item is first in a section', () => {
+      const items = Item.createItems(1, 2, 3);
+      spectator.setInput({
+        items,
+        getSectionName: (item: any) => 'this is a test',
+      });
+      runNgOnChanges();
+
+      const isFirst = spectator.component.isFirst(items[0]);
+
+      expect(isFirst).toBe(true);
+    });
+    it('should return false if item is NOT first', () => {
+      const items = Item.createItems(1, 2, 3);
+      spectator.setInput({
+        items,
+      });
+      runNgOnChanges();
+
+      const isFirst = spectator.component.isFirst(items[1]);
+
+      expect(isFirst).toBe(false);
+    });
+    it('should return false if item is NOT first in a section', () => {
+      const items = Item.createItems(1, 2, 3);
+      spectator.setInput({
+        items,
+        getSectionName: (item: any) => 'this is a test',
+      });
+      runNgOnChanges();
+
+      const isFirst = spectator.component.isFirst(items[1]);
+
+      expect(isFirst).toBe(false);
+    });
+  });
+  describe('function: isLast', () => {
+    it('should return true if item is last', () => {
+      const items = Item.createItems(1, 2, 3);
+      spectator.setInput({
+        items,
+      });
+      runNgOnChanges();
+
+      const lastIdx = items.length - 1;
+      const isLast = spectator.component.isLast(items[lastIdx]);
+
+      expect(isLast).toBe(true);
+    });
+    it('should return true if item is last in a section', () => {
+      const items = Item.createItems(1, 2, 3);
+      spectator.setInput({
+        items,
+        getSectionName: (item: any) => 'this is a test',
+      });
+      runNgOnChanges();
+
+      const lastIdx = items.length - 1;
+      const isLast = spectator.component.isLast(items[lastIdx]);
+
+      expect(isLast).toBe(true);
+    });
+    it('should return false if item is NOT last', () => {
+      const items = Item.createItems(1, 2, 3);
+      spectator.setInput({
+        items,
+      });
+      runNgOnChanges();
+
+      const isLast = spectator.component.isLast(items[1]);
+
+      expect(isLast).toBe(false);
+    });
+    it('should return false if item is NOT last in a section', () => {
+      const items = Item.createItems(1, 2, 3);
+      spectator.setInput({
+        items,
+        getSectionName: (item: any) => 'this is a test',
+      });
+      runNgOnChanges();
+
+      const isLast = spectator.component.isLast(items[1]);
+
+      expect(isLast).toBe(false);
+    });
+  });
+
+  describe('function: itemHeightFn (kirbyItemHeightFn)', () => {
+    it('should return header height if the item is first or last', () => {
+      const items = Item.createItems(1, 2, 3);
+      spectator.setInput({
+        items,
+        getSectionName: (item: any) => 'this is a test',
+      });
+      runNgOnChanges();
+
+      const firstIdx = 0;
+      const lastIdx = items.length - 1;
+      const headerHeight = spectator.component.itemHeightFn(items[firstIdx], firstIdx);
+      const footerHeight = spectator.component.itemHeightFn(items[lastIdx], lastIdx);
+      const expectedHeight =
+        +DesignTokenHelper.itemHeight().split('px')[0] + +DesignTokenHelper.size('xxs')[0];
+      expect(headerHeight).toBe(expectedHeight);
+      expect(footerHeight).toBe(expectedHeight);
+    });
+
+    it('should return item height if the item is NOT first or last', () => {
+      const items = Item.createItems(1, 2, 3);
+      spectator.setInput({
+        items,
+        getSectionName: (item: any) => 'this is a test',
+      });
+      runNgOnChanges();
+
+      const middleIdx = 1;
+      const itemHeight = spectator.component.itemHeightFn(items[middleIdx], middleIdx);
+      const expectedHeight = +DesignTokenHelper.itemHeight().split('px')[0];
+      expect(itemHeight).toBe(expectedHeight);
+    });
+  });
+
+  describe('function: sectionHeaderFn', () => {
+    it('should get a sectionHeader for first item with a given section header', () => {
+      const items = Item.createItems(1, 2, 3);
+      const expectedSectionHeader = 'this is a test';
+      spectator.setInput({
+        items,
+        getSectionName: (item: any) => expectedSectionHeader,
+      });
+      runNgOnChanges();
+
+      const firstIdx = 0;
+      const sectionHeaderRes = spectator.component.sectionHeaderFn(
+        items[firstIdx],
+        firstIdx,
+        items
+      );
+      expect(sectionHeaderRes).toBe(expectedSectionHeader);
+    });
+
+    it('should NOT get a sectionHeader for second item with a given section header', () => {
+      const items = Item.createItems(1, 2, 3);
+      const sectionHeader = 'this is a test';
+      spectator.setInput({
+        items,
+        getSectionName: (item: any) => sectionHeader,
+      });
+      runNgOnChanges();
+
+      const secondIdx = 1;
+      const sectionHeaderRes = spectator.component.sectionHeaderFn(
+        items[secondIdx],
+        secondIdx,
+        items
+      );
+      expect(sectionHeaderRes).toBe(null);
     });
   });
 });

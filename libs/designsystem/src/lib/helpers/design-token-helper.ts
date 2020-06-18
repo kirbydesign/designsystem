@@ -22,6 +22,10 @@ export class DesignTokenHelper {
     return styles.sizes[key];
   }
 
+  public static itemHeight(key: 'm' | 's' | 'xs' = 'm'): string {
+    return styles.itemHeights[key];
+  }
+
   public static fontSize(key: string): string {
     return styles.fontSizes[key];
   }

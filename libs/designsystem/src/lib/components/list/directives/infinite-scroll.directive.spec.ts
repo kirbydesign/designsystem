@@ -4,12 +4,16 @@ import { SpyObject } from '@ngneat/spectator';
 
 import { WindowRef } from './../../shared/window-ref/window-ref.service';
 import { InfiniteScrollDirective, INFINITE_SCROLL_DEBOUNCE } from './infinite-scroll.directive';
+import { ListComponent } from '../list.component';
 
 describe('InfiniteScrollDirective', () => {
   let nativeElement: SpyObject<any>;
   let document: SpyObject<Document>;
 
-  const createDirective = (scrollPercentage: number): InfiniteScrollDirective => {
+  const createDirective = (
+    scrollPercentage: number,
+    isVirtualScrollEnabled = false
+  ): InfiniteScrollDirective => {
     const height = 800;
     const bottom = height * (1 - scrollPercentage);
     const viewHeight = 0;
@@ -29,7 +33,8 @@ describe('InfiniteScrollDirective', () => {
     const directive = new InfiniteScrollDirective(
       { nativeElement } as ElementRef,
       { nativeWindow: { innerHeight: viewHeight, document: document as Document } } as WindowRef,
-      mockNgZone
+      mockNgZone,
+      { isVirtualScrollEnabled } as ListComponent
     );
     spyOn(directive.scrollEnd, 'emit');
     directive.ngAfterViewInit();
