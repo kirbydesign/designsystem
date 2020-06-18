@@ -90,12 +90,11 @@ describe('InputComponent', () => {
       spectator.detectChanges();
     });
 
-    // TODO: Fails on Jenkins but passes on Travis. Ignore for now investigate later
-    // it('should render with default padding', () => {
-    //   expect(element).toHaveComputedStyle({
-    //     padding: '1px 2px',
-    //   });
-    // });
+    it('should render with correct padding', () => {
+      expect(element).toHaveComputedStyle({
+        padding: '0px',
+      });
+    });
 
     it('should render without border-radius', () => {
       expect(element).toHaveComputedStyle({

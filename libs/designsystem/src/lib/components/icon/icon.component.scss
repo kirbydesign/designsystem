@@ -15,6 +15,10 @@
   }
 }
 
+:host(.xs) {
+  --kirby-icon-font-size: #{icon-font-size('xs')};
+}
+
 :host(.sm) {
   --kirby-icon-font-size: #{icon-font-size('sm')};
 }

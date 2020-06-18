@@ -22,9 +22,9 @@ describe('InputComponent in Item', () => {
     element = spectator.element as HTMLInputElement;
   });
 
-  it('should render with default padding', () => {
+  it('should render with correct padding', () => {
     expect(element).toHaveComputedStyle({
-      padding: '1px 2px',
+      padding: '0px',
     });
   });
 
