@@ -208,10 +208,10 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   isFirst(item: any) {
-    return this.orderMap.get(item) && this.orderMap.get(item).isFirst;
+    return this.orderMap.get(item).isFirst;
   }
   isLast(item: any) {
-    return this.orderMap.get(item) && this.orderMap.get(item).isLast;
+    return this.orderMap.get(item).isLast;
   }
 
   ngOnChanges(): void {
