@@ -150,7 +150,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   groupedItems: GroupedItem[];
   selectedItem: any;
   private orderMap: WeakMap<any, { isFirst: boolean; isLast: boolean }> = new WeakMap();
-  private sectionNameMap: WeakMap<any, string> = new WeakMap();
+  private sectionNameMap: Map<number, string> = new Map();
 
   constructor(private listHelper: ListHelper, private groupBy: GroupByPipe) {}
 
@@ -178,7 +178,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   headerFn = this._headerFn.bind(this);
 
   private _sectionHeaderFn = (item: any, index: number, items: any[]) => {
-    return this.sectionNameMap.get(item);
+    return this.sectionNameMap.get(index);
   };
 
   sectionHeaderFn: (
@@ -227,16 +227,16 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   private createSectionNameMap() {
-    const sectionNameMap = new WeakMap<any, string>();
+    const sectionNameMap = new Map<number, string>();
     const sectionNameSet = new Set<string>();
     // calculate section name for each item and add them to a index, section name | null map,
     this.sortedItems.forEach((item: any, index) => {
       const sectionName = this.getSectionName(item);
       if (sectionNameSet.has(sectionName)) {
         // if sectionname is already added to map, add null for other items
-        sectionNameMap.set(item, null);
+        sectionNameMap.set(index, null);
       } else {
-        sectionNameMap.set(item, sectionName);
+        sectionNameMap.set(index, sectionName);
         sectionNameSet.add(sectionName);
       }
     });
