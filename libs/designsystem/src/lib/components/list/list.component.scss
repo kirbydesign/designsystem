@@ -6,6 +6,9 @@ $item-height: size('xxxl');
 
 :host {
   display: block;
+  // virtual scroll needs the list to be positioned to get correct offset parent
+  // https://github.com/ionic-team/ionic/blob/976e68da5b030baf26dc60034ff80d8db2cff8e6/core/src/components/virtual-scroll/virtual-scroll.tsx#L268
+  position: relative;
 }
 
 .list {
