@@ -24,8 +24,7 @@
     <ion-item-sliding
       *virtualItem="let item"
       [class.selected]="isSelectable && item === selectedItem"
-      [kirbyListItemColor]="getItemColor"
-      [item]="item"
+      class="{{ getItemColor(item) }}"
       [disabled]="isSwipingEnabled ? null : true"
       [class.first]="isFirst(item)"
       [class.last]="isLast(item)"
@@ -45,6 +44,7 @@
     </div>
   </ion-virtual-scroll>
 
+  <!-- Virtual scroll list with sections -->
   <ion-virtual-scroll
     *ngIf="isSectionsEnabled && sortedItems"
     [items]="sortedItems"
@@ -73,8 +73,7 @@
     <ion-item-sliding
       *virtualItem="let item; let index = index"
       [class.selected]="isSelectable && item === selectedItem"
-      [kirbyListItemColor]="getItemColor"
-      [item]="item"
+      class="{{ getItemColor(item) }}"
       [disabled]="isSwipingEnabled ? null : true"
       [class.first]="isFirst(item)"
       [class.last]="isLast(item)"

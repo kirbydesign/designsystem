@@ -50,7 +50,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   sortedItems: any[];
 
   @Input()
-  getItemColor: (item: any) => ThemeColor;
+  getItemColor: (item: any) => ThemeColor = () => null;
 
   /**
    * Callback to determine name of section. Sections will be ordered alphabetically.
