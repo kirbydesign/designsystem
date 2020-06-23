@@ -4,14 +4,12 @@ import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { OverlayModule } from '@angular/cdk/overlay';
 
-import { InfiniteScrollDirective } from './components/list/directives/infinite-scroll.directive';
 import { ModalWrapperComponent } from './components/modal/modal-wrapper/modal-wrapper.component';
 import { ModalCompactWrapperComponent } from './components/modal/modal-wrapper/compact/modal-compact-wrapper.component';
 import { ModalFooterComponent } from './components/modal/footer/modal-footer.component';
 import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';
 import { FullscreenLoadingOverlayComponent } from './components/loading-overlay/fullscreen-loading-overlay/fullscreen-loading-overlay.component';
 import { LoadingOverlayComponent } from './components/loading-overlay/loading-overlay.component';
-import { ListItemColorDirective } from './components/list/directives/list-item-color.directive';
 import { AlertComponent } from './components/modal/alert/alert.component';
 import { PageModule } from './components/page/page.module';
 import { FormFieldMessageComponent } from './components/form-field/form-field-message/form-field-message.component';
@@ -34,17 +32,6 @@ import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { ChipComponent } from './components/chip/chip.component';
 import { EmptyStateComponent } from './components/empty-state/empty-state.component';
 import { GridComponent } from './components/grid/grid.component';
-import { ListHeaderComponent } from './components/list/list-header/list-header.component';
-import { ListSectionHeaderComponent } from './components/list/list-section-header/list-section-header.component';
-import { ListComponent } from './components/list/list.component';
-import {
-  ListFlexItemDirective,
-  ListFooterDirective,
-  ListHeaderDirective,
-  ListItemDirective,
-  ListItemTemplateDirective,
-  ListSectionHeaderDirective,
-} from './components/list/list.directive';
 import { GroupByPipe } from './components/list/pipes/group-by.pipe';
 import { ActionSheetComponent } from './components/modal/action-sheet/action-sheet.component';
 import { ActionSheetHelper } from './components/modal/services/action-sheet.helper';
@@ -74,28 +61,20 @@ import { ResizeObserverFactory } from './components/shared/resize-observer/resiz
 import { ResizeObserverService } from './components/shared/resize-observer/resize-observer.service';
 import { ProgressCircleComponent } from './components/progress-circle/progress-circle.component';
 import { ProgressCircleRingComponent } from './components/progress-circle/progress-circle-ring.component';
+import { ListModule } from './components/list/list.module';
+import { SpinnerModule } from './components/spinner/spinner.module';
 
 const exportedDeclarations = [
   CardComponent,
   CardHeaderComponent,
   CardFooterComponent,
   ButtonComponent,
-  ListComponent,
-  ListItemDirective,
-  ListFlexItemDirective,
-  ListItemTemplateDirective,
-  ListSectionHeaderComponent,
-  ListSectionHeaderDirective,
-  ListHeaderDirective,
-  ListHeaderComponent,
-  ListFooterDirective,
   ChartComponent,
   StockChartComponent,
   GridComponent,
   ComponentLoaderDirective,
   AvatarComponent,
   GroupByPipe,
-  SpinnerComponent,
   CalendarComponent,
   CheckboxComponent,
   ActionSheetComponent,
@@ -117,14 +96,12 @@ const exportedDeclarations = [
   DividerComponent,
   ReorderListComponent,
   DropdownComponent,
-  InfiniteScrollDirective,
   LoadingOverlayComponent,
   ProgressCircleComponent,
 ];
 
 const declarations = [
   ...exportedDeclarations,
-  ListItemColorDirective,
   FullscreenLoadingOverlayComponent,
   KeyHandlerDirective,
   FormFieldMessageComponent,
@@ -141,6 +118,8 @@ const exportedModules = [
   TabsModule,
   IconModule,
   ItemModule,
+  ListModule,
+  SpinnerModule,
 ];
 
 const exports = [...exportedModules, ...exportedDeclarations];

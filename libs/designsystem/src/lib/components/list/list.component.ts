@@ -187,7 +187,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
     items: any[]
   ) => string | null = this._sectionHeaderFn.bind(this);
 
-  private _footerFn(item: any, index: number, items: any[]) {
+  protected _footerFn(item: any, index: number, items: any[]) {
     return this.footerTemplate && items && items.length > 0 && items.length - 1 === index
       ? true
       : null;
