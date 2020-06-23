@@ -13,6 +13,7 @@ import {
   ContentChildren,
   AfterViewInit,
 } from '@angular/core';
+import { IonList, IonItemSliding } from '@ionic/angular';
 
 import {
   ListFlexItemDirective,
@@ -39,7 +40,7 @@ export type ListShape = 'square' | 'rounded' | 'none';
   providers: [ListHelper, GroupByPipe],
 })
 export class ListComponent implements OnInit, AfterViewInit, OnChanges {
-  @ViewChild('list', { static: true }) list: any;
+  list: IonList;
 
   /**
    * Provide items for the list to render. Items must be provided in the order you expect them to be rendered.
@@ -125,6 +126,8 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
    */
   @Output() itemSelect = new EventEmitter<any>();
 
+  @ViewChild(IonItemSliding) ionItemSlidingElement: IonItemSliding;
+
   // The first element that matches ListItemDirective. As a structural directive it unfolds into a template. This is a reference to that.
   @ContentChild(ListItemTemplateDirective, { static: true, read: TemplateRef })
   itemTemplate: TemplateRef<any>;
@@ -197,7 +200,8 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
 
   private kirbyItemHeightFn(item: any, index: number) {
     const dividerHeight = 1;
-    if (this.isFirst(item) || this.isLast(item)) {
+    const itemOrder = this.orderMap.get(item);
+    if (itemOrder.isFirst || itemOrder.isLast) {
       const edgeHeight =
         +DesignTokenHelper.itemHeight().split('px')[0] + +DesignTokenHelper.size('xxs')[0];
       return this.showDivider ? edgeHeight + dividerHeight : edgeHeight;
@@ -207,11 +211,13 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
     return this.showDivider ? itemHeight + dividerHeight : itemHeight;
   }
 
-  isFirst(item: any) {
-    return this.orderMap.get(item) && this.orderMap.get(item).isFirst;
-  }
-  isLast(item: any) {
-    return this.orderMap.get(item) && this.orderMap.get(item).isLast;
+  getOrderClasses(item: any) {
+    const itemOrder = this.orderMap.get(item);
+
+    return {
+      first: (itemOrder && itemOrder.isFirst) || false,
+      last: (itemOrder && itemOrder.isLast) || false,
+    };
   }
 
   ngOnChanges(): void {
@@ -322,7 +328,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
 
   onSwipeActionSelect(swipeAction: ListSwipeAction, item: any, event: Event): void {
     swipeAction.onSelected(item);
-    this.list.closeSlidingItems();
+    this.ionItemSlidingElement.closeOpened();
     event.stopPropagation();
   }
 

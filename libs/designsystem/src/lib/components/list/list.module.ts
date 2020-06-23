@@ -18,6 +18,7 @@ import { VirtualScrollListComponent } from './components/virtual-scroll-list/vir
 import { IconModule } from '../icon/icon.module';
 import { SpinnerModule } from '../spinner/spinner.module';
 import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
+import { NormalListComponent } from './components/normal-list/normal-list.component';
 
 const exportedDeclarations = [
   ListComponent,
@@ -35,6 +36,7 @@ const declarations = [
   ...exportedDeclarations,
   ListItemColorDirective,
   VirtualScrollListComponent,
+  NormalListComponent,
   InfiniteScrollDirective,
 ];
 
