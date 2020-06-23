@@ -41,7 +41,6 @@ import { ModalController } from './components/modal/services/modal.controller';
 import { ModalHelper } from './components/modal/services/modal.helper';
 import { ComponentLoaderDirective } from './components/shared/component-loader.directive';
 import { SlideButtonComponent } from './components/slide-button/slide-button.component';
-import { SpinnerComponent } from './components/spinner/spinner.component';
 import { ToastController } from './components/toast/services/toast.controller';
 import { ToastHelper } from './components/toast/services/toast.helper';
 import { ToggleComponent } from './components/toggle/toggle.component';
