@@ -1,4 +1,4 @@
 <div class="example">
-  <cookbook-list-load-on-demand-example></cookbook-list-load-on-demand-example>
-  <cookbook-code-viewer [html]="exampleHtml"></cookbook-code-viewer>
+  <cookbook-list-load-on-demand-example #listLoadOnDemand></cookbook-list-load-on-demand-example>
+  <cookbook-code-viewer [html]="listLoadOnDemand.template"></cookbook-code-viewer>
 </div>

@@ -24,6 +24,7 @@ export const config = {
   template: config.template,
 })
 export class ListLoadOnDemandExampleComponent extends BaseListComponent {
+  template = config.template;
   private itemCount: number = 0;
 
   constructor() {

@@ -22,7 +22,7 @@ import { ListComponent } from '../list.component';
  */
 export const INFINITE_SCROLL_DEBOUNCE = 100;
 export const INSTANT = 0;
-export const VIRTUAL_SCROLL_INITIALZATION = 1000;
+export const VIRTUAL_SCROLL_INITIALIZATION = 1000;
 
 @Directive({
   selector: '[kirbyInfiniteScroll]',
@@ -92,7 +92,7 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
 
     const timeoutTime = !this.listComponent.isVirtualScrollEnabled
       ? INSTANT
-      : VIRTUAL_SCROLL_INITIALZATION;
+      : VIRTUAL_SCROLL_INITIALIZATION;
     setTimeout(() => {
       const ionContent: HTMLElement = this.elementRef.nativeElement.closest('ion-content');
       if (ionContent) {

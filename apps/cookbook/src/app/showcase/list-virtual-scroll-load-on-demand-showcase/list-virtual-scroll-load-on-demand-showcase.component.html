@@ -1,4 +1,6 @@
 <div class="example">
-  <cookbook-list-virtual-scroll-load-on-demand-example></cookbook-list-virtual-scroll-load-on-demand-example>
-  <cookbook-code-viewer [html]="exampleHtml"></cookbook-code-viewer>
+  <cookbook-list-virtual-scroll-load-on-demand-example
+    #listVirtualScrollLoadOnDemand
+  ></cookbook-list-virtual-scroll-load-on-demand-example>
+  <cookbook-code-viewer [html]="listVirtualScrollLoadOnDemand.template"></cookbook-code-viewer>
 </div>
