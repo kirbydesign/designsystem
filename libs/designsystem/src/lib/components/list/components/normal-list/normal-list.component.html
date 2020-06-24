@@ -56,12 +56,10 @@
   </ion-item-group>
 </ng-template>
 
-<ng-template #slidingItemsTemplate let-items>
-  <ng-container
+<ng-template let-items #slidingItemsTemplate>
+  <kirby-sliding-item
     *ngFor="let item of items; trackBy: listComponent.trackBy || listComponent.defaultTrackBy"
+    [item]="item"
   >
-    <ng-container
-      *ngTemplateOutlet="slidingItemTemplate; context: { $implicit: item }"
-    ></ng-container>
-  </ng-container>
+  </kirby-sliding-item>
 </ng-template>

@@ -19,6 +19,7 @@ import { IconModule } from '../icon/icon.module';
 import { SpinnerModule } from '../spinner/spinner.module';
 import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
 import { NormalListComponent } from './components/normal-list/normal-list.component';
+import { SlidingItemComponent } from './components/sliding-item/sliding-item.component';
 
 const exportedDeclarations = [
   ListComponent,
@@ -38,6 +39,7 @@ const declarations = [
   VirtualScrollListComponent,
   NormalListComponent,
   InfiniteScrollDirective,
+  SlidingItemComponent,
 ];
 
 @NgModule({

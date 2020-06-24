@@ -8,7 +8,5 @@ import { ListComponent } from '../../list.component';
   styleUrls: ['../../list.component.scss'],
 })
 export class NormalListComponent {
-  @Input() slidingItemTemplate: TemplateRef<any>;
-
   constructor(public listComponent: ListComponent) {}
 }

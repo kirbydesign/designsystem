@@ -1,0 +1,96 @@
+<ion-item-sliding
+  [class.selected]="listComponent.isSelectable && item === listComponent.selectedItem"
+  [kirbyListItemColor]="listComponent.getItemColor"
+  [item]="item"
+  [disabled]="listComponent.isSwipingEnabled ? null : true"
+  [ngClass]="listComponent.getOrderClasses(item)"
+  keyHandler
+  (click)="listComponent.isSelectable ? listComponent.onItemSelect(item) : null"
+>
+  <ng-container
+    *ngTemplateOutlet="swipeActionsTemplate; context: { $implicit: item }"
+  ></ng-container>
+  <ng-container
+    *ngTemplateOutlet="defaultItemTemplate; context: { $implicit: item }"
+  ></ng-container>
+</ion-item-sliding>
+
+<!-- Item templates -->
+<ng-template #defaultItemTemplate let-item>
+  <ng-container
+    *ngTemplateOutlet="
+      listComponent.hasDeprecatedItemTemplate ? deprecatedItemTemplate : listComponent.itemTemplate;
+      context: { $implicit: item }
+    "
+  ></ng-container>
+</ng-template>
+
+<ng-template #deprecatedItemTemplate let-item>
+  <ion-item
+    [button]="listComponent.isSelectable ? true : null"
+    [attr.tabindex]="listComponent.isSelectable ? null : 0"
+    detail="false"
+  >
+    <ng-container
+      *ngTemplateOutlet="listComponent.legacyItemTemplate; context: { $implicit: item }"
+    ></ng-container>
+    <ng-container
+      *ngTemplateOutlet="listComponent.legacyFlexItemTemplate; context: { $implicit: item }"
+    ></ng-container>
+  </ion-item>
+</ng-template>
+
+<ng-template #swipeActionsTemplate let-item>
+  <ion-item-options
+    *ngIf="
+      listComponent.getSwipeActionsSide('left', item) &&
+      listComponent.getSwipeActionsSide('left', item).length > 0
+    "
+    side="start"
+  >
+    <ng-container
+      *ngTemplateOutlet="
+        swipeActionTemplate;
+        context: { $implicit: item, swipeActions: listComponent.getSwipeActionsSide('left', item) }
+      "
+    ></ng-container>
+  </ion-item-options>
+
+  <ion-item-options
+    *ngIf="
+      listComponent.getSwipeActionsSide('right', item) &&
+      listComponent.getSwipeActionsSide('right', item).length > 0
+    "
+    side="end"
+  >
+    <ng-container
+      *ngTemplateOutlet="
+        swipeActionTemplate;
+        context: { $implicit: item, swipeActions: listComponent.getSwipeActionsSide('right', item) }
+      "
+    ></ng-container>
+  </ion-item-options>
+</ng-template>
+
+<ng-template #swipeActionTemplate let-item let-swipeActions="swipeActions">
+  <div class="swipe-action">
+    <ng-container *ngFor="let swipeAction of swipeActions">
+      <ion-item-option
+        [ngClass]="listComponent.getSwipeActionType(swipeAction, item)"
+        (click)="listComponent.onSwipeActionSelect(swipeAction, item, $event)"
+      >
+        <div class="item-content">
+          <kirby-icon
+            *ngIf="listComponent.getSwipeActionIcon(swipeAction, item)"
+            size="sm"
+            [name]="listComponent.getSwipeActionIcon(swipeAction, item)"
+          >
+          </kirby-icon>
+          <ion-label>
+            {{ listComponent.getSwipeActionTitle(swipeAction, item) }}
+          </ion-label>
+        </div>
+      </ion-item-option>
+    </ng-container>
+  </div>
+</ng-template>

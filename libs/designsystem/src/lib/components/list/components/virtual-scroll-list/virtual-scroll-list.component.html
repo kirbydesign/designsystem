@@ -19,13 +19,7 @@
     <ng-container *ngTemplateOutlet="listComponent.headerTemplate"></ng-container>
   </ion-list-header>
 
-  <ng-container *virtualItem="let item">
-    <span>
-      <ng-container
-        *ngTemplateOutlet="slidingItemTemplate; context: { $implicit: item }"
-      ></ng-container>
-    </span>
-  </ng-container>
+  <kirby-sliding-item *virtualItem="let item" [item]="item"> </kirby-sliding-item>
 
   <div *virtualFooter="let footer" class="footer">
     <ng-container *ngTemplateOutlet="listComponent.footerTemplate"></ng-container>
@@ -58,11 +52,7 @@
     </ion-item-divider>
   </ng-container>
 
-  <ng-container *virtualItem="let item">
-    <ng-container
-      *ngTemplateOutlet="slidingItemTemplate; context: { $implicit: item }"
-    ></ng-container>
-  </ng-container>
+  <kirby-sliding-item *virtualItem="let item" [item]="item"> </kirby-sliding-item>
 
   <ng-container *virtualFooter="let footer">
     <div class="footer">
