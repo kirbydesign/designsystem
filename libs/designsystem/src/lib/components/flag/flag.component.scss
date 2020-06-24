@@ -1,0 +1,34 @@
+@import '../../scss/utils';
+
+:host {
+  background-color: var(--kirby-flag-background-color, get-color('white'));
+  color: var(--kirby-flag-color, get-color('white-contrast'));
+  border-radius: 4px;
+
+  padding-top: 2px;
+  padding-right: 4px;
+  padding-bottom: 2px;
+  padding-left: 4px;
+}
+
+@each $color-name, $color-value in $notification-colors {
+  :host(.#{$color-name}) {
+    --kirby-flag-background-color: #{get-color($color-name)};
+    --kirby-flag-color: #{get-color($color-name + '-contrast')};
+  }
+}
+
+@each $color-name, $color-value in $system-colors {
+  :host(.#{$color-name}) {
+    --kirby-flag-background-color: #{get-color($color-name)};
+    --kirby-flag-color: #{get-color($color-name + '-contrast')};
+  }
+}
+
+:host(.danger) {
+  --kirby-flag-color: #{get-color('white')};
+}
+
+:host(.transparent) {
+  border: 1px solid var(--kirby-flag-border-color, get-color('medium'));
+}

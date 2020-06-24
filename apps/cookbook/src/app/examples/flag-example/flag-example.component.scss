@@ -1,0 +1,8 @@
+@import './libs/designsystem/src/lib/scss/utils';
+
+.flag-examples {
+  display: inline-flex;
+  kirby-flag + kirby-flag {
+    margin-left: size('s');
+  }
+}
