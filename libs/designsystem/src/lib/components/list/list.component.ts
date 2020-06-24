@@ -40,8 +40,6 @@ export type ListShape = 'square' | 'rounded' | 'none';
   providers: [ListHelper, GroupByPipe],
 })
 export class ListComponent implements OnInit, AfterViewInit, OnChanges {
-  list: IonList;
-
   /**
    * Provide items for the list to render. Items must be provided in the order you expect them to be rendered.
    */
@@ -341,8 +339,8 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
     const large = 1025; //TODO this need to be refactored.
     if (this.swipeActions && this.swipeActions.length) {
       this.isSwipingEnabled = window.innerWidth < large;
-      if (this.list && !this.isSwipingEnabled) {
-        this.list.closeSlidingItems();
+      if (this.ionItemSlidingElement && !this.isSwipingEnabled) {
+        this.ionItemSlidingElement.closeOpened();
       }
     }
   }
