@@ -4,7 +4,7 @@ import {
   ChangeDetectionStrategy,
   HostBinding,
   ElementRef,
-  AfterViewChecked,
+  AfterViewInit,
   ChangeDetectorRef,
   OnDestroy,
 } from '@angular/core';
@@ -15,7 +15,7 @@ import {
   styleUrls: ['./progress-circle.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProgressCircleComponent implements AfterViewChecked, OnDestroy {
+export class ProgressCircleComponent implements AfterViewInit, OnDestroy {
   static readonly DIAMETER_MAP = {
     sm: 40,
     md: 56,
@@ -33,34 +33,23 @@ export class ProgressCircleComponent implements AfterViewChecked, OnDestroy {
 
   private hasElementBeenVisible?: boolean;
   private observer: IntersectionObserver;
-  private attachObserverTimeoutId;
 
   constructor(
     private elementRef: ElementRef<HTMLElement>,
     private changeDetectorRef: ChangeDetectorRef
   ) {}
 
-  ngAfterViewChecked(): void {
-    this.attachObserver();
+  ngAfterViewInit(): void {
+    if (!this.observer) {
+      this.observer = new IntersectionObserver(this.onIntersectionChange, {
+        threshold: 0.5,
+      });
+      this.observer.observe(this.elementRef.nativeElement);
+    }
   }
 
   ngOnDestroy(): void {
     this.unobserve();
-  }
-
-  private attachObserver() {
-    if (!this.observer) {
-      // Ensure element is connected before observing:
-      if (this.elementRef.nativeElement.isConnected) {
-        this.observer = new IntersectionObserver(this.onIntersectionChange, {
-          threshold: 0.5,
-        });
-        this.observer.observe(this.elementRef.nativeElement);
-      } else if (!this.attachObserverTimeoutId) {
-        // Try again in a tick when the element is connected to the DOM:
-        this.attachObserverTimeoutId = setTimeout(() => this.attachObserver());
-      }
-    }
   }
 
   private onIntersectionChange = (entries: IntersectionObserverEntry[]) => {
