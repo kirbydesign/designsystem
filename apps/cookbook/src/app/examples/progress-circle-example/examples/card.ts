@@ -32,6 +32,11 @@ const config = {
   template: config.template,
   styles: [
     `
+      :host {
+        width: 100%;
+        max-width: 500px;
+      }
+
       kirby-card:not(:first-of-type) {
         margin-top: 12px;
       }
