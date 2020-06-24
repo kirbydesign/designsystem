@@ -18,12 +18,14 @@ export class DesignTokenHelper {
     };
   }
 
-  public static size(key: string): string {
-    return styles.sizes[key];
+  public static size(key: string, valueOnly: boolean = false): string {
+    const size = styles.sizes[key];
+    return valueOnly ? size.split('px')[0] : size;
   }
 
-  public static itemHeight(key: 'm' | 's' | 'xs' = 'm'): string {
-    return styles.itemHeights[key];
+  public static itemHeight(key: 'm' | 's' | 'xs' = 'm', valueOnly: boolean = false): string {
+    const itemHeight = styles.itemHeights[key];
+    return valueOnly ? itemHeight.split('px')[0] : itemHeight;
   }
 
   public static fontSize(key: string): string {

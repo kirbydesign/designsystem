@@ -3,7 +3,8 @@
   [kirbyListItemColor]="listComponent.getItemColor"
   [item]="item"
   [disabled]="listComponent.isSwipingEnabled ? null : true"
-  [ngClass]="listComponent.getOrderClasses(item)"
+  [class.first]="listComponent.isFirst(item)"
+  [class.last]="listComponent.isLast(item)"
   keyHandler
   (click)="listComponent.isSelectable ? listComponent.onItemSelect(item) : null"
 >

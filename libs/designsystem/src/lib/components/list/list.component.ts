@@ -201,23 +201,24 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   private kirbyItemHeightFn(item: any, index: number) {
     const dividerHeight = 1;
     const itemOrder = this.orderMap.get(item);
-    if (itemOrder.isFirst || itemOrder.isLast) {
+    if (itemOrder && (itemOrder.isFirst || itemOrder.isLast)) {
       const edgeHeight =
-        +DesignTokenHelper.itemHeight().split('px')[0] + +DesignTokenHelper.size('xxs')[0];
+        +DesignTokenHelper.itemHeight('m', true) + +DesignTokenHelper.size('xxs', true);
       return this.showDivider ? edgeHeight + dividerHeight : edgeHeight;
     }
 
-    const itemHeight = +DesignTokenHelper.itemHeight().split('px')[0];
+    const itemHeight = +DesignTokenHelper.itemHeight('m', true);
     return this.showDivider ? itemHeight + dividerHeight : itemHeight;
   }
 
-  getOrderClasses(item: any) {
+  isFirst(item: any) {
     const itemOrder = this.orderMap.get(item);
+    return itemOrder.isFirst;
+  }
 
-    return {
-      first: (itemOrder && !this.headerTemplate && itemOrder.isFirst) || false,
-      last: (itemOrder && !this.footerTemplate && itemOrder.isLast) || false,
-    };
+  isLast(item: any) {
+    const itemOrder = this.orderMap.get(item);
+    return itemOrder.isLast;
   }
 
   ngOnChanges(): void {
