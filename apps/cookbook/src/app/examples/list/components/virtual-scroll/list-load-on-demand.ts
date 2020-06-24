@@ -17,11 +17,19 @@ export const config = {
     </kirby-label>
   </kirby-item>
 </kirby-list></ion-content>`,
+  styles: [
+    `
+    .kirby-list {
+      background: var(--kirby-background-color);
+    }
+  `,
+  ],
 };
 
 @Component({
   selector: config.selector,
   template: config.template,
+  styles: config.styles,
 })
 export class VirtualScrollListLoadOnDemandExampleComponent extends BaseListComponent {
   template = config.template;
