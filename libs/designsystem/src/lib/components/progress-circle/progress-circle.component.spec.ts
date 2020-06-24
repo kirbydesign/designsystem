@@ -86,7 +86,7 @@ describe('ProgressCircleComponent', () => {
       });
     });
 
-    describe('ngAfterContentChecked ', () => {
+    describe('ngAfterViewChecked', () => {
       it('should instantiate IntersectionObserver with onIntersectionChange as callback', async () => {
         expect(intersectionObserverConstructorSpy).toHaveBeenCalledWith(
           spectator.component['onIntersectionChange'],

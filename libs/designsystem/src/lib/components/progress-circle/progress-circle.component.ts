@@ -4,7 +4,7 @@ import {
   ChangeDetectionStrategy,
   HostBinding,
   ElementRef,
-  AfterContentChecked,
+  AfterViewChecked,
   ChangeDetectorRef,
   OnDestroy,
 } from '@angular/core';
@@ -15,7 +15,7 @@ import {
   styleUrls: ['./progress-circle.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProgressCircleComponent implements AfterContentChecked, OnDestroy {
+export class ProgressCircleComponent implements AfterViewChecked, OnDestroy {
   static readonly DIAMETER_MAP = {
     sm: 40,
     md: 56,
@@ -33,13 +33,14 @@ export class ProgressCircleComponent implements AfterContentChecked, OnDestroy {
 
   private hasElementBeenVisible?: boolean;
   private observer: IntersectionObserver;
+  private attachObserverTimeoutId;
 
   constructor(
     private elementRef: ElementRef<HTMLElement>,
     private changeDetectorRef: ChangeDetectorRef
   ) {}
 
-  ngAfterContentChecked(): void {
+  ngAfterViewChecked(): void {
     this.attachObserver();
   }
 
@@ -55,9 +56,9 @@ export class ProgressCircleComponent implements AfterContentChecked, OnDestroy {
           threshold: 0.5,
         });
         this.observer.observe(this.elementRef.nativeElement);
-      } else {
-        // Try again until the element is connected to the DOM
-        setTimeout(() => this.attachObserver(), 50);
+      } else if (!this.attachObserverTimeoutId) {
+        // Try again in a tick when the element is connected to the DOM:
+        this.attachObserverTimeoutId = setTimeout(() => this.attachObserver());
       }
     }
   }
