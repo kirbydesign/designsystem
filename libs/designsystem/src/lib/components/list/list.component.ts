@@ -215,8 +215,8 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
     const itemOrder = this.orderMap.get(item);
 
     return {
-      first: (itemOrder && itemOrder.isFirst) || false,
-      last: (itemOrder && itemOrder.isLast) || false,
+      first: (itemOrder && !this.headerTemplate && itemOrder.isFirst) || false,
+      last: (itemOrder && !this.footerTemplate && itemOrder.isLast) || false,
     };
   }
 
