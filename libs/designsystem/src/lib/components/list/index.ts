@@ -1,7 +1,7 @@
 export { ListComponent } from './list.component';
 export { ListShape } from './list.component';
-export { ListHeaderComponent } from './list-header/list-header.component';
-export { ListSectionHeaderComponent } from './list-section-header/list-section-header.component';
+export { ListHeaderComponent } from './components/list-header/list-header.component';
+export { ListSectionHeaderComponent } from './components/list-section-header/list-section-header.component';
 
 export { LoadOnDemandEvent } from './list.event';
 export { ListSwipeAction } from './list-swipe-action';
