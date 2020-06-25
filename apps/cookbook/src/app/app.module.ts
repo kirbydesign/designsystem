@@ -2,6 +2,7 @@ import { NgModule, LOCALE_ID } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
 import { registerLocaleData } from '@angular/common';
 import localeEn from '@angular/common/locales/en-GB';
 
@@ -23,6 +24,7 @@ registerLocaleData(localeEn);
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
     KirbyModule,
     FirebaseModule,
   ],
