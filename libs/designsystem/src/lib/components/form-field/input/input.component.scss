@@ -22,7 +22,8 @@
 :host-context(kirby-item kirby-form-field[slot='end']) {
   text-align: right;
 
-  &[type='number'] {
+  &[type='number'],
+  &[type='currency'] {
     font-weight: font-weight('bold');
   }
 }

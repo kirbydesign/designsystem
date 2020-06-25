@@ -8,3 +8,4 @@ export { Sizes } from './size/size.directive';
 export { SizeDirective } from './size/size.directive';
 
 export { ThemeColorDirective } from './theme-color/theme-color.directive';
+export { CurrencyFormatterDirective } from './input-formatter/currency-formatter.directive';

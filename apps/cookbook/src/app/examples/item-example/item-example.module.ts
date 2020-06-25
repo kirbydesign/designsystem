@@ -28,6 +28,7 @@ import { ItemExampleSimpleSmallComponent } from './examples/simple/default-sm';
 import { ItemExampleSimpleExtraSmallComponent } from './examples/simple/default-xs';
 import { ItemExampleInputDefaultComponent } from './examples/input/default';
 import { ItemExampleInputNumericComponent } from './examples/input/numeric';
+import { ItemExampleInputCurrencyComponent } from './examples/input/currency';
 import { ItemExampleCardComponent } from './examples/card';
 
 const COMPONENT_DECLARATIONS = [
@@ -56,6 +57,7 @@ const COMPONENT_DECLARATIONS = [
   ItemExampleHorizontalComponent,
   ItemExampleInputDefaultComponent,
   ItemExampleInputNumericComponent,
+  ItemExampleInputCurrencyComponent,
   ItemExampleCardComponent,
 ];
 

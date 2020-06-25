@@ -20,6 +20,7 @@ export class InputComponent implements OnChanges {
   private static typeToInputmodeMap = {
     number: 'decimal',
     search: 'search',
+    currency: 'currency',
   };
 
   kirbyChange = new EventEmitter<string>();
