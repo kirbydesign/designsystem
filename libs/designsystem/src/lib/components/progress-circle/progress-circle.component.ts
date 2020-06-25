@@ -4,7 +4,7 @@ import {
   ChangeDetectionStrategy,
   HostBinding,
   ElementRef,
-  AfterContentChecked,
+  AfterViewInit,
   ChangeDetectorRef,
   OnDestroy,
 } from '@angular/core';
@@ -15,7 +15,7 @@ import {
   styleUrls: ['./progress-circle.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProgressCircleComponent implements AfterContentChecked, OnDestroy {
+export class ProgressCircleComponent implements AfterViewInit, OnDestroy {
   static readonly DIAMETER_MAP = {
     sm: 40,
     md: 56,
@@ -39,9 +39,8 @@ export class ProgressCircleComponent implements AfterContentChecked, OnDestroy {
     private changeDetectorRef: ChangeDetectorRef
   ) {}
 
-  ngAfterContentChecked(): void {
-    // Ensure element is connected before observing:
-    if (!this.observer && this.elementRef.nativeElement.isConnected) {
+  ngAfterViewInit(): void {
+    if (!this.observer) {
       this.observer = new IntersectionObserver(this.onIntersectionChange, {
         threshold: 0.5,
       });
