@@ -8,12 +8,11 @@ import {
   OnChanges,
   Output,
   TemplateRef,
-  ViewChild,
   TrackByFunction,
   ContentChildren,
   AfterViewInit,
+  ChangeDetectorRef,
 } from '@angular/core';
-import { IonList, IonItemSliding } from '@ionic/angular';
 
 import {
   ListFlexItemDirective,
@@ -124,8 +123,6 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
    */
   @Output() itemSelect = new EventEmitter<any>();
 
-  @ViewChild(IonItemSliding) ionItemSlidingElement: IonItemSliding;
-
   // The first element that matches ListItemDirective. As a structural directive it unfolds into a template. This is a reference to that.
   @ContentChild(ListItemTemplateDirective, { static: true, read: TemplateRef })
   itemTemplate: TemplateRef<any>;
@@ -153,7 +150,11 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   private orderMap: WeakMap<any, { isFirst: boolean; isLast: boolean }> = new WeakMap();
   private sectionNameMap: Map<number, string> = new Map();
 
-  constructor(private listHelper: ListHelper, private groupBy: GroupByPipe) {}
+  constructor(
+    private listHelper: ListHelper,
+    private groupBy: GroupByPipe,
+    private changeDetectionRef: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
     this.hasDeprecatedItemTemplate = !!this.legacyItemTemplate || !!this.legacyFlexItemTemplate;
@@ -209,16 +210,14 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
     return this.showDivider ? itemHeight + dividerHeight : itemHeight;
   }
 
-  isFirst(item: any) {
+  getOrderClasses(item: any) {
     const itemOrder = this.orderMap.get(item);
-    return (itemOrder && itemOrder.isFirst) || false;
-  }
 
-  isLast(item: any) {
-    const itemOrder = this.orderMap.get(item);
-    return (itemOrder && itemOrder.isLast) || false;
+    return {
+      first: (itemOrder && !this.headerTemplate && itemOrder.isFirst) || false,
+      last: (itemOrder && !this.footerTemplate && itemOrder.isLast) || false,
+    };
   }
-
   ngOnChanges(): void {
     this.isSectionsEnabled = !!this.getSectionName;
     if (this.isSectionsEnabled && this.items) {
@@ -325,23 +324,30 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
     return swipeAction.type;
   }
 
-  onSwipeActionSelect(swipeAction: ListSwipeAction, item: any, event: Event): void {
+  onSwipeActionSelect(
+    swipeAction: ListSwipeAction,
+    item: any,
+    event: Event,
+    closeOpened: () => void
+  ): void {
     swipeAction.onSelected(item);
-    this.ionItemSlidingElement.closeOpened();
+    closeOpened();
+    this.changeDetectionRef.detectChanges();
     event.stopPropagation();
   }
 
-  onResize(): void {
+  onResize(closeOpened: () => void): void {
     this.initializeSwipeActions();
+    if (!this.isSwipingEnabled) {
+      closeOpened();
+      this.changeDetectionRef.detectChanges();
+    }
   }
 
   private initializeSwipeActions(): void {
     const large = 1025; //TODO this need to be refactored.
     if (this.swipeActions && this.swipeActions.length) {
       this.isSwipingEnabled = window.innerWidth < large;
-      if (this.ionItemSlidingElement && !this.isSwipingEnabled) {
-        this.ionItemSlidingElement.closeOpened();
-      }
     }
   }
 }

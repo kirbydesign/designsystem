@@ -3,8 +3,7 @@
   [kirbyListItemColor]="listComponent.getItemColor"
   [item]="item"
   [disabled]="listComponent.isSwipingEnabled ? null : true"
-  [class.first]="listComponent.isFirst(item)"
-  [class.last]="listComponent.isLast(item)"
+  [ngClass]="listComponent.getOrderClasses(item)"
   keyHandler
   (click)="listComponent.isSelectable ? listComponent.onItemSelect(item) : null"
 >
@@ -78,7 +77,14 @@
     <ng-container *ngFor="let swipeAction of swipeActions">
       <ion-item-option
         [ngClass]="listComponent.getSwipeActionType(swipeAction, item)"
-        (click)="listComponent.onSwipeActionSelect(swipeAction, item, $event)"
+        (click)="
+          listComponent.onSwipeActionSelect(
+            swipeAction,
+            item,
+            $event,
+            ionItemSliding.closeOpened.bind(ionItemSliding)
+          )
+        "
       >
         <div class="item-content">
           <kirby-icon

@@ -7,7 +7,7 @@
   [class.has-header]="listComponent.headerTemplate"
   [class.has-footer]="listComponent.footerTemplate"
   [class.has-divider]="listComponent.showDivider"
-  (window:resize)="listComponent.onResize()"
+  (window:resize)="listComponent.onResize(slidingItem?.ionItemSliding?.closeOpened)"
 >
   <ion-list-header *ngIf="listComponent.headerTemplate">
     <ng-container *ngTemplateOutlet="listComponent.headerTemplate"></ng-container>

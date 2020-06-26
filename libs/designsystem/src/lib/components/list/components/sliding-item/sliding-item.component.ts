@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { IonItemSliding } from '@ionic/angular';
 
 import { ListComponent } from '../../list.component';
 
@@ -9,6 +10,7 @@ import { ListComponent } from '../../list.component';
 })
 export class SlidingItemComponent implements OnInit {
   @Input() item: any;
+  @ViewChild(IonItemSliding) ionItemSliding: IonItemSliding;
   constructor(public listComponent: ListComponent) {}
 
   ngOnInit() {}

@@ -37,7 +37,8 @@ export class ListLoadOnDemandExampleComponent extends BaseListComponent {
     if (this.itemCount <= 20) {
       // lets make a delay to simulate a HTTP call.
       setTimeout(() => {
-        this.items.push(...this.generateItems());
+        // make sure to update items reference to update list correctly
+        this.items = [...this.items, ...this.generateItems()];
         loadOnDemandEvent.complete();
       }, 2000);
     } else {

@@ -45,7 +45,7 @@ export class VirtualScrollListLoadOnDemandExampleComponent extends BaseListCompo
     if (this.itemCount <= 20) {
       // lets make a delay to simulate a HTTP call.
       setTimeout(() => {
-        this.items.push(...this.generateItems());
+        this.items = [...this.items, ...this.generateItems()];
         loadOnDemandEvent.complete();
       }, 2000);
     } else {
