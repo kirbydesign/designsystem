@@ -12,7 +12,7 @@ describe('Directive: CurrencyFormatterDirective', () => {
   let element: HTMLInputElement;
 
   beforeEach(() => {
-    const template = ` <input type="currency" kirby-input currencyFormatter />`;
+    const template = ` <input type="currency" kirby-input currencyFormatter="da" />`;
     spectator = createHost(template);
     element = spectator.element as HTMLInputElement;
   });
@@ -66,7 +66,7 @@ describe('Directive: CurrencyFormatterDirective', () => {
       expect(element.value).toBe(`123`);
     });
 
-    fit('should update add thousand separators when going from 3 to 4 digit number', () => {
+    fit('should add thousand separators when going from 3 to 4 digit number', () => {
       element.value = '123';
       element.dispatchEvent(new Event('input'));
       spectator.detectChanges();
@@ -126,21 +126,12 @@ describe('Directive: CurrencyFormatterDirective', () => {
   });
 
   describe('Localization format', () => {
-    fit('should by default show grouping selector (.) and decimal point (,)', () => {
+    fit('should by default show the correct grouping seperator and decimal point', () => {
       element.value = '123456789,10';
       element.dispatchEvent(new Event('input'));
       spectator.detectChanges();
 
       expect(element.value).toBe(`123.456.789,10`);
-    });
-
-    fit('should show grouping selector (,) and decimal point (.) when format = en-GB', () => {
-      spectator.directive.LOCALIZATION_FORMAT = 'en-GB';
-      element.value = '123456789.10';
-      element.dispatchEvent(new Event('input'));
-      spectator.detectChanges();
-
-      expect(element.value).toBe(`123,456,789.10`);
     });
   });
 });
