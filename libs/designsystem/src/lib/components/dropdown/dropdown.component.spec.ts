@@ -873,6 +873,28 @@ describe('DropdownComponent', () => {
       });
     });
 
+    describe('through template property binding', () => {
+      function getSpectatorWithStringSize(size: string) {
+        return createHost(`<kirby-dropdown [size]="'${size}'"></kirby-dropdown>`, {
+          props: { items: items },
+        });
+      }
+
+      it('should have small size on button', () => {
+        const size = 'sm';
+        spectator = getSpectatorWithStringSize(size);
+        buttonSizeDirective = getButtonSizeDirective();
+        expect(buttonSizeDirective.size).toBe(size);
+      });
+
+      it('should have medium size on button', () => {
+        const size = 'md';
+        spectator = getSpectatorWithStringSize(size);
+        buttonSizeDirective = getButtonSizeDirective();
+        expect(buttonSizeDirective.size).toBe(size);
+      });
+    });
+
     describe('through input properties', () => {
       function getSpectatorWithSize(size: 'sm' | 'md') {
         return createHost(`<kirby-dropdown></kirby-dropdown>`, {
