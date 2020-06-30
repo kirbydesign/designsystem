@@ -1,5 +1,5 @@
 import { LoadOnDemandEventData } from '../list.event';
-import { ListComponent } from './../list.component';
+import { ListComponent } from '../list.component';
 
 export class ListHelper {
   onLoadOnDemand(component: ListComponent, _event: LoadOnDemandEventData) {
