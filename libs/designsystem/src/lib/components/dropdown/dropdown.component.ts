@@ -21,9 +21,9 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { ListItemTemplateDirective } from '../list';
-import { ItemComponent } from '../item';
-import { CardComponent } from '../card';
+import { ListItemTemplateDirective } from '../list/list.directive';
+import { ItemComponent } from '../item/item.component';
+import { CardComponent } from '../card/card.component';
 
 @Component({
   selector: 'kirby-dropdown',
