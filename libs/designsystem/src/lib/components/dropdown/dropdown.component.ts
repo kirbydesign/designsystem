@@ -91,6 +91,9 @@ export class DropdownComponent
   hasError: boolean;
 
   @Input()
+  size: 'sm' | 'md' = 'md';
+
+  @Input()
   tabindex = 0;
 
   @HostBinding('attr.tabindex')
