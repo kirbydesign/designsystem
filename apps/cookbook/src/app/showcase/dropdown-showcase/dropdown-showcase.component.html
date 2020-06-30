@@ -2,19 +2,52 @@
 <h3>Default</h3>
 <cookbook-example-viewer [html]="defaultExample.template">
   <div>
-    <cookbook-dropdown-example-default #defaultExample></cookbook-dropdown-example-default>
+    <cookbook-dropdown-example-default
+      [size]="size"
+      #defaultExample
+    ></cookbook-dropdown-example-default>
   </div>
 </cookbook-example-viewer>
+<fieldset>
+  <legend>Configuration</legend>
+  <p>
+    <strong>Size:</strong><br />
+    <label>
+      <input
+        type="radio"
+        name="size"
+        value="sm"
+        [checked]="size === 'sm'"
+        (change)="setSize($event.target.value)"
+      />
+      Small (<code>sm</code>)
+    </label>
+    <label>
+      <input
+        type="radio"
+        name="size"
+        value="md"
+        [checked]="size === 'md'"
+        (change)="setSize($event.target.value)"
+      />
+      Medium (<code>md</code>) - default
+    </label>
+  </p>
+</fieldset>
 <h3>Scroll</h3>
 <cookbook-example-viewer [html]="scrollExample.template">
   <div>
-    <cookbook-dropdown-example-scroll #scrollExample></cookbook-dropdown-example-scroll>
+    <cookbook-dropdown-example-scroll
+      [size]="size"
+      #scrollExample
+    ></cookbook-dropdown-example-scroll>
   </div>
 </cookbook-example-viewer>
 <h3>Pre-selected</h3>
 <cookbook-example-viewer [html]="preSelectedExample.template">
   <div>
     <cookbook-dropdown-example-pre-selected
+      [size]="size"
       #preSelectedExample
     ></cookbook-dropdown-example-pre-selected>
   </div>
@@ -22,13 +55,17 @@
 <h3>Block level</h3>
 <cookbook-example-viewer [html]="expandExample.template">
   <div>
-    <cookbook-dropdown-example-expand #expandExample></cookbook-dropdown-example-expand>
+    <cookbook-dropdown-example-expand
+      [size]="size"
+      #expandExample
+    ></cookbook-dropdown-example-expand>
   </div>
 </cookbook-example-viewer>
 <h3>Right aligned</h3>
 <cookbook-example-viewer [html]="rightAlignedExample.template" [css]="rightAlignedExample.styles">
   <div>
     <cookbook-dropdown-example-right-aligned
+      [size]="size"
       #rightAlignedExample
     ></cookbook-dropdown-example-right-aligned>
   </div>
@@ -37,6 +74,7 @@
 <cookbook-example-viewer [html]="attentionLevelExample.template">
   <div>
     <cookbook-dropdown-example-attention-level
+      [size]="size"
       #attentionLevelExample
     ></cookbook-dropdown-example-attention-level>
   </div>
@@ -45,6 +83,7 @@
 <cookbook-example-viewer [html]="itemSelectExample.template">
   <div>
     <cookbook-dropdown-example-item-select
+      [size]="size"
       #itemSelectExample
     ></cookbook-dropdown-example-item-select>
   </div>
@@ -54,6 +93,7 @@
 <cookbook-example-viewer [html]="customItemTemplateExample.template">
   <div>
     <cookbook-dropdown-example-custom-item-template
+      [size]="size"
       #customItemTemplateExample
     ></cookbook-dropdown-example-custom-item-template>
   </div>
@@ -61,7 +101,10 @@
 <h3>Forms</h3>
 <cookbook-example-viewer [html]="formsExample.template" [ts]="formsExample.codeSnippet">
   <div>
-    <cookbook-dropdown-example-ng-forms #formsExample></cookbook-dropdown-example-ng-forms>
+    <cookbook-dropdown-example-ng-forms
+      [size]="size"
+      #formsExample
+    ></cookbook-dropdown-example-ng-forms>
   </div>
 </cookbook-example-viewer>
 <h2>Properties:</h2>
