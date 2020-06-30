@@ -8,7 +8,7 @@ import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-prop
   styleUrls: ['./dropdown-showcase.component.scss'],
 })
 export class DropdownShowcaseComponent {
-  size: 'sm' | 'md' = 'md';
+  size: string = 'md';
   properties: ShowcaseProperty[] = [
     {
       name: 'items',
@@ -97,7 +97,7 @@ export class DropdownShowcaseComponent {
     Type: 'Signature',
   };
 
-  setSize(size: 'sm' | 'md') {
+  setSize(size: string) {
     this.size = size;
   }
 }

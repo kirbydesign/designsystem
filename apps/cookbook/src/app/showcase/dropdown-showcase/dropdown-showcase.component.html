@@ -1,3 +1,7 @@
+<cookbook-dropdown-example-configuration
+  [size]="size"
+  (sizeChanged)="setSize($event)"
+></cookbook-dropdown-example-configuration>
 <h2>Simple</h2>
 <h3>Default</h3>
 <cookbook-example-viewer [html]="defaultExample.template">
@@ -8,32 +12,6 @@
     ></cookbook-dropdown-example-default>
   </div>
 </cookbook-example-viewer>
-<fieldset>
-  <legend>Configuration</legend>
-  <p>
-    <strong>Size:</strong><br />
-    <label>
-      <input
-        type="radio"
-        name="size"
-        value="sm"
-        [checked]="size === 'sm'"
-        (change)="setSize($event.target.value)"
-      />
-      Small (<code>sm</code>)
-    </label>
-    <label>
-      <input
-        type="radio"
-        name="size"
-        value="md"
-        [checked]="size === 'md'"
-        (change)="setSize($event.target.value)"
-      />
-      Medium (<code>md</code>) - default
-    </label>
-  </p>
-</fieldset>
 <h3>Scroll</h3>
 <cookbook-example-viewer [html]="scrollExample.template">
   <div>
