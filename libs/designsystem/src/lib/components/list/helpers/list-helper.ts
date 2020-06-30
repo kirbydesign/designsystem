@@ -6,8 +6,8 @@ export class ListHelper {
     if (component.isLoadOnDemandEnabled && !component.isLoading) {
       component.isLoading = true;
       component.loadOnDemand.emit({
-        complete: (disableLoadOnDamand: boolean) => {
-          component.isLoadOnDemandEnabled = !disableLoadOnDamand;
+        complete: (disableLoadOnDemand: boolean) => {
+          component.isLoadOnDemandEnabled = !disableLoadOnDemand;
           component.isLoading = false;
         },
       });
