@@ -72,6 +72,8 @@ import { BreakpointHelperService } from './components/grid/breakpoint-helper.ser
 import { LoadingOverlayService } from './components/loading-overlay/fullscreen-loading-overlay/loading-overlay.service';
 import { ResizeObserverFactory } from './components/shared/resize-observer/resize-observer.factory';
 import { ResizeObserverService } from './components/shared/resize-observer/resize-observer.service';
+import { ProgressCircleComponent } from './components/progress-circle/progress-circle.component';
+import { ProgressCircleRingComponent } from './components/progress-circle/progress-circle-ring.component';
 
 const exportedDeclarations = [
   CardComponent,
@@ -117,6 +119,7 @@ const exportedDeclarations = [
   DropdownComponent,
   InfiniteScrollDirective,
   LoadingOverlayComponent,
+  ProgressCircleComponent,
 ];
 
 const declarations = [
@@ -128,6 +131,7 @@ const declarations = [
   AlertComponent,
   ModalWrapperComponent,
   ModalCompactWrapperComponent,
+  ProgressCircleRingComponent,
 ];
 
 const exportedModules = [

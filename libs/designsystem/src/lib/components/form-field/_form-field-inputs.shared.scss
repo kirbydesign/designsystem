@@ -31,6 +31,7 @@ $form-field-label-height: 24px;
   line-height: line-height('n');
   outline: none;
   margin: 0;
+  padding: 0;
   -webkit-appearance: none;
 
   &:not(.borderless) {
@@ -53,4 +54,11 @@ $form-field-label-height: 24px;
   &::-ms-input-placeholder {
     color: get-text-color('semi-dark');
   }
+}
+// TODO: !important used to overrule &:not(.borderless) - May need refactoring
+:host-context(kirby-item) {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  width: auto !important;
 }

@@ -1,115 +1,20 @@
-<h2>Avatar with image</h2>
+<h1>Avatar</h1>
 
-<div class="avatar-item-container">
-  <div class="avatar-item-inner-container">
-    <kirby-avatar [imageSrc]="imageSrc" [altText]="altText" size="lg"></kirby-avatar>
-  </div>
-</div>
+<h2>Default</h2>
+<cookbook-avatar-example-default></cookbook-avatar-example-default>
 
-<h2>Avatar with overlay</h2>
-
-<div class="avatar-item-container">
-  <div class="avatar-item-inner-container">
-    <kirby-avatar [imageSrc]="imageSrc" [altText]="altText" size="lg" overlay="true"></kirby-avatar>
-  </div>
-</div>
-
-<h2>Avatar with shadow</h2>
-
-<div class="avatar-item-container">
-  <div class="avatar-item-inner-container">
-    <kirby-avatar [imageSrc]="imageSrc" [altText]="altText" size="lg" shadow="true"></kirby-avatar>
-  </div>
-</div>
+<h2>Colors</h2>
+<cookbook-avatar-example-colors></cookbook-avatar-example-colors>
 
 <h2>Avatar with text</h2>
-
-<div class="avatar-item-container">
-  <div class="avatar-item-inner-container">
-    <kirby-avatar size="lg" overlay="true" text="C"> </kirby-avatar>
-  </div>
-</div>
-<div class="avatar-item-container">
-  <div class="avatar-item-inner-container">
-    <kirby-avatar size="md" overlay="true" text="C"> </kirby-avatar>
-  </div>
-</div>
-<div class="avatar-item-container">
-  <div class="avatar-item-inner-container">
-    <kirby-avatar size="sm" overlay="true" text="C"> </kirby-avatar>
-  </div>
-</div>
+<cookbook-avatar-example-text></cookbook-avatar-example-text>
 
 <h2>Avatar with icon</h2>
-
-<div class="avatar-item-container">
-  <div class="avatar-item-inner-container">
-    <kirby-avatar size="lg" overlay="true">
-      <kirby-icon name="qr"></kirby-icon>
-    </kirby-avatar>
-  </div>
-</div>
-<div class="avatar-item-container">
-  <div class="avatar-item-inner-container">
-    <kirby-avatar size="md" overlay="true">
-      <kirby-icon name="qr"></kirby-icon>
-    </kirby-avatar>
-  </div>
-</div>
-<div class="avatar-item-container">
-  <div class="avatar-item-inner-container">
-    <kirby-avatar size="sm" overlay="true">
-      <kirby-icon name="qr"></kirby-icon>
-    </kirby-avatar>
-  </div>
-</div>
+<cookbook-avatar-example-icon></cookbook-avatar-example-icon>
 
 <h2>Avatar with badge</h2>
+<cookbook-avatar-example-badge></cookbook-avatar-example-badge>
 
-<kirby-card>
-  <div class="avatar-item-container">
-    <div class="avatar-item-inner-container">
-      <kirby-avatar size="lg" overlay="true">
-        <kirby-icon name="cog"></kirby-icon>
-        <kirby-badge>
-          <kirby-icon name="attach"></kirby-icon>
-        </kirby-badge>
-      </kirby-avatar>
-    </div>
-  </div>
-  <div class="avatar-item-container">
-    <div class="avatar-item-inner-container">
-      <kirby-avatar size="md" overlay="true">
-        <kirby-icon name="cog"></kirby-icon>
-        <kirby-badge>
-          <kirby-icon name="attach"></kirby-icon>
-        </kirby-badge>
-      </kirby-avatar>
-    </div>
-  </div>
-  <div class="avatar-item-container">
-    <div class="avatar-item-inner-container">
-      <kirby-avatar size="sm" overlay="true">
-        <kirby-icon name="cog"></kirby-icon>
-        <kirby-badge>
-          <kirby-icon name="attach"></kirby-icon>
-        </kirby-badge>
-      </kirby-avatar>
-    </div>
-  </div>
-</kirby-card>
-
-<h2>Sizes</h2>
-
-<div class="avatar-item-container" *ngFor="let size of sizes | keyvalue">
-  <div class="avatar-item-inner-container">
-    <kirby-avatar
-      [imageSrc]="imageSrc"
-      [altText]="altText"
-      [size]="size.value"
-      overlay="true"
-      shadow="true"
-    ></kirby-avatar>
-    <span class="avatar-item-title">{{ size.value }}</span>
-  </div>
-</div>
+<h2>Avatar with image</h2>
+<cookbook-avatar-example-image></cookbook-avatar-example-image>
+<cookbook-avatar-example-image-size></cookbook-avatar-example-image-size>

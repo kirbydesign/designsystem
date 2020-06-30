@@ -1,0 +1,21 @@
+@import '../../scss/utils';
+
+.circle {
+  stroke: get-color('semi-light');
+}
+.progress {
+  transition-property: stroke-dashoffset, stroke;
+  transition-duration: get-transition-duration('extra-long');
+  transition-timing-function: get-transition-easing('enter-exit');
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+  stroke: var(--kirby-progress-circle-stroke-color, #{get-color('success')});
+}
+
+:host {
+  @each $color-name, $color-value in $notification-colors {
+    &.#{$color-name} {
+      --kirby-progress-circle-stroke-color: #{$color-value};
+    }
+  }
+}

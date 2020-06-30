@@ -1,3 +1,4 @@
+import { ProgressCircleShowcaseComponent } from './progress-circle-showcase/progress-circle-showcase.component';
 import { FormFieldShowcaseComponent } from './form-field-showcase/form-field-showcase.component';
 import { ListNoShapeShowcaseComponent } from './list-no-shape-showcase/list-no-shape-showcase.component';
 import { ListSwipeShowcaseComponent } from './list-swipe-showcase/list-swipe-showcase.component';
@@ -77,6 +78,7 @@ export const COMPONENT_EXPORTS: any[] = [
   ReorderListShowcaseComponent,
   DropdownShowcaseComponent,
   StockChartShowcaseComponent,
+  ProgressCircleShowcaseComponent,
 ];
 
 export const COMPONENT_DECLARATIONS: any[] = [...COMPONENT_EXPORTS, ShowcaseComponent];

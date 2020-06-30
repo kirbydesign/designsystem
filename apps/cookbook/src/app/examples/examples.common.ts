@@ -48,6 +48,7 @@ import { DividerExampleComponent } from './divider-example/divider-example.compo
 import { ReorderListExampleComponent } from './reorder-list/reorder-list-example.component';
 import { DropdownExampleComponent } from '~/app/examples/dropdown-example/dropdown-example.component';
 import { StockChartExampleComponent } from './stock-chart-example/stock-chart-example.component';
+import { ProgressCircleExampleComponent } from './progress-circle-example/progress-circle-example.component';
 
 // Example of "custom" icons
 export const iconSettings: IconSettings = {
@@ -112,6 +113,7 @@ export const COMPONENT_DECLARATIONS: any[] = [
   ReorderListExampleComponent,
   DropdownExampleComponent,
   StockChartExampleComponent,
+  ProgressCircleExampleComponent,
 ];
 
 // Configure custom icons (used by example to show the usage of custom icons)

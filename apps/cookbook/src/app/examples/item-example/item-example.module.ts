@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { KirbyModule } from '@kirbydesign/designsystem';
+
 import { ItemExampleSimpleComponent } from './examples/simple/default';
 import { ItemExampleLongTitleComponent } from './examples/simple/long-title';
 import { ItemExampleSimpleTwoLinesComponent } from './examples/simple/two-lines';
@@ -25,6 +26,8 @@ import { ItemExampleButtonComponent } from './examples/button';
 import { ItemExampleSimpleMediumComponent } from './examples/simple/default-md';
 import { ItemExampleSimpleSmallComponent } from './examples/simple/default-sm';
 import { ItemExampleSimpleExtraSmallComponent } from './examples/simple/default-xs';
+import { ItemExampleInputDefaultComponent } from './examples/input/default';
+import { ItemExampleInputNumericComponent } from './examples/input/numeric';
 import { ItemExampleCardComponent } from './examples/card';
 
 const COMPONENT_DECLARATIONS = [
@@ -51,6 +54,8 @@ const COMPONENT_DECLARATIONS = [
   ItemExampleAvatarFlaggedThreeLinesComponent,
   ItemExampleButtonComponent,
   ItemExampleHorizontalComponent,
+  ItemExampleInputDefaultComponent,
+  ItemExampleInputNumericComponent,
   ItemExampleCardComponent,
 ];
 
