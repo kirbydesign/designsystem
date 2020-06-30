@@ -1,17 +1,15 @@
-import { Spectator, createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { createHostFactory, Spectator, SpectatorHost } from '@ngneat/spectator';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { fakeAsync, tick } from '@angular/core/testing';
-import { MockComponents } from 'ng-mocks';
+import { MockComponents, MockDirectives } from 'ng-mocks';
 import { IonItem } from '@ionic/angular';
 
 import { DropdownComponent } from './dropdown.component';
-import { ButtonComponent } from '../button/button.component';
-import { IconComponent } from '../icon/icon.component';
-import { CardComponent } from '../card/card.component';
-import { ItemComponent } from '../item/item.component';
+import { ButtonComponent, CardComponent, IconComponent, ItemComponent } from '..';
 import { TestHelper } from '../../testing/test-helper';
 import { ListItemTemplateDirective } from '../list';
 import { DesignTokenHelper } from '../../helpers';
+import { SizeDirective } from '../../directives';
 
 @Component({
   template: '<ng-content></ng-content>',
@@ -832,6 +830,78 @@ describe('DropdownComponent', () => {
           spectator.component.disabled = false;
           spectator.component.setDisabledState(true);
           expect(spectator.component.disabled).toBeTruthy();
+        });
+      });
+    });
+  });
+
+  describe('when configured with size', () => {
+    let spectator: SpectatorHost<DropdownComponent>;
+    let buttonSizeDirective: SizeDirective;
+
+    const createHost = createHostFactory({
+      component: DropdownComponent,
+      declarations: [
+        MockComponents(ButtonComponent, CardComponent, ItemComponent, IconComponent),
+        MockDirectives(SizeDirective),
+      ],
+    });
+
+    function getButtonSizeDirective() {
+      return spectator.query(ButtonComponent, { read: SizeDirective });
+    }
+
+    describe('through template one-time string initialization', () => {
+      function getSpectatorWithStringSize(size: string) {
+        return createHost(`<kirby-dropdown size="${size}"></kirby-dropdown>`, {
+          props: { items: items },
+        });
+      }
+
+      it('should have small size on button', () => {
+        const size = 'sm';
+        spectator = getSpectatorWithStringSize(size);
+        buttonSizeDirective = getButtonSizeDirective();
+        expect(buttonSizeDirective.size).toBe(size);
+      });
+
+      it('should have medium size on button', () => {
+        const size = 'md';
+        spectator = getSpectatorWithStringSize(size);
+        buttonSizeDirective = getButtonSizeDirective();
+        expect(buttonSizeDirective.size).toBe(size);
+      });
+    });
+
+    describe('through input properties', () => {
+      function getSpectatorWithSize(size: 'sm' | 'md') {
+        return createHost(`<kirby-dropdown></kirby-dropdown>`, {
+          props: { items: items, size: size },
+        });
+      }
+
+      it('should have small size on button', () => {
+        const size = 'sm';
+        spectator = getSpectatorWithSize(size);
+        console.log(spectator.query(ButtonComponent));
+        buttonSizeDirective = getButtonSizeDirective();
+        expect(buttonSizeDirective.size).toBe(size);
+      });
+
+      it('should have medium size on button', () => {
+        const size = 'md';
+        spectator = getSpectatorWithSize(size);
+        buttonSizeDirective = getButtonSizeDirective();
+        expect(buttonSizeDirective.size).toBe(size);
+      });
+
+      describe('when changing size', () => {
+        it('should have correct size', () => {
+          const newSize = 'sm';
+          spectator = getSpectatorWithSize('md');
+          spectator.setInput('size', newSize);
+          buttonSizeDirective = getButtonSizeDirective();
+          expect(buttonSizeDirective.size).toEqual(newSize);
         });
       });
     });
