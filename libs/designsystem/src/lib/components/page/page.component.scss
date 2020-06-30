@@ -12,10 +12,10 @@ ion-toolbar {
 
 ion-toolbar {
   --border-width: 0 !important;
-  --padding-start: #{size('xxs')};
-  --padding-end: #{size('xxs')};
+  --padding-start: #{size('xxxs')};
+  --padding-end: #{size('xxxs')};
   --padding-top: 0;
-  --padding-bottom: #{size('xxxs')};
+  --padding-bottom: 0;
 
   /*
   * This overrides Ionic's default ios styling for the position of secondary action buttons which are to the left of content: https://ionicframework.com/docs/api/toolbar#buttons
@@ -59,12 +59,8 @@ ion-title {
 ion-back-button {
   --color: #{get-color('black')};
   --icon-font-size: 24px;
-  $fatFingerSize: 44;
-  $paddingStart: 8;
-  $iconWidth: 15;
-  --min-height: #{$fatFingerSize}px;
-  --padding-start: #{$paddingStart}px;
-  --padding-end: #{$fatFingerSize - $paddingStart - $iconWidth}px;
+  height: $fat-finger-size;
+  width: $fat-finger-size;
 }
 
 /*
