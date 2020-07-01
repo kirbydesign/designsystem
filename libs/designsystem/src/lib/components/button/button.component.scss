@@ -208,12 +208,7 @@
     width: $fat-finger-size;
   }
 
-  &.attention-level1,
-  &.attention-level2,
-  &.attention-level3,
-  &.attention-level4 {
-    @include button-attentionlevel4;
-  }
+  @include button-attentionlevel4;
 }
 /* clean-css ignore:end */
 
