@@ -1,14 +1,24 @@
 @import '../../scss/utils';
 
 :host {
+  display: block;
   background-color: var(--kirby-flag-background-color, get-color('white'));
   color: var(--kirby-flag-color, get-color('white-contrast'));
   border-radius: 4px;
+  font-size: font-size('n');
 
   padding-top: 2px;
   padding-right: 4px;
   padding-bottom: 2px;
   padding-left: 4px;
+
+  &.sm {
+    font-size: font-size('s');
+  }
+
+  &.xs {
+    font-size: font-size('xs');
+  }
 }
 
 @each $color-name, $color-value in $notification-colors {
@@ -31,4 +41,5 @@
 
 :host(.transparent) {
   border: 1px solid var(--kirby-flag-border-color, get-color('medium'));
+  background-color: transparent;
 }

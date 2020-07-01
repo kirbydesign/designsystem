@@ -1,8 +1,14 @@
 @import './libs/designsystem/src/lib/scss/utils';
 
-.flag-examples {
-  display: inline-flex;
-  kirby-flag + kirby-flag {
-    margin-left: size('s');
+.flag-example-wrapper {
+  display: flex;
+  flex-direction: column;
+
+  .flag-examples {
+    display: inline-flex;
+    kirby-flag + kirby-flag {
+      margin-left: size('s');
+    }
+    margin-bottom: size('s');
   }
 }
