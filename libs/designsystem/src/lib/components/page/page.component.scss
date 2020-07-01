@@ -26,8 +26,6 @@ ion-toolbar {
   }
 
   ion-title {
-    padding-bottom: var(--padding-bottom);
-
     .toolbar-title {
       @include slotted('*') {
         text-overflow: ellipsis;
