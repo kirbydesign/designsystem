@@ -215,11 +215,10 @@
 // Temp fix for https://github.com/angular/angular-cli/issues/13854#issuecomment-470831308
 /* clean-css ignore:start */
 :host-context(.page-title kirby-page-actions) {
-  &.attention-level1,
-  &.attention-level2,
-  &.attention-level3,
-  &.attention-level4 {
-    @include button-attentionlevel2;
+  @include button-attentionlevel2;
+
+  &.attention-level1 {
+    @include button-attentionlevel1;
   }
 }
 /* clean-css ignore:end */
