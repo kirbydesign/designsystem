@@ -17,7 +17,7 @@ import { IconComponent } from '../icon/icon.component';
 })
 export class ButtonComponent implements AfterContentInit {
   @HostBinding('class.attention-level1')
-  isAttentionLevel1: boolean = true; // Default
+  isAttentionLevel1: boolean; // Default
   @HostBinding('class.attention-level2')
   isAttentionLevel2: boolean;
   @HostBinding('class.attention-level3')

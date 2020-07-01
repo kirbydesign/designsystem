@@ -71,6 +71,7 @@
 }
 
 :host {
+  @include button-attentionlevel1;
   font-family: var(--kirby-font-family);
   background-color: var(--kirby-button-background-color);
   border-radius: $border-radius-round;
