@@ -12,8 +12,9 @@ export class FlagComponent {
   @Input() size: 'xs' | 'sm' | 'md' = 'md';
   @Input() themeColor: 'success' | 'warning' | 'danger' | 'semi-light' | 'transparent' =
     'transparent';
+
   @HostBinding('class')
-  get _themeColor() {
-    return this.themeColor;
+  get _cssClass() {
+    return [this.themeColor, this.size];
   }
 }
