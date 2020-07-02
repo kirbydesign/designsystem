@@ -1,0 +1,40 @@
+@import './libs/designsystem/src/lib/scss/utils';
+
+:host {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: size('s');
+
+  > * {
+    margin-right: size('s');
+    margin-bottom: size('s');
+  }
+
+  flex-wrap: wrap;
+
+  &.align-top {
+    align-items: flex-start;
+  }
+}
+
+kirby-flag {
+  position: relative;
+}
+
+kirby-flag[title] {
+  margin-bottom: size('s');
+
+  &::before {
+    content: '';
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    transform: translateY(100%);
+    font-size: font-size('xs');
+    text-align: center;
+  }
+
+  &[title='(default)']::before {
+    content: '(default)';
+  }
+}

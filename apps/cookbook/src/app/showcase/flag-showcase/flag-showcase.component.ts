@@ -2,15 +2,12 @@ import { Component } from '@angular/core';
 
 import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
 
-declare var require: any;
 @Component({
   selector: 'cookbook-flag-showcase',
   templateUrl: './flag-showcase.component.html',
+  styleUrls: ['./flag-showcase.component.scss'],
 })
 export class FlagShowcaseComponent {
-  exampleHtml: string = require('!raw-loader!../../examples/flag-example/flag-example.component.html')
-    .default;
-
   properties: ShowcaseProperty[] = [
     {
       name: 'themeColor',
