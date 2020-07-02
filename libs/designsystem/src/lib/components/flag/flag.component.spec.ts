@@ -2,7 +2,6 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
 import { DesignTokenHelper, ThemeColorExtended } from '../../helpers/design-token-helper';
 import { FlagComponent } from './flag.component';
-import { SizeDirective } from '../../directives/size/size.directive';
 
 const getColor = DesignTokenHelper.getColor;
 const size = DesignTokenHelper.size;
@@ -14,7 +13,6 @@ describe('FlagComponent', () => {
 
   const createHost = createHostFactory({
     component: FlagComponent,
-    declarations: [SizeDirective],
   });
 
   beforeEach(() => {
@@ -28,7 +26,7 @@ describe('FlagComponent', () => {
 
   it('should render with correct display', () => {
     expect(element).toHaveComputedStyle({
-      display: 'block',
+      display: 'inline-block',
     });
   });
 
@@ -60,10 +58,10 @@ describe('FlagComponent', () => {
 
   it('should render with correct padding', () => {
     expect(element).toHaveComputedStyle({
-      'padding-left': size('xxxs'),
-      'padding-right': size('xxxs'),
-      'padding-top': '2px',
-      'padding-bottom': '2px',
+      'padding-left': size('xxs'),
+      'padding-right': size('xxs'),
+      'padding-top': size('xxxxs'),
+      'padding-bottom': size('xxxxs'),
     });
   });
 
@@ -74,16 +72,16 @@ describe('FlagComponent', () => {
         spectator.detectChanges();
       });
 
-      // it('should render with correct font-size', () => {
-      //   expect(element).toHaveComputedStyle({ 'font-size': fontSize('xs') });
-      // });
+      it('should render with correct font-size', () => {
+        expect(element).toHaveComputedStyle({ 'font-size': fontSize('xs') });
+      });
 
       it('should render with correct padding', () => {
         expect(element).toHaveComputedStyle({
           'padding-left': size('xxxs'),
           'padding-right': size('xxxs'),
-          'padding-top': '2px',
-          'padding-bottom': '2px',
+          'padding-top': size('xxxxs'),
+          'padding-bottom': size('xxxxs'),
         });
       });
     });
@@ -94,23 +92,23 @@ describe('FlagComponent', () => {
         spectator.detectChanges();
       });
 
-      // it('should render with correct font-size', () => {
-      //   expect(element).toHaveComputedStyle({ 'font-size': fontSize('s') });
-      // });
+      it('should render with correct font-size', () => {
+        expect(element).toHaveComputedStyle({ 'font-size': fontSize('s') });
+      });
 
       it('should render with correct padding', () => {
         expect(element).toHaveComputedStyle({
-          'padding-left': size('xxxs'),
-          'padding-right': size('xxxs'),
-          'padding-top': '2px',
-          'padding-bottom': '2px',
+          'padding-left': size('xxs'),
+          'padding-right': size('xxs'),
+          'padding-top': size('xxxxs'),
+          'padding-bottom': size('xxxxs'),
         });
       });
     });
   });
 
   describe(`when configured with themeColor`, () => {
-    const allowedThemeColors = ['success', 'warning', 'semi-light'] as const;
+    const allowedThemeColors = ['success', 'warning', 'danger', 'semi-light'] as const;
     type FlagThemeColor = typeof allowedThemeColors[number];
     const themeColors = allowedThemeColors.map((color) => getColor(color));
     themeColors.forEach((color) => {
@@ -122,16 +120,6 @@ describe('FlagComponent', () => {
           'background-color': color,
           color: getColor(color.name as ThemeColorExtended, 'contrast'),
         });
-      });
-    });
-
-    it(`should render with correct colors when themeColor = 'danger'`, async () => {
-      spectator.component.themeColor = 'danger';
-      spectator.detectChanges();
-
-      expect(element).toHaveComputedStyle({
-        'background-color': getColor('danger'),
-        color: getColor('white'),
       });
     });
 
