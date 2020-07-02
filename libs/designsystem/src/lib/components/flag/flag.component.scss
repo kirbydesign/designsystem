@@ -7,10 +7,10 @@
   border-radius: 4px;
   font-size: font-size('n');
 
-  padding-top: 2px;
-  padding-right: 4px;
-  padding-bottom: 2px;
-  padding-left: 4px;
+  padding-top: size('xxxxs');
+  padding-bottom: size('xxxxs');
+  padding-left: size('xxs');
+  padding-right: size('xxs');
 
   &.sm {
     font-size: font-size('s');
