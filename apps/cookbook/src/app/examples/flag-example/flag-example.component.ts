@@ -5,8 +5,4 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './flag-example.component.html',
   styleUrls: ['./flag-example.component.scss'],
 })
-export class FlagExampleComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit() {}
-}
+export class FlagExampleComponent {}
