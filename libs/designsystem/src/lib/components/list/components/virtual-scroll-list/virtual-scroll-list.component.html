@@ -41,7 +41,7 @@
   [footerFn]="listComponent.footerFn"
   [class.has-footer]="listComponent.footerTemplate"
   [class.has-divider]="listComponent.showDivider"
-  (window:resize)="listComponent.onResize()"
+  (window:resize)="listComponent.onResize(slidingItem?.ionItemSliding?.closeOpened)"
   #list
 >
   <ng-container *virtualHeader="let header">
