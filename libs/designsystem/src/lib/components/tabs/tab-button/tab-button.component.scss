@@ -12,22 +12,32 @@ ion-tab-button {
   --kirby-badge-left: calc(50% + 5px);
   --kirby-badge-top: 0;
 
+  @include media('>=medium') {
+    flex: none;
+    padding: 0 size('m');
+    margin-right: size('m');
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    font-size: font-size('s');
+    flex-direction: row;
+
+    --kirby-badge-top: -5px;
+    --kirby-badge-left: auto;
+    --kirby-badge-right: -5px;
+
+    .icon-container {
+      position: relative;
+      margin-right: size('xxs');
+    }
+  }
+
   @include media('>=large') {
     @include not-touch {
-      flex: none;
       padding: 0 size('xs');
-
-      font-size: font-size('s');
-      flex-direction: row;
-
-      --kirby-badge-top: -5px;
-      --kirby-badge-left: auto;
-      --kirby-badge-right: -5px;
-
-      .icon-container {
-        position: relative;
-        margin-right: size('xxs');
-      }
+      margin-right: 0;
     }
   }
 }
