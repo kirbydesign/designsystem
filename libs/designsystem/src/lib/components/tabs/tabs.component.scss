@@ -2,19 +2,25 @@
 
 ion-tabs {
   @include media('>=large') {
-    flex-direction: column-reverse;
+    @include not-touch {
+      flex-direction: column-reverse;
+    }
   }
 
   ion-tab-bar {
-    --background: #{get-color('background-color')};
-    --border: none;
+    --background: rgba(#{get-color('white-rgb')}, 0.94);
+    --border: 1px solid #{get-color('light')};
     --color: #{get-color('black')};
     max-width: var(--kirby-tab-bar-max-width, none);
+    align-self: center;
+    width: 100%;
 
     @include media('>=large') {
-      width: 100%;
-      margin: 0 auto;
-      justify-content: flex-end;
+      @include not-touch {
+        width: 100%;
+        margin: 0 auto;
+        justify-content: flex-end;
+      }
     }
   }
 }

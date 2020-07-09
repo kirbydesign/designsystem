@@ -13,19 +13,21 @@ ion-tab-button {
   --kirby-badge-top: 0;
 
   @include media('>=large') {
-    flex: none;
-    padding: 0 size('xs');
+    @include not-touch {
+      flex: none;
+      padding: 0 size('xs');
 
-    font-size: font-size('s');
-    flex-direction: row;
+      font-size: font-size('s');
+      flex-direction: row;
 
-    --kirby-badge-top: -5px;
-    --kirby-badge-left: auto;
-    --kirby-badge-right: -5px;
+      --kirby-badge-top: -5px;
+      --kirby-badge-left: auto;
+      --kirby-badge-right: -5px;
 
-    .icon-container {
-      position: relative;
-      margin-right: size('xxs');
+      .icon-container {
+        position: relative;
+        margin-right: size('xxs');
+      }
     }
   }
 }
