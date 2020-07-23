@@ -11,18 +11,18 @@ ion-tabs {
     --background: rgba(#{get-color('white-rgb')}, 0.94);
     --border: 1px solid #{get-color('light')};
     --color: #{get-color('black')};
-  }
 
-  .tab-bar-content {
     display: flex;
     max-width: var(--kirby-tab-bar-max-width, none);
     justify-content: center;
+
+    $padding: calc((100vw - var(--kirby-tab-bar-max-width, none)) / 2);
+    padding-left: $padding;
+    padding-right: $padding;
     width: 100%;
-    height: 100%;
 
     @include media('>=large') {
       @include not-touch {
-        width: 100%;
         margin: 0 auto;
         justify-content: flex-end;
       }
