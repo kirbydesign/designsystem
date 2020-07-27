@@ -6,8 +6,13 @@
 ion-header,
 ion-toolbar {
   --background: #{get-color('background-color')};
-  max-width: 768px;
   margin: 0 auto;
+
+  @include media('>=large') {
+    @include not-touch {
+      max-width: 768px;
+    }
+  }
 }
 
 ion-toolbar {
