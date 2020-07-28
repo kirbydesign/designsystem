@@ -44,6 +44,7 @@ export class FabSheetComponent implements AfterContentInit, AfterViewInit {
   ngAfterViewInit(): void {
     const kirbyCloseIcon = kirbyIconSettings.icons.find((icon) => icon.name === 'close');
     this.setCloseIcon(kirbyCloseIcon);
+    this.renderer.addClass(this.backdropEl, 'fab-sheet-backdrop');
   }
 
   private setCloseIcon(kirbyCloseIcon: Icon, retryCount = 0) {
