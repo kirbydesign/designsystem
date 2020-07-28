@@ -61,6 +61,10 @@ export class DesignTokenHelper {
   public static avatarSize(key: 'xs' | 's' | 'm' | 'l'): string {
     return styles.avatarSizes[key];
   }
+
+  public static fatFingerSize(): string {
+    return styles.fatFingerSize;
+  }
 }
 
 export type ThemeColorExtended =

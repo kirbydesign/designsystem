@@ -138,3 +138,11 @@
     @content;
   }
 }
+
+// Only apply the styles on non touch devices
+// (fine pointer and hover):
+@mixin not-touch() {
+  @media (hover: hover) and (pointer: fine) {
+    @content;
+  }
+}

@@ -12,7 +12,12 @@
       </td>
       <td *ngIf="columns.Description">{{ prop.description }}</td>
       <td *ngIf="columns.Type">
-        <pre><code>{{ prop.inputValues ? prop.inputValues.join(' | ') : '' }}</code></pre>
+        <ng-container *ngIf="!prop.preserveInputValuesWhitespaces">
+          <code>{{ prop.inputValues ? prop.inputValues.join(' | ') : '' }}</code>
+        </ng-container>
+        <pre
+          *ngIf="prop.preserveInputValuesWhitespaces"
+        ><code>{{ prop.inputValues ? prop.inputValues.join(' | ') : '' }}</code></pre>
       </td>
       <td *ngIf="columns.Default">
         <code>{{ prop.defaultValue }}</code>

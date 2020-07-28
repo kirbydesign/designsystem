@@ -6,16 +6,21 @@
 ion-header,
 ion-toolbar {
   --background: #{get-color('background-color')};
-  max-width: 768px;
   margin: 0 auto;
+
+  @include media('>=large') {
+    @include not-touch {
+      max-width: 768px;
+    }
+  }
 }
 
 ion-toolbar {
   --border-width: 0 !important;
-  --padding-start: #{size('xxs')};
-  --padding-end: #{size('xxs')};
+  --padding-start: #{size('xxxs')};
+  --padding-end: #{size('xxxs')};
   --padding-top: 0;
-  --padding-bottom: #{size('xxxs')};
+  --padding-bottom: 0;
 
   /*
   * This overrides Ionic's default ios styling for the position of secondary action buttons which are to the left of content: https://ionicframework.com/docs/api/toolbar#buttons
@@ -26,8 +31,6 @@ ion-toolbar {
   }
 
   ion-title {
-    padding-bottom: var(--padding-bottom);
-
     .toolbar-title {
       @include slotted('*') {
         text-overflow: ellipsis;
@@ -59,8 +62,8 @@ ion-title {
 ion-back-button {
   --color: #{get-color('black')};
   --icon-font-size: 24px;
-  width: 24px;
-  height: 24px;
+  height: $fat-finger-size;
+  width: $fat-finger-size;
 }
 
 /*

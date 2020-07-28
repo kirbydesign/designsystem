@@ -37,6 +37,7 @@ export class SegmentedControlShowcaseComponent {
   }
 }]`,
       ],
+      preserveInputValuesWhitespaces: true,
     },
     {
       name: 'value',
