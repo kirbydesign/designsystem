@@ -7,6 +7,7 @@ import {
   AfterViewInit,
   ViewChild,
   ElementRef,
+  Renderer2,
 } from '@angular/core';
 import { IonFab, IonFabButton, IonIcon } from '@ionic/angular';
 
@@ -29,21 +30,21 @@ export class FabSheetComponent implements AfterContentInit, AfterViewInit {
     return this._isFabSheetOpen;
   }
 
-  private _isBackdropVisible: boolean = false;
-  @HostBinding('class.backdrop-visible')
-  get isBackdropVisible() {
-    return this._isBackdropVisible;
-  }
-
   @ContentChild(ActionSheetComponent, { static: false }) actionSheet: ActionSheetComponent;
 
   @ViewChild(IonFabButton, { static: true, read: ElementRef }) ionFabButton: ElementRef<
     HTMLElement
   >;
+  @ViewChild(IonFab, { static: false, read: IonFab }) fab: IonFab;
+
+  private backdropEl = this.renderer.createElement('ion-backdrop');
+
+  constructor(private renderer: Renderer2) {}
 
   ngAfterViewInit(): void {
     const kirbyCloseIcon = kirbyIconSettings.icons.find((icon) => icon.name === 'close');
     this.setCloseIcon(kirbyCloseIcon);
+    this.renderer.addClass(this.backdropEl, 'fab-sheet-backdrop');
   }
 
   private setCloseIcon(kirbyCloseIcon: Icon, retryCount = 0) {
@@ -77,11 +78,29 @@ export class FabSheetComponent implements AfterContentInit, AfterViewInit {
   hideActions(fab: IonFab) {
     fab.close();
     this._isFabSheetOpen = false;
-    this._isBackdropVisible = false;
+    this.removeBackdrop();
   }
 
   onFabClick(fab: IonFab) {
     this._isFabSheetOpen = !fab.activated;
-    setTimeout(() => (this._isBackdropVisible = this.isFabSheetOpen));
+    if (this._isFabSheetOpen) {
+      this.renderer.appendChild(document.querySelector('body'), this.backdropEl);
+      this.renderer.listen(this.backdropEl, 'ionBackdropTap', (e) => {
+        this.hideActions(this.fab);
+      });
+
+      setTimeout(() => {
+        this.renderer.addClass(document.querySelector('body'), 'backdrop-visible');
+      });
+    } else {
+      this.removeBackdrop();
+    }
+  }
+
+  removeBackdrop() {
+    this.renderer.removeClass(document.querySelector('body'), 'backdrop-visible');
+    setTimeout(() => {
+      this.renderer.removeChild(document.querySelector('body'), this.backdropEl);
+    }, 750);
   }
 }
