@@ -51,6 +51,7 @@ import { ReorderListExampleComponent } from './reorder-list/reorder-list-example
 import { DropdownExampleComponent } from '~/app/examples/dropdown-example/dropdown-example.component';
 import { StockChartExampleComponent } from './stock-chart-example/stock-chart-example.component';
 import { ProgressCircleExampleComponent } from './progress-circle-example/progress-circle-example.component';
+import { FlagExampleComponent } from './flag-example/flag-example.component';
 
 export const routes: Routes = [
   {
@@ -262,6 +263,10 @@ export const routes: Routes = [
   {
     path: 'badge',
     component: BadgeExampleComponent,
+  },
+  {
+    path: 'flag',
+    component: FlagExampleComponent,
   },
   {
     path: 'icon',
