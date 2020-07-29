@@ -44,7 +44,7 @@ export class FabSheetComponent implements AfterContentInit, AfterViewInit {
     HTMLElement
   >;
 
-  constructor(private renderer: Renderer2, @Inject(DOCUMENT) private document: Document) {}
+  constructor(private renderer: Renderer2, @Inject(DOCUMENT) private document: any) {}
 
   ngAfterViewInit(): void {
     const kirbyCloseIcon = kirbyIconSettings.icons.find((icon) => icon.name === 'close');
