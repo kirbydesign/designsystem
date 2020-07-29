@@ -38,6 +38,7 @@ export class FabSheetComponent implements AfterContentInit, AfterViewInit {
   @ViewChild(IonFab, { static: false, read: IonFab }) fab: IonFab;
 
   private backdropEl = this.renderer.createElement('ion-backdrop');
+  private removeBackdropTimeoutId: any;
 
   constructor(private renderer: Renderer2) {}
 
@@ -83,6 +84,7 @@ export class FabSheetComponent implements AfterContentInit, AfterViewInit {
 
   onFabClick(fab: IonFab) {
     this._isFabSheetOpen = !fab.activated;
+    if (this.removeBackdropTimeoutId) clearInterval(this.removeBackdropTimeoutId);
     if (this._isFabSheetOpen) {
       this.renderer.appendChild(document.querySelector('body'), this.backdropEl);
       this.renderer.listen(this.backdropEl, 'ionBackdropTap', (e) => {
@@ -99,7 +101,7 @@ export class FabSheetComponent implements AfterContentInit, AfterViewInit {
 
   removeBackdrop() {
     this.renderer.removeClass(document.querySelector('body'), 'backdrop-visible');
-    setTimeout(() => {
+    this.removeBackdropTimeoutId = setTimeout(() => {
       this.renderer.removeChild(document.querySelector('body'), this.backdropEl);
     }, 750);
   }
