@@ -43,6 +43,21 @@ ion-fab {
   position: absolute;
 }
 
+ion-backdrop {
+  opacity: 0;
+  transition: opacity 750ms;
+  position: fixed;
+  z-index: 999;
+}
+
+:host(.backdrop-visible) ion-backdrop {
+  opacity: 0.4;
+
+  @include media('>=medium') {
+    opacity: 0;
+  }
+}
+
 ion-fab-list {
   margin-top: 76px;
   margin-bottom: 76px;
