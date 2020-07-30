@@ -155,6 +155,7 @@ ion-modal.kirby-overlay {
   .tabs-inner,
   ion-router-outlet,
   .ion-page {
+    overflow: visible;
     contain: none !important;
   }
 
