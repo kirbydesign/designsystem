@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import { ModalConfig, ModalController } from '@kirbydesign/designsystem';
+
 import { FirstEmbeddedModalExampleComponent } from './first-embedded-modal-example/first-embedded-modal-example.component';
 import { ModalCompactExampleComponent } from './compact-example/modal-compact-example.component';
 
@@ -12,7 +13,7 @@ const config = {
 <button kirby-button (click)="showModalWithFooter()">Show modal with footer</button>`,
   footerTemplate: `<p>Some content of the embedded component</p>
 ...
-<kirby-modal-footer>
+<kirby-modal-footer [snapToKeyboard]="false">
   <button kirby-button (click)="scrollToBottom()">Scroll to bottom</button>
 </kirby-modal-footer>`,
   defaultCodeSnippet: `constructor(private modalController: ModalController) {}
