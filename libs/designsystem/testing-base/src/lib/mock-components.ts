@@ -12,6 +12,7 @@ import { MockDividerComponent } from './components/mock.divider.component';
 import { MockDropdownComponent } from './components/mock.dropdown.component';
 import { MockEmptyStateComponent } from './components/mock.empty-state.component';
 import { MockFabSheetComponent } from './components/mock.fab-sheet.component';
+import { MockFlagComponent } from './components/mock.flag.component';
 import { MockFormFieldMessageComponent } from './components/mock.form-field-message.component';
 import { MockFormFieldComponent } from './components/mock.form-field.component';
 import { MockInputComponent } from './components/mock.input.component';
@@ -63,6 +64,7 @@ export const MOCK_COMPONENTS = [
   MockDropdownComponent,
   MockEmptyStateComponent,
   MockFabSheetComponent,
+  MockFlagComponent,
   MockFormFieldMessageComponent,
   MockFormFieldComponent,
   MockInputComponent,
