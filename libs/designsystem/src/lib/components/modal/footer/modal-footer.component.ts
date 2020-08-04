@@ -13,7 +13,7 @@ export class ModalFooterComponent implements OnInit, OnChanges {
   constructor(private elementRef: ElementRef<HTMLElement>) {}
 
   ngOnInit() {
-    this.kirbyModalFooterElement = this.elementRef.nativeElement.closest('ion-modal');
+    this.kirbyModalFooterElement = this.elementRef.nativeElement; //.nativeElement.closest('ion-footer');
 
     this.setSnapToKeyboard(this.snapToKeyboard);
   }
@@ -25,6 +25,8 @@ export class ModalFooterComponent implements OnInit, OnChanges {
   }
 
   private setSnapToKeyboard(value: boolean) {
-    this.kirbyModalFooterElement.style.setProperty('--snap-to-keyboard', value ? '1' : '0');
+    if (this.kirbyModalFooterElement) {
+      this.kirbyModalFooterElement.style.setProperty('--snap-to-keyboard', value ? '1' : '0');
+    }
   }
 }
