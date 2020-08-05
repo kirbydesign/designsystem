@@ -1,4 +1,4 @@
-import { forwardRef, Component } from '@angular/core';
+import { forwardRef, Component, Input } from '@angular/core';
 
 import { ModalFooterComponent } from '@kirbydesign/designsystem';
 
