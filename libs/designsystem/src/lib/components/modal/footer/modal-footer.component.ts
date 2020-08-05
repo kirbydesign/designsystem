@@ -13,7 +13,7 @@ export class ModalFooterComponent implements OnInit, OnChanges {
   constructor(private elementRef: ElementRef<HTMLElement>) {}
 
   ngOnInit() {
-    this.kirbyModalFooterElement = this.elementRef.nativeElement; //.nativeElement.closest('ion-footer');
+    this.kirbyModalFooterElement = this.elementRef.nativeElement;
 
     this.setSnapToKeyboard(this.snapToKeyboard);
   }
