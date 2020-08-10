@@ -10,3 +10,7 @@ ion-footer {
   padding-bottom: calc(#{size('s')} + var(--keyboard-offset, 0px));
   transition: padding-bottom $soft-keyboard-transition;
 }
+
+.light-bg {
+  background-color: get-color('background-color');
+}
