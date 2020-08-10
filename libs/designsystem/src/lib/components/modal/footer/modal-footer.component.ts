@@ -7,5 +7,5 @@ import { Component, Input } from '@angular/core';
 })
 export class ModalFooterComponent {
   @Input()
-  themeColor?: 'white' | 'light' = 'white';
+  themeColor?: 'white' | 'light';
 }
