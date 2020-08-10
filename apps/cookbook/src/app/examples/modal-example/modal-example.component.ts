@@ -13,7 +13,7 @@ const config = {
 <button kirby-button (click)="showModalWithFooter()">Show modal with footer</button>`,
   footerTemplate: `<p>Some content of the embedded component</p>
 ...
-<kirby-modal-footer [snapToKeyboard]="false">
+<kirby-modal-footer>
   <button kirby-button (click)="scrollToBottom()">Scroll to bottom</button>
 </kirby-modal-footer>`,
   defaultCodeSnippet: `constructor(private modalController: ModalController) {}
