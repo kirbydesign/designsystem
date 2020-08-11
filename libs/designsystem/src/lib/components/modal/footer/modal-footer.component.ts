@@ -7,6 +7,4 @@ import { Component, Input, HostBinding } from '@angular/core';
 })
 export class ModalFooterComponent {
   @HostBinding('class.snap-to-keyboard') @Input() snapToKeyboard = false;
-
-  constructor() {}
 }

@@ -7,10 +7,9 @@ ion-footer {
   align-items: center;
   background-color: get-color('white');
   padding: size('s');
-  padding-bottom: size('s');
-  transition: padding-bottom $soft-keyboard-transition;
 }
 
 :host(.snap-to-keyboard) ion-footer {
   padding-bottom: calc(#{size('s')} + var(--keyboard-offset, 0px));
+  transition: padding-bottom $soft-keyboard-transition;
 }
