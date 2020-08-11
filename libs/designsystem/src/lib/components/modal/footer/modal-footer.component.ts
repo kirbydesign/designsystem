@@ -6,5 +6,7 @@ import { Component, Input, HostBinding } from '@angular/core';
   styleUrls: ['./modal-footer.component.scss'],
 })
 export class ModalFooterComponent {
-  @HostBinding('class.snap-to-keyboard') @Input() snapToKeyboard = false;
+  @HostBinding('class.snap-to-keyboard')
+  @Input()
+  snapToKeyboard = false;
 }
