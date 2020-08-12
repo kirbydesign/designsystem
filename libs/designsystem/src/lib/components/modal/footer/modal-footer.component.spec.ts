@@ -5,15 +5,20 @@ import { createComponentFactory, Spectator } from '@ngneat/spectator';
 
 import { TestHelper } from '../../../testing/test-helper';
 import { ModalFooterComponent } from '../footer/modal-footer.component';
+import { DesignTokenHelper } from '../../../helpers/design-token-helper';
+
+const getColor = DesignTokenHelper.getColor;
 
 @Component({
-  template: '<kirby-modal-footer [snapToKeyboard]="snapToKeyboard"></kirby-modal-footer>',
+  template:
+    '<kirby-modal-footer [themeColor]="themeColor" [snapToKeyboard]="snapToKeyboard"></kirby-modal-footer>',
 })
 class TestHostComponent {
   snapToKeyboard = false;
+  themeColor = undefined;
 }
 
-describe('ModalWrapperComponent', () => {
+describe('ModalFooterComponent', () => {
   let spectator: Spectator<TestHostComponent>;
   let modalFooterElement: HTMLElement;
   let ionFooterElement: HTMLIonFooterElement;
@@ -55,6 +60,28 @@ describe('ModalWrapperComponent', () => {
       it('should not follow the keyboard up', () => {
         keyboardSlideIn();
         expectPaddingBottom().toEqual(PADDING_BOTTOM_NOT_PUSHED_BY_KEYBOARD);
+      });
+    });
+  });
+
+  describe('Footer background color', () => {
+    it('should default to white when themeColor not set', () => {
+      expect(ionFooterElement).toHaveComputedStyle({
+        'background-color': getColor('white'),
+      });
+    });
+
+    it('should be white when themeColor is white', () => {
+      spectator.setInput('themeColor', 'white');
+      expect(ionFooterElement).toHaveComputedStyle({
+        'background-color': getColor('white'),
+      });
+    });
+
+    it('should be background-color when themeColor is light', () => {
+      spectator.setInput('themeColor', 'light');
+      expect(ionFooterElement).toHaveComputedStyle({
+        'background-color': getColor('background-color'),
       });
     });
   });

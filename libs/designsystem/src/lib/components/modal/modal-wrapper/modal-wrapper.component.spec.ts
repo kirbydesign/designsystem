@@ -11,9 +11,6 @@ import { ButtonComponent } from '../../button/button.component';
 import { IconComponent } from '../../icon/icon.component';
 import { ModalFooterComponent } from '../footer/modal-footer.component';
 import { ModalWrapperComponent } from './modal-wrapper.component';
-import { DesignTokenHelper } from '../../../helpers/design-token-helper';
-
-const getColor = DesignTokenHelper.getColor;
 
 @Component({
   template: `
@@ -37,16 +34,6 @@ class DynamicFooterEmbeddedComponent {
   showFooter = false;
   isEnabled = false;
 }
-
-@Component({
-  template: `
-    <div>Some test content</div>
-    <kirby-modal-footer>
-      <button kirby-button>Test</button>
-    </kirby-modal-footer>
-  `,
-})
-class DefaultThemedFooterEmbeddedComponent {}
 
 @Component({
   template: `
@@ -219,32 +206,6 @@ describe('ModalWrapperComponent', () => {
       expect(ionContent.scrollY).toBeFalse;
     });
   });
-
-  // TODO: I need a little help here.
-  // describe('with default themed footer', () => {
-  //   beforeEach(() => {
-  //     spectator = createComponent({
-  //       props: {
-  //         config: {
-  //           title: 'Modal with footer',
-  //           component: DefaultThemedFooterEmbeddedComponent,
-  //         },
-  //       },
-  //     });
-  //   });
-
-  //   afterEach(() => {
-  //     // Ensure any observers are destroyed:
-  //     spectator.component.ngOnDestroy();
-  //   });
-
-  //   it('should default to white background on embedded footer', () => {
-  //     const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
-  //     expect(kirbyModalFooter).toHaveComputedStyle({
-  //       'background-color': getColor('white'),
-  //     });
-  //   });
-  // });
 
   describe('with embedded component with static footer', () => {
     beforeEach(() => {
