@@ -15,6 +15,7 @@ import { ModalFooterComponent } from '@kirbydesign/designsystem';
 })
 export class MockModalFooterComponent {
   @Input() themeColor: 'white' | 'light';
+  @Input() snapToKeyboard: boolean;
 }
 
 // #endregion

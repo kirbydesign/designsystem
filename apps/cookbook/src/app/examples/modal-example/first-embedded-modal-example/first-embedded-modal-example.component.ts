@@ -10,10 +10,12 @@ import { SecondEmbeddedModalExampleComponent } from '../second-embedded-modal-ex
 @Component({
   selector: 'cookbook-first-embedded-modal-example',
   templateUrl: './first-embedded-modal-example.component.html',
+  styleUrls: ['./first-embedded-modal-example.component.scss'],
 })
 export class FirstEmbeddedModalExampleComponent {
   props: { [key: string]: any };
-  showFooter: boolean = true;
+  showFooter = true;
+  snapFooterToKeyboard = false;
 
   constructor(
     @Inject(COMPONENT_PROPS) componentProps,
@@ -107,6 +109,10 @@ export class FirstEmbeddedModalExampleComponent {
       durationInMs: 1500,
     };
     this.toastController.showToast(config);
+  }
+
+  onSnapFooterToKeyboardCheckbox(checked: boolean) {
+    this.snapFooterToKeyboard = checked;
   }
 
   onAlertClose(result?: boolean): void {

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, HostBinding } from '@angular/core';
 
 @Component({
   selector: 'kirby-modal-footer',
@@ -8,4 +8,7 @@ import { Component, Input } from '@angular/core';
 export class ModalFooterComponent {
   @Input()
   themeColor?: 'white' | 'light';
+  @HostBinding('class.snap-to-keyboard')
+  @Input()
+  snapToKeyboard = false;
 }
