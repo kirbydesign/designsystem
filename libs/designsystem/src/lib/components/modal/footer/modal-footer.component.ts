@@ -6,8 +6,6 @@ import { Component, Input, HostBinding } from '@angular/core';
   styleUrls: ['./modal-footer.component.scss'],
 })
 export class ModalFooterComponent {
-  @Input()
-  themeColor?: 'white' | 'light';
   @HostBinding('class.snap-to-keyboard')
   @Input()
   snapToKeyboard = false;
