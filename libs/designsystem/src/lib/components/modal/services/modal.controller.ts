@@ -8,6 +8,7 @@ import { AlertConfig } from '../alert/config/alert-config';
 import { KirbyAnimation } from '../../../animation/kirby-animation';
 import { ModalConfig } from '../modal-wrapper/config/modal-config';
 import { Overlay } from './modal.interfaces';
+import { ModalOutlet } from './modal-outlet.service';
 
 @Injectable()
 export class ModalController {
@@ -17,14 +18,32 @@ export class ModalController {
   constructor(
     private modalHelper: ModalHelper,
     private actionSheetHelper: ActionSheetHelper,
-    private alertHelper: AlertHelper
-  ) {}
+    private alertHelper: AlertHelper,
+    private modalOutlet: ModalOutlet
+  ) {
+    this.resolveModal();
+  }
+
+  private resolveModal() {
+    this.modalOutlet.resolve$.subscribe(() => {
+      if (this.overlays.length === 0) this.showModal({ title: '' });
+    });
+  }
 
   public async showModal(config: ModalConfig, onClose?: (data?: any) => void): Promise<void> {
     if (config.hasOwnProperty('dim')) {
       console.warn('ModalConfig.dim is deprecated - please remove from your configuration.');
     }
-    await this.showAndRegisterOverlay(() => this.modalHelper.showModalWindow(config), onClose);
+
+    const onCloseOveride = () => {
+      this.modalOutlet.destroy();
+      onClose();
+    };
+
+    await this.showAndRegisterOverlay(
+      () => this.modalHelper.showModalWindow(config),
+      onCloseOveride
+    );
   }
 
   public async showActionSheet(

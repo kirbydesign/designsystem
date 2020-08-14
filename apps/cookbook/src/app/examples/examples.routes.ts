@@ -1,8 +1,6 @@
-import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { Routes, Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { Routes } from '@angular/router';
 
-import { ModalController } from '@kirbydesign/designsystem';
+import { ModalResolver } from '@kirbydesign/designsystem';
 
 import { ListNoShapeExampleComponent } from './list/components/no-shape/list-no-shape-example.component';
 import { AvatarExampleComponent } from './avatar-example/avatar-example.component';
@@ -56,23 +54,6 @@ import { DropdownExampleComponent } from '~/app/examples/dropdown-example/dropdo
 import { StockChartExampleComponent } from './stock-chart-example/stock-chart-example.component';
 import { ProgressCircleExampleComponent } from './progress-circle-example/progress-circle-example.component';
 import { IntroComponent } from '../intro/intro.component';
-
-@Injectable({ providedIn: 'root' })
-export class HeroResolver implements Resolve<any> {
-  constructor(private modalController: ModalController) {}
-
-  resolve(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): Observable<any> | Promise<any> | any {
-    const config: any = {
-      title: 'My Modal Title',
-    };
-    // TODO: NOT OPEN IF ALREADY OPEN
-    this.modalController.showModal(config);
-    return of(true);
-  }
-}
 
 export const routes: Routes = [
   {
@@ -164,19 +145,22 @@ export const routes: Routes = [
       {
         path: 'modal',
         component: ModalExamplePopoutComponent,
-        resolve: {
-          modal: HeroResolver,
-        },
         children: [
           {
             path: 'feature',
             outlet: 'modal',
             component: IntroComponent,
+            data: {
+              modalTitle: 'Feature 1',
+            },
           },
           {
             path: 'feature2',
             outlet: 'modal',
             component: ButtonExampleComponent,
+            data: {
+              modalTitle: 'Feature 2',
+            },
           },
         ],
       },
