@@ -18,6 +18,7 @@ matrix:
       addons:
         chrome: stable
       script:
+        - echo '//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}'
         - npm run lint
         - npm run extract-scss-variables
         - npm run test:ci
