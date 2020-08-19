@@ -73,6 +73,6 @@ matrix:
             all_branches: true
             condition: $TRAVIS_BRANCH != master
         - provider: script
-          script: ./.travis/deploy-helm.sh drbstaging.azurecr.io/kirbydesign/designsystem git$TRAVIS_COMMIT artifactsmanager cookbook config/helm/staging.yaml kirby.design
+          script: ./.travis/deploy-helm.sh drbstaging.azurecr.io/kirbydesign/designsystem git$TRAVIS_COMMIT designsystem cookbook config/helm/staging.yaml kirby.design
           on:
             branch: master
