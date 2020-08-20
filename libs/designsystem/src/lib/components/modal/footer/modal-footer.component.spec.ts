@@ -68,7 +68,6 @@ describe('ModalFooterComponent', () => {
     });
   });
 
-  // TODO: BDYPLH - 20200814 I need help with these tests
   describe('ModalFooterComponent background color', () => {
     it('should be background-color when themeColor is light', () => {
       spectator = createHost(`<kirby-modal-footer themeColor="light"></kirby-modal-footer>`);
