@@ -1,16 +1,12 @@
 import { Component } from '@angular/core';
 import { IonFooter } from '@ionic/angular';
-import { MockComponents, MockComponent } from 'ng-mocks';
-import {
-  createComponentFactory,
-  Spectator,
-  SpectatorHost,
-  createHostFactory,
-} from '@ngneat/spectator';
+import { MockComponents } from 'ng-mocks';
+import { SpectatorHost, createHostFactory } from '@ngneat/spectator';
 
 import { TestHelper } from '../../../testing/test-helper';
 import { ModalFooterComponent } from '../footer/modal-footer.component';
 import { DesignTokenHelper } from '../../../helpers/design-token-helper';
+import { ThemeColorDirective } from '../../../directives';
 
 const getColor = DesignTokenHelper.getColor;
 
@@ -21,29 +17,36 @@ class TestHostComponent {
   snapToKeyboard = false;
 }
 describe('ModalFooterComponent', () => {
-  let spectator: Spectator<TestHostComponent>;
+  let spectator: SpectatorHost<ModalFooterComponent, TestHostComponent>;
   let modalFooterElement: HTMLElement;
   let ionFooterElement: HTMLIonFooterElement;
 
-  const createComponent = createComponentFactory({
-    component: TestHostComponent,
-    entryComponents: [],
-    declarations: [TestHostComponent, ModalFooterComponent, MockComponents(IonFooter)],
+  const createHost = createHostFactory({
+    component: ModalFooterComponent,
+    host: TestHostComponent,
+    declarations: [MockComponents(IonFooter), ThemeColorDirective],
   });
 
-  beforeEach(() => {
-    spectator = createComponent();
-    modalFooterElement = spectator.element.querySelector('kirby-modal-footer');
-    ionFooterElement = spectator.element.querySelector('ion-footer');
-  });
+  beforeEach(() => {});
 
   it('should create', () => {
+    spectator = createHost(`<kirby-modal-footer></kirby-modal-footer>`);
     expect(spectator.component).toBeTruthy();
   });
 
   describe('Snap to keyboard', () => {
+    beforeEach(() => {
+      spectator = createHost(
+        `<kirby-modal-footer [snapToKeyboard]="snapToKeyboard"></kirby-modal-footer>`
+      );
+      modalFooterElement = spectator.element;
+      ionFooterElement = spectator.query('ion-footer');
+    });
+
     describe('when snapToKeyboard is true', () => {
-      beforeEach(() => spectator.setInput('snapToKeyboard', true));
+      beforeEach(() => {
+        spectator.setHostInput('snapToKeyboard', true);
+      });
 
       it('should follow the keyboard up', () => {
         keyboardSlideIn();
@@ -57,9 +60,8 @@ describe('ModalFooterComponent', () => {
     });
 
     describe('when snapToKeyboard is false', () => {
-      beforeEach(() => spectator.setInput('snapToKeyboard', false));
-
       it('should not follow the keyboard up', () => {
+        spectator.setHostInput('snapToKeyboard', false);
         keyboardSlideIn();
         expectPaddingBottom().toEqual(PADDING_BOTTOM_NOT_PUSHED_BY_KEYBOARD);
       });
@@ -67,31 +69,35 @@ describe('ModalFooterComponent', () => {
   });
 
   // TODO: BDYPLH - 20200814 I need help with these tests
-  // describe('ModalFooterComponent background color', () => {
-  //   fit('should be background-color when themeColor is light', () => {
-  //     spectator.element.setAttribute('themeColor', 'light');
-  //     const footer = spectator.element.querySelector('ion-footer');
-  //     expect(footer).toHaveComputedStyle({
-  //       'background-color': getColor('background-color'),
-  //     });
-  //   });
+  describe('ModalFooterComponent background color', () => {
+    it('should be background-color when themeColor is light', () => {
+      spectator = createHost(`<kirby-modal-footer themeColor="light"></kirby-modal-footer>`);
+      expect(spectator.query('ion-footer')).toHaveComputedStyle({
+        'background-color': getColor('background-color'),
+      });
+    });
 
-  //   fit('should be white when themeColor is white', () => {
-  //     spectator.element.setAttribute('themeColor', 'white');
-  //     const footer = spectator.element.querySelector('ion-footer');
-  //     expect(footer).toHaveComputedStyle({
-  //       'background-color': getColor('white'),
-  //     });
-  //   });
+    it('should be white when themeColor is white', () => {
+      spectator = createHost(`<kirby-modal-footer themeColor="white"></kirby-modal-footer>`);
+      expect(spectator.query('ion-footer')).toHaveComputedStyle({
+        'background-color': getColor('white'),
+      });
+    });
 
-  //   fit('should be white when themeColor not set', () => {
-  //     spectator.element.removeAttribute('themeColor');
-  //     const footer = spectator.element.querySelector('ion-footer');
-  //     expect(footer).toHaveComputedStyle({
-  //       'background-color': getColor('white'),
-  //     });
-  //   });
-  // });
+    it('should be white when themeColor not set', () => {
+      spectator = createHost(`<kirby-modal-footer></kirby-modal-footer>`);
+      expect(spectator.query('ion-footer')).toHaveComputedStyle({
+        'background-color': getColor('white'),
+      });
+    });
+
+    it('should be white when color set by themeColor is not supported', () => {
+      spectator = createHost(`<kirby-modal-footer themeColor="primary"></kirby-modal-footer>`);
+      expect(spectator.query('ion-footer')).toHaveComputedStyle({
+        'background-color': getColor('white'),
+      });
+    });
+  });
 
   // utility constants and functions
 
