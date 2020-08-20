@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 
+import { ActionSheetItem } from '@kirbydesign/designsystem';
+
 @Component({
   template: `
     <kirby-page [title]="title | async">
@@ -51,12 +53,28 @@ import { Observable, of } from 'rxjs';
         </p>
         <button kirby-button (click)="navigateToAccountSub()">Go to account sub</button>
       </kirby-page-content>
+
+      <kirby-fab-sheet *kirbyPageContent="{ fixed: true }" horizontalAlignment="right">
+        <kirby-icon name="write-message"></kirby-icon>
+        <kirby-action-sheet
+          header="Your action sheet header"
+          subheader="Your action sheet subheader"
+          [items]="items"
+          (itemSelect)="onItemSelect($event)"
+        >
+        </kirby-action-sheet>
+      </kirby-fab-sheet>
     </kirby-page>
   `,
   styleUrls: [],
 })
 export class TabExampleComponent implements OnInit {
   title: Observable<string>;
+  items: ActionSheetItem[] = [
+    { id: '1', text: 'Option 1' },
+    { id: '2', text: 'Option 2' },
+    { id: '3', text: 'Option 3' },
+  ];
 
   constructor(private route: ActivatedRoute, private router: Router) {}
 
@@ -64,6 +82,10 @@ export class TabExampleComponent implements OnInit {
     setTimeout(() => {
       this.title = of(this.route.snapshot.data.title);
     }, 300);
+  }
+
+  onItemSelect(item: ActionSheetItem) {
+    alert('item selected');
   }
 
   navigateToAccountSub() {

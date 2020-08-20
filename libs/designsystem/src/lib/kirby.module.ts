@@ -74,6 +74,7 @@ import { ResizeObserverFactory } from './components/shared/resize-observer/resiz
 import { ResizeObserverService } from './components/shared/resize-observer/resize-observer.service';
 import { ProgressCircleComponent } from './components/progress-circle/progress-circle.component';
 import { ProgressCircleRingComponent } from './components/progress-circle/progress-circle-ring.component';
+import { FlagComponent } from './components/flag/flag.component';
 
 const exportedDeclarations = [
   CardComponent,
@@ -120,6 +121,7 @@ const exportedDeclarations = [
   InfiniteScrollDirective,
   LoadingOverlayComponent,
   ProgressCircleComponent,
+  FlagComponent,
 ];
 
 const declarations = [

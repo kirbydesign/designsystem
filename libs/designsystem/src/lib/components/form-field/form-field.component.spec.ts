@@ -7,6 +7,7 @@ import { FormFieldComponent } from './form-field.component';
 import { FormFieldMessageComponent } from './form-field-message/form-field-message.component';
 import { InputComponent } from './input/input.component';
 import { TextareaComponent } from './textarea/textarea.component';
+import { ItemComponent } from '../item/item.component';
 
 const size = DesignTokenHelper.size;
 const fontSize = DesignTokenHelper.fontSize;
@@ -23,6 +24,7 @@ describe('FormFieldComponent', () => {
       InputComponent,
       TextareaComponent,
       InputCounterComponent,
+      ItemComponent,
     ],
   });
 
@@ -261,6 +263,55 @@ describe('FormFieldComponent', () => {
       it('should render the textarea within a label', () => {
         const textareaElement = spectator.queryHost('label textarea[kirby-textarea]');
         expect(textareaElement).toBeTruthy();
+      });
+    });
+  });
+
+  describe('When nested inside a kirby-item', () => {
+    describe('by default', () => {
+      beforeEach(() => {
+        spectator = createHost(
+          `<kirby-item>
+            <kirby-form-field>
+              <input kirby-input />
+            </kirby-form-field>
+          </kirby-item>`
+        );
+      });
+
+      it('should render with no bottom margin', () => {
+        const formFieldElement = spectator.queryHost('kirby-form-field');
+        expect(formFieldElement).toHaveComputedStyle({
+          'margin-bottom': '0px',
+        });
+      });
+    });
+
+    describe('and slotted end', () => {
+      beforeEach(() => {
+        spectator = createHost(
+          `<kirby-item>
+            <kirby-form-field slot="end">
+              <input kirby-input type="number"/>
+            </kirby-form-field>
+          </kirby-item>`
+        );
+      });
+
+      it('should render the input with correct text alignment', () => {
+        const formFieldElement = spectator.queryHost('input[kirby-input]');
+        expect(formFieldElement).toHaveComputedStyle({
+          'text-align': 'right',
+        });
+      });
+
+      describe('when input is type number', () => {
+        it('should render the input with correct font weight', () => {
+          const formFieldElement = spectator.queryHost('input[kirby-input]');
+          expect(formFieldElement).toHaveComputedStyle({
+            'font-weight': fontWeight('bold'),
+          });
+        });
       });
     });
   });

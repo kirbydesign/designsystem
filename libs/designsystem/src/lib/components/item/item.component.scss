@@ -31,6 +31,10 @@
       margin-inline-start: size('xs');
     }
 
+    @include slotted('kirby-form-field[slot="end"]') {
+      margin-inline-start: size('s');
+    }
+
     @include slotted('data[slot="end"]', '[detail][slot="end"], ion-reorder[slot="end"]') {
       margin-inline-start: size('s');
     }

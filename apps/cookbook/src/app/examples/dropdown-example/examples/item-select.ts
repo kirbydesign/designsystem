@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
 
 const config = {
   selector: 'cookbook-dropdown-example-item-select',
   template: `<kirby-dropdown
+  [size]="size"
   placeholder="Dropdown with event handler"
   [items]="items"
   (change)="onItemSelect($event)"
@@ -24,6 +25,7 @@ export class DropdownExampleItemSelectComponent {
     { id: 44, text: 'Item 4' },
     { id: 55, text: 'Item 5' },
   ];
+  @Input() size: string;
 
   constructor(private toastController: ToastController) {}
 
