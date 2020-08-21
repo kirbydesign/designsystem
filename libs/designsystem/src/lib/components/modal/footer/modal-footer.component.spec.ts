@@ -34,6 +34,26 @@ describe('ModalFooterComponent', () => {
     expect(spectator.component).toBeTruthy();
   });
 
+  describe('Set bottom padding', () => {
+    beforeEach(() => {
+      spectator = createHost(`<kirby-modal-footer></kirby-modal-footer>`);
+      modalFooterElement = spectator.element;
+      ionFooterElement = spectator.query('ion-footer');
+    });
+
+    it('when --kirby-safe-area-bottom is set', () => {
+      setSafeAreaBottom();
+      const expected = BASE_PADDING_PX + SAFE_AREA_BOTTOM_PX + 'px';
+      expectPaddingBottom().toEqual(expected);
+    });
+
+    it('when --kirby-safe-area-bottom is not set', () => {
+      clearSafeAreaBottom();
+      const expected = BASE_PADDING_PX + 'px';
+      expectPaddingBottom().toEqual(expected);
+    });
+  });
+
   describe('Snap to keyboard', () => {
     beforeEach(() => {
       spectator = createHost(
@@ -102,9 +122,18 @@ describe('ModalFooterComponent', () => {
 
   const KEYBOARD_HEIGHT_PX = 216; // sample value, depends upon device
   const BASE_PADDING_PX = 16;
+  const SAFE_AREA_BOTTOM_PX = 22;
 
   const PADDING_BOTTOM_NOT_PUSHED_BY_KEYBOARD = BASE_PADDING_PX + 'px';
   const PADDING_BOTTOM_PUSHED_BY_KEYBOARD = BASE_PADDING_PX + KEYBOARD_HEIGHT_PX + 'px';
+
+  function setSafeAreaBottom() {
+    modalFooterElement.style.setProperty('--kirby-safe-area-bottom', SAFE_AREA_BOTTOM_PX + 'px');
+  }
+
+  function clearSafeAreaBottom() {
+    modalFooterElement.style.removeProperty('--kirby-safe-area-bottom');
+  }
 
   function keyboardSlideIn() {
     modalFooterElement.style.setProperty('--keyboard-offset', KEYBOARD_HEIGHT_PX + 'px');
