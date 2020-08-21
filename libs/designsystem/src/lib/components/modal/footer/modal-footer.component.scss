@@ -8,5 +8,12 @@ ion-footer {
   background-color: get-color('white');
   padding: size('s');
   padding-bottom: calc(#{size('s')} + var(--keyboard-offset, 0px) + var(--kirby-safe-area-bottom));
+}
+
+:host(.snap-to-keyboard) ion-footer {
   transition: padding-bottom $soft-keyboard-transition;
+}
+
+:host(.light) ion-footer {
+  background-color: get-color('background-color');
 }
