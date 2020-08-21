@@ -6,6 +6,7 @@ import { createComponentFactory, Spectator } from '@ngneat/spectator';
 
 import { KirbyAnimation } from '../../../animation/kirby-animation';
 import { TestHelper } from '../../../testing/test-helper';
+
 import { ButtonComponent } from '../../button/button.component';
 import { IconComponent } from '../../icon/icon.component';
 import { ModalFooterComponent } from '../footer/modal-footer.component';
