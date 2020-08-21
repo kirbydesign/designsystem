@@ -7,11 +7,12 @@ ion-footer {
   align-items: center;
   background-color: get-color('white');
   padding: size('s');
-  padding-bottom: calc(#{size('s')} + var(--keyboard-offset, 0px) + var(--kirby-safe-area-bottom));
+  padding-bottom: calc(#{size('s')} + var(--kirby-safe-area-bottom));
 }
 
 :host(.snap-to-keyboard) ion-footer {
   transition: padding-bottom $soft-keyboard-transition;
+  padding-bottom: calc(#{size('s')} + var(--keyboard-offset, 0px) + var(--kirby-safe-area-bottom));
 }
 
 :host(.light) ion-footer {
