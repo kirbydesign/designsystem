@@ -61,11 +61,16 @@ ion-backdrop {
 
 kirby-card {
   overflow: inherit;
+  z-index: auto;
 
   @include slotted('div:last-child ion-reorder-group div:last-child>kirby-item') {
     border-bottom-left-radius: $border-radius;
     border-bottom-right-radius: $border-radius;
     overflow: hidden;
+  }
+
+  @include slotted('div kirby-item') {
+    z-index: 1; // for showing rounded corners on ios devices
   }
 
   @include slotted('div:first-child>kirby-item') {

@@ -1,19 +1,17 @@
 @import '../../scss/utils';
 
-$item-height: 56px;
-$dropdown-max-height: 5 * $item-height;
+$dropdown-max-height: 8 * $dropdown-item-height;
+$margin-horizontal-total: 2 * size('s');
 
 :host {
   --kirby_internal_min-screen-width: 320px;
   @include media('>=small') {
     --kirby_internal_min-screen-width: 375px;
   }
-  --kirby_internal_margin-horizontal-total: calc(2 * #{size('s')});
 
   display: inline-block;
   position: relative;
-  border: 1px solid transparent;
-  max-width: calc(100vw - var(--kirby_internal_margin-horizontal-total));
+  max-width: calc(100vw - #{$margin-horizontal-total});
 
   &.expand {
     display: block;
@@ -21,21 +19,44 @@ $dropdown-max-height: 5 * $item-height;
 
   &:not(.expand) {
     kirby-card {
-      max-width: calc(100vw - var(--kirby_internal_margin-horizontal-total));
+      min-width: calc(var(--kirby_internal_min-screen-width) - #{$margin-horizontal-total});
+      max-width: calc(100vw - #{$margin-horizontal-total});
+    }
+  }
+
+  // Outline is applied on button border instead,
+  // to keep the rounded shape:
+  outline: none;
+
+  // Only apply focus ring if pointer device can hover
+  // (effectively desktop/mouse devices):
+  @include focus() {
+    > button,
+    > button.attention-level3 {
+      border-color: $focus-ring-color;
     }
   }
 
   &.error,
   &.ng-touched.ng-invalid {
-    border-color: get-color('danger');
+    > button {
+      border-color: get-color('danger');
+    }
   }
 }
 
 :host > button {
+  position: relative;
   margin: 0;
   outline: none;
   width: 100%;
   transition: box-shadow 0.2s, border-color 0.2s;
+
+  // Temporary fix for button-width as attention level 3 has border,
+  // and attention level 2 does not:
+  &.attention-level2 {
+    border: 1px solid transparent;
+  }
 
   .text {
     overflow: hidden;
@@ -48,9 +69,6 @@ kirby-card {
   opacity: 0;
   position: absolute;
   width: 100%;
-  min-width: calc(
-    var(--kirby_internal_min-screen-width) - var(--kirby_internal_margin-horizontal-total)
-  );
   max-height: $dropdown-max-height;
   margin-top: size('xxxs');
   overflow-y: auto;
@@ -67,11 +85,32 @@ kirby-card {
 :host(.is-open) {
   & > button {
     box-shadow: get-elevation(8);
-    border: 1px solid transparent;
   }
 
   kirby-card {
     display: block;
     opacity: 1;
+  }
+}
+
+:host(.align-end) {
+  kirby-card {
+    right: 0;
+  }
+}
+
+// TODO: UI refine style and behaviour when open upwards...
+:host(.align-top) {
+  kirby-card {
+    top: 0;
+    margin-top: -#{size('xxxs')};
+    transform: translateY(-100%);
+  }
+
+  &.is-open {
+    > button {
+      //Move button on top of card's shadow:
+      z-index: z('dropdown') + 1;
+    }
   }
 }

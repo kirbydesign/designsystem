@@ -16,6 +16,8 @@ import {
   EventEmitter,
   OnDestroy,
   forwardRef,
+  AfterViewInit,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -35,9 +37,21 @@ import { CardComponent } from '../card/card.component';
     },
   ],
 })
-export class DropdownComponent implements AfterContentChecked, OnDestroy, ControlValueAccessor {
-  @Input()
-  items: string[] | any[] = [];
+export class DropdownComponent
+  implements AfterContentChecked, AfterViewInit, OnDestroy, ControlValueAccessor {
+  static readonly OPEN_DELAY_IN_MS = 100;
+  private state: 'closed' | 'opening' | 'open' = 'closed';
+  private hasConfiguredSlottedItems = false;
+
+  private _items: string[] | any[] = [];
+  get items(): string[] | any[] {
+    return this._items;
+  }
+
+  @Input() set items(value: string[] | any[]) {
+    this._items = value;
+    this._value = this.items[this.selectedIndex] || null;
+  }
 
   private _selectedIndex: number = -1;
   get selectedIndex(): number {
@@ -47,7 +61,7 @@ export class DropdownComponent implements AfterContentChecked, OnDestroy, Contro
   @Input() set selectedIndex(value: number) {
     if (this._selectedIndex != value) {
       this._selectedIndex = value;
-      this._value = this.items[this.selectedIndex];
+      this._value = this.items[this.selectedIndex] || null;
     }
   }
 
@@ -75,6 +89,9 @@ export class DropdownComponent implements AfterContentChecked, OnDestroy, Contro
   @HostBinding('class.error')
   @Input()
   hasError: boolean;
+
+  @Input()
+  size: 'sm' | 'md' = 'md';
 
   @Input()
   tabindex = 0;
@@ -107,10 +124,27 @@ export class DropdownComponent implements AfterContentChecked, OnDestroy, Contro
   _role = 'listbox';
 
   @HostBinding('class.is-opening')
-  _isOpening: boolean;
+  get _isOpening(): boolean {
+    return this.state === 'opening';
+  }
 
   @HostBinding('class.is-open')
-  isOpen = false;
+  get isOpen(): boolean {
+    return this.state === 'open';
+  }
+
+  @HostBinding('class.align-end')
+  _alignEnd: boolean;
+
+  @HostBinding('class.align-top')
+  _alignTop: boolean;
+
+  private set _horizontal(value: 'start' | 'end') {
+    this._alignEnd = value === 'end';
+  }
+  private set _vertical(value: 'up' | 'down') {
+    this._alignTop = value === 'up';
+  }
 
   @ContentChild(ListItemTemplateDirective, { static: true, read: TemplateRef })
   itemTemplate: TemplateRef<any>;
@@ -123,9 +157,15 @@ export class DropdownComponent implements AfterContentChecked, OnDestroy, Contro
   @ContentChildren(ItemComponent, { read: ElementRef })
   kirbyItemsSlotted: QueryList<ElementRef<HTMLElement>>;
 
-  private itemClickUnlisten: () => void;
+  private itemClickUnlisten: (() => void)[] = [];
+  private intersectionObserverRef: IntersectionObserver;
+  private showDropdownTimeoutId;
 
-  constructor(private renderer: Renderer2, private elementRef: ElementRef<HTMLElement>) {}
+  constructor(
+    private renderer: Renderer2,
+    private elementRef: ElementRef<HTMLElement>,
+    private changeDetectorRef: ChangeDetectorRef
+  ) {}
 
   onToggle(event: Event) {
     event.stopPropagation();
@@ -148,13 +188,66 @@ export class DropdownComponent implements AfterContentChecked, OnDestroy, Contro
   }
 
   ngAfterContentChecked() {
-    if (this.kirbyItemsSlotted.length) {
+    if (!this.hasConfiguredSlottedItems && this.kirbyItemsSlotted.length) {
       this.kirbyItemsSlotted.forEach((kirbyItem, index) => {
         this.renderer.setAttribute(kirbyItem.nativeElement, 'role', 'option');
-        this.itemClickUnlisten = this.renderer.listen(kirbyItem.nativeElement, 'click', () => {
+        const unlisten = this.renderer.listen(kirbyItem.nativeElement, 'click', () => {
           this.onItemSelect(index);
         });
+        this.itemClickUnlisten.push(unlisten);
       });
+      this.hasConfiguredSlottedItems = true;
+    }
+  }
+
+  ngAfterViewInit() {
+    this.initializeAlignment();
+  }
+
+  private initializeAlignment() {
+    if (!this.intersectionObserverRef) {
+      const options = {
+        rootMargin: '0px',
+      };
+      const callback: IntersectionObserverCallback = (entries) => {
+        // Only apply alignment when opening:
+        if (this.state !== 'opening') {
+          return;
+        }
+
+        // Cancel any pending timer to show dropdown:
+        clearTimeout(this.showDropdownTimeoutId);
+
+        const entry = entries[0];
+        const isVisible = entry.boundingClientRect.width > 0;
+        if (isVisible && entry.intersectionRatio < 1) {
+          // entry not fully showing:
+          if (entry.boundingClientRect.right > entry.rootBounds.right) {
+            // entry is cut off to the right by ${entry.boundingClientRect.right - entry.intersectionRect.right}px
+            // align to the end:
+            this._horizontal = 'end';
+          }
+          if (entry.boundingClientRect.top < 0) {
+            // entry is cut off at the top by ${entry.boundingClientRect.top}px
+            // open downwards:
+            this._vertical = 'down';
+          }
+          if (entry.boundingClientRect.bottom > entry.rootBounds.bottom) {
+            // entry is cut off at the bottom by ${entry.boundingClientRect.bottom - entry.intersectionRect.bottom}px
+            const containerOffsetTop = this.elementRef.nativeElement.getBoundingClientRect().top;
+            const spacing = 5; //TODO: Get from SCSS
+            // Check if the card can fit on top of button:
+            if (containerOffsetTop > entry.target.clientHeight + spacing) {
+              // open upwards:
+              this._vertical = 'up';
+            }
+          }
+        }
+        this.showDropdown();
+        this.changeDetectorRef.detectChanges();
+      };
+      this.intersectionObserverRef = new IntersectionObserver(callback, options);
+      this.intersectionObserverRef.observe(this.cardElement.nativeElement);
     }
   }
 
@@ -163,11 +256,20 @@ export class DropdownComponent implements AfterContentChecked, OnDestroy, Contro
       return;
     }
     if (!this.isOpen) {
-      this._isOpening = true;
-      setTimeout(() => {
-        this.isOpen = true;
-        this.scrollItemIntoView(this.selectedIndex);
-      });
+      this.state = 'opening';
+      // ensures that the dropdown is opened in case the IntersectionObserverCallback isn't invoked
+      this.showDropdownTimeoutId = setTimeout(
+        () => this.showDropdown(),
+        DropdownComponent.OPEN_DELAY_IN_MS
+      );
+    }
+  }
+
+  private showDropdown() {
+    if (this.state === 'opening') {
+      this.state = 'open';
+      this.scrollItemIntoView(this.selectedIndex);
+      this.changeDetectorRef.markForCheck();
     }
   }
 
@@ -176,8 +278,7 @@ export class DropdownComponent implements AfterContentChecked, OnDestroy, Contro
       return;
     }
     if (this.isOpen) {
-      this._isOpening = false;
-      this.isOpen = false;
+      this.state = 'closed';
     }
   }
 
@@ -380,8 +481,12 @@ export class DropdownComponent implements AfterContentChecked, OnDestroy, Contro
   }
 
   ngOnDestroy(): void {
-    if (this.itemClickUnlisten) {
-      this.itemClickUnlisten();
+    let unlisten: () => void;
+    while ((unlisten = this.itemClickUnlisten.pop()) !== undefined) {
+      unlisten();
+    }
+    if (this.intersectionObserverRef) {
+      this.intersectionObserverRef.disconnect();
     }
   }
 }

@@ -1,20 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-declare var require: any;
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'cookbook-chip-showcase',
   templateUrl: './chip-showcase.component.html',
   styleUrls: ['./chip-showcase.component.scss'],
 })
-export class ChipShowcaseComponent implements OnInit {
-  themeColors = ['light', 'dark'];
+export class ChipShowcaseComponent {
+  themeColors = [
+    { text: 'None', value: '' },
+    { text: 'Light', value: 'light' },
+    { text: 'Dark', value: 'dark' },
+  ];
   themeColor = '';
-  exampleHtml: string = require('!raw-loader!../../examples/chip-example/chip-example.component.html')
-    .default;
-
-  constructor() {}
-
-  ngOnInit() {}
 
   onThemeChange(themeColor) {
     this.themeColor = themeColor;

@@ -1,16 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-declare var require: any;
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'cookbook-chart-showcase',
   templateUrl: './chart-showcase.component.html',
   styleUrls: ['./chart-showcase.component.scss'],
 })
-export class ChartShowcaseComponent implements OnInit {
-  exampleHtml: string = require('!raw-loader!../../examples/chart-example/chart-example.component.html')
-    .default;
-
-  constructor() {}
-
-  ngOnInit() {}
-}
+export class ChartShowcaseComponent {}

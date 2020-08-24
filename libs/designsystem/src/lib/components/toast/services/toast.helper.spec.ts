@@ -12,7 +12,7 @@ describe('toastHelper', () => {
 
   const spectator = createService({
     service: ToastHelper,
-    imports: [IonicModule.forRoot()],
+    imports: [IonicModule.forRoot({ mode: 'ios', _testing: true })],
     providers: [ToastController],
   });
 

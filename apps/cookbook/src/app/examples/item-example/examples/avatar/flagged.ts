@@ -17,7 +17,9 @@ const config = {
     <h3>Lorem ipsum quam notem andamus gepulowitzh onga bonga bimmelon sid est insula</h3>
     <p detail>Phone, Internet, Streaming services og other</p>
   </kirby-label>
-  <data slot="end" value="300.00">EUR 300,00</data>
+  <kirby-flag slot="end" themeColor="success">
+    <data value="300.00">EUR 300,00</data>
+  </kirby-flag>
 </kirby-item>`,
   styles: [
     `.flag {
@@ -33,11 +35,6 @@ const config = {
     }`,
     `.flag:not(:last-child) {
       margin-bottom: 2px;
-    }`,
-    `data {
-      background-color: var(--kirby-success);
-      border-radius: 4px;
-      padding: 2px 8px;
     }`,
   ],
 };

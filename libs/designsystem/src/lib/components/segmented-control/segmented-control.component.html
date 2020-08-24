@@ -1,13 +1,11 @@
-<ion-segment mode="ios" *ngIf="isDefaultMode">
-  <div class="segment-btn-wrapper" *ngFor="let item of items" role="group">
-    <ion-segment-button
-      [value]="item"
-      class="kirby-text-small"
-      [checked]="item.checked"
-      (ionSelect)="onSegmentSelect(item)"
-    >
-      {{ item.text }}
-    </ion-segment-button>
+<ion-segment
+  *ngIf="!isChipMode"
+  [value]="value?.id"
+  (ionChange)="onSegmentSelect($event.detail.value)"
+  (click)="preventWrapperClick($event)"
+>
+  <div *ngFor="let item of items" class="segment-btn-wrapper">
+    <ion-segment-button [value]="item.id">{{ item.text }}</ion-segment-button>
     <kirby-badge
       *ngIf="item.badge"
       role="text"
@@ -18,13 +16,12 @@
   </div>
 </ion-segment>
 
-<div class="scrollable" role="group" *ngIf="isChipMode">
+<ng-container *ngIf="isChipMode">
   <kirby-chip
+    *ngFor="let item of items; let index = index"
     [text]="item.text"
-    [isSelected]="item.checked"
-    [attr.aria-selected]="item.checked"
-    (click)="onSegmentSelect(item)"
-    *ngFor="let item of items"
+    [isSelected]="index === selectedIndex"
+    (click)="onSegmentSelect(item.id)"
     role="button"
   ></kirby-chip>
-</div>
+</ng-container>

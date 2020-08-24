@@ -12,6 +12,7 @@ import { MockDividerComponent } from './components/mock.divider.component';
 import { MockDropdownComponent } from './components/mock.dropdown.component';
 import { MockEmptyStateComponent } from './components/mock.empty-state.component';
 import { MockFabSheetComponent } from './components/mock.fab-sheet.component';
+import { MockFlagComponent } from './components/mock.flag.component';
 import { MockFormFieldMessageComponent } from './components/mock.form-field-message.component';
 import { MockFormFieldComponent } from './components/mock.form-field.component';
 import { MockInputComponent } from './components/mock.input.component';
@@ -27,6 +28,7 @@ import { MockListComponent } from './components/mock.list.component';
 import { MockFullscreenLoadingOverlayComponent } from './components/mock.fullscreen-loading-overlay.component';
 import { MockLoadingOverlayComponent } from './components/mock.loading-overlay.component';
 import { MockActionSheetComponent } from './components/mock.action-sheet.component';
+import { MockModalFooterComponent } from './components/mock.modal-footer.component';
 import {
   MockPageTitleDirective,
   MockPageToolbarTitleDirective,
@@ -36,6 +38,7 @@ import {
   MockPageActionsComponent,
   MockPageComponent,
 } from './components/mock.page.component';
+import { MockProgressCircleComponent } from './components/mock.progress-circle.component';
 import { MockReorderListComponent } from './components/mock.reorder-list.component';
 import { MockRouterOutletComponent } from './components/mock.router-outlet.component';
 import { MockSegmentedControlComponent } from './components/mock.segmented-control.component';
@@ -61,6 +64,7 @@ export const MOCK_COMPONENTS = [
   MockDropdownComponent,
   MockEmptyStateComponent,
   MockFabSheetComponent,
+  MockFlagComponent,
   MockFormFieldMessageComponent,
   MockFormFieldComponent,
   MockInputComponent,
@@ -76,6 +80,7 @@ export const MOCK_COMPONENTS = [
   MockFullscreenLoadingOverlayComponent,
   MockLoadingOverlayComponent,
   MockActionSheetComponent,
+  MockModalFooterComponent,
   MockPageTitleDirective,
   MockPageToolbarTitleDirective,
   MockPageActionsDirective,
@@ -83,6 +88,7 @@ export const MOCK_COMPONENTS = [
   MockPageContentComponent,
   MockPageActionsComponent,
   MockPageComponent,
+  MockProgressCircleComponent,
   MockReorderListComponent,
   MockRouterOutletComponent,
   MockSegmentedControlComponent,

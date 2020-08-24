@@ -25,15 +25,15 @@ import { ItemComponent } from '../item/item.component';
 const getColor = DesignTokenHelper.getColor;
 const size = DesignTokenHelper.size;
 const fontSize = DesignTokenHelper.fontSize;
+const fatFingerSize = DesignTokenHelper.fatFingerSize();
 
 describe('ButtonComponent in Kirby Page', () => {
   let spectator: SpectatorHost<PageComponent>;
   const createHost = createHostFactory({
     component: PageComponent,
-    imports: [IonicModule.forRoot(), RouterTestingModule],
+    imports: [IonicModule.forRoot({ mode: 'ios', _testing: true }), RouterTestingModule],
     declarations: [
       ButtonComponent,
-      PageComponent,
       PageContentComponent,
       PageActionsComponent,
       PageActionsDirective,
@@ -54,7 +54,8 @@ describe('ButtonComponent in Kirby Page', () => {
           Test Title
         </ng-template>
         <kirby-page-actions *kirbyPageActions>
-          <button kirby-button>Test Action</button>
+          <button kirby-button class="text">Test Action</button>
+          <button kirby-button class="icon-only">Icon</button>
         </kirby-page-actions>
         <kirby-page-content>
           <p class="my-content">Custom Content...</kirby-page-content>
@@ -69,11 +70,15 @@ describe('ButtonComponent in Kirby Page', () => {
   describe('inside Toolbar', () => {
     let ionToolbar: HTMLElement;
     let actionButtonInHeader: HTMLButtonElement;
+    let actionButtonInHeaderIconOnly: HTMLButtonElement;
 
     beforeEach(() => {
       ionToolbar = spectator.queryHost('ion-toolbar');
       actionButtonInHeader = spectator.queryHost(
-        'ion-toolbar kirby-page-actions button[kirby-button]'
+        'ion-toolbar kirby-page-actions button[kirby-button].text'
+      );
+      actionButtonInHeaderIconOnly = spectator.queryHost(
+        'ion-toolbar kirby-page-actions button[kirby-button].icon-only'
       );
     });
 
@@ -93,11 +98,23 @@ describe('ButtonComponent in Kirby Page', () => {
       });
     });
 
-    it('should render without border', async () => {
+    it('should render with transparent border', async () => {
       await TestHelper.whenHydrated(ionToolbar);
       expect(actionButtonInHeader).toHaveComputedStyle({
-        'border-width': '0px',
-        'border-style': 'none',
+        'border-width': '1px',
+        'border-style': 'solid',
+        'border-color': 'transparent',
+      });
+    });
+
+    it('should render with correct size', () => {
+      expect(actionButtonInHeader).toHaveComputedStyle({
+        width: 'auto',
+        height: fatFingerSize,
+      });
+      expect(actionButtonInHeaderIconOnly).toHaveComputedStyle({
+        width: fatFingerSize,
+        height: fatFingerSize,
       });
     });
   });
@@ -131,11 +148,12 @@ describe('ButtonComponent in Kirby Page', () => {
       });
     });
 
-    it('should render without border', async () => {
+    it('should render with transparent border', async () => {
       await TestHelper.whenHydrated(ionContent);
       expect(actionButtonInPage).toHaveComputedStyle({
-        'border-width': '0px',
-        'border-style': 'none',
+        'border-width': '1px',
+        'border-style': 'solid',
+        'border-color': 'transparent',
       });
     });
   });
@@ -160,11 +178,12 @@ describe('ButtonComponent in Kirby Page', () => {
       });
     });
 
-    it('should render without border', async () => {
+    it('should render with transparent border', async () => {
       await TestHelper.whenHydrated(ionContent);
       expect(normalButtonInPage).toHaveComputedStyle({
-        'border-width': '0px',
-        'border-style': 'none',
+        'border-width': '1px',
+        'border-style': 'solid',
+        'border-color': 'transparent',
       });
     });
 
@@ -182,8 +201,8 @@ describe('ButtonComponent in kirby empty state', () => {
   let actionButtonInEmptyState: HTMLButtonElement;
   const createHost = createHostFactory({
     component: EmptyStateComponent,
-    imports: [IonicModule.forRoot(), RouterTestingModule],
-    declarations: [ButtonComponent, EmptyStateComponent, IconComponent],
+    imports: [IonicModule.forRoot({ mode: 'ios', _testing: true }), RouterTestingModule],
+    declarations: [ButtonComponent, IconComponent],
   });
 
   beforeEach(() => {
@@ -236,7 +255,7 @@ describe('ButtonComponent with size directive', () => {
   let element: HTMLButtonElement;
   const createHost = createHostFactory({
     component: ButtonComponent,
-    declarations: [ButtonComponent, SizeDirective, MockComponent(IconComponent)],
+    declarations: [SizeDirective, MockComponent(IconComponent)],
   });
 
   describe('when configured with size = SM', () => {
@@ -294,7 +313,7 @@ describe('ButtonComponent configured with icon only', () => {
   let element: HTMLButtonElement;
   const createHost = createHostFactory({
     component: ButtonComponent,
-    declarations: [ButtonComponent, SizeDirective, MockComponent(IconComponent)],
+    declarations: [SizeDirective, MockComponent(IconComponent)],
   });
 
   const attentionLevels = ['1', '2', '3', '4'];
@@ -439,7 +458,7 @@ describe('ButtonComponent configured with text and icon', () => {
   let element: HTMLButtonElement;
   const createHost = createHostFactory({
     component: ButtonComponent,
-    declarations: [ButtonComponent, SizeDirective, IconComponent, MockComponent(IonIcon)],
+    declarations: [SizeDirective, IconComponent, MockComponent(IonIcon)],
   });
 
   it('should render with correct icon font-size', () => {

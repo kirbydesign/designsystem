@@ -1,18 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
 
-declare var require: any;
 @Component({
   selector: 'cookbook-segmented-control-showcase',
   templateUrl: './segmented-control-showcase.component.html',
   styleUrls: ['./segmented-control-showcase.component.scss'],
 })
-export class SegmentedControlShowcaseComponent implements OnInit {
-  selectedMode: 'default' | 'chip';
-  exampleHtml: string = require('!raw-loader!../../examples/segmented-control-example/segmented-control-example.component.html')
-    .default;
-
+export class SegmentedControlShowcaseComponent {
   properties: ShowcaseProperty[] = [
     {
       name: 'mode',
@@ -21,20 +16,42 @@ export class SegmentedControlShowcaseComponent implements OnInit {
       inputValues: ['default', 'chip'],
     },
     {
-      name: 'segmentItems',
-      description: 'Array of SegmentItem controls',
+      name: 'size',
+      description: 'Sets the size of the segmented control. Only applies to `default` mode.',
+      defaultValue: 'md',
+      inputValues: ['sm', 'md'],
+    },
+    {
+      name: 'items',
+      description:
+        'An array of `SegmentItem[]` representing the set of segment elements within the control.',
       defaultValue: '',
       inputValues: [
-        '[{ text: string, id: string, checked: boolean, badge?: {content: string, description?: string, themeColor: ThemeColor}}]',
+        `[{
+  id: string,
+  text: string,
+  badge?: {
+    content: string,
+    description?: string,
+    themeColor: ThemeColor
+  }
+}]`,
       ],
+      preserveInputValuesWhitespaces: true,
+    },
+    {
+      name: 'value',
+      description:
+        'Gets/sets the selected segment. Returns the selected segment if there is one, otherwise `undefined``.',
+      defaultValue: 'undefined',
+      inputValues: ['SegmentItem'],
+    },
+    {
+      name: 'selectedIndex',
+      description:
+        'Gets/sets the index of the selected segment within the `segmentItems` array. The value -1 indicates no element is selected.',
+      defaultValue: 'undefined',
+      inputValues: ['number'],
     },
   ];
-
-  ngOnInit(): void {
-    this.selectedMode = 'default';
-  }
-
-  onModeChange(mode: any) {
-    this.selectedMode = mode;
-  }
 }

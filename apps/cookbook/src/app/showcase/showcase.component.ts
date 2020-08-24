@@ -12,7 +12,8 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
   exampleComponentName: string;
   exampleComponentGitUrl: string;
   private routerEventsSubscription: Subscription;
-  private gitUrl = 'https://github.com/kirbydesign/designsystem/tree/master/src/app/examples/';
+  private gitUrl =
+    'https://github.com/kirbydesign/designsystem/tree/master/apps/cookbook/src/app/examples/';
   isCTABoxShown = true;
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {

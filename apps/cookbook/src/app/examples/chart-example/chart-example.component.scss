@@ -1,0 +1,18 @@
+@import './libs/designsystem/src/lib/scss/utils';
+
+:host {
+  display: block;
+  height: 100%;
+  overflow-x: hidden;
+  background: get-color('background-color');
+  padding: size('s');
+
+  @include media('>=medium') {
+    padding: size('l');
+  }
+
+  > * {
+    display: block;
+    margin: size('s') 0;
+  }
+}

@@ -1,10 +1,19 @@
+<cookbook-dropdown-example-configuration
+  [size]="size"
+  (sizeChanged)="onSizeChange($event)"
+></cookbook-dropdown-example-configuration>
 <h3>Simple</h3>
-<cookbook-dropdown-example-default></cookbook-dropdown-example-default>
-<cookbook-dropdown-example-scroll></cookbook-dropdown-example-scroll>
-<cookbook-dropdown-example-pre-selected></cookbook-dropdown-example-pre-selected>
-<cookbook-dropdown-example-expand></cookbook-dropdown-example-expand>
-<cookbook-dropdown-example-attention-level></cookbook-dropdown-example-attention-level>
-<cookbook-dropdown-example-item-select></cookbook-dropdown-example-item-select>
+<cookbook-dropdown-example-default [size]="size"></cookbook-dropdown-example-default>
+<cookbook-dropdown-example-scroll [size]="size"></cookbook-dropdown-example-scroll>
+<cookbook-dropdown-example-pre-selected [size]="size"></cookbook-dropdown-example-pre-selected>
+<cookbook-dropdown-example-expand [size]="size"></cookbook-dropdown-example-expand>
+<cookbook-dropdown-example-right-aligned [size]="size"></cookbook-dropdown-example-right-aligned>
+<cookbook-dropdown-example-attention-level
+  [size]="size"
+></cookbook-dropdown-example-attention-level>
+<cookbook-dropdown-example-item-select [size]="size"></cookbook-dropdown-example-item-select>
 <h3>Advanced</h3>
-<cookbook-dropdown-example-custom-item-template></cookbook-dropdown-example-custom-item-template>
-<cookbook-dropdown-example-ng-forms></cookbook-dropdown-example-ng-forms>
+<cookbook-dropdown-example-custom-item-template
+  [size]="size"
+></cookbook-dropdown-example-custom-item-template>
+<cookbook-dropdown-example-ng-forms [size]="size"></cookbook-dropdown-example-ng-forms>

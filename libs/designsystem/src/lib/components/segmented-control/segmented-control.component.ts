@@ -6,28 +6,77 @@ import { SegmentItem } from './segment-item';
   selector: 'kirby-segmented-control',
   templateUrl: './segmented-control.component.html',
   styleUrls: ['./segmented-control.component.scss'],
+  // tslint:disable-next-line: no-host-metadata-property
+  host: { role: 'group' },
 })
 export class SegmentedControlComponent {
-  @Output() segmentSelect: EventEmitter<SegmentItem> = new EventEmitter();
-
-  @HostBinding('class.default-mode')
-  isDefaultMode: boolean = true; // Default
+  preventWrapperClick(event: Event) {
+    if (event.target instanceof HTMLElement) {
+      if (event.target.classList.contains('segment-btn-wrapper')) {
+        event.stopImmediatePropagation();
+      }
+    }
+  }
 
   @HostBinding('class.chip-mode')
   isChipMode: boolean;
 
-  @Input() items: SegmentItem[];
+  private _items: SegmentItem[] = [];
+  get items(): SegmentItem[] {
+    return this._items;
+  }
+
+  @Input() set items(value: SegmentItem[]) {
+    this._items = value || [];
+    const checkedItemIndex = this.items.findIndex((item) => item.checked);
+    if (checkedItemIndex > -1) {
+      console.warn(
+        'SegmentItem.checked is deprecated - please remove from your `items` configuration. Use `selectedIndex` or `value` on `<kirby-segmented-control>` instead '
+      );
+      this._selectedIndex = checkedItemIndex;
+    }
+    this._value = this.items[this.selectedIndex];
+  }
+
+  private _selectedIndex: number = -1;
+  get selectedIndex(): number {
+    return this._selectedIndex;
+  }
+
+  @Input() set selectedIndex(value: number) {
+    if (value !== this._selectedIndex) {
+      this._selectedIndex = value;
+      this._value = this.items[this.selectedIndex];
+    }
+  }
+
+  private _value: SegmentItem;
+  get value(): SegmentItem {
+    return this._value;
+  }
+
+  @Input() set value(value: SegmentItem) {
+    this.selectedIndex = this.items.indexOf(value);
+  }
 
   @Input() set mode(mode: 'default' | 'chip') {
-    this.isDefaultMode = mode === 'default';
     this.isChipMode = mode === 'chip';
   }
 
-  activeSegment: SegmentItem;
+  @HostBinding('class.sm')
+  isSmallSize: boolean;
 
-  onSegmentSelect(item: SegmentItem) {
-    this.activeSegment = item;
-    this.items.forEach((segment) => (segment.checked = this.activeSegment.id === segment.id));
-    this.segmentSelect.emit(this.activeSegment);
+  @Input() set size(size: 'sm' | 'md') {
+    this.isSmallSize = size === 'sm';
+  }
+
+  @Output() segmentSelect: EventEmitter<SegmentItem> = new EventEmitter();
+
+  onSegmentSelect(selectedId: string) {
+    const selectedItemIndex = this.items.findIndex((item) => selectedId === item.id);
+    if (selectedItemIndex !== this.selectedIndex) {
+      this.selectedIndex = selectedItemIndex;
+      this.segmentSelect.emit(this.value);
+    }
   }
 }

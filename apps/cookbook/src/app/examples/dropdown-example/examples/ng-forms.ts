@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 const config = {
@@ -6,6 +6,7 @@ const config = {
   template: `<form [formGroup]="form">
   <kirby-dropdown
     formControlName="favoriteFood"
+    [size]="size"
     placeholder="Dropdown in form"
     [items]="items"
     itemTextProperty="title"
@@ -89,6 +90,7 @@ export class DropdownExampleNgFormsComponent implements OnInit {
   ];
   form: FormGroup;
   favoriteFoodControl: FormControl;
+  @Input() size: string;
 
   ngOnInit(): void {
     this.buildForm();

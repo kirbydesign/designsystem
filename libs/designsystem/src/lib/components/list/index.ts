@@ -13,3 +13,6 @@ export { ListHeaderDirective } from './list.directive';
 export { ListItemDirective } from './list.directive';
 export { ListItemTemplateDirective } from './list.directive';
 export { ListSectionHeaderDirective } from './list.directive';
+export { ListFooterDirective } from './list.directive';
+
+export { GroupByPipe } from './pipes/group-by.pipe';

@@ -26,7 +26,7 @@ describe('ReorderListComponent', () => {
   }
 
   const createHost = createComponentFactory({
-    imports: [IonicModule.forRoot(), IconModule],
+    imports: [IonicModule.forRoot({ mode: 'ios', _testing: true }), IconModule],
     component: ReorderListComponent,
     declarations: [MockComponent(CardComponent), MockComponent(ItemComponent)],
   });

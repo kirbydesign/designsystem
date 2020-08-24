@@ -31,7 +31,7 @@
             "main": "libs/designsystem/src/test.ts",
             "tsConfig": "libs/designsystem/tsconfig.spec.json",
             "karmaConfig": "libs/designsystem/karma.conf.js",
-            "styles": ["libs/designsystem/src/lib/scss/_global-styles.scss"]
+            "styles": ["libs/designsystem/src/lib/testing/styles.scss"]
           }
         }
       },
@@ -195,7 +195,8 @@
     }
   },
   "cli": {
-    "defaultCollection": "@nrwl/angular"
+    "defaultCollection": "@nrwl/angular",
+    "analytics": false
   },
   "schematics": {
     "@nrwl/angular:application": {

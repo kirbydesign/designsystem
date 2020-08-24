@@ -11,8 +11,17 @@
         <code>{{ prop.name }}</code>
       </td>
       <td *ngIf="columns.Description">{{ prop.description }}</td>
-      <td *ngIf="columns.Type">{{ prop.inputValues ? prop.inputValues.join(' | ') : '' }}</td>
-      <td *ngIf="columns.Default">{{ prop.defaultValue }}</td>
+      <td *ngIf="columns.Type">
+        <ng-container *ngIf="!prop.preserveInputValuesWhitespaces">
+          <code>{{ prop.inputValues ? prop.inputValues.join(' | ') : '' }}</code>
+        </ng-container>
+        <pre
+          *ngIf="prop.preserveInputValuesWhitespaces"
+        ><code>{{ prop.inputValues ? prop.inputValues.join(' | ') : '' }}</code></pre>
+      </td>
+      <td *ngIf="columns.Default">
+        <code>{{ prop.defaultValue }}</code>
+      </td>
     </tr>
   </tbody>
 </table>

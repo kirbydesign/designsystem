@@ -15,7 +15,7 @@ import { ComponentStatusComponent } from './component-status.component';
         component: ComponentStatusComponent,
       },
     ]),
-    IonicModule.forRoot(),
+    IonicModule,
     KirbyModule,
   ],
   declarations: [ComponentStatusComponent],

@@ -1,0 +1,52 @@
+<div class="example">
+  <h2>Default</h2>
+  <cookbook-example-viewer [html]="defaultExample.template">
+    <cookbook-progress-circle-example-default
+      #defaultExample
+    ></cookbook-progress-circle-example-default>
+  </cookbook-example-viewer>
+
+  <h2>Sizes</h2>
+
+  <cookbook-example-viewer [html]="sizesExample.template">
+    <cookbook-progress-circle-example-sizes #sizesExample></cookbook-progress-circle-example-sizes>
+  </cookbook-example-viewer>
+
+  <h2>With content</h2>
+
+  <h3>Steps</h3>
+  <cookbook-example-viewer [html]="contentStepsExample.template">
+    <cookbook-progress-circle-example-content-steps
+      #contentStepsExample
+    ></cookbook-progress-circle-example-content-steps>
+  </cookbook-example-viewer>
+
+  <h3>Avatar and icon</h3>
+  <cookbook-example-viewer [html]="contentIconExample.template">
+    <cookbook-progress-circle-example-content-avatar
+      #contentIconExample
+    ></cookbook-progress-circle-example-content-avatar>
+  </cookbook-example-viewer>
+
+  <h3>Percent</h3>
+  <cookbook-example-viewer [html]="contentPercentExample.template">
+    <cookbook-progress-circle-example-content-percent
+      #contentPercentExample
+    ></cookbook-progress-circle-example-content-percent>
+  </cookbook-example-viewer>
+
+  <h2>Dynamic</h2>
+  <cookbook-example-viewer [html]="animatedExample.template" [ts]="animatedExample.codeSnippet">
+    <cookbook-progress-circle-example-animated
+      #animatedExample
+    ></cookbook-progress-circle-example-animated>
+  </cookbook-example-viewer>
+
+  <h2>In card</h2>
+  <cookbook-example-viewer [html]="cardExample.template">
+    <cookbook-progress-circle-example-card #cardExample></cookbook-progress-circle-example-card>
+  </cookbook-example-viewer>
+
+  <h2>Properties</h2>
+  <cookbook-showcase-properties [properties]="properties"></cookbook-showcase-properties>
+</div>

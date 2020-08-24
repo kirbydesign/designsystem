@@ -7,7 +7,7 @@
 
   ion-item {
     font-size: font-size('s');
-    --min-height: 56px;
+    --min-height: #{map-get($item-heights, 'm')};
     --padding-start: #{size('s')};
     --inner-padding-top: #{size('xxs')};
     --inner-padding-bottom: #{size('xxs')};
@@ -15,8 +15,11 @@
 
     --background: var(--kirby-item-background, #{get-color('white')});
     --background-activated: var(--kirby-item-background-activated, #{get-color('white-shade')});
+    --background-activated-opacity: 1;
     --background-focused: var(--kirby-item-background-focused, #{get-color('background-color')});
+    --background-focused-opacity: 1;
     --background-hover: var(--kirby-item-background-hover, #{get-color('background-color')});
+    --background-hover-opacity: 1;
 
     @include slotted('[slot="end"]') {
       margin-inline-start: 0;
@@ -26,6 +29,10 @@
 
     @include slotted('time[slot="end"]') {
       margin-inline-start: size('xs');
+    }
+
+    @include slotted('kirby-form-field[slot="end"]') {
+      margin-inline-start: size('s');
     }
 
     @include slotted('data[slot="end"]', '[detail][slot="end"], ion-reorder[slot="end"]') {
@@ -40,11 +47,11 @@
   }
 
   &.sm ion-item {
-    --min-height: 44px;
+    --min-height: #{map-get($item-heights, 's')};
   }
 
   &.xs ion-item {
-    --min-height: 32px;
+    --min-height: #{map-get($item-heights, 'xs')};
     --inner-padding-top: #{size('xxxs')};
     --inner-padding-bottom: #{size('xxxs')};
   }
@@ -56,6 +63,10 @@
     width: size('s');
     z-index: 1;
   }
+}
+
+:host-context(kirby-dropdown) ion-item {
+  --min-height: #{$dropdown-item-height};
 }
 
 /* clean-css ignore:start */

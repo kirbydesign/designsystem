@@ -53,6 +53,14 @@
   @return map-get($elevations, $value);
 }
 
+@function get-transition-duration($value) {
+  @return map-get($transition-durations, $value);
+}
+
+@function get-transition-easing($value) {
+  @return map-get($transition-easings, $value);
+}
+
 @function get-shadow-size($elevation) {
   $shadow-size: 0;
   $shadow-list: map-get($elevations, $elevation);
@@ -83,5 +91,58 @@
     #{$selectors} {
       @content;
     }
+  }
+}
+
+@mixin theme-background($variant, $text-variant-override: null) {
+  $background-color: null;
+  $text-color: null;
+  @if $variant == transparent {
+    $background-color: transparent;
+    $text-color: get-text-color('black');
+  } @else {
+    $background-color: get-color($variant);
+    $text-color: get-color($variant + '-contrast');
+  }
+  @if ($text-variant-override != null) {
+    $text-color: get-text-color($text-variant-override);
+  }
+  background-color: $background-color;
+  color: $text-color;
+}
+
+/// Only apply the :hover selector and styles if pointer device can hover
+/// (effectively desktop/mouse devices):
+@mixin hover() {
+  @media (hover: hover) {
+    &:hover {
+      @content;
+    }
+  }
+}
+
+// Only apply the :focus selector and styles if pointer device can hover
+// (effectively desktop/mouse devices):
+@mixin focus() {
+  @media (hover: hover) {
+    &:focus {
+      @content;
+    }
+  }
+}
+
+// Only apply the styles on touch devices
+// (coarse pointer and cannot hover):
+@mixin touch() {
+  @media (pointer: coarse) and (hover: none) {
+    @content;
+  }
+}
+
+// Only apply the styles on non touch devices
+// (fine pointer and hover):
+@mixin not-touch() {
+  @media (hover: hover) and (pointer: fine) {
+    @content;
   }
 }

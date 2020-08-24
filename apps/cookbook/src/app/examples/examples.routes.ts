@@ -9,7 +9,7 @@ import { ListExampleComponent } from './list/list-example.component';
 import { ChartExampleComponent } from './chart-example/chart-example.component';
 import { FontsExampleComponent } from './fonts-example/fonts-example.component';
 import { SpinnerExampleComponent } from './spinner-example/spinner-example.component';
-import { ModalExampleComponent } from './modal-example/modal-example.component';
+import { ModalExamplePopoutComponent } from './modal-example/modal-example-popout.component';
 import { SegmentedControlExampleComponent } from './segmented-control-example/segmented-control-example.component';
 import { ChipExampleComponent } from './chip-example/chip-example.component';
 import { BadgeExampleComponent } from './badge-example/badge-example.component';
@@ -49,6 +49,9 @@ import { ListWithSectionsExampleComponent } from './list/components/sections';
 import { ListItemsExampleComponent } from './list/components/items';
 import { ReorderListExampleComponent } from './reorder-list/reorder-list-example.component';
 import { DropdownExampleComponent } from '~/app/examples/dropdown-example/dropdown-example.component';
+import { StockChartExampleComponent } from './stock-chart-example/stock-chart-example.component';
+import { ProgressCircleExampleComponent } from './progress-circle-example/progress-circle-example.component';
+import { FlagExampleComponent } from './flag-example/flag-example.component';
 
 export const routes: Routes = [
   {
@@ -137,6 +140,10 @@ export const routes: Routes = [
         path: 'reorder-list',
         component: ReorderListExampleComponent,
       },
+      {
+        path: 'modal',
+        component: ModalExamplePopoutComponent,
+      },
     ],
   },
   {
@@ -214,6 +221,10 @@ export const routes: Routes = [
     component: ChartExampleComponent,
   },
   {
+    path: 'stock-chart',
+    component: StockChartExampleComponent,
+  },
+  {
     path: 'grid',
     component: GridExampleComponent,
   },
@@ -234,10 +245,6 @@ export const routes: Routes = [
     component: SpinnerExampleComponent,
   },
   {
-    path: 'modal',
-    component: ModalExampleComponent,
-  },
-  {
     path: 'loading-overlay',
     component: LoadingOverlayExampleComponent,
   },
@@ -256,6 +263,10 @@ export const routes: Routes = [
   {
     path: 'badge',
     component: BadgeExampleComponent,
+  },
+  {
+    path: 'flag',
+    component: FlagExampleComponent,
   },
   {
     path: 'icon',
@@ -300,5 +311,9 @@ export const routes: Routes = [
   {
     path: 'dropdown',
     component: DropdownExampleComponent,
+  },
+  {
+    path: 'progress-circle',
+    component: ProgressCircleExampleComponent,
   },
 ];

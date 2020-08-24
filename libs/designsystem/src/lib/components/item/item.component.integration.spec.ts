@@ -23,10 +23,9 @@ describe('ItemComponent in Kirby List', () => {
   let spectator: SpectatorHost<ListComponent>;
   const createHost = createHostFactory({
     component: ListComponent,
-    imports: [IonicModule.forRoot()],
+    imports: [IonicModule.forRoot({ mode: 'ios', _testing: true })],
     declarations: [
       ItemComponent,
-      ListComponent,
       SpinnerComponent,
       IconComponent,
       CardComponent,

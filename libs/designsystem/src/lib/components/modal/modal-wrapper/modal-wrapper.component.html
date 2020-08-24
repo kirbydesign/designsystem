@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header (touchstart)="onHeaderTouchStart($event)">
   <ion-toolbar>
     <ion-title>{{ config.title }}</ion-title>
     <ion-buttons slot="start" *ngIf="config.flavor === 'drawer'">
@@ -14,14 +14,14 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content>
+<ion-content [scrollEvents]="true">
   <ng-container
     *ngComponentOutlet="config.component; injector: componentPropsInjector"
   ></ng-container>
 </ion-content>
 
 <ng-template #closeButton let-icon="icon">
-  <button kirby-button attentionLevel="4" size="sm" (click)="onClose()">
+  <button kirby-button attentionLevel="4" size="sm" (click)="close()">
     <kirby-icon [name]="icon"></kirby-icon>
   </button>
 </ng-template>

@@ -1,47 +1,32 @@
 @import '../../scss/utils';
 
-$chip-height: 30px;
+@mixin selected-and-hover($background-color) {
+  &.is-selected {
+    @include theme-background($background-color);
+  }
+
+  @include hover() {
+    @include theme-background($background-color);
+  }
+}
 
 :host {
   white-space: nowrap;
   padding: 0 size('s');
-  height: $chip-height;
-  font-size: font-size('s');
+  height: size('l');
+  font-size: font-size('xs');
   line-height: 1;
   display: inline-flex;
   align-items: center;
-  border-radius: $chip-height;
-  margin-right: 5px;
+  border-radius: $border-radius-round;
+  margin: size('xxxs');
   cursor: pointer;
-  background-color: get-color('white');
-  color: get-color('white-contrast');
   user-select: none;
-
-  &:hover,
-  &.is-selected {
-    background-color: get-color('black');
-    color: get-color('black-contrast');
-  }
-
-  :host-context(.default),
-  :host-context(.kirby-color-brightness-white) {
-    background-color: get-color('white');
-    color: get-color('white-contrast');
-    &:hover,
-    &.is-selected {
-      background-color: get-color('black');
-      color: get-color('black-contrast');
-    }
-  }
+  @include theme-background('white');
+  @include selected-and-hover('black');
 
   :host-context(.kirby-color-brightness-dark) {
-    background-color: transparent;
-    color: get-text-color('white');
-
-    &:hover,
-    &.is-selected {
-      background-color: get-color('white');
-      color: get-color('white-contrast');
-    }
+    @include theme-background(transparent, 'white');
+    @include selected-and-hover('white');
   }
 }

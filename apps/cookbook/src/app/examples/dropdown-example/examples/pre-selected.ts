@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 const config = {
   selector: 'cookbook-dropdown-example-pre-selected',
   template: `<kirby-dropdown
+  [size]="size"
   [items]="['Item 1','Item 2','Item 3','Item 4','Item 5 (preselected)']"
   selectedIndex="4"
 ></kirby-dropdown>`,
@@ -14,4 +15,5 @@ const config = {
 })
 export class DropdownExamplePreSelectedComponent {
   template: string = config.template;
+  @Input() size: string;
 }
