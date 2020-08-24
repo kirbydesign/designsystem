@@ -76,9 +76,20 @@
   </div>
   <button *ngIf="!showFooter" kirby-button (click)="scrollToTop()">Scroll to top</button>
 </div>
-<kirby-modal-footer *ngIf="showFooter">
-  <button attentionLevel="3" style="flex-grow: 1;" kirby-button (click)="scrollToTop()">
-    To top
-  </button>
-  <button style="flex-grow: 1;" kirby-button (click)="close()">Close</button>
+<kirby-modal-footer *ngIf="showFooter" themeColor="white" [snapToKeyboard]="snapFooterToKeyboard">
+  <div>
+    <div>
+      <button attentionLevel="3" style="flex-grow: 1;" kirby-button (click)="scrollToTop()">
+        To top
+      </button>
+      <button style="flex-grow: 1;" kirby-button (click)="close()">Close</button>
+    </div>
+    <div>
+      <kirby-checkbox
+        checked="false"
+        (checkedChange)="onSnapFooterToKeyboardCheckbox($event)"
+      ></kirby-checkbox
+      ><label>Snap footer to keyboard</label>
+    </div>
+  </div>
 </kirby-modal-footer>

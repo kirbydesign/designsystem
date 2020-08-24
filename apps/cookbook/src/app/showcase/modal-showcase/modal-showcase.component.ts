@@ -70,6 +70,15 @@ export class ModalShowcaseComponent implements AfterViewInit {
     },
   ];
 
+  footerProperties: ShowcaseProperty[] = [
+    {
+      name: 'themeColor',
+      description: "Theme color. 'light' will use the background-color variable",
+      inputValues: ['white', 'light'],
+      defaultValue: 'white',
+    },
+  ];
+
   events: ShowcaseProperty[] = [
     {
       name: 'didPresent',
