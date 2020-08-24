@@ -178,6 +178,10 @@ ion-item-options[side='end'] {
   ion-list-header {
     border-top-left-radius: $border-radius;
     border-top-right-radius: $border-radius;
+    -webkit-mask-image: -webkit-radial-gradient(
+      white,
+      black
+    ); // Solves issues with round borders at iOS in certain scenarios
   }
 
   ion-list ion-item-sliding > ion-item,
@@ -192,6 +196,10 @@ ion-item-options[side='end'] {
   .footer {
     border-bottom-left-radius: $border-radius;
     border-bottom-right-radius: $border-radius;
+    -webkit-mask-image: -webkit-radial-gradient(
+      white,
+      black
+    ); // Solves issues with round borders at iOS in certain scenarios
   }
 
   ion-list ion-item-sliding > ion-item,

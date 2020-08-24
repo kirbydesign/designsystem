@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 const config = {
   selector: 'cookbook-dropdown-example-custom-item-template',
   template: `<kirby-dropdown #dropdown
+  [size]="size"
   placeholder="Dropdown with custom item template"
   [items]="items"
   itemTextProperty="title">
@@ -45,4 +46,5 @@ export class DropdownExampleCustomItemTemplateComponent {
     { title: 'Item 4', subtitle: 'Tongue bresaola tail swine', value: 4 },
     { title: 'Item 5', subtitle: 'Drumstick pastrami sirloin ', value: 5 },
   ];
+  @Input() size: string;
 }

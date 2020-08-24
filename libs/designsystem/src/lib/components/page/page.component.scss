@@ -6,8 +6,13 @@
 ion-header,
 ion-toolbar {
   --background: #{get-color('background-color')};
-  max-width: 768px;
   margin: 0 auto;
+
+  @include media('>=large') {
+    @include not-touch {
+      max-width: 768px;
+    }
+  }
 }
 
 ion-toolbar {
@@ -27,6 +32,11 @@ ion-toolbar {
 
   ion-title {
     .toolbar-title {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      pointer-events: auto;
+      overflow: hidden;
+
       @include slotted('*') {
         text-overflow: ellipsis;
         white-space: nowrap;
