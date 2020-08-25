@@ -1,0 +1,6 @@
+@import '../../scss/utils';
+
+:host {
+  font-size: font-sizes('sm');
+  text-decoration: underline;
+}
