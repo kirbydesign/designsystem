@@ -53,6 +53,8 @@ import { StockChartExampleComponent } from './stock-chart-example/stock-chart-ex
 import { ProgressCircleExampleComponent } from './progress-circle-example/progress-circle-example.component';
 import { FlagExampleComponent } from './flag-example/flag-example.component';
 
+import { TextLinkExampleComponent } from './text-link-example/text-link-example.component';
+
 export const routes: Routes = [
   {
     path: '',
@@ -315,5 +317,9 @@ export const routes: Routes = [
   {
     path: 'progress-circle',
     component: ProgressCircleExampleComponent,
+  },
+  {
+    path: 'text-link',
+    component: TextLinkExampleComponent,
   },
 ];

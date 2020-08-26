@@ -1,6 +1,44 @@
 @import '../../scss/utils';
 
 :host {
-  font-size: font-sizes('sm');
-  text-decoration: underline;
+  vertical-align: bottom;
+  --kirby-icon-font-size: #{size('m')};
+
+  a {
+    font-size: font-size('n');
+    line-height: line-height('n');
+    color: get-text-color('black');
+    vertical-align: bottom;
+  }
+  kirby-icon {
+    vertical-align: bottom;
+  }
+  &.sm {
+    --kirby-icon-font-size: #{size('m')};
+
+    a {
+      font-size: font-size('s');
+      line-height: line-height('s');
+    }
+    kirby-icon {
+    }
+  }
+  &.xs {
+    --kirby-icon-font-size: #{size('s')};
+
+    a {
+      font-size: font-size('xs');
+      line-height: line-height('xs');
+    }
+    kirby-icon {
+    }
+  }
 }
+/*
+font-size: font-size('n');
+  line-height: line-height('n');
+  letter-spacing: normal;
+  text-decoration: underline;
+  text-decoration-color: get-text-color('black');
+
+*/

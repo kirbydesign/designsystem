@@ -75,6 +75,7 @@ import { ResizeObserverService } from './components/shared/resize-observer/resiz
 import { ProgressCircleComponent } from './components/progress-circle/progress-circle.component';
 import { ProgressCircleRingComponent } from './components/progress-circle/progress-circle-ring.component';
 import { FlagComponent } from './components/flag/flag.component';
+import { TextLinkComponent } from './components/text-link/text-link.component';
 
 const exportedDeclarations = [
   CardComponent,
@@ -122,6 +123,7 @@ const exportedDeclarations = [
   LoadingOverlayComponent,
   ProgressCircleComponent,
   FlagComponent,
+  TextLinkComponent,
 ];
 
 const declarations = [

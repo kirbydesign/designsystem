@@ -17,6 +17,7 @@ import { ChartExampleModule } from './chart-example/chart-example.module';
 import { ProgressCircleExampleModule } from './progress-circle-example/progress-circle-example.module';
 import { AvatarExampleModule } from './avatar-example/avatar-example.module';
 import { FlagExampleModule } from './flag-example/flag-example.module';
+import { TextLinkExampleComponent } from './text-link-example/text-link-example.component';
 
 @NgModule({
   imports: [

@@ -205,6 +205,9 @@
     },
     "@nrwl/angular:library": {
       "unitTestRunner": "karma"
+    },
+    "@schematics/angular:component": {
+      "style": "scss"
     }
   },
   "defaultProject": "designsystem"

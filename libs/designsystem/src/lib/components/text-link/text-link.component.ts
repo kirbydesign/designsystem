@@ -8,9 +8,15 @@ import { Component, OnInit, Input } from '@angular/core';
 export class TextLinkComponent implements OnInit {
   baseUrl = window.location.origin;
   @Input() link: string;
-  @Input() title: string;
 
   constructor() {}
-
   ngOnInit(): void {}
+
+  inAppLink() {
+    let appLink = true;
+    if (!this.link.includes('baseUrl') || this.link.split('/').length != 1) {
+      appLink = false;
+    }
+    return appLink;
+  }
 }

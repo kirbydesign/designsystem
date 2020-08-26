@@ -50,6 +50,7 @@ import { DropdownExampleComponent } from '~/app/examples/dropdown-example/dropdo
 import { StockChartExampleComponent } from './stock-chart-example/stock-chart-example.component';
 import { ProgressCircleExampleComponent } from './progress-circle-example/progress-circle-example.component';
 import { FlagExampleComponent } from './flag-example/flag-example.component';
+import { TextLinkExampleComponent } from './text-link-example/text-link-example.component';
 
 // Example of "custom" icons
 export const iconSettings: IconSettings = {
@@ -116,6 +117,7 @@ export const COMPONENT_DECLARATIONS: any[] = [
   StockChartExampleComponent,
   ProgressCircleExampleComponent,
   FlagExampleComponent,
+  TextLinkExampleComponent,
 ];
 
 // Configure custom icons (used by example to show the usage of custom icons)
