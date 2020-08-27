@@ -50,6 +50,7 @@ matrix:
         - ./scripts/version_bump.sh
 
     - stage: "Deploy cookbook site"
+      if: type != pull_request
       os: linux
       dist: trusty
       env:
