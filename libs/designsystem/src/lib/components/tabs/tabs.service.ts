@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IonRouterOutlet } from '@ionic/angular';
-import { BehaviorSubject, ReplaySubject } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { ReplaySubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
