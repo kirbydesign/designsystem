@@ -12,13 +12,7 @@ export class TextLinkComponent implements OnInit {
   @Input() text: string;
 
   constructor() {}
-  ngOnInit(): void {
-    console.log('TextLinkComponent -> constructor ->     this.isExternal()', this.isExternal());
-  }
-  /*
-Will not work if link contains multiple nested paths
-Needs more work
-*/
+  ngOnInit(): void {}
 
   checkDomain(url) {
     if (url.indexOf('//') === 0) {
