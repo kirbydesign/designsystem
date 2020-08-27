@@ -1,4 +1,8 @@
-<a [routerLink]="link">
-  <ng-content> </ng-content>
-</a>
-<kirby-icon name="link"></kirby-icon>
+<!-- routerlink har problemer med external links, noget research skal laves -->
+<ng-template [ngIf]="!isExternal()" [ngIfElse]="externalLink">
+  <a [routerLink]="link">{{ text }}</a>
+</ng-template>
+<ng-template #externalLink>
+  <a href="{{ link }}">{{ text }} </a>
+  <kirby-icon name="link"></kirby-icon>
+</ng-template>

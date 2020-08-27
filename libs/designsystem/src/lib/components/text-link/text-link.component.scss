@@ -1,7 +1,6 @@
 @import '../../scss/utils';
 
 :host {
-  vertical-align: bottom;
   --kirby-icon-font-size: #{size('m')};
 
   a {
@@ -20,8 +19,6 @@
       font-size: font-size('s');
       line-height: line-height('s');
     }
-    kirby-icon {
-    }
   }
   &.xs {
     --kirby-icon-font-size: #{size('s')};
@@ -29,8 +26,6 @@
     a {
       font-size: font-size('xs');
       line-height: line-height('xs');
-    }
-    kirby-icon {
     }
   }
 }
