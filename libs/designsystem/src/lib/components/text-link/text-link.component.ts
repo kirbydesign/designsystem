@@ -25,8 +25,7 @@ export class TextLinkComponent implements OnInit {
   }
 
   isExternal() {
-    const url = this.link;
-    console.log('TextLinkComponent -> isExternal -> url', url);
+    const url = this.link || '';
     return (
       (url.indexOf(':') > -1 || url.indexOf('//') > -1) &&
       this.checkDomain(location.href) !== this.checkDomain(url)
