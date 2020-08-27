@@ -76,7 +76,7 @@
   </div>
   <button *ngIf="!showFooter" kirby-button (click)="scrollToTop()">Scroll to top</button>
 </div>
-<kirby-modal-footer *ngIf="showFooter" [snapToKeyboard]="snapFooterToKeyboard">
+<kirby-modal-footer *ngIf="showFooter" themeColor="white" [snapToKeyboard]="snapFooterToKeyboard">
   <div>
     <div>
       <button attentionLevel="3" style="flex-grow: 1;" kirby-button (click)="scrollToTop()">

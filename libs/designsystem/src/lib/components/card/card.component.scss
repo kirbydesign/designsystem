@@ -2,11 +2,11 @@
 
 :host {
   --kirby-card-header-background-color: #{get-color('white')};
-  --kirby-card-header-color: #{get-color('primary-contrast')};
+  --kirby-card-header-color: #{get-color('white-contrast')};
   --kirby-card-main-background-color: #{get-color('white')};
-  --kirby-card-main-color: #{get-color('primary-contrast')};
+  --kirby-card-main-color: #{get-color('white-contrast')};
   --kirby-card-footer-background-color: #{get-color('white')};
-  --kirby-card-footer-color: #{get-color('primary-contrast')};
+  --kirby-card-footer-color: #{get-color('white-contrast')};
 
   border-radius: $border-radius;
   box-shadow: get-elevation(2);
