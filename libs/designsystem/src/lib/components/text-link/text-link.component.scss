@@ -7,7 +7,7 @@
     font-size: font-size('n');
     line-height: line-height('n');
     color: get-text-color('black');
-    vertical-align: bottom;
+    // vertical-align: bottom;
   }
   kirby-icon {
     vertical-align: bottom;
@@ -27,13 +27,8 @@
       font-size: font-size('xs');
       line-height: line-height('xs');
     }
+    kirby-icon {
+      vertical-align: middle;
+    }
   }
 }
-/*
-font-size: font-size('n');
-  line-height: line-height('n');
-  letter-spacing: normal;
-  text-decoration: underline;
-  text-decoration-color: get-text-color('black');
-
-*/

@@ -10,6 +10,7 @@ import { ExampleViewerComponent } from '../shared/example-viewer/example-viewer.
 import { ShowcasePropertiesComponent } from '../shared/showcase-properties/showcase-properties.component';
 import { IphoneModule } from '../iphone/iphone.module';
 import { DividerShowcaseComponent } from './divider-showcase/divider-showcase.component';
+import { TextLinkExampleModule } from '../examples/text-link-example/text-link-example.module';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import { DividerShowcaseComponent } from './divider-showcase/divider-showcase.co
     IonicModule,
     KirbyModule,
     IphoneModule,
+    TextLinkExampleModule,
   ],
   declarations: [
     ...COMPONENT_DECLARATIONS,

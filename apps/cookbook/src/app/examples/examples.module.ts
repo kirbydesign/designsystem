@@ -18,6 +18,7 @@ import { ProgressCircleExampleModule } from './progress-circle-example/progress-
 import { AvatarExampleModule } from './avatar-example/avatar-example.module';
 import { FlagExampleModule } from './flag-example/flag-example.module';
 import { TextLinkExampleComponent } from './text-link-example/text-link-example.component';
+import { TextLinkExampleModule } from './text-link-example/text-link-example.module';
 
 @NgModule({
   imports: [
@@ -31,6 +32,7 @@ import { TextLinkExampleComponent } from './text-link-example/text-link-example.
     ChartExampleModule,
     ProgressCircleExampleModule,
     AvatarExampleModule,
+    TextLinkExampleModule,
     FlagExampleModule,
   ],
   declarations: COMPONENT_DECLARATIONS,
@@ -44,6 +46,7 @@ import { TextLinkExampleComponent } from './text-link-example/text-link-example.
     ChartExampleModule,
     ProgressCircleExampleModule,
     AvatarExampleModule,
+    TextLinkExampleModule,
     FlagExampleModule,
   ],
   providers: [PROVIDER_DECLARATIONS],
