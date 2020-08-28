@@ -29,8 +29,6 @@ class GridCard {
 export class GridComponent implements OnInit, OnDestroy {
   cardConfigs: GridCardConfiguration[];
   cards: GridCard[] = [];
-  rows = 'auto,'; // Used in {N}'s gridlayout
-  columns = '*,'; // Used in {N}'s gridlayout
   private breakpointSubscription: Subscription;
 
   @Input() maxColumns: number;
@@ -53,8 +51,6 @@ export class GridComponent implements OnInit, OnDestroy {
       calculatedMaxColumns = this.maxColumns;
     }
     this.cards = [];
-    this.rows = 'auto, ';
-    this.columns = '*, ';
     let columnCounter = 0;
     let currentRow = 0;
     let currentColumn = 0;
@@ -94,9 +90,6 @@ export class GridComponent implements OnInit, OnDestroy {
         currentCard.colSpan += restColumns;
       }
     });
-    // Update the rows and columns string to match the calculated sizes (Only used by {N} GridLayout)
-    this.rows = this.rows.repeat(currentRow) + 'auto';
-    this.columns = this.columns.repeat(calculatedMaxColumns);
   }
 
   ngOnInit() {
