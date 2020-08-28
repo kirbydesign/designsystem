@@ -48,3 +48,31 @@ matrix:
             - $HOME/.npm
       script: 
         - ./scripts/version_bump.sh
+
+    - stage: "Deploy cookbook site"
+      if: type != pull_request
+      os: linux
+      dist: trusty
+      env:
+        - NODE_OPTIONS="--max_old_space_size=3072"
+      cache:
+        - directories:
+          - "$HOME/.npm"
+      install:
+        - echo no | npm ci
+        - openssl version
+        - ./.travis/install-kube-tools.sh
+      script:
+        - npm run dist
+      after_success:
+        - docker build -t drbstaging.azurecr.io/kirbydesign/designsystem:git$TRAVIS_COMMIT .
+      deploy:
+        - provider: script
+          script: ./.travis/deploy-helm-branch.sh drbstaging.azurecr.io/kirbydesign/designsystem config/helm/branch.yaml
+          on:
+            all_branches: true
+            condition: $TRAVIS_BRANCH != master
+        - provider: script
+          script: ./.travis/deploy-helm.sh drbstaging.azurecr.io/kirbydesign/designsystem git$TRAVIS_COMMIT designsystem cookbook config/helm/staging.yaml kirby.design
+          on:
+            branch: master
