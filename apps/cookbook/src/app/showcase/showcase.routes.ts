@@ -39,6 +39,7 @@ import { ReorderListShowcaseComponent } from './reorder-list-showcase/reorder-li
 import { StockChartShowcaseComponent } from './stock-chart-showcase/stock-chart-showcase.component';
 import { ProgressCircleShowcaseComponent } from './progress-circle-showcase/progress-circle-showcase.component';
 import { FlagShowcaseComponent } from './flag-showcase/flag-showcase.component';
+import { TextLinkShowcaseComponent } from './text-link-showcase/text-link-showcase.component';
 
 export const routes: Routes = [
   {
@@ -201,6 +202,10 @@ export const routes: Routes = [
       {
         path: 'progress-circle',
         component: ProgressCircleShowcaseComponent,
+      },
+      {
+        path: 'link',
+        component: TextLinkShowcaseComponent,
       },
     ],
   },

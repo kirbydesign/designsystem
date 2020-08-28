@@ -1,0 +1,19 @@
+<p>
+  The Link component consists of two types. A link with and without a icon. <br />
+  The component will automatically add a icon for external links. The Component is built using the
+  angular
+  <strong>RouterLink </strong> componenet for internal link and <strong>href</strong> for external
+  links.
+</p>
+<h2>Default</h2>
+<cookbook-example-viewer [html]="defaultExample.template">
+  <cookbook-text-link-example-default #defaultExample></cookbook-text-link-example-default>
+</cookbook-example-viewer>
+
+<h2>With icons</h2>
+<cookbook-example-viewer [html]="iconExample.template">
+  <cookbook-text-link-example-icon #iconExample></cookbook-text-link-example-icon>
+</cookbook-example-viewer>
+
+<h2>Properties:</h2>
+<cookbook-showcase-properties [properties]="properties"></cookbook-showcase-properties>

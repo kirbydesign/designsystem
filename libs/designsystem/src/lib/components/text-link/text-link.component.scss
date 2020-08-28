@@ -10,7 +10,9 @@
     // vertical-align: bottom;
   }
   kirby-icon {
-    vertical-align: bottom;
+    padding-left: size('xxxs');
+    padding-right: size('s');
+    vertical-align: middle;
   }
   &.sm {
     --kirby-icon-font-size: #{size('m')};
@@ -28,7 +30,8 @@
       line-height: line-height('xs');
     }
     kirby-icon {
-      vertical-align: middle;
+      padding-left: size('xxxxs');
+      padding-right: size('s');
     }
   }
 }

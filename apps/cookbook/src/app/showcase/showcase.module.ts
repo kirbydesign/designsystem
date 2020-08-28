@@ -11,6 +11,7 @@ import { ShowcasePropertiesComponent } from '../shared/showcase-properties/showc
 import { IphoneModule } from '../iphone/iphone.module';
 import { DividerShowcaseComponent } from './divider-showcase/divider-showcase.component';
 import { TextLinkExampleModule } from '../examples/text-link-example/text-link-example.module';
+import { TextLinkShowcaseComponent } from './text-link-showcase/text-link-showcase.component';
 
 @NgModule({
   imports: [
@@ -28,6 +29,7 @@ import { TextLinkExampleModule } from '../examples/text-link-example/text-link-e
     ExampleViewerComponent,
     ShowcasePropertiesComponent,
     DividerShowcaseComponent,
+    TextLinkShowcaseComponent,
   ],
   exports: COMPONENT_EXPORTS,
 })

@@ -3,11 +3,11 @@ import { Component, OnInit } from '@angular/core';
 const config = {
   selector: 'cookbook-text-link-example-default',
   template: `
-<kirby-text-link link="home" text="default"></kirby-text-link>
+<kirby-text-link link="/home" text="medium (default)"></kirby-text-link>
 
-<kirby-text-link size="sm" link="home" text="small"></kirby-text-link>
+<kirby-text-link size="sm" link="/home" text="small"></kirby-text-link>
 
-<kirby-text-link size="xs" link="home" text="extra small"></kirby-text-link>`,
+<kirby-text-link size="xs" link="/home" text="extra small"></kirby-text-link>`,
 };
 
 @Component({
