@@ -1,8 +1,8 @@
 @import '../../scss/utils';
+@import '../icon/icon.component.shared';
 
 :host {
-  --kirby-icon-font-size: #{size('m')};
-
+  --kirby-icon-font-size: #{icon-font-size('sm')};
   a {
     font-size: font-size('n');
     line-height: line-height('n');
@@ -15,15 +15,13 @@
     vertical-align: middle;
   }
   &.sm {
-    --kirby-icon-font-size: #{size('m')};
-
     a {
       font-size: font-size('s');
       line-height: line-height('s');
     }
   }
   &.xs {
-    --kirby-icon-font-size: #{size('s')};
+    --kirby-icon-font-size: #{icon-font-size('xs')};
 
     a {
       font-size: font-size('xs');
