@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, ContentChildren } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'kirby-text-link',
@@ -6,8 +6,6 @@ import { Component, OnInit, Input, ViewChild, ElementRef, ContentChildren } from
   styleUrls: ['./text-link.component.scss'],
 })
 export class TextLinkComponent implements OnInit {
-  baseUrl = window.location.origin;
-
   @Input() link: string;
   @Input() text: string;
 

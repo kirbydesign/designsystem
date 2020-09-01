@@ -3,12 +3,15 @@
 
 :host {
   --kirby-icon-font-size: #{icon-font-size('sm')};
+
   a {
     font-size: font-size('n');
     line-height: line-height('n');
     color: get-text-color('black');
     // vertical-align: bottom;
   }
+  cursor: pointer;
+
   kirby-icon {
     padding-left: size('xxxs');
     padding-right: size('s');
