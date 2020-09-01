@@ -2,8 +2,8 @@ import { Directive, Input, HostBinding } from '@angular/core';
 
 @Directive({
   // don't worry. I know what i am doing!
-  // tslint:disable-next-line:directive-selector
   selector:
+    // tslint:disable-next-line: directive-selector
     'button[size], kirby-icon[size], kirby-avatar[size], kirby-item[size],kirby-text-link[size]',
 })
 export class SizeDirective {
