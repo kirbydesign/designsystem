@@ -114,9 +114,7 @@ describe('TextLinkComponent', () => {
       const icon = spectator.queryHost<HTMLElement>('kirby-icon');
       const text = spectator.queryHost<HTMLElement>('a');
       const textPosition = text.getBoundingClientRect();
-      console.log('textPosition', textPosition);
       const iconPosition = icon.getBoundingClientRect();
-      console.log('iconPosition', iconPosition);
       expect(textPosition.right).toBeLessThan(iconPosition.right);
     });
     const testCases: TestCase[] = [
