@@ -108,9 +108,6 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   constructor(private calendarHelper: CalendarHelper, @Inject(LOCALE_ID) private locale: string) {
-    if (this.locale === 'en-US') {
-      this.locale = 'en-GB';
-    }
     moment.locale(this.locale);
     moment().format('YYYY-MM-DD');
   }
@@ -192,9 +189,9 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   private getWeekDays(): string[] {
-    return [0, 1, 2, 3, 4, 5, 6].map((index) =>
+    return [1, 2, 3, 4, 5, 6, 7].map((index) =>
       moment()
-        .weekday(index)
+        .isoWeekday(index)
         .format('dd')
         .substr(0, 1)
         .toUpperCase()
