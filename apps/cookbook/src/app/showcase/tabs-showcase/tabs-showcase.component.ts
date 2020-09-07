@@ -45,6 +45,19 @@ const routes: Routes = [
   }
 ];`;
 
+  exampleTabsService = `
+  import { TabsService } from '@kirbydesign/designsystem';
+  ...
+  constructor(private tabsSerivce: TabsService) {}
+  
+  ngOnInit() {
+    this.tabsService.subscribe((outlet) => {
+      console.log(outlet.canGoBack());
+    });
+  }
+  ...
+`;
+
   properties: ShowcaseProperty[] = [
     {
       name: 'routerLink',
