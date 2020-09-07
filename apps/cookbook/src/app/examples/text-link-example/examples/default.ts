@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 const config = {
-  selector: 'cookbook-text-link-example-default',
+  selector: 'cookbook-text-link-example-internal',
   template: `
 <kirby-text-link link="/home" text="medium (default)"></kirby-text-link>
 
