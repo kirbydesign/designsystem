@@ -12,7 +12,7 @@ import {
   TrackByFunction,
   ContentChildren,
   AfterViewInit,
-  ElementRef,
+  Inject,
 } from '@angular/core';
 
 import {
@@ -29,6 +29,7 @@ import { GroupByPipe } from './pipes/group-by.pipe';
 import { ListSwipeAction } from './list-swipe-action';
 import { ThemeColor } from '../../helpers/theme-color.type';
 import { ItemComponent } from '../item/item.component';
+import { WINDOW_TOKEN } from '../../helpers/di';
 
 export type ListShape = 'square' | 'rounded' | 'none';
 
@@ -140,7 +141,11 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   groupedItems: any[];
   selectedItem: any;
 
-  constructor(private listHelper: ListHelper, private groupBy: GroupByPipe) {}
+  constructor(
+    private listHelper: ListHelper,
+    private groupBy: GroupByPipe,
+    @Inject(WINDOW_TOKEN) private window: Window
+  ) {}
 
   ngOnInit() {
     this.hasDeprecatedItemTemplate = !!this.legacyItemTemplate || !!this.legacyFlexItemTemplate;
@@ -235,7 +240,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
 
   private initializeSwipeActions(): void {
     if (this.swipeActions && this.swipeActions.length) {
-      this.isSwipingEnabled = window.matchMedia('(pointer: coarse) and (hover: none)').matches;
+      this.isSwipingEnabled = this.window.matchMedia('(pointer: coarse) and (hover: none)').matches;
       if (this.list && !this.isSwipingEnabled) {
         this.list.closeSlidingItems();
       }
