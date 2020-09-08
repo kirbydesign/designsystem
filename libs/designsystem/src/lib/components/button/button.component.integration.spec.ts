@@ -542,7 +542,7 @@ describe('ButtonComponent configured with text and icon', () => {
       element = spectator.element as HTMLButtonElement;
       kirbyIcon = element.getElementsByTagName('kirby-icon')[0];
 
-      expect(kirbyIcon).toHaveComputedStyle({ 'font-size': size('s') });
+      expect(kirbyIcon).toHaveComputedStyle({ 'font-size': size('m') });
     });
   });
 
