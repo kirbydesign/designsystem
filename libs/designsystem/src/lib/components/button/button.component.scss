@@ -10,12 +10,22 @@
   }
 
   &.icon-only {
+    position: relative;
     width: size('l');
-  }
 
-  &.icon-left,
-  &.icon-right {
-    --kirby-icon-font-size: #{size('s')};
+    &:not(.floating)::before {
+      content: '';
+      position: absolute;
+      top: -7px;
+      bottom: -7px;
+      left: -7px;
+      right: -7px;
+    }
+
+    &.icon-left,
+    &.icon-right {
+      --kirby-icon-font-size: #{size('s')};
+    }
   }
 }
 
@@ -119,12 +129,22 @@
   &.icon-only {
     width: size('xl');
     padding: 0;
+    position: relative;
   }
 
   &.sm {
     @include button-sm;
   }
-
+  &.md {
+    &.icon-only:not(.floating)::before {
+      content: '';
+      position: absolute;
+      top: -7px;
+      bottom: -7px;
+      left: -7px;
+      right: -7px;
+    }
+  }
   &.lg {
     @include button-lg;
   }
