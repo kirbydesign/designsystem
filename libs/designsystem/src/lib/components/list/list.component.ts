@@ -234,9 +234,8 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   private initializeSwipeActions(): void {
-    const large = 1025; //TODO this need to be refactored.
     if (this.swipeActions && this.swipeActions.length) {
-      this.isSwipingEnabled = window.innerWidth < large;
+      this.isSwipingEnabled = window.matchMedia('(pointer: coarse) and (hover: none)').matches;
       if (this.list && !this.isSwipingEnabled) {
         this.list.closeSlidingItems();
       }
