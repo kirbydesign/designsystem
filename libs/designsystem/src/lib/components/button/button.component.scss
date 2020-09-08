@@ -15,17 +15,17 @@
 
     &:not(.floating)::before {
       content: '';
-      // position: absolute;
-      /*    top: -7px;
+      position: absolute;
+      top: -7px;
       bottom: -7px;
       left: -7px;
-      right: -7px; */
+      right: -7px;
     }
+  }
 
-    &.icon-left,
-    &.icon-right {
-      --kirby-icon-font-size: #{size('s')};
-    }
+  &.icon-left,
+  &.icon-right {
+    --kirby-icon-font-size: #{size('s')};
   }
 }
 
