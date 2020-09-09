@@ -1,9 +1,5 @@
 @import '../../scss/utils';
 
-@function calcTouchArea($oSize, $border) {
-  $area: calc((#{$fat-finger-size} - #{$oSize} - #{$border}* -2) / -2);
-  @return $area;
-}
 @mixin button-sm {
   $touchArea: calcTouchArea(size('l'), 1px);
   font-size: font-size('xs');

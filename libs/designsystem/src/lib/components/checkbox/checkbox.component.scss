@@ -1,6 +1,8 @@
 @import '../../scss/utils';
 
 .checkbox {
+  $touchArea: calcTouchArea(var(--size), 0px);
+
   --border-color: #{get-color('primary-contrast')};
   // Increase touch area to 44px
   &.square {
@@ -8,21 +10,23 @@
       cursor: pointer;
       position: absolute;
       content: '';
-      top: -13px;
-      right: -13px;
-      left: -13px;
-      bottom: -13px;
+      top: $touchArea;
+      bottom: $touchArea;
+      left: $touchArea;
+      right: $touchArea;
     }
   }
   &.circle {
+    $touchArea: calcTouchArea(var(--size), 0px);
+
     &::before {
       cursor: pointer;
       position: absolute;
       content: '';
-      top: -9px;
-      right: -9px;
-      left: -9px;
-      bottom: -9px;
+      top: $touchArea;
+      bottom: $touchArea;
+      left: $touchArea;
+      right: $touchArea;
     }
   }
 }

@@ -15,6 +15,10 @@
   $value: _get-map-prop($sizes, $key);
   @return if($negative, unquote('-' + $value), $value);
 }
+@function calcTouchArea($oSize, $border) {
+  $area: calc((#{$fat-finger-size} - #{$oSize} - #{$border}* -2) / -2);
+  @return $area;
+}
 
 @function z($key) {
   @return _get-map-prop($z-layers, $key);
