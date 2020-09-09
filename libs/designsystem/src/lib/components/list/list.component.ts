@@ -144,7 +144,8 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   constructor(
     private listHelper: ListHelper,
     private groupBy: GroupByPipe,
-    @Inject(WINDOW_TOKEN) private window: Window
+    // because of "Could not resolve type Window" error
+    @Inject(WINDOW_TOKEN) private window: any
   ) {}
 
   ngOnInit() {
