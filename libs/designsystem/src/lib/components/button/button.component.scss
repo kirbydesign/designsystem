@@ -1,6 +1,11 @@
 @import '../../scss/utils';
 
+@function calcTouchArea($oSize, $border) {
+  $area: calc((#{$fat-finger-size} - #{$oSize} - #{$border}* -2) / -2);
+  @return $area;
+}
 @mixin button-sm {
+  $touchArea: calcTouchArea(size('l'), 1px);
   font-size: font-size('xs');
   height: size('l');
 
@@ -16,10 +21,10 @@
     &:not(.floating)::before {
       content: '';
       position: absolute;
-      top: -7px;
-      bottom: -7px;
-      left: -7px;
-      right: -7px;
+      top: $touchArea;
+      bottom: $touchArea;
+      left: $touchArea;
+      right: $touchArea;
     }
   }
 
@@ -136,13 +141,15 @@
     @include button-sm;
   }
   &.md {
+    $touchArea: calcTouchArea(size('xl'), 1px);
+
     &.icon-only:not(.floating)::before {
       content: '';
       position: absolute;
-      top: -7px;
-      bottom: -7px;
-      left: -7px;
-      right: -7px;
+      top: $touchArea;
+      bottom: $touchArea;
+      left: $touchArea;
+      right: $touchArea;
     }
   }
   &.lg {
