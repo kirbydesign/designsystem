@@ -11,6 +11,7 @@ import { ColorHelper } from '../../helpers/color-helper';
              kirby-icon[themeColor],
              kirby-progress-circle-ring[themeColor],
              kirby-toolbar[themeColor],
+             kirby-modal-footer[themeColor],
              kirby-empty-state[themeColor]`,
 })
 export class ThemeColorDirective {
