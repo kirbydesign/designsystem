@@ -240,7 +240,8 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
 
   private initializeSwipeActions(): void {
     if (this.swipeActions && this.swipeActions.length) {
-      this.isSwipingEnabled = this.window.matchMedia('(pointer: coarse) and (hover: none)').matches;
+      const isTouchDeviceQuery = '(pointer: coarse) and (hover: none)';
+      this.isSwipingEnabled = this.window.matchMedia(isTouchDeviceQuery).matches;
       if (this.list && !this.isSwipingEnabled) {
         this.list.closeSlidingItems();
       }
