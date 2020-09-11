@@ -12,21 +12,9 @@ import {
   OnInit,
   ViewChildren,
   QueryList,
-  ComponentFactoryResolver,
-  ViewContainerRef,
 } from '@angular/core';
 import { IonContent } from '@ionic/angular';
 import { Subject } from 'rxjs';
-import {
-  ActivatedRoute,
-  Router,
-  ChildrenOutletContexts,
-  RouterStateSnapshot,
-  RouterState,
-  NavigationEnd,
-  ActivationStart,
-} from '@angular/router';
-import { filter, first } from 'rxjs/operators';
 
 import { KirbyAnimation } from '../../../animation/kirby-animation';
 import { ModalConfig } from './config/modal-config';
@@ -83,19 +71,12 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     private injector: Injector,
     private elementRef: ElementRef<HTMLElement>,
     private renderer: Renderer2,
-    private resizeObserverService: ResizeObserverService,
-    private activatedRoute: ActivatedRoute,
-    private router: Router,
-    private parentContexts: ChildrenOutletContexts,
-    private componentFactoryResolver: ComponentFactoryResolver,
-    private location: ViewContainerRef
+    private resizeObserverService: ResizeObserverService
   ) {
     this.observeViewportResize();
   }
 
   ngOnInit(): void {
-    this.activateModalOutlet();
-
     this.ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
     this.listenForIonModalDidPresent();
     this.listenForIonModalWillDismiss();
@@ -103,36 +84,6 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
       providers: [{ provide: COMPONENT_PROPS, useValue: this.config.componentProps }],
       parent: this.injector,
     });
-  }
-
-  activateModalOutlet() {
-    const modalComponent = this.getModalOutletRouterState(
-      this.router.routerState['_root'].children[0].value
-    );
-    if (!modalComponent) return;
-
-    const outlet = this.parentContexts.getContext('modal').outlet;
-    outlet.activateWith(modalComponent, this.parentContexts.getContext('modal').resolver);
-
-    this.router.events
-      .pipe(
-        filter((event) => event instanceof NavigationEnd),
-        first()
-      )
-      .subscribe(() => {
-        if (outlet.isActivated) {
-          outlet.deactivate();
-        }
-        this.activateModalOutlet();
-      });
-  }
-
-  getModalOutletRouterState(state: ActivatedRoute) {
-    if (state.children[0]) {
-      return this.getModalOutletRouterState(state.children[0]);
-    } else if (state.outlet === 'modal') {
-      return state;
-    }
   }
 
   ngAfterViewInit(): void {

@@ -21,13 +21,6 @@ export const routes: Routes = [
       {
         path: 'intro',
         component: IntroComponent,
-        children: [
-          {
-            path: 'examples',
-            loadChildren: () =>
-              import('./examples/examples-routing.module').then((m) => m.ExamplesRoutingModule),
-          },
-        ],
       },
       {
         path: 'showcase',

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 
 import { KirbyModule } from '@kirbydesign/designsystem';
 
@@ -21,7 +20,6 @@ import { AvatarExampleModule } from './avatar-example/avatar-example.module';
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule,
     KirbyModule,
     FormFieldExamplesModule,
     ItemExampleModule,
