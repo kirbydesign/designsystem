@@ -1,16 +1,8 @@
-import {
-  Component,
-  ContentChild,
-  ElementRef,
-  AfterContentInit,
-  ViewChild,
-  OnInit,
-} from '@angular/core';
+import { Component, ContentChild, ElementRef, AfterContentInit, ViewChild } from '@angular/core';
 import { IonApp } from '@ionic/angular';
 
 import { RouterOutletComponent } from '../router-outlet/router-outlet.component';
 import { ModalController } from '../modal/services/modal.controller';
-import { ModalOutlet } from '../modal/services/modal-outlet.service';
 
 @Component({
   selector: 'kirby-app',
