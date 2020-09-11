@@ -1,14 +1,12 @@
-import { Injectable, Injector } from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
   Router,
   ActivatedRoute,
   ChildrenOutletContexts,
   NavigationEnd,
-  Event,
   RouterEvent,
 } from '@angular/router';
-import { Observable, from } from 'rxjs';
-import { filter, first, takeUntil, tap } from 'rxjs/operators';
+import { filter } from 'rxjs/operators';
 
 import { ModalWrapperComponent } from '../modal-wrapper/modal-wrapper.component';
 
@@ -37,7 +35,6 @@ export class ModalOutlet {
   }
 
   activate(modalWrapper: ModalWrapperComponent) {
-    console.log('comp activate');
     if (!this.isModalRoute(this.router.url)) return;
 
     const routerState = this.getRouterState(this.router);

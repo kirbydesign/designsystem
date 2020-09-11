@@ -37,7 +37,7 @@ export class ModalController {
 
     const onCloseOveride = () => {
       this.modalOutlet.destroy();
-      onClose();
+      if (typeof onClose === 'function') onClose();
     };
 
     await this.showAndRegisterOverlay(

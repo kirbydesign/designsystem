@@ -1,7 +1,5 @@
 import { Routes } from '@angular/router';
 
-import { ModalResolver } from '@kirbydesign/designsystem';
-
 import { ListNoShapeExampleComponent } from './list/components/no-shape/list-no-shape-example.component';
 import { AvatarExampleComponent } from './avatar-example/avatar-example.component';
 import { ButtonExampleComponent } from './button-example/button-example.component';

@@ -11,6 +11,7 @@ const config = {
 <button kirby-button (click)="showDrawer()">Show drawer</button>
 <button kirby-button (click)="showCompact()">Show compact</button>
 <button kirby-button (click)="showModalWithFooter()">Show modal with footer</button>
+<button kirby-button (click)="navigateToModalRoute()">Open modal by route</button>
 `,
   footerTemplate: `<p>Some content of the embedded component</p>
 ...
@@ -132,6 +133,21 @@ export class EmbeddedComponent() {
     this.modal?.close(returnData);
   }
 }`,
+  modalWithOutletCodeSnippet: `{
+    path: 'route-which-is-behind-the-modal',
+    component: SomeComponent,
+    children: [
+      {
+        path: 'some-route',
+        outlet: 'modal',
+        component: SomeOtherComponent,
+        data: {
+          modalTitle: 'Some title',
+        },
+      },
+    ],
+  }`,
+  routerLinkForModalOutletCodeSnippet: `[routerLink]="['/', { outlets: { modal: ['some-route'] } }]"`,
 };
 
 @Component({
@@ -143,6 +159,7 @@ export class ModalExampleComponent implements OnInit {
   footerTemplate = config.footerTemplate;
   defaultCodeSnippet = config.defaultCodeSnippet;
   drawerCodeSnippet = config.drawerCodeSnippet;
+  modalWithOutletCodeSnippet = config.modalWithOutletCodeSnippet;
   callbackCodeSnippet = config.callbackCodeSnippet;
   callbackWithDataCodeSnippet = config.callbackWithDataCodeSnippet;
   didPresentCodeSnippet = config.didPresentCodeSnippet;
@@ -151,13 +168,9 @@ export class ModalExampleComponent implements OnInit {
   disableScrollingCodeSnippet = config.disableScrollingCodeSnippet;
   embeddedCodeSnippet = config.embeddedCodeSnippet;
   closeModalCodeSnippet = config.closeModalCodeSnippet;
+  routerLinkForModalOutletCodeSnippet = config.routerLinkForModalOutletCodeSnippet;
 
-  constructor(
-    private modalController: ModalController,
-    private activatedRoute: ActivatedRoute,
-    private router: Router,
-    private parentContexts: ChildrenOutletContexts
-  ) {}
+  constructor(private modalController: ModalController, private router: Router) {}
 
   ngOnInit() {}
 
@@ -200,6 +213,10 @@ export class ModalExampleComponent implements OnInit {
 
   showModalWithFooter() {
     this.showModal(true);
+  }
+
+  navigateToModalRoute() {
+    this.router.navigate(['/home/showcase/modal/', { outlets: { modal: ['some-route'] } }]);
   }
 
   onModalClose(data: any): void {

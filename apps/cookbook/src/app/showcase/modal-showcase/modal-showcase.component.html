@@ -13,7 +13,14 @@
       <li>
         The modal comes in 3 different <a href="#" (click)="scrollTo(modalFlavors)">flavors</a>:
         <ul>
-          <li><a href="#" (click)="scrollTo(modalFlavorsModal)">Modal (default)</a></li>
+          <li>
+            <a href="#" (click)="scrollTo(modalFlavorsModal)">Modal (default) - with component</a>
+          </li>
+          <li>
+            <a href="#" (click)="scrollTo(modalFlavorsModalWithOutlet)"
+              >Modal (default) - with outlet</a
+            >
+          </li>
           <li><a href="#" (click)="scrollTo(modalFlavorsCompact)">Compact</a></li>
           <li><a href="#" (click)="scrollTo(modalFlavorsDrawer)">Drawer</a></li>
         </ul>
@@ -50,7 +57,7 @@
   The modal can have one of multiple flavors, used to determine the opening animation, the position
   of the title and the close button.
 </p>
-<h3 #modalFlavorsModal>Modal (default)</h3>
+<h3 #modalFlavorsModal>Modal (default) - with component</h3>
 <p>
   With the <strong><code>modal</code></strong> flavor, the dialog opens with a slide-up animation,
   it's title is aligned to the left and it's close button is placed in the top right corner. The
@@ -58,6 +65,21 @@
   On mobile/small screens the presenting page will be pushed back in a card-like style (when used
   inside a <code>kirby-app</code>). Any additional modals with the <code>modal</code> flavor opened
   on top will also scale/push back the existing modal, similar to a card stack.
+</p>
+
+<h3 #modalFlavorsModalWithOutlet>Modal (default) - with outlet</h3>
+<p>
+  Instead of providing the modal with a component, you can configure your route to be opened in a
+  modal. This is done by a secondary outlet named <strong><code>modal</code></strong
+  >. The URL for these kind of routes will look like this:
+  <strong><code>/(modal:some-route)</code></strong
+  >. This means that you can do flows inside of modals just as "normal" pages, and makes it possible
+  to deeplink to specific pages inside of the modal. "Modal" routes will automatically open up a
+  modal, if none is already opened.
+  <cookbook-code-viewer [ts]="example.modalWithOutletCodeSnippet"></cookbook-code-viewer>
+  These kind of routes can be navigated to by: (PLEASE NOTE THAT THE MAIN ROUTE IS THE ROUTE BEHIND
+  THE MODAL)
+  <cookbook-code-viewer [ts]="example.routerLinkForModalOutletCodeSnippet"></cookbook-code-viewer>
 </p>
 <h3 #modalFlavorsCompact>Compact</h3>
 <p>

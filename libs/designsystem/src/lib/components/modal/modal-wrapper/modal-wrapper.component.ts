@@ -89,8 +89,12 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
 
   ngOnInit(): void {
     this.modalOutlet.activate(this);
-    this.navigationEndListener$.subscribe(() => {
-      this.modalOutlet.activate(this);
+    this.navigationEndListener$.subscribe((e) => {
+      if (!this.modalOutlet.isModalRoute(e.url)) {
+        this.close();
+      } else {
+        this.modalOutlet.activate(this);
+      }
     });
     this.willClose$.subscribe(() => {
       this.modalOutlet.destroy();

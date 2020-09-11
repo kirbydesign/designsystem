@@ -38,6 +38,7 @@ import { DropdownShowcaseComponent } from '~/app/showcase/dropdown-showcase/drop
 import { ReorderListShowcaseComponent } from './reorder-list-showcase/reorder-list-showcase.component';
 import { StockChartShowcaseComponent } from './stock-chart-showcase/stock-chart-showcase.component';
 import { ProgressCircleShowcaseComponent } from './progress-circle-showcase/progress-circle-showcase.component';
+import { IntroComponent } from '../intro/intro.component';
 
 export const routes: Routes = [
   {
@@ -128,6 +129,16 @@ export const routes: Routes = [
       {
         path: 'modal',
         component: ModalShowcaseComponent,
+        children: [
+          {
+            path: 'some-route',
+            outlet: 'modal',
+            component: IntroComponent,
+            data: {
+              modalTitle: 'Some title',
+            },
+          },
+        ],
       },
       {
         path: 'loading-overlay',
