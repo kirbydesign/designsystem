@@ -10,6 +10,7 @@ import { PageComponent, PageContentComponent } from './page.component';
 import { FitHeadingDirective } from '../../directives/fit-heading/fit-heading.directive';
 
 const size = DesignTokenHelper.size;
+const fatFingerSize = DesignTokenHelper.fatFingerSize();
 
 describe('PageComponent', () => {
   let spectator: SpectatorHost<PageComponent>;
@@ -50,18 +51,23 @@ describe('PageComponent', () => {
     expect(spectator.component).toBeTruthy();
   });
 
-  it('should render with correct padding', async () => {
+  it('should render toolbar with correct padding', async () => {
     await TestHelper.whenHydrated(ionToolbar);
     const toolbarContainer = ionToolbar.shadowRoot.querySelector('.toolbar-container');
     expect(toolbarContainer).toHaveComputedStyle({
-      'padding-left': size('xxs'),
-      'padding-right': size('xxs'),
+      'padding-left': size('xxxs'),
+      'padding-right': size('xxxs'),
       'padding-top': '0px',
-      'padding-bottom': size('xxxs'),
+      'padding-bottom': '0px',
     });
-    const ionTitle = spectator.queryHost('ion-title');
-    expect(ionTitle).toHaveComputedStyle({
-      'padding-bottom': size('xxxs'),
+  });
+
+  it('should render back button with correct size', async () => {
+    await TestHelper.whenHydrated(ionToolbar);
+    const ionBackButton = spectator.queryHost('ion-toolbar ion-buttons ion-back-button');
+    expect(ionBackButton).toHaveComputedStyle({
+      width: fatFingerSize,
+      height: fatFingerSize,
     });
   });
 });

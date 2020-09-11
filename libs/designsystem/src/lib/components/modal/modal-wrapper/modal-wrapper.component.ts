@@ -255,8 +255,10 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
             (node) => node.nodeName === 'KIRBY-MODAL-FOOTER'
           );
         })[0];
-      this.embeddedFooterElement = <HTMLElement>addedFooter;
-      this.moveEmbeddedFooter();
+      if (addedFooter) {
+        this.embeddedFooterElement = <HTMLElement>addedFooter;
+        this.moveEmbeddedFooter();
+      }
     };
     this.mutationObserver = new MutationObserver(callback);
     this.mutationObserver.observe(embeddedComponentElement, {

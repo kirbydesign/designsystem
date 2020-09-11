@@ -31,13 +31,19 @@ $form-field-label-height: 24px;
   line-height: line-height('n');
   outline: none;
   margin: 0;
+  padding: 0;
   -webkit-appearance: none;
+  border-radius: size('s');
+  box-shadow: get-elevation(2);
+  padding: size('s');
+  width: 100%;
 
-  &:not(.borderless) {
-    border-radius: size('s');
-    box-shadow: get-elevation(2);
-    padding: size('s');
-    width: 100%;
+  &:host-context(kirby-item),
+  &.borderless {
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
+    width: auto;
   }
 
   &:disabled {
@@ -53,11 +59,4 @@ $form-field-label-height: 24px;
   &::-ms-input-placeholder {
     color: get-text-color('semi-dark');
   }
-}
-// TODO: !important used to overrule &:not(.borderless) - May need refactoring
-:host-context(kirby-item) {
-  border-radius: 0 !important;
-  box-shadow: none !important;
-  padding: 1px 2px !important;
-  width: auto !important;
 }

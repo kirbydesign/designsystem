@@ -37,7 +37,7 @@ $badge-diameter: $avatar-badge-size;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: get-color('light');
+  background-color: get-color('white');
   color: get-color('light-contrast');
 
   //default to icon size 'sm'
