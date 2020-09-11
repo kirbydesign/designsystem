@@ -15,17 +15,13 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <a [routerLink]="['/examples/modal', { outlets: { modal: ['feature'] } }]">
-    Feature 1
-  </a>
-  <a [routerLink]="['/examples/modal', { outlets: { modal: ['feature2'] } }]">
-    Feature 2
-  </a>
-
-  <router-outlet name="modal"></router-outlet>
-  <!--<ng-container
+  <router-outlet
+    name="modal"
+    [style.visibility]="!config.component ? 'visible' : 'hidden'"
+  ></router-outlet>
+  <ng-container
     *ngComponentOutlet="config.component; injector: componentPropsInjector"
-  ></ng-container>-->
+  ></ng-container>
 </ion-content>
 
 <ng-template #closeButton let-icon="icon">
