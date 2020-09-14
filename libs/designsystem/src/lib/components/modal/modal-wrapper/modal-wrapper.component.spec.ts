@@ -3,6 +3,7 @@ import { tick, fakeAsync } from '@angular/core/testing';
 import { IonToolbar, IonHeader, IonTitle, IonButtons, IonContent } from '@ionic/angular';
 import { MockComponents } from 'ng-mocks';
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { KirbyAnimation } from '../../../animation/kirby-animation';
 import { TestHelper } from '../../../testing/test-helper';
@@ -49,6 +50,7 @@ describe('ModalWrapperComponent', () => {
 
   const createComponent = createComponentFactory({
     component: ModalWrapperComponent,
+    imports: [RouterTestingModule],
     entryComponents: [
       StaticFooterEmbeddedComponent,
       DynamicFooterEmbeddedComponent,
@@ -226,6 +228,7 @@ describe('ModalWrapperComponent', () => {
     it('should move embedded footer to wrapper component', () => {
       const ionContentElement = spectator.query('ion-content');
       const embeddedComponentElement = ionContentElement.firstElementChild;
+      console.log('embedded', embeddedComponentElement);
       const embeddedFooter = embeddedComponentElement.querySelector('kirby-modal-footer');
       expect(embeddedFooter).toBeNull();
       const footerAsWrapperChild = spectator.element.querySelector(':scope > kirby-modal-footer');

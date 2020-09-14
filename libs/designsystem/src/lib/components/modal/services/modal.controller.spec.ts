@@ -1,10 +1,12 @@
-import { Subject } from 'rxjs';
+import { Subject, of } from 'rxjs';
+import { filter } from 'rxjs/operators';
 
 import { Overlay, OverlayEventDetail } from './modal.interfaces';
 import { ModalController } from './modal.controller';
 import { ModalHelper } from './modal.helper';
 import { ActionSheetHelper } from './action-sheet.helper';
 import { AlertHelper } from './alert.helper';
+import { ModalOutlet } from './modal-outlet.service';
 
 describe('modalController', () => {
   let modalController: ModalController;
@@ -18,11 +20,22 @@ describe('modalController', () => {
   const alertHelperSpy: jasmine.SpyObj<AlertHelper> = jasmine.createSpyObj('AlertHelper', [
     'showAlert',
   ]);
+  const ModalOutletSpy: jasmine.SpyObj<ModalOutlet> = jasmine.createSpyObj('ModalOutletSpy', [
+    'resolve$',
+    'destroy',
+  ]);
+  ModalOutletSpy.resolve$ = of(null).pipe(filter(() => false));
+
   const expectedError = 'No modal overlays are currently registered';
   let callbackSpy: jasmine.Spy;
 
   beforeEach(() => {
-    modalController = new ModalController(modalHelperSpy, actionSheetHelperSpy, alertHelperSpy);
+    modalController = new ModalController(
+      modalHelperSpy,
+      actionSheetHelperSpy,
+      alertHelperSpy,
+      ModalOutletSpy
+    );
     callbackSpy = jasmine.createSpy('callback');
   });
 

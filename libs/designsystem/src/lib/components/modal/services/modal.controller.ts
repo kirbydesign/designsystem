@@ -35,9 +35,11 @@ export class ModalController {
       console.warn('ModalConfig.dim is deprecated - please remove from your configuration.');
     }
 
-    const onCloseOveride = () => {
+    const onCloseOveride = (data?: any) => {
       this.modalOutlet.destroy();
-      if (typeof onClose === 'function') onClose();
+      if (typeof onClose === 'function') {
+        onClose(data);
+      }
     };
 
     await this.showAndRegisterOverlay(
@@ -66,10 +68,14 @@ export class ModalController {
   ) {
     const overlay = await showOverlay();
     this.overlays.push(overlay);
+
+    if (!overlay || !overlay.onDidDismiss) return;
+
     overlay.onDidDismiss.then((event) => {
       this.overlays.pop();
-      if (onCloseOverlay) {
-        onCloseOverlay(event.data);
+      if (typeof onCloseOverlay === 'function') {
+        const data = !event || !event.data ? undefined : event.data;
+        onCloseOverlay(data);
       }
     });
   }

@@ -1,9 +1,11 @@
 import { IonicModule, ModalController as IonicModalController } from '@ionic/angular';
-import { createService } from '@ngneat/spectator';
+import { createService, mockProvider } from '@ngneat/spectator';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { ActionSheetHelper } from './action-sheet.helper';
 import { ModalHelper } from './modal.helper';
 import { Overlay } from './modal.interfaces';
+import { ModalOutlet } from './modal-outlet.service';
 
 describe('ActionSheetHelper', () => {
   let actionSheetHelper: ActionSheetHelper;
@@ -11,8 +13,8 @@ describe('ActionSheetHelper', () => {
 
   const spectator = createService({
     service: ActionSheetHelper,
-    imports: [IonicModule.forRoot({ mode: 'ios', _testing: true })],
-    providers: [ModalHelper],
+    imports: [IonicModule.forRoot({ mode: 'ios', _testing: true }), RouterTestingModule],
+    providers: [ModalHelper, mockProvider(ModalOutlet)],
   });
 
   beforeEach(() => {

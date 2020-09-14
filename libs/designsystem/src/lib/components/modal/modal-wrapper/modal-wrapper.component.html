@@ -15,13 +15,13 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
+  <ng-container
+    *ngComponentOutlet="config.component; injector: componentPropsInjector"
+  ></ng-container>
   <router-outlet
     name="modal"
     [style.visibility]="!config.component ? 'visible' : 'hidden'"
   ></router-outlet>
-  <ng-container
-    *ngComponentOutlet="config.component; injector: componentPropsInjector"
-  ></ng-container>
 </ion-content>
 
 <ng-template #closeButton let-icon="icon">

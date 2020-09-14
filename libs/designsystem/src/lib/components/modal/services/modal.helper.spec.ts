@@ -1,11 +1,14 @@
 import { Component, Optional, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { IonicModule, ModalController as IonicModalController } from '@ionic/angular';
-import { createService } from '@ngneat/spectator';
+import { createService, mockProvider } from '@ngneat/spectator';
+import { RouterTestingModule } from '@angular/router/testing';
+import { ChildrenOutletContexts } from '@angular/router';
 
 import { DesignTokenHelper } from '../../../helpers/design-token-helper';
 import { TestHelper } from '../../../testing/test-helper';
 import { ModalHelper } from './modal.helper';
 import { Overlay, Modal } from './modal.interfaces';
+import { ModalOutlet } from './modal-outlet.service';
 
 @Component({
   template: `
@@ -22,6 +25,14 @@ class InputEmbeddedComponent implements OnInit {
   ngOnInit() {
     this.modal && this.modal.didPresent.then(() => this.input.nativeElement.focus());
   }
+}
+
+function resolveAfterAnimation(ms: number) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve('animation done');
+    }, ms);
+  });
 }
 
 describe('ModalHelper', () => {
@@ -41,7 +52,8 @@ describe('ModalHelper', () => {
 
   const spectator = createService({
     service: ModalHelper,
-    imports: [IonicModule.forRoot({ mode: 'ios', _testing: true })],
+    imports: [IonicModule.forRoot({ mode: 'ios', _testing: true }), RouterTestingModule],
+    providers: [mockProvider(ModalOutlet), mockProvider(ChildrenOutletContexts)],
     entryComponents: [InputEmbeddedComponent],
   });
 
@@ -82,6 +94,7 @@ describe('ModalHelper', () => {
             title: 'Modal On Presenting Element',
             component: undefined,
           });
+
           ionModal = await ionModalController.getTop();
           ionBackdrop = ionModal.querySelector(':scope > ion-backdrop');
           expect(ionBackdrop).toHaveComputedStyle({ opacity: backdropOpacity });
