@@ -12,7 +12,7 @@ const config = {
 
 @Component({
   selector: config.selector,
-  templateUrl: config.template,
+  template: config.template,
   styleUrls: ['./text-link-examples.scss'],
 })
 export class TextLinkExampleIconComponent {
