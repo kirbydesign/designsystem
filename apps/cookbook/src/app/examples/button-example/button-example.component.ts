@@ -24,7 +24,9 @@ export class ButtonExampleComponent {
       value: 'lg',
     },
   ];
-
+  click() {
+    console.log('hey');
+  }
   onButtonSizeChange(value) {
     this.buttonSize = value;
   }

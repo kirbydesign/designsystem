@@ -82,6 +82,7 @@
 }
 
 :host {
+  $touchArea: calcTouchArea(size('xl'), 1px);
   font-family: var(--kirby-font-family);
   background-color: var(--kirby-button-background-color);
   border-radius: $border-radius-round;
@@ -132,22 +133,19 @@
     padding: 0;
     position: relative;
   }
+  &.icon-only:not(.floating)::before {
+    content: '';
+    position: absolute;
+    top: $touchArea;
+    bottom: $touchArea;
+    left: $touchArea;
+    right: $touchArea;
+  }
 
   &.sm {
     @include button-sm;
   }
-  &.md {
-    $touchArea: calcTouchArea(size('xl'), 1px);
 
-    &.icon-only:not(.floating)::before {
-      content: '';
-      position: absolute;
-      top: $touchArea;
-      bottom: $touchArea;
-      left: $touchArea;
-      right: $touchArea;
-    }
-  }
   &.lg {
     @include button-lg;
   }
