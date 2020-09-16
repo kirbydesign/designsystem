@@ -8,6 +8,7 @@
   &:not(.icon-only) {
     padding-left: size('s');
     padding-right: size('s');
+    min-width: 44px;
   }
 
   &.icon-only {
@@ -115,7 +116,9 @@
   @include focus() {
     border-color: $focus-ring-color;
   }
-
+  &:not(.icon-only) {
+    min-width: 44px;
+  }
   &.icon-left {
     padding-left: size('xs');
     padding-right: size('s');
