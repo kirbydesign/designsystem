@@ -1,7 +1,7 @@
 @import '../../scss/utils';
 
 @mixin min-width {
-  &:not(.icon-only):not(.icon-left):not(.icon-right):not(.lg) {
+  &:not(.icon-only) :not(.icon-left) :not(.icon-right) :not(.lg) {
     min-width: 44px;
   }
 }
@@ -154,7 +154,6 @@
     @include button-sm;
     @include min-width;
   }
-
   &.lg {
     @include button-lg;
   }

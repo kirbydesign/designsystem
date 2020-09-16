@@ -196,7 +196,7 @@ describe('ButtonComponent in Kirby Page', () => {
   });
 });
 
-describe('ButtonComponent in kirby empty state', () => {
+fdescribe('ButtonComponent in kirby empty state', () => {
   let spectator: SpectatorHost<EmptyStateComponent>;
   let actionButtonInEmptyState: HTMLButtonElement;
   const createHost = createHostFactory({
