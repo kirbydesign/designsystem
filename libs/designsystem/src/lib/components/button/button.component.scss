@@ -1,7 +1,7 @@
 @import '../../scss/utils';
 
 @mixin min-width {
-  &:not(.icon-only):not(.icon-left):not(.icon-right):not(.lg) {
+  &:not(.icon-only):not(.icon-left):not(.icon-right):not(.lg):not(article .content) {
     min-width: 44px;
   }
 }
@@ -20,7 +20,7 @@
     position: relative;
     width: size('l');
 
-    &:not(.floating)::before {
+    &:not(.floating):before {
       content: '';
       position: absolute;
       top: $touchArea;
@@ -39,7 +39,7 @@
 @mixin button-lg {
   font-size: font-size('n');
   height: size('xxl');
-  min-width: 220px;
+  min-width: 220px !important;
 
   &.icon-only {
     width: size('xxl');
@@ -260,6 +260,7 @@
 // Temp fix for https://github.com/angular/angular-cli/issues/13854#issuecomment-470831308
 /* clean-css ignore:start */
 :host-context(kirby-empty-state .content) {
+  background-color: chartreuse;
   @include button-lg;
 }
 /* clean-css ignore:end */

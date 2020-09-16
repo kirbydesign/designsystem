@@ -27,7 +27,7 @@ const size = DesignTokenHelper.size;
 const fontSize = DesignTokenHelper.fontSize;
 const fatFingerSize = DesignTokenHelper.fatFingerSize();
 
-describe('ButtonComponent in Kirby Page', () => {
+fdescribe('ButtonComponent in Kirby Page', () => {
   let spectator: SpectatorHost<PageComponent>;
   const createHost = createHostFactory({
     component: PageComponent,
@@ -196,7 +196,7 @@ describe('ButtonComponent in Kirby Page', () => {
   });
 });
 
-describe('ButtonComponent in kirby empty state', () => {
+fdescribe('ButtonComponent in kirby empty state', () => {
   let spectator: SpectatorHost<EmptyStateComponent>;
   let actionButtonInEmptyState: HTMLButtonElement;
   const createHost = createHostFactory({
@@ -311,6 +311,23 @@ describe('ButtonComponent with size directive', () => {
 
     it('should render with correct min-width', () => {
       expect(element).toHaveComputedStyle({ 'min-width': '220px' });
+    });
+  });
+  describe('when configured with  no size', () => {
+    beforeEach(() => {
+      spectator = createHost('<button kirby-button >Test</button>');
+      element = spectator.element as HTMLButtonElement;
+    });
+    it('should render with correct font-size', () => {
+      expect(element).toHaveComputedStyle({ 'font-size': fontSize('s') });
+    });
+
+    it('should render with correct height', () => {
+      expect(element).toHaveComputedStyle({ height: size('xl') });
+    });
+
+    it('should render with correct min-width', () => {
+      expect(element).toHaveComputedStyle({ 'min-width': '44px' });
     });
   });
 });
