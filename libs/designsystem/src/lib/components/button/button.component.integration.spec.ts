@@ -271,12 +271,16 @@ describe('ButtonComponent with size directive', () => {
     it('should render with correct height', () => {
       expect(element).toHaveComputedStyle({ height: size('l') });
     });
+    it('should render with correct min-width', () => {
+      expect(element).toHaveComputedStyle({ 'min-width': '44px' });
+    });
   });
 
   describe('when configured with size = MD', () => {
     beforeEach(() => {
       spectator = createHost('<button kirby-button size="md"><span>Text Left</span></button>');
       element = spectator.element as HTMLButtonElement;
+      console.log('element', element);
     });
 
     it('should render with correct font-size', () => {
@@ -285,6 +289,9 @@ describe('ButtonComponent with size directive', () => {
 
     it('should render with correct height', () => {
       expect(element).toHaveComputedStyle({ height: size('xl') });
+    });
+    it('should render with correct min-width', () => {
+      expect(element).toHaveComputedStyle({ 'min-width': '44px' });
     });
   });
 
