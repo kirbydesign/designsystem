@@ -1,5 +1,11 @@
 @import '../../scss/utils';
 
+@mixin min-width {
+  &:not(.icon-only):not(.icon-left):not(.icon-right):not(.lg) {
+    min-width: 44px;
+  }
+}
+
 @mixin button-sm {
   $touchArea: calcTouchArea(size('l'), 1px);
   font-size: font-size('xs');
@@ -116,9 +122,8 @@
   @include focus() {
     border-color: $focus-ring-color;
   }
-  &:not(.icon-only) {
-    min-width: 44px;
-  }
+  @include min-width;
+
   &.icon-left {
     padding-left: size('xs');
     padding-right: size('s');
@@ -147,6 +152,7 @@
 
   &.sm {
     @include button-sm;
+    @include min-width;
   }
 
   &.lg {

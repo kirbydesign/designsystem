@@ -34,6 +34,7 @@ export class ButtonComponent implements AfterContentInit {
   public get isIconOnly(): boolean {
     return this.icon && !this._hasSlottedContent;
   }
+
   private _isIconLeft = false;
   @HostBinding('class.icon-left')
   public get isIconLeft() {
