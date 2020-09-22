@@ -12,7 +12,7 @@ import {
   TrackByFunction,
   ContentChildren,
   AfterViewInit,
-  ElementRef,
+  Inject,
 } from '@angular/core';
 
 import {
@@ -29,6 +29,7 @@ import { GroupByPipe } from './pipes/group-by.pipe';
 import { ListSwipeAction } from './list-swipe-action';
 import { ThemeColor } from '../../helpers/theme-color.type';
 import { ItemComponent } from '../item/item.component';
+import { WINDOW_TOKEN } from '../../helpers/di';
 
 export type ListShape = 'square' | 'rounded' | 'none';
 
@@ -140,7 +141,12 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   groupedItems: any[];
   selectedItem: any;
 
-  constructor(private listHelper: ListHelper, private groupBy: GroupByPipe) {}
+  constructor(
+    private listHelper: ListHelper,
+    private groupBy: GroupByPipe,
+    // because of "Could not resolve type Window" error
+    @Inject(WINDOW_TOKEN) private window: any
+  ) {}
 
   ngOnInit() {
     this.hasDeprecatedItemTemplate = !!this.legacyItemTemplate || !!this.legacyFlexItemTemplate;
@@ -234,9 +240,9 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   private initializeSwipeActions(): void {
-    const large = 1025; //TODO this need to be refactored.
     if (this.swipeActions && this.swipeActions.length) {
-      this.isSwipingEnabled = window.innerWidth < large;
+      const isTouchDeviceQuery = '(pointer: coarse) and (hover: none)';
+      this.isSwipingEnabled = this.window.matchMedia(isTouchDeviceQuery).matches;
       if (this.list && !this.isSwipingEnabled) {
         this.list.closeSlidingItems();
       }
