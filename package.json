@@ -1,6 +1,7 @@
 {
   "name": "designsystem",
   "version": "1.2.77-beta.0",
+
   "description": "Kirby Design Components",
   "repository": {
     "type": "git",
