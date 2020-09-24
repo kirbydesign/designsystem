@@ -3,6 +3,12 @@
 // Global modal styling can be found at scss/base/_ionic.scss
 
 :host {
+  @include media('>=medium') {
+    &:not(.drawer) {
+      display: block;
+    }
+  }
+
   padding-top: size('s');
 }
 

@@ -48,6 +48,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   @ViewChild(IonContent, { static: true, read: ElementRef }) private ionContentElement: ElementRef<
     HTMLIonContentElement
   >;
+
   private mutationObserver: MutationObserver;
   private keyboardVisible = false;
   private toolbarButtons: HTMLButtonElement[] = [];
@@ -56,6 +57,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   private initialViewportHeight: number;
   private viewportResized = false;
   private ionModalElement: HTMLIonModalElement;
+  private embeddedComponentElement: HTMLElement;
   private embeddedFooterElement: HTMLElement;
   private readonly ionModalDidPresent = new Subject<void>();
   readonly didPresent = this.ionModalDidPresent.toPromise();
@@ -65,6 +67,12 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   @HostBinding('class.drawer')
   get _isDrawer() {
     return this.config.flavor === 'drawer';
+  }
+
+  private _ionPageReset = true;
+  @HostBinding('class.ion-page')
+  get ionPageReset() {
+    return this._ionPageReset;
   }
 
   constructor(
@@ -78,6 +86,10 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
 
   ngOnInit(): void {
     this.ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
+    this.embeddedComponentElement = this.ionContentElement.nativeElement.querySelector(
+      ':first-child'
+    );
+    this._ionPageReset = !window.matchMedia('(min-width: 721px)').matches;
     this.listenForIonModalDidPresent();
     this.listenForIonModalWillDismiss();
     this.componentPropsInjector = Injector.create({
@@ -86,7 +98,71 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     });
   }
 
+  private setIonContentHeightBasedOnContent(contentHeight: number) {
+    const modalElementRef = this.elementRef.nativeElement.parentElement;
+    const contentWrapperElementRef = this.ionContentElement.nativeElement.querySelector(
+      '.content-wrapper'
+    );
+    const footerElementRef = this.elementRef.nativeElement.querySelector('kirby-modal-footer');
+
+    if (!window.matchMedia('(min-width: 721px)').matches) {
+      this._ionPageReset = true;
+      this.renderer.setStyle(this.ionContentElement.nativeElement, 'height', `100%`);
+      this.renderer.setStyle(modalElementRef, 'border-bottom-right-radius', 'inherit');
+      this.renderer.setStyle(modalElementRef, 'border-bottom-left-radius', 'inherit');
+      return;
+    }
+
+    this._ionPageReset = false;
+
+    const fullModalHeight =
+        document.documentElement.clientHeight -
+        40 /* padding-top kirby-modal */ -
+        46 /* modal header */ -
+        16 /* padding-top kirby-modal-wrapper */;
+
+    if (fullModalHeight >= contentHeight) {
+      this.renderer.setStyle(modalElementRef, 'border-bottom-right-radius', '16px');
+      this.renderer.setStyle(modalElementRef, 'border-bottom-left-radius', '16px');
+
+      this.renderer.setStyle(this.ionContentElement.nativeElement, 'height', `${contentHeight}px`);
+
+      if (footerElementRef) {
+        this.renderer.setStyle(footerElementRef, 'position', 'static');
+        this.renderer.setStyle(footerElementRef, 'bottom', 'auto');
+        this.renderer.setStyle(contentWrapperElementRef, 'padding-bottom', `0`);
+      }
+    } else {
+      this.renderer.setStyle(modalElementRef, 'border-bottom-right-radius', '0');
+      this.renderer.setStyle(modalElementRef, 'border-bottom-left-radius', '0');
+
+      this.renderer.setStyle(
+        this.ionContentElement.nativeElement,
+        'height',
+        `${fullModalHeight}px`
+      );
+
+      if (footerElementRef) {
+        this.renderer.setStyle(footerElementRef, 'position', 'absolute');
+        this.renderer.setStyle(footerElementRef, 'bottom', '0');
+        this.renderer.setStyle(footerElementRef, 'width', '100%');
+
+        const footerHeight = footerElementRef.getBoundingClientRect().height;
+        this.renderer.setStyle(contentWrapperElementRef, 'padding-bottom', `${footerHeight}px`);
+      }
+    }
+  }
+
+  private setModalSize() {
+    if (this.config.flavor !== 'modal') return;
+    this.resizeObserverService.observe(this.embeddedComponentElement, (entry) => {
+      this.setIonContentHeightBasedOnContent(entry.contentRect.height);
+    });
+  }
+
   ngAfterViewInit(): void {
+    this.setModalSize();
+
     if (this.toolbarButtonsQuery) {
       this.toolbarButtons = this.toolbarButtonsQuery.map((buttonRef) => buttonRef.nativeElement);
     }
@@ -271,5 +347,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     this.mutationObserver && this.mutationObserver.disconnect();
     delete this.mutationObserver;
     this.resizeObserverService && this.resizeObserverService.unobserve(window.document.body);
+    this.resizeObserverService &&
+      this.resizeObserverService.unobserve(this.embeddedComponentElement);
   }
 }

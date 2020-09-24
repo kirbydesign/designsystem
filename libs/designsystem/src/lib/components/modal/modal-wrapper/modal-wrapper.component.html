@@ -14,10 +14,14 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
+
 <ion-content [scrollEvents]="true">
-  <ng-container
-    *ngComponentOutlet="config.component; injector: componentPropsInjector"
-  ></ng-container>
+  <div class="content-wrapper">
+    <!-- Ensures that the embeded component is inside an element which is displayed: block -->
+    <ng-container
+      *ngComponentOutlet="config.component; injector: componentPropsInjector"
+    ></ng-container>
+  </div>
 </ion-content>
 
 <ng-template #closeButton let-icon="icon">

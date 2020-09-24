@@ -99,6 +99,11 @@ ion-modal.kirby-overlay {
       &:not(.kirby-drawer):not(.kirby-modal-compact) {
         align-items: flex-start;
         padding-top: size('xl');
+        transition: all 0.5s ease-in-out, padding 0s linear;
+        .modal-wrapper {
+          --height: auto;
+          --max-height: none;
+        }
       }
 
       &.kirby-drawer {
