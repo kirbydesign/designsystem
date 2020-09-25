@@ -15,7 +15,7 @@ echo Clone charts...
 git clone https://github.com/Bankdata/charts.git charts
 
 echo Decrypt kube config
-openssl aes-256-cbc -K $encrypted_6fbdcc8b6f4d_key -iv $encrypted_6fbdcc8b6f4d_iv -in $TRAVIS_BUILD_DIR/.travis/kube.config.enc -out kube.config -d
+openssl aes-256-cbc -K $encrypted_09e556d51fdc_key -iv $encrypted_09e556d51fdc_iv -in $TRAVIS_BUILD_DIR/.travis/kube-config.enc -out kube.config -d
 
 helm upgrade \
   --kubeconfig kube.config \
