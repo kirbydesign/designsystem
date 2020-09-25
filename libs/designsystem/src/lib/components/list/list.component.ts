@@ -235,10 +235,6 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
     event.stopPropagation();
   }
 
-  onResize(): void {
-    this.initializeSwipeActions();
-  }
-
   private initializeSwipeActions(): void {
     if (this.swipeActions && this.swipeActions.length) {
       const isTouchDeviceQuery = '(pointer: coarse) and (hover: none)';
