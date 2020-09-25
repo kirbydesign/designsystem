@@ -29,7 +29,7 @@ import { GroupByPipe } from './pipes/group-by.pipe';
 import { ListSwipeAction } from './list-swipe-action';
 import { ThemeColor } from '../../helpers/theme-color.type';
 import { ItemComponent } from '../item/item.component';
-import { WINDOW_TOKEN } from '../../helpers/di';
+import { WindowRef } from '../../interfaces';
 
 export type ListShape = 'square' | 'rounded' | 'none';
 
@@ -145,7 +145,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
     private listHelper: ListHelper,
     private groupBy: GroupByPipe,
     // because of "Could not resolve type Window" error
-    @Inject(WINDOW_TOKEN) private window: any
+    private window: WindowRef
   ) {}
 
   ngOnInit() {

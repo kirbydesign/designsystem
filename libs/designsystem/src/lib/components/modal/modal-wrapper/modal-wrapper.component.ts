@@ -23,6 +23,7 @@ import { Modal } from '../services/modal.interfaces';
 import { ButtonComponent } from '../../button/button.component';
 import { ResizeObserverService } from '../../shared/resize-observer/resize-observer.service';
 import { ResizeObserverEntry } from '../../shared/resize-observer/types/resize-observer-entry';
+import { WindowRef } from '../../../interfaces';
 
 @Component({
   selector: 'kirby-modal-wrapper',
@@ -33,7 +34,7 @@ import { ResizeObserverEntry } from '../../shared/resize-observer/types/resize-o
 export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDestroy {
   static readonly KEYBOARD_HIDE_DELAY_IN_MS = 100;
 
-  scrollY: number = Math.abs(window.scrollY);
+  scrollY: number = Math.abs(this.window.scrollY);
   set scrollDisabled(disabled: boolean) {
     this.ionContent.scrollY = !disabled;
   }
@@ -71,7 +72,8 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     private injector: Injector,
     private elementRef: ElementRef<HTMLElement>,
     private renderer: Renderer2,
-    private resizeObserverService: ResizeObserverService
+    private resizeObserverService: ResizeObserverService,
+    private window: WindowRef
   ) {
     this.observeViewportResize();
   }
@@ -152,7 +154,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   @HostListener('window:focusout')
   onFocusChange() {
     // This fixes an undesired scroll behaviour occurring on keyboard-tabbing backwards (with shift+tab):
-    window.scrollTo({ top: this.scrollY });
+    this.window.scrollTo({ top: this.scrollY });
   }
 
   @HostListener('window:keyboardWillShow', ['$event'])
@@ -194,7 +196,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   }
 
   private observeViewportResize() {
-    this.resizeObserverService.observe(window.document.body, this.onViewportResize.bind(this));
+    this.resizeObserverService.observe(this.window.document.body, this.onViewportResize.bind(this));
   }
 
   private onViewportResize(entry: ResizeObserverEntry) {
@@ -270,6 +272,6 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     //clean up the observer
     this.mutationObserver && this.mutationObserver.disconnect();
     delete this.mutationObserver;
-    this.resizeObserverService && this.resizeObserverService.unobserve(window.document.body);
+    this.resizeObserverService && this.resizeObserverService.unobserve(this.window.document.body);
   }
 }

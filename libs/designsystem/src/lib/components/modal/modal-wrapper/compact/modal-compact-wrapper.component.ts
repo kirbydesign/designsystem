@@ -12,6 +12,7 @@ import { Subject } from 'rxjs';
 import { ModalConfig } from '../config/modal-config';
 import { COMPONENT_PROPS } from '../config/modal-config.helper';
 import { Modal } from '../../services/modal.interfaces';
+import { WindowRef } from 'libs/designsystem/src/lib/interfaces';
 
 @Component({
   selector: 'kirby-modal-compact-wrapper',
@@ -20,7 +21,7 @@ import { Modal } from '../../services/modal.interfaces';
   providers: [{ provide: Modal, useExisting: ModalCompactWrapperComponent }],
 })
 export class ModalCompactWrapperComponent implements Modal, OnInit {
-  scrollY: number = Math.abs(window.scrollY);
+  scrollY: number = Math.abs(this.window.scrollY);
   scrollDisabled = false;
   @Input() config: ModalConfig;
   componentPropsInjector: Injector;
@@ -37,7 +38,11 @@ export class ModalCompactWrapperComponent implements Modal, OnInit {
     return this._ionPageReset;
   }
 
-  constructor(private injector: Injector, private elementRef: ElementRef<HTMLElement>) {}
+  constructor(
+    private injector: Injector,
+    private elementRef: ElementRef<HTMLElement>,
+    private window: WindowRef
+  ) {}
 
   ngOnInit(): void {
     this.ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
@@ -81,6 +86,6 @@ export class ModalCompactWrapperComponent implements Modal, OnInit {
   @HostListener('window:focusout')
   onFocusChange() {
     // This fixes an undesired scroll behaviour occurring on keyboard-tabbing backwards (with shift+tab):
-    window.scrollTo({ top: this.scrollY });
+    this.window.scrollTo({ top: this.scrollY });
   }
 }
