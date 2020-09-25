@@ -108,8 +108,8 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     if (!window.matchMedia('(min-width: 721px)').matches) {
       this._ionPageReset = true;
       this.renderer.setStyle(this.ionContentElement.nativeElement, 'height', `100%`);
-      this.renderer.setStyle(modalElementRef, 'border-bottom-right-radius', 'inherit');
-      this.renderer.setStyle(modalElementRef, 'border-bottom-left-radius', 'inherit');
+      this.renderer.setStyle(modalElementRef, 'border-bottom-right-radius', '0');
+      this.renderer.setStyle(modalElementRef, 'border-bottom-left-radius', '0');
       return;
     }
 
@@ -155,13 +155,21 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
 
   private setModalSize() {
     if (this.config.flavor !== 'modal') return;
+    this.setIonContentHeightBasedOnContent(
+      this.embeddedComponentElement.getBoundingClientRect().height
+    );
+  }
+
+  private onEmbededComponentElementResize() {
     this.resizeObserverService.observe(this.embeddedComponentElement, (entry) => {
       this.setIonContentHeightBasedOnContent(entry.contentRect.height);
     });
   }
 
   ngAfterViewInit(): void {
-    this.setModalSize();
+    if (this.config.flavor === 'modal') {
+      this.onEmbededComponentElementResize();
+    }
 
     if (this.toolbarButtonsQuery) {
       this.toolbarButtons = this.toolbarButtonsQuery.map((buttonRef) => buttonRef.nativeElement);
@@ -274,6 +282,8 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   }
 
   private onViewportResize(entry: ResizeObserverEntry) {
+    this.setModalSize();
+
     if (!this.initialViewportHeight) {
       // Initial observe callback, register initial height:
       this.initialViewportHeight = entry.contentRect.height;
@@ -347,7 +357,9 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     this.mutationObserver && this.mutationObserver.disconnect();
     delete this.mutationObserver;
     this.resizeObserverService && this.resizeObserverService.unobserve(window.document.body);
-    this.resizeObserverService &&
-      this.resizeObserverService.unobserve(this.embeddedComponentElement);
+    if (this.config.flavor === 'modal') {
+      this.resizeObserverService &&
+        this.resizeObserverService.unobserve(this.embeddedComponentElement);
+    }
   }
 }
