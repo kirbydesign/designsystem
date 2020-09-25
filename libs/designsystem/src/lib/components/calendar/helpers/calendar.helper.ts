@@ -1,6 +1,6 @@
 import { ElementRef, Injectable } from '@angular/core';
 
-import { WindowRef } from '../../../interfaces';
+import { WindowRef } from '../../../types';
 
 import { CalendarOptions } from './calendar-options.model';
 

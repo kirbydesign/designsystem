@@ -12,7 +12,7 @@ import { Subject } from 'rxjs';
 import { ModalConfig } from '../config/modal-config';
 import { COMPONENT_PROPS } from '../config/modal-config.helper';
 import { Modal } from '../../services/modal.interfaces';
-import { WindowRef } from 'libs/designsystem/src/lib/interfaces';
+import { WindowRef } from 'libs/designsystem/src/lib/types';
 
 @Component({
   selector: 'kirby-modal-compact-wrapper',

@@ -12,7 +12,7 @@ import {
 import { Subject, fromEvent } from 'rxjs';
 import { debounceTime, takeUntil, filter, map } from 'rxjs/operators';
 
-import { WindowRef } from '../../../interfaces';
+import { WindowRef } from '../../../types';
 
 import { Scroll } from './scroll.model';
 

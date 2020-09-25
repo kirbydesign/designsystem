@@ -1,5 +1,5 @@
 import { RouterTestingModule } from '@angular/router/testing';
-import { SpectatorHost, createHostFactory } from '@ngneat/spectator';
+import { SpectatorHost, createHostFactory, createSpyObject } from '@ngneat/spectator';
 import { IonicModule, IonIcon } from '@ionic/angular';
 import { MockComponent, MockComponents } from 'ng-mocks';
 
@@ -21,6 +21,7 @@ import { EmptyStateComponent } from '../empty-state/empty-state.component';
 import { DropdownComponent } from '../dropdown/dropdown.component';
 import { CardComponent } from '../card/card.component';
 import { ItemComponent } from '../item/item.component';
+import { WindowRef } from '../../types';
 
 const getColor = DesignTokenHelper.getColor;
 const size = DesignTokenHelper.size;
@@ -40,6 +41,12 @@ describe('ButtonComponent in Kirby Page', () => {
       PageTitleDirective,
       PageToolbarTitleDirective,
       FitHeadingDirective,
+    ],
+    providers: [
+      {
+        provide: WindowRef,
+        useValue: createSpyObject(WindowRef),
+      },
     ],
   });
 

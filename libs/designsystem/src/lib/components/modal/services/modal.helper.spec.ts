@@ -4,6 +4,7 @@ import { createService } from '@ngneat/spectator';
 
 import { DesignTokenHelper } from '../../../helpers/design-token-helper';
 import { TestHelper } from '../../../testing/test-helper';
+import { WindowRef } from '../../../types';
 import { ModalHelper } from './modal.helper';
 import { Overlay, Modal } from './modal.interfaces';
 
@@ -42,6 +43,7 @@ describe('ModalHelper', () => {
   const spectator = createService({
     service: ModalHelper,
     imports: [IonicModule.forRoot({ mode: 'ios', _testing: true })],
+    mocks: [WindowRef],
     entryComponents: [InputEmbeddedComponent],
   });
 

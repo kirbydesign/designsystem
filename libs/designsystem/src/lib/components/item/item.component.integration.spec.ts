@@ -13,7 +13,7 @@ import {
   IconComponent,
   CardComponent,
 } from '..';
-import { WindowRef } from '../../interfaces';
+import { WindowRef } from '../../types';
 
 const size = DesignTokenHelper.size;
 
