@@ -108,8 +108,10 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     if (!window.matchMedia('(min-width: 721px)').matches) {
       this._ionPageReset = true;
       this.renderer.setStyle(this.ionContentElement.nativeElement, 'height', `100%`);
-      this.renderer.setStyle(modalElementRef, 'border-bottom-right-radius', '0');
-      this.renderer.setStyle(modalElementRef, 'border-bottom-left-radius', '0');
+      if (modalElementRef) {
+        this.renderer.setStyle(modalElementRef, 'border-bottom-right-radius', '0');
+        this.renderer.setStyle(modalElementRef, 'border-bottom-left-radius', '0');
+      }
       return;
     }
 
@@ -122,8 +124,10 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
         16 /* padding-top kirby-modal-wrapper */;
 
     if (fullModalHeight >= contentHeight) {
-      this.renderer.setStyle(modalElementRef, 'border-bottom-right-radius', '16px');
-      this.renderer.setStyle(modalElementRef, 'border-bottom-left-radius', '16px');
+      if (modalElementRef) {
+        this.renderer.setStyle(modalElementRef, 'border-bottom-right-radius', '16px');
+        this.renderer.setStyle(modalElementRef, 'border-bottom-left-radius', '16px');
+      }
 
       this.renderer.setStyle(this.ionContentElement.nativeElement, 'height', `${contentHeight}px`);
 
@@ -133,8 +137,10 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
         this.renderer.setStyle(contentWrapperElementRef, 'padding-bottom', `0`);
       }
     } else {
-      this.renderer.setStyle(modalElementRef, 'border-bottom-right-radius', '0');
-      this.renderer.setStyle(modalElementRef, 'border-bottom-left-radius', '0');
+      if (modalElementRef) {
+        this.renderer.setStyle(modalElementRef, 'border-bottom-right-radius', '0');
+        this.renderer.setStyle(modalElementRef, 'border-bottom-left-radius', '0');
+      }
 
       this.renderer.setStyle(
         this.ionContentElement.nativeElement,
@@ -312,7 +318,9 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   }
 
   private checkForEmbeddedFooter() {
-    const embeddedComponentElement = this.ionContentElement.nativeElement.firstElementChild;
+    const embeddedComponentElement = this.ionContentElement.nativeElement.querySelector(
+      'ng-component'
+    );
     if (embeddedComponentElement) {
       this.embeddedFooterElement = embeddedComponentElement.querySelector('kirby-modal-footer');
       this.moveEmbeddedFooter();
