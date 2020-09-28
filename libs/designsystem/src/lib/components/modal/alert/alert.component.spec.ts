@@ -5,6 +5,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AlertComponent } from './alert.component';
 import { ButtonComponent } from '../../button/button.component';
 import { SizeDirective } from '../../../directives/size/size.directive';
+import { WindowRef } from '../../../types';
 
 describe('AlertComponent', () => {
   let component: AlertComponent;
@@ -13,6 +14,12 @@ describe('AlertComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [AlertComponent, ButtonComponent, SizeDirective],
+      providers: [
+        {
+          provide: WindowRef,
+          useValue: window,
+        },
+      ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   }));
