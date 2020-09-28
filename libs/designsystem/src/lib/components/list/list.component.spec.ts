@@ -1,4 +1,4 @@
-import { createComponentFactory, Spectator } from '@ngneat/spectator';
+import { createComponentFactory, createSpyObject, Spectator } from '@ngneat/spectator';
 import { MockComponent } from 'ng-mocks';
 import * as ionic from '@ionic/angular';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -55,7 +55,7 @@ describe('ListComponent', () => {
       GroupByPipe,
       {
         provide: WindowRef,
-        useValue: {},
+        useValue: createSpyObject(WindowRef),
       },
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],

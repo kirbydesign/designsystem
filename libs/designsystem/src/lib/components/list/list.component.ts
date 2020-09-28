@@ -144,7 +144,6 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   constructor(
     private listHelper: ListHelper,
     private groupBy: GroupByPipe,
-    // because of "Could not resolve type Window" error
     private window: WindowRef
   ) {}
 
