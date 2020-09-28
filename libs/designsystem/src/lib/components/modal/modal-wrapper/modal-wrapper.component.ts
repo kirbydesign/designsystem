@@ -105,6 +105,9 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     );
     const footerElementRef = this.elementRef.nativeElement.querySelector('kirby-modal-footer');
 
+    /*
+     * RESET STYLES ON SMALL SCREENS
+     */
     if (!window.matchMedia('(min-width: 721px)').matches) {
       this._ionPageReset = true;
       this.renderer.setStyle(this.ionContentElement.nativeElement, 'height', `100%`);
@@ -123,6 +126,9 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
         46 /* modal header */ -
         16 /* padding-top kirby-modal-wrapper */;
 
+    /*
+     * If content is greater or equals available height
+     */
     if (fullModalHeight >= contentHeight) {
       if (modalElementRef) {
         this.renderer.setStyle(modalElementRef, 'border-bottom-right-radius', '16px');
@@ -136,6 +142,9 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
         this.renderer.setStyle(footerElementRef, 'bottom', 'auto');
         this.renderer.setStyle(contentWrapperElementRef, 'padding-bottom', `0`);
       }
+      /*
+       * Set height by content
+       */
     } else {
       if (modalElementRef) {
         this.renderer.setStyle(modalElementRef, 'border-bottom-right-radius', '0');
@@ -318,9 +327,9 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   }
 
   private checkForEmbeddedFooter() {
-    const embeddedComponentElement = this.ionContentElement.nativeElement.querySelector(
-      'ng-component'
-    );
+    const embeddedComponentElement = this.ionContentElement.nativeElement.firstElementChild
+      .firstElementChild;
+
     if (embeddedComponentElement) {
       this.embeddedFooterElement = embeddedComponentElement.querySelector('kirby-modal-footer');
       this.moveEmbeddedFooter();
