@@ -1,7 +1,7 @@
 import { IonicModule, ModalController as IonicModalController } from '@ionic/angular';
 import { createService } from '@ngneat/spectator';
 
-import { DesignTokenHelper } from '../../../helpers/design-token-helper';
+import { DesignTokenHelper } from '../../../helpers';
 
 import { WindowRef } from '../../../types/window-ref';
 import { AlertHelper } from './alert.helper';
