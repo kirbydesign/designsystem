@@ -10,7 +10,7 @@ import { SpinnerComponent } from '../spinner/spinner.component';
 import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
 import { ListHelper } from './helpers/list-helper';
 import { ListItemColorDirective } from './directives/list-item-color.directive';
-import { WINDOW_TOKEN } from '../../helpers/di';
+import { WindowRef } from '../../types/window-ref';
 
 /**
  * We need an actual model item, since WeakMap can't use primitives for keys.
@@ -54,7 +54,7 @@ describe('ListComponent', () => {
       ListHelper,
       GroupByPipe,
       {
-        provide: WINDOW_TOKEN,
+        provide: WindowRef,
         useValue: window,
       },
     ],
