@@ -76,6 +76,7 @@ import { ProgressCircleComponent } from './components/progress-circle/progress-c
 import { ProgressCircleRingComponent } from './components/progress-circle/progress-circle-ring.component';
 import { FlagComponent } from './components/flag/flag.component';
 import { WINDOW_TOKEN } from './helpers/di';
+import { KirbyIconRegistryService } from './components/icon/kirby-icon-registry.service';
 
 const exportedDeclarations = [
   CardComponent,
@@ -152,6 +153,7 @@ const importedModules = [...exportedModules, OverlayModule];
 
 const providers = [
   ModalController,
+  KirbyIconRegistryService,
   ActionSheetHelper,
   ModalHelper,
   AlertHelper,

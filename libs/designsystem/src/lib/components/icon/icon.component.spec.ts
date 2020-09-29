@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 import { ThemeColorDirective } from '../../directives/theme-color/theme-color.directive';
 import { DesignTokenHelper } from '../../helpers/design-token-helper';
 import { IconComponent } from './icon.component';
+import { IconSettings, ICON_SETTINGS } from './icon-settings';
+import { KirbyIconRegistryService } from './kirby-icon-registry.service';
 
 const getColor = DesignTokenHelper.getColor;
 
@@ -113,6 +115,24 @@ describe('IconComponent', () => {
       });
     });
   });
+  describe('multiple icon settings', () => {
+    it('should combine multiple provided icon, but use icons from ICON_SETTINGS', () => {
+      const fixture = createTestComponent(`<kirby-icon customName="name1"></kirby-icon>`);
+      fixture.detectChanges();
+      const component = fixture.debugElement.query(By.directive(IconComponent)).componentInstance;
+      expect(component.icon.name).toBe('name1');
+      expect(component.icon.svg).toBe('svg1');
+    });
+
+    it('should combine multiple provided icon, and use icons added with KirbyIconRegistryService', () => {
+      const fixture = createTestComponent(`<kirby-icon customName="customName1"></kirby-icon>`);
+      fixture.detectChanges();
+      const component = fixture.debugElement.query(By.directive(IconComponent)).componentInstance;
+      fixture.detectChanges();
+      expect(component.icon.name).toBe('customName1');
+      expect(component.icon.svg).toBe('customSvg1');
+    });
+  });
 });
 
 /*
@@ -131,8 +151,23 @@ export class TestWrapperComponent implements OnInit {
  * Custom Helper function to quickly create a `fixture` instance based on
  * the 'TestWrapperComponent' class
  */
+
 function createTestComponent(template: string): ComponentFixture<TestWrapperComponent> {
   return TestBed.overrideComponent(TestWrapperComponent, {
-    set: { template: template },
+    set: {
+      template: template,
+      providers: [
+        {
+          provide: KirbyIconRegistryService,
+          useValue: jasmine.createSpyObj('KirbyIconRegistryService', ['getCustomIcons'], {
+            getCustomIcons: () => [{ name: 'customName1', svg: 'customSvg1' }],
+          }),
+        },
+        {
+          provide: ICON_SETTINGS,
+          useValue: { icons: [{ name: 'name1', svg: 'svg1' }] } as IconSettings,
+        },
+      ],
+    },
   }).createComponent(TestWrapperComponent);
 }
