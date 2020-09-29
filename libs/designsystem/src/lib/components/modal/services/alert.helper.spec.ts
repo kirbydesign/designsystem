@@ -1,5 +1,5 @@
 import { IonicModule, ModalController as IonicModalController } from '@ionic/angular';
-import { createService, createSpyObject } from '@ngneat/spectator';
+import { createService } from '@ngneat/spectator';
 
 import { DesignTokenHelper } from '../../../helpers/design-token-helper';
 
