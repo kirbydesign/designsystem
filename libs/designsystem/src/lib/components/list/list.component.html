@@ -6,7 +6,6 @@
   [class.has-header]="headerTemplate"
   [class.has-footer]="footerTemplate"
   [class.has-divider]="showDivider"
-  (window:resize)="onResize()"
 >
   <ion-list-header *ngIf="headerTemplate">
     <ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
