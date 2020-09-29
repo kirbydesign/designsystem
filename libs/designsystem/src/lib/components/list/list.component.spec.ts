@@ -55,7 +55,7 @@ describe('ListComponent', () => {
       GroupByPipe,
       {
         provide: WindowRef,
-        useValue: createSpyObject(WindowRef),
+        useValue: window,
       },
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],

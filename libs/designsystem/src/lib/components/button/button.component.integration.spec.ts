@@ -45,7 +45,7 @@ describe('ButtonComponent in Kirby Page', () => {
     providers: [
       {
         provide: WindowRef,
-        useValue: createSpyObject(WindowRef),
+        useValue: window,
       },
     ],
   });

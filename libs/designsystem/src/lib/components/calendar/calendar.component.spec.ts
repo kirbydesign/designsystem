@@ -24,7 +24,7 @@ describe('CalendarComponent', () => {
       },
       {
         provide: WindowRef,
-        useValue: createSpyObject(WindowRef),
+        useValue: window,
       },
     ],
   });

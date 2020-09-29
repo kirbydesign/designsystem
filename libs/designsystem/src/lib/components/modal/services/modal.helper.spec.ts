@@ -43,7 +43,12 @@ describe('ModalHelper', () => {
   const spectator = createService({
     service: ModalHelper,
     imports: [IonicModule.forRoot({ mode: 'ios', _testing: true })],
-    mocks: [WindowRef],
+    providers: [
+      {
+        provide: WindowRef,
+        useValue: window,
+      },
+    ],
     entryComponents: [InputEmbeddedComponent],
   });
 
