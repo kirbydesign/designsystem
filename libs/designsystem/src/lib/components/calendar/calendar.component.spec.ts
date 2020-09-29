@@ -1,4 +1,4 @@
-import { createHostFactory, createSpyObject, SpectatorHost } from '@ngneat/spectator';
+import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import moment from 'moment';
 import { MockComponent } from 'ng-mocks';
 import { LOCALE_ID } from '@angular/core';
