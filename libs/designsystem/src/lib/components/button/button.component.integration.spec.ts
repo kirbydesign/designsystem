@@ -1,5 +1,5 @@
 import { RouterTestingModule } from '@angular/router/testing';
-import { SpectatorHost, createHostFactory, createSpyObject } from '@ngneat/spectator';
+import { SpectatorHost, createHostFactory } from '@ngneat/spectator';
 import { IonicModule, IonIcon } from '@ionic/angular';
 import { MockComponent, MockComponents } from 'ng-mocks';
 
