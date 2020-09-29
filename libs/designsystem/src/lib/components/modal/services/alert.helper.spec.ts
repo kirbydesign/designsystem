@@ -2,6 +2,8 @@ import { IonicModule, ModalController as IonicModalController } from '@ionic/ang
 import { createService } from '@ngneat/spectator';
 
 import { DesignTokenHelper } from '../../../helpers';
+
+import { WindowRef } from '../../../types/window-ref';
 import { AlertHelper } from './alert.helper';
 import { ModalHelper } from './modal.helper';
 import { Overlay } from './modal.interfaces';
@@ -13,7 +15,13 @@ describe('AlertHelper', () => {
   const spectator = createService({
     service: AlertHelper,
     imports: [IonicModule.forRoot({ mode: 'ios', _testing: true })],
-    providers: [ModalHelper],
+    providers: [
+      ModalHelper,
+      {
+        provide: WindowRef,
+        useValue: window,
+      },
+    ],
   });
 
   beforeEach(() => {

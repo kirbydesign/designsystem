@@ -3,6 +3,7 @@ import { IonicModule, ModalController as IonicModalController } from '@ionic/ang
 import { createService } from '@ngneat/spectator';
 
 import { DesignTokenHelper } from '../../../helpers/design-token-helper';
+import { WindowRef } from '../../../types/window-ref';
 import { TestHelper } from '../../../testing/test-helper';
 import { ModalHelper } from './modal.helper';
 import { Overlay, Modal } from './modal.interfaces';
@@ -42,6 +43,12 @@ describe('ModalHelper', () => {
   const spectator = createService({
     service: ModalHelper,
     imports: [IonicModule.forRoot({ mode: 'ios', _testing: true })],
+    providers: [
+      {
+        provide: WindowRef,
+        useValue: window,
+      },
+    ],
     entryComponents: [InputEmbeddedComponent],
   });
 

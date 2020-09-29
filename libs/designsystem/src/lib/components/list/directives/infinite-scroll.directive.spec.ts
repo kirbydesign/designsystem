@@ -2,7 +2,8 @@ import { ElementRef, NgZone } from '@angular/core';
 import { fakeAsync, tick } from '@angular/core/testing';
 import { SpyObject } from '@ngneat/spectator';
 
-import { WindowRef } from './../../shared/window-ref/window-ref.service';
+import { WindowRef } from '../../../types/window-ref';
+
 import { InfiniteScrollDirective, INFINITE_SCROLL_DEBOUNCE } from './infinite-scroll.directive';
 
 describe('InfiniteScrollDirective', () => {
@@ -28,7 +29,7 @@ describe('InfiniteScrollDirective', () => {
 
     const directive = new InfiniteScrollDirective(
       { nativeElement } as ElementRef,
-      { nativeWindow: { innerHeight: viewHeight, document: document as Document } } as WindowRef,
+      { innerHeight: viewHeight, document: document as Document } as WindowRef,
       mockNgZone
     );
     spyOn(directive.scrollEnd, 'emit');
