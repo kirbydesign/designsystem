@@ -4,6 +4,7 @@ import { IonicModule } from '@ionic/angular';
 import { TestHelper } from '../../testing/test-helper';
 import { WindowRef } from '../../types/window-ref';
 import { ItemComponent } from './item.component';
+import { DesignTokenHelper } from '../../helpers';
 import {
   ListComponent,
   InfiniteScrollDirective,
@@ -13,7 +14,6 @@ import {
   IconComponent,
   CardComponent,
 } from '..';
-import { DesignTokenHelper } from '../../helpers/design-token-helper';
 
 const size = DesignTokenHelper.size;
 
