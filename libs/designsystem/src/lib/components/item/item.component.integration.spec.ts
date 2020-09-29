@@ -2,7 +2,8 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { IonicModule } from '@ionic/angular';
 
 import { TestHelper } from '../../testing/test-helper';
-import { DesignTokenHelper, WINDOW_TOKEN } from '../../helpers';
+import { DesignTokenHelper } from '../../helpers';
+import { WindowRef } from '../../types/window-ref';
 import { ItemComponent } from './item.component';
 import {
   ListComponent,
@@ -26,7 +27,7 @@ describe('ItemComponent in Kirby List', () => {
     imports: [IonicModule.forRoot({ mode: 'ios', _testing: true })],
     providers: [
       {
-        provide: WINDOW_TOKEN,
+        provide: WindowRef,
         useValue: window,
       },
     ],

@@ -1,11 +1,15 @@
 import { ElementRef, Injectable } from '@angular/core';
 
+import { WindowRef } from '../../../types/window-ref';
+
 import { CalendarOptions } from './calendar-options.model';
 
 @Injectable()
 export class CalendarHelper {
   private embeddedView: Window;
   private embeddedViewReady = false;
+
+  constructor(private window: WindowRef) {}
 
   public init(
     calendarContainer: ElementRef,
@@ -21,7 +25,7 @@ export class CalendarHelper {
       };
       this.embeddedView = iframe.contentWindow;
 
-      window.addEventListener('message', (event: MessageEvent) =>
+      this.window.addEventListener('message', (event: MessageEvent) =>
         this.handleMessageEvent(event, onDaySelected, onChangeMonth)
       );
     }

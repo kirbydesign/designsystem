@@ -7,7 +7,6 @@ import { Icon } from './icon-settings';
 })
 export class KirbyIconRegistryService {
   private iconRegistry = new Map<string, string>();
-  constructor() {}
 
   addIcon(iconName: string, svgPath: string): void {
     this.iconRegistry.set(iconName, svgPath);
@@ -15,7 +14,7 @@ export class KirbyIconRegistryService {
 
   addIcons(icons: Icon[]): void {
     if (!icons) {
-      console.error('Icon array not defined');
+      console.error('Icons not defined');
       return;
     }
     icons.forEach((icon) => {

@@ -69,13 +69,13 @@ export class IconComponent implements OnChanges {
   }
 
   private combineIconSettings() {
-    const iconSettings: Icon[] =
+    const iconSettingsIcons: Icon[] =
       this.iconSettings && this.iconSettings.icons
         ? [...this.iconSettings.icons]
         : [this.defaultIcon];
 
     this.combinedIconSettings = {
-      icons: [...iconSettings, ...this.iconRegistryService.getCustomIcons()],
+      icons: [...iconSettingsIcons, ...this.iconRegistryService.getCustomIcons()],
     } as IconSettings;
   }
 
