@@ -1,6 +1,8 @@
 import { Component, ElementRef, ViewChild, AfterViewInit, HostBinding, Input } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
+import { WindowRef } from '../../../types/window-ref';
+
 @Component({
   selector: 'kirby-alert',
   templateUrl: './alert.component.html',
@@ -9,7 +11,7 @@ import { Observable, of } from 'rxjs';
 export class AlertComponent implements AfterViewInit {
   readonly BLUR_WRAPPER_DELAY_IN_MS = 50;
   @ViewChild('alertWrapper', { static: true }) private alertWrapper: ElementRef;
-  private scrollY: number = Math.abs(window.scrollY);
+  private scrollY: number = Math.abs(this.window.scrollY);
 
   title$: Observable<string>;
   @Input()
@@ -35,7 +37,7 @@ export class AlertComponent implements AfterViewInit {
     return this._ionPageReset;
   }
 
-  constructor(private elementRef: ElementRef<HTMLElement>) {}
+  constructor(private elementRef: ElementRef<HTMLElement>, private window: WindowRef) {}
 
   ngAfterViewInit(): void {
     setTimeout(() => {
@@ -46,7 +48,7 @@ export class AlertComponent implements AfterViewInit {
 
   onFocusChange() {
     // This fixes an undesired scroll behaviour occurring on keyboard-tabbing
-    window.scrollTo({ top: this.scrollY });
+    this.window.scrollTo({ top: this.scrollY });
   }
 
   onCancel() {

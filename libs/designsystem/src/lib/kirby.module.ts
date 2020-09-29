@@ -75,7 +75,7 @@ import { ResizeObserverService } from './components/shared/resize-observer/resiz
 import { ProgressCircleComponent } from './components/progress-circle/progress-circle.component';
 import { ProgressCircleRingComponent } from './components/progress-circle/progress-circle-ring.component';
 import { FlagComponent } from './components/flag/flag.component';
-import { WINDOW_TOKEN } from './helpers/di';
+import { WindowRef } from './types/window-ref';
 
 const exportedDeclarations = [
   CardComponent,
@@ -162,7 +162,7 @@ const providers = [
   ResizeObserverFactory,
   ResizeObserverService,
   {
-    provide: WINDOW_TOKEN,
+    provide: WindowRef,
     useValue: window,
   },
 ];
