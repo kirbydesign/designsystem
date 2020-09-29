@@ -116,7 +116,7 @@ describe('IconComponent', () => {
     });
   });
   describe('multiple icon settings', () => {
-    it('should combine multiple provided icon, but use icons from ICON_SETTINGS', () => {
+    it('should combine multiple provided icons, but use icons from ICON_SETTINGS', () => {
       const fixture = createTestComponent(`<kirby-icon customName="name1"></kirby-icon>`);
       fixture.detectChanges();
       const component = fixture.debugElement.query(By.directive(IconComponent)).componentInstance;
@@ -124,7 +124,7 @@ describe('IconComponent', () => {
       expect(component.icon.svg).toBe('svg1');
     });
 
-    it('should combine multiple provided icon, and use icons added with KirbyIconRegistryService', () => {
+    it('should combine multiple provided icons, and use icons added with KirbyIconRegistryService', () => {
       const fixture = createTestComponent(`<kirby-icon customName="customName1"></kirby-icon>`);
       fixture.detectChanges();
       const component = fixture.debugElement.query(By.directive(IconComponent)).componentInstance;
