@@ -75,6 +75,7 @@ import { ResizeObserverService } from './components/shared/resize-observer/resiz
 import { ProgressCircleComponent } from './components/progress-circle/progress-circle.component';
 import { ProgressCircleRingComponent } from './components/progress-circle/progress-circle-ring.component';
 import { FlagComponent } from './components/flag/flag.component';
+import { WindowRef } from './types/window-ref';
 
 const exportedDeclarations = [
   CardComponent,
@@ -160,6 +161,10 @@ const providers = [
   LoadingOverlayService,
   ResizeObserverFactory,
   ResizeObserverService,
+  {
+    provide: WindowRef,
+    useValue: window,
+  },
 ];
 
 const entryComponents = [

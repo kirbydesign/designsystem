@@ -28,6 +28,7 @@ import { IonContent } from '@ionic/angular';
 import { FitHeadingConfig } from '../../directives/fit-heading/fit-heading.directive';
 import { selectedTabClickEvent } from '../tabs/tab-button/tab-button.events';
 import { KirbyAnimation } from '../../animation/kirby-animation';
+import { WindowRef } from '../../types/window-ref';
 
 type stickyConfig = { sticky: boolean };
 type fixedConfig = { fixed: boolean };
@@ -156,7 +157,8 @@ export class PageComponent
     private elementRef: ElementRef,
     private renderer: Renderer2,
     private router: Router,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
+    private window: WindowRef
   ) {}
 
   ngOnInit(): void {
@@ -183,7 +185,7 @@ export class PageComponent
       }
     });
 
-    window.addEventListener(selectedTabClickEvent, () => {
+    this.window.addEventListener(selectedTabClickEvent, () => {
       this.content.scrollToTop(KirbyAnimation.Duration.LONG);
     });
   }
@@ -205,7 +207,7 @@ export class PageComponent
       this.routerEventsSubscription.unsubscribe();
     }
     this.pageTitleIntersectionObserverRef.disconnect();
-    window.removeEventListener(selectedTabClickEvent, () => {
+    this.window.removeEventListener(selectedTabClickEvent, () => {
       this.content.scrollToTop(KirbyAnimation.Duration.LONG);
     });
   }
