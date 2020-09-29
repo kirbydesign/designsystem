@@ -143,3 +143,5 @@ export interface KirbyColor extends Color {
   shade: Color;
   contrast: Color;
 }
+
+export type NotificationColor = 'success' | 'warning' | 'danger';

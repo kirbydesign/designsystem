@@ -1,0 +1,4 @@
+<kirby-toggle-button [checked]="true" (checkedChange)="onCheckedChange($event)">
+  <button kirby-button attentionLevel="3" *kirbyToggleButtonShowWhen="false">Deactivated</button>
+  <button kirby-button *kirbyToggleButtonShowWhen="true" color="success">Activated</button>
+</kirby-toggle-button>

@@ -39,6 +39,7 @@ import { DropdownShowcaseComponent } from '~/app/showcase/dropdown-showcase/drop
 import { ReorderListShowcaseComponent } from '../showcase/reorder-list-showcase/reorder-list-showcase.component';
 import { StockChartShowcaseComponent } from './stock-chart-showcase/stock-chart-showcase.component';
 import { FlagShowcaseComponent } from './flag-showcase/flag-showcase.component';
+import { ToggleButtonShowcaseComponent } from './toggle-button-showcase/toggle-button-showcase.component';
 
 export const COMPONENT_IMPORTS: any[] = [ExamplesModule, ShowcaseRoutingModule];
 
@@ -67,6 +68,7 @@ export const COMPONENT_EXPORTS: any[] = [
   AlertShowcaseComponent,
   ToastShowcaseComponent,
   ToggleShowcaseComponent,
+  ToggleButtonShowcaseComponent,
   EmptyStateShowcaseComponent,
   LoadingOverlayShowcaseComponent,
   ToolbarShowcaseComponent,
