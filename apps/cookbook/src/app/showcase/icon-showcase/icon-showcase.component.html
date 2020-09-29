@@ -3,13 +3,29 @@
   <cookbook-code-viewer [html]="exampleHtml"></cookbook-code-viewer>
   <h4>Properties:</h4>
   <cookbook-showcase-properties [properties]="properties"></cookbook-showcase-properties>
-
   <br />
-  <br />
-  Use 'customName' if you want to add custom icons. You need to add 'IconSettings' under your
-  NgModule
-  <br />
+  To support custom icons, use KirbyIconRegistryService in youre NgModule to add custom icons.
   <pre>
+    const customIconSettings: Icon[] = {{ '{' }}
+        {{ '{' }} 
+          name: 'football',
+          svg: '[PATH_TO_SVG_FILE]',
+        {{ '},' }}
+        ...
+    {{ '};' }}
+
+    export class @NGModule {{ '{' }} 
+      constructor(kirbyIconRegistryService: KirbyIconRegistryService) {{ '{' }} 
+        kirbyIconRegistryService.addIcons(customIconSettings);
+      {{ '}' }} 
+    {{ '}' }} 
+  </pre>
+  <h3>Deprecated</h3>
+  <i>
+    Use 'customName' if you want to add custom icons. You need to add 'IconSettings' under your
+    NgModule
+    <br />
+    <pre>
     const customIconSettings: IconSettings = {{ '{' }}
       icons: [
         {{ '{' }} 
@@ -32,7 +48,9 @@
       {{ '],' }} 
       ...
     {{ '}),' }} 
-  </pre>
+  </pre
+    >
+  </i>
 
   <div class="performance">
     <div class="title">
