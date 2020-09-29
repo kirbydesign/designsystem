@@ -28,7 +28,7 @@ import { IonContent } from '@ionic/angular';
 import { FitHeadingConfig } from '../../directives/fit-heading/fit-heading.directive';
 import { selectedTabClickEvent } from '../tabs/tab-button/tab-button.events';
 import { KirbyAnimation } from '../../animation/kirby-animation';
-import { WindowRef } from '../../types';
+import { WindowRef } from '../../helpers/window-ref';
 
 type stickyConfig = { sticky: boolean };
 type fixedConfig = { fixed: boolean };

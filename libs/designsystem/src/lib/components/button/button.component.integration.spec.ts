@@ -21,7 +21,7 @@ import { EmptyStateComponent } from '../empty-state/empty-state.component';
 import { DropdownComponent } from '../dropdown/dropdown.component';
 import { CardComponent } from '../card/card.component';
 import { ItemComponent } from '../item/item.component';
-import { WindowRef } from '../../types';
+import { WindowRef } from '../../helpers/window-ref';
 
 const getColor = DesignTokenHelper.getColor;
 const size = DesignTokenHelper.size;

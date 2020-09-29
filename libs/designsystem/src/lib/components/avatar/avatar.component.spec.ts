@@ -8,7 +8,7 @@ import { IconComponent } from '../icon/icon.component';
 import { AvatarComponent } from './avatar.component';
 import { SizeDirective } from '../../directives/size/size.directive';
 import { ThemeColorDirective } from '../../directives';
-import { ColorHelper } from '../../helpers';
+import { ColorHelper } from '../../helpers/color-helper';
 import { ProgressCircleComponent } from '../progress-circle/progress-circle.component';
 
 const getColor = DesignTokenHelper.getColor;

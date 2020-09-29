@@ -4,7 +4,7 @@ import { MockComponent } from 'ng-mocks';
 import { LOCALE_ID } from '@angular/core';
 
 import { CalendarComponent, IconComponent } from '..';
-import { WindowRef } from '../../types';
+import { WindowRef } from '../../helpers/window-ref';
 
 // NOTE: when specifying multiple input properties, set selectedDate
 // as the last one. This makes the component update without the need to

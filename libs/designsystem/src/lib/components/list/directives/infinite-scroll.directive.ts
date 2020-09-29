@@ -12,7 +12,8 @@ import {
 import { Subject, fromEvent } from 'rxjs';
 import { debounceTime, takeUntil, filter, map } from 'rxjs/operators';
 
-import { WindowRef } from '../../../types';
+import { WindowRef } from '../../../helpers/window-ref';
+
 import { Scroll } from './scroll.model';
 
 /**

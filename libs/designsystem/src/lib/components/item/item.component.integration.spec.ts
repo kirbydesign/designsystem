@@ -2,7 +2,7 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { IonicModule } from '@ionic/angular';
 
 import { TestHelper } from '../../testing/test-helper';
-import { DesignTokenHelper } from '../../helpers';
+import { WindowRef } from '../../helpers/window-ref';
 import { ItemComponent } from './item.component';
 import {
   ListComponent,
@@ -13,7 +13,7 @@ import {
   IconComponent,
   CardComponent,
 } from '..';
-import { WindowRef } from '../../types';
+import { DesignTokenHelper } from '../../helpers/design-token-helper';
 
 const size = DesignTokenHelper.size;
 

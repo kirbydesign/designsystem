@@ -8,7 +8,7 @@ import { DropdownComponent } from './dropdown.component';
 import { ButtonComponent, CardComponent, IconComponent, ItemComponent } from '..';
 import { TestHelper } from '../../testing/test-helper';
 import { ListItemTemplateDirective } from '../list';
-import { DesignTokenHelper } from '../../helpers';
+import { DesignTokenHelper } from '../../helpers/design-token-helper';
 import { SizeDirective } from '../../directives';
 
 @Component({

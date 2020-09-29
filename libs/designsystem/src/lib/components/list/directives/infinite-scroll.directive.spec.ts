@@ -2,7 +2,7 @@ import { ElementRef, NgZone } from '@angular/core';
 import { fakeAsync, tick } from '@angular/core/testing';
 import { SpyObject } from '@ngneat/spectator';
 
-import { WindowRef } from '../../../types';
+import { WindowRef } from '../../../helpers/window-ref';
 
 import { InfiniteScrollDirective, INFINITE_SCROLL_DEBOUNCE } from './infinite-scroll.directive';
 
