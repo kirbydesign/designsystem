@@ -5,7 +5,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AlertComponent } from './alert.component';
 import { ButtonComponent } from '../../button/button.component';
 import { SizeDirective } from '../../../directives/size/size.directive';
-import { WindowRef } from '../../../helpers/window-ref';
+import { WindowRef } from '../../../types/window-ref';
 
 describe('AlertComponent', () => {
   let component: AlertComponent;

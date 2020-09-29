@@ -10,7 +10,7 @@ import { SpinnerComponent } from '../spinner/spinner.component';
 import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
 import { ListHelper } from './helpers/list-helper';
 import { ListItemColorDirective } from './directives/list-item-color.directive';
-import { WindowRef } from '../../helpers/window-ref';
+import { WindowRef } from '../../types/window-ref';
 
 /**
  * We need an actual model item, since WeakMap can't use primitives for keys.

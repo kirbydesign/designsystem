@@ -29,7 +29,7 @@ import { GroupByPipe } from './pipes/group-by.pipe';
 import { ListSwipeAction } from './list-swipe-action';
 import { ThemeColor } from '../../helpers/theme-color.type';
 import { ItemComponent } from '../item/item.component';
-import { WindowRef } from '../../helpers/window-ref';
+import { WindowRef } from '../../types/window-ref';
 
 export type ListShape = 'square' | 'rounded' | 'none';
 

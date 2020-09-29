@@ -3,7 +3,7 @@ import { createService } from '@ngneat/spectator';
 
 import { DesignTokenHelper } from '../../../helpers/design-token-helper';
 
-import { WindowRef } from '../../../helpers/window-ref';
+import { WindowRef } from '../../../types/window-ref';
 import { AlertHelper } from './alert.helper';
 import { ModalHelper } from './modal.helper';
 import { Overlay } from './modal.interfaces';

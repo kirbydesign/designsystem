@@ -1,7 +1,7 @@
 import { Component, ElementRef, ViewChild, AfterViewInit, HostBinding, Input } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { WindowRef } from '../../../helpers/window-ref';
+import { WindowRef } from '../../../types/window-ref';
 
 @Component({
   selector: 'kirby-alert',

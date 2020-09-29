@@ -2,7 +2,7 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { IonicModule } from '@ionic/angular';
 
 import { TestHelper } from '../../testing/test-helper';
-import { WindowRef } from '../../helpers/window-ref';
+import { WindowRef } from '../../types/window-ref';
 import { ItemComponent } from './item.component';
 import {
   ListComponent,

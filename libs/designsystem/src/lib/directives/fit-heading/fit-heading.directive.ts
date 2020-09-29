@@ -4,7 +4,7 @@ import { ResizeObserverService } from '../../components/shared/resize-observer/r
 import { ResizeObserverEntry } from '../../components/shared/resize-observer/types/resize-observer-entry';
 
 import { DesignTokenHelper } from '../../helpers/design-token-helper';
-import { WindowRef } from '../../helpers/window-ref';
+import { WindowRef } from '../../types/window-ref';
 
 const fontSize = DesignTokenHelper.fontSize;
 const lineHeight = DesignTokenHelper.lineHeight;
