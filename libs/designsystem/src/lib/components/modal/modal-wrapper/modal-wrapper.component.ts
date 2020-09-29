@@ -69,12 +69,6 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     return this.config.flavor === 'drawer';
   }
 
-  private _ionPageReset = true;
-  @HostBinding('class.ion-page')
-  get ionPageReset() {
-    return this._ionPageReset;
-  }
-
   constructor(
     private injector: Injector,
     private elementRef: ElementRef<HTMLElement>,
@@ -89,7 +83,6 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     this.embeddedComponentElement = this.ionContentElement.nativeElement.querySelector(
       ':first-child'
     );
-    this._ionPageReset = !window.matchMedia('(min-width: 721px)').matches;
     this.listenForIonModalDidPresent();
     this.listenForIonModalWillDismiss();
     this.componentPropsInjector = Injector.create({
@@ -98,86 +91,46 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     });
   }
 
-  private setIonContentHeightBasedOnContent(contentHeight: number) {
+  private setLayoutBasedOnContent(contentHeight: number) {
     const modalElementRef = this.elementRef.nativeElement.parentElement;
+    const footerElementRef = this.elementRef.nativeElement.querySelector('kirby-modal-footer');
     const contentWrapperElementRef = this.ionContentElement.nativeElement.querySelector(
       '.content-wrapper'
     );
-    const footerElementRef = this.elementRef.nativeElement.querySelector('kirby-modal-footer');
 
-    /*
-     * RESET STYLES ON SMALL SCREENS
-     */
-    if (!window.matchMedia('(min-width: 721px)').matches) {
-      this._ionPageReset = true;
-      this.renderer.setStyle(this.ionContentElement.nativeElement, 'height', `100%`);
-      if (modalElementRef) {
-        this.renderer.setStyle(modalElementRef, 'border-bottom-right-radius', '0');
-        this.renderer.setStyle(modalElementRef, 'border-bottom-left-radius', '0');
-      }
-      return;
-    }
-
-    this._ionPageReset = false;
-
-    const fullModalHeight =
+    const availableHeight =
         document.documentElement.clientHeight -
         40 /* padding-top kirby-modal */ -
         46 /* modal header */ -
         16 /* padding-top kirby-modal-wrapper */;
 
-    /*
-     * If content is greater or equals available height
-     */
-    if (fullModalHeight >= contentHeight) {
-      if (modalElementRef) {
-        this.renderer.setStyle(modalElementRef, 'border-bottom-right-radius', '16px');
-        this.renderer.setStyle(modalElementRef, 'border-bottom-left-radius', '16px');
-      }
-
-      this.renderer.setStyle(this.ionContentElement.nativeElement, 'height', `${contentHeight}px`);
+    if (contentHeight < availableHeight && modalElementRef) {
+      this.renderer.removeClass(modalElementRef, 'content-exceeds-viewport');
 
       if (footerElementRef) {
-        this.renderer.setStyle(footerElementRef, 'position', 'static');
-        this.renderer.setStyle(footerElementRef, 'bottom', 'auto');
         this.renderer.setStyle(contentWrapperElementRef, 'padding-bottom', `0`);
       }
-      /*
-       * Set height by content
-       */
-    } else {
-      if (modalElementRef) {
-        this.renderer.setStyle(modalElementRef, 'border-bottom-right-radius', '0');
-        this.renderer.setStyle(modalElementRef, 'border-bottom-left-radius', '0');
-      }
-
-      this.renderer.setStyle(
-        this.ionContentElement.nativeElement,
-        'height',
-        `${fullModalHeight}px`
-      );
+    } else if (modalElementRef) {
+      this.renderer.addClass(modalElementRef, 'content-exceeds-viewport');
 
       if (footerElementRef) {
-        this.renderer.setStyle(footerElementRef, 'position', 'absolute');
-        this.renderer.setStyle(footerElementRef, 'bottom', '0');
-        this.renderer.setStyle(footerElementRef, 'width', '100%');
-
         const footerHeight = footerElementRef.getBoundingClientRect().height;
         this.renderer.setStyle(contentWrapperElementRef, 'padding-bottom', `${footerHeight}px`);
       }
     }
+
+    const ionContentHeight = availableHeight >= contentHeight ? contentHeight : availableHeight;
+    this.renderer.setStyle(this.ionContentElement.nativeElement, 'height', `${ionContentHeight}px`);
   }
 
   private setModalSize() {
     if (this.config.flavor !== 'modal') return;
-    this.setIonContentHeightBasedOnContent(
-      this.embeddedComponentElement.getBoundingClientRect().height
-    );
+    this.setLayoutBasedOnContent(this.embeddedComponentElement.getBoundingClientRect().height);
   }
 
   private onEmbededComponentElementResize() {
     this.resizeObserverService.observe(this.embeddedComponentElement, (entry) => {
-      this.setIonContentHeightBasedOnContent(entry.contentRect.height);
+      this.setLayoutBasedOnContent(entry.contentRect.height);
     });
   }
 

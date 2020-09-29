@@ -18,3 +18,9 @@ ion-footer {
 :host(.light) ion-footer {
   background-color: get-color('background-color');
 }
+
+:host-context(.content-exceeds-viewport) {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}

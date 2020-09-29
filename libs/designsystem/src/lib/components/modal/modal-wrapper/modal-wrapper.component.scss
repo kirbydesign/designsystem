@@ -6,6 +6,8 @@
   @include media('>=medium') {
     &:not(.drawer) {
       display: block;
+      position: relative;
+      contain: inherit;
     }
   }
 

@@ -101,8 +101,14 @@ ion-modal.kirby-overlay {
         padding-top: size('xl');
         transition: all 0.5s ease-in-out, padding 0s linear;
         .modal-wrapper {
-          --height: auto;
+          height: auto;
           --max-height: none;
+          border-radius: $border-radius;
+
+          &.content-exceeds-viewport {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+          }
         }
       }
 
