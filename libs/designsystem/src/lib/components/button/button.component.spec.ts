@@ -313,15 +313,4 @@ describe('ButtonComponent', () => {
       });
     });
   });
-
-  describe('when used in a kirby-toggle-button', () => {
-    ColorHelper.notificationColors.forEach((color: KirbyColor) => {
-      it(`should render with correct color for themeColor: ${color.name}`, () => {
-        spectator.component.themeColor = color.name as NotificationColor;
-        spectator.detectChanges();
-
-        expect(element).toHaveComputedStyle({ color: color.value });
-      });
-    });
-  });
 });
