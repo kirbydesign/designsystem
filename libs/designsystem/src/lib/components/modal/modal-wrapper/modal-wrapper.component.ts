@@ -99,8 +99,8 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     let availableSpace =
       document.documentElement.clientHeight -
       parseInt(ionModalPaddingTop) -
-      (this.ionContentElement.nativeElement.getBoundingClientRect().y -
-        this.elementRef.nativeElement.getBoundingClientRect().y);
+      (this.ionContentElement.nativeElement.getBoundingClientRect().top -
+        this.elementRef.nativeElement.getBoundingClientRect().top);
 
     if (this.embeddedFooterElement) {
       availableSpace -= this.embeddedFooterElement.getBoundingClientRect().height;
