@@ -4,6 +4,7 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { DesignTokenHelper } from '../../helpers/design-token-helper';
 import { IconComponent } from '../icon/icon.component';
 import { ButtonComponent } from './button.component';
+import { ColorHelper, KirbyColor, NotificationColor } from '../../helpers';
 
 const getColor = DesignTokenHelper.getColor;
 const size = DesignTokenHelper.size;
@@ -309,6 +310,17 @@ describe('ButtonComponent', () => {
 
       it('should render with correct color', () => {
         expect(element).toHaveComputedStyle({ color: getColor('danger') });
+      });
+    });
+  });
+
+  describe('when used in a kirby-toggle-button', () => {
+    ColorHelper.notificationColors.forEach((color: KirbyColor) => {
+      it(`should render with correct color for themeColor: ${color.name}`, () => {
+        spectator.component.themeColor = color.name as NotificationColor;
+        spectator.detectChanges();
+
+        expect(element).toHaveComputedStyle({ color: color.value });
       });
     });
   });
