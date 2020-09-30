@@ -1,27 +1,21 @@
-/* tslint:disable:no-unused-variable */
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
+import { Spectator, createComponentFactory } from '@ngneat/spectator';
+import { first } from 'rxjs/operators';
 
 import { ToggleButtonComponent } from './toggle-button.component';
 
 describe('ToggleButtonComponent', () => {
-  let component: ToggleButtonComponent;
-  let fixture: ComponentFixture<ToggleButtonComponent>;
+  let spectator: Spectator<ToggleButtonComponent>;
+  const createComponent = createComponentFactory(ToggleButtonComponent);
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ToggleButtonComponent],
-    }).compileComponents();
-  }));
+  beforeEach(() => (spectator = createComponent()));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(ToggleButtonComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+  it('should should toggle checked state on click', (done) => {
+    spectator.component.checked = true;
+    spectator.component.checkChanged.pipe(first()).subscribe((check) => {
+      expect(check).toBe(false);
+      done();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+    spectator.component.onClick();
   });
 });

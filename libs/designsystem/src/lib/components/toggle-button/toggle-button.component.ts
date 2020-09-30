@@ -6,7 +6,6 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'kirby-toggle-button',
@@ -15,19 +14,12 @@ import { BehaviorSubject } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToggleButtonComponent {
-  private checkedSubject = new BehaviorSubject(false);
-  checked$ = this.checkedSubject.asObservable();
-  public get checked(): boolean {
-    return this.checkedSubject.getValue();
-  }
-  @Input()
-  public set checked(checked: boolean) {
-    this.checkedSubject.next(checked);
-  }
+  @Input() checked: boolean;
   @Output() checkChanged = new EventEmitter<boolean>();
+
   @HostListener('click')
   onClick() {
-    this.checkedSubject.next(!this.checked);
+    this.checked = !this.checked;
     this.checkChanged.emit(this.checked);
   }
 }
