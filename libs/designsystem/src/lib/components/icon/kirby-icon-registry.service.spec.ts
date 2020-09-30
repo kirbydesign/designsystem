@@ -12,22 +12,16 @@ describe('KirbyIconRegistryService', () => {
   });
   describe('getCustomIcons', () => {
     it('get icons from empty map', () => {
-      const expectedIcons: Icon[] = [];
+      const expectedIcons = [];
       expect(service.getCustomIcons()).toEqual(expectedIcons);
     });
     it('get excisting icons in map', () => {
-      const IconSettings = {
-        icons: [
-          { name: 'name1', svg: 'svg1' },
-          { name: 'name2', svg: 'svg2' },
-        ] as Icon[],
-      } as IconSettings;
-      service.addIcons(IconSettings.icons);
-      const expectedIcons = [
+      const icons = [
         { name: 'name1', svg: 'svg1' },
         { name: 'name2', svg: 'svg2' },
       ];
-      expect(service.getCustomIcons()).toEqual(expectedIcons);
+      service.addIcons(icons);
+      expect(service.getCustomIcons()).toEqual(icons);
     });
   });
 });

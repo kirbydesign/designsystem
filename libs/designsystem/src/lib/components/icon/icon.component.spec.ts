@@ -47,6 +47,22 @@ describe('IconComponent', () => {
       expect(component.name).toBe(undefined);
       expect(component.icon.name).toBe(component.defaultIcon.name);
     });
+
+    it('should use custom icons from ICON_SETTINGS', () => {
+      const fixture = createTestComponent(`<kirby-icon customName="name1"></kirby-icon>`);
+      fixture.detectChanges();
+      const component = fixture.debugElement.query(By.directive(IconComponent)).componentInstance;
+      expect(component.icon.name).toBe('name1');
+      expect(component.icon.svg).toBe('svg1');
+    });
+
+    it('should use custom icons added with KirbyIconRegistryService', () => {
+      const fixture = createTestComponent(`<kirby-icon customName="customName1"></kirby-icon>`);
+      fixture.detectChanges();
+      const component = fixture.debugElement.query(By.directive(IconComponent)).componentInstance;
+      expect(component.icon.name).toBe('customName1');
+      expect(component.icon.svg).toBe('customSvg1');
+    });
   });
 
   describe('color', () => {
@@ -113,24 +129,6 @@ describe('IconComponent', () => {
       expect(el.nativeElement).toHaveComputedStyle({
         color: getColor('danger'),
       });
-    });
-  });
-  describe('multiple icon settings', () => {
-    it('should combine multiple provided icons, but use icons from ICON_SETTINGS', () => {
-      const fixture = createTestComponent(`<kirby-icon customName="name1"></kirby-icon>`);
-      fixture.detectChanges();
-      const component = fixture.debugElement.query(By.directive(IconComponent)).componentInstance;
-      expect(component.icon.name).toBe('name1');
-      expect(component.icon.svg).toBe('svg1');
-    });
-
-    it('should combine multiple provided icons, and use icons added with KirbyIconRegistryService', () => {
-      const fixture = createTestComponent(`<kirby-icon customName="customName1"></kirby-icon>`);
-      fixture.detectChanges();
-      const component = fixture.debugElement.query(By.directive(IconComponent)).componentInstance;
-      fixture.detectChanges();
-      expect(component.icon.name).toBe('customName1');
-      expect(component.icon.svg).toBe('customSvg1');
     });
   });
 });

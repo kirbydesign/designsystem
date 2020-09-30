@@ -69,14 +69,10 @@ export class IconComponent implements OnChanges {
   }
 
   private combineIconSettings() {
-    const iconSettingsIcons: Icon[] =
-      this.iconSettings && this.iconSettings.icons
-        ? [...this.iconSettings.icons]
-        : [this.defaultIcon];
-
+    const iconSettingsIcons = this.iconSettings ? this.iconSettings.icons : [];
     this.combinedIconSettings = {
       icons: [...iconSettingsIcons, ...this.iconRegistryService.getCustomIcons()],
-    } as IconSettings;
+    };
   }
 
   ngOnChanges(changes: SimpleChanges): void {
