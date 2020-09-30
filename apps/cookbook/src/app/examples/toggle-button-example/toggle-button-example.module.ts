@@ -7,7 +7,7 @@ const DECLARATIONS = [ToggleButtonExampleComponent];
 
 @NgModule({
   imports: [KirbyModule],
-  declarations: [...DECLARATIONS],
+  declarations: DECLARATIONS,
   exports: DECLARATIONS,
 })
 export class ToggleButtonExampleModule {}
