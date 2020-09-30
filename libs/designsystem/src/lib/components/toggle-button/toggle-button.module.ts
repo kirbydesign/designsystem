@@ -2,9 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ToggleButtonComponent } from './toggle-button.component';
-import { ToggleButtonThemeColorDirective } from './directives/toggle-button-color.directive';
 
-const DECLARATIONS = [ToggleButtonComponent, ToggleButtonThemeColorDirective];
+const DECLARATIONS = [ToggleButtonComponent];
 
 @NgModule({
   declarations: [...DECLARATIONS],

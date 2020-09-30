@@ -10,7 +10,6 @@ import {
 @Component({
   selector: 'kirby-toggle-button',
   templateUrl: './toggle-button.component.html',
-  styleUrls: ['./toggle-button.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToggleButtonComponent {

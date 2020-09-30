@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 
-import { ToggleButtonExampleComponent } from './toggle-button-example.component';
 import { KirbyModule } from '@kirbydesign/designsystem';
+import { ToggleButtonExampleComponent } from './toggle-button-example.component';
 
 const DECLARATIONS = [ToggleButtonExampleComponent];
 

@@ -1,14 +1,10 @@
 import { Component } from '@angular/core';
 
 import { ShowcaseProperty } from '../../shared/showcase-properties/showcase-property';
-declare var require: any;
-
 @Component({
   templateUrl: './toggle-button-showcase.component.html',
 })
 export class ToggleButtonShowcaseComponent {
-  exampleHtml: string = require('!raw-loader!../../examples/toggle-button-example/toggle-button-example.component.html')
-    .default;
   properties: ShowcaseProperty[] = [
     {
       name: 'checked',
