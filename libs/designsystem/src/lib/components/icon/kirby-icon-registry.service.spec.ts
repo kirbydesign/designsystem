@@ -1,11 +1,11 @@
-import { KirbyIconRegistryService } from './kirby-icon-registry.service';
+import { IconRegistryService } from './kirby-icon-registry.service';
 import { Icon, IconSettings } from './icon-settings';
 
 describe('KirbyIconRegistryService', () => {
-  let service: KirbyIconRegistryService;
+  let service: IconRegistryService;
 
   beforeEach(() => {
-    service = new KirbyIconRegistryService();
+    service = new IconRegistryService();
   });
   it('should create service', () => {
     expect(service).toBeTruthy();
@@ -13,7 +13,7 @@ describe('KirbyIconRegistryService', () => {
   describe('getCustomIcons', () => {
     it('get icons from empty map', () => {
       const expectedIcons = [];
-      expect(service.getCustomIcons()).toEqual(expectedIcons);
+      expect(service.getIcons()).toEqual(expectedIcons);
     });
     it('get excisting icons in map', () => {
       const icons = [
@@ -21,7 +21,7 @@ describe('KirbyIconRegistryService', () => {
         { name: 'name2', svg: 'svg2' },
       ];
       service.addIcons(icons);
-      expect(service.getCustomIcons()).toEqual(icons);
+      expect(service.getIcons()).toEqual(icons);
     });
   });
 });

@@ -11,7 +11,7 @@ import {
 
 import { kirbyIconSettings } from './kirby-icon-settings';
 import { ICON_SETTINGS, Icon, IconSettings } from './icon-settings';
-import { KirbyIconRegistryService } from './kirby-icon-registry.service';
+import { IconRegistryService } from './kirby-icon-registry.service';
 
 @Component({
   selector: 'kirby-icon',
@@ -25,7 +25,6 @@ export class IconComponent implements OnChanges {
 
   @Input() name: string;
   @Input() customName: string;
-  private combinedIconSettings: IconSettings;
 
   get icon(): Icon {
     return this._icon;
@@ -62,24 +61,26 @@ export class IconComponent implements OnChanges {
    * iconSettings: @deprecated Use KirbyIconRegistryService for adding custom icons.
    */
   constructor(
-    private iconRegistryService: KirbyIconRegistryService,
+    private iconRegistryService: IconRegistryService,
     @Optional() @Inject(ICON_SETTINGS) private iconSettings?: IconSettings
   ) {
-    this.combineIconSettings();
+    this.mergeIconSettings();
   }
 
-  private combineIconSettings() {
-    const iconSettingsIcons = this.iconSettings ? this.iconSettings.icons : [];
-    this.combinedIconSettings = {
-      icons: [...iconSettingsIcons, ...this.iconRegistryService.getCustomIcons()],
-    };
+  private mergeIconSettings() {
+    if (this.iconSettings) {
+      this.iconRegistryService.addIcons(this.iconSettings.icons);
+    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.name && changes.name.currentValue) {
       this.icon = this.findIcon(kirbyIconSettings.icons, changes.name.currentValue);
     } else if (changes.customName && changes.customName.currentValue) {
-      this.icon = this.findIcon(this.combinedIconSettings.icons, changes.customName.currentValue);
+      this.icon = this.findIcon(
+        this.iconRegistryService.getIcons(),
+        changes.customName.currentValue
+      );
     }
   }
 
