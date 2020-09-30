@@ -96,10 +96,13 @@ ion-modal.kirby-overlay {
       --border-radius: #{$border-radius};
       --box-shadow: #{get-elevation(8)};
 
+      &.kirby-drawer {
+        align-items: flex-end;
+      }
+
       &:not(.kirby-drawer):not(.kirby-modal-compact) {
         align-items: flex-start;
         padding-top: size('xl');
-        transition: all 0.5s ease-in-out, padding 0s linear;
         .modal-wrapper {
           height: auto;
           --max-height: none;

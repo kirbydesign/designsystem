@@ -91,46 +91,47 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     });
   }
 
-  private setLayoutBasedOnContent(contentHeight: number) {
-    const modalElementRef = this.elementRef.nativeElement.parentElement;
-    const footerElementRef = this.elementRef.nativeElement.querySelector('kirby-modal-footer');
-    const contentWrapperElementRef = this.ionContentElement.nativeElement.querySelector(
-      '.content-wrapper'
-    );
+  private getContentMaxHeight(): number {
+    const ionModalWrapper = this.elementRef.nativeElement.parentElement;
+    const ionModal = ionModalWrapper.parentElement;
+    const ionModalPaddingTop = window.getComputedStyle(ionModal).getPropertyValue('padding-top');
 
-    const availableHeight =
-        document.documentElement.clientHeight -
-        40 /* padding-top kirby-modal */ -
-        46 /* modal header */ -
-        16 /* padding-top kirby-modal-wrapper */;
+    let availableSpace =
+      document.documentElement.clientHeight -
+      parseInt(ionModalPaddingTop) -
+      (this.ionContentElement.nativeElement.getBoundingClientRect().y -
+        this.elementRef.nativeElement.getBoundingClientRect().y);
 
-    if (contentHeight < availableHeight && modalElementRef) {
-      this.renderer.removeClass(modalElementRef, 'content-exceeds-viewport');
-
-      if (footerElementRef) {
-        this.renderer.setStyle(contentWrapperElementRef, 'padding-bottom', `0`);
-      }
-    } else if (modalElementRef) {
-      this.renderer.addClass(modalElementRef, 'content-exceeds-viewport');
-
-      if (footerElementRef) {
-        const footerHeight = footerElementRef.getBoundingClientRect().height;
-        this.renderer.setStyle(contentWrapperElementRef, 'padding-bottom', `${footerHeight}px`);
-      }
+    if (this.embeddedFooterElement) {
+      availableSpace -= this.embeddedFooterElement.getBoundingClientRect().height;
     }
-
-    const ionContentHeight = availableHeight >= contentHeight ? contentHeight : availableHeight;
-    this.renderer.setStyle(this.ionContentElement.nativeElement, 'height', `${ionContentHeight}px`);
+    return availableSpace;
   }
 
-  private setModalSize() {
-    if (this.config.flavor !== 'modal') return;
-    this.setLayoutBasedOnContent(this.embeddedComponentElement.getBoundingClientRect().height);
+  private async setHeightOfContent(contentHeight: number) {
+    const modalElementRef = this.elementRef.nativeElement.parentElement;
+    const contentMaxHeight = this.getContentMaxHeight();
+
+    if (contentHeight < contentMaxHeight && modalElementRef) {
+      this.renderer.removeClass(modalElementRef, 'content-exceeds-viewport');
+    } else if (modalElementRef) {
+      this.renderer.addClass(modalElementRef, 'content-exceeds-viewport');
+    }
+
+    const scrollElement = await this.ionContent.getScrollElement();
+    const scrollElementStyles = window.getComputedStyle(scrollElement);
+
+    const scrollElementPaddingTopAndBottom =
+      parseInt(scrollElementStyles.getPropertyValue('padding-top')) +
+      parseInt(scrollElementStyles.getPropertyValue('padding-bottom'));
+
+    const minHeight = Math.min(contentHeight + scrollElementPaddingTopAndBottom, contentMaxHeight);
+    this.renderer.setStyle(this.ionContentElement.nativeElement, 'min-height', `${minHeight}px`);
   }
 
   private onEmbededComponentElementResize() {
     this.resizeObserverService.observe(this.embeddedComponentElement, (entry) => {
-      this.setLayoutBasedOnContent(entry.contentRect.height);
+      this.setHeightOfContent(entry.contentRect.height);
     });
   }
 
@@ -250,7 +251,9 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   }
 
   private onViewportResize(entry: ResizeObserverEntry) {
-    this.setModalSize();
+    if (this.config.flavor === 'modal') {
+      this.setHeightOfContent(this.embeddedComponentElement.getBoundingClientRect().height);
+    }
 
     if (!this.initialViewportHeight) {
       // Initial observe callback, register initial height:
