@@ -4,10 +4,10 @@ import { NotificationColor } from '../../../helpers/color-helper';
 
 @Directive({
   // tslint:disable-next-line: directive-selector
-  selector: 'button[color]',
+  selector: 'button[themeColor][checked], button[themeColor][unchecked]',
 })
-export class ToggleButtonColorDirective {
+export class ToggleButtonThemeColorDirective {
   @HostBinding('class')
   @Input()
-  color: NotificationColor;
+  themeColor: NotificationColor;
 }
