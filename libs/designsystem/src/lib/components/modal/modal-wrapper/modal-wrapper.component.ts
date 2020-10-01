@@ -125,7 +125,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     const scrollElement = await this.ionContent.getScrollElement();
     const scrollElementStyles = this.windowRef.getComputedStyle(scrollElement);
 
-    const scrollElementPaddingTopAndBottom =
+    const scrollElementVerticalPadding =
       parseInt(scrollElementStyles.getPropertyValue('padding-top')) +
       parseInt(scrollElementStyles.getPropertyValue('padding-bottom'));
 
