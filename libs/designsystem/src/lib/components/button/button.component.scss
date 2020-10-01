@@ -238,11 +238,6 @@
   justify-content: space-between;
 }
 
-.danger {
-  --kirby-button-background-color: yellow;
-  --kirby-button-color: white;
-}
-
 :host-context(kirby-toggle-button) {
   @each $color-name, $color-value in $notification-colors {
     &.#{$color-name} {

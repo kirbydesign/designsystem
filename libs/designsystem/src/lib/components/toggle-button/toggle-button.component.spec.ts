@@ -9,7 +9,7 @@ describe('ToggleButtonComponent', () => {
 
   beforeEach(() => (spectator = createComponent()));
 
-  it('should should toggle checked state on click', (done) => {
+  it('should toggle checked state on click', (done) => {
     spectator.component.checked = true;
     spectator.component.checkChanged.pipe(first()).subscribe((check) => {
       expect(check).toBe(false);
@@ -17,5 +17,7 @@ describe('ToggleButtonComponent', () => {
     });
 
     spectator.component.onClick();
+
+    expect(spectator.component.checked).toBe(false);
   });
 });

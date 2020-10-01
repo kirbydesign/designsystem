@@ -4,7 +4,6 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { DesignTokenHelper } from '../../helpers/design-token-helper';
 import { IconComponent } from '../icon/icon.component';
 import { ButtonComponent } from './button.component';
-import { ColorHelper, KirbyColor, NotificationColor } from '../../helpers';
 
 const getColor = DesignTokenHelper.getColor;
 const size = DesignTokenHelper.size;
