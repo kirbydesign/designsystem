@@ -76,11 +76,10 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     private renderer: Renderer2,
     private resizeObserverService: ResizeObserverService,
     private windowRef: WindowRef
-  ) {
-    this.observeViewportResize();
-  }
+  ) {}
 
   ngOnInit(): void {
+    this.observeViewportResize();
     this.ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
     this.embeddedComponentElement = this.ionContentElement.nativeElement.querySelector(
       ':first-child'
