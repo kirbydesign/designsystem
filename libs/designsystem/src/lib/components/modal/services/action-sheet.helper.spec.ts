@@ -1,6 +1,8 @@
 import { IonicModule, ModalController as IonicModalController } from '@ionic/angular';
 import { createService } from '@ngneat/spectator';
 
+import { WindowRef } from '../../../types';
+
 import { ActionSheetHelper } from './action-sheet.helper';
 import { ModalHelper } from './modal.helper';
 import { Overlay } from './modal.interfaces';
@@ -12,7 +14,13 @@ describe('ActionSheetHelper', () => {
   const spectator = createService({
     service: ActionSheetHelper,
     imports: [IonicModule.forRoot({ mode: 'ios', _testing: true })],
-    providers: [ModalHelper],
+    providers: [
+      ModalHelper,
+      {
+        provide: WindowRef,
+        useValue: window,
+      },
+    ],
   });
 
   beforeEach(() => {
