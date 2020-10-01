@@ -336,8 +336,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     //clean up the observer
     this.mutationObserver && this.mutationObserver.disconnect();
     delete this.mutationObserver;
-    this.resizeObserverService &&
-      this.resizeObserverService.unobserve(this.windowRef.document.body);
+    this.resizeObserverService.unobserve(this.windowRef.document.body);
     if (this.config.flavor === 'modal') {
       this.resizeObserverService &&
         this.resizeObserverService.unobserve(this.embeddedComponentElement);
