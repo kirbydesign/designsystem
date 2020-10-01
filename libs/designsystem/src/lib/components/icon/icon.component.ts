@@ -10,6 +10,7 @@ import {
 
 import { kirbyIconSettings } from './kirby-icon-settings';
 import { ICON_SETTINGS, Icon, IconSettings } from './icon-settings';
+import { IconRegistryService } from './icon-registry.service';
 
 @Component({
   selector: 'kirby-icon',
@@ -54,13 +55,31 @@ export class IconComponent implements OnChanges {
     }
   }
 
-  constructor(@Optional() @Inject(ICON_SETTINGS) private iconSettings?: IconSettings) {}
+  /**
+   * iconRegistryService: Registry for custom icons.
+   * iconSettings: @deprecated Use KirbyIconRegistryService for adding custom icons.
+   */
+  constructor(
+    private iconRegistryService: IconRegistryService,
+    @Optional() @Inject(ICON_SETTINGS) private iconSettings?: IconSettings
+  ) {
+    this.mergeIconSettings();
+  }
+
+  private mergeIconSettings() {
+    if (this.iconSettings) {
+      this.iconRegistryService.addIcons(this.iconSettings.icons);
+    }
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.name && changes.name.currentValue) {
       this.icon = this.findIcon(kirbyIconSettings.icons, changes.name.currentValue);
     } else if (changes.customName && changes.customName.currentValue) {
-      this.icon = this.findIcon(this.iconSettings.icons, changes.customName.currentValue);
+      this.icon = this.findIcon(
+        this.iconRegistryService.getIcons(),
+        changes.customName.currentValue
+      );
     }
   }
 
