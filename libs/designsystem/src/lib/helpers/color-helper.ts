@@ -144,8 +144,4 @@ export interface KirbyColor extends Color {
   contrast: Color;
 }
 
-export enum NotificationColor {
-  success = 'success',
-  warning = 'warning',
-  danger = 'danger',
-}
+export type NotificationColor = keyof typeof styles.notificationColors;
