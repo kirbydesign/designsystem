@@ -129,7 +129,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
       parseInt(scrollElementStyles.getPropertyValue('padding-top')) +
       parseInt(scrollElementStyles.getPropertyValue('padding-bottom'));
 
-    const minHeight = Math.min(contentHeight + scrollElementPaddingTopAndBottom, contentMaxHeight);
+    const minContentHeight = Math.min(contentHeight + scrollElementPaddingTopAndBottom, contentMaxHeight);
     this.renderer.setStyle(this.ionContentElement.nativeElement, 'min-height', `${minHeight}px`);
   }
 
