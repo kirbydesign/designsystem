@@ -3,12 +3,12 @@ import { MockComponent } from 'ng-mocks';
 import * as ionic from '@ionic/angular';
 import { By } from '@angular/platform-browser';
 import { Component, OnInit } from '@angular/core';
+import { createSpyObject } from '@ngneat/spectator';
 
 import { ThemeColorDirective } from '../../directives/theme-color/theme-color.directive';
 import { DesignTokenHelper } from '../../helpers/design-token-helper';
 import { IconComponent } from './icon.component';
-import { IconSettings, ICON_SETTINGS } from './icon-settings';
-import { KirbyIconRegistryService } from './kirby-icon-registry.service';
+import { IconRegistryService } from './icon-registry.service';
 
 const getColor = DesignTokenHelper.getColor;
 
@@ -46,6 +46,33 @@ describe('IconComponent', () => {
       const component = fixture.debugElement.query(By.directive(IconComponent)).componentInstance;
       expect(component.name).toBe(undefined);
       expect(component.icon.name).toBe(component.defaultIcon.name);
+    });
+
+    it('should use default icons from Kirby icon settings', () => {
+      const fixture = createTestComponent('<kirby-icon name="verify"></kirby-icon>');
+      fixture.detectChanges();
+      const component = fixture.debugElement.query(By.directive(IconComponent)).componentInstance;
+      expect(component.icon.name).toBe('verify');
+    });
+
+    it('should use custom icons from ICON_SETTINGS', () => {
+      const fixture = createTestComponent(
+        `<kirby-icon customName="customIconNameFromIconSettings"></kirby-icon>`
+      );
+      fixture.detectChanges();
+      const component = fixture.debugElement.query(By.directive(IconComponent)).componentInstance;
+      expect(component.icon.name).toBe('customIconNameFromIconSettings');
+      expect(component.icon.svg).toBe('customIconSvgFromIconSettings');
+    });
+
+    it('should use custom icons added with KirbyIconRegistryService', () => {
+      const fixture = createTestComponent(
+        `<kirby-icon customName="customIconNameFromIconRegistry"></kirby-icon>`
+      );
+      fixture.detectChanges();
+      const component = fixture.debugElement.query(By.directive(IconComponent)).componentInstance;
+      expect(component.icon.name).toBe('customIconNameFromIconRegistry');
+      expect(component.icon.svg).toBe('customIconSvgFromIconRegistry');
     });
   });
 
@@ -115,24 +142,6 @@ describe('IconComponent', () => {
       });
     });
   });
-  describe('multiple icon settings', () => {
-    it('should combine multiple provided icons, but use icons from ICON_SETTINGS', () => {
-      const fixture = createTestComponent(`<kirby-icon customName="name1"></kirby-icon>`);
-      fixture.detectChanges();
-      const component = fixture.debugElement.query(By.directive(IconComponent)).componentInstance;
-      expect(component.icon.name).toBe('name1');
-      expect(component.icon.svg).toBe('svg1');
-    });
-
-    it('should combine multiple provided icons, and use icons added with KirbyIconRegistryService', () => {
-      const fixture = createTestComponent(`<kirby-icon customName="customName1"></kirby-icon>`);
-      fixture.detectChanges();
-      const component = fixture.debugElement.query(By.directive(IconComponent)).componentInstance;
-      fixture.detectChanges();
-      expect(component.icon.name).toBe('customName1');
-      expect(component.icon.svg).toBe('customSvg1');
-    });
-  });
 });
 
 /*
@@ -158,14 +167,13 @@ function createTestComponent(template: string): ComponentFixture<TestWrapperComp
       template: template,
       providers: [
         {
-          provide: KirbyIconRegistryService,
-          useValue: jasmine.createSpyObj('KirbyIconRegistryService', ['getCustomIcons'], {
-            getCustomIcons: () => [{ name: 'customName1', svg: 'customSvg1' }],
+          provide: IconRegistryService,
+          useValue: createSpyObject(IconRegistryService, {
+            getIcons: () => [
+              { name: 'customIconNameFromIconRegistry', svg: 'customIconSvgFromIconRegistry' },
+              { name: 'customIconNameFromIconSettings', svg: 'customIconSvgFromIconSettings' },
+            ],
           }),
-        },
-        {
-          provide: ICON_SETTINGS,
-          useValue: { icons: [{ name: 'name1', svg: 'svg1' }] } as IconSettings,
         },
       ],
     },

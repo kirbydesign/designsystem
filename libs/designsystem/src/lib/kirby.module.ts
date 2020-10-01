@@ -75,7 +75,7 @@ import { ResizeObserverService } from './components/shared/resize-observer/resiz
 import { ProgressCircleComponent } from './components/progress-circle/progress-circle.component';
 import { ProgressCircleRingComponent } from './components/progress-circle/progress-circle-ring.component';
 import { FlagComponent } from './components/flag/flag.component';
-import { KirbyIconRegistryService } from './components/icon/kirby-icon-registry.service';
+import { IconRegistryService } from './components/icon/icon-registry.service';
 import { WindowRef } from './types/window-ref';
 
 const exportedDeclarations = [
@@ -153,7 +153,7 @@ const importedModules = [...exportedModules, OverlayModule];
 
 const providers = [
   ModalController,
-  KirbyIconRegistryService,
+  IconRegistryService,
   ActionSheetHelper,
   ModalHelper,
   AlertHelper,

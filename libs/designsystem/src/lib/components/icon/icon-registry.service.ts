@@ -5,11 +5,15 @@ import { Icon } from './icon-settings';
 @Injectable({
   providedIn: 'root',
 })
-export class KirbyIconRegistryService {
+export class IconRegistryService {
   private iconRegistry = new Map<string, string>();
 
   addIcon(iconName: string, svgPath: string): void {
-    this.iconRegistry.set(iconName, svgPath);
+    if (!this.iconRegistry.has(iconName)) {
+      this.iconRegistry.set(iconName, svgPath);
+    } else {
+      console.warn(`Icon with name: "${iconName}" already exists`);
+    }
   }
 
   addIcons(icons: Icon[]): void {
@@ -22,7 +26,7 @@ export class KirbyIconRegistryService {
     });
   }
 
-  getCustomIcons(): Icon[] {
+  getIcons(): Icon[] {
     return [...this.iconRegistry].map(
       (keyValPair) => ({ name: keyValPair[0], svg: keyValPair[1] } as Icon)
     );
