@@ -9,7 +9,11 @@ export class IconRegistryService {
   private iconRegistry = new Map<string, string>();
 
   addIcon(iconName: string, svgPath: string): void {
-    this.iconRegistry.set(iconName, svgPath);
+    if (!this.iconRegistry.has(iconName)) {
+      this.iconRegistry.set(iconName, svgPath);
+    } else {
+      console.warn(`Icon with name: "${iconName}" allready excist`);
+    }
   }
 
   addIcons(icons: Icon[]): void {
@@ -18,11 +22,7 @@ export class IconRegistryService {
       return;
     }
     icons.forEach((icon) => {
-      if (!this.iconRegistry.has(icon.name)) {
-        this.addIcon(icon.name, icon.svg);
-      } else {
-        console.warn(`Icon with name: "${icon.name}" allready excist`);
-      }
+      this.addIcon(icon.name, icon.svg);
     });
   }
 

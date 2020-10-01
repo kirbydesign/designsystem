@@ -71,10 +71,8 @@ describe('IconComponent', () => {
       const fixture = createTestComponent(
         `<kirby-icon customName="customIconNameFromIconRegistry"></kirby-icon>`
       );
-      const iconRegistry = TestBed.inject(IconRegistryService) as SpyObject<IconRegistryService>;
       fixture.detectChanges();
       const component = fixture.debugElement.query(By.directive(IconComponent)).componentInstance;
-
       expect(component.icon.name).toBe('customIconNameFromIconRegistry');
       expect(component.icon.svg).toBe('customIconSvgFromIconRegistry');
     });
@@ -177,19 +175,7 @@ function createTestComponent(template: string): ComponentFixture<TestWrapperComp
               { name: 'customIconNameFromIconRegistry', svg: 'customIconSvgFromIconRegistry' },
               { name: 'customIconNameFromIconSettings', svg: 'customIconSvgFromIconSettings' },
             ],
-            addIcons: () => [
-              { name: 'customIconNameFromIconRegistry', svg: 'customIconSvgFromIconRegistry' },
-              { name: 'customIconNameFromIconSettings', svg: 'customIconSvgFromIconSettings' },
-            ],
           }),
-        },
-        {
-          provide: ICON_SETTINGS,
-          useValue: {
-            icons: [
-              { name: 'customIconNameFromIconSettings', svg: 'customIconSvgFromIconSettings' },
-            ],
-          } as IconSettings,
         },
       ],
     },

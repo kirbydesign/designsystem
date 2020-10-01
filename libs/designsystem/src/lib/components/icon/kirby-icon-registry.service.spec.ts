@@ -23,5 +23,12 @@ describe('KirbyIconRegistryService', () => {
       service.addIcons(icons);
       expect(service.getIcons()).toEqual(icons);
     });
+    it('should only add distinct icon names', () => {
+      const icon1 = [{ name: 'name1', svg: 'svg1' }];
+      const icon2 = [{ name: 'name1', svg: 'svg2' }];
+      service.addIcons(icon1);
+      service.addIcons(icon2);
+      expect(service.getIcons()).toEqual(icon1);
+    });
   });
 });
