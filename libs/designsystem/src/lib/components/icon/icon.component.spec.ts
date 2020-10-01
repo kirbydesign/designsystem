@@ -3,10 +3,12 @@ import { MockComponent } from 'ng-mocks';
 import * as ionic from '@ionic/angular';
 import { By } from '@angular/platform-browser';
 import { Component, OnInit } from '@angular/core';
+import { createSpyObject } from '@ngneat/spectator';
 
 import { ThemeColorDirective } from '../../directives/theme-color/theme-color.directive';
 import { DesignTokenHelper } from '../../helpers/design-token-helper';
 import { IconComponent } from './icon.component';
+import { IconRegistryService } from './icon-registry.service';
 
 const getColor = DesignTokenHelper.getColor;
 
@@ -44,6 +46,33 @@ describe('IconComponent', () => {
       const component = fixture.debugElement.query(By.directive(IconComponent)).componentInstance;
       expect(component.name).toBe(undefined);
       expect(component.icon.name).toBe(component.defaultIcon.name);
+    });
+
+    it('should use default icons from Kirby icon settings', () => {
+      const fixture = createTestComponent('<kirby-icon name="verify"></kirby-icon>');
+      fixture.detectChanges();
+      const component = fixture.debugElement.query(By.directive(IconComponent)).componentInstance;
+      expect(component.icon.name).toBe('verify');
+    });
+
+    it('should use custom icons from ICON_SETTINGS', () => {
+      const fixture = createTestComponent(
+        `<kirby-icon customName="customIconNameFromIconSettings"></kirby-icon>`
+      );
+      fixture.detectChanges();
+      const component = fixture.debugElement.query(By.directive(IconComponent)).componentInstance;
+      expect(component.icon.name).toBe('customIconNameFromIconSettings');
+      expect(component.icon.svg).toBe('customIconSvgFromIconSettings');
+    });
+
+    it('should use custom icons added with KirbyIconRegistryService', () => {
+      const fixture = createTestComponent(
+        `<kirby-icon customName="customIconNameFromIconRegistry"></kirby-icon>`
+      );
+      fixture.detectChanges();
+      const component = fixture.debugElement.query(By.directive(IconComponent)).componentInstance;
+      expect(component.icon.name).toBe('customIconNameFromIconRegistry');
+      expect(component.icon.svg).toBe('customIconSvgFromIconRegistry');
     });
   });
 
@@ -131,8 +160,22 @@ export class TestWrapperComponent implements OnInit {
  * Custom Helper function to quickly create a `fixture` instance based on
  * the 'TestWrapperComponent' class
  */
+
 function createTestComponent(template: string): ComponentFixture<TestWrapperComponent> {
   return TestBed.overrideComponent(TestWrapperComponent, {
-    set: { template: template },
+    set: {
+      template: template,
+      providers: [
+        {
+          provide: IconRegistryService,
+          useValue: createSpyObject(IconRegistryService, {
+            getIcons: () => [
+              { name: 'customIconNameFromIconRegistry', svg: 'customIconSvgFromIconRegistry' },
+              { name: 'customIconNameFromIconSettings', svg: 'customIconSvgFromIconSettings' },
+            ],
+          }),
+        },
+      ],
+    },
   }).createComponent(TestWrapperComponent);
 }

@@ -75,6 +75,7 @@ import { ResizeObserverService } from './components/shared/resize-observer/resiz
 import { ProgressCircleComponent } from './components/progress-circle/progress-circle.component';
 import { ProgressCircleRingComponent } from './components/progress-circle/progress-circle-ring.component';
 import { FlagComponent } from './components/flag/flag.component';
+import { IconRegistryService } from './components/icon/icon-registry.service';
 import { WindowRef } from './types/window-ref';
 import { ToggleButtonModule } from './components/toggle-button/toggle-button.module';
 
@@ -154,6 +155,7 @@ const importedModules = [...exportedModules, OverlayModule];
 
 const providers = [
   ModalController,
+  IconRegistryService,
   ActionSheetHelper,
   ModalHelper,
   AlertHelper,
