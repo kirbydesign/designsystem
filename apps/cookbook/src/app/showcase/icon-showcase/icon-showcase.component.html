@@ -4,23 +4,24 @@
   <h4>Properties:</h4>
   <cookbook-showcase-properties [properties]="properties"></cookbook-showcase-properties>
   <br />
-  To support custom icons, use KirbyIconRegistryService in youre NgModule to add custom icons.
+  Use 'customName' if you want to add custom icons. For adding custom icons, use IconRegistryService
+  in youre NgModule to add custom icons.
   <pre>
-    const customIconSettings: Icon[] = {{ '{' }}
+    const customIcons = {{ '{' }}
         {{ '{' }} 
-          name: 'football',
+          name: 'customIconName',
           svg: '[PATH_TO_SVG_FILE]',
         {{ '},' }}
         ...
     {{ '};' }}
 
     export class @NGModule {{ '{' }} 
-      constructor(kirbyIconRegistryService: KirbyIconRegistryService) {{ '{' }} 
-        kirbyIconRegistryService.addIcons(customIconSettings);
+      constructor(iconRegistryService: IconRegistryService) {{ '{' }} 
+        iconRegistryService.addIcons(customIcons);
       {{ '}' }} 
     {{ '}' }} 
   </pre>
-  <h3>Deprecated</h3>
+  <h3>Deprecated usage below</h3>
   <i>
     Use 'customName' if you want to add custom icons. You need to add 'IconSettings' under your
     NgModule

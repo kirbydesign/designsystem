@@ -1,5 +1,4 @@
 import { IconRegistryService } from './icon-registry.service';
-import { Icon, IconSettings } from './icon-settings';
 
 describe('KirbyIconRegistryService', () => {
   let service: IconRegistryService;

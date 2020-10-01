@@ -57,7 +57,7 @@ export class IconComponent implements OnChanges {
 
   /**
    * iconRegistryService: Registry for custom icons.
-   * iconSettings: @deprecated Use KirbyIconRegistryService for adding custom icons.
+   * iconSettings: @deprecated Use IconRegistryService for adding custom icons.
    */
   constructor(
     private iconRegistryService: IconRegistryService,
