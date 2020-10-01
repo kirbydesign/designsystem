@@ -129,7 +129,10 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
       parseInt(scrollElementStyles.getPropertyValue('padding-top')) +
       parseInt(scrollElementStyles.getPropertyValue('padding-bottom'));
 
-    const minContentHeight = Math.min(contentHeight + scrollElementPaddingTopAndBottom, contentMaxHeight);
+    const minContentHeight = Math.min(
+      contentHeight + scrollElementPaddingTopAndBottom,
+      contentMaxHeight
+    );
     this.renderer.setStyle(this.ionContentElement.nativeElement, 'min-height', `${minHeight}px`);
   }
 
@@ -337,7 +340,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     this.mutationObserver && this.mutationObserver.disconnect();
     delete this.mutationObserver;
     this.resizeObserverService.unobserve(this.windowRef.document.body);
-    if (this.config.flavor === 'modal') {
+    if (this.embeddedComponentElement) {
       this.resizeObserverService.unobserve(this.embeddedComponentElement);
     }
   }
