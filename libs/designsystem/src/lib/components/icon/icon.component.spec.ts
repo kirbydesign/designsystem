@@ -3,14 +3,12 @@ import { MockComponent } from 'ng-mocks';
 import * as ionic from '@ionic/angular';
 import { By } from '@angular/platform-browser';
 import { Component, OnInit } from '@angular/core';
-import { createSpyObject, SpyObject } from '@ngneat/spectator';
+import { createSpyObject } from '@ngneat/spectator';
 
 import { ThemeColorDirective } from '../../directives/theme-color/theme-color.directive';
 import { DesignTokenHelper } from '../../helpers/design-token-helper';
 import { IconComponent } from './icon.component';
-import { IconSettings, ICON_SETTINGS } from './icon-settings';
-import { IconRegistryService } from './kirby-icon-registry.service';
-import { KirbyIconRegistryService } from '.';
+import { IconRegistryService } from './icon-registry.service';
 
 const getColor = DesignTokenHelper.getColor;
 
@@ -170,7 +168,7 @@ function createTestComponent(template: string): ComponentFixture<TestWrapperComp
       providers: [
         {
           provide: IconRegistryService,
-          useValue: createSpyObject(KirbyIconRegistryService, {
+          useValue: createSpyObject(IconRegistryService, {
             getIcons: () => [
               { name: 'customIconNameFromIconRegistry', svg: 'customIconSvgFromIconRegistry' },
               { name: 'customIconNameFromIconSettings', svg: 'customIconSvgFromIconSettings' },

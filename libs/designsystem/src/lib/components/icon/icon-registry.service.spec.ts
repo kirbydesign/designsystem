@@ -1,4 +1,4 @@
-import { IconRegistryService } from './kirby-icon-registry.service';
+import { IconRegistryService } from './icon-registry.service';
 import { Icon, IconSettings } from './icon-settings';
 
 describe('KirbyIconRegistryService', () => {
@@ -10,12 +10,12 @@ describe('KirbyIconRegistryService', () => {
   it('should create service', () => {
     expect(service).toBeTruthy();
   });
-  describe('getCustomIcons', () => {
-    it('get icons from empty map', () => {
+  describe('getIcons', () => {
+    it('should return empty map by default', () => {
       const expectedIcons = [];
       expect(service.getIcons()).toEqual(expectedIcons);
     });
-    it('get excisting icons in map', () => {
+    it('should return registed icons', () => {
       const icons = [
         { name: 'name1', svg: 'svg1' },
         { name: 'name2', svg: 'svg2' },

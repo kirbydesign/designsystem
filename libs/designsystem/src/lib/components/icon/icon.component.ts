@@ -4,14 +4,13 @@ import {
   Inject,
   Input,
   OnChanges,
-  OnInit,
   Optional,
   SimpleChanges,
 } from '@angular/core';
 
 import { kirbyIconSettings } from './kirby-icon-settings';
 import { ICON_SETTINGS, Icon, IconSettings } from './icon-settings';
-import { IconRegistryService } from './kirby-icon-registry.service';
+import { IconRegistryService } from './icon-registry.service';
 
 @Component({
   selector: 'kirby-icon',

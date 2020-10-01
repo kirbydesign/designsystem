@@ -12,7 +12,7 @@ export class IconRegistryService {
     if (!this.iconRegistry.has(iconName)) {
       this.iconRegistry.set(iconName, svgPath);
     } else {
-      console.warn(`Icon with name: "${iconName}" allready excist`);
+      console.warn(`Icon with name: "${iconName}" already exists`);
     }
   }
 
