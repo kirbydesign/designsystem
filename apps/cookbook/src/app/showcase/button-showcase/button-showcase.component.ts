@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+
+import { NotificationColor } from '@kirbydesign/designsystem';
 declare var require: any;
 
 import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
@@ -47,6 +49,13 @@ export class ButtonShowcaseComponent {
         '(Optional) Determine if the button is going to be a Floating Action Button (FAB). Please note: FABs have an elevation of z8 by default. FABs have only an icon and no text. FABs always have a size of 64x64.',
       defaultValue: 'false',
       inputValues: ['boolean'],
+    },
+    {
+      name: 'themeColor',
+      description:
+        '(Only works when used in a toggle button) Sets the background color to the provided notification color.',
+      defaultValue: '',
+      inputValues: ['success', 'warning', 'danger'] as NotificationColor[],
     },
   ];
 
