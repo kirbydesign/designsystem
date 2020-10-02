@@ -81,9 +81,6 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   ngOnInit(): void {
     this.observeViewportResize();
     this.ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
-    this.embeddedComponentElement = this.ionContentElement.nativeElement.querySelector(
-      ':first-child'
-    );
     this.listenForIonModalDidPresent();
     this.listenForIonModalWillDismiss();
     this.componentPropsInjector = Injector.create({
@@ -153,6 +150,10 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   }
 
   ngAfterViewInit(): void {
+    this.embeddedComponentElement = this.ionContentElement.nativeElement.querySelector(
+      ':first-child'
+    );
+
     if (this.config.flavor === 'modal') {
       this.onEmbededComponentElementResize();
     }
