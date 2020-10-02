@@ -111,8 +111,17 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     return availableSpace;
   }
 
+  private getVerticalPadding(element) {
+    if (!element) return 0;
+    const computedStyles = this.windowRef.getComputedStyle(element);
+    const paddingTop = parseInt(computedStyles.getPropertyValue('padding-top')) || 0;
+    const paddingBottom = parseInt(computedStyles.getPropertyValue('padding-bottom')) || 0;
+    return paddingTop + paddingBottom;
+  }
+
   private async setHeightOfContent(contentHeight: number) {
     const modalElementRef = this.elementRef.nativeElement.parentElement;
+    if (!modalElementRef) return;
     const contentMaxHeight = this.getContentMaxHeight();
 
     if (contentHeight < contentMaxHeight && modalElementRef) {
@@ -122,16 +131,13 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     }
 
     const scrollElement = await this.ionContent.getScrollElement();
-    const scrollElementStyles = this.windowRef.getComputedStyle(scrollElement);
-
-    const scrollElementVerticalPadding =
-      parseInt(scrollElementStyles.getPropertyValue('padding-top')) +
-      parseInt(scrollElementStyles.getPropertyValue('padding-bottom'));
+    const scrollElementVerticalPadding = this.getVerticalPadding(scrollElement);
 
     const minContentHeight = Math.min(
       contentHeight + scrollElementVerticalPadding,
       contentMaxHeight
     );
+
     this.renderer.setStyle(
       this.ionContentElement.nativeElement,
       'min-height',

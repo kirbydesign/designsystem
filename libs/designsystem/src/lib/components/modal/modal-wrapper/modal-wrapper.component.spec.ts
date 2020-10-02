@@ -25,7 +25,7 @@ class StaticFooterEmbeddedComponent {}
 
 @Component({
   template: `
-    <div>Some test content</div>
+    <div data-testid="embedded-content">Some test content</div>
     <kirby-modal-footer *ngIf="showFooter" [class.enabled]="isEnabled">
       <button kirby-button>Test</button>
     </kirby-modal-footer>
@@ -539,6 +539,104 @@ describe('ModalWrapperComponent', () => {
           expect(ionModalSpy.dismiss).toHaveBeenCalledWith('test data');
         }));
       });
+    });
+  });
+
+  describe('Flavor: modal - size of content', () => {
+    let embeddedContent: HTMLElement;
+    let ionContentElement;
+
+    beforeEach(() => {
+      spectator = createComponent({
+        props: {
+          config: {
+            title: 'Modal size of content',
+            flavor: 'modal',
+            component: DynamicFooterEmbeddedComponent,
+          },
+        },
+      });
+
+      ionContentElement = spectator.query('ion-content');
+      embeddedContent = ionContentElement.querySelector('[data-testid="embedded-content"]');
+
+      spyOn(spectator.component['ionContent'], 'getScrollElement').and.returnValue(
+        Promise.resolve(document.createElement('DIV'))
+      );
+    });
+
+    afterEach(() => {
+      spectator.component.ngOnDestroy();
+      TestHelper.resetTestWindow();
+    });
+
+    it('should not set min-height of content, if flavor is "drawer"', async () => {
+      spectator = createComponent({
+        props: {
+          config: {
+            title: 'Drawer',
+            flavor: 'drawer',
+            component: DynamicFooterEmbeddedComponent,
+          },
+        },
+      });
+      // @ts-ignore
+      const setHeightOfContentSpy = spyOn(spectator.component, 'setHeightOfContent');
+
+      TestHelper.waitForResizeObserver();
+
+      expect(setHeightOfContentSpy).not.toHaveBeenCalled();
+    });
+
+    it('should set min-height of content equals the height of the content, if content dont overflow viewport', async () => {
+      const expectedHeight = '20px';
+      embeddedContent['style'].height = expectedHeight;
+      await TestHelper.resizeTestWindow({ width: '721px', height: '500px' });
+      await TestHelper.waitForResizeObserver();
+
+      const ionContentElementMinHeight = window
+        .getComputedStyle(ionContentElement)
+        .getPropertyValue('min-height');
+
+      expect(ionContentElementMinHeight).toEqual(expectedHeight);
+    });
+
+    it('should set min-height of content equals the space to bottom of viewport, if content overflows', async () => {
+      const contentHeight = '500px';
+      embeddedContent['style'].height = contentHeight;
+      await TestHelper.resizeTestWindow({
+        width: '721px',
+        height: `${parseInt(contentHeight) / 2}px`, // Make sure content can't fit inside viewport
+      });
+      await TestHelper.waitForResizeObserver();
+
+      const ionContentElementMinHeight = window
+        .getComputedStyle(ionContentElement)
+        .getPropertyValue('min-height');
+
+      expect(ionContentElementMinHeight).toEqual('190px');
+    });
+
+    it('should make space for footer, when content overflows', async () => {
+      const contentHeight = '500px'; // Ensure content can't fit inside viewport
+      embeddedContent['style'].height = contentHeight;
+
+      // Enable dynamic footer
+      const embeddedComponent = spectator.query(DynamicFooterEmbeddedComponent);
+      embeddedComponent.showFooter = true;
+      spectator.detectChanges();
+
+      await TestHelper.resizeTestWindow({
+        width: '721px',
+        height: `${parseInt(contentHeight) / 2}px`, // Make sure content can't fit inside viewport
+      });
+      await TestHelper.waitForResizeObserver();
+
+      const ionContentElementMinHeight = window
+        .getComputedStyle(ionContentElement)
+        .getPropertyValue('min-height');
+
+      expect(ionContentElementMinHeight).toEqual('171px');
     });
   });
 });

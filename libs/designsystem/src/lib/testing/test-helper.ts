@@ -112,4 +112,8 @@ export class TestHelper {
     (window.frameElement as HTMLIFrameElement).style.width = null;
     (window.frameElement as HTMLIFrameElement).style.height = null;
   }
+
+  public static waitForResizeObserver(): Promise<void> {
+    return new Promise((resolve) => setTimeout(resolve));
+  }
 }
