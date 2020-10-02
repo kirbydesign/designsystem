@@ -28,7 +28,7 @@ describe('KirbyIconRegistryService', () => {
       const icon2 = [{ name: 'name1', svg: 'svg2' }];
       service.addIcons(icon1);
       service.addIcons(icon2);
-      expect(service.getIcons()).toEqual(icon1);
+      expect(service.getIcons()).toEqual(icon2);
     });
   });
 });
