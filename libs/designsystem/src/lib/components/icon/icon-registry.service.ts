@@ -9,11 +9,7 @@ export class IconRegistryService {
   private iconRegistry = new Map<string, string>();
 
   addIcon(iconName: string, svgPath: string): void {
-    if (!this.iconRegistry.has(iconName)) {
-      this.iconRegistry.set(iconName, svgPath);
-    } else {
-      console.warn(`Icon with name: "${iconName}" already exists`);
-    }
+    this.iconRegistry.set(iconName, svgPath);
   }
 
   addIcons(icons: Icon[]): void {
