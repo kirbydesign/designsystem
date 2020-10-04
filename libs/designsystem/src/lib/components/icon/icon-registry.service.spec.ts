@@ -1,5 +1,5 @@
 import { IconRegistryService } from './icon-registry.service';
-import { Icon, IconSettings } from './icon-settings';
+import { IconSettings } from './icon-settings';
 
 describe('KirbyIconRegistryService', () => {
   let service: IconRegistryService;
@@ -57,12 +57,47 @@ describe('KirbyIconRegistryService', () => {
       service.addIcons(icons);
       expect(service.getIcons()).toEqual(icons);
     });
+  });
+
+  describe('addIcon', () => {
+    it('should add the icon to the regitry', () => {
+      service.addIcon('name1', 'svg1');
+      expect(service.getIcons()).toEqual([{ name: 'name1', svg: 'svg1' }]);
+    });
     it('should only add distinct icon names', () => {
-      const icon1 = [{ name: 'name1', svg: 'svg1' }];
-      const icon2 = [{ name: 'name1', svg: 'svg2' }];
-      service.addIcons(icon1);
-      service.addIcons(icon2);
-      expect(service.getIcons()).toEqual(icon1);
+      service.addIcon('name1', 'svg1');
+      service.addIcon('name1', 'svg2');
+      expect(service.getIcons()).toEqual([{ name: 'name1', svg: 'svg1' }]);
+    });
+    it('should warn when overwriting existing icon name', () => {
+      spyOn(console, 'warn');
+      service.addIcon('name1', 'svg1');
+      service.addIcon('name1', 'svg2');
+      expect(console.warn).toHaveBeenCalledWith('Icon with name: "name1" already exists');
+    });
+  });
+
+  describe('addIcons', () => {
+    const icon1 = { name: 'name1', svg: 'svg1' };
+    const icon2 = { name: 'name1', svg: 'svg2' };
+    const icon3 = { name: 'name3', svg: 'svg3' };
+    const expectedIcons = [icon1, icon3];
+
+    it('should only add distinct icon names from same set', () => {
+      service.addIcons([icon1, icon2, icon3]);
+      expect(service.getIcons()).toEqual(expectedIcons);
+    });
+
+    it('should only add distinct icon names from different sets', () => {
+      service.addIcons([icon1]);
+      service.addIcons([icon2, icon3]);
+      expect(service.getIcons()).toEqual(expectedIcons);
+    });
+
+    it('should warn when overwriting existing icon name', () => {
+      spyOn(console, 'warn');
+      service.addIcons([icon1, icon2, icon3]);
+      expect(console.warn).toHaveBeenCalledWith('Icon with name: "name1" already exists');
     });
   });
 });
