@@ -47,6 +47,7 @@ import { MockSpinnerComponent } from './components/mock.spinner.component';
 import { MockTabButtonComponent } from './components/mock.tab-button.component';
 import { MockTabsComponent } from './components/mock.tabs.component';
 import { MockToggleComponent } from './components/mock.toggle.component';
+import { MockToggleButtonComponent } from './components/mock.toggle-button.component';
 import { MockToolbarComponent } from './components/mock.toolbar.component';
 
 export const MOCK_COMPONENTS = [
@@ -97,5 +98,6 @@ export const MOCK_COMPONENTS = [
   MockTabButtonComponent,
   MockTabsComponent,
   MockToggleComponent,
+  MockToggleButtonComponent,
   MockToolbarComponent,
 ];
