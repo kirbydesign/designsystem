@@ -1,7 +1,7 @@
 import { IconRegistryService } from './icon-registry.service';
 import { Icon, IconSettings } from './icon-settings';
 
-fdescribe('KirbyIconRegistryService', () => {
+describe('KirbyIconRegistryService', () => {
   let service: IconRegistryService;
 
   beforeEach(() => {

@@ -12,7 +12,7 @@ import { IconRegistryService } from './icon-registry.service';
 
 const getColor = DesignTokenHelper.getColor;
 
-fdescribe('IconComponent', () => {
+describe('IconComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
@@ -41,7 +41,7 @@ fdescribe('IconComponent', () => {
   });
 
   describe('icons', () => {
-    fit('should point to the cog icon by default', () => {
+    it('should point to the cog icon by default', () => {
       const fixture = createTestComponent('<kirby-icon></kirby-icon>');
       const component = fixture.debugElement.query(By.directive(IconComponent)).componentInstance;
       expect(component.name).toBe(undefined);
