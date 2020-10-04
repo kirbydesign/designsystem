@@ -12,7 +12,7 @@ import { IconRegistryService } from './icon-registry.service';
 
 const getColor = DesignTokenHelper.getColor;
 
-describe('IconComponent', () => {
+fdescribe('IconComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
@@ -41,7 +41,7 @@ describe('IconComponent', () => {
   });
 
   describe('icons', () => {
-    it('should point to the cog icon by default', () => {
+    fit('should point to the cog icon by default', () => {
       const fixture = createTestComponent('<kirby-icon></kirby-icon>');
       const component = fixture.debugElement.query(By.directive(IconComponent)).componentInstance;
       expect(component.name).toBe(undefined);
@@ -55,17 +55,7 @@ describe('IconComponent', () => {
       expect(component.icon.name).toBe('verify');
     });
 
-    it('should use custom icons from ICON_SETTINGS', () => {
-      const fixture = createTestComponent(
-        `<kirby-icon customName="customIconNameFromIconSettings"></kirby-icon>`
-      );
-      fixture.detectChanges();
-      const component = fixture.debugElement.query(By.directive(IconComponent)).componentInstance;
-      expect(component.icon.name).toBe('customIconNameFromIconSettings');
-      expect(component.icon.svg).toBe('customIconSvgFromIconSettings');
-    });
-
-    it('should use custom icons added with KirbyIconRegistryService', () => {
+    it('should use custom icon from IconRegistryService', () => {
       const fixture = createTestComponent(
         `<kirby-icon customName="customIconNameFromIconRegistry"></kirby-icon>`
       );
@@ -169,10 +159,10 @@ function createTestComponent(template: string): ComponentFixture<TestWrapperComp
         {
           provide: IconRegistryService,
           useValue: createSpyObject(IconRegistryService, {
-            getIcons: () => [
-              { name: 'customIconNameFromIconRegistry', svg: 'customIconSvgFromIconRegistry' },
-              { name: 'customIconNameFromIconSettings', svg: 'customIconSvgFromIconSettings' },
-            ],
+            getIcon: (_) => ({
+              name: 'customIconNameFromIconRegistry',
+              svg: 'customIconSvgFromIconRegistry',
+            }),
           }),
         },
       ],

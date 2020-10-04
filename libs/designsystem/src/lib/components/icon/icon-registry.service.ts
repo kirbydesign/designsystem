@@ -1,12 +1,18 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, Optional } from '@angular/core';
 
-import { Icon } from './icon-settings';
+import { Icon, IconSettings, ICON_SETTINGS } from './icon-settings';
 
 @Injectable({
   providedIn: 'root',
 })
 export class IconRegistryService {
   private iconRegistry = new Map<string, string>();
+
+  constructor(@Optional() @Inject(ICON_SETTINGS) private iconSettings?: IconSettings) {
+    if (this.iconSettings) {
+      this.addIcons(this.iconSettings.icons);
+    }
+  }
 
   addIcon(iconName: string, svgPath: string): void {
     if (!this.iconRegistry.has(iconName)) {
@@ -30,5 +36,10 @@ export class IconRegistryService {
     return [...this.iconRegistry].map(
       (keyValPair) => ({ name: keyValPair[0], svg: keyValPair[1] } as Icon)
     );
+  }
+
+  public getIcon(name: string): Icon {
+    const svg = this.iconRegistry.get(name);
+    return svg ? { name, svg } : undefined;
   }
 }
