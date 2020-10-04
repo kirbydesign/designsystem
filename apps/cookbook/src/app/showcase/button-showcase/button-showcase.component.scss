@@ -1,5 +1,15 @@
 @import './libs/designsystem/src/lib/scss/utils';
 
-.toggle-button-link {
+h2 {
+  margin-top: size('xl');
+}
+
+cookbook-toggle-button-example {
+  padding: 0;
+  margin-bottom: size('s');
+}
+
+cookbook-code-viewer {
+  display: block;
   margin-top: size('xl');
 }
