@@ -116,7 +116,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     return paddingTop + paddingBottom;
   }
 
-  private async setHeightOfContent(contentHeight: number) {
+  private async setContentWrapperHeight(height: number) {
     const modalElementRef = this.elementRef.nativeElement.parentElement;
     if (!modalElementRef) return;
     const contentMaxHeight = this.getContentMaxHeight();
