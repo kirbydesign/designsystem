@@ -42,10 +42,10 @@
     </ul>
     <h2><span class="desktop">Desktop:</span><span class="mobile">Mobile:</span></h2>
     <cookbook-modal-example #example></cookbook-modal-example>
-    <cookbook-code-viewer [html]="example.template"></cookbook-code-viewer>
   </div>
   <cookbook-iphone src="/examples/modal" showExternalLink="true"></cookbook-iphone>
 </div>
+<cookbook-code-viewer [html]="example.template"></cookbook-code-viewer>
 <h2 #modalController>Inside the parent (caller) component:</h2>
 <p>
   To show the modal, create a <code>ModalConfig</code> and pass it to the

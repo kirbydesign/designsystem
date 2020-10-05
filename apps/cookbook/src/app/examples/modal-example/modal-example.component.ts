@@ -10,9 +10,13 @@ const config = {
 <button kirby-button (click)="showDrawer()">Show drawer</button>
 <button kirby-button (click)="showCompact()">Show compact</button>
 <button kirby-button (click)="showModalWithFooter()">Show modal with footer</button>
+
+<kirby-divider [hasMargin]="true"></kirby-divider>
+
 <button kirby-button (click)="navigateToModalRoute('page1')">Open modal by route</button>
-<button kirby-button [routerLink]="[ { outlets: { modal: 'page1' } } ]">Open modal by router link</button>
-<button kirby-button class="deeplink" (click)="navigateToModalRoute('page1', '/examples/modal/')">Deep link to modal route</button>
+<button kirby-button kirbyModalRouterLink="page1">Open modal by router link</button>
+<button kirby-button class="deeplink" (click)="navigateToModalRoute(['/examples', 'modal', 'page1'])">Deep link to modal route</button>
+<button kirby-button class="deeplink" [kirbyModalRouterLink]="['/examples', 'modal', 'page1']">Deep link to modal by router link</button>
 `,
   footerTemplate: `<p>Some content of the embedded component</p>
 ...
@@ -220,8 +224,8 @@ export class ModalExampleComponent implements OnInit {
     this.showModal(true);
   }
 
-  navigateToModalRoute(childPath: string, parentPath?: string) {
-    this.modalController.navigateToModal(childPath, parentPath);
+  navigateToModalRoute(path: string) {
+    this.modalController.navigateToModal(path);
   }
 
   onModalClose(data: any): void {
