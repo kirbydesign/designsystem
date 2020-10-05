@@ -91,9 +91,8 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
 
   private getContentMaxHeight(): number {
     const ionModalWrapper = this.elementRef.nativeElement.closest('.modal-wrapper')
-    const ionModal = ionModalWrapper.parentElement;
     const ionModalPaddingTop = this.windowRef
-      .getComputedStyle(ionModal)
+      .getComputedStyle(this.ionModalElement)
       .getPropertyValue('padding-top');
 
     let availableHeight =
