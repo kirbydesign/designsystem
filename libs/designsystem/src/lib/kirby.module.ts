@@ -75,6 +75,7 @@ import { ResizeObserverFactory } from './components/shared/resize-observer/resiz
 import { ResizeObserverService } from './components/shared/resize-observer/resize-observer.service';
 import { ProgressCircleComponent } from './components/progress-circle/progress-circle.component';
 import { ProgressCircleRingComponent } from './components/progress-circle/progress-circle-ring.component';
+import { ModalRouterLinkDirective } from './directives/modal-router-link/modal-router-link.directive';
 
 const exportedDeclarations = [
   CardComponent,
@@ -121,6 +122,7 @@ const exportedDeclarations = [
   InfiniteScrollDirective,
   LoadingOverlayComponent,
   ProgressCircleComponent,
+  ModalRouterLinkDirective,
 ];
 
 const declarations = [
