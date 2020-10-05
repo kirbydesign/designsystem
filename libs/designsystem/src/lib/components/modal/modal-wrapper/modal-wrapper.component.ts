@@ -96,7 +96,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
       .getComputedStyle(ionModal)
       .getPropertyValue('padding-top');
 
-    let availableSpace =
+    let availableHeight =
       document.documentElement.clientHeight -
       parseInt(ionModalPaddingTop) -
       (this.ionContentElement.nativeElement.getBoundingClientRect().top -
