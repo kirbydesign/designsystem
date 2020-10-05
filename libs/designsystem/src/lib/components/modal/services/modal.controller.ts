@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
-import { ModalHelper } from './modal.helper';
-import { AlertHelper } from './alert.helper';
-import { ActionSheetHelper } from './action-sheet.helper';
-import { ActionSheetConfig } from '../action-sheet/config/action-sheet-config';
-import { AlertConfig } from '../alert/config/alert-config';
 import { KirbyAnimation } from '../../../animation/kirby-animation';
+import { ActionSheetConfig } from '../action-sheet/config/action-sheet-config';
 import { ModalConfig } from '../modal-wrapper/config/modal-config';
+import { ActionSheetHelper } from './action-sheet.helper';
+import { AlertConfig } from '../alert/config/alert-config';
+import { AlertHelper } from './alert.helper';
+import { ModalHelper } from './modal.helper';
+import { ModalNavigationService } from './modal-navigation.service';
 import { Overlay } from './modal.interfaces';
-import { ModalOutlet } from './modal-outlet.service';
 
 @Injectable()
 export class ModalController {
@@ -19,32 +21,54 @@ export class ModalController {
     private modalHelper: ModalHelper,
     private actionSheetHelper: ActionSheetHelper,
     private alertHelper: AlertHelper,
-    private modalOutlet: ModalOutlet
+    private modalNavigationService: ModalNavigationService
   ) {
-    this.resolveModal();
+    this.onModalRouteActivated();
+    this.onModalRouteDeActivated(); // TODO: Do we want to close modal when routing out of modal route? Or should the code that navigates close the window??
   }
 
-  private resolveModal() {
-    this.modalOutlet.resolve$.subscribe(() => {
-      if (this.overlays.length === 0) this.showModal({ title: '' });
-    });
+  private onModalRouteActivated() {
+    const navigateOnWillClose = () => this.modalNavigationService.navigateOutOfModalOutlet();
+    this.modalNavigationService.modalRouteActivated$
+      .pipe(filter(() => this.overlays.length === 0))
+      .subscribe(async (route) => {
+        await this.showModalRoute(route, navigateOnWillClose);
+      });
+  }
+
+  private onModalRouteDeActivated() {
+    this.modalNavigationService.modalRouteDeactivated$
+      .pipe(filter(() => this.overlays.length > 0))
+      .subscribe(async () => {
+        await this.hideAll(); // TODO: Should we just hide all or specifically close the modal route overlay???
+      });
   }
 
   public async showModal(config: ModalConfig, onClose?: (data?: any) => void): Promise<void> {
     if (config.hasOwnProperty('dim')) {
       console.warn('ModalConfig.dim is deprecated - please remove from your configuration.');
     }
+    await this.showAndRegisterOverlay(() => this.modalHelper.showModalWindow(config), onClose);
+  }
 
-    const onCloseOveride = (data?: any) => {
-      this.modalOutlet.destroy();
-      if (typeof onClose === 'function') {
-        onClose(data);
-      }
+  public async navigateToModalRoute(childPath: string, parentPath?: string): Promise<boolean> {
+    await this.modalNavigationService.navigateToModalRoute(childPath, parentPath);
+  }
+
+  private async showModalRoute(
+    modalRoute: ActivatedRoute,
+    onWillClose?: (data?: any) => void
+  ): Promise<void> {
+    const config: ModalConfig = {
+      title: modalRoute.snapshot.data.modalTitle, // TODO: Title should be rendered within ModalWrapper from embedded kirby-title component
+      component: null,
+      modalRoute: modalRoute,
+      flavor: 'modal', // Todo: Should it be possible to specify flavor as data in RouteConfig?
     };
-
     await this.showAndRegisterOverlay(
       () => this.modalHelper.showModalWindow(config),
-      onCloseOveride
+      null,
+      onWillClose
     );
   }
 
@@ -64,18 +88,22 @@ export class ModalController {
 
   private async showAndRegisterOverlay(
     showOverlay: () => Promise<Overlay>,
-    onCloseOverlay?: (data?: any) => void
+    onCloseOverlay?: (data?: any) => void,
+    onWillCloseOverlay?: (data?: any) => void
   ) {
     const overlay = await showOverlay();
+    if (!overlay) return;
+
     this.overlays.push(overlay);
 
-    if (!overlay || !overlay.onDidDismiss) return;
+    if (typeof onWillCloseOverlay === 'function') {
+      overlay.onWillDismiss.then((event) => onWillCloseOverlay(event.data));
+    }
 
     overlay.onDidDismiss.then((event) => {
       this.overlays.pop();
       if (typeof onCloseOverlay === 'function') {
-        const data = !event || !event.data ? undefined : event.data;
-        onCloseOverlay(data);
+        onCloseOverlay(event.data);
       }
     });
   }

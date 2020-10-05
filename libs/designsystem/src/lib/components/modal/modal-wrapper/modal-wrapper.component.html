@@ -20,7 +20,7 @@
   ></ng-container>
   <router-outlet
     name="modal"
-    [style.visibility]="!config.component ? 'visible' : 'hidden'"
+    [style.visibility]="config.modalRoute ? 'visible' : 'hidden'"
   ></router-outlet>
 </ion-content>
 

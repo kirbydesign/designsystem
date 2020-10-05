@@ -1,8 +1,11 @@
+import { ActivatedRoute } from '@angular/router';
+
 import { DrawerSupplementaryAction } from './drawer-supplementary-action';
 
 export interface ModalConfig {
   title: string;
-  component?: any;
+  component: any;
+  modalRoute?: ActivatedRoute;
   flavor?: 'modal' | 'drawer' | 'compact';
   /**
    * @deprecated Will be removed in next major version.

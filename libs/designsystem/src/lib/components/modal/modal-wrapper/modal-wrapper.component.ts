@@ -12,20 +12,21 @@ import {
   OnInit,
   ViewChildren,
   QueryList,
+  ComponentFactoryResolver,
 } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 import { IonContent } from '@ionic/angular';
 import { Subject, from } from 'rxjs';
-import { Router, NavigationEnd } from '@angular/router';
-import { filter, first, takeUntil } from 'rxjs/operators';
+import { first, takeUntil } from 'rxjs/operators';
 
 import { KirbyAnimation } from '../../../animation/kirby-animation';
 import { ModalConfig } from './config/modal-config';
 import { COMPONENT_PROPS } from './config/modal-config.helper';
 import { Modal } from '../services/modal.interfaces';
+import { ModalNavigationService } from '../services/modal-navigation.service';
 import { ButtonComponent } from '../../button/button.component';
 import { ResizeObserverService } from '../../shared/resize-observer/resize-observer.service';
 import { ResizeObserverEntry } from '../../shared/resize-observer/types/resize-observer-entry';
-import { ModalOutlet } from '../services/modal-outlet.service';
 
 @Component({
   selector: 'kirby-modal-wrapper',
@@ -51,6 +52,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   @ViewChild(IonContent, { static: true, read: ElementRef }) private ionContentElement: ElementRef<
     HTMLIonContentElement
   >;
+  @ViewChild(RouterOutlet, { static: true }) private routerOutlet: RouterOutlet;
   private mutationObserver: MutationObserver;
   private keyboardVisible = false;
   private toolbarButtons: HTMLButtonElement[] = [];
@@ -70,43 +72,52 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     return this.config.flavor === 'drawer';
   }
 
-  willClose$ = from(this.willClose).pipe(first());
-  private navigationEndListener$: any = this.router.events.pipe(
-    takeUntil(this.willClose$),
-    filter((event) => event instanceof NavigationEnd)
-  );
+  willClose$ = this.ionModalWillDismiss.pipe(first());
 
   constructor(
     private injector: Injector,
     private elementRef: ElementRef<HTMLElement>,
     private renderer: Renderer2,
     private resizeObserverService: ResizeObserverService,
-    private modalOutlet: ModalOutlet,
-    private router: Router
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private modalNavigationService: ModalNavigationService
   ) {
     this.observeViewportResize();
   }
 
   ngOnInit(): void {
-    this.modalOutlet.activate(this);
-    this.navigationEndListener$.subscribe((e) => {
-      if (!this.modalOutlet.isModalRoute(e.url)) {
-        this.close();
-      } else {
-        this.modalOutlet.activate(this);
-      }
-    });
-    this.willClose$.subscribe(() => {
-      this.modalOutlet.destroy();
-    });
-
     this.ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
+    this.initializeModalRoute();
     this.listenForIonModalDidPresent();
     this.listenForIonModalWillDismiss();
     this.componentPropsInjector = Injector.create({
       providers: [{ provide: COMPONENT_PROPS, useValue: this.config.componentProps }],
       parent: this.injector,
     });
+  }
+
+  private initializeModalRoute() {
+    if (this.config.modalRoute) {
+      this.onModalRouteActivated();
+
+      this.ionModalElement.onWillDismiss().then(() => {
+        this.routerOutlet.deactivate(); // Todo: Is this needed? The wrapper component is destroyed anyway...
+      });
+
+      // Load component from modal-route inside router-outlet:
+      this.routerOutlet.activateWith(this.config.modalRoute, this.componentFactoryResolver);
+    }
+  }
+
+  private onModalRouteActivated() {
+    this.modalNavigationService.modalRouteActivated$
+      .pipe(takeUntil(this.willClose$))
+      .subscribe((route) => {
+        if (this.routerOutlet.isActivated) {
+          this.routerOutlet.deactivate();
+        }
+        this.routerOutlet.activateWith(route, this.componentFactoryResolver);
+      });
   }
 
   ngAfterViewInit(): void {

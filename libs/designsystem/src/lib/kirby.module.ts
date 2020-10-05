@@ -51,6 +51,7 @@ import { ActionSheetHelper } from './components/modal/services/action-sheet.help
 import { AlertHelper } from './components/modal/services/alert.helper';
 import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
 import { ModalController } from './components/modal/services/modal.controller';
+import { ModalNavigationService } from './components/modal/services/modal-navigation.service';
 import { ModalHelper } from './components/modal/services/modal.helper';
 import { ComponentLoaderDirective } from './components/shared/component-loader.directive';
 import { SlideButtonComponent } from './components/slide-button/slide-button.component';
@@ -149,6 +150,7 @@ const importedModules = [...exportedModules, OverlayModule];
 
 const providers = [
   ModalController,
+  ModalNavigationService,
   ActionSheetHelper,
   ModalHelper,
   AlertHelper,
@@ -184,4 +186,9 @@ const entryComponents = [
   entryComponents: entryComponents,
   exports: exports,
 })
-export class KirbyModule {}
+export class KirbyModule {
+  // TODO: Should we eager-initialize ModalNavigationService here??
+  // constructor(modalNavigationService: ModalNavigationService) {
+  //   console.warn('KirbyModule ctor');
+  // }
+}
