@@ -14,8 +14,8 @@
         {{ '},' }}
         ...
     ];
-
-    export class @NGModule {{ '{' }} 
+    @NgModule({{ '{' }} ... {{ '}' }} )
+    export class MyModule {{ '{' }} 
       constructor(iconRegistryService: IconRegistryService) {{ '{' }} 
         iconRegistryService.addIcons(customIcons);
       {{ '}' }} 
