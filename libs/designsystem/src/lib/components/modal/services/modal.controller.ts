@@ -51,8 +51,12 @@ export class ModalController {
     await this.showAndRegisterOverlay(() => this.modalHelper.showModalWindow(config), onClose);
   }
 
-  public async navigateToModalRoute(childPath: string, parentPath?: string): Promise<boolean> {
-    await this.modalNavigationService.navigateToModalRoute(childPath, parentPath);
+  public async navigateToModal(childPath: string, parentPath?: string): Promise<boolean> {
+    return this.modalNavigationService.navigateToModal(childPath, parentPath);
+  }
+
+  public async navigateWithinModal(relativePath: string): Promise<boolean> {
+    return this.modalNavigationService.navigateWithinModal(relativePath);
   }
 
   private async showModalRoute(
