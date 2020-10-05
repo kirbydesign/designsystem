@@ -17,34 +17,25 @@ import { ChartExampleModule } from './chart-example/chart-example.module';
 import { ProgressCircleExampleModule } from './progress-circle-example/progress-circle-example.module';
 import { AvatarExampleModule } from './avatar-example/avatar-example.module';
 import { FlagExampleModule } from './flag-example/flag-example.module';
+import { ToggleButtonExampleModule } from './toggle-button-example/toggle-button-example.module';
+
+const IMPORTS = [
+  FormFieldExamplesModule,
+  ItemExampleModule,
+  ListExamplesModule,
+  DropdownExampleModule,
+  SegmentedControlExampleModule,
+  ChartExampleModule,
+  ProgressCircleExampleModule,
+  AvatarExampleModule,
+  FlagExampleModule,
+  ToggleButtonExampleModule,
+];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    KirbyModule,
-    FormFieldExamplesModule,
-    ItemExampleModule,
-    ListExamplesModule,
-    DropdownExampleModule,
-    SegmentedControlExampleModule,
-    ChartExampleModule,
-    ProgressCircleExampleModule,
-    AvatarExampleModule,
-    FlagExampleModule,
-  ],
+  imports: [CommonModule, KirbyModule, ...IMPORTS],
   declarations: COMPONENT_DECLARATIONS,
-  exports: [
-    ...COMPONENT_DECLARATIONS,
-    FormFieldExamplesModule,
-    ItemExampleModule,
-    ListExamplesModule,
-    DropdownExampleModule,
-    SegmentedControlExampleModule,
-    ChartExampleModule,
-    ProgressCircleExampleModule,
-    AvatarExampleModule,
-    FlagExampleModule,
-  ],
+  exports: [...COMPONENT_DECLARATIONS, ...IMPORTS],
   providers: [PROVIDER_DECLARATIONS],
   entryComponents: [
     CardExampleComponent,

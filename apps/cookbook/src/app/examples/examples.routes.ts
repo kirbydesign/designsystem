@@ -52,6 +52,7 @@ import { DropdownExampleComponent } from '~/app/examples/dropdown-example/dropdo
 import { StockChartExampleComponent } from './stock-chart-example/stock-chart-example.component';
 import { ProgressCircleExampleComponent } from './progress-circle-example/progress-circle-example.component';
 import { FlagExampleComponent } from './flag-example/flag-example.component';
+import { ToggleButtonExampleComponent } from './toggle-button-example/toggle-button-example.component';
 
 export const routes: Routes = [
   {
@@ -315,5 +316,9 @@ export const routes: Routes = [
   {
     path: 'progress-circle',
     component: ProgressCircleExampleComponent,
+  },
+  {
+    path: 'toggle-button',
+    component: ToggleButtonExampleComponent,
   },
 ];
