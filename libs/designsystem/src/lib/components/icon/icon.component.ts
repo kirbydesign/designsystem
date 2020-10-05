@@ -55,10 +55,6 @@ export class IconComponent implements OnChanges {
     }
   }
 
-  /**
-   * iconRegistryService: Registry for custom icons.
-   * iconSettings: @deprecated Use IconRegistryService for adding custom icons.
-   */
   constructor(
     private iconRegistryService: IconRegistryService,
     @Optional() @Inject(ICON_SETTINGS) private iconSettings?: IconSettings
