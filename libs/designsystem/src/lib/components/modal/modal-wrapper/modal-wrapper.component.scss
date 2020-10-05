@@ -5,9 +5,19 @@
 :host {
   @include media('>=medium') {
     &:not(.drawer) {
-      display: block;
+      display: flex;
+      flex-direction: column;
       position: relative;
       contain: inherit;
+      height: 100%;
+
+      ion-header {
+        flex: 0 0 auto;
+      }
+
+      ion-content {
+        overflow: hidden;
+      }
     }
   }
 
@@ -51,6 +61,12 @@ ion-title {
 
 ion-content {
   --background: transparent;
+  display: flex;
+
+  flex-direction: column;
+
+  // TODO: HOW TO GET MAX HEIGHT HEADER PLUS PADDING?
+  //max-height: calc(100vh - (62px + 40px));
 
   @include slotted('*') {
     box-sizing: border-box;

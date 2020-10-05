@@ -231,17 +231,19 @@ describe('ModalWrapperComponent', () => {
       spectator.component.ngOnDestroy();
     });
 
-    it('should move embedded footer to wrapper component', () => {
+    it('should move embedded footer to ion-content[slot="fixed"]', () => {
       const ionContentElement = spectator.query('ion-content');
       const embeddedComponentElement = ionContentElement.firstElementChild;
       const embeddedFooter = embeddedComponentElement.querySelector('kirby-modal-footer');
       expect(embeddedFooter).toBeNull();
-      const footerAsWrapperChild = spectator.element.querySelector(':scope > kirby-modal-footer');
+      const footerAsWrapperChild = spectator.element.querySelector(
+        'ion-content > kirby-modal-footer[slot="fixed"]'
+      );
       expect(footerAsWrapperChild).not.toBeNull();
     });
 
     it('should define custom CSS property --keyboard-offset on embedded footer', () => {
-      const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
+      const kirbyModalFooter = spectator.element.querySelector('kirby-modal-footer');
       spectator.component._onKeyboardWillShow({ keyboardHeight: 200 });
       expect(kirbyModalFooter).toHaveStyle({ '--keyboard-offset': '200px' });
     });
@@ -264,7 +266,7 @@ describe('ModalWrapperComponent', () => {
       spectator.component.ngOnDestroy();
     });
 
-    it('should move embedded footer to wrapper component when rendered', (done) => {
+    it('should move embedded footer to ion-content[slot="fixed"] when rendered', (done) => {
       const footer = spectator.element.querySelector('kirby-modal-footer');
       expect(footer).toBeNull();
 
@@ -277,13 +279,15 @@ describe('ModalWrapperComponent', () => {
         const embeddedComponentElement = ionContentElement.firstElementChild;
         const embeddedFooter = embeddedComponentElement.querySelector('kirby-modal-footer');
         expect(embeddedFooter).toBeNull();
-        const footerAsWrapperChild = spectator.element.querySelector(':scope > kirby-modal-footer');
+        const footerAsWrapperChild = spectator.element.querySelector(
+          'ion-content > kirby-modal-footer[slot="fixed"]'
+        );
         expect(footerAsWrapperChild).not.toBeNull();
         done();
       });
     });
 
-    it('should remove embedded footer from wrapper component when not rendered', (done) => {
+    it('should remove embedded footer from ion-content when not rendered', (done) => {
       const footer = spectator.element.querySelector('kirby-modal-footer');
       expect(footer).toBeNull();
 
@@ -292,7 +296,9 @@ describe('ModalWrapperComponent', () => {
       spectator.detectChanges();
 
       setTimeout(() => {
-        const footerAsWrapperChild = spectator.element.querySelector(':scope > kirby-modal-footer');
+        const footerAsWrapperChild = spectator.element.querySelector(
+          'ion-content > kirby-modal-footer[slot="fixed"]'
+        );
         expect(footerAsWrapperChild).not.toBeNull();
 
         embeddedComponent.showFooter = false;
@@ -317,7 +323,9 @@ describe('ModalWrapperComponent', () => {
         const embeddedComponentElement = ionContentElement.firstElementChild;
         const embeddedFooter = embeddedComponentElement.querySelector('kirby-modal-footer');
         expect(embeddedFooter).toBeNull();
-        const footerAsWrapperChild = spectator.element.querySelector(':scope > kirby-modal-footer');
+        const footerAsWrapperChild = spectator.element.querySelector(
+          'ion-content > kirby-modal-footer[slot="fixed"]'
+        );
         expect(footerAsWrapperChild).not.toBeNull();
 
         embeddedComponent.isEnabled = true;
@@ -333,7 +341,8 @@ describe('ModalWrapperComponent', () => {
       spectator.detectChanges();
 
       setTimeout(() => {
-        const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
+        const kirbyModalFooter = spectator.element.querySelector('kirby-modal-footer');
+        console.log(kirbyModalFooter);
         spectator.component._onKeyboardWillShow({ keyboardHeight: 200 });
         expect(kirbyModalFooter).toHaveStyle({ '--keyboard-offset': '200px' });
         done();
@@ -568,75 +577,6 @@ describe('ModalWrapperComponent', () => {
     afterEach(() => {
       spectator.component.ngOnDestroy();
       TestHelper.resetTestWindow();
-    });
-
-    it('should not set min-height of content, if flavor is "drawer"', async () => {
-      spectator = createComponent({
-        props: {
-          config: {
-            title: 'Drawer',
-            flavor: 'drawer',
-            component: DynamicFooterEmbeddedComponent,
-          },
-        },
-      });
-      // @ts-ignore
-      const setHeightOfContentSpy = spyOn(spectator.component, 'setHeightOfContent');
-
-      TestHelper.waitForResizeObserver();
-
-      expect(setHeightOfContentSpy).not.toHaveBeenCalled();
-    });
-
-    it('should set min-height of content equals the height of the content, if content dont overflow viewport', async () => {
-      const expectedHeight = '20px';
-      embeddedContent['style'].height = expectedHeight;
-      await TestHelper.resizeTestWindow({ width: '721px', height: '500px' });
-      await TestHelper.waitForResizeObserver();
-
-      const ionContentElementMinHeight = window
-        .getComputedStyle(ionContentElement)
-        .getPropertyValue('min-height');
-
-      expect(ionContentElementMinHeight).toEqual(expectedHeight);
-    });
-
-    it('should set min-height of content equals the space to bottom of viewport, if content overflows', async () => {
-      const contentHeight = '500px';
-      embeddedContent['style'].height = contentHeight;
-      await TestHelper.resizeTestWindow({
-        width: '721px',
-        height: `${parseInt(contentHeight) / 2}px`, // Make sure content can't fit inside viewport
-      });
-      await TestHelper.waitForResizeObserver();
-
-      const ionContentElementMinHeight = window
-        .getComputedStyle(ionContentElement)
-        .getPropertyValue('min-height');
-
-      expect(ionContentElementMinHeight).toEqual('190px');
-    });
-
-    it('should make space for footer, when content overflows', async () => {
-      const contentHeight = '500px'; // Ensure content can't fit inside viewport
-      embeddedContent['style'].height = contentHeight;
-
-      // Enable dynamic footer
-      const embeddedComponent = spectator.query(DynamicFooterEmbeddedComponent);
-      embeddedComponent.showFooter = true;
-      spectator.detectChanges();
-
-      await TestHelper.resizeTestWindow({
-        width: '721px',
-        height: `${parseInt(contentHeight) / 2}px`, // Make sure content can't fit inside viewport
-      });
-      await TestHelper.waitForResizeObserver();
-
-      const ionContentElementMinHeight = window
-        .getComputedStyle(ionContentElement)
-        .getPropertyValue('min-height');
-
-      expect(ionContentElementMinHeight).toEqual('171px');
     });
   });
 });

@@ -101,17 +101,16 @@ ion-modal.kirby-overlay {
       }
 
       &:not(.kirby-drawer):not(.kirby-modal-compact) {
+        --height: auto;
+        --max-height: none;
         align-items: flex-start;
         padding-top: size('xl');
-        .modal-wrapper {
-          height: auto;
-          --max-height: none;
-          border-radius: $border-radius;
+        transition: all 0.5s ease-in-out, padding 0ms;
 
-          &.content-exceeds-viewport {
-            border-bottom-left-radius: 0;
-            border-bottom-right-radius: 0;
-          }
+        .modal-wrapper.content-overflows {
+          border-bottom-left-radius: 0;
+          border-bottom-right-radius: 0;
+          align-self: stretch;
         }
       }
 

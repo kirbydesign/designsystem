@@ -89,77 +89,51 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     });
   }
 
-  private getContentMaxHeight(): number {
-    const ionModalWrapper = this.elementRef.nativeElement.closest('.modal-wrapper')
-    const ionModalPaddingTop = this.windowRef
-      .getComputedStyle(this.ionModalElement)
-      .getPropertyValue('padding-top');
+  private getAvailableContentHeight(modalWrapper: HTMLElement): number {
+    const ionContentElementTop = this.ionContentElement.nativeElement.getBoundingClientRect().top;
+    const modalWrapperTop = modalWrapper.getBoundingClientRect().top;
 
-    let availableHeight =
-      document.documentElement.clientHeight -
-      ionModalPaddingTop -
-      (contentWrapperTop - modalWrapperTop);
+    const distanceFromContentToModalWrapper = ionContentElementTop - modalWrapperTop;
+    const ionModalHeight = this.ionModalElement.getBoundingClientRect().height;
 
-    if (this.embeddedFooterElement) {
-      availableSpace -= this.embeddedFooterElement.getBoundingClientRect().height;
+    const availableHeight = ionModalHeight - distanceFromContentToModalWrapper;
+    return availableHeight;
+  }
+
+  private onScrollElementResize() {
+    const modalWrapper = this.ionModalElement.querySelector('.modal-wrapper');
+    const embeddedComponentHeight = this.embeddedComponentElement.getBoundingClientRect().height;
+
+    if (embeddedComponentHeight >= this.getAvailableContentHeight(modalWrapper as HTMLElement)) {
+      this.renderer.addClass(modalWrapper, 'content-overflows');
+    } else {
+      this.renderer.removeClass(modalWrapper, 'content-overflows');
     }
-    return availableSpace;
   }
 
-  private getVerticalPadding(element) {
-    if (!element) return 0;
-    const computedStyles = this.windowRef.getComputedStyle(element);
-    const paddingTop = parseInt(computedStyles.getPropertyValue('padding-top')) || 0;
-    const paddingBottom = parseInt(computedStyles.getPropertyValue('padding-bottom')) || 0;
-    return paddingTop + paddingBottom;
-  }
+  private observeScrollElementResize() {
+    if (this.config.flavor === 'modal') {
+      this.embeddedComponentElement = this.ionContentElement.nativeElement.querySelector(
+        ':first-child'
+      );
 
-  private async setContentWrapperHeight(height: number) {
-    const modalElementRef = this.elementRef.nativeElement.parentElement;
-    if (!modalElementRef) return;
-    const contentMaxHeight = this.getContentMaxHeight();
+      const scrollElementPromise = this.ionContent.getScrollElement();
+      if (!scrollElementPromise) return;
 
-    if (contentHeight < contentMaxHeight && modalElementRef) {
-      this.renderer.removeClass(modalElementRef, 'content-exceeds-viewport');
-    } else if (modalElementRef) {
-      this.renderer.addClass(modalElementRef, 'content-exceeds-viewport');
+      scrollElementPromise.then((scrollElement) => {
+        // TODO: Do you know how we can access main (scrollElement) of ion-content from scss?
+        this.renderer.setStyle(scrollElement, 'position', 'relative');
+        this.resizeObserverService.observe(scrollElement, () => this.onScrollElementResize());
+      });
     }
-
-    const scrollElement = await this.ionContent.getScrollElement();
-    const scrollElementVerticalPadding = this.getVerticalPadding(scrollElement);
-
-    const minContentHeight = Math.min(
-      contentHeight + scrollElementVerticalPadding,
-      contentMaxHeight
-    );
-
-    this.renderer.setStyle(
-      this.ionContentElement.nativeElement,
-      'min-height',
-      `${minContentHeight}px`
-    );
-  }
-
-  private onEmbededComponentElementResize() {
-    if (!this.embeddedComponentElement) return;
-    this.resizeObserverService.observe(this.embeddedComponentElement, (entry) => {
-      this.setHeightOfContent(entry.contentRect.height);
-    });
   }
 
   ngAfterViewInit(): void {
-    this.embeddedComponentElement = this.ionContentElement.nativeElement.querySelector(
-      ':first-child'
-    );
-
-    if (this.config.flavor === 'modal') {
-      this.onEmbededComponentElementResize();
-    }
-
     if (this.toolbarButtonsQuery) {
       this.toolbarButtons = this.toolbarButtonsQuery.map((buttonRef) => buttonRef.nativeElement);
     }
     this.checkForEmbeddedFooter();
+    this.observeScrollElementResize();
   }
 
   private listenForIonModalDidPresent() {
@@ -270,10 +244,6 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   }
 
   private onViewportResize(entry: ResizeObserverEntry) {
-    if (this.config.flavor === 'modal') {
-      this.setHeightOfContent(this.embeddedComponentElement.getBoundingClientRect().height);
-    }
-
     if (!this.initialViewportHeight) {
       // Initial observe callback, register initial height:
       this.initialViewportHeight = entry.contentRect.height;
@@ -302,8 +272,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   }
 
   private checkForEmbeddedFooter() {
-    const embeddedComponentElement = this.ionContentElement.nativeElement.firstElementChild
-      .firstElementChild;
+    const embeddedComponentElement = this.ionContentElement.nativeElement.firstElementChild;
 
     if (embeddedComponentElement) {
       this.embeddedFooterElement = embeddedComponentElement.querySelector('kirby-modal-footer');
@@ -319,7 +288,8 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
         this.embeddedFooterElement.parentElement,
         this.embeddedFooterElement
       );
-      this.renderer.appendChild(this.elementRef.nativeElement, this.embeddedFooterElement);
+      this.embeddedFooterElement.setAttribute('slot', 'fixed');
+      this.renderer.appendChild(this.ionContentElement.nativeElement, this.embeddedFooterElement);
     }
   }
 
