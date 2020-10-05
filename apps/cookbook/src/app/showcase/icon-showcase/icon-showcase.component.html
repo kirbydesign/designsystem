@@ -7,13 +7,13 @@
   Use 'customName' if you want to add custom icons. For adding custom icons, use IconRegistryService
   in youre NgModule to add custom icons.
   <pre>
-    const customIcons = {{ '{' }}
+    const customIcons = [
         {{ '{' }} 
           name: 'customIconName',
           svg: '[PATH_TO_SVG_FILE]',
         {{ '},' }}
         ...
-    {{ '};' }}
+    ];
 
     export class @NGModule {{ '{' }} 
       constructor(iconRegistryService: IconRegistryService) {{ '{' }} 
