@@ -7,6 +7,7 @@ export interface OverlayEventDetail<T = any> {
 
 export interface Overlay {
   dismiss: (data?: any) => Promise<boolean>;
+  onWillDismiss: Promise<OverlayEventDetail>;
   onDidDismiss: Promise<OverlayEventDetail>;
 }
 
