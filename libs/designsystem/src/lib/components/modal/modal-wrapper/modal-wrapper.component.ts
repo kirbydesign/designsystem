@@ -101,6 +101,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   }
 
   private onScrollElementResize() {
+    if (!this.embeddedComponentElement) return;
     const modalWrapper = this.ionModalElement.querySelector('.modal-wrapper');
     const embeddedComponentHeight = this.embeddedComponentElement.getBoundingClientRect().height;
 
