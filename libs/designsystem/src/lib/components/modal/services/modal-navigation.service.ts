@@ -34,8 +34,9 @@ export class ModalNavigationService {
     filter((isDeactivation) => isDeactivation)
   );
 
-  async navigateToModal(childPath: string, parentPath?: string): Promise<boolean> {
-    const commands = parentPath ? [parentPath] : [];
+  async navigateToModal(path: string | string[]): Promise<boolean> {
+    const commands = Array.isArray(path) ? path : [path];
+    const childPath = commands.pop();
     return this.router.navigate([...commands, { outlets: { modal: [childPath] } }], {
       relativeTo: this.getCurrentActivatedRoute(),
     });
