@@ -49,6 +49,8 @@ import { ReorderListExampleComponent } from './reorder-list/reorder-list-example
 import { DropdownExampleComponent } from '~/app/examples/dropdown-example/dropdown-example.component';
 import { StockChartExampleComponent } from './stock-chart-example/stock-chart-example.component';
 import { ProgressCircleExampleComponent } from './progress-circle-example/progress-circle-example.component';
+import { ModalRoutePage1ExampleComponent } from './modal-example/modal-route-example/modal-route-page1-example.component';
+import { ModalRoutePage2ExampleComponent } from './modal-example/modal-route-example/modal-route-page2-example.component';
 
 // Example of "custom" icons
 export const iconSettings: IconSettings = {
@@ -84,6 +86,8 @@ export const COMPONENT_DECLARATIONS: any[] = [
   FirstEmbeddedModalExampleComponent,
   SecondEmbeddedModalExampleComponent,
   ModalCompactExampleComponent,
+  ModalRoutePage1ExampleComponent,
+  ModalRoutePage2ExampleComponent,
   SegmentedControlExampleComponent,
   ChipExampleComponent,
   BadgeExampleComponent,

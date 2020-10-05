@@ -51,7 +51,8 @@ import { ReorderListExampleComponent } from './reorder-list/reorder-list-example
 import { DropdownExampleComponent } from '~/app/examples/dropdown-example/dropdown-example.component';
 import { StockChartExampleComponent } from './stock-chart-example/stock-chart-example.component';
 import { ProgressCircleExampleComponent } from './progress-circle-example/progress-circle-example.component';
-import { IntroComponent } from '../intro/intro.component';
+import { ModalRoutePage1ExampleComponent } from './modal-example/modal-route-example/modal-route-page1-example.component';
+import { ModalRoutePage2ExampleComponent } from './modal-example/modal-route-example/modal-route-page2-example.component';
 
 export const routes: Routes = [
   {
@@ -145,19 +146,19 @@ export const routes: Routes = [
         component: ModalExamplePopoutComponent,
         children: [
           {
-            path: 'feature',
+            path: 'page1',
             outlet: 'modal',
-            component: IntroComponent,
+            component: ModalRoutePage1ExampleComponent,
             data: {
-              modalTitle: 'Feature 1',
+              modalTitle: 'Modal Page 1',
             },
           },
           {
-            path: 'feature2',
+            path: 'page2',
             outlet: 'modal',
-            component: ButtonExampleComponent,
+            component: ModalRoutePage2ExampleComponent,
             data: {
-              modalTitle: 'Feature 2',
+              modalTitle: 'Modal Page 2',
             },
           },
         ],

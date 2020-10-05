@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ChildrenOutletContexts, Router } from '@angular/router';
 
 import { ModalConfig, ModalController } from '@kirbydesign/designsystem';
 import { FirstEmbeddedModalExampleComponent } from './first-embedded-modal-example/first-embedded-modal-example.component';
@@ -11,7 +10,9 @@ const config = {
 <button kirby-button (click)="showDrawer()">Show drawer</button>
 <button kirby-button (click)="showCompact()">Show compact</button>
 <button kirby-button (click)="showModalWithFooter()">Show modal with footer</button>
-<button kirby-button (click)="navigateToModalRoute()">Open modal by route</button>
+<button kirby-button (click)="navigateToModalRoute('page1')">Open modal by route</button>
+<button kirby-button [routerLink]="[ { outlets: { modal: 'page1' } } ]">Open modal by router link</button>
+<button kirby-button class="deeplink" (click)="navigateToModalRoute('page1', '/examples/modal/')">Deep link to modal route</button>
 `,
   footerTemplate: `<p>Some content of the embedded component</p>
 ...
@@ -153,6 +154,10 @@ export class EmbeddedComponent() {
 @Component({
   selector: config.selector,
   template: config.template,
+  styles: [
+    'button.deeplink { display: none; } ',
+    ':host-context(cookbook-modal-showcase) button.deeplink { display: initial; } ',
+  ],
 })
 export class ModalExampleComponent implements OnInit {
   template = config.template;
@@ -170,7 +175,7 @@ export class ModalExampleComponent implements OnInit {
   closeModalCodeSnippet = config.closeModalCodeSnippet;
   routerLinkForModalOutletCodeSnippet = config.routerLinkForModalOutletCodeSnippet;
 
-  constructor(private modalController: ModalController, private router: Router) {}
+  constructor(private modalController: ModalController) {}
 
   ngOnInit() {}
 
@@ -215,8 +220,8 @@ export class ModalExampleComponent implements OnInit {
     this.showModal(true);
   }
 
-  navigateToModalRoute() {
-    this.router.navigate(['/home/showcase/modal/', { outlets: { modal: ['some-route'] } }]);
+  navigateToModalRoute(childPath: string, parentPath?: string) {
+    this.modalController.navigateToModal(childPath, parentPath);
   }
 
   onModalClose(data: any): void {
