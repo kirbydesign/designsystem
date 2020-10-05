@@ -1,9 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MockComponent } from 'ng-mocks';
-import * as ionic from '@ionic/angular';
+import { IonIcon } from '@ionic/angular';
 import { By } from '@angular/platform-browser';
-import { Component, OnInit } from '@angular/core';
-import { createSpyObject } from '@ngneat/spectator';
+import { Component } from '@angular/core';
+import { mockProvider, SpyObject } from '@ngneat/spectator';
 
 import { ThemeColorDirective } from '../../directives/theme-color/theme-color.directive';
 import { DesignTokenHelper } from '../../helpers/design-token-helper';
@@ -19,8 +19,9 @@ describe('IconComponent', () => {
         IconComponent,
         ThemeColorDirective,
         TestWrapperComponent,
-        MockComponent(ionic.IonIcon),
+        MockComponent(IonIcon),
       ],
+      providers: [mockProvider(IconRegistryService)],
     });
   }));
 
@@ -41,11 +42,51 @@ describe('IconComponent', () => {
   });
 
   describe('icons', () => {
-    it('should point to the cog icon by default', () => {
+    it('should set default icon by default', () => {
       const fixture = createTestComponent('<kirby-icon></kirby-icon>');
       const component = fixture.debugElement.query(By.directive(IconComponent)).componentInstance;
       expect(component.name).toBe(undefined);
       expect(component.icon.name).toBe(component.defaultIcon.name);
+    });
+
+    it('should set default icon if icon name not found', () => {
+      const noExistingIconName = 'no-existing-icon-name';
+      const fixture = createTestComponent(`<kirby-icon name="${noExistingIconName}"></kirby-icon>`);
+      const component = fixture.debugElement.query(By.directive(IconComponent)).componentInstance;
+      expect(component.name).toBe(noExistingIconName);
+      expect(component.icon.name).toBe(component.defaultIcon.name);
+    });
+
+    it('should warn if icon name not found', () => {
+      spyOn(console, 'warn');
+      const noExistingIconName = 'no-existing-icon-name';
+      const fixture = createTestComponent(`<kirby-icon name="${noExistingIconName}"></kirby-icon>`);
+      fixture.detectChanges();
+      expect(console.warn).toHaveBeenCalledWith(
+        `Icon with name "${noExistingIconName}" was not found.`
+      );
+    });
+
+    it('should set default icon if custom icon name not found', () => {
+      const noExistingIconName = 'no-existing-custom-icon-name';
+      const fixture = createTestComponent(
+        `<kirby-icon customName="${noExistingIconName}"></kirby-icon>`
+      );
+      const component = fixture.debugElement.query(By.directive(IconComponent)).componentInstance;
+      expect(component.customName).toBe(noExistingIconName);
+      expect(component.icon.name).toBe(component.defaultIcon.name);
+    });
+
+    it('should warn if custom icon name not found', () => {
+      spyOn(console, 'warn');
+      const noExistingIconName = 'no-existing-custom-icon-name';
+      const fixture = createTestComponent(
+        `<kirby-icon customName="${noExistingIconName}"></kirby-icon>`
+      );
+      fixture.detectChanges();
+      expect(console.warn).toHaveBeenCalledWith(
+        `Icon with name "${noExistingIconName}" was not found.`
+      );
     });
 
     it('should use default icons from Kirby icon settings', () => {
@@ -55,20 +96,15 @@ describe('IconComponent', () => {
       expect(component.icon.name).toBe('verify');
     });
 
-    it('should use custom icons from ICON_SETTINGS', () => {
-      const fixture = createTestComponent(
-        `<kirby-icon customName="customIconNameFromIconSettings"></kirby-icon>`
-      );
-      fixture.detectChanges();
-      const component = fixture.debugElement.query(By.directive(IconComponent)).componentInstance;
-      expect(component.icon.name).toBe('customIconNameFromIconSettings');
-      expect(component.icon.svg).toBe('customIconSvgFromIconSettings');
-    });
-
-    it('should use custom icons added with KirbyIconRegistryService', () => {
+    it('should use custom icon from IconRegistryService', () => {
       const fixture = createTestComponent(
         `<kirby-icon customName="customIconNameFromIconRegistry"></kirby-icon>`
       );
+      const iconRegistrySpy = TestBed.inject(IconRegistryService) as SpyObject<IconRegistryService>;
+      iconRegistrySpy.getIcon.and.returnValue({
+        name: 'customIconNameFromIconRegistry',
+        svg: 'customIconSvgFromIconRegistry',
+      });
       fixture.detectChanges();
       const component = fixture.debugElement.query(By.directive(IconComponent)).componentInstance;
       expect(component.icon.name).toBe('customIconNameFromIconRegistry');
@@ -151,10 +187,7 @@ describe('IconComponent', () => {
   selector: 'kirby-test-component',
   template: '<span>PlaceHolder HTML to be Replaced</span>',
 })
-export class TestWrapperComponent implements OnInit {
-  constructor() {}
-  ngOnInit() {}
-}
+export class TestWrapperComponent {}
 
 /*
  * Custom Helper function to quickly create a `fixture` instance based on
@@ -165,17 +198,6 @@ function createTestComponent(template: string): ComponentFixture<TestWrapperComp
   return TestBed.overrideComponent(TestWrapperComponent, {
     set: {
       template: template,
-      providers: [
-        {
-          provide: IconRegistryService,
-          useValue: createSpyObject(IconRegistryService, {
-            getIcons: () => [
-              { name: 'customIconNameFromIconRegistry', svg: 'customIconSvgFromIconRegistry' },
-              { name: 'customIconNameFromIconSettings', svg: 'customIconSvgFromIconSettings' },
-            ],
-          }),
-        },
-      ],
     },
   }).createComponent(TestWrapperComponent);
 }
