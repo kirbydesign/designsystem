@@ -3,13 +3,30 @@
   <cookbook-code-viewer [html]="exampleHtml"></cookbook-code-viewer>
   <h4>Properties:</h4>
   <cookbook-showcase-properties [properties]="properties"></cookbook-showcase-properties>
-
   <br />
-  <br />
-  Use 'customName' if you want to add custom icons. You need to add 'IconSettings' under your
-  NgModule
-  <br />
+  Use 'customName' if you want to add custom icons. For adding custom icons, use IconRegistryService
+  in youre NgModule to add custom icons.
   <pre>
+    const customIcons = [
+        {{ '{' }} 
+          name: 'customIconName',
+          svg: '[PATH_TO_SVG_FILE]',
+        {{ '},' }}
+        ...
+    ];
+    @NgModule({{ '{' }} ... {{ '}' }} )
+    export class MyModule {{ '{' }} 
+      constructor(iconRegistryService: IconRegistryService) {{ '{' }} 
+        iconRegistryService.addIcons(customIcons);
+      {{ '}' }} 
+    {{ '}' }} 
+  </pre>
+  <h3>Deprecated usage below</h3>
+  <i>
+    Use 'customName' if you want to add custom icons. You need to add 'IconSettings' under your
+    NgModule
+    <br />
+    <pre>
     const customIconSettings: IconSettings = {{ '{' }}
       icons: [
         {{ '{' }} 
@@ -32,7 +49,9 @@
       {{ '],' }} 
       ...
     {{ '}),' }} 
-  </pre>
+  </pre
+    >
+  </i>
 
   <div class="performance">
     <div class="title">
