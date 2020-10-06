@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { DrawerSupplementaryAction } from './drawer-supplementary-action';
 
 export interface ModalConfig {
-  title: string;
+  title?: string;
   component: any;
   modalRoute?: ActivatedRoute;
   flavor?: 'modal' | 'drawer' | 'compact';

@@ -64,7 +64,6 @@ export class ModalController {
     onWillClose?: (data?: any) => void
   ): Promise<void> {
     const config: ModalConfig = {
-      title: modalRoute.snapshot.data.modalTitle, // TODO: Title should be rendered within ModalWrapper from embedded kirby-title component
       component: null,
       modalRoute: modalRoute,
       flavor: 'modal', // Todo: Should it be possible to specify flavor as data in RouteConfig?
