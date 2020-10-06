@@ -18,6 +18,11 @@ const config = {
 <button kirby-button class="deeplink" (click)="navigateToModalRoute(['/examples', 'modal', 'page1'])">Deep link to modal route</button>
 <button kirby-button class="deeplink" [kirbyModalRouterLink]="['/examples', 'modal', 'page1']">Deep link to modal by router link</button>
 `,
+  titleTemplate: `<kirby-page-title>My Modal Title</kirby-page-title>
+ 
+<p>Some content of the embedded component</p>
+...
+`,
   footerTemplate: `<p>Some content of the embedded component</p>
 ...
 <kirby-modal-footer>
@@ -194,6 +199,7 @@ navigate() {
 })
 export class ModalExampleComponent implements OnInit {
   template = config.template;
+  titleTemplate = config.titleTemplate;
   footerTemplate = config.footerTemplate;
   defaultCodeSnippet = config.defaultCodeSnippet;
   drawerCodeSnippet = config.drawerCodeSnippet;

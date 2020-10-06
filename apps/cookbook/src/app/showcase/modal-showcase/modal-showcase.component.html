@@ -148,7 +148,20 @@
   </li>
   <li>the embedded component must be listed in your <code>entryComponents</code> (module file)</li>
 </ol>
-<br />
+<h3>Modal Title</h3>
+<p>
+  Inside the embedded component markup you should include a <code>kirby-page-title</code> element
+  with the title of your modal window:
+</p>
+<cookbook-code-viewer [html]="example.titleTemplate"></cookbook-code-viewer>
+
+<h3 #footer>Footer</h3>
+<p>
+  To render a fixed footer at the bottom of the modal include a
+  <code>kirby-modal-footer</code> inside the embedded component:
+</p>
+<cookbook-code-viewer [html]="example.footerTemplate"></cookbook-code-viewer>
+
 <em>(Optional)</em><br />
 <p>
   To access data passed into the embedded component, inject the
@@ -194,13 +207,6 @@
   <code>scrollDisabled = true</code>
 </p>
 <cookbook-code-viewer [ts]="example.disableScrollingCodeSnippet"></cookbook-code-viewer>
-
-<h2 #footer>Footer</h2>
-<p>
-  To render a fixed footer at the bottom of the modal include a
-  <code>kirby-modal-footer</code> inside the embedded component:
-</p>
-<cookbook-code-viewer [html]="example.footerTemplate"></cookbook-code-viewer>
 
 <h2>Modal config:</h2>
 <cookbook-showcase-properties [properties]="configProperties"></cookbook-showcase-properties>
