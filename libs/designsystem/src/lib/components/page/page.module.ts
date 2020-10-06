@@ -9,6 +9,7 @@ import {
   PageActionsDirective,
   PageContentComponent,
   PageContentDirective,
+  PageTitleComponent,
   PageTitleDirective,
   PageToolbarTitleDirective,
 } from './page.component';
@@ -21,6 +22,7 @@ import {
     PageContentComponent,
     PageContentDirective,
     PageTitleDirective,
+    PageTitleComponent,
     PageToolbarTitleDirective,
   ],
   imports: [CommonModule, IonicModule, FitHeadingModule],
@@ -31,6 +33,7 @@ import {
     PageContentComponent,
     PageContentDirective,
     PageTitleDirective,
+    PageTitleComponent,
     PageToolbarTitleDirective,
     FitHeadingModule,
   ],
