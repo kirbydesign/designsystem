@@ -137,17 +137,51 @@ export class EmbeddedComponent() {
   }
 }`,
   modalWithOutletCodeSnippet: `{
-    path: 'route-which-is-behind-the-modal',
+    path: 'main-route-presented-behind-the-modal',
     component: SomeComponent,
     children: [
       {
-        path: 'some-route',
+        path: 'child-route-presented-in-modal',
         outlet: 'modal',
         component: SomeOtherComponent,
       },
     ],
   }`,
-  routerLinkForModalOutletCodeSnippet: `[routerLink]="['/', { outlets: { modal: ['some-route'] } }]"`,
+  routerLinkForModalOutletCodeSnippet: `<!-- Relative path when opened from parent route: -->
+<a kirbyModalRouterLink="child-route-presented-in-modal">Open Modal</a>
+
+<!-- Relative path to parent route + modal: -->
+<a [kirbyModalRouterLink]="['../', 'main-route-presented-behind-the-modal', 'child-route-presented-in-modal']">Navigate to Modal</a>
+
+<!-- Absolute path to parent route + modal: -->
+<a [kirbyModalRouterLink]="['/home', 'main-route-presented-behind-the-modal', 'child-route-presented-in-modal']">Navigate to Modal</a>`,
+
+  modalControllerForModalOutletCodeSnippet: `// Relative path when opened from parent component:
+modalController.navigateToModal('child-route-presented-in-modal');
+
+// Relative path when opened from another component:
+modalController.navigateToModal(['../', 'main-route-presented-behind-the-modal', 'child-route-presented-in-modal']);
+
+// Absolute path when opened from another component:
+modalController.navigateToModal(['/home', 'main-route-presented-behind-the-modal', 'child-route-presented-in-modal']);`,
+
+  routerLinkWithinModalOutletCodeSnippet: `<!-- Relative path to sibling modal route: -->
+<a routerLink="../second-child-route-presented-in-modal">Page 2</a>`,
+
+  modalControllerWithinModalOutletCodeSnippet: `// Using Angular Router:
+constructor(private router: Router, private route: ActivatedRoute) {}
+
+navigate() {
+  this.router.navigate(['../second-child-route-presented-in-modal'], { relativeTo: this.route });
+}
+
+// OR using Kirby ModalController:
+constructor(private modalController: ModalController) {}
+
+navigate() {
+  // Relative path to sibling modal route:
+  modalController.navigateWithinModal('../second-child-route-presented-in-modal');    
+}`,
 };
 
 @Component({
@@ -173,6 +207,9 @@ export class ModalExampleComponent implements OnInit {
   embeddedCodeSnippet = config.embeddedCodeSnippet;
   closeModalCodeSnippet = config.closeModalCodeSnippet;
   routerLinkForModalOutletCodeSnippet = config.routerLinkForModalOutletCodeSnippet;
+  modalControllerForModalOutletCodeSnippet = config.modalControllerForModalOutletCodeSnippet;
+  routerLinkWithinModalOutletCodeSnippet = config.routerLinkWithinModalOutletCodeSnippet;
+  modalControllerWithinModalOutletCodeSnippet = config.modalControllerWithinModalOutletCodeSnippet;
 
   constructor(private modalController: ModalController) {}
 
@@ -217,7 +254,7 @@ export class ModalExampleComponent implements OnInit {
     this.showModal(true);
   }
 
-  navigateToModalRoute(path: string) {
+  navigateToModalRoute(path: string | string[]) {
     this.modalController.navigateToModal(path);
   }
 

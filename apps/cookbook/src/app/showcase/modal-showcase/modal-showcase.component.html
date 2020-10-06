@@ -46,17 +46,20 @@
   <cookbook-iphone src="/examples/modal" showExternalLink="true"></cookbook-iphone>
 </div>
 <cookbook-code-viewer [html]="example.template"></cookbook-code-viewer>
+
 <h2 #modalController>Inside the parent (caller) component:</h2>
 <p>
   To show the modal, create a <code>ModalConfig</code> and pass it to the
   <code>ModalController.showModal</code> method:
   <cookbook-code-viewer [ts]="example.defaultCodeSnippet"></cookbook-code-viewer>
 </p>
+
 <h2 #modalFlavors>Modal flavors:</h2>
 <p>
   The modal can have one of multiple flavors, used to determine the opening animation, the position
   of the title and the close button.
 </p>
+
 <h3 #modalFlavorsModal>Modal (default) - with component</h3>
 <p>
   With the <strong><code>modal</code></strong> flavor, the dialog opens with a slide-up animation,
@@ -77,16 +80,43 @@
   to deeplink to specific pages inside of the modal. "Modal" routes will automatically open up a
   modal, if none is already opened.
   <cookbook-code-viewer [ts]="example.modalWithOutletCodeSnippet"></cookbook-code-viewer>
-  These kind of routes can be navigated to by: (PLEASE NOTE THAT THE MAIN ROUTE IS THE ROUTE BEHIND
-  THE MODAL)
-  <cookbook-code-viewer [ts]="example.routerLinkForModalOutletCodeSnippet"></cookbook-code-viewer>
+  <em
+    ><strong>*Please note:</strong> The main route is the route with the component being presented
+    behind the modal</em
+  >
 </p>
+<p>
+  These kind of routes can be navigated to by using a <code>kirbyModalRouterLink</code>:
+  <cookbook-code-viewer [html]="example.routerLinkForModalOutletCodeSnippet"></cookbook-code-viewer>
+  Or by injecting <code>ModalController</code> and calling <code>navigateToModal</code> method:
+  <cookbook-code-viewer
+    [ts]="example.modalControllerForModalOutletCodeSnippet"
+  ></cookbook-code-viewer>
+</p>
+<p>
+  <strong>Within the child component</strong> presented in the modal a regular Angular
+  <code>[routerLink]</code> can be used with a relative path to the sibling modal route:
+  <cookbook-code-viewer
+    [html]="example.routerLinkWithinModalOutletCodeSnippet"
+  ></cookbook-code-viewer>
+</p>
+<p>
+  If you need to navigate from code <strong>within the child component</strong> you can either
+  inject and navigate through the regular Angular <code>Router</code> or you can inject
+  <code>ModalController</code> and call it's <code>navigateWithinModal</code> method for
+  convenience:
+  <cookbook-code-viewer
+    [ts]="example.modalControllerWithinModalOutletCodeSnippet"
+  ></cookbook-code-viewer>
+</p>
+
 <h3 #modalFlavorsCompact>Compact</h3>
 <p>
   The <strong><code>compact</code></strong> flavor renders a stripped-down version with no heading,
   toolbar or close button and no content scrolling. Can be used for <em>out-of-order</em> style
   modals.
 </p>
+
 <h3 #modalFlavorsDrawer>Drawer</h3>
 <p>
   When a <strong><code>drawer</code></strong> flavor is used, the dialog opens with a slide-up

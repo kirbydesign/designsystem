@@ -14,7 +14,7 @@ import { Component } from '@angular/core';
     </p>
     <button kirby-button (click)="toggleFooter()">Toggle footer</button>
     <kirby-modal-footer *ngIf="showFooter">
-      <button kirby-button class="nav" [routerLink]="['../page2']">
+      <button kirby-button class="nav" routerLink="../page2">
         Next
         <kirby-icon name="arrow-more"></kirby-icon>
       </button>
