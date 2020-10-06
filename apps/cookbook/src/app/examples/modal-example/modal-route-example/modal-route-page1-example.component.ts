@@ -1,13 +1,9 @@
-import { Component, Optional, SkipSelf } from '@angular/core';
-
-import { Modal } from '@kirbydesign/designsystem';
+import { Component } from '@angular/core';
 
 @Component({
+  selector: 'cookbook-modal-route-page-1-example',
   template: `
-    <button kirby-button class="nav" attentionLevel="3" [routerLink]="['../page2']">
-      Page 2
-      <kirby-icon name="arrow-more"></kirby-icon>
-    </button>
+    <kirby-page-title>Modal Page 1/2</kirby-page-title>
     <h4>The standard Lorem Ipsum passage, used since the 1500s</h4>
     <p>
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
@@ -16,19 +12,23 @@ import { Modal } from '@kirbydesign/designsystem';
       voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
       non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
     </p>
-    <button kirby-button (click)="close()">Hide me</button>
+    <button kirby-button (click)="toggleFooter()">Toggle footer</button>
+    <kirby-modal-footer *ngIf="showFooter">
+      <button kirby-button class="nav" [routerLink]="['../page2']">
+        Next
+        <kirby-icon name="arrow-more"></kirby-icon>
+      </button>
+    </kirby-modal-footer>
   `,
   styles: [
-    ':host { display: flex; flex-direction: column; align-items: flex-start; }',
-    'button[kirby-button].nav { align-self: flex-end; }',
+    'kirby-modal-footer { --kirby-modal-footer-justify-content: flex-end; }',
     'h4 { margin-top: 24px; } ',
   ],
 })
 export class ModalRoutePage1ExampleComponent {
-  constructor(@Optional() @SkipSelf() private modal: Modal) {}
+  showFooter: boolean = true;
 
-  close() {
-    let someTestData: number = Math.PI;
-    this.modal.close(someTestData);
+  toggleFooter() {
+    this.showFooter = !this.showFooter;
   }
 }

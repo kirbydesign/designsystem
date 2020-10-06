@@ -3,11 +3,9 @@ import { Component, Optional, SkipSelf } from '@angular/core';
 import { Modal, ModalController } from '@kirbydesign/designsystem';
 
 @Component({
+  selector: 'cookbook-modal-route-page-2-example',
   template: `
-    <button kirby-button attentionLevel="3" (click)="navigateToPreviousModal()">
-      <kirby-icon name="arrow-back"></kirby-icon>
-      Page 1
-    </button>
+    <kirby-page-title>Modal Page 2/2</kirby-page-title>
     <h4>Section 1.10.32 of "de Finibus Bonorum et Malorum", written by Cicero in 45 BC</h4>
     <p>
       "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
@@ -16,20 +14,32 @@ import { Modal, ModalController } from '@kirbydesign/designsystem';
       odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
       Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit,
       sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat
-      voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit
-      laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit
-      qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum
-      fugiat quo voluptas nulla pariatur?" 1914 translation by H. Rackham "
+      voluptatem."
     </p>
-    <button kirby-button (click)="close()">Hide me</button>
+    <button kirby-button (click)="toggleFooter()">Toggle footer</button>
+    <kirby-modal-footer *ngIf="showFooter">
+      <button kirby-button attentionLevel="3" (click)="navigateToPreviousModal()">
+        <kirby-icon name="arrow-back"></kirby-icon>
+      </button>
+      <button kirby-button (click)="close()">Finish</button>
+    </kirby-modal-footer>
   `,
-  styles: ['h4 { margin-top: 24px; } '],
+  styles: [
+    'h4 { margin-top: 24px; } ',
+    'kirby-modal-footer { --kirby-modal-footer-justify-content: space-between; }',
+  ],
 })
 export class ModalRoutePage2ExampleComponent {
   constructor(
     private modalController: ModalController,
     @Optional() @SkipSelf() private modal: Modal
   ) {}
+
+  showFooter: boolean = true;
+
+  toggleFooter() {
+    this.showFooter = !this.showFooter;
+  }
 
   navigateToPreviousModal() {
     this.modalController.navigateWithinModal('../page1');
