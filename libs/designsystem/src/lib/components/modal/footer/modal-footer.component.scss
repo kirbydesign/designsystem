@@ -3,7 +3,7 @@
 ion-footer {
   box-shadow: get-elevation(8);
   display: flex;
-  justify-content: center;
+  justify-content: var(--kirby-modal-footer-justify-content, center);
   align-items: center;
   background-color: get-color('white');
   padding: size('s');
