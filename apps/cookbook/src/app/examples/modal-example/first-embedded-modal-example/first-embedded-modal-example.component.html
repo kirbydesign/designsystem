@@ -1,7 +1,11 @@
+<kirby-page-title>{{
+  componentProps?.flavor === 'drawer' ? 'My Drawer Title' : 'My Modal Title'
+}}</kirby-page-title>
+
 <div>
   <h4>Component properties:</h4>
-  <p>prop 1: {{ props.prop1 }}</p>
-  <p>prop 2: {{ props.prop2 }}</p>
+  <p>prop 1: {{ componentProps.prop1 }}</p>
+  <p>prop 2: {{ componentProps.prop2 }}</p>
   <p>
     <kirby-form-field>
       <input kirby-input placeholder="Focus me on device to see keyboard" />

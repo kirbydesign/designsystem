@@ -27,7 +27,6 @@ const config = {
 
 showModal() {
   const config: ModalConfig = {
-    title: 'Your Modal Title',
     flavor: 'modal',
     component: YourEmbeddedModalComponent,
     componentProps: {
@@ -39,7 +38,6 @@ showModal() {
 }`,
   drawerCodeSnippet: `showModal() {
   const config: ModalConfig = {
-    title: 'Your Drawer Title',
     flavor: 'drawer',
     drawerSupplementaryAction: {
       iconName: 'qr',
@@ -146,9 +144,6 @@ export class EmbeddedComponent() {
         path: 'some-route',
         outlet: 'modal',
         component: SomeOtherComponent,
-        data: {
-          modalTitle: 'Some title',
-        },
       },
     ],
   }`,
@@ -185,7 +180,6 @@ export class ModalExampleComponent implements OnInit {
 
   showModal(showFooter = false) {
     const config: ModalConfig = {
-      title: 'My Modal Title',
       component: FirstEmbeddedModalExampleComponent,
       componentProps: {
         prop1: 'value1',
@@ -198,7 +192,6 @@ export class ModalExampleComponent implements OnInit {
 
   showCompact() {
     const config: ModalConfig = {
-      title: null,
       flavor: 'compact',
       component: ModalCompactExampleComponent,
     };
@@ -208,10 +201,10 @@ export class ModalExampleComponent implements OnInit {
 
   showDrawer() {
     const config: ModalConfig = {
-      title: 'My Drawer Title',
       flavor: 'drawer',
       component: FirstEmbeddedModalExampleComponent,
       componentProps: {
+        flavor: 'drawer',
         prop1: 'value1',
         prop2: 'value2',
       },
