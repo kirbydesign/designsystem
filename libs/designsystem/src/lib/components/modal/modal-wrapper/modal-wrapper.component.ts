@@ -23,7 +23,7 @@ import { Modal } from '../services/modal.interfaces';
 import { ButtonComponent } from '../../button/button.component';
 import { ResizeObserverService } from '../../shared/resize-observer/resize-observer.service';
 import { ResizeObserverEntry } from '../../shared/resize-observer/types/resize-observer-entry';
-import { WindowRef } from '../../../types';
+import { WindowRef } from '../../../types/window-ref';
 
 @Component({
   selector: 'kirby-modal-wrapper',
@@ -89,7 +89,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     });
   }
 
-  private getAvailableContentHeight(modalWrapper: HTMLElement): number {
+  private getAvailableContentHeight(modalWrapper: any): number {
     const ionContentElementTop = this.ionContentElement.nativeElement.getBoundingClientRect().top;
     const modalWrapperTop = modalWrapper.getBoundingClientRect().top;
 
@@ -105,7 +105,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     const modalWrapper = this.ionModalElement.querySelector('.modal-wrapper');
     const embeddedComponentHeight = this.embeddedComponentElement.getBoundingClientRect().height;
 
-    if (embeddedComponentHeight >= this.getAvailableContentHeight(modalWrapper as HTMLElement)) {
+    if (embeddedComponentHeight >= this.getAvailableContentHeight(modalWrapper)) {
       this.renderer.addClass(modalWrapper, 'content-overflows');
     } else {
       this.renderer.removeClass(modalWrapper, 'content-overflows');
