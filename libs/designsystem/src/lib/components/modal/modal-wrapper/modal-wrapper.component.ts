@@ -87,6 +87,25 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
       providers: [{ provide: COMPONENT_PROPS, useValue: this.config.componentProps }],
       parent: this.injector,
     });
+
+    this.moveUnderlyingModalBackdropsInFrontOfModals();
+  }
+
+  private moveUnderlyingModalBackdropsInFrontOfModals() {
+    const underlyingModalElements = this.ionModalElement.parentElement.querySelectorAll(
+      'ion-modal:not(:last-of-type)'
+    );
+    if (underlyingModalElements.length === 0) return;
+
+    underlyingModalElements.forEach((modalElement) => {
+      this.renderer.setStyle(modalElement.querySelector('ion-backdrop'), 'z-index', '20');
+    });
+
+    this.willClose.then(() => {
+      underlyingModalElements.forEach((modalElement) => {
+        this.renderer.setStyle(modalElement.querySelector('ion-backdrop'), 'z-index', '2');
+      });
+    });
   }
 
   private getAvailableContentHeight(modalWrapper: any): number {
