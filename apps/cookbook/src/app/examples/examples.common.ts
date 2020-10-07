@@ -11,7 +11,8 @@ import { ListLoadOnDemandExampleComponent } from './list/components/load-on-dema
 import { FontsExampleComponent } from './fonts-example/fonts-example.component';
 import { SpinnerExampleComponent } from './spinner-example/spinner-example.component';
 import { ModalExampleComponent } from './modal-example/modal-example.component';
-import { ModalExamplePopoutComponent } from './modal-example/modal-example-popout.component';
+import { ModalExampleDefaultComponent } from './modal-example/modal-example-default.component';
+import { ModalExampleOutletComponent } from './modal-example/modal-example-outlet.component';
 import { FirstEmbeddedModalExampleComponent } from './modal-example/first-embedded-modal-example/first-embedded-modal-example.component';
 import { SecondEmbeddedModalExampleComponent } from './modal-example/second-embedded-modal-example/second-embedded-modal-example.component';
 import { ModalCompactExampleComponent } from './modal-example/compact-example/modal-compact-example.component';
@@ -82,7 +83,8 @@ export const COMPONENT_DECLARATIONS: any[] = [
   FontsExampleComponent,
   SpinnerExampleComponent,
   ModalExampleComponent,
-  ModalExamplePopoutComponent,
+  ModalExampleDefaultComponent,
+  ModalExampleOutletComponent,
   FirstEmbeddedModalExampleComponent,
   SecondEmbeddedModalExampleComponent,
   ModalCompactExampleComponent,

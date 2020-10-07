@@ -9,7 +9,7 @@ import { ListExampleComponent } from './list/list-example.component';
 import { ChartExampleComponent } from './chart-example/chart-example.component';
 import { FontsExampleComponent } from './fonts-example/fonts-example.component';
 import { SpinnerExampleComponent } from './spinner-example/spinner-example.component';
-import { ModalExamplePopoutComponent } from './modal-example/modal-example-popout.component';
+import { ModalExampleComponent } from './modal-example/modal-example.component';
 import { SegmentedControlExampleComponent } from './segmented-control-example/segmented-control-example.component';
 import { ChipExampleComponent } from './chip-example/chip-example.component';
 import { BadgeExampleComponent } from './badge-example/badge-example.component';
@@ -143,23 +143,17 @@ export const routes: Routes = [
       },
       {
         path: 'modal',
-        component: ModalExamplePopoutComponent,
+        component: ModalExampleComponent,
         children: [
           {
             path: 'page1',
             outlet: 'modal',
             component: ModalRoutePage1ExampleComponent,
-            data: {
-              modalTitle: 'Modal Page 1',
-            },
           },
           {
             path: 'page2',
             outlet: 'modal',
             component: ModalRoutePage2ExampleComponent,
-            data: {
-              modalTitle: 'Modal Page 2',
-            },
           },
         ],
       },

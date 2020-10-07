@@ -135,17 +135,11 @@ export const routes: Routes = [
             path: 'page1',
             outlet: 'modal',
             component: ModalRoutePage1ExampleComponent,
-            data: {
-              modalTitle: 'Some title',
-            },
           },
           {
             path: 'page2',
             outlet: 'modal',
             component: ModalRoutePage2ExampleComponent,
-            data: {
-              modalTitle: 'Some title',
-            },
           },
         ],
       },
