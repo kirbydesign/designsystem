@@ -40,6 +40,23 @@ ion-modal.kirby-overlay {
   &.kirby-action-sheet {
     --backdrop-opacity: 0.4;
   }
+
+  @include media('>=medium') {
+    &:first-of-type,
+    &.modal-card:first-of-type {
+      ion-content {
+        --overflow: hidden;
+      }
+    }
+
+    &:last-of-type,
+    &.modal-card:last-of-type {
+      ion-content {
+        --overflow: auto;
+      }
+    }
+  }
+
   @include media('<medium') {
     // Only apply backdrop on stacking drawers on small screens:
     &.kirby-drawer {
