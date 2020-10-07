@@ -19,6 +19,7 @@ import { SegmentedControlExampleModule } from './segmented-control-example/segme
 import { ChartExampleModule } from './chart-example/chart-example.module';
 import { ProgressCircleExampleModule } from './progress-circle-example/progress-circle-example.module';
 import { AvatarExampleModule } from './avatar-example/avatar-example.module';
+import { FlagExampleModule } from './flag-example/flag-example.module';
 
 @NgModule({
   imports: [
@@ -33,6 +34,7 @@ import { AvatarExampleModule } from './avatar-example/avatar-example.module';
     ChartExampleModule,
     ProgressCircleExampleModule,
     AvatarExampleModule,
+    FlagExampleModule,
   ],
   declarations: COMPONENT_DECLARATIONS,
   exports: [
@@ -45,6 +47,7 @@ import { AvatarExampleModule } from './avatar-example/avatar-example.module';
     ChartExampleModule,
     ProgressCircleExampleModule,
     AvatarExampleModule,
+    FlagExampleModule,
   ],
   providers: [PROVIDER_DECLARATIONS],
   entryComponents: [

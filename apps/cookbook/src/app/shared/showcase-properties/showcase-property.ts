@@ -3,4 +3,5 @@ export interface ShowcaseProperty {
   defaultValue?: string;
   description?: string;
   inputValues?: string[];
+  preserveInputValuesWhitespaces?: boolean;
 }

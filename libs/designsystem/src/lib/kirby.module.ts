@@ -8,6 +8,7 @@ import { InfiniteScrollDirective } from './components/list/directives/infinite-s
 import { ModalWrapperComponent } from './components/modal/modal-wrapper/modal-wrapper.component';
 import { ModalCompactWrapperComponent } from './components/modal/modal-wrapper/compact/modal-compact-wrapper.component';
 import { ModalFooterComponent } from './components/modal/footer/modal-footer.component';
+import { ModalRouterLinkDirective } from './directives/modal-router-link/modal-router-link.directive';
 import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';
 import { FullscreenLoadingOverlayComponent } from './components/loading-overlay/fullscreen-loading-overlay/fullscreen-loading-overlay.component';
 import { LoadingOverlayComponent } from './components/loading-overlay/loading-overlay.component';
@@ -75,7 +76,8 @@ import { ResizeObserverFactory } from './components/shared/resize-observer/resiz
 import { ResizeObserverService } from './components/shared/resize-observer/resize-observer.service';
 import { ProgressCircleComponent } from './components/progress-circle/progress-circle.component';
 import { ProgressCircleRingComponent } from './components/progress-circle/progress-circle-ring.component';
-import { ModalRouterLinkDirective } from './directives/modal-router-link/modal-router-link.directive';
+import { FlagComponent } from './components/flag/flag.component';
+import { WINDOW_TOKEN } from './helpers/di';
 
 const exportedDeclarations = [
   CardComponent,
@@ -102,6 +104,7 @@ const exportedDeclarations = [
   CheckboxComponent,
   ActionSheetComponent,
   ModalFooterComponent,
+  ModalRouterLinkDirective,
   SegmentedControlComponent,
   ChipComponent,
   BadgeComponent,
@@ -122,7 +125,7 @@ const exportedDeclarations = [
   InfiniteScrollDirective,
   LoadingOverlayComponent,
   ProgressCircleComponent,
-  ModalRouterLinkDirective,
+  FlagComponent,
 ];
 
 const declarations = [
@@ -162,6 +165,10 @@ const providers = [
   LoadingOverlayService,
   ResizeObserverFactory,
   ResizeObserverService,
+  {
+    provide: WINDOW_TOKEN,
+    useValue: window,
+  },
 ];
 
 const entryComponents = [

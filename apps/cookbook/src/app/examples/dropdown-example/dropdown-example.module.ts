@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { KirbyModule } from '@kirbydesign/designsystem';
+import { DropdownExampleConfigurationComponent } from './dropdown-example-configuration-component/dropdown-example-configuration.component';
 import { DropdownExampleDefaultComponent } from './examples/default';
 import { DropdownExampleScrollComponent } from './examples/scroll';
 import { DropdownExamplePreSelectedComponent } from './examples/pre-selected';
@@ -14,6 +15,7 @@ import { DropdownExampleCustomItemTemplateComponent } from './examples/custom-it
 import { DropdownExampleNgFormsComponent } from './examples/ng-forms';
 
 const COMPONENT_DECLARATIONS = [
+  DropdownExampleConfigurationComponent,
   DropdownExampleDefaultComponent,
   DropdownExampleScrollComponent,
   DropdownExamplePreSelectedComponent,

@@ -81,6 +81,10 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
         this.scrollEnd.emit();
       });
 
+    /**
+     * Subscribe to the ionScroll event on the ion-content around the list (if any)
+     * and emit {@link scrollEnd} event when element scroll position has surpassed the offset.
+     */
     setTimeout(() => {
       const ionContent: HTMLElement = this.elementRef.nativeElement.closest('ion-content');
       if (ionContent) {

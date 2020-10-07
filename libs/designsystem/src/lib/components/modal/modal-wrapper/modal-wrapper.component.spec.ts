@@ -7,6 +7,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { KirbyAnimation } from '../../../animation/kirby-animation';
 import { TestHelper } from '../../../testing/test-helper';
+
 import { ButtonComponent } from '../../button/button.component';
 import { IconComponent } from '../../icon/icon.component';
 import { ModalFooterComponent } from '../footer/modal-footer.component';
@@ -234,6 +235,12 @@ describe('ModalWrapperComponent', () => {
       const footerAsWrapperChild = spectator.element.querySelector(':scope > kirby-modal-footer');
       expect(footerAsWrapperChild).not.toBeNull();
     });
+
+    it('should define custom CSS property --keyboard-offset on embedded footer', () => {
+      const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
+      spectator.component._onKeyboardWillShow({ keyboardHeight: 200 });
+      expect(kirbyModalFooter).toHaveStyle({ '--keyboard-offset': '200px' });
+    });
   });
 
   describe('with embedded component with dynamic footer', () => {
@@ -312,6 +319,19 @@ describe('ModalWrapperComponent', () => {
         embeddedComponent.isEnabled = true;
         spectator.detectChanges();
         expect(footerAsWrapperChild).toHaveClass('enabled');
+        done();
+      });
+    });
+
+    it('should define custom CSS property --keyboard-offset on embedded footer', (done) => {
+      const embeddedComponent = spectator.query(DynamicFooterEmbeddedComponent);
+      embeddedComponent.showFooter = true;
+      spectator.detectChanges();
+
+      setTimeout(() => {
+        const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
+        spectator.component._onKeyboardWillShow({ keyboardHeight: 200 });
+        expect(kirbyModalFooter).toHaveStyle({ '--keyboard-offset': '200px' });
         done();
       });
     });

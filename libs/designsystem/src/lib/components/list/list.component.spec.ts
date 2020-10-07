@@ -10,6 +10,7 @@ import { SpinnerComponent } from '../spinner/spinner.component';
 import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
 import { ListHelper } from './helpers/list-helper';
 import { ListItemColorDirective } from './directives/list-item-color.directive';
+import { WINDOW_TOKEN } from '../../helpers/di';
 
 /**
  * We need an actual model item, since WeakMap can't use primitives for keys.
@@ -49,7 +50,14 @@ describe('ListComponent', () => {
       MockComponent(ionic.IonItemGroup),
       MockComponent(ionic.IonItemSliding),
     ],
-    providers: [ListHelper, GroupByPipe],
+    providers: [
+      ListHelper,
+      GroupByPipe,
+      {
+        provide: WINDOW_TOKEN,
+        useValue: window,
+      },
+    ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
   });
 

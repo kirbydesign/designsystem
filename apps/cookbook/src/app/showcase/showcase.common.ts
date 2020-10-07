@@ -38,6 +38,7 @@ import { DividerShowcaseComponent } from '../showcase/divider-showcase/divider-s
 import { DropdownShowcaseComponent } from '~/app/showcase/dropdown-showcase/dropdown-showcase.component';
 import { ReorderListShowcaseComponent } from '../showcase/reorder-list-showcase/reorder-list-showcase.component';
 import { StockChartShowcaseComponent } from './stock-chart-showcase/stock-chart-showcase.component';
+import { FlagShowcaseComponent } from './flag-showcase/flag-showcase.component';
 
 export const COMPONENT_IMPORTS: any[] = [ExamplesModule, ShowcaseRoutingModule];
 
@@ -79,6 +80,7 @@ export const COMPONENT_EXPORTS: any[] = [
   DropdownShowcaseComponent,
   StockChartShowcaseComponent,
   ProgressCircleShowcaseComponent,
+  FlagShowcaseComponent,
 ];
 
 export const COMPONENT_DECLARATIONS: any[] = [...COMPONENT_EXPORTS, ShowcaseComponent];

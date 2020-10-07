@@ -12,11 +12,6 @@
 # dependencies
 /node_modules
 
-# NativeScript
-/hooks
-/platforms
-/.tmp_backup
-
 # IDEs and editors
 /.idea
 .project
