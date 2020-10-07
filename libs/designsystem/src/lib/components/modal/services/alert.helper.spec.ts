@@ -1,14 +1,19 @@
+import { Component } from '@angular/core';
 import { IonicModule, ModalController as IonicModalController } from '@ionic/angular';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
-import { RouterTestingModule } from '@angular/router/testing';
 
 import { DesignTokenHelper } from '../../../helpers';
 
 import { WindowRef } from '../../../types/window-ref';
 import { AlertHelper } from './alert.helper';
-import { ModalHelper } from './modal.helper';
 import { Overlay } from './modal.interfaces';
-import { ModalNavigationService } from './modal-navigation.service';
+
+@Component({
+  template: `
+    <h2>Dummy Component</h2>
+  `,
+})
+class EmbeddedDummyComponent {}
 
 describe('AlertHelper', () => {
   let spectator: SpectatorService<AlertHelper>;
@@ -17,9 +22,8 @@ describe('AlertHelper', () => {
 
   const createService = createServiceFactory({
     service: AlertHelper,
-    imports: [IonicModule.forRoot({ mode: 'ios', _testing: true }), RouterTestingModule],
+    imports: [IonicModule.forRoot({ mode: 'ios', _testing: true })],
     providers: [
-      ModalHelper,
       {
         provide: WindowRef,
         useValue: window,
@@ -66,19 +70,20 @@ describe('AlertHelper', () => {
 
     it('alert should have correct backdrop style when opened on top of a modal', async () => {
       await overlay.dismiss();
-      const modalHelper = spectator.inject(ModalHelper);
-      const modalOverlay = await modalHelper.showModalWindow({
-        title: 'Modal',
-        component: undefined,
+      const ionModalElement = await ionModalController.create({
+        component: EmbeddedDummyComponent,
       });
+      await ionModalElement.present();
       const modalIonModal = await ionModalController.getTop();
       expect(modalIonModal).toBeTruthy();
+
       overlay = await alertHelper.showAlert({ title: 'Alert on top of modal' });
+
       ionModal = await ionModalController.getTop();
       expect(ionModal).toBeTruthy();
       backdrop = ionModal.querySelector('ion-backdrop');
       expect(backdrop).toHaveComputedStyle({ opacity: backdropOpacity });
-      await modalOverlay.dismiss();
+      await ionModalElement.dismiss();
     });
   });
 });

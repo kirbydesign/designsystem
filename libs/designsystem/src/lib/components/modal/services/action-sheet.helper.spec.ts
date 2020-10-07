@@ -1,11 +1,16 @@
+import { Component } from '@angular/core';
 import { IonicModule, ModalController as IonicModalController } from '@ionic/angular';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
-import { RouterTestingModule } from '@angular/router/testing';
 
 import { ActionSheetHelper } from './action-sheet.helper';
-import { ModalHelper } from './modal.helper';
 import { Overlay } from './modal.interfaces';
-import { ModalNavigationService } from './modal-navigation.service';
+
+@Component({
+  template: `
+    <h2>Dummy Component</h2>
+  `,
+})
+class EmbeddedDummyComponent {}
 
 describe('ActionSheetHelper', () => {
   let spectator: SpectatorService<ActionSheetHelper>;
@@ -14,9 +19,7 @@ describe('ActionSheetHelper', () => {
 
   const createService = createServiceFactory({
     service: ActionSheetHelper,
-    imports: [IonicModule.forRoot({ mode: 'ios', _testing: true }), RouterTestingModule],
-    providers: [ModalHelper],
-    mocks: [ModalNavigationService],
+    imports: [IonicModule.forRoot({ mode: 'ios', _testing: true })],
   });
 
   beforeEach(() => {
@@ -64,19 +67,20 @@ describe('ActionSheetHelper', () => {
 
     it('action-sheet should have correct backdrop style when opened on top of a modal', async () => {
       await overlay.dismiss();
-      const modalHelper = spectator.inject(ModalHelper);
-      const modalOverlay = await modalHelper.showModalWindow({
-        title: 'Modal',
-        component: undefined,
+      const ionModalElement = await ionModalController.create({
+        component: EmbeddedDummyComponent,
       });
+      await ionModalElement.present();
       const modalIonModal = await ionModalController.getTop();
       expect(modalIonModal).toBeTruthy();
+
       overlay = await actionSheetHelper.showActionSheet({ items: [] });
+
       ionModal = await ionModalController.getTop();
       expect(ionModal).toBeTruthy();
       backdrop = ionModal.querySelector('ion-backdrop');
       expect(backdrop).toHaveComputedStyle({ opacity: backdropOpacity });
-      await modalOverlay.dismiss();
+      await ionModalElement.dismiss();
     });
   });
 });
