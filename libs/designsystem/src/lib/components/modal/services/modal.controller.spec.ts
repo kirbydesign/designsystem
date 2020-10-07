@@ -1,42 +1,62 @@
-import { Subject, of } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
+import { Subject, EMPTY, defer } from 'rxjs';
 
 import { Overlay, OverlayEventDetail } from './modal.interfaces';
 import { ModalController } from './modal.controller';
 import { ModalHelper } from './modal.helper';
 import { ActionSheetHelper } from './action-sheet.helper';
 import { AlertHelper } from './alert.helper';
-import { ModalOutlet } from './modal-outlet.service';
+import { ModalNavigationService } from './modal-navigation.service';
 
 describe('modalController', () => {
+  let spectator: SpectatorService<ModalController>;
   let modalController: ModalController;
-  const modalHelperSpy: jasmine.SpyObj<ModalHelper> = jasmine.createSpyObj('ModalHelper', [
-    'showModalWindow',
-  ]);
-  const actionSheetHelperSpy: jasmine.SpyObj<ActionSheetHelper> = jasmine.createSpyObj(
-    'ActionSheetHelper',
-    ['showActionSheet']
-  );
-  const alertHelperSpy: jasmine.SpyObj<AlertHelper> = jasmine.createSpyObj('AlertHelper', [
-    'showAlert',
-  ]);
-  const ModalOutletSpy: jasmine.SpyObj<ModalOutlet> = jasmine.createSpyObj('ModalOutletSpy', [
-    'resolve$',
-    'destroy',
-  ]);
-  ModalOutletSpy.resolve$ = of(null).pipe(filter(() => false));
+
+  const createService = createServiceFactory({
+    service: ModalController,
+    mocks: [ActionSheetHelper, AlertHelper, ModalHelper, ModalNavigationService],
+  });
+
+  let modalHelperSpy: jasmine.SpyObj<ModalHelper>;
+  let actionSheetHelperSpy: jasmine.SpyObj<ActionSheetHelper>;
+  let alertHelperSpy: jasmine.SpyObj<AlertHelper>;
+  let modalNavigationServiceSpy: jasmine.SpyObj<ModalNavigationService>;
 
   const expectedError = 'No modal overlays are currently registered';
   let callbackSpy: jasmine.Spy;
 
   beforeEach(() => {
-    modalController = new ModalController(
-      modalHelperSpy,
-      actionSheetHelperSpy,
-      alertHelperSpy,
-      ModalOutletSpy
-    );
+    spectator = createService();
+    modalController = spectator.service;
+    modalHelperSpy = spectator.inject(ModalHelper);
+    actionSheetHelperSpy = spectator.inject(ActionSheetHelper);
+    alertHelperSpy = spectator.inject(AlertHelper);
+    modalNavigationServiceSpy = spectator.inject(ModalNavigationService);
     callbackSpy = jasmine.createSpy('callback');
+  });
+
+  it('should create', () => {
+    expect(spectator.service).toBeTruthy();
+  });
+
+  describe('initialize', () => {
+    it('should subscribe to modal route activation', async () => {
+      let subscribedToActivated = false;
+      let subscribedToDeActivated = false;
+      modalNavigationServiceSpy.modalRouteActivated$ = defer(() => {
+        subscribedToActivated = true;
+        return EMPTY;
+      });
+      modalNavigationServiceSpy.modalRouteDeactivated$ = defer(() => {
+        subscribedToDeActivated = true;
+        return EMPTY;
+      });
+
+      modalController.initialize();
+
+      expect(subscribedToActivated).toBeTrue();
+      expect(subscribedToDeActivated).toBeTrue();
+    });
   });
 
   describe('hideTopmost', () => {

@@ -1,14 +1,13 @@
 import { Component, Optional, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { IonicModule, ModalController as IonicModalController } from '@ionic/angular';
-import { createService, mockProvider } from '@ngneat/spectator';
+import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 import { RouterTestingModule } from '@angular/router/testing';
-import { ChildrenOutletContexts } from '@angular/router';
 
 import { DesignTokenHelper } from '../../../helpers/design-token-helper';
 import { TestHelper } from '../../../testing/test-helper';
 import { ModalHelper } from './modal.helper';
 import { Overlay, Modal } from './modal.interfaces';
-import { ModalOutlet } from './modal-outlet.service';
+import { ModalNavigationService } from './modal-navigation.service';
 
 @Component({
   template: `
@@ -27,15 +26,8 @@ class InputEmbeddedComponent implements OnInit {
   }
 }
 
-function resolveAfterAnimation(ms: number) {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve('animation done');
-    }, ms);
-  });
-}
-
 describe('ModalHelper', () => {
+  let spectator: SpectatorService<ModalHelper>;
   let modalHelper: ModalHelper;
   let ionModalController: IonicModalController;
   let overlay: Overlay;
@@ -50,11 +42,11 @@ describe('ModalHelper', () => {
   const size = DesignTokenHelper.size;
   const backgroundColor = DesignTokenHelper.backgroundColor();
 
-  const spectator = createService({
+  const createService = createServiceFactory({
     service: ModalHelper,
     imports: [IonicModule.forRoot({ mode: 'ios', _testing: true }), RouterTestingModule],
-    providers: [mockProvider(ModalOutlet), mockProvider(ChildrenOutletContexts)],
     entryComponents: [InputEmbeddedComponent],
+    mocks: [ModalNavigationService],
   });
 
   beforeAll(() => {
@@ -74,6 +66,7 @@ describe('ModalHelper', () => {
   });
 
   beforeEach(() => {
+    spectator = createService();
     modalHelper = spectator.service;
     ionModalController = spectator.inject(IonicModalController);
   });

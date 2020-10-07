@@ -1,24 +1,27 @@
 import { IonicModule, ModalController as IonicModalController } from '@ionic/angular';
-import { createService, mockProvider } from '@ngneat/spectator';
+import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { DesignTokenHelper } from '../../../helpers';
 import { AlertHelper } from './alert.helper';
 import { ModalHelper } from './modal.helper';
 import { Overlay } from './modal.interfaces';
-import { ModalOutlet } from './modal-outlet.service';
+import { ModalNavigationService } from './modal-navigation.service';
 
 describe('AlertHelper', () => {
+  let spectator: SpectatorService<AlertHelper>;
   let alertHelper: AlertHelper;
   const backdropOpacity = '0.4';
 
-  const spectator = createService({
+  const createService = createServiceFactory({
     service: AlertHelper,
     imports: [IonicModule.forRoot({ mode: 'ios', _testing: true }), RouterTestingModule],
-    providers: [ModalHelper, mockProvider(ModalOutlet)],
+    providers: [ModalHelper],
+    mocks: [ModalNavigationService],
   });
 
   beforeEach(() => {
+    spectator = createService();
     alertHelper = spectator.service;
   });
 
