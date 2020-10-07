@@ -8,9 +8,10 @@ import { Icon, IconSettings, ICON_SETTINGS } from './icon-settings';
 export class IconRegistryService {
   private iconRegistry = new Map<string, string>();
 
-  constructor(@Optional() @Inject(ICON_SETTINGS) private iconSettings?: IconSettings) {
-    if (this.iconSettings) {
-      this.addIcons(this.iconSettings.icons);
+  constructor(@Optional() @Inject(ICON_SETTINGS) iconSettings?: IconSettings) {
+    if (iconSettings) {
+      this.addIcons(iconSettings.icons);
+      console.warn(`Use of IconSettings is deprecated, use IconRegistryService instead`);
     }
   }
 
