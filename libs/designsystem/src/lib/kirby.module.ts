@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { OverlayModule } from '@angular/cdk/overlay';
 
+import { appInitialize } from './app-initialize';
 import { InfiniteScrollDirective } from './components/list/directives/infinite-scroll.directive';
 import { ModalWrapperComponent } from './components/modal/modal-wrapper/modal-wrapper.component';
 import { ModalCompactWrapperComponent } from './components/modal/modal-wrapper/compact/modal-compact-wrapper.component';
@@ -77,8 +78,9 @@ import { ResizeObserverService } from './components/shared/resize-observer/resiz
 import { ProgressCircleComponent } from './components/progress-circle/progress-circle.component';
 import { ProgressCircleRingComponent } from './components/progress-circle/progress-circle-ring.component';
 import { FlagComponent } from './components/flag/flag.component';
-import { WINDOW_TOKEN } from './helpers/di';
-import { appInitialize } from './app-initialize';
+import { IconRegistryService } from './components/icon/icon-registry.service';
+import { WindowRef } from './types/window-ref';
+import { ToggleButtonModule } from './components/toggle-button/toggle-button.module';
 
 const exportedDeclarations = [
   CardComponent,
@@ -148,6 +150,7 @@ const exportedModules = [
   TabsModule,
   IconModule,
   ItemModule,
+  ToggleButtonModule,
 ];
 
 const exports = [...exportedModules, ...exportedDeclarations];
@@ -157,6 +160,7 @@ const importedModules = [...exportedModules, OverlayModule];
 const providers = [
   ModalController,
   ModalNavigationService,
+  IconRegistryService,
   ActionSheetHelper,
   ModalHelper,
   AlertHelper,
@@ -167,7 +171,7 @@ const providers = [
   ResizeObserverFactory,
   ResizeObserverService,
   {
-    provide: WINDOW_TOKEN,
+    provide: WindowRef,
     useValue: window,
   },
   {

@@ -29,7 +29,7 @@ import { GroupByPipe } from './pipes/group-by.pipe';
 import { ListSwipeAction } from './list-swipe-action';
 import { ThemeColor } from '../../helpers/theme-color.type';
 import { ItemComponent } from '../item/item.component';
-import { WINDOW_TOKEN } from '../../helpers/di';
+import { WindowRef } from '../../types/window-ref';
 
 export type ListShape = 'square' | 'rounded' | 'none';
 
@@ -144,8 +144,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   constructor(
     private listHelper: ListHelper,
     private groupBy: GroupByPipe,
-    // because of "Could not resolve type Window" error
-    @Inject(WINDOW_TOKEN) private window: any
+    private window: WindowRef
   ) {}
 
   ngOnInit() {
@@ -235,17 +234,11 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
     event.stopPropagation();
   }
 
-  onResize(): void {
-    this.initializeSwipeActions();
-  }
-
   private initializeSwipeActions(): void {
     if (this.swipeActions && this.swipeActions.length) {
-      const isTouchDeviceQuery = '(pointer: coarse) and (hover: none)';
+      // No check for `hover: none`, as Samsung Galaxy will return false on `hover: none` media query:
+      const isTouchDeviceQuery = '(pointer: coarse)';
       this.isSwipingEnabled = this.window.matchMedia(isTouchDeviceQuery).matches;
-      if (this.list && !this.isSwipingEnabled) {
-        this.list.closeSlidingItems();
-      }
     }
   }
 }

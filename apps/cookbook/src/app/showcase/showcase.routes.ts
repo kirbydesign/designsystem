@@ -41,6 +41,7 @@ import { ReorderListShowcaseComponent } from './reorder-list-showcase/reorder-li
 import { StockChartShowcaseComponent } from './stock-chart-showcase/stock-chart-showcase.component';
 import { ProgressCircleShowcaseComponent } from './progress-circle-showcase/progress-circle-showcase.component';
 import { FlagShowcaseComponent } from './flag-showcase/flag-showcase.component';
+import { ToggleButtonShowcaseComponent } from './toggle-button-showcase/toggle-button-showcase.component';
 
 export const routes: Routes = [
   {
@@ -183,6 +184,10 @@ export const routes: Routes = [
       {
         path: 'toggle',
         component: ToggleShowcaseComponent,
+      },
+      {
+        path: 'toggle-button',
+        component: ToggleButtonShowcaseComponent,
       },
       {
         path: 'calendar',

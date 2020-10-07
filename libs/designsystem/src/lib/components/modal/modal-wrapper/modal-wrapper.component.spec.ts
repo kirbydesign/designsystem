@@ -13,6 +13,7 @@ import { IconComponent } from '../../icon/icon.component';
 import { ModalFooterComponent } from '../footer/modal-footer.component';
 import { ModalWrapperComponent } from './modal-wrapper.component';
 import { ModalNavigationService } from '../services/modal-navigation.service';
+import { WindowRef } from '../../../types/window-ref';
 
 @Component({
   template: `
@@ -57,6 +58,12 @@ describe('ModalWrapperComponent', () => {
       StaticFooterEmbeddedComponent,
       DynamicFooterEmbeddedComponent,
       InputEmbeddedComponent,
+    ],
+    providers: [
+      {
+        provide: WindowRef,
+        useValue: window,
+      },
     ],
     declarations: [
       MockComponents(

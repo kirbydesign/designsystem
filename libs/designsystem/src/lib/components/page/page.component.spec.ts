@@ -8,6 +8,7 @@ import { DesignTokenHelper } from '../../helpers/design-token-helper';
 import { TestHelper } from '../../testing/test-helper';
 import { PageComponent, PageContentComponent } from './page.component';
 import { FitHeadingDirective } from '../../directives/fit-heading/fit-heading.directive';
+import { WindowRef } from '../../types/window-ref';
 
 const size = DesignTokenHelper.size;
 const fatFingerSize = DesignTokenHelper.fatFingerSize();
@@ -33,6 +34,12 @@ describe('PageComponent', () => {
     component: PageComponent,
     declarations: [PageContentComponent, MockDirective(FitHeadingDirective)],
     imports: [IonicModule.forRoot({ mode: 'ios' }), NoopAnimationsModule, RouterTestingModule],
+    providers: [
+      {
+        provide: WindowRef,
+        useValue: window,
+      },
+    ],
   });
 
   beforeEach(() => {

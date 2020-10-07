@@ -3,6 +3,8 @@ import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { DesignTokenHelper } from '../../../helpers';
+
+import { WindowRef } from '../../../types/window-ref';
 import { AlertHelper } from './alert.helper';
 import { ModalHelper } from './modal.helper';
 import { Overlay } from './modal.interfaces';
@@ -16,8 +18,13 @@ describe('AlertHelper', () => {
   const createService = createServiceFactory({
     service: AlertHelper,
     imports: [IonicModule.forRoot({ mode: 'ios', _testing: true }), RouterTestingModule],
-    providers: [ModalHelper],
-    mocks: [ModalNavigationService],
+    providers: [
+      ModalHelper,
+      {
+        provide: WindowRef,
+        useValue: window,
+      },
+    ],
   });
 
   beforeEach(() => {

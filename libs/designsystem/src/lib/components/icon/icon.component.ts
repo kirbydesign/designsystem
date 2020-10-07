@@ -1,15 +1,8 @@
-import {
-  Component,
-  HostBinding,
-  Inject,
-  Input,
-  OnChanges,
-  Optional,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, HostBinding, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 import { kirbyIconSettings } from './kirby-icon-settings';
-import { ICON_SETTINGS, Icon, IconSettings } from './icon-settings';
+import { Icon } from './icon-settings';
+import { IconRegistryService } from './icon-registry.service';
 
 @Component({
   selector: 'kirby-icon',
@@ -29,13 +22,6 @@ export class IconComponent implements OnChanges {
   }
 
   set icon(icon: Icon) {
-    // Check if ICON_SETTINGS are configured
-    if (!this.iconSettings && this.customName) {
-      console.warn(
-        'ICON_SETTINGS provider in your module.ts is not set. Read documentation on how to set it up.'
-      );
-    }
-
     // If icon are not found, set default icon
     if (!icon && (this.name || this.customName)) {
       console.warn(`Icon with name "${this.name || this.customName}" was not found.`);
@@ -54,13 +40,13 @@ export class IconComponent implements OnChanges {
     }
   }
 
-  constructor(@Optional() @Inject(ICON_SETTINGS) private iconSettings?: IconSettings) {}
+  constructor(private iconRegistryService: IconRegistryService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.name && changes.name.currentValue) {
       this.icon = this.findIcon(kirbyIconSettings.icons, changes.name.currentValue);
-    } else if (changes.customName && changes.customName.currentValue && this.iconSettings) {
-      this.icon = this.findIcon(this.iconSettings.icons, changes.customName.currentValue);
+    } else if (changes.customName && changes.customName.currentValue) {
+      this.icon = this.iconRegistryService.getIcon(changes.customName.currentValue);
     }
   }
 

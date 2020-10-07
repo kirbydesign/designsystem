@@ -4,6 +4,7 @@ import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { DesignTokenHelper } from '../../../helpers/design-token-helper';
+import { WindowRef } from '../../../types/window-ref';
 import { TestHelper } from '../../../testing/test-helper';
 import { ModalHelper } from './modal.helper';
 import { Overlay, Modal } from './modal.interfaces';
@@ -45,6 +46,12 @@ describe('ModalHelper', () => {
   const createService = createServiceFactory({
     service: ModalHelper,
     imports: [IonicModule.forRoot({ mode: 'ios', _testing: true }), RouterTestingModule],
+    providers: [
+      {
+        provide: WindowRef,
+        useValue: window,
+      },
+    ],
     entryComponents: [InputEmbeddedComponent],
     mocks: [ModalNavigationService],
   });
