@@ -132,9 +132,9 @@
 }
 
 // Only apply the styles on touch devices
-// (coarse pointer and cannot hover):
+// (coarse pointer):
 @mixin touch() {
-  @media (pointer: coarse) and (hover: none) {
+  @media (pointer: coarse) {
     @content;
   }
 }

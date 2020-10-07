@@ -236,7 +236,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
 
   private initializeSwipeActions(): void {
     if (this.swipeActions && this.swipeActions.length) {
-      const isTouchDeviceQuery = '(pointer: coarse) and (hover: none)';
+      const isTouchDeviceQuery = '(pointer: coarse)';
       this.isSwipingEnabled = this.window.matchMedia(isTouchDeviceQuery).matches;
     }
   }
