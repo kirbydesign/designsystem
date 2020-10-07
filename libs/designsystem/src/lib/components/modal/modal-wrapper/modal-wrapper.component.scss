@@ -17,6 +17,7 @@
 
       ion-content {
         overflow: hidden;
+        contain: content;
       }
     }
   }
