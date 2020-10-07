@@ -57,7 +57,6 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   >;
   @ViewChild(RouterOutlet, { static: true }) private routerOutlet: RouterOutlet;
 
-  private mutationObserver: MutationObserver;
   private keyboardVisible = false;
   private toolbarButtons: HTMLButtonElement[] = [];
   private delayedClose = () => {};
@@ -69,6 +68,13 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   readonly didPresent = this.ionModalDidPresent.toPromise();
   private readonly ionModalWillDismiss = new Subject<void>();
   readonly willClose = this.ionModalWillDismiss.toPromise();
+  private _mutationObserver: MutationObserver;
+  private get mutationObserver(): MutationObserver {
+    if (!this._mutationObserver) {
+      this._mutationObserver = this.createEmbeddedElementsMutationObserver();
+    }
+    return this._mutationObserver;
+  }
 
   @HostBinding('class.drawer')
   get _isDrawer() {
@@ -112,6 +118,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
       .pipe(takeUntil(this.willClose$))
       .subscribe((route) => {
         if (this.routerOutlet.isActivated) {
+          this.mutationObserver.disconnect();
           this.routerOutlet.deactivate();
           this.clearEmbeddedElements();
         }
@@ -310,6 +317,12 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
 
   private observeEmbeddedElements() {
     const parentElement = this.getEmbeddedComponentElement();
+    this.mutationObserver.observe(parentElement, {
+      childList: true, // Listen for addition or removal of child nodes
+    });
+  }
+
+  private createEmbeddedElementsMutationObserver(): MutationObserver {
     const observedElements = Object.keys(this.elementToParentMap);
     const callback = (mutations: MutationRecord[]) => {
       const addedNodes = mutations
@@ -331,16 +344,13 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
         this.moveChild(addedElement, newParentElement);
       });
     };
-    this.mutationObserver = new MutationObserver(callback);
-    this.mutationObserver.observe(parentElement, {
-      childList: true, // Listen for addition or removal of child nodes
-    });
+    return new MutationObserver(callback);
   }
 
   ngOnDestroy() {
     //clean up the observer
-    this.mutationObserver && this.mutationObserver.disconnect();
-    delete this.mutationObserver;
+    this.mutationObserver.disconnect();
+    delete this._mutationObserver;
     this.resizeObserverService && this.resizeObserverService.unobserve(window.document.body);
   }
 }
