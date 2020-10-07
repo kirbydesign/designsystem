@@ -22,10 +22,7 @@ export class ModalController {
     private actionSheetHelper: ActionSheetHelper,
     private alertHelper: AlertHelper,
     private modalNavigationService: ModalNavigationService
-  ) {
-    this.onModalRouteActivated();
-    this.onModalRouteDeActivated(); // TODO: Do we want to close modal when routing out of modal route? Or should the code that navigates close the window??
-  }
+  ) {}
 
   private onModalRouteActivated() {
     const navigateOnWillClose = () => this.modalNavigationService.navigateOutOfModalOutlet();
@@ -42,6 +39,11 @@ export class ModalController {
       .subscribe(async () => {
         await this.hideAll(); // TODO: Should we just hide all or specifically close the modal route overlay???
       });
+  }
+
+  public initialize() {
+    this.onModalRouteActivated();
+    this.onModalRouteDeActivated(); // TODO: Do we want to close modal when routing out of modal route? Or should the code that navigates close the window??
   }
 
   public async showModal(config: ModalConfig, onClose?: (data?: any) => void): Promise<void> {

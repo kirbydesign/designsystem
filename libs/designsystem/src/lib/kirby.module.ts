@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
@@ -78,6 +78,7 @@ import { ProgressCircleComponent } from './components/progress-circle/progress-c
 import { ProgressCircleRingComponent } from './components/progress-circle/progress-circle-ring.component';
 import { FlagComponent } from './components/flag/flag.component';
 import { WINDOW_TOKEN } from './helpers/di';
+import { appInitialize } from './app-initialize';
 
 const exportedDeclarations = [
   CardComponent,
@@ -169,6 +170,12 @@ const providers = [
     provide: WINDOW_TOKEN,
     useValue: window,
   },
+  {
+    provide: APP_INITIALIZER,
+    useFactory: appInitialize,
+    multi: true,
+    deps: [ModalController],
+  },
 ];
 
 const entryComponents = [
@@ -195,9 +202,4 @@ const entryComponents = [
   entryComponents: entryComponents,
   exports: exports,
 })
-export class KirbyModule {
-  // TODO: Should we eager-initialize ModalNavigationService here??
-  // constructor(modalNavigationService: ModalNavigationService) {
-  //   console.warn('KirbyModule ctor');
-  // }
-}
+export class KirbyModule {}
