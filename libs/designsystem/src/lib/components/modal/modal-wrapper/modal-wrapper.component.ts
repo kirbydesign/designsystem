@@ -95,6 +95,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
    * This is done by TS and not by scss, because it otherwise will be delayed when reverting back the z-index on will-close
    */
   private moveUnderlyingModalBackdropsInFrontOfModals() {
+    if (!this.ionModalElement) return;
     const container = this.ionModalElement.parentElement;
     if (!container) return;
 
