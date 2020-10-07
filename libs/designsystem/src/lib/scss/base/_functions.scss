@@ -132,6 +132,7 @@
 }
 
 // Only apply the styles on touch devices
+// No check for hover: none, as some mobile devices like Samsung Galaxy S10 will have hover enabled
 // (coarse pointer):
 @mixin touch() {
   @media (pointer: coarse) {
