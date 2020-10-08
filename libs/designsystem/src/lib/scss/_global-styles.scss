@@ -41,22 +41,6 @@ ion-modal.kirby-overlay {
     --backdrop-opacity: 0.4;
   }
 
-  @include media('>=medium') {
-    &:first-of-type,
-    &.modal-card:first-of-type {
-      ion-content {
-        --overflow: hidden;
-      }
-    }
-
-    &:last-of-type,
-    &.modal-card:last-of-type {
-      ion-content {
-        --overflow: auto;
-      }
-    }
-  }
-
   @include media('<medium') {
     // Only apply backdrop on stacking drawers on small screens:
     &.kirby-drawer {
@@ -119,7 +103,9 @@ ion-modal.kirby-overlay {
 
       &:not(.kirby-drawer):not(.kirby-modal-compact) {
         --height: auto;
+        --min-height: 300px;
         --max-height: none;
+        --overflow: hidden;
         align-items: flex-start;
         padding-top: size('xl');
         transition: all 0.5s ease-in-out, padding 0ms;
@@ -128,6 +114,7 @@ ion-modal.kirby-overlay {
           border-bottom-left-radius: 0;
           border-bottom-right-radius: 0;
           align-self: stretch;
+          --overflow: auto;
         }
       }
 
