@@ -9,6 +9,7 @@ const config = {
   selector: 'cookbook-modal-example',
   template: `<button kirby-button (click)="showModal()">Show modal</button>
 <button kirby-button (click)="showDrawer()">Show drawer</button>
+<button kirby-button (click)="showDrawerWithFooter()">Show drawer with footer</button>
 <button kirby-button (click)="showCompact()">Show compact</button>
 <button kirby-button (click)="showModalWithFooter()">Show modal with footer</button>`,
   footerTemplate: `<p>Some content of the embedded component</p>
@@ -176,7 +177,7 @@ export class ModalExampleComponent {
     this.modalController.showModal(config, this.onModalClose);
   }
 
-  showDrawer() {
+  showDrawer(showFooter = false) {
     const config: ModalConfig = {
       title: 'My Drawer Title',
       flavor: 'drawer',
@@ -184,10 +185,15 @@ export class ModalExampleComponent {
       componentProps: {
         prop1: 'value1',
         prop2: 'value2',
+        showFooter: showFooter,
       },
     };
 
     this.modalController.showModal(config, this.onDrawerClose);
+  }
+
+  showDrawerWithFooter() {
+    this.showDrawer(true);
   }
 
   showModalWithFooter() {
