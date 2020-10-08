@@ -63,11 +63,7 @@ ion-title {
 ion-content {
   --background: transparent;
   display: flex;
-
   flex-direction: column;
-
-  // TODO: HOW TO GET MAX HEIGHT HEADER PLUS PADDING?
-  //max-height: calc(100vh - (62px + 40px));
 
   @include slotted('*') {
     box-sizing: border-box;

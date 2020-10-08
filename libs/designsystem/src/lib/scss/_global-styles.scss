@@ -108,7 +108,10 @@ ion-modal.kirby-overlay {
         --overflow: hidden;
         align-items: flex-start;
         padding-top: size('xl');
-        transition: all 0.5s ease-in-out, padding 0ms;
+        transition: all 0.5s #{get-transition-duration('long')} #{get-transition-easing(
+              'enter-exit'
+            )},
+          padding 0ms;
 
         .modal-wrapper.content-overflows {
           border-bottom-left-radius: 0;

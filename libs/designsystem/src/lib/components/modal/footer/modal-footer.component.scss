@@ -1,11 +1,5 @@
 @import '../../../scss/utils';
 
-:host {
-  width: 100%;
-  bottom: 0;
-  position: relative;
-}
-
 ion-footer {
   box-shadow: get-elevation(8);
   display: flex;
