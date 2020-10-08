@@ -139,20 +139,18 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   }
 
   private observeScrollElementResize() {
-    if (this.config.flavor === 'modal') {
-      this.embeddedComponentElement = this.ionContentElement.nativeElement.querySelector(
-        ':first-child'
-      );
+    this.embeddedComponentElement = this.ionContentElement.nativeElement.querySelector(
+      ':first-child'
+    );
 
-      const scrollElementPromise = this.ionContent.getScrollElement();
-      if (!scrollElementPromise) return;
+    const scrollElementPromise = this.ionContent.getScrollElement();
+    if (!scrollElementPromise) return;
 
-      scrollElementPromise.then((scrollElement) => {
-        // TODO: Do you know how we can access main (scrollElement) of ion-content from scss?
-        this.renderer.setStyle(scrollElement, 'position', 'relative');
-        this.resizeObserverService.observe(scrollElement, () => this.onScrollElementResize());
-      });
-    }
+    scrollElementPromise.then((scrollElement) => {
+      // TODO: Do you know how we can access main (scrollElement) of ion-content from scss?
+      this.renderer.setStyle(scrollElement, 'position', 'relative');
+      this.resizeObserverService.observe(scrollElement, () => this.onScrollElementResize());
+    });
   }
 
   ngAfterViewInit(): void {
