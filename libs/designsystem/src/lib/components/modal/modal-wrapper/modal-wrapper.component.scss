@@ -7,6 +7,7 @@
     &:not(.drawer) {
       display: flex;
       flex-direction: column;
+      min-height: var(--min-height);
       position: relative;
       contain: inherit;
       height: 100%;
@@ -67,6 +68,7 @@ ion-content {
 
   @include slotted('*') {
     box-sizing: border-box;
+    display: block;
   }
 
   --padding-top: #{size('m')};

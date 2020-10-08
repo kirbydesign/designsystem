@@ -105,7 +105,6 @@ ion-modal.kirby-overlay {
         --height: auto;
         --min-height: 300px;
         --max-height: none;
-        --overflow: hidden;
         align-items: flex-start;
         padding-top: size('xl');
         transition: all 0.5s #{get-transition-duration('long')} #{get-transition-easing(
@@ -113,11 +112,18 @@ ion-modal.kirby-overlay {
             )},
           padding 0ms;
 
+        ion-content {
+          --overflow: hidden;
+        }
+
         .modal-wrapper.content-overflows {
           border-bottom-left-radius: 0;
           border-bottom-right-radius: 0;
           align-self: stretch;
-          --overflow: auto;
+
+          ion-content {
+            --overflow: auto;
+          }
         }
       }
 

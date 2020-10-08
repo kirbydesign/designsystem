@@ -1,4 +1,4 @@
-import { Component, Inject, Optional, SkipSelf } from '@angular/core';
+import { Component, Inject, OnInit, Optional, SkipSelf } from '@angular/core';
 
 import { AlertConfig, ActionSheetConfig, Modal, ModalController } from '@kirbydesign/designsystem';
 import { ModalConfig, COMPONENT_PROPS } from '@kirbydesign/designsystem';
@@ -12,9 +12,10 @@ import { SecondEmbeddedModalExampleComponent } from '../second-embedded-modal-ex
   templateUrl: './first-embedded-modal-example.component.html',
   styleUrls: ['./first-embedded-modal-example.component.scss'],
 })
-export class FirstEmbeddedModalExampleComponent {
+export class FirstEmbeddedModalExampleComponent implements OnInit {
   props: { [key: string]: any };
   showFooter = true;
+  isLoading = true;
   snapFooterToKeyboard = false;
 
   constructor(
@@ -25,6 +26,12 @@ export class FirstEmbeddedModalExampleComponent {
   ) {
     this.props = componentProps;
     this.showFooter = this.props.showFooter;
+  }
+
+  ngOnInit() {
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 1000);
   }
 
   showNestedModal() {
