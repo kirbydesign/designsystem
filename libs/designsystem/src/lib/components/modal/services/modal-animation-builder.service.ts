@@ -93,7 +93,6 @@ export class ModalAnimationBuilderService {
                 borderRadius: '10px 10px 0 0',
               },
             ]);
-          console.warn('mobile - no backdrop anim!');
           baseAnimation.addAnimation(presentingAnimation);
         } else {
           baseAnimation.addAnimation(backdropAnimation);
@@ -134,7 +133,6 @@ export class ModalAnimationBuilderService {
           }
         }
       } else {
-        console.warn('not presElement - add backdrop anim!');
         baseAnimation.addAnimation(backdropAnimation);
         if (currentBackdropAnimation) {
           baseAnimation.addAnimation(currentBackdropAnimation);
