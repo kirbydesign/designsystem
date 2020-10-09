@@ -145,4 +145,8 @@ $transition-easings: (
   exit: ease-in,
   enter-exit: ease,
   motion: cubic-bezier(0.25, 0.1, 0.25, 1),
+  modal: (
+    enter: cubic-bezier(0.32, 0.72, 0, 1),
+    exit: cubic-bezier(0.32, 0.72, 0, 1),
+  ),
 );
