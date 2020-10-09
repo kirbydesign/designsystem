@@ -342,7 +342,6 @@ describe('ModalWrapperComponent', () => {
 
       setTimeout(() => {
         const kirbyModalFooter = spectator.element.querySelector('kirby-modal-footer');
-        console.log(kirbyModalFooter);
         spectator.component._onKeyboardWillShow({ keyboardHeight: 200 });
         expect(kirbyModalFooter).toHaveStyle({ '--keyboard-offset': '200px' });
         done();
