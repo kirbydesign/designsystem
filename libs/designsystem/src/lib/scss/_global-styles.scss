@@ -23,32 +23,25 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+$backdrop-opacity: 0.4;
+
 ion-modal.kirby-overlay {
   position: fixed;
 
-  // Ensure consistent backdrop on overlays, as Ionic 5 only applies --backdrop-opacity to :first-of-type:
-  // See https://github.com/ionic-team/ionic/commit/253cd96164914a803f6bb42ff95ca74880c940d0
-  // and https://github.com/ionic-team/ionic/issues/20800#issuecomment-606670762
-  /* RULES:
-  * Always show backdrop on first opened overlay
-  * Always show backdrop on alert and action-sheet (also nested)
-  * Show backdrop on drawer on small screens only
-  */
-  &:first-of-type,
-  &.modal-card:first-of-type,
-  &.kirby-alert,
-  &.kirby-action-sheet {
-    --backdrop-opacity: 0.4;
+  // Ensure consistent backdrop on all overlays:
+  &:not(.modal-card) {
+    --backdrop-opacity: #{$backdrop-opacity};
+    ion-backdrop {
+      opacity: var(--backdrop-opacity);
+    }
   }
 
-  @include media('<medium') {
-    // Only apply backdrop on stacking drawers on small screens:
-    &.kirby-drawer {
-      --backdrop-opacity: 0.4;
-      ion-backdrop {
-        opacity: var(--backdrop-opacity);
-      }
-    }
+  // Ensure consistent backdrop on card style modals, as Ionic 5 only applies --backdrop-opacity to :first-of-type:
+  // See https://github.com/ionic-team/ionic/commit/253cd96164914a803f6bb42ff95ca74880c940d0
+  // and https://github.com/ionic-team/ionic/issues/20800#issuecomment-606670762
+  &.modal-card,
+  &.modal-card:first-of-type {
+    --backdrop-opacity: #{$backdrop-opacity};
   }
 
   .modal-shadow {

@@ -87,32 +87,6 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
       providers: [{ provide: COMPONENT_PROPS, useValue: this.config.componentProps }],
       parent: this.injector,
     });
-
-    this.moveUnderlyingModalBackdropsInFrontOfModals();
-  }
-
-  /*
-   * This is done by TS and not by scss, because it otherwise will be delayed when reverting back the z-index on will-close
-   */
-  private moveUnderlyingModalBackdropsInFrontOfModals() {
-    if (!this.ionModalElement) return;
-    const container = this.ionModalElement.parentElement;
-    if (!container) return;
-
-    const underlyingModalElements = this.ionModalElement.parentElement.querySelectorAll(
-      'ion-modal:not(:last-of-type)'
-    );
-    if (underlyingModalElements.length === 0) return;
-
-    underlyingModalElements.forEach((modalElement) => {
-      this.renderer.setStyle(modalElement.querySelector('ion-backdrop'), 'z-index', '20');
-    });
-
-    this.willClose.then(() => {
-      underlyingModalElements.forEach((modalElement) => {
-        this.renderer.setStyle(modalElement.querySelector('ion-backdrop'), 'z-index', '2');
-      });
-    });
   }
 
   private getAvailableContentHeight(ionModalWrapper: HTMLElement): number {
