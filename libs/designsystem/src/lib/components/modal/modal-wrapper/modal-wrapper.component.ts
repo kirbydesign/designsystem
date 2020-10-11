@@ -45,7 +45,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   @ViewChildren(ButtonComponent, { read: ElementRef }) private toolbarButtonsQuery: QueryList<
     ElementRef<HTMLButtonElement>
   >;
-  @ViewChild(IonContent, { static: true }) private ionContent: IonContent;
+  @ViewChild(IonContent, { static: true }) ionContent: IonContent;
   @ViewChild(IonContent, { static: true, read: ElementRef }) private ionContentElement: ElementRef<
     HTMLIonContentElement
   >;
@@ -139,6 +139,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   }
 
   private observeScrollElementResize() {
+    if (!this.ionContent) return;
     this.embeddedComponentElement = this.ionContentElement.nativeElement
       .firstElementChild as HTMLElement;
 
@@ -293,6 +294,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   }
 
   private checkForEmbeddedFooter() {
+    if (!this.ionContentElement) return;
     const embeddedComponentElement = this.ionContentElement.nativeElement.firstElementChild;
 
     if (embeddedComponentElement) {
@@ -339,8 +341,11 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     this.mutationObserver && this.mutationObserver.disconnect();
     delete this.mutationObserver;
     this.resizeObserverService.unobserve(this.windowRef.document.body);
-    this.ionContent.getScrollElement().then((scrollElement) => {
-      this.resizeObserverService.unobserve(scrollElement);
-    });
+
+    if (this.ionContent && this.ionContent.getScrollElement) {
+      this.ionContent.getScrollElement().then((scrollElement) => {
+        this.resizeObserverService.unobserve(scrollElement);
+      });
+    }
   }
 }

@@ -74,9 +74,11 @@ describe('ModalWrapperComponent', () => {
         IonContent
       ),
     ],
+    detectChanges: false,
   });
 
   beforeEach(() => {
+    console.log('create component');
     spectator = createComponent({
       props: {
         config: {
@@ -85,12 +87,16 @@ describe('ModalWrapperComponent', () => {
           flavor: 'modal',
         },
       },
+      detectChanges: false,
     });
+
+    spyOn(spectator.component.ionContent, 'getScrollElement').and.returnValue(new Promise(null));
+    spectator.detectChanges();
   });
 
   afterEach(() => {
     // Ensure any observers are destroyed:
-    spectator.component.ngOnDestroy();
+    spectator.fixture.destroy();
   });
 
   it('should create', () => {
@@ -223,12 +229,19 @@ describe('ModalWrapperComponent', () => {
             component: StaticFooterEmbeddedComponent,
           },
         },
+        detectChanges: false,
       });
+
+      const ionContent: IonContent = spectator.query(IonContent);
+      spyOn(ionContent, 'getScrollElement').and.returnValue(
+        Promise.resolve(document.createElement('DIV'))
+      );
+      spectator.detectChanges();
     });
 
     afterEach(() => {
       // Ensure any observers are destroyed:
-      spectator.component.ngOnDestroy();
+      spectator.fixture.destroy();
     });
 
     it('should move embedded footer to wrapper component', () => {
@@ -256,12 +269,16 @@ describe('ModalWrapperComponent', () => {
             component: DynamicFooterEmbeddedComponent,
           },
         },
+        detectChanges: false,
       });
+
+      spyOn(spectator.component.ionContent, 'getScrollElement').and.returnValue(new Promise(null));
+      spectator.detectChanges();
     });
 
     afterEach(() => {
       // Ensure any observers are destroyed:
-      spectator.component.ngOnDestroy();
+      spectator.fixture.destroy();
     });
 
     it('should move embedded footer to wrapper component when rendered', (done) => {
@@ -365,11 +382,17 @@ describe('ModalWrapperComponent', () => {
             component: InputEmbeddedComponent,
           },
         },
+        detectChanges: false,
       });
+
+      spyOn(spectator.component.ionContent, 'getScrollElement').and.returnValue(new Promise(null));
+      spectator.detectChanges();
+
       // Ensure ion-content gets height
       // or embedded component won't be visible:
       spectator.element.classList.add('ion-page');
       ionContent = spectator.query('ion-content');
+
       await TestHelper.whenReady(ionContent);
       input = ionContent.querySelector('input');
       spyOn(input, 'blur');
@@ -377,7 +400,7 @@ describe('ModalWrapperComponent', () => {
 
     afterEach(() => {
       // Ensure any observers are destroyed:
-      spectator.component.ngOnDestroy();
+      spectator.fixture.destroy();
     });
 
     describe(`when keyboard is NOT visible`, () => {
@@ -445,7 +468,7 @@ describe('ModalWrapperComponent', () => {
     beforeEach(() => {
       if (spectator.component) {
         // Ensure any observers are destroyed:
-        spectator.component.ngOnDestroy();
+        spectator.fixture.destroy();
       }
       spectator = createComponent({
         props: {
@@ -454,6 +477,7 @@ describe('ModalWrapperComponent', () => {
             component: InputEmbeddedComponent,
           },
         },
+        detectChanges: false,
       });
       // Ensure ion-content gets height
       // or embedded component won't be visible:
@@ -462,11 +486,13 @@ describe('ModalWrapperComponent', () => {
       // Inject the modal spy through modal-wrapper's element.closest method:
       spectator.element.closest = () => ionModalSpy;
       spectator.component.ngOnInit();
+      spyOn(spectator.component.ionContent, 'getScrollElement').and.returnValue(new Promise(null));
+      spectator.detectChanges();
     });
 
     afterEach(() => {
       // Ensure any observers are destroyed:
-      spectator.component.ngOnDestroy();
+      spectator.fixture.destroy();
     });
 
     it(`should call wrapping ion-modal's dismiss() method immediately`, () => {
@@ -513,7 +539,7 @@ describe('ModalWrapperComponent', () => {
 
         afterEach(() => {
           // Ensure any observers are destroyed:
-          spectator.component.ngOnDestroy();
+          spectator.fixture.destroy();
           TestHelper.resetTestWindow();
         });
 

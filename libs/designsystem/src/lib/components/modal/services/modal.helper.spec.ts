@@ -1,6 +1,6 @@
 import { Component, Optional, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { IonicModule, ModalController as IonicModalController } from '@ionic/angular';
-import { createService } from '@ngneat/spectator';
+import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 
 import { DesignTokenHelper } from '../../../helpers/design-token-helper';
 import { WindowRef } from '../../../types/window-ref';
@@ -26,6 +26,7 @@ class InputEmbeddedComponent implements OnInit {
 }
 
 describe('ModalHelper', () => {
+  let spectator: SpectatorService<ModalHelper>;
   let modalHelper: ModalHelper;
   let ionModalController: IonicModalController;
   let overlay: Overlay;
@@ -40,7 +41,7 @@ describe('ModalHelper', () => {
   const size = DesignTokenHelper.size;
   const backgroundColor = DesignTokenHelper.backgroundColor();
 
-  const spectator = createService({
+  const createService = createServiceFactory({
     service: ModalHelper,
     imports: [IonicModule.forRoot({ mode: 'ios', _testing: true })],
     providers: [
@@ -69,6 +70,7 @@ describe('ModalHelper', () => {
   });
 
   beforeEach(() => {
+    spectator = createService();
     modalHelper = spectator.service;
     ionModalController = spectator.inject(IonicModalController);
   });
@@ -142,8 +144,11 @@ describe('ModalHelper', () => {
         it('modal window should not take focus from embedded input after opening', async () => {
           const ionContent = ionModal.querySelector<HTMLElement>('ion-content');
           await TestHelper.whenReady(ionContent);
+          console.log(ionContent);
           const input: HTMLInputElement = ionContent.querySelector<HTMLInputElement>('input');
-          expect(input).toBeDefined();
+          expect(input)
+            .withContext('Input is not defined')
+            .toEqual(jasmine.anything());
           expect(document.activeElement).toEqual(input);
         });
 
