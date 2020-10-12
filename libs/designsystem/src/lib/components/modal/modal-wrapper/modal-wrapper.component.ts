@@ -316,7 +316,8 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     delete this.mutationObserver;
     this.resizeObserverService.unobserve(this.windowRef.document.body);
 
-    if (this.ionContent && this.ionContent.getScrollElement) {
+    const scrollElement = this.ionContent.getScrollElement();
+    if (this.ionContent && scrollElement && scrollElement.then) {
       this.ionContent.getScrollElement().then((scrollElement) => {
         this.resizeObserverService.unobserve(scrollElement);
       });
