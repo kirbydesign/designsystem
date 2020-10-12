@@ -155,7 +155,6 @@ const importedModules = [...exportedModules, OverlayModule];
 
 const providers = [
   ModalController,
-  IconRegistryService,
   ActionSheetHelper,
   ModalHelper,
   AlertHelper,
