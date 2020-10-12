@@ -236,7 +236,8 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
 
   private initializeSwipeActions(): void {
     if (this.swipeActions && this.swipeActions.length) {
-      const isTouchDeviceQuery = '(pointer: coarse) and (hover: none)';
+      // No check for `hover: none`, as Samsung Galaxy will return false on `hover: none` media query:
+      const isTouchDeviceQuery = '(pointer: coarse)';
       this.isSwipingEnabled = this.window.matchMedia(isTouchDeviceQuery).matches;
     }
   }
