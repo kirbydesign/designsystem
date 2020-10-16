@@ -190,6 +190,10 @@ export class PageComponent
     });
   }
 
+  scrollToTop(duration?: number): Promise<void> {
+    return this.content.scrollToTop(duration);
+  }
+
   ngAfterContentChecked(): void {
     if (this.urls.indexOf(this.router.url) === -1) {
       this.urls.push(this.router.url);

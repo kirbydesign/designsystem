@@ -98,6 +98,17 @@ export class PageShowcaseComponent {
     Type: '(Optional) Configuration',
   };
 
+  methods: ShowcaseProperty[] = [
+    {
+      name: 'scrollToTop',
+      description: `
+      Supports scrolling to the top and bottom of the modal using this methods.
+      The method accepts duration as optional param. If not provided the scrolling will happen instantaneously.`,
+      inputValues: ['duration?'],
+      defaultValue: '0',
+    },
+  ];
+
   directives: ShowcaseProperty[] = [
     {
       name: '*kirbyPageTitle',
