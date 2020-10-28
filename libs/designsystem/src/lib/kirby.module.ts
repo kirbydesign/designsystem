@@ -1,10 +1,9 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { OverlayModule } from '@angular/cdk/overlay';
 
-import { appInitialize } from './app-initialize';
 import { InfiniteScrollDirective } from './components/list/directives/infinite-scroll.directive';
 import { ModalWrapperComponent } from './components/modal/modal-wrapper/modal-wrapper.component';
 import { ModalCompactWrapperComponent } from './components/modal/modal-wrapper/compact/modal-compact-wrapper.component';
@@ -53,7 +52,6 @@ import { ActionSheetHelper } from './components/modal/services/action-sheet.help
 import { AlertHelper } from './components/modal/services/alert.helper';
 import { SegmentedControlComponent } from './components/segmented-control/segmented-control.component';
 import { ModalController } from './components/modal/services/modal.controller';
-import { ModalNavigationService } from './components/modal/services/modal-navigation.service';
 import { ModalHelper } from './components/modal/services/modal.helper';
 import { ComponentLoaderDirective } from './components/shared/component-loader.directive';
 import { SlideButtonComponent } from './components/slide-button/slide-button.component';
@@ -159,7 +157,6 @@ const importedModules = [...exportedModules, OverlayModule];
 
 const providers = [
   ModalController,
-  ModalNavigationService,
   IconRegistryService,
   ActionSheetHelper,
   ModalHelper,
@@ -173,12 +170,6 @@ const providers = [
   {
     provide: WindowRef,
     useValue: window,
-  },
-  {
-    provide: APP_INITIALIZER,
-    useFactory: appInitialize,
-    multi: true,
-    deps: [ModalController],
   },
 ];
 
