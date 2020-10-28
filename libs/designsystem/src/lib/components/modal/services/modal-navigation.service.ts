@@ -100,15 +100,25 @@ export class ModalNavigationService {
       : [];
   }
 
-  private isNewParentRoute(navigationEnd: NavigationEnd) {
+  private isNewModalWindow(navigationEnd: NavigationEnd) {
     const currentNavigation = this.router.getCurrentNavigation();
-    if (currentNavigation && currentNavigation.previousNavigation) {
-      const previousRoutePaths = this.getCurrentRoutePaths(currentNavigation.previousNavigation);
-      const currentModalRouteParent = navigationEnd.urlAfterRedirects.split('/(modal:')[0];
-      const previousModalRouteParent = ['', ...previousRoutePaths].join('/');
-      return previousModalRouteParent !== currentModalRouteParent;
+    if (!currentNavigation || !currentNavigation.previousNavigation) {
+      return true;
     }
-    return true;
+    const previousRoutePath = (
+      currentNavigation.previousNavigation.finalUrl ||
+      currentNavigation.previousNavigation.extractedUrl
+    ).toString();
+    const wasModalRoute = this.isModalRoute(previousRoutePath);
+    const isModalRoute = this.isModalRoute(navigationEnd.urlAfterRedirects);
+    if (!wasModalRoute && isModalRoute) {
+      return true;
+    }
+
+    const currentModalRouteParent = navigationEnd.urlAfterRedirects.split('/(modal:')[0];
+    const previousModalRouteParent = previousRoutePath.split('/(modal:')[0];
+
+    return previousModalRouteParent !== currentModalRouteParent;
   }
 
   private navigationEndListener$ = this.router.events.pipe(
@@ -132,7 +142,7 @@ export class ModalNavigationService {
           map(([_, currentNavigation]) => {
             const isNewModalRoute = this.isModalRoute(currentNavigation.urlAfterRedirects);
             // Deactivate modal route if new route is NOT modal OR is outside current parent route:
-            return !isNewModalRoute || this.isNewParentRoute(currentNavigation);
+            return !isNewModalRoute || this.isNewModalWindow(currentNavigation);
           }),
           filter((isDeactivation) => isDeactivation)
         );
@@ -149,8 +159,10 @@ export class ModalNavigationService {
       if (hasModalRoutes) {
         return this.navigationEndListener$.pipe(
           filter((navigationEnd) => modalRouteMap.has(navigationEnd.urlAfterRedirects)),
-          filter((navigationEnd) => this.isNewParentRoute(navigationEnd)),
-          map(() => this.getCurrentActivatedRoute())
+          map((navigationEnd) => ({
+            route: this.getCurrentActivatedRoute(),
+            isNewModal: this.isNewModalWindow(navigationEnd),
+          }))
         );
       }
     }

@@ -36,14 +36,14 @@ export class ModalController implements OnDestroy {
   }
 
   private onModalRouteActivated() {
-    const navigateOnWillClose = () => {
-      this.modalNavigationService.navigateOutOfModalOutlet();
-    };
+    const navigateOnWillClose = () => this.modalNavigationService.navigateOutOfModalOutlet();
     this.modalRouteActivatedSubscription = this.modalNavigationService
       .modalRouteActivatedFor(this.routeConfig)
       .pipe(filter(() => this.overlays.length === 0))
-      .subscribe(async (route) => {
-        await this.showModalRoute(route, navigateOnWillClose);
+      .subscribe(async (modalRouteActivation) => {
+        if (modalRouteActivation.isNewModal) {
+          await this.showModalRoute(modalRouteActivation.route, navigateOnWillClose);
+        }
       });
   }
 

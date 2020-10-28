@@ -174,6 +174,19 @@ describe('ModalNavigationService', () => {
       subscription.unsubscribe();
     });
 
+    it('should emit when navigating from backdrop route to child modal route within routeConfig', async () => {
+      let modalRouteActivated = false;
+      await zone.run(() => router.navigate(['modal-backdrop']));
+      const subscription = spectator.service
+        .modalRouteActivatedFor(routeConfig)
+        .subscribe((_) => (modalRouteActivated = true));
+
+      await zone.run(() => router.navigate(['modal-backdrop', { outlets: { modal: ['page1'] } }]));
+
+      expect(modalRouteActivated).toBeTrue();
+      subscription.unsubscribe();
+    });
+
     it('should emit when navigating from modal route to another modal route within routeConfig', async () => {
       let modalRouteActivated = false;
       await zone.run(() => router.navigate(['modal-backdrop', { outlets: { modal: ['page1'] } }]));
@@ -189,17 +202,18 @@ describe('ModalNavigationService', () => {
       subscription.unsubscribe();
     });
 
-    it('should NOT emit when navigating from modal route to sibling modal route within routeConfig', async () => {
-      let modalRouteActivated = false;
+    it(`should emit with 'isNewModal=false' when navigating from modal route to sibling modal route within routeConfig`, async () => {
+      let isNewModal: boolean;
       const routeConfig = spectator.inject(ROUTES);
       await zone.run(() => router.navigate(['modal-backdrop', { outlets: { modal: ['page1'] } }]));
       const subscription = spectator.service
         .modalRouteActivatedFor(routeConfig)
-        .subscribe((_) => (modalRouteActivated = true));
+        .subscribe((modalRouteActivation) => (isNewModal = modalRouteActivation.isNewModal));
 
       await zone.run(() => router.navigate(['modal-backdrop', { outlets: { modal: ['page2'] } }]));
 
-      expect(modalRouteActivated).toBeFalse();
+      expect(isNewModal).toBeDefined();
+      expect(isNewModal).toBeFalse();
       subscription.unsubscribe();
     });
 
