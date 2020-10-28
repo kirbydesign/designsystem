@@ -1,4 +1,4 @@
-import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
+import { createServiceFactory, mockProvider, SpectatorService } from '@ngneat/spectator';
 import { Subject, EMPTY, defer } from 'rxjs';
 
 import { Overlay, OverlayEventDetail } from './modal.interfaces';
@@ -14,7 +14,16 @@ describe('modalController', () => {
 
   const createService = createServiceFactory({
     service: ModalController,
-    mocks: [ActionSheetHelper, AlertHelper, ModalHelper, ModalNavigationService],
+    mocks: [ActionSheetHelper, AlertHelper, ModalHelper],
+    providers: [
+      mockProvider(ModalNavigationService, {
+        modalRouteActivated$: EMPTY,
+        modalRouteDeactivated$: EMPTY,
+        modalRouteActivatedFor: jasmine
+          .createSpy('modalRouteActivatedForSpy')
+          .and.returnValue(EMPTY),
+      }),
+    ],
   });
 
   let modalHelperSpy: jasmine.SpyObj<ModalHelper>;
@@ -41,21 +50,23 @@ describe('modalController', () => {
 
   describe('initialize', () => {
     it('should subscribe to modal route activation', async () => {
-      let subscribedToActivated = false;
-      let subscribedToDeActivated = false;
-      modalNavigationServiceSpy.modalRouteActivated$ = defer(() => {
-        subscribedToActivated = true;
-        return EMPTY;
-      });
+      modalNavigationServiceSpy.modalRouteActivatedFor.calls.reset();
+
+      modalController['initialize']();
+
+      expect(modalNavigationServiceSpy.modalRouteActivatedFor).toHaveBeenCalledTimes(1);
+    });
+
+    it('should subscribe to modal route deactivation', async () => {
+      let subscribedToDeactivated = false;
       modalNavigationServiceSpy.modalRouteDeactivated$ = defer(() => {
-        subscribedToDeActivated = true;
+        subscribedToDeactivated = true;
         return EMPTY;
       });
 
-      modalController.initialize();
+      modalController['initialize']();
 
-      expect(subscribedToActivated).toBeTrue();
-      expect(subscribedToDeActivated).toBeTrue();
+      expect(subscribedToDeactivated).toBeTrue();
     });
   });
 
