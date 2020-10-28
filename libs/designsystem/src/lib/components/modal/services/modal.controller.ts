@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Inject, Injectable, Optional } from '@angular/core';
+import { ActivatedRoute, Routes, ROUTES } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
 import { KirbyAnimation } from '../../../animation/kirby-animation';
@@ -21,12 +21,21 @@ export class ModalController {
     private modalHelper: ModalHelper,
     private actionSheetHelper: ActionSheetHelper,
     private alertHelper: AlertHelper,
-    private modalNavigationService: ModalNavigationService
-  ) {}
+    private modalNavigationService: ModalNavigationService,
+    @Optional() @Inject(ROUTES) private routeConfig: Routes[]
+  ) {
+    this.initialize();
+  }
+
+  private initialize() {
+    this.onModalRouteActivated();
+    this.onModalRouteDeActivated(); // TODO: Do we want to close modal when routing out of modal route? Or should the code that navigates close the window??
+  }
 
   private onModalRouteActivated() {
     const navigateOnWillClose = () => this.modalNavigationService.navigateOutOfModalOutlet();
-    this.modalNavigationService.modalRouteActivated$
+    this.modalNavigationService
+      .modalRouteActivatedFor(this.routeConfig)
       .pipe(filter(() => this.overlays.length === 0))
       .subscribe(async (route) => {
         await this.showModalRoute(route, navigateOnWillClose);
@@ -39,11 +48,6 @@ export class ModalController {
       .subscribe(async () => {
         await this.hideAll(); // TODO: Should we just hide all or specifically close the modal route overlay???
       });
-  }
-
-  public initialize() {
-    this.onModalRouteActivated();
-    this.onModalRouteDeActivated(); // TODO: Do we want to close modal when routing out of modal route? Or should the code that navigates close the window??
   }
 
   public async showModal(config: ModalConfig, onClose?: (data?: any) => void): Promise<void> {
