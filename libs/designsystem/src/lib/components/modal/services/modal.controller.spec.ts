@@ -1,5 +1,5 @@
 import { createServiceFactory, mockProvider, SpectatorService } from '@ngneat/spectator';
-import { Subject, EMPTY, defer } from 'rxjs';
+import { Subject, EMPTY } from 'rxjs';
 
 import { Overlay, OverlayEventDetail } from './modal.interfaces';
 import { ModalController } from './modal.controller';
@@ -18,9 +18,11 @@ describe('modalController', () => {
     providers: [
       mockProvider(ModalNavigationService, {
         modalRouteActivated$: EMPTY,
-        modalRouteDeactivated$: EMPTY,
         modalRouteActivatedFor: jasmine
           .createSpy('modalRouteActivatedForSpy')
+          .and.returnValue(EMPTY),
+        modalRouteDeactivatedFor: jasmine
+          .createSpy('modalRouteDeactivatedForSpy')
           .and.returnValue(EMPTY),
       }),
     ],
@@ -58,15 +60,11 @@ describe('modalController', () => {
     });
 
     it('should subscribe to modal route deactivation', async () => {
-      let subscribedToDeactivated = false;
-      modalNavigationServiceSpy.modalRouteDeactivated$ = defer(() => {
-        subscribedToDeactivated = true;
-        return EMPTY;
-      });
+      modalNavigationServiceSpy.modalRouteDeactivatedFor.calls.reset();
 
       modalController['initialize']();
 
-      expect(subscribedToDeactivated).toBeTrue();
+      expect(modalNavigationServiceSpy.modalRouteDeactivatedFor).toHaveBeenCalledTimes(1);
     });
   });
 

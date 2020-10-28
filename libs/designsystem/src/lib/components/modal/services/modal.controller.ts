@@ -1,5 +1,6 @@
-import { Inject, Injectable, Optional } from '@angular/core';
+import { Inject, Injectable, OnDestroy, Optional } from '@angular/core';
 import { ActivatedRoute, Routes, ROUTES } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
 import { KirbyAnimation } from '../../../animation/kirby-animation';
@@ -13,9 +14,11 @@ import { ModalNavigationService } from './modal-navigation.service';
 import { Overlay } from './modal.interfaces';
 
 @Injectable()
-export class ModalController {
+export class ModalController implements OnDestroy {
   private overlays: Overlay[] = [];
   private readonly noOverlayRegisteredErrorMessage = 'No modal overlays are currently registered';
+  private modalRouteActivatedSubscription: Subscription;
+  private modalRouteDeactivatedSubscription: Subscription;
 
   constructor(
     private modalHelper: ModalHelper,
@@ -29,12 +32,14 @@ export class ModalController {
 
   private initialize() {
     this.onModalRouteActivated();
-    this.onModalRouteDeActivated(); // TODO: Do we want to close modal when routing out of modal route? Or should the code that navigates close the window??
+    this.onModalRouteDeactivated(); // TODO: Do we want to close modal when routing out of modal route? Or should the code that navigates close the window??
   }
 
   private onModalRouteActivated() {
-    const navigateOnWillClose = () => this.modalNavigationService.navigateOutOfModalOutlet();
-    this.modalNavigationService
+    const navigateOnWillClose = () => {
+      this.modalNavigationService.navigateOutOfModalOutlet();
+    };
+    this.modalRouteActivatedSubscription = this.modalNavigationService
       .modalRouteActivatedFor(this.routeConfig)
       .pipe(filter(() => this.overlays.length === 0))
       .subscribe(async (route) => {
@@ -42,11 +47,14 @@ export class ModalController {
       });
   }
 
-  private onModalRouteDeActivated() {
-    this.modalNavigationService.modalRouteDeactivated$
-      .pipe(filter(() => this.overlays.length > 0))
+  private onModalRouteDeactivated() {
+    this.modalRouteDeactivatedSubscription = this.modalNavigationService
+      .modalRouteDeactivatedFor(this.routeConfig)
+      .pipe(
+        filter(() => this.overlays.length > 0) // TODO: This also fires when closing overlay - should we check for isClosing??
+      )
       .subscribe(async () => {
-        await this.hideAll(); // TODO: Should we just hide all or specifically close the modal route overlay???
+        await this.hideAll();
       });
   }
 
@@ -163,5 +171,14 @@ export class ModalController {
         await overlay.dismiss();
       })
     );
+  }
+
+  ngOnDestroy() {
+    if (this.modalRouteActivatedSubscription) {
+      this.modalRouteActivatedSubscription.unsubscribe();
+    }
+    if (this.modalRouteDeactivatedSubscription) {
+      this.modalRouteDeactivatedSubscription.unsubscribe();
+    }
   }
 }
