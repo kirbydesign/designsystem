@@ -33,16 +33,22 @@ navigateToModalRoute(path: string | string[]) {
 <a kirbyModalRouterLink="child-route-presented-in-modal">Open Modal</a>
 
 <!-- Relative path to parent route + modal: -->
+<a kirbyModalRouterLink="../main-route-presented-behind-the-modal/child-route-presented-in-modal">Navigate to Modal</a>
+<!-- OR using string array: -->
 <a [kirbyModalRouterLink]="['../', 'main-route-presented-behind-the-modal', 'child-route-presented-in-modal']">Navigate to Modal</a>
 
 <!-- Absolute path to parent route + modal: -->
 <a [kirbyModalRouterLink]="['/home', 'main-route-presented-behind-the-modal', 'child-route-presented-in-modal']">Navigate to Modal</a>`,
 
-  modalControllerForModalOutletCodeSnippet: `// Relative path when opened from parent component:
+  modalControllerForModalOutletCodeSnippet: `import { ModalController } from '@kirbydesign/designsystem';
+
+// Relative path when opened from parent component:
 modalController.navigateToModal('child-route-presented-in-modal');
 
 // Relative path when opened from another component:
 modalController.navigateToModal(['../', 'main-route-presented-behind-the-modal', 'child-route-presented-in-modal']);
+// OR using plain string:
+modalController.navigateToModal('../main-route-presented-behind-the-modal/child-route-presented-in-modal');
 
 // Absolute path when opened from another component:
 modalController.navigateToModal(['/home', 'main-route-presented-behind-the-modal', 'child-route-presented-in-modal']);`,
@@ -50,20 +56,22 @@ modalController.navigateToModal(['/home', 'main-route-presented-behind-the-modal
   routerLinkWithinModalOutletCodeSnippet: `<!-- Relative path to sibling modal route: -->
 <a routerLink="../second-child-route-presented-in-modal">Page 2</a>`,
 
-  modalControllerWithinModalOutletCodeSnippet: `// Using Angular Router:
-constructor(private router: Router, private route: ActivatedRoute) {}
+  modalControllerWithinModalOutletCodeSnippet: `// Using Kirby ModalController:
+import { ModalController } from '@kirbydesign/designsystem';
 
-navigate() {
-  this.router.navigate(['../second-child-route-presented-in-modal'], { relativeTo: this.route });
-}
-
-// OR using Kirby ModalController:
 constructor(private modalController: ModalController) {}
 
 navigate() {
   // Relative path to sibling modal route:
   modalController.navigateWithinModal('../second-child-route-presented-in-modal');    
-}`,
+}
+
+// OR using Angular Router:
+constructor(private router: Router, private route: ActivatedRoute) {}
+
+navigate() {
+  this.router.navigate(['../second-child-route-presented-in-modal'], { relativeTo: this.route });
+} `,
 };
 
 @Component({
