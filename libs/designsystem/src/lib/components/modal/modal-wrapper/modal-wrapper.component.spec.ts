@@ -236,7 +236,6 @@ describe('ModalWrapperComponent', () => {
     it('should move embedded footer to wrapper component', () => {
       const ionContentElement = spectator.query('ion-content');
       const embeddedComponentElement = ionContentElement.firstElementChild;
-      console.log('embedded', embeddedComponentElement);
       const embeddedFooter = embeddedComponentElement.querySelector('kirby-modal-footer');
       expect(embeddedFooter).toBeNull();
       const footerAsWrapperChild = spectator.element.querySelector(':scope > kirby-modal-footer');
