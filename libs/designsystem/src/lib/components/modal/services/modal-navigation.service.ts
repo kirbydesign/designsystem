@@ -170,11 +170,11 @@ export class ModalNavigationService {
     return EMPTY;
   }
 
-  async navigateToModal(path: string | string[], route?: ActivatedRoute): Promise<boolean> {
+  async navigateToModal(path: string | string[]): Promise<boolean> {
     const commands = Array.isArray(path) ? path : path.split('/');
     const childPath = commands.pop();
     const result = await this.router.navigate([...commands, { outlets: { modal: [childPath] } }], {
-      relativeTo: route || this.getCurrentActivatedRoute(),
+      relativeTo: this.getCurrentActivatedRoute(),
     });
     return result;
   }
