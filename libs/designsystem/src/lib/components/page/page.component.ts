@@ -76,6 +76,14 @@ export class PageContentDirective {
 }
 
 @Component({
+  selector: 'kirby-page-title',
+  template: `
+    <ng-content></ng-content>
+  `,
+})
+export class PageTitleComponent {}
+
+@Component({
   selector: 'kirby-page-content',
   template: `
     <ng-content></ng-content>

@@ -9,6 +9,7 @@ import {
   PageActionsDirective,
   PageContentComponent,
   PageContentDirective,
+  PageTitleComponent,
   PageTitleDirective,
   PageToolbarTitleDirective,
 } from './page.component';
@@ -20,6 +21,7 @@ import {
     PageActionsDirective,
     PageContentComponent,
     PageContentDirective,
+    PageTitleComponent,
     PageTitleDirective,
     PageToolbarTitleDirective,
   ],
@@ -30,6 +32,7 @@ import {
     PageActionsDirective,
     PageContentComponent,
     PageContentDirective,
+    PageTitleComponent,
     PageTitleDirective,
     PageToolbarTitleDirective,
     FitHeadingModule,

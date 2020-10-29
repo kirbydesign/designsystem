@@ -3,6 +3,7 @@ import { tick, fakeAsync } from '@angular/core/testing';
 import { IonToolbar, IonHeader, IonTitle, IonButtons, IonContent } from '@ionic/angular';
 import { MockComponents } from 'ng-mocks';
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { KirbyAnimation } from '../../../animation/kirby-animation';
 import { TestHelper } from '../../../testing/test-helper';
@@ -51,6 +52,7 @@ describe('ModalWrapperComponent', () => {
 
   const createComponent = createComponentFactory({
     component: ModalWrapperComponent,
+    imports: [RouterTestingModule],
     entryComponents: [
       StaticFooterEmbeddedComponent,
       DynamicFooterEmbeddedComponent,
