@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRoute, Navigation, NavigationEnd, Route, Router, Routes } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Route, Router, Routes } from '@angular/router';
 import { EMPTY } from 'rxjs';
 import { filter, map, pairwise } from 'rxjs/operators';
 
@@ -12,7 +12,7 @@ export class ModalNavigationService {
   }
 
   private getCurrentActivatedRoute() {
-    let childRoute = this.route.firstChild;
+    let childRoute = this.route.root;
     while (childRoute.firstChild) {
       childRoute = childRoute.firstChild;
     }
@@ -24,29 +24,36 @@ export class ModalNavigationService {
     let modalRoutes: string[] = [];
     const moduleRootPaths = this.getModuleRootPath(flattenedRoutes);
     if (moduleRootPaths) {
-      modalRoutes = this.getModalRoutePaths(flattenedRoutes, ['', ...moduleRootPaths]);
+      modalRoutes = this.getModalRoutePaths(flattenedRoutes, moduleRootPaths);
     }
     return new Map(modalRoutes.map((modalRoute) => [modalRoute, modalRoute]));
   }
 
   private getModuleRootPath(routes: Routes) {
-    const currentRoutePaths = this.getCurrentRoutePaths(this.router.getCurrentNavigation());
+    const currentRoutePaths = this.getCurrentRoutePaths();
     this.removeChildSegments(currentRoutePaths, routes);
     return currentRoutePaths;
   }
 
-  private getCurrentRoutePaths(navigation: Navigation) {
-    if (!navigation) return [];
+  private getCurrentRoutePaths() {
+    let childRoute = this.route.snapshot.root;
+    while (childRoute.firstChild) {
+      childRoute = childRoute.firstChild;
+    }
+    const currentBackdropRoutePath = childRoute.pathFromRoot.filter(
+      (route) => route.outlet !== 'modal'
+    );
 
-    const urlTree = navigation.finalUrl || navigation.extractedUrl; // finalUrl not always available, fallback to extractedUrl
-    const primaryOutletKey = 'primary';
-    const primaryUrlSegmentGroup = urlTree.root.children[primaryOutletKey];
-    const primaryUrlSegments = (primaryUrlSegmentGroup && primaryUrlSegmentGroup.segments) || [];
-    return primaryUrlSegments.map((segment) => segment.path);
+    const rootPath = [''];
+    return rootPath.concat(
+      ...currentBackdropRoutePath.map((route) =>
+        route.url.filter((segment) => !!segment.path).map((segment) => segment.path)
+      )
+    );
   }
 
   private removeChildSegments(currentRoutePaths: string[], routes: Routes) {
-    if (!currentRoutePaths || !currentRoutePaths.length) return;
+    if (!currentRoutePaths.length) return;
 
     const moduleRelativePaths = this.getRoutePaths(routes, ['']);
     moduleRelativePaths.sort().reverse(); // Ensure child paths are evaluated first
@@ -125,11 +132,23 @@ export class ModalNavigationService {
     filter((event): event is NavigationEnd => event instanceof NavigationEnd)
   );
 
-  modalRouteActivated$ = this.navigationEndListener$.pipe(
-    map((event) => this.isModalRoute(event.urlAfterRedirects)),
-    filter((isModalRoute) => isModalRoute),
-    map(() => this.getCurrentActivatedRoute())
-  );
+  modalRouteActivatedFor(routeConfig: Routes[]) {
+    if (Array.isArray(routeConfig)) {
+      const modalRouteMap = this.getModalRouteMap(routeConfig);
+      const hasModalRoutes = modalRouteMap.size > 0;
+
+      if (hasModalRoutes) {
+        return this.navigationEndListener$.pipe(
+          filter((navigationEnd) => modalRouteMap.has(navigationEnd.urlAfterRedirects)),
+          map((navigationEnd) => ({
+            route: this.getCurrentActivatedRoute(),
+            isNewModal: this.isNewModalWindow(navigationEnd),
+          }))
+        );
+      }
+    }
+    return EMPTY;
+  }
 
   modalRouteDeactivatedFor(routeConfig: Routes[]) {
     if (Array.isArray(routeConfig)) {
@@ -145,24 +164,6 @@ export class ModalNavigationService {
             return !isNewModalRoute || this.isNewModalWindow(currentNavigation);
           }),
           filter((isDeactivation) => isDeactivation)
-        );
-      }
-    }
-    return EMPTY;
-  }
-
-  modalRouteActivatedFor(routeConfig: Routes[]) {
-    if (Array.isArray(routeConfig)) {
-      const modalRouteMap = this.getModalRouteMap(routeConfig);
-      const hasModalRoutes = modalRouteMap.size > 0;
-
-      if (hasModalRoutes) {
-        return this.navigationEndListener$.pipe(
-          filter((navigationEnd) => modalRouteMap.has(navigationEnd.urlAfterRedirects)),
-          map((navigationEnd) => ({
-            route: this.getCurrentActivatedRoute(),
-            isNewModal: this.isNewModalWindow(navigationEnd),
-          }))
         );
       }
     }

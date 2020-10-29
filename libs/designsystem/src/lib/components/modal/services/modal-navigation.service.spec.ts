@@ -2,6 +2,7 @@ import { Component, NgZone } from '@angular/core';
 import { Router, Routes, ROUTES } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
+import { EMPTY } from 'rxjs';
 
 import { ModalNavigationService } from './modal-navigation.service';
 
@@ -40,16 +41,6 @@ describe('ModalNavigationService', () => {
               outlet: 'modal',
               component: ModalPageComponent,
             },
-            {
-              path: 'subbackdrop',
-              children: [
-                {
-                  path: 'page3',
-                  outlet: 'modal',
-                  component: ModalPageComponent,
-                },
-              ],
-            },
           ],
         },
         {
@@ -65,16 +56,6 @@ describe('ModalNavigationService', () => {
               path: 'page2',
               outlet: 'modal',
               component: ModalPageComponent,
-            },
-            {
-              path: 'subbackdrop',
-              children: [
-                {
-                  path: 'page3',
-                  outlet: 'modal',
-                  component: ModalPageComponent,
-                },
-              ],
             },
           ],
         },
@@ -92,73 +73,6 @@ describe('ModalNavigationService', () => {
 
   it('should create', () => {
     expect(spectator.service).toBeTruthy();
-  });
-
-  describe('modalRouteActivated$', () => {
-    it('should emit on modal routes', async () => {
-      let modalRouteActivated = false;
-      const subscription = spectator.service.modalRouteActivated$.subscribe(
-        (_) => (modalRouteActivated = true)
-      );
-
-      await zone.run(() => router.navigate(['modal-backdrop', { outlets: { modal: ['page1'] } }]));
-
-      expect(modalRouteActivated).toBeTrue();
-      subscription.unsubscribe();
-    });
-
-    it('should NOT emit on non-modal routes', async () => {
-      let modalRouteActivated = false;
-      const subscription = spectator.service.modalRouteActivated$.subscribe(
-        (_) => (modalRouteActivated = true)
-      );
-
-      await zone.run(() => router.navigate(['']));
-
-      expect(modalRouteActivated).toBeFalse();
-      subscription.unsubscribe();
-    });
-  });
-
-  describe('modalRouteDeactivatedFor', () => {
-    it('should emit when navigating away from modal route', async () => {
-      let modalRouteDeactivated = false;
-      const subscription = spectator.service
-        .modalRouteDeactivatedFor(routeConfig)
-        .subscribe((_) => (modalRouteDeactivated = true));
-      await zone.run(() => router.navigate(['modal-backdrop', { outlets: { modal: ['page1'] } }]));
-
-      await zone.run(() => router.navigate(['modal-backdrop']));
-
-      expect(modalRouteDeactivated).toBeTrue();
-      subscription.unsubscribe();
-    });
-
-    it('should NOT emit on non-modal routes', async () => {
-      let modalRouteDeactivated = false;
-      const subscription = spectator.service
-        .modalRouteDeactivatedFor(routeConfig)
-        .subscribe((_) => (modalRouteDeactivated = true));
-
-      await zone.run(() => router.navigate(['modal-backdrop']));
-      await zone.run(() => router.navigate(['']));
-
-      expect(modalRouteDeactivated).toBeFalse();
-      subscription.unsubscribe();
-    });
-
-    it('should NOT emit when navigating from modal route to another modal route', async () => {
-      let modalRouteDeactivated = false;
-      const subscription = spectator.service
-        .modalRouteDeactivatedFor(routeConfig)
-        .subscribe((_) => (modalRouteDeactivated = true));
-
-      await zone.run(() => router.navigate(['modal-backdrop', { outlets: { modal: ['page1'] } }]));
-      await zone.run(() => router.navigate(['modal-backdrop', { outlets: { modal: ['page2'] } }]));
-
-      expect(modalRouteDeactivated).toBeFalse();
-      subscription.unsubscribe();
-    });
   });
 
   describe('modalRouteActivatedFor', () => {
@@ -250,6 +164,57 @@ describe('ModalNavigationService', () => {
 
       expect(modalRouteActivated).toBeFalse();
       subscription.unsubscribe();
+    });
+
+    it('should NEVER emit when routeConfig is null', async () => {
+      const actual = spectator.service.modalRouteActivatedFor(null);
+      expect(actual).toEqual(EMPTY);
+    });
+  });
+
+  describe('modalRouteDeactivatedFor', () => {
+    it('should emit when navigating away from modal route', async () => {
+      let modalRouteDeactivated = false;
+      const subscription = spectator.service
+        .modalRouteDeactivatedFor(routeConfig)
+        .subscribe((_) => (modalRouteDeactivated = true));
+      await zone.run(() => router.navigate(['modal-backdrop', { outlets: { modal: ['page1'] } }]));
+
+      await zone.run(() => router.navigate(['modal-backdrop']));
+
+      expect(modalRouteDeactivated).toBeTrue();
+      subscription.unsubscribe();
+    });
+
+    it('should NOT emit on non-modal routes', async () => {
+      let modalRouteDeactivated = false;
+      const subscription = spectator.service
+        .modalRouteDeactivatedFor(routeConfig)
+        .subscribe((_) => (modalRouteDeactivated = true));
+
+      await zone.run(() => router.navigate(['modal-backdrop']));
+      await zone.run(() => router.navigate(['']));
+
+      expect(modalRouteDeactivated).toBeFalse();
+      subscription.unsubscribe();
+    });
+
+    it('should NOT emit when navigating from modal route to another modal route', async () => {
+      let modalRouteDeactivated = false;
+      const subscription = spectator.service
+        .modalRouteDeactivatedFor(routeConfig)
+        .subscribe((_) => (modalRouteDeactivated = true));
+
+      await zone.run(() => router.navigate(['modal-backdrop', { outlets: { modal: ['page1'] } }]));
+      await zone.run(() => router.navigate(['modal-backdrop', { outlets: { modal: ['page2'] } }]));
+
+      expect(modalRouteDeactivated).toBeFalse();
+      subscription.unsubscribe();
+    });
+
+    it('should NEVER emit when routeConfig is null', async () => {
+      const actual = spectator.service.modalRouteDeactivatedFor(null);
+      expect(actual).toEqual(EMPTY);
     });
   });
 });

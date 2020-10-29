@@ -1,4 +1,5 @@
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 
 import { DrawerSupplementaryAction } from './drawer-supplementary-action';
 
@@ -9,6 +10,7 @@ export interface ModalConfig {
   title?: string;
   component: any;
   modalRoute?: ActivatedRoute;
+  siblingModalRouteActivated$?: Observable<ActivatedRoute>;
   flavor?: 'modal' | 'drawer' | 'compact';
   /**
    * @deprecated Will be removed in next major version.

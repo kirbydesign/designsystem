@@ -1,7 +1,7 @@
 import { Inject, Injectable, OnDestroy, Optional } from '@angular/core';
 import { ActivatedRoute, Routes, ROUTES } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { filter, map, takeUntil } from 'rxjs/operators';
 
 import { KirbyAnimation } from '../../../animation/kirby-animation';
 import { ActionSheetConfig } from '../action-sheet/config/action-sheet-config';
@@ -17,8 +17,7 @@ import { Overlay } from './modal.interfaces';
 export class ModalController implements OnDestroy {
   private overlays: Overlay[] = [];
   private readonly noOverlayRegisteredErrorMessage = 'No modal overlays are currently registered';
-  private modalRouteActivatedSubscription: Subscription;
-  private modalRouteDeactivatedSubscription: Subscription;
+  private destroy$ = new Subject<void>();
 
   constructor(
     private modalHelper: ModalHelper,
@@ -36,21 +35,38 @@ export class ModalController implements OnDestroy {
   }
 
   private onModalRouteActivated() {
-    const navigateOnWillClose = () => this.modalNavigationService.navigateOutOfModalOutlet();
-    this.modalRouteActivatedSubscription = this.modalNavigationService
-      .modalRouteActivatedFor(this.routeConfig)
-      .pipe(filter(() => this.overlays.length === 0))
+    const navigateOnWillClose = () => {
+      this.modalNavigationService.navigateOutOfModalOutlet();
+    };
+    const modalRouteActivated$ = this.modalNavigationService.modalRouteActivatedFor(
+      this.routeConfig
+    );
+    const siblingModalRouteActivated$ = modalRouteActivated$.pipe(
+      filter((modalRouteActivation) => !modalRouteActivation.isNewModal),
+      map((modalRouteActivation) => modalRouteActivation.route)
+    );
+
+    modalRouteActivated$
+      .pipe(
+        takeUntil(this.destroy$),
+        filter(() => this.overlays.length === 0)
+      )
       .subscribe(async (modalRouteActivation) => {
         if (modalRouteActivation.isNewModal) {
-          await this.showModalRoute(modalRouteActivation.route, navigateOnWillClose);
+          await this.showModalRoute(
+            modalRouteActivation.route,
+            siblingModalRouteActivated$,
+            navigateOnWillClose
+          );
         }
       });
   }
 
   private onModalRouteDeactivated() {
-    this.modalRouteDeactivatedSubscription = this.modalNavigationService
+    this.modalNavigationService
       .modalRouteDeactivatedFor(this.routeConfig)
       .pipe(
+        takeUntil(this.destroy$),
         filter(() => this.overlays.length > 0) // TODO: This also fires when closing overlay - should we check for isClosing??
       )
       .subscribe(async () => {
@@ -75,11 +91,13 @@ export class ModalController implements OnDestroy {
 
   private async showModalRoute(
     modalRoute: ActivatedRoute,
-    onWillClose?: (data?: any) => void
+    siblingModalRouteActivated$: Observable<ActivatedRoute>,
+    onWillClose: (data?: any) => void
   ): Promise<void> {
     const config: ModalConfig = {
       component: null,
       modalRoute: modalRoute,
+      siblingModalRouteActivated$: siblingModalRouteActivated$,
       flavor: 'modal', // Todo: Should it be possible to specify flavor as data in RouteConfig?
     };
     await this.showAndRegisterOverlay(
@@ -173,12 +191,8 @@ export class ModalController implements OnDestroy {
     );
   }
 
-  ngOnDestroy() {
-    if (this.modalRouteActivatedSubscription) {
-      this.modalRouteActivatedSubscription.unsubscribe();
-    }
-    if (this.modalRouteDeactivatedSubscription) {
-      this.modalRouteDeactivatedSubscription.unsubscribe();
-    }
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

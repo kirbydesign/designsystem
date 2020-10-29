@@ -17,7 +17,6 @@ describe('modalController', () => {
     mocks: [ActionSheetHelper, AlertHelper, ModalHelper],
     providers: [
       mockProvider(ModalNavigationService, {
-        modalRouteActivated$: EMPTY,
         modalRouteActivatedFor: jasmine
           .createSpy('modalRouteActivatedForSpy')
           .and.returnValue(EMPTY),

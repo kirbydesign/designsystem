@@ -14,16 +14,15 @@ import {
   QueryList,
   ComponentFactoryResolver,
 } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import { IonContent, IonTitle } from '@ionic/angular';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { first, takeUntil } from 'rxjs/operators';
 
 import { KirbyAnimation } from '../../../animation/kirby-animation';
 import { ModalConfig } from './config/modal-config';
 import { COMPONENT_PROPS } from './config/modal-config.helper';
 import { Modal } from '../services/modal.interfaces';
-import { ModalNavigationService } from '../services/modal-navigation.service';
 import { ButtonComponent } from '../../button/button.component';
 import { ResizeObserverService } from '../../shared/resize-observer/resize-observer.service';
 import { ResizeObserverEntry } from '../../shared/resize-observer/types/resize-observer-entry';
@@ -88,8 +87,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     private elementRef: ElementRef<HTMLElement>,
     private renderer: Renderer2,
     private resizeObserverService: ResizeObserverService,
-    private componentFactoryResolver: ComponentFactoryResolver,
-    private modalNavigationService: ModalNavigationService
+    private componentFactoryResolver: ComponentFactoryResolver
   ) {
     this.observeViewportResize();
   }
@@ -107,24 +105,23 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
 
   private initializeModalRoute() {
     if (this.config.modalRoute) {
-      this.onModalRouteActivated();
+      this.onSiblingModalRouteActivated(this.config.siblingModalRouteActivated$);
       // Load component from modal-route inside router-outlet:
       this.routerOutlet.activateWith(this.config.modalRoute, this.componentFactoryResolver);
     }
   }
 
-  private onModalRouteActivated() {
-    this.modalNavigationService.modalRouteActivated$
-      .pipe(takeUntil(this.willClose$))
-      .subscribe((route) => {
-        if (this.routerOutlet.isActivated) {
-          this.mutationObserver.disconnect();
-          this.routerOutlet.deactivate();
-          this.clearEmbeddedElements();
-        }
-        this.routerOutlet.activateWith(route, this.componentFactoryResolver);
-        this.checkForEmbeddedElements();
-      });
+  private onSiblingModalRouteActivated(siblingModalRouteActivated$?: Observable<ActivatedRoute>) {
+    if (!siblingModalRouteActivated$) return;
+    siblingModalRouteActivated$.pipe(takeUntil(this.willClose$)).subscribe((route) => {
+      if (this.routerOutlet.isActivated) {
+        this.mutationObserver.disconnect();
+        this.routerOutlet.deactivate();
+        this.clearEmbeddedElements();
+      }
+      this.routerOutlet.activateWith(route, this.componentFactoryResolver);
+      this.checkForEmbeddedElements();
+    });
   }
 
   ngAfterViewInit(): void {
@@ -348,6 +345,9 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   }
 
   ngOnDestroy() {
+    if (this.routerOutlet.isActivated) {
+      this.routerOutlet.deactivate();
+    }
     //clean up the observer
     this.mutationObserver.disconnect();
     delete this._mutationObserver;
