@@ -107,7 +107,7 @@ export class ModalNavigationService {
       : [];
   }
 
-  private isNewModalWindow(navigationEnd: NavigationEnd) {
+  private isNewModalWindow(navigationEnd: NavigationEnd): boolean {
     const currentNavigation = this.router.getCurrentNavigation();
     if (!currentNavigation || !currentNavigation.previousNavigation) {
       return true;
