@@ -52,7 +52,7 @@ export class ModalNavigationService {
     );
   }
 
-  private removeChildSegments(currentRoutePaths: string[], routes: Routes) {
+  private removeChildSegments(currentRoutePaths: string[], routes: Routes): void {
     if (!currentRoutePaths.length) return;
 
     const moduleRelativePaths = this.getRoutePaths(routes, ['']);
