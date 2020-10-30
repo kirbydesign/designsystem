@@ -50,6 +50,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     HTMLIonContentElement
   >;
 
+  private readonly defaultSize = 'medium';
   private mutationObserver: MutationObserver;
   private keyboardVisible = false;
   private toolbarButtons: HTMLButtonElement[] = [];
@@ -81,12 +82,17 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   ngOnInit(): void {
     this.observeViewportResize();
     this.ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
+    this.setModalSize();
     this.listenForIonModalDidPresent();
     this.listenForIonModalWillDismiss();
     this.componentPropsInjector = Injector.create({
       providers: [{ provide: COMPONENT_PROPS, useValue: this.config.componentProps }],
       parent: this.injector,
     });
+  }
+
+  private setModalSize() {
+    this.renderer.addClass(this.ionModalElement, this.config.size || this.defaultSize);
   }
 
   private getAvailableContentHeight(ionModalWrapper: HTMLElement): number {
@@ -104,10 +110,14 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     if (!this.embeddedComponentElement) return;
     const ionModalWrapper = this.elementRef.nativeElement.closest<HTMLElement>('.modal-wrapper');
     const embeddedComponentHeight = this.embeddedComponentElement.getBoundingClientRect().height;
+    const availableHeight = this.getAvailableContentHeight(ionModalWrapper);
 
-    if (embeddedComponentHeight >= this.getAvailableContentHeight(ionModalWrapper)) {
+    this.ionModalElement.style.setProperty('--max-height', `none`);
+
+    if (embeddedComponentHeight >= availableHeight) {
       this.renderer.addClass(ionModalWrapper, 'content-overflows');
     } else {
+      this.ionModalElement.style.setProperty('--max-height', `${ionModalWrapper.clientHeight}px`);
       this.renderer.removeClass(ionModalWrapper, 'content-overflows');
     }
   }
@@ -118,9 +128,11 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
       .firstElementChild as HTMLElement;
 
     this.ionContent.getScrollElement().then((scrollElement) => {
-      // TODO: Do you know how we can access main (scrollElement) of ion-content from scss?
+      this.renderer.setStyle(scrollElement, 'height', '100%');
       this.renderer.setStyle(scrollElement, 'position', 'relative');
-      this.resizeObserverService.observe(scrollElement, () => this.onScrollElementResize());
+      this.resizeObserverService.observe(this.embeddedComponentElement, () =>
+        this.onScrollElementResize()
+      );
     });
   }
 

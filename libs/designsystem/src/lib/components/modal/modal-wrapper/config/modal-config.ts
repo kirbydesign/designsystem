@@ -3,6 +3,7 @@ import { DrawerSupplementaryAction } from './drawer-supplementary-action';
 export interface ModalConfig {
   title: string;
   component: any;
+  size?: 'small' | 'medium' | 'large';
   flavor?: 'modal' | 'drawer' | 'compact';
   /**
    * @deprecated Will be removed in next major version.
