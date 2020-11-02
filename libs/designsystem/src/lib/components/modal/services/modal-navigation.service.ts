@@ -3,11 +3,13 @@ import { ActivatedRoute, NavigationEnd, Route, Router, Routes } from '@angular/r
 import { EMPTY, Observable } from 'rxjs';
 import { filter, first, map, pairwise } from 'rxjs/operators';
 
+import { ModalRouteActivation } from './modal.interfaces';
+
 @Injectable({ providedIn: 'root' })
 export class ModalNavigationService {
   constructor(private router: Router, private route: ActivatedRoute) {}
 
-  private isModalRoute(url: string) {
+  private isModalRoute(url: string): boolean {
     return url.includes('(modal:');
   }
 
