@@ -13,7 +13,7 @@ export class ModalNavigationService {
     return url.includes('(modal:');
   }
 
-  private getCurrentActivatedRoute() {
+  private getCurrentActivatedRoute(): ActivatedRoute {
     let childRoute = this.route.root;
     while (childRoute.firstChild) {
       childRoute = childRoute.firstChild;
