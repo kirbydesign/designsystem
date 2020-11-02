@@ -196,4 +196,8 @@ const entryComponents = [
   entryComponents: entryComponents,
   exports: exports,
 })
-export class KirbyModule {}
+export class KirbyModule {
+  constructor(modalController: ModalController) {
+    modalController.initialize();
+  }
+}
