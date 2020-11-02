@@ -25,9 +25,7 @@ export class ModalController implements OnDestroy {
     private alertHelper: AlertHelper,
     private modalNavigationService: ModalNavigationService,
     @Optional() @Inject(ROUTES) private routeConfig: Routes[]
-  ) {
-    this.initialize();
-  }
+  ) {}
 
   async initialize() {
     await this.onModalRouteActivated();
