@@ -7,7 +7,10 @@ import {
   AfterViewInit,
   ViewChild,
   ElementRef,
+  Renderer2,
+  Inject,
 } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { IonFab, IonFabButton, IonIcon } from '@ionic/angular';
 
 import { ActionSheetComponent } from '../modal/action-sheet/action-sheet.component';
@@ -40,6 +43,8 @@ export class FabSheetComponent implements AfterContentInit, AfterViewInit {
   @ViewChild(IonFabButton, { static: true, read: ElementRef }) ionFabButton: ElementRef<
     HTMLElement
   >;
+
+  constructor(private renderer: Renderer2, @Inject(DOCUMENT) private document: any) {}
 
   ngAfterViewInit(): void {
     const kirbyCloseIcon = kirbyIconSettings.icons.find((icon) => icon.name === 'close');
@@ -78,10 +83,16 @@ export class FabSheetComponent implements AfterContentInit, AfterViewInit {
     fab.close();
     this._isFabSheetOpen = false;
     this._isBackdropVisible = false;
+    this.renderer.removeClass(this.document.body, 'fab-sheet-active');
   }
 
   onFabClick(fab: IonFab) {
     this._isFabSheetOpen = !fab.activated;
+    if (this._isFabSheetOpen) {
+      this.renderer.addClass(this.document.body, 'fab-sheet-active');
+    } else {
+      this.renderer.removeClass(this.document.body, 'fab-sheet-active');
+    }
     setTimeout(() => (this._isBackdropVisible = this.isFabSheetOpen));
   }
 }

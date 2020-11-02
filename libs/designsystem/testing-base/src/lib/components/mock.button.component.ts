@@ -1,6 +1,6 @@
 import { forwardRef, Component, Input } from '@angular/core';
 
-import { ButtonComponent } from '@kirbydesign/designsystem';
+import { ButtonComponent, NotificationColor } from '@kirbydesign/designsystem';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
@@ -17,6 +17,7 @@ import { ButtonComponent } from '@kirbydesign/designsystem';
 export class MockButtonComponent {
   @Input() attentionLevel: '1' | '2' | '3' | '4';
   @Input() isDestructive: boolean;
+  @Input() themeColor: NotificationColor;
   @Input() expand: 'full' | 'block';
   @Input() text: string;
   @Input() isFloating: boolean;

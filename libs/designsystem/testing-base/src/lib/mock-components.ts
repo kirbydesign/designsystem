@@ -12,6 +12,7 @@ import { MockDividerComponent } from './components/mock.divider.component';
 import { MockDropdownComponent } from './components/mock.dropdown.component';
 import { MockEmptyStateComponent } from './components/mock.empty-state.component';
 import { MockFabSheetComponent } from './components/mock.fab-sheet.component';
+import { MockFlagComponent } from './components/mock.flag.component';
 import { MockFormFieldMessageComponent } from './components/mock.form-field-message.component';
 import { MockFormFieldComponent } from './components/mock.form-field.component';
 import { MockInputComponent } from './components/mock.input.component';
@@ -33,10 +34,12 @@ import {
   MockPageToolbarTitleDirective,
   MockPageActionsDirective,
   MockPageContentDirective,
+  MockPageTitleComponent,
   MockPageContentComponent,
   MockPageActionsComponent,
   MockPageComponent,
 } from './components/mock.page.component';
+import { MockProgressCircleComponent } from './components/mock.progress-circle.component';
 import { MockReorderListComponent } from './components/mock.reorder-list.component';
 import { MockRouterOutletComponent } from './components/mock.router-outlet.component';
 import { MockSegmentedControlComponent } from './components/mock.segmented-control.component';
@@ -45,6 +48,7 @@ import { MockSpinnerComponent } from './components/mock.spinner.component';
 import { MockTabButtonComponent } from './components/mock.tab-button.component';
 import { MockTabsComponent } from './components/mock.tabs.component';
 import { MockToggleComponent } from './components/mock.toggle.component';
+import { MockToggleButtonComponent } from './components/mock.toggle-button.component';
 import { MockToolbarComponent } from './components/mock.toolbar.component';
 
 export const MOCK_COMPONENTS = [
@@ -62,6 +66,7 @@ export const MOCK_COMPONENTS = [
   MockDropdownComponent,
   MockEmptyStateComponent,
   MockFabSheetComponent,
+  MockFlagComponent,
   MockFormFieldMessageComponent,
   MockFormFieldComponent,
   MockInputComponent,
@@ -82,9 +87,11 @@ export const MOCK_COMPONENTS = [
   MockPageToolbarTitleDirective,
   MockPageActionsDirective,
   MockPageContentDirective,
+  MockPageTitleComponent,
   MockPageContentComponent,
   MockPageActionsComponent,
   MockPageComponent,
+  MockProgressCircleComponent,
   MockReorderListComponent,
   MockRouterOutletComponent,
   MockSegmentedControlComponent,
@@ -93,5 +100,6 @@ export const MOCK_COMPONENTS = [
   MockTabButtonComponent,
   MockTabsComponent,
   MockToggleComponent,
+  MockToggleButtonComponent,
   MockToolbarComponent,
 ];

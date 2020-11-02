@@ -1,4 +1,8 @@
-@import './libs/designsystem/src/lib/scss/utils';
+@import '../examples.shared';
+
+h1 {
+  text-align: center;
+}
 
 @include media('>medium') {
   .mobile {

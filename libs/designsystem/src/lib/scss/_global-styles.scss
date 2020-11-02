@@ -147,3 +147,19 @@ ion-modal.kirby-overlay {
     }
   }
 }
+
+/*
+ * FAB-sheet backdrop
+*/
+.fab-sheet-active {
+  .tabs-inner,
+  ion-router-outlet,
+  .ion-page {
+    overflow: visible;
+    contain: none !important;
+  }
+
+  ion-tab-bar {
+    z-index: -1;
+  }
+}

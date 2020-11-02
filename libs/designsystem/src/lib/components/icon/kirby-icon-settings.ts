@@ -31,6 +31,7 @@ export const kirbyIconSettings: IconSettings = {
     { name: 'inbox', svg: 'assets/kirby/icons/svg/inbox.svg' },
     { name: 'inbox-outline', svg: 'assets/kirby/icons/svg/inbox-outline.svg' },
     { name: 'information', svg: 'assets/kirby/icons/svg/information.svg' },
+    { name: 'kirby', svg: 'assets/kirby/icons/svg/kirby.svg' },
     { name: 'link', svg: 'assets/kirby/icons/svg/link.svg' },
     { name: 'log-out', svg: 'assets/kirby/icons/svg/log-out.svg' },
     { name: 'menu-outline', svg: 'assets/kirby/icons/svg/menu-outline.svg' },

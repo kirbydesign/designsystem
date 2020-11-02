@@ -3,13 +3,16 @@ import { tick, fakeAsync } from '@angular/core/testing';
 import { IonToolbar, IonHeader, IonTitle, IonButtons, IonContent } from '@ionic/angular';
 import { MockComponents } from 'ng-mocks';
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { KirbyAnimation } from '../../../animation/kirby-animation';
 import { TestHelper } from '../../../testing/test-helper';
+
 import { ButtonComponent } from '../../button/button.component';
 import { IconComponent } from '../../icon/icon.component';
 import { ModalFooterComponent } from '../footer/modal-footer.component';
 import { ModalWrapperComponent } from './modal-wrapper.component';
+import { WindowRef } from '../../../types/window-ref';
 
 @Component({
   template: `
@@ -49,10 +52,17 @@ describe('ModalWrapperComponent', () => {
 
   const createComponent = createComponentFactory({
     component: ModalWrapperComponent,
+    imports: [RouterTestingModule],
     entryComponents: [
       StaticFooterEmbeddedComponent,
       DynamicFooterEmbeddedComponent,
       InputEmbeddedComponent,
+    ],
+    providers: [
+      {
+        provide: WindowRef,
+        useValue: window,
+      },
     ],
     declarations: [
       MockComponents(
@@ -231,6 +241,12 @@ describe('ModalWrapperComponent', () => {
       const footerAsWrapperChild = spectator.element.querySelector(':scope > kirby-modal-footer');
       expect(footerAsWrapperChild).not.toBeNull();
     });
+
+    it('should define custom CSS property --keyboard-offset on embedded footer', () => {
+      const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
+      spectator.component._onKeyboardWillShow({ keyboardHeight: 200 });
+      expect(kirbyModalFooter).toHaveStyle({ '--keyboard-offset': '200px' });
+    });
   });
 
   describe('with embedded component with dynamic footer', () => {
@@ -309,6 +325,19 @@ describe('ModalWrapperComponent', () => {
         embeddedComponent.isEnabled = true;
         spectator.detectChanges();
         expect(footerAsWrapperChild).toHaveClass('enabled');
+        done();
+      });
+    });
+
+    it('should define custom CSS property --keyboard-offset on embedded footer', (done) => {
+      const embeddedComponent = spectator.query(DynamicFooterEmbeddedComponent);
+      embeddedComponent.showFooter = true;
+      spectator.detectChanges();
+
+      setTimeout(() => {
+        const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
+        spectator.component._onKeyboardWillShow({ keyboardHeight: 200 });
+        expect(kirbyModalFooter).toHaveStyle({ '--keyboard-offset': '200px' });
         done();
       });
     });

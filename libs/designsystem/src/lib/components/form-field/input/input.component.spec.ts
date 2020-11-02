@@ -32,6 +32,15 @@ describe('InputComponent', () => {
     expect(element).toHaveComputedStyle({ height: size('xxxl') });
   });
 
+  it('should render with correct width', () => {
+    //window.getComputedStyle() returns width in pixels - so use element.computedStyleMap:
+    const styleWidth = (element as any)
+      .computedStyleMap()
+      .get('width')
+      .toString();
+    expect(styleWidth).toBe('100%');
+  });
+
   it('should render with correct box-sizing', () => {
     expect(element).toHaveComputedStyle({ 'box-sizing': 'border-box' });
   });
@@ -74,6 +83,40 @@ describe('InputComponent', () => {
     expect(onChangeSpy).toHaveBeenCalledTimes(1);
     expect(onChangeSpy).toHaveBeenCalledWith(testValue);
   }));
+
+  describe('when configured with borderless=true', () => {
+    beforeEach(() => {
+      spectator.component.borderless = true;
+      spectator.detectChanges();
+    });
+
+    it('should render with correct padding', () => {
+      expect(element).toHaveComputedStyle({
+        padding: '0px',
+      });
+    });
+
+    it('should render without border-radius', () => {
+      expect(element).toHaveComputedStyle({
+        'border-radius': '0px',
+      });
+    });
+
+    it('should render without box-shadow', () => {
+      expect(element).toHaveComputedStyle({
+        'border-shadow': '',
+      });
+    });
+
+    it('should render with default width', () => {
+      //window.getComputedStyle() returns width in pixels - so use element.computedStyleMap:
+      const styleWidth = (element as any)
+        .computedStyleMap()
+        .get('width')
+        .toString();
+      expect(styleWidth).toBe('auto');
+    });
+  });
 
   describe('when hasError', () => {
     beforeEach(() => {

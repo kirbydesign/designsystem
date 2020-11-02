@@ -21,10 +21,12 @@ import { EmptyStateComponent } from '../empty-state/empty-state.component';
 import { DropdownComponent } from '../dropdown/dropdown.component';
 import { CardComponent } from '../card/card.component';
 import { ItemComponent } from '../item/item.component';
+import { WindowRef } from '../../types/window-ref';
 
 const getColor = DesignTokenHelper.getColor;
 const size = DesignTokenHelper.size;
 const fontSize = DesignTokenHelper.fontSize;
+const fatFingerSize = DesignTokenHelper.fatFingerSize();
 
 describe('ButtonComponent in Kirby Page', () => {
   let spectator: SpectatorHost<PageComponent>;
@@ -40,6 +42,12 @@ describe('ButtonComponent in Kirby Page', () => {
       PageToolbarTitleDirective,
       FitHeadingDirective,
     ],
+    providers: [
+      {
+        provide: WindowRef,
+        useValue: window,
+      },
+    ],
   });
 
   beforeEach(() => {
@@ -53,7 +61,8 @@ describe('ButtonComponent in Kirby Page', () => {
           Test Title
         </ng-template>
         <kirby-page-actions *kirbyPageActions>
-          <button kirby-button>Test Action</button>
+          <button kirby-button class="text">Test Action</button>
+          <button kirby-button class="icon-only">Icon</button>
         </kirby-page-actions>
         <kirby-page-content>
           <p class="my-content">Custom Content...</kirby-page-content>
@@ -68,11 +77,15 @@ describe('ButtonComponent in Kirby Page', () => {
   describe('inside Toolbar', () => {
     let ionToolbar: HTMLElement;
     let actionButtonInHeader: HTMLButtonElement;
+    let actionButtonInHeaderIconOnly: HTMLButtonElement;
 
     beforeEach(() => {
       ionToolbar = spectator.queryHost('ion-toolbar');
       actionButtonInHeader = spectator.queryHost(
-        'ion-toolbar kirby-page-actions button[kirby-button]'
+        'ion-toolbar kirby-page-actions button[kirby-button].text'
+      );
+      actionButtonInHeaderIconOnly = spectator.queryHost(
+        'ion-toolbar kirby-page-actions button[kirby-button].icon-only'
       );
     });
 
@@ -98,6 +111,17 @@ describe('ButtonComponent in Kirby Page', () => {
         'border-width': '1px',
         'border-style': 'solid',
         'border-color': 'transparent',
+      });
+    });
+
+    it('should render with correct size', () => {
+      expect(actionButtonInHeader).toHaveComputedStyle({
+        width: 'auto',
+        height: fatFingerSize,
+      });
+      expect(actionButtonInHeaderIconOnly).toHaveComputedStyle({
+        width: fatFingerSize,
+        height: fatFingerSize,
       });
     });
   });

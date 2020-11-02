@@ -41,6 +41,7 @@ export class DropdownComponent
   implements AfterContentChecked, AfterViewInit, OnDestroy, ControlValueAccessor {
   static readonly OPEN_DELAY_IN_MS = 100;
   private state: 'closed' | 'opening' | 'open' = 'closed';
+  private hasConfiguredSlottedItems = false;
 
   private _items: string[] | any[] = [];
   get items(): string[] | any[] {
@@ -88,6 +89,9 @@ export class DropdownComponent
   @HostBinding('class.error')
   @Input()
   hasError: boolean;
+
+  @Input()
+  size: 'sm' | 'md' = 'md';
 
   @Input()
   tabindex = 0;
@@ -153,7 +157,7 @@ export class DropdownComponent
   @ContentChildren(ItemComponent, { read: ElementRef })
   kirbyItemsSlotted: QueryList<ElementRef<HTMLElement>>;
 
-  private itemClickUnlisten: () => void;
+  private itemClickUnlisten: (() => void)[] = [];
   private intersectionObserverRef: IntersectionObserver;
   private showDropdownTimeoutId;
 
@@ -184,13 +188,15 @@ export class DropdownComponent
   }
 
   ngAfterContentChecked() {
-    if (this.kirbyItemsSlotted.length) {
+    if (!this.hasConfiguredSlottedItems && this.kirbyItemsSlotted.length) {
       this.kirbyItemsSlotted.forEach((kirbyItem, index) => {
         this.renderer.setAttribute(kirbyItem.nativeElement, 'role', 'option');
-        this.itemClickUnlisten = this.renderer.listen(kirbyItem.nativeElement, 'click', () => {
+        const unlisten = this.renderer.listen(kirbyItem.nativeElement, 'click', () => {
           this.onItemSelect(index);
         });
+        this.itemClickUnlisten.push(unlisten);
       });
+      this.hasConfiguredSlottedItems = true;
     }
   }
 
@@ -236,9 +242,9 @@ export class DropdownComponent
               this._vertical = 'up';
             }
           }
-          this.showDropdown();
-          this.changeDetectorRef.detectChanges();
         }
+        this.showDropdown();
+        this.changeDetectorRef.detectChanges();
       };
       this.intersectionObserverRef = new IntersectionObserver(callback, options);
       this.intersectionObserverRef.observe(this.cardElement.nativeElement);
@@ -475,8 +481,9 @@ export class DropdownComponent
   }
 
   ngOnDestroy(): void {
-    if (this.itemClickUnlisten) {
-      this.itemClickUnlisten();
+    let unlisten: () => void;
+    while ((unlisten = this.itemClickUnlisten.pop()) !== undefined) {
+      unlisten();
     }
     if (this.intersectionObserverRef) {
       this.intersectionObserverRef.disconnect();

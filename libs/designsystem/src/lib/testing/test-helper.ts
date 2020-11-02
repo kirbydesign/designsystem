@@ -46,8 +46,33 @@ export class TestHelper {
     }
   }
 
+  public static async whenTrue(
+    pollFunc: () => boolean,
+    timeout: number = 2000,
+    pollInterval: number = 5
+  ): Promise<void> {
+    return new Promise((resolve) => {
+      let timeoutId, intervalId;
+      const pollState = () => {
+        if (pollFunc()) {
+          clearTimeout(timeoutId);
+          clearInterval(intervalId);
+          resolve();
+        }
+      };
+      timeoutId = setTimeout(() => {
+        clearInterval(intervalId);
+        resolve();
+      }, timeout);
+      intervalId = setInterval(pollState, pollInterval);
+    });
+  }
+
   public static getCssProperty(element: Element, propertyName: string) {
-    return window.getComputedStyle(element).getPropertyValue(propertyName);
+    return window
+      .getComputedStyle(element)
+      .getPropertyValue(propertyName)
+      .trim();
   }
 
   public static screensize = {

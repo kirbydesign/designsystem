@@ -1,3 +1,6 @@
+<kirby-page-title>{{
+  componentProps?.flavor === 'drawer' ? 'Nested Drawer Title' : 'Nested Modal Title'
+}}</kirby-page-title>
 <div>
   <p>Hello from the second embedded example component</p>
   <button kirby-button (click)="close()">Hide me</button>

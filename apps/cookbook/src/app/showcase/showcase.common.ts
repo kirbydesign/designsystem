@@ -1,3 +1,4 @@
+import { ProgressCircleShowcaseComponent } from './progress-circle-showcase/progress-circle-showcase.component';
 import { FormFieldShowcaseComponent } from './form-field-showcase/form-field-showcase.component';
 import { ListNoShapeShowcaseComponent } from './list-no-shape-showcase/list-no-shape-showcase.component';
 import { ListSwipeShowcaseComponent } from './list-swipe-showcase/list-swipe-showcase.component';
@@ -37,6 +38,8 @@ import { DividerShowcaseComponent } from '../showcase/divider-showcase/divider-s
 import { DropdownShowcaseComponent } from '~/app/showcase/dropdown-showcase/dropdown-showcase.component';
 import { ReorderListShowcaseComponent } from '../showcase/reorder-list-showcase/reorder-list-showcase.component';
 import { StockChartShowcaseComponent } from './stock-chart-showcase/stock-chart-showcase.component';
+import { FlagShowcaseComponent } from './flag-showcase/flag-showcase.component';
+import { ToggleButtonShowcaseComponent } from './toggle-button-showcase/toggle-button-showcase.component';
 
 export const COMPONENT_IMPORTS: any[] = [ExamplesModule, ShowcaseRoutingModule];
 
@@ -65,6 +68,7 @@ export const COMPONENT_EXPORTS: any[] = [
   AlertShowcaseComponent,
   ToastShowcaseComponent,
   ToggleShowcaseComponent,
+  ToggleButtonShowcaseComponent,
   EmptyStateShowcaseComponent,
   LoadingOverlayShowcaseComponent,
   ToolbarShowcaseComponent,
@@ -77,6 +81,8 @@ export const COMPONENT_EXPORTS: any[] = [
   ReorderListShowcaseComponent,
   DropdownShowcaseComponent,
   StockChartShowcaseComponent,
+  ProgressCircleShowcaseComponent,
+  FlagShowcaseComponent,
 ];
 
 export const COMPONENT_DECLARATIONS: any[] = [...COMPONENT_EXPORTS, ShowcaseComponent];

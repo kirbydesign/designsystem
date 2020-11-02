@@ -3,30 +3,30 @@ import { Component, Inject, Optional, SkipSelf } from '@angular/core';
 import { AlertConfig, ActionSheetConfig, Modal, ModalController } from '@kirbydesign/designsystem';
 import { ModalConfig, COMPONENT_PROPS } from '@kirbydesign/designsystem';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
-import { SecondEmbeddedModalExampleComponent } from '../second-embedded-modal-example/second-embedded-modal-example.component';
 import { KirbyAnimation } from '@kirbydesign/designsystem';
+
+import { SecondEmbeddedModalExampleComponent } from '../second-embedded-modal-example/second-embedded-modal-example.component';
 
 @Component({
   selector: 'cookbook-first-embedded-modal-example',
   templateUrl: './first-embedded-modal-example.component.html',
+  styleUrls: ['./first-embedded-modal-example.component.scss'],
 })
 export class FirstEmbeddedModalExampleComponent {
-  props: { [key: string]: any };
-  showFooter: boolean = true;
+  showFooter = true;
+  snapFooterToKeyboard = false;
 
   constructor(
-    @Inject(COMPONENT_PROPS) componentProps,
+    @Inject(COMPONENT_PROPS) public componentProps,
     private modalController: ModalController,
     private toastController: ToastController,
     @Optional() @SkipSelf() private modal: Modal
   ) {
-    this.props = componentProps;
-    this.showFooter = this.props.showFooter;
+    this.showFooter = componentProps.showFooter;
   }
 
   showNestedModal() {
     const config: ModalConfig = {
-      title: 'Embedded Modal Title',
       flavor: 'modal',
       component: SecondEmbeddedModalExampleComponent,
     };
@@ -37,13 +37,15 @@ export class FirstEmbeddedModalExampleComponent {
 
   showNestedDrawer() {
     const config: ModalConfig = {
-      title: 'Embedded Drawer Title',
       flavor: 'drawer',
       drawerSupplementaryAction: {
         iconName: 'edit',
         action: this.onSupplementaryActionSelect.bind(this),
       },
       component: SecondEmbeddedModalExampleComponent,
+      componentProps: {
+        flavor: 'drawer',
+      },
     };
 
     // supposing no callback needed for the second component
@@ -90,6 +92,10 @@ export class FirstEmbeddedModalExampleComponent {
     this.modal.scrollDisabled = false;
   }
 
+  toggleFooter() {
+    this.showFooter = !this.showFooter;
+  }
+
   close() {
     let someTestData: number = Math.PI;
     this.modal.close(someTestData);
@@ -102,6 +108,10 @@ export class FirstEmbeddedModalExampleComponent {
       durationInMs: 1500,
     };
     this.toastController.showToast(config);
+  }
+
+  onSnapFooterToKeyboardCheckbox(checked: boolean) {
+    this.snapFooterToKeyboard = checked;
   }
 
   onAlertClose(result?: boolean): void {

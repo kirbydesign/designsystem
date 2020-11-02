@@ -12,7 +12,7 @@ import {
   TrackByFunction,
   ContentChildren,
   AfterViewInit,
-  ElementRef,
+  Inject,
 } from '@angular/core';
 
 import {
@@ -29,6 +29,7 @@ import { GroupByPipe } from './pipes/group-by.pipe';
 import { ListSwipeAction } from './list-swipe-action';
 import { ThemeColor } from '../../helpers/theme-color.type';
 import { ItemComponent } from '../item/item.component';
+import { WindowRef } from '../../types/window-ref';
 
 export type ListShape = 'square' | 'rounded' | 'none';
 
@@ -140,7 +141,11 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   groupedItems: any[];
   selectedItem: any;
 
-  constructor(private listHelper: ListHelper, private groupBy: GroupByPipe) {}
+  constructor(
+    private listHelper: ListHelper,
+    private groupBy: GroupByPipe,
+    private window: WindowRef
+  ) {}
 
   ngOnInit() {
     this.hasDeprecatedItemTemplate = !!this.legacyItemTemplate || !!this.legacyFlexItemTemplate;
@@ -229,17 +234,11 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
     event.stopPropagation();
   }
 
-  onResize(): void {
-    this.initializeSwipeActions();
-  }
-
   private initializeSwipeActions(): void {
-    const large = 1025; //TODO this need to be refactored.
     if (this.swipeActions && this.swipeActions.length) {
-      this.isSwipingEnabled = window.innerWidth < large;
-      if (this.list && !this.isSwipingEnabled) {
-        this.list.closeSlidingItems();
-      }
+      // No check for `hover: none`, as Samsung Galaxy will return false on `hover: none` media query:
+      const isTouchDeviceQuery = '(pointer: coarse)';
+      this.isSwipingEnabled = this.window.matchMedia(isTouchDeviceQuery).matches;
     }
   }
 }

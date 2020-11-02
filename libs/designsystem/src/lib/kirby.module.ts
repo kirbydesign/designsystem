@@ -8,6 +8,7 @@ import { InfiniteScrollDirective } from './components/list/directives/infinite-s
 import { ModalWrapperComponent } from './components/modal/modal-wrapper/modal-wrapper.component';
 import { ModalCompactWrapperComponent } from './components/modal/modal-wrapper/compact/modal-compact-wrapper.component';
 import { ModalFooterComponent } from './components/modal/footer/modal-footer.component';
+import { ModalRouterLinkDirective } from './directives/modal-router-link/modal-router-link.directive';
 import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';
 import { FullscreenLoadingOverlayComponent } from './components/loading-overlay/fullscreen-loading-overlay/fullscreen-loading-overlay.component';
 import { LoadingOverlayComponent } from './components/loading-overlay/loading-overlay.component';
@@ -72,6 +73,12 @@ import { BreakpointHelperService } from './components/grid/breakpoint-helper.ser
 import { LoadingOverlayService } from './components/loading-overlay/fullscreen-loading-overlay/loading-overlay.service';
 import { ResizeObserverFactory } from './components/shared/resize-observer/resize-observer.factory';
 import { ResizeObserverService } from './components/shared/resize-observer/resize-observer.service';
+import { ProgressCircleComponent } from './components/progress-circle/progress-circle.component';
+import { ProgressCircleRingComponent } from './components/progress-circle/progress-circle-ring.component';
+import { FlagComponent } from './components/flag/flag.component';
+import { IconRegistryService } from './components/icon/icon-registry.service';
+import { WindowRef } from './types/window-ref';
+import { ToggleButtonModule } from './components/toggle-button/toggle-button.module';
 
 const exportedDeclarations = [
   CardComponent,
@@ -98,6 +105,7 @@ const exportedDeclarations = [
   CheckboxComponent,
   ActionSheetComponent,
   ModalFooterComponent,
+  ModalRouterLinkDirective,
   SegmentedControlComponent,
   ChipComponent,
   BadgeComponent,
@@ -117,6 +125,8 @@ const exportedDeclarations = [
   DropdownComponent,
   InfiniteScrollDirective,
   LoadingOverlayComponent,
+  ProgressCircleComponent,
+  FlagComponent,
 ];
 
 const declarations = [
@@ -128,6 +138,7 @@ const declarations = [
   AlertComponent,
   ModalWrapperComponent,
   ModalCompactWrapperComponent,
+  ProgressCircleRingComponent,
 ];
 
 const exportedModules = [
@@ -137,6 +148,7 @@ const exportedModules = [
   TabsModule,
   IconModule,
   ItemModule,
+  ToggleButtonModule,
 ];
 
 const exports = [...exportedModules, ...exportedDeclarations];
@@ -154,6 +166,10 @@ const providers = [
   LoadingOverlayService,
   ResizeObserverFactory,
   ResizeObserverService,
+  {
+    provide: WindowRef,
+    useValue: window,
+  },
 ];
 
 const entryComponents = [
@@ -180,4 +196,8 @@ const entryComponents = [
   entryComponents: entryComponents,
   exports: exports,
 })
-export class KirbyModule {}
+export class KirbyModule {
+  constructor(modalController: ModalController) {
+    modalController.initialize();
+  }
+}

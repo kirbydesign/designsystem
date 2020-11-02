@@ -5,4 +5,10 @@ import { Component } from '@angular/core';
   templateUrl: './dropdown-example.component.html',
   styleUrls: ['./dropdown-example.component.scss'],
 })
-export class DropdownExampleComponent {}
+export class DropdownExampleComponent {
+  size: string = 'md';
+
+  onSizeChange(size: string) {
+    this.size = size;
+  }
+}

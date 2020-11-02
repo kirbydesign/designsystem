@@ -6,6 +6,10 @@
   margin-bottom: size('s');
 }
 
+:host-context(kirby-item) {
+  margin-bottom: 0;
+}
+
 .texts {
   display: flex;
   justify-content: space-between;

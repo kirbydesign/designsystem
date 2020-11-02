@@ -198,12 +198,19 @@
 // Temp fix for https://github.com/angular/angular-cli/issues/13854#issuecomment-470831308
 /* clean-css ignore:start */
 :host-context(ion-toolbar kirby-page-actions) {
+  font-size: font-size('s');
+  margin: 0;
+  height: $fat-finger-size;
+
+  &.icon-only {
+    width: $fat-finger-size;
+  }
+
   &.attention-level1,
   &.attention-level2,
   &.attention-level3,
   &.attention-level4 {
     @include button-attentionlevel4;
-    @include button-sm;
   }
 }
 /* clean-css ignore:end */
@@ -229,4 +236,13 @@
 
 :host-context(kirby-dropdown) {
   justify-content: space-between;
+}
+
+:host-context(kirby-toggle-button) {
+  @each $color-name, $color-value in $notification-colors {
+    &.#{$color-name} {
+      --kirby-button-background-color: #{get-color($color-name)};
+      --kirby-button-color: #{get-color($color-name + '-contrast')};
+    }
+  }
 }

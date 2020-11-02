@@ -47,3 +47,8 @@ export * from './tabs';
 export * from './toast';
 export { ToggleComponent } from './toggle/toggle.component';
 export { ToolbarComponent } from './toolbar/toolbar.component';
+
+export { ProgressCircleComponent } from './progress-circle/progress-circle.component';
+export { FlagComponent } from './flag/flag.component';
+
+export { ToggleButtonComponent } from './toggle-button/toggle-button.component';

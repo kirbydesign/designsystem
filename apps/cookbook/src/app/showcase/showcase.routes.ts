@@ -13,6 +13,8 @@ import { FontsShowcaseComponent } from './fonts-showcase/fonts-showcase.componen
 import { ColorsShowcaseComponent } from './colors-showcase/colors-showcase.component';
 import { SpinnerShowcaseComponent } from './spinner-showcase/spinner-showcase.component';
 import { ModalShowcaseComponent } from './modal-showcase/modal-showcase.component';
+import { ModalRoutePage1ExampleComponent } from '../examples/modal-example/modal-route-example/modal-route-page1-example.component';
+import { ModalRoutePage2ExampleComponent } from '../examples/modal-example/modal-route-example/modal-route-page2-example.component';
 import { SegmentedControlShowcaseComponent } from './segmented-control-showcase/segmented-control-showcase.component';
 import { ChipShowcaseComponent } from './chip-showcase/chip-showcase.component';
 import { BadgeShowcaseComponent } from './badge-showcase/badge-showcase.component';
@@ -34,9 +36,12 @@ import { PageShowcaseComponent } from './page-showcase/page-showcase.component';
 import { TabsShowcaseComponent } from './tabs-showcase/tabs-showcase.component';
 import { ItemShowcaseComponent } from '../showcase/item-showcase/item-showcase.component';
 import { DividerShowcaseComponent } from './divider-showcase/divider-showcase.component';
-import { DropdownShowcaseComponent } from '~/app/showcase/dropdown-showcase/dropdown-showcase.component';
+import { DropdownShowcaseComponent } from './dropdown-showcase/dropdown-showcase.component';
 import { ReorderListShowcaseComponent } from './reorder-list-showcase/reorder-list-showcase.component';
 import { StockChartShowcaseComponent } from './stock-chart-showcase/stock-chart-showcase.component';
+import { ProgressCircleShowcaseComponent } from './progress-circle-showcase/progress-circle-showcase.component';
+import { FlagShowcaseComponent } from './flag-showcase/flag-showcase.component';
+import { ToggleButtonShowcaseComponent } from './toggle-button-showcase/toggle-button-showcase.component';
 
 export const routes: Routes = [
   {
@@ -127,6 +132,18 @@ export const routes: Routes = [
       {
         path: 'modal',
         component: ModalShowcaseComponent,
+        children: [
+          {
+            path: 'page1',
+            outlet: 'modal',
+            component: ModalRoutePage1ExampleComponent,
+          },
+          {
+            path: 'page2',
+            outlet: 'modal',
+            component: ModalRoutePage2ExampleComponent,
+          },
+        ],
       },
       {
         path: 'loading-overlay',
@@ -149,6 +166,10 @@ export const routes: Routes = [
         component: BadgeShowcaseComponent,
       },
       {
+        path: 'flag',
+        component: FlagShowcaseComponent,
+      },
+      {
         path: 'icon',
         component: IconShowcaseComponent,
       },
@@ -163,6 +184,10 @@ export const routes: Routes = [
       {
         path: 'toggle',
         component: ToggleShowcaseComponent,
+      },
+      {
+        path: 'toggle-button',
+        component: ToggleButtonShowcaseComponent,
       },
       {
         path: 'calendar',
@@ -191,6 +216,10 @@ export const routes: Routes = [
       {
         path: 'dropdown',
         component: DropdownShowcaseComponent,
+      },
+      {
+        path: 'progress-circle',
+        component: ProgressCircleShowcaseComponent,
       },
     ],
   },
