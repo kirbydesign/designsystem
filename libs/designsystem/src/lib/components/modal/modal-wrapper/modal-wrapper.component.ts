@@ -58,7 +58,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   private delayedCloseTimeoutId;
   private initialViewportHeight: number;
   private viewportResized = false;
-  private ionModalElement: HTMLIonModalElement;
+  public ionModalElement: HTMLIonModalElement;
   private embeddedComponentElement: HTMLElement;
   private embeddedFooterElement: HTMLElement;
   private readonly ionModalDidPresent = new Subject<void>();
@@ -80,6 +80,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   ) {}
 
   ngOnInit(): void {
+    alert('what!!');
     this.observeViewportResize();
     this.ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
     this.setModalSize();
@@ -109,6 +110,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   private onScrollElementResize() {
     if (!this.embeddedComponentElement) return;
     const ionModalWrapper = this.elementRef.nativeElement.closest<HTMLElement>('.modal-wrapper');
+    if (!ionModalWrapper) return;
     const embeddedComponentHeight = this.embeddedComponentElement.getBoundingClientRect().height;
     const availableHeight = this.getAvailableContentHeight(ionModalWrapper);
 
@@ -171,10 +173,6 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   }
 
   async close(data?: any): Promise<void> {
-    if (!this.ionModalElement) {
-      return;
-    }
-
     if (!this.keyboardVisible || !this.viewportResized) {
       // No keyboard visible or viewport not resized:
       // Dismiss modal and return:
@@ -221,6 +219,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   }
 
   private setKeyboardOffset(value: number) {
+    console.log('SET KEYBOARD OFFSET');
     const [key, pixelValue] = ['--keyboard-offset', `${value}px`];
     this.ionContentElement.nativeElement.style.setProperty(key, pixelValue);
     if (this.embeddedFooterElement) {
@@ -270,6 +269,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   blurActiveElement() {
     const BLUR_TARGET_SELECTOR = 'input, textarea';
     if (this.keyboardVisible) {
+      console.log('BLUUUR');
       if (
         document.activeElement instanceof HTMLElement &&
         document.activeElement.matches(BLUR_TARGET_SELECTOR)
