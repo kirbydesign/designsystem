@@ -1,4 +1,4 @@
-import { createServiceFactory, mockProvider, SpectatorService } from '@ngneat/spectator';
+import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 import { Subject, EMPTY } from 'rxjs';
 
 import { Overlay, OverlayEventDetail } from './modal.interfaces';
@@ -14,17 +14,7 @@ describe('modalController', () => {
 
   const createService = createServiceFactory({
     service: ModalController,
-    mocks: [ActionSheetHelper, AlertHelper, ModalHelper],
-    providers: [
-      mockProvider(ModalNavigationService, {
-        modalRouteActivatedFor: jasmine
-          .createSpy('modalRouteActivatedForSpy')
-          .and.returnValue(EMPTY),
-        modalRouteDeactivatedFor: jasmine
-          .createSpy('modalRouteDeactivatedForSpy')
-          .and.returnValue(EMPTY),
-      }),
-    ],
+    mocks: [ActionSheetHelper, AlertHelper, ModalHelper, ModalNavigationService],
   });
 
   let modalHelperSpy: jasmine.SpyObj<ModalHelper>;
@@ -42,6 +32,8 @@ describe('modalController', () => {
     actionSheetHelperSpy = spectator.inject(ActionSheetHelper);
     alertHelperSpy = spectator.inject(AlertHelper);
     modalNavigationServiceSpy = spectator.inject(ModalNavigationService);
+    modalNavigationServiceSpy.modalRouteActivatedFor.and.resolveTo(EMPTY);
+    modalNavigationServiceSpy.modalRouteDeactivatedFor.and.resolveTo(EMPTY);
     callbackSpy = jasmine.createSpy('callback');
   });
 
@@ -51,17 +43,14 @@ describe('modalController', () => {
 
   describe('initialize', () => {
     it('should subscribe to modal route activation', async () => {
-      modalNavigationServiceSpy.modalRouteActivatedFor.calls.reset();
-
-      modalController['initialize']();
+      await new Promise((resolve) => setTimeout(resolve, 25));
+      await modalController.initialize();
 
       expect(modalNavigationServiceSpy.modalRouteActivatedFor).toHaveBeenCalledTimes(1);
     });
 
     it('should subscribe to modal route deactivation', async () => {
-      modalNavigationServiceSpy.modalRouteDeactivatedFor.calls.reset();
-
-      modalController['initialize']();
+      await modalController.initialize();
 
       expect(modalNavigationServiceSpy.modalRouteDeactivatedFor).toHaveBeenCalledTimes(1);
     });

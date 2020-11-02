@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Route, Router, Routes } from '@angular/router';
-import { EMPTY } from 'rxjs';
-import { filter, map, pairwise } from 'rxjs/operators';
+import { EMPTY, Observable } from 'rxjs';
+import { filter, first, map, pairwise } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class ModalNavigationService {
@@ -19,23 +19,36 @@ export class ModalNavigationService {
     return childRoute;
   }
 
-  private getModalRouteMap(routeConfig: Routes[]): Map<string, string> {
+  private async getModalRouteMap(routeConfig: Routes[]): Promise<Map<string, string>> {
     const flattenedRoutes: Routes = [].concat(...routeConfig);
     let modalRoutes: string[] = [];
-    const moduleRootPaths = this.getModuleRootPath(flattenedRoutes);
+    const moduleRootPaths = await this.getModuleRootPath(flattenedRoutes);
     if (moduleRootPaths) {
       modalRoutes = this.getModalRoutePaths(flattenedRoutes, moduleRootPaths);
     }
     return new Map(modalRoutes.map((modalRoute) => [modalRoute, modalRoute]));
   }
 
-  private getModuleRootPath(routes: Routes) {
-    const currentRoutePaths = this.getCurrentRoutePaths();
+  private async getModuleRootPath(routes: Routes): Promise<string[]> {
+    const currentRoutePaths = await this.getCurrentRoutePaths();
     this.removeChildSegments(currentRoutePaths, routes);
     return currentRoutePaths;
   }
 
-  private getCurrentRoutePaths() {
+  private async getCurrentRoutePaths(): Promise<string[]> {
+    const rootPath = [''];
+    const currentNavigation = this.router.getCurrentNavigation();
+
+    if (!this.router.navigated && !currentNavigation) {
+      // If router hasn't navigated yet and we are not in the middle of navigating, assume root:
+      return rootPath;
+    }
+
+    if (currentNavigation) {
+      // Wait for current navigation to finish:
+      await this.navigationEndListener$.pipe(first()).toPromise();
+    }
+
     let childRoute = this.route.snapshot.root;
     while (childRoute.firstChild) {
       childRoute = childRoute.firstChild;
@@ -44,7 +57,6 @@ export class ModalNavigationService {
       (route) => route.outlet !== 'modal'
     );
 
-    const rootPath = [''];
     return rootPath.concat(
       ...currentBackdropRoutePath.map((route) =>
         route.url.filter((segment) => !!segment.path).map((segment) => segment.path)
@@ -132,9 +144,9 @@ export class ModalNavigationService {
     filter((event): event is NavigationEnd => event instanceof NavigationEnd)
   );
 
-  modalRouteActivatedFor(routeConfig: Routes[]) {
+  async modalRouteActivatedFor(routeConfig: Routes[]): Promise<Observable<ModalRouteActivation>> {
     if (Array.isArray(routeConfig)) {
-      const modalRouteMap = this.getModalRouteMap(routeConfig);
+      const modalRouteMap = await this.getModalRouteMap(routeConfig);
       const hasModalRoutes = modalRouteMap.size > 0;
 
       if (hasModalRoutes) {
@@ -150,9 +162,9 @@ export class ModalNavigationService {
     return EMPTY;
   }
 
-  modalRouteDeactivatedFor(routeConfig: Routes[]) {
+  async modalRouteDeactivatedFor(routeConfig: Routes[]): Promise<Observable<boolean>> {
     if (Array.isArray(routeConfig)) {
-      const modalRouteMap = this.getModalRouteMap(routeConfig);
+      const modalRouteMap = await this.getModalRouteMap(routeConfig);
       const hasModalRoutes = modalRouteMap.size > 0;
       if (hasModalRoutes) {
         return this.navigationEndListener$.pipe(

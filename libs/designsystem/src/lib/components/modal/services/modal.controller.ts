@@ -29,16 +29,16 @@ export class ModalController implements OnDestroy {
     this.initialize();
   }
 
-  private initialize() {
-    this.onModalRouteActivated();
-    this.onModalRouteDeactivated(); // TODO: Do we want to close modal when routing out of modal route? Or should the code that navigates close the window??
+  async initialize() {
+    await this.onModalRouteActivated();
+    await this.onModalRouteDeactivated(); // TODO: Do we want to close modal when routing out of modal route? Or should the code that navigates close the window??
   }
 
-  private onModalRouteActivated() {
+  private async onModalRouteActivated() {
     const navigateOnWillClose = () => {
       this.modalNavigationService.navigateOutOfModalOutlet();
     };
-    const modalRouteActivated$ = this.modalNavigationService.modalRouteActivatedFor(
+    const modalRouteActivated$ = await this.modalNavigationService.modalRouteActivatedFor(
       this.routeConfig
     );
     const siblingModalRouteActivated$ = modalRouteActivated$.pipe(
@@ -62,9 +62,11 @@ export class ModalController implements OnDestroy {
       });
   }
 
-  private onModalRouteDeactivated() {
-    this.modalNavigationService
-      .modalRouteDeactivatedFor(this.routeConfig)
+  private async onModalRouteDeactivated() {
+    const modalRouteDeactivated$ = await this.modalNavigationService.modalRouteDeactivatedFor(
+      this.routeConfig
+    );
+    modalRouteDeactivated$
       .pipe(
         takeUntil(this.destroy$),
         filter(() => this.overlays.length > 0) // TODO: This also fires when closing overlay - should we check for isClosing??
