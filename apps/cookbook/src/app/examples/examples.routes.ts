@@ -53,6 +53,7 @@ import { StockChartExampleComponent } from './stock-chart-example/stock-chart-ex
 import { ProgressCircleExampleComponent } from './progress-circle-example/progress-circle-example.component';
 import { FlagExampleComponent } from './flag-example/flag-example.component';
 import { ToggleButtonExampleComponent } from './toggle-button-example/toggle-button-example.component';
+import { SlidesExampleComponent } from './slides-example/slides-example.component';
 
 export const routes: Routes = [
   {
@@ -320,5 +321,9 @@ export const routes: Routes = [
   {
     path: 'toggle-button',
     component: ToggleButtonExampleComponent,
+  },
+  {
+    path: 'slides',
+    component: SlidesExampleComponent,
   },
 ];

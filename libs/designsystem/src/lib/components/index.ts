@@ -50,5 +50,6 @@ export { ToolbarComponent } from './toolbar/toolbar.component';
 
 export { ProgressCircleComponent } from './progress-circle/progress-circle.component';
 export { FlagComponent } from './flag/flag.component';
+export { SlidesComponent } from './slides/slides.component';
 
 export { ToggleButtonComponent } from './toggle-button/toggle-button.component';
