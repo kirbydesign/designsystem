@@ -16,10 +16,6 @@ export class SlidesExampleComponent {
         slidesPerView: 2.15,
         centeredSlides: false,
       },
-      1025: {
-        slidesPerView: 3.3,
-        centeredSlides: false,
-      },
     },
   };
 
@@ -32,4 +28,8 @@ export class SlidesExampleComponent {
   subtitle = 'Test Subtitle';
   hasHeaderFooterBgColor = true;
   hasFooter = true;
+
+  getDataFromActiveSlide(e: any) {
+    console.log('received: ', e);
+  }
 }

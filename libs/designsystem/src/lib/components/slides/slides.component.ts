@@ -1,3 +1,4 @@
+import { EventEmitter } from '@angular/core';
 import {
   Component,
   ChangeDetectionStrategy,
@@ -7,8 +8,8 @@ import {
   Directive,
   AfterViewInit,
   ViewChild,
-  OnInit,
   ChangeDetectorRef,
+  Output,
 } from '@angular/core';
 import { IonSlides } from '@ionic/angular';
 
@@ -20,7 +21,7 @@ export class SlideDirective {}
 @Component({
   selector: 'kirby-slides',
   template: `
-    <ion-slides [options]="slidesOptions" #ionslides>
+    <ion-slides [options]="slidesOptions" #ionslides (ionSlideDidChange)="onSlideChanged($event)">
       <ion-slide *ngFor="let slide of slides" [ngClass]="{ 'highlight-active': onlyOneSlideShown }">
         <ng-container
           *ngTemplateOutlet="slideTemplate; context: { $implicit: slide }"
@@ -36,6 +37,8 @@ export class SlidesComponent implements AfterViewInit {
   @Input() slidesOptions: any;
   @Input() slides: any[];
 
+  @Output() selectedRecord = new EventEmitter<any>();
+
   constructor(private changeDetectorRef: ChangeDetectorRef) {}
 
   onlyOneSlideShown: boolean;
@@ -45,20 +48,29 @@ export class SlidesComponent implements AfterViewInit {
 
   // instance of swiper only accessible AfterViewInit
   ngAfterViewInit() {
-    this.countNoOfSlidesPerView();
+    this.handleNoOfSlidesPerView();
   }
 
-  countNoOfSlidesPerView() {
+  onSlideChanged(e: any) {
+    this.ionSlides.getActiveIndex().then((selectedIndex) => {
+      this.selectedRecord.emit(this.slides[selectedIndex]);
+    });
+  }
+
+  handleNoOfSlidesPerView() {
     this.ionSlides.getSwiper().then((swiper) => {
       swiper.on('breakpoint', () => {
-        const _slidesPerView = swiper.params.slidesPerView;
-        this.onlyOneSlideShown = _slidesPerView >= 1 && _slidesPerView < 2;
+        this.onlyOneSlideShown = this.isOnlyOneSlide(swiper);
         this.changeDetectorRef.detectChanges();
       });
 
-      const _slidesPerView = swiper.params.slidesPerView;
-      this.onlyOneSlideShown = _slidesPerView >= 1 && _slidesPerView < 2;
+      this.onlyOneSlideShown = this.isOnlyOneSlide(swiper);
       this.changeDetectorRef.markForCheck();
     });
+  }
+
+  private isOnlyOneSlide(swiper: any) {
+    const _slidesPerView = swiper.params.slidesPerView;
+    return _slidesPerView >= 1 && _slidesPerView < 2;
   }
 }

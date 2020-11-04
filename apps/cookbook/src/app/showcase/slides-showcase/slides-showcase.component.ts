@@ -14,28 +14,24 @@ export class SlidesShowcaseComponent {
     .default;
   properties: ShowcaseProperty[] = [
     {
-      name: 'header',
-      description: '(Optional) The header of the action sheet',
+      name: 'slidesOptions',
+      description:
+        'Configuration object for ion-slides. <a href="https://ionicframework.com/docs/v3/api/components/slides/Slides/#input-properties">View documentation</a> for available props',
       defaultValue: '',
-      inputValues: ['string'],
+      inputValues: ['object'],
     },
     {
-      name: 'subheader',
-      description: '(Optional) The subheader of the action sheet',
+      name: 'slides',
+      description: 'Objectarray holding the data to be shown',
       defaultValue: '',
-      inputValues: ['string'],
+      inputValues: ['DataArray'],
     },
+  ];
+  events: ShowcaseProperty[] = [
     {
-      name: 'items',
-      description: 'The options shown inside the action sheet',
-      defaultValue: '',
-      inputValues: ['Array<ActionSheetItem>'],
-    },
-    {
-      name: 'cancelButtonText',
-      description: '(Optional) The text for the cancel button.',
-      defaultValue: 'Cancel',
-      inputValues: ['string'],
+      name: 'selectedRecord',
+      description: 'Emits active data-object when slide did change',
+      inputValues: ['func'],
     },
   ];
 }
