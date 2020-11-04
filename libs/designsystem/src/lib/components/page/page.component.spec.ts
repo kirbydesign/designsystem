@@ -61,6 +61,7 @@ describe('PageComponent', () => {
   it('should render toolbar with correct padding', async () => {
     await TestHelper.whenReady(ionToolbar);
     const toolbarContainer = ionToolbar.shadowRoot.querySelector('.toolbar-container');
+    expect(toolbarContainer).toBeTruthy();
     expect(toolbarContainer).toHaveComputedStyle({
       'padding-left': size('xxxs'),
       'padding-right': size('xxxs'),

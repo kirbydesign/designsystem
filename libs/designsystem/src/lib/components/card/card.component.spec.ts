@@ -50,7 +50,7 @@ describe('CardComponent', () => {
       const ionicGlobalMode = document.getAttribute('mode');
       const ionBadgeElement = spectator.query<HTMLElement>('ion-badge');
       expect(ionBadgeElement).toBeTruthy();
-      await TestHelper.whenHasCssClass(ionBadgeElement, 'hydrated');
+      await TestHelper.whenReady(ionBadgeElement);
       expect(ionBadgeElement).toHaveClass('hydrated', ionicGlobalMode);
     });
   });
