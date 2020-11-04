@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 import { KirbyModule } from '@kirbydesign/designsystem';
 
@@ -8,6 +9,8 @@ import { CardExampleComponent } from './card-example/card-example.component';
 import { FirstEmbeddedModalExampleComponent } from './modal-example/first-embedded-modal-example/first-embedded-modal-example.component';
 import { SecondEmbeddedModalExampleComponent } from './modal-example/second-embedded-modal-example/second-embedded-modal-example.component';
 import { ModalCompactExampleComponent } from './modal-example/compact-example/modal-compact-example.component';
+import { ModalRoutePage1ExampleComponent } from './modal-example/modal-route-example/modal-route-page1-example.component';
+import { ModalRoutePage2ExampleComponent } from './modal-example/modal-route-example/modal-route-page2-example.component';
 import { FormFieldExamplesModule } from './form-field-example/form-field-example.module';
 import { ListExamplesModule } from './list/list-example.module';
 import { ItemExampleModule } from './item-example/item-example.module';
@@ -33,7 +36,7 @@ const IMPORTS = [
 ];
 
 @NgModule({
-  imports: [CommonModule, KirbyModule, ...IMPORTS],
+  imports: [CommonModule, RouterModule, KirbyModule, ...IMPORTS],
   declarations: COMPONENT_DECLARATIONS,
   exports: [...COMPONENT_DECLARATIONS, ...IMPORTS],
   providers: [PROVIDER_DECLARATIONS],
@@ -42,6 +45,8 @@ const IMPORTS = [
     FirstEmbeddedModalExampleComponent,
     SecondEmbeddedModalExampleComponent,
     ModalCompactExampleComponent,
+    ModalRoutePage1ExampleComponent,
+    ModalRoutePage2ExampleComponent,
   ],
 })
 export class ExamplesModule {}

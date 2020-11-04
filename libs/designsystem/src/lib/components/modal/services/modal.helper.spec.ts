@@ -1,12 +1,14 @@
 import { Component, Optional, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { IonicModule, ModalController as IonicModalController } from '@ionic/angular';
-import { createService } from '@ngneat/spectator';
+import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { DesignTokenHelper } from '../../../helpers/design-token-helper';
 import { WindowRef } from '../../../types/window-ref';
 import { TestHelper } from '../../../testing/test-helper';
 import { ModalHelper } from './modal.helper';
 import { Overlay, Modal } from './modal.interfaces';
+import { ModalNavigationService } from './modal-navigation.service';
 
 @Component({
   template: `
@@ -26,6 +28,7 @@ class InputEmbeddedComponent implements OnInit {
 }
 
 describe('ModalHelper', () => {
+  let spectator: SpectatorService<ModalHelper>;
   let modalHelper: ModalHelper;
   let ionModalController: IonicModalController;
   let overlay: Overlay;
@@ -40,9 +43,9 @@ describe('ModalHelper', () => {
   const size = DesignTokenHelper.size;
   const backgroundColor = DesignTokenHelper.backgroundColor();
 
-  const spectator = createService({
+  const createService = createServiceFactory({
     service: ModalHelper,
-    imports: [IonicModule.forRoot({ mode: 'ios', _testing: true })],
+    imports: [IonicModule.forRoot({ mode: 'ios', _testing: true }), RouterTestingModule],
     providers: [
       {
         provide: WindowRef,
@@ -50,6 +53,7 @@ describe('ModalHelper', () => {
       },
     ],
     entryComponents: [InputEmbeddedComponent],
+    mocks: [ModalNavigationService],
   });
 
   beforeAll(() => {
@@ -69,6 +73,7 @@ describe('ModalHelper', () => {
   });
 
   beforeEach(() => {
+    spectator = createService();
     modalHelper = spectator.service;
     ionModalController = spectator.inject(IonicModalController);
   });
@@ -89,6 +94,7 @@ describe('ModalHelper', () => {
             title: 'Modal On Presenting Element',
             component: undefined,
           });
+
           ionModal = await ionModalController.getTop();
           ionBackdrop = ionModal.querySelector(':scope > ion-backdrop');
           expect(ionBackdrop).toHaveComputedStyle({ opacity: backdropOpacity });

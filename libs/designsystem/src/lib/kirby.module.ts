@@ -8,6 +8,7 @@ import { InfiniteScrollDirective } from './components/list/directives/infinite-s
 import { ModalWrapperComponent } from './components/modal/modal-wrapper/modal-wrapper.component';
 import { ModalCompactWrapperComponent } from './components/modal/modal-wrapper/compact/modal-compact-wrapper.component';
 import { ModalFooterComponent } from './components/modal/footer/modal-footer.component';
+import { ModalRouterLinkDirective } from './directives/modal-router-link/modal-router-link.directive';
 import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';
 import { FullscreenLoadingOverlayComponent } from './components/loading-overlay/fullscreen-loading-overlay/fullscreen-loading-overlay.component';
 import { LoadingOverlayComponent } from './components/loading-overlay/loading-overlay.component';
@@ -105,6 +106,7 @@ const exportedDeclarations = [
   CheckboxComponent,
   ActionSheetComponent,
   ModalFooterComponent,
+  ModalRouterLinkDirective,
   SegmentedControlComponent,
   ChipComponent,
   BadgeComponent,
@@ -197,4 +199,8 @@ const entryComponents = [
   entryComponents: entryComponents,
   exports: exports,
 })
-export class KirbyModule {}
+export class KirbyModule {
+  constructor(modalController: ModalController) {
+    modalController.initialize();
+  }
+}

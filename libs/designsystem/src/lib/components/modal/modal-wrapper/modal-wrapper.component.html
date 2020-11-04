@@ -18,6 +18,10 @@
   <ng-container
     *ngComponentOutlet="config.component; injector: componentPropsInjector"
   ></ng-container>
+  <router-outlet
+    name="modal"
+    [style.visibility]="config.modalRoute ? 'visible' : 'hidden'"
+  ></router-outlet>
 </ion-content>
 
 <ng-template #closeButton let-icon="icon">

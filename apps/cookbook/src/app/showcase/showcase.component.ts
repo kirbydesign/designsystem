@@ -34,9 +34,15 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
 
   handleRouterEvent(event: NavigationEnd) {
     const urlSegments = event.url.split('/');
-    this.exampleComponentName = urlSegments.length
-      ? urlSegments[urlSegments.length - 1]
-      : undefined;
+    let exampleComponentName = undefined;
+    if (urlSegments.length) {
+      exampleComponentName = urlSegments[urlSegments.length - 1];
+      if (exampleComponentName.includes('(modal:')) {
+        exampleComponentName = urlSegments[urlSegments.length - 2];
+      }
+      exampleComponentName = exampleComponentName.replace('-', ' ');
+    }
+    this.exampleComponentName = exampleComponentName;
     if (this.exampleComponentName === 'colors') {
       this.isCTABoxShown = false;
     } else {

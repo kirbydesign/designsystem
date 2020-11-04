@@ -37,6 +37,10 @@ export class ActionSheetHelper {
     });
 
     await ionModal.present();
-    return { dismiss: ionModal.dismiss.bind(ionModal), onDidDismiss: ionModal.onDidDismiss() };
+    return {
+      dismiss: ionModal.dismiss.bind(ionModal),
+      onWillDismiss: ionModal.onWillDismiss(),
+      onDidDismiss: ionModal.onDidDismiss(),
+    };
   }
 }
