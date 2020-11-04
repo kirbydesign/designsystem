@@ -1,48 +1,24 @@
 export class TestHelper {
   /*
-   * Returns a promise that is either
-   * resolved when the element has the expected CSS class
-   * or rejected if timed out
-   * */
-  public static whenHasCssClass(
-    node: HTMLElement,
-    cssClass: string,
-    timeout: number = 2000
-  ): Promise<void> {
-    return new Promise((resolve, reject) => {
-      // Check if already hydrated:
-      if (node.classList.contains(cssClass)) {
-        resolve();
-        return;
-      }
-      const timeoutId = setTimeout(() => {
-        reject('Timed out when waiting for css class on element...');
-      }, timeout);
-      const mutationCallback = (mutations, observer) => {
-        const isHydrated = mutations.some((mutation) => {
-          return mutation.type === 'attributes' && mutation.target.classList.contains(cssClass);
-        });
-        if (isHydrated) {
-          observer.disconnect();
-          clearTimeout(timeoutId);
-          resolve();
-        }
-      };
-      const config = { attributes: true, attributeFilter: ['class'] };
-      const observer = new MutationObserver(mutationCallback);
-      observer.observe(node, config);
-    });
+   * Checks for the Web Component being ready,
+   * ie. the component is hydrated, styles have been applied
+   * and the Shadow DOM is ready for query
+   */
+  public static async whenReady(element: Element): Promise<void> {
+    await TestHelper.whenDefined(element);
+    await TestHelper.ionComponentOnReady(element);
   }
 
-  /** Checks for the Ionic Web Component being ready, ie. the Shadow DOM is ready for query */
-  public static async whenReady(element: Element): Promise<void> {
-    const componentOnReady = (element as any).componentOnReady;
+  /* Checks for the Web Component being defined, ie. the public methods are available */
+  public static async whenDefined(element: Element): Promise<void> {
+    await customElements.whenDefined(element.localName);
+  }
+
+  /* Checks for the Ionic Web Component being ready, ie. the component is hydrated and styles applied */
+  public static async ionComponentOnReady(element: Element): Promise<void> {
+    const componentOnReady = (element as any).componentOnReady as () => Promise<void>;
     if (typeof componentOnReady === 'function') {
-      await componentOnReady.bind(element);
-    } else {
-      return Promise.reject(
-        '`element.componentOnReady` is not a function - `whenReady()` can only be used on Ionic elements (`ion-`)'
-      );
+      await componentOnReady.bind(element)();
     }
   }
 
