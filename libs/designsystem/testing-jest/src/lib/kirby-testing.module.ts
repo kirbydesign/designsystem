@@ -8,6 +8,8 @@ import { KirbyTestingBaseModule } from '@kirbydesign/designsystem/testing-base';
 export function modalControllerFactory() {
   return {
     showModal: jest.fn(),
+    navigateToModal: jest.fn(),
+    navigateWithinModal: jest.fn(),
     showActionSheet: jest.fn(),
     showAlert: jest.fn(),
     register: jest.fn(),
