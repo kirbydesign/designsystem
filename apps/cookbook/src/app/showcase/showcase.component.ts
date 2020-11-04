@@ -41,8 +41,7 @@ export class ShowcaseComponent implements OnDestroy {
 
   private getExampleComponentUrlSegment(url: string) {
     const urlSegments = url.split('/');
-    let exampleComponentUrlSegment: string = undefined;
-    exampleComponentUrlSegment = urlSegments.pop();
+    let exampleComponentUrlSegment = urlSegments.pop();
     if (exampleComponentUrlSegment && exampleComponentUrlSegment.startsWith('(modal:')) {
       exampleComponentUrlSegment = urlSegments.pop();
     }
