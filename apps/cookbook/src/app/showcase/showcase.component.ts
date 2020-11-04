@@ -8,46 +8,47 @@ import { filter } from 'rxjs/operators';
   templateUrl: './showcase.component.html',
   styleUrls: ['./showcase.component.scss'],
 })
-export class ShowcaseComponent implements OnInit, OnDestroy {
+export class ShowcaseComponent implements OnDestroy {
   exampleComponentName: string;
+  exampleComponentPopOutUrl: string[];
   exampleComponentGitUrl: string;
   private routerEventsSubscription: Subscription;
   private gitUrl =
     'https://github.com/kirbydesign/designsystem/tree/master/apps/cookbook/src/app/examples/';
   isCTABoxShown = true;
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
-    this.subscribeToRouterEvents();
+  constructor(private router: Router) {
+    this.onNavigationEnd();
   }
-
-  ngOnInit() {}
 
   ngOnDestroy(): void {
     this.routerEventsSubscription.unsubscribe();
   }
 
-  subscribeToRouterEvents() {
+  private onNavigationEnd() {
     this.routerEventsSubscription = this.router.events
-      .pipe(filter((event) => event instanceof NavigationEnd))
-      .subscribe((event: NavigationEnd) => this.handleRouterEvent(event));
+      .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
+      .subscribe((event) => this.setExampleComponentFromUrl(event.urlAfterRedirects));
   }
 
-  handleRouterEvent(event: NavigationEnd) {
-    const urlSegments = event.url.split('/');
-    let exampleComponentName = undefined;
-    if (urlSegments.length) {
-      exampleComponentName = urlSegments[urlSegments.length - 1];
-      if (exampleComponentName.includes('(modal:')) {
-        exampleComponentName = urlSegments[urlSegments.length - 2];
-      }
-      exampleComponentName = exampleComponentName.replace('-', ' ');
+  private setExampleComponentFromUrl(url: string) {
+    let exampleComponentUrlSegment = this.getExampleComponentUrlSegment(url);
+    this.exampleComponentPopOutUrl = ['/', 'examples', exampleComponentUrlSegment];
+    this.exampleComponentGitUrl = this.gitUrl + exampleComponentUrlSegment + '-example';
+    this.exampleComponentName = this.replaceHyphens(exampleComponentUrlSegment);
+    this.isCTABoxShown = this.exampleComponentName !== 'colors';
+  }
+
+  private getExampleComponentUrlSegment(url: string) {
+    const urlSegments = url.split('/');
+    let exampleComponentUrlSegment = urlSegments.pop();
+    if (exampleComponentUrlSegment && exampleComponentUrlSegment.startsWith('(modal:')) {
+      exampleComponentUrlSegment = urlSegments.pop();
     }
-    this.exampleComponentName = exampleComponentName;
-    if (this.exampleComponentName === 'colors') {
-      this.isCTABoxShown = false;
-    } else {
-      this.isCTABoxShown = true;
-    }
-    this.exampleComponentGitUrl = this.gitUrl + urlSegments.pop() + '-example';
+    return exampleComponentUrlSegment;
+  }
+
+  private replaceHyphens(name: string) {
+    return name && name.split('-').join(' ');
   }
 }
