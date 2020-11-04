@@ -8,7 +8,7 @@ import { filter } from 'rxjs/operators';
   templateUrl: './showcase.component.html',
   styleUrls: ['./showcase.component.scss'],
 })
-export class ShowcaseComponent implements OnInit, OnDestroy {
+export class ShowcaseComponent implements OnDestroy {
   exampleComponentName: string;
   exampleComponentPopOutUrl: string[];
   exampleComponentGitUrl: string;
@@ -21,19 +21,17 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
     this.onNavigationEnd();
   }
 
-  ngOnInit() {}
-
   ngOnDestroy(): void {
     this.routerEventsSubscription.unsubscribe();
   }
 
-  onNavigationEnd() {
+  private onNavigationEnd() {
     this.routerEventsSubscription = this.router.events
       .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
       .subscribe((event) => this.setExampleComponentFromUrl(event.urlAfterRedirects));
   }
 
-  setExampleComponentFromUrl(url: string) {
+  private setExampleComponentFromUrl(url: string) {
     let exampleComponentUrlSegment = this.getExampleComponentUrlSegment(url);
     this.exampleComponentPopOutUrl = ['/', 'examples', exampleComponentUrlSegment];
     this.exampleComponentGitUrl = this.gitUrl + exampleComponentUrlSegment + '-example';
