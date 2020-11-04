@@ -6,7 +6,7 @@
   justify-content: space-between;
   margin-bottom: 2rem;
 
-  &__header {
+  h1 {
     text-transform: uppercase;
     font-size: 24px;
     color: get-color('dark');
@@ -31,7 +31,7 @@ h4 {
   margin-top: size('s');
 }
 
-.showcase-cta-box {
+.cta-box {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -43,7 +43,7 @@ h4 {
   z-index: 1;
   position: relative;
 
-  &__link {
+  a {
     display: inline-flex;
     align-items: center;
     text-decoration: none;
