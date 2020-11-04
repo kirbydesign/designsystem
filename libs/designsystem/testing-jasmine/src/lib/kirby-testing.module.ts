@@ -8,6 +8,8 @@ import { KirbyTestingBaseModule } from '@kirbydesign/designsystem/testing-base';
 export function modalControllerFactory() {
   return jasmine.createSpyObj('ModalController', [
     'showModal',
+    'navigateToModal',
+    'navigateWithinModal',
     'showActionSheet',
     'showAlert',
     'register',
