@@ -118,15 +118,6 @@ ion-modal.kirby-overlay {
             )},
           padding 0ms;
 
-        ion-content {
-          --overflow: hidden;
-        }
-
-        ion-content,
-        kirby-modal-footer {
-          --keyboard-offset: 0px !important;
-        }
-
         .modal-wrapper.content-overflows {
           border-bottom-left-radius: 0;
           border-bottom-right-radius: 0;

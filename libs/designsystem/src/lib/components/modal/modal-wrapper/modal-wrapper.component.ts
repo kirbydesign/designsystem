@@ -80,7 +80,6 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   ) {}
 
   ngOnInit(): void {
-    alert('what!!');
     this.observeViewportResize();
     this.ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
     this.setModalSize();
@@ -114,12 +113,23 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     const embeddedComponentHeight = this.embeddedComponentElement.getBoundingClientRect().height;
     const availableHeight = this.getAvailableContentHeight(ionModalWrapper);
 
-    this.ionModalElement.style.setProperty('--max-height', `none`);
-
     if (embeddedComponentHeight >= availableHeight) {
       this.renderer.addClass(ionModalWrapper, 'content-overflows');
+      this.renderer.setStyle(this.ionContentElement.nativeElement, 'max-height', 'none');
     } else {
-      this.ionModalElement.style.setProperty('--max-height', `${ionModalWrapper.clientHeight}px`);
+      // If not in timeout, height of ionContent is not correct
+      setTimeout(() => {
+        const keyboardOffset = this.windowRef
+          .getComputedStyle(this.ionContentElement.nativeElement)
+          .getPropertyValue('--keyboard-offset');
+
+        this.renderer.setStyle(
+          this.ionContentElement.nativeElement,
+          'max-height',
+          `${this.ionContentElement.nativeElement.clientHeight - parseInt(keyboardOffset)}px`
+        );
+      });
+
       this.renderer.removeClass(ionModalWrapper, 'content-overflows');
     }
   }
@@ -219,7 +229,6 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   }
 
   private setKeyboardOffset(value: number) {
-    console.log('SET KEYBOARD OFFSET');
     const [key, pixelValue] = ['--keyboard-offset', `${value}px`];
     this.ionContentElement.nativeElement.style.setProperty(key, pixelValue);
     if (this.embeddedFooterElement) {
@@ -269,7 +278,6 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   blurActiveElement() {
     const BLUR_TARGET_SELECTOR = 'input, textarea';
     if (this.keyboardVisible) {
-      console.log('BLUUUR');
       if (
         document.activeElement instanceof HTMLElement &&
         document.activeElement.matches(BLUR_TARGET_SELECTOR)
