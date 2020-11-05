@@ -52,16 +52,19 @@ describe('ItemComponent in Kirby List', () => {
         `
       );
       ionList = spectator.queryHost('ion-list');
-      await TestHelper.whenHydrated(ionList);
+      await TestHelper.whenReady(ionList);
       itemsInList = spectator.queryAll('ion-list ion-item');
     });
 
     it('should create list wrapper', () => {
-      expect(spectator).toBeTruthy();
+      expect(spectator.component).toBeTruthy();
     });
 
-    it('should create items in list', () => {
-      expect(itemsInList).toBeTruthy();
+    it('should render items in list', () => {
+      expect(itemsInList).not.toBeEmpty();
+      itemsInList.forEach((item) => {
+        expect(item.shadowRoot.hasChildNodes()).toBeTrue();
+      });
     });
 
     it('should render first and last item with correct padding', async () => {
@@ -84,16 +87,19 @@ describe('ItemComponent in Kirby List', () => {
         `
       );
       ionList = spectator.queryHost('ion-list');
-      await TestHelper.whenHydrated(ionList);
+      await TestHelper.whenReady(ionList);
       itemsInList = spectator.queryAll('ion-list ion-item');
     });
 
     it('should create list wrapper', () => {
-      expect(spectator).toBeTruthy();
+      expect(spectator.component).toBeTruthy();
     });
 
-    it('should render items in cards in list', () => {
-      expect(itemsInList).toBeTruthy();
+    it('should render items in list', () => {
+      expect(itemsInList).not.toBeEmpty();
+      itemsInList.forEach((item) => {
+        expect(item.shadowRoot.hasChildNodes()).toBeTrue();
+      });
     });
 
     it('should render first and last item without padding top/bottom', async () => {
