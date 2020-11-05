@@ -11,7 +11,7 @@ import { AlertConfig } from '../alert/config/alert-config';
 import { AlertHelper } from './alert.helper';
 import { ModalHelper } from './modal.helper';
 import { ModalNavigationService } from './modal-navigation.service';
-import { Overlay } from './modal.interfaces';
+import { ModalRouteActivation, Overlay } from './modal.interfaces';
 
 @Injectable()
 export class ModalController implements OnDestroy {
@@ -28,17 +28,15 @@ export class ModalController implements OnDestroy {
   ) {}
 
   async initialize() {
-    await this.onModalRouteActivated();
-    await this.onModalRouteDeactivated(); // TODO: Do we want to close modal when routing out of modal route? Or should the code that navigates close the window??
+    const modalNavigation = await this.modalNavigationService.getModalNavigation(this.routeConfig);
+    this.onModalRouteActivated(modalNavigation.activated$);
+    this.onModalRouteDeactivated(modalNavigation.deactivated$); // TODO: Do we want to close modal when routing out of modal route? Or should the code that navigates close the window??
   }
 
-  private async onModalRouteActivated() {
+  private onModalRouteActivated(modalRouteActivated$: Observable<ModalRouteActivation>) {
     const navigateOnWillClose = () => {
       this.modalNavigationService.navigateOutOfModalOutlet();
     };
-    const modalRouteActivated$ = await this.modalNavigationService.modalRouteActivatedFor(
-      this.routeConfig
-    );
     const siblingModalRouteActivated$ = modalRouteActivated$.pipe(
       filter((modalRouteActivation) => !modalRouteActivation.isNewModal),
       map((modalRouteActivation) => modalRouteActivation.route)
@@ -60,10 +58,7 @@ export class ModalController implements OnDestroy {
       });
   }
 
-  private async onModalRouteDeactivated() {
-    const modalRouteDeactivated$ = await this.modalNavigationService.modalRouteDeactivatedFor(
-      this.routeConfig
-    );
+  private onModalRouteDeactivated(modalRouteDeactivated$: Observable<boolean>) {
     modalRouteDeactivated$
       .pipe(
         takeUntil(this.destroy$),
