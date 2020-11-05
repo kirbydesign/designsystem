@@ -16,7 +16,7 @@ export class SlidesShowcaseComponent {
     {
       name: 'slidesOptions',
       description:
-        'Configuration object for ion-slides. <a href="https://ionicframework.com/docs/v3/api/components/slides/Slides/#input-properties">View documentation</a> for available props',
+        'Configuration object for ion-slides. View documentation at: [https://ionicframework.com/docs/v3/api/components/slides/Slides/#input-properties] for available props',
       defaultValue: '',
       inputValues: ['object'],
     },
@@ -25,6 +25,12 @@ export class SlidesShowcaseComponent {
       description: 'Objectarray holding the data to be shown',
       defaultValue: '',
       inputValues: ['DataArray'],
+    },
+    {
+      name: 'indexShownAtStartup',
+      description: 'sets centered (active) slide',
+      defaultValue: '',
+      inputValues: ['number'],
     },
   ];
   events: ShowcaseProperty[] = [

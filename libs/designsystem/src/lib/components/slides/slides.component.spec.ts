@@ -33,6 +33,7 @@ describe('SlidesComponent', () => {
         },
       },
     };
+    indexShownAtStartup = 3;
   }
 
   const createHost = createHostFactory({
@@ -43,7 +44,7 @@ describe('SlidesComponent', () => {
 
   beforeEach(() => {
     spectator = createHost(
-      `<kirby-slides [slidesOptions]="slidesOptions" [slides]="slides">
+      `<kirby-slides [slidesOptions]="slidesOptions" [slides]="slides" [indexShownAtStartup]="indexShownAtStartup">
       <span data-testid="slideContent" *kirbySlide>MockContent</span>
       </kirby-slides>`
     );
@@ -63,5 +64,11 @@ describe('SlidesComponent', () => {
 
   it('should pass options-object to ion-slides', () => {
     expect(spectator.component.slidesOptions).toEqual(new KirbySlidesHostComponent().slidesOptions);
+  });
+
+  it('should slide to indexShownAtStartup', () => {
+    expect(spectator.component.indexShownAtStartup).toEqual(
+      new KirbySlidesHostComponent().indexShownAtStartup
+    );
   });
 });

@@ -1,6 +1,7 @@
 <kirby-slides
   [slidesOptions]="slidesOptions"
   [slides]="slides"
+  [indexShownAtStartup]="0"
   (selectedSlide)="getDataFromActiveSlide($event)"
 >
   <cookbook-example-card-content
