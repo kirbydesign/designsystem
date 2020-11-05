@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Route, Router, Routes } from '@angular/router';
 import { EMPTY, Observable } from 'rxjs';
-import { filter, first, map, pairwise } from 'rxjs/operators';
+import { filter, first, map, pairwise, startWith } from 'rxjs/operators';
 
 import { ModalRouteActivation } from './modal.interfaces';
 
@@ -146,42 +146,57 @@ export class ModalNavigationService {
     filter((event): event is NavigationEnd => event instanceof NavigationEnd)
   );
 
-  async modalRouteActivatedFor(routeConfig: Routes[]): Promise<Observable<ModalRouteActivation>> {
-    if (Array.isArray(routeConfig)) {
-      const modalRouteMap = await this.getModalRouteMap(routeConfig);
-      const hasModalRoutes = modalRouteMap.size > 0;
-
-      if (hasModalRoutes) {
-        return this.navigationEndListener$.pipe(
-          filter((navigationEnd) => modalRouteMap.has(navigationEnd.urlAfterRedirects)),
-          map((navigationEnd) => ({
-            route: this.getCurrentActivatedRoute(),
-            isNewModal: this.isNewModalWindow(navigationEnd),
-          }))
-        );
-      }
+  private async waitForCurrentThenGetNavigationEndStream(): Promise<Observable<NavigationEnd>> {
+    if (this.router.getCurrentNavigation()) {
+      const currentNavigationEnd = await this.navigationEndListener$.pipe(first()).toPromise();
+      return this.navigationEndListener$.pipe(startWith(currentNavigationEnd));
     }
-    return EMPTY;
+    return this.navigationEndListener$;
   }
 
-  async modalRouteDeactivatedFor(routeConfig: Routes[]): Promise<Observable<boolean>> {
+  private modalRouteActivatedFor(
+    navigationEnd$: Observable<NavigationEnd>,
+    modalRouteMap: Map<string, string>
+  ): Observable<ModalRouteActivation> {
+    return navigationEnd$.pipe(
+      filter((navigationEnd) => modalRouteMap.has(navigationEnd.urlAfterRedirects)),
+      map((navigationEnd) => ({
+        route: this.getCurrentActivatedRoute(),
+        isNewModal: this.isNewModalWindow(navigationEnd),
+      }))
+    );
+  }
+
+  private modalRouteDeactivatedFor(
+    navigationEnd$: Observable<NavigationEnd>,
+    modalRouteMap: Map<string, string>
+  ): Observable<boolean> {
+    return navigationEnd$.pipe(
+      pairwise(),
+      filter(([prevNavigation, _]) => modalRouteMap.has(prevNavigation.urlAfterRedirects)), // Only emit if previous route was modal
+      map(([_, currentNavigation]) => {
+        const isNewModalRoute = this.isModalRoute(currentNavigation.urlAfterRedirects);
+        // Deactivate modal route if new route is NOT modal OR is outside current parent route:
+        return !isNewModalRoute || this.isNewModalWindow(currentNavigation);
+      }),
+      filter((isDeactivation) => isDeactivation)
+    );
+  }
+
+  async getModalNavigation(
+    routeConfig: Routes[]
+  ): Promise<{ activated$: Observable<ModalRouteActivation>; deactivated$: Observable<boolean> }> {
     if (Array.isArray(routeConfig)) {
+      const navigationEnd$ = await this.waitForCurrentThenGetNavigationEndStream();
       const modalRouteMap = await this.getModalRouteMap(routeConfig);
       const hasModalRoutes = modalRouteMap.size > 0;
       if (hasModalRoutes) {
-        return this.navigationEndListener$.pipe(
-          pairwise(),
-          filter(([prevNavigation, _]) => this.isModalRoute(prevNavigation.urlAfterRedirects)), // Only emit if previous route was modal
-          map(([_, currentNavigation]) => {
-            const isNewModalRoute = this.isModalRoute(currentNavigation.urlAfterRedirects);
-            // Deactivate modal route if new route is NOT modal OR is outside current parent route:
-            return !isNewModalRoute || this.isNewModalWindow(currentNavigation);
-          }),
-          filter((isDeactivation) => isDeactivation)
-        );
+        const activated$ = this.modalRouteActivatedFor(navigationEnd$, modalRouteMap);
+        const deactivated$ = this.modalRouteDeactivatedFor(navigationEnd$, modalRouteMap);
+        return { activated$, deactivated$ };
       }
     }
-    return EMPTY;
+    return { activated$: EMPTY, deactivated$: EMPTY };
   }
 
   async navigateToModal(path: string | string[]): Promise<boolean> {

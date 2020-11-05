@@ -8,7 +8,7 @@ import { ActionSheetHelper } from './action-sheet.helper';
 import { AlertHelper } from './alert.helper';
 import { ModalNavigationService } from './modal-navigation.service';
 
-describe('modalController', () => {
+describe('ModalController', () => {
   let spectator: SpectatorService<ModalController>;
   let modalController: ModalController;
 
@@ -32,8 +32,10 @@ describe('modalController', () => {
     actionSheetHelperSpy = spectator.inject(ActionSheetHelper);
     alertHelperSpy = spectator.inject(AlertHelper);
     modalNavigationServiceSpy = spectator.inject(ModalNavigationService);
-    modalNavigationServiceSpy.modalRouteActivatedFor.and.resolveTo(EMPTY);
-    modalNavigationServiceSpy.modalRouteDeactivatedFor.and.resolveTo(EMPTY);
+    modalNavigationServiceSpy.getModalNavigation.and.resolveTo({
+      activated$: EMPTY,
+      deactivated$: EMPTY,
+    });
     callbackSpy = jasmine.createSpy('callback');
   });
 
@@ -42,17 +44,11 @@ describe('modalController', () => {
   });
 
   describe('initialize', () => {
-    it('should subscribe to modal route activation', async () => {
-      await new Promise((resolve) => setTimeout(resolve, 25));
+    it('should subscribe to modal route navigation', async () => {
+      await new Promise((resolve) => setTimeout(resolve, 1));
       await modalController.initialize();
 
-      expect(modalNavigationServiceSpy.modalRouteActivatedFor).toHaveBeenCalledTimes(1);
-    });
-
-    it('should subscribe to modal route deactivation', async () => {
-      await modalController.initialize();
-
-      expect(modalNavigationServiceSpy.modalRouteDeactivatedFor).toHaveBeenCalledTimes(1);
+      expect(modalNavigationServiceSpy.getModalNavigation).toHaveBeenCalledTimes(1);
     });
   });
 
