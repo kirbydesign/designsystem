@@ -13,7 +13,6 @@ $page-side-nav-width: 16.625rem;
   box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.2);
   position: absolute;
   top: 0;
-  bottom: 0;
   z-index: 900;
   @include media('>=large') {
     display: block;

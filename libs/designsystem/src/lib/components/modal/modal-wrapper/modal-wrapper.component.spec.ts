@@ -372,7 +372,10 @@ describe('ModalWrapperComponent', () => {
       // or embedded component won't be visible:
       spectator.element.classList.add('ion-page');
       ionContent = spectator.query('ion-content');
-      await TestHelper.whenReady(ionContent);
+      // If other test specs have imported IonicModule before this test is run,
+      // then Ionic components won't be mocked - so ensure ionContent.componentOnReady is run if exists:
+      await TestHelper.ionComponentOnReady(ionContent);
+
       input = ionContent.querySelector('input');
       spyOn(input, 'blur');
     });
@@ -521,7 +524,10 @@ describe('ModalWrapperComponent', () => {
 
         it(`should blur document.activeElement before calling wrapping ion-modal's dismiss() method`, fakeAsync(async () => {
           const ionContent = spectator.query('ion-content');
-          await TestHelper.whenReady(ionContent);
+          // If other test specs have imported IonicModule before this test is run,
+          // then Ionic components won't be mocked - so ensure ionContent.componentOnReady is run if exists:
+          await TestHelper.ionComponentOnReady(ionContent);
+
           const input = ionContent.querySelector('input');
           spyOn(input, 'blur');
           input.focus();
