@@ -1,3 +1,6 @@
+import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+import { ToggleButtonComponent } from 'libs/designsystem/src';
+
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
   selector: 'kirby-toggle-button',
