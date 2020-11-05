@@ -2,7 +2,6 @@ import { forwardRef, Component, Directive, Input } from '@angular/core';
 
 import { SlideDirective, SlidesComponent } from '@kirbydesign/designsystem';
 
-// #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Directive({
   selector: '[kirbySlide]',
   providers: [
@@ -28,5 +27,3 @@ export class MockSlidesComponent {
   @Input() slidesOptions: any;
   @Input() slides: any[];
 }
-
-// #endregion

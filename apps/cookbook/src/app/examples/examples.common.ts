@@ -54,6 +54,7 @@ import { StockChartExampleComponent } from './stock-chart-example/stock-chart-ex
 import { ProgressCircleExampleComponent } from './progress-circle-example/progress-circle-example.component';
 import { FlagExampleComponent } from './flag-example/flag-example.component';
 import { SlidesExampleComponent } from './slides-example/slides-example.component';
+import { CookbookExampleCardContentComponent } from './slides-example/example-card-content';
 
 // Example of "custom" icons
 export const iconSettings: IconSettings = {
@@ -124,6 +125,7 @@ export const COMPONENT_DECLARATIONS: any[] = [
   ProgressCircleExampleComponent,
   FlagExampleComponent,
   SlidesExampleComponent,
+  CookbookExampleCardContentComponent,
 ];
 
 // Configure custom icons (used by example to show the usage of custom icons)

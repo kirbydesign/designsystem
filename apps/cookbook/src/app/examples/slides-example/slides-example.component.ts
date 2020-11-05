@@ -1,3 +1,4 @@
+import { LowerCasePipe } from '@angular/common';
 import { Component } from '@angular/core';
 
 @Component({
@@ -13,23 +14,46 @@ export class SlidesExampleComponent {
     slidesPerView: 1.15,
     breakpoints: {
       721: {
-        slidesPerView: 2.15,
-        centeredSlides: false,
+        slidesPerView: 1.9,
       },
     },
   };
 
-  slides = [1, 2, 3, 4, 5];
-
-  hasPadding = true;
-  showSize = true;
-  hasHeader = true;
-  title = 'Test Title';
-  subtitle = 'Test Subtitle';
-  hasHeaderFooterBgColor = true;
-  hasFooter = true;
+  slides = [
+    {
+      title: 'Slide 1',
+      subtitle: 'Subtitle 1',
+      cardContent:
+        ' Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia facere molestias recusandae necessitatibus ab veniam repellendus doloremque culpa quam libero, est quo  accusamus cumque, in quia itaque cupiditate ratione repellat!',
+    },
+    {
+      title: 'Slide 2',
+      subtitle: 'Subtitle 2',
+      cardContent:
+        ' Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia facere molestias recusandae necessitatibus ab veniam repellendus doloremque culpa quam libero, est quo  accusamus cumque, in quia itaque cupiditate ratione repellat!',
+    },
+    {
+      title: 'Slide 3',
+      subtitle: 'Subtitle 3',
+      cardContent:
+        ' Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia facere molestias recusandae necessitatibus ab veniam repellendus doloremque culpa quam libero, est quo  accusamus cumque, in quia itaque cupiditate ratione repellat!',
+    },
+    {
+      title: 'Slide 4',
+      subtitle: 'Subtitle 4',
+      cardContent:
+        ' Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia facere molestias recusandae necessitatibus ab veniam repellendus doloremque culpa quam libero, est quo  accusamus cumque, in quia itaque cupiditate ratione repellat!',
+    },
+    {
+      title: 'Slide 5',
+      subtitle: 'Subtitle 5',
+      cardContent:
+        ' Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia facere molestias recusandae necessitatibus ab veniam repellendus doloremque culpa quam libero, est quo  accusamus cumque, in quia itaque cupiditate ratione repellat!',
+    },
+  ];
 
   getDataFromActiveSlide(e: any) {
-    console.log('received: ', e);
+    // Output onSlideDidChange
+    console.log('Output: ', e);
   }
 }

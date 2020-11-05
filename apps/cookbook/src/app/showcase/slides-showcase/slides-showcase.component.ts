@@ -29,7 +29,7 @@ export class SlidesShowcaseComponent {
   ];
   events: ShowcaseProperty[] = [
     {
-      name: 'selectedRecord',
+      name: 'selectedSlide',
       description: 'Emits active data-object when slide did change',
       inputValues: ['func'],
     },
