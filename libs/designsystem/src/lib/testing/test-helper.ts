@@ -1,35 +1,24 @@
 export class TestHelper {
-  /** Checks for the Ionic Web Component being hydrated, ie. the Shadow DOM is ready for query */
-  public static whenHydrated(node: HTMLElement, timeout: number = 2000): Promise<void> {
-    return new Promise((resolve, reject) => {
-      // Check if already hydrated:
-      if (node.classList.contains('hydrated')) {
-        resolve();
-        return;
-      }
-      const timeoutId = setTimeout(() => {
-        reject('Timed out when waiting for hydrated element...');
-      }, timeout);
-      const mutationCallback = (mutations, observer) => {
-        const isHydrated = mutations.some((mutation) => {
-          return mutation.type === 'attributes' && mutation.target.classList.contains('hydrated');
-        });
-        if (isHydrated) {
-          observer.disconnect();
-          clearTimeout(timeoutId);
-          resolve();
-        }
-      };
-      const config = { attributes: true, attributeFilter: ['class'] };
-      const observer = new MutationObserver(mutationCallback);
-      observer.observe(node, config);
-    });
+  /*
+   * Checks for the Web Component being ready,
+   * ie. the component is hydrated, styles have been applied
+   * and the Shadow DOM is ready for query
+   */
+  public static async whenReady(element: Element): Promise<void> {
+    await TestHelper.whenDefined(element);
+    await TestHelper.ionComponentOnReady(element);
   }
 
-  public static async whenReady(element: Element): Promise<void> {
-    const componentOnReady = (element as any).componentOnReady;
+  /* Checks for the Web Component being defined, ie. the public methods are available */
+  public static async whenDefined(element: Element): Promise<void> {
+    await customElements.whenDefined(element.localName);
+  }
+
+  /* Checks for the Ionic Web Component being ready, ie. the component is hydrated and styles applied */
+  public static async ionComponentOnReady(element: Element): Promise<void> {
+    const componentOnReady = (element as any).componentOnReady as () => Promise<void>;
     if (typeof componentOnReady === 'function') {
-      await componentOnReady.bind(element);
+      await componentOnReady.bind(element)();
     }
   }
 

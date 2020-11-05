@@ -1,23 +1,31 @@
 import { ToastController, IonicModule } from '@ionic/angular';
-import { createService } from '@ngneat/spectator';
+import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 
 import { DesignTokenHelper } from '../../../helpers/design-token-helper';
 import { TestHelper } from '../../../testing/test-helper';
+import { Overlay } from '../../modal/services/modal.interfaces';
 import { ToastHelper } from './toast.helper';
 
 const getColor = DesignTokenHelper.getColor;
 
-describe('toastHelper', () => {
-  let toastHelper: ToastHelper;
+describe('ToastHelper', () => {
+  let spectator: SpectatorService<ToastHelper>;
+  let overlay: Overlay;
 
-  const spectator = createService({
+  const createService = createServiceFactory({
     service: ToastHelper,
     imports: [IonicModule.forRoot({ mode: 'ios', _testing: true })],
     providers: [ToastController],
   });
 
   beforeEach(() => {
-    toastHelper = spectator.service;
+    spectator = createService();
+  });
+
+  afterEach(() => {
+    if (overlay) {
+      overlay.dismiss();
+    }
   });
 
   describe('showToast', () => {
@@ -27,14 +35,13 @@ describe('toastHelper', () => {
       let ionToast: HTMLIonToastElement;
       let toastMessage: Element;
       beforeEach(async () => {
-        await toastHelper.showToast({
+        overlay = await spectator.service.showToast({
           message: testMessage,
           messageType: 'success',
-          durationInMs: 1,
-          animated: false,
         });
+
         ionToast = window.document.getElementsByTagName('ion-toast')[0];
-        await TestHelper.whenHydrated(ionToast);
+        await TestHelper.whenReady(ionToast);
         toastMessage = ionToast.shadowRoot.querySelector('.toast-message');
       });
 
@@ -46,7 +53,7 @@ describe('toastHelper', () => {
         expect(toastMessage.textContent).toEqual(testMessage);
       });
 
-      it('should render toast message with center aligned text', () => {
+      it('should render toast message with center aligned text xxx', () => {
         expect(toastMessage).toHaveComputedStyle({ 'text-align': 'center' });
       });
     });
@@ -62,25 +69,18 @@ describe('toastHelper', () => {
       ]);
 
       messageTypeColorMap.forEach((notificationColor, messageType) => {
-        it(
-          'should render with correct background color for messageType = ' + messageType,
-          async () => {
-            await toastHelper.showToast({
-              message: 'Test Message',
-              messageType: messageType,
-              durationInMs: 1,
-              animated: false,
-            });
-            const ionToast = window.document.getElementsByTagName('ion-toast')[0];
-            expect(ionToast).toBeTruthy();
-
-            await TestHelper.whenHydrated(ionToast);
-            const toastWrapper = ionToast.shadowRoot.querySelector('.toast-wrapper');
-            expect(toastWrapper).toHaveComputedStyle({
-              'background-color': getColor(notificationColor),
-            });
-          }
-        );
+        it(`should render with correct background color for messageType = '${messageType}'`, async () => {
+          overlay = await spectator.service.showToast({
+            message: 'Test Message',
+            messageType: messageType,
+          });
+          const ionToast = window.document.getElementsByTagName('ion-toast')[0];
+          await TestHelper.whenReady(ionToast);
+          const toastWrapper = ionToast.shadowRoot.querySelector('.toast-wrapper');
+          expect(toastWrapper).toHaveComputedStyle({
+            'background-color': getColor(notificationColor),
+          });
+        });
       });
     });
   });

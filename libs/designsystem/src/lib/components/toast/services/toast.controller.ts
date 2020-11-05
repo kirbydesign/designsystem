@@ -8,9 +8,9 @@ export class ToastController {
   constructor(private toastHelper: ToastHelper) {}
 
   showToast(config: ToastConfig, onCloseToast?: () => void) {
-    this.toastHelper.showToast(config).then(() => {
+    this.toastHelper.showToast(config).then((overlay) => {
       if (onCloseToast) {
-        onCloseToast();
+        overlay.onDidDismiss.then(() => onCloseToast());
       }
     });
   }
