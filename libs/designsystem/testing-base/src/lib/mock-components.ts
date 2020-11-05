@@ -44,7 +44,6 @@ import { MockReorderListComponent } from './components/mock.reorder-list.compone
 import { MockRouterOutletComponent } from './components/mock.router-outlet.component';
 import { MockSegmentedControlComponent } from './components/mock.segmented-control.component';
 import { MockSlideButtonComponent } from './components/mock.slide-button.component';
-import { MockSlideDirective, MockSlidesComponent } from './components/mock.slides.component';
 import { MockSpinnerComponent } from './components/mock.spinner.component';
 import { MockTabButtonComponent } from './components/mock.tab-button.component';
 import { MockTabsComponent } from './components/mock.tabs.component';
@@ -97,8 +96,6 @@ export const MOCK_COMPONENTS = [
   MockRouterOutletComponent,
   MockSegmentedControlComponent,
   MockSlideButtonComponent,
-  MockSlideDirective,
-  MockSlidesComponent,
   MockSpinnerComponent,
   MockTabButtonComponent,
   MockTabsComponent,
