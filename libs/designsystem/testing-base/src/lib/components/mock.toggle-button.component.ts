@@ -1,5 +1,6 @@
-import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
-import { ToggleButtonComponent } from 'libs/designsystem/src';
+import { forwardRef, Component, Input, Output, EventEmitter } from '@angular/core';
+
+import { ToggleButtonComponent } from '@kirbydesign/designsystem';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
