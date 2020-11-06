@@ -35,9 +35,7 @@ export class ComponentStatusComponent implements OnInit, OnDestroy {
   uxStatusEnum = ItemUXStatus;
   codeStatusEnum = ItemCodeStatus;
   excludedStatuses: ItemCodeStatus[] = [];
-  newIssueUrl =
-    environment.githubBaseUrl +
-    '/issues/new?labels=component&template=component-request.md&title=%5BCOMPONENT%5D+';
+  newIssueUrl = environment.githubBaseUrl + '/issues/new/choose';
 
   firebaseSubscription: Subscription;
 
