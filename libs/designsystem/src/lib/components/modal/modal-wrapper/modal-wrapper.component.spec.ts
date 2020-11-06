@@ -1,4 +1,4 @@
-import { fakeAsync, tick } from '@angular/core/testing';
+import { tick, fakeAsync } from '@angular/core/testing';
 import { IonContent } from '@ionic/angular';
 import { Spectator } from '@ngneat/spectator';
 
@@ -352,8 +352,10 @@ describe('ModalWrapperComponent', () => {
       // or embedded component won't be visible:
       spectator.element.classList.add('ion-page');
       ionContent = spectator.query('ion-content');
+      // If other test specs have imported IonicModule before this test is run,
+      // then Ionic components won't be mocked - so ensure ionContent.componentOnReady is run if exists:
+      await TestHelper.ionComponentOnReady(ionContent);
 
-      await TestHelper.whenReady(ionContent);
       input = ionContent.querySelector('input');
       spyOn(input, 'blur');
     });
@@ -435,6 +437,7 @@ describe('ModalWrapperComponent', () => {
 
     it(`should call wrapping ion-modal's dismiss() method immediately`, () => {
       spectator.component.close('test data');
+      // @ts-ignore
       expect(spectator.component.ionModalElement.dismiss).toHaveBeenCalledWith('test data');
     });
 
@@ -446,6 +449,7 @@ describe('ModalWrapperComponent', () => {
       describe(`and viewport is not resized`, () => {
         it(`should call wrapping ion-modal's dismiss() method immediately`, () => {
           spectator.component.close('test data');
+          // @ts-ignore
           expect(spectator.component.ionModalElement.dismiss).toHaveBeenCalledWith('test data');
         });
       });
@@ -483,23 +487,30 @@ describe('ModalWrapperComponent', () => {
 
         it(`should blur document.activeElement before calling wrapping ion-modal's dismiss() method`, fakeAsync(async () => {
           const ionContent = spectator.query('ion-content');
-          await TestHelper.whenReady(ionContent);
+          // If other test specs have imported IonicModule before this test is run,
+          // then Ionic components won't be mocked - so ensure ionContent.componentOnReady is run if exists:
+          await TestHelper.ionComponentOnReady(ionContent);
+
           const input = ionContent.querySelector('input');
           spyOn(input, 'blur');
           input.focus();
           expect(document.activeElement).toEqual(input);
 
           spectator.component.close('test data');
+          // @ts-ignore
           expect(spectator.component.ionModalElement.dismiss).not.toHaveBeenCalled();
           expect(input.blur).toHaveBeenCalled();
           tick(ModalWrapperComponent.KEYBOARD_HIDE_DELAY_IN_MS);
+          // @ts-ignore
           expect(spectator.component.ionModalElement.dismiss).toHaveBeenCalled();
         }));
 
         it(`should delay before calling wrapping ion-modal's dismiss() method`, fakeAsync(() => {
           spectator.component.close('test data');
+          // @ts-ignore
           expect(spectator.component.ionModalElement.dismiss).not.toHaveBeenCalled();
           tick(ModalWrapperComponent.KEYBOARD_HIDE_DELAY_IN_MS);
+          // @ts-ignore
           expect(spectator.component.ionModalElement.dismiss).toHaveBeenCalledWith('test data');
         }));
       });

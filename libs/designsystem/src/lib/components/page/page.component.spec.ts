@@ -59,8 +59,9 @@ describe('PageComponent', () => {
   });
 
   it('should render toolbar with correct padding', async () => {
-    await TestHelper.whenHydrated(ionToolbar);
+    await TestHelper.whenReady(ionToolbar);
     const toolbarContainer = ionToolbar.shadowRoot.querySelector('.toolbar-container');
+    expect(toolbarContainer).toBeTruthy();
     expect(toolbarContainer).toHaveComputedStyle({
       'padding-left': size('xxxs'),
       'padding-right': size('xxxs'),
@@ -70,7 +71,7 @@ describe('PageComponent', () => {
   });
 
   it('should render back button with correct size', async () => {
-    await TestHelper.whenHydrated(ionToolbar);
+    await TestHelper.whenReady(ionToolbar);
     const ionBackButton = spectator.queryHost('ion-toolbar ion-buttons ion-back-button');
     expect(ionBackButton).toHaveComputedStyle({
       width: fatFingerSize,

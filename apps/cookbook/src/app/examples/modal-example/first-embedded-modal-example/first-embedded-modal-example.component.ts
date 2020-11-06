@@ -13,19 +13,17 @@ import { SecondEmbeddedModalExampleComponent } from '../second-embedded-modal-ex
   styleUrls: ['./first-embedded-modal-example.component.scss'],
 })
 export class FirstEmbeddedModalExampleComponent implements OnInit {
-  props: { [key: string]: any };
   showFooter = true;
   isLoading = true;
   snapFooterToKeyboard = false;
 
   constructor(
-    @Inject(COMPONENT_PROPS) componentProps,
+    @Inject(COMPONENT_PROPS) public componentProps,
     private modalController: ModalController,
     private toastController: ToastController,
     @Optional() @SkipSelf() private modal: Modal
   ) {
-    this.props = componentProps;
-    this.showFooter = this.props.showFooter;
+    this.showFooter = componentProps.showFooter;
   }
 
   ngOnInit() {
@@ -36,7 +34,6 @@ export class FirstEmbeddedModalExampleComponent implements OnInit {
 
   showNestedModal() {
     const config: ModalConfig = {
-      title: 'Embedded Modal Title',
       flavor: 'modal',
       component: SecondEmbeddedModalExampleComponent,
     };
@@ -47,13 +44,15 @@ export class FirstEmbeddedModalExampleComponent implements OnInit {
 
   showNestedDrawer() {
     const config: ModalConfig = {
-      title: 'Embedded Drawer Title',
       flavor: 'drawer',
       drawerSupplementaryAction: {
         iconName: 'edit',
         action: this.onSupplementaryActionSelect.bind(this),
       },
       component: SecondEmbeddedModalExampleComponent,
+      componentProps: {
+        flavor: 'drawer',
+      },
     };
 
     // supposing no callback needed for the second component

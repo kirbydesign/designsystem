@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RouterTestingModule } from '@angular/router/testing';
 import { IonButtons, IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular';
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
 import { MockComponents } from 'ng-mocks';
@@ -18,6 +19,7 @@ export class ModalWrapperTestBuilder {
   };
   private readonly createComponent = createComponentFactory({
     component: ModalWrapperComponent,
+    imports: [RouterTestingModule],
     entryComponents: [
       StaticFooterEmbeddedComponent,
       DynamicFooterEmbeddedComponent,

@@ -10,11 +10,14 @@ import { ListExampleComponent } from './list/list-example.component';
 import { ListLoadOnDemandExampleComponent } from './list/components/load-on-demand/list-load-on-demand-example.component';
 import { FontsExampleComponent } from './fonts-example/fonts-example.component';
 import { SpinnerExampleComponent } from './spinner-example/spinner-example.component';
+import { ModalCompactExampleComponent } from './modal-example/compact-example/modal-compact-example.component';
 import { ModalExampleComponent } from './modal-example/modal-example.component';
-import { ModalExamplePopoutComponent } from './modal-example/modal-example-popout.component';
+import { ModalExampleDefaultComponent } from './modal-example/modal-example-default.component';
+import { ModalExampleOutletComponent } from './modal-example/modal-example-outlet.component';
 import { FirstEmbeddedModalExampleComponent } from './modal-example/first-embedded-modal-example/first-embedded-modal-example.component';
 import { SecondEmbeddedModalExampleComponent } from './modal-example/second-embedded-modal-example/second-embedded-modal-example.component';
-import { ModalCompactExampleComponent } from './modal-example/compact-example/modal-compact-example.component';
+import { ModalRoutePage1ExampleComponent } from './modal-example/modal-route-example/modal-route-page1-example.component';
+import { ModalRoutePage2ExampleComponent } from './modal-example/modal-route-example/modal-route-page2-example.component';
 import { SegmentedControlExampleComponent } from './segmented-control-example/segmented-control-example.component';
 import { ChipExampleComponent } from './chip-example/chip-example.component';
 import { BadgeExampleComponent } from './badge-example/badge-example.component';
@@ -81,10 +84,13 @@ export const COMPONENT_DECLARATIONS: any[] = [
   FontsExampleComponent,
   SpinnerExampleComponent,
   ModalExampleComponent,
-  ModalExamplePopoutComponent,
+  ModalExampleDefaultComponent,
+  ModalExampleOutletComponent,
   FirstEmbeddedModalExampleComponent,
   SecondEmbeddedModalExampleComponent,
   ModalCompactExampleComponent,
+  ModalRoutePage1ExampleComponent,
+  ModalRoutePage2ExampleComponent,
   SegmentedControlExampleComponent,
   ChipExampleComponent,
   BadgeExampleComponent,

@@ -1,12 +1,13 @@
 import { highlightElement } from 'prismjs';
 import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
+  ElementRef,
   Input,
   OnChanges,
   SimpleChanges,
-  ChangeDetectionStrategy,
-  AfterContentInit,
-  ElementRef,
+  ViewChild,
 } from '@angular/core';
 
 @Component({
@@ -15,7 +16,7 @@ import {
   styleUrls: ['./code-viewer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CodeViewerComponent implements OnChanges, AfterContentInit {
+export class CodeViewerComponent implements AfterViewInit, OnChanges {
   @Input() language: 'html' | 'css' | 'scss' | 'js' | 'ts' | 'typescript';
   code: string;
   languageTitle: string;
@@ -29,7 +30,8 @@ export class CodeViewerComponent implements OnChanges, AfterContentInit {
   };
   codeViewerLanguage: string;
 
-  constructor(private elementRef: ElementRef) {}
+  @ViewChild('codeElement', { read: ElementRef, static: true })
+  private codeElement: ElementRef<HTMLElement>;
 
   @Input()
   set html(value: string) {
@@ -61,13 +63,13 @@ export class CodeViewerComponent implements OnChanges, AfterContentInit {
     this.language = 'ts';
   }
 
+  ngAfterViewInit() {
+    highlightElement(this.codeElement.nativeElement);
+  }
+
   ngOnChanges(_: SimpleChanges): void {
     this.languageTitle = this.language.toUpperCase();
     const supportedLanguage = this.supportedLanguages[this.language];
     this.codeViewerLanguage = `language-${supportedLanguage}`;
-  }
-
-  ngAfterContentInit() {
-    highlightElement(this.elementRef.nativeElement, true);
   }
 }

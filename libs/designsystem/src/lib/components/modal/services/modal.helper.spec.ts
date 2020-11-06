@@ -1,12 +1,14 @@
 import { Component, Optional, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { IonicModule, ModalController as IonicModalController } from '@ionic/angular';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { DesignTokenHelper } from '../../../helpers/design-token-helper';
 import { WindowRef } from '../../../types/window-ref';
 import { TestHelper } from '../../../testing/test-helper';
 import { ModalHelper } from './modal.helper';
 import { Overlay, Modal } from './modal.interfaces';
+import { ModalNavigationService } from './modal-navigation.service';
 
 @Component({
   template: `
@@ -43,7 +45,7 @@ describe('ModalHelper', () => {
 
   const createService = createServiceFactory({
     service: ModalHelper,
-    imports: [IonicModule.forRoot({ mode: 'ios', _testing: true })],
+    imports: [IonicModule.forRoot({ mode: 'ios', _testing: true }), RouterTestingModule],
     providers: [
       {
         provide: WindowRef,
@@ -51,6 +53,7 @@ describe('ModalHelper', () => {
       },
     ],
     entryComponents: [InputEmbeddedComponent],
+    mocks: [ModalNavigationService],
   });
 
   beforeAll(() => {
@@ -91,6 +94,7 @@ describe('ModalHelper', () => {
             title: 'Modal On Presenting Element',
             component: undefined,
           });
+
           ionModal = await ionModalController.getTop();
           ionBackdrop = ionModal.querySelector(':scope > ion-backdrop');
           expect(ionBackdrop).toHaveComputedStyle({ opacity: defaultBackdropOpacity });
