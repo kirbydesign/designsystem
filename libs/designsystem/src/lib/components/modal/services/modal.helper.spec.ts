@@ -185,7 +185,7 @@ describe('ModalHelper', () => {
         it('modal wrapper should have correct style', () => {
           expect(ionModalWrapper).toHaveComputedStyle({
             'background-color': backgroundColor,
-            'border-radius': defaultBorderRadius,
+            'border-radius': `${defaultBorderRadius} ${defaultBorderRadius} 0px 0px`,
           });
         });
 
