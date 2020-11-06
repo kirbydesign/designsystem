@@ -195,10 +195,14 @@ export class ComponentStatusComponent implements OnInit, OnDestroy {
     });
   }
 
-  private getZeplinUrl(issue: { body: string }): string {
-    const matches = issue.body.match(
-      /https:\/\/(app\.zeplin|zpl)\.io\/(project\/[a-z,0-9]{24}\/screen\/[a-z,0-9]{24}|[a-z,0-9]{7})/i
-    );
+  private getZeplinUrl(issue: { body: string; url: string; title: string }): string {
+    // Should match:
+    // https://zpl.io/b6Djlky
+    // https://app.zeplin.io/project/5e1f27f01ffb15bd95efc426/screen/5e46809806041da857a4bf49
+    // https://app.zeplin.io/styleguide/5e7094006caa6013a71590b8/components?seid=5e466bc4394e31b73d693e4e
+    // https://app.zeplin.io/styleguide/5e734ec04ee3d6bac20654e2/components?cseid=5fa2b58acbcb0e8512f515ee
+    const regex = /(https:\/\/(app\.zeplin|zpl)\.io\/)((project\/[a-z,0-9]{24}\/screen\/[a-z,0-9]{24})|(\b(?!project)[a-z,0-9]{7}\b)|(styleguide\/[a-z,0-9]{24}\/components\?(seid|cseid)\=[a-z,0-9]{24}))/i;
+    let matches = issue.body.match(regex);
     const url = matches ? matches[0] : null;
     return url;
   }
