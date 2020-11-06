@@ -58,6 +58,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   @ViewChild(RouterOutlet, { static: true }) private routerOutlet: RouterOutlet;
 
   private keyboardVisible = false;
+  private keyboardHeight: number;
   private toolbarButtons: HTMLButtonElement[] = [];
   private delayedClose = () => {};
   private delayedCloseTimeoutId;
@@ -158,14 +159,10 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     } else {
       // If not in timeout, height of ionContent is not correct
       setTimeout(() => {
-        const keyboardOffset = this.windowRef
-          .getComputedStyle(this.ionContentElement.nativeElement)
-          .getPropertyValue('--keyboard-offset');
-
         this.renderer.setStyle(
           this.ionContentElement.nativeElement,
           'max-height',
-          `${this.ionContentElement.nativeElement.clientHeight - parseInt(keyboardOffset)}px`
+          `${this.ionContentElement.nativeElement.clientHeight - this.keyboardHeight}px`
         );
       });
 
@@ -268,28 +265,31 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     this.windowRef.scrollTo({ top: this.scrollY });
   }
 
-  @HostListener('window:keyboardWillShow', ['$event'])
-  _onKeyboardWillShow(info?: { keyboardHeight: number }) {
+  @HostListener('window:ionKeyboardDidShow', ['$event'])
+  _onKeyboardWillShow(event: { detail: { keyboardHeight: number } }) {
     this.keyboardVisible = true;
-    if (info && info.keyboardHeight) {
-      this.setKeyboardOffset(info.keyboardHeight);
-    }
+    this.setKeyboardOffset(event.detail.keyboardHeight);
+    const ionModalWrapper = this.elementRef.nativeElement.closest<HTMLElement>('.modal-wrapper');
+    if (!ionModalWrapper) return;
+    const distanceFromWindowBottomToModalBottom =
+      this.windowRef.innerHeight - ionModalWrapper.getBoundingClientRect().bottom;
+    const keyboardOverlap = this.keyboardHeight - distanceFromWindowBottomToModalBottom;
+    console.warn('keyboardOverlap:', keyboardOverlap);
   }
-
-  @HostListener('window:keyboardWillHide')
+  @HostListener('window:ionKeyboardDidHide')
   _onKeyboardWillHide() {
     this.keyboardVisible = false;
     this.setKeyboardOffset(0);
   }
-
   private setKeyboardOffset(value: number) {
+    this.keyboardHeight = value;
     const [key, pixelValue] = ['--keyboard-offset', `${value}px`];
     this.ionContentElement.nativeElement.style.setProperty(key, pixelValue);
     const embeddedFooterElement = this.elementRef.nativeElement.querySelector<HTMLElement>(
       'kirby-modal-footer'
     );
     if (embeddedFooterElement) {
-      embeddedFooterElement.style.setProperty(key, pixelValue);
+      this.renderer.setStyle(embeddedFooterElement, key, pixelValue);
     }
   }
 

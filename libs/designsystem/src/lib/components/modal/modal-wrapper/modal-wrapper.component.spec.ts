@@ -221,7 +221,7 @@ describe('ModalWrapperComponent', () => {
 
     it('should define custom CSS property --keyboard-offset on embedded footer', () => {
       const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
-      spectator.component._onKeyboardWillShow({ keyboardHeight: 200 });
+      spectator.component._onKeyboardWillShow({ detail: { keyboardHeight: 200 } });
       expect(kirbyModalFooter).toHaveStyle({ '--keyboard-offset': '200px' });
     });
   });
@@ -311,7 +311,7 @@ describe('ModalWrapperComponent', () => {
 
       setTimeout(() => {
         const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
-        spectator.component._onKeyboardWillShow({ keyboardHeight: 200 });
+        spectator.component._onKeyboardWillShow({ detail: { keyboardHeight: 200 } });
         expect(kirbyModalFooter).toHaveStyle({ '--keyboard-offset': '200px' });
         done();
       });
@@ -328,12 +328,13 @@ describe('ModalWrapperComponent', () => {
       spectator.fixture.destroy();
     });
 
-    it('should set keyboardVisible to true on window:keyboardWillShow', () => {
-      spectator.dispatchFakeEvent(window, 'keyboardWillShow');
+    it('should set keyboardVisible to true on window:ionKeyboardDidShow', () => {
+      spectator.dispatchFakeEvent(window, 'ionKeyboardDidShow');
       expect(spectator.component['keyboardVisible']).toBeTrue();
     });
-    it('should set keyboardVisible to false on window:keyboardWillHide', () => {
-      spectator.dispatchFakeEvent(window, 'keyboardWillHide');
+    it('should set keyboardVisible to false on window:ionKeyboardDidHide', () => {
+      spectator.dispatchFakeEvent(window, 'ionKeyboardDidShow');
+      spectator.dispatchFakeEvent(window, 'ionKeyboardDidHide');
       expect(spectator.component['keyboardVisible']).toBeFalse();
     });
   });
@@ -382,7 +383,7 @@ describe('ModalWrapperComponent', () => {
       beforeEach(() => {
         input.focus();
         expect(document.activeElement).toEqual(input);
-        spectator.dispatchFakeEvent(window, 'keyboardWillShow');
+        spectator.dispatchFakeEvent(window, 'ionKeyboardDidShow');
       });
 
       it('should blur document.activeElement when it is an input', () => {
@@ -443,7 +444,7 @@ describe('ModalWrapperComponent', () => {
 
     describe(`when keyboard is visible`, () => {
       beforeEach(() => {
-        spectator.dispatchFakeEvent(window, 'keyboardWillShow');
+        spectator.dispatchFakeEvent(window, 'ionKeyboardDidShow');
       });
 
       describe(`and viewport is not resized`, () => {

@@ -53,16 +53,6 @@ ion-modal.kirby-overlay {
     --background: #{get-color('background-color')};
     --border-radius: 0;
 
-    &.small {
-      --min-height: #{map-get($modal-heights, 's')};
-    }
-    &.medium {
-      --min-height: #{map-get($modal-heights, 'm')};
-    }
-    &.large {
-      --min-height: #{map-get($modal-heights, 'l')};
-    }
-
     &.kirby-modal-compact {
       --border-radius: #{$border-radius};
 
@@ -111,12 +101,23 @@ ion-modal.kirby-overlay {
       &:not(.kirby-drawer):not(.kirby-modal-compact) {
         --height: auto;
         --max-height: none;
+        --min-height: #{$modal-default-height};
         align-items: flex-start;
         padding-top: size('xl');
         transition: all 0.5s #{get-transition-duration('long')} #{get-transition-easing(
               'enter-exit'
             )},
           padding 0ms;
+
+        &.small {
+          --min-height: #{map-get($modal-heights, 's')};
+        }
+        &.medium {
+          --min-height: #{map-get($modal-heights, 'm')};
+        }
+        &.large {
+          --min-height: #{map-get($modal-heights, 'l')};
+        }
 
         .modal-wrapper.content-overflows {
           border-bottom-left-radius: 0;
