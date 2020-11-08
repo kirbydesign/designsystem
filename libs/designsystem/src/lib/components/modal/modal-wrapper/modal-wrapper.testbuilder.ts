@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { IonButtons, IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular';
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
@@ -7,6 +7,7 @@ import { MockComponents } from 'ng-mocks';
 import { WindowRef } from '../../../types';
 import { ButtonComponent } from '../../button/button.component';
 import { IconComponent } from '../../icon';
+import { ResizeObserverService } from '../../shared';
 import { ModalFooterComponent } from '../footer/modal-footer.component';
 import { ModalConfig } from './config/modal-config';
 import { ModalWrapperComponent } from './modal-wrapper.component';
@@ -84,7 +85,13 @@ export class ModalWrapperTestBuilder {
       },
       detectChanges: false,
     });
-    spyOn(spectator.component.ionContent, 'getScrollElement').and.returnValue(new Promise(null));
+    spyOn(spectator.component.ionContent, 'getScrollElement').and.returnValue(
+      Promise.resolve(document.createElement('DIV'))
+    );
+    const resizeObserverService = spectator.inject(ResizeObserverService);
+    spyOn(resizeObserverService, 'observe');
+    spyOn(resizeObserverService, 'unobserve');
+
     spectator.element.closest = () => {
       let ionModal = document.createElement('div');
       ionModal['dismiss'] = jasmine.createSpy('dissmissSpy');

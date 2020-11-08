@@ -5,6 +5,7 @@ import { Spectator } from '@ngneat/spectator';
 import { KirbyAnimation } from '../../../animation/kirby-animation';
 import { TestHelper } from '../../../testing/test-helper';
 import { IconComponent } from '../../icon/icon.component';
+import { ResizeObserverService } from '../../shared';
 import { ModalWrapperComponent } from './modal-wrapper.component';
 import {
   DynamicFooterEmbeddedComponent,
@@ -53,6 +54,43 @@ describe('ModalWrapperComponent', () => {
       const rootElement: HTMLElement = spectator.element;
       const title = rootElement.querySelector('ion-title');
       expect(window.getComputedStyle(title).fontSize).toEqual('18px');
+    });
+  });
+
+  describe('sizing', () => {
+    beforeEach(() => {
+      spectator = modalWrapperTestBuilder
+        .flavor('modal')
+        .withEmbeddedInputComponent()
+        .build();
+    });
+    afterEach(() => {
+      spectator.fixture.destroy();
+    });
+
+    it('should trigger `onScrollElementResize` when embeddded component resizes', (done) => {
+      setTimeout(() => {
+        // @ts-ignore
+        expect(spectator.component.resizeObserverService.observe).toHaveBeenCalledWith(
+          // @ts-ignore
+          spectator.component.getEmbeddedComponentElement(),
+          jasmine.any(Function)
+        );
+        done();
+      });
+    });
+
+    it('should clean up resize observer of embedded component, on destroy', (done) => {
+      spectator.component.ngOnDestroy();
+
+      setTimeout(() => {
+        // @ts-ignore
+        expect(spectator.component.resizeObserverService.unobserve).toHaveBeenCalledWith(
+          // @ts-ignore
+          spectator.component.getEmbeddedComponentElement()
+        );
+        done();
+      });
     });
   });
 
@@ -336,6 +374,14 @@ describe('ModalWrapperComponent', () => {
       spectator.dispatchFakeEvent(window, 'ionKeyboardDidShow');
       spectator.dispatchFakeEvent(window, 'ionKeyboardDidHide');
       expect(spectator.component['keyboardVisible']).toBeFalse();
+    });
+
+    it('should keep same height, when keyboard is opened', () => {
+      const heightHeyboardClosed = spectator.element.getBoundingClientRect().height;
+      spectator.dispatchFakeEvent(window, 'ionKeyboardDidShow');
+      expect(spectator.component['keyboardVisible']).toBeTrue();
+      const heightHeyboardOpened = spectator.element.getBoundingClientRect().height;
+      expect(heightHeyboardClosed).toEqual(heightHeyboardOpened);
     });
   });
 

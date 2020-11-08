@@ -5,6 +5,7 @@
 :host {
   @include media('>=medium') {
     &:not(.drawer) {
+      padding-top: 0;
       display: flex;
       flex-direction: column;
       min-height: var(--min-height);
@@ -22,7 +23,6 @@
       }
     }
   }
-
   padding-top: size('s');
 }
 

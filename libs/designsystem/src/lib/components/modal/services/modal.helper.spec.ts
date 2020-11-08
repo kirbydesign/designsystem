@@ -9,6 +9,7 @@ import { TestHelper } from '../../../testing/test-helper';
 import { ModalHelper } from './modal.helper';
 import { Overlay, Modal } from './modal.interfaces';
 import { ModalNavigationService } from './modal-navigation.service';
+import { ModalFooterComponent } from '../footer/modal-footer.component';
 
 @Component({
   template: `
@@ -26,6 +27,25 @@ class InputEmbeddedComponent implements OnInit {
     this.modal && this.modal.didPresent.then(() => this.input.nativeElement.focus());
   }
 }
+
+@Component({
+  template: `
+    <div [style.height.px]="height">Content</div>
+    <kirby-modal-footer>
+      <button kirby-button>Button inside footer</button>
+    </kirby-modal-footer>
+  `,
+})
+class ContentOverflowsWithFooterEmbeddedComponent {
+  height: number = window.innerHeight;
+}
+
+@Component({
+  template: `
+    <div style="height: 1px;">Content</div>
+  `,
+})
+class ContentWithNoOverflowEmbeddedComponent {}
 
 describe('ModalHelper', () => {
   let spectator: SpectatorService<ModalHelper>;
@@ -52,9 +72,15 @@ describe('ModalHelper', () => {
         useValue: window,
       },
     ],
-    entryComponents: [InputEmbeddedComponent],
+    declarations: [ModalFooterComponent],
+    entryComponents: [
+      InputEmbeddedComponent,
+      ContentOverflowsWithFooterEmbeddedComponent,
+      ContentWithNoOverflowEmbeddedComponent,
+    ],
     mocks: [ModalNavigationService],
   });
+  let originalTimeout;
 
   beforeAll(() => {
     dummyPresentingElement = window.document.createElement('div');
@@ -73,9 +99,16 @@ describe('ModalHelper', () => {
   });
 
   beforeEach(() => {
+    originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000000;
+
     spectator = createService();
     modalHelper = spectator.service;
     ionModalController = spectator.inject(IonicModalController);
+  });
+
+  afterEach(() => {
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
   });
 
   describe('showModalWindow', () => {
@@ -114,6 +147,133 @@ describe('ModalHelper', () => {
         });
       });
 
+      describe('sizing', () => {
+        it('modal should be default sized (medium), if size is not provided', async () => {
+          overlay = await modalHelper.showModalWindow({
+            title: 'Modal',
+            component: InputEmbeddedComponent,
+          });
+          ionModal = await ionModalController.getTop();
+          expect(ionModal).toBeTruthy();
+          expect(ionModal.classList.contains('small')).toBeFalse();
+          expect(ionModal.classList.contains('medium')).toBeTrue();
+          expect(ionModal.classList.contains('large')).toBeFalse();
+          await overlay.dismiss();
+        });
+
+        it('modal should be sized `small`', async () => {
+          overlay = await modalHelper.showModalWindow({
+            title: 'Modal',
+            component: InputEmbeddedComponent,
+            size: 'small',
+          });
+          ionModal = await ionModalController.getTop();
+          expect(ionModal).toBeTruthy();
+          expect(ionModal.classList.contains('small')).toBeTrue();
+          expect(ionModal.classList.contains('medium')).toBeFalse();
+          expect(ionModal.classList.contains('large')).toBeFalse();
+          await overlay.dismiss();
+        });
+
+        it('modal should be sized `medium`', async () => {
+          overlay = await modalHelper.showModalWindow({
+            title: 'Modal',
+            component: InputEmbeddedComponent,
+            size: 'medium',
+          });
+          ionModal = await ionModalController.getTop();
+          expect(ionModal).toBeTruthy();
+          expect(ionModal.classList.contains('small')).toBeFalse();
+          expect(ionModal.classList.contains('medium')).toBeTrue();
+          expect(ionModal.classList.contains('large')).toBeFalse();
+          await overlay.dismiss();
+        });
+
+        it('modal should be sized `large`', async () => {
+          overlay = await modalHelper.showModalWindow({
+            title: 'Modal',
+            component: InputEmbeddedComponent,
+            size: 'large',
+          });
+          ionModal = await ionModalController.getTop();
+          expect(ionModal).toBeTruthy();
+          expect(ionModal.classList.contains('small')).toBeFalse();
+          expect(ionModal.classList.contains('medium')).toBeFalse();
+          expect(ionModal.classList.contains('large')).toBeTrue();
+          await overlay.dismiss();
+        });
+
+        it('should not set sizing class (large) if flavor is `drawer`', async () => {
+          overlay = await modalHelper.showModalWindow({
+            title: 'Modal',
+            flavor: 'drawer',
+            component: InputEmbeddedComponent,
+          });
+          ionModal = await ionModalController.getTop();
+          expect(ionModal).toBeTruthy();
+          expect(ionModal.classList.contains('small')).toBeFalse();
+          expect(ionModal.classList.contains('medium')).toBeFalse();
+          expect(ionModal.classList.contains('large')).toBeFalse();
+          await overlay.dismiss();
+        });
+
+        it("should add class `content-overflows`, if content can't fit in viewport", async () => {
+          overlay = await modalHelper.showModalWindow({
+            title: 'Modal',
+            component: ContentOverflowsWithFooterEmbeddedComponent,
+          });
+          ionModal = await ionModalController.getTop();
+          const ionModalWrapper = ionModal.querySelector('.modal-wrapper');
+          expect(ionModal).toBeTruthy();
+          expect(ionModalWrapper).toBeTruthy();
+
+          await TestHelper.whenTrue(() => {
+            return ionModalWrapper.classList.contains('content-overflows');
+          });
+
+          expect(ionModalWrapper.classList.contains('content-overflows')).toBeTrue();
+          await overlay.dismiss();
+        });
+
+        it('should NOT add class `content-overflows`, if content can fit in viewport', async (done) => {
+          overlay = await modalHelper.showModalWindow({
+            title: 'Modal',
+            component: ContentWithNoOverflowEmbeddedComponent,
+          });
+          ionModal = await ionModalController.getTop();
+          const ionModalWrapper = ionModal.querySelector('.modal-wrapper');
+          expect(ionModal).toBeTruthy();
+          expect(ionModalWrapper).toBeTruthy();
+
+          setTimeout(async () => {
+            expect(ionModalWrapper.classList.contains('content-overflows')).toBeFalse();
+            await overlay.dismiss();
+            done();
+          });
+        });
+
+        it('should have footer visible at the bottom of viewport, when content-overflows', async () => {
+          overlay = await modalHelper.showModalWindow({
+            title: 'Modal',
+            component: ContentOverflowsWithFooterEmbeddedComponent,
+          });
+          ionModal = await ionModalController.getTop();
+          const ionModalWrapper = ionModal.querySelector('.modal-wrapper');
+          const footer = ionModal.querySelector('kirby-modal-footer');
+          expect(ionModal).toBeTruthy();
+          expect(ionModalWrapper).toBeTruthy();
+          expect(footer).toBeTruthy();
+
+          await TestHelper.whenTrue(() => {
+            return ionModalWrapper.classList.contains('content-overflows');
+          });
+
+          expect(ionModalWrapper.classList.contains('content-overflows')).toBeTrue();
+          expect(footer.getBoundingClientRect().bottom).toEqual(window.innerHeight);
+          await overlay.dismiss();
+        });
+      });
+
       describe(`with default flavor ('modal')`, () => {
         beforeEach(async () => {
           overlay = await modalHelper.showModalWindow({
@@ -148,7 +308,6 @@ describe('ModalHelper', () => {
         it('modal window should not take focus from embedded input after opening', async () => {
           const ionContent = ionModal.querySelector<HTMLElement>('ion-content');
           await TestHelper.whenReady(ionContent);
-          console.log(ionContent);
           const input: HTMLInputElement = ionContent.querySelector<HTMLInputElement>('input');
           expect(input)
             .withContext('Input is not defined')

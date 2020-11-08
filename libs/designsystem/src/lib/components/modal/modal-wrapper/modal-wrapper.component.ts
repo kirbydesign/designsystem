@@ -58,7 +58,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   @ViewChild(RouterOutlet, { static: true }) private routerOutlet: RouterOutlet;
 
   private keyboardVisible = false;
-  private keyboardHeight: number;
+  private keyboardHeight: number = 0;
   private toolbarButtons: HTMLButtonElement[] = [];
   private delayedClose = () => {};
   private delayedCloseTimeoutId;
@@ -131,6 +131,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   }
 
   private setModalSize() {
+    if (this.config.flavor !== 'modal') return;
     this.renderer.addClass(this.ionModalElement, this.config.size || this.defaultSize);
   }
 
@@ -171,13 +172,19 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   }
 
   private observeScrollElementResize() {
-    if (!this.ionContent) return;
-
+    if (
+      !this.ionContent ||
+      !this.ionContent.getScrollElement ||
+      !this.ionContent.getScrollElement() ||
+      !this.ionContent.getScrollElement().then
+    )
+      return;
     this.ionContent.getScrollElement().then((scrollElement) => {
       this.renderer.setStyle(scrollElement, 'height', '100%');
       this.renderer.setStyle(scrollElement, 'position', 'relative');
-      this.resizeObserverService.observe(this.getEmbeddedComponentElement(), () =>
-        this.onScrollElementResize()
+      this.resizeObserverService.observe(
+        this.getEmbeddedComponentElement(),
+        this.onScrollElementResize.bind(this)
       );
     });
   }
@@ -268,6 +275,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   @HostListener('window:ionKeyboardDidShow', ['$event'])
   _onKeyboardWillShow(event: { detail: { keyboardHeight: number } }) {
     this.keyboardVisible = true;
+    if (!event.detail) return;
     this.setKeyboardOffset(event.detail.keyboardHeight);
     const ionModalWrapper = this.elementRef.nativeElement.closest<HTMLElement>('.modal-wrapper');
     if (!ionModalWrapper) return;
@@ -417,7 +425,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     const scrollElement = this.ionContent.getScrollElement();
     if (this.ionContent && scrollElement && scrollElement.then) {
       this.ionContent.getScrollElement().then((scrollElement) => {
-        this.resizeObserverService.unobserve(scrollElement);
+        this.resizeObserverService.unobserve(this.getEmbeddedComponentElement());
       });
     }
   }
