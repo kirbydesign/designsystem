@@ -37,7 +37,7 @@
   }
 }
 
-:host-context(.swiper-slide-active.highlight-active) {
+:host-context(.swiper-slide-active) {
   box-shadow: get-elevation(4);
   transition: all 0.5s;
   transform: translateY(-3px);
