@@ -234,6 +234,10 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   }
 
   async close(data?: any): Promise<void> {
+    if (!this.ionModalElement) {
+      return;
+    }
+
     if (!this.keyboardVisible || !this.viewportResized) {
       // No keyboard visible or viewport not resized:
       // Dismiss modal and return:
