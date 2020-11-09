@@ -62,16 +62,16 @@ describe('AlertComponent', () => {
 
     it('should have default size', () => {
       const okButton = fixture.debugElement.query(By.css('.ok-btn'));
-      component.cancelBtnText = null;
+      component.cancelBtnText = 'Test Cancel Button Text';
       fixture.detectChanges();
-      expect(okButton.attributes['size'] === '');
+      expect(okButton.attributes['ng-reflect-size']).toBeUndefined();
     });
 
     it('should have large ok button when no cancel button', () => {
       const okButton = fixture.debugElement.query(By.css('.ok-btn'));
       component.cancelBtnText = null;
       fixture.detectChanges();
-      expect(okButton.attributes['size'] === 'lg');
+      expect(okButton.attributes['ng-reflect-size']).toBe('lg');
     });
   });
 
