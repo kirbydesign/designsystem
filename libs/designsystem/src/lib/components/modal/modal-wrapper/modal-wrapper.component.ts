@@ -276,13 +276,12 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   _onKeyboardWillShow(event: { detail: { keyboardHeight: number } }) {
     this.keyboardVisible = true;
     if (!event.detail) return;
-    this.setKeyboardOffset(event.detail.keyboardHeight);
     const ionModalWrapper = this.elementRef.nativeElement.closest<HTMLElement>('.modal-wrapper');
     if (!ionModalWrapper) return;
     const distanceFromWindowBottomToModalBottom =
       this.windowRef.innerHeight - ionModalWrapper.getBoundingClientRect().bottom;
-    const keyboardOverlap = this.keyboardHeight - distanceFromWindowBottomToModalBottom;
-    console.warn('keyboardOverlap:', keyboardOverlap);
+    const keyboardOverlap = event.detail.keyboardHeight - distanceFromWindowBottomToModalBottom;
+        this.setKeyboardOffset(keyboardOverlap);
   }
   @HostListener('window:ionKeyboardDidHide')
   _onKeyboardWillHide() {
