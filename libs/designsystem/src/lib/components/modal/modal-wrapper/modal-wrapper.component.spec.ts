@@ -70,9 +70,7 @@ describe('ModalWrapperComponent', () => {
 
     it('should trigger `onScrollElementResize` when embeddded component resizes', (done) => {
       setTimeout(() => {
-        // @ts-ignore
-        expect(spectator.component.resizeObserverService.observe).toHaveBeenCalledWith(
-          // @ts-ignore
+        expect(spectator.component['resizeObserverService'].observe).toHaveBeenCalledWith(
           spectator.component.getEmbeddedComponentElement(),
           jasmine.any(Function)
         );
@@ -377,7 +375,7 @@ describe('ModalWrapperComponent', () => {
     });
 
     it('should keep same height, when keyboard is opened', () => {
-      const heightHeyboardClosed = spectator.element.getBoundingClientRect().height;
+      const heightKeyboardClosed = spectator.element.getBoundingClientRect().height;
       spectator.dispatchFakeEvent(window, 'ionKeyboardDidShow');
       expect(spectator.component['keyboardVisible']).toBeTrue();
       const heightHeyboardOpened = spectator.element.getBoundingClientRect().height;
