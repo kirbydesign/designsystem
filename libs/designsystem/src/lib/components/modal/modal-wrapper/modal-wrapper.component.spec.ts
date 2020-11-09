@@ -70,9 +70,7 @@ describe('ModalWrapperComponent', () => {
 
     it('should trigger `onScrollElementResize` when embeddded component resizes', (done) => {
       setTimeout(() => {
-        // @ts-ignore
-        expect(spectator.component.resizeObserverService.observe).toHaveBeenCalledWith(
-          // @ts-ignore
+        expect(spectator.component['resizeObserverService'].observe).toHaveBeenCalledWith(
           spectator.component.getEmbeddedComponentElement(),
           jasmine.any(Function)
         );
