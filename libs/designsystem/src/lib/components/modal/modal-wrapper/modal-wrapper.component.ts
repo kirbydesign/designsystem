@@ -275,7 +275,6 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   @HostListener('window:ionKeyboardDidShow', ['$event'])
   _onKeyboardWillShow(event: { detail: { keyboardHeight: number } }) {
     this.keyboardVisible = true;
-    if (!event.detail) return;
     const ionModalWrapper = this.elementRef.nativeElement.closest<HTMLElement>('.modal-wrapper');
     if (!ionModalWrapper) return;
     const distanceFromWindowBottomToModalBottom =
