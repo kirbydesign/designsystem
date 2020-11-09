@@ -212,7 +212,7 @@ describe('ModalWrapperComponent', () => {
     it('should disable scroll Y', () => {
       const ionContent: IonContent = spectator.query(IonContent);
       spectator.component.scrollDisabled = true;
-      expect(ionContent.scrollY).toBeFalse;
+      expect(ionContent.scrollY).toBeFalse();
     });
   });
 
