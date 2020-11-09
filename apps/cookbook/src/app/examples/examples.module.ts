@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
-import { KirbyModule } from '@kirbydesign/designsystem';
+import { IconRegistryService, KirbyModule } from '@kirbydesign/designsystem';
 
 import { COMPONENT_DECLARATIONS, PROVIDER_DECLARATIONS } from './examples.common';
 import { CardExampleComponent } from './card-example/card-example.component';
@@ -39,7 +39,6 @@ const IMPORTS = [
   imports: [CommonModule, RouterModule, KirbyModule, ...IMPORTS],
   declarations: COMPONENT_DECLARATIONS,
   exports: [...COMPONENT_DECLARATIONS, ...IMPORTS],
-  providers: [PROVIDER_DECLARATIONS],
   entryComponents: [
     CardExampleComponent,
     FirstEmbeddedModalExampleComponent,
@@ -49,4 +48,18 @@ const IMPORTS = [
     ModalRoutePage2ExampleComponent,
   ],
 })
-export class ExamplesModule {}
+export class ExamplesModule {
+  constructor(iconRegistryService: IconRegistryService) {
+    // Example of "custom" icons:
+    iconRegistryService.addIcons([
+      {
+        name: 'football',
+        svg: 'assets/icons/football.svg',
+      },
+      {
+        name: 'umbrella',
+        svg: 'assets/icons/umbrella.svg',
+      },
+    ]);
+  }
+}
