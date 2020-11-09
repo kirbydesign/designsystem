@@ -16,7 +16,6 @@ describe('SegmentedControlComponent', () => {
     {
       text: 'First item',
       id: 'first',
-      checked: false,
       badge: {
         content: '2',
         themeColor: 'danger',
@@ -24,12 +23,10 @@ describe('SegmentedControlComponent', () => {
     },
     {
       text: 'Second item',
-      checked: true,
       id: 'second',
     },
     {
       text: 'Third item',
-      checked: false,
       id: 'third',
     },
   ];
@@ -47,7 +44,7 @@ describe('SegmentedControlComponent', () => {
 
   beforeEach(() => {
     spectator = createHost(
-      `<kirby-segmented-control [items]="items">
+      `<kirby-segmented-control [items]="items" selectedIndex="1">
        </kirby-segmented-control>`,
       {
         hostProps: {

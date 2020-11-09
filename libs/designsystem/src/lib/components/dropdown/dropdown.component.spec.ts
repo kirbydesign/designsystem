@@ -36,6 +36,7 @@ describe('DropdownComponent', () => {
       declarations: [
         ItemComponent,
         MockComponents(ButtonComponent, CardComponent, IconComponent, IonItem),
+        MockDirectives(SizeDirective),
       ],
     });
 
@@ -935,7 +936,10 @@ describe('DropdownComponent', () => {
 
     const createHost = createHostFactory({
       component: DropdownComponent,
-      declarations: [MockComponents(ButtonComponent, CardComponent, ItemComponent, IconComponent)],
+      declarations: [
+        MockComponents(ButtonComponent, CardComponent, ItemComponent, IconComponent),
+        MockDirectives(SizeDirective),
+      ],
     });
 
     const defaultSelectedIndex = 2;
@@ -1043,7 +1047,10 @@ describe('DropdownComponent', () => {
 
     const createHost = createHostFactory({
       component: DropdownComponent,
-      declarations: [MockComponents(ButtonComponent, CardComponent, ItemComponent, IconComponent)],
+      declarations: [
+        MockComponents(ButtonComponent, CardComponent, ItemComponent, IconComponent),
+        MockDirectives(SizeDirective),
+      ],
       host: OnPushHostComponent,
     });
 
@@ -1089,6 +1096,7 @@ describe('DropdownComponent', () => {
         ItemComponent,
         ListItemTemplateDirective,
         MockComponents(ButtonComponent, CardComponent, IconComponent, IonItem),
+        MockDirectives(SizeDirective),
       ],
     });
 
