@@ -8,16 +8,15 @@ import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-prop
   selector: 'cookbook-icon-showcase',
   templateUrl: './icon-showcase.component.html',
   styleUrls: ['./icon-showcase.component.scss'],
+  preserveWhitespaces: true,
 })
 export class IconShowcaseComponent {
-  exampleHtml: string = `
-<!-- Default icons -->
+  exampleHtml: string = `<!-- Default icons -->
 <kirby-icon name="NAME"></kirby-icon>
 <!-- Custom icons -->
 <kirby-icon customName="NAME"></kirby-icon>
 <!-- Size -->
-<kirby-icon size="SIZE"></kirby-icon>
-    `;
+<kirby-icon size="SIZE"></kirby-icon>`;
   sizes = Sizes;
 
   properties: ShowcaseProperty[] = [
@@ -29,7 +28,7 @@ export class IconShowcaseComponent {
     },
     {
       name: 'size',
-      description: 'Determines size of the icon.',
+      description: 'Determines the size of the icon.',
       defaultValue: 'sm',
       inputValues: Object.values(this.sizes),
     },
@@ -51,7 +50,7 @@ export class IconShowcaseComponent {
     },
     {
       name: 'customName',
-      description: 'Used for custom icons font.',
+      description: 'Used for custom icons.',
       defaultValue: 'null',
       inputValues: ['string'],
     },
