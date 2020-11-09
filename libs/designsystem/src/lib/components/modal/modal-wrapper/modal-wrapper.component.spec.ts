@@ -375,7 +375,7 @@ describe('ModalWrapperComponent', () => {
     });
 
     it('should keep same height, when keyboard is opened', () => {
-      const heightHeyboardClosed = spectator.element.getBoundingClientRect().height;
+      const heightKeyboardClosed = spectator.element.getBoundingClientRect().height;
       spectator.dispatchFakeEvent(window, 'ionKeyboardDidShow');
       expect(spectator.component['keyboardVisible']).toBeTrue();
       const heightHeyboardOpened = spectator.element.getBoundingClientRect().height;
