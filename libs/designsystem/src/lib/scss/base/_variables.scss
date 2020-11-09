@@ -118,7 +118,7 @@ $modal-heights: (
   l: $modal-max-width * 0.8,
 ) !default;
 
-$modal-default-height: map-get($modal-heights, 's');
+$modal-default-height: map-get($modal-heights, 'm');
 
 /* Item
 ****************************************************************************/
