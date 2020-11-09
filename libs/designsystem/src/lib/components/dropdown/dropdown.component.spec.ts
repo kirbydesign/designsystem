@@ -906,7 +906,6 @@ describe('DropdownComponent', () => {
       it('should have small size on button', () => {
         const size = 'sm';
         spectator = getSpectatorWithSize(size);
-        console.log(spectator.query(ButtonComponent));
         buttonSizeDirective = getButtonSizeDirective();
         expect(buttonSizeDirective.size).toBe(size);
       });
