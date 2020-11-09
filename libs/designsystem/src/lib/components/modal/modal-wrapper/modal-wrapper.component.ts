@@ -93,7 +93,6 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     private componentFactoryResolver: ComponentFactoryResolver,
     private windowRef: WindowRef
   ) {
-    this.observeViewportResize();
   }
 
   ngOnInit(): void {
