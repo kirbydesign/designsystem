@@ -131,6 +131,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
 
   private setModalSize() {
     if (this.config.flavor !== 'modal') return;
+    if (!this.ionModalElement) return;
     this.renderer.addClass(this.ionModalElement, this.config.size || this.defaultSize);
   }
 
