@@ -93,7 +93,6 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     private componentFactoryResolver: ComponentFactoryResolver,
     private windowRef: WindowRef
   ) {
-    this.observeViewportResize();
   }
 
   ngOnInit(): void {
@@ -132,6 +131,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
 
   private setModalSize() {
     if (this.config.flavor !== 'modal') return;
+    if (!this.ionModalElement) return;
     this.renderer.addClass(this.ionModalElement, this.config.size || this.defaultSize);
   }
 
@@ -275,21 +275,19 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   @HostListener('window:ionKeyboardDidShow', ['$event'])
   _onKeyboardWillShow(event: { detail: { keyboardHeight: number } }) {
     this.keyboardVisible = true;
-    if (!event.detail) return;
-    this.setKeyboardOffset(event.detail.keyboardHeight);
     const ionModalWrapper = this.elementRef.nativeElement.closest<HTMLElement>('.modal-wrapper');
     if (!ionModalWrapper) return;
     const distanceFromWindowBottomToModalBottom =
       this.windowRef.innerHeight - ionModalWrapper.getBoundingClientRect().bottom;
-    const keyboardOverlap = this.keyboardHeight - distanceFromWindowBottomToModalBottom;
-    console.warn('keyboardOverlap:', keyboardOverlap);
+    const keyboardOverlap = event.detail.keyboardHeight - distanceFromWindowBottomToModalBottom;
+        this.setKeyboardOffset(keyboardOverlap);
   }
   @HostListener('window:ionKeyboardDidHide')
   _onKeyboardWillHide() {
     this.keyboardVisible = false;
     this.setKeyboardOffset(0);
   }
-  private setKeyboardOffset(value: number) {
+  private setKeyboardVisibility(value: number) {
     this.keyboardHeight = value;
     const [key, pixelValue] = ['--keyboard-offset', `${value}px`];
     this.ionContentElement.nativeElement.style.setProperty(key, pixelValue);

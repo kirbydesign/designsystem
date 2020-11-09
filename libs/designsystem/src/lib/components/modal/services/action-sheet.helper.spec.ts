@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { IonicModule, ModalController as IonicModalController } from '@ionic/angular';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 
-import { WindowRef } from '../../../types';
-
 import { ActionSheetHelper } from './action-sheet.helper';
 import { Overlay } from './modal.interfaces';
 
