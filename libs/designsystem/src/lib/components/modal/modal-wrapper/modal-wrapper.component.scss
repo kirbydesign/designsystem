@@ -68,7 +68,7 @@ ion-content {
 
   @include slotted('*') {
     box-sizing: border-box;
-    display: block;
+    //display: block;
   }
 
   --padding-top: #{size('m')};
