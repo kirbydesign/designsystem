@@ -48,7 +48,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   @ViewChildren(ButtonComponent, { read: ElementRef }) private toolbarButtonsQuery: QueryList<
     ElementRef<HTMLButtonElement>
   >;
-  @ViewChild(IonContent, { static: true }) ionContent: IonContent;
+  @ViewChild(IonContent, { static: true }) private ionContent: IonContent;
   @ViewChild(IonContent, { static: true, read: ElementRef }) private ionContentElement: ElementRef<
     HTMLIonContentElement
   >;
@@ -172,14 +172,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   }
 
   private observeScrollElementResize() {
-    if (
-      !this.ionContent ||
-      !this.ionContent.getScrollElement ||
-      !this.ionContent.getScrollElement() ||
-      !this.ionContent.getScrollElement().then
-    )
-      return;
-    this.ionContent.getScrollElement().then((scrollElement) => {
+    this.ionContentElement.nativeElement.getScrollElement().then((scrollElement) => {
       this.renderer.setStyle(scrollElement, 'height', '100%');
       this.renderer.setStyle(scrollElement, 'position', 'relative');
       this.resizeObserverService.observe(
