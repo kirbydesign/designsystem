@@ -46,8 +46,6 @@ export class ModalWrapperTestBuilder {
     ],
   });
 
-  constructor() {}
-
   title(title: string) {
     this.config.title = title;
     return this;
