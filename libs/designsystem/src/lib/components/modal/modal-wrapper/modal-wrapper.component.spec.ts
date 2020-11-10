@@ -361,27 +361,25 @@ describe('ModalWrapperComponent', () => {
       });
       window.dispatchEvent(ionKeyboardDidShowEvent);
       expect(spectator.component['keyboardVisible']).toBeTrue();
-      spectator.dispatchFakeEvent(window, 'ionKeyboardDidHide');
     });
+
     it('should set keyboardVisible to false on window:ionKeyboardDidHide', () => {
-      const ionKeyboardDidShowEvent = new CustomEvent('ionKeyboardDidShow', {
-        detail: { keyboardHeight: 200 },
-      });
-      window.dispatchEvent(ionKeyboardDidShowEvent);
+      spectator.component['keyboardVisible'] = true;
+
       spectator.dispatchFakeEvent(window, 'ionKeyboardDidHide');
+
       expect(spectator.component['keyboardVisible']).toBeFalse();
     });
 
-    it('should keep same height, when keyboard is opened', () => {
-      const heightKeyboardClosed = spectator.element.getBoundingClientRect().height;
+    it('should keep same height, when keyboard is opened', async () => {
+      const heightWhenKeyboardClosed = spectator.element.getBoundingClientRect().height;
       const ionKeyboardDidShowEvent = new CustomEvent('ionKeyboardDidShow', {
         detail: { keyboardHeight: 200 },
       });
       window.dispatchEvent(ionKeyboardDidShowEvent);
       expect(spectator.component['keyboardVisible']).toBeTrue();
-      const heightKeyboardOpened = spectator.element.getBoundingClientRect().height;
-      expect(heightKeyboardClosed).toEqual(heightKeyboardOpened);
-      spectator.dispatchFakeEvent(window, 'ionKeyboardDidHide');
+      const heightWhenKeyboardOpened = spectator.element.getBoundingClientRect().height;
+      expect(heightWhenKeyboardClosed).toEqual(heightWhenKeyboardOpened);
     });
   });
 
@@ -433,9 +431,6 @@ describe('ModalWrapperComponent', () => {
           detail: { keyboardHeight: 200 },
         });
         window.dispatchEvent(ionKeyboardDidShowEvent);
-      });
-      afterEach(() => {
-        spectator.dispatchFakeEvent(window, 'ionKeyboardDidHide');
       });
 
       it('should blur document.activeElement when it is an input', () => {
@@ -500,9 +495,6 @@ describe('ModalWrapperComponent', () => {
         });
         window.dispatchEvent(ionKeyboardDidShowEvent);
       });
-      afterEach(() => {
-        spectator.dispatchFakeEvent(window, 'ionKeyboardDidHide');
-      });
 
       describe(`and viewport is not resized`, () => {
         it(`should call wrapping ion-modal's dismiss() method immediately`, () => {
@@ -514,10 +506,8 @@ describe('ModalWrapperComponent', () => {
       describe(`and viewport is resized`, () => {
         beforeEach(async () => {
           // Ensure resizeObserver triggers and initialViewportHeight is set:
-          await new Promise((resolve) => setTimeout(resolve));
-          if (!spectator.component['initialViewportHeight']) {
-            await new Promise((resolve) => setTimeout(resolve, 25));
-          }
+          await TestHelper.waitForResizeObserver();
+          await TestHelper.whenTrue(() => !!spectator.component['initialViewportHeight']);
           expect(spectator.component['initialViewportHeight']).toBeGreaterThan(0);
 
           const keyboardHeight = 300;
@@ -529,10 +519,8 @@ describe('ModalWrapperComponent', () => {
           await TestHelper.resizeTestWindow({ height: `${window.innerHeight - keyboardHeight}px` });
 
           // Ensure resizeObserver triggers and onViewportResize fires:
-          await new Promise((resolve) => setTimeout(resolve));
-          if (!spectator.component['viewportResized']) {
-            await new Promise((resolve) => setTimeout(resolve, 25));
-          }
+          await TestHelper.waitForResizeObserver();
+          await TestHelper.whenTrue(() => spectator.component['viewportResized']);
           expect(spectator.component['viewportResized']).toBeTrue();
 
           // Ensure keyboard is visible
