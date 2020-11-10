@@ -24,13 +24,14 @@ export class TestHelper {
 
   public static async whenTrue(
     pollFunc: () => boolean,
-    timeout: number = 2000,
-    pollInterval: number = 5
+    timeoutInMs: number = 2000,
+    pollIntervalInMs: number = 5
   ): Promise<void> {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       let timeoutId, intervalId;
       const pollState = () => {
-        if (pollFunc()) {
+        const result = pollFunc();
+        if (result === true) {
           clearTimeout(timeoutId);
           clearInterval(intervalId);
           resolve();
@@ -38,9 +39,11 @@ export class TestHelper {
       };
       timeoutId = setTimeout(() => {
         clearInterval(intervalId);
-        resolve();
-      }, timeout);
-      intervalId = setInterval(pollState, pollInterval);
+        reject(
+          `Error: Timeout - TestHelper.whenTrue function did not complete within ${timeoutInMs}ms`
+        );
+      }, timeoutInMs);
+      intervalId = setInterval(pollState, pollIntervalInMs);
     });
   }
 
