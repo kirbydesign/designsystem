@@ -89,7 +89,6 @@ describe('ModalHelper', () => {
     ],
     mocks: [ModalNavigationService],
   });
-  let originalTimeout;
 
   beforeAll(() => {
     dummyPresentingElement = window.document.createElement('div');
@@ -108,16 +107,9 @@ describe('ModalHelper', () => {
   });
 
   beforeEach(() => {
-    originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000000;
-
     spectator = createService();
     modalHelper = spectator.service;
     ionModalController = spectator.inject(IonicModalController);
-  });
-
-  afterEach(() => {
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
   });
 
   describe('showModalWindow', () => {
@@ -276,7 +268,6 @@ describe('ModalHelper', () => {
 
           expect(ionModalWrapper.classList.contains('content-overflows')).toBeTrue();
           expect(footer.getBoundingClientRect().bottom).toEqual(window.innerHeight);
-          await overlay.dismiss();
         });
       });
 
