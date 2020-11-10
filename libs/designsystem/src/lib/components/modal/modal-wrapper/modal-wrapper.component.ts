@@ -66,6 +66,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   private delayedClose = () => {};
   private delayedCloseTimeoutId;
   private initialViewportHeight: number;
+  private scrollElementVerticalPadding = 0;
   private viewportResized = false;
   private ionModalElement?: HTMLIonModalElement;
   private readonly ionModalDidPresent = new Subject<void>();
@@ -138,68 +139,41 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     this.renderer.addClass(this.ionModalElement, this.config.size || this.defaultSize);
   }
 
-  private getVerticalPadding(element) {
-    const styles = this.windowRef.getComputedStyle(element);
-    return parseInt(styles.paddingTop) + parseInt(styles.paddingBottom);
-  }
-
-  private getAvailableContentHeight(): number {
-    const ionModalVerticalPadding = this.getVerticalPadding(this.ionModalElement);
-    const ionHeaderHeight = this.ionHeaderElement.nativeElement.getBoundingClientRect().height;
-    const embeddedComponentOffsetTop = this.getEmbeddedComponentElement()['offsetTop'];
-
-    const ionModalHeight = this.ionModalElement.getBoundingClientRect().height;
-    let availableHeight =
-      ionModalHeight - ionModalVerticalPadding - ionHeaderHeight - embeddedComponentOffsetTop;
-
-    const embeddedFooterElement = this.elementRef.nativeElement.querySelector<HTMLElement>(
-      'kirby-modal-footer'
-    );
-    if (embeddedFooterElement) {
-      availableHeight -= embeddedFooterElement.getBoundingClientRect().height;
-    }
-
-    return availableHeight;
-  }
-
-  private onEmbeddedElementResize() {
-    if (!this.getEmbeddedComponentElement()) return;
+  private onEmbeddedElementResize(embeddedElement: HTMLElement) {
     const ionModalWrapper = this.elementRef.nativeElement.closest<HTMLElement>('.modal-wrapper');
-    if (!ionModalWrapper) return;
-    const embeddedComponentHeight = this.getEmbeddedComponentElement().getBoundingClientRect()
-      .height;
-    const availableHeight = this.getAvailableContentHeight();
+    if (!embeddedElement || !ionModalWrapper) return;
 
-    if (embeddedComponentHeight >= availableHeight) {
-      setTimeout(() => {
+    const embeddedElementHeight = embeddedElement.offsetHeight + this.scrollElementVerticalPadding;
+    const contentWrapperHeight = this.ionContentElement.nativeElement.offsetHeight;
+
+    // Ensure resizing doesn't happen within ResizeObserver callback to avoid inifinite loop:
+    setTimeout(() => {
+      if (embeddedElementHeight > contentWrapperHeight) {
         this.renderer.addClass(ionModalWrapper, 'content-overflows');
-        this.renderer.setStyle(this.ionContentElement.nativeElement, 'max-height', 'none');
-      });
-    } else {
-      // If not in timeout, height of ionContent is not correct
-      setTimeout(() => {
-        let contentMaxHeight =
-          this.ionContentElement.nativeElement.clientHeight - this.keyboardOverlap;
-
-        this.renderer.setStyle(
-          this.ionContentElement.nativeElement,
-          'max-height',
-          `${contentMaxHeight}px`
-        );
-      });
-
-      this.renderer.removeClass(ionModalWrapper, 'content-overflows');
-    }
+      } else {
+        this.renderer.removeClass(ionModalWrapper, 'content-overflows');
+      }
+    });
   }
 
-  private observeScrollElementResize() {
-    this.ionContent.getScrollElement().then((scrollElement) => {
-      this.renderer.setStyle(scrollElement, 'height', '100%');
-      this.renderer.setStyle(scrollElement, 'position', 'relative');
-      this.resizeObserverService.observe(
-        this.getEmbeddedComponentElement(),
-        this.onEmbeddedElementResize.bind(this)
-      );
+  private observeEmbeddedElementResize() {
+    const embeddedElement = this.getEmbeddedComponentElement();
+    if (!embeddedElement) return;
+    this.resizeObserverService.observe(embeddedElement, (entry) =>
+      this.onEmbeddedElementResize(entry.target as HTMLElement)
+    );
+  }
+
+  private setScrollElementSize(): Promise<void> {
+    return new Promise((resolve) => {
+      this.ionContent.getScrollElement().then((scrollElement) => {
+        this.renderer.setStyle(scrollElement, 'height', '100%');
+        this.renderer.setStyle(scrollElement, 'position', 'relative');
+        const computedStyle = this.windowRef.getComputedStyle(scrollElement);
+        this.scrollElementVerticalPadding =
+          parseInt(computedStyle.paddingTop) + parseInt(computedStyle.paddingBottom);
+        resolve();
+      });
     });
   }
 
@@ -207,13 +181,23 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     if (this.toolbarButtonsQuery) {
       this.toolbarButtons = this.toolbarButtonsQuery.map((buttonRef) => buttonRef.nativeElement);
     }
-    this.observeScrollElementResize();
     this.checkForEmbeddedElements();
+    this.observeHeaderResize();
+    this.setScrollElementSize().then(() => {
+      this.observeEmbeddedElementResize();
+    });
   }
 
   private checkForEmbeddedElements() {
     this.moveEmbeddedElements();
     this.observeEmbeddedElements();
+  }
+
+  private observeHeaderResize() {
+    this.resizeObserverService.observe(this.ionHeaderElement.nativeElement, (entry) => {
+      const [key, pixelValue] = ['--header-height', `${entry.contentRect.height}px`];
+      this.elementRef.nativeElement.style.setProperty(key, pixelValue);
+    });
   }
 
   private moveEmbeddedElements() {
@@ -303,9 +287,8 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
 
     const [key, pixelValue] = ['--keyboard-offset', `${this.keyboardOverlap}px`];
     this.ionContentElement.nativeElement.style.setProperty(key, pixelValue);
-    const embeddedFooterElement = this.elementRef.nativeElement.querySelector<HTMLElement>(
-      'kirby-modal-footer'
-    );
+
+    const embeddedFooterElement = this.getEmbeddedFooterElement();
     if (embeddedFooterElement) {
       embeddedFooterElement.style.setProperty(key, pixelValue);
     }
@@ -342,9 +325,8 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   }
 
   private observeViewportResize() {
-    this.resizeObserverService.observe(
-      this.windowRef.document.body,
-      this.onViewportResize.bind(this)
+    this.resizeObserverService.observe(this.windowRef.document.body, (entry) =>
+      this.onViewportResize(entry)
     );
   }
 
@@ -394,9 +376,19 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
       : this.ionContentElement.nativeElement.firstElementChild;
   }
 
+  private getEmbeddedFooterElement() {
+    return this.elementRef.nativeElement.querySelector<HTMLElement>('kirby-modal-footer');
+  }
+
   private moveChild(child: Element, newParent: Element) {
     this.renderer.removeChild(child.parentElement, child);
     this.renderer.appendChild(newParent, child);
+    if (child.tagName === 'KIRBY-MODAL-FOOTER') {
+      this.resizeObserverService.observe(child, (entry) => {
+        const [key, pixelValue] = ['--footer-height', `${entry.contentRect.height}px`];
+        this.elementRef.nativeElement.style.setProperty(key, pixelValue);
+      });
+    }
   }
 
   private removeChild(child?: Element) {
@@ -444,8 +436,11 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     //clean up the observer
     this.mutationObserver.disconnect();
     delete this._mutationObserver;
-    this.resizeObserverService && this.resizeObserverService.unobserve(window.document.body);
-    this.resizeObserverService &&
+    if (this.resizeObserverService) {
+      this.resizeObserverService.unobserve(window.document.body);
       this.resizeObserverService.unobserve(this.getEmbeddedComponentElement());
+      this.resizeObserverService.unobserve(this.ionHeaderElement.nativeElement);
+      this.resizeObserverService.unobserve(this.getEmbeddedFooterElement());
+    }
   }
 }

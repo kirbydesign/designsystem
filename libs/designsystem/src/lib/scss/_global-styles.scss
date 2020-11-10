@@ -100,10 +100,11 @@ ion-modal.kirby-overlay {
 
       &:not(.kirby-drawer):not(.kirby-modal-compact) {
         --height: auto;
-        --max-height: none;
+        --kirby-modal-padding-top: #{size('xl')};
         --min-height: #{$modal-default-height};
+        --max-height: calc(100vh - var(--kirby-modal-padding-top));
         align-items: flex-start;
-        padding-top: size('xl');
+        padding-top: var(--kirby-modal-padding-top);
         transition: all 0.5s #{get-transition-duration('long')} #{get-transition-easing(
               'enter-exit'
             )},
@@ -123,10 +124,6 @@ ion-modal.kirby-overlay {
           border-bottom-left-radius: 0;
           border-bottom-right-radius: 0;
           align-self: stretch;
-
-          ion-content {
-            --overflow: auto;
-          }
         }
       }
 
