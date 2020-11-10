@@ -20,11 +20,13 @@ export class MockCalendarComponent {
   @Input() disablePastDates: boolean;
   @Input() disableFutureDates: boolean;
   @Input() alwaysEnableToday: boolean;
+  @Input() useYearSelector: boolean;
   @Input() selectedDate: Date;
   @Input() disabledDates: Date[];
   @Input() todayDate: Date;
   @Input() minDate: Date;
   @Input() maxDate: Date;
+  @Input() activeYear: string;
 }
 
 // #endregion

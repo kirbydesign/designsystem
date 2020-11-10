@@ -41,8 +41,12 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() disablePastDates = false;
   @Input() disableFutureDates = false;
   @Input() alwaysEnableToday = false;
+  @Input() useYearSelector: boolean = false;
+
   public month: CalendarCell[][];
   public weekDays: string[];
+  public yearSelectorVisible: boolean = false;
+
   private selectedDay: CalendarCell;
   // NOTE: Internally, all objects wrapping timestamps (i.e. Date and moment.Moment)
   // are normalized to point to local timezone midnight, regardless of the timezone
@@ -105,6 +109,10 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
 
   get activeYear(): string {
     return this.activeMonth.format('YYYY');
+  }
+  @Input() set activeYear(value: string) {
+    const activeMonth = this.activeMonth.clone();
+    this.setActiveMonth(activeMonth.year(Number(value)).toDate());
   }
 
   constructor(private calendarHelper: CalendarHelper, @Inject(LOCALE_ID) private locale: string) {

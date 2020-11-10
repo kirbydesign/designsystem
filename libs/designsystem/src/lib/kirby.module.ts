@@ -79,6 +79,7 @@ import { FlagComponent } from './components/flag/flag.component';
 import { IconRegistryService } from './components/icon/icon-registry.service';
 import { WindowRef } from './types/window-ref';
 import { ToggleButtonModule } from './components/toggle-button/toggle-button.module';
+import { YearSelectorComponent } from './components/calendar/year-selector/year-selector.component';
 
 const exportedDeclarations = [
   CardComponent,
@@ -127,6 +128,7 @@ const exportedDeclarations = [
   LoadingOverlayComponent,
   ProgressCircleComponent,
   FlagComponent,
+  YearSelectorComponent,
 ];
 
 const declarations = [

@@ -55,6 +55,59 @@ td {
   }
 }
 
+.header-year-selector {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.5em;
+
+  button {
+    background-color: transparent;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    padding-top: 3px;
+  }
+
+  button:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  .section-month {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    .month {
+      margin: auto;
+      flex: auto;
+      display: flex;
+      flex-direction: row;
+      width: 100px;
+      align-content: center;
+      justify-content: center;
+      font-weight: font-weight('bold');
+    }
+  }
+
+  .section-year {
+    display: flex;
+    flex-direction: row;
+    background-color: lightcyan;
+    .year {
+      margin: auto;
+      flex: auto;
+      display: flex;
+      flex-direction: row;
+      width: 100px;
+      align-content: center;
+      justify-content: flex-end;
+      font-weight: font-weight('bold');
+    }
+  }
+}
+
 .month-and-year {
   line-height: line-height('xl');
   user-select: none;

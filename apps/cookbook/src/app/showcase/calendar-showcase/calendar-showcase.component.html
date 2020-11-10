@@ -16,6 +16,7 @@
         [setMaxDate]="setMaxDate"
         [setTodayDate]="setTodayDate"
         [useTimezoneUTC]="useTimezoneUTC"
+        [useYearSelector]="useYearSelector"
       ></cookbook-calendar-card-example>
       <!-- prettier-ignore -->
       <fieldset>
@@ -37,11 +38,27 @@
           <kirby-checkbox [checked]="setTodayDate" (checkedChange)="setTodayDate = $event;"></kirby-checkbox>
           <label (click)="setTodayDate = !setTodayDate">Set today date ({{todayDate | date:'dd-MM-yyyy':(useTimezoneUTC ? 'UTC' : undefined)}})</label><br/>  
           <kirby-checkbox [checked]="" (checkedChange)="useTimezoneUTC = $event;"></kirby-checkbox>
-          <label (click)="useTimezoneUTC = !useTimezoneUTC">Use UTC instead of local time</label>  
-        </fieldset>
+          <label (click)="useTimezoneUTC = !useTimezoneUTC">Use UTC instead of local time</label><br/>
+          <kirby-checkbox id="yearSelector" [checked]="" (checkedChange)="useYearSelector = $event;"></kirby-checkbox>
+          <label for="yearSelector">Show Year Selector</label>
+      </fieldset>
     </div>
     <cookbook-code-viewer [html]="exampleWithCardHtml"></cookbook-code-viewer>
   </div>
+
   <h4>Properties:</h4>
   <cookbook-showcase-properties [properties]="properties"></cookbook-showcase-properties>
+
+  <h2 class="custom-example">Using year selector:</h2>
+  <div class="calendar-example">
+    <div class="example-wrapper">
+      <cookbook-calendar-card-example
+        [useYearSelector]="true"
+        [minDate]="getMinDate()"
+        [maxDate]="getMaxDate()"
+        setMinDate="true"
+        setMaxDate="true"
+      ></cookbook-calendar-card-example>
+    </div>
+  </div>
 </div>

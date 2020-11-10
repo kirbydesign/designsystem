@@ -19,6 +19,7 @@ export class CalendarShowcaseComponent {
   setTodayDate = false;
   setDisabledDates = false;
   useTimezoneUTC = false;
+  useYearSelector = false;
   minDate: Date;
   maxDate: Date;
   todayDate: Date;
@@ -29,7 +30,7 @@ export class CalendarShowcaseComponent {
     this.minDate = new Date();
     this.minDate.setDate(today.getDate() - 60);
     this.maxDate = new Date();
-    this.maxDate.setDate(today.getDate() + 60);
+    this.maxDate.setDate(today.getDate() + 1200);
     this.todayDate = new Date();
     this.todayDate.setDate(today.getDate() + 3);
   }
@@ -96,6 +97,12 @@ export class CalendarShowcaseComponent {
       inputValues: ['Date[]'],
     },
     {
+      name: 'useYearSelector',
+      description: '(Optional) Specify if Year Selector should be available (visible).',
+      defaultValue: 'false',
+      inputValues: ['true | false'],
+    },
+    {
       name: 'timezone',
       description:
         '(Optional) Specify timezone for aligning Date objects. Emitted Date objects will be constructed to point to midnight in the given timezone. Input Date objects may be in either of the two timezones but we highly recommend aligning them with midnight.',
@@ -103,4 +110,12 @@ export class CalendarShowcaseComponent {
       inputValues: ['"local" | "UTC"'],
     },
   ];
+
+  getMaxDate() {
+    return new Date('2030');
+  }
+
+  getMinDate() {
+    return new Date('2020');
+  }
 }

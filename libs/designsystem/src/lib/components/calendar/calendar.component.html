@@ -1,4 +1,4 @@
-<div class="header">
+<div class="header" *ngIf="!useYearSelector">
   <button [disabled]="!canNavigateBack" (click)="changeMonth(-1)">
     <kirby-icon name="arrow-back"></kirby-icon>
   </button>
@@ -13,11 +13,41 @@
   </button>
 </div>
 
-<table class="calendar-table">
+<div class="header-year-selector" *ngIf="useYearSelector">
+  <div class="section-month">
+    <button [disabled]="!canNavigateBack" (click)="changeMonth(-1)">
+      <kirby-icon name="arrow-back"></kirby-icon>
+    </button>
+    <div class="month">
+      {{ activeMonthName }}
+    </div>
+    <button [disabled]="!canNavigateForward" (click)="changeMonth(1)">
+      <kirby-icon name="arrow-more"></kirby-icon>
+    </button>
+  </div>
+
+  <div class="section-year">
+    <div class="year">
+      {{ activeYear }}
+    </div>
+    <button class="select-button" (click)="yearSelectorVisible = !yearSelectorVisible">
+      <kirby-icon name="{{ !yearSelectorVisible ? 'arrow-down' : 'arrow-up' }}"></kirby-icon>
+    </button>
+  </div>
+</div>
+
+<kirby-year-selector
+  *ngIf="yearSelectorVisible"
+  [(activeYear)]="activeYear"
+  minYear="{{ minDate }}"
+  maxYear="{{ maxDate }}"
+>
+</kirby-year-selector>
+
+<table class="calendar-table" *ngIf="!yearSelectorVisible">
   <thead class="calendar-table-header">
     <th *ngFor="let weekDay of weekDays">{{ weekDay }}</th>
   </thead>
-
   <tbody>
     <tr *ngFor="let week of month">
       <td *ngFor="let day of week">

@@ -1,9 +1,22 @@
+import * as ionic from '@ionic/angular';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import moment from 'moment';
 import { MockComponent } from 'ng-mocks';
 import { LOCALE_ID } from '@angular/core';
+import { ComponentFixtureAutoDetect } from '@angular/core/testing';
 
-import { CalendarComponent, IconComponent } from '..';
+import { YearSelectorComponent } from './year-selector/year-selector.component';
+import {
+  CalendarComponent,
+  CardComponent,
+  IconComponent,
+  InfiniteScrollDirective,
+  ItemComponent,
+  ListComponent,
+  ListItemColorDirective,
+  ListItemTemplateDirective,
+  SpinnerComponent,
+} from '..';
 import { WindowRef } from '../../types/window-ref';
 
 // NOTE: when specifying multiple input properties, set selectedDate
@@ -15,7 +28,26 @@ describe('CalendarComponent', () => {
 
   const createHost = createHostFactory({
     component: CalendarComponent,
-    declarations: [CalendarComponent, MockComponent(IconComponent)],
+    declarations: [
+      CalendarComponent,
+      YearSelectorComponent,
+      ListComponent,
+      ItemComponent,
+      InfiniteScrollDirective,
+      ListItemColorDirective,
+      SpinnerComponent,
+      IconComponent,
+      CardComponent,
+      ListItemTemplateDirective,
+      MockComponent(ionic.IonList),
+      MockComponent(ionic.IonListHeader),
+      MockComponent(ionic.IonLabel),
+      MockComponent(ionic.IonItem),
+      MockComponent(ionic.IonIcon),
+      MockComponent(ionic.IonItemDivider),
+      MockComponent(ionic.IonItemGroup),
+      MockComponent(ionic.IonItemSliding),
+    ],
     providers: [
       {
         provide: LOCALE_ID,
@@ -26,6 +58,7 @@ describe('CalendarComponent', () => {
         provide: WindowRef,
         useValue: window,
       },
+      { provide: ComponentFixtureAutoDetect, useValue: true },
     ],
   });
 
@@ -220,6 +253,117 @@ describe('CalendarComponent', () => {
     expect(spectator.component.disabledDates).toEqual(localDates);
   });
 
+  it('should not display caret for Year Selector when in default mode', async () => {
+    await expect(spectator.query('.header-year-selector')).toBeNull();
+  });
+
+  it('should display Content Year Selector when set to visible', async () => {
+    spectator.setInput('yearSelectorVisible', true);
+    spectator.setInput('minDate', localMidnightDate('2020-01-01'));
+    spectator.setInput('maxDate', localMidnightDate('2030-01-01'));
+    spectator.setInput('selectedDate', localMidnightDate('2021-08-29'));
+
+    spectator.detectChanges();
+    spectator.detectComponentChanges();
+    await spectator.fixture.whenStable();
+    const content = spectator.query('.calendar-content');
+    await expect(content).not.toBe(null);
+    expect(spectator.component.yearSelectorVisible).toBeTrue();
+  });
+
+  it('should set yearSelectorVisible when setting useYearSelector and then Click on Caret', async () => {
+    spectator.setInput('useYearSelector', true);
+    spectator.setInput('minDate', localMidnightDate('2020-01-01'));
+    spectator.setInput('maxDate', localMidnightDate('2030-01-01'));
+    spectator.setInput('selectedDate', localMidnightDate('2021-08-29'));
+    expect(spectator.component.useYearSelector).toBeTrue();
+
+    // Click
+    spectator.click(spectator.query('.select-button'));
+
+    spectator.detectChanges();
+    spectator.detectComponentChanges();
+    await spectator.fixture.whenStable();
+
+    expect(spectator.component.yearSelectorVisible).toBeTrue();
+
+    const content = spectator.query('.calendar-content');
+    await expect(content).not.toBe(null);
+  });
+
+  it('should  display header for Year Selector when set to year selections mode, but not year content', async () => {
+    spectator.setInput('useYearSelector', true);
+    spectator.setInput('minDate', localMidnightDate('2020-01-01'));
+    spectator.setInput('maxDate', localMidnightDate('2030-01-01'));
+    spectator.setInput('selectedDate', localMidnightDate('2021-08-29'));
+    spectator.detectChanges();
+    spectator.detectComponentChanges();
+    await spectator.fixture.whenStable();
+    expect(spectator.component.useYearSelector).toBeTrue();
+    let content = spectator.query('.header-year-selector');
+    await expect(content).not.toBe(null);
+    content = await spectator.query('.calendar-content');
+    await expect(content).toBe(null);
+  });
+
+  it('should render 11 Years inside List', async () => {
+    spectator.setInput('useYearSelector', true);
+    spectator.setInput('minDate', localMidnightDate('2020-01-01'));
+    spectator.setInput('maxDate', localMidnightDate('2030-01-01'));
+    spectator.setInput('selectedDate', localMidnightDate('2021-08-29'));
+    expect(spectator.component.useYearSelector).toBeTrue();
+
+    // Click
+    spectator.click(spectator.query('.select-button'));
+
+    spectator.detectChanges();
+    spectator.detectComponentChanges();
+    await spectator.fixture.whenStable();
+
+    await expect(spectator.component.yearSelectorVisible).toBeTrue();
+
+    const content = spectator.query('.calendar-content');
+    await expect(content).not.toBe(null);
+
+    const content2 = spectator
+      .queryAll('.calendar-content kirby-item')
+      .map((_) => _.textContent)
+      .join(' ');
+    console.log(content2);
+
+    await expect(content2).toEqual(
+      ' 2020   2021   2022   2023   2024   2025   2026   2027   2028   2029   2030 '
+    );
+  });
+
+  it('should render 2 Years inside List', async () => {
+    spectator.setInput('useYearSelector', true);
+    spectator.setInput('minDate', localMidnightDate('2020-01-01'));
+    spectator.setInput('maxDate', localMidnightDate('2021-01-01'));
+    spectator.setInput('selectedDate', localMidnightDate('2020-08-29'));
+    expect(spectator.component.useYearSelector).toBeTrue();
+
+    // Click
+    spectator.click(spectator.query('.select-button'));
+
+    spectator.detectChanges();
+    spectator.detectComponentChanges();
+    await spectator.fixture.whenStable();
+
+    await expect(spectator.component.yearSelectorVisible).toBeTrue();
+
+    const content = spectator.query('.calendar-content');
+    await expect(content).not.toBe(null);
+
+    const content2 = spectator
+      .queryAll('.calendar-content kirby-item')
+      .map((_) => _.textContent)
+      .join(' ');
+    console.log(content2);
+
+    await expect(content2).toEqual(' 2020   2021 ');
+  });
+
   it('should render days from Monday to Sunday', () => {
     expect(
       spectator
@@ -244,6 +388,10 @@ describe('CalendarComponent', () => {
 
   function clickDayOfMonth(dateOneIndexed: number) {
     spectator.click(spectator.queryAll('.day.current-month')[dateOneIndexed - 1]);
+  }
+
+  function clickYearSelector() {
+    spectator.click(spectator.queryAll('')[0]);
   }
 
   function trimmedTexts(selector: string) {

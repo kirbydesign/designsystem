@@ -1,0 +1,17 @@
+<kirby-list
+  (itemSelect)="onItemSelect($event)"
+  class="calendar-content"
+  [items]="selectableDates"
+  shape="square"
+  hasItemSpacing="false"
+>
+  <kirby-item
+    *kirbyListItemTemplate="let item"
+    selectable="true"
+    selected="isItemSelected(item)"
+    size="sm"
+  >
+    {{ item }}
+    <kirby-icon *ngIf="isItemSelected(item)" slot="end" name="checkmark-selected"></kirby-icon>
+  </kirby-item>
+</kirby-list>
