@@ -249,9 +249,10 @@ describe('ModalWrapperComponent', () => {
 
     it('should define custom CSS property --keyboard-offset on embedded footer', () => {
       const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
-      spectator.component._onKeyboardDidShow({ detail: { keyboardHeight: 200 } });
+      const keyboardHeight = 200;
+      spectator.component._onKeyboardDidShow({ detail: { keyboardHeight } });
       const keyboardOverlap =
-        200 - spectator.component['getDistanceFromWindowButtomToModalButtom']();
+        keyboardHeight - spectator.component['getDistanceFromWindowBottomToModalBottom']();
       expect(kirbyModalFooter).toHaveStyle({
         '--keyboard-offset': `${keyboardOverlap}px`,
       });
@@ -334,10 +335,11 @@ describe('ModalWrapperComponent', () => {
       await TestHelper.waitForResizeObserver();
 
       const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
-      spectator.component._onKeyboardDidShow({ detail: { keyboardHeight: 200 } });
+      const keyboardHeight = 200;
+      spectator.component._onKeyboardDidShow({ detail: { keyboardHeight } });
 
       const keyboardOverlap =
-        200 - spectator.component['getDistanceFromWindowButtomToModalButtom']();
+        keyboardHeight - spectator.component['getDistanceFromWindowBottomToModalBottom']();
 
       expect(kirbyModalFooter).toHaveStyle({ '--keyboard-offset': `${keyboardOverlap}px` });
     });

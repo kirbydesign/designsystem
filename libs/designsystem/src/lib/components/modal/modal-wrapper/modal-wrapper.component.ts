@@ -294,13 +294,13 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
 
   private setKeyboardOverlap(value: number) {
     if (value > 0) {
-      this.keyboardOverlap = value - this.getDistanceFromWindowButtomToModalButtom();
+      this.keyboardOverlap = value - this.getDistanceFromWindowBottomToModalBottom();
     } else {
       this.keyboardOverlap = 0;
     }
   }
 
-  private getDistanceFromWindowButtomToModalButtom() {
+  private getDistanceFromWindowBottomToModalBottom() {
     const ionModalWrapper = this.elementRef.nativeElement.closest<HTMLElement>('.modal-wrapper');
     if (!ionModalWrapper) return;
     return this.windowRef.innerHeight - ionModalWrapper.getBoundingClientRect().bottom;
