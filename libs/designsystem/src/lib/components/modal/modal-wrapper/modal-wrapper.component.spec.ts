@@ -535,7 +535,6 @@ describe('ModalWrapperComponent', () => {
           // Ensure any observers are destroyed:
           spectator.fixture.destroy();
           TestHelper.resetTestWindow();
-          spectator.dispatchFakeEvent(window, 'ionKeyboardDidHide');
         });
 
         it(`should blur document.activeElement before calling wrapping ion-modal's dismiss() method`, fakeAsync(async () => {
