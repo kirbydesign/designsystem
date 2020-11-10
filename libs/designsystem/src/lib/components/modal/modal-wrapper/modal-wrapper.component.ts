@@ -284,10 +284,8 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   private setKeyboardVisibility(value: number) {
     this.keyboardVisible = value > 0;
     this.setKeyboardOverlap(value);
-
     const [key, pixelValue] = ['--keyboard-offset', `${this.keyboardOverlap}px`];
     this.ionContentElement.nativeElement.style.setProperty(key, pixelValue);
-
     const embeddedFooterElement = this.getEmbeddedFooterElement();
     if (embeddedFooterElement) {
       embeddedFooterElement.style.setProperty(key, pixelValue);
