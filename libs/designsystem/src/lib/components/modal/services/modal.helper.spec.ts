@@ -89,7 +89,6 @@ describe('ModalHelper', () => {
     ],
     mocks: [ModalNavigationService],
   });
-  let originalTimeout;
 
   beforeAll(() => {
     dummyPresentingElement = window.document.createElement('div');
@@ -108,16 +107,9 @@ describe('ModalHelper', () => {
   });
 
   beforeEach(() => {
-    originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000000;
-
     spectator = createService();
     modalHelper = spectator.service;
     ionModalController = spectator.inject(IonicModalController);
-  });
-
-  afterEach(() => {
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
   });
 
   describe('showModalWindow', () => {
@@ -157,6 +149,10 @@ describe('ModalHelper', () => {
       });
 
       describe('sizing', () => {
+        afterEach(async () => {
+          await overlay.dismiss();
+        });
+
         it('modal should be default sized (medium), if size is not provided', async () => {
           overlay = await modalHelper.showModalWindow({
             title: 'Modal',
@@ -167,7 +163,6 @@ describe('ModalHelper', () => {
           expect(ionModal.classList.contains('small')).toBeFalse();
           expect(ionModal.classList.contains('medium')).toBeTrue();
           expect(ionModal.classList.contains('large')).toBeFalse();
-          await overlay.dismiss();
         });
 
         it('modal should be sized `small`', async () => {
@@ -181,7 +176,6 @@ describe('ModalHelper', () => {
           expect(ionModal.classList.contains('small')).toBeTrue();
           expect(ionModal.classList.contains('medium')).toBeFalse();
           expect(ionModal.classList.contains('large')).toBeFalse();
-          await overlay.dismiss();
         });
 
         it('modal should be sized `medium`', async () => {
@@ -195,7 +189,6 @@ describe('ModalHelper', () => {
           expect(ionModal.classList.contains('small')).toBeFalse();
           expect(ionModal.classList.contains('medium')).toBeTrue();
           expect(ionModal.classList.contains('large')).toBeFalse();
-          await overlay.dismiss();
         });
 
         it('modal should be sized `large`', async () => {
@@ -209,7 +202,6 @@ describe('ModalHelper', () => {
           expect(ionModal.classList.contains('small')).toBeFalse();
           expect(ionModal.classList.contains('medium')).toBeFalse();
           expect(ionModal.classList.contains('large')).toBeTrue();
-          await overlay.dismiss();
         });
 
         it('should not set sizing class (large) if flavor is `drawer`', async () => {
@@ -223,7 +215,6 @@ describe('ModalHelper', () => {
           expect(ionModal.classList.contains('small')).toBeFalse();
           expect(ionModal.classList.contains('medium')).toBeFalse();
           expect(ionModal.classList.contains('large')).toBeFalse();
-          await overlay.dismiss();
         });
 
         it("should add class `content-overflows`, if content can't fit in viewport", async () => {
@@ -241,7 +232,6 @@ describe('ModalHelper', () => {
           });
 
           expect(ionModalWrapper.classList.contains('content-overflows')).toBeTrue();
-          await overlay.dismiss();
         });
 
         it('should NOT add class `content-overflows`, if content can fit in viewport', async (done) => {
@@ -256,7 +246,6 @@ describe('ModalHelper', () => {
 
           setTimeout(async () => {
             expect(ionModalWrapper.classList.contains('content-overflows')).toBeFalse();
-            await overlay.dismiss();
             done();
           });
         });
@@ -279,7 +268,6 @@ describe('ModalHelper', () => {
 
           expect(ionModalWrapper.classList.contains('content-overflows')).toBeTrue();
           expect(footer.getBoundingClientRect().bottom).toEqual(window.innerHeight);
-          await overlay.dismiss();
         });
       });
 

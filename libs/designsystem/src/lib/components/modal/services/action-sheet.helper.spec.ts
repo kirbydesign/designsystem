@@ -13,7 +13,6 @@ import { Overlay } from './modal.interfaces';
 class EmbeddedDummyComponent {}
 
 describe('ActionSheetHelper', () => {
-  let originalTimeout;
   let spectator: SpectatorService<ActionSheetHelper>;
   let actionSheetHelper: ActionSheetHelper;
   const backdropOpacity = '0.4';
@@ -24,14 +23,8 @@ describe('ActionSheetHelper', () => {
   });
 
   beforeEach(() => {
-    originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000000;
     spectator = createService();
     actionSheetHelper = spectator.service;
-  });
-
-  afterEach(() => {
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
   });
 
   describe('showActionSheet', () => {
