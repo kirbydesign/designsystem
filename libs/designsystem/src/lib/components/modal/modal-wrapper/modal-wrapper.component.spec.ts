@@ -522,13 +522,6 @@ describe('ModalWrapperComponent', () => {
           await TestHelper.waitForResizeObserver();
           await TestHelper.whenTrue(() => spectator.component['viewportResized']);
           expect(spectator.component['viewportResized']).toBeTrue();
-
-          // Ensure keyboard is visible
-          const ionKeyboardDidShowEvent = new CustomEvent('ionKeyboardDidShow', {
-            detail: { keyboardHeight },
-          });
-          window.dispatchEvent(ionKeyboardDidShowEvent);
-          expect(spectator.component['keyboardVisible']).toBeTrue();
         });
 
         afterEach(() => {
