@@ -85,7 +85,7 @@ export class ModalWrapperTestBuilder {
       },
       detectChanges: false,
     });
-    spyOn(spectator.component.ionContent, 'getScrollElement').and.returnValue(
+    spyOn(spectator.component['ionContent'], 'getScrollElement').and.returnValue(
       Promise.resolve(document.createElement('DIV'))
     );
     const resizeObserverService = spectator.inject(ResizeObserverService);

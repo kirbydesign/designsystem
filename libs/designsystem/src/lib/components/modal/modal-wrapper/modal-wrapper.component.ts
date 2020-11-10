@@ -15,7 +15,7 @@ import {
   ComponentFactoryResolver,
 } from '@angular/core';
 import { ActivatedRoute, RouterOutlet } from '@angular/router';
-import { IonContent, IonTitle } from '@ionic/angular';
+import { IonContent, IonHeader, IonTitle } from '@ionic/angular';
 import { Observable, Subject } from 'rxjs';
 import { first, takeUntil } from 'rxjs/operators';
 
@@ -52,13 +52,16 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   @ViewChild(IonContent, { static: true, read: ElementRef }) private ionContentElement: ElementRef<
     HTMLIonContentElement
   >;
+  @ViewChild(IonHeader, { static: true, read: ElementRef }) private ionHeaderElement: ElementRef<
+    HTMLIonHeaderElement
+  >;
   @ViewChild(IonTitle, { static: true, read: ElementRef }) private ionTitleElement: ElementRef<
     HTMLIonTitleElement
   >;
   @ViewChild(RouterOutlet, { static: true }) private routerOutlet: RouterOutlet;
 
   private keyboardVisible = false;
-  private keyboardHeight: number = 0;
+  private keyboardOverlap: number = 0;
   private toolbarButtons: HTMLButtonElement[] = [];
   private delayedClose = () => {};
   private delayedCloseTimeoutId;
@@ -93,12 +96,12 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     private componentFactoryResolver: ComponentFactoryResolver,
     private windowRef: WindowRef
   ) {
+    this.observeViewportResize();
   }
 
   ngOnInit(): void {
-    this.observeViewportResize();
     this.ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
-    this.setModalSize();
+    this.setInitialModalSize();
     this.initializeModalRoute();
     this.listenForIonModalDidPresent();
     this.listenForIonModalWillDismiss();
@@ -129,41 +132,59 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     });
   }
 
-  private setModalSize() {
+  private setInitialModalSize() {
     if (this.config.flavor !== 'modal') return;
     if (!this.ionModalElement) return;
     this.renderer.addClass(this.ionModalElement, this.config.size || this.defaultSize);
   }
 
-  private getAvailableContentHeight(ionModalWrapper: HTMLElement): number {
-    const ionContentElementTop = this.ionContentElement.nativeElement.getBoundingClientRect().top;
-    const modalWrapperTop = ionModalWrapper.getBoundingClientRect().top;
+  private getVerticalPadding(element) {
+    const styles = this.windowRef.getComputedStyle(element);
+    return parseInt(styles.paddingTop) + parseInt(styles.paddingBottom);
+  }
 
-    const distanceFromContentToModalWrapper = ionContentElementTop - modalWrapperTop;
+  private getAvailableContentHeight(): number {
+    const ionModalVerticalPadding = this.getVerticalPadding(this.ionModalElement);
+    const ionHeaderHeight = this.ionHeaderElement.nativeElement.getBoundingClientRect().height;
+    const embeddedComponentOffsetTop = this.getEmbeddedComponentElement()['offsetTop'];
+
     const ionModalHeight = this.ionModalElement.getBoundingClientRect().height;
+    let availableHeight =
+      ionModalHeight - ionModalVerticalPadding - ionHeaderHeight - embeddedComponentOffsetTop;
 
-    const availableHeight = ionModalHeight - distanceFromContentToModalWrapper;
+    const embeddedFooterElement = this.elementRef.nativeElement.querySelector<HTMLElement>(
+      'kirby-modal-footer'
+    );
+    if (embeddedFooterElement) {
+      availableHeight -= embeddedFooterElement.getBoundingClientRect().height;
+    }
+
     return availableHeight;
   }
 
-  private onScrollElementResize() {
+  private onEmbeddedElementResize() {
     if (!this.getEmbeddedComponentElement()) return;
     const ionModalWrapper = this.elementRef.nativeElement.closest<HTMLElement>('.modal-wrapper');
     if (!ionModalWrapper) return;
     const embeddedComponentHeight = this.getEmbeddedComponentElement().getBoundingClientRect()
       .height;
-    const availableHeight = this.getAvailableContentHeight(ionModalWrapper);
+    const availableHeight = this.getAvailableContentHeight();
 
     if (embeddedComponentHeight >= availableHeight) {
-      this.renderer.addClass(ionModalWrapper, 'content-overflows');
-      this.renderer.setStyle(this.ionContentElement.nativeElement, 'max-height', 'none');
+      setTimeout(() => {
+        this.renderer.addClass(ionModalWrapper, 'content-overflows');
+        this.renderer.setStyle(this.ionContentElement.nativeElement, 'max-height', 'none');
+      });
     } else {
       // If not in timeout, height of ionContent is not correct
       setTimeout(() => {
+        let contentMaxHeight =
+          this.ionContentElement.nativeElement.clientHeight - this.keyboardOverlap;
+
         this.renderer.setStyle(
           this.ionContentElement.nativeElement,
           'max-height',
-          `${this.ionContentElement.nativeElement.clientHeight - this.keyboardHeight}px`
+          `${contentMaxHeight}px`
         );
       });
 
@@ -172,12 +193,12 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   }
 
   private observeScrollElementResize() {
-    this.ionContentElement.nativeElement.getScrollElement().then((scrollElement) => {
+    this.ionContent.getScrollElement().then((scrollElement) => {
       this.renderer.setStyle(scrollElement, 'height', '100%');
       this.renderer.setStyle(scrollElement, 'position', 'relative');
       this.resizeObserverService.observe(
         this.getEmbeddedComponentElement(),
-        this.onScrollElementResize.bind(this)
+        this.onEmbeddedElementResize.bind(this)
       );
     });
   }
@@ -237,7 +258,6 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     if (!this.ionModalElement) {
       return;
     }
-
     if (!this.keyboardVisible || !this.viewportResized) {
       // No keyboard visible or viewport not resized:
       // Dismiss modal and return:
@@ -270,30 +290,39 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   }
 
   @HostListener('window:ionKeyboardDidShow', ['$event'])
-  _onKeyboardWillShow(event: { detail: { keyboardHeight: number } }) {
-    this.keyboardVisible = true;
-    const ionModalWrapper = this.elementRef.nativeElement.closest<HTMLElement>('.modal-wrapper');
-    if (!ionModalWrapper) return;
-    const distanceFromWindowBottomToModalBottom =
-      this.windowRef.innerHeight - ionModalWrapper.getBoundingClientRect().bottom;
-    const keyboardOverlap = event.detail.keyboardHeight - distanceFromWindowBottomToModalBottom;
-        this.setKeyboardOffset(keyboardOverlap);
+  _onKeyboardDidShow(event: { detail: { keyboardHeight: number } }) {
+    this.setKeyboardVisibility(event.detail.keyboardHeight);
   }
   @HostListener('window:ionKeyboardDidHide')
-  _onKeyboardWillHide() {
-    this.keyboardVisible = false;
-    this.setKeyboardOffset(0);
+  _onKeyboardDidHide() {
+    this.setKeyboardVisibility(0);
   }
   private setKeyboardVisibility(value: number) {
-    this.keyboardHeight = value;
-    const [key, pixelValue] = ['--keyboard-offset', `${value}px`];
+    this.keyboardVisible = value > 0;
+    this.setKeyboardOverlap(value);
+
+    const [key, pixelValue] = ['--keyboard-offset', `${this.keyboardOverlap}px`];
     this.ionContentElement.nativeElement.style.setProperty(key, pixelValue);
     const embeddedFooterElement = this.elementRef.nativeElement.querySelector<HTMLElement>(
       'kirby-modal-footer'
     );
     if (embeddedFooterElement) {
-      this.renderer.setStyle(embeddedFooterElement, key, pixelValue);
+      embeddedFooterElement.style.setProperty(key, pixelValue);
     }
+  }
+
+  private setKeyboardOverlap(value: number) {
+    if (value > 0) {
+      this.keyboardOverlap = value - this.getDistanceFromWindowButtomToModalButtom();
+    } else {
+      this.keyboardOverlap = 0;
+    }
+  }
+
+  private getDistanceFromWindowButtomToModalButtom() {
+    const ionModalWrapper = this.elementRef.nativeElement.closest<HTMLElement>('.modal-wrapper');
+    if (!ionModalWrapper) return;
+    return this.windowRef.innerHeight - ionModalWrapper.getBoundingClientRect().bottom;
   }
 
   onHeaderTouchStart(event: TouchEvent) {

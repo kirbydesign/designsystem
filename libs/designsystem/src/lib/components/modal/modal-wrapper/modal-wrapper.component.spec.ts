@@ -5,7 +5,6 @@ import { Spectator } from '@ngneat/spectator';
 import { KirbyAnimation } from '../../../animation/kirby-animation';
 import { TestHelper } from '../../../testing/test-helper';
 import { IconComponent } from '../../icon/icon.component';
-import { ResizeObserverService } from '../../shared';
 import { ModalWrapperComponent } from './modal-wrapper.component';
 import {
   DynamicFooterEmbeddedComponent,
@@ -71,7 +70,7 @@ describe('ModalWrapperComponent', () => {
     it('should trigger `onScrollElementResize` when embeddded component resizes', (done) => {
       setTimeout(() => {
         expect(spectator.component['resizeObserverService'].observe).toHaveBeenCalledWith(
-          spectator.component.getEmbeddedComponentElement(),
+          spectator.component['getEmbeddedComponentElement'](),
           jasmine.any(Function)
         );
         done();
@@ -82,10 +81,8 @@ describe('ModalWrapperComponent', () => {
       spectator.component.ngOnDestroy();
 
       setTimeout(() => {
-        // @ts-ignore
-        expect(spectator.component.resizeObserverService.unobserve).toHaveBeenCalledWith(
-          // @ts-ignore
-          spectator.component.getEmbeddedComponentElement()
+        expect(spectator.component['resizeObserverService'].unobserve).toHaveBeenCalledWith(
+          spectator.component['getEmbeddedComponentElement']()
         );
         done();
       });
@@ -257,8 +254,12 @@ describe('ModalWrapperComponent', () => {
 
     it('should define custom CSS property --keyboard-offset on embedded footer', () => {
       const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
-      spectator.component._onKeyboardWillShow({ detail: { keyboardHeight: 200 } });
-      expect(kirbyModalFooter).toHaveStyle({ '--keyboard-offset': '200px' });
+      spectator.component._onKeyboardDidShow({ detail: { keyboardHeight: 200 } });
+      const keyboardOverlap =
+        200 - spectator.component['getDistanceFromWindowButtomToModalButtom']();
+      expect(kirbyModalFooter).toHaveStyle({
+        '--keyboard-offset': `${keyboardOverlap}px`,
+      });
     });
   });
 
@@ -347,8 +348,12 @@ describe('ModalWrapperComponent', () => {
 
       setTimeout(() => {
         const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
-        spectator.component._onKeyboardWillShow({ detail: { keyboardHeight: 200 } });
-        expect(kirbyModalFooter).toHaveStyle({ '--keyboard-offset': '200px' });
+        spectator.component._onKeyboardDidShow({ detail: { keyboardHeight: 200 } });
+
+        const keyboardOverlap =
+          200 - spectator.component['getDistanceFromWindowButtomToModalButtom']();
+
+        expect(kirbyModalFooter).toHaveStyle({ '--keyboard-offset': `${keyboardOverlap}px` });
         done();
       });
     });
@@ -365,21 +370,32 @@ describe('ModalWrapperComponent', () => {
     });
 
     it('should set keyboardVisible to true on window:ionKeyboardDidShow', () => {
-      spectator.dispatchFakeEvent(window, 'ionKeyboardDidShow');
+      const ionKeyboardDidShowEvent = new CustomEvent('ionKeyboardDidShow', {
+        detail: { keyboardHeight: 200 },
+      });
+      window.dispatchEvent(ionKeyboardDidShowEvent);
       expect(spectator.component['keyboardVisible']).toBeTrue();
+      spectator.dispatchFakeEvent(window, 'ionKeyboardDidHide');
     });
     it('should set keyboardVisible to false on window:ionKeyboardDidHide', () => {
-      spectator.dispatchFakeEvent(window, 'ionKeyboardDidShow');
+      const ionKeyboardDidShowEvent = new CustomEvent('ionKeyboardDidShow', {
+        detail: { keyboardHeight: 200 },
+      });
+      window.dispatchEvent(ionKeyboardDidShowEvent);
       spectator.dispatchFakeEvent(window, 'ionKeyboardDidHide');
       expect(spectator.component['keyboardVisible']).toBeFalse();
     });
 
     it('should keep same height, when keyboard is opened', () => {
       const heightKeyboardClosed = spectator.element.getBoundingClientRect().height;
-      spectator.dispatchFakeEvent(window, 'ionKeyboardDidShow');
+      const ionKeyboardDidShowEvent = new CustomEvent('ionKeyboardDidShow', {
+        detail: { keyboardHeight: 200 },
+      });
+      window.dispatchEvent(ionKeyboardDidShowEvent);
       expect(spectator.component['keyboardVisible']).toBeTrue();
-      const heightHeyboardOpened = spectator.element.getBoundingClientRect().height;
-      expect(heightHeyboardClosed).toEqual(heightHeyboardOpened);
+      const heightKeyboardOpened = spectator.element.getBoundingClientRect().height;
+      expect(heightKeyboardClosed).toEqual(heightKeyboardOpened);
+      spectator.dispatchFakeEvent(window, 'ionKeyboardDidHide');
     });
   });
 
@@ -427,7 +443,13 @@ describe('ModalWrapperComponent', () => {
       beforeEach(() => {
         input.focus();
         expect(document.activeElement).toEqual(input);
-        spectator.dispatchFakeEvent(window, 'ionKeyboardDidShow');
+        const ionKeyboardDidShowEvent = new CustomEvent('ionKeyboardDidShow', {
+          detail: { keyboardHeight: 200 },
+        });
+        window.dispatchEvent(ionKeyboardDidShowEvent);
+      });
+      afterEach(() => {
+        spectator.dispatchFakeEvent(window, 'ionKeyboardDidHide');
       });
 
       it('should blur document.activeElement when it is an input', () => {
@@ -482,20 +504,24 @@ describe('ModalWrapperComponent', () => {
 
     it(`should call wrapping ion-modal's dismiss() method immediately`, () => {
       spectator.component.close('test data');
-      // @ts-ignore
-      expect(spectator.component.ionModalElement.dismiss).toHaveBeenCalledWith('test data');
+      expect(spectator.component['ionModalElement'].dismiss).toHaveBeenCalledWith('test data');
     });
 
     describe(`when keyboard is visible`, () => {
       beforeEach(() => {
-        spectator.dispatchFakeEvent(window, 'ionKeyboardDidShow');
+        const ionKeyboardDidShowEvent = new CustomEvent('ionKeyboardDidShow', {
+          detail: { keyboardHeight: 200 },
+        });
+        window.dispatchEvent(ionKeyboardDidShowEvent);
+      });
+      afterEach(() => {
+        spectator.dispatchFakeEvent(window, 'ionKeyboardDidHide');
       });
 
       describe(`and viewport is not resized`, () => {
         it(`should call wrapping ion-modal's dismiss() method immediately`, () => {
           spectator.component.close('test data');
-          // @ts-ignore
-          expect(spectator.component.ionModalElement.dismiss).toHaveBeenCalledWith('test data');
+          expect(spectator.component['ionModalElement'].dismiss).toHaveBeenCalledWith('test data');
         });
       });
 
@@ -521,13 +547,21 @@ describe('ModalWrapperComponent', () => {
           if (!spectator.component['viewportResized']) {
             await new Promise((resolve) => setTimeout(resolve, 25));
           }
-          expect(spectator.component['viewportResized']).toBeTrue;
+          expect(spectator.component['viewportResized']).toBeTrue();
+
+          // Ensure keyboard is visible
+          const ionKeyboardDidShowEvent = new CustomEvent('ionKeyboardDidShow', {
+            detail: { keyboardHeight },
+          });
+          window.dispatchEvent(ionKeyboardDidShowEvent);
+          expect(spectator.component['keyboardVisible']).toBeTrue();
         });
 
         afterEach(() => {
           // Ensure any observers are destroyed:
           spectator.fixture.destroy();
           TestHelper.resetTestWindow();
+          spectator.dispatchFakeEvent(window, 'ionKeyboardDidHide');
         });
 
         it(`should blur document.activeElement before calling wrapping ion-modal's dismiss() method`, fakeAsync(async () => {
@@ -542,21 +576,17 @@ describe('ModalWrapperComponent', () => {
           expect(document.activeElement).toEqual(input);
 
           spectator.component.close('test data');
-          // @ts-ignore
-          expect(spectator.component.ionModalElement.dismiss).not.toHaveBeenCalled();
+          expect(spectator.component['ionModalElement'].dismiss).not.toHaveBeenCalled();
           expect(input.blur).toHaveBeenCalled();
           tick(ModalWrapperComponent.KEYBOARD_HIDE_DELAY_IN_MS);
-          // @ts-ignore
-          expect(spectator.component.ionModalElement.dismiss).toHaveBeenCalled();
+          expect(spectator.component['ionModalElement'].dismiss).toHaveBeenCalled();
         }));
 
         it(`should delay before calling wrapping ion-modal's dismiss() method`, fakeAsync(() => {
           spectator.component.close('test data');
-          // @ts-ignore
-          expect(spectator.component.ionModalElement.dismiss).not.toHaveBeenCalled();
+          expect(spectator.component['ionModalElement'].dismiss).not.toHaveBeenCalled();
           tick(ModalWrapperComponent.KEYBOARD_HIDE_DELAY_IN_MS);
-          // @ts-ignore
-          expect(spectator.component.ionModalElement.dismiss).toHaveBeenCalledWith('test data');
+          expect(spectator.component['ionModalElement'].dismiss).toHaveBeenCalledWith('test data');
         }));
       });
     });

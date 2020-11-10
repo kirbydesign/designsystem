@@ -2,6 +2,7 @@ import { Component, Optional, OnInit, ViewChild, ElementRef } from '@angular/cor
 import { IonicModule, ModalController as IonicModalController } from '@ionic/angular';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 import { RouterTestingModule } from '@angular/router/testing';
+import { MockComponent } from 'ng-mocks';
 
 import { DesignTokenHelper } from '../../../helpers/design-token-helper';
 import { WindowRef } from '../../../types/window-ref';
@@ -10,6 +11,9 @@ import { ModalHelper } from './modal.helper';
 import { Overlay, Modal } from './modal.interfaces';
 import { ModalNavigationService } from './modal-navigation.service';
 import { ModalFooterComponent } from '../footer/modal-footer.component';
+import { ModalWrapperComponent } from '../modal-wrapper/modal-wrapper.component';
+import { ModalCompactWrapperComponent } from '../modal-wrapper/compact/modal-compact-wrapper.component';
+import { IconComponent } from '../../icon';
 
 @Component({
   template: `
@@ -72,7 +76,12 @@ describe('ModalHelper', () => {
         useValue: window,
       },
     ],
-    declarations: [ModalFooterComponent],
+    declarations: [
+      ModalFooterComponent,
+      ModalWrapperComponent,
+      ModalCompactWrapperComponent,
+      MockComponent(IconComponent),
+    ],
     entryComponents: [
       InputEmbeddedComponent,
       ContentOverflowsWithFooterEmbeddedComponent,
