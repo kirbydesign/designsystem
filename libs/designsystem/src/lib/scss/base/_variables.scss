@@ -113,9 +113,9 @@ $compact-modal-max-width: 359px;
 $modal-max-width: 720px;
 
 $modal-heights: (
-  s: $modal-max-width * 0.4,
-  m: $modal-max-width * 0.64,
-  l: $modal-max-width * 0.8,
+  s: floor($modal-max-width * 0.4),
+  m: floor($modal-max-width * 0.64),
+  l: floor($modal-max-width * 0.8),
 ) !default;
 
 $modal-default-height: map-get($modal-heights, 'm');
