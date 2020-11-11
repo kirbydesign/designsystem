@@ -157,22 +157,24 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     if (!this.intersectionObserver) {
       const ionModalWrapper = this.elementRef.nativeElement.closest<HTMLElement>('.modal-wrapper');
       if (!ionModalWrapper) return;
-      // Wait until modal has finished animating:
+      const callback: IntersectionObserverCallback = (entries) => {
+        const entry = entries[0];
+        const isTouchingViewport = entry.intersectionRatio < 1;
+        if (isTouchingViewport) {
+          this.renderer.addClass(ionModalWrapper, 'full-height');
+        } else {
+          this.renderer.removeClass(ionModalWrapper, 'full-height');
+        }
+      };
+      const options: IntersectionObserverInit = {
+        rootMargin: '0px 0px -1px 0px', // `bottom: -1px` allows checking when the modal bottom is touching the viewport
+        threshold: [0.99, 1],
+      };
+      this.intersectionObserver = new IntersectionObserver(callback, options);
+
+      // Start observing when modal has finished animating:
       this.didPresent.then(() => {
-        const callback: IntersectionObserverCallback = (entries) => {
-          const entry = entries[0];
-          const isTouchingViewport = entry.intersectionRatio < 1;
-          if (isTouchingViewport) {
-            this.renderer.addClass(ionModalWrapper, 'full-height');
-          } else {
-            this.renderer.removeClass(ionModalWrapper, 'full-height');
-          }
-        };
-        const options: IntersectionObserverInit = {
-          rootMargin: '0px 0px -1px 0px', // `bottom: -1px` allows checking when the modal bottom is touching the viewport
-          threshold: [0.99, 1],
-        };
-        this.intersectionObserver = new IntersectionObserver(callback, options);
+        console.warn('didPresent!');
         this.intersectionObserver.observe(ionModalWrapper);
       });
     }

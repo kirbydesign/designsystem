@@ -67,20 +67,24 @@ describe('ModalWrapperComponent', () => {
       spectator.fixture.destroy();
     });
 
-    it('should trigger `onScrollElementResize` when embeddded component resizes', async () => {
-      await TestHelper.waitForResizeObserver();
-      expect(spectator.component['resizeObserverService'].observe).toHaveBeenCalledWith(
-        spectator.component['getEmbeddedComponentElement'](),
-        jasmine.any(Function)
-      );
+    it('should observe Ionic modal-wrapper intersecting with viewport after ion-modal has been presented', async () => {
+      const observeSpy = spyOn(spectator.component['intersectionObserver'], 'observe');
+
+      spectator.component['ionModalDidPresent'].complete();
+      await TestHelper.waitForTimeout();
+
+      const dummyWrapper = spectator.element.closest('.modal-wrapper');
+      expect(observeSpy).toHaveBeenCalledWith(dummyWrapper);
     });
 
-    it('should clean up resize observer of embedded component, on destroy', () => {
+    it('should clean up intersection observer of Ionic modal-wrapper on destroy', async () => {
+      const disconnectSpy = spyOn(spectator.component['intersectionObserver'], 'disconnect');
+      spectator.component['ionModalDidPresent'].complete();
+      await TestHelper.waitForTimeout();
+
       spectator.component.ngOnDestroy();
 
-      expect(spectator.component['resizeObserverService'].unobserve).toHaveBeenCalledWith(
-        spectator.component['getEmbeddedComponentElement']()
-      );
+      expect(disconnectSpy).toHaveBeenCalled();
     });
   });
 

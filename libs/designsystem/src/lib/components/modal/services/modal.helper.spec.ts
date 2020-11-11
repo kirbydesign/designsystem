@@ -217,7 +217,7 @@ describe('ModalHelper', () => {
           expect(ionModal.classList.contains('large')).toBeFalse();
         });
 
-        it("should add class `content-overflows`, if content can't fit in viewport", async () => {
+        it("should add class `full-height`, if content can't fit in viewport", async () => {
           overlay = await modalHelper.showModalWindow({
             title: 'Modal',
             component: ContentOverflowsWithFooterEmbeddedComponent,
@@ -228,13 +228,13 @@ describe('ModalHelper', () => {
           expect(ionModalWrapper).toBeTruthy();
 
           await TestHelper.whenTrue(() => {
-            return ionModalWrapper.classList.contains('content-overflows');
+            return ionModalWrapper.classList.contains('full-height');
           });
 
-          expect(ionModalWrapper.classList.contains('content-overflows')).toBeTrue();
+          expect(ionModalWrapper.classList.contains('full-height')).toBeTrue();
         });
 
-        it('should NOT add class `content-overflows`, if content can fit in viewport', async (done) => {
+        it('should NOT add class `full-height`, if content can fit in viewport', async (done) => {
           overlay = await modalHelper.showModalWindow({
             title: 'Modal',
             component: ContentWithNoOverflowEmbeddedComponent,
@@ -245,12 +245,12 @@ describe('ModalHelper', () => {
           expect(ionModalWrapper).toBeTruthy();
 
           setTimeout(async () => {
-            expect(ionModalWrapper.classList.contains('content-overflows')).toBeFalse();
+            expect(ionModalWrapper.classList.contains('full-height')).toBeFalse();
             done();
           });
         });
 
-        it('should have footer visible at the bottom of viewport, when content-overflows', async () => {
+        it('should have footer visible at the bottom of viewport, when full-height', async () => {
           overlay = await modalHelper.showModalWindow({
             title: 'Modal',
             component: ContentOverflowsWithFooterEmbeddedComponent,
@@ -263,10 +263,10 @@ describe('ModalHelper', () => {
           expect(footer).toBeTruthy();
 
           await TestHelper.whenTrue(() => {
-            return ionModalWrapper.classList.contains('content-overflows');
+            return ionModalWrapper.classList.contains('full-height');
           });
 
-          expect(ionModalWrapper.classList.contains('content-overflows')).toBeTrue();
+          expect(ionModalWrapper.classList.contains('full-height')).toBeTrue();
           expect(footer.getBoundingClientRect().bottom).toEqual(window.innerHeight);
         });
       });

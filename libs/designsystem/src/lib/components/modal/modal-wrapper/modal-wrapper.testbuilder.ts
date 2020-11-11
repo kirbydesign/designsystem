@@ -90,11 +90,15 @@ export class ModalWrapperTestBuilder {
     spyOn(resizeObserverService, 'observe');
     spyOn(resizeObserverService, 'unobserve');
 
-    spectator.element.closest = () => {
-      let ionModal = document.createElement('div');
-      ionModal['dismiss'] = jasmine.createSpy('dissmissSpy');
-      return ionModal;
-    };
+    const ionModalWrapper = document.createElement('div');
+    const ionModal = document.createElement('div');
+    ionModal['dismiss'] = jasmine.createSpy('dissmissSpy');
+    spyOn(spectator.element, 'closest')
+      .withArgs('.modal-wrapper')
+      .and.returnValue(ionModalWrapper)
+      .withArgs('ion-modal')
+      .and.returnValue(ionModal);
+
     spectator.detectChanges();
 
     return spectator;
