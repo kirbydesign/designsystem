@@ -248,6 +248,8 @@ describe('ModalHelper', () => {
           expect(ionModal).toBeTruthy();
           expect(ionModalWrapper).toBeTruthy();
 
+          await TestHelper.waitForResizeObserver();
+
           expect(ionModalWrapper.classList.contains('full-height')).toBeFalse();
         });
 
