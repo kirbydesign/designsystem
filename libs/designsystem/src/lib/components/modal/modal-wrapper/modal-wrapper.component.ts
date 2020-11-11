@@ -148,7 +148,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
 
     // Ensure resizing doesn't happen within ResizeObserver callback to avoid infinite loop:
     setTimeout(() => {
-      if (embeddedElementHeight > contentWrapperHeight) {
+      if (embeddedElementHeight >= contentWrapperHeight) {
         this.renderer.addClass(ionModalWrapper, 'content-overflows');
       } else {
         this.renderer.removeClass(ionModalWrapper, 'content-overflows');
