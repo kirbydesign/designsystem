@@ -188,6 +188,7 @@ const entryComponents = [
       mode: 'ios',
       inputShims: true,
       scrollAssist: true,
+      scrollPadding: false,
     }),
     ...importedModules,
   ],
