@@ -12,6 +12,7 @@
       flex-direction: column;
       position: relative;
       contain: inherit;
+      min-height: var(--min-height);
 
       ion-header {
         flex: 0 0 auto;
