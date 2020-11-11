@@ -67,8 +67,6 @@ describe('SlidesComponent', () => {
   });
 
   it('should slide to indexShownAtStartup', () => {
-    expect(spectator.component.activeSlide).toEqual(
-      new KirbySlidesHostComponent().indexShownAtStartup
-    );
+    expect(spectator.component.activeSlide).toEqual(new KirbySlidesHostComponent().activeSlide);
   });
 });
