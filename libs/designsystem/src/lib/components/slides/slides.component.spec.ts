@@ -33,7 +33,7 @@ describe('SlidesComponent', () => {
         },
       },
     };
-    indexShownAtStartup = 3;
+    activeSlide = 3;
   }
 
   const createHost = createHostFactory({
