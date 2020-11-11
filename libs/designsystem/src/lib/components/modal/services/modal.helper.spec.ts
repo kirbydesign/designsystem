@@ -149,6 +149,10 @@ describe('ModalHelper', () => {
       });
 
       describe('sizing', () => {
+        beforeEach(() => {
+          TestHelper.scrollMainWindowToTop();
+        });
+
         afterEach(async () => {
           await overlay.dismiss();
         });
@@ -234,7 +238,7 @@ describe('ModalHelper', () => {
           expect(ionModalWrapper.classList.contains('full-height')).toBeTrue();
         });
 
-        it('should NOT add class `full-height`, if content can fit in viewport', async (done) => {
+        it('should NOT add class `full-height`, if content can fit in viewport', async () => {
           overlay = await modalHelper.showModalWindow({
             title: 'Modal',
             component: ContentWithNoOverflowEmbeddedComponent,
@@ -244,10 +248,7 @@ describe('ModalHelper', () => {
           expect(ionModal).toBeTruthy();
           expect(ionModalWrapper).toBeTruthy();
 
-          setTimeout(async () => {
-            expect(ionModalWrapper.classList.contains('full-height')).toBeFalse();
-            done();
-          });
+          expect(ionModalWrapper.classList.contains('full-height')).toBeFalse();
         });
 
         it('should have footer visible at the bottom of viewport, when full-height', async () => {

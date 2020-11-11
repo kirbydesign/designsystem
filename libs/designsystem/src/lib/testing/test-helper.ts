@@ -105,6 +105,17 @@ export class TestHelper {
     (window.frameElement as HTMLIFrameElement).style.height = null;
   }
 
+  public static scrollMainWindowToTop() {
+    if (
+      window.parent &&
+      window.parent.document &&
+      window.parent.document.documentElement &&
+      window.parent.document.documentElement.scrollTop > 0
+    ) {
+      window.parent.document.documentElement.scrollTop = 0;
+    }
+  }
+
   public static waitForResizeObserver(): Promise<void> {
     return TestHelper.waitForTimeout();
   }
