@@ -12,10 +12,6 @@
       contain: inherit;
       min-height: Min(var(--min-height), calc(100vh - var(--kirby-modal-padding-top, 0px)));
 
-      ion-header {
-        flex: 0 0 auto;
-      }
-
       ion-content {
         contain: content;
         max-height: calc(
