@@ -44,12 +44,10 @@ describe('SlidesComponent', () => {
 
   beforeEach(() => {
     spectator = createHost(
-      `<kirby-slides [slidesOptions]="slidesOptions" [slides]="slides" [indexShownAtStartup]="indexShownAtStartup">
+      `<kirby-slides [slidesOptions]="slidesOptions" [slides]="slides" [activeSlide]="activeSlide">
       <span data-testid="slideContent" *kirbySlide>MockContent</span>
       </kirby-slides>`
     );
-
-    // changeDetectorRef = (spectator as any).instance.changeDetectorRef;
 
     spectator.detectChanges();
   });
@@ -66,7 +64,7 @@ describe('SlidesComponent', () => {
     expect(spectator.component.slidesOptions).toEqual(new KirbySlidesHostComponent().slidesOptions);
   });
 
-  it('should slide to indexShownAtStartup', () => {
+  it('should slide to active slide', () => {
     expect(spectator.component.activeSlide).toEqual(new KirbySlidesHostComponent().activeSlide);
   });
 });
