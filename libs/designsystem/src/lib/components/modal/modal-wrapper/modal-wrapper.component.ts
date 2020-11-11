@@ -66,7 +66,6 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   private delayedClose = () => {};
   private delayedCloseTimeoutId;
   private initialViewportHeight: number;
-  private scrollElementVerticalPadding = 0;
   private viewportResized = false;
   private ionModalElement?: HTMLIonModalElement;
   private readonly ionModalDidPresent = new Subject<void>();
@@ -81,6 +80,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     }
     return this._mutationObserver;
   }
+  private intersectionObserver: IntersectionObserver;
 
   @HostBinding('class.drawer')
   get _isDrawer() {
@@ -102,7 +102,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
 
   ngOnInit(): void {
     this.ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
-    this.setInitialModalSize();
+    this.initializeSizing();
     this.initializeModalRoute();
     this.listenForIonModalDidPresent();
     this.listenForIonModalWillDismiss();
@@ -110,6 +110,13 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
       providers: [{ provide: COMPONENT_PROPS, useValue: this.config.componentProps }],
       parent: this.injector,
     });
+  }
+
+  private initializeSizing() {
+    this.setInitialModalSize();
+    this.setScrollElementSize();
+    this.observeHeaderResize();
+    this.observeModalFullHeight();
   }
 
   private initializeModalRoute() {
@@ -139,42 +146,36 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     this.renderer.addClass(this.ionModalElement, this.config.size || this.defaultSize);
   }
 
-  private onEmbeddedElementResize(embeddedElement: HTMLElement) {
-    const ionModalWrapper = this.elementRef.nativeElement.closest<HTMLElement>('.modal-wrapper');
-    if (!embeddedElement || !ionModalWrapper) return;
-
-    const embeddedElementHeight = embeddedElement.offsetHeight + this.scrollElementVerticalPadding;
-    const contentWrapperHeight = this.ionContentElement.nativeElement.offsetHeight;
-
-    // Ensure resizing doesn't happen within ResizeObserver callback to avoid infinite loop:
-    setTimeout(() => {
-      if (embeddedElementHeight >= contentWrapperHeight) {
-        this.renderer.addClass(ionModalWrapper, 'content-overflows');
-      } else {
-        this.renderer.removeClass(ionModalWrapper, 'content-overflows');
-      }
+  private setScrollElementSize(): void {
+    this.ionContent.getScrollElement().then((scrollElement) => {
+      this.renderer.setStyle(scrollElement, 'height', '100%');
+      this.renderer.setStyle(scrollElement, 'position', 'relative');
     });
   }
 
-  private observeEmbeddedElementResize() {
-    const embeddedElement = this.getEmbeddedComponentElement();
-    if (!embeddedElement) return;
-    this.resizeObserverService.observe(embeddedElement, (entry) =>
-      this.onEmbeddedElementResize(entry.target as HTMLElement)
-    );
-  }
-
-  private setScrollElementSize(): Promise<void> {
-    return new Promise((resolve) => {
-      this.ionContent.getScrollElement().then((scrollElement) => {
-        this.renderer.setStyle(scrollElement, 'height', '100%');
-        this.renderer.setStyle(scrollElement, 'position', 'relative');
-        const computedStyle = this.windowRef.getComputedStyle(scrollElement);
-        this.scrollElementVerticalPadding =
-          parseInt(computedStyle.paddingTop) + parseInt(computedStyle.paddingBottom);
-        resolve();
+  private observeModalFullHeight() {
+    if (!this.intersectionObserver) {
+      const ionModalWrapper = this.elementRef.nativeElement.closest<HTMLElement>('.modal-wrapper');
+      if (!ionModalWrapper) return;
+      // Wait until modal has finished animating:
+      this.didPresent.then(() => {
+        const callback: IntersectionObserverCallback = (entries) => {
+          const entry = entries[0];
+          const isTouchingViewport = entry.intersectionRatio < 1;
+          if (isTouchingViewport) {
+            this.renderer.addClass(ionModalWrapper, 'full-height');
+          } else {
+            this.renderer.removeClass(ionModalWrapper, 'full-height');
+          }
+        };
+        const options: IntersectionObserverInit = {
+          rootMargin: '0px 0px -1px 0px', // `bottom: -1px` allows checking when the modal bottom is touching the viewport
+          threshold: [0.99, 1],
+        };
+        this.intersectionObserver = new IntersectionObserver(callback, options);
+        this.intersectionObserver.observe(ionModalWrapper);
       });
-    });
+    }
   }
 
   ngAfterViewInit(): void {
@@ -182,10 +183,6 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
       this.toolbarButtons = this.toolbarButtonsQuery.map((buttonRef) => buttonRef.nativeElement);
     }
     this.checkForEmbeddedElements();
-    this.observeHeaderResize();
-    this.setScrollElementSize().then(() => {
-      this.observeEmbeddedElementResize();
-    });
   }
 
   private checkForEmbeddedElements() {
@@ -434,9 +431,12 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     //clean up the observer
     this.mutationObserver.disconnect();
     delete this._mutationObserver;
+    if (this.intersectionObserver) {
+      this.intersectionObserver.disconnect();
+      delete this.intersectionObserver;
+    }
     if (this.resizeObserverService) {
       this.resizeObserverService.unobserve(window.document.body);
-      this.resizeObserverService.unobserve(this.getEmbeddedComponentElement());
       this.resizeObserverService.unobserve(this.ionHeaderElement.nativeElement);
       this.resizeObserverService.unobserve(this.getEmbeddedFooterElement());
     }
