@@ -1,4 +1,4 @@
-import { AfterViewInit, EventEmitter, OnInit } from '@angular/core';
+import { AfterViewInit, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import {
   Component,
   ChangeDetectionStrategy,
@@ -29,18 +29,24 @@ export class SlideDirective {}
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SlidesComponent implements AfterViewInit {
+export class SlidesComponent implements AfterViewInit, OnChanges {
   @ViewChild('ionslides', { static: false }) ionSlides: IonSlides;
   @Input() slidesOptions: any;
   @Input() slides: any[];
-  @Input() indexShownAtStartup: number = 0;
+  @Input() activeSlide: number = 0;
   @Output() selectedSlide = new EventEmitter<any>();
 
   @ContentChild(SlideDirective, { static: true, read: TemplateRef })
   public slideTemplate: TemplateRef<any>;
 
+  ngOnChanges(changes: SimpleChanges) {
+    if (this.ionSlides && changes.activeSlide) {
+      this.ionSlides.slideTo(this.activeSlide);
+    }
+  }
+
   ngAfterViewInit() {
-    this.ionSlides.slideTo(this.indexShownAtStartup);
+    this.ionSlides.slideTo(this.activeSlide);
   }
 
   onSlideChanged(e: any) {

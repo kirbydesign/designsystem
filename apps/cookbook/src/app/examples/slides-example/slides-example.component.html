@@ -1,7 +1,7 @@
 <kirby-slides
   [slidesOptions]="slidesOptions"
   [slides]="slides"
-  [indexShownAtStartup]="0"
+  [activeSlide]="activeSlide"
   (selectedSlide)="getDataFromActiveSlide($event)"
 >
   <cookbook-example-card-content
@@ -9,3 +9,7 @@
     *kirbySlide="let slide"
   ></cookbook-example-card-content>
 </kirby-slides>
+<br />
+<div style="text-align: center;">
+  <button kirby-button (click)="changeSlide()">Activate slide no. 4</button>
+</div>

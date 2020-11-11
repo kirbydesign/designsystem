@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
   templateUrl: './slides-example.component.html',
 })
 export class SlidesExampleComponent {
+  activeSlide = 0;
   constructor() {}
 
   slidesOptions = {
@@ -54,5 +55,9 @@ export class SlidesExampleComponent {
   getDataFromActiveSlide(e: any) {
     // Output onSlideDidChange
     console.log('Output: ', e);
+  }
+
+  changeSlide() {
+    this.activeSlide = 3;
   }
 }

@@ -27,8 +27,8 @@ export class SlidesShowcaseComponent {
       inputValues: ['DataArray'],
     },
     {
-      name: 'indexShownAtStartup',
-      description: 'sets centered (active) slide',
+      name: 'activeSlide',
+      description: 'Sets centered (active) slide',
       defaultValue: '',
       inputValues: ['number'],
     },
@@ -36,7 +36,7 @@ export class SlidesShowcaseComponent {
   events: ShowcaseProperty[] = [
     {
       name: 'selectedSlide',
-      description: 'Emits active data-object when slide did change',
+      description: 'Emits active slide',
       inputValues: ['func'],
     },
   ];

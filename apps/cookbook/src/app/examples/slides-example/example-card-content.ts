@@ -32,7 +32,6 @@ export class CookbookExampleCardContentComponent implements OnInit {
   hasFooter = true;
 
   ngOnInit() {
-    console.log('DATA: ', this.data);
     this.title = this.data.title;
     this.subtitle = this.data.subtitle;
     this.cardContent = this.data.cardContent;
