@@ -110,6 +110,15 @@ $avatar-badge-size: 16px;
 ****************************************************************************/
 $alert-max-width: 359px;
 $compact-modal-max-width: 359px;
+$modal-max-width: 720px;
+
+$modal-heights: (
+  s: floor($modal-max-width * 0.4),
+  m: floor($modal-max-width * 0.64),
+  l: floor($modal-max-width * 0.8),
+) !default;
+
+$modal-default-height: map-get($modal-heights, 'm');
 
 /* Item
 ****************************************************************************/
@@ -145,4 +154,8 @@ $transition-easings: (
   exit: ease-in,
   enter-exit: ease,
   motion: cubic-bezier(0.25, 0.1, 0.25, 1),
+  modal: (
+    enter: cubic-bezier(0.32, 0.72, 0, 1),
+    exit: cubic-bezier(0.32, 0.72, 0, 1),
+  ),
 );

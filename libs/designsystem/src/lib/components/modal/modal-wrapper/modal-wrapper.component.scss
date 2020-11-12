@@ -3,6 +3,23 @@
 // Global modal styling can be found at scss/base/_ionic.scss
 
 :host {
+  --header-height: 0px;
+  --footer-height: 0px;
+  @include media('>=medium') {
+    &:not(.drawer) {
+      padding-top: 0;
+      position: relative;
+      contain: inherit;
+      min-height: Min(var(--min-height), calc(100vh - var(--kirby-modal-padding-top, 0px)));
+
+      ion-content {
+        contain: content;
+        max-height: calc(
+          100vh - var(--kirby-modal-padding-top, 0px) - var(--header-height) - var(--footer-height)
+        );
+      }
+    }
+  }
   padding-top: size('s');
 }
 
@@ -43,12 +60,16 @@ ion-title {
 
 ion-content {
   --background: transparent;
+  display: flex;
+  flex-direction: column;
 
   @include slotted('*') {
     box-sizing: border-box;
+    display: block;
   }
 
   --padding-top: #{size('m')};
+  --padding-bottom: #{size('m')};
   --padding-start: #{size('s')};
   --padding-end: #{size('s')};
 
