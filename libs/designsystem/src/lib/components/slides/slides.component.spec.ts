@@ -64,7 +64,7 @@ describe('SlidesComponent', () => {
     expect(spectator.component.slidesOptions).toEqual(new KirbySlidesHostComponent().slidesOptions);
   });
 
-  fit('should call slideTo with 4', () => {
+  it('should call slideTo with 4', () => {
     // Arrange
     spyOn(spectator.component.ionSlides, 'slideTo');
 
