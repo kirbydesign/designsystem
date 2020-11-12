@@ -42,7 +42,7 @@ export class SlidesComponent implements AfterViewInit {
     this.slideTo(0);
   }
 
-  private onSlideChanged(e: any) {
+  onSlideChanged(e: any) {
     this.ionSlides.getActiveIndex().then((selectedIndex) => {
       this.selectedSlide.emit(this.slides[selectedIndex]);
     });
