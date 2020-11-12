@@ -18,7 +18,6 @@ class IonSlidesFake extends IonSlides {
 
 describe('SlidesComponent', () => {
   let spectator: SpectatorHost<SlidesComponent, HostComponent>;
-  // let changeDetectorRef: ChangeDetectorRef;
 
   @Component({ selector: 'kirby-slides-host-component', template: '' })
   class KirbySlidesHostComponent {
