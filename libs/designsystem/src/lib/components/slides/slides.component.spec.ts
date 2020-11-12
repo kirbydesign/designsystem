@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { fakeAsync } from '@angular/core/testing';
 import { IonSlide, IonSlides } from '@ionic/angular';
 import { byTestId, createHostFactory, HostComponent, SpectatorHost } from '@ngneat/spectator';
@@ -13,6 +13,7 @@ class IonSlidesFake extends IonSlides {
         slidesPerView: 1,
       },
     });
+  slideTo = (index: number, speed?: number, runCallbacks?: boolean) => Promise.resolve();
 }
 
 describe('SlidesComponent', () => {
@@ -33,7 +34,6 @@ describe('SlidesComponent', () => {
         },
       },
     };
-    activeSlide = 3;
   }
 
   const createHost = createHostFactory({
@@ -44,7 +44,7 @@ describe('SlidesComponent', () => {
 
   beforeEach(() => {
     spectator = createHost(
-      `<kirby-slides [slidesOptions]="slidesOptions" [slides]="slides" [activeSlide]="activeSlide">
+      `<kirby-slides [slidesOptions]="slidesOptions" [slides]="slides">
       <span data-testid="slideContent" *kirbySlide>MockContent</span>
       </kirby-slides>`
     );
@@ -64,7 +64,14 @@ describe('SlidesComponent', () => {
     expect(spectator.component.slidesOptions).toEqual(new KirbySlidesHostComponent().slidesOptions);
   });
 
-  it('should slide to active slide', () => {
-    expect(spectator.component.activeSlide).toEqual(new KirbySlidesHostComponent().activeSlide);
+  fit('should call slideTo with 4', () => {
+    // Arrange
+    spyOn(spectator.component.ionSlides, 'slideTo');
+
+    // Act
+    spectator.component.slideTo(2);
+
+    // Assert
+    expect(spectator.component.ionSlides.slideTo).toHaveBeenCalledWith(2);
   });
 });
