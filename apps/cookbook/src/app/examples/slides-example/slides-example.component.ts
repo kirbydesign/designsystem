@@ -1,11 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+
+import { SlidesComponent } from '@kirbydesign/designsystem';
 
 @Component({
   selector: 'cookbook-slides-example',
   templateUrl: './slides-example.component.html',
 })
 export class SlidesExampleComponent {
-  activeSlide = 0;
+  @ViewChild(SlidesComponent) slidesComponent: SlidesComponent;
   constructor() {}
 
   slidesOptions = {
@@ -52,12 +54,14 @@ export class SlidesExampleComponent {
     },
   ];
 
+  activeSlide = this.slides[0];
+
   getDataFromActiveSlide(e: any) {
     // Output onSlideDidChange
     console.log('Output: ', e);
   }
 
   changeSlide() {
-    this.activeSlide = 3;
+    this.slidesComponent.slideTo(3);
   }
 }

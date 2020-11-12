@@ -12,6 +12,9 @@ declare var require: any;
 export class SlidesShowcaseComponent {
   exampleHtml: string = require('!raw-loader!../../examples/slides-example/slides-example.component.html')
     .default;
+
+  exampleTS: string = require('!raw-loader!../../examples/slides-example/slides-example.component.ts')
+    .default;
   properties: ShowcaseProperty[] = [
     {
       name: 'slidesOptions',
@@ -25,12 +28,6 @@ export class SlidesShowcaseComponent {
       description: 'Objectarray holding the data to be shown',
       defaultValue: '',
       inputValues: ['DataArray'],
-    },
-    {
-      name: 'activeSlide',
-      description: 'Sets centered (active) slide',
-      defaultValue: '',
-      inputValues: ['number'],
     },
   ];
   events: ShowcaseProperty[] = [
