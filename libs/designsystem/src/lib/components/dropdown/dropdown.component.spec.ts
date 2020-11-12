@@ -85,6 +85,10 @@ describe('DropdownComponent', () => {
       expect(spectator.element.attributes['disabled']).toBeUndefined();
     });
 
+    it('should render no-blur attribute', () => {
+      expect(spectator.element.attributes['no-blur']).toBeDefined();
+    });
+
     it('should not render button as disabled ', () => {
       expect(buttonElement.disabled).toBeFalsy();
     });
