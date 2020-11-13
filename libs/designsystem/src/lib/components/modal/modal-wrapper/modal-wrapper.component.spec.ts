@@ -1,6 +1,6 @@
 import { tick, fakeAsync } from '@angular/core/testing';
 import { IonContent } from '@ionic/angular';
-import { Spectator } from '@ngneat/spectator';
+import { Spectator, SpyObject } from '@ngneat/spectator';
 
 import { KirbyAnimation } from '../../../animation/kirby-animation';
 import { TestHelper } from '../../../testing/test-helper';
@@ -232,6 +232,10 @@ describe('ModalWrapperComponent', () => {
   });
 
   describe('with embedded component with static footer', () => {
+    beforeAll(() => {
+      TestHelper.scrollMainWindowToTop();
+    });
+
     beforeEach(() => {
       spectator = modalWrapperTestBuilder.withStaticFooter().build();
       spectator.detectChanges();
@@ -253,10 +257,6 @@ describe('ModalWrapperComponent', () => {
 
     describe(`should set custom CSS property '--keyboard-offset' on embedded footer`, () => {
       const keyboardHeight = 400;
-
-      beforeEach(() => {
-        TestHelper.scrollMainWindowToTop();
-      });
 
       it('to a value', () => {
         const kirbyModalFooter = spectator.element.querySelector<HTMLElement>(
@@ -302,6 +302,10 @@ describe('ModalWrapperComponent', () => {
   });
 
   describe('with embedded component with dynamic footer', () => {
+    beforeAll(() => {
+      TestHelper.scrollMainWindowToTop();
+    });
+
     beforeEach(() => {
       spectator = modalWrapperTestBuilder
         .flavor('modal')
@@ -601,6 +605,9 @@ describe('ModalWrapperComponent', () => {
           await TestHelper.waitForResizeObserver();
           await TestHelper.whenTrue(() => spectator.component['viewportResized']);
           expect(spectator.component['viewportResized']).toBeTrue();
+
+          const dismissSpy = spectator.component['ionModalElement'].dismiss as jasmine.Spy;
+          expect(dismissSpy).not.toHaveBeenCalled();
         });
 
         afterEach(() => {
