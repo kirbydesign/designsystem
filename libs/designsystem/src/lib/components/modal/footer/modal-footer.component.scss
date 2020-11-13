@@ -11,8 +11,9 @@ ion-footer {
 }
 
 :host(.snap-to-keyboard) ion-footer {
-  padding-bottom: calc(#{size('s')} + var(--keyboard-offset, 0px));
-  transition: padding-bottom $soft-keyboard-transition;
+  padding-bottom: size('s');
+  transform: translateY(calc(var(--keyboard-offset, 0px) * -1));
+  transition: transform $soft-keyboard-transition;
 }
 
 :host(.light) ion-footer {
