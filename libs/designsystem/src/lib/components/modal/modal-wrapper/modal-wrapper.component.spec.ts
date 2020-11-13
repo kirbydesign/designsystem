@@ -232,10 +232,6 @@ describe('ModalWrapperComponent', () => {
   });
 
   describe('with embedded component with static footer', () => {
-    beforeAll(() => {
-      TestHelper.scrollMainWindowToTop();
-    });
-
     beforeEach(() => {
       spectator = modalWrapperTestBuilder.withStaticFooter().build();
       spectator.detectChanges();
@@ -268,7 +264,7 @@ describe('ModalWrapperComponent', () => {
 
       it('to 0 when no keyboard overlap', () => {
         const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
-        spectator.element.style.position = 'absolute';
+        spectator.element.style.position = 'fixed';
         spectator.element.style.bottom = `${keyboardHeight + 200}px`;
         spectator.component._onKeyboardDidShow({ detail: { keyboardHeight } });
         const keyboardOverlap = 0;
@@ -279,7 +275,7 @@ describe('ModalWrapperComponent', () => {
 
       it('to value of overlap when keyboard overlaps partially', () => {
         const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
-        spectator.element.style.position = 'absolute';
+        spectator.element.style.position = 'fixed';
         spectator.element.style.bottom = `${keyboardHeight - 200}px`;
         spectator.component._onKeyboardDidShow({ detail: { keyboardHeight } });
         const keyboardOverlap = 200;
@@ -290,7 +286,7 @@ describe('ModalWrapperComponent', () => {
 
       it('to keyboard height when keyboard overlaps completely', () => {
         const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
-        spectator.element.style.position = 'absolute';
+        spectator.element.style.position = 'fixed';
         spectator.element.style.bottom = '0px';
         spectator.component._onKeyboardDidShow({ detail: { keyboardHeight } });
         const keyboardOverlap = keyboardHeight;
@@ -302,10 +298,6 @@ describe('ModalWrapperComponent', () => {
   });
 
   describe('with embedded component with dynamic footer', () => {
-    beforeAll(() => {
-      TestHelper.scrollMainWindowToTop();
-    });
-
     beforeEach(() => {
       spectator = modalWrapperTestBuilder
         .flavor('modal')
@@ -395,7 +387,7 @@ describe('ModalWrapperComponent', () => {
 
       it('to 0 when no keyboard overlap', () => {
         const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
-        spectator.element.style.position = 'absolute';
+        spectator.element.style.position = 'fixed';
         spectator.element.style.bottom = `${keyboardHeight + 200}px`;
         spectator.component._onKeyboardDidShow({ detail: { keyboardHeight } });
         const keyboardOverlap = 0;
@@ -406,7 +398,7 @@ describe('ModalWrapperComponent', () => {
 
       it('to value of overlap when keyboard overlaps partially', () => {
         const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
-        spectator.element.style.position = 'absolute';
+        spectator.element.style.position = 'fixed';
         spectator.element.style.bottom = `${keyboardHeight - 200}px`;
         spectator.component._onKeyboardDidShow({ detail: { keyboardHeight } });
         const keyboardOverlap = 200;
@@ -417,7 +409,7 @@ describe('ModalWrapperComponent', () => {
 
       it('to keyboard height when keyboard overlaps completely', () => {
         const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
-        spectator.element.style.position = 'absolute';
+        spectator.element.style.position = 'fixed';
         spectator.element.style.bottom = '0px';
         spectator.component._onKeyboardDidShow({ detail: { keyboardHeight } });
         const keyboardOverlap = keyboardHeight;
