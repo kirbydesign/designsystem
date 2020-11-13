@@ -10,6 +10,7 @@ import { SizeDirective } from '../../directives/size/size.directive';
 import { ThemeColorDirective } from '../../directives';
 import { ColorHelper } from '../../helpers';
 import { ProgressCircleComponent } from '../progress-circle/progress-circle.component';
+import { ProgressCircleRingComponent } from '../progress-circle/progress-circle-ring.component';
 
 const getColor = DesignTokenHelper.getColor;
 const size = DesignTokenHelper.size;
@@ -20,7 +21,13 @@ describe('AvatarComponent', () => {
 
   const createHost = createHostFactory({
     component: AvatarComponent,
-    declarations: [IconComponent, SizeDirective, ThemeColorDirective, ProgressCircleComponent],
+    declarations: [
+      IconComponent,
+      SizeDirective,
+      ThemeColorDirective,
+      ProgressCircleComponent,
+      ProgressCircleRingComponent,
+    ],
     imports: [IonicModule.forRoot({ mode: 'ios', _testing: true })],
   });
 

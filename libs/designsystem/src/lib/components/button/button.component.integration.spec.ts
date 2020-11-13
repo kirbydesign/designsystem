@@ -1,7 +1,7 @@
 import { RouterTestingModule } from '@angular/router/testing';
 import { SpectatorHost, createHostFactory } from '@ngneat/spectator';
 import { IonicModule, IonIcon } from '@ionic/angular';
-import { MockComponent, MockComponents } from 'ng-mocks';
+import { MockComponent, MockComponents, MockDirectives } from 'ng-mocks';
 
 import { DesignTokenHelper } from '../../helpers/design-token-helper';
 import { TestHelper } from '../../testing/test-helper';
@@ -244,7 +244,11 @@ describe('ButtonComponent in Kirby dropdown', () => {
   let spectator: SpectatorHost<DropdownComponent>;
   const createHost = createHostFactory({
     component: DropdownComponent,
-    declarations: [ButtonComponent, MockComponents(CardComponent, ItemComponent, IconComponent)],
+    declarations: [
+      ButtonComponent,
+      MockComponents(CardComponent, ItemComponent, IconComponent),
+      MockDirectives(SizeDirective),
+    ],
   });
 
   it('should render with space between text and icon', () => {

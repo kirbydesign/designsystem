@@ -7,10 +7,13 @@ describe('KirbyIconRegistryService', () => {
   beforeEach(() => {
     service = new IconRegistryService();
   });
+
   it('should create service', () => {
     expect(service).toBeTruthy();
   });
+
   it('should register icons if injected', () => {
+    const consoleWarnSpy = spyOn(console, 'warn');
     const iconSettings: IconSettings = {
       icons: [
         { name: 'name1', svg: 'svg1' },
@@ -19,12 +22,16 @@ describe('KirbyIconRegistryService', () => {
     };
     service = new IconRegistryService(iconSettings);
     expect(service.getIcons()).toEqual(iconSettings.icons);
+    expect(consoleWarnSpy).toHaveBeenCalledWith(
+      'Use of IconSettings is deprecated, use IconRegistryService instead'
+    );
   });
 
   describe('getIcon', () => {
     it('should return undefined if no icons registered', () => {
       expect(service.getIcon('test')).toBeUndefined();
     });
+
     it('should return undefined if no icon match name', () => {
       const icons = [
         { name: 'name1', svg: 'svg1' },
@@ -33,6 +40,7 @@ describe('KirbyIconRegistryService', () => {
       service.addIcons(icons);
       expect(service.getIcon('test')).toBeUndefined();
     });
+
     it('should return icon if name matches registered icon', () => {
       const icons = [
         { name: 'name1', svg: 'svg1' },
@@ -49,6 +57,7 @@ describe('KirbyIconRegistryService', () => {
       const expectedIcons = [];
       expect(service.getIcons()).toEqual(expectedIcons);
     });
+
     it('should return registed icons', () => {
       const icons = [
         { name: 'name1', svg: 'svg1' },
@@ -60,28 +69,40 @@ describe('KirbyIconRegistryService', () => {
   });
 
   describe('addIcon', () => {
+    let consoleWarnSpy: jasmine.Spy;
+
+    beforeAll(() => {
+      consoleWarnSpy = spyOn(console, 'warn');
+    });
+
     it('should add the icon to the regitry', () => {
       service.addIcon('name1', 'svg1');
       expect(service.getIcons()).toEqual([{ name: 'name1', svg: 'svg1' }]);
     });
+
     it('should only add distinct icon names', () => {
       service.addIcon('name1', 'svg1');
       service.addIcon('name1', 'svg2');
       expect(service.getIcons()).toEqual([{ name: 'name1', svg: 'svg1' }]);
     });
+
     it('should warn when overwriting existing icon name', () => {
-      spyOn(console, 'warn');
       service.addIcon('name1', 'svg1');
       service.addIcon('name1', 'svg2');
-      expect(console.warn).toHaveBeenCalledWith('Icon with name: "name1" already exists');
+      expect(consoleWarnSpy).toHaveBeenCalledWith('Icon with name: "name1" already exists');
     });
   });
 
   describe('addIcons', () => {
+    let consoleWarnSpy: jasmine.Spy;
     const icon1 = { name: 'name1', svg: 'svg1' };
     const icon2 = { name: 'name1', svg: 'svg2' };
     const icon3 = { name: 'name3', svg: 'svg3' };
     const expectedIcons = [icon1, icon3];
+
+    beforeAll(() => {
+      consoleWarnSpy = spyOn(console, 'warn');
+    });
 
     it('should only add distinct icon names from same set', () => {
       service.addIcons([icon1, icon2, icon3]);
@@ -95,9 +116,8 @@ describe('KirbyIconRegistryService', () => {
     });
 
     it('should warn when overwriting existing icon name', () => {
-      spyOn(console, 'warn');
       service.addIcons([icon1, icon2, icon3]);
-      expect(console.warn).toHaveBeenCalledWith('Icon with name: "name1" already exists');
+      expect(consoleWarnSpy).toHaveBeenCalledWith('Icon with name: "name1" already exists');
     });
   });
 });
