@@ -299,7 +299,11 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     let snapFooterToKeyboard = false;
     const embeddedFooterElement = this.getEmbeddedFooterElement();
     if (embeddedFooterElement) {
-      embeddedFooterElement.style.setProperty('--keyboard-offset', `${keyboardOverlap}px`);
+      const keyboardOffsetFooter =
+        keyboardHeight > 0
+          ? `calc(${keyboardOverlap}px - var(--kirby-safe-area-bottom, 0px))`
+          : '0px';
+      embeddedFooterElement.style.setProperty('--keyboard-offset', keyboardOffsetFooter);
       snapFooterToKeyboard = embeddedFooterElement.classList.contains('snap-to-keyboard');
     }
 
