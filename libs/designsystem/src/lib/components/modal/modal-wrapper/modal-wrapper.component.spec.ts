@@ -254,6 +254,10 @@ describe('ModalWrapperComponent', () => {
     describe(`should set custom CSS property '--keyboard-offset' on embedded footer`, () => {
       const keyboardHeight = 400;
 
+      beforeEach(() => {
+        TestHelper.scrollMainWindowToTop();
+      });
+
       it('to a value', () => {
         const kirbyModalFooter = spectator.element.querySelector<HTMLElement>(
           ':scope > kirby-modal-footer'
@@ -374,6 +378,7 @@ describe('ModalWrapperComponent', () => {
         embeddedComponent.showFooter = true;
         spectator.detectChanges();
         await TestHelper.waitForResizeObserver();
+        TestHelper.scrollMainWindowToTop();
       });
 
       it('to a value', () => {
