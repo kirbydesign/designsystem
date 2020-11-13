@@ -6,20 +6,38 @@
   bottom: 0;
   z-index: 99999;
   pointer-events: none;
+  overflow: hidden;
+  height: var(--keyboard-height);
 
-  &.top {
-    background-color: transparent;
-    border-top: 1px dotted red;
-    height: var(--keyboard-height);
+  .top,
+  .bg {
+    position: absolute;
+    height: 100%;
+    width: 100%;
   }
 
-  &.bg {
-    background-color: rgba(255, 0, 0, 0.3);
-    height: 0;
-    transition: height $soft-keyboard-transition;
+  .top {
+    background-color: transparent;
+    border-top: 1px dashed get-color('semi-dark');
+    z-index: 1;
+  }
+
+  .bg {
+    opacity: 0.9;
+    background-color: get-color('medium');
+    transition: transform $soft-keyboard-transition;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-gap: size('s');
+    padding: size('s');
+    transform: translateY(100%);
+
+    > * {
+      background-color: get-color('white');
+    }
 
     &.keyboard-showing {
-      height: var(--keyboard-height);
+      transform: translateY(0);
     }
   }
 }

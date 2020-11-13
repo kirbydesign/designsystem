@@ -1,6 +1,12 @@
-<div *ngIf="showDummyKeyboard" [style.--keyboard-height]="keyboardHeight + 'px'">
-  <div class="dummy-keyboard top"></div>
-  <div class="dummy-keyboard bg" [class.keyboard-showing]="keyboardIsShowing"></div>
+<div
+  *ngIf="showDummyKeyboard"
+  [style.--keyboard-height]="keyboardHeight + 'px'"
+  class="dummy-keyboard"
+>
+  <div class="top"></div>
+  <div class="bg" [class.keyboard-showing]="keyboardIsShowing">
+    <div *ngFor="let counter of keys"></div>
+  </div>
 </div>
 
 <kirby-app>

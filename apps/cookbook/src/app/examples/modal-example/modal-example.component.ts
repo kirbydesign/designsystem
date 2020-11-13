@@ -30,7 +30,7 @@ import { WindowRef } from '@kirbydesign/designsystem/types/window-ref';
 export class ModalExampleComponent {
   constructor(private window: WindowRef) {}
 
-  showDummyKeyboard = false;
+  showDummyKeyboard = !!this.window.sessionStorage.getItem('kirby-cookbook-show-dummy-keyboard');
 
   toggleDummyKeyboard(show: boolean) {
     this.showDummyKeyboard = show;

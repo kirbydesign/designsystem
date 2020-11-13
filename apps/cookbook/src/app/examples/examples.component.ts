@@ -8,9 +8,11 @@ import { WindowRef } from '@kirbydesign/designsystem/types/window-ref';
   styleUrls: ['./examples.component.scss'],
 })
 export class ExamplesComponent {
-  showDummyKeyboard = false;
+  showDummyKeyboard = !!this.window.sessionStorage.getItem('kirby-cookbook-show-dummy-keyboard');
   keyboardIsShowing = false;
   keyboardHeight: number;
+  keyCount = 40;
+  keys = Array(this.keyCount).fill('');
 
   constructor(private window: WindowRef) {
     this.setKeyboardSize();
@@ -49,6 +51,10 @@ export class ExamplesComponent {
   _onToggleDummyKeyboard() {
     setTimeout(() => {
       this.showDummyKeyboard = !this.showDummyKeyboard;
+      const sessionKey = 'kirby-cookbook-show-dummy-keyboard';
+      this.showDummyKeyboard
+        ? this.window.sessionStorage.setItem(sessionKey, 'true')
+        : this.window.sessionStorage.removeItem(sessionKey);
     });
   }
 
