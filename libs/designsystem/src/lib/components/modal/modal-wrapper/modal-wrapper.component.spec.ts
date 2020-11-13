@@ -255,8 +255,10 @@ describe('ModalWrapperComponent', () => {
       const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
       const keyboardHeight = 200;
       spectator.component._onKeyboardDidShow({ detail: { keyboardHeight } });
-      const keyboardOverlap =
-        keyboardHeight - spectator.component['getDistanceFromWindowBottomToModalBottom']();
+      const keyboardOverlap = spectator.component['getKeyboardOverlap'](
+        keyboardHeight,
+        spectator.component['ionContentElement'].nativeElement
+      );
       expect(kirbyModalFooter).toHaveStyle({
         '--keyboard-offset': `${keyboardOverlap}px`,
       });
@@ -342,8 +344,10 @@ describe('ModalWrapperComponent', () => {
       const keyboardHeight = 200;
       spectator.component._onKeyboardDidShow({ detail: { keyboardHeight } });
 
-      const keyboardOverlap =
-        keyboardHeight - spectator.component['getDistanceFromWindowBottomToModalBottom']();
+      const keyboardOverlap = spectator.component['getKeyboardOverlap'](
+        keyboardHeight,
+        spectator.component['ionContentElement'].nativeElement
+      );
 
       expect(kirbyModalFooter).toHaveStyle({ '--keyboard-offset': `${keyboardOverlap}px` });
     });
