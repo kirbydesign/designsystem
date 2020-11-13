@@ -23,31 +23,25 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+$backdrop-opacity: 0.4;
+
 ion-modal.kirby-overlay {
   position: fixed;
 
-  // Ensure consistent backdrop on overlays, as Ionic 5 only applies --backdrop-opacity to :first-of-type:
+  // Ensure consistent backdrop on all overlays:
+  &:not(.modal-card) {
+    --backdrop-opacity: #{$backdrop-opacity};
+    ion-backdrop {
+      opacity: var(--backdrop-opacity);
+    }
+  }
+
+  // Ensure consistent backdrop on card style modals, as Ionic 5 only applies --backdrop-opacity to :first-of-type:
   // See https://github.com/ionic-team/ionic/commit/253cd96164914a803f6bb42ff95ca74880c940d0
   // and https://github.com/ionic-team/ionic/issues/20800#issuecomment-606670762
-  /* RULES:
-  * Always show backdrop on first opened overlay
-  * Always show backdrop on alert and action-sheet (also nested)
-  * Show backdrop on drawer on small screens only
-  */
-  &:first-of-type,
-  &.modal-card:first-of-type,
-  &.kirby-alert,
-  &.kirby-action-sheet {
-    --backdrop-opacity: 0.4;
-  }
-  @include media('<medium') {
-    // Only apply backdrop on stacking drawers on small screens:
-    &.kirby-drawer {
-      --backdrop-opacity: 0.4;
-      ion-backdrop {
-        opacity: var(--backdrop-opacity);
-      }
-    }
+  &.modal-card,
+  &.modal-card:first-of-type {
+    --backdrop-opacity: #{$backdrop-opacity};
   }
 
   .modal-shadow {
@@ -95,6 +89,42 @@ ion-modal.kirby-overlay {
       --height: 647px;
       --border-radius: #{$border-radius};
       --box-shadow: #{get-elevation(8)};
+
+      &.kirby-drawer {
+        align-items: flex-end;
+        .modal-wrapper {
+          border-bottom-left-radius: 0;
+          border-bottom-right-radius: 0;
+        }
+      }
+
+      &:not(.kirby-drawer):not(.kirby-modal-compact) {
+        --height: auto;
+        --kirby-modal-padding-top: #{size('xl')};
+        --min-height: #{$modal-default-height};
+        --max-height: calc(100vh - var(--kirby-modal-padding-top));
+        align-items: flex-start;
+        padding-top: var(--kirby-modal-padding-top);
+        transition: all 0.5s #{get-transition-duration('long')} #{get-transition-easing(
+              'enter-exit'
+            )},
+          padding 0ms;
+
+        &.small {
+          --min-height: #{map-get($modal-heights, 's')};
+        }
+        &.medium {
+          --min-height: #{map-get($modal-heights, 'm')};
+        }
+        &.large {
+          --min-height: #{map-get($modal-heights, 'l')};
+        }
+
+        .modal-wrapper.full-height {
+          border-bottom-left-radius: 0;
+          border-bottom-right-radius: 0;
+        }
+      }
 
       &.kirby-drawer {
         padding-top: unset;

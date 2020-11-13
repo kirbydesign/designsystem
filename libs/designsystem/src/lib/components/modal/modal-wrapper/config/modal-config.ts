@@ -9,6 +9,7 @@ export interface ModalConfig {
    */
   title?: string;
   component: any;
+  size?: 'small' | 'medium' | 'large';
   modalRoute?: ActivatedRoute;
   siblingModalRouteActivated$?: Observable<ActivatedRoute>;
   flavor?: 'modal' | 'drawer' | 'compact';
