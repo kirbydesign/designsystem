@@ -9,7 +9,7 @@ import { ModalRouteActivation } from './modal.interfaces';
 export class ModalNavigationService {
   constructor(private router: Router, private route: ActivatedRoute) {}
 
-  private isModalRoute(url: string): boolean {
+  isModalRoute(url: string): boolean {
     return url.includes('(modal:');
   }
 
