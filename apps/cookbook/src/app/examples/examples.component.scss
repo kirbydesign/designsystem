@@ -1,1 +1,43 @@
 @import './libs/designsystem/src/lib/scss/utils';
+
+.dummy-keyboard {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  z-index: 99999;
+  pointer-events: none;
+  overflow: hidden;
+  height: var(--keyboard-height);
+
+  .top,
+  .bg {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+  }
+
+  .top {
+    background-color: transparent;
+    border-top: 1px dashed get-color('semi-dark');
+    z-index: 1;
+  }
+
+  .bg {
+    opacity: 0.9;
+    background-color: get-color('medium');
+    transition: transform $soft-keyboard-transition;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-gap: size('s');
+    padding: size('s');
+    transform: translateY(100%);
+
+    > * {
+      background-color: get-color('white');
+    }
+
+    &.keyboard-showing {
+      transform: translateY(0);
+    }
+  }
+}
