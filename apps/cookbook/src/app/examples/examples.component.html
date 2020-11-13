@@ -1,3 +1,8 @@
+<div *ngIf="showDummyKeyboard" [style.--keyboard-height]="keyboardHeight + 'px'">
+  <div class="dummy-keyboard top"></div>
+  <div class="dummy-keyboard bg" [class.keyboard-showing]="keyboardIsShowing"></div>
+</div>
+
 <kirby-app>
   <kirby-router-outlet></kirby-router-outlet>
 </kirby-app>

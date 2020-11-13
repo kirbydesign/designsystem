@@ -1,1 +1,25 @@
 @import './libs/designsystem/src/lib/scss/utils';
+
+.dummy-keyboard {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  z-index: 99999;
+  pointer-events: none;
+
+  &.top {
+    background-color: transparent;
+    border-top: 1px dotted red;
+    height: var(--keyboard-height);
+  }
+
+  &.bg {
+    background-color: rgba(255, 0, 0, 0.3);
+    height: 0;
+    transition: height $soft-keyboard-transition;
+
+    &.keyboard-showing {
+      height: var(--keyboard-height);
+    }
+  }
+}
