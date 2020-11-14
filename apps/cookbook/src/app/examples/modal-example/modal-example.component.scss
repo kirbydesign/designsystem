@@ -9,3 +9,14 @@ h1 {
     display: none;
   }
 }
+
+fieldset {
+  margin-top: size('xl');
+  display: flex;
+
+  label {
+    cursor: pointer;
+    padding-left: size(xxxs);
+    transform: translateY(size(xxxxs) * -1);
+  }
+}

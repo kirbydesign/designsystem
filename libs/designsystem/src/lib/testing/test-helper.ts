@@ -1,4 +1,15 @@
 export class TestHelper {
+  private static readonly _init = TestHelper.muteIonicReInitializeWarning();
+
+  private static muteIonicReInitializeWarning() {
+    const originalWarn = console.warn;
+    const patchedWarn = (warning: any, ...optionalParams: any[]) => {
+      const suppress = `Ionic Angular was already initialized. Make sure IonicModule.forRoot() is just called once.`;
+      if (warning !== suppress) originalWarn(warning, ...optionalParams);
+    };
+    console.warn = patchedWarn;
+  }
+
   /*
    * Checks for the Web Component being ready,
    * ie. the component is hydrated, styles have been applied

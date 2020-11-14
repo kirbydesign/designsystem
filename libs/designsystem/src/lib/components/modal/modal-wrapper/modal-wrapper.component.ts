@@ -61,7 +61,6 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   @ViewChild(RouterOutlet, { static: true }) private routerOutlet: RouterOutlet;
 
   private keyboardVisible = false;
-  private keyboardOverlap: number = 0;
   private toolbarButtons: HTMLButtonElement[] = [];
   private delayedClose = () => {};
   private delayedCloseTimeoutId;
@@ -264,33 +263,55 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   _onKeyboardDidShow(event: { detail: { keyboardHeight: number } }) {
     this.setKeyboardVisibility(event.detail.keyboardHeight);
   }
+
   @HostListener('window:ionKeyboardDidHide')
   _onKeyboardDidHide() {
     this.setKeyboardVisibility(0);
   }
-  private setKeyboardVisibility(value: number) {
-    this.keyboardVisible = value > 0;
-    this.setKeyboardOverlap(value);
-    const [key, pixelValue] = ['--keyboard-offset', `${this.keyboardOverlap}px`];
-    this.ionContentElement.nativeElement.style.setProperty(key, pixelValue);
+
+  private toggleContentMaxHeight(freeze: boolean) {
+    const style = 'max-height';
+    const contentElement = this.ionContentElement.nativeElement;
+    if (freeze) {
+      const contentHeight = contentElement.offsetHeight;
+      this.renderer.setStyle(contentElement, style, `${contentHeight}px`);
+    } else {
+      this.renderer.removeStyle(contentElement, style);
+    }
+  }
+
+  private setKeyboardVisibility(keyboardHeight: number) {
+    this.keyboardVisible = keyboardHeight > 0;
+    this.toggleContentMaxHeight(this.keyboardVisible);
+    this.setKeyboardOverlap(keyboardHeight);
+  }
+
+  private getKeyboardOverlap(keyboardHeight: number, element: Element) {
+    if (keyboardHeight <= 0 || !element) return 0;
+    const distanceFromViewportBottomToElement = Math.floor(
+      this.windowRef.innerHeight - element.getBoundingClientRect().bottom
+    );
+    return Math.max(keyboardHeight - distanceFromViewportBottomToElement, 0);
+  }
+
+  private setKeyboardOverlap(keyboardHeight: number) {
+    const keyboardOverlap = this.getKeyboardOverlap(keyboardHeight, this.elementRef.nativeElement);
+    let snapFooterToKeyboard = false;
     const embeddedFooterElement = this.getEmbeddedFooterElement();
     if (embeddedFooterElement) {
-      embeddedFooterElement.style.setProperty(key, pixelValue);
+      const keyboardOffsetFooter =
+        keyboardHeight > 0
+          ? `calc(${keyboardOverlap}px - var(--kirby-safe-area-bottom, 0px))`
+          : '0px';
+      embeddedFooterElement.style.setProperty('--keyboard-offset', keyboardOffsetFooter);
+      snapFooterToKeyboard = embeddedFooterElement.classList.contains('snap-to-keyboard');
     }
-  }
 
-  private setKeyboardOverlap(value: number) {
-    if (value > 0) {
-      this.keyboardOverlap = value - this.getDistanceFromWindowBottomToModalBottom();
-    } else {
-      this.keyboardOverlap = 0;
-    }
-  }
-
-  private getDistanceFromWindowBottomToModalBottom() {
-    const ionModalWrapper = this.elementRef.nativeElement.closest<HTMLElement>('.modal-wrapper');
-    if (!ionModalWrapper) return;
-    return this.windowRef.innerHeight - ionModalWrapper.getBoundingClientRect().bottom;
+    const contentElement = this.ionContentElement.nativeElement;
+    const contentKeyboardOffset = snapFooterToKeyboard
+      ? keyboardOverlap
+      : this.getKeyboardOverlap(keyboardHeight, contentElement);
+    contentElement.style.setProperty('--keyboard-offset', `${contentKeyboardOffset}px`);
   }
 
   onHeaderTouchStart(event: TouchEvent) {
@@ -370,7 +391,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     this.renderer.appendChild(newParent, child);
     if (child.tagName === 'KIRBY-MODAL-FOOTER') {
       this.resizeObserverService.observe(child, (entry) => {
-        const [key, pixelValue] = ['--footer-height', `${entry.contentRect.height}px`];
+        const [key, pixelValue] = ['--footer-height', `${Math.floor(entry.contentRect.height)}px`];
         this.elementRef.nativeElement.style.setProperty(key, pixelValue);
       });
     }

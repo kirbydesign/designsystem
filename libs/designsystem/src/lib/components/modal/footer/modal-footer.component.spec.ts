@@ -70,12 +70,12 @@ describe('ModalFooterComponent', () => {
 
       it('should follow the keyboard up', () => {
         keyboardSlideIn();
-        expectPaddingBottom().toEqual(PADDING_BOTTOM_PUSHED_BY_KEYBOARD);
+        expectTransform().toEqual(TRANSFORM_PUSHED_BY_KEYBOARD);
       });
 
       it('should follow the keyboard down', () => {
         keyboardSlideOut();
-        expectPaddingBottom().toEqual(PADDING_BOTTOM_NOT_PUSHED_BY_KEYBOARD);
+        expectTransform().toEqual(TRANSFORM_NOT_PUSHED_BY_KEYBOARD);
       });
     });
 
@@ -83,7 +83,7 @@ describe('ModalFooterComponent', () => {
       it('should not follow the keyboard up', () => {
         spectator.setHostInput('snapToKeyboard', false);
         keyboardSlideIn();
-        expectPaddingBottom().toEqual(PADDING_BOTTOM_NOT_PUSHED_BY_KEYBOARD);
+        expectTransform().toEqual('none');
       });
     });
   });
@@ -124,8 +124,8 @@ describe('ModalFooterComponent', () => {
   const BASE_PADDING_PX = 16;
   const SAFE_AREA_BOTTOM_PX = 22;
 
-  const PADDING_BOTTOM_NOT_PUSHED_BY_KEYBOARD = BASE_PADDING_PX + 'px';
-  const PADDING_BOTTOM_PUSHED_BY_KEYBOARD = BASE_PADDING_PX + KEYBOARD_HEIGHT_PX + 'px';
+  const TRANSFORM_NOT_PUSHED_BY_KEYBOARD = `matrix(1, 0, 0, 1, 0, 0)`;
+  const TRANSFORM_PUSHED_BY_KEYBOARD = `matrix(1, 0, 0, 1, 0, -${KEYBOARD_HEIGHT_PX})`;
 
   function setSafeAreaBottom() {
     modalFooterElement.style.setProperty('--kirby-safe-area-bottom', SAFE_AREA_BOTTOM_PX + 'px');
@@ -145,5 +145,9 @@ describe('ModalFooterComponent', () => {
 
   function expectPaddingBottom() {
     return expect(TestHelper.getCssProperty(ionFooterElement, 'padding-bottom'));
+  }
+
+  function expectTransform() {
+    return expect(TestHelper.getCssProperty(ionFooterElement, 'transform'));
   }
 });

@@ -79,6 +79,7 @@ import { FlagComponent } from './components/flag/flag.component';
 import { IconRegistryService } from './components/icon/icon-registry.service';
 import { WindowRef } from './types/window-ref';
 import { ToggleButtonModule } from './components/toggle-button/toggle-button.module';
+import { SlideDirective, SlidesComponent } from './components/slides/slides.component';
 
 const exportedDeclarations = [
   CardComponent,
@@ -127,6 +128,8 @@ const exportedDeclarations = [
   LoadingOverlayComponent,
   ProgressCircleComponent,
   FlagComponent,
+  SlidesComponent,
+  SlideDirective,
 ];
 
 const declarations = [

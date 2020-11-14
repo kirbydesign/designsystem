@@ -42,6 +42,7 @@ import { StockChartShowcaseComponent } from './stock-chart-showcase/stock-chart-
 import { ProgressCircleShowcaseComponent } from './progress-circle-showcase/progress-circle-showcase.component';
 import { FlagShowcaseComponent } from './flag-showcase/flag-showcase.component';
 import { ToggleButtonShowcaseComponent } from './toggle-button-showcase/toggle-button-showcase.component';
+import { SlidesShowcaseComponent } from './slides-showcase/slides-showcase.component';
 
 export const routes: Routes = [
   {
@@ -220,6 +221,10 @@ export const routes: Routes = [
       {
         path: 'progress-circle',
         component: ProgressCircleShowcaseComponent,
+      },
+      {
+        path: 'slides',
+        component: SlidesShowcaseComponent,
       },
     ],
   },
