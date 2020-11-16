@@ -117,12 +117,14 @@ describe('ModalNavigationService', () => {
     describe('when navigation to modal route has NOT YET finished', () => {
       describe('modalNavigation.activated$', () => {
         it('should emit initial modal route activation', async () => {
-          router.navigate([
-            'home',
-            'modal-lazy',
-            'modal-backdrop',
-            { outlets: { modal: ['page1'] } },
-          ]);
+          zone.run(() =>
+            router.navigate([
+              'home',
+              'modal-lazy',
+              'modal-backdrop',
+              { outlets: { modal: ['page1'] } },
+            ])
+          );
 
           let modalRouteActivated = false;
           const subscription = (

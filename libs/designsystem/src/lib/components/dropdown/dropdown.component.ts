@@ -101,6 +101,12 @@ export class DropdownComponent
     return this.disabled ? -1 : this.tabindex;
   }
 
+  // Prevent Ionic blur on scroll
+  @HostBinding('attr.no-blur')
+  get _noBlurOnScroll() {
+    return true;
+  }
+
   /**
    * Emitted when an item is selected (tap on mobile, click/keypress on web)
    */
