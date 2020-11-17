@@ -259,9 +259,19 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     this.windowRef.scrollTo({ top: this.scrollY });
   }
 
+  @HostListener('window:keyboardWillShow', ['$event'])
+  _onKeyboardWillShow(info: { keyboardHeight: number }) {
+    this.setKeyboardVisibility(info.keyboardHeight);
+  }
+
   @HostListener('window:ionKeyboardDidShow', ['$event'])
   _onKeyboardDidShow(event: { detail: { keyboardHeight: number } }) {
     this.setKeyboardVisibility(event.detail.keyboardHeight);
+  }
+
+  @HostListener('window:keyboardWillHide')
+  _onKeyboardWillHide() {
+    this.setKeyboardVisibility(0);
   }
 
   @HostListener('window:ionKeyboardDidHide')
@@ -281,6 +291,9 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   }
 
   private setKeyboardVisibility(keyboardHeight: number) {
+    const keyboardAlreadyVisible = keyboardHeight > 0 && this.keyboardVisible;
+    const keyboardAlreadyHidden = keyboardHeight === 0 && !this.keyboardVisible;
+    if (keyboardAlreadyVisible || keyboardAlreadyHidden) return;
     this.keyboardVisible = keyboardHeight > 0;
     this.toggleContentMaxHeight(this.keyboardVisible);
     this.setKeyboardOverlap(keyboardHeight);
@@ -299,11 +312,8 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     let snapFooterToKeyboard = false;
     const embeddedFooterElement = this.getEmbeddedFooterElement();
     if (embeddedFooterElement) {
-      const keyboardOffsetFooter =
-        keyboardHeight > 0
-          ? `calc(${keyboardOverlap}px - var(--kirby-safe-area-bottom, 0px))`
-          : '0px';
-      embeddedFooterElement.style.setProperty('--keyboard-offset', keyboardOffsetFooter);
+      embeddedFooterElement.style.setProperty('--keyboard-offset', `${keyboardOverlap}px`);
+      embeddedFooterElement.classList.toggle('keyboard-visible', keyboardHeight > 0);
       snapFooterToKeyboard = embeddedFooterElement.classList.contains('snap-to-keyboard');
     }
 

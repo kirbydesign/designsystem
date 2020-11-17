@@ -1,18 +1,41 @@
 @import '../../../scss/utils';
 
+$padding: size('s');
+$soft-keyboard-transition-delay: 150ms;
+
 ion-footer {
   box-shadow: get-elevation(8);
   display: flex;
   justify-content: var(--kirby-modal-footer-justify-content, center);
   align-items: center;
   background-color: get-color('white');
-  padding: size('s');
-  padding-bottom: calc(#{size('s')} + var(--kirby-safe-area-bottom));
+  padding: $padding;
+  padding-bottom: calc(#{$padding} + var(--kirby-modal-footer-safe-area-bottom, #{0px}));
+
+  @include media('<medium') {
+    --kirby-modal-footer-safe-area-bottom: var(--kirby-safe-area-bottom);
+  }
 }
 
-:host(.snap-to-keyboard) ion-footer {
-  transform: translateY(calc(var(--keyboard-offset, 0px) * -1));
-  transition: transform $soft-keyboard-transition;
+:host-context(.modal-wrapper.full-height) {
+  --kirby-modal-footer-safe-area-bottom: var(--kirby-safe-area-bottom);
+}
+
+:host(.snap-to-keyboard) {
+  ion-footer {
+    transition: transform $soft-keyboard-transition;
+  }
+}
+
+:host(.snap-to-keyboard.keyboard-visible) {
+  ion-footer {
+    transform: translateY(
+      calc(
+        (var(--keyboard-offset, #{0px}) - var(--kirby-modal-footer-safe-area-bottom, #{0px})) * -1
+      )
+    );
+    transition: transform $soft-keyboard-transition $soft-keyboard-transition-delay;
+  }
 }
 
 :host(.light) ion-footer {
