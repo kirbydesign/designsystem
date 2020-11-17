@@ -52,7 +52,7 @@
 
 @mixin button-attentionlevel3 {
   --kirby-button-color: #{get-color('medium-contrast')};
-  &:not(:focus):not(:disabled) {
+  &:not(:disabled) {
     border-color: var(--kirby-button-border-color, #{get-color('medium')});
   }
 
