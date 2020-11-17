@@ -16,6 +16,7 @@ const getColor = DesignTokenHelper.getColor;
 class TestHostComponent {
   snapToKeyboard = false;
 }
+
 describe('ModalFooterComponent', () => {
   let spectator: SpectatorHost<ModalFooterComponent, TestHostComponent>;
   let modalFooterElement: HTMLElement;
@@ -43,7 +44,7 @@ describe('ModalFooterComponent', () => {
 
     it('when --kirby-safe-area-bottom is set', () => {
       setSafeAreaBottom();
-      const expected = BASE_PADDING_PX + SAFE_AREA_BOTTOM_PX + 'px';
+      const expected = BASE_PADDING_PX + 'px';
       expectPaddingBottom().toEqual(expected);
     });
 
@@ -51,6 +52,28 @@ describe('ModalFooterComponent', () => {
       clearSafeAreaBottom();
       const expected = BASE_PADDING_PX + 'px';
       expectPaddingBottom().toEqual(expected);
+    });
+
+    describe('on small screens', () => {
+      beforeAll(async () => {
+        await TestHelper.resizeTestWindow(TestHelper.screensize.phone);
+      });
+
+      afterAll(() => {
+        TestHelper.resetTestWindow();
+      });
+
+      it('when --kirby-safe-area-bottom is set', () => {
+        setSafeAreaBottom();
+        const expected = BASE_PADDING_PX + SAFE_AREA_BOTTOM_PX + 'px';
+        expectPaddingBottom().toEqual(expected);
+      });
+
+      it('when --kirby-safe-area-bottom is not set', () => {
+        clearSafeAreaBottom();
+        const expected = BASE_PADDING_PX + 'px';
+        expectPaddingBottom().toEqual(expected);
+      });
     });
   });
 
@@ -75,7 +98,7 @@ describe('ModalFooterComponent', () => {
 
       it('should follow the keyboard down', () => {
         keyboardSlideOut();
-        expectTransform().toEqual(TRANSFORM_NOT_PUSHED_BY_KEYBOARD);
+        expectTransform().toEqual('none');
       });
     });
 
@@ -124,7 +147,6 @@ describe('ModalFooterComponent', () => {
   const BASE_PADDING_PX = 16;
   const SAFE_AREA_BOTTOM_PX = 22;
 
-  const TRANSFORM_NOT_PUSHED_BY_KEYBOARD = `matrix(1, 0, 0, 1, 0, 0)`;
   const TRANSFORM_PUSHED_BY_KEYBOARD = `matrix(1, 0, 0, 1, 0, -${KEYBOARD_HEIGHT_PX})`;
 
   function setSafeAreaBottom() {
@@ -137,10 +159,12 @@ describe('ModalFooterComponent', () => {
 
   function keyboardSlideIn() {
     modalFooterElement.style.setProperty('--keyboard-offset', KEYBOARD_HEIGHT_PX + 'px');
+    modalFooterElement.classList.add('keyboard-visible');
   }
 
   function keyboardSlideOut() {
     modalFooterElement.style.setProperty('--keyboard-offset', '0px');
+    modalFooterElement.classList.remove('keyboard-visible');
   }
 
   function expectPaddingBottom() {

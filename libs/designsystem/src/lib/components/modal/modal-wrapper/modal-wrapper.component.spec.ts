@@ -253,8 +253,6 @@ describe('ModalWrapperComponent', () => {
 
     describe(`should set custom CSS property '--keyboard-offset' on embedded footer`, () => {
       const keyboardHeight = 400;
-      const getExpectedKeyboardOffsetStyle = (keyboardOverlap) =>
-        `calc(${keyboardOverlap}px -  0px)`;
 
       it('to a value', () => {
         const kirbyModalFooter = spectator.element.querySelector<HTMLElement>(
@@ -271,7 +269,7 @@ describe('ModalWrapperComponent', () => {
         spectator.component._onKeyboardDidShow({ detail: { keyboardHeight } });
         const keyboardOverlap = 0;
         expect(kirbyModalFooter).toHaveStyle({
-          '--keyboard-offset': getExpectedKeyboardOffsetStyle(keyboardOverlap),
+          '--keyboard-offset': `${keyboardOverlap}px`,
         });
       });
 
@@ -282,7 +280,7 @@ describe('ModalWrapperComponent', () => {
         spectator.component._onKeyboardDidShow({ detail: { keyboardHeight } });
         const keyboardOverlap = 200;
         expect(kirbyModalFooter).toHaveStyle({
-          '--keyboard-offset': getExpectedKeyboardOffsetStyle(keyboardOverlap),
+          '--keyboard-offset': `${keyboardOverlap}px`,
         });
       });
 
@@ -293,7 +291,7 @@ describe('ModalWrapperComponent', () => {
         spectator.component._onKeyboardDidShow({ detail: { keyboardHeight } });
         const keyboardOverlap = keyboardHeight;
         expect(kirbyModalFooter).toHaveStyle({
-          '--keyboard-offset': getExpectedKeyboardOffsetStyle(keyboardOverlap),
+          '--keyboard-offset': `${keyboardOverlap}px`,
         });
       });
     });
@@ -370,8 +368,6 @@ describe('ModalWrapperComponent', () => {
 
     describe(`should set custom CSS property '--keyboard-offset' on embedded footer`, () => {
       const keyboardHeight = 400;
-      const getExpectedKeyboardOffsetStyle = (keyboardOverlap) =>
-        `calc(${keyboardOverlap}px -  0px)`;
 
       beforeEach(async () => {
         const embeddedComponent = spectator.query(DynamicFooterEmbeddedComponent);
@@ -396,7 +392,7 @@ describe('ModalWrapperComponent', () => {
         spectator.component._onKeyboardDidShow({ detail: { keyboardHeight } });
         const keyboardOverlap = 0;
         expect(kirbyModalFooter).toHaveStyle({
-          '--keyboard-offset': getExpectedKeyboardOffsetStyle(keyboardOverlap),
+          '--keyboard-offset': `${keyboardOverlap}px`,
         });
       });
 
@@ -407,7 +403,7 @@ describe('ModalWrapperComponent', () => {
         spectator.component._onKeyboardDidShow({ detail: { keyboardHeight } });
         const keyboardOverlap = 200;
         expect(kirbyModalFooter).toHaveStyle({
-          '--keyboard-offset': getExpectedKeyboardOffsetStyle(keyboardOverlap),
+          '--keyboard-offset': `${keyboardOverlap}px`,
         });
       });
 
@@ -418,7 +414,7 @@ describe('ModalWrapperComponent', () => {
         spectator.component._onKeyboardDidShow({ detail: { keyboardHeight } });
         const keyboardOverlap = keyboardHeight;
         expect(kirbyModalFooter).toHaveStyle({
-          '--keyboard-offset': getExpectedKeyboardOffsetStyle(keyboardOverlap),
+          '--keyboard-offset': `${keyboardOverlap}px`,
         });
       });
     });
