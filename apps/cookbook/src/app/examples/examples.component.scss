@@ -25,19 +25,26 @@
   .bg {
     opacity: 0.9;
     background-color: get-color('medium');
-    transition: transform $soft-keyboard-transition;
+    transition: transform $soft-keyboard-transition-leave;
     display: grid;
-    grid-template-columns: repeat(10, 1fr);
+    grid-template-columns: repeat(7, 1fr);
     grid-gap: size('s');
     padding: size('s');
     transform: translateY(100%);
 
+    @include media('>=medium') {
+      grid-template-columns: repeat(10, 1fr);
+    }
+
     > * {
       background-color: get-color('white');
+      border-radius: size('xxxs');
+      box-shadow: 0px 2px get-color('semi-dark');
     }
 
     &.keyboard-showing {
       transform: translateY(0);
+      transition: transform $soft-keyboard-transition-enter;
     }
   }
 }

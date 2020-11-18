@@ -4,6 +4,8 @@ import { ColorHelper } from './color-helper';
 import { styles } from './design-token-helper.styles';
 
 export class DesignTokenHelper {
+  public static readonly breakpoints = styles.breakpoints;
+
   public static getColor(
     name: ThemeColorExtended,
     variant?: ThemeColorVariant

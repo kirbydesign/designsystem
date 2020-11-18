@@ -1,6 +1,6 @@
 import { tick, fakeAsync } from '@angular/core/testing';
 import { IonContent } from '@ionic/angular';
-import { Spectator, SpyObject } from '@ngneat/spectator';
+import { Spectator } from '@ngneat/spectator';
 
 import { KirbyAnimation } from '../../../animation/kirby-animation';
 import { TestHelper } from '../../../testing/test-helper';
@@ -253,14 +253,12 @@ describe('ModalWrapperComponent', () => {
 
     describe(`should set custom CSS property '--keyboard-offset' on embedded footer`, () => {
       const keyboardHeight = 400;
-      const getExpectedKeyboardOffsetStyle = (keyboardOverlap) =>
-        `calc(${keyboardOverlap}px -  0px)`;
 
       it('to a value', () => {
         const kirbyModalFooter = spectator.element.querySelector<HTMLElement>(
           ':scope > kirby-modal-footer'
         );
-        spectator.component._onKeyboardDidShow({ detail: { keyboardHeight } });
+        spectator.component._onKeyboardShow(keyboardHeight);
         expect(kirbyModalFooter.style.getPropertyValue('--keyboard-offset')).toBeDefined();
       });
 
@@ -268,10 +266,10 @@ describe('ModalWrapperComponent', () => {
         const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
         spectator.element.style.position = 'fixed';
         spectator.element.style.bottom = `${keyboardHeight + 200}px`;
-        spectator.component._onKeyboardDidShow({ detail: { keyboardHeight } });
+        spectator.component._onKeyboardShow(keyboardHeight);
         const keyboardOverlap = 0;
         expect(kirbyModalFooter).toHaveStyle({
-          '--keyboard-offset': getExpectedKeyboardOffsetStyle(keyboardOverlap),
+          '--keyboard-offset': `${keyboardOverlap}px`,
         });
       });
 
@@ -279,10 +277,10 @@ describe('ModalWrapperComponent', () => {
         const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
         spectator.element.style.position = 'fixed';
         spectator.element.style.bottom = `${keyboardHeight - 200}px`;
-        spectator.component._onKeyboardDidShow({ detail: { keyboardHeight } });
+        spectator.component._onKeyboardShow(keyboardHeight);
         const keyboardOverlap = 200;
         expect(kirbyModalFooter).toHaveStyle({
-          '--keyboard-offset': getExpectedKeyboardOffsetStyle(keyboardOverlap),
+          '--keyboard-offset': `${keyboardOverlap}px`,
         });
       });
 
@@ -290,10 +288,10 @@ describe('ModalWrapperComponent', () => {
         const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
         spectator.element.style.position = 'fixed';
         spectator.element.style.bottom = '0px';
-        spectator.component._onKeyboardDidShow({ detail: { keyboardHeight } });
+        spectator.component._onKeyboardShow(keyboardHeight);
         const keyboardOverlap = keyboardHeight;
         expect(kirbyModalFooter).toHaveStyle({
-          '--keyboard-offset': getExpectedKeyboardOffsetStyle(keyboardOverlap),
+          '--keyboard-offset': `${keyboardOverlap}px`,
         });
       });
     });
@@ -370,8 +368,6 @@ describe('ModalWrapperComponent', () => {
 
     describe(`should set custom CSS property '--keyboard-offset' on embedded footer`, () => {
       const keyboardHeight = 400;
-      const getExpectedKeyboardOffsetStyle = (keyboardOverlap) =>
-        `calc(${keyboardOverlap}px -  0px)`;
 
       beforeEach(async () => {
         const embeddedComponent = spectator.query(DynamicFooterEmbeddedComponent);
@@ -385,7 +381,7 @@ describe('ModalWrapperComponent', () => {
         const kirbyModalFooter = spectator.element.querySelector<HTMLElement>(
           ':scope > kirby-modal-footer'
         );
-        spectator.component._onKeyboardDidShow({ detail: { keyboardHeight } });
+        spectator.component._onKeyboardShow(keyboardHeight);
         expect(kirbyModalFooter.style.getPropertyValue('--keyboard-offset')).toBeDefined();
       });
 
@@ -393,10 +389,10 @@ describe('ModalWrapperComponent', () => {
         const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
         spectator.element.style.position = 'fixed';
         spectator.element.style.bottom = `${keyboardHeight + 200}px`;
-        spectator.component._onKeyboardDidShow({ detail: { keyboardHeight } });
+        spectator.component._onKeyboardShow(keyboardHeight);
         const keyboardOverlap = 0;
         expect(kirbyModalFooter).toHaveStyle({
-          '--keyboard-offset': getExpectedKeyboardOffsetStyle(keyboardOverlap),
+          '--keyboard-offset': `${keyboardOverlap}px`,
         });
       });
 
@@ -404,10 +400,10 @@ describe('ModalWrapperComponent', () => {
         const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
         spectator.element.style.position = 'fixed';
         spectator.element.style.bottom = `${keyboardHeight - 200}px`;
-        spectator.component._onKeyboardDidShow({ detail: { keyboardHeight } });
+        spectator.component._onKeyboardShow(keyboardHeight);
         const keyboardOverlap = 200;
         expect(kirbyModalFooter).toHaveStyle({
-          '--keyboard-offset': getExpectedKeyboardOffsetStyle(keyboardOverlap),
+          '--keyboard-offset': `${keyboardOverlap}px`,
         });
       });
 
@@ -415,10 +411,10 @@ describe('ModalWrapperComponent', () => {
         const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
         spectator.element.style.position = 'fixed';
         spectator.element.style.bottom = '0px';
-        spectator.component._onKeyboardDidShow({ detail: { keyboardHeight } });
+        spectator.component._onKeyboardShow(keyboardHeight);
         const keyboardOverlap = keyboardHeight;
         expect(kirbyModalFooter).toHaveStyle({
-          '--keyboard-offset': getExpectedKeyboardOffsetStyle(keyboardOverlap),
+          '--keyboard-offset': `${keyboardOverlap}px`,
         });
       });
     });
@@ -434,12 +430,27 @@ describe('ModalWrapperComponent', () => {
       spectator.fixture.destroy();
     });
 
+    it('should set keyboardVisible to true on window:keyboardWillShow', () => {
+      const keyboardWillShowEvent = new CustomEvent('keyboardWillShow');
+      keyboardWillShowEvent['keyboardHeight'] = 200;
+      window.dispatchEvent(keyboardWillShowEvent);
+      expect(spectator.component['keyboardVisible']).toBeTrue();
+    });
+
     it('should set keyboardVisible to true on window:ionKeyboardDidShow', () => {
       const ionKeyboardDidShowEvent = new CustomEvent('ionKeyboardDidShow', {
         detail: { keyboardHeight: 200 },
       });
       window.dispatchEvent(ionKeyboardDidShowEvent);
       expect(spectator.component['keyboardVisible']).toBeTrue();
+    });
+
+    it('should set keyboardVisible to false on window:keyboardWillHide', () => {
+      spectator.component['keyboardVisible'] = true;
+
+      spectator.dispatchFakeEvent(window, 'keyboardWillHide');
+
+      expect(spectator.component['keyboardVisible']).toBeFalse();
     });
 
     it('should set keyboardVisible to false on window:ionKeyboardDidHide', () => {
@@ -506,10 +517,7 @@ describe('ModalWrapperComponent', () => {
       beforeEach(() => {
         input.focus();
         expect(document.activeElement).toEqual(input);
-        const ionKeyboardDidShowEvent = new CustomEvent('ionKeyboardDidShow', {
-          detail: { keyboardHeight: 200 },
-        });
-        window.dispatchEvent(ionKeyboardDidShowEvent);
+        spectator.component['_onKeyboardShow'](200);
       });
 
       it('should blur document.activeElement when it is an input', () => {
@@ -569,10 +577,7 @@ describe('ModalWrapperComponent', () => {
 
     describe(`when keyboard is visible`, () => {
       beforeEach(() => {
-        const ionKeyboardDidShowEvent = new CustomEvent('ionKeyboardDidShow', {
-          detail: { keyboardHeight: 200 },
-        });
-        window.dispatchEvent(ionKeyboardDidShowEvent);
+        spectator.component['_onKeyboardShow'](200);
       });
 
       describe(`and viewport is not resized`, () => {

@@ -99,10 +99,10 @@
     </div>
     <div>
       <kirby-checkbox
-        checked="false"
+        [checked]="snapFooterToKeyboard"
         (checkedChange)="onSnapFooterToKeyboardCheckbox($event)"
       ></kirby-checkbox
-      ><label>Snap footer to keyboard</label>
+      ><label (click)="snapFooterToKeyboard = !snapFooterToKeyboard">Snap footer to keyboard</label>
     </div>
   </div>
 </kirby-modal-footer>
