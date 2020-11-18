@@ -263,23 +263,15 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     this.windowRef.scrollTo({ top: this.scrollY });
   }
 
-  @HostListener('window:keyboardWillShow', ['$event'])
-  _onKeyboardWillShow(info: { keyboardHeight: number }) {
-    this.setKeyboardVisibility(info.keyboardHeight);
-  }
-
-  @HostListener('window:ionKeyboardDidShow', ['$event'])
-  _onKeyboardDidShow(event: { detail: { keyboardHeight: number } }) {
-    this.setKeyboardVisibility(event.detail.keyboardHeight);
-  }
-
-  @HostListener('window:keyboardWillHide')
-  _onKeyboardWillHide() {
-    this.setKeyboardVisibility(0);
+  @HostListener('window:ionKeyboardDidShow', ['$event.detail.keyboardHeight'])
+  @HostListener('window:keyboardWillShow', ['$event.keyboardHeight'])
+  _onKeyboardShow(keyboardHeight: number) {
+    this.setKeyboardVisibility(keyboardHeight);
   }
 
   @HostListener('window:ionKeyboardDidHide')
-  _onKeyboardDidHide() {
+  @HostListener('window:keyboardWillHide')
+  _onKeyboardHide() {
     this.setKeyboardVisibility(0);
   }
 

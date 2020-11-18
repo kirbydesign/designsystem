@@ -258,7 +258,7 @@ describe('ModalWrapperComponent', () => {
         const kirbyModalFooter = spectator.element.querySelector<HTMLElement>(
           ':scope > kirby-modal-footer'
         );
-        spectator.component._onKeyboardDidShow({ detail: { keyboardHeight } });
+        spectator.component._onKeyboardShow(keyboardHeight);
         expect(kirbyModalFooter.style.getPropertyValue('--keyboard-offset')).toBeDefined();
       });
 
@@ -266,7 +266,7 @@ describe('ModalWrapperComponent', () => {
         const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
         spectator.element.style.position = 'fixed';
         spectator.element.style.bottom = `${keyboardHeight + 200}px`;
-        spectator.component._onKeyboardDidShow({ detail: { keyboardHeight } });
+        spectator.component._onKeyboardShow(keyboardHeight);
         const keyboardOverlap = 0;
         expect(kirbyModalFooter).toHaveStyle({
           '--keyboard-offset': `${keyboardOverlap}px`,
@@ -277,7 +277,7 @@ describe('ModalWrapperComponent', () => {
         const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
         spectator.element.style.position = 'fixed';
         spectator.element.style.bottom = `${keyboardHeight - 200}px`;
-        spectator.component._onKeyboardDidShow({ detail: { keyboardHeight } });
+        spectator.component._onKeyboardShow(keyboardHeight);
         const keyboardOverlap = 200;
         expect(kirbyModalFooter).toHaveStyle({
           '--keyboard-offset': `${keyboardOverlap}px`,
@@ -288,7 +288,7 @@ describe('ModalWrapperComponent', () => {
         const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
         spectator.element.style.position = 'fixed';
         spectator.element.style.bottom = '0px';
-        spectator.component._onKeyboardDidShow({ detail: { keyboardHeight } });
+        spectator.component._onKeyboardShow(keyboardHeight);
         const keyboardOverlap = keyboardHeight;
         expect(kirbyModalFooter).toHaveStyle({
           '--keyboard-offset': `${keyboardOverlap}px`,
@@ -381,7 +381,7 @@ describe('ModalWrapperComponent', () => {
         const kirbyModalFooter = spectator.element.querySelector<HTMLElement>(
           ':scope > kirby-modal-footer'
         );
-        spectator.component._onKeyboardDidShow({ detail: { keyboardHeight } });
+        spectator.component._onKeyboardShow(keyboardHeight);
         expect(kirbyModalFooter.style.getPropertyValue('--keyboard-offset')).toBeDefined();
       });
 
@@ -389,7 +389,7 @@ describe('ModalWrapperComponent', () => {
         const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
         spectator.element.style.position = 'fixed';
         spectator.element.style.bottom = `${keyboardHeight + 200}px`;
-        spectator.component._onKeyboardDidShow({ detail: { keyboardHeight } });
+        spectator.component._onKeyboardShow(keyboardHeight);
         const keyboardOverlap = 0;
         expect(kirbyModalFooter).toHaveStyle({
           '--keyboard-offset': `${keyboardOverlap}px`,
@@ -400,7 +400,7 @@ describe('ModalWrapperComponent', () => {
         const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
         spectator.element.style.position = 'fixed';
         spectator.element.style.bottom = `${keyboardHeight - 200}px`;
-        spectator.component._onKeyboardDidShow({ detail: { keyboardHeight } });
+        spectator.component._onKeyboardShow(keyboardHeight);
         const keyboardOverlap = 200;
         expect(kirbyModalFooter).toHaveStyle({
           '--keyboard-offset': `${keyboardOverlap}px`,
@@ -411,7 +411,7 @@ describe('ModalWrapperComponent', () => {
         const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
         spectator.element.style.position = 'fixed';
         spectator.element.style.bottom = '0px';
-        spectator.component._onKeyboardDidShow({ detail: { keyboardHeight } });
+        spectator.component._onKeyboardShow(keyboardHeight);
         const keyboardOverlap = keyboardHeight;
         expect(kirbyModalFooter).toHaveStyle({
           '--keyboard-offset': `${keyboardOverlap}px`,
