@@ -9,6 +9,16 @@ import { DesignTokenHelper } from '../../../helpers/design-token-helper';
 import { ThemeColorDirective } from '../../../directives';
 
 const getColor = DesignTokenHelper.getColor;
+const size = DesignTokenHelper.size;
+
+const KEYBOARD_HEIGHT = 216; // sample value, depends upon device
+const BASE_PADDING_VERTICAL_PX = size('xxs');
+const BASE_PADDING_VERTICAL = parseInt(BASE_PADDING_VERTICAL_PX);
+const BASE_PADDING_HORIZONTAL_PX = size('s');
+const SAFE_AREA_BOTTOM = 22;
+const SAFE_AREA_BOTTOM_PX = `${SAFE_AREA_BOTTOM}px`;
+
+const TRANSFORM_PUSHED_BY_KEYBOARD = `matrix(1, 0, 0, 1, 0, -${KEYBOARD_HEIGHT})`;
 
 @Component({
   template: '<kirby-modal-footer [snapToKeyboard]="snapToKeyboard"></kirby-modal-footer>',
@@ -17,7 +27,7 @@ class TestHostComponent {
   snapToKeyboard = false;
 }
 
-describe('ModalFooterComponent', () => {
+fdescribe('ModalFooterComponent', () => {
   let spectator: SpectatorHost<ModalFooterComponent, TestHostComponent>;
   let modalFooterElement: HTMLElement;
   let ionFooterElement: HTMLIonFooterElement;
@@ -35,6 +45,18 @@ describe('ModalFooterComponent', () => {
     expect(spectator.component).toBeTruthy();
   });
 
+  it('should set correct padding', () => {
+    spectator = createHost(`<kirby-modal-footer></kirby-modal-footer>`);
+    expect(spectator.component).toBeTruthy();
+    ionFooterElement = spectator.query('ion-footer');
+    expect(ionFooterElement).toHaveComputedStyle({
+      'padding-left': BASE_PADDING_HORIZONTAL_PX,
+      'padding-right': BASE_PADDING_HORIZONTAL_PX,
+      'padding-top': BASE_PADDING_VERTICAL_PX,
+      'padding-bottom': BASE_PADDING_VERTICAL_PX,
+    });
+  });
+
   describe('Set bottom padding', () => {
     beforeEach(() => {
       spectator = createHost(`<kirby-modal-footer></kirby-modal-footer>`);
@@ -42,16 +64,13 @@ describe('ModalFooterComponent', () => {
       ionFooterElement = spectator.query('ion-footer');
     });
 
-    it('when --kirby-safe-area-bottom is set', () => {
-      setSafeAreaBottom();
-      const expected = BASE_PADDING_PX + 'px';
-      expectPaddingBottom().toEqual(expected);
+    it('when --kirby-safe-area-bottom is not set', () => {
+      expect(ionFooterElement).toHaveComputedStyle({ 'padding-bottom': BASE_PADDING_VERTICAL_PX });
     });
 
-    it('when --kirby-safe-area-bottom is not set', () => {
-      clearSafeAreaBottom();
-      const expected = BASE_PADDING_PX + 'px';
-      expectPaddingBottom().toEqual(expected);
+    it('when --kirby-safe-area-bottom is set', () => {
+      setSafeAreaBottom();
+      expect(ionFooterElement).toHaveComputedStyle({ 'padding-bottom': BASE_PADDING_VERTICAL_PX });
     });
 
     describe('on small screens', () => {
@@ -63,16 +82,16 @@ describe('ModalFooterComponent', () => {
         TestHelper.resetTestWindow();
       });
 
-      it('when --kirby-safe-area-bottom is set', () => {
-        setSafeAreaBottom();
-        const expected = BASE_PADDING_PX + SAFE_AREA_BOTTOM_PX + 'px';
-        expectPaddingBottom().toEqual(expected);
+      it('when --kirby-safe-area-bottom is not set', () => {
+        expect(ionFooterElement).toHaveComputedStyle({
+          'padding-bottom': BASE_PADDING_VERTICAL_PX,
+        });
       });
 
-      it('when --kirby-safe-area-bottom is not set', () => {
-        clearSafeAreaBottom();
-        const expected = BASE_PADDING_PX + 'px';
-        expectPaddingBottom().toEqual(expected);
+      it('when --kirby-safe-area-bottom is set', () => {
+        setSafeAreaBottom();
+        const expected = BASE_PADDING_VERTICAL + SAFE_AREA_BOTTOM + 'px';
+        expect(ionFooterElement).toHaveComputedStyle({ 'padding-bottom': expected });
       });
     });
   });
@@ -93,12 +112,16 @@ describe('ModalFooterComponent', () => {
 
       it('should follow the keyboard up', () => {
         keyboardSlideIn();
-        expectTransform().toEqual(TRANSFORM_PUSHED_BY_KEYBOARD);
+        expect(ionFooterElement).toHaveComputedStyle({
+          transform: TRANSFORM_PUSHED_BY_KEYBOARD,
+        });
       });
 
       it('should follow the keyboard down', () => {
         keyboardSlideOut();
-        expectTransform().toEqual('none');
+        expect(ionFooterElement).toHaveComputedStyle({
+          transform: 'none',
+        });
       });
     });
 
@@ -106,7 +129,9 @@ describe('ModalFooterComponent', () => {
       it('should not follow the keyboard up', () => {
         spectator.setHostInput('snapToKeyboard', false);
         keyboardSlideIn();
-        expectTransform().toEqual('none');
+        expect(ionFooterElement).toHaveComputedStyle({
+          transform: 'none',
+        });
       });
     });
   });
@@ -141,37 +166,18 @@ describe('ModalFooterComponent', () => {
     });
   });
 
-  // utility constants and functions
-
-  const KEYBOARD_HEIGHT_PX = 216; // sample value, depends upon device
-  const BASE_PADDING_PX = 16;
-  const SAFE_AREA_BOTTOM_PX = 22;
-
-  const TRANSFORM_PUSHED_BY_KEYBOARD = `matrix(1, 0, 0, 1, 0, -${KEYBOARD_HEIGHT_PX})`;
-
+  // utility functions
   function setSafeAreaBottom() {
-    modalFooterElement.style.setProperty('--kirby-safe-area-bottom', SAFE_AREA_BOTTOM_PX + 'px');
-  }
-
-  function clearSafeAreaBottom() {
-    modalFooterElement.style.removeProperty('--kirby-safe-area-bottom');
+    modalFooterElement.style.setProperty('--kirby-safe-area-bottom', SAFE_AREA_BOTTOM_PX);
   }
 
   function keyboardSlideIn() {
-    modalFooterElement.style.setProperty('--keyboard-offset', KEYBOARD_HEIGHT_PX + 'px');
+    modalFooterElement.style.setProperty('--keyboard-offset', KEYBOARD_HEIGHT + 'px');
     modalFooterElement.classList.add('keyboard-visible');
   }
 
   function keyboardSlideOut() {
     modalFooterElement.style.setProperty('--keyboard-offset', '0px');
     modalFooterElement.classList.remove('keyboard-visible');
-  }
-
-  function expectPaddingBottom() {
-    return expect(TestHelper.getCssProperty(ionFooterElement, 'padding-bottom'));
-  }
-
-  function expectTransform() {
-    return expect(TestHelper.getCssProperty(ionFooterElement, 'transform'));
   }
 });

@@ -1,6 +1,7 @@
 @import '../../../scss/utils';
 
-$padding: size('s');
+$padding-horizontal: size('s');
+$padding-vertical: size('xxs');
 
 ion-footer {
   box-shadow: get-elevation(8);
@@ -8,8 +9,8 @@ ion-footer {
   justify-content: var(--kirby-modal-footer-justify-content, center);
   align-items: center;
   background-color: get-color('white');
-  padding: $padding;
-  padding-bottom: calc(#{$padding} + var(--kirby-modal-footer-safe-area-bottom, 0px));
+  padding: $padding-vertical $padding-horizontal;
+  padding-bottom: calc(#{$padding-vertical} + var(--kirby-modal-footer-safe-area-bottom, 0px));
 }
 
 @include media('<medium') {
