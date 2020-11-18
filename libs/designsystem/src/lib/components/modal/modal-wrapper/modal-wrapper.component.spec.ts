@@ -1,6 +1,6 @@
 import { tick, fakeAsync } from '@angular/core/testing';
 import { IonContent } from '@ionic/angular';
-import { Spectator, SpyObject } from '@ngneat/spectator';
+import { Spectator } from '@ngneat/spectator';
 
 import { KirbyAnimation } from '../../../animation/kirby-animation';
 import { TestHelper } from '../../../testing/test-helper';
@@ -430,12 +430,27 @@ describe('ModalWrapperComponent', () => {
       spectator.fixture.destroy();
     });
 
+    it('should set keyboardVisible to true on window:keyboardWillShow', () => {
+      const keyboardWillShowEvent = new CustomEvent('keyboardWillShow');
+      keyboardWillShowEvent['keyboardHeight'] = 200;
+      window.dispatchEvent(keyboardWillShowEvent);
+      expect(spectator.component['keyboardVisible']).toBeTrue();
+    });
+
     it('should set keyboardVisible to true on window:ionKeyboardDidShow', () => {
       const ionKeyboardDidShowEvent = new CustomEvent('ionKeyboardDidShow', {
         detail: { keyboardHeight: 200 },
       });
       window.dispatchEvent(ionKeyboardDidShowEvent);
       expect(spectator.component['keyboardVisible']).toBeTrue();
+    });
+
+    it('should set keyboardVisible to false on window:keyboardWillHide', () => {
+      spectator.component['keyboardVisible'] = true;
+
+      spectator.dispatchFakeEvent(window, 'keyboardWillHide');
+
+      expect(spectator.component['keyboardVisible']).toBeFalse();
     });
 
     it('should set keyboardVisible to false on window:ionKeyboardDidHide', () => {
@@ -502,10 +517,7 @@ describe('ModalWrapperComponent', () => {
       beforeEach(() => {
         input.focus();
         expect(document.activeElement).toEqual(input);
-        const ionKeyboardDidShowEvent = new CustomEvent('ionKeyboardDidShow', {
-          detail: { keyboardHeight: 200 },
-        });
-        window.dispatchEvent(ionKeyboardDidShowEvent);
+        spectator.component['_onKeyboardShow'](200);
       });
 
       it('should blur document.activeElement when it is an input', () => {
@@ -565,10 +577,7 @@ describe('ModalWrapperComponent', () => {
 
     describe(`when keyboard is visible`, () => {
       beforeEach(() => {
-        const ionKeyboardDidShowEvent = new CustomEvent('ionKeyboardDidShow', {
-          detail: { keyboardHeight: 200 },
-        });
-        window.dispatchEvent(ionKeyboardDidShowEvent);
+        spectator.component['_onKeyboardShow'](200);
       });
 
       describe(`and viewport is not resized`, () => {
