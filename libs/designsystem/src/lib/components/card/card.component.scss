@@ -22,9 +22,6 @@
   .content-wrapper {
     &.padding {
       padding: size('s');
-      @include media('<small') {
-        padding: size('xxs');
-      }
     }
   }
 
