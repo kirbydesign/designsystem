@@ -25,7 +25,7 @@
   .bg {
     opacity: 0.9;
     background-color: get-color('medium');
-    transition: transform $soft-keyboard-transition;
+    transition: transform $soft-keyboard-transition-enter;
     display: grid;
     grid-template-columns: repeat(10, 1fr);
     grid-gap: size('s');
