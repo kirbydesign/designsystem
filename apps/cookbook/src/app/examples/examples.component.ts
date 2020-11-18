@@ -26,7 +26,7 @@ export class ExamplesComponent {
   private setKeyboardSize() {
     const keyboardHeights = {
       tablet: {
-        portrait: 264,
+        portrait: 408,
         landscape: 434,
       },
       phone: {
