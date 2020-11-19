@@ -1,0 +1,7 @@
+<ng-container>
+  <div [ngClass]="{ expanded: isExpanded }" (click)="isExpanded = !isExpanded" class="header">
+    <div class="title">{{ title }}</div>
+    <kirby-icon name="arrow-down"></kirby-icon>
+  </div>
+  <div class="content"><ng-content></ng-content></div>
+</ng-container>

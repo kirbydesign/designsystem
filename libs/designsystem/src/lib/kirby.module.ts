@@ -80,6 +80,7 @@ import { IconRegistryService } from './components/icon/icon-registry.service';
 import { WindowRef } from './types/window-ref';
 import { ToggleButtonModule } from './components/toggle-button/toggle-button.module';
 import { SlideDirective, SlidesComponent } from './components/slides/slides.component';
+import { ExpandableComponent } from './components/expandable/expandable.component';
 
 const exportedDeclarations = [
   CardComponent,
@@ -130,6 +131,7 @@ const exportedDeclarations = [
   FlagComponent,
   SlidesComponent,
   SlideDirective,
+  ExpandableComponent,
 ];
 
 const declarations = [
