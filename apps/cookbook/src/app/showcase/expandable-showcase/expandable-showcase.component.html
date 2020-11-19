@@ -1,0 +1,28 @@
+<div class="example">
+  <h2>A single expandable</h2>
+  <cookbook-example-viewer [html]="singleExample.template">
+    <cookbook-expandable-example-single #singleExample></cookbook-expandable-example-single>
+  </cookbook-example-viewer>
+
+  <h2>Several expandable</h2>
+  <cookbook-example-viewer [html]="severalExample.template">
+    <cookbook-expandable-example-several #severalExample></cookbook-expandable-example-several>
+  </cookbook-example-viewer>
+
+  <h2>A single expandable inside a card</h2>
+  <cookbook-example-viewer [html]="singleCardExample.template">
+    <cookbook-expandable-example-single-card
+      #singleCardExample
+    ></cookbook-expandable-example-single-card>
+  </cookbook-example-viewer>
+
+  <h2>Several expandable inside a card</h2>
+  <cookbook-example-viewer [html]="severalCardExample.template">
+    <cookbook-expandable-example-several-card
+      #severalCardExample
+    ></cookbook-expandable-example-several-card>
+  </cookbook-example-viewer>
+
+  <h2>Properties:</h2>
+  <cookbook-showcase-properties [properties]="properties"></cookbook-showcase-properties>
+</div>
