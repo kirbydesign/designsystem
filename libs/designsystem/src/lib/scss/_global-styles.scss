@@ -71,13 +71,19 @@ ion-modal.kirby-overlay {
       text-align: center;
     }
 
-    // Reset Ionic Card style height + top border radius:
     @include media('<medium') {
-      &.modal-card:not(.kirby-drawer) {
+      // Reset Ionic Card style height:
+      &.modal-card {
         .modal-wrapper {
           height: 100%;
-          border-top-left-radius: 0;
-          border-top-right-radius: 0;
+        }
+
+        // Reset Ionic Card top border radius:
+        &:not(.kirby-drawer) {
+          .modal-wrapper {
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+          }
         }
       }
     }
