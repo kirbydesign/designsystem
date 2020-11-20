@@ -99,7 +99,7 @@ ion-modal.kirby-overlay {
 
     @include media('>=medium') {
       --kirby-modal-padding-top: #{size('xl')};
-      --width: 720px; //TODO Hardcoded magic number: Jakob + Jonathan, revisit!!!
+      --width: #{$modal-max-width};
       --border-radius: #{$border-radius};
       --box-shadow: #{get-elevation(8)};
       --height: auto;
