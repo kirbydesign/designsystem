@@ -1,8 +1,23 @@
 @import './libs/designsystem/src/lib/scss/utils';
 
-kirby-modal-footer label {
-  font-size: font-size('xs');
-  position: relative;
-  top: -4px;
-  padding-left: 10px;
+kirby-card {
+  margin-top: size('l');
+}
+
+cookbook-modal-example-configuration {
+  margin-top: size('l');
+}
+
+kirby-modal-footer {
+  button {
+    flex-grow: 1;
+  }
+
+  kirby-checkbox {
+    padding-right: size('xxxs');
+  }
+
+  label {
+    font-size: font-size('xs');
+  }
 }

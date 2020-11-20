@@ -1,0 +1,16 @@
+@import './libs/designsystem/src/lib/scss/utils';
+
+:host {
+  display: flex;
+
+  fieldset {
+    kirby-checkbox {
+      padding-right: size('xxxs');
+    }
+
+    label {
+      cursor: pointer;
+      display: block;
+    }
+  }
+}

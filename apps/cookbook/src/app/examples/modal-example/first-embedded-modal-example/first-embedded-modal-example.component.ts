@@ -1,7 +1,13 @@
-import { Component, Inject, OnInit, Optional, SkipSelf } from '@angular/core';
+import { Component, Inject, Input, OnInit, Optional, SkipSelf } from '@angular/core';
 
-import { AlertConfig, ActionSheetConfig, Modal, ModalController } from '@kirbydesign/designsystem';
-import { ModalConfig, COMPONENT_PROPS } from '@kirbydesign/designsystem';
+import {
+  AlertConfig,
+  ActionSheetConfig,
+  Modal,
+  ModalController,
+  COMPONENT_PROPS,
+} from '@kirbydesign/designsystem';
+import { ModalConfig } from '@kirbydesign/designsystem';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
 import { KirbyAnimation } from '@kirbydesign/designsystem';
 
@@ -13,29 +19,56 @@ import { SecondEmbeddedModalExampleComponent } from '../second-embedded-modal-ex
   styleUrls: ['./first-embedded-modal-example.component.scss'],
 })
 export class FirstEmbeddedModalExampleComponent implements OnInit {
-  showFooter = true;
-  isLoading = true;
+  title: string;
+  subtitle: string;
+
+  stringProperty: string;
+  numberProperty: number;
+  booleanProperty: boolean;
+
+  showNestedOptions: boolean;
+  showDummyKeyboard: boolean;
+  showFooter: boolean;
+  loadContent: boolean;
+  loadAdditionalContent: boolean;
+  disableScroll: boolean = false;
+
+  isLoading = false;
+  isLoadingAdditionalContent = false;
   snapFooterToKeyboard = false;
 
   constructor(
-    @Inject(COMPONENT_PROPS) public componentProps,
+    @Inject(COMPONENT_PROPS) componentProps,
     private modalController: ModalController,
     private toastController: ToastController,
     @Optional() @SkipSelf() private modal: Modal
   ) {
-    this.showFooter = componentProps.showFooter;
+    Object.assign(this, componentProps);
   }
 
   ngOnInit() {
-    setTimeout(() => {
-      this.isLoading = false;
-    }, 1000);
+    if (this.loadContent) {
+      this.isLoading = true;
+      setTimeout(() => (this.isLoading = false), 1000);
+    }
+    if (this.loadAdditionalContent) {
+      this.isLoadingAdditionalContent = true;
+      setTimeout(() => (this.isLoadingAdditionalContent = false), 2000);
+    }
   }
 
   showNestedModal() {
     const config: ModalConfig = {
       flavor: 'modal',
-      component: SecondEmbeddedModalExampleComponent,
+      component: FirstEmbeddedModalExampleComponent,
+      componentProps: {
+        title: 'Nested Modal Title',
+        subtitle: 'Hello from second embedded example component!',
+        showDummyKeyboard: this.showDummyKeyboard,
+        showFooter: this.showFooter,
+        loadContent: this.loadContent,
+        loadAdditionalContent: this.loadAdditionalContent,
+      },
     };
 
     // supposing no callback needed for the second component
@@ -49,9 +82,13 @@ export class FirstEmbeddedModalExampleComponent implements OnInit {
         iconName: 'edit',
         action: this.onSupplementaryActionSelect.bind(this),
       },
-      component: SecondEmbeddedModalExampleComponent,
+      component: FirstEmbeddedModalExampleComponent,
       componentProps: {
-        flavor: 'drawer',
+        title: 'Nested Drawer Title',
+        subtitle: 'Hello from second embedded example component!',
+        showFooter: this.showFooter,
+        loadContent: this.loadContent,
+        loadAdditionalContent: this.loadAdditionalContent,
       },
     };
 
@@ -84,19 +121,15 @@ export class FirstEmbeddedModalExampleComponent implements OnInit {
   }
 
   scrollToBottom() {
-    this.modal.scrollToBottom();
+    this.modal.scrollToBottom(KirbyAnimation.Duration.EXTRA_LONG);
   }
 
   scrollToTop() {
-    this.modal.scrollToTop(KirbyAnimation.Duration.LONG);
+    this.modal.scrollToTop(KirbyAnimation.Duration.SHORT);
   }
 
-  disableScroll() {
-    this.modal.scrollDisabled = true;
-  }
-
-  enableScroll() {
-    this.modal.scrollDisabled = false;
+  toggleDisableScroll(disabled: boolean) {
+    this.modal.scrollDisabled = disabled;
   }
 
   toggleFooter() {

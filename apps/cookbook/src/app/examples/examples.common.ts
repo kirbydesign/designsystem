@@ -12,6 +12,7 @@ import { FontsExampleComponent } from './fonts-example/fonts-example.component';
 import { SpinnerExampleComponent } from './spinner-example/spinner-example.component';
 import { ModalCompactExampleComponent } from './modal-example/compact-example/modal-compact-example.component';
 import { ModalExampleComponent } from './modal-example/modal-example.component';
+import { ModalExampleConfigurationComponent } from './modal-example/modal-example-configuration/modal-example-configuration.component';
 import { ModalExampleDefaultComponent } from './modal-example/modal-example-default.component';
 import { ModalExampleOutletComponent } from './modal-example/modal-example-outlet.component';
 import { FirstEmbeddedModalExampleComponent } from './modal-example/first-embedded-modal-example/first-embedded-modal-example.component';
@@ -85,14 +86,17 @@ export const COMPONENT_DECLARATIONS: any[] = [
   AvatarExampleComponent,
   FontsExampleComponent,
   SpinnerExampleComponent,
+  // TODO: Move Modal examples to ModalExample.module
   ModalExampleComponent,
   ModalExampleDefaultComponent,
+  ModalExampleConfigurationComponent,
   ModalExampleOutletComponent,
   FirstEmbeddedModalExampleComponent,
   SecondEmbeddedModalExampleComponent,
   ModalCompactExampleComponent,
   ModalRoutePage1ExampleComponent,
   ModalRoutePage2ExampleComponent,
+  // END TODO: Move Modal examples to ModalExample.module
   SegmentedControlExampleComponent,
   ChipExampleComponent,
   BadgeExampleComponent,
