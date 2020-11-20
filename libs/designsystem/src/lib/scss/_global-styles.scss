@@ -24,6 +24,18 @@
 }
 
 $backdrop-opacity: 0.4;
+$modal-close-button-inner-height: size('l'); // Todo: Move to / get from shared var
+$modal-close-button-vertical-margin: size('xxxs') * 2; // Todo: Move to / get from shared var
+$modal-header-vertical-padding: 3px * 2; // 3px defined by Ionic
+$modal-header-total-height: $modal-close-button-inner-height + $modal-close-button-vertical-margin +
+  $modal-header-vertical-padding;
+$modal-behind-nested-drawer-translate-y: -10px; // Defined by Ionic
+$modal-behind-nested-drawer-scale: 0.93; // Defined by Ionic
+$modal-header-vertical-center: round(
+  ($modal-header-total-height * $modal-behind-nested-drawer-scale) / 2
+);
+$drawer-padding-top: var(--kirby-modal-padding-top) - #{$modal-header-vertical-center +
+  $modal-behind-nested-drawer-translate-y};
 
 ion-modal.kirby-overlay {
   position: fixed;
@@ -55,12 +67,8 @@ ion-modal.kirby-overlay {
 
     &.kirby-modal-compact {
       --border-radius: #{$border-radius};
-
-      .modal-wrapper {
-        max-width: $compact-modal-max-width;
-        height: auto;
-        text-align: center;
-      }
+      --max-width: #{$compact-modal-max-width};
+      text-align: center;
     }
 
     // Reset Ionic Card style height + top border radius:
@@ -84,14 +92,21 @@ ion-modal.kirby-overlay {
     }
 
     @include media('>=medium') {
-      //TODO Hardcoded magic numbers: Jakob + Jonathan, revisit!!!
-      --width: 720px;
-      --height: 647px;
+      --kirby-modal-padding-top: #{size('xl')};
+      --width: 720px; //TODO Hardcoded magic number: Jakob + Jonathan, revisit!!!
       --border-radius: #{$border-radius};
       --box-shadow: #{get-elevation(8)};
+      --height: auto;
 
       &.kirby-drawer {
+        --min-height: #{map-get($modal-heights, 's')};
+        --max-height: calc(100vh - var(--kirby-modal-padding-top));
         align-items: flex-end;
+
+        &.modal-card {
+          --max-height: calc(100vh - #{$drawer-padding-top});
+        }
+
         .modal-wrapper {
           border-bottom-left-radius: 0;
           border-bottom-right-radius: 0;
@@ -99,12 +114,10 @@ ion-modal.kirby-overlay {
       }
 
       &:not(.kirby-drawer):not(.kirby-modal-compact) {
-        --height: auto;
-        --kirby-modal-padding-top: #{size('xl')};
         --min-height: #{$modal-default-height};
         --max-height: calc(100vh - var(--kirby-modal-padding-top));
-        align-items: flex-start;
         padding-top: var(--kirby-modal-padding-top);
+        align-items: flex-start;
 
         &.small {
           --min-height: #{map-get($modal-heights, 's')};

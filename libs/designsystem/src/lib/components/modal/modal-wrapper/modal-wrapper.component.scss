@@ -6,18 +6,16 @@
   --header-height: 0px;
   --footer-height: 0px;
   @include media('>=medium') {
-    &:not(.drawer) {
-      padding-top: 0;
-      position: relative;
-      contain: inherit;
-      min-height: Min(var(--min-height), calc(100vh - var(--kirby-modal-padding-top, 0px)));
+    padding-top: 0;
+    position: relative;
+    contain: inherit;
+    min-height: Min(var(--min-height), calc(100vh - var(--kirby-modal-padding-top, 0px)));
 
-      ion-content {
-        contain: content;
-        max-height: calc(
-          100vh - var(--kirby-modal-padding-top, 0px) - var(--header-height) - var(--footer-height)
-        );
-      }
+    ion-content {
+      contain: content;
+      max-height: calc(
+        100vh - var(--kirby-modal-padding-top, 0px) - var(--header-height) - var(--footer-height)
+      );
     }
   }
   padding-top: size('s');
