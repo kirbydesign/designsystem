@@ -3,5 +3,6 @@
   [ngClass]="classes"
   [mode]="shape === 'circle' ? undefined : 'md'"
   [checked]="checked"
+  [disabled]="disabled"
   (ionChange)="onChecked($event.detail.checked)"
 ></ion-checkbox>
