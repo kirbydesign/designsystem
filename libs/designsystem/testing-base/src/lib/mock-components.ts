@@ -1,3 +1,4 @@
+import { MockAccordionComponent } from './components/mock.accordion.component';
 import { MockAppComponent } from './components/mock.app.component';
 import { MockAvatarComponent } from './components/mock.avatar.component';
 import { MockBadgeComponent } from './components/mock.badge.component';
@@ -11,7 +12,6 @@ import { MockChipComponent } from './components/mock.chip.component';
 import { MockDividerComponent } from './components/mock.divider.component';
 import { MockDropdownComponent } from './components/mock.dropdown.component';
 import { MockEmptyStateComponent } from './components/mock.empty-state.component';
-import { MockExpandableComponent } from './components/mock.expandable.component';
 import { MockFabSheetComponent } from './components/mock.fab-sheet.component';
 import { MockFlagComponent } from './components/mock.flag.component';
 import { MockFormFieldMessageComponent } from './components/mock.form-field-message.component';
@@ -53,6 +53,7 @@ import { MockToggleButtonComponent } from './components/mock.toggle-button.compo
 import { MockToolbarComponent } from './components/mock.toolbar.component';
 
 export const MOCK_COMPONENTS = [
+  MockAccordionComponent,
   MockAppComponent,
   MockAvatarComponent,
   MockBadgeComponent,
@@ -66,7 +67,6 @@ export const MOCK_COMPONENTS = [
   MockDividerComponent,
   MockDropdownComponent,
   MockEmptyStateComponent,
-  MockExpandableComponent,
   MockFabSheetComponent,
   MockFlagComponent,
   MockFormFieldMessageComponent,
