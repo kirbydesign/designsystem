@@ -22,14 +22,19 @@ export class FirstEmbeddedModalExampleComponent implements OnInit {
   title: string;
   subtitle: string;
 
-  stringProperty: string;
-  numberProperty: number;
-  booleanProperty: boolean;
+  exampleProperties: {
+    stringProperty: string;
+    numberProperty: number;
+    booleanProperty: boolean;
+  };
 
   showNestedOptions: boolean;
   showDummyKeyboard: boolean;
   showFooter: boolean;
-  loadContent: boolean;
+  showDummyContent: boolean;
+  showNestedFooter: boolean = false;
+  showNestedDummyContent: boolean = true;
+  delayLoadDummyContent: boolean;
   loadAdditionalContent: boolean;
   disableScroll: boolean = false;
 
@@ -47,53 +52,48 @@ export class FirstEmbeddedModalExampleComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.loadContent) {
-      this.isLoading = true;
-      setTimeout(() => (this.isLoading = false), 1000);
-    }
-    if (this.loadAdditionalContent) {
-      this.isLoadingAdditionalContent = true;
-      setTimeout(() => (this.isLoadingAdditionalContent = false), 2000);
+    if (this.showDummyContent) {
+      if (this.delayLoadDummyContent) {
+        this.isLoading = true;
+        setTimeout(() => (this.isLoading = false), 1000);
+      }
+      if (this.loadAdditionalContent) {
+        this.isLoadingAdditionalContent = true;
+        setTimeout(() => (this.isLoadingAdditionalContent = false), 2000);
+      }
     }
   }
 
-  showNestedModal() {
+  private showNestedOverlay(flavor: 'modal' | 'drawer') {
+    const title = flavor === 'modal' ? 'Nested Modal Title' : 'Nested Drawer Title';
     const config: ModalConfig = {
-      flavor: 'modal',
-      component: FirstEmbeddedModalExampleComponent,
-      componentProps: {
-        title: 'Nested Modal Title',
-        subtitle: 'Hello from second embedded example component!',
-        showDummyKeyboard: this.showDummyKeyboard,
-        showFooter: this.showFooter,
-        loadContent: this.loadContent,
-        loadAdditionalContent: this.loadAdditionalContent,
-      },
-    };
-
-    // supposing no callback needed for the second component
-    this.modalController.showModal(config);
-  }
-
-  showNestedDrawer() {
-    const config: ModalConfig = {
-      flavor: 'drawer',
+      flavor,
       drawerSupplementaryAction: {
         iconName: 'edit',
         action: this.onSupplementaryActionSelect.bind(this),
       },
       component: FirstEmbeddedModalExampleComponent,
       componentProps: {
-        title: 'Nested Drawer Title',
+        title,
         subtitle: 'Hello from second embedded example component!',
-        showFooter: this.showFooter,
-        loadContent: this.loadContent,
+        showDummyKeyboard: this.showDummyKeyboard,
+        showFooter: this.showNestedFooter,
+        showDummyContent: this.showNestedDummyContent,
+        delayLoadDummyContent: this.delayLoadDummyContent,
         loadAdditionalContent: this.loadAdditionalContent,
       },
     };
 
     // supposing no callback needed for the second component
     this.modalController.showModal(config);
+  }
+
+  showNestedModal() {
+    this.showNestedOverlay('modal');
+  }
+
+  showNestedDrawer() {
+    this.showNestedOverlay('drawer');
   }
 
   showNestedAlert() {

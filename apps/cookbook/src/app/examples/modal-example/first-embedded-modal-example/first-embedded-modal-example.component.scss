@@ -1,11 +1,32 @@
 @import './libs/designsystem/src/lib/scss/utils';
 
 kirby-card {
-  margin-top: size('l');
-}
+  &.nested-modal-configuration {
+    margin-top: size('l');
+    margin-bottom: size('l');
+    cookbook-modal-example-configuration {
+      margin-top: size('m');
+    }
+  }
 
-cookbook-modal-example-configuration {
-  margin-top: size('l');
+  &.current-modal-configuration {
+    position: fixed;
+    top: 0;
+    right: -$border-radius;
+    font-size: font-size('xs');
+
+    // @include not-touch() {
+    opacity: 0.5;
+    transition: transform get-transition-duration('short') get-transition-easing('enter-exit');
+    transform: translateX(40%);
+
+    &:hover,
+    &:active {
+      opacity: unset;
+      transform: translateX(0);
+    }
+    // }
+  }
 }
 
 kirby-modal-footer {

@@ -14,7 +14,8 @@ const config = {
   <cookbook-modal-example-configuration
     [(showDummyKeyboard)]="showDummyKeyboard"
     [(showFooter)]="showFooter"
-    [(loadContent)]="loadContent"
+    [(showDummyContent)]="showDummyContent"
+    [(delayLoadDummyContent)]="delayLoadDummyContent"
     [(loadAdditionalContent)]="loadAdditionalContent"
   ></cookbook-modal-example-configuration>`,
   titleTemplate: `<kirby-page-title>My Modal Title</kirby-page-title>
@@ -176,8 +177,9 @@ export class ModalExampleDefaultComponent {
 
   showDummyKeyboard = !!this.window.sessionStorage.getItem('kirby-cookbook-show-dummy-keyboard');
   showFooter = false;
+  showDummyContent = true;
+  delayLoadDummyContent = true;
   loadAdditionalContent = false;
-  loadContent = true;
 
   constructor(private modalController: ModalController, private window: WindowRef) {}
 
@@ -197,7 +199,8 @@ export class ModalExampleDefaultComponent {
         showNestedOptions: true,
         showDummyKeyboard: this.showDummyKeyboard,
         showFooter: this.showFooter,
-        loadContent: this.loadContent,
+        showDummyContent: this.showDummyContent,
+        delayLoadDummyContent: this.delayLoadDummyContent,
         loadAdditionalContent: this.loadAdditionalContent,
         disableScroll: false,
       },

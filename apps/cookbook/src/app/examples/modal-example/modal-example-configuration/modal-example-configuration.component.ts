@@ -14,8 +14,11 @@ export class ModalExampleConfigurationComponent {
   @Input() showFooter: boolean;
   @Output() showFooterChange = new EventEmitter<boolean>();
 
-  @Input() loadContent: boolean;
-  @Output() loadContentChange = new EventEmitter<boolean>();
+  @Input() showDummyContent: boolean;
+  @Output() showDummyContentChange = new EventEmitter<boolean>();
+
+  @Input() delayLoadDummyContent: boolean;
+  @Output() delayLoadDummyContentChange = new EventEmitter<boolean>();
 
   @Input() loadAdditionalContent: boolean;
   @Output() loadAdditionalContentChange = new EventEmitter<boolean>();
@@ -26,7 +29,6 @@ export class ModalExampleConfigurationComponent {
   constructor(private window: WindowRef, zone: NgZone) {}
 
   toggleDummyKeyboard() {
-    console.count('toggleDummyKeyboard');
     const sessionKey = 'kirby-cookbook-show-dummy-keyboard';
     this.showDummyKeyboard
       ? this.window.sessionStorage.setItem(sessionKey, 'true')
@@ -51,9 +53,14 @@ export class ModalExampleConfigurationComponent {
     this.showFooterChange.emit(this.showFooter);
   }
 
-  toggleLoadContent(show: boolean) {
-    this.loadContent = show;
-    this.loadContentChange.emit(this.loadContent);
+  toggleShowDummyContent(show: boolean) {
+    this.showDummyContent = show;
+    this.showDummyContentChange.emit(this.showDummyContent);
+  }
+
+  toggleDelayLoadDummyContent(show: boolean) {
+    this.delayLoadDummyContent = show;
+    this.delayLoadDummyContentChange.emit(this.delayLoadDummyContent);
   }
 
   toggleLoadAdditionalContent(show: boolean) {

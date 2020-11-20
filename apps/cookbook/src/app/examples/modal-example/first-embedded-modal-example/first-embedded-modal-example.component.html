@@ -6,22 +6,38 @@
     <kirby-form-field>
       <input kirby-input placeholder="Focus me on device to see keyboard" />
     </kirby-form-field>
-    <ng-container *ngIf="exampleProperties">
-      <h4>Component properties (injected from parent component):</h4>
-      <p>
-        <code>stringProperty: </code><i>{{ exampleProperties.stringProperty }}</i
-        ><br />
-        <code>numberProperty: </code><i>{{ exampleProperties.numberProperty }}</i
-        ><br />
-        <code>booleanProperty: </code><i>{{ exampleProperties.booleanProperty }}</i>
-      </p>
+    <ng-container *ngIf="showDummyContent">
+      <ng-container *ngIf="exampleProperties">
+        <h4>Component properties (injected from parent component):</h4>
+        <p>
+          <code>stringProperty: </code><i>{{ exampleProperties.stringProperty }}</i
+          ><br />
+          <code>numberProperty: </code><i>{{ exampleProperties.numberProperty }}</i
+          ><br />
+          <code>booleanProperty: </code><i>{{ exampleProperties.booleanProperty }}</i>
+        </p>
+      </ng-container>
+      <button kirby-button attentionLevel="3" (click)="scrollToBottom()">
+        Scroll to bottom
+        <kirby-icon name="arrow-down"></kirby-icon>
+      </button>
     </ng-container>
-    <button kirby-button attentionLevel="3" (click)="scrollToBottom()">
-      Scroll to bottom
-      <kirby-icon name="arrow-down"></kirby-icon>
-    </button>
     <button kirby-button (click)="close()">Hide me</button>
-    <kirby-card *ngIf="showNestedOptions" hasPadding="true" themeColor="light">
+    <kirby-card hasPadding="true" class="current-modal-configuration">
+      <cookbook-modal-example-configuration
+        [(showDummyKeyboard)]="showDummyKeyboard"
+        [(showFooter)]="showFooter"
+        [(showDummyContent)]="showDummyContent"
+        [disableScroll]="disableScroll"
+        (disableScrollChange)="toggleDisableScroll($event)"
+      ></cookbook-modal-example-configuration>
+    </kirby-card>
+    <kirby-card
+      *ngIf="showNestedOptions"
+      hasPadding="true"
+      themeColor="light"
+      class="nested-modal-configuration"
+    >
       <h3>Open nested:</h3>
       <button kirby-button attentionLevel="2" (click)="showNestedModal()">
         Modal
@@ -36,18 +52,13 @@
         Action sheet
       </button>
       <cookbook-modal-example-configuration
-        [(showFooter)]="showFooter"
-        [(loadContent)]="loadContent"
+        [(showFooter)]="showNestedFooter"
+        [(showDummyContent)]="showNestedDummyContent"
+        [(delayLoadDummyContent)]="delayLoadDummyContent"
         [(loadAdditionalContent)]="loadAdditionalContent"
       ></cookbook-modal-example-configuration>
     </kirby-card>
-    <cookbook-modal-example-configuration
-      [(showDummyKeyboard)]="showDummyKeyboard"
-      [(showFooter)]="showFooter"
-      [disableScroll]="disableScroll"
-      (disableScrollChange)="toggleDisableScroll($event)"
-    ></cookbook-modal-example-configuration>
-    <div>
+    <div *ngIf="showDummyContent">
       <h4>The standard Lorem Ipsum passage, used since the 1500s</h4>
       <p>
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
@@ -112,7 +123,12 @@
         </div>
       </kirby-loading-overlay>
     </div>
-    <button *ngIf="!showFooter" kirby-button attentionLevel="3" (click)="scrollToTop()">
+    <button
+      *ngIf="!showFooter && showDummyContent"
+      kirby-button
+      attentionLevel="3"
+      (click)="scrollToTop()"
+    >
       Scroll to top
       <kirby-icon name="arrow-up"></kirby-icon>
     </button>
