@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 
 const config = {
-  selector: 'cookbook-expandable-example-single-card',
+  selector: 'cookbook-accordion-example-single-card',
   template: `<kirby-card>
-      <kirby-expandable title="Title for expandable">
+      <kirby-accordion title="Title for accordion">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non neque vitae felis ultricies imperdiet in ut orci. Aenean sodales, augue ac consectetur sodales, neque velit condimentum nulla, at ultrices dolor tortor a nunc. Proin tellus nibh, venenatis eget quam ut, blandit cursus ante. Pellentesque convallis pretium orci vitae porta.
-      </kirby-expandable>
+      </kirby-accordion>
     </kirby-card>`,
 };
 
@@ -13,6 +13,6 @@ const config = {
   selector: config.selector,
   template: config.template,
 })
-export class ExpandableExampleSingleCardComponent {
+export class AccordionExampleSingleCardComponent {
   template: string = config.template;
 }

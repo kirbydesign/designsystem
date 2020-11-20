@@ -37,7 +37,7 @@ $padding: size('s');
   }
 }
 
-:host-context(.expandable-list) {
+:host-context(.accordion) {
   &:not(:first-child) {
     border-top: none;
   }

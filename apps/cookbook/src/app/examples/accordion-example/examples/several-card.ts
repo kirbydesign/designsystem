@@ -1,21 +1,21 @@
 import { Component } from '@angular/core';
 
 const config = {
-  selector: 'cookbook-expandable-example-several-card',
+  selector: 'cookbook-accordion-example-several-card',
   template: `<kirby-card>
-      <div class="expandable-list">
-        <kirby-expandable title="Title for expandable 1">
+      <div class="accordion">
+        <kirby-accordion title="Title for accordion 1">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non neque vitae felis ultricies imperdiet in ut orci. Aenean sodales, augue ac consectetur sodales, neque velit condimentum nulla, at ultrices dolor tortor a nunc. Proin tellus nibh, venenatis eget quam ut, blandit cursus ante. Pellentesque convallis pretium orci vitae porta.
-        </kirby-expandable>
-        <kirby-expandable title="Title for expandable 2">
+        </kirby-accordion>
+        <kirby-accordion title="Title for accordion 2">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non neque vitae felis ultricies imperdiet in ut orci. Aenean sodales, augue ac consectetur sodales, neque velit condimentum nulla, at ultrices dolor tortor a nunc. Proin tellus nibh, venenatis eget quam ut, blandit cursus ante. Pellentesque convallis pretium orci vitae porta.
-        </kirby-expandable>
-        <kirby-expandable title="Title for expandable 3">
+        </kirby-accordion>
+        <kirby-accordion title="Title for accordion 3">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non neque vitae felis ultricies imperdiet in ut orci. Aenean sodales, augue ac consectetur sodales, neque velit condimentum nulla, at ultrices dolor tortor a nunc. Proin tellus nibh, venenatis eget quam ut, blandit cursus ante. Pellentesque convallis pretium orci vitae porta.
-        </kirby-expandable>
-        <kirby-expandable title="Title for expandable 4">
+        </kirby-accordion>
+        <kirby-accordion title="Title for accordion 4">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non neque vitae felis ultricies imperdiet in ut orci. Aenean sodales, augue ac consectetur sodales, neque velit condimentum nulla, at ultrices dolor tortor a nunc. Proin tellus nibh, venenatis eget quam ut, blandit cursus ante. Pellentesque convallis pretium orci vitae porta.
-        </kirby-expandable>
+        </kirby-accordion>
       </div>
     </kirby-card>`,
 };
@@ -24,6 +24,6 @@ const config = {
   selector: config.selector,
   template: config.template,
 })
-export class ExpandableExampleSeveralCardComponent {
+export class AccordionExampleSeveralCardComponent {
   template: string = config.template;
 }

@@ -3,11 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
 
 @Component({
-  selector: 'cookbook-expandable-showcase',
-  templateUrl: './expandable-showcase.component.html',
-  styleUrls: ['./expandable-showcase.component.scss'],
+  selector: 'cookbook-accordion-showcase',
+  templateUrl: './accordion-showcase.component.html',
+  styleUrls: ['./accordion-showcase.component.scss'],
 })
-export class ExpandableShowcaseComponent {
+export class AccordionShowcaseComponent {
   properties: ShowcaseProperty[] = [
     {
       name: 'title',

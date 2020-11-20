@@ -54,4 +54,4 @@ export * from './slides/slides.component';
 
 export { ToggleButtonComponent } from './toggle-button/toggle-button.component';
 
-export { ExpandableComponent } from './expandable/expandable.component';
+export { AccordionComponent } from './accordion/accordion.component';

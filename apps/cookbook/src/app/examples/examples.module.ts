@@ -21,7 +21,7 @@ import { ProgressCircleExampleModule } from './progress-circle-example/progress-
 import { AvatarExampleModule } from './avatar-example/avatar-example.module';
 import { FlagExampleModule } from './flag-example/flag-example.module';
 import { ToggleButtonExampleModule } from './toggle-button-example/toggle-button-example.module';
-import { ExpandableExampleModule } from './expandable-example/expandable-example.module';
+import { AccordionExampleModule } from './accordion-example/accordion-example.module';
 
 const IMPORTS = [
   FormFieldExamplesModule,
@@ -34,7 +34,7 @@ const IMPORTS = [
   AvatarExampleModule,
   FlagExampleModule,
   ToggleButtonExampleModule,
-  ExpandableExampleModule,
+  AccordionExampleModule,
 ];
 
 @NgModule({
