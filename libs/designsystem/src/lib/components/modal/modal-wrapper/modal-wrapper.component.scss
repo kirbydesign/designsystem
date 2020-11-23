@@ -14,6 +14,18 @@
       100vh - var(--kirby-modal-padding-top, 0px) - var(--header-height) - var(--footer-height)
     );
   }
+
+  &.drawer {
+    ion-content::part(scroll) {
+      transition: padding-bottom $soft-keyboard-transition-leave;
+    }
+
+    &.keyboard-visible {
+      ion-content::part(scroll) {
+        transition: padding-bottom $soft-keyboard-transition-enter;
+      }
+    }
+  }
 }
 
 :host {
@@ -21,18 +33,6 @@
   --footer-height: 0px;
   @include media('>=medium') {
     @include contain-content();
-
-    &.drawer {
-      ion-content::part(scroll) {
-        transition: padding-bottom $soft-keyboard-transition-leave;
-      }
-
-      &.keyboard-visible {
-        ion-content::part(scroll) {
-          transition: padding-bottom $soft-keyboard-transition-enter;
-        }
-      }
-    }
   }
 
   &.drawer {
