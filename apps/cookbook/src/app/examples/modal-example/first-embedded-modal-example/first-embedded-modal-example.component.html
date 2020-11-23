@@ -9,13 +9,14 @@
     <ng-container *ngIf="showDummyContent">
       <ng-container *ngIf="exampleProperties">
         <h4>Component properties (injected from parent component):</h4>
-        <p>
-          <code>stringProperty: </code><i>{{ exampleProperties.stringProperty }}</i
-          ><br />
-          <code>numberProperty: </code><i>{{ exampleProperties.numberProperty }}</i
-          ><br />
-          <code>booleanProperty: </code><i>{{ exampleProperties.booleanProperty }}</i>
-        </p>
+        <dl>
+          <dt><code>stringProperty:</code></dt>
+          <dd>{{ exampleProperties.stringProperty }}</dd>
+          <dt><code>numberProperty:</code></dt>
+          <dd>{{ exampleProperties.numberProperty }}</dd>
+          <dt><code>booleanProperty:</code></dt>
+          <dd>{{ exampleProperties.booleanProperty }}</dd>
+        </dl>
       </ng-container>
       <button kirby-button attentionLevel="3" (click)="scrollToBottom()">
         Scroll to bottom

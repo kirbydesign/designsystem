@@ -1,5 +1,19 @@
 @import './libs/designsystem/src/lib/scss/utils';
 
+dl {
+  display: grid;
+  grid-template: auto / auto 1fr;
+
+  dt {
+    padding-right: size('xxxs');
+  }
+
+  dd {
+    margin: 0;
+    font-style: italic;
+  }
+}
+
 kirby-card {
   &.nested-modal-configuration {
     margin-top: size('l');
@@ -15,7 +29,6 @@ kirby-card {
     right: -$border-radius;
     font-size: font-size('xs');
 
-    // @include not-touch() {
     opacity: 0.5;
     transition: transform get-transition-duration('short') get-transition-easing('enter-exit');
     transform: translateX(40%);
@@ -25,7 +38,6 @@ kirby-card {
       opacity: unset;
       transform: translateX(0);
     }
-    // }
   }
 }
 
@@ -40,5 +52,6 @@ kirby-modal-footer {
 
   label {
     font-size: font-size('xs');
+    cursor: pointer;
   }
 }
