@@ -43,9 +43,9 @@ ion-header ion-toolbar {
 
 // Ensure iOS safe-area padding-top on default/modal flavor
 // when opened on presenting element (gets .modal-card class):
-:host-context(ion-modal.modal-card) {
+:host-context(ion-modal.modal-card:not(.kirby-drawer)) {
   ion-header ion-toolbar:first-of-type {
-    padding-top: var(--ion-safe-area-top, 0);
+    padding-top: var(--kirby-safe-area-top, 0px);
   }
 }
 
