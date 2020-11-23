@@ -88,6 +88,7 @@ ion-modal.kirby-overlay {
     &.kirby-drawer {
       --kirby-modal-padding-top: calc(var(--kirby-safe-area-top, 0px) + #{size('m')});
       padding-top: var(--kirby-modal-padding-top);
+      align-items: flex-end;
 
       .modal-wrapper {
         border-top-left-radius: #{$border-radius};
@@ -109,7 +110,6 @@ ion-modal.kirby-overlay {
         --kirby-modal-padding-top: calc(
           var(--kirby-modal-padding-top-base) + #{get-drawer-additional-padding-top()}
         );
-        align-items: flex-end;
 
         .modal-wrapper {
           border-bottom-left-radius: 0;
