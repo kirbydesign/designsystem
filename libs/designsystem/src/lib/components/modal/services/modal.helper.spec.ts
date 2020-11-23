@@ -699,7 +699,7 @@ describe('ModalHelper', () => {
                   });
                 }
 
-                fit(`second modal should have should have correct backdrop style`, async () => {
+                it(`second modal should have should have correct backdrop style`, async () => {
                   const secondOverlay = await modalHelper.showModalWindow({
                     title: `Second Modal - flavor: ${secondFlavor}`,
                     component: undefined,
