@@ -21,6 +21,18 @@
   --footer-height: 0px;
   @include media('>=medium') {
     @include contain-content();
+
+    &.drawer {
+      ion-content::part(scroll) {
+        transition: padding-bottom $soft-keyboard-transition-leave;
+      }
+
+      &.keyboard-visible {
+        ion-content::part(scroll) {
+          transition: padding-bottom $soft-keyboard-transition-enter;
+        }
+      }
+    }
   }
 
   &.drawer {

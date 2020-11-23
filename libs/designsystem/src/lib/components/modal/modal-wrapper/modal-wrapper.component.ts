@@ -325,12 +325,12 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   }
 
   private setKeyboardOverlap(keyboardHeight: number) {
+    this.toggleCssClass(this.elementRef.nativeElement, 'keyboard-visible', keyboardHeight > 0);
     const keyboardOverlap = this.getKeyboardOverlap(keyboardHeight, this.elementRef.nativeElement);
     let snapFooterToKeyboard = false;
     const embeddedFooterElement = this.getEmbeddedFooterElement();
     if (embeddedFooterElement) {
       this.setCssVar(embeddedFooterElement, '--keyboard-offset', `${keyboardOverlap}px`);
-      this.toggleCssClass(embeddedFooterElement, 'keyboard-visible', keyboardHeight > 0);
       snapFooterToKeyboard = embeddedFooterElement.classList.contains('snap-to-keyboard');
     }
 
