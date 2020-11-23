@@ -4,10 +4,11 @@
   display: flex;
 
   fieldset {
-    border: 1px solid get-color('medium');
+    border: 1px solid var(--border-color, get-color('medium'));
 
     legend {
       color: get-text-color('semi-dark');
+      text-align: var(--text-align, initial);
     }
 
     kirby-checkbox {

@@ -7,7 +7,7 @@
       <input kirby-input placeholder="Focus me on device to see keyboard" />
     </kirby-form-field>
     <ng-container *ngIf="showDummyContent">
-      <ng-container *ngIf="exampleProperties">
+      <div class="example-properties" *ngIf="exampleProperties">
         <h4>Component properties (injected from parent component):</h4>
         <dl>
           <dt><code>stringProperty:</code></dt>
@@ -17,14 +17,14 @@
           <dt><code>booleanProperty:</code></dt>
           <dd>{{ exampleProperties.booleanProperty }}</dd>
         </dl>
-      </ng-container>
+      </div>
       <button kirby-button attentionLevel="3" (click)="scrollToBottom()">
         Scroll to bottom
         <kirby-icon name="arrow-down"></kirby-icon>
       </button>
     </ng-container>
     <button kirby-button (click)="close()">Hide me</button>
-    <kirby-card hasPadding="true" class="current-modal-configuration">
+    <kirby-card class="current-modal-configuration" [class.pad-top]="flavor === 'modal'">
       <cookbook-modal-example-configuration
         [(showDummyKeyboard)]="showDummyKeyboard"
         [(showFooter)]="showFooter"

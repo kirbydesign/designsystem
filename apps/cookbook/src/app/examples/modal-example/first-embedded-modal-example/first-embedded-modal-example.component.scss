@@ -1,16 +1,24 @@
 @import './libs/designsystem/src/lib/scss/utils';
 
-dl {
-  display: grid;
-  grid-template: auto / auto 1fr;
+.example-properties {
+  display: none;
 
-  dt {
-    padding-right: size('xxxs');
+  @include media('>=medium') {
+    display: unset;
   }
 
-  dd {
-    margin: 0;
-    font-style: italic;
+  dl {
+    display: grid;
+    grid-template: auto / auto 1fr;
+
+    dt {
+      padding-right: size('xxxs');
+    }
+
+    dd {
+      margin: 0;
+      font-style: italic;
+    }
   }
 }
 
@@ -28,15 +36,41 @@ kirby-card {
     top: 0;
     right: -$border-radius;
     font-size: font-size('xs');
-
     opacity: 0.5;
-    transition: transform get-transition-duration('short') get-transition-easing('enter-exit');
-    transform: translateX(40%);
+    transition-property: transform, padding;
+    transition-duration: get-transition-duration('short');
+    transition-timing-function: get-transition-easing('enter-exit');
+    transform: rotate(-90deg) translateY(-28%);
+    transform-origin: top right;
+    padding: size('xxs');
+    --border-color: transparent;
+    --text-align: center;
+
+    &.pad-top {
+      @include media('<medium') {
+        top: size('xxxl');
+      }
+    }
+
+    @include media('>=medium') {
+      transform: translateX(40%);
+      padding: size('s');
+      --text-align: initial;
+      --border-color: initial;
+    }
 
     &:hover,
     &:active {
       opacity: unset;
-      transform: translateX(0);
+      transform: none;
+      padding: size('s');
+      padding-right: size('l');
+      --border-color: initial;
+
+      // @include media('>=medium') {
+      //   transform: translateX(40%);
+      //   padding: size('s');
+      // }
     }
   }
 }
