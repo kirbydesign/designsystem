@@ -105,10 +105,6 @@ ion-modal.kirby-overlay {
         --max-height: calc(100vh - var(--kirby-modal-padding-top));
         align-items: flex-start;
         padding-top: var(--kirby-modal-padding-top);
-        transition: all 0.5s #{get-transition-duration('long')} #{get-transition-easing(
-              'enter-exit'
-            )},
-          padding 0ms;
 
         &.small {
           --min-height: #{map-get($modal-heights, 's')};

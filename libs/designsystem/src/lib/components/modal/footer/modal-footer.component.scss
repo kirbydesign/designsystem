@@ -1,18 +1,44 @@
 @import '../../../scss/utils';
 
+$padding-horizontal: size('s');
+$padding-vertical: size('xxs');
+
 ion-footer {
   box-shadow: get-elevation(8);
   display: flex;
   justify-content: var(--kirby-modal-footer-justify-content, center);
   align-items: center;
   background-color: get-color('white');
-  padding: size('s');
-  padding-bottom: calc(#{size('s')} + var(--kirby-safe-area-bottom));
+  padding: $padding-vertical $padding-horizontal;
+  padding-bottom: calc(#{$padding-vertical} + var(--kirby-modal-footer-safe-area-bottom, 0px));
 }
 
-:host(.snap-to-keyboard) ion-footer {
-  transform: translateY(calc(var(--keyboard-offset, 0px) * -1));
-  transition: transform $soft-keyboard-transition;
+@include media('<medium') {
+  :host {
+    --kirby-modal-footer-safe-area-bottom: var(--kirby-safe-area-bottom);
+  }
+}
+
+:host-context(.modal-wrapper.full-height) {
+  --kirby-modal-footer-safe-area-bottom: var(--kirby-safe-area-bottom);
+}
+
+:host(.snap-to-keyboard) {
+  ion-footer {
+    transition: transform $soft-keyboard-transition-leave;
+  }
+}
+
+:host(.snap-to-keyboard.keyboard-visible) {
+  ion-footer {
+    transition: transform $soft-keyboard-transition-enter;
+    // Prevent clean-css from replacing `0px` with `0` or `calc()` won't work:
+    /* clean-css ignore:start */
+    transform: translateY(
+      calc((var(--keyboard-offset, 0px) - var(--kirby-modal-footer-safe-area-bottom, 0px)) * -1)
+    );
+    /* clean-css ignore:end */
+  }
 }
 
 :host(.light) ion-footer {
