@@ -43,7 +43,7 @@ ion-modal.kirby-overlay {
   position: fixed;
 
   // Ensure consistent backdrop on all overlays:
-  &:not(.modal-card) {
+  &.kirby-drawer {
     --backdrop-opacity: #{$backdrop-opacity};
     ion-backdrop {
       opacity: var(--backdrop-opacity);
