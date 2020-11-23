@@ -29,12 +29,8 @@
   $modal-header-vertical-padding: 3px * 2; // 3px defined by Ionic
   $modal-header-total-height: $modal-close-button-inner-height + $modal-close-button-vertical-margin +
     $modal-header-vertical-padding;
-  $modal-behind-nested-drawer-translate-y: -10px; // Defined by Ionic
-  $modal-behind-nested-drawer-scale: 0.93; // Defined by Ionic
-  $modal-header-vertical-center: round(
-    ($modal-header-total-height * $modal-behind-nested-drawer-scale) / 2
-  );
-  @return $modal-header-vertical-center + $modal-behind-nested-drawer-translate-y;
+  $modal-header-vertical-center: round($modal-header-total-height / 2);
+  @return $modal-header-vertical-center;
 }
 
 $backdrop-opacity: 0.4;

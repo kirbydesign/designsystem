@@ -64,14 +64,12 @@ export class ModalHelper {
 
   private async getPresentingElement(flavor?: 'modal' | 'drawer' | 'compact') {
     let modalPresentingElement: HTMLElement = undefined;
-    if (flavor !== 'compact') {
+    if (!flavor || flavor === 'modal') {
       const topMostModal = await this.ionicModalController.getTop();
       if (!topMostModal) {
-        if (flavor !== 'drawer') {
-          modalPresentingElement = ModalHelper.presentingElement;
-        }
+        modalPresentingElement = ModalHelper.presentingElement;
       } else if (
-        !topMostModal.classList.contains('kirby-drawer') && // TODO: Should drawer on drawer stack like cards?
+        !topMostModal.classList.contains('kirby-drawer') &&
         !topMostModal.classList.contains('kirby-modal-compact')
       ) {
         modalPresentingElement = topMostModal;
