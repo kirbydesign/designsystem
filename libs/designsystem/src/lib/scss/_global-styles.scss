@@ -38,6 +38,14 @@ $backdrop-opacity: 0.4;
 ion-modal.kirby-overlay {
   position: fixed;
 
+  // Ensure consistent backdrop on all overlays:
+  &:not(.modal-card) {
+    --backdrop-opacity: #{$backdrop-opacity};
+    ion-backdrop {
+      opacity: var(--backdrop-opacity);
+    }
+  }
+
   // Ensure consistent backdrop on card style modals, as Ionic 5 only applies --backdrop-opacity to :first-of-type:
   // See https://github.com/ionic-team/ionic/commit/253cd96164914a803f6bb42ff95ca74880c940d0
   // and https://github.com/ionic-team/ionic/issues/20800#issuecomment-606670762
@@ -63,12 +71,6 @@ ion-modal.kirby-overlay {
     }
 
     &.kirby-drawer {
-      // Ensure consistent backdrop on drawer:
-      --backdrop-opacity: #{$backdrop-opacity};
-      ion-backdrop {
-        opacity: var(--backdrop-opacity);
-      }
-
       --kirby-modal-padding-top: calc(var(--kirby-safe-area-top, 0px) + #{size('m')});
       padding-top: var(--kirby-modal-padding-top);
       align-items: flex-end;
