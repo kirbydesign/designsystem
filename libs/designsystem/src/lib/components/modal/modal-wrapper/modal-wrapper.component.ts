@@ -281,7 +281,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   }
 
   private toggleContentMaxHeight(freeze: boolean) {
-    const shouldToggleMaxHeight = this.isTabletOrBigger();
+    const shouldToggleMaxHeight = this.config.flavor === 'modal' && this.isTabletOrBigger();
     if (!shouldToggleMaxHeight) return;
     const style = 'max-height';
     const contentElement = this.ionContentElement.nativeElement;
