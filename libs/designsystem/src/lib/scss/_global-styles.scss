@@ -96,10 +96,33 @@ ion-modal.kirby-overlay {
       --width: #{$modal-max-width};
       --border-radius: #{$border-radius};
       --box-shadow: #{get-elevation(8)};
-      --max-height: 100%;
-      --kirby-modal-padding-top-base: #{size('xl')};
-      --kirby-modal-padding-top: var(--kirby-modal-padding-top-base);
-      padding-top: var(--kirby-modal-padding-top);
+
+      &:not(.kirby-modal-compact) {
+        --max-height: 100%;
+        --kirby-modal-padding-top-base: #{size('xl')};
+        --kirby-modal-padding-top: var(--kirby-modal-padding-top-base);
+        padding-top: var(--kirby-modal-padding-top);
+
+        &:not(.kirby-drawer) {
+          --min-height: #{$modal-default-height};
+          align-items: flex-start;
+
+          &.small {
+            --min-height: #{map-get($modal-heights, 's')};
+          }
+          &.medium {
+            --min-height: #{map-get($modal-heights, 'm')};
+          }
+          &.large {
+            --min-height: #{map-get($modal-heights, 'l')};
+          }
+
+          .modal-wrapper.full-height {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+          }
+        }
+      }
 
       &.kirby-drawer {
         --min-height: #{$drawer-default-height};
@@ -108,26 +131,6 @@ ion-modal.kirby-overlay {
         );
 
         .modal-wrapper {
-          border-bottom-left-radius: 0;
-          border-bottom-right-radius: 0;
-        }
-      }
-
-      &:not(.kirby-drawer):not(.kirby-modal-compact) {
-        --min-height: #{$modal-default-height};
-        align-items: flex-start;
-
-        &.small {
-          --min-height: #{map-get($modal-heights, 's')};
-        }
-        &.medium {
-          --min-height: #{map-get($modal-heights, 'm')};
-        }
-        &.large {
-          --min-height: #{map-get($modal-heights, 'l')};
-        }
-
-        .modal-wrapper.full-height {
           border-bottom-left-radius: 0;
           border-bottom-right-radius: 0;
         }
