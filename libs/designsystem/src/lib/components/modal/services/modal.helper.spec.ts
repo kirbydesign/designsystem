@@ -305,6 +305,10 @@ describe('ModalHelper', () => {
           });
         });
 
+        it('modal should have correct padding-top', () => {
+          expect(ionModal).toHaveComputedStyle({ 'padding-top': size('xl') });
+        });
+
         it('modal window should not take focus from embedded input after opening', async () => {
           const ionContent = ionModal.querySelector<HTMLElement>('ion-content');
           await TestHelper.whenReady(ionContent);
@@ -349,7 +353,10 @@ describe('ModalHelper', () => {
         });
 
         it('modal should have correct padding-top', () => {
-          expect(ionModal).toHaveComputedStyle({ 'padding-top': '0px' });
+          const headerHeight = 46;
+          expect(ionModal).toHaveComputedStyle({
+            'padding-top': `${parseInt(size('xl')) + headerHeight / 2}px`,
+          });
         });
       });
 
@@ -494,11 +501,11 @@ describe('ModalHelper', () => {
         describe('when iOS safe-area is present', () => {
           const safeAreaTop = '20px';
           beforeAll(() => {
-            window.document.body.style.setProperty('--ion-safe-area-top', safeAreaTop);
+            window.document.documentElement.style.setProperty('--ion-safe-area-top', safeAreaTop);
           });
 
           afterAll(() => {
-            window.document.body.style.removeProperty('--ion-safe-area-top');
+            window.document.documentElement.style.removeProperty('--ion-safe-area-top');
           });
 
           it('modal toolbar should respect iOS safe-area', async () => {
@@ -610,11 +617,11 @@ describe('ModalHelper', () => {
       describe('when iOS safe-area is present', () => {
         const safeAreaTop = '20px';
         beforeAll(() => {
-          window.document.body.style.setProperty('--ion-safe-area-top', safeAreaTop);
+          window.document.documentElement.style.setProperty('--ion-safe-area-top', safeAreaTop);
         });
 
         afterAll(() => {
-          window.document.body.style.removeProperty('--ion-safe-area-top');
+          window.document.documentElement.style.removeProperty('--ion-safe-area-top');
         });
 
         it('modal toolbar should respect iOS safe-area', async () => {
@@ -692,7 +699,7 @@ describe('ModalHelper', () => {
                   });
                 }
 
-                it(`second modal should have should have correct backdrop style`, async () => {
+                fit(`second modal should have should have correct backdrop style`, async () => {
                   const secondOverlay = await modalHelper.showModalWindow({
                     title: `Second Modal - flavor: ${secondFlavor}`,
                     component: undefined,
@@ -706,8 +713,7 @@ describe('ModalHelper', () => {
                   if (firstFlavor === 'modal' && secondFlavor === 'modal') {
                     expectedBackdropOpacity = invisibleBackdropOpacity;
                   }
-                  // TODO: Fix backdrop style...
-                  // expect(secondBackdrop).toHaveComputedStyle({ opacity: expectedBackdropOpacity });
+                  expect(secondBackdrop).toHaveComputedStyle({ opacity: expectedBackdropOpacity });
                   await secondOverlay.dismiss();
                 });
               });
