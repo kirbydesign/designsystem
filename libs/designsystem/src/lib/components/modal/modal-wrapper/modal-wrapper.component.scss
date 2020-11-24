@@ -14,6 +14,11 @@
       var(--vh100) - var(--kirby-modal-padding-top, 0px) - var(--header-height) -
         var(--footer-height)
     );
+
+    &::part(scroll) {
+      height: '100%';
+      position: relative;
+    }
   }
 
   &.drawer {
