@@ -124,7 +124,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
 
   private initializeSizing() {
     this.setInitialModalSize();
-    this.setScrollElementSize();
+    this.patchScrollElementSize();
     this.observeHeaderResize();
     this.observeModalFullHeight();
   }
@@ -156,10 +156,19 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     this.renderer.addClass(this.ionModalElement, this.config.size || this.defaultSize);
   }
 
-  private setScrollElementSize(): void {
+  private patchScrollElementSize(): void {
+    const supportsCssShadowParts = 'part' in HTMLElement.prototype;
+    if (supportsCssShadowParts) return;
     this.ionContent.getScrollElement().then((scrollElement) => {
       this.renderer.setStyle(scrollElement, 'height', '100%');
       this.renderer.setStyle(scrollElement, 'position', 'relative');
+      if (this.config.flavor === 'drawer') {
+        this.renderer.setStyle(
+          scrollElement,
+          'transition',
+          'padding-bottom ' + DesignTokenHelper.softKeyboardTransitionLeave
+        );
+      }
     });
   }
 
