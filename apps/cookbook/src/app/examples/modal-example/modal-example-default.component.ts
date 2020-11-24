@@ -191,7 +191,6 @@ export class ModalExampleDefaultComponent {
       componentProps: {
         title,
         subtitle: 'Hello from the first embedded example component!',
-        flavor,
         exampleProperties: {
           stringProperty: 'Value injected from parent component',
           numberProperty: 123,

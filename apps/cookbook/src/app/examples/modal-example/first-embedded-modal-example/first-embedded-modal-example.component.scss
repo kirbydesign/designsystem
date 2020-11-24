@@ -33,24 +33,20 @@ kirby-card {
 
   &.current-modal-configuration {
     position: fixed;
-    top: 0;
-    right: -$border-radius;
+    z-index: z('default') + 1;
+    top: var(--header-height);
+    right: 0;
+    margin-top: $border-radius;
     font-size: font-size('xs');
     opacity: 0.5;
-    transition-property: transform, padding;
+    transition-property: transform, border-radius;
     transition-duration: get-transition-duration('short');
     transition-timing-function: get-transition-easing('enter-exit');
-    transform: rotate(-90deg) translateY(-28%);
+    transform: rotate(-90deg) translateY(-#{$border-radius + size('xs')});
     transform-origin: top right;
     padding: size('xxs');
     --border-color: transparent;
     --text-align: center;
-
-    &.pad-top {
-      @include media('<medium') {
-        top: size('xxxl');
-      }
-    }
 
     @include media('>=medium') {
       transform: translateX(40%);
@@ -59,18 +55,17 @@ kirby-card {
       --border-color: initial;
     }
 
+    cookbook-modal-example-configuration {
+      pointer-events: none;
+    }
+
     &:hover,
     &:active {
       opacity: unset;
       transform: none;
-      padding: size('s');
-      padding-right: size('l');
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
       --border-color: initial;
-
-      // @include media('>=medium') {
-      //   transform: translateX(40%);
-      //   padding: size('s');
-      // }
     }
   }
 }

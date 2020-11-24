@@ -21,7 +21,6 @@ import { SecondEmbeddedModalExampleComponent } from '../second-embedded-modal-ex
 export class FirstEmbeddedModalExampleComponent implements OnInit {
   title: string;
   subtitle: string;
-  flavor: 'modal' | 'drawer';
 
   exampleProperties: {
     stringProperty: string;
