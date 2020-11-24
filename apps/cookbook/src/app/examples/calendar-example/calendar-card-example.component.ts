@@ -16,6 +16,7 @@ export class CalendarCardExampleComponent implements OnChanges {
   @Input() setMaxDate = false;
   @Input() setTodayDate = false;
   @Input() useTimezoneUTC = false;
+  @Input() showYearSelector = false;
 
   minDate: Date;
   maxDate: Date;
