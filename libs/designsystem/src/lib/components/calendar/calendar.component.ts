@@ -41,6 +41,8 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() disablePastDates = false;
   @Input() disableFutureDates = false;
   @Input() alwaysEnableToday = false;
+  @Input() showYearSelector = false;
+  @Input() years = ['2020', '2021', '2022', '2023', '2024']; // TODO: Decide naming, input as array vs. 'numberOfSelectableYears' or similar + remove dummy value
   public month: CalendarCell[][];
   public weekDays: string[];
   private selectedDay: CalendarCell;
@@ -357,6 +359,11 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
 
   public changeMonth(index: number) {
     this.changeActiveView(index, 'months');
+  }
+
+  public changeYear(year: number) {
+    const activeYear = parseInt(this.activeYear);
+    this.changeActiveView(year - activeYear, 'years');
   }
 
   private changeActiveView(index: number, unit: moment.unitOfTime.Base) {

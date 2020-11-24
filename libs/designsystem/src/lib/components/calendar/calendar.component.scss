@@ -30,17 +30,33 @@ table.calendar-table {
   }
 }
 
+.header.expand {
+  flex-grow: 1;
+}
+
 .header,
 th,
 td {
   background-color: transparent;
 }
 
+.outer-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5em;
+  position: relative;
+}
+
+kirby-dropdown.dropdown {
+  --kirby_internal_min-screen-width: 340px; // TODO: Remove magic number - calculate width and/or make responsive
+}
+
 .header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 0.5em;
 
   button {
     background-color: transparent;
