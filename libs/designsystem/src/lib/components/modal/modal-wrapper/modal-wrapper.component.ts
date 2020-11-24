@@ -106,6 +106,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     private componentFactoryResolver: ComponentFactoryResolver,
     private windowRef: WindowRef
   ) {
+    this.setViewportHeight();
     this.observeViewportResize();
   }
 
@@ -355,6 +356,16 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
         this.blurActiveElement();
       }
     }
+  }
+
+  @HostListener('window:resize')
+  _onWindowResize() {
+    this.setViewportHeight();
+  }
+
+  private setViewportHeight() {
+    const vh = this.windowRef.innerHeight * 0.01;
+    this.setCssVar(this.elementRef.nativeElement, '--vh', `${vh}px`);
   }
 
   private observeViewportResize() {

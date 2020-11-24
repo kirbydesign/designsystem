@@ -6,12 +6,13 @@
   padding-top: 0;
   position: relative;
   contain: inherit;
-  min-height: Min(var(--min-height), calc(100vh - var(--kirby-modal-padding-top, 0px)));
+  min-height: Min(var(--min-height), calc(var(--vh100) - var(--kirby-modal-padding-top, 0px)));
 
   ion-content {
     contain: content;
     max-height: calc(
-      100vh - var(--kirby-modal-padding-top, 0px) - var(--header-height) - var(--footer-height)
+      var(--vh100) - var(--kirby-modal-padding-top, 0px) - var(--header-height) -
+        var(--footer-height)
     );
   }
 
@@ -29,6 +30,7 @@
 }
 
 :host {
+  --vh100: var(--vh, 1vh) * 100; /// Fixes an issue with vh units on iOS Safari
   --header-height: 0px;
   --footer-height: 0px;
   @include media('>=medium') {
