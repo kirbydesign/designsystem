@@ -126,6 +126,18 @@ describe('ModalHelper', () => {
     expect(modalShadow).toBeTruthy();
   };
 
+  const openModal = async (
+    title: string = 'Modal',
+    component?: any,
+    size?: 'small' | 'medium' | 'large'
+  ) => {
+    await openOverlay({ flavor: 'modal', title, component, size });
+  };
+
+  const openDrawer = async (title: string = 'Drawer', component?: any) => {
+    await openOverlay({ flavor: 'drawer', title, component });
+  };
+
   const expectShadowStyle = () => {
     it('should not show shadow', () => {
       expect(modalShadow).toHaveComputedStyle({ display: 'none' });
@@ -180,11 +192,7 @@ describe('ModalHelper', () => {
 
           describe(`modal`, () => {
             beforeEach(async () => {
-              await openOverlay({
-                flavor: 'modal',
-                title: 'Modal On Presenting Element',
-                component: undefined,
-              });
+              await openModal('Modal On Presenting Element');
             });
 
             afterEach(async () => {
@@ -198,11 +206,7 @@ describe('ModalHelper', () => {
 
           describe(`drawer`, () => {
             beforeEach(async () => {
-              await openOverlay({
-                flavor: 'drawer',
-                title: 'Drawer On Presenting Element',
-                component: undefined,
-              });
+              await openDrawer('Drawer On Presenting Element');
             });
 
             afterEach(async () => {
@@ -231,11 +235,7 @@ describe('ModalHelper', () => {
           };
 
           it('modal should have min-height', async () => {
-            await openOverlay({
-              flavor: 'modal',
-              title: 'Modal',
-              component: undefined,
-            });
+            await openModal();
 
             expect(ionModalWrapper).toHaveComputedStyle({
               '--min-height': DesignTokenHelper.modalDefaultHeight,
@@ -243,11 +243,7 @@ describe('ModalHelper', () => {
           });
 
           it('drawer should have min-height', async () => {
-            await openOverlay({
-              flavor: 'drawer',
-              title: 'Drawer',
-              component: undefined,
-            });
+            await openDrawer();
 
             expect(ionModalWrapper).toHaveComputedStyle({
               '--min-height': DesignTokenHelper.drawerDefaultHeight,
@@ -255,86 +251,54 @@ describe('ModalHelper', () => {
           });
 
           it('modal should be default sized (medium), if size is not provided', async () => {
-            await openOverlay({
-              flavor: 'modal',
-              title: 'Modal',
-              component: undefined,
-            });
+            await openModal();
 
             expectSize('medium');
           });
 
           it('modal should be sized `small`', async () => {
-            await openOverlay({
-              flavor: 'modal',
-              title: 'Modal',
-              component: undefined,
-              size: 'small',
-            });
+            await openModal('Small Modal', undefined, 'small');
 
             expectSize('small');
           });
 
           it('modal should be sized `medium`', async () => {
-            await openOverlay({
-              flavor: 'modal',
-              title: 'Modal',
-              component: undefined,
-              size: 'medium',
-            });
+            await openModal('Medium Modal', undefined, 'medium');
 
             expectSize('medium');
           });
 
           it('modal should be sized `large`', async () => {
-            await openOverlay({
-              flavor: 'modal',
-              title: 'Modal',
-              component: undefined,
-              size: 'large',
-            });
+            await openModal('Large Modal', undefined, 'large');
 
             expectSize('large');
           });
 
           it('should not set sizing class if flavor is `drawer`', async () => {
-            await openOverlay({
-              flavor: 'drawer',
-              title: 'Drawer',
-              component: undefined,
-            });
+            await openDrawer();
 
             expectSize(undefined);
           });
 
           it("should add class `full-height`, if content can't fit in viewport", async () => {
-            await openOverlay({
-              flavor: 'modal',
-              title: 'Modal with full height',
-              component: ContentOverflowsWithFooterEmbeddedComponent,
-            });
+            await openDrawer('Modal with full height', ContentOverflowsWithFooterEmbeddedComponent);
             await TestHelper.waitForResizeObserver();
 
             expect(ionModalWrapper.classList.contains('full-height')).toBeTrue();
           });
 
           it('should NOT add class `full-height`, if content can fit in viewport', async () => {
-            await openOverlay({
-              flavor: 'modal',
-              title: 'Modal with minimum height',
-              component: ContentWithNoOverflowEmbeddedComponent,
-            });
+            await openModal('Modal with minimum height', ContentWithNoOverflowEmbeddedComponent);
             await TestHelper.waitForResizeObserver();
 
             expect(ionModalWrapper.classList.contains('full-height')).toBeFalse();
           });
 
           it('should have footer visible at the bottom of viewport, when full-height', async () => {
-            await openOverlay({
-              flavor: 'modal',
-              title: 'Modal with full height and footer',
-              component: ContentOverflowsWithFooterEmbeddedComponent,
-            });
+            await openModal(
+              'Modal with full height and footer',
+              ContentOverflowsWithFooterEmbeddedComponent
+            );
             const footer = ionModal.querySelector('kirby-modal-footer');
             expect(footer).toBeTruthy();
             await TestHelper.waitForResizeObserver();
@@ -346,11 +310,7 @@ describe('ModalHelper', () => {
 
         describe(`with default flavor ('modal')`, () => {
           beforeEach(async () => {
-            await openOverlay({
-              flavor: 'modal',
-              title: 'Modal',
-              component: InputEmbeddedComponent,
-            });
+            await openModal('Modal', InputEmbeddedComponent);
           });
 
           afterEach(async () => {
@@ -379,11 +339,7 @@ describe('ModalHelper', () => {
 
         describe(`with 'drawer' flavor`, () => {
           beforeEach(async () => {
-            await openOverlay({
-              flavor: 'drawer',
-              title: 'Drawer',
-              component: undefined,
-            });
+            await openDrawer();
           });
 
           afterEach(async () => {
@@ -504,22 +460,14 @@ describe('ModalHelper', () => {
         });
 
         it(`modal should have no visible backdrop`, async () => {
-          await openOverlay({
-            flavor: 'modal',
-            title: 'Modal On Presenting Element',
-            component: undefined,
-          });
+          await openModal('Modal On Presenting Element');
 
           expect(ionBackdrop).toHaveComputedStyle({ opacity: invisibleBackdropOpacity });
           await overlay.dismiss();
         });
 
         it('drawer should have correct backdrop style', async () => {
-          await openOverlay({
-            flavor: 'drawer',
-            title: 'Drawer On Presenting Element',
-            component: undefined,
-          });
+          await openDrawer('Drawer On Presenting Element');
 
           expect(ionBackdrop).toHaveComputedStyle({ opacity: defaultBackdropOpacity });
           await overlay.dismiss();
@@ -537,11 +485,7 @@ describe('ModalHelper', () => {
           });
 
           it('modal toolbar should respect iOS safe-area', async () => {
-            await openOverlay({
-              flavor: 'modal',
-              title: 'Modal On Presenting Element',
-              component: undefined,
-            });
+            await openModal('Modal On Presenting Element');
 
             const ionToolbar = ionModal.querySelector('ion-header > ion-toolbar');
             expect(ionToolbar).toHaveComputedStyle({ 'padding-top': safeAreaTop });
@@ -549,11 +493,7 @@ describe('ModalHelper', () => {
           });
 
           it('drawer should respect iOS safe-area', async () => {
-            await openOverlay({
-              flavor: 'drawer',
-              title: 'Drawer On Presenting Element',
-              component: undefined,
-            });
+            await openDrawer('Drawer On Presenting Element');
 
             const expectedPaddingTop = `${parseInt(size('m')) + parseInt(safeAreaTop)}px`;
             expect(ionModal).toHaveComputedStyle({ 'padding-top': expectedPaddingTop });
@@ -561,11 +501,7 @@ describe('ModalHelper', () => {
           });
 
           it('drawer toolbar should not have additional padding', async () => {
-            await openOverlay({
-              flavor: 'drawer',
-              title: 'Drawer On Presenting Element',
-              component: undefined,
-            });
+            await openDrawer('Drawer On Presenting Element');
 
             const ionToolbar = ionModal.querySelector('ion-header > ion-toolbar');
             expect(ionToolbar).toHaveComputedStyle({ 'padding-top': '0px' });
@@ -576,7 +512,7 @@ describe('ModalHelper', () => {
 
       describe(`with default flavor ('modal')`, () => {
         beforeEach(async () => {
-          await openOverlay({ flavor: 'modal', title: 'Modal', component: undefined });
+          await openModal();
         });
 
         afterEach(async () => {
@@ -590,7 +526,7 @@ describe('ModalHelper', () => {
 
       describe(`with 'drawer' flavor`, () => {
         beforeEach(async () => {
-          await openOverlay({ flavor: 'drawer', title: 'Drawer', component: undefined });
+          await openDrawer();
         });
 
         afterEach(async () => {
@@ -617,7 +553,7 @@ describe('ModalHelper', () => {
         });
 
         it('modal toolbar should respect iOS safe-area', async () => {
-          await openOverlay({ flavor: 'modal', title: 'Modal', component: undefined });
+          await openModal();
 
           const ionToolbar = ionModal.querySelector('ion-header > ion-toolbar');
           expect(ionToolbar).toHaveComputedStyle({ 'padding-top': safeAreaTop });
@@ -625,7 +561,7 @@ describe('ModalHelper', () => {
         });
 
         it('drawer should respect iOS safe-area', async () => {
-          await openOverlay({ flavor: 'drawer', title: 'Drawer', component: undefined });
+          await openDrawer();
 
           const expectedPaddingTop = `${parseInt(size('m')) + parseInt(safeAreaTop)}px`;
           expect(ionModal).toHaveComputedStyle({ 'padding-top': expectedPaddingTop });
@@ -633,7 +569,7 @@ describe('ModalHelper', () => {
         });
 
         it('drawer toolbar should not have additional padding', async () => {
-          await openOverlay({ flavor: 'drawer', title: 'Drawer', component: undefined });
+          await openDrawer();
 
           const ionToolbar = ionModal.querySelector('ion-header > ion-toolbar');
           expect(ionToolbar).toHaveComputedStyle({ 'padding-top': '0px' });
