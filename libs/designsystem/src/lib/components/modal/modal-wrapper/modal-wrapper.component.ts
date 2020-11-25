@@ -495,10 +495,17 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
         this.renderer.removeClass(entry.target, 'full-height');
       }
     };
+
+    // Set explicit viewport root if within iframe:
+    const root = this.windowRef.frameElement
+      ? (this.windowRef.document as any) // Cast to `any` as Typescript lib.d.ts doesnt support Document type yet
+      : undefined;
     const options: IntersectionObserverInit = {
       rootMargin: '0px 0px -1px 0px', // `bottom: -1px` allows checking when the modal bottom is touching the viewport
+      root,
       threshold: [0.99, 1],
     };
+
     return new IntersectionObserver(callback, options);
   }
 
