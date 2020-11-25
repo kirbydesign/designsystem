@@ -2,10 +2,12 @@ import { Injectable } from '@angular/core';
 import { Animation, AnimationBuilder, AnimationController } from '@ionic/angular';
 
 import { KirbyAnimation } from '../../../animation/kirby-animation';
+import { DesignTokenHelper } from '../../../helpers';
+import { WindowRef } from '../../../types';
 
 @Injectable({ providedIn: 'root' })
 export class ModalAnimationBuilderService {
-  constructor(private animationCtrl: AnimationController) {}
+  constructor(private animationCtrl: AnimationController, private windowRef: WindowRef) {}
 
   private readonly easingEnter = KirbyAnimation.Easing.modal.enter;
   private readonly easingLeave = KirbyAnimation.Easing.modal.exit;
@@ -13,6 +15,11 @@ export class ModalAnimationBuilderService {
   private readonly SwipeToCloseDefaults = {
     MIN_PRESENTING_SCALE: 0.93,
   };
+
+  private isPhabletOrBigger() {
+    const query = `(min-width: ${DesignTokenHelper.breakpoints.medium})`;
+    return this.windowRef.matchMedia(query).matches;
+  }
 
   public enterAnimation(currentBackdrop?: HTMLIonBackdropElement): AnimationBuilder {
     return (baseEl: HTMLElement, presentingEl?: HTMLElement): Animation => {
@@ -47,7 +54,7 @@ export class ModalAnimationBuilderService {
       }
 
       if (presentingEl) {
-        const isMobile = window.innerWidth < 768;
+        const isMobile = !this.isPhabletOrBigger();
         const hasCardModal =
           presentingEl.tagName === 'ION-MODAL' &&
           (presentingEl as HTMLIonModalElement).presentingElement !== undefined;
@@ -173,7 +180,7 @@ export class ModalAnimationBuilderService {
       }
 
       if (presentingEl) {
-        const isMobile = window.innerWidth < 768;
+        const isMobile = !this.isPhabletOrBigger();
         const hasCardModal =
           presentingEl.tagName === 'ION-MODAL' &&
           (presentingEl as HTMLIonModalElement).presentingElement !== undefined;
