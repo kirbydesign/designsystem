@@ -285,13 +285,13 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     this.setKeyboardVisibility(0);
   }
 
-  private isTabletOrBigger() {
+  private isPhabletOrBigger() {
     const query = `(min-width: ${DesignTokenHelper.breakpoints.medium})`;
     return this.windowRef.matchMedia(query).matches;
   }
 
   private toggleContentMaxHeight(freeze: boolean) {
-    const shouldToggleMaxHeight = this.config.flavor === 'modal' && this.isTabletOrBigger();
+    const shouldToggleMaxHeight = this.config.flavor === 'modal' && this.isPhabletOrBigger();
     if (!shouldToggleMaxHeight) return;
     const style = 'max-height';
     const contentElement = this.ionContentElement.nativeElement;
