@@ -45,14 +45,14 @@ kirby-card {
     transform: rotate(-90deg) translateY(-#{$border-radius + size('xs')});
     transform-origin: top right;
     padding: size('xxs');
-    --border-color: transparent;
+    --kirby-border-color: transparent;
     --text-align: center;
 
     @include media('>=medium') {
       transform: translateX(40%);
       padding: size('s');
       --text-align: initial;
-      --border-color: initial;
+      --kirby-border-color: initial;
     }
 
     &:hover,
@@ -61,7 +61,7 @@ kirby-card {
       transform: none;
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
-      --border-color: initial;
+      --kirby-border-color: initial;
     }
   }
 }

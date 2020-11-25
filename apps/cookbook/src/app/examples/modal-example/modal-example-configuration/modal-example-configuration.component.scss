@@ -4,7 +4,7 @@
   display: flex;
 
   fieldset {
-    border: 1px solid var(--border-color, get-color('medium'));
+    border: 1px solid var(--kirby-border-color, get-color('medium'));
 
     legend {
       color: get-text-color('semi-dark');
