@@ -106,6 +106,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     private componentFactoryResolver: ComponentFactoryResolver,
     private windowRef: WindowRef
   ) {
+    this.setViewportHeight();
     this.observeViewportResize();
   }
 
@@ -123,7 +124,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
 
   private initializeSizing() {
     this.setInitialModalSize();
-    this.setScrollElementSize();
+    this.patchScrollElementSize();
     this.observeHeaderResize();
     this.observeModalFullHeight();
   }
@@ -155,10 +156,19 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     this.renderer.addClass(this.ionModalElement, this.config.size || this.defaultSize);
   }
 
-  private setScrollElementSize(): void {
+  private patchScrollElementSize(): void {
+    const supportsCssShadowParts = 'part' in HTMLElement.prototype;
+    if (supportsCssShadowParts) return;
     this.ionContent.getScrollElement().then((scrollElement) => {
       this.renderer.setStyle(scrollElement, 'height', '100%');
       this.renderer.setStyle(scrollElement, 'position', 'relative');
+      if (this.config.flavor === 'drawer') {
+        this.renderer.setStyle(
+          scrollElement,
+          'transition',
+          'padding-bottom ' + DesignTokenHelper.softKeyboardTransitionLeave
+        );
+      }
     });
   }
 
@@ -275,13 +285,13 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     this.setKeyboardVisibility(0);
   }
 
-  private isTabletOrBigger() {
+  private isPhabletOrBigger() {
     const query = `(min-width: ${DesignTokenHelper.breakpoints.medium})`;
     return this.windowRef.matchMedia(query).matches;
   }
 
   private toggleContentMaxHeight(freeze: boolean) {
-    const shouldToggleMaxHeight = this.isTabletOrBigger();
+    const shouldToggleMaxHeight = this.config.flavor === 'modal' && this.isPhabletOrBigger();
     if (!shouldToggleMaxHeight) return;
     const style = 'max-height';
     const contentElement = this.ionContentElement.nativeElement;
@@ -325,12 +335,12 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   }
 
   private setKeyboardOverlap(keyboardHeight: number) {
+    this.toggleCssClass(this.elementRef.nativeElement, 'keyboard-visible', keyboardHeight > 0);
     const keyboardOverlap = this.getKeyboardOverlap(keyboardHeight, this.elementRef.nativeElement);
     let snapFooterToKeyboard = false;
     const embeddedFooterElement = this.getEmbeddedFooterElement();
     if (embeddedFooterElement) {
       this.setCssVar(embeddedFooterElement, '--keyboard-offset', `${keyboardOverlap}px`);
-      this.toggleCssClass(embeddedFooterElement, 'keyboard-visible', keyboardHeight > 0);
       snapFooterToKeyboard = embeddedFooterElement.classList.contains('snap-to-keyboard');
     }
 
@@ -355,6 +365,16 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
         this.blurActiveElement();
       }
     }
+  }
+
+  @HostListener('window:resize')
+  _onWindowResize() {
+    this.setViewportHeight();
+  }
+
+  private setViewportHeight() {
+    const vh = this.windowRef.innerHeight * 0.01;
+    this.setCssVar(this.elementRef.nativeElement, '--vh', `${vh}px`);
   }
 
   private observeViewportResize() {
@@ -475,10 +495,17 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
         this.renderer.removeClass(entry.target, 'full-height');
       }
     };
+
+    // Set explicit viewport root if within iframe:
+    const root = this.windowRef.frameElement
+      ? (this.windowRef.document as any) // Cast to `any` as Typescript lib.d.ts doesnt support Document type yet
+      : undefined;
     const options: IntersectionObserverInit = {
       rootMargin: '0px 0px -1px 0px', // `bottom: -1px` allows checking when the modal bottom is touching the viewport
+      root,
       threshold: [0.99, 1],
     };
+
     return new IntersectionObserver(callback, options);
   }
 

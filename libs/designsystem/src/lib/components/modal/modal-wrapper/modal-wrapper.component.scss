@@ -2,22 +2,53 @@
 
 // Global modal styling can be found at scss/base/_ionic.scss
 
+@mixin contain-content() {
+  padding-top: 0;
+  position: relative;
+  contain: inherit;
+  min-height: Min(var(--min-height), calc(var(--vh100) - var(--kirby-modal-padding-top, 0px)));
+
+  ion-content {
+    contain: content;
+    max-height: calc(
+      var(--vh100) - var(--kirby-modal-padding-top, 0px) - var(--header-height) -
+        var(--footer-height)
+    );
+
+    &::part(scroll) {
+      height: '100%';
+      position: relative;
+    }
+  }
+
+  &.drawer {
+    ion-content::part(scroll) {
+      transition: padding-bottom $soft-keyboard-transition-leave;
+    }
+
+    &.keyboard-visible {
+      ion-content::part(scroll) {
+        transition: padding-bottom $soft-keyboard-transition-enter;
+      }
+    }
+  }
+}
+
 :host {
+  --vh100: var(--vh, 1vh) * 100; /// Fixes an issue with vh units on iOS Safari
   --header-height: 0px;
   --footer-height: 0px;
   @include media('>=medium') {
-    &:not(.drawer) {
-      padding-top: 0;
-      position: relative;
-      contain: inherit;
-      min-height: Min(var(--min-height), calc(100vh - var(--kirby-modal-padding-top, 0px)));
+    @include contain-content();
+  }
 
-      ion-content {
-        contain: content;
-        max-height: calc(
-          100vh - var(--kirby-modal-padding-top, 0px) - var(--header-height) - var(--footer-height)
-        );
-      }
+  &.drawer {
+    @include contain-content();
+    // Prevent iOS safe-area padding-top on drawer flavor
+    // as this is already applied on the top-level modal itself
+    // in /scss/_global-styles.scss:
+    ion-header ion-toolbar:first-of-type {
+      padding-top: 0;
     }
   }
   padding-top: size('s');
@@ -31,18 +62,9 @@ ion-header ion-toolbar {
 
 // Ensure iOS safe-area padding-top on default/modal flavor
 // when opened on presenting element (gets .modal-card class):
-:host-context(ion-modal.modal-card) {
+:host-context(ion-modal.modal-card:not(.kirby-drawer)) {
   ion-header ion-toolbar:first-of-type {
-    padding-top: var(--ion-safe-area-top, 0);
-  }
-}
-
-// Prevent iOS safe-area padding-top on drawer flavor
-// as this is already applied on the top-level modal itself
-// in /scss/_global-styles.scss:
-:host(.drawer) {
-  ion-header ion-toolbar:first-of-type {
-    padding-top: 0;
+    padding-top: var(--kirby-safe-area-top, 0px);
   }
 }
 

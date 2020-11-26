@@ -68,6 +68,8 @@ export class TestHelper {
   public static screensize = {
     phonesmall: { width: '320px', height: '568px' },
     phone: { width: '375px', height: '667px' },
+    phablet: { width: '575px', height: '767px' },
+    'phablet-landscape': { width: '767px', height: '575px' },
     tablet: { width: '768px', height: '1024px' },
     desktop: { width: '1024px', height: '1366px' },
   };
@@ -135,3 +137,5 @@ export class TestHelper {
     return new Promise((resolve) => setTimeout(resolve, timeoutInMs));
   }
 }
+
+export type ScreenSize = keyof typeof TestHelper.screensize;

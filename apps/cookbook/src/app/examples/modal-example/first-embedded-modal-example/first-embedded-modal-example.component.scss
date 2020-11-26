@@ -1,8 +1,82 @@
 @import './libs/designsystem/src/lib/scss/utils';
 
-kirby-modal-footer label {
-  font-size: font-size('xs');
-  position: relative;
-  top: -4px;
-  padding-left: 10px;
+.example-properties {
+  display: none;
+
+  @include media('>=medium') {
+    display: unset;
+  }
+
+  dl {
+    display: grid;
+    grid-template: auto / auto 1fr;
+
+    dt {
+      padding-right: size('xxxs');
+    }
+
+    dd {
+      margin: 0;
+      font-style: italic;
+    }
+  }
+}
+
+kirby-card {
+  &.nested-modal-configuration {
+    margin-top: size('l');
+    margin-bottom: size('l');
+    cookbook-modal-example-configuration {
+      margin-top: size('m');
+    }
+  }
+
+  &.current-modal-configuration {
+    position: fixed;
+    z-index: z('default') + 1;
+    top: var(--header-height);
+    right: 0;
+    margin-top: $border-radius;
+    font-size: font-size('xs');
+    opacity: 0.5;
+    transition-property: transform, border-radius;
+    transition-duration: get-transition-duration('short');
+    transition-timing-function: get-transition-easing('enter-exit');
+    transform: rotate(-90deg) translateY(-#{$border-radius + size('xs')});
+    transform-origin: top right;
+    padding: size('xxs');
+    --kirby-border-color: transparent;
+    --text-align: center;
+
+    @include media('>=medium') {
+      transform: translateX(40%);
+      padding: size('s');
+      --text-align: initial;
+      --kirby-border-color: initial;
+    }
+
+    &:hover,
+    &:active {
+      opacity: unset;
+      transform: none;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      --kirby-border-color: initial;
+    }
+  }
+}
+
+kirby-modal-footer {
+  button {
+    flex-grow: 1;
+  }
+
+  kirby-checkbox {
+    padding-right: size('xxxs');
+  }
+
+  label {
+    font-size: font-size('xs');
+    cursor: pointer;
+  }
 }

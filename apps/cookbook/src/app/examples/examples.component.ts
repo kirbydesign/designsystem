@@ -56,15 +56,9 @@ export class ExamplesComponent {
     this.keyboardIsShowing = false;
   }
 
-  @HostListener('window:kirbyToggleDummyKeyboard')
-  _onToggleDummyKeyboard() {
-    setTimeout(() => {
-      this.showDummyKeyboard = !this.showDummyKeyboard;
-      const sessionKey = 'kirby-cookbook-show-dummy-keyboard';
-      this.showDummyKeyboard
-        ? this.window.sessionStorage.setItem(sessionKey, 'true')
-        : this.window.sessionStorage.removeItem(sessionKey);
-    });
+  @HostListener('window:kirbyToggleDummyKeyboard', ['$event.detail'])
+  _onToggleDummyKeyboard(show: boolean) {
+    this.showDummyKeyboard = show;
   }
 
   @HostListener('document:focusin', ['$event.target'])

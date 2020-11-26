@@ -1,0 +1,54 @@
+<fieldset>
+  <legend>Configuration</legend>
+  <label *ngIf="showDummyKeyboard !== undefined" (click)="showDummyKeyboard = !showDummyKeyboard">
+    <kirby-checkbox
+      [checked]="showDummyKeyboard"
+      (checkedChange)="toggleDummyKeyboard()"
+    ></kirby-checkbox
+    >Show dummy keyboard</label
+  >
+  <label *ngIf="showFooter !== undefined" (click)="toggleShowFooter((showFooter = !showFooter))"
+    ><kirby-checkbox [checked]="showFooter"></kirby-checkbox>Show footer</label
+  >
+  <label
+    *ngIf="disableScroll !== undefined"
+    (click)="toggleDisableScroll((disableScroll = !disableScroll))"
+    ><kirby-checkbox [checked]="disableScroll"></kirby-checkbox>Disable scroll</label
+  >
+  <label
+    *ngIf="showDummyContent !== undefined"
+    (click)="toggleShowDummyContent((showDummyContent = !showDummyContent))"
+  >
+    <kirby-checkbox [checked]="showDummyContent"></kirby-checkbox>Show dummy content</label
+  >
+  <label
+    *ngIf="delayLoadDummyContent !== undefined"
+    (click)="
+      showDummyContent &&
+        toggleDelayLoadDummyContent((delayLoadDummyContent = !delayLoadDummyContent))
+    "
+    class="indent"
+    [class.disabled]="!showDummyContent"
+  >
+    <kirby-checkbox
+      [checked]="delayLoadDummyContent"
+      [disabled]="!showDummyContent"
+    ></kirby-checkbox
+    >Delay load modal content</label
+  >
+  <label
+    *ngIf="loadAdditionalContent !== undefined"
+    (click)="
+      showDummyContent &&
+        toggleLoadAdditionalContent((loadAdditionalContent = !loadAdditionalContent))
+    "
+    class="indent"
+    [class.disabled]="!showDummyContent"
+  >
+    <kirby-checkbox
+      [checked]="loadAdditionalContent"
+      [disabled]="!showDummyContent"
+    ></kirby-checkbox
+    >Delay load additional modal content</label
+  >
+</fieldset>

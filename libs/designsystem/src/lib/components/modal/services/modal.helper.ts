@@ -62,7 +62,7 @@ export class ModalHelper {
     ModalHelper.presentingElement = element;
   }
 
-  private async getPresentingElement(flavor?: string) {
+  private async getPresentingElement(flavor?: 'modal' | 'drawer' | 'compact') {
     let modalPresentingElement: HTMLElement = undefined;
     if (!flavor || flavor === 'modal') {
       const topMostModal = await this.ionicModalController.getTop();
