@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
-import { ModalConfig } from '../modal-wrapper/config/modal-config';
+import { ModalConfig, ModalFlavor } from '../modal-wrapper/config/modal-config';
 import { ModalWrapperComponent } from '../modal-wrapper/modal-wrapper.component';
 import { ModalCompactWrapperComponent } from '../modal-wrapper/compact/modal-compact-wrapper.component';
 import { Overlay } from './modal.interfaces';
@@ -62,7 +62,7 @@ export class ModalHelper {
     ModalHelper.presentingElement = element;
   }
 
-  private async getPresentingElement(flavor?: 'modal' | 'drawer' | 'compact') {
+  private async getPresentingElement(flavor?: ModalFlavor) {
     let modalPresentingElement: HTMLElement = undefined;
     if (!flavor || flavor === 'modal') {
       const topMostModal = await this.ionicModalController.getTop();

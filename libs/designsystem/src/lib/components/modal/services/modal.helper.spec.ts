@@ -9,7 +9,7 @@ import { WindowRef } from '../../../types/window-ref';
 import { ScreenSize, TestHelper } from '../../../testing/test-helper';
 import { IconComponent } from '../../icon';
 import { ModalFooterComponent } from '../footer/modal-footer.component';
-import { ModalConfig } from '../modal-wrapper/config/modal-config';
+import { ModalConfig, ModalFlavor } from '../modal-wrapper/config/modal-config';
 import { ModalWrapperComponent } from '../modal-wrapper/modal-wrapper.component';
 import { ModalCompactWrapperComponent } from '../modal-wrapper/compact/modal-compact-wrapper.component';
 import { ModalHelper } from './modal.helper';
@@ -390,8 +390,7 @@ describe('ModalHelper', () => {
         });
 
         describe(`when modal is opened on top of another modal`, () => {
-          type modalFlavorType = 'modal' | 'drawer' | 'compact';
-          const modalFlavors: modalFlavorType[] = ['modal', 'drawer', 'compact'];
+          const modalFlavors: ModalFlavor[] = ['modal', 'drawer', 'compact'];
           modalFlavors.forEach((firstFlavor) => {
             describe(`when first modal has '${firstFlavor}' flavor`, () => {
               beforeEach(async () => {
@@ -578,8 +577,7 @@ describe('ModalHelper', () => {
       });
 
       describe(`when modal is opened on top of another modal`, () => {
-        type modalFlavorType = 'modal' | 'drawer' | 'compact';
-        const modalFlavors: modalFlavorType[] = ['modal', 'drawer', 'compact'];
+        const modalFlavors: ModalFlavor[] = ['modal', 'drawer', 'compact'];
         modalFlavors.forEach((firstFlavor) => {
           describe(`when first modal has '${firstFlavor}' flavor`, () => {
             beforeEach(async () => {
