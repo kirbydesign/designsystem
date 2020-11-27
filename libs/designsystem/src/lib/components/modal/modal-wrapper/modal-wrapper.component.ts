@@ -122,7 +122,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   }
 
   private initializeSizing() {
-    this.setInitialModalSize();
+    if (this.config.size === 'full-height') return;
     this.patchScrollElementSize();
     this.observeHeaderResize();
     this.observeModalFullHeight();

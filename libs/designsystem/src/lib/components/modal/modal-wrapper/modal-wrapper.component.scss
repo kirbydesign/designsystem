@@ -34,16 +34,22 @@
   }
 }
 
-:host {
-  --vh100: var(--vh, 1vh) * 100; /// Fixes an issue with vh units on iOS Safari
-  --header-height: 0px;
-  --footer-height: 0px;
+:host-context(ion-modal:not(.full-height)) {
   @include media('>=medium') {
     @include contain-content();
   }
 
   &.drawer {
     @include contain-content();
+  }
+}
+
+:host {
+  --vh100: var(--vh, 1vh) * 100; /// Fixes an issue with vh units on iOS Safari
+  --header-height: 0px;
+  --footer-height: 0px;
+
+  &.drawer {
     // Prevent iOS safe-area padding-top on drawer flavor
     // as this is already applied on the top-level modal itself
     // in /scss/_global-styles.scss:
