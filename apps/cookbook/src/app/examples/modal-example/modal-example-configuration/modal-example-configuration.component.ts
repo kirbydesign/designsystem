@@ -26,6 +26,9 @@ export class ModalExampleConfigurationComponent {
   @Input() disableScroll: boolean;
   @Output() disableScrollChange = new EventEmitter<boolean>();
 
+  @Input() openFullHeight: boolean;
+  @Output() openFullHeightChange = new EventEmitter<boolean>();
+
   constructor(private window: WindowRef, zone: NgZone) {}
 
   toggleDummyKeyboard() {
@@ -71,5 +74,10 @@ export class ModalExampleConfigurationComponent {
   toggleDisableScroll(show: boolean) {
     this.disableScroll = show;
     this.disableScrollChange.emit(this.disableScroll);
+  }
+
+  toggleOpenFullHeight(show: boolean) {
+    this.openFullHeight = show;
+    this.openFullHeightChange.emit(this.openFullHeight);
   }
 }
