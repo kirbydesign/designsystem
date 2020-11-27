@@ -57,6 +57,8 @@ import { FlagExampleComponent } from './flag-example/flag-example.component';
 import { ToggleButtonExampleComponent } from './toggle-button-example/toggle-button-example.component';
 import { SlidesExampleComponent } from './slides-example/slides-example.component';
 
+import { TextLinkExampleComponent } from './text-link-example/text-link-example.component';
+
 export const routes: Routes = [
   {
     path: '',
@@ -339,5 +341,9 @@ export const routes: Routes = [
   {
     path: 'slides',
     component: SlidesExampleComponent,
+  },
+  {
+    path: 'text-link',
+    component: TextLinkExampleComponent,
   },
 ];

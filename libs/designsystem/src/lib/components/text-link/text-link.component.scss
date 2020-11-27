@@ -1,0 +1,37 @@
+@import '../../scss/utils';
+@import '../icon/icon.component.shared';
+
+:host {
+  --kirby-icon-font-size: #{icon-font-size('sm')};
+
+  a {
+    font-size: font-size('n');
+    line-height: line-height('n');
+    color: get-text-color('black');
+  }
+  cursor: pointer;
+
+  kirby-icon {
+    padding-left: size('xxxs');
+    padding-right: size('s');
+    vertical-align: middle;
+  }
+  &.sm {
+    a {
+      font-size: font-size('s');
+      line-height: line-height('s');
+    }
+  }
+  &.xs {
+    --kirby-icon-font-size: #{icon-font-size('xs')};
+
+    a {
+      font-size: font-size('xs');
+      line-height: line-height('xs');
+    }
+    kirby-icon {
+      padding-left: size('xxxxs');
+      padding-right: size('s');
+    }
+  }
+}
