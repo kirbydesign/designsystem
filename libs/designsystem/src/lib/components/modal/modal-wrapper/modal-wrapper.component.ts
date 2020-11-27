@@ -366,7 +366,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   }
 
   private setViewportHeight() {
-    const vh = this.windowRef.innerHeight * 0.01;
+    const vh = (this.windowRef.innerHeight * 0.01).toFixed(2);
     this.setCssVar(this.elementRef.nativeElement, '--vh', `${vh}px`);
   }
 
