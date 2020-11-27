@@ -74,7 +74,6 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   readonly didPresent = this.ionModalDidPresent.toPromise();
   private readonly ionModalWillDismiss = new Subject<void>();
   readonly willClose = this.ionModalWillDismiss.toPromise();
-  private readonly defaultSize = 'medium';
   private _mutationObserver: MutationObserver;
   private get mutationObserver(): MutationObserver {
     if (!this._mutationObserver) {
@@ -148,12 +147,6 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
       this.routerOutlet.activateWith(route, this.componentFactoryResolver);
       this.checkForEmbeddedElements();
     });
-  }
-
-  private setInitialModalSize() {
-    if (this.config.flavor !== 'modal') return;
-    if (!this.ionModalElement) return;
-    this.renderer.addClass(this.ionModalElement, this.config.size || this.defaultSize);
   }
 
   private patchScrollElementSize(): void {
