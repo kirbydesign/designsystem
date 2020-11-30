@@ -13,8 +13,6 @@ import { AccordionComponent } from '@kirbydesign/designsystem';
     },
   ],
 })
-export class MockAccordionComponent {
-  @Input() title: string;
-}
+export class MockAccordionComponent {}
 
 // #endregion
