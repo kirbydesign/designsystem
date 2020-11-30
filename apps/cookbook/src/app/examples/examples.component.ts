@@ -68,7 +68,11 @@ export class ExamplesComponent {
       const ionKeyboardDidShowEvent = new CustomEvent('ionKeyboardDidShow', {
         detail: { keyboardHeight: this.keyboardHeight },
       });
-      setTimeout(() => this.window.dispatchEvent(ionKeyboardDidShowEvent), 100);
+      const keyboardDidShowDelayInMs = 100;
+      setTimeout(
+        () => this.window.dispatchEvent(ionKeyboardDidShowEvent),
+        keyboardDidShowDelayInMs
+      );
     }
   }
 
