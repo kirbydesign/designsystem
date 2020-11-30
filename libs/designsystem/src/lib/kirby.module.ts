@@ -81,6 +81,7 @@ import { WindowRef } from './types/window-ref';
 import { ToggleButtonModule } from './components/toggle-button/toggle-button.module';
 import { SlideDirective, SlidesComponent } from './components/slides/slides.component';
 import { AccordionComponent } from './components/accordion/accordion.component';
+import { AccordionItemComponent } from './components/accordion/accordion-item.component';
 
 const exportedDeclarations = [
   CardComponent,
@@ -132,6 +133,7 @@ const exportedDeclarations = [
   SlidesComponent,
   SlideDirective,
   AccordionComponent,
+  AccordionItemComponent,
 ];
 
 const declarations = [

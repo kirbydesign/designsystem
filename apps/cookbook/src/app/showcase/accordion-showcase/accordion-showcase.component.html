@@ -1,26 +1,12 @@
 <div class="example">
   <h2>Accordion</h2>
-  <cookbook-example-viewer [html]="severalExample.template">
-    <cookbook-accordion-example-several #severalExample></cookbook-accordion-example-several>
+  <cookbook-example-viewer [html]="accordionExample.template">
+    <cookbook-accordion-example #accordionExample></cookbook-accordion-example>
   </cookbook-example-viewer>
 
   <h2>Accordion inside a card</h2>
-  <cookbook-example-viewer [html]="severalCardExample.template">
-    <cookbook-accordion-example-several-card
-      #severalCardExample
-    ></cookbook-accordion-example-several-card>
-  </cookbook-example-viewer>
-
-  <h2>A single accordion</h2>
-  <cookbook-example-viewer [html]="singleExample.template">
-    <cookbook-accordion-example-single #singleExample></cookbook-accordion-example-single>
-  </cookbook-example-viewer>
-
-  <h2>A single accordion inside a card</h2>
-  <cookbook-example-viewer [html]="singleCardExample.template">
-    <cookbook-accordion-example-single-card
-      #singleCardExample
-    ></cookbook-accordion-example-single-card>
+  <cookbook-example-viewer [html]="accordionCardExample.template">
+    <cookbook-accordion-example-card #accordionCardExample></cookbook-accordion-example-card>
   </cookbook-example-viewer>
 
   <h2>Properties:</h2>

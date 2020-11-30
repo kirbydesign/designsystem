@@ -1,0 +1,17 @@
+<ng-container>
+  <div
+    (click)="isExpanded = !isExpanded"
+    class="header"
+    role="button"
+    [class.expanded]="isExpanded"
+    [attr.aria-expanded]="isExpanded"
+    [attr.aria-controls]="_contentId"
+    [id]="_titleId"
+  >
+    <div class="title">{{ title }}</div>
+    <kirby-icon name="arrow-down"></kirby-icon>
+  </div>
+  <div class="content" role="region" [attr.aria-labelledby]="_titleId" [id]="_contentId">
+    <ng-content></ng-content>
+  </div>
+</ng-container>

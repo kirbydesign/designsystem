@@ -3,17 +3,10 @@ import { CommonModule } from '@angular/common';
 
 import { KirbyModule } from '@kirbydesign/designsystem';
 
-import { AccordionExampleSingleComponent } from './examples/single';
-import { AccordionExampleSeveralComponent } from './examples/several';
-import { AccordionExampleSingleCardComponent } from './examples/single-card';
-import { AccordionExampleSeveralCardComponent } from './examples/several-card';
+import { AccordionExampleComponent } from './examples/accordion';
+import { AccordionExampleCardComponent } from './examples/accordion-card';
 
-const COMPONENT_DECLARATIONS = [
-  AccordionExampleSingleComponent,
-  AccordionExampleSeveralComponent,
-  AccordionExampleSingleCardComponent,
-  AccordionExampleSeveralCardComponent,
-];
+const COMPONENT_DECLARATIONS = [AccordionExampleComponent, AccordionExampleCardComponent];
 
 @NgModule({
   imports: [CommonModule, KirbyModule],
