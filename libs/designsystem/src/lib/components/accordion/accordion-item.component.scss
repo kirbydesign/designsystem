@@ -39,7 +39,7 @@ $padding: size('s');
   }
 }
 
-:host-context(.accordion) {
+:host-context(kirby-accordion) {
   &:not(:first-child) {
     border-top: none;
   }

@@ -80,7 +80,7 @@ import { IconRegistryService } from './components/icon/icon-registry.service';
 import { WindowRef } from './types/window-ref';
 import { ToggleButtonModule } from './components/toggle-button/toggle-button.module';
 import { SlideDirective, SlidesComponent } from './components/slides/slides.component';
-import { AccordionComponent } from './components/accordion/accordion.component';
+import { AccordionDirective } from './components/accordion/accordion.directive';
 import { AccordionItemComponent } from './components/accordion/accordion-item.component';
 
 const exportedDeclarations = [
@@ -132,7 +132,7 @@ const exportedDeclarations = [
   FlagComponent,
   SlidesComponent,
   SlideDirective,
-  AccordionComponent,
+  AccordionDirective,
   AccordionItemComponent,
 ];
 
