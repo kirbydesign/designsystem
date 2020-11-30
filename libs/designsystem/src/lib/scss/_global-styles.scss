@@ -82,6 +82,16 @@ ion-modal.kirby-overlay {
       }
     }
 
+    @include media('<medium') {
+      &:not(.kirby-drawer):not(.kirby-modal-compact) {
+        --height: 100%;
+      }
+    }
+
+    &:not(.kirby-modal-compact).full-height {
+      --height: 100%;
+    }
+
     &.modal-card:not(.kirby-drawer) {
       .modal-wrapper {
         @include media('<medium') {
@@ -96,10 +106,6 @@ ion-modal.kirby-overlay {
           border-radius: $border-radius;
         }
       }
-    }
-
-    &:not(.kirby-modal-compact).full-height {
-      --height: 100%;
     }
 
     @include media('>=medium') {
