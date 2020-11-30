@@ -160,6 +160,10 @@ export const routes: Routes = [
           },
         ],
       },
+      {
+        path: 'form-field',
+        component: FormFieldExampleComponent,
+      },
     ],
   },
   {
@@ -315,10 +319,6 @@ export const routes: Routes = [
   {
     path: 'toolbar',
     component: ToolbarExampleComponent,
-  },
-  {
-    path: 'form-field',
-    component: FormFieldExampleComponent,
   },
   {
     path: 'fab-sheet',
