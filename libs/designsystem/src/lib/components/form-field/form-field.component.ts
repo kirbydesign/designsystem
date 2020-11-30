@@ -19,6 +19,7 @@ import { InputCounterComponent } from './input-counter/input-counter.component';
 export class FormFieldComponent implements AfterContentChecked, OnDestroy {
   private isRegistered = false;
   private element: HTMLElement;
+  private focusElement: HTMLElement;
 
   @Input() label: string;
   @Input() message: string;
@@ -27,6 +28,7 @@ export class FormFieldComponent implements AfterContentChecked, OnDestroy {
 
   constructor(elementRef: ElementRef<HTMLElement>) {
     this.element = elementRef.nativeElement;
+    this.focusElement = this.element.closest('[scroll-into-view]') || this.element;
   }
 
   ngAfterContentChecked(): void {
@@ -39,7 +41,7 @@ export class FormFieldComponent implements AfterContentChecked, OnDestroy {
       this.isRegistered = true;
       document.dispatchEvent(
         new CustomEvent('ionInputDidLoad', {
-          detail: this.element,
+          detail: this.focusElement,
         })
       );
     }
@@ -48,7 +50,7 @@ export class FormFieldComponent implements AfterContentChecked, OnDestroy {
   ngOnDestroy(): void {
     document.dispatchEvent(
       new CustomEvent('ionInputDidUnload', {
-        detail: this.element,
+        detail: this.focusElement,
       })
     );
   }
