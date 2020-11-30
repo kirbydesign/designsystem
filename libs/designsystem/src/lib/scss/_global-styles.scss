@@ -71,6 +71,7 @@ ion-modal.kirby-overlay {
     }
 
     &.kirby-drawer {
+      --min-height: #{$drawer-default-height};
       --kirby-modal-padding-top: calc(var(--kirby-safe-area-top, 0px) + #{size('m')});
       padding-top: var(--kirby-modal-padding-top);
       align-items: flex-end;
@@ -79,6 +80,16 @@ ion-modal.kirby-overlay {
         border-top-left-radius: #{$border-radius};
         border-top-right-radius: #{$border-radius};
       }
+    }
+
+    @include media('<medium') {
+      &:not(.kirby-drawer):not(.kirby-modal-compact) {
+        --height: 100%;
+      }
+    }
+
+    &:not(.kirby-modal-compact).full-height {
+      --height: 100%;
     }
 
     &.modal-card:not(.kirby-drawer) {
@@ -122,6 +133,7 @@ ion-modal.kirby-overlay {
             --min-height: #{map-get($modal-heights, 'l')};
           }
 
+          &.full-height .modal-wrapper,
           .modal-wrapper.full-height {
             border-bottom-left-radius: 0;
             border-bottom-right-radius: 0;
@@ -130,7 +142,6 @@ ion-modal.kirby-overlay {
       }
 
       &.kirby-drawer {
-        --min-height: #{$drawer-default-height};
         --kirby-modal-padding-top: calc(
           var(--kirby-modal-padding-top-base) + #{get-drawer-additional-padding-top()}
         );

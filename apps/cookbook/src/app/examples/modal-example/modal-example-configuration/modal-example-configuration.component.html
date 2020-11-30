@@ -51,4 +51,9 @@
     ></kirby-checkbox
     >Delay load additional modal content</label
   >
+  <label
+    *ngIf="openFullHeight !== undefined"
+    (click)="toggleOpenFullHeight((openFullHeight = !openFullHeight))"
+    ><kirby-checkbox [checked]="openFullHeight"></kirby-checkbox>Open in full height</label
+  >
 </fieldset>
