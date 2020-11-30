@@ -17,6 +17,7 @@ const config = {
     [(showDummyContent)]="showDummyContent"
     [(delayLoadDummyContent)]="delayLoadDummyContent"
     [(loadAdditionalContent)]="loadAdditionalContent"
+    [(openFullHeight)]="openFullHeight"
   ></cookbook-modal-example-configuration>`,
   titleTemplate: `<kirby-page-title>My Modal Title</kirby-page-title>
  
@@ -180,6 +181,7 @@ export class ModalExampleDefaultComponent {
   showDummyContent = true;
   delayLoadDummyContent = true;
   loadAdditionalContent = false;
+  openFullHeight = false;
 
   constructor(private modalController: ModalController, private window: WindowRef) {}
 
@@ -188,6 +190,7 @@ export class ModalExampleDefaultComponent {
     const config: ModalConfig = {
       flavor,
       component: FirstEmbeddedModalExampleComponent,
+      size: this.openFullHeight ? 'full-height' : null,
       componentProps: {
         title,
         subtitle: 'Hello from the first embedded example component!',
@@ -203,6 +206,7 @@ export class ModalExampleDefaultComponent {
         delayLoadDummyContent: this.delayLoadDummyContent,
         loadAdditionalContent: this.loadAdditionalContent,
         disableScroll: false,
+        openFullHeight: this.openFullHeight,
       },
     };
     await this.modalController.showModal(config, this.onOverlayClose);

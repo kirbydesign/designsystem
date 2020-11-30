@@ -10,7 +10,7 @@
       <td *ngIf="columns.Name">
         <code>{{ prop.name }}</code>
       </td>
-      <td *ngIf="columns.Description">{{ prop.description }}</td>
+      <td *ngIf="columns.Description" class="description">{{ prop.description }}</td>
       <td *ngIf="columns.Type">
         <ng-container *ngIf="!prop.preserveInputValuesWhitespaces">
           <code>{{ prop.inputValues ? prop.inputValues.join(' | ') : '' }}</code>
