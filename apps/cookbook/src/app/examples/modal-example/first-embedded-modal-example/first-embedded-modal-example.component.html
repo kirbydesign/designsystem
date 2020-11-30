@@ -60,6 +60,15 @@
       ></cookbook-modal-example-configuration>
     </kirby-card>
     <div *ngIf="showDummyContent">
+      <kirby-form-field>
+        <input kirby-input placeholder="Focus me on device to scroll input into view" />
+      </kirby-form-field>
+      <div scroll-into-view>
+        <kirby-form-field>
+          <input kirby-input placeholder="Focus me on device to scroll wrapper into view" />
+        </kirby-form-field>
+        <button kirby-button attentionLevel="2">OK</button>
+      </div>
       <h4>The standard Lorem Ipsum passage, used since the 1500s</h4>
       <p>
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
