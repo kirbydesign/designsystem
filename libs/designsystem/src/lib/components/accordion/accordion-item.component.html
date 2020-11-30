@@ -11,7 +11,15 @@
     <div class="title">{{ title }}</div>
     <kirby-icon name="arrow-down"></kirby-icon>
   </div>
-  <div class="content" role="region" [attr.aria-labelledby]="_titleId" [id]="_contentId">
-    <ng-content></ng-content>
+  <div
+    class="content"
+    role="region"
+    [attr.aria-labelledby]="_titleId"
+    [id]="_contentId"
+    [@isExpanded]="isExpanded ? true : false"
+  >
+    <div class="content-body">
+      <ng-content></ng-content>
+    </div>
   </div>
 </ng-container>

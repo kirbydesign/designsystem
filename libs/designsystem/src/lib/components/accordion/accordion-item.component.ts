@@ -1,3 +1,4 @@
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 // Counter for generating unique element ids
@@ -8,6 +9,13 @@ let uniqueId = 0;
   templateUrl: './accordion-item.component.html',
   styleUrls: ['./accordion-item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('isExpanded', [
+      state('true', style({ height: '*', visibility: 'visible' })),
+      state('false', style({ height: '0px', visibility: 'hidden' })),
+      transition('true <=> false', animate('0.2s')),
+    ]),
+  ],
 })
 export class AccordionItemComponent {
   @Input() title: string;

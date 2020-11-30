@@ -20,8 +20,13 @@ $padding: size('s');
 .title {
   flex-grow: 2;
 }
+.kirby-icon {
+  transition: transform get-transition-duration('quick');
+}
 .content {
-  display: none;
+  overflow: hidden;
+}
+.content-body {
   padding: 0 $padding $padding $padding;
 }
 
@@ -31,9 +36,6 @@ $padding: size('s');
   }
   .kirby-icon {
     transform: rotate(180deg);
-  }
-  + .content {
-    display: block;
   }
 }
 
