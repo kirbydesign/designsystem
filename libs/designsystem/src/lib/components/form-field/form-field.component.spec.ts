@@ -173,7 +173,15 @@ describe('FormFieldComponent', () => {
 
   describe('with slotted input', () => {
     describe('and no label', () => {
+      let dispatchEventSpy: jasmine.Spy;
+      let actualEvent: CustomEvent;
+
       beforeEach(() => {
+        dispatchEventSpy = spyOn(document, 'dispatchEvent').and.callFake((e: CustomEvent) => {
+          actualEvent = e;
+          return true;
+        });
+
         spectator = createHost(
           `<kirby-form-field>
              <input kirby-input/>
@@ -195,6 +203,20 @@ describe('FormFieldComponent', () => {
       it('should not render the input within a label', () => {
         const inputElement = spectator.queryHost('label input[kirby-input]');
         expect(inputElement).toBeNull();
+      });
+
+      it('should dispatch `ionInputDidLoad` event after content checked', () => {
+        spectator.detectChanges();
+        expect(dispatchEventSpy).toHaveBeenCalledWith(new CustomEvent('ionInputDidLoad'));
+        expect(actualEvent.type).toEqual('ionInputDidLoad');
+        expect(actualEvent.detail).toEqual(spectator.element);
+      });
+
+      it('should dispatch `ionInputDidUnload` event on destroy', () => {
+        spectator.fixture.destroy();
+        expect(dispatchEventSpy).toHaveBeenCalledWith(new CustomEvent('ionInputDidLoad'));
+        expect(actualEvent.type).toEqual('ionInputDidUnload');
+        expect(actualEvent.detail).toEqual(spectator.element);
       });
     });
 
@@ -313,6 +335,37 @@ describe('FormFieldComponent', () => {
           });
         });
       });
+    });
+  });
+
+  describe('when wrapped in `[scroll-into-view]`', () => {
+    let dispatchEventSpy: jasmine.Spy;
+    let actualEvent: CustomEvent;
+
+    beforeEach(() => {
+      dispatchEventSpy = spyOn(document, 'dispatchEvent').and.callFake((e: CustomEvent) => {
+        actualEvent = e;
+        return true;
+      });
+      spectator = createHost(`<div scroll-into-view>
+        <kirby-form-field>
+          <input kirby-input />
+        </kirby-form-field>
+      </div>`);
+    });
+
+    it('should dispatch `ionInputDidLoad` event after content checked', () => {
+      spectator.detectChanges();
+      expect(dispatchEventSpy).toHaveBeenCalledWith(new CustomEvent('ionInputDidLoad'));
+      expect(actualEvent.type).toEqual('ionInputDidLoad');
+      expect(actualEvent.detail).toEqual(spectator.hostElement.firstChild);
+    });
+
+    it('should dispatch `ionInputDidUnload` event on destroy', () => {
+      spectator.fixture.destroy();
+      expect(dispatchEventSpy).toHaveBeenCalledWith(new CustomEvent('ionInputDidUnload'));
+      expect(actualEvent.type).toEqual('ionInputDidUnload');
+      expect(actualEvent.detail).toEqual(spectator.hostElement.firstChild);
     });
   });
 });
