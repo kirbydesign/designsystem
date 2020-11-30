@@ -97,6 +97,10 @@ ion-modal.kirby-overlay {
       }
     }
 
+    &:not(.kirby-modal-compact).full-height {
+      --height: 100%;
+    }
+
     @include media('>=medium') {
       --width: #{$modal-max-width};
       --border-radius: #{$border-radius};
@@ -107,10 +111,6 @@ ion-modal.kirby-overlay {
         --kirby-modal-padding-top-base: #{size('xl')};
         --kirby-modal-padding-top: var(--kirby-modal-padding-top-base);
         padding-top: var(--kirby-modal-padding-top);
-
-        &.full-height {
-          --height: 100%;
-        }
 
         &:not(.kirby-drawer) {
           --min-height: #{$modal-default-height};
