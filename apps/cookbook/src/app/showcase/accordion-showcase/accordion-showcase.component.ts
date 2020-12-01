@@ -15,5 +15,11 @@ export class AccordionShowcaseComponent {
       defaultValue: 'null',
       inputValues: ['string'],
     },
+    {
+      name: 'isExpanded',
+      description: 'Should the content be initially shown',
+      defaultValue: 'false',
+      inputValues: ['boolean'],
+    },
   ];
 }

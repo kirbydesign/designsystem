@@ -19,8 +19,7 @@ let uniqueId = 0;
 })
 export class AccordionItemComponent {
   @Input() title: string;
-
-  isExpanded: boolean = false;
+  @Input() isExpanded: boolean = false;
 
   // IDs used for a11y labelling
   _titleId = `kirby-accordion-item-title-${++uniqueId}`;

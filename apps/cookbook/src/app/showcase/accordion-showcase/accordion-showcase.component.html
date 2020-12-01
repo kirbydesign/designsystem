@@ -4,9 +4,16 @@
     <cookbook-accordion-example #accordionExample></cookbook-accordion-example>
   </cookbook-example-viewer>
 
+  <h2>Accordion with an initially expanded item</h2>
+  <cookbook-example-viewer [html]="accordionExpandedExample.template">
+    <cookbook-accordion-expanded-example
+      #accordionExpandedExample
+    ></cookbook-accordion-expanded-example>
+  </cookbook-example-viewer>
+
   <h2>Accordion inside a card</h2>
   <cookbook-example-viewer [html]="accordionCardExample.template">
-    <cookbook-accordion-example-card #accordionCardExample></cookbook-accordion-example-card>
+    <cookbook-accordion-card-example #accordionCardExample></cookbook-accordion-card-example>
   </cookbook-example-viewer>
 
   <h2>Properties:</h2>

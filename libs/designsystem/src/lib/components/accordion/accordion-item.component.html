@@ -16,7 +16,7 @@
     role="region"
     [attr.aria-labelledby]="_titleId"
     [id]="_contentId"
-    [@isExpanded]="isExpanded ? true : false"
+    [@isExpanded]="!!isExpanded"
   >
     <div class="content-body">
       <ng-content></ng-content>

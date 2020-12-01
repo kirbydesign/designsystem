@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 const config = {
-  selector: 'cookbook-accordion-example-card',
+  selector: 'cookbook-accordion-card-example',
   template: `<kirby-card>
       <kirby-accordion>
         <kirby-accordion-item title="Title for accordion item 1">
@@ -24,6 +24,6 @@ const config = {
   selector: config.selector,
   template: config.template,
 })
-export class AccordionExampleCardComponent {
+export class AccordionCardExampleComponent {
   template: string = config.template;
 }
