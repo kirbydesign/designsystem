@@ -3,7 +3,7 @@
     <ion-title>{{ config.title }}</ion-title>
     <ng-container *ngIf="config.flavor === 'modal'">
       <ng-container
-        *ngComponentOutlet="config.component; injector: componentPropsInjector"
+        *ngComponentOutlet="config.modalHeaderStartSlot; injector: componentPropsInjector"
       ></ng-container>
     </ng-container>
     <ion-buttons slot="start" *ngIf="config.flavor === 'drawer'">
