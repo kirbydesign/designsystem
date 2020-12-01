@@ -1,0 +1,55 @@
+@import './libs/designsystem/src/lib/scss/utils';
+
+:host {
+  display: inline-block;
+}
+
+:host-context(kirby-modal-wrapper:not(.drawer)) {
+  kirby-card {
+    top: var(--header-height, 0);
+  }
+}
+
+fieldset {
+  border: 1px solid var(--kirby-border-color, get-color('medium'));
+
+  legend {
+    color: get-text-color('semi-dark');
+    text-align: var(--text-align, initial);
+  }
+}
+
+kirby-card {
+  position: fixed;
+  z-index: z('default') + 1;
+  top: 0;
+  right: 0;
+  margin-top: $border-radius;
+  font-size: font-size('xs');
+  opacity: 0.5;
+  transition-property: transform, border-radius;
+  transition-duration: get-transition-duration('short');
+  transition-timing-function: get-transition-easing('enter-exit');
+  transform: rotate(-90deg) translateY(-#{$border-radius + size('xs')});
+  transform-origin: top right;
+  padding: size('xxs');
+  --kirby-border-color: transparent;
+  --text-align: center;
+
+  @include media('>=medium') {
+    top: 0;
+    transform: translateX(40%);
+    padding: size('s');
+    --text-align: initial;
+    --kirby-border-color: initial;
+  }
+
+  &:hover,
+  &:active {
+    opacity: unset;
+    transform: none;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    --kirby-border-color: initial;
+  }
+}
