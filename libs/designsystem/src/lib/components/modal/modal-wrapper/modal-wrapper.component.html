@@ -1,6 +1,11 @@
 <ion-header (touchstart)="onHeaderTouchStart($event)">
   <ion-toolbar>
     <ion-title>{{ config.title }}</ion-title>
+    <ng-container *ngIf="config.flavor === 'modal'">
+      <ng-container
+        *ngComponentOutlet="config.component; injector: componentPropsInjector"
+      ></ng-container>
+    </ng-container>
     <ion-buttons slot="start" *ngIf="config.flavor === 'drawer'">
       <ng-container *ngTemplateOutlet="closeButton; context: { icon: 'arrow-down' }"></ng-container>
     </ion-buttons>
