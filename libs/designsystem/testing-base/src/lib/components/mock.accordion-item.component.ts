@@ -15,6 +15,7 @@ import { AccordionItemComponent } from '@kirbydesign/designsystem';
 })
 export class MockAccordionItemComponent {
   @Input() title: string;
+  @Input() isExpanded: boolean;
 }
 
 // #endregion
