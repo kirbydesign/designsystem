@@ -9,8 +9,8 @@ import {
   OnInit,
 } from '@angular/core';
 
-import { PlatformService } from '../../helpers';
-import { WindowRef } from '../../types';
+import { PlatformService } from '../../helpers/platform.service';
+import { WindowRef } from '../../types/window-ref';
 
 import { InputCounterComponent } from './input-counter/input-counter.component';
 

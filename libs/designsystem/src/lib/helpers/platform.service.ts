@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { WindowRef } from '../types';
+import { WindowRef } from '../types/window-ref';
 import { DesignTokenHelper } from './design-token-helper';
 
 @Injectable({

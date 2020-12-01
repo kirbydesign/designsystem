@@ -29,7 +29,8 @@ import { ButtonComponent } from '../../button/button.component';
 import { ResizeObserverService } from '../../shared/resize-observer/resize-observer.service';
 import { ResizeObserverEntry } from '../../shared/resize-observer/types/resize-observer-entry';
 import { WindowRef } from '../../../types/window-ref';
-import { DesignTokenHelper, PlatformService } from '../../../helpers';
+import { DesignTokenHelper } from '../../../helpers/design-token-helper';
+import { PlatformService } from '../../../helpers/platform.service';
 
 @Component({
   selector: 'kirby-modal-wrapper',

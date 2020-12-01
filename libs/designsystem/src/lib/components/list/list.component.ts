@@ -28,7 +28,7 @@ import { GroupByPipe } from './pipes/group-by.pipe';
 import { ListSwipeAction } from './list-swipe-action';
 import { ThemeColor } from '../../helpers/theme-color.type';
 import { ItemComponent } from '../item/item.component';
-import { PlatformService } from '../../helpers';
+import { PlatformService } from '../../helpers/platform.service';
 
 export type ListShape = 'square' | 'rounded' | 'none';
 
