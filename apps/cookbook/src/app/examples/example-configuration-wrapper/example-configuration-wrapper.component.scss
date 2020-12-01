@@ -4,9 +4,15 @@
   display: inline-block;
 }
 
-:host-context(kirby-modal-wrapper:not(.drawer)) {
+:host-context(.ion-page) {
   kirby-card {
     top: var(--header-height, 0);
+  }
+}
+
+:host-context(.ion-page.drawer) {
+  kirby-card {
+    top: 0;
   }
 }
 
