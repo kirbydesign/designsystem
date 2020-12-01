@@ -6,6 +6,7 @@ import {
   AfterContentChecked,
   OnDestroy,
   ElementRef,
+  OnInit,
 } from '@angular/core';
 
 import { PlatformService } from '../../helpers';
@@ -19,7 +20,7 @@ import { InputCounterComponent } from './input-counter/input-counter.component';
   styleUrls: ['./form-field.component.scss'],
   templateUrl: './form-field.component.html',
 })
-export class FormFieldComponent implements AfterContentChecked, OnDestroy {
+export class FormFieldComponent implements AfterContentChecked, OnInit, OnDestroy {
   private isRegistered = false;
   private element: HTMLElement;
   private focusElement: HTMLElement;
@@ -33,13 +34,10 @@ export class FormFieldComponent implements AfterContentChecked, OnDestroy {
 
   constructor(
     elementRef: ElementRef<HTMLElement>,
-    platform: PlatformService,
+    private platform: PlatformService,
     private window: WindowRef
   ) {
     this.element = elementRef.nativeElement;
-    // Allow optional wrapper to scroll into view:
-    this.focusElement = this.element.closest('[scroll-into-view]') || this.element;
-    this.isTouch = platform.isTouch();
   }
 
   focus() {
@@ -57,11 +55,19 @@ export class FormFieldComponent implements AfterContentChecked, OnDestroy {
     }
   }
 
+  ngOnInit() {
+    this.isTouch = this.platform.isTouch();
+  }
+
   ngAfterContentChecked(): void {
-    this.inputElement = this.element.querySelector('input, textarea');
+    if (!this.inputElement) {
+      this.inputElement = this.element.querySelector('input, textarea');
+    }
     if (!this.isRegistered && this.element.isConnected && !!this.inputElement) {
       // Host is connected to dom and slotted input/textarea is present:
       this.isRegistered = true;
+      // Allow optional wrapper to scroll into view:
+      this.focusElement = this.element.closest<HTMLElement>('[scroll-into-view]') || this.element;
       // Dispatch an `ionInputDidLoad` event to register
       // form field + input/textarea with Ionic input shims
       // See: https://github.com/ionic-team/ionic-framework/blob/master/core/src/utils/input-shims/input-shims.ts
