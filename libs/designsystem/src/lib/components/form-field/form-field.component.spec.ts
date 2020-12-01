@@ -1,6 +1,7 @@
 import { SpectatorHost, createHostFactory } from '@ngneat/spectator';
 
-import { DesignTokenHelper } from '../../helpers/design-token-helper';
+import { WindowRef } from '../../types';
+import { DesignTokenHelper, PlatformService } from '../../helpers';
 import { TestHelper } from '../../testing/test-helper';
 import { InputCounterComponent } from './input-counter/input-counter.component';
 import { FormFieldComponent } from './form-field.component';
@@ -25,6 +26,13 @@ describe('FormFieldComponent', () => {
       TextareaComponent,
       InputCounterComponent,
       ItemComponent,
+    ],
+    mocks: [PlatformService],
+    providers: [
+      {
+        provide: WindowRef,
+        useValue: window,
+      },
     ],
   });
 
