@@ -29,15 +29,17 @@ ion-footer {
   }
 }
 
-:host(.snap-to-keyboard.keyboard-visible) {
-  ion-footer {
-    transition: transform $soft-keyboard-transition-enter;
-    // Prevent clean-css from replacing `0px` with `0` or `calc()` won't work:
-    /* clean-css ignore:start */
-    transform: translateY(
-      calc((var(--keyboard-offset, 0px) - var(--kirby-modal-footer-safe-area-bottom, 0px)) * -1)
-    );
-    /* clean-css ignore:end */
+:host-context(.keyboard-visible) {
+  &.snap-to-keyboard {
+    ion-footer {
+      transition: transform $soft-keyboard-transition-enter;
+      // Prevent clean-css from replacing `0px` with `0` or `calc()` won't work:
+      /* clean-css ignore:start */
+      transform: translateY(
+        calc((var(--keyboard-offset, 0px) - var(--kirby-modal-footer-safe-area-bottom, 0px)) * -1)
+      );
+      /* clean-css ignore:end */
+    }
   }
 }
 
