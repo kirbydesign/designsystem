@@ -181,20 +181,18 @@ describe('FormFieldComponent', () => {
 
   describe('with slotted input', () => {
     describe('and no label', () => {
-      let dispatchEventSpy: jasmine.Spy;
-      let actualEvent: CustomEvent;
+      let dispatchEventSpy: jasmine.Spy<jasmine.Func>;
 
       beforeEach(() => {
-        dispatchEventSpy = spyOn(document, 'dispatchEvent').and.callFake((e: CustomEvent) => {
-          actualEvent = e;
-          return true;
-        });
+        dispatchEventSpy = spyOn(document, 'dispatchEvent');
 
         spectator = createHost(
           `<kirby-form-field>
              <input kirby-input/>
            </kirby-form-field>`
         );
+
+        spectator.detectChanges();
       });
 
       it('should render the input', () => {
@@ -214,17 +212,18 @@ describe('FormFieldComponent', () => {
       });
 
       it('should dispatch `ionInputDidLoad` event after content checked', () => {
-        spectator.detectChanges();
-        expect(dispatchEventSpy).toHaveBeenCalledWith(new CustomEvent('ionInputDidLoad'));
-        expect(actualEvent.type).toEqual('ionInputDidLoad');
-        expect(actualEvent.detail).toEqual(spectator.element);
+        const event: Event = dispatchEventSpy.calls.mostRecent().args[0];
+        expect(event).toBeInstanceOf(CustomEvent);
+        expect(event.type).toBe('ionInputDidLoad');
+        expect((event as CustomEvent).detail).toEqual(spectator.element);
       });
 
       it('should dispatch `ionInputDidUnload` event on destroy', () => {
         spectator.fixture.destroy();
-        expect(dispatchEventSpy).toHaveBeenCalledWith(new CustomEvent('ionInputDidLoad'));
-        expect(actualEvent.type).toEqual('ionInputDidUnload');
-        expect(actualEvent.detail).toEqual(spectator.element);
+        const event: Event = dispatchEventSpy.calls.mostRecent().args[0];
+        expect(event).toBeInstanceOf(CustomEvent);
+        expect(event.type).toBe('ionInputDidUnload');
+        expect((event as CustomEvent).detail).toEqual(spectator.element);
       });
     });
 
@@ -348,32 +347,77 @@ describe('FormFieldComponent', () => {
 
   describe('when wrapped in `[scroll-into-view]`', () => {
     let dispatchEventSpy: jasmine.Spy;
-    let actualEvent: CustomEvent;
 
     beforeEach(() => {
-      dispatchEventSpy = spyOn(document, 'dispatchEvent').and.callFake((e: CustomEvent) => {
-        actualEvent = e;
-        return true;
-      });
+      dispatchEventSpy = spyOn(document, 'dispatchEvent');
+
       spectator = createHost(`<div scroll-into-view>
         <kirby-form-field>
           <input kirby-input />
         </kirby-form-field>
       </div>`);
+      spectator.detectChanges();
     });
 
     it('should dispatch `ionInputDidLoad` event after content checked', () => {
-      spectator.detectChanges();
-      expect(dispatchEventSpy).toHaveBeenCalledWith(new CustomEvent('ionInputDidLoad'));
-      expect(actualEvent.type).toEqual('ionInputDidLoad');
-      expect(actualEvent.detail).toEqual(spectator.hostElement.firstChild);
+      const event: Event = dispatchEventSpy.calls.mostRecent().args[0];
+      expect(event).toBeInstanceOf(CustomEvent);
+      expect(event.type).toBe('ionInputDidLoad');
+      expect((event as CustomEvent).detail).toEqual(spectator.hostElement.firstChild);
     });
 
     it('should dispatch `ionInputDidUnload` event on destroy', () => {
       spectator.fixture.destroy();
-      expect(dispatchEventSpy).toHaveBeenCalledWith(new CustomEvent('ionInputDidUnload'));
-      expect(actualEvent.type).toEqual('ionInputDidUnload');
-      expect(actualEvent.detail).toEqual(spectator.hostElement.firstChild);
+      const event: Event = dispatchEventSpy.calls.mostRecent().args[0];
+      expect(event).toBeInstanceOf(CustomEvent);
+      expect(event.type).toBe('ionInputDidUnload');
+      expect((event as CustomEvent).detail).toEqual(spectator.hostElement.firstChild);
+    });
+  });
+
+  describe('focus', () => {
+    let platformServiceSpy: jasmine.SpyObj<PlatformService>;
+
+    beforeEach(() => {
+      spectator = createHost(
+        `<kirby-form-field>
+        <input kirby-input />
+      </kirby-form-field>`,
+        { detectChanges: false } // Delay change detection to allow altering platform.isTouch()
+      );
+      platformServiceSpy = spectator.inject(PlatformService);
+    });
+
+    it('should focus input element if not touch', () => {
+      platformServiceSpy.isTouch.and.returnValue(false);
+      // Call detectChanges() twice - see: https://angular.io/guide/testing-components-scenarios#detectchanges
+      spectator.detectChanges(); //ngOnInit() + 1st ngAfterContentChecked()
+      spectator.detectChanges(); // 2nd ngAfterContentChecked
+      const formFieldElement = spectator.queryHost<HTMLInputElement>('input[kirby-input]');
+      const focusSpy = spyOn(formFieldElement, 'focus');
+
+      spectator.component.focus();
+
+      expect(focusSpy).toHaveBeenCalled();
+    });
+
+    it('should dispatch touch events if touch', () => {
+      platformServiceSpy.isTouch.and.returnValue(true);
+      // Call detectChanges() twice - see: https://angular.io/guide/testing-components-scenarios#detectchanges
+      spectator.detectChanges(); //ngOnInit() + 1st ngAfterContentChecked()
+      spectator.detectChanges(); // 2nd ngAfterContentChecked
+      const inputElement = spectator.queryHost<HTMLInputElement>('input[kirby-input]');
+      const dispatchEventSpy = spyOn(inputElement, 'dispatchEvent');
+
+      spectator.component.focus();
+
+      expect(dispatchEventSpy).toHaveBeenCalledTimes(2);
+      const firstEvent: Event = dispatchEventSpy.calls.argsFor(0)[0];
+      expect(firstEvent).toBeInstanceOf(TouchEvent);
+      expect(firstEvent.type).toBe('touchstart');
+      const secondEvent: Event = dispatchEventSpy.calls.argsFor(1)[0];
+      expect(secondEvent).toBeInstanceOf(TouchEvent);
+      expect(secondEvent.type).toBe('touchend');
     });
   });
 });
