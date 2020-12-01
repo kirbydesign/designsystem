@@ -1,5 +1,10 @@
 @import '../../scss/utils';
 
+:host {
+  display: inline-block;
+  vertical-align: middle;
+}
+
 .checkbox {
   --border-color: #{get-color('primary-contrast')};
 }
