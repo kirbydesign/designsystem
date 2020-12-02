@@ -58,6 +58,15 @@ ion-title {
   font-size: font-size('m');
 }
 
+// :host:not(.drawer) ion-title {
+//   --padding-start: #{size('s')};
+//   padding-inline-start: var(--padding-start);
+
+//   @include media('>=medium') {
+//     --padding-start: #{size('xxxl')};
+//   }
+// }
+
 ion-content {
   --background: transparent;
   display: flex;
