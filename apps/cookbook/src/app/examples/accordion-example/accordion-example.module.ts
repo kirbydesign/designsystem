@@ -3,13 +3,13 @@ import { CommonModule } from '@angular/common';
 
 import { KirbyModule } from '@kirbydesign/designsystem';
 
-import { AccordionCardExampleComponent } from './examples/accordion-card';
-import { AccordionExampleComponent } from './examples/accordion';
-import { AccordionExpandedExampleComponent } from './examples/accordion-expanded';
+import { AccordionCardExampleComponent } from './examples/card';
+import { AccordionDefaultExampleComponent } from './examples/default';
+import { AccordionExpandedExampleComponent } from './examples/expanded';
 
 const COMPONENT_DECLARATIONS = [
   AccordionCardExampleComponent,
-  AccordionExampleComponent,
+  AccordionDefaultExampleComponent,
   AccordionExpandedExampleComponent,
 ];
 
