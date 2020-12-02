@@ -3,13 +3,13 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 
 import { FitHeadingModule } from '../../directives/fit-heading/fit-heading.module';
+import { PageTitleComponent } from './title/page-title.component';
 import {
   PageComponent,
   PageActionsComponent,
   PageActionsDirective,
   PageContentComponent,
   PageContentDirective,
-  PageTitleComponent,
   PageTitleDirective,
   PageToolbarTitleDirective,
 } from './page.component';

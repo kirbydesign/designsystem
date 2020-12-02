@@ -1,0 +1,13 @@
+:host {
+  display: flex;
+  justify-content: var(--kirby-modal-header-justify-content, center);
+  align-items: center;
+}
+
+:host.has-children {
+  justify-content: var(--kirby-modal-header-justify-content, space-between);
+}
+
+:host.has-children::after {
+  content: '';
+}

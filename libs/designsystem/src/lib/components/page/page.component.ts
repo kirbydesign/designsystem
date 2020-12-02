@@ -78,17 +78,6 @@ export class PageContentDirective {
 }
 
 @Component({
-  selector: 'kirby-page-title',
-  template: `
-    <ng-content></ng-content>
-  `,
-  styles: [
-    `:host{'display: flex; justify-content: space-between; align-items: 'center'} :host::after{ content: '' }`,
-  ],
-})
-export class PageTitleComponent {}
-
-@Component({
   selector: 'kirby-page-content',
   template: `
     <ng-content></ng-content>
