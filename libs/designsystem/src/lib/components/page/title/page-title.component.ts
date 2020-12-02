@@ -9,7 +9,7 @@ export class PageTitleComponent {
   constructor(private elref: ElementRef) {}
 
   @HostBinding('class.has-children')
-  private get hasChildren(): boolean {
+  get hasChildren(): boolean {
     return this.elref.nativeElement.children.length > 0;
   }
 }
