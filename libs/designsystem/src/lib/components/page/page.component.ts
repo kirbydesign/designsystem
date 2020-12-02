@@ -82,6 +82,9 @@ export class PageContentDirective {
   template: `
     <ng-content></ng-content>
   `,
+  styles: [
+    `:host{'display: flex; justify-content: space-between; align-items: 'center'} :host::after{ content: '' }`,
+  ],
 })
 export class PageTitleComponent {}
 
