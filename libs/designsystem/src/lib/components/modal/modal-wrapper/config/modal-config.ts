@@ -9,7 +9,6 @@ export interface ModalConfig {
    */
   title?: string;
   component: any;
-  modalHeaderStartSlot: any;
   size?: 'small' | 'medium' | 'large';
   modalRoute?: ActivatedRoute;
   siblingModalRouteActivated$?: Observable<ActivatedRoute>;
