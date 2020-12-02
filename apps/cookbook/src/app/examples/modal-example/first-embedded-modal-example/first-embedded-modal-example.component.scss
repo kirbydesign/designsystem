@@ -22,47 +22,12 @@
   }
 }
 
-kirby-card {
-  &.nested-modal-configuration {
-    margin-top: size('l');
-    margin-bottom: size('l');
-    cookbook-modal-example-configuration {
-      margin-top: size('m');
-    }
-  }
+kirby-card.nested-modal-configuration {
+  margin-top: size('l');
+  margin-bottom: size('l');
 
-  &.current-modal-configuration {
-    position: fixed;
-    z-index: z('default') + 1;
-    top: var(--header-height);
-    right: 0;
-    margin-top: $border-radius;
-    font-size: font-size('xs');
-    opacity: 0.5;
-    transition-property: transform, border-radius;
-    transition-duration: get-transition-duration('short');
-    transition-timing-function: get-transition-easing('enter-exit');
-    transform: rotate(-90deg) translateY(-#{$border-radius + size('xs')});
-    transform-origin: top right;
-    padding: size('xxs');
-    --kirby-border-color: transparent;
-    --text-align: center;
-
-    @include media('>=medium') {
-      transform: translateX(40%);
-      padding: size('s');
-      --text-align: initial;
-      --kirby-border-color: initial;
-    }
-
-    &:hover,
-    &:active {
-      opacity: unset;
-      transform: none;
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
-      --kirby-border-color: initial;
-    }
+  cookbook-example-configuration-wrapper {
+    margin-top: size('m');
   }
 }
 
@@ -84,13 +49,13 @@ kirby-modal-footer {
 [scroll-into-view] {
   display: flex;
   flex-direction: column;
-  padding: size('l');
+  padding: size('l') size('s');
   margin-bottom: size('m');
   background: url('https://images.unsplash.com/photo-1496737018672-b1a6be2e949c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80')
     no-repeat center;
 
   @include media('>=medium') {
-    padding: 104px size('l');
+    padding: size('xxxl') * 2 size('l');
   }
 
   button {
