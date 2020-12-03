@@ -16,6 +16,17 @@ const config = {
 <p>Some content of the embedded component</p>
 ...
 `,
+  titleWithProgressCircleTemplate: `
+<kirby-page-title>
+  <kirby-progress-circle themeColor="warning" value="50" size="sm" class="kirby-text-xsmall">
+  2/4
+  </kirby-progress-circle>
+  My Modal Title
+</kirby-page-title>
+ 
+<p>Some content of the embedded component</p>
+...
+`,
   footerTemplate: `<p>Some content of the embedded component</p>
 ...
 <kirby-modal-footer>
@@ -150,6 +161,7 @@ export class EmbeddedComponent() {
 export class ModalExampleDefaultComponent {
   template = config.template;
   titleTemplate = config.titleTemplate;
+  titleWithProgressCircleTemplate = config.titleWithProgressCircleTemplate;
   footerTemplate = config.footerTemplate;
   defaultCodeSnippet = [
     config.showModalCodeSnippet,
