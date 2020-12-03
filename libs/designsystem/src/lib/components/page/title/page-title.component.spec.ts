@@ -15,7 +15,6 @@ describe('PageTitleComponent', () => {
       <div>here is some additional content</div>
       My title
     </kirby-page-title>`);
-    // spectator.detectChanges();
     const rootElement: HTMLElement = spectator.element;
     expect(rootElement.classList).toContain('has-children');
   });
@@ -23,7 +22,6 @@ describe('PageTitleComponent', () => {
     spectator = createComponent(`<kirby-page-title>
       My title
     </kirby-page-title>`);
-    // spectator.detectChanges();
     const rootElement: HTMLElement = spectator.element;
     expect(rootElement.classList).not.toContain('has-children');
   });
