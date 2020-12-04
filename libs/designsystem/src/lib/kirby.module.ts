@@ -80,6 +80,7 @@ import { IconRegistryService } from './components/icon/icon-registry.service';
 import { WindowRef } from './types/window-ref';
 import { ToggleButtonModule } from './components/toggle-button/toggle-button.module';
 import { SlideDirective, SlidesComponent } from './components/slides/slides.component';
+import { NumericInputDirective } from './components/form-field/directives/numeric-input.directive';
 
 const exportedDeclarations = [
   CardComponent,
@@ -112,6 +113,7 @@ const exportedDeclarations = [
   BadgeComponent,
   SizeDirective,
   ThemeColorDirective,
+  NumericInputDirective,
   SlideButtonComponent,
   ToggleComponent,
   EmptyStateComponent,

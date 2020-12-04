@@ -10,11 +10,10 @@ import { FormFieldInputNumericExampleComponent } from './examples/input/numeric'
 import { FormFieldInputDisabledExampleComponent } from './examples/input/disabled';
 import { FormFieldInputErrorExampleComponent } from './examples/input/error';
 import { FormFieldInputBorderlessExampleComponent } from './examples/input/borderless';
-import { FormFieldFocusExampleComponent } from './examples/input/focus';
-import { FormFieldScrollIntoViewExampleComponent } from './examples/input/scroll-into-view';
 import { FormFieldTextareaDefaultExampleComponent } from './examples/textarea/default';
 import { FormFieldTextareaLabelExampleComponent } from './examples/textarea/label';
 import { FormFieldTextareaCounterExampleComponent } from './examples/textarea/counter';
+import { FormFieldInputNumericInputExampleComponent } from './examples/input/numeric-input';
 
 const COMPONENT_DECLARATIONS = [
   FormFieldInputDefaultExampleComponent,
@@ -22,11 +21,10 @@ const COMPONENT_DECLARATIONS = [
   FormFieldInputLabelMessageExampleComponent,
   FormFieldInputCounterExampleComponent,
   FormFieldInputNumericExampleComponent,
+  FormFieldInputNumericInputExampleComponent,
   FormFieldInputDisabledExampleComponent,
   FormFieldInputErrorExampleComponent,
   FormFieldInputBorderlessExampleComponent,
-  FormFieldFocusExampleComponent,
-  FormFieldScrollIntoViewExampleComponent,
   FormFieldTextareaDefaultExampleComponent,
   FormFieldTextareaLabelExampleComponent,
   FormFieldTextareaCounterExampleComponent,
