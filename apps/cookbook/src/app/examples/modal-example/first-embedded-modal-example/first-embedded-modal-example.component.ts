@@ -14,6 +14,7 @@ import { SecondEmbeddedModalExampleComponent } from '../second-embedded-modal-ex
 })
 export class FirstEmbeddedModalExampleComponent implements OnInit {
   showFooter = true;
+  showCustomHeader = false;
   isLoading = true;
   snapFooterToKeyboard = false;
 
@@ -24,6 +25,7 @@ export class FirstEmbeddedModalExampleComponent implements OnInit {
     @Optional() @SkipSelf() private modal: Modal
   ) {
     this.showFooter = componentProps.showFooter;
+    this.showCustomHeader = componentProps.showCustomHeader;
   }
 
   ngOnInit() {

@@ -10,7 +10,8 @@ const config = {
   template: `<button kirby-button (click)="showModal()">Show modal</button>
 <button kirby-button (click)="showDrawer()">Show drawer</button>
 <button kirby-button (click)="showCompact()">Show compact</button>
-<button kirby-button (click)="showModalWithFooter()">Show modal with footer</button>`,
+<button kirby-button (click)="showModalWithFooter()">Show modal with footer</button>
+<button kirby-button (click)="showModalWithCustomHeader()">Show modal with custom header</button>`,
   titleTemplate: `<kirby-page-title>My Modal Title</kirby-page-title>
  
 <p>Some content of the embedded component</p>
@@ -193,6 +194,18 @@ export class ModalExampleDefaultComponent {
     this.modalController.showModal(config, this.onModalClose);
   }
 
+  showModalWithCustomHeader() {
+    const config: ModalConfig = {
+      component: FirstEmbeddedModalExampleComponent,
+      componentProps: {
+        prop1: 'value1',
+        prop2: 'value2',
+        showCustomHeader: true,
+      },
+    };
+    this.modalController.showModal(config, this.onModalClose);
+  }
+
   showCompact() {
     const config: ModalConfig = {
       flavor: 'compact',
@@ -219,6 +232,10 @@ export class ModalExampleDefaultComponent {
   showModalWithFooter() {
     this.showModal(true);
   }
+
+  // showModalWithFooter() {
+  //   this.showModal(true);
+  // }
 
   onModalClose(data: any): void {
     console.log('Callback from Embedded Modal:');

@@ -1,6 +1,15 @@
-<kirby-page-title>{{
-  componentProps?.flavor === 'drawer' ? 'My Drawer Title' : 'My Modal Title'
-}}</kirby-page-title>
+<kirby-page-title>
+  <kirby-progress-circle
+    *ngIf="showCustomHeader"
+    themeColor="warning"
+    value="50"
+    size="sm"
+    class="kirby-text-xsmall"
+  >
+    2/4
+  </kirby-progress-circle>
+  {{ componentProps?.flavor === 'drawer' ? 'My Drawer Title' : 'My Modal Title' }}</kirby-page-title
+>
 
 <kirby-loading-overlay [isLoading]="isLoading">
   <div *ngIf="!isLoading">
