@@ -8,6 +8,7 @@
   justify-content: var(--kirby-modal-header-justify-content, space-between);
 }
 
+// Enforce left alignment when host has one ore more children. This works with justify-content: space-between.
 :host.has-children::after {
   content: '';
 }
