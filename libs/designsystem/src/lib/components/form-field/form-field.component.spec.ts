@@ -345,36 +345,6 @@ describe('FormFieldComponent', () => {
     });
   });
 
-  describe('when wrapped in `[scroll-into-view]`', () => {
-    let dispatchEventSpy: jasmine.Spy;
-
-    beforeEach(() => {
-      dispatchEventSpy = spyOn(document, 'dispatchEvent');
-
-      spectator = createHost(`<div scroll-into-view>
-        <kirby-form-field>
-          <input kirby-input />
-        </kirby-form-field>
-      </div>`);
-      spectator.detectChanges();
-    });
-
-    it('should dispatch `ionInputDidLoad` event after content checked', () => {
-      const event: Event = dispatchEventSpy.calls.mostRecent().args[0];
-      expect(event).toBeInstanceOf(CustomEvent);
-      expect(event.type).toBe('ionInputDidLoad');
-      expect((event as CustomEvent).detail).toEqual(spectator.hostElement.firstChild);
-    });
-
-    it('should dispatch `ionInputDidUnload` event on destroy', () => {
-      spectator.fixture.destroy();
-      const event: Event = dispatchEventSpy.calls.mostRecent().args[0];
-      expect(event).toBeInstanceOf(CustomEvent);
-      expect(event.type).toBe('ionInputDidUnload');
-      expect((event as CustomEvent).detail).toEqual(spectator.hostElement.firstChild);
-    });
-  });
-
   describe('focus', () => {
     let platformServiceSpy: jasmine.SpyObj<PlatformService>;
 

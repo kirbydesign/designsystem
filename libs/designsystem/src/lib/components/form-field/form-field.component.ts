@@ -24,7 +24,6 @@ import { InputCounterComponent } from './input-counter/input-counter.component';
 export class FormFieldComponent implements AfterContentChecked, OnInit, OnDestroy {
   private isRegistered = false;
   private element: HTMLElement;
-  private focusElement: HTMLElement;
   private inputElement: HTMLInputElement | HTMLTextAreaElement;
   private isTouch: boolean;
 
@@ -47,7 +46,7 @@ export class FormFieldComponent implements AfterContentChecked, OnInit, OnDestro
     // See: https://github.com/ionic-team/ionic-framework/blob/master/core/src/utils/input-shims/input-shims.ts
     this.window.document.dispatchEvent(
       new CustomEvent('ionInputDidLoad', {
-        detail: this.focusElement,
+        detail: this.element,
       })
     );
   }
@@ -83,8 +82,6 @@ export class FormFieldComponent implements AfterContentChecked, OnInit, OnDestro
     if (!this.isRegistered && this.element.isConnected && !!this.inputElement) {
       // Host is connected to dom and slotted input/textarea is present:
       this.isRegistered = true;
-      // Allow optional wrapper to scroll into view:
-      this.focusElement = this.element.closest<HTMLElement>('[scroll-into-view]') || this.element;
       this.dispatchLoadEvent();
     }
   }
@@ -95,7 +92,7 @@ export class FormFieldComponent implements AfterContentChecked, OnInit, OnDestro
     // See: https://github.com/ionic-team/ionic-framework/blob/master/core/src/utils/input-shims/input-shims.ts
     this.window.document.dispatchEvent(
       new CustomEvent('ionInputDidUnload', {
-        detail: this.focusElement,
+        detail: this.element,
       })
     );
   }
