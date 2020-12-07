@@ -35,11 +35,7 @@ export class AppComponent implements AfterContentInit {
     const ensureIonicDeviceHacksDelay = 250;
     setTimeout(() => {
       document.querySelectorAll('kirby-form-field').forEach((formField) => {
-        document.dispatchEvent(
-          new CustomEvent('ionInputDidLoad', {
-            detail: formField,
-          })
-        );
+        formField.dispatchEvent(new CustomEvent('kirbyRegisterFormField'));
       });
     }, ensureIonicDeviceHacksDelay);
   }

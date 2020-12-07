@@ -12,7 +12,7 @@ const config = {
   Enable input
 </label>
 <kirby-form-field #formfield>
-  <input kirby-input [disabled]="!inputEnabled" placeholder="Enable to focus and scroll into view" />
+  <input kirby-input [disabled]="!inputEnabled" placeholder="Enable to focus (+scroll into view on device)" />
 </kirby-form-field>`,
   codeSnippet: `import { FormFieldComponent } from '@kirbydesign/designsystem';
   

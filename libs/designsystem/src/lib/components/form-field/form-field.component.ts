@@ -7,6 +7,7 @@ import {
   OnDestroy,
   ElementRef,
   OnInit,
+  HostListener,
 } from '@angular/core';
 
 import { PlatformService } from '../../helpers/platform.service';
@@ -23,7 +24,6 @@ import { InputCounterComponent } from './input-counter/input-counter.component';
 export class FormFieldComponent implements AfterContentChecked, OnInit, OnDestroy {
   private isRegistered = false;
   private element: HTMLElement;
-  private focusElement: HTMLElement;
   private inputElement: HTMLInputElement | HTMLTextAreaElement;
   private isTouch: boolean;
 
@@ -38,6 +38,22 @@ export class FormFieldComponent implements AfterContentChecked, OnInit, OnDestro
     private window: WindowRef
   ) {
     this.element = elementRef.nativeElement;
+  }
+
+  private dispatchLoadEvent() {
+    // Dispatch an `ionInputDidLoad` event to register
+    // form field + input/textarea with Ionic input shims
+    // See: https://github.com/ionic-team/ionic-framework/blob/master/core/src/utils/input-shims/input-shims.ts
+    this.window.document.dispatchEvent(
+      new CustomEvent('ionInputDidLoad', {
+        detail: this.element,
+      })
+    );
+  }
+
+  @HostListener('kirbyRegisterFormField')
+  _onRegisterFormField() {
+    this.dispatchLoadEvent();
   }
 
   focus() {
@@ -66,16 +82,7 @@ export class FormFieldComponent implements AfterContentChecked, OnInit, OnDestro
     if (!this.isRegistered && this.element.isConnected && !!this.inputElement) {
       // Host is connected to dom and slotted input/textarea is present:
       this.isRegistered = true;
-      // Allow optional wrapper to scroll into view:
-      this.focusElement = this.element.closest<HTMLElement>('[scroll-into-view]') || this.element;
-      // Dispatch an `ionInputDidLoad` event to register
-      // form field + input/textarea with Ionic input shims
-      // See: https://github.com/ionic-team/ionic-framework/blob/master/core/src/utils/input-shims/input-shims.ts
-      this.window.document.dispatchEvent(
-        new CustomEvent('ionInputDidLoad', {
-          detail: this.focusElement,
-        })
-      );
+      this.dispatchLoadEvent();
     }
   }
 
@@ -85,7 +92,7 @@ export class FormFieldComponent implements AfterContentChecked, OnInit, OnDestro
     // See: https://github.com/ionic-team/ionic-framework/blob/master/core/src/utils/input-shims/input-shims.ts
     this.window.document.dispatchEvent(
       new CustomEvent('ionInputDidUnload', {
-        detail: this.focusElement,
+        detail: this.element,
       })
     );
   }
