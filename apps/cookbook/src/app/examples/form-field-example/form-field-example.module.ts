@@ -11,7 +11,6 @@ import { FormFieldInputDisabledExampleComponent } from './examples/input/disable
 import { FormFieldInputErrorExampleComponent } from './examples/input/error';
 import { FormFieldInputBorderlessExampleComponent } from './examples/input/borderless';
 import { FormFieldFocusExampleComponent } from './examples/input/focus';
-import { FormFieldScrollIntoViewExampleComponent } from './examples/input/scroll-into-view';
 import { FormFieldTextareaDefaultExampleComponent } from './examples/textarea/default';
 import { FormFieldTextareaLabelExampleComponent } from './examples/textarea/label';
 import { FormFieldTextareaCounterExampleComponent } from './examples/textarea/counter';
@@ -26,7 +25,6 @@ const COMPONENT_DECLARATIONS = [
   FormFieldInputErrorExampleComponent,
   FormFieldInputBorderlessExampleComponent,
   FormFieldFocusExampleComponent,
-  FormFieldScrollIntoViewExampleComponent,
   FormFieldTextareaDefaultExampleComponent,
   FormFieldTextareaLabelExampleComponent,
   FormFieldTextareaCounterExampleComponent,
