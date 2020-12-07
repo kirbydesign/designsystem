@@ -100,9 +100,15 @@ ion-content {
   --padding-bottom: #{size('m')};
   --padding-start: #{size('s')};
   --padding-end: #{size('s')};
+}
 
-  @include media('>=medium') {
+// Ensure padding-rules are not merged with other media query,
+// as this rule has to come AFTER the default mobile-first rule in order to override:
+/* clean-css ignore:start */
+@include media('>=medium') {
+  ion-content {
     --padding-start: #{size('xxxl')};
     --padding-end: #{size('xxxl')};
   }
 }
+/* clean-css ignore:end */
