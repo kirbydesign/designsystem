@@ -29,7 +29,8 @@ import { ButtonComponent } from '../../button/button.component';
 import { ResizeObserverService } from '../../shared/resize-observer/resize-observer.service';
 import { ResizeObserverEntry } from '../../shared/resize-observer/types/resize-observer-entry';
 import { WindowRef } from '../../../types/window-ref';
-import { DesignTokenHelper } from '../../../helpers';
+import { DesignTokenHelper } from '../../../helpers/design-token-helper';
+import { PlatformService } from '../../../helpers/platform.service';
 
 @Component({
   selector: 'kirby-modal-wrapper',
@@ -103,7 +104,8 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     private zone: NgZone,
     private resizeObserverService: ResizeObserverService,
     private componentFactoryResolver: ComponentFactoryResolver,
-    private windowRef: WindowRef
+    private windowRef: WindowRef,
+    private platform: PlatformService
   ) {
     this.setViewportHeight();
     this.observeViewportResize();
@@ -278,13 +280,9 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     this.setKeyboardVisibility(0);
   }
 
-  private isPhabletOrBigger() {
-    const query = `(min-width: ${DesignTokenHelper.breakpoints.medium})`;
-    return this.windowRef.matchMedia(query).matches;
-  }
-
   private toggleContentMaxHeight(freeze: boolean) {
-    const shouldToggleMaxHeight = this.config.flavor === 'modal' && this.isPhabletOrBigger();
+    const shouldToggleMaxHeight =
+      this.config.flavor === 'modal' && this.platform.isPhabletOrBigger();
     if (!shouldToggleMaxHeight) return;
     const style = 'max-height';
     const contentElement = this.ionContentElement.nativeElement;

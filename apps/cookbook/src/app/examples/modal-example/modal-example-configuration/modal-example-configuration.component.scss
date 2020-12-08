@@ -1,36 +1,25 @@
 @import './libs/designsystem/src/lib/scss/utils';
 
 :host {
-  display: flex;
+  kirby-checkbox {
+    padding-right: size('xxxs');
+  }
 
-  fieldset {
-    border: 1px solid var(--kirby-border-color, get-color('medium'));
+  label {
+    cursor: pointer;
+    display: block;
+    &:not(:first-of-type) {
+      margin-top: size('xxs');
+    }
 
-    legend {
+    &.indent {
+      margin-left: size('m');
+      margin-top: size('xxxs');
+      font-size: font-size('s');
+    }
+
+    &.disabled {
       color: get-text-color('semi-dark');
-      text-align: var(--text-align, initial);
-    }
-
-    kirby-checkbox {
-      padding-right: size('xxxs');
-    }
-
-    label {
-      cursor: pointer;
-      display: block;
-      &:not(:first-of-type) {
-        margin-top: size('xxs');
-      }
-
-      &.indent {
-        margin-left: size('m');
-        margin-top: size('xxxs');
-        font-size: font-size('s');
-      }
-
-      &.disabled {
-        color: get-text-color('semi-dark');
-      }
     }
   }
 }

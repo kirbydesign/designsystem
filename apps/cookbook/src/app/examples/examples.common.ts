@@ -45,6 +45,7 @@ import { PageCustomTitleExampleComponent } from './page-example/advanced/page-cu
 import { PageAdvancedExampleComponent } from './page-example/advanced/page-advanced-example.component';
 import { FormFieldExampleComponent } from './form-field-example/form-field-example.component';
 import { ExamplesComponent } from './examples.component';
+import { ExampleConfigurationWrapperComponent } from './example-configuration-wrapper/example-configuration-wrapper.component';
 import { TabsExampleComponent } from './tabs/tabs-example.component';
 import { TabExampleComponent } from './tabs/tab/tab-example.component';
 import { ItemExampleComponent } from './item-example/item-example.component';
@@ -74,6 +75,7 @@ export const iconSettings: IconSettings = {
 
 export const COMPONENT_DECLARATIONS: any[] = [
   ExamplesComponent,
+  ExampleConfigurationWrapperComponent,
   ButtonExampleComponent,
   SlideButtonExampleComponent,
   CardExampleComponent,

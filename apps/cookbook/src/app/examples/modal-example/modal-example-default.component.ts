@@ -9,8 +9,9 @@ import { WindowRef } from '@kirbydesign/designsystem/types/window-ref';
 const config = {
   selector: 'cookbook-modal-example-default',
   template: `<button kirby-button (click)="showModal()">Show modal</button>
-  <button kirby-button (click)="showDrawer()">Show drawer</button>
-  <button kirby-button (click)="showCompact()">Show compact</button>
+<button kirby-button (click)="showDrawer()">Show drawer</button>
+<button kirby-button (click)="showCompact()">Show compact</button>
+<cookbook-example-configuration-wrapper>
   <cookbook-modal-example-configuration
     [(showDummyKeyboard)]="showDummyKeyboard"
     [(showFooter)]="showFooter"
@@ -18,7 +19,8 @@ const config = {
     [(delayLoadDummyContent)]="delayLoadDummyContent"
     [(loadAdditionalContent)]="loadAdditionalContent"
     [(openFullHeight)]="openFullHeight"
-  ></cookbook-modal-example-configuration>`,
+  ></cookbook-modal-example-configuration>
+</cookbook-example-configuration-wrapper>`,
   titleTemplate: `<kirby-page-title>My Modal Title</kirby-page-title>
  
 <p>Some content of the embedded component</p>
@@ -157,7 +159,7 @@ export class EmbeddedComponent() {
   styleUrls: ['./modal-example-default.component.scss'],
 })
 export class ModalExampleDefaultComponent {
-  template = config.template.split('<cookbook-modal-example-configuration')[0]; // Remove config part of the template
+  template = config.template.split('<cookbook-example-configuration-wrapper>')[0]; // Remove config part of the template
   titleTemplate = config.titleTemplate;
   footerTemplate = config.footerTemplate;
   defaultCodeSnippet = [
