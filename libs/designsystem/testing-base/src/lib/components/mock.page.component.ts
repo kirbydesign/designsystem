@@ -24,7 +24,8 @@ type fixedConfig = { fixed: boolean };
     },
   ],
 })
-export class MockPageTitleDirective {}
+// start class MockPageTitleDirective
+export class MockPageTitleDirective {} // end class MockPageTitleDirective
 
 @Directive({
   selector: '[kirbyPageToolbarTitle]',
@@ -35,7 +36,8 @@ export class MockPageTitleDirective {}
     },
   ],
 })
-export class MockPageToolbarTitleDirective {}
+// start class MockPageToolbarTitleDirective
+export class MockPageToolbarTitleDirective {} // end class MockPageToolbarTitleDirective
 
 @Directive({
   selector: '[kirbyPageActions]',
@@ -46,9 +48,10 @@ export class MockPageToolbarTitleDirective {}
     },
   ],
 })
+// start class MockPageActionsDirective
 export class MockPageActionsDirective {
   @Input('kirbyPageActions') config: stickyConfig | fixedConfig;
-}
+} // end class MockPageActionsDirective
 
 @Directive({
   selector: '[kirbyPageContent]',
@@ -59,9 +62,10 @@ export class MockPageActionsDirective {
     },
   ],
 })
+// start class MockPageContentDirective
 export class MockPageContentDirective {
   @Input('kirbyPageContent') config: fixedConfig;
-}
+} // end class MockPageContentDirective
 
 @Component({
   selector: 'kirby-page-title',
@@ -73,7 +77,8 @@ export class MockPageContentDirective {
     },
   ],
 })
-export class MockPageTitleComponent {}
+// start class MockPageTitleComponent
+export class MockPageTitleComponent {} // end class MockPageTitleComponent
 
 @Component({
   selector: 'kirby-page-content',
@@ -85,7 +90,8 @@ export class MockPageTitleComponent {}
     },
   ],
 })
-export class MockPageContentComponent {}
+// start class MockPageContentComponent
+export class MockPageContentComponent {} // end class MockPageContentComponent
 
 @Component({
   selector: 'kirby-page-actions',
@@ -97,7 +103,8 @@ export class MockPageContentComponent {}
     },
   ],
 })
-export class MockPageActionsComponent {}
+// start class MockPageActionsComponent
+export class MockPageActionsComponent {} // end class MockPageActionsComponent
 
 @Component({
   selector: 'kirby-page',
@@ -109,6 +116,7 @@ export class MockPageActionsComponent {}
     },
   ],
 })
+// start class MockPageComponent
 export class MockPageComponent {
   @Input() title: string;
   @Input() toolbarTitle: string;
@@ -118,6 +126,6 @@ export class MockPageComponent {
   @Input() titleMaxLines: number;
   @Output() enter = new EventEmitter<void>();
   @Output() leave = new EventEmitter<void>();
-}
+} // end class MockPageComponent
 
 // #endregion

@@ -13,9 +13,10 @@ import { IconComponent } from '@kirbydesign/designsystem';
     },
   ],
 })
+// start class MockIconComponent
 export class MockIconComponent {
   @Input() name: string;
   @Input() customName: string;
-}
+} // end class MockIconComponent
 
 // #endregion

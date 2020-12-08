@@ -13,6 +13,7 @@ import { ActionSheetComponent, ActionSheetItem } from '@kirbydesign/designsystem
     },
   ],
 })
+// start class MockActionSheetComponent
 export class MockActionSheetComponent {
   @Input() cancelButtonText: string;
   @Input() hideCancel: boolean;
@@ -22,6 +23,6 @@ export class MockActionSheetComponent {
   @Input() items: Array<ActionSheetItem>;
   @Output() cancel = new EventEmitter();
   @Output() itemSelect = new EventEmitter<ActionSheetItem>();
-}
+} // end class MockActionSheetComponent
 
 // #endregion

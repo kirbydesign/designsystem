@@ -13,8 +13,9 @@ import { DividerComponent } from '@kirbydesign/designsystem';
     },
   ],
 })
+// start class MockDividerComponent
 export class MockDividerComponent {
   @Input() hasMargin: boolean;
-}
+} // end class MockDividerComponent
 
 // #endregion

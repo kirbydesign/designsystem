@@ -19,6 +19,7 @@ import {
     },
   ],
 })
+// start class MockListComponent
 export class MockListComponent {
   @Input() items: any[];
   @Input() getItemColor: (item: any) => ThemeColor;
@@ -32,6 +33,6 @@ export class MockListComponent {
   @Input() swipeActions: ListSwipeAction[];
   @Output() loadOnDemand = new EventEmitter<LoadOnDemandEvent>();
   @Output() itemSelect = new EventEmitter<any>();
-}
+} // end class MockListComponent
 
 // #endregion

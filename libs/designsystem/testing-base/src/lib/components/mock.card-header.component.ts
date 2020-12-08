@@ -13,10 +13,11 @@ import { CardHeaderComponent } from '@kirbydesign/designsystem';
     },
   ],
 })
+// start class MockCardHeaderComponent
 export class MockCardHeaderComponent {
   @Input() title: string;
   @Input() subtitle: string;
   @Input() isTitleBold: boolean;
-}
+} // end class MockCardHeaderComponent
 
 // #endregion

@@ -14,12 +14,13 @@ import { ReorderEvent } from '@kirbydesign/designsystem';
     },
   ],
 })
+// start class MockReorderListComponent
 export class MockReorderListComponent {
   @Input() items: any[];
   @Input() subItemsName: string;
   @Input() getItemTextDefault: (item: any) => string;
   @Output() itemReorder = new EventEmitter<ReorderEvent>();
   @Output() subItemReorder = new EventEmitter<ReorderEvent>();
-}
+} // end class MockReorderListComponent
 
 // #endregion

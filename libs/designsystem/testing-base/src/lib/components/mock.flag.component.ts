@@ -13,9 +13,10 @@ import { FlagComponent } from '@kirbydesign/designsystem';
     },
   ],
 })
+// start class MockFlagComponent
 export class MockFlagComponent {
   @Input() size: 'xs' | 'sm' | 'md';
   @Input() themeColor: 'success' | 'warning' | 'danger' | 'semi-light' | 'transparent';
-}
+} // end class MockFlagComponent
 
 // #endregion

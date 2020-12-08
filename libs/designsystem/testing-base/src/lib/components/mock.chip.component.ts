@@ -13,9 +13,10 @@ import { ChipComponent } from '@kirbydesign/designsystem';
     },
   ],
 })
+// start class MockChipComponent
 export class MockChipComponent {
   @Input() text: string;
   @Input() isSelected: boolean;
-}
+} // end class MockChipComponent
 
 // #endregion

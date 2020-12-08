@@ -13,10 +13,11 @@ import { ToggleComponent } from '@kirbydesign/designsystem';
     },
   ],
 })
+// start class MockToggleComponent
 export class MockToggleComponent {
   @Input() checked: boolean;
   @Input() disabled: boolean;
   @Output() checkedChange = new EventEmitter<boolean>();
-}
+} // end class MockToggleComponent
 
 // #endregion

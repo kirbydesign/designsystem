@@ -13,9 +13,10 @@ import { GridComponent, GridCardConfiguration } from '@kirbydesign/designsystem'
     },
   ],
 })
+// start class MockGridComponent
 export class MockGridComponent {
   @Input() maxColumns: number;
   @Input() cardConfigurations: GridCardConfiguration[];
-}
+} // end class MockGridComponent
 
 // #endregion

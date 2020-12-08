@@ -13,11 +13,12 @@ import { ItemComponent } from '@kirbydesign/designsystem';
     },
   ],
 })
+// start class MockItemComponent
 export class MockItemComponent {
   @Input() disabled: boolean;
   @Input() selected: boolean;
   @Input() selectable: boolean;
   @Input() reorderable: boolean;
-}
+} // end class MockItemComponent
 
 // #endregion

@@ -12,8 +12,9 @@ import { FullscreenLoadingOverlayComponent } from '@kirbydesign/designsystem';
     },
   ],
 })
+// start class MockFullscreenLoadingOverlayComponent
 export class MockFullscreenLoadingOverlayComponent {
   @Input() showBackdrop: boolean;
-}
+} // end class MockFullscreenLoadingOverlayComponent
 
 // #endregion

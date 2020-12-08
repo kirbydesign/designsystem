@@ -13,11 +13,12 @@ import { EmptyStateComponent } from '@kirbydesign/designsystem';
     },
   ],
 })
+// start class MockEmptyStateComponent
 export class MockEmptyStateComponent {
   @Input() iconName: string;
   @Input() customIconName: string;
   @Input() title: string;
   @Input() subtitle: string;
-}
+} // end class MockEmptyStateComponent
 
 // #endregion

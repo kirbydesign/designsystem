@@ -14,6 +14,7 @@ import { InputComponent } from '@kirbydesign/designsystem';
     },
   ],
 })
+// start class MockInputComponent
 export class MockInputComponent {
   @Input() type: string;
   @Input() borderless: boolean;
@@ -23,6 +24,6 @@ export class MockInputComponent {
   @Input() value: string;
   @Input() maxlength: number;
   @Input() inputmode: string;
-}
+} // end class MockInputComponent
 
 // #endregion

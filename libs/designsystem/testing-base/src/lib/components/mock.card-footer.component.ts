@@ -13,6 +13,7 @@ import { CardFooterComponent } from '@kirbydesign/designsystem';
     },
   ],
 })
-export class MockCardFooterComponent {}
+// start class MockCardFooterComponent
+export class MockCardFooterComponent {} // end class MockCardFooterComponent
 
 // #endregion

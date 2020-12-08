@@ -13,9 +13,10 @@ import { FormFieldComponent } from '@kirbydesign/designsystem';
     },
   ],
 })
+// start class MockFormFieldComponent
 export class MockFormFieldComponent {
   @Input() label: string;
   @Input() message: string;
-}
+} // end class MockFormFieldComponent
 
 // #endregion

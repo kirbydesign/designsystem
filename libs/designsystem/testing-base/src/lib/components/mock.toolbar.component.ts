@@ -13,12 +13,13 @@ import { ToolbarComponent } from '@kirbydesign/designsystem';
     },
   ],
 })
+// start class MockToolbarComponent
 export class MockToolbarComponent {
   @Input() title: string;
   @Input() hideBackButton: boolean;
   @Output() back = new EventEmitter();
   @Output() primarySelect = new EventEmitter();
   @Output() secondarySelect = new EventEmitter();
-}
+} // end class MockToolbarComponent
 
 // #endregion

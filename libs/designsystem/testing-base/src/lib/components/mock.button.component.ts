@@ -14,6 +14,7 @@ import { ButtonComponent, NotificationColor } from '@kirbydesign/designsystem';
     },
   ],
 })
+// start class MockButtonComponent
 export class MockButtonComponent {
   @Input() attentionLevel: '1' | '2' | '3' | '4';
   @Input() isDestructive: boolean;
@@ -21,6 +22,6 @@ export class MockButtonComponent {
   @Input() expand: 'full' | 'block';
   @Input() text: string;
   @Input() isFloating: boolean;
-}
+} // end class MockButtonComponent
 
 // #endregion

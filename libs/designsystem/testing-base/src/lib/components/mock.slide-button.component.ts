@@ -13,11 +13,12 @@ import { SlideButtonComponent } from '@kirbydesign/designsystem';
     },
   ],
 })
+// start class MockSlideButtonComponent
 export class MockSlideButtonComponent {
   @Input() text: string;
   @Input() expand: 'block';
   @Output() slideDone = new EventEmitter();
   @Output() slidingPercentageChanged = new EventEmitter<number>();
-}
+} // end class MockSlideButtonComponent
 
 // #endregion

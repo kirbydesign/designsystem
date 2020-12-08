@@ -13,9 +13,10 @@ import { FormFieldMessageComponent } from '@kirbydesign/designsystem';
     },
   ],
 })
+// start class MockFormFieldMessageComponent
 export class MockFormFieldMessageComponent {
   @Input() text: string;
   @Input() position: 'left' | 'right';
-}
+} // end class MockFormFieldMessageComponent
 
 // #endregion

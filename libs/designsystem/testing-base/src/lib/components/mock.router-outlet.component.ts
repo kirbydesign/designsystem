@@ -13,8 +13,9 @@ import { RouterOutletComponent } from '@kirbydesign/designsystem';
     },
   ],
 })
+// start class MockRouterOutletComponent
 export class MockRouterOutletComponent {
   @Input() main: boolean;
-}
+} // end class MockRouterOutletComponent
 
 // #endregion

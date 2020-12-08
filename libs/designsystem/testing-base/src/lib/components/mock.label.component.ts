@@ -13,8 +13,9 @@ import { LabelComponent } from '@kirbydesign/designsystem';
     },
   ],
 })
+// start class MockLabelComponent
 export class MockLabelComponent {
   @Input() direction: 'vertical' | 'horizontal';
-}
+} // end class MockLabelComponent
 
 // #endregion

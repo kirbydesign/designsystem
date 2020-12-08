@@ -13,8 +13,9 @@ import { BadgeComponent } from '@kirbydesign/designsystem';
     },
   ],
 })
+// start class MockBadgeComponent
 export class MockBadgeComponent {
   @Input() text: string;
-}
+} // end class MockBadgeComponent
 
 // #endregion

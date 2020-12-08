@@ -13,12 +13,13 @@ import { CardComponent } from '@kirbydesign/designsystem';
     },
   ],
 })
+// start class MockCardComponent
 export class MockCardComponent {
   @Input() title: string;
   @Input() subtitle: string;
   @Input() hasPadding: boolean;
   @Input() sizes: { [size: string]: number };
   @Input() mode: 'flat' | 'highlighted';
-}
+} // end class MockCardComponent
 
 // #endregion

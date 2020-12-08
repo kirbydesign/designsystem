@@ -13,6 +13,7 @@ import { ListHeaderComponent } from '@kirbydesign/designsystem';
     },
   ],
 })
-export class MockListHeaderComponent {}
+// start class MockListHeaderComponent
+export class MockListHeaderComponent {} // end class MockListHeaderComponent
 
 // #endregion

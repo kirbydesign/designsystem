@@ -13,6 +13,7 @@ import { AppComponent } from '@kirbydesign/designsystem';
     },
   ],
 })
-export class MockAppComponent {}
+// start class MockAppComponent
+export class MockAppComponent {} // end class MockAppComponent
 
 // #endregion

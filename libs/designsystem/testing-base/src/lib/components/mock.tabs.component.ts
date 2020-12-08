@@ -13,6 +13,7 @@ import { TabsComponent } from '@kirbydesign/designsystem';
     },
   ],
 })
-export class MockTabsComponent {}
+// start class MockTabsComponent
+export class MockTabsComponent {} // end class MockTabsComponent
 
 // #endregion

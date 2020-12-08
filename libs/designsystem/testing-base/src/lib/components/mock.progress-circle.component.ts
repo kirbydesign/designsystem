@@ -13,10 +13,11 @@ import { ProgressCircleComponent } from '@kirbydesign/designsystem';
     },
   ],
 })
+// start class MockProgressCircleComponent
 export class MockProgressCircleComponent {
   @Input() value: number;
   @Input() size: 'sm' | 'md' | 'lg';
   @Input() themeColor: 'success' | 'warning' | 'danger';
-}
+} // end class MockProgressCircleComponent
 
 // #endregion

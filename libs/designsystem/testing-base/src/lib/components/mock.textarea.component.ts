@@ -14,6 +14,7 @@ import { TextareaComponent } from '@kirbydesign/designsystem';
     },
   ],
 })
+// start class MockTextareaComponent
 export class MockTextareaComponent {
   @Input() value: string;
   @Input() borderless: boolean;
@@ -21,6 +22,6 @@ export class MockTextareaComponent {
   @Input() autocomplete: 'on' | 'off';
   @Input() autocorrect: 'on' | 'off';
   @Input() maxlength: number;
-}
+} // end class MockTextareaComponent
 
 // #endregion

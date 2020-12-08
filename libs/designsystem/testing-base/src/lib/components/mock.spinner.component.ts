@@ -13,6 +13,7 @@ import { SpinnerComponent } from '@kirbydesign/designsystem';
     },
   ],
 })
-export class MockSpinnerComponent {}
+// start class MockSpinnerComponent
+export class MockSpinnerComponent {} // end class MockSpinnerComponent
 
 // #endregion

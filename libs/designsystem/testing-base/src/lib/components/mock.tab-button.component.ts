@@ -13,9 +13,10 @@ import { TabButtonComponent } from '@kirbydesign/designsystem';
     },
   ],
 })
+// start class MockTabButtonComponent
 export class MockTabButtonComponent {
   @Input() routerLink: string;
   @Output() click = new EventEmitter<Event>();
-}
+} // end class MockTabButtonComponent
 
 // #endregion

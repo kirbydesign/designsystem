@@ -13,6 +13,7 @@ import { CalendarComponent } from '@kirbydesign/designsystem';
     },
   ],
 })
+// start class MockCalendarComponent
 export class MockCalendarComponent {
   @Output() dateChange = new EventEmitter<Date>();
   @Input() timezone: 'local' | 'UTC';
@@ -25,6 +26,6 @@ export class MockCalendarComponent {
   @Input() todayDate: Date;
   @Input() minDate: Date;
   @Input() maxDate: Date;
-}
+} // end class MockCalendarComponent
 
 // #endregion

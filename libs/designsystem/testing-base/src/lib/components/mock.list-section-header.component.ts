@@ -13,8 +13,9 @@ import { ListSectionHeaderComponent } from '@kirbydesign/designsystem';
     },
   ],
 })
+// start class MockListSectionHeaderComponent
 export class MockListSectionHeaderComponent {
   @Input() title: string;
-}
+} // end class MockListSectionHeaderComponent
 
 // #endregion

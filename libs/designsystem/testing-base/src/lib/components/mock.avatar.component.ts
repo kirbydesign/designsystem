@@ -13,12 +13,13 @@ import { AvatarComponent } from '@kirbydesign/designsystem';
     },
   ],
 })
+// start class MockAvatarComponent
 export class MockAvatarComponent {
   @Input() imageSrc: string;
   @Input() altText: string;
   @Input() shadow: boolean;
   @Input() text: string;
   @Input() overlay: boolean;
-}
+} // end class MockAvatarComponent
 
 // #endregion

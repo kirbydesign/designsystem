@@ -13,6 +13,7 @@ import { DropdownComponent } from '@kirbydesign/designsystem';
     },
   ],
 })
+// start class MockDropdownComponent
 export class MockDropdownComponent {
   @Input() items: string[] | any[];
   @Input() selectedIndex: number;
@@ -25,6 +26,6 @@ export class MockDropdownComponent {
   @Input() size: 'sm' | 'md';
   @Input() tabindex: number;
   @Output() change = new EventEmitter<string | any>();
-}
+} // end class MockDropdownComponent
 
 // #endregion

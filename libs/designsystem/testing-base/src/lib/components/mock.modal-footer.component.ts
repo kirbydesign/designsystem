@@ -13,8 +13,9 @@ import { ModalFooterComponent } from '@kirbydesign/designsystem';
     },
   ],
 })
+// start class MockModalFooterComponent
 export class MockModalFooterComponent {
   @Input() snapToKeyboard: boolean;
-}
+} // end class MockModalFooterComponent
 
 // #endregion

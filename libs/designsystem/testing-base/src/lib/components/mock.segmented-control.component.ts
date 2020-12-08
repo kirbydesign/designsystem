@@ -13,6 +13,7 @@ import { SegmentedControlComponent, SegmentItem } from '@kirbydesign/designsyste
     },
   ],
 })
+// start class MockSegmentedControlComponent
 export class MockSegmentedControlComponent {
   @Input() items: SegmentItem[];
   @Input() selectedIndex: number;
@@ -20,6 +21,6 @@ export class MockSegmentedControlComponent {
   @Input() mode: 'default' | 'chip';
   @Input() size: 'sm' | 'md';
   @Output() segmentSelect = new EventEmitter();
-}
+} // end class MockSegmentedControlComponent
 
 // #endregion

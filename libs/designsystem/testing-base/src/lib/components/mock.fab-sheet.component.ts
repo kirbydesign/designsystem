@@ -13,9 +13,10 @@ import { FabSheetComponent } from '@kirbydesign/designsystem';
     },
   ],
 })
+// start class MockFabSheetComponent
 export class MockFabSheetComponent {
   @Input() disabled: boolean;
   @Input() horizontalAlignment: 'left' | 'center' | 'right';
-}
+} // end class MockFabSheetComponent
 
 // #endregion

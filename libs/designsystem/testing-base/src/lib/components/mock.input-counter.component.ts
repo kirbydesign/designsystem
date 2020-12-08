@@ -17,8 +17,9 @@ import {
     },
   ],
 })
+// start class MockInputCounterComponent
 export class MockInputCounterComponent {
   @Input() listenTo: InputComponent | TextareaComponent;
-}
+} // end class MockInputCounterComponent
 
 // #endregion

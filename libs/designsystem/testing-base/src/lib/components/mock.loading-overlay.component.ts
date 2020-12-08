@@ -13,9 +13,10 @@ import { LoadingOverlayComponent } from '@kirbydesign/designsystem';
     },
   ],
 })
+// start class MockLoadingOverlayComponent
 export class MockLoadingOverlayComponent {
   @Input() isLoading: boolean;
   @Input() showBackdrop: boolean;
-}
+} // end class MockLoadingOverlayComponent
 
 // #endregion
