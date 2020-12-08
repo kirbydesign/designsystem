@@ -3,6 +3,13 @@ import { forwardRef, Component, Input, Output, EventEmitter } from '@angular/cor
 import { CheckboxComponent } from '@kirbydesign/designsystem';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
+// Please note: To keep custom members (e.g. methods) when auto-generating mocks,
+// wrap the custom code within a CUSTOM region - as in:
+// #region CUSTOM
+// YourCustomCodeHere() {
+//   ...
+// }
+// #endregion
 @Component({
   selector: 'kirby-checkbox',
   template: '<ng-content></ng-content>',
