@@ -24,6 +24,10 @@ import { FormFieldComponent } from '@kirbydesign/designsystem';
 export class MockFormFieldComponent {
   @Input() label: string;
   @Input() message: string;
+
+  // #region CUSTOM
+  focus() {}
+  // #endregion
 } // end class MockFormFieldComponent
 
 // #endregion
