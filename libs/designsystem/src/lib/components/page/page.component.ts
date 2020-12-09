@@ -22,13 +22,15 @@ import {
   ViewChild,
 } from '@angular/core';
 import { NavigationEnd, NavigationStart, Router, RouterEvent } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Observable, Subject, Subscription } from 'rxjs';
+import { filter, takeUntil } from 'rxjs/operators';
 import { IonContent } from '@ionic/angular';
 
 import { FitHeadingConfig } from '../../directives/fit-heading/fit-heading.directive';
 import { selectedTabClickEvent } from '../tabs/tab-button/tab-button.events';
 import { KirbyAnimation } from '../../animation/kirby-animation';
 import { WindowRef } from '../../types/window-ref';
+import { ModalNavigationService } from '../modal/services/modal-navigation.service';
 
 type stickyConfig = { sticky: boolean };
 type fixedConfig = { fixed: boolean };
@@ -123,10 +125,7 @@ export class PageComponent
 
   @ViewChild('pageTitle', { static: false, read: ElementRef })
   private pageTitle: ElementRef;
-  @ViewChild('stickyToolbarButtons', { static: false, read: ElementRef })
-  private stickyToolbarButtons: ElementRef;
-  @ViewChild('fixedToolbarButtons', { static: false, read: ElementRef })
-  private fixedToolbarButtons: ElementRef;
+
   @ViewChild('simpleTitleTemplate', { static: true, read: TemplateRef })
   private simpleTitleTemplate: TemplateRef<any>;
   @ViewChild('simpleToolbarTitleTemplate', { static: true, read: TemplateRef })
@@ -137,8 +136,6 @@ export class PageComponent
   customTitleTemplate: TemplateRef<any>;
   @ContentChildren(PageActionsDirective)
   customActions: QueryList<PageActionsDirective>;
-  @ContentChild(PageActionsComponent, { static: false })
-  private actionsComponent: PageActionsComponent;
   @ContentChildren(PageContentDirective)
   private customContent: QueryList<PageContentDirective>;
 
@@ -161,12 +158,24 @@ export class PageComponent
   private urls: string[] = [];
   private hasEntered: boolean;
 
+  private ngOnDestroy$ = new Subject();
+  private navigationStart$: Observable<RouterEvent> = this.router.events.pipe(
+    takeUntil(this.ngOnDestroy$),
+    filter((event: RouterEvent) => event instanceof NavigationStart)
+  );
+
+  private navigationEnd$: Observable<RouterEvent> = this.router.events.pipe(
+    takeUntil(this.ngOnDestroy$),
+    filter((event: RouterEvent) => event instanceof NavigationEnd)
+  );
+
   constructor(
     private elementRef: ElementRef,
     private renderer: Renderer2,
     private router: Router,
     private changeDetectorRef: ChangeDetectorRef,
-    private window: WindowRef
+    private window: WindowRef,
+    private modalNavigationService: ModalNavigationService
   ) {}
 
   ngOnInit(): void {
@@ -183,12 +192,18 @@ export class PageComponent
   }
 
   ngAfterViewInit(): void {
-    this.routerEventsSubscription = this.router.events.subscribe((event: RouterEvent) => {
-      if (event instanceof NavigationStart && this.urls.indexOf(event.url) === -1) {
+    this.navigationStart$.subscribe((event: NavigationStart) => {
+      if (
+        !this.urls.includes(event.url) &&
+        !this.modalNavigationService.isModalRoute(event.url) &&
+        !this.modalNavigationService.isModalRoute(this.router.url)
+      ) {
         this.onLeave();
       }
+    });
 
-      if (event instanceof NavigationEnd && this.urls.indexOf(event.urlAfterRedirects) > -1) {
+    this.navigationEnd$.subscribe((event: NavigationEnd) => {
+      if (this.urls.includes(event.urlAfterRedirects)) {
         this.onEnter();
       }
     });
@@ -199,7 +214,7 @@ export class PageComponent
   }
 
   ngAfterContentChecked(): void {
-    if (this.urls.indexOf(this.router.url) === -1) {
+    if (!this.urls.includes(this.router.url)) {
       this.urls.push(this.router.url);
       this.onEnter();
     }
@@ -211,9 +226,9 @@ export class PageComponent
   }
 
   ngOnDestroy(): void {
-    if (this.routerEventsSubscription) {
-      this.routerEventsSubscription.unsubscribe();
-    }
+    this.ngOnDestroy$.next();
+    this.ngOnDestroy$.complete();
+
     this.pageTitleIntersectionObserverRef.disconnect();
     this.window.removeEventListener(selectedTabClickEvent, () => {
       this.content.scrollToTop(KirbyAnimation.Duration.LONG);

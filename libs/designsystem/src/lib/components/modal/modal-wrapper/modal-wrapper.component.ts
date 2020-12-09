@@ -13,9 +13,11 @@ import {
   ViewChildren,
   QueryList,
   ComponentFactoryResolver,
+  NgZone,
+  RendererStyleFlags2,
 } from '@angular/core';
 import { ActivatedRoute, RouterOutlet } from '@angular/router';
-import { IonContent, IonTitle } from '@ionic/angular';
+import { IonContent, IonHeader, IonTitle } from '@ionic/angular';
 import { Observable, Subject } from 'rxjs';
 import { first, takeUntil } from 'rxjs/operators';
 
@@ -26,6 +28,9 @@ import { Modal } from '../services/modal.interfaces';
 import { ButtonComponent } from '../../button/button.component';
 import { ResizeObserverService } from '../../shared/resize-observer/resize-observer.service';
 import { ResizeObserverEntry } from '../../shared/resize-observer/types/resize-observer-entry';
+import { WindowRef } from '../../../types/window-ref';
+import { DesignTokenHelper } from '../../../helpers/design-token-helper';
+import { PlatformService } from '../../../helpers/platform.service';
 
 @Component({
   selector: 'kirby-modal-wrapper',
@@ -36,7 +41,7 @@ import { ResizeObserverEntry } from '../../shared/resize-observer/types/resize-o
 export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDestroy {
   static readonly KEYBOARD_HIDE_DELAY_IN_MS = 100;
 
-  scrollY: number = Math.abs(window.scrollY);
+  scrollY: number = Math.abs(this.windowRef.scrollY);
   set scrollDisabled(disabled: boolean) {
     this.ionContent.scrollY = !disabled;
   }
@@ -50,6 +55,9 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   @ViewChild(IonContent, { static: true }) private ionContent: IonContent;
   @ViewChild(IonContent, { static: true, read: ElementRef }) private ionContentElement: ElementRef<
     HTMLIonContentElement
+  >;
+  @ViewChild(IonHeader, { static: true, read: ElementRef }) private ionHeaderElement: ElementRef<
+    HTMLIonHeaderElement
   >;
   @ViewChild(IonTitle, { static: true, read: ElementRef }) private ionTitleElement: ElementRef<
     HTMLIonTitleElement
@@ -74,6 +82,13 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     }
     return this._mutationObserver;
   }
+  private _intersectionObserver: IntersectionObserver;
+  private get intersectionObserver(): IntersectionObserver {
+    if (!this._intersectionObserver) {
+      this._intersectionObserver = this.createModalWrapperIntersectionObserver();
+    }
+    return this._intersectionObserver;
+  }
 
   @HostBinding('class.drawer')
   get _isDrawer() {
@@ -86,14 +101,19 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     private injector: Injector,
     private elementRef: ElementRef<HTMLElement>,
     private renderer: Renderer2,
+    private zone: NgZone,
     private resizeObserverService: ResizeObserverService,
-    private componentFactoryResolver: ComponentFactoryResolver
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private windowRef: WindowRef,
+    private platform: PlatformService
   ) {
+    this.setViewportHeight();
     this.observeViewportResize();
   }
 
   ngOnInit(): void {
     this.ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
+    this.initializeSizing();
     this.initializeModalRoute();
     this.listenForIonModalDidPresent();
     this.listenForIonModalWillDismiss();
@@ -101,6 +121,13 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
       providers: [{ provide: COMPONENT_PROPS, useValue: this.config.componentProps }],
       parent: this.injector,
     });
+  }
+
+  private initializeSizing() {
+    if (this.config.size === 'full-height') return;
+    this.patchScrollElementSize();
+    this.observeHeaderResize();
+    this.observeModalFullHeight();
   }
 
   private initializeModalRoute() {
@@ -124,6 +151,31 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     });
   }
 
+  private patchScrollElementSize(): void {
+    const supportsCssShadowParts = 'part' in HTMLElement.prototype;
+    if (supportsCssShadowParts) return;
+    this.ionContent.getScrollElement().then((scrollElement) => {
+      this.renderer.setStyle(scrollElement, 'height', '100%');
+      this.renderer.setStyle(scrollElement, 'position', 'relative');
+      if (this.config.flavor === 'drawer') {
+        this.renderer.setStyle(
+          scrollElement,
+          'transition',
+          'padding-bottom ' + DesignTokenHelper.softKeyboardTransitionLeave
+        );
+      }
+    });
+  }
+
+  private observeModalFullHeight() {
+    const ionModalWrapper = this.elementRef.nativeElement.closest<HTMLElement>('.modal-wrapper');
+    if (!ionModalWrapper) return;
+    // Start observing when modal has finished animating:
+    this.didPresent.then(() => {
+      this.intersectionObserver.observe(ionModalWrapper);
+    });
+  }
+
   ngAfterViewInit(): void {
     if (this.toolbarButtonsQuery) {
       this.toolbarButtons = this.toolbarButtonsQuery.map((buttonRef) => buttonRef.nativeElement);
@@ -134,6 +186,13 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   private checkForEmbeddedElements() {
     this.moveEmbeddedElements();
     this.observeEmbeddedElements();
+  }
+
+  private observeHeaderResize() {
+    this.resizeObserverService.observe(this.ionHeaderElement.nativeElement, (entry) => {
+      const [property, pixelValue] = ['--header-height', `${entry.contentRect.height}px`];
+      this.setCssVar(this.elementRef.nativeElement, property, pixelValue);
+    });
   }
 
   private moveEmbeddedElements() {
@@ -178,7 +237,6 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     if (!this.ionModalElement) {
       return;
     }
-
     if (!this.keyboardVisible || !this.viewportResized) {
       // No keyboard visible or viewport not resized:
       // Dismiss modal and return:
@@ -207,32 +265,81 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   @HostListener('window:focusout')
   onFocusChange() {
     // This fixes an undesired scroll behaviour occurring on keyboard-tabbing backwards (with shift+tab):
-    window.scrollTo({ top: this.scrollY });
+    this.windowRef.scrollTo({ top: this.scrollY });
   }
 
-  @HostListener('window:keyboardWillShow', ['$event'])
-  _onKeyboardWillShow(info?: { keyboardHeight: number }) {
-    this.keyboardVisible = true;
-    if (info && info.keyboardHeight) {
-      this.setKeyboardOffset(info.keyboardHeight);
-    }
+  @HostListener('window:ionKeyboardDidShow', ['$event.detail.keyboardHeight'])
+  @HostListener('window:keyboardWillShow', ['$event.keyboardHeight'])
+  _onKeyboardShow(keyboardHeight: number) {
+    this.setKeyboardVisibility(keyboardHeight);
   }
 
+  @HostListener('window:ionKeyboardDidHide')
   @HostListener('window:keyboardWillHide')
-  _onKeyboardWillHide() {
-    this.keyboardVisible = false;
-    this.setKeyboardOffset(0);
+  _onKeyboardHide() {
+    this.setKeyboardVisibility(0);
   }
 
-  private setKeyboardOffset(value: number) {
-    const [key, pixelValue] = ['--keyboard-offset', `${value}px`];
-    this.ionContentElement.nativeElement.style.setProperty(key, pixelValue);
-    const embeddedFooterElement = this.elementRef.nativeElement.querySelector<HTMLElement>(
-      'kirby-modal-footer'
+  private toggleContentMaxHeight(freeze: boolean) {
+    const shouldToggleMaxHeight =
+      this.config.flavor === 'modal' && this.platform.isPhabletOrBigger();
+    if (!shouldToggleMaxHeight) return;
+    const style = 'max-height';
+    const contentElement = this.ionContentElement.nativeElement;
+    this.zone.run(() => {
+      if (freeze) {
+        const contentHeight = contentElement.offsetHeight;
+        this.renderer.setStyle(contentElement, style, `${contentHeight}px`);
+      } else {
+        this.renderer.removeStyle(contentElement, style);
+      }
+    });
+  }
+
+  private setKeyboardVisibility(keyboardHeight: number) {
+    const keyboardAlreadyVisible = keyboardHeight > 0 && this.keyboardVisible;
+    const keyboardAlreadyHidden = keyboardHeight === 0 && !this.keyboardVisible;
+    if (keyboardAlreadyVisible || keyboardAlreadyHidden) return;
+    this.keyboardVisible = keyboardHeight > 0;
+    this.toggleContentMaxHeight(this.keyboardVisible);
+    this.setKeyboardOverlap(keyboardHeight);
+  }
+
+  private getKeyboardOverlap(keyboardHeight: number, element: Element) {
+    if (keyboardHeight <= 0 || !element) return 0;
+    const distanceFromViewportBottomToElement = Math.floor(
+      this.windowRef.innerHeight - element.getBoundingClientRect().bottom
     );
+    return Math.max(keyboardHeight - distanceFromViewportBottomToElement, 0);
+  }
+
+  private setCssVar(element: Element, property: string, value: string) {
+    this.zone.run(() =>
+      this.renderer.setStyle(element, property, value, RendererStyleFlags2.DashCase)
+    );
+  }
+
+  private toggleCssClass(element: Element, klass: string, condition: boolean) {
+    this.zone.run(() =>
+      condition ? this.renderer.addClass(element, klass) : this.renderer.removeClass(element, klass)
+    );
+  }
+
+  private setKeyboardOverlap(keyboardHeight: number) {
+    this.toggleCssClass(this.elementRef.nativeElement, 'keyboard-visible', keyboardHeight > 0);
+    const keyboardOverlap = this.getKeyboardOverlap(keyboardHeight, this.elementRef.nativeElement);
+    let snapFooterToKeyboard = false;
+    const embeddedFooterElement = this.getEmbeddedFooterElement();
     if (embeddedFooterElement) {
-      embeddedFooterElement.style.setProperty(key, pixelValue);
+      this.setCssVar(embeddedFooterElement, '--keyboard-offset', `${keyboardOverlap}px`);
+      snapFooterToKeyboard = embeddedFooterElement.classList.contains('snap-to-keyboard');
     }
+
+    const contentElement = this.ionContentElement.nativeElement;
+    const contentKeyboardOffset = snapFooterToKeyboard
+      ? keyboardOverlap
+      : this.getKeyboardOverlap(keyboardHeight, contentElement);
+    this.setCssVar(contentElement, '--keyboard-offset', `${contentKeyboardOffset}px`);
   }
 
   onHeaderTouchStart(event: TouchEvent) {
@@ -251,8 +358,20 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     }
   }
 
+  @HostListener('window:resize')
+  _onWindowResize() {
+    this.setViewportHeight();
+  }
+
+  private setViewportHeight() {
+    const vh = (this.windowRef.innerHeight * 0.01).toFixed(2);
+    this.setCssVar(this.elementRef.nativeElement, '--vh', `${vh}px`);
+  }
+
   private observeViewportResize() {
-    this.resizeObserverService.observe(window.document.body, this.onViewportResize.bind(this));
+    this.resizeObserverService.observe(this.windowRef.document.body, (entry) =>
+      this.onViewportResize(entry)
+    );
   }
 
   private onViewportResize(entry: ResizeObserverEntry) {
@@ -301,9 +420,22 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
       : this.ionContentElement.nativeElement.firstElementChild;
   }
 
+  private getEmbeddedFooterElement() {
+    return this.elementRef.nativeElement.querySelector<HTMLElement>('kirby-modal-footer');
+  }
+
   private moveChild(child: Element, newParent: Element) {
     this.renderer.removeChild(child.parentElement, child);
     this.renderer.appendChild(newParent, child);
+    if (child.tagName === 'KIRBY-MODAL-FOOTER') {
+      this.resizeObserverService.observe(child, (entry) => {
+        const [property, pixelValue] = [
+          '--footer-height',
+          `${Math.floor(entry.contentRect.height)}px`,
+        ];
+        this.setCssVar(this.elementRef.nativeElement, property, pixelValue);
+      });
+    }
   }
 
   private removeChild(child?: Element) {
@@ -344,6 +476,30 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     return new MutationObserver(callback);
   }
 
+  private createModalWrapperIntersectionObserver(): IntersectionObserver {
+    const callback: IntersectionObserverCallback = (entries) => {
+      const entry = entries[0];
+      const isTouchingViewport = entry.intersectionRatio < 1;
+      if (isTouchingViewport) {
+        this.renderer.addClass(entry.target, 'full-height');
+      } else {
+        this.renderer.removeClass(entry.target, 'full-height');
+      }
+    };
+
+    // Set explicit viewport root if within iframe:
+    const root = this.windowRef.frameElement
+      ? (this.windowRef.document as any) // Cast to `any` as Typescript lib.d.ts doesnt support Document type yet
+      : undefined;
+    const options: IntersectionObserverInit = {
+      rootMargin: '0px 0px -1px 0px', // `bottom: -1px` allows checking when the modal bottom is touching the viewport
+      root,
+      threshold: [0.99, 1],
+    };
+
+    return new IntersectionObserver(callback, options);
+  }
+
   ngOnDestroy() {
     if (this.routerOutlet.isActivated) {
       this.routerOutlet.deactivate();
@@ -351,6 +507,12 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     //clean up the observer
     this.mutationObserver.disconnect();
     delete this._mutationObserver;
-    this.resizeObserverService && this.resizeObserverService.unobserve(window.document.body);
+    this.intersectionObserver.disconnect();
+    delete this._intersectionObserver;
+    if (this.resizeObserverService) {
+      this.resizeObserverService.unobserve(window.document.body);
+      this.resizeObserverService.unobserve(this.ionHeaderElement.nativeElement);
+      this.resizeObserverService.unobserve(this.getEmbeddedFooterElement());
+    }
   }
 }

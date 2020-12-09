@@ -1,6 +1,12 @@
 @import '../../scss/utils';
 
+:host {
+  display: block;
+  min-height: size('l');
+}
+
 .overlay-wrapper {
+  min-height: inherit;
   height: 100%;
   width: 100%;
   position: relative;

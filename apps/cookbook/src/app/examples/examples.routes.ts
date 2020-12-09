@@ -55,6 +55,8 @@ import { StockChartExampleComponent } from './stock-chart-example/stock-chart-ex
 import { ProgressCircleExampleComponent } from './progress-circle-example/progress-circle-example.component';
 import { FlagExampleComponent } from './flag-example/flag-example.component';
 import { ToggleButtonExampleComponent } from './toggle-button-example/toggle-button-example.component';
+import { SlidesExampleComponent } from './slides-example/slides-example.component';
+import { AccordionExampleComponent } from './accordion-example/accordion-example.component';
 
 export const routes: Routes = [
   {
@@ -158,6 +160,10 @@ export const routes: Routes = [
             component: ModalRoutePage2ExampleComponent,
           },
         ],
+      },
+      {
+        path: 'form-field',
+        component: FormFieldExampleComponent,
       },
     ],
   },
@@ -316,10 +322,6 @@ export const routes: Routes = [
     component: ToolbarExampleComponent,
   },
   {
-    path: 'form-field',
-    component: FormFieldExampleComponent,
-  },
-  {
     path: 'fab-sheet',
     component: FabSheetExampleComponent,
   },
@@ -334,5 +336,13 @@ export const routes: Routes = [
   {
     path: 'toggle-button',
     component: ToggleButtonExampleComponent,
+  },
+  {
+    path: 'slides',
+    component: SlidesExampleComponent,
+  },
+  {
+    path: 'accordion',
+    component: AccordionExampleComponent,
   },
 ];

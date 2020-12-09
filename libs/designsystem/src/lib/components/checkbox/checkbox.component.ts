@@ -17,6 +17,7 @@ import {
 })
 export class CheckboxComponent implements OnChanges {
   @Input() checked: boolean;
+  @Input() disabled: boolean;
   @Input() color: string = 'primary';
   @Input() shape: string = 'square';
   @Output() checkedChange = new EventEmitter<boolean>();

@@ -25,6 +25,19 @@ export class FormFieldShowcaseComponent {
     },
   ];
 
+  formFieldMethods: ShowcaseProperty[] = [
+    {
+      name: 'focus()',
+      description: `Programmatically sets focus to the input (or textarea) within the form field.
+On native devices this method also ensures the form field is scrolled into the viewport.`,
+    },
+  ];
+
+  methodColumns = {
+    Name: 'Name',
+    Description: 'Description',
+  };
+
   sharedProperties: ShowcaseProperty[] = [
     {
       name: 'hasError',

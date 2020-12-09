@@ -1,1 +1,73 @@
 @import './libs/designsystem/src/lib/scss/utils';
+
+@mixin kirby-keys($start-index, $additional-keys: ()) {
+  $keys: append(('K', 'I', 'R', 'B', 'Y'), $additional-keys);
+  @each $letter in $keys {
+    $counter: index($keys, $letter);
+    &:nth-child(#{$start-index + $counter})::before {
+      content: $letter;
+    }
+  }
+}
+
+.dummy-keyboard {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  z-index: 99999;
+  pointer-events: none;
+  overflow: hidden;
+  height: var(--keyboard-height);
+
+  .top,
+  .bg {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+  }
+
+  .top {
+    background-color: transparent;
+    border-top: 1px dashed get-color('semi-dark');
+    z-index: 1;
+  }
+
+  .bg {
+    opacity: 0.9;
+    background-color: get-color('medium');
+    transition: transform $soft-keyboard-transition-leave;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-auto-rows: 1fr;
+    grid-gap: size('s');
+    padding: size('s');
+    transform: translateY(100%);
+
+    @include media('>=medium') {
+      grid-template-columns: repeat(10, 1fr);
+    }
+
+    > * {
+      background-color: get-color('white');
+      border-radius: size('xxxs');
+      box-shadow: 0px 2px get-color('semi-dark');
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: font-size('m');
+
+      @include media('<medium') {
+        @include kirby-keys(15);
+      }
+
+      @include media('>=medium') {
+        @include kirby-keys(22, $additional-keys: ('©'));
+      }
+    }
+
+    &.keyboard-showing {
+      transform: translateY(0);
+      transition: transform $soft-keyboard-transition-enter;
+    }
+  }
+}

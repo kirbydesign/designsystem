@@ -8,4 +8,5 @@ export namespace KirbyAnimation {
     LONG = parseInt(styles.transitionDurations.long),
     EXTRA_LONG = parseInt(styles.transitionDurations.extraLong),
   }
+  export const Easing = styles.transitionEasings;
 }

@@ -1,4 +1,15 @@
 export class TestHelper {
+  private static readonly _init = TestHelper.muteIonicReInitializeWarning();
+
+  private static muteIonicReInitializeWarning() {
+    const originalWarn = console.warn;
+    const patchedWarn = (warning: any, ...optionalParams: any[]) => {
+      const suppress = `Ionic Angular was already initialized. Make sure IonicModule.forRoot() is just called once.`;
+      if (warning !== suppress) originalWarn(warning, ...optionalParams);
+    };
+    console.warn = patchedWarn;
+  }
+
   /*
    * Checks for the Web Component being ready,
    * ie. the component is hydrated, styles have been applied
@@ -24,13 +35,14 @@ export class TestHelper {
 
   public static async whenTrue(
     pollFunc: () => boolean,
-    timeout: number = 2000,
-    pollInterval: number = 5
+    timeoutInMs: number = 2000,
+    pollIntervalInMs: number = 5
   ): Promise<void> {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       let timeoutId, intervalId;
       const pollState = () => {
-        if (pollFunc()) {
+        const result = pollFunc();
+        if (result === true) {
           clearTimeout(timeoutId);
           clearInterval(intervalId);
           resolve();
@@ -38,9 +50,11 @@ export class TestHelper {
       };
       timeoutId = setTimeout(() => {
         clearInterval(intervalId);
-        resolve();
-      }, timeout);
-      intervalId = setInterval(pollState, pollInterval);
+        reject(
+          `Error: Timeout - TestHelper.whenTrue function did not complete within ${timeoutInMs}ms`
+        );
+      }, timeoutInMs);
+      intervalId = setInterval(pollState, pollIntervalInMs);
     });
   }
 
@@ -54,6 +68,8 @@ export class TestHelper {
   public static screensize = {
     phonesmall: { width: '320px', height: '568px' },
     phone: { width: '375px', height: '667px' },
+    phablet: { width: '575px', height: '767px' },
+    'phablet-landscape': { width: '767px', height: '575px' },
     tablet: { width: '768px', height: '1024px' },
     desktop: { width: '1024px', height: '1366px' },
   };
@@ -101,4 +117,25 @@ export class TestHelper {
     (window.frameElement as HTMLIFrameElement).style.width = null;
     (window.frameElement as HTMLIFrameElement).style.height = null;
   }
+
+  public static scrollMainWindowToTop() {
+    if (
+      window.parent &&
+      window.parent.document &&
+      window.parent.document.documentElement &&
+      window.parent.document.documentElement.scrollTop > 0
+    ) {
+      window.parent.document.documentElement.scrollTop = 0;
+    }
+  }
+
+  public static waitForResizeObserver(): Promise<void> {
+    return TestHelper.waitForTimeout();
+  }
+
+  public static waitForTimeout(timeoutInMs?: number): Promise<void> {
+    return new Promise((resolve) => setTimeout(resolve, timeoutInMs));
+  }
 }
+
+export type ScreenSize = keyof typeof TestHelper.screensize;
