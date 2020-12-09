@@ -47,6 +47,16 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() disablePastDates = false;
   @Input() disableFutureDates = false;
   @Input() alwaysEnableToday = false;
+  /**
+   * Configuration for the year navigator.
+   *
+   * Internally, calendar component:
+   *
+   * - Bases yearNavigatorOptions.from and yearNavigatorOptions.to on todayDate
+   *
+   * - prioritizes minDate and maxDate over yearNavigatorOptions.from and yearNavigatorOptions.to
+   */
+  // TODO: Discuss comment content and placement in lib
   @Input() yearNavigatorOptions: YearNavigatorConfig;
   public month: CalendarCell[][];
   public weekDays: string[];
