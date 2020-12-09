@@ -20,8 +20,7 @@ export class MockCalendarComponent {
   @Input() disablePastDates: boolean;
   @Input() disableFutureDates: boolean;
   @Input() alwaysEnableToday: boolean;
-  @Input() showYearSelector: boolean;
-  @Input() years: [];
+  @Input() yearNavigatorOptions: YearNavigatorConfig;
   @Input() selectedDate: Date;
   @Input() disabledDates: Date[];
   @Input() todayDate: Date;
