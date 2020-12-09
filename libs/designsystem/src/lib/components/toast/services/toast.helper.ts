@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 
+import { Overlay } from '../../modal/services/modal.interfaces';
+
 import { ToastConfig, MessageType } from '../config/toast-config';
 
 @Injectable()
@@ -10,7 +12,7 @@ export class ToastHelper {
 
   constructor(private toastController: ToastController) {}
 
-  public async showToast(config: ToastConfig): Promise<any> {
+  public async showToast(config: ToastConfig): Promise<Overlay> {
     const toast = await this.toastController.create({
       animated: config.animated,
       message: config.message,
@@ -18,8 +20,12 @@ export class ToastHelper {
       duration: config.durationInMs ? config.durationInMs : ToastHelper.DURATION_IN_MS,
       cssClass: this.getCssClass(config.messageType),
     });
-    toast.present();
-    return toast.onDidDismiss();
+    await toast.present();
+    return {
+      dismiss: toast.dismiss.bind(toast),
+      onWillDismiss: toast.onWillDismiss(),
+      onDidDismiss: toast.onDidDismiss(),
+    };
   }
 
   private getCssClass(messageType: MessageType): string {

@@ -7,13 +7,13 @@ import {
   Input,
   Output,
   ElementRef,
-  Inject,
   NgZone,
 } from '@angular/core';
 import { Subject, fromEvent } from 'rxjs';
 import { debounceTime, takeUntil, filter, map } from 'rxjs/operators';
 
-import { WINDOW_PROVIDER, WINDOW_REF, WindowRef } from '../../shared/window-ref/window-ref.service';
+import { WindowRef } from '../../../types/window-ref';
+
 import { Scroll } from './scroll.model';
 
 /**
@@ -23,7 +23,6 @@ export const INFINITE_SCROLL_DEBOUNCE = 100;
 
 @Directive({
   selector: '[kirbyInfiniteScroll]',
-  providers: [WINDOW_PROVIDER],
 })
 export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
   /**
@@ -53,11 +52,7 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
    */
   private offset = 0.8;
 
-  constructor(
-    private elementRef: ElementRef,
-    @Inject(WINDOW_REF) private windowRef: WindowRef,
-    private zone: NgZone
-  ) {}
+  constructor(private elementRef: ElementRef, private window: WindowRef, private zone: NgZone) {}
 
   ngAfterViewInit(): void {
     if (this.disabled) return;
@@ -81,6 +76,10 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
         this.scrollEnd.emit();
       });
 
+    /**
+     * Subscribe to the ionScroll event on the ion-content around the list (if any)
+     * and emit {@link scrollEnd} event when element scroll position has surpassed the offset.
+     */
     setTimeout(() => {
       const ionContent: HTMLElement = this.elementRef.nativeElement.closest('ion-content');
       if (ionContent) {
@@ -132,7 +131,7 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
 
     const distanceToViewBottom = boundindClientRect.bottom;
     const elementHeight = boundindClientRect.height;
-    const viewHeight = this.windowRef.nativeWindow.innerHeight;
+    const viewHeight = this.window.innerHeight;
 
     return { distanceToViewBottom, elementHeight, viewHeight };
   }

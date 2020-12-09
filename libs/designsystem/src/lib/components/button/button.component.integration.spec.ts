@@ -1,7 +1,7 @@
 import { RouterTestingModule } from '@angular/router/testing';
 import { SpectatorHost, createHostFactory } from '@ngneat/spectator';
 import { IonicModule, IonIcon } from '@ionic/angular';
-import { MockComponent, MockComponents } from 'ng-mocks';
+import { MockComponent, MockComponents, MockDirectives } from 'ng-mocks';
 
 import { DesignTokenHelper } from '../../helpers/design-token-helper';
 import { TestHelper } from '../../testing/test-helper';
@@ -21,6 +21,7 @@ import { EmptyStateComponent } from '../empty-state/empty-state.component';
 import { DropdownComponent } from '../dropdown/dropdown.component';
 import { CardComponent } from '../card/card.component';
 import { ItemComponent } from '../item/item.component';
+import { WindowRef } from '../../types/window-ref';
 
 const getColor = DesignTokenHelper.getColor;
 const size = DesignTokenHelper.size;
@@ -40,6 +41,12 @@ describe('ButtonComponent in Kirby Page', () => {
       PageTitleDirective,
       PageToolbarTitleDirective,
       FitHeadingDirective,
+    ],
+    providers: [
+      {
+        provide: WindowRef,
+        useValue: window,
+      },
     ],
   });
 
@@ -87,19 +94,19 @@ describe('ButtonComponent in Kirby Page', () => {
     });
 
     it('should render without background-color', async () => {
-      await TestHelper.whenHydrated(ionToolbar);
+      await TestHelper.whenReady(ionToolbar);
       expect(actionButtonInHeader).toHaveComputedStyle({ 'background-color': 'transparent' });
     });
 
     it('should render with correct color', async () => {
-      await TestHelper.whenHydrated(ionToolbar);
+      await TestHelper.whenReady(ionToolbar);
       expect(actionButtonInHeader).toHaveComputedStyle({
         color: getColor('primary', 'contrast'),
       });
     });
 
     it('should render with transparent border', async () => {
-      await TestHelper.whenHydrated(ionToolbar);
+      await TestHelper.whenReady(ionToolbar);
       expect(actionButtonInHeader).toHaveComputedStyle({
         'border-width': '1px',
         'border-style': 'solid',
@@ -135,21 +142,21 @@ describe('ButtonComponent in Kirby Page', () => {
     });
 
     it('should render with correct background-color', async () => {
-      await TestHelper.whenHydrated(ionContent);
+      await TestHelper.whenReady(ionContent);
       expect(actionButtonInPage).toHaveComputedStyle({
         'background-color': getColor('white'),
       });
     });
 
     it('should render with correct color', async () => {
-      await TestHelper.whenHydrated(ionContent);
+      await TestHelper.whenReady(ionContent);
       expect(actionButtonInPage).toHaveComputedStyle({
         color: getColor('white', 'contrast'),
       });
     });
 
     it('should render with transparent border', async () => {
-      await TestHelper.whenHydrated(ionContent);
+      await TestHelper.whenReady(ionContent);
       expect(actionButtonInPage).toHaveComputedStyle({
         'border-width': '1px',
         'border-style': 'solid',
@@ -172,14 +179,14 @@ describe('ButtonComponent in Kirby Page', () => {
     });
 
     it('should render with correct background-color', async () => {
-      await TestHelper.whenHydrated(ionContent);
+      await TestHelper.whenReady(ionContent);
       expect(normalButtonInPage).toHaveComputedStyle({
         'background-color': getColor('primary'),
       });
     });
 
     it('should render with transparent border', async () => {
-      await TestHelper.whenHydrated(ionContent);
+      await TestHelper.whenReady(ionContent);
       expect(normalButtonInPage).toHaveComputedStyle({
         'border-width': '1px',
         'border-style': 'solid',
@@ -188,7 +195,7 @@ describe('ButtonComponent in Kirby Page', () => {
     });
 
     it('should render with correct color', async () => {
-      await TestHelper.whenHydrated(ionContent);
+      await TestHelper.whenReady(ionContent);
       expect(normalButtonInPage).toHaveComputedStyle({
         color: getColor('primary', 'contrast'),
       });
@@ -237,7 +244,11 @@ describe('ButtonComponent in Kirby dropdown', () => {
   let spectator: SpectatorHost<DropdownComponent>;
   const createHost = createHostFactory({
     component: DropdownComponent,
-    declarations: [ButtonComponent, MockComponents(CardComponent, ItemComponent, IconComponent)],
+    declarations: [
+      ButtonComponent,
+      MockComponents(CardComponent, ItemComponent, IconComponent),
+      MockDirectives(SizeDirective),
+    ],
   });
 
   it('should render with space between text and icon', () => {

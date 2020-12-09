@@ -8,6 +8,7 @@ import { DesignTokenHelper } from '../../helpers/design-token-helper';
 import { TestHelper } from '../../testing/test-helper';
 import { PageComponent, PageContentComponent } from './page.component';
 import { FitHeadingDirective } from '../../directives/fit-heading/fit-heading.directive';
+import { WindowRef } from '../../types/window-ref';
 
 const size = DesignTokenHelper.size;
 const fatFingerSize = DesignTokenHelper.fatFingerSize();
@@ -33,6 +34,12 @@ describe('PageComponent', () => {
     component: PageComponent,
     declarations: [PageContentComponent, MockDirective(FitHeadingDirective)],
     imports: [IonicModule.forRoot({ mode: 'ios' }), NoopAnimationsModule, RouterTestingModule],
+    providers: [
+      {
+        provide: WindowRef,
+        useValue: window,
+      },
+    ],
   });
 
   beforeEach(() => {
@@ -52,8 +59,9 @@ describe('PageComponent', () => {
   });
 
   it('should render toolbar with correct padding', async () => {
-    await TestHelper.whenHydrated(ionToolbar);
+    await TestHelper.whenReady(ionToolbar);
     const toolbarContainer = ionToolbar.shadowRoot.querySelector('.toolbar-container');
+    expect(toolbarContainer).toBeTruthy();
     expect(toolbarContainer).toHaveComputedStyle({
       'padding-left': size('xxxs'),
       'padding-right': size('xxxs'),
@@ -63,7 +71,7 @@ describe('PageComponent', () => {
   });
 
   it('should render back button with correct size', async () => {
-    await TestHelper.whenHydrated(ionToolbar);
+    await TestHelper.whenReady(ionToolbar);
     const ionBackButton = spectator.queryHost('ion-toolbar ion-buttons ion-back-button');
     expect(ionBackButton).toHaveComputedStyle({
       width: fatFingerSize,

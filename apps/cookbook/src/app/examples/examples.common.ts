@@ -10,11 +10,15 @@ import { ListExampleComponent } from './list/list-example.component';
 import { ListLoadOnDemandExampleComponent } from './list/components/load-on-demand/list-load-on-demand-example.component';
 import { FontsExampleComponent } from './fonts-example/fonts-example.component';
 import { SpinnerExampleComponent } from './spinner-example/spinner-example.component';
+import { ModalCompactExampleComponent } from './modal-example/compact-example/modal-compact-example.component';
 import { ModalExampleComponent } from './modal-example/modal-example.component';
-import { ModalExamplePopoutComponent } from './modal-example/modal-example-popout.component';
+import { ModalExampleConfigurationComponent } from './modal-example/modal-example-configuration/modal-example-configuration.component';
+import { ModalExampleDefaultComponent } from './modal-example/modal-example-default.component';
+import { ModalExampleOutletComponent } from './modal-example/modal-example-outlet.component';
 import { FirstEmbeddedModalExampleComponent } from './modal-example/first-embedded-modal-example/first-embedded-modal-example.component';
 import { SecondEmbeddedModalExampleComponent } from './modal-example/second-embedded-modal-example/second-embedded-modal-example.component';
-import { ModalCompactExampleComponent } from './modal-example/compact-example/modal-compact-example.component';
+import { ModalRoutePage1ExampleComponent } from './modal-example/modal-route-example/modal-route-page1-example.component';
+import { ModalRoutePage2ExampleComponent } from './modal-example/modal-route-example/modal-route-page2-example.component';
 import { SegmentedControlExampleComponent } from './segmented-control-example/segmented-control-example.component';
 import { ChipExampleComponent } from './chip-example/chip-example.component';
 import { BadgeExampleComponent } from './badge-example/badge-example.component';
@@ -41,6 +45,7 @@ import { PageCustomTitleExampleComponent } from './page-example/advanced/page-cu
 import { PageAdvancedExampleComponent } from './page-example/advanced/page-advanced-example.component';
 import { FormFieldExampleComponent } from './form-field-example/form-field-example.component';
 import { ExamplesComponent } from './examples.component';
+import { ExampleConfigurationWrapperComponent } from './example-configuration-wrapper/example-configuration-wrapper.component';
 import { TabsExampleComponent } from './tabs/tabs-example.component';
 import { TabExampleComponent } from './tabs/tab/tab-example.component';
 import { ItemExampleComponent } from './item-example/item-example.component';
@@ -49,6 +54,10 @@ import { ReorderListExampleComponent } from './reorder-list/reorder-list-example
 import { DropdownExampleComponent } from '~/app/examples/dropdown-example/dropdown-example.component';
 import { StockChartExampleComponent } from './stock-chart-example/stock-chart-example.component';
 import { ProgressCircleExampleComponent } from './progress-circle-example/progress-circle-example.component';
+import { FlagExampleComponent } from './flag-example/flag-example.component';
+import { SlidesExampleComponent } from './slides-example/slides-example.component';
+import { CookbookExampleCardContentComponent } from './slides-example/example-card-content';
+import { AccordionExampleComponent } from './accordion-example/accordion-example.component';
 
 // Example of "custom" icons
 export const iconSettings: IconSettings = {
@@ -66,6 +75,7 @@ export const iconSettings: IconSettings = {
 
 export const COMPONENT_DECLARATIONS: any[] = [
   ExamplesComponent,
+  ExampleConfigurationWrapperComponent,
   ButtonExampleComponent,
   SlideButtonExampleComponent,
   CardExampleComponent,
@@ -79,11 +89,17 @@ export const COMPONENT_DECLARATIONS: any[] = [
   AvatarExampleComponent,
   FontsExampleComponent,
   SpinnerExampleComponent,
+  // TODO: Move Modal examples to ModalExample.module
   ModalExampleComponent,
-  ModalExamplePopoutComponent,
+  ModalExampleDefaultComponent,
+  ModalExampleConfigurationComponent,
+  ModalExampleOutletComponent,
   FirstEmbeddedModalExampleComponent,
   SecondEmbeddedModalExampleComponent,
   ModalCompactExampleComponent,
+  ModalRoutePage1ExampleComponent,
+  ModalRoutePage2ExampleComponent,
+  // END TODO: Move Modal examples to ModalExample.module
   SegmentedControlExampleComponent,
   ChipExampleComponent,
   BadgeExampleComponent,
@@ -114,6 +130,10 @@ export const COMPONENT_DECLARATIONS: any[] = [
   DropdownExampleComponent,
   StockChartExampleComponent,
   ProgressCircleExampleComponent,
+  FlagExampleComponent,
+  SlidesExampleComponent,
+  CookbookExampleCardContentComponent,
+  AccordionExampleComponent,
 ];
 
 // Configure custom icons (used by example to show the usage of custom icons)

@@ -1,96 +1,41 @@
-import { Component } from '@angular/core';
 import { tick, fakeAsync } from '@angular/core/testing';
-import { IonToolbar, IonHeader, IonTitle, IonButtons, IonContent } from '@ionic/angular';
-import { MockComponents } from 'ng-mocks';
-import { createComponentFactory, Spectator } from '@ngneat/spectator';
+import { IonContent } from '@ionic/angular';
+import { Spectator } from '@ngneat/spectator';
 
 import { KirbyAnimation } from '../../../animation/kirby-animation';
 import { TestHelper } from '../../../testing/test-helper';
-import { ButtonComponent } from '../../button/button.component';
 import { IconComponent } from '../../icon/icon.component';
-import { ModalFooterComponent } from '../footer/modal-footer.component';
 import { ModalWrapperComponent } from './modal-wrapper.component';
-
-@Component({
-  template: `
-    <div>Some test content</div>
-    <kirby-modal-footer>
-      <button kirby-button>Test</button>
-    </kirby-modal-footer>
-  `,
-})
-class StaticFooterEmbeddedComponent {}
-
-@Component({
-  template: `
-    <div>Some test content</div>
-    <kirby-modal-footer *ngIf="showFooter" [class.enabled]="isEnabled">
-      <button kirby-button>Test</button>
-    </kirby-modal-footer>
-  `,
-})
-class DynamicFooterEmbeddedComponent {
-  showFooter = false;
-  isEnabled = false;
-}
-
-@Component({
-  template: `
-    <h2>Embedded Input</h2>
-    <input />
-    <textarea></textarea>
-    <button>Test Button</button>
-  `,
-})
-class InputEmbeddedComponent {}
+import {
+  DynamicFooterEmbeddedComponent,
+  ModalWrapperTestBuilder,
+} from './modal-wrapper.testbuilder';
 
 describe('ModalWrapperComponent', () => {
+  const modalWrapperTestBuilder = new ModalWrapperTestBuilder();
   let spectator: Spectator<ModalWrapperComponent>;
 
-  const createComponent = createComponentFactory({
-    component: ModalWrapperComponent,
-    entryComponents: [
-      StaticFooterEmbeddedComponent,
-      DynamicFooterEmbeddedComponent,
-      InputEmbeddedComponent,
-    ],
-    declarations: [
-      MockComponents(
-        IconComponent,
-        ButtonComponent,
-        ModalFooterComponent,
-        IonHeader,
-        IonToolbar,
-        IonTitle,
-        IonButtons,
-        IonContent
-      ),
-    ],
-  });
-
-  beforeEach(() => {
-    spectator = createComponent({
-      props: {
-        config: {
-          title: 'Test title',
-          component: undefined,
-          flavor: 'modal',
-        },
-      },
-    });
-  });
-
-  afterEach(() => {
-    // Ensure any observers are destroyed:
-    spectator.component.ngOnDestroy();
-  });
-
   it('should create', () => {
+    spectator = modalWrapperTestBuilder.build();
+
     expect(spectator.component).toBeTruthy();
-    spectator.component.config.title = 'hest';
+    // Ensure any observers are destroyed:
+    spectator.fixture.destroy();
   });
 
   describe('title', () => {
+    beforeEach(() => {
+      spectator = modalWrapperTestBuilder
+        .title('Test title')
+        .flavor('modal')
+        .build();
+    });
+
+    afterEach(() => {
+      // Ensure any observers are destroyed:
+      spectator.fixture.destroy();
+    });
+
     it('should render', () => {
       expect(spectator.component.config.title).toEqual('Test title');
     });
@@ -111,8 +56,51 @@ describe('ModalWrapperComponent', () => {
     });
   });
 
+  describe('sizing', () => {
+    beforeEach(() => {
+      spectator = modalWrapperTestBuilder
+        .flavor('modal')
+        .withEmbeddedInputComponent()
+        .build();
+    });
+    afterEach(() => {
+      spectator.fixture.destroy();
+    });
+
+    it('should observe Ionic modal-wrapper intersecting with viewport after ion-modal has been presented', async () => {
+      const observeSpy = spyOn(spectator.component['intersectionObserver'], 'observe');
+
+      spectator.component['ionModalDidPresent'].complete();
+      await TestHelper.waitForTimeout();
+
+      const dummyWrapper = spectator.element.closest('.modal-wrapper');
+      expect(observeSpy).toHaveBeenCalledWith(dummyWrapper);
+    });
+
+    it('should clean up intersection observer of Ionic modal-wrapper on destroy', async () => {
+      const disconnectSpy = spyOn(spectator.component['intersectionObserver'], 'disconnect');
+      spectator.component['ionModalDidPresent'].complete();
+      await TestHelper.waitForTimeout();
+
+      spectator.component.ngOnDestroy();
+
+      expect(disconnectSpy).toHaveBeenCalled();
+    });
+  });
+
   describe('close button', () => {
+    beforeEach(() => {
+      spectator = modalWrapperTestBuilder.build();
+    });
+
+    afterEach(() => {
+      // Ensure any observers are destroyed:
+      spectator.fixture.destroy();
+    });
+
     it('should render as a close icon by default', () => {
+      spectator.component.config.flavor = 'modal';
+      spectator.detectChanges();
       var el = spectator.query(IconComponent);
       expect(el.name).toBe('close');
     });
@@ -126,7 +114,17 @@ describe('ModalWrapperComponent', () => {
   });
 
   describe('supplementary button', () => {
+    beforeEach(() => {
+      spectator = modalWrapperTestBuilder.build();
+    });
+
+    afterEach(() => {
+      // Ensure any observers are destroyed:
+      spectator.fixture.destroy();
+    });
+
     it('should not render if an icon was provided, but the flavor is modal', () => {
+      spectator.component.config.flavor = 'modal';
       spectator.component.config.drawerSupplementaryAction = { iconName: 'qr', action: undefined };
       spectator.detectChanges();
       const elements = spectator.queryAll(IconComponent);
@@ -159,6 +157,15 @@ describe('ModalWrapperComponent', () => {
   });
 
   describe('scrollToTop', () => {
+    beforeEach(() => {
+      spectator = modalWrapperTestBuilder.build();
+    });
+
+    afterEach(() => {
+      // Ensure any observers are destroyed:
+      spectator.fixture.destroy();
+    });
+
     it('should scroll to top with no scroll animation duration', () => {
       const ionContent: IonContent = spectator.query(IonContent);
       spyOn(ionContent, 'scrollToTop');
@@ -178,6 +185,15 @@ describe('ModalWrapperComponent', () => {
   });
 
   describe('scrollToBottom', () => {
+    beforeEach(() => {
+      spectator = modalWrapperTestBuilder.build();
+    });
+
+    afterEach(() => {
+      // Ensure any observers are destroyed:
+      spectator.fixture.destroy();
+    });
+
     it('should scroll to bottom with no scroll animation duration', () => {
       const ionContent: IonContent = spectator.query(IonContent);
       spyOn(ionContent, 'scrollToBottom');
@@ -199,28 +215,31 @@ describe('ModalWrapperComponent', () => {
   });
 
   describe('disable scroll Y', () => {
+    beforeEach(() => {
+      spectator = modalWrapperTestBuilder.build();
+    });
+
+    afterEach(() => {
+      // Ensure any observers are destroyed:
+      spectator.fixture.destroy();
+    });
+
     it('should disable scroll Y', () => {
       const ionContent: IonContent = spectator.query(IonContent);
       spectator.component.scrollDisabled = true;
-      expect(ionContent.scrollY).toBeFalse;
+      expect(ionContent.scrollY).toBeFalse();
     });
   });
 
   describe('with embedded component with static footer', () => {
     beforeEach(() => {
-      spectator = createComponent({
-        props: {
-          config: {
-            title: 'Modal with static footer',
-            component: StaticFooterEmbeddedComponent,
-          },
-        },
-      });
+      spectator = modalWrapperTestBuilder.withStaticFooter().build();
+      spectator.detectChanges();
     });
 
     afterEach(() => {
       // Ensure any observers are destroyed:
-      spectator.component.ngOnDestroy();
+      spectator.fixture.destroy();
     });
 
     it('should move embedded footer to wrapper component', () => {
@@ -232,115 +251,225 @@ describe('ModalWrapperComponent', () => {
       expect(footerAsWrapperChild).not.toBeNull();
     });
 
-    it('should define custom CSS property --keyboard-offset on embedded footer', () => {
-      const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
-      spectator.component._onKeyboardWillShow({ keyboardHeight: 200 });
-      expect(kirbyModalFooter).toHaveStyle({ '--keyboard-offset': '200px' });
+    describe(`should set custom CSS property '--keyboard-offset' on embedded footer`, () => {
+      const keyboardHeight = 400;
+
+      it('to a value', () => {
+        const kirbyModalFooter = spectator.element.querySelector<HTMLElement>(
+          ':scope > kirby-modal-footer'
+        );
+        spectator.component._onKeyboardShow(keyboardHeight);
+        expect(kirbyModalFooter.style.getPropertyValue('--keyboard-offset')).toBeDefined();
+      });
+
+      it('to 0 when no keyboard overlap', () => {
+        const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
+        spectator.element.style.position = 'fixed';
+        spectator.element.style.bottom = `${keyboardHeight + 200}px`;
+        spectator.component._onKeyboardShow(keyboardHeight);
+        const keyboardOverlap = 0;
+        expect(kirbyModalFooter).toHaveStyle({
+          '--keyboard-offset': `${keyboardOverlap}px`,
+        });
+      });
+
+      it('to value of overlap when keyboard overlaps partially', () => {
+        const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
+        spectator.element.style.position = 'fixed';
+        spectator.element.style.bottom = `${keyboardHeight - 200}px`;
+        spectator.component._onKeyboardShow(keyboardHeight);
+        const keyboardOverlap = 200;
+        expect(kirbyModalFooter).toHaveStyle({
+          '--keyboard-offset': `${keyboardOverlap}px`,
+        });
+      });
+
+      it('to keyboard height when keyboard overlaps completely', () => {
+        const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
+        spectator.element.style.position = 'fixed';
+        spectator.element.style.bottom = '0px';
+        spectator.component._onKeyboardShow(keyboardHeight);
+        const keyboardOverlap = keyboardHeight;
+        expect(kirbyModalFooter).toHaveStyle({
+          '--keyboard-offset': `${keyboardOverlap}px`,
+        });
+      });
     });
   });
 
   describe('with embedded component with dynamic footer', () => {
     beforeEach(() => {
-      spectator = createComponent({
-        props: {
-          config: {
-            title: 'Modal with dynamic footer',
-            component: DynamicFooterEmbeddedComponent,
-          },
-        },
-      });
+      spectator = modalWrapperTestBuilder
+        .flavor('modal')
+        .withDynamicFooter()
+        .build();
+      spectator.detectComponentChanges();
     });
 
     afterEach(() => {
       // Ensure any observers are destroyed:
-      spectator.component.ngOnDestroy();
+      spectator.fixture.destroy();
     });
 
-    it('should move embedded footer to wrapper component when rendered', (done) => {
+    it('should move embedded footer to wrapper component when rendered', async () => {
       const footer = spectator.element.querySelector('kirby-modal-footer');
       expect(footer).toBeNull();
 
       const embeddedComponent = spectator.query(DynamicFooterEmbeddedComponent);
       embeddedComponent.showFooter = true;
       spectator.detectChanges();
+      await TestHelper.waitForResizeObserver();
 
-      setTimeout(() => {
-        const ionContentElement = spectator.query('ion-content');
-        const embeddedComponentElement = ionContentElement.firstElementChild;
-        const embeddedFooter = embeddedComponentElement.querySelector('kirby-modal-footer');
-        expect(embeddedFooter).toBeNull();
-        const footerAsWrapperChild = spectator.element.querySelector(':scope > kirby-modal-footer');
-        expect(footerAsWrapperChild).not.toBeNull();
-        done();
-      });
+      const ionContentElement = spectator.query('ion-content');
+      const embeddedComponentElement = ionContentElement.firstElementChild;
+      const embeddedFooter = embeddedComponentElement.querySelector('kirby-modal-footer');
+      expect(embeddedFooter).toBeNull();
+      const footerAsWrapperChild = spectator.element.querySelector(':scope > kirby-modal-footer');
+      expect(footerAsWrapperChild).not.toBeNull();
     });
 
-    it('should remove embedded footer from wrapper component when not rendered', (done) => {
-      const footer = spectator.element.querySelector('kirby-modal-footer');
+    it('should remove embedded footer from wrapper component when not rendered', async () => {
+      let footer = spectator.element.querySelector('kirby-modal-footer');
       expect(footer).toBeNull();
 
       const embeddedComponent = spectator.query(DynamicFooterEmbeddedComponent);
       embeddedComponent.showFooter = true;
       spectator.detectChanges();
+      await TestHelper.waitForResizeObserver();
 
-      setTimeout(() => {
-        const footerAsWrapperChild = spectator.element.querySelector(':scope > kirby-modal-footer');
-        expect(footerAsWrapperChild).not.toBeNull();
+      const footerAsWrapperChild = spectator.element.querySelector(':scope > kirby-modal-footer');
+      expect(footerAsWrapperChild).not.toBeNull();
 
-        embeddedComponent.showFooter = false;
-        spectator.detectChanges();
-
-        setTimeout(() => {
-          const footer = spectator.element.querySelector('kirby-modal-footer');
-          expect(footer).toBeNull();
-          done();
-        });
-      });
+      embeddedComponent.showFooter = false;
+      spectator.detectChanges();
+      footer = spectator.element.querySelector('kirby-modal-footer');
+      expect(footer).toBeNull();
     });
 
-    it('should render changes to embedded footer inside wrapper component', (done) => {
+    it('should render changes to embedded footer inside wrapper component', async () => {
       const footer = spectator.element.querySelector('kirby-modal-footer');
       expect(footer).not.toHaveClass('enabled');
       const embeddedComponent = spectator.query(DynamicFooterEmbeddedComponent);
       embeddedComponent.showFooter = true;
       spectator.detectChanges();
-      setTimeout(() => {
-        const ionContentElement = spectator.query('ion-content');
-        const embeddedComponentElement = ionContentElement.firstElementChild;
-        const embeddedFooter = embeddedComponentElement.querySelector('kirby-modal-footer');
-        expect(embeddedFooter).toBeNull();
-        const footerAsWrapperChild = spectator.element.querySelector(':scope > kirby-modal-footer');
-        expect(footerAsWrapperChild).not.toBeNull();
+      await TestHelper.waitForResizeObserver();
 
-        embeddedComponent.isEnabled = true;
-        spectator.detectChanges();
-        expect(footerAsWrapperChild).toHaveClass('enabled');
-        done();
-      });
+      const ionContentElement = spectator.query('ion-content');
+      const embeddedComponentElement = ionContentElement.firstElementChild;
+      const embeddedFooter = embeddedComponentElement.querySelector('kirby-modal-footer');
+      expect(embeddedFooter).toBeNull();
+      const footerAsWrapperChild = spectator.element.querySelector(':scope > kirby-modal-footer');
+      expect(footerAsWrapperChild).not.toBeNull();
+
+      embeddedComponent.isEnabled = true;
+      spectator.detectChanges();
+      expect(footerAsWrapperChild).toHaveClass('enabled');
     });
 
-    it('should define custom CSS property --keyboard-offset on embedded footer', (done) => {
-      const embeddedComponent = spectator.query(DynamicFooterEmbeddedComponent);
-      embeddedComponent.showFooter = true;
-      spectator.detectChanges();
+    describe(`should set custom CSS property '--keyboard-offset' on embedded footer`, () => {
+      const keyboardHeight = 400;
 
-      setTimeout(() => {
+      beforeEach(async () => {
+        const embeddedComponent = spectator.query(DynamicFooterEmbeddedComponent);
+        embeddedComponent.showFooter = true;
+        spectator.detectChanges();
+        await TestHelper.waitForResizeObserver();
+        TestHelper.scrollMainWindowToTop();
+      });
+
+      it('to a value', () => {
+        const kirbyModalFooter = spectator.element.querySelector<HTMLElement>(
+          ':scope > kirby-modal-footer'
+        );
+        spectator.component._onKeyboardShow(keyboardHeight);
+        expect(kirbyModalFooter.style.getPropertyValue('--keyboard-offset')).toBeDefined();
+      });
+
+      it('to 0 when no keyboard overlap', () => {
         const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
-        spectator.component._onKeyboardWillShow({ keyboardHeight: 200 });
-        expect(kirbyModalFooter).toHaveStyle({ '--keyboard-offset': '200px' });
-        done();
+        spectator.element.style.position = 'fixed';
+        spectator.element.style.bottom = `${keyboardHeight + 200}px`;
+        spectator.component._onKeyboardShow(keyboardHeight);
+        const keyboardOverlap = 0;
+        expect(kirbyModalFooter).toHaveStyle({
+          '--keyboard-offset': `${keyboardOverlap}px`,
+        });
+      });
+
+      it('to value of overlap when keyboard overlaps partially', () => {
+        const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
+        spectator.element.style.position = 'fixed';
+        spectator.element.style.bottom = `${keyboardHeight - 200}px`;
+        spectator.component._onKeyboardShow(keyboardHeight);
+        const keyboardOverlap = 200;
+        expect(kirbyModalFooter).toHaveStyle({
+          '--keyboard-offset': `${keyboardOverlap}px`,
+        });
+      });
+
+      it('to keyboard height when keyboard overlaps completely', () => {
+        const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
+        spectator.element.style.position = 'fixed';
+        spectator.element.style.bottom = '0px';
+        spectator.component._onKeyboardShow(keyboardHeight);
+        const keyboardOverlap = keyboardHeight;
+        expect(kirbyModalFooter).toHaveStyle({
+          '--keyboard-offset': `${keyboardOverlap}px`,
+        });
       });
     });
   });
 
   describe(`on keyboard show/hide events`, () => {
+    beforeEach(() => {
+      spectator = modalWrapperTestBuilder.build();
+    });
+
+    afterEach(() => {
+      // Ensure any observers are destroyed:
+      spectator.fixture.destroy();
+    });
+
     it('should set keyboardVisible to true on window:keyboardWillShow', () => {
-      spectator.dispatchFakeEvent(window, 'keyboardWillShow');
+      const keyboardWillShowEvent = new CustomEvent('keyboardWillShow');
+      keyboardWillShowEvent['keyboardHeight'] = 200;
+      window.dispatchEvent(keyboardWillShowEvent);
       expect(spectator.component['keyboardVisible']).toBeTrue();
     });
+
+    it('should set keyboardVisible to true on window:ionKeyboardDidShow', () => {
+      const ionKeyboardDidShowEvent = new CustomEvent('ionKeyboardDidShow', {
+        detail: { keyboardHeight: 200 },
+      });
+      window.dispatchEvent(ionKeyboardDidShowEvent);
+      expect(spectator.component['keyboardVisible']).toBeTrue();
+    });
+
     it('should set keyboardVisible to false on window:keyboardWillHide', () => {
+      spectator.component['keyboardVisible'] = true;
+
       spectator.dispatchFakeEvent(window, 'keyboardWillHide');
+
       expect(spectator.component['keyboardVisible']).toBeFalse();
+    });
+
+    it('should set keyboardVisible to false on window:ionKeyboardDidHide', () => {
+      spectator.component['keyboardVisible'] = true;
+
+      spectator.dispatchFakeEvent(window, 'ionKeyboardDidHide');
+
+      expect(spectator.component['keyboardVisible']).toBeFalse();
+    });
+
+    it('should keep same height, when keyboard is opened', async () => {
+      const heightWhenKeyboardClosed = spectator.element.getBoundingClientRect().height;
+      const ionKeyboardDidShowEvent = new CustomEvent('ionKeyboardDidShow', {
+        detail: { keyboardHeight: 200 },
+      });
+      window.dispatchEvent(ionKeyboardDidShowEvent);
+      expect(spectator.component['keyboardVisible']).toBeTrue();
+      const heightWhenKeyboardOpened = spectator.element.getBoundingClientRect().height;
+      expect(heightWhenKeyboardClosed).toEqual(heightWhenKeyboardOpened);
     });
   });
 
@@ -349,27 +478,26 @@ describe('ModalWrapperComponent', () => {
     let input: HTMLInputElement;
 
     beforeEach(async () => {
-      spectator = createComponent({
-        props: {
-          config: {
-            title: 'Test title',
-            flavor: 'drawer',
-            component: InputEmbeddedComponent,
-          },
-        },
-      });
+      spectator = modalWrapperTestBuilder
+        .flavor('drawer')
+        .withEmbeddedInputComponent()
+        .build();
+
       // Ensure ion-content gets height
       // or embedded component won't be visible:
       spectator.element.classList.add('ion-page');
       ionContent = spectator.query('ion-content');
-      await TestHelper.whenReady(ionContent);
+      // If other test specs have imported IonicModule before this test is run,
+      // then Ionic components won't be mocked - so ensure ionContent.componentOnReady is run if exists:
+      await TestHelper.ionComponentOnReady(ionContent);
+
       input = ionContent.querySelector('input');
       spyOn(input, 'blur');
     });
 
     afterEach(() => {
       // Ensure any observers are destroyed:
-      spectator.component.ngOnDestroy();
+      spectator.fixture.destroy();
     });
 
     describe(`when keyboard is NOT visible`, () => {
@@ -389,7 +517,7 @@ describe('ModalWrapperComponent', () => {
       beforeEach(() => {
         input.focus();
         expect(document.activeElement).toEqual(input);
-        spectator.dispatchFakeEvent(window, 'keyboardWillShow');
+        spectator.component['_onKeyboardShow'](200);
       });
 
       it('should blur document.activeElement when it is an input', () => {
@@ -433,58 +561,37 @@ describe('ModalWrapperComponent', () => {
   });
 
   describe(`close()`, () => {
-    let ionModalSpy: jasmine.SpyObj<HTMLIonModalElement>;
     beforeEach(() => {
-      if (spectator.component) {
-        // Ensure any observers are destroyed:
-        spectator.component.ngOnDestroy();
-      }
-      spectator = createComponent({
-        props: {
-          config: {
-            title: 'Test title',
-            component: InputEmbeddedComponent,
-          },
-        },
-      });
-      // Ensure ion-content gets height
-      // or embedded component won't be visible:
-      spectator.element.classList.add('ion-page');
-      ionModalSpy = jasmine.createSpyObj('ion-modal spy', ['dismiss', 'addEventListener']);
-      // Inject the modal spy through modal-wrapper's element.closest method:
-      spectator.element.closest = () => ionModalSpy;
-      spectator.component.ngOnInit();
+      spectator = modalWrapperTestBuilder.withEmbeddedInputComponent().build();
     });
 
     afterEach(() => {
       // Ensure any observers are destroyed:
-      spectator.component.ngOnDestroy();
+      spectator.fixture.destroy();
     });
 
     it(`should call wrapping ion-modal's dismiss() method immediately`, () => {
       spectator.component.close('test data');
-      expect(ionModalSpy.dismiss).toHaveBeenCalledWith('test data');
+      expect(spectator.component['ionModalElement'].dismiss).toHaveBeenCalledWith('test data');
     });
 
     describe(`when keyboard is visible`, () => {
       beforeEach(() => {
-        spectator.dispatchFakeEvent(window, 'keyboardWillShow');
+        spectator.component['_onKeyboardShow'](200);
       });
 
       describe(`and viewport is not resized`, () => {
         it(`should call wrapping ion-modal's dismiss() method immediately`, () => {
           spectator.component.close('test data');
-          expect(ionModalSpy.dismiss).toHaveBeenCalledWith('test data');
+          expect(spectator.component['ionModalElement'].dismiss).toHaveBeenCalledWith('test data');
         });
       });
 
       describe(`and viewport is resized`, () => {
         beforeEach(async () => {
           // Ensure resizeObserver triggers and initialViewportHeight is set:
-          await new Promise((resolve) => setTimeout(resolve));
-          if (!spectator.component['initialViewportHeight']) {
-            await new Promise((resolve) => setTimeout(resolve, 25));
-          }
+          await TestHelper.waitForResizeObserver();
+          await TestHelper.whenTrue(() => !!spectator.component['initialViewportHeight']);
           expect(spectator.component['initialViewportHeight']).toBeGreaterThan(0);
 
           const keyboardHeight = 300;
@@ -496,39 +603,43 @@ describe('ModalWrapperComponent', () => {
           await TestHelper.resizeTestWindow({ height: `${window.innerHeight - keyboardHeight}px` });
 
           // Ensure resizeObserver triggers and onViewportResize fires:
-          await new Promise((resolve) => setTimeout(resolve));
-          if (!spectator.component['viewportResized']) {
-            await new Promise((resolve) => setTimeout(resolve, 25));
-          }
-          expect(spectator.component['viewportResized']).toBeTrue;
+          await TestHelper.waitForResizeObserver();
+          await TestHelper.whenTrue(() => spectator.component['viewportResized']);
+          expect(spectator.component['viewportResized']).toBeTrue();
+
+          const dismissSpy = spectator.component['ionModalElement'].dismiss as jasmine.Spy;
+          expect(dismissSpy).not.toHaveBeenCalled();
         });
 
         afterEach(() => {
           // Ensure any observers are destroyed:
-          spectator.component.ngOnDestroy();
+          spectator.fixture.destroy();
           TestHelper.resetTestWindow();
         });
 
         it(`should blur document.activeElement before calling wrapping ion-modal's dismiss() method`, fakeAsync(async () => {
           const ionContent = spectator.query('ion-content');
-          await TestHelper.whenReady(ionContent);
+          // If other test specs have imported IonicModule before this test is run,
+          // then Ionic components won't be mocked - so ensure ionContent.componentOnReady is run if exists:
+          await TestHelper.ionComponentOnReady(ionContent);
+
           const input = ionContent.querySelector('input');
           spyOn(input, 'blur');
           input.focus();
           expect(document.activeElement).toEqual(input);
 
           spectator.component.close('test data');
-          expect(ionModalSpy.dismiss).not.toHaveBeenCalled();
+          expect(spectator.component['ionModalElement'].dismiss).not.toHaveBeenCalled();
           expect(input.blur).toHaveBeenCalled();
           tick(ModalWrapperComponent.KEYBOARD_HIDE_DELAY_IN_MS);
-          expect(ionModalSpy.dismiss).toHaveBeenCalled();
+          expect(spectator.component['ionModalElement'].dismiss).toHaveBeenCalled();
         }));
 
         it(`should delay before calling wrapping ion-modal's dismiss() method`, fakeAsync(() => {
           spectator.component.close('test data');
-          expect(ionModalSpy.dismiss).not.toHaveBeenCalled();
+          expect(spectator.component['ionModalElement'].dismiss).not.toHaveBeenCalled();
           tick(ModalWrapperComponent.KEYBOARD_HIDE_DELAY_IN_MS);
-          expect(ionModalSpy.dismiss).toHaveBeenCalledWith('test data');
+          expect(spectator.component['ionModalElement'].dismiss).toHaveBeenCalledWith('test data');
         }));
       });
     });

@@ -91,11 +91,20 @@ export class DropdownComponent
   hasError: boolean;
 
   @Input()
+  size: 'sm' | 'md' = 'md';
+
+  @Input()
   tabindex = 0;
 
   @HostBinding('attr.tabindex')
   get _tabindex() {
     return this.disabled ? -1 : this.tabindex;
+  }
+
+  // Prevent Ionic blur on scroll
+  @HostBinding('attr.no-blur')
+  get _noBlurOnScroll() {
+    return true;
   }
 
   /**

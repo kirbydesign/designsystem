@@ -7,6 +7,8 @@ import {
   ElementRef,
 } from '@angular/core';
 
+import { NotificationColor } from '../../helpers';
+
 import { IconComponent } from '../icon/icon.component';
 
 @Component({
@@ -55,6 +57,9 @@ export class ButtonComponent implements AfterContentInit {
   @Input() set isDestructive(state: boolean) {
     this.destructive = state;
   }
+  @HostBinding('class')
+  @Input()
+  themeColor: NotificationColor;
   @Input() expand: 'full' | 'block';
   @Input() text: string;
   @Input() isFloating: boolean = false;

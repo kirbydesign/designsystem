@@ -16,7 +16,6 @@ describe('SegmentedControlComponent', () => {
     {
       text: 'First item',
       id: 'first',
-      checked: false,
       badge: {
         content: '2',
         themeColor: 'danger',
@@ -24,12 +23,10 @@ describe('SegmentedControlComponent', () => {
     },
     {
       text: 'Second item',
-      checked: true,
       id: 'second',
     },
     {
       text: 'Third item',
-      checked: false,
       id: 'third',
     },
   ];
@@ -47,7 +44,7 @@ describe('SegmentedControlComponent', () => {
 
   beforeEach(() => {
     spectator = createHost(
-      `<kirby-segmented-control [items]="items">
+      `<kirby-segmented-control [items]="items" selectedIndex="1">
        </kirby-segmented-control>`,
       {
         hostProps: {
@@ -83,7 +80,7 @@ describe('SegmentedControlComponent', () => {
     it('should call onSegmentSelect when ionChange event fires', async () => {
       expect(component.value).toBe(items[1]);
       const ionSegmentElement = spectator.queryHost<HTMLIonSegmentElement>('ion-segment');
-      await TestHelper.whenHydrated(ionSegmentElement);
+      await TestHelper.whenReady(ionSegmentElement);
       spyOn(component, 'onSegmentSelect');
       const changeEvent = new CustomEvent('ionChange', { detail: { value: items[0].id } });
       ionSegmentElement.dispatchEvent(changeEvent);
@@ -93,7 +90,7 @@ describe('SegmentedControlComponent', () => {
     it('should set value to event.detail.value when ionChange event fires', async () => {
       expect(component.value).toBe(items[1]);
       const ionSegmentElement = spectator.queryHost<HTMLIonSegmentElement>('ion-segment');
-      await TestHelper.whenHydrated(ionSegmentElement);
+      await TestHelper.whenReady(ionSegmentElement);
       const changeEvent = new CustomEvent('ionChange', { detail: { value: items[2].id } });
       ionSegmentElement.dispatchEvent(changeEvent);
       expect(component.value).toBe(items[2]);
@@ -102,7 +99,7 @@ describe('SegmentedControlComponent', () => {
     describe('when updating items', () => {
       it('should not emit segmentSelect event', async () => {
         const ionSegmentElement = spectator.queryHost<HTMLIonSegmentElement>('ion-segment');
-        await TestHelper.whenHydrated(ionSegmentElement);
+        await TestHelper.whenReady(ionSegmentElement);
 
         const clonedItems = JSON.parse(JSON.stringify(items));
         spectator.setHostInput({ items: clonedItems });

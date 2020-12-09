@@ -1,12 +1,7 @@
-@import './libs/designsystem/src/lib/scss/utils';
+@import '../showcase.shared';
 
-h2 {
-  margin-top: size('l');
-}
-
-.example-wrapper {
-  display: flex;
-  justify-content: space-between;
+cookbook-iphone {
+  float: right;
 }
 
 .desktop {

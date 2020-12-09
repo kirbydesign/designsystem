@@ -8,6 +8,7 @@ import {
   PageContentComponent,
   PageActionsComponent,
   PageComponent,
+  PageTitleComponent,
 } from '@kirbydesign/designsystem';
 
 type stickyConfig = { sticky: boolean };
@@ -61,6 +62,18 @@ export class MockPageActionsDirective {
 export class MockPageContentDirective {
   @Input('kirbyPageContent') config: fixedConfig;
 }
+
+@Component({
+  selector: 'kirby-page-title',
+  template: '<ng-content></ng-content>',
+  providers: [
+    {
+      provide: PageTitleComponent,
+      useExisting: forwardRef(() => MockPageTitleComponent),
+    },
+  ],
+})
+export class MockPageTitleComponent {}
 
 @Component({
   selector: 'kirby-page-content',

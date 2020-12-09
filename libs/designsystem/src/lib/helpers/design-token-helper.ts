@@ -4,6 +4,12 @@ import { ColorHelper } from './color-helper';
 import { styles } from './design-token-helper.styles';
 
 export class DesignTokenHelper {
+  public static readonly breakpoints = styles.breakpoints;
+  public static readonly softKeyboardTransitionEnter = styles.softKeyboardTransitionEnter.join(' ');
+  public static readonly softKeyboardTransitionLeave = styles.softKeyboardTransitionLeave.join(' ');
+  public static readonly modalDefaultHeight = styles.modalDefaultHeight;
+  public static readonly drawerDefaultHeight = styles.drawerDefaultHeight;
+
   public static getColor(
     name: ThemeColorExtended,
     variant?: ThemeColorVariant

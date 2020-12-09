@@ -22,6 +22,7 @@ export class MockDropdownComponent {
   @Input() expand: 'block';
   @Input() disabled: boolean;
   @Input() hasError: boolean;
+  @Input() size: 'sm' | 'md';
   @Input() tabindex: number;
   @Output() change = new EventEmitter<string | any>();
 }
