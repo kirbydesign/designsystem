@@ -1,23 +1,22 @@
 <div class="outer-header">
-  <div class="header" [class.expand]="!showYearSelector">
+  <div class="header" [class.expand]="!yearNavigatorOptions">
     <button [disabled]="!canNavigateBack" (click)="changeMonth(-1)">
       <kirby-icon name="arrow-back"></kirby-icon>
     </button>
 
     <div class="month-and-year">
       <span class="month">{{ activeMonthName }}</span
-      ><span *ngIf="!showYearSelector" class="year">{{ activeYear }}</span>
+      ><span *ngIf="!yearNavigatorOptions" class="year">{{ activeYear }}</span>
     </div>
 
     <button [disabled]="!canNavigateForward" (click)="changeMonth(1)">
       <kirby-icon name="arrow-more"></kirby-icon>
     </button>
   </div>
-  <!-- TODO: Set selected year / selectedIndex based on active month/year -->
   <kirby-dropdown
-    *ngIf="showYearSelector"
-    [selectedIndex]="0"
-    [items]="this.years"
+    *ngIf="yearNavigatorOptions"
+    [selectedIndex]="navigatedYear"
+    [items]="navigableYears"
     class="dropdown align-end"
     (change)="changeYear($event)"
   >
