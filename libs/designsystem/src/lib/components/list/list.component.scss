@@ -57,9 +57,11 @@ ion-item-divider {
 }
 
 ion-item-sliding {
-  // backface-visibility and transform, to fix clipping issue on iOS see https://stackoverflow.com/a/16681137 and https://github.com/kirbydesign/designsystem/issues/863
-  backface-visibility: hidden;
-  transform: translate3d(0, 0, 0);
+  &.item-sliding-active-slide {
+    // backface-visibility and transform, to fix clipping issue on iOS see https://stackoverflow.com/a/16681137 and https://github.com/kirbydesign/designsystem/issues/863
+    backface-visibility: hidden;
+    transform: translate3d(0, 0, 0);
+  }
 
   $list-colors: ('light'); // add supported list item theme colors here
   @each $color-name, $color-value in $list-colors {
@@ -176,6 +178,10 @@ ion-item-options[side='end'] {
   ion-list-header {
     border-top-left-radius: $border-radius;
     border-top-right-radius: $border-radius;
+    -webkit-mask-image: -webkit-radial-gradient(
+      white,
+      black
+    ); // Solves issues with round borders at iOS in certain scenarios
   }
 
   ion-list ion-item-sliding > ion-item,
@@ -190,6 +196,10 @@ ion-item-options[side='end'] {
   .footer {
     border-bottom-left-radius: $border-radius;
     border-bottom-right-radius: $border-radius;
+    -webkit-mask-image: -webkit-radial-gradient(
+      white,
+      black
+    ); // Solves issues with round borders at iOS in certain scenarios
   }
 
   ion-list ion-item-sliding > ion-item,

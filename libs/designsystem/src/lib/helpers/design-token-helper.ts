@@ -4,6 +4,12 @@ import { ColorHelper } from './color-helper';
 import { styles } from './design-token-helper.styles';
 
 export class DesignTokenHelper {
+  public static readonly breakpoints = styles.breakpoints;
+  public static readonly softKeyboardTransitionEnter = styles.softKeyboardTransitionEnter.join(' ');
+  public static readonly softKeyboardTransitionLeave = styles.softKeyboardTransitionLeave.join(' ');
+  public static readonly modalDefaultHeight = styles.modalDefaultHeight;
+  public static readonly drawerDefaultHeight = styles.drawerDefaultHeight;
+
   public static getColor(
     name: ThemeColorExtended,
     variant?: ThemeColorVariant
@@ -53,9 +59,26 @@ export class DesignTokenHelper {
   public static compactModalMaxWidth(): string {
     return styles.compactModalMaxWidth;
   }
+
+  public static dropdownItemHeight(): string {
+    return styles.dropdownItemHeight;
+  }
+
+  public static avatarSize(key: 'xs' | 's' | 'm' | 'l'): string {
+    return styles.avatarSizes[key];
+  }
+
+  public static fatFingerSize(): string {
+    return styles.fatFingerSize;
+  }
 }
 
-export type ThemeColorExtended = ThemeColor | 'black' | 'semi-light' | 'semi-dark';
+export type ThemeColorExtended =
+  | ThemeColor
+  | 'black'
+  | 'semi-light'
+  | 'semi-dark'
+  | 'background-color';
 
 export type ThemeColorVariant = 'tint' | 'shade' | 'contrast';
 

@@ -4,6 +4,7 @@ import { ResizeObserverService } from '../../components/shared/resize-observer/r
 import { ResizeObserverEntry } from '../../components/shared/resize-observer/types/resize-observer-entry';
 
 import { DesignTokenHelper } from '../../helpers/design-token-helper';
+import { WindowRef } from '../../types/window-ref';
 
 const fontSize = DesignTokenHelper.fontSize;
 const lineHeight = DesignTokenHelper.lineHeight;
@@ -51,7 +52,8 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
   constructor(
     private elementRef: ElementRef,
     private renderer: Renderer2,
-    private resizeObserverService: ResizeObserverService
+    private resizeObserverService: ResizeObserverService,
+    private window: WindowRef
   ) {}
 
   ngOnInit(): void {
@@ -90,7 +92,7 @@ export class FitHeadingDirective implements OnInit, OnDestroy {
     if (height === 0 || this.isScalingHeader) return false;
 
     const lineHeight = parseInt(
-      window.getComputedStyle(this.elementRef.nativeElement).getPropertyValue('line-height')
+      this.window.getComputedStyle(this.elementRef.nativeElement).getPropertyValue('line-height')
     );
 
     const lines = height / lineHeight;

@@ -19,7 +19,7 @@ export class IphoneComponent implements OnChanges, AfterViewInit {
   @Input() showExternalLink: boolean;
   trustedSrc: SafeResourceUrl;
 
-  @ViewChild('iframe', { read: ElementRef, static: true }) iframe: ElementRef;
+  @ViewChild('iframe', { read: ElementRef, static: true }) iframe: ElementRef<HTMLIFrameElement>;
 
   constructor(private sanitizer: DomSanitizer) {}
 
@@ -34,10 +34,8 @@ export class IphoneComponent implements OnChanges, AfterViewInit {
   }
 
   onIframeLoaded() {
-    let document = this.iframe.nativeElement.contentWindow.document;
-    let ionApp = document.getElementsByTagName('ion-app')[0];
-
-    ionApp.style.setProperty('--ion-safe-area-top', '20px');
-    ionApp.style.setProperty('--ion-safe-area-bottom', '22px');
+    const document = this.iframe.nativeElement.contentWindow.document.documentElement;
+    document.style.setProperty('--ion-safe-area-top', '20px');
+    document.style.setProperty('--ion-safe-area-bottom', '22px');
   }
 }

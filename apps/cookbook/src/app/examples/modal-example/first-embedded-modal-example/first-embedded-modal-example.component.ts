@@ -1,18 +1,47 @@
-import { Component, Inject, Optional, SkipSelf } from '@angular/core';
+import { Component, Inject, Input, OnInit, Optional, SkipSelf } from '@angular/core';
 
-import { AlertConfig, ActionSheetConfig, Modal, ModalController } from '@kirbydesign/designsystem';
-import { ModalConfig, COMPONENT_PROPS } from '@kirbydesign/designsystem';
+import {
+  AlertConfig,
+  ActionSheetConfig,
+  Modal,
+  ModalController,
+  COMPONENT_PROPS,
+} from '@kirbydesign/designsystem';
+import { ModalConfig } from '@kirbydesign/designsystem';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
-import { SecondEmbeddedModalExampleComponent } from '../second-embedded-modal-example/second-embedded-modal-example.component';
 import { KirbyAnimation } from '@kirbydesign/designsystem';
+
+import { SecondEmbeddedModalExampleComponent } from '../second-embedded-modal-example/second-embedded-modal-example.component';
 
 @Component({
   selector: 'cookbook-first-embedded-modal-example',
   templateUrl: './first-embedded-modal-example.component.html',
+  styleUrls: ['./first-embedded-modal-example.component.scss'],
 })
-export class FirstEmbeddedModalExampleComponent {
-  props: { [key: string]: any };
-  showFooter: boolean = true;
+export class FirstEmbeddedModalExampleComponent implements OnInit {
+  title: string;
+  subtitle: string;
+
+  exampleProperties: {
+    stringProperty: string;
+    numberProperty: number;
+    booleanProperty: boolean;
+  };
+
+  showNestedOptions: boolean;
+  showDummyKeyboard: boolean;
+  showFooter: boolean;
+  showDummyContent: boolean;
+  showNestedFooter: boolean = false;
+  showNestedDummyContent: boolean = true;
+  delayLoadDummyContent: boolean;
+  loadAdditionalContent: boolean;
+  disableScroll: boolean = false;
+  openFullHeight: boolean;
+
+  isLoading = false;
+  isLoadingAdditionalContent = false;
+  snapFooterToKeyboard = false;
 
   constructor(
     @Inject(COMPONENT_PROPS) componentProps,
@@ -20,34 +49,53 @@ export class FirstEmbeddedModalExampleComponent {
     private toastController: ToastController,
     @Optional() @SkipSelf() private modal: Modal
   ) {
-    this.props = componentProps;
-    this.showFooter = this.props.showFooter;
+    Object.assign(this, componentProps);
   }
 
-  showNestedModal() {
-    const config: ModalConfig = {
-      title: 'Embedded Modal Title',
-      flavor: 'modal',
-      component: SecondEmbeddedModalExampleComponent,
-    };
-
-    // supposing no callback needed for the second component
-    this.modalController.showModal(config);
+  ngOnInit() {
+    if (this.showDummyContent) {
+      if (this.delayLoadDummyContent) {
+        this.isLoading = true;
+        setTimeout(() => (this.isLoading = false), 1000);
+      }
+      if (this.loadAdditionalContent) {
+        this.isLoadingAdditionalContent = true;
+        setTimeout(() => (this.isLoadingAdditionalContent = false), 2000);
+      }
+    }
   }
 
-  showNestedDrawer() {
+  private showNestedOverlay(flavor: 'modal' | 'drawer') {
+    const title = flavor === 'modal' ? 'Nested Modal Title' : 'Nested Drawer Title';
     const config: ModalConfig = {
-      title: 'Embedded Drawer Title',
-      flavor: 'drawer',
+      flavor,
       drawerSupplementaryAction: {
         iconName: 'edit',
         action: this.onSupplementaryActionSelect.bind(this),
       },
-      component: SecondEmbeddedModalExampleComponent,
+      component: FirstEmbeddedModalExampleComponent,
+      size: this.openFullHeight ? 'full-height' : null,
+      componentProps: {
+        title,
+        subtitle: 'Hello from second embedded example component!',
+        showDummyKeyboard: this.showDummyKeyboard,
+        showFooter: this.showNestedFooter,
+        showDummyContent: this.showNestedDummyContent,
+        delayLoadDummyContent: this.delayLoadDummyContent,
+        loadAdditionalContent: this.loadAdditionalContent,
+      },
     };
 
     // supposing no callback needed for the second component
     this.modalController.showModal(config);
+  }
+
+  showNestedModal() {
+    this.showNestedOverlay('modal');
+  }
+
+  showNestedDrawer() {
+    this.showNestedOverlay('drawer');
   }
 
   showNestedAlert() {
@@ -75,11 +123,19 @@ export class FirstEmbeddedModalExampleComponent {
   }
 
   scrollToBottom() {
-    this.modal.scrollToBottom();
+    this.modal.scrollToBottom(KirbyAnimation.Duration.EXTRA_LONG);
   }
 
   scrollToTop() {
-    this.modal.scrollToTop(KirbyAnimation.Duration.LONG);
+    this.modal.scrollToTop(KirbyAnimation.Duration.SHORT);
+  }
+
+  toggleDisableScroll(disabled: boolean) {
+    this.modal.scrollDisabled = disabled;
+  }
+
+  toggleFooter() {
+    this.showFooter = !this.showFooter;
   }
 
   close() {
@@ -94,6 +150,10 @@ export class FirstEmbeddedModalExampleComponent {
       durationInMs: 1500,
     };
     this.toastController.showToast(config);
+  }
+
+  onSnapFooterToKeyboardCheckbox(checked: boolean) {
+    this.snapFooterToKeyboard = checked;
   }
 
   onAlertClose(result?: boolean): void {

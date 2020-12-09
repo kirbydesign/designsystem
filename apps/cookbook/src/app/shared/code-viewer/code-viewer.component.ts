@@ -1,12 +1,22 @@
-import { highlightAll } from 'prismjs';
-import { Component, AfterViewChecked, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { highlightElement } from 'prismjs';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  Input,
+  OnChanges,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 
 @Component({
   selector: 'cookbook-code-viewer',
   templateUrl: './code-viewer.component.html',
   styleUrls: ['./code-viewer.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CodeViewerComponent implements OnChanges, AfterViewChecked {
+export class CodeViewerComponent implements AfterViewInit, OnChanges {
   @Input() language: 'html' | 'css' | 'scss' | 'js' | 'ts' | 'typescript';
   code: string;
   languageTitle: string;
@@ -19,6 +29,9 @@ export class CodeViewerComponent implements OnChanges, AfterViewChecked {
     typescript: 'js',
   };
   codeViewerLanguage: string;
+
+  @ViewChild('codeElement', { read: ElementRef, static: true })
+  private codeElement: ElementRef<HTMLElement>;
 
   @Input()
   set html(value: string) {
@@ -50,13 +63,13 @@ export class CodeViewerComponent implements OnChanges, AfterViewChecked {
     this.language = 'ts';
   }
 
+  ngAfterViewInit() {
+    highlightElement(this.codeElement.nativeElement);
+  }
+
   ngOnChanges(_: SimpleChanges): void {
     this.languageTitle = this.language.toUpperCase();
     const supportedLanguage = this.supportedLanguages[this.language];
     this.codeViewerLanguage = `language-${supportedLanguage}`;
-  }
-
-  ngAfterViewChecked() {
-    highlightAll();
   }
 }

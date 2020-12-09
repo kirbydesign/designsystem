@@ -9,7 +9,6 @@ import { LabelComponent } from './label/label.component';
 @NgModule({
   imports: [IonicModule, IconModule, CommonModule],
   declarations: [ItemComponent, LabelComponent],
-  providers: [],
   exports: [ItemComponent, LabelComponent],
 })
 export class ItemModule {}

@@ -7,10 +7,12 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
+import { Subject } from 'rxjs';
 
 import { ModalConfig } from '../config/modal-config';
 import { COMPONENT_PROPS } from '../config/modal-config.helper';
 import { Modal } from '../../services/modal.interfaces';
+import { WindowRef } from '../../../../types/window-ref';
 
 @Component({
   selector: 'kirby-modal-compact-wrapper',
@@ -19,9 +21,16 @@ import { Modal } from '../../services/modal.interfaces';
   providers: [{ provide: Modal, useExisting: ModalCompactWrapperComponent }],
 })
 export class ModalCompactWrapperComponent implements Modal, OnInit {
-  scrollY: number = Math.abs(window.scrollY);
+  scrollY: number = Math.abs(this.window.scrollY);
+  scrollDisabled = false;
   @Input() config: ModalConfig;
   componentPropsInjector: Injector;
+
+  private ionModalElement: HTMLIonModalElement;
+  private readonly ionModalDidPresent = new Subject<void>();
+  private readonly ionModalWillDismiss = new Subject<void>();
+  readonly didPresent = this.ionModalDidPresent.toPromise();
+  readonly willClose = this.ionModalWillDismiss.toPromise();
 
   private _ionPageReset = false;
   @HostBinding('class.ion-page')
@@ -29,13 +38,38 @@ export class ModalCompactWrapperComponent implements Modal, OnInit {
     return this._ionPageReset;
   }
 
-  constructor(private injector: Injector, private elementRef: ElementRef<HTMLElement>) {}
+  constructor(
+    private injector: Injector,
+    private elementRef: ElementRef<HTMLElement>,
+    private window: WindowRef
+  ) {}
 
   ngOnInit(): void {
+    this.ionModalElement = this.elementRef.nativeElement.closest('ion-modal');
+    this.listenForIonModalDidPresent();
+    this.listenForIonModalWillDismiss();
     this.componentPropsInjector = Injector.create({
       providers: [{ provide: COMPONENT_PROPS, useValue: this.config.componentProps }],
       parent: this.injector,
     });
+  }
+
+  private listenForIonModalDidPresent() {
+    if (this.ionModalElement) {
+      this.ionModalElement.addEventListener('ionModalDidPresent', () => {
+        this.ionModalDidPresent.next();
+        this.ionModalDidPresent.complete();
+      });
+    }
+  }
+
+  private listenForIonModalWillDismiss() {
+    if (this.ionModalElement) {
+      this.ionModalElement.addEventListener('ionModalWillDismiss', () => {
+        this.ionModalWillDismiss.next();
+        this.ionModalWillDismiss.complete();
+      });
+    }
   }
 
   async close(data?: any): Promise<void> {
@@ -52,6 +86,6 @@ export class ModalCompactWrapperComponent implements Modal, OnInit {
   @HostListener('window:focusout')
   onFocusChange() {
     // This fixes an undesired scroll behaviour occurring on keyboard-tabbing backwards (with shift+tab):
-    window.scrollTo({ top: this.scrollY });
+    this.window.scrollTo({ top: this.scrollY });
   }
 }

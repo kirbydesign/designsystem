@@ -1,0 +1,42 @@
+@import '../../scss/utils';
+
+:host {
+  display: inline-block;
+  background-color: var(--kirby-flag-background-color, transparent);
+  color: var(--kirby-flag-color, get-color('white-contrast'));
+  border: 1px solid var(--kirby-flag-border-color, get-color('medium'));
+  border-radius: size('xxxs');
+
+  font-size: font-size('n');
+
+  padding-top: size('xxxxs');
+  padding-bottom: size('xxxxs');
+  padding-left: size('xxs');
+  padding-right: size('xxs');
+
+  &.sm {
+    font-size: font-size('s');
+  }
+
+  &.xs {
+    font-size: font-size('xs');
+    padding-left: size('xxxs');
+    padding-right: size('xxxs');
+  }
+}
+
+@each $color-name,
+  $color-value
+    in map-merge(
+      $notification-colors,
+      (
+        'semi-light': get-color('semi-light'),
+      )
+    )
+{
+  :host(.#{$color-name}) {
+    --kirby-flag-background-color: #{get-color($color-name)};
+    --kirby-flag-color: #{get-color($color-name + '-contrast')};
+    --kirby-flag-border-color: #{get-color($color-name)};
+  }
+}

@@ -9,6 +9,8 @@ import { FormFieldInputCounterExampleComponent } from './examples/input/counter'
 import { FormFieldInputNumericExampleComponent } from './examples/input/numeric';
 import { FormFieldInputDisabledExampleComponent } from './examples/input/disabled';
 import { FormFieldInputErrorExampleComponent } from './examples/input/error';
+import { FormFieldInputBorderlessExampleComponent } from './examples/input/borderless';
+import { FormFieldFocusExampleComponent } from './examples/input/focus';
 import { FormFieldTextareaDefaultExampleComponent } from './examples/textarea/default';
 import { FormFieldTextareaLabelExampleComponent } from './examples/textarea/label';
 import { FormFieldTextareaCounterExampleComponent } from './examples/textarea/counter';
@@ -21,6 +23,8 @@ const COMPONENT_DECLARATIONS = [
   FormFieldInputNumericExampleComponent,
   FormFieldInputDisabledExampleComponent,
   FormFieldInputErrorExampleComponent,
+  FormFieldInputBorderlessExampleComponent,
+  FormFieldFocusExampleComponent,
   FormFieldTextareaDefaultExampleComponent,
   FormFieldTextareaLabelExampleComponent,
   FormFieldTextareaCounterExampleComponent,

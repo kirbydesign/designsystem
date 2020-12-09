@@ -8,8 +8,10 @@ import { DesignTokenHelper } from '../../helpers/design-token-helper';
 import { TestHelper } from '../../testing/test-helper';
 import { PageComponent, PageContentComponent } from './page.component';
 import { FitHeadingDirective } from '../../directives/fit-heading/fit-heading.directive';
+import { WindowRef } from '../../types/window-ref';
 
 const size = DesignTokenHelper.size;
+const fatFingerSize = DesignTokenHelper.fatFingerSize();
 
 describe('PageComponent', () => {
   let spectator: SpectatorHost<PageComponent>;
@@ -32,6 +34,12 @@ describe('PageComponent', () => {
     component: PageComponent,
     declarations: [PageContentComponent, MockDirective(FitHeadingDirective)],
     imports: [IonicModule.forRoot({ mode: 'ios' }), NoopAnimationsModule, RouterTestingModule],
+    providers: [
+      {
+        provide: WindowRef,
+        useValue: window,
+      },
+    ],
   });
 
   beforeEach(() => {
@@ -50,18 +58,24 @@ describe('PageComponent', () => {
     expect(spectator.component).toBeTruthy();
   });
 
-  it('should render with correct padding', async () => {
-    await TestHelper.whenHydrated(ionToolbar);
+  it('should render toolbar with correct padding', async () => {
+    await TestHelper.whenReady(ionToolbar);
     const toolbarContainer = ionToolbar.shadowRoot.querySelector('.toolbar-container');
+    expect(toolbarContainer).toBeTruthy();
     expect(toolbarContainer).toHaveComputedStyle({
-      'padding-left': size('xxs'),
-      'padding-right': size('xxs'),
+      'padding-left': size('xxxs'),
+      'padding-right': size('xxxs'),
       'padding-top': '0px',
-      'padding-bottom': size('xxxs'),
+      'padding-bottom': '0px',
     });
-    const ionTitle = spectator.queryHost('ion-title');
-    expect(ionTitle).toHaveComputedStyle({
-      'padding-bottom': size('xxxs'),
+  });
+
+  it('should render back button with correct size', async () => {
+    await TestHelper.whenReady(ionToolbar);
+    const ionBackButton = spectator.queryHost('ion-toolbar ion-buttons ion-back-button');
+    expect(ionBackButton).toHaveComputedStyle({
+      width: fatFingerSize,
+      height: fatFingerSize,
     });
   });
 });

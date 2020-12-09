@@ -12,9 +12,14 @@ ion-tab-button {
   --kirby-badge-left: calc(50% + 5px);
   --kirby-badge-top: 0;
 
-  @include media('>=large') {
+  @include media('>=medium') {
     flex: none;
-    padding: 0 size('xs');
+    padding: 0 size('m');
+    margin-right: size('m');
+
+    &:last-child {
+      margin-right: 0;
+    }
 
     font-size: font-size('s');
     flex-direction: row;
@@ -26,6 +31,13 @@ ion-tab-button {
     .icon-container {
       position: relative;
       margin-right: size('xxs');
+    }
+  }
+
+  @include media('>=large') {
+    @include not-touch {
+      padding: 0 size('xs');
+      margin-right: 0;
     }
   }
 }

@@ -7,6 +7,7 @@ export { ButtonComponent } from './button/button.component';
 
 export * from './card';
 export * from './chart';
+export * from './stock-chart';
 export { CalendarComponent } from './calendar/calendar.component';
 export { CheckboxComponent } from './checkbox/checkbox.component';
 export { ChipComponent } from './chip/chip.component';
@@ -46,3 +47,11 @@ export * from './tabs';
 export * from './toast';
 export { ToggleComponent } from './toggle/toggle.component';
 export { ToolbarComponent } from './toolbar/toolbar.component';
+
+export { ProgressCircleComponent } from './progress-circle/progress-circle.component';
+export { FlagComponent } from './flag/flag.component';
+export * from './slides/slides.component';
+
+export { ToggleButtonComponent } from './toggle-button/toggle-button.component';
+
+export * from './accordion';

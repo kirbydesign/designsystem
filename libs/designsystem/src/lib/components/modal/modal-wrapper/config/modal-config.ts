@@ -1,9 +1,21 @@
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+
 import { DrawerSupplementaryAction } from './drawer-supplementary-action';
 
+export type ModalFlavor = 'modal' | 'drawer' | 'compact';
+export type ModalSize = 'small' | 'medium' | 'large' | 'full-height';
+
 export interface ModalConfig {
-  title: string;
+  /**
+   * @deprecated Will be removed in next major version. Embed a `<kirby-page-title>` element inside the component instead.
+   */
+  title?: string;
   component: any;
-  flavor?: 'modal' | 'drawer' | 'compact';
+  size?: ModalSize;
+  modalRoute?: ActivatedRoute;
+  siblingModalRouteActivated$?: Observable<ActivatedRoute>;
+  flavor?: ModalFlavor;
   /**
    * @deprecated Will be removed in next major version.
    */

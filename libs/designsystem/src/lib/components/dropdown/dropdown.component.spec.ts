@@ -1,19 +1,15 @@
-import {
-  Spectator,
-  createComponentFactory,
-  createHostFactory,
-  SpectatorHost,
-} from '@ngneat/spectator';
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { createHostFactory, Spectator, SpectatorHost } from '@ngneat/spectator';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { fakeAsync, tick } from '@angular/core/testing';
-import { MockComponents } from 'ng-mocks';
+import { MockComponents, MockDirectives } from 'ng-mocks';
 import { IonItem } from '@ionic/angular';
 
 import { DropdownComponent } from './dropdown.component';
-import { ButtonComponent } from '../button/button.component';
-import { IconComponent } from '../icon/icon.component';
-import { CardComponent } from '../card/card.component';
-import { ItemComponent } from '../item/item.component';
+import { ButtonComponent, CardComponent, IconComponent, ItemComponent } from '..';
+import { TestHelper } from '../../testing/test-helper';
+import { ListItemTemplateDirective } from '../list';
+import { DesignTokenHelper } from '../../helpers';
+import { SizeDirective } from '../../directives';
 
 @Component({
   template: '<ng-content></ng-content>',
@@ -35,15 +31,17 @@ describe('DropdownComponent', () => {
     let spectator: Spectator<DropdownComponent>;
     let buttonElement: HTMLButtonElement;
 
-    const createComponent = createComponentFactory({
+    const createHost = createHostFactory({
       component: DropdownComponent,
       declarations: [
-        MockComponents(ButtonComponent, CardComponent, ItemComponent, IconComponent, IonItem),
+        ItemComponent,
+        MockComponents(ButtonComponent, CardComponent, IconComponent, IonItem),
+        MockDirectives(SizeDirective),
       ],
     });
 
     beforeEach(() => {
-      spectator = createComponent({
+      spectator = createHost(`<kirby-dropdown></kirby-dropdown>`, {
         props: {
           items: items,
         },
@@ -88,6 +86,10 @@ describe('DropdownComponent', () => {
       expect(spectator.element.attributes['disabled']).toBeUndefined();
     });
 
+    it('should render no-blur attribute', () => {
+      expect(spectator.element.attributes['no-blur']).toBeDefined();
+    });
+
     it('should not render button as disabled ', () => {
       expect(buttonElement.disabled).toBeFalsy();
     });
@@ -96,9 +98,18 @@ describe('DropdownComponent', () => {
       expect(buttonElement.attributes['disabled']).toBeUndefined();
     });
 
+    it('should have correct item size', () => {
+      const itemElements = spectator.queryAll<HTMLElement>('kirby-item');
+      expect(itemElements).toHaveLength(items.length);
+      itemElements.forEach((item) => {
+        expect(item.querySelector('ion-item')).toHaveComputedStyle({
+          '--min-height': DesignTokenHelper.dropdownItemHeight(),
+        });
+      });
+    });
+
     it('should receive focus', () => {
       spectator.element.focus();
-      spectator.detectChanges();
       expect(spectator.element).toBeFocused();
     });
 
@@ -116,7 +127,6 @@ describe('DropdownComponent', () => {
       beforeEach(() => {
         onChangeSpy = spyOn(spectator.component.change, 'emit');
         spectator.setInput('selectedIndex', newSelectedIndex);
-        spectator.detectChanges();
       });
 
       it('should have correct selected item', () => {
@@ -282,16 +292,17 @@ describe('DropdownComponent', () => {
       });
 
       describe('and button is clicked', () => {
-        beforeEach(fakeAsync(() => {
+        it('should open and focus dropdown', fakeAsync(() => {
           spectator.click('button');
-          spectator.detectChanges();
           tick(openDelayInMs);
-        }));
-        it('should open dropdown', () => {
           expect(spectator.component.isOpen).toBeTruthy();
-        });
-        it('should recieve focus', () => {
           expect(spectator.element).toBeFocused();
+        }));
+
+        it('should open dropdown within actual delay', async () => {
+          spectator.click('button');
+          await TestHelper.whenTrue(() => spectator.component.isOpen, openDelayInMs);
+          expect(spectator.component.isOpen).toBeTruthy();
         });
       });
 
@@ -829,6 +840,99 @@ describe('DropdownComponent', () => {
     });
   });
 
+  describe('when configured with size', () => {
+    let spectator: SpectatorHost<DropdownComponent>;
+    let buttonSizeDirective: SizeDirective;
+
+    const createHost = createHostFactory({
+      component: DropdownComponent,
+      declarations: [
+        MockComponents(ButtonComponent, CardComponent, ItemComponent, IconComponent),
+        MockDirectives(SizeDirective),
+      ],
+    });
+
+    function getButtonSizeDirective() {
+      return spectator.query(ButtonComponent, { read: SizeDirective });
+    }
+
+    describe('through template one-time string initialization', () => {
+      function getSpectatorWithStringSize(size: string) {
+        return createHost(`<kirby-dropdown size="${size}"></kirby-dropdown>`, {
+          props: { items: items },
+        });
+      }
+
+      it('should have small size on button', () => {
+        const size = 'sm';
+        spectator = getSpectatorWithStringSize(size);
+        buttonSizeDirective = getButtonSizeDirective();
+        expect(buttonSizeDirective.size).toBe(size);
+      });
+
+      it('should have medium size on button', () => {
+        const size = 'md';
+        spectator = getSpectatorWithStringSize(size);
+        buttonSizeDirective = getButtonSizeDirective();
+        expect(buttonSizeDirective.size).toBe(size);
+      });
+    });
+
+    describe('through template property binding', () => {
+      function getSpectatorWithStringSize(size: string) {
+        return createHost(`<kirby-dropdown [size]="'${size}'"></kirby-dropdown>`, {
+          props: { items: items },
+        });
+      }
+
+      it('should have small size on button', () => {
+        const size = 'sm';
+        spectator = getSpectatorWithStringSize(size);
+        buttonSizeDirective = getButtonSizeDirective();
+        expect(buttonSizeDirective.size).toBe(size);
+      });
+
+      it('should have medium size on button', () => {
+        const size = 'md';
+        spectator = getSpectatorWithStringSize(size);
+        buttonSizeDirective = getButtonSizeDirective();
+        expect(buttonSizeDirective.size).toBe(size);
+      });
+    });
+
+    describe('through input properties', () => {
+      function getSpectatorWithSize(size: 'sm' | 'md') {
+        return createHost(`<kirby-dropdown></kirby-dropdown>`, {
+          props: { items: items, size: size },
+        });
+      }
+
+      it('should have small size on button', () => {
+        const size = 'sm';
+        spectator = getSpectatorWithSize(size);
+        buttonSizeDirective = getButtonSizeDirective();
+        expect(buttonSizeDirective.size).toBe(size);
+      });
+
+      it('should have medium size on button', () => {
+        const size = 'md';
+        spectator = getSpectatorWithSize(size);
+        buttonSizeDirective = getButtonSizeDirective();
+        expect(buttonSizeDirective.size).toBe(size);
+      });
+
+      describe('when changing size', () => {
+        it('should have correct size', () => {
+          const newSize = 'sm';
+          spectator = getSpectatorWithSize('md');
+          spectator.setInput('size', newSize);
+          buttonSizeDirective = getButtonSizeDirective();
+          expect(buttonSizeDirective.size).toEqual(newSize);
+        });
+      });
+    });
+  });
+
   describe('when configured with selected index', () => {
     let spectator: SpectatorHost<DropdownComponent>;
     let buttonElement: HTMLButtonElement;
@@ -836,7 +940,8 @@ describe('DropdownComponent', () => {
     const createHost = createHostFactory({
       component: DropdownComponent,
       declarations: [
-        MockComponents(ButtonComponent, CardComponent, ItemComponent, IconComponent, IonItem),
+        MockComponents(ButtonComponent, CardComponent, ItemComponent, IconComponent),
+        MockDirectives(SizeDirective),
       ],
     });
 
@@ -941,13 +1046,13 @@ describe('DropdownComponent', () => {
 
   describe('when inside host component with ChangeDetectionStrategy.OnPush', () => {
     let spectator: SpectatorHost<DropdownComponent>;
-    let buttonElement: HTMLButtonElement;
     let cardElement: HTMLElement;
 
     const createHost = createHostFactory({
       component: DropdownComponent,
       declarations: [
-        MockComponents(ButtonComponent, CardComponent, ItemComponent, IconComponent, IonItem),
+        MockComponents(ButtonComponent, CardComponent, ItemComponent, IconComponent),
+        MockDirectives(SizeDirective),
       ],
       host: OnPushHostComponent,
     });
@@ -958,7 +1063,6 @@ describe('DropdownComponent', () => {
           items: items,
         },
       });
-      buttonElement = spectator.query('button[kirby-button]');
     });
 
     beforeEach(fakeAsync(() => {
@@ -983,6 +1087,71 @@ describe('DropdownComponent', () => {
     it('options should be visible', () => {
       expect(cardElement).toBeVisible();
       expect(cardElement).toHaveComputedStyle({ opacity: '1' });
+    });
+  });
+
+  describe('when configured with custom item template', () => {
+    let spectator: SpectatorHost<DropdownComponent>;
+
+    const createHost = createHostFactory({
+      component: DropdownComponent,
+      declarations: [
+        ItemComponent,
+        ListItemTemplateDirective,
+        MockComponents(ButtonComponent, CardComponent, IconComponent, IonItem),
+        MockDirectives(SizeDirective),
+      ],
+    });
+
+    beforeEach(() => {
+      spectator = createHost(
+        `<kirby-dropdown>
+           <kirby-item
+             *kirbyListItemTemplate="let item; let selected = selected"
+             selectable="true"
+             [selected]="selected">
+             <kirby-icon *ngIf="selected" name="checkmark-selected" slot="start"></kirby-icon>
+             <h3>{{ item.title }}</h3>
+           </kirby-item>
+         </kirby-dropdown>`,
+        {
+          props: {
+            items: items,
+          },
+        }
+      );
+    });
+
+    it('should have correct item size', () => {
+      const itemElements = spectator.queryAll<HTMLElement>('kirby-item');
+      expect(itemElements).toHaveLength(items.length);
+      itemElements.forEach((item) => {
+        expect(item.querySelector('ion-item')).toHaveComputedStyle({
+          '--min-height': DesignTokenHelper.dropdownItemHeight(),
+        });
+      });
+    });
+
+    it('should set up click listernes for slotted items', () => {
+      spectator.detectChanges();
+      const clickListeners = spectator.component['itemClickUnlisten'];
+      expect(clickListeners).toHaveLength(items.length);
+    });
+
+    describe('ngOnDestroy', () => {
+      it('should call each item click unlisten function for slotted items', () => {
+        const unlistenMockArray = [
+          () => unlistenCounter++,
+          () => unlistenCounter++,
+          () => unlistenCounter++,
+        ];
+        const unlistenMockArrayLength = unlistenMockArray.length;
+        let unlistenCounter = 0;
+        spectator.component['itemClickUnlisten'] = unlistenMockArray;
+        spectator.component.ngOnDestroy();
+        expect(spectator.component['itemClickUnlisten']).toHaveLength(0);
+        expect(unlistenCounter).toEqual(unlistenMockArrayLength);
+      });
     });
   });
 });

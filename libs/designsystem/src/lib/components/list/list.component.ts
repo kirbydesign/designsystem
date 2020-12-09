@@ -12,7 +12,6 @@ import {
   TrackByFunction,
   ContentChildren,
   AfterViewInit,
-  ElementRef,
 } from '@angular/core';
 
 import {
@@ -29,6 +28,7 @@ import { GroupByPipe } from './pipes/group-by.pipe';
 import { ListSwipeAction } from './list-swipe-action';
 import { ThemeColor } from '../../helpers/theme-color.type';
 import { ItemComponent } from '../item/item.component';
+import { PlatformService } from '../../helpers/platform.service';
 
 export type ListShape = 'square' | 'rounded' | 'none';
 
@@ -140,7 +140,11 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   groupedItems: any[];
   selectedItem: any;
 
-  constructor(private listHelper: ListHelper, private groupBy: GroupByPipe) {}
+  constructor(
+    private listHelper: ListHelper,
+    private groupBy: GroupByPipe,
+    private platform: PlatformService
+  ) {}
 
   ngOnInit() {
     this.hasDeprecatedItemTemplate = !!this.legacyItemTemplate || !!this.legacyFlexItemTemplate;
@@ -229,17 +233,9 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
     event.stopPropagation();
   }
 
-  onResize(): void {
-    this.initializeSwipeActions();
-  }
-
   private initializeSwipeActions(): void {
-    const large = 1025; //TODO this need to be refactored.
     if (this.swipeActions && this.swipeActions.length) {
-      this.isSwipingEnabled = window.innerWidth < large;
-      if (this.list && !this.isSwipingEnabled) {
-        this.list.closeSlidingItems();
-      }
+      this.isSwipingEnabled = this.platform.isTouch();
     }
   }
 }

@@ -1,16 +1,12 @@
+import { styles } from '../helpers/design-token-helper.styles';
+
 export namespace KirbyAnimation {
   export enum Duration {
     // Duration in milliseconds
-    QUICK = 200,
-    SHORT = 300,
-    LONG = 500,
-    TEST = 1000,
+    QUICK = parseInt(styles.transitionDurations.quick),
+    SHORT = parseInt(styles.transitionDurations.short),
+    LONG = parseInt(styles.transitionDurations.long),
+    EXTRA_LONG = parseInt(styles.transitionDurations.extraLong),
   }
-
-  export enum Easing {
-    STATIC = 'linear',
-    ENTER = 'ease-out',
-    EXIT = 'ease-in',
-    MOTION = 'cubic-bezier(.25, .1, .25, 1)',
-  }
+  export const Easing = styles.transitionEasings;
 }

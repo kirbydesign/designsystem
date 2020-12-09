@@ -8,6 +8,7 @@ import { InfiniteScrollDirective } from './components/list/directives/infinite-s
 import { ModalWrapperComponent } from './components/modal/modal-wrapper/modal-wrapper.component';
 import { ModalCompactWrapperComponent } from './components/modal/modal-wrapper/compact/modal-compact-wrapper.component';
 import { ModalFooterComponent } from './components/modal/footer/modal-footer.component';
+import { ModalRouterLinkDirective } from './directives/modal-router-link/modal-router-link.directive';
 import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';
 import { FullscreenLoadingOverlayComponent } from './components/loading-overlay/fullscreen-loading-overlay/fullscreen-loading-overlay.component';
 import { LoadingOverlayComponent } from './components/loading-overlay/loading-overlay.component';
@@ -29,6 +30,7 @@ import { CardFooterComponent } from './components/card/card-footer/card-footer.c
 import { CardHeaderComponent } from './components/card/card-header/card-header.component';
 import { CardComponent } from './components/card/card.component';
 import { ChartComponent } from './components/chart/chart.component';
+import { StockChartComponent } from './components/stock-chart/stock-chart.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { ChipComponent } from './components/chip/chip.component';
 import { EmptyStateComponent } from './components/empty-state/empty-state.component';
@@ -71,6 +73,15 @@ import { BreakpointHelperService } from './components/grid/breakpoint-helper.ser
 import { LoadingOverlayService } from './components/loading-overlay/fullscreen-loading-overlay/loading-overlay.service';
 import { ResizeObserverFactory } from './components/shared/resize-observer/resize-observer.factory';
 import { ResizeObserverService } from './components/shared/resize-observer/resize-observer.service';
+import { ProgressCircleComponent } from './components/progress-circle/progress-circle.component';
+import { ProgressCircleRingComponent } from './components/progress-circle/progress-circle-ring.component';
+import { FlagComponent } from './components/flag/flag.component';
+import { IconRegistryService } from './components/icon/icon-registry.service';
+import { WindowRef } from './types/window-ref';
+import { ToggleButtonModule } from './components/toggle-button/toggle-button.module';
+import { SlideDirective, SlidesComponent } from './components/slides/slides.component';
+import { AccordionDirective } from './components/accordion/accordion.directive';
+import { AccordionItemComponent } from './components/accordion/accordion-item.component';
 
 const exportedDeclarations = [
   CardComponent,
@@ -87,6 +98,7 @@ const exportedDeclarations = [
   ListHeaderComponent,
   ListFooterDirective,
   ChartComponent,
+  StockChartComponent,
   GridComponent,
   ComponentLoaderDirective,
   AvatarComponent,
@@ -96,6 +108,7 @@ const exportedDeclarations = [
   CheckboxComponent,
   ActionSheetComponent,
   ModalFooterComponent,
+  ModalRouterLinkDirective,
   SegmentedControlComponent,
   ChipComponent,
   BadgeComponent,
@@ -115,6 +128,12 @@ const exportedDeclarations = [
   DropdownComponent,
   InfiniteScrollDirective,
   LoadingOverlayComponent,
+  ProgressCircleComponent,
+  FlagComponent,
+  SlidesComponent,
+  SlideDirective,
+  AccordionDirective,
+  AccordionItemComponent,
 ];
 
 const declarations = [
@@ -126,6 +145,7 @@ const declarations = [
   AlertComponent,
   ModalWrapperComponent,
   ModalCompactWrapperComponent,
+  ProgressCircleRingComponent,
 ];
 
 const exportedModules = [
@@ -135,6 +155,7 @@ const exportedModules = [
   TabsModule,
   IconModule,
   ItemModule,
+  ToggleButtonModule,
 ];
 
 const exports = [...exportedModules, ...exportedDeclarations];
@@ -152,6 +173,10 @@ const providers = [
   LoadingOverlayService,
   ResizeObserverFactory,
   ResizeObserverService,
+  {
+    provide: WindowRef,
+    useValue: window,
+  },
 ];
 
 const entryComponents = [
@@ -168,6 +193,9 @@ const entryComponents = [
     RouterModule,
     IonicModule.forRoot({
       mode: 'ios',
+      inputShims: true,
+      scrollAssist: true,
+      scrollPadding: false,
     }),
     ...importedModules,
   ],
@@ -176,4 +204,8 @@ const entryComponents = [
   entryComponents: entryComponents,
   exports: exports,
 })
-export class KirbyModule {}
+export class KirbyModule {
+  constructor(modalController: ModalController) {
+    modalController.initialize();
+  }
+}

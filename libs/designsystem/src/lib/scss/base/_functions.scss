@@ -53,6 +53,14 @@
   @return map-get($elevations, $value);
 }
 
+@function get-transition-duration($value) {
+  @return map-get($transition-durations, $value);
+}
+
+@function get-transition-easing($value) {
+  @return map-get($transition-easings, $value);
+}
+
 @function get-shadow-size($elevation) {
   $shadow-size: 0;
   $shadow-list: map-get($elevations, $elevation);
@@ -124,9 +132,17 @@
 }
 
 // Only apply the styles on touch devices
-// (coarse pointer and cannot hover):
+// No check for `hover: none`, as Samsung Galaxy will return false on `hover: none` media query
 @mixin touch() {
-  @media (pointer: coarse) and (hover: none) {
+  @media (pointer: coarse) {
+    @content;
+  }
+}
+
+// Only apply the styles on non touch devices
+// (fine pointer and hover):
+@mixin not-touch() {
+  @media (hover: hover) and (pointer: fine) {
     @content;
   }
 }

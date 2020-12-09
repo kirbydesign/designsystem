@@ -1,0 +1,11 @@
+@import '../examples.shared';
+
+h1 {
+  text-align: center;
+}
+
+@include media('>medium') {
+  .mobile {
+    display: none;
+  }
+}

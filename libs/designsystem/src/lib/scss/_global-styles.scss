@@ -18,33 +18,40 @@
   --kirby-safe-area-bottom: var(--ion-safe-area-bottom);
   --kirby-safe-area-left: var(--ion-safe-area-left);
   --kirby-tab-bar-height: 50px;
+
+  // Prevent iOS tap highlight:
+  -webkit-tap-highlight-color: transparent;
 }
+
+@function get-drawer-additional-padding-top() {
+  $modal-close-button-inner-height: size('l'); // Todo: Move to / get from shared var
+  $modal-close-button-vertical-margin: size('xxxs') * 2; // Todo: Move to / get from shared var
+  $modal-header-vertical-padding: 3px * 2; // 3px defined by Ionic
+  $modal-header-total-height: $modal-close-button-inner-height + $modal-close-button-vertical-margin +
+    $modal-header-vertical-padding;
+  $modal-header-vertical-center: round($modal-header-total-height / 2);
+  @return $modal-header-vertical-center;
+}
+
+$backdrop-opacity: 0.4;
 
 ion-modal.kirby-overlay {
   position: fixed;
 
-  // Ensure consistent backdrop on overlays, as Ionic 5 only applies --backdrop-opacity to :first-of-type:
+  // Ensure consistent backdrop on all overlays:
+  &:not(.modal-card) {
+    --backdrop-opacity: #{$backdrop-opacity};
+    ion-backdrop {
+      opacity: var(--backdrop-opacity);
+    }
+  }
+
+  // Ensure consistent backdrop on card style modals, as Ionic 5 only applies --backdrop-opacity to :first-of-type:
   // See https://github.com/ionic-team/ionic/commit/253cd96164914a803f6bb42ff95ca74880c940d0
   // and https://github.com/ionic-team/ionic/issues/20800#issuecomment-606670762
-  /* RULES:
-  * Always show backdrop on first opened overlay
-  * Always show backdrop on alert and action-sheet (also nested)
-  * Show backdrop on drawer on small screens only
-  */
-  &:first-of-type,
-  &.modal-card:first-of-type,
-  &.kirby-alert,
-  &.kirby-action-sheet {
-    --backdrop-opacity: 0.4;
-  }
-  @include media('<medium') {
-    // Only apply backdrop on stacking drawers on small screens:
-    &.kirby-drawer {
-      --backdrop-opacity: 0.4;
-      ion-backdrop {
-        opacity: var(--backdrop-opacity);
-      }
-    }
+  &.modal-card,
+  &.modal-card:first-of-type {
+    --backdrop-opacity: #{$backdrop-opacity};
   }
 
   .modal-shadow {
@@ -55,30 +62,19 @@ ion-modal.kirby-overlay {
     box-sizing: border-box;
     --background: #{get-color('background-color')};
     --border-radius: 0;
+    --height: auto;
 
     &.kirby-modal-compact {
       --border-radius: #{$border-radius};
-
-      .modal-wrapper {
-        max-width: $compact-modal-max-width;
-        height: auto;
-        text-align: center;
-      }
-    }
-
-    // Reset Ionic Card style height + top border radius:
-    @include media('<medium') {
-      &.modal-card:not(.kirby-drawer) {
-        .modal-wrapper {
-          height: 100%;
-          border-top-left-radius: 0;
-          border-top-right-radius: 0;
-        }
-      }
+      --max-width: #{$compact-modal-max-width};
+      text-align: center;
     }
 
     &.kirby-drawer {
-      padding-top: calc(var(--ion-safe-area-top, 0) + #{size('m')});
+      --min-height: #{$drawer-default-height};
+      --kirby-modal-padding-top: calc(var(--kirby-safe-area-top, 0px) + #{size('m')});
+      padding-top: var(--kirby-modal-padding-top);
+      align-items: flex-end;
 
       .modal-wrapper {
         border-top-left-radius: #{$border-radius};
@@ -86,15 +82,74 @@ ion-modal.kirby-overlay {
       }
     }
 
+    @include media('<medium') {
+      &:not(.kirby-drawer):not(.kirby-modal-compact) {
+        --height: 100%;
+      }
+    }
+
+    &:not(.kirby-modal-compact).full-height {
+      --height: 100%;
+    }
+
+    &.modal-card:not(.kirby-drawer) {
+      .modal-wrapper {
+        @include media('<medium') {
+          // Reset Ionic Card style height + top border radius:
+          --height: 100%;
+          border-top-left-radius: 0;
+          border-top-right-radius: 0;
+        }
+
+        @include media('>=medium') {
+          // Reset Ionic Card style border radius:
+          border-radius: $border-radius;
+        }
+      }
+    }
+
     @include media('>=medium') {
-      //TODO Hardcoded magic numbers: Jakob + Jonathan, revisit!!!
-      --width: 720px;
-      --height: 647px;
+      --width: #{$modal-max-width};
       --border-radius: #{$border-radius};
       --box-shadow: #{get-elevation(8)};
 
+      &:not(.kirby-modal-compact) {
+        --max-height: 100%;
+        --kirby-modal-padding-top-base: #{size('xl')};
+        --kirby-modal-padding-top: var(--kirby-modal-padding-top-base);
+        padding-top: var(--kirby-modal-padding-top);
+
+        &:not(.kirby-drawer) {
+          --min-height: #{$modal-default-height};
+          align-items: flex-start;
+
+          &.small {
+            --min-height: #{map-get($modal-heights, 's')};
+          }
+          &.medium {
+            --min-height: #{map-get($modal-heights, 'm')};
+          }
+          &.large {
+            --min-height: #{map-get($modal-heights, 'l')};
+          }
+
+          &.full-height .modal-wrapper,
+          .modal-wrapper.full-height {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+          }
+        }
+      }
+
       &.kirby-drawer {
-        padding-top: unset;
+        --kirby-modal-padding-top: calc(
+          var(--kirby-modal-padding-top-base) + #{get-drawer-additional-padding-top()}
+        );
+
+        .modal-wrapper {
+          border-bottom-left-radius: 0;
+          border-bottom-right-radius: 0;
+        }
       }
     }
   }
@@ -142,5 +197,21 @@ ion-modal.kirby-overlay {
       --color: #{get-color($color-name + '-contrast')};
       --button-color: #{get-color($color-name + '-contrast')};
     }
+  }
+}
+
+/*
+ * FAB-sheet backdrop
+*/
+.fab-sheet-active {
+  .tabs-inner,
+  ion-router-outlet,
+  .ion-page {
+    overflow: visible;
+    contain: none !important;
+  }
+
+  ion-tab-bar {
+    z-index: -1;
   }
 }

@@ -11,6 +11,7 @@ $sizes: (
   xs: 12px,
   xxs: 8px,
   xxxs: 4px,
+  xxxxs: 2px,
 ) !default;
 
 /*
@@ -93,7 +94,69 @@ $elevations: (
   ),
 ) !default;
 
+/* avatar
+****************************************************************************/
+$avatar-sizes: (
+  xs: 32px,
+  s: 40px,
+  m: 56px,
+  l: 96px,
+) !default;
+
+$avatar-badge-size: 16px;
+
 /* Modal
 ****************************************************************************/
 $alert-max-width: 359px;
 $compact-modal-max-width: 359px;
+$modal-max-width: 720px;
+
+$modal-heights: (
+  s: floor($modal-max-width * 0.4),
+  m: floor($modal-max-width * 0.64),
+  l: floor($modal-max-width * 0.8),
+) !default;
+
+$modal-default-height: map-get($modal-heights, 'm');
+$drawer-default-height: map-get($modal-heights, 's');
+
+/* Item
+****************************************************************************/
+$item-heights: (
+  m: 56px,
+  s: 44px,
+  xs: 32px,
+) !default;
+
+/* Dropdown
+****************************************************************************/
+$dropdown-item-height: map-get($item-heights, 's');
+
+/* Button
+****************************************************************************/
+$fat-finger-size: 44px;
+
+/* Transitions
+****************************************************************************/
+$soft-keyboard-transition-enter: 250ms ease-out 1ms; // Adding a 1ms delay seems to improve the smoothness on iPhone
+$soft-keyboard-transition-leave: 150ms ease-out;
+
+$transition-durations: (
+  quick: 200ms,
+  short: 300ms,
+  long: 500ms,
+  extra-long: 1000ms,
+);
+
+// Easing function
+$transition-easings: (
+  static: linear,
+  enter: ease-out,
+  exit: ease-in,
+  enter-exit: ease,
+  motion: cubic-bezier(0.25, 0.1, 0.25, 1),
+  modal: (
+    enter: cubic-bezier(0.32, 0.72, 0, 1),
+    exit: cubic-bezier(0.32, 0.72, 0, 1),
+  ),
+);

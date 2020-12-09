@@ -11,9 +11,9 @@ const config = {
     <h3 class="kirby-text-bold">Title</h3>
     <p detail>Detail</p>
   </kirby-label>
-  <kirby-label slot="end">
+  <kirby-flag slot="end" themeColor="success">
     <data value="60.0">60</data>
-  </kirby-label>
+  </kirby-flag>
 </kirby-item>`,
   styles: [
     `.flag {
@@ -29,11 +29,6 @@ const config = {
     }`,
     `.flag:not(:last-child) {
       margin-bottom: 2px;
-    }`,
-    `data {
-      background-color: var(--kirby-success);
-      border-radius: 4px;
-      padding: 2px 8px;
     }`,
   ],
 };

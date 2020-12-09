@@ -1,0 +1,69 @@
+@import './libs/designsystem/src/lib/scss/utils';
+
+:host {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: size('s');
+
+  > * {
+    margin-right: size('s');
+  }
+
+  &.wrap {
+    flex-wrap: wrap;
+
+    > * {
+      margin-bottom: size('s');
+    }
+  }
+
+  &.align-top {
+    align-items: flex-start;
+  }
+}
+
+kirby-avatar {
+  position: relative;
+}
+
+kirby-avatar[title] {
+  margin-bottom: size('s');
+
+  &::before {
+    content: '';
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    transform: translateY(100%);
+    font-size: font-size('xs');
+    text-align: center;
+  }
+
+  &[title='Overlay']::before {
+    content: 'Overlay';
+  }
+
+  &[title='Shadow']::before {
+    content: 'Shadow';
+  }
+
+  &[title='light (default)']::before {
+    content: '(default)';
+  }
+
+  &[title='xs']::before {
+    content: 'xs';
+  }
+
+  &[title='sm']::before {
+    content: 'sm';
+  }
+
+  &[title='md']::before {
+    content: 'md';
+  }
+
+  &[title='lg']::before {
+    content: 'lg';
+  }
+}

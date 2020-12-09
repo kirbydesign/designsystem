@@ -1,8 +1,10 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import moment from 'moment';
 import { MockComponent } from 'ng-mocks';
+import { LOCALE_ID } from '@angular/core';
 
 import { CalendarComponent, IconComponent } from '..';
+import { WindowRef } from '../../types/window-ref';
 
 // NOTE: when specifying multiple input properties, set selectedDate
 // as the last one. This makes the component update without the need to
@@ -14,6 +16,17 @@ describe('CalendarComponent', () => {
   const createHost = createHostFactory({
     component: CalendarComponent,
     declarations: [CalendarComponent, MockComponent(IconComponent)],
+    providers: [
+      {
+        provide: LOCALE_ID,
+        // i.e. en-US. The week should start on Monday regardlessly
+        useValue: 'en',
+      },
+      {
+        provide: WindowRef,
+        useValue: window,
+      },
+    ],
   });
 
   beforeEach(() => {
@@ -205,6 +218,15 @@ describe('CalendarComponent', () => {
     expect(spectator.component.disabledDates).toEqual(localDates);
     spectator.setInput('disabledDates', utcDates);
     expect(spectator.component.disabledDates).toEqual(localDates);
+  });
+
+  it('should render days from Monday to Sunday', () => {
+    expect(
+      spectator
+        .queryAll('.calendar-table-header th')
+        .map((_) => _.textContent)
+        .join(' ')
+    ).toEqual('M T W T F S S');
   });
 
   // constants and utility functions

@@ -1,7 +1,7 @@
 import { RouterTestingModule } from '@angular/router/testing';
 import { SpectatorHost, createHostFactory } from '@ngneat/spectator';
 import { IonicModule, IonIcon } from '@ionic/angular';
-import { MockComponent, MockComponents } from 'ng-mocks';
+import { MockComponent, MockComponents, MockDirectives } from 'ng-mocks';
 
 import { DesignTokenHelper } from '../../helpers/design-token-helper';
 import { TestHelper } from '../../testing/test-helper';
@@ -21,10 +21,12 @@ import { EmptyStateComponent } from '../empty-state/empty-state.component';
 import { DropdownComponent } from '../dropdown/dropdown.component';
 import { CardComponent } from '../card/card.component';
 import { ItemComponent } from '../item/item.component';
+import { WindowRef } from '../../types/window-ref';
 
 const getColor = DesignTokenHelper.getColor;
 const size = DesignTokenHelper.size;
 const fontSize = DesignTokenHelper.fontSize;
+const fatFingerSize = DesignTokenHelper.fatFingerSize();
 
 describe('ButtonComponent in Kirby Page', () => {
   let spectator: SpectatorHost<PageComponent>;
@@ -40,6 +42,12 @@ describe('ButtonComponent in Kirby Page', () => {
       PageToolbarTitleDirective,
       FitHeadingDirective,
     ],
+    providers: [
+      {
+        provide: WindowRef,
+        useValue: window,
+      },
+    ],
   });
 
   beforeEach(() => {
@@ -53,7 +61,8 @@ describe('ButtonComponent in Kirby Page', () => {
           Test Title
         </ng-template>
         <kirby-page-actions *kirbyPageActions>
-          <button kirby-button>Test Action</button>
+          <button kirby-button class="text">Test Action</button>
+          <button kirby-button class="icon-only">Icon</button>
         </kirby-page-actions>
         <kirby-page-content>
           <p class="my-content">Custom Content...</kirby-page-content>
@@ -68,11 +77,15 @@ describe('ButtonComponent in Kirby Page', () => {
   describe('inside Toolbar', () => {
     let ionToolbar: HTMLElement;
     let actionButtonInHeader: HTMLButtonElement;
+    let actionButtonInHeaderIconOnly: HTMLButtonElement;
 
     beforeEach(() => {
       ionToolbar = spectator.queryHost('ion-toolbar');
       actionButtonInHeader = spectator.queryHost(
-        'ion-toolbar kirby-page-actions button[kirby-button]'
+        'ion-toolbar kirby-page-actions button[kirby-button].text'
+      );
+      actionButtonInHeaderIconOnly = spectator.queryHost(
+        'ion-toolbar kirby-page-actions button[kirby-button].icon-only'
       );
     });
 
@@ -81,22 +94,34 @@ describe('ButtonComponent in Kirby Page', () => {
     });
 
     it('should render without background-color', async () => {
-      await TestHelper.whenHydrated(ionToolbar);
+      await TestHelper.whenReady(ionToolbar);
       expect(actionButtonInHeader).toHaveComputedStyle({ 'background-color': 'transparent' });
     });
 
     it('should render with correct color', async () => {
-      await TestHelper.whenHydrated(ionToolbar);
+      await TestHelper.whenReady(ionToolbar);
       expect(actionButtonInHeader).toHaveComputedStyle({
         color: getColor('primary', 'contrast'),
       });
     });
 
-    it('should render without border', async () => {
-      await TestHelper.whenHydrated(ionToolbar);
+    it('should render with transparent border', async () => {
+      await TestHelper.whenReady(ionToolbar);
       expect(actionButtonInHeader).toHaveComputedStyle({
-        'border-width': '0px',
-        'border-style': 'none',
+        'border-width': '1px',
+        'border-style': 'solid',
+        'border-color': 'transparent',
+      });
+    });
+
+    it('should render with correct size', () => {
+      expect(actionButtonInHeader).toHaveComputedStyle({
+        width: 'auto',
+        height: fatFingerSize,
+      });
+      expect(actionButtonInHeaderIconOnly).toHaveComputedStyle({
+        width: fatFingerSize,
+        height: fatFingerSize,
       });
     });
   });
@@ -117,24 +142,25 @@ describe('ButtonComponent in Kirby Page', () => {
     });
 
     it('should render with correct background-color', async () => {
-      await TestHelper.whenHydrated(ionContent);
+      await TestHelper.whenReady(ionContent);
       expect(actionButtonInPage).toHaveComputedStyle({
         'background-color': getColor('white'),
       });
     });
 
     it('should render with correct color', async () => {
-      await TestHelper.whenHydrated(ionContent);
+      await TestHelper.whenReady(ionContent);
       expect(actionButtonInPage).toHaveComputedStyle({
         color: getColor('white', 'contrast'),
       });
     });
 
-    it('should render without border', async () => {
-      await TestHelper.whenHydrated(ionContent);
+    it('should render with transparent border', async () => {
+      await TestHelper.whenReady(ionContent);
       expect(actionButtonInPage).toHaveComputedStyle({
-        'border-width': '0px',
-        'border-style': 'none',
+        'border-width': '1px',
+        'border-style': 'solid',
+        'border-color': 'transparent',
       });
     });
   });
@@ -153,22 +179,23 @@ describe('ButtonComponent in Kirby Page', () => {
     });
 
     it('should render with correct background-color', async () => {
-      await TestHelper.whenHydrated(ionContent);
+      await TestHelper.whenReady(ionContent);
       expect(normalButtonInPage).toHaveComputedStyle({
         'background-color': getColor('primary'),
       });
     });
 
-    it('should render without border', async () => {
-      await TestHelper.whenHydrated(ionContent);
+    it('should render with transparent border', async () => {
+      await TestHelper.whenReady(ionContent);
       expect(normalButtonInPage).toHaveComputedStyle({
-        'border-width': '0px',
-        'border-style': 'none',
+        'border-width': '1px',
+        'border-style': 'solid',
+        'border-color': 'transparent',
       });
     });
 
     it('should render with correct color', async () => {
-      await TestHelper.whenHydrated(ionContent);
+      await TestHelper.whenReady(ionContent);
       expect(normalButtonInPage).toHaveComputedStyle({
         color: getColor('primary', 'contrast'),
       });
@@ -217,7 +244,11 @@ describe('ButtonComponent in Kirby dropdown', () => {
   let spectator: SpectatorHost<DropdownComponent>;
   const createHost = createHostFactory({
     component: DropdownComponent,
-    declarations: [ButtonComponent, MockComponents(CardComponent, ItemComponent, IconComponent)],
+    declarations: [
+      ButtonComponent,
+      MockComponents(CardComponent, ItemComponent, IconComponent),
+      MockDirectives(SizeDirective),
+    ],
   });
 
   it('should render with space between text and icon', () => {
