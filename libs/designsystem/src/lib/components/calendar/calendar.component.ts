@@ -27,6 +27,12 @@ interface CalendarDay {
   isDisabled: boolean;
 }
 
+// TODO: Should this actually be exported?
+type YearNavigatorConfig = {
+  from: number | Date;
+  to: number | Date;
+};
+
 @Component({
   selector: 'kirby-calendar',
   templateUrl: './calendar.component.html',
@@ -41,7 +47,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() disablePastDates = false;
   @Input() disableFutureDates = false;
   @Input() alwaysEnableToday = false;
-  @Input() yearNavigatorOptions: { from: number | date; to: number | Date };
+  @Input() yearNavigatorOptions: YearNavigatorConfig;
   public month: CalendarCell[][];
   public weekDays: string[];
   private selectedDay: CalendarCell;
