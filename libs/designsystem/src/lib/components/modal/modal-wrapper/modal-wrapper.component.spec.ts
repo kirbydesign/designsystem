@@ -297,6 +297,7 @@ describe('ModalWrapperComponent', () => {
     });
   });
 
+  // TODO: Rename to generic name
   describe('with embedded component with dynamic footer', () => {
     beforeEach(() => {
       spectator = modalWrapperTestBuilder
@@ -366,6 +367,7 @@ describe('ModalWrapperComponent', () => {
       expect(footerAsWrapperChild).toHaveClass('enabled');
     });
 
+    // TODO: Add slot start tests
     describe(`should set custom CSS property '--keyboard-offset' on embedded footer`, () => {
       const keyboardHeight = 400;
 

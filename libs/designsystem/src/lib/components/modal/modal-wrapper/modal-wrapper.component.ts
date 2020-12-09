@@ -62,6 +62,8 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     HTMLIonTitleElement
   >;
   @ViewChild(RouterOutlet, { static: true }) private routerOutlet: RouterOutlet;
+  @ViewChild('toolbarButtonsStart', { static: false, read: ElementRef })
+  private toolbarButtonsStart: ElementRef<HTMLIonButtonsElement>;
 
   private keyboardVisible = false;
   private toolbarButtons: HTMLButtonElement[] = [];
@@ -394,6 +396,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   private readonly elementToParentMap: { [key: string]: () => HTMLElement } = {
     'KIRBY-MODAL-FOOTER': () => this.elementRef.nativeElement,
     'KIRBY-PAGE-TITLE': () => this.ionTitleElement.nativeElement,
+    '[slot="start"]': () => this.toolbarButtonsStart.nativeElement,
   };
 
   private clearEmbeddedElements() {
