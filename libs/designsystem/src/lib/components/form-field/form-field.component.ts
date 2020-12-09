@@ -56,7 +56,7 @@ export class FormFieldComponent implements AfterContentChecked, OnInit, OnDestro
     this.dispatchLoadEvent();
   }
 
-  focus() {
+  public focus() {
     if (!this.inputElement) return;
 
     if (this.isTouch) {
