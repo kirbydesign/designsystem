@@ -231,194 +231,195 @@ describe('ModalWrapperComponent', () => {
     });
   });
 
-  describe('with embedded component with static footer', () => {
-    beforeEach(() => {
-      spectator = modalWrapperTestBuilder.withStaticFooter().build();
-      spectator.detectChanges();
-    });
-
-    afterEach(() => {
-      // Ensure any observers are destroyed:
-      spectator.fixture.destroy();
-    });
-
-    it('should move embedded footer to wrapper component', () => {
-      const ionContentElement = spectator.query('ion-content');
-      const embeddedComponentElement = ionContentElement.firstElementChild;
-      const embeddedFooter = embeddedComponentElement.querySelector('kirby-modal-footer');
-      expect(embeddedFooter).toBeNull();
-      const footerAsWrapperChild = spectator.element.querySelector(':scope > kirby-modal-footer');
-      expect(footerAsWrapperChild).not.toBeNull();
-    });
-
-    describe(`should set custom CSS property '--keyboard-offset' on embedded footer`, () => {
-      const keyboardHeight = 400;
-
-      it('to a value', () => {
-        const kirbyModalFooter = spectator.element.querySelector<HTMLElement>(
-          ':scope > kirby-modal-footer'
-        );
-        spectator.component._onKeyboardShow(keyboardHeight);
-        expect(kirbyModalFooter.style.getPropertyValue('--keyboard-offset')).toBeDefined();
+  describe('with embedded component', () => {
+    describe('with static footer', () => {
+      beforeEach(() => {
+        spectator = modalWrapperTestBuilder.withStaticFooter().build();
+        spectator.detectChanges();
       });
 
-      it('to 0 when no keyboard overlap', () => {
-        const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
-        spectator.element.style.position = 'fixed';
-        spectator.element.style.bottom = `${keyboardHeight + 200}px`;
-        spectator.component._onKeyboardShow(keyboardHeight);
-        const keyboardOverlap = 0;
-        expect(kirbyModalFooter).toHaveStyle({
-          '--keyboard-offset': `${keyboardOverlap}px`,
+      afterEach(() => {
+        // Ensure any observers are destroyed:
+        spectator.fixture.destroy();
+      });
+
+      it('should move embedded footer to wrapper component', () => {
+        const ionContentElement = spectator.query('ion-content');
+        const embeddedComponentElement = ionContentElement.firstElementChild;
+        const embeddedFooter = embeddedComponentElement.querySelector('kirby-modal-footer');
+        expect(embeddedFooter).toBeNull();
+        const footerAsWrapperChild = spectator.element.querySelector(':scope > kirby-modal-footer');
+        expect(footerAsWrapperChild).not.toBeNull();
+      });
+
+      describe(`should set custom CSS property '--keyboard-offset' on embedded footer`, () => {
+        const keyboardHeight = 400;
+
+        it('to a value', () => {
+          const kirbyModalFooter = spectator.element.querySelector<HTMLElement>(
+            ':scope > kirby-modal-footer'
+          );
+          spectator.component._onKeyboardShow(keyboardHeight);
+          expect(kirbyModalFooter.style.getPropertyValue('--keyboard-offset')).toBeDefined();
+        });
+
+        it('to 0 when no keyboard overlap', () => {
+          const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
+          spectator.element.style.position = 'fixed';
+          spectator.element.style.bottom = `${keyboardHeight + 200}px`;
+          spectator.component._onKeyboardShow(keyboardHeight);
+          const keyboardOverlap = 0;
+          expect(kirbyModalFooter).toHaveStyle({
+            '--keyboard-offset': `${keyboardOverlap}px`,
+          });
+        });
+
+        it('to value of overlap when keyboard overlaps partially', () => {
+          const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
+          spectator.element.style.position = 'fixed';
+          spectator.element.style.bottom = `${keyboardHeight - 200}px`;
+          spectator.component._onKeyboardShow(keyboardHeight);
+          const keyboardOverlap = 200;
+          expect(kirbyModalFooter).toHaveStyle({
+            '--keyboard-offset': `${keyboardOverlap}px`,
+          });
+        });
+
+        it('to keyboard height when keyboard overlaps completely', () => {
+          const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
+          spectator.element.style.position = 'fixed';
+          spectator.element.style.bottom = '0px';
+          spectator.component._onKeyboardShow(keyboardHeight);
+          const keyboardOverlap = keyboardHeight;
+          expect(kirbyModalFooter).toHaveStyle({
+            '--keyboard-offset': `${keyboardOverlap}px`,
+          });
         });
       });
+    });
 
-      it('to value of overlap when keyboard overlaps partially', () => {
-        const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
-        spectator.element.style.position = 'fixed';
-        spectator.element.style.bottom = `${keyboardHeight - 200}px`;
-        spectator.component._onKeyboardShow(keyboardHeight);
-        const keyboardOverlap = 200;
-        expect(kirbyModalFooter).toHaveStyle({
-          '--keyboard-offset': `${keyboardOverlap}px`,
-        });
+    describe('with dynamic footer', () => {
+      beforeEach(() => {
+        spectator = modalWrapperTestBuilder
+          .flavor('modal')
+          .withDynamicFooter()
+          .build();
+        spectator.detectComponentChanges();
       });
 
-      it('to keyboard height when keyboard overlaps completely', () => {
-        const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
-        spectator.element.style.position = 'fixed';
-        spectator.element.style.bottom = '0px';
-        spectator.component._onKeyboardShow(keyboardHeight);
-        const keyboardOverlap = keyboardHeight;
-        expect(kirbyModalFooter).toHaveStyle({
-          '--keyboard-offset': `${keyboardOverlap}px`,
-        });
+      afterEach(() => {
+        // Ensure any observers are destroyed:
+        spectator.fixture.destroy();
       });
-    });
-  });
+      it('should move embedded footer to wrapper component when rendered', async () => {
+        const footer = spectator.element.querySelector('kirby-modal-footer');
+        expect(footer).toBeNull();
 
-  // TODO: Rename to generic name
-  describe('with embedded component with dynamic footer', () => {
-    beforeEach(() => {
-      spectator = modalWrapperTestBuilder
-        .flavor('modal')
-        .withDynamicFooter()
-        .build();
-      spectator.detectComponentChanges();
-    });
-
-    afterEach(() => {
-      // Ensure any observers are destroyed:
-      spectator.fixture.destroy();
-    });
-
-    it('should move embedded footer to wrapper component when rendered', async () => {
-      const footer = spectator.element.querySelector('kirby-modal-footer');
-      expect(footer).toBeNull();
-
-      const embeddedComponent = spectator.query(DynamicFooterEmbeddedComponent);
-      embeddedComponent.showFooter = true;
-      spectator.detectChanges();
-      await TestHelper.waitForResizeObserver();
-
-      const ionContentElement = spectator.query('ion-content');
-      const embeddedComponentElement = ionContentElement.firstElementChild;
-      const embeddedFooter = embeddedComponentElement.querySelector('kirby-modal-footer');
-      expect(embeddedFooter).toBeNull();
-      const footerAsWrapperChild = spectator.element.querySelector(':scope > kirby-modal-footer');
-      expect(footerAsWrapperChild).not.toBeNull();
-    });
-
-    it('should remove embedded footer from wrapper component when not rendered', async () => {
-      let footer = spectator.element.querySelector('kirby-modal-footer');
-      expect(footer).toBeNull();
-
-      const embeddedComponent = spectator.query(DynamicFooterEmbeddedComponent);
-      embeddedComponent.showFooter = true;
-      spectator.detectChanges();
-      await TestHelper.waitForResizeObserver();
-
-      const footerAsWrapperChild = spectator.element.querySelector(':scope > kirby-modal-footer');
-      expect(footerAsWrapperChild).not.toBeNull();
-
-      embeddedComponent.showFooter = false;
-      spectator.detectChanges();
-      footer = spectator.element.querySelector('kirby-modal-footer');
-      expect(footer).toBeNull();
-    });
-
-    it('should render changes to embedded footer inside wrapper component', async () => {
-      const footer = spectator.element.querySelector('kirby-modal-footer');
-      expect(footer).not.toHaveClass('enabled');
-      const embeddedComponent = spectator.query(DynamicFooterEmbeddedComponent);
-      embeddedComponent.showFooter = true;
-      spectator.detectChanges();
-      await TestHelper.waitForResizeObserver();
-
-      const ionContentElement = spectator.query('ion-content');
-      const embeddedComponentElement = ionContentElement.firstElementChild;
-      const embeddedFooter = embeddedComponentElement.querySelector('kirby-modal-footer');
-      expect(embeddedFooter).toBeNull();
-      const footerAsWrapperChild = spectator.element.querySelector(':scope > kirby-modal-footer');
-      expect(footerAsWrapperChild).not.toBeNull();
-
-      embeddedComponent.isEnabled = true;
-      spectator.detectChanges();
-      expect(footerAsWrapperChild).toHaveClass('enabled');
-    });
-
-    // TODO: Add slot start tests
-    describe(`should set custom CSS property '--keyboard-offset' on embedded footer`, () => {
-      const keyboardHeight = 400;
-
-      beforeEach(async () => {
         const embeddedComponent = spectator.query(DynamicFooterEmbeddedComponent);
         embeddedComponent.showFooter = true;
         spectator.detectChanges();
         await TestHelper.waitForResizeObserver();
-        TestHelper.scrollMainWindowToTop();
+
+        const ionContentElement = spectator.query('ion-content');
+        const embeddedComponentElement = ionContentElement.firstElementChild;
+        const embeddedFooter = embeddedComponentElement.querySelector('kirby-modal-footer');
+        expect(embeddedFooter).toBeNull();
+        const footerAsWrapperChild = spectator.element.querySelector(':scope > kirby-modal-footer');
+        expect(footerAsWrapperChild).not.toBeNull();
       });
 
-      it('to a value', () => {
-        const kirbyModalFooter = spectator.element.querySelector<HTMLElement>(
-          ':scope > kirby-modal-footer'
-        );
-        spectator.component._onKeyboardShow(keyboardHeight);
-        expect(kirbyModalFooter.style.getPropertyValue('--keyboard-offset')).toBeDefined();
+      it('should remove embedded footer from wrapper component when not rendered', async () => {
+        let footer = spectator.element.querySelector('kirby-modal-footer');
+        expect(footer).toBeNull();
+
+        const embeddedComponent = spectator.query(DynamicFooterEmbeddedComponent);
+        embeddedComponent.showFooter = true;
+        spectator.detectChanges();
+        await TestHelper.waitForResizeObserver();
+
+        const footerAsWrapperChild = spectator.element.querySelector(':scope > kirby-modal-footer');
+        expect(footerAsWrapperChild).not.toBeNull();
+
+        embeddedComponent.showFooter = false;
+        spectator.detectChanges();
+        footer = spectator.element.querySelector('kirby-modal-footer');
+        expect(footer).toBeNull();
       });
 
-      it('to 0 when no keyboard overlap', () => {
-        const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
-        spectator.element.style.position = 'fixed';
-        spectator.element.style.bottom = `${keyboardHeight + 200}px`;
-        spectator.component._onKeyboardShow(keyboardHeight);
-        const keyboardOverlap = 0;
-        expect(kirbyModalFooter).toHaveStyle({
-          '--keyboard-offset': `${keyboardOverlap}px`,
+      it('should render changes to embedded footer inside wrapper component', async () => {
+        const footer = spectator.element.querySelector('kirby-modal-footer');
+        expect(footer).not.toHaveClass('enabled');
+        const embeddedComponent = spectator.query(DynamicFooterEmbeddedComponent);
+        embeddedComponent.showFooter = true;
+        spectator.detectChanges();
+        await TestHelper.waitForResizeObserver();
+
+        const ionContentElement = spectator.query('ion-content');
+        const embeddedComponentElement = ionContentElement.firstElementChild;
+        const embeddedFooter = embeddedComponentElement.querySelector('kirby-modal-footer');
+        expect(embeddedFooter).toBeNull();
+        const footerAsWrapperChild = spectator.element.querySelector(':scope > kirby-modal-footer');
+        expect(footerAsWrapperChild).not.toBeNull();
+
+        embeddedComponent.isEnabled = true;
+        spectator.detectChanges();
+        expect(footerAsWrapperChild).toHaveClass('enabled');
+      });
+
+      describe(`should set custom CSS property '--keyboard-offset' on embedded footer`, () => {
+        const keyboardHeight = 400;
+
+        beforeEach(async () => {
+          const embeddedComponent = spectator.query(DynamicFooterEmbeddedComponent);
+          embeddedComponent.showFooter = true;
+          spectator.detectChanges();
+          await TestHelper.waitForResizeObserver();
+          TestHelper.scrollMainWindowToTop();
+        });
+
+        it('to a value', () => {
+          const kirbyModalFooter = spectator.element.querySelector<HTMLElement>(
+            ':scope > kirby-modal-footer'
+          );
+          spectator.component._onKeyboardShow(keyboardHeight);
+          expect(kirbyModalFooter.style.getPropertyValue('--keyboard-offset')).toBeDefined();
+        });
+
+        it('to 0 when no keyboard overlap', () => {
+          const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
+          spectator.element.style.position = 'fixed';
+          spectator.element.style.bottom = `${keyboardHeight + 200}px`;
+          spectator.component._onKeyboardShow(keyboardHeight);
+          const keyboardOverlap = 0;
+          expect(kirbyModalFooter).toHaveStyle({
+            '--keyboard-offset': `${keyboardOverlap}px`,
+          });
+        });
+
+        it('to value of overlap when keyboard overlaps partially', () => {
+          const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
+          spectator.element.style.position = 'fixed';
+          spectator.element.style.bottom = `${keyboardHeight - 200}px`;
+          spectator.component._onKeyboardShow(keyboardHeight);
+          const keyboardOverlap = 200;
+          expect(kirbyModalFooter).toHaveStyle({
+            '--keyboard-offset': `${keyboardOverlap}px`,
+          });
+        });
+
+        it('to keyboard height when keyboard overlaps completely', () => {
+          const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
+          spectator.element.style.position = 'fixed';
+          spectator.element.style.bottom = '0px';
+          spectator.component._onKeyboardShow(keyboardHeight);
+          const keyboardOverlap = keyboardHeight;
+          expect(kirbyModalFooter).toHaveStyle({
+            '--keyboard-offset': `${keyboardOverlap}px`,
+          });
         });
       });
 
-      it('to value of overlap when keyboard overlaps partially', () => {
-        const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
-        spectator.element.style.position = 'fixed';
-        spectator.element.style.bottom = `${keyboardHeight - 200}px`;
-        spectator.component._onKeyboardShow(keyboardHeight);
-        const keyboardOverlap = 200;
-        expect(kirbyModalFooter).toHaveStyle({
-          '--keyboard-offset': `${keyboardOverlap}px`,
-        });
-      });
-
-      it('to keyboard height when keyboard overlaps completely', () => {
-        const kirbyModalFooter = spectator.element.querySelector(':scope > kirby-modal-footer');
-        spectator.element.style.position = 'fixed';
-        spectator.element.style.bottom = '0px';
-        spectator.component._onKeyboardShow(keyboardHeight);
-        const keyboardOverlap = keyboardHeight;
-        expect(kirbyModalFooter).toHaveStyle({
-          '--keyboard-offset': `${keyboardOverlap}px`,
-        });
-      });
+      // TODO: Add slot start test
     });
   });
 
