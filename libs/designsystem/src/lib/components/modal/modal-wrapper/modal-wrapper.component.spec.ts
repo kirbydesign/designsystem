@@ -232,6 +232,33 @@ describe('ModalWrapperComponent', () => {
   });
 
   describe('with embedded component', () => {
+    describe('with static custom header content', () => {
+      beforeEach(() => {
+        spectator = modalWrapperTestBuilder
+          .flavor('modal')
+          .withStaticProgressCircleComponent()
+          .build();
+        spectator.detectComponentChanges();
+      });
+
+      afterEach(() => {
+        // Ensure any observers are destroyed:
+        spectator.fixture.destroy();
+      });
+      fit('should move embedded custom header conter to ion-toolbar', () => {
+        const ionContentElement = spectator.query('ion-content');
+        const embeddedComponentElement = ionContentElement.firstElementChild;
+
+        const embeddedCustomHeader = embeddedComponentElement.querySelector(
+          'kirby-progress-circle'
+        );
+        console.log(spectator.element);
+        expect(embeddedCustomHeader).toBeNull();
+        const customHeaderAsWrapperChild = spectator.element.querySelector('kirby-progress-circle');
+        expect(customHeaderAsWrapperChild).not.toBeNull();
+      });
+    });
+
     describe('with static footer', () => {
       beforeEach(() => {
         spectator = modalWrapperTestBuilder.withStaticFooter().build();

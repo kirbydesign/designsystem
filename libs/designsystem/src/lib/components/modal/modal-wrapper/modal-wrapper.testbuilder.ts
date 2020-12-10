@@ -71,6 +71,11 @@ export class ModalWrapperTestBuilder {
     return this;
   }
 
+  withStaticProgressCircleComponent() {
+    this.config.component = StaticProgressCircleEmbeddedComponent;
+    return this;
+  }
+
   component(component: any) {
     this.config.component = component;
     return this;
@@ -137,3 +142,19 @@ export class DynamicFooterEmbeddedComponent {
   `,
 })
 export class InputEmbeddedComponent {}
+
+@Component({
+  template: `
+    <kirby-progress-circle
+      slot="start"
+      themeColor="warning"
+      value="50"
+      size="sm"
+      class="kirby-text-xsmall"
+    >
+      2/4
+    </kirby-progress-circle>
+    <kirby-page-title> My Drawer Title</kirby-page-title>
+  `,
+})
+export class StaticProgressCircleEmbeddedComponent {}
