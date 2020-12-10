@@ -1,33 +1,32 @@
-<cookbook-checkbox-example></cookbook-checkbox-example>
-<cookbook-code-viewer [html]="exampleHtml"></cookbook-code-viewer>
-<h4>Properties:</h4>
-<table class="cookbook-properties">
-  <thead>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Input values</th>
-    <th>Default</th>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>checked</code></td>
-      <td>Checks- and unchecks the checkbox</td>
-      <td><code>boolean</code></td>
-      <td>false</td>
-    </tr>
-    <tr>
-      <td><code>color</code></td>
-      <td>Specifies the fill color of the checkbox</td>
-      <td>
-        <code>"primary" || "secondary" || "tertiary" || "warning" || "success" || "danger"</code>
-      </td>
-      <td>"primary"</td>
-    </tr>
-    <tr>
-      <td><code>shape</code></td>
-      <td>Specifies if the checkbox will be square or circle shaped</td>
-      <td><code>"square" || "circle</code></td>
-      <td>"square"</td>
-    </tr>
-  </tbody>
-</table>
+<div class="example">
+  <h2>Single select</h2>
+  <p>Use as a binary choice for a standalone checkbox</p>
+  <cookbook-example-viewer [html]="checkboxSingleExample.template">
+    <cookbook-checkbox-single-example #checkboxSingleExample></cookbook-checkbox-single-example>
+  </cookbook-example-viewer>
+
+  <h2>Multi select</h2>
+  <p>Use in a list of checkboxes, where multiple choices can be selected</p>
+  <cookbook-example-viewer [html]="checkboxMultiExample.template">
+    <cookbook-checkbox-multi-example #checkboxMultiExample></cookbook-checkbox-multi-example>
+  </cookbook-example-viewer>
+
+  <h2>Multi select in a list</h2>
+  <cookbook-example-viewer [html]="checkboxMultiListExample.template">
+    <cookbook-checkbox-multi-list-example
+      #checkboxMultiListExample
+    ></cookbook-checkbox-multi-list-example>
+  </cookbook-example-viewer>
+
+  <h2>Properties:</h2>
+  <cookbook-showcase-properties [properties]="properties"></cookbook-showcase-properties>
+
+  <h2>Events:</h2>
+  <cookbook-showcase-properties
+    [properties]="events"
+    [columns]="{
+      Name: 'Name',
+      Description: 'Description'
+    }"
+  ></cookbook-showcase-properties>
+</div>

@@ -1,0 +1,17 @@
+@import './libs/designsystem/src/lib/scss/utils';
+
+h2:not(:first-child) {
+  margin-top: size('l');
+}
+p {
+  margin-top: -12px;
+}
+
+cookbook-example-viewer > *:first-child {
+  display: block;
+}
+
+cookbook-checkbox-multi-list-example {
+  max-width: 550px;
+  margin-bottom: size('s');
+}
