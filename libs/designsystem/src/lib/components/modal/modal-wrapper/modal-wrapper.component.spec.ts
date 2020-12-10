@@ -8,7 +8,7 @@ import { IconComponent } from '../../icon/icon.component';
 import { ModalWrapperComponent } from './modal-wrapper.component';
 import {
   DynamicFooterEmbeddedComponent,
-  DynamicProgressCircleEmbeddedComponent,
+  DynamicCustomHeaderContentEmbeddedComponent,
   ModalWrapperTestBuilder,
 } from './modal-wrapper.testbuilder';
 
@@ -238,7 +238,9 @@ describe('ModalWrapperComponent', () => {
       beforeEach(() => {
         spectator = modalWrapperTestBuilder
           .flavor('modal')
-          .withStaticProgressCircleComponent()
+          // TODO: Suggestion: Make withStaticComponent instead of withStaticSpecificComponent based on type like flavor is.
+          // TODO: You could even make just a withComponent() which coulcd be generic or take an options object.
+          .withStaticCustomHeaderContent()
           .build();
         spectator.detectComponentChanges();
       });
@@ -247,16 +249,18 @@ describe('ModalWrapperComponent', () => {
         // Ensure any observers are destroyed:
         spectator.fixture.destroy();
       });
-      it('should move embedded custom header conter to ion-toolbar', () => {
+      it('should move embedded custom header conter to modal header', () => {
         const ionContentElement = spectator.query('ion-content');
         const embeddedComponentElement = ionContentElement.firstElementChild;
 
         const embeddedCustomHeader = embeddedComponentElement.querySelector(
-          'kirby-progress-circle'
+          customHeaderContentSelector
         );
 
         expect(embeddedCustomHeader).toBeNull();
-        const customHeaderAsWrapperChild = spectator.element.querySelector('kirby-progress-circle');
+        const customHeaderAsWrapperChild = spectator.element.querySelector(
+          customHeaderContentSelector
+        );
         expect(customHeaderAsWrapperChild).not.toBeNull();
       });
     });
@@ -279,7 +283,7 @@ describe('ModalWrapperComponent', () => {
         const customHeaderContent = spectator.element.querySelector(customHeaderContentSelector);
         expect(customHeaderContent).toBeNull();
 
-        const embeddedComponent = spectator.query(DynamicProgressCircleEmbeddedComponent);
+        const embeddedComponent = spectator.query(DynamicCustomHeaderContentEmbeddedComponent);
         embeddedComponent.showCustomHeader = true;
         spectator.detectChanges();
         await TestHelper.waitForResizeObserver();
@@ -300,7 +304,7 @@ describe('ModalWrapperComponent', () => {
         let customHeaderContent = spectator.element.querySelector(customHeaderContentSelector);
         expect(customHeaderContent).toBeNull();
 
-        const embeddedComponent = spectator.query(DynamicProgressCircleEmbeddedComponent);
+        const embeddedComponent = spectator.query(DynamicCustomHeaderContentEmbeddedComponent);
         embeddedComponent.showCustomHeader = true;
         spectator.detectChanges();
         await TestHelper.waitForResizeObserver();
@@ -444,7 +448,7 @@ describe('ModalWrapperComponent', () => {
         const footerAsWrapperChild = spectator.element.querySelector(':scope > kirby-modal-footer');
         expect(footerAsWrapperChild).not.toBeNull();
 
-        // embeddedComponent.isEnabled = true;
+        embeddedComponent.isEnabled = true;
         spectator.detectChanges();
         expect(footerAsWrapperChild).toHaveClass('enabled');
       });

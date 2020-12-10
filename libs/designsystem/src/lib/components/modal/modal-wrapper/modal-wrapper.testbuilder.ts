@@ -26,8 +26,8 @@ export class ModalWrapperTestBuilder {
       StaticFooterEmbeddedComponent,
       DynamicFooterEmbeddedComponent,
       InputEmbeddedComponent,
-      StaticProgressCircleEmbeddedComponent,
-      DynamicProgressCircleEmbeddedComponent,
+      StaticCustomHeaderContentEmbeddedComponent,
+      DynamicCustomHeaderContentEmbeddedComponent,
     ],
     providers: [
       {
@@ -75,13 +75,13 @@ export class ModalWrapperTestBuilder {
     return this;
   }
 
-  withStaticProgressCircleComponent() {
-    this.config.component = StaticProgressCircleEmbeddedComponent;
+  withStaticCustomHeaderContent() {
+    this.config.component = StaticCustomHeaderContentEmbeddedComponent;
     return this;
   }
 
   withDynamicCustomHeadercontent() {
-    this.config.component = DynamicProgressCircleEmbeddedComponent;
+    this.config.component = DynamicCustomHeaderContentEmbeddedComponent;
     return this;
   }
 
@@ -166,7 +166,7 @@ export class InputEmbeddedComponent {}
     <kirby-page-title> My Drawer Title</kirby-page-title>
   `,
 })
-export class StaticProgressCircleEmbeddedComponent {}
+export class StaticCustomHeaderContentEmbeddedComponent {}
 @Component({
   template: `
     <kirby-progress-circle
@@ -182,6 +182,6 @@ export class StaticProgressCircleEmbeddedComponent {}
     <div>My title</div>
   `,
 })
-export class DynamicProgressCircleEmbeddedComponent {
+export class DynamicCustomHeaderContentEmbeddedComponent {
   showCustomHeader = false;
 }
