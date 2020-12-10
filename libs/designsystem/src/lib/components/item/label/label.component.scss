@@ -8,6 +8,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  position: relative;
 
   &.horizontal {
     display: flex;
@@ -17,6 +18,12 @@
 
     @include slotted(':not(:first-child)') {
       margin-left: size('xs');
+    }
+  }
+
+  @include slotted('kirby-checkbox') {
+    ion-checkbox {
+      position: static;
     }
   }
 }
