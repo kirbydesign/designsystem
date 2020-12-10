@@ -1,5 +1,7 @@
 import { Component, HostListener } from '@angular/core';
 
+import { DesignTokenHelper } from '@kirbydesign/designsystem';
+
 import { WindowRef } from '@kirbydesign/designsystem/types/window-ref';
 
 @Component({
@@ -12,16 +14,19 @@ export class ExamplesComponent {
   keyboardIsShowing = false;
   keyboardHeight: number;
   keyCount = 40;
-  keys = Array(this.keyCount).fill('');
 
   constructor(private window: WindowRef) {
     this.setKeyboardSize();
   }
 
+  get keys() {
+    return Array(this.keyCount).fill('');
+  }
+
   private setKeyboardSize() {
     const keyboardHeights = {
       tablet: {
-        portrait: 264,
+        portrait: 408,
         landscape: 434,
       },
       phone: {
@@ -29,11 +34,15 @@ export class ExamplesComponent {
         landscape: 200,
       },
     };
-    const device = this.window.matchMedia('(min-width: 721px)').matches ? 'tablet' : 'phone';
+    const query = `(min-width: ${DesignTokenHelper.breakpoints.medium})`;
+    const device = this.window.matchMedia(query).matches ? 'tablet' : 'phone';
     const orientation = this.window.matchMedia('(orientation: landscape)').matches
       ? 'landscape'
       : 'portrait';
     this.keyboardHeight = keyboardHeights[device][orientation];
+    const keysPerRow = device === 'phone' ? 7 : 10;
+    const rows = 4;
+    this.keyCount = keysPerRow * rows;
   }
 
   @HostListener('window:ionKeyboardDidShow', ['$event'])
@@ -47,15 +56,9 @@ export class ExamplesComponent {
     this.keyboardIsShowing = false;
   }
 
-  @HostListener('window:kirbyToggleDummyKeyboard')
-  _onToggleDummyKeyboard() {
-    setTimeout(() => {
-      this.showDummyKeyboard = !this.showDummyKeyboard;
-      const sessionKey = 'kirby-cookbook-show-dummy-keyboard';
-      this.showDummyKeyboard
-        ? this.window.sessionStorage.setItem(sessionKey, 'true')
-        : this.window.sessionStorage.removeItem(sessionKey);
-    });
+  @HostListener('window:kirbyToggleDummyKeyboard', ['$event.detail'])
+  _onToggleDummyKeyboard(show: boolean) {
+    this.showDummyKeyboard = show;
   }
 
   @HostListener('document:focusin', ['$event.target'])
@@ -65,7 +68,11 @@ export class ExamplesComponent {
       const ionKeyboardDidShowEvent = new CustomEvent('ionKeyboardDidShow', {
         detail: { keyboardHeight: this.keyboardHeight },
       });
-      this.window.dispatchEvent(ionKeyboardDidShowEvent);
+      const keyboardDidShowDelayInMs = 100;
+      setTimeout(
+        () => this.window.dispatchEvent(ionKeyboardDidShowEvent),
+        keyboardDidShowDelayInMs
+      );
     }
   }
 

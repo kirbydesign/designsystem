@@ -4,13 +4,23 @@ import { ModalConfig, ModalController } from '@kirbydesign/designsystem';
 
 import { FirstEmbeddedModalExampleComponent } from './first-embedded-modal-example/first-embedded-modal-example.component';
 import { ModalCompactExampleComponent } from './compact-example/modal-compact-example.component';
+import { WindowRef } from '@kirbydesign/designsystem/types/window-ref';
 
 const config = {
   selector: 'cookbook-modal-example-default',
   template: `<button kirby-button (click)="showModal()">Show modal</button>
 <button kirby-button (click)="showDrawer()">Show drawer</button>
 <button kirby-button (click)="showCompact()">Show compact</button>
-<button kirby-button (click)="showModalWithFooter()">Show modal with footer</button>`,
+<cookbook-example-configuration-wrapper>
+  <cookbook-modal-example-configuration
+    [(showDummyKeyboard)]="showDummyKeyboard"
+    [(showFooter)]="showFooter"
+    [(showDummyContent)]="showDummyContent"
+    [(delayLoadDummyContent)]="delayLoadDummyContent"
+    [(loadAdditionalContent)]="loadAdditionalContent"
+    [(openFullHeight)]="openFullHeight"
+  ></cookbook-modal-example-configuration>
+</cookbook-example-configuration-wrapper>`,
   titleTemplate: `<kirby-page-title>My Modal Title</kirby-page-title>
  
 <p>Some content of the embedded component</p>
@@ -146,9 +156,10 @@ export class EmbeddedComponent() {
 @Component({
   selector: config.selector,
   template: config.template,
+  styleUrls: ['./modal-example-default.component.scss'],
 })
 export class ModalExampleDefaultComponent {
-  template = config.template;
+  template = config.template.split('<cookbook-example-configuration-wrapper>')[0]; // Remove config part of the template
   titleTemplate = config.titleTemplate;
   footerTemplate = config.footerTemplate;
   defaultCodeSnippet = [
@@ -167,54 +178,60 @@ export class ModalExampleDefaultComponent {
   embeddedCodeSnippet = config.embeddedCodeSnippet;
   closeModalCodeSnippet = config.closeModalCodeSnippet;
 
-  constructor(private modalController: ModalController) {}
+  showDummyKeyboard = !!this.window.sessionStorage.getItem('kirby-cookbook-show-dummy-keyboard');
+  showFooter = false;
+  showDummyContent = true;
+  delayLoadDummyContent = true;
+  loadAdditionalContent = false;
+  openFullHeight = false;
 
-  showModal(showFooter = false) {
+  constructor(private modalController: ModalController, private window: WindowRef) {}
+
+  private async showOverlay(flavor: 'modal' | 'drawer') {
+    const title = flavor === 'modal' ? 'Modal Title' : 'Drawer Title';
     const config: ModalConfig = {
+      flavor,
       component: FirstEmbeddedModalExampleComponent,
+      size: this.openFullHeight ? 'full-height' : null,
       componentProps: {
-        prop1: 'value1',
-        prop2: 'value2',
-        showFooter: showFooter,
+        title,
+        subtitle: 'Hello from the first embedded example component!',
+        exampleProperties: {
+          stringProperty: 'Value injected from parent component',
+          numberProperty: 123,
+          booleanProperty: true,
+        },
+        showNestedOptions: true,
+        showDummyKeyboard: this.showDummyKeyboard,
+        showFooter: this.showFooter,
+        showDummyContent: this.showDummyContent,
+        delayLoadDummyContent: this.delayLoadDummyContent,
+        loadAdditionalContent: this.loadAdditionalContent,
+        disableScroll: false,
+        openFullHeight: this.openFullHeight,
       },
     };
-    this.modalController.showModal(config, this.onModalClose);
+    await this.modalController.showModal(config, this.onOverlayClose);
   }
 
-  showCompact() {
+  async showModal() {
+    await this.showOverlay('modal');
+  }
+
+  async showCompact() {
     const config: ModalConfig = {
       flavor: 'compact',
       component: ModalCompactExampleComponent,
     };
-
-    this.modalController.showModal(config, this.onModalClose);
+    await this.modalController.showModal(config, this.onOverlayClose);
   }
 
-  showDrawer() {
-    const config: ModalConfig = {
-      flavor: 'drawer',
-      component: FirstEmbeddedModalExampleComponent,
-      componentProps: {
-        flavor: 'drawer',
-        prop1: 'value1',
-        prop2: 'value2',
-      },
-    };
-
-    this.modalController.showModal(config, this.onDrawerClose);
+  async showDrawer() {
+    await this.showOverlay('drawer');
   }
 
-  showModalWithFooter() {
-    this.showModal(true);
-  }
-
-  onModalClose(data: any): void {
+  private onOverlayClose(data: any): void {
     console.log('Callback from Embedded Modal:');
-    console.log(`Data received: ${JSON.stringify(data)}`);
-  }
-
-  onDrawerClose(data: any): void {
-    console.log('Callback from Embedded Drawer:');
     console.log(`Data received: ${JSON.stringify(data)}`);
   }
 }

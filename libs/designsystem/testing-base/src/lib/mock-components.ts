@@ -1,3 +1,4 @@
+import { MockAccordionItemComponent } from './components/mock.accordion-item.component';
 import { MockAppComponent } from './components/mock.app.component';
 import { MockAvatarComponent } from './components/mock.avatar.component';
 import { MockBadgeComponent } from './components/mock.badge.component';
@@ -52,6 +53,7 @@ import { MockToggleButtonComponent } from './components/mock.toggle-button.compo
 import { MockToolbarComponent } from './components/mock.toolbar.component';
 
 export const MOCK_COMPONENTS = [
+  MockAccordionItemComponent,
   MockAppComponent,
   MockAvatarComponent,
   MockBadgeComponent,

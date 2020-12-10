@@ -13,6 +13,7 @@ type ComponentMetaData = {
   decorator: string;
   selector: string;
   properties: any[];
+  methods: any[];
 };
 
 export class GenerateMocks {
@@ -164,6 +165,7 @@ ${endRegion}
     componentMetaData: ComponentMetaData
   ): string {
     const propertiesString = this.renderProperties(componentMetaData.properties);
+    const methodsString = this.renderMethods(componentMetaData.methods);
     const validSelector =
       componentMetaData.selector &&
       (componentMetaData.selector.startsWith(`'kirby`) ||
@@ -190,7 +192,7 @@ providers: [
 
     const config = `{${selector}${template}${providers}}`;
     const content = `@${componentMetaData.decorator}(${config})
-export class ${mockClassName} {${propertiesString}}
+export class ${mockClassName} {${propertiesString}${methodsString}}
 `;
     return content;
   }
@@ -247,6 +249,14 @@ export class ${mockClassName} {${propertiesString}}
     return renderedProps.length ? separator + renderedProps.join(separator) + newLine : '';
   }
 
+  private renderMethods(methods: any[]) {
+    let renderedMethods = methods.map((method) => {
+      return `${method.name}() {};`;
+    });
+    const separator = `${newLine}  `;
+    return renderedMethods.length ? separator + renderedMethods.join(separator) + newLine : '';
+  }
+
   private generateMetaData(fileName: string) {
     const sourceFile = ts.createSourceFile(
       fileName,
@@ -257,7 +267,13 @@ export class ${mockClassName} {${propertiesString}}
     const components = [];
     sourceFile.forEachChild((node) => {
       if (ts.isClassDeclaration(node)) {
-        const componentMetaData = { className: '', decorator: '', selector: '', properties: [] };
+        const componentMetaData: ComponentMetaData = {
+          className: '',
+          decorator: '',
+          selector: '',
+          properties: [],
+          methods: [],
+        };
         this.visitTree(node, componentMetaData);
         if (componentMetaData.decorator) {
           components.push(componentMetaData);
@@ -273,6 +289,9 @@ export class ${mockClassName} {${propertiesString}}
     }
     if (ts.isPropertyDeclaration(node) || ts.isSetAccessorDeclaration(node)) {
       this.visitPropertyDeclaration(node, componentMetaData);
+    }
+    if (ts.isMethodDeclaration(node)) {
+      this.visitMethodDeclaration(node, componentMetaData);
     }
     ts.forEachChild(node, (node) => this.visitTree(node, componentMetaData));
   }
@@ -335,6 +354,28 @@ export class ${mockClassName} {${propertiesString}}
     };
 
     componentMetaData.properties.push(prop);
+  }
+
+  private visitMethodDeclaration(
+    methodDeclaration: ts.MethodDeclaration,
+    componentMetaData: ComponentMetaData
+  ) {
+    // Only render methods explicitly marked as public :
+    if (
+      !methodDeclaration.modifiers ||
+      !methodDeclaration.modifiers.some((modifier) => modifier.kind === ts.SyntaxKind.PublicKeyword)
+    ) {
+      return;
+    }
+    const name = methodDeclaration.name.getText();
+    if (name.startsWith('ng') || name.startsWith('_')) return;
+    const type = methodDeclaration.type; // this.getPropertyType(name, methodDeclaration, componentMetaData);
+    const method = {
+      name,
+      type,
+    };
+
+    componentMetaData.methods.push(method);
   }
 
   private getInputOutputDecorator(

@@ -119,6 +119,7 @@ $modal-heights: (
 ) !default;
 
 $modal-default-height: map-get($modal-heights, 'm');
+$drawer-default-height: map-get($modal-heights, 's');
 
 /* Item
 ****************************************************************************/
@@ -138,7 +139,8 @@ $fat-finger-size: 44px;
 
 /* Transitions
 ****************************************************************************/
-$soft-keyboard-transition: 250ms ease-out;
+$soft-keyboard-transition-enter: 250ms ease-out 1ms; // Adding a 1ms delay seems to improve the smoothness on iPhone
+$soft-keyboard-transition-leave: 150ms ease-out;
 
 $transition-durations: (
   quick: 200ms,
