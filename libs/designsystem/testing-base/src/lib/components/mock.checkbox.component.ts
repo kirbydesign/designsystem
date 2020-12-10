@@ -16,8 +16,8 @@ import { CheckboxComponent } from '@kirbydesign/designsystem';
 export class MockCheckboxComponent {
   @Input() checked: boolean;
   @Input() disabled: boolean;
-  @Input() color: string;
-  @Input() shape: string;
+  @Input() error: boolean;
+  @Input() type: 'single' | 'multi';
   @Output() checkedChange = new EventEmitter<boolean>();
 }
 
