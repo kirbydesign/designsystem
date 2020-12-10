@@ -153,10 +153,10 @@
   }
 
   &:disabled {
-    --kirby-button-background-color: #{get-color('semi-light')};
-    --kirby-button-border-color: transparent;
-    --kirby-button-color: #{get-color('semi-dark-shade')};
+    background-color: get-color('semi-light');
+    border-color: transparent;
     pointer-events: none;
+    --kirby-button-color: #{get-color('semi-dark-shade')};
   }
 
   :host-context(.default),
