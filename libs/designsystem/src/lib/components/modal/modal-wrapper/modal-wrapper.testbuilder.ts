@@ -11,6 +11,7 @@ import { ResizeObserverService } from '../../shared';
 import { ModalFooterComponent } from '../footer/modal-footer.component';
 import { ModalConfig } from './config/modal-config';
 import { ModalWrapperComponent } from './modal-wrapper.component';
+import { ProgressCircleComponent } from '../../progress-circle/progress-circle.component';
 
 export class ModalWrapperTestBuilder {
   private config: ModalConfig = {
@@ -25,6 +26,8 @@ export class ModalWrapperTestBuilder {
       StaticFooterEmbeddedComponent,
       DynamicFooterEmbeddedComponent,
       InputEmbeddedComponent,
+      StaticProgressCircleEmbeddedComponent,
+      DynamicProgressCircleEmbeddedComponent,
     ],
     providers: [
       {
@@ -37,6 +40,7 @@ export class ModalWrapperTestBuilder {
         IconComponent,
         ButtonComponent,
         ModalFooterComponent,
+        ProgressCircleComponent,
         IonHeader,
         IonToolbar,
         IonTitle,
@@ -73,6 +77,11 @@ export class ModalWrapperTestBuilder {
 
   withStaticProgressCircleComponent() {
     this.config.component = StaticProgressCircleEmbeddedComponent;
+    return this;
+  }
+
+  withDynamicCustomHeadercontent() {
+    this.config.component = DynamicProgressCircleEmbeddedComponent;
     return this;
   }
 
@@ -158,3 +167,21 @@ export class InputEmbeddedComponent {}
   `,
 })
 export class StaticProgressCircleEmbeddedComponent {}
+@Component({
+  template: `
+    <kirby-progress-circle
+      *ngIf="showCustomHeader"
+      slot="start"
+      themeColor="warning"
+      value="50"
+      size="sm"
+      class="kirby-text-xsmall"
+    >
+      2/4
+    </kirby-progress-circle>
+    <div>My title</div>
+  `,
+})
+export class DynamicProgressCircleEmbeddedComponent {
+  showCustomHeader = false;
+}

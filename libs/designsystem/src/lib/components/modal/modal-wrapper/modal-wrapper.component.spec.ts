@@ -8,6 +8,7 @@ import { IconComponent } from '../../icon/icon.component';
 import { ModalWrapperComponent } from './modal-wrapper.component';
 import {
   DynamicFooterEmbeddedComponent,
+  DynamicProgressCircleEmbeddedComponent,
   ModalWrapperTestBuilder,
 } from './modal-wrapper.testbuilder';
 
@@ -232,6 +233,7 @@ describe('ModalWrapperComponent', () => {
   });
 
   describe('with embedded component', () => {
+    const customHeaderContentSelector = 'kirby-progress-circle';
     describe('with static custom header content', () => {
       beforeEach(() => {
         spectator = modalWrapperTestBuilder
@@ -245,17 +247,71 @@ describe('ModalWrapperComponent', () => {
         // Ensure any observers are destroyed:
         spectator.fixture.destroy();
       });
-      fit('should move embedded custom header conter to ion-toolbar', () => {
+      it('should move embedded custom header conter to ion-toolbar', () => {
         const ionContentElement = spectator.query('ion-content');
         const embeddedComponentElement = ionContentElement.firstElementChild;
 
         const embeddedCustomHeader = embeddedComponentElement.querySelector(
           'kirby-progress-circle'
         );
-        console.log(spectator.element);
+
         expect(embeddedCustomHeader).toBeNull();
         const customHeaderAsWrapperChild = spectator.element.querySelector('kirby-progress-circle');
         expect(customHeaderAsWrapperChild).not.toBeNull();
+      });
+    });
+
+    describe('with dynamic custom header content', () => {
+      beforeEach(() => {
+        spectator = modalWrapperTestBuilder
+          .flavor('modal')
+          .withDynamicCustomHeadercontent()
+          .build();
+        spectator.detectComponentChanges();
+      });
+
+      afterEach(() => {
+        // Ensure any observers are destroyed:
+        spectator.fixture.destroy();
+      });
+
+      it('should move embedded header to wrapper component when rendered', async () => {
+        const customHeaderContent = spectator.element.querySelector(customHeaderContentSelector);
+        expect(customHeaderContent).toBeNull();
+
+        const embeddedComponent = spectator.query(DynamicProgressCircleEmbeddedComponent);
+        embeddedComponent.showCustomHeader = true;
+        spectator.detectChanges();
+        await TestHelper.waitForResizeObserver();
+
+        const ionContentElement = spectator.query('ion-content');
+        const embeddedComponentElement = ionContentElement.firstElementChild;
+        const embeddedCustomHeaderContent = embeddedComponentElement.querySelector(
+          customHeaderContentSelector
+        );
+        expect(embeddedCustomHeaderContent).toBeNull();
+        const customHeaderContentAsWrapperChild = spectator.element.querySelector(
+          customHeaderContentSelector
+        );
+        expect(customHeaderContentAsWrapperChild).not.toBeNull();
+      });
+
+      it('should remove embedded custom header content from wrapper component when not rendered', async () => {
+        let customHeaderContent = spectator.element.querySelector(customHeaderContentSelector);
+        expect(customHeaderContent).toBeNull();
+
+        const embeddedComponent = spectator.query(DynamicProgressCircleEmbeddedComponent);
+        embeddedComponent.showCustomHeader = true;
+        spectator.detectChanges();
+        await TestHelper.waitForResizeObserver();
+
+        const footerAsWrapperChild = spectator.element.querySelector(customHeaderContentSelector);
+        expect(footerAsWrapperChild).not.toBeNull();
+
+        embeddedComponent.showCustomHeader = false;
+        spectator.detectChanges();
+        customHeaderContent = spectator.element.querySelector(customHeaderContentSelector);
+        expect(customHeaderContent).toBeNull();
       });
     });
 
@@ -388,7 +444,7 @@ describe('ModalWrapperComponent', () => {
         const footerAsWrapperChild = spectator.element.querySelector(':scope > kirby-modal-footer');
         expect(footerAsWrapperChild).not.toBeNull();
 
-        embeddedComponent.isEnabled = true;
+        // embeddedComponent.isEnabled = true;
         spectator.detectChanges();
         expect(footerAsWrapperChild).toHaveClass('enabled');
       });
@@ -445,8 +501,6 @@ describe('ModalWrapperComponent', () => {
           });
         });
       });
-
-      // TODO: Add slot start test
     });
   });
 
