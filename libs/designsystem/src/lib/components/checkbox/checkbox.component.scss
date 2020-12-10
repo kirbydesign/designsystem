@@ -1,52 +1,77 @@
 @import '../../scss/utils';
 
+$border-radius: 6px;
+$checkbox-icon-size: size('m');
+
 :host {
   display: inline-block;
   vertical-align: middle;
 }
 
-.checkbox {
-  --border-color: #{get-color('primary-contrast')};
-}
-
-.primary {
-  --checkmark-color: #{get-color('primary-contrast')};
-  --background-checked: #{get-color('primary')};
-  --border-color-checked: #{get-color('primary')};
-}
-
-.secondary {
-  --checkmark-color: #{get-color('secondary-contrast')};
-  --background-checked: #{get-color('secondary')};
-  --border-color-checked: #{get-color('secondary')};
-}
-
-.tertiary {
-  --checkmark-color: #{get-color('tertiary-contrast')};
-  --background-checked: #{get-color('tertiary')};
-  --border-color-checked: #{get-color('tertiary')};
-}
-
-.warning {
-  --checkmark-color: #{get-color('warning-contrast')};
-  --background-checked: #{get-color('warning')};
-  --border-color-checked: #{get-color('warning')};
-}
-
-.success {
-  --checkmark-color: #{get-color('success-contrast')};
+ion-checkbox {
+  --checkmark-width: #{size('xxxs')};
+  --background: #{get-color('white')};
+  --border-width: 1px;
+  --border-color: #{get-color('semi-dark')};
+  --border-radius: #{$border-radius};
+  --checkmark-color: #{get-color('black')};
   --background-checked: #{get-color('success')};
   --border-color-checked: #{get-color('success')};
+  cursor: pointer;
+
+  // Making clickable area bigger without making icon bigger
+  --size: #{$fat-finger-size};
+  padding: #{($fat-finger-size - $checkbox-icon-size) / 2};
+
+  &::part(container) {
+    padding: size('xxxs');
+  }
+
+  &.error {
+    --border-color: #{get-color('danger')};
+  }
+  &.has-focus::part(container) {
+    @media (hover: hover) {
+      box-shadow: 0 0 0 1px var(--kirby-background-color), 0 0 0 2px #{$focus-ring-color};
+      border-radius: $border-radius;
+    }
+  }
+  &.is-pressed {
+    --background: #{get-color('white-shade')};
+    --background-checked: #{get-color('success-shade')};
+    --border-color-checked: #{get-color('success-shade')};
+  }
+  &.checkbox-disabled {
+    opacity: 1;
+    --checkmark-color: #{get-color('semi-dark')};
+    --background: #{get-color('semi-light')};
+    --background-checked: #{get-color('semi-light')};
+    --border-color: #{get-color('medium')};
+    --border-color-checked: #{get-color('semi-light')};
+  }
 }
 
-.danger {
-  --checkmark-color: #{get-color('danger-contrast')};
-  --background-checked: #{get-color('danger')};
-  --border-color-checked: #{get-color('danger')};
+.multi {
+  --checkmark-color: #{get-color('white')};
+  --background-checked: #{get-color('black')};
+  --border-color-checked: #{get-color('black')};
+
+  &.is-pressed {
+    --checkmark-color: #{get-color('white-shade')};
+    --background-checked: #{get-color('black-tint')};
+    --border-color-checked: #{get-color('black-tint')};
+  }
 }
 
 :host-context(kirby-item) {
+  ion-checkbox {
+    --size: #{$checkbox-icon-size};
+    padding: 0;
+  }
+  z-index: 1; // Makes whole kirby-item clickable above item-inner.
+
   &[slot='start'] {
+    margin: 0;
     margin-inline-end: size('s');
   }
 }

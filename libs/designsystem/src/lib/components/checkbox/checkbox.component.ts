@@ -1,13 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  Output,
-  SimpleChange,
-  SimpleChanges,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'kirby-checkbox',
@@ -15,37 +6,32 @@ import {
   styleUrls: ['./checkbox.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CheckboxComponent implements OnChanges {
+export class CheckboxComponent {
   @Input() checked: boolean;
   @Input() disabled: boolean;
-  @Input() color: string = 'primary';
-  @Input() shape: string = 'square';
+  @Input() error: boolean;
+  @Input() type: 'single' | 'multi' = 'single';
   @Output() checkedChange = new EventEmitter<boolean>();
 
-  classes: string[] = [];
-
-  private readonly SHAPE_INDEX = 0;
-  private readonly COLOR_INDEX = 1;
+  hasFocus: boolean;
+  isPressed: boolean;
 
   onChecked(checked: boolean): void {
     this.checked = checked;
     this.checkedChange.emit(this.checked);
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    const shape: SimpleChange = changes.shape;
-    const color: SimpleChange = changes.color;
+  onFocus() {
+    this.hasFocus = true;
+  }
+  onBlur() {
+    this.hasFocus = false;
+  }
 
-    if (changes.shape) {
-      this.classes[this.SHAPE_INDEX] = shape.currentValue;
-    } else {
-      this.classes[this.SHAPE_INDEX] = this.shape;
-    }
-
-    if (changes.color) {
-      this.classes[this.COLOR_INDEX] = color.currentValue;
-    } else {
-      this.classes[this.COLOR_INDEX] = this.color;
-    }
+  onMouseDown() {
+    if (!this.disabled) this.isPressed = true;
+  }
+  onMouseUp() {
+    if (!this.disabled) this.isPressed = false;
   }
 }

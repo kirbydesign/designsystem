@@ -1,22 +1,14 @@
-<!-- Since there is a bug in Ionic when binding to the `mode` property of ion-checkbox,
-a switch between templates is used -->
-<ng-container *ngIf="shape === 'circle'; else squareBox">
-  <ion-checkbox
-    class="checkbox"
-    [ngClass]="classes"
-    [checked]="checked"
-    [disabled]="disabled"
-    (ionChange)="onChecked($event.detail.checked)"
-  ></ion-checkbox>
-</ng-container>
-
-<ng-template #squareBox>
-  <ion-checkbox
-    class="checkbox"
-    [ngClass]="classes"
-    mode="md"
-    [checked]="checked"
-    (ionChange)="onChecked($event.detail.checked)"
-  >
-  </ion-checkbox>
-</ng-template>
+<ion-checkbox
+  [ngClass]="type"
+  [class.error]="error"
+  [class.has-focus]="hasFocus"
+  [class.is-pressed]="isPressed"
+  mode="md"
+  [checked]="checked"
+  [disabled]="disabled"
+  (ionChange)="onChecked($event.detail.checked)"
+  (ionFocus)="onFocus()"
+  (ionBlur)="onBlur()"
+  (mousedown)="onMouseDown()"
+  (mouseup)="onMouseUp()"
+></ion-checkbox>
