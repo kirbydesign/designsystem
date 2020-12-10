@@ -70,10 +70,10 @@
 
 :host {
   font-family: var(--kirby-font-family);
-  background-color: var(--kirby-button-background-color);
+  background-color: var(--kirby-button-background-color, get-color('primary'));
+  color: var(--kirby-button-color, get-color('primary-contrast'));
   border-radius: $border-radius-round;
   box-sizing: border-box; // Ensure border is not added to button height
-  color: var(--kirby-button-color);
   cursor: pointer;
   display: inline-flex;
   flex-direction: row;
@@ -154,9 +154,9 @@
 
   &:disabled {
     background-color: get-color('semi-light');
+    color: get-color('semi-dark-shade');
     border-color: transparent;
     pointer-events: none;
-    --kirby-button-color: #{get-color('semi-dark-shade')};
   }
 
   :host-context(.default),
