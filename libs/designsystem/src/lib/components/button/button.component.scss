@@ -51,6 +51,7 @@
 }
 
 @mixin button-attentionlevel3 {
+  --kirby-button-background-color: transparent;
   --kirby-button-color: #{get-color('medium-contrast')};
   --kirby-button-border-color: #{get-color('medium')};
 
