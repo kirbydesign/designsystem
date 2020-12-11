@@ -40,6 +40,10 @@ const config = {
 
 <kirby-avatar themeColor="danger" title="danger">
   <kirby-icon name="kirby"></kirby-icon>
+</kirby-avatar>
+
+<kirby-avatar themeColor="semi-light" title="danger">
+  <kirby-icon name="kirby"></kirby-icon>
 </kirby-avatar>`,
 };
 
