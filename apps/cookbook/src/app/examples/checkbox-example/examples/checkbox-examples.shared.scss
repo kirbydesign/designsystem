@@ -1,3 +1,10 @@
+@import './libs/designsystem/src/lib/scss/utils';
+
+:host {
+  display: block;
+  margin-bottom: size('s');
+}
+
 kirby-label {
   display: inline-block;
   margin-right: 20px;
