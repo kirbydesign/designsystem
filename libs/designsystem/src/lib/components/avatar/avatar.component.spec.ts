@@ -186,7 +186,11 @@ describe('AvatarComponent', () => {
   });
 
   describe(`when rendering Avatar with themeColor`, () => {
-    const colors = [...ColorHelper.mainColors, { name: 'white', value: '#ffffff' }];
+    const colors = [
+      ...ColorHelper.mainColors,
+      { name: 'white', value: '#ffffff' },
+      { name: 'semi-light', value: '#ebebeb' },
+    ];
     colors.forEach((color) => {
       it(`should render with correct colors when themeColor = '${color.name}'`, async () => {
         spectator = createHost(`
