@@ -1,21 +1,20 @@
 import { SpectatorHost, createHostFactory } from '@ngneat/spectator';
-import { IonicModule } from '@ionic/angular';
 import { RouterTestingModule } from '@angular/router/testing';
+import { MockComponent } from 'ng-mocks';
 
 import { TextLinkComponent } from './text-link.component';
 import { DesignTokenHelper } from '../../helpers';
 import { SizeDirective } from '../../directives';
 import { IconComponent } from '../icon';
-
 const getColor = DesignTokenHelper.getColor;
 
-describe('TextLinkComponent unitTest', () => {
+describe('TextLinkComponent', () => {
   let spectator: SpectatorHost<TextLinkComponent>;
 
   const createHost = createHostFactory({
     component: TextLinkComponent,
     declarations: [IconComponent, SizeDirective],
-    imports: [RouterTestingModule, IonicModule.forRoot({ mode: 'ios', _testing: true })],
+    imports: [RouterTestingModule, MockComponent(IconComponent)],
   });
 
   it('should create', () => {

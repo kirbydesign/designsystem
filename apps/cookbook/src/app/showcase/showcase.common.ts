@@ -41,7 +41,7 @@ import { StockChartShowcaseComponent } from './stock-chart-showcase/stock-chart-
 import { FlagShowcaseComponent } from './flag-showcase/flag-showcase.component';
 import { ToggleButtonShowcaseComponent } from './toggle-button-showcase/toggle-button-showcase.component';
 import { SlidesShowcaseComponent } from './slides-showcase/slides-showcase.component';
-
+import { TextLinkShowcaseComponent } from './text-link-showcase/text-link-showcase.component';
 export const COMPONENT_IMPORTS: any[] = [ExamplesModule, ShowcaseRoutingModule];
 
 export const COMPONENT_EXPORTS: any[] = [
@@ -85,6 +85,7 @@ export const COMPONENT_EXPORTS: any[] = [
   ProgressCircleShowcaseComponent,
   FlagShowcaseComponent,
   SlidesShowcaseComponent,
+  TextLinkShowcaseComponent,
 ];
 
 export const COMPONENT_DECLARATIONS: any[] = [...COMPONENT_EXPORTS, ShowcaseComponent];

@@ -2,10 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { KirbyModule } from '@kirbydesign/designsystem';
-import { TextLinkExampleIconComponent } from './examples/icon';
-import { TextLinkExampleDefaultComponent } from './examples/default';
+import { TextLinkExampleExternalLinkComponent } from './examples/external-link.ts';
+import { TextLinkExampleInternalLinkComponent } from './examples/internal-link';
 
-const COMPONENT_DECLARATIONS = [TextLinkExampleIconComponent, TextLinkExampleDefaultComponent];
+const COMPONENT_DECLARATIONS = [
+  TextLinkExampleExternalLinkComponent,
+  TextLinkExampleInternalLinkComponent,
+];
 
 @NgModule({
   declarations: [COMPONENT_DECLARATIONS],

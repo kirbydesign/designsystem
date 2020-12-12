@@ -1,8 +1,8 @@
-<!-- routerlink har problemer med external links, noget research skal laves -->
-<ng-template [ngIf]="!isExternal()" [ngIfElse]="externalLink">
+<!-- The Routerlink has problems with external links -->
+<ng-template *ngIf="!isExternal(); else externalLinkTemplate">
   <a [routerLink]="link">{{ text }}</a>
 </ng-template>
-<ng-template #externalLink>
+<ng-template #externalLinkTemplate>
   <a href="{{ link }}">{{ text }}</a>
   <kirby-icon name="link"></kirby-icon>
 </ng-template>

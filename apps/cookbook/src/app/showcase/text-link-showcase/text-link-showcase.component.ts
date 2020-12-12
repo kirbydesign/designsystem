@@ -8,11 +8,11 @@ import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-prop
   templateUrl: './text-link-showcase.component.html',
   styleUrls: ['./text-link-showcase.component.scss'],
 })
-export class TextLinkShowcaseComponent implements OnInit {
+export class TextLinkShowcaseComponent {
   properties: ShowcaseProperty[] = [
     {
       name: 'link',
-      description: 'The navigation link',
+      description: 'The navigation link (internal or external)',
       defaultValue: 'null',
       inputValues: ['string'],
     },
@@ -24,12 +24,9 @@ export class TextLinkShowcaseComponent implements OnInit {
     },
     {
       name: 'text',
-      description: 'The text, which should contain the link',
+      description: 'The text shown within the link',
       defaultValue: 'null',
       inputValues: ['string'],
     },
   ];
-  constructor() {}
-
-  ngOnInit(): void {}
 }

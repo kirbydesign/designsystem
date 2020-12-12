@@ -5,8 +5,4 @@ import { Component, OnInit, Input } from '@angular/core';
   templateUrl: './text-link-example.component.html',
   styleUrls: ['./text-link-example.component.scss'],
 })
-export class TextLinkExampleComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
-}
+export class TextLinkExampleComponent {}

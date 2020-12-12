@@ -1,6 +1,6 @@
 import { SpectatorHost, createHostFactory } from '@ngneat/spectator';
-import { IonicModule } from '@ionic/angular';
 import { RouterTestingModule } from '@angular/router/testing';
+import { MockComponent } from 'ng-mocks';
 
 import { TextLinkComponent } from './text-link.component';
 import { DesignTokenHelper } from '../../helpers';
@@ -16,10 +16,10 @@ describe('TextLinkComponent integrationt test', () => {
 
   const createHost = createHostFactory({
     component: TextLinkComponent,
-    declarations: [IconComponent, SizeDirective],
-    imports: [RouterTestingModule, IonicModule.forRoot({ mode: 'ios', _testing: true })],
+    declarations: [MockComponent(IconComponent), SizeDirective],
+    imports: [RouterTestingModule],
   });
-  describe('test sizes and padding', () => {
+  describe('size and padding', () => {
     interface TestCase {
       name: string;
       value: string;

@@ -1,32 +1,31 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, HostBinding, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'kirby-text-link',
   templateUrl: './text-link.component.html',
   styleUrls: ['./text-link.component.scss'],
 })
-export class TextLinkComponent implements OnInit {
+export class TextLinkComponent implements OnChanges {
   @Input() link: string;
   @Input() text: string;
-
-  constructor() {}
-  ngOnInit(): void {}
-
-  checkDomain(url) {
-    if (url.indexOf('//') === 0) {
-      url = location.protocol + url;
-    }
-    return url
-      .toLowerCase()
-      .replace(/([a-z])?:\/\//, '$1')
-      .split('/')[0];
+  @Input() size: 'sm' | 'md' | 'lg' = 'md';
+  @HostBinding('class')
+  get _cssSize() {
+    return this.size;
   }
-
+  ngOnChanges(changes: SimpleChanges) {
+    for (const propName in changes) {
+      if (changes.hasOwnProperty(propName)) {
+        switch (propName) {
+          case 'link': {
+            this.isExternal();
+          }
+        }
+      }
+    }
+  }
   isExternal() {
-    const url = this.link || '';
-    return (
-      (url.indexOf(':') > -1 || url.indexOf('//') > -1) &&
-      this.checkDomain(location.href) !== this.checkDomain(url)
-    );
+    const baseURI = window.document.baseURI;
+    return new URL(baseURI).origin === new URL(this.link, baseURI).origin;
   }
 }
