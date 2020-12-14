@@ -6,6 +6,10 @@ $checkbox-icon-size: size('m');
 :host {
   display: inline-block;
   vertical-align: middle;
+
+  &.error ion-checkbox {
+    --border-color: #{get-color('danger')};
+  }
 }
 
 ion-checkbox {
@@ -25,10 +29,6 @@ ion-checkbox {
 
   &::part(container) {
     padding: size('xxxs');
-  }
-
-  &.error {
-    --border-color: #{get-color('danger')};
   }
 
   &:focus-within::part(container) {

@@ -22,7 +22,7 @@ export class CheckboxShowcaseComponent {
       inputValues: ['boolean'],
     },
     {
-      name: 'error',
+      name: 'hasError',
       description: 'Shows an error border color, if not checked',
       defaultValue: 'false',
       inputValues: ['boolean'],

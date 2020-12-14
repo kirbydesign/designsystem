@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  HostBinding,
+  Input,
+  Output,
+} from '@angular/core';
 
 @Component({
   selector: 'kirby-checkbox',
@@ -7,13 +14,14 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CheckboxComponent {
+  @HostBinding('class.error')
+  @Input()
+  hasError: boolean;
+
   @Input() checked: boolean;
   @Input() disabled: boolean;
-  @Input() error: boolean;
   @Input() type: 'single' | 'multi' = 'single';
   @Output() checkedChange = new EventEmitter<boolean>();
-
-  hasFocus: boolean;
 
   onChecked(checked: boolean): void {
     this.checked = checked;

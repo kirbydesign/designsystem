@@ -11,8 +11,8 @@ const config = {
   Not checked
 </kirby-label>
 <kirby-label>
-  <kirby-checkbox [checked]="single3checked" [error]="true"></kirby-checkbox>
-  Error
+  <kirby-checkbox [checked]="single3checked" [hasError]="true"></kirby-checkbox>
+  Has error
 </kirby-label>
 <kirby-label>
   <kirby-checkbox disabled="true"></kirby-checkbox>
