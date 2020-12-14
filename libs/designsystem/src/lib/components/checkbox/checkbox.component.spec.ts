@@ -1,14 +1,10 @@
 import { Spectator, createHostFactory } from '@ngneat/spectator';
 import { IonCheckbox, IonicModule } from '@ionic/angular';
 
-import { DesignTokenHelper } from '../../helpers/design-token-helper';
 import { CheckboxComponent } from './checkbox.component';
-
-const getColor = DesignTokenHelper.getColor;
 
 fdescribe('CheckboxComponent', () => {
   let spectator: Spectator<CheckboxComponent>;
-  let element: HTMLButtonElement;
 
   const createHost = createHostFactory({
     component: CheckboxComponent,
@@ -18,7 +14,6 @@ fdescribe('CheckboxComponent', () => {
 
   beforeEach(() => {
     spectator = createHost(`<kirby-checkbox></kirby-checkbox>`);
-    element = spectator.query('ion-checkbox') as HTMLButtonElement;
   });
 
   it('should create', () => {
@@ -53,7 +48,7 @@ fdescribe('CheckboxComponent', () => {
 
       spectator.setInput('type', type);
 
-      expect(element).not.toHaveClass('multi');
+      expect(spectator.query('ion-checkbox')).not.toHaveClass('multi');
     });
 
     it('should set class .multi on ion-checkbox when type is "multi"', () => {
@@ -61,7 +56,7 @@ fdescribe('CheckboxComponent', () => {
 
       spectator.setInput('type', type);
 
-      expect(element).toHaveClass('multi');
+      expect(spectator.query('ion-checkbox')).toHaveClass('multi');
     });
 
     it('should set the [checked] input on ion-checkbox to true', () => {
@@ -100,16 +95,18 @@ fdescribe('CheckboxComponent', () => {
       const hasError = true;
 
       spectator.setInput('hasError', hasError);
+      spectator.detectChanges();
 
-      expect(element).toHaveClass('error');
+      expect(spectator.element).toHaveClass('error');
     });
 
     it('should not have error class when [hasError] input is false', () => {
       const hasError = false;
 
       spectator.setInput('hasError', hasError);
+      spectator.detectChanges();
 
-      expect(element).not.toHaveClass('error');
+      expect(spectator.element).not.toHaveClass('error');
     });
   });
 });
