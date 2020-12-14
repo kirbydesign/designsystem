@@ -21,12 +21,6 @@ export class ThemeColorDirective {
     return this._isDefault;
   }
 
-  private _isSemiLight: boolean;
-  @HostBinding('class.semi-light')
-  get isSemiLight() {
-    return this._isSemiLight;
-  }
-
   private _isPrimary: boolean;
   @HostBinding('class.primary')
   get isPrimary() {
@@ -117,7 +111,6 @@ export class ThemeColorDirective {
     this._isMedium = value === 'medium';
     this._isDark = value === 'dark';
     this._isWhite = value === 'white';
-    this._isSemiLight = value === 'semi-light';
     const colorBrightness = ColorHelper.getColorBrightness(value);
     this._isBrightnessWhite = colorBrightness === 'white';
     this._isBrightnessLight = colorBrightness === 'light';

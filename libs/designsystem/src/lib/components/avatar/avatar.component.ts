@@ -1,4 +1,6 @@
-import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectionStrategy, HostBinding } from '@angular/core';
+
+import { MainColor } from '../../helpers/color-helper';
 
 @Component({
   selector: 'kirby-avatar',
@@ -12,6 +14,9 @@ export class AvatarComponent implements OnInit {
   @Input() shadow: boolean;
   @Input() text: string;
   @Input() overlay: boolean;
+  @HostBinding('class')
+  @Input()
+  themeColor: MainColor | 'semi-light';
 
   constructor() {}
 
