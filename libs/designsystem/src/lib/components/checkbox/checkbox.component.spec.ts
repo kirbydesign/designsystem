@@ -3,10 +3,9 @@ import { IonCheckbox } from '@ionic/angular';
 
 import { CheckboxComponent } from './checkbox.component';
 
-fdescribe('CheckboxComponent', () => {
+describe('CheckboxComponent', () => {
   let spectator: Spectator<CheckboxComponent>;
   let checkbox: IonCheckbox;
-  let checkboxElement: HTMLIonCheckboxElement;
 
   const createHost = createHostFactory({
     component: CheckboxComponent,
@@ -16,7 +15,6 @@ fdescribe('CheckboxComponent', () => {
   beforeEach(() => {
     spectator = createHost(`<kirby-checkbox></kirby-checkbox>`);
     checkbox = spectator.query(IonCheckbox);
-    checkboxElement = spectator.query('ion-checkbox');
   });
 
   it('should create', () => {
@@ -43,7 +41,7 @@ fdescribe('CheckboxComponent', () => {
       });
     });
 
-    it('should have class .attention-level1 when attentionLevel is "1"', () => {
+    it('should have class .attention-level1 when attentionLevel is 1', () => {
       const attentionLevel = '1';
 
       spectator.setInput('attentionLevel', attentionLevel);

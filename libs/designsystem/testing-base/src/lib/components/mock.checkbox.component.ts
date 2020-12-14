@@ -14,10 +14,10 @@ import { CheckboxComponent } from '@kirbydesign/designsystem';
   ],
 })
 export class MockCheckboxComponent {
-  @Input() hasError: boolean;
   @Input() checked: boolean;
   @Input() disabled: boolean;
-  @Input() type: 'single' | 'multi';
+  @Input() attentionLevel: '1' | '2';
+  @Input() hasError: boolean;
   @Output() checkedChange = new EventEmitter<boolean>();
 }
 
