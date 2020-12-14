@@ -1,5 +1,5 @@
 import { Spectator, createHostFactory } from '@ngneat/spectator';
-import { IonCheckbox, IonicModule } from '@ionic/angular';
+import { IonCheckbox } from '@ionic/angular';
 
 import { CheckboxComponent } from './checkbox.component';
 
@@ -9,7 +9,6 @@ fdescribe('CheckboxComponent', () => {
   const createHost = createHostFactory({
     component: CheckboxComponent,
     declarations: [IonCheckbox],
-    imports: [IonicModule.forRoot({ mode: 'ios', _testing: true })],
   });
 
   beforeEach(() => {
