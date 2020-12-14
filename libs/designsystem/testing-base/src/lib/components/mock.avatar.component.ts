@@ -1,6 +1,6 @@
 import { forwardRef, Component, Input } from '@angular/core';
 
-import { AvatarComponent } from '@kirbydesign/designsystem';
+import { AvatarComponent, MainColor } from '@kirbydesign/designsystem';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
@@ -19,6 +19,7 @@ export class MockAvatarComponent {
   @Input() shadow: boolean;
   @Input() text: string;
   @Input() overlay: boolean;
+  @Input() themeColor: MainColor | 'semi-light';
 }
 
 // #endregion
