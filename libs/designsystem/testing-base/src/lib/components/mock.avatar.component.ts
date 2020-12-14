@@ -19,7 +19,14 @@ export class MockAvatarComponent {
   @Input() shadow: boolean;
   @Input() text: string;
   @Input() overlay: boolean;
-  @Input() themeColor: MainColor | 'semi-light';
+  @Input() themeColor:
+    | NotificationColor
+    | BrandColor
+    | 'medium'
+    | 'white'
+    | 'dark'
+    | 'light'
+    | 'semi-light';
 }
 
 // #endregion

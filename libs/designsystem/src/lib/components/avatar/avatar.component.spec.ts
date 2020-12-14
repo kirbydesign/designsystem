@@ -189,8 +189,8 @@ describe('AvatarComponent', () => {
   describe(`when rendering Avatar with themeColor`, () => {
     const colors = [
       ...ColorHelper.mainColors,
-      { name: 'white', value: styles.systemColors.white },
-      { name: 'semi-light', value: styles.systemColors.semiLight },
+      DesignTokenHelper.getColor('white'),
+      DesignTokenHelper.getColor('semi-light'),
     ];
     colors.forEach((color) => {
       it(`should render with correct colors when themeColor = '${color.name}'`, async () => {
