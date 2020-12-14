@@ -14,7 +14,6 @@ export class CheckboxComponent {
   @Output() checkedChange = new EventEmitter<boolean>();
 
   hasFocus: boolean;
-  isPressed: boolean;
 
   onChecked(checked: boolean): void {
     this.checked = checked;
@@ -26,12 +25,5 @@ export class CheckboxComponent {
   }
   onBlur() {
     this.hasFocus = false;
-  }
-
-  onMouseDown() {
-    if (!this.disabled) this.isPressed = true;
-  }
-  onMouseUp() {
-    if (!this.disabled) this.isPressed = false;
   }
 }

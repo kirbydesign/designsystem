@@ -2,13 +2,10 @@
   [ngClass]="type"
   [class.error]="error"
   [class.has-focus]="hasFocus"
-  [class.is-pressed]="isPressed"
   mode="md"
   [checked]="checked"
   [disabled]="disabled"
   (ionChange)="onChecked($event.detail.checked)"
   (ionFocus)="onFocus()"
   (ionBlur)="onBlur()"
-  (mousedown)="onMouseDown()"
-  (mouseup)="onMouseUp()"
 ></ion-checkbox>
