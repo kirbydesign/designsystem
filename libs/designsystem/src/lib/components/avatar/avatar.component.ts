@@ -16,7 +16,7 @@ export class AvatarComponent implements OnInit {
   @Input() overlay: boolean;
   @HostBinding('class')
   @Input()
-  themeColor: MainColor | 'semi-light';
+  themeColor: MainColor | 'white' | 'semi-light';
 
   constructor() {}
 
