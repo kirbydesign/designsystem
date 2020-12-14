@@ -64,6 +64,12 @@ ion-checkbox {
   }
 }
 
+:host-context(kirby-label) {
+  ion-checkbox {
+    position: static;
+  }
+}
+
 :host-context(kirby-item) {
   z-index: z('default'); // Makes whole kirby-item clickable above item-inner.
 
