@@ -42,7 +42,7 @@ const config = {
   <kirby-icon name="kirby"></kirby-icon>
 </kirby-avatar>
 
-<kirby-avatar themeColor="semi-light" title="danger">
+<kirby-avatar themeColor="semi-light" title="semi-light">
   <kirby-icon name="kirby"></kirby-icon>
 </kirby-avatar>`,
 };
