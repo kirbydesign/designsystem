@@ -65,11 +65,12 @@ ion-checkbox {
 }
 
 :host-context(kirby-item) {
+  z-index: z('default'); // Makes whole kirby-item clickable above item-inner.
+
   ion-checkbox {
     --size: #{$checkbox-icon-size};
     padding: 0;
   }
-  z-index: 1; // Makes whole kirby-item clickable above item-inner.
 
   &[slot='start'] {
     margin: 0;
