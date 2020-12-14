@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 
 const config = {
-  selector: 'cookbook-checkbox-multi-list-example',
+  selector: 'cookbook-checkbox-list-example',
   template: `<kirby-list [items]="checkboxItems" showDivider="true">
   <kirby-item *kirbyListItemTemplate="let item">
     <kirby-checkbox
       slot="start"
-      type="multi"
       [checked]="item.checked"
       (checkedChange)="checkedChange($event)"
     ></kirby-checkbox>
@@ -20,7 +19,7 @@ const config = {
   template: config.template,
   styleUrls: ['./checkbox-examples.shared.scss'],
 })
-export class CheckboxMultiListExampleComponent {
+export class CheckboxListExampleComponent {
   template: string = config.template;
 
   checkboxItems = [

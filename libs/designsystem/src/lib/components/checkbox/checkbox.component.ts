@@ -14,13 +14,21 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CheckboxComponent {
+  @Input() checked: boolean = false;
+  @Input() disabled: boolean = false;
+  @Input() attentionLevel: '1' | '2' = '2';
+
   @HostBinding('class.error')
   @Input()
-  hasError: boolean;
+  hasError: boolean = false;
 
-  @Input() checked: boolean;
-  @Input() disabled: boolean;
-  @Input() type: 'single' | 'multi' = 'single';
+  @HostBinding('class.attention-level1') get isAttentionLevel1() {
+    return this.attentionLevel === '1';
+  }
+  @HostBinding('class.attention-level2') get isAttentionLevel2() {
+    return this.attentionLevel === '2';
+  }
+
   @Output() checkedChange = new EventEmitter<boolean>();
 
   onChecked(checked: boolean): void {

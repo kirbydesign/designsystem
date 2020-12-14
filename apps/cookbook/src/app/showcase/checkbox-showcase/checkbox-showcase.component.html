@@ -1,21 +1,24 @@
 <div class="example">
-  <h2>Single select</h2>
-  <p>Use as a binary choice for a standalone checkbox</p>
-  <cookbook-example-viewer [html]="checkboxSingleExample.template">
-    <cookbook-checkbox-single-example #checkboxSingleExample></cookbook-checkbox-single-example>
+  <h2>Checkboxes</h2>
+  <cookbook-example-viewer [html]="checkboxDefaultExample.template">
+    <cookbook-checkbox-default-example #checkboxDefaultExample></cookbook-checkbox-default-example>
   </cookbook-example-viewer>
 
-  <h2>Multi select</h2>
-  <p>Use in a list of checkboxes, where multiple choices can be selected</p>
-  <cookbook-example-viewer [html]="checkboxMultiExample.template">
-    <cookbook-checkbox-multi-example #checkboxMultiExample></cookbook-checkbox-multi-example>
+  <h2>Checkboxes in a kirby-list</h2>
+  <cookbook-example-viewer [html]="checkboxListExample.template">
+    <cookbook-checkbox-list-example #checkboxListExample></cookbook-checkbox-list-example>
   </cookbook-example-viewer>
 
-  <h2>Multi select in a list</h2>
-  <cookbook-example-viewer [html]="checkboxMultiListExample.template">
-    <cookbook-checkbox-multi-list-example
-      #checkboxMultiListExample
-    ></cookbook-checkbox-multi-list-example>
+  <h2>Checkbox for confirmation</h2>
+  <p>Add <code>attentionLevel="1"</code> when used to confirm something</p>
+  <cookbook-example-viewer [html]="checkboxConfirmExample.template">
+    <cookbook-checkbox-confirm-example #checkboxConfirmExample></cookbook-checkbox-confirm-example>
+  </cookbook-example-viewer>
+
+  <h2>States</h2>
+  <p>The states a checkbox can have</p>
+  <cookbook-example-viewer [html]="checkboxStatesExample.template">
+    <cookbook-checkbox-states-example #checkboxStatesExample></cookbook-checkbox-states-example>
   </cookbook-example-viewer>
 
   <h2>Properties:</h2>

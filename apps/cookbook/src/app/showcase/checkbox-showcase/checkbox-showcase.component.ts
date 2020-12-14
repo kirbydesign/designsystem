@@ -28,11 +28,11 @@ export class CheckboxShowcaseComponent {
       inputValues: ['boolean'],
     },
     {
-      name: 'type',
+      name: 'attentionLevel',
       description:
-        'Specifies a look.\nUse "single" as a binary choice for a standalone checkbox.\nUse "multi" in a list of checkboxes, where multiple choices can be selected',
-      defaultValue: 'single',
-      inputValues: ['single', 'multi'],
+        'Specifies a look.\nUse attentionLevel 1 for confirm scenarios\nUse attentionLevel 2 for others',
+      defaultValue: '2',
+      inputValues: ['1', '2'],
     },
   ];
 

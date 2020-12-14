@@ -23,43 +23,33 @@ fdescribe('CheckboxComponent', () => {
     expect(spectator.component).toBeTruthy();
   });
 
-  describe('event: checkedChange', () => {
-    it('should emit true when checked', () => {
-      const checked = true;
+  describe('when configured', () => {
+    describe('by default', () => {
+      it('should have attention level 2', () => {
+        expect(spectator.component.attentionLevel).toBe('2');
+        expect(spectator.element).toHaveClass('attention-level2');
+      });
 
-      spyOn(spectator.component.checkedChange, 'emit');
-      spectator.component.onChecked(checked);
+      it('should not be checked', () => {
+        expect(spectator.component.checked).toBe(false);
+      });
 
-      expect(spectator.component.checkedChange.emit).toHaveBeenCalledTimes(1);
-      expect(spectator.component.checkedChange.emit).toHaveBeenCalledWith(true);
+      it('should not be disabled', () => {
+        expect(spectator.component.disabled).toBe(false);
+      });
+
+      it('should not have error', () => {
+        expect(spectator.component.hasError).toBe(false);
+      });
     });
 
-    it('should emit false when unchecked', () => {
-      const checked = false;
+    it('should have class .attention-level1 when attentionLevel is "1"', () => {
+      const attentionLevel = '1';
 
-      spyOn(spectator.component.checkedChange, 'emit');
-      spectator.component.onChecked(checked);
+      spectator.setInput('attentionLevel', attentionLevel);
+      spectator.detectChanges();
 
-      expect(spectator.component.checkedChange.emit).toHaveBeenCalledTimes(1);
-      expect(spectator.component.checkedChange.emit).toHaveBeenCalledWith(false);
-    });
-  });
-
-  describe('Input', () => {
-    it('should not set class .multi on ion-checkbox when no type', () => {
-      const type = 'single';
-
-      spectator.setInput('type', type);
-
-      expect(checkboxElement).not.toHaveClass('multi');
-    });
-
-    it('should set class .multi on ion-checkbox when type is "multi"', () => {
-      const type = 'multi';
-
-      spectator.setInput('type', type);
-
-      expect(checkboxElement).toHaveClass('multi');
+      expect(spectator.element).toHaveClass('attention-level1');
     });
 
     it('should set the [checked] input on ion-checkbox to true', () => {
@@ -110,6 +100,28 @@ fdescribe('CheckboxComponent', () => {
       spectator.detectChanges();
 
       expect(spectator.element).not.toHaveClass('error');
+    });
+  });
+
+  describe('when checking checkbox', () => {
+    it('should emit true with event checkedChange when checked', () => {
+      const checked = true;
+
+      spyOn(spectator.component.checkedChange, 'emit');
+      spectator.component.onChecked(checked);
+
+      expect(spectator.component.checkedChange.emit).toHaveBeenCalledTimes(1);
+      expect(spectator.component.checkedChange.emit).toHaveBeenCalledWith(true);
+    });
+
+    it('should emit false with event checkedChange when unchecked', () => {
+      const checked = false;
+
+      spyOn(spectator.component.checkedChange, 'emit');
+      spectator.component.onChecked(checked);
+
+      expect(spectator.component.checkedChange.emit).toHaveBeenCalledTimes(1);
+      expect(spectator.component.checkedChange.emit).toHaveBeenCalledWith(false);
     });
   });
 });

@@ -3,14 +3,16 @@ import { CommonModule } from '@angular/common';
 
 import { KirbyModule } from '@kirbydesign/designsystem';
 
-import { CheckboxSingleExampleComponent } from './examples/single';
-import { CheckboxMultiExampleComponent } from './examples/multi';
-import { CheckboxMultiListExampleComponent } from './examples/multi-list';
+import { CheckboxDefaultExampleComponent } from './examples/default';
+import { CheckboxListExampleComponent } from './examples/list';
+import { CheckboxConfirmExampleComponent } from './examples/confirm';
+import { CheckboxStatesExampleComponent } from './examples/states';
 
 const COMPONENT_DECLARATIONS = [
-  CheckboxSingleExampleComponent,
-  CheckboxMultiExampleComponent,
-  CheckboxMultiListExampleComponent,
+  CheckboxDefaultExampleComponent,
+  CheckboxListExampleComponent,
+  CheckboxConfirmExampleComponent,
+  CheckboxStatesExampleComponent,
 ];
 
 @NgModule({
