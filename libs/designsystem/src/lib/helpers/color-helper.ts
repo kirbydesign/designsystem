@@ -145,4 +145,4 @@ export interface KirbyColor extends Color {
 }
 
 export type NotificationColor = keyof typeof styles.notificationColors;
-export type MainColor = keyof typeof styles.mainColors;
+export type BrandColor = keyof typeof styles.brandColors;

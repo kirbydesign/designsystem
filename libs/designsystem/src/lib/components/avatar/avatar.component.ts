@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ChangeDetectionStrategy, HostBinding } from '@angular/core';
 
-import { MainColor } from '../../helpers/color-helper';
+import { BrandColor, NotificationColor } from '../../helpers/color-helper';
 
 @Component({
   selector: 'kirby-avatar',
@@ -16,7 +16,7 @@ export class AvatarComponent implements OnInit {
   @Input() overlay: boolean;
   @HostBinding('class')
   @Input()
-  themeColor: MainColor | 'white' | 'semi-light';
+  themeColor: NotificationColor | BrandColor | 'medium' | 'white' | 'dark' | 'light' | 'semi-light';
 
   constructor() {}
 

@@ -6,6 +6,10 @@ const config = {
   <kirby-icon name="kirby"></kirby-icon>
 </kirby-avatar>
 
+<kirby-avatar themeColor="semi-light" title="semi-light">
+  <kirby-icon name="kirby"></kirby-icon>
+</kirby-avatar>
+
 <kirby-avatar themeColor="medium" title="medium">
   <kirby-icon name="kirby"></kirby-icon>
 </kirby-avatar>
@@ -39,10 +43,6 @@ const config = {
 </kirby-avatar>
 
 <kirby-avatar themeColor="danger" title="danger">
-  <kirby-icon name="kirby"></kirby-icon>
-</kirby-avatar>
-
-<kirby-avatar themeColor="semi-light" title="semi-light">
   <kirby-icon name="kirby"></kirby-icon>
 </kirby-avatar>`,
 };

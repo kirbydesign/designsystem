@@ -11,6 +11,7 @@ import { ThemeColorDirective } from '../../directives';
 import { ColorHelper } from '../../helpers';
 import { ProgressCircleComponent } from '../progress-circle/progress-circle.component';
 import { ProgressCircleRingComponent } from '../progress-circle/progress-circle-ring.component';
+import { styles } from '../../helpers/color-helper.styles';
 
 const getColor = DesignTokenHelper.getColor;
 const size = DesignTokenHelper.size;
@@ -188,8 +189,8 @@ describe('AvatarComponent', () => {
   describe(`when rendering Avatar with themeColor`, () => {
     const colors = [
       ...ColorHelper.mainColors,
-      { name: 'white', value: '#ffffff' },
-      { name: 'semi-light', value: '#ebebeb' },
+      { name: 'white', value: styles.systemColors.white },
+      { name: 'semi-light', value: styles.systemColors.semiLight },
     ];
     colors.forEach((color) => {
       it(`should render with correct colors when themeColor = '${color.name}'`, async () => {
