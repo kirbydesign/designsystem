@@ -5,6 +5,8 @@ import { CheckboxComponent } from './checkbox.component';
 
 fdescribe('CheckboxComponent', () => {
   let spectator: Spectator<CheckboxComponent>;
+  let checkbox: IonCheckbox;
+  let checkboxElement: HTMLIonCheckboxElement;
 
   const createHost = createHostFactory({
     component: CheckboxComponent,
@@ -13,6 +15,8 @@ fdescribe('CheckboxComponent', () => {
 
   beforeEach(() => {
     spectator = createHost(`<kirby-checkbox></kirby-checkbox>`);
+    checkbox = spectator.query(IonCheckbox);
+    checkboxElement = spectator.query('ion-checkbox');
   });
 
   it('should create', () => {
@@ -47,7 +51,7 @@ fdescribe('CheckboxComponent', () => {
 
       spectator.setInput('type', type);
 
-      expect(spectator.query('ion-checkbox')).not.toHaveClass('multi');
+      expect(checkboxElement).not.toHaveClass('multi');
     });
 
     it('should set class .multi on ion-checkbox when type is "multi"', () => {
@@ -55,7 +59,7 @@ fdescribe('CheckboxComponent', () => {
 
       spectator.setInput('type', type);
 
-      expect(spectator.query('ion-checkbox')).toHaveClass('multi');
+      expect(checkboxElement).toHaveClass('multi');
     });
 
     it('should set the [checked] input on ion-checkbox to true', () => {
@@ -63,7 +67,7 @@ fdescribe('CheckboxComponent', () => {
 
       spectator.setInput('checked', checked);
 
-      expect((spectator.query(IonCheckbox) as IonCheckbox).checked).toBe(true);
+      expect(checkbox.checked).toBe(true);
     });
 
     it('should set the [checked] input on ion-checkbox to false', () => {
@@ -71,7 +75,7 @@ fdescribe('CheckboxComponent', () => {
 
       spectator.setInput('checked', checked);
 
-      expect((spectator.query(IonCheckbox) as IonCheckbox).checked).toBe(false);
+      expect(checkbox.checked).toBe(false);
     });
 
     it('should set the [disabled] input on ion-checkbox to true', () => {
@@ -79,7 +83,7 @@ fdescribe('CheckboxComponent', () => {
 
       spectator.setInput('disabled', disabled);
 
-      expect((spectator.query(IonCheckbox) as IonCheckbox).disabled).toBe(true);
+      expect(checkbox.disabled).toBe(true);
     });
 
     it('should set the [disabled] input on ion-checkbox to false', () => {
@@ -87,7 +91,7 @@ fdescribe('CheckboxComponent', () => {
 
       spectator.setInput('disabled', disabled);
 
-      expect((spectator.query(IonCheckbox) as IonCheckbox).disabled).toBe(false);
+      expect(checkbox.disabled).toBe(false);
     });
 
     it('should have error class when [hasError] input is true', () => {
