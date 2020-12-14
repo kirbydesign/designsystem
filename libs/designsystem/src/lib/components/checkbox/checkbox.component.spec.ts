@@ -1,8 +1,5 @@
-import { Spectator, createComponentFactory, createHostFactory } from '@ngneat/spectator';
+import { Spectator, createHostFactory } from '@ngneat/spectator';
 import { IonCheckbox, IonicModule } from '@ionic/angular';
-
-import { MockComponent } from 'ng-mocks';
-import * as ionic from '@ionic/angular';
 
 import { DesignTokenHelper } from '../../helpers/design-token-helper';
 import { CheckboxComponent } from './checkbox.component';
@@ -99,18 +96,18 @@ fdescribe('CheckboxComponent', () => {
       expect((spectator.query(IonCheckbox) as IonCheckbox).disabled).toBe(false);
     });
 
-    it('should have error class when [error] input is true', () => {
-      const error = true;
+    it('should have error class when [hasError] input is true', () => {
+      const hasError = true;
 
-      spectator.setInput('error', error);
+      spectator.setInput('hasError', hasError);
 
       expect(element).toHaveClass('error');
     });
 
-    it('should not have error class when [error] input is false', () => {
-      const error = false;
+    it('should not have error class when [hasError] input is false', () => {
+      const hasError = false;
 
-      spectator.setInput('error', error);
+      spectator.setInput('hasError', hasError);
 
       expect(element).not.toHaveClass('error');
     });
