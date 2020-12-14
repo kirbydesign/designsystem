@@ -19,11 +19,4 @@ export class CheckboxComponent {
     this.checked = checked;
     this.checkedChange.emit(this.checked);
   }
-
-  onFocus() {
-    this.hasFocus = true;
-  }
-  onBlur() {
-    this.hasFocus = false;
-  }
 }

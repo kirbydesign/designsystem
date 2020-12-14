@@ -1,11 +1,8 @@
 <ion-checkbox
   [ngClass]="type"
   [class.error]="error"
-  [class.has-focus]="hasFocus"
   mode="md"
   [checked]="checked"
   [disabled]="disabled"
   (ionChange)="onChecked($event.detail.checked)"
-  (ionFocus)="onFocus()"
-  (ionBlur)="onBlur()"
 ></ion-checkbox>

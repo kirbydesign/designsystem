@@ -30,7 +30,8 @@ ion-checkbox {
   &.error {
     --border-color: #{get-color('danger')};
   }
-  &.has-focus::part(container) {
+
+  &:focus-within::part(container) {
     @media (hover: hover) {
       box-shadow: 0 0 0 1px var(--kirby-background-color), 0 0 0 2px #{$focus-ring-color};
       border-radius: $border-radius;
