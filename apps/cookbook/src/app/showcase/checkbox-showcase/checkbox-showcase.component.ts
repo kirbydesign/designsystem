@@ -11,14 +11,15 @@ export class CheckboxShowcaseComponent {
   properties: ShowcaseProperty[] = [
     {
       name: 'attentionLevel',
-      description:
-        'Specifies a look.\nUse attentionLevel 1 for confirm scenarios\nUse attentionLevel 2 for others',
+      description: `Specifies a look.
+Use attentionLevel 1 for confirm scenarios.
+Use the default attentionLevel 2 for checkbox lists.`,
       defaultValue: '2',
       inputValues: ['1', '2'],
     },
     {
       name: 'checked',
-      description: 'Checks and unchecks the checkbox',
+      description: 'If `true`, the checkbox is selected',
       defaultValue: 'false',
       inputValues: ['boolean'],
     },
@@ -30,7 +31,7 @@ export class CheckboxShowcaseComponent {
     },
     {
       name: 'hasError',
-      description: 'Shows an error border color, if not checked',
+      description: 'Indicates whether the checkbox is in an error state',
       defaultValue: 'false',
       inputValues: ['boolean'],
     },
