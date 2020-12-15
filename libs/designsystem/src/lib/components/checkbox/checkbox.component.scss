@@ -34,7 +34,7 @@ $checkbox-icon-size: size('m');
   }
 
   &.disabled {
-    color: #{get-color('semi-dark')};
+    color: #{get-text-color('semi-dark')};
 
     ion-checkbox {
       opacity: 1;
