@@ -1,6 +1,10 @@
-<ion-checkbox
-  mode="md"
-  [checked]="checked"
-  [disabled]="disabled"
-  (ionChange)="onChecked($event.detail.checked)"
-></ion-checkbox>
+<div [id]="_labelId">
+  <ion-checkbox
+    mode="md"
+    [checked]="checked"
+    [disabled]="disabled"
+    (ionChange)="onChecked($event.detail.checked)"
+    [attr.aria-labelledby]="labelText ? _labelId : ''"
+  ></ion-checkbox>
+  {{ labelText }}
+</div>
