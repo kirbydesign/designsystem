@@ -8,7 +8,6 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  styleUrls: ['./checkbox-examples.shared.scss'],
 })
 export class CheckboxConfirmExampleComponent {
   template: string = config.template;

@@ -21,7 +21,6 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  styleUrls: ['./checkbox-examples.shared.scss'],
 })
 export class CheckboxListExampleComponent {
   template: string = config.template;
