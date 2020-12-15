@@ -44,46 +44,38 @@ describe('CheckboxComponent', () => {
     it('should have class .attention-level1 when attentionLevel is 1', () => {
       spectator.setInput('attentionLevel', '1');
       spectator.detectChanges();
-
       expect(spectator.element).toHaveClass('attention-level1');
     });
 
-    it('should set the [checked] input on ion-checkbox to true', () => {
+    it('should set the [checked] input on ion-checkbox', () => {
       spectator.setInput('checked', true);
-
       expect(checkbox.checked).toBe(true);
-    });
 
-    it('should set the [checked] input on ion-checkbox to false', () => {
       spectator.setInput('checked', false);
-
       expect(checkbox.checked).toBe(false);
     });
 
-    it('should set the [disabled] input on ion-checkbox to true', () => {
+    it('should set the [disabled] input on ion-checkbox', () => {
       spectator.setInput('disabled', true);
-
       expect(checkbox.disabled).toBe(true);
-    });
 
-    it('should set the [disabled] input on ion-checkbox to false', () => {
       spectator.setInput('disabled', false);
-
       expect(checkbox.disabled).toBe(false);
     });
 
-    it('should have error class when [hasError] input is true', () => {
+    it('should only set error class when [hasError] input is true', () => {
       spectator.setInput('hasError', true);
       spectator.detectChanges();
-
       expect(spectator.element).toHaveClass('error');
-    });
 
-    it('should not have error class when [hasError] input is false', () => {
       spectator.setInput('hasError', false);
       spectator.detectChanges();
-
       expect(spectator.element).not.toHaveClass('error');
+    });
+
+    it('should have the text when [labelText] input is set', () => {
+      spectator.setInput('labelText', 'test');
+      expect(spectator.element).toHaveText('test');
     });
   });
 
