@@ -52,7 +52,6 @@ $checkbox-icon-size: size('m');
     --border-width: 1px;
     --border-color: #{get-color('semi-dark')};
     --border-radius: #{$border-radius};
-    cursor: pointer;
 
     // Making clickable area bigger without making icon bigger
     --size: #{$fat-finger-size};
