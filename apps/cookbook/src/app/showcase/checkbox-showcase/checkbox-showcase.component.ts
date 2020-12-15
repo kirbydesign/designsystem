@@ -35,6 +35,11 @@ Use the default attentionLevel 2 for checkbox lists.`,
       defaultValue: 'false',
       inputValues: ['boolean'],
     },
+    {
+      name: 'labelText',
+      description: 'Adds a label text',
+      inputValues: ['string'],
+    },
   ];
 
   events: ShowcaseProperty[] = [
