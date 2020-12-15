@@ -5,7 +5,7 @@
   margin-bottom: size('s');
 }
 
-.states kirby-label {
-  display: inline-block;
-  margin-right: 20px;
+.states {
+  display: flex;
+  flex-wrap: wrap;
 }

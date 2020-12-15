@@ -10,6 +10,13 @@ import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-prop
 export class CheckboxShowcaseComponent {
   properties: ShowcaseProperty[] = [
     {
+      name: 'attentionLevel',
+      description:
+        'Specifies a look.\nUse attentionLevel 1 for confirm scenarios\nUse attentionLevel 2 for others',
+      defaultValue: '2',
+      inputValues: ['1', '2'],
+    },
+    {
       name: 'checked',
       description: 'Checks and unchecks the checkbox',
       defaultValue: 'false',
@@ -26,13 +33,6 @@ export class CheckboxShowcaseComponent {
       description: 'Shows an error border color, if not checked',
       defaultValue: 'false',
       inputValues: ['boolean'],
-    },
-    {
-      name: 'attentionLevel',
-      description:
-        'Specifies a look.\nUse attentionLevel 1 for confirm scenarios\nUse attentionLevel 2 for others',
-      defaultValue: '2',
-      inputValues: ['1', '2'],
     },
   ];
 

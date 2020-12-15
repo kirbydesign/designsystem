@@ -7,11 +7,15 @@ const config = {
     <kirby-checkbox
       slot="start"
       [checked]="item.checked"
-      (checkedChange)="checkedChange($event)"
     ></kirby-checkbox>
     <kirby-label>{{ item.label }}</kirby-label>
   </kirby-item>
 </kirby-list>`,
+  checkboxItemsCodeSnippet: `checkboxItems = [
+  { label: 'Checkbox 1', checked: true },
+  { label: 'Checkbox 2', checked: false },
+  { label: 'Checkbox 3', checked: false },
+];`,
 };
 
 @Component({
@@ -21,6 +25,7 @@ const config = {
 })
 export class CheckboxListExampleComponent {
   template: string = config.template;
+  checkboxItemsCodeSnippet: string = config.checkboxItemsCodeSnippet;
 
   checkboxItems = [
     { label: 'Checkbox 1', checked: true },

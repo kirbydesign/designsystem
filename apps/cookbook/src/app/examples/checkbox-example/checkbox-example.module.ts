@@ -7,12 +7,14 @@ import { CheckboxDefaultExampleComponent } from './examples/default';
 import { CheckboxListExampleComponent } from './examples/list';
 import { CheckboxConfirmExampleComponent } from './examples/confirm';
 import { CheckboxStatesExampleComponent } from './examples/states';
+import { CheckboxEventsExampleComponent } from './examples/events';
 
 const COMPONENT_DECLARATIONS = [
   CheckboxDefaultExampleComponent,
   CheckboxListExampleComponent,
   CheckboxConfirmExampleComponent,
   CheckboxStatesExampleComponent,
+  CheckboxEventsExampleComponent,
 ];
 
 @NgModule({

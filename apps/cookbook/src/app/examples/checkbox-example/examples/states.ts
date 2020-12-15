@@ -3,26 +3,11 @@ import { Component } from '@angular/core';
 const config = {
   selector: 'cookbook-checkbox-states-example',
   template: `<div class="states">
-  <kirby-label>
-    <kirby-checkbox [checked]="checked1"></kirby-checkbox>
-    Checked
-  </kirby-label>
-  <kirby-label>
-    <kirby-checkbox [checked]="checked2"></kirby-checkbox>
-    Not checked
-  </kirby-label>
-  <kirby-label>
-    <kirby-checkbox [checked]="checked3" [hasError]="true"></kirby-checkbox>
-    Has error
-  </kirby-label>
-  <kirby-label>
-    <kirby-checkbox disabled="true"></kirby-checkbox>
-    Disabled
-  </kirby-label>
-  <kirby-label>
-    <kirby-checkbox checked="true" disabled="true"></kirby-checkbox>
-    Disabled checked
-  </kirby-label>
+  <kirby-checkbox labelText="Default"></kirby-checkbox>
+  <kirby-checkbox checked="true" labelText="Checked"></kirby-checkbox>
+  <kirby-checkbox disabled="true" labelText="Disabled"></kirby-checkbox>
+  <kirby-checkbox disabled="true" checked="true" labelText="Disabled checked"></kirby-checkbox>
+  <kirby-checkbox hasError="true" labelText="Has error"></kirby-checkbox>
 </div>`,
 };
 
