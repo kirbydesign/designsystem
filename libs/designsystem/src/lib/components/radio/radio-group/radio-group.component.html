@@ -1,0 +1,23 @@
+<ion-radio-group [value]="value" (ionChange)="onChange($event.detail.value)">
+  <ng-container *ngIf="!items || !items.length; else itemsTemplate">
+    <ng-content></ng-content>
+  </ng-container>
+</ion-radio-group>
+
+<ng-template #itemsTemplate>
+  <ng-container *ngFor="let item of items; let i = index">
+    <ng-container
+      *ngTemplateOutlet="
+        itemTemplate || defaultItemTemplate;
+        context: { $implicit: item, selected: i === selectedIndex, index: i }
+      "
+    ></ng-container>
+  </ng-container>
+</ng-template>
+
+<ng-template #defaultItemTemplate let-item let-selected="selected" let-index="index">
+  <kirby-label>
+    <kirby-radio [value]="item" [disabled]="getDisabledStateFromItem(item)"></kirby-radio>
+    <span>{{ getTextFromItem(item) }}</span>
+  </kirby-label>
+</ng-template>

@@ -1,0 +1,24 @@
+@import '../../scss/utils';
+
+:host {
+  display: inline-block;
+  height: 44px;
+  width: 44px;
+
+  // cursor: pointer;
+}
+
+ion-radio {
+  line-height: 44px;
+  margin: 12px;
+  position: static;
+}
+
+:host-context(kirby-item) {
+  z-index: 2; // TODO: Get from z-layers map...
+
+  &[slot='start'] {
+    margin-inline-end: size('xxxs'); // TODO: Do we need a right margin??
+    margin-inline-start: size('xs') * -1; // TODO: Should we take fat finger size into consideration?
+  }
+}
