@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 const config = {
   selector: 'cookbook-checkbox-confirm-example',
-  template: `<kirby-checkbox attentionLevel="1" [checked]="true" labelText="Confirm terms"></kirby-checkbox>`,
+  template: `<kirby-checkbox attentionLevel="1" [checked]="true" text="Confirm terms"></kirby-checkbox>`,
 };
 
 @Component({

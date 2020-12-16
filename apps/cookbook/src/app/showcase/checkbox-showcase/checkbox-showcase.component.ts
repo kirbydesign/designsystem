@@ -36,7 +36,7 @@ Use the default attentionLevel 2 for checkbox lists.`,
       inputValues: ['boolean'],
     },
     {
-      name: 'labelText',
+      name: 'text',
       description: 'Adds a label text',
       inputValues: ['string'],
     },

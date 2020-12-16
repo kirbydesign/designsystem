@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 const config = {
   selector: 'cookbook-checkbox-events-example',
-  template: `<kirby-checkbox (checkedChange)="checkedChange($event)" labelText="Toggle to see 'checkedChange' event in action"></kirby-checkbox>`,
+  template: `<kirby-checkbox (checkedChange)="checkedChange($event)" text="Toggle to see 'checkedChange' event in action"></kirby-checkbox>`,
   checkboxEventCodeSnippet: `checkedChange(checked: boolean) {
   alert(\`Checkbox checked change: \${checked}\`);
 }`,

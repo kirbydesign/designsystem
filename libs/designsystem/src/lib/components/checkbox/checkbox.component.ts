@@ -22,7 +22,7 @@ export class CheckboxComponent {
 
   @HostBinding('class.has-label')
   @Input()
-  labelText: string;
+  text: string;
 
   @HostBinding('class.error')
   @Input()

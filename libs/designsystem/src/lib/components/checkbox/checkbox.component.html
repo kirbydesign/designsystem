@@ -4,7 +4,7 @@
     [checked]="checked"
     [disabled]="disabled"
     (ionChange)="onChecked($event.detail.checked)"
-    [attr.aria-labelledby]="labelText ? _labelId : ''"
+    [attr.aria-labelledby]="text ? _labelId : ''"
   ></ion-checkbox>
-  {{ labelText }}
+  {{ text }}
 </div>

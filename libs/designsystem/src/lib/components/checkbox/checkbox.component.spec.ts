@@ -109,8 +109,8 @@ describe('CheckboxComponent', () => {
       });
     });
 
-    it('should have the text when [labelText] input is set', () => {
-      spectator.setInput('labelText', 'test');
+    it('should have the text when [text] input is set', () => {
+      spectator.setInput('text', 'test');
       expect(spectator.element).toHaveText('test');
     });
   });
