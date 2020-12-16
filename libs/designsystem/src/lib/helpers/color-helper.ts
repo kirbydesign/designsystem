@@ -55,6 +55,10 @@ export class ColorHelper {
     return `rgb(${rgbValue})`;
   }
 
+  public static getThemeColorHexString(name: string) {
+    return ColorHelper.getColor(name);
+  }
+
   public static getTransparentColorRgbString() {
     return 'rgba(0, 0, 0, 0)';
   }

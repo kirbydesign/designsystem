@@ -21,6 +21,7 @@ export class DesignTokenHelper {
       variant: variant,
       fullname: colorVariant,
       value: ColorHelper.getThemeColorRgbString(colorVariant),
+      hex: ColorHelper.getThemeColorHexString(colorVariant),
     };
   }
 
@@ -87,4 +88,5 @@ export interface ThemeColorDefinition {
   variant?: ThemeColorVariant;
   fullname: string;
   value?: string;
+  hex?: string;
 }
