@@ -4,7 +4,7 @@ $border-radius: 6px;
 $checkbox-icon-size: size('m');
 
 :host {
-  display: block;
+  display: inline-block;
 
   &.attention-level1 ion-checkbox {
     --checkmark-color: #{get-color('black')};
@@ -73,6 +73,8 @@ $checkbox-icon-size: size('m');
   }
 
   &.has-label {
+    display: block;
+
     div {
       position: relative;
       display: inline-flex;
