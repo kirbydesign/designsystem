@@ -28,9 +28,11 @@ export class CheckboxComponent {
   @Input()
   hasError: boolean = false;
 
-  @HostBinding('class.disabled')
-  @Input()
-  disabled: boolean = false;
+  @Input() disabled = false;
+  @HostBinding('attr.disabled')
+  get _isDisabled() {
+    return this.disabled ? 'disabled' : null;
+  }
 
   @HostBinding('class.attention-level1') get isAttentionLevel1() {
     return this.attentionLevel === '1';

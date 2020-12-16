@@ -33,7 +33,7 @@ $checkbox-icon-size: size('m');
     --border-color: #{get-color('danger')};
   }
 
-  &.disabled {
+  &[disabled] {
     color: #{get-text-color('semi-dark')};
 
     ion-checkbox {
