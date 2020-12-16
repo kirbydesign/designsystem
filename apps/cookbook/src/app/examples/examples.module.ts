@@ -22,6 +22,7 @@ import { AvatarExampleModule } from './avatar-example/avatar-example.module';
 import { FlagExampleModule } from './flag-example/flag-example.module';
 import { ToggleButtonExampleModule } from './toggle-button-example/toggle-button-example.module';
 import { AccordionExampleModule } from './accordion-example/accordion-example.module';
+import { RadioExampleModule } from './radio-example/radio-example.module';
 
 const IMPORTS = [
   FormFieldExamplesModule,
@@ -35,12 +36,13 @@ const IMPORTS = [
   FlagExampleModule,
   ToggleButtonExampleModule,
   AccordionExampleModule,
+  RadioExampleModule,
 ];
 
 @NgModule({
   imports: [CommonModule, RouterModule, KirbyModule, ...IMPORTS],
   declarations: COMPONENT_DECLARATIONS,
-  exports: [...COMPONENT_DECLARATIONS, ...IMPORTS],
+  exports: [...COMPONENT_DECLARATIONS, ...IMPORTS, RadioExampleModule],
   entryComponents: [
     CardExampleComponent,
     FirstEmbeddedModalExampleComponent,
