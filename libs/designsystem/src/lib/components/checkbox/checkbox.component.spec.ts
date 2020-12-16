@@ -101,16 +101,6 @@ describe('CheckboxComponent', () => {
       });
     });
 
-    it('should only set error class when [hasError] input is true', () => {
-      spectator.setInput('hasError', true);
-      spectator.detectChanges();
-      expect(spectator.element).toHaveClass('error');
-
-      spectator.setInput('hasError', false);
-      spectator.detectChanges();
-      expect(spectator.element).not.toHaveClass('error');
-    });
-
     it('should have correct icon styling when checkbox has error', () => {
       spectator.setInput('hasError', true);
       spectator.detectChanges();
