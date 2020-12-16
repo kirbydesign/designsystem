@@ -25,6 +25,21 @@ export class DesignTokenHelper {
     };
   }
 
+  public static getTextColor(
+    name: ThemeColorExtended,
+    variant?: ThemeColorVariant
+  ): ThemeColorDefinition {
+    const variantSuffix = variant ? `-${variant}` : '';
+    const colorVariant = `${name}${variantSuffix}`;
+    return {
+      name: name,
+      variant: variant,
+      fullname: colorVariant,
+      value: ColorHelper.getThemeTextColorRgbString(colorVariant),
+      hex: ColorHelper.getThemeTextColorHexString(colorVariant),
+    };
+  }
+
   public static size(key: string): string {
     return styles.sizes[key];
   }

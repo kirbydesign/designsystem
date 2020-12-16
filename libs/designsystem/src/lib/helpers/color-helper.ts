@@ -6,7 +6,10 @@ export class ColorHelper {
   static readonly brandColors = ColorHelper.mapToKirbyColorArray(styles.brandColors);
   static readonly notificationColors = ColorHelper.mapToKirbyColorArray(styles.notificationColors);
   static readonly systemColors = ColorHelper.mapToKirbyColorArray(styles.systemColors);
-  static readonly textColors = ColorHelper.mapToKirbyColorArray(styles.textColors);
+  static readonly textColors = ColorHelper.mapToKirbyColorArray(
+    styles.textColors,
+    styles.kirbyTextColors
+  );
   static readonly mainColors = ColorHelper.getMainColors();
 
   private static getMainColors(): Color[] {
@@ -16,7 +19,10 @@ export class ColorHelper {
     return colorArray;
   }
 
-  private static mapToKirbyColorArray(colors: KirbyColorGroup): KirbyColor[] {
+  private static mapToKirbyColorArray(
+    colors: KirbyColorGroup,
+    fullColorMap: KirbyColorGroup = styles.kirbyColors
+  ): KirbyColor[] {
     const TINT = 'Tint';
     const SHADE = 'Shade';
     const CONTRAST = 'Contrast';
@@ -25,15 +31,15 @@ export class ColorHelper {
       value,
       base: value,
       tint: {
-        value: styles.kirbyColors[name + TINT],
+        value: fullColorMap[name + TINT],
         name: ColorHelper.camelToKebabCase(name + TINT),
       },
       shade: {
-        value: styles.kirbyColors[name + SHADE],
+        value: fullColorMap[name + SHADE],
         name: ColorHelper.camelToKebabCase(name + SHADE),
       },
       contrast: {
-        value: styles.kirbyColors[name + CONTRAST],
+        value: fullColorMap[name + CONTRAST],
         name: ColorHelper.camelToKebabCase(name + CONTRAST),
       },
     }));
@@ -55,8 +61,17 @@ export class ColorHelper {
     return `rgb(${rgbValue})`;
   }
 
+  public static getThemeTextColorRgbString(name: string) {
+    const rgbValue = ColorHelper.getTextColor(name + '-rgb');
+    return `rgb(${rgbValue})`;
+  }
+
   public static getThemeColorHexString(name: string) {
     return ColorHelper.getColor(name);
+  }
+
+  public static getThemeTextColorHexString(name: string) {
+    return ColorHelper.getTextColor(name);
   }
 
   public static getTransparentColorRgbString() {
@@ -106,6 +121,12 @@ export class ColorHelper {
   private static getColor(name: string): string {
     const camelCaseKey = ColorHelper.kebabToCamelCase(name);
     const found = styles.kirbyColors[camelCaseKey];
+    return found || null;
+  }
+
+  private static getTextColor(name: string): string {
+    const camelCaseKey = ColorHelper.kebabToCamelCase(name);
+    const found = styles.kirbyTextColors[camelCaseKey];
     return found || null;
   }
 
