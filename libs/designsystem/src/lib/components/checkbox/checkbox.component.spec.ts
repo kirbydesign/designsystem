@@ -53,12 +53,6 @@ describe('CheckboxComponent', () => {
   });
 
   describe('when configured', () => {
-    it('should have class .attention-level1 when attentionLevel is 1', () => {
-      spectator.setInput('attentionLevel', '1');
-      spectator.detectChanges();
-      expect(spectator.element).toHaveClass('attention-level1');
-    });
-
     it('should have correct icon styling when attentionLevel is 1', () => {
       spectator.setInput('attentionLevel', '1');
       spectator.detectChanges();
@@ -77,31 +71,33 @@ describe('CheckboxComponent', () => {
       expect(ionCheckbox.checked).toBe(false);
     });
 
-    it('should set the [disabled] input on ion-checkbox', () => {
-      spectator.setInput('disabled', true);
-      expect(ionCheckbox.disabled).toBe(true);
+    describe('when disabled', () => {
+      it('should set the [disabled] input on ion-checkbox', () => {
+        spectator.setInput('disabled', true);
+        expect(ionCheckbox.disabled).toBe(true);
 
-      spectator.setInput('disabled', false);
-      expect(ionCheckbox.disabled).toBe(false);
-    });
-
-    it('should have correct text styling when disabled', () => {
-      spectator.setInput('disabled', true);
-      spectator.detectChanges();
-      expect(spectator.element).toHaveComputedStyle({
-        color: getTextColor('semi-dark'),
+        spectator.setInput('disabled', false);
+        expect(ionCheckbox.disabled).toBe(false);
       });
-    });
 
-    it('should have correct icon styling when disabled', () => {
-      spectator.setInput('disabled', true);
-      spectator.detectChanges();
-      expect(ionCheckbox).toHaveComputedStyle({
-        '--checkmark-color': getColor('semi-dark'),
-        '--background': getColor('semi-light'),
-        '--background-checked': getColor('semi-light'),
-        '--border-color': getColor('medium'),
-        '--border-color-checked': getColor('semi-light'),
+      it('should have correct text styling', () => {
+        spectator.setInput('disabled', true);
+        spectator.detectChanges();
+        expect(spectator.element).toHaveComputedStyle({
+          color: getTextColor('semi-dark'),
+        });
+      });
+
+      it('should have correct icon styling', () => {
+        spectator.setInput('disabled', true);
+        spectator.detectChanges();
+        expect(ionCheckbox).toHaveComputedStyle({
+          '--checkmark-color': getColor('semi-dark'),
+          '--background': getColor('semi-light'),
+          '--background-checked': getColor('semi-light'),
+          '--border-color': getColor('medium'),
+          '--border-color-checked': getColor('semi-light'),
+        });
       });
     });
 
