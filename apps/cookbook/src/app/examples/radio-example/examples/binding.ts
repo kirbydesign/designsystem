@@ -8,7 +8,7 @@ const items = [
   { title: 'Bacon', value: 1 },
   { title: 'Salami', value: 2 },
   { title: 'Tenderloin', value: 3 },
-  { title: 'Veggie', value: 4, disabled: true },
+  { title: 'Veggie (not an option)', value: 4, disabled: true },
 ];
 
 const config = {

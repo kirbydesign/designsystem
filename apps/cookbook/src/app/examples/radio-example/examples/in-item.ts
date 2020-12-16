@@ -4,7 +4,7 @@ import { stringifyPretty } from '~/app/shared/code-viewer/code-viewer.component'
 
 const items = [
   { title: 'Bacon', value: 1 },
-  { title: 'Salami', value: 2, disabled: true },
+  { title: 'Salami (disabled)', value: 2, disabled: true },
   { title: 'Tenderloin', value: 3 },
 ];
 
