@@ -2,8 +2,6 @@
 @import '../item.utils';
 
 :host {
-  position: relative; // Used when containing checkbox
-
   &.horizontal ion-label {
     display: flex;
     flex-direction: row;
