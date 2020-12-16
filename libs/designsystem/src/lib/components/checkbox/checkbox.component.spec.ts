@@ -1,20 +1,24 @@
 import { Spectator, createHostFactory } from '@ngneat/spectator';
-import { IonCheckbox } from '@ionic/angular';
+import { IonicModule } from '@ionic/angular';
 
 import { CheckboxComponent } from './checkbox.component';
+import { DesignTokenHelper } from '../../helpers';
+
+const getColor = DesignTokenHelper.getColor;
+const getTextColor = DesignTokenHelper.getTextColor;
 
 describe('CheckboxComponent', () => {
   let spectator: Spectator<CheckboxComponent>;
-  let checkbox: IonCheckbox;
+  let ionCheckbox: HTMLIonCheckboxElement;
 
   const createHost = createHostFactory({
     component: CheckboxComponent,
-    declarations: [IonCheckbox],
+    imports: [IonicModule.forRoot({ _testing: true })],
   });
 
   beforeEach(() => {
     spectator = createHost(`<kirby-checkbox></kirby-checkbox>`);
-    checkbox = spectator.query(IonCheckbox);
+    ionCheckbox = spectator.query('ion-checkbox');
   });
 
   it('should create', () => {
@@ -25,6 +29,14 @@ describe('CheckboxComponent', () => {
     it('should have attention level 2', () => {
       expect(spectator.component.attentionLevel).toBe('2');
       expect(spectator.element).toHaveClass('attention-level2');
+    });
+
+    it('should have correct icon styling', () => {
+      expect(ionCheckbox).toHaveComputedStyle({
+        '--checkmark-color': getColor('white'),
+        '--background-checked': getColor('black'),
+        '--border-color-checked': getColor('black'),
+      });
     });
 
     it('should not be checked', () => {
@@ -47,20 +59,50 @@ describe('CheckboxComponent', () => {
       expect(spectator.element).toHaveClass('attention-level1');
     });
 
+    it('should have correct icon styling when attentionLevel is 1', () => {
+      spectator.setInput('attentionLevel', '1');
+      spectator.detectChanges();
+      expect(ionCheckbox).toHaveComputedStyle({
+        '--checkmark-color': getColor('black'),
+        '--background-checked': getColor('success'),
+        '--border-color-checked': getColor('success'),
+      });
+    });
+
     it('should set the [checked] input on ion-checkbox', () => {
       spectator.setInput('checked', true);
-      expect(checkbox.checked).toBe(true);
+      expect(ionCheckbox.checked).toBe(true);
 
       spectator.setInput('checked', false);
-      expect(checkbox.checked).toBe(false);
+      expect(ionCheckbox.checked).toBe(false);
     });
 
     it('should set the [disabled] input on ion-checkbox', () => {
       spectator.setInput('disabled', true);
-      expect(checkbox.disabled).toBe(true);
+      expect(ionCheckbox.disabled).toBe(true);
 
       spectator.setInput('disabled', false);
-      expect(checkbox.disabled).toBe(false);
+      expect(ionCheckbox.disabled).toBe(false);
+    });
+
+    it('should have correct text styling when disabled', () => {
+      spectator.setInput('disabled', true);
+      spectator.detectChanges();
+      expect(spectator.element).toHaveComputedStyle({
+        color: getTextColor('semi-dark'),
+      });
+    });
+
+    it('should have correct icon styling when disabled', () => {
+      spectator.setInput('disabled', true);
+      spectator.detectChanges();
+      expect(ionCheckbox).toHaveComputedStyle({
+        '--checkmark-color': getColor('semi-dark'),
+        '--background': getColor('semi-light'),
+        '--background-checked': getColor('semi-light'),
+        '--border-color': getColor('medium'),
+        '--border-color-checked': getColor('semi-light'),
+      });
     });
 
     it('should only set error class when [hasError] input is true', () => {
@@ -71,6 +113,14 @@ describe('CheckboxComponent', () => {
       spectator.setInput('hasError', false);
       spectator.detectChanges();
       expect(spectator.element).not.toHaveClass('error');
+    });
+
+    it('should have correct icon styling when checkbox has error', () => {
+      spectator.setInput('hasError', true);
+      spectator.detectChanges();
+      expect(ionCheckbox).toHaveComputedStyle({
+        '--border-color': getColor('danger'),
+      });
     });
 
     it('should have the text when [labelText] input is set', () => {
