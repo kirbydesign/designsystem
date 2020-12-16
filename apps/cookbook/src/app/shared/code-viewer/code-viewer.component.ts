@@ -10,6 +10,13 @@ import {
   ViewChild,
 } from '@angular/core';
 
+export function stringifyPretty(value: any) {
+  return JSON.stringify(value, null, 2)
+    .replace(/"/g, "'") // convert to single quotes
+    .replace(/'(\w+)':/g, '$1:') // remove quotes around single-word property names
+    .replace(/(?<!(\[|},))(\n( )+)/g, ' '); // Remove additional whitespace and linebreaks within object literals
+}
+
 @Component({
   selector: 'cookbook-code-viewer',
   templateUrl: './code-viewer.component.html',
