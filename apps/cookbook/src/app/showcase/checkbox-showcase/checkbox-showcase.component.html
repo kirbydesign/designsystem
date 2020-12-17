@@ -54,11 +54,11 @@
   </cookbook-example-viewer>
 
   <h2>Checked Change Event</h2>
-  <cookbook-example-viewer [html]="checkboxEventsExample.template">
+  <cookbook-example-viewer
+    [html]="checkboxEventsExample.template"
+    [ts]="checkboxEventsExample.codeSnippet"
+  >
     <cookbook-checkbox-events-example #checkboxEventsExample></cookbook-checkbox-events-example>
-    <cookbook-code-viewer
-      [ts]="checkboxEventsExample.checkboxEventCodeSnippet"
-    ></cookbook-code-viewer>
   </cookbook-example-viewer>
 
   <h2>Properties</h2>
