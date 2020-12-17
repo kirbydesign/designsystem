@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 
 const config = {
   selector: 'cookbook-checkbox-sizes-example',
-  template: `<kirby-checkbox size="xs" text="xs"></kirby-checkbox>
-<kirby-checkbox size="sm" text="sm (default)"></kirby-checkbox>
-<kirby-checkbox size="md" text="md"></kirby-checkbox>`,
+  template: `<kirby-checkbox size="xs" text="Extra small ('xs')"></kirby-checkbox>
+<kirby-checkbox size="sm" text="Small ('sm' - default)"></kirby-checkbox>
+<kirby-checkbox size="md" text="Medium ('md')"></kirby-checkbox>`,
 };
 
 @Component({
@@ -12,12 +12,6 @@ const config = {
   template: config.template,
   styles: [
     `
-      :host {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-      }
-
       kirby-checkbox {
         margin-bottom: 8px;
       }
