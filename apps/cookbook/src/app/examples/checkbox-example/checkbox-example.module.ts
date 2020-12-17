@@ -7,6 +7,7 @@ import { CheckboxDefaultExampleComponent } from './examples/default';
 import { CheckboxListExampleComponent } from './examples/list';
 import { CheckboxConfirmExampleComponent } from './examples/confirm';
 import { CheckboxStatesExampleComponent } from './examples/states';
+import { CheckboxSizesExampleComponent } from './examples/sizes';
 import { CheckboxEventsExampleComponent } from './examples/events';
 
 const COMPONENT_DECLARATIONS = [
@@ -14,6 +15,7 @@ const COMPONENT_DECLARATIONS = [
   CheckboxListExampleComponent,
   CheckboxConfirmExampleComponent,
   CheckboxStatesExampleComponent,
+  CheckboxSizesExampleComponent,
   CheckboxEventsExampleComponent,
 ];
 
