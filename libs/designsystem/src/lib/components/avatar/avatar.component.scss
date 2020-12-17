@@ -137,7 +137,8 @@ $badge-diameter: $avatar-badge-size;
     in map-merge(
       $main-colors,
       (
-        'white': #ffffff,
+        'white': get-color('white'),
+        'semi-light': get-color('semi-light'),
       )
     )
 {

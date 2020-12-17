@@ -2,43 +2,29 @@
 @import '../item.utils';
 
 :host {
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  box-sizing: border-box;
-  font-size: inherit;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-:host-context(kirby-item) {
-  &:not(.horizontal) {
-    flex-direction: column;
-    align-items: normal;
-  }
-
-  &[slot='end'] {
-    align-items: flex-end;
-
-    @include slotted(data, '[detail]') {
-      margin-inline-start: size('s');
-    }
-  }
-
-  &.horizontal {
+  &.horizontal ion-label {
+    display: flex;
+    flex-direction: row;
     justify-content: space-between;
+    align-items: center;
 
     @include slotted(':not(:first-child)') {
       margin-left: size('xs');
     }
   }
+}
 
+:host-context(kirby-item) ion-label {
   @include item-typography();
 }
 
-:host-context(kirby-item.selected) {
+:host([slot='end']) ion-label {
+  @include slotted(data, '[detail]') {
+    margin-inline-start: size('s');
+  }
+}
+
+:host-context(kirby-item.selected) ion-label {
   @include slotted(h1, h2, h3, h4, h5, h6, p, data) {
     font-weight: font-weight('bold');
   }
