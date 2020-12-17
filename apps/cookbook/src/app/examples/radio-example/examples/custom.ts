@@ -11,17 +11,28 @@ const items = [
 const config = {
   selector: 'cookbook-radio-custom-content-example',
   template: `<kirby-radio-group [value]="selected" [items]="items">
-  <kirby-label *kirbyListItemTemplate="let item; let selected = selected" [title]="item.description" [class.is-selected]="selected">
-    <kirby-radio [value]="item"></kirby-radio>
-    <span>{{item.label}}</span>
+  <div
+    *kirbyListItemTemplate="let item; let selected = selected"
+    [class.is-selected]="selected"
+    class="wrapper">
+    <kirby-radio
+      [value]="item"
+      [text]="item.label"
+      [title]="item.description">
+    </kirby-radio>
     <em class="rating">Rating: {{item.rating}}</em>
-  </kirby-label>
+  </div>
 </kirby-radio-group>`,
   codeSnippet: `items = ${stringifyPretty(items)};
 
 selected = this.items[1];`,
   styles: [
-    `.rating {
+    `.wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.rating {
   font-size: 12px;
   padding: 2px 4px;
   margin-left: 8px;
