@@ -19,6 +19,7 @@ import { FirstEmbeddedModalExampleComponent } from './modal-example/first-embedd
 import { SecondEmbeddedModalExampleComponent } from './modal-example/second-embedded-modal-example/second-embedded-modal-example.component';
 import { ModalRoutePage1ExampleComponent } from './modal-example/modal-route-example/modal-route-page1-example.component';
 import { ModalRoutePage2ExampleComponent } from './modal-example/modal-route-example/modal-route-page2-example.component';
+import { ModalRoutePage3ExampleComponent } from './modal-example/modal-route-example/modal-route-page3-example.component';
 import { SegmentedControlExampleComponent } from './segmented-control-example/segmented-control-example.component';
 import { ChipExampleComponent } from './chip-example/chip-example.component';
 import { BadgeExampleComponent } from './badge-example/badge-example.component';
@@ -98,6 +99,7 @@ export const COMPONENT_DECLARATIONS: any[] = [
   ModalCompactExampleComponent,
   ModalRoutePage1ExampleComponent,
   ModalRoutePage2ExampleComponent,
+  ModalRoutePage3ExampleComponent,
   // END TODO: Move Modal examples to ModalExample.module
   SegmentedControlExampleComponent,
   ChipExampleComponent,

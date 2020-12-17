@@ -1,0 +1,13 @@
+@import '../../../../scss/utils';
+
+:host-context(kirby-inline-footer) {
+  ion-footer {
+    position: var(--position);
+    bottom: var(--bottom);
+    left: var(--left);
+    width: var(--width);
+
+    // WIP: remove
+    background-color: var(--background-color);
+  }
+}

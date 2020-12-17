@@ -1,20 +1,20 @@
 import {
+  AfterViewInit,
   Component,
+  ComponentFactoryResolver,
+  ElementRef,
+  HostBinding,
   HostListener,
   Injector,
-  HostBinding,
-  ViewChild,
-  AfterViewInit,
-  OnDestroy,
-  ElementRef,
-  Renderer2,
   Input,
-  OnInit,
-  ViewChildren,
-  QueryList,
-  ComponentFactoryResolver,
   NgZone,
+  OnDestroy,
+  OnInit,
+  QueryList,
+  Renderer2,
   RendererStyleFlags2,
+  ViewChild,
+  ViewChildren,
 } from '@angular/core';
 import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import { IonContent, IonHeader, IonTitle } from '@ionic/angular';
@@ -42,6 +42,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   static readonly KEYBOARD_HIDE_DELAY_IN_MS = 100;
 
   scrollY: number = Math.abs(this.windowRef.scrollY);
+
   set scrollDisabled(disabled: boolean) {
     this.ionContent.scrollY = !disabled;
   }
@@ -53,9 +54,11 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     ElementRef<HTMLButtonElement>
   >;
   @ViewChild(IonContent, { static: true }) private ionContent: IonContent;
-  @ViewChild(IonContent, { static: true, read: ElementRef }) private ionContentElement: ElementRef<
-    HTMLIonContentElement
-  >;
+  @ViewChild(IonContent, {
+    static: true,
+    read: ElementRef,
+  })
+  private ionContentElement: ElementRef<HTMLIonContentElement>;
   @ViewChild(IonHeader, { static: true, read: ElementRef }) private ionHeaderElement: ElementRef<
     HTMLIonHeaderElement
   >;
@@ -82,6 +85,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     }
     return this._mutationObserver;
   }
+
   private _intersectionObserver: IntersectionObserver;
   private get intersectionObserver(): IntersectionObserver {
     if (!this._intersectionObserver) {
@@ -186,6 +190,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   private checkForEmbeddedElements() {
     this.moveEmbeddedElements();
     this.observeEmbeddedElements();
+    setTimeout(() => this.positionEmbeddedElements());
   }
 
   private observeHeaderResize() {
@@ -193,6 +198,34 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
       const [property, pixelValue] = ['--header-height', `${entry.contentRect.height}px`];
       this.setCssVar(this.elementRef.nativeElement, property, pixelValue);
     });
+  }
+
+  private positionEmbeddedElements() {
+    const inlineFooterComponent = this.elementRef.nativeElement.querySelector<HTMLElement>(
+      'kirby-inline-footer'
+    );
+    if (inlineFooterComponent === null) return;
+    const ionContent = inlineFooterComponent.parentElement.parentElement;
+    const ionContentHeight = ionContent.offsetHeight;
+
+    const page = inlineFooterComponent.parentElement;
+    const pageHeight = page.clientHeight;
+    if (ionContent.clientHeight < page.clientHeight) {
+      this.setCssVar(inlineFooterComponent, '--background-color', `purple`); // WIP.. skip this line
+      return;
+    }
+    const inlineFooterHeight = inlineFooterComponent.firstElementChild.clientHeight;
+    const padding = ionContentHeight - pageHeight - inlineFooterHeight;
+    if (padding <= 0) {
+      // WIP.. skip this block and line
+      this.setCssVar(inlineFooterComponent, '--background-color', `lightgreen`);
+    } else if (padding > 0) {
+      this.setCssVar(inlineFooterComponent, '--background-color', `red`);
+      this.setCssVar(inlineFooterComponent, '--position', `fixed`);
+      this.setCssVar(inlineFooterComponent, '--width', `100%`);
+      this.setCssVar(inlineFooterComponent, '--left', `0`);
+      this.setCssVar(inlineFooterComponent, '--bottom', `${this.modalFooterHeight}px`);
+    }
   }
 
   private moveEmbeddedElements() {
@@ -424,13 +457,25 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     return this.elementRef.nativeElement.querySelector<HTMLElement>('kirby-modal-footer');
   }
 
+  private modalFooterHeight = 0;
+
   private moveChild(child: Element, newParent: Element) {
     this.renderer.removeChild(child.parentElement, child);
     this.renderer.appendChild(newParent, child);
     if (child.tagName === 'KIRBY-MODAL-FOOTER') {
       this.resizeObserverService.observe(child, (entry) => {
+        this.modalFooterHeight = Math.floor(entry.contentRect.height);
+        const [property, pixelValue] = ['--footer-height', `${this.modalFooterHeight}px`];
+        this.setCssVar(this.elementRef.nativeElement, property, pixelValue);
+      });
+    }
+  }
+
+  private positionInlineFooter(child: Element) {
+    if (child.tagName === 'KIRBY-INLINE-FOOTER') {
+      this.resizeObserverService.observe(child, (entry) => {
         const [property, pixelValue] = [
-          '--footer-height',
+          '--inline-height',
           `${Math.floor(entry.contentRect.height)}px`,
         ];
         this.setCssVar(this.elementRef.nativeElement, property, pixelValue);

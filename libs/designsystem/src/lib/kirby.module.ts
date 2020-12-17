@@ -80,6 +80,7 @@ import { IconRegistryService } from './components/icon/icon-registry.service';
 import { WindowRef } from './types/window-ref';
 import { ToggleButtonModule } from './components/toggle-button/toggle-button.module';
 import { SlideDirective, SlidesComponent } from './components/slides/slides.component';
+import { InlineFooterComponent } from './components';
 
 const exportedDeclarations = [
   CardComponent,
@@ -106,6 +107,7 @@ const exportedDeclarations = [
   CheckboxComponent,
   ActionSheetComponent,
   ModalFooterComponent,
+  InlineFooterComponent,
   ModalRouterLinkDirective,
   SegmentedControlComponent,
   ChipComponent,

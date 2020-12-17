@@ -11,6 +11,7 @@ import { SecondEmbeddedModalExampleComponent } from './modal-example/second-embe
 import { ModalCompactExampleComponent } from './modal-example/compact-example/modal-compact-example.component';
 import { ModalRoutePage1ExampleComponent } from './modal-example/modal-route-example/modal-route-page1-example.component';
 import { ModalRoutePage2ExampleComponent } from './modal-example/modal-route-example/modal-route-page2-example.component';
+import { ModalRoutePage3ExampleComponent } from './modal-example/modal-route-example/modal-route-page3-example.component';
 import { FormFieldExamplesModule } from './form-field-example/form-field-example.module';
 import { ListExamplesModule } from './list/list-example.module';
 import { ItemExampleModule } from './item-example/item-example.module';
@@ -47,6 +48,7 @@ const IMPORTS = [
     ModalCompactExampleComponent,
     ModalRoutePage1ExampleComponent,
     ModalRoutePage2ExampleComponent,
+    ModalRoutePage3ExampleComponent,
   ],
 })
 export class ExamplesModule {}

@@ -1,9 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+
+import { ModalConfig } from '@kirbydesign/designsystem';
 
 @Component({
   selector: 'cookbook-modal-route-page-1-example',
   template: `
-    <kirby-page-title>Modal Page 1/2</kirby-page-title>
+    <kirby-page-title>Modal Page 1/3</kirby-page-title>
+
     <h4>The standard Lorem Ipsum passage, used since the 1500s</h4>
     <p>
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
@@ -13,6 +16,9 @@ import { Component } from '@angular/core';
       non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
     </p>
     <button kirby-button (click)="toggleFooter()">Toggle footer</button>
+
+    <kirby-inline-footer>Inline footer content</kirby-inline-footer>
+
     <kirby-modal-footer *ngIf="showFooter">
       <button kirby-button class="nav" routerLink="../page2">
         Next
@@ -27,6 +33,8 @@ import { Component } from '@angular/core';
 })
 export class ModalRoutePage1ExampleComponent {
   showFooter: boolean = true;
+
+  constructor() {}
 
   toggleFooter() {
     this.showFooter = !this.showFooter;

@@ -15,6 +15,7 @@ import { SpinnerShowcaseComponent } from './spinner-showcase/spinner-showcase.co
 import { ModalShowcaseComponent } from './modal-showcase/modal-showcase.component';
 import { ModalRoutePage1ExampleComponent } from '../examples/modal-example/modal-route-example/modal-route-page1-example.component';
 import { ModalRoutePage2ExampleComponent } from '../examples/modal-example/modal-route-example/modal-route-page2-example.component';
+import { ModalRoutePage3ExampleComponent } from '../examples/modal-example/modal-route-example/modal-route-page3-example.component';
 import { SegmentedControlShowcaseComponent } from './segmented-control-showcase/segmented-control-showcase.component';
 import { ChipShowcaseComponent } from './chip-showcase/chip-showcase.component';
 import { BadgeShowcaseComponent } from './badge-showcase/badge-showcase.component';
@@ -143,6 +144,11 @@ export const routes: Routes = [
             path: 'page2',
             outlet: 'modal',
             component: ModalRoutePage2ExampleComponent,
+          },
+          {
+            path: 'page3',
+            outlet: 'modal',
+            component: ModalRoutePage3ExampleComponent,
           },
         ],
       },
