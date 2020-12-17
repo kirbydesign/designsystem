@@ -22,6 +22,7 @@ import { AvatarExampleModule } from './avatar-example/avatar-example.module';
 import { FlagExampleModule } from './flag-example/flag-example.module';
 import { ToggleButtonExampleModule } from './toggle-button-example/toggle-button-example.module';
 import { AccordionExampleModule } from './accordion-example/accordion-example.module';
+import { CheckboxExampleModule } from './checkbox-example/checkbox-example.module';
 
 const IMPORTS = [
   FormFieldExamplesModule,
@@ -35,6 +36,7 @@ const IMPORTS = [
   FlagExampleModule,
   ToggleButtonExampleModule,
   AccordionExampleModule,
+  CheckboxExampleModule,
 ];
 
 @NgModule({
