@@ -5,6 +5,7 @@ $checkbox-icon-size: size('m');
 $checkbox-size-xs: size('l');
 $checkbox-size-sm: $fat-finger-size;
 $checkbox-size-md: size('xxxl');
+$checkbox-margin-right: size('xs');
 
 :host {
   display: inline-block;
@@ -58,7 +59,8 @@ $checkbox-size-md: size('xxxl');
 
     // Making clickable area bigger without making icon bigger
     --size: #{$checkbox-size-sm};
-    padding: calc((var(--size) - #{$checkbox-icon-size}) / 2);
+    --kirby-checkbox-padding: calc((var(--size) - #{$checkbox-icon-size}) / 2);
+    padding: var(--kirby-checkbox-padding);
     box-sizing: border-box; // Ensure padding is not added to checkbox width/height
 
     &::part(container) {
@@ -88,7 +90,7 @@ $checkbox-size-md: size('xxxl');
     }
     ion-checkbox {
       position: static;
-      margin-right: size('xxxs');
+      margin-right: Max(calc(#{$checkbox-margin-right} - var(--kirby-checkbox-padding)), 0px);
     }
   }
 
