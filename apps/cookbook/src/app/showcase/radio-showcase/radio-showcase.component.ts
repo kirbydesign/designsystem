@@ -8,7 +8,7 @@ import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-prop
   styleUrls: ['./radio-showcase.component.scss'],
 })
 export class RadioShowcaseComponent {
-  buttonProperties: ShowcaseProperty[] = [
+  radioProperties: ShowcaseProperty[] = [
     {
       name: 'value',
       description: 'The value represented by the radio button.',
@@ -21,9 +21,14 @@ export class RadioShowcaseComponent {
       defaultValue: 'false',
       inputValues: ['true', 'false'],
     },
+    {
+      name: 'text',
+      description: 'Adds a label text. This is mandatory when used in a plain radio button list.',
+      inputValues: ['string'],
+    },
   ];
 
-  groupProperties: ShowcaseProperty[] = [
+  radioGroupProperties: ShowcaseProperty[] = [
     {
       name: 'items',
       description: 'The items rendered within the radio group.',

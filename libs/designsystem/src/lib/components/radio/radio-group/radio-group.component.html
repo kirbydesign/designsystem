@@ -16,8 +16,9 @@
 </ng-template>
 
 <ng-template #defaultItemTemplate let-item let-selected="selected" let-index="index">
-  <kirby-label>
-    <kirby-radio [value]="item" [disabled]="getDisabledStateFromItem(item)"></kirby-radio>
-    <span>{{ getTextFromItem(item) }}</span>
-  </kirby-label>
+  <kirby-radio
+    [value]="item"
+    [disabled]="getDisabledStateFromItem(item)"
+    [text]="getTextFromItem(item)"
+  ></kirby-radio>
 </ng-template>

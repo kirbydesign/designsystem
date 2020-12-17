@@ -1,1 +1,9 @@
-<ion-radio [value]="value" [disabled]="disabled" mode="md"></ion-radio>
+<div>
+  <ion-radio
+    [value]="value"
+    [disabled]="disabled"
+    mode="md"
+    [attr.aria-labelledby]="text ? _labelId : null"
+  ></ion-radio>
+  <span [id]="_labelId" *ngIf="text">{{ text }}</span>
+</div>

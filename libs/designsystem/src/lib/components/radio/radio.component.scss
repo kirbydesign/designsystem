@@ -1,21 +1,37 @@
 @import '../../scss/utils';
 
+$radio-icon-padding: size('xxxxs');
+$radio-icon-size: size('m') - ($radio-icon-padding * 2);
+
 :host {
   display: inline-block;
-  height: 44px;
-  width: 44px;
 
-  // cursor: pointer;
+  &.has-label {
+    display: block;
+
+    div {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      vertical-align: top;
+    }
+
+    ion-radio {
+      position: static;
+      margin-right: size('xxxxs');
+    }
+  }
 }
 
 ion-radio {
-  line-height: 44px;
-  margin: 12px;
-  position: static;
+  height: $fat-finger-size;
+  width: $fat-finger-size;
+  padding: #{($fat-finger-size - $radio-icon-size) / 2}; // Making clickable area bigger without making icon bigger
+  box-sizing: border-box; // Ensure padding is not added to radio width/height
 }
 
 :host-context(kirby-item) {
-  z-index: 2; // TODO: Get from z-layers map...
+  z-index: z('default'); // Makes whole kirby-item clickable above item-inner.
 
   &[slot='start'] {
     margin-inline-end: size('xxxs'); // TODO: Do we need a right margin??
