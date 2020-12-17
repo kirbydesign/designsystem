@@ -1,11 +1,16 @@
 import { Spectator, createHostFactory } from '@ngneat/spectator';
-import { IonicModule } from '@ionic/angular';
+import { IonCheckbox } from '@ionic/angular';
 
 import { CheckboxComponent } from './checkbox.component';
 import { DesignTokenHelper } from '../../helpers';
 
 const getColor = DesignTokenHelper.getColor;
 const getTextColor = DesignTokenHelper.getTextColor;
+const fatFingerSize = DesignTokenHelper.fatFingerSize();
+const checkboxIconSizeValue = parseInt(DesignTokenHelper.size('m'));
+const checkboxSizeXs = DesignTokenHelper.size('l');
+const checkboxSizeSm = fatFingerSize;
+const checkboxSizeMd = DesignTokenHelper.size('xxxl');
 
 describe('CheckboxComponent', () => {
   let spectator: Spectator<CheckboxComponent>;
@@ -13,7 +18,7 @@ describe('CheckboxComponent', () => {
 
   const createHost = createHostFactory({
     component: CheckboxComponent,
-    imports: [IonicModule.forRoot({ _testing: true })],
+    declarations: [IonCheckbox],
   });
 
   beforeEach(() => {
@@ -69,6 +74,45 @@ describe('CheckboxComponent', () => {
 
       spectator.setInput('checked', false);
       expect(ionCheckbox.checked).toBe(false);
+    });
+
+    describe('with size', () => {
+      it(`should have 'sm' size by default`, () => {
+        expect(ionCheckbox).toHaveComputedStyle({
+          '--size': checkboxSizeSm,
+          padding: `${(parseInt(checkboxSizeSm) - checkboxIconSizeValue) / 2}px`,
+        });
+      });
+
+      it(`should have correct size when size = 'xs'`, () => {
+        spectator.setInput('size', 'xs');
+        spectator.detectChanges();
+
+        expect(ionCheckbox).toHaveComputedStyle({
+          '--size': checkboxSizeXs,
+          padding: `${(parseInt(checkboxSizeXs) - checkboxIconSizeValue) / 2}px`,
+        });
+      });
+
+      it(`should have correct size when size = 'sm'`, () => {
+        spectator.setInput('size', 'sm');
+        spectator.detectChanges();
+
+        expect(ionCheckbox).toHaveComputedStyle({
+          '--size': checkboxSizeSm,
+          padding: `${(parseInt(checkboxSizeSm) - checkboxIconSizeValue) / 2}px`,
+        });
+      });
+
+      it(`should have correct size when size = 'md'`, () => {
+        spectator.setInput('size', 'md');
+        spectator.detectChanges();
+
+        expect(ionCheckbox).toHaveComputedStyle({
+          '--size': checkboxSizeMd,
+          padding: `${(parseInt(checkboxSizeMd) - checkboxIconSizeValue) / 2}px`,
+        });
+      });
     });
 
     describe('when disabled', () => {
