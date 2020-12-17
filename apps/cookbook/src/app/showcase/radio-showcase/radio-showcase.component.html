@@ -51,10 +51,10 @@
 <h2>Custom radio template</h2>
 <p>
   If you need to customize the radio buttons you can supply a custom item template through the
-  <code>*kirbyListItemTemplate</code> directive. Start by wrapping each
-  <code>&lt;kirby-radio&gt;</code> in a <code>&lt;kirby-label&gt;</code> to ensure proper
-  accessibility and alignment of the radio button and its label - this also ensure the entire label
-  is clickable.
+  <code>*kirbyListItemTemplate</code> directive. Just remember to include a
+  <code>&lt;kirby-radio&gt;</code> inside your template with the <code>value</code> property set to
+  your data item and the <code>text</code> property set to the textual representation of your data
+  item.
 </p>
 
 <cookbook-example-viewer
@@ -110,10 +110,10 @@
 
 <h2>Properties</h2>
 <h3>Radio:</h3>
-<cookbook-showcase-properties [properties]="buttonProperties"></cookbook-showcase-properties>
+<cookbook-showcase-properties [properties]="radioProperties"></cookbook-showcase-properties>
 
 <h3>Radio Group:</h3>
-<cookbook-showcase-properties [properties]="groupProperties"></cookbook-showcase-properties>
+<cookbook-showcase-properties [properties]="radioGroupProperties"></cookbook-showcase-properties>
 
 <h2>Events</h2>
 <h3>Radio Group:</h3>
