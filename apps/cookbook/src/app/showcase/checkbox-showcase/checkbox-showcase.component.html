@@ -13,12 +13,12 @@
     <li>Attention Level 2: Use in a list of check boxes, where multiple choices can be selected</li>
   </ol>
 
-  <h2>Attention Level 1</h2>
+  <h3>Attention Level 1</h3>
   <cookbook-example-viewer [html]="checkboxConfirmExample.template">
     <cookbook-checkbox-confirm-example #checkboxConfirmExample></cookbook-checkbox-confirm-example>
   </cookbook-example-viewer>
 
-  <h2>Attention Level 2</h2>
+  <h3>Attention Level 2</h3>
   <cookbook-example-viewer [html]="checkboxDefaultExample.template">
     <cookbook-checkbox-default-example #checkboxDefaultExample></cookbook-checkbox-default-example>
   </cookbook-example-viewer>
@@ -28,11 +28,11 @@
     For more on using checkbox in an item, see
     <a routerLink="/home/showcase/item">item documentation</a>
   </p>
-  <cookbook-example-viewer [html]="checkboxListExample.template">
+  <cookbook-example-viewer
+    [html]="checkboxListExample.template"
+    [ts]="checkboxListExample.checkboxItemsCodeSnippet"
+  >
     <cookbook-checkbox-list-example #checkboxListExample></cookbook-checkbox-list-example>
-    <cookbook-code-viewer
-      [ts]="checkboxListExample.checkboxItemsCodeSnippet"
-    ></cookbook-code-viewer>
   </cookbook-example-viewer>
 
   <h2>States</h2>
