@@ -2,10 +2,13 @@
 
 $border-radius: 6px;
 $checkbox-icon-size: size('m');
-$checkbox-size-xs: size('l');
-$checkbox-size-sm: $fat-finger-size;
-$checkbox-size-md: size('xxxl');
-$checkbox-margin-right: size('xs');
+$checkbox-sizes: (
+  'xs': size('l'),
+  'sm': $fat-finger-size,
+  'md': size('xxxl'),
+);
+$spacing-to-label: size('xs');
+$spacing-to-edge: size('xs');
 
 :host {
   display: inline-block;
@@ -51,20 +54,18 @@ $checkbox-margin-right: size('xs');
   }
 
   ion-checkbox {
+    --size: #{$checkbox-icon-size};
     --checkmark-width: #{size('xxxs')};
     --background: #{get-color('white')};
     --border-width: 1px;
     --border-color: #{get-color('semi-dark')};
     --border-radius: #{$border-radius};
 
-    // Making clickable area bigger without making icon bigger
-    --size: #{$checkbox-size-sm};
-    --kirby-checkbox-padding: calc((var(--size) - #{$checkbox-icon-size}) / 2);
-    padding: var(--kirby-checkbox-padding);
-    box-sizing: border-box; // Ensure padding is not added to checkbox width/height
+    margin-left: $spacing-to-edge;
+    margin-right: $spacing-to-label;
 
     &::part(container) {
-      padding: size('xxxs');
+      padding: size('xxxs'); // Spacing between checkmark and container box
     }
 
     &:focus-within::part(container) {
@@ -86,33 +87,23 @@ $checkbox-margin-right: size('xs');
       display: inline-flex;
       align-items: center;
       vertical-align: top;
-      padding-right: size('s');
+      padding-right: $spacing-to-label; // Ensure same padding on right side of label
+      min-height: map-get($checkbox-sizes, 'sm');
+    }
+
+    @each $size, $height in $checkbox-sizes {
+      :host-context(.checkbox-#{$size}),
+      &.#{$size} {
+        .wrapper {
+          min-height: $height;
+        }
+      }
     }
 
     ion-checkbox {
       position: static;
-      margin-right: Max(calc(#{$checkbox-margin-right} - var(--kirby-checkbox-padding)), 0px);
-    }
-  }
-
-  :host-context(.checkbox-xs),
-  &.xs {
-    ion-checkbox {
-      --size: #{$checkbox-size-xs};
-    }
-  }
-
-  :host-context(.checkbox-sm),
-  &.sm {
-    ion-checkbox {
-      --size: #{$checkbox-size-sm};
-    }
-  }
-
-  :host-context(.checkbox-md),
-  &.md {
-    ion-checkbox {
-      --size: #{$checkbox-size-md};
+      flex-shrink: 0;
+      flex-grow: 0;
     }
   }
 }
@@ -121,12 +112,10 @@ $checkbox-margin-right: size('xs');
   z-index: z('default'); // Makes whole kirby-item clickable above item-inner.
 
   ion-checkbox {
-    --size: #{$checkbox-icon-size};
-    padding: 0;
+    margin: 0;
   }
 
   &[slot='start'] {
-    margin: 0;
-    margin-inline-end: size('s');
+    margin-inline-end: $spacing-to-label;
   }
 }
