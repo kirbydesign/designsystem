@@ -2,25 +2,15 @@ import { Component } from '@angular/core';
 
 const config = {
   selector: 'cookbook-checkbox-sizes-example',
-  template: `<kirby-checkbox size="xs" text="Extra small ('xs')"></kirby-checkbox>
-<kirby-checkbox size="sm" text="Small ('sm' - default)"></kirby-checkbox>
-<kirby-checkbox size="md" text="Medium ('md')"></kirby-checkbox>`,
+  template: `<kirby-checkbox size="xs" text="Extra Small"></kirby-checkbox>
+<kirby-checkbox size="sm" text="Small"></kirby-checkbox>
+<kirby-checkbox size="md" text="Medium (default) with a lot more text"></kirby-checkbox>`,
 };
 
 @Component({
   selector: config.selector,
   template: config.template,
-  styles: [
-    `
-      kirby-checkbox {
-        margin-bottom: 8px;
-      }
-
-      kirby-checkbox ::ng-deep ion-checkbox {
-        background-color: pink;
-      }
-    `,
-  ],
+  styleUrls: ['./sizes.scss'],
 })
 export class CheckboxSizesExampleComponent {
   template: string = config.template;
