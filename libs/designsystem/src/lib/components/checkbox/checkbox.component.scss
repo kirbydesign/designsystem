@@ -7,8 +7,8 @@ $checkbox-sizes: (
   'sm': $fat-finger-size,
   'md': size('xxxl'),
 );
+$spacing-to-edge: size('s');
 $spacing-to-label: size('xs');
-$spacing-to-edge: size('xs');
 
 :host {
   display: inline-block;
