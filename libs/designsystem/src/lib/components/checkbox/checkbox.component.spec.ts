@@ -4,13 +4,14 @@ import { IonCheckbox } from '@ionic/angular';
 import { CheckboxComponent } from './checkbox.component';
 import { DesignTokenHelper } from '../../helpers';
 
+const size = DesignTokenHelper.size;
 const getColor = DesignTokenHelper.getColor;
 const getTextColor = DesignTokenHelper.getTextColor;
 const fatFingerSize = DesignTokenHelper.fatFingerSize();
-const checkboxIconSizeValue = parseInt(DesignTokenHelper.size('m'));
-const checkboxSizeXs = DesignTokenHelper.size('l');
+const checkboxIconSize = size('m');
+const checkboxSizeXs = size('l');
 const checkboxSizeSm = fatFingerSize;
-const checkboxSizeMd = DesignTokenHelper.size('xxxl');
+const checkboxSizeMd = size('xxxl');
 
 describe('CheckboxComponent', () => {
   let spectator: Spectator<CheckboxComponent>;
@@ -22,7 +23,7 @@ describe('CheckboxComponent', () => {
   });
 
   beforeEach(() => {
-    spectator = createHost(`<kirby-checkbox></kirby-checkbox>`);
+    spectator = createHost(`<kirby-checkbox text="test"></kirby-checkbox>`);
     ionCheckbox = spectator.query('ion-checkbox');
   });
 
@@ -38,9 +39,17 @@ describe('CheckboxComponent', () => {
 
     it('should have correct icon styling', () => {
       expect(ionCheckbox).toHaveComputedStyle({
+        '--size': checkboxIconSize,
         '--checkmark-color': getColor('white'),
         '--background-checked': getColor('black'),
         '--border-color-checked': getColor('black'),
+      });
+    });
+
+    it('should have correct vertical spacing', () => {
+      expect(ionCheckbox).toHaveComputedStyle({
+        'margin-left': size('s'),
+        'margin-right': size('xs'),
       });
     });
 
@@ -78,9 +87,8 @@ describe('CheckboxComponent', () => {
 
     describe('with size', () => {
       it(`should have 'sm' size by default`, () => {
-        expect(ionCheckbox).toHaveComputedStyle({
-          '--size': checkboxSizeSm,
-          padding: `${(parseInt(checkboxSizeSm) - checkboxIconSizeValue) / 2}px`,
+        expect(spectator.element).toHaveComputedStyle({
+          height: checkboxSizeSm,
         });
       });
 
@@ -88,9 +96,8 @@ describe('CheckboxComponent', () => {
         spectator.setInput('size', 'xs');
         spectator.detectChanges();
 
-        expect(ionCheckbox).toHaveComputedStyle({
-          '--size': checkboxSizeXs,
-          padding: `${(parseInt(checkboxSizeXs) - checkboxIconSizeValue) / 2}px`,
+        expect(spectator.element).toHaveComputedStyle({
+          height: checkboxSizeXs,
         });
       });
 
@@ -98,9 +105,8 @@ describe('CheckboxComponent', () => {
         spectator.setInput('size', 'sm');
         spectator.detectChanges();
 
-        expect(ionCheckbox).toHaveComputedStyle({
-          '--size': checkboxSizeSm,
-          padding: `${(parseInt(checkboxSizeSm) - checkboxIconSizeValue) / 2}px`,
+        expect(spectator.element).toHaveComputedStyle({
+          height: checkboxSizeSm,
         });
       });
 
@@ -108,9 +114,8 @@ describe('CheckboxComponent', () => {
         spectator.setInput('size', 'md');
         spectator.detectChanges();
 
-        expect(ionCheckbox).toHaveComputedStyle({
-          '--size': checkboxSizeMd,
-          padding: `${(parseInt(checkboxSizeMd) - checkboxIconSizeValue) / 2}px`,
+        expect(spectator.element).toHaveComputedStyle({
+          height: checkboxSizeMd,
         });
       });
     });

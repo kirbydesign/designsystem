@@ -1,11 +1,12 @@
 import { SpectatorHost, createHostFactory } from '@ngneat/spectator';
 import { IonCheckbox, IonItem } from '@ionic/angular';
+import { MockComponents } from 'ng-mocks';
 
 import { DesignTokenHelper } from '../../helpers';
 import { ItemComponent } from '../item';
 import { CheckboxComponent } from './checkbox.component';
 
-const checkboxIconSize = DesignTokenHelper.size('m');
+const size = DesignTokenHelper.size;
 
 describe('CheckboxComponent in Item', () => {
   let spectator: SpectatorHost<CheckboxComponent>;
@@ -13,26 +14,44 @@ describe('CheckboxComponent in Item', () => {
 
   const createHost = createHostFactory({
     component: CheckboxComponent,
-    declarations: [ItemComponent, IonItem, IonCheckbox],
+    declarations: MockComponents(ItemComponent, IonItem, IonCheckbox),
   });
 
-  beforeEach(() => {
-    spectator = createHost(`<kirby-item>
+  describe('by default', () => {
+    beforeEach(() => {
+      spectator = createHost(`
+    <kirby-item>
       <kirby-checkbox></kirby-checkbox>
     </kirby-item>`);
-    ionCheckbox = spectator.query('ion-checkbox');
-  });
+      ionCheckbox = spectator.query('ion-checkbox');
+    });
 
-  it(`should be sized to icon size`, () => {
-    expect(ionCheckbox).toHaveComputedStyle({
-      '--size': checkboxIconSize,
-      padding: '0px',
+    it(`icon should not have any margin`, () => {
+      expect(ionCheckbox).toHaveComputedStyle({
+        margin: '0px',
+      });
+    });
+
+    it(`should have z-index`, () => {
+      expect(spectator.element).toHaveComputedStyle({
+        'z-index': '1',
+      });
     });
   });
 
-  it(`should have z-index`, () => {
-    expect(spectator.element).toHaveComputedStyle({
-      'z-index': '1',
+  describe('slotted start', () => {
+    beforeEach(() => {
+      spectator = createHost(`
+    <kirby-item>
+      <kirby-checkbox slot="start"></kirby-checkbox>
+    </kirby-item>`);
+      ionCheckbox = spectator.query('ion-checkbox');
+    });
+
+    it(`should have correct vertical spacing`, () => {
+      expect(spectator.element).toHaveComputedStyle({
+        'margin-inline-end': size('xs'),
+      });
     });
   });
 });
