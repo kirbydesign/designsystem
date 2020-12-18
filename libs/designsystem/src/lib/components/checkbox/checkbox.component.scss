@@ -88,7 +88,7 @@ $spacing-to-label: size('xs');
       align-items: center;
       vertical-align: top;
       padding-right: $spacing-to-label; // Ensure same padding on right side of label
-      min-height: map-get($checkbox-sizes, 'sm');
+      min-height: map-get($checkbox-sizes, 'md');
     }
 
     @each $size, $height in $checkbox-sizes {

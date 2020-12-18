@@ -88,7 +88,7 @@ describe('CheckboxComponent', () => {
     describe('with size', () => {
       it(`should have 'sm' size by default`, () => {
         expect(spectator.element).toHaveComputedStyle({
-          height: checkboxSizeSm,
+          height: checkboxSizeMd,
         });
       });
 
