@@ -12,12 +12,18 @@ const config = {
     itemTextProperty="title"
   ></kirby-dropdown>
 </form>
-<fieldset>
+<fieldset class="checkbox-xs">
   <legend>Configuration</legend>
-  <kirby-checkbox [checked]="canSelectFavorite" (checkedChange)="toggleEnabled($event)"></kirby-checkbox>
-  <label (click)="toggleEnabled(!canSelectFavorite)">Form field enabled</label><br />
-  <kirby-checkbox [checked]="favoriteRequired" (checkedChange)="toggleRequired($event)"></kirby-checkbox>
-  <label (click)="toggleRequired(!favoriteRequired)">Form field required</label>
+  <kirby-checkbox
+    [checked]="canSelectFavorite"
+    (checkedChange)="toggleEnabled($event)"
+    text="Form field enabled">
+  </kirby-checkbox>
+  <kirby-checkbox
+    [checked]="favoriteRequired"
+    (checkedChange)="toggleRequired($event)"
+    text="Form field required">
+  </kirby-checkbox>
   <p class="selection">
     form.value: {{ form.value | json }}<br />
     form.favoriteFood:
@@ -45,14 +51,6 @@ toggleRequired(required: boolean) {
   favoriteFoodControl.updateValueAndValidity();
 }`,
   styles: [
-    `label {
-      cursor: pointer;
-      font-size: 14px;
-      font-weight: 300;
-      line-height: 20px;
-      padding-left: 4px;
-      transform: translateY(-4px);
-    }`,
     `.selection {
       margin: 0;
       font-size: 12px;

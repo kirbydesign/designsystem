@@ -12,6 +12,14 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
+  styles: [
+    `
+      :host {
+        display: flex;
+        flex-wrap: wrap;
+      }
+    `,
+  ],
 })
 export class CheckboxStatesExampleComponent {
   template: string = config.template;

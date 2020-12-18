@@ -2,6 +2,13 @@
 
 $border-radius: 6px;
 $checkbox-icon-size: size('m');
+$checkbox-sizes: (
+  'xs': size('l'),
+  'sm': $fat-finger-size,
+  'md': size('xxxl'),
+);
+$spacing-to-edge: size('s');
+$spacing-to-label: size('xs');
 
 :host {
   display: inline-block;
@@ -47,18 +54,18 @@ $checkbox-icon-size: size('m');
   }
 
   ion-checkbox {
+    --size: #{$checkbox-icon-size};
     --checkmark-width: #{size('xxxs')};
     --background: #{get-color('white')};
     --border-width: 1px;
     --border-color: #{get-color('semi-dark')};
     --border-radius: #{$border-radius};
 
-    // Making clickable area bigger without making icon bigger
-    --size: #{$fat-finger-size};
-    padding: #{($fat-finger-size - $checkbox-icon-size) / 2};
+    margin-left: $spacing-to-edge;
+    margin-right: $spacing-to-label;
 
     &::part(container) {
-      padding: size('xxxs');
+      padding: size('xxxs'); // Spacing between checkmark and container box
     }
 
     &:focus-within::part(container) {
@@ -75,16 +82,28 @@ $checkbox-icon-size: size('m');
   &.has-label {
     display: block;
 
-    div {
+    .wrapper {
       position: relative;
       display: inline-flex;
       align-items: center;
       vertical-align: top;
-      padding-right: size('s');
+      padding-right: $spacing-to-label; // Ensure same padding on right side of label
+      min-height: map-get($checkbox-sizes, 'md');
     }
+
+    @each $size, $height in $checkbox-sizes {
+      :host-context(.checkbox-#{$size}),
+      &.#{$size} {
+        .wrapper {
+          min-height: $height;
+        }
+      }
+    }
+
     ion-checkbox {
       position: static;
-      margin-right: size('xxxs');
+      flex-shrink: 0;
+      flex-grow: 0;
     }
   }
 }
@@ -93,12 +112,10 @@ $checkbox-icon-size: size('m');
   z-index: z('default'); // Makes whole kirby-item clickable above item-inner.
 
   ion-checkbox {
-    --size: #{$checkbox-icon-size};
-    padding: 0;
+    margin: 0;
   }
 
   &[slot='start'] {
-    margin: 0;
-    margin-inline-end: size('s');
+    margin-inline-end: $spacing-to-label;
   }
 }
