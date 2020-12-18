@@ -81,13 +81,14 @@ $checkbox-margin-right: size('xs');
   &.has-label {
     display: block;
 
-    div {
+    .wrapper {
       position: relative;
       display: inline-flex;
       align-items: center;
       vertical-align: top;
       padding-right: size('s');
     }
+
     ion-checkbox {
       position: static;
       margin-right: Max(calc(#{$checkbox-margin-right} - var(--kirby-checkbox-padding)), 0px);
