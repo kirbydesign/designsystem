@@ -26,6 +26,7 @@ describe('TextLinkComponent integrationt test', () => {
       expected_font: string;
       expected_padding_right: string;
       expected_padding_left: string;
+      expected_line_height: string;
     }
     const testCases: TestCase[] = [
       {
@@ -34,6 +35,7 @@ describe('TextLinkComponent integrationt test', () => {
         expected_font: 'm',
         expected_padding_left: 'xxxs',
         expected_padding_right: 's',
+        expected_line_height: 'n',
       },
       {
         name: 'sm',
@@ -41,6 +43,7 @@ describe('TextLinkComponent integrationt test', () => {
         expected_font: 'm',
         expected_padding_left: 'xxxs',
         expected_padding_right: 's',
+        expected_line_height: 's',
       },
       {
         name: 'xs',
@@ -48,6 +51,7 @@ describe('TextLinkComponent integrationt test', () => {
         expected_font: 's',
         expected_padding_left: 'xxxxs',
         expected_padding_right: 's',
+        expected_line_height: 'xs',
       },
       {
         name: 'Empty',
@@ -55,6 +59,7 @@ describe('TextLinkComponent integrationt test', () => {
         expected_font: 'm',
         expected_padding_left: 'xxxs',
         expected_padding_right: 's',
+        expected_line_height: 'n',
       },
     ];
     testCases.forEach((tc) => {
@@ -64,36 +69,26 @@ describe('TextLinkComponent integrationt test', () => {
         );
         const icon = spectator.queryHost<HTMLElement>('kirby-icon');
         expect(icon).toHaveComputedStyle({
-          'font-size': size(tc.expected_font),
+          'font-size': fontSize(tc.expected_font),
           'padding-left': size(tc.expected_padding_left),
           'padding-right': size(tc.expected_padding_right),
+          'line-height': lineHeight(tc.expected_line_height),
         });
       });
-    });
-  });
-
-  describe('Test TextLink sizes and line-height', () => {
-    interface TestCase {
-      name: string;
-      value: string;
-      expected: string;
-    }
-    const testCases: TestCase[] = [
-      { name: 'md', value: 'md', expected: 'n' },
-      { name: 'sm', value: 'sm', expected: 's' },
-      { name: 'xs', value: 'xs', expected: 'xs' },
-
-      { name: 'Empty', value: '', expected: 'n' },
-    ];
-    testCases.forEach((tc) => {
-      it('should render correct size & line-height, when size is ' + tc.name, () => {
-        spectator = createHost(`<kirby-text-link size='${tc.value}' text='Some Link' link='/'>`);
-        const link = spectator.queryHost<HTMLElement>('a');
-        expect(link).toHaveComputedStyle({
-          'font-size': fontSize(tc.expected),
-          'line-height': lineHeight(tc.expected),
+      it('should render correct size & lineHeight, when size is ' + tc.name, () => {
+        spectator = createHost(
+          `<kirby-text-link size='${tc.value}' text='Some Link' link='https://angular.io/api/router/RouterLink'></kirby-text-link>`
+        );
+        const icon = spectator.queryHost<HTMLElement>('kirby-icon');
+        expect(icon).toHaveComputedStyle({
+          'font-size': fontSize(tc.expected_font),
+          'line-height': lineHeight(tc.expected_line_height),
         });
       });
     });
   });
 });
+/*  expect(ionIcon).toHaveComputedStyle({ width: size('m'), height: size('m')
+
+ const avatar = spectator.queryHost<HTMLElement>('.avatar');
+      expect(avatar).toHaveComputedStyle({ width: avatarSize('m'), height: avatarSize('m') }); */

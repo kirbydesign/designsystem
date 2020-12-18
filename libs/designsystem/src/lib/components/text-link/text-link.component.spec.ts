@@ -18,30 +18,30 @@ describe('TextLinkComponent', () => {
   });
 
   it('should create', () => {
-    spectator = createHost(`<kirby-text-link text='Some Link' link='/'>`);
+    spectator = createHost(`<kirby-text-link text='Some Link' link='/'></kirby-text-link>`);
     expect(spectator.component).toBeTruthy();
   });
 
   it('should render with correct color', () => {
-    spectator = createHost(`<kirby-text-link text='Some Link' link='/'>`);
-    const link = spectator.queryHost<HTMLElement>('a');
-    expect(link).toHaveComputedStyle({ color: getColor('black') });
+    spectator = createHost(`<kirby-text-link text='Some Link' link='/'></kirby-text-link>`);
+    const anchor = spectator.queryHost<HTMLAnchorElement>('a');
+    expect(anchor).toHaveComputedStyle({ color: getColor('black') });
   });
 
   it('should render with an underline', () => {
-    spectator = createHost(`<kirby-text-link text='Some Link' link='/'>`);
-    const link = spectator.queryHost<HTMLElement>('a');
-    expect(link).toHaveComputedStyle({ 'text-decoration-line': 'underline' });
+    spectator = createHost(`<kirby-text-link text='Some Link' link='/'></kirby-text-link>`);
+    const anchor = spectator.queryHost<HTMLAnchorElement>('a');
+    expect(anchor).toHaveComputedStyle({ 'text-decoration-line': 'underline' });
   });
 
   it('should have a pointer as the cursor', () => {
-    spectator = createHost(`<kirby-text-link text='Some Link' link='/'>`);
+    spectator = createHost(`<kirby-text-link text='Some Link' link='/'></kirby-text-link>`);
 
-    const link = spectator.hostElement.getElementsByTagName('kirby-text-link');
-    expect(link[0]).toHaveComputedStyle({ cursor: 'pointer' });
+    const anchor = spectator.element;
+    expect(anchor[0]).toHaveComputedStyle({ cursor: 'pointer' });
   });
 
-  describe('Test TextLink with icon', () => {
+  describe('external links', () => {
     it('should render a text link with a icon', () => {
       spectator = createHost(
         `<kirby-text-link  text='Some Link' link='https://angular.io/api/router/RouterLink'></kirby-text-link>`
@@ -55,8 +55,8 @@ describe('TextLinkComponent', () => {
       );
       const icon = spectator.queryHost<HTMLElement>('kirby-icon');
 
-      const IconName = icon.getAttribute('name');
-      expect(IconName).toBe('link');
+      const iconName = icon.getAttribute('name');
+      expect(iconName).toBe('link');
     });
 
     it('should render the icon to the right from the text', () => {

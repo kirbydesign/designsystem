@@ -1,5 +1,5 @@
 <!-- The Routerlink has problems with external links -->
-<ng-template *ngIf="!isExternal(); else externalLinkTemplate">
+<ng-template [ngIf]="isExternal()" [ngIfElse]="externalLinkTemplate">
   <a [routerLink]="link">{{ text }}</a>
 </ng-template>
 <ng-template #externalLinkTemplate>

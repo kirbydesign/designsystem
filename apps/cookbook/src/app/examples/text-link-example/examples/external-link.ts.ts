@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 const config = {
   selector: 'cookbook-text-link-example-external',
-  template: `
+  template: `<kirby-text-link size="xs" link="https://angular.io/api/router/RouterLink" text="extra small"></kirby-text-link>
 <kirby-text-link size="sm" link="https://angular.io/api/router/RouterLink" text="small"></kirby-text-link>
-<kirby-text-link size="xs" link="https://angular.io/api/router/RouterLink" text="extra small"></kirby-text-link>
-<kirby-text-link link="https://angular.io/api/router/RouterLink" text="medium"></kirby-text-link>
+<kirby-text-link link="https://angular.io/api/router/RouterLink" text="medium (default)"></kirby-text-link>
 `,
 };
 
