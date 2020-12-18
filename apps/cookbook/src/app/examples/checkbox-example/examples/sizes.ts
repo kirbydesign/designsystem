@@ -4,7 +4,7 @@ const config = {
   selector: 'cookbook-checkbox-sizes-example',
   template: `<kirby-checkbox size="xs" text="Extra Small"></kirby-checkbox>
 <kirby-checkbox size="sm" text="Small"></kirby-checkbox>
-<kirby-checkbox size="md" text="Medium (default) with a lot more text"></kirby-checkbox>`,
+<kirby-checkbox size="md" text="Medium (default)"></kirby-checkbox>`,
 };
 
 @Component({
