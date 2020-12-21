@@ -6,7 +6,6 @@ import { ModalConfig } from '@kirbydesign/designsystem';
   selector: 'cookbook-modal-route-page-1-example',
   template: `
     <kirby-page-title>Modal Page 1/3</kirby-page-title>
-
     <h4>The standard Lorem Ipsum passage, used since the 1500s</h4>
     <p>
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
@@ -17,8 +16,7 @@ import { ModalConfig } from '@kirbydesign/designsystem';
     </p>
     <button kirby-button (click)="toggleFooter()">Toggle footer</button>
 
-    <kirby-inline-footer>Inline footer content</kirby-inline-footer>
-
+    <kirby-inline-footer style="background-color: lightpink">Inline Footer</kirby-inline-footer>
     <kirby-modal-footer *ngIf="showFooter">
       <button kirby-button class="nav" routerLink="../page2">
         Next
@@ -28,7 +26,7 @@ import { ModalConfig } from '@kirbydesign/designsystem';
   `,
   styles: [
     'kirby-modal-footer { --kirby-modal-footer-justify-content: flex-end; }',
-    'h4 { margin-top: 24px; } ',
+    // 'h4 { margin-top: 24px; } ',
   ],
 })
 export class ModalRoutePage1ExampleComponent {

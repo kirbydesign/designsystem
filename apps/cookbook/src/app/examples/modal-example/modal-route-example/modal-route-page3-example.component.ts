@@ -6,16 +6,13 @@ import { Modal, ModalController } from '@kirbydesign/designsystem';
   selector: 'cookbook-modal-route-page-3-example',
   template: `
     <kirby-page-title>Modal Page 3/3</kirby-page-title>
-
     <h4>Section 1.10.32 of "de Finibus Bonorum et Malorum", written by Cicero in 45 BC</h4>
     <p>
       "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
       laudantium "
     </p>
     <button kirby-button (click)="toggleFooter()">Toggle footer</button>
-
-    <kirby-inline-footer>Inline footer content</kirby-inline-footer>
-
+    <kirby-inline-footer style="background-color: lightpink">Inline Footer</kirby-inline-footer>
     <kirby-modal-footer *ngIf="showFooter">
       <button kirby-button attentionLevel="3" (click)="navigateToPreviousModal()">
         <kirby-icon name="arrow-back"></kirby-icon>

@@ -190,41 +190,53 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   private checkForEmbeddedElements() {
     this.moveEmbeddedElements();
     this.observeEmbeddedElements();
-    setTimeout(() => this.positionEmbeddedElements());
+    this.positionInlineFooter();
   }
 
   private observeHeaderResize() {
     this.resizeObserverService.observe(this.ionHeaderElement.nativeElement, (entry) => {
       const [property, pixelValue] = ['--header-height', `${entry.contentRect.height}px`];
       this.setCssVar(this.elementRef.nativeElement, property, pixelValue);
+      this.positionInlineFooter();
     });
   }
 
-  private positionEmbeddedElements() {
-    const inlineFooterComponent = this.elementRef.nativeElement.querySelector<HTMLElement>(
-      'kirby-inline-footer'
-    );
-    if (inlineFooterComponent === null) return;
-    const ionContent = inlineFooterComponent.parentElement.parentElement;
-    const ionContentHeight = ionContent.offsetHeight;
+  private positionInlineFooter() {
+    setTimeout(() => this.setInlineFooterPosition(), 100);
+  }
 
-    const page = inlineFooterComponent.parentElement;
-    const pageHeight = page.clientHeight;
-    if (ionContent.clientHeight < page.clientHeight) {
-      this.setCssVar(inlineFooterComponent, '--background-color', `purple`); // WIP.. skip this line
-      return;
-    }
-    const inlineFooterHeight = inlineFooterComponent.firstElementChild.clientHeight;
-    const padding = ionContentHeight - pageHeight - inlineFooterHeight;
-    if (padding <= 0) {
-      // WIP.. skip this block and line
-      this.setCssVar(inlineFooterComponent, '--background-color', `lightgreen`);
-    } else if (padding > 0) {
-      this.setCssVar(inlineFooterComponent, '--background-color', `red`);
-      this.setCssVar(inlineFooterComponent, '--position', `fixed`);
-      this.setCssVar(inlineFooterComponent, '--width', `100%`);
-      this.setCssVar(inlineFooterComponent, '--left', `0`);
-      this.setCssVar(inlineFooterComponent, '--bottom', `${this.modalFooterHeight}px`);
+  private setInlineFooterPosition() {
+    const rootElement = this.getEmbeddedComponentElement() as HTMLElement;
+    const inlineFooter = rootElement.querySelector<HTMLElement>('kirby-inline-footer');
+    if (inlineFooter !== null) {
+      const ionContentHeight = this.ionContentElement.nativeElement.offsetHeight;
+      this.ionContent.getScrollElement().then((scrollElement) => {
+        const scrollElementHeight = scrollElement.offsetHeight;
+        let availableFooterSpace = ionContentHeight - scrollElementHeight;
+        console.log('available footer space:', availableFooterSpace);
+
+        if (availableFooterSpace > 0) {
+          this.setCssVar(inlineFooter, '--margin-top', `${availableFooterSpace}px`);
+        } else {
+          const page = inlineFooter.parentElement;
+          const pageHeight = page.offsetHeight;
+
+          availableFooterSpace = scrollElementHeight - pageHeight - inlineFooter.offsetHeight;
+
+          console.log(
+            'calculate available footer space: ',
+            scrollElementHeight,
+            scrollElement.clientHeight,
+            pageHeight,
+            inlineFooter.offsetHeight,
+            availableFooterSpace
+          );
+          if (availableFooterSpace > 0) {
+            this.setCssVar(inlineFooter, '--margin-top', `${availableFooterSpace}px`);
+          }
+        }
+        console.log('exit');
+      });
     }
   }
 
@@ -457,25 +469,13 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     return this.elementRef.nativeElement.querySelector<HTMLElement>('kirby-modal-footer');
   }
 
-  private modalFooterHeight = 0;
-
   private moveChild(child: Element, newParent: Element) {
     this.renderer.removeChild(child.parentElement, child);
     this.renderer.appendChild(newParent, child);
     if (child.tagName === 'KIRBY-MODAL-FOOTER') {
       this.resizeObserverService.observe(child, (entry) => {
-        this.modalFooterHeight = Math.floor(entry.contentRect.height);
-        const [property, pixelValue] = ['--footer-height', `${this.modalFooterHeight}px`];
-        this.setCssVar(this.elementRef.nativeElement, property, pixelValue);
-      });
-    }
-  }
-
-  private positionInlineFooter(child: Element) {
-    if (child.tagName === 'KIRBY-INLINE-FOOTER') {
-      this.resizeObserverService.observe(child, (entry) => {
         const [property, pixelValue] = [
-          '--inline-height',
+          '--footer-height',
           `${Math.floor(entry.contentRect.height)}px`,
         ];
         this.setCssVar(this.elementRef.nativeElement, property, pixelValue);

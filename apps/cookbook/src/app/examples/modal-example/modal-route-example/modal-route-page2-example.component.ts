@@ -19,8 +19,7 @@ import { Modal, ModalController } from '@kirbydesign/designsystem';
     </p>
     <button kirby-button (click)="toggleFooter()">Toggle footer</button>
 
-    <kirby-inline-footer>Inline footer content</kirby-inline-footer>
-
+    <kirby-inline-footer style="background-color: lightpink">Inline Footer</kirby-inline-footer>
     <kirby-modal-footer *ngIf="showFooter">
       <button kirby-button attentionLevel="3" (click)="navigateToPreviousModal()">
         <kirby-icon name="arrow-back"></kirby-icon>
@@ -32,7 +31,7 @@ import { Modal, ModalController } from '@kirbydesign/designsystem';
     </kirby-modal-footer>
   `,
   styles: [
-    'h4 { margin-top: 24px; } ',
+    //    'h4 { margin-top: 24px; } ',
     'kirby-modal-footer { --kirby-modal-footer-justify-content: space-between; }',
   ],
 })

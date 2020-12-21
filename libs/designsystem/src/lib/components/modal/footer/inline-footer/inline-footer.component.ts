@@ -2,7 +2,15 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'kirby-inline-footer',
-  templateUrl: './inline-footer.component.html',
-  styleUrls: ['./inline-footer.component.scss'],
+  template: '<ng-content></ng-content>',
+  styles: [
+    `
+      :host {
+        display: block;
+        margin-top: var(--margin-top, 0px);
+        padding: 8px 16px;
+      }
+    `,
+  ],
 })
 export class InlineFooterComponent {}
