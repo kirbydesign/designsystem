@@ -8,6 +8,8 @@ import { InfiniteScrollDirective } from './components/list/directives/infinite-s
 import { ModalWrapperComponent } from './components/modal/modal-wrapper/modal-wrapper.component';
 import { ModalCompactWrapperComponent } from './components/modal/modal-wrapper/compact/modal-compact-wrapper.component';
 import { ModalFooterComponent } from './components/modal/footer/modal-footer.component';
+import { InlineFooterComponent } from './components/modal/footer/inline-footer/inline-footer.component';
+
 import { ModalRouterLinkDirective } from './directives/modal-router-link/modal-router-link.directive';
 import { KeyHandlerDirective } from './directives/key-handler/key-handler.directive';
 import { FullscreenLoadingOverlayComponent } from './components/loading-overlay/fullscreen-loading-overlay/fullscreen-loading-overlay.component';
@@ -80,7 +82,8 @@ import { IconRegistryService } from './components/icon/icon-registry.service';
 import { WindowRef } from './types/window-ref';
 import { ToggleButtonModule } from './components/toggle-button/toggle-button.module';
 import { SlideDirective, SlidesComponent } from './components/slides/slides.component';
-import { InlineFooterComponent } from './components';
+import { AccordionDirective } from './components/accordion/accordion.directive';
+import { AccordionItemComponent } from './components/accordion/accordion-item.component';
 
 const exportedDeclarations = [
   CardComponent,
@@ -132,6 +135,8 @@ const exportedDeclarations = [
   FlagComponent,
   SlidesComponent,
   SlideDirective,
+  AccordionDirective,
+  AccordionItemComponent,
 ];
 
 const declarations = [

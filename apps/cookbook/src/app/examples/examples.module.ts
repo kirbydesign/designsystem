@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
-import { KirbyModule } from '@kirbydesign/designsystem';
+import { IconRegistryService, KirbyModule } from '@kirbydesign/designsystem';
 
 import { COMPONENT_DECLARATIONS, PROVIDER_DECLARATIONS } from './examples.common';
 import { CardExampleComponent } from './card-example/card-example.component';
@@ -22,6 +22,8 @@ import { ProgressCircleExampleModule } from './progress-circle-example/progress-
 import { AvatarExampleModule } from './avatar-example/avatar-example.module';
 import { FlagExampleModule } from './flag-example/flag-example.module';
 import { ToggleButtonExampleModule } from './toggle-button-example/toggle-button-example.module';
+import { AccordionExampleModule } from './accordion-example/accordion-example.module';
+import { CheckboxExampleModule } from './checkbox-example/checkbox-example.module';
 
 const IMPORTS = [
   FormFieldExamplesModule,
@@ -34,13 +36,14 @@ const IMPORTS = [
   AvatarExampleModule,
   FlagExampleModule,
   ToggleButtonExampleModule,
+  AccordionExampleModule,
+  CheckboxExampleModule,
 ];
 
 @NgModule({
   imports: [CommonModule, RouterModule, KirbyModule, ...IMPORTS],
   declarations: COMPONENT_DECLARATIONS,
   exports: [...COMPONENT_DECLARATIONS, ...IMPORTS],
-  providers: [PROVIDER_DECLARATIONS],
   entryComponents: [
     CardExampleComponent,
     FirstEmbeddedModalExampleComponent,
@@ -51,4 +54,18 @@ const IMPORTS = [
     ModalRoutePage3ExampleComponent,
   ],
 })
-export class ExamplesModule {}
+export class ExamplesModule {
+  constructor(iconRegistryService: IconRegistryService) {
+    // Example of "custom" icons:
+    iconRegistryService.addIcons([
+      {
+        name: 'football',
+        svg: 'assets/icons/football.svg',
+      },
+      {
+        name: 'umbrella',
+        svg: 'assets/icons/umbrella.svg',
+      },
+    ]);
+  }
+}

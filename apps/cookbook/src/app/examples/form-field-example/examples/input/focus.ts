@@ -4,13 +4,11 @@ import { FormFieldComponent } from '@kirbydesign/designsystem';
 
 const config = {
   selector: 'cookbook-form-field-focus-example',
-  template: `<label (click)="inputEnabled = !inputEnabled">
-  <kirby-checkbox
-    [checked]="inputEnabled"
-    (checkedChange)="onToggleInput($event)">
-  </kirby-checkbox>
-  Enable input
-</label>
+  template: `<kirby-checkbox
+  [checked]="inputEnabled"
+  (checkedChange)="onToggleInput($event)"
+  text="Enable input">
+</kirby-checkbox>
 <kirby-form-field #formfield>
   <input kirby-input [disabled]="!inputEnabled" placeholder="Enable to focus (+scroll into view on device)" />
 </kirby-form-field>`,
@@ -22,6 +20,7 @@ export class MyComponent {
   inputEnabled = false;
 
   onToggleInput(enable: boolean) {
+    this.inputEnabled = enable;
     if (!enable) return;
     this.formfield.focus();
   }
@@ -49,7 +48,8 @@ export class FormFieldFocusExampleComponent {
   inputEnabled = false;
 
   onToggleInput(enable: boolean) {
+    this.inputEnabled = enable;
     if (!enable) return;
-    this.formfield.focus();
+    setTimeout(() => this.formfield.focus());
   }
 }

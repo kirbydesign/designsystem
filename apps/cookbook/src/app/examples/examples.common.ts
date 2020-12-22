@@ -58,6 +58,7 @@ import { ProgressCircleExampleComponent } from './progress-circle-example/progre
 import { FlagExampleComponent } from './flag-example/flag-example.component';
 import { SlidesExampleComponent } from './slides-example/slides-example.component';
 import { CookbookExampleCardContentComponent } from './slides-example/example-card-content';
+import { AccordionExampleComponent } from './accordion-example/accordion-example.component';
 
 // Example of "custom" icons
 export const iconSettings: IconSettings = {
@@ -134,6 +135,7 @@ export const COMPONENT_DECLARATIONS: any[] = [
   FlagExampleComponent,
   SlidesExampleComponent,
   CookbookExampleCardContentComponent,
+  AccordionExampleComponent,
 ];
 
 // Configure custom icons (used by example to show the usage of custom icons)
