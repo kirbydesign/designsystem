@@ -202,7 +202,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   }
 
   private positionInlineFooter() {
-    setTimeout(() => this.setInlineFooterPosition(), 100);
+    setTimeout(() => this.setInlineFooterPosition(), 50);
   }
 
   private setInlineFooterPosition() {
@@ -213,29 +213,17 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
       this.ionContent.getScrollElement().then((scrollElement) => {
         const scrollElementHeight = scrollElement.offsetHeight;
         let availableFooterSpace = ionContentHeight - scrollElementHeight;
-        console.log('available footer space:', availableFooterSpace);
 
         if (availableFooterSpace > 0) {
           this.setCssVar(inlineFooter, '--margin-top', `${availableFooterSpace}px`);
         } else {
           const page = inlineFooter.parentElement;
           const pageHeight = page.offsetHeight;
-
           availableFooterSpace = scrollElementHeight - pageHeight - inlineFooter.offsetHeight;
-
-          console.log(
-            'calculate available footer space: ',
-            scrollElementHeight,
-            scrollElement.clientHeight,
-            pageHeight,
-            inlineFooter.offsetHeight,
-            availableFooterSpace
-          );
           if (availableFooterSpace > 0) {
             this.setCssVar(inlineFooter, '--margin-top', `${availableFooterSpace}px`);
           }
         }
-        console.log('exit');
       });
     }
   }
