@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { FormatWidth, getLocaleDateFormat, NumberSymbol } from '@angular/common';
+
+import { LocaleAnalyser } from '../localeAnalyser';
 
 @Injectable({
   providedIn: 'root',
@@ -7,22 +8,9 @@ import { FormatWidth, getLocaleDateFormat, NumberSymbol } from '@angular/common'
 export class DateKeyRules {
   public digitsPattern = /^[0-9]+$/g;
   public separatorPattern: RegExp;
-  public separator: string;
 
-  constructor(private locale: string) {
-    const localeFormat = getLocaleDateFormat(this.locale, FormatWidth.Short);
-
-    const d = localeFormat.indexOf('dd');
-    const m = localeFormat.indexOf('MM');
-    const y = localeFormat.indexOf('y');
-    if (y > 0) {
-      this.separator = localeFormat[y - 1];
-    } else if (d > 0) {
-      this.separator = localeFormat[d - 1];
-    } else if (m > 0) {
-      this.separator = localeFormat[m - 1];
-    }
-    this.separatorPattern = new RegExp('[' + this.separator + ']+$', 'g');
+  constructor(localeConfig: LocaleAnalyser) {
+    this.separatorPattern = new RegExp('[' + localeConfig.separator + ']+$', 'g');
   }
 
   public isMetaKeyAllowed(key: string): boolean {

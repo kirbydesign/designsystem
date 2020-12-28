@@ -1,11 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { DatePipe } from '@angular/common';
 
-import { DateKeyAnalyzer } from './date-key.analyzer';
-
 describe('DateInputKeyDirective', () => {
-  //  let directive: DateInputDirective;
-  let analyzer: DateKeyAnalyzer;
   let regexp: RegExp;
 
   beforeEach(() => {
@@ -20,12 +16,12 @@ describe('DateInputKeyDirective', () => {
         DatePipe,
       ],
     });
-    analyzer = new DateKeyAnalyzer('da', TestBed.inject(DatePipe));
+
     // regexp = analyzer.createValidationPattern();
   });
 
   it('should create an instance', () => {
-    expect(analyzer).toBeTruthy();
+    // expect(analyzer).toBeTruthy();
     expect(regexp).toBeTruthy();
   });
 

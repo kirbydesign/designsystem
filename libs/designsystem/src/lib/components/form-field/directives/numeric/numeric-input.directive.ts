@@ -85,8 +85,6 @@ export class NumericInputDirective implements OnInit, OnDestroy {
         map((value: string) => this.analyzer.analyse(this.cursorPosition, value, this.lastValue))
       )
       .subscribe((value: string) => {
-        console.log('updating value', value);
-        console.log('lastvalue value', this.lastValue);
         this.cursorPosition = this.analyzer.cursorPosition;
         this.updateCursorPosition();
         this.updateValue(value);
@@ -109,8 +107,7 @@ export class NumericInputDirective implements OnInit, OnDestroy {
     if (value === undefined || value === null) {
       return;
     }
-    console.log('updateValue value', value);
-    this.ngControl.control.setValue(value, {
+   this.ngControl.control.setValue(value, {
       emitEvent: false,
       onlySelf: true,
       emitModelToViewChange: true,

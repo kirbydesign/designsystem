@@ -1,9 +1,7 @@
 import { Directive, ElementRef, Inject, LOCALE_ID, OnDestroy, OnInit, Self } from '@angular/core';
-import { DatePipe } from '@angular/common';
 import { NgControl } from '@angular/forms';
 import { map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-
 
 import { DateInputAnalyzer } from './date-input.analyzer';
 
@@ -15,8 +13,7 @@ import { DateInputAnalyzer } from './date-input.analyzer';
 export class DateInputDirective implements OnInit, OnDestroy {
   constructor(
     @Self() public ngControl: NgControl,
-    @Inject(LOCALE_ID) private locale: string,
-    private datePipe: DatePipe,
+    private analyzer: DateInputAnalyzer,
     @Self() public hostElement: ElementRef<HTMLInputElement>
   ) {
     if (!hostElement.nativeElement.setSelectionRange) {
@@ -24,13 +21,11 @@ export class DateInputDirective implements OnInit, OnDestroy {
     }
   }
 
-  private analyzer: DateInputAnalyzer;
   private destroy$ = new Subject();
   private lastValue = '';
   private cursorPosition = -1;
 
   ngOnInit(): any {
-    this.analyzer = new DateInputAnalyzer(this.locale, this.datePipe);
     // @ts-ignore
     this.ngControl.valueChanges
       .pipe(
@@ -39,8 +34,6 @@ export class DateInputDirective implements OnInit, OnDestroy {
         map((value: string) => this.analyzer.analyse(this.cursorPosition, value, this.lastValue))
       )
       .subscribe((value: string) => {
-        console.log('updating value', value);
-        console.log('lastvalue value', this.lastValue);
         this.cursorPosition = this.analyzer.cursorPosition;
         this.updateCursorPosition();
         this.updateValue(value);

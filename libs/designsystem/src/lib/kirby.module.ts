@@ -84,6 +84,8 @@ import { AccordionDirective } from './components/accordion/accordion.directive';
 import { AccordionItemComponent } from './components/accordion/accordion-item.component';
 import { NumericInputDirective } from './components/form-field/directives/numeric/numeric-input.directive';
 import { NumericKeyInputDirective } from './components/form-field/directives/numeric/key/numeric-key-input.directive';
+import { DateInputDirective } from './components/form-field/directives/date/date-input.directive';
+import { DateInputKeyDirective } from './components/form-field/directives/date/key/date-input-key.directive';
 
 const exportedDeclarations = [
   CardComponent,
@@ -118,6 +120,8 @@ const exportedDeclarations = [
   ThemeColorDirective,
   NumericInputDirective,
   NumericKeyInputDirective,
+  DateInputDirective,
+  DateInputKeyDirective,
   SlideButtonComponent,
   ToggleComponent,
   EmptyStateComponent,

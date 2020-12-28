@@ -7,7 +7,6 @@ import {
   OnInit,
   Self,
 } from '@angular/core';
-import { DatePipe } from '@angular/common';
 
 import { DateKeyRules } from './date-key.rules';
 import { DateInputAnalyzer } from '../date-input.analyzer';
@@ -29,15 +28,14 @@ import { DateFormatter } from '../date.formatter';
   // tslint:disable-next-line:directive-selector
   selector: '[kirby-key-date-input]',
 })
-export class DateInputKeyDirective implements OnInit {
-  private analyzer: DateInputAnalyzer;
-  private keyRules: DateKeyRules;
+export class DateInputKeyDirective {
   private lastValue = '';
   private cursorPosition = -1;
 
   constructor(
     @Inject(LOCALE_ID) private locale: string,
-    private datePipe: DatePipe,
+    private analyzer: DateInputAnalyzer,
+    private keyRules: DateKeyRules,
     private dateFormatter: DateFormatter,
     @Self() private hostElement: ElementRef<HTMLInputElement>
   ) {
@@ -46,13 +44,22 @@ export class DateInputKeyDirective implements OnInit {
     }
   }
 
-  ngOnInit(): any {
-    this.analyzer = new DateInputAnalyzer(this.locale, this.datePipe);
-    this.keyRules = new DateKeyRules(this.locale);
-  }
-
   @HostListener('keyup', ['$event'])
   keyup($event: KeyboardEvent): void {
+    this.handleKeyup($event);
+  }
+
+  @HostListener('focusout', ['$event'])
+  blur($event: any): void {
+    this.analyzeValue();
+  }
+
+  @HostListener('keydown', ['$event'])
+  keydown($event: KeyboardEvent): void {
+    this.handleKeydown($event);
+  }
+
+  public handleKeyup($event: KeyboardEvent): void {
     const value: string = this.hostElement.nativeElement.value;
     if (this.keyRules.isMetaKeyAllowed($event.key)) {
       if (value !== this.lastValue) {
@@ -70,13 +77,7 @@ export class DateInputKeyDirective implements OnInit {
     this.analyzeValue();
   }
 
-  @HostListener('focusout', ['$event'])
-  blur($event: any): void {
-    this.analyzeValue();
-  }
-
-  @HostListener('keydown', ['$event'])
-  keydown($event: KeyboardEvent): void {
+  public handleKeydown($event: KeyboardEvent): void {
     let value: string = this.hostElement.nativeElement.value;
     this.lastValue = value;
     if (this.keyRules.isMetaKeyAllowed($event.key)) {
