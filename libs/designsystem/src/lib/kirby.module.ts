@@ -80,7 +80,10 @@ import { IconRegistryService } from './components/icon/icon-registry.service';
 import { WindowRef } from './types/window-ref';
 import { ToggleButtonModule } from './components/toggle-button/toggle-button.module';
 import { SlideDirective, SlidesComponent } from './components/slides/slides.component';
-import { NumericInputDirective } from './components/form-field/directives/numeric-input.directive';
+import { AccordionDirective } from './components/accordion/accordion.directive';
+import { AccordionItemComponent } from './components/accordion/accordion-item.component';
+import { NumericInputDirective } from './components/form-field/directives/numeric/numeric-input.directive';
+import { NumericKeyInputDirective } from './components/form-field/directives/numeric/key/numeric-key-input.directive';
 
 const exportedDeclarations = [
   CardComponent,
@@ -114,6 +117,7 @@ const exportedDeclarations = [
   SizeDirective,
   ThemeColorDirective,
   NumericInputDirective,
+  NumericKeyInputDirective,
   SlideButtonComponent,
   ToggleComponent,
   EmptyStateComponent,
@@ -132,6 +136,8 @@ const exportedDeclarations = [
   FlagComponent,
   SlidesComponent,
   SlideDirective,
+  AccordionDirective,
+  AccordionItemComponent,
 ];
 
 const declarations = [

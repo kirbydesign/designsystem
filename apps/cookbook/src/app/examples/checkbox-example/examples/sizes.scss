@@ -1,0 +1,53 @@
+@import './libs/designsystem/src/lib/scss/utils';
+
+kirby-checkbox {
+  margin-bottom: size('xxs');
+  background-color: get-color('semi-light');
+  position: relative;
+}
+
+/* height measure */
+kirby-checkbox::before,
+kirby-checkbox::after {
+  height: 100%;
+  border: 1px solid get-color('danger');
+  position: absolute;
+  right: 0;
+}
+
+/* horizontal measure */
+kirby-checkbox::before {
+  content: '';
+  border-left: 0;
+  border-right: 0;
+  width: size('xxs') + 1px;
+}
+
+/* vertical measure */
+kirby-checkbox::after {
+  content: 'md: #{ size(xxxl) }';
+  border-left: 0;
+  border-top: 0;
+  border-bottom: 0;
+  line-height: size('xxxl');
+  font-size: font-size('xs');
+  color: get-color('danger');
+  padding-right: size('xxs');
+  margin-right: size('xxs') / 2;
+  vertical-align: center;
+}
+
+kirby-checkbox.xs::after {
+  content: 'xs: #{ size(l) }';
+  line-height: size('l');
+}
+
+kirby-checkbox.sm::after {
+  content: 'sm: #{ $fat-finger-size }';
+  line-height: $fat-finger-size;
+}
+
+kirby-checkbox ::ng-deep .wrapper {
+  background-color: #f7e0f0;
+  margin-right: 80px; // Allow room for height measure info
+}

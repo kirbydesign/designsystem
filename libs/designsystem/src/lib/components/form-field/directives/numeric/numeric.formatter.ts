@@ -1,4 +1,4 @@
-import { CurrencyPipe, DecimalPipe, formatNumber } from '@angular/common';
+import { CurrencyPipe, DecimalPipe } from '@angular/common';
 import { Inject, Injectable, LOCALE_ID } from '@angular/core';
 
 @Injectable({
@@ -12,15 +12,12 @@ export class NumericFormatter {
   ) {}
 
   public format(numb: number): string {
-    console.log('using formatNumber with locale', formatNumber(numb, this.locale), this.locale);
-    return formatNumber(numb, this.locale);
-    /*const format = '2.0';
+    const format = '2.0';
     const result = this.decimalPipe.transform(numb, format, this.locale);
     if (result !== undefined && result !== null && result.length > 0 && result[0] === '0') {
       return result.substr(1);
     }
     return result;
-        */
   }
   public formatCurrency(numb: number): string {
     const format = '2.0';

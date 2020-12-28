@@ -66,12 +66,6 @@
       <kirby-form-field>
         <input kirby-input placeholder="Focus me on device to scroll input into view" />
       </kirby-form-field>
-      <div scroll-into-view>
-        <kirby-form-field>
-          <input kirby-input placeholder="Focus me on device to scroll wrapper into view" />
-        </kirby-form-field>
-        <button kirby-button attentionLevel="2">OK</button>
-      </div>
       <h4>The standard Lorem Ipsum passage, used since the 1500s</h4>
       <p>
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
@@ -161,9 +155,10 @@
       </button>
       <button kirby-button (click)="close()">Close</button>
     </div>
-    <label (click)="snapFooterToKeyboard = !snapFooterToKeyboard">
-      <kirby-checkbox [checked]="snapFooterToKeyboard"></kirby-checkbox>
-      Snap footer to keyboard
-    </label>
+    <kirby-checkbox
+      size="xs"
+      [(checked)]="snapFooterToKeyboard"
+      text="Snap footer to keyboard"
+    ></kirby-checkbox>
   </div>
 </kirby-modal-footer>

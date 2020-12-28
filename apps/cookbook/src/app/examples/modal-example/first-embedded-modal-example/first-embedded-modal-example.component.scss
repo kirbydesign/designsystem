@@ -37,28 +37,7 @@ kirby-modal-footer {
   }
 
   kirby-checkbox {
-    padding-right: size('xxxs');
-  }
-
-  label {
     font-size: font-size('xs');
-    cursor: pointer;
-  }
-}
-
-[scroll-into-view] {
-  display: flex;
-  flex-direction: column;
-  padding: size('l') size('s');
-  margin-bottom: size('m');
-  background: url('https://images.unsplash.com/photo-1496737018672-b1a6be2e949c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80')
-    no-repeat center;
-
-  @include media('>=medium') {
-    padding: size('xxxl') * 2 size('l');
-  }
-
-  button {
-    margin-left: auto;
+    text-align: center;
   }
 }

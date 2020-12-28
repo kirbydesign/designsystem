@@ -1,12 +1,6 @@
 import { CurrencyPipe, DecimalPipe, getLocaleNumberSymbol, NumberSymbol } from '@angular/common';
-import { Inject, Injectable, LOCALE_ID } from '@angular/core';
-import { filter, map, takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
-import { NgControl } from '@angular/forms';
 
 import { NumericFormatter } from './numeric.formatter';
-
-type ValueWithSplitDecimal = { value: string; decimalPart: string };
 
 type Config = {
   maxNumberOfIntegrals: number;
@@ -15,9 +9,6 @@ type Config = {
   maximumNumberOfDecimals: number;
 };
 
-@Injectable({
-  providedIn: 'root',
-})
 export class NumericInputAnalyzer {
   private digitsPattern = /^[0-9]+$/g;
   private allowedPattern = /^[0-9.,]+$/g;
@@ -29,11 +20,7 @@ export class NumericInputAnalyzer {
   private neutralGroupingSeparator = ','; // en-US
   private lastValue = '';
   private currentValue = '';
-
-  private destroy$ = new Subject();
-  private cursorPosition: number;
-  private ngControl: NgControl;
-  private hostElement: HTMLInputElement;
+  private hasNegativeSign = false;
 
   private config: Config = {
     maxNumberOfIntegrals: 100,
@@ -46,88 +33,84 @@ export class NumericInputAnalyzer {
   private decimalPart: string;
   private allowedCharsOnly: boolean;
 
-  constructor(
-    @Inject(LOCALE_ID) private locale: string,
-    private decimalPipe: DecimalPipe,
-    private currencyPipe: CurrencyPipe
-  ) {}
+  public cursorPosition: number;
+  public invalid: boolean;
 
-  public run(ngControl: NgControl, hostElement: HTMLInputElement, config?: Config): any {
+  constructor(
+    private locale: string,
+    private decimalPipe: DecimalPipe,
+    private currencyPipe: CurrencyPipe,
+    config?: Config
+  ) {
     if (config !== undefined) {
       this.config = config;
     }
-    this.hostElement = hostElement;
-    this.lastValue = hostElement.value;
-    this.ngControl = ngControl;
-
     this.groupingSeparator = getLocaleNumberSymbol(this.locale, NumberSymbol.CurrencyGroup);
     this.decimalSeparator = getLocaleNumberSymbol(this.locale, NumberSymbol.CurrencyDecimal);
-
-    console.log('grouping decimal', this.groupingSeparator, this.decimalSeparator);
-
-    // @ts-ignore
-    return this.ngControl.valueChanges
-      .pipe(
-        takeUntil(this.destroy$),
-        map((value: string) => value || ''),
-        map((value: string) => this.capture(value)),
-        filter((value: string) => this.lastValue !== value && value !== ''),
-        map((value: string) => this.validateValue(value)),
-        map((value: string) => this.handleIntegralPart(value)),
-        map((value: string) => this.handleDecimalPart(value)),
-        map((value: string) => this.output(value))
-      )
-      .subscribe((value: string) => {
-        console.log('updating lastvalue', value);
-        this.lastValue = value;
-      });
   }
 
-  Destroy(): void {
-    this.destroy$.next();
-  }
+  public analyse(cursorPosition: number, value: string, lastValue: string): string {
+    this.cursorPosition = cursorPosition;
+    this.lastValue = lastValue;
+    value = value || '';
+    value = this.resetAndCapture(value);
 
-  /////////////////////////////////
-  //// pipe methods
-  /////////////////////////////////
-
-  private capture(value: string): string {
-    this.currentValue = value;
-    console.log('/////////////////////////////////');
-    console.log('value', value);
-    console.log('this.lastValue', this.lastValue);
+    if (this.lastValue !== value && value !== '') {
+      value = this.handleNegativeSign(value);
+      value = this.validateValue(value);
+      value = this.handleIntegralPart(value);
+      value = this.handleDecimalPart(value);
+      value = this.createOutput(value);
+    }
     return value;
   }
 
+  private resetAndCapture(value: string): string {
+    this.invalid = false;
+    this.hasNegativeSign = false;
+    this.integralPart = '';
+    this.decimalPart = '';
+    this.currentValue = value;
+    return value;
+  }
+
+  private handleNegativeSign(value: string): string {
+    if (this.config.allowNegativeNumber) {
+      if (value.startsWith('-')) {
+        this.hasNegativeSign = true;
+        value = value.substring(1);
+      }
+    }
+    return value;
+  }
   private validateValue(value: string): string {
-    this.findCursorPosition(this.hostElement);
     this.allowedCharsOnly = this.hasAllowedCharsOnly(value);
     if (!this.allowedCharsOnly) {
+      this.invalid = true;
       return this.lastValue;
     }
-    this.correctCursorPosition(value);
+    this.adjustCursorPosition(value);
     return value;
   }
 
   private handleIntegralPart(value: string): string {
     if (!this.allowedCharsOnly) {
+      this.invalid = true;
       return value;
     }
     this.integralPart = this.extractIntegralPart(value);
     this.integralPart = this.replaceSeparator(this.integralPart, this.groupingSeparator, '');
+    if (this.integralPart.length > this.config.maxNumberOfIntegrals) {
+      this.invalid = true;
+      return this.lastValue;
+    }
     this.integralPart = this.addGroupingSeparators(this.integralPart);
-    console.log('addGroupingSeparators', this.integralPart);
-    this.integralPart = this.replaceSeparator(
-      this.integralPart,
-      this.neutralGroupingSeparator,
-      this.groupingSeparator
-    );
-    console.log('handleIntegralPart result', this.integralPart);
     return value;
   }
 
   private handleDecimalPart(value: string): string {
     if (!this.allowedCharsOnly) {
+      this.invalid = true;
       return value;
     }
     this.decimalPart = this.findDecimalPart(value);
@@ -137,18 +120,16 @@ export class NumericInputAnalyzer {
     return value;
   }
 
-  private output(value: string): string {
+  private createOutput(value: string): string {
     value = this.integralPart + this.decimalPart;
-    console.log('output assemble value', value, this.currentValue);
-    if (value !== this.currentValue) {
-      this.updateValue(value);
+    if (value === '') {
+      value = this.lastValue;
+    }
+    if (this.config.allowNegativeNumber && this.hasNegativeSign) {
+      value = '-' + value;
     }
     return value;
   }
-
-  /////////////////////////////////
-  //// end pipe methods
-  /////////////////////////////////
 
   private hasAllowedCharsOnly(value: string): boolean {
     const m = value.match(this.excludedPattern);
@@ -159,11 +140,7 @@ export class NumericInputAnalyzer {
     return true;
   }
 
-  private findCursorPosition(inputElement: HTMLInputElement): void {
-    this.cursorPosition = inputElement.selectionStart;
-  }
-
-  private correctCursorPosition(value: string): void {
+  private adjustCursorPosition(value: string): void {
     const count = this.countGroupingSeparator(value.substring(0, this.cursorPosition));
     this.cursorPosition -= count;
   }
@@ -179,15 +156,7 @@ export class NumericInputAnalyzer {
     return value;
   }
 
-  private formatIntegralPart(): void {
-    if (this.integralPart === '') {
-      return;
-    }
-    const convertedValue = this.convertIntoNumber(this.integralPart);
-    this.integralPart = convertedValue.toString(10);
-  }
-
-  private formatResult(value: number): string {
+  public formatResult(value: number): string {
     const formatter: NumericFormatter = new NumericFormatter(
       this.locale,
       this.decimalPipe,
@@ -198,7 +167,10 @@ export class NumericInputAnalyzer {
   }
 
   private addGroupingSeparators(value: string): string {
-    const newValue = this.formatResult(this.convertIntoNumber(value));
+    if (!this.config.thousandSeparatorEnabled) {
+      return value;
+    }
+    let newValue = this.formatResult(this.convertIntoNumber(value));
     if (newValue === null) {
       return value;
     }
@@ -210,6 +182,11 @@ export class NumericInputAnalyzer {
         this.cursorPosition += newValue.length - value.length;
       }
     }
+    newValue = this.replaceSeparator(
+      newValue,
+      this.neutralGroupingSeparator,
+      this.groupingSeparator
+    );
     return newValue;
   }
 
@@ -230,39 +207,6 @@ export class NumericInputAnalyzer {
     }
     if (lengthBeforeFormatting === formattedValLength - 1) {
       this.cursorPosition = this.cursorPosition + 1;
-    }
-  }
-
-  private updateValue(value: string): void {
-    if (value === undefined || value === null) {
-      return;
-    }
-    console.log('updateValue value', value);
-
-    this.ngControl.control.setValue(value, {
-      emitEvent: false,
-      onlySelf: true,
-      emitModelToViewChange: true,
-    });
-
-    // this.hostElement.value = value;
-    /*
-    let v = this.integralPart;
-    if (this.decimalPart !== '') {
-      v = this.integralPart + this.decimalPart;
-    }*/
-
-    // This is for setting the formControl value without thousand separators but not reflecting it in the view
-    // console.log('updateValue v', v);
-    /*
-        this.ngControl.control.setValue(v, {
-          emitEvent: false,
-          emitModelToViewChange: false,
-          onlySelf: true,
-        });
-    */
-    if (this.cursorPosition !== undefined) {
-      this.hostElement.setSelectionRange(this.cursorPosition, this.cursorPosition);
     }
   }
 
@@ -290,7 +234,7 @@ export class NumericInputAnalyzer {
   private extractDecimalPart(value: string): string {
     const idx = value.indexOf(this.decimalSeparator);
     if (idx > -1) {
-      return value.substring(idx);
+      value = value.substring(idx);
     }
     return value;
   }
@@ -307,6 +251,7 @@ export class NumericInputAnalyzer {
     const count = this.countDecimalSeparator(value);
     if (count > 1) {
       value = this.replaceSeparator(value, this.decimalSeparator, '');
+      this.invalid = true;
       return this.decimalSeparator + value;
     }
     return value;
@@ -318,6 +263,7 @@ export class NumericInputAnalyzer {
       value.lastIndexOf(this.groupingSeparator) > value.lastIndexOf(this.decimalSeparator)
     ) {
       value = this.replaceSeparator(value, this.groupingSeparator, '');
+      this.invalid = true;
       return value;
     }
     return value;
@@ -370,6 +316,7 @@ export class NumericInputAnalyzer {
     if (this.requiresDecimalSupport()) {
       const count = this.numberOfDecimals(value);
       if (count > this.config.maximumNumberOfDecimals) {
+        this.invalid = true;
         return value.substring(0, value.length - (count - this.config.maximumNumberOfDecimals));
       }
     }
