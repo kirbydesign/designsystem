@@ -1,9 +1,4 @@
-import {
-  DatePipe,
-  FormatWidth,
-  getLocaleDateFormat,
-
-} from '@angular/common';
+import { DatePipe, FormatWidth, getLocaleDateFormat } from '@angular/common';
 import { Inject, Injectable, LOCALE_ID } from '@angular/core';
 
 type Config = {};

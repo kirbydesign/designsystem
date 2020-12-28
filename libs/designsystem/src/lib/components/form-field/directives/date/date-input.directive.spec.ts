@@ -2,11 +2,11 @@ import { DateInputDirective } from './date-input.directive';
 import { LOCALE_ID } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { createDirectiveFactory, SpectatorDirective } from '@ngneat/spectator';
-import {DatePipe} from '@angular/common';
+import { DatePipe } from '@angular/common';
 
 describe('Directive: DateInputDirective', () => {
   [
-//    { id: 'da', separators: { group: '.', decimal: ',' } },
+    //    { id: 'da', separators: { group: '.', decimal: ',' } },
     { id: 'en', separators: { group: ',', decimal: '.' } },
   ].forEach((locale) => {
     describe(`locale: ${locale.id}`, () => {
@@ -14,7 +14,8 @@ describe('Directive: DateInputDirective', () => {
         directive: DateInputDirective,
         declarations: [DateInputDirective, DatePipe],
         imports: [FormsModule, ReactiveFormsModule],
-        providers: [DatePipe,
+        providers: [
+          DatePipe,
           {
             provide: LOCALE_ID,
             useValue: locale.id,
@@ -30,8 +31,6 @@ describe('Directive: DateInputDirective', () => {
         sep = locale.separators.group;
       });
       describe('dates separator', () => {
-
-
         it('should add separator and set changed value in formControl', () => {
           const template = `<input kirby-date-input  [formControl]="testFormControl" />`;
           spectatorDirective = createHost(template, {
@@ -66,9 +65,7 @@ describe('Directive: DateInputDirective', () => {
           spectatorDirective.detectChanges();
           expect((spectatorDirective.element as HTMLInputElement).value).toBe(``);
         });
-
       });
-
 
       describe('empty string', () => {
         it('should not format input, nor set selection range', () => {
@@ -82,7 +79,6 @@ describe('Directive: DateInputDirective', () => {
           expect(htmlElement.setSelectionRange).not.toHaveBeenCalled();
         });
       });
-
     });
   });
 });

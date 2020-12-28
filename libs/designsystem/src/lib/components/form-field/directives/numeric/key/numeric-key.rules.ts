@@ -11,7 +11,7 @@ export class NumericKeyRules {
   private groupingSeparator: string;
   private decimalSeparator: string;
 
-  constructor(@Inject(LOCALE_ID) private locale: string,) {
+  constructor(@Inject(LOCALE_ID) private locale: string) {
     this.groupingSeparator = getLocaleNumberSymbol(this.locale, NumberSymbol.CurrencyGroup);
     this.decimalSeparator = getLocaleNumberSymbol(this.locale, NumberSymbol.CurrencyDecimal);
     this.separatorPattern = new RegExp('[' + this.decimalSeparator + ']+$', 'g');

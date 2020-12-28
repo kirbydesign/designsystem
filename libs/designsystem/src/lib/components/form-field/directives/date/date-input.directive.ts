@@ -1,16 +1,9 @@
-import {
-  Directive,
-  ElementRef,
-  Inject,
-  LOCALE_ID,
-  OnDestroy,
-  OnInit,
-  Self,
-} from '@angular/core';
+import { Directive, ElementRef, Inject, LOCALE_ID, OnDestroy, OnInit, Self } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { NgControl } from '@angular/forms';
 import { map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+
 
 import { DateInputAnalyzer } from './date-input.analyzer';
 

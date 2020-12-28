@@ -140,7 +140,7 @@ export class NumericKeyInputDirective implements OnInit {
   private analyzeValue(input: HTMLInputElement): void {
     const value: string = input.value;
     this.findCursorPosition(input);
-   const result = this.analyzer.analyse(this.cursorPosition, value, this.lastValue);
+    const result = this.analyzer.analyse(this.cursorPosition, value, this.lastValue);
     if (result !== value) {
       this.cursorPosition = this.analyzer.cursorPosition;
       this.updateValue(input, result);

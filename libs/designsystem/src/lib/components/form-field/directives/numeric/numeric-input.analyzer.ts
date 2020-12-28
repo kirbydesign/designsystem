@@ -1,5 +1,6 @@
 import { CurrencyPipe, DecimalPipe, getLocaleNumberSymbol, NumberSymbol } from '@angular/common';
 
+
 import { NumericFormatter } from './numeric.formatter';
 
 type Config = {
@@ -105,6 +106,9 @@ export class NumericInputAnalyzer {
       return this.lastValue;
     }
     this.integralPart = this.addGroupingSeparators(this.integralPart);
+    if (this.integralPart.length === 0) {
+      this.integralPart = '0';
+    }
     return value;
   }
 

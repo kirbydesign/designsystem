@@ -141,20 +141,20 @@ describe('Directive: NumericInputDirective', () => {
       describe('thousand to decimal separator', () => {
         beforeEach(() => {});
 
-        it('should NOT convert thousand-separator to decimal-separator when changed char is a thousand-separator and "thousandToDecimalSeparatorEnabled" is disabled', () => {
+        it('should NOT convert thousand-separator to decimal-separator when changed char is a thousand-separator and "thousandSeparatorEnabled" is disabled', () => {
           const template = `<input kirby-numeric-input thousandSeparatorEnabled=false [formControl]="testFormControl" />`;
           spectatorDirective = createHost(template, {
             hostProps: { testFormControl },
           });
 
-          const val = `12${locale.separators.group}34`;
+          const val = `12${sep}34`;
           testFormControl.setValue(val);
           spectatorDirective.detectChanges();
 
-          expect((spectatorDirective.element as HTMLInputElement).value).toBe(val);
+          expect((spectatorDirective.element as HTMLInputElement).value).toBe('1234');
         });
 
-        it('should convert thousand-separator to decimal-separator only when changed char is a thousand-separator', () => {
+        it('should remove thousand-separator when disabled', () => {
           const template = `<input kirby-numeric-input thousandSeparatorEnabled=false [formControl]="testFormControl" />`;
           spectatorDirective = createHost(template, {
             hostProps: { testFormControl },
@@ -164,64 +164,13 @@ describe('Directive: NumericInputDirective', () => {
           spectatorDirective.detectChanges();
           spectatorDirective.directive.ngOnInit();
           inputElm.setSelectionRange(3, 3);
-          testFormControl.setValue(`12${locale.separators.group}34`, {
+          testFormControl.setValue(`12${sep}34`, {
             emitModelToViewChange: false,
             emitViewToModelChange: false,
             onlySelf: true,
           });
           spectatorDirective.detectChanges();
-
-          expect((spectatorDirective.element as HTMLInputElement).value).toBe(
-            `12${locale.separators.decimal}34`
-          );
-        });
-
-        it('should convert thousand-separator to decimal-separator when added thousand-separator at beginning of input', () => {
-          const template = `<input kirby-numeric-input thousandSeparatorEnabled=false [formControl]="testFormControl" />`;
-          spectatorDirective = createHost(template, {
-            hostProps: { testFormControl },
-          });
-          const inputElm = spectatorDirective.element as HTMLInputElement;
-          inputElm.value = '1234';
-          spectatorDirective.detectChanges();
-          spectatorDirective.directive.ngOnInit();
-          inputElm.setSelectionRange(1, 1);
-          testFormControl.setValue(`${locale.separators.group}1234`, {
-            emitModelToViewChange: false,
-            emitViewToModelChange: false,
-            onlySelf: true,
-          });
-          spectatorDirective.detectChanges();
-
-          expect((spectatorDirective.element as HTMLInputElement).value).toBe(
-            `0${locale.separators.decimal}1234`
-          );
-        });
-
-        // tslint:disable-next-line:max-line-length
-        it('should convert thousand-separator to decimal-separator when added thousand-separator at beginning of input for negative numbers', () => {
-          const template = `<input kirby-numeric-input thousandSeparatorEnabled=false [formControl]="testFormControl" />`;
-          spectatorDirective = createHost(template, {
-            hostProps: { testFormControl },
-          });
-          // spectator.directive.isNegativeNumber = true;
-          const inputElm = spectatorDirective.element as HTMLInputElement;
-          testFormControl.setValue(`-1234`, {
-            emitModelToViewChange: false,
-            emitViewToModelChange: false,
-            onlySelf: true,
-          });
-          inputElm.setSelectionRange(2, 2);
-          testFormControl.setValue(`-${locale.separators.group}1234`, {
-            emitModelToViewChange: false,
-            emitViewToModelChange: false,
-            onlySelf: true,
-          });
-          spectatorDirective.detectChanges();
-
-          expect((spectatorDirective.element as HTMLInputElement).value).toBe(
-            `-0${locale.separators.decimal}1234`
-          );
+          expect((spectatorDirective.element as HTMLInputElement).value).toBe(`1234`);
         });
 
         it('should remove non number chars', () => {
@@ -236,21 +185,8 @@ describe('Directive: NumericInputDirective', () => {
 
           expect((spectatorDirective.element as HTMLInputElement).value).toBe('1234');
         });
-
-        it('should not convert thousand-separator to decimal-separator if more than 1 changed char', () => {
-          const template = `<input kirby-numeric-input thousandSeparatorEnabled=false [formControl]="testFormControl" />`;
-          spectatorDirective = createHost(template, {
-            hostProps: { testFormControl },
-          });
-          spectatorDirective.detectChanges();
-          testFormControl.setValue('1234');
-          const lastVal = `1233234${locale.separators.group}34`;
-          testFormControl.setValue(lastVal);
-          spectatorDirective.detectChanges();
-
-          expect((spectatorDirective.element as HTMLInputElement).value).toBe(lastVal);
-        });
       });
+
       describe('decimalsEnabled', () => {
         beforeEach(() => {});
 
@@ -261,21 +197,22 @@ describe('Directive: NumericInputDirective', () => {
           });
           testFormControl.setValue(`1234${decSep}12345679`);
           spectatorDirective.detectChanges();
-          expect((spectatorDirective.element as HTMLInputElement).value).toBe('1234');
+          expect((spectatorDirective.element as HTMLInputElement).value).toBe(`1${sep}234`);
         });
 
         it('should NOT remove decimals from number if decimals enabled', () => {
-          //  spectator.directive.decimalsEnabled = true;
           const template = `<input kirby-numeric-input maximumNumberOfDecimals=-1 [formControl]="testFormControl" />`;
           spectatorDirective = createHost(template, {
             hostProps: { testFormControl },
           });
           spectatorDirective.detectChanges();
-          const val = `1234${sep}12345679`;
+          const val = `1234${decSep}12345679`;
           testFormControl.setValue(val);
           spectatorDirective.detectChanges();
 
-          expect((spectatorDirective.element as HTMLInputElement).value).toBe(val);
+          expect((spectatorDirective.element as HTMLInputElement).value).toBe(
+            `1${sep}234${decSep}12345679`
+          );
         });
       });
 
@@ -302,13 +239,12 @@ describe('Directive: NumericInputDirective', () => {
           spectatorDirective.detectChanges();
           spectatorDirective.directive.ngOnInit();
           inputElm.setSelectionRange(1, 1);
-          testFormControl.setValue(`${decSep}1234`, {
+          testFormControl.setValue(`0${decSep}1234`, {
             emitModelToViewChange: false,
             emitViewToModelChange: false,
             onlySelf: true,
           });
           spectatorDirective.detectChanges();
-
           expect((spectatorDirective.element as HTMLInputElement).value).toBe(`0${decSep}12`);
         });
       });
@@ -326,7 +262,29 @@ describe('Directive: NumericInputDirective', () => {
           spectatorDirective.detectChanges();
           spectatorDirective.directive.ngOnInit();
           inputElm.setSelectionRange(1, 1);
-          testFormControl.setValue(`${decSep}1234`, {
+          testFormControl.setValue(`-10${decSep}1234`, {
+            emitModelToViewChange: false,
+            emitViewToModelChange: false,
+            onlySelf: true,
+          });
+          spectatorDirective.detectChanges();
+
+          expect((spectatorDirective.element as HTMLInputElement).value).toBe(`-10${decSep}1234`);
+        });
+        it('should add a "-" if isNegativeNumber, lenght is > 0 and value is not 0', () => {
+          //  spectator.directive.isNegativeNumber = true;
+
+          const template = `<input kirby-numeric-input  [formControl]="testFormControl" />`;
+          spectatorDirective = createHost(template, {
+            hostProps: { testFormControl },
+          });
+
+          const inputElm = spectatorDirective.element as HTMLInputElement;
+          inputElm.value = '1234';
+          spectatorDirective.detectChanges();
+          spectatorDirective.directive.ngOnInit();
+          inputElm.setSelectionRange(1, 1);
+          testFormControl.setValue(`-${decSep}1234`, {
             emitModelToViewChange: false,
             emitViewToModelChange: false,
             onlySelf: true,
@@ -348,7 +306,7 @@ describe('Directive: NumericInputDirective', () => {
           spectatorDirective.detectChanges();
           spectatorDirective.directive.ngOnInit();
           inputElm.setSelectionRange(1, 1);
-          testFormControl.setValue(`${decSep}${decSep}1234`, {
+          testFormControl.setValue(`0${decSep}${decSep}1234`, {
             emitModelToViewChange: false,
             emitViewToModelChange: false,
             onlySelf: true,

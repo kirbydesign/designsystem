@@ -29,7 +29,7 @@ import { NumericKeyRules } from './key/numeric-key.rules';
  * Example:
  * ```
  * <input type="text" [value]="xyz" inputmode="decimal"  clearInput="true" kirby-numeric-input maximumNumberOfDecimals="2"
- * allowNegativeNumber="'false'" thousandSeparatorEnabled="'true'"  maxNumberOfIntegrals="'10'"></input>
+ * allowNegativeNumber="'false'" thousandSeparatorEnabled="'true'"  maxNumberOfIntegrals=10></input>
  * ```
  * * ```
  * <input type="text" inputmode="decimal"  clearInput="true" kirby-numeric-input ></input>
@@ -44,9 +44,9 @@ import { NumericKeyRules } from './key/numeric-key.rules';
 })
 export class NumericInputDirective implements OnInit, OnDestroy {
   @Input() thousandSeparatorEnabled = true;
-  @Input() allowNegativeNumber = false;
+  @Input() allowNegativeNumber = true;
   @Input() maximumNumberOfDecimals = -1;
-  @Input() maxNumberOfIntegrals = 100;
+  @Input() maxNumberOfIntegrals = 15;
   private analyzer: NumericInputAnalyzer;
   private destroy$ = new Subject();
   private lastValue = '';
