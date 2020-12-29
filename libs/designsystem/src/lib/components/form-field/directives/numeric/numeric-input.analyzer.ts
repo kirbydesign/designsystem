@@ -1,6 +1,5 @@
 import { CurrencyPipe, DecimalPipe, getLocaleNumberSymbol, NumberSymbol } from '@angular/common';
 
-
 import { NumericFormatter } from './numeric.formatter';
 
 type Config = {

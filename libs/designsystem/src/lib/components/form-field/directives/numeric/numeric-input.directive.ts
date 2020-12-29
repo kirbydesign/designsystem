@@ -14,7 +14,6 @@ import { map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 import { NumericInputAnalyzer } from './numeric-input.analyzer';
-import { NumericKeyRules } from './key/numeric-key.rules';
 
 /**
  * Directive for filtering input keys matching digits + decimal and grouping separator.
@@ -107,7 +106,7 @@ export class NumericInputDirective implements OnInit, OnDestroy {
     if (value === undefined || value === null) {
       return;
     }
-   this.ngControl.control.setValue(value, {
+    this.ngControl.control.setValue(value, {
       emitEvent: false,
       onlySelf: true,
       emitModelToViewChange: true,

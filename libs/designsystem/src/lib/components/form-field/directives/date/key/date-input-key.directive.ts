@@ -7,6 +7,7 @@ import {
   OnInit,
   Self,
 } from '@angular/core';
+import { DatePipe, } from '@angular/common';
 
 import { DateKeyRules } from './date-key.rules';
 import { DateInputAnalyzer } from '../date-input.analyzer';
@@ -27,6 +28,7 @@ import { DateFormatter } from '../date.formatter';
 @Directive({
   // tslint:disable-next-line:directive-selector
   selector: '[kirby-key-date-input]',
+  providers: [DateInputAnalyzer, DateKeyRules, DateFormatter, DatePipe],
 })
 export class DateInputKeyDirective {
   private lastValue = '';

@@ -1,4 +1,4 @@
-import { Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
 import { DatePatterns } from './date.patterns';
 import { DateLocaleAnalyser } from './date-locale-analyser';
@@ -14,7 +14,7 @@ export class DateInputAnalyzer {
     this.maxLength = 10;
     this.digitsPattern = new RegExp('[0-9' + this.localeConfig.separator + ']+$', 'g');
     this.excludedPattern = new RegExp('[^0-9' + this.localeConfig.separator + ']+', 'g');
- }
+  }
 
   public cursorPosition: number;
 
@@ -41,9 +41,6 @@ export class DateInputAnalyzer {
 
   private resetAndCapture(value: string): string {
     this.currentValue = value;
-    console.log('/////////////ANALYZE Date////////////////////');
-    console.log('value', value);
-    console.log('this.lastValue', this.lastValue);
     return value;
   }
 
@@ -122,7 +119,6 @@ export class DateInputAnalyzer {
       return value.substring(0, value.length - 1);
     }
     value = this.replaceSeparator(value, this.localeConfig.separator, '');
-    console.log('reduced value', value);
 
     // check for chars up to:
     // dd
@@ -131,12 +127,6 @@ export class DateInputAnalyzer {
     if (value.length <= this.localeConfig.firstSectionLength) {
       DatePatterns.validationPattern1.lastIndex = 0;
       const result: boolean = DatePatterns.validationPattern1.test(value);
-      console.log(
-        'rule 1 for value result',
-        value,
-        result,
-        DatePatterns.validationPattern1.test(value)
-      );
       if (result) {
         value = this.validateSection1(value);
         return value;
@@ -149,7 +139,6 @@ export class DateInputAnalyzer {
     if (value.length === this.localeConfig.firstSectionLength + 1) {
       DatePatterns.validationPattern4.lastIndex = 0;
       const result = DatePatterns.validationPattern4.test(value);
-      console.log('rule 2 for: value result', value, result);
       if (result) {
         value = this.validateSection2(value);
         value = this.addMissingSeparator(value);
@@ -162,7 +151,6 @@ export class DateInputAnalyzer {
     if (value.length === this.localeConfig.firstSectionLength + 2) {
       DatePatterns.validationPattern5.lastIndex = 0;
       const result = DatePatterns.validationPattern5.test(value);
-      console.log('rule 4 for: value result', value, result);
       if (result) {
         value = this.validateSection2(value);
         value = this.addMissingSeparator(value);
@@ -175,12 +163,6 @@ export class DateInputAnalyzer {
     if (value.length === this.localeConfig.firstSectionLength + 3) {
       DatePatterns.validationPattern6.lastIndex = 0;
       const result = DatePatterns.validationPattern6.test(value);
-      console.log(
-        'rule 5 for: value result pattern',
-        value,
-        result,
-        DatePatterns.validationPattern6
-      );
       if (result) {
         value = this.validateSection3(value);
         value = this.addMissingSeparator(value);
@@ -195,20 +177,15 @@ export class DateInputAnalyzer {
       const testValue = value.padEnd(this.maxLength - 2, '0');
       DatePatterns.validationPattern.lastIndex = 0;
       const result = DatePatterns.validationPattern.test(testValue);
-      console.log('rule 6 for: value testValue result', value, testValue, result);
       if (result) {
         value = this.validateSection3(value);
         value = this.addMissingSeparator(value);
         return value;
       }
     }
-
     if (value.endsWith(this.localeConfig.separator)) {
-      // console.log('removing separator', value, this.separator);
       return value.substring(0, value.length - 1);
     }
-
-    console.error('no matching rule found for value', value);
     return undefined;
   }
 

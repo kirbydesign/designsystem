@@ -1,4 +1,4 @@
-import { DatePipe, formatDate, FormatWidth, getLocaleDateFormat } from '@angular/common';
+import { DatePipe, FormatWidth, getLocaleDateFormat } from '@angular/common';
 import { Inject, Injectable, LOCALE_ID } from '@angular/core';
 
 @Injectable({
@@ -14,7 +14,6 @@ export class DateFormatter {
     if (value === undefined || value === null) {
       return '';
     }
-    console.log('using formatDate', formatDate(value, this.dateFormat, this.locale));
     return this.datePipe.transform(value, null, null, this.locale);
   }
 }

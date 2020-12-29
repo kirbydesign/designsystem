@@ -2,13 +2,14 @@ import { Directive, ElementRef, Inject, LOCALE_ID, OnDestroy, OnInit, Self } fro
 import { NgControl } from '@angular/forms';
 import { map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { DatePipe } from '@angular/common';
 
 import { DateInputAnalyzer } from './date-input.analyzer';
 
 @Directive({
   // tslint:disable-next-line:directive-selector
   selector: '[kirby-date-input]',
-  providers: [DateInputAnalyzer],
+  providers: [DateInputAnalyzer, DatePipe],
 })
 export class DateInputDirective implements OnInit, OnDestroy {
   constructor(

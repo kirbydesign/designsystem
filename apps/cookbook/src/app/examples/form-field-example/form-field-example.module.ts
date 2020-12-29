@@ -14,6 +14,7 @@ import { FormFieldFocusExampleComponent } from './examples/input/focus';
 import { FormFieldTextareaDefaultExampleComponent } from './examples/textarea/default';
 import { FormFieldTextareaLabelExampleComponent } from './examples/textarea/label';
 import { FormFieldTextareaCounterExampleComponent } from './examples/textarea/counter';
+import { FormFieldInputDateExampleComponent } from '~/app/examples/form-field-example/examples/input/date';
 
 const COMPONENT_DECLARATIONS = [
   FormFieldInputDefaultExampleComponent,
@@ -21,6 +22,7 @@ const COMPONENT_DECLARATIONS = [
   FormFieldInputLabelMessageExampleComponent,
   FormFieldInputCounterExampleComponent,
   FormFieldInputNumericExampleComponent,
+  FormFieldInputDateExampleComponent,
   FormFieldInputDisabledExampleComponent,
   FormFieldInputErrorExampleComponent,
   FormFieldInputBorderlessExampleComponent,
