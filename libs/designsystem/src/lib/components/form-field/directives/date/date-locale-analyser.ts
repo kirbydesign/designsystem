@@ -37,10 +37,5 @@ export class DateLocaleAnalyser {
       this.firstSectionLength = 4;
     }
     this.dayBeforeMonth = this.dayIndex < this.monthIndex;
-    console.log('localeFormat', localeFormat);
-    console.log('is year first', this.yearFirst);
-    console.log('is day before month', this.dayBeforeMonth);
-    console.log('firstSectionLength', this.firstSectionLength);
-    console.log('separator', this.separator);
   }
 }

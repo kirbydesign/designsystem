@@ -64,7 +64,6 @@ export class DatePatterns {
         DatePatterns.frag3 = DatePatterns.years;
       }
     }
-    console.log(this.frag1, this.frag2, this.frag3, separator);
     DatePatterns.createValidationPattern(this.frag1, this.frag2, this.frag3, separator);
   }
 
