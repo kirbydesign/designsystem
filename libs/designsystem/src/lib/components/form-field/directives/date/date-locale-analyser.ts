@@ -3,7 +3,7 @@ import { FormatWidth, getLocaleDateFormat } from '@angular/common';
 @Injectable({
   providedIn: 'root',
 })
-export class LocaleAnalyser {
+export class DateLocaleAnalyser {
   public separator: string;
   public yearFirst: boolean;
   public dayBeforeMonth: boolean;

@@ -1,4 +1,4 @@
-import { LocaleAnalyser } from './localeAnalyser';
+import { DateLocaleAnalyser } from './date-locale-analyser';
 
 export class DatePatterns {
   public static dates = '([0-3][1-9]|[1-9])';
@@ -30,7 +30,7 @@ export class DatePatterns {
   public static frag2 = '';
   public static frag3 = '';
 
-  public static buildPatterns(localeConfig: LocaleAnalyser): void {
+  public static buildPatterns(localeConfig: DateLocaleAnalyser): void {
     const d: number = localeConfig.dayIndex;
     const m: number = localeConfig.monthIndex;
     const y: number = localeConfig.yearIndex;

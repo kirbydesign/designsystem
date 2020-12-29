@@ -39,7 +39,7 @@ import { NumericKeyRules } from './numeric-key.rules';
   selector: '[kirby-key-numeric-input]',
   providers: [DecimalPipe, CurrencyPipe],
 })
-export class NumericKeyInputDirective implements OnInit {
+export class NumericInputKeyDirective implements OnInit {
   @Input() thousandSeparatorEnabled = true;
   @Input() allowNegativeNumber = true;
   @Input() maximumNumberOfDecimals = -1;

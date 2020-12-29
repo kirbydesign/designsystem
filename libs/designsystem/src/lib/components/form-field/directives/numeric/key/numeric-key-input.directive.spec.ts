@@ -3,19 +3,18 @@ import { LOCALE_ID } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { createDirectiveFactory, SpectatorDirective } from '@ngneat/spectator';
 
+import { NumericInputKeyDirective } from './numeric-input-key.directive';
+import { KeyboardHelper } from './keyboard-helper';
 
-import { NumericKeyInputDirective } from './numeric-key-input.directive';
-import { KeyboardHelper } from './KeyboardHelper';
-
-describe('Directive: NumericKeyInputDirective', () => {
+describe('Directive: NumericInputKeyDirective', () => {
   [
     //    { id: 'da', separators: { group: '.', decimal: ',' } },
     { id: 'en', separators: { group: ',', decimal: '.' } },
   ].forEach((locale) => {
     describe(`locale: ${locale.id}`, () => {
       const createHost = createDirectiveFactory({
-        directive: NumericKeyInputDirective,
-        declarations: [NumericKeyInputDirective, DecimalPipe, CurrencyPipe],
+        directive: NumericInputKeyDirective,
+        declarations: [NumericInputKeyDirective, DecimalPipe, CurrencyPipe],
         imports: [FormsModule, ReactiveFormsModule],
         providers: [
           DecimalPipe,
@@ -27,7 +26,7 @@ describe('Directive: NumericKeyInputDirective', () => {
         ],
       });
       let testFormControl: FormControl;
-      let spectatorDirective: SpectatorDirective<NumericKeyInputDirective>;
+      let spectatorDirective: SpectatorDirective<NumericInputKeyDirective>;
       let sep: string;
       let decSep: string;
 
@@ -140,27 +139,6 @@ describe('Directive: NumericKeyInputDirective', () => {
             KeyboardHelper.Press(spectatorDirective, input, c);
           }
           expect(input.value).toBe(`1${sep}234`);
-        });
-
-        it('should remove thousand separators when going from 4 to 3 digit number', () => {
-          const template = `<input kirby-key-numeric-input thousandSeparatorEnabled=true />`;
-          spectatorDirective = createHost(template, {});
-
-          const input = spectatorDirective.element as HTMLInputElement;
-          let val = `1234`;
-          for (let c of val) {
-            KeyboardHelper.Press(spectatorDirective, input, c);
-          }
-          expect(input.value).toBe(`1${sep}234`);
-
-          const keyCode: number = 8; // delete/backspace
-          spectatorDirective.dispatchKeyboardEvent(input, 'keydown', keyCode, input);
-          input.focus();
-          input.value = val.substring(0, val.length - 2);
-          console.log(input.value);
-          spectatorDirective.dispatchKeyboardEvent(input, 'keyup', keyCode, input);
-
-          expect(input.value).toBe(`123`);
         });
       });
 

@@ -1,7 +1,7 @@
 import { Injectable} from '@angular/core';
 
 import { DatePatterns } from './date.patterns';
-import { LocaleAnalyser } from './localeAnalyser';
+import { DateLocaleAnalyser } from './date-locale-analyser';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +9,7 @@ import { LocaleAnalyser } from './localeAnalyser';
 export class DateInputAnalyzer {
   public invalid: boolean;
 
-  constructor(private localeConfig: LocaleAnalyser) {
+  constructor(private localeConfig: DateLocaleAnalyser) {
     DatePatterns.buildPatterns(this.localeConfig);
     this.maxLength = 10;
     this.digitsPattern = new RegExp('[0-9' + this.localeConfig.separator + ']+$', 'g');

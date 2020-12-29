@@ -83,7 +83,7 @@ import { SlideDirective, SlidesComponent } from './components/slides/slides.comp
 import { AccordionDirective } from './components/accordion/accordion.directive';
 import { AccordionItemComponent } from './components/accordion/accordion-item.component';
 import { NumericInputDirective } from './components/form-field/directives/numeric/numeric-input.directive';
-import { NumericKeyInputDirective } from './components/form-field/directives/numeric/key/numeric-key-input.directive';
+import { NumericInputKeyDirective } from './components/form-field/directives/numeric/key/numeric-input-key.directive';
 import { DateInputDirective } from './components/form-field/directives/date/date-input.directive';
 import { DateInputKeyDirective } from './components/form-field/directives/date/key/date-input-key.directive';
 
@@ -119,7 +119,7 @@ const exportedDeclarations = [
   SizeDirective,
   ThemeColorDirective,
   NumericInputDirective,
-  NumericKeyInputDirective,
+  NumericInputKeyDirective,
   DateInputDirective,
   DateInputKeyDirective,
   SlideButtonComponent,
