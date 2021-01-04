@@ -229,6 +229,53 @@ describe('CalendarComponent', () => {
     ).toEqual('M T W T F S S');
   });
 
+  describe('year navigator', () => {
+    beforeEach(() => {
+      spectator.component.yearNavigatorOptions = {
+        from: -3,
+        to: 2,
+      };
+      spectator.detectChanges();
+    });
+
+    it('should only render the navigator when year navigator options are set', () => {
+      expect(spectator.element.querySelector('kirby-dropdown')).not.toBeNull();
+      spectator.component.yearNavigatorOptions = undefined;
+      spectator.detectChanges();
+      expect(spectator.element.querySelector('kirby-dropdown')).toBeNull();
+    });
+
+    it('should get the correct index for the selected year', () => {
+      expect(spectator.component.navigatedYear).toEqual(3);
+      spectator.component.yearNavigatorOptions = {
+        from: -2,
+        to: 2,
+      };
+      expect(spectator.component.navigatedYear).toEqual(2);
+    });
+
+    it('should get navigable years based on from and to when min and max date are omitted', () => {
+      spectator.component.minDate = undefined;
+      spectator.component.maxDate = undefined;
+
+      expect(spectator.component.navigableYears).toEqual([
+        '2018',
+        '2019',
+        '2020',
+        '2021',
+        '2022',
+        '2023',
+      ]);
+    });
+
+    it('should prioritize min and max date over from and to when getting navigable years', () => {
+      spectator.component.minDate = new Date(2019, 0, 1);
+      spectator.component.maxDate = new Date(2023, 11, 31);
+
+      expect(spectator.component.navigableYears).toEqual(['2019', '2020', '2021', '2022', '2023']);
+    });
+  });
+
   // constants and utility functions
 
   const SEL_NAV_BACK = '.header button:first-of-type';
