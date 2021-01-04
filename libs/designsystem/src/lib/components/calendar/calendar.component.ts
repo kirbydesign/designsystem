@@ -52,7 +52,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
    *
    * Internally, calendar component:
    *
-   * - Bases yearNavigatorOptions.from and yearNavigatorOptions.to on todayDate
+   * - Bases yearNavigatorOptions.from and yearNavigatorOptions.to on todayDate if a number is provided
    *
    * - prioritizes minDate and maxDate over yearNavigatorOptions.from and yearNavigatorOptions.to
    */
