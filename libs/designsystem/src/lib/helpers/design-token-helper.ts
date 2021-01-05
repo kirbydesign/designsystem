@@ -87,6 +87,10 @@ export class DesignTokenHelper {
   public static fatFingerSize(): string {
     return styles.fatFingerSize;
   }
+
+  public static getElevation(z: 2 | 4 | 8): string {
+    return styles.elevationsRgb[z];
+  }
 }
 
 export type ThemeColorExtended =
