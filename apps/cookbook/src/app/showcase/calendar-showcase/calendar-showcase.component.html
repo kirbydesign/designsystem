@@ -36,11 +36,11 @@
           <kirby-checkbox [checked]="setMaxDate" (checkedChange)="setMaxDate = $event;"></kirby-checkbox>
           <label (click)="setMaxDate = !setMaxDate">Set max date ({{maxDate | date:'dd-MM-yyyy':(useTimezoneUTC ? 'UTC' : undefined)}})</label><br/>
           <kirby-checkbox [checked]="setTodayDate" (checkedChange)="setTodayDate = $event;"></kirby-checkbox>
-          <label (click)="setTodayDate = !setTodayDate">Set today date ({{todayDate | date:'dd-MM-yyyy':(useTimezoneUTC ? 'UTC' : undefined)}})</label><br/>  
+          <label (click)="setTodayDate = !setTodayDate">Set today date ({{todayDate | date:'dd-MM-yyyy':(useTimezoneUTC ? 'UTC' : undefined)}})</label><br/>
           <kirby-checkbox [checked]="" (checkedChange)="useTimezoneUTC = $event;"></kirby-checkbox>
-          <label (click)="useTimezoneUTC = !useTimezoneUTC">Use UTC instead of local time</label><br/>  
+          <label (click)="useTimezoneUTC = !useTimezoneUTC">Use UTC instead of local time</label><br/>
           <kirby-checkbox [checked]="" (checkedChange)="showYearNavigator = $event;"></kirby-checkbox>
-          <label (click)="showYearNavigator = !showYearNavigator">Show year navigator</label><br/>  
+          <label (click)="showYearNavigator = !showYearNavigator">Show year navigator</label><br/>
         </fieldset>
     </div>
     <cookbook-code-viewer [html]="exampleWithCardHtml"></cookbook-code-viewer>

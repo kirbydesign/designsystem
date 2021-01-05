@@ -19,7 +19,7 @@ export class CalendarShowcaseComponent {
   setTodayDate = false;
   setDisabledDates = false;
   useTimezoneUTC = false;
-  showYearSelector = false;
+  showYearNavigator = false;
   minDate: Date;
   maxDate: Date;
   todayDate: Date;
