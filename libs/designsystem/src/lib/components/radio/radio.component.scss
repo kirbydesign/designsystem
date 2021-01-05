@@ -2,6 +2,7 @@
 
 $radio-icon-padding: size('xxxxs');
 $radio-icon-size: size('m') - ($radio-icon-padding * 2);
+$radio-icon-mark-size: 60%;
 
 :host {
   display: inline-block;
@@ -28,6 +29,24 @@ ion-radio {
   width: $fat-finger-size;
   padding: #{($fat-finger-size - $radio-icon-size) / 2}; // Making clickable area bigger without making icon bigger
   box-sizing: border-box; // Ensure padding is not added to radio width/height
+  --border-width: 1px;
+  --color: #{get-color('semi-dark')};
+  --color-checked: #{get-color('success')};
+
+  &::part(mark) {
+    width: calc($radio-icon-mark-size);
+    height: calc($radio-icon-mark-size);
+  }
+
+  &.radio-checked {
+    --border-width: 0px;
+    --color: transparent;
+
+    &::part(container) {
+      background-color: get-color('white');
+      box-shadow: get-elevation(2);
+    }
+  }
 }
 
 :host-context(kirby-item) {
