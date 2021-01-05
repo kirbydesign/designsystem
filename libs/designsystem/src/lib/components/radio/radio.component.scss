@@ -33,18 +33,39 @@ ion-radio {
   --color: #{get-color('semi-dark')};
   --color-checked: #{get-color('success')};
 
+  &::part(container) {
+    background-color: get-color('white');
+  }
+
   &::part(mark) {
-    width: calc($radio-icon-mark-size);
-    height: calc($radio-icon-mark-size);
+    width: $radio-icon-mark-size;
+    height: $radio-icon-mark-size;
+  }
+
+  &:active {
+    --color: transparent;
+
+    &::part(container) {
+      background-color: get-color('white-shade');
+    }
+  }
+
+  // Only apply focus ring if pointer device can hover
+  // (effectively desktop/mouse devices):
+  @include focus() {
+    &::part(container) {
+      // Apply focus ring through box-shadow to keep circle shape and default border:
+      box-shadow: 0 0 0 1px var(--kirby-background-color), 0 0 0 3px #{$focus-ring-color};
+    }
   }
 
   &.radio-checked {
     --border-width: 0px;
-    --color: transparent;
 
-    &::part(container) {
-      background-color: get-color('white');
-      box-shadow: get-elevation(2);
+    &:not(:focus) {
+      &::part(container) {
+        box-shadow: get-elevation(2);
+      }
     }
   }
 }
