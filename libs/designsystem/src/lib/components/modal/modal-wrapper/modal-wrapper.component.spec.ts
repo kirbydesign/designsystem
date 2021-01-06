@@ -8,6 +8,7 @@ import { IconComponent } from '../../icon/icon.component';
 import { ModalWrapperComponent } from './modal-wrapper.component';
 import {
   DynamicFooterEmbeddedComponent,
+  InlineFooterEmbeddedComponent,
   ModalWrapperTestBuilder,
 } from './modal-wrapper.testbuilder';
 
@@ -441,18 +442,35 @@ describe('ModalWrapperComponent', () => {
       expect(inlineFooter).not.toBeNull();
     });
 
-    describe(`should set custom CSS property '--margin-top' on inline footer`, () => {
+    describe(`should set custom CSS property value'--margin-top' on inline footer`, () => {
       beforeEach(async () => {
-        const embeddedComponent = spectator.query(DynamicFooterEmbeddedComponent);
+        const embeddedComponent = spectator.query(InlineFooterEmbeddedComponent);
         embeddedComponent.showFooter = true;
         spectator.detectChanges();
         await TestHelper.waitForResizeObserver();
         TestHelper.scrollMainWindowToTop();
       });
 
-      it('to a value', () => {
+      it('to a NOT empty property value', () => {
+        const modalFooter = spectator.element.querySelector('kirby-modal-footer');
+        expect(modalFooter).not.toBeNull();
         const inlineFooter = spectator.element.querySelector<HTMLElement>('kirby-inline-footer');
-        expect(inlineFooter.style.getPropertyValue('--margin-top')).toBeDefined();
+        expect(inlineFooter).not.toBeNull();
+        const value = inlineFooter.style.getPropertyValue('--margin-top');
+        console.log(value);
+        expect(value).not.toEqual('');
+      });
+    });
+
+    describe(`should Not set custom CSS property value'--margin-top' on inline footer`, () => {
+      it('to an empty property value', () => {
+        const modalFooter = spectator.element.querySelector('kirby-modal-footer');
+        expect(modalFooter).not.toBeNull();
+        const inlineFooter = spectator.element.querySelector<HTMLElement>('kirby-inline-footer');
+        expect(inlineFooter).not.toBeNull();
+        const value = inlineFooter.style.getPropertyValue('--margin-top');
+        console.log(value);
+        expect(value).toEqual('');
       });
     });
   });

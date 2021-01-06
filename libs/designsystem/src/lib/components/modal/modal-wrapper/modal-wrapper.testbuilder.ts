@@ -143,10 +143,19 @@ export class InputEmbeddedComponent {}
 
 @Component({
   template: `
-    <div>InlineFooterEmbeddedComponent - Some test content</div>
+    <kirby-page-title>InlineFooterEmbeddedComponent - Some test content</kirby-page-title>
+    <h4>Section 1.10.32 of "de Finibus Bonorum et Malorum", written by Cicero in 45 BC</h4>
+    <p>
+      "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
+      laudantium "
+    </p>
+    <button kirby-button>Toggle footer</button>
     <kirby-inline-footer>Inline Footer</kirby-inline-footer>
-    <kirby-modal-footer *ngIf="showFooter" [class.enabled]="isEnabled">
-      <button kirby-button>Test</button>
+    <kirby-modal-footer>
+      <button kirby-button attentionLevel="3">
+        <kirby-icon name="arrow-back"></kirby-icon>
+      </button>
+      <button kirby-button>Finish</button>
     </kirby-modal-footer>
   `,
 })
