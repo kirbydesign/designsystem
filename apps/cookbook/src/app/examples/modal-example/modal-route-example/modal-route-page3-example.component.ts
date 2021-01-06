@@ -12,7 +12,7 @@ import { Modal, ModalController } from '@kirbydesign/designsystem';
       laudantium "
     </p>
     <button kirby-button (click)="toggleFooter()">Toggle footer</button>
-    <kirby-inline-footer style="background-color: lightpink">Inline Footer</kirby-inline-footer>
+    <kirby-inline-footer>Inline Footer</kirby-inline-footer>
     <kirby-modal-footer *ngIf="showFooter">
       <button kirby-button attentionLevel="3" (click)="navigateToPreviousModal()">
         <kirby-icon name="arrow-back"></kirby-icon>

@@ -16,7 +16,7 @@ import { ModalConfig } from '@kirbydesign/designsystem';
     </p>
     <button kirby-button (click)="toggleFooter()">Toggle footer</button>
 
-    <kirby-inline-footer style="background-color: lightpink">Inline Footer</kirby-inline-footer>
+    <kirby-inline-footer>Inline Footer</kirby-inline-footer>
     <kirby-modal-footer *ngIf="showFooter">
       <button kirby-button class="nav" routerLink="../page2">
         Next

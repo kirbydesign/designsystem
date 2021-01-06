@@ -67,6 +67,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   >;
   @ViewChild(RouterOutlet, { static: true }) private routerOutlet: RouterOutlet;
 
+  private isResizeCausedByMarginChange = false;
   private keyboardVisible = false;
   private toolbarButtons: HTMLButtonElement[] = [];
   private delayedClose = () => {};
@@ -190,7 +191,6 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   private checkForEmbeddedElements() {
     this.moveEmbeddedElements();
     this.observeEmbeddedElements();
-    this.positionInlineFooter();
   }
 
   private observeHeaderResize() {
@@ -206,23 +206,26 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   }
 
   private setInlineFooterPosition() {
-    const rootElement = this.getEmbeddedComponentElement() as HTMLElement;
-    const inlineFooter = rootElement.querySelector<HTMLElement>('kirby-inline-footer');
+    if (this.isResizeCausedByMarginChange) {
+      this.isResizeCausedByMarginChange = false;
+      // return;
+    }
+    const embeddededElement = this.getEmbeddedComponentElement() as HTMLElement;
+    const inlineFooter = embeddededElement.querySelector<HTMLElement>('kirby-inline-footer');
+    this.setCssVar(inlineFooter, '--margin-top', `0`);
     if (inlineFooter !== null) {
-      const ionContentHeight = this.ionContentElement.nativeElement.offsetHeight;
       this.ionContent.getScrollElement().then((scrollElement) => {
-        const scrollElementHeight = scrollElement.offsetHeight;
-        let availableFooterSpace = ionContentHeight - scrollElementHeight;
-
+        const ionContentBottom = this.ionContentElement.nativeElement.getBoundingClientRect()
+          .bottom;
+        const scrollElementPaddingBottom = parseInt(
+          this.windowRef.getComputedStyle(scrollElement).paddingBottom
+        );
+        const embeddededElementBottom = embeddededElement.getBoundingClientRect().bottom;
+        const availableFooterSpace =
+          ionContentBottom - embeddededElementBottom - scrollElementPaddingBottom;
         if (availableFooterSpace > 0) {
+          this.isResizeCausedByMarginChange = true;
           this.setCssVar(inlineFooter, '--margin-top', `${availableFooterSpace}px`);
-        } else {
-          const page = inlineFooter.parentElement;
-          const pageHeight = page.offsetHeight;
-          availableFooterSpace = scrollElementHeight - pageHeight - inlineFooter.offsetHeight;
-          if (availableFooterSpace > 0) {
-            this.setCssVar(inlineFooter, '--margin-top', `${availableFooterSpace}px`);
-          }
         }
       });
     }
@@ -402,9 +405,10 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   }
 
   private observeViewportResize() {
-    this.resizeObserverService.observe(this.windowRef.document.body, (entry) =>
-      this.onViewportResize(entry)
-    );
+    this.resizeObserverService.observe(this.windowRef.document.body, (entry) => {
+      this.onViewportResize(entry);
+      this.positionInlineFooter();
+    });
   }
 
   private onViewportResize(entry: ResizeObserverEntry) {
@@ -494,6 +498,9 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
           return Array.from(mutation.addedNodes).filter((node) =>
             observedElements.includes(node.nodeName)
           );
+        })
+        .map((r) => {
+          this.positionInlineFooter();
         });
 
       const addedElements = Array.prototype

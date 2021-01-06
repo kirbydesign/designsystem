@@ -420,6 +420,43 @@ describe('ModalWrapperComponent', () => {
     });
   });
 
+  describe('with embedded component with inline footer and dynamic footer', () => {
+    beforeEach(() => {
+      spectator = modalWrapperTestBuilder
+        .flavor('modal')
+        .withDynamicAndInlineFooter()
+        .build();
+      spectator.detectComponentChanges();
+    });
+
+    afterEach(() => {
+      // Ensure any observers are destroyed:
+      spectator.fixture.destroy();
+    });
+
+    it('should move inline footer to top of modal footer when rendered', async () => {
+      const modalFooter = spectator.element.querySelector('kirby-modal-footer');
+      expect(modalFooter).not.toBeNull();
+      const inlineFooter = spectator.element.querySelector('kirby-inline-footer');
+      expect(inlineFooter).not.toBeNull();
+    });
+
+    describe(`should set custom CSS property '--margin-top' on inline footer`, () => {
+      beforeEach(async () => {
+        const embeddedComponent = spectator.query(DynamicFooterEmbeddedComponent);
+        embeddedComponent.showFooter = true;
+        spectator.detectChanges();
+        await TestHelper.waitForResizeObserver();
+        TestHelper.scrollMainWindowToTop();
+      });
+
+      it('to a value', () => {
+        const inlineFooter = spectator.element.querySelector<HTMLElement>('kirby-inline-footer');
+        expect(inlineFooter.style.getPropertyValue('--margin-top')).toBeDefined();
+      });
+    });
+  });
+
   describe(`on keyboard show/hide events`, () => {
     beforeEach(() => {
       spectator = modalWrapperTestBuilder.build();

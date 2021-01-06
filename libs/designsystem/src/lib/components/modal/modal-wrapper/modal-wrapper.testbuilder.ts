@@ -65,7 +65,10 @@ export class ModalWrapperTestBuilder {
     this.config.component = DynamicFooterEmbeddedComponent;
     return this;
   }
-
+  withDynamicAndInlineFooter() {
+    this.config.component = InlineFooterEmbeddedComponent;
+    return this;
+  }
   withEmbeddedInputComponent() {
     this.config.component = InputEmbeddedComponent;
     return this;
@@ -137,3 +140,17 @@ export class DynamicFooterEmbeddedComponent {
   `,
 })
 export class InputEmbeddedComponent {}
+
+@Component({
+  template: `
+    <div>InlineFooterEmbeddedComponent - Some test content</div>
+    <kirby-inline-footer>Inline Footer</kirby-inline-footer>
+    <kirby-modal-footer *ngIf="showFooter" [class.enabled]="isEnabled">
+      <button kirby-button>Test</button>
+    </kirby-modal-footer>
+  `,
+})
+export class InlineFooterEmbeddedComponent {
+  showFooter = true;
+  isEnabled = true;
+}
