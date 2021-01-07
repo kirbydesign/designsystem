@@ -10,8 +10,8 @@
     <kirby-checkbox
       [checked]="disableFabSheet"
       (checkedChange)="disableFabSheet = $event"
-    ></kirby-checkbox
-    ><label (click)="disableFabSheet = !disableFabSheet">Disable FAB</label>
+      text="Disable FAB"
+    ></kirby-checkbox>
   </fieldset>
   <cookbook-fab-sheet-example [disableFabSheet]="disableFabSheet"></cookbook-fab-sheet-example>
   <cookbook-code-viewer [html]="exampleHtml"></cookbook-code-viewer>

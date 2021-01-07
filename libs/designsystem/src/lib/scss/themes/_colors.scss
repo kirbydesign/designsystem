@@ -112,3 +112,4 @@ $main-colors: map-remove(
 }
 
 $kirby-colors: generate-colors();
+$kirby-text-colors: generate-colors($text-colors);

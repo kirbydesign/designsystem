@@ -52,20 +52,28 @@ function getExpectedStringValueAndAlias(
   cssProperty: string,
   expectedValue: string | ThemeColorDefinition
 ) {
-  let expectedStringValue;
-  let expectedValueAlias;
+  let expectedStringValue: string;
+  let expectedValueAlias: string;
 
   if (typeof expectedValue === 'string') {
     expectedStringValue = expectedValue;
-    if (cssProperty.indexOf('color') != -1) {
-      expectedValueAlias = expectedValue;
-      expectedStringValue = ColorHelper.colorStringToRgbString(expectedValue);
-      if (expectedValue === expectedValueAlias) {
-        expectedValueAlias = undefined;
+    // Check of css property is a color:
+    if (
+      cssProperty.indexOf('color') > -1 ||
+      expectedValue.startsWith('rgb') ||
+      expectedValue.startsWith('#')
+    ) {
+      // Check if css property is a css variable:
+      // Css variable values are hex when getting computed style, all other property values are rgb:
+      if (!cssProperty.startsWith('--')) {
+        // Not a css variable, convert color to rgb:
+        expectedStringValue = ColorHelper.colorStringToRgbString(expectedValue);
       }
     }
   } else {
-    expectedStringValue = expectedValue.value;
+    // Check if css property is a css variable:
+    // Css variable values are hex when getting computed style, all other property values are rgb:
+    expectedStringValue = cssProperty.startsWith('--') ? expectedValue.hex : expectedValue.value;
     expectedValueAlias = expectedValue.fullname;
   }
 

@@ -391,7 +391,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
     this.calendarHelper.update(this.getHelperOptions());
   }
 
-  public changeMonth(index: number) {
+  changeMonth(index: number) {
     this.changeActiveView(index, 'months');
   }
 

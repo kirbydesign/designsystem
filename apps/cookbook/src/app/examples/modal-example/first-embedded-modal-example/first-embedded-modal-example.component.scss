@@ -1,8 +1,43 @@
 @import './libs/designsystem/src/lib/scss/utils';
 
-kirby-modal-footer label {
-  font-size: font-size('xs');
-  position: relative;
-  top: -4px;
-  padding-left: 10px;
+.example-properties {
+  display: none;
+
+  @include media('>=medium') {
+    display: unset;
+  }
+
+  dl {
+    display: grid;
+    grid-template: auto / auto 1fr;
+
+    dt {
+      padding-right: size('xxxs');
+    }
+
+    dd {
+      margin: 0;
+      font-style: italic;
+    }
+  }
+}
+
+kirby-card.nested-modal-configuration {
+  margin-top: size('l');
+  margin-bottom: size('l');
+
+  cookbook-example-configuration-wrapper {
+    margin-top: size('m');
+  }
+}
+
+kirby-modal-footer {
+  button {
+    flex-grow: 1;
+  }
+
+  kirby-checkbox {
+    font-size: font-size('xs');
+    text-align: center;
+  }
 }

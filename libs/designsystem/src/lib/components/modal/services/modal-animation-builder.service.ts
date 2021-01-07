@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { Animation, AnimationBuilder, AnimationController } from '@ionic/angular';
 
 import { KirbyAnimation } from '../../../animation/kirby-animation';
+import { PlatformService } from '../../../helpers/platform.service';
 
 @Injectable({ providedIn: 'root' })
 export class ModalAnimationBuilderService {
-  constructor(private animationCtrl: AnimationController) {}
+  constructor(private animationCtrl: AnimationController, private platform: PlatformService) {}
 
   private readonly easingEnter = KirbyAnimation.Easing.modal.enter;
   private readonly easingLeave = KirbyAnimation.Easing.modal.exit;
@@ -47,7 +48,7 @@ export class ModalAnimationBuilderService {
       }
 
       if (presentingEl) {
-        const isMobile = window.innerWidth < 768;
+        const isMobile = !this.platform.isPhabletOrBigger();
         const hasCardModal =
           presentingEl.tagName === 'ION-MODAL' &&
           (presentingEl as HTMLIonModalElement).presentingElement !== undefined;
@@ -173,7 +174,7 @@ export class ModalAnimationBuilderService {
       }
 
       if (presentingEl) {
-        const isMobile = window.innerWidth < 768;
+        const isMobile = !this.platform.isPhabletOrBigger();
         const hasCardModal =
           presentingEl.tagName === 'ION-MODAL' &&
           (presentingEl as HTMLIonModalElement).presentingElement !== undefined;

@@ -119,6 +119,7 @@ $modal-heights: (
 ) !default;
 
 $modal-default-height: map-get($modal-heights, 'm');
+$drawer-default-height: map-get($modal-heights, 's');
 
 /* Item
 ****************************************************************************/

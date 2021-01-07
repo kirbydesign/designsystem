@@ -26,6 +26,8 @@ export class MockCalendarComponent {
   @Input() todayDate: Date;
   @Input() minDate: Date;
   @Input() maxDate: Date;
+
+  changeYear() {}
 }
 
 // #endregion
