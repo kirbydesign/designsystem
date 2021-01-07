@@ -212,7 +212,7 @@ describe('FormFieldComponent', () => {
         expect(inputElement).toBeNull();
       });
 
-      it('should dispatch `ionInputDidLoad` event if not readonly', () => {
+      it('should register shims if not readonly', () => {
         spectator.setHostInput({ readonly: true });
         spectator.detectChanges(); //ngOnInit() + 1st ngAfterContentChecked()
         expect(dispatchEventSpy).toHaveBeenCalledTimes(0);
