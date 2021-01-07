@@ -67,7 +67,6 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   >;
   @ViewChild(RouterOutlet, { static: true }) private routerOutlet: RouterOutlet;
 
-  private isResizeCausedByMarginChange = false;
   private keyboardVisible = false;
   private toolbarButtons: HTMLButtonElement[] = [];
   private delayedClose = () => {};
@@ -206,10 +205,6 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   }
 
   private setInlineFooterPosition() {
-    if (this.isResizeCausedByMarginChange) {
-      this.isResizeCausedByMarginChange = false;
-      // return;
-    }
     const embeddededElement = this.getEmbeddedComponentElement() as HTMLElement;
     const inlineFooter = embeddededElement.querySelector<HTMLElement>('kirby-inline-footer');
     this.setCssVar(inlineFooter, '--margin-top', `0`);
@@ -217,14 +212,29 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
       this.ionContent.getScrollElement().then((scrollElement) => {
         const ionContentBottom = this.ionContentElement.nativeElement.getBoundingClientRect()
           .bottom;
+
+        const computedStyle = this.windowRef.getComputedStyle(scrollElement);
+
+        console.log('setInlineFooterPosition computedStyle', computedStyle);
+
         const scrollElementPaddingBottom = parseInt(
           this.windowRef.getComputedStyle(scrollElement).paddingBottom
         );
         const embeddededElementBottom = embeddededElement.getBoundingClientRect().bottom;
+
+        console.log(
+          'setInlineFooterPosition',
+          ionContentBottom,
+          scrollElementPaddingBottom,
+          embeddededElementBottom
+        );
+
         const availableFooterSpace =
           ionContentBottom - embeddededElementBottom - scrollElementPaddingBottom;
+
+        console.log('setInlineFooterPosition availableFooterSpace', availableFooterSpace);
+
         if (availableFooterSpace > 0) {
-          this.isResizeCausedByMarginChange = true;
           this.setCssVar(inlineFooter, '--margin-top', `${availableFooterSpace}px`);
         }
       });

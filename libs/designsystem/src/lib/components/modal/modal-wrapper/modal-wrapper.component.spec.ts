@@ -445,19 +445,29 @@ describe('ModalWrapperComponent', () => {
     describe(`should set custom CSS property value'--margin-top' on inline footer`, () => {
       beforeEach(async () => {
         const embeddedComponent = spectator.query(InlineFooterEmbeddedComponent);
-        embeddedComponent.showFooter = true;
-        spectator.detectChanges();
-        await TestHelper.waitForResizeObserver();
+        // embeddedComponent.showFooter = true;
+
+        TestHelper.resizeTestWindow(TestHelper.screensize.desktop);
         TestHelper.scrollMainWindowToTop();
+        spectator.detectChanges();
+
+        await TestHelper.waitForResizeObserver();
+        await TestHelper.waitForTimeout(1000);
+
+        // @ts-ignore
+        spectator.fixture.componentInstance.setInlineFooterPosition();
       });
 
       it('to a NOT empty property value', () => {
+        // getCssProperty
+
         const modalFooter = spectator.element.querySelector('kirby-modal-footer');
         expect(modalFooter).not.toBeNull();
         const inlineFooter = spectator.element.querySelector<HTMLElement>('kirby-inline-footer');
         expect(inlineFooter).not.toBeNull();
         const value = inlineFooter.style.getPropertyValue('--margin-top');
         console.log(value);
+
         expect(value).not.toEqual('');
       });
     });
