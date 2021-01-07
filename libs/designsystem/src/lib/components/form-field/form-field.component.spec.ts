@@ -390,4 +390,35 @@ describe('FormFieldComponent', () => {
       expect(secondEvent.type).toBe('touchend');
     });
   });
+
+  describe('ngAfterContentChecked', () => {
+    let platformServiceSpy: jasmine.SpyObj<PlatformService>;
+
+    beforeEach(() => {
+      spectator = createHost(
+        `<kirby-form-field>
+        <input kirby-input [readonly]="readonly" />
+      </kirby-form-field>`,
+        { detectChanges: false, hostProps: { readonly: true } } // Delay change detection to allow altering platform.isTouch()
+      );
+      platformServiceSpy = spectator.inject(PlatformService);
+      platformServiceSpy.isTouch.and.returnValue(true);
+    });
+
+    it('should register ionic input shims if not readonly', () => {
+      spectator.detectChanges(); //ngOnInit() + 1st ngAfterContentChecked()
+      const inputElement = spectator.queryHost<HTMLInputElement>('input[kirby-input]');
+      const dispatchEventSpy = spyOn(window.document, 'dispatchEvent');
+      expect(dispatchEventSpy).toHaveBeenCalledTimes(0);
+
+      spectator.setHostInput({ readonly: false });
+      spectator.detectChanges(); //ngOnInit() + 2nd ngAfterContentChecked()
+      expect(dispatchEventSpy).toHaveBeenCalledTimes(1);
+      expect(dispatchEventSpy).toHaveBeenCalledWith(
+        new CustomEvent('ionInputDidLoad', {
+          detail: spectator.element,
+        })
+      );
+    });
+  });
 });
