@@ -212,7 +212,24 @@ describe('FormFieldComponent', () => {
         expect(inputElement).toBeNull();
       });
 
-      it('should register shims if not readonly', () => {
+      it('should register shims', () => {
+        spectator.setHostInput({ readonly: false });
+        spectator.detectChanges(); //ngOnInit() + 1st ngAfterContentChecked()
+        expect(dispatchEventSpy).toHaveBeenCalledTimes(1);
+        expect(dispatchEventSpy).toHaveBeenCalledWith(
+          new CustomEvent('ionInputDidLoad', {
+            detail: spectator.element,
+          })
+        );
+      });
+
+      it('should NOT register shims if readonly', () => {
+        spectator.setHostInput({ readonly: true });
+        spectator.detectChanges(); //ngOnInit() + 1st ngAfterContentChecked()
+        expect(dispatchEventSpy).toHaveBeenCalledTimes(0);
+      });
+
+      it('should register shims if changing from readonly to not readonly', () => {
         spectator.setHostInput({ readonly: true });
         spectator.detectChanges(); //ngOnInit() + 1st ngAfterContentChecked()
         expect(dispatchEventSpy).toHaveBeenCalledTimes(0);
