@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 const config = {
   selector: 'cookbook-form-field-input-date-example',
-  template: `<kirby-form-field label="Date input" >
-  <input kirby-input kirby-key-date-input formControlName="dateDemo"
-  />
-</kirby-form-field>
+  template: `
+  <form [formGroup]="dateFormGroup">
+    <kirby-form-field label="Date input" >
+      <input kirby-input kirby-key-date-input formControlName="dateDemo" />
+    </kirby-form-field>
+  </form>
 `,
 };
 
@@ -16,11 +18,11 @@ const config = {
 })
 export class FormFieldInputDateExampleComponent {
   template: string = config.template;
+  dateFormGroup: FormGroup;
 
-  constructor(private fb: FormBuilder) {
-    this.myFormGroup = fb.group({
-      dateDemo: [''],
+  constructor() {
+    this.dateFormGroup = new FormGroup({
+      dateDemo: new FormControl(),
     });
   }
-  myFormGroup: FormGroup;
 }

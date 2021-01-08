@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { KirbyModule } from '@kirbydesign/designsystem';
 import { FormFieldInputDefaultExampleComponent } from './examples/input/default';
@@ -33,7 +34,7 @@ const COMPONENT_DECLARATIONS = [
 ];
 
 @NgModule({
-  imports: [CommonModule, KirbyModule],
+  imports: [CommonModule, KirbyModule, ReactiveFormsModule],
   declarations: COMPONENT_DECLARATIONS,
   exports: COMPONENT_DECLARATIONS,
 })
