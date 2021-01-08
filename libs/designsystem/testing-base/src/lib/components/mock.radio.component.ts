@@ -16,6 +16,7 @@ import { RadioComponent } from '@kirbydesign/designsystem';
 export class MockRadioComponent {
   @Input() value: any;
   @Input() text: string;
+  @Input() hasError: boolean;
   @Input() disabled: boolean;
 }
 
