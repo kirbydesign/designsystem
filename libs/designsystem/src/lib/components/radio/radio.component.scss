@@ -1,8 +1,10 @@
 @import '../../scss/utils';
 
 $radio-icon-padding: size('xxxxs');
-$radio-icon-size: size('m') - ($radio-icon-padding * 2);
+$radio-icon-size: size('m');
 $radio-icon-mark-size: 60%;
+$spacing-to-edge: size('s');
+$spacing-to-label: size('xs');
 
 :host {
   display: inline-block;
@@ -15,11 +17,14 @@ $radio-icon-mark-size: 60%;
       display: inline-flex;
       align-items: center;
       vertical-align: top;
+      padding-right: $spacing-to-label; // Ensure same padding on right side of label
+      min-height: size('xxxl');
     }
 
     ion-radio {
       position: static;
-      margin-right: size('xxxxs');
+      margin-left: $spacing-to-edge;
+      margin-right: $spacing-to-label;
     }
   }
 
@@ -44,9 +49,9 @@ $radio-icon-mark-size: 60%;
 }
 
 ion-radio {
-  height: $fat-finger-size;
-  width: $fat-finger-size;
-  padding: #{($fat-finger-size - $radio-icon-size) / 2}; // Making clickable area bigger without making icon bigger
+  min-height: $radio-icon-size;
+  min-width: $radio-icon-size;
+  padding: $radio-icon-padding;
   box-sizing: border-box; // Ensure padding is not added to radio width/height
   --border-width: 1px;
   --color: #{get-color('semi-dark')};
@@ -92,8 +97,11 @@ ion-radio {
 :host-context(kirby-item) {
   z-index: z('default'); // Makes whole kirby-item clickable above item-inner.
 
+  ion-radio {
+    margin: 0; // Reset Ionic in-item margins
+  }
+
   &[slot='start'] {
-    margin-inline-end: size('xxxs'); // TODO: Do we need a right margin??
-    margin-inline-start: size('xs') * -1; // TODO: Should we take fat finger size into consideration?
+    margin-inline-end: $spacing-to-label;
   }
 }
