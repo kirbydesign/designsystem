@@ -86,7 +86,7 @@ ion-radio {
   &.radio-checked {
     --border-width: 0px;
 
-    &:not(:focus) {
+    &:not(:focus):not(.radio-disabled) {
       &::part(container) {
         box-shadow: get-elevation(2);
       }
