@@ -18,6 +18,10 @@ export class RadioComponent {
 
   @Input()
   disabled: boolean;
+  @HostBinding('attr.disabled')
+  get _isDisabled() {
+    return this.disabled ? 'disabled' : null;
+  }
 
   _labelId = `kirby-radio-label-${uniqueId++}`;
 }

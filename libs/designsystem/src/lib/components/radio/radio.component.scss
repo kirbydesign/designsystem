@@ -22,6 +22,18 @@ $radio-icon-mark-size: 60%;
       margin-right: size('xxxxs');
     }
   }
+
+  &[disabled] {
+    color: #{get-text-color('semi-dark')};
+    ion-radio {
+      opacity: 1; // Reset Ionic disabled style
+      --color: #{get-color('medium')};
+      --color-checked: #{get-color('medium')};
+      &::part(container) {
+        background-color: get-color('semi-light');
+      }
+    }
+  }
 }
 
 ion-radio {
