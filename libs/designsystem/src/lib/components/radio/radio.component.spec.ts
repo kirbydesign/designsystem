@@ -8,6 +8,7 @@ import { RadioComponent } from './radio.component';
 
 const getColor = DesignTokenHelper.getColor;
 const getElevation = DesignTokenHelper.getElevation;
+const size = DesignTokenHelper.size;
 
 describe('RadioComponent', () => {
   const createComponent = createComponentFactory({
@@ -16,14 +17,12 @@ describe('RadioComponent', () => {
   });
 
   let spectator: Spectator<RadioComponent>;
-  let component: RadioComponent;
   let ionRadioElement: HTMLIonRadioElement;
   let radioIcon: HTMLElement;
   let radioCheckmark: HTMLElement;
 
   beforeEach(async () => {
     spectator = createComponent();
-    component = spectator.component;
     ionRadioElement = spectator.query('ion-radio');
     await TestHelper.whenReady(ionRadioElement);
     radioIcon = ionRadioElement.shadowRoot.querySelector('[part=container]');
@@ -34,7 +33,21 @@ describe('RadioComponent', () => {
     expect(spectator.component).toBeTruthy();
   });
 
-  describe('input property', () => {
+  describe('by default', () => {
+    it('should not be checked', () => {
+      expect(ionRadioElement.classList.contains('radio-checked')).toBe(false);
+    });
+
+    it('should not be disabled', () => {
+      expect(spectator.component.disabled).toBe(undefined);
+    });
+
+    it('should not have error', () => {
+      expect(spectator.component.hasError).toBe(false);
+    });
+  });
+
+  describe('when configured with', () => {
     describe('value', () => {
       it('should be bound to "value"-property of ion-radio', () => {
         const value = 'some random value';
@@ -53,60 +66,116 @@ describe('RadioComponent', () => {
   });
 
   describe('presentation', () => {
-    it('should be that of material design (traditional round radio button) and not an iOS checkmark', () => {
-      expect(ionRadioElement.mode).toBe('md');
-    });
-
-    it('should have correct size', () => {
-      expect(ionRadioElement).toHaveComputedStyle({ width: '44px', height: '44px' });
-      expect(radioIcon).toHaveComputedStyle({ width: '20px', height: '20px' });
-    });
-
-    it('should have correct border style', () => {
-      expect(radioIcon).toHaveComputedStyle({
-        'border-width': '1px',
-        'border-color': getColor('semi-dark'),
-      });
-    });
-
-    it('should have correct background color', () => {
-      expect(radioIcon).toHaveComputedStyle({
-        'background-color': getColor('white'),
-      });
-    });
-
-    describe('when selected', () => {
-      beforeEach(() => {
-        ionRadioElement.classList.add('radio-checked');
+    describe('by default', () => {
+      it('should be that of material design (traditional round radio button) and not an iOS checkmark', () => {
+        expect(ionRadioElement.mode).toBe('md');
       });
 
-      it('should not have any border', () => {
-        expect(radioIcon).toHaveComputedStyle({
-          'border-width': '0px',
+      it('should have correct size', () => {
+        const radioSize = size('m');
+        const radioPadding = size('xxxxs');
+        expect(ionRadioElement).toHaveComputedStyle({
+          width: radioSize,
+          height: radioSize,
+          padding: radioPadding,
         });
+        const radioIconSize = `${parseInt(radioSize) - parseInt(radioPadding) * 2}px`;
+        expect(radioIcon).toHaveComputedStyle({ width: radioIconSize, height: radioIconSize });
       });
 
-      it('should have correct background color', () => {
+      it('should have correct icon styling', () => {
         expect(radioIcon).toHaveComputedStyle({
+          'border-width': '1px',
+          'border-color': getColor('semi-dark'),
           'background-color': getColor('white'),
         });
       });
+    });
 
-      it('should have correct elevation', () => {
-        expect(radioIcon).toHaveComputedStyle({
-          'box-shadow': getElevation(2),
+    describe('when state is', () => {
+      describe('checked', () => {
+        beforeEach(() => {
+          ionRadioElement.classList.add('radio-checked');
+        });
+
+        it('should have correct icon styling', () => {
+          expect(radioIcon).toHaveComputedStyle({
+            'background-color': getColor('white'),
+            'border-width': '0px',
+            'box-shadow': getElevation(2),
+          });
+        });
+
+        it('should have correct checkmark styling', () => {
+          expect(radioCheckmark).toHaveComputedStyle({
+            width: '12px',
+            height: '12px',
+            'background-color': getColor('success'),
+          });
         });
       });
 
-      it('should have correct checkmark styling', () => {
-        expect(radioCheckmark).toHaveComputedStyle({
-          width: '12px',
-          height: '12px',
+      describe('disabled', () => {
+        beforeEach(async () => {
+          spectator.setInput('disabled', true);
+          spectator.detectChanges();
+          await TestHelper.whenTrue(() => ionRadioElement.classList.contains('radio-disabled'));
+        });
+
+        it('should have correct icon styling', () => {
+          expect(ionRadioElement).toHaveComputedStyle({
+            opacity: '1',
+          });
+          expect(radioIcon).toHaveComputedStyle({
+            'background-color': getColor('semi-light'),
+            'border-width': '1px',
+            'border-color': getColor('medium'),
+            'box-shadow': 'none',
+          });
+        });
+
+        it('should have correct checkmark styling', () => {
+          expect(radioCheckmark).toHaveComputedStyle({
+            'background-color': getColor('medium'),
+          });
         });
       });
 
-      it('should have correct elevation + color + no border', () => {
-        expect(ionRadioElement).toHaveComputedStyle({ width: '44px', height: '44px' });
+      describe('checked and disabled', () => {
+        beforeEach(async () => {
+          spectator.setInput('disabled', true);
+          spectator.detectChanges();
+          ionRadioElement.classList.add('radio-checked');
+          await TestHelper.whenTrue(() => ionRadioElement.classList.contains('radio-disabled'));
+        });
+
+        it('should have correct icon styling', () => {
+          expect(ionRadioElement).toHaveComputedStyle({
+            opacity: '1',
+          });
+          expect(radioIcon).toHaveComputedStyle({
+            'background-color': getColor('semi-light'),
+            'border-width': '0px',
+            'box-shadow': 'none',
+          });
+        });
+
+        it('should have correct checkmark styling', () => {
+          expect(radioCheckmark).toHaveComputedStyle({
+            'background-color': getColor('medium'),
+          });
+        });
+      });
+
+      describe('error', () => {
+        it('should have correct border style', () => {
+          spectator.setInput('hasError', true);
+          spectator.detectChanges();
+          expect(radioIcon).toHaveComputedStyle({
+            'border-width': '1px',
+            'border-color': getColor('danger'),
+          });
+        });
       });
     });
   });
