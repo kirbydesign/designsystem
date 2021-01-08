@@ -79,7 +79,7 @@ ion-radio {
   @include focus() {
     &::part(container) {
       // Apply focus ring through box-shadow to keep circle shape and default border:
-      box-shadow: 0 0 0 1px var(--kirby-background-color), 0 0 0 3px #{$focus-ring-color};
+      box-shadow: 0 0 0 1px #{get-color('background-color')}, 0 0 0 3px #{$focus-ring-color};
     }
   }
 
