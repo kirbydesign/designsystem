@@ -155,9 +155,10 @@
       </button>
       <button kirby-button (click)="close()">Close</button>
     </div>
-    <label (click)="snapFooterToKeyboard = !snapFooterToKeyboard">
-      <kirby-checkbox [checked]="snapFooterToKeyboard"></kirby-checkbox>
-      Snap footer to keyboard
-    </label>
+    <kirby-checkbox
+      size="xs"
+      [(checked)]="snapFooterToKeyboard"
+      text="Snap footer to keyboard"
+    ></kirby-checkbox>
   </div>
 </kirby-modal-footer>

@@ -1,4 +1,12 @@
-import { Component, EventEmitter, HostListener, Input, NgZone, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  HostBinding,
+  HostListener,
+  Input,
+  NgZone,
+  Output,
+} from '@angular/core';
 
 import { WindowRef } from '@kirbydesign/designsystem/types/window-ref';
 
@@ -29,10 +37,13 @@ export class ModalExampleConfigurationComponent {
   @Input() openFullHeight: boolean;
   @Output() openFullHeightChange = new EventEmitter<boolean>();
 
+  @HostBinding('class.checkbox-xs') true; // Extra small checkboxes
+
   constructor(private window: WindowRef, zone: NgZone) {}
 
-  toggleDummyKeyboard() {
+  toggleDummyKeyboard(show: boolean) {
     const sessionKey = 'kirby-cookbook-show-dummy-keyboard';
+    this.showDummyKeyboard = show;
     this.showDummyKeyboard
       ? this.window.sessionStorage.setItem(sessionKey, 'true')
       : this.window.sessionStorage.removeItem(sessionKey);

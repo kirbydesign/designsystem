@@ -7,18 +7,18 @@
   </p>
 
   <h2>Types</h2>
-  <p>There are two types of Checkbox’s:</p>
+  <p>There are two types of Checkboxes:</p>
   <ol>
     <li>Attention Level 1: Use as a binary choice for a standalone check box</li>
     <li>Attention Level 2: Use in a list of check boxes, where multiple choices can be selected</li>
   </ol>
 
-  <h2>Attention Level 1</h2>
+  <h3>Attention Level 1</h3>
   <cookbook-example-viewer [html]="checkboxConfirmExample.template">
     <cookbook-checkbox-confirm-example #checkboxConfirmExample></cookbook-checkbox-confirm-example>
   </cookbook-example-viewer>
 
-  <h2>Attention Level 2</h2>
+  <h3>Attention Level 2</h3>
   <cookbook-example-viewer [html]="checkboxDefaultExample.template">
     <cookbook-checkbox-default-example #checkboxDefaultExample></cookbook-checkbox-default-example>
   </cookbook-example-viewer>
@@ -28,25 +28,33 @@
     For more on using checkbox in an item, see
     <a routerLink="/home/showcase/item">item documentation</a>
   </p>
-  <cookbook-example-viewer [html]="checkboxListExample.template">
+  <cookbook-example-viewer
+    [html]="checkboxListExample.template"
+    [ts]="checkboxListExample.codeSnippet"
+  >
     <cookbook-checkbox-list-example #checkboxListExample></cookbook-checkbox-list-example>
-    <cookbook-code-viewer
-      [ts]="checkboxListExample.checkboxItemsCodeSnippet"
-    ></cookbook-code-viewer>
   </cookbook-example-viewer>
 
   <h2>States</h2>
-  <p>The states a checkbox can have</p>
   <cookbook-example-viewer [html]="checkboxStatesExample.template">
     <cookbook-checkbox-states-example #checkboxStatesExample></cookbook-checkbox-states-example>
   </cookbook-example-viewer>
 
+  <h2>Sizes</h2>
+  <p>
+    The size applies to the clickable/tapable area (highlighted in the examples below). The checkbox
+    and checkmark always have the same size.
+  </p>
+  <cookbook-example-viewer [html]="checkboxSizesExample.template">
+    <cookbook-checkbox-sizes-example #checkboxSizesExample></cookbook-checkbox-sizes-example>
+  </cookbook-example-viewer>
+
   <h2>Checked Change Event</h2>
-  <cookbook-example-viewer [html]="checkboxEventsExample.template">
+  <cookbook-example-viewer
+    [html]="checkboxEventsExample.template"
+    [ts]="checkboxEventsExample.codeSnippet"
+  >
     <cookbook-checkbox-events-example #checkboxEventsExample></cookbook-checkbox-events-example>
-    <cookbook-code-viewer
-      [ts]="checkboxEventsExample.checkboxEventCodeSnippet"
-    ></cookbook-code-viewer>
   </cookbook-example-viewer>
 
   <h2>Properties</h2>

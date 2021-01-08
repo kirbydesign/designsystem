@@ -1,10 +1,15 @@
 import { Component } from '@angular/core';
 
+import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
+
 const config = {
   selector: 'cookbook-checkbox-events-example',
-  template: `<kirby-checkbox (checkedChange)="checkedChange($event)" text="Toggle to see 'checkedChange' event in action"></kirby-checkbox>`,
-  checkboxEventCodeSnippet: `checkedChange(checked: boolean) {
-  alert(\`Checkbox checked change: \${checked}\`);
+  template: `<kirby-checkbox
+  (checkedChange)="onCheckedChange($event)"
+  text="Toggle to see 'checkedChange' event in action">
+</kirby-checkbox>`,
+  codeSnippet: `onCheckedChange(checked: boolean) {
+  ...
 }`,
 };
 
@@ -14,9 +19,16 @@ const config = {
 })
 export class CheckboxEventsExampleComponent {
   template: string = config.template;
-  checkboxEventCodeSnippet: string = config.checkboxEventCodeSnippet;
+  codeSnippet: string = config.codeSnippet;
 
-  checkedChange(checked: boolean) {
-    alert(`Checkbox checked change: ${checked}`);
+  constructor(private toastController: ToastController) {}
+
+  onCheckedChange(checked: boolean) {
+    const config: ToastConfig = {
+      message: `Checkbox changed - checked: ${checked}`,
+      messageType: checked ? 'success' : 'warning',
+      durationInMs: 1500,
+    };
+    this.toastController.showToast(config);
   }
 }

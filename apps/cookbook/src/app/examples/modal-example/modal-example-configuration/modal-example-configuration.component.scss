@@ -2,24 +2,14 @@
 
 :host {
   kirby-checkbox {
-    padding-right: size('xxxs');
-  }
-
-  label {
-    cursor: pointer;
-    display: block;
     &:not(:first-of-type) {
-      margin-top: size('xxs');
+      margin-top: size('xxxs');
     }
 
     &.indent {
-      margin-left: size('m');
+      margin-left: size('l');
       margin-top: size('xxxs');
       font-size: font-size('s');
-    }
-
-    &.disabled {
-      color: get-text-color('semi-dark');
     }
   }
 }

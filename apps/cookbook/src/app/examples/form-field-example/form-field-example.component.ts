@@ -12,8 +12,9 @@ export class FormFieldExampleComponent {
 
   showDummyKeyboard = !!this.window.sessionStorage.getItem('kirby-cookbook-show-dummy-keyboard');
 
-  toggleDummyKeyboard() {
+  toggleDummyKeyboard(show: boolean) {
     const sessionKey = 'kirby-cookbook-show-dummy-keyboard';
+    this.showDummyKeyboard = show;
     this.showDummyKeyboard
       ? this.window.sessionStorage.setItem(sessionKey, 'true')
       : this.window.sessionStorage.removeItem(sessionKey);

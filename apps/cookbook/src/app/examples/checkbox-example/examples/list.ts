@@ -11,7 +11,7 @@ const config = {
     <kirby-label>{{ item.label }}</kirby-label>
   </kirby-item>
 </kirby-list>`,
-  checkboxItemsCodeSnippet: `checkboxItems = [
+  codeSnippet: `checkboxItems = [
   { label: 'Checkbox 1', checked: true },
   { label: 'Checkbox 2', checked: false },
   { label: 'Checkbox 3', checked: false },
@@ -24,7 +24,7 @@ const config = {
 })
 export class CheckboxListExampleComponent {
   template: string = config.template;
-  checkboxItemsCodeSnippet: string = config.checkboxItemsCodeSnippet;
+  codeSnippet: string = config.codeSnippet;
 
   checkboxItems = [
     { label: 'Checkbox 1', checked: true },

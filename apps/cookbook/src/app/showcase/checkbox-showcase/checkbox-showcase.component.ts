@@ -36,6 +36,12 @@ Use the default attentionLevel 2 for checkbox lists.`,
       inputValues: ['boolean'],
     },
     {
+      name: 'size',
+      description: 'Sets the size of the clickable/tapable area',
+      defaultValue: 'md',
+      inputValues: ['xs', 'sm', 'md'],
+    },
+    {
       name: 'text',
       description: 'Adds a label text',
       inputValues: ['string'],

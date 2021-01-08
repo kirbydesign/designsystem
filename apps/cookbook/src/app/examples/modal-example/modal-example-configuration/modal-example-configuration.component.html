@@ -1,50 +1,52 @@
-<label *ngIf="showDummyKeyboard !== undefined" (click)="showDummyKeyboard = !showDummyKeyboard">
-  <kirby-checkbox
-    [checked]="showDummyKeyboard"
-    (checkedChange)="toggleDummyKeyboard()"
-  ></kirby-checkbox
-  >Show dummy keyboard</label
->
-<label *ngIf="showFooter !== undefined" (click)="toggleShowFooter((showFooter = !showFooter))"
-  ><kirby-checkbox [checked]="showFooter"></kirby-checkbox>Show footer</label
->
-<label
+<kirby-checkbox
+  *ngIf="showDummyKeyboard !== undefined"
+  [checked]="showDummyKeyboard"
+  (checkedChange)="toggleDummyKeyboard($event)"
+  text="Show dummy keyboard"
+></kirby-checkbox>
+
+<kirby-checkbox
+  *ngIf="showFooter !== undefined"
+  [checked]="showFooter"
+  (checkedChange)="toggleShowFooter($event)"
+  text="Show footer"
+></kirby-checkbox>
+
+<kirby-checkbox
   *ngIf="disableScroll !== undefined"
-  (click)="toggleDisableScroll((disableScroll = !disableScroll))"
-  ><kirby-checkbox [checked]="disableScroll"></kirby-checkbox>Disable scroll</label
->
-<label
+  [checked]="disableScroll"
+  (checkedChange)="toggleDisableScroll($event)"
+  text="Disable scroll"
+></kirby-checkbox>
+
+<kirby-checkbox
   *ngIf="showDummyContent !== undefined"
-  (click)="toggleShowDummyContent((showDummyContent = !showDummyContent))"
->
-  <kirby-checkbox [checked]="showDummyContent"></kirby-checkbox>Show dummy content</label
->
-<label
+  [checked]="showDummyContent"
+  (checkedChange)="toggleShowDummyContent($event)"
+  text="Show dummy content"
+></kirby-checkbox>
+
+<kirby-checkbox
   *ngIf="delayLoadDummyContent !== undefined"
-  (click)="
-    showDummyContent &&
-      toggleDelayLoadDummyContent((delayLoadDummyContent = !delayLoadDummyContent))
-  "
+  [checked]="delayLoadDummyContent"
+  (checkedChange)="toggleDelayLoadDummyContent($event)"
+  [disabled]="!showDummyContent"
   class="indent"
-  [class.disabled]="!showDummyContent"
->
-  <kirby-checkbox [checked]="delayLoadDummyContent" [disabled]="!showDummyContent"></kirby-checkbox
-  >Delay load modal content</label
->
-<label
+  text="Delay load modal"
+></kirby-checkbox>
+
+<kirby-checkbox
   *ngIf="loadAdditionalContent !== undefined"
-  (click)="
-    showDummyContent &&
-      toggleLoadAdditionalContent((loadAdditionalContent = !loadAdditionalContent))
-  "
+  [checked]="loadAdditionalContent"
+  (checkedChange)="showDummyContent && toggleLoadAdditionalContent($event)"
+  [disabled]="!showDummyContent"
   class="indent"
-  [class.disabled]="!showDummyContent"
->
-  <kirby-checkbox [checked]="loadAdditionalContent" [disabled]="!showDummyContent"></kirby-checkbox
-  >Delay load additional modal content</label
->
-<label
+  text="Delay load additional"
+></kirby-checkbox>
+
+<kirby-checkbox
   *ngIf="openFullHeight !== undefined"
-  (click)="toggleOpenFullHeight((openFullHeight = !openFullHeight))"
-  ><kirby-checkbox [checked]="openFullHeight"></kirby-checkbox>Open in full height</label
->
+  [checked]="openFullHeight"
+  (checkedChange)="toggleOpenFullHeight($event)"
+  text="Open in full height"
+></kirby-checkbox>

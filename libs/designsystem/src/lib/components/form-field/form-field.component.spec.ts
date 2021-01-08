@@ -188,8 +188,9 @@ describe('FormFieldComponent', () => {
 
         spectator = createHost(
           `<kirby-form-field>
-             <input kirby-input/>
-           </kirby-form-field>`
+            <input kirby-input [readonly]="readonly" />
+          </kirby-form-field>`,
+          { detectChanges: false, hostProps: { readonly: false } } // Delay change detection to allow altering platform.isTouch()
         );
 
         spectator.detectChanges();
@@ -211,11 +212,36 @@ describe('FormFieldComponent', () => {
         expect(inputElement).toBeNull();
       });
 
-      it('should dispatch `ionInputDidLoad` event after content checked', () => {
-        const event: Event = dispatchEventSpy.calls.mostRecent().args[0];
-        expect(event).toBeInstanceOf(CustomEvent);
-        expect(event.type).toBe('ionInputDidLoad');
-        expect((event as CustomEvent).detail).toEqual(spectator.element);
+      it('should register shims', () => {
+        spectator.setHostInput({ readonly: false });
+        spectator.detectChanges(); //ngOnInit() + 1st ngAfterContentChecked()
+        expect(dispatchEventSpy).toHaveBeenCalledTimes(1);
+        expect(dispatchEventSpy).toHaveBeenCalledWith(
+          new CustomEvent('ionInputDidLoad', {
+            detail: spectator.element,
+          })
+        );
+      });
+
+      it('should NOT register shims if readonly', () => {
+        spectator.setHostInput({ readonly: true });
+        spectator.detectChanges(); //ngOnInit() + 1st ngAfterContentChecked()
+        expect(dispatchEventSpy).toHaveBeenCalledTimes(0);
+      });
+
+      it('should register shims if changing from readonly to not readonly', () => {
+        spectator.setHostInput({ readonly: true });
+        spectator.detectChanges(); //ngOnInit() + 1st ngAfterContentChecked()
+        expect(dispatchEventSpy).toHaveBeenCalledTimes(0);
+
+        spectator.setHostInput({ readonly: false });
+        spectator.detectChanges(); //ngOnInit() + 2nd ngAfterContentChecked()
+        expect(dispatchEventSpy).toHaveBeenCalledTimes(1);
+        expect(dispatchEventSpy).toHaveBeenCalledWith(
+          new CustomEvent('ionInputDidLoad', {
+            detail: spectator.element,
+          })
+        );
       });
 
       it('should dispatch `ionInputDidUnload` event on destroy', () => {

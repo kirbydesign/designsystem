@@ -24,6 +24,10 @@ export class CheckboxComponent {
   @Input()
   text: string;
 
+  @HostBinding('class')
+  @Input()
+  size?: 'xs' | 'sm' | 'md';
+
   @HostBinding('class.error')
   @Input()
   hasError: boolean = false;

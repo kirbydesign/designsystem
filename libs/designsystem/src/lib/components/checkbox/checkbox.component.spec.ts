@@ -1,11 +1,17 @@
 import { Spectator, createHostFactory } from '@ngneat/spectator';
-import { IonicModule } from '@ionic/angular';
+import { IonCheckbox } from '@ionic/angular';
 
 import { CheckboxComponent } from './checkbox.component';
 import { DesignTokenHelper } from '../../helpers';
 
+const size = DesignTokenHelper.size;
 const getColor = DesignTokenHelper.getColor;
 const getTextColor = DesignTokenHelper.getTextColor;
+const fatFingerSize = DesignTokenHelper.fatFingerSize();
+const checkboxIconSize = size('m');
+const checkboxSizeXs = size('l');
+const checkboxSizeSm = fatFingerSize;
+const checkboxSizeMd = size('xxxl');
 
 describe('CheckboxComponent', () => {
   let spectator: Spectator<CheckboxComponent>;
@@ -13,11 +19,11 @@ describe('CheckboxComponent', () => {
 
   const createHost = createHostFactory({
     component: CheckboxComponent,
-    imports: [IonicModule.forRoot({ _testing: true })],
+    declarations: [IonCheckbox],
   });
 
   beforeEach(() => {
-    spectator = createHost(`<kirby-checkbox></kirby-checkbox>`);
+    spectator = createHost(`<kirby-checkbox text="test"></kirby-checkbox>`);
     ionCheckbox = spectator.query('ion-checkbox');
   });
 
@@ -33,9 +39,17 @@ describe('CheckboxComponent', () => {
 
     it('should have correct icon styling', () => {
       expect(ionCheckbox).toHaveComputedStyle({
+        '--size': checkboxIconSize,
         '--checkmark-color': getColor('white'),
         '--background-checked': getColor('black'),
         '--border-color-checked': getColor('black'),
+      });
+    });
+
+    it('should have correct vertical spacing', () => {
+      expect(ionCheckbox).toHaveComputedStyle({
+        'margin-left': size('s'),
+        'margin-right': size('xs'),
       });
     });
 
@@ -69,6 +83,41 @@ describe('CheckboxComponent', () => {
 
       spectator.setInput('checked', false);
       expect(ionCheckbox.checked).toBe(false);
+    });
+
+    describe('with size', () => {
+      it(`should have 'sm' size by default`, () => {
+        expect(spectator.element).toHaveComputedStyle({
+          height: checkboxSizeMd,
+        });
+      });
+
+      it(`should have correct size when size = 'xs'`, () => {
+        spectator.setInput('size', 'xs');
+        spectator.detectChanges();
+
+        expect(spectator.element).toHaveComputedStyle({
+          height: checkboxSizeXs,
+        });
+      });
+
+      it(`should have correct size when size = 'sm'`, () => {
+        spectator.setInput('size', 'sm');
+        spectator.detectChanges();
+
+        expect(spectator.element).toHaveComputedStyle({
+          height: checkboxSizeSm,
+        });
+      });
+
+      it(`should have correct size when size = 'md'`, () => {
+        spectator.setInput('size', 'md');
+        spectator.detectChanges();
+
+        expect(spectator.element).toHaveComputedStyle({
+          height: checkboxSizeMd,
+        });
+      });
     });
 
     describe('when disabled', () => {
