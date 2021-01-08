@@ -23,6 +23,13 @@ $radio-icon-mark-size: 60%;
     }
   }
 
+  &.error {
+    ion-radio,
+    ion-radio:active {
+      --color: #{get-color('danger')};
+    }
+  }
+
   &[disabled] {
     color: #{get-text-color('semi-dark')};
     ion-radio {
