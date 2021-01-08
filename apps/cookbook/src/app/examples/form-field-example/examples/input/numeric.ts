@@ -19,7 +19,6 @@ const config = {
     />
   </kirby-form-field>
 
-
   <kirby-form-field label="Numeric input with positive 8 digit integral part only (0 decimals)" >
     <input kirby-input kirby-numeric-input formControlName="numericDemo3"
     maximumNumberOfDecimals="0"
