@@ -91,7 +91,6 @@ td {
 .day.selected {
   color: get-color('black-contrast');
   background-color: get-color('black');
-  pointer-events: none;
 }
 
 .day:not(.current-month) {
