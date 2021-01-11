@@ -240,7 +240,6 @@ export class DateInputAnalyzer {
       // mmdd
       value = this.fixDaySection(subStr1) + this.fixMonthSection(subStr2);
     }
-    console.log('validating section 2', value);
     return value;
   }
 
