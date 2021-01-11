@@ -72,16 +72,8 @@ describe('RadioComponent', () => {
         expect(ionRadioElement.mode).toBe('md');
       });
 
-      it('should have correct size', () => {
-        const radioSize = size('m');
-        const radioPadding = size('xxxxs');
-        expect(ionRadioElement).toHaveComputedStyle({
-          width: radioSize,
-          height: radioSize,
-          padding: radioPadding,
-        });
-        const radioIconSize = `${parseInt(radioSize) - parseInt(radioPadding) * 2}px`;
-        expect(radioIcon).toHaveComputedStyle({ width: radioIconSize, height: radioIconSize });
+      it('should have correct icon size', () => {
+        expectIconSize();
       });
 
       it('should have correct icon styling', () => {
@@ -96,6 +88,38 @@ describe('RadioComponent', () => {
         expect(spectator.element).toHaveComputedStyle({
           height: `>=${fatFingerSize}`,
           width: `>=${fatFingerSize}`,
+        });
+      });
+    });
+
+    describe('when configured with size', () => {
+      it(`should have correct size when size = 'xs'`, () => {
+        spectator.setInput('size', 'xs');
+        spectator.detectChanges();
+
+        expectIconSize();
+        expect(spectator.element).toHaveComputedStyle({
+          height: size('l'),
+        });
+      });
+
+      it(`should have correct size when size = 'sm'`, () => {
+        spectator.setInput('size', 'sm');
+        spectator.detectChanges();
+
+        expectIconSize();
+        expect(spectator.element).toHaveComputedStyle({
+          height: fatFingerSize,
+        });
+      });
+
+      it(`should have correct size when size = 'md'`, () => {
+        spectator.setInput('size', 'md');
+        spectator.detectChanges();
+
+        expectIconSize();
+        expect(spectator.element).toHaveComputedStyle({
+          height: size('xxxl'),
         });
       });
     });
@@ -187,4 +211,20 @@ describe('RadioComponent', () => {
       });
     });
   });
+
+  function expectIconSize() {
+    const radioIconOuterSize = size('m');
+    const radioPadding = size('xxxxs');
+    const radioIconInnerSize = `${parseInt(radioIconOuterSize) - parseInt(radioPadding) * 2}px`;
+
+    expect(ionRadioElement).toHaveComputedStyle({
+      width: radioIconOuterSize,
+      height: radioIconOuterSize,
+      padding: radioPadding,
+    });
+    expect(radioIcon).toHaveComputedStyle({
+      width: radioIconInnerSize,
+      height: radioIconInnerSize,
+    });
+  }
 });

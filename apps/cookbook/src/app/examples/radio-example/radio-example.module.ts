@@ -7,6 +7,7 @@ import { KirbyModule } from '@kirbydesign/designsystem';
 import { RadioExampleComponent } from './radio-example.component';
 import { RadioDefaultExampleComponent } from './examples/default';
 import { RadioStatesExampleComponent } from './examples/states';
+import { RadioSizesExampleComponent } from './examples/sizes';
 import { RadioExampleBindingComponent } from './examples/binding';
 import { RadioInItemExampleComponent } from './examples/in-item';
 import { RadioCustomContentExampleComponent } from './examples/custom';
@@ -16,6 +17,7 @@ const COMPONENT_DECLARATIONS = [
   RadioExampleComponent,
   RadioDefaultExampleComponent,
   RadioStatesExampleComponent,
+  RadioSizesExampleComponent,
   RadioCustomContentExampleComponent,
   RadioInItemExampleComponent,
   RadioInListExampleComponent,
