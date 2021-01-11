@@ -6,6 +6,7 @@ import { DesignTokenHelper } from '../../helpers';
 
 import { RadioComponent } from './radio.component';
 
+const fatFingerSize = DesignTokenHelper.fatFingerSize();
 const getColor = DesignTokenHelper.getColor;
 const getElevation = DesignTokenHelper.getElevation;
 const size = DesignTokenHelper.size;
@@ -22,7 +23,7 @@ describe('RadioComponent', () => {
   let radioCheckmark: HTMLElement;
 
   beforeEach(async () => {
-    spectator = createComponent();
+    spectator = createComponent({ props: { text: 'test' } });
     ionRadioElement = spectator.query('ion-radio');
     await TestHelper.whenReady(ionRadioElement);
     radioIcon = ionRadioElement.shadowRoot.querySelector('[part=container]');
@@ -88,6 +89,13 @@ describe('RadioComponent', () => {
           'border-width': '1px',
           'border-color': getColor('semi-dark'),
           'background-color': getColor('white'),
+        });
+      });
+
+      it('should have minimum fat finger size', () => {
+        expect(spectator.element).toHaveComputedStyle({
+          height: `>=${fatFingerSize}`,
+          width: `>=${fatFingerSize}`,
         });
       });
     });
