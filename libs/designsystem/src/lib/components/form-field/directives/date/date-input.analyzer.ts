@@ -18,8 +18,8 @@ export class DateInputAnalyzer {
 
   public cursorPosition: number;
 
-  private excludedPattern: RegExp; // /[^0-9.:-]+/g;
-  private digitsPattern: RegExp; // = /^[0-9]+$/g;
+  private excludedPattern: RegExp;
+  private digitsPattern: RegExp;
 
   private lastValue = '';
   private currentValue = '';
@@ -31,7 +31,9 @@ export class DateInputAnalyzer {
     this.lastValue = lastValue;
     value = value || '';
     value = this.resetAndCapture(value);
-
+    if (value !== '') {
+      if (value.endsWith(this.localeConfig.separator)) return value;
+    }
     if (this.lastValue !== value && value !== '') {
       value = this.validateValue(value);
       value = this.handleDate(value);
@@ -41,6 +43,7 @@ export class DateInputAnalyzer {
 
   private resetAndCapture(value: string): string {
     this.currentValue = value;
+    this.allowedCharsOnly = true;
     return value;
   }
 
@@ -49,6 +52,7 @@ export class DateInputAnalyzer {
     if (!this.allowedCharsOnly) {
       return this.lastValue;
     }
+
     if (value.length > this.maxLength) {
       return this.lastValue;
     }
@@ -79,6 +83,7 @@ export class DateInputAnalyzer {
     }
     return true;
   }
+
   private adjustCursorPositionAfterFormatting(
     formattedValLength: number,
     lengthBeforeFormatting: number

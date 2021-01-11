@@ -1,8 +1,8 @@
 import { DateLocaleAnalyser } from './date-locale-analyser';
 
 export class DatePatterns {
-  public static dates = '([0-3][1-9]|[1-9])';
-  public static months = '([0-1][0-2]|[1-9])';
+  public static dates = '([0-3][1-9]|[0-9])';
+  public static months = '([0-1][0-2]|[0-9])';
   public static years = '[1-2][0-9][0-9][0-9]|[1-2]|[1-2][0-9]|[1-2][0-9][0-9]';
 
   public static order: any[] = [];

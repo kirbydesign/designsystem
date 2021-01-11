@@ -9,20 +9,22 @@ const config = {
     <input type="number" kirby-input />
   </kirby-form-field>
 
-  <kirby-form-field label="Numeric input using default settings">
+  <kirby-form-field label="Numeric input using default settings for grouping separator and decimal separator and allowed negative numbers">
     <input kirby-input kirby-numeric-input formControlName="numericDemo1"
     />
   </kirby-form-field>
 
-  <kirby-form-field label="Numeric input with 2 decimals and negative numbers" >
-    <input kirby-input kirby-numeric-input formControlName="numericDemo2" maximumNumberOfDecimals="2" allowNegativeNumber="true"
+  <kirby-form-field label="Numeric input with grouping separator, maximum 2 decimals and allowed negative numbers" >
+    <input kirby-input kirby-numeric-input formControlName="numericDemo2" 
+    maximumNumberOfDecimals="2" 
     />
   </kirby-form-field>
 
-  <kirby-form-field label="Numeric input with positive 8 digit integral part only (0 decimals)" >
+  <kirby-form-field label="Numeric input with positive 8 digits only in integral part, grouping separator and 0 decimals, and no negative values" >
     <input kirby-input kirby-numeric-input formControlName="numericDemo3"
     maximumNumberOfDecimals="0"
-    allowNegativeNumber="false" maxNumberOfIntegrals="8"
+    allowNegativeNumber="false" 
+    maxNumberOfIntegrals="8"
     />
   </kirby-form-field>
 </form>

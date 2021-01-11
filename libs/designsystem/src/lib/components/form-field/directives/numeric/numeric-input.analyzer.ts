@@ -60,6 +60,7 @@ export class NumericInputAnalyzer {
       value = this.validateValue(value);
       value = this.handleIntegralPart(value);
       value = this.handleDecimalPart(value);
+      this.adjustCursorPosition(value);
       value = this.createOutput(value);
     }
     return value;
@@ -83,26 +84,24 @@ export class NumericInputAnalyzer {
     }
     return value;
   }
+
   private validateValue(value: string): string {
     this.allowedCharsOnly = this.hasAllowedCharsOnly(value);
     if (!this.allowedCharsOnly) {
       this.invalid = true;
       return this.lastValue;
     }
-    this.adjustCursorPosition(value);
     return value;
   }
 
   private handleIntegralPart(value: string): string {
-    if (!this.allowedCharsOnly) {
-      this.invalid = true;
-      return value;
-    }
     this.integralPart = this.extractIntegralPart(value);
     this.integralPart = this.replaceSeparator(this.integralPart, this.groupingSeparator, '');
     if (this.integralPart.length > this.config.maxNumberOfIntegrals) {
       this.invalid = true;
-      return this.lastValue;
+      value = this.lastValue;
+      this.integralPart = this.extractIntegralPart(value);
+      this.integralPart = this.replaceSeparator(this.integralPart, this.groupingSeparator, '');
     }
     this.integralPart = this.addGroupingSeparators(this.integralPart);
     if (this.integralPart.length === 0) {
@@ -112,10 +111,6 @@ export class NumericInputAnalyzer {
   }
 
   private handleDecimalPart(value: string): string {
-    if (!this.allowedCharsOnly) {
-      this.invalid = true;
-      return value;
-    }
     this.decimalPart = this.findDecimalPart(value);
     if (this.decimalPart === null) {
       return this.lastValue;
@@ -144,6 +139,9 @@ export class NumericInputAnalyzer {
   }
 
   private adjustCursorPosition(value: string): void {
+    if (this.invalid) {
+      return;
+    }
     const count = this.countGroupingSeparator(value.substring(0, this.cursorPosition));
     this.cursorPosition -= count;
   }
