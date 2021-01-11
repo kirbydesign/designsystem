@@ -79,7 +79,15 @@ export class FormFieldComponent implements AfterContentChecked, OnInit, OnDestro
     if (!this.inputElement) {
       this.inputElement = this.element.querySelector('input, textarea');
     }
-    if (!this.isRegistered && this.element.isConnected && !!this.inputElement) {
+
+    // TODO: remove "!this.inputElement.readOnly" when ionic has fixed input click issue
+    // https://github.com/ionic-team/ionic-framework/issues/22740
+    if (
+      !this.isRegistered &&
+      this.element.isConnected &&
+      !!this.inputElement &&
+      !this.inputElement.readOnly
+    ) {
       // Host is connected to dom and slotted input/textarea is present:
       this.isRegistered = true;
       this.dispatchLoadEvent();
