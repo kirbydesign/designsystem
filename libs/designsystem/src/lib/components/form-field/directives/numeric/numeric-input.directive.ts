@@ -19,9 +19,9 @@ import { NumericInputAnalyzer } from './numeric-input.analyzer';
  * Directive for filtering input keys matching digits + decimal and grouping separator.
  * Uses LOCALE_ID to read initial separator settings, this can be overriden by the directive user
  * Supports these features:
- * #1: Allows for configurable thousand (grouping) separator
- * #2: Allows for configurable decimal separator
- * #3: Allows for configurable number of decimals. Default is no limit. Can be set to 0 to prevent decimals
+ * #1: Thousand (grouping) separator in integral part
+ * #2: Decimal separator
+ * #3: Allows for configurable number of decimals. Default is no limit. Can be set to 0 to disallow decimals
  * #4: Allows for using negative sign or blocking it
  *
  *

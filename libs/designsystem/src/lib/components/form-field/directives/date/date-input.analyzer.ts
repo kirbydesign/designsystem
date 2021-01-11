@@ -193,12 +193,10 @@ export class DateInputAnalyzer {
     // ddx -> dd.x
     // yyyyx -> yyyy.x
     if (value.length > this.localeConfig.firstSectionLength) {
-      // && value[value.length - 1] !== this.separator
       value =
         value.substring(0, this.localeConfig.firstSectionLength) +
         this.localeConfig.separator +
         value.substring(this.localeConfig.firstSectionLength);
-      // console.log('new value', value);
       this.cursorPosition++;
     }
     // dd.mmx -> dd.mm.x
@@ -209,14 +207,12 @@ export class DateInputAnalyzer {
         value.substring(0, this.localeConfig.firstSectionLength + 3) +
         this.localeConfig.separator +
         value.substring(this.localeConfig.firstSectionLength + 3);
-      // console.log('new value', value);
       this.cursorPosition++;
     }
     return value;
   }
 
   private validateSection1(value: string): string {
-    console.log('validating section 1', value);
     if (this.localeConfig.yearFirst) {
       value = this.fixYearSection(value);
     } else {
@@ -226,15 +222,12 @@ export class DateInputAnalyzer {
         value = this.fixMonthSection(value);
       }
     }
-    console.log('validating section 1', value);
     return value;
   }
 
   private validateSection2(value: string): string {
-    console.log('validating section 2', value);
     const subStr1 = value.substring(0, this.localeConfig.firstSectionLength);
     const subStr2 = value.substring(this.localeConfig.firstSectionLength);
-
     if (this.localeConfig.dayBeforeMonth) {
       // ddmm
       value = this.fixMonthSection(subStr1) + this.fixDaySection(subStr2);
@@ -247,7 +240,6 @@ export class DateInputAnalyzer {
   }
 
   private validateSection3(value: string): string {
-    console.log('validating section 3', value);
     const subStr1 = value.substring(0, this.localeConfig.firstSectionLength);
     const subStr2 = value.substring(
       this.localeConfig.firstSectionLength,
@@ -282,7 +274,6 @@ export class DateInputAnalyzer {
           this.fixYearSection(subStr3);
       }
     }
-    console.log('validating section 3', value);
     return value;
   }
 

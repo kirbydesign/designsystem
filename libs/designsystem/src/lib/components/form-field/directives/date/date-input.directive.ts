@@ -1,10 +1,23 @@
-import { Directive, ElementRef, Inject, LOCALE_ID, OnDestroy, OnInit, Self } from '@angular/core';
+import { Directive, ElementRef, OnDestroy, OnInit, Self } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { DatePipe } from '@angular/common';
 
 import { DateInputAnalyzer } from './date-input.analyzer';
+/**
+ * Directive for handling input in locale specific date format.
+ * Uses LOCALE_ID to read initial separator settings, this can be overriden by the directive user
+ * Supports these features:
+ * #1: Adds date-month-year separators
+ *
+ *
+ * Example:
+ * ```
+ * <input kirby-input kirby-date-input formControlName="dateDemo" />
+ * ```
+ *
+ */
 
 @Directive({
   // tslint:disable-next-line:directive-selector
@@ -56,7 +69,6 @@ export class DateInputDirective implements OnInit, OnDestroy {
     if (value === undefined || value === null) {
       return;
     }
-    console.log('updateValue value', value);
     this.ngControl.control.setValue(value, {
       emitEvent: false,
       onlySelf: true,
