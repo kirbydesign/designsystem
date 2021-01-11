@@ -14,7 +14,8 @@ export function stringifyPretty(value: any) {
   return JSON.stringify(value, null, 2)
     .replace(/"/g, "'") // convert to single quotes
     .replace(/'(\w+)':/g, '$1:') // remove quotes around single-word property names
-    .replace(/(?<!(\[|},))(\n( )+)/g, ' '); // Remove additional whitespace and linebreaks within object literals
+    .replace(/(\[\n)|(\},\n)|(\n\])|(\s+)/g, '$1$2$3 ') // remove additional whitespace and linebreaks within object literals
+    .trim();
 }
 
 @Component({
