@@ -214,12 +214,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
           .bottom;
 
         const computedStyle = this.windowRef.getComputedStyle(scrollElement);
-
-        console.log('setInlineFooterPosition computedStyle', computedStyle);
-
-        const scrollElementPaddingBottom = parseInt(
-          this.windowRef.getComputedStyle(scrollElement).paddingBottom
-        );
+        const scrollElementPaddingBottom = parseInt(computedStyle.paddingBottom);
         const embeddededElementBottom = embeddededElement.getBoundingClientRect().bottom;
 
         console.log(
