@@ -1,6 +1,7 @@
 import { forwardRef, Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { CalendarComponent } from '@kirbydesign/designsystem';
+import { YearNavigatorConfig } from '../../../../src/lib/components/calendar/calendar.component';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({

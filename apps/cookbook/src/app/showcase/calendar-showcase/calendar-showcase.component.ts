@@ -103,5 +103,11 @@ export class CalendarShowcaseComponent {
       defaultValue: '"local"',
       inputValues: ['"local" | "UTC"'],
     },
+    {
+      name: 'yearNavigatorOptions',
+      description: '(Optional) Display Drowdown to navigate between Years',
+      defaultValue: 'false',
+      inputValues: ['true | false'],
+    },
   ];
 }

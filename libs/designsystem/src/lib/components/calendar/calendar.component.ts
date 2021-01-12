@@ -28,7 +28,7 @@ interface CalendarDay {
 }
 
 // TODO: Should this actually be exported?
-type YearNavigatorConfig = {
+export type YearNavigatorConfig = {
   from: number | Date;
   to: number | Date;
 };
