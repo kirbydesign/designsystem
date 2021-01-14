@@ -1,3 +1,6 @@
+import { IonicModule } from '@ionic/angular';
+import { IonicConfig } from '@ionic/core';
+
 export class TestHelper {
   private static readonly _init = TestHelper.muteIonicReInitializeWarning();
 
@@ -9,6 +12,12 @@ export class TestHelper {
     };
     console.warn = patchedWarn;
   }
+
+  public static ionicModuleForTest = IonicModule.forRoot({
+    mode: 'ios',
+    _testing: true,
+    get: () => {}, // Prevents Ionic "config.get is not a function" errors
+  } as IonicConfig);
 
   /*
    * Checks for the Web Component(s) being ready,
