@@ -23,6 +23,11 @@ const config = {
     <em class="rating">Rating: {{item.rating}}</em>
   </div>
 </kirby-radio-group>`,
+  slottedTemplate: `<kirby-radio-group value="Bacon">
+  <kirby-radio value="Bacon" text="Bacon">
+  <kirby-radio value="Bologna" text="Bologna">
+  <kirby-radio value="Tenderloin" text="Tenderloin">
+</kirby-radio-group>`,
   codeSnippet: `items = ${stringifyPretty(items)};
 
 selected = this.items[1];`,
@@ -55,7 +60,11 @@ selected = this.items[1];`,
   styles: config.styles,
 })
 export class RadioCustomContentExampleComponent {
-  template: string = config.template;
+  template: string = `<!-- 1. Using slotted <kirby-radio> -->
+${config.slottedTemplate}
+
+<!-- 2. Using *kirbyListItemTemplate -->
+${config.template}`;
   codeSnippet: string = config.codeSnippet;
   styles: string = config.styles.join(`
 `);

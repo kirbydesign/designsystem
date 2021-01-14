@@ -17,8 +17,9 @@ const config = {
   [items]="items"
   itemTextProperty="title"
   [value]="selected"
-  (change)="onChange($event)">
+  (valueChange)="onChange($event)">
 </kirby-radio-group>`,
+  twoWayBindingTemplate: `<kirby-radio-group [(value)]="selected"></kirby-radio-group>`,
   codeSnippet: `items = ${stringifyPretty(items)};
 
 selected = this.items[0];
@@ -34,6 +35,7 @@ onChange(value: string | YourDataType) {
 })
 export class RadioExampleBindingComponent {
   template: string = config.template;
+  twoWayBindingTemplate: string = config.twoWayBindingTemplate;
   codeSnippet: string = config.codeSnippet;
 
   constructor(private toastController: ToastController) {}
