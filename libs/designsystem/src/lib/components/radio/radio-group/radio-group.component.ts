@@ -1,24 +1,43 @@
-import { ContentChild, EventEmitter, Output, TemplateRef } from '@angular/core';
+import {
+  AfterContentInit,
+  ContentChild,
+  ContentChildren,
+  EventEmitter,
+  Output,
+  QueryList,
+  TemplateRef,
+  ViewChildren,
+} from '@angular/core';
 import { Component, Input } from '@angular/core';
 
 import { ListItemTemplateDirective } from '../../list/list.directive';
+import { RadioComponent } from '../radio.component';
 
 @Component({
   selector: 'kirby-radio-group',
   templateUrl: './radio-group.component.html',
+  styles: ['ion-radio-group { display: inherit; flex-wrap: inherit}'],
 })
-export class RadioGroupComponent {
+export class RadioGroupComponent implements AfterContentInit {
   @ContentChild(ListItemTemplateDirective, { static: true, read: TemplateRef })
   itemTemplate: TemplateRef<any>;
 
+  @ViewChildren(RadioComponent)
+  private radioButtons: QueryList<RadioComponent>;
+
+  @ContentChildren(RadioComponent, { descendants: true })
+  private slottedRadioButtons: QueryList<RadioComponent>;
+
   private _items: string[] | any[] = [];
   get items(): string[] | any[] {
-    return this._items;
+    return this._items || []; // Ensure items return empty array even if set to null/undefined
   }
 
-  @Input() set items(value: string[] | any[]) {
-    this._items = value;
-    this._selectedIndex = this.items.indexOf(this.value);
+  @Input() set items(items: string[] | any[]) {
+    this._items = items;
+    if (this.value) {
+      this._selectedIndex = this.items.indexOf(this.value); // Ensure selectedIndex reflects value within new items
+    }
     this._value = this.items[this.selectedIndex] || null;
   }
 
@@ -27,11 +46,34 @@ export class RadioGroupComponent {
     return this._selectedIndex;
   }
 
-  @Input() set selectedIndex(value: number) {
-    if (this._selectedIndex != value) {
-      this._selectedIndex = value;
-      this._value = this.items[this.selectedIndex] || null;
+  @Input() set selectedIndex(index: number) {
+    if (index === this._selectedIndex) return;
+    this._selectedIndex = index;
+    this._value = this.getValueFromSelectedIndex() || null;
+  }
+
+  private getValueFromSelectedIndex() {
+    if (this.items.length) {
+      return this.items && this.items[this.selectedIndex]; // Get value from items
     }
+    const selectedRadio =
+      this.slottedRadioButtons && this.slottedRadioButtons.toArray()[this.selectedIndex];
+    return selectedRadio && selectedRadio.value; // Get value from slotted radios
+  }
+
+  private _value: string | any = null;
+  get value(): string | any {
+    return this._value;
+  }
+
+  @Input() set value(value: any) {
+    this.setSelectedItem(value);
+  }
+
+  ngAfterContentInit(): void {
+    if (this.value) return;
+    // Ensure value is initialized from selectedIndex if not already set explicitly:
+    this._value = this.getValueFromSelectedIndex() || null;
   }
 
   @Input()
@@ -46,33 +88,50 @@ export class RadioGroupComponent {
   }
 
   getDisabledStateFromItem(item: string | any): boolean {
-    if (!item) return null;
-    return typeof item === 'string' ? null : item[this.itemDisabledProperty];
+    if (!item) return undefined;
+    return typeof item === 'string' ? undefined : item[this.itemDisabledProperty];
   }
 
-  private _value: string | any = null;
-  get value(): string | any {
-    return this._value;
+  private _disabled = false;
+  get disabled(): boolean {
+    return this._disabled;
   }
 
-  @Input() set value(value: any) {
-    this.setSelectedItem(value);
+  @Input() set disabled(disabled: boolean) {
+    this._disabled = disabled;
+    this.setDisabledState(disabled);
+  }
+
+  setDisabledState(isDisabled: boolean) {
+    this.setRadioDisabledState(this.radioButtons, isDisabled);
+    this.setRadioDisabledState(this.slottedRadioButtons, isDisabled);
+  }
+
+  private setRadioDisabledState(radioButtons: QueryList<RadioComponent>, isDisabled: boolean) {
+    if (!radioButtons || !radioButtons.length) return;
+    radioButtons.forEach((radio, index) => {
+      let disableRadio = isDisabled;
+      if (isDisabled === false) {
+        disableRadio = this.getDisabledStateFromItem(this.items[index]); // Ensure each item's disabled state overwrite radio-group state, if defined
+      }
+      radio.disabled = disableRadio;
+    });
   }
 
   /**
    * Emitted when an option is selected
    */
-  @Output() change: EventEmitter<string | any> = new EventEmitter<string | any>();
+  @Output() valueChange: EventEmitter<string | any> = new EventEmitter<string | any>();
 
-  onChange(value) {
+  _onChange(value: any) {
+    if (value === this._value) return;
     this.setSelectedItem(value);
-    this.change.emit(value);
+    this.valueChange.emit(value);
   }
 
   private setSelectedItem(value: any) {
-    if (this._value !== value) {
-      this._value = value;
-      this._selectedIndex = this.items.indexOf(value);
-    }
+    if (value === this._value) return;
+    this._value = value;
+    this._selectedIndex = this.items.indexOf(value);
   }
 }
