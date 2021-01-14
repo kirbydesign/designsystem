@@ -1,4 +1,4 @@
-<ion-radio-group [value]="value" (ionChange)="onChange($event.detail.value)">
+<ion-radio-group [value]="value" (ionChange)="_onChange($event.detail.value)">
   <ng-container *ngIf="!items || !items.length; else itemsTemplate">
     <ng-content></ng-content>
   </ng-container>
@@ -15,7 +15,7 @@
   </ng-container>
 </ng-template>
 
-<ng-template #defaultItemTemplate let-item let-selected="selected" let-index="index">
+<ng-template #defaultItemTemplate let-item>
   <kirby-radio
     [value]="item"
     [disabled]="getDisabledStateFromItem(item)"
