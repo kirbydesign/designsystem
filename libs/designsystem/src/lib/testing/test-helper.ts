@@ -46,6 +46,7 @@ export class TestHelper {
     timeoutInMs: number = 2000,
     pollIntervalInMs: number = 5
   ): Promise<void> {
+    if (pollFunc() === true) return Promise.resolve();
     return new Promise((resolve, reject) => {
       let timeoutId, intervalId;
       const pollState = () => {
