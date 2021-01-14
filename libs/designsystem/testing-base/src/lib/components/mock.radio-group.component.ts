@@ -16,10 +16,11 @@ import { RadioGroupComponent } from '@kirbydesign/designsystem';
 export class MockRadioGroupComponent {
   @Input() items: string[] | any[];
   @Input() selectedIndex: number;
+  @Input() value: any;
   @Input() itemTextProperty: string;
   @Input() itemDisabledProperty: string;
-  @Input() value: any;
-  @Output() change = new EventEmitter<string | any>();
+  @Input() disabled: boolean;
+  @Output() valueChange = new EventEmitter<string | any>();
 }
 
 // #endregion
