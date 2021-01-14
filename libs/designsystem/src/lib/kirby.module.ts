@@ -82,6 +82,7 @@ import { ToggleButtonModule } from './components/toggle-button/toggle-button.mod
 import { SlideDirective, SlidesComponent } from './components/slides/slides.component';
 import { AccordionDirective } from './components/accordion/accordion.directive';
 import { AccordionItemComponent } from './components/accordion/accordion-item.component';
+import { InputPostfixComponent, InputPrefixComponent } from './components';
 
 const exportedDeclarations = [
   CardComponent,
@@ -110,6 +111,8 @@ const exportedDeclarations = [
   ModalFooterComponent,
   ModalRouterLinkDirective,
   SegmentedControlComponent,
+  InputPrefixComponent,
+  InputPostfixComponent,
   ChipComponent,
   BadgeComponent,
   SizeDirective,

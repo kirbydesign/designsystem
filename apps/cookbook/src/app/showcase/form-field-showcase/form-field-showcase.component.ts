@@ -159,4 +159,16 @@ On native devices this method also ensures the form field is scrolled into the v
       inputValues: ['string'],
     },
   ];
+
+  prefixPostProperties: ShowcaseProperty[] = [
+    {
+      name: 'prefixPostfix',
+      defaultValue: undefined,
+      description:
+        'Reference to the kirby-input component that Prefix and or Postfix should be applied to. ' +
+        '' +
+        '',
+      inputValues: ['string'],
+    },
+  ];
 }

@@ -14,6 +14,7 @@ import { FormFieldFocusExampleComponent } from './examples/input/focus';
 import { FormFieldTextareaDefaultExampleComponent } from './examples/textarea/default';
 import { FormFieldTextareaLabelExampleComponent } from './examples/textarea/label';
 import { FormFieldTextareaCounterExampleComponent } from './examples/textarea/counter';
+import { FormFieldInputPrefixPostfixExampleComponent } from './examples/input/form-field-input-prefix-postfix-example.component';
 
 const COMPONENT_DECLARATIONS = [
   FormFieldInputDefaultExampleComponent,
@@ -28,6 +29,7 @@ const COMPONENT_DECLARATIONS = [
   FormFieldTextareaDefaultExampleComponent,
   FormFieldTextareaLabelExampleComponent,
   FormFieldTextareaCounterExampleComponent,
+  FormFieldInputPrefixPostfixExampleComponent,
 ];
 
 @NgModule({
