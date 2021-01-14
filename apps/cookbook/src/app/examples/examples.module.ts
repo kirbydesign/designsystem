@@ -44,7 +44,7 @@ const IMPORTS = [
 @NgModule({
   imports: [CommonModule, RouterModule, KirbyModule, ...IMPORTS],
   declarations: COMPONENT_DECLARATIONS,
-  exports: [...COMPONENT_DECLARATIONS, ...IMPORTS, RadioExampleModule],
+  exports: [...COMPONENT_DECLARATIONS, ...IMPORTS],
   entryComponents: [
     CardExampleComponent,
     FirstEmbeddedModalExampleComponent,
