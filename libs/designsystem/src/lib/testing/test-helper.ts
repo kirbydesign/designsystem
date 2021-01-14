@@ -11,13 +11,21 @@ export class TestHelper {
   }
 
   /*
-   * Checks for the Web Component being ready,
+   * Checks for the Web Component(s) being ready,
    * ie. the component is hydrated, styles have been applied
    * and the Shadow DOM is ready for query
    */
-  public static async whenReady(element: Element): Promise<void> {
-    await TestHelper.whenDefined(element);
-    await TestHelper.ionComponentOnReady(element);
+  public static async whenReady(
+    elementOrNodeList: Element | NodeListOf<Element> | Element[]
+  ): Promise<void> {
+    if (elementOrNodeList instanceof Element) {
+      await TestHelper.whenDefined(elementOrNodeList);
+      await TestHelper.ionComponentOnReady(elementOrNodeList);
+    } else {
+      await Promise.all(
+        Array.from(elementOrNodeList).map(async (element) => await TestHelper.whenReady(element))
+      );
+    }
   }
 
   /* Checks for the Web Component being defined, ie. the public methods are available */
