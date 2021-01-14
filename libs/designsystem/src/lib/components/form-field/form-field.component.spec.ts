@@ -165,8 +165,8 @@ describe('FormFieldComponent', () => {
 
       it('should render the message with correct width', () => {
         const availableTextWidth = getAvailableTextWidth();
-        const expectedMessageWidth = availableTextWidth * 0.75;
-        const messageWidth = messageElement.getBoundingClientRect().width;
+        const expectedMessageWidth = (availableTextWidth * 0.75).toFixed(0);
+        const messageWidth = messageElement.getBoundingClientRect().width.toFixed(0);
         expect(messageWidth).toEqual(expectedMessageWidth);
       });
 
@@ -201,10 +201,10 @@ describe('FormFieldComponent', () => {
         expect(inputElement).toBeTruthy();
       });
 
-      it('should render the input as a direct descendant', () => {
+      it('should render the input as a 2nd level descendant', () => {
         const inputElement = spectator.queryHost('input[kirby-input]');
         expect(inputElement).toBeTruthy();
-        expect(inputElement.parentElement).toEqual(spectator.element);
+        expect(inputElement.parentElement.parentElement).toEqual(spectator.element);
       });
 
       it('should not render the input within a label', () => {
@@ -289,10 +289,10 @@ describe('FormFieldComponent', () => {
         expect(textareaElement).toBeTruthy();
       });
 
-      it('should render the textarea as a direct descendant', () => {
+      it('should render the textarea as a 2nd level descendant', () => {
         const textareaElement = spectator.queryHost('textarea[kirby-textarea]');
         expect(textareaElement).toBeTruthy();
-        expect(textareaElement.parentElement).toEqual(spectator.element);
+        expect(textareaElement.parentElement.parentElement).toEqual(spectator.element);
       });
 
       it('should not render the textarea within a label', () => {

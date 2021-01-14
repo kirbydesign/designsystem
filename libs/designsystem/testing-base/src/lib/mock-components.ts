@@ -18,6 +18,8 @@ import { MockFormFieldMessageComponent } from './components/mock.form-field-mess
 import { MockFormFieldComponent } from './components/mock.form-field.component';
 import { MockInputComponent } from './components/mock.input.component';
 import { MockInputCounterComponent } from './components/mock.input-counter.component';
+import { MockInputPostfixComponent } from './components/mock.input-postfix.component';
+import { MockInputPrefixComponent } from './components/mock.input-prefix.component';
 import { MockTextareaComponent } from './components/mock.textarea.component';
 import { MockGridComponent } from './components/mock.grid.component';
 import { MockIconComponent } from './components/mock.icon.component';
@@ -73,6 +75,8 @@ export const MOCK_COMPONENTS = [
   MockFormFieldComponent,
   MockInputComponent,
   MockInputCounterComponent,
+  MockInputPostfixComponent,
+  MockInputPrefixComponent,
   MockTextareaComponent,
   MockGridComponent,
   MockIconComponent,
