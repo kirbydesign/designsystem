@@ -43,6 +43,12 @@ export class RadioShowcaseComponent {
       inputValues: ['any'],
     },
     {
+      name: 'selectedIndex',
+      description: 'The index of the selected item within the `items` array.',
+      defaultValue: '-1',
+      inputValues: ['number'],
+    },
+    {
       name: 'itemTextProperty',
       description:
         'The property to use for the text representation of items when configured with `Array<any>`.',
@@ -60,7 +66,7 @@ export class RadioShowcaseComponent {
 
   groupEvents: ShowcaseProperty[] = [
     {
-      name: 'change',
+      name: 'valueChange',
       description: 'Emitted when the selected value changes',
       inputValues: ['(value: any) => void'],
     },
