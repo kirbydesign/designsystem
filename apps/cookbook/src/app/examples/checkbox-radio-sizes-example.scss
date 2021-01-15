@@ -1,6 +1,9 @@
 @import './libs/designsystem/src/lib/scss/utils';
 
-kirby-checkbox {
+$height-measure-width: 80px;
+
+kirby-checkbox,
+kirby-radio {
   margin-bottom: size('xxs');
   background-color: get-color('semi-light');
   position: relative;
@@ -8,7 +11,9 @@ kirby-checkbox {
 
 /* height measure */
 kirby-checkbox::before,
-kirby-checkbox::after {
+kirby-checkbox::after,
+kirby-radio::before,
+kirby-radio::after {
   height: 100%;
   border: 1px solid get-color('danger');
   position: absolute;
@@ -16,7 +21,8 @@ kirby-checkbox::after {
 }
 
 /* horizontal measure */
-kirby-checkbox::before {
+kirby-checkbox::before,
+kirby-radio::before {
   content: '';
   border-left: 0;
   border-right: 0;
@@ -24,7 +30,8 @@ kirby-checkbox::before {
 }
 
 /* vertical measure */
-kirby-checkbox::after {
+kirby-checkbox::after,
+kirby-radio::after {
   content: 'md: #{ size(xxxl) }';
   border-left: 0;
   border-top: 0;
@@ -37,17 +44,20 @@ kirby-checkbox::after {
   vertical-align: center;
 }
 
-kirby-checkbox.xs::after {
+kirby-checkbox.xs::after,
+kirby-radio.xs::after {
   content: 'xs: #{ size(l) }';
   line-height: size('l');
 }
 
-kirby-checkbox.sm::after {
+kirby-checkbox.sm::after,
+kirby-radio.sm::after {
   content: 'sm: #{ $fat-finger-size }';
   line-height: $fat-finger-size;
 }
 
-kirby-checkbox ::ng-deep .wrapper {
+kirby-checkbox ::ng-deep .wrapper,
+kirby-radio ::ng-deep .wrapper {
   background-color: #f7e0f0;
-  margin-right: 80px; // Allow room for height measure info
+  margin-right: $height-measure-width; // Allow room for height measure info
 }
