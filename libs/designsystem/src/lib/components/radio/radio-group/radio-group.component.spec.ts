@@ -36,11 +36,11 @@ describe('RadioGroupComponent', () => {
         items: ['Larry', 'Curly', 'Moe'],
         selected: 'Curly',
       },
-      // {
-      //   description: 'data items with default property names',
-      //   items: dataItems,
-      //   selected: dataItems[1],
-      // },
+      {
+        description: 'data items with default property names',
+        items: dataItems,
+        selected: dataItems[1],
+      },
     ];
 
     dataScenarios.forEach((dataScenario) => {
