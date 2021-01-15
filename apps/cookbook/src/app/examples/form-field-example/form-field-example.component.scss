@@ -7,7 +7,3 @@ kirby-page-content > * {
 kirby-page-content > * + * {
   margin-top: size('m');
 }
-
-kirby-checkbox {
-  padding-right: size('xxxs');
-}
