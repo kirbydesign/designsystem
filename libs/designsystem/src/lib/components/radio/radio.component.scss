@@ -3,13 +3,8 @@
 $radio-icon-padding: size('xxxxs');
 $radio-icon-size: size('m');
 $radio-icon-mark-size: 60%;
-$radio-sizes: (
-  'xs': size('l'),
-  'sm': $fat-finger-size,
-  'md': size('xxxl'),
-);
-$spacing-to-edge: size('s');
-$spacing-to-label: size('xs');
+$spacing-to-edge: map-get($checkbox-radio-spacing, 'to-edge');
+$spacing-to-label: map-get($checkbox-radio-spacing, 'to-label');
 
 :host {
   display: inline-block;
@@ -23,10 +18,10 @@ $spacing-to-label: size('xs');
       align-items: center;
       vertical-align: top;
       padding-right: $spacing-to-label; // Ensure same padding on right side of label
-      min-height: map-get($radio-sizes, 'md');
+      min-height: map-get($checkbox-radio-sizes, 'md');
     }
 
-    @each $size, $height in $radio-sizes {
+    @each $size, $height in $checkbox-radio-sizes {
       :host-context(.radio-#{$size}),
       &.#{$size} {
         .wrapper {
