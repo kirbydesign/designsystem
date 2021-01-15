@@ -19,7 +19,7 @@ const config = {
   [value]="selected"
   (valueChange)="onChange($event)">
 </kirby-radio-group>`,
-  twoWayBindingTemplate: `<kirby-radio-group [(value)]="selected"></kirby-radio-group>`,
+  twoWayBindingTemplate: `<kirby-radio-group [items]="items" [(value)]="selected"></kirby-radio-group>`,
   codeSnippet: `items = ${stringifyPretty(items)};
 
 selected = this.items[0];
