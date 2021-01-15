@@ -213,6 +213,18 @@ describe('RadioGroupComponent', () => {
                 radios.forEach((each) => expect(each.disabled).toBeUndefined());
               });
 
+              it('should disable the radio items if items are set after the kirby-radio-group is disabled', async () => {
+                spectator.setHostInput('items', null);
+                spectator.setInput('disabled', true);
+                await TestHelper.waitForTimeout(); // Wait a tick
+
+                spectator.setHostInput('items', dataScenario.items);
+                await TestHelper.waitForTimeout(); // Wait a tick
+
+                radios = spectator.queryAll(RadioComponent);
+                radios.forEach((each) => expect(each.disabled).toBeTrue());
+              });
+
               if (
                 dataScenario.description !== 'plain text' &&
                 templateScenario.description !== 'with slotted radios'
