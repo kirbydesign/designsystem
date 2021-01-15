@@ -1,5 +1,6 @@
 import {
   AfterContentInit,
+  AfterViewInit,
   ContentChild,
   ContentChildren,
   EventEmitter,
@@ -18,7 +19,7 @@ import { RadioComponent } from '../radio.component';
   templateUrl: './radio-group.component.html',
   styles: ['ion-radio-group { display: inherit; flex-wrap: inherit}'],
 })
-export class RadioGroupComponent implements AfterContentInit {
+export class RadioGroupComponent implements AfterContentInit, AfterViewInit {
   @ContentChild(ListItemTemplateDirective, { static: true, read: TemplateRef })
   itemTemplate: TemplateRef<any>;
 
@@ -74,6 +75,19 @@ export class RadioGroupComponent implements AfterContentInit {
     if (this.value) return;
     // Ensure value is initialized from selectedIndex if not already set explicitly:
     this._value = this.getValueFromSelectedIndex() || null;
+  }
+
+  ngAfterViewInit() {
+    // Ensure disabled state propagates when re-rendering radios.
+    // setTimeout prevents ExpressionChangedAfterItHasBeenCheckedError when updating the DOM in QueryList.changes:
+    this.radioButtons.changes.subscribe(() => this.setDisabledNextCycle());
+    this.slottedRadioButtons.changes.subscribe(() => this.setDisabledNextCycle());
+  }
+
+  private setDisabledNextCycle() {
+    if (this.disabled) {
+      setTimeout(() => this.setDisabledState(this.disabled));
+    }
   }
 
   @Input()
