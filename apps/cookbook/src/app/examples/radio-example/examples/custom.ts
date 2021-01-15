@@ -20,7 +20,7 @@ const config = {
       [text]="item.label"
       [attr.title]="item.description">
     </kirby-radio>
-    <em class="rating">Rating: {{item.rating}}</em>
+    <span class="rating">Rating: {{item.rating}}</span>
   </div>
 </kirby-radio-group>`,
   slottedTemplate: `<kirby-radio-group value="Bacon">
@@ -38,18 +38,16 @@ selected = this.items[1];`,
 }
 
 .rating {
-  font-size: 12px;
-  padding: 2px 4px;
+  font-size: 14px;
+  padding: 2px 8px;
   margin-left: 8px;
-  background-color: var(--kirby-white);
-  border: 1px solid var(--kirby-medium);
+  background-color: var(--kirby-semi-light);
   border-radius: 4px;
   transition: background-color 200ms;
 }
 
 .is-selected .rating {
   background-color: var(--kirby-success);
-  border: 1px solid var(--kirby-semi-dark);
 }`,
   ],
 };
