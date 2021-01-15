@@ -197,23 +197,20 @@ describe('RadioGroupComponent', () => {
 
             describe('enablement', () => {
               it('should not disable the radio items by default', () => {
-                const radioButtons = spectator.queryAll(RadioComponent);
-                radioButtons.forEach((each) => expect(each.disabled).toBeUndefined());
+                radios.forEach((each) => expect(each.disabled).toBeUndefined());
               });
 
               it('should disable the radio items when the kirby-radio-group is disabled', () => {
-                const radioButtons = spectator.queryAll(RadioComponent);
                 spectator.setInput('disabled', true);
-                radioButtons.forEach((each) => expect(each.disabled).toBeTrue());
+                radios.forEach((each) => expect(each.disabled).toBeTrue());
               });
 
               it('should re-enable the radio items when the kirby-radio-group is enabled', () => {
-                const radioButtons = spectator.queryAll(RadioComponent);
                 spectator.setInput('disabled', true);
-                radioButtons.forEach((each) => expect(each.disabled).toBeTrue());
+                radios.forEach((each) => expect(each.disabled).toBeTrue());
 
                 spectator.setInput('disabled', false);
-                radioButtons.forEach((each) => expect(each.disabled).toBeUndefined());
+                radios.forEach((each) => expect(each.disabled).toBeUndefined());
               });
 
               if (
@@ -237,15 +234,13 @@ describe('RadioGroupComponent', () => {
                   });
 
                   it('should disable the radio items when the kirby-radio-group is disabled', () => {
-                    const radioButtons = spectator.queryAll(RadioComponent);
                     spectator.setInput('disabled', true);
-                    radioButtons.forEach((each) => expect(each.disabled).toBeTrue());
+                    radios.forEach((each) => expect(each.disabled).toBeTrue());
                   });
 
                   it('should only re-enable the radio items if the corresponding data item is not disabled when the kirby-radio-group is enabled', () => {
-                    const radioButtons = spectator.queryAll(RadioComponent);
                     spectator.setInput('disabled', true);
-                    radioButtons.forEach((each) => expect(each.disabled).toBeTrue());
+                    radios.forEach((each) => expect(each.disabled).toBeTrue());
 
                     spectator.setInput('disabled', false);
                     expect(radios[0].disabled).toBeUndefined();
