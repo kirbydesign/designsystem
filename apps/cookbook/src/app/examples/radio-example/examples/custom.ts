@@ -18,7 +18,7 @@ const config = {
     <kirby-radio
       [value]="item"
       [text]="item.label"
-      [title]="item.description">
+      [attr.title]="item.description">
     </kirby-radio>
     <em class="rating">Rating: {{item.rating}}</em>
   </div>
