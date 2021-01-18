@@ -15,7 +15,7 @@
 
     --background: var(--kirby-item-background, #{get-color('white')});
     --background-activated: var(--kirby-item-background-activated, #{get-color('white-shade')});
-    // WORKAROUND: Needed to fix ignored clicked on scrollend
+    // WORKAROUND: Needed to fix ignored click on scrollend
     // https://github.com/ionic-team/ionic-framework/issues/21871
     --background-activated-opacity: 0.99;
     --background-focused: var(--kirby-item-background-focused, #{get-color('background-color')});
