@@ -217,6 +217,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
         const scrollElementPaddingBottom = parseInt(computedStyle.paddingBottom);
         const embeddededElementBottom = embeddededElement.getBoundingClientRect().bottom;
 
+        // TODO: remove me
         console.log(
           'setInlineFooterPosition',
           ionContentBottom,
@@ -227,6 +228,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
         const availableFooterSpace =
           ionContentBottom - embeddededElementBottom - scrollElementPaddingBottom;
 
+        // TODO: remove me
         console.log('setInlineFooterPosition availableFooterSpace', availableFooterSpace);
 
         if (availableFooterSpace > 0) {
