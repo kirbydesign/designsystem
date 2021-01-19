@@ -159,20 +159,18 @@ export class EmbeddedComponent() {
 
   ngOnInit() {
     this.modal.willClose((close) => {
-      if (this.preventClose) {
-        const config: AlertConfig = {
-          title: 'Are you sure?',
-          message: 'Please confirm that you want to close',
-          okBtn: 'Confirm',
-          cancelBtn: 'Cancel',
-        };
-        this.modalController.showAlert(config, (result) => {
-          if (result) {
-            let someTestData: number = Math.PI;
-            close(someTestData);
-          }
-        });
-      }
+      const config: AlertConfig = {
+        title: 'Are you sure?',
+        message: 'Please confirm that you want to close',
+        okBtn: 'Confirm',
+        cancelBtn: 'Cancel',
+      };
+      this.modalController.showAlert(config, (result) => {
+        if (result) {
+          let someTestData: number = Math.PI;
+          close(someTestData);
+        }
+      });
     }, true);
   }
   `,
