@@ -17,7 +17,27 @@ describe('TabsComponent', () => {
     spectator = createHost({});
   });
 
-  it('should create', () => {
-    expect(spectator.component).toBeTruthy();
+  describe('hide', () => {
+    it('should hide tab bar', () => {
+      spectator.component.hide();
+      spectator.detectChanges();
+
+      const ionTabBarElm = spectator.query('ion-tab-bar');
+      spectator.detectChanges();
+
+      const ionTabBarElmStyle = getComputedStyle(ionTabBarElm);
+      expect(ionTabBarElmStyle.display).toBe('none');
+    });
+  });
+
+  describe('show', () => {
+    it('should show tab bar', () => {
+      spectator.component.show();
+      spectator.detectChanges();
+
+      const ionTabBarElm = spectator.query('ion-tab-bar');
+      const ionTabBarElmStyle = getComputedStyle(ionTabBarElm);
+      expect(ionTabBarElmStyle.display).not.toBe('none');
+    });
   });
 });

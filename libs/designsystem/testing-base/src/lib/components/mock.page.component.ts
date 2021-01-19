@@ -116,6 +116,7 @@ export class MockPageComponent {
   @Input() defaultBackHref: string;
   @Input() hideBackButton: boolean;
   @Input() titleMaxLines: number;
+  @Input() hideTabs: boolean;
   @Output() enter = new EventEmitter<void>();
   @Output() leave = new EventEmitter<void>();
 }

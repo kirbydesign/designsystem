@@ -1,14 +1,24 @@
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MockDirective } from 'ng-mocks';
-import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
+import {
+  createHostFactory,
+  createSpyObject,
+  mockProvider,
+  SpectatorHost,
+  SpyObject,
+} from '@ngneat/spectator';
 import { IonicModule } from '@ionic/angular';
+import { ReplaySubject } from 'rxjs';
+import { NavigationEnd, NavigationStart, Router, RouterEvent } from '@angular/router';
 
 import { DesignTokenHelper } from '../../helpers/design-token-helper';
 import { TestHelper } from '../../testing/test-helper';
 import { PageComponent, PageContentComponent } from './page.component';
 import { FitHeadingDirective } from '../../directives/fit-heading/fit-heading.directive';
 import { WindowRef } from '../../types/window-ref';
+import { TabsComponent } from '../tabs';
+import { ModalNavigationService } from '../modal/services/modal-navigation.service';
 
 const size = DesignTokenHelper.size;
 const fatFingerSize = DesignTokenHelper.fatFingerSize();
@@ -17,6 +27,14 @@ describe('PageComponent', () => {
   let spectator: SpectatorHost<PageComponent>;
   let element: HTMLElement;
   let ionToolbar: HTMLElement;
+  let tabbar: SpyObject<TabsComponent>;
+  let eventSubject = new ReplaySubject<RouterEvent>(1);
+  let router: SpyObject<Router> = {
+    ...createSpyObject(Router),
+    url: '123',
+    events: eventSubject.asObservable(),
+  } as SpyObject<Router>;
+  let modalNavigationService: SpyObject<ModalNavigationService>;
 
   const dummyContent = `<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci animi aperiam deserunt dolore error esse
             laborum magni natus nihil optio perferendis placeat, quae sed, sequi sunt totam voluptatem! Dicta,
@@ -39,6 +57,12 @@ describe('PageComponent', () => {
         provide: WindowRef,
         useValue: window,
       },
+      mockProvider(TabsComponent),
+      mockProvider(ModalNavigationService),
+      {
+        provide: Router,
+        useValue: router,
+      },
     ],
   });
 
@@ -48,17 +72,18 @@ describe('PageComponent', () => {
         <kirby-page-content>
           ${dummyContent}
         </kirby-page-content>
-      </kirby-page>`
+      </kirby-page>`,
+      { detectChanges: false }
     );
     element = spectator.element as HTMLElement;
     ionToolbar = spectator.queryHost('ion-toolbar');
-  });
-
-  it('should create', () => {
-    expect(spectator.component).toBeTruthy();
+    tabbar = spectator.inject(TabsComponent);
+    modalNavigationService = spectator.inject(ModalNavigationService);
+    modalNavigationService.isModalRoute.and.returnValue(false);
   });
 
   it('should render toolbar with correct padding', async () => {
+    spectator.detectChanges();
     await TestHelper.whenReady(ionToolbar);
     const toolbarContainer = ionToolbar.shadowRoot.querySelector('.toolbar-container');
     expect(toolbarContainer).toBeTruthy();
@@ -71,11 +96,32 @@ describe('PageComponent', () => {
   });
 
   it('should render back button with correct size', async () => {
+    spectator.detectChanges();
     await TestHelper.whenReady(ionToolbar);
     const ionBackButton = spectator.queryHost('ion-toolbar ion-buttons ion-back-button');
     expect(ionBackButton).toHaveComputedStyle({
       width: fatFingerSize,
       height: fatFingerSize,
     });
+  });
+
+  it('should hide tab bar when hideTabs is true on enter', () => {
+    spectator.component.hideTabs = true;
+    spectator.detectChanges();
+    eventSubject.next(new NavigationEnd(1, '123', '123'));
+
+    expect(tabbar.hide).toHaveBeenCalled();
+  });
+  it('should show tab bar when hideTabs is true on leave', () => {
+    spectator.component.hideTabs = true;
+    spectator.detectChanges();
+    eventSubject.next(new NavigationStart(1, '123'));
+    spectator.component.ngAfterContentChecked();
+    eventSubject.next(new NavigationEnd(1, '123', '123'));
+    spectator.component.ngAfterContentChecked();
+    eventSubject.next(new NavigationStart(1, '234'));
+    spectator.component.ngAfterContentChecked();
+
+    expect(tabbar.show).toHaveBeenCalled();
   });
 });

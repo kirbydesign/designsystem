@@ -1,0 +1,14 @@
+@import '../../../scss/utils';
+
+$padding-horizontal: size('s');
+$padding-vertical: size('xxs');
+
+:host {
+  display: block;
+  background-color: var(--kirby-white);
+
+  &.padding {
+    padding: $padding-vertical $padding-horizontal;
+    padding-bottom: calc(#{$padding-vertical} + var(--kirby-page-footer-safe-area-bottom, 0px));
+  }
+}

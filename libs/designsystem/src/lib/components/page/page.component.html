@@ -62,6 +62,10 @@
   </div>
 </ion-content>
 
+<ion-footer>
+  <ng-content select="kirby-page-footer"></ng-content>
+</ion-footer>
+
 <ng-template #defaultPageTitleTemplate>
   <h1 [kirbyFitHeading]="fitHeadingConfig">
     <ng-container *ngTemplateOutlet="simpleTitleTemplate"></ng-container>

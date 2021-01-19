@@ -58,6 +58,7 @@ import { FlagExampleComponent } from './flag-example/flag-example.component';
 import { SlidesExampleComponent } from './slides-example/slides-example.component';
 import { CookbookExampleCardContentComponent } from './slides-example/example-card-content';
 import { AccordionExampleComponent } from './accordion-example/accordion-example.component';
+import { FixedFooterTabsExampleComponent } from './page-example/fixed-footer-tabs/fixed-footer-tabs-example.component';
 
 // Example of "custom" icons
 export const iconSettings: IconSettings = {
@@ -118,10 +119,12 @@ export const COMPONENT_DECLARATIONS: any[] = [
   FormFieldExampleComponent,
   PageSimpleExampleComponent,
   PageAlignmentAndToolbarTitleExampleComponent,
-  PageFitHeadingExampleComponent,
-  PageFixedTitleAndActionsExampleComponent,
   PageCustomTitleExampleComponent,
   PageAdvancedExampleComponent,
+  PageFitHeadingExampleComponent,
+  PageFixedTitleAndActionsExampleComponent,
+  TabExampleComponent,
+  FixedFooterTabsExampleComponent,
   TabsExampleComponent,
   TabExampleComponent,
   ItemExampleComponent,

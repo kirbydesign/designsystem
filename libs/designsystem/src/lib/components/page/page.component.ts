@@ -9,28 +9,32 @@ import {
   Directive,
   ElementRef,
   EventEmitter,
+  HostBinding,
   HostListener,
   Input,
   OnChanges,
   OnDestroy,
   OnInit,
+  Optional,
   Output,
   QueryList,
   Renderer2,
   SimpleChanges,
+  SkipSelf,
   TemplateRef,
   ViewChild,
 } from '@angular/core';
 import { NavigationEnd, NavigationStart, Router, RouterEvent } from '@angular/router';
-import { Observable, Subject, Subscription } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
-import { IonContent } from '@ionic/angular';
+import { IonContent, IonFooter, IonHeader } from '@ionic/angular';
 
 import { FitHeadingConfig } from '../../directives/fit-heading/fit-heading.directive';
 import { selectedTabClickEvent } from '../tabs/tab-button/tab-button.events';
 import { KirbyAnimation } from '../../animation/kirby-animation';
 import { WindowRef } from '../../types/window-ref';
 import { ModalNavigationService } from '../modal/services/modal-navigation.service';
+import { TabsComponent } from '../tabs/tabs.component';
 
 type stickyConfig = { sticky: boolean };
 type fixedConfig = { fixed: boolean };
@@ -115,6 +119,8 @@ export class PageComponent
   @Input() defaultBackHref: string;
   @Input() hideBackButton: boolean;
   @Input() titleMaxLines: number;
+  @Input()
+  hideTabs: boolean;
 
   @Output() enter = new EventEmitter<void>();
   @Output() leave = new EventEmitter<void>();
@@ -122,6 +128,10 @@ export class PageComponent
   @ViewChild(IonContent, { static: true }) private content: IonContent;
   @ViewChild(IonContent, { static: true, read: ElementRef })
   private ionContentElement: ElementRef<HTMLIonContentElement>;
+  @ViewChild(IonHeader, { static: true, read: ElementRef })
+  ionHeaderElement: ElementRef<HTMLIonHeaderElement>;
+  @ViewChild(IonFooter, { static: true, read: ElementRef })
+  private ionFooterElement: ElementRef<HTMLIonFooterElement>;
 
   @ViewChild('pageTitle', { static: false, read: ElementRef })
   private pageTitle: ElementRef;
@@ -154,7 +164,6 @@ export class PageComponent
   stickyActionsTemplate: TemplateRef<any>;
   fixedActionsTemplate: TemplateRef<any>;
   private pageTitleIntersectionObserverRef: IntersectionObserver = this.pageTitleIntersectionObserver();
-  private routerEventsSubscription: Subscription;
   private urls: string[] = [];
   private hasEntered: boolean;
 
@@ -175,7 +184,8 @@ export class PageComponent
     private router: Router,
     private changeDetectorRef: ChangeDetectorRef,
     private window: WindowRef,
-    private modalNavigationService: ModalNavigationService
+    private modalNavigationService: ModalNavigationService,
+    @Optional() @SkipSelf() private tabbar: TabsComponent
   ) {}
 
   ngOnInit(): void {
@@ -243,6 +253,11 @@ export class PageComponent
     if (this.pageTitle) {
       this.pageTitleIntersectionObserverRef.observe(this.pageTitle.nativeElement);
     }
+
+    // TODO: unit test
+    if (this.hideTabs) {
+      this.tabbar && this.tabbar.hide();
+    }
   }
 
   private onLeave() {
@@ -251,6 +266,11 @@ export class PageComponent
       this.pageTitleIntersectionObserverRef.unobserve(this.pageTitle.nativeElement);
     }
     this.hasEntered = false;
+
+    // TODO: unit test
+    if (this.hideTabs) {
+      this.tabbar && this.tabbar.show();
+    }
   }
 
   private initializeTitle() {
@@ -303,11 +323,13 @@ export class PageComponent
 
   private removeWrapper() {
     const parent = this.elementRef.nativeElement.parentNode;
-    const header = this.elementRef.nativeElement.childNodes[0];
-    const content = this.elementRef.nativeElement.childNodes[1];
+    const header = this.ionHeaderElement.nativeElement;
+    const content = this.ionContentElement.nativeElement;
+    const footer = this.ionFooterElement.nativeElement;
     this.renderer.removeChild(parent, this.elementRef.nativeElement);
     this.renderer.appendChild(parent, header);
     this.renderer.appendChild(parent, content);
+    this.renderer.appendChild(parent, footer);
   }
 
   private pageTitleIntersectionObserver() {

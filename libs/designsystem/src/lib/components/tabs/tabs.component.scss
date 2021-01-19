@@ -1,5 +1,11 @@
 @import '../../scss/utils';
 
+:host {
+  &:not(.hide-tab-bar) {
+    --kirby-safe-area-bottom: 0px;
+  }
+}
+
 ion-tabs {
   @include media('>=large') {
     @include not-touch {
@@ -11,6 +17,10 @@ ion-tabs {
     --background: rgba(#{get-color('white-rgb')}, 0.94);
     --border: 1px solid #{get-color('light')};
     --color: #{get-color('black')};
+
+    &.hide {
+      display: none;
+    }
 
     display: flex;
     max-width: var(--kirby-tab-bar-max-width, none);
