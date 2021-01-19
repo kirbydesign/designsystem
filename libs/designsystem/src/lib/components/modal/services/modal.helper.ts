@@ -57,13 +57,20 @@ export class ModalHelper {
     Object.defineProperty(ionModal, 'dismiss', {
       value: new Proxy(ionModal.dismiss, {
         apply: function(target, _, args) {
-          alert('WHUUT');
-          target.bind(ionModal)(...args);
+          const [data, role] = args;
+          if (role === 'force') {
+            target.bind(ionModal)(...args);
+          } else {
+            const shouldDismiss = ionModal.dispatchEvent(
+              new CustomEvent('kirbyModalWillDismiss', { cancelable: true })
+            );
+            if (shouldDismiss) target.bind(ionModal)(...args);
+          }
         },
       }),
     });
 
-    if (config.flavor !== 'compact') {
+    if (config.flavor != 'compact') {
       const backdrop: HTMLIonBackdropElement = ionModal.querySelector('ion-backdrop');
       backdrop.onclick = () => {
         ionModal.dismiss();

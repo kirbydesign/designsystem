@@ -37,6 +37,9 @@ export class ModalExampleConfigurationComponent {
   @Input() openFullHeight: boolean;
   @Output() openFullHeightChange = new EventEmitter<boolean>();
 
+  @Input() preventClose: boolean;
+  @Output() preventCloseChange = new EventEmitter<boolean>();
+
   @HostBinding('class.checkbox-xs') true; // Extra small checkboxes
 
   constructor(private window: WindowRef, zone: NgZone) {}
@@ -90,5 +93,10 @@ export class ModalExampleConfigurationComponent {
   toggleOpenFullHeight(show: boolean) {
     this.openFullHeight = show;
     this.openFullHeightChange.emit(this.openFullHeight);
+  }
+
+  togglePreventClose(show: boolean) {
+    this.preventClose = show;
+    this.preventCloseChange.emit(this.preventClose);
   }
 }

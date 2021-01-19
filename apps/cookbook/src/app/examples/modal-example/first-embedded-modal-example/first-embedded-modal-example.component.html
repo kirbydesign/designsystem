@@ -29,6 +29,7 @@
         [(showDummyKeyboard)]="showDummyKeyboard"
         [(showFooter)]="showFooter"
         [(showDummyContent)]="showDummyContent"
+        [(preventClose)]="preventClose"
         [disableScroll]="disableScroll"
         (disableScrollChange)="toggleDisableScroll($event)"
       ></cookbook-modal-example-configuration>
@@ -59,6 +60,7 @@
           [(delayLoadDummyContent)]="delayLoadDummyContent"
           [(loadAdditionalContent)]="loadAdditionalContent"
           [(openFullHeight)]="openFullHeight"
+          [(preventClose)]="preventClose"
         ></cookbook-modal-example-configuration>
       </cookbook-example-configuration-wrapper>
     </kirby-card>
