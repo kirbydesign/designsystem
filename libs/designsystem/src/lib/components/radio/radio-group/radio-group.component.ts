@@ -76,7 +76,7 @@ export class RadioGroupComponent implements AfterContentInit, AfterViewInit {
 
   // #region "protected" properties used by template
   @ContentChild(ListItemTemplateDirective, { static: true, read: TemplateRef })
-  itemTemplate: TemplateRef<any>;
+  _itemTemplate: TemplateRef<any>;
   // #endregion "protected" properties used by template
 
   // #region private fields
@@ -84,7 +84,6 @@ export class RadioGroupComponent implements AfterContentInit, AfterViewInit {
   private _items: string[] | any[] = [];
   private _selectedIndex: number = -1;
   private _value: string | any = null;
-
   @ViewChildren(RadioComponent)
   private radioButtons: QueryList<RadioComponent>;
   @ContentChildren(RadioComponent, { descendants: true })
@@ -112,12 +111,12 @@ export class RadioGroupComponent implements AfterContentInit, AfterViewInit {
   // #endregion public methods
 
   // #region "protected" methods used by template
-  getTextFromItem(item: string | any): string {
+  _getTextFromItem(item: string | any): string {
     if (!item) return null;
     return typeof item === 'string' ? item : item[this.itemTextProperty];
   }
 
-  getDisabledStateFromItem(item: string | any): boolean {
+  _getDisabledStateFromItem(item: string | any): boolean {
     if (!item) return undefined;
     return typeof item === 'string' ? undefined : item[this.itemDisabledProperty];
   }
@@ -150,7 +149,7 @@ export class RadioGroupComponent implements AfterContentInit, AfterViewInit {
     radioButtons.forEach((radio, index) => {
       let disableRadio = isDisabled;
       if (isDisabled === false) {
-        disableRadio = this.getDisabledStateFromItem(this.items[index]); // Ensure each item's disabled state overwrite radio-group state, if defined
+        disableRadio = this._getDisabledStateFromItem(this.items[index]); // Ensure each item's disabled state overwrite radio-group state, if defined
       }
       radio.disabled = disableRadio;
     });

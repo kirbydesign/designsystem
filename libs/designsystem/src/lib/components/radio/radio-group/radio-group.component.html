@@ -8,7 +8,7 @@
   <ng-container *ngFor="let item of items; let i = index">
     <ng-container
       *ngTemplateOutlet="
-        itemTemplate || defaultItemTemplate;
+        _itemTemplate || defaultItemTemplate;
         context: { $implicit: item, selected: i === selectedIndex, index: i }
       "
     ></ng-container>
@@ -18,7 +18,7 @@
 <ng-template #defaultItemTemplate let-item>
   <kirby-radio
     [value]="item"
-    [disabled]="getDisabledStateFromItem(item)"
-    [text]="getTextFromItem(item)"
+    [disabled]="_getDisabledStateFromItem(item)"
+    [text]="_getTextFromItem(item)"
   ></kirby-radio>
 </ng-template>
