@@ -13,7 +13,7 @@ const size = DesignTokenHelper.size;
 
 const getColor = DesignTokenHelper.getColor;
 
-fdescribe('TextLinkComponent', () => {
+describe('TextLinkComponent', () => {
   let spectator: SpectatorHost<TextLinkComponent>;
 
   const createHost = createHostFactory({
