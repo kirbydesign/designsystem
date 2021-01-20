@@ -1,4 +1,4 @@
-import { forwardRef, Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 
 import { RadioGroupComponent } from '@kirbydesign/designsystem';
 
@@ -14,12 +14,12 @@ import { RadioGroupComponent } from '@kirbydesign/designsystem';
   ],
 })
 export class MockRadioGroupComponent {
+  @Input() disabled: boolean;
   @Input() items: string[] | any[];
-  @Input() selectedIndex: number;
-  @Input() value: any;
   @Input() itemTextProperty: string;
   @Input() itemDisabledProperty: string;
-  @Input() disabled: boolean;
+  @Input() selectedIndex: number;
+  @Input() value: any;
   @Output() valueChange = new EventEmitter<string | any>();
 }
 
