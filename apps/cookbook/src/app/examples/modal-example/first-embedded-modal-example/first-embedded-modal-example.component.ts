@@ -37,6 +37,7 @@ export class FirstEmbeddedModalExampleComponent implements OnInit {
   delayLoadDummyContent: boolean;
   loadAdditionalContent: boolean;
   disableScroll: boolean = false;
+  openFullHeight: boolean;
 
   isLoading = false;
   isLoadingAdditionalContent = false;
@@ -73,6 +74,7 @@ export class FirstEmbeddedModalExampleComponent implements OnInit {
         action: this.onSupplementaryActionSelect.bind(this),
       },
       component: FirstEmbeddedModalExampleComponent,
+      size: this.openFullHeight ? 'full-height' : null,
       componentProps: {
         title,
         subtitle: 'Hello from second embedded example component!',

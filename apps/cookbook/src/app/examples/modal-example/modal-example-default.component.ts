@@ -9,15 +9,18 @@ import { WindowRef } from '@kirbydesign/designsystem/types/window-ref';
 const config = {
   selector: 'cookbook-modal-example-default',
   template: `<button kirby-button (click)="showModal()">Show modal</button>
-  <button kirby-button (click)="showDrawer()">Show drawer</button>
-  <button kirby-button (click)="showCompact()">Show compact</button>
+<button kirby-button (click)="showDrawer()">Show drawer</button>
+<button kirby-button (click)="showCompact()">Show compact</button>
+<cookbook-example-configuration-wrapper>
   <cookbook-modal-example-configuration
     [(showDummyKeyboard)]="showDummyKeyboard"
     [(showFooter)]="showFooter"
     [(showDummyContent)]="showDummyContent"
     [(delayLoadDummyContent)]="delayLoadDummyContent"
     [(loadAdditionalContent)]="loadAdditionalContent"
-  ></cookbook-modal-example-configuration>`,
+    [(openFullHeight)]="openFullHeight"
+  ></cookbook-modal-example-configuration>
+</cookbook-example-configuration-wrapper>`,
   titleTemplate: `<kirby-page-title>My Modal Title</kirby-page-title>
  
 <p>Some content of the embedded component</p>
@@ -156,7 +159,7 @@ export class EmbeddedComponent() {
   styleUrls: ['./modal-example-default.component.scss'],
 })
 export class ModalExampleDefaultComponent {
-  template = config.template.split('<cookbook-modal-example-configuration')[0]; // Remove config part of the template
+  template = config.template.split('<cookbook-example-configuration-wrapper>')[0]; // Remove config part of the template
   titleTemplate = config.titleTemplate;
   footerTemplate = config.footerTemplate;
   defaultCodeSnippet = [
@@ -180,6 +183,7 @@ export class ModalExampleDefaultComponent {
   showDummyContent = true;
   delayLoadDummyContent = true;
   loadAdditionalContent = false;
+  openFullHeight = false;
 
   constructor(private modalController: ModalController, private window: WindowRef) {}
 
@@ -188,6 +192,7 @@ export class ModalExampleDefaultComponent {
     const config: ModalConfig = {
       flavor,
       component: FirstEmbeddedModalExampleComponent,
+      size: this.openFullHeight ? 'full-height' : null,
       componentProps: {
         title,
         subtitle: 'Hello from the first embedded example component!',
@@ -203,6 +208,7 @@ export class ModalExampleDefaultComponent {
         delayLoadDummyContent: this.delayLoadDummyContent,
         loadAdditionalContent: this.loadAdditionalContent,
         disableScroll: false,
+        openFullHeight: this.openFullHeight,
       },
     };
     await this.modalController.showModal(config, this.onOverlayClose);

@@ -56,6 +56,7 @@ import { ProgressCircleExampleComponent } from './progress-circle-example/progre
 import { FlagExampleComponent } from './flag-example/flag-example.component';
 import { ToggleButtonExampleComponent } from './toggle-button-example/toggle-button-example.component';
 import { SlidesExampleComponent } from './slides-example/slides-example.component';
+import { AccordionExampleComponent } from './accordion-example/accordion-example.component';
 
 import { TextLinkExampleComponent } from './text-link-example/text-link-example.component';
 
@@ -161,6 +162,10 @@ export const routes: Routes = [
             component: ModalRoutePage2ExampleComponent,
           },
         ],
+      },
+      {
+        path: 'form-field',
+        component: FormFieldExampleComponent,
       },
     ],
   },
@@ -319,10 +324,6 @@ export const routes: Routes = [
     component: ToolbarExampleComponent,
   },
   {
-    path: 'form-field',
-    component: FormFieldExampleComponent,
-  },
-  {
     path: 'fab-sheet',
     component: FabSheetExampleComponent,
   },
@@ -345,5 +346,9 @@ export const routes: Routes = [
   {
     path: 'text-link',
     component: TextLinkExampleComponent,
+  },
+  {
+    path: 'accordion',
+    component: AccordionExampleComponent,
   },
 ];

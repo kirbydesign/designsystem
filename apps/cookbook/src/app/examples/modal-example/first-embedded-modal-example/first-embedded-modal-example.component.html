@@ -24,7 +24,7 @@
       </button>
     </ng-container>
     <button kirby-button (click)="close()">Hide me</button>
-    <kirby-card class="current-modal-configuration">
+    <cookbook-example-configuration-wrapper [snapToViewport]="true">
       <cookbook-modal-example-configuration
         [(showDummyKeyboard)]="showDummyKeyboard"
         [(showFooter)]="showFooter"
@@ -32,7 +32,7 @@
         [disableScroll]="disableScroll"
         (disableScrollChange)="toggleDisableScroll($event)"
       ></cookbook-modal-example-configuration>
-    </kirby-card>
+    </cookbook-example-configuration-wrapper>
     <kirby-card
       *ngIf="showNestedOptions"
       hasPadding="true"
@@ -52,14 +52,20 @@
       <button kirby-button attentionLevel="2" (click)="showNestedActionSheet()">
         Action sheet
       </button>
-      <cookbook-modal-example-configuration
-        [(showFooter)]="showNestedFooter"
-        [(showDummyContent)]="showNestedDummyContent"
-        [(delayLoadDummyContent)]="delayLoadDummyContent"
-        [(loadAdditionalContent)]="loadAdditionalContent"
-      ></cookbook-modal-example-configuration>
+      <cookbook-example-configuration-wrapper>
+        <cookbook-modal-example-configuration
+          [(showFooter)]="showNestedFooter"
+          [(showDummyContent)]="showNestedDummyContent"
+          [(delayLoadDummyContent)]="delayLoadDummyContent"
+          [(loadAdditionalContent)]="loadAdditionalContent"
+          [(openFullHeight)]="openFullHeight"
+        ></cookbook-modal-example-configuration>
+      </cookbook-example-configuration-wrapper>
     </kirby-card>
     <div *ngIf="showDummyContent">
+      <kirby-form-field>
+        <input kirby-input placeholder="Focus me on device to scroll input into view" />
+      </kirby-form-field>
       <h4>The standard Lorem Ipsum passage, used since the 1500s</h4>
       <p>
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
@@ -149,9 +155,10 @@
       </button>
       <button kirby-button (click)="close()">Close</button>
     </div>
-    <label (click)="snapFooterToKeyboard = !snapFooterToKeyboard">
-      <kirby-checkbox [checked]="snapFooterToKeyboard"></kirby-checkbox>
-      Snap footer to keyboard
-    </label>
+    <kirby-checkbox
+      size="xs"
+      [(checked)]="snapFooterToKeyboard"
+      text="Snap footer to keyboard"
+    ></kirby-checkbox>
   </div>
 </kirby-modal-footer>

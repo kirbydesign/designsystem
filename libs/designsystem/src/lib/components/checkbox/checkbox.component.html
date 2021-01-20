@@ -1,8 +1,10 @@
-<ion-checkbox
-  class="checkbox"
-  [ngClass]="classes"
-  [mode]="shape === 'circle' ? undefined : 'md'"
-  [checked]="checked"
-  [disabled]="disabled"
-  (ionChange)="onChecked($event.detail.checked)"
-></ion-checkbox>
+<div class="wrapper">
+  <ion-checkbox
+    mode="md"
+    [checked]="checked"
+    [disabled]="disabled"
+    (ionChange)="onChecked($event.detail.checked)"
+    [attr.aria-labelledby]="text ? _labelId : null"
+  ></ion-checkbox>
+  <span [id]="_labelId" *ngIf="text">{{ text }}</span>
+</div>

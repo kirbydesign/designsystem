@@ -4,54 +4,25 @@
   <h4>Properties:</h4>
   <cookbook-showcase-properties [properties]="properties"></cookbook-showcase-properties>
   <br />
-  Use 'customName' if you want to add custom icons. For adding custom icons, use IconRegistryService
-  in youre NgModule to add custom icons.
-  <pre>
-    const customIcons = [
-        {{ '{' }} 
-          name: 'customIconName',
-          svg: '[PATH_TO_SVG_FILE]',
-        {{ '},' }}
-        ...
-    ];
-    @NgModule({{ '{' }} ... {{ '}' }} )
-    export class MyModule {{ '{' }} 
-      constructor(iconRegistryService: IconRegistryService) {{ '{' }} 
-        iconRegistryService.addIcons(customIcons);
-      {{ '}' }} 
-    {{ '}' }} 
-  </pre>
-  <h3>Deprecated usage below</h3>
-  <i>
-    Use 'customName' if you want to add custom icons. You need to add 'IconSettings' under your
-    NgModule
-    <br />
-    <pre>
-    const customIconSettings: IconSettings = {{ '{' }}
-      icons: [
-        {{ '{' }} 
-          name: 'football',
-          svg: '[PATH_TO_SVG_FILE]',
-        {{ '},' }} 
-        {{ '{' }} 
-          name: 'umbrella',
-          svg: '[PATH_TO_SVG_FILE]',
-        {{ '},' }} 
-      {{ '],' }} 
-    {{ '};' }}
+  Use <code>'customName'</code> if you want to use custom icons. For adding custom icons, use
+  <code>IconRegistryService</code> in your <code>NgModule</code>'s constructor to add custom icons.
+  <!-- prettier-ignore -->
+  <cookbook-code-viewer language="ts">import {{ '{' }} IconRegistryService {{ '}' }} from '@kirbydesign/designsystem';
 
-    @NgModule({{ '{' }} 
-      ...
-      providers: [
-      {{ '{' }} 
-          provide: ICON_SETTINGS, useValue: customIconSettings,
-      {{ '},' }} 
-      {{ '],' }} 
-      ...
-    {{ '}),' }} 
-  </pre
-    >
-  </i>
+const customIcons = [
+    {{ '{' }} 
+      name: 'customIconName',
+      svg: '[PATH_TO_SVG_FILE]',
+    {{ '},' }}
+    ...
+];
+
+@NgModule({{ '{' }} ... {{ '}' }} )
+export class MyModule {{ '{' }} 
+  constructor(iconRegistryService: IconRegistryService) {{ '{' }} 
+    iconRegistryService.addIcons(customIcons);
+  {{ '}' }} 
+{{ '}' }}</cookbook-code-viewer>
 
   <div class="performance">
     <div class="title">

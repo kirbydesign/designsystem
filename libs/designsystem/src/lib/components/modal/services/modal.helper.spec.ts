@@ -9,7 +9,7 @@ import { WindowRef } from '../../../types/window-ref';
 import { ScreenSize, TestHelper } from '../../../testing/test-helper';
 import { IconComponent } from '../../icon';
 import { ModalFooterComponent } from '../footer/modal-footer.component';
-import { ModalConfig } from '../modal-wrapper/config/modal-config';
+import { ModalConfig, ModalFlavor, ModalSize } from '../modal-wrapper/config/modal-config';
 import { ModalWrapperComponent } from '../modal-wrapper/modal-wrapper.component';
 import { ModalCompactWrapperComponent } from '../modal-wrapper/compact/modal-compact-wrapper.component';
 import { ModalHelper } from './modal.helper';
@@ -68,6 +68,9 @@ describe('ModalHelper', () => {
   const defaultBorderRadius = DesignTokenHelper.borderRadius();
   const size = DesignTokenHelper.size;
   const backgroundColor = DesignTokenHelper.backgroundColor();
+  const modalPaddingTopPx = size('xl');
+  const modalPaddingTop = parseInt(modalPaddingTopPx);
+  const modalHeaderHeight = 46;
 
   const createService = createServiceFactory({
     service: ModalHelper,
@@ -126,16 +129,12 @@ describe('ModalHelper', () => {
     expect(modalShadow).toBeTruthy();
   };
 
-  const openModal = async (
-    title: string = 'Modal',
-    component?: any,
-    size?: 'small' | 'medium' | 'large'
-  ) => {
+  const openModal = async (title: string = 'Modal', component?: any, size?: ModalSize) => {
     await openOverlay({ flavor: 'modal', title, component, size });
   };
 
-  const openDrawer = async (title: string = 'Drawer', component?: any) => {
-    await openOverlay({ flavor: 'drawer', title, component });
+  const openDrawer = async (title: string = 'Drawer', component?: any, size?: ModalSize) => {
+    await openOverlay({ flavor: 'drawer', title, component, size });
   };
 
   const expectShadowStyle = () => {
@@ -228,7 +227,7 @@ describe('ModalHelper', () => {
             await overlay.dismiss();
           });
 
-          const expectSize = (size: 'small' | 'medium' | 'large' | undefined) => {
+          const expectSize = (size: ModalSize | undefined) => {
             expect(ionModal.classList.contains('small')).toBe(size === 'small');
             expect(ionModal.classList.contains('medium')).toBe(size === 'medium');
             expect(ionModal.classList.contains('large')).toBe(size === 'large');
@@ -274,7 +273,26 @@ describe('ModalHelper', () => {
             expectSize('large');
           });
 
-          it('should not set sizing class if flavor is `drawer`', async () => {
+          it('modal should be sized `full-height`', async () => {
+            await openModal('Full-height Modal', undefined, 'full-height');
+
+            expectSize('full-height');
+            const expectedHeight = window.innerHeight - modalPaddingTop;
+            expect(ionModalWrapper).toHaveComputedStyle({ '--height': '100%' });
+            expect(ionModalWrapper).toHaveComputedStyle({ height: `${expectedHeight}px` });
+          });
+
+          it('drawer should be sized `full-height`', async () => {
+            await openDrawer('Full-height Drawer', undefined, 'full-height');
+
+            expectSize('full-height');
+            const drawerPaddingTop = modalPaddingTop + modalHeaderHeight / 2;
+            const expectedHeight = window.innerHeight - drawerPaddingTop;
+            expect(ionModalWrapper).toHaveComputedStyle({ '--height': '100%' });
+            expect(ionModalWrapper).toHaveComputedStyle({ height: `${expectedHeight}px` });
+          });
+
+          it('should not set default size class if flavor is `drawer`', async () => {
             await openDrawer();
 
             expectSize(undefined);
@@ -322,7 +340,7 @@ describe('ModalHelper', () => {
           expectModalWrapperStyle();
 
           it('modal should have correct padding-top', () => {
-            expect(ionModal).toHaveComputedStyle({ 'padding-top': size('xl') });
+            expect(ionModal).toHaveComputedStyle({ 'padding-top': modalPaddingTopPx });
           });
 
           it('modal window should not take focus from embedded input after opening', async () => {
@@ -351,9 +369,8 @@ describe('ModalHelper', () => {
           expectDrawerWrapperStyle();
 
           it('modal should have correct padding-top', () => {
-            const headerHeight = 46;
             expect(ionModal).toHaveComputedStyle({
-              'padding-top': `${parseInt(size('xl')) + headerHeight / 2}px`,
+              'padding-top': `${modalPaddingTop + modalHeaderHeight / 2}px`,
             });
           });
         });
@@ -390,8 +407,7 @@ describe('ModalHelper', () => {
         });
 
         describe(`when modal is opened on top of another modal`, () => {
-          type modalFlavorType = 'modal' | 'drawer' | 'compact';
-          const modalFlavors: modalFlavorType[] = ['modal', 'drawer', 'compact'];
+          const modalFlavors: ModalFlavor[] = ['modal', 'drawer', 'compact'];
           modalFlavors.forEach((firstFlavor) => {
             describe(`when first modal has '${firstFlavor}' flavor`, () => {
               beforeEach(async () => {
@@ -510,6 +526,44 @@ describe('ModalHelper', () => {
         });
       });
 
+      describe('sizing', () => {
+        afterEach(async () => {
+          await overlay.dismiss();
+        });
+
+        const expectSize = (size: ModalSize | undefined) => {
+          expect(ionModal.classList.contains('small')).toBe(size === 'small');
+          expect(ionModal.classList.contains('medium')).toBe(size === 'medium');
+          expect(ionModal.classList.contains('large')).toBe(size === 'large');
+        };
+
+        it('modal should be full height', async () => {
+          await openModal();
+
+          expect(ionModalWrapper).toHaveComputedStyle({
+            '--height': '100%',
+          });
+        });
+
+        it('drawer should have min-height', async () => {
+          await openDrawer();
+
+          expect(ionModalWrapper).toHaveComputedStyle({
+            '--min-height': DesignTokenHelper.drawerDefaultHeight,
+          });
+        });
+
+        it('drawer should be sized `full-height`', async () => {
+          await openDrawer('Full-height Drawer', undefined, 'full-height');
+
+          expectSize('full-height');
+          const drawerPaddingTop = parseInt(size('m'));
+          const expectedHeight = window.innerHeight - drawerPaddingTop;
+          expect(ionModalWrapper).toHaveComputedStyle({ '--height': '100%' });
+          expect(ionModalWrapper).toHaveComputedStyle({ height: `${expectedHeight}px` });
+        });
+      });
+
       describe(`with default flavor ('modal')`, () => {
         beforeEach(async () => {
           await openModal();
@@ -578,8 +632,7 @@ describe('ModalHelper', () => {
       });
 
       describe(`when modal is opened on top of another modal`, () => {
-        type modalFlavorType = 'modal' | 'drawer' | 'compact';
-        const modalFlavors: modalFlavorType[] = ['modal', 'drawer', 'compact'];
+        const modalFlavors: ModalFlavor[] = ['modal', 'drawer', 'compact'];
         modalFlavors.forEach((firstFlavor) => {
           describe(`when first modal has '${firstFlavor}' flavor`, () => {
             beforeEach(async () => {

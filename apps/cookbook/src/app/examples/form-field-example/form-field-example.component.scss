@@ -1,15 +1,9 @@
 @import './libs/designsystem/src/lib/scss/utils';
 
-:host {
+kirby-page-content > * {
   display: block;
-  padding: size('s');
-  background-color: get-color('background-color');
+}
 
-  > * {
-    display: block;
-  }
-
-  > * + * {
-    margin-top: size('m');
-  }
+kirby-page-content > * + * {
+  margin-top: size('m');
 }

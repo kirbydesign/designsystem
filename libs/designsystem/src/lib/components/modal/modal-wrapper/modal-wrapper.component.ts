@@ -29,7 +29,8 @@ import { ButtonComponent } from '../../button/button.component';
 import { ResizeObserverService } from '../../shared/resize-observer/resize-observer.service';
 import { ResizeObserverEntry } from '../../shared/resize-observer/types/resize-observer-entry';
 import { WindowRef } from '../../../types/window-ref';
-import { DesignTokenHelper } from '../../../helpers';
+import { DesignTokenHelper } from '../../../helpers/design-token-helper';
+import { PlatformService } from '../../../helpers/platform.service';
 
 @Component({
   selector: 'kirby-modal-wrapper',
@@ -74,7 +75,6 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   readonly didPresent = this.ionModalDidPresent.toPromise();
   private readonly ionModalWillDismiss = new Subject<void>();
   readonly willClose = this.ionModalWillDismiss.toPromise();
-  private readonly defaultSize = 'medium';
   private _mutationObserver: MutationObserver;
   private get mutationObserver(): MutationObserver {
     if (!this._mutationObserver) {
@@ -104,7 +104,8 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     private zone: NgZone,
     private resizeObserverService: ResizeObserverService,
     private componentFactoryResolver: ComponentFactoryResolver,
-    private windowRef: WindowRef
+    private windowRef: WindowRef,
+    private platform: PlatformService
   ) {
     this.setViewportHeight();
     this.observeViewportResize();
@@ -123,7 +124,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   }
 
   private initializeSizing() {
-    this.setInitialModalSize();
+    if (this.config.size === 'full-height') return;
     this.patchScrollElementSize();
     this.observeHeaderResize();
     this.observeModalFullHeight();
@@ -148,12 +149,6 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
       this.routerOutlet.activateWith(route, this.componentFactoryResolver);
       this.checkForEmbeddedElements();
     });
-  }
-
-  private setInitialModalSize() {
-    if (this.config.flavor !== 'modal') return;
-    if (!this.ionModalElement) return;
-    this.renderer.addClass(this.ionModalElement, this.config.size || this.defaultSize);
   }
 
   private patchScrollElementSize(): void {
@@ -285,13 +280,9 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     this.setKeyboardVisibility(0);
   }
 
-  private isPhabletOrBigger() {
-    const query = `(min-width: ${DesignTokenHelper.breakpoints.medium})`;
-    return this.windowRef.matchMedia(query).matches;
-  }
-
   private toggleContentMaxHeight(freeze: boolean) {
-    const shouldToggleMaxHeight = this.config.flavor === 'modal' && this.isPhabletOrBigger();
+    const shouldToggleMaxHeight =
+      this.config.flavor === 'modal' && this.platform.isPhabletOrBigger();
     if (!shouldToggleMaxHeight) return;
     const style = 'max-height';
     const contentElement = this.ionContentElement.nativeElement;
@@ -373,7 +364,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   }
 
   private setViewportHeight() {
-    const vh = this.windowRef.innerHeight * 0.01;
+    const vh = (this.windowRef.innerHeight * 0.01).toFixed(2);
     this.setCssVar(this.elementRef.nativeElement, '--vh', `${vh}px`);
   }
 

@@ -1,6 +1,7 @@
 import { SpectatorHost, createHostFactory } from '@ngneat/spectator';
 
-import { DesignTokenHelper } from '../../helpers/design-token-helper';
+import { WindowRef } from '../../types';
+import { DesignTokenHelper, PlatformService } from '../../helpers';
 import { TestHelper } from '../../testing/test-helper';
 import { InputCounterComponent } from './input-counter/input-counter.component';
 import { FormFieldComponent } from './form-field.component';
@@ -25,6 +26,13 @@ describe('FormFieldComponent', () => {
       TextareaComponent,
       InputCounterComponent,
       ItemComponent,
+    ],
+    mocks: [PlatformService],
+    providers: [
+      {
+        provide: WindowRef,
+        useValue: window,
+      },
     ],
   });
 
@@ -173,12 +181,19 @@ describe('FormFieldComponent', () => {
 
   describe('with slotted input', () => {
     describe('and no label', () => {
+      let dispatchEventSpy: jasmine.Spy<jasmine.Func>;
+
       beforeEach(() => {
+        dispatchEventSpy = spyOn(document, 'dispatchEvent');
+
         spectator = createHost(
           `<kirby-form-field>
-             <input kirby-input/>
-           </kirby-form-field>`
+            <input kirby-input [readonly]="readonly" />
+          </kirby-form-field>`,
+          { detectChanges: false, hostProps: { readonly: false } } // Delay change detection to allow altering platform.isTouch()
         );
+
+        spectator.detectChanges();
       });
 
       it('should render the input', () => {
@@ -195,6 +210,46 @@ describe('FormFieldComponent', () => {
       it('should not render the input within a label', () => {
         const inputElement = spectator.queryHost('label input[kirby-input]');
         expect(inputElement).toBeNull();
+      });
+
+      it('should register shims', () => {
+        spectator.setHostInput({ readonly: false });
+        spectator.detectChanges(); //ngOnInit() + 1st ngAfterContentChecked()
+        expect(dispatchEventSpy).toHaveBeenCalledTimes(1);
+        expect(dispatchEventSpy).toHaveBeenCalledWith(
+          new CustomEvent('ionInputDidLoad', {
+            detail: spectator.element,
+          })
+        );
+      });
+
+      it('should NOT register shims if readonly', () => {
+        spectator.setHostInput({ readonly: true });
+        spectator.detectChanges(); //ngOnInit() + 1st ngAfterContentChecked()
+        expect(dispatchEventSpy).toHaveBeenCalledTimes(0);
+      });
+
+      it('should register shims if changing from readonly to not readonly', () => {
+        spectator.setHostInput({ readonly: true });
+        spectator.detectChanges(); //ngOnInit() + 1st ngAfterContentChecked()
+        expect(dispatchEventSpy).toHaveBeenCalledTimes(0);
+
+        spectator.setHostInput({ readonly: false });
+        spectator.detectChanges(); //ngOnInit() + 2nd ngAfterContentChecked()
+        expect(dispatchEventSpy).toHaveBeenCalledTimes(1);
+        expect(dispatchEventSpy).toHaveBeenCalledWith(
+          new CustomEvent('ionInputDidLoad', {
+            detail: spectator.element,
+          })
+        );
+      });
+
+      it('should dispatch `ionInputDidUnload` event on destroy', () => {
+        spectator.fixture.destroy();
+        const event: Event = dispatchEventSpy.calls.mostRecent().args[0];
+        expect(event).toBeInstanceOf(CustomEvent);
+        expect(event.type).toBe('ionInputDidUnload');
+        expect((event as CustomEvent).detail).toEqual(spectator.element);
       });
     });
 
@@ -313,6 +368,52 @@ describe('FormFieldComponent', () => {
           });
         });
       });
+    });
+  });
+
+  describe('focus', () => {
+    let platformServiceSpy: jasmine.SpyObj<PlatformService>;
+
+    beforeEach(() => {
+      spectator = createHost(
+        `<kirby-form-field>
+        <input kirby-input />
+      </kirby-form-field>`,
+        { detectChanges: false } // Delay change detection to allow altering platform.isTouch()
+      );
+      platformServiceSpy = spectator.inject(PlatformService);
+    });
+
+    it('should focus input element if not touch', () => {
+      platformServiceSpy.isTouch.and.returnValue(false);
+      // Call detectChanges() twice - see: https://angular.io/guide/testing-components-scenarios#detectchanges
+      spectator.detectChanges(); //ngOnInit() + 1st ngAfterContentChecked()
+      spectator.detectChanges(); // 2nd ngAfterContentChecked
+      const formFieldElement = spectator.queryHost<HTMLInputElement>('input[kirby-input]');
+      const focusSpy = spyOn(formFieldElement, 'focus');
+
+      spectator.component.focus();
+
+      expect(focusSpy).toHaveBeenCalled();
+    });
+
+    it('should dispatch touch events if touch', () => {
+      platformServiceSpy.isTouch.and.returnValue(true);
+      // Call detectChanges() twice - see: https://angular.io/guide/testing-components-scenarios#detectchanges
+      spectator.detectChanges(); //ngOnInit() + 1st ngAfterContentChecked()
+      spectator.detectChanges(); // 2nd ngAfterContentChecked
+      const inputElement = spectator.queryHost<HTMLInputElement>('input[kirby-input]');
+      const dispatchEventSpy = spyOn(inputElement, 'dispatchEvent');
+
+      spectator.component.focus();
+
+      expect(dispatchEventSpy).toHaveBeenCalledTimes(2);
+      const firstEvent: Event = dispatchEventSpy.calls.argsFor(0)[0];
+      expect(firstEvent).toBeInstanceOf(TouchEvent);
+      expect(firstEvent.type).toBe('touchstart');
+      const secondEvent: Event = dispatchEventSpy.calls.argsFor(1)[0];
+      expect(secondEvent).toBeInstanceOf(TouchEvent);
+      expect(secondEvent.type).toBe('touchend');
     });
   });
 });
