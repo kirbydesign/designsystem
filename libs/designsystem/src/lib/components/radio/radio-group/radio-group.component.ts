@@ -20,16 +20,17 @@ import { RadioComponent } from '../radio.component';
   styles: ['ion-radio-group { display: inherit; flex-wrap: inherit}'],
 })
 export class RadioGroupComponent implements AfterContentInit, AfterViewInit {
-  @ContentChild(ListItemTemplateDirective, { static: true, read: TemplateRef })
-  itemTemplate: TemplateRef<any>;
+  // #region public properties
 
-  @ViewChildren(RadioComponent)
-  private radioButtons: QueryList<RadioComponent>;
+  get disabled(): boolean {
+    return this._disabled;
+  }
 
-  @ContentChildren(RadioComponent, { descendants: true })
-  private slottedRadioButtons: QueryList<RadioComponent>;
+  @Input() set disabled(disabled: boolean) {
+    this._disabled = disabled;
+    this.setDisabledState(disabled);
+  }
 
-  private _items: string[] | any[] = [];
   get items(): string[] | any[] {
     return this._items || []; // Ensure items return empty array even if set to null/undefined
   }
@@ -42,7 +43,12 @@ export class RadioGroupComponent implements AfterContentInit, AfterViewInit {
     this._value = this.items[this.selectedIndex] || null;
   }
 
-  private _selectedIndex: number = -1;
+  @Input()
+  itemTextProperty = 'text';
+
+  @Input()
+  itemDisabledProperty = 'disabled';
+
   get selectedIndex(): number {
     return this._selectedIndex;
   }
@@ -53,16 +59,6 @@ export class RadioGroupComponent implements AfterContentInit, AfterViewInit {
     this._value = this.getValueFromSelectedIndex() || null;
   }
 
-  private getValueFromSelectedIndex() {
-    if (this.items.length) {
-      return this.items && this.items[this.selectedIndex]; // Get value from items
-    }
-    const selectedRadio =
-      this.slottedRadioButtons && this.slottedRadioButtons.toArray()[this.selectedIndex];
-    return selectedRadio && selectedRadio.value; // Get value from slotted radios
-  }
-
-  private _value: string | any = null;
   get value(): string | any {
     return this._value;
   }
@@ -71,6 +67,31 @@ export class RadioGroupComponent implements AfterContentInit, AfterViewInit {
     this.setSelectedItem(value);
   }
 
+  /**
+   * Emitted when an option is selected
+   */
+  @Output() valueChange: EventEmitter<string | any> = new EventEmitter<string | any>();
+
+  // #endregion public properties
+
+  // #region "protected" properties used by template
+  @ContentChild(ListItemTemplateDirective, { static: true, read: TemplateRef })
+  itemTemplate: TemplateRef<any>;
+  // #endregion "protected" properties used by template
+
+  // #region private fields
+  private _disabled = false;
+  private _items: string[] | any[] = [];
+  private _selectedIndex: number = -1;
+  private _value: string | any = null;
+
+  @ViewChildren(RadioComponent)
+  private radioButtons: QueryList<RadioComponent>;
+  @ContentChildren(RadioComponent, { descendants: true })
+  private slottedRadioButtons: QueryList<RadioComponent>;
+  // #endregion private fields
+
+  // #region public methods
   ngAfterContentInit(): void {
     if (this.value) return;
     // Ensure value is initialized from selectedIndex if not already set explicitly:
@@ -84,18 +105,13 @@ export class RadioGroupComponent implements AfterContentInit, AfterViewInit {
     this.slottedRadioButtons.changes.subscribe(() => this.setDisabledNextCycle());
   }
 
-  private setDisabledNextCycle() {
-    if (this.disabled) {
-      setTimeout(() => this.setDisabledState(this.disabled));
-    }
+  setDisabledState(isDisabled: boolean) {
+    this.setRadioDisabledState(this.radioButtons, isDisabled);
+    this.setRadioDisabledState(this.slottedRadioButtons, isDisabled);
   }
+  // #endregion public methods
 
-  @Input()
-  itemTextProperty = 'text';
-
-  @Input()
-  itemDisabledProperty = 'disabled';
-
+  // #region "protected" methods used by template
   getTextFromItem(item: string | any): string {
     if (!item) return null;
     return typeof item === 'string' ? item : item[this.itemTextProperty];
@@ -106,19 +122,27 @@ export class RadioGroupComponent implements AfterContentInit, AfterViewInit {
     return typeof item === 'string' ? undefined : item[this.itemDisabledProperty];
   }
 
-  private _disabled = false;
-  get disabled(): boolean {
-    return this._disabled;
+  _onChange(value: any) {
+    if (value === this._value) return;
+    this.setSelectedItem(value);
+    this.valueChange.emit(value);
+  }
+  // #endregion "protected" methods used by template
+
+  // #region private methods
+  private getValueFromSelectedIndex() {
+    if (this.items.length) {
+      return this.items && this.items[this.selectedIndex]; // Get value from items
+    }
+    const selectedRadio =
+      this.slottedRadioButtons && this.slottedRadioButtons.toArray()[this.selectedIndex];
+    return selectedRadio && selectedRadio.value; // Get value from slotted radios
   }
 
-  @Input() set disabled(disabled: boolean) {
-    this._disabled = disabled;
-    this.setDisabledState(disabled);
-  }
-
-  setDisabledState(isDisabled: boolean) {
-    this.setRadioDisabledState(this.radioButtons, isDisabled);
-    this.setRadioDisabledState(this.slottedRadioButtons, isDisabled);
+  private setDisabledNextCycle() {
+    if (this.disabled) {
+      setTimeout(() => this.setDisabledState(this.disabled));
+    }
   }
 
   private setRadioDisabledState(radioButtons: QueryList<RadioComponent>, isDisabled: boolean) {
@@ -132,20 +156,10 @@ export class RadioGroupComponent implements AfterContentInit, AfterViewInit {
     });
   }
 
-  /**
-   * Emitted when an option is selected
-   */
-  @Output() valueChange: EventEmitter<string | any> = new EventEmitter<string | any>();
-
-  _onChange(value: any) {
-    if (value === this._value) return;
-    this.setSelectedItem(value);
-    this.valueChange.emit(value);
-  }
-
   private setSelectedItem(value: any) {
     if (value === this._value) return;
     this._value = value;
     this._selectedIndex = this.items.indexOf(value);
   }
+  // #endregion private methods
 }
