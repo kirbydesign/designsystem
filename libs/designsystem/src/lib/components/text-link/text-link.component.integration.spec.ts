@@ -11,7 +11,7 @@ const fontSize = DesignTokenHelper.fontSize;
 const lineHeight = DesignTokenHelper.lineHeight;
 const size = DesignTokenHelper.size;
 
-describe('TextLinkComponent integrationt test', () => {
+describe('TextLinkComponent', () => {
   let spectator: SpectatorHost<TextLinkComponent>;
 
   const createHost = createHostFactory({
@@ -21,74 +21,91 @@ describe('TextLinkComponent integrationt test', () => {
   });
   describe('size and padding', () => {
     interface TestCase {
-      name: string;
-      value: string;
-      expected_font: string;
-      expected_padding_right: string;
-      expected_padding_left: string;
-      expected_line_height: string;
+      size?: string;
+      expected: {
+        fontSize: string;
+        fontLineHeight: string;
+        iconPaddingLeft: string;
+        iconPaddingRight: string;
+      };
     }
     const testCases: TestCase[] = [
       {
-        name: 'md',
-        value: 'md',
-        expected_font: 'm',
-        expected_padding_left: 'xxxs',
-        expected_padding_right: 's',
-        expected_line_height: 'n',
+        size: 'md',
+        expected: {
+          fontSize: 'n',
+          fontLineHeight: 'n',
+          iconPaddingLeft: 'xxxs',
+          iconPaddingRight: 's',
+        },
       },
       {
-        name: 'sm',
-        value: 'sm',
-        expected_font: 'm',
-        expected_padding_left: 'xxxs',
-        expected_padding_right: 's',
-        expected_line_height: 's',
+        size: 'sm',
+        expected: {
+          fontSize: 's',
+          fontLineHeight: 's',
+          iconPaddingLeft: 'xxxs',
+          iconPaddingRight: 's',
+        },
       },
       {
-        name: 'xs',
-        value: 'xs',
-        expected_font: 's',
-        expected_padding_left: 'xxxxs',
-        expected_padding_right: 's',
-        expected_line_height: 'xs',
+        size: 'xs',
+        expected: {
+          fontSize: 'xs',
+          fontLineHeight: 'xs',
+          iconPaddingLeft: 'xxxxs',
+          iconPaddingRight: 's',
+        },
       },
       {
-        name: 'Empty',
-        value: '',
-        expected_font: 'm',
-        expected_padding_left: 'xxxs',
-        expected_padding_right: 's',
-        expected_line_height: 'n',
+        size: '',
+        expected: {
+          fontSize: 'n',
+          fontLineHeight: 'n',
+          iconPaddingLeft: 'xxxs',
+          iconPaddingRight: 's',
+        },
       },
     ];
-    testCases.forEach((tc) => {
-      it('should render correct size & padding, when size is ' + tc.name, () => {
-        spectator = createHost(
-          `<kirby-text-link size='${tc.value}' text='Some Link' link='https://angular.io/api/router/RouterLink'></kirby-text-link>`
-        );
-        const icon = spectator.queryHost<HTMLElement>('kirby-icon');
-        expect(icon).toHaveComputedStyle({
-          'font-size': fontSize(tc.expected_font),
-          'padding-left': size(tc.expected_padding_left),
-          'padding-right': size(tc.expected_padding_right),
-          'line-height': lineHeight(tc.expected_line_height),
+    testCases.forEach((scenario) => {
+      describe(`when size is ${scenario.size}`, () => {
+        describe(`external link`, () => {
+          beforeEach(() => {
+            spectator = createHost(
+              `<kirby-text-link size='${scenario.size}' text='Some Link' link='https://angular.io/api/router/RouterLink'></kirby-text-link>`
+            );
+          });
+          it('should render icon with correct styling', () => {
+            const icon = spectator.queryHost<HTMLElement>('kirby-icon');
+
+            expect(icon).toHaveComputedStyle({
+              // 'font-size': fontSize(tc.expected_font),
+              'padding-left': size(scenario.expected.iconPaddingLeft),
+              'padding-right': size(scenario.expected.iconPaddingRight),
+              // 'line-height': lineHeight(tc.expected_line_height),
+            });
+          });
+          it('should render anchor link with corrrect styling', () => {
+            const link = spectator.queryHost<HTMLElement>('a');
+            expect(link).toHaveComputedStyle({
+              'font-size': fontSize(scenario.expected.fontSize),
+              'line-height': lineHeight(scenario.expected.fontLineHeight),
+            });
+          });
         });
-      });
-      it('should render correct size & lineHeight, when size is ' + tc.name, () => {
-        spectator = createHost(
-          `<kirby-text-link size='${tc.value}' text='Some Link' link='https://angular.io/api/router/RouterLink'></kirby-text-link>`
-        );
-        const icon = spectator.queryHost<HTMLElement>('kirby-icon');
-        expect(icon).toHaveComputedStyle({
-          'font-size': fontSize(tc.expected_font),
-          'line-height': lineHeight(tc.expected_line_height),
+        describe(`internal link`, () => {
+          it('should render anchor link with corrrect styling', () => {
+            spectator = createHost(
+              `<kirby-text-link size='${scenario.size}' text='Some Link' link='/'>`
+            );
+            const link = spectator.queryHost<HTMLElement>('a');
+            expect(link).toHaveComputedStyle({
+              'font-size': fontSize(scenario.expected.fontSize),
+              'line-height': lineHeight(scenario.expected.fontLineHeight),
+            });
+          });
         });
       });
     });
   });
 });
-/*  expect(ionIcon).toHaveComputedStyle({ width: size('m'), height: size('m')
-
- const avatar = spectator.queryHost<HTMLElement>('.avatar');
-      expect(avatar).toHaveComputedStyle({ width: avatarSize('m'), height: avatarSize('m') }); */
