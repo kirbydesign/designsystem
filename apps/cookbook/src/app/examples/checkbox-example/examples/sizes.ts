@@ -10,7 +10,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  styleUrls: ['./sizes.scss'],
+  styleUrls: ['../../checkbox-radio-sizes-example.scss'],
 })
 export class CheckboxSizesExampleComponent {
   template: string = config.template;

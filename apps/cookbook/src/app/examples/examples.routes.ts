@@ -57,6 +57,7 @@ import { FlagExampleComponent } from './flag-example/flag-example.component';
 import { ToggleButtonExampleComponent } from './toggle-button-example/toggle-button-example.component';
 import { SlidesExampleComponent } from './slides-example/slides-example.component';
 import { AccordionExampleComponent } from './accordion-example/accordion-example.component';
+import { RadioExampleComponent } from './radio-example/radio-example.component';
 
 export const routes: Routes = [
   {
@@ -344,5 +345,9 @@ export const routes: Routes = [
   {
     path: 'accordion',
     component: AccordionExampleComponent,
+  },
+  {
+    path: 'radio',
+    component: RadioExampleComponent,
   },
 ];
