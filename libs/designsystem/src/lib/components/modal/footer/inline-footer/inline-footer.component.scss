@@ -1,0 +1,10 @@
+@import '../../../../scss/utils';
+
+$padding-horizontal: size('s');
+$padding-vertical: size('xxs');
+
+:host {
+  display: block;
+  margin-top: var(--margin-top, 0px);
+  padding: $padding-vertical $padding-horizontal;
+}
