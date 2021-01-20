@@ -79,7 +79,7 @@ import { ActionSheetItem } from '@kirbydesign/designsystem';
     `,
   ],
 })
-export class TabExampleComponent implements OnInit {
+export class FixedFooterTabExampleComponent implements OnInit {
   title: Observable<string>;
   items: ActionSheetItem[] = [
     { id: '1', text: 'Option 1' },

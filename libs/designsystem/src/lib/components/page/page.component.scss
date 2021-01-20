@@ -16,7 +16,10 @@ ion-toolbar {
 }
 
 ion-footer {
-  --kirby-page-footer-safe-area-bottom: var(--kirby-safe-area-bottom);
+  --kirby-page-footer-safe-area-bottom: var(
+    --kirby-page-footer-safe-area-bottom-override,
+    var(--kirby-safe-area-bottom)
+  );
 }
 
 ion-toolbar {

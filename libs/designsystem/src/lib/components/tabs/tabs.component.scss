@@ -2,7 +2,13 @@
 
 :host {
   &:not(.hide-tab-bar) {
-    --kirby-safe-area-bottom: 0px;
+    // we are not hiding tabs if below large screen and not touch
+    @include media('<large') {
+      --kirby-page-footer-safe-area-bottom-override: 0px;
+    }
+    @include touch {
+      --kirby-page-footer-safe-area-bottom-override: 0px;
+    }
   }
 }
 
@@ -19,7 +25,12 @@ ion-tabs {
     --color: #{get-color('black')};
 
     &.hide {
-      display: none;
+      @include media('<large') {
+        display: none;
+      }
+      @include touch {
+        display: none;
+      }
     }
 
     display: flex;
