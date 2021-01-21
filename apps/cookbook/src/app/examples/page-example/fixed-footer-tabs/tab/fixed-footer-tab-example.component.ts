@@ -1,59 +1,74 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Observable, of } from 'rxjs';
 
-import { ActionSheetItem } from '@kirbydesign/designsystem';
+import { PageFooterComponent } from '@kirbydesign/designsystem/components/page/page-footer/page-footer.component';
 
+const template = `
+<kirby-page [title]="title | async" [hideTabs]="!showTabs">
+  <kirby-page-content>
+    <ng-container *ngTemplateOutlet="controls"></ng-container>
+    <br />
+
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt error minus odit
+      officia officiis quo tempora ut velit voluptate. Aliquid ea, earum facilis hic in libero
+      obcaecati odit quia soluta!
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt error minus odit
+      officia officiis quo tempora ut velit voluptate. Aliquid ea, earum facilis hic in libero
+      obcaecati odit quia soluta!
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt error minus odit
+      officia officiis quo tempora ut velit voluptate. Aliquid ea, earum facilis hic in libero
+      obcaecati odit quia soluta!
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt error minus odit
+      officia officiis quo tempora ut velit voluptate. Aliquid ea, earum facilis hic in libero
+      obcaecati odit quia soluta!
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt error minus odit
+      officia officiis quo tempora ut velit voluptate. Aliquid ea, earum facilis hic in libero
+      obcaecati odit quia soluta!
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt error minus odit
+      officia officiis quo tempora ut velit voluptate. Aliquid ea, earum facilis hic in libero
+      obcaecati odit quia soluta!
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt error minus odit
+      officia officiis quo tempora ut velit voluptate. Aliquid ea, earum facilis hic in libero
+      obcaecati odit quia soluta!
+    </p>
+    <ng-container *ngTemplateOutlet="controls"></ng-container>
+  </kirby-page-content>
+  <kirby-page-footer *ngIf="showFooter" #pageFooter>
+    <div class="footer-content">
+      <h3>0 selected</h3>
+      <kirby-icon class="close-footer" name="close" (click)="onCloseClick()"></kirby-icon>
+      This is the fixed footer
+    </div>
+  </kirby-page-footer>
+</kirby-page>
+
+<ng-template #controls>
+  <kirby-item>
+    <h3>Toggle tabs</h3>
+    <kirby-toggle slot="end" (click)="toggleTabs()" [checked]="showTabs"></kirby-toggle>
+  </kirby-item>
+  <kirby-item>
+    <h3>Toggle footer</h3>
+    <kirby-toggle slot="end" (click)="toggleFooter()" [checked]="showFooter"></kirby-toggle>
+  </kirby-item>
+</ng-template>
+`;
 @Component({
-  template: `
-    <kirby-page [title]="title | async" [hideTabs]="hideTabs">
-      <kirby-page-content>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt error minus odit
-          officia officiis quo tempora ut velit voluptate. Aliquid ea, earum facilis hic in libero
-          obcaecati odit quia soluta!
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt error minus odit
-          officia officiis quo tempora ut velit voluptate. Aliquid ea, earum facilis hic in libero
-          obcaecati odit quia soluta!
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt error minus odit
-          officia officiis quo tempora ut velit voluptate. Aliquid ea, earum facilis hic in libero
-          obcaecati odit quia soluta!
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt error minus odit
-          officia officiis quo tempora ut velit voluptate. Aliquid ea, earum facilis hic in libero
-          obcaecati odit quia soluta!
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt error minus odit
-          officia officiis quo tempora ut velit voluptate. Aliquid ea, earum facilis hic in libero
-          obcaecati odit quia soluta!
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt error minus odit
-          officia officiis quo tempora ut velit voluptate. Aliquid ea, earum facilis hic in libero
-          obcaecati odit quia soluta!
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt error minus odit
-          officia officiis quo tempora ut velit voluptate. Aliquid ea, earum facilis hic in libero
-          obcaecati odit quia soluta!
-        </p>
-        <button kirby-button (click)="toggleTabBar()">Toggle tab bar</button>
-      </kirby-page-content>
-      <kirby-page-footer *ngIf="!hideFooter">
-        <div class="footer-content">
-          <h3>0 valgte</h3>
-          <kirby-icon class="close-footer" name="close" (click)="onCloseClick()"></kirby-icon>
-          This is the fixed footer
-        </div>
-      </kirby-page-footer>
-    </kirby-page>
-  `,
+  template,
   styles: [
     `
       .footer-content {
@@ -69,8 +84,11 @@ import { ActionSheetItem } from '@kirbydesign/designsystem';
   ],
 })
 export class PageFixedFooterTabExampleComponent implements OnInit {
-  hideTabs = false;
-  hideFooter = false;
+  static template = template;
+
+  @ViewChild('pageFooter') pageFooter: PageFooterComponent;
+  showTabs = true;
+  showFooter = true;
   title: Observable<string>;
   constructor(private route: ActivatedRoute) {}
 
@@ -80,11 +98,17 @@ export class PageFixedFooterTabExampleComponent implements OnInit {
     }, 300);
   }
 
-  toggleTabBar() {
-    this.hideTabs = !this.hideTabs;
+  toggleTabs() {
+    this.showTabs = !this.showTabs;
+  }
+
+  toggleFooter() {
+    this.showFooter = !this.showFooter;
   }
 
   onCloseClick() {
-    this.hideFooter = !this.hideFooter;
+    this.pageFooter.close();
+    this.showFooter = false;
+    this.showTabs = true;
   }
 }
