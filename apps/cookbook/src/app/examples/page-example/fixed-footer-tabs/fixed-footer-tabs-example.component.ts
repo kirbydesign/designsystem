@@ -39,7 +39,7 @@ const template = `<!-- This container is only needed due to layout of larger scr
   template,
   styleUrls: ['./fixed-footer-tabs-example.component.scss'],
 })
-export class FixedFooterTabsExampleComponent {
+export class PageFixedFooterTabsExampleComponent {
   static template = template;
   constructor() {}
 
