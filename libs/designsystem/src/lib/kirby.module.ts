@@ -84,6 +84,8 @@ import { AccordionDirective } from './components/accordion/accordion.directive';
 import { AccordionItemComponent } from './components/accordion/accordion-item.component';
 import { NumericInputDirective } from './components/form-field/directives/numeric/numeric-input.directive';
 import { DateInputDirective } from './components/form-field/directives/date/date-input.directive';
+import { RadioComponent } from './components/radio/radio.component';
+import { RadioGroupComponent } from './components/radio/radio-group/radio-group.component';
 
 const exportedDeclarations = [
   CardComponent,
@@ -138,6 +140,8 @@ const exportedDeclarations = [
   SlideDirective,
   AccordionDirective,
   AccordionItemComponent,
+  RadioComponent,
+  RadioGroupComponent,
 ];
 
 const declarations = [
