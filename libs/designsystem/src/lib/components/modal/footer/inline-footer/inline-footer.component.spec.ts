@@ -61,7 +61,7 @@ describe('InlineFooterComponent', () => {
     beforeEach(() => {
       config = {
         title: null,
-        component: StaticFooterEmbeddedComponent, // InlineFooterEmbeddedComponent,
+        component: InlineFooterEmbeddedComponent,
         flavor: null,
       };
       spectator = createComponent({
@@ -70,24 +70,9 @@ describe('InlineFooterComponent', () => {
         },
         detectChanges: false,
       });
-
-      // remove this mock
-      spyOn(spectator.component['ionContent'], 'getScrollElement').and.returnValue(
-        Promise.resolve(document.createElement('DIV'))
-      );
-
       const resizeObserverService = spectator.inject(ResizeObserverService);
       spyOn(resizeObserverService, 'observe');
       spyOn(resizeObserverService, 'unobserve');
-
-      const ionModalWrapper = document.createElement('div');
-      const ionModal = document.createElement('div');
-      ionModal['dismiss'] = jasmine.createSpy('dissmissSpy');
-      spyOn(spectator.element, 'closest')
-        .withArgs('.modal-wrapper')
-        .and.returnValue(ionModalWrapper)
-        .withArgs('ion-modal')
-        .and.returnValue(ionModal);
 
       spectator.detectChanges();
     });
@@ -100,6 +85,7 @@ describe('InlineFooterComponent', () => {
     describe(`should find `, () => {
       it('modal footer and inline footer', async () => {
         const embeddedComponent = spectator.query(InlineFooterEmbeddedComponent);
+        expect(embeddedComponent).not.toBeNull();
         embeddedComponent.showFooter = true;
         spectator.detectChanges();
         const modalFooter = spectator.element.querySelector('kirby-modal-footer');
@@ -110,11 +96,7 @@ describe('InlineFooterComponent', () => {
     });
 
     describe(`should set custom CSS property value'--margin-top' on inline footer`, () => {
-      beforeEach(async () => {
-        // await TestHelper.resizeTestWindow(TestHelper.screensize.phone);
-        // await TestHelper.waitForResizeObserver();
-        //   await TestHelper.whenTrue(() => spectator.component['viewportResized']);
-      });
+      beforeEach(async () => {});
 
       afterEach(() => {
         TestHelper.resetTestWindow();
