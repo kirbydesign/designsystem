@@ -9,6 +9,8 @@ $padding-vertical: size('xxs');
 
   &.padding {
     padding: $padding-vertical $padding-horizontal;
-    padding-bottom: calc(#{$padding-vertical} + var(--kirby-page-footer-safe-area-bottom, 0px));
+    padding-bottom: calc(
+      #{$padding-vertical} + var(--kirby-page-footer-safe-area-bottom, var(--kirby-safe-area-bottom))
+    );
   }
 }

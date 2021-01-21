@@ -59,7 +59,7 @@ import { SlidesExampleComponent } from './slides-example/slides-example.componen
 import { CookbookExampleCardContentComponent } from './slides-example/example-card-content';
 import { AccordionExampleComponent } from './accordion-example/accordion-example.component';
 import { FixedFooterTabsExampleComponent } from './page-example/fixed-footer-tabs/fixed-footer-tabs-example.component';
-import { FixedFooterTabExampleComponent } from './page-example/fixed-footer-tabs/tab/fixed-footer-tab-example.component';
+import { PageFixedFooterTabExampleComponent } from './page-example/fixed-footer-tabs/tab/fixed-footer-tab-example.component';
 
 // Example of "custom" icons
 export const iconSettings: IconSettings = {
@@ -126,7 +126,7 @@ export const COMPONENT_DECLARATIONS: any[] = [
   PageFixedTitleAndActionsExampleComponent,
   TabExampleComponent,
   FixedFooterTabsExampleComponent,
-  FixedFooterTabExampleComponent,
+  PageFixedFooterTabExampleComponent,
   TabsExampleComponent,
   TabExampleComponent,
   ItemExampleComponent,

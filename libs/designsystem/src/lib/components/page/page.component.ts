@@ -9,9 +9,9 @@ import {
   Directive,
   ElementRef,
   EventEmitter,
-  HostBinding,
   HostListener,
   Input,
+  NgZone,
   OnChanges,
   OnDestroy,
   OnInit,
@@ -119,8 +119,25 @@ export class PageComponent
   @Input() defaultBackHref: string;
   @Input() hideBackButton: boolean;
   @Input() titleMaxLines: number;
+
+  private _hideTabs: boolean;
+  public get hideTabs(): boolean {
+    return this._hideTabs;
+  }
   @Input()
-  hideTabs: boolean;
+  public set hideTabs(hideTabs: boolean) {
+    if (this.tabbar) {
+      // as we are setting a class on tabs, we need this to happen in a separate cd cycle
+      setTimeout(() => {
+        if (hideTabs) {
+          this.tabbar.hide();
+        } else {
+          this.tabbar.show();
+        }
+      });
+    }
+    this._hideTabs = hideTabs;
+  }
 
   @Output() enter = new EventEmitter<void>();
   @Output() leave = new EventEmitter<void>();
@@ -254,7 +271,6 @@ export class PageComponent
       this.pageTitleIntersectionObserverRef.observe(this.pageTitle.nativeElement);
     }
 
-    // TODO: unit test
     if (this.hideTabs) {
       this.tabbar && this.tabbar.hide();
     }
@@ -267,7 +283,6 @@ export class PageComponent
     }
     this.hasEntered = false;
 
-    // TODO: unit test
     if (this.hideTabs) {
       this.tabbar && this.tabbar.show();
     }

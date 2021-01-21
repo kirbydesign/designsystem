@@ -15,13 +15,6 @@ ion-toolbar {
   }
 }
 
-ion-footer {
-  --kirby-page-footer-safe-area-bottom: var(
-    --kirby-page-footer-safe-area-bottom-override,
-    var(--kirby-safe-area-bottom)
-  );
-}
-
 ion-toolbar {
   --border-width: 0 !important;
   --padding-start: #{size('xxxs')};

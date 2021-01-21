@@ -7,6 +7,7 @@ import { PageFixedTitleAndActionsExampleComponent } from '~/app/examples/page-ex
 import { PageCustomTitleExampleComponent } from '~/app/examples/page-example/advanced/page-custom-title-example.component';
 import { PageAdvancedExampleComponent } from '~/app/examples/page-example/advanced/page-advanced-example.component';
 import { PageFitHeadingExampleComponent } from '~/app/examples/page-example/fit-heading/fit-heading-example.component';
+import { FixedFooterTabsExampleComponent } from '~/app/examples/page-example/fixed-footer-tabs/fixed-footer-tabs-example.component';
 
 @Component({
   selector: 'cookbook-page-showcase',
@@ -19,6 +20,7 @@ export class PageShowcaseComponent {
     PageAlignmentAndToolbarTitleExampleComponent.template;
   fitHeadingExampleHtml: string = PageFitHeadingExampleComponent.template;
   fixedTitleAndActionsExampleHtml: string = PageFixedTitleAndActionsExampleComponent.template;
+  fixedFooterTabsExampleHtml: string = FixedFooterTabsExampleComponent.template;
   fixedCustomTitleExampleHtml: string =
     PageFixedTitleAndActionsExampleComponent.customTitleTemplate;
   fixedActionsExampleHtml: string = PageFixedTitleAndActionsExampleComponent.fixedActionsTemplate;

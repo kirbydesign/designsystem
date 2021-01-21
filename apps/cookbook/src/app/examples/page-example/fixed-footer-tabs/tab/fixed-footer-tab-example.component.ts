@@ -6,15 +6,7 @@ import { ActionSheetItem } from '@kirbydesign/designsystem';
 
 @Component({
   template: `
-    <kirby-page [title]="title | async" [hideTabs]="true">
-      <kirby-page-actions *kirbyPageActions>
-        <button kirby-button (click)="onCogSelect()">
-          <kirby-icon name="cog"></kirby-icon>
-        </button>
-        <button kirby-button (click)="onMoreSelect()">
-          <kirby-icon name="more"></kirby-icon>
-        </button>
-      </kirby-page-actions>
+    <kirby-page [title]="title | async" [hideTabs]="hideTabs">
       <kirby-page-content>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt error minus odit
@@ -51,19 +43,8 @@ import { ActionSheetItem } from '@kirbydesign/designsystem';
           officia officiis quo tempora ut velit voluptate. Aliquid ea, earum facilis hic in libero
           obcaecati odit quia soluta!
         </p>
-        <button kirby-button (click)="navigateToAccountSub()">Go to account sub</button>
+        <button kirby-button (click)="toggleTabBar()">Toggle tab bar</button>
       </kirby-page-content>
-
-      <kirby-fab-sheet *kirbyPageContent="{ fixed: true }" horizontalAlignment="right">
-        <kirby-icon name="write-message"></kirby-icon>
-        <kirby-action-sheet
-          header="Your action sheet header"
-          subheader="Your action sheet subheader"
-          [items]="items"
-          (itemSelect)="onItemSelect($event)"
-        >
-        </kirby-action-sheet>
-      </kirby-fab-sheet>
       <kirby-page-footer>
         <div class="footer-content">
           This is the fixed footer
@@ -79,15 +60,10 @@ import { ActionSheetItem } from '@kirbydesign/designsystem';
     `,
   ],
 })
-export class FixedFooterTabExampleComponent implements OnInit {
+export class PageFixedFooterTabExampleComponent implements OnInit {
+  hideTabs = false;
   title: Observable<string>;
-  items: ActionSheetItem[] = [
-    { id: '1', text: 'Option 1' },
-    { id: '2', text: 'Option 2' },
-    { id: '3', text: 'Option 3' },
-  ];
-
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     setTimeout(() => {
@@ -95,19 +71,7 @@ export class FixedFooterTabExampleComponent implements OnInit {
     }, 300);
   }
 
-  onItemSelect(item: ActionSheetItem) {
-    alert('item selected');
-  }
-
-  navigateToAccountSub() {
-    this.router.navigate(['sub'], { relativeTo: this.route });
-  }
-
-  onCogSelect() {
-    alert('On cog select');
-  }
-
-  onMoreSelect() {
-    alert('On more select');
+  toggleTabBar() {
+    this.hideTabs = !this.hideTabs;
   }
 }

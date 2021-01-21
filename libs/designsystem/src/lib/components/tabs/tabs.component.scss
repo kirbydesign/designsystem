@@ -4,18 +4,20 @@
   &:not(.hide-tab-bar) {
     // we are not hiding tabs if below large screen and not touch
     @include media('<large') {
-      --kirby-page-footer-safe-area-bottom-override: 0px;
+      --kirby-page-footer-safe-area-bottom: 0px;
     }
     @include touch {
-      --kirby-page-footer-safe-area-bottom-override: 0px;
+      --kirby-page-footer-safe-area-bottom: 0px;
     }
   }
 }
 
 ion-tabs {
+  // move tabs to top of screen if not touch and large device
   @include media('>=large') {
     @include not-touch {
       flex-direction: column-reverse;
+      --kirby-page-footer-safe-area-bottom: 0px;
     }
   }
 
