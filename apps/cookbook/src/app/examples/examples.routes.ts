@@ -58,6 +58,7 @@ import { ToggleButtonExampleComponent } from './toggle-button-example/toggle-but
 import { SlidesExampleComponent } from './slides-example/slides-example.component';
 import { ModalRoutePage3ExampleComponent } from '~/app/examples/modal-example/modal-route-example/modal-route-page3-example.component';
 import { AccordionExampleComponent } from './accordion-example/accordion-example.component';
+import { RadioExampleComponent } from './radio-example/radio-example.component';
 
 export const routes: Routes = [
   {
@@ -350,5 +351,9 @@ export const routes: Routes = [
   {
     path: 'accordion',
     component: AccordionExampleComponent,
+  },
+  {
+    path: 'radio',
+    component: RadioExampleComponent,
   },
 ];
