@@ -56,3 +56,5 @@ export * from './slides/slides.component';
 export { ToggleButtonComponent } from './toggle-button/toggle-button.component';
 
 export * from './accordion';
+
+export * from './radio';

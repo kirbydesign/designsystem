@@ -82,6 +82,8 @@ import { ToggleButtonModule } from './components/toggle-button/toggle-button.mod
 import { SlideDirective, SlidesComponent } from './components/slides/slides.component';
 import { AccordionDirective } from './components/accordion/accordion.directive';
 import { AccordionItemComponent } from './components/accordion/accordion-item.component';
+import { RadioComponent } from './components/radio/radio.component';
+import { RadioGroupComponent } from './components/radio/radio-group/radio-group.component';
 
 const exportedDeclarations = [
   CardComponent,
@@ -134,6 +136,8 @@ const exportedDeclarations = [
   SlideDirective,
   AccordionDirective,
   AccordionItemComponent,
+  RadioComponent,
+  RadioGroupComponent,
 ];
 
 const declarations = [
