@@ -1,4 +1,4 @@
-import { Component, Input, HostBinding, OnDestroy, ElementRef } from '@angular/core';
+import { Component, ElementRef, HostBinding, Input, OnDestroy } from '@angular/core';
 
 import { PageComponent } from '../page.component';
 
@@ -15,7 +15,6 @@ export class PageFooterComponent implements OnDestroy {
   constructor(private pageComponent: PageComponent, private host: ElementRef<HTMLElement>) {}
 
   close() {
-    debugger;
     this.pageComponent.hideTabs = false;
     this.host.nativeElement.remove();
   }
