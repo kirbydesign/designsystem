@@ -53,6 +53,13 @@ describe('CheckboxComponent', () => {
       });
     });
 
+    it('should have minimum fat finger size', () => {
+      expect(spectator.element).toHaveComputedStyle({
+        height: `>=${fatFingerSize}`,
+        width: `>=${fatFingerSize}`,
+      });
+    });
+
     it('should not be checked', () => {
       expect(spectator.component.checked).toBe(false);
     });
@@ -86,7 +93,7 @@ describe('CheckboxComponent', () => {
     });
 
     describe('with size', () => {
-      it(`should have 'sm' size by default`, () => {
+      it(`should have 'md' size by default`, () => {
         expect(spectator.element).toHaveComputedStyle({
           height: checkboxSizeMd,
         });

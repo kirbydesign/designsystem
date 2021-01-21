@@ -83,6 +83,8 @@ import { SlideDirective, SlidesComponent } from './components/slides/slides.comp
 import { AccordionDirective } from './components/accordion/accordion.directive';
 import { AccordionItemComponent } from './components/accordion/accordion-item.component';
 import { InputPostfixComponent, InputPrefixComponent } from './components';
+import { RadioComponent } from './components/radio/radio.component';
+import { RadioGroupComponent } from './components/radio/radio-group/radio-group.component';
 
 const exportedDeclarations = [
   CardComponent,
@@ -137,6 +139,8 @@ const exportedDeclarations = [
   SlideDirective,
   AccordionDirective,
   AccordionItemComponent,
+  RadioComponent,
+  RadioGroupComponent,
 ];
 
 const declarations = [
