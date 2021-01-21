@@ -70,16 +70,12 @@ describe('InlineFooterComponent', () => {
         },
         detectChanges: false,
       });
-      /*
-      const resizeObserverService = spectator.inject(ResizeObserverService);
-      spyOn(resizeObserverService, 'observe');
-      spyOn(resizeObserverService, 'unobserve');
-      spectator.detectComponentChanges();
-*/
 
+      // remove this mock
       spyOn(spectator.component['ionContent'], 'getScrollElement').and.returnValue(
         Promise.resolve(document.createElement('DIV'))
       );
+
       const resizeObserverService = spectator.inject(ResizeObserverService);
       spyOn(resizeObserverService, 'observe');
       spyOn(resizeObserverService, 'unobserve');
@@ -100,12 +96,23 @@ describe('InlineFooterComponent', () => {
       // Ensure any observers are destroyed:
       spectator.fixture.destroy();
     });
+
+    describe(`should find `, () => {
+      it('modal footer and inline footer', async () => {
+        const embeddedComponent = spectator.query(InlineFooterEmbeddedComponent);
+        embeddedComponent.showFooter = true;
+        spectator.detectChanges();
+        const modalFooter = spectator.element.querySelector('kirby-modal-footer');
+        expect(modalFooter).not.toBeNull();
+        const inlineFooter = spectator.element.querySelector<HTMLElement>('kirby-inline-footer');
+        expect(inlineFooter).not.toBeNull();
+      });
+    });
+
     describe(`should set custom CSS property value'--margin-top' on inline footer`, () => {
       beforeEach(async () => {
-        await TestHelper.resizeTestWindow(TestHelper.screensize.phone);
-
-        await TestHelper.waitForResizeObserver();
-
+        // await TestHelper.resizeTestWindow(TestHelper.screensize.phone);
+        // await TestHelper.waitForResizeObserver();
         //   await TestHelper.whenTrue(() => spectator.component['viewportResized']);
       });
 
@@ -113,24 +120,121 @@ describe('InlineFooterComponent', () => {
         TestHelper.resetTestWindow();
       });
 
-      it('to a NOT empty property value', async () => {
+      it('to 0 property value for small phone device', async () => {
+        await TestHelper.resizeTestWindow(TestHelper.screensize.phonesmall);
+        await TestHelper.waitForResizeObserver();
+
         const embeddedComponent = spectator.query(InlineFooterEmbeddedComponent);
         embeddedComponent.showFooter = true;
         spectator.detectChanges();
 
-        // calling private method
+        // should not be calling private method. Verify that gthe method is called through the event system
         // @ts-ignore
         // spectator.fixture.componentInstance.setInlineFooterPosition();
-        const modalFooter = spectator.element.querySelector('kirby-modal-footer');
-        expect(modalFooter).not.toBeNull();
+        const inlineFooter = spectator.element.querySelector<HTMLElement>('kirby-inline-footer');
+
+        // get CssProperty
+        const value = inlineFooter.style.getPropertyValue('--margin-top');
+
+        console.log(value);
+        expect(value).toEqual('0');
+      });
+
+      it('to 0 property value for phone', async () => {
+        await TestHelper.resizeTestWindow(TestHelper.screensize.phone);
+        await TestHelper.waitForResizeObserver();
+
+        const embeddedComponent = spectator.query(InlineFooterEmbeddedComponent);
+        embeddedComponent.showFooter = true;
+        spectator.detectChanges();
+
         const inlineFooter = spectator.element.querySelector<HTMLElement>('kirby-inline-footer');
         expect(inlineFooter).not.toBeNull();
 
         // get CssProperty
         const value = inlineFooter.style.getPropertyValue('--margin-top');
 
-        console.log(value);
-        expect(value).toEqual('');
+        expect(value).toEqual('0');
+      });
+
+      it('to not 0 property value', async () => {
+        await TestHelper.resizeTestWindow(TestHelper.screensize.phablet);
+        await TestHelper.waitForResizeObserver();
+
+        const embeddedComponent = spectator.query(InlineFooterEmbeddedComponent);
+        embeddedComponent.showFooter = true;
+        spectator.detectChanges();
+
+        const inlineFooter = spectator.element.querySelector<HTMLElement>('kirby-inline-footer');
+        expect(inlineFooter).not.toBeNull();
+
+        // get CssProperty
+        const value = inlineFooter.style.getPropertyValue('--margin-top');
+
+        //expect value must be found.
+        expect(value).not.toEqual('0');
+      });
+
+      it('to 608 property value for tablet size', async () => {
+        await TestHelper.resizeTestWindow(TestHelper.screensize.tablet);
+        await TestHelper.waitForResizeObserver();
+
+        const embeddedComponent = spectator.query(InlineFooterEmbeddedComponent);
+        embeddedComponent.showFooter = true;
+        spectator.detectChanges();
+
+        const inlineFooter = spectator.element.querySelector<HTMLElement>('kirby-inline-footer');
+        expect(inlineFooter).not.toBeNull();
+
+        // get CssProperty
+        const value = inlineFooter.style.getPropertyValue('--margin-top');
+
+        //expect value must be found.
+        expect(value).toEqual('608');
+      });
+
+      it('to 608 property value for desktop size', async () => {
+        await TestHelper.resizeTestWindow(TestHelper.screensize.desktop);
+        await TestHelper.waitForResizeObserver();
+
+        const embeddedComponent = spectator.query(InlineFooterEmbeddedComponent);
+        embeddedComponent.showFooter = true;
+        spectator.detectChanges();
+
+        const inlineFooter = spectator.element.querySelector<HTMLElement>('kirby-inline-footer');
+        expect(inlineFooter).not.toBeNull();
+
+        // get CssProperty
+        const value = inlineFooter.style.getPropertyValue('--margin-top');
+
+        //expect value must be found.
+        expect(value).toEqual('608');
+      });
+
+      it('to change position when footer is hidden for desktop size', async () => {
+        await TestHelper.resizeTestWindow(TestHelper.screensize.desktop);
+        await TestHelper.waitForResizeObserver();
+
+        const embeddedComponent = spectator.query(InlineFooterEmbeddedComponent);
+        embeddedComponent.showFooter = true;
+        spectator.detectChanges();
+
+        const inlineFooter = spectator.element.querySelector<HTMLElement>('kirby-inline-footer');
+        expect(inlineFooter).not.toBeNull();
+
+        // get CssProperty
+        const prevValue = parseInt(inlineFooter.style.getPropertyValue('--margin-top'));
+
+        //expect value must be found.
+        expect(prevValue).toEqual(608);
+
+        embeddedComponent.showFooter = false;
+        spectator.detectChanges();
+
+        const postValue: number = parseInt(inlineFooter.style.getPropertyValue('--margin-top'));
+
+        //expect value must be found.
+        expect(prevValue).toBeLessThan(postValue);
       });
     });
   });

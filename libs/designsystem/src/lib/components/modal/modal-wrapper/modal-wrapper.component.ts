@@ -201,7 +201,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   }
 
   private positionInlineFooter() {
-    //    this.zone.run(() => this.setInlineFooterPosition());
+    this.zone.run(() => this.setInlineFooterPosition());
   }
 
   private setInlineFooterPosition() {
