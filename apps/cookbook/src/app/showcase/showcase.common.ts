@@ -42,6 +42,7 @@ import { FlagShowcaseComponent } from './flag-showcase/flag-showcase.component';
 import { ToggleButtonShowcaseComponent } from './toggle-button-showcase/toggle-button-showcase.component';
 import { SlidesShowcaseComponent } from './slides-showcase/slides-showcase.component';
 import { AccordionShowcaseComponent } from './accordion-showcase/accordion-showcase.component';
+import { RadioShowcaseComponent } from './radio-showcase/radio-showcase.component';
 
 export const COMPONENT_IMPORTS: any[] = [ExamplesModule, ShowcaseRoutingModule];
 
@@ -87,6 +88,7 @@ export const COMPONENT_EXPORTS: any[] = [
   FlagShowcaseComponent,
   SlidesShowcaseComponent,
   AccordionShowcaseComponent,
+  RadioShowcaseComponent,
 ];
 
 export const COMPONENT_DECLARATIONS: any[] = [...COMPONENT_EXPORTS, ShowcaseComponent];

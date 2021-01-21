@@ -59,6 +59,7 @@ import { SlidesExampleComponent } from './slides-example/slides-example.componen
 import { AccordionExampleComponent } from './accordion-example/accordion-example.component';
 import { PageFixedFooterTabsExampleComponent } from './page-example/fixed-footer-tabs/fixed-footer-tabs-example.component';
 import { PageFixedFooterTabExampleComponent } from './page-example/fixed-footer-tabs/tab/fixed-footer-tab-example.component';
+import { RadioExampleComponent } from './radio-example/radio-example.component';
 
 export const routes: Routes = [
   {
@@ -364,5 +365,9 @@ export const routes: Routes = [
   {
     path: 'accordion',
     component: AccordionExampleComponent,
+  },
+  {
+    path: 'radio',
+    component: RadioExampleComponent,
   },
 ];
