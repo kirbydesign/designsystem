@@ -8,7 +8,6 @@ import { IconComponent } from '../../icon/icon.component';
 import { ModalWrapperComponent } from './modal-wrapper.component';
 import {
   DynamicFooterEmbeddedComponent,
-  InlineFooterEmbeddedComponent,
   ModalWrapperTestBuilder,
 } from './modal-wrapper.testbuilder';
 
@@ -417,52 +416,6 @@ describe('ModalWrapperComponent', () => {
         expect(kirbyModalFooter).toHaveStyle({
           '--keyboard-offset': `${keyboardOverlap}px`,
         });
-      });
-    });
-  });
-
-  describe('with embedded component and dynamic footer and inline footer', () => {
-    beforeEach(() => {
-      spectator = modalWrapperTestBuilder
-        .flavor('modal')
-        .withDynamicAndInlineFooter()
-        .build();
-      spectator.detectComponentChanges();
-    });
-
-    afterEach(() => {
-      // Ensure any observers are destroyed:
-      spectator.fixture.destroy();
-    });
-    describe(`should set custom CSS property value'--margin-top' on inline footer`, () => {
-      beforeEach(async () => {
-        await TestHelper.resizeTestWindow(TestHelper.screensize.phone);
-        await TestHelper.waitForResizeObserver();
-        //   await TestHelper.whenTrue(() => spectator.component['viewportResized']);
-      });
-
-      afterEach(() => {
-        TestHelper.resetTestWindow();
-      });
-
-      it('to a NOT empty property value', () => {
-        const embeddedComponent = spectator.query(InlineFooterEmbeddedComponent);
-        embeddedComponent.showFooter = true;
-        spectator.detectChanges();
-
-        // calling private method
-        // @ts-ignore
-        spectator.fixture.componentInstance.setInlineFooterPosition();
-        const modalFooter = spectator.element.querySelector('kirby-modal-footer');
-        expect(modalFooter).not.toBeNull();
-        const inlineFooter = spectator.element.querySelector<HTMLElement>('kirby-inline-footer');
-        expect(inlineFooter).not.toBeNull();
-
-        // get CssProperty
-        const value = inlineFooter.style.getPropertyValue('--margin-top');
-
-        console.log(value);
-        expect(value).not.toEqual('');
       });
     });
   });
