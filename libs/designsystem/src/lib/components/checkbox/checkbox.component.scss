@@ -2,13 +2,8 @@
 
 $border-radius: 6px;
 $checkbox-icon-size: size('m');
-$checkbox-sizes: (
-  'xs': size('l'),
-  'sm': $fat-finger-size,
-  'md': size('xxxl'),
-);
-$spacing-to-edge: size('s');
-$spacing-to-label: size('xs');
+$spacing-to-edge: map-get($checkbox-radio-spacing, 'to-edge');
+$spacing-to-label: map-get($checkbox-radio-spacing, 'to-label');
 
 :host {
   display: inline-block;
@@ -88,10 +83,10 @@ $spacing-to-label: size('xs');
       align-items: center;
       vertical-align: top;
       padding-right: $spacing-to-label; // Ensure same padding on right side of label
-      min-height: map-get($checkbox-sizes, 'md');
+      min-height: map-get($checkbox-radio-sizes, 'md');
     }
 
-    @each $size, $height in $checkbox-sizes {
+    @each $size, $height in $checkbox-radio-sizes {
       :host-context(.checkbox-#{$size}),
       &.#{$size} {
         .wrapper {
