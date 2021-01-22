@@ -51,7 +51,7 @@ const template = `
     <div class="footer-content">
       <h3>0 selected</h3>
       <kirby-icon class="close-footer" name="close" (click)="onCloseClick()"></kirby-icon>
-      This is the fixed footer
+      This is a fixed footer
     </div>
   </kirby-page-footer>
 </kirby-page>
