@@ -58,7 +58,7 @@ const template = `
 
 <ng-template #controls>
   <kirby-item>
-    <h3>Toggle tabs</h3>
+    <h3>Show tabs</h3>
     <kirby-toggle slot="end" (click)="toggleTabs()" [checked]="showTabs"></kirby-toggle>
   </kirby-item>
   <kirby-item>
