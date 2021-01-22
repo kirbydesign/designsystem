@@ -127,13 +127,7 @@ export class PageComponent
   public set hideTabs(hideTabs: boolean) {
     if (this.tabbar) {
       // as we are setting a class on tabs, we need this to happen in a separate cd cycle
-      setTimeout(() => {
-        if (hideTabs) {
-          this.tabbar.hide();
-        } else {
-          this.tabbar.show();
-        }
-      });
+      setTimeout(() => hideTabs ? this.tabbar.hide() : this.tabbar.show());
     }
     this._hideTabs = hideTabs;
   }
