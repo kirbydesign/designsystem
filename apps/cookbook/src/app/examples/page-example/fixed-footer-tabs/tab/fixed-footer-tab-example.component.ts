@@ -52,18 +52,18 @@ const template = `
       <button kirby-button attentionLevel="2" class="close-footer-btn" (click)="onCloseClick()">
         <kirby-icon name="close"></kirby-icon>
       </button>
-      This is the fixed footer
+      This is a fixed footer
   </kirby-page-footer>
 </kirby-page>
 
 <ng-template #controls>
   <kirby-card>
     <kirby-item>
-      <h3>Toggle tabs</h3>
+      <h3>Show tabs</h3>
       <kirby-toggle slot="end" (click)="toggleTabs()" [checked]="showTabs"></kirby-toggle>
     </kirby-item>
     <kirby-item>
-      <h3>Toggle footer</h3>
+      <h3>Show footer</h3>
       <kirby-toggle slot="end" (click)="toggleFooter()" [checked]="showFooter"></kirby-toggle>
     </kirby-item>
   </kirby-card>

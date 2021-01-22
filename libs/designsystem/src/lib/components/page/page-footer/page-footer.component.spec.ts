@@ -1,16 +1,12 @@
 import { ElementRef } from '@angular/core';
-import { Spectator, createComponentFactory, createSpyObject } from '@ngneat/spectator';
+import { createComponentFactory, createSpyObject, Spectator } from '@ngneat/spectator';
 
 import { PageComponent } from '../page.component';
+
 import { PageFooterComponent } from './page-footer.component';
 
 describe('PageFooterComponent', () => {
   let spectator: Spectator<PageFooterComponent>;
-  let elementRef = {
-    nativeElement: {
-      remove: jasmine.createSpy('remove'),
-    },
-  } as ElementRef;
   let pageComponent = createSpyObject(PageComponent, { hideTabs: true });
   const createComponent = createComponentFactory({
     component: PageFooterComponent,
@@ -18,10 +14,6 @@ describe('PageFooterComponent', () => {
       {
         provide: PageComponent,
         useValue: pageComponent,
-      },
-      {
-        provide: ElementRef,
-        useValue: elementRef,
       },
     ],
   });

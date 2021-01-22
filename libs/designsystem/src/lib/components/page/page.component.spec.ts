@@ -113,6 +113,7 @@ describe('PageComponent', () => {
 
     expect(tabbar.hide).toHaveBeenCalled();
   });
+
   it('should show tab bar when hideTabs is true on leave', () => {
     spectator.component.hideTabs = true;
     spectator.detectChanges();
