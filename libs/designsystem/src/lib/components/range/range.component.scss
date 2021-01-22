@@ -76,6 +76,10 @@ ion-range {
 // Active
 ion-range::part(knob) {
   background-color: var(--knob-background) !important;
+  // box-shadow: get-elevation(20);
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
+  //box-shadow: 10px 10px;
+  //get-shadow-size
 }
 
 // Active
@@ -87,7 +91,7 @@ ion-range::part(pin) {
 
 // Active
 ion-range::part(tick) {
-  background-color:  var(--tick-color) !important;
+  background-color: var(--tick-color) !important;
 }
 
 // Active
@@ -97,11 +101,10 @@ ion-range::part(tick-active) {
 
 // Active
 ion-range::part(bar) {
-  background-color:  var(--bar-color) !important;
+  background-color: var(--bar-color) !important;
 }
 
 // Active
 ion-range::part(bar-active) {
-  background-color:  var(--bar-active-color) !important;
+  background-color: var(--bar-active-color) !important;
 }
-
