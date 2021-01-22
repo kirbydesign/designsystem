@@ -338,13 +338,10 @@ export class PageComponent
 
   private removeWrapper() {
     const parent = this.elementRef.nativeElement.parentNode;
-    const header = this.ionHeaderElement.nativeElement;
-    const content = this.ionContentElement.nativeElement;
-    const footer = this.ionFooterElement.nativeElement;
     this.renderer.removeChild(parent, this.elementRef.nativeElement);
-    this.renderer.appendChild(parent, header);
-    this.renderer.appendChild(parent, content);
-    this.renderer.appendChild(parent, footer);
+    this.renderer.appendChild(parent,  this.ionHeaderElement.nativeElement;);
+    this.renderer.appendChild(parent, this.ionContentElement.nativeElement);
+    this.renderer.appendChild(parent, this.ionFooterElement.nativeElement);
   }
 
   private pageTitleIntersectionObserver() {
