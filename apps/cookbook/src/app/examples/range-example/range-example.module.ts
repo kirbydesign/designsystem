@@ -8,12 +8,14 @@ import { RangeExampleComponent } from './range-example.component';
 import { RangeDefaultExampleComponent } from './examples/default';
 import { RangeWithVisibleValueExampleComponent } from './examples/rangewithvisiblevalue';
 import { RangeWithColorExampleComponent } from './examples/rangewithcolor';
+import { RangeStepExampleComponent } from '~/app/examples/range-example/examples/step';
 
 const COMPONENT_DECLARATIONS = [
   RangeExampleComponent,
   RangeDefaultExampleComponent,
   RangeWithVisibleValueExampleComponent,
   RangeWithColorExampleComponent,
+  RangeStepExampleComponent,
 ];
 
 @NgModule({

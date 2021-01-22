@@ -4,10 +4,10 @@ import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { RangeValue } from '@kirbydesign/designsystem/components/range/range.component';
 
 const config = {
-  selector: 'cookbook-range-default-example',
+  selector: 'cookbook-range-step-example',
   template: `
-    <form [formGroup]="rangeFormDefault">
-      <kirby-range formControlName="kirbyRangeName" [formGroup]="rangeFormDefault" ticks="5" startLabel="Min value" endLabel="Max value" max="5" min="1"></kirby-range>
+    <form [formGroup]="rangeFormStep">
+      <kirby-range formControlName="kirbyRangeName" [formGroup]="rangeFormStep" ticks="5" startLabel="Min value" endLabel="Max value" pin="true" snaps="true" max="15" min="1"></kirby-range>
     </form>
   `,
 };
@@ -16,20 +16,20 @@ const config = {
   selector: config.selector,
   template: config.template,
 })
-export class RangeDefaultExampleComponent implements OnInit{
+export class RangeStepExampleComponent implements OnInit{
   template: string = config.template;
 
-  public rangeFormDefault: FormGroup;
+  public rangeFormStep: FormGroup;
   public get kirbyRangeName(): AbstractControl {
-    return this.rangeFormDefault.get('kirbyRangeName');
+    return this.rangeFormStep.get('kirbyRangeName');
   }
 
   @Output() value: RangeValue;
 
   constructor(private formBuilder: FormBuilder) {}
   ngOnInit(): void {
-    this.rangeFormDefault = this.formBuilder.group({
-      kirbyRangeName: [{ value: '3', disabled: false }],
+    this.rangeFormStep = this.formBuilder.group({
+      kirbyRangeName: [{ value: '2', disabled: false }],
     });
   }
 }

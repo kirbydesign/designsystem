@@ -1,69 +1,76 @@
+@import '../../helpers/color-helper';
+@import '../../scss/utils';
+
 :root {
-  --ion-safe-area-top: 20px;
-  --ion-safe-area-bottom: 22px;
+  --range-row-ion-range-height: 45px;
+  --range-container-width: 45px;
+  --range-container-background: #{get-color('white')};
+  --range-row-padding: size('xxs');
+
+  --range-row-label-color: get-text-color('semi-dark');
+  --range-row-label-background: transparent;
+
+  --range-row-label-font-size: font-size('n');
+  --range-row-label-width: 100px;
+}
+
+// Active
+ion-range {
+  --bar-background: #{get-color('background-color')};
+  --knob-background: #{get-color('background-color')};
+
+  --pin-color: #{get-color('black')};
+  --pin-background: transparent;
+  --pin-font-size: font-size('xxxs');
+
+  --tick-color: #{get-color('semi-dark')};
+  --tick-active-color: #{get-color('dark')};
+
+  --bar-color: #{get-color('semi-dark')};
+  --bar-active-color: #{get-color('black')};
 }
 
 .range-container {
   padding-left: 10px;
   padding-right: 10px;
-  min-width: 400px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   display: flex;
   flex-direction: column;
   margin: 0;
-  padding-top: 5px;
+  background-color: var(--range-container-background);
   .range-row ion-range {
-    height: 35px;
+    height: var(--range-row-ion-range-height);
   }
 }
 
 .range-row {
   flex: auto;
-  min-width: 400px;
   display: flex;
   flex-direction: row;
   justify-content: stretch;
   justify-items: stretch;
 
-  :first-child{
+  :first-child {
     justify-content: flex-start;
-    padding-left: 10px;
+    padding-left: var(--range-row-padding);
     text-align: left;
   }
 
   :last-child {
     margin-left: auto;
     justify-content: flex-end;
-    padding-right: 10px;
-  }
-  .range-label {
-    width: 100px;
+    padding-right: var(--range-row-padding);
   }
 }
-
-// Active
-ion-range {
-  --bar-background: blue;
-  --knob-background: red;
-  --pin-color: black;
-  --pin-background: red;
-  --pin-font-size: 0.7em;
-  --tick-color: red;
-  --tick-active-color: purple;
-  --bar-color: lightgreen;
-  --bar-active-color: green;
-}
-
 
 // Active
 .range-row ion-label {
-  --label-color: blue;
-  --label-background: yellow;
-  --label-font-size: 0.1em;
-
-  background-color: var(--label-background) !important;
-  color: var(--label-color);
-  font-size: var(--label-font-size);
-
+  background-color: var(--range-row-label-background, transparent) !important;
+  color: var(--range-row-label-color);
+  font-size: var(--range-row-label-font-size);
+  min-width: var(--range-row-label-width);
+  text-align: center;
 }
 
 // Active

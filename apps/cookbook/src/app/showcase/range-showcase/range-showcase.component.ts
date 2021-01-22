@@ -18,8 +18,8 @@ export class RangeShowcaseComponent {
     {
       name: 'disabled',
       description: 'Disables the range component so that the user cannot interact with it.',
-      defaultValue: '1',
-      inputValues: ['42', '4711'],
+      defaultValue: 'false',
+      inputValues: ['true', 'false'],
     },
   ];
 }

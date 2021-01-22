@@ -100,17 +100,17 @@ export class RangeComponent implements OnInit, ControlValueAccessor {
   }
 
   public setLabel(color: string): void {
-    const [property, pixelValue] = ['--label-color', color];
+    const [property, pixelValue] = ['--range-row-label-color', color];
     this.setCssVar(this.ionRangeElementRef.nativeElement, property, pixelValue);
   }
 
   public setLabelFontSize(size: string): void {
-    const [property, pixelValue] = ['--label-font-size', size];
+    const [property, pixelValue] = ['--range-row-label-font-size', size];
     this.setCssVar(this.ionRangeElementRef.nativeElement, property, pixelValue);
   }
 
   public setLabelBackground(color: string): void {
-    const [property, pixelValue] = ['--label-background', color];
+    const [property, pixelValue] = ['--range-row-label-background', color];
     this.setCssVar(this.ionRangeElementRef.nativeElement, property, pixelValue);
   }
 
