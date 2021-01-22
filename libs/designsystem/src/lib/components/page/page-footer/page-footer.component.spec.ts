@@ -22,13 +22,17 @@ describe('PageFooterComponent', () => {
   beforeEach(() => (spectator = createComponent()));
 
   describe('close', () => {
-    it('should show tabs and remove element', () => {
+    it('should show tabs', () => {
+      spectator.component.close();
+
+      expect(pageComponent.tabBarBottomHidden).toBe(false);
+    });
+    it('should remove host element', () => {
       // can't use spectator.inject here https://stackoverflow.com/questions/56737965/how-test-directive-with-renderer2
       const renderer = spectator.fixture.componentRef.injector.get(Renderer2);
       const destroySpy = spyOn(renderer, 'destroy');
       spectator.component.close();
 
-      expect(pageComponent.tabBarBottomHidden).toBe(false);
       expect(destroySpy).toHaveBeenCalled();
     });
   });

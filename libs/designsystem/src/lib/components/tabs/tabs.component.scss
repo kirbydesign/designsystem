@@ -9,6 +9,7 @@ ion-tabs {
   @include media('>=large') {
     @include not-touch {
       flex-direction: column-reverse;
+      // Ensure page-footer falls back to safe-area default
       --kirby-page-footer-safe-area-bottom: initial;
 
       ion-tab-bar.bottom-hidden {
