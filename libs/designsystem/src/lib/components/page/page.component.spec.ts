@@ -108,6 +108,7 @@ describe('PageComponent', () => {
 
   it('should hide tab bar when hideTabs is true', () => {
     spectator.setInput('hideTabs', true);
+    spectator.detectChanges();
     eventSubject.next(new NavigationEnd(1, '123', '123'));
 
     expect(tabbar.hide).toHaveBeenCalled();
@@ -115,6 +116,7 @@ describe('PageComponent', () => {
 
   it('should show tab bar when hideTabs is true on leave', () => {
     spectator.setInput('hideTabs', true);
+    spectator.detectChanges();
     eventSubject.next(new NavigationStart(1, '123'));
     spectator.component.ngAfterContentChecked();
     eventSubject.next(new NavigationEnd(1, '123', '123'));

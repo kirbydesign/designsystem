@@ -2,13 +2,7 @@
 
 :host {
   &:not(.hide-tab-bar) {
-    // If tab-bar is not hidden and in bottom, page-footer shouldn't consider safe-area:
-    @include media('<large') {
-      --kirby-page-footer-safe-area-bottom: 0px;
-    }
-    @include touch {
-      --kirby-page-footer-safe-area-bottom: 0px;
-    }
+    --kirby-page-footer-safe-area-bottom: 0px;
   }
 }
 
@@ -17,6 +11,7 @@ ion-tabs {
   @include media('>=large') {
     @include not-touch {
       flex-direction: column-reverse;
+      --kirby-page-footer-safe-area-bottom: initial;
     }
   }
 
@@ -33,7 +28,6 @@ ion-tabs {
         display: none;
       }
     }
-
     display: flex;
     max-width: var(--kirby-tab-bar-max-width, none);
     justify-content: center;

@@ -33,7 +33,7 @@ describe('TabsComponent', () => {
       spectator.detectChanges();
 
       const ionTabBarElm = spectator.query('ion-tab-bar');
-      expect(ionTabBarElm).toHaveComputedStyle({ display: 'none' });
+      expect(ionTabBarElm).not.toHaveComputedStyle({ display: 'none' });
     });
   });
 });
