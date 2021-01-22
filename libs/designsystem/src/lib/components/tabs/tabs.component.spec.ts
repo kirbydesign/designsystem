@@ -23,8 +23,7 @@ describe('TabsComponent', () => {
       spectator.detectChanges();
       const ionTabBarElm = spectator.query('ion-tab-bar');
 
-      const ionTabBarElmStyle = getComputedStyle(ionTabBarElm);
-      expect(ionTabBarElmStyle.display).toBe('none');
+      expect(ionTabBarElm).toHaveComputedStyle({display: none});
     });
   });
 
@@ -34,8 +33,7 @@ describe('TabsComponent', () => {
       spectator.detectChanges();
 
       const ionTabBarElm = spectator.query('ion-tab-bar');
-      const ionTabBarElmStyle = getComputedStyle(ionTabBarElm);
-      expect(ionTabBarElmStyle.display).not.toBe('none');
+      expect(ionTabBarElm).toHaveComputedStyle({display: none});
     });
   });
 });
