@@ -43,6 +43,7 @@ import { ToggleButtonShowcaseComponent } from './toggle-button-showcase/toggle-b
 import { SlidesShowcaseComponent } from './slides-showcase/slides-showcase.component';
 import { AccordionShowcaseComponent } from './accordion-showcase/accordion-showcase.component';
 import { RadioShowcaseComponent } from './radio-showcase/radio-showcase.component';
+import { RangeShowcaseComponent } from './range-showcase/range-showcase.component';
 
 export const COMPONENT_IMPORTS: any[] = [ExamplesModule, ShowcaseRoutingModule];
 
@@ -50,6 +51,7 @@ export const COMPONENT_EXPORTS: any[] = [
   CardShowcaseComponent,
   ColorsShowcaseComponent,
   ButtonShowcaseComponent,
+  RangeShowcaseComponent,
   SlideButtonShowcaseComponent,
   ListShowcaseComponent,
   ListLoadOnDemandShowcaseComponent,

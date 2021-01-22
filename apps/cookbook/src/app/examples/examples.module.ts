@@ -24,10 +24,12 @@ import { ToggleButtonExampleModule } from './toggle-button-example/toggle-button
 import { AccordionExampleModule } from './accordion-example/accordion-example.module';
 import { RadioExampleModule } from './radio-example/radio-example.module';
 import { CheckboxExampleModule } from './checkbox-example/checkbox-example.module';
+import { RangeExampleModule } from './range-example/range-example.module';
 
 const IMPORTS = [
   FormFieldExamplesModule,
   ItemExampleModule,
+  RangeExampleModule,
   ListExamplesModule,
   DropdownExampleModule,
   SegmentedControlExampleModule,

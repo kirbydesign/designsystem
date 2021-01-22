@@ -13,7 +13,7 @@ export { CheckboxComponent } from './checkbox/checkbox.component';
 export { ChipComponent } from './chip/chip.component';
 
 export { DividerComponent } from './divider/divider.component';
-
+export { RangeComponent } from './range/range.component';
 export { DropdownComponent } from './dropdown/dropdown.component';
 
 export { EmptyStateComponent } from './empty-state/empty-state.component';

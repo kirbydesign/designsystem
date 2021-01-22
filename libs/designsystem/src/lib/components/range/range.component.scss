@@ -1,0 +1,100 @@
+:root {
+  --ion-safe-area-top: 20px;
+  --ion-safe-area-bottom: 22px;
+}
+
+.range-container {
+  padding-left: 10px;
+  padding-right: 10px;
+  min-width: 400px;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding-top: 5px;
+  .range-row ion-range {
+    height: 35px;
+  }
+}
+
+.range-row {
+  flex: auto;
+  min-width: 400px;
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  justify-items: stretch;
+
+  :first-child{
+    justify-content: flex-start;
+    padding-left: 10px;
+    text-align: left;
+  }
+
+  :last-child {
+    margin-left: auto;
+    justify-content: flex-end;
+    padding-right: 10px;
+  }
+  .range-label {
+    width: 100px;
+  }
+}
+
+// Active
+ion-range {
+  --bar-background: blue;
+  --knob-background: red;
+  --pin-color: black;
+  --pin-background: red;
+  --pin-font-size: 0.7em;
+  --tick-color: red;
+  --tick-active-color: purple;
+  --bar-color: lightgreen;
+  --bar-active-color: green;
+}
+
+
+// Active
+.range-row ion-label {
+  --label-color: blue;
+  --label-background: yellow;
+  --label-font-size: 0.1em;
+
+  background-color: var(--label-background) !important;
+  color: var(--label-color);
+  font-size: var(--label-font-size);
+
+}
+
+// Active
+ion-range::part(knob) {
+  background-color: var(--knob-background) !important;
+}
+
+// Active
+ion-range::part(pin) {
+  font-size: var(--pin-font-size);
+  color: var(--pin-color);
+  background-color: var(--pin-background) !important;
+}
+
+// Active
+ion-range::part(tick) {
+  background-color:  var(--tick-color) !important;
+}
+
+// Active
+ion-range::part(tick-active) {
+  background-color: var(--tick-active-color) !important;
+}
+
+// Active
+ion-range::part(bar) {
+  background-color:  var(--bar-color) !important;
+}
+
+// Active
+ion-range::part(bar-active) {
+  background-color:  var(--bar-active-color) !important;
+}
+

@@ -10,6 +10,7 @@ import { ExampleViewerComponent } from '../shared/example-viewer/example-viewer.
 import { ShowcasePropertiesComponent } from '../shared/showcase-properties/showcase-properties.component';
 import { IphoneModule } from '../iphone/iphone.module';
 import { DividerShowcaseComponent } from './divider-showcase/divider-showcase.component';
+import { RangeShowcaseComponent } from './range-showcase/range-showcase.component';
 
 @NgModule({
   imports: [
@@ -26,6 +27,7 @@ import { DividerShowcaseComponent } from './divider-showcase/divider-showcase.co
     ExampleViewerComponent,
     ShowcasePropertiesComponent,
     DividerShowcaseComponent,
+    RangeShowcaseComponent,
   ],
   exports: COMPONENT_EXPORTS,
 })

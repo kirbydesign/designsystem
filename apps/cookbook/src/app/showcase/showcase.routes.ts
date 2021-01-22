@@ -44,7 +44,8 @@ import { FlagShowcaseComponent } from './flag-showcase/flag-showcase.component';
 import { ToggleButtonShowcaseComponent } from './toggle-button-showcase/toggle-button-showcase.component';
 import { SlidesShowcaseComponent } from './slides-showcase/slides-showcase.component';
 import { AccordionShowcaseComponent } from './accordion-showcase/accordion-showcase.component';
-import { RadioShowcaseComponent } from '~/app/showcase/radio-showcase/radio-showcase.component';
+import { RadioShowcaseComponent } from './radio-showcase/radio-showcase.component';
+import { RangeShowcaseComponent } from './range-showcase/range-showcase.component';
 
 export const routes: Routes = [
   {
@@ -127,6 +128,10 @@ export const routes: Routes = [
       {
         path: 'fonts',
         component: FontsShowcaseComponent,
+      },
+      {
+        path: 'range',
+        component: RangeShowcaseComponent,
       },
       {
         path: 'spinner',
