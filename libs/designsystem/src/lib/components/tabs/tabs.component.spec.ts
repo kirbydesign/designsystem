@@ -25,6 +25,13 @@ describe('TabsComponent', () => {
 
       expect(ionTabBarElm).toHaveComputedStyle({ display: 'none' });
     });
+    it('should NOT set page footer safe area if tab bar is hidden or at top', () => {
+      spectator.component.hide();
+      spectator.detectChanges();
+      const ionTabBarElm = spectator.query('ion-tab-bar');
+
+      expect(ionTabBarElm).toHaveComputedStyle({ '--kirby-page-footer-safe-area-bottom': '' });
+    });
   });
 
   describe('show', () => {
@@ -34,6 +41,13 @@ describe('TabsComponent', () => {
 
       const ionTabBarElm = spectator.query('ion-tab-bar');
       expect(ionTabBarElm).not.toHaveComputedStyle({ display: 'none' });
+    });
+    it('should set footer safe area to 0 when tab bar is shown and in bottom', () => {
+      spectator.component.show();
+      spectator.detectChanges();
+
+      const ionTabBarElm = spectator.element;
+      expect(ionTabBarElm).toHaveComputedStyle({ '--kirby-page-footer-safe-area-bottom': '0px' });
     });
   });
 });
