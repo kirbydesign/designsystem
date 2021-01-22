@@ -36,6 +36,9 @@
       Support for <a href="#" (click)="scrollTo(advanced)">fixed page content</a> (e.g. a Floating
       Action Button)
     </li>
+    <li>
+      Support for <a href="#" (click)="scrollTo(fixedFooter)">fixed page footer</a> and hiding tabs.
+    </li>
   </ul>
 
   <h2>Life-cycle hooks</h2>
@@ -192,7 +195,7 @@
 
 <div class="page-example">
   <div>
-    <h2>Fixed Footer</h2>
+    <h2 #fixedFooter>Fixed Footer</h2>
     <p>
       If the <code>kirby-page-footer</code> component is present <em>outside</em> of the
       <code>kirby-page-content</code>, the page will show a <em>fixed</em> footer placed right under
