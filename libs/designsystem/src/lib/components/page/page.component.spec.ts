@@ -107,16 +107,14 @@ describe('PageComponent', () => {
   });
 
   it('should hide tab bar when hideTabs is true', () => {
-    spectator.component.hideTabs = true;
-    spectator.detectChanges();
+    spectator.setInput('hideTabs', true);
     eventSubject.next(new NavigationEnd(1, '123', '123'));
 
     expect(tabbar.hide).toHaveBeenCalled();
   });
 
   it('should show tab bar when hideTabs is true on leave', () => {
-    spectator.component.hideTabs = true;
-    spectator.detectChanges();
+    spectator.setInput('hideTabs', true);
     eventSubject.next(new NavigationStart(1, '123'));
     spectator.component.ngAfterContentChecked();
     eventSubject.next(new NavigationEnd(1, '123', '123'));
