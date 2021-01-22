@@ -7,7 +7,7 @@ import { PageFooterComponent } from './page-footer.component';
 
 describe('PageFooterComponent', () => {
   let spectator: Spectator<PageFooterComponent>;
-  const pageComponent = createSpyObject(PageComponent, { hideTabs: true });
+  const pageComponent = createSpyObject(PageComponent, { tabBarBottomHidden: true });
   const createComponent = createComponentFactory({
     component: PageFooterComponent,
     providers: [
@@ -28,7 +28,7 @@ describe('PageFooterComponent', () => {
       const destroySpy = spyOn(renderer, 'destroy');
       spectator.component.close();
 
-      expect(pageComponent.hideTabs).toBe(false);
+      expect(pageComponent.tabBarBottomHidden).toBe(false);
       expect(destroySpy).toHaveBeenCalled();
     });
   });
@@ -37,7 +37,7 @@ describe('PageFooterComponent', () => {
     it('should show tabs', () => {
       spectator.component.ngOnDestroy();
 
-      expect(pageComponent.hideTabs).toBe(false);
+      expect(pageComponent.tabBarBottomHidden).toBe(false);
     });
   });
 });

@@ -119,17 +119,17 @@ export class PageComponent
   @Input() hideBackButton: boolean;
   @Input() titleMaxLines: number;
 
-  private _hideTabs: boolean;
-  public get hideTabs(): boolean {
-    return this._hideTabs;
+  private _tabBarBottomHidden: boolean;
+  public get tabBarBottomHidden(): boolean {
+    return this._tabBarBottomHidden;
   }
   @Input()
-  public set hideTabs(hideTabs: boolean) {
-    if (this.tabbar) {
+  public set tabBarBottomHidden(tabBarBottomHidden: boolean) {
+    if (this.tabsComponent) {
       // as we are setting a class on tabs, we need this to happen in a separate cd cycle
-      setTimeout(() => hideTabs ? this.tabbar.hide() : this.tabbar.show());
+      setTimeout(() => (this.tabsComponent.tabBarBottomHidden = tabBarBottomHidden));
     }
-    this._hideTabs = hideTabs;
+    this._tabBarBottomHidden = tabBarBottomHidden;
   }
 
   @Output() enter = new EventEmitter<void>();
@@ -195,7 +195,7 @@ export class PageComponent
     private changeDetectorRef: ChangeDetectorRef,
     private window: WindowRef,
     private modalNavigationService: ModalNavigationService,
-    @Optional() @SkipSelf() private tabbar: TabsComponent
+    @Optional() @SkipSelf() private tabsComponent: TabsComponent
   ) {}
 
   ngOnInit(): void {
@@ -263,10 +263,6 @@ export class PageComponent
     if (this.pageTitle) {
       this.pageTitleIntersectionObserverRef.observe(this.pageTitle.nativeElement);
     }
-
-    if (this.hideTabs) {
-      this.tabbar && this.tabbar.hide();
-    }
   }
 
   private onLeave() {
@@ -276,8 +272,8 @@ export class PageComponent
     }
     this.hasEntered = false;
 
-    if (this.hideTabs) {
-      this.tabbar && this.tabbar.show();
+    if (this.tabBarBottomHidden && this.tabsComponent) {
+      this.tabsComponent.tabBarBottomHidden = false;
     }
   }
 

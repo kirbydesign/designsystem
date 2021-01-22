@@ -17,16 +17,16 @@ describe('TabsComponent', () => {
     spectator = createHost({});
   });
 
-  describe('hide', () => {
+  describe('hideTabBar: true', () => {
     it('should hide tab bar', () => {
-      spectator.component.hide();
+      spectator.component.tabBarBottomHidden = true;
       spectator.detectChanges();
       const ionTabBarElm = spectator.query('ion-tab-bar');
 
       expect(ionTabBarElm).toHaveComputedStyle({ display: 'none' });
     });
-    it('should NOT set page footer safe area if tab bar is hidden or at top', () => {
-      spectator.component.hide();
+    it('should NOT set page footer safe area override if tab bar bottom is hidden', () => {
+      spectator.component.tabBarBottomHidden = true;
       spectator.detectChanges();
       const ionTabBarElm = spectator.query('ion-tab-bar');
 
@@ -34,16 +34,16 @@ describe('TabsComponent', () => {
     });
   });
 
-  describe('show', () => {
+  describe('hideTabBar: false', () => {
     it('should show tab bar', () => {
-      spectator.component.show();
+      spectator.component.tabBarBottomHidden = false;
       spectator.detectChanges();
 
       const ionTabBarElm = spectator.query('ion-tab-bar');
       expect(ionTabBarElm).not.toHaveComputedStyle({ display: 'none' });
     });
     it('should set footer safe area to 0 when tab bar is shown and in bottom', () => {
-      spectator.component.show();
+      spectator.component.tabBarBottomHidden = false;
       spectator.detectChanges();
 
       const ionTabBarElm = spectator.element;

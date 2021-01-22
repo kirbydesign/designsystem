@@ -1,13 +1,4 @@
-import {
-  Component,
-  ElementRef,
-  HostBinding,
-  Input,
-  OnDestroy,
-  Optional,
-  Renderer2,
-  SkipSelf,
-} from '@angular/core';
+import { Component, Input, OnDestroy, Optional, Renderer2, SkipSelf } from '@angular/core';
 
 import { PageComponent } from '../page.component';
 
@@ -30,11 +21,11 @@ export class PageFooterComponent implements OnDestroy {
   }
 
   close() {
-    this.pageComponent.hideTabs = false;
+    this.pageComponent.tabBarBottomHidden = false;
     this.renderer.destroy();
   }
 
   ngOnDestroy(): void {
-    this.pageComponent.hideTabs = false;
+    this.pageComponent.tabBarBottomHidden = false;
   }
 }

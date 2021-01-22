@@ -1,9 +1,7 @@
 @import '../../scss/utils';
 
-:host {
-  &:not(.hide-tab-bar) {
-    --kirby-page-footer-safe-area-bottom: 0px;
-  }
+:host(:not(.tab-bar-bottom-hidden)) {
+  --kirby-page-footer-safe-area-bottom: 0px;
 }
 
 ion-tabs {
@@ -12,6 +10,10 @@ ion-tabs {
     @include not-touch {
       flex-direction: column-reverse;
       --kirby-page-footer-safe-area-bottom: initial;
+
+      ion-tab-bar.bottom-hidden {
+        display: flex;
+      }
     }
   }
 
@@ -19,15 +21,6 @@ ion-tabs {
     --background: rgba(#{get-color('white-rgb')}, 0.94);
     --border: 1px solid #{get-color('light')};
     --color: #{get-color('black')};
-
-    &.hide {
-      @include media('<large') {
-        display: none;
-      }
-      @include touch {
-        display: none;
-      }
-    }
     display: flex;
     max-width: var(--kirby-tab-bar-max-width, none);
     justify-content: center;
@@ -36,6 +29,10 @@ ion-tabs {
     padding-left: $padding;
     padding-right: $padding;
     width: 100%;
+
+    &.bottom-hidden {
+      display: none;
+    }
 
     @include media('>=large') {
       @include not-touch {

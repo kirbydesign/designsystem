@@ -1,16 +1,11 @@
+import { Component, NgZone } from '@angular/core';
+import { fakeAsync, tick } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { NavigationEnd, NavigationStart, Router, RouterEvent } from '@angular/router';
+import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { IonicModule } from '@ionic/angular';
-import {
-  createHostFactory,
-  createSpyObject,
-  mockProvider,
-  SpectatorHost,
-  SpyObject,
-} from '@ngneat/spectator';
+import { createHostFactory, mockProvider, SpectatorHost, SpyObject } from '@ngneat/spectator';
 import { MockDirective } from 'ng-mocks';
-import { ReplaySubject } from 'rxjs';
 
 import { FitHeadingDirective } from '../../directives/fit-heading/fit-heading.directive';
 import { DesignTokenHelper } from '../../helpers/design-token-helper';
@@ -24,17 +19,14 @@ import { PageComponent, PageContentComponent } from './page.component';
 const size = DesignTokenHelper.size;
 const fatFingerSize = DesignTokenHelper.fatFingerSize();
 
+@Component({})
+class DummyComponent {}
+
 describe('PageComponent', () => {
   let spectator: SpectatorHost<PageComponent>;
-  let element: HTMLElement;
   let ionToolbar: HTMLElement;
-  let tabbar: SpyObject<TabsComponent>;
-  let eventSubject = new ReplaySubject<RouterEvent>(1);
-  let router: SpyObject<Router> = {
-    ...createSpyObject(Router),
-    url: '123',
-    events: eventSubject.asObservable(),
-  } as SpyObject<Router>;
+  let tabBar: SpyObject<TabsComponent>;
+  let router: SpyObject<Router>;
   let modalNavigationService: SpyObject<ModalNavigationService>;
 
   const dummyContent = `<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci animi aperiam deserunt dolore error esse
@@ -52,18 +44,27 @@ describe('PageComponent', () => {
   const createHost = createHostFactory({
     component: PageComponent,
     declarations: [PageContentComponent, MockDirective(FitHeadingDirective)],
-    imports: [IonicModule.forRoot({ mode: 'ios' }), NoopAnimationsModule, RouterTestingModule],
+    imports: [
+      IonicModule.forRoot({ mode: 'ios' }),
+      NoopAnimationsModule,
+      RouterTestingModule.withRoutes([
+        {
+          path: '',
+          component: PageComponent,
+        },
+        {
+          path: 'someUrl',
+          component: DummyComponent,
+        },
+      ]),
+    ],
     providers: [
       {
         provide: WindowRef,
         useValue: window,
       },
-      mockProvider(TabsComponent),
+      mockProvider(TabsComponent, { tabBarBottomHidden: false }),
       mockProvider(ModalNavigationService),
-      {
-        provide: Router,
-        useValue: router,
-      },
     ],
   });
 
@@ -76,11 +77,11 @@ describe('PageComponent', () => {
       </kirby-page>`,
       { detectChanges: false }
     );
-    element = spectator.element as HTMLElement;
     ionToolbar = spectator.queryHost('ion-toolbar');
-    tabbar = spectator.inject(TabsComponent);
+    tabBar = spectator.inject(TabsComponent);
     modalNavigationService = spectator.inject(ModalNavigationService);
     modalNavigationService.isModalRoute.and.returnValue(false);
+    router = spectator.inject(Router);
   });
 
   it('should render toolbar with correct padding', async () => {
@@ -106,24 +107,73 @@ describe('PageComponent', () => {
     });
   });
 
-  it('should hide tab bar when hideTabs is true', () => {
-    spectator.setInput('hideTabs', true);
+  it('should hide tab bar when tabBarBottomHidden is true', fakeAsync(() => {
+    expect(tabBar.tabBarBottomHidden).toBe(false);
+
+    spectator.setInput('tabBarBottomHidden', true);
     spectator.detectChanges();
-    eventSubject.next(new NavigationEnd(1, '123', '123'));
+    tick();
 
-    expect(tabbar.hide).toHaveBeenCalled();
-  });
+    expect(tabBar.tabBarBottomHidden).toBe(true);
+  }));
 
-  it('should show tab bar when hideTabs is true on leave', () => {
-    spectator.setInput('hideTabs', true);
+  it('should show tab bar when tabBarBottomHidden is false', fakeAsync(() => {
+    // show tab bar
+    spectator.setInput('tabBarBottomHidden', true);
     spectator.detectChanges();
-    eventSubject.next(new NavigationStart(1, '123'));
-    spectator.component.ngAfterContentChecked();
-    eventSubject.next(new NavigationEnd(1, '123', '123'));
-    spectator.component.ngAfterContentChecked();
-    eventSubject.next(new NavigationStart(1, '234'));
-    spectator.component.ngAfterContentChecked();
+    tick();
+    expect(tabBar.tabBarBottomHidden).toBe(true);
 
-    expect(tabbar.show).toHaveBeenCalled();
+    // hide tab bar
+    spectator.setInput('tabBarBottomHidden', false);
+    spectator.detectChanges();
+    tick();
+
+    expect(tabBar.tabBarBottomHidden).toBe(false);
+  }));
+
+  it('should show tab bar when tabBarBottomHidden on leave', fakeAsync(() => {
+    spectator.setInput('tabBarBottomHidden', true);
+    spectator.detectChanges();
+
+    triggerOnLeave(router);
+
+    expect(tabBar.tabBarBottomHidden).toBe(false);
+    tick();
+  }));
+
+  describe('onEnter', () => {
+    it('should trigger onEnter when navigating to url', () => {
+      const enterEmitSpy = spyOn(spectator.component.enter, 'emit');
+
+      router.navigate(['']);
+      spectator.detectChanges();
+
+      expect(enterEmitSpy).toHaveBeenCalledTimes(1);
+    });
+    it('should trigger onEnter once when navigating to same twice url', () => {
+      const enterEmitSpy = spyOn(spectator.component.enter, 'emit');
+
+      router.navigate(['']);
+      spectator.detectChanges();
+      router.navigate(['']);
+      spectator.detectChanges();
+
+      expect(enterEmitSpy).toHaveBeenCalledTimes(1);
+    });
   });
+  describe('onLeave', () => {
+    it('should trigger onLeave when navigating to another url', async () => {
+      const leaveEmitSpy = spyOn(spectator.component.leave, 'emit');
+
+      triggerOnLeave(router);
+
+      expect(leaveEmitSpy).toHaveBeenCalledTimes(1);
+    });
+  });
+  function triggerOnLeave(router: SpyObject<Router>) {
+    spectator.detectChanges();
+    router.navigate(['someUrl']);
+    spectator.detectChanges();
+  }
 });
