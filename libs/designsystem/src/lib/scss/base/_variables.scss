@@ -106,11 +106,15 @@ $avatar-sizes: (
 
 $avatar-badge-size: 16px;
 
+/* Page
+****************************************************************************/
+$page-max-width: 720px;
+
 /* Modal
 ****************************************************************************/
 $alert-max-width: 359px;
 $compact-modal-max-width: 359px;
-$modal-max-width: 720px;
+$modal-max-width: $page-max-width;
 
 $modal-heights: (
   s: floor($modal-max-width * 0.4),

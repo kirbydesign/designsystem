@@ -5,7 +5,7 @@ import { Observable, of } from 'rxjs';
 import { PageFooterComponent } from '@kirbydesign/designsystem/components/page/page-footer/page-footer.component';
 
 const template = `
-<kirby-page [title]="title | async" [hideTabs]="!showTabs">
+<kirby-page [title]="title" [hideTabs]="!showTabs">
   <kirby-page-content>
     <ng-container *ngTemplateOutlet="controls"></ng-container>
     <br />
@@ -48,54 +48,51 @@ const template = `
     <ng-container *ngTemplateOutlet="controls"></ng-container>
   </kirby-page-content>
   <kirby-page-footer *ngIf="showFooter" #pageFooter>
-    <div class="footer-content">
       <h3>0 selected</h3>
-      <kirby-icon class="close-footer" name="close" (click)="onCloseClick()"></kirby-icon>
+      <button kirby-button attentionLevel="2" class="close-footer-btn" (click)="onCloseClick()">
+        <kirby-icon name="close"></kirby-icon>
+      </button>
       This is the fixed footer
-    </div>
   </kirby-page-footer>
 </kirby-page>
 
 <ng-template #controls>
-  <kirby-item>
-    <h3>Toggle tabs</h3>
-    <kirby-toggle slot="end" (click)="toggleTabs()" [checked]="showTabs"></kirby-toggle>
-  </kirby-item>
-  <kirby-item>
-    <h3>Toggle footer</h3>
-    <kirby-toggle slot="end" (click)="toggleFooter()" [checked]="showFooter"></kirby-toggle>
-  </kirby-item>
+  <kirby-card>
+    <kirby-item>
+      <h3>Toggle tabs</h3>
+      <kirby-toggle slot="end" (click)="toggleTabs()" [checked]="showTabs"></kirby-toggle>
+    </kirby-item>
+    <kirby-item>
+      <h3>Toggle footer</h3>
+      <kirby-toggle slot="end" (click)="toggleFooter()" [checked]="showFooter"></kirby-toggle>
+    </kirby-item>
+  </kirby-card>
 </ng-template>
 `;
 @Component({
   template,
   styles: [
     `
-      .footer-content {
-        display: block;
-      }
-
-      .close-footer {
+      .close-footer-btn {
         position: absolute;
         top: 8px;
         right: 16px;
+        margin: 0;
       }
     `,
   ],
 })
 export class PageFixedFooterTabExampleComponent implements OnInit {
-  static template = template;
+  static readonly template = template;
 
-  @ViewChild('pageFooter') pageFooter: PageFooterComponent;
+  @ViewChild(PageFooterComponent) pageFooter: PageFooterComponent;
   showTabs = true;
   showFooter = true;
-  title: Observable<string>;
+  title: string;
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    setTimeout(() => {
-      this.title = of(this.route.snapshot.data.title);
-    }, 300);
+    this.title = this.route.snapshot.data.title;
   }
 
   toggleTabs() {

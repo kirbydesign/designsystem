@@ -1,6 +1,7 @@
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { NavigationEnd, NavigationStart, Router, RouterEvent } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { MockDirective } from 'ng-mocks';
+import { IonicModule } from '@ionic/angular';
 import {
   createHostFactory,
   createSpyObject,
@@ -8,17 +9,17 @@ import {
   SpectatorHost,
   SpyObject,
 } from '@ngneat/spectator';
-import { IonicModule } from '@ionic/angular';
+import { MockDirective } from 'ng-mocks';
 import { ReplaySubject } from 'rxjs';
-import { NavigationEnd, NavigationStart, Router, RouterEvent } from '@angular/router';
 
+import { FitHeadingDirective } from '../../directives/fit-heading/fit-heading.directive';
 import { DesignTokenHelper } from '../../helpers/design-token-helper';
 import { TestHelper } from '../../testing/test-helper';
-import { PageComponent, PageContentComponent } from './page.component';
-import { FitHeadingDirective } from '../../directives/fit-heading/fit-heading.directive';
 import { WindowRef } from '../../types/window-ref';
-import { TabsComponent } from '../tabs';
 import { ModalNavigationService } from '../modal/services/modal-navigation.service';
+import { TabsComponent } from '../tabs';
+
+import { PageComponent, PageContentComponent } from './page.component';
 
 const size = DesignTokenHelper.size;
 const fatFingerSize = DesignTokenHelper.fatFingerSize();
@@ -105,7 +106,7 @@ describe('PageComponent', () => {
     });
   });
 
-  it('should hide tab bar when hideTabs is true on enter', () => {
+  it('should hide tab bar when hideTabs is true', () => {
     spectator.component.hideTabs = true;
     spectator.detectChanges();
     eventSubject.next(new NavigationEnd(1, '123', '123'));

@@ -41,7 +41,6 @@ const template = `<!-- This container is only needed due to layout of larger scr
 })
 export class PageFixedFooterTabsExampleComponent {
   static template = template;
-  constructor() {}
 
   openMenu() {
     alert('Open menu');

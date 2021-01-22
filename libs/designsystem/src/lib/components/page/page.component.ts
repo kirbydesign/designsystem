@@ -11,7 +11,6 @@ import {
   EventEmitter,
   HostListener,
   Input,
-  NgZone,
   OnChanges,
   OnDestroy,
   OnInit,
@@ -25,15 +24,15 @@ import {
   ViewChild,
 } from '@angular/core';
 import { NavigationEnd, NavigationStart, Router, RouterEvent } from '@angular/router';
+import { IonContent, IonFooter, IonHeader } from '@ionic/angular';
 import { Observable, Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
-import { IonContent, IonFooter, IonHeader } from '@ionic/angular';
 
-import { FitHeadingConfig } from '../../directives/fit-heading/fit-heading.directive';
-import { selectedTabClickEvent } from '../tabs/tab-button/tab-button.events';
 import { KirbyAnimation } from '../../animation/kirby-animation';
+import { FitHeadingConfig } from '../../directives/fit-heading/fit-heading.directive';
 import { WindowRef } from '../../types/window-ref';
 import { ModalNavigationService } from '../modal/services/modal-navigation.service';
+import { selectedTabClickEvent } from '../tabs/tab-button/tab-button.events';
 import { TabsComponent } from '../tabs/tabs.component';
 
 type stickyConfig = { sticky: boolean };

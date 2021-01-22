@@ -7,10 +7,16 @@ $padding-vertical: size('xxs');
   display: block;
   background-color: var(--kirby-white);
 
-  &.padding {
-    padding: $padding-vertical $padding-horizontal;
-    padding-bottom: calc(
-      #{$padding-vertical} + var(--kirby-page-footer-safe-area-bottom, var(--kirby-safe-area-bottom))
-    );
+  .wrapper {
+    position: relative;
+    max-width: var(--page-content-max-width, $page-max-width);
+    margin: 0 auto;
+
+    &.padding {
+      padding: $padding-vertical $padding-horizontal;
+      padding-bottom: calc(
+        #{$padding-vertical} + var(--kirby-page-footer-safe-area-bottom, var(--kirby-safe-area-bottom))
+      );
+    }
   }
 }

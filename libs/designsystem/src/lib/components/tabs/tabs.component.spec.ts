@@ -1,6 +1,6 @@
-import { Spectator, createComponentFactory } from '@ngneat/spectator';
-import { MockModule } from 'ng-mocks';
 import { IonicModule } from '@ionic/angular';
+import { createComponentFactory, Spectator } from '@ngneat/spectator';
+import { MockModule } from 'ng-mocks';
 
 import { TabsComponent } from './tabs.component';
 
@@ -21,9 +21,7 @@ describe('TabsComponent', () => {
     it('should hide tab bar', () => {
       spectator.component.hide();
       spectator.detectChanges();
-
       const ionTabBarElm = spectator.query('ion-tab-bar');
-      spectator.detectChanges();
 
       const ionTabBarElmStyle = getComputedStyle(ionTabBarElm);
       expect(ionTabBarElmStyle.display).toBe('none');

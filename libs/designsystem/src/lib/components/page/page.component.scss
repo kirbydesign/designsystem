@@ -113,7 +113,7 @@ ion-content {
   --background: #{get-color('background-color')};
 
   .content-inner {
-    max-width: var(--page-content-max-width, 720px);
+    max-width: var(--page-content-max-width, $page-max-width);
     margin: 0 auto;
     padding-bottom: size('xl');
   }
