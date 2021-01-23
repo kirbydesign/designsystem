@@ -17,7 +17,7 @@ describe('TabsComponent', () => {
     spectator = createHost({});
   });
 
-  describe('hideTabBar: true', () => {
+  describe('tabBarBottomHidden: true', () => {
     it('should hide tab bar', () => {
       spectator.component.tabBarBottomHidden = true;
       spectator.detectChanges();
