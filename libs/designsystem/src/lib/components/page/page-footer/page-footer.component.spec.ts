@@ -28,12 +28,11 @@ describe('PageFooterComponent', () => {
       expect(pageComponent.tabBarBottomHidden).toBe(false);
     });
     it('should remove host element', () => {
-      // can't use spectator.inject here https://stackoverflow.com/questions/56737965/how-test-directive-with-renderer2
-      const renderer = spectator.fixture.componentRef.injector.get(Renderer2);
-      const destroySpy = spyOn(renderer, 'destroy');
       spectator.component.close();
+      spectator.detectChanges();
 
-      expect(destroySpy).toHaveBeenCalled();
+      expect(spectator.element.parentElement).toBeNull();
+      expect(spectator.element.isConnected).toBe(false);
     });
   });
 
