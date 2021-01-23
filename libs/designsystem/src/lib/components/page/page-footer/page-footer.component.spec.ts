@@ -39,6 +39,8 @@ describe('PageFooterComponent', () => {
 
   describe('ngOnDestroy', () => {
     it('should show tabs', () => {
+    expect(pageComponent.tabBarBottomHidden).toBe(true);
+
       spectator.component.ngOnDestroy();
 
       expect(pageComponent.tabBarBottomHidden).toBe(false);
