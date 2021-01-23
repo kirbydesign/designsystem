@@ -12,6 +12,7 @@ ion-tabs {
       // Ensure page-footer falls back to safe-area default
       --kirby-page-footer-safe-area-bottom: initial;
 
+      // Ensure tabs are not hidden when displayed at top of screen:
       ion-tab-bar.bottom-hidden {
         display: flex;
       }
