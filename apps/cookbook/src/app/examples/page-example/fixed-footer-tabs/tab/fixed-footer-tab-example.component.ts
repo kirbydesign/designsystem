@@ -5,39 +5,37 @@ import { PageFooterComponent } from '@kirbydesign/designsystem/components/page/p
 
 import { BasePageExampleComponent } from '../../base-page-example.component';
 
+const pageTemplate = `<kirby-page [title]="title" [tabBarBottomHidden]="!showTabs">
+  <kirby-page-content style="border: 1px solid red">
+    <ng-container *ngTemplateOutlet="controls"></ng-container>
+    <div [innerHTML]="content"></div>
+    <ng-container *ngTemplateOutlet="controls"></ng-container>
+  </kirby-page-content>
+  <kirby-page-footer *ngIf="showFooter">
+    <h3>0 selected</h3>
+    This is a fixed footer
+    <button kirby-button attentionLevel="2" class="close-footer-btn" (click)="onCloseClick()">
+      <kirby-icon name="close"></kirby-icon>
+    </button>
+  </kirby-page-footer>
+</kirby-page>`;
+const controlsTemplate = `<ng-template #controls>
+  <kirby-card>
+    <kirby-item>
+      <h3>Show tabs</h3>
+      <kirby-toggle slot="end" (click)="toggleTabs()" [checked]="showTabs"></kirby-toggle>
+    </kirby-item>
+    <kirby-item>
+      <h3>Show footer</h3>
+      <kirby-toggle slot="end" (click)="toggleFooter()" [checked]="showFooter"></kirby-toggle>
+    </kirby-item>
+  </kirby-card>
+</ng-template>`;
+
 const config = {
-  template: `
-  <kirby-page [title]="title" [tabBarBottomHidden]="!showTabs">
-    <kirby-page-content>
-      <ng-container *ngTemplateOutlet="controls"></ng-container>
-      <div [innerHTML]="content"></div>
-      <ng-container *ngTemplateOutlet="controls"></ng-container>
-    </kirby-page-content>
-    <kirby-page-footer *ngIf="showFooter">
-        <h3>0 selected</h3>
-        <button kirby-button attentionLevel="2" class="close-footer-btn" (click)="onCloseClick()">
-          <kirby-icon name="close"></kirby-icon>
-        </button>
-        This is a fixed footer
-    </kirby-page-footer>
-  </kirby-page>
-  
-  <ng-template #controls>
-    <kirby-card>
-      <kirby-item>
-        <h3>Show tabs</h3>
-        <kirby-toggle slot="end" (click)="toggleTabs()" [checked]="showTabs"></kirby-toggle>
-      </kirby-item>
-      <kirby-item>
-        <h3>Show footer</h3>
-        <kirby-toggle slot="end" (click)="toggleFooter()" [checked]="showFooter"></kirby-toggle>
-      </kirby-item>
-    </kirby-card>
-  </ng-template>
-  `,
+  template: pageTemplate + controlsTemplate,
   styles: [
-    `
-      .close-footer-btn {
+    `.close-footer-btn {
         position: absolute;
         top: 8px;
         right: 16px;
@@ -46,16 +44,16 @@ const config = {
 
       kirby-card:first-of-type {
         margin-bottom: 24px;
-      }
-    `,
+      }`,
   ],
 };
 
 @Component({ template: config.template, styles: config.styles })
 export class PageFixedFooterTabExampleComponent extends BasePageExampleComponent implements OnInit {
-  static readonly template = config.template
-    .replace(' defaultBackHref="/"', '')
-    .replace('<div [innerHTML]="content"></div>', '...');
+  static readonly template = pageTemplate.replace(
+    /<kirby-page-content[^>]*>(.|\s)*?<\/kirby-page-content>/,
+    '<kirby-page-content>...</kirby-page-content>'
+  );
 
   @ViewChild(PageFooterComponent) pageFooter: PageFooterComponent;
   showTabs = true;
