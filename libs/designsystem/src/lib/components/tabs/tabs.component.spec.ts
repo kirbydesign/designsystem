@@ -46,8 +46,8 @@ describe('TabsComponent', () => {
       spectator.component.tabBarBottomHidden = false;
       spectator.detectChanges();
 
-      const ionTabBarElm = spectator.element;
-      expect(ionTabBarElm).toHaveComputedStyle({ '--kirby-page-footer-safe-area-bottom': '0px' });
+      const ionTabBarElm = spectator.query('ion-tab-bar');
+      expect(ionTabBarElm).toHaveComputedStyle({ '--kirby-page-footer-safe-area-bottom': '' });
     });
   });
 });
