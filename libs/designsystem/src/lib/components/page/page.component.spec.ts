@@ -119,13 +119,13 @@ describe('PageComponent', () => {
   }));
 
   it('should show tab bar when tabBarBottomHidden is false', fakeAsync(() => {
-    // show tab bar
+    // hide tab bar
     spectator.setInput('tabBarBottomHidden', true);
     spectator.detectChanges();
     tick();
     expect(tabBar.tabBarBottomHidden).toBe(true);
 
-    // hide tab bar
+    // show tab bar
     spectator.setInput('tabBarBottomHidden', false);
     spectator.detectChanges();
     tick();
@@ -133,14 +133,15 @@ describe('PageComponent', () => {
     expect(tabBar.tabBarBottomHidden).toBe(false);
   }));
 
-  it('should show tab bar when tabBarBottomHidden on leave', fakeAsync(() => {
+  it('should show tab bar when tabBarBottomHidden is true on leave', fakeAsync(() => {
     spectator.setInput('tabBarBottomHidden', true);
-    spectator.detectChanges();
+    tick();
+    expect(tabBar.tabBarBottomHidden).toBe(true);
 
     triggerOnLeave(router);
 
     expect(tabBar.tabBarBottomHidden).toBe(false);
-    tick();
+    flush();
   }));
 
   describe('onEnter', () => {
