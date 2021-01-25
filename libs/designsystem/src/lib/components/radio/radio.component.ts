@@ -1,4 +1,5 @@
-import { Component, HostBinding, Input } from '@angular/core';
+import { Component, ElementRef, HostBinding, Input, ViewChild } from '@angular/core';
+import { IonRadio } from '@ionic/angular';
 
 // Counter for generating unique element ids
 let uniqueId = 0;
@@ -31,5 +32,17 @@ export class RadioComponent {
     return this.disabled ? 'disabled' : null;
   }
 
+  get buttonTabIndex(): number {
+    return this.ionRadioElement ? this.ionRadioElement.nativeElement.tabIndex : -1;
+  }
+
+  focus() {
+    this.ionRadioElement && this.ionRadioElement.nativeElement.focus();
+  }
+
   _labelId = `kirby-radio-label-${uniqueId++}`;
+
+  @ViewChild(IonRadio, { read: ElementRef, static: true }) private ionRadioElement?: ElementRef<
+    HTMLIonRadioElement
+  >;
 }

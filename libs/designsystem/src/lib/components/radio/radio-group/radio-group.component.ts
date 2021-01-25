@@ -91,6 +91,13 @@ export class RadioGroupComponent implements AfterContentInit, AfterViewInit {
   // #endregion private fields
 
   // #region public methods
+  focus() {
+    const focusable =
+      this.radioButtons.find((radio) => radio.buttonTabIndex !== -1) ||
+      this.slottedRadioButtons.find((radio) => radio.buttonTabIndex !== -1);
+    focusable && focusable.focus();
+  }
+
   ngAfterContentInit(): void {
     if (this.value) return;
     // Ensure value is initialized from selectedIndex if not already set explicitly:

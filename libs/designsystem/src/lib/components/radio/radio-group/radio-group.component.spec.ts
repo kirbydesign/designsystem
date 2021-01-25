@@ -271,6 +271,32 @@ describe('RadioGroupComponent', () => {
                 });
               }
             });
+
+            describe('focus', () => {
+              it('should focus the selected radio', async () => {
+                const selectedRadio = ionRadioElements[defaultSelectedIndex];
+                expect(selectedRadio.getAttribute('aria-checked')).toEqual('true');
+                // Wait for tabindex to be rendered:
+                await TestHelper.whenTrue(() => selectedRadio.tabIndex === 0);
+
+                spectator.component.focus();
+
+                expect(document.activeElement).toEqual(selectedRadio);
+              });
+
+              it('should focus the first radio when none is selected', async () => {
+                const firstRadio = ionRadioElements[0];
+                spectator.setInput('selectedIndex', -1);
+                // Wait for tabindex to be rendered:
+                await TestHelper.waitForTimeout(50);
+                console.log('firstRadio.tabIndex:', firstRadio.tabIndex);
+                await TestHelper.whenTrue(() => firstRadio.tabIndex === 0);
+
+                spectator.component.focus();
+
+                expect(document.activeElement).toEqual(firstRadio);
+              });
+            });
           });
         });
 
