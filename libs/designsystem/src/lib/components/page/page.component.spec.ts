@@ -139,7 +139,7 @@ describe('PageComponent', () => {
     triggerOnLeave(router);
 
     expect(tabBar.tabBarBottomHidden).toBe(false);
-    tick();
+    flush();
   }));
 
   describe('onEnter', () => {
