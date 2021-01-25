@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-
 import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
 
 @Component({
@@ -156,18 +155,6 @@ On native devices this method also ensures the form field is scrolled into the v
       defaultValue: undefined,
       description:
         'Reference to the kirby-input component the counter should observe. Can be specified through a template reference variable, e.g.: #cityName. The current value and (optional) maxlength of the input will be displayed.',
-      inputValues: ['string'],
-    },
-  ];
-
-  prefixPostProperties: ShowcaseProperty[] = [
-    {
-      name: 'prefixPostfix',
-      defaultValue: undefined,
-      description:
-        'Reference to the kirby-input component that Prefix and or Postfix should be applied to. ' +
-        '' +
-        '',
       inputValues: ['string'],
     },
   ];
