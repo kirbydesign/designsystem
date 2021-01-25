@@ -32,23 +32,21 @@ jobs:
       - run: npm run test:ci
       - run: npm run coverage-report || true
 
-#  build_kirby:
-#    runs-on: ubuntu-latest
-#    strategy:
-#      matrix:
-#        node-version: [10.16]
-#    steps:
-#      - uses: actions/checkout@v2
-#      - name: Use Node.js ${{ matrix.node-version }}
-#        uses: actions/setup-node@v1
-#        with:
-#          always-auth: true
-#          registry-url: https://registry.npmjs.org
-#          node-version: ${{ matrix.node-version }}
-#      - name: Install dependencies
-#      - run: pip install six
-#      - run: npm ci
-#        env:
-#          NODE_AUTH_TOKEN: $ {{ NPM_AUTH_TOKEN }}
-#      - name: execute ...
+  build_kirby:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [10.16]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          always-auth: true
+          registry-url: https://registry.npmjs.org
+          node-version: ${{ matrix.node-version }}
+      - run: pip install six
+      - run: npm ci
+        env:
+          NODE_AUTH_TOKEN: $ {{ NPM_AUTH_TOKEN }}
 #      run: npm run dist:designsystem
