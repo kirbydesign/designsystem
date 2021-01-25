@@ -54,7 +54,6 @@ jobs:
 
   deploy_to_cookbook:
     needs: [lint_and_unittest, build_kirby]
-    if: github.
     runs-on: ubuntu-latest
     strategy:
       matrix:
