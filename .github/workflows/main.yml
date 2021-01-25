@@ -84,13 +84,6 @@ jobs:
       matrix:
         node-version: [10.16]
     steps:
-      - uses: actions/checkout@v2
-      - name: Setting up vars
-        shell: bash
-        run: |
-          echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-          echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"          
-      
       - name: Deploy to cookbook
       - uses: actions/checkout@v2
       - env:
