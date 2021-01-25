@@ -5,7 +5,7 @@ $padding-vertical: size('xxs');
 
 :host {
   display: block;
-  background-color: get-color(white);
+  background-color: get-color('white');
 
   .wrapper {
     position: relative;

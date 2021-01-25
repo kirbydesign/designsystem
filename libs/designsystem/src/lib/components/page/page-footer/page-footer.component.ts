@@ -1,4 +1,12 @@
-import { Component, Input, OnDestroy, Optional, Renderer2, SkipSelf } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  OnDestroy,
+  Optional,
+  Renderer2,
+  SkipSelf,
+} from '@angular/core';
 
 import { PageComponent } from '../page.component';
 
@@ -13,6 +21,7 @@ export class PageFooterComponent implements OnDestroy {
 
   constructor(
     @Optional() @SkipSelf() private pageComponent: PageComponent,
+    private hostElement: ElementRef,
     private renderer: Renderer2
   ) {
     if (!pageComponent) {
@@ -22,7 +31,11 @@ export class PageFooterComponent implements OnDestroy {
 
   close() {
     this.pageComponent.tabBarBottomHidden = false;
-    this.renderer.destroy();
+    this.renderer.removeChild(
+      this.hostElement.nativeElement.parentElement,
+      this.hostElement.nativeElement,
+      true
+    );
   }
 
   ngOnDestroy(): void {

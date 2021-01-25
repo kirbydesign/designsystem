@@ -28,6 +28,7 @@ describe('PageComponent', () => {
   let tabBar: SpyObject<TabsComponent>;
   let router: SpyObject<Router>;
   let modalNavigationService: SpyObject<ModalNavigationService>;
+  let zone: NgZone;
 
   const dummyContent = `<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci animi aperiam deserunt dolore error esse
             laborum magni natus nihil optio perferendis placeat, quae sed, sequi sunt totam voluptatem! Dicta,
@@ -45,8 +46,7 @@ describe('PageComponent', () => {
     component: PageComponent,
     declarations: [PageContentComponent, MockDirective(FitHeadingDirective)],
     imports: [
-      IonicModule.forRoot({ mode: 'ios' }),
-      NoopAnimationsModule,
+      TestHelper.ionicModuleForTest,
       RouterTestingModule.withRoutes([
         {
           path: '',
@@ -77,6 +77,7 @@ describe('PageComponent', () => {
       </kirby-page>`,
       { detectChanges: false }
     );
+    zone = spectator.inject(NgZone);
     ionToolbar = spectator.queryHost('ion-toolbar');
     tabBar = spectator.inject(TabsComponent);
     modalNavigationService = spectator.inject(ModalNavigationService);
@@ -143,20 +144,20 @@ describe('PageComponent', () => {
   }));
 
   describe('onEnter', () => {
-    it('should trigger onEnter when navigating to url', () => {
+    it('should trigger onEnter when navigating to url', async () => {
       const enterEmitSpy = spyOn(spectator.component.enter, 'emit');
 
-      router.navigate(['']);
+      await zone.run(() => router.navigate(['']));
       spectator.detectChanges();
 
       expect(enterEmitSpy).toHaveBeenCalledTimes(1);
     });
-    it('should trigger onEnter once when navigating to same twice url', () => {
+    it('should trigger onEnter once when navigating to same twice url', async () => {
       const enterEmitSpy = spyOn(spectator.component.enter, 'emit');
 
-      router.navigate(['']);
+      await zone.run(() => router.navigate(['']));
       spectator.detectChanges();
-      router.navigate(['']);
+      await zone.run(() => router.navigate(['']));
       spectator.detectChanges();
 
       expect(enterEmitSpy).toHaveBeenCalledTimes(1);
@@ -171,9 +172,9 @@ describe('PageComponent', () => {
       expect(leaveEmitSpy).toHaveBeenCalledTimes(1);
     });
   });
-  function triggerOnLeave(router: SpyObject<Router>) {
+  async function triggerOnLeave(router: SpyObject<Router>) {
     spectator.detectChanges();
-    router.navigate(['someUrl']);
+    await zone.run(() => router.navigate(['someUrl']));
     spectator.detectChanges();
   }
 });

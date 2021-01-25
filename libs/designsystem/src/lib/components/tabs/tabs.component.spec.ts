@@ -47,7 +47,7 @@ describe('TabsComponent', () => {
       spectator.detectChanges();
 
       const ionTabBarElm = spectator.query('ion-tab-bar');
-      expect(ionTabBarElm).toHaveComputedStyle({ '--kirby-page-footer-safe-area-bottom': '' });
+      expect(ionTabBarElm).toHaveComputedStyle({ '--kirby-page-footer-safe-area-bottom': '0px' });
     });
   });
 });
