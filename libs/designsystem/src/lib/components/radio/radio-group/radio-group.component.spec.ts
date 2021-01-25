@@ -4,6 +4,7 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { TestHelper } from '../../../testing/test-helper';
 import { ListItemTemplateDirective } from '../../list/list.directive';
 import { RadioComponent } from '../radio.component';
+
 import { RadioGroupComponent } from './radio-group.component';
 
 describe('RadioGroupComponent', () => {
@@ -24,6 +25,10 @@ describe('RadioGroupComponent', () => {
       return ionRadioElements[index].getAttribute('aria-checked') === 'true';
     }
 
+    const defaultSelectedIndex = 1;
+
+    const textItems: string[] = ['Larry', 'Curly', 'Moe'];
+
     const dataItems: defaultDataType[] = [
       { text: 'Larry', value: 1 },
       { text: 'Curly', value: 2 },
@@ -33,13 +38,13 @@ describe('RadioGroupComponent', () => {
     const dataScenarios = [
       {
         description: 'plain text',
-        items: ['Larry', 'Curly', 'Moe'],
-        selected: 'Curly',
+        items: textItems,
+        selected: textItems[defaultSelectedIndex],
       },
       {
         description: 'data items with default property names',
         items: dataItems,
-        selected: dataItems[1],
+        selected: dataItems[defaultSelectedIndex],
       },
     ];
 
@@ -139,7 +144,6 @@ describe('RadioGroupComponent', () => {
               beforeEach(async () => {
                 // Assert initial state:
                 expect(ionRadioGroup.value).toBe(dataScenario.selected);
-                await TestHelper.whenReady(ionRadioElements);
                 // Assert initial state of radios:
                 expect(radioChecked(0)).toBeFalse();
                 expect(radioChecked(1)).toBeTrue();
@@ -274,7 +278,6 @@ describe('RadioGroupComponent', () => {
                 RadioGroupComponent,
                 { items: string[] | defaultDataType[]; selectedIndex: number }
               >;
-              const selectedIndex = 1;
 
               describe('through template one-time string initialization', () => {
                 it('should set the value to the corresponding data item', () => {
@@ -282,9 +285,9 @@ describe('RadioGroupComponent', () => {
                     templateScenario === 'by default'
                       ? `<kirby-radio-group
                           [items]="items"
-                          selectedIndex="${selectedIndex}">
+                          selectedIndex="${defaultSelectedIndex}">
                         </kirby-radio-group>`
-                      : `<kirby-radio-group selectedIndex="${selectedIndex}">
+                      : `<kirby-radio-group selectedIndex="${defaultSelectedIndex}">
                            <kirby-radio *ngFor="let item of items" [value]="item" [text]="item.text || item"></kirby-radio>
                          </kirby-radio-group>`;
                   spectator = createHost(template, {
@@ -294,7 +297,9 @@ describe('RadioGroupComponent', () => {
                     },
                   });
 
-                  expect(spectator.component.value).toEqual(dataScenario.items[selectedIndex]);
+                  expect(spectator.component.value).toEqual(
+                    dataScenario.items[defaultSelectedIndex]
+                  );
                 });
               });
 
@@ -312,13 +317,15 @@ describe('RadioGroupComponent', () => {
                   spectator = createHost(template, {
                     hostProps: {
                       items: dataScenario.items,
-                      selectedIndex,
+                      selectedIndex: defaultSelectedIndex,
                     },
                   });
                 });
 
                 it('should set the value to the corresponding data item', () => {
-                  expect(spectator.component.value).toEqual(dataScenario.items[selectedIndex]);
+                  expect(spectator.component.value).toEqual(
+                    dataScenario.items[defaultSelectedIndex]
+                  );
                 });
 
                 describe('when changing selected index', () => {
@@ -356,10 +363,12 @@ describe('RadioGroupComponent', () => {
                 describe('through input properties', () => {
                   it('should set the value to the corresponding data item', () => {
                     spectator = createHost('<kirby-radio-group></kirby-radio-group>', {
-                      props: { selectedIndex, items: dataScenario.items },
+                      props: { selectedIndex: defaultSelectedIndex, items: dataScenario.items },
                     });
 
-                    expect(spectator.component.value).toEqual(dataScenario.items[selectedIndex]);
+                    expect(spectator.component.value).toEqual(
+                      dataScenario.items[defaultSelectedIndex]
+                    );
                   });
                 });
               }
