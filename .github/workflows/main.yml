@@ -1,6 +1,8 @@
 name: Kirby CI for pull requests
 
 on:
+  push:
+    branches: [ master ]
   pull_request:
     branches: [ master ]
 
@@ -42,3 +44,22 @@ jobs:
       - run: pip install six
       - run: npm ci
       - run: npm run dist:designsystem
+
+  deploy_to_cookbook:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [10.16]
+    steps:
+      - uses: actions/checkout@v2
+      if: ${{ !github.event.issue.pull_request }}
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          always-auth: true
+          registry-url: https://registry.npmjs.org
+          node-version: ${{ matrix.node-version }}
+        env:
+          NODE_AUTH_TOKEN: $ {{ NPM_AUTH_TOKEN }}
+      - run: pip install six
+      - run: npm ci
