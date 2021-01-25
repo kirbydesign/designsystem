@@ -29,6 +29,8 @@ describe('PageFooterComponent', () => {
       expect(pageComponent.tabBarBottomHidden).toBe(false);
     });
     it('should remove host element', () => {
+      expect(spectator.element.parentElement).not.toBeNull();
+
       spectator.component.close();
       spectator.detectChanges();
 
