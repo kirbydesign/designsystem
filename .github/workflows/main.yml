@@ -47,12 +47,12 @@ jobs:
 
   deploy_to_cookbook:
     runs-on: ubuntu-latest
+    if: ${{ !github.event.issue.pull_request }}
     strategy:
       matrix:
         node-version: [10.16]
     steps:
       - uses: actions/checkout@v2
-      if: ${{ !github.event.issue.pull_request }}
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
