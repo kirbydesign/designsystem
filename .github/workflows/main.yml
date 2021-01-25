@@ -2,7 +2,7 @@
 
 name: Kirby CI
 
-# Controls when the action will run. 
+# Controls when the action will run.
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
@@ -25,34 +25,32 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      name: Install dependencies
+      - name: Install dependencies
       - run: pip install six
       - run: npm ci
-      name: execute ...
+      - name: Execute ...
       - run: npm run lint
       - run: npm run extract-scss-variables
       - run: npm run test:ci
       - run: npm run coverage-report || true
-  
+
   build_kirby:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [10.16]
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        always-auth: true
-        registry-url: https://registry.npmjs.org
-        node-version: ${{ matrix.node-version }}
-    - name: Install dependencies
-    - run: pip install six
-    - run: npm ci
-      env:
-        NODE_AUTH_TOKEN: $ {{ NPM_AUTH_TOKEN }}
-    - name: execute ...
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          always-auth: true
+          registry-url: https://registry.npmjs.org
+          node-version: ${{ matrix.node-version }}
+      - name: Install dependencies
+      - run: pip install six
+      - run: npm ci
+        env:
+          NODE_AUTH_TOKEN: $ {{ NPM_AUTH_TOKEN }}
+      - name: execute ...
 #      run: npm run dist:designsystem
-
-
