@@ -118,13 +118,13 @@ describe('PageComponent', () => {
   }));
 
   it('should show tab bar when tabBarBottomHidden is false', fakeAsync(() => {
-    // show tab bar
+    // hide tab bar
     spectator.setInput('tabBarBottomHidden', true);
     spectator.detectChanges();
     tick();
     expect(tabBar.tabBarBottomHidden).toBe(true);
 
-    // hide tab bar
+    // show tab bar
     spectator.setInput('tabBarBottomHidden', false);
     spectator.detectChanges();
     tick();
