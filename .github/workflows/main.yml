@@ -92,6 +92,7 @@ jobs:
           echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"          
       
       - name: Deploy to cookbook
+      - uses: actions/checkout@v2
       - env:
           NODE_OPTIONS: '--max_old_space_size=3072'
       - run: npm ci
