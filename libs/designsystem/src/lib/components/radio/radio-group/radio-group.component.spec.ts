@@ -103,6 +103,7 @@ describe('RadioGroupComponent', () => {
               await TestHelper.whenReady(ionRadioGroupElement);
               radios = spectator.queryAll(RadioComponent);
               ionRadioElements = spectator.queryAll('ion-radio');
+              await TestHelper.whenReady(ionRadioElements);
             });
 
             it('should render all items', () => {
