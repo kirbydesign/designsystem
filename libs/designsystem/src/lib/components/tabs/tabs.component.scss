@@ -5,20 +5,6 @@
 }
 
 ion-tabs {
-  // move tabs to top of screen if not touch and large device
-  @include media('>=large') {
-    @include not-touch {
-      flex-direction: column-reverse;
-      // Ensure page-footer falls back to safe-area default
-      --kirby-page-footer-safe-area-bottom: initial;
-
-      // Ensure tabs are not hidden when displayed at top of screen:
-      ion-tab-bar.bottom-hidden {
-        display: flex;
-      }
-    }
-  }
-
   ion-tab-bar {
     --background: rgba(#{get-color('white-rgb')}, 0.94);
     --border: 1px solid #{get-color('light')};
@@ -40,6 +26,20 @@ ion-tabs {
       @include not-touch {
         margin: 0 auto;
         justify-content: flex-end;
+      }
+    }
+  }
+
+  // move tabs to top of screen if not touch and large device
+  @include media('>=large') {
+    @include not-touch {
+      flex-direction: column-reverse;
+      // Ensure page-footer falls back to safe-area default
+      --kirby-page-footer-safe-area-bottom: initial;
+
+      // Ensure tabs are not hidden when displayed at top of screen:
+      ion-tab-bar.bottom-hidden {
+        display: flex;
       }
     }
   }
