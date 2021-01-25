@@ -124,7 +124,7 @@ export class PageComponent
     return this._tabBarBottomHidden;
   }
   @Input()
-  public set tabBarBottomHidden(tabBarBottomHidden: boolean) {
+  public set tabBarBottomHidden(value: boolean) {
     if (this.tabsComponent) {
       // as we are setting a class on tabs, we need this to happen in a separate cd cycle
       setTimeout(() => (this.tabsComponent.tabBarBottomHidden = tabBarBottomHidden));
