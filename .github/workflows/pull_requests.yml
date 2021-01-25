@@ -1,17 +1,8 @@
-# This is a basic workflow to help you get started with Actions
+name: Kirby CI for pull requests
 
-name: Kirby CI
-
-# Controls when the action will run.
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
-  push:
-    branches: [ master ]
   pull_request:
     branches: [ master ]
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
 
 jobs:
   lint_and_unittest:
@@ -51,14 +42,3 @@ jobs:
       - run: pip install six
       - run: npm ci
       - run: npm run dist:designsystem
-
-  deploy_to_cookbook:
-    needs: [lint_and_unittest, build_kirby]
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [10.16]
-    steps:
-      - uses: actions/checkout@v2
-                    
-
