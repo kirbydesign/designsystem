@@ -85,7 +85,6 @@ jobs:
         node-version: [10.16]
     steps:
       - uses: actions/checkout@v2
-        if: matrix
       - name: Setting up vars
         shell: bash
         run: |
