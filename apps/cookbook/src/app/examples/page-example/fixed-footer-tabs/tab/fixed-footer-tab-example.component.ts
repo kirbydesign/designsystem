@@ -6,7 +6,7 @@ import { PageFooterComponent } from '@kirbydesign/designsystem/components/page/p
 import { BasePageExampleComponent } from '../../base-page-example.component';
 
 const pageTemplate = `<kirby-page [title]="title" [tabBarBottomHidden]="!showTabs">
-  <kirby-page-content style="border: 1px solid red">
+  <kirby-page-content>
     <ng-container *ngTemplateOutlet="controls"></ng-container>
     <div [innerHTML]="content"></div>
     <ng-container *ngTemplateOutlet="controls"></ng-container>
