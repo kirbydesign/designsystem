@@ -23,6 +23,7 @@ describe('PageFooterComponent', () => {
 
   describe('close', () => {
     it('should show tabs', () => {
+      pageComponent.tabBarBottomHidden = true;
       spectator.component.close();
 
       expect(pageComponent.tabBarBottomHidden).toBe(false);
