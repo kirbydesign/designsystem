@@ -52,6 +52,19 @@ jobs:
         node-version: [10.16]
     steps:
       - uses: actions/checkout@v2
+
+      - name: Cache modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
@@ -64,30 +77,30 @@ jobs:
       - run: npm ci
       - run: npm run dist:designsystem
 
-#  deploy_to_cookbook:
-#    needs: build_kirby
-#    runs-on: ubuntu-latest
-#    strategy:
-#      matrix:
-#        node-version: [10.16]
-#    steps:
-#      - uses: actions/checkout@v2
-#        if: matrix
-#      - name: Setting up vars
-#        shell: bash
-#        run: |
-#          echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-#          echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"          
-#      
-#      - name: Deploy to cookbook
-#      - env:
-#          NODE_OPTIONS: '--max_old_space_size=3072'
-#      - run: npm ci
-#      - run: openssl version
-#      - run: npm dist
-#        if: success()
-#      - run: echo Starting docker build with target ../designsystem:git${{ steps.vars.outputs.sha_short }}
-#      #- run: docker build -t drbstaging.azurecr.io/kirbydesign/designsystem:git${{ steps.vars.outputs.sha_short }}
+  deploy_to_cookbook:
+    needs: build_kirby
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [10.16]
+    steps:
+      - uses: actions/checkout@v2
+        if: matrix
+      - name: Setting up vars
+        shell: bash
+        run: |
+          echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+          echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"          
+      
+      - name: Deploy to cookbook
+      - env:
+          NODE_OPTIONS: '--max_old_space_size=3072'
+      - run: npm ci
+      - run: openssl version
+      - run: npm dist
+        if: success()
+      - run: echo Starting docker build with target ../designsystem:git${{ steps.vars.outputs.sha_short }}
+      #- run: docker build -t drbstaging.azurecr.io/kirbydesign/designsystem:git${{ steps.vars.outputs.sha_short }}
       
                 
           
