@@ -25,26 +25,34 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+      name: Install dependencies
       - run: pip install six
       - run: npm ci
+      name: execute ...
       - run: npm run lint
       - run: npm run extract-scss-variables
       - run: npm run test:ci
       - run: npm run coverage-report || true
   
-#  build_kirby:
-#    runs-on: ubuntu-latest
-#    strategy:
-#      matrix:
-#        node-version: [10.16]
-#    steps:
-#    - uses: actions/checkout@v2
-#    - name: Use Node.js ${{ matrix.node-version }}
-#      uses: actions/setup-node@v1
-#      with:
-#        node-version: ${{ matrix.node-version }}
-#    - run: npm ci
-#    - run: npm run build --if-present
-#    - run: npm test
+  build_kirby:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [10.16]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        always-auth: true
+        registry-url: https://registry.npmjs.org
+        node-version: ${{ matrix.node-version }}
+    - name: Install dependencies
+    - run: pip install six
+    - run: npm ci
+      env:
+        NODE_AUTH_TOKEN: $ {{ NPM_AUTH_TOKEN }}
+    - name: execute ...
+#      run: npm run dist:designsystem
 
 
