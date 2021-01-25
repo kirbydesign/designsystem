@@ -25,10 +25,8 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Install dependencies
       - run: pip install six
       - run: npm ci
-      - name: Execute ...
       - run: npm run lint
       - run: npm run extract-scss-variables
       - run: npm run test:ci
