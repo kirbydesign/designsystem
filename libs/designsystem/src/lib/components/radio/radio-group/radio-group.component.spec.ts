@@ -161,6 +161,10 @@ describe('RadioGroupComponent', () => {
                 expect(radioChecked(2)).toBeFalse();
               });
 
+              it('should have selected index corresponding to the selected data item', () => {
+                expect(spectator.component.selectedIndex).toBe(defaultSelectedIndex);
+              });
+
               it('should set the value to the corresponding data item when clicking a radio item', () => {
                 spectator.click(ionRadioElements[0]);
                 expect(spectator.component.value).toEqual(dataScenario.items[0]);
