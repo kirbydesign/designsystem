@@ -1,7 +1,7 @@
 import {
-  AfterViewInit,
   Component,
-  ElementRef, EventEmitter,
+  ElementRef,
+  EventEmitter,
   forwardRef,
   Input,
   NgZone,
