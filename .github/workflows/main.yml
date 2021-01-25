@@ -78,6 +78,7 @@ jobs:
       - run: npm run dist:designsystem
 
   deploy_to_cookbook:
+    needs: [build_kirby]
     runs-on: ubuntu-latest
     strategy:
       matrix:
