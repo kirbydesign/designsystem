@@ -78,14 +78,26 @@ jobs:
       - run: npm run dist:designsystem
 
   deploy_to_cookbook:
-    needs: build_kirby
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [10.16]
     steps:
-      - name: Deploy to cookbook
       - uses: actions/checkout@v2
+
+      - name: Cache modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      - name: Deploy to cookbook
       - env:
           NODE_OPTIONS: '--max_old_space_size=3072'
       - run: npm ci
