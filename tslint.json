@@ -13,7 +13,21 @@
     // https://hackernoon.com/custom-tslint-rules-easier-than-you-think-1bd9c361d70c
     "disallow-http-client-module-import-in-specs": true,
     "disallow-specific-environment-import": true,
-    "import-line-spacing": true,
+
+    "ordered-imports": {
+      "severity": "warning",
+      "options": [
+        {
+          "grouped-imports": true,
+          "groups": [
+            { "name": "kirby lib", "match": "^@kirbydesign", "order": 20 },
+            { "name": "parent directories", "match": "^\\.\\.", "order": 30 },
+            { "name": "current directory", "match": "^\\.", "order": 40 },
+            { "name": "3rd party libs", "match": ".*", "order": 10 }
+          ]
+        }
+      ]
+    },
 
     // Codelyzer rules:
     "no-output-on-prefix": true,
