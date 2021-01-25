@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { DatePatterns } from './date.patterns';
 import { DateLocaleAnalyser } from './date-locale-analyser';
+import { DatePatterns } from './date.patterns';
 
 @Injectable({
   providedIn: 'root',
@@ -12,17 +12,14 @@ export class DateInputAnalyzer {
   constructor(private localeConfig: DateLocaleAnalyser) {
     DatePatterns.buildPatterns(this.localeConfig);
     this.maxLength = 10;
-    this.digitsPattern = new RegExp('[0-9' + this.localeConfig.separator + ']+$', 'g');
     this.excludedPattern = new RegExp('[^0-9' + this.localeConfig.separator + ']+', 'g');
   }
 
   public cursorPosition: number;
 
   private excludedPattern: RegExp;
-  private digitsPattern: RegExp;
-
   private lastValue = '';
-  private currentValue = '';
+
   private allowedCharsOnly: boolean;
   private maxLength: number;
 
@@ -42,7 +39,6 @@ export class DateInputAnalyzer {
   }
 
   private resetAndCapture(value: string): string {
-    this.currentValue = value;
     this.allowedCharsOnly = true;
     return value;
   }
@@ -94,26 +90,6 @@ export class DateInputAnalyzer {
     if (lengthBeforeFormatting === formattedValLength - 1) {
       this.cursorPosition = this.cursorPosition + 1;
     }
-  }
-
-  private testPattern(value: string): string {
-    if (DatePatterns.validationPattern1.test(value)) {
-      return value;
-    }
-    if (DatePatterns.validationPattern4.test(value)) {
-      return this.addMissingSeparator(value);
-    }
-    if (DatePatterns.validationPattern5.test(value)) {
-      return value;
-    }
-    if (DatePatterns.validationPattern6.test(value)) {
-      return this.addMissingSeparator(value);
-    }
-    const testValue = value.padEnd(this.maxLength, '0');
-    if (DatePatterns.validationPattern.test(testValue)) {
-      return value;
-    }
-    return undefined;
   }
 
   private validateAndTransformResult(value: string): string {

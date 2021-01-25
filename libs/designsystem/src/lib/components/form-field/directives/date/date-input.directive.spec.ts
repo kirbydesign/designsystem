@@ -1,15 +1,12 @@
+import { DatePipe } from '@angular/common';
 import { LOCALE_ID } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { createDirectiveFactory, SpectatorDirective } from '@ngneat/spectator';
-import { DatePipe } from '@angular/common';
 
 import { DateInputDirective } from './date-input.directive';
 
 describe('Directive: DateInputDirective', () => {
-  [
-    //    { id: 'da', separators: { sep: '.' } },
-    { id: 'en', separators: { sep: '/' } },
-  ].forEach((locale) => {
+  [{ id: 'en', separators: { sep: '/' } }].forEach((locale) => {
     describe(`locale: ${locale.id}`, () => {
       const createHost = createDirectiveFactory({
         directive: DateInputDirective,

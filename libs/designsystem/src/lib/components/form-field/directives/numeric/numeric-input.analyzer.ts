@@ -10,10 +10,7 @@ type Config = {
 };
 
 export class NumericInputAnalyzer {
-  private digitsPattern = /^[0-9]+$/g;
-  private allowedPattern = /^[0-9.,]+$/g;
   private excludedPattern = /[^0-9.,]+/g;
-  private separatorPattern = /[.,]+/g;
 
   private groupingSeparator: string;
   private decimalSeparator: string;
@@ -271,25 +268,11 @@ export class NumericInputAnalyzer {
   }
 
   private countDecimalSeparator(value: string): number {
-    let counter = 0;
-    // tslint:disable-next-line:prefer-for-of
-    for (let i = 0; i < value.length; i++) {
-      if (value[i] === this.decimalSeparator) {
-        counter++;
-      }
-    }
-    return counter;
+    return value.split(this.decimalSeparator).length - 1;
   }
 
   private countGroupingSeparator(value: string): number {
-    let counter = 0;
-    // tslint:disable-next-line:prefer-for-of
-    for (let i = 0; i < value.length; i++) {
-      if (value[i] === this.groupingSeparator) {
-        counter++;
-      }
-    }
-    return counter;
+    return value.split(this.groupingSeparator).length - 1;
   }
 
   private requiresDecimalSupport(): boolean {

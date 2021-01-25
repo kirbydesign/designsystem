@@ -6,10 +6,7 @@ import { createDirectiveFactory, SpectatorDirective } from '@ngneat/spectator';
 import { NumericInputDirective } from './numeric-input.directive';
 
 describe('Directive: NumericInputDirective', () => {
-  [
-    //    { id: 'da', separators: { group: '.', decimal: ',' } },
-    { id: 'en', separators: { group: ',', decimal: '.' } },
-  ].forEach((locale) => {
+  [{ id: 'en', separators: { group: ',', decimal: '.' } }].forEach((locale) => {
     describe(`locale: ${locale.id}`, () => {
       const createHost = createDirectiveFactory({
         directive: NumericInputDirective,
@@ -17,7 +14,6 @@ describe('Directive: NumericInputDirective', () => {
         imports: [FormsModule, ReactiveFormsModule],
         providers: [
           DecimalPipe,
-          CurrencyPipe,
           {
             provide: LOCALE_ID,
             useValue: locale.id,

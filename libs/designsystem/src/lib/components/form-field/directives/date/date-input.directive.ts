@@ -1,8 +1,8 @@
+import { DatePipe } from '@angular/common';
 import { Directive, ElementRef, OnDestroy, OnInit, Self } from '@angular/core';
 import { NgControl } from '@angular/forms';
-import { map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { DatePipe } from '@angular/common';
+import { map, takeUntil } from 'rxjs/operators';
 
 import { DateInputAnalyzer } from './date-input.analyzer';
 /**
@@ -39,7 +39,7 @@ export class DateInputDirective implements OnInit, OnDestroy {
   private lastValue = '';
   private cursorPosition = -1;
 
-  ngOnInit(): any {
+  ngOnInit(): void {
     // @ts-ignore
     this.ngControl.valueChanges
       .pipe(
@@ -66,7 +66,7 @@ export class DateInputDirective implements OnInit, OnDestroy {
     this.hostElement.nativeElement.selectionStart = this.cursorPosition;
   }
   private updateValue(value: string): void {
-    if (value === undefined || value === null) {
+    if (!value) {
       return;
     }
     this.ngControl.control.setValue(value, {
