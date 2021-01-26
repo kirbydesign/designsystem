@@ -16,4 +16,4 @@ jobs:
       - name: generate release name for brances
         if: ${{ github.ref != 'refs/heads/master' }}
         run:  echo "RELEASE_NAME=${GITHUB_REF##*/}"
-      
+        
