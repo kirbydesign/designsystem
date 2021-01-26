@@ -1,4 +1,5 @@
-import { CurrencyPipe, DecimalPipe } from '@angular/common';
+import { DecimalPipe } from '@angular/common';
+import '@angular/common/locales/global/da';
 import { LOCALE_ID } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { createDirectiveFactory, SpectatorDirective } from '@ngneat/spectator';
@@ -6,11 +7,14 @@ import { createDirectiveFactory, SpectatorDirective } from '@ngneat/spectator';
 import { NumericInputDirective } from './numeric-input.directive';
 
 describe('Directive: NumericInputDirective', () => {
-  [{ id: 'en', separators: { group: ',', decimal: '.' } }].forEach((locale) => {
+  [
+    { id: 'en', separators: { group: ',', decimal: '.' } },
+    { id: 'da', separators: { group: '.', decimal: ',' } },
+  ].forEach((locale) => {
     describe(`locale: ${locale.id}`, () => {
       const createHost = createDirectiveFactory({
         directive: NumericInputDirective,
-        declarations: [NumericInputDirective, DecimalPipe, CurrencyPipe],
+        declarations: [NumericInputDirective, DecimalPipe],
         imports: [FormsModule, ReactiveFormsModule],
         providers: [
           DecimalPipe,

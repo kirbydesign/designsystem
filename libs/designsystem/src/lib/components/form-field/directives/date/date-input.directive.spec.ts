@@ -1,12 +1,17 @@
 import { DatePipe } from '@angular/common';
+import '@angular/common/locales/global/da';
 import { LOCALE_ID } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { createDirectiveFactory, SpectatorDirective } from '@ngneat/spectator';
 
 import { DateInputDirective } from './date-input.directive';
+import { DateLocaleAnalyser } from './date-locale-analyser';
 
 describe('Directive: DateInputDirective', () => {
-  [{ id: 'en', separators: { sep: '/' } }].forEach((locale) => {
+  [
+    { id: 'en', separators: { sep: '/' } },
+    { id: 'da', separators: { sep: '.' } },
+  ].forEach((locale) => {
     describe(`locale: ${locale.id}`, () => {
       const createHost = createDirectiveFactory({
         directive: DateInputDirective,
@@ -40,24 +45,38 @@ describe('Directive: DateInputDirective', () => {
       });
       describe('dates separator', () => {
         it('should add separator and set changed value in formControl', () => {
-          const val = month + day + year;
+          const localeSettings: DateLocaleAnalyser = new DateLocaleAnalyser(locale.id);
+          let expectedValue = '';
+          if (localeSettings.dayBeforeMonth) {
+            expectedValue = `${day}${sep}${month}${sep}${year}`;
+          } else {
+            expectedValue = `${month}${sep}${day}${sep}${year}`;
+          }
+          const val = DateFormatHelper.getDate(locale.id, day, month, year);
           testFormControl.setValue(val);
           spectatorDirective.detectChanges();
-
-          const expectedValue = `${month}${sep}${day}${sep}${year}`;
           expect((spectatorDirective.element as HTMLInputElement).value).toBe(expectedValue);
         });
 
         it('should remove leading "0"s in input', () => {
-          const val = '00' + day + year;
+          const localeSettings: DateLocaleAnalyser = new DateLocaleAnalyser(locale.id);
+          let val = '';
+          let expectedValue = '';
+          if (localeSettings.dayBeforeMonth) {
+            val = '00' + month + year;
+            expectedValue = `01${sep}${month}${sep}${year}`;
+          } else {
+            val = '00' + day + year;
+            expectedValue = `01${sep}${day}${sep}${year}`;
+          }
+
           testFormControl.setValue(val);
           spectatorDirective.detectChanges();
-          const expectedValue = `01${sep}${day}${sep}${year}`;
           expect((spectatorDirective.element as HTMLInputElement).value).toBe(expectedValue);
         });
 
         it('should remove dates out of range in input', () => {
-          const val = '32' + '32' + year;
+          const val = DateFormatHelper.getDate(locale.id, '32', '32', year);
           testFormControl.setValue(val);
           spectatorDirective.detectChanges();
           const expectedValue = `01${sep}01${sep}${year}`;
@@ -103,3 +122,14 @@ describe('Directive: DateInputDirective', () => {
     });
   });
 });
+
+class DateFormatHelper {
+  public static getDate(locale: string, d: string, m: string, y: string): string {
+    const localeSettings: DateLocaleAnalyser = new DateLocaleAnalyser(locale);
+    if (localeSettings.dayBeforeMonth) {
+      return d + m + y;
+    } else {
+      return m + d + y;
+    }
+  }
+}

@@ -85,6 +85,7 @@
     "@angular/core": "^9.1.0",
     "@angular/fire": "5.2.1",
     "@angular/forms": "^9.1.0",
+    "@angular/localize": "^9.1.13",
     "@angular/platform-browser": "^9.1.0",
     "@angular/platform-browser-dynamic": "^9.1.0",
     "@angular/router": "^9.1.0",
