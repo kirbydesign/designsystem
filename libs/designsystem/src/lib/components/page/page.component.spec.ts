@@ -135,6 +135,8 @@ describe('PageComponent', () => {
     spectator.setInput('tabBarBottomHidden', true);
     tick();
     expect(tabBar.tabBarBottomHidden).toBe(true);
+    // needed for setting up navigation subscriptions in ngAfterViewInit
+    spectator.detectChanges();
 
     triggerOnLeave(router);
 
@@ -142,30 +144,37 @@ describe('PageComponent', () => {
     flush();
   }));
 
-  describe('onEnter', () => {
-    it('should trigger onEnter when navigating to url', async () => {
-      const enterEmitSpy = spyOn(spectator.component.enter, 'emit');
+  describe('on navigation', () => {
+    beforeEach(() => {
+      // needed for setting up navigation subscriptions in ngAfterViewInit
       spectator.detectChanges();
+    });
 
-      await zone.run(() => router.navigate(['']));
+    describe('onEnter', () => {
+      it('should trigger onEnter when navigating to url', async () => {
+        const enterEmitSpy = spyOn(spectator.component.enter, 'emit');
 
-      expect(enterEmitSpy).toHaveBeenCalledTimes(1);
+        await triggerOnEnter(zone, router);
+
+        expect(enterEmitSpy).toHaveBeenCalledTimes(1);
+      });
+    });
+
+    describe('onLeave', () => {
+      it('should trigger onLeave when navigating to another url', async () => {
+        const leaveEmitSpy = spyOn(spectator.component.leave, 'emit');
+
+        triggerOnLeave(router);
+
+        expect(leaveEmitSpy).toHaveBeenCalledTimes(1);
+      });
     });
   });
 
-  describe('onLeave', () => {
-    it('should trigger onLeave when navigating to another url', async () => {
-      const leaveEmitSpy = spyOn(spectator.component.leave, 'emit');
-
-      triggerOnLeave(router);
-
-      expect(leaveEmitSpy).toHaveBeenCalledTimes(1);
-    });
-  });
-
+  async function triggerOnEnter(zone: NgZone, router: SpyObject<Router>) {
+    await zone.run(() => router.navigate(['']));
+  }
   async function triggerOnLeave(router: SpyObject<Router>) {
-    // needed for setting up navigation subscriptions in ngAfterViewInit
-    spectator.detectChanges();
     await zone.run(() => router.navigate(['someUrl']));
   }
 });
