@@ -70,7 +70,7 @@ describe('TabsComponent', () => {
 
     describe('on screensize large', () => {
       beforeEach(async () => {
-        await TestHelper.resizeTestWindow({ width: '1200px', height: '900px' });
+        await TestHelper.resizeTestWindow(TestHelper.screensize.desktop);
       });
 
       describe('tabBarBottomHidden: true', () => {

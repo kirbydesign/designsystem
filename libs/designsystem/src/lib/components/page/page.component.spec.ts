@@ -164,6 +164,7 @@ describe('PageComponent', () => {
   });
 
   async function triggerOnLeave(router: SpyObject<Router>) {
+    // needed for setting up navigation subscriptions in ngAfterViewInit
     spectator.detectChanges();
     await zone.run(() => router.navigate(['someUrl']));
   }
