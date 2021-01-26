@@ -10,12 +10,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: branch name modifications
-        env:
-          FEATURE: 'feature'
-          NAME: ${{GITHUB_REF}}
-        if: ${{ github.ref != 'refs/heads/master' }}
         run: |
-          echo "RELEASE_NAME=$GITHUB_REF##*/" >> @GITHUB_ENV
-          echo bname ${{env.NAME}}
+          echo "RELEASE_NAME=${GITHUB_REF##*/}" >> @GITHUB_ENV
+      - name: print
+          echo branch is ${{ env.NAME }}
         
   
