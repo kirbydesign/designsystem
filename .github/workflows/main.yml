@@ -9,44 +9,44 @@ defaults:
     shell: bash
 
 jobs:
-  #  lint_and_unittest:
-  #    runs-on: ubuntu-latest
-  #    strategy:
-  #      matrix:
-  #        node-version: [10.16]
-  #    steps:
-  #      - uses: actions/checkout@v2
-  #      - name: Use Node.js ${{ matrix.node-version }}
-  #        uses: actions/setup-node@v1
-  #        with:
-  #          node-version: ${{ matrix.node-version }}
-  #      - run: echo Event ${{ github.event.type }}
-  #      - run: pip install six
-  #      - run: npm ci
-  #      - run: npm run lint
-  #      - run: npm run extract-scss-variables
-  #      - run: npm run test:ci
-  #      - run: npm run coverage-report || true
-  #  build_kirby:
-  #    runs-on: ubuntu-latest
-  #    strategy:
-  #      matrix:
-  #        node-version: [10.16]
-  #    steps:
-  #      - uses: actions/checkout@v2
-  #      - name: Use Node.js ${{ matrix.node-version }}
-  #        uses: actions/setup-node@v1
-  #        with:
-  #          always-auth: true
-  #          registry-url: https://registry.npmjs.org
-  #          node-version: ${{ matrix.node-version }}
-  #        env:
-  #          NODE_AUTH_TOKEN: $ {{ NPM_AUTH_TOKEN }}
-  #      - run: pip install six
-  #      - run: npm ci
-  #      - run: npm run dist:designsystem
+  lint_and_unittest:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [10.16]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: echo Event ${{ github.event.type }}
+      - run: pip install six
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run extract-scss-variables
+      - run: npm run test:ci
+      - run: npm run coverage-report || true
+  build_kirby:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [10.16]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          always-auth: true
+          registry-url: https://registry.npmjs.org
+          node-version: ${{ matrix.node-version }}
+        env:
+          NODE_AUTH_TOKEN: $ {{ NPM_AUTH_TOKEN }}
+      - run: pip install six
+      - run: npm ci
+      - run: npm run dist:designsystem
   deploy_to_cookbook:
-    #    needs: [lint_and_unittest, build_kirby]
+    needs: [lint_and_unittest, build_kirby]
     runs-on: ubuntu-latest
     #    if: ${{ github.event_name != 'pull_request' }}
     strategy:
@@ -60,14 +60,14 @@ jobs:
           node-version: ${{ matrix.node-version }}
         env:
           NODE_OPTIONS: '--max_old_space_size=3072'
-#      - run: npm ci
-#      - run: openssl version
-#      - run: sh ./install-kube-tools.sh
-#      - run: npm run dist
-#      - run: docker build -t drbstaging.azurecr.io/kirbydesign/designsystem:git${{ github.sha }} .
+      - run: npm ci
+      - run: openssl version
+      - run: sh ./.scripts/install-kube-tools.sh
+      - run: npm run dist
+      - run: docker build -t drbstaging.azurecr.io/kirbydesign/designsystem:git${{ github.sha }} .
       - name: handle branch
         if: ${{ github.ref != 'refs/heads/master' }}
-        run: echo "B"
+        run: sh ./.scripts/deploy-helm-branch.sh drbstaging.azurecr.io/kirbydesign/designsystem config/helm/branch.yaml
       - name: handle master
         if: ${{ github.ref == 'refs/heads/master' }}
-        run: echo "M"
+        run: sh ./.scripts/deploy-helm.sh drbstaging.azurecr.io/kirbydesign/designsystem git${{ github.sha }} designsystem cookbook config/helm/staging.yaml kirby.design
