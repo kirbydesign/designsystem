@@ -60,10 +60,8 @@ jobs:
           node-version: ${{ matrix.node-version }}
         env:
           NODE_OPTIONS: '--max_old_space_size=3072'
-      - run: |
-          npm ci
-          openssl version
-          install-kube-tools.sh
-          echo "${{ secrets.NPM_PUBLISH_TOKEN }}"
-      - run: npm run dist
-      - run: docker build -t drbstaging.azurecr.io/kirbydesign/designsystem:git${{ github.sha }} .
+      - run: npm ci
+      - run: openssl version
+      - run: install-kube-tools.sh
+#      - run: npm run dist
+#      - run: docker build -t drbstaging.azurecr.io/kirbydesign/designsystem:git${{ github.sha }} .
