@@ -62,6 +62,6 @@ jobs:
           NODE_OPTIONS: '--max_old_space_size=3072'
       - run: npm ci
       - run: openssl version
-      - run: install-kube-tools.sh
+      - run: ./install-kube-tools.sh
 #      - run: npm run dist
 #      - run: docker build -t drbstaging.azurecr.io/kirbydesign/designsystem:git${{ github.sha }} .
