@@ -21,13 +21,6 @@ ion-tabs {
     &.bottom-hidden {
       display: none;
     }
-
-    @include media('>=large') {
-      @include not-touch {
-        margin: 0 auto;
-        justify-content: flex-end;
-      }
-    }
   }
 
   // move tabs to top of screen if not touch and large device
@@ -38,8 +31,13 @@ ion-tabs {
       --kirby-page-footer-safe-area-bottom: initial;
 
       // Ensure tabs are not hidden when displayed at top of screen:
-      ion-tab-bar.bottom-hidden {
-        display: flex;
+      ion-tab-bar {
+        margin: 0 auto;
+        justify-content: flex-end;
+
+        &.bottom-hidden {
+          display: flex;
+        }
       }
     }
   }
