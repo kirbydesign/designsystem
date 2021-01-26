@@ -34,11 +34,13 @@ describe('TabsComponent', () => {
           spectator.component.tabBarBottomHidden = true;
           spectator.detectChanges();
         });
-        it('should hide tab bar when tabBarBottomHidden', async () => {
+
+        it('should hide tab bar', async () => {
           const ionTabBarElm = spectator.query('ion-tab-bar');
           expect(ionTabBarElm).toHaveComputedStyle({ display: 'none' });
         });
-        it('should NOT set page footer safe area override if tab bar bottom is hidden', async () => {
+
+        it('should NOT set page footer safe area override', async () => {
           const ionTabBarElm = spectator.query('ion-tab-bar');
           expect(ionTabBarElm).toHaveComputedStyle({
             '--kirby-page-footer-safe-area-bottom': '',
@@ -51,11 +53,13 @@ describe('TabsComponent', () => {
           spectator.component.tabBarBottomHidden = false;
           spectator.detectChanges();
         });
+
         it('should show tab bar', () => {
           const ionTabBarElm = spectator.query('ion-tab-bar');
           expect(ionTabBarElm).not.toHaveComputedStyle({ display: 'none' });
         });
-        it('should set footer safe area to 0 when tab bar is shown and in bottom', () => {
+
+        it('should set footer safe area to 0', () => {
           const ionTabBarElm = spectator.query('ion-tab-bar');
           expect(ionTabBarElm).toHaveComputedStyle({
             '--kirby-page-footer-safe-area-bottom': '0px',
@@ -73,18 +77,18 @@ describe('TabsComponent', () => {
         it('should NOT hide tab bar when tabBarBottomHidden', async () => {
           spectator.component.tabBarBottomHidden = true;
           spectator.detectChanges();
-          const ionTabBarElm = spectator.query('ion-tab-bar');
 
+          const ionTabBarElm = spectator.query('ion-tab-bar');
           expect(ionTabBarElm).not.toHaveComputedStyle({ display: 'none' });
         });
       });
 
       describe('tabBarBottomHidden: false', () => {
-        it('should not set footer safe area', async () => {
+        it('should NOT set page footer safe area override', async () => {
           spectator.component.tabBarBottomHidden = false;
           spectator.detectChanges();
 
-          const ionTabBarElm = spectator.query('ion-tabs');
+          const ionTabBarElm = spectator.query('ion-tab-bar');
           expect(ionTabBarElm).toHaveComputedStyle({
             '--kirby-page-footer-safe-area-bottom': '',
           });

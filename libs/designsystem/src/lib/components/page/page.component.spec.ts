@@ -146,22 +146,13 @@ describe('PageComponent', () => {
     it('should trigger onEnter when navigating to url', async () => {
       const enterEmitSpy = spyOn(spectator.component.enter, 'emit');
 
-      await zone.run(() => router.navigate(['']));
-      spectator.detectChanges();
-
-      expect(enterEmitSpy).toHaveBeenCalledTimes(1);
-    });
-    it('should trigger onEnter once when navigating to same twice url', async () => {
-      const enterEmitSpy = spyOn(spectator.component.enter, 'emit');
-
-      await zone.run(() => router.navigate(['']));
       spectator.detectChanges();
       await zone.run(() => router.navigate(['']));
-      spectator.detectChanges();
 
       expect(enterEmitSpy).toHaveBeenCalledTimes(1);
     });
   });
+
   describe('onLeave', () => {
     it('should trigger onLeave when navigating to another url', async () => {
       const leaveEmitSpy = spyOn(spectator.component.leave, 'emit');
@@ -171,9 +162,9 @@ describe('PageComponent', () => {
       expect(leaveEmitSpy).toHaveBeenCalledTimes(1);
     });
   });
+
   async function triggerOnLeave(router: SpyObject<Router>) {
     spectator.detectChanges();
     await zone.run(() => router.navigate(['someUrl']));
-    spectator.detectChanges();
   }
 });

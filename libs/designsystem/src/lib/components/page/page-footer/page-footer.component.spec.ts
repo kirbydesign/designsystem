@@ -28,6 +28,7 @@ describe('PageFooterComponent', () => {
 
       expect(pageComponent.tabBarBottomHidden).toBe(false);
     });
+
     it('should remove host element', () => {
       expect(spectator.element.parentElement).not.toBeNull();
 
@@ -42,7 +43,6 @@ describe('PageFooterComponent', () => {
   describe('ngOnDestroy', () => {
     it('should show tabs', () => {
       pageComponent.tabBarBottomHidden = true;
-      expect(pageComponent.tabBarBottomHidden).toBe(true);
 
       spectator.component.ngOnDestroy();
 
