@@ -10,9 +10,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: branch name modifications
+        env:
+          RELEASE_NAME: ''
+          FEATURE: 'feature'
         run: |
           echo "RELEASE_NAME=${GITHUB_REF##*/}"
-          echo "RELEASE_NAME=${RELEASE_NAME//$feature\//}"
+          echo "RELEASE_NAME=${RELEASE_NAME//$FEATURE\//}"
           echo "RELEASE_NAME=${RELEASE_NAME#?}"
           echo "RELEASE_NAME=${RELEASE_NAME#?}"
           echo "RELEASE_NAME="$GIT_REPO-${RELEASE_NAME//[^a-zA-Z0-9]/-}"
