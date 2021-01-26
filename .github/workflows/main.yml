@@ -47,7 +47,7 @@ jobs:
 
   deploy_to_cookbook:
     runs-on: ubuntu-latest
-    if: ${{ github.event_name != 'pull_request' }}
+#    if: ${{ github.event_name != 'pull_request' }}
     strategy:
       matrix:
         node-version: [10.16]
@@ -56,14 +56,12 @@ jobs:
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
-          always-auth: true
-          registry-url: https://registry.npmjs.org
           node-version: ${{ matrix.node-version }}
         env:
-          NODE_AUTH_TOKEN: $ {{ NPM_AUTH_TOKEN }}
-#      - run: pip install six
-#      - run: npm ci
-      - run: echo "This is the event ${{ github.base_ref }}
-      - run: echo "This is the sha ${{ github.sha }}
-      - run: echo "This is the ref ${{ github.ref }}
+          NODE_OPTIONS: '--max_old_space_size=3072'
+      - run: npm ci
+      - run: npm dist
+      - run: echo "Docker build to drbstaging.azurecr.io/kirbydesign/designsystem:git${{ github.sha }}"   
+      - run: docker build -t drbstaging.azurecr.io/kirbydesign/designsystem:git${{ github.sha }}
+        
       
