@@ -64,7 +64,7 @@ describe('TabsComponent', () => {
       });
     });
 
-    describe('screensize large', () => {
+    describe('on screensize large', () => {
       beforeEach(async () => {
         await TestHelper.resizeTestWindow({ width: '1200px', height: '900px' });
       });
