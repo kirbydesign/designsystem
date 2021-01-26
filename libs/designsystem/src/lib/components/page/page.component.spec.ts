@@ -145,8 +145,8 @@ describe('PageComponent', () => {
   describe('onEnter', () => {
     it('should trigger onEnter when navigating to url', async () => {
       const enterEmitSpy = spyOn(spectator.component.enter, 'emit');
-
       spectator.detectChanges();
+
       await zone.run(() => router.navigate(['']));
 
       expect(enterEmitSpy).toHaveBeenCalledTimes(1);
