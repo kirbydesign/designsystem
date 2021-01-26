@@ -9,7 +9,7 @@ jobs:
     steps:
       - name: get branch name
         run: |
-          echo "${GITHUB_REF##*/}
+          echo "${GITHUB_REF##*/}"
           echo "GIT_BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
           echo "GIT_BRANCH=${GIT_BRANCH//feature\//}" >> $GITHUB_ENV
       - name: Use environment variables
