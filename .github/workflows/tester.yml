@@ -16,6 +16,6 @@ jobs:
         if: ${{ github.ref != 'refs/heads/master' }}
         run: |
           echo "RELEASE_NAME=$GITHUB_REF##*/" >> @GITHUB_ENV
-          echo bname env.RELEASE_NAME
+          echo bname ${{env.RELEASE_NAME}}
         
   
