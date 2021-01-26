@@ -1,0 +1,14 @@
+name: CI-test
+
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: branch name
+        run: echo running on branch ${GITHUB_REF##*/}
+
