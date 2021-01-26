@@ -15,7 +15,7 @@ jobs:
       - name: print env
         run: echo branch is ${{ env.RELEASE_NAME }}
       - name: print direct
-        run: echo branch is $RELEASE_NAME
+        run: echo branch is ${RELEASE_NAME}
       - name: src
         run: echo ${GITHUB_REF##*/}
   
