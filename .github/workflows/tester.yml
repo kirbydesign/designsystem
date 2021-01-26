@@ -15,7 +15,7 @@ jobs:
           FEATURE: 'feature'
         run: |
           echo "RELEASE_NAME=${GITHUB_REF##*/}"
-          echo "RELEASE_NAME=$RELEASE_NAME//$feature\//"
+          echo "RELEASE_NAME=$RELEASE_NAME//$FEATURE\//"
           echo "RELEASE_NAME=$RELEASE_NAME#?"
           echo "RELEASE_NAME="$GIT_REPO-$RELEASE_NAME//[^a-zA-Z0-9]/-"
           echo "RELEASE_NAME=$(tr [A-Z] [a-z] <<< $RELEASE_NAME)"
