@@ -13,7 +13,7 @@ jobs:
         run: |
           echo "RELEASE_NAME=${GITHUB_REF##*/}" >> @GITHUB_ENV
       - name: print
-        run: echo branch is ${{ env.NAME }}
+        run: echo branch is ${{ env.RELEASE_NAME }}
       - name: src
         run: echo ${GITHUB_REF##*/}
   
