@@ -11,7 +11,6 @@ jobs:
       - uses: actions/checkout@v2
       - name: branch name modifications
         env:
-          RELEASE_NAME: ''
           FEATURE: 'feature'
         if: ${{ github.ref != 'refs/heads/master' }}
         run: |
