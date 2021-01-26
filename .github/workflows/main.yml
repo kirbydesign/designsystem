@@ -7,7 +7,7 @@ on:
 defaults:
   run:
     shell: bash
-    working-directory: .scripts
+
 jobs:
   #  lint_and_unittest:
   #    runs-on: ubuntu-latest
@@ -60,11 +60,11 @@ jobs:
           node-version: ${{ matrix.node-version }}
         env:
           NODE_OPTIONS: '--max_old_space_size=3072'
-      - run: npm ci
-      - run: openssl version
-      - run: sh ./install-kube-tools.sh
-      - run: npm run dist
-      - run: docker build -t drbstaging.azurecr.io/kirbydesign/designsystem:git${{ github.sha }} .
+#      - run: npm ci
+#      - run: openssl version
+#      - run: sh ./install-kube-tools.sh
+#      - run: npm run dist
+#      - run: docker build -t drbstaging.azurecr.io/kirbydesign/designsystem:git${{ github.sha }} .
       - run: echo "Ref ${{ github.ref }}"
         if: github.ref == 'refs/heads/master'
       - run: echo "This is master"
