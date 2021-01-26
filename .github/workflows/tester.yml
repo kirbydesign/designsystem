@@ -7,11 +7,9 @@ jobs:
   set-env:
     runs-on: ubuntu-latest
     steps:
-      - name: Set environment variables
+      - name: get branch name
         run: |
-          echo "GIT_SHA=${GITHUB_SHA}" >> $GITHUB_ENV
           echo "GIT_BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
+          echo "GIT_BRANCH=${GIT_BRANCH}//$feature\//" >> $GITHUB_ENV
       - name: Use environment variables
-        run: |
-          echo "GIT_SHA=${GIT_SHA}"
-          echo "GIT_BRANCH=${GIT_BRANCH}"
+        run: echo "GIT_BRANCH=${GIT_BRANCH}"
