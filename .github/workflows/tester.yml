@@ -9,10 +9,7 @@ jobs:
     steps:
       - name: get branch name
         run: |
-          echo "${GITHUB_REF##*/}"
           gref="${GITHUB_REF##*/}"
           echo $gref
-          ref="${github_ref////-}"
+          ref="${gref//test//-}"
           echo $ref
-      - name: Use environment variables
-        run: echo "GIT_BRANCH=${GIT_BRANCH}"
