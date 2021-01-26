@@ -12,7 +12,7 @@ jobs:
       - name: branch name modifications
         env:
           FEATURE: 'feature'
-          NAME: ${{GITHUB_REF##*/}}
+          NAME: ${{GITHUB_REF}}
         if: ${{ github.ref != 'refs/heads/master' }}
         run: |
           echo "RELEASE_NAME=$GITHUB_REF##*/" >> @GITHUB_ENV
