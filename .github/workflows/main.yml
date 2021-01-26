@@ -60,13 +60,25 @@ jobs:
           node-version: ${{ matrix.node-version }}
         env:
           NODE_OPTIONS: '--max_old_space_size=3072'
+      - name: install
       - run: npm ci
-      - run: sh ./.scripts/install-kube-tools.sh
+      - run: |
+          sudo apt-get update
+          sudo apt-get install -y apt-transport-https
+          curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+          echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+          sudo apt-get update
+          sudo apt-get install -y kubectl
+      - run: |
+          curl https://storage.googleapis.com/kubernetes-helm/helm-v2.12.3-linux-amd64.tar.gz -o helm-linux-amd64.tar.gz
+          tar xzf helm-linux-amd64.tar.gz
+          sudo cp linux-amd64/helm /usr/bin/
+          rm -rf linux-amd64
       - run: npm run dist
       - run: docker build -t drbstaging.azurecr.io/kirbydesign/designsystem:git${{ github.sha }} .
       - name: handle branches
         if: ${{ github.ref != 'refs/heads/master' }}
-        run: sh ./.scripts/deploy-helm-branch.sh drbstaging.azurecr.io/kirbydesign/designsystem config/helm/branch.yaml
+
       - name: handle master
         if: ${{ github.ref == 'refs/heads/master' }}
-        run: sh ./.scripts/deploy-helm.sh drbstaging.azurecr.io/kirbydesign/designsystem git${{ github.sha }} designsystem cookbook config/helm/staging.yaml kirby.design
+
