@@ -4,18 +4,14 @@ on:
   push:
 
 jobs:
-  build:
+  set-env:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v2
-      - name: branch name modifications
+      - name: Set environment variables
         run: |
-          echo "RELEASE_NAME=${GITHUB_REF##*/}" >> @GITHUB_ENV
-      - name: print env
-        run: echo branch is ${{ env.RELEASE_NAME }}
-      - name: print direct
-        run: echo branch is ${RELEASE_NAME}
-      - name: src
-        run: echo ${GITHUB_REF##*/}
-  
+          echo "GIT_SHA=${GITHUB_SHA}" >> $GITHUB_ENV
+          echo "GIT_BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
+      - name: Use environment variables
+        run: |
+          echo "GIT_SHA=${GIT_SHA}"
+          echo "GIT_BRANCH=${GIT_BRANCH}"
