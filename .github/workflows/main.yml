@@ -61,11 +61,13 @@ jobs:
         env:
           NODE_OPTIONS: '--max_old_space_size=3072'
       - name: Setup environment
-      - run: npm ci
-      - run: sh ./.scripts/install-kube-tools.sh
+      - run: |
+          npm ci
+          sh ./.scripts/install-kube-tools.sh
       - name: Run dist and tag
-      - run: npm run dist
-      - run: docker build -t drbstaging.azurecr.io/kirbydesign/designsystem:git${{ github.sha }} .
+        run: |
+          npm run dist
+          docker build -t drbstaging.azurecr.io/kirbydesign/designsystem:git${{ github.sha }} .
       - name: handle branches
         if: ${{ github.ref != 'refs/heads/master' }}
         run: sh ./.scripts/deploy-helm-branch.sh drbstaging.azurecr.io/kirbydesign/designsystem config/helm/branch.yaml
