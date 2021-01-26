@@ -72,8 +72,7 @@ describe('PageComponent', () => {
         <kirby-page-content>
           ${dummyContent}
         </kirby-page-content>
-      </kirby-page>`,
-      { detectChanges: false }
+      </kirby-page>`
     );
     zone = spectator.inject(NgZone);
     ionToolbar = spectator.queryHost('ion-toolbar');
@@ -135,8 +134,6 @@ describe('PageComponent', () => {
     spectator.setInput('tabBarBottomHidden', true);
     tick();
     expect(tabBar.tabBarBottomHidden).toBe(true);
-    // needed for setting up navigation subscriptions in ngAfterViewInit
-    spectator.detectChanges();
 
     triggerOnLeave(router);
 
@@ -144,36 +141,6 @@ describe('PageComponent', () => {
     flush();
   }));
 
-  describe('on navigation', () => {
-    beforeEach(() => {
-      // needed for setting up navigation subscriptions in ngAfterViewInit
-      spectator.detectChanges();
-    });
-
-    describe('onEnter', () => {
-      it('should trigger onEnter when navigating to url', async () => {
-        const enterEmitSpy = spyOn(spectator.component.enter, 'emit');
-
-        await triggerOnEnter(zone, router);
-
-        expect(enterEmitSpy).toHaveBeenCalledTimes(1);
-      });
-    });
-
-    describe('onLeave', () => {
-      it('should trigger onLeave when navigating to another url', async () => {
-        const leaveEmitSpy = spyOn(spectator.component.leave, 'emit');
-
-        triggerOnLeave(router);
-
-        expect(leaveEmitSpy).toHaveBeenCalledTimes(1);
-      });
-    });
-  });
-
-  async function triggerOnEnter(zone: NgZone, router: SpyObject<Router>) {
-    await zone.run(() => router.navigate(['']));
-  }
   async function triggerOnLeave(router: SpyObject<Router>) {
     await zone.run(() => router.navigate(['someUrl']));
   }
