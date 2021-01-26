@@ -1,4 +1,4 @@
-name: Kirby CI for pull requests
+name: Kirby CI
 on:
   push:
     branches: [ master ]
@@ -63,5 +63,10 @@ jobs:
       - run: npm ci
       - run: openssl version
       - run: sh ./install-kube-tools.sh
-#      - run: npm run dist
-#      - run: docker build -t drbstaging.azurecr.io/kirbydesign/designsystem:git${{ github.sha }} .
+      - run: npm run dist
+      - run: docker build -t drbstaging.azurecr.io/kirbydesign/designsystem:git${{ github.sha }} .
+      - run: echo "Ref ${{ github.ref }}"
+        if: github.ref == 'refs/heads/master'
+      - run: echo "This is master"
+        if: github.ref != 'refs/heads/master'
+      - run: echo "This is not master"
