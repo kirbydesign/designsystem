@@ -75,9 +75,9 @@ jobs:
           rm -rf linux-amd64
       - run: npm run dist
       - run: docker build -t drbstaging.azurecr.io/kirbydesign/designsystem:git${{ github.sha }} .
-      - name: handle branches
-        if: ${{ github.ref != 'refs/heads/master' }}
+#      - name: handle branches
+#        if: ${{ github.ref != 'refs/heads/master' }}
 
-      - name: handle master
-        if: ${{ github.ref == 'refs/heads/master' }}
+#      - name: handle master
+#        if: ${{ github.ref == 'refs/heads/master' }}
 
