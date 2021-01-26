@@ -128,12 +128,12 @@ describe('PageComponent', () => {
     expect(tabBar.tabBarBottomHidden).toBe(false);
   }));
 
-  it('should show tab bar when tabBarBottomHidden is true on leave', fakeAsync(() => {
+  it('should show tab bar when tabBarBottomHidden is true on leave', fakeAsync(async () => {
     spectator.setInput('tabBarBottomHidden', true);
     tick();
     expect(tabBar.tabBarBottomHidden).toBe(true);
 
-    triggerOnLeave(router);
+    await triggerOnLeave(router);
 
     expect(tabBar.tabBarBottomHidden).toBe(false);
     flush();
