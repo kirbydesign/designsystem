@@ -31,10 +31,10 @@ ion-range {
 }
 
 .range-container {
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding-left: size('s'); //10px;
+  padding-right: size('s'); //10px;
+  padding-top: size('xxs'); //5px;
+  padding-bottom: size('xxs'); //5px;
   display: flex;
   flex-direction: column;
   margin: 0;
@@ -76,10 +76,7 @@ ion-range {
 // Active
 ion-range::part(knob) {
   background-color: var(--knob-background) !important;
-  // box-shadow: get-elevation(20);
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
-  //box-shadow: 10px 10px;
-  //get-shadow-size
 }
 
 // Active

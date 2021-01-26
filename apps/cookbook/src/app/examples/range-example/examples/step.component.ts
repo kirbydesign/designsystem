@@ -16,7 +16,7 @@ const config = {
   selector: config.selector,
   template: config.template,
 })
-export class RangeStepExampleComponent implements OnInit{
+export class RangeStepExampleComponent implements OnInit {
   template: string = config.template;
 
   public rangeFormStep: FormGroup;

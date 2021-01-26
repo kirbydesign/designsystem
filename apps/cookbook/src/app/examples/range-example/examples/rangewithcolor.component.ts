@@ -1,7 +1,10 @@
 import { AfterViewInit, Component, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 
-import { RangeComponent, RangeValue } from '@kirbydesign/designsystem/components/range/range.component';
+import {
+  RangeComponent,
+  RangeValue,
+} from '@kirbydesign/designsystem/components/range/range.component';
 
 const config = {
   selector: 'cookbook-range-color-example',
@@ -10,7 +13,9 @@ const config = {
     <kirby-range ticks="5" #kirbyRangeColor startLabel="Min value" endLabel="Max value" pin="true" snaps="true" max="5" min="1"></kirby-range>
     </div>
     <div>
-    <button (click)="setColor(kirbyRangeColor, 'lightgray', 'gray')">Use Gray theme</button>
+    <p><br>
+    <button (click)="setColor(kirbyRangeColor, 'lightgray', 'gray')">Switch to Gray theme</button>
+    </p>
    </div>
   `,
 };
