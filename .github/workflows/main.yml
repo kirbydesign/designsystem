@@ -9,44 +9,44 @@ defaults:
     shell: bash
 
 jobs:
-#  lint_and_unittest:
-#    runs-on: ubuntu-latest
-#    strategy:
-#     matrix:
-#        node-version: [10.16]
-#    steps:
-#      - uses: actions/checkout@v2
-#      - name: Use Node.js ${{ matrix.node-version }}
-#        uses: actions/setup-node@v1
-#        with:
-#          node-version: ${{ matrix.node-version }}
-#      - run: echo Event ${{ github.event.type }}
-#      - run: pip install six
-#      - run: npm ci
-#      - run: npm run lint
-#      - run: npm run extract-scss-variables
-#      - run: npm run test:ci
-#      - run: npm run coverage-report || true
-#  build_kirby:
-#    runs-on: ubuntu-latest
-#    strategy:
-#      matrix:
-#        node-version: [10.16]
-#    steps:
-#      - uses: actions/checkout@v2
-#      - name: Use Node.js ${{ matrix.node-version }}
-#        uses: actions/setup-node@v1
-#        with:
-#          always-auth: true
-#          registry-url: https://registry.npmjs.org
-#          node-version: ${{ matrix.node-version }}
-#        env:
-#          NODE_AUTH_TOKEN: $ {{ NPM_AUTH_TOKEN }}
-#      - run: pip install six
-#      - run: npm ci
-#      - run: npm run dist:designsystem
+  #  lint_and_unittest:
+  #    runs-on: ubuntu-latest
+  #    strategy:
+  #     matrix:
+  #        node-version: [10.16]
+  #    steps:
+  #      - uses: actions/checkout@v2
+  #      - name: Use Node.js ${{ matrix.node-version }}
+  #        uses: actions/setup-node@v1
+  #        with:
+  #          node-version: ${{ matrix.node-version }}
+  #      - run: echo Event ${{ github.event.type }}
+  #      - run: pip install six
+  #      - run: npm ci
+  #      - run: npm run lint
+  #      - run: npm run extract-scss-variables
+  #      - run: npm run test:ci
+  #      - run: npm run coverage-report || true
+  #  build_kirby:
+  #    runs-on: ubuntu-latest
+  #    strategy:
+  #      matrix:
+  #        node-version: [10.16]
+  #    steps:
+  #      - uses: actions/checkout@v2
+  #      - name: Use Node.js ${{ matrix.node-version }}
+  #        uses: actions/setup-node@v1
+  #        with:
+  #          always-auth: true
+  #          registry-url: https://registry.npmjs.org
+  #          node-version: ${{ matrix.node-version }}
+  #        env:
+  #          NODE_AUTH_TOKEN: $ {{ NPM_AUTH_TOKEN }}
+  #      - run: pip install six
+  #      - run: npm ci
+  #      - run: npm run dist:designsystem
   deploy_to_cookbook:
-#    needs: [lint_and_unittest, build_kirby]
+    #    needs: [lint_and_unittest, build_kirby]
     runs-on: ubuntu-latest
     #    if: ${{ github.event_name != 'pull_request' }}
     strategy:
@@ -113,4 +113,28 @@ jobs:
           echo "pushing docker image $DOCKER_REPO:$DOCKER_TAG"
           echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin drbstaging.azurecr.io
           docker push $DOCKER_REPO:$DOCKER_TAG
+      - name: clone charts
+        run: git clone https://github.com/Bankdata/charts.git charts
+      - name: decrypt kube config
+        env:
+          encrypted_09e556d51fdc_key: ${{secrets.ENCRYPTED_09E556D51FDC_KEY}}
+          encrypted_09e556d51fdc_iv: ${{secrets.ENCRYPTED_09E556D51FDC_IV}}
+        run: openssl aes-256-cbc -K $encrypted_09e556d51fdc_key -iv $encrypted_09e556d51fdc_iv -in ./.scripts/kube-config.enc -out kube.config -d
+      - name: run helm upgrade
+        env:
+          RELEASENAME: ${RELEASENAME}
+          DOCKER_REPO: 'drbstaging.azurecr.io/kirbydesign/designsystem'
+          DOCKER_TAG: git${{github.sha}}
+          HOSTNAME: ${DNS}
+          DOMAIN: '650b277bd9a54e5cbadc.westeurope.aksapp.io'
+          HELM_CONFIG: 'config/helm/branch.yaml'
+        run: helm upgrade --kubeconfig kube.config -i $RELEASENAME charts/spa --set image.repository=$DOCKER_REPO --set image.tag=$DOCKER_TAG --set ingress.host=$HOSTNAME.$DOMAIN -f $HELM_CONFIG
+
+
+
+
+
+
+
+
 
