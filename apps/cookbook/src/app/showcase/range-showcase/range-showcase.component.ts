@@ -8,18 +8,5 @@ import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-prop
   styleUrls: ['./range-showcase.component.scss'],
 })
 export class RangeShowcaseComponent {
-  rangeProperties: ShowcaseProperty[] = [
-    {
-      name: 'value',
-      description: 'The value represented by the range component.',
-      defaultValue: '0',
-      inputValues: ['any'],
-    },
-    {
-      name: 'disabled',
-      description: 'Disables the range component so that the user cannot interact with it.',
-      defaultValue: 'false',
-      inputValues: ['true', 'false'],
-    },
-  ];
+
 }

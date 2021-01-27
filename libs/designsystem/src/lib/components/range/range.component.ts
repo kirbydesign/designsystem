@@ -49,7 +49,7 @@ export class RangeComponent implements OnInit, ControlValueAccessor {
   @Input() disabled: boolean = false;
   @Input() max: number;
   @Input() min: number;
-  @Input() mode: 'ios' | 'md';
+  @Input() mode: 'ios' | 'md' = 'md';
 
   @Input() name: string;
   @Input() pin: boolean;
@@ -59,8 +59,8 @@ export class RangeComponent implements OnInit, ControlValueAccessor {
 
   @Output() valueChange: EventEmitter<RangeValue> = new EventEmitter<RangeValue>();
 
-  @Input() startLabel: string;
-  @Input() endLabel: string;
+  @Input() minLabel: string;
+  @Input() maxLabel: string;
 
   public rangeValueChange($event: any): void {
     this.writeValue($event.detail.value);

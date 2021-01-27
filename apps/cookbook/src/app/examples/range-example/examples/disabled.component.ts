@@ -6,7 +6,7 @@ import { RangeValue } from '@kirbydesign/designsystem/components/range/range.com
 const config = {
   selector: 'cookbook-range-disabled-example',
   template: `
-      <kirby-range  disabled="true" ticks="5"  startLabel="Min" endLabel="Max" max="5" min="1"></kirby-range>
+      <kirby-range  disabled="true" ticks="5"  minLabel="Min" maxLabel="Max" max="5" min="1"></kirby-range>
   `,
 };
 

@@ -7,7 +7,7 @@ const config = {
   selector: 'cookbook-range-step-example',
   template: `
     <form [formGroup]="rangeFormStep">
-      <kirby-range formControlName="kirbyRangeName" [formGroup]="rangeFormStep" ticks="5" startLabel="Min value" endLabel="Max value" pin="true" snaps="true" max="15" min="1"></kirby-range>
+      <kirby-range formControlName="kirbyRangeName" [formGroup]="rangeFormStep" ticks="5" minLabel="Min value" maxLabel="Max value" pin="true" snaps="true" max="15" min="1"></kirby-range>
     </form>
   `,
 };

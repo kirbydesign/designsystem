@@ -11,7 +11,7 @@ const config = {
   template: `
     <form [formGroup]="rangeFormValue">
         <div style="background-color: lightgray;width: 100%">Selected Range value: {{kirbyRangeName.value}}</div>
-        <kirby-range formControlName="kirbyRangeName" [formGroup]="rangeFormValue" ticks="5" startLabel="Min value" endLabel="Max value" pin="true" snaps="true" max="5" min="1"></kirby-range>
+        <kirby-range formControlName="kirbyRangeName" [formGroup]="rangeFormValue" ticks="5" minLabel="Min value" maxLabel="Max value" pin="true" snaps="true" max="5" min="1"></kirby-range>
      </form>
   `,
 };

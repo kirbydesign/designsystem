@@ -10,7 +10,7 @@ const config = {
   selector: 'cookbook-range-color-example',
   template: `
     <div>
-    <kirby-range ticks="5" #kirbyRangeColor startLabel="Min value" endLabel="Max value" pin="true" snaps="true" max="5" min="1"></kirby-range>
+    <kirby-range ticks="5" #kirbyRangeColor minLabel="Min value" maxLabel="Max value" pin="true" snaps="true" max="5" min="1"></kirby-range>
     </div>
     <div>
     <p><br>

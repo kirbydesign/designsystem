@@ -29,9 +29,11 @@ export class MockRangeComponent {
   @Output() valueChange = new EventEmitter<RangeValue>();
   @Input() startLabel: string;
   @Input() endLabel: string;
+  @Input() value: RangeValue;
 
   rangeValueChange() {}
   writeValue() {}
+  setDisabledState() {}
   registerOnTouched() {}
   registerOnChange() {}
   setLabel() {}

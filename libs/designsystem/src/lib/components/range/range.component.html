@@ -18,8 +18,8 @@
     >
     </ion-range>
   </div>
-  <div class="range-row ">
-    <ion-label [ngClass]="disabled ? 'disabled' : ''">{{ startLabel }}</ion-label>
-    <ion-label [ngClass]="disabled ? 'disabled' : ''">{{ endLabel }}</ion-label>
+  <div class="range-row">
+    <label *ngIf="minLabel" [ngClass]="disabled ? 'disabled' : ''">{{ minLabel }}</label>
+    <label *ngIf="maxLabel" [ngClass]="disabled ? 'disabled' : ''">{{ maxLabel }}</label>
   </div>
 </div>

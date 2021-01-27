@@ -14,6 +14,9 @@
   --range-row-label-width: 100px;
 }
 
+$tickHeight: 8px;
+$tickWidth: 8px;
+
 // Active
 ion-range {
   --bar-background: get-color('background-color');
@@ -28,6 +31,8 @@ ion-range {
 
   --bar-color: #{get-color('semi-dark')};
   --bar-active-color: #{get-color('black')};
+
+
 }
 
 .range-container {
@@ -67,7 +72,7 @@ ion-range {
 }
 
 // Active
-.range-row ion-label {
+.range-row label {
   background-color: var(--range-row-label-background, transparent) !important;
   color: var(--range-row-label-color);
   font-size: var(--range-row-label-font-size);
@@ -92,8 +97,10 @@ ion-range::part(pin) {
 ion-range::part(tick) {
   background-color: var(--tick-color) !important;
   border-radius: 50%;
-  width: 7px;
-  height: 7px;
+  width: $tickWidth;
+  height: $tickHeight;
+  margin-left: -1px * $tickWidth / 2px;
+  margin-top: 1px + (-1 * $tickHeight / 2px);
   z-index: 1;
 }
 
@@ -101,8 +108,10 @@ ion-range::part(tick) {
 ion-range::part(tick-active) {
   background-color: var(--tick-active-color) !important;
   border-radius: 50%;
-  width: 7px;
-  height: 7px;
+  width: $tickWidth;
+  height: $tickHeight;
+  margin-left: -1px * $tickWidth / 2px;
+  margin-top: 1px + (-1 * $tickHeight / 2px);
   z-index: 1;
 }
 
