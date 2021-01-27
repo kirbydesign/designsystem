@@ -8,23 +8,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: get branch name
-        run: |
-          branchname="${GITHUB_REF##*/}"
-          branchname="${branchname//feature//}"
-          branchname="${branchname#?}"
-          releasename="designsystem-${branchname//[^a-zA-Z0-9]/-}"
-          releasename=$(tr [A-Z] [a-z] <<< "$releasename")
-          releasename=$(cut -c 1-53 <<< "$releasename")
-          echo "RELEASENAME=${releasename}" >> $GITHUB_ENV
-      - name: get dns
+      - name: decrypt kube config
         env:
-          DOMAIN: '650b277bd9a54e5cbadc.westeurope.aksapp.io'
+          encrypted_09e556d51fdc_key: ${{secrets.ENCRYPTED_09E556D51FDC_KEY}}
+          encrypted_09e556d51fdc_iv: ${{secrets.ENCRYPTED_09E556D51FDC_IV}}
         run: |
-          chmod +x ./.scripts/dns.pl
-          dns=$(perl ./.scripts/dns.pl $DOMAIN "${RELEASENAME}")
-          echo "dns became $dns"
-      - name: handle branches
-        if: ${{ github.ref != 'refs/heads/master' }}
-        run: echo "release name from env ${RELEASENAME}"
+          echo $encrypted_09e556d51fdc_key
+          echo $encrypted_09e556d51fdc_iv
+          openssl version
           
