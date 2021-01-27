@@ -22,7 +22,7 @@ jobs:
       - name: get dns
         run: |
           echo $PWD
-          dns=$('sh .scripts/dns.pl ${DOMAIN} ${RELEASENAME}')
+          dns=$('perl $PWD/.scripts/dns.pl')
           echo $dns
       - name: handle branches
         if: ${{ github.ref != 'refs/heads/master' }}
