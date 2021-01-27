@@ -7,6 +7,7 @@ jobs:
   set-env:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - name: get branch name
         env:
           NODE_OPTIONS: '--max_old_space_size=3072'
@@ -21,7 +22,6 @@ jobs:
           echo "RELEASENAME=${releasename}" >> $GITHUB_ENV
       - name: get dns
         run: |
-          ls -R /home/runner
           dns=$('perl ./.scripts/dns.pl')
           echo $dns
       - name: handle branches
