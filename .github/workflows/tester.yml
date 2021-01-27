@@ -24,7 +24,7 @@ jobs:
         run: |
           chmod +x ./.scripts/dns.pl
           dns=$('perl ./.scripts/dns.pl env.DOMAIN ${RELEASENAME}')
-          echo $dns
+          echo "dns became $dns"
       - name: handle branches
         if: ${{ github.ref != 'refs/heads/master' }}
         run: echo "release name from env ${RELEASENAME}"
