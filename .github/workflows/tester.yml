@@ -21,7 +21,7 @@ jobs:
           echo "RELEASENAME=${releasename}" >> $GITHUB_ENV
       - name: get dns
         run: |
-          dns="$('sh chmod +x ./.scripts/dns.pl|sh ./.scripts/dns.pl ${DOMAIN} ${RELEASENAME})"
+          dns=$('sh chmod +x ./.scripts/dns.pl'|'sh ./.scripts/dns.pl ${DOMAIN} ${RELEASENAME}')
           echo $dns
       - name: handle branches
         if: ${{ github.ref != 'refs/heads/master' }}
