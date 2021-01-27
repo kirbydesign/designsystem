@@ -21,11 +21,9 @@ jobs:
           releasename=$(cut -c 1-53 <<< "$releasename")
           echo "RELEASENAME=${releasename}" >> $GITHUB_ENV
       - name: get dns
-        run: |
-          chmod +x ./.scripts/dns.pl
-          echo ${{env.DOMAIN}} ${RELEASENAME}
-          dns=perl ./.scripts/dns.pl ${{env.DOMAIN}} ${RELEASENAME}
-          echo "dns became $dns"
+      - run: chmod +x ./.scripts/dns.pl
+      - run: dns=perl ./.scripts/dns.pl $env.DOMAIN echo "$RELEASENAME"
+      - run: echo dns became $dns
       - name: handle branches
         if: ${{ github.ref != 'refs/heads/master' }}
         run: echo "release name from env ${RELEASENAME}"
