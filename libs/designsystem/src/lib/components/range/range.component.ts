@@ -17,8 +17,6 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { IonRange } from '@ionic/angular';
 
-import { DesignTokenHelper } from '../../helpers';
-
 export type RangeValue = number | { lower: number; upper: number };
 
 @Component({
@@ -35,12 +33,9 @@ export type RangeValue = number | { lower: number; upper: number };
     },
   ],
 })
-export class RangeComponent implements OnInit, ControlValueAccessor, AfterViewInit {
+export class RangeComponent implements OnInit, ControlValueAccessor {
   @ViewChild('ionRange', { static: false }) ionRange: IonRange;
   @ViewChild(IonRange, { read: ElementRef }) ionRangeElementRef: ElementRef;
-
-  private getColor = DesignTokenHelper.getColor;
-  private getTextColor = DesignTokenHelper.getTextColor;
 
   constructor(
     @Self() private elementRef: ElementRef<HTMLElement>,
@@ -52,9 +47,6 @@ export class RangeComponent implements OnInit, ControlValueAccessor, AfterViewIn
   @Input() color: string;
   @Input() debounce: number;
   @Input() disabled: boolean = false;
-
-  // private _disabled: boolean = false;
-
   @Input() max: number;
   @Input() min: number;
   @Input() mode: 'ios' | 'md';
@@ -82,23 +74,16 @@ export class RangeComponent implements OnInit, ControlValueAccessor, AfterViewIn
       this.value = value;
     }
   }
-  /*
-  public get disabled(): boolean {
-    console.log('get disabled', this._disabled);
-    return this._disabled;
+
+  public setDisabledState?(isDisabled: boolean): void {
+    this.disabled = isDisabled;
   }
-  @Input()
-  public set disabled(value: boolean) {
-    console.log('set disabled', value);
-    if (value !== this._disabled) {
-      this._disabled = value;
-    }
-  }*/
 
   public get value(): RangeValue {
     return this.currentValue;
   }
 
+  @Input()
   public set value(value: RangeValue) {
     if (value !== this.currentValue) {
       this.currentValue = value;
@@ -118,8 +103,6 @@ export class RangeComponent implements OnInit, ControlValueAccessor, AfterViewIn
   ngOnInit(): void {
     this.value = this.min;
   }
-
-  ngAfterViewInit(): void {}
 
   public setLabel(color: string): void {
     const [property, pixelValue] = ['--range-row-label-color', color];
