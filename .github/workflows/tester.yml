@@ -11,7 +11,9 @@ jobs:
         run: |
           branchname="${GITHUB_REF##*/}"
           echo $branchname
-          branchname="${branchname//test//-}"
+          branchname="${branchname//feature//}"
+          echo $branchname
+          branchname="${branchname#?}"
           echo $branchname
           releasename="designsystem-${branchname//[^a-zA-Z0-9]/-}"
           echo $releasename
