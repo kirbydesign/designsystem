@@ -76,10 +76,25 @@ jobs:
       - run: npm run dist
       - run: docker build -t drbstaging.azurecr.io/kirbydesign/designsystem:git${{ github.sha }} .
       - name: get branch name
-        run: echo "GIT_BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
+      if: ${{ github.ref != 'refs/heads/master' }}
+        run: |
+          branchname="${GITHUB_REF##*/}"
+          branchname="${branchname//feature//}"
+          branchname="${branchname#?}"
+          releasename="designsystem-${branchname//[^a-zA-Z0-9]/-}"
+          releasename=$(tr [A-Z] [a-z] <<< "$releasename")
+          releasename=$(cut -c 1-53 <<< "$releasename")
+          echo "RELEASENAME=${releasename}" >> $GITHUB_ENV
+      - name: get dns
+        env:
+          DOMAIN: '650b277bd9a54e5cbadc.westeurope.aksapp.io'
+        run: |
+          chmod +x ./.scripts/dns.pl
+          dns=$(perl ./.scripts/dns.pl $DOMAIN "${RELEASENAME}")
+          echo "DNS=@{dns}" >> $GITHUB_ENV
       - name: handle branches
         if: ${{ github.ref != 'refs/heads/master' }}
-        run: echo "${GIT_BRANCH}"
+        run: echo "${DNS}"
 #      - name: handle master
 #        if: ${{ github.ref == 'refs/heads/master' }}
 
