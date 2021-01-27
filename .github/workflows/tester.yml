@@ -23,7 +23,8 @@ jobs:
       - name: get dns
         run: |
           chmod +x ./.scripts/dns.pl
-          dns=$('perl ./.scripts/dns.pl env.DOMAIN ${RELEASENAME}')
+          echo ${{env.DOMAIN}} ${{RELEASENAME}}
+          dns=perl ./.scripts/dns.pl ${{env.DOMAIN}} ${{RELEASENAME}}
           echo "dns became $dns"
       - name: handle branches
         if: ${{ github.ref != 'refs/heads/master' }}
