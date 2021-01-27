@@ -79,11 +79,17 @@ jobs:
         if: ${{ github.ref != 'refs/heads/master' }}
         run: |
           branchname="${GITHUB_REF##*/}"
+          echo $branchname
           branchname="${branchname//feature//}"
+          echo $branchname
           branchname="${branchname#?}"
+          echo $branchname
           releasename="designsystem-${branchname//[^a-zA-Z0-9]/-}"
+          echo $releasename
           releasename=$(tr [A-Z] [a-z] <<< "$releasename")
+          echo $releasename
           releasename=$(cut -c 1-53 <<< "$releasename")
+          echo $releasename
           echo "RELEASENAME=${releasename}" >> $GITHUB_ENV
       - name: get dns
         env:
@@ -91,10 +97,19 @@ jobs:
         run: |
           chmod +x ./.scripts/dns.pl
           dns=$(perl ./.scripts/dns.pl $DOMAIN "${RELEASENAME}")
-          echo "DNS=@{dns}" >> $GITHUB_ENV
+          echo "DNS=${dns}" >> $GITHUB_ENV
       - name: handle branches
         if: ${{ github.ref != 'refs/heads/master' }}
         run: echo "${DNS}"
-#      - name: handle master
-#        if: ${{ github.ref == 'refs/heads/master' }}
+      - name: push docker image
+        if: ${{ github.ref == 'refs/heads/master' }}
+        env:
+          DOCKER_REPO: 'drbstaging.azurecr.io/kirbydesign/designsystem'
+          DOCKER_TAG: git${{github.sha}}
+          DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
+          DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+        run: |
+          echo "pushing docker image $DOCKER_REPO:$DOCKER_TAG"
+          echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin drbstaging.azurecr.io
+          docker push $DOCKER_REPO:$DOCKER_TAG
 
