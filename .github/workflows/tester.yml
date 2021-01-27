@@ -22,6 +22,7 @@ jobs:
           echo "RELEASENAME=${releasename}" >> $GITHUB_ENV
       - name: get dns
         run: |
+          chmod +x ./.scripts/dns.pl
           dns=perl ./.scripts/dns.pl
           echo $dns
       - name: handle branches
