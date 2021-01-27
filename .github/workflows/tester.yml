@@ -9,9 +9,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: get branch name
-        env:
-          NODE_OPTIONS: '--max_old_space_size=3072'
-          DOMAIN: '650b277bd9a54e5cbadc.westeurope.aksapp.io'
         run: |
           branchname="${GITHUB_REF##*/}"
           branchname="${branchname//feature//}"
@@ -21,9 +18,11 @@ jobs:
           releasename=$(cut -c 1-53 <<< "$releasename")
           echo "RELEASENAME=${releasename}" >> $GITHUB_ENV
       - name: get dns
+        env:
+          DOMAIN: '650b277bd9a54e5cbadc.westeurope.aksapp.io'
         run: |
           chmod +x ./.scripts/dns.pl
-          dns=$(perl ./.scripts/dns.pl)
+          dns=$(perl ./.scripts/dns.pl $DOMAIN "${RELEASENAME}")
           echo "dns became $dns"
       - name: handle branches
         if: ${{ github.ref != 'refs/heads/master' }}
