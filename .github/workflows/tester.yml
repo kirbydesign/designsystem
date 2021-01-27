@@ -9,6 +9,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Setup tmate session
+        env:
+          KEY: ${{secrets.ENCRYPTED_09E556D51FDC_KEY}}
+          IV: ${{secrets.ENCRYPTED_09E556D51FDC_IV}}
         uses: mxschmitt/action-tmate@v3
         timeout-minutes: 15
       - name: decrypt kube config
