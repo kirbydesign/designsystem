@@ -8,6 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+        timeout-minutes: 15
       - name: decrypt kube config
         env:
           KEY: ${{secrets.ENCRYPTED_09E556D51FDC_KEY}}
