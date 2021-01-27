@@ -7,18 +7,31 @@ jobs:
   set-env:
     runs-on: ubuntu-latest
     steps:
+#      - name: get branch name
+#        run: |
+#          branchname="${GITHUB_REF##*/}"
+#          echo $branchname
+#          branchname="${branchname//feature//}"
+#          echo $branchname
+#          branchname="${branchname#?}"
+#          echo $branchname
+#          releasename="designsystem-${branchname//[^a-zA-Z0-9]/-}"
+#          echo $releasename
+#          releasename=$(tr [A-Z] [a-z] <<< "$releasename")
+#          echo $releasename
+#          releasename=$(cut -c 1-53 <<< "$releasename")
+#          echo $releasename
       - name: get branch name
+        if: ${{ github.ref != 'refs/heads/master' }}
         run: |
           branchname="${GITHUB_REF##*/}"
-          echo $branchname
           branchname="${branchname//feature//}"
-          echo $branchname
           branchname="${branchname#?}"
-          echo $branchname
           releasename="designsystem-${branchname//[^a-zA-Z0-9]/-}"
-          echo $releasename
           releasename=$(tr [A-Z] [a-z] <<< "$releasename")
-          echo $releasename
           releasename=$(cut -c 1-53 <<< "$releasename")
-          echo $releasename
+          echo "RELEASENAME=${releasename}" >> $GITHUB_ENV
+      - name: handle branches
+        if: ${{ github.ref != 'refs/heads/master' }}
+        run: echo "release name from env ${RELEASENAME}"
           
