@@ -16,10 +16,10 @@
 
 // Active
 ion-range {
-  --bar-background: #{get-color('background-color')};
-  --knob-background: #{get-color('background-color')};
+  --bar-background: get-color('background-color');
+  --knob-background: #{get-color('white')};
 
-  --pin-color: #{get-color('black')};
+  --pin-color: get-color('black');
   --pin-background: transparent;
   --pin-font-size: font-size('xxxs');
 
@@ -53,15 +53,17 @@ ion-range {
 
   :first-child {
     justify-content: flex-start;
-    padding-left: var(--range-row-padding);
     text-align: left;
   }
 
   :last-child {
     margin-left: auto;
     justify-content: flex-end;
-    padding-right: var(--range-row-padding);
   }
+}
+
+.disabled {
+  --range-row-label-color: #{get-color('semi-light')};
 }
 
 // Active
@@ -89,11 +91,19 @@ ion-range::part(pin) {
 // Active
 ion-range::part(tick) {
   background-color: var(--tick-color) !important;
+  border-radius: 50%;
+  width: 7px;
+  height: 7px;
+  z-index: 1;
 }
 
 // Active
 ion-range::part(tick-active) {
   background-color: var(--tick-active-color) !important;
+  border-radius: 50%;
+  width: 7px;
+  height: 7px;
+  z-index: 1;
 }
 
 // Active

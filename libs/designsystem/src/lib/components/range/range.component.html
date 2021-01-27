@@ -1,13 +1,25 @@
 <div class="range-container">
   <div class="range-row">
-    <ion-range (ionChange)="rangeValueChange($event)" #ionRange
-               [min]="min" [max]="max" [step]="step" [value]="value" [pin]="pin" [snaps]="snaps"
-               [color]="color" [ticks]="ticks" [name]="name" [mode]="mode" [debounce]="debounce" [disabled]="disabled">
-
+    <ion-range
+      (ionChange)="rangeValueChange($event)"
+      #ionRange
+      [min]="min"
+      [max]="max"
+      [step]="step"
+      [value]="value"
+      [pin]="pin"
+      [snaps]="snaps"
+      [color]="color"
+      [ticks]="ticks"
+      [name]="name"
+      [mode]="mode"
+      [debounce]="debounce"
+      [disabled]="disabled"
+    >
     </ion-range>
   </div>
   <div class="range-row ">
-    <ion-label >{{startLabel}}</ion-label>
-    <ion-label >{{endLabel}}</ion-label>
+    <ion-label [ngClass]="disabled ? 'disabled' : ''">{{ startLabel }}</ion-label>
+    <ion-label [ngClass]="disabled ? 'disabled' : ''">{{ endLabel }}</ion-label>
   </div>
 </div>

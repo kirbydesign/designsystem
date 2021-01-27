@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   Component,
   ElementRef,
   EventEmitter,
@@ -16,6 +17,8 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { IonRange } from '@ionic/angular';
 
+import { DesignTokenHelper } from '../../helpers';
+
 export type RangeValue = number | { lower: number; upper: number };
 
 @Component({
@@ -32,9 +35,12 @@ export type RangeValue = number | { lower: number; upper: number };
     },
   ],
 })
-export class RangeComponent implements OnInit, ControlValueAccessor {
+export class RangeComponent implements OnInit, ControlValueAccessor, AfterViewInit {
   @ViewChild('ionRange', { static: false }) ionRange: IonRange;
   @ViewChild(IonRange, { read: ElementRef }) ionRangeElementRef: ElementRef;
+
+  private getColor = DesignTokenHelper.getColor;
+  private getTextColor = DesignTokenHelper.getTextColor;
 
   constructor(
     @Self() private elementRef: ElementRef<HTMLElement>,
@@ -45,7 +51,9 @@ export class RangeComponent implements OnInit, ControlValueAccessor {
   private currentValue: RangeValue;
   @Input() color: string;
   @Input() debounce: number;
-  @Input() disabled: boolean;
+  @Input() disabled: boolean = false;
+
+  // private _disabled: boolean = false;
 
   @Input() max: number;
   @Input() min: number;
@@ -74,6 +82,18 @@ export class RangeComponent implements OnInit, ControlValueAccessor {
       this.value = value;
     }
   }
+  /*
+  public get disabled(): boolean {
+    console.log('get disabled', this._disabled);
+    return this._disabled;
+  }
+  @Input()
+  public set disabled(value: boolean) {
+    console.log('set disabled', value);
+    if (value !== this._disabled) {
+      this._disabled = value;
+    }
+  }*/
 
   public get value(): RangeValue {
     return this.currentValue;
@@ -98,6 +118,8 @@ export class RangeComponent implements OnInit, ControlValueAccessor {
   ngOnInit(): void {
     this.value = this.min;
   }
+
+  ngAfterViewInit(): void {}
 
   public setLabel(color: string): void {
     const [property, pixelValue] = ['--range-row-label-color', color];
