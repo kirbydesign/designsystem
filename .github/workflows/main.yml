@@ -78,6 +78,7 @@ jobs:
       - name: get branch name
         if: ${{ github.ref != 'refs/heads/master' }}
         run: |
+          echo "${GITHUB_REF}"
           branchname="${GITHUB_REF##*/}"
           echo $branchname
           branchname="${branchname//feature//}"
@@ -102,7 +103,7 @@ jobs:
         if: ${{ github.ref != 'refs/heads/master' }}
         run: echo "${DNS}"
       - name: push docker image
-        if: ${{ github.ref == 'refs/heads/master' }}
+        if: ${{ github.ref != 'refs/heads/master' }}
         env:
           DOCKER_REPO: 'drbstaging.azurecr.io/kirbydesign/designsystem'
           DOCKER_TAG: git${{github.sha}}
