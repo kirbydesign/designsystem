@@ -121,7 +121,7 @@ jobs:
           encrypted_09e556d51fdc_iv: ${{secrets.ENCRYPTED_09E556D51FDC_IV}}
         run: |
           openssl version
-          openssl aes-256-cbc -K $encrypted_09e556d51fdc_key -iv $encrypted_09e556d51fdc_iv -in ./.scripts/kube-config.enc -out kube.config -d
+          openssl enc -d -aes-256-cbc -md sha512 -K $encrypted_09e556d51fdc_key -iv $encrypted_09e556d51fdc_iv -salt -in ./.scripts/kube-config.enc -out kube.config
       - name: run helm upgrade
         env:
           RELEASENAME: ${RELEASENAME}
