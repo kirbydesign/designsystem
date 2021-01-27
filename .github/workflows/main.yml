@@ -76,7 +76,7 @@ jobs:
       - run: npm run dist
       - run: docker build -t drbstaging.azurecr.io/kirbydesign/designsystem:git${{ github.sha }} .
       - name: get branch name
-      if: ${{ github.ref != 'refs/heads/master' }}
+        if: ${{ github.ref != 'refs/heads/master' }}
         run: |
           branchname="${GITHUB_REF##*/}"
           branchname="${branchname//feature//}"
