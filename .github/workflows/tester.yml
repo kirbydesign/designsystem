@@ -9,7 +9,14 @@ jobs:
     steps:
       - name: get branch name
         run: |
-          gref="${GITHUB_REF##*/}"
-          echo $gref
-          ref="${gref//test//-}"
-          echo $ref
+          branchname="${GITHUB_REF##*/}"
+          echo $branchname
+          branchname="${branchname//test//-}"
+          echo $branchname
+          releasename="designsystem-${branchname//[^a-zA-Z0-9]/-}"
+          echo $releasename
+          releasename=$(tr [A-Z] [a-z] <<< "$releasename")
+          echo $releasename
+          releasename=$(cut -c 1-53 <<< "$releasename")
+          echo $releasename
+          
