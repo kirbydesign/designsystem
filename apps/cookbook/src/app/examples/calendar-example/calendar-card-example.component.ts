@@ -24,7 +24,7 @@ export class CalendarCardExampleComponent implements OnChanges {
   maxDate: Date;
   todayDate: Date;
   disabledDates: Date[];
-  yearNavigatorOptions = { from: -3, to: 3 };
+  yearNavigatorOptions = { from: -6, to: 3 };
 
   constructor() {
     this.updateInputDates();

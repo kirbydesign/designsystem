@@ -105,9 +105,9 @@ export class CalendarShowcaseComponent {
     },
     {
       name: 'yearNavigatorOptions',
-      description: '(Optional) Display Drowdown to navigate between Years',
+      description: '(Optional) Displays a dropdown to navigate between years',
       defaultValue: 'false',
-      inputValues: ['true | false'],
+      inputValues: ['{ from: number | Date; to: number | Date }'],
     },
   ];
 }
