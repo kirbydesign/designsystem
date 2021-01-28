@@ -87,7 +87,7 @@ jobs:
             branchname="${GITHUB_REF##*/}"
             branchname="${branchname//feature//}"
             branchname="${branchname#?}"
-            releasename="designsystem-${branchname//[^a-zA-Z0-9]/-}"
+            releasename="kby-${branchname//[^a-zA-Z0-9]/-}"
             releasename=$(tr [A-Z] [a-z] <<< "$releasename")
             releasename=$(cut -c 1-53 <<< "$releasename")
             echo "RELEASENAME=${releasename}" >> $GITHUB_ENV
