@@ -20,13 +20,18 @@ jobs:
           uses: actions/setup-node@v1
           with:
             node-version: ${{ matrix.node-version }}
-        - run: echo Event ${{ github.event.type }}
-        - run: pip install six
-        - run: npm ci
-        - run: npm run lint
-        - run: npm run extract-scss-variables
-        - run: npm run test:ci
-        - run: npm run coverage-report || true
+        - name: Install six
+          run: pip install six
+        - name: run npm ci
+          run: npm ci
+        - name: run npm lint
+          run: npm run lint
+        - name: run npm extract-scss-variables
+          run: npm run extract-scss-variables
+        - name: run npm test ci
+          run: npm run test:ci
+        - name: run npm coverage-report
+          run: npm run coverage-report || true
     build_kirby:
       runs-on: ubuntu-latest
       strategy:
