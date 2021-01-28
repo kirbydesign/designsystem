@@ -8,7 +8,7 @@ export { ButtonComponent } from './button/button.component';
 export * from './card';
 export * from './chart';
 export * from './stock-chart';
-export * from './calendar/calendar.component';
+export * from './calendar';
 
 export { CheckboxComponent } from './checkbox/checkbox.component';
 export { ChipComponent } from './chip/chip.component';

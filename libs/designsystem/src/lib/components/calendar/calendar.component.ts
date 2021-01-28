@@ -17,6 +17,7 @@ import moment from 'moment';
 import { CalendarCell } from './helpers/calendar-cell.model';
 import { CalendarOptions } from './helpers/calendar-options.model';
 import { CalendarHelper } from './helpers/calendar.helper';
+import { CalendarYearNavigatorConfig } from './options/calendar-year-navigator-options';
 
 interface CalendarDay {
   isCurrentMonth: boolean;
@@ -26,11 +27,6 @@ interface CalendarDay {
   isFuture: boolean;
   isDisabled: boolean;
 }
-
-export type YearNavigatorConfig = {
-  from: number | Date;
-  to: number | Date;
-};
 
 @Component({
   selector: 'kirby-calendar',
@@ -53,7 +49,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
    * - bases yearNavigatorOptions.from and yearNavigatorOptions.to on todayDate if a number is provided
    * - prioritizes minDate and maxDate over yearNavigatorOptions.from and yearNavigatorOptions.to
    */
-  @Input() yearNavigatorOptions: YearNavigatorConfig;
+  @Input() yearNavigatorOptions: CalendarYearNavigatorConfig;
   public month: CalendarCell[][];
   public weekDays: string[];
   private selectedDay: CalendarCell;
