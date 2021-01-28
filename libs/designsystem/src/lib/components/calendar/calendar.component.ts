@@ -50,12 +50,9 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
    * Configuration for the year navigator.
    *
    * Internally, calendar component:
-   *
-   * - Bases yearNavigatorOptions.from and yearNavigatorOptions.to on todayDate if a number is provided
-   *
+   * - bases yearNavigatorOptions.from and yearNavigatorOptions.to on todayDate if a number is provided
    * - prioritizes minDate and maxDate over yearNavigatorOptions.from and yearNavigatorOptions.to
    */
-  // TODO: Discuss comment content and placement in lib
   @Input() yearNavigatorOptions: YearNavigatorConfig;
   public month: CalendarCell[][];
   public weekDays: string[];
@@ -126,7 +123,6 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   /**
    * Gets navigable years for year navigator based on yearNavigatorOptions.
    */
-  // TODO: Naming? Was called selectableYears
   get navigableYears(): string[] {
     const dateOfFirstNavigableYear =
       this.minDate || this.getDateFromNavigableYear(this.yearNavigatorOptions.from);
@@ -137,7 +133,6 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
     return this.findYearsBetweenDates(dateOfFirstNavigableYear, dateOfLastNavigableYear);
   }
 
-  // TODO: Naming? Was called activeYearIndexOfSelectableYears
   get navigatedYear(): number {
     return this.navigableYears.indexOf(this.activeYear);
   }
@@ -446,24 +441,16 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
     };
   }
 
-  // TODO: Should this be based on new Date() (so deterministically today) or this.todayDate?
-  // TODO: Is an if else statement more readable here?
   private getDateFromNavigableYear(navigableYear: number | Date): Date {
-    return navigableYear instanceof Date
-      ? navigableYear
-      : new Date(
-          (this.todayDate ? this.todayDate : new Date()).getFullYear() + navigableYear,
-          0,
-          1
-        );
+    if (navigableYear instanceof Date) return navigableYear;
+    const today = this.todayDate || new Date();
+    return new Date(today.getFullYear() + navigableYear, 0, 1);
   }
 
-  // TODO: Perhaps moment can already do this ? ? ?
   private findYearsBetweenDates(startDate: Date, endDate: Date): string[] {
-    const yearsBetweenDates = [];
-    for (let year = startDate.getFullYear(); year <= endDate.getFullYear(); year++) {
-      yearsBetweenDates.push(year.toString());
-    }
-    return yearsBetweenDates;
+    // Ensure years are ordered correctly if parameters are switched:
+    const [startYear, endYear] = [startDate.getFullYear(), endDate.getFullYear()].sort();
+    const numberOfYears = endYear - startYear;
+    return Array.from({ length: numberOfYears + 1 }, (_, i) => (startYear + i).toString());
   }
 }
