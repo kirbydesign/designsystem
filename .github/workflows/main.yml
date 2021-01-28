@@ -128,7 +128,7 @@ jobs:
             DOCKER_TAG: git${{github.sha}}
             DOMAIN: '650b277bd9a54e5cbadc.westeurope.aksapp.io'
             HELM_CONFIG: 'config/helm/branch.yaml'
-          run: helm upgrade --kubeconfig kube.config -i "${RELEASENAME}" charts/spa --set image.repository=$DOCKER_REPO --set image.tag=$DOCKER_TAG --set ingress.host="${DNS}".$DOMAIN -f $HELM_CONFIG
+          run: /usr/bin/helm upgrade --kubeconfig kube.config -i "${RELEASENAME}" charts/spa --set image.repository=$DOCKER_REPO --set image.tag=$DOCKER_TAG --set ingress.host="${DNS}".$DOMAIN -f $HELM_CONFIG
 
 
 
