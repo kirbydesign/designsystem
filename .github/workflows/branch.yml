@@ -50,9 +50,9 @@ jobs:
           run: npm run dist:designsystem
 
     deploy_to_cookbook:
+      if: ${{ github.event_name != 'pull_request' }}
       needs: [lint_and_unittest, build_kirby]
       runs-on: ubuntu-latest
-      #    if: ${{ github.event_name != 'pull_request' }}
       strategy:
         matrix:
           node-version: [10.16]
