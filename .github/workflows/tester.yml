@@ -6,7 +6,7 @@ defaults:
     shell: bash
 
 jobs:
-  lint_and_unittest:
+  doIt:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -17,6 +17,6 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Install six
+      - name: Test if
         if: "!startsWith(github.event.head_commit.message, 'Bumping version to')"
-        run: echo "${{github.event.head_commit.message}}
+        run: echo "${{github.event.head_commit.message}}"
