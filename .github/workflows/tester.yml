@@ -17,6 +17,6 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Test if
+      - name: Test if true
         if: "!startsWith(github.event.head_commit.message, 'Bumping version to')"
         run: echo "${{github.event.head_commit.message}}"
