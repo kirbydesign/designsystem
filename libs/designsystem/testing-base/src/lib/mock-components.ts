@@ -3,6 +3,7 @@ import { MockAppComponent } from './components/mock.app.component';
 import { MockAvatarComponent } from './components/mock.avatar.component';
 import { MockBadgeComponent } from './components/mock.badge.component';
 import { MockButtonComponent } from './components/mock.button.component';
+import { MockCalendarComponent } from './components/mock.calendar.component';
 import { MockCardFooterComponent } from './components/mock.card-footer.component';
 import { MockCardHeaderComponent } from './components/mock.card-header.component';
 import { MockCardComponent } from './components/mock.card.component';
@@ -59,6 +60,7 @@ export const MOCK_COMPONENTS = [
   MockAvatarComponent,
   MockBadgeComponent,
   MockButtonComponent,
+  MockCalendarComponent,
   MockCardFooterComponent,
   MockCardHeaderComponent,
   MockCardComponent,
