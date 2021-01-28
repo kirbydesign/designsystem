@@ -32,6 +32,7 @@ jobs:
           run: npm run test:ci
         - name: run npm coverage-report
           run: npm run coverage-report || true
+
     build_kirby:
       runs-on: ubuntu-latest
       strategy:
@@ -42,14 +43,14 @@ jobs:
         - name: Use Node.js ${{ matrix.node-version }}
           uses: actions/setup-node@v1
           with:
-            always-auth: true
-            registry-url: https://registry.npmjs.org
             node-version: ${{ matrix.node-version }}
-          env:
-            NODE_AUTH_TOKEN: $ {{ NPM_AUTH_TOKEN }}
-        - run: pip install six
-        - run: npm ci
-        - run: npm run dist:designsystem
+        - name: install six
+          run: pip install six
+        - name: run npm ci
+          run: npm ci
+        - name: run npm dist:designsystem
+          run: npm run dist:designsystem
+
     deploy_to_cookbook:
       needs: [lint_and_unittest, build_kirby]
       runs-on: ubuntu-latest
@@ -63,39 +64,35 @@ jobs:
           uses: actions/setup-node@v1
           with:
             node-version: ${{ matrix.node-version }}
-          env:
-            NODE_OPTIONS: '--max_old_space_size=3072'
-        - run: npm ci
-        - run: |
+        - name: run npm ci
+          run: npm ci
+        - name: setup kubectl
+          run: |
             sudo apt-get update
             sudo apt-get install -y apt-transport-https
             curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
             echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
             sudo apt-get update
             sudo apt-get install -y kubectl
-        - run: |
+        - name: setup helm to use version 2.12.3
+          run: |
             curl https://storage.googleapis.com/kubernetes-helm/helm-v2.12.3-linux-amd64.tar.gz -o helm-linux-amd64.tar.gz
             tar xzf helm-linux-amd64.tar.gz
             sudo cp linux-amd64/helm /usr/bin/
             rm -rf linux-amd64
-        - run: npm run dist
-        - run: docker build -t drbstaging.azurecr.io/kirbydesign/designsystem:git${{ github.sha }} .
-        - name: get branch name
+        - name: run npm dist
+          run: npm run dist
+        - name: build docker image
+          run: docker build -t drbstaging.azurecr.io/kirbydesign/designsystem:git${{ github.sha }} .
+        - name: if branch get branch name
           if: ${{ github.ref != 'refs/heads/master' }}
           run: |
-            echo "${GITHUB_REF}"
             branchname="${GITHUB_REF##*/}"
-            echo $branchname
             branchname="${branchname//feature//}"
-            echo $branchname
             branchname="${branchname#?}"
-            echo $branchname
             releasename="designsystem-${branchname//[^a-zA-Z0-9]/-}"
-            echo $releasename
             releasename=$(tr [A-Z] [a-z] <<< "$releasename")
-            echo $releasename
             releasename=$(cut -c 1-53 <<< "$releasename")
-            echo $releasename
             echo "RELEASENAME=${releasename}" >> $GITHUB_ENV
         - name: get dns
           env:
@@ -104,7 +101,7 @@ jobs:
             chmod +x ./.scripts/dns.pl
             dns=$(perl ./.scripts/dns.pl $DOMAIN "${RELEASENAME}")
             echo "DNS=${dns}" >> $GITHUB_ENV
-        - name: handle branches
+        - name: run if a branch
           if: ${{ github.ref != 'refs/heads/master' }}
           run: echo "${DNS}"
         - name: push docker image
