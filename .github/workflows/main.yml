@@ -124,14 +124,20 @@ jobs:
 #          openssl enc -d -aes-256-cbc -md sha512 -K $KEY -iv $IV -salt -in ./.scripts/kube-config.enc -out kube.config
       - name: run helm upgrade
         env:
-          RELEASENAME: "${RELEASENAME}"
+#          RELEASENAME: "${RELEASENAME}"
           DOCKER_REPO: 'drbstaging.azurecr.io/kirbydesign/designsystem'
           DOCKER_TAG: git${{github.sha}}
-          HOSTNAME: "${DNS}"
+#          HOSTNAME: "${DNS}"
           DOMAIN: '650b277bd9a54e5cbadc.westeurope.aksapp.io'
           HELM_CONFIG: 'config/helm/branch.yaml'
 #        run: helm upgrade --kubeconfig kube.config -i $RELEASENAME charts/spa --set image.repository=$DOCKER_REPO --set image.tag=$DOCKER_TAG --set ingress.host=$HOSTNAME.$DOMAIN -f $HELM_CONFIG
-        run: echo "${RELEASENAME}" $DOCKER_REPO $DOCKER_TAG "${DNS}".$DOMAIN $HELM_CONFIG
+        run: echo |
+            This is the release "${RELEASENAME}" 
+            This is docker repo $DOCKER_REPO 
+            this is docker tag $DOCKER_TAG 
+            this is dns "${DNS}"
+            this is domain $DOMAIN 
+            this is helm $HELM_CONFIG
 
 
 
