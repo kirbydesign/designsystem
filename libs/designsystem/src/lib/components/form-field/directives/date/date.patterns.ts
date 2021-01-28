@@ -30,38 +30,48 @@ export class DatePatterns {
   public static frag2 = '';
   public static frag3 = '';
 
+  public static placeholderPattern = '';
+
   public static buildPatterns(localeConfig: DateLocaleAnalyser): void {
     const d: number = localeConfig.dayIndex;
     const m: number = localeConfig.monthIndex;
     const y: number = localeConfig.yearIndex;
     const separator: string = localeConfig.separator;
 
+    console.log(localeConfig);
+
     if (y < d && y < m) {
       this.frag1 = DatePatterns.years;
       if (m < d) {
         DatePatterns.frag2 = DatePatterns.months;
         DatePatterns.frag3 = DatePatterns.dates;
+        DatePatterns.placeholderPattern = `yyyy${separator}mm${separator}dd`;
       } else {
         DatePatterns.frag2 = DatePatterns.dates;
         DatePatterns.frag3 = DatePatterns.months;
+        DatePatterns.placeholderPattern = `yyyy${separator}dd${separator}mm`;
       }
     } else if (d < m && d < y) {
       DatePatterns.frag1 = DatePatterns.dates;
       if (y < m) {
         DatePatterns.frag2 = DatePatterns.years;
         DatePatterns.frag3 = DatePatterns.months;
+        DatePatterns.placeholderPattern = `dd${separator}yyyy${separator}mm`;
       } else {
         DatePatterns.frag2 = DatePatterns.months;
         DatePatterns.frag3 = DatePatterns.years;
+        DatePatterns.placeholderPattern = `dd${separator}mm${separator}yyyy`;
       }
     } else if (m < d && m < y) {
       this.frag1 = DatePatterns.months;
       if (y < d) {
         DatePatterns.frag2 = DatePatterns.years;
         DatePatterns.frag3 = DatePatterns.dates;
+        DatePatterns.placeholderPattern = `mm${separator}yyyy${separator}dd`;
       } else {
         DatePatterns.frag2 = DatePatterns.dates;
         DatePatterns.frag3 = DatePatterns.years;
+        DatePatterns.placeholderPattern = `mm${separator}dd${separator}yyyy`;
       }
     }
     DatePatterns.createValidationPattern(this.frag1, this.frag2, this.frag3, separator);

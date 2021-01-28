@@ -1,5 +1,5 @@
-import { Inject, Injectable, LOCALE_ID } from '@angular/core';
 import { FormatWidth, getLocaleDateFormat } from '@angular/common';
+import { Inject, Injectable, LOCALE_ID } from '@angular/core';
 @Injectable({
   providedIn: 'root',
 })
@@ -8,6 +8,8 @@ export class DateLocaleAnalyser {
   public yearFirst: boolean;
   public dayBeforeMonth: boolean;
   public firstSectionLength: number;
+  public secondSectionLength: number;
+  public thirdSectionLength: number;
 
   public dayIndex: number;
   public monthIndex: number;
@@ -16,8 +18,13 @@ export class DateLocaleAnalyser {
   constructor(@Inject(LOCALE_ID) private locale: string) {
     this.yearFirst = false;
     this.firstSectionLength = 2;
+    this.secondSectionLength = 2;
+    this.thirdSectionLength = 4;
 
     const localeFormat = getLocaleDateFormat(this.locale, FormatWidth.Short);
+
+    console.log(localeFormat);
+
     this.dayIndex = localeFormat.indexOf('dd');
     if (this.dayIndex === -1) this.dayIndex = localeFormat.indexOf('d');
     this.monthIndex = localeFormat.indexOf('MM');
@@ -35,6 +42,10 @@ export class DateLocaleAnalyser {
     if (this.yearIndex < this.dayIndex && this.yearIndex < this.monthIndex) {
       this.yearFirst = true;
       this.firstSectionLength = 4;
+      this.thirdSectionLength = 2;
+    } else if (this.yearIndex > this.dayIndex && this.yearIndex > this.monthIndex) {
+      this.firstSectionLength = 2;
+      this.thirdSectionLength = 4;
     }
     this.dayBeforeMonth = this.dayIndex < this.monthIndex;
   }

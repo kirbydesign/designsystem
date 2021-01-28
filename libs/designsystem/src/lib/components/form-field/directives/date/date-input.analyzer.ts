@@ -23,13 +23,21 @@ export class DateInputAnalyzer {
   private allowedCharsOnly: boolean;
   private maxLength: number;
 
+  public getPlaceholder(): string {
+    return DatePatterns.placeholderPattern;
+  }
+
   public analyse(cursorPosition: number, value: string, lastValue: string): string {
     this.cursorPosition = cursorPosition;
     this.lastValue = lastValue;
     value = value || '';
     value = this.resetAndCapture(value);
     if (value !== '') {
-      if (value.endsWith(this.localeConfig.separator)) return value;
+      if (value.endsWith(this.localeConfig.separator)) {
+        console.log('separator detected');
+        value = this.handleSeparator(value);
+        return value;
+      }
     }
     if (this.lastValue !== value && value !== '') {
       value = this.validateValue(value);
@@ -194,6 +202,7 @@ export class DateInputAnalyzer {
   }
 
   private validateSection1(value: string): string {
+    console.log('validateSection1', value);
     if (this.localeConfig.yearFirst) {
       value = this.fixYearSection(value);
     } else {
@@ -207,19 +216,21 @@ export class DateInputAnalyzer {
   }
 
   private validateSection2(value: string): string {
+    console.log('validateSection2', value);
     const subStr1 = value.substring(0, this.localeConfig.firstSectionLength);
     const subStr2 = value.substring(this.localeConfig.firstSectionLength);
     if (this.localeConfig.dayBeforeMonth) {
       // ddmm
-      value = this.fixMonthSection(subStr1) + this.fixDaySection(subStr2);
+      value = this.fixDaySection(subStr1) + this.fixDaySection(subStr2);
     } else {
       // mmdd
-      value = this.fixDaySection(subStr1) + this.fixMonthSection(subStr2);
+      value = this.fixMonthSection(subStr1) + this.fixMonthSection(subStr2);
     }
     return value;
   }
 
   private validateSection3(value: string): string {
+    console.log('validateSection3', value);
     const subStr1 = value.substring(0, this.localeConfig.firstSectionLength);
     const subStr2 = value.substring(
       this.localeConfig.firstSectionLength,
@@ -258,7 +269,8 @@ export class DateInputAnalyzer {
   }
 
   private fixDaySection(value: string): string {
-    const v = value;
+    console.log('enter fixDaySection', value, this.cursorPosition);
+
     if (value.length === 1) {
       const val = parseInt(value, 10);
       if (val > 3 && val <= 9) {
@@ -271,11 +283,13 @@ export class DateInputAnalyzer {
         value = '01';
       }
     }
+    console.log('exit fixDaySection', value, this.cursorPosition);
+
     return value;
   }
 
   private fixMonthSection(value: string): string {
-    const v = value;
+    console.log('enter fixMonthSection', value, this.cursorPosition);
     if (value.length === 1) {
       const val = parseInt(value, 10);
       if (val > 3 && val <= 9) {
@@ -284,14 +298,51 @@ export class DateInputAnalyzer {
       }
     } else if (value.length === 2) {
       const val = parseInt(value, 10);
-      if (val > 12 || val === 0) {
+      if (val === 0) {
         value = '01';
       }
+      if (val > 12) {
+        value = '12';
+      }
     }
+    console.log('exit fixMonthSection', value, this.cursorPosition);
     return value;
   }
 
   private fixYearSection(value: string): string {
+    return value;
+  }
+
+  private handleSeparator(value: string) {
+    console.log('enter handleSeparator', value, this.cursorPosition);
+
+    const firstLength = this.localeConfig.firstSectionLength;
+    const secondLength = this.localeConfig.secondSectionLength;
+    const includeSecondPartLength =
+      this.localeConfig.firstSectionLength +
+      this.localeConfig.separator.length +
+      this.localeConfig.secondSectionLength;
+
+    if (value.length === firstLength) {
+      const val = parseInt(value.substr(0, firstLength - 1), 10);
+      const v = val.toString().padStart(firstLength, '0') + this.localeConfig.separator;
+      console.log('firstLength val og v', val, v);
+      value = v;
+      this.cursorPosition = value.length;
+    } else if (value.length === includeSecondPartLength) {
+      const val = parseInt(value.substr(firstLength + 1, secondLength - 1), 10);
+
+      const v =
+        value.substr(0, firstLength) +
+        this.localeConfig.separator +
+        val.toString().padStart(secondLength, '0') +
+        this.localeConfig.separator;
+
+      console.log('secondLength  val og v', val, v);
+      value = v;
+      this.cursorPosition = value.length;
+    }
+    console.log('exit handleSeparator', value, this.cursorPosition);
     return value;
   }
 }

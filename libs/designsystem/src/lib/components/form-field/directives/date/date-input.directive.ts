@@ -40,6 +40,9 @@ export class DateInputDirective implements OnInit, OnDestroy {
   private cursorPosition = -1;
 
   ngOnInit(): void {
+    if (!this.hostElement.nativeElement.placeholder) {
+      this.hostElement.nativeElement.placeholder = this.analyzer.getPlaceholder();
+    }
     // @ts-ignore
     this.ngControl.valueChanges
       .pipe(
@@ -74,7 +77,6 @@ export class DateInputDirective implements OnInit, OnDestroy {
       onlySelf: true,
       emitModelToViewChange: true,
     });
-
     if (this.cursorPosition !== undefined) {
       this.hostElement.nativeElement.setSelectionRange(this.cursorPosition, this.cursorPosition);
     }
