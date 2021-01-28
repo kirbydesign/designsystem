@@ -1,7 +1,7 @@
-name: Kirby CI
+name: Kirby branch CI
 on:
   push:
-    branches-ignore : [ master ]
+    branches-ignore: [ master ]
 defaults:
   run:
     shell: bash
