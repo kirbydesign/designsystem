@@ -1,18 +1,23 @@
-name: CI-test
-
+name: Kirby master CI
 on:
   push:
+    branches: [ master ]
+defaults:
+  run:
+    shell: bash
 
 jobs:
-  set-env:
+  lint_and_unittest:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [10.16]
     steps:
       - uses: actions/checkout@v2
-      - name: test stuff
-        env:
-          KEY: ${{secrets.ENCRYPTED_09E556D51FDC_KEY}}
-          IV: ${{secrets.ENCRYPTED_09E556D51FDC_IV}}
-        run: helm version
-#          openssl version
-#          openssl enc -d -aes-256-cbc -md sha512 -K $KEY -iv $IV -salt -in ./.scripts/kube-config.enc -out kube.config
-          
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install six
+        if: startsWith(github.event.head_commit.message, 'Bumping version to' == false
+        run: echo "${{github.event.head_commit.message}}
