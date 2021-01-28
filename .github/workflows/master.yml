@@ -80,6 +80,16 @@ jobs:
           git --no-pager diff
           git checkout master
           npm version patch -m ":bookmark: Bumping version to %s"
+  publish_to_npm:
+    needs: [lint_and_unittest, build_kirby, bump_version]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [10.16]
+    steps:
+      if: tag is something like vx.x
+      - name: publish to npm
+        run: sh ./scripts/publish.sh
 
   deploy_to_cookbook:
     needs: [lint_and_unittest, build_kirby, bump_version]
