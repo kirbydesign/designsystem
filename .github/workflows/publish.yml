@@ -20,8 +20,12 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+        env:
+          TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+      - name: create npm file
+        run: echo '//registry.npmjs.org/:_authToken=$TOKEN' > ~/.npmrc
       - name: publish to npm
-        run: sh ./scripts/publish.sh
+        run: sh ./scripts/publish.js
 
 
 
