@@ -9,135 +9,126 @@ defaults:
     shell: bash
 
 jobs:
-  #  lint_and_unittest:
-  #    runs-on: ubuntu-latest
-  #    strategy:
-  #     matrix:
-  #        node-version: [10.16]
-  #    steps:
-  #      - uses: actions/checkout@v2
-  #      - name: Use Node.js ${{ matrix.node-version }}
-  #        uses: actions/setup-node@v1
-  #        with:
-  #          node-version: ${{ matrix.node-version }}
-  #      - run: echo Event ${{ github.event.type }}
-  #      - run: pip install six
-  #      - run: npm ci
-  #      - run: npm run lint
-  #      - run: npm run extract-scss-variables
-  #      - run: npm run test:ci
-  #      - run: npm run coverage-report || true
-  #  build_kirby:
-  #    runs-on: ubuntu-latest
-  #    strategy:
-  #      matrix:
-  #        node-version: [10.16]
-  #    steps:
-  #      - uses: actions/checkout@v2
-  #      - name: Use Node.js ${{ matrix.node-version }}
-  #        uses: actions/setup-node@v1
-  #        with:
-  #          always-auth: true
-  #          registry-url: https://registry.npmjs.org
-  #          node-version: ${{ matrix.node-version }}
-  #        env:
-  #          NODE_AUTH_TOKEN: $ {{ NPM_AUTH_TOKEN }}
-  #      - run: pip install six
-  #      - run: npm ci
-  #      - run: npm run dist:designsystem
-  deploy_to_cookbook:
-    #    needs: [lint_and_unittest, build_kirby]
-    runs-on: ubuntu-latest
-    #    if: ${{ github.event_name != 'pull_request' }}
-    strategy:
-      matrix:
-        node-version: [10.16]
-    steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-        env:
-          NODE_OPTIONS: '--max_old_space_size=3072'
-#      - run: npm ci
-#      - run: |
-#          sudo apt-get update
-#          sudo apt-get install -y apt-transport-https
-#          curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
-#          echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
-#          sudo apt-get update
-#          sudo apt-get install -y kubectl
-#      - run: |
-#          curl https://storage.googleapis.com/kubernetes-helm/helm-v2.12.3-linux-amd64.tar.gz -o helm-linux-amd64.tar.gz
-#          tar xzf helm-linux-amd64.tar.gz
-#          sudo cp linux-amd64/helm /usr/bin/
-#          rm -rf linux-amd64
-#      - run: npm run dist
-#      - run: docker build -t drbstaging.azurecr.io/kirbydesign/designsystem:git${{ github.sha }} .
-      - name: get branch name
-        if: ${{ github.ref != 'refs/heads/master' }}
-        run: |
-          echo "${GITHUB_REF}"
-          branchname="${GITHUB_REF##*/}"
-          echo $branchname
-          branchname="${branchname//feature//}"
-          echo $branchname
-          branchname="${branchname#?}"
-          echo $branchname
-          releasename="designsystem-${branchname//[^a-zA-Z0-9]/-}"
-          echo $releasename
-          releasename=$(tr [A-Z] [a-z] <<< "$releasename")
-          echo $releasename
-          releasename=$(cut -c 1-53 <<< "$releasename")
-          echo $releasename
-          echo "RELEASENAME=${releasename}" >> $GITHUB_ENV
-      - name: get dns
-        env:
-          DOMAIN: '650b277bd9a54e5cbadc.westeurope.aksapp.io'
-        run: |
-          chmod +x ./.scripts/dns.pl
-          dns=$(perl ./.scripts/dns.pl $DOMAIN "${RELEASENAME}")
-          echo "DNS=${dns}" >> $GITHUB_ENV
-#      - name: handle branches
-#        if: ${{ github.ref != 'refs/heads/master' }}
-#        run: echo "${DNS}"
-#      - name: push docker image
-#        if: ${{ github.ref != 'refs/heads/master' }}
-#        env:
-#          DOCKER_REPO: 'drbstaging.azurecr.io/kirbydesign/designsystem'
-#          DOCKER_TAG: git${{github.sha}}
-#          DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
-#          DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
-#        run: |
-#          echo "pushing docker image $DOCKER_REPO:$DOCKER_TAG"
-#          echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin drbstaging.azurecr.io
-#          docker push $DOCKER_REPO:$DOCKER_TAG
-#      - name: clone charts
-#        run: git clone https://github.com/Bankdata/charts.git charts
-#      - name: decrypt kube config
-#        env:
-#          KEY: ${{secrets.ENCRYPTED_09E556D51FDC_KEY}}
-#          IV: ${{secrets.ENCRYPTED_09E556D51FDC_IV}}
-#        run: |
-#          openssl version
-#          openssl enc -d -aes-256-cbc -md sha512 -K $KEY -iv $IV -salt -in ./.scripts/kube-config.enc -out kube.config
-      - name: run helm upgrade
-        env:
-#          RELEASENAME: "${RELEASENAME}"
-          DOCKER_REPO: 'drbstaging.azurecr.io/kirbydesign/designsystem'
-          DOCKER_TAG: git${{github.sha}}
-#          HOSTNAME: "${DNS}"
-          DOMAIN: '650b277bd9a54e5cbadc.westeurope.aksapp.io'
-          HELM_CONFIG: 'config/helm/branch.yaml'
-#        run: helm upgrade --kubeconfig kube.config -i $RELEASENAME charts/spa --set image.repository=$DOCKER_REPO --set image.tag=$DOCKER_TAG --set ingress.host=$HOSTNAME.$DOMAIN -f $HELM_CONFIG
-        run: | 
-          echo this is the release "${RELEASENAME}" 
-          echo this is docker repo $DOCKER_REPO 
-          echo this is docker tag $DOCKER_TAG 
-          echo this is dns "${DNS}"
-          echo this is domain $DOMAIN 
-          echo this is helm $HELM_CONFIG
+    lint_and_unittest:
+      runs-on: ubuntu-latest
+      strategy:
+       matrix:
+          node-version: [10.16]
+      steps:
+        - uses: actions/checkout@v2
+        - name: Use Node.js ${{ matrix.node-version }}
+          uses: actions/setup-node@v1
+          with:
+            node-version: ${{ matrix.node-version }}
+        - run: echo Event ${{ github.event.type }}
+        - run: pip install six
+        - run: npm ci
+        - run: npm run lint
+        - run: npm run extract-scss-variables
+        - run: npm run test:ci
+        - run: npm run coverage-report || true
+    build_kirby:
+      runs-on: ubuntu-latest
+      strategy:
+        matrix:
+          node-version: [10.16]
+      steps:
+        - uses: actions/checkout@v2
+        - name: Use Node.js ${{ matrix.node-version }}
+          uses: actions/setup-node@v1
+          with:
+            always-auth: true
+            registry-url: https://registry.npmjs.org
+            node-version: ${{ matrix.node-version }}
+          env:
+            NODE_AUTH_TOKEN: $ {{ NPM_AUTH_TOKEN }}
+        - run: pip install six
+        - run: npm ci
+        - run: npm run dist:designsystem
+    deploy_to_cookbook:
+      needs: [lint_and_unittest, build_kirby]
+      runs-on: ubuntu-latest
+      #    if: ${{ github.event_name != 'pull_request' }}
+      strategy:
+        matrix:
+          node-version: [10.16]
+      steps:
+        - uses: actions/checkout@v2
+        - name: Use Node.js ${{ matrix.node-version }}
+          uses: actions/setup-node@v1
+          with:
+            node-version: ${{ matrix.node-version }}
+          env:
+            NODE_OPTIONS: '--max_old_space_size=3072'
+        - run: npm ci
+        - run: |
+            sudo apt-get update
+            sudo apt-get install -y apt-transport-https
+            curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+            echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+            sudo apt-get update
+            sudo apt-get install -y kubectl
+        - run: |
+            curl https://storage.googleapis.com/kubernetes-helm/helm-v2.12.3-linux-amd64.tar.gz -o helm-linux-amd64.tar.gz
+            tar xzf helm-linux-amd64.tar.gz
+            sudo cp linux-amd64/helm /usr/bin/
+            rm -rf linux-amd64
+        - run: npm run dist
+        - run: docker build -t drbstaging.azurecr.io/kirbydesign/designsystem:git${{ github.sha }} .
+        - name: get branch name
+          if: ${{ github.ref != 'refs/heads/master' }}
+          run: |
+            echo "${GITHUB_REF}"
+            branchname="${GITHUB_REF##*/}"
+            echo $branchname
+            branchname="${branchname//feature//}"
+            echo $branchname
+            branchname="${branchname#?}"
+            echo $branchname
+            releasename="designsystem-${branchname//[^a-zA-Z0-9]/-}"
+            echo $releasename
+            releasename=$(tr [A-Z] [a-z] <<< "$releasename")
+            echo $releasename
+            releasename=$(cut -c 1-53 <<< "$releasename")
+            echo $releasename
+            echo "RELEASENAME=${releasename}" >> $GITHUB_ENV
+        - name: get dns
+          env:
+            DOMAIN: '650b277bd9a54e5cbadc.westeurope.aksapp.io'
+          run: |
+            chmod +x ./.scripts/dns.pl
+            dns=$(perl ./.scripts/dns.pl $DOMAIN "${RELEASENAME}")
+            echo "DNS=${dns}" >> $GITHUB_ENV
+        - name: handle branches
+          if: ${{ github.ref != 'refs/heads/master' }}
+          run: echo "${DNS}"
+        - name: push docker image
+          if: ${{ github.ref != 'refs/heads/master' }}
+          env:
+            DOCKER_REPO: 'drbstaging.azurecr.io/kirbydesign/designsystem'
+            DOCKER_TAG: git${{github.sha}}
+            DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
+            DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+          run: |
+            echo "pushing docker image $DOCKER_REPO:$DOCKER_TAG"
+            echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin drbstaging.azurecr.io
+            docker push $DOCKER_REPO:$DOCKER_TAG
+        - name: clone charts
+          run: git clone https://github.com/Bankdata/charts.git charts
+        - name: decrypt kube config
+          env:
+            KEY: ${{secrets.ENCRYPTED_09E556D51FDC_KEY}}
+            IV: ${{secrets.ENCRYPTED_09E556D51FDC_IV}}
+          run: |
+            openssl version
+            openssl enc -d -aes-256-cbc -md sha512 -K $KEY -iv $IV -salt -in ./.scripts/kube-config.enc -out kube.config
+        - name: run helm upgrade
+          env:
+            DOCKER_REPO: 'drbstaging.azurecr.io/kirbydesign/designsystem'
+            DOCKER_TAG: git${{github.sha}}
+            DOMAIN: '650b277bd9a54e5cbadc.westeurope.aksapp.io'
+            HELM_CONFIG: 'config/helm/branch.yaml'
+          run: helm upgrade --kubeconfig kube.config -i "${RELEASENAME}" charts/spa --set image.repository=$DOCKER_REPO --set image.tag=$DOCKER_TAG --set ingress.host="${DNS}".$DOMAIN -f $HELM_CONFIG
 
 
 
