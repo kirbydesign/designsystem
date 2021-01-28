@@ -1,7 +1,6 @@
 name: Kirby master CI
-on:
-  push:
-    branches: [ master ]
+on: push
+    
 defaults:
   run:
     shell: bash
