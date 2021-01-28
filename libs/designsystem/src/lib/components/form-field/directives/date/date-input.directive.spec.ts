@@ -27,6 +27,7 @@ describe('Directive: DateInputDirective', () => {
       });
       let testFormControl: FormControl;
       let spectatorDirective: SpectatorDirective<DateInputDirective>;
+      let inputElement: HTMLInputElement;
       let sep: string;
       let month: string;
       let day: string;
@@ -42,6 +43,7 @@ describe('Directive: DateInputDirective', () => {
         spectatorDirective = createHost(template, {
           hostProps: { testFormControl },
         });
+        inputElement = spectatorDirective.element as HTMLInputElement;
       });
       describe('dates separator', () => {
         it('should add separator and set changed value in formControl', () => {
@@ -55,7 +57,7 @@ describe('Directive: DateInputDirective', () => {
           const val = DateFormatHelper.getDate(locale.id, day, month, year);
           testFormControl.setValue(val);
           spectatorDirective.detectChanges();
-          expect((spectatorDirective.element as HTMLInputElement).value).toBe(expectedValue);
+          expect(inputElement.value).toBe(expectedValue);
         });
 
         it('should remove leading "0"s in input', () => {
@@ -63,51 +65,105 @@ describe('Directive: DateInputDirective', () => {
           let val = '';
           let expectedValue = '';
           if (localeSettings.dayBeforeMonth) {
-            val = '00' + month + year;
+            val = `00${month}${year}`;
             expectedValue = `01${sep}${month}${sep}${year}`;
           } else {
-            val = '00' + day + year;
+            val = `00${day}${year}`;
             expectedValue = `01${sep}${day}${sep}${year}`;
           }
 
           testFormControl.setValue(val);
           spectatorDirective.detectChanges();
-          expect((spectatorDirective.element as HTMLInputElement).value).toBe(expectedValue);
+          expect(inputElement.value).toBe(expectedValue);
+        });
+
+        it('should handle out of range day (>31) and month (>12)', () => {
+          const localeSettings: DateLocaleAnalyser = new DateLocaleAnalyser(locale.id);
+          let val = '';
+          let expectedValue = '';
+          if (localeSettings.dayBeforeMonth) {
+            val = '32';
+            expectedValue = `31`;
+          } else {
+            val = '13';
+            expectedValue = `12`;
+          }
+
+          testFormControl.setValue(val);
+          spectatorDirective.detectChanges();
+          expect(inputElement.value).toBe(expectedValue);
+        });
+
+        it('should handle lower out of range day (0) and month (0)', () => {
+          const localeSettings: DateLocaleAnalyser = new DateLocaleAnalyser(locale.id);
+          let val = '';
+          let expectedValue = '';
+          val = `0${sep}`;
+          expectedValue = `01${sep}`;
+          testFormControl.setValue(val);
+          spectatorDirective.detectChanges();
+          expect(inputElement.value).toBe(expectedValue);
         });
 
         it('should remove dates out of range in input', () => {
-          const val = DateFormatHelper.getDate(locale.id, '32', '32', year);
+          const val = DateFormatHelper.getDate(locale.id, '32', '13', year);
           testFormControl.setValue(val);
           spectatorDirective.detectChanges();
-          const expectedValue = `01${sep}01${sep}${year}`;
-          expect((spectatorDirective.element as HTMLInputElement).value).toBe(expectedValue);
+          const expectedValue = DateFormatHelper.getDate(locale.id, '31', '12', year);
+          expect(inputElement.value.replace(sep, '').replace(sep, '')).toBe(expectedValue);
         });
 
         it('should accept first char as 1', () => {
           const val = '1';
           testFormControl.setValue(val);
           spectatorDirective.detectChanges();
-          expect((spectatorDirective.element as HTMLInputElement).value).toBe(val);
+          expect(inputElement.value).toBe(val);
         });
 
         it('should accept first part (month or day) as 01', () => {
           const val = '01';
           testFormControl.setValue(val);
           spectatorDirective.detectChanges();
-          expect((spectatorDirective.element as HTMLInputElement).value).toBe(val);
+          expect(inputElement.value).toBe(val);
         });
 
-        it('should accept month and as x/y', () => {
+        it('should accept month as x/y', () => {
           const val = `${month}${sep}${month}`; //use month only to avoid looking a dd/mm and mm/dd scenarios
           testFormControl.setValue(val);
           spectatorDirective.detectChanges();
-          expect((spectatorDirective.element as HTMLInputElement).value).toBe(val);
+          expect(inputElement.value).toBe(val);
         });
         it('should accept full date as x/y/z', () => {
           const val = `${month}${sep}${month}${sep}${year}`; //use month only to avoid looking a dd/mm and mm/dd scenarios
           testFormControl.setValue(val);
           spectatorDirective.detectChanges();
-          expect((spectatorDirective.element as HTMLInputElement).value).toBe(val);
+          expect(inputElement.value).toBe(val);
+        });
+
+        it('should convert 1/ to 01/', () => {
+          const localeSettings: DateLocaleAnalyser = new DateLocaleAnalyser(locale.id);
+          let val = '';
+          let expectedValue = '';
+          val = `0${sep}`;
+          expectedValue = `01${sep}`;
+
+          testFormControl.setValue(val);
+          spectatorDirective.detectChanges();
+
+          expect(inputElement.value).toBe(expectedValue);
+        });
+
+        it('should convert 01/1/ to 01/01/', () => {
+          const localeSettings: DateLocaleAnalyser = new DateLocaleAnalyser(locale.id);
+          let val = '';
+          let expectedValue = '';
+          val = `01${sep}1${sep}`;
+          expectedValue = `01${sep}01${sep}`;
+
+          testFormControl.setValue(val);
+          spectatorDirective.detectChanges();
+
+          expect(inputElement.value).toBe(expectedValue);
         });
       });
 
@@ -126,6 +182,13 @@ describe('Directive: DateInputDirective', () => {
 class DateFormatHelper {
   public static getDate(locale: string, d: string, m: string, y: string): string {
     const localeSettings: DateLocaleAnalyser = new DateLocaleAnalyser(locale);
+    if (localeSettings.yearFirst) {
+      if (localeSettings.dayBeforeMonth) {
+        return y + d + m;
+      } else {
+        return y + m + d;
+      }
+    }
     if (localeSettings.dayBeforeMonth) {
       return d + m + y;
     } else {

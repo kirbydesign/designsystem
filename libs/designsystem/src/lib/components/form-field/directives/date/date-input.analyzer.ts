@@ -32,17 +32,24 @@ export class DateInputAnalyzer {
     this.lastValue = lastValue;
     value = value || '';
     value = this.resetAndCapture(value);
+    let sepDetected = false;
     if (value !== '') {
       if (value.endsWith(this.localeConfig.separator)) {
         console.log('separator detected');
         value = this.handleSeparator(value);
-        return value;
+        sepDetected = true;
+        console.log('separated handled value', value);
       }
     }
     if (this.lastValue !== value && value !== '') {
       value = this.validateValue(value);
       value = this.handleDate(value);
     }
+    if (sepDetected) {
+      value = value + this.localeConfig.separator;
+      this.cursorPosition = value.length;
+    }
+
     return value;
   }
 
@@ -279,8 +286,10 @@ export class DateInputAnalyzer {
       }
     } else if (value.length === 2) {
       const val = parseInt(value, 10);
-      if (val > 31 || val === 0) {
+      if (val === 0) {
         value = '01';
+      } else if (val > 31) {
+        value = '31';
       }
     }
     console.log('exit fixDaySection', value, this.cursorPosition);
@@ -325,22 +334,22 @@ export class DateInputAnalyzer {
 
     if (value.length === firstLength) {
       const val = parseInt(value.substr(0, firstLength - 1), 10);
-      const v = val.toString().padStart(firstLength, '0') + this.localeConfig.separator;
+      const v = val.toString().padStart(firstLength, '0');
       console.log('firstLength val og v', val, v);
-      value = v;
-      this.cursorPosition = value.length;
+      value = v; // + this.localeConfig.separator;
+      // this.cursorPosition = value.length;
     } else if (value.length === includeSecondPartLength) {
       const val = parseInt(value.substr(firstLength + 1, secondLength - 1), 10);
 
       const v =
         value.substr(0, firstLength) +
         this.localeConfig.separator +
-        val.toString().padStart(secondLength, '0') +
-        this.localeConfig.separator;
+        val.toString().padStart(secondLength, '0');
+      //  + this.localeConfig.separator
 
       console.log('secondLength  val og v', val, v);
       value = v;
-      this.cursorPosition = value.length;
+      // this.cursorPosition = value.length;
     }
     console.log('exit handleSeparator', value, this.cursorPosition);
     return value;
