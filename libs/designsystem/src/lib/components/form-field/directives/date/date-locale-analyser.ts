@@ -22,9 +22,6 @@ export class DateLocaleAnalyser {
     this.thirdSectionLength = 4;
 
     const localeFormat = getLocaleDateFormat(this.locale, FormatWidth.Short);
-
-    console.log(localeFormat);
-
     this.dayIndex = localeFormat.indexOf('dd');
     if (this.dayIndex === -1) this.dayIndex = localeFormat.indexOf('d');
     this.monthIndex = localeFormat.indexOf('MM');

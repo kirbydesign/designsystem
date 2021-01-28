@@ -38,8 +38,6 @@ export class DatePatterns {
     const y: number = localeConfig.yearIndex;
     const separator: string = localeConfig.separator;
 
-    console.log(localeConfig);
-
     if (y < d && y < m) {
       this.frag1 = DatePatterns.years;
       if (m < d) {
