@@ -1,17 +1,17 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgModule } from '@angular/core';
 
 import { KirbyModule } from '@kirbydesign/designsystem';
 
-import { RadioExampleComponent } from './radio-example.component';
-import { RadioDefaultExampleComponent } from './examples/default';
-import { RadioStatesExampleComponent } from './examples/states';
-import { RadioSizesExampleComponent } from './examples/sizes';
 import { RadioExampleBindingComponent } from './examples/binding';
-import { RadioInItemExampleComponent } from './examples/in-item';
 import { RadioCustomContentExampleComponent } from './examples/custom';
+import { RadioDefaultExampleComponent } from './examples/default';
+import { RadioInFormFieldExampleComponent } from './examples/in-form-field';
+import { RadioInItemExampleComponent } from './examples/in-item';
 import { RadioInListExampleComponent } from './examples/list';
+import { RadioSizesExampleComponent } from './examples/sizes';
+import { RadioStatesExampleComponent } from './examples/states';
+import { RadioExampleComponent } from './radio-example.component';
 
 const COMPONENT_DECLARATIONS = [
   RadioExampleComponent,
@@ -19,13 +19,14 @@ const COMPONENT_DECLARATIONS = [
   RadioStatesExampleComponent,
   RadioSizesExampleComponent,
   RadioCustomContentExampleComponent,
+  RadioInFormFieldExampleComponent,
   RadioInItemExampleComponent,
   RadioInListExampleComponent,
   RadioExampleBindingComponent,
 ];
 
 @NgModule({
-  imports: [CommonModule, KirbyModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, KirbyModule],
   declarations: COMPONENT_DECLARATIONS,
   exports: COMPONENT_DECLARATIONS,
 })
