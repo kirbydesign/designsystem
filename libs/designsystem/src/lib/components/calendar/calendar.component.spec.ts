@@ -230,49 +230,69 @@ describe('CalendarComponent', () => {
   });
 
   describe('year navigator', () => {
-    beforeEach(() => {
-      spectator.component.yearNavigatorOptions = {
-        from: -3,
-        to: 2,
-      };
-      spectator.detectChanges();
+    describe('by default', () => {
+      it('should not render', () => {
+        expect(spectator.element.querySelector('kirby-dropdown')).toBeNull();
+      });
     });
 
-    it('should only render the navigator when year navigator options are set', () => {
-      expect(spectator.element.querySelector('kirby-dropdown')).not.toBeNull();
-      spectator.component.yearNavigatorOptions = undefined;
-      spectator.detectChanges();
-      expect(spectator.element.querySelector('kirby-dropdown')).toBeNull();
-    });
+    describe('when yearNavigatorOptions are set', () => {
+      let todayDate: Date;
+      let yearsBefore: number;
+      let yearsAfter: number;
 
-    it('should get the correct index for the selected year', () => {
-      expect(spectator.component.navigatedYear).toEqual(3);
-      spectator.component.yearNavigatorOptions = {
-        from: -2,
-        to: 2,
-      };
-      expect(spectator.component.navigatedYear).toEqual(2);
-    });
+      beforeEach(() => {
+        todayDate = new Date(2021, 0, 1);
+        yearsBefore = -3;
+        yearsAfter = 2;
 
-    it('should get navigable years based on from and to when min and max date are omitted', () => {
-      spectator.component.minDate = undefined;
-      spectator.component.maxDate = undefined;
+        spectator.setInput('todayDate', todayDate);
+        spectator.setInput('yearNavigatorOptions', {
+          from: yearsBefore,
+          to: yearsAfter,
+        });
+      });
 
-      expect(spectator.component.navigableYears).toEqual([
-        '2018',
-        '2019',
-        '2020',
-        '2021',
-        '2022',
-        '2023',
-      ]);
-    });
+      it('should render', () => {
+        expect(spectator.element.querySelector('kirby-dropdown')).not.toBeNull();
+      });
 
-    it('should prioritize min and max date over from and to when getting navigable years', () => {
-      spectator.component.minDate = new Date(2019, 0, 1);
-      spectator.component.maxDate = new Date(2023, 11, 31);
+      it('should get the correct index for the selected year', () => {
+        expect(spectator.component.navigatedYear).toEqual(3);
+        spectator.component.yearNavigatorOptions = {
+          from: -2,
+          to: 2,
+        };
+        expect(spectator.component.navigatedYear).toEqual(2);
+      });
 
-      expect(spectator.component.navigableYears).toEqual(['2019', '2020', '2021', '2022', '2023']);
+      it('should get navigable years based on `from` and `to` when min and max date are omitted', () => {
+        spectator.setInput('minDate', undefined);
+        spectator.setInput('maxDate', undefined);
+
+        expect(spectator.component.navigableYears).toEqual([
+          '2018',
+          '2019',
+          '2020',
+          '2021',
+          '2022',
+          '2023',
+        ]);
+      });
+
+      it('should prioritize `minDate` and `maxDate` over `from` and `to` when getting navigable years', () => {
+        spectator.setInput('minDate', new Date(2019, 0, 1));
+        spectator.setInput('maxDate', new Date(2024, 11, 31));
+
+        expect(spectator.component.navigableYears).toEqual([
+          '2019',
+          '2020',
+          '2021',
+          '2022',
+          '2023',
+          '2024',
+        ]);
+      });
     });
   });
 
