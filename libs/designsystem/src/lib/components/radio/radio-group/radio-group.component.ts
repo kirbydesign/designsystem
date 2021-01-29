@@ -1,6 +1,7 @@
 import {
   AfterContentInit,
-  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   ContentChild,
   ContentChildren,
   EventEmitter,
@@ -18,29 +19,30 @@ import { RadioComponent } from '../radio.component';
   selector: 'kirby-radio-group',
   templateUrl: './radio-group.component.html',
   styles: ['ion-radio-group { display: inherit; flex-wrap: inherit}'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RadioGroupComponent implements AfterContentInit, AfterViewInit {
+export class RadioGroupComponent implements AfterContentInit {
+  constructor(private changeDetectionRef: ChangeDetectorRef) {}
+
   // #region public properties
 
   get disabled(): boolean {
     return this._disabled;
   }
 
-  @Input() set disabled(disabled: boolean) {
-    this._disabled = disabled;
-    this.setDisabledState(disabled);
+  @Input() set disabled(value: boolean) {
+    this._disabled = value;
+    this.setProjectedRadiosDisabledState(value);
   }
 
   get items(): string[] | any[] {
     return this._items || []; // Ensure items return empty array even if set to null/undefined
   }
 
-  @Input() set items(items: string[] | any[]) {
-    this._items = items;
-    if (this.value) {
-      this._selectedIndex = this.items.indexOf(this.value); // Ensure selectedIndex reflects value within new items
-    }
-    this._value = this.items[this.selectedIndex] || null;
+  @Input() set items(value: string[] | any[]) {
+    if ((!value || !value.length) && !this.items.length) return; // Nothing changed, no items before or after
+    this._items = value;
+    this.refreshSelectionState();
   }
 
   @Input()
@@ -53,9 +55,11 @@ export class RadioGroupComponent implements AfterContentInit, AfterViewInit {
     return this._selectedIndex;
   }
 
-  @Input() set selectedIndex(index: number) {
-    if (index === this._selectedIndex) return;
-    this._selectedIndex = index;
+  @Input() set selectedIndex(value: number) {
+    if (typeof value === 'string') value = parseInt(value); // Ensure data type number, e.g. when used with template syntax without binding: <... selectedIndex="1"
+    if (value === undefined || value === null || value === NaN) value = -1;
+    if (value === this.selectedIndex) return;
+    this._selectedIndex = value;
     this._value = this.getValueFromSelectedIndex() || null;
   }
 
@@ -63,7 +67,7 @@ export class RadioGroupComponent implements AfterContentInit, AfterViewInit {
     return this._value;
   }
 
-  @Input() set value(value: any) {
+  @Input() set value(value: string | any) {
     this.setSelectedItem(value);
   }
 
@@ -75,45 +79,45 @@ export class RadioGroupComponent implements AfterContentInit, AfterViewInit {
   // #endregion public properties
 
   // #region "protected" properties used by template
-  @ContentChild(ListItemTemplateDirective, { static: true, read: TemplateRef })
-  _itemTemplate: TemplateRef<any>;
+  @ContentChild(ListItemTemplateDirective, { read: TemplateRef })
+  _customItemTemplate: TemplateRef<any>;
   // #endregion "protected" properties used by template
 
   // #region private fields
   private _disabled = false;
   private _items: string[] | any[] = [];
   private _selectedIndex: number = -1;
-  private _value: string | any = null;
+  private _value?: string | any = null;
   @ViewChildren(RadioComponent)
   private radioButtons: QueryList<RadioComponent>;
   @ContentChildren(RadioComponent, { descendants: true })
-  private slottedRadioButtons: QueryList<RadioComponent>;
+  private projectedRadioButtons: QueryList<RadioComponent>;
+  private get hasItemsFromContentProjection(): boolean {
+    return (
+      !this.items.length &&
+      !this._customItemTemplate &&
+      this.projectedRadioButtons &&
+      this.projectedRadioButtons.length > 0
+    );
+  }
+
   // #endregion private fields
 
   // #region public methods
   focus() {
-    const focusable =
-      this.radioButtons.find((radio) => radio.buttonTabIndex !== -1) ||
-      this.slottedRadioButtons.find((radio) => radio.buttonTabIndex !== -1);
+    const findFocusable = (radios: QueryList<RadioComponent>) =>
+      radios && radios.find((radio) => !isNaN(radio.buttonTabIndex) && radio.buttonTabIndex !== -1);
+    const focusable = findFocusable(this.radioButtons) || findFocusable(this.projectedRadioButtons);
     focusable && focusable.focus();
   }
 
   ngAfterContentInit(): void {
-    if (this.value) return;
-    // Ensure value is initialized from selectedIndex if not already set explicitly:
-    this._value = this.getValueFromSelectedIndex() || null;
-  }
-
-  ngAfterViewInit() {
-    // Ensure disabled state propagates when re-rendering radios.
-    // setTimeout prevents ExpressionChangedAfterItHasBeenCheckedError when updating the DOM in QueryList.changes:
-    this.radioButtons.changes.subscribe(() => this.setDisabledNextCycle());
-    this.slottedRadioButtons.changes.subscribe(() => this.setDisabledNextCycle());
+    this.initSelectionStateFromProjectedContent();
+    this.listenForProjectedRadiosChange();
   }
 
   setDisabledState(isDisabled: boolean) {
-    this.setRadioDisabledState(this.radioButtons, isDisabled);
-    this.setRadioDisabledState(this.slottedRadioButtons, isDisabled);
+    this.disabled = isDisabled;
   }
   // #endregion public methods
 
@@ -128,7 +132,11 @@ export class RadioGroupComponent implements AfterContentInit, AfterViewInit {
     return typeof item === 'string' ? undefined : item[this.itemDisabledProperty];
   }
 
-  _onChange(value: any) {
+  get _hasItems(): boolean {
+    return this.items.length > 0 || this.hasItemsFromContentProjection;
+  }
+
+  _onChange(value: string | any) {
     if (value === this._value) return;
     this.setSelectedItem(value);
     this.valueChange.emit(value);
@@ -136,36 +144,86 @@ export class RadioGroupComponent implements AfterContentInit, AfterViewInit {
   // #endregion "protected" methods used by template
 
   // #region private methods
-  private getValueFromSelectedIndex() {
-    if (this.items.length) {
-      return this.items && this.items[this.selectedIndex]; // Get value from items
-    }
-    const selectedRadio =
-      this.slottedRadioButtons && this.slottedRadioButtons.toArray()[this.selectedIndex];
-    return selectedRadio && selectedRadio.value; // Get value from slotted radios
+  private getIndexOfSelectedValue() {
+    if (!this.value) return -1;
+    return this.hasItemsFromContentProjection
+      ? this.getIndexOfProjectedRadio(this.value)
+      : this.items.indexOf(this.value);
   }
 
-  private setDisabledNextCycle() {
-    if (this.disabled) {
-      setTimeout(() => this.setDisabledState(this.disabled));
+  private getIndexOfProjectedRadio(value: string | any): number {
+    let selectedIndex = -1;
+    this.projectedRadioButtons &&
+      this.projectedRadioButtons.find((radio, i) => {
+        const found = radio.value === value;
+        if (found) {
+          selectedIndex = i;
+        }
+        return found;
+      });
+    return selectedIndex;
+  }
+
+  private getValueFromSelectedIndex(): string | any {
+    if (this.selectedIndex === -1) return;
+    return this.hasItemsFromContentProjection
+      ? this.getValueFromProjectedRadios(this.selectedIndex)
+      : this.items[this.selectedIndex];
+  }
+
+  private getValueFromProjectedRadios(index: number): string | any {
+    const radio =
+      this.projectedRadioButtons &&
+      this.projectedRadioButtons.find((_, i) => {
+        return i === index;
+      });
+    return radio && radio.value;
+  }
+
+  private initSelectionStateFromProjectedContent() {
+    if (this.hasItemsFromContentProjection) {
+      this.refreshSelectionState(); // Initialize selected index and value from projected radios
     }
   }
 
-  private setRadioDisabledState(radioButtons: QueryList<RadioComponent>, isDisabled: boolean) {
-    if (!radioButtons || !radioButtons.length) return;
-    radioButtons.forEach((radio, index) => {
-      let disableRadio = isDisabled;
-      if (isDisabled === false) {
-        disableRadio = this._getDisabledStateFromItem(this.items[index]); // Ensure each item's disabled state overwrite radio-group state, if defined
+  private listenForProjectedRadiosChange() {
+    this.projectedRadioButtons.changes.subscribe(() => {
+      this.refreshStateFromProjectedContent();
+
+      // Ensure disabled state propagates when re-rendering projected radios.
+      // setTimeout prevents ExpressionChangedAfterItHasBeenCheckedError when updating the DOM in QueryList.changes:
+      if (this.disabled) {
+        setTimeout(() => this.setProjectedRadiosDisabledState(this.disabled));
       }
-      radio.disabled = disableRadio;
     });
   }
 
-  private setSelectedItem(value: any) {
-    if (value === this._value) return;
-    this._value = value;
-    this._selectedIndex = this.items.indexOf(value);
+  private refreshSelectionState() {
+    if (this.value) {
+      this._selectedIndex = this.getIndexOfSelectedValue(); // Ensure selectedIndex reflects value within items
+    }
+    this._value = this.getValueFromSelectedIndex() || null; // Ensure value exists within items
   }
+
+  private refreshStateFromProjectedContent() {
+    if (!!this._customItemTemplate) return; // Only refresh on changes to projected content, not when re-rendering custom template
+    this.changeDetectionRef.markForCheck(); // Ensure changes to projected content triggers change detection
+    this.refreshSelectionState(); // Sync selected index and value from projected radios
+  }
+
+  private setSelectedItem(value: string | any) {
+    if (value === this._value) return; // Nothing changed
+    this._value = value;
+    this._selectedIndex = this.getIndexOfSelectedValue();
+  }
+
+  private setProjectedRadiosDisabledState(isDisabled: boolean) {
+    if (!this.projectedRadioButtons || !this.projectedRadioButtons.length) return;
+    this.projectedRadioButtons.forEach((radio, index) => {
+      // Disable all radios when group is disabled, otherwise fall back to each item's disabled state, if defined:
+      radio.disabled = isDisabled || this._getDisabledStateFromItem(this.items[index]);
+    });
+  }
+
   // #endregion private methods
 }
