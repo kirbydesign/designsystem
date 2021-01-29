@@ -27,6 +27,8 @@ export class TestHelper {
   public static async whenReady(
     elementOrNodeList: Element | NodeListOf<Element> | Element[]
   ): Promise<void> {
+    if (elementOrNodeList === undefined || elementOrNodeList === null)
+      return Promise.reject('TestHelper.whenReady: Element is null or undefined');
     if (elementOrNodeList instanceof Element) {
       await TestHelper.whenDefined(elementOrNodeList);
       await TestHelper.ionComponentOnReady(elementOrNodeList);
