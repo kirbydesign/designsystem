@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-
 import { stringifyPretty } from '~/app/shared/code-viewer/code-viewer.component';
 
 const items = [
@@ -24,9 +23,9 @@ const config = {
   </div>
 </kirby-radio-group>`,
   slottedTemplate: `<kirby-radio-group value="Bacon">
-  <kirby-radio value="Bacon" text="Bacon">
-  <kirby-radio value="Bologna" text="Bologna">
-  <kirby-radio value="Tenderloin" text="Tenderloin">
+  <kirby-radio value="Bacon" text="Bacon"></kirby-radio>
+  <kirby-radio value="Bologna" text="Bologna"></kirby-radio>
+  <kirby-radio value="Tenderloin" text="Tenderloin"></kirby-radio>
 </kirby-radio-group>`,
   codeSnippet: `items = ${stringifyPretty(items)};
 
