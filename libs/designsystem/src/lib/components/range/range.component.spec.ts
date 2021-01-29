@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { IonRange } from '@ionic/angular';
+import { IonicModule, IonRange } from '@ionic/angular';
 import {
   createComponentFactory,
   createHostFactory,
@@ -9,6 +9,7 @@ import {
 
 import { DesignTokenHelper } from '../../helpers';
 import { TestHelper } from '../../testing/test-helper';
+import { WindowRef } from '../../types';
 
 import { RangeComponent } from './range.component';
 
@@ -21,6 +22,13 @@ const createComponent = createComponentFactory({
 const createHost = createHostFactory({
   component: RangeComponent,
   declarations: [RangeComponent, IonRange],
+  imports: [IonicModule.forRoot({ mode: 'ios', _testing: true })],
+  providers: [
+    {
+      provide: WindowRef,
+      useValue: window,
+    },
+  ],
 });
 
 describe('RangeComponent', () => {
@@ -101,18 +109,17 @@ describe('RangeComponent design properties', () => {
     expect(spectator.component.step.toString()).toBe('1');
     expect(spectator.component.minLabel).toBe('Min');
     expect(spectator.component.maxLabel).toBe('Max');
-    expect(spectator.component.pin).toBe(true);
-    expect(spectator.component.snaps).toBe(true);
+    expect(spectator.component.pin.toString()).toBe('true');
+    expect(spectator.component.snaps.toString()).toBe('true');
   });
 });
 
 describe('Integration test of RangeComponent', () => {
   let spectator: SpectatorHost<RangeComponent>;
   let ionRangeElement: HTMLIonRangeElement;
-  beforeEach(async () => {
+  beforeEach(() => {
     spectator = createHost(`<kirby-range></kirby-range>`);
     ionRangeElement = spectator.query('ion-range');
-    await TestHelper.whenReady(ionRangeElement);
   });
 
   it('can create spectator host and find ion range', async () => {
@@ -171,7 +178,7 @@ describe('Min and Max Label ', () => {
 
 describe('Default Styling of RangeComponent', () => {
   let spectator: SpectatorHost<RangeComponent>;
-  beforeEach(async () => {
+  beforeEach(() => {
     spectator = createHost(`<kirby-range minLabel="min" maxLabel="max"></kirby-range>`);
   });
 
@@ -195,23 +202,23 @@ describe('Ion-Range', () => {
     ionRangeElement = spectator.query('ion-range');
     await TestHelper.whenReady(ionRangeElement);
   });
-  it('should have shadow dome', () => {
+
+  it('should have shadow DOM', () => {
     expect(ionRangeElement.shadowRoot).not.toBeNull();
+    expect(ionRangeElement.shadowRoot.parentElement).not.toBeNull();
   });
-  describe('tick should have correct default styling', () => {
-    it('ionRange tick should have correct styling', () => {
-      const tick = ionRangeElement.shadowRoot.querySelector('[part=tick]');
-      expect(tick).toHaveComputedStyle({
-        'z-index': '1',
-        'border-radius': '50%',
-      });
+  it('ionRange tick should have correct styling', () => {
+    const tick = ionRangeElement.shadowRoot.querySelector('[part=tick]');
+    expect(tick).toHaveComputedStyle({
+      'z-index': '1',
+      'border-radius': '50%',
     });
-    it('ionRange tick active should have correct styling', () => {
-      const tick = ionRangeElement.shadowRoot.querySelector('[part=tick-active]');
-      expect(tick).toHaveComputedStyle({
-        'z-index': '1',
-        'border-radius': '50%',
-      });
+  });
+  it('ionRange tick active should have correct styling', () => {
+    const tick = ionRangeElement.shadowRoot.querySelector('[part=tick-active]');
+    expect(tick).toHaveComputedStyle({
+      'z-index': '1',
+      'border-radius': '50%',
     });
   });
 });
