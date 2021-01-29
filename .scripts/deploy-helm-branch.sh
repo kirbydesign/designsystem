@@ -3,7 +3,7 @@
 git_repo="designsystem"
 domain="650b277bd9a54e5cbadc.westeurope.aksapp.io"
 docker_repo=$1
-docker_tag=git$github.sha
+docker_tag=git$TRAVIS_COMMIT
 helm_config=$2
 feature="feature"
 
