@@ -27,8 +27,8 @@ export class MockRangeComponent {
   @Input() step: number;
   @Input() ticks: number;
   @Output() valueChange = new EventEmitter<RangeValue>();
-  @Input() startLabel: string;
-  @Input() endLabel: string;
+  @Input() minLabel: string;
+  @Input() maxLabel: string;
   @Input() value: RangeValue;
 
   rangeValueChange() {}

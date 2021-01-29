@@ -62,13 +62,14 @@ describe('RangeComponent default properties', () => {
   });
   it('should set value', () => {
     expect(spectator.component.value).toBe(30);
-    spectator.component.value = 42;
-    expect(spectator.component.value).toBe(42);
+    const expectedValue = 35;
+    spectator.component.value = expectedValue;
+    expect(spectator.component.value).toBe(expectedValue);
   });
 
   it('should set value and react to change event', () => {
     expect(spectator.component.value).toBe(30);
-    const expectedValue = 42;
+    const expectedValue = 40;
     let value = 0;
     spectator.component.valueChange.subscribe((v) => (value = v));
     spectator.component.value = expectedValue;
@@ -80,7 +81,7 @@ describe('RangeComponent default properties', () => {
     const expectedValue = 42;
     let value = 0;
     spectator.component.valueChange.subscribe((v) => (value = v));
-    spectator.setInput('value', 42);
+    spectator.setInput('value', expectedValue);
     expect(value).toBe(expectedValue);
   });
 });
@@ -117,7 +118,6 @@ describe('Integration test of RangeComponent', () => {
   it('can create spectator host and find ion range', async () => {
     expect(spectator).not.toBeNull();
     expect(ionRangeElement).not.toBeNull();
-    expect(ionRangeElement.shadowRoot).not.toBeNull();
   });
 });
 
@@ -185,11 +185,9 @@ describe('Default Styling of RangeComponent', () => {
       'padding-bottom': size('xxs'),
     });
   });
-
-  // ionRangeElement.classList.contains('')).toBe(false)
 });
 
-describe('Styling of Ion-Range', () => {
+describe('Ion-Range', () => {
   let spectator: SpectatorHost<RangeComponent>;
   let ionRangeElement: HTMLIonRangeElement;
   beforeEach(async () => {
@@ -197,12 +195,22 @@ describe('Styling of Ion-Range', () => {
     ionRangeElement = spectator.query('ion-range');
     await TestHelper.whenReady(ionRangeElement);
   });
-
-  describe('should have correct default styling', () => {
-    it('ionRange should have correct styling', () => {
+  it('should have shadow dome', () => {
+    expect(ionRangeElement.shadowRoot).not.toBeNull();
+  });
+  describe('tick should have correct default styling', () => {
+    it('ionRange tick should have correct styling', () => {
       const tick = ionRangeElement.shadowRoot.querySelector('[part=tick]');
       expect(tick).toHaveComputedStyle({
         'z-index': '1',
+        'border-radius': '50%',
+      });
+    });
+    it('ionRange tick active should have correct styling', () => {
+      const tick = ionRangeElement.shadowRoot.querySelector('[part=tick-active]');
+      expect(tick).toHaveComputedStyle({
+        'z-index': '1',
+        'border-radius': '50%',
       });
     });
   });
