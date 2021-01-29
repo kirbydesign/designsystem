@@ -19,7 +19,7 @@ export class MockRadioGroupComponent {
   @Input() itemTextProperty: string;
   @Input() itemDisabledProperty: string;
   @Input() selectedIndex: number;
-  @Input() value: any;
+  @Input() value: string | any;
   @Output() valueChange = new EventEmitter<string | any>();
 }
 
