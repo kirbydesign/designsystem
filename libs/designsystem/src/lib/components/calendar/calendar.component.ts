@@ -126,7 +126,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
     const dateOfLastNavigableYear =
       this.maxDate || this.getDateFromNavigableYear(this.yearNavigatorOptions.to);
 
-    return this.findYearsBetweenDates(dateOfFirstNavigableYear, dateOfLastNavigableYear);
+    return this.getYearsBetweenDates(dateOfFirstNavigableYear, dateOfLastNavigableYear);
   }
 
   get navigatedYear(): number {
@@ -443,7 +443,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
     return new Date(today.getFullYear() + navigableYear, 0, 1);
   }
 
-  private findYearsBetweenDates(startDate: Date, endDate: Date): string[] {
+  private getYearsBetweenDates(startDate: Date, endDate: Date): string[] {
     // Ensure years are ordered correctly if parameters are switched:
     const [startYear, endYear] = [startDate.getFullYear(), endDate.getFullYear()].sort();
     const numberOfYears = endYear - startYear;
