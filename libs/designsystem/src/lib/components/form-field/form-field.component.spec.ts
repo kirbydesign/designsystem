@@ -17,7 +17,7 @@ const fontSize = DesignTokenHelper.fontSize;
 const fontWeight = DesignTokenHelper.fontWeight;
 const lineHeight = DesignTokenHelper.lineHeight;
 
-fdescribe('FormFieldComponent', () => {
+describe('FormFieldComponent', () => {
   let spectator: SpectatorHost<FormFieldComponent>;
 
   const createHost = createHostFactory({
