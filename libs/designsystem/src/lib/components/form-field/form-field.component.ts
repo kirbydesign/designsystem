@@ -1,19 +1,27 @@
 import {
+  AfterContentChecked,
+  AfterContentInit,
   ChangeDetectionStrategy,
   Component,
-  Input,
   ContentChild,
-  AfterContentChecked,
-  OnDestroy,
   ElementRef,
-  OnInit,
   HostListener,
+  Input,
+  OnDestroy,
+  OnInit,
+  Renderer2,
 } from '@angular/core';
 
 import { PlatformService } from '../../helpers/platform.service';
 import { WindowRef } from '../../types/window-ref';
+import { RadioGroupComponent } from '../radio';
 
 import { InputCounterComponent } from './input-counter/input-counter.component';
+import { InputComponent } from './input/input.component';
+import { TextareaComponent } from './textarea/textarea.component';
+
+// Counter for generating unique element ids
+let uniqueId = 0;
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -21,23 +29,37 @@ import { InputCounterComponent } from './input-counter/input-counter.component';
   styleUrls: ['./form-field.component.scss'],
   templateUrl: './form-field.component.html',
 })
-export class FormFieldComponent implements AfterContentChecked, OnInit, OnDestroy {
+export class FormFieldComponent
+  implements AfterContentChecked, AfterContentInit, OnInit, OnDestroy {
   private isRegistered = false;
   private element: HTMLElement;
   private inputElement: HTMLInputElement | HTMLTextAreaElement;
   private isTouch: boolean;
+  _labelId = `kirby-form-field-label-${uniqueId++}`;
 
   @Input() label: string;
   @Input() message: string;
 
   @ContentChild(InputCounterComponent, { static: false }) counter: InputCounterComponent;
+  @ContentChild(RadioGroupComponent) private radioGroupComponent: RadioGroupComponent;
+  @ContentChild(RadioGroupComponent, { read: ElementRef }) private radioGroupElement: ElementRef<
+    HTMLElement
+  >;
+
+  @ContentChild(InputComponent, { read: ElementRef }) input: ElementRef<HTMLInputElement>;
+  @ContentChild(TextareaComponent, { read: ElementRef }) textarea: ElementRef<HTMLTextAreaElement>;
 
   constructor(
     elementRef: ElementRef<HTMLElement>,
     private platform: PlatformService,
+    private renderer: Renderer2,
     private window: WindowRef
   ) {
     this.element = elementRef.nativeElement;
+  }
+
+  get _wrapContentInLabel(): boolean {
+    return !!this.label && (!!this.input || !!this.textarea);
   }
 
   private dispatchLoadEvent() {
@@ -54,6 +76,10 @@ export class FormFieldComponent implements AfterContentChecked, OnInit, OnDestro
   @HostListener('kirbyRegisterFormField')
   _onRegisterFormField() {
     this.dispatchLoadEvent();
+  }
+
+  onLabelClick() {
+    this.radioGroupComponent && this.radioGroupComponent.focus();
   }
 
   public focus() {
@@ -73,6 +99,16 @@ export class FormFieldComponent implements AfterContentChecked, OnInit, OnDestro
 
   ngOnInit() {
     this.isTouch = this.platform.isTouch();
+  }
+
+  ngAfterContentInit(): void {
+    if (this.label && this.radioGroupElement) {
+      this.renderer.setAttribute(
+        this.radioGroupElement.nativeElement,
+        'aria-labelledby',
+        this._labelId
+      );
+    }
   }
 
   ngAfterContentChecked(): void {
