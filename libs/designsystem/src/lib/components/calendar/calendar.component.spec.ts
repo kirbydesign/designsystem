@@ -266,7 +266,7 @@ describe('CalendarComponent', () => {
         expect(spectator.component.navigatedYear).toEqual(2);
       });
 
-      it('should get navigable years based on `from` and `to` when min and max date are omitted', () => {
+      it('should get navigable years based on `from` and `to` when `minDate` and `maxDate` are omitted', () => {
         spectator.setInput('minDate', undefined);
         spectator.setInput('maxDate', undefined);
 
