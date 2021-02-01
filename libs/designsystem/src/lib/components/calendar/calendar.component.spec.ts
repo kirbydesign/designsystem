@@ -2,9 +2,13 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import moment from 'moment';
 import { MockComponent } from 'ng-mocks';
 import { LOCALE_ID } from '@angular/core';
+import { IonItem } from '@ionic/angular';
 
 import { CalendarComponent, IconComponent } from '..';
 import { WindowRef } from '../../types/window-ref';
+import { DropdownComponent } from '../dropdown/dropdown.component';
+import { CardComponent } from '../card/card.component';
+import { ItemComponent } from '../item/item.component';
 
 // NOTE: when specifying multiple input properties, set selectedDate
 // as the last one. This makes the component update without the need to
@@ -15,7 +19,14 @@ describe('CalendarComponent', () => {
 
   const createHost = createHostFactory({
     component: CalendarComponent,
-    declarations: [CalendarComponent, MockComponent(IconComponent)],
+    declarations: [
+      CalendarComponent,
+      MockComponent(IconComponent),
+      DropdownComponent,
+      CardComponent,
+      ItemComponent,
+      IonItem,
+    ],
     providers: [
       {
         provide: LOCALE_ID,
@@ -228,7 +239,6 @@ describe('CalendarComponent', () => {
         .join(' ')
     ).toEqual('M T W T F S S');
   });
-
   describe('year navigator', () => {
     describe('by default', () => {
       it('should not render', () => {
@@ -257,13 +267,28 @@ describe('CalendarComponent', () => {
         expect(spectator.element.querySelector('kirby-dropdown')).not.toBeNull();
       });
 
+      // TODO: Could introduce a describe containing the next 2 tests to improve readability as well as designated expects
+      it('should change year on navigation', () => {
+        const yearNavigator = spectator.element.querySelector('kirby-dropdown');
+        const yearNavigatorButton = yearNavigator.querySelector('button');
+        const itemsInNavigator = yearNavigator.querySelectorAll('kirby-item');
+        const selectedItemIndex = 0;
+        const selectedNavigatorItem = itemsInNavigator.item(selectedItemIndex);
+        const currentNavigatorYear = selectedNavigatorItem.textContent;
+
+        spectator.click(selectedNavigatorItem);
+
+        expect(spectator.component.navigatedYear).toEqual(selectedItemIndex);
+        expect(yearNavigatorButton.textContent).toEqual(currentNavigatorYear);
+      });
+
       it('should get the correct index for the selected year', () => {
-        expect(spectator.component.navigatedYear).toEqual(3);
-        spectator.component.yearNavigatorOptions = {
-          from: -2,
-          to: 2,
-        };
-        expect(spectator.component.navigatedYear).toEqual(2);
+        const yearChange = 1;
+
+        expect(spectator.component.navigatedYear).toEqual(yearsBefore * -1);
+
+        spectator.component.changeYear(spectator.component.todayDate.getFullYear() + yearChange);
+        expect(spectator.component.navigatedYear).toEqual(yearsBefore * -1 + yearChange);
       });
 
       it('should get navigable years based on `from` and `to` when `minDate` and `maxDate` are omitted', () => {
