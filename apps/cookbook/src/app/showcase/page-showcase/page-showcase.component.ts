@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
+import { PageAdvancedExampleComponent } from '~/app/examples/page-example/advanced/page-advanced-example.component';
+import { PageCustomTitleExampleComponent } from '~/app/examples/page-example/advanced/page-custom-title-example.component';
+import { PageAlignmentAndToolbarTitleExampleComponent } from '~/app/examples/page-example/alignment-and-toolbar-title/page-alignment-and-toolbar-title-example.component';
+import { PageFitHeadingExampleComponent } from '~/app/examples/page-example/fit-heading/fit-heading-example.component';
+import { PageFixedFooterTabExampleComponent } from '~/app/examples/page-example/fixed-footer-tabs/tab/fixed-footer-tab-example.component';
+import { PageFixedTitleAndActionsExampleComponent } from '~/app/examples/page-example/fixed-title-and-actions/page-fixed-title-and-actions-example.component';
+import { PageSimpleExampleComponent } from '~/app/examples/page-example/simple/page-simple-example.component';
 
 import { ShowcaseProperty } from './../../shared/showcase-properties/showcase-property';
-import { PageSimpleExampleComponent } from '~/app/examples/page-example/simple/page-simple-example.component';
-import { PageAlignmentAndToolbarTitleExampleComponent } from '~/app/examples/page-example/alignment-and-toolbar-title/page-alignment-and-toolbar-title-example.component';
-import { PageFixedTitleAndActionsExampleComponent } from '~/app/examples/page-example/fixed-title-and-actions/page-fixed-title-and-actions-example.component';
-import { PageCustomTitleExampleComponent } from '~/app/examples/page-example/advanced/page-custom-title-example.component';
-import { PageAdvancedExampleComponent } from '~/app/examples/page-example/advanced/page-advanced-example.component';
-import { PageFitHeadingExampleComponent } from '~/app/examples/page-example/fit-heading/fit-heading-example.component';
 
 @Component({
   selector: 'cookbook-page-showcase',
@@ -19,6 +20,7 @@ export class PageShowcaseComponent {
     PageAlignmentAndToolbarTitleExampleComponent.template;
   fitHeadingExampleHtml: string = PageFitHeadingExampleComponent.template;
   fixedTitleAndActionsExampleHtml: string = PageFixedTitleAndActionsExampleComponent.template;
+  fixedFooterTabsExampleHtml: string = PageFixedFooterTabExampleComponent.template;
   fixedCustomTitleExampleHtml: string =
     PageFixedTitleAndActionsExampleComponent.customTitleTemplate;
   fixedActionsExampleHtml: string = PageFixedTitleAndActionsExampleComponent.fixedActionsTemplate;
@@ -52,6 +54,12 @@ export class PageShowcaseComponent {
     {
       name: 'hideBackButton',
       description: 'Hides the back button in the toolbar.',
+      defaultValue: 'false',
+      inputValues: ['true', 'false'],
+    },
+    {
+      name: 'tabBarBottomHidden',
+      description: 'Hides the tab bar when placed in the bottom.',
       defaultValue: 'false',
       inputValues: ['true', 'false'],
     },
