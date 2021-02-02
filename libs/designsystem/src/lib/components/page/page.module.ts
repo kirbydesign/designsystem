@@ -13,6 +13,7 @@ import {
   PageTitleDirective,
   PageToolbarTitleDirective,
 } from './page.component';
+import { PageFooterComponent } from './page-footer/page-footer.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import {
     PageActionsComponent,
     PageActionsDirective,
     PageContentComponent,
+    PageFooterComponent,
     PageContentDirective,
     PageTitleComponent,
     PageTitleDirective,
@@ -31,6 +33,7 @@ import {
     PageActionsComponent,
     PageActionsDirective,
     PageContentComponent,
+    PageFooterComponent,
     PageContentDirective,
     PageTitleComponent,
     PageTitleDirective,

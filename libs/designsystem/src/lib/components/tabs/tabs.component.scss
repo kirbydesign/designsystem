@@ -1,17 +1,14 @@
 @import '../../scss/utils';
 
-ion-tabs {
-  @include media('>=large') {
-    @include not-touch {
-      flex-direction: column-reverse;
-    }
-  }
+:host(:not(.tab-bar-bottom-hidden)) {
+  --kirby-page-footer-safe-area-bottom: 0px;
+}
 
+ion-tabs {
   ion-tab-bar {
     --background: rgba(#{get-color('white-rgb')}, 0.94);
     --border: 1px solid #{get-color('light')};
     --color: #{get-color('black')};
-
     display: flex;
     max-width: var(--kirby-tab-bar-max-width, none);
     justify-content: center;
@@ -21,10 +18,26 @@ ion-tabs {
     padding-right: $padding;
     width: 100%;
 
-    @include media('>=large') {
-      @include not-touch {
+    &.bottom-hidden {
+      display: none;
+    }
+  }
+
+  // move tabs to top of screen if not touch and large device
+  @include media('>=large') {
+    @include not-touch {
+      flex-direction: column-reverse;
+      // Ensure page-footer falls back to safe-area default
+      --kirby-page-footer-safe-area-bottom: initial;
+
+      ion-tab-bar {
         margin: 0 auto;
         justify-content: flex-end;
+
+        // Ensure tabs are not hidden when displayed at top of screen
+        &.bottom-hidden {
+          display: flex;
+        }
       }
     }
   }
