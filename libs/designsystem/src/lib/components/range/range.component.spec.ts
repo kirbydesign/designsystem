@@ -202,7 +202,7 @@ describe('Ion-Range', () => {
     spectator = createHost(`<kirby-range></kirby-range>`);
     ionRangeElement = spectator.query('ion-range');
     // await TestHelper.whenReady(ionRangeElement);
-    await TestHelper.whenTrue(() => ionRangeElement.shadowRoot !== null, 60000, 1);
+    await TestHelper.whenTrue(() => ionRangeElement.shadowRoot !== null, 10000, 1);
   });
 
   it('should have shadow DOM', () => {
