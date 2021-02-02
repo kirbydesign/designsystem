@@ -1,4 +1,4 @@
-import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { AfterViewInit, Component, HostBinding, ViewChild } from '@angular/core';
 import { IonTabs } from '@ionic/angular';
 
 import { TabsService } from './tabs.service';
@@ -9,6 +9,8 @@ import { TabsService } from './tabs.service';
   styleUrls: ['./tabs.component.scss'],
 })
 export class TabsComponent implements AfterViewInit {
+  @HostBinding('class.tab-bar-bottom-hidden')
+  tabBarBottomHidden = false;
   @ViewChild(IonTabs, { static: true }) tabs: IonTabs;
 
   constructor(private tabsService: TabsService) {}

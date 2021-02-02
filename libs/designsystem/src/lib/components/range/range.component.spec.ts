@@ -197,28 +197,36 @@ describe('Default Styling of RangeComponent', () => {
 describe('Ion-Range', () => {
   let spectator: SpectatorHost<RangeComponent>;
   let ionRangeElement: HTMLIonRangeElement;
+
   beforeEach(async () => {
     spectator = createHost(`<kirby-range></kirby-range>`);
     ionRangeElement = spectator.query('ion-range');
-    await TestHelper.whenReady(ionRangeElement);
+    // await TestHelper.whenReady(ionRangeElement);
+    await TestHelper.whenTrue(() => ionRangeElement.shadowRoot !== null, 60000, 1);
   });
 
   it('should have shadow DOM', () => {
     expect(ionRangeElement.shadowRoot).not.toBeNull();
-    expect(ionRangeElement.shadowRoot.parentElement).not.toBeNull();
   });
+
   it('ionRange tick should have correct styling', () => {
-    const tick = ionRangeElement.shadowRoot.querySelector('[part=tick]');
-    expect(tick).toHaveComputedStyle({
-      'z-index': '1',
-      'border-radius': '50%',
+    const ticks = ionRangeElement.shadowRoot.querySelectorAll('.range-tick'); // [part=tick]
+    expect(ticks).not.toBeNull();
+    ticks.forEach((tick) => {
+      expect(tick).toHaveComputedStyle({
+        'z-index': '1',
+        'border-radius': '50%',
+      });
     });
   });
   it('ionRange tick active should have correct styling', () => {
-    const tick = ionRangeElement.shadowRoot.querySelector('[part=tick-active]');
-    expect(tick).toHaveComputedStyle({
-      'z-index': '1',
-      'border-radius': '50%',
+    const ticks = ionRangeElement.shadowRoot.querySelectorAll('.range-tick-active'); // [part=tick-active]
+    expect(ticks).not.toBeNull();
+    ticks.forEach((tick) => {
+      expect(tick).toHaveComputedStyle({
+        'z-index': '1',
+        'border-radius': '50%',
+      });
     });
   });
 });
