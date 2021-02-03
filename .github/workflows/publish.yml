@@ -11,22 +11,18 @@ defaults:
 jobs:
   publish_to_npm:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [10.16]
     steps:
       - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Install Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: [10.16]
         env:
           TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
       - name: create npm file
         run: echo '//registry.npmjs.org/:_authToken=$TOKEN' > ~/.npmrc
       - name: publish to npm
         run: sh ./scripts/publish.js
-
 
 
 
