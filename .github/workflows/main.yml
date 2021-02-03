@@ -21,5 +21,5 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Get event
-        run: echo Event ${{github.event_name}}
+        run: echo Event is ${{github.event_name}}
 
