@@ -117,7 +117,7 @@ kirby-card {
 
 :host-context(kirby-calendar) {
   button {
-    border: none; // TODO: Fix glitch when opening dropdown - maybe border-color: transparent?
+    border-color: transparent;
     font-weight: font-weight('bold');
     font-size: initial;
   }
