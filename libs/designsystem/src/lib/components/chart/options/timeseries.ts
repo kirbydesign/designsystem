@@ -91,7 +91,7 @@ export const TimeSeriesOptions: Options = {
     {
       type: 'area',
       name: 'USD to EUR',
-      data: this === undefined ? [] : this.data,
+      data: this === undefined ? [] : (this as any).data,
     },
   ],
 };

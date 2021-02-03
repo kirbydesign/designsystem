@@ -82,7 +82,7 @@ export const ActivityGaugeOptions: Options = {
   series: [
     {
       type: 'solidgauge',
-      data: this === undefined ? [] : this.data,
+      data: this === undefined ? [] : (this as any).data,
     },
   ],
 };
