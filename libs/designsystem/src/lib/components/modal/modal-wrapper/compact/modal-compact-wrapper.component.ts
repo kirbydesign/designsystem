@@ -30,6 +30,7 @@ export class ModalCompactWrapperComponent implements Modal, OnInit {
   private readonly ionModalDidPresent = new Subject<void>();
   private readonly ionModalWillDismiss = new Subject<void>();
   readonly didPresent = this.ionModalDidPresent.toPromise();
+  readonly willClose = this.ionModalWillDismiss.toPromise();
 
   private _ionPageReset = false;
   @HostBinding('class.ion-page')
@@ -68,15 +69,6 @@ export class ModalCompactWrapperComponent implements Modal, OnInit {
         this.ionModalWillDismiss.next();
         this.ionModalWillDismiss.complete();
       });
-    }
-  }
-
-  willClose(callback) {
-    if (this.ionModalElement) {
-      const forceClose = (data) => this.ionModalElement.dismiss(data, 'force');
-      this.ionModalElement.addEventListener('kirbyModalWillDismiss', (e) =>
-        callback(e, forceClose)
-      );
     }
   }
 

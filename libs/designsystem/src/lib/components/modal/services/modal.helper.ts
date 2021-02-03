@@ -44,39 +44,14 @@ export class ModalHelper {
         config.flavor === 'compact' ? 'kirby-modal-compact' : null,
         modalSize,
       ],
-      backdropDismiss: false,
+      backdropDismiss: !config.confirmClose,
       componentProps: { config: config },
-      swipeToClose: config.flavor != 'compact',
+      swipeToClose: config.flavor != 'compact' && !config.confirmClose,
       presentingElement: modalPresentingElement,
       keyboardClose: false,
       enterAnimation,
       leaveAnimation,
     });
-
-    /** Overwrite ionic dissmiss */
-    Object.defineProperty(ionModal, 'dismiss', {
-      value: new Proxy(ionModal.dismiss, {
-        apply: function(target, _, args) {
-          const [data, role] = args;
-          if (role === 'force') {
-            target.bind(ionModal)(...args);
-          } else {
-            const shouldDismiss = ionModal.dispatchEvent(
-              new CustomEvent('kirbyModalWillDismiss', { cancelable: true })
-            );
-            if (shouldDismiss) target.bind(ionModal)(...args);
-          }
-        },
-      }),
-    });
-
-    if (config.flavor != 'compact') {
-      const backdrop: HTMLIonBackdropElement = ionModal.querySelector('ion-backdrop');
-      backdrop.onclick = () => {
-        ionModal.dismiss();
-      };
-    }
-    /** end of Overwrite ionic dissmiss */
 
     await ionModal.present();
 

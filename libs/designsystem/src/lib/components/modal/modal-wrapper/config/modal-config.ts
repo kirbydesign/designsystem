@@ -16,6 +16,7 @@ export interface ModalConfig {
   modalRoute?: ActivatedRoute;
   siblingModalRouteActivated$?: Observable<ActivatedRoute>;
   flavor?: ModalFlavor;
+  confirmClose?: ModalConfig | (() => Promise<any>);
   /**
    * @deprecated Will be removed in next major version.
    */

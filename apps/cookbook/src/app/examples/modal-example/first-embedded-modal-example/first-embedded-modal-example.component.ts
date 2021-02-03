@@ -61,23 +61,6 @@ export class FirstEmbeddedModalExampleComponent implements OnInit {
         setTimeout(() => (this.isLoadingAdditionalContent = false), 2000);
       }
     }
-
-    this.modal.willClose((close) => {
-      if (this.preventClose) {
-        const config: AlertConfig = {
-          title: 'Are you sure?',
-          message: 'Please confirm that you want to close',
-          okBtn: 'Confirm',
-          cancelBtn: 'Cancel',
-        };
-        this.modalController.showAlert(config, (result) => {
-          if (result) {
-            let someTestData: number = Math.PI;
-            close(someTestData);
-          }
-        });
-      }
-    }, this.preventClose);
   }
 
   private showNestedOverlay(flavor: 'modal' | 'drawer') {

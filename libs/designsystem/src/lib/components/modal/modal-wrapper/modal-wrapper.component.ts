@@ -73,7 +73,8 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   private ionModalElement?: HTMLIonModalElement;
   private readonly ionModalDidPresent = new Subject<void>();
   readonly didPresent = this.ionModalDidPresent.toPromise();
-  private readonly ionModalWillDismiss = new Subject<any>();
+  private readonly ionModalWillDismiss = new Subject<void>();
+  readonly willClose = this.ionModalWillDismiss.toPromise();
   private _mutationObserver: MutationObserver;
   private get mutationObserver(): MutationObserver {
     if (!this._mutationObserver) {
@@ -115,6 +116,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     this.initializeSizing();
     this.initializeModalRoute();
     this.listenForIonModalDidPresent();
+    this.listenForIonModalWillDismiss();
     this.componentPropsInjector = Injector.create({
       providers: [{ provide: COMPONENT_PROPS, useValue: this.config.componentProps }],
       parent: this.injector,
@@ -214,15 +216,11 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
     }
   }
 
-  willClose(callback, preventClose = false) {
-    if (this.ionModalElement && callback) {
-      if (preventClose) {
-        this.ionModalElement.swipeToClose = false;
-      }
-      const close = (data: any) => this.ionModalElement.dismiss(data, 'force');
-      this.ionModalElement.addEventListener('kirbyModalWillDismiss', (e) => {
-        if (preventClose) e.preventDefault();
-        callback(close);
+  private listenForIonModalWillDismiss() {
+    if (this.ionModalElement) {
+      this.ionModalElement.addEventListener('ionModalWillDismiss', () => {
+        this.ionModalWillDismiss.next();
+        this.ionModalWillDismiss.complete();
       });
     }
   }

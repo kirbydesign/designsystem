@@ -20,7 +20,7 @@ export interface ModalRouteActivation {
 
 export abstract class Modal {
   didPresent: Promise<void>;
-  willClose?: (close: (data?: any) => void, preventClose?: boolean) => void;
+  willClose: Promise<void>;
   close: (data?: any) => Promise<void>;
   scrollToTop: (scrollDuration?: KirbyAnimation.Duration) => void;
   scrollToBottom: (scrollDuration?: KirbyAnimation.Duration) => void;
