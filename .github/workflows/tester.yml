@@ -25,5 +25,4 @@ jobs:
         run: |
           echo Domain $DOMAIN
           echo HELM_CONFIG $HELM_CONFIG
-          echo ${{ github.event.head_commit.message }}
           
