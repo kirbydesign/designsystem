@@ -28,7 +28,6 @@ jobs:
 
   build_kirby:
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'pull_request' }}
     steps:
       - uses: actions/checkout@v2
       - name: Install Node.js
