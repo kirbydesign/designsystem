@@ -77,8 +77,24 @@ describe('TabsComponent', () => {
         it('should NOT hide tab bar when tabBarBottomHidden', async () => {
           spectator.component.tabBarBottomHidden = true;
           spectator.detectChanges();
+          console.log(
+            'window.frameElement.style.width:',
+            (window.frameElement as HTMLIFrameElement).style.width
+          );
+          console.log(
+            'window.frameElement.width:',
+            (window.frameElement as HTMLIFrameElement).width
+          );
+          console.log(
+            'window.matchMedia((min-width: 1025px)):',
+            window.matchMedia('(min-width: 1025px)')
+          );
 
           const ionTabBarElm = spectator.query('ion-tab-bar');
+          console.log(
+            'ionTabBarElm.hasClass(bottom-hidden):',
+            ionTabBarElm.classList.contains('bottom-hidden')
+          );
           expect(ionTabBarElm).not.toHaveComputedStyle({ display: 'none' });
         });
       });
