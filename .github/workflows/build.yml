@@ -1,6 +1,6 @@
 name: Kirby CI
 on:
-  push:
+  push
 
 defaults:
   run:
@@ -69,7 +69,6 @@ jobs:
           npm version patch -m ":bookmark: Bumping version to %s"
 
   deploy_to_cookbook:
-    if: ${{ github.event_name != 'pull_request' }}
     needs: [lint_and_unittest, build_kirby]
     runs-on: ubuntu-latest
     steps:
