@@ -21,5 +21,8 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Get event
-        run: echo Event is ${{github.event_name}}
+        run: |
+          echo Event is ${{github.event_name}}
+          echo GITHUB_REF is $GITHUB_REF
+          echo GITHUB_HEAD_REF is $GITHUB_HEAD_REF
 
