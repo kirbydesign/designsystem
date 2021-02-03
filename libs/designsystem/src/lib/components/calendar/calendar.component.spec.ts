@@ -267,7 +267,7 @@ describe('CalendarComponent', () => {
         expect(spectator.element.querySelector('kirby-dropdown')).not.toBeNull();
       });
 
-      // TODO: Could introduce a describe containing the next 2 tests to improve readability as well as designated expects
+      // TODO: Should this test be split up into 2 tests or is it acceptable to keep the expects in the same test?
       it('should change year on navigation', () => {
         const yearNavigator = spectator.element.querySelector('kirby-dropdown');
         const yearNavigatorButton = yearNavigator.querySelector('button');
@@ -280,15 +280,6 @@ describe('CalendarComponent', () => {
 
         expect(spectator.component.navigatedYear).toEqual(selectedItemIndex);
         expect(yearNavigatorButton.textContent).toEqual(currentNavigatorYear);
-      });
-
-      it('should get the correct index for the selected year', () => {
-        const yearChange = 1;
-
-        expect(spectator.component.navigatedYear).toEqual(yearsBefore * -1);
-
-        spectator.component.changeYear(spectator.component.todayDate.getFullYear() + yearChange);
-        expect(spectator.component.navigatedYear).toEqual(yearsBefore * -1 + yearChange);
       });
 
       it('should get navigable years based on `from` and `to` when `minDate` and `maxDate` are omitted', () => {
