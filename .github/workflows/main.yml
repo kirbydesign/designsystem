@@ -16,12 +16,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        env:
+          GH: $github
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
       - name: Get event
         run: |
           echo Event is ${{github.event_name}}
-          echo GITHUB_REF is $GITHUB_REF
-          echo GITHUB_HEAD_REF is $GITHUB_HEAD_REF
-          echo Is this a PR? ${{github.event.pull_request.merged}}
 
