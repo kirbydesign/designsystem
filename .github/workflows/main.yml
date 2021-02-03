@@ -19,8 +19,8 @@ jobs:
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
         env:
-          GH: $github
-          GHE: $github.event
+          GH: ${{github}}
+          GHE: ${{github.event}}
       - name: Get event
         run: |
           echo Event is ${{github.event_name}}
