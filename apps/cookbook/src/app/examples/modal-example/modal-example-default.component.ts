@@ -19,7 +19,6 @@ const config = {
     [(delayLoadDummyContent)]="delayLoadDummyContent"
     [(loadAdditionalContent)]="loadAdditionalContent"
     [(openFullHeight)]="openFullHeight"
-    [(preventClose)]="preventClose"
   ></cookbook-modal-example-configuration>
 </cookbook-example-configuration-wrapper>`,
   titleTemplate: `<kirby-page-title>My Modal Title</kirby-page-title>
@@ -152,28 +151,6 @@ export class EmbeddedComponent() {
     this.modal?.close(returnData);
   }
 }`,
-  confirmCloseModalCodeSnippet: `
-  constructor(
-    @Optional() @SkipSelf() private modal: Modal
-  ) {}
-
-  ngOnInit() {
-    this.modal.willClose((close) => {
-      const config: AlertConfig = {
-        title: 'Are you sure?',
-        message: 'Please confirm that you want to close',
-        okBtn: 'Confirm',
-        cancelBtn: 'Cancel',
-      };
-      this.modalController.showAlert(config, (result) => {
-        if (result) {
-          let someTestData: number = Math.PI;
-          close(someTestData);
-        }
-      });
-    }, true);
-  }
-  `,
 };
 
 @Component({
@@ -200,7 +177,6 @@ export class ModalExampleDefaultComponent {
   disableScrollingCodeSnippet = config.disableScrollingCodeSnippet;
   embeddedCodeSnippet = config.embeddedCodeSnippet;
   closeModalCodeSnippet = config.closeModalCodeSnippet;
-  confirmCloseModalCodeSnippet = config.confirmCloseModalCodeSnippet;
 
   showDummyKeyboard = !!this.window.sessionStorage.getItem('kirby-cookbook-show-dummy-keyboard');
   showFooter = false;
@@ -208,7 +184,6 @@ export class ModalExampleDefaultComponent {
   delayLoadDummyContent = true;
   loadAdditionalContent = false;
   openFullHeight = false;
-  preventClose = false;
 
   constructor(private modalController: ModalController, private window: WindowRef) {}
 
@@ -234,7 +209,6 @@ export class ModalExampleDefaultComponent {
         loadAdditionalContent: this.loadAdditionalContent,
         disableScroll: false,
         openFullHeight: this.openFullHeight,
-        preventClose: this.preventClose,
       },
     };
     await this.modalController.showModal(config, this.onOverlayClose);

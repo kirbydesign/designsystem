@@ -50,10 +50,3 @@
   (checkedChange)="toggleOpenFullHeight($event)"
   text="Open in full height"
 ></kirby-checkbox>
-
-<kirby-checkbox
-  *ngIf="preventClose !== undefined"
-  [checked]="preventClose"
-  (checkedChange)="togglePreventClose($event)"
-  text="Prevent close (modal & drawer)"
-></kirby-checkbox>

@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, Optional, SkipSelf } from '@angular/core';
+import { Component, Inject, Input, OnInit, Optional, SkipSelf } from '@angular/core';
 
 import {
   AlertConfig,
@@ -10,6 +10,9 @@ import {
 import { ModalConfig } from '@kirbydesign/designsystem';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
 import { KirbyAnimation } from '@kirbydesign/designsystem';
+
+import { SecondEmbeddedModalExampleComponent } from '../second-embedded-modal-example/second-embedded-modal-example.component';
+
 @Component({
   selector: 'cookbook-first-embedded-modal-example',
   templateUrl: './first-embedded-modal-example.component.html',
@@ -35,7 +38,6 @@ export class FirstEmbeddedModalExampleComponent implements OnInit {
   loadAdditionalContent: boolean;
   disableScroll: boolean = false;
   openFullHeight: boolean;
-  preventClose: boolean = false;
 
   isLoading = false;
   isLoadingAdditionalContent = false;
@@ -81,7 +83,6 @@ export class FirstEmbeddedModalExampleComponent implements OnInit {
         showDummyContent: this.showNestedDummyContent,
         delayLoadDummyContent: this.delayLoadDummyContent,
         loadAdditionalContent: this.loadAdditionalContent,
-        preventClose: this.preventClose,
       },
     };
 
