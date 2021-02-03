@@ -12,9 +12,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
         with:
-          node-version: [10.16]
+          node-version: '10.16'
       - name: run npm ci
         run: npm ci
       - name: run npm lint
@@ -32,9 +32,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
         with:
-          node-version: [10.16]
+          node-version: '10.16'
       - name: run npm ci
         run: npm ci
       - name: run npm dist:designsystem
@@ -47,9 +47,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
         with:
-          node-version: [10.16]
+          node-version: '10.16'
         env:
           KEY: ${{secrets.ENCRYPTED_09E556D51FDC_KEY}}
           IV: ${{secrets.ENCRYPTED_09E556D51FDC_IV}}
@@ -76,9 +76,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
         with:
-          node-version: [10.16]
+          node-version: '10.16'
       - name: run npm ci
         run: npm ci
       - name: setup kubectl
