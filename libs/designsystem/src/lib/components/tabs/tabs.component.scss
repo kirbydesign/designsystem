@@ -37,6 +37,7 @@ ion-tabs {
         // Ensure tabs are not hidden when displayed at top of screen
         &.bottom-hidden {
           display: flex;
+          border: 1px solid red;
         }
       }
     }
