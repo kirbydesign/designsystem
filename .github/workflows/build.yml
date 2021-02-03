@@ -40,7 +40,7 @@ jobs:
         run: npm run dist:designsystem
 
   bump_version:
-    needs: [lint_and_unittest]
+    needs: [lint_and_unittest, build_kirby]
     if: "!startsWith(github.event.head_commit.message, 'Bumping version to') && github.ref == 'refs/heads/master'"
     runs-on: ubuntu-latest
     steps:
@@ -70,7 +70,7 @@ jobs:
 
   deploy_to_cookbook:
     if: ${{ github.event_name != 'pull_request' }}
-    needs: [lint_and_unittest]
+    needs: [lint_and_unittest, build_kirby]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
