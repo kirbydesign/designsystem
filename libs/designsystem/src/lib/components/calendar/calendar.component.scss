@@ -49,10 +49,6 @@ td {
   position: relative;
 }
 
-kirby-dropdown.year-navigator {
-  --kirby_internal_min-screen-width: 340px; // TODO: Remove magic number - calculate width and/or make responsive
-}
-
 .month-navigator {
   display: flex;
   flex-direction: row;
