@@ -245,7 +245,7 @@ describe('CalendarComponent', () => {
         expect(spectator.element.querySelector('kirby-dropdown')).toBeNull();
       });
     });
-
+    // TODO: Add a test which verifies that minDate and maxDate are set properly when limiting them to dates inside yearNavigatorOptions
     describe('when yearNavigatorOptions are set', () => {
       let todayDate: Date;
       let yearsBefore: number;
