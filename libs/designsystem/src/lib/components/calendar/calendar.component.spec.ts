@@ -197,21 +197,31 @@ describe('CalendarComponent', () => {
   });
 
   it('should emit dateSelect event when clicking a date that is not already selected', () => {
+    spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
+
+    const captured = captureDateSelectEvents();
+
+    clickDayOfMonth(14);
+    expect(captured.event).toEqual(localMidnightDate('1997-08-14'));
+  });
+
+  it('should emit dateSelect event when clicking the already selected date', () => {
+    spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
+
+    const captured = captureDateSelectEvents();
+
+    clickDayOfMonth(29);
+    expect(captured.event).toEqual(localMidnightDate('1997-08-29'));
+  });
+
+  it('should emit dateSelect event as UTC midnights when timezone is set to UTC', () => {
+    spectator.setInput('timezone', 'UTC');
     spectator.setInput('selectedDate', utcMidnightDate('1997-08-29'));
 
     const captured = captureDateSelectEvents();
 
     clickDayOfMonth(14);
-    expect(captured.event).toBeTrue();
-  });
-
-  it('should emit dateSelect event when clicking the already selected date', () => {
-    spectator.setInput('selectedDate', utcMidnightDate('1997-08-29'));
-
-    const captured = captureDateSelectEvents();
-
-    clickDayOfMonth(29);
-    expect(captured.event).toBeTrue();
+    expect(captured.event).toEqual(utcMidnightDate('1997-08-14'));
   });
 
   it('should be tolerant of date input (selectedDate, todayDate, minDate, maxDate, and disabledDates) as both UTC midnight and local time midnight', () => {
@@ -293,8 +303,8 @@ describe('CalendarComponent', () => {
   }
 
   function captureDateSelectEvents() {
-    const captured: { event?: boolean } = {};
-    spectator.output<void>('dateSelect').subscribe(() => (captured.event = true));
+    const captured: { event?: Date } = {};
+    spectator.output<Date>('dateSelect').subscribe((result) => (captured.event = result));
     return captured;
   }
 });
