@@ -258,7 +258,7 @@ describe('DropdownComponent', () => {
       });
     });
 
-    fdescribe('when configured with cardAligment', () => {
+    describe('when configured with cardAligment', () => {
       it('should render card with left alignment', () => {
         spectator.component.cardAlign = cardAlignment.left;
         spectator.component['state'] = openState.open;
