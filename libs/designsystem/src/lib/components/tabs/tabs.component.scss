@@ -21,6 +21,20 @@ ion-tabs {
     &.bottom-hidden {
       display: none;
     }
+
+    border: 1px solid blue;
+  }
+
+  @include media('>=large') {
+    ion-tab-bar {
+      border-color: green;
+    }
+  }
+
+  @include not-touch {
+    ion-tab-bar {
+      border-width: 5px;
+    }
   }
 
   // move tabs to top of screen if not touch and large device
