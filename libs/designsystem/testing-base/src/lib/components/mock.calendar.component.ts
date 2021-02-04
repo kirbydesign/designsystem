@@ -15,7 +15,7 @@ import { CalendarComponent } from '@kirbydesign/designsystem';
 })
 export class MockCalendarComponent {
   @Output() dateChange = new EventEmitter<Date>();
-  @Output() dateSelect = new EventEmitter<void>();
+  @Output() dateSelect = new EventEmitter<Date>();
   @Input() timezone: 'local' | 'UTC';
   @Input() disableWeekends: boolean;
   @Input() disablePastDates: boolean;
