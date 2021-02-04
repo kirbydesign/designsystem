@@ -1,4 +1,4 @@
-import { forwardRef, Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 
 import { DropdownComponent } from '@kirbydesign/designsystem';
 
@@ -18,6 +18,7 @@ export class MockDropdownComponent {
   @Input() selectedIndex: number;
   @Input() itemTextProperty: string;
   @Input() placeholder: string;
+  @Input() cardAlign;
   @Input() attentionLevel: '1' | '2' | '3' | '4';
   @Input() expand: 'block';
   @Input() disabled: boolean;
