@@ -30,6 +30,11 @@ export enum openState {
   opening,
   open,
 }
+
+export enum cardAlignment {
+  right = 'right',
+  left = 'left',
+}
 @Component({
   selector: 'kirby-dropdown',
   templateUrl: './dropdown.component.html',
@@ -75,6 +80,9 @@ export class DropdownComponent
 
   @Input()
   placeholder = 'Please select:';
+
+  @Input()
+  cardAlign = cardAlignment.left;
 
   @Input()
   attentionLevel: '1' | '2' | '3' | '4' = '3';
@@ -229,15 +237,11 @@ export class DropdownComponent
         // Cancel any pending timer to show dropdown:
         clearTimeout(this.showDropdownTimeoutId);
 
+        this._horizontal = this.cardAlign === cardAlignment.left ? 'start' : 'end';
         const entry = entries[0];
         const isVisible = entry.boundingClientRect.width > 0;
         if (isVisible && entry.intersectionRatio < 1) {
-          // entry not fully showing:
-          if (entry.boundingClientRect.right > entry.rootBounds.right) {
-            // entry is cut off to the right by ${entry.boundingClientRect.right - entry.intersectionRect.right}px
-            // align to the end:
-            this._horizontal = 'end';
-          }
+          this._horizontal = this.getCardAlignment(entry);
           if (entry.boundingClientRect.top < 0) {
             // entry is cut off at the top by ${entry.boundingClientRect.top}px
             // open downwards:
@@ -246,9 +250,9 @@ export class DropdownComponent
           if (entry.boundingClientRect.bottom > entry.rootBounds.bottom) {
             // entry is cut off at the bottom by ${entry.boundingClientRect.bottom - entry.intersectionRect.bottom}px
             const containerOffsetTop = this.elementRef.nativeElement.getBoundingClientRect().top;
-            const spacing = 5; //TODO: Get from SCSS
+            const SPACING = 5; //TODO: Get from SCSS
             // Check if the card can fit on top of button:
-            if (containerOffsetTop > entry.target.clientHeight + spacing) {
+            if (containerOffsetTop > entry.target.clientHeight + SPACING) {
               // open upwards:
               this._vertical = 'up';
             }
@@ -259,6 +263,16 @@ export class DropdownComponent
       };
       this.intersectionObserverRef = new IntersectionObserver(callback, options);
       this.intersectionObserverRef.observe(this.cardElement.nativeElement);
+    }
+  }
+
+  private getCardAlignment(entry) {
+    // If card alignment is left, and the entry is cut off to the right by ${entry.boundingClientRect.right - entry.intersectionRect.right}px
+    // it is set to align to end in stead, and vice versa for right-aligned card
+    if (this.cardAlign === cardAlignment.left) {
+      return entry.boundingClientRect.right > entry.rootBounds.right ? 'end' : 'start';
+    } else {
+      return entry.boundingClientRect.left < entry.rootBounds.left ? 'start' : 'end';
     }
   }
 

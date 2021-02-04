@@ -6,6 +6,7 @@ const config = {
   [size]="size"
   placeholder="Right aligned dropdown"
   [items]="['Item 1','Item 2','Item 3','Item 4','Item 5']"
+  cardAlign="right"
 ></kirby-dropdown>`,
   styles: [
     `kirby-dropdown {
