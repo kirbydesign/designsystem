@@ -235,6 +235,7 @@ export class DropdownComponent
         }
 
         if (this.cardAlign === cardAlignment.right) {
+          this._horizontal = 'end';
         }
         // Cancel any pending timer to show dropdown:
         clearTimeout(this.showDropdownTimeoutId);
