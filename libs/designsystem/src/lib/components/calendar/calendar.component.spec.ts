@@ -303,19 +303,14 @@ describe('CalendarComponent', () => {
 
     describe('when yearNavigatorOptions are set', () => {
       let todayDate: Date;
-      let yearsBefore: number;
-      let yearsAfter: number;
+      let yearNavigatorOptions: CalendarYearNavigatorConfig;
 
       beforeEach(() => {
         todayDate = new Date(2021, 0, 1);
-        yearsBefore = -3;
-        yearsAfter = 2;
+        yearNavigatorOptions = { from: -3, to: 3 };
 
         spectator.setInput('todayDate', todayDate);
-        spectator.setInput('yearNavigatorOptions', {
-          from: yearsBefore,
-          to: yearsAfter,
-        });
+        spectator.setInput('yearNavigatorOptions', yearNavigatorOptions);
       });
 
       it('should render', () => {
