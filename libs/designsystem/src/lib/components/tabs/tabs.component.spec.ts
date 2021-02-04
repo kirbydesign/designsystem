@@ -114,6 +114,18 @@ fdescribe('TabsComponent', () => {
             window.matchMedia('(pointer: none)').matches
           );
           console.log(
+            'window.matchMedia((any-pointer: fine)):',
+            window.matchMedia('(any-pointer: fine)').matches
+          );
+          console.log(
+            'window.matchMedia((any-pointer: coarse)):',
+            window.matchMedia('(any-pointer: coarse)').matches
+          );
+          console.log(
+            'window.matchMedia((any-pointer: none)):',
+            window.matchMedia('(any-pointer: none)').matches
+          );
+          console.log(
             'window.matchMedia((hover: hover) and (pointer: fine)):',
             window.matchMedia('(hover: hover) and (pointer: fine)').matches
           );
