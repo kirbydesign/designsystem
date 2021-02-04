@@ -317,7 +317,6 @@ describe('CalendarComponent', () => {
         expect(spectator.element.querySelector('kirby-dropdown')).not.toBeNull();
       });
 
-      // TODO: Should this test be split up into 2 tests or is it acceptable to keep the expects in the same test?
       it('should change year on navigation', () => {
         const yearNavigator = spectator.element.querySelector('kirby-dropdown');
         const yearNavigatorButton = yearNavigator.querySelector('button');
