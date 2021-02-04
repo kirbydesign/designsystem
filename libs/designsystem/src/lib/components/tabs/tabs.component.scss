@@ -12,6 +12,7 @@ ion-tabs {
     display: flex;
     max-width: var(--kirby-tab-bar-max-width, none);
     justify-content: center;
+    height: var(--kirby-tab-bar-height);
 
     $padding: calc((100vw - var(--kirby-tab-bar-max-width, none)) / 2);
     padding-left: $padding;
@@ -21,6 +22,10 @@ ion-tabs {
     &.bottom-hidden {
       display: none;
     }
+  }
+
+  @include media('>=medium') {
+    --kirby-tab-bar-height: 70px;
   }
 
   // move tabs to top of screen if not touch and large device
