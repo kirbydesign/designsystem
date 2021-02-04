@@ -2,7 +2,7 @@ import { IonicModule } from '@ionic/angular';
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
 import { MockModule } from 'ng-mocks';
 
-import { TestHelper } from '../../testing/test-helper';
+import { ScreenSize, TestHelper } from '../../testing/test-helper';
 
 import { TabsComponent } from './tabs.component';
 
@@ -100,46 +100,24 @@ describe('TabsComponent', () => {
     }
   });
 
-  describe('Tab-bar height', () => {
+  describe('tab-bar sizing', () => {
     afterAll(() => {
       TestHelper.resetTestWindow();
     });
 
-    describe('on screensize phone', () => {
-      beforeEach(async () => {
-        await TestHelper.resizeTestWindow(TestHelper.screensize.phone);
-      });
+    const scenarios: { [key in ScreenSize]?: string } = {
+      phone: '50px',
+      tablet: '70px',
+      desktop: '70px',
+    };
 
-      it('should be 50px', () => {
+    Object.entries(scenarios).forEach(([screenSize, expectedHeight]) => {
+      it(`should have correct height on screensize ${screenSize}`, async () => {
+        await TestHelper.resizeTestWindow(TestHelper.screensize[screenSize]);
+
         const ionTabBarElm = spectator.query('ion-tab-bar');
         expect(ionTabBarElm).toHaveComputedStyle({
-          height: '50px',
-        });
-      });
-    });
-
-    describe('on screensize tablet', () => {
-      beforeEach(async () => {
-        await TestHelper.resizeTestWindow(TestHelper.screensize.tablet);
-      });
-
-      it('should be 70px', () => {
-        const ionTabBarElm = spectator.query('ion-tab-bar');
-        expect(ionTabBarElm).toHaveComputedStyle({
-          height: '70px',
-        });
-      });
-    });
-
-    describe('on screensize desktop', () => {
-      beforeEach(async () => {
-        await TestHelper.resizeTestWindow(TestHelper.screensize.desktop);
-      });
-
-      it('should be 70px', () => {
-        const ionTabBarElm = spectator.query('ion-tab-bar');
-        expect(ionTabBarElm).toHaveComputedStyle({
-          height: '70px',
+          height: expectedHeight,
         });
       });
     });
