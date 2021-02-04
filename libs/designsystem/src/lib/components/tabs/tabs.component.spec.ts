@@ -6,7 +6,7 @@ import { TestHelper } from '../../testing/test-helper';
 
 import { TabsComponent } from './tabs.component';
 
-describe('TabsComponent', () => {
+fdescribe('TabsComponent', () => {
   let spectator: Spectator<TabsComponent>;
 
   const createHost = createComponentFactory({
@@ -92,6 +92,18 @@ describe('TabsComponent', () => {
           console.log(
             'window.matchMedia((min-width: 1025px)):',
             window.matchMedia('(min-width: 1025px)').matches
+          );
+          console.log(
+            'window.matchMedia((hover: hover)):',
+            window.matchMedia('(hover: hover)').matches
+          );
+          console.log(
+            'window.matchMedia((pointer: fine)):',
+            window.matchMedia('(pointer: fine)').matches
+          );
+          console.log(
+            'window.matchMedia((hover: hover) and (pointer: fine)):',
+            window.matchMedia('(hover: hover) and (pointer: fine)').matches
           );
 
           const ionTabBarElm = spectator.query('ion-tab-bar');
