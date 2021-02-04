@@ -1,18 +1,20 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { KirbyModule } from '@kirbydesign/designsystem';
+
 import { DropdownExampleConfigurationComponent } from './dropdown-example-configuration-component/dropdown-example-configuration.component';
-import { DropdownExampleDefaultComponent } from './examples/default';
-import { DropdownExampleScrollComponent } from './examples/scroll';
-import { DropdownExamplePreSelectedComponent } from './examples/pre-selected';
-import { DropdownExampleExpandComponent } from './examples/expand';
-import { DropdownExampleRightAlignedComponent } from './examples/right-aligned';
 import { DropdownExampleAttentionLevelComponent } from './examples/attention-level';
-import { DropdownExampleItemSelectComponent } from './examples/item-select';
 import { DropdownExampleCustomItemTemplateComponent } from './examples/custom-item-template';
+import { DropdownExampleDefaultComponent } from './examples/default';
+import { DropdownExampleDropdownRightAlignedComponent } from './examples/dropdown-right-aligned';
+import { DropdownExampleExpandComponent } from './examples/expand';
+import { DropdownExampleItemSelectComponent } from './examples/item-select';
 import { DropdownExampleNgFormsComponent } from './examples/ng-forms';
+import { DropdownExamplePreSelectedComponent } from './examples/pre-selected';
+import { DropdownExampleRightAlignedComponent } from './examples/right-aligned';
+import { DropdownExampleScrollComponent } from './examples/scroll';
 
 const COMPONENT_DECLARATIONS = [
   DropdownExampleConfigurationComponent,
@@ -21,6 +23,7 @@ const COMPONENT_DECLARATIONS = [
   DropdownExamplePreSelectedComponent,
   DropdownExampleExpandComponent,
   DropdownExampleRightAlignedComponent,
+  DropdownExampleDropdownRightAlignedComponent,
   DropdownExampleAttentionLevelComponent,
   DropdownExampleItemSelectComponent,
   DropdownExampleCustomItemTemplateComponent,
