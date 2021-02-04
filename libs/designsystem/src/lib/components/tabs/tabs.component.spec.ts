@@ -86,12 +86,8 @@ describe('TabsComponent', () => {
             (window.frameElement as HTMLIFrameElement).width
           );
           console.log(
-            'window.frameElement.width:',
-            window.getComputedStyle(window.frameElement).width
-          );
-          console.log(
             'window.matchMedia((min-width: 1025px)):',
-            window.matchMedia('(min-width: 1025px)').matches
+            window.matchMedia('(min-width: 1025px)')
           );
 
           const ionTabBarElm = spectator.query('ion-tab-bar');
@@ -99,8 +95,6 @@ describe('TabsComponent', () => {
             'ionTabBarElm.hasClass(bottom-hidden):',
             ionTabBarElm.classList.contains('bottom-hidden')
           );
-          console.log('ionTabBarElm.display:', window.getComputedStyle(ionTabBarElm).display);
-          console.log('ionTabBarElm.border:', window.getComputedStyle(ionTabBarElm).border);
           expect(ionTabBarElm).not.toHaveComputedStyle({ display: 'none' });
         });
       });
