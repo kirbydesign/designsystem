@@ -294,7 +294,6 @@ describe('CalendarComponent', () => {
     });
   });
 
-  // TODO: Make test which verifies that navigableYears works with dates instead of numbers
   describe('year navigator', () => {
     describe('by default', () => {
       it('should not render', () => {

@@ -1,8 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import moment from 'moment';
 
-// TODO: Handle situation where user is on 2024 and you limit years to 2023 and below
-// TODO: Handle length of dropdown messing with how many years it show
 @Component({
   selector: 'cookbook-calendar-card-example',
   templateUrl: './calendar-card-example.component.html',
