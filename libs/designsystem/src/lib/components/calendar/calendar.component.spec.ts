@@ -294,7 +294,7 @@ describe('CalendarComponent', () => {
 
   function captureDateSelectEvents() {
     const captured: { event?: boolean } = {};
-    spectator.output<any>('dateSelect').subscribe(() => (captured.event = true));
+    spectator.output<void>('dateSelect').subscribe(() => (captured.event = true));
     return captured;
   }
 });
