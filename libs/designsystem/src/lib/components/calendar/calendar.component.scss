@@ -74,7 +74,8 @@ td {
   text-align: center;
 }
 
-.day.selectable {
+.day.selectable,
+.day.selected {
   cursor: pointer;
 }
 
@@ -91,7 +92,6 @@ td {
 .day.selected {
   color: get-color('black-contrast');
   background-color: get-color('black');
-  pointer-events: none;
 }
 
 .day:not(.current-month) {
