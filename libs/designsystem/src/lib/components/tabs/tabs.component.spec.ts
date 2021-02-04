@@ -68,32 +68,35 @@ describe('TabsComponent', () => {
       });
     });
 
-    describe('on screensize large', () => {
-      beforeEach(async () => {
-        await TestHelper.resizeTestWindow(TestHelper.screensize.desktop);
-      });
-
-      describe('tabBarBottomHidden: true', () => {
-        it('should NOT hide tab bar when tabBarBottomHidden', async () => {
-          spectator.component.tabBarBottomHidden = true;
-          spectator.detectChanges();
-
-          const ionTabBarElm = spectator.query('ion-tab-bar');
-          expect(ionTabBarElm).not.toHaveComputedStyle({ display: 'none' });
+    // Only run test on non-touch devices
+    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      describe('on screensize large', () => {
+        beforeEach(async () => {
+          await TestHelper.resizeTestWindow(TestHelper.screensize.desktop);
         });
-      });
 
-      describe('tabBarBottomHidden: false', () => {
-        it('should NOT set page footer safe area override', async () => {
-          spectator.component.tabBarBottomHidden = false;
-          spectator.detectChanges();
+        describe('tabBarBottomHidden: true', () => {
+          it('should NOT hide tab bar when tabBarBottomHidden', async () => {
+            spectator.component.tabBarBottomHidden = true;
+            spectator.detectChanges();
 
-          const ionTabBarElm = spectator.query('ion-tab-bar');
-          expect(ionTabBarElm).toHaveComputedStyle({
-            '--kirby-page-footer-safe-area-bottom': '',
+            const ionTabBarElm = spectator.query('ion-tab-bar');
+            expect(ionTabBarElm).not.toHaveComputedStyle({ display: 'none' });
+          });
+        });
+
+        describe('tabBarBottomHidden: false', () => {
+          it('should NOT set page footer safe area override', async () => {
+            spectator.component.tabBarBottomHidden = false;
+            spectator.detectChanges();
+
+            const ionTabBarElm = spectator.query('ion-tab-bar');
+            expect(ionTabBarElm).toHaveComputedStyle({
+              '--kirby-page-footer-safe-area-bottom': '',
+            });
           });
         });
       });
-    });
+    }
   });
 });
