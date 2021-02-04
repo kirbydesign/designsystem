@@ -82,7 +82,7 @@ export class DropdownComponent
   placeholder = 'Please select:';
 
   @Input()
-  cardAlign = cardAlignment.left;
+  cardAlign: cardAlignment = cardAlignment.left;
 
   @Input()
   attentionLevel: '1' | '2' | '3' | '4' = '3';
