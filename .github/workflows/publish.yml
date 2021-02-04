@@ -9,11 +9,11 @@ defaults:
     shell: bash
 
 jobs:
-  publish_to_npm:
+  publish:
     runs-on: ubuntu-latest
+    if: github.event.pull_request.merged
     steps:
       - uses: actions/checkout@v2
-        if: github.event.pull_request.merged
         with:
           ref: refs/heads/master      
       - name: Install Node.js
@@ -22,17 +22,23 @@ jobs:
           node-version: '10.16'
       - name: Install npm
         run: npm install
-      - name: Set git information
+      - name: Configure git
+        env:
+          GITHUB_USER: ${{ secrets.GITHUB_USER }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name $GITHUB_ACTOR
-          git config user.email gha-${GITHUB_ACTOR}@github.com
-      - name: Version and Publish
-        run: |
-          npm config set //registry.npmjs.org/:_authToken=$NPM_API_TOKEN
-          npm version minor --force -m "Version %s"
-          npm publish
-      - name: Tag publish in github
-        run: |
-          git remote add gha-origin https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-          git push gha-origin HEAD:master --tags
-          
+          git config user.email gh-actions-${GITHUB_ACTOR}@github.com
+          git remote add gh-origin https://${GITHUB_USER}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+      - name: Create .npmrc
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_API_TOKEN }}
+        run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
+      - name: Run npm prerelease
+        run: npm run prerelease
+      - name: Bump version
+        run: npm version minor --force -m "Version %s [build-skip]"
+      - name: Publish
+        run: npm publish
+      - name: Update github with version tag
+        run: git push gh-origin HEAD:master --tags
