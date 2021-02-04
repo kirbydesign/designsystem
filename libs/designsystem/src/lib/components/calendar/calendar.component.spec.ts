@@ -9,6 +9,7 @@ import { WindowRef } from '../../types/window-ref';
 import { DropdownComponent } from '../dropdown/dropdown.component';
 import { CardComponent } from '../card/card.component';
 import { ItemComponent } from '../item/item.component';
+import { CalendarYearNavigatorConfig } from './options/calendar-year-navigator-options';
 
 // NOTE: when specifying multiple input properties, set selectedDate
 // as the last one. This makes the component update without the need to
@@ -239,13 +240,67 @@ describe('CalendarComponent', () => {
         .join(' ')
     ).toEqual('M T W T F S S');
   });
+
+  describe('active month', () => {
+    describe('when `minDate` is set', () => {
+      let minDate: Date;
+
+      beforeEach(() => {
+        minDate = new Date(2017, 0, 1);
+        spectator.setInput('minDate', minDate);
+      });
+
+      describe('when `minDate` changes to a date inside previously valid dates', () => {
+        let newMinDate: Date;
+
+        beforeEach(() => {
+          newMinDate = new Date(2019, 3, 10);
+        });
+
+        it('should set active month based on changed `minDate`', () => {
+          spectator.setInput('minDate', newMinDate);
+
+          expect(spectator.component.activeMonthName.toLowerCase()).toEqual(
+            moment(newMinDate).format('MMMM')
+          );
+        });
+      });
+    });
+
+    describe('when `MaxDate` is set', () => {
+      let MaxDate: Date;
+
+      beforeEach(() => {
+        MaxDate = new Date(2017, 0, 1);
+        spectator.setInput('maxDate', MaxDate);
+      });
+
+      describe('when `MaxDate` changes to a date inside previously valid dates', () => {
+        let newMaxDate: Date;
+
+        beforeEach(() => {
+          newMaxDate = new Date(2019, 3, 10);
+        });
+
+        it('should set active month based on changed `MaxDate`', () => {
+          spectator.setInput('maxDate', newMaxDate);
+
+          expect(spectator.component.activeMonthName.toLowerCase()).toEqual(
+            moment(newMaxDate).format('MMMM')
+          );
+        });
+      });
+    });
+  });
+
+  // TODO: Make test which verifies that navigableYears works with dates instead of numbers
   describe('year navigator', () => {
     describe('by default', () => {
       it('should not render', () => {
         expect(spectator.element.querySelector('kirby-dropdown')).toBeNull();
       });
     });
-    // TODO: Add a test which verifies that minDate and maxDate are set properly when limiting them to dates inside yearNavigatorOptions
+
     describe('when yearNavigatorOptions are set', () => {
       let todayDate: Date;
       let yearsBefore: number;
