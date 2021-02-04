@@ -103,11 +103,17 @@ jobs:
         if: github.ref != 'refs/heads/master'
         run: |
           branchname="${GITHUB_REF##*/}"
+          echo "Branchname: $branchname"
           branchname="${branchname//feature//}"
+          echo "Branchname: $branchname"
           branchname="${branchname#?}"
+          echo "Branchname: $branchname"
           releasename="kby-${branchname//[^a-zA-Z0-9]/-}"
+          echo "Releasename: $releasename"
           releasename=$(tr [A-Z] [a-z] <<< "$releasename")
+          echo "Releasename: $releasename"
           releasename=$(cut -c 1-53 <<< "$releasename")
+          echo "Releasename: $releasename"
           echo "RELEASENAME=${releasename}" >> $GITHUB_ENV
       - name: Get release name
         if: github.ref == 'refs/heads/master'
