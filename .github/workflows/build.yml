@@ -17,12 +17,8 @@ jobs:
           node-version: '10.16'
       - name: run npm ci
         run: npm ci
-      - name: npm run postinstall  
-        run: npm run postinstall
       - name: run npm lint
         run: npm run lint
-      - name: run npm extract-scss-variables
-        run: npm run extract-scss-variables
       - name: run npm test ci
         run: npm run test:ci
       - name: run npm coverage-report
