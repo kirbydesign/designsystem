@@ -22,4 +22,17 @@ jobs:
           node-version: '10.16'
       - name: Install npm
         run: npm install
+      - name: Set git information
+        run: |
+          git config user.name $GITHUB_ACTOR
+          git config user.email gha-${GITHUB_ACTOR}@github.com
+      - name: Version and Publish
+        run: |
+          npm config set //registry.npmjs.org/:_authToken=$NPM_API_TOKEN
+          npm version minor --force -m "Version %s"
+          npm publish
+      - name: Tag publish in github
+        run: |
+          git remote add gha-origin https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+          git push gha-origin HEAD:master --tags
           
