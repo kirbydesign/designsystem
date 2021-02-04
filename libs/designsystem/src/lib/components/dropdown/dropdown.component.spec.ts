@@ -1,15 +1,16 @@
-import { createHostFactory, Spectator, SpectatorHost } from '@ngneat/spectator';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { fakeAsync, tick } from '@angular/core/testing';
-import { MockComponents, MockDirectives } from 'ng-mocks';
 import { IonItem } from '@ionic/angular';
+import { createHostFactory, Spectator, SpectatorHost } from '@ngneat/spectator';
+import { MockComponents, MockDirectives } from 'ng-mocks';
 
-import { DropdownComponent } from './dropdown.component';
 import { ButtonComponent, CardComponent, IconComponent, ItemComponent } from '..';
+import { SizeDirective } from '../../directives';
+import { DesignTokenHelper } from '../../helpers';
 import { TestHelper } from '../../testing/test-helper';
 import { ListItemTemplateDirective } from '../list';
-import { DesignTokenHelper } from '../../helpers';
-import { SizeDirective } from '../../directives';
+
+import { DropdownComponent, openState } from './dropdown.component';
 
 @Component({
   template: '<ng-content></ng-content>',
@@ -270,7 +271,7 @@ describe('DropdownComponent', () => {
       });
 
       it('should render dropdown with full width', () => {
-        spectator.component['state'] = 'open';
+        spectator.component['state'] = openState.open;
         spectator.detectChanges();
         const card = spectator.query('kirby-card');
         const componentWidth = spectator.element.clientWidth;
@@ -282,7 +283,7 @@ describe('DropdownComponent', () => {
 
     describe('when closed', () => {
       beforeEach(() => {
-        spectator.component['state'] = 'closed';
+        spectator.component['state'] = openState.closed;
         spectator.detectChanges();
       });
 
@@ -518,7 +519,7 @@ describe('DropdownComponent', () => {
 
     describe('when open', () => {
       beforeEach(() => {
-        spectator.component['state'] = 'open';
+        spectator.component['state'] = openState.open;
         spectator.detectChanges();
       });
 

@@ -1,30 +1,35 @@
 import {
-  Component,
-  HostBinding,
-  Input,
-  TemplateRef,
-  ContentChild,
-  HostListener,
-  ElementRef,
-  ContentChildren,
-  ViewChildren,
-  QueryList,
-  ViewChild,
   AfterContentChecked,
-  Renderer2,
-  Output,
-  EventEmitter,
-  OnDestroy,
-  forwardRef,
   AfterViewInit,
   ChangeDetectorRef,
+  Component,
+  ContentChild,
+  ContentChildren,
+  ElementRef,
+  EventEmitter,
+  forwardRef,
+  HostBinding,
+  HostListener,
+  Input,
+  OnDestroy,
+  Output,
+  QueryList,
+  Renderer2,
+  TemplateRef,
+  ViewChild,
+  ViewChildren,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { ListItemTemplateDirective } from '../list/list.directive';
-import { ItemComponent } from '../item/item.component';
 import { CardComponent } from '../card/card.component';
+import { ItemComponent } from '../item/item.component';
+import { ListItemTemplateDirective } from '../list/list.directive';
 
+export enum openState {
+  closed,
+  opening,
+  open,
+}
 @Component({
   selector: 'kirby-dropdown',
   templateUrl: './dropdown.component.html',
@@ -40,7 +45,7 @@ import { CardComponent } from '../card/card.component';
 export class DropdownComponent
   implements AfterContentChecked, AfterViewInit, OnDestroy, ControlValueAccessor {
   static readonly OPEN_DELAY_IN_MS = 100;
-  private state: 'closed' | 'opening' | 'open' = 'closed';
+  private state = openState.closed;
   private hasConfiguredSlottedItems = false;
 
   private _items: string[] | any[] = [];
@@ -131,12 +136,12 @@ export class DropdownComponent
 
   @HostBinding('class.is-opening')
   get _isOpening(): boolean {
-    return this.state === 'opening';
+    return this.state === openState.opening;
   }
 
   @HostBinding('class.is-open')
   get isOpen(): boolean {
-    return this.state === 'open';
+    return this.state === openState.open;
   }
 
   @HostBinding('class.align-end')
@@ -217,7 +222,7 @@ export class DropdownComponent
       };
       const callback: IntersectionObserverCallback = (entries) => {
         // Only apply alignment when opening:
-        if (this.state !== 'opening') {
+        if (this.state !== openState.opening) {
           return;
         }
 
@@ -262,7 +267,7 @@ export class DropdownComponent
       return;
     }
     if (!this.isOpen) {
-      this.state = 'opening';
+      this.state = openState.opening;
       // ensures that the dropdown is opened in case the IntersectionObserverCallback isn't invoked
       this.showDropdownTimeoutId = setTimeout(
         () => this.showDropdown(),
@@ -272,8 +277,8 @@ export class DropdownComponent
   }
 
   private showDropdown() {
-    if (this.state === 'opening') {
-      this.state = 'open';
+    if (this.state === openState.opening) {
+      this.state = openState.open;
       this.scrollItemIntoView(this.selectedIndex);
       this.changeDetectorRef.markForCheck();
     }
@@ -284,7 +289,7 @@ export class DropdownComponent
       return;
     }
     if (this.isOpen) {
-      this.state = 'closed';
+      this.state = openState.closed;
     }
   }
 
