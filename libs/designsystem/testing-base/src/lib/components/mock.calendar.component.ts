@@ -1,4 +1,4 @@
-import { forwardRef, Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 
 import { CalendarComponent } from '@kirbydesign/designsystem';
 
@@ -15,6 +15,7 @@ import { CalendarComponent } from '@kirbydesign/designsystem';
 })
 export class MockCalendarComponent {
   @Output() dateChange = new EventEmitter<Date>();
+  @Output() dateSelect = new EventEmitter<void>();
   @Input() timezone: 'local' | 'UTC';
   @Input() disableWeekends: boolean;
   @Input() disablePastDates: boolean;

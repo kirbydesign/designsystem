@@ -36,6 +36,7 @@ interface CalendarDay {
 export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   @ViewChild('calendarContainer', { static: false }) calendarContainer: ElementRef;
   @Output() dateChange = new EventEmitter<Date>();
+  @Output() dateSelect = new EventEmitter<void>();
   @Input() timezone: 'local' | 'UTC' = 'local';
   @Input() disableWeekends = false;
   @Input() disablePastDates = false;
@@ -336,17 +337,25 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
         .clone()
         .date(newDay.date)
         .toDate();
-      this.onSelectedDateChange(selectedDate);
-      this._selectedDate = selectedDate;
 
-      if (this.timezone === 'local') {
-        // emit as local time midnight
-        this.dateChange.emit(selectedDate);
-      } else {
-        // emit as equivalent date in utc midnight
-        const utcMidnightDate = moment.utc(moment(selectedDate).format('YYYY-MM-DD')).toDate();
-        this.dateChange.emit(utcMidnightDate);
+      const isNewDayAlreadySelected = this._selectedDate
+        ? selectedDate.getTime() === this._selectedDate.getTime()
+        : false;
+
+      if (!isNewDayAlreadySelected) {
+        this.onSelectedDateChange(selectedDate);
+        this._selectedDate = selectedDate;
+
+        if (this.timezone === 'local') {
+          // emit as local time midnight
+          this.dateChange.emit(selectedDate);
+        } else {
+          // emit as equivalent date in utc midnight
+          const utcMidnightDate = moment.utc(moment(selectedDate).format('YYYY-MM-DD')).toDate();
+          this.dateChange.emit(utcMidnightDate);
+        }
       }
+      this.dateSelect.emit();
     }
   }
 
