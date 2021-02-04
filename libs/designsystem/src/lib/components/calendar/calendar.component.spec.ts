@@ -249,7 +249,7 @@ describe('CalendarComponent', () => {
       spectator.setInput('todayDate', todayDate);
     });
 
-    fdescribe('when `minDate` is set', () => {
+    describe('when `minDate` is set', () => {
       let minDate: Date;
 
       beforeEach(() => {
