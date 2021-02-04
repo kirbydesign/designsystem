@@ -99,4 +99,49 @@ describe('TabsComponent', () => {
       });
     }
   });
+
+  describe('Tab-bar height', () => {
+    afterAll(() => {
+      TestHelper.resetTestWindow();
+    });
+
+    describe('on screensize phone', () => {
+      beforeEach(async () => {
+        await TestHelper.resizeTestWindow(TestHelper.screensize.phone);
+      });
+
+      it('should be 50px', () => {
+        const ionTabBarElm = spectator.query('ion-tab-bar');
+        expect(ionTabBarElm).toHaveComputedStyle({
+          height: '50px',
+        });
+      });
+    });
+
+    describe('on screensize tablet', () => {
+      beforeEach(async () => {
+        await TestHelper.resizeTestWindow(TestHelper.screensize.tablet);
+      });
+
+      it('should be 70px', () => {
+        const ionTabBarElm = spectator.query('ion-tab-bar');
+        expect(ionTabBarElm).toHaveComputedStyle({
+          height: '70px',
+        });
+      });
+    });
+
+    describe('on screensize desktop', () => {
+      beforeEach(async () => {
+        await TestHelper.resizeTestWindow(TestHelper.screensize.desktop);
+      });
+
+      it('should be 70px', () => {
+        const ionTabBarElm = spectator.query('ion-tab-bar');
+        expect(ionTabBarElm).toHaveComputedStyle({
+          height: '70px',
+        });
+      });
+    });
+  });
 });
