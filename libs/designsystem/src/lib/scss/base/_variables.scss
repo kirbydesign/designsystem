@@ -51,7 +51,8 @@ $font-weight: (
   light: 300,
   normal: 400,
   bold: 700,
-    'black': 900, // black will be treated as a named css color if not quoted
+  // black will be treated as a named css color if not quoted
+    'black': 900,
 ) !default;
 
 /*
