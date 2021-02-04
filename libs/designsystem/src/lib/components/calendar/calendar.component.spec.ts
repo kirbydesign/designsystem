@@ -242,7 +242,14 @@ describe('CalendarComponent', () => {
   });
 
   describe('active month', () => {
-    describe('when `minDate` is set', () => {
+    let todayDate: Date;
+
+    beforeEach(() => {
+      todayDate = new Date(2021, 0, 1);
+      spectator.setInput('todayDate', todayDate);
+    });
+
+    fdescribe('when `minDate` is set', () => {
       let minDate: Date;
 
       beforeEach(() => {
@@ -250,44 +257,38 @@ describe('CalendarComponent', () => {
         spectator.setInput('minDate', minDate);
       });
 
-      describe('when `minDate` changes to a date inside previously valid dates', () => {
+      describe('when `minDate` changes to a later date', () => {
         let newMinDate: Date;
 
         beforeEach(() => {
-          newMinDate = new Date(2019, 3, 10);
+          newMinDate = new Date(2021, 11, 30);
+          spectator.setInput('minDate', newMinDate);
         });
 
         it('should set active month based on changed `minDate`', () => {
-          spectator.setInput('minDate', newMinDate);
-
-          expect(spectator.component.activeMonthName.toLowerCase()).toEqual(
-            moment(newMinDate).format('MMMM')
-          );
+          expect(spectator.component.activeMonthName).toEqual(moment(newMinDate).format('MMMM'));
         });
       });
     });
 
-    describe('when `MaxDate` is set', () => {
-      let MaxDate: Date;
+    describe('when `maxDate` is set', () => {
+      let maxDate: Date;
 
       beforeEach(() => {
-        MaxDate = new Date(2017, 0, 1);
-        spectator.setInput('maxDate', MaxDate);
+        maxDate = new Date(2023, 0, 1);
+        spectator.setInput('maxDate', maxDate);
       });
 
-      describe('when `MaxDate` changes to a date inside previously valid dates', () => {
+      describe('when `maxDate` changes to an earlier date', () => {
         let newMaxDate: Date;
 
         beforeEach(() => {
-          newMaxDate = new Date(2019, 3, 10);
+          newMaxDate = new Date(2020, 6, 30);
+          spectator.setInput('maxDate', newMaxDate);
         });
 
-        it('should set active month based on changed `MaxDate`', () => {
-          spectator.setInput('maxDate', newMaxDate);
-
-          expect(spectator.component.activeMonthName.toLowerCase()).toEqual(
-            moment(newMaxDate).format('MMMM')
-          );
+        it('should set active month based on changed `maxDate`', () => {
+          expect(spectator.component.activeMonthName).toEqual(moment(newMaxDate).format('MMMM'));
         });
       });
     });
