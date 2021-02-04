@@ -307,7 +307,7 @@ describe('CalendarComponent', () => {
 
       beforeEach(() => {
         todayDate = new Date(2021, 0, 1);
-        yearNavigatorOptions = { from: -3, to: 3 };
+        yearNavigatorOptions = { from: -3, to: 2 };
 
         spectator.setInput('todayDate', todayDate);
         spectator.setInput('yearNavigatorOptions', yearNavigatorOptions);
