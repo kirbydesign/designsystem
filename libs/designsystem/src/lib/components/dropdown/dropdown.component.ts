@@ -234,14 +234,15 @@ export class DropdownComponent
           return;
         }
 
+        if (this.cardAlign === cardAlignment.right) {
+        }
         // Cancel any pending timer to show dropdown:
         clearTimeout(this.showDropdownTimeoutId);
-
-        this._horizontal = this.cardAlign === cardAlignment.left ? 'start' : 'end';
         const entry = entries[0];
         const isVisible = entry.boundingClientRect.width > 0;
         if (isVisible && entry.intersectionRatio < 1) {
-          this._horizontal = this.getCardAlignment(entry);
+          this.setCardAlignment(entry);
+
           if (entry.boundingClientRect.top < 0) {
             // entry is cut off at the top by ${entry.boundingClientRect.top}px
             // open downwards:
@@ -266,13 +267,19 @@ export class DropdownComponent
     }
   }
 
-  private getCardAlignment(entry) {
+  private setCardAlignment(entry) {
     // If card alignment is left, and the entry is cut off to the right by ${entry.boundingClientRect.right - entry.intersectionRect.right}px
     // it is set to align to end in stead, and vice versa for right-aligned card
     if (this.cardAlign === cardAlignment.left) {
-      return entry.boundingClientRect.right > entry.rootBounds.right ? 'end' : 'start';
+      if (entry.boundingClientRect.right > entry.rootBounds.right) {
+        this._horizontal = 'end';
+        this.cardAlign = cardAlignment.right;
+      }
     } else {
-      return entry.boundingClientRect.left < entry.rootBounds.left ? 'start' : 'end';
+      if (entry.boundingClientRect.left < entry.rootBounds.left) {
+        this._horizontal = 'start';
+        this.cardAlign = cardAlignment.left;
+      }
     }
   }
 

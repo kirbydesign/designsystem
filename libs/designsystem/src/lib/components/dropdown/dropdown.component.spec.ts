@@ -10,7 +10,7 @@ import { DesignTokenHelper } from '../../helpers';
 import { TestHelper } from '../../testing/test-helper';
 import { ListItemTemplateDirective } from '../list';
 
-import { DropdownComponent, openState } from './dropdown.component';
+import { cardAlignment, DropdownComponent, openState } from './dropdown.component';
 
 @Component({
   template: '<ng-content></ng-content>',
@@ -72,6 +72,10 @@ describe('DropdownComponent', () => {
 
     it('should have default placeholder text', () => {
       expect(buttonElement).toHaveText(spectator.component.placeholder, true);
+    });
+
+    it('should have default cardAligment set', () => {
+      expect(spectator.component.cardAlign).toEqual(cardAlignment.left);
     });
 
     it('should render as inline block', () => {
@@ -251,6 +255,33 @@ describe('DropdownComponent', () => {
         spectator.detectChanges();
         const button = spectator.query(ButtonComponent);
         expect(button.attentionLevel).toEqual('1');
+      });
+    });
+
+    fdescribe('when configured with cardAligment', () => {
+      it('should render card with left alignment', () => {
+        spectator.component.cardAlign = cardAlignment.left;
+        spectator.component['state'] = openState.open;
+        spectator.detectChanges();
+        const buttonRect = buttonElement.getBoundingClientRect();
+        const card = spectator.query('kirby-card');
+        const cardRect = card.getBoundingClientRect();
+        expect(cardRect.left).toEqual(buttonRect.left);
+      });
+
+      it('should render card with right alignment', (done) => {
+        spectator.setInput('cardAlign', cardAlignment.right);
+        spectator.element.style.cssFloat = 'right';
+        spectator.component.open();
+        spectator.detectChanges();
+        setTimeout(() => {
+          spectator.detectChanges();
+          const card = spectator.query('kirby-card');
+          const buttonRect = buttonElement.getBoundingClientRect();
+          const cardRect = card.getBoundingClientRect();
+          expect(cardRect.right).toEqual(buttonRect.right);
+          done();
+        }, openDelayInMs);
       });
     });
 
