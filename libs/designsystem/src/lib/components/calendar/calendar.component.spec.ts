@@ -1,7 +1,7 @@
+import { LOCALE_ID } from '@angular/core';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import moment from 'moment';
 import { MockComponent } from 'ng-mocks';
-import { LOCALE_ID } from '@angular/core';
 
 import { CalendarComponent, IconComponent } from '..';
 import { WindowRef } from '../../types/window-ref';
@@ -164,6 +164,15 @@ describe('CalendarComponent', () => {
     expect(captured.event).toBeUndefined();
   });
 
+  it('should not emit a dateChange event if clicking the already selected date', () => {
+    spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
+
+    const captured = captureDateChangeEvents();
+
+    clickDayOfMonth(29);
+    expect(captured.event).toBeUndefined();
+  });
+
   it('should always emit a dateChange event when clicking today if alwaysEnableToday is set to true', () => {
     const today = localMidnightDate('1997-08-28');
     spectator.setInput('disabledDates', [today]);
@@ -185,6 +194,24 @@ describe('CalendarComponent', () => {
 
     clickDayOfMonth(14);
     expect(captured.event).toEqual(utcMidnightDate('1997-08-14'));
+  });
+
+  it('should emit dateSelect event when clicking a date that is not already selected', () => {
+    spectator.setInput('selectedDate', utcMidnightDate('1997-08-29'));
+
+    const captured = captureDateSelectEvents();
+
+    clickDayOfMonth(14);
+    expect(captured.event).toBeTrue();
+  });
+
+  it('should emit dateSelect event when clicking the already selected date', () => {
+    spectator.setInput('selectedDate', utcMidnightDate('1997-08-29'));
+
+    const captured = captureDateSelectEvents();
+
+    clickDayOfMonth(29);
+    expect(captured.event).toBeTrue();
   });
 
   it('should be tolerant of date input (selectedDate, todayDate, minDate, maxDate, and disabledDates) as both UTC midnight and local time midnight', () => {
@@ -262,6 +289,12 @@ describe('CalendarComponent', () => {
   function captureDateChangeEvents() {
     let captured: { event?: Date } = {};
     spectator.output<Date>('dateChange').subscribe((result) => (captured.event = result));
+    return captured;
+  }
+
+  function captureDateSelectEvents() {
+    const captured: { event?: boolean } = {};
+    spectator.output<any>('dateSelect').subscribe(() => (captured.event = true));
     return captured;
   }
 });
