@@ -234,90 +234,90 @@ describe('ModalWrapperComponent', () => {
 
   describe('with embedded component', () => {
     const customHeaderContentSelector = 'kirby-progress-circle';
-    describe('with static custom header content', () => {
-      beforeEach(() => {
-        spectator = modalWrapperTestBuilder
-          .flavor('modal')
-          // TODO: Suggestion: Make withStaticComponent instead of withStaticSpecificComponent based on type like flavor is.
-          // TODO: You could even make just a withComponent() which coulcd be generic or take an options object.
-          .withStaticCustomHeaderContent()
-          .build();
-        spectator.detectComponentChanges();
-      });
+    // describe('with static custom header content', () => {
+    //   beforeEach(() => {
+    //     spectator = modalWrapperTestBuilder
+    //       .flavor('modal')
+    //       // TODO: Suggestion: Make withStaticComponent instead of withStaticSpecificComponent based on type like flavor is.
+    //       // TODO: You could even make just a withComponent() which coulcd be generic or take an options object.
+    //       .withStaticCustomHeaderContent()
+    //       .build();
+    //     spectator.detectComponentChanges();
+    //   });
 
-      afterEach(() => {
-        // Ensure any observers are destroyed:
-        spectator.fixture.destroy();
-      });
-      it('should move embedded custom header conter to modal header', () => {
-        const ionContentElement = spectator.query('ion-content');
-        const embeddedComponentElement = ionContentElement.firstElementChild;
+    //   afterEach(() => {
+    //     // Ensure any observers are destroyed:
+    //     spectator.fixture.destroy();
+    //   });
+    //   it('should move embedded custom header conter to modal header', () => {
+    //     const ionContentElement = spectator.query('ion-content');
+    //     const embeddedComponentElement = ionContentElement.firstElementChild;
 
-        const embeddedCustomHeader = embeddedComponentElement.querySelector(
-          customHeaderContentSelector
-        );
+    //     const embeddedCustomHeader = embeddedComponentElement.querySelector(
+    //       customHeaderContentSelector
+    //     );
 
-        expect(embeddedCustomHeader).toBeNull();
-        const customHeaderAsWrapperChild = spectator.element.querySelector(
-          customHeaderContentSelector
-        );
-        expect(customHeaderAsWrapperChild).not.toBeNull();
-      });
-    });
+    //     expect(embeddedCustomHeader).toBeNull();
+    //     const customHeaderAsWrapperChild = spectator.element.querySelector(
+    //       customHeaderContentSelector
+    //     );
+    //     expect(customHeaderAsWrapperChild).not.toBeNull();
+    //   });
+    // });
 
-    describe('with dynamic custom header content', () => {
-      beforeEach(() => {
-        spectator = modalWrapperTestBuilder
-          .flavor('modal')
-          .withDynamicCustomHeadercontent()
-          .build();
-        spectator.detectComponentChanges();
-      });
+    // describe('with dynamic custom header content', () => {
+    //   beforeEach(() => {
+    //     spectator = modalWrapperTestBuilder
+    //       .flavor('modal')
+    //       .withDynamicCustomHeadercontent()
+    //       .build();
+    //     spectator.detectComponentChanges();
+    //   });
 
-      afterEach(() => {
-        // Ensure any observers are destroyed:
-        spectator.fixture.destroy();
-      });
+    //   afterEach(() => {
+    //     // Ensure any observers are destroyed:
+    //     spectator.fixture.destroy();
+    //   });
 
-      it('should move embedded header to wrapper component when rendered', async () => {
-        const customHeaderContent = spectator.element.querySelector(customHeaderContentSelector);
-        expect(customHeaderContent).toBeNull();
+    //   it('should move embedded header to wrapper component when rendered', async () => {
+    //     const customHeaderContent = spectator.element.querySelector(customHeaderContentSelector);
+    //     expect(customHeaderContent).toBeNull();
 
-        const embeddedComponent = spectator.query(DynamicCustomHeaderContentEmbeddedComponent);
-        embeddedComponent.showCustomHeader = true;
-        spectator.detectChanges();
-        await TestHelper.waitForResizeObserver();
+    //     const embeddedComponent = spectator.query(DynamicCustomHeaderContentEmbeddedComponent);
+    //     embeddedComponent.showCustomHeader = true;
+    //     spectator.detectChanges();
+    //     await TestHelper.waitForResizeObserver();
 
-        const ionContentElement = spectator.query('ion-content');
-        const embeddedComponentElement = ionContentElement.firstElementChild;
-        const embeddedCustomHeaderContent = embeddedComponentElement.querySelector(
-          customHeaderContentSelector
-        );
-        expect(embeddedCustomHeaderContent).toBeNull();
-        const customHeaderContentAsWrapperChild = spectator.element.querySelector(
-          customHeaderContentSelector
-        );
-        expect(customHeaderContentAsWrapperChild).not.toBeNull();
-      });
+    //     const ionContentElement = spectator.query('ion-content');
+    //     const embeddedComponentElement = ionContentElement.firstElementChild;
+    //     const embeddedCustomHeaderContent = embeddedComponentElement.querySelector(
+    //       customHeaderContentSelector
+    //     );
+    //     expect(embeddedCustomHeaderContent).toBeNull();
+    //     const customHeaderContentAsWrapperChild = spectator.element.querySelector(
+    //       customHeaderContentSelector
+    //     );
+    //     expect(customHeaderContentAsWrapperChild).not.toBeNull();
+    //   });
 
-      it('should remove embedded custom header content from wrapper component when not rendered', async () => {
-        let customHeaderContent = spectator.element.querySelector(customHeaderContentSelector);
-        expect(customHeaderContent).toBeNull();
+    //   it('should remove embedded custom header content from wrapper component when not rendered', async () => {
+    //     let customHeaderContent = spectator.element.querySelector(customHeaderContentSelector);
+    //     expect(customHeaderContent).toBeNull();
 
-        const embeddedComponent = spectator.query(DynamicCustomHeaderContentEmbeddedComponent);
-        embeddedComponent.showCustomHeader = true;
-        spectator.detectChanges();
-        await TestHelper.waitForResizeObserver();
+    //     const embeddedComponent = spectator.query(DynamicCustomHeaderContentEmbeddedComponent);
+    //     embeddedComponent.showCustomHeader = true;
+    //     spectator.detectChanges();
+    //     await TestHelper.waitForResizeObserver();
 
-        const footerAsWrapperChild = spectator.element.querySelector(customHeaderContentSelector);
-        expect(footerAsWrapperChild).not.toBeNull();
+    //     const footerAsWrapperChild = spectator.element.querySelector(customHeaderContentSelector);
+    //     expect(footerAsWrapperChild).not.toBeNull();
 
-        embeddedComponent.showCustomHeader = false;
-        spectator.detectChanges();
-        customHeaderContent = spectator.element.querySelector(customHeaderContentSelector);
-        expect(customHeaderContent).toBeNull();
-      });
-    });
+    //     embeddedComponent.showCustomHeader = false;
+    //     spectator.detectChanges();
+    //     customHeaderContent = spectator.element.querySelector(customHeaderContentSelector);
+    //     expect(customHeaderContent).toBeNull();
+    //   });
+    // });
 
     describe('with static footer', () => {
       beforeEach(() => {
