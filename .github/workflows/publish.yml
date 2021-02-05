@@ -1,0 +1,23 @@
+name: Kirby release CI
+
+on:
+  push:
+    tags:
+      - '^v[0-9]+\.[0-9]+'
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  publish_to_npm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '10.16'
+      - name: Create npm config
+        run: echo '//registry.npmjs.org/:_authToken=${{secrets.NPM_PUBLISH_TOKEN}}' > ~/.npmrc
+      - name: Publish to npm
+        run: sh ./scripts/publish.js
