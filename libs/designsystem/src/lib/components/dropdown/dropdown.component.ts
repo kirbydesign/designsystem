@@ -25,16 +25,21 @@ import { CardComponent } from '../card/card.component';
 import { ItemComponent } from '../item/item.component';
 import { ListItemTemplateDirective } from '../list/list.directive';
 
-export enum openState {
+export enum OpenState {
   closed,
   opening,
   open,
 }
 
-export enum cardAlignment {
+export enum HorizontalDirection {
   right = 'right',
   left = 'left',
 }
+enum VerticalDirection {
+  up,
+  down,
+}
+
 @Component({
   selector: 'kirby-dropdown',
   templateUrl: './dropdown.component.html',
@@ -50,7 +55,7 @@ export enum cardAlignment {
 export class DropdownComponent
   implements AfterContentChecked, AfterViewInit, OnDestroy, ControlValueAccessor {
   static readonly OPEN_DELAY_IN_MS = 100;
-  private state = openState.closed;
+  private state = OpenState.closed;
   private hasConfiguredSlottedItems = false;
 
   private _items: string[] | any[] = [];
@@ -81,8 +86,13 @@ export class DropdownComponent
   @Input()
   placeholder = 'Please select:';
 
-  @Input()
-  cardAlign: cardAlignment = cardAlignment.left;
+  @Input() set open(direction: HorizontalDirection) {
+    this._horizontal = direction || HorizontalDirection.right;
+  }
+
+  get open() {
+    return this._horizontal;
+  }
 
   @Input()
   attentionLevel: '1' | '2' | '3' | '4' = '3';
@@ -144,25 +154,29 @@ export class DropdownComponent
 
   @HostBinding('class.is-opening')
   get _isOpening(): boolean {
-    return this.state === openState.opening;
+    return this.state === OpenState.opening;
   }
 
   @HostBinding('class.is-open')
   get isOpen(): boolean {
-    return this.state === openState.open;
+    return this.state === OpenState.open;
   }
 
   @HostBinding('class.align-end')
-  _alignEnd: boolean;
+  _openLeft: boolean;
 
   @HostBinding('class.align-top')
-  _alignTop: boolean;
+  _openUp: boolean;
 
-  private set _horizontal(value: 'start' | 'end') {
-    this._alignEnd = value === 'end';
+  private set _horizontal(alignment: HorizontalDirection) {
+    this._openLeft = alignment === HorizontalDirection.left;
   }
-  private set _vertical(value: 'up' | 'down') {
-    this._alignTop = value === 'up';
+  private get _horizontal() {
+    return this._openLeft ? HorizontalDirection.left : HorizontalDirection.right;
+  }
+
+  private set _vertical(direction: VerticalDirection) {
+    this._openUp = direction === VerticalDirection.up;
   }
 
   @ContentChild(ListItemTemplateDirective, { static: true, read: TemplateRef })
@@ -198,7 +212,7 @@ export class DropdownComponent
     if (this.disabled) {
       return;
     }
-    this.isOpen ? this.close() : this.open();
+    this.isOpen ? this.closeDropdown() : this.openDropdown();
   }
 
   onButtonMouseEvent(event: Event) {
@@ -230,24 +244,21 @@ export class DropdownComponent
       };
       const callback: IntersectionObserverCallback = (entries) => {
         // Only apply alignment when opening:
-        if (this.state !== openState.opening) {
+        if (this.state !== OpenState.opening) {
           return;
         }
 
-        if (this.cardAlign === cardAlignment.right) {
-          this._horizontal = 'end';
-        }
         // Cancel any pending timer to show dropdown:
         clearTimeout(this.showDropdownTimeoutId);
         const entry = entries[0];
         const isVisible = entry.boundingClientRect.width > 0;
         if (isVisible && entry.intersectionRatio < 1) {
-          this.setCardAlignment(entry);
+          this.setHorizontalAlignment(entry);
 
           if (entry.boundingClientRect.top < 0) {
             // entry is cut off at the top by ${entry.boundingClientRect.top}px
             // open downwards:
-            this._vertical = 'down';
+            this._vertical = VerticalDirection.down;
           }
           if (entry.boundingClientRect.bottom > entry.rootBounds.bottom) {
             // entry is cut off at the bottom by ${entry.boundingClientRect.bottom - entry.intersectionRect.bottom}px
@@ -256,7 +267,7 @@ export class DropdownComponent
             // Check if the card can fit on top of button:
             if (containerOffsetTop > entry.target.clientHeight + SPACING) {
               // open upwards:
-              this._vertical = 'up';
+              this._vertical = VerticalDirection.up;
             }
           }
         }
@@ -268,28 +279,26 @@ export class DropdownComponent
     }
   }
 
-  private setCardAlignment(entry) {
+  private setHorizontalAlignment(entry) {
     // If card alignment is left, and the entry is cut off to the right by ${entry.boundingClientRect.right - entry.intersectionRect.right}px
     // it is set to align to end in stead, and vice versa for right-aligned card
-    if (this.cardAlign === cardAlignment.left) {
+    if (this._horizontal === HorizontalDirection.right) {
       if (entry.boundingClientRect.right > entry.rootBounds.right) {
-        this._horizontal = 'end';
-        this.cardAlign = cardAlignment.right;
+        this._horizontal = HorizontalDirection.left;
       }
     } else {
       if (entry.boundingClientRect.left < entry.rootBounds.left) {
-        this._horizontal = 'start';
-        this.cardAlign = cardAlignment.left;
+        this._horizontal = HorizontalDirection.right;
       }
     }
   }
 
-  open() {
+  openDropdown() {
     if (this.disabled) {
       return;
     }
     if (!this.isOpen) {
-      this.state = openState.opening;
+      this.state = OpenState.opening;
       // ensures that the dropdown is opened in case the IntersectionObserverCallback isn't invoked
       this.showDropdownTimeoutId = setTimeout(
         () => this.showDropdown(),
@@ -299,25 +308,25 @@ export class DropdownComponent
   }
 
   private showDropdown() {
-    if (this.state === openState.opening) {
-      this.state = openState.open;
+    if (this.state === OpenState.opening) {
+      this.state = OpenState.open;
       this.scrollItemIntoView(this.selectedIndex);
       this.changeDetectorRef.markForCheck();
     }
   }
 
-  close() {
+  closeDropdown() {
     if (this.disabled) {
       return;
     }
     if (this.isOpen) {
-      this.state = openState.closed;
+      this.state = OpenState.closed;
     }
   }
 
   onItemSelect(index: number) {
     this.selectItem(index);
-    this.close();
+    this.closeDropdown();
   }
 
   private _onChange: (value: any) => void = () => {};
@@ -412,7 +421,7 @@ export class DropdownComponent
   _onTab(event: KeyboardEvent) {
     if (this.isOpen) {
       event.preventDefault();
-      this.close();
+      this.closeDropdown();
     }
   }
 
@@ -439,7 +448,7 @@ export class DropdownComponent
       return;
     }
     if (this.isOpen) {
-      this.close();
+      this.closeDropdown();
     }
     this._onTouched();
   }
@@ -449,7 +458,7 @@ export class DropdownComponent
     event.preventDefault();
     event.stopPropagation();
     if (!this.isOpen) {
-      this.open();
+      this.openDropdown();
     }
   }
 

@@ -8,7 +8,6 @@ import { DropdownExampleConfigurationComponent } from './dropdown-example-config
 import { DropdownExampleAttentionLevelComponent } from './examples/attention-level';
 import { DropdownExampleCustomItemTemplateComponent } from './examples/custom-item-template';
 import { DropdownExampleDefaultComponent } from './examples/default';
-import { DropdownExampleDropdownRightAlignedComponent } from './examples/dropdown-right-aligned';
 import { DropdownExampleExpandComponent } from './examples/expand';
 import { DropdownExampleItemSelectComponent } from './examples/item-select';
 import { DropdownExampleNgFormsComponent } from './examples/ng-forms';
@@ -23,7 +22,6 @@ const COMPONENT_DECLARATIONS = [
   DropdownExamplePreSelectedComponent,
   DropdownExampleExpandComponent,
   DropdownExampleRightAlignedComponent,
-  DropdownExampleDropdownRightAlignedComponent,
   DropdownExampleAttentionLevelComponent,
   DropdownExampleItemSelectComponent,
   DropdownExampleCustomItemTemplateComponent,

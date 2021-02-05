@@ -1,8 +1,6 @@
 import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
-import {
-  cardAlignment,
-  DropdownComponent,
-} from 'libs/designsystem/src/lib/components/dropdown/dropdown.component';
+
+import { DropdownComponent, HorizontalDirection } from '@kirbydesign/designsystem';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
@@ -20,7 +18,7 @@ export class MockDropdownComponent {
   @Input() selectedIndex: number;
   @Input() itemTextProperty: string;
   @Input() placeholder: string;
-  @Input() cardAlign: cardAlignment;
+  @Input() open: HorizontalDirection;
   @Input() attentionLevel: '1' | '2' | '3' | '4';
   @Input() expand: 'block';
   @Input() disabled: boolean;

@@ -6,6 +6,7 @@ const config = {
   [size]="size"
   placeholder="Right aligned (opens left)"
   [items]="['Item 1','Item 2','Item 3','Item 4','Item 5']"
+  open="left"
 ></kirby-dropdown>`,
   styles: [
     `:host(.right-align) {

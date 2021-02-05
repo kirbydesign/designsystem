@@ -10,7 +10,7 @@ import { DesignTokenHelper } from '../../helpers';
 import { TestHelper } from '../../testing/test-helper';
 import { ListItemTemplateDirective } from '../list';
 
-import { cardAlignment, DropdownComponent, openState } from './dropdown.component';
+import { DropdownComponent, HorizontalDirection, OpenState } from './dropdown.component';
 
 @Component({
   template: '<ng-content></ng-content>',
@@ -75,7 +75,7 @@ describe('DropdownComponent', () => {
     });
 
     it('should have default cardAligment set', () => {
-      expect(spectator.component.cardAlign).toEqual(cardAlignment.left);
+      expect(spectator.component.open).toEqual(HorizontalDirection.left);
     });
 
     it('should render as inline block', () => {
@@ -258,27 +258,30 @@ describe('DropdownComponent', () => {
       });
     });
 
-    describe('when configured with cardAligment', () => {
-      it('should render card with left alignment', () => {
-        spectator.component.cardAlign = cardAlignment.left;
-        spectator.component['state'] = openState.open;
+    describe('when configured with open direction', () => {
+      it('should render card to the right', () => {
+        spectator.component.open = HorizontalDirection.right;
+        spectator.component['state'] = OpenState.open;
         spectator.detectChanges();
+
         const buttonRect = buttonElement.getBoundingClientRect();
         const card = spectator.query('kirby-card');
         const cardRect = card.getBoundingClientRect();
+
         expect(cardRect.left).toEqual(buttonRect.left);
       });
 
-      it('should render card with right alignment', (done) => {
-        spectator.setInput('cardAlign', cardAlignment.right);
+      it('should open card to the left', (done) => {
+        spectator.component.open = HorizontalDirection.left;
         spectator.element.style.cssFloat = 'right';
-        spectator.component.open();
+        spectator.component['state'] = OpenState.open;
         spectator.detectChanges();
+
         setTimeout(() => {
-          spectator.detectChanges();
           const card = spectator.query('kirby-card');
           const buttonRect = buttonElement.getBoundingClientRect();
           const cardRect = card.getBoundingClientRect();
+
           expect(cardRect.right).toEqual(buttonRect.right);
           done();
         }, openDelayInMs);
@@ -302,7 +305,7 @@ describe('DropdownComponent', () => {
       });
 
       it('should render dropdown with full width', () => {
-        spectator.component['state'] = openState.open;
+        spectator.component['state'] = OpenState.open;
         spectator.detectChanges();
         const card = spectator.query('kirby-card');
         const componentWidth = spectator.element.clientWidth;
@@ -314,7 +317,7 @@ describe('DropdownComponent', () => {
 
     describe('when closed', () => {
       beforeEach(() => {
-        spectator.component['state'] = openState.closed;
+        spectator.component['state'] = OpenState.closed;
         spectator.detectChanges();
       });
 
@@ -550,7 +553,7 @@ describe('DropdownComponent', () => {
 
     describe('when open', () => {
       beforeEach(() => {
-        spectator.component['state'] = openState.open;
+        spectator.component['state'] = OpenState.open;
         spectator.detectChanges();
       });
 
@@ -740,7 +743,7 @@ describe('DropdownComponent', () => {
     describe('when aligned to right side of viewport', () => {
       it('should align the dropdown to the right side of button and component container ', (done) => {
         spectator.element.style.cssFloat = 'right';
-        spectator.component.open();
+        spectator.component.openDropdown();
         spectator.detectChanges();
         setTimeout(() => {
           spectator.detectChanges();
@@ -770,7 +773,7 @@ describe('DropdownComponent', () => {
       });
 
       it('should not open', fakeAsync(() => {
-        spectator.component.open();
+        spectator.component.openDropdown();
         tick(openDelayInMs);
         expect(spectator.component.isOpen).toBeFalsy();
       }));
