@@ -3,6 +3,7 @@ name: Publish to npm
 on:
   pull_request:
     types: closed
+    branches: master
     
 defaults:
   run:
