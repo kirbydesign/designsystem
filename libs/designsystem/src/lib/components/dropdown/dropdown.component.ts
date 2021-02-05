@@ -253,23 +253,8 @@ export class DropdownComponent
         const entry = entries[0];
         const isVisible = entry.boundingClientRect.width > 0;
         if (isVisible && entry.intersectionRatio < 1) {
-          this.setHorizontalAlignment(entry);
-
-          if (entry.boundingClientRect.top < 0) {
-            // entry is cut off at the top by ${entry.boundingClientRect.top}px
-            // open downwards:
-            this._vertical = VerticalDirection.down;
-          }
-          if (entry.boundingClientRect.bottom > entry.rootBounds.bottom) {
-            // entry is cut off at the bottom by ${entry.boundingClientRect.bottom - entry.intersectionRect.bottom}px
-            const containerOffsetTop = this.elementRef.nativeElement.getBoundingClientRect().top;
-            const SPACING = 5; //TODO: Get from SCSS
-            // Check if the card can fit on top of button:
-            if (containerOffsetTop > entry.target.clientHeight + SPACING) {
-              // open upwards:
-              this._vertical = VerticalDirection.up;
-            }
-          }
+          this.setHorizontalDirection(entry);
+          this.setVerticalDirection(entry);
         }
         this.showDropdown();
         this.changeDetectorRef.detectChanges();
@@ -279,7 +264,7 @@ export class DropdownComponent
     }
   }
 
-  private setHorizontalAlignment(entry) {
+  private setHorizontalDirection(entry) {
     // If card alignment is left, and the entry is cut off to the right by ${entry.boundingClientRect.right - entry.intersectionRect.right}px
     // it is set to align to end in stead, and vice versa for right-aligned card
     if (this._horizontal === HorizontalDirection.right) {
@@ -289,6 +274,24 @@ export class DropdownComponent
     } else {
       if (entry.boundingClientRect.left < entry.rootBounds.left) {
         this._horizontal = HorizontalDirection.right;
+      }
+    }
+  }
+
+  private setVerticalDirection(entry) {
+    if (entry.boundingClientRect.top < 0) {
+      // entry is cut off at the top by ${entry.boundingClientRect.top}px
+      // open downwards:
+      this._vertical = VerticalDirection.down;
+    }
+    if (entry.boundingClientRect.bottom > entry.rootBounds.bottom) {
+      // entry is cut off at the bottom by ${entry.boundingClientRect.bottom - entry.intersectionRect.bottom}px
+      const containerOffsetTop = this.elementRef.nativeElement.getBoundingClientRect().top;
+      const SPACING = 5; //TODO: Get from SCSS
+      // Check if the card can fit on top of button:
+      if (containerOffsetTop > entry.target.clientHeight + SPACING) {
+        // open upwards:
+        this._vertical = VerticalDirection.up;
       }
     }
   }
