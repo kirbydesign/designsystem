@@ -1,9 +1,9 @@
-import { forwardRef, Component, Input, Output, EventEmitter, TrackByFunction } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, Output, TrackByFunction } from '@angular/core';
 
 import {
   ListComponent,
-  ListSwipeAction,
   ListShape,
+  ListSwipeAction,
   LoadOnDemandEvent,
   ThemeColor,
 } from '@kirbydesign/designsystem';
@@ -27,6 +27,7 @@ export class MockListComponent {
   @Input() noMoreItemsText: string;
   @Input() showDivider: boolean;
   @Input() markSelectedRow: boolean;
+  @Input() disableLoadOnDemand: boolean;
   @Input() shape: ListShape;
   @Input() hasItemSpacing: boolean;
   @Input() swipeActions: ListSwipeAction[];
