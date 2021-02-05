@@ -146,13 +146,13 @@ describe('ListComponent', () => {
 
       component.ngOnInit();
 
-      expect(component.isLoadOnDemandEnabled).toBeTruthy();
+      expect(component.disableLoadOnDemand).toBeFalsy();
     });
 
     it('should disable load more, if there is no subscriber to the loadMore event emitter', () => {
       runNgOnChanges();
 
-      expect(component.isLoadOnDemandEnabled).toBeFalsy();
+      expect(component.disableLoadOnDemand).toBeTruthy();
     });
   });
 });
