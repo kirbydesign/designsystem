@@ -74,8 +74,8 @@ describe('DropdownComponent', () => {
       expect(buttonElement).toHaveText(spectator.component.placeholder, true);
     });
 
-    it('should have default cardAligment set', () => {
-      expect(spectator.component.open).toEqual(HorizontalDirection.left);
+    it('should have default open set', () => {
+      expect(spectator.component.open).toEqual(HorizontalDirection.right);
     });
 
     it('should render as inline block', () => {
