@@ -1,34 +1,35 @@
 import {
+  AfterViewInit,
   Component,
   ContentChild,
+  ContentChildren,
   EventEmitter,
   HostBinding,
   Input,
-  OnInit,
   OnChanges,
+  OnInit,
   Output,
   TemplateRef,
-  ViewChild,
   TrackByFunction,
-  ContentChildren,
-  AfterViewInit,
+  ViewChild,
 } from '@angular/core';
 
+import { PlatformService } from '../../helpers/platform.service';
+import { ThemeColor } from '../../helpers/theme-color.type';
+import { ItemComponent } from '../item/item.component';
+
+import { ListHelper } from './helpers/list-helper';
+import { ListSwipeAction } from './list-swipe-action';
 import {
   ListFlexItemDirective,
   ListFooterDirective,
   ListHeaderDirective,
   ListItemDirective,
-  ListSectionHeaderDirective,
   ListItemTemplateDirective,
+  ListSectionHeaderDirective,
 } from './list.directive';
 import { LoadOnDemandEvent, LoadOnDemandEventData } from './list.event';
-import { ListHelper } from './helpers/list-helper';
 import { GroupByPipe } from './pipes/group-by.pipe';
-import { ListSwipeAction } from './list-swipe-action';
-import { ThemeColor } from '../../helpers/theme-color.type';
-import { ItemComponent } from '../item/item.component';
-import { PlatformService } from '../../helpers/platform.service';
 
 export type ListShape = 'square' | 'rounded' | 'none';
 
