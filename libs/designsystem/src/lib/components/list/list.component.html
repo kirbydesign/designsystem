@@ -2,7 +2,7 @@
   #list
   kirbyInfiniteScroll
   (scrollEnd)="onLoadOnDemand()"
-  [disabled]="!isLoadOnDemandEnabled"
+  [disabled]="disableLoadOnDemand"
   [class.has-header]="headerTemplate"
   [class.has-footer]="footerTemplate"
   [class.has-divider]="showDivider"
@@ -23,7 +23,7 @@
   </div>
 </ion-list>
 
-<p *ngIf="!isLoadOnDemandEnabled && noMoreItemsText" class="no-more-items">{{ noMoreItemsText }}</p>
+<p *ngIf="disableLoadOnDemand && noMoreItemsText" class="no-more-items">{{ noMoreItemsText }}</p>
 <div *ngIf="isLoading" class="loading">
   <kirby-spinner></kirby-spinner>
 </div>

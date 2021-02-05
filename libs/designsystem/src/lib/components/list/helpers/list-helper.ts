@@ -3,11 +3,11 @@ import { LoadOnDemandEventData } from '../list.event';
 
 export class ListHelper {
   onLoadOnDemand(component: ListComponent, _event: LoadOnDemandEventData) {
-    if (component.isLoadOnDemandEnabled && !component.isLoading) {
+    if (!component.disableLoadOnDemand && !component.isLoading) {
       component.isLoading = true;
       component.loadOnDemand.emit({
         complete: (disableLoadOnDemand: boolean) => {
-          component.isLoadOnDemandEnabled = !disableLoadOnDemand;
+          component.disableLoadOnDemand = disableLoadOnDemand;
           component.isLoading = false;
         },
       });
