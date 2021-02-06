@@ -2,7 +2,7 @@ import { IonicModule } from '@ionic/angular';
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
 import { MockModule } from 'ng-mocks';
 
-import { TestHelper } from '../../testing/test-helper';
+import { ScreenSize, TestHelper } from '../../testing/test-helper';
 
 import { TabsComponent } from './tabs.component';
 
@@ -98,5 +98,28 @@ describe('TabsComponent', () => {
         });
       });
     }
+  });
+
+  describe('tab-bar sizing', () => {
+    afterAll(() => {
+      TestHelper.resetTestWindow();
+    });
+
+    const scenarios: { [key in ScreenSize]?: string } = {
+      phone: '50px',
+      tablet: '70px',
+      desktop: '70px',
+    };
+
+    Object.entries(scenarios).forEach(([screenSize, expectedHeight]) => {
+      it(`should have correct height on screensize ${screenSize}`, async () => {
+        await TestHelper.resizeTestWindow(TestHelper.screensize[screenSize]);
+
+        const ionTabBarElm = spectator.query('ion-tab-bar');
+        expect(ionTabBarElm).toHaveComputedStyle({
+          height: expectedHeight,
+        });
+      });
+    });
   });
 });
