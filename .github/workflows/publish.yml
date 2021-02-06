@@ -1,4 +1,4 @@
-name: Publish to npm
+name: Publish new version to npm
 
 on:
   pull_request:
@@ -10,18 +10,20 @@ defaults:
     shell: bash
 
 jobs:
-  publish:
+  bump_version_and_publish:
+    name: Bump and publish new package version to npm
     runs-on: ubuntu-latest
     if: github.event.pull_request.merged
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout master branch
+        uses: actions/checkout@v2
         with:
           ref: refs/heads/master      
       - name: Install Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '10.16'
-      - name: Install npm
+      - name: Install NPM dependencies
         run: npm ci
       - name: Configure git
         run: |
@@ -31,7 +33,7 @@ jobs:
         run: echo '//registry.npmjs.org/:_authToken=${{secrets.NPM_PUBLISH_TOKEN}}' > ~/.npmrc
       - name: Bump version
         run: npm version patch -m ":bookmark:Bumping version to %s"
-      - name: Publish to npm
+      - name: Build package and publish to npm
         run: sh ./scripts/publish.js
       - name: Push version bump and tag to Github
         run: |
