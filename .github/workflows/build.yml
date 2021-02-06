@@ -39,36 +39,6 @@ jobs:
       - name: Build Kirby lib
         run: npm run dist:designsystem
 
-  bump_version:
-    name: Bump version and create tag 
-    needs: [lint_and_unittest, build_kirby]
-    if: "!contains(github.event.head_commit.message, 'Bumping version to') && github.ref == 'refs/heads/master'"
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Install Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '10.16'
-        env:
-          KEY: ${{secrets.ENCRYPTED_09E556D51FDC_KEY}}
-          IV: ${{secrets.ENCRYPTED_09E556D51FDC_IV}}
-      - name: Decrypt ssh key
-        run: openssl aes-256-cbc -K $KEY -iv $IV -in scripts/ssh_key.enc -out ssh_key -d
-      - name: Set up ssh agent with key
-        run: |
-          eval "$(ssh-agent -s)"
-          chmod 600 ssh_key
-          ssh-add ssh_key
-      - name: Set git origin
-        run: git remote set-url origin git@github.com:kirbydesign/designsystem.git
-      - name: Bump version and push tags
-        run: |
-          git checkout -- package.json
-          git --no-pager diff
-          git checkout master
-          npm version patch -m ":bookmark: Bumping version to %s"
-
   deploy_to_cookbook:
     name: Deploy cookbook
     needs: [lint_and_unittest, build_kirby]
