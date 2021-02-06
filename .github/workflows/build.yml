@@ -11,7 +11,8 @@ jobs:
     name: Lint & unit test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout repo
+        uses: actions/checkout@v2
       - name: Install Node.js
         uses: actions/setup-node@v2
         with:
@@ -29,7 +30,8 @@ jobs:
     name: Build Kirby lib
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout repo
+        uses: actions/checkout@v2
       - name: Install Node.js
         uses: actions/setup-node@v2
         with:
@@ -44,7 +46,8 @@ jobs:
     needs: [lint_and_unittest, build_kirby]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout repo
+        uses: actions/checkout@v2
       - name: Install Node.js
         uses: actions/setup-node@v2
         with:
