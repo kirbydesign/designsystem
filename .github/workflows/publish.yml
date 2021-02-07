@@ -31,6 +31,7 @@ jobs:
         run: |
           git config user.name "Kirby Bot"
           git config user.email "<>"
+          git remote add gh-origin https://kirbycibot:${secrets.VERSION_BUMP_GITHUB_TOKEN}@github.com/kirbydesign/designsystem.git
       - name: Create npm config
         run: echo '//registry.npmjs.org/:_authToken=${{secrets.NPM_PUBLISH_TOKEN}}' > ~/.npmrc
       - name: Bump version
