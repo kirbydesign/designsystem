@@ -4,6 +4,7 @@ on:
   pull_request:
     types: closed
     branches: master
+    paths: 'libs/**'
   workflow_dispatch:
 
 defaults:
