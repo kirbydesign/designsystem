@@ -7,10 +7,6 @@ on:
     paths: 'libs/**'
   workflow_dispatch:
 
-defaults:
-  run:
-    shell: bash
-
 jobs:
   bump_version_and_publish:
     name: Bump and publish new package version to npm
