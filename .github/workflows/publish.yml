@@ -35,7 +35,7 @@ jobs:
       - name: Bump version
         run: npm version patch -m ":bookmark:Bumping version to %s"
       - name: Build package and publish to npm
-        run: sh ./.scripts/publish.js
+        run: node ./.scripts/publish.js
       - name: Push version bump and tag to Github
         run: |
           git push 
