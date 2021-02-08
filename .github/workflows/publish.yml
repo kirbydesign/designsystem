@@ -20,7 +20,8 @@ jobs:
       - name: Checkout master branch
         uses: actions/checkout@v2
         with:
-          ref: refs/heads/master      
+          ref: refs/heads/master
+          token: ${{secrets.VERSION_BUMP_GITHUB_TOKEN}}
       - name: Install Node.js
         uses: actions/setup-node@v2
         with:
