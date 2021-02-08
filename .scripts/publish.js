@@ -55,16 +55,14 @@ function cleanDistribution() {
 }
 
 function buildDesignsystem() {
-  if (isCI) {
-    return Promise.resolve();
-  } else {
-    return npm(['run', 'dist:designsystem'], {
-      onFailMessage: 'Unable to build designsystem package (with ng-packagr)',
-    });
-  }
+  console.log('buildDesignsystem...');
+  return npm(['run', 'dist:designsystem'], {
+    onFailMessage: 'Unable to build designsystem package (with ng-packagr)',
+  });
 }
 
 function enhancePackageJson() {
+  console.log('enhancePackageJson...');
   return fs.readJson(distPackageJsonPath, 'utf-8').then((distPackageJson) => {
     distPackageJson.version = version;
     distPackageJson.description = description;
@@ -133,5 +131,5 @@ cleanDistribution()
   .then(copyReadme)
   .then(copyScssFiles)
   .then(copyIcons)
-  .then(copyPolyfills)
-  .then(publish);
+  .then(copyPolyfills);
+// .then(publish);
