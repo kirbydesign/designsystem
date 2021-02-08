@@ -14,10 +14,10 @@
   >
   </kirby-calendar>
 
-  <div>
+  <kirby-card-footer>
     <button kirby-button (click)="selectNextMonth()">Next month</button>
     <button kirby-button (click)="selectToday()" attentionLevel="2">Now</button>
-  </div>
+  </kirby-card-footer>
 </kirby-card>
 
 <div *ngIf="selectedDate">
