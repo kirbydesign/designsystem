@@ -242,7 +242,6 @@ export class DropdownComponent
         if (this.state !== OpenState.opening) {
           return;
         }
-        console.log('obserfver');
 
         // Cancel any pending timer to show dropdown:
         clearTimeout(this.showDropdownTimeoutId);
