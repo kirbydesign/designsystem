@@ -143,16 +143,14 @@ describe('ListComponent', () => {
   describe('function: ngOnInit', () => {
     it('should enable load more, if there is a subscriber to the loadMore event emitter', () => {
       component.loadOnDemand.subscribe((_: LoadOnDemandEvent) => {});
-
       component.ngOnInit();
-
-      expect(component.disableLoadOnDemand).toBeFalsy();
+      expect(component.isLoadOnDemandEnabled).toBeTrue();
     });
 
     it('should disable load more, if there is no subscriber to the loadMore event emitter', () => {
       runNgOnChanges();
 
-      expect(component.disableLoadOnDemand).toBeTruthy();
+      expect(component.isLoadOnDemandEnabled).toBeFalse();
     });
   });
 });
