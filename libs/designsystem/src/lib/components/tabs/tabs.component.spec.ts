@@ -2,7 +2,7 @@ import { IonicModule } from '@ionic/angular';
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
 import { MockModule } from 'ng-mocks';
 
-import { TestHelper } from '../../testing/test-helper';
+import { ScreenSize, TestHelper } from '../../testing/test-helper';
 
 import { TabsComponent } from './tabs.component';
 
@@ -68,30 +68,56 @@ describe('TabsComponent', () => {
       });
     });
 
-    describe('on screensize large', () => {
-      beforeEach(async () => {
-        await TestHelper.resizeTestWindow(TestHelper.screensize.desktop);
-      });
+    // Only run test on non-touch devices
+    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      describe('on screensize large', () => {
+        beforeEach(async () => {
+          await TestHelper.resizeTestWindow(TestHelper.screensize.desktop);
+        });
 
-      describe('tabBarBottomHidden: true', () => {
-        it('should NOT hide tab bar when tabBarBottomHidden', async () => {
-          spectator.component.tabBarBottomHidden = true;
-          spectator.detectChanges();
+        describe('tabBarBottomHidden: true', () => {
+          it('should NOT hide tab bar when tabBarBottomHidden', async () => {
+            spectator.component.tabBarBottomHidden = true;
+            spectator.detectChanges();
 
-          const ionTabBarElm = spectator.query('ion-tab-bar');
-          expect(ionTabBarElm).not.toHaveComputedStyle({ display: 'none' });
+            const ionTabBarElm = spectator.query('ion-tab-bar');
+            expect(ionTabBarElm).not.toHaveComputedStyle({ display: 'none' });
+          });
+        });
+
+        describe('tabBarBottomHidden: false', () => {
+          it('should NOT set page footer safe area override', async () => {
+            spectator.component.tabBarBottomHidden = false;
+            spectator.detectChanges();
+
+            const ionTabBarElm = spectator.query('ion-tab-bar');
+            expect(ionTabBarElm).toHaveComputedStyle({
+              '--kirby-page-footer-safe-area-bottom': '',
+            });
+          });
         });
       });
+    }
+  });
 
-      describe('tabBarBottomHidden: false', () => {
-        it('should NOT set page footer safe area override', async () => {
-          spectator.component.tabBarBottomHidden = false;
-          spectator.detectChanges();
+  describe('tab-bar sizing', () => {
+    afterAll(() => {
+      TestHelper.resetTestWindow();
+    });
 
-          const ionTabBarElm = spectator.query('ion-tab-bar');
-          expect(ionTabBarElm).toHaveComputedStyle({
-            '--kirby-page-footer-safe-area-bottom': '',
-          });
+    const scenarios: { [key in ScreenSize]?: string } = {
+      phone: '50px',
+      tablet: '70px',
+      desktop: '70px',
+    };
+
+    Object.entries(scenarios).forEach(([screenSize, expectedHeight]) => {
+      it(`should have correct height on screensize ${screenSize}`, async () => {
+        await TestHelper.resizeTestWindow(TestHelper.screensize[screenSize]);
+
+        const ionTabBarElm = spectator.query('ion-tab-bar');
+        expect(ionTabBarElm).toHaveComputedStyle({
+          height: expectedHeight,
         });
       });
     });
