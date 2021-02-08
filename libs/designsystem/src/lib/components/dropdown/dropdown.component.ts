@@ -35,6 +35,7 @@ export enum HorizontalDirection {
   right = 'right',
   left = 'left',
 }
+
 enum VerticalDirection {
   up,
   down,
@@ -57,8 +58,8 @@ export class DropdownComponent
   static readonly OPEN_DELAY_IN_MS = 100;
   private state = OpenState.closed;
   private hasConfiguredSlottedItems = false;
-  private _horizontal = HorizontalDirection.right;
-  private _vertical = VerticalDirection.down;
+  private horizontalDirection = HorizontalDirection.right;
+  private verticalDirection = VerticalDirection.down;
 
   private _items: string[] | any[] = [];
   get items(): string[] | any[] {
@@ -88,12 +89,12 @@ export class DropdownComponent
   @Input()
   placeholder = 'Please select:';
 
-  @Input() set popOut(direction: HorizontalDirection) {
-    this._horizontal = direction || HorizontalDirection.right;
+  @Input() set popout(direction: HorizontalDirection) {
+    this.horizontalDirection = direction || HorizontalDirection.right;
   }
 
-  get popOut() {
-    return this._horizontal;
+  get popout() {
+    return this.horizontalDirection;
   }
 
   @Input()
@@ -166,12 +167,12 @@ export class DropdownComponent
 
   @HostBinding('class.popout-left')
   get _popOutLeft() {
-    return this._horizontal === HorizontalDirection.left;
+    return this.horizontalDirection === HorizontalDirection.left;
   }
 
   @HostBinding('class.popout-up')
   get _popOutUp() {
-    return this._vertical === VerticalDirection.up;
+    return this.verticalDirection === VerticalDirection.up;
   }
 
   @ContentChild(ListItemTemplateDirective, { static: true, read: TemplateRef })
@@ -262,13 +263,13 @@ export class DropdownComponent
   private setHorizontalDirection(entry) {
     // If card alignment is left, and the entry is cut off to the right by ${entry.boundingClientRect.right - entry.intersectionRect.right}px
     // it is set to align to end instead, and vice versa for right-aligned card
-    if (this._horizontal === HorizontalDirection.right) {
+    if (this.horizontalDirection === HorizontalDirection.right) {
       if (entry.boundingClientRect.right > entry.rootBounds.right) {
-        this._horizontal = HorizontalDirection.left;
+        this.horizontalDirection = HorizontalDirection.left;
       }
     } else {
       if (entry.boundingClientRect.left < entry.rootBounds.left) {
-        this._horizontal = HorizontalDirection.right;
+        this.horizontalDirection = HorizontalDirection.right;
       }
     }
   }
@@ -277,7 +278,7 @@ export class DropdownComponent
     if (entry.boundingClientRect.top < 0) {
       // entry is cut off at the top by ${entry.boundingClientRect.top}px
       // open downwards:
-      this._vertical = VerticalDirection.down;
+      this.verticalDirection = VerticalDirection.down;
     }
     if (entry.boundingClientRect.bottom > entry.rootBounds.bottom) {
       // entry is cut off at the bottom by ${entry.boundingClientRect.bottom - entry.intersectionRect.bottom}px
@@ -286,7 +287,7 @@ export class DropdownComponent
       // Check if the card can fit on top of button:
       if (containerOffsetTop > entry.target.clientHeight + SPACING) {
         // open upwards:
-        this._vertical = VerticalDirection.up;
+        this.verticalDirection = VerticalDirection.up;
       }
     }
   }
@@ -320,7 +321,7 @@ export class DropdownComponent
     if (this.isOpen) {
       this.state = OpenState.closed;
       // Reset vertical direction to default
-      this._vertical = VerticalDirection.down;
+      this.verticalDirection = VerticalDirection.down;
     }
   }
 

@@ -75,7 +75,7 @@ describe('DropdownComponent', () => {
     });
 
     it('should have default popout set', () => {
-      expect(spectator.component.popOut).toEqual(HorizontalDirection.right);
+      expect(spectator.component.popout).toEqual(HorizontalDirection.right);
     });
 
     it('should render as inline block', () => {
@@ -259,8 +259,8 @@ describe('DropdownComponent', () => {
     });
 
     describe('when configured with popout direction', () => {
-      it('should open card to the right when popout=right', () => {
-        spectator.component.popOut = HorizontalDirection.right;
+      it('should render card to the right', () => {
+        spectator.component.popout = HorizontalDirection.right;
         spectator.component['state'] = OpenState.open;
         spectator.detectChanges();
 
@@ -271,8 +271,8 @@ describe('DropdownComponent', () => {
         expect(cardRect.left).toEqual(buttonRect.left);
       });
 
-      it('should open card to the left when popout=left, () => {
-        spectator.component.popOut = HorizontalDirection.left;
+      it('should open card to the left', () => {
+        spectator.component.popout = HorizontalDirection.left;
         spectator.element.style.cssFloat = 'right';
         spectator.component['state'] = OpenState.open;
         spectator.detectChanges();
