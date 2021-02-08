@@ -22,15 +22,16 @@ import { Observable, Subject } from 'rxjs';
 import { first, takeUntil } from 'rxjs/operators';
 
 import { KirbyAnimation } from '../../../animation/kirby-animation';
-import { ModalConfig } from './config/modal-config';
-import { COMPONENT_PROPS } from './config/modal-config.helper';
-import { Modal } from '../services/modal.interfaces';
+import { DesignTokenHelper } from '../../../helpers/design-token-helper';
+import { PlatformService } from '../../../helpers/platform.service';
+import { WindowRef } from '../../../types/window-ref';
 import { ButtonComponent } from '../../button/button.component';
 import { ResizeObserverService } from '../../shared/resize-observer/resize-observer.service';
 import { ResizeObserverEntry } from '../../shared/resize-observer/types/resize-observer-entry';
-import { WindowRef } from '../../../types/window-ref';
-import { DesignTokenHelper } from '../../../helpers/design-token-helper';
-import { PlatformService } from '../../../helpers/platform.service';
+import { Modal } from '../services/modal.interfaces';
+
+import { ModalConfig } from './config/modal-config';
+import { COMPONENT_PROPS } from './config/modal-config.helper';
 
 @Component({
   selector: 'kirby-modal-wrapper',
@@ -201,7 +202,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   }
 
   private positionInlineFooter() {
-    //   this.zone.run(() => this.setInlineFooterPosition());
+    this.zone.run(() => this.setInlineFooterPosition());
   }
 
   private setInlineFooterPosition() {
