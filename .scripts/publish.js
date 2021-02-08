@@ -1,26 +1,5 @@
 #!/usr/bin/env node
 
-'use strict';
-
-// Publish script.
-// ---------------
-// Serves two distinct purposes:
-//
-// 1. Produces a distribution bundle (npm package) for publishing to NPM.js
-//
-//    The created bundle contains:
-//    - Transpiled distribution bundle
-//    - Polyfills (required by kirby)
-//    - SCSS sources files (containing utilities exposed by kirby)
-//    - SVG Icons (icons provided / used by kirby)
-//    - README.md file
-//
-// or
-//
-// 2. Produces a npm package tarball (gzipped) that can be installed using "npm install <path to tarball>"
-//
-// NOTICE: This script automatically determines if running on CI, or a local developer machine.
-
 const cp = require('child_process');
 const fs = require('fs-extra');
 const path = require('path');
@@ -75,21 +54,18 @@ function cleanDistribution() {
   }
 }
 
-function buildPolyfills() {
-  return npm(['run', 'build-polyfills'], {
-    onFailMessage: 'Unable to build polyfills',
-  });
-}
-
 function buildDesignsystem() {
-  return npm(['run', 'dist:designsystem'], {
-    onFailMessage: 'Unable to build designsystem package (with ng-packagr)',
-  });
+  if (isCI) {
+    return Promise.resolve();
+  } else {
+    return npm(['run', 'dist:designsystem'], {
+      onFailMessage: 'Unable to build designsystem package (with ng-packagr)',
+    });
+  }
 }
 
 function enhancePackageJson() {
   return fs.readJson(distPackageJsonPath, 'utf-8').then((distPackageJson) => {
-    // Modify contents
     distPackageJson.version = version;
     distPackageJson.description = description;
     distPackageJson.repository = repository;
@@ -99,7 +75,6 @@ function enhancePackageJson() {
     distPackageJson.bugs = bugs;
     distPackageJson.homepage = homepage;
 
-    // (over-)write destination package.json file
     const json = JSON.stringify(distPackageJson, null, 2);
     console.log(`Writing new package.json (to: ${distPackageJsonPath}):\n\n${json}`);
     return fs.writeJson(distPackageJsonPath, distPackageJson, { spaces: 2 });
@@ -139,11 +114,9 @@ function publish() {
     );
 
   if (isCI) {
-    // Publish to NPM
     console.log('Running on CI, hence publishing package');
     return npm(['publish', distTarget], { onFailMessage: 'Unable to publish package' });
   } else {
-    // Create a GZipped Tarball
     console.log('Running on non-CI, hence creating a gzipped tar-ball');
     return npm(['pack', distTarget], {
       onFailMessage: 'Unable to create gzipped tar-ball package',
@@ -154,9 +127,7 @@ function publish() {
   }
 }
 
-// Actual execution of script!
 cleanDistribution()
-  .then(buildPolyfills)
   .then(buildDesignsystem)
   .then(enhancePackageJson)
   .then(copyReadme)
