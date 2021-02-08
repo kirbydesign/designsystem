@@ -74,8 +74,8 @@ describe('DropdownComponent', () => {
       expect(buttonElement).toHaveText(spectator.component.placeholder, true);
     });
 
-    it('should have default open set', () => {
-      expect(spectator.component.open).toEqual(HorizontalDirection.right);
+    it('should have default popout set', () => {
+      expect(spectator.component.popOut).toEqual(HorizontalDirection.right);
     });
 
     it('should render as inline block', () => {
@@ -258,9 +258,9 @@ describe('DropdownComponent', () => {
       });
     });
 
-    describe('when configured with open direction', () => {
+    fdescribe('when configured with popout direction', () => {
       it('should render card to the right', () => {
-        spectator.component.open = HorizontalDirection.right;
+        spectator.component.popOut = HorizontalDirection.right;
         spectator.component['state'] = OpenState.open;
         spectator.detectChanges();
 
@@ -271,20 +271,17 @@ describe('DropdownComponent', () => {
         expect(cardRect.left).toEqual(buttonRect.left);
       });
 
-      it('should open card to the left', (done) => {
-        spectator.component.open = HorizontalDirection.left;
+      it('should open card to the left', () => {
+        spectator.component.popOut = HorizontalDirection.left;
         spectator.element.style.cssFloat = 'right';
         spectator.component['state'] = OpenState.open;
         spectator.detectChanges();
 
-        setTimeout(() => {
-          const card = spectator.query('kirby-card');
-          const buttonRect = buttonElement.getBoundingClientRect();
-          const cardRect = card.getBoundingClientRect();
+        const card = spectator.query('kirby-card');
+        const buttonRect = buttonElement.getBoundingClientRect();
+        const cardRect = card.getBoundingClientRect();
 
-          expect(cardRect.right).toEqual(buttonRect.right);
-          done();
-        }, openDelayInMs);
+        expect(cardRect.right).toEqual(buttonRect.right);
       });
     });
 
@@ -743,7 +740,7 @@ describe('DropdownComponent', () => {
     describe('when aligned to right side of viewport', () => {
       it('should align the dropdown to the right side of button and component container ', (done) => {
         spectator.element.style.cssFloat = 'right';
-        spectator.component.openDropdown();
+        spectator.component.open();
         spectator.detectChanges();
         setTimeout(() => {
           spectator.detectChanges();
@@ -773,7 +770,7 @@ describe('DropdownComponent', () => {
       });
 
       it('should not open', fakeAsync(() => {
-        spectator.component.openDropdown();
+        spectator.component.open();
         tick(openDelayInMs);
         expect(spectator.component.isOpen).toBeFalsy();
       }));

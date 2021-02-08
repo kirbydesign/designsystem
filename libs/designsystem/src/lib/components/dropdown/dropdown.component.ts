@@ -57,6 +57,8 @@ export class DropdownComponent
   static readonly OPEN_DELAY_IN_MS = 100;
   private state = OpenState.closed;
   private hasConfiguredSlottedItems = false;
+  private _horizontal = HorizontalDirection.right;
+  private _vertical = VerticalDirection.down;
 
   private _items: string[] | any[] = [];
   get items(): string[] | any[] {
@@ -86,11 +88,11 @@ export class DropdownComponent
   @Input()
   placeholder = 'Please select:';
 
-  @Input() set open(direction: HorizontalDirection) {
+  @Input() set popOut(direction: HorizontalDirection) {
     this._horizontal = direction || HorizontalDirection.right;
   }
 
-  get open() {
+  get popOut() {
     return this._horizontal;
   }
 
@@ -162,21 +164,14 @@ export class DropdownComponent
     return this.state === OpenState.open;
   }
 
-  @HostBinding('class.align-end')
-  _openLeft: boolean;
-
-  @HostBinding('class.align-top')
-  _openUp: boolean;
-
-  private set _horizontal(alignment: HorizontalDirection) {
-    this._openLeft = alignment === HorizontalDirection.left;
-  }
-  private get _horizontal() {
-    return this._openLeft ? HorizontalDirection.left : HorizontalDirection.right;
+  @HostBinding('class.popout-left')
+  get _popOutLeft() {
+    return this._horizontal === HorizontalDirection.left;
   }
 
-  private set _vertical(direction: VerticalDirection) {
-    this._openUp = direction === VerticalDirection.up;
+  @HostBinding('class.popout-up')
+  get _popOutUp() {
+    return this._vertical === VerticalDirection.up;
   }
 
   @ContentChild(ListItemTemplateDirective, { static: true, read: TemplateRef })
@@ -212,7 +207,7 @@ export class DropdownComponent
     if (this.disabled) {
       return;
     }
-    this.isOpen ? this.closeDropdown() : this.openDropdown();
+    this.isOpen ? this.close() : this.open();
   }
 
   onButtonMouseEvent(event: Event) {
@@ -296,7 +291,7 @@ export class DropdownComponent
     }
   }
 
-  openDropdown() {
+  open() {
     if (this.disabled) {
       return;
     }
@@ -318,7 +313,7 @@ export class DropdownComponent
     }
   }
 
-  closeDropdown() {
+  close() {
     if (this.disabled) {
       return;
     }
@@ -329,7 +324,7 @@ export class DropdownComponent
 
   onItemSelect(index: number) {
     this.selectItem(index);
-    this.closeDropdown();
+    this.close();
   }
 
   private _onChange: (value: any) => void = () => {};
@@ -424,7 +419,7 @@ export class DropdownComponent
   _onTab(event: KeyboardEvent) {
     if (this.isOpen) {
       event.preventDefault();
-      this.closeDropdown();
+      this.close();
     }
   }
 
@@ -451,7 +446,7 @@ export class DropdownComponent
       return;
     }
     if (this.isOpen) {
-      this.closeDropdown();
+      this.close();
     }
     this._onTouched();
   }
@@ -461,7 +456,7 @@ export class DropdownComponent
     event.preventDefault();
     event.stopPropagation();
     if (!this.isOpen) {
-      this.openDropdown();
+      this.open();
     }
   }
 
