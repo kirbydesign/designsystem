@@ -242,6 +242,7 @@ export class DropdownComponent
         if (this.state !== OpenState.opening) {
           return;
         }
+        console.log('obserfver');
 
         // Cancel any pending timer to show dropdown:
         clearTimeout(this.showDropdownTimeoutId);
@@ -319,6 +320,8 @@ export class DropdownComponent
     }
     if (this.isOpen) {
       this.state = OpenState.closed;
+      // Reset vertical direction to default
+      this._vertical = VerticalDirection.down;
     }
   }
 
