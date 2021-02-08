@@ -18,7 +18,7 @@ export class MockDropdownComponent {
   @Input() selectedIndex: number;
   @Input() itemTextProperty: string;
   @Input() placeholder: string;
-  @Input() popOut: HorizontalDirection;
+  @Input() popout: HorizontalDirection;
   @Input() attentionLevel: '1' | '2' | '3' | '4';
   @Input() expand: 'block';
   @Input() disabled: boolean;
