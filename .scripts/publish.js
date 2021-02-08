@@ -54,12 +54,6 @@ function cleanDistribution() {
   }
 }
 
-function buildPolyfills() {
-  return npm(['run', 'build-polyfills'], {
-    onFailMessage: 'Unable to build polyfills',
-  });
-}
-
 function buildDesignsystem() {
   if (isCI) {
     return Promise.resolve();
@@ -134,7 +128,6 @@ function publish() {
 }
 
 cleanDistribution()
-  .then(buildPolyfills)
   .then(buildDesignsystem)
   .then(enhancePackageJson)
   .then(copyReadme)
