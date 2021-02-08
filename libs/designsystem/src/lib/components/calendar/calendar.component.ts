@@ -344,7 +344,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
           ? selectedDate
           : moment.utc(moment(selectedDate).format('YYYY-MM-DD')).toDate();
 
-      if (!this._selectedDate || selectedDate.getTime() !== this._selectedDate.getTime()) {
+      if (this.hasDateChanged(selectedDate, this._selectedDate)) {
         this.onSelectedDateChange(selectedDate);
         this._selectedDate = selectedDate;
         this.dateChange.emit(emitDate);
