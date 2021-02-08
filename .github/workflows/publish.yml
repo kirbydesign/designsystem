@@ -1,10 +1,10 @@
 name: Publish new version to npm
 
 on:
-  pull_request:
-    types: closed
-    branches: master
-    paths: 'libs/**'
+#  pull_request:
+#    types: closed
+#    branches: master
+#    paths: 'libs/**'
   workflow_dispatch:
 
 defaults:
@@ -15,7 +15,7 @@ jobs:
   bump_version_and_publish:
     name: Bump and publish new package version to npm
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged
+#    if: github.event.pull_request.merged
     steps:
       - name: Checkout master branch
         uses: actions/checkout@v2
@@ -37,8 +37,9 @@ jobs:
       - name: Bump version
         run: npm version patch -m ":bookmark:Bumping version to %s"
       - name: Build package and publish to npm
-        run: node ./.scripts/publish.js
+        run: node ./.scripts/publish.js || { echo >&2 "failed with $?"; exit 1; }
       - name: Push version bump and tag to Github
+        if: success()
         run: |
-          git push 
-          git push --tags
+          echo git push 
+          echo git push --tags
