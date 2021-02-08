@@ -245,3 +245,10 @@
     }
   }
 }
+
+:host-context(kirby-card-footer) {
+  flex: 1;
+  height: auto;
+  border-radius: 0;
+  margin: 0;
+}
