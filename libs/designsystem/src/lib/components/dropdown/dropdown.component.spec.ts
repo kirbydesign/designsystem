@@ -258,7 +258,7 @@ describe('DropdownComponent', () => {
       });
     });
 
-    fdescribe('when configured with popout direction', () => {
+    describe('when configured with popout direction', () => {
       it('should render card to the right', () => {
         spectator.component.popOut = HorizontalDirection.right;
         spectator.component['state'] = OpenState.open;
