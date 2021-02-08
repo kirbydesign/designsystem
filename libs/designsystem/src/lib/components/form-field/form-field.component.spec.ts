@@ -1,14 +1,15 @@
-import { SpectatorHost, createHostFactory } from '@ngneat/spectator';
+import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
-import { WindowRef } from '../../types';
 import { DesignTokenHelper, PlatformService } from '../../helpers';
 import { TestHelper } from '../../testing/test-helper';
-import { InputCounterComponent } from './input-counter/input-counter.component';
-import { FormFieldComponent } from './form-field.component';
+import { WindowRef } from '../../types';
+import { ItemComponent } from '../item/item.component';
+
 import { FormFieldMessageComponent } from './form-field-message/form-field-message.component';
+import { FormFieldComponent } from './form-field.component';
+import { InputCounterComponent } from './input-counter/input-counter.component';
 import { InputComponent } from './input/input.component';
 import { TextareaComponent } from './textarea/textarea.component';
-import { ItemComponent } from '../item/item.component';
 
 const size = DesignTokenHelper.size;
 const fontSize = DesignTokenHelper.fontSize;
@@ -55,6 +56,16 @@ describe('FormFieldComponent', () => {
       spectator = createHost(`<kirby-form-field></kirby-form-field>`);
       const labelElement = spectator.queryHost('label');
       expect(labelElement).toBeNull();
+    });
+  });
+
+  fdescribe('When disabled', () => {
+    it('should not have elevation', () => {
+      spectator = createHost(`<kirby-form-field>
+        <input kirby-input disabled value="Disabled input" />
+      </kirby-form-field>`);
+
+      expect(spectator.element).toHaveComputedStyle({ 'box-shadow': 'none' });
     });
   });
 
