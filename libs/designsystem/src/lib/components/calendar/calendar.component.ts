@@ -339,7 +339,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
         .toDate();
 
       // emit equivalent date in utc midnight if timezone is not local
-      const emitDate =
+      const dateToEmit =
         this.timezone === 'local'
           ? newDate
           : moment.utc(moment(newDate).format('YYYY-MM-DD')).toDate();
@@ -347,9 +347,9 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
       if (this.hasDateChanged(newDate, this._selectedDate)) {
         this.onSelectedDateChange(newDate);
         this._selectedDate = newDate;
-        this.dateChange.emit(emitDate);
+        this.dateChange.emit(dateToEmit);
       }
-      this.dateSelect.emit(emitDate);
+      this.dateSelect.emit(dateToEmit);
     }
   }
 
