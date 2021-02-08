@@ -55,12 +55,14 @@ function cleanDistribution() {
 }
 
 function buildDesignsystem() {
+  console.log('buildDesignsystem...');
   return npm(['run', 'dist:designsystem'], {
     onFailMessage: 'Unable to build designsystem package (with ng-packagr)',
   });
 }
 
 function enhancePackageJson() {
+  console.log('enhancePackageJson...');
   return fs.readJson(distPackageJsonPath, 'utf-8').then((distPackageJson) => {
     distPackageJson.version = version;
     distPackageJson.description = description;
