@@ -55,10 +55,10 @@ function cleanDistribution() {
 }
 
 function buildDesignsystem() {
-    return npm(['run', 'dist:designsystem'], {
-      onFailMessage: 'Unable to build designsystem package (with ng-packagr)',
-    });
-  }
+  return npm(['run', 'dist:designsystem'], {
+    onFailMessage: 'Unable to build designsystem package (with ng-packagr)',
+  });
+}
 
 function enhancePackageJson() {
   return fs.readJson(distPackageJsonPath, 'utf-8').then((distPackageJson) => {
@@ -129,5 +129,5 @@ cleanDistribution()
   .then(copyReadme)
   .then(copyScssFiles)
   .then(copyIcons)
-  .then(copyPolyfills)
-  .then(publish);
+  .then(copyPolyfills);
+// .then(publish);
