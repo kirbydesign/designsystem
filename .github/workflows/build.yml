@@ -100,6 +100,31 @@ jobs:
           DOMAIN: '650b277bd9a54e5cbadc.westeurope.aksapp.io'
         run: |
           echo "HOSTNAME=cookbook" >> $GITHUB_ENV
+      - name: Create Github Deployment
+        id: create_deployment
+        if: github.ref != 'refs/heads/master'
+        uses: octokit/request-action@v2.x
+        with:
+          route: POST /repos/:repository/deployments
+          repository: ${{ github.repository }}
+          ref: ${{ github.ref }}
+          environment: qa
+          auto_merge: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Set deployment status to in progress
+        if: github.ref != 'refs/heads/master'
+        uses: octokit/request-action@v2.x
+        with:
+          route: POST /repos/:repository/deployments/:deployment/statuses
+          repository: ${{ github.repository }}
+          deployment: ${{ fromJson(steps.create_deployment.outputs.data).id }}
+          environment: qa
+          environment_url: https://${RELEASENAME}.${DOMAIN}
+          log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          state: in_progress
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Push Docker image
         env:
           DOCKER_REPO: 'drbstaging.azurecr.io/kirbydesign/designsystem'
@@ -125,3 +150,17 @@ jobs:
           DOMAIN: ${{ github.ref == 'refs/heads/master' && 'kirby.design' || '650b277bd9a54e5cbadc.westeurope.aksapp.io' }}
           HELM_CONFIG: ${{ github.ref == 'refs/heads/master' && 'config/helm/staging.yaml' || 'config/helm/branch.yaml' }}
         run: /usr/bin/helm upgrade --kubeconfig kube.config -i "${RELEASENAME}" charts/spa --set image.repository=$DOCKER_REPO --set image.tag=$DOCKER_TAG --set ingress.host="${HOSTNAME}".$DOMAIN -f $HELM_CONFIG
+      - name: Set deployment status to success
+        if: github.ref != 'refs/heads/master'
+        id: successful_deployment
+        uses: octokit/request-action@v2.x
+        with:
+          route: POST /repos/:repository/deployments/:deployment/statuses
+          repository: ${{ github.repository }}
+          deployment: ${{ fromJson(steps.create_deployment.outputs.data).id }}
+          environment: qa
+          environment_url: https://${RELEASENAME}.${DOMAIN}
+          log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          state: success
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
