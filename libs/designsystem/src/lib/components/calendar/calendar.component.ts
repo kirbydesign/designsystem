@@ -333,7 +333,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
 
   onDateSelected(newDay: CalendarCell) {
     if (newDay.isSelectable && newDay.date) {
-      const selectedDate = this.activeMonth
+      const newDate = this.activeMonth
         .clone()
         .date(newDay.date)
         .toDate();
@@ -341,12 +341,12 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
       // emit equivalent date in utc midnight if timezone is not local
       const emitDate =
         this.timezone === 'local'
-          ? selectedDate
-          : moment.utc(moment(selectedDate).format('YYYY-MM-DD')).toDate();
+          ? newDate
+          : moment.utc(moment(newDate).format('YYYY-MM-DD')).toDate();
 
-      if (this.hasDateChanged(selectedDate, this._selectedDate)) {
-        this.onSelectedDateChange(selectedDate);
-        this._selectedDate = selectedDate;
+      if (this.hasDateChanged(newDate, this._selectedDate)) {
+        this.onSelectedDateChange(newDate);
+        this._selectedDate = newDate;
         this.dateChange.emit(emitDate);
       }
       this.dateSelect.emit(emitDate);
