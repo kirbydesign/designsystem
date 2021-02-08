@@ -261,7 +261,7 @@ export class DropdownComponent
 
   private setHorizontalDirection(entry) {
     // If card alignment is left, and the entry is cut off to the right by ${entry.boundingClientRect.right - entry.intersectionRect.right}px
-    // it is set to align to end in stead, and vice versa for right-aligned card
+    // it is set to align to end instead, and vice versa for right-aligned card
     if (this._horizontal === HorizontalDirection.right) {
       if (entry.boundingClientRect.right > entry.rootBounds.right) {
         this._horizontal = HorizontalDirection.left;
