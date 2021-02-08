@@ -24,4 +24,4 @@ jobs:
       - name: Install NPM dependencies
         run: npm ci
       - name: Build package
-        run: echo node ./.scripts/publish.js
+        run: npm run publish
