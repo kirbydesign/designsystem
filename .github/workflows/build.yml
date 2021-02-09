@@ -43,7 +43,7 @@ jobs:
 
   deploy_to_cookbook:
     name: Deploy cookbook
-    needs: [lint_and_unittest, build_kirby]
+    #needs: [lint_and_unittest, build_kirby]
     runs-on: ubuntu-latest
     env:
       DOMAIN: ${{ github.ref == 'refs/heads/master' && 'kirby.design' || '650b277bd9a54e5cbadc.westeurope.aksapp.io' }}
@@ -96,7 +96,7 @@ jobs:
           route: POST /repos/:repository/deployments/:deployment/statuses
           repository: ${{ github.repository }}
           deployment: ${{ fromJson(steps.create_deployment.outputs.data).id }}
-          environment: ${{ env.HOSTNAME }}
+          #environment: ${{ env.HOSTNAME }}
           log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
           state: in_progress
           mediaType: '{"previews": ["flash", "ant-man"]}'
@@ -158,9 +158,9 @@ jobs:
           route: POST /repos/:repository/deployments/:deployment/statuses
           repository: ${{ github.repository }}
           deployment: ${{ fromJson(steps.create_deployment.outputs.data).id }}
-          environment: ${{ env.HOSTNAME }}
+          #environment: ${{ env.HOSTNAME }}
           environment_url: https://${{ env.HOSTNAME }}.${{ env.DOMAIN }}
-          log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          #log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
           state: success
           mediaType: '{"previews": ["flash", "ant-man"]}'
         env:
@@ -173,9 +173,9 @@ jobs:
           route: POST /repos/:repository/deployments/:deployment/statuses
           repository: ${{ github.repository }}
           deployment: ${{ fromJson(steps.create_deployment.outputs.data).id }}
-          environment: ${{ env.HOSTNAME }}
-          environment_url: https://${{ env.HOSTNAME }}.${{ env.DOMAIN }}
-          log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          #environment: ${{ env.HOSTNAME }}
+          #environment_url: https://${{ env.HOSTNAME }}.${{ env.DOMAIN }}
+          #log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
           mediaType: '{"previews": ["flash", "ant-man"]}'
           state: failure
         env:
