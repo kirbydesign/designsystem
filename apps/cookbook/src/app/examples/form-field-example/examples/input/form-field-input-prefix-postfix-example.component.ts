@@ -36,7 +36,7 @@ const config = {
 <kirby-form-field >
 <kirby-input-prefix >Name</kirby-input-prefix>
 <kirby-dropdown  class="input-prefix-postfix"
-  [size]="size"
+ 
   [items]="['Item 1','Item 2','Item 3','Item 4','Item 5']"
 ></kirby-dropdown>
   
