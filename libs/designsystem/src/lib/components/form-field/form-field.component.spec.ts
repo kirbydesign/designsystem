@@ -188,6 +188,16 @@ describe('FormFieldComponent', () => {
   });
 
   describe('with slotted input', () => {
+    it('should render the input with elevation', () => {
+      spectator = createHost(
+        `<kirby-form-field>
+          <input kirby-input />
+        </kirby-form-field>`
+      );
+      const inputElement = spectator.queryHost('input[kirby-input]');
+      expect(inputElement).toHaveComputedStyle({ 'box-shadow': getElevation(2) });
+    });
+
     describe('and no label', () => {
       let dispatchEventSpy: jasmine.Spy<jasmine.Func>;
 
@@ -278,11 +288,6 @@ describe('FormFieldComponent', () => {
       it('should render the input within a label', () => {
         const inputElement = spectator.queryHost('label input[kirby-input]');
         expect(inputElement).toBeTruthy();
-      });
-
-      it('should render the input with elevation', () => {
-        const inputElement = spectator.queryHost('input[kirby-input]');
-        expect(inputElement).toHaveComputedStyle({ 'box-shadow': getElevation(2) });
       });
     });
   });
