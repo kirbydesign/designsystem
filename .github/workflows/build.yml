@@ -45,6 +45,8 @@ jobs:
     name: Deploy cookbook
     needs: [lint_and_unittest, build_kirby]
     runs-on: ubuntu-latest
+    env:
+      DOMAIN: ${{ github.ref == 'refs/heads/master' && 'kirby.design' || '650b277bd9a54e5cbadc.westeurope.aksapp.io' }}
     steps:
       - name: Create Github Deployment
         id: create_deployment
@@ -116,16 +118,12 @@ jobs:
           echo "RELEASENAME=designsystem" >> $GITHUB_ENV
       - name: Get hostname for feature branch
         if: github.ref != 'refs/heads/master'
-        env:
-          DOMAIN: '650b277bd9a54e5cbadc.westeurope.aksapp.io'
         run: |
           chmod +x ./.scripts/dns.pl
           hostname=$(perl ./.scripts/dns.pl $DOMAIN "${RELEASENAME}")
           echo "HOSTNAME=${hostname}" >> $GITHUB_ENV
       - name: Get hostname for master branch
         if: github.ref == 'refs/heads/master'
-        env:
-          DOMAIN: '650b277bd9a54e5cbadc.westeurope.aksapp.io'
         run: |
           echo "HOSTNAME=cookbook" >> $GITHUB_ENV
       - name: Push Docker image
@@ -150,7 +148,6 @@ jobs:
         env:
           DOCKER_REPO: 'drbstaging.azurecr.io/kirbydesign/designsystem'
           DOCKER_TAG: git${{github.sha}}
-          DOMAIN: ${{ github.ref == 'refs/heads/master' && 'kirby.design' || '650b277bd9a54e5cbadc.westeurope.aksapp.io' }}
           HELM_CONFIG: ${{ github.ref == 'refs/heads/master' && 'config/helm/staging.yaml' || 'config/helm/branch.yaml' }}
         run: /usr/bin/helm upgrade --kubeconfig kube.config -i "${RELEASENAME}" charts/spa --set image.repository=$DOCKER_REPO --set image.tag=$DOCKER_TAG --set ingress.host="${HOSTNAME}".$DOMAIN -f $HELM_CONFIG
       - name: Set deployment status to success
@@ -162,7 +159,7 @@ jobs:
           repository: ${{ github.repository }}
           deployment: ${{ fromJson(steps.create_deployment.outputs.data).id }}
           environment: qa
-          environment_url: https://kby-ithub-deployment.650b277bd9a54e5cbadc.westeurope.aksapp.io # https://${{ HOSTNAME }}.${{ DOMAIN }}
+          environment_url: https://${{ HOSTNAME }}.${{ DOMAIN }}
           log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
           state: success
           mediaType: '{"previews": ["flash", "ant-man"]}'
