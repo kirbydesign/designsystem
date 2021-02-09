@@ -14,7 +14,7 @@ const config = {
     />
   </kirby-form-field>
 
-  <kirby-form-field label="Numeric input with grouping separator, maximum 2 decimals and allowed negative numbers" >
+  <kirby-form-field label="Numeric input with grouping separator, maximum 2 decimals and allowed negative numbers"  message="This is additional info that will be shown below the input">
     <input kirby-input kirby-numeric-input formControlName="numericDemo2" 
     maximumNumberOfDecimals="2" 
     />

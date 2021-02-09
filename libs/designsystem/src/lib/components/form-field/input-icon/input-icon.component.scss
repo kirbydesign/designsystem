@@ -12,6 +12,7 @@ $spacing-to-edge: map-get($checkbox-radio-spacing, 'to-edge');
   margin-left: -$input-icon-size - $spacing-to-edge;
   margin-top: -$input-icon-size / 2 - 5px;
   display: flex;
+
   &:first-child {
     flex: auto;
     background-color: transparent;
