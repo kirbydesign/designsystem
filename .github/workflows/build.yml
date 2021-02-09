@@ -86,7 +86,8 @@ jobs:
           transient_environment: true # Deployed feature branch is temporary and gets destroyed after PR/branch is closed/deleted
           auto_merge: false
           required_contexts: '[]' # Skip commit checks
-          mediaType: '{"previews": ["flash", "ant-man"]}' # some parameters need preview: https://docs.github.com/en/rest/reference/repos#list-deployment-statuses-preview-notices
+          log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          mediaType: '{"previews": ["ant-man"]}' # some parameters need preview: https://docs.github.com/en/rest/reference/repos#list-deployment-statuses-preview-notices
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Set deployment status to in progress
@@ -96,8 +97,6 @@ jobs:
           route: POST /repos/:repository/deployments/:deployment/statuses
           repository: ${{ github.repository }}
           deployment: ${{ fromJson(steps.create_deployment.outputs.data).id }}
-          #environment: ${{ env.HOSTNAME }}
-          log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
           state: in_progress
           mediaType: '{"previews": ["flash", "ant-man"]}'
         env:
@@ -158,11 +157,9 @@ jobs:
           route: POST /repos/:repository/deployments/:deployment/statuses
           repository: ${{ github.repository }}
           deployment: ${{ fromJson(steps.create_deployment.outputs.data).id }}
-          #environment: ${{ env.HOSTNAME }}
           environment_url: https://${{ env.HOSTNAME }}.${{ env.DOMAIN }}
-          #log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
           state: success
-          mediaType: '{"previews": ["flash", "ant-man"]}'
+          mediaType: '{"previews": ["ant-man"]}'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Set deployment status to failure
@@ -173,10 +170,6 @@ jobs:
           route: POST /repos/:repository/deployments/:deployment/statuses
           repository: ${{ github.repository }}
           deployment: ${{ fromJson(steps.create_deployment.outputs.data).id }}
-          #environment: ${{ env.HOSTNAME }}
-          #environment_url: https://${{ env.HOSTNAME }}.${{ env.DOMAIN }}
-          #log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          mediaType: '{"previews": ["flash", "ant-man"]}'
           state: failure
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
