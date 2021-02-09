@@ -48,60 +48,8 @@ jobs:
     env:
       DOMAIN: ${{ github.ref == 'refs/heads/master' && 'kirby.design' || '650b277bd9a54e5cbadc.westeurope.aksapp.io' }}
     steps:
-      - name: Create Github Deployment
-        id: create_deployment
-        if: github.ref != 'refs/heads/master'
-        uses: octokit/request-action@v2.x
-        with:
-          route: POST /repos/:repository/deployments
-          repository: ${{ github.repository }}
-          ref: ${{ github.ref }}
-          environment: qa
-          transient_environment: true # Deployed feature branch is temporary and gets destroyed after PR/branch is closed/deleted
-          auto_merge: false
-          required_contexts: '[]' # Skip commit checks
-          mediaType: '{"previews": ["flash", "ant-man"]}' # some parameters need preview: https://docs.github.com/en/rest/reference/repos#list-deployment-statuses-preview-notices
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Set deployment status to in progress
-        if: github.ref != 'refs/heads/master'
-        uses: octokit/request-action@v2.x
-        with:
-          route: POST /repos/:repository/deployments/:deployment/statuses
-          repository: ${{ github.repository }}
-          deployment: ${{ fromJson(steps.create_deployment.outputs.data).id }}
-          environment: qa
-          log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          state: in_progress
-          mediaType: '{"previews": ["flash", "ant-man"]}'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Checkout repo
         uses: actions/checkout@v2
-      - name: Install Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '10.16'
-      - name: Install NPM dependencies
-        run: npm ci
-      - name: Install Kubernetes CLI
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y apt-transport-https
-          curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
-          echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
-          sudo apt-get update
-          sudo apt-get install -y kubectl
-      - name: Setup Helm to use version 2.12.3
-        run: |
-          curl https://storage.googleapis.com/kubernetes-helm/helm-v2.12.3-linux-amd64.tar.gz -o helm-linux-amd64.tar.gz
-          tar xzf helm-linux-amd64.tar.gz
-          sudo cp linux-amd64/helm /usr/bin/
-          rm -rf linux-amd64
-      - name: Build Kirby cookbook
-        run: npm run dist:cookbook
-      - name: Build Docker image
-        run: docker build -t drbstaging.azurecr.io/kirbydesign/designsystem:git${{ github.sha }} .
       - name: Get branch name
         if: github.ref != 'refs/heads/master'
         run: |
@@ -126,6 +74,58 @@ jobs:
         if: github.ref == 'refs/heads/master'
         run: |
           echo "HOSTNAME=cookbook" >> $GITHUB_ENV
+      - name: Create Github Deployment
+        id: create_deployment
+        if: github.ref != 'refs/heads/master'
+        uses: octokit/request-action@v2.x
+        with:
+          route: POST /repos/:repository/deployments
+          repository: ${{ github.repository }}
+          ref: ${{ github.ref }}
+          environment: ${{ env.HOSTNAME }}
+          transient_environment: true # Deployed feature branch is temporary and gets destroyed after PR/branch is closed/deleted
+          auto_merge: false
+          required_contexts: '[]' # Skip commit checks
+          mediaType: '{"previews": ["flash", "ant-man"]}' # some parameters need preview: https://docs.github.com/en/rest/reference/repos#list-deployment-statuses-preview-notices
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Set deployment status to in progress
+        if: github.ref != 'refs/heads/master'
+        uses: octokit/request-action@v2.x
+        with:
+          route: POST /repos/:repository/deployments/:deployment/statuses
+          repository: ${{ github.repository }}
+          deployment: ${{ fromJson(steps.create_deployment.outputs.data).id }}
+          environment: ${{ env.HOSTNAME }}
+          log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          state: in_progress
+          mediaType: '{"previews": ["flash", "ant-man"]}'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '10.16'
+      - name: Install NPM dependencies
+        run: npm ci
+      - name: Install Kubernetes CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y apt-transport-https
+          curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+          echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+          sudo apt-get update
+          sudo apt-get install -y kubectl
+      - name: Setup Helm to use version 2.12.3
+        run: |
+          curl https://storage.googleapis.com/kubernetes-helm/helm-v2.12.3-linux-amd64.tar.gz -o helm-linux-amd64.tar.gz
+          tar xzf helm-linux-amd64.tar.gz
+          sudo cp linux-amd64/helm /usr/bin/
+          rm -rf linux-amd64
+      - name: Build Kirby cookbook
+        run: npm run dist:cookbook
+      - name: Build Docker image
+        run: docker build -t drbstaging.azurecr.io/kirbydesign/designsystem:git${{ github.sha }} .
       - name: Push Docker image
         env:
           DOCKER_REPO: 'drbstaging.azurecr.io/kirbydesign/designsystem'
@@ -158,7 +158,7 @@ jobs:
           route: POST /repos/:repository/deployments/:deployment/statuses
           repository: ${{ github.repository }}
           deployment: ${{ fromJson(steps.create_deployment.outputs.data).id }}
-          environment: qa
+          environment: ${{ env.HOSTNAME }}
           environment_url: https://${{ env.HOSTNAME }}.${{ env.DOMAIN }}
           log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
           state: success
@@ -173,7 +173,7 @@ jobs:
           route: POST /repos/:repository/deployments/:deployment/statuses
           repository: ${{ github.repository }}
           deployment: ${{ fromJson(steps.create_deployment.outputs.data).id }}
-          environment: qa
+          environment: ${{ env.HOSTNAME }}
           environment_url: https://${{ env.HOSTNAME }}.${{ env.DOMAIN }}
           log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
           mediaType: '{"previews": ["flash", "ant-man"]}'
