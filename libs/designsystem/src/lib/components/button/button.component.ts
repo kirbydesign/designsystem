@@ -86,8 +86,8 @@ export class ButtonComponent implements AfterContentInit {
     }
   }
 
-  private findNonCommentSibling(e: any, direction: 'nextSibling' | 'previousSibling') {
-    const sibling = e[direction];
+  private findNonCommentSibling(nativeElement: any, direction: 'nextSibling' | 'previousSibling') {
+    const sibling = nativeElement[direction];
     if (sibling != null && sibling.nodeName === '#comment') {
       return this.findNonCommentSibling(sibling, direction);
     }
