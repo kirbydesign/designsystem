@@ -46,6 +46,34 @@ jobs:
     needs: [lint_and_unittest, build_kirby]
     runs-on: ubuntu-latest
     steps:
+      - name: Create Github Deployment
+        id: create_deployment
+        if: github.ref != 'refs/heads/master'
+        uses: octokit/request-action@v2.x
+        with:
+          route: POST /repos/:repository/deployments
+          repository: ${{ github.repository }}
+          ref: ${{ github.ref }}
+          environment: qa
+          transient_environment: true
+          auto_merge: false
+          required_contexts: '[]'
+          mediaType: '{"previews": ["flash", "ant-man"]}'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Set deployment status to in progress
+        if: github.ref != 'refs/heads/master'
+        uses: octokit/request-action@v2.x
+        with:
+          route: POST /repos/:repository/deployments/:deployment/statuses
+          repository: ${{ github.repository }}
+          deployment: ${{ fromJson(steps.create_deployment.outputs.data).id }}
+          environment: qa
+          log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          state: in_progress
+          mediaType: '{"previews": ["flash", "ant-man"]}'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Checkout repo
         uses: actions/checkout@v2
       - name: Install Node.js
@@ -100,31 +128,6 @@ jobs:
           DOMAIN: '650b277bd9a54e5cbadc.westeurope.aksapp.io'
         run: |
           echo "HOSTNAME=cookbook" >> $GITHUB_ENV
-      - name: Create Github Deployment
-        id: create_deployment
-        if: github.ref != 'refs/heads/master'
-        uses: octokit/request-action@v2.x
-        with:
-          route: POST /repos/:repository/deployments
-          repository: ${{ github.repository }}
-          ref: ${{ github.ref }}
-          environment: qa
-          auto_merge: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Set deployment status to in progress
-        if: github.ref != 'refs/heads/master'
-        uses: octokit/request-action@v2.x
-        with:
-          route: POST /repos/:repository/deployments/:deployment/statuses
-          repository: ${{ github.repository }}
-          deployment: ${{ fromJson(steps.create_deployment.outputs.data).id }}
-          environment: qa
-          environment_url: https://${RELEASENAME}.${DOMAIN}
-          log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          state: in_progress
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Push Docker image
         env:
           DOCKER_REPO: 'drbstaging.azurecr.io/kirbydesign/designsystem'
@@ -159,8 +162,9 @@ jobs:
           repository: ${{ github.repository }}
           deployment: ${{ fromJson(steps.create_deployment.outputs.data).id }}
           environment: qa
-          environment_url: https://${RELEASENAME}.${DOMAIN}
+          environment_url: https://${HOSTNAME}.${DOMAIN}
           log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
           state: success
+          mediaType: '{"previews": ["flash", "ant-man"]}'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
