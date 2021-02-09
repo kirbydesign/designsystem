@@ -166,12 +166,12 @@ export class DropdownComponent
   }
 
   @HostBinding('class.popout-left')
-  get _popOutLeft() {
+  get _popoutLeft() {
     return this.horizontalDirection === HorizontalDirection.left;
   }
 
   @HostBinding('class.popout-up')
-  get _popOutUp() {
+  get _popoutUp() {
     return this.verticalDirection === VerticalDirection.up;
   }
 
@@ -261,8 +261,8 @@ export class DropdownComponent
   }
 
   private setHorizontalDirection(entry) {
-    // If card alignment is left, and the entry is cut off to the right by ${entry.boundingClientRect.right - entry.intersectionRect.right}px
-    // it is set to align to end instead, and vice versa for right-aligned card
+    // If popout direction is set to right, and the entry is cut off to the right by ${entry.boundingClientRect.right - entry.intersectionRect.right}px
+    // it is set to popout left instead, and vice versa for popout direction left
     if (this.horizontalDirection === HorizontalDirection.right) {
       if (entry.boundingClientRect.right > entry.rootBounds.right) {
         this.horizontalDirection = HorizontalDirection.left;
