@@ -46,10 +46,6 @@ describe('FormFieldComponent', () => {
     it('should have correct margin', () => {
       expect(spectator.element).toHaveComputedStyle({ 'margin-bottom': size('s') });
     });
-    it('should have elevation', () => {
-      const inputElement = spectator.queryHost('input[kirby-input]');
-      expect(inputElement).toHaveComputedStyle({ 'box-shadow': getElevation(2) });
-    });
   });
 
   describe('without label', () => {
@@ -60,7 +56,7 @@ describe('FormFieldComponent', () => {
     });
   });
 
-  describe('When disabled', () => {
+  describe('when disabled', () => {
     it('should not have elevation', () => {
       spectator = createHost(`<kirby-form-field>
         <input kirby-input disabled value="Disabled input" />
@@ -283,6 +279,11 @@ describe('FormFieldComponent', () => {
         const inputElement = spectator.queryHost('label input[kirby-input]');
         expect(inputElement).toBeTruthy();
       });
+
+      it('should render the input with elevation', () => {
+        const inputElement = spectator.queryHost('input[kirby-input]');
+        expect(inputElement).toHaveComputedStyle({ 'box-shadow': getElevation(2) });
+      });
     });
   });
 
@@ -310,6 +311,11 @@ describe('FormFieldComponent', () => {
       it('should not render the textarea within a label', () => {
         const textareaElement = spectator.queryHost('label textarea[kirby-textarea]');
         expect(textareaElement).toBeNull();
+      });
+
+      it('should render the textarea with elevation', () => {
+        const textareaElement = spectator.queryHost('textarea[kirby-textarea]');
+        expect(textareaElement).toHaveComputedStyle({ 'box-shadow': getElevation(2) });
       });
     });
 
