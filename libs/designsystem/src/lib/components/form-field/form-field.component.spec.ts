@@ -36,7 +36,7 @@ describe('FormFieldComponent', () => {
 
   describe('by default', () => {
     beforeEach(() => {
-      spectator = createHost(`<kirby-form-field> <input kirby-input /></kirby-form-field>`);
+      spectator = createHost(`<kirby-form-field></kirby-form-field>`);
     });
 
     it('should create', () => {
