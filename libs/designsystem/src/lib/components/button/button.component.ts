@@ -1,14 +1,13 @@
 import {
-  Component,
-  Input,
-  HostBinding,
-  ContentChild,
   AfterContentInit,
+  Component,
+  ContentChild,
   ElementRef,
+  HostBinding,
+  Input,
 } from '@angular/core';
 
 import { NotificationColor } from '../../helpers';
-
 import { IconComponent } from '../icon/icon.component';
 
 @Component({
@@ -71,18 +70,27 @@ export class ButtonComponent implements AfterContentInit {
 
   ngAfterContentInit(): void {
     if (this.iconDomNode && this.iconDomNode.nativeElement) {
-      const prev = this.iconDomNode.nativeElement.previousSibling;
-      const next = this.iconDomNode.nativeElement.nextSibling;
-      if (prev && prev.nodeName !== '#comment') {
+      const iconNativeElement = this.iconDomNode.nativeElement;
+      const prev = this.findNonCommentSibling(iconNativeElement, 'previousSibling');
+      const next = this.findNonCommentSibling(iconNativeElement, 'nextSibling');
+      if (prev) {
         this._hasSlottedContent = true;
         this._isIconLeft = false;
         this._isIconRight = true;
       }
-      if (next && next.nodeName !== '#comment') {
+      if (next) {
         this._hasSlottedContent = true;
         this._isIconLeft = true;
         this._isIconRight = false;
       }
     }
+  }
+
+  private findNonCommentSibling(e: any, direction: 'nextSibling' | 'previousSibling') {
+    const sibling = e[direction];
+    if (sibling != null && sibling.nodeName === '#comment') {
+      return this.findNonCommentSibling(sibling, direction);
+    }
+    return sibling;
   }
 }
