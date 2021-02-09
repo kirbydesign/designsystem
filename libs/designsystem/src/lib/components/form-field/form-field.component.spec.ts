@@ -11,10 +11,7 @@ import { InputCounterComponent } from './input-counter/input-counter.component';
 import { InputComponent } from './input/input.component';
 import { TextareaComponent } from './textarea/textarea.component';
 
-const size = DesignTokenHelper.size;
-const fontSize = DesignTokenHelper.fontSize;
-const fontWeight = DesignTokenHelper.fontWeight;
-const lineHeight = DesignTokenHelper.lineHeight;
+const { size, fontSize, fontWeight, lineHeight, getElevation } = DesignTokenHelper;
 
 describe('FormFieldComponent', () => {
   let spectator: SpectatorHost<FormFieldComponent>;
@@ -39,7 +36,7 @@ describe('FormFieldComponent', () => {
 
   describe('by default', () => {
     beforeEach(() => {
-      spectator = createHost(`<kirby-form-field></kirby-form-field>`);
+      spectator = createHost(`<kirby-form-field> <input kirby-input /></kirby-form-field>`);
     });
 
     it('should create', () => {
@@ -48,6 +45,10 @@ describe('FormFieldComponent', () => {
 
     it('should have correct margin', () => {
       expect(spectator.element).toHaveComputedStyle({ 'margin-bottom': size('s') });
+    });
+    it('should have elevation', () => {
+      const inputElement = spectator.queryHost('input[kirby-input]');
+      expect(inputElement).toHaveComputedStyle({ 'box-shadow': getElevation(2) });
     });
   });
 
@@ -59,13 +60,13 @@ describe('FormFieldComponent', () => {
     });
   });
 
-  fdescribe('When disabled', () => {
+  describe('When disabled', () => {
     it('should not have elevation', () => {
       spectator = createHost(`<kirby-form-field>
         <input kirby-input disabled value="Disabled input" />
       </kirby-form-field>`);
-
-      expect(spectator.element).toHaveComputedStyle({ 'box-shadow': 'none' });
+      const inputElement = spectator.queryHost('input[kirby-input]');
+      expect(inputElement).toHaveComputedStyle({ 'box-shadow': 'none' });
     });
   });
 
