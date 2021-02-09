@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-
 import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
 
 @Component({
@@ -7,6 +6,4 @@ import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-prop
   templateUrl: './range-showcase.component.html',
   styleUrls: ['./range-showcase.component.scss'],
 })
-export class RangeShowcaseComponent {
-
-}
+export class RangeShowcaseComponent {}
