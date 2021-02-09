@@ -162,7 +162,7 @@ jobs:
           repository: ${{ github.repository }}
           deployment: ${{ fromJson(steps.create_deployment.outputs.data).id }}
           environment: qa
-          environment_url: https://${{HOSTNAME}}.${{DOMAIN}}
+          environment_url: https://${{ HOSTNAME }}.${{ DOMAIN }}
           log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
           state: success
           mediaType: '{"previews": ["flash", "ant-man"]}'
