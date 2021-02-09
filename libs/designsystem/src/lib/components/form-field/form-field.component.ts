@@ -1,13 +1,13 @@
 import {
+  AfterContentChecked,
   ChangeDetectionStrategy,
   Component,
-  Input,
   ContentChild,
-  AfterContentChecked,
-  OnDestroy,
   ElementRef,
-  OnInit,
   HostListener,
+  Input,
+  OnDestroy,
+  OnInit,
 } from '@angular/core';
 
 import { PlatformService } from '../../helpers/platform.service';

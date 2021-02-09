@@ -1,12 +1,12 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  Input,
+  EventEmitter,
   HostBinding,
   HostListener,
-  EventEmitter,
-  SimpleChanges,
+  Input,
   OnChanges,
+  SimpleChanges,
 } from '@angular/core';
 
 @Component({
