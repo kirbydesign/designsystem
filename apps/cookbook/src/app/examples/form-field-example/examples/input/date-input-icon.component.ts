@@ -1,5 +1,5 @@
-import { Component, Input, Output, OnInit } from '@angular/core';
-import { FormGroup, FormControl, AbstractControl, FormBuilder } from '@angular/forms';
+import { Component, Input, OnInit, Output } from '@angular/core';
+import { AbstractControl, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 const config = {
   selector: 'cookbook-form-field-date-input-icon-example',
@@ -19,14 +19,13 @@ const config = {
   >
   </kirby-calendar>
   </kirby-card>
- 
 `,
 };
 @Component({
   selector: config.selector,
   template: config.template,
 })
-export class FormFieldDateInputIconExampleComponent implements OnInit{
+export class FormFieldDateInputIconExampleComponent implements OnInit {
   template: string = config.template;
 
   dateFormGroup: FormGroup;
