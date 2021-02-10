@@ -84,12 +84,12 @@ jobs:
           ref: ${{ github.ref }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: "echo existing deployment: ${{ steps.get_latest_deployment.outputs.data }}"
       - name: "Has existing deployment"
         if: |
           github.ref != 'refs/heads/master' &&
           steps.get_latest_deployment.outputs.data.length > 0
-        run: echo has existing deployment!
+        run: |
+          echo "existing deployment: ${{ steps.get_latest_deployment.outputs.data }}"
       - name: "Does NOT have existing deployment"
         if: |
           github.ref != 'refs/heads/master' &&
