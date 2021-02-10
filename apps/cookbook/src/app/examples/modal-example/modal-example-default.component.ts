@@ -233,10 +233,6 @@ export class ModalExampleDefaultComponent {
     this.showModal(true);
   }
 
-  // showModalWithFooter() {
-  //   this.showModal(true);
-  // }
-
   onModalClose(data: any): void {
     console.log('Callback from Embedded Modal:');
     console.log(`Data received: ${JSON.stringify(data)}`);
