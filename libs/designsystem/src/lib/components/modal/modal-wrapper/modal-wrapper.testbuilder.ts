@@ -154,31 +154,22 @@ export class InputEmbeddedComponent {}
 
 @Component({
   template: `
-    <kirby-progress-circle
-      slot="start"
-      themeColor="warning"
-      value="50"
-      size="sm"
-      class="kirby-text-xsmall"
-    >
-      2/4
-    </kirby-progress-circle>
+    <kirby-page-header>
+      <kirby-progress-circle themeColor="warning" value="50" size="sm" class="kirby-text-xsmall">
+        2/4
+      </kirby-progress-circle>
+    </kirby-page-header>
     <kirby-page-title> My Drawer Title</kirby-page-title>
   `,
 })
 export class StaticCustomHeaderContentEmbeddedComponent {}
 @Component({
   template: `
-    <kirby-progress-circle
-      *ngIf="showCustomHeader"
-      slot="start"
-      themeColor="warning"
-      value="50"
-      size="sm"
-      class="kirby-text-xsmall"
-    >
-      2/4
-    </kirby-progress-circle>
+    <kirby-page-header *ngIf="showCustomHeader">
+      <kirby-progress-circle themeColor="warning" value="50" size="sm" class="kirby-text-xsmall">
+        2/4
+      </kirby-progress-circle>
+    </kirby-page-header>
     <div>My title</div>
   `,
 })
