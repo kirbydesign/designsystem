@@ -85,6 +85,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: "echo existing deployment: ${{ steps.get_latest_deployment.outputs.data }}"
+      - name: "Has existing deployment"
+        if: steps.get_latest_deployment.outputs.data.length > 0
+        run: echo has existing deployment!
+      - name: "Does NOT have existing deployment"
+        if: steps.get_latest_deployment.outputs.data.length == 0
+        run: echo does NOT have existing deployment!
       # - name: Create Github Deployment
       #   id: create_deployment
       #   if: github.ref != 'refs/heads/master'
