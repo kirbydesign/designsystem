@@ -1,4 +1,4 @@
-import { forwardRef, Component, Input } from '@angular/core';
+import { Component, forwardRef, Input } from '@angular/core';
 
 import { InputComponent } from '@kirbydesign/designsystem';
 
@@ -16,6 +16,7 @@ import { InputComponent } from '@kirbydesign/designsystem';
 })
 export class MockInputComponent {
   @Input() type: string;
+  @Input() size: InputSize;
   @Input() borderless: boolean;
   @Input() hasError: boolean;
   @Input() autocomplete: 'on' | 'off';
