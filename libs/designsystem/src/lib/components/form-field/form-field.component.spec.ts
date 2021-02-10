@@ -11,10 +11,7 @@ import { InputCounterComponent } from './input-counter/input-counter.component';
 import { InputComponent } from './input/input.component';
 import { TextareaComponent } from './textarea/textarea.component';
 
-const size = DesignTokenHelper.size;
-const fontSize = DesignTokenHelper.fontSize;
-const fontWeight = DesignTokenHelper.fontWeight;
-const lineHeight = DesignTokenHelper.lineHeight;
+const { size, fontSize, fontWeight, lineHeight, getElevation } = DesignTokenHelper;
 
 describe('FormFieldComponent', () => {
   let spectator: SpectatorHost<FormFieldComponent>;
@@ -56,6 +53,16 @@ describe('FormFieldComponent', () => {
       spectator = createHost(`<kirby-form-field></kirby-form-field>`);
       const labelElement = spectator.queryHost('label');
       expect(labelElement).toBeNull();
+    });
+  });
+
+  describe('when disabled', () => {
+    it('should not have elevation', () => {
+      spectator = createHost(`<kirby-form-field>
+        <input kirby-input disabled value="Disabled input" />
+      </kirby-form-field>`);
+      const inputElement = spectator.queryHost('input[kirby-input]');
+      expect(inputElement).toHaveComputedStyle({ 'box-shadow': 'none' });
     });
   });
 
@@ -181,6 +188,16 @@ describe('FormFieldComponent', () => {
   });
 
   describe('with slotted input', () => {
+    it('should render the input with elevation', () => {
+      spectator = createHost(
+        `<kirby-form-field>
+          <input kirby-input />
+        </kirby-form-field>`
+      );
+      const inputElement = spectator.queryHost('input[kirby-input]');
+      expect(inputElement).toHaveComputedStyle({ 'box-shadow': getElevation(2) });
+    });
+
     describe('and no label', () => {
       let dispatchEventSpy: jasmine.Spy<jasmine.Func>;
 
@@ -299,6 +316,11 @@ describe('FormFieldComponent', () => {
       it('should not render the textarea within a label', () => {
         const textareaElement = spectator.queryHost('label textarea[kirby-textarea]');
         expect(textareaElement).toBeNull();
+      });
+
+      it('should render the textarea with elevation', () => {
+        const textareaElement = spectator.queryHost('textarea[kirby-textarea]');
+        expect(textareaElement).toHaveComputedStyle({ 'box-shadow': getElevation(2) });
       });
     });
 
