@@ -147,7 +147,7 @@ describe('Min and Max Label ', () => {
     expect(maxLabelElement.innerHTML).toBe('max');
   });
 
-  it('should verify the the disabled class is NOT applied', () => {
+  it('should verify that the disabled class is NOT applied', () => {
     spectator = createHost(
       `<kirby-range minLabel="min" maxLabel="max"><ion-range></ion-range></kirby-range>`
     );

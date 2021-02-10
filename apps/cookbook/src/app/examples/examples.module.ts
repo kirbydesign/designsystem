@@ -29,7 +29,6 @@ import { ToggleButtonExampleModule } from './toggle-button-example/toggle-button
 const IMPORTS = [
   FormFieldExamplesModule,
   ItemExampleModule,
-  RangeExampleModule,
   ListExamplesModule,
   DropdownExampleModule,
   SegmentedControlExampleModule,
@@ -41,6 +40,7 @@ const IMPORTS = [
   AccordionExampleModule,
   RadioExampleModule,
   CheckboxExampleModule,
+  RangeExampleModule,
 ];
 
 @NgModule({

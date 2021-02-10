@@ -115,7 +115,6 @@ const exportedDeclarations = [
   SegmentedControlComponent,
   ChipComponent,
   BadgeComponent,
-  RangeComponent,
   SizeDirective,
   ThemeColorDirective,
   SlideButtonComponent,
@@ -140,6 +139,7 @@ const exportedDeclarations = [
   AccordionItemComponent,
   RadioComponent,
   RadioGroupComponent,
+  RangeComponent,
 ];
 
 const declarations = [

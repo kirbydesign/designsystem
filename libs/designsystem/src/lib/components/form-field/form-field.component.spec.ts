@@ -173,8 +173,8 @@ describe('FormFieldComponent', () => {
 
       it('should render the message with correct width', () => {
         const availableTextWidth = getAvailableTextWidth();
-        const expectedMessageWidth = (availableTextWidth * 0.75).toFixed();
-        const messageWidth = messageElement.getBoundingClientRect().width.toFixed();
+        const expectedMessageWidth = availableTextWidth * 0.75;
+        const messageWidth = messageElement.getBoundingClientRect().width;
         expect(messageWidth).toEqual(expectedMessageWidth);
       });
 

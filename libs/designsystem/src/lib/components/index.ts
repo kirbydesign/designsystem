@@ -57,4 +57,3 @@ export { ToggleButtonComponent } from './toggle-button/toggle-button.component';
 export * from './accordion';
 
 export * from './radio';
-export * from './range';
