@@ -1,4 +1,5 @@
 export { PageComponent } from './page.component';
+export { PageHeaderComponent } from './page.component';
 export { PageTitleComponent } from './page.component';
 export { PageTitleDirective } from './page.component';
 export { PageToolbarTitleDirective } from './page.component';

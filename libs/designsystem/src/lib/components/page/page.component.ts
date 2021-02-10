@@ -76,6 +76,13 @@ export class PageContentDirective {
     return this.config && this.config.fixed;
   }
 }
+@Component({
+  selector: 'kirby-page-header',
+  template: `
+    <ng-content></ng-content>
+  `,
+})
+export class PageHeaderComponent {}
 
 @Component({
   selector: 'kirby-page-title',
