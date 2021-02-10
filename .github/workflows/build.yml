@@ -13,18 +13,18 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
-      - name: Install Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '10.16'
-      - name: Install NPM dependencies
-        run: npm ci
-      - name: Run linting
-        run: npm run lint
-      - name: Run tests
-        run: npm run test:ci
-      - name: Generate coverage report
-        run: npm run coverage-report || true
+  #     - name: Install Node.js
+  #       uses: actions/setup-node@v2
+  #       with:
+  #         node-version: '10.16'
+  #     - name: Install NPM dependencies
+  #       run: npm ci
+  #     - name: Run linting
+  #       run: npm run lint
+  #     - name: Run tests
+  #       run: npm run test:ci
+  #     - name: Generate coverage report
+  #       run: npm run coverage-report || true
 
   build_kirby:
     name: Build Kirby lib
@@ -32,14 +32,14 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
-      - name: Install Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '10.16'
-      - name: Install NPM dependencies
-        run: npm ci
-      - name: Build Kirby lib
-        run: npm run dist:designsystem
+  #     - name: Install Node.js
+  #       uses: actions/setup-node@v2
+  #       with:
+  #         node-version: '10.16'
+  #     - name: Install NPM dependencies
+  #       run: npm ci
+  #     - name: Build Kirby lib
+  #       run: npm run dist:designsystem
 
   deploy_to_cookbook:
     name: Deploy cookbook
@@ -101,54 +101,58 @@ jobs:
           mediaType: '{"previews": ["flash", "ant-man"]}'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Install Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '10.16'
-      - name: Install NPM dependencies
-        run: npm ci
-      - name: Install Kubernetes CLI
+      # - name: Install Node.js
+      #   uses: actions/setup-node@v2
+      #   with:
+      #     node-version: '10.16'
+      # - name: Install NPM dependencies
+      #   run: npm ci
+      # - name: Install Kubernetes CLI
+      #   run: |
+      #     sudo apt-get update
+      #     sudo apt-get install -y apt-transport-https
+      #     curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+      #     echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+      #     sudo apt-get update
+      #     sudo apt-get install -y kubectl
+      # - name: Setup Helm to use version 2.12.3
+      #   run: |
+      #     curl https://storage.googleapis.com/kubernetes-helm/helm-v2.12.3-linux-amd64.tar.gz -o helm-linux-amd64.tar.gz
+      #     tar xzf helm-linux-amd64.tar.gz
+      #     sudo cp linux-amd64/helm /usr/bin/
+      #     rm -rf linux-amd64
+      # - name: Build Kirby cookbook
+      #   run: npm run dist:cookbook
+      # - name: Build Docker image
+      #   run: docker build -t drbstaging.azurecr.io/kirbydesign/designsystem:git${{ github.sha }} .
+      # - name: Push Docker image
+      #   env:
+      #     DOCKER_REPO: 'drbstaging.azurecr.io/kirbydesign/designsystem'
+      #     DOCKER_TAG: git${{github.sha}}
+      #     DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
+      #     DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+      #   run: |
+      #     echo "pushing docker image $DOCKER_REPO:$DOCKER_TAG"
+      #     echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin drbstaging.azurecr.io
+      #     docker push $DOCKER_REPO:$DOCKER_TAG
+      # - name: Clone charts repo
+      #   run: git clone https://github.com/Bankdata/charts.git charts
+      # - name: Decrypt Kubernetes config
+      #   env:
+      #     KEY: ${{secrets.ENCRYPTED_09E556D51FDC_KEY}}
+      #     IV: ${{secrets.ENCRYPTED_09E556D51FDC_IV}}
+      #   run: |
+      #     openssl enc -d -aes-256-cbc -md sha512 -K $KEY -iv $IV -salt -in ./.scripts/kube-config.enc -out kube.config
+      # - name: Upgrade deployed cookbook using Helm
+      #   env:
+      #     DOCKER_REPO: 'drbstaging.azurecr.io/kirbydesign/designsystem'
+      #     DOCKER_TAG: git${{github.sha}}
+      #     HELM_CONFIG: ${{ github.ref == 'refs/heads/master' && 'config/helm/staging.yaml' || 'config/helm/branch.yaml' }}
+      #   run: /usr/bin/helm upgrade --kubeconfig kube.config -i "${RELEASENAME}" charts/spa --set image.repository=$DOCKER_REPO --set image.tag=$DOCKER_TAG --set ingress.host="${HOSTNAME}".$DOMAIN -f $HELM_CONFIG
+      - name: Deploy the pull request
         run: |
-          sudo apt-get update
-          sudo apt-get install -y apt-transport-https
-          curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
-          echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
-          sudo apt-get update
-          sudo apt-get install -y kubectl
-      - name: Setup Helm to use version 2.12.3
-        run: |
-          curl https://storage.googleapis.com/kubernetes-helm/helm-v2.12.3-linux-amd64.tar.gz -o helm-linux-amd64.tar.gz
-          tar xzf helm-linux-amd64.tar.gz
-          sudo cp linux-amd64/helm /usr/bin/
-          rm -rf linux-amd64
-      - name: Build Kirby cookbook
-        run: npm run dist:cookbook
-      - name: Build Docker image
-        run: docker build -t drbstaging.azurecr.io/kirbydesign/designsystem:git${{ github.sha }} .
-      - name: Push Docker image
-        env:
-          DOCKER_REPO: 'drbstaging.azurecr.io/kirbydesign/designsystem'
-          DOCKER_TAG: git${{github.sha}}
-          DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
-          DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
-        run: |
-          echo "pushing docker image $DOCKER_REPO:$DOCKER_TAG"
-          echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin drbstaging.azurecr.io
-          docker push $DOCKER_REPO:$DOCKER_TAG
-      - name: Clone charts repo
-        run: git clone https://github.com/Bankdata/charts.git charts
-      - name: Decrypt Kubernetes config
-        env:
-          KEY: ${{secrets.ENCRYPTED_09E556D51FDC_KEY}}
-          IV: ${{secrets.ENCRYPTED_09E556D51FDC_IV}}
-        run: |
-          openssl enc -d -aes-256-cbc -md sha512 -K $KEY -iv $IV -salt -in ./.scripts/kube-config.enc -out kube.config
-      - name: Upgrade deployed cookbook using Helm
-        env:
-          DOCKER_REPO: 'drbstaging.azurecr.io/kirbydesign/designsystem'
-          DOCKER_TAG: git${{github.sha}}
-          HELM_CONFIG: ${{ github.ref == 'refs/heads/master' && 'config/helm/staging.yaml' || 'config/helm/branch.yaml' }}
-        run: /usr/bin/helm upgrade --kubeconfig kube.config -i "${RELEASENAME}" charts/spa --set image.repository=$DOCKER_REPO --set image.tag=$DOCKER_TAG --set ingress.host="${HOSTNAME}".$DOMAIN -f $HELM_CONFIG
+          # deployment logic goes here
+          sleep 30
       - name: Set deployment status to success
         if: github.ref != 'refs/heads/master'
         id: successful_deployment
