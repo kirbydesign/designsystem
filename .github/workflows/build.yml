@@ -96,7 +96,6 @@ jobs:
           route: POST /repos/:repository/deployments/:deployment/statuses
           repository: ${{ github.repository }}
           deployment: ${{ fromJson(steps.create_deployment.outputs.data).id }}
-          #environment: ${{ env.HOSTNAME }}
           log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
           state: in_progress
           mediaType: '{"previews": ["flash", "ant-man"]}'
@@ -158,9 +157,8 @@ jobs:
           route: POST /repos/:repository/deployments/:deployment/statuses
           repository: ${{ github.repository }}
           deployment: ${{ fromJson(steps.create_deployment.outputs.data).id }}
-          #environment: ${{ env.HOSTNAME }}
           environment_url: https://${{ env.HOSTNAME }}.${{ env.DOMAIN }}
-          #log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
           state: success
           mediaType: '{"previews": ["flash", "ant-man"]}'
         env:
@@ -173,9 +171,7 @@ jobs:
           route: POST /repos/:repository/deployments/:deployment/statuses
           repository: ${{ github.repository }}
           deployment: ${{ fromJson(steps.create_deployment.outputs.data).id }}
-          #environment: ${{ env.HOSTNAME }}
-          #environment_url: https://${{ env.HOSTNAME }}.${{ env.DOMAIN }}
-          #log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
           mediaType: '{"previews": ["flash", "ant-man"]}'
           state: failure
         env:
