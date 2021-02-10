@@ -88,129 +88,123 @@ jobs:
         if:  |
           github.ref != 'refs/heads/master' &&
           fromJson(steps.get_latest_deployment.outputs.data)[0] != null
-        # run: echo "DEPLOYMENT_ID=${fromJson(steps.get_latest_deployment.outputs.data)[0].id}" >> $GITHUB_ENV
-        run: |
-          echo DEPLOYMENT_ID=${LATEST_DEPLOYMENT_ID}
-          echo "DEPLOYMENT_ID=${LATEST_DEPLOYMENT_ID}" >> $GITHUB_ENV
+        run: echo "DEPLOYMENT_ID=${LATEST_DEPLOYMENT_ID}" >> $GITHUB_ENV
         env:
           LATEST_DEPLOYMENT_ID: ${{ fromJson(steps.get_latest_deployment.outputs.data)[0].id }}
-      - name: "Existing deployment id"
+      - name: Create Github Deployment
+        id: create_deployment
+        if: |
+          github.ref != 'refs/heads/master' &&
+          env.DEPLOYMENT_ID == null
+        uses: octokit/request-action@v2.x
+        with:
+          route: POST /repos/:repository/deployments
+          repository: ${{ github.repository }}
+          ref: ${{ github.ref }}
+          environment: ${{ env.HOSTNAME }}
+          transient_environment: true # Deployed feature branch is temporary and gets destroyed after PR/branch is closed/deleted
+          auto_merge: false
+          required_contexts: '[]' # Skip commit checks
+          mediaType: '{"previews": ["flash", "ant-man"]}' # some parameters need preview: https://docs.github.com/en/rest/reference/repos#list-deployment-statuses-preview-notices
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: "Set new deployment id"
         if:  |
           github.ref != 'refs/heads/master' &&
-          env.DEPLOYMENT_ID != null
-        run: echo "DEPLOYMENT_ID - ${DEPLOYMENT_ID}"
-      # - name: Create Github Deployment
-      #   id: create_deployment
-      #   if: |
-      #     github.ref != 'refs/heads/master' &&
-      #     env.DEPLOYMENT_ID == null
-      #   uses: octokit/request-action@v2.x
+          env.DEPLOYMENT_ID == null
+        run: echo "DEPLOYMENT_ID=${NEW_DEPLOYMENT_ID}" >> $GITHUB_ENV
+        env:
+          NEW_DEPLOYMENT_ID: ${{ fromJson(steps.create_deployment.outputs.data).id }}
+      - name: Set deployment status to in progress
+        if: github.ref != 'refs/heads/master'
+        uses: octokit/request-action@v2.x
+        with:
+          route: POST /repos/:repository/deployments/:deployment/statuses
+          repository: ${{ github.repository }}
+          deployment: ${{ env.DEPLOYMENT_ID }}
+          log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          description: "Testing the description for in-progress"
+          state: in_progress
+          mediaType: '{"previews": ["flash", "ant-man"]}'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Install Node.js
+      #   uses: actions/setup-node@v2
       #   with:
-      #     route: POST /repos/:repository/deployments
-      #     repository: ${{ github.repository }}
-      #     ref: ${{ github.ref }}
-      #     environment: ${{ env.HOSTNAME }}
-      #     transient_environment: true # Deployed feature branch is temporary and gets destroyed after PR/branch is closed/deleted
-      #     auto_merge: false
-      #     required_contexts: '[]' # Skip commit checks
-      #     mediaType: '{"previews": ["flash", "ant-man"]}' # some parameters need preview: https://docs.github.com/en/rest/reference/repos#list-deployment-statuses-preview-notices
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      # - name: "Set new deployment id"
-      #   if:  |
-      #     github.ref != 'refs/heads/master' &&
-      #     env.DEPLOYMENT_ID == null
-      #   run: echo "DEPLOYMENT_ID=${fromJson(steps.create_deployment.outputs.data).id}" >> $GITHUB_ENV
-      # - name: Set deployment status to in progress
-      #   if: github.ref != 'refs/heads/master'
-      #   uses: octokit/request-action@v2.x
-      #   with:
-      #     route: POST /repos/:repository/deployments/:deployment/statuses
-      #     repository: ${{ github.repository }}
-      #     deployment: ${{ env.DEPLOYMENT_ID }}
-      #     log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-      #     description: "Testing the description for in-progress"
-      #     state: in_progress
-      #     mediaType: '{"previews": ["flash", "ant-man"]}'
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      # # - name: Install Node.js
-      # #   uses: actions/setup-node@v2
-      # #   with:
-      # #     node-version: '10.16'
-      # # - name: Install NPM dependencies
-      # #   run: npm ci
-      # # - name: Install Kubernetes CLI
-      # #   run: |
-      # #     sudo apt-get update
-      # #     sudo apt-get install -y apt-transport-https
-      # #     curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
-      # #     echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
-      # #     sudo apt-get update
-      # #     sudo apt-get install -y kubectl
-      # # - name: Setup Helm to use version 2.12.3
-      # #   run: |
-      # #     curl https://storage.googleapis.com/kubernetes-helm/helm-v2.12.3-linux-amd64.tar.gz -o helm-linux-amd64.tar.gz
-      # #     tar xzf helm-linux-amd64.tar.gz
-      # #     sudo cp linux-amd64/helm /usr/bin/
-      # #     rm -rf linux-amd64
-      # # - name: Build Kirby cookbook
-      # #   run: npm run dist:cookbook
-      # # - name: Build Docker image
-      # #   run: docker build -t drbstaging.azurecr.io/kirbydesign/designsystem:git${{ github.sha }} .
-      # # - name: Push Docker image
-      # #   env:
-      # #     DOCKER_REPO: 'drbstaging.azurecr.io/kirbydesign/designsystem'
-      # #     DOCKER_TAG: git${{github.sha}}
-      # #     DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
-      # #     DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
-      # #   run: |
-      # #     echo "pushing docker image $DOCKER_REPO:$DOCKER_TAG"
-      # #     echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin drbstaging.azurecr.io
-      # #     docker push $DOCKER_REPO:$DOCKER_TAG
-      # # - name: Clone charts repo
-      # #   run: git clone https://github.com/Bankdata/charts.git charts
-      # # - name: Decrypt Kubernetes config
-      # #   env:
-      # #     KEY: ${{secrets.ENCRYPTED_09E556D51FDC_KEY}}
-      # #     IV: ${{secrets.ENCRYPTED_09E556D51FDC_IV}}
-      # #   run: |
-      # #     openssl enc -d -aes-256-cbc -md sha512 -K $KEY -iv $IV -salt -in ./.scripts/kube-config.enc -out kube.config
-      # # - name: Upgrade deployed cookbook using Helm
-      # #   env:
-      # #     DOCKER_REPO: 'drbstaging.azurecr.io/kirbydesign/designsystem'
-      # #     DOCKER_TAG: git${{github.sha}}
-      # #     HELM_CONFIG: ${{ github.ref == 'refs/heads/master' && 'config/helm/staging.yaml' || 'config/helm/branch.yaml' }}
-      # #   run: /usr/bin/helm upgrade --kubeconfig kube.config -i "${RELEASENAME}" charts/spa --set image.repository=$DOCKER_REPO --set image.tag=$DOCKER_TAG --set ingress.host="${HOSTNAME}".$DOMAIN -f $HELM_CONFIG
-      # - name: Deploy the pull request
+      #     node-version: '10.16'
+      # - name: Install NPM dependencies
+      #   run: npm ci
+      # - name: Install Kubernetes CLI
       #   run: |
-      #     # deployment logic goes here
-      #     sleep 30
-      # - name: Set deployment status to success
-      #   if: github.ref != 'refs/heads/master'
-      #   id: successful_deployment
-      #   uses: octokit/request-action@v2.x
-      #   with:
-      #     route: POST /repos/:repository/deployments/:deployment/statuses
-      #     repository: ${{ github.repository }}
-      #     deployment: ${{ env.DEPLOYMENT_ID }}
-      #     environment_url: https://${{ env.HOSTNAME }}.${{ env.DOMAIN }}
-      #     log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-      #     description: "Testing the description for success"
-      #     state: success
-      #     mediaType: '{"previews": ["ant-man"]}'
+      #     sudo apt-get update
+      #     sudo apt-get install -y apt-transport-https
+      #     curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+      #     echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+      #     sudo apt-get update
+      #     sudo apt-get install -y kubectl
+      # - name: Setup Helm to use version 2.12.3
+      #   run: |
+      #     curl https://storage.googleapis.com/kubernetes-helm/helm-v2.12.3-linux-amd64.tar.gz -o helm-linux-amd64.tar.gz
+      #     tar xzf helm-linux-amd64.tar.gz
+      #     sudo cp linux-amd64/helm /usr/bin/
+      #     rm -rf linux-amd64
+      # - name: Build Kirby cookbook
+      #   run: npm run dist:cookbook
+      # - name: Build Docker image
+      #   run: docker build -t drbstaging.azurecr.io/kirbydesign/designsystem:git${{ github.sha }} .
+      # - name: Push Docker image
       #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      # - name: Set deployment status to failure
-      #   id: failed_deployment
-      #   uses: octokit/request-action@v2.x
-      #   if: failure()
-      #   with:
-      #     route: POST /repos/:repository/deployments/:deployment/statuses
-      #     repository: ${{ github.repository }}
-      #     deployment: ${{ env.DEPLOYMENT_ID }}
-      #     log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-      #     state: failure
-      #     mediaType: '{"previews": ["ant-man"]}'
+      #     DOCKER_REPO: 'drbstaging.azurecr.io/kirbydesign/designsystem'
+      #     DOCKER_TAG: git${{github.sha}}
+      #     DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
+      #     DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+      #   run: |
+      #     echo "pushing docker image $DOCKER_REPO:$DOCKER_TAG"
+      #     echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin drbstaging.azurecr.io
+      #     docker push $DOCKER_REPO:$DOCKER_TAG
+      # - name: Clone charts repo
+      #   run: git clone https://github.com/Bankdata/charts.git charts
+      # - name: Decrypt Kubernetes config
       #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     KEY: ${{secrets.ENCRYPTED_09E556D51FDC_KEY}}
+      #     IV: ${{secrets.ENCRYPTED_09E556D51FDC_IV}}
+      #   run: |
+      #     openssl enc -d -aes-256-cbc -md sha512 -K $KEY -iv $IV -salt -in ./.scripts/kube-config.enc -out kube.config
+      # - name: Upgrade deployed cookbook using Helm
+      #   env:
+      #     DOCKER_REPO: 'drbstaging.azurecr.io/kirbydesign/designsystem'
+      #     DOCKER_TAG: git${{github.sha}}
+      #     HELM_CONFIG: ${{ github.ref == 'refs/heads/master' && 'config/helm/staging.yaml' || 'config/helm/branch.yaml' }}
+      #   run: /usr/bin/helm upgrade --kubeconfig kube.config -i "${RELEASENAME}" charts/spa --set image.repository=$DOCKER_REPO --set image.tag=$DOCKER_TAG --set ingress.host="${HOSTNAME}".$DOMAIN -f $HELM_CONFIG
+      - name: Deploy the pull request
+        run: |
+          # deployment logic goes here
+          sleep 30
+      - name: Set deployment status to success
+        if: github.ref != 'refs/heads/master'
+        id: successful_deployment
+        uses: octokit/request-action@v2.x
+        with:
+          route: POST /repos/:repository/deployments/:deployment/statuses
+          repository: ${{ github.repository }}
+          deployment: ${{ env.DEPLOYMENT_ID }}
+          environment_url: https://${{ env.HOSTNAME }}.${{ env.DOMAIN }}
+          log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          description: "Testing the description for success"
+          state: success
+          mediaType: '{"previews": ["ant-man"]}'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Set deployment status to failure
+        id: failed_deployment
+        uses: octokit/request-action@v2.x
+        if: failure()
+        with:
+          route: POST /repos/:repository/deployments/:deployment/statuses
+          repository: ${{ github.repository }}
+          deployment: ${{ env.DEPLOYMENT_ID }}
+          log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          state: failure
+          mediaType: '{"previews": ["ant-man"]}'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
