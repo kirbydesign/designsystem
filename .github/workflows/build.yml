@@ -86,26 +86,32 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: "echo existing deployment: ${{ steps.get_latest_deployment.outputs.data }}"
       - name: "Has existing deployment"
-        if: steps.get_latest_deployment.outputs.data.length > 0
+        if: |
+          github.ref != 'refs/heads/master' &&
+          steps.get_latest_deployment.outputs.data.length > 0
         run: echo has existing deployment!
       - name: "Does NOT have existing deployment"
-        if: steps.get_latest_deployment.outputs.data.length == 0
+        if: |
+          github.ref != 'refs/heads/master' &&
+          steps.get_latest_deployment.outputs.data.length == 0
         run: echo does NOT have existing deployment!
-      # - name: Create Github Deployment
-      #   id: create_deployment
-      #   if: github.ref != 'refs/heads/master'
-      #   uses: octokit/request-action@v2.x
-      #   with:
-      #     route: POST /repos/:repository/deployments
-      #     repository: ${{ github.repository }}
-      #     ref: ${{ github.ref }}
-      #     environment: ${{ env.HOSTNAME }}
-      #     transient_environment: true # Deployed feature branch is temporary and gets destroyed after PR/branch is closed/deleted
-      #     auto_merge: false
-      #     required_contexts: '[]' # Skip commit checks
-      #     mediaType: '{"previews": ["flash", "ant-man"]}' # some parameters need preview: https://docs.github.com/en/rest/reference/repos#list-deployment-statuses-preview-notices
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create Github Deployment
+        id: create_deployment
+        if: |
+          github.ref != 'refs/heads/master' &&
+          steps.get_latest_deployment.outputs.data.length == 0
+        uses: octokit/request-action@v2.x
+        with:
+          route: POST /repos/:repository/deployments
+          repository: ${{ github.repository }}
+          ref: ${{ github.ref }}
+          environment: ${{ env.HOSTNAME }}
+          transient_environment: true # Deployed feature branch is temporary and gets destroyed after PR/branch is closed/deleted
+          auto_merge: false
+          required_contexts: '[]' # Skip commit checks
+          mediaType: '{"previews": ["flash", "ant-man"]}' # some parameters need preview: https://docs.github.com/en/rest/reference/repos#list-deployment-statuses-preview-notices
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # - name: Set deployment status to in progress
       #   if: github.ref != 'refs/heads/master'
       #   uses: octokit/request-action@v2.x
