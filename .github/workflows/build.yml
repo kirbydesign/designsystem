@@ -101,6 +101,8 @@ jobs:
           steps.get_latest_deployment.outputs.data.length == 0
         run: |
           echo does NOT have existing deployment!
+          echo "number of existing deployments: ${{ steps.get_latest_deployment.outputs.data.length }}"
+          echo "number of existing deployments from json: ${{ fromJson(steps.get_latest_deployment.outputs.data).length }}"
           echo "existing deployment: ${{ steps.get_latest_deployment.outputs.data }}"
       # - name: Create Github Deployment
       #   id: create_deployment
