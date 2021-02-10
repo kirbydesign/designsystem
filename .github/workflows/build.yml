@@ -97,6 +97,7 @@ jobs:
           repository: ${{ github.repository }}
           deployment: ${{ fromJson(steps.create_deployment.outputs.data).id }}
           log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          description: Testing the description for in-progress
           state: in_progress
           mediaType: '{"previews": ["flash", "ant-man"]}'
         env:
@@ -163,6 +164,7 @@ jobs:
           deployment: ${{ fromJson(steps.create_deployment.outputs.data).id }}
           environment_url: https://${{ env.HOSTNAME }}.${{ env.DOMAIN }}
           log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          description: Testing the description for success
           state: success
           mediaType: '{"previews": ["flash", "ant-man"]}'
         env:
