@@ -9,6 +9,11 @@ import {
   SimpleChanges,
 } from '@angular/core';
 
+enum InputSize {
+  medium = 'md',
+  large = 'lg',
+}
+
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   // tslint:disable-next-line:component-selector
@@ -29,6 +34,13 @@ export class InputComponent implements OnChanges {
     if (mappedValue && !this.inputmode) {
       this.inputmode = mappedValue;
     }
+  }
+
+  @Input() size: InputSize = InputSize.large;
+
+  @HostBinding('class')
+  get _cssClass() {
+    return [this.size];
   }
 
   /**
