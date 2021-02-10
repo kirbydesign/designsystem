@@ -91,7 +91,12 @@ jobs:
         run: |
           echo "existing deployment: ${{ steps.get_latest_deployment.outputs.data }}"
       - name: "Has existing deployment"
-        if:  steps.get_latest_deployment.outputs.data.length > 0
+        if:  steps.get_latest_deployment.outputs.data[0] != null
+        run: |
+          echo "number of existing deployments: ${{ steps.get_latest_deployment.outputs.data.length }}"
+          echo "existing deployment: ${{ steps.get_latest_deployment.outputs.data }}"
+      - name: "Has existing deployment fromJson"
+        if:  fromJson(steps.get_latest_deployment.outputs.data)[0] != null
         run: |
           echo "number of existing deployments: ${{ steps.get_latest_deployment.outputs.data.length }}"
           echo "existing deployment: ${{ steps.get_latest_deployment.outputs.data }}"
@@ -106,23 +111,23 @@ jobs:
           echo "existing deployments from json: ${{ fromJson(steps.get_latest_deployment.outputs.data) }}"
           echo "latest existing deployments from json: ${{ fromJson(steps.get_latest_deployment.outputs.data)[0] }}"
           echo "existing deployment: ${{ steps.get_latest_deployment.outputs.data }}"
-      # - name: Create Github Deployment
-      #   id: create_deployment
-      #   if: |
-      #     github.ref != 'refs/heads/master' &&
-      #     steps.get_latest_deployment.outputs.data.length == 0
-      #   uses: octokit/request-action@v2.x
-      #   with:
-      #     route: POST /repos/:repository/deployments
-      #     repository: ${{ github.repository }}
-      #     ref: ${{ github.ref }}
-      #     environment: ${{ env.HOSTNAME }}
-      #     transient_environment: true # Deployed feature branch is temporary and gets destroyed after PR/branch is closed/deleted
-      #     auto_merge: false
-      #     required_contexts: '[]' # Skip commit checks
-      #     mediaType: '{"previews": ["flash", "ant-man"]}' # some parameters need preview: https://docs.github.com/en/rest/reference/repos#list-deployment-statuses-preview-notices
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create Github Deployment
+        id: create_deployment
+        if: |
+          github.ref != 'refs/heads/master' &&
+          fromJson(steps.get_latest_deployment.outputs.data)[0] == null
+        uses: octokit/request-action@v2.x
+        with:
+          route: POST /repos/:repository/deployments
+          repository: ${{ github.repository }}
+          ref: ${{ github.ref }}
+          environment: ${{ env.HOSTNAME }}
+          transient_environment: true # Deployed feature branch is temporary and gets destroyed after PR/branch is closed/deleted
+          auto_merge: false
+          required_contexts: '[]' # Skip commit checks
+          mediaType: '{"previews": ["flash", "ant-man"]}' # some parameters need preview: https://docs.github.com/en/rest/reference/repos#list-deployment-statuses-preview-notices
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # - name: Set deployment status to in progress
       #   if: github.ref != 'refs/heads/master'
       #   uses: octokit/request-action@v2.x
