@@ -99,7 +99,9 @@ jobs:
         if: |
           github.ref != 'refs/heads/master' &&
           steps.get_latest_deployment.outputs.data.length == 0
-        run: echo does NOT have existing deployment!
+        run: |
+          echo does NOT have existing deployment!
+          echo "existing deployment: ${{ steps.get_latest_deployment.outputs.data }}"
       # - name: Create Github Deployment
       #   id: create_deployment
       #   if: |
