@@ -1,9 +1,10 @@
-import { Directive, Input, HostBinding } from '@angular/core';
+import { Directive, HostBinding, Input } from '@angular/core';
 
 @Directive({
   // don't worry. I know what i am doing!
-  // tslint:disable-next-line:directive-selector
-  selector: 'button[size], kirby-icon[size], kirby-avatar[size], kirby-item[size]',
+  selector:
+    // tslint:disable-next-line: directive-selector
+    'button[size], kirby-icon[size], kirby-avatar[size], kirby-item[size] input[kirby-input][size]',
 })
 export class SizeDirective {
   @HostBinding('class.xs')
@@ -15,10 +16,10 @@ export class SizeDirective {
   @HostBinding('class.lg')
   isLargeSize: boolean;
   @Input() set size(size: Sizes) {
-    this.isExtraSmall = size === 'xs';
-    this.isSmallSize = size === 'sm';
-    this.isMediumSize = size === 'md';
-    this.isLargeSize = size === 'lg';
+    this.isExtraSmall = size === Sizes.extraSmall;
+    this.isSmallSize = size === Sizes.small;
+    this.isMediumSize = size === Sizes.medium;
+    this.isLargeSize = size === Sizes.large;
   }
 }
 
