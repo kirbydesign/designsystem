@@ -89,8 +89,9 @@ jobs:
           github.ref != 'refs/heads/master' &&
           fromJson(steps.get_latest_deployment.outputs.data)[0] != null
         # run: echo "DEPLOYMENT_ID=${fromJson(steps.get_latest_deployment.outputs.data)[0].id}" >> $GITHUB_ENV
-        run: echo "existing deployment ${fromJson(steps.get_latest_deployment.outputs.data)[0]}""
-        run: echo DEPLOYMENT_ID=${fromJson(steps.get_latest_deployment.outputs.data)[0].id}
+        run: |
+          echo "existing deployment ${fromJson(steps.get_latest_deployment.outputs.data)[0]}"
+          echo DEPLOYMENT_ID=${fromJson(steps.get_latest_deployment.outputs.data)[0].id}
       # - name: Create Github Deployment
       #   id: create_deployment
       #   if: |
