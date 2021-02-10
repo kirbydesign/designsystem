@@ -34,11 +34,12 @@ import {
   MockPageToolbarTitleDirective,
   MockPageActionsDirective,
   MockPageContentDirective,
+  MockPageHeaderComponent,
+  MockPageTitleComponent,
   MockPageContentComponent,
   MockPageActionsComponent,
   MockPageComponent,
 } from './components/mock.page.component';
-import { MockPageTitleComponent } from './components/mock.page-title.component';
 import { MockProgressCircleComponent } from './components/mock.progress-circle.component';
 import { MockReorderListComponent } from './components/mock.reorder-list.component';
 import { MockRouterOutletComponent } from './components/mock.router-outlet.component';
@@ -87,10 +88,11 @@ export const MOCK_COMPONENTS = [
   MockPageToolbarTitleDirective,
   MockPageActionsDirective,
   MockPageContentDirective,
+  MockPageHeaderComponent,
+  MockPageTitleComponent,
   MockPageContentComponent,
   MockPageActionsComponent,
   MockPageComponent,
-  MockPageTitleComponent,
   MockProgressCircleComponent,
   MockReorderListComponent,
   MockRouterOutletComponent,

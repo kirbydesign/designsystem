@@ -64,6 +64,30 @@ export class MockPageContentDirective {
 }
 
 @Component({
+  selector: 'kirby-page-header',
+  template: '<ng-content></ng-content>',
+  providers: [
+    {
+      provide: PageHeaderComponent,
+      useExisting: forwardRef(() => MockPageHeaderComponent),
+    },
+  ],
+})
+export class MockPageHeaderComponent {}
+
+@Component({
+  selector: 'kirby-page-title',
+  template: '<ng-content></ng-content>',
+  providers: [
+    {
+      provide: PageTitleComponent,
+      useExisting: forwardRef(() => MockPageTitleComponent),
+    },
+  ],
+})
+export class MockPageTitleComponent {}
+
+@Component({
   selector: 'kirby-page-content',
   template: '<ng-content></ng-content>',
   providers: [
