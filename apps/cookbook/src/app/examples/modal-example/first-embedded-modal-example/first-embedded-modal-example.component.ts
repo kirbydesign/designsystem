@@ -105,6 +105,10 @@ export class FirstEmbeddedModalExampleComponent implements OnInit {
     this.showFooter = !this.showFooter;
   }
 
+  toggleCustomHeaderContent() {
+    this.showCustomHeader = !this.showCustomHeader;
+  }
+
   close() {
     let someTestData: number = Math.PI;
     this.modal.close(someTestData);

@@ -1,13 +1,9 @@
-<kirby-progress-circle
-  *ngIf="showCustomHeader"
-  slot="start"
-  themeColor="warning"
-  value="50"
-  size="sm"
-  class="kirby-text-xsmall"
->
-  2/4
-</kirby-progress-circle>
+<kirby-page-header *ngIf="showCustomHeader">
+  <kirby-progress-circle themeColor="warning" value="50" size="sm" class="kirby-text-xsmall">
+    2/4
+  </kirby-progress-circle>
+</kirby-page-header>
+
 <kirby-page-title>
   {{ componentProps?.flavor === 'drawer' ? 'My Drawer Title' : 'My Modal Title' }}</kirby-page-title
 >
@@ -32,6 +28,7 @@
     <button kirby-button (click)="disableScroll()">Disable scroll</button>
     <button kirby-button (click)="enableScroll()">Enable scroll</button>
     <button kirby-button (click)="toggleFooter()">Toggle footer</button>
+    <button kirby-button (click)="toggleCustomHeaderContent()">Toggle custom header content</button>
     <div>
       <h4>The standard Lorem Ipsum passage, used since the 1500s</h4>
       <p>
