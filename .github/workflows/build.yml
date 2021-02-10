@@ -90,8 +90,9 @@ jobs:
           fromJson(steps.get_latest_deployment.outputs.data)[0] != null
         # run: echo "DEPLOYMENT_ID=${fromJson(steps.get_latest_deployment.outputs.data)[0].id}" >> $GITHUB_ENV
         run: |
-          echo "existing deployment ${fromJson(steps.get_latest_deployment.outputs.data)[0]}"
-          echo DEPLOYMENT_ID=${fromJson(steps.get_latest_deployment.outputs.data)[0].id}
+          echo DEPLOYMENT_ID=${LATEST_DEPLOYMENT.id}
+        env:
+          LATEST_DEPLOYMENT: ${{ fromJson(steps.get_latest_deployment.outputs.data)[0] }}
       # - name: Create Github Deployment
       #   id: create_deployment
       #   if: |
