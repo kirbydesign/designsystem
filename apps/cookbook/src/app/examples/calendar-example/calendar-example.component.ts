@@ -12,6 +12,7 @@ export class CalendarExampleComponent {
     from: -5,
     to: 5,
   };
+
   onDateChange(selectedDate: Date) {
     this.selectedDate = selectedDate;
   }
