@@ -90,9 +90,15 @@ jobs:
           fromJson(steps.get_latest_deployment.outputs.data)[0] != null
         # run: echo "DEPLOYMENT_ID=${fromJson(steps.get_latest_deployment.outputs.data)[0].id}" >> $GITHUB_ENV
         run: |
-          echo DEPLOYMENT_ID=${LATEST_DEPLOYMENT.id}
+          echo DEPLOYMENT_ID=${LATEST_DEPLOYMENT_ID}
+          echo "DEPLOYMENT_ID=${LATEST_DEPLOYMENT_ID}" >> $GITHUB_ENV
         env:
-          LATEST_DEPLOYMENT: ${{ fromJson(steps.get_latest_deployment.outputs.data)[0] }}
+          LATEST_DEPLOYMENT_ID: ${{ fromJson(steps.get_latest_deployment.outputs.data)[0].id }}
+      - name: "Existing deployment id"
+        if:  |
+          github.ref != 'refs/heads/master' &&
+          env.DEPLOYMENT_ID != null
+        run: echo "DEPLOYMENT_ID - ${DEPLOYMENT_ID}"
       # - name: Create Github Deployment
       #   id: create_deployment
       #   if: |
