@@ -396,7 +396,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   private readonly elementToParentMap: { [key: string]: () => HTMLElement } = {
     'KIRBY-MODAL-FOOTER': () => this.elementRef.nativeElement,
     'KIRBY-PAGE-TITLE': () => this.ionTitleElement.nativeElement,
-    '[slot="start"]': () => this.toolbarButtonsStart.nativeElement,
+    'KIRBY-PAGE-HEADER': () => this.toolbarButtonsStart.nativeElement,
   };
 
   private clearEmbeddedElements() {
