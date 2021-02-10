@@ -9,7 +9,7 @@ import {
   SimpleChanges,
 } from '@angular/core';
 
-enum InputSize {
+export enum InputSize {
   medium = 'md',
   large = 'lg',
 }

@@ -1,6 +1,6 @@
 import { Component, forwardRef, Input } from '@angular/core';
 
-import { InputComponent } from '@kirbydesign/designsystem';
+import { InputComponent, InputSize } from '@kirbydesign/designsystem';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
