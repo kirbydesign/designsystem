@@ -1,6 +1,6 @@
-import { forwardRef, Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 
-import { DropdownComponent } from '@kirbydesign/designsystem';
+import { DropdownComponent, HorizontalDirection } from '@kirbydesign/designsystem';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
@@ -18,6 +18,7 @@ export class MockDropdownComponent {
   @Input() selectedIndex: number;
   @Input() itemTextProperty: string;
   @Input() placeholder: string;
+  @Input() popout: HorizontalDirection;
   @Input() attentionLevel: '1' | '2' | '3' | '4';
   @Input() expand: 'block';
   @Input() disabled: boolean;

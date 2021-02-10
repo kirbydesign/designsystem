@@ -14,23 +14,26 @@ import {
   OnChanges,
   OnDestroy,
   OnInit,
+  Optional,
   Output,
   QueryList,
   Renderer2,
   SimpleChanges,
+  SkipSelf,
   TemplateRef,
   ViewChild,
 } from '@angular/core';
 import { NavigationEnd, NavigationStart, Router, RouterEvent } from '@angular/router';
-import { Observable, Subject, Subscription } from 'rxjs';
+import { IonContent, IonFooter, IonHeader } from '@ionic/angular';
+import { Observable, Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
-import { IonContent } from '@ionic/angular';
 
-import { FitHeadingConfig } from '../../directives/fit-heading/fit-heading.directive';
-import { selectedTabClickEvent } from '../tabs/tab-button/tab-button.events';
 import { KirbyAnimation } from '../../animation/kirby-animation';
+import { FitHeadingConfig } from '../../directives/fit-heading/fit-heading.directive';
 import { WindowRef } from '../../types/window-ref';
 import { ModalNavigationService } from '../modal/services/modal-navigation.service';
+import { selectedTabClickEvent } from '../tabs/tab-button/tab-button.events';
+import { TabsComponent } from '../tabs/tabs.component';
 
 type stickyConfig = { sticky: boolean };
 type fixedConfig = { fixed: boolean };
@@ -116,12 +119,29 @@ export class PageComponent
   @Input() hideBackButton: boolean;
   @Input() titleMaxLines: number;
 
+  private _tabBarBottomHidden: boolean;
+  public get tabBarBottomHidden(): boolean {
+    return this._tabBarBottomHidden;
+  }
+  @Input()
+  public set tabBarBottomHidden(value: boolean) {
+    if (this.tabsComponent) {
+      // as we are setting a class on tabs, we need this to happen in a separate cd cycle
+      setTimeout(() => (this.tabsComponent.tabBarBottomHidden = value));
+    }
+    this._tabBarBottomHidden = value;
+  }
+
   @Output() enter = new EventEmitter<void>();
   @Output() leave = new EventEmitter<void>();
 
   @ViewChild(IonContent, { static: true }) private content: IonContent;
   @ViewChild(IonContent, { static: true, read: ElementRef })
   private ionContentElement: ElementRef<HTMLIonContentElement>;
+  @ViewChild(IonHeader, { static: true, read: ElementRef })
+  ionHeaderElement: ElementRef<HTMLIonHeaderElement>;
+  @ViewChild(IonFooter, { static: true, read: ElementRef })
+  private ionFooterElement: ElementRef<HTMLIonFooterElement>;
 
   @ViewChild('pageTitle', { static: false, read: ElementRef })
   private pageTitle: ElementRef;
@@ -154,7 +174,6 @@ export class PageComponent
   stickyActionsTemplate: TemplateRef<any>;
   fixedActionsTemplate: TemplateRef<any>;
   private pageTitleIntersectionObserverRef: IntersectionObserver = this.pageTitleIntersectionObserver();
-  private routerEventsSubscription: Subscription;
   private urls: string[] = [];
   private hasEntered: boolean;
 
@@ -175,7 +194,8 @@ export class PageComponent
     private router: Router,
     private changeDetectorRef: ChangeDetectorRef,
     private window: WindowRef,
-    private modalNavigationService: ModalNavigationService
+    private modalNavigationService: ModalNavigationService,
+    @Optional() @SkipSelf() private tabsComponent: TabsComponent
   ) {}
 
   ngOnInit(): void {
@@ -251,6 +271,10 @@ export class PageComponent
       this.pageTitleIntersectionObserverRef.unobserve(this.pageTitle.nativeElement);
     }
     this.hasEntered = false;
+
+    if (this.tabBarBottomHidden && this.tabsComponent) {
+      this.tabsComponent.tabBarBottomHidden = false;
+    }
   }
 
   private initializeTitle() {
@@ -303,11 +327,10 @@ export class PageComponent
 
   private removeWrapper() {
     const parent = this.elementRef.nativeElement.parentNode;
-    const header = this.elementRef.nativeElement.childNodes[0];
-    const content = this.elementRef.nativeElement.childNodes[1];
     this.renderer.removeChild(parent, this.elementRef.nativeElement);
-    this.renderer.appendChild(parent, header);
-    this.renderer.appendChild(parent, content);
+    this.renderer.appendChild(parent, this.ionHeaderElement.nativeElement);
+    this.renderer.appendChild(parent, this.ionContentElement.nativeElement);
+    this.renderer.appendChild(parent, this.ionFooterElement.nativeElement);
   }
 
   private pageTitleIntersectionObserver() {

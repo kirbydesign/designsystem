@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-
 import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
 
 declare var require: any;
@@ -110,4 +109,19 @@ export class CalendarShowcaseComponent {
       inputValues: ['{ from: number | Date; to: number | Date }'],
     },
   ];
+
+  events: ShowcaseProperty[] = [
+    {
+      name: 'dateSelect',
+      description: 'Emitted when a date is clicked.',
+      inputValues: ['EventEmitter<Date>'],
+    },
+    {
+      name: 'dateChange',
+      description: 'Emitted when selectedDate changes value.',
+      inputValues: ['EventEmitter<Date>'],
+    },
+  ];
+
+  eventColumns = { Name: 'Name', Description: 'Description', Type: 'Type' };
 }

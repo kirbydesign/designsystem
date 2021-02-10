@@ -1,0 +1,23 @@
+@import '../../../scss/utils';
+
+$padding-horizontal: size('s');
+$padding-vertical: size('xxs');
+
+:host {
+  display: block;
+  background-color: get-color('white');
+
+  .wrapper {
+    position: relative;
+    max-width: var(--page-content-max-width, $page-content-max-width);
+    margin: 0 auto;
+    padding-bottom: var(--kirby-page-footer-safe-area-bottom, var(--kirby-safe-area-bottom));
+
+    &.padding {
+      padding: $padding-vertical $padding-horizontal;
+      padding-bottom: calc(
+        #{$padding-vertical} + var(--kirby-page-footer-safe-area-bottom, var(--kirby-safe-area-bottom))
+      );
+    }
+  }
+}

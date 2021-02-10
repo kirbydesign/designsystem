@@ -1,14 +1,15 @@
+import { LOCALE_ID } from '@angular/core';
+import { IonItem } from '@ionic/angular';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import moment from 'moment';
 import { MockComponent } from 'ng-mocks';
-import { LOCALE_ID } from '@angular/core';
-import { IonItem } from '@ionic/angular';
 
 import { CalendarComponent, IconComponent } from '..';
 import { WindowRef } from '../../types/window-ref';
-import { DropdownComponent } from '../dropdown/dropdown.component';
 import { CardComponent } from '../card/card.component';
+import { DropdownComponent } from '../dropdown/dropdown.component';
 import { ItemComponent } from '../item/item.component';
+
 import { CalendarYearNavigatorConfig } from './options/calendar-year-navigator-options';
 
 // NOTE: when specifying multiple input properties, set selectedDate
@@ -176,6 +177,15 @@ describe('CalendarComponent', () => {
     expect(captured.event).toBeUndefined();
   });
 
+  it('should not emit a dateChange event if clicking the already selected date', () => {
+    spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
+
+    const captured = captureDateChangeEvents();
+
+    clickDayOfMonth(29);
+    expect(captured.event).toBeUndefined();
+  });
+
   it('should always emit a dateChange event when clicking today if alwaysEnableToday is set to true', () => {
     const today = localMidnightDate('1997-08-28');
     spectator.setInput('disabledDates', [today]);
@@ -194,6 +204,34 @@ describe('CalendarComponent', () => {
     spectator.setInput('selectedDate', utcMidnightDate('1997-08-29'));
 
     const captured = captureDateChangeEvents();
+
+    clickDayOfMonth(14);
+    expect(captured.event).toEqual(utcMidnightDate('1997-08-14'));
+  });
+
+  it('should emit dateSelect event when clicking a date that is not already selected', () => {
+    spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
+
+    const captured = captureDateSelectEvents();
+
+    clickDayOfMonth(14);
+    expect(captured.event).toEqual(localMidnightDate('1997-08-14'));
+  });
+
+  it('should emit dateSelect event when clicking the already selected date', () => {
+    spectator.setInput('selectedDate', localMidnightDate('1997-08-29'));
+
+    const captured = captureDateSelectEvents();
+
+    clickDayOfMonth(29);
+    expect(captured.event).toEqual(localMidnightDate('1997-08-29'));
+  });
+
+  it('should emit dateSelect event as UTC midnights when timezone is set to UTC', () => {
+    spectator.setInput('timezone', 'UTC');
+    spectator.setInput('selectedDate', utcMidnightDate('1997-08-29'));
+
+    const captured = captureDateSelectEvents();
 
     clickDayOfMonth(14);
     expect(captured.event).toEqual(utcMidnightDate('1997-08-14'));
@@ -241,7 +279,7 @@ describe('CalendarComponent', () => {
     ).toEqual('M T W T F S S');
   });
 
-  describe('active month', () => {
+  fdescribe('active month', () => {
     let todayDate: Date;
 
     beforeEach(() => {
@@ -394,6 +432,12 @@ describe('CalendarComponent', () => {
   function captureDateChangeEvents() {
     let captured: { event?: Date } = {};
     spectator.output<Date>('dateChange').subscribe((result) => (captured.event = result));
+    return captured;
+  }
+
+  function captureDateSelectEvents() {
+    const captured: { event?: Date } = {};
+    spectator.output<Date>('dateSelect').subscribe((result) => (captured.event = result));
     return captured;
   }
 });

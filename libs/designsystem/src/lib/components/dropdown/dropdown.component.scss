@@ -93,14 +93,14 @@ kirby-card {
   }
 }
 
-:host(.align-end) {
+:host(.popout-left) {
   kirby-card {
     right: 0;
   }
 }
 
 // TODO: UI refine style and behaviour when open upwards...
-:host(.align-top) {
+:host(.popout-up) {
   kirby-card {
     top: 0;
     margin-top: -#{size('xxxs')};
