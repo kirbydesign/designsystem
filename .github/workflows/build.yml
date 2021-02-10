@@ -74,7 +74,7 @@ jobs:
         if: github.ref == 'refs/heads/master'
         run: |
           echo "HOSTNAME=cookbook" >> $GITHUB_ENV
-      - name: Get existing Github Deployment
+      - name: Get existing deployment for branch
         id: get_latest_deployment
         if: github.ref != 'refs/heads/master'
         uses: octokit/request-action@v2.x
@@ -84,38 +84,16 @@ jobs:
           ref: ${{ github.ref }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: "Not on Master and has existing deployment"
-        if: |
+      - name: "Set existing deployment id"
+        if:  |
           github.ref != 'refs/heads/master' &&
-          steps.get_latest_deployment.outputs.data.length > 0
-        run: |
-          echo "existing deployment: ${{ steps.get_latest_deployment.outputs.data }}"
-      - name: "Has existing deployment"
-        if:  steps.get_latest_deployment.outputs.data[0] != null
-        run: |
-          echo "number of existing deployments: ${{ steps.get_latest_deployment.outputs.data.length }}"
-          echo "existing deployment: ${{ steps.get_latest_deployment.outputs.data }}"
-      - name: "Has existing deployment fromJson"
-        if:  fromJson(steps.get_latest_deployment.outputs.data)[0] != null
-        run: |
-          echo "number of existing deployments: ${{ steps.get_latest_deployment.outputs.data.length }}"
-          echo "existing deployment: ${{ steps.get_latest_deployment.outputs.data }}"
-      - name: "Does NOT have existing deployment"
-        if: |
-          github.ref != 'refs/heads/master' &&
-          steps.get_latest_deployment.outputs.data.length == 0
-        run: |
-          echo does NOT have existing deployment!
-          echo "number of existing deployments: ${{ steps.get_latest_deployment.outputs.data.length }}"
-          echo "number of existing deployments from json: ${{ fromJson(steps.get_latest_deployment.outputs.data).length }}"
-          echo "existing deployments from json: ${{ fromJson(steps.get_latest_deployment.outputs.data) }}"
-          echo "latest existing deployments from json: ${{ fromJson(steps.get_latest_deployment.outputs.data)[0] }}"
-          echo "existing deployment: ${{ steps.get_latest_deployment.outputs.data }}"
+          fromJson(steps.get_latest_deployment.outputs.data)[0] != null
+        run: echo "DEPLOYMENT_ID=${fromJson(steps.get_latest_deployment.outputs.data)[0].id}" >> $GITHUB_ENV
       - name: Create Github Deployment
         id: create_deployment
         if: |
           github.ref != 'refs/heads/master' &&
-          fromJson(steps.get_latest_deployment.outputs.data)[0] == null
+          env.DEPLOYMENT_ID == null
         uses: octokit/request-action@v2.x
         with:
           route: POST /repos/:repository/deployments
@@ -128,19 +106,24 @@ jobs:
           mediaType: '{"previews": ["flash", "ant-man"]}' # some parameters need preview: https://docs.github.com/en/rest/reference/repos#list-deployment-statuses-preview-notices
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      # - name: Set deployment status to in progress
-      #   if: github.ref != 'refs/heads/master'
-      #   uses: octokit/request-action@v2.x
-      #   with:
-      #     route: POST /repos/:repository/deployments/:deployment/statuses
-      #     repository: ${{ github.repository }}
-      #     deployment: ${{ fromJson(steps.create_deployment.outputs.data).id }}
-      #     log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-      #     description: "Testing the description for in-progress"
-      #     state: in_progress
-      #     mediaType: '{"previews": ["flash", "ant-man"]}'
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: "Set new deployment id"
+        if:  |
+          github.ref != 'refs/heads/master' &&
+          env.DEPLOYMENT_ID == null
+        run: echo "DEPLOYMENT_ID=${fromJson(steps.create_deployment.outputs.data).id}" >> $GITHUB_ENV
+      - name: Set deployment status to in progress
+        if: github.ref != 'refs/heads/master'
+        uses: octokit/request-action@v2.x
+        with:
+          route: POST /repos/:repository/deployments/:deployment/statuses
+          repository: ${{ github.repository }}
+          deployment: ${{ env.DEPLOYMENT_ID }}
+          log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          description: "Testing the description for in-progress"
+          state: in_progress
+          mediaType: '{"previews": ["flash", "ant-man"]}'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # - name: Install Node.js
       #   uses: actions/setup-node@v2
       #   with:
@@ -189,35 +172,35 @@ jobs:
       #     DOCKER_TAG: git${{github.sha}}
       #     HELM_CONFIG: ${{ github.ref == 'refs/heads/master' && 'config/helm/staging.yaml' || 'config/helm/branch.yaml' }}
       #   run: /usr/bin/helm upgrade --kubeconfig kube.config -i "${RELEASENAME}" charts/spa --set image.repository=$DOCKER_REPO --set image.tag=$DOCKER_TAG --set ingress.host="${HOSTNAME}".$DOMAIN -f $HELM_CONFIG
-      # - name: Deploy the pull request
-      #   run: |
-      #     # deployment logic goes here
-      #     sleep 30
-      # - name: Set deployment status to success
-      #   if: github.ref != 'refs/heads/master'
-      #   id: successful_deployment
-      #   uses: octokit/request-action@v2.x
-      #   with:
-      #     route: POST /repos/:repository/deployments/:deployment/statuses
-      #     repository: ${{ github.repository }}
-      #     deployment: ${{ fromJson(steps.create_deployment.outputs.data).id }}
-      #     environment_url: https://${{ env.HOSTNAME }}.${{ env.DOMAIN }}
-      #     log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-      #     description: "Testing the description for success"
-      #     state: success
-      #     mediaType: '{"previews": ["flash", "ant-man"]}'
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      # - name: Set deployment status to failure
-      #   id: failed_deployment
-      #   uses: octokit/request-action@v2.x
-      #   if: failure()
-      #   with:
-      #     route: POST /repos/:repository/deployments/:deployment/statuses
-      #     repository: ${{ github.repository }}
-      #     deployment: ${{ fromJson(steps.create_deployment.outputs.data).id }}
-      #     log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-      #     mediaType: '{"previews": ["flash", "ant-man"]}'
-      #     state: failure
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Deploy the pull request
+        run: |
+          # deployment logic goes here
+          sleep 30
+      - name: Set deployment status to success
+        if: github.ref != 'refs/heads/master'
+        id: successful_deployment
+        uses: octokit/request-action@v2.x
+        with:
+          route: POST /repos/:repository/deployments/:deployment/statuses
+          repository: ${{ github.repository }}
+          deployment: ${{ env.DEPLOYMENT_ID }}
+          environment_url: https://${{ env.HOSTNAME }}.${{ env.DOMAIN }}
+          log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          description: "Testing the description for success"
+          state: success
+          mediaType: '{"previews": ["ant-man"]}'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Set deployment status to failure
+        id: failed_deployment
+        uses: octokit/request-action@v2.x
+        if: failure()
+        with:
+          route: POST /repos/:repository/deployments/:deployment/statuses
+          repository: ${{ github.repository }}
+          deployment: ${{ env.DEPLOYMENT_ID }}
+          log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          state: failure
+          mediaType: '{"previews": ["ant-man"]}'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
