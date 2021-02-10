@@ -10,7 +10,7 @@ import { CardComponent } from '../card/card.component';
 import { DropdownComponent } from '../dropdown/dropdown.component';
 import { ItemComponent } from '../item/item.component';
 
-import { CalendarYearNavigatorConfig } from './options/calendar-year-navigator-options';
+import { CalendarYearNavigatorConfig } from './options/calendar-year-navigator-config';
 
 // NOTE: when specifying multiple input properties, set selectedDate
 // as the last one. This makes the component update without the need to

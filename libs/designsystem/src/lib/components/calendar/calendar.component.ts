@@ -17,7 +17,7 @@ import moment from 'moment';
 import { CalendarCell } from './helpers/calendar-cell.model';
 import { CalendarOptions } from './helpers/calendar-options.model';
 import { CalendarHelper } from './helpers/calendar.helper';
-import { CalendarYearNavigatorConfig } from './options/calendar-year-navigator-options';
+import { CalendarYearNavigatorConfig } from './options/calendar-year-navigator-config';
 
 interface CalendarDay {
   isCurrentMonth: boolean;
