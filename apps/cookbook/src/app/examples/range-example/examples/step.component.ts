@@ -7,7 +7,14 @@ const config = {
   selector: 'cookbook-range-step-example',
   template: `
     <form [formGroup]="rangeFormStep">
-      <kirby-range formControlName="kirbyRangeName" [formGroup]="rangeFormStep" ticks="5" minLabel="Min value" maxLabel="Max value" pin="true" snaps="true" max="15" min="1"></kirby-range>
+      <kirby-range minLabel="Min value" maxLabel="Max value">
+        <ion-range
+            formControlName="kirbyRangeName" [formGroup]="rangeFormStep" ticks="true"  
+            pin="true" snaps="true" max="15" min="1" 
+       >
+        </ion-range>
+     </kirby-range>
+
     </form>
   `,
 };
@@ -29,7 +36,7 @@ export class RangeStepExampleComponent implements OnInit {
   constructor(private formBuilder: FormBuilder) {}
   ngOnInit(): void {
     this.rangeFormStep = this.formBuilder.group({
-      kirbyRangeName: [{ value: '2', disabled: false }],
+      kirbyRangeName: [{ value: '10', disabled: false }],
     });
   }
 }

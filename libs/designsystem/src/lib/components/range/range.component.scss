@@ -99,7 +99,8 @@ ion-range::part(tick) {
   width: $tickWidth;
   height: $tickHeight;
   margin-left: -1px * $tickWidth / 2px;
-  margin-top: 1px + (-1 * $tickHeight / 2px);
+  margin-top: -1px;
+  // margin-top: 1px + (-1 * $tickHeight / 2px);
   z-index: 1;
 }
 
@@ -110,7 +111,8 @@ ion-range::part(tick-active) {
   width: $tickWidth;
   height: $tickHeight;
   margin-left: -1px * $tickWidth / 2px;
-  margin-top: 1px + (-1 * $tickHeight / 2px);
+  margin-top: -1px;
+  //  margin-top: 1px + (-1 * $tickHeight / 2px);
   z-index: 1;
 }
 

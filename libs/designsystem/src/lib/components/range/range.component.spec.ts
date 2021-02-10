@@ -56,41 +56,30 @@ describe('RangeComponent default properties', () => {
   let spectator: Spectator<RangeComponent>;
 
   beforeEach(() => {
-    spectator = createComponent({
-      props: { value: 30, min: 30, max: 42 },
-    });
+    spectator = createHost(
+      `
+        <kirby-range minLabel="Min" maxLabel="Max">
+        <ion-range value="30" 
+            ticks=true  step="1" 
+            pin="true" snaps="true" max="42" min="30" 
+       >
+        </ion-range>
+     </kirby-range>`
+    );
   });
 
   it('should not be disabled', () => {
     expect(spectator.component.disabled).toBe(false);
   });
   it('should set disabled state', () => {
-    spectator.component.setDisabledState(true);
+    spectator.component.ionRange.disabled = true;
     expect(spectator.component.disabled).toBe(true);
   });
   it('should set value', () => {
-    expect(spectator.component.value).toBe(30);
+    expect(spectator.component.ionRange.value).toBe(30);
     const expectedValue = 35;
-    spectator.component.value = expectedValue;
-    expect(spectator.component.value).toBe(expectedValue);
-  });
-
-  it('should set value and react to change event', () => {
-    expect(spectator.component.value).toBe(30);
-    const expectedValue = 40;
-    let value = 0;
-    spectator.component.valueChange.subscribe((v) => (value = v));
-    spectator.component.value = expectedValue;
-    expect(value).toBe(expectedValue);
-  });
-
-  it('should set value using @Input() and react to change event', () => {
-    expect(spectator.component.value).toBe(30);
-    const expectedValue = 42;
-    let value = 0;
-    spectator.component.valueChange.subscribe((v) => (value = v));
-    spectator.setInput('value', expectedValue);
-    expect(value).toBe(expectedValue);
+    spectator.component.ionRange.value = expectedValue;
+    expect(spectator.component.ionRange.value).toBe(expectedValue);
   });
 });
 
@@ -98,19 +87,26 @@ describe('RangeComponent design properties', () => {
   let spectator: Spectator<RangeComponent>;
   beforeEach(() => {
     spectator = createHost(
-      `<kirby-range ticks="5" step="1" snaps="true" pin="true" minLabel="Min" maxLabel="Max" max="5" min="1"></kirby-range>`
+      `
+        <kirby-range minLabel="Min" maxLabel="Max">
+        <ion-range
+            ticks=true  step="1"
+            pin=true snaps=true max="25" min="1" 
+       >
+        </ion-range>
+     </kirby-range>`
     );
   });
   it('to be correct', () => {
     //  expect(spectator.component.value).toBe('1');
-    expect(spectator.component.max.toString()).toBe('5');
-    expect(spectator.component.min.toString()).toBe('1');
-    expect(spectator.component.ticks.toString()).toBe('5');
-    expect(spectator.component.step.toString()).toBe('1');
+    expect(spectator.component.ionRange.max.toString()).toBe('25');
+    expect(spectator.component.ionRange.min.toString()).toBe('1');
+    expect(spectator.component.ionRange.ticks).toBeTruthy();
+    expect(spectator.component.ionRange.step.toString()).toBe('1');
+    expect(spectator.component.ionRange.pin).toBeTruthy();
+    expect(spectator.component.ionRange.snaps).toBeTruthy();
     expect(spectator.component.minLabel).toBe('Min');
     expect(spectator.component.maxLabel).toBe('Max');
-    expect(spectator.component.pin.toString()).toBe('true');
-    expect(spectator.component.snaps.toString()).toBe('true');
   });
 });
 
@@ -118,11 +114,11 @@ describe('Integration test of RangeComponent', () => {
   let spectator: SpectatorHost<RangeComponent>;
   let ionRangeElement: HTMLIonRangeElement;
   beforeEach(() => {
-    spectator = createHost(`<kirby-range></kirby-range>`);
+    spectator = createHost(`<kirby-range><ion-range></ion-range></kirby-range>`);
     ionRangeElement = spectator.query('ion-range');
   });
 
-  it('can create spectator host and find ion range', async () => {
+  it('can create spectator host and find ion range', () => {
     expect(spectator).not.toBeNull();
     expect(ionRangeElement).not.toBeNull();
   });
@@ -132,7 +128,7 @@ describe('Min and Max Label ', () => {
   let spectator: SpectatorHost<RangeComponent>;
 
   it('should not be present', () => {
-    spectator = createHost(`<kirby-range></kirby-range>`);
+    spectator = createHost(`<kirby-range><ion-range></ion-range></kirby-range>`);
     const minLabelElement = spectator.query('.min-label');
     const maxLabelElement = spectator.query('.max-label');
     expect(minLabelElement).toBeNull();
@@ -140,7 +136,9 @@ describe('Min and Max Label ', () => {
   });
 
   it('should render the min and max labels with correct text', () => {
-    spectator = createHost(`<kirby-range minLabel="min" maxLabel="max"></kirby-range>`);
+    spectator = createHost(
+      `<kirby-range minLabel="min" maxLabel="max"><ion-range></ion-range></kirby-range>`
+    );
     const minLabelElement = spectator.query('.min-label');
     const maxLabelElement = spectator.query('.max-label');
     expect(minLabelElement).not.toBeNull();
@@ -150,7 +148,9 @@ describe('Min and Max Label ', () => {
   });
 
   it('should verify the the disabled class is NOT applied', () => {
-    spectator = createHost(`<kirby-range minLabel="min" maxLabel="max"></kirby-range>`);
+    spectator = createHost(
+      `<kirby-range minLabel="min" maxLabel="max"><ion-range></ion-range></kirby-range>`
+    );
 
     const minLabelElement = spectator.query('.min-label');
     const maxLabelElement = spectator.query('.max-label');
@@ -162,8 +162,10 @@ describe('Min and Max Label ', () => {
   });
 
   it('should verify the the disabled class is applied', () => {
-    spectator = createHost(`<kirby-range minLabel="min" maxLabel="max"></kirby-range>`);
-    spectator.component.disabled = true;
+    spectator = createHost(
+      `<kirby-range minLabel="min" maxLabel="max"><ion-range></ion-range></kirby-range>`
+    );
+    spectator.component.ionRange.disabled = true;
     spectator.detectChanges();
 
     const minLabelElement = spectator.query('.min-label');
@@ -179,7 +181,9 @@ describe('Min and Max Label ', () => {
 describe('Default Styling of RangeComponent', () => {
   let spectator: SpectatorHost<RangeComponent>;
   beforeEach(() => {
-    spectator = createHost(`<kirby-range minLabel="min" maxLabel="max"></kirby-range>`);
+    spectator = createHost(
+      `<kirby-range minLabel="min" maxLabel="max"><ion-range></ion-range></kirby-range>`
+    );
   });
 
   it('range container should have correct padding', () => {
@@ -199,7 +203,7 @@ describe('Ion-Range', () => {
   let ionRangeElement: HTMLIonRangeElement;
 
   beforeEach(async () => {
-    spectator = createHost(`<kirby-range></kirby-range>`);
+    spectator = createHost(`<kirby-range><ion-range></ion-range></kirby-range>`);
     ionRangeElement = spectator.query('ion-range');
     // await TestHelper.whenReady(ionRangeElement);
     await TestHelper.whenTrue(() => ionRangeElement.shadowRoot !== null, 10000, 1);

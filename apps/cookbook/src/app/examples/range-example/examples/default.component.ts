@@ -7,7 +7,13 @@ const config = {
   selector: 'cookbook-range-default-example',
   template: `
     <form [formGroup]="rangeFormDefault">
-      <kirby-range formControlName="kirbyRangeName" [formGroup]="rangeFormDefault" ticks="5" minLabel="Min value" maxLabel="Max value" max="5" min="1"></kirby-range>
+   <kirby-range minLabel="Min label" maxLabel="Max label">
+          <ion-range
+            formControlName="kirbyRangeName" [formGroup]="rangeFormDefault" ticks="true" max="5" min="1"
+          >
+        </ion-range>
+     </kirby-range>
+   
     </form>
   `,
 };
