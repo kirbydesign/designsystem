@@ -3,6 +3,7 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  HostBinding,
   Inject,
   Input,
   LOCALE_ID,
@@ -138,6 +139,11 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
 
   get navigatedYear(): number {
     return this.navigableYears.indexOf(this.activeYear);
+  }
+
+  @HostBinding('class.has-year-navigator')
+  get _hasYearNavigator() {
+    return !!this.yearNavigatorOptions;
   }
 
   constructor(private calendarHelper: CalendarHelper, @Inject(LOCALE_ID) private locale: string) {

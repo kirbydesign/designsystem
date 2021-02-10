@@ -1,5 +1,9 @@
 @import '../../scss/utils';
 
+:host {
+  --kirby_internal_month-navigator-width: 80px;
+}
+
 table.calendar-table {
   width: 100%;
   border-collapse: collapse;
@@ -114,4 +118,16 @@ td {
 .day.selectable:not(.selected):hover {
   color: get-color('light-contrast');
   background-color: get-color('light');
+}
+
+:host(.has-year-navigator) {
+  .month-and-year {
+    width: var(--kirby_internal_month-navigator-width);
+    margin: 0 size('xxs');
+    text-align: center;
+  }
+
+  .month {
+    margin-right: 0;
+  }
 }
