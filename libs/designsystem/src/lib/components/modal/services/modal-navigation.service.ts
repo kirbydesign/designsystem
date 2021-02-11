@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Route, Router, Routes } from '@angular/router';
 import { EMPTY, Observable } from 'rxjs';
-import { filter, first, map, pairwise, startWith } from 'rxjs/operators';
+import { filter, first, map, pairwise, startWith, tap } from 'rxjs/operators';
 
 import { ModalRouteActivation } from './modal.interfaces';
 
 @Injectable({ providedIn: 'root' })
 export class ModalNavigationService {
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  constructor(private router: Router, private route: ActivatedRoute) {
+    console.log('*************** ModalNavigationService ctor ***************');
+  }
 
   isModalRoute(url: string): boolean {
     return url.includes('(modal:');
@@ -21,19 +23,37 @@ export class ModalNavigationService {
     return childRoute;
   }
 
-  private async getModalRouteMap(routeConfig: Routes[]): Promise<Map<string, string>> {
+  private async getModalRouteMap(
+    routeConfig: Routes[],
+    moduleRootRoutePath?: string
+  ): Promise<Map<string, string>> {
     const flattenedRoutes: Routes = [].concat(...routeConfig);
     let modalRoutes: string[] = [];
-    const moduleRootPaths = await this.getModuleRootPath(flattenedRoutes);
+    const moduleRootPaths = await this.getModuleRootPath(flattenedRoutes, moduleRootRoutePath);
+    if (moduleRootRoutePath) {
+      console.warn('ModalNavigationService.getModalRouteMap - moduleRootPaths:', moduleRootPaths);
+    }
     if (moduleRootPaths) {
       modalRoutes = this.getModalRoutePaths(flattenedRoutes, moduleRootPaths);
+      console.warn('ModalNavigationService.getModalRouteMap - modalRoutes:', modalRoutes);
     }
     return new Map(modalRoutes.map((modalRoute) => [modalRoute, modalRoute]));
   }
 
-  private async getModuleRootPath(routes: Routes): Promise<string[]> {
+  private async getModuleRootPath(routes: Routes, moduleRootRoutePath?: string): Promise<string[]> {
+    if (moduleRootRoutePath) {
+      const trimmedPaths = moduleRootRoutePath
+        .trim()
+        .split('/')
+        .filter((path) => !!path);
+      const rootPath = [''];
+      return rootPath.concat(trimmedPaths);
+    }
+
     const currentRoutePaths = await this.getCurrentRoutePaths();
+    console.log('currentRoutePaths BEFORE:', currentRoutePaths);
     this.removeChildSegments(currentRoutePaths, routes);
+    console.log('currentRoutePaths AFTER:', currentRoutePaths);
     return currentRoutePaths;
   }
 
@@ -41,8 +61,11 @@ export class ModalNavigationService {
     const rootPath = [''];
     const currentNavigation = this.router.getCurrentNavigation();
 
+    console.log('this.router.navigated:', this.router.navigated);
+    console.log('currentNavigation:', currentNavigation);
     if (!this.router.navigated && !currentNavigation) {
       // If router hasn't navigated yet and we are not in the middle of navigating, assume root:
+      console.log('assume root...');
       return rootPath;
     }
 
@@ -159,6 +182,12 @@ export class ModalNavigationService {
     modalRouteMap: Map<string, string>
   ): Observable<ModalRouteActivation> {
     return navigationEnd$.pipe(
+      tap((navigationEnd) => {
+        console.log('navigationEnd:', navigationEnd);
+        console.log('isModalRoute:', this.isModalRoute(navigationEnd.urlAfterRedirects));
+        console.log('isNewModal:', this.isNewModalWindow(navigationEnd));
+        console.log('modalRouteMap:', modalRouteMap);
+      }),
       filter((navigationEnd) => modalRouteMap.has(navigationEnd.urlAfterRedirects)),
       map((navigationEnd) => ({
         route: this.getCurrentActivatedRoute(),
@@ -184,11 +213,12 @@ export class ModalNavigationService {
   }
 
   async getModalNavigation(
-    routeConfig: Routes[]
+    routeConfig: Routes[],
+    moduleRootRoutePath?: string
   ): Promise<{ activated$: Observable<ModalRouteActivation>; deactivated$: Observable<boolean> }> {
     if (Array.isArray(routeConfig)) {
       const navigationEnd$ = await this.waitForCurrentThenGetNavigationEndStream();
-      const modalRouteMap = await this.getModalRouteMap(routeConfig);
+      const modalRouteMap = await this.getModalRouteMap(routeConfig, moduleRootRoutePath);
       const hasModalRoutes = modalRouteMap.size > 0;
       if (hasModalRoutes) {
         const activated$ = this.modalRouteActivatedFor(navigationEnd$, modalRouteMap);
