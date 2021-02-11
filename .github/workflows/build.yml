@@ -60,8 +60,7 @@ jobs:
           echo "RELEASENAME=${releasename}" >> $GITHUB_ENV
       - name: Get release name
         if: github.ref == 'refs/heads/master'
-        run: |
-          echo "RELEASENAME=designsystem" >> $GITHUB_ENV
+        run: echo "RELEASENAME=designsystem" >> $GITHUB_ENV
       - name: Get hostname for feature branch
         if: github.ref != 'refs/heads/master'
         run: |
@@ -70,8 +69,7 @@ jobs:
           echo "HOSTNAME=${hostname}" >> $GITHUB_ENV
       - name: Get hostname for master branch
         if: github.ref == 'refs/heads/master'
-        run: |
-          echo "HOSTNAME=cookbook" >> $GITHUB_ENV
+        run: echo "HOSTNAME=cookbook" >> $GITHUB_ENV
     - name: Create Github Deployment
         id: create_deployment
         if:  github.ref != 'refs/heads/master'
