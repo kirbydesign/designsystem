@@ -7,9 +7,28 @@ defaults:
     shell: bash
 
 jobs:
+  test_string_replace:
+    name: Test bash string replace
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          branchname="refs/heads/chore/github----dePLOYment#€%&#"
+          echo "branchname: ${branchname}"
+          branchname="${branchname##*/}"
+          echo "Removed leading paths - branchname: ${branchname}"
+          branchname=$(tr [:upper:] [:lower:] <<< "$releasename")
+          echo "Removed uppercase - branchname: ${branchname}"
+          branchname="${branchname//[^a-zA-Z0-9]/-}"
+          echo "Removed illegal chars - branchname: ${branchname}"
+          branchname=$(tr -s '-' '-' <<< "$branchname")
+          echo "Removed duplicated dashes - branchname: ${branchname}"
+          branchname="${branchname%%-}"
+          echo "Removed trailing dash - final branchname: ${branchname}"
+          
   lint_and_unittest:
     name: Lint & unit test
     runs-on: ubuntu-latest
+    if: false
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
@@ -29,6 +48,7 @@ jobs:
   build_kirby:
     name: Build Kirby lib
     runs-on: ubuntu-latest
+    if: false
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
@@ -45,6 +65,7 @@ jobs:
     name: Deploy cookbook
     needs: [lint_and_unittest, build_kirby]
     runs-on: ubuntu-latest
+    if: false
     env:
       DOMAIN: ${{ github.ref == 'refs/heads/master' && 'kirby.design' || '650b277bd9a54e5cbadc.westeurope.aksapp.io' }}
     steps:
