@@ -74,52 +74,50 @@ jobs:
         if: github.ref == 'refs/heads/master'
         run: |
           echo "HOSTNAME=cookbook" >> $GITHUB_ENV
-      - name: Get existing deployment for branch
-        id: get_latest_deployment
-        if: github.ref != 'refs/heads/master'
-        uses: octokit/request-action@v2.x
-        with:
-          route: GET /repos/:repository/deployments
-          repository: ${{ github.repository }}
-          ref: ${{ github.ref }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: "Set existing deployment id"
-        if:  |
-          github.ref != 'refs/heads/master' &&
-          fromJson(steps.get_latest_deployment.outputs.data)[0] != null
-        run: echo "DEPLOYMENT_ID=${{ fromJson(steps.get_latest_deployment.outputs.data)[0].id }}" >> $GITHUB_ENV
+      # - name: Get existing deployment for branch
+      #   id: get_latest_deployment
+      #   if: github.ref != 'refs/heads/master'
+      #   uses: octokit/request-action@v2.x
+      #   with:
+      #     route: GET /repos/:repository/deployments
+      #     repository: ${{ github.repository }}
+      #     ref: ${{ github.ref }}
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: "Set existing deployment id"
+      #   if:  |
+      #     github.ref != 'refs/heads/master' &&
+      #     fromJson(steps.get_latest_deployment.outputs.data)[0] != null
+      #   run: echo "DEPLOYMENT_ID=${{ fromJson(steps.get_latest_deployment.outputs.data)[0].id }}" >> $GITHUB_ENV
       - name: Create Github Deployment
         id: create_deployment
-        if: |
-          github.ref != 'refs/heads/master' &&
-          env.DEPLOYMENT_ID == null
+        if:  github.ref != 'refs/heads/master' # && env.DEPLOYMENT_ID == null
         uses: octokit/request-action@v2.x
         with:
           route: POST /repos/:repository/deployments
           repository: ${{ github.repository }}
           ref: ${{ github.ref }}
           environment: ${{ env.HOSTNAME }}
-          transient_environment: true # Deployed feature branch is temporary and gets destroyed after PR/branch is closed/deleted
+          # transient_environment: true # Deployed feature branch is temporary and gets destroyed after PR/branch is closed/deleted
           auto_merge: false
           required_contexts: '[]' # Skip commit checks
+          description: "Testing the description for creation"
           mediaType: '{"previews": ["flash", "ant-man"]}' # some parameters need preview: https://docs.github.com/en/rest/reference/repos#list-deployment-statuses-preview-notices
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: "Set new deployment id"
-        if:  |
-          github.ref != 'refs/heads/master' &&
-          env.DEPLOYMENT_ID == null
-        run: echo "DEPLOYMENT_ID=${{ fromJson(steps.create_deployment.outputs.data).id }}" >> $GITHUB_ENV
+      # - name: "Set new deployment id"
+      #   if:  |
+      #     github.ref != 'refs/heads/master' &&
+      #     env.DEPLOYMENT_ID == null
+      #   run: echo "DEPLOYMENT_ID=${{ fromJson(steps.create_deployment.outputs.data).id }}" >> $GITHUB_ENV
       - name: Set deployment status to in progress
         if: github.ref != 'refs/heads/master'
         uses: octokit/request-action@v2.x
         with:
           route: POST /repos/:repository/deployments/:deployment/statuses
           repository: ${{ github.repository }}
-          deployment: ${{ env.DEPLOYMENT_ID }}
+          deployment: ${{ fromJson(steps.create_deployment.outputs.data).id }}
           log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          description: "Testing the description for in-progress"
           state: in_progress
           mediaType: '{"previews": ["flash", "ant-man"]}'
         env:
@@ -183,10 +181,9 @@ jobs:
         with:
           route: POST /repos/:repository/deployments/:deployment/statuses
           repository: ${{ github.repository }}
-          deployment: ${{ env.DEPLOYMENT_ID }}
+          deployment: ${{ fromJson(steps.create_deployment.outputs.data).id }}
           environment_url: https://${{ env.HOSTNAME }}.${{ env.DOMAIN }}
           log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          description: "Testing the description for success"
           state: success
           mediaType: '{"previews": ["ant-man"]}'
         env:
@@ -198,7 +195,7 @@ jobs:
         with:
           route: POST /repos/:repository/deployments/:deployment/statuses
           repository: ${{ github.repository }}
-          deployment: ${{ env.DEPLOYMENT_ID }}
+          deployment: ${{ fromJson(steps.create_deployment.outputs.data).id }}
           log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
           state: failure
           mediaType: '{"previews": ["ant-man"]}'
