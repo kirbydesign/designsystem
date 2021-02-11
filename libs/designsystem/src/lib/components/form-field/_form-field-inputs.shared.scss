@@ -48,6 +48,8 @@ $form-field-label-height: 24px;
 
   &:disabled {
     background-color: get-color('light-tint');
+    color: get-text-color('semi-dark');
+    box-shadow: none;
   }
 
   &::placeholder {
