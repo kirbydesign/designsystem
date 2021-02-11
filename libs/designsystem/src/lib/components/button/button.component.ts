@@ -65,14 +65,14 @@ export class ButtonComponent implements AfterContentInit {
 
   @ContentChild(IconComponent, { static: false }) icon: IconComponent;
   @ContentChild(IconComponent, { static: false, read: ElementRef })
-  iconDomNode: ElementRef<HTMLElement>;
+  iconElementRef: ElementRef<HTMLElement>;
   private _hasSlottedContent = false;
 
   ngAfterContentInit(): void {
-    if (this.iconDomNode && this.iconDomNode.nativeElement) {
-      const iconNativeElement = this.iconDomNode.nativeElement;
-      const prev = this.findNonCommentSibling(iconNativeElement, 'previousSibling');
-      const next = this.findNonCommentSibling(iconNativeElement, 'nextSibling');
+    if (this.iconElementRef && this.iconElementRef.nativeElement) {
+      const iconElement = this.iconElementRef.nativeElement;
+      const prev = this.findNonCommentSibling(iconElement, 'previousSibling');
+      const next = this.findNonCommentSibling(iconElement, 'nextSibling');
       if (prev) {
         this._hasSlottedContent = true;
         this._isIconLeft = false;
