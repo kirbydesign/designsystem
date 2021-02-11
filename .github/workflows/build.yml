@@ -101,7 +101,6 @@ jobs:
           # transient_environment: true # Deployed feature branch is temporary and gets destroyed after PR/branch is closed/deleted
           auto_merge: false
           required_contexts: '[]' # Skip commit checks
-          description: "Testing the description for creation"
           mediaType: '{"previews": ["flash", "ant-man"]}' # some parameters need preview: https://docs.github.com/en/rest/reference/repos#list-deployment-statuses-preview-notices
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
