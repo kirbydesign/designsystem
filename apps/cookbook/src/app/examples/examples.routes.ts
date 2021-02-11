@@ -54,8 +54,8 @@ import { SlideButtonExampleComponent } from './slide-button-example/slide-button
 import { SlidesExampleComponent } from './slides-example/slides-example.component';
 import { SpinnerExampleComponent } from './spinner-example/spinner-example.component';
 import { StockChartExampleComponent } from './stock-chart-example/stock-chart-example.component';
-import { TabExampleComponent } from './tabs/tab/tab-example.component';
-import { TabsExampleComponent } from './tabs/tabs-example.component';
+import { TabExampleComponent } from './tabs-example/tab/tab-example.component';
+import { TabsExampleComponent } from './tabs-example/tabs-example.component';
 import { ToastExampleComponent } from './toast-example/toast-example.component';
 import { ToggleButtonExampleComponent } from './toggle-button-example/toggle-button-example.component';
 import { ToggleExampleComponent } from './toggle-example/toggle-example.component';
