@@ -58,9 +58,9 @@ jobs:
           branchname="${branchname##*/}"
           echo "Removed leading paths - branchname: ${branchname}"
           branchname=$(tr [:upper:] [:lower:] <<< "$branchname")
-          echo "Removed uppercase - branchname: ${branchname}"
+          echo "Converted to lowercase - branchname: ${branchname}"
           branchname="${branchname//[^a-zA-Z0-9]/-}"
-          echo "Removed illegal chars - branchname: ${branchname}"
+          echo "Replaced illegal chars - branchname: ${branchname}"
           branchname=$(tr -s '-' '-' <<< "$branchname")
           echo "Removed duplicated dashes - branchname: ${branchname}"
           branchname="${branchname%%-}"
