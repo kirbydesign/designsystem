@@ -65,7 +65,7 @@ export class ButtonComponent implements AfterContentInit {
 
   @ContentChild(IconComponent, { static: false }) icon: IconComponent;
   @ContentChild(IconComponent, { static: false, read: ElementRef })
-  iconDomNode: ElementRef;
+  iconDomNode: ElementRef<HTMLElement>;
   private _hasSlottedContent = false;
 
   ngAfterContentInit(): void {
@@ -86,8 +86,11 @@ export class ButtonComponent implements AfterContentInit {
     }
   }
 
-  private findNonCommentSibling(nativeElement: any, direction: 'nextSibling' | 'previousSibling') {
-    const sibling = nativeElement[direction];
+  private findNonCommentSibling(
+    nativeElement: HTMLElement,
+    direction: 'nextSibling' | 'previousSibling'
+  ) {
+    const sibling = nativeElement[direction] as HTMLElement;
     if (sibling != null && sibling.nodeName === '#comment') {
       return this.findNonCommentSibling(sibling, direction);
     }
