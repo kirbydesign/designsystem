@@ -71,31 +71,31 @@ jobs:
         if: github.ref == 'refs/heads/master'
         run: echo "HOSTNAME=cookbook" >> $GITHUB_ENV
       - name: Create Github Deployment
-          id: create_deployment
-          if:  github.ref != 'refs/heads/master'
-          uses: octokit/request-action@v2.x
-          with:
-            route: POST /repos/:repository/deployments
-            repository: ${{ github.repository }}
-            ref: ${{ github.ref }}
-            environment: ${{ env.HOSTNAME }}
-            auto_merge: false
-            required_contexts: '[]' # Skip commit checks
-            mediaType: '{"previews": ["flash", "ant-man"]}' # some parameters need preview: https://docs.github.com/en/rest/reference/repos#list-deployment-statuses-preview-notices
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        id: create_deployment
+        if:  github.ref != 'refs/heads/master'
+        uses: octokit/request-action@v2.x
+        with:
+          route: POST /repos/:repository/deployments
+          repository: ${{ github.repository }}
+          ref: ${{ github.ref }}
+          environment: ${{ env.HOSTNAME }}
+          auto_merge: false
+          required_contexts: '[]' # Skip commit checks
+          mediaType: '{"previews": ["flash", "ant-man"]}' # some parameters need preview: https://docs.github.com/en/rest/reference/repos#list-deployment-statuses-preview-notices
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Set deployment status to in progress
-          if: github.ref != 'refs/heads/master'
-          uses: octokit/request-action@v2.x
-          with:
-            route: POST /repos/:repository/deployments/:deployment/statuses
-            repository: ${{ github.repository }}
-            deployment: ${{ fromJson(steps.create_deployment.outputs.data).id }}
-            log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-            state: in_progress
-            mediaType: '{"previews": ["flash", "ant-man"]}'
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        if: github.ref != 'refs/heads/master'
+        uses: octokit/request-action@v2.x
+        with:
+          route: POST /repos/:repository/deployments/:deployment/statuses
+          repository: ${{ github.repository }}
+          deployment: ${{ fromJson(steps.create_deployment.outputs.data).id }}
+          log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          state: in_progress
+          mediaType: '{"previews": ["flash", "ant-man"]}'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # - name: Install Node.js
       #   uses: actions/setup-node@v2
       #   with:
