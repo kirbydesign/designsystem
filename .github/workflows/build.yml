@@ -7,7 +7,6 @@ defaults:
     shell: bash
 
 jobs:
-          
   lint_and_unittest:
     name: Lint & unit test
     runs-on: ubuntu-latest
