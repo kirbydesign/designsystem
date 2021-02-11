@@ -24,6 +24,7 @@ import { IconExampleComponent } from './icon-example/icon-example.component';
 import { ItemExampleComponent } from './item-example/item-example.component';
 import { ListExampleComponent } from './list-example/list-example.component';
 import { ListLoadOnDemandExampleComponent } from './list-load-on-demand-example/list-load-on-demand-example.component';
+import { ListSwipeExampleComponent } from './list-swipe-example/list-swipe-example.component';
 import { ListBoldTextOnRowSelectionExampleComponent } from './list/components/bold-text-on-row-selection';
 import { ListColoredItemsExampleComponent } from './list/components/colored-items';
 import { ListWithDividersExampleComponent } from './list/components/dividers';
@@ -33,7 +34,6 @@ import { ListNoShapeExampleComponent } from './list/components/no-shape/list-no-
 import { ListWithSectionsExampleComponent } from './list/components/sections';
 import { ListWithSectionsAndColoredItemsExampleComponent } from './list/components/sections-and-colored-items';
 import { ListSelectableItemsExampleComponent } from './list/components/selectable-items';
-import { ListSwipeExampleComponent } from './list/components/swipe/list-swipe-example.component';
 import { LoadingOverlayExampleComponent } from './loading-overlay-example/loading-overlay-example.component';
 import { ModalExampleComponent } from './modal-example/modal-example.component';
 import { ModalRoutePage1ExampleComponent } from './modal-example/modal-route-example/modal-route-page1-example.component';
