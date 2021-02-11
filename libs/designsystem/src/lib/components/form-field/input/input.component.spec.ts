@@ -28,7 +28,7 @@ describe('InputComponent', () => {
     expect(element).toHaveComputedStyle({ color: getColor('black') });
   });
 
-  it('should render with correct height', () => {
+  it('should render with default height', () => {
     expect(element).toHaveComputedStyle({ height: size('xxxl') });
   });
 
