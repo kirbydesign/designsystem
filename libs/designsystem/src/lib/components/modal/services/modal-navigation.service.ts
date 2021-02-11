@@ -21,17 +21,29 @@ export class ModalNavigationService {
     return childRoute;
   }
 
-  private async getModalRouteMap(routeConfig: Routes[]): Promise<Map<string, string>> {
+  private async getModalRouteMap(
+    routeConfig: Routes[],
+    moduleRootRoutePath?: string
+  ): Promise<Map<string, string>> {
     const flattenedRoutes: Routes = [].concat(...routeConfig);
     let modalRoutes: string[] = [];
-    const moduleRootPaths = await this.getModuleRootPath(flattenedRoutes);
+    const moduleRootPaths = await this.getModuleRootPath(flattenedRoutes, moduleRootRoutePath);
     if (moduleRootPaths) {
       modalRoutes = this.getModalRoutePaths(flattenedRoutes, moduleRootPaths);
     }
     return new Map(modalRoutes.map((modalRoute) => [modalRoute, modalRoute]));
   }
 
-  private async getModuleRootPath(routes: Routes): Promise<string[]> {
+  private async getModuleRootPath(routes: Routes, moduleRootRoutePath?: string): Promise<string[]> {
+    if (moduleRootRoutePath) {
+      const trimmedPaths = moduleRootRoutePath
+        .trim()
+        .split('/')
+        .filter((path) => !!path);
+      const rootPath = [''];
+      return rootPath.concat(trimmedPaths);
+    }
+
     const currentRoutePaths = await this.getCurrentRoutePaths();
     this.removeChildSegments(currentRoutePaths, routes);
     return currentRoutePaths;
@@ -184,11 +196,12 @@ export class ModalNavigationService {
   }
 
   async getModalNavigation(
-    routeConfig: Routes[]
+    routeConfig: Routes[],
+    moduleRootRoutePath?: string
   ): Promise<{ activated$: Observable<ModalRouteActivation>; deactivated$: Observable<boolean> }> {
     if (Array.isArray(routeConfig)) {
       const navigationEnd$ = await this.waitForCurrentThenGetNavigationEndStream();
-      const modalRouteMap = await this.getModalRouteMap(routeConfig);
+      const modalRouteMap = await this.getModalRouteMap(routeConfig, moduleRootRoutePath);
       const hasModalRoutes = modalRouteMap.size > 0;
       if (hasModalRoutes) {
         const activated$ = this.modalRouteActivatedFor(navigationEnd$, modalRouteMap);
