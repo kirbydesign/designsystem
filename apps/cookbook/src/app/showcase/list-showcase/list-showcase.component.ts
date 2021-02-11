@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-
-import { ListBoldTextOnRowSelectionExampleTemplate } from '../../examples/list/components/bold-text-on-row-selection';
-import { ListWithDividersExampleTemplate } from '~/app/examples/list/components/dividers';
-import { ListSelectableItemsExampleTemplate } from '~/app/examples/list/components/selectable-items';
 import { ListColoredItemsExampleTemplate } from '~/app/examples/list/components/colored-items';
-import { ListWithSectionsAndColoredItemsExampleTemplate } from '~/app/examples/list/components/sections-and-colored-items';
+import { ListWithDividersExampleTemplate } from '~/app/examples/list/components/dividers';
 import { ListWithHeaderAndFooterExampleTemplate } from '~/app/examples/list/components/header-and-footer';
 import { ListWithSectionsExampleTemplate } from '~/app/examples/list/components/sections';
+import { ListWithSectionsAndColoredItemsExampleTemplate } from '~/app/examples/list/components/sections-and-colored-items';
+import { ListSelectableItemsExampleTemplate } from '~/app/examples/list/components/selectable-items';
+
+import { ListBoldTextOnRowSelectionExampleTemplate } from '../../examples/list/components/bold-text-on-row-selection';
 import { ListItemsExampleTemplate } from '../../examples/list/components/items';
 
 declare var require: any;
@@ -26,7 +26,7 @@ export class ListShowcaseComponent implements OnInit {
   sectionsExampleTemplate: string = ListWithSectionsExampleTemplate;
   items: string = ListItemsExampleTemplate;
 
-  exampleHtml: string = require('!raw-loader!../../examples/list/list-example.component.html')
+  exampleHtml: string = require('!raw-loader!../../examples/list-example/list-example.component.html')
     .default;
 
   sectionHeaderExampleHtml: string =

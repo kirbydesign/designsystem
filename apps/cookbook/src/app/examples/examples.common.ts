@@ -26,10 +26,10 @@ import { FormFieldExampleComponent } from './form-field-example/form-field-examp
 import { GridExampleComponent } from './grid-example/grid-example.component';
 import { IconExampleComponent } from './icon-example/icon-example.component';
 import { ItemExampleComponent } from './item-example/item-example.component';
+import { ListExampleComponent } from './list-example/list-example.component';
 import { ListLoadOnDemandExampleComponent } from './list-load-on-demand-example/list-load-on-demand-example.component';
 import { ListNoShapeExampleComponent } from './list/components/no-shape/list-no-shape-example.component';
 import { ListSwipeExampleComponent } from './list/components/swipe/list-swipe-example.component';
-import { ListExampleComponent } from './list/list-example.component';
 import { LoadingOverlayExampleComponent } from './loading-overlay-example/loading-overlay-example.component';
 import { ModalCompactExampleComponent } from './modal-example/compact-example/modal-compact-example.component';
 import { FirstEmbeddedModalExampleComponent } from './modal-example/first-embedded-modal-example/first-embedded-modal-example.component';

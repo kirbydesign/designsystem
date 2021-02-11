@@ -14,7 +14,7 @@ export class ShowcaseComponent implements OnDestroy {
   exampleComponentGitUrl: string;
   private routerEventsSubscription: Subscription;
   private gitUrl =
-    'https://github.com/kirbydesign/designsystem/tree/master/apps/cookbook/src/app/examples/';
+    'https://github.com/kirbydesign/designsystem/tree/bug/dead-list-links/apps/cookbook/src/app/examples/';
   isCTABoxShown = true;
 
   constructor(private router: Router) {
