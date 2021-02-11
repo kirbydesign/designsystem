@@ -314,29 +314,3 @@ describe('ButtonComponent', () => {
     });
   });
 });
-
-describe('ButtonComponent using an ngIf directive', () => {
-  let spectator: SpectatorHost<ButtonComponent>;
-  let element: HTMLButtonElement;
-
-  const createHost = createHostFactory({
-    component: ButtonComponent,
-    declarations: [MockComponent(IconComponent)],
-  });
-
-  it('should not have the icon-only class, if kirby-icon is inserted before text', () => {
-    spectator = createHost(
-      '<button kirby-button><kirby-icon name="close" *ngIf="true"></kirby-icon>Test</button>'
-    );
-    element = spectator.element as HTMLButtonElement;
-    expect(element).not.toHaveClass('icon-only');
-  });
-
-  it('should not have the icon-only class, if kirby-icon is inserted after text', () => {
-    spectator = createHost(
-      '<button kirby-button>Test<kirby-icon name="close" *ngIf="true"></kirby-icon></button>'
-    );
-    element = spectator.element as HTMLButtonElement;
-    expect(element).not.toHaveClass('icon-only');
-  });
-});

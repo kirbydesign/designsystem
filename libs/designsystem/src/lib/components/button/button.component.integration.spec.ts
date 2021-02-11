@@ -1,27 +1,28 @@
 import { RouterTestingModule } from '@angular/router/testing';
-import { SpectatorHost, createHostFactory } from '@ngneat/spectator';
 import { IonicModule, IonIcon } from '@ionic/angular';
+import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponent, MockComponents, MockDirectives } from 'ng-mocks';
 
+import { FitHeadingDirective } from '../../directives/fit-heading/fit-heading.directive';
+import { SizeDirective } from '../../directives/size/size.directive';
 import { DesignTokenHelper } from '../../helpers/design-token-helper';
 import { TestHelper } from '../../testing/test-helper';
+import { WindowRef } from '../../types/window-ref';
+import { CardComponent } from '../card/card.component';
+import { DropdownComponent } from '../dropdown/dropdown.component';
+import { EmptyStateComponent } from '../empty-state/empty-state.component';
+import { IconComponent } from '../icon/icon.component';
+import { ItemComponent } from '../item/item.component';
 import {
-  PageComponent,
-  PageContentComponent,
   PageActionsComponent,
   PageActionsDirective,
+  PageComponent,
+  PageContentComponent,
   PageTitleDirective,
   PageToolbarTitleDirective,
 } from '../page/page.component';
-import { FitHeadingDirective } from '../../directives/fit-heading/fit-heading.directive';
-import { SizeDirective } from '../../directives/size/size.directive';
+
 import { ButtonComponent } from './button.component';
-import { IconComponent } from '../icon/icon.component';
-import { EmptyStateComponent } from '../empty-state/empty-state.component';
-import { DropdownComponent } from '../dropdown/dropdown.component';
-import { CardComponent } from '../card/card.component';
-import { ItemComponent } from '../item/item.component';
-import { WindowRef } from '../../types/window-ref';
 
 const getColor = DesignTokenHelper.getColor;
 const size = DesignTokenHelper.size;
@@ -587,5 +588,31 @@ describe('ButtonComponent configured with text and icon', () => {
 
       expect(kirbyIcon).toHaveComputedStyle({ 'font-size': size('m') });
     });
+  });
+});
+
+describe('ButtonComponent using an ngIf directive', () => {
+  let spectator: SpectatorHost<ButtonComponent>;
+  let element: HTMLButtonElement;
+
+  const createHost = createHostFactory({
+    component: ButtonComponent,
+    declarations: [MockComponent(IconComponent)],
+  });
+
+  it('should not have the icon-only class, if kirby-icon is inserted before text', () => {
+    spectator = createHost(
+      '<button kirby-button><kirby-icon name="close" *ngIf="true"></kirby-icon>Test</button>'
+    );
+    element = spectator.element as HTMLButtonElement;
+    expect(element).not.toHaveClass('icon-only');
+  });
+
+  it('should not have the icon-only class, if kirby-icon is inserted after text', () => {
+    spectator = createHost(
+      '<button kirby-button>Test<kirby-icon name="close" *ngIf="true"></kirby-icon></button>'
+    );
+    element = spectator.element as HTMLButtonElement;
+    expect(element).not.toHaveClass('icon-only');
   });
 });
