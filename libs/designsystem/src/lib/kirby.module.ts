@@ -228,7 +228,7 @@ export class KirbyModule {
 
   constructor(
     modalController: ModalController,
-    @Optional() @Inject(ConfigToken) config: KirbyConfig
+    @Optional() @Inject(ConfigToken) config?: KirbyConfig
   ) {
     modalController.initialize(config && config.moduleRootRoutePath);
   }
