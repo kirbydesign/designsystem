@@ -26,11 +26,7 @@ export class ModalController implements OnDestroy {
     private alertHelper: AlertHelper,
     private modalNavigationService: ModalNavigationService,
     @Optional() @Inject(ROUTES) private routeConfig: Routes[]
-  ) {
-    console.log('**************************************');
-    console.log('ModalController constructorzzzz...');
-    console.log('**************************************');
-  }
+  ) {}
 
   async initialize(moduleRootRoutePath?: string) {
     const modalNavigation = await this.modalNavigationService.getModalNavigation(
