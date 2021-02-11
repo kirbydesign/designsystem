@@ -1,0 +1,27 @@
+name: Kirby CI/CD clean up branch deployment
+#on: delete
+on: push
+
+jobs:
+  delete_latest_deployment_for_branch:
+    name: Delete latest deployment for branch
+    # if: github.event.ref_type == 'branch'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get deployments for branch
+        id: get_branch_deployments
+        uses: octokit/request-action@v2.x
+        with:
+          route: GET /repos/:repository/deployments
+          repository: ${{ github.repository }}
+          ref: ${{ github.event.ref }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: "Get latest deployment"
+        id: get_latest_deployment
+        if: fromJson(steps.get_branch_deployments.outputs.data)[0] != null
+        run: echo "::set-output name=id::${{ fromJson(steps.get_branch_deployments.outputs.data)[0].id }}"
+      - name: Remove deployment
+        if: steps.get_latest_deployment.outputs.id != null
+        run: |
+          echo "Clean up for branch ${{ github.event.ref }} on deployment id ${{ steps.get_latest_deployment.outputs.id }}"
