@@ -22,12 +22,12 @@ import { FormFieldExampleComponent } from './form-field-example/form-field-examp
 import { GridExampleComponent } from './grid-example/grid-example.component';
 import { IconExampleComponent } from './icon-example/icon-example.component';
 import { ItemExampleComponent } from './item-example/item-example.component';
+import { ListLoadOnDemandExampleComponent } from './list-load-on-demand-example/list-load-on-demand-example.component';
 import { ListBoldTextOnRowSelectionExampleComponent } from './list/components/bold-text-on-row-selection';
 import { ListColoredItemsExampleComponent } from './list/components/colored-items';
 import { ListWithDividersExampleComponent } from './list/components/dividers';
 import { ListWithHeaderAndFooterExampleComponent } from './list/components/header-and-footer';
 import { ListItemsExampleComponent } from './list/components/items';
-import { ListLoadOnDemandExampleComponent } from './list/components/load-on-demand/list-load-on-demand-example.component';
 import { ListNoShapeExampleComponent } from './list/components/no-shape/list-no-shape-example.component';
 import { ListWithSectionsExampleComponent } from './list/components/sections';
 import { ListWithSectionsAndColoredItemsExampleComponent } from './list/components/sections-and-colored-items';
