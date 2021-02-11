@@ -16,7 +16,7 @@ jobs:
           echo "branchname: ${branchname}"
           branchname="${branchname##*/}"
           echo "Removed leading paths - branchname: ${branchname}"
-          branchname=$(tr [:upper:] [:lower:] <<< "$releasename")
+          branchname=$(tr [:upper:] [:lower:] <<< "$branchname")
           echo "Removed uppercase - branchname: ${branchname}"
           branchname="${branchname//[^a-zA-Z0-9]/-}"
           echo "Removed illegal chars - branchname: ${branchname}"
