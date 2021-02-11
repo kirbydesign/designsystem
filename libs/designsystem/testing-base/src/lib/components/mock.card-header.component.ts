@@ -1,4 +1,4 @@
-import { forwardRef, Component, Input } from '@angular/core';
+import { Component, forwardRef, Input } from '@angular/core';
 
 import { CardHeaderComponent } from '@kirbydesign/designsystem';
 
@@ -17,6 +17,7 @@ export class MockCardHeaderComponent {
   @Input() title: string;
   @Input() subtitle: string;
   @Input() isTitleBold: boolean;
+  @Input() flagged: 'success' | 'warning' | 'danger' | 'informational';
 }
 
 // #endregion
