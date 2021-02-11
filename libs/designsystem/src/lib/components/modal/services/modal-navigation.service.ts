@@ -28,12 +28,8 @@ export class ModalNavigationService {
     const flattenedRoutes: Routes = [].concat(...routeConfig);
     let modalRoutes: string[] = [];
     const moduleRootPaths = await this.getModuleRootPath(flattenedRoutes, moduleRootRoutePath);
-    if (moduleRootRoutePath) {
-      console.warn('ModalNavigationService.getModalRouteMap - moduleRootPaths:', moduleRootPaths);
-    }
     if (moduleRootPaths) {
       modalRoutes = this.getModalRoutePaths(flattenedRoutes, moduleRootPaths);
-      console.warn('ModalNavigationService.getModalRouteMap - modalRoutes:', modalRoutes);
     }
     return new Map(modalRoutes.map((modalRoute) => [modalRoute, modalRoute]));
   }

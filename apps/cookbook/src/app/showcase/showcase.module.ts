@@ -19,7 +19,7 @@ import { COMPONENT_DECLARATIONS, COMPONENT_EXPORTS, COMPONENT_IMPORTS } from './
     CommonModule,
     FormsModule,
     IonicModule,
-    KirbyModule.forChild({ moduleRootRoutePath: '/home/showcase/' }),
+    KirbyModule.forChild({ moduleRootRoutePath: '/home/showcase' }),
     IphoneModule,
   ],
   declarations: [
