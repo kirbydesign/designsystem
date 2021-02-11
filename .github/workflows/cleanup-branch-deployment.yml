@@ -1,4 +1,4 @@
-name: Kirby CI/CD clean up branch deployment
+name: Clean up branch deployment
 on:
   delete
 

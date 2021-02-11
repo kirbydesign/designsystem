@@ -1,4 +1,4 @@
-name: Kirby CI
+name: Build & Deploy Cookbok
 on:
   push
 
