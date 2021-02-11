@@ -7,28 +7,10 @@ defaults:
     shell: bash
 
 jobs:
-  test_string_replace:
-    name: Test bash string replace
-    runs-on: ubuntu-latest
-    steps:
-      - run: |
-          branchname="refs/heads/chore/github----dePLOYment#€%&#"
-          echo "branchname: ${branchname}"
-          branchname="${branchname##*/}"
-          echo "Removed leading paths - branchname: ${branchname}"
-          branchname=$(tr [:upper:] [:lower:] <<< "$branchname")
-          echo "Removed uppercase - branchname: ${branchname}"
-          branchname="${branchname//[^a-zA-Z0-9]/-}"
-          echo "Removed illegal chars - branchname: ${branchname}"
-          branchname=$(tr -s '-' '-' <<< "$branchname")
-          echo "Removed duplicated dashes - branchname: ${branchname}"
-          branchname="${branchname%%-}"
-          echo "Removed trailing dash - final branchname: ${branchname}"
           
   lint_and_unittest:
     name: Lint & unit test
     runs-on: ubuntu-latest
-    if: false
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
@@ -48,7 +30,6 @@ jobs:
   build_kirby:
     name: Build Kirby lib
     runs-on: ubuntu-latest
-    if: false
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
@@ -65,7 +46,6 @@ jobs:
     name: Deploy cookbook
     needs: [lint_and_unittest, build_kirby]
     runs-on: ubuntu-latest
-    if: false
     env:
       DOMAIN: ${{ github.ref == 'refs/heads/master' && 'kirby.design' || '650b277bd9a54e5cbadc.westeurope.aksapp.io' }}
     steps:
@@ -75,9 +55,21 @@ jobs:
         if: github.ref != 'refs/heads/master'
         run: |
           branchname="${GITHUB_REF##*/}"
-          releasename="kby-${branchname//[^a-zA-Z0-9]/-}"
-          releasename=$(tr [A-Z] [a-z] <<< "$releasename")
+          echo "Github branchname: ${branchname}"
+          branchname="${branchname##*/}"
+          echo "Removed leading paths - branchname: ${branchname}"
+          branchname=$(tr [:upper:] [:lower:] <<< "$branchname")
+          echo "Removed uppercase - branchname: ${branchname}"
+          branchname="${branchname//[^a-zA-Z0-9]/-}"
+          echo "Removed illegal chars - branchname: ${branchname}"
+          branchname=$(tr -s '-' '-' <<< "$branchname")
+          echo "Removed duplicated dashes - branchname: ${branchname}"
+          branchname="${branchname%%-}"
+          echo "Removed trailing dash - final branchname: ${branchname}"
+          releasename="kby-${branchname}"
           releasename=$(cut -c 1-53 <<< "$releasename")
+          echo "Releasename: ${releasename}"
+          echo "GH_DEPLOY_ENVIRONMENT=pr-${branchname}" >> $GITHUB_ENV
           echo "RELEASENAME=${releasename}" >> $GITHUB_ENV
       - name: Get release name
         if: github.ref == 'refs/heads/master'
@@ -99,7 +91,7 @@ jobs:
           route: POST /repos/:repository/deployments
           repository: ${{ github.repository }}
           ref: ${{ github.ref }}
-          environment: ${{ env.HOSTNAME }}
+          environment: ${{ env.GH_DEPLOY_ENVIRONMENT }}
           auto_merge: false
           required_contexts: '[]' # Skip commit checks
           mediaType: '{"previews": ["flash", "ant-man"]}' # some parameters need preview: https://docs.github.com/en/rest/reference/repos#list-deployment-statuses-preview-notices
