@@ -42,6 +42,7 @@ import {
 import { MockProgressCircleComponent } from './components/mock.progress-circle.component';
 import { MockRadioGroupComponent } from './components/mock.radio-group.component';
 import { MockRadioComponent } from './components/mock.radio.component';
+import { MockRangeComponent } from './components/mock.range.component';
 import { MockReorderListComponent } from './components/mock.reorder-list.component';
 import { MockRouterOutletComponent } from './components/mock.router-outlet.component';
 import { MockSegmentedControlComponent } from './components/mock.segmented-control.component';
@@ -98,6 +99,7 @@ export const MOCK_COMPONENTS = [
   MockProgressCircleComponent,
   MockRadioGroupComponent,
   MockRadioComponent,
+  MockRangeComponent,
   MockReorderListComponent,
   MockRouterOutletComponent,
   MockSegmentedControlComponent,
