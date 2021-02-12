@@ -72,26 +72,6 @@ header {
   font-family: courier new;
 }
 
-// .block {
-//   opacity: 0;
-//   //name duration timing delay
-//   animation: enter 1s ease-in-out 2.5s forwards;
-
-//   &--large {
-//     transform-origin: 0 0;
-//     animation: enter 1s ease-in-out 1s forwards;
-//   }
-
-//   &--medium {
-//     animation: enter 1s ease-in-out 1.5s forwards;
-//     width: 85%;
-//   }
-
-//   &--small {
-//     width: 40%;
-//   }
-// }
-
 .kirby-icon {
   display: none;
   @include media('>=large') {
