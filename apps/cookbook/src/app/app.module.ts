@@ -1,19 +1,18 @@
-import { registerLocaleData } from '@angular/common';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import localeEn from '@angular/common/locales/en-GB';
-import { LOCALE_ID, NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-import { KirbyModule } from '@kirbydesign/designsystem';
+import { FormsModule } from '@angular/forms';
+import { registerLocaleData } from '@angular/common';
+import localeEn from '@angular/common/locales/en-GB';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { IntroComponent } from './intro/intro.component';
-import { HeaderComponent } from './page/header/header.component';
 import { SideNavComponent } from './page/side-nav/side-nav.component';
+import { HeaderComponent } from './page/header/header.component';
+import { IntroComponent } from './intro/intro.component';
+import { KirbyModule } from '@kirbydesign/designsystem';
 import { FirebaseModule } from './shared/firebase/firebase.module';
 
 registerLocaleData(localeEn);
