@@ -71,8 +71,8 @@ export class ButtonComponent implements AfterContentInit {
   ngAfterContentInit(): void {
     if (this.iconElementRef && this.iconElementRef.nativeElement) {
       const iconElement = this.iconElementRef.nativeElement;
-      const prev = this.findNonCommentSibling(iconElement, 'previousSibling');
-      const next = this.findNonCommentSibling(iconElement, 'nextSibling');
+      const prev = this.findNonCommentSibling(iconElement, 'previous');
+      const next = this.findNonCommentSibling(iconElement, 'next');
       if (prev) {
         this._hasSlottedContent = true;
         this._isIconLeft = false;
@@ -86,13 +86,11 @@ export class ButtonComponent implements AfterContentInit {
     }
   }
 
-  private findNonCommentSibling(
-    nativeElement: HTMLElement,
-    direction: 'nextSibling' | 'previousSibling'
-  ) {
-    const sibling = nativeElement[direction] as HTMLElement;
+  private findNonCommentSibling(nativeElement: HTMLElement, direction: 'next' | 'previous') {
+    const sibling =
+      direction === 'previous' ? nativeElement.previousSibling : nativeElement.nextSibling;
     if (sibling != null && sibling.nodeName === '#comment') {
-      return this.findNonCommentSibling(sibling, direction);
+      return this.findNonCommentSibling(sibling as HTMLElement, direction);
     }
     return sibling;
   }
