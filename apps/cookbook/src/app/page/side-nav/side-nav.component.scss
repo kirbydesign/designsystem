@@ -47,7 +47,7 @@ $page-side-nav-width: 16.625rem;
 
 .side-nav {
   list-style: none;
-  padding: 2rem $page-gutter;
+  padding: 40px 0;
   margin: 0;
 
   &--sub {
@@ -56,7 +56,7 @@ $page-side-nav-width: 16.625rem;
     transition: 0.15s transform ease-in-out;
     transform-origin: 0 0;
     will-change: height, transform;
-    margin-left: -1rem;
+    margin-left: 0;
     padding: 0;
 
     &.is-selected {
@@ -70,12 +70,11 @@ $page-side-nav-width: 16.625rem;
     color: get-text-color('black');
     font-weight: 200;
     padding: 0.75rem 0 0.75rem 0.75rem;
-    margin-left: -1rem;
+    margin-left: 0;
     display: block;
     font-size: 1.2em;
     display: flex;
     align-items: center;
-    //border-top: 1px solid red;
     &:hover,
     &:focus {
       background-color: get-color('medium');
@@ -88,10 +87,6 @@ $page-side-nav-width: 16.625rem;
 
   .is-selected > &-header {
     font-weight: bold;
-  }
-
-  &--sub &__item {
-    padding-left: 4.25rem; //Magic... :)
   }
 }
 

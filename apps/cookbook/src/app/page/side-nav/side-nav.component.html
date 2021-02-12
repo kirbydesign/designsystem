@@ -2,73 +2,32 @@
   <button class="side-menu__close-btn">
     <kirby-icon name="close" size="large"></kirby-icon>
   </button>
+
   <li>
-    <a routerLink="/home/intro" [routerLinkActive]="'is-selected'" class="side-nav__item">Intro</a>
-  </li>
-  <li>
-    <a
-      class="side-nav__item side-nav-header"
-      routerLink="/home/component-status"
-      [routerLinkActive]="'is-selected'"
-      [routerLinkActiveOptions]="{ exact: false }"
-    >
-      <svg class="icon">
-        <use xlink:href="../../assets/icons/icon-sprite.svg#icon-make-group"></use>
-      </svg>
-      Component Status
-    </a>
-  </li>
-  <li>
-    <a
-      class="side-nav__item side-nav-header"
-      routerLink="/home/changelog"
-      [routerLinkActive]="'is-selected'"
-      [routerLinkActiveOptions]="{ exact: false }"
-    >
-      <kirby-icon name="pension" size="md"></kirby-icon>
-      Changelog
-    </a>
-  </li>
-  <li routerLinkActive="is-selected" [routerLinkActiveOptions]="{ exact: false }">
-    <a
-      class="side-nav__item side-nav-header"
-      [routerLinkActive]="'is-selected'"
-      [routerLinkActiveOptions]="{ exact: false }"
-    >
-      <svg class="icon">
-        <use xlink:href="../../assets/icons/icon-sprite.svg#icon-point-down"></use>
-      </svg>
-      Actions
-    </a>
     <!-- prettier-ignore -->
     <ul class="side-nav side-nav--sub">
-      <li><a routerLink="showcase/action-sheet" [routerLinkActive]="'is-selected'" class="side-nav__item">Action Sheet</a></li>
-      <li><a routerLink="showcase/fab-sheet" [routerLinkActive]="'is-selected'" class="side-nav__item">FAB Sheet</a></li>
-      <li><a routerLink="showcase/alert" [routerLinkActive]="'is-selected'" class="side-nav__item">Alert</a></li>
-      <li><a routerLink="showcase/button" [routerLinkActive]="'is-selected'" class="side-nav__item">Button</a></li>
-      <li><a routerLink="showcase/slide-button" [routerLinkActive]="'is-selected'" class="side-nav__item">Slide Button</a></li>
-      <li><a routerLink="showcase/calendar" [routerLinkActive]="'is-selected'" class="side-nav__item">Calendar</a></li>
-      <li><a routerLink="showcase/checkbox" [routerLinkActive]="'is-selected'" class="side-nav__item">Checkbox</a></li>
-      <li><a routerLink="showcase/radio" [routerLinkActive]="'is-selected'" class="side-nav__item">Radio</a></li>
-      <li><a routerLink="showcase/chip" [routerLinkActive]="'is-selected'" class="side-nav__item">Chip</a></li>
-      <li><a routerLink="showcase/dropdown" [routerLinkActive]="'is-selected'" class="side-nav__item">Dropdown</a></li>
-      <li><a routerLink="showcase/empty-state" [routerLinkActive]="'is-selected'" class="side-nav__item">Empty State</a></li>
-      <li><a routerLink="showcase/form-field" [routerLinkActive]="'is-selected'" class="side-nav__item">Form Field</a></li>
-      <li><a routerLink="showcase/modal" [routerLinkActive]="'is-selected'" class="side-nav__item">Modal</a></li>
-      <li><a routerLink="showcase/loading-overlay" [routerLinkActive]="'is-selected'" class="side-nav__item">Loading Overlay</a></li>
-      <li><a routerLink="showcase/segmented-control" [routerLinkActive]="'is-selected'" class="side-nav__item">Segmented Control</a></li>
-      <li><a routerLink="showcase/toast" [routerLinkActive]="'is-selected'" class="side-nav__item">Toast</a></li>
-      <li><a routerLink="showcase/toggle" [routerLinkActive]="'is-selected'" class="side-nav__item">Toggle</a></li>
-      <li><a routerLink="showcase/toggle-button" [routerLinkActive]="'is-selected'" class="side-nav__item">Toggle Button</a></li>
-    </ul>
+    <li><a routerLink="showcase/action-sheet" [routerLinkActive]="'is-selected'" class="side-nav__item">Action Sheet</a></li>
+    <li><a routerLink="showcase/fab-sheet" [routerLinkActive]="'is-selected'" class="side-nav__item">FAB Sheet</a></li>
+    <li><a routerLink="showcase/alert" [routerLinkActive]="'is-selected'" class="side-nav__item">Alert</a></li>
+    <li><a routerLink="showcase/button" [routerLinkActive]="'is-selected'" class="side-nav__item">Button</a></li>
+    <li><a routerLink="showcase/slide-button" [routerLinkActive]="'is-selected'" class="side-nav__item">Slide Button</a></li>
+    <li><a routerLink="showcase/calendar" [routerLinkActive]="'is-selected'" class="side-nav__item">Calendar</a></li>
+    <li><a routerLink="showcase/checkbox" [routerLinkActive]="'is-selected'" class="side-nav__item">Checkbox</a></li>
+    <li><a routerLink="showcase/radio" [routerLinkActive]="'is-selected'" class="side-nav__item">Radio</a></li>
+    <li><a routerLink="showcase/chip" [routerLinkActive]="'is-selected'" class="side-nav__item">Chip</a></li>
+    <li><a routerLink="showcase/dropdown" [routerLinkActive]="'is-selected'" class="side-nav__item">Dropdown</a></li>
+    <li><a routerLink="showcase/empty-state" [routerLinkActive]="'is-selected'" class="side-nav__item">Empty State</a></li>
+    <li><a routerLink="showcase/form-field" [routerLinkActive]="'is-selected'" class="side-nav__item">Form Field</a></li>
+    <li><a routerLink="showcase/modal" [routerLinkActive]="'is-selected'" class="side-nav__item">Modal</a></li>
+    <li><a routerLink="showcase/loading-overlay" [routerLinkActive]="'is-selected'" class="side-nav__item">Loading Overlay</a></li>
+    <li><a routerLink="showcase/segmented-control" [routerLinkActive]="'is-selected'" class="side-nav__item">Segmented Control</a></li>
+    <li><a routerLink="showcase/toast" [routerLinkActive]="'is-selected'" class="side-nav__item">Toast</a></li>
+    <li><a routerLink="showcase/toggle" [routerLinkActive]="'is-selected'" class="side-nav__item">Toggle</a></li>
+    <li><a routerLink="showcase/toggle-button" [routerLinkActive]="'is-selected'" class="side-nav__item">Toggle Button</a></li>
+  </ul>
   </li>
-  <li routerLinkActive="is-selected" [routerLinkActiveOptions]="{ exact: false }">
-    <a class="side-nav__item side-nav-header">
-      <svg class="icon">
-        <use xlink:href="../../assets/icons/icon-sprite.svg#icon-insert-template"></use>
-      </svg>
-      Structure
-    </a>
+
+  <li>
     <!-- prettier-ignore -->
     <ul class="side-nav side-nav--sub">
       <li><a routerLink="showcase/accordion" [routerLinkActive]="'is-selected'" class="side-nav__item">Accordion</a></li>
@@ -87,36 +46,25 @@
       <li><a routerLink="showcase/toolbar" [routerLinkActive]="'is-selected'" class="side-nav__item">Toolbar</a></li>
     </ul>
   </li>
-  <li routerLinkActive="is-selected" [routerLinkActiveOptions]="{ exact: false }">
-    <a class="side-nav__item side-nav-header">
-      <svg class="icon">
-        <use xlink:href="../../assets/icons/icon-sprite.svg#icon-sleepy"></use>
-      </svg>
-      Other
-    </a>
+
+  <li>
     <!-- prettier-ignore -->
     <ul class="side-nav side-nav--sub">
-      <li><a routerLink="showcase/avatar" [routerLinkActive]="'is-selected'" class="side-nav__item">Avatar</a></li>
-      <li><a routerLink="showcase/badge" [routerLinkActive]="'is-selected'" class="side-nav__item">Badge</a></li>
-      <li><a routerLink="showcase/chart" [routerLinkActive]="'is-selected'" class="side-nav__item">Charts</a></li>
-      <li><a routerLink="showcase/stock-chart" [routerLinkActive]="'is-selected'" class="side-nav__item">Stock Chart</a></li>
-      <li><a routerLink="showcase/colors" [routerLinkActive]="'is-selected'" class="side-nav__item">Colors</a></li>
-      <li><a routerLink="showcase/flag" [routerLinkActive]="'is-selected'" class="side-nav__item">Flag</a></li>
-      <li><a routerLink="showcase/icon" [routerLinkActive]="'is-selected'" class="side-nav__item">Icon</a></li>
-      <li><a routerLink="showcase/progress-circle" [routerLinkActive]="'is-selected'" class="side-nav__item">Progress Circle</a></li>
-      <li><a routerLink="showcase/spinner" [routerLinkActive]="'is-selected'" class="side-nav__item">Spinner</a></li>
-    </ul>
+     <li><a routerLink="showcase/avatar" [routerLinkActive]="'is-selected'" class="side-nav__item">Avatar</a></li>
+     <li><a routerLink="showcase/badge" [routerLinkActive]="'is-selected'" class="side-nav__item">Badge</a></li>
+     <li><a routerLink="showcase/chart" [routerLinkActive]="'is-selected'" class="side-nav__item">Charts</a></li>
+     <li><a routerLink="showcase/stock-chart" [routerLinkActive]="'is-selected'" class="side-nav__item">Stock Chart</a></li>
+     <li><a routerLink="showcase/colors" [routerLinkActive]="'is-selected'" class="side-nav__item">Colors</a></li>
+     <li><a routerLink="showcase/flag" [routerLinkActive]="'is-selected'" class="side-nav__item">Flag</a></li>
+     <li><a routerLink="showcase/icon" [routerLinkActive]="'is-selected'" class="side-nav__item">Icon</a></li>
+     <li><a routerLink="showcase/progress-circle" [routerLinkActive]="'is-selected'" class="side-nav__item">Progress Circle</a></li>
+     <li><a routerLink="showcase/spinner" [routerLinkActive]="'is-selected'" class="side-nav__item">Spinner</a></li>
+   </ul>
   </li>
-  <li routerLinkActive="is-selected" [routerLinkActiveOptions]="{ exact: false }">
-    <a class="side-nav__item side-nav-header">
-      <svg class="icon">
-        <use xlink:href="../../assets/icons/icon-sprite.svg#icon-font-size"></use>
-      </svg>
-      Typography
-    </a>
+  <li>
     <!-- prettier-ignore -->
     <ul class="side-nav side-nav--sub">
-      <li><a routerLink="showcase/fonts" [routerLinkActive]="'is-selected'" class="side-nav__item">Font sizes</a></li>
-    </ul>
+    <li><a routerLink="showcase/fonts" [routerLinkActive]="'is-selected'" class="side-nav__item">Typography</a></li>
+  </ul>
   </li>
 </ul>
