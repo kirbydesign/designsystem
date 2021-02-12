@@ -591,7 +591,7 @@ describe('ButtonComponent configured with text and icon', () => {
   });
 });
 
-describe('ButtonComponent using an ngIf directive', () => {
+describe('ButtonComponent configured with text and icon using an ngIf directive', () => {
   let spectator: SpectatorHost<ButtonComponent>;
   let element: HTMLButtonElement;
 
