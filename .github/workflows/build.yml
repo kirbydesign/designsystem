@@ -165,7 +165,6 @@ jobs:
           # deployment logic goes here
           sleep 30
       - name: Set deployment status to success
-        if: github.ref != 'refs/heads/master'
         id: successful_deployment
         uses: octokit/request-action@v2.x
         with:
