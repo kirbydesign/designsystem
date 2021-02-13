@@ -46,6 +46,7 @@ jobs:
 
   deploy_to_cookbook:
     name: Deploy cookbook
+    if: github.event_name == 'pull_request' || contains(github.event.head_commit.message, 'Bumping version to')
     needs: [lint_and_unittest, build_kirby]
     runs-on: ubuntu-latest
     env:
