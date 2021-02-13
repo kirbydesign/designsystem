@@ -93,7 +93,7 @@ jobs:
         with:
           route: POST /repos/:repository/deployments
           repository: ${{ github.repository }}
-          ref: ${{ github.ref }}
+          ref: ${{ github.event_name == 'pull_request' &&  github.head_ref || github.ref }}
           environment: ${{ env.GH_DEPLOY_ENVIRONMENT }}
           production_environment: ${{ github.ref == 'refs/heads/master' }}
           auto_merge: false
