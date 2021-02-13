@@ -1,8 +1,8 @@
 name: Build & Deploy Cookbok
+
 on:
   push: # TODO: Change to `release` event when our release workflow is in place
-    branches:
-      - master
+    branches: master
   pull_request:
 
 defaults:
