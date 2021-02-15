@@ -3,14 +3,14 @@ import { NgModule } from '@angular/core';
 
 import { KirbyModule } from '@kirbydesign/designsystem';
 
-import { ListBoldTextOnRowSelectionExampleComponent } from './components/bold-text-on-row-selection';
-import { ListColoredItemsExampleComponent } from './components/colored-items';
-import { ListWithDividersExampleComponent } from './components/dividers';
-import { ListWithHeaderAndFooterExampleComponent } from './components/header-and-footer';
-import { ListItemsExampleComponent } from './components/items';
-import { ListWithSectionsExampleComponent } from './components/sections';
-import { ListWithSectionsAndColoredItemsExampleComponent } from './components/sections-and-colored-items';
-import { ListSelectableItemsExampleComponent } from './components/selectable-items';
+import { ListBoldTextOnRowSelectionExampleComponent } from './examples/bold-text-on-row-selection';
+import { ListColoredItemsExampleComponent } from './examples/colored-items';
+import { ListWithDividersExampleComponent } from './examples/dividers';
+import { ListWithHeaderAndFooterExampleComponent } from './examples/header-and-footer';
+import { ListItemsExampleComponent } from './examples/items';
+import { ListWithSectionsExampleComponent } from './examples/sections';
+import { ListWithSectionsAndColoredItemsExampleComponent } from './examples/sections-and-colored-items';
+import { ListSelectableItemsExampleComponent } from './examples/selectable-items';
 
 const listExamples = [
   ListBoldTextOnRowSelectionExampleComponent,
