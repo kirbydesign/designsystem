@@ -190,9 +190,9 @@ export class RadioGroupComponent implements AfterContentInit {
     this.projectedRadioButtons.changes.subscribe(() => {
       this.refreshStateFromProjectedContent();
 
-      // Ensure disabled state propagates when re-rendering projected radios.
-      // setTimeout prevents ExpressionChangedAfterItHasBeenCheckedError when updating the DOM in QueryList.changes:
       if (this.disabled) {
+        // Ensure disabled state propagates when re-rendering projected radios.
+        // setTimeout prevents ExpressionChangedAfterItHasBeenCheckedError when updating the DOM in QueryList.changes:
         setTimeout(() => this.setProjectedRadiosDisabledState(this.disabled));
       }
     });
