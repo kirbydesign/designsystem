@@ -18,8 +18,8 @@ const config = {
   <kirby-radio disabled="true" value="bacon" text="Disabled checked"></kirby-radio>
 </kirby-radio-group>
 
-<kirby-radio-group>
-  <kirby-radio hasError="true" text="Has error"></kirby-radio>
+<kirby-radio-group [hasError]="true">
+  <kirby-radio text="Has error"></kirby-radio>
 </kirby-radio-group>`,
 };
 

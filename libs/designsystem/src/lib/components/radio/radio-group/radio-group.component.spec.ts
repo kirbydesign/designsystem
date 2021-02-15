@@ -415,6 +415,20 @@ describe('RadioGroupComponent', () => {
                 });
               });
 
+              describe('hasError', () => {
+                it('should not have error state by default', () => {
+                  expect(spectator.component.hasError).toBeFalse;
+                  expect(spectator.element.classList).not.toContain('error');
+                });
+
+                it('should apply class `error` when hasError=true', () => {
+                  spectator.setInput('hasError', true);
+                  spectator.detectChanges();
+
+                  expect(spectator.element.classList).toContain('error');
+                });
+              });
+
               describe('when updating items', () => {
                 describe('by shifting items down', () => {
                   it('should have selected index corresponding to the selected data item', () => {

@@ -44,10 +44,6 @@ describe('RadioComponent', () => {
       expect(spectator.component.disabled).toBe(undefined);
     });
 
-    it('should not have error', () => {
-      expect(spectator.component.hasError).toBe(false);
-    });
-
     it('should get tabindex from ion-radio', () => {
       expect(spectator.component.buttonTabIndex).toBe(-1);
 
@@ -204,17 +200,6 @@ describe('RadioComponent', () => {
         it('should have correct checkmark styling', () => {
           expect(radioCheckmark).toHaveComputedStyle({
             'background-color': getColor('medium'),
-          });
-        });
-      });
-
-      describe('error', () => {
-        it('should have correct border style', () => {
-          spectator.setInput('hasError', true);
-          spectator.detectChanges();
-          expect(radioIcon).toHaveComputedStyle({
-            'border-width': '1px',
-            'border-color': getColor('danger'),
           });
         });
       });

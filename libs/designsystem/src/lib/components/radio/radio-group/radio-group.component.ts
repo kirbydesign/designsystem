@@ -5,6 +5,7 @@ import {
   ContentChild,
   ContentChildren,
   EventEmitter,
+  HostBinding,
   Output,
   QueryList,
   TemplateRef,
@@ -34,6 +35,10 @@ export class RadioGroupComponent implements AfterContentInit {
     this._disabled = value;
     this.setProjectedRadiosDisabledState(value);
   }
+
+  @HostBinding('class.error') // Used to style radios with error state
+  @Input()
+  hasError: boolean = false;
 
   get items(): string[] | any[] {
     return this._items || []; // Ensure items return empty array even if set to null/undefined

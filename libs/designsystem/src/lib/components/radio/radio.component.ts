@@ -21,10 +21,6 @@ export class RadioComponent {
   @Input()
   size?: 'xs' | 'sm' | 'md';
 
-  @HostBinding('class.error')
-  @Input()
-  hasError: boolean = false;
-
   @Input()
   disabled: boolean;
   @HostBinding('attr.disabled')
