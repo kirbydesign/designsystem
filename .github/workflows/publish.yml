@@ -37,6 +37,4 @@ jobs:
       - name: Build package and publish to npm
         run: npm run publish
       - name: Push version bump and tag to Github
-        run: |
-          git push 
-          git push --tags
+        run: git push --follow-tags
