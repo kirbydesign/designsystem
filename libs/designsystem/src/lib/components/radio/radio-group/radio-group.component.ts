@@ -207,7 +207,7 @@ export class RadioGroupComponent implements AfterContentInit {
 
   private refreshStateFromProjectedContent() {
     if (!!this._customItemTemplate) return; // Only refresh on changes to projected content, not when re-rendering custom template
-    this.changeDetectionRef.markForCheck(); // Ensure changes to projected content triggers change detection
+    this.changeDetectionRef.markForCheck(); // Ensure changes to projected content gets checked in next change detection cycle
     this.refreshSelectionState(); // Sync selected index and value from projected radios
   }
 
