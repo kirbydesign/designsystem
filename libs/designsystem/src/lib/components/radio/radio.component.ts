@@ -35,8 +35,7 @@ export class RadioComponent {
     this.ionRadioElement && this.ionRadioElement.nativeElement.focus();
   }
 
-  private idGenerator = UniqueIdGenerator.scopedTo('kirby-radio-label');
-  _labelId = this.idGenerator.next();
+  _labelId = UniqueIdGenerator.scopedTo('kirby-radio-label').next();
 
   @ViewChild(IonRadio, { read: ElementRef, static: true }) private ionRadioElement?: ElementRef<
     HTMLIonRadioElement

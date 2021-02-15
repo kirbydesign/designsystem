@@ -33,8 +33,7 @@ export class FormFieldComponent
   private element: HTMLElement;
   private inputElement: HTMLInputElement | HTMLTextAreaElement;
   private isTouch: boolean;
-  private idGenerator = UniqueIdGenerator.scopedTo('kirby-form-field-label');
-  _labelId = this.idGenerator.next();
+  _labelId = UniqueIdGenerator.scopedTo('kirby-form-field-label').next();
 
   @Input() label: string;
   @Input() message: string;
