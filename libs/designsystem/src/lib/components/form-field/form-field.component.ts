@@ -15,7 +15,7 @@ import {
 import { PlatformService } from '../../helpers/platform.service';
 import { UniqueIdGenerator } from '../../helpers/unique-id-generator.helper';
 import { WindowRef } from '../../types/window-ref';
-import { RadioGroupComponent } from '../radio';
+import { RadioGroupComponent } from '../radio/radio-group/radio-group.component';
 
 import { InputCounterComponent } from './input-counter/input-counter.component';
 import { InputComponent } from './input/input.component';
