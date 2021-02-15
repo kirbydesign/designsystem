@@ -342,10 +342,6 @@ describe('FormFieldComponent', () => {
         label = spectator.queryHost('label');
       });
 
-      it('should render the radio-group', () => {
-        expect(radioGroupElement).toBeTruthy();
-      });
-
       it('should render the radio-group as a direct descendant', () => {
         expect(radioGroupElement).toBeTruthy();
         expect(radioGroupElement.parentElement).toEqual(spectator.element);
