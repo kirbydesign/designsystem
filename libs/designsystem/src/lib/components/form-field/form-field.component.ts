@@ -13,15 +13,13 @@ import {
 } from '@angular/core';
 
 import { PlatformService } from '../../helpers/platform.service';
+import { UniqueIdGenerator } from '../../helpers/unique-id-generator.helper';
 import { WindowRef } from '../../types/window-ref';
 import { RadioGroupComponent } from '../radio';
 
 import { InputCounterComponent } from './input-counter/input-counter.component';
 import { InputComponent } from './input/input.component';
 import { TextareaComponent } from './textarea/textarea.component';
-
-// Counter for generating unique element ids
-let uniqueId = 0;
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -35,7 +33,8 @@ export class FormFieldComponent
   private element: HTMLElement;
   private inputElement: HTMLInputElement | HTMLTextAreaElement;
   private isTouch: boolean;
-  _labelId = `kirby-form-field-label-${uniqueId++}`;
+  private idGenerator = UniqueIdGenerator.scopedTo('kirby-form-field-label');
+  _labelId = this.idGenerator.next();
 
   @Input() label: string;
   @Input() message: string;
