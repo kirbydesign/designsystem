@@ -87,23 +87,21 @@ header {
 .logo {
   &-text {
     opacity: 0;
-    animation: enter 0.6s ease-in-out 1.5s forwards;
+    animation: enter 450ms ease-in-out 500ms forwards;
   }
   &-large-rect {
     opacity: 0;
-    animation: enter 0.6s ease-in-out 1.8s forwards;
+    animation: enter 450ms ease-in-out 900ms forwards;
   }
   &-medium-rect {
     opacity: 0;
-    transform-origin: top center;
-    transform: scale(0);
-    animation: enter-pop 0.4s ease-in-out 2s forwards;
+    transform-origin: center top;
+    animation: enter-pop 300ms ease-in-out 1200ms forwards;
   }
   &-small-rect {
     opacity: 0;
     transform-origin: center;
-    transform: scale(0);
-    animation: enter-pop 0.4s ease-in-out 2.2s forwards;
+    animation: enter-pop 300ms ease-in-out 1400ms forwards;
   }
 }
 
@@ -117,14 +115,14 @@ header {
 }
 @keyframes enter-pop {
   0% {
-    opacity: 0;
     transform: scale(0);
+    opacity: 1;
   }
   89% {
     transform: scale(1.2);
   }
   100% {
-    opacity: 1;
     transform: scale(1);
+    opacity: 1;
   }
 }
