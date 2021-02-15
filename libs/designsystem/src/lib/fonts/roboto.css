@@ -21,3 +21,11 @@
   font-display: swap;
   src: url('./assets/roboto-bold-webfont.woff2') format('woff2');
 }
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url('./assets/roboto-black-webfont.woff2') format('woff2');
+}
