@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 
 import { FormFieldComponent } from '@kirbydesign/designsystem';
 
@@ -10,7 +10,7 @@ const config = {
   text="Enable input">
 </kirby-checkbox>
 <kirby-form-field #formfield>
-  <input kirby-input [disabled]="!inputEnabled" placeholder="Enable to focus (+scroll into view on device)" />
+  <input kirby-input [size]="size" [disabled]="!inputEnabled" placeholder="Enable to focus (+scroll into view on device)" />
 </kirby-form-field>`,
   codeSnippet: `import { FormFieldComponent } from '@kirbydesign/designsystem';
   
@@ -40,6 +40,8 @@ export class MyComponent {
   ],
 })
 export class FormFieldFocusExampleComponent {
+  @Input() size: string;
+
   @ViewChild('formfield', { static: true })
   private formfield: FormFieldComponent;
 

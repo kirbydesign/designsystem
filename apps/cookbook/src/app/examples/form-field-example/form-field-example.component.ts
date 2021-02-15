@@ -9,7 +9,10 @@ import { WindowRef } from '@kirbydesign/designsystem/types';
 })
 export class FormFieldExampleComponent {
   constructor(private window: WindowRef) {}
-
+  size: string = 'lg';
+  onSizeChange(size: string) {
+    this.size = size;
+  }
   showDummyKeyboard = !!this.window.sessionStorage.getItem('kirby-cookbook-show-dummy-keyboard');
 
   toggleDummyKeyboard(show: boolean) {

@@ -36,12 +36,9 @@ export class InputComponent implements OnChanges {
     }
   }
 
-  @Input() size: InputSize = InputSize.large;
-
   @HostBinding('class')
-  get _cssClass() {
-    return [this.size];
-  }
+  @Input()
+  size: InputSize = InputSize.large;
 
   /**
    * Removes padding, width, rounded borders and drop-shadow when set to `true`.

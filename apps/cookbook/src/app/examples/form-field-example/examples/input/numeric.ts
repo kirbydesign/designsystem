@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 const config = {
   selector: 'cookbook-form-field-input-numeric-example',
   template: `<kirby-form-field label="Numeric input">
-  <input type="number" kirby-input />
+  <input type="number" kirby-input [size]="size" />
 </kirby-form-field>`,
 };
 
@@ -13,4 +13,5 @@ const config = {
 })
 export class FormFieldInputNumericExampleComponent {
   template: string = config.template;
+  @Input() size: string;
 }

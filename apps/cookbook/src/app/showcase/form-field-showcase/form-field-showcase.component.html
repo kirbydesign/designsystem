@@ -1,13 +1,20 @@
-<h2>Input Large (default)</h2>
-
+<h2>Input</h2>
+<cookbook-form-field-example-configuration
+  [size]="size"
+  (sizeChanged)="setSize($event)"
+></cookbook-form-field-example-configuration>
 <h3>Default</h3>
 <cookbook-example-viewer [html]="inputDefaultExample.template">
-  <cookbook-form-field-input-example #inputDefaultExample></cookbook-form-field-input-example>
+  <cookbook-form-field-input-example
+    [size]="size"
+    #inputDefaultExample
+  ></cookbook-form-field-input-example>
 </cookbook-example-viewer>
 
 <h3>Label</h3>
 <cookbook-example-viewer [html]="inputLabelExample.template">
   <cookbook-form-field-input-label-example
+    [size]="size"
     #inputLabelExample
   ></cookbook-form-field-input-label-example>
 </cookbook-example-viewer>
@@ -15,6 +22,7 @@
 <h3>Label & Message</h3>
 <cookbook-example-viewer [html]="inputLabelMessageExample.template">
   <cookbook-form-field-input-label-message-example
+    [size]="size"
     #inputLabelMessageExample
   ></cookbook-form-field-input-label-message-example>
 </cookbook-example-viewer>
@@ -22,6 +30,7 @@
 <h3>Character counter</h3>
 <cookbook-example-viewer [html]="inputCounterExample.template">
   <cookbook-form-field-input-counter-example
+    [size]="size"
     #inputCounterExample
   ></cookbook-form-field-input-counter-example>
 </cookbook-example-viewer>
@@ -29,6 +38,7 @@
 <h3>Numeric</h3>
 <cookbook-example-viewer [html]="inputNumericExample.template">
   <cookbook-form-field-input-numeric-example
+    [size]="size"
     #inputNumericExample
   ></cookbook-form-field-input-numeric-example>
 </cookbook-example-viewer>
@@ -36,6 +46,7 @@
 <h3>Disabled</h3>
 <cookbook-example-viewer [html]="inputDisabledExample.template">
   <cookbook-form-field-input-disabled-example
+    [size]="size"
     #inputDisabledExample
   ></cookbook-form-field-input-disabled-example>
 </cookbook-example-viewer>
@@ -43,6 +54,7 @@
 <h3>Error</h3>
 <cookbook-example-viewer [html]="inputErrorExample.template">
   <cookbook-form-field-input-error-example
+    [size]="size"
     #inputErrorExample
   ></cookbook-form-field-input-error-example>
 </cookbook-example-viewer>
@@ -50,71 +62,17 @@
 <h3>Borderless</h3>
 <cookbook-example-viewer [html]="inputBorderlessExample.template">
   <cookbook-form-field-input-borderless-example
+    [size]="size"
     #inputBorderlessExample
   ></cookbook-form-field-input-borderless-example>
 </cookbook-example-viewer>
 
 <h3>Focus programmatically</h3>
 <cookbook-example-viewer [html]="focusExample.template" [ts]="focusExample.codeSnippet">
-  <cookbook-form-field-focus-example #focusExample></cookbook-form-field-focus-example>
-</cookbook-example-viewer>
-
-<h2>Input Medium</h2>
-
-<h3>Default</h3>
-<cookbook-example-viewer [html]="mediumInputDefaultExample.template">
-  <cookbook-form-field-input-medium-example
-    #mediumInputDefaultExample
-  ></cookbook-form-field-input-medium-example>
-</cookbook-example-viewer>
-
-<h3>Label</h3>
-<cookbook-example-viewer [html]="inputMediumLabelExample.template">
-  <cookbook-form-field-input-medium-label-example
-    #inputMediumLabelExample
-  ></cookbook-form-field-input-medium-label-example>
-</cookbook-example-viewer>
-
-<h3>Label & Message</h3>
-<cookbook-example-viewer [html]="inputMediumLabelMessageExample.template">
-  <cookbook-form-field-input-medium-label-message-example
-    #inputMediumLabelMessageExample
-  ></cookbook-form-field-input-medium-label-message-example>
-</cookbook-example-viewer>
-
-<h3>Character counter</h3>
-<cookbook-example-viewer [html]="inputMediumCounterExample.template">
-  <cookbook-form-field-input-medium-counter-example
-    #inputMediumCounterExample
-  ></cookbook-form-field-input-medium-counter-example>
-</cookbook-example-viewer>
-
-<h3>Numeric</h3>
-<cookbook-example-viewer [html]="inputMediumNumericExample.template">
-  <cookbook-form-field-input-medium-numeric-example
-    #inputMediumNumericExample
-  ></cookbook-form-field-input-medium-numeric-example>
-</cookbook-example-viewer>
-
-<h3>Disabled</h3>
-<cookbook-example-viewer [html]="inputMediumDisabledExample.template">
-  <cookbook-form-field-input-medium-disabled-example
-    #inputMediumDisabledExample
-  ></cookbook-form-field-input-medium-disabled-example>
-</cookbook-example-viewer>
-
-<h3>Error</h3>
-<cookbook-example-viewer [html]="inputMediumErrorExample.template">
-  <cookbook-form-field-input-medium-error-example
-    #inputMediumErrorExample
-  ></cookbook-form-field-input-medium-error-example>
-</cookbook-example-viewer>
-
-<h3>Borderless</h3>
-<cookbook-example-viewer [html]="inputMediumBorderlessExample.template">
-  <cookbook-form-field-input-medium-borderless-example
-    #inputMediumBorderlessExample
-  ></cookbook-form-field-input-medium-borderless-example>
+  <cookbook-form-field-focus-example
+    [size]="size"
+    #focusExample
+  ></cookbook-form-field-focus-example>
 </cookbook-example-viewer>
 
 <h2>Textarea</h2>

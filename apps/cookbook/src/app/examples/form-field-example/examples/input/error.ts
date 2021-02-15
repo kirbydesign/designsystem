@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 const config = {
   selector: 'cookbook-form-field-input-error-example',
   template: `<kirby-form-field label="Error" message="This is an error message">
-  <input kirby-input hasError="true" />
+  <input kirby-input [size]="size" hasError="true" />
 </kirby-form-field>`,
 };
 
@@ -13,4 +13,5 @@ const config = {
 })
 export class FormFieldInputErrorExampleComponent {
   template: string = config.template;
+  @Input() size: string;
 }

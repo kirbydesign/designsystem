@@ -16,10 +16,10 @@ export class SizeDirective {
   @HostBinding('class.lg')
   isLargeSize: boolean;
   @Input() set size(size: Sizes) {
-    this.isExtraSmall = size === Sizes.extraSmall;
-    this.isSmallSize = size === Sizes.small;
-    this.isMediumSize = size === Sizes.medium;
-    this.isLargeSize = size === Sizes.large;
+    this.isExtraSmall = size === 'xs';
+    this.isSmallSize = size === 'sm';
+    this.isMediumSize = size === 'md';
+    this.isLargeSize = size === 'lg';
   }
 }
 
