@@ -15,5 +15,6 @@ export class CardExampleComponent implements DynamicComponent {
   @Input() hasHeader = true;
   @Input() hasFooter = false;
   @Input() hasHeaderFooterBgColor = false;
+  @Input() flagged = null;
   data: any;
 }
