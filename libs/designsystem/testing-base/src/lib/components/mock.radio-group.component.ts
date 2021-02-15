@@ -15,6 +15,7 @@ import { RadioGroupComponent } from '@kirbydesign/designsystem';
 })
 export class MockRadioGroupComponent {
   @Input() disabled: boolean;
+  @Input() hasError: boolean;
   @Input() items: string[] | any[];
   @Input() itemTextProperty: string;
   @Input() itemDisabledProperty: string;
