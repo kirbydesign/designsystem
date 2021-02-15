@@ -11,7 +11,7 @@ const config = {
 </kirby-radio-group>
 
 <kirby-radio-group>
-  <kirby-radio disabled="true" text="Disabled"></kirby-radio>
+  <kirby-radio [disabled]="true" text="Disabled"></kirby-radio>
 </kirby-radio-group>
 
 <kirby-radio-group value="bacon">
