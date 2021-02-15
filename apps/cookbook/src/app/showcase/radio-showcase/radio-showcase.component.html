@@ -118,10 +118,10 @@
 
 <h2>In Item</h2>
 <p>
-  To render radio buttons as part of an item (e.g. inside a card or a list) you can either supply
-  the item template through the <code>*kirbyListItemTemplate</code> directive (see list example
-  below) or you can simply nest the items inside the <code>&lt;kirby-radio-group&gt;</code> wrapper
-  component using static markup or an <code>*ngFor</code> loop.
+  To render radio buttons as part of an item (e.g. inside a card) you can either supply the item
+  template through the <code>*kirbyListItemTemplate</code> directive (see list example below) or you
+  can simply nest the items inside the <code>&lt;kirby-radio-group&gt;</code> wrapper component
+  using static markup or an <code>*ngFor</code> loop.
 </p>
 
 <p>
@@ -139,23 +139,7 @@
 </cookbook-example-viewer>
 
 <h2>In List</h2>
-<p>
-  Rendering radio buttons inside a list is very similar to the items example above - except you
-  <em>must</em> provide an item template through the <code>*kirbyListItemTemplate</code> directive.
-</p>
-<p>
-  This example groups a <code>kirby-radio</code> with a <code>kirby-avatar</code> and a
-  <code>kirby-label</code> inside a <code>kirby-item</code>.<br />
-  The radio is right-aligned using
-  <code>slot="end"</code>.<br />
-  <em
-    ><strong>Please note:</strong> Always remember to wrap the list of items in a
-    <code>&lt;kirby-radio-group&gt;</code>.</em
-  >
-</p>
-<cookbook-example-viewer [html]="inListExample.template" [ts]="inListExample.codeSnippet">
-  <cookbook-radio-in-list-example #inListExample></cookbook-radio-in-list-example>
-</cookbook-example-viewer>
+<em>See "In Item" example above.</em>
 
 <h2>Properties</h2>
 <h3>Radio:</h3>
