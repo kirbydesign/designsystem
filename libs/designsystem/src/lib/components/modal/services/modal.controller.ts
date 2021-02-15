@@ -5,12 +5,13 @@ import { filter, map, takeUntil } from 'rxjs/operators';
 
 import { KirbyAnimation } from '../../../animation/kirby-animation';
 import { ActionSheetConfig } from '../action-sheet/config/action-sheet-config';
-import { ModalConfig } from '../modal-wrapper/config/modal-config';
-import { ActionSheetHelper } from './action-sheet.helper';
 import { AlertConfig } from '../alert/config/alert-config';
+import { ModalConfig } from '../modal-wrapper/config/modal-config';
+
+import { ActionSheetHelper } from './action-sheet.helper';
 import { AlertHelper } from './alert.helper';
-import { ModalHelper } from './modal.helper';
 import { ModalNavigationService } from './modal-navigation.service';
+import { ModalHelper } from './modal.helper';
 import { ModalRouteActivation, Overlay } from './modal.interfaces';
 
 @Injectable()
@@ -27,8 +28,11 @@ export class ModalController implements OnDestroy {
     @Optional() @Inject(ROUTES) private routeConfig: Routes[]
   ) {}
 
-  async initialize() {
-    const modalNavigation = await this.modalNavigationService.getModalNavigation(this.routeConfig);
+  async initialize(moduleRootRoutePath?: string) {
+    const modalNavigation = await this.modalNavigationService.getModalNavigation(
+      this.routeConfig,
+      moduleRootRoutePath
+    );
     this.onModalRouteActivated(modalNavigation.activated$);
     this.onModalRouteDeactivated(modalNavigation.deactivated$); // TODO: Do we want to close modal when routing out of modal route? Or should the code that navigates close the window??
   }

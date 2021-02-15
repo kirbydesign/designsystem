@@ -91,7 +91,7 @@ export class TestHelper {
     phablet: { width: '575px', height: '767px' },
     'phablet-landscape': { width: '767px', height: '575px' },
     tablet: { width: '768px', height: '1024px' },
-    desktop: { width: '1024px', height: '1366px' },
+    desktop: { width: '1200px', height: '900px' },
   };
 
   public static resizeTestWindow(size: { width?: string; height?: string }): Promise<void> {

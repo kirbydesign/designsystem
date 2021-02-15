@@ -9,7 +9,6 @@ import {
   Input,
   OnDestroy,
   OnInit,
-  Renderer2,
 } from '@angular/core';
 
 import { PlatformService } from '../../helpers/platform.service';
