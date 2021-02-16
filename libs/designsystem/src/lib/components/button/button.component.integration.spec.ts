@@ -605,6 +605,7 @@ describe('ButtonComponent configured with text and icon using an ngIf directive'
       '<button kirby-button><kirby-icon name="close" *ngIf="true"></kirby-icon>Test</button>'
     );
     element = spectator.element as HTMLButtonElement;
+
     expect(element).not.toHaveClass('icon-only');
   });
 
@@ -613,6 +614,7 @@ describe('ButtonComponent configured with text and icon using an ngIf directive'
       '<button kirby-button>Test<kirby-icon name="close" *ngIf="true"></kirby-icon></button>'
     );
     element = spectator.element as HTMLButtonElement;
+
     expect(element).not.toHaveClass('icon-only');
   });
 });
