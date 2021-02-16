@@ -151,7 +151,6 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
     this.hasDeprecatedItemTemplate = !!this.legacyItemTemplate || !!this.legacyFlexItemTemplate;
     this.initializeSwipeActions();
     this.isSelectable = this.itemSelect.observers.length > 0;
-
     this.isLoadOnDemandEnabled = this.loadOnDemand.observers.length > 0;
   }
 
