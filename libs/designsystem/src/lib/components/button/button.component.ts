@@ -27,20 +27,21 @@ export class ButtonComponent implements AfterContentInit {
   isAttentionLevel4: boolean;
   @HostBinding('class.destructive')
   destructive: boolean = false; // Default
+
   @HostBinding('class.floating')
   public get isButtonFloating(): boolean {
     return this.isFloating;
   }
+
   @HostBinding('class.icon-only')
   public get isIconOnly(): boolean {
-    return this.icon && !this._hasSlottedContent;
+    return !!this.icon && !this._hasText;
   }
   private _isIconLeft = false;
   @HostBinding('class.icon-left')
   public get isIconLeft() {
     return this._isIconLeft;
   }
-
   private _isIconRight = false;
   @HostBinding('class.icon-right')
   public get isIconRight() {
@@ -66,31 +67,16 @@ export class ButtonComponent implements AfterContentInit {
   @ContentChild(IconComponent, { static: false }) icon: IconComponent;
   @ContentChild(IconComponent, { static: false, read: ElementRef })
   iconElementRef: ElementRef<HTMLElement>;
-  private _hasSlottedContent = false;
+  private _hasText = false;
+
+  constructor(private elementRef: ElementRef<HTMLElement>) {}
 
   ngAfterContentInit(): void {
-    if (this.iconElementRef && this.iconElementRef.nativeElement) {
-      const iconElement = this.iconElementRef.nativeElement;
-      const prev = this.findNonCommentSibling(iconElement, 'previous');
-      const next = this.findNonCommentSibling(iconElement, 'next');
-      if (prev) {
-        this._hasSlottedContent = true;
-        this._isIconLeft = false;
-        this._isIconRight = true;
-      }
-      if (next) {
-        this._hasSlottedContent = true;
-        this._isIconLeft = true;
-        this._isIconRight = false;
-      }
+    this._hasText = !!this.elementRef.nativeElement.textContent;
+    if (this.iconElementRef !== undefined && this._hasText) {
+      this._isIconLeft =
+        this.elementRef.nativeElement.firstChild === this.iconElementRef.nativeElement;
+      this._isIconRight = !this._isIconLeft;
     }
-  }
-
-  private findNonCommentSibling(element: HTMLElement, direction: 'next' | 'previous') {
-    const sibling = direction === 'previous' ? element.previousSibling : element.nextSibling;
-    if (sibling != null && sibling.nodeName === '#comment') {
-      return this.findNonCommentSibling(sibling as HTMLElement, direction);
-    }
-    return sibling;
   }
 }
