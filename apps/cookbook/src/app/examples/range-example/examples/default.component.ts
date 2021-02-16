@@ -12,8 +12,7 @@ const config = {
             formControlName="kirbyRangeName" [formGroup]="rangeFormDefault" ticks="true" max="5" min="1"
           >
         </ion-range>
-     </kirby-range>
-   
+     </kirby-range>   
     </form>
   `,
 };

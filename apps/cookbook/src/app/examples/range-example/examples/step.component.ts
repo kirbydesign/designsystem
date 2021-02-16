@@ -14,7 +14,6 @@ const config = {
        >
         </ion-range>
      </kirby-range>
-
     </form>
   `,
 };
