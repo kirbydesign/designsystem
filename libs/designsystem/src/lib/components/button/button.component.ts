@@ -35,7 +35,7 @@ export class ButtonComponent implements AfterContentInit {
 
   @HostBinding('class.icon-only')
   public get isIconOnly(): boolean {
-    return !!this.icon && !this._hasText;
+    return !!this.icon && !this.hasText;
   }
   private _isIconLeft = false;
   @HostBinding('class.icon-left')
@@ -67,13 +67,13 @@ export class ButtonComponent implements AfterContentInit {
   @ContentChild(IconComponent, { static: false }) icon: IconComponent;
   @ContentChild(IconComponent, { static: false, read: ElementRef })
   iconElementRef: ElementRef<HTMLElement>;
-  private _hasText = false;
+  private hasText = false;
 
   constructor(private elementRef: ElementRef<HTMLElement>) {}
 
   ngAfterContentInit(): void {
-    this._hasText = !!this.elementRef.nativeElement.textContent;
-    if (this.iconElementRef !== undefined && this._hasText) {
+    this.hasText = !!this.elementRef.nativeElement.textContent;
+    if (this.iconElementRef !== undefined && this.hasText) {
       this._isIconLeft =
         this.elementRef.nativeElement.firstChild === this.iconElementRef.nativeElement;
       this._isIconRight = !this._isIconLeft;
