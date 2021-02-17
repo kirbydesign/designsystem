@@ -19,7 +19,6 @@ export type RangeValue = number | { lower: number; upper: number };
   selector: 'kirby-range',
   templateUrl: './range.component.html',
   styleUrls: ['./range.component.scss'],
-  encapsulation: ViewEncapsulation.None, //   ShadowDom
 })
 export class RangeComponent implements AfterViewInit {
   @ContentChild(IonRange, { static: false }) ionRange: IonRange;
