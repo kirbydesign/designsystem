@@ -289,9 +289,10 @@ describe('CalendarComponent', () => {
 
     describe('when `minDate` is set', () => {
       let minDate: Date;
+      const yearsBeforeTodayDate = 4;
 
       beforeEach(() => {
-        minDate = new Date(2017, 0, 1);
+        minDate = new Date(todayDate.getFullYear() - yearsBeforeTodayDate, 0, 1);
         spectator.setInput('minDate', minDate);
       });
 
@@ -299,7 +300,7 @@ describe('CalendarComponent', () => {
         let newMinDate: Date;
 
         beforeEach(() => {
-          newMinDate = new Date(2021, 11, 30);
+          newMinDate = new Date(todayDate.getFullYear(), 11, 30);
           spectator.setInput('minDate', newMinDate);
         });
 
@@ -311,9 +312,10 @@ describe('CalendarComponent', () => {
 
     describe('when `maxDate` is set', () => {
       let maxDate: Date;
+      const yearsAfterTodayDate = 2;
 
       beforeEach(() => {
-        maxDate = new Date(2023, 0, 1);
+        maxDate = new Date(todayDate.getFullYear() + yearsAfterTodayDate, 0, 1);
         spectator.setInput('maxDate', maxDate);
       });
 
@@ -321,7 +323,7 @@ describe('CalendarComponent', () => {
         let newMaxDate: Date;
 
         beforeEach(() => {
-          newMaxDate = new Date(2020, 6, 30);
+          newMaxDate = new Date(todayDate.getFullYear(), 6, 30);
           spectator.setInput('maxDate', newMaxDate);
         });
 
