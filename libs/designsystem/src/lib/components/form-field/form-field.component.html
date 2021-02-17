@@ -1,12 +1,12 @@
 <label *ngIf="label">
   <div class="text">{{ label }}</div>
-  <div class="prefix-postfix-group">
+  <div class="row">
     <ng-container *ngTemplateOutlet="slottedInput"></ng-container>
   </div>
 </label>
 
 <ng-container *ngIf="!label">
-  <div class="prefix-postfix-group">
+  <div class="row">
     <ng-container *ngTemplateOutlet="slottedInput"></ng-container>
   </div>
 </ng-container>
