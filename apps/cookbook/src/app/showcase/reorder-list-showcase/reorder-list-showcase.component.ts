@@ -10,7 +10,7 @@ declare var require: any;
   styleUrls: ['./reorder-list-showcase.component.scss'],
 })
 export class ReorderListShowcaseComponent {
-  exampleHtml: string = require('!raw-loader!../../examples/reorder-list/reorder-list-example.component.html')
+  exampleHtml: string = require('!raw-loader!../../examples/reorder-list-example/reorder-list-example.component.html')
     .default;
 
   properties: ShowcaseProperty[] = [
