@@ -1,12 +1,12 @@
 <div class="header">
-  <div class="month-navigator" [class.expand]="!yearNavigatorOptions">
+  <div class="month-navigator">
     <button [disabled]="!canNavigateBack" (click)="changeMonth(-1)">
       <kirby-icon name="arrow-back"></kirby-icon>
     </button>
 
     <div class="month-and-year">
       <span class="month">{{ activeMonthName }}</span
-      ><span *ngIf="!yearNavigatorOptions" class="year">{{ activeYear }}</span>
+      ><span *ngIf="!_hasYearNavigator" class="year">{{ activeYear }}</span>
     </div>
 
     <button [disabled]="!canNavigateForward" (click)="changeMonth(1)">
@@ -14,7 +14,7 @@
     </button>
   </div>
   <kirby-dropdown
-    *ngIf="yearNavigatorOptions"
+    *ngIf="_hasYearNavigator"
     [selectedIndex]="navigatedYear"
     [items]="navigableYears"
     popout="left"
