@@ -1,8 +1,7 @@
 <kirby-page title="Form Field">
   <kirby-page-content>
     <cookbook-form-field-example-configuration
-      [size]="size"
-      (sizeChanged)="onSizeChange($event)"
+      [(size)]="size"
     ></cookbook-form-field-example-configuration>
     <h2>Input</h2>
     <cookbook-form-field-input-example [size]="size"></cookbook-form-field-input-example>
