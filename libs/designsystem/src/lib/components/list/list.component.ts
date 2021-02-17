@@ -77,6 +77,11 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
    */
   @Input() markSelectedRow = false;
 
+  /**
+   *  If set - Determines whether loadOnDemand event should be emitted.
+   */
+  @Input() disableLoadOnDemand?: boolean;
+
   @HostBinding('class.kirby-list') true;
   /**
    * Determine outline shape of:
@@ -137,7 +142,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   isSwipingEnabled: boolean = false;
   isSelectable: boolean;
   isLoading: boolean;
-  isLoadOnDemandEnabled: boolean;
+  isLoadOnDemandEnabled;
   groupedItems: any[];
   selectedItem: any;
 
@@ -238,9 +243,5 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
     if (this.swipeActions && this.swipeActions.length) {
       this.isSwipingEnabled = this.platform.isTouch();
     }
-  }
-
-  public enableLoadOnDemand(isLoadOnDemandEnabled: boolean) {
-    this.isLoadOnDemandEnabled = isLoadOnDemandEnabled;
   }
 }
