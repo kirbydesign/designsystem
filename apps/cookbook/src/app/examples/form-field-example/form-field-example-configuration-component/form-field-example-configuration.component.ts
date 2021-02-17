@@ -1,11 +1,22 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
+import { InputSize } from '@kirbydesign/designsystem';
+
 @Component({
   selector: 'cookbook-form-field-example-configuration',
   templateUrl: './form-field-example-configuration.component.html',
   styleUrls: ['./form-field-example-configuration.component.scss'],
 })
 export class FormFieldExampleConfigurationComponent {
-  @Input() size: 'md' | 'lg';
-  @Output() sizeChanged = new EventEmitter<string>();
+  items = [
+    { title: 'Medium (md)', value: InputSize.medium },
+    { title: 'Large (lg) - default', value: InputSize.large },
+  ];
+  @Input() size = InputSize.large;
+  @Output() sizeChange = new EventEmitter<InputSize>();
+
+  onChange = (selected) => {
+    this.size = selected.value;
+    this.sizeChange.emit(selected.value);
+  };
 }

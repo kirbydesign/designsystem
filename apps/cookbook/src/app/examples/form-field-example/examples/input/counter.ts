@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 
+import { InputSize } from '@kirbydesign/designsystem';
+
 const config = {
   selector: 'cookbook-form-field-input-counter-example',
   template: `<kirby-form-field>
@@ -24,5 +26,5 @@ const config = {
 })
 export class FormFieldInputCounterExampleComponent {
   template: string = config.template;
-  @Input() size: string;
+  @Input() size: InputSize;
 }

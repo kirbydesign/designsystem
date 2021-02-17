@@ -1,7 +1,6 @@
 <h2>Input</h2>
 <cookbook-form-field-example-configuration
-  [size]="size"
-  (sizeChanged)="setSize($event)"
+  [(size)]="size"
 ></cookbook-form-field-example-configuration>
 <h3>Default</h3>
 <cookbook-example-viewer [html]="inputDefaultExample.template">

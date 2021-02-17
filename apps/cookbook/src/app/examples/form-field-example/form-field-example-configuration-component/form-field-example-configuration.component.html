@@ -2,25 +2,11 @@
   <legend>Input field size for examples below</legend>
   <p>
     <strong>Size:</strong><br />
-    <label>
-      <input
-        type="radio"
-        name="size"
-        value="md"
-        [checked]="size === 'md'"
-        (change)="sizeChanged.emit($event.target.value)"
-      />
-      Medium (<code>md</code>)
-    </label>
-    <label>
-      <input
-        type="radio"
-        name="size"
-        value="lg"
-        [checked]="size === 'lg'"
-        (change)="sizeChanged.emit($event.target.value)"
-      />
-      Large (<code>lg</code>) - default
-    </label>
+    <kirby-radio-group
+      [items]="items"
+      (valueChange)="onChange($event)"
+      itemTextProperty="title"
+      [selectedIndex]="1"
+    ></kirby-radio-group>
   </p>
 </fieldset>
