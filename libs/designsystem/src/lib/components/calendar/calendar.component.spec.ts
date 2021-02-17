@@ -279,7 +279,7 @@ describe('CalendarComponent', () => {
     ).toEqual('M T W T F S S');
   });
 
-  fdescribe('active month', () => {
+  describe('active month', () => {
     let todayDate: Date;
 
     beforeEach(() => {
@@ -295,7 +295,7 @@ describe('CalendarComponent', () => {
         spectator.setInput('minDate', minDate);
       });
 
-      describe('when `minDate` changes to a later date', () => {
+      describe('when `minDate` changes to a later date than `todayDate`', () => {
         let newMinDate: Date;
 
         beforeEach(() => {
@@ -317,7 +317,7 @@ describe('CalendarComponent', () => {
         spectator.setInput('maxDate', maxDate);
       });
 
-      describe('when `maxDate` changes to an earlier date', () => {
+      describe('when `maxDate` changes to an earlier date then `todayDate`', () => {
         let newMaxDate: Date;
 
         beforeEach(() => {
