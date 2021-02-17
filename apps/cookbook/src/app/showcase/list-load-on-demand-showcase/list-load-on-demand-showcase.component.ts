@@ -7,6 +7,6 @@ declare var require: any;
   styleUrls: ['./list-load-on-demand-showcase.component.scss'],
 })
 export class ListLoadOnDemandShowcaseComponent {
-  exampleHtml: string = require('!raw-loader!../../examples/list/components/load-on-demand/list-load-on-demand-example.component.html')
+  exampleHtml: string = require('!raw-loader!../../examples/list-load-on-demand-example/list-load-on-demand-example.component.html')
     .default;
 }
