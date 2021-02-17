@@ -1,12 +1,4 @@
-import {
-  Directive,
-  ElementRef,
-  HostBinding,
-  Input,
-  OnChanges,
-  Renderer2,
-  SimpleChanges,
-} from '@angular/core';
+import { Directive, HostBinding, Input, OnChanges } from '@angular/core';
 
 import { ThemeColor } from '../../../helpers/theme-color.type';
 
@@ -20,9 +12,7 @@ export class ListItemColorDirective implements OnChanges {
   @HostBinding('class')
   color: ThemeColor;
 
-  constructor(private renderer: Renderer2, private elementRef: ElementRef) {}
-
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     this.color = this.getColor();
   }
 
