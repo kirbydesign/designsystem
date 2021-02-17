@@ -1,6 +1,6 @@
 import { OverlayModule } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { Inject, InjectionToken, ModuleWithProviders, NgModule, Optional } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
@@ -197,6 +197,11 @@ const entryComponents = [
   AlertComponent,
 ];
 
+const ConfigToken = new InjectionToken<any>('USERCONFIG');
+export interface KirbyConfig {
+  moduleRootRoutePath?: string;
+}
+
 @NgModule({
   imports: [
     CommonModule,
@@ -215,7 +220,22 @@ const entryComponents = [
   exports: exports,
 })
 export class KirbyModule {
-  constructor(modalController: ModalController) {
-    modalController.initialize();
+  static forChild(config?: KirbyConfig): ModuleWithProviders<KirbyModule> {
+    return {
+      ngModule: KirbyModule,
+      providers: [
+        {
+          provide: ConfigToken,
+          useValue: config,
+        },
+      ],
+    };
+  }
+
+  constructor(
+    modalController: ModalController,
+    @Optional() @Inject(ConfigToken) config?: KirbyConfig
+  ) {
+    modalController.initialize(config && config.moduleRootRoutePath);
   }
 }

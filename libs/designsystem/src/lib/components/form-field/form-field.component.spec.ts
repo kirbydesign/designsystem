@@ -1,9 +1,13 @@
+import { IonIcon, IonItem, IonRadio, IonRadioGroup } from '@ionic/angular';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
 import { DesignTokenHelper, PlatformService } from '../../helpers';
 import { TestHelper } from '../../testing/test-helper';
 import { WindowRef } from '../../types';
+import { IconComponent } from '../icon';
 import { ItemComponent } from '../item/item.component';
+import { RadioComponent } from '../radio';
+import { RadioGroupComponent } from '../radio/radio-group/radio-group.component';
 
 import { FormFieldMessageComponent } from './form-field-message/form-field-message.component';
 import { FormFieldComponent } from './form-field.component';
@@ -12,10 +16,7 @@ import { InputIconComponent } from './input-icon/input-icon.component';
 import { InputComponent } from './input/input.component';
 import { TextareaComponent } from './textarea/textarea.component';
 
-const size = DesignTokenHelper.size;
-const fontSize = DesignTokenHelper.fontSize;
-const fontWeight = DesignTokenHelper.fontWeight;
-const lineHeight = DesignTokenHelper.lineHeight;
+const { size, fontSize, fontWeight, lineHeight, getElevation } = DesignTokenHelper;
 
 describe('FormFieldComponent', () => {
   let spectator: SpectatorHost<FormFieldComponent>;
@@ -26,9 +27,16 @@ describe('FormFieldComponent', () => {
       FormFieldMessageComponent,
       InputComponent,
       TextareaComponent,
+      RadioGroupComponent,
       InputCounterComponent,
       ItemComponent,
       InputIconComponent,
+      IconComponent,
+      IonIcon,
+      IonRadio,
+      IonRadioGroup,
+      RadioComponent,
+      IonItem,
     ],
     mocks: [PlatformService],
     providers: [
@@ -61,12 +69,23 @@ describe('FormFieldComponent', () => {
     });
   });
 
+  describe('when disabled', () => {
+    it('should not have elevation', () => {
+      spectator = createHost(`<kirby-form-field>
+        <input kirby-input disabled value="Disabled input" />
+      </kirby-form-field>`);
+      const inputElement = spectator.queryHost('input[kirby-input]');
+      expect(inputElement).toHaveComputedStyle({ 'box-shadow': 'none' });
+    });
+  });
+
   describe('with label', () => {
     let labelElement: HTMLLabelElement;
     let labelTextElement: HTMLElement;
     beforeEach(() => {
       spectator = createHost(
         `<kirby-form-field label="Form field with label">
+          <input kirby-input />
          </kirby-form-field>`
       );
       labelElement = spectator.queryHost('label');
@@ -170,7 +189,7 @@ describe('FormFieldComponent', () => {
         const availableTextWidth = getAvailableTextWidth();
         const expectedMessageWidth = availableTextWidth * 0.75;
         const messageWidth = messageElement.getBoundingClientRect().width;
-        expect(messageWidth).toEqual(expectedMessageWidth);
+        expect(messageWidth.toFixed()).toEqual(expectedMessageWidth.toFixed());
       });
 
       it('should render the counter with correct width', () => {
@@ -183,6 +202,16 @@ describe('FormFieldComponent', () => {
   });
 
   describe('with slotted input', () => {
+    it('should render the input with elevation', () => {
+      spectator = createHost(
+        `<kirby-form-field>
+          <input kirby-input />
+        </kirby-form-field>`
+      );
+      const inputElement = spectator.queryHost('input[kirby-input]');
+      expect(inputElement).toHaveComputedStyle({ 'box-shadow': getElevation(2) });
+    });
+
     describe('and no label', () => {
       let dispatchEventSpy: jasmine.Spy<jasmine.Func>;
 
@@ -204,10 +233,16 @@ describe('FormFieldComponent', () => {
         expect(inputElement).toBeTruthy();
       });
 
-      it('should render the input as a direct descendant', () => {
+      it('should render the input as a 2nd level descendant', () => {
         const inputElement = spectator.queryHost('input[kirby-input]');
         expect(inputElement).toBeTruthy();
-        expect(inputElement.parentElement).toEqual(spectator.element);
+        expect(inputElement.parentElement.parentElement).toEqual(spectator.element);
+      });
+
+      it('should render the input as a descendant of div', () => {
+        const inputElement = spectator.queryHost('input[kirby-input]');
+        expect(inputElement).toBeTruthy();
+        expect(inputElement.parentElement.className).toEqual('row');
       });
 
       it('should not render the input within a label', () => {
@@ -292,15 +327,20 @@ describe('FormFieldComponent', () => {
         expect(textareaElement).toBeTruthy();
       });
 
-      it('should render the textarea as a direct descendant', () => {
+      it('should render the textarea as a 2nd level descendant', () => {
         const textareaElement = spectator.queryHost('textarea[kirby-textarea]');
         expect(textareaElement).toBeTruthy();
-        expect(textareaElement.parentElement).toEqual(spectator.element);
+        expect(textareaElement.parentElement.parentElement).toEqual(spectator.element);
       });
 
       it('should not render the textarea within a label', () => {
         const textareaElement = spectator.queryHost('label textarea[kirby-textarea]');
         expect(textareaElement).toBeNull();
+      });
+
+      it('should render the textarea with elevation', () => {
+        const textareaElement = spectator.queryHost('textarea[kirby-textarea]');
+        expect(textareaElement).toHaveComputedStyle({ 'box-shadow': getElevation(2) });
       });
     });
 
@@ -321,6 +361,78 @@ describe('FormFieldComponent', () => {
       it('should render the textarea within a label', () => {
         const textareaElement = spectator.queryHost('label textarea[kirby-textarea]');
         expect(textareaElement).toBeTruthy();
+      });
+    });
+  });
+
+  describe('with slotted radio-group', () => {
+    let radioGroupElement: HTMLElement;
+    let label: HTMLLabelElement;
+    describe('and no label', () => {
+      beforeEach(() => {
+        spectator = createHost(
+          `<kirby-form-field>
+             <kirby-radio-group
+               [items]="['Test 1','Test 2','Test 3']">
+             </kirby-radio-group>
+           <kirby-form-field>`
+        );
+        radioGroupElement = spectator.queryHost('kirby-radio-group');
+        label = spectator.queryHost('label');
+      });
+
+      it('should render the radio-group as a 2nd level descendant', () => {
+        expect(radioGroupElement).toBeTruthy();
+        expect(radioGroupElement.parentElement.parentElement).toEqual(spectator.element);
+      });
+
+      it('should not render the radio-group within a label', () => {
+        const radioGroupInLabel = spectator.queryHost('label kirby-radio-group');
+        expect(radioGroupInLabel).toBeNull();
+      });
+
+      it('should not render a label', () => {
+        expect(label).toBeNull();
+      });
+    });
+
+    describe('and a label', () => {
+      beforeEach(() => {
+        spectator = createHost(
+          `<kirby-form-field label="Radio group with label">
+            <kirby-radio-group
+              [items]="['Test 1','Test 2','Test 3']">
+            </kirby-radio-group>
+          <kirby-form-field>`
+        );
+        radioGroupElement = spectator.queryHost('kirby-radio-group');
+        label = spectator.queryHost('label');
+      });
+
+      it('should render the radio-group', () => {
+        expect(radioGroupElement).toBeTruthy();
+      });
+
+      it('should not render the radio-group within a label', () => {
+        const radioGroupInLabel = spectator.queryHost('label kirby-radio-group');
+        expect(radioGroupInLabel).toBeNull();
+      });
+
+      it('should render a label', () => {
+        expect(label).toBeTruthy();
+      });
+
+      it('should associate the label with the radio group', () => {
+        expect(radioGroupElement.getAttribute('aria-labelledby')).toEqual(label.id);
+      });
+
+      it('should focus the the radio group when clicking the label ', () => {
+        const radioGroupComponent = spectator.query(RadioGroupComponent);
+        const focusSpy = spyOn(radioGroupComponent, 'focus');
+
+        spectator.click(label);
+
+        expect(focusSpy).toHaveBeenCalled();
       });
     });
   });
@@ -370,6 +482,45 @@ describe('FormFieldComponent', () => {
             'font-weight': fontWeight('bold'),
           });
         });
+      });
+    });
+  });
+
+  describe('When using kirby-input-icon', () => {
+    describe('by default', () => {
+      beforeEach(() => {
+        spectator = createHost(
+          `<kirby-form-field label="Input with Icon"  message="This is additional info that will be shown below the input">
+  <input type="text" kirby-input placeholder="Write something or Click Icon for Action "/>
+  <kirby-input-icon icon="attach"  (click)="onClick($event)"></kirby-input-icon>
+</kirby-form-field>`
+        );
+      });
+      it('should render kirby-input-icon', () => {
+        const iconInputElement = spectator.queryHost('kirby-input-icon');
+        expect(iconInputElement).toBeTruthy();
+        const buttonElement = spectator.queryHost('button[kirby-button]');
+        expect(buttonElement).toBeTruthy();
+        const iconElement = spectator.queryHost('kirby-icon');
+        expect(iconElement).toBeTruthy();
+        expect(iconInputElement.attributes['icon']).toBeTruthy();
+        expect(iconInputElement.attributes['icon'].value).toBe('attach');
+        expect(buttonElement.attributes['size'].value).toBe('sm');
+        expect(buttonElement.attributes['class'].value).toBe('input-icon');
+        expect(iconElement.attributes['ng-reflect-name'].value).toBe('attach');
+        expect(iconElement.attributes['class'].value).toBe('kirby-icon');
+      });
+
+      it('should render with position absolute and margin left', () => {
+        const buttonElement = spectator.queryHost('button[kirby-button]');
+        expect(buttonElement).toBeTruthy();
+        expect(buttonElement).toHaveComputedStyle({
+          position: 'absolute',
+        });
+        expect(buttonElement).toHaveComputedStyle({
+          'margin-left': '-40px',
+        });
+        //input-icon
       });
     });
   });

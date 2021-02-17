@@ -31,15 +31,17 @@
 
 label {
   display: block;
-
-  .text {
-    font-size: font-size('s');
-    font-weight: font-weight('light');
-    line-height: line-height('s');
-    margin-bottom: size('xxxs');
-    padding: 0 size('s');
-  }
 }
+
+.text {
+  display: block;
+  font-size: font-size('s');
+  font-weight: font-weight('light');
+  line-height: line-height('s');
+  margin-bottom: size('xxxs');
+  padding: 0 size('s');
+}
+
 .row {
   display: -webkit-box;
   display: -ms-flexbox;

@@ -37,13 +37,6 @@ $spacing-to-label: map-get($checkbox-radio-spacing, 'to-label');
     }
   }
 
-  &.error {
-    ion-radio,
-    ion-radio:active {
-      --color: #{get-color('danger')};
-    }
-  }
-
   &[disabled] {
     color: #{get-text-color('semi-dark')};
     ion-radio {
@@ -80,6 +73,13 @@ ion-radio {
 
     &::part(container) {
       background-color: get-color('white-shade');
+    }
+  }
+
+  :host-context(kirby-radio-group.error) {
+    ion-radio,
+    ion-radio:active {
+      --color: #{get-color('danger')};
     }
   }
 
