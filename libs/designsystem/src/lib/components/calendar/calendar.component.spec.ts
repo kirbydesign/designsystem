@@ -300,7 +300,11 @@ describe('CalendarComponent', () => {
         let newMinDate: Date;
 
         beforeEach(() => {
-          newMinDate = new Date(todayDate.getFullYear(), 11, 30);
+          newMinDate = new Date(
+            todayDate.getFullYear() + 1,
+            todayDate.getMonth(),
+            todayDate.getDay()
+          );
           spectator.setInput('minDate', newMinDate);
         });
 
@@ -323,7 +327,11 @@ describe('CalendarComponent', () => {
         let newMaxDate: Date;
 
         beforeEach(() => {
-          newMaxDate = new Date(todayDate.getFullYear(), 6, 30);
+          newMaxDate = new Date(
+            todayDate.getFullYear() - 1,
+            todayDate.getMonth(),
+            todayDate.getDay()
+          );
           spectator.setInput('maxDate', newMaxDate);
         });
 
