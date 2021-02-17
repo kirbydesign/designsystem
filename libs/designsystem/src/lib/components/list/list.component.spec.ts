@@ -1,16 +1,17 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import * as ionic from '@ionic/angular';
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
 import { MockComponent } from 'ng-mocks';
-import * as ionic from '@ionic/angular';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
+import { WindowRef } from '../../types/window-ref';
+import { SpinnerComponent } from '../spinner/spinner.component';
+
+import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
+import { ListItemColorDirective } from './directives/list-item-color.directive';
+import { ListHelper } from './helpers/list-helper';
+import { ListComponent } from './list.component';
 import { LoadOnDemandEvent } from './list.event';
 import { GroupByPipe } from './pipes/group-by.pipe';
-import { ListComponent } from './list.component';
-import { SpinnerComponent } from '../spinner/spinner.component';
-import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
-import { ListHelper } from './helpers/list-helper';
-import { ListItemColorDirective } from './directives/list-item-color.directive';
-import { WindowRef } from '../../types/window-ref';
 
 /**
  * We need an actual model item, since WeakMap can't use primitives for keys.

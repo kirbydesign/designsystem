@@ -78,7 +78,7 @@ export class BaseListComponent {
       subTitle: '443 pcs',
       amount: '95.190 DKK',
       detail: -135,
-      color: 'white',
+      color: 'semi-light',
     },
     {
       id: 10,
