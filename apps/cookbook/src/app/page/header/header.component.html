@@ -116,7 +116,7 @@
             #rla="routerLinkActive"
             [routerLinkActiveOptions]="{ exact: false }"
           >
-            <button kirby-button [attentionLevel]="rla.isActive ? '3' : '4'">
+            <button kirby-button [attentionLevel]="rla.isActive || item.showAsActive ? '3' : '4'">
               {{ item.text }}
             </button>
           </a>

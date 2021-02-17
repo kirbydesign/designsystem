@@ -1,9 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 
 interface IHeaderLink {
   text: string;
   routerLink?: string;
   externalUrl?: string;
+  showAsActive?: boolean;
 }
 @Component({
   selector: 'cookbook-header',
@@ -23,9 +25,15 @@ export class HeaderComponent implements OnInit {
     { text: 'GitHub', externalUrl: 'https://github.com/kirbydesign/designsystem' },
   ];
 
-  constructor() {}
+  constructor(private router: Router) {
+    this.router.events.subscribe((val) => {
+      if (val instanceof NavigationEnd) {
+        this.items[0].showAsActive = val.url.indexOf('showcase') > -1;
+      }
+    });
+  }
 
-  ngOnInit() {}
+  ngOnInit(): void {}
 
   onToggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
