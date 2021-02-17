@@ -1,15 +1,12 @@
 import { Component } from '@angular/core';
 import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
 
-import { InputSize } from '@kirbydesign/designsystem';
-
 @Component({
   selector: 'cookbook-form-field-showcase',
   templateUrl: './form-field-showcase.component.html',
   styleUrls: ['./form-field-showcase.component.scss'],
 })
 export class FormFieldShowcaseComponent {
-  size: InputSize = InputSize.large;
   formFieldProperties: ShowcaseProperty[] = [
     {
       name: 'label',
@@ -161,8 +158,4 @@ On native devices this method also ensures the form field is scrolled into the v
       inputValues: ['string'],
     },
   ];
-
-  setSize(size: InputSize) {
-    this.size = size;
-  }
 }
