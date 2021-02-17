@@ -116,7 +116,7 @@ kirby-card {
 }
 
 :host-context(kirby-calendar) {
-  button {
+  > button {
     border-color: transparent;
     font-weight: font-weight('bold');
     font-size: initial;
