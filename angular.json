@@ -91,11 +91,6 @@
                 "glob": "**/*.svg",
                 "input": "node_modules/ionicons/dist/ionicons/svg",
                 "output": "./svg"
-              },
-              {
-                "glob": "**/*.woff2",
-                "input": "libs/designsystem/src/lib/fonts",
-                "output": "./assets/kirby/fonts"
               }
             ],
             "styles": ["apps/cookbook/src/styles.scss", "node_modules/prismjs/themes/prism.css"],
