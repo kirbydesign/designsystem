@@ -7,7 +7,6 @@ import { RangeStepExampleComponent } from '~/app/examples/range-example/examples
 import { KirbyModule } from '@kirbydesign/designsystem';
 
 import { RangeDefaultExampleComponent } from './examples/default.component';
-import { RangeDisabledExampleComponent } from './examples/disabled.component';
 import { RangeDisabledFormExampleComponent } from './examples/disabled.form.component';
 import { RangeWithVisibleValueExampleComponent } from './examples/rangewithvisiblevalue.component';
 import { RangeExampleComponent } from './range-example.component';
@@ -17,7 +16,6 @@ const COMPONENT_DECLARATIONS = [
   RangeDefaultExampleComponent,
   RangeWithVisibleValueExampleComponent,
   RangeStepExampleComponent,
-  RangeDisabledExampleComponent,
   RangeDisabledFormExampleComponent,
 ];
 

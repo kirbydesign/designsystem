@@ -1,15 +1,15 @@
 import {
   AfterViewInit,
   Component,
-  ContentChild,
   ElementRef,
+  EventEmitter,
   forwardRef,
   Input,
-  NgZone,
-  Renderer2,
-  Self,
+  Output,
+  ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { IonRange } from '@ionic/angular';
 
 export type RangeValue = number | { lower: number; upper: number };
@@ -19,28 +19,85 @@ export type RangeValue = number | { lower: number; upper: number };
   selector: 'kirby-range',
   templateUrl: './range.component.html',
   styleUrls: ['./range.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      multi: true,
+      useExisting: forwardRef(() => RangeComponent),
+    },
+  ],
+  encapsulation: ViewEncapsulation.None,
 })
-export class RangeComponent implements AfterViewInit {
-  @ContentChild(IonRange, { static: false }) ionRange: IonRange;
+export class RangeComponent implements AfterViewInit, ControlValueAccessor {
+  @ViewChild('ionRange', { static: false }) ionRange: IonRange;
+  @ViewChild(IonRange, { read: ElementRef }) ionRangeElementRef: ElementRef;
 
   @Input() minLabel: string;
   @Input() maxLabel: string;
-  private element: HTMLElement;
+  @Input() color: string;
+  @Input() debounce: number;
+  @Input() max: number;
+  @Input() min: number;
+  @Input() mode: 'ios' | 'md';
+  @Input() name: string;
+  @Input() pin: boolean;
+  @Input() snaps: boolean;
+  @Input() step: number;
+  @Input() ticks: number;
+  @Output() valueChange: EventEmitter<RangeValue> = new EventEmitter<RangeValue>();
+  @Input() startLabel: string;
+  @Input() endLabel: string;
+  @Input() disabled: boolean;
+  private currentValue: RangeValue;
 
-  constructor(
-    @Self() private elementRef: ElementRef<HTMLElement>,
-    private renderer: Renderer2,
-    private zone: NgZone
-  ) {
-    this.element = elementRef.nativeElement;
+  constructor() {}
+
+  public get value(): RangeValue {
+    return this.currentValue;
   }
 
-  @Input() get disabled(): boolean {
-    if (this.ionRange.disabled === undefined) {
-      return false;
+  public set value(value: RangeValue) {
+    if (value !== this.currentValue) {
+      this.currentValue = value;
+      this.propagateChange(this.currentValue);
+      this.valueChange.emit(this.currentValue);
     }
-    return this.ionRange.disabled;
   }
+
+  public setDisabledState?(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+  }
+
+  public rangeValueChange($event: any): void {
+    this.writeValue($event.detail.value);
+  }
+
+  public onTouched = () => {};
+
+  public propagateChange = (_: any) => {};
+
+  public writeValue(value: any): void {
+    if (value !== undefined) {
+      this.value = value;
+    }
+  }
+
+  public registerOnTouched(fn: any): void {
+    this.onTouched = fn;
+  }
+
+  public registerOnChange(fn: any): void {
+    this.propagateChange = fn;
+  }
+
+  /*
+    @Input() get disabled(): boolean {
+      if (!this.ionRange) return false;
+      if (this.ionRange.disabled === undefined) {
+        return false;
+      }
+      return this.ionRange.disabled;
+    }*/
 
   ngAfterViewInit(): void {}
 }

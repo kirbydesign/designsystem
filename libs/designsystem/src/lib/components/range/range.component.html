@@ -1,6 +1,22 @@
 <div class="range-container">
   <div class="range-row">
-    <ng-content select="ion-range"></ng-content>
+    <ion-range
+      (ionChange)="rangeValueChange($event)"
+      #ionRange
+      [min]="min"
+      [max]="max"
+      [step]="step"
+      [value]="value"
+      [pin]="pin"
+      [snaps]="snaps"
+      [color]="color"
+      [ticks]="ticks"
+      [name]="name"
+      [mode]="mode"
+      [debounce]="debounce"
+      [disabled]="disabled"
+    >
+    </ion-range>
   </div>
   <div class="range-row">
     <label *ngIf="minLabel" class="min-label" [ngClass]="disabled ? 'disabled' : ''">{{

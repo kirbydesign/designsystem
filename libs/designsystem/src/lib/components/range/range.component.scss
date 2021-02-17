@@ -2,22 +2,21 @@
 @import '../../scss/utils';
 
 :root {
-  --range-row-ion-range-height: 45px;
+  --range-height: 45px;
   --range-container-width: 45px;
   --range-container-background: #{get-color('white')};
-  --range-row-padding: size('xxs');
+  --range-padding: size('xxs');
 
-  --range-row-label-color: get-text-color('semi-dark');
-  --range-row-label-background: transparent;
+  --range-label-color: get-text-color('semi-dark');
+  --range-label-background: transparent;
 
-  --range-row-label-font-size: font-size('n');
-  --range-row-label-width: 100px;
+  --range-label-font-size: font-size('n');
+  --range-label-width: auto;
+  --range-label-disabled-color: #{get-color('semi-light')};
 }
 
 $tickHeight: 8px;
 $tickWidth: 8px;
-
-// Active
 
 .range-container {
   padding-left: size('s');
@@ -28,21 +27,15 @@ $tickWidth: 8px;
   flex-direction: column;
   margin: 0;
   background-color: var(--range-container-background);
-  .range-row ion-range {
-    height: var(--range-row-ion-range-height);
-  }
 
   ion-range {
-    --bar-background: get-color('background-color');
     --knob-background: #{get-color('white')};
-
     --pin-color: get-color('black');
     --pin-background: transparent;
     --pin-font-size: font-size('xxxs');
-
     --tick-color: #{get-color('semi-dark')};
     --tick-active-color: #{get-color('dark')};
-
+    --bar-background: get-color('background-color');
     --bar-color: #{get-color('semi-dark')};
     --bar-active-color: #{get-color('black')};
   }
@@ -67,21 +60,21 @@ $tickWidth: 8px;
 }
 
 .disabled {
-  --range-row-label-color: #{get-color('semi-light')};
+  --range-label-color: var(--range-label-disabled-color);
 }
 
 // Active
 .range-row label {
-  background-color: var(--range-row-label-background, transparent) !important;
-  color: var(--range-row-label-color);
-  font-size: var(--range-row-label-font-size);
-  min-width: var(--range-row-label-width);
+  background-color: var(--range-label-background);
+  color: var(--range-label-color);
+  font-size: var(--range-label-font-size);
+  min-width: var(--range-label-width);
   text-align: center;
 }
 
 // Active
 ion-range::part(knob) {
-  background-color: var(--knob-background) !important;
+  background-color: var(--knob-background);
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
 }
 
@@ -89,12 +82,12 @@ ion-range::part(knob) {
 ion-range::part(pin) {
   font-size: var(--pin-font-size);
   color: var(--pin-color);
-  background-color: var(--pin-background) !important;
+  background-color: var(--pin-background);
 }
 
 // Active
 ion-range::part(tick) {
-  background-color: var(--tick-color) !important;
+  background-color: var(--tick-color);
   border-radius: 50%;
   width: $tickWidth;
   height: $tickHeight;
@@ -106,7 +99,7 @@ ion-range::part(tick) {
 
 // Active
 ion-range::part(tick-active) {
-  background-color: var(--tick-active-color) !important;
+  background-color: var(--tick-active-color);
   border-radius: 50%;
   width: $tickWidth;
   height: $tickHeight;
@@ -118,10 +111,10 @@ ion-range::part(tick-active) {
 
 // Active
 ion-range::part(bar) {
-  background-color: var(--bar-color) !important;
+  background-color: var(--bar-color);
 }
 
 // Active
 ion-range::part(bar-active) {
-  background-color: var(--bar-active-color) !important;
+  background-color: var(--bar-active-color);
 }

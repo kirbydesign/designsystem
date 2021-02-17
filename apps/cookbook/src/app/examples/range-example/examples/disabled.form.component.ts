@@ -7,12 +7,8 @@ const config = {
   selector: 'cookbook-range-disabled-form-example',
   template: `
     <form [formGroup]="rangeFormDisabled">
-    <kirby-range  minLabel="Min value" maxLabel="Max value">
-        <ion-range
-            formControlName="kirbyRangeName" [formGroup]="rangeFormDisabled" ticks="true" 
-            pin="true" snaps="true" max="15" min="1"
-       >
-        </ion-range>
+    <kirby-range  minLabel="Min value" maxLabel="Max value" formControlName="kirbyRangeName" [formGroup]="rangeFormDisabled" ticks="true" 
+            pin="true" snaps="true" max="15" min="1">
      </kirby-range>
     </form>
   `,
