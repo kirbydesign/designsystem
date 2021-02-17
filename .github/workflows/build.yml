@@ -1,6 +1,9 @@
 name: Build & Deploy Cookbok
+
 on:
-  push
+  push: # TODO: Change to `release` event when our release workflow is in place
+    branches: master
+  pull_request:
 
 defaults:
   run:
@@ -43,6 +46,7 @@ jobs:
 
   deploy_to_cookbook:
     name: Deploy cookbook
+    if: github.event_name == 'pull_request' || contains(github.event.head_commit.message, 'Bumping version to')
     needs: [lint_and_unittest, build_kirby]
     runs-on: ubuntu-latest
     env:
@@ -50,10 +54,10 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
-      - name: Get branch name
-        if: github.ref != 'refs/heads/master'
+      - name: Get deployment name for feature branch
+        if: github.event_name == 'pull_request'
         run: |
-          branchname="${GITHUB_REF##*/}"
+          branchname="${GITHUB_HEAD_REF}"
           echo "Github branchname: ${branchname}"
           branchname="${branchname##*/}"
           echo "Removed leading paths - branchname: ${branchname}"
@@ -70,9 +74,11 @@ jobs:
           echo "Releasename: ${releasename}"
           echo "GH_DEPLOY_ENVIRONMENT=pr-${branchname}" >> $GITHUB_ENV
           echo "RELEASENAME=${releasename}" >> $GITHUB_ENV
-      - name: Get release name
+      - name: Get deployment name for master branch
         if: github.ref == 'refs/heads/master'
-        run: echo "RELEASENAME=designsystem" >> $GITHUB_ENV
+        run: |
+          echo "GH_DEPLOY_ENVIRONMENT=production" >> $GITHUB_ENV
+          echo "RELEASENAME=designsystem" >> $GITHUB_ENV
       - name: Get hostname for feature branch
         if: github.ref != 'refs/heads/master'
         run: |
@@ -84,20 +90,19 @@ jobs:
         run: echo "HOSTNAME=cookbook" >> $GITHUB_ENV
       - name: Create Github Deployment
         id: create_deployment
-        if:  github.ref != 'refs/heads/master'
         uses: octokit/request-action@v2.x
         with:
           route: POST /repos/:repository/deployments
           repository: ${{ github.repository }}
-          ref: ${{ github.ref }}
+          ref: ${{ github.event_name == 'pull_request' && format('refs/heads/{0}', github.head_ref) || github.ref }}
           environment: ${{ env.GH_DEPLOY_ENVIRONMENT }}
+          production_environment: ${{ github.ref == 'refs/heads/master' }}
           auto_merge: false
           required_contexts: '[]' # Skip commit checks
           mediaType: '{"previews": ["flash", "ant-man"]}' # some parameters need preview: https://docs.github.com/en/rest/reference/repos#list-deployment-statuses-preview-notices
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Set deployment status to in progress
-        if: github.ref != 'refs/heads/master'
         uses: octokit/request-action@v2.x
         with:
           route: POST /repos/:repository/deployments/:deployment/statuses
@@ -161,7 +166,6 @@ jobs:
           # deployment logic goes here
           sleep 30
       - name: Set deployment status to success
-        if: github.ref != 'refs/heads/master'
         id: successful_deployment
         uses: octokit/request-action@v2.x
         with:
