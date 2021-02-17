@@ -14,5 +14,12 @@ kirby-card {
     align-items: stretch;
     padding: 0;
     border-top: 1px solid get-color('medium');
+
+    button {
+      flex: 1;
+      height: auto;
+      border-radius: 0;
+      margin: 0;
+    }
   }
 }
