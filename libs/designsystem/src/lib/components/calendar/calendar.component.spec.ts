@@ -1,14 +1,11 @@
 import { LOCALE_ID } from '@angular/core';
-import { IonItem } from '@ionic/angular';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import moment from 'moment';
 import { MockComponent } from 'ng-mocks';
 
 import { CalendarComponent, IconComponent } from '..';
 import { WindowRef } from '../../types/window-ref';
-import { CardComponent } from '../card/card.component';
 import { DropdownComponent } from '../dropdown/dropdown.component';
-import { ItemComponent } from '../item/item.component';
 
 import { CalendarYearNavigatorConfig } from './options/calendar-year-navigator-config';
 
@@ -21,14 +18,7 @@ describe('CalendarComponent', () => {
 
   const createHost = createHostFactory({
     component: CalendarComponent,
-    declarations: [
-      CalendarComponent,
-      MockComponent(IconComponent),
-      DropdownComponent,
-      CardComponent,
-      ItemComponent,
-      IonItem,
-    ],
+    declarations: [CalendarComponent, MockComponent(IconComponent)],
     providers: [
       {
         provide: LOCALE_ID,
@@ -284,7 +274,9 @@ describe('CalendarComponent', () => {
 
     beforeEach(() => {
       todayDate = new Date(2021, 0, 1);
+
       spectator.setInput('todayDate', todayDate);
+      spectator.setInput('selectedDate', todayDate);
     });
 
     describe('when `minDate` is set', () => {
@@ -358,6 +350,7 @@ describe('CalendarComponent', () => {
         yearNavigatorOptions = { from: -3, to: 2 };
 
         spectator.setInput('todayDate', todayDate);
+        spectator.setInput('selectedDate', todayDate);
         spectator.setInput('yearNavigatorOptions', yearNavigatorOptions);
       });
 
@@ -366,17 +359,13 @@ describe('CalendarComponent', () => {
       });
 
       it('should change year on navigation', () => {
-        const yearNavigator = spectator.element.querySelector('kirby-dropdown');
-        const yearNavigatorButton = yearNavigator.querySelector('button');
-        const itemsInNavigator = yearNavigator.querySelectorAll('kirby-item');
-        const selectedItemIndex = 0;
-        const selectedNavigatorItem = itemsInNavigator.item(selectedItemIndex);
-        const currentNavigatorYear = selectedNavigatorItem.textContent;
+        const monthsUntilNextDecember = 12 - (todayDate.getMonth() + 1);
 
-        spectator.click(selectedNavigatorItem);
+        spectator.component.changeMonth(monthsUntilNextDecember);
+        expect(todayDate.getFullYear().toString()).toEqual(spectator.component.activeYear);
 
-        expect(spectator.component.navigatedYear).toEqual(selectedItemIndex);
-        expect(yearNavigatorButton.textContent).toEqual(currentNavigatorYear);
+        spectator.component.changeMonth(1);
+        expect((todayDate.getFullYear() + 1).toString()).toEqual(spectator.component.activeYear);
       });
 
       it('should get navigable years based on `from` and `to` when `minDate` and `maxDate` are omitted', () => {
@@ -394,8 +383,8 @@ describe('CalendarComponent', () => {
       });
 
       it('should prioritize `minDate` and `maxDate` over `from` and `to` when getting navigable years', () => {
-        spectator.setInput('minDate', new Date(2019, 0, 1));
-        spectator.setInput('maxDate', new Date(2024, 11, 31));
+        spectator.setInput('minDate', new Date(todayDate.getFullYear() - 2, 0, 1));
+        spectator.setInput('maxDate', new Date(todayDate.getFullYear() + 3, 11, 31));
 
         expect(spectator.component.navigableYears).toEqual([
           '2019',
