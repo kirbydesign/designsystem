@@ -155,18 +155,4 @@ describe('ListComponent', () => {
       expect(component.isLoadOnDemandEnabled).toBeFalse();
     });
   });
-
-  describe('function: enableLoadOnDemand', () => {
-    it('should enable load more, if called with true', () => {
-      component.enableLoadOnDemand(true);
-
-      expect(component.isLoadOnDemandEnabled).toBeTrue();
-    });
-
-    it('should disable load more, if called with false', () => {
-      component.enableLoadOnDemand(false);
-
-      expect(component.isLoadOnDemandEnabled).toBeFalse();
-    });
-  });
 });
