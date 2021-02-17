@@ -1,4 +1,4 @@
-export { ListComponent } from './list.component';
+export { ListComponent, ListItemColor } from './list.component';
 export { ListShape } from './list.component';
 export { ListHeaderComponent } from './list-header/list-header.component';
 export { ListSectionHeaderComponent } from './list-section-header/list-section-header.component';

@@ -32,7 +32,7 @@ import { LoadOnDemandEvent, LoadOnDemandEventData } from './list.event';
 import { GroupByPipe } from './pipes/group-by.pipe';
 
 export type ListShape = 'square' | 'rounded' | 'none';
-export type ListColors = null | 'light' | 'semi-light';
+export type ListItemColor = null | 'light' | 'semi-light';
 
 @Component({
   selector: 'kirby-list',
@@ -51,7 +51,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   items: any[];
 
   @Input()
-  getItemColor: (item: any) => ListColors;
+  getItemColor: (item: any) => ListItemColor;
 
   /**
    * Callback to determine name of section. Sections will be ordered alphabetically.

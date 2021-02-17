@@ -1,11 +1,12 @@
-import { forwardRef, Component, Input, Output, EventEmitter, TrackByFunction } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, Output, TrackByFunction } from '@angular/core';
 
 import {
   ListComponent,
-  ListSwipeAction,
+  ListItemColor,
+  ListItemColor,
   ListShape,
+  ListSwipeAction,
   LoadOnDemandEvent,
-  ThemeColor,
 } from '@kirbydesign/designsystem';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
@@ -21,7 +22,7 @@ import {
 })
 export class MockListComponent {
   @Input() items: any[];
-  @Input() getItemColor: (item: any) => ThemeColor;
+  @Input() getItemColor: (item: any) => ListItemColor;
   @Input() getSectionName: (item: any) => string;
   @Input() trackBy: TrackByFunction<any>;
   @Input() noMoreItemsText: string;
