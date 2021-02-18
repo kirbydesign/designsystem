@@ -5,8 +5,6 @@ import { MockComponent } from 'ng-mocks';
 
 import { CalendarComponent, IconComponent } from '..';
 import { WindowRef } from '../../types/window-ref';
-import { DropdownComponent } from '../dropdown/dropdown.component';
-
 import { CalendarYearNavigatorConfig } from './options/calendar-year-navigator-config';
 
 // NOTE: when specifying multiple input properties, set selectedDate
@@ -360,12 +358,15 @@ describe('CalendarComponent', () => {
 
       it('should change year on navigation', () => {
         const monthsUntilNextDecember = 12 - (todayDate.getMonth() + 1);
+        const navigatedYearIndex = spectator.component.navigatedYear;
 
         spectator.component.changeMonth(monthsUntilNextDecember);
-        expect(todayDate.getFullYear().toString()).toEqual(spectator.component.activeYear);
+        expect(spectator.component.activeYear).toEqual(todayDate.getFullYear().toString());
+        expect(spectator.component.navigatedYear).toEqual(navigatedYearIndex);
 
         spectator.component.changeMonth(1);
-        expect((todayDate.getFullYear() + 1).toString()).toEqual(spectator.component.activeYear);
+        expect(spectator.component.activeYear).toEqual((todayDate.getFullYear() + 1).toString());
+        expect(spectator.component.navigatedYear).toEqual(navigatedYearIndex + 1);
       });
 
       it('should get navigable years based on `from` and `to` when `minDate` and `maxDate` are omitted', () => {
