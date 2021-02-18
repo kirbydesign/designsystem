@@ -142,7 +142,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   isSwipingEnabled: boolean = false;
   isSelectable: boolean;
   isLoading: boolean;
-  isLoadOnDemandEnabled;
+  @Input() isLoadOnDemandEnabled: boolean;
   groupedItems: any[];
   selectedItem: any;
 
@@ -156,7 +156,10 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
     this.hasDeprecatedItemTemplate = !!this.legacyItemTemplate || !!this.legacyFlexItemTemplate;
     this.initializeSwipeActions();
     this.isSelectable = this.itemSelect.observers.length > 0;
-    this.isLoadOnDemandEnabled = this.loadOnDemand.observers.length > 0;
+
+    if (this.isLoadOnDemandEnabled === undefined) {
+      this.isLoadOnDemandEnabled = this.loadOnDemand.observers.length > 0;
+    }
   }
 
   ngAfterViewInit(): void {
