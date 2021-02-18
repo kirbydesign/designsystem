@@ -7,8 +7,7 @@ import {
   Output,
 } from '@angular/core';
 
-// Counter for generating unique element ids
-let uniqueId = 0;
+import { UniqueIdGenerator } from '../../helpers/unique-id-generator.helper';
 
 @Component({
   selector: 'kirby-checkbox',
@@ -53,5 +52,5 @@ export class CheckboxComponent {
   }
 
   // IDs used for a11y labelling
-  _labelId = `kirby-checkbox-label-${++uniqueId}`;
+  _labelId = UniqueIdGenerator.scopedTo('kirby-checkbox-label').next();
 }
