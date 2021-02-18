@@ -1,9 +1,8 @@
 import { EventEmitter } from '@angular/core';
 
 import { ListComponent } from '../list.component';
-import { LoadOnDemandEvent } from '../list.event';
-
 import { ListHelper } from './list-helper';
+import { LoadOnDemandEvent } from '../list.event';
 
 describe('list helper', () => {
   let listHelper: ListHelper;
