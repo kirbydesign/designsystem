@@ -104,8 +104,9 @@ export class CalendarShowcaseComponent {
     },
     {
       name: 'yearNavigatorOptions',
-      description: '(Optional) Displays a dropdown to navigate between years',
-      defaultValue: 'false',
+      description:
+        '(Optional) Displays a dropdown to navigate between years, and specifies the navigable year interval with either numbers or dates. Navigable years are set by getting the year difference between from and to, but prioritize minDate and maxDate. So if minDate and maxDate are set, they override from and to.',
+      defaultValue: 'null',
       inputValues: ['{ from: number | Date; to: number | Date }'],
     },
   ];
