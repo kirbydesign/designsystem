@@ -64,8 +64,8 @@ export class ButtonComponent implements AfterContentInit {
   @Input() text: string;
   @Input() isFloating: boolean = false;
 
-  @ContentChild(IconComponent, { static: false }) icon: IconComponent;
-  @ContentChild(IconComponent, { static: false, read: ElementRef })
+  @ContentChild(IconComponent) icon: IconComponent;
+  @ContentChild(IconComponent, { read: ElementRef })
   iconElementRef: ElementRef<HTMLElement>;
   private hasText = false;
 
