@@ -250,8 +250,6 @@ describe('Directive: NumericInputDirective', () => {
       });
       describe('format negative', () => {
         it('should add a "-" if isNegativeNumber, lenght is > 0 and value is not 0', () => {
-          //  spectator.directive.isNegativeNumber = true;
-
           const template = `<input kirby-numeric-input  [formControl]="testFormControl" />`;
           spectatorDirective = createHost(template, {
             hostProps: { testFormControl },
@@ -294,6 +292,82 @@ describe('Directive: NumericInputDirective', () => {
           expect((spectatorDirective.element as HTMLInputElement).value).toBe(`-0${decSep}1234`);
         });
       });
+      describe('handle cursor position', () => {
+        let template: string;
+        let inputElm: HTMLInputElement;
+        beforeEach(() => {
+          template = `<input kirby-numeric-input  [formControl]="testFormControl" />`;
+          spectatorDirective = createHost(template, {
+            hostProps: { testFormControl },
+          });
+          inputElm = spectatorDirective.element as HTMLInputElement;
+        });
+
+        it('should add an integral digit beyound first group separator and increment cursor position', () => {
+          inputElm.value = '123';
+          inputElm.setSelectionRange(3, 3);
+          spectatorDirective.detectChanges();
+          spectatorDirective.directive.ngOnInit();
+          inputElm.setSelectionRange(3, 3);
+          testFormControl.setValue(`1234`, {
+            emitModelToViewChange: false,
+            emitViewToModelChange: false,
+            onlySelf: true,
+          });
+          spectatorDirective.detectChanges();
+          expect((spectatorDirective.element as HTMLInputElement).value).toBe(`1${sep}234`);
+          expect(inputElm.selectionStart).toBe(4);
+        });
+
+        it('should add an integral digit 1 char beyound first group separator and increment cursor position', () => {
+          inputElm.value = '123';
+          inputElm.setSelectionRange(2, 2);
+          spectatorDirective.detectChanges();
+          spectatorDirective.directive.ngOnInit();
+          inputElm.setSelectionRange(2, 2);
+          testFormControl.setValue(`1243`, {
+            emitModelToViewChange: false,
+            emitViewToModelChange: false,
+            onlySelf: true,
+          });
+          spectatorDirective.detectChanges();
+          expect((spectatorDirective.element as HTMLInputElement).value).toBe(`1${sep}243`);
+          expect(inputElm.selectionStart).toBe(3);
+        });
+
+        it('should delete an integral digit before first group separator and maintain cursor position', () => {
+          inputElm.value = '1234567';
+          inputElm.setSelectionRange(0, 0);
+          spectatorDirective.detectChanges();
+          spectatorDirective.directive.ngOnInit();
+          inputElm.setSelectionRange(2, 2);
+          testFormControl.setValue(`124567`, {
+            emitModelToViewChange: false,
+            emitViewToModelChange: false,
+            onlySelf: true,
+          });
+          spectatorDirective.detectChanges();
+          expect((spectatorDirective.element as HTMLInputElement).value).toBe(`124${sep}567`);
+          expect(inputElm.selectionStart).toBe(2);
+        });
+
+        it('should delete the first integral digit and maintain cursor position', () => {
+          inputElm.value = '1234567';
+          inputElm.setSelectionRange(0, 0);
+          spectatorDirective.detectChanges();
+          spectatorDirective.directive.ngOnInit();
+          testFormControl.setValue(`234567`, {
+            emitModelToViewChange: false,
+            emitViewToModelChange: false,
+            onlySelf: true,
+          });
+          spectatorDirective.detectChanges();
+
+          expect((spectatorDirective.element as HTMLInputElement).value).toBe(`234${sep}567`);
+          expect(inputElm.selectionStart).toBe(0);
+        });
+      });
+
       describe('remove duplicate decimal separator', () => {
         it('should only allow one decimal separator', () => {
           const template = `<input kirby-numeric-input maximumNumberOfDecimals=-1 [formControl]="testFormControl" />`;

@@ -1,3 +1,4 @@
+import { CurrencyPipe, DecimalPipe } from '@angular/common';
 import {
   Directive,
   ElementRef,
@@ -9,9 +10,8 @@ import {
   Self,
 } from '@angular/core';
 import { NgControl } from '@angular/forms';
-import { CurrencyPipe, DecimalPipe } from '@angular/common';
-import { map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { map, takeUntil } from 'rxjs/operators';
 
 import { NumericInputAnalyzer } from './numeric-input.analyzer';
 
@@ -50,6 +50,7 @@ export class NumericInputDirective implements OnInit, OnDestroy {
   private destroy$ = new Subject();
   private lastValue = '';
   private cursorPosition = -1;
+  private lastCursorPosition = -1;
 
   constructor(
     @Inject(LOCALE_ID) private locale: string,
@@ -81,13 +82,16 @@ export class NumericInputDirective implements OnInit, OnDestroy {
       .pipe(
         takeUntil(this.destroy$),
         map((value: string) => this.findCursorPosition(value)),
-        map((value: string) => this.analyzer.analyse(this.cursorPosition, value, this.lastValue))
+        map((value: string) =>
+          this.analyzer.analyse(this.cursorPosition, this.lastCursorPosition, value, this.lastValue)
+        )
       )
       .subscribe((value: string) => {
         this.cursorPosition = this.analyzer.cursorPosition;
         this.updateCursorPosition();
         this.updateValue(value);
         this.lastValue = value;
+        this.lastCursorPosition = this.cursorPosition;
       });
   }
 

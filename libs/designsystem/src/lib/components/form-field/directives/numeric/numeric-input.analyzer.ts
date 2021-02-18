@@ -10,28 +10,27 @@ type Config = {
 };
 
 export class NumericInputAnalyzer {
+  public cursorPosition: number;
+  public invalid: boolean;
   private excludedPattern = /[^0-9.,]+/g;
-
   private groupingSeparator: string;
   private decimalSeparator: string;
   private neutralGroupingSeparator = ','; // en-US
+
   private lastValue = '';
+  private lastCursorPosition = 0;
+
   private currentValue = '';
   private hasNegativeSign = false;
-
   private config: Config = {
     maxNumberOfIntegrals: 100,
     thousandSeparatorEnabled: true,
     allowNegativeNumber: false,
     maximumNumberOfDecimals: -1,
   };
-
   private integralPart: string;
   private decimalPart: string;
   private allowedCharsOnly: boolean;
-
-  public cursorPosition: number;
-  public invalid: boolean;
 
   constructor(
     private locale: string,
@@ -46,8 +45,14 @@ export class NumericInputAnalyzer {
     this.decimalSeparator = getLocaleNumberSymbol(this.locale, NumberSymbol.CurrencyDecimal);
   }
 
-  public analyse(cursorPosition: number, value: string, lastValue: string): string {
+  public analyse(
+    cursorPosition: number,
+    lastCursorPosition: number,
+    value: string,
+    lastValue: string
+  ): string {
     this.cursorPosition = cursorPosition;
+    this.lastCursorPosition = lastCursorPosition;
     this.lastValue = lastValue;
     value = value || '';
     value = this.resetAndCapture(value);
@@ -57,10 +62,20 @@ export class NumericInputAnalyzer {
       value = this.validateValue(value);
       value = this.handleIntegralPart(value);
       value = this.handleDecimalPart(value);
-      this.adjustCursorPosition(value);
       value = this.createOutput(value);
+      this.adjustCursorPosition(value);
     }
     return value;
+  }
+
+  public formatResult(value: number): string {
+    const formatter: NumericFormatter = new NumericFormatter(
+      this.locale,
+      this.decimalPipe,
+      this.currencyPipe
+    );
+    const output = formatter.format(value);
+    return output;
   }
 
   private resetAndCapture(value: string): string {
@@ -139,8 +154,13 @@ export class NumericInputAnalyzer {
     if (this.invalid) {
       return;
     }
-    const count = this.countGroupingSeparator(value.substring(0, this.cursorPosition));
-    this.cursorPosition -= count;
+    if (value.length > this.lastValue.length) {
+      const lastCount = this.countExistingGroupingSeparator(
+        this.lastValue.substring(0, this.lastCursorPosition)
+      );
+      const newCount = this.countExistingGroupingSeparator(value.substring(0, this.cursorPosition));
+      this.cursorPosition += newCount - lastCount;
+    }
   }
 
   private replaceSeparator(value: string, separator: string, replaceValue: string): string {
@@ -154,16 +174,6 @@ export class NumericInputAnalyzer {
     return value;
   }
 
-  public formatResult(value: number): string {
-    const formatter: NumericFormatter = new NumericFormatter(
-      this.locale,
-      this.decimalPipe,
-      this.currencyPipe
-    );
-    const output = formatter.format(value);
-    return output;
-  }
-
   private addGroupingSeparators(value: string): string {
     if (!this.config.thousandSeparatorEnabled) {
       return value;
@@ -172,14 +182,7 @@ export class NumericInputAnalyzer {
     if (newValue === null) {
       return value;
     }
-    if (value.length !== newValue.length) {
-      if (value.length > newValue.length) {
-        this.cursorPosition -= value.length - newValue.length;
-      }
-      if (newValue.length > value.length) {
-        this.cursorPosition += newValue.length - value.length;
-      }
-    }
+
     newValue = this.replaceSeparator(
       newValue,
       this.neutralGroupingSeparator,
@@ -271,7 +274,7 @@ export class NumericInputAnalyzer {
     return value.split(this.decimalSeparator).length - 1;
   }
 
-  private countGroupingSeparator(value: string): number {
+  private countExistingGroupingSeparator(value: string): number {
     return value.split(this.groupingSeparator).length - 1;
   }
 
