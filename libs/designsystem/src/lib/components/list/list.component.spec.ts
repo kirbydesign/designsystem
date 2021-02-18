@@ -141,18 +141,60 @@ describe('ListComponent', () => {
   });
 
   describe('function: ngOnInit', () => {
-    it('should enable load more, if there is a subscriber to the loadMore event emitter', () => {
-      component.loadOnDemand.subscribe((_: LoadOnDemandEvent) => {});
+    describe('there is a subscriber to the loadMore event', () => {
+      beforeEach(() => {
+        component.loadOnDemand.subscribe((_: LoadOnDemandEvent) => {});
+      });
 
-      component.ngOnInit();
+      it('should enable load more, if isLoadOnDemandEnabled is not set', () => {
+        component.isLoadOnDemandEnabled = undefined;
 
-      expect(component.isLoadOnDemandEnabled).toBeTrue();
+        component.ngOnInit();
+
+        expect(component.isLoadOnDemandEnabled).toBeTrue();
+      });
+
+      it('should enable load more, if isLoadOnDemandEnabled is set to true', () => {
+        component.isLoadOnDemandEnabled = undefined;
+
+        component.ngOnInit();
+
+        expect(component.isLoadOnDemandEnabled).toBeTrue();
+      });
+
+      it('should disable load more, if isLoadOnDemandEnabled is set to false', () => {
+        component.isLoadOnDemandEnabled = false;
+
+        component.ngOnInit();
+
+        expect(component.isLoadOnDemandEnabled).toBeFalse();
+      });
     });
 
-    it('should disable load more, if there is no subscriber to the loadMore event emitter', () => {
-      runNgOnChanges();
+    describe('there is no subscriber to the loadMore event', () => {
+      it('should disable load more, if isLoadOnDemandEnabled is not set', () => {
+        component.isLoadOnDemandEnabled = undefined;
 
-      expect(component.isLoadOnDemandEnabled).toBeFalse();
+        component.ngOnInit();
+
+        expect(component.isLoadOnDemandEnabled).toBeFalse();
+      });
+
+      it('should enable load more, if isLoadOnDemandEnabled is set to true', () => {
+        component.isLoadOnDemandEnabled = true;
+
+        component.ngOnInit();
+
+        expect(component.isLoadOnDemandEnabled).toBeTrue();
+      });
+
+      it('should disable load more, if isLoadOnDemandEnabled is set to false', () => {
+        component.isLoadOnDemandEnabled = false;
+
+        component.ngOnInit();
+
+        expect(component.isLoadOnDemandEnabled).toBeFalse();
+      });
     });
   });
 });
