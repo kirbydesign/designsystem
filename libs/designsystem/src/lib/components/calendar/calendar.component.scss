@@ -63,7 +63,7 @@ td {
   }
 }
 
-:host(.has-year-navigator) .month-navigator {
+:not(:host(.has-year-navigator)) .month-navigator {
   flex-grow: 1;
 }
 
