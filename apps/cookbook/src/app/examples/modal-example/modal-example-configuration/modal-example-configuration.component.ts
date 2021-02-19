@@ -19,11 +19,11 @@ export class ModalExampleConfigurationComponent {
   @Input() showDummyKeyboard: boolean;
   @Output() showDummyKeyboardChange = new EventEmitter<boolean>();
 
-  @Input() showFooter: boolean;
-  @Output() showFooterChange = new EventEmitter<boolean>();
-
   @Input() showCustomHeader: boolean;
   @Output() showCustomHeaderChange = new EventEmitter<boolean>();
+
+  @Input() showFooter: boolean;
+  @Output() showFooterChange = new EventEmitter<boolean>();
 
   @Input() showDummyContent: boolean;
   @Output() showDummyContentChange = new EventEmitter<boolean>();
@@ -65,14 +65,14 @@ export class ModalExampleConfigurationComponent {
     }
   }
 
-  toggleShowFooter(show: boolean) {
-    this.showFooter = show;
-    this.showFooterChange.emit(this.showFooter);
-  }
-
   toggleShowCustomHeader(show: boolean) {
     this.showCustomHeader = show;
     this.showCustomHeaderChange.emit(this.showCustomHeader);
+  }
+
+  toggleShowFooter(show: boolean) {
+    this.showFooter = show;
+    this.showFooterChange.emit(this.showFooter);
   }
 
   toggleShowDummyContent(show: boolean) {

@@ -11,8 +11,6 @@ import { ModalConfig } from '@kirbydesign/designsystem';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
 import { KirbyAnimation } from '@kirbydesign/designsystem';
 
-import { SecondEmbeddedModalExampleComponent } from '../second-embedded-modal-example/second-embedded-modal-example.component';
-
 @Component({
   selector: 'cookbook-first-embedded-modal-example',
   templateUrl: './first-embedded-modal-example.component.html',
@@ -30,8 +28,8 @@ export class FirstEmbeddedModalExampleComponent implements OnInit {
 
   showNestedOptions: boolean;
   showDummyKeyboard: boolean;
-  showFooter: boolean;
   showCustomHeader: boolean;
+  showFooter: boolean;
   showDummyContent: boolean;
   showNestedFooter: boolean = false;
   showNestedDummyContent: boolean = true;
@@ -80,6 +78,7 @@ export class FirstEmbeddedModalExampleComponent implements OnInit {
         title,
         subtitle: 'Hello from second embedded example component!',
         showDummyKeyboard: this.showDummyKeyboard,
+        showCustomHeader: this.showCustomHeader,
         showFooter: this.showNestedFooter,
         showDummyContent: this.showNestedDummyContent,
         delayLoadDummyContent: this.delayLoadDummyContent,
@@ -135,12 +134,12 @@ export class FirstEmbeddedModalExampleComponent implements OnInit {
     this.modal.scrollDisabled = disabled;
   }
 
-  toggleFooter() {
-    this.showFooter = !this.showFooter;
-  }
-
   toggleCustomHeaderContent() {
     this.showCustomHeader = !this.showCustomHeader;
+  }
+
+  toggleFooter() {
+    this.showFooter = !this.showFooter;
   }
 
   close() {

@@ -6,6 +6,13 @@
 ></kirby-checkbox>
 
 <kirby-checkbox
+  *ngIf="showCustomHeader !== undefined"
+  [checked]="showCustomHeader"
+  (checkedChange)="toggleShowCustomHeader($event)"
+  text="Show custom header"
+></kirby-checkbox>
+
+<kirby-checkbox
   *ngIf="showFooter !== undefined"
   [checked]="showFooter"
   (checkedChange)="toggleShowFooter($event)"

@@ -33,6 +33,7 @@
     <cookbook-example-configuration-wrapper [snapToViewport]="true">
       <cookbook-modal-example-configuration
         [(showDummyKeyboard)]="showDummyKeyboard"
+        [(showCustomHeader)]="showCustomHeader"
         [(showFooter)]="showFooter"
         [(showDummyContent)]="showDummyContent"
         [disableScroll]="disableScroll"
@@ -60,6 +61,7 @@
       </button>
       <cookbook-example-configuration-wrapper>
         <cookbook-modal-example-configuration
+          [(showCustomHeader)]="showCustomHeader"
           [(showFooter)]="showNestedFooter"
           [(showDummyContent)]="showNestedDummyContent"
           [(delayLoadDummyContent)]="delayLoadDummyContent"

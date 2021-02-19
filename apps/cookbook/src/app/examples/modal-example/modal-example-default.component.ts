@@ -27,7 +27,7 @@ const config = {
 <p>Some content of the embedded component</p>
 ...
 `,
-  titleWithProgressCircleTemplate: `
+  customHeaderTemplate: `
 <kirby-page-title>
   <kirby-progress-circle themeColor="warning" value="50" size="sm" class="kirby-text-xsmall">
   2/4
@@ -173,7 +173,7 @@ export class EmbeddedComponent() {
 export class ModalExampleDefaultComponent {
   template = config.template.split('<cookbook-example-configuration-wrapper>')[0]; // Remove config part of the template
   titleTemplate = config.titleTemplate;
-  titleWithProgressCircleTemplate = config.titleWithProgressCircleTemplate;
+  customHeaderTemplate = config.customHeaderTemplate;
   footerTemplate = config.footerTemplate;
   defaultCodeSnippet = [
     config.showModalCodeSnippet,
@@ -192,8 +192,8 @@ export class ModalExampleDefaultComponent {
   closeModalCodeSnippet = config.closeModalCodeSnippet;
 
   showDummyKeyboard = !!this.window.sessionStorage.getItem('kirby-cookbook-show-dummy-keyboard');
-  showFooter = false;
   showCustomHeader = false;
+  showFooter = false;
   showDummyContent = true;
   delayLoadDummyContent = true;
   loadAdditionalContent = false;
@@ -217,8 +217,8 @@ export class ModalExampleDefaultComponent {
         },
         showNestedOptions: true,
         showDummyKeyboard: this.showDummyKeyboard,
-        showFooter: this.showFooter,
         showCustomHeader: this.showCustomHeader,
+        showFooter: this.showFooter,
         showDummyContent: this.showDummyContent,
         delayLoadDummyContent: this.delayLoadDummyContent,
         loadAdditionalContent: this.loadAdditionalContent,
