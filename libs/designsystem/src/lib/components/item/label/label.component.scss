@@ -2,14 +2,7 @@
 @import '../item.utils';
 
 :host {
-  display: block;
-  box-sizing: border-box;
-  font-size: inherit;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-
-  &.horizontal {
+  &.horizontal ion-label {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -21,17 +14,17 @@
   }
 }
 
-:host-context(kirby-item) {
+:host-context(kirby-item) ion-label {
   @include item-typography();
 }
 
-:host([slot='end']) {
+:host([slot='end']) ion-label {
   @include slotted(data, '[detail]') {
     margin-inline-start: size('s');
   }
 }
 
-:host-context(kirby-item.selected) {
+:host-context(kirby-item.selected) ion-label {
   @include slotted(h1, h2, h3, h4, h5, h6, p, data) {
     font-weight: font-weight('bold');
   }

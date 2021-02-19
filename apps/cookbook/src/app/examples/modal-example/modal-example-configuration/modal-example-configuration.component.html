@@ -1,0 +1,52 @@
+<kirby-checkbox
+  *ngIf="showDummyKeyboard !== undefined"
+  [checked]="showDummyKeyboard"
+  (checkedChange)="toggleDummyKeyboard($event)"
+  text="Show dummy keyboard"
+></kirby-checkbox>
+
+<kirby-checkbox
+  *ngIf="showFooter !== undefined"
+  [checked]="showFooter"
+  (checkedChange)="toggleShowFooter($event)"
+  text="Show footer"
+></kirby-checkbox>
+
+<kirby-checkbox
+  *ngIf="disableScroll !== undefined"
+  [checked]="disableScroll"
+  (checkedChange)="toggleDisableScroll($event)"
+  text="Disable scroll"
+></kirby-checkbox>
+
+<kirby-checkbox
+  *ngIf="showDummyContent !== undefined"
+  [checked]="showDummyContent"
+  (checkedChange)="toggleShowDummyContent($event)"
+  text="Show dummy content"
+></kirby-checkbox>
+
+<kirby-checkbox
+  *ngIf="delayLoadDummyContent !== undefined"
+  [checked]="delayLoadDummyContent"
+  (checkedChange)="toggleDelayLoadDummyContent($event)"
+  [disabled]="!showDummyContent"
+  class="indent"
+  text="Delay load modal"
+></kirby-checkbox>
+
+<kirby-checkbox
+  *ngIf="loadAdditionalContent !== undefined"
+  [checked]="loadAdditionalContent"
+  (checkedChange)="showDummyContent && toggleLoadAdditionalContent($event)"
+  [disabled]="!showDummyContent"
+  class="indent"
+  text="Delay load additional"
+></kirby-checkbox>
+
+<kirby-checkbox
+  *ngIf="openFullHeight !== undefined"
+  [checked]="openFullHeight"
+  (checkedChange)="toggleOpenFullHeight($event)"
+  text="Open in full height"
+></kirby-checkbox>

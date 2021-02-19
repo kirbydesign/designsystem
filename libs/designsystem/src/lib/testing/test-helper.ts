@@ -1,3 +1,6 @@
+import { IonicModule } from '@ionic/angular';
+import { IonicConfig } from '@ionic/core';
+
 export class TestHelper {
   private static readonly _init = TestHelper.muteIonicReInitializeWarning();
 
@@ -10,14 +13,30 @@ export class TestHelper {
     console.warn = patchedWarn;
   }
 
+  public static ionicModuleForTest = IonicModule.forRoot({
+    mode: 'ios',
+    _testing: true,
+    get: () => {}, // Prevents Ionic "config.get is not a function" errors
+  } as IonicConfig);
+
   /*
-   * Checks for the Web Component being ready,
+   * Checks for the Web Component(s) being ready,
    * ie. the component is hydrated, styles have been applied
    * and the Shadow DOM is ready for query
    */
-  public static async whenReady(element: Element): Promise<void> {
-    await TestHelper.whenDefined(element);
-    await TestHelper.ionComponentOnReady(element);
+  public static async whenReady(
+    elementOrNodeList: Element | NodeListOf<Element> | Element[]
+  ): Promise<void> {
+    if (elementOrNodeList === undefined || elementOrNodeList === null)
+      return Promise.reject('TestHelper.whenReady: Element is null or undefined');
+    if (elementOrNodeList instanceof Element) {
+      await TestHelper.whenDefined(elementOrNodeList);
+      await TestHelper.ionComponentOnReady(elementOrNodeList);
+    } else {
+      await Promise.all(
+        Array.from(elementOrNodeList).map(async (element) => await TestHelper.whenReady(element))
+      );
+    }
   }
 
   /* Checks for the Web Component being defined, ie. the public methods are available */
@@ -38,6 +57,7 @@ export class TestHelper {
     timeoutInMs: number = 2000,
     pollIntervalInMs: number = 5
   ): Promise<void> {
+    if (pollFunc() === true) return Promise.resolve();
     return new Promise((resolve, reject) => {
       let timeoutId, intervalId;
       const pollState = () => {
@@ -68,8 +88,10 @@ export class TestHelper {
   public static screensize = {
     phonesmall: { width: '320px', height: '568px' },
     phone: { width: '375px', height: '667px' },
+    phablet: { width: '575px', height: '767px' },
+    'phablet-landscape': { width: '767px', height: '575px' },
     tablet: { width: '768px', height: '1024px' },
-    desktop: { width: '1024px', height: '1366px' },
+    desktop: { width: '1200px', height: '900px' },
   };
 
   public static resizeTestWindow(size: { width?: string; height?: string }): Promise<void> {
@@ -135,3 +157,5 @@ export class TestHelper {
     return new Promise((resolve) => setTimeout(resolve, timeoutInMs));
   }
 }
+
+export type ScreenSize = keyof typeof TestHelper.screensize;

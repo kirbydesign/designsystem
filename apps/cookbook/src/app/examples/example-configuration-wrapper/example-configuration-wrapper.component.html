@@ -1,0 +1,12 @@
+<ng-container *ngIf="snapToViewport; else fieldset">
+  <kirby-card>
+    <ng-container *ngTemplateOutlet="fieldset"></ng-container>
+  </kirby-card>
+</ng-container>
+
+<ng-template #fieldset>
+  <fieldset>
+    <legend>Configuration</legend>
+    <ng-content></ng-content>
+  </fieldset>
+</ng-template>

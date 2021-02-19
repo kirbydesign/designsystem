@@ -14,7 +14,7 @@ export { ChipComponent } from './chip/chip.component';
 
 export { DividerComponent } from './divider/divider.component';
 
-export { DropdownComponent } from './dropdown/dropdown.component';
+export { DropdownComponent, HorizontalDirection } from './dropdown/dropdown.component';
 
 export { EmptyStateComponent } from './empty-state/empty-state.component';
 
@@ -53,3 +53,7 @@ export { FlagComponent } from './flag/flag.component';
 export * from './slides/slides.component';
 
 export { ToggleButtonComponent } from './toggle-button/toggle-button.component';
+
+export * from './accordion';
+
+export * from './radio';

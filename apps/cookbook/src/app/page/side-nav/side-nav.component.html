@@ -47,16 +47,13 @@
       <li><a routerLink="showcase/alert" [routerLinkActive]="'is-selected'" class="side-nav__item">Alert</a></li>
       <li><a routerLink="showcase/button" [routerLinkActive]="'is-selected'" class="side-nav__item">Button</a></li>
       <li><a routerLink="showcase/slide-button" [routerLinkActive]="'is-selected'" class="side-nav__item">Slide Button</a></li>
-      <li><a routerLink="showcase/card" [routerLinkActive]="'is-selected'" class="side-nav__item">Card</a></li>
+      <li><a routerLink="showcase/calendar" [routerLinkActive]="'is-selected'" class="side-nav__item">Calendar</a></li>
       <li><a routerLink="showcase/checkbox" [routerLinkActive]="'is-selected'" class="side-nav__item">Checkbox</a></li>
+      <li><a routerLink="showcase/radio" [routerLinkActive]="'is-selected'" class="side-nav__item">Radio</a></li>
       <li><a routerLink="showcase/chip" [routerLinkActive]="'is-selected'" class="side-nav__item">Chip</a></li>
-      <li><a routerLink="showcase/divider" [routerLinkActive]="'is-selected'" class="side-nav__item">Divider</a></li>
+      <li><a routerLink="showcase/dropdown" [routerLinkActive]="'is-selected'" class="side-nav__item">Dropdown</a></li>
       <li><a routerLink="showcase/empty-state" [routerLinkActive]="'is-selected'" class="side-nav__item">Empty State</a></li>
-      <li><a routerLink="showcase/list" [routerLinkActive]="'is-selected'" class="side-nav__item">List</a></li>
-      <li><a routerLink="showcase/list-load-on-demand" [routerLinkActive]="'is-selected'" class="side-nav__item">List - load on demand</a></li>
-      <li><a routerLink="showcase/list-swipe" [routerLinkActive]="'is-selected'" class="side-nav__item">List - swipe</a></li>
-      <li><a routerLink="showcase/list-no-shape" [routerLinkActive]="'is-selected'" class="side-nav__item">List - No styling</a></li>
-      <li><a routerLink="showcase/reorder-list" [routerLinkActive]="'is-selected'" class="side-nav__item">List - reorder</a></li>
+      <li><a routerLink="showcase/form-field" [routerLinkActive]="'is-selected'" class="side-nav__item">Form Field</a></li>
       <li><a routerLink="showcase/modal" [routerLinkActive]="'is-selected'" class="side-nav__item">Modal</a></li>
       <li><a routerLink="showcase/loading-overlay" [routerLinkActive]="'is-selected'" class="side-nav__item">Loading Overlay</a></li>
       <li><a routerLink="showcase/segmented-control" [routerLinkActive]="'is-selected'" class="side-nav__item">Segmented Control</a></li>
@@ -74,12 +71,20 @@
     </a>
     <!-- prettier-ignore -->
     <ul class="side-nav side-nav--sub">
-      <li><a routerLink="showcase/page" [routerLinkActive]="'is-selected'" class="side-nav__item">Page</a></li>
+      <li><a routerLink="showcase/accordion" [routerLinkActive]="'is-selected'" class="side-nav__item">Accordion</a></li>
+      <li><a routerLink="showcase/card" [routerLinkActive]="'is-selected'" class="side-nav__item">Card</a></li>
+      <li><a routerLink="showcase/divider" [routerLinkActive]="'is-selected'" class="side-nav__item">Divider</a></li>
       <li><a routerLink="showcase/grid" [routerLinkActive]="'is-selected'" class="side-nav__item">Grid</a></li>
       <li><a routerLink="showcase/item" [routerLinkActive]="'is-selected'" class="side-nav__item">Item</a></li>
-      <li><a routerLink="showcase/toolbar" [routerLinkActive]="'is-selected'" class="side-nav__item">Toolbar</a></li>
-      <li><a routerLink="showcase/tabs" [routerLinkActive]="'is-selected'" class="side-nav__item">Tabs</a></li>
+      <li><a routerLink="showcase/list" [routerLinkActive]="'is-selected'" class="side-nav__item">List</a></li>
+      <li><a routerLink="showcase/list-load-on-demand" [routerLinkActive]="'is-selected'" class="side-nav__item">List - load on demand</a></li>
+      <li><a routerLink="showcase/list-swipe" [routerLinkActive]="'is-selected'" class="side-nav__item">List - swipe</a></li>
+      <li><a routerLink="showcase/list-no-shape" [routerLinkActive]="'is-selected'" class="side-nav__item">List - No styling</a></li>
+      <li><a routerLink="showcase/reorder-list" [routerLinkActive]="'is-selected'" class="side-nav__item">List - reorder</a></li>
+      <li><a routerLink="showcase/page" [routerLinkActive]="'is-selected'" class="side-nav__item">Page</a></li>
       <li><a routerLink="showcase/slides" [routerLinkActive]="'is-selected'" class="side-nav__item">Slides</a></li>
+      <li><a routerLink="showcase/tabs" [routerLinkActive]="'is-selected'" class="side-nav__item">Tabs</a></li>
+      <li><a routerLink="showcase/toolbar" [routerLinkActive]="'is-selected'" class="side-nav__item">Toolbar</a></li>
     </ul>
   </li>
   <li routerLinkActive="is-selected" [routerLinkActiveOptions]="{ exact: false }">
@@ -93,16 +98,13 @@
     <ul class="side-nav side-nav--sub">
       <li><a routerLink="showcase/avatar" [routerLinkActive]="'is-selected'" class="side-nav__item">Avatar</a></li>
       <li><a routerLink="showcase/badge" [routerLinkActive]="'is-selected'" class="side-nav__item">Badge</a></li>
-      <li><a routerLink="showcase/flag" [routerLinkActive]="'is-selected'" class="side-nav__item">Flag</a></li>
       <li><a routerLink="showcase/chart" [routerLinkActive]="'is-selected'" class="side-nav__item">Charts</a></li>
       <li><a routerLink="showcase/stock-chart" [routerLinkActive]="'is-selected'" class="side-nav__item">Stock Chart</a></li>
       <li><a routerLink="showcase/colors" [routerLinkActive]="'is-selected'" class="side-nav__item">Colors</a></li>
-      <li><a routerLink="showcase/calendar" [routerLinkActive]="'is-selected'" class="side-nav__item">Calendar</a></li>
+      <li><a routerLink="showcase/flag" [routerLinkActive]="'is-selected'" class="side-nav__item">Flag</a></li>
       <li><a routerLink="showcase/icon" [routerLinkActive]="'is-selected'" class="side-nav__item">Icon</a></li>
-      <li><a routerLink="showcase/spinner" [routerLinkActive]="'is-selected'" class="side-nav__item">Spinner</a></li>
-      <li><a routerLink="showcase/form-field" [routerLinkActive]="'is-selected'" class="side-nav__item">Form Field</a></li>
-      <li><a routerLink="showcase/dropdown" [routerLinkActive]="'is-selected'" class="side-nav__item">Dropdown</a></li>
       <li><a routerLink="showcase/progress-circle" [routerLinkActive]="'is-selected'" class="side-nav__item">Progress Circle</a></li>
+      <li><a routerLink="showcase/spinner" [routerLinkActive]="'is-selected'" class="side-nav__item">Spinner</a></li>
     </ul>
   </li>
   <li routerLinkActive="is-selected" [routerLinkActiveOptions]="{ exact: false }">

@@ -1,47 +1,116 @@
 @import '../../scss/utils';
 
-.checkbox {
-  --border-color: #{get-color('primary-contrast')};
-}
+$border-radius: 6px;
+$checkbox-icon-size: size('m');
+$spacing-to-edge: map-get($checkbox-radio-spacing, 'to-edge');
+$spacing-to-label: map-get($checkbox-radio-spacing, 'to-label');
 
-.primary {
-  --checkmark-color: #{get-color('primary-contrast')};
-  --background-checked: #{get-color('primary')};
-  --border-color-checked: #{get-color('primary')};
-}
+:host {
+  display: inline-block;
 
-.secondary {
-  --checkmark-color: #{get-color('secondary-contrast')};
-  --background-checked: #{get-color('secondary')};
-  --border-color-checked: #{get-color('secondary')};
-}
+  &.attention-level1 ion-checkbox {
+    --checkmark-color: #{get-color('black')};
+    --background-checked: #{get-color('success')};
+    --border-color-checked: #{get-color('success')};
 
-.tertiary {
-  --checkmark-color: #{get-color('tertiary-contrast')};
-  --background-checked: #{get-color('tertiary')};
-  --border-color-checked: #{get-color('tertiary')};
-}
+    &:active {
+      --background-checked: #{get-color('success-shade')};
+      --border-color-checked: #{get-color('success-shade')};
+    }
+  }
 
-.warning {
-  --checkmark-color: #{get-color('warning-contrast')};
-  --background-checked: #{get-color('warning')};
-  --border-color-checked: #{get-color('warning')};
-}
+  &.attention-level2 ion-checkbox {
+    --checkmark-color: #{get-color('white')};
+    --background-checked: #{get-color('black')};
+    --border-color-checked: #{get-color('black')};
 
-.success {
-  --checkmark-color: #{get-color('success-contrast')};
-  --background-checked: #{get-color('success')};
-  --border-color-checked: #{get-color('success')};
-}
+    &:active {
+      --checkmark-color: #{get-color('white-shade')};
+      --background-checked: #{get-color('black-tint')};
+      --border-color-checked: #{get-color('black-tint')};
+    }
+  }
 
-.danger {
-  --checkmark-color: #{get-color('danger-contrast')};
-  --background-checked: #{get-color('danger')};
-  --border-color-checked: #{get-color('danger')};
+  &.error ion-checkbox {
+    --border-color: #{get-color('danger')};
+  }
+
+  &[disabled] {
+    color: #{get-text-color('semi-dark')};
+
+    ion-checkbox {
+      opacity: 1;
+      --checkmark-color: #{get-color('semi-dark')};
+      --background: #{get-color('semi-light')};
+      --background-checked: #{get-color('semi-light')};
+      --border-color: #{get-color('medium')};
+      --border-color-checked: #{get-color('semi-light')};
+    }
+  }
+
+  ion-checkbox {
+    --size: #{$checkbox-icon-size};
+    --checkmark-width: #{size('xxxs')};
+    --background: #{get-color('white')};
+    --border-width: 1px;
+    --border-color: #{get-color('semi-dark')};
+    --border-radius: #{$border-radius};
+
+    margin-left: $spacing-to-edge;
+    margin-right: $spacing-to-label;
+
+    &::part(container) {
+      padding: size('xxxs'); // Spacing between checkmark and container box
+    }
+
+    &:focus-within::part(container) {
+      @media (hover: hover) {
+        box-shadow: 0 0 0 1px var(--kirby-background-color), 0 0 0 2px #{$focus-ring-color};
+        border-radius: $border-radius;
+      }
+    }
+    &:active {
+      --background: #{get-color('white-shade')};
+    }
+  }
+
+  &.has-label {
+    display: block;
+
+    .wrapper {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      vertical-align: top;
+      padding-right: $spacing-to-label; // Ensure same padding on right side of label
+      min-height: map-get($checkbox-radio-sizes, 'md');
+    }
+
+    @each $size, $height in $checkbox-radio-sizes {
+      :host-context(.checkbox-#{$size}),
+      &.#{$size} {
+        .wrapper {
+          min-height: $height;
+        }
+      }
+    }
+
+    ion-checkbox {
+      position: static;
+      flex-shrink: 0;
+      flex-grow: 0;
+    }
+  }
 }
 
 :host-context(kirby-item) {
+  z-index: z('default'); // Makes whole kirby-item clickable above item-inner.
+
+  ion-checkbox {
+    margin: 0;
+  }
+
   &[slot='start'] {
-    margin-inline-end: size('s');
+    margin-inline-end: $spacing-to-label;
   }
 }

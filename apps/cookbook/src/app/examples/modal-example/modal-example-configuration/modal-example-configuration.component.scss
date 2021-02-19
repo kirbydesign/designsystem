@@ -1,0 +1,15 @@
+@import './libs/designsystem/src/lib/scss/utils';
+
+:host {
+  kirby-checkbox {
+    &:not(:first-of-type) {
+      margin-top: size('xxxs');
+    }
+
+    &.indent {
+      margin-left: size('l');
+      margin-top: size('xxxs');
+      font-size: font-size('s');
+    }
+  }
+}

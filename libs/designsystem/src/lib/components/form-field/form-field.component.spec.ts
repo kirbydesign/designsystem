@@ -1,18 +1,18 @@
-import { SpectatorHost, createHostFactory } from '@ngneat/spectator';
+import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
-import { DesignTokenHelper } from '../../helpers/design-token-helper';
+import { DesignTokenHelper, PlatformService } from '../../helpers';
 import { TestHelper } from '../../testing/test-helper';
-import { InputCounterComponent } from './input-counter/input-counter.component';
-import { FormFieldComponent } from './form-field.component';
+import { WindowRef } from '../../types';
+import { ItemComponent } from '../item/item.component';
+import { RadioGroupComponent } from '../radio/radio-group/radio-group.component';
+
 import { FormFieldMessageComponent } from './form-field-message/form-field-message.component';
+import { FormFieldComponent } from './form-field.component';
+import { InputCounterComponent } from './input-counter/input-counter.component';
 import { InputComponent } from './input/input.component';
 import { TextareaComponent } from './textarea/textarea.component';
-import { ItemComponent } from '../item/item.component';
 
-const size = DesignTokenHelper.size;
-const fontSize = DesignTokenHelper.fontSize;
-const fontWeight = DesignTokenHelper.fontWeight;
-const lineHeight = DesignTokenHelper.lineHeight;
+const { size, fontSize, fontWeight, lineHeight, getElevation } = DesignTokenHelper;
 
 describe('FormFieldComponent', () => {
   let spectator: SpectatorHost<FormFieldComponent>;
@@ -23,8 +23,16 @@ describe('FormFieldComponent', () => {
       FormFieldMessageComponent,
       InputComponent,
       TextareaComponent,
+      RadioGroupComponent,
       InputCounterComponent,
       ItemComponent,
+    ],
+    mocks: [PlatformService],
+    providers: [
+      {
+        provide: WindowRef,
+        useValue: window,
+      },
     ],
   });
 
@@ -50,12 +58,23 @@ describe('FormFieldComponent', () => {
     });
   });
 
+  describe('when disabled', () => {
+    it('should not have elevation', () => {
+      spectator = createHost(`<kirby-form-field>
+        <input kirby-input disabled value="Disabled input" />
+      </kirby-form-field>`);
+      const inputElement = spectator.queryHost('input[kirby-input]');
+      expect(inputElement).toHaveComputedStyle({ 'box-shadow': 'none' });
+    });
+  });
+
   describe('with label', () => {
     let labelElement: HTMLLabelElement;
     let labelTextElement: HTMLElement;
     beforeEach(() => {
       spectator = createHost(
         `<kirby-form-field label="Form field with label">
+          <input kirby-input />
          </kirby-form-field>`
       );
       labelElement = spectator.queryHost('label');
@@ -172,13 +191,30 @@ describe('FormFieldComponent', () => {
   });
 
   describe('with slotted input', () => {
+    it('should render the input with elevation', () => {
+      spectator = createHost(
+        `<kirby-form-field>
+          <input kirby-input />
+        </kirby-form-field>`
+      );
+      const inputElement = spectator.queryHost('input[kirby-input]');
+      expect(inputElement).toHaveComputedStyle({ 'box-shadow': getElevation(2) });
+    });
+
     describe('and no label', () => {
+      let dispatchEventSpy: jasmine.Spy<jasmine.Func>;
+
       beforeEach(() => {
+        dispatchEventSpy = spyOn(document, 'dispatchEvent');
+
         spectator = createHost(
           `<kirby-form-field>
-             <input kirby-input/>
-           </kirby-form-field>`
+            <input kirby-input [readonly]="readonly" />
+          </kirby-form-field>`,
+          { detectChanges: false, hostProps: { readonly: false } } // Delay change detection to allow altering platform.isTouch()
         );
+
+        spectator.detectChanges();
       });
 
       it('should render the input', () => {
@@ -195,6 +231,46 @@ describe('FormFieldComponent', () => {
       it('should not render the input within a label', () => {
         const inputElement = spectator.queryHost('label input[kirby-input]');
         expect(inputElement).toBeNull();
+      });
+
+      it('should register shims', () => {
+        spectator.setHostInput({ readonly: false });
+        spectator.detectChanges(); //ngOnInit() + 1st ngAfterContentChecked()
+        expect(dispatchEventSpy).toHaveBeenCalledTimes(1);
+        expect(dispatchEventSpy).toHaveBeenCalledWith(
+          new CustomEvent('ionInputDidLoad', {
+            detail: spectator.element,
+          })
+        );
+      });
+
+      it('should NOT register shims if readonly', () => {
+        spectator.setHostInput({ readonly: true });
+        spectator.detectChanges(); //ngOnInit() + 1st ngAfterContentChecked()
+        expect(dispatchEventSpy).toHaveBeenCalledTimes(0);
+      });
+
+      it('should register shims if changing from readonly to not readonly', () => {
+        spectator.setHostInput({ readonly: true });
+        spectator.detectChanges(); //ngOnInit() + 1st ngAfterContentChecked()
+        expect(dispatchEventSpy).toHaveBeenCalledTimes(0);
+
+        spectator.setHostInput({ readonly: false });
+        spectator.detectChanges(); //ngOnInit() + 2nd ngAfterContentChecked()
+        expect(dispatchEventSpy).toHaveBeenCalledTimes(1);
+        expect(dispatchEventSpy).toHaveBeenCalledWith(
+          new CustomEvent('ionInputDidLoad', {
+            detail: spectator.element,
+          })
+        );
+      });
+
+      it('should dispatch `ionInputDidUnload` event on destroy', () => {
+        spectator.fixture.destroy();
+        const event: Event = dispatchEventSpy.calls.mostRecent().args[0];
+        expect(event).toBeInstanceOf(CustomEvent);
+        expect(event.type).toBe('ionInputDidUnload');
+        expect((event as CustomEvent).detail).toEqual(spectator.element);
       });
     });
 
@@ -244,6 +320,11 @@ describe('FormFieldComponent', () => {
         const textareaElement = spectator.queryHost('label textarea[kirby-textarea]');
         expect(textareaElement).toBeNull();
       });
+
+      it('should render the textarea with elevation', () => {
+        const textareaElement = spectator.queryHost('textarea[kirby-textarea]');
+        expect(textareaElement).toHaveComputedStyle({ 'box-shadow': getElevation(2) });
+      });
     });
 
     describe('and a label', () => {
@@ -263,6 +344,78 @@ describe('FormFieldComponent', () => {
       it('should render the textarea within a label', () => {
         const textareaElement = spectator.queryHost('label textarea[kirby-textarea]');
         expect(textareaElement).toBeTruthy();
+      });
+    });
+  });
+
+  describe('with slotted radio-group', () => {
+    let radioGroupElement: HTMLElement;
+    let label: HTMLLabelElement;
+    describe('and no label', () => {
+      beforeEach(() => {
+        spectator = createHost(
+          `<kirby-form-field>
+             <kirby-radio-group
+               [items]="['Test 1','Test 2','Test 3']">
+             </kirby-radio-group>
+           <kirby-form-field>`
+        );
+        radioGroupElement = spectator.queryHost('kirby-radio-group');
+        label = spectator.queryHost('label');
+      });
+
+      it('should render the radio-group as a direct descendant', () => {
+        expect(radioGroupElement).toBeTruthy();
+        expect(radioGroupElement.parentElement).toEqual(spectator.element);
+      });
+
+      it('should not render the radio-group within a label', () => {
+        const radioGroupInLabel = spectator.queryHost('label kirby-radio-group');
+        expect(radioGroupInLabel).toBeNull();
+      });
+
+      it('should not render a label', () => {
+        expect(label).toBeNull();
+      });
+    });
+
+    describe('and a label', () => {
+      beforeEach(() => {
+        spectator = createHost(
+          `<kirby-form-field label="Radio group with label">
+            <kirby-radio-group
+              [items]="['Test 1','Test 2','Test 3']">
+            </kirby-radio-group>
+          <kirby-form-field>`
+        );
+        radioGroupElement = spectator.queryHost('kirby-radio-group');
+        label = spectator.queryHost('label');
+      });
+
+      it('should render the radio-group', () => {
+        expect(radioGroupElement).toBeTruthy();
+      });
+
+      it('should not render the radio-group within a label', () => {
+        const radioGroupInLabel = spectator.queryHost('label kirby-radio-group');
+        expect(radioGroupInLabel).toBeNull();
+      });
+
+      it('should render a label', () => {
+        expect(label).toBeTruthy();
+      });
+
+      it('should associate the label with the radio group', () => {
+        expect(radioGroupElement.getAttribute('aria-labelledby')).toEqual(label.id);
+      });
+
+      it('should focus the the radio group when clicking the label ', () => {
+        const radioGroupComponent = spectator.query(RadioGroupComponent);
+        const focusSpy = spyOn(radioGroupComponent, 'focus');
+
+        spectator.click(label);
+
+        expect(focusSpy).toHaveBeenCalled();
       });
     });
   });
@@ -313,6 +466,52 @@ describe('FormFieldComponent', () => {
           });
         });
       });
+    });
+  });
+
+  describe('focus', () => {
+    let platformServiceSpy: jasmine.SpyObj<PlatformService>;
+
+    beforeEach(() => {
+      spectator = createHost(
+        `<kirby-form-field>
+        <input kirby-input />
+      </kirby-form-field>`,
+        { detectChanges: false } // Delay change detection to allow altering platform.isTouch()
+      );
+      platformServiceSpy = spectator.inject(PlatformService);
+    });
+
+    it('should focus input element if not touch', () => {
+      platformServiceSpy.isTouch.and.returnValue(false);
+      // Call detectChanges() twice - see: https://angular.io/guide/testing-components-scenarios#detectchanges
+      spectator.detectChanges(); //ngOnInit() + 1st ngAfterContentChecked()
+      spectator.detectChanges(); // 2nd ngAfterContentChecked
+      const formFieldElement = spectator.queryHost<HTMLInputElement>('input[kirby-input]');
+      const focusSpy = spyOn(formFieldElement, 'focus');
+
+      spectator.component.focus();
+
+      expect(focusSpy).toHaveBeenCalled();
+    });
+
+    it('should dispatch touch events if touch', () => {
+      platformServiceSpy.isTouch.and.returnValue(true);
+      // Call detectChanges() twice - see: https://angular.io/guide/testing-components-scenarios#detectchanges
+      spectator.detectChanges(); //ngOnInit() + 1st ngAfterContentChecked()
+      spectator.detectChanges(); // 2nd ngAfterContentChecked
+      const inputElement = spectator.queryHost<HTMLInputElement>('input[kirby-input]');
+      const dispatchEventSpy = spyOn(inputElement, 'dispatchEvent');
+
+      spectator.component.focus();
+
+      expect(dispatchEventSpy).toHaveBeenCalledTimes(2);
+      const firstEvent: Event = dispatchEventSpy.calls.argsFor(0)[0];
+      expect(firstEvent).toBeInstanceOf(TouchEvent);
+      expect(firstEvent.type).toBe('touchstart');
+      const secondEvent: Event = dispatchEventSpy.calls.argsFor(1)[0];
+      expect(secondEvent).toBeInstanceOf(TouchEvent);
+      expect(secondEvent.type).toBe('touchend');
     });
   });
 });

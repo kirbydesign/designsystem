@@ -5,6 +5,10 @@ import { styles } from './design-token-helper.styles';
 
 export class DesignTokenHelper {
   public static readonly breakpoints = styles.breakpoints;
+  public static readonly softKeyboardTransitionEnter = styles.softKeyboardTransitionEnter.join(' ');
+  public static readonly softKeyboardTransitionLeave = styles.softKeyboardTransitionLeave.join(' ');
+  public static readonly modalDefaultHeight = styles.modalDefaultHeight;
+  public static readonly drawerDefaultHeight = styles.drawerDefaultHeight;
 
   public static getColor(
     name: ThemeColorExtended,
@@ -17,6 +21,22 @@ export class DesignTokenHelper {
       variant: variant,
       fullname: colorVariant,
       value: ColorHelper.getThemeColorRgbString(colorVariant),
+      hex: ColorHelper.getThemeColorHexString(colorVariant),
+    };
+  }
+
+  public static getTextColor(
+    name: ThemeColorExtended,
+    variant?: ThemeColorVariant
+  ): ThemeColorDefinition {
+    const variantSuffix = variant ? `-${variant}` : '';
+    const colorVariant = `${name}${variantSuffix}`;
+    return {
+      name: name,
+      variant: variant,
+      fullname: colorVariant,
+      value: ColorHelper.getThemeTextColorRgbString(colorVariant),
+      hex: ColorHelper.getThemeTextColorHexString(colorVariant),
     };
   }
 
@@ -67,6 +87,10 @@ export class DesignTokenHelper {
   public static fatFingerSize(): string {
     return styles.fatFingerSize;
   }
+
+  public static getElevation(z: 2 | 4 | 8): string {
+    return styles.elevationsRgb[z];
+  }
 }
 
 export type ThemeColorExtended =
@@ -83,4 +107,5 @@ export interface ThemeColorDefinition {
   variant?: ThemeColorVariant;
   fullname: string;
   value?: string;
+  hex?: string;
 }

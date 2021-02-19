@@ -1,3 +1,4 @@
+import { MockAccordionItemComponent } from './components/mock.accordion-item.component';
 import { MockAppComponent } from './components/mock.app.component';
 import { MockAvatarComponent } from './components/mock.avatar.component';
 import { MockBadgeComponent } from './components/mock.badge.component';
@@ -41,6 +42,8 @@ import {
   MockPageComponent,
 } from './components/mock.page.component';
 import { MockProgressCircleComponent } from './components/mock.progress-circle.component';
+import { MockRadioGroupComponent } from './components/mock.radio-group.component';
+import { MockRadioComponent } from './components/mock.radio.component';
 import { MockReorderListComponent } from './components/mock.reorder-list.component';
 import { MockRouterOutletComponent } from './components/mock.router-outlet.component';
 import { MockSegmentedControlComponent } from './components/mock.segmented-control.component';
@@ -53,6 +56,7 @@ import { MockToggleButtonComponent } from './components/mock.toggle-button.compo
 import { MockToolbarComponent } from './components/mock.toolbar.component';
 
 export const MOCK_COMPONENTS = [
+  MockAccordionItemComponent,
   MockAppComponent,
   MockAvatarComponent,
   MockBadgeComponent,
@@ -94,6 +98,8 @@ export const MOCK_COMPONENTS = [
   MockPageActionsComponent,
   MockPageComponent,
   MockProgressCircleComponent,
+  MockRadioGroupComponent,
+  MockRadioComponent,
   MockReorderListComponent,
   MockRouterOutletComponent,
   MockSegmentedControlComponent,

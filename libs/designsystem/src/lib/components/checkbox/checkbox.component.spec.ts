@@ -1,105 +1,191 @@
-import { Spectator, createComponentFactory } from '@ngneat/spectator';
+import { Spectator, createHostFactory } from '@ngneat/spectator';
 import { IonCheckbox } from '@ionic/angular';
 
-import { MockComponent } from 'ng-mocks';
-import * as ionic from '@ionic/angular';
-import { SimpleChange } from '@angular/core';
-
 import { CheckboxComponent } from './checkbox.component';
+import { DesignTokenHelper } from '../../helpers';
+
+const size = DesignTokenHelper.size;
+const getColor = DesignTokenHelper.getColor;
+const getTextColor = DesignTokenHelper.getTextColor;
+const fatFingerSize = DesignTokenHelper.fatFingerSize();
+const checkboxIconSize = size('m');
+const checkboxSizeXs = size('l');
+const checkboxSizeSm = fatFingerSize;
+const checkboxSizeMd = size('xxxl');
 
 describe('CheckboxComponent', () => {
-  const checked = true;
-  const shape = 'square';
-  const color = 'primary';
-
   let spectator: Spectator<CheckboxComponent>;
+  let ionCheckbox: HTMLIonCheckboxElement;
 
-  const createHost = createComponentFactory({
+  const createHost = createHostFactory({
     component: CheckboxComponent,
-    declarations: [MockComponent(ionic.IonCheckbox)],
+    declarations: [IonCheckbox],
   });
 
   beforeEach(() => {
-    spectator = createHost({ props: { checked, shape, color } });
+    spectator = createHost(`<kirby-checkbox text="test"></kirby-checkbox>`);
+    ionCheckbox = spectator.query('ion-checkbox');
   });
 
   it('should create', () => {
     expect(spectator.component).toBeTruthy();
   });
 
-  describe('event: checkedChange', () => {
-    it('should emit true', () => {
-      spyOn(spectator.component.checkedChange, 'emit');
-      const change = true;
+  describe('by default', () => {
+    it('should have attention level 2', () => {
+      expect(spectator.component.attentionLevel).toBe('2');
+      expect(spectator.element).toHaveClass('attention-level2');
+    });
 
-      spectator.component.onChecked(change);
+    it('should have correct icon styling', () => {
+      expect(ionCheckbox).toHaveComputedStyle({
+        '--size': checkboxIconSize,
+        '--checkmark-color': getColor('white'),
+        '--background-checked': getColor('black'),
+        '--border-color-checked': getColor('black'),
+      });
+    });
+
+    it('should have correct vertical spacing', () => {
+      expect(ionCheckbox).toHaveComputedStyle({
+        'margin-left': size('s'),
+        'margin-right': size('xs'),
+      });
+    });
+
+    it('should have minimum fat finger size', () => {
+      expect(spectator.element).toHaveComputedStyle({
+        height: `>=${fatFingerSize}`,
+        width: `>=${fatFingerSize}`,
+      });
+    });
+
+    it('should not be checked', () => {
+      expect(spectator.component.checked).toBe(false);
+    });
+
+    it('should not be disabled', () => {
+      expect(spectator.component.disabled).toBe(false);
+    });
+
+    it('should not have error', () => {
+      expect(spectator.component.hasError).toBe(false);
+    });
+  });
+
+  describe('when configured', () => {
+    it('should have correct icon styling when attentionLevel is 1', () => {
+      spectator.setInput('attentionLevel', '1');
+      spectator.detectChanges();
+      expect(ionCheckbox).toHaveComputedStyle({
+        '--checkmark-color': getColor('black'),
+        '--background-checked': getColor('success'),
+        '--border-color-checked': getColor('success'),
+      });
+    });
+
+    it('should set the [checked] input on ion-checkbox', () => {
+      spectator.setInput('checked', true);
+      expect(ionCheckbox.checked).toBe(true);
+
+      spectator.setInput('checked', false);
+      expect(ionCheckbox.checked).toBe(false);
+    });
+
+    describe('with size', () => {
+      it(`should have 'md' size by default`, () => {
+        expect(spectator.element).toHaveComputedStyle({
+          height: checkboxSizeMd,
+        });
+      });
+
+      it(`should have correct size when size = 'xs'`, () => {
+        spectator.setInput('size', 'xs');
+        spectator.detectChanges();
+
+        expect(spectator.element).toHaveComputedStyle({
+          height: checkboxSizeXs,
+        });
+      });
+
+      it(`should have correct size when size = 'sm'`, () => {
+        spectator.setInput('size', 'sm');
+        spectator.detectChanges();
+
+        expect(spectator.element).toHaveComputedStyle({
+          height: checkboxSizeSm,
+        });
+      });
+
+      it(`should have correct size when size = 'md'`, () => {
+        spectator.setInput('size', 'md');
+        spectator.detectChanges();
+
+        expect(spectator.element).toHaveComputedStyle({
+          height: checkboxSizeMd,
+        });
+      });
+    });
+
+    describe('when disabled', () => {
+      it('should set the [disabled] input on ion-checkbox', () => {
+        spectator.setInput('disabled', true);
+        expect(ionCheckbox.disabled).toBe(true);
+
+        spectator.setInput('disabled', false);
+        expect(ionCheckbox.disabled).toBe(false);
+      });
+
+      it('should have correct text styling', () => {
+        spectator.setInput('disabled', true);
+        spectator.detectChanges();
+        expect(spectator.element).toHaveComputedStyle({
+          color: getTextColor('semi-dark'),
+        });
+      });
+
+      it('should have correct icon styling', () => {
+        spectator.setInput('disabled', true);
+        spectator.detectChanges();
+        expect(ionCheckbox).toHaveComputedStyle({
+          '--checkmark-color': getColor('semi-dark'),
+          '--background': getColor('semi-light'),
+          '--background-checked': getColor('semi-light'),
+          '--border-color': getColor('medium'),
+          '--border-color-checked': getColor('semi-light'),
+        });
+      });
+    });
+
+    it('should have correct icon styling when checkbox has error', () => {
+      spectator.setInput('hasError', true);
+      spectator.detectChanges();
+      expect(ionCheckbox).toHaveComputedStyle({
+        '--border-color': getColor('danger'),
+      });
+    });
+
+    it('should have the text when [text] input is set', () => {
+      spectator.setInput('text', 'test');
+      expect(spectator.element).toHaveText('test');
+    });
+  });
+
+  describe('when checking checkbox', () => {
+    it('should emit true with event checkedChange when checked', () => {
+      spyOn(spectator.component.checkedChange, 'emit');
+      spectator.component.onChecked(true);
 
       expect(spectator.component.checkedChange.emit).toHaveBeenCalledTimes(1);
       expect(spectator.component.checkedChange.emit).toHaveBeenCalledWith(true);
     });
 
-    it('should emit false', () => {
+    it('should emit false with event checkedChange when unchecked', () => {
       spyOn(spectator.component.checkedChange, 'emit');
-      const change = false;
-
-      spectator.component.onChecked(change);
+      spectator.component.onChecked(false);
 
       expect(spectator.component.checkedChange.emit).toHaveBeenCalledTimes(1);
       expect(spectator.component.checkedChange.emit).toHaveBeenCalledWith(false);
-    });
-  });
-
-  describe('Inputs', () => {
-    it('should bind the class .square to ion-checkbox', () => {
-      const squareShape = 'square';
-      spectator.component.ngOnChanges({
-        shape: new SimpleChange(null, squareShape, false),
-      });
-
-      spectator.setInput('shape', squareShape);
-
-      expect(spectator.query('ion-checkbox')).toHaveClass('square');
-      expect(spectator.query('ion-checkbox')).not.toHaveClass('circle');
-    });
-
-    it('should bind the class .circle to ion-checkbox', () => {
-      const circleShape = 'circle';
-      spectator.component.ngOnChanges({
-        shape: new SimpleChange(null, circleShape, false),
-      });
-
-      spectator.setInput('shape', circleShape);
-
-      expect(spectator.query('ion-checkbox')).toHaveClass('circle');
-      expect(spectator.query('ion-checkbox')).not.toHaveClass('square');
-    });
-
-    it('should bind the class .primary to ion-checkbox', () => {
-      const color = 'primary';
-      spectator.component.ngOnChanges({
-        color: new SimpleChange(null, color, false),
-      });
-
-      spectator.setInput('color', color);
-
-      expect(spectator.query('ion-checkbox')).toHaveClass('primary');
-      expect(spectator.query('ion-checkbox')).not.toHaveClass('secondary');
-    });
-
-    it('should set the [checked] input on ion-checkbox to true', () => {
-      const checked = true;
-
-      spectator.setInput('checked', checked);
-
-      expect((spectator.query(IonCheckbox) as IonCheckbox).checked).toBe(true);
-    });
-
-    it('should set the [checked] input on ion-checkbox to false', () => {
-      const checked = false;
-
-      spectator.setInput('checked', checked);
-
-      expect((spectator.query(IonCheckbox) as IonCheckbox).checked).toBe(false);
     });
   });
 });

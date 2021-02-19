@@ -1,0 +1,116 @@
+@import '../../scss/utils';
+
+$radio-icon-padding: size('xxxxs');
+$radio-icon-size: size('m');
+$radio-icon-mark-size: 60%;
+$spacing-to-edge: map-get($checkbox-radio-spacing, 'to-edge');
+$spacing-to-label: map-get($checkbox-radio-spacing, 'to-label');
+
+:host {
+  display: inline-block;
+
+  &.has-label {
+    display: block;
+
+    div.wrapper {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      vertical-align: top;
+      padding-right: $spacing-to-label; // Ensure same padding on right side of label
+      min-height: map-get($checkbox-radio-sizes, 'md');
+    }
+
+    @each $size, $height in $checkbox-radio-sizes {
+      :host-context(.radio-#{$size}),
+      &.#{$size} {
+        .wrapper {
+          min-height: $height;
+        }
+      }
+    }
+
+    ion-radio {
+      position: static;
+      margin-left: $spacing-to-edge;
+      margin-right: $spacing-to-label;
+    }
+  }
+
+  &[disabled] {
+    color: #{get-text-color('semi-dark')};
+    ion-radio {
+      opacity: 1; // Reset Ionic disabled style
+      --color: #{get-color('medium')};
+      --color-checked: #{get-color('medium')};
+      &::part(container) {
+        background-color: get-color('semi-light');
+      }
+    }
+  }
+}
+
+ion-radio {
+  min-height: $radio-icon-size;
+  min-width: $radio-icon-size;
+  padding: $radio-icon-padding;
+  box-sizing: border-box; // Ensure padding is not added to radio width/height
+  --border-width: 1px;
+  --color: #{get-color('semi-dark')};
+  --color-checked: #{get-color('success')};
+
+  &::part(container) {
+    background-color: get-color('white');
+  }
+
+  &::part(mark) {
+    width: $radio-icon-mark-size;
+    height: $radio-icon-mark-size;
+  }
+
+  &:active {
+    --color: transparent;
+
+    &::part(container) {
+      background-color: get-color('white-shade');
+    }
+  }
+
+  :host-context(kirby-radio-group.error) {
+    ion-radio,
+    ion-radio:active {
+      --color: #{get-color('danger')};
+    }
+  }
+
+  // Only apply focus ring if pointer device can hover
+  // (effectively desktop/mouse devices):
+  @include focus() {
+    &::part(container) {
+      // Apply focus ring through box-shadow to keep circle shape and default border:
+      box-shadow: 0 0 0 1px #{get-color('background-color')}, 0 0 0 3px #{$focus-ring-color};
+    }
+  }
+
+  &.radio-checked {
+    --border-width: 0px;
+
+    &:not(:focus):not(.radio-disabled) {
+      &::part(container) {
+        box-shadow: get-elevation(2);
+      }
+    }
+  }
+}
+
+:host-context(kirby-item) {
+  z-index: z('default'); // Makes whole kirby-item clickable above item-inner.
+
+  ion-radio {
+    margin: 0; // Reset Ionic in-item margins
+  }
+
+  &[slot='start'] {
+    margin-inline-end: $spacing-to-label;
+  }
+}
