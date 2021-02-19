@@ -6,6 +6,7 @@ import {
   PageComponent,
   PageContentComponent,
   PageContentDirective,
+  PageHeaderComponent,
   PageTitleComponent,
   PageTitleDirective,
   PageToolbarTitleDirective,
