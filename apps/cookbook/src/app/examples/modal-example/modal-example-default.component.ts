@@ -29,9 +29,13 @@ const config = {
 `,
   customHeaderTemplate: `
 <kirby-page-title>
+<kirby-page-header>
   <kirby-progress-circle themeColor="warning" value="50" size="sm" class="kirby-text-xsmall">
   2/4
   </kirby-progress-circle>
+</kirby-page-header>
+
+<kirby-page-title>
   My Modal Title
 </kirby-page-title>
  
