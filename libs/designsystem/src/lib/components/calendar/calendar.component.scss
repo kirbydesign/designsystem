@@ -48,6 +48,7 @@ td {
 .month-navigator {
   display: flex;
   flex-direction: row;
+  flex-grow: 1;
   justify-content: space-between;
 
   button {
@@ -63,10 +64,6 @@ td {
   }
 }
 
-:not(:host(.has-year-navigator)) .month-navigator {
-  flex-grow: 1;
-}
-
 .month-and-year {
   line-height: line-height('xl');
   user-select: none;
@@ -78,6 +75,10 @@ td {
 }
 
 :host(.has-year-navigator) {
+  .month-navigator {
+    flex-grow: 0;
+  }
+
   .month-and-year {
     width: $month-navigator-width;
     margin: 0 size('xxs');
