@@ -17,6 +17,9 @@ Add any information or context about the inquiry here. What question do you need
 - Browser version [e.g. 22]
 
 ## Subject area:
+
+<!-- Please check the one that applies to this PR using "x". -->
+
 - [ ] Kirby UX
 - [ ] Kirby development
 - [ ] Prioritysation status (Product owner)
