@@ -341,10 +341,12 @@ describe('CalendarComponent', () => {
 
     describe('when yearNavigatorOptions are set', () => {
       let todayDate: Date;
+      let todayDateYear: number;
       let yearNavigatorOptions: CalendarYearNavigatorConfig;
 
       beforeEach(() => {
         todayDate = new Date(2021, 0, 1);
+        todayDateYear = todayDate.getFullYear();
         yearNavigatorOptions = { from: -3, to: 2 };
 
         spectator.setInput('todayDate', todayDate);
@@ -357,15 +359,12 @@ describe('CalendarComponent', () => {
       });
 
       it('should change year on navigation', () => {
-        const monthsUntilNextDecember = 12 - (todayDate.getMonth() + 1);
         const firstNavigatedYearIndex = spectator.component.navigatedYear;
-
-        spectator.component.changeMonth(monthsUntilNextDecember);
-        expect(spectator.component.activeYear).toEqual(todayDate.getFullYear().toString());
-        expect(spectator.component.navigatedYear).toEqual(firstNavigatedYearIndex);
+        spectator.setInput('selectedDate', new Date(todayDateYear, 11, 31));
 
         spectator.component.changeMonth(1);
-        expect(spectator.component.activeYear).toEqual((todayDate.getFullYear() + 1).toString());
+
+        expect(spectator.component.activeYear).toEqual('2022');
         expect(spectator.component.navigatedYear).toEqual(firstNavigatedYearIndex + 1);
       });
 
