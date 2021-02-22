@@ -18,6 +18,11 @@
   height: size('xxxl');
 }
 
+:host(.md) {
+  height: size('xl');
+  border-radius: size('m');
+}
+
 /* clean-css ignore:start */
 :host-context(kirby-item kirby-form-field[slot='end']) {
   &[type='number'] {
