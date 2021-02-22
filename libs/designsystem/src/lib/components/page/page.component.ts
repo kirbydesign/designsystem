@@ -82,8 +82,10 @@ export class PageContentDirective {
 @Component({
   selector: 'kirby-page-header',
   template: `
-    <ng-content></ng-content>
-  `,
+        <ng-content>
+        </ng-content>
+    `,
+  styles: [':host {display: flex}'],
 })
 export class PageHeaderComponent {}
 
