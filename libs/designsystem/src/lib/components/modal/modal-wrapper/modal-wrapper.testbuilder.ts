@@ -12,6 +12,7 @@ import { ModalFooterComponent } from '../footer/modal-footer.component';
 import { ModalConfig } from './config/modal-config';
 import { ModalWrapperComponent } from './modal-wrapper.component';
 import { ProgressCircleComponent } from '../../progress-circle/progress-circle.component';
+import { PageHeaderComponent } from '../../page/page.component';
 
 export class ModalWrapperTestBuilder {
   private config: ModalConfig = {
@@ -39,8 +40,9 @@ export class ModalWrapperTestBuilder {
       MockComponents(
         IconComponent,
         ButtonComponent,
-        ModalFooterComponent,
+        PageHeaderComponent,
         ProgressCircleComponent,
+        ModalFooterComponent,
         IonHeader,
         IonToolbar,
         IonTitle,
@@ -159,7 +161,7 @@ export class InputEmbeddedComponent {}
         2/4
       </kirby-progress-circle>
     </kirby-page-header>
-    <kirby-page-title> My Drawer Title</kirby-page-title>
+    <div>My Title</div>
   `,
 })
 export class StaticCustomHeaderContentEmbeddedComponent {}
