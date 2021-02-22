@@ -18,6 +18,7 @@ What kind of change does this PR introduce?
 - [ ] Code style update (formatting, local variables)
 - [ ] Refactoring (no functional changes, no api changes)
 - [ ] Build related changes
+- [ ] Enhancement (to existing content)
 - [ ] CI related changes
 - [ ] Documentation content changes
 - [ ] cookbook application / infrastructure changes
