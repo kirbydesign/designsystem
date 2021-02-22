@@ -3,6 +3,7 @@
 @mixin button-sm {
   font-size: font-size('xs');
   height: size('l');
+  min-width: 44px;
 
   &:not(.icon-only) {
     padding-left: size('s');
@@ -11,11 +12,13 @@
 
   &.icon-only {
     width: size('l');
+    min-width: unset;
   }
 
   &.icon-left,
   &.icon-right {
     --kirby-icon-font-size: #{size('s')};
+    min-width: 88px;
   }
 }
 
@@ -86,10 +89,11 @@
   white-space: nowrap;
 
   // we default to 'md' size.
-  margin: size('xxxs');
-  padding: 0 size('m');
   font-size: font-size('s');
   height: size('xl');
+  min-width: 88px;
+  padding: 0 size('m');
+  margin: size('xxxs');
   line-height: line-height('s');
 
   // Outline is applied on button border instead,
@@ -112,6 +116,7 @@
   &.icon-only {
     width: size('xl');
     padding: 0;
+    min-width: unset;
   }
 
   &.sm {
