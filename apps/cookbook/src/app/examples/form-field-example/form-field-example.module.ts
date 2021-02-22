@@ -1,21 +1,24 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
 import { KirbyModule } from '@kirbydesign/designsystem';
-import { FormFieldInputDefaultExampleComponent } from './examples/input/default';
-import { FormFieldInputLabelExampleComponent } from './examples/input/label';
-import { FormFieldInputLabelMessageExampleComponent } from './examples/input/label-message';
+
+import { FormFieldInputBorderlessExampleComponent } from './examples/input/borderless';
 import { FormFieldInputCounterExampleComponent } from './examples/input/counter';
-import { FormFieldInputNumericExampleComponent } from './examples/input/numeric';
+import { FormFieldInputDefaultExampleComponent } from './examples/input/default';
 import { FormFieldInputDisabledExampleComponent } from './examples/input/disabled';
 import { FormFieldInputErrorExampleComponent } from './examples/input/error';
-import { FormFieldInputBorderlessExampleComponent } from './examples/input/borderless';
 import { FormFieldFocusExampleComponent } from './examples/input/focus';
+import { FormFieldInputLabelExampleComponent } from './examples/input/label';
+import { FormFieldInputLabelMessageExampleComponent } from './examples/input/label-message';
+import { FormFieldInputNumericExampleComponent } from './examples/input/numeric';
+import { FormFieldTextareaCounterExampleComponent } from './examples/textarea/counter';
 import { FormFieldTextareaDefaultExampleComponent } from './examples/textarea/default';
 import { FormFieldTextareaLabelExampleComponent } from './examples/textarea/label';
-import { FormFieldTextareaCounterExampleComponent } from './examples/textarea/counter';
+import { FormFieldExampleConfigurationComponent } from './form-field-example-configuration-component/form-field-example-configuration.component';
 
 const COMPONENT_DECLARATIONS = [
+  FormFieldExampleConfigurationComponent,
   FormFieldInputDefaultExampleComponent,
   FormFieldInputLabelExampleComponent,
   FormFieldInputLabelMessageExampleComponent,
