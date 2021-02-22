@@ -160,10 +160,12 @@
   with the title of your modal window:
 </p>
 <cookbook-code-viewer [html]="defaultExample.titleTemplate"></cookbook-code-viewer>
-<p>You can further extend the the modal title by providing additional content:</p>
-<cookbook-code-viewer
-  [html]="defaultExample.customHeaderTemplate"
-></cookbook-code-viewer>
+<h3>Modal Header Start Slot</h3>
+<p>
+  Inside the embedded component markup you should include a <code>kirby-page-header</code> element
+  with the content of your modal header start slot:
+</p>
+<cookbook-code-viewer [html]="defaultExample.customHeaderTemplate"></cookbook-code-viewer>
 
 <h3 #footer>Footer</h3>
 <p>
