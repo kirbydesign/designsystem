@@ -1,5 +1,6 @@
 import { Component, HostListener } from '@angular/core';
 
+import { InputSize } from '@kirbydesign/designsystem';
 import { WindowRef } from '@kirbydesign/designsystem/types';
 
 @Component({
@@ -9,7 +10,7 @@ import { WindowRef } from '@kirbydesign/designsystem/types';
 })
 export class FormFieldExampleComponent {
   constructor(private window: WindowRef) {}
-
+  size: InputSize;
   showDummyKeyboard = !!this.window.sessionStorage.getItem('kirby-cookbook-show-dummy-keyboard');
 
   toggleDummyKeyboard(show: boolean) {
