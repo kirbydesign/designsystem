@@ -1,9 +1,9 @@
 ---
 name: Inquiry
 about: Create a inquiry to seek answers. These will be adressed Tuesdag + Thursday 9.15-10.15
-title: "[BUG]"
+title: "[Inquiry]"
 labels: New, inquiry
-assignees: ''
+assignees: 'alxzak'
 
 ---
 
