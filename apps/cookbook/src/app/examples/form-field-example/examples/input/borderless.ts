@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+
+import { InputSize } from '@kirbydesign/designsystem';
 
 const config = {
   selector: 'cookbook-form-field-input-borderless-example',
   template: `<kirby-form-field label="Input field with no borders and initial width">
-  <input kirby-input borderless="true" />
+  <input kirby-input [size]="size" borderless="true" />
 </kirby-form-field>`,
 };
 
@@ -13,4 +15,5 @@ const config = {
 })
 export class FormFieldInputBorderlessExampleComponent {
   template: string = config.template;
+  @Input() size: InputSize;
 }

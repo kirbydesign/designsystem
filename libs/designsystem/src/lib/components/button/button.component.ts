@@ -1,14 +1,13 @@
 import {
-  Component,
-  Input,
-  HostBinding,
-  ContentChild,
   AfterContentInit,
+  Component,
+  ContentChild,
   ElementRef,
+  HostBinding,
+  Input,
 } from '@angular/core';
 
 import { NotificationColor } from '../../helpers';
-
 import { IconComponent } from '../icon/icon.component';
 
 @Component({
@@ -28,20 +27,21 @@ export class ButtonComponent implements AfterContentInit {
   isAttentionLevel4: boolean;
   @HostBinding('class.destructive')
   destructive: boolean = false; // Default
+
   @HostBinding('class.floating')
   public get isButtonFloating(): boolean {
     return this.isFloating;
   }
+
   @HostBinding('class.icon-only')
   public get isIconOnly(): boolean {
-    return this.icon && !this._hasSlottedContent;
+    return !!this.icon && !this.hasText;
   }
   private _isIconLeft = false;
   @HostBinding('class.icon-left')
   public get isIconLeft() {
     return this._isIconLeft;
   }
-
   private _isIconRight = false;
   @HostBinding('class.icon-right')
   public get isIconRight() {
@@ -64,25 +64,19 @@ export class ButtonComponent implements AfterContentInit {
   @Input() text: string;
   @Input() isFloating: boolean = false;
 
-  @ContentChild(IconComponent, { static: false }) icon: IconComponent;
-  @ContentChild(IconComponent, { static: false, read: ElementRef })
-  iconDomNode: ElementRef;
-  private _hasSlottedContent = false;
+  @ContentChild(IconComponent) icon: IconComponent;
+  @ContentChild(IconComponent, { read: ElementRef })
+  iconElementRef: ElementRef<HTMLElement>;
+  private hasText = false;
+
+  constructor(private elementRef: ElementRef<HTMLElement>) {}
 
   ngAfterContentInit(): void {
-    if (this.iconDomNode && this.iconDomNode.nativeElement) {
-      const prev = this.iconDomNode.nativeElement.previousSibling;
-      const next = this.iconDomNode.nativeElement.nextSibling;
-      if (prev && prev.nodeName !== '#comment') {
-        this._hasSlottedContent = true;
-        this._isIconLeft = false;
-        this._isIconRight = true;
-      }
-      if (next && next.nodeName !== '#comment') {
-        this._hasSlottedContent = true;
-        this._isIconLeft = true;
-        this._isIconRight = false;
-      }
+    this.hasText = !!this.elementRef.nativeElement.textContent;
+    if (this.iconElementRef !== undefined && this.hasText) {
+      this._isIconLeft =
+        this.elementRef.nativeElement.firstChild === this.iconElementRef.nativeElement;
+      this._isIconRight = !this._isIconLeft;
     }
   }
 }
