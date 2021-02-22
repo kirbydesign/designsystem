@@ -1,4 +1,3 @@
-<kirby-calendar [yearNavigatorOptions]="yearNavigatorOptions" (dateChange)="onDateChange($event)">
-</kirby-calendar>
+<kirby-calendar (dateChange)="onDateChange($event)"> </kirby-calendar>
 
 <div *ngIf="selectedDate">Selected Date: {{ selectedDate | date }}</div>

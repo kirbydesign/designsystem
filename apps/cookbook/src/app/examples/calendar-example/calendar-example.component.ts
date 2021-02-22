@@ -8,10 +8,6 @@ import { CalendarYearNavigatorConfig } from '@kirbydesign/designsystem';
 })
 export class CalendarExampleComponent {
   selectedDate: Date;
-  yearNavigatorOptions: CalendarYearNavigatorConfig = {
-    from: -5,
-    to: 5,
-  };
 
   onDateChange(selectedDate: Date) {
     this.selectedDate = selectedDate;
