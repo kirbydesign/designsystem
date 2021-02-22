@@ -1,14 +1,6 @@
 @import './libs/designsystem/src/lib/scss/utils';
 
-$page-header-bg: #1c1c1c;
-$page-header-color: #f4f1e8;
 $page-gutter: 20px;
-$page-side-nav-width: 16.625rem;
-
-$sårt: #1c1c1c;
-$hvii: #f4f1e8;
-$dark-grey: #353535;
-$semi-dark-grey: #838383;
 
 :host {
   display: block;
@@ -27,63 +19,41 @@ header {
 }
 
 .menu-button {
-  text-decoration: none;
-  appearance: none;
-  border: none;
-  background: none;
-  font-size: 0.7rem;
-  margin: 0;
-  padding: $page-gutter;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-
   @include media('>=large') {
     display: none;
-  }
-
-  .icon {
-    width: 1.4rem;
-    height: 1.4rem;
-    align-self: center;
-    justify-self: center;
-    stroke: currentColor;
-    fill: currentColor;
   }
 }
 
 .header-nav {
-  display: flex;
-  list-style: none;
-  padding: 0;
-  margin: 0;
+  display: none;
+  @include media('>=large') {
+    display: block;
+  }
+  ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 
-  &__item-link {
-    text-decoration: none;
+    a {
+      text-decoration: none;
+    }
   }
 }
 
-.title {
-  font-size: 1.5em;
-  font-weight: 200;
-  margin-top: auto;
-  grid-column-start: span 2;
-  font-family: courier new;
-}
-
-.kirby-icon {
-  display: none;
+.kirby-logo {
+  width: 40px;
+  height: 40px;
   @include media('>=large') {
     width: 70px;
     height: 70px;
-    display: block;
   }
   svg {
     height: 100%;
     width: 100%;
   }
 }
+
 .logo {
   &-text {
     opacity: 0;
@@ -113,6 +83,7 @@ header {
     opacity: 1;
   }
 }
+
 @keyframes enter-pop {
   0% {
     transform: scale(0);

@@ -28,9 +28,14 @@ export class HeaderComponent implements OnInit {
   constructor(private router: Router) {
     this.router.events.subscribe((val) => {
       if (val instanceof NavigationEnd) {
+        // we want the component item to appear active when a specific component route is active also
         this.items[0].showAsActive = val.url.indexOf('showcase') > -1;
       }
     });
+  }
+
+  get icon(): string {
+    return this.isMenuOpen ? 'close' : 'more';
   }
 
   ngOnInit(): void {}

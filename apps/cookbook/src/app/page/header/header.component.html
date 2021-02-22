@@ -1,14 +1,5 @@
 <header>
-  <button
-    class="menu-button menu-button--align-right menu-button--only-mobile"
-    (click)="onToggleMenu()"
-  >
-    <svg class="icon">
-      <use xlink:href="../../assets/icons/icon-sprite.svg#icon-burger"></use>
-    </svg>
-  </button>
-
-  <div class="kirby-icon">
+  <div class="kirby-logo">
     <svg
       version="1.1"
       id="Layer_1"
@@ -95,59 +86,35 @@
     </svg>
   </div>
 
-  <kirby-card mode="flat">
-    <nav>
-      <ul class="header-nav">
-        <li class="header-nav__item" *ngFor="let item of items">
-          <a
-            *ngIf="item.externalUrl"
-            [href]="item.externalUrl"
-            class="header-nav__item-link"
-            target="blank"
-          >
-            <button kirby-button attentionLevel="4">{{ item.text }}</button>
-          </a>
-          <a
-            *ngIf="item.routerLink"
-            href="#"
-            class="header-nav__item-link"
-            [routerLink]="item.routerLink"
-            routerLinkActive
-            #rla="routerLinkActive"
-            [routerLinkActiveOptions]="{ exact: false }"
-          >
-            <button kirby-button [attentionLevel]="rla.isActive || item.showAsActive ? '3' : '4'">
-              {{ item.text }}
-            </button>
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </kirby-card>
+  <nav class="header-nav">
+    <ul>
+      <li class="header-nav__item" *ngFor="let item of items">
+        <a
+          *ngIf="item.externalUrl"
+          [href]="item.externalUrl"
+          class="header-nav__item-link"
+          target="blank"
+        >
+          <button kirby-button attentionLevel="4">{{ item.text }}</button>
+        </a>
+        <a
+          *ngIf="item.routerLink"
+          href="#"
+          class="header-nav__item-link"
+          [routerLink]="item.routerLink"
+          routerLinkActive
+          #rla="routerLinkActive"
+          [routerLinkActiveOptions]="{ exact: false }"
+        >
+          <button kirby-button [attentionLevel]="rla.isActive || item.showAsActive ? '3' : '4'">
+            {{ item.text }}
+          </button>
+        </a>
+      </li>
+    </ul>
+  </nav>
 
-  <!-- <kirby-tab-bar>
-    <kirby-tab-button>
-      <kirby-icon name="person-outline"></kirby-icon>
-      <kirby-icon name="person" selected-tab></kirby-icon>
-      Dashboard
-    </kirby-tab-button>
-
-    <kirby-tab-button>
-      <kirby-icon name="accounts-outline"></kirby-icon>
-      <kirby-icon name="accounts" selected-tab></kirby-icon>
-      Account
-    </kirby-tab-button>
-
-    <kirby-tab-button>
-      <kirby-icon name="inbox-outline"></kirby-icon>
-      <kirby-icon name="inbox" selected-tab></kirby-icon>
-      Inbox
-      <kirby-badge themeColor="danger">1</kirby-badge>
-    </kirby-tab-button>
-
-    <kirby-tab-button (click)="openMenu()">
-      <kirby-icon name="menu-outline"></kirby-icon>
-      Menu
-    </kirby-tab-button>
-  </kirby-tab-bar> -->
+  <button kirby-button attentionLevel="3" class="menu-button" (click)="onToggleMenu()">
+    <kirby-icon [name]="icon"> </kirby-icon>
+  </button>
 </header>
