@@ -1,9 +1,19 @@
 @import '../../scss/utils';
 
+$button-width: (
+  sm: 44px,
+  md: 88px,
+  lg: 220px,
+) !default;
+
+@function button-width($key: 'md') {
+  @return map-get($button-width, $key);
+}
+
 @mixin button-sm {
   font-size: font-size('xs');
   height: size('l');
-  min-width: 44px;
+  min-width: button-width('sm');
 
   &:not(.icon-only) {
     padding-left: size('s');
@@ -18,14 +28,14 @@
   &.icon-left,
   &.icon-right {
     --kirby-icon-font-size: #{size('s')};
-    min-width: 88px;
+    min-width: button-width('md');
   }
 }
 
 @mixin button-lg {
   font-size: font-size('n');
   height: size('xxl');
-  min-width: 220px;
+  min-width: button-width('lg');
 
   &.icon-only {
     width: size('xxl');
@@ -91,7 +101,7 @@
   // we default to 'md' size.
   font-size: font-size('s');
   height: size('xl');
-  min-width: 88px;
+  min-width: button-width('md');
   padding: 0 size('m');
   margin: size('xxxs');
   line-height: line-height('s');
