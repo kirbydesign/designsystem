@@ -15,11 +15,12 @@ import { RadioGroupComponent } from '@kirbydesign/designsystem';
 })
 export class MockRadioGroupComponent {
   @Input() disabled: boolean;
+  @Input() hasError: boolean;
   @Input() items: string[] | any[];
   @Input() itemTextProperty: string;
   @Input() itemDisabledProperty: string;
   @Input() selectedIndex: number;
-  @Input() value: any;
+  @Input() value: string | any;
   @Output() valueChange = new EventEmitter<string | any>();
 }
 

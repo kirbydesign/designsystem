@@ -7,6 +7,6 @@ declare var require: any;
   styleUrls: ['./list-no-shape-showcase.component.scss'],
 })
 export class ListNoShapeShowcaseComponent {
-  exampleHtml: string = require('!raw-loader!../../examples/list/components/no-shape/list-no-shape-example.component.html')
+  exampleHtml: string = require('!raw-loader!../../examples/list-no-shape-example/list-no-shape-example.component.html')
     .default;
 }

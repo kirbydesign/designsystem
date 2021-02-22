@@ -1,11 +1,11 @@
-import { SpectatorHost, createHostFactory } from '@ngneat/spectator';
 import { fakeAsync, tick } from '@angular/core/testing';
+import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
 import { DesignTokenHelper } from '../../../helpers/design-token-helper';
+
 import { InputComponent } from './input.component';
 
-const getColor = DesignTokenHelper.getColor;
-const size = DesignTokenHelper.size;
+const { getColor, size } = DesignTokenHelper;
 
 describe('InputComponent', () => {
   let spectator: SpectatorHost<InputComponent>;
@@ -28,7 +28,7 @@ describe('InputComponent', () => {
     expect(element).toHaveComputedStyle({ color: getColor('black') });
   });
 
-  it('should render with correct height', () => {
+  it('should render with default height', () => {
     expect(element).toHaveComputedStyle({ height: size('xxxl') });
   });
 
@@ -146,6 +146,20 @@ describe('InputComponent', () => {
       expect(element).toHaveComputedStyle({
         'background-color': getColor('light', 'tint'),
       });
+    });
+  });
+});
+
+describe('when configured with size medium', () => {
+  const createHost = createHostFactory({
+    component: InputComponent,
+  });
+  it('should render with correct height', () => {
+    const spectator = createHost(`
+    <input kirby-input size="md"/>
+    `);
+    expect(spectator.element).toHaveComputedStyle({
+      height: size('xl'),
     });
   });
 });

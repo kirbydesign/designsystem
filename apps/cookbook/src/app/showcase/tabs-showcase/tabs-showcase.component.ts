@@ -9,7 +9,7 @@ declare var require: any;
   styleUrls: ['./tabs-showcase.component.scss'],
 })
 export class TabsShowcaseComponent implements OnInit {
-  exampleHtml: string = require('!raw-loader!../../examples/tabs/tabs-example.component.html')
+  exampleHtml: string = require('!raw-loader!../../examples/tabs-example/tabs-example.component.html')
     .default;
 
   exampleRouterHtml = `<kirby-tab-bar>
