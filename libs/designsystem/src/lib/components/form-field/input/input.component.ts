@@ -9,6 +9,11 @@ import {
   SimpleChanges,
 } from '@angular/core';
 
+export enum InputSize {
+  medium = 'md',
+  large = 'lg',
+}
+
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   // tslint:disable-next-line:component-selector
@@ -30,6 +35,10 @@ export class InputComponent implements OnChanges {
       this.inputmode = mappedValue;
     }
   }
+
+  @HostBinding('class')
+  @Input()
+  size: InputSize = InputSize.large;
 
   /**
    * Removes padding, width, rounded borders and drop-shadow when set to `true`.

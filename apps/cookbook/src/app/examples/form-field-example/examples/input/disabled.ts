@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+
+import { InputSize } from '@kirbydesign/designsystem';
 
 const config = {
   selector: 'cookbook-form-field-input-disabled-example',
   template: `<kirby-form-field>
-  <input kirby-input disabled value="Disabled input" />
+  <input kirby-input [size]="size" disabled value="Disabled input" />
 </kirby-form-field>`,
 };
 
@@ -13,4 +15,5 @@ const config = {
 })
 export class FormFieldInputDisabledExampleComponent {
   template = config.template;
+  @Input() size: InputSize;
 }
