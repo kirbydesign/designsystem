@@ -1,16 +1,26 @@
 <div class="header">
-  <button [disabled]="!canNavigateBack" (click)="changeMonth(-1)">
-    <kirby-icon name="arrow-back"></kirby-icon>
-  </button>
+  <div class="month-navigator">
+    <button [disabled]="!canNavigateBack" (click)="changeMonth(-1)">
+      <kirby-icon name="arrow-back"></kirby-icon>
+    </button>
 
-  <div class="month-and-year">
-    <span class="month">{{ activeMonthName }}</span
-    ><span class="year">{{ activeYear }}</span>
+    <div class="month-and-year">
+      <span class="month">{{ activeMonthName }}</span
+      ><span *ngIf="!_hasYearNavigator" class="year">{{ activeYear }}</span>
+    </div>
+
+    <button [disabled]="!canNavigateForward" (click)="changeMonth(1)">
+      <kirby-icon name="arrow-more"></kirby-icon>
+    </button>
   </div>
-
-  <button [disabled]="!canNavigateForward" (click)="changeMonth(1)">
-    <kirby-icon name="arrow-more"></kirby-icon>
-  </button>
+  <kirby-dropdown
+    *ngIf="_hasYearNavigator"
+    [selectedIndex]="navigatedYear"
+    [items]="navigableYears"
+    popout="left"
+    (change)="changeYear($event)"
+  >
+  </kirby-dropdown>
 </div>
 
 <table class="calendar-table">

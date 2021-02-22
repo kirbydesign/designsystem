@@ -1,4 +1,5 @@
 @import '../../scss/utils';
+$month-navigator-width: 80px;
 
 table.calendar-table {
   width: 100%;
@@ -39,8 +40,16 @@ td {
 .header {
   display: flex;
   flex-direction: row;
+  align-items: center;
   justify-content: space-between;
   padding: 0.5em;
+}
+
+.month-navigator {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  justify-content: space-between;
 
   button {
     background-color: transparent;
@@ -62,6 +71,22 @@ td {
   .month {
     font-weight: font-weight('bold');
     margin-right: size('xxs');
+  }
+}
+
+:host(.has-year-navigator) {
+  .month-navigator {
+    flex-grow: 0;
+  }
+
+  .month-and-year {
+    width: $month-navigator-width;
+    margin: 0 size('xxs');
+    text-align: center;
+  }
+
+  .month {
+    margin-right: 0;
   }
 }
 
