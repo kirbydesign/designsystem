@@ -23,7 +23,7 @@ export class EmptyStateComponent implements AfterContentInit {
     this.slottedButtons.changes.pipe(delay(0)).subscribe(() => this.enforceAttentionLevelRules());
   }
 
-  /** Enforces that all buttons will have their attention
+  /** Enforces that all slotted buttons will have their attention
    * level set to 3, except the first button if it has
    * level 1.
    */
