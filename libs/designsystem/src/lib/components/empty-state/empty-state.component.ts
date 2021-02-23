@@ -20,6 +20,7 @@ export class EmptyStateComponent implements AfterContentInit {
   ngAfterContentInit() {
     this.enforceAttentionLevelRules();
 
+    // delay(0) causes changes to happen in a seperate cd cycle
     this.slottedButtons.changes.pipe(delay(0)).subscribe(() => this.enforceAttentionLevelRules());
   }
 
