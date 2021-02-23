@@ -4,12 +4,10 @@ import { MockComponent } from 'ng-mocks';
 import { ButtonComponent } from '../button/button.component';
 import { IconComponent } from '../icon/icon.component';
 
-import { DesignTokenHelper } from './../../helpers/design-token-helper';
 import { EmptyStateComponent } from './empty-state.component';
 
 describe('EmptyStateComponent with slotted buttons', () => {
   let spectator: SpectatorHost<EmptyStateComponent>;
-  let element: HTMLElement;
   let buttons: ButtonComponent[];
 
   const createHost = createHostFactory({
@@ -31,7 +29,6 @@ describe('EmptyStateComponent with slotted buttons', () => {
           </kirby-empty-state>
       `);
 
-    element = spectator.element;
     buttons = spectator.queryAll(ButtonComponent);
   });
 
