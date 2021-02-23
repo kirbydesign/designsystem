@@ -29,6 +29,11 @@ $page-gutter: 1rem;
     text-decoration: none;
     color: get-text-color('semi-dark');
     display: block;
+    padding: 8px 20px;
+    opacity: 1;
+    max-height: 50px;
+    transition: opacity 100ms, max-height 200ms ease-in, padding 200ms ease-in;
+    will-change: max-height, padding;
     &:hover,
     &:focus {
       color: get-text-color('black');
@@ -36,10 +41,22 @@ $page-gutter: 1rem;
     &.is-selected {
       color: get-text-color('black');
       font-weight: bold;
+      background-color: get-color('light');
+    }
+    &.hidden {
+      opacity: 0;
+      max-height: 0;
+      padding: 0 0;
+    }
+    &:first-child {
+      margin-top: 15px;
+    }
+    &:last-child {
+      margin-bottom: 15px;
     }
   }
 
-  .is-selected > &-header {
+  .is-selected {
     font-weight: bold;
   }
 }

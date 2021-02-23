@@ -1,10 +1,13 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 
 import { routes } from '../../showcase/showcase.routes';
 
 interface ISideNavLink {
   path: string;
   name: string;
+  active: boolean;
+  hidden: boolean;
 }
 
 @Component({
@@ -13,16 +16,26 @@ interface ISideNavLink {
   styleUrls: ['./side-nav.component.scss'],
 })
 export class SideNavComponent implements OnInit {
-  private _showcaseRoutes: ISideNavLink[];
+  private allShowcaseRoutes: ISideNavLink[];
+  private filteredShowcaseRoutes: ISideNavLink[];
   filter: string = '';
 
   @Output() menuToggle = new EventEmitter<boolean>();
   @Input() isMenuOpen = false;
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit() {
     this.mapRoutes();
+    this.filteredShowcaseRoutes = this.allShowcaseRoutes;
+    this.router.events.subscribe((val) => {
+      if (val instanceof NavigationEnd) {
+        if (val.url.indexOf('showcase') === -1) {
+          // reset component links
+          this.filterComponents();
+        }
+      }
+    });
   }
 
   private mapRoutes() {
@@ -30,24 +43,27 @@ export class SideNavComponent implements OnInit {
     routesWithPath.sort((a, b) => {
       return a.path < b.path ? -1 : a.path > b.path ? 1 : 0;
     });
-    this._showcaseRoutes = routesWithPath.map((route) => {
+    this.allShowcaseRoutes = routesWithPath.map((route) => {
       return {
         path: `showcase/${route.path}`,
         name: this.convertKebabToTitleCase(route.path),
+        active: this.router.url.indexOf(route.path) > -1,
+        hidden: false,
       };
     });
   }
 
   onFilterChange(event) {
     this.filter = event;
+    this.filterComponents();
   }
 
-  onClear() {
-    this.filter = '';
+  onComponentClick(event) {
+    this.setRouteActive(event.path);
   }
 
   get showcaseRoutes(): ISideNavLink[] {
-    return this.filterComponents();
+    return this.filteredShowcaseRoutes;
   }
 
   onToggleMenu() {
@@ -64,18 +80,29 @@ export class SideNavComponent implements OnInit {
     return titleWords.join(' ');
   }
 
-  private filterComponents(): ISideNavLink[] {
+  private filterComponents(): void {
     if (this.filter.length === 0) {
-      return this._showcaseRoutes;
+      this.filteredShowcaseRoutes = this.allShowcaseRoutes.map((link) => {
+        return { ...link, hidden: false, active: this.router.url.indexOf(link.path) > -1 };
+      });
+      return;
     }
     const caseSensitive = this.filter[0].toUpperCase() === this.filter[0];
     const casedFilter = caseSensitive ? this.filter : this.filter.toLowerCase();
 
-    const filteredList = this._showcaseRoutes.filter((link) => {
+    this.filteredShowcaseRoutes = this.allShowcaseRoutes.map((link) => {
       const casedLinkName = caseSensitive ? link.name : link.name.toLowerCase();
-      return casedLinkName.indexOf(casedFilter) > -1;
+      return {
+        ...link,
+        hidden: casedLinkName.indexOf(casedFilter) === -1,
+        active: this.router.url.indexOf(link.path) > -1,
+      };
     });
+  }
 
-    return filteredList;
+  private setRouteActive(path) {
+    this.filteredShowcaseRoutes = this.filteredShowcaseRoutes.map((route) => {
+      return { ...route, active: route.path === path };
+    });
   }
 }
