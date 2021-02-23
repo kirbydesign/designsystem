@@ -24,9 +24,9 @@ describe('EmptyStateComponent', () => {
       subtitle="You don't have any items. Call support to add some items to your account."
     >
       <button kirby-button>Call support</button>
-      <button kirby-button attentionLevel='2'> Mail support</button>
-      <button kirby-button attentionLevel='3'> Get directions </button>
-      <button kirby-button attentionLevel='1'> Mail support</button>
+      <button kirby-button attentionLevel='2'>Mail support</button>
+      <button kirby-button attentionLevel='3'>Get directions </button>
+      <button kirby-button attentionLevel='1'>Mail support</button>
     </kirby-empty-state>
     `);
     element = spectator.element;
