@@ -1,9 +1,8 @@
-import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponent } from 'ng-mocks';
-
-import { IconComponent } from '../icon/icon.component';
+import { SpectatorHost, createHostFactory } from '@ngneat/spectator';
 
 import { DesignTokenHelper } from './../../helpers/design-token-helper';
+import { IconComponent } from '../icon/icon.component';
 import { EmptyStateComponent } from './empty-state.component';
 
 describe('EmptyStateComponent', () => {
