@@ -31,7 +31,6 @@ The Kirby Cookbook, containing samples, status of components etc. can be accesse
   - [Include KirbyModule](#include-kirbymodule)
   - [Sass](#sass)
   - [Icons](#icons)
-  - [Fonts](#fonts)
   - [Testing](#testing)
   - [Migration Guide](#migration-guide)
 - [Folder Structure](#folder-structure)
@@ -215,29 +214,6 @@ Kirby comes bundled with a default set of icons. Make sure the `.svg` files used
 }
 ```
 
-### Fonts
-
-Kirby comes bundled with the [Roboto][roboto] font. Make sure the `.woff2` files used by Kirby are copied to your output folder by adding the following to `build > options > assets` in `angular.json`:
-
-```json
-{
-  ...
-  "build": {
-    "options": {
-      "assets": [
-        ...,
-        {
-          "glob": "**/*.woff2",
-          "input": "node_modules/@kirbydesign/designsystem/fonts",
-          "output": "./assets/kirby/fonts"
-        },
-        ...
-      ],
-    }
-  }
-}
-```
-
 ## Folder Structure
 
 The folder structure of the repository is based on [Nrwl][nrwl]'s [NX][nx] mono-repository project.
@@ -361,7 +337,6 @@ The Kirby chart components use Highcharts. Note that this is a licensed product.
 [jest]: https://jestjs.io/
 [nrwl]: https://nrwl.io/
 [nx]: https://nx.dev/angular
-[roboto]: https://fonts.google.com/specimen/Roboto
 [kirby.design]: https://kirby.design/
 [kirby.cookbook]: https://cookbook.kirby.design
 [kirby.cookbook.fonts]: https://cookbook.kirby.design/home/showcase/fonts
