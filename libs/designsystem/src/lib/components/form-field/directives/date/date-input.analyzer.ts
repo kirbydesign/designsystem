@@ -47,7 +47,6 @@ export class DateInputAnalyzer {
       value = value + this.localeConfig.separator;
       this.cursorPosition = value.length;
     }
-
     return value;
   }
 

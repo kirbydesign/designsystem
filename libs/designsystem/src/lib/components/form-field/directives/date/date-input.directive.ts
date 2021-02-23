@@ -48,12 +48,15 @@ export class DateInputDirective implements OnInit, OnDestroy {
       .pipe(
         takeUntil(this.destroy$),
         map((value: string) => this.findCursorPosition(value)),
-        map((value: string) => this.analyzer.analyse(this.cursorPosition, value, this.lastValue))
+        map(
+          (value: string) =>
+            (value = this.analyzer.analyse(this.cursorPosition, value, this.lastValue))
+        )
       )
       .subscribe((value: string) => {
         this.cursorPosition = this.analyzer.cursorPosition;
-        this.updateCursorPosition();
         this.updateValue(value);
+        this.updateCursorPosition();
         this.lastValue = value;
       });
   }
@@ -68,10 +71,8 @@ export class DateInputDirective implements OnInit, OnDestroy {
   private updateCursorPosition(): void {
     this.hostElement.nativeElement.selectionStart = this.cursorPosition;
   }
+
   private updateValue(value: string): void {
-    if (!value) {
-      return;
-    }
     this.ngControl.control.setValue(value, {
       emitEvent: false,
       onlySelf: true,

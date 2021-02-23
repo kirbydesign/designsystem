@@ -175,6 +175,16 @@ describe('Directive: DateInputDirective', () => {
           expect(input.setSelectionRange).not.toHaveBeenCalled();
         });
       });
+
+      describe('invalid characters', () => {
+        it('should not allow invalid characters', () => {
+          const val = 'a';
+          const expectedValue = '';
+          testFormControl.setValue(val);
+          spectatorDirective.detectChanges();
+          expect(inputElement.value).toBe(expectedValue);
+        });
+      });
     });
   });
 });
