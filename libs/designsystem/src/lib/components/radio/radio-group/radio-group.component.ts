@@ -9,9 +9,12 @@ import {
   Output,
   QueryList,
   TemplateRef,
+  ViewChild,
   ViewChildren,
 } from '@angular/core';
 import { Component, Input } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { IonRadioGroup } from '@ionic/angular';
 
 import { ListItemTemplateDirective } from '../../list/list.directive';
 import { RadioComponent } from '../radio.component';
@@ -20,9 +23,16 @@ import { RadioComponent } from '../radio.component';
   selector: 'kirby-radio-group',
   templateUrl: './radio-group.component.html',
   styles: ['ion-radio-group { display: inherit; flex-wrap: inherit}'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: RadioGroupComponent,
+      multi: true,
+    },
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RadioGroupComponent implements AfterContentInit {
+export class RadioGroupComponent implements AfterContentInit, ControlValueAccessor {
   constructor(private changeDetectionRef: ChangeDetectorRef) {}
 
   // #region public properties
@@ -105,10 +115,26 @@ export class RadioGroupComponent implements AfterContentInit {
       this.projectedRadioButtons.length > 0
     );
   }
+  @ViewChild(IonRadioGroup, { static: true }) private ionRadioGroup: IonRadioGroup;
+  private _onChangeCallback: Function;
+  private _onTouchedCallback: Function;
 
   // #endregion private fields
 
   // #region public methods
+  writeValue(value: any): void {
+    this.ionRadioGroup.value = value;
+    this.changeDetectionRef.detectChanges();
+  }
+
+  registerOnChange(fn: any): void {
+    this._onChangeCallback = fn;
+  }
+
+  registerOnTouched(fn: any): void {
+    this._onTouchedCallback = fn;
+  }
+
   focus() {
     const findFocusable = (radios: QueryList<RadioComponent>) =>
       radios && radios.find((radio) => !isNaN(radio.buttonTabIndex) && radio.buttonTabIndex !== -1);
