@@ -7,7 +7,7 @@ import { IconComponent } from '../icon/icon.component';
 import { DesignTokenHelper } from './../../helpers/design-token-helper';
 import { EmptyStateComponent } from './empty-state.component';
 
-fdescribe('EmptyStateComponent with slotted buttons', () => {
+describe('EmptyStateComponent with slotted buttons', () => {
   let spectator: SpectatorHost<EmptyStateComponent>;
   let element: HTMLElement;
   let buttons: ButtonComponent[];
@@ -40,7 +40,7 @@ fdescribe('EmptyStateComponent with slotted buttons', () => {
   });
 });
 
-fdescribe('EmptyStateComponent with slotted buttons where the first has attention level 1', () => {
+describe('EmptyStateComponent with slotted buttons where the first has attention level 1', () => {
   let spectator: SpectatorHost<EmptyStateComponent>;
   let buttons: ButtonComponent[];
 
