@@ -6,7 +6,7 @@ export interface ShowcaseProperty {
   preserveInputValuesWhitespaces?: boolean;
 }
 
-export interface ShowCasePropertyColumns {
+export interface ShowcasePropertyColumns {
   Name?: string;
   Description?: string;
   Type?: string;
