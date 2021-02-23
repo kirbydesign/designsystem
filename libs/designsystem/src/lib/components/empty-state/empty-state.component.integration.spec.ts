@@ -24,7 +24,7 @@ describe('EmptyStateComponent with slotted buttons', () => {
           >
               <button kirby-button attentionLevel='4'>Call support</button>
               <button kirby-button attentionLevel='3'>Mail support</button>
-              <button kirby-button attentionLevel='2'>Get directions </button>
+              <button kirby-button attentionLevel='2'>Get directions</button>
               <button kirby-button attentionLevel='1'>Cancel</button>
           </kirby-empty-state>
       `);
