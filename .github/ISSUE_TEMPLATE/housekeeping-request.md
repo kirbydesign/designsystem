@@ -10,19 +10,19 @@ assignees: ''
 
 <!-- Replace the paragraph below with your own description -->
 
-Please provide a clear and concise description of what needs housekeeping and the reason for doing it.
+Add a clear and concise description of what needs housekeeping along with a reason for doing it.
 
 **Alternatives**
 
 <!-- Replace the paragraph below with your own description -->
 
-Please provide a clear and concise description of any alternative solutions you've considered (if any).
+Provide a clear and concise description of any alternative solutions you've considered (if any).
 
 **Additional context**
 
 <!-- Replace the paragraph below with your own description -->
 
-Please add any other context about the housekeeping request e.g, links or screenshots.
+Add any other context about the housekeeping request e.g, links or screenshots.
 
 ## Tasks
 
