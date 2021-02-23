@@ -6,7 +6,7 @@ $button-width: (
   lg: 220px,
 ) !default;
 
-@function button-width($key: 'md') {
+@function button-width($key) {
   @return map-get($button-width, $key);
 }
 
