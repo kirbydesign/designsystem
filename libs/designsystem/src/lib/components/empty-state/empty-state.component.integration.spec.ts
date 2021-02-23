@@ -24,10 +24,10 @@ fdescribe('EmptyStateComponent with slotted buttons', () => {
               title="No items"
               subtitle="You don't have any items. Call support to add some items to your account."
           >
-              <button kirby-button attentionLevel='1'>Call support</button>
-              <button kirby-button attentionLevel='2'>Mail support</button>
-              <button kirby-button attentionLevel='3'>Get directions </button>
-              <button kirby-button attentionLevel='4'>Mail support</button>
+              <button kirby-button attentionLevel='4'>Call support</button>
+              <button kirby-button attentionLevel='3'>Mail support</button>
+              <button kirby-button attentionLevel='2'>Get directions </button>
+              <button kirby-button attentionLevel='1'>Cancel</button>
           </kirby-empty-state>
       `);
 
@@ -38,19 +38,10 @@ fdescribe('EmptyStateComponent with slotted buttons', () => {
   it('should set the attention level of all buttons to 3', () => {
     expect(buttons.every((button) => button.isAttentionLevel3)).toBeTrue();
   });
-
-  it('should enforce attention level rules when a button is added', () => {
-    expect('implement me').toBeTrue();
-  });
-
-  it('should enforce attention level rules when a button is removed', () => {
-    expect('implement me').toBeTrue();
-  });
 });
 
 fdescribe('EmptyStateComponent with slotted buttons where the first has attention level 1', () => {
   let spectator: SpectatorHost<EmptyStateComponent>;
-  let element: HTMLElement;
   let buttons: ButtonComponent[];
 
   const createHost = createHostFactory({
@@ -67,12 +58,11 @@ fdescribe('EmptyStateComponent with slotted buttons where the first has attentio
         >
             <button kirby-button attentionLevel='1'>Call support</button>
             <button kirby-button attentionLevel='2'>Mail support</button>
-            <button kirby-button attentionLevel='3'>Get directions </button>
-            <button kirby-button attentionLevel='4'>Mail support</button>
+            <button kirby-button attentionLevel='3'>Get directions</button>
+            <button kirby-button attentionLevel='4'>Cancel</button>
         </kirby-empty-state>
     `);
 
-    element = spectator.element;
     buttons = spectator.queryAll(ButtonComponent);
   });
 

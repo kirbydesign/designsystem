@@ -1,13 +1,5 @@
-import {
-  AfterContentInit,
-  Component,
-  ContentChildren,
-  Input,
-  OnDestroy,
-  QueryList,
-} from '@angular/core';
-import { Subject } from 'rxjs';
-import { delay, takeUntil } from 'rxjs/operators';
+import { AfterContentInit, Component, ContentChildren, Input, QueryList } from '@angular/core';
+import { delay } from 'rxjs/operators';
 
 import { ButtonComponent } from '../button/button.component';
 
@@ -25,8 +17,6 @@ export class EmptyStateComponent implements AfterContentInit {
   @ContentChildren(ButtonComponent)
   private slottedButtons: QueryList<ButtonComponent>;
 
-  private ngUnsubscribe$ = new Subject<void>();
-
   ngAfterContentInit() {
     this.enforceAttentionLevelRules();
 
@@ -34,16 +24,14 @@ export class EmptyStateComponent implements AfterContentInit {
   }
 
   /** Enforces that all buttons will have their attention
-   * level set to 3 except the first encountered button
-   * with level 1
+   * level set to 3, except the first button if it has
+   * level 1.
    */
   private enforceAttentionLevelRules() {
-    let encounteredLvl1Button = false;
+    this.slottedButtons.forEach((button, index) => {
+      if (index === 0 && button.isAttentionLevel1) return;
 
-    this.slottedButtons.forEach((button) => {
-      if (button.isAttentionLevel1 && !encounteredLvl1Button) {
-        encounteredLvl1Button = true;
-      } else if (!button.isAttentionLevel3) {
+      if (!button.isAttentionLevel3) {
         button.attentionLevel = '3';
       }
     });
