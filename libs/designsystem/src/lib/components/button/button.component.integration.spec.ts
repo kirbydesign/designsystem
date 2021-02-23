@@ -283,6 +283,10 @@ describe('ButtonComponent with size directive', () => {
     it('should render with correct height', () => {
       expect(element).toHaveComputedStyle({ height: size('l') });
     });
+
+    it('should render with correct min-width', () => {
+      expect(element).toHaveComputedStyle({ 'min-width': '44px' });
+    });
   });
 
   describe('when configured with size = MD', () => {
@@ -297,6 +301,10 @@ describe('ButtonComponent with size directive', () => {
 
     it('should render with correct height', () => {
       expect(element).toHaveComputedStyle({ height: size('xl') });
+    });
+
+    it('should render with correct min-width', () => {
+      expect(element).toHaveComputedStyle({ 'min-width': '88px' });
     });
   });
 
@@ -543,7 +551,7 @@ describe('ButtonComponent configured with text and icon', () => {
   });
 
   describe('and size directive with size = SM', () => {
-    it('should render with correct icon font-size', () => {
+    beforeEach(() => {
       spectator = createHost(
         `<button kirby-button size="sm">
           <span>Text</span>
@@ -553,13 +561,19 @@ describe('ButtonComponent configured with text and icon', () => {
 
       element = spectator.element as HTMLButtonElement;
       kirbyIcon = element.getElementsByTagName('kirby-icon')[0];
+    });
 
+    it('should render with correct icon font-size', () => {
       expect(kirbyIcon).toHaveComputedStyle({ 'font-size': size('s') });
+    });
+
+    it('should render with correct min-width', () => {
+      expect(element).toHaveComputedStyle({ 'min-width': '88px' });
     });
   });
 
   describe('and size directive with size = MD', () => {
-    it('should render with correct icon font-size', () => {
+    beforeEach(() => {
       spectator = createHost(
         `<button kirby-button size="md">
           <span>Text</span>
@@ -569,13 +583,19 @@ describe('ButtonComponent configured with text and icon', () => {
 
       element = spectator.element as HTMLButtonElement;
       kirbyIcon = element.getElementsByTagName('kirby-icon')[0];
+    });
 
+    it('should render with correct icon font-size', () => {
       expect(kirbyIcon).toHaveComputedStyle({ 'font-size': size('m') });
+    });
+
+    it('should render with correct min-width', () => {
+      expect(element).toHaveComputedStyle({ 'min-width': '88px' });
     });
   });
 
   describe('and size directive with size = LG', () => {
-    it('should render with correct icon font-size', () => {
+    beforeEach(() => {
       spectator = createHost(
         `<button kirby-button size="lg">
           <span>Text</span>
@@ -585,8 +605,14 @@ describe('ButtonComponent configured with text and icon', () => {
 
       element = spectator.element as HTMLButtonElement;
       kirbyIcon = element.getElementsByTagName('kirby-icon')[0];
+    });
 
+    it('should render with correct icon font-size', () => {
       expect(kirbyIcon).toHaveComputedStyle({ 'font-size': size('m') });
+    });
+
+    it('should render with correct min-width', () => {
+      expect(element).toHaveComputedStyle({ 'min-width': '220px' });
     });
   });
 });
