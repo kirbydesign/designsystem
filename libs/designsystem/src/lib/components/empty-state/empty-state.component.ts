@@ -16,7 +16,7 @@ import { ButtonComponent } from '../button/button.component';
   templateUrl: './empty-state.component.html',
   styleUrls: ['./empty-state.component.scss'],
 })
-export class EmptyStateComponent implements AfterContentInit, OnDestroy {
+export class EmptyStateComponent implements AfterContentInit {
   @Input() iconName: string;
   @Input() customIconName: string;
   @Input() title: string;
@@ -30,14 +30,7 @@ export class EmptyStateComponent implements AfterContentInit, OnDestroy {
   ngAfterContentInit() {
     this.enforceAttentionLevelRules();
 
-    this.slottedButtons.changes
-      .pipe(takeUntil(this.ngUnsubscribe$), delay(0))
-      .subscribe(() => this.enforceAttentionLevelRules());
-  }
-
-  ngOnDestroy() {
-    this.ngUnsubscribe$.next();
-    this.ngUnsubscribe$.complete();
+    this.slottedButtons.changes.pipe(delay(0)).subscribe(() => this.enforceAttentionLevelRules());
   }
 
   /** Enforces that all buttons will have their attention
