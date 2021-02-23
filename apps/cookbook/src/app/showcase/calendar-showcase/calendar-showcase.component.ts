@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
+import {
+  ShowcaseProperty,
+  ShowcasePropertyColumns,
+} from '~/app/shared/showcase-properties/showcase-property';
 
 declare var require: any;
 
@@ -124,5 +127,9 @@ export class CalendarShowcaseComponent {
     },
   ];
 
-  eventColumns = { Name: 'Name', Description: 'Description', Type: 'Type' };
+  eventColumns: ShowcasePropertyColumns = {
+    Name: 'Name',
+    Description: 'Description',
+    Type: 'Type',
+  };
 }

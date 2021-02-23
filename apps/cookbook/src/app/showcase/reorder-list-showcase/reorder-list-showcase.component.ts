@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 
-import { ShowcaseProperty } from './../../shared/showcase-properties/showcase-property';
+import {
+  ShowcaseProperty,
+  ShowcasePropertyColumns,
+} from './../../shared/showcase-properties/showcase-property';
 
 declare var require: any;
 
@@ -47,7 +50,7 @@ export class ReorderListShowcaseComponent {
     },
   ];
 
-  eventColumns = {
+  eventColumns: ShowcasePropertyColumns = {
     Name: 'Name',
     Description: 'Description',
   };
@@ -61,7 +64,7 @@ export class ReorderListShowcaseComponent {
     },
   ];
 
-  methodColumns = {
+  methodColumns: ShowcasePropertyColumns = {
     Name: 'Name',
     Description: 'Description',
     Type: 'Signature',

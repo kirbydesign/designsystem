@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
+import {
+  ShowcaseProperty,
+  ShowcasePropertyColumns,
+} from '~/app/shared/showcase-properties/showcase-property';
 
 import { InputSize } from '@kirbydesign/designsystem';
 
@@ -35,7 +38,7 @@ On native devices this method also ensures the form field is scrolled into the v
     },
   ];
 
-  methodColumns = {
+  methodColumns: ShowcasePropertyColumns = {
     Name: 'Name',
     Description: 'Description',
   };

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-
-import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
+import {
+  ShowcaseProperty,
+  ShowcasePropertyColumns,
+} from '~/app/shared/showcase-properties/showcase-property';
 
 @Component({
   selector: 'cookbook-radio-showcase',
@@ -72,7 +74,7 @@ export class RadioShowcaseComponent {
     },
   ];
 
-  eventColumns = {
+  eventColumns: ShowcasePropertyColumns = {
     Name: 'Name',
     Description: 'Description',
     Type: 'Signature',

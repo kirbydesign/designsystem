@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-
-import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
+import {
+  ShowcaseProperty,
+  ShowcasePropertyColumns,
+} from '~/app/shared/showcase-properties/showcase-property';
 
 @Component({
   selector: 'cookbook-dropdown-showcase',
@@ -78,7 +80,7 @@ export class DropdownShowcaseComponent {
     },
   ];
 
-  methodColumns = {
+  methodColumns: ShowcasePropertyColumns = {
     Name: 'Name',
     Description: 'Description',
   };
@@ -91,7 +93,7 @@ export class DropdownShowcaseComponent {
     },
   ];
 
-  eventColumns = {
+  eventColumns: ShowcasePropertyColumns = {
     Name: 'Name',
     Description: 'Description',
     Type: 'Signature',

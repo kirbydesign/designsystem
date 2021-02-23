@@ -1,7 +1,10 @@
-import { Component, ElementRef, AfterViewInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef } from '@angular/core';
+import {
+  ShowcaseProperty,
+  ShowcasePropertyColumns,
+} from '~/app/shared/showcase-properties/showcase-property';
 
 import { ModalController } from '@kirbydesign/designsystem';
-import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
 
 @Component({
   selector: 'cookbook-modal-showcase',
@@ -99,7 +102,7 @@ export class ModalShowcaseComponent implements AfterViewInit {
     },
   ];
 
-  eventColumns = {
+  eventColumns: ShowcasePropertyColumns = {
     Name: 'Name',
     Description: 'Description',
     Type: 'Signature',
