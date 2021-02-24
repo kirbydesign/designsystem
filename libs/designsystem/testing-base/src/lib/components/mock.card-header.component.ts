@@ -17,7 +17,7 @@ export class MockCardHeaderComponent {
   @Input() title: string;
   @Input() subtitle: string;
   @Input() isTitleBold: boolean;
-  @Input() flagged: 'success' | 'warning' | 'danger' | 'informational';
+  @Input() flagged: CardFlagType;
 }
 
 // #endregion
