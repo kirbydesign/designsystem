@@ -3,6 +3,7 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  HostBinding,
   Inject,
   Input,
   LOCALE_ID,
@@ -17,6 +18,7 @@ import moment from 'moment';
 import { CalendarCell } from './helpers/calendar-cell.model';
 import { CalendarOptions } from './helpers/calendar-options.model';
 import { CalendarHelper } from './helpers/calendar.helper';
+import { CalendarYearNavigatorConfig } from './options/calendar-year-navigator-config';
 
 interface CalendarDay {
   isCurrentMonth: boolean;
@@ -42,6 +44,14 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() disablePastDates = false;
   @Input() disableFutureDates = false;
   @Input() alwaysEnableToday = false;
+  /**
+   * Configuration for the year navigator.
+   *
+   * Internally, calendar component:
+   * - bases yearNavigatorOptions.from and yearNavigatorOptions.to on todayDate if a number is provided
+   * - prioritizes minDate and maxDate over yearNavigatorOptions.from and yearNavigatorOptions.to
+   */
+  @Input() yearNavigatorOptions: CalendarYearNavigatorConfig;
   public month: CalendarCell[][];
   public weekDays: string[];
   private selectedDay: CalendarCell;
@@ -89,6 +99,9 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   @Input() set minDate(value: Date) {
+    if (value && this.activeMonth.toDate() < value) {
+      this.setActiveMonth(value);
+    }
     this._minDate = this.normalizeDate(value);
   }
 
@@ -97,6 +110,9 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   @Input() set maxDate(value: Date) {
+    if (value && this.activeMonth.toDate() > value) {
+      this.setActiveMonth(value);
+    }
     this._maxDate = this.normalizeDate(value);
   }
 
@@ -106,6 +122,28 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
 
   get activeYear(): string {
     return this.activeMonth.format('YYYY');
+  }
+
+  /**
+   * Gets navigable years for year navigator based on yearNavigatorOptions.
+   */
+  get navigableYears(): string[] {
+    const dateOfFirstNavigableYear =
+      this.minDate || this.getDateFromNavigableYear(this.yearNavigatorOptions.from);
+
+    const dateOfLastNavigableYear =
+      this.maxDate || this.getDateFromNavigableYear(this.yearNavigatorOptions.to);
+
+    return this.getYearsBetweenDates(dateOfFirstNavigableYear, dateOfLastNavigableYear);
+  }
+
+  get navigatedYear(): number {
+    return this.navigableYears.indexOf(this.activeYear);
+  }
+
+  @HostBinding('class.has-year-navigator')
+  get _hasYearNavigator() {
+    return !!this.yearNavigatorOptions;
   }
 
   constructor(private calendarHelper: CalendarHelper, @Inject(LOCALE_ID) private locale: string) {
@@ -362,6 +400,10 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
     this.changeActiveView(index, 'months');
   }
 
+  public changeYear(year: number) {
+    this.changeActiveView(year - this.activeMonth.year(), 'years');
+  }
+
   private changeActiveView(index: number, unit: moment.unitOfTime.Base) {
     if (index != 0) {
       this.activeMonth.add(index, unit);
@@ -407,5 +449,18 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
       weekDays: this.weekDays,
       month: this.month,
     };
+  }
+
+  private getDateFromNavigableYear(navigableYear: number | Date): Date {
+    if (navigableYear instanceof Date) return navigableYear;
+    const today = this.todayDate || new Date();
+    return new Date(today.getFullYear() + navigableYear, 0, 1);
+  }
+
+  private getYearsBetweenDates(startDate: Date, endDate: Date): string[] {
+    // Ensure years are ordered correctly if parameters are switched:
+    const [startYear, endYear] = [startDate.getFullYear(), endDate.getFullYear()].sort();
+    const numberOfYears = endYear - startYear;
+    return Array.from({ length: numberOfYears + 1 }, (_, i) => (startYear + i).toString());
   }
 }
