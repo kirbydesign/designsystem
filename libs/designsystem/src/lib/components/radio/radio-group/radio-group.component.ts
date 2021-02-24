@@ -90,7 +90,6 @@ export class RadioGroupComponent implements AfterContentInit, ControlValueAccess
    * Emitted when an option is selected
    */
   @Output() valueChange: EventEmitter<string | any> = new EventEmitter<string | any>();
-
   // #endregion public properties
 
   // #region "protected" properties used by template
@@ -101,12 +100,18 @@ export class RadioGroupComponent implements AfterContentInit, ControlValueAccess
   // #region private fields
   private _disabled = false;
   private _items: string[] | any[] = [];
+  private _onChangeCallback: Function;
+  private _onTouchedCallback: Function;
   private _selectedIndex: number = -1;
   private _value?: string | any = null;
   @ViewChildren(RadioComponent)
   private radioButtons: QueryList<RadioComponent>;
   @ContentChildren(RadioComponent, { descendants: true })
   private projectedRadioButtons: QueryList<RadioComponent>;
+  private get boundToForm() {
+    return !!this._onChangeCallback;
+  }
+
   private get hasItemsFromContentProjection(): boolean {
     return (
       !this.items.length &&
@@ -115,26 +120,10 @@ export class RadioGroupComponent implements AfterContentInit, ControlValueAccess
       this.projectedRadioButtons.length > 0
     );
   }
-  @ViewChild(IonRadioGroup, { static: true }) private ionRadioGroup: IonRadioGroup;
-  private _onChangeCallback: Function;
-  private _onTouchedCallback: Function;
 
   // #endregion private fields
 
   // #region public methods
-  writeValue(value: any): void {
-    this.ionRadioGroup.value = value;
-    this.changeDetectionRef.detectChanges();
-  }
-
-  registerOnChange(fn: any): void {
-    this._onChangeCallback = fn;
-  }
-
-  registerOnTouched(fn: any): void {
-    this._onTouchedCallback = fn;
-  }
-
   focus() {
     const findFocusable = (radios: QueryList<RadioComponent>) =>
       radios && radios.find((radio) => !isNaN(radio.buttonTabIndex) && radio.buttonTabIndex !== -1);
@@ -150,6 +139,19 @@ export class RadioGroupComponent implements AfterContentInit, ControlValueAccess
   setDisabledState(isDisabled: boolean) {
     this.disabled = isDisabled;
   }
+
+  registerOnChange(fn: any): void {
+    this._onChangeCallback = fn;
+  }
+
+  registerOnTouched(fn: any): void {
+    this._onTouchedCallback = fn;
+  }
+
+  writeValue(value: any): void {
+    this.value = value;
+  }
+
   // #endregion public methods
 
   // #region "protected" methods used by template
@@ -171,10 +173,34 @@ export class RadioGroupComponent implements AfterContentInit, ControlValueAccess
     if (value === this._value) return;
     this.setSelectedItem(value);
     this.valueChange.emit(value);
+
+    if (this.boundToForm) {
+      this._onChangeCallback(value);
+    }
   }
+
   // #endregion "protected" methods used by template
 
   // #region private methods
+
+  private trackTouchedState() {
+    // const focusChanges = this.radioButtons.toArray().map((each) =>
+    //   each.focusChange.pipe(
+    //     filter((focused) => !!focused),
+    //     take(1)
+    //   )
+    // );
+    // race(...focusChanges)
+    //   .pipe(takeUntil(race(this._newRadioButtonsSlotted, this._destroy$)))
+    //   .subscribe(() => this._onTouchedCallback());
+  }
+
+  private stopTrackingTouchedState() {
+    // this._newRadioButtonsSlotted.next();
+    // this._newRadioButtonsSlotted.complete();
+    // this._newRadioButtonsSlotted = new Subject();
+  }
+
   private getIndexOfSelectedValue() {
     if (!this.value) return -1;
     return this.hasItemsFromContentProjection
