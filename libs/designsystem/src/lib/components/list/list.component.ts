@@ -77,11 +77,6 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
    */
   @Input() markSelectedRow = false;
 
-  /**
-   *  If set - Determines whether loadOnDemand event should be emitted.
-   */
-  @Input() disableLoadOnDemand?: boolean;
-
   @HostBinding('class.kirby-list') true;
   /**
    * Determine outline shape of:
@@ -103,6 +98,13 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   @HostBinding('class.item-spacing')
   @Input()
   hasItemSpacing: boolean;
+
+  /**
+   * Determines if the loadOnDemand event should be emitted
+   * - will be set to true if not given a value by parent component
+   * and there's a subscriber to the loadOnDemand event
+   */
+  @Input() isLoadOnDemandEnabled: boolean;
 
   /**
    * Determines if list items should have swipe actions or not
@@ -142,7 +144,6 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   isSwipingEnabled: boolean = false;
   isSelectable: boolean;
   isLoading: boolean;
-  @Input() isLoadOnDemandEnabled: boolean;
   groupedItems: any[];
   selectedItem: any;
 
