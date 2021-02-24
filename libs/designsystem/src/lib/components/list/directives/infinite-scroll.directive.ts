@@ -10,7 +10,7 @@ import {
   Output,
 } from '@angular/core';
 import { fromEvent, Subject } from 'rxjs';
-import { debounceTime, filter, map, takeUntil, tap } from 'rxjs/operators';
+import { debounceTime, filter, map, takeUntil } from 'rxjs/operators';
 
 import { WindowRef } from '../../../types/window-ref';
 
@@ -24,7 +24,7 @@ export const INFINITE_SCROLL_DEBOUNCE = 100;
 @Directive({
   selector: '[kirbyInfiniteScroll]',
 })
-export class InfiniteScrollDirective implements OnDestroy, AfterViewInit {
+export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
   /**
    * Event that will be triggered when the user has scrolled to
    * bottom of the element
