@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { CalendarYearNavigatorConfig } from '@kirbydesign/designsystem';
+
 @Component({
   selector: 'cookbook-calendar-example',
   templateUrl: './calendar-example.component.html',
