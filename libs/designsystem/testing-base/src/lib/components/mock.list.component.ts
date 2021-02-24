@@ -27,13 +27,12 @@ export class MockListComponent {
   @Input() noMoreItemsText: string;
   @Input() showDivider: boolean;
   @Input() markSelectedRow: boolean;
-  @Input() disableLoadOnDemand: boolean;
   @Input() shape: ListShape;
   @Input() hasItemSpacing: boolean;
+  @Input() isLoadOnDemandEnabled: boolean;
   @Input() swipeActions: ListSwipeAction[];
   @Output() loadOnDemand = new EventEmitter<LoadOnDemandEvent>();
   @Output() itemSelect = new EventEmitter<any>();
-  @Input() isLoadOnDemandEnabled: boolean;
 }
 
 // #endregion
