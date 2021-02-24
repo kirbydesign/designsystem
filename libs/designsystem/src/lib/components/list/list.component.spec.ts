@@ -141,7 +141,7 @@ describe('ListComponent', () => {
   });
 
   describe('function: ngOnInit', () => {
-    describe('there is a subscriber to the loadMore event', () => {
+    describe('when there is a subscriber to the loadMore event', () => {
       beforeEach(() => {
         component.loadOnDemand.subscribe((_: LoadOnDemandEvent) => {});
       });
@@ -171,7 +171,7 @@ describe('ListComponent', () => {
       });
     });
 
-    describe('there is no subscriber to the loadMore event', () => {
+    describe('when there is no subscriber to the loadMore event', () => {
       it('should disable load more, if isLoadOnDemandEnabled is not set', () => {
         component.isLoadOnDemandEnabled = undefined;
 
