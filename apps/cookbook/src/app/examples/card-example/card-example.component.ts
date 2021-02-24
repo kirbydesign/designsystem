@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { DynamicComponent } from '@kirbydesign/designsystem';
+import { CardFlagType, DynamicComponent } from '@kirbydesign/designsystem';
 
 @Component({
   selector: 'cookbook-card-example',
@@ -15,6 +15,6 @@ export class CardExampleComponent implements DynamicComponent {
   @Input() hasHeader = true;
   @Input() hasFooter = false;
   @Input() hasHeaderFooterBgColor = false;
-  @Input() flagged = null;
+  @Input() flagged: CardFlagType = null;
   data: any;
 }

@@ -1,19 +1,19 @@
-import { Component, HostBinding, Input, OnInit } from '@angular/core';
+import { Component, HostBinding, Input } from '@angular/core';
+
+import { NotificationAndInfoColor } from '../../../helpers';
+
+export type CardFlagType = NotificationAndInfoColor;
 
 @Component({
   selector: 'kirby-card-header',
   templateUrl: './card-header.component.html',
   styleUrls: ['./card-header.component.scss'],
 })
-export class CardHeaderComponent implements OnInit {
+export class CardHeaderComponent {
   @Input() title: string;
   @Input() subtitle: string;
   @Input() isTitleBold: boolean;
-  @Input() flagged: 'success' | 'warning' | 'danger' | 'informational' = null;
-
-  constructor() {}
-
-  ngOnInit() {}
+  @Input() flagged: CardFlagType = null;
 
   @HostBinding('class')
   get _cssClass() {
