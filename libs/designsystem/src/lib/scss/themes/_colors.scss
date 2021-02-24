@@ -10,6 +10,15 @@ $notification-colors: (
   'danger': #ff595e,
 );
 
+$notification-and-info-colors: (
+  map-merge(
+    $notification-colors,
+    (
+      'info': #ebebeb,
+    )
+  )
+);
+
 $system-colors: (
   'background-color': #f6f6f6,
   'white': #ffffff,

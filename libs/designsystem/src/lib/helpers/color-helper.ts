@@ -5,6 +5,9 @@ type KirbyColorGroup = { [key: string]: string };
 export class ColorHelper {
   static readonly brandColors = ColorHelper.mapToKirbyColorArray(styles.brandColors);
   static readonly notificationColors = ColorHelper.mapToKirbyColorArray(styles.notificationColors);
+  static readonly notificationAndInfoColors = ColorHelper.mapToKirbyColorArray(
+    styles.notificationAndInfoColors
+  );
   static readonly systemColors = ColorHelper.mapToKirbyColorArray(styles.systemColors);
   static readonly textColors = ColorHelper.mapToKirbyColorArray(
     styles.textColors,
@@ -170,4 +173,5 @@ export interface KirbyColor extends Color {
 }
 
 export type NotificationColor = keyof typeof styles.notificationColors;
+export type NotificationAndInfoColor = keyof typeof styles.notificationAndInfoColors;
 export type BrandColor = keyof typeof styles.brandColors;
