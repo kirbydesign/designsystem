@@ -1,5 +1,4 @@
 import { AfterContentInit, Component, ContentChildren, Input, QueryList } from '@angular/core';
-import { delay } from 'rxjs/operators';
 
 import { ButtonComponent } from '../button/button.component';
 
