@@ -20,9 +20,11 @@ export class EmptyStateComponent implements AfterContentInit {
   ngAfterContentInit() {
     this.enforceAttentionLevelRules();
 
-    /* as enforceAttentionLevelRules changes the attention level of slotted buttons, 
-    delay(0) is used to make these changes happen in a seperate cd cycle */
-    this.slottedButtons.changes.pipe(delay(0)).subscribe(() => this.enforceAttentionLevelRules());
+    /* setTimeout prevents ExpressionChangedAfterItHasBeenCheckedError when changing attention 
+    levels of slotted buttons in this.enforceAttentionLevelRules */
+    this.slottedButtons.changes.subscribe(() => {
+      setTimeout(() => this.enforceAttentionLevelRules());
+    });
   }
 
   /** Enforces that all slotted buttons will have their attention
