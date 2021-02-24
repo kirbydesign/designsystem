@@ -10,7 +10,7 @@ $page-side-nav-width: 16.625rem;
   background-color: var(--kirby-background-color);
   display: grid;
   grid-template-columns: 15px minmax(0, 1fr) 15px;
-  grid-template-rows: 58px minmax(0, 1fr) 70px;
+  grid-template-rows: 58px minmax(0, 1fr) 140px;
   grid-template-areas:
     '. header .'
     '. main .'
@@ -20,7 +20,7 @@ $page-side-nav-width: 16.625rem;
 
   @include media('>=large') {
     grid-template-columns: 20px 260px minmax(0, 1fr) 20px;
-    grid-template-rows: 90px minmax(0, 1fr) 100px;
+    grid-template-rows: 90px minmax(0, 1fr) 140px;
     grid-template-areas:
       '. header header .'
       '. sidebar main .'
