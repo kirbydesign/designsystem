@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { of } from 'rxjs';
 
 import { LoadOnDemandEvent } from '@kirbydesign/designsystem';
 
-import { BaseListComponent } from '../base-list.component';
+import { BaseListComponent } from '../list-shared/base-list.component';
 
 @Component({
   selector: 'cookbook-list-load-on-demand-example',
