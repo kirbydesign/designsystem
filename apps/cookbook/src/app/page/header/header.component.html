@@ -90,7 +90,7 @@
 
   <nav class="header-nav">
     <ul>
-      <li class="header-nav__item" *ngFor="let item of items">
+      <li class="header-nav__item" *ngFor="let item of navigationItems">
         <a
           *ngIf="item.externalUrl"
           [href]="item.externalUrl"

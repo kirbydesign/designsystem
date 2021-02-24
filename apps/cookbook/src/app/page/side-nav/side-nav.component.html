@@ -1,4 +1,19 @@
-<section class="side-nav side-menu" [ngClass]="{ 'is-open': isMenuOpen }" (click)="onToggleMenu()">
+<section class="side-nav" [ngClass]="{ 'is-open': isMenuOpen }" (click)="onToggleMenu()">
+  <nav class="page-links">
+    <ng-container *ngFor="let item of navigationLinks">
+      <a
+        *ngIf="item.routerLink"
+        [routerLink]="item.routerLink"
+        [routerLinkActive]="'is-selected'"
+        [routerLinkActiveOptions]="{ exact: false }"
+        class="side-nav__item"
+        >{{ item.text }}
+      </a>
+      <a *ngIf="item.externalUrl" [href]="item.externalUrl" class="side-nav__item" target="blank"
+        >{{ item.text }}
+      </a>
+    </ng-container>
+  </nav>
   <div class="filter-container">
     <kirby-form-field>
       <input
@@ -31,16 +46,4 @@
       >{{ item.name }}
     </a>
   </kirby-card>
-
-  <!-- <kirby-list [items]="showcaseRoutes">
-    <kirby-item *kirbyListItemTemplate="let item" [class]="{ hidden: item.hidden }">
-      <a
-        [routerLink]="item.path"
-        [class]="{ 'is-selected': item.active }"
-        class="side-nav__item"
-        (click)="onComponentClick(item)"
-        >{{ item.name }}
-      </a>
-    </kirby-item>
-  </kirby-list> -->
 </section>

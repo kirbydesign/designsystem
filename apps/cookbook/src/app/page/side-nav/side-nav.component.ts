@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 
 import { routes } from '../../showcase/showcase.routes';
+import { navigationItems } from '../header/header.component';
 
 interface ISideNavLink {
   path: string;
@@ -24,6 +25,8 @@ export class SideNavComponent implements OnInit {
   @Input() isMenuOpen = false;
 
   constructor(private router: Router) {}
+
+  navigationLinks = navigationItems;
 
   ngOnInit() {
     this.mapRoutes();

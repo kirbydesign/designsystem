@@ -6,25 +6,36 @@ $page-header-height: 7rem;
 $page-gutter: 1rem;
 
 :host {
-  grid-area: sidebar;
+  @include media('>=large') {
+    grid-area: sidebar;
+  }
 }
 
-.side-menu {
-  display: none;
-  position: absolute;
-  top: 0;
-  z-index: 900;
+.page-links {
   @include media('>=large') {
-    display: block;
-    position: static;
-    background-color: transparent;
-  }
-  &.is-open {
-    display: block;
+    display: none;
   }
 }
 
 .side-nav {
+  display: none;
+  position: absolute;
+  top: 0;
+  z-index: 900;
+  background-color: get-color('white');
+  padding: 0 20px;
+  box-shadow: get-elevation(4);
+  @include media('>=large') {
+    box-shadow: none;
+    display: block;
+    position: static;
+    background-color: transparent;
+    padding: 0;
+  }
+  &.is-open {
+    display: block;
+  }
+
   &__item {
     text-decoration: none;
     color: get-text-color('semi-dark');
@@ -41,12 +52,13 @@ $page-gutter: 1rem;
     &.is-selected {
       color: get-text-color('black');
       font-weight: bold;
-      background-color: get-color('light');
+      background-color: get-color('semi-light');
     }
     &.hidden {
       opacity: 0;
       max-height: 0;
       padding: 0 0;
+      pointer-events: none;
     }
     &:first-child {
       margin-top: 15px;
