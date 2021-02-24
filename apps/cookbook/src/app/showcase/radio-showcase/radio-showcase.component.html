@@ -147,6 +147,33 @@
 <h2>In List</h2>
 <em>See "In Item" example above.</em>
 
+<h2>Reactive Forms</h2>
+<p>
+  To render radio buttons as part of an item (e.g. inside a card) you can either supply the item
+  template through the <code>*kirbyListItemTemplate</code> directive (see list example below) or you
+  can simply nest the items inside the <code>&lt;kirby-radio-group&gt;</code> wrapper component
+  using static markup or an <code>*ngFor</code> loop.
+</p>
+
+<p>
+  This example groups a <code>kirby-radio</code> and <code>kirby-label</code> inside a
+  <code>kirby-item</code>.<br />
+  The radio can be left aligned using <code>slot="start"</code> or right-aligned using
+  <code>slot="end"</code>.<br />
+  <em
+    ><strong>Please note:</strong> Always remember to wrap the list of items in a
+    <code>&lt;kirby-radio-group&gt;</code>.</em
+  >
+</p>
+<cookbook-example-viewer
+  [html]="reactiveFormExample.template"
+  [ts]="reactiveFormExample.codeSnippet"
+>
+  <cookbook-radio-reactive-forms-example
+    #reactiveFormExample
+  ></cookbook-radio-reactive-forms-example>
+</cookbook-example-viewer>
+
 <h2>Properties</h2>
 <h3>Radio:</h3>
 <cookbook-showcase-properties [properties]="radioProperties"></cookbook-showcase-properties>
