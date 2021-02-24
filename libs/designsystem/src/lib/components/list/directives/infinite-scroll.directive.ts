@@ -36,7 +36,7 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
    */
   _disabled: boolean = false;
   @Input() set disabled(value: boolean) {
-    this.checkScroll$Subscription(value);
+    this.checkScrollSubscription(value);
     this._disabled = value;
   }
   get disabled() {
@@ -62,7 +62,7 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
   constructor(private elementRef: ElementRef, private window: WindowRef, private zone: NgZone) {}
 
   ngAfterViewInit() {
-    this.checkScroll$Subscription(this.disabled);
+    this.checkScrollSubscription(this.disabled);
   }
 
   /**
@@ -83,7 +83,7 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
     this.ngUnsubscribe$.complete();
   }
 
-  private checkScroll$Subscription(disabled: boolean) {
+  private checkScrollSubscription(disabled: boolean) {
     if (this.disabled || this.scroll$.observers.length > 0) return;
     /**
      * Subscribe to {@link scroll$} observable and emit {@link scrollEnd} event
