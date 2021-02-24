@@ -34,14 +34,7 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
   /**
    * If true then {@link scrollEnd} event should NOT be emitted
    */
-  _disabled: boolean = false;
-  @Input() set disabled(value: boolean) {
-    this.checkScrollSubscription(value);
-    this._disabled = value;
-  }
-  get disabled() {
-    return this._disabled;
-  }
+  @Input() disabled = false;
 
   /**
    * Emits a new value on element scroll event
@@ -61,30 +54,8 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
 
   constructor(private elementRef: ElementRef, private window: WindowRef, private zone: NgZone) {}
 
-  ngAfterViewInit() {
-    this.checkScrollSubscription(this.disabled);
-  }
-
-  /**
-   * On element scroll event emit next {@link scroll$} observable value
-   */
-  @HostListener('window:scroll')
-  onScroll(): void {
+  ngAfterViewInit(): void {
     if (this.disabled) return;
-    const scroll = this.getScroll();
-    this.scroll$.next(scroll);
-  }
-
-  /**
-   * trigger {@link ngUnsubscribe} complete on component destroy lifecycle hook
-   */
-  ngOnDestroy(): void {
-    this.ngUnsubscribe$.next();
-    this.ngUnsubscribe$.complete();
-  }
-
-  private checkScrollSubscription(disabled: boolean) {
-    if (this.disabled || this.scroll$.observers.length > 0) return;
     /**
      * Subscribe to {@link scroll$} observable and emit {@link scrollEnd} event
      * when element scroll position has surpassed the offset.
@@ -134,6 +105,24 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
         });
       }
     });
+  }
+
+  /**
+   * On element scroll event emit next {@link scroll$} observable value
+   */
+  @HostListener('window:scroll')
+  onScroll(): void {
+    if (this.disabled) return;
+    const scroll = this.getScroll();
+    this.scroll$.next(scroll);
+  }
+
+  /**
+   * trigger {@link ngUnsubscribe} complete on component destroy lifecycle hook
+   */
+  ngOnDestroy(): void {
+    this.ngUnsubscribe$.next();
+    this.ngUnsubscribe$.complete();
   }
 
   private getScroll(): Scroll {
