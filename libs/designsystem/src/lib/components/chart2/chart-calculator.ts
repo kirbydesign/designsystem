@@ -1,7 +1,5 @@
-import { Chart, ChartPoint } from 'chart.js';
+import { Chart, ChartDataSets, ChartPoint } from 'chart.js';
 import moment from 'moment';
-
-import { ChartDataType } from './chartOptions';
 
 export interface ChartTimeFormats {
   timeAxisFormat: string;
@@ -80,41 +78,43 @@ export class ChartCalculator {
 
   /**
    * Search a dataset for minimum and maximum values and returns an object with these values.
-   * @param data An array of ChartPoints or numbers to search for values.
+   * @param dataSets
    */
   public static readMinMaxY(
-    data: ChartDataType
+    dataSets: ChartDataSets[]
   ): { min: number; minIndex: number; max: number; maxIndex: number } {
     let testVal: number;
     let min: number = null;
     let max: number = null;
     let minIndex: number = null;
     let maxIndex: number = null;
+    for (let j = 0; j < dataSets.length; j++) {
+      const data = dataSets[j].data;
 
-    for (let i = 0; i < data.length; ++i) {
-      testVal =
-        typeof data[i] === 'number' ? (data[i] as number) : ((data[i] as ChartPoint).y as number);
+      for (let i = 0; i < data.length; ++i) {
+        testVal =
+          typeof data[i] === 'number' ? (data[i] as number) : ((data[i] as ChartPoint).y as number);
 
-      if (max === null || testVal >= max) {
-        max = testVal;
-        maxIndex = i;
+        if (max === null || testVal >= max) {
+          max = testVal;
+          maxIndex = i;
+        }
+
+        if (min === null || testVal <= min) {
+          min = testVal;
+          minIndex = i;
+        }
       }
 
-      if (min === null || testVal <= min) {
-        min = testVal;
-        minIndex = i;
+      // Handle two points of same value
+
+      if (typeof data[0] !== 'number' && data.length === 2 && data[0] === data[1]) {
+        min = (data[0] as ChartPoint).y as number;
+        max = (data[0] as ChartPoint).y as number;
+        minIndex = 0;
+        maxIndex = 1;
       }
     }
-
-    // Handle two points of same value
-
-    if (typeof data[0] !== 'number' && data.length === 2 && data[0] === data[1]) {
-      min = (data[0] as ChartPoint).y as number;
-      max = (data[0] as ChartPoint).y as number;
-      minIndex = 0;
-      maxIndex = 1;
-    }
-
     return { min, minIndex, max, maxIndex };
   }
 

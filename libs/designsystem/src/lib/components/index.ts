@@ -7,6 +7,7 @@ export { ButtonComponent } from './button/button.component';
 
 export * from './card';
 export * from './chart';
+export * from './chart2';
 export * from './stock-chart';
 export * from './calendar';
 

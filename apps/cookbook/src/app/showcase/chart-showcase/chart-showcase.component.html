@@ -1,4 +1,31 @@
 <div class="example">
+  <cookbook-example-viewer [html]="bar21.template" [ts]="bar21.codeSnippet">
+    <cookbook-chart-example-bar-1 #bar21> </cookbook-chart-example-bar-1>
+  </cookbook-example-viewer>
+
+  <cookbook-example-viewer [html]="bar22.template" [ts]="bar22.codeSnippet">
+    <cookbook-chart-example-bar-2 #bar22> </cookbook-chart-example-bar-2>
+  </cookbook-example-viewer>
+  <cookbook-example-viewer [html]="bar23.template" [ts]="bar23.codeSnippet">
+    <cookbook-chart-example-bar-3 #bar23> </cookbook-chart-example-bar-3>
+  </cookbook-example-viewer>
+
+  <cookbook-example-viewer [html]="horbar.template" [ts]="horbar.codeSnippet">
+    <cookbook-chart-example-horizontal-bar #horbar> </cookbook-chart-example-horizontal-bar>
+  </cookbook-example-viewer>
+
+  <cookbook-example-viewer [html]="doughnut.template" [ts]="doughnut.codeSnippet">
+    <cookbook-chart-example-doughnut-1 #doughnut> </cookbook-chart-example-doughnut-1>
+  </cookbook-example-viewer>
+
+  <cookbook-example-viewer [html]="pie1.template" [ts]="pie1.codeSnippet">
+    <cookbook-chart-example-pie-1 #pie1> </cookbook-chart-example-pie-1>
+  </cookbook-example-viewer>
+
+  <cookbook-example-viewer [html]="line1.template" [ts]="line1.codeSnippet">
+    <cookbook-chart-example-line-1 #line1> </cookbook-chart-example-line-1>
+  </cookbook-example-viewer>
+
   <cookbook-example-viewer [html]="donut.template">
     <cookbook-chart-example-donut #donut> </cookbook-chart-example-donut>
   </cookbook-example-viewer>
@@ -21,63 +48,4 @@
   <cookbook-example-viewer [html]="bar.template" [ts]="bar.codeSnippet">
     <cookbook-chart-example-bar #bar> </cookbook-chart-example-bar>
   </cookbook-example-viewer>
-
-  <cookbook-example-viewer [html]="bar2.template" [ts]="bar2.codeSnippet">
-    <cookbook-chart2-example-bar #bar2> </cookbook-chart2-example-bar>
-  </cookbook-example-viewer>
-
-  <hr />
-
-  <h3>Temp temp temp</h3>
-
-  <cookbook-chart2-example> </cookbook-chart2-example>
-
-  <div class="code-example">
-    <h4>Properties:</h4>
-    <table class="cookbook-properties">
-      <thead>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Input values</th>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>height</code></td>
-          <td>The height of the chart in px for web and dp for native</td>
-          <td><code>number</code></td>
-        </tr>
-        <tr>
-          <td><code>type</code></td>
-          <td>The type of chart</td>
-          <td><code>donut | pie | areaspline</code></td>
-        </tr>
-        <tr>
-          <td><code>showDataLabels</code></td>
-          <td>Enable or disable labels around pie/donut charts (default: true)</td>
-          <td><code>true, false</code></td>
-        </tr>
-        <tr>
-          <td><code>description</code></td>
-          <td>Description of chart for accessibility</td>
-          <td><code>string - e.g. "Distribution of assets in custody account"</code></td>
-        </tr>
-        <tr>
-          <td><code>data</code></td>
-          <td>Data input for chart</td>
-          <td><code>See examples above for exact format</code></td>
-        </tr>
-        <tr>
-          <td><code>options</code></td>
-          <td>
-            The Highcharts options to configure the chart with (will override existing options using
-            a deep merge)
-          </td>
-          <td>
-            See Highcharts options docs
-            <a href="https://api.highcharts.com/highcharts/" target="_blank">here</a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
 </div>

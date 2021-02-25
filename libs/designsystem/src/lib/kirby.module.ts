@@ -88,7 +88,6 @@ import { WindowRef } from './types/window-ref';
 
 const exportedDeclarations = [
   CardComponent,
-
   CardHeaderComponent,
   CardFooterComponent,
   ButtonComponent,

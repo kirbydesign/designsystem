@@ -70,28 +70,21 @@ export function readKirbyColorFromElement(
 
 export class KirbyIntegration {
   public getSettings(element: HTMLElement): any {
-    /*
-        const colorPoint = readKirbyColorFromElement(this.document, KirbyColor.PRIMARY);
-        const colorGraph = readKirbyColor(this.document, KirbyColor.TERTIARY);
-        const colorDatalabelsFont = readKirbyColor(this.document, KirbyColor.TERTIARY_CONTRAST  );
-        const colorTooltip = readKirbyColor( this.document, KirbyColor.BACKGROUND_COLOR );
-        const colorGrid = readKirbyColor(this.document, KirbyColor.BACKGROUND_COLOR_SHADE );
-        const colorFont = readKirbyColor(this.document, KirbyColor.TEXT_SEMI_DARK);
-    */
     const colorPoint = readKirbyColorFromElement(element, KirbyColor.PRIMARY);
     const colorGraph = readKirbyColorFromElement(element, KirbyColor.TERTIARY);
     const colorDatalabelsFont = readKirbyColorFromElement(element, KirbyColor.TERTIARY_CONTRAST);
     const colorTooltip = readKirbyColorFromElement(element, KirbyColor.BACKGROUND_COLOR);
     const colorGrid = readKirbyColorFromElement(element, KirbyColor.BACKGROUND_COLOR_SHADE);
     const colorFont = readKirbyColorFromElement(element, KirbyColor.TEXT_SEMI_DARK);
-    /*
-    console.log(colorPoint);
-    console.log(colorGraph);
-    console.log(colorDatalabelsFont);
-    console.log(colorTooltip);
-    console.log(colorGrid);
-    console.log(colorFont);
-*/
+    return { colorPoint, colorGraph, colorDatalabelsFont, colorTooltip, colorGrid, colorFont };
+  }
+  public getSettingsFromDocument(document: Document): any {
+    const colorPoint = readKirbyColor(document, KirbyColor.PRIMARY);
+    const colorGraph = readKirbyColor(document, KirbyColor.TERTIARY);
+    const colorDatalabelsFont = readKirbyColor(document, KirbyColor.TERTIARY_CONTRAST);
+    const colorTooltip = readKirbyColor(document, KirbyColor.BACKGROUND_COLOR);
+    const colorGrid = readKirbyColor(document, KirbyColor.BACKGROUND_COLOR_SHADE);
+    const colorFont = readKirbyColor(document, KirbyColor.TEXT_SEMI_DARK);
     return { colorPoint, colorGraph, colorDatalabelsFont, colorTooltip, colorGrid, colorFont };
   }
 }

@@ -1,48 +1,15 @@
 import { InjectionToken } from '@angular/core';
-import { ChartPoint } from 'chart.js';
+import { ChartConfiguration } from 'chart.js';
 
-export type ChartDataType = number[] | ChartPoint[];
+export const CHART_CONFIGURATION = new InjectionToken<ChartConfiguration>('DefaultChartOptions');
 
-export interface ChartDataset {
-  label?: string;
-  data?: ChartDataType;
-  backgroundColor?: any[];
-  borderColor?: any[];
-  borderWidth?: number;
-}
-
-export interface ChartData {
-  labels: string[];
-  datasets: ChartDataset[];
-}
-export interface ChartOption {
-  type?: string;
-  data?: ChartData;
-  options?: any;
-}
-export const CHART_OPTIONS = new InjectionToken<ChartOption>('ChartOptions');
-
-export class ChartOverrideOptions implements ChartOption {
-  public data: ChartData;
-  constructor() {
-    this.data = {
-      datasets: [],
-      labels: [],
-    };
-  }
-}
-
-export const DefaultChartOptions: ChartOption = {
-  type: 'line',
-  data: {
-    datasets: [],
-    labels: [],
-  },
+export const DefaultChartOptions: ChartConfiguration = {
   options: {
     maintainAspectRatio: false,
     animation: {
       duration: 0,
     },
+    showLines: false,
     layout: {
       padding: {
         left: 0,
@@ -54,7 +21,7 @@ export const DefaultChartOptions: ChartOption = {
     elements: {
       line: {
         tension: 0, // Smooth curve (0 = no smoothing)
-        borderWidth: 2,
+        borderWidth: 1,
         fill: false, // Disable fill below line
       },
       point: {
@@ -99,7 +66,6 @@ export const DefaultChartOptions: ChartOption = {
       intersect: false,
       animationDuration: 0,
     },
-
     tooltips: {
       mode: 'index',
       intersect: false,
@@ -113,72 +79,6 @@ export const DefaultChartOptions: ChartOption = {
       titleFontSize: 12,
       bodyFontStyle: 'bold',
       bodyFontSize: 15,
-
-      /*
-        callbacks: {
-          title: (tooltipItems: ChartTooltipItem[], chartData: ChartData) => {
-            const currPoint: ChartPoint = this.getChartPointFromTooltipItem(
-              tooltipItems,
-              chartData
-            );
-            return moment(currPoint.x)
-              .tz(TimeOrDatePipe.DK_TZ)
-              .format(chartTimeFormats.tooltipFormat);
-          },
-          label: (tooltipItem: ChartTooltipItem, chartData: ChartData) => {
-            const currPoint: ChartPoint = this.getChartPointFromTooltipItem(
-              tooltipItem,
-              chartData
-            );
-            const val: number = currPoint.y as number;
-
-            return formatNumber(val, this.locale, '1.2-2');
-          },
-        },*/
-    },
-
-    plugins: {
-      datalabels: {
-        //          backgroundColor: this.colorGraph,
-        //          color: this.colorDatalabelsFont,
-        borderRadius: 3,
-        font: {
-          lineHeight: 1,
-          size: 11,
-        },
-        padding: {
-          top: 6,
-          left: 5,
-          right: 5,
-          bottom: 5,
-        },
-
-        offset: 5,
-        /*
-          align: (context: Context): Align => {
-            const currVal: ChartPoint = this.getChartPointFromContext(
-              context
-            );
-            return currVal !== null
-              ? this.max === currVal.y
-                ? 'top'
-                : 'bottom'
-              : null;
-          },
-          display: (context: Context): boolean => {
-            return (
-              context.dataIndex === minIndex || context.dataIndex === maxIndex
-            );
-          },
-          formatter: (value: any, context: Context): string => {
-            const currVal: ChartPoint = this.getChartPointFromContext(
-              context
-            );
-            return currVal !== null
-              ? formatNumber(currVal.y as number, this.locale, '1.2-2')
-              : null;
-          },*/
-      },
     },
   },
 };
