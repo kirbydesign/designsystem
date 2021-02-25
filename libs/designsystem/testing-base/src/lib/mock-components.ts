@@ -29,6 +29,7 @@ import { MockListSectionHeaderComponent } from './components/mock.list-section-h
 import { MockListComponent } from './components/mock.list.component';
 import { MockLoadingOverlayComponent } from './components/mock.loading-overlay.component';
 import { MockModalFooterComponent } from './components/mock.modal-footer.component';
+import { MockPageFooterComponent } from './components/mock.page-footer.component';
 import {
   MockPageActionsComponent,
   MockPageActionsDirective,
@@ -88,6 +89,7 @@ export const MOCK_COMPONENTS = [
   MockLoadingOverlayComponent,
   MockActionSheetComponent,
   MockModalFooterComponent,
+  MockPageFooterComponent,
   MockPageTitleDirective,
   MockPageToolbarTitleDirective,
   MockPageActionsDirective,

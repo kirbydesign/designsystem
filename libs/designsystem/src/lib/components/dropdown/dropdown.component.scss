@@ -114,3 +114,17 @@ kirby-card {
     }
   }
 }
+
+:host-context(kirby-calendar) {
+  > button {
+    border-color: transparent;
+    font-weight: font-weight('bold');
+    font-size: initial;
+  }
+
+  &.is-open {
+    & > button {
+      box-shadow: none;
+    }
+  }
+}

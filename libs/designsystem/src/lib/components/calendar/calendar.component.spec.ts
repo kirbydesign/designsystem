@@ -5,6 +5,7 @@ import { MockComponent } from 'ng-mocks';
 
 import { CalendarComponent, IconComponent } from '..';
 import { WindowRef } from '../../types/window-ref';
+import { CalendarYearNavigatorConfig } from './options/calendar-year-navigator-config';
 
 // NOTE: when specifying multiple input properties, set selectedDate
 // as the last one. This makes the component update without the need to
@@ -264,6 +265,137 @@ describe('CalendarComponent', () => {
         .map((_) => _.textContent)
         .join(' ')
     ).toEqual('M T W T F S S');
+  });
+
+  describe('active month', () => {
+    let todayDate: Date;
+
+    beforeEach(() => {
+      todayDate = new Date(2021, 0, 1);
+
+      spectator.setInput('todayDate', todayDate);
+      spectator.setInput('selectedDate', todayDate);
+    });
+
+    describe('when `minDate` is set', () => {
+      let minDate: Date;
+      const yearsBeforeTodayDate = 4;
+
+      beforeEach(() => {
+        minDate = new Date(todayDate.getFullYear() - yearsBeforeTodayDate, 0, 1);
+        spectator.setInput('minDate', minDate);
+      });
+
+      describe('when `minDate` changes to a later date than `todayDate`', () => {
+        let newMinDate: Date;
+
+        beforeEach(() => {
+          newMinDate = new Date(
+            todayDate.getFullYear() + 1,
+            todayDate.getMonth(),
+            todayDate.getDay()
+          );
+          spectator.setInput('minDate', newMinDate);
+        });
+
+        it('should set active month based on changed `minDate`', () => {
+          expect(spectator.component.activeMonthName).toEqual(moment(newMinDate).format('MMMM'));
+        });
+      });
+    });
+
+    describe('when `maxDate` is set', () => {
+      let maxDate: Date;
+      const yearsAfterTodayDate = 2;
+
+      beforeEach(() => {
+        maxDate = new Date(todayDate.getFullYear() + yearsAfterTodayDate, 0, 1);
+        spectator.setInput('maxDate', maxDate);
+      });
+
+      describe('when `maxDate` changes to an earlier date then `todayDate`', () => {
+        let newMaxDate: Date;
+
+        beforeEach(() => {
+          newMaxDate = new Date(
+            todayDate.getFullYear() - 1,
+            todayDate.getMonth(),
+            todayDate.getDay()
+          );
+          spectator.setInput('maxDate', newMaxDate);
+        });
+
+        it('should set active month based on changed `maxDate`', () => {
+          expect(spectator.component.activeMonthName).toEqual(moment(newMaxDate).format('MMMM'));
+        });
+      });
+    });
+  });
+
+  describe('year navigator', () => {
+    describe('by default', () => {
+      it('should not render', () => {
+        expect(spectator.element.querySelector('kirby-dropdown')).toBeNull();
+      });
+    });
+
+    describe('when yearNavigatorOptions are set', () => {
+      let todayDate: Date;
+      let todayDateYear: number;
+      let yearNavigatorOptions: CalendarYearNavigatorConfig;
+
+      beforeEach(() => {
+        todayDate = new Date(2021, 0, 1);
+        todayDateYear = todayDate.getFullYear();
+        yearNavigatorOptions = { from: -3, to: 2 };
+
+        spectator.setInput('todayDate', todayDate);
+        spectator.setInput('selectedDate', todayDate);
+        spectator.setInput('yearNavigatorOptions', yearNavigatorOptions);
+      });
+
+      it('should render', () => {
+        expect(spectator.element.querySelector('kirby-dropdown')).not.toBeNull();
+      });
+
+      it('should change year on navigation', () => {
+        const firstNavigatedYearIndex = spectator.component.navigatedYear;
+        spectator.setInput('selectedDate', new Date(todayDateYear, 11, 31));
+
+        spectator.component.changeMonth(1);
+
+        expect(spectator.component.activeYear).toEqual('2022');
+        expect(spectator.component.navigatedYear).toEqual(firstNavigatedYearIndex + 1);
+      });
+
+      it('should get navigable years based on `from` and `to` when `minDate` and `maxDate` are omitted', () => {
+        spectator.setInput('minDate', undefined);
+        spectator.setInput('maxDate', undefined);
+
+        expect(spectator.component.navigableYears).toEqual([
+          '2018',
+          '2019',
+          '2020',
+          '2021',
+          '2022',
+          '2023',
+        ]);
+      });
+
+      it('should prioritize `minDate` and `maxDate` over `from` and `to` when getting navigable years', () => {
+        spectator.setInput('minDate', new Date(todayDate.getFullYear() - 2, 0, 1));
+        spectator.setInput('maxDate', new Date(todayDate.getFullYear() + 3, 11, 31));
+
+        expect(spectator.component.navigableYears).toEqual([
+          '2019',
+          '2020',
+          '2021',
+          '2022',
+          '2023',
+          '2024',
+        ]);
+      });
+    });
   });
 
   // constants and utility functions

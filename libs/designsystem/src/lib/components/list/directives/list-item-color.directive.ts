@@ -1,4 +1,4 @@
-import { Directive, Input, Renderer2, ElementRef, OnChanges, SimpleChanges } from '@angular/core';
+import { Directive, HostBinding, Input, OnChanges } from '@angular/core';
 
 import { ThemeColor } from '../../../helpers/theme-color.type';
 
@@ -8,17 +8,20 @@ import { ThemeColor } from '../../../helpers/theme-color.type';
 export class ListItemColorDirective implements OnChanges {
   @Input()
   kirbyListItemColor: (item: any) => ThemeColor;
-
   @Input() item: any;
+  @HostBinding('class')
+  color: ThemeColor;
 
-  constructor(private renderer: Renderer2, private elementRef: ElementRef) {}
+  ngOnChanges(): void {
+    this.color = this.getColor();
+  }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  private getColor(): ThemeColor {
     if (!this.kirbyListItemColor || !this.item) {
       return;
     }
 
     const themeColor = this.kirbyListItemColor(this.item);
-    this.renderer.addClass(this.elementRef.nativeElement, themeColor);
+    return themeColor;
   }
 }

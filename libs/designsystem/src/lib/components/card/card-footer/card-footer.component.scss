@@ -3,5 +3,16 @@
 :host {
   display: block;
   padding: size('s');
-  //default
+  border-bottom-left-radius: inherit;
+  border-bottom-right-radius: inherit;
+  overflow: hidden;
+  // backface-visibility and transform, to fix clipping issue
+  // on Safari see https://stackoverflow.com/a/16681137
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
+}
+
+footer {
+  display: inherit;
+  flex: inherit;
 }
