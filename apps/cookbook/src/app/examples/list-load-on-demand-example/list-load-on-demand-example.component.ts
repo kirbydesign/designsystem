@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { LoadOnDemandEvent } from '@kirbydesign/designsystem';
 
@@ -10,8 +10,6 @@ import { BaseListComponent } from '../list-shared/base-list.component';
   styleUrls: ['./list-load-on-demand-example.component.scss'],
 })
 export class ListLoadOnDemandExampleComponent extends BaseListComponent {
-  @Input() disableLoadMore: boolean;
-
   private itemCount: number = 0;
 
   constructor() {

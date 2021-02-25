@@ -13,8 +13,6 @@ export class ListLoadOnDemandShowcaseComponent {
   exampleHtml: string = require('!raw-loader!../../examples/list-load-on-demand-example/list-load-on-demand-example.component.html')
     .default;
 
-  disableLoadMore: boolean = false;
-
   properties: ShowcaseProperty[] = [
     {
       name: 'isLoadOnDemandEnabled',

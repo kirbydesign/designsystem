@@ -1,9 +1,4 @@
-<kirby-list
-  [items]="items"
-  [isLoadOnDemandEnabled]="!disableLoadMore"
-  (loadOnDemand)="onLoadDemand($event)"
-  noMoreItemsText="No more items"
->
+<kirby-list [items]="items" (loadOnDemand)="onLoadDemand($event)" noMoreItemsText="No more items">
   <kirby-item *kirbyListItemTemplate="let item">
     <kirby-label>
       <h3>{{ item.title }}</h3>

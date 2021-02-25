@@ -18,17 +18,7 @@
     emitted. If <code>noMoreItemsText</code> is configured it will be shown at the end of the list
     at this point.
   </p>
-  <fieldset>
-    <legend>Configuration</legend>
-    <kirby-checkbox
-      [checked]="disableLoadMore"
-      (checkedChange)="disableLoadMore = $event"
-      text="Disable load more"
-    ></kirby-checkbox>
-  </fieldset>
-  <cookbook-list-load-on-demand-example
-    [disableLoadMore]="disableLoadMore"
-  ></cookbook-list-load-on-demand-example>
+  <cookbook-list-load-on-demand-example></cookbook-list-load-on-demand-example>
   <cookbook-code-viewer [html]="exampleHtml"></cookbook-code-viewer>
   <h2>Properties:</h2>
   <cookbook-showcase-properties [properties]="properties"></cookbook-showcase-properties>
