@@ -28,8 +28,8 @@ export class ModalWrapperTestBuilder {
       StaticFooterEmbeddedComponent,
       DynamicFooterEmbeddedComponent,
       InputEmbeddedComponent,
-      StaticCustomHeaderContentEmbeddedComponent,
-      DynamicCustomHeaderContentEmbeddedComponent,
+      StaticPageProgressEmbeddedComponent,
+      DynamicPageProgressEmbeddedComponent,
     ],
     providers: [
       {
@@ -79,12 +79,12 @@ export class ModalWrapperTestBuilder {
   }
 
   withStaticCustomHeaderContent() {
-    this.config.component = StaticCustomHeaderContentEmbeddedComponent;
+    this.config.component = StaticPageProgressEmbeddedComponent;
     return this;
   }
 
   withDynamicCustomHeadercontent() {
-    this.config.component = DynamicCustomHeaderContentEmbeddedComponent;
+    this.config.component = DynamicPageProgressEmbeddedComponent;
     return this;
   }
 
@@ -157,25 +157,25 @@ export class InputEmbeddedComponent {}
 
 @Component({
   template: `
-    <kirby-page-header>
+    <kirby-page-progress>
       <kirby-progress-circle themeColor="warning" value="50" size="sm" class="kirby-text-xsmall">
         2/4
       </kirby-progress-circle>
-    </kirby-page-header>
+    </kirby-page-progress>
     <div>My Title</div>
   `,
 })
-export class StaticCustomHeaderContentEmbeddedComponent {}
+export class StaticPageProgressEmbeddedComponent {}
 @Component({
   template: `
-    <kirby-page-header *ngIf="showCustomHeader">
+    <kirby-page-progress *ngIf="showPageProgress">
       <kirby-progress-circle themeColor="warning" value="50" size="sm" class="kirby-text-xsmall">
         2/4
       </kirby-progress-circle>
-    </kirby-page-header>
+    </kirby-page-progress>
     <div>My title</div>
   `,
 })
-export class DynamicCustomHeaderContentEmbeddedComponent {
+export class DynamicPageProgressEmbeddedComponent {
   showPageProgress = false;
 }

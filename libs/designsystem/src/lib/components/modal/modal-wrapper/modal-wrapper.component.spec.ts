@@ -8,8 +8,8 @@ import { IconComponent } from '../../icon/icon.component';
 
 import { ModalWrapperComponent } from './modal-wrapper.component';
 import {
-  DynamicCustomHeaderContentEmbeddedComponent,
   DynamicFooterEmbeddedComponent,
+  DynamicPageProgressEmbeddedComponent,
   ModalWrapperTestBuilder,
 } from './modal-wrapper.testbuilder';
 
@@ -278,7 +278,7 @@ describe('ModalWrapperComponent', () => {
         const pageProgressContent = spectator.element.querySelector(customHeaderContentSelector);
         expect(pageProgressContent).toBeNull();
 
-        const embeddedComponent = spectator.query(DynamicCustomHeaderContentEmbeddedComponent);
+        const embeddedComponent = spectator.query(DynamicPageProgressEmbeddedComponent);
         embeddedComponent.showPageProgress = true;
         spectator.detectChanges();
         await TestHelper.waitForResizeObserver();
@@ -296,7 +296,7 @@ describe('ModalWrapperComponent', () => {
         let pageProgress = spectator.element.querySelector('kirby-page-progress');
         expect(pageProgress).toBeNull();
 
-        const embeddedComponent = spectator.query(DynamicCustomHeaderContentEmbeddedComponent);
+        const embeddedComponent = spectator.query(DynamicPageProgressEmbeddedComponent);
         embeddedComponent.showPageProgress = true;
         spectator.detectChanges();
         await TestHelper.waitForResizeObserver();
