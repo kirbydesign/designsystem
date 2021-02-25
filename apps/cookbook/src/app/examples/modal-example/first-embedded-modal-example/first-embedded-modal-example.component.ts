@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnInit, Optional, SkipSelf } from '@angular/core';
+import { Component, Inject, OnInit, Optional, SkipSelf } from '@angular/core';
 
 import {
   ActionSheetConfig,
@@ -134,7 +134,7 @@ export class FirstEmbeddedModalExampleComponent implements OnInit {
     this.modal.scrollDisabled = disabled;
   }
 
-  togglePageProgressContent() {
+  togglePageProgress() {
     this.showPageProgress = !this.showPageProgress;
   }
 

@@ -65,7 +65,7 @@ export class ModalExampleConfigurationComponent {
     }
   }
 
-  toggleShowCustomHeader(show: boolean) {
+  toggleShowPageProgress(show: boolean) {
     this.showPageProgress = show;
     this.showPageProgressChange.emit(this.showPageProgress);
   }
