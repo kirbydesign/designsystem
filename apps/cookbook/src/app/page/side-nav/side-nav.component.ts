@@ -1,8 +1,19 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  QueryList,
+  ViewChildren,
+} from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 
 import { routes } from '../../showcase/showcase.routes';
 import { navigationItems } from '../header/header.component';
+
+const KEY_DOWN = 'ArrowDown';
+const KEY_UP = 'ArrowUp';
 
 interface ISideNavLink {
   path: string;
@@ -56,9 +67,49 @@ export class SideNavComponent implements OnInit {
     });
   }
 
+  @ViewChildren('componentLink') componentLinks: QueryList<any>;
+
   onFilterChange(event) {
     this.filter = event;
     this.filterComponents();
+  }
+
+  onFilterKeyDown(event: KeyboardEvent) {
+    if (event.key === KEY_DOWN) {
+      event.preventDefault();
+      const links = this.componentLinks.toArray();
+      for (let i = 0; i < links.length; i++) {
+        const element = links[i].nativeElement;
+        if (!element.classList.contains('hidden')) {
+          element.focus();
+          break;
+        }
+      }
+    }
+  }
+
+  onLinksKeyDown(event: KeyboardEvent) {
+    if (event.key === KEY_DOWN || event.key === KEY_UP) {
+      event.preventDefault();
+    } else {
+      return;
+    }
+
+    const visibleLinks = this.componentLinks.filter((link) => {
+      return !link.nativeElement.classList.contains('hidden');
+    });
+    const currentlyFocused = visibleLinks.findIndex((link) => {
+      return link.nativeElement === document.activeElement;
+    });
+    if (currentlyFocused === -1) {
+      return;
+    }
+
+    if (event.key === KEY_DOWN) {
+      visibleLinks[Math.min(currentlyFocused + 1, visibleLinks.length - 1)].nativeElement.focus();
+    } else {
+      visibleLinks[Math.max(currentlyFocused - 1, 0)].nativeElement.focus();
+    }
   }
 
   onComponentClick(event) {

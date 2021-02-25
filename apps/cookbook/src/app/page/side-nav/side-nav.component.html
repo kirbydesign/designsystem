@@ -21,6 +21,7 @@
         [size]="'md'"
         placeholder="Filter components..."
         (input)="onFilterChange($event.target.value)"
+        (keydown)="onFilterKeyDown($event)"
         [ngModel]="filter"
       />
     </kirby-form-field>
@@ -36,13 +37,14 @@
     </button>
   </div>
 
-  <kirby-card>
+  <kirby-card (keydown)="onLinksKeyDown($event)">
     <a
       *ngFor="let item of showcaseRoutes"
       [routerLink]="item.path"
       [class]="{ 'is-selected': item.active, hidden: item.hidden }"
       class="side-nav__item"
       (click)="onComponentClick(item)"
+      #componentLink
       >{{ item.name }}
     </a>
   </kirby-card>

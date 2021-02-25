@@ -41,6 +41,8 @@ $page-gutter: 1rem;
     color: get-text-color('semi-dark');
     display: block;
     padding: 8px 20px;
+    margin: 0 2px;
+    border-radius: 3px;
     opacity: 1;
     max-height: 50px;
     transition: opacity 100ms, max-height 200ms ease-in, padding 200ms ease-in;
@@ -48,6 +50,7 @@ $page-gutter: 1rem;
     &:hover,
     &:focus {
       color: get-text-color('black');
+      background-color: get-color('light');
     }
     &.is-selected {
       color: get-text-color('black');
