@@ -1,0 +1,36 @@
+/*:root {
+  --kirby-chart-height: 100%;
+  --kirby-chart-padding-top: 30px;
+
+  --kirby-background-color: silver;
+  --kirby-primary: red;
+  --kirby-secondary: yellow;
+  --kirby-tertiary: green;
+  --kirby-tertiary-contrast: darkgreen;
+  --kirby-background-color-shade: lightgrey;
+  --kirby-text-color-semi-dark: silver;
+}
+*/
+:host {
+  --kirby-chart-height: 100%;
+  --kirby-chart-padding-top: 30px;
+  --kirby-chart-border: solid 2px red;
+
+  // must be moved when in kirby
+  --kirby-background-color: white;
+  --kirby-primary: red;
+  --kirby-secondary: yellow;
+  --kirby-tertiary: silver;
+  --kirby-tertiary-contrast: black;
+  --kirby-background-color-shade: lightgrey;
+  --kirby-text-color-semi-dark: darkgray;
+
+  display: block;
+  box-sizing: border-box;
+  border: var(--kirby-chart-border);
+  height: var(--kirby-chart-height);
+  padding-top: var(--kirby-chart-padding-top);
+  .chart-wrapper {
+    position: relative;
+  }
+}

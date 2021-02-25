@@ -15,6 +15,7 @@ import { CardFooterComponent } from './components/card/card-footer/card-footer.c
 import { CardHeaderComponent } from './components/card/card-header/card-header.component';
 import { CardComponent } from './components/card/card.component';
 import { ChartComponent } from './components/chart/chart.component';
+import { Chart2Component } from './components/chart2/chart.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { ChipComponent } from './components/chip/chip.component';
 import { DividerComponent } from './components/divider/divider.component';
@@ -87,6 +88,7 @@ import { WindowRef } from './types/window-ref';
 
 const exportedDeclarations = [
   CardComponent,
+
   CardHeaderComponent,
   CardFooterComponent,
   ButtonComponent,
@@ -100,6 +102,7 @@ const exportedDeclarations = [
   ListHeaderComponent,
   ListFooterDirective,
   ChartComponent,
+  Chart2Component,
   StockChartComponent,
   GridComponent,
   ComponentLoaderDirective,

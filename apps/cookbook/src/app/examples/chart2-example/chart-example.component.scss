@@ -1,0 +1,37 @@
+@import './libs/designsystem/src/lib/scss/utils';
+
+:host {
+  display: block;
+  height: 100%;
+  overflow-x: hidden;
+  background: get-color('background-color');
+  padding: size('s');
+
+  @include media('>=medium') {
+    padding: size('l');
+  }
+
+  > * {
+    display: block;
+    margin: size('s') 0;
+  }
+}
+// temp code
+.chart {
+  width: 600px;
+  flex: auto;
+  margin: auto;
+  background-color: white;
+}
+.chart-width {
+  width: 600px;
+}
+
+.main-container {
+  width: 100%;
+  margin: 100px;
+  background: get-color('background-color');
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

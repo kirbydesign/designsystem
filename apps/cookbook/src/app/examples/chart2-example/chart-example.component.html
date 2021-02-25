@@ -1,0 +1,139 @@
+<!--temp temp temp-->
+
+<div class="main-container">
+  <div class="chart">
+    <h1>Line Chart</h1>
+    <kirby-chart-2 #chartLine class="chart-width"> </kirby-chart-2>
+  </div>
+  <div class="chart">
+    <h1>Bar Chart Demo 1</h1>
+    <kirby-chart-2 #chartBar1 class="chart-width"> </kirby-chart-2>
+  </div>
+  <div class="chart">
+    <h1>Bar Chart Demo 2</h1>
+    <kirby-chart-2 #chartBar2 class="chart-width"> </kirby-chart-2>
+  </div>
+  <div class="chart">
+    <h1>Pie Chart Demo</h1>
+    <kirby-chart-2 #chartPie class="chart-width"> </kirby-chart-2>
+  </div>
+  <div class="chart">
+    <h1>Doughnut Chart Demo</h1>
+    <kirby-chart-2 #chartDoughnut class="chart-width"> </kirby-chart-2>
+  </div>
+
+  <div class="chart">
+    <h1>Pie Chart with data binding</h1>
+    <kirby-chart-2
+      [data]="[-3, -2, -1, 0, 1, 2, 3]"
+      type="pie"
+      [labels]="['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange']"
+      [backgroundColor]="[
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)'
+      ]"
+      [borderColor]="[
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)'
+      ]"
+      [borderWidth]="1"
+      class="chart-width"
+    >
+    </kirby-chart-2>
+  </div>
+
+  <div class="chart">
+    <h1>Pie Chart with data binding</h1>
+    <kirby-chart-2
+      [dataset]="{
+        label: '# of Votes',
+        data: [12, 19, 3, 5, 2, 3],
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1
+      }"
+      type="pie"
+      [labels]="['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange']"
+      class="chart-width"
+    >
+    </kirby-chart-2>
+  </div>
+
+  <div class="chart">
+    <h1>Line Chart with data binding</h1>
+    <kirby-chart-2
+      [data]="[
+        { x: 1, y: 1 },
+        { x: 2, y: 2 },
+        { x: 3, y: 3 },
+        { x: 4, y: 4 }
+      ]"
+      type="line"
+      label="the line"
+      [labels]="['Red', 'Blue', 'Yellow', 'Green']"
+      [backgroundColor]="['rgba(255, 99, 132, 0.2)']"
+      [borderColor]="['rgba(255, 159, 64, 0.2)']"
+      [borderWidth]="1"
+      class="chart-width"
+    >
+    </kirby-chart-2>
+  </div>
+
+  <div class="chart">
+    <h1>Horizontal Bar Chart</h1>
+    <kirby-chart-2
+      [data]="[12, 19, 3, 5, 2, 3]"
+      type="horizontalBar"
+      label="Horizontal bars"
+      [labels]="['A', 'B', 'C', 'D', 'E', 'F']"
+      [backgroundColor]="[
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 255, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)'
+      ]"
+      [borderWidth]="1"
+      class="chart-width"
+    >
+    </kirby-chart-2>
+  </div>
+
+  <div class="chart">
+    <h1>Gauge</h1>
+    <kirby-chart-2
+      [data]="[12, 19, 3, 5, 2, 3]"
+      type="doughnut"
+      label="the gauge"
+      [labels]="['Red', 'Blue', 'Yellow', 'Green']"
+      [backgroundColor]="['rgba(255, 99, 132, 0.2)']"
+      [borderColor]="['rgba(255, 159, 64, 0.2)']"
+      [borderWidth]="1"
+      class="chart-width"
+    >
+    </kirby-chart-2>
+  </div>
+</div>
