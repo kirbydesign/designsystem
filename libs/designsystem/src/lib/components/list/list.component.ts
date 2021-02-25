@@ -100,9 +100,8 @@ export class ListComponent implements OnInit, AfterViewInit, OnChanges {
   hasItemSpacing: boolean;
 
   /**
-   * Determines if the loadOnDemand event should be emitted
-   * - will be set to true if not given a value by parent component
-   * and there's a subscriber to the loadOnDemand event
+   * Determines if the loadOnDemand event should be emitted.
+   * Will default to true if there is at least one subscriber to the loadOnDemand event
    */
   @Input() isLoadOnDemandEnabled: boolean;
 

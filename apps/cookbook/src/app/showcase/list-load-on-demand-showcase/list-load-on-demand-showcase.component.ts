@@ -23,7 +23,7 @@ export class ListLoadOnDemandShowcaseComponent {
     {
       name: 'noMoreItemsText',
       description:
-        'Text to display when no more items can be loaded (used for "on demand"-loading).',
+        'Text to display when on demand loading of items is complete.,
       inputValues: ['string'],
       defaultValue: 'undefined',
     },

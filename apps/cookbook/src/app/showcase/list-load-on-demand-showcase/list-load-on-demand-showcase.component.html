@@ -1,21 +1,20 @@
 <div class="example">
   <p>
-    The kirby list will emit at <code>loadMore</code> event, when the user has scrolled 80% of the
+    The kirby list will emit a <code>loadMore</code> event, when the user has scrolled 80% of the
     list. It is the responsibility of the consumer to add more items to the bound
     <code>items</code>.
   </p>
   <p>
     The event emitted is of type <code>KirbyLoadMoreEvent</code> which exposes a
-    <code>complete</code> callback function.
+    <code>complete()</code> callback function.
   </p>
   <p>
-    The <code>complete</code> callback function should be called when the loading of the additional
+    The <code>complete()</code> callback function should be called when the loading of the additional
     items are done.
   </p>
   <p>
-    If <code>complete</code> is called with the <code>disableLoadMore</code> argument set to
-    <code>true</code>, no further events will be emitted. Further more, if any is given, the
-    <code>noMoreItemsText</code> will be shown.
+    If <code>complete(disableLoadMore?: boolean)</code> is called with the <code>disableLoadMore</code> argument set to
+    <code>true</code>, no further events will be emitted. If <code>noMoreItemsText</code> is configured it will be shown at the end of the list at this point.
   </p>
   <cookbook-list-load-on-demand-example></cookbook-list-load-on-demand-example>
   <cookbook-code-viewer [html]="exampleHtml"></cookbook-code-viewer>
