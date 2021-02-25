@@ -85,11 +85,13 @@ export class PageContentDirective {
 @Component({
   selector: 'kirby-page-progress',
   template: `
-    <ng-content> </ng-content>
+    <ng-content></ng-content>
   `,
   styles: [':host {display: flex}'],
 })
 export class PageProgressComponent implements OnInit {
+  // TODO: Find alternative implementation, which aligns with future page configuration / consumption
+  // this implementation was chosen over expanding moveChild in component wrapper with another scenario
   @HostBinding('attr.slot') slotAttribute = 'start';
 
   constructor(@Optional() @SkipSelf() private modalWrapper: ModalWrapperComponent) {}
