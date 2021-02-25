@@ -239,7 +239,7 @@ describe('ModalWrapperComponent', () => {
       beforeEach(() => {
         spectator = modalWrapperTestBuilder
           .flavor('modal')
-          .withStaticCustomHeaderContent()
+          .withStaticPageProgress()
           .build();
         spectator.detectComponentChanges();
       });
@@ -264,7 +264,7 @@ describe('ModalWrapperComponent', () => {
       beforeEach(() => {
         spectator = modalWrapperTestBuilder
           .flavor('modal')
-          .withDynamicCustomHeadercontent()
+          .withDynamicPageProgress()
           .build();
         spectator.detectComponentChanges();
       });

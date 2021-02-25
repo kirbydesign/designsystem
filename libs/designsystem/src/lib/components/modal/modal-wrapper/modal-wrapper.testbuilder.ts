@@ -78,12 +78,12 @@ export class ModalWrapperTestBuilder {
     return this;
   }
 
-  withStaticCustomHeaderContent() {
+  withStaticPageProgress() {
     this.config.component = StaticPageProgressEmbeddedComponent;
     return this;
   }
 
-  withDynamicCustomHeadercontent() {
+  withDynamicPageProgress() {
     this.config.component = DynamicPageProgressEmbeddedComponent;
     return this;
   }
