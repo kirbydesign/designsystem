@@ -1,11 +1,13 @@
-<label *ngIf="label">
-  <div class="text">{{ label }}</div>
-  <ng-container *ngTemplateOutlet="slottedInput"></ng-container>
+<label *ngIf="_wrapContentInLabel">
+  <ng-container *ngTemplateOutlet="labelTextTemplate"></ng-container>
+  <ng-container *ngTemplateOutlet="slottedInputTemplate"></ng-container>
 </label>
-<ng-container *ngIf="!label">
-  <ng-container *ngTemplateOutlet="slottedInput"></ng-container>
+
+<ng-container *ngIf="!_wrapContentInLabel">
+  <ng-container *ngTemplateOutlet="labelTemplate"></ng-container>
+  <ng-container *ngTemplateOutlet="slottedInputTemplate"></ng-container>
 </ng-container>
-<ng-content select="kirby-dropdown"></ng-content>
+
 <div *ngIf="message || counter" class="texts">
   <kirby-form-field-message
     *ngIf="message"
@@ -18,7 +20,20 @@
   </div>
 </div>
 
-<ng-template #slottedInput>
+<ng-template #slottedInputTemplate>
   <ng-content select="input[kirby-input]"></ng-content>
   <ng-content select="textarea[kirby-textarea]"></ng-content>
+  <ng-content select="kirby-radio-group"></ng-content>
+</ng-template>
+
+<ng-template #labelTextTemplate>
+  <ng-container *ngIf="label">
+    <span class="text">{{ label }}</span>
+  </ng-container>
+</ng-template>
+
+<ng-template #labelTemplate>
+  <ng-container *ngIf="label">
+    <label class="text" [id]="_labelId" (click)="onLabelClick()">{{ label }}</label>
+  </ng-container>
 </ng-template>

@@ -5,3 +5,10 @@ export interface ShowcaseProperty {
   inputValues?: string[];
   preserveInputValuesWhitespaces?: boolean;
 }
+
+export interface ShowCasePropertyColumns {
+  Name?: string;
+  Description?: string;
+  Type?: string;
+  Default?: string;
+}

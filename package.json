@@ -1,6 +1,6 @@
 {
   "name": "designsystem",
-  "version": "1.4.0",
+  "version": "1.4.15",
   "description": "Kirby Design Components",
   "repository": {
     "type": "git",
@@ -50,7 +50,6 @@
     "predist:designsystem": "npm run extract-scss-variables",
     "dist:designsystem": "ng build designsystem",
     "postinstall": "npm run ngcc && npm run build-polyfills && npm run transpile:tools && npm run extract-scss-variables",
-    "postversion": "git push && git push --tags",
     "coverage-report": "cat ./coverage/lcov.info | coveralls",
     "transpile:tools": "npm run transpile:tslint-rules && npm run transpile:sass-to-ts && npm run transpile:generate-mocks",
     "transpile:tslint-rules": "tsc -p tools/tslint-rules",

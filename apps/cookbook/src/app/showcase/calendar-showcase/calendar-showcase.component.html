@@ -16,6 +16,7 @@
         [setMaxDate]="setMaxDate"
         [setTodayDate]="setTodayDate"
         [useTimezoneUTC]="useTimezoneUTC"
+        [showYearNavigator]="showYearNavigator"
       ></cookbook-calendar-card-example>
       <!-- prettier-ignore -->
       <fieldset class="checkbox-xs">
@@ -29,10 +30,17 @@
           <kirby-checkbox [(checked)]="setMaxDate" text="Set max date ({{maxDate | date:'dd-MM-yyyy':(useTimezoneUTC ? 'UTC' : undefined)}})"></kirby-checkbox>
           <kirby-checkbox [(checked)]="setTodayDate" text="Set today date ({{todayDate | date:'dd-MM-yyyy':(useTimezoneUTC ? 'UTC' : undefined)}})"></kirby-checkbox>
           <kirby-checkbox [(checked)]="useTimezoneUTC" text="Use UTC instead of local time"></kirby-checkbox>
+          <kirby-checkbox [(checked)]="showYearNavigator" text="Show year navigator"></kirby-checkbox>
         </fieldset>
     </div>
     <cookbook-code-viewer [html]="exampleWithCardHtml"></cookbook-code-viewer>
   </div>
   <h4>Properties:</h4>
   <cookbook-showcase-properties [properties]="properties"></cookbook-showcase-properties>
+
+  <h4>Events:</h4>
+  <cookbook-showcase-properties
+    [properties]="events"
+    [columns]="eventColumns"
+  ></cookbook-showcase-properties>
 </div>

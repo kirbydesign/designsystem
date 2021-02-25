@@ -1,8 +1,8 @@
 import { IonicModule } from '@ionic/angular';
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
 
-import { TestHelper } from '../../testing/test-helper';
 import { DesignTokenHelper } from '../../helpers';
+import { TestHelper } from '../../testing/test-helper';
 
 import { RadioComponent } from './radio.component';
 
@@ -25,6 +25,7 @@ describe('RadioComponent', () => {
   beforeEach(async () => {
     spectator = createComponent({ props: { text: 'test' } });
     ionRadioElement = spectator.query('ion-radio');
+    ionRadioElement.tabIndex = -1;
     await TestHelper.whenReady(ionRadioElement);
     radioIcon = ionRadioElement.shadowRoot.querySelector('[part=container]');
     radioCheckmark = ionRadioElement.shadowRoot.querySelector('[part=mark]');
@@ -43,8 +44,12 @@ describe('RadioComponent', () => {
       expect(spectator.component.disabled).toBe(undefined);
     });
 
-    it('should not have error', () => {
-      expect(spectator.component.hasError).toBe(false);
+    it('should get tabindex from ion-radio', () => {
+      expect(spectator.component.buttonTabIndex).toBe(-1);
+
+      ionRadioElement.tabIndex = 0;
+
+      expect(spectator.component.buttonTabIndex).toBe(0);
     });
   });
 
@@ -198,17 +203,16 @@ describe('RadioComponent', () => {
           });
         });
       });
+    });
+  });
 
-      describe('error', () => {
-        it('should have correct border style', () => {
-          spectator.setInput('hasError', true);
-          spectator.detectChanges();
-          expect(radioIcon).toHaveComputedStyle({
-            'border-width': '1px',
-            'border-color': getColor('danger'),
-          });
-        });
-      });
+  describe('focus()', () => {
+    it('should focus ion-radio', () => {
+      const focusSpy = spyOn(ionRadioElement, 'focus');
+
+      spectator.component.focus();
+
+      expect(focusSpy).toHaveBeenCalled();
     });
   });
 

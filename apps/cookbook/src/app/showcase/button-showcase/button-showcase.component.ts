@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-declare var require: any;
-
 import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
+declare var require: any;
 
 @Component({
   selector: 'cookbook-button-showcase',

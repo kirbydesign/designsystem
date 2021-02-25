@@ -1,20 +1,25 @@
 @import './libs/designsystem/src/lib/scss/utils';
 
 kirby-card {
+  z-index: 3; // Ensure dropdown opens over configuration checkboxes
+  overflow: visible; // Ensure dropdown isn't cut off
+
   width: 320px;
   margin-bottom: 20px;
 
-  div {
+  kirby-card-footer {
+    height: size('xxl');
     display: flex;
+    flex-grow: 1;
+    align-items: stretch;
+    padding: 0;
     border-top: 1px solid get-color('medium');
 
     button {
-      font-size: 14px;
-      width: 100%;
-      height: 50px;
+      flex: 1;
+      height: auto;
       border-radius: 0;
-      margin: auto;
-      outline: none;
+      margin: 0;
     }
   }
 }

@@ -3,6 +3,7 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  HostBinding,
   Inject,
   Input,
   LOCALE_ID,
@@ -17,6 +18,7 @@ import moment from 'moment';
 import { CalendarCell } from './helpers/calendar-cell.model';
 import { CalendarOptions } from './helpers/calendar-options.model';
 import { CalendarHelper } from './helpers/calendar.helper';
+import { CalendarYearNavigatorConfig } from './options/calendar-year-navigator-config';
 
 interface CalendarDay {
   isCurrentMonth: boolean;
@@ -36,11 +38,20 @@ interface CalendarDay {
 export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   @ViewChild('calendarContainer', { static: false }) calendarContainer: ElementRef;
   @Output() dateChange = new EventEmitter<Date>();
+  @Output() dateSelect = new EventEmitter<Date>();
   @Input() timezone: 'local' | 'UTC' = 'local';
   @Input() disableWeekends = false;
   @Input() disablePastDates = false;
   @Input() disableFutureDates = false;
   @Input() alwaysEnableToday = false;
+  /**
+   * Configuration for the year navigator.
+   *
+   * Internally, calendar component:
+   * - bases yearNavigatorOptions.from and yearNavigatorOptions.to on todayDate if a number is provided
+   * - prioritizes minDate and maxDate over yearNavigatorOptions.from and yearNavigatorOptions.to
+   */
+  @Input() yearNavigatorOptions: CalendarYearNavigatorConfig;
   public month: CalendarCell[][];
   public weekDays: string[];
   private selectedDay: CalendarCell;
@@ -88,6 +99,9 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   @Input() set minDate(value: Date) {
+    if (value && this.activeMonth.toDate() < value) {
+      this.setActiveMonth(value);
+    }
     this._minDate = this.normalizeDate(value);
   }
 
@@ -96,6 +110,9 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   @Input() set maxDate(value: Date) {
+    if (value && this.activeMonth.toDate() > value) {
+      this.setActiveMonth(value);
+    }
     this._maxDate = this.normalizeDate(value);
   }
 
@@ -105,6 +122,28 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
 
   get activeYear(): string {
     return this.activeMonth.format('YYYY');
+  }
+
+  /**
+   * Gets navigable years for year navigator based on yearNavigatorOptions.
+   */
+  get navigableYears(): string[] {
+    const dateOfFirstNavigableYear =
+      this.minDate || this.getDateFromNavigableYear(this.yearNavigatorOptions.from);
+
+    const dateOfLastNavigableYear =
+      this.maxDate || this.getDateFromNavigableYear(this.yearNavigatorOptions.to);
+
+    return this.getYearsBetweenDates(dateOfFirstNavigableYear, dateOfLastNavigableYear);
+  }
+
+  get navigatedYear(): number {
+    return this.navigableYears.indexOf(this.activeYear);
+  }
+
+  @HostBinding('class.has-year-navigator')
+  get _hasYearNavigator() {
+    return !!this.yearNavigatorOptions;
   }
 
   constructor(private calendarHelper: CalendarHelper, @Inject(LOCALE_ID) private locale: string) {
@@ -332,21 +371,23 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
 
   onDateSelected(newDay: CalendarCell) {
     if (newDay.isSelectable && newDay.date) {
-      const selectedDate = this.activeMonth
+      const newDate = this.activeMonth
         .clone()
         .date(newDay.date)
         .toDate();
-      this.onSelectedDateChange(selectedDate);
-      this._selectedDate = selectedDate;
 
-      if (this.timezone === 'local') {
-        // emit as local time midnight
-        this.dateChange.emit(selectedDate);
-      } else {
-        // emit as equivalent date in utc midnight
-        const utcMidnightDate = moment.utc(moment(selectedDate).format('YYYY-MM-DD')).toDate();
-        this.dateChange.emit(utcMidnightDate);
+      // emit equivalent date in utc midnight if timezone is not local
+      const dateToEmit =
+        this.timezone === 'local'
+          ? newDate
+          : moment.utc(moment(newDate).format('YYYY-MM-DD')).toDate();
+
+      if (this.hasDateChanged(newDate, this._selectedDate)) {
+        this.onSelectedDateChange(newDate);
+        this._selectedDate = newDate;
+        this.dateChange.emit(dateToEmit);
       }
+      this.dateSelect.emit(dateToEmit);
     }
   }
 
@@ -357,6 +398,10 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
 
   changeMonth(index: number) {
     this.changeActiveView(index, 'months');
+  }
+
+  public changeYear(year: number) {
+    this.changeActiveView(year - this.activeMonth.year(), 'years');
   }
 
   private changeActiveView(index: number, unit: moment.unitOfTime.Base) {
@@ -404,5 +449,18 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
       weekDays: this.weekDays,
       month: this.month,
     };
+  }
+
+  private getDateFromNavigableYear(navigableYear: number | Date): Date {
+    if (navigableYear instanceof Date) return navigableYear;
+    const today = this.todayDate || new Date();
+    return new Date(today.getFullYear() + navigableYear, 0, 1);
+  }
+
+  private getYearsBetweenDates(startDate: Date, endDate: Date): string[] {
+    // Ensure years are ordered correctly if parameters are switched:
+    const [startYear, endYear] = [startDate.getFullYear(), endDate.getFullYear()].sort();
+    const numberOfYears = endYear - startYear;
+    return Array.from({ length: numberOfYears + 1 }, (_, i) => (startYear + i).toString());
   }
 }

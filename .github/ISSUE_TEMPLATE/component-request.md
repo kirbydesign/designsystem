@@ -33,22 +33,30 @@ Add any other context or screenshots about the feature request here, e.g. a link
 
 ### Kick Off:
 
-- [ ] Accept Feature incl. name of component (DSL)
-- [ ] Update Kirby Component Status and publish to [Kirby Cookbook](https://cookbook.kirby.design)
+- [ ] Ensure Feature is `UX refined` and aligned with UX incl. name of component (our shared Design System Language).  
+_The component should be published and available in the [Kirby Styleguide on Zeplin](https://zpl.io/258pXGj)_
+- [ ] Ensure Feature has been `Tech refined` with @kirbydesign/kirby-guild and this issue is updated with a clear implementation description  
+_This issue should be in the [Ready to do](https://github.com/kirbydesign/designsystem/projects/1#column-4590936) column of the [Kirby kan-ban board](https://github.com/kirbydesign/designsystem/projects/1) before starting implementation)_
+- [ ] Assign yourself to this issue and move it to the [In progress](https://github.com/kirbydesign/designsystem/projects/1#column-4590937) column of the [Kirby kan-ban board](https://github.com/kirbydesign/designsystem/projects/1)
 
 ### Code:
 
-- [ ] Create Feature Branch
-- [ ] Implement Skeleton Component
-- Ask UX for review:
-  - [ ] Ensure implementation is correct in relation to UX design
-  - [ ] Define the version of the implementation + steps needed to reach version 1.0 (create [enhancement requests](https://github.com/kirbydesign/designsystem/issues/new?assignees=&labels=enhancement&template=enhancement-request.md&title=%5BEnhancement%5D))
-- [ ] [Implement Examples and Showcase](https://cookbook.kirby.design/home/showcase/button)
-- [ ] Add link to showcase on Kirby Component Status (`component-status-items.ts => code.cookbookUrl`)
-- [ ] Also remove `githubIssueNo` and set `status` to `ItemCodeStatus.ready`
-- [ ] Push commits to GitHub
+- [ ] Create Feature Branch from [master branch](https://github.com/kirbydesign/designsystem/tree/master)
+- [ ] Implement Skeleton Component and push to Github
+- [ ] Ask a member of @kirbydesign/kirby-guild for a WIP review by creating a draft Pull Request
+- [ ] Implement unit tests
+- [ ] Implement Cookbook Examples and Showcase, i.e. see [Radio](https://cookbook.kirby.design/home/showcase/radio)  
+_Also remember to add any relevant API documentation_
 
 ### Review:
 
-- [ ] Open a pull request (remember to add `closes #issueno` to the description) and ask @kirbydesign/kirby-guild for review
-- Merge to master and delete branch
+- UX review:
+  - [ ] Ensure implementation is correct in relation to the UX design and the [Kirby Styleguide on Zeplin](https://zpl.io/258pXGj)
+  - [ ] With UX agree on the version of the implementation + any additional steps needed to reach version 1.0 (create [enhancement requests](https://github.com/kirbydesign/designsystem/issues/new/choose))
+- Code review:
+  - [ ] Open a pull request (or mark the existing draft PR as `Ready for review`) and ask @kirbydesign/kirby-guild for a review  
+_Remember to add `closes #issueno` to the description of the PR._
+  - [ ] Once approved, merge feature branch/PR to master
+- [ ] Ask a member of @kirbydesign/kirby-guild to add a link to component showcase from Kirby Component Status
+
+:tada: Celebrate

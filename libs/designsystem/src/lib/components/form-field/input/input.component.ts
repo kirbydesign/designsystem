@@ -1,13 +1,18 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  Input,
+  EventEmitter,
   HostBinding,
   HostListener,
-  EventEmitter,
-  SimpleChanges,
+  Input,
   OnChanges,
+  SimpleChanges,
 } from '@angular/core';
+
+export enum InputSize {
+  medium = 'md',
+  large = 'lg',
+}
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -30,6 +35,10 @@ export class InputComponent implements OnChanges {
       this.inputmode = mappedValue;
     }
   }
+
+  @HostBinding('class')
+  @Input()
+  size: InputSize = InputSize.large;
 
   /**
    * Removes padding, width, rounded borders and drop-shadow when set to `true`.
