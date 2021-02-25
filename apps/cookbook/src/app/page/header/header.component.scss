@@ -10,10 +10,9 @@ header {
   justify-content: space-between;
   align-items: center;
   margin: 0 auto;
-  max-width: var(--kirby-page-max-width);
-  padding: 10px 0 0;
+  padding-top: 10px;
   @include media('>=large') {
-    padding: 20px 0 0;
+    padding-top: 20px;
   }
 }
 
