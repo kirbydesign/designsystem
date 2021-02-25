@@ -1,11 +1,11 @@
 import { Component, Inject, Input, OnInit, Optional, SkipSelf } from '@angular/core';
 
 import {
-  AlertConfig,
   ActionSheetConfig,
+  AlertConfig,
+  COMPONENT_PROPS,
   Modal,
   ModalController,
-  COMPONENT_PROPS,
 } from '@kirbydesign/designsystem';
 import { ModalConfig } from '@kirbydesign/designsystem';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
@@ -28,7 +28,7 @@ export class FirstEmbeddedModalExampleComponent implements OnInit {
 
   showNestedOptions: boolean;
   showDummyKeyboard: boolean;
-  showCustomHeader: boolean;
+  showPageProgress: boolean;
   showFooter: boolean;
   showDummyContent: boolean;
   showNestedFooter: boolean = false;
@@ -78,7 +78,7 @@ export class FirstEmbeddedModalExampleComponent implements OnInit {
         title,
         subtitle: 'Hello from second embedded example component!',
         showDummyKeyboard: this.showDummyKeyboard,
-        showCustomHeader: this.showCustomHeader,
+        showPageProgress: this.showPageProgress,
         showFooter: this.showNestedFooter,
         showDummyContent: this.showNestedDummyContent,
         delayLoadDummyContent: this.delayLoadDummyContent,
@@ -134,8 +134,8 @@ export class FirstEmbeddedModalExampleComponent implements OnInit {
     this.modal.scrollDisabled = disabled;
   }
 
-  toggleCustomHeaderContent() {
-    this.showCustomHeader = !this.showCustomHeader;
+  togglePageProgressContent() {
+    this.showPageProgress = !this.showPageProgress;
   }
 
   toggleFooter() {
