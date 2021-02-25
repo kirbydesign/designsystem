@@ -3,8 +3,6 @@ import { Component } from '@angular/core';
 import { ListLoadOnDemandExampleTemplate } from './../../examples/list-load-on-demand-example/list-load-on-demand-example.component';
 import { ShowcaseProperty } from './../../shared/showcase-properties/showcase-property';
 
-declare var require: any;
-
 @Component({
   selector: 'cookbook-list-load-on-demand-showcase',
   templateUrl: './list-load-on-demand-showcase.component.html',
