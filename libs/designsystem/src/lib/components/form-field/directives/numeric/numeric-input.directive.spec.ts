@@ -1,4 +1,3 @@
-import { DecimalPipe } from '@angular/common';
 import '@angular/common/locales/global/da';
 import { LOCALE_ID } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -14,10 +13,9 @@ describe('Directive: NumericInputDirective', () => {
     describe(`locale: ${locale.id}`, () => {
       const createHost = createDirectiveFactory({
         directive: NumericInputDirective,
-        declarations: [NumericInputDirective, DecimalPipe],
+        declarations: [NumericInputDirective],
         imports: [FormsModule, ReactiveFormsModule],
         providers: [
-          DecimalPipe,
           {
             provide: LOCALE_ID,
             useValue: locale.id,
@@ -365,6 +363,86 @@ describe('Directive: NumericInputDirective', () => {
 
           expect((spectatorDirective.element as HTMLInputElement).value).toBe(`234${sep}567`);
           expect(inputElm.selectionStart).toBe(0);
+        });
+
+        it('should delete 3 chars after the first integral digit and maintain cursor position', () => {
+          //Hvis jeg indsætter 123,456,789 og dernæst sletter 6, 5 og 4 så havner min cursor efter kommaet
+          inputElm.value = '123456789';
+          inputElm.setSelectionRange(4, 4);
+          spectatorDirective.detectChanges();
+          spectatorDirective.directive.ngOnInit();
+          expect(inputElm.value).toBe(`123456789`);
+          expect(inputElm.selectionStart).toBe(4);
+          console.log(
+            'inputElm value and selectionStart',
+            inputElm.value,
+            inputElm.selectionStart,
+            inputElm.selectionEnd
+          );
+
+          testFormControl.setValue(`123456789`, {
+            emitModelToViewChange: false,
+            emitViewToModelChange: false,
+            onlySelf: true,
+          });
+          spectatorDirective.detectChanges();
+          console.log(
+            'inputElm value and selectionStart',
+            inputElm.value,
+            inputElm.selectionStart,
+            inputElm.selectionEnd
+          );
+          expect(inputElm.value).toBe(`123${sep}456${sep}789`);
+          expect(inputElm.selectionStart).toBe(5);
+
+          testFormControl.setValue(`12345789`, {
+            emitModelToViewChange: false,
+            emitViewToModelChange: false,
+            onlySelf: true,
+          });
+          spectatorDirective.detectChanges();
+          expect(inputElm.value).toBe(`12${sep}345${sep}789`);
+          console.log(
+            'inputElm value and selectionStart',
+            inputElm.value,
+            inputElm.selectionStart,
+            inputElm.selectionEnd
+          );
+          expect(inputElm.selectionStart).toBe(5);
+
+          testFormControl.setValue(`1234789`, {
+            emitModelToViewChange: false,
+            emitViewToModelChange: false,
+            onlySelf: true,
+          });
+          spectatorDirective.detectChanges();
+          expect((spectatorDirective.element as HTMLInputElement).value).toBe(
+            `1${sep}234${sep}789`
+          );
+          console.log(
+            'inputElm value and selectionStart',
+            inputElm.value,
+            inputElm.selectionStart,
+            inputElm.selectionEnd
+          );
+
+          expect(inputElm.selectionStart).toBe(5);
+
+          testFormControl.setValue(`123789`, {
+            emitModelToViewChange: false,
+            emitViewToModelChange: false,
+            onlySelf: true,
+          });
+          spectatorDirective.detectChanges();
+          expect(inputElm.value).toBe(`123${sep}789`);
+          console.log(
+            'inputElm value and selectionStart',
+            inputElm.value,
+            inputElm.selectionStart,
+            inputElm.selectionEnd
+          );
+
+          expect(inputElm.selectionStart).toBe(5);
         });
       });
 

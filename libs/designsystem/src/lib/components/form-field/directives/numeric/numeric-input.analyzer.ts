@@ -1,6 +1,4 @@
-import { CurrencyPipe, DecimalPipe, getLocaleNumberSymbol, NumberSymbol } from '@angular/common';
-
-import { NumericFormatter } from './numeric.formatter';
+import { formatNumber, getLocaleNumberSymbol, NumberSymbol } from '@angular/common';
 
 type Config = {
   maxNumberOfIntegrals: number;
@@ -32,12 +30,7 @@ export class NumericInputAnalyzer {
   private decimalPart: string;
   private allowedCharsOnly: boolean;
 
-  constructor(
-    private locale: string,
-    private decimalPipe: DecimalPipe,
-    private currencyPipe: CurrencyPipe,
-    config?: Config
-  ) {
+  constructor(private locale: string, config?: Config) {
     if (config !== undefined) {
       this.config = config;
     }
@@ -66,16 +59,6 @@ export class NumericInputAnalyzer {
       this.adjustCursorPosition(value);
     }
     return value;
-  }
-
-  public formatResult(value: number): string {
-    const formatter: NumericFormatter = new NumericFormatter(
-      this.locale,
-      this.decimalPipe,
-      this.currencyPipe
-    );
-    const output = formatter.format(value);
-    return output;
   }
 
   private resetAndCapture(value: string): string {
@@ -167,7 +150,7 @@ export class NumericInputAnalyzer {
     if (separator === replaceValue) {
       return value;
     }
-    const r = new RegExp('[' + separator + ']+', 'g');
+    const r = new RegExp(`[${separator}]`, 'g');
     while (value.indexOf(separator) > -1) {
       value = value.replace(r, replaceValue);
     }
@@ -178,11 +161,10 @@ export class NumericInputAnalyzer {
     if (!this.config.thousandSeparatorEnabled) {
       return value;
     }
-    let newValue = this.formatResult(this.convertIntoNumber(value));
+    let newValue = formatNumber(this.convertIntoNumber(value), this.locale, '0.');
     if (newValue === null) {
       return value;
     }
-
     newValue = this.replaceSeparator(
       newValue,
       this.neutralGroupingSeparator,
@@ -243,7 +225,11 @@ export class NumericInputAnalyzer {
   private extractIntegralPart(value: string): string {
     const idx = value.indexOf(this.decimalSeparator);
     if (idx > -1) {
-      return value.substring(0, idx);
+      let result = value.substring(0, idx);
+      if (result === '') {
+        result = '0';
+      }
+      return result;
     }
     return value;
   }

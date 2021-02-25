@@ -39,7 +39,6 @@ import { NumericInputAnalyzer } from './numeric-input.analyzer';
 @Directive({
   // tslint:disable-next-line:directive-selector
   selector: '[kirby-numeric-input]',
-  providers: [DecimalPipe, CurrencyPipe],
 })
 export class NumericInputDirective implements OnInit, OnDestroy {
   @Input() thousandSeparatorEnabled = true;
@@ -54,8 +53,6 @@ export class NumericInputDirective implements OnInit, OnDestroy {
 
   constructor(
     @Inject(LOCALE_ID) private locale: string,
-    private decimalPipe: DecimalPipe,
-    private currencyPipe: CurrencyPipe,
     @Self() private ngControl: NgControl,
     @Self() private hostElement: ElementRef<HTMLInputElement>
   ) {
@@ -70,7 +67,7 @@ export class NumericInputDirective implements OnInit, OnDestroy {
     this.maxNumberOfIntegrals = parseInt(this.maxNumberOfIntegrals.toString(), 10);
     this.maximumNumberOfDecimals = parseInt(this.maximumNumberOfDecimals.toString(), 10);
 
-    this.analyzer = new NumericInputAnalyzer(this.locale, this.decimalPipe, this.currencyPipe, {
+    this.analyzer = new NumericInputAnalyzer(this.locale, {
       maxNumberOfIntegrals: this.maxNumberOfIntegrals,
       thousandSeparatorEnabled: this.thousandSeparatorEnabled,
       allowNegativeNumber: this.allowNegativeNumber,
