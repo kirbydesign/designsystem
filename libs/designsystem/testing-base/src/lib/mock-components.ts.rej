@@ -1,0 +1,5 @@
+diff a/libs/designsystem/testing-base/src/lib/mock-components.ts b/libs/designsystem/testing-base/src/lib/mock-components.ts	(rejected hunks)
+@@ -54,2 +54 @@ import { MockTabsComponent } from './components/mock.tabs.component';
+-import { MockTextareaComponent } from './components/mock.textarea.component';
+-import { MockToggleComponent } from './components/mock.toggle.component';
++import { MockTextareaComponent } from './components/mock.textarea.component';
