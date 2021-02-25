@@ -45,3 +45,11 @@ html {
 *:after {
   box-sizing: inherit;
 }
+
+// The <cookbook-code-viewer> component prefixes the class attribute
+// with "language-" on <code> elements. Do not target those.
+code:not([class*='language-']) {
+  border-radius: size('xxxs');
+  background-color: get-color('semi-light');
+  padding: size('xxxxs') size('xxxs');
+}
