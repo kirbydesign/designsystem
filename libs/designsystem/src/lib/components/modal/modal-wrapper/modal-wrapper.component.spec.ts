@@ -234,7 +234,6 @@ describe('ModalWrapperComponent', () => {
   });
 
   describe('with embedded page progress component', () => {
-    const customHeaderContentSelector = 'kirby-page-progress';
     describe('with static page progress', () => {
       beforeEach(() => {
         spectator = modalWrapperTestBuilder
@@ -248,6 +247,7 @@ describe('ModalWrapperComponent', () => {
         // Ensure any observers are destroyed:
         spectator.fixture.destroy();
       });
+
       it('should move embedded page progress content to ion toolbar', () => {
         const ionContentElement = spectator.query('ion-content');
         const embeddedComponentElement = ionContentElement.firstElementChild;
@@ -275,7 +275,7 @@ describe('ModalWrapperComponent', () => {
       });
 
       it('should move embedded page progress to wrapper component when rendered', async () => {
-        const pageProgressContent = spectator.element.querySelector(customHeaderContentSelector);
+        const pageProgressContent = spectator.element.querySelector('kirby-page-progress');
         expect(pageProgressContent).toBeNull();
 
         const embeddedComponent = spectator.query(DynamicPageProgressEmbeddedComponent);
@@ -307,7 +307,7 @@ describe('ModalWrapperComponent', () => {
         embeddedComponent.showPageProgress = false;
         spectator.detectChanges();
 
-        pageProgress = spectator.element.querySelector(customHeaderContentSelector);
+        pageProgress = spectator.element.querySelector('kirby-page-progress');
         expect(pageProgress).toBeNull();
       });
     });
