@@ -40,7 +40,7 @@ $text-colors: (
 $focus-ring-color: rgb(77, 144, 254);
 
 @function getAllColors() {
-  @return map-merge(map-merge($brand-colors, $notification-colors), $system-colors);
+  @return map-merge(map-merge($brand-colors, $notification-and-info-colors), $system-colors);
 }
 
 $_color-palette: getAllColors();
