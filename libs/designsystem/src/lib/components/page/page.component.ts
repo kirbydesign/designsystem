@@ -79,12 +79,12 @@ export class PageContentDirective {
     return this.config && this.config.fixed;
   }
 }
+
 @Component({
   selector: 'kirby-page-header',
   template: `
-        <ng-content>
-        </ng-content>
-    `,
+    <ng-content></ng-content>
+  `,
   styles: [':host {display: flex}'],
 })
 export class PageHeaderComponent {}
@@ -94,6 +94,7 @@ export class PageHeaderComponent {}
   template: `
     <ng-content></ng-content>
   `,
+  styles: [':host {display: flex}'],
 })
 export class PageTitleComponent {}
 
