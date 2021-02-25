@@ -17,7 +17,7 @@ import {
   ViewChildren,
 } from '@angular/core';
 import { ActivatedRoute, RouterOutlet } from '@angular/router';
-import { IonContent, IonHeader, IonTitle } from '@ionic/angular';
+import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular';
 import { Observable, Subject } from 'rxjs';
 import { first, takeUntil } from 'rxjs/operators';
 
@@ -60,12 +60,13 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   @ViewChild(IonHeader, { static: true, read: ElementRef }) private ionHeaderElement: ElementRef<
     HTMLIonHeaderElement
   >;
+  @ViewChild(IonToolbar, { static: true, read: ElementRef }) private ionToolbarElement: ElementRef<
+    HTMLIonToolbarElement
+  >;
   @ViewChild(IonTitle, { static: true, read: ElementRef }) private ionTitleElement: ElementRef<
     HTMLIonTitleElement
   >;
   @ViewChild(RouterOutlet, { static: true }) private routerOutlet: RouterOutlet;
-  @ViewChild('toolbarButtonsStart', { static: false, read: ElementRef })
-  private toolbarButtonsStart: ElementRef<HTMLIonButtonsElement>;
 
   private keyboardVisible = false;
   private toolbarButtons: HTMLButtonElement[] = [];
@@ -408,7 +409,7 @@ export class ModalWrapperComponent implements Modal, AfterViewInit, OnInit, OnDe
   private readonly elementToParentMap: { [key: string]: () => HTMLElement } = {
     'KIRBY-MODAL-FOOTER': () => this.elementRef.nativeElement,
     'KIRBY-PAGE-TITLE': () => this.ionTitleElement.nativeElement,
-    'KIRBY-PAGE-HEADER': () => this.toolbarButtonsStart.nativeElement,
+    'KIRBY-PAGE-PROGRESS': () => this.ionToolbarElement.nativeElement,
   };
 
   private clearEmbeddedElements() {

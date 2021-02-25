@@ -7,12 +7,13 @@ import { MockComponents } from 'ng-mocks';
 import { WindowRef } from '../../../types';
 import { ButtonComponent } from '../../button/button.component';
 import { IconComponent } from '../../icon';
+import { PageProgressComponent } from '../../page/page.component';
+import { ProgressCircleComponent } from '../../progress-circle/progress-circle.component';
 import { ResizeObserverService } from '../../shared';
 import { ModalFooterComponent } from '../footer/modal-footer.component';
+
 import { ModalConfig } from './config/modal-config';
 import { ModalWrapperComponent } from './modal-wrapper.component';
-import { ProgressCircleComponent } from '../../progress-circle/progress-circle.component';
-import { PageHeaderComponent } from '../../page/page.component';
 
 export class ModalWrapperTestBuilder {
   private config: ModalConfig = {
@@ -40,7 +41,7 @@ export class ModalWrapperTestBuilder {
       MockComponents(
         IconComponent,
         ButtonComponent,
-        PageHeaderComponent,
+        PageProgressComponent,
         ProgressCircleComponent,
         ModalFooterComponent,
         IonHeader,

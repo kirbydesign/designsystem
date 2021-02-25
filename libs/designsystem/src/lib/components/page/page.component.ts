@@ -9,6 +9,7 @@ import {
   Directive,
   ElementRef,
   EventEmitter,
+  HostBinding,
   HostListener,
   Input,
   OnChanges,
@@ -31,6 +32,7 @@ import { filter, takeUntil } from 'rxjs/operators';
 import { KirbyAnimation } from '../../animation/kirby-animation';
 import { FitHeadingConfig } from '../../directives/fit-heading/fit-heading.directive';
 import { WindowRef } from '../../types/window-ref';
+import { ModalWrapperComponent } from '../modal/modal-wrapper/modal-wrapper.component';
 import { ModalNavigationService } from '../modal/services/modal-navigation.service';
 import { selectedTabClickEvent } from '../tabs/tab-button/tab-button.events';
 import { TabsComponent } from '../tabs/tabs.component';
@@ -81,13 +83,23 @@ export class PageContentDirective {
 }
 
 @Component({
-  selector: 'kirby-page-header',
+  selector: 'kirby-page-progress',
   template: `
-    <ng-content></ng-content>
+    <ng-content> </ng-content>
   `,
   styles: [':host {display: flex}'],
 })
-export class PageHeaderComponent {}
+export class PageProgressComponent implements OnInit {
+  @HostBinding('attr.slot') slotAttribute = 'start';
+
+  constructor(@Optional() @SkipSelf() private modalWrapper: ModalWrapperComponent) {}
+
+  ngOnInit(): void {
+    if (this.modalWrapper.config.flavor === 'drawer') {
+      this.slotAttribute = 'end';
+    }
+  }
+}
 
 @Component({
   selector: 'kirby-page-title',
