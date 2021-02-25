@@ -1,14 +1,15 @@
-import { tick, fakeAsync } from '@angular/core/testing';
+import { fakeAsync, tick } from '@angular/core/testing';
 import { IonContent } from '@ionic/angular';
 import { Spectator } from '@ngneat/spectator';
 
 import { KirbyAnimation } from '../../../animation/kirby-animation';
 import { TestHelper } from '../../../testing/test-helper';
 import { IconComponent } from '../../icon/icon.component';
+
 import { ModalWrapperComponent } from './modal-wrapper.component';
 import {
-  DynamicFooterEmbeddedComponent,
   DynamicCustomHeaderContentEmbeddedComponent,
+  DynamicFooterEmbeddedComponent,
   ModalWrapperTestBuilder,
 } from './modal-wrapper.testbuilder';
 
@@ -232,6 +233,86 @@ describe('ModalWrapperComponent', () => {
     });
   });
 
+  describe('with embedded page progress component', () => {
+    const customHeaderContentSelector = 'kirby-page-progress';
+    describe('with static page progress', () => {
+      beforeEach(() => {
+        spectator = modalWrapperTestBuilder
+          .flavor('modal')
+          .withStaticCustomHeaderContent()
+          .build();
+        spectator.detectComponentChanges();
+      });
+
+      afterEach(() => {
+        // Ensure any observers are destroyed:
+        spectator.fixture.destroy();
+      });
+      it('should move embedded page progress content to ion toolbar', () => {
+        const ionContentElement = spectator.query('ion-content');
+        const embeddedComponentElement = ionContentElement.firstElementChild;
+
+        const embeddedPageProgress = embeddedComponentElement.querySelector('kirby-page-progress');
+        expect(embeddedPageProgress).toBeNull();
+
+        const pageProgressAsWrapperChild = spectator.element.querySelector('kirby-page-progress');
+        expect(pageProgressAsWrapperChild).not.toBeNull();
+      });
+    });
+
+    describe('with dynamic page progress', () => {
+      beforeEach(() => {
+        spectator = modalWrapperTestBuilder
+          .flavor('modal')
+          .withDynamicCustomHeadercontent()
+          .build();
+        spectator.detectComponentChanges();
+      });
+
+      afterEach(() => {
+        // Ensure any observers are destroyed:
+        spectator.fixture.destroy();
+      });
+
+      it('should move embedded page progress to wrapper component when rendered', async () => {
+        const pageProgressContent = spectator.element.querySelector(customHeaderContentSelector);
+        expect(pageProgressContent).toBeNull();
+
+        const embeddedComponent = spectator.query(DynamicCustomHeaderContentEmbeddedComponent);
+        embeddedComponent.showPageProgress = true;
+        spectator.detectChanges();
+        await TestHelper.waitForResizeObserver();
+
+        const ionContentElement = spectator.query('ion-content');
+        const embeddedComponentElement = ionContentElement.firstElementChild;
+        const embeddedPageProgress = embeddedComponentElement.querySelector('kirby-page-progress');
+        expect(embeddedPageProgress).toBeNull();
+
+        const pageProgressAsWrapperChild = spectator.element.querySelector('kirby-page-progress');
+        expect(pageProgressAsWrapperChild).not.toBeNull();
+      });
+
+      it('should remove embedded page progress content from wrapper component when not rendered', async () => {
+        let pageProgress = spectator.element.querySelector('kirby-page-progress');
+        expect(pageProgress).toBeNull();
+
+        const embeddedComponent = spectator.query(DynamicCustomHeaderContentEmbeddedComponent);
+        embeddedComponent.showPageProgress = true;
+        spectator.detectChanges();
+        await TestHelper.waitForResizeObserver();
+
+        const pageProgressAsWrapperChild = spectator.element.querySelector('kirby-page-progress');
+        expect(pageProgressAsWrapperChild).not.toBeNull();
+
+        embeddedComponent.showPageProgress = false;
+        spectator.detectChanges();
+
+        pageProgress = spectator.element.querySelector(customHeaderContentSelector);
+        expect(pageProgress).toBeNull();
+      });
+    });
+  });
+
   describe('with embedded component with static footer', () => {
     beforeEach(() => {
       spectator = modalWrapperTestBuilder.withStaticFooter().build();
@@ -417,94 +498,6 @@ describe('ModalWrapperComponent', () => {
         expect(kirbyModalFooter).toHaveStyle({
           '--keyboard-offset': `${keyboardOverlap}px`,
         });
-      });
-    });
-  });
-
-  describe('with embedded page header', () => {
-    const customHeaderContentSelector = 'kirby-page-header';
-    describe('with static page header', () => {
-      beforeEach(() => {
-        spectator = modalWrapperTestBuilder
-          .flavor('modal')
-          .withStaticCustomHeaderContent()
-          .build();
-        spectator.detectComponentChanges();
-      });
-
-      afterEach(() => {
-        // Ensure any observers are destroyed:
-        spectator.fixture.destroy();
-      });
-      it('should move embedded custom header content to modal header', () => {
-        const ionContentElement = spectator.query('ion-content');
-        const embeddedComponentElement = ionContentElement.firstElementChild;
-
-        const embeddedCustomHeader = embeddedComponentElement.querySelector(
-          customHeaderContentSelector
-        );
-
-        expect(embeddedCustomHeader).toBeNull();
-        const customHeaderAsWrapperChild = spectator.element.querySelector(
-          customHeaderContentSelector
-        );
-        expect(customHeaderAsWrapperChild).not.toBeNull();
-      });
-    });
-
-    describe('with dynamic page header', () => {
-      beforeEach(() => {
-        spectator = modalWrapperTestBuilder
-          .flavor('modal')
-          .withDynamicCustomHeadercontent()
-          .build();
-        spectator.detectComponentChanges();
-      });
-
-      afterEach(() => {
-        // Ensure any observers are destroyed:
-        spectator.fixture.destroy();
-      });
-
-      it('should move embedded header to wrapper component when rendered', async () => {
-        const customHeaderContent = spectator.element.querySelector(customHeaderContentSelector);
-        expect(customHeaderContent).toBeNull();
-
-        const embeddedComponent = spectator.query(DynamicCustomHeaderContentEmbeddedComponent);
-        embeddedComponent.showCustomHeader = true;
-        spectator.detectChanges();
-        await TestHelper.waitForResizeObserver();
-
-        const ionContentElement = spectator.query('ion-content');
-        const embeddedComponentElement = ionContentElement.firstElementChild;
-        const embeddedCustomHeaderContent = embeddedComponentElement.querySelector(
-          customHeaderContentSelector
-        );
-        expect(embeddedCustomHeaderContent).toBeNull();
-        const customHeaderContentAsWrapperChild = spectator.element.querySelector(
-          customHeaderContentSelector
-        );
-        expect(customHeaderContentAsWrapperChild).not.toBeNull();
-      });
-
-      it('should remove embedded custom header content from wrapper component when not rendered', async () => {
-        let customHeaderContent = spectator.element.querySelector(customHeaderContentSelector);
-        expect(customHeaderContent).toBeNull();
-
-        const embeddedComponent = spectator.query(DynamicCustomHeaderContentEmbeddedComponent);
-        embeddedComponent.showCustomHeader = true;
-        spectator.detectChanges();
-        await TestHelper.waitForResizeObserver();
-
-        const customHeaderAsWrapperChild = spectator.element.querySelector(
-          customHeaderContentSelector
-        );
-        expect(customHeaderAsWrapperChild).not.toBeNull();
-
-        embeddedComponent.showCustomHeader = false;
-        spectator.detectChanges();
-        customHeaderContent = spectator.element.querySelector(customHeaderContentSelector);
-        expect(customHeaderContent).toBeNull();
       });
     });
   });

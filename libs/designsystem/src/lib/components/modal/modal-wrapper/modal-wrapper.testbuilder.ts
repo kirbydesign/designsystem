@@ -177,5 +177,5 @@ export class StaticCustomHeaderContentEmbeddedComponent {}
   `,
 })
 export class DynamicCustomHeaderContentEmbeddedComponent {
-  showCustomHeader = false;
+  showPageProgress = false;
 }
