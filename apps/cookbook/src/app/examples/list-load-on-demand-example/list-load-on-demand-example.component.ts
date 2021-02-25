@@ -4,9 +4,29 @@ import { LoadOnDemandEvent } from '@kirbydesign/designsystem';
 
 import { BaseListComponent } from '../list-shared/base-list.component';
 
+export const ListLoadOnDemandExampleTemplate = `
+<kirby-list [items]="items" (loadOnDemand)="onLoadDemand($event)" noMoreItemsText="No more items">
+  <kirby-item *kirbyListItemTemplate="let item">
+    <kirby-label>
+      <h3>{{ item.title }}</h3>
+      <p subtitle>{{ item.subTitle }}</p>
+    </kirby-label>
+    <kirby-label slot="end">
+      <data [value]="item.amount">{{ item.amount }}</data>
+      <data [value]="item.detail" detail>{{ item.detail }}</data>
+    </kirby-label>
+  </kirby-item>
+</kirby-list>`;
+
 @Component({
   selector: 'cookbook-list-load-on-demand-example',
-  templateUrl: './list-load-on-demand-example.component.html',
+  template: `
+    <kirby-page title="Load On Demand">
+      <kirby-page-content>
+        ${ListLoadOnDemandExampleTemplate}
+      </kirby-page-content>
+    </kirby-page>
+  `,
   styleUrls: ['./list-load-on-demand-example.component.scss'],
 })
 export class ListLoadOnDemandExampleComponent extends BaseListComponent {

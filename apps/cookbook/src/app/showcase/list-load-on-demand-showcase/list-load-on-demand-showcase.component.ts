@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+import { ListLoadOnDemandExampleTemplate } from './../../examples/list-load-on-demand-example/list-load-on-demand-example.component';
 import { ShowcaseProperty } from './../../shared/showcase-properties/showcase-property';
 
 declare var require: any;
@@ -10,8 +11,7 @@ declare var require: any;
   styleUrls: ['./list-load-on-demand-showcase.component.scss'],
 })
 export class ListLoadOnDemandShowcaseComponent {
-  exampleHtml: string = require('!raw-loader!../../examples/list-load-on-demand-example/list-load-on-demand-example.component.html')
-    .default;
+  exampleHtml: string = ListLoadOnDemandExampleTemplate;
 
   properties: ShowcaseProperty[] = [
     {
