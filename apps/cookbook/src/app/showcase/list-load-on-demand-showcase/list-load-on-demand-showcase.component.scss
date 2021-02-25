@@ -1,1 +1,6 @@
 @import '../showcase.shared';
+
+fieldset {
+  display: inline-block;
+  margin-bottom: size('s');
+}
