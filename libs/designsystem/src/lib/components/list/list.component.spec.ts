@@ -180,14 +180,6 @@ describe('ListComponent', () => {
         expect(component.isLoadOnDemandEnabled).toBeFalse();
       });
 
-      it('should enable load more, if isLoadOnDemandEnabled is set to true', () => {
-        component.isLoadOnDemandEnabled = true;
-
-        component.ngOnInit();
-
-        expect(component.isLoadOnDemandEnabled).toBeTrue();
-      });
-
       it('should disable load more, if isLoadOnDemandEnabled is set to false', () => {
         component.isLoadOnDemandEnabled = false;
 
