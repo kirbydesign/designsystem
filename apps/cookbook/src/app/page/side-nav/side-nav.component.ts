@@ -14,6 +14,7 @@ import { navigationItems } from '../header/header.component';
 
 const KEY_DOWN = 'ArrowDown';
 const KEY_UP = 'ArrowUp';
+const HIDDEN_CLASS = 'is-hidden';
 
 interface ISideNavLink {
   path: string;
@@ -29,7 +30,7 @@ interface ISideNavLink {
 })
 export class SideNavComponent implements OnInit {
   private allShowcaseRoutes: ISideNavLink[];
-  private filteredShowcaseRoutes: ISideNavLink[];
+  filteredShowcaseRoutes: ISideNavLink[];
   filter: string = '';
 
   @Output() menuToggle = new EventEmitter<boolean>();
@@ -80,7 +81,7 @@ export class SideNavComponent implements OnInit {
       const links = this.componentLinks.toArray();
       for (let i = 0; i < links.length; i++) {
         const element = links[i].nativeElement;
-        if (!element.classList.contains('hidden')) {
+        if (!element.classList.contains(HIDDEN_CLASS)) {
           element.focus();
           break;
         }
@@ -96,7 +97,7 @@ export class SideNavComponent implements OnInit {
     }
 
     const visibleLinks = this.componentLinks.filter((link) => {
-      return !link.nativeElement.classList.contains('hidden');
+      return !link.nativeElement.classList.contains(HIDDEN_CLASS);
     });
     const currentlyFocused = visibleLinks.findIndex((link) => {
       return link.nativeElement === document.activeElement;
@@ -115,10 +116,6 @@ export class SideNavComponent implements OnInit {
   onComponentClick(event) {
     this.setRouteActive(event.path);
     this.onToggleMenu();
-  }
-
-  get showcaseRoutes(): ISideNavLink[] {
-    return this.filteredShowcaseRoutes;
   }
 
   onToggleMenu() {

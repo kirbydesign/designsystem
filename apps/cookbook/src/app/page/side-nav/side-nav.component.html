@@ -40,7 +40,7 @@
 
   <kirby-card (keydown)="onLinksKeyDown($event)">
     <a
-      *ngFor="let item of showcaseRoutes"
+      *ngFor="let item of filteredShowcaseRoutes"
       [routerLink]="item.path"
       [class]="{ 'is-selected': item.active, 'is-hidden': item.hidden }"
       class="side-nav__item"

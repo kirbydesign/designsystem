@@ -13,8 +13,6 @@ export class ChipShowcaseComponent {
   ];
   themeColor = '';
 
-  linkToProperties = true;
-
   onThemeChange(themeColor) {
     this.themeColor = themeColor;
   }
