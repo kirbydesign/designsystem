@@ -25,6 +25,15 @@
   }
 }
 
+.cta-links {
+  a {
+    display: block;
+    @include media('>=large') {
+      display: inline-block;
+    }
+  }
+}
+
 h4 {
   margin-top: size('s');
 }

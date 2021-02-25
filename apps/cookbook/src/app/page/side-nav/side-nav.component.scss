@@ -20,6 +20,7 @@ $page-gutter: 1rem;
 .side-nav {
   display: none;
   position: absolute;
+  min-height: 100vh;
   top: 0;
   z-index: 900;
   background-color: get-color('white');
@@ -31,6 +32,7 @@ $page-gutter: 1rem;
     position: static;
     background-color: transparent;
     padding: 0;
+    min-height: none;
   }
   &.is-open {
     display: block;
@@ -43,10 +45,6 @@ $page-gutter: 1rem;
     padding: 8px 20px;
     margin: 0 2px;
     border-radius: 3px;
-    opacity: 1;
-    max-height: 50px;
-    transition: opacity 100ms, max-height 200ms ease-in, padding 200ms ease-in;
-    will-change: max-height, padding;
     &:hover,
     &:focus {
       color: get-text-color('black');
@@ -57,7 +55,7 @@ $page-gutter: 1rem;
       font-weight: bold;
       background-color: get-color('semi-light');
     }
-    &.hidden {
+    &.is-hidden {
       opacity: 0;
       max-height: 0;
       padding: 0 0;
@@ -69,10 +67,6 @@ $page-gutter: 1rem;
     &:last-child {
       margin-bottom: 15px;
     }
-  }
-
-  .is-selected {
-    font-weight: bold;
   }
 }
 

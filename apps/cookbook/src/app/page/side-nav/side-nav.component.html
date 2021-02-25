@@ -1,4 +1,4 @@
-<section class="side-nav" [ngClass]="{ 'is-open': isMenuOpen }" (click)="onToggleMenu()">
+<section class="side-nav" [ngClass]="{ 'is-open': isMenuOpen }">
   <nav class="page-links">
     <ng-container *ngFor="let item of navigationLinks">
       <a
@@ -7,6 +7,7 @@
         [routerLinkActive]="'is-selected'"
         [routerLinkActiveOptions]="{ exact: false }"
         class="side-nav__item"
+        (click)="onToggleMenu()"
         >{{ item.text }}
       </a>
       <a *ngIf="item.externalUrl" [href]="item.externalUrl" class="side-nav__item" target="blank"
@@ -41,7 +42,7 @@
     <a
       *ngFor="let item of showcaseRoutes"
       [routerLink]="item.path"
-      [class]="{ 'is-selected': item.active, hidden: item.hidden }"
+      [class]="{ 'is-selected': item.active, 'is-hidden': item.hidden }"
       class="side-nav__item"
       (click)="onComponentClick(item)"
       #componentLink

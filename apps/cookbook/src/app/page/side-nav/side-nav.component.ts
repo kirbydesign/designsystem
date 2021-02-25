@@ -114,6 +114,7 @@ export class SideNavComponent implements OnInit {
 
   onComponentClick(event) {
     this.setRouteActive(event.path);
+    this.onToggleMenu();
   }
 
   get showcaseRoutes(): ISideNavLink[] {
