@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {
   defaultEventColumns,
+  defaultMethodColumns,
   ShowcaseProperty,
   ShowcasePropertyColumns,
 } from '~/app/shared/showcase-properties/showcase-property';
@@ -70,21 +71,21 @@ export class DropdownShowcaseComponent {
     {
       name: 'toggle()',
       description: 'Toggles the open/closed state of the dropdown.',
+      inputValues: ['() => void'],
     },
     {
       name: 'open()',
       description: 'Opens the dropdown.',
+      inputValues: ['() => void'],
     },
     {
       name: 'close()',
       description: 'Closes the dropdown.',
+      inputValues: ['() => void'],
     },
   ];
 
-  methodColumns: ShowcasePropertyColumns = {
-    Name: 'Name',
-    Description: 'Description',
-  };
+  methodColumns: ShowcasePropertyColumns = defaultMethodColumns;
 
   events: ShowcaseProperty[] = [
     {

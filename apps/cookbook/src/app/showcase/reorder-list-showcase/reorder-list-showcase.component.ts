@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import {
+  defaultMethodColumns,
   ShowcaseProperty,
   ShowcasePropertyColumns,
 } from './../../shared/showcase-properties/showcase-property';
@@ -64,9 +65,5 @@ export class ReorderListShowcaseComponent {
     },
   ];
 
-  methodColumns: ShowcasePropertyColumns = {
-    Name: 'Name',
-    Description: 'Description',
-    Type: 'Signature',
-  };
+  methodColumns: ShowcasePropertyColumns = defaultMethodColumns;
 }

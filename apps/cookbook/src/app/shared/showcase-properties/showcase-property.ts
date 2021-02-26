@@ -18,3 +18,9 @@ export const defaultEventColumns: ShowcasePropertyColumns = Object.freeze({
   Description: 'Description',
   Type: 'Signature',
 });
+
+export const defaultMethodColumns: ShowcasePropertyColumns = Object.freeze({
+  Name: 'Name',
+  Description: 'Description',
+  Type: 'Signature',
+});

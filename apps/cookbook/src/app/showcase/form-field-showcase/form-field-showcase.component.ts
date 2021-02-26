@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {
+  defaultMethodColumns,
   ShowcaseProperty,
   ShowcasePropertyColumns,
 } from '~/app/shared/showcase-properties/showcase-property';
@@ -35,13 +36,11 @@ export class FormFieldShowcaseComponent {
       name: 'focus()',
       description: `Programmatically sets focus to the input (or textarea) within the form field.
 On native devices this method also ensures the form field is scrolled into the viewport.`,
+      inputValues: ['() => void'],
     },
   ];
 
-  methodColumns: ShowcasePropertyColumns = {
-    Name: 'Name',
-    Description: 'Description',
-  };
+  methodColumns: ShowcasePropertyColumns = defaultMethodColumns;
 
   sharedProperties: ShowcaseProperty[] = [
     {
