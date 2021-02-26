@@ -251,11 +251,10 @@ describe('ModalWrapperComponent', () => {
       it('should move embedded page progress content to ion toolbar', () => {
         const ionContentElement = spectator.query('ion-content');
         const embeddedComponentElement = ionContentElement.firstElementChild;
-
         const embeddedPageProgress = embeddedComponentElement.querySelector('kirby-page-progress');
-        expect(embeddedPageProgress).toBeNull();
-
         const pageProgressAsWrapperChild = spectator.element.querySelector('kirby-page-progress');
+        
+        expect(embeddedPageProgress).toBeNull();
         expect(pageProgressAsWrapperChild).not.toBeNull();
       });
     });
