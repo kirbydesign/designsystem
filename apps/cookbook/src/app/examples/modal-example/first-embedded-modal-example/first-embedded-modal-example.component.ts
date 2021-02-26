@@ -31,6 +31,7 @@ export class FirstEmbeddedModalExampleComponent implements OnInit {
   showPageProgress: boolean;
   showFooter: boolean;
   showDummyContent: boolean;
+  showNestedPageProgress: boolean = false;
   showNestedFooter: boolean = false;
   showNestedDummyContent: boolean = true;
   delayLoadDummyContent: boolean;
@@ -78,7 +79,7 @@ export class FirstEmbeddedModalExampleComponent implements OnInit {
         title,
         subtitle: 'Hello from second embedded example component!',
         showDummyKeyboard: this.showDummyKeyboard,
-        showPageProgress: this.showPageProgress,
+        showPageProgress: this.showNestedPageProgress,
         showFooter: this.showNestedFooter,
         showDummyContent: this.showNestedDummyContent,
         delayLoadDummyContent: this.delayLoadDummyContent,
