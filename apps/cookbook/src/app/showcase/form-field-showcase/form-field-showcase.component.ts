@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-
 import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
+
+import { InputSize } from '@kirbydesign/designsystem';
 
 @Component({
   selector: 'cookbook-form-field-showcase',
@@ -8,6 +9,7 @@ import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-prop
   styleUrls: ['./form-field-showcase.component.scss'],
 })
 export class FormFieldShowcaseComponent {
+  size: InputSize;
   formFieldProperties: ShowcaseProperty[] = [
     {
       name: 'label',

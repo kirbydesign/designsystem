@@ -1,6 +1,9 @@
-name: Kirby CI
+name: Build & Deploy Cookbok
+
 on:
-  push
+  push: # TODO: Change to `release` event when our release workflow is in place
+    branches: master
+  pull_request:
 
 defaults:
   run:
@@ -43,11 +46,73 @@ jobs:
 
   deploy_to_cookbook:
     name: Deploy cookbook
+    if: github.event_name == 'pull_request' || contains(github.event.head_commit.message, 'Bumping version to')
     needs: [lint_and_unittest, build_kirby]
     runs-on: ubuntu-latest
+    env:
+      DOMAIN: ${{ github.ref == 'refs/heads/master' && 'kirby.design' || '650b277bd9a54e5cbadc.westeurope.aksapp.io' }}
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
+      - name: Get deployment name for feature branch
+        if: github.event_name == 'pull_request'
+        run: |
+          branchname="${GITHUB_HEAD_REF}"
+          echo "Github branchname: ${branchname}"
+          branchname="${branchname##*/}"
+          echo "Removed leading paths - branchname: ${branchname}"
+          branchname=$(tr [:upper:] [:lower:] <<< "$branchname")
+          echo "Converted to lowercase - branchname: ${branchname}"
+          branchname="${branchname//[^a-zA-Z0-9]/-}"
+          echo "Replaced illegal chars - branchname: ${branchname}"
+          branchname=$(tr -s '-' '-' <<< "$branchname")
+          echo "Removed duplicated dashes - branchname: ${branchname}"
+          branchname="${branchname%%-}"
+          echo "Removed trailing dash - final branchname: ${branchname}"
+          releasename="kby-${branchname}"
+          releasename=$(cut -c 1-53 <<< "$releasename")
+          echo "Releasename: ${releasename}"
+          echo "GH_DEPLOY_ENVIRONMENT=pr-${branchname}" >> $GITHUB_ENV
+          echo "RELEASENAME=${releasename}" >> $GITHUB_ENV
+      - name: Get deployment name for master branch
+        if: github.ref == 'refs/heads/master'
+        run: |
+          echo "GH_DEPLOY_ENVIRONMENT=production" >> $GITHUB_ENV
+          echo "RELEASENAME=designsystem" >> $GITHUB_ENV
+      - name: Get hostname for feature branch
+        if: github.ref != 'refs/heads/master'
+        run: |
+          chmod +x ./.scripts/dns.pl
+          hostname=$(perl ./.scripts/dns.pl $DOMAIN "${RELEASENAME}")
+          echo "HOSTNAME=${hostname}" >> $GITHUB_ENV
+      - name: Get hostname for master branch
+        if: github.ref == 'refs/heads/master'
+        run: echo "HOSTNAME=cookbook" >> $GITHUB_ENV
+      - name: Create Github Deployment
+        id: create_deployment
+        uses: octokit/request-action@v2.x
+        with:
+          route: POST /repos/:repository/deployments
+          repository: ${{ github.repository }}
+          ref: ${{ github.event_name == 'pull_request' && format('refs/heads/{0}', github.head_ref) || github.ref }}
+          environment: ${{ env.GH_DEPLOY_ENVIRONMENT }}
+          production_environment: ${{ github.ref == 'refs/heads/master' }}
+          auto_merge: false
+          required_contexts: '[]' # Skip commit checks
+          mediaType: '{"previews": ["flash", "ant-man"]}' # some parameters need preview: https://docs.github.com/en/rest/reference/repos#list-deployment-statuses-preview-notices
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Set deployment status to in progress
+        uses: octokit/request-action@v2.x
+        with:
+          route: POST /repos/:repository/deployments/:deployment/statuses
+          repository: ${{ github.repository }}
+          deployment: ${{ fromJson(steps.create_deployment.outputs.data).id }}
+          log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          state: in_progress
+          mediaType: '{"previews": ["flash", "ant-man"]}'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Install Node.js
         uses: actions/setup-node@v2
         with:
@@ -72,34 +137,6 @@ jobs:
         run: npm run dist:cookbook
       - name: Build Docker image
         run: docker build -t drbstaging.azurecr.io/kirbydesign/designsystem:git${{ github.sha }} .
-      - name: Get branch name
-        if: github.ref != 'refs/heads/master'
-        run: |
-          branchname="${GITHUB_REF##*/}"
-          branchname="${branchname//feature//}"
-          branchname="${branchname#?}"
-          releasename="kby-${branchname//[^a-zA-Z0-9]/-}"
-          releasename=$(tr [A-Z] [a-z] <<< "$releasename")
-          releasename=$(cut -c 1-53 <<< "$releasename")
-          echo "RELEASENAME=${releasename}" >> $GITHUB_ENV
-      - name: Get release name
-        if: github.ref == 'refs/heads/master'
-        run: |
-          echo "RELEASENAME=designsystem" >> $GITHUB_ENV
-      - name: Get hostname for feature branch
-        if: github.ref != 'refs/heads/master'
-        env:
-          DOMAIN: '650b277bd9a54e5cbadc.westeurope.aksapp.io'
-        run: |
-          chmod +x ./.scripts/dns.pl
-          hostname=$(perl ./.scripts/dns.pl $DOMAIN "${RELEASENAME}")
-          echo "HOSTNAME=${hostname}" >> $GITHUB_ENV
-      - name: Get hostname for master branch
-        if: github.ref == 'refs/heads/master'
-        env:
-          DOMAIN: '650b277bd9a54e5cbadc.westeurope.aksapp.io'
-        run: |
-          echo "HOSTNAME=cookbook" >> $GITHUB_ENV
       - name: Push Docker image
         env:
           DOCKER_REPO: 'drbstaging.azurecr.io/kirbydesign/designsystem'
@@ -122,6 +159,35 @@ jobs:
         env:
           DOCKER_REPO: 'drbstaging.azurecr.io/kirbydesign/designsystem'
           DOCKER_TAG: git${{github.sha}}
-          DOMAIN: ${{ github.ref == 'refs/heads/master' && 'kirby.design' || '650b277bd9a54e5cbadc.westeurope.aksapp.io' }}
           HELM_CONFIG: ${{ github.ref == 'refs/heads/master' && 'config/helm/staging.yaml' || 'config/helm/branch.yaml' }}
         run: /usr/bin/helm upgrade --kubeconfig kube.config -i "${RELEASENAME}" charts/spa --set image.repository=$DOCKER_REPO --set image.tag=$DOCKER_TAG --set ingress.host="${HOSTNAME}".$DOMAIN -f $HELM_CONFIG
+      - name: Deploy the pull request
+        run: |
+          # deployment logic goes here
+          sleep 30
+      - name: Set deployment status to success
+        id: successful_deployment
+        uses: octokit/request-action@v2.x
+        with:
+          route: POST /repos/:repository/deployments/:deployment/statuses
+          repository: ${{ github.repository }}
+          deployment: ${{ fromJson(steps.create_deployment.outputs.data).id }}
+          environment_url: https://${{ env.HOSTNAME }}.${{ env.DOMAIN }}
+          log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          state: success
+          mediaType: '{"previews": ["ant-man"]}'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Set deployment status to failure
+        id: failed_deployment
+        uses: octokit/request-action@v2.x
+        if: failure()
+        with:
+          route: POST /repos/:repository/deployments/:deployment/statuses
+          repository: ${{ github.repository }}
+          deployment: ${{ fromJson(steps.create_deployment.outputs.data).id }}
+          log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          state: failure
+          mediaType: '{"previews": ["ant-man"]}'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

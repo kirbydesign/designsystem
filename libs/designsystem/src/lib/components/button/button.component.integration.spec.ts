@@ -1,27 +1,28 @@
 import { RouterTestingModule } from '@angular/router/testing';
-import { SpectatorHost, createHostFactory } from '@ngneat/spectator';
 import { IonicModule, IonIcon } from '@ionic/angular';
+import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponent, MockComponents, MockDirectives } from 'ng-mocks';
 
+import { FitHeadingDirective } from '../../directives/fit-heading/fit-heading.directive';
+import { SizeDirective } from '../../directives/size/size.directive';
 import { DesignTokenHelper } from '../../helpers/design-token-helper';
 import { TestHelper } from '../../testing/test-helper';
+import { WindowRef } from '../../types/window-ref';
+import { CardComponent } from '../card/card.component';
+import { DropdownComponent } from '../dropdown/dropdown.component';
+import { EmptyStateComponent } from '../empty-state/empty-state.component';
+import { IconComponent } from '../icon/icon.component';
+import { ItemComponent } from '../item/item.component';
 import {
-  PageComponent,
-  PageContentComponent,
   PageActionsComponent,
   PageActionsDirective,
+  PageComponent,
+  PageContentComponent,
   PageTitleDirective,
   PageToolbarTitleDirective,
 } from '../page/page.component';
-import { FitHeadingDirective } from '../../directives/fit-heading/fit-heading.directive';
-import { SizeDirective } from '../../directives/size/size.directive';
+
 import { ButtonComponent } from './button.component';
-import { IconComponent } from '../icon/icon.component';
-import { EmptyStateComponent } from '../empty-state/empty-state.component';
-import { DropdownComponent } from '../dropdown/dropdown.component';
-import { CardComponent } from '../card/card.component';
-import { ItemComponent } from '../item/item.component';
-import { WindowRef } from '../../types/window-ref';
 
 const getColor = DesignTokenHelper.getColor;
 const size = DesignTokenHelper.size;
@@ -282,6 +283,10 @@ describe('ButtonComponent with size directive', () => {
     it('should render with correct height', () => {
       expect(element).toHaveComputedStyle({ height: size('l') });
     });
+
+    it('should render with correct min-width', () => {
+      expect(element).toHaveComputedStyle({ 'min-width': '44px' });
+    });
   });
 
   describe('when configured with size = MD', () => {
@@ -296,6 +301,10 @@ describe('ButtonComponent with size directive', () => {
 
     it('should render with correct height', () => {
       expect(element).toHaveComputedStyle({ height: size('xl') });
+    });
+
+    it('should render with correct min-width', () => {
+      expect(element).toHaveComputedStyle({ 'min-width': '88px' });
     });
   });
 
@@ -542,7 +551,7 @@ describe('ButtonComponent configured with text and icon', () => {
   });
 
   describe('and size directive with size = SM', () => {
-    it('should render with correct icon font-size', () => {
+    beforeEach(() => {
       spectator = createHost(
         `<button kirby-button size="sm">
           <span>Text</span>
@@ -552,13 +561,19 @@ describe('ButtonComponent configured with text and icon', () => {
 
       element = spectator.element as HTMLButtonElement;
       kirbyIcon = element.getElementsByTagName('kirby-icon')[0];
+    });
 
+    it('should render with correct icon font-size', () => {
       expect(kirbyIcon).toHaveComputedStyle({ 'font-size': size('s') });
+    });
+
+    it('should render with correct min-width', () => {
+      expect(element).toHaveComputedStyle({ 'min-width': '88px' });
     });
   });
 
   describe('and size directive with size = MD', () => {
-    it('should render with correct icon font-size', () => {
+    beforeEach(() => {
       spectator = createHost(
         `<button kirby-button size="md">
           <span>Text</span>
@@ -568,13 +583,19 @@ describe('ButtonComponent configured with text and icon', () => {
 
       element = spectator.element as HTMLButtonElement;
       kirbyIcon = element.getElementsByTagName('kirby-icon')[0];
+    });
 
+    it('should render with correct icon font-size', () => {
       expect(kirbyIcon).toHaveComputedStyle({ 'font-size': size('m') });
+    });
+
+    it('should render with correct min-width', () => {
+      expect(element).toHaveComputedStyle({ 'min-width': '88px' });
     });
   });
 
   describe('and size directive with size = LG', () => {
-    it('should render with correct icon font-size', () => {
+    beforeEach(() => {
       spectator = createHost(
         `<button kirby-button size="lg">
           <span>Text</span>
@@ -584,8 +605,42 @@ describe('ButtonComponent configured with text and icon', () => {
 
       element = spectator.element as HTMLButtonElement;
       kirbyIcon = element.getElementsByTagName('kirby-icon')[0];
+    });
 
+    it('should render with correct icon font-size', () => {
       expect(kirbyIcon).toHaveComputedStyle({ 'font-size': size('m') });
     });
+
+    it('should render with correct min-width', () => {
+      expect(element).toHaveComputedStyle({ 'min-width': '220px' });
+    });
+  });
+});
+
+describe('ButtonComponent configured with text and icon using an ngIf directive', () => {
+  let spectator: SpectatorHost<ButtonComponent>;
+  let element: HTMLButtonElement;
+
+  const createHost = createHostFactory({
+    component: ButtonComponent,
+    declarations: [MockComponent(IconComponent)],
+  });
+
+  it('should not have the icon-only class, if kirby-icon is inserted before text', () => {
+    spectator = createHost(
+      '<button kirby-button><kirby-icon name="close" *ngIf="true"></kirby-icon>Test</button>'
+    );
+    element = spectator.element as HTMLButtonElement;
+
+    expect(element).not.toHaveClass('icon-only');
+  });
+
+  it('should not have the icon-only class, if kirby-icon is inserted after text', () => {
+    spectator = createHost(
+      '<button kirby-button>Test<kirby-icon name="close" *ngIf="true"></kirby-icon></button>'
+    );
+    element = spectator.element as HTMLButtonElement;
+
+    expect(element).not.toHaveClass('icon-only');
   });
 });

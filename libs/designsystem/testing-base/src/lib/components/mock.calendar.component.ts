@@ -1,6 +1,6 @@
 import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 
-import { CalendarComponent } from '@kirbydesign/designsystem';
+import { CalendarComponent, CalendarYearNavigatorConfig } from '@kirbydesign/designsystem';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
@@ -21,11 +21,14 @@ export class MockCalendarComponent {
   @Input() disablePastDates: boolean;
   @Input() disableFutureDates: boolean;
   @Input() alwaysEnableToday: boolean;
+  @Input() yearNavigatorOptions: CalendarYearNavigatorConfig;
   @Input() selectedDate: Date;
   @Input() disabledDates: Date[];
   @Input() todayDate: Date;
   @Input() minDate: Date;
   @Input() maxDate: Date;
+
+  changeYear() {}
 }
 
 // #endregion
