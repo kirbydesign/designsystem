@@ -1,16 +1,16 @@
 import {
-  Directive,
   AfterViewInit,
-  OnDestroy,
-  HostListener,
-  EventEmitter,
-  Input,
-  Output,
+  Directive,
   ElementRef,
+  EventEmitter,
+  HostListener,
+  Input,
   NgZone,
+  OnDestroy,
+  Output,
 } from '@angular/core';
-import { Subject, fromEvent } from 'rxjs';
-import { debounceTime, takeUntil, filter, map } from 'rxjs/operators';
+import { fromEvent, Subject } from 'rxjs';
+import { debounceTime, filter, map, takeUntil } from 'rxjs/operators';
 
 import { WindowRef } from '../../../types/window-ref';
 
@@ -55,7 +55,6 @@ export class InfiniteScrollDirective implements AfterViewInit, OnDestroy {
   constructor(private elementRef: ElementRef, private window: WindowRef, private zone: NgZone) {}
 
   ngAfterViewInit(): void {
-    if (this.disabled) return;
     /**
      * Subscribe to {@link scroll$} observable and emit {@link scrollEnd} event
      * when element scroll position has surpassed the offset.
