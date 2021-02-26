@@ -6,7 +6,7 @@ kirby-card {
 }
 
 kirby-card-header {
-  &:not(.bg-color):not([class^='flagged']) {
+  &:not(.bg-color) {
     padding-bottom: 0;
   }
 

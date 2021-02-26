@@ -13,11 +13,7 @@ export class CardHeaderComponent {
   @Input() title: string;
   @Input() subtitle: string;
   @Input() isTitleBold: boolean;
-  @Input() flagged: CardFlagType = null;
-
   @HostBinding('class')
-  get _cssClass() {
-    // TODO: Should we use the 'flagged-' prefix or not?
-    return [this.flagged && `flagged-${this.flagged}`];
-  }
+  @Input()
+  flagged: CardFlagType = null;
 }

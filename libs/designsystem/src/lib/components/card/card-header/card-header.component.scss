@@ -7,18 +7,6 @@
   text-align: center;
   padding: size('s');
   background-color: transparent;
-
-  // TODO: Should we use the 'flagged-' prefix or not? Loop over $card-flag-colors instead?
-  &[class^='flagged'] {
-    color: var(--kirby-card-header-color);
-    background-color: var(--kirby-card-header-background-color);
-    padding: size('xxxxs') size('xxs');
-
-    h2 {
-      margin-bottom: 0;
-      line-height: line-height('n');
-    }
-  }
 }
 
 h2 {
@@ -37,28 +25,19 @@ h4 {
   font-weight: font-weight('normal');
 }
 
-// TODO: Should 'informational' be added to $notification-colors in general? Would remove the need for mapping to 'semi-light' but could have broader consequences.
+// Flagged card headers
+@each $color-name, $color-value in $notification-and-info-colors {
+  :host(.#{$color-name}) {
+    --kirby-card-header-background-color: #{get-color($color-name)};
+    --kirby-card-header-color: #{get-color($color-name + '-contrast')};
 
-$card-flag-colors: (
-  map-merge(
-    $notification-colors,
-    (
-      'informational': get-color('semi-light'),
-    )
-  )
-);
+    color: var(--kirby-card-header-color);
+    background-color: var(--kirby-card-header-background-color);
+    padding: size('xxxxs') size('xxs');
 
-@function _get-flag-color-contrast($color-name) {
-  @if $color-name == 'informational' {
-    @return get-color('semi-light-contrast');
-  } @else {
-    @return get-color($color-name + '-contrast');
-  }
-}
-
-@each $color-name, $color-value in $card-flag-colors {
-  :host(.flagged-#{$color-name}) {
-    --kirby-card-header-background-color: #{$color-value};
-    --kirby-card-header-color: #{_get-flag-color-contrast($color-name)};
+    h2 {
+      margin-bottom: 0;
+      line-height: line-height('n');
+    }
   }
 }
