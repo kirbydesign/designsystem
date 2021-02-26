@@ -98,7 +98,7 @@ export class PageProgressComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.modalWrapper.config.flavor === 'drawer') {
-      this.slotAttribute = 'end';
+      this.slot = 'end';
     }
   }
 }
