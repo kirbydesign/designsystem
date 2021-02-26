@@ -11,7 +11,7 @@ export class ColorsShowcaseComponent {
   selectedColor = 'primary';
   selectedOnColor = 'primary-contrast';
   brandColors = ColorHelper.brandColors;
-  notificationColors = ColorHelper.notificationColors;
+  notificationAndInfoColors = ColorHelper.notificationAndInfoColors;
   systemColors = ColorHelper.systemColors;
   textColors = ColorHelper.textColors;
 

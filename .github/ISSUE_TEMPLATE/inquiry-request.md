@@ -1,6 +1,6 @@
 ---
 name: Inquiry
-about: Create a inquiry to seek answers. These will be adressed Tuesdag + Thursday 9.15-10.15
+about: Create an inquiry to seek answers. The inquiry will be adressed during open office hours on Tuesday and Thursday 9.15-10.15
 title: "[Inquiry]"
 labels: New, inquiry
 assignees: 'alxzak'
@@ -9,7 +9,7 @@ assignees: 'alxzak'
 
 **Please complete the following information:**
 
-Add any information or context about the inquiry here. What question do you need answer to?
+Add any information or context about the inquiry here. What question do you need an answer for?
 
 **Additional context**
 - OS: [e.g. Windows, MacOS, iOS]
