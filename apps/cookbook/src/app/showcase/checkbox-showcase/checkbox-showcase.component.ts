@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {
+  defaultEventColumns,
   ShowcaseProperty,
   ShowcasePropertyColumns,
 } from '~/app/shared/showcase-properties/showcase-property';
@@ -58,9 +59,5 @@ Use the default attentionLevel 2 for checkbox lists.`,
     },
   ];
 
-  eventColumns: ShowcasePropertyColumns = {
-    Name: 'Name',
-    Description: 'Description',
-    Type: 'Signature',
-  };
+  eventColumns: ShowcasePropertyColumns = defaultEventColumns;
 }

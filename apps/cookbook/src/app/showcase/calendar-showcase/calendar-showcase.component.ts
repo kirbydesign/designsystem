@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {
+  defaultEventColumns,
   ShowcaseProperty,
   ShowcasePropertyColumns,
 } from '~/app/shared/showcase-properties/showcase-property';
@@ -127,9 +128,5 @@ export class CalendarShowcaseComponent {
     },
   ];
 
-  eventColumns: ShowcasePropertyColumns = {
-    Name: 'Name',
-    Description: 'Description',
-    Type: 'Type',
-  };
+  eventColumns: ShowcasePropertyColumns = defaultEventColumns;
 }

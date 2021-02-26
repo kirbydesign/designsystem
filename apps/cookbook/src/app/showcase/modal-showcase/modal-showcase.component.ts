@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef } from '@angular/core';
 import {
+  defaultEventColumns,
   ShowcaseProperty,
   ShowcasePropertyColumns,
 } from '~/app/shared/showcase-properties/showcase-property';
@@ -102,9 +103,5 @@ export class ModalShowcaseComponent implements AfterViewInit {
     },
   ];
 
-  eventColumns: ShowcasePropertyColumns = {
-    Name: 'Name',
-    Description: 'Description',
-    Type: 'Signature',
-  };
+  eventColumns: ShowcasePropertyColumns = defaultEventColumns;
 }
