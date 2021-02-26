@@ -285,9 +285,8 @@ describe('ModalWrapperComponent', () => {
         const ionContentElement = spectator.query('ion-content');
         const embeddedComponentElement = ionContentElement.firstElementChild;
         const embeddedPageProgress = embeddedComponentElement.querySelector('kirby-page-progress');
-        expect(embeddedPageProgress).toBeNull();
-
         const pageProgressAsWrapperChild = spectator.element.querySelector('kirby-page-progress');
+        expect(embeddedPageProgress).toBeNull();
         expect(pageProgressAsWrapperChild).not.toBeNull();
       });
 
