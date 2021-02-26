@@ -248,7 +248,7 @@ describe('ModalWrapperComponent', () => {
         spectator.fixture.destroy();
       });
 
-      it('should move embedded page progress content to ion toolbar', () => {
+      it('should move embedded page progress to wrapper component', () => {
         const ionContentElement = spectator.query('ion-content');
         const embeddedComponentElement = ionContentElement.firstElementChild;
         const embeddedPageProgress = embeddedComponentElement.querySelector('kirby-page-progress');
