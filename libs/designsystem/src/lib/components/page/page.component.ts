@@ -92,7 +92,7 @@ export class PageContentDirective {
 export class PageProgressComponent implements OnInit {
   // TODO: Find alternative implementation, which aligns with future page configuration / consumption
   // this implementation was chosen over expanding moveChild in component wrapper with another scenario
-  @HostBinding('attr.slot') slotAttribute = 'start';
+  @HostBinding('attr.slot') slot = 'start';
 
   constructor(@Optional() @SkipSelf() private modalWrapper: ModalWrapperComponent) {}
 
