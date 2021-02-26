@@ -60,5 +60,6 @@ Use the default attentionLevel 2 for checkbox lists.`,
   eventColumns: ShowcasePropertyColumns = {
     Name: 'Name',
     Description: 'Description',
+    Type: 'Signature',
   };
 }
