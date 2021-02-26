@@ -1,5 +1,7 @@
 import { InjectionToken } from '@angular/core';
-import { ChartConfiguration } from 'chart.js';
+import { ChartConfiguration, ChartPoint } from 'chart.js';
+
+export type ChartDataType = Array<number | null | undefined | number[]> | ChartPoint[];
 
 export const CHART_CONFIGURATION = new InjectionToken<ChartConfiguration>('DefaultChartOptions');
 
@@ -9,12 +11,12 @@ export const DefaultChartOptions: ChartConfiguration = {
     animation: {
       duration: 0,
     },
-    showLines: false,
+    showLines: true,
     layout: {
       padding: {
-        left: 0,
-        right: 0,
-        top: 30,
+        left: 20,
+        right: 20,
+        top: 0,
         bottom: 0,
       },
     },
@@ -22,6 +24,7 @@ export const DefaultChartOptions: ChartConfiguration = {
       line: {
         tension: 0, // Smooth curve (0 = no smoothing)
         borderWidth: 1,
+        // cubicInterpolationMode: 'monotone',
         fill: false, // Disable fill below line
       },
       point: {
@@ -33,6 +36,7 @@ export const DefaultChartOptions: ChartConfiguration = {
     scales: {
       xAxes: [
         {
+          display: false,
           offset: false,
           gridLines: {
             display: false, // Dont show gridlines on xAxis
@@ -47,6 +51,7 @@ export const DefaultChartOptions: ChartConfiguration = {
       ],
       yAxes: [
         {
+          display: false,
           offset: false,
           ticks: {
             padding: 16,
@@ -66,10 +71,10 @@ export const DefaultChartOptions: ChartConfiguration = {
       intersect: false,
       animationDuration: 0,
     },
+
     tooltips: {
       mode: 'index',
       intersect: false,
-
       caretSize: 0,
       caretPadding: 12,
       cornerRadius: 2,

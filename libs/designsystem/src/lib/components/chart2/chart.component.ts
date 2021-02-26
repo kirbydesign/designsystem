@@ -18,10 +18,8 @@ import * as moment from 'moment';
 import merge from 'ts-deepmerge';
 
 import { ChartCalculator, ChartTimeFormats } from './chart-calculator';
-import { CHART_CONFIGURATION } from './chartOptions';
+import { ChartDataType, CHART_CONFIGURATION, DefaultChartOptions } from './chartOptions';
 import { KirbyIntegration } from './kirby-helpers';
-
-export type ChartDataType = Array<number | null | undefined | number[]> | ChartPoint[];
 
 @Component({
   selector: 'kirby-chart-2',
@@ -42,7 +40,8 @@ export class Chart2Component implements AfterViewInit, OnDestroy {
   public minIndex: number = null;
   public max: number = null;
   public maxIndex: number = null;
-
+  @Input() height = 300;
+  @Input() description = '';
   // Private configurations of graph coloring used for default layout
   private colorFont: string;
   private colorGrid: string;
@@ -50,18 +49,15 @@ export class Chart2Component implements AfterViewInit, OnDestroy {
   private colorPoint: string;
   private colorTooltip: string;
   private colorDatalabelsFont: string;
-
-  private overrideConfiguration: ChartConfiguration;
+  private overrideConfiguration: ChartConfiguration = {};
   private defaultChartConfiguration: ChartConfiguration;
-
+  private specificChartConfiguration: ChartConfiguration = {};
   private chartData: ChartDataType = null;
-  private chartDataset: ChartDataSets = null;
-  private chartDatasets: ChartDataSets[] = null;
-
+  // private chartDataset: ChartDataSets = null;
+  private chartDatasets: ChartDataSets[] = [];
   private chartType: Chart.ChartType = null;
   private chartBorderWidth: number;
   private chartLabel: string = null;
-
   private chartLabels: string[] = null;
   private chartBackgroundColor: string[] = null;
   private chartBorderColor: string[] = null;
@@ -69,15 +65,12 @@ export class Chart2Component implements AfterViewInit, OnDestroy {
   //  private chartTimeFormats: ChartTimeFormats = null;
 
   constructor(
-    @Inject(CHART_CONFIGURATION) chartConfiguration: ChartConfiguration,
-    @Inject(CHART_CONFIGURATION) overrideConfiguration: ChartConfiguration,
     @Inject(DOCUMENT) private document: Document,
     @Inject(LOCALE_ID) private locale: string,
     private kirbyIntegration: KirbyIntegration,
     @Self() private elementRef: ElementRef<HTMLElement>
   ) {
-    this.defaultChartConfiguration = merge(chartConfiguration);
-    this.overrideConfiguration = merge(overrideConfiguration);
+    this.defaultChartConfiguration = merge(DefaultChartOptions);
 
     //TODO: look into this
     // First time the component is used - trigger setting of global values on chart component
@@ -108,6 +101,7 @@ export class Chart2Component implements AfterViewInit, OnDestroy {
    */
   @Input()
   public set backgroundColor(value: string[]) {
+    console.log('backgroundColor', value);
     this.chartBackgroundColor = value;
   }
 
@@ -162,11 +156,13 @@ export class Chart2Component implements AfterViewInit, OnDestroy {
   public get labels(): string[] {
     return this.chartLabels;
   }
+
   /**
    * Provides labels data
    */
   @Input()
   public set labels(value: string[]) {
+    console.log('labels', value);
     this.chartLabels = value;
   }
 
@@ -184,70 +180,50 @@ export class Chart2Component implements AfterViewInit, OnDestroy {
       this.overrideConfiguration.type = this.chartType;
       switch (this.chartType) {
         case 'line':
-          merge(
-            this.defaultChartConfiguration,
-            (this.defaultChartConfiguration = Chart.defaults.line)
-          );
+          this.specificChartConfiguration = merge(Chart.defaults.line);
           break;
         case 'bar':
-          this.defaultChartConfiguration = merge(
-            this.defaultChartConfiguration,
-            Chart.defaults.bar
-          );
+          this.specificChartConfiguration = merge(Chart.defaults.bar);
           break;
         case 'pie':
-          merge(
-            this.defaultChartConfiguration,
-            (this.defaultChartConfiguration = Chart.defaults.pie)
-          );
+          this.specificChartConfiguration = merge(Chart.defaults.pie);
           break;
         case 'doughnut':
-          merge(
-            this.defaultChartConfiguration,
-            (this.defaultChartConfiguration = Chart.defaults.doughnut)
-          );
+          this.specificChartConfiguration = merge(Chart.defaults.doughnut);
           break;
         case 'horizontalBar':
-          merge(this.defaultChartConfiguration, Chart.defaults.bar);
+          this.specificChartConfiguration = merge(Chart.defaults.horizontalBar);
           break;
         case 'polarArea':
-          merge(
-            this.defaultChartConfiguration,
-            (this.defaultChartConfiguration = Chart.defaults.polarArea)
-          );
+          this.specificChartConfiguration = merge(Chart.defaults.polarArea);
           break;
         case 'radar':
-          merge(
-            this.defaultChartConfiguration,
-            (this.defaultChartConfiguration = Chart.defaults.radar)
-          );
+          this.specificChartConfiguration = merge(Chart.defaults.radar);
           break;
         case 'bubble':
-          merge(
-            this.defaultChartConfiguration,
-            (this.defaultChartConfiguration = Chart.defaults.bubble)
-          );
+          this.specificChartConfiguration = merge(Chart.defaults.bubble);
           break;
         case 'scatter':
-          merge(
-            this.defaultChartConfiguration,
-            (this.defaultChartConfiguration = Chart.defaults.scatter)
-          );
+          this.specificChartConfiguration = merge(Chart.defaults.scatter);
           break;
       }
     }
   }
-
+  /*
   public get dataset(): ChartDataSets {
-    return this.chartDataset;
+    if () ()
+    return this.chartDatasets[0];
   }
+*/
 
   /**
    * Provides data for graph as a Dataset type, ie a complex type
    */
   @Input()
   public set dataset(value: ChartDataSets) {
-    this.chartDataset = value;
+    console.log('dataset', value);
+
+    this.chartDatasets.push(value);
   }
 
   public get datasets(): ChartDataSets[] {
@@ -259,6 +235,8 @@ export class Chart2Component implements AfterViewInit, OnDestroy {
    */
   @Input()
   public set datasets(value: ChartDataSets[]) {
+    console.log('datasets', value);
+
     this.chartDatasets = value;
   }
 
@@ -296,18 +274,51 @@ export class Chart2Component implements AfterViewInit, OnDestroy {
     this.cleanUp();
   }
 
-  private resetDataSet(value: ChartDataSets): void {
-    if (!value.label) {
-      value.label = '';
+  public renderChart(): void {
+    this.initialize();
+    if (this.renderingElement == null) {
+      return;
     }
-    if (!value.borderWidth) {
-      value.borderWidth = 1;
+
+    let options: ChartConfiguration = this.createConfiguration();
+    options = this.addData(options);
+
+    // Find min and max values from the dataset
+    const minMax: {
+      min: number;
+      minIndex: number;
+      max: number;
+      maxIndex: number;
+    } = ChartCalculator.readMinMaxY(options.data.datasets);
+
+    this.min = minMax.min;
+    this.max = minMax.max;
+    this.minIndex = minMax.minIndex;
+    this.maxIndex = minMax.maxIndex;
+
+    const steps = ChartCalculator.getSteps(this.min, this.max);
+    console.log('steps', steps);
+
+    if (this.chart !== null) {
+      this.cleanUp();
     }
-    if (!value.borderColor) {
-      value.borderColor = [];
+    console.log('resulting Options', options);
+    this.chart = new Chart(this.renderingElement.nativeElement, options);
+  }
+
+  private initializeDataSet(chartDataSets: ChartDataSets): void {
+    if (!chartDataSets) return;
+    if (!chartDataSets.label) {
+      chartDataSets.label = '';
     }
-    if (!value.backgroundColor) {
-      value.backgroundColor = [];
+    if (!chartDataSets.borderWidth) {
+      chartDataSets.borderWidth = 1;
+    }
+    if (!chartDataSets.borderColor) {
+      chartDataSets.borderColor = [];
+    }
+    if (!chartDataSets.backgroundColor) {
+      chartDataSets.backgroundColor = [];
     }
   }
 
@@ -325,24 +336,27 @@ export class Chart2Component implements AfterViewInit, OnDestroy {
 
   /**
    * Returns a merged Chart.js configuration
-   *
    */
-  private createOptions(): ChartConfiguration {
-    let options = merge(this.defaultChartConfiguration);
-    options = merge(options, merge(this.overrideConfiguration));
+  private createConfiguration(): ChartConfiguration {
+    let options: ChartConfiguration = {};
+    options = merge(this.defaultChartConfiguration);
+    options = merge(options, this.specificChartConfiguration);
+    options = merge(options, this.overrideConfiguration);
+    options = merge(options, this.createStyledOptions());
+    return options;
+  }
+
+  /**
+   * adds data to Chart.js configuration
+   */
+  private addData(options: ChartConfiguration): ChartConfiguration {
+    this.ensureDataset(options);
     if (this.chartDatasets) {
-      this.chartDatasets.forEach((v) => this.resetDataSet(v));
+      this.chartDatasets.forEach((v) => this.initializeDataSet(v));
       options.data.datasets = this.chartDatasets;
     }
 
-    if (this.chartDataset) {
-      this.ensureDataset(options);
-      this.resetDataSet(this.chartDataset);
-      options.data.datasets.push(this.chartDataset);
-    }
-
     if (this.chartData) {
-      this.ensureDataset(options);
       const dataSet: ChartDataSets = {
         data: this.chartData,
         label: this.chartLabel,
@@ -350,13 +364,13 @@ export class Chart2Component implements AfterViewInit, OnDestroy {
         borderColor: this.chartBorderColor,
         borderWidth: this.chartBorderWidth,
       };
-      this.resetDataSet(dataSet);
+      this.initializeDataSet(dataSet);
       options.data.datasets.push(dataSet);
     }
     if (this.chartLabels) {
       options.data.labels = this.chartLabels;
     }
-
+    console.log('data-options', options);
     return options;
   }
 
@@ -372,13 +386,16 @@ export class Chart2Component implements AfterViewInit, OnDestroy {
     }
   }
 
-  private createStyledOptions(steps: any): ChartConfiguration {
+  /**
+   * Returns a Chart.js configuration with colors inserted
+   */
+  private createStyledOptions(): ChartConfiguration {
     const styledOptions: ChartConfiguration = {
       options: {
         elements: {
           line: {
             borderColor: this.colorGraph,
-            backgroundColor: this.colorGraph,
+            backgroundColor: 'red', //this.colorGraph,
             borderWidth: 1,
           },
           point: {
@@ -398,7 +415,6 @@ export class Chart2Component implements AfterViewInit, OnDestroy {
             borderWidth: 1,
           },
         },
-
         tooltips: {
           backgroundColor: this.colorTooltip,
           titleFontColor: this.colorGraph,
@@ -414,41 +430,6 @@ export class Chart2Component implements AfterViewInit, OnDestroy {
       },
     };
     return styledOptions;
-  }
-
-  public renderChart(): void {
-    this.initialize();
-    if (this.renderingElement == null) {
-      return;
-    }
-
-    let options: ChartConfiguration = this.createOptions();
-    //    if (options.data.datasets.length === 0) return;
-
-    // Find highest and lowest values from the dataset
-    const minMax: {
-      min: number;
-      minIndex: number;
-      max: number;
-      maxIndex: number;
-    } = ChartCalculator.readMinMaxY(options.data.datasets);
-
-    this.min = minMax.min;
-    this.max = minMax.max;
-    this.minIndex = minMax.minIndex;
-    this.maxIndex = minMax.maxIndex;
-
-    const steps = ChartCalculator.getSteps(this.min, this.max);
-
-    // Create config
-    const styledOptions = this.createStyledOptions(steps);
-    options = merge(options, styledOptions);
-    //    console.log('resulting Options', options);
-
-    if (this.chart !== null) {
-      this.cleanUp();
-    }
-    this.chart = new Chart(this.renderingElement.nativeElement, options);
   }
 
   private cleanUp(): void {

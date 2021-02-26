@@ -7,15 +7,14 @@
 }
 
 :host {
-  .chart-wrapper {
-    display: block;
-    border: var(--kirby-chart-border);
-    height: var(--kirby-chart-height);
-    width: var(--kirby-chart-width);
-    padding: var(--kirby-chart-padding);
-    padding-top: var(--kirby-chart-padding-top);
+  display: block;
+  border: var(--kirby-chart-border);
+  height: var(--kirby-chart-height);
+  width: var(--kirby-chart-width);
+  padding: var(--kirby-chart-padding);
+  padding-top: var(--kirby-chart-padding-top);
 
-    position: relative;
-    background-color: var(--kirby-background-color);
-  }
+  position: relative;
+  // background-color: lightgreen;
+  // background-color: var(--kirby-background-color);
 }

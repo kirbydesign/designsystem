@@ -2,15 +2,16 @@ import { Component, Input, Output } from '@angular/core';
 import { ChartConfiguration, ChartDataSets } from 'chart.js';
 
 const config = {
-  selector: 'cookbook-chart-example-line-1',
+  selector: 'cookbook-chart-example-line-2',
   template: `<kirby-card>
-  <kirby-card-header title="Areaspline"></kirby-card-header>
+  <kirby-card-header title="Areaspline - 2"></kirby-card-header>
   <kirby-chart-2 
     type="line"
     label="Areaspline"
     [labels]="labels"
     [height]="height"
-    [dataset]="dataset"   
+    [data]="data"   
+    [options]="lineOptions"
     [backgroundColor]="color"
     >
   </kirby-chart-2>
@@ -31,14 +32,13 @@ const config = {
   selector: config.selector,
   template: config.template,
 })
-export class ChartExampleLine1Component {
+export class ChartExampleLine2Component {
   template: string = config.template;
   codeSnippet: string = config.codeSnippet;
 
-  height = 250;
-
+  height = 450;
   color: string[] = ['red'];
-  @Input()
+
   lineOptions: ChartConfiguration = {
     options: {
       elements: {
@@ -53,37 +53,7 @@ export class ChartExampleLine1Component {
       },
     },
   };
-  // https://www.chartjs.org/docs/latest/axes/cartesian/category.html#category-cartesian-axis
-  dataset: ChartDataSets = {
-    label: 'the label',
-    data: [
-      1600.9,
-      1710.5,
-      1060.4,
-      1290.2,
-      1440.0,
-      1460.0,
-      1350.6,
-      1480.5,
-      1800.4,
-      1940.1,
-      1950.6,
-      1700.4,
-      1600.9,
-      1710.5,
-      1060.4,
-      1290.2,
-      1440.0,
-      1460.0,
-      1350.6,
-      1480.5,
-      1800.4,
-      1940.1,
-      1950.6,
-      1700.4,
-    ],
-  };
-
+  label: 'the label';
   labels: string[] = [
     'January',
     'February',
@@ -109,5 +79,32 @@ export class ChartExampleLine1Component {
     'April',
     'May',
     'June',
+  ];
+
+  data: number[] = [
+    1600.9,
+    1710.5,
+    1060.4,
+    1290.2,
+    1440.0,
+    1460.0,
+    1350.6,
+    1480.5,
+    1800.4,
+    1940.1,
+    1950.6,
+    1700.4,
+    1600.9,
+    1710.5,
+    1060.4,
+    1290.2,
+    1440.0,
+    1460.0,
+    1350.6,
+    1480.5,
+    1800.4,
+    1940.1,
+    1950.6,
+    1700.4,
   ];
 }
