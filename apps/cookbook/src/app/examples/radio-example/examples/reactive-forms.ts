@@ -45,12 +45,19 @@ const config = {
                 form.value: {{ form.value | json }}
                 <br/>
                 form.favoriteFood:
+                <br/>
                 <span [class.state-true]="favoriteFoodControl.valid">
                     valid: {{ favoriteFoodControl.valid }}
                 </span>
+                <br/>
+                <span [class.state-true]="favoriteFoodControl.errors">
+                    errors: {{ favoriteFoodControl.errors | json }}
+                </span>
+                <br/>
                 <span [class.state-true]="favoriteFoodControl.enabled">
                     enabled: {{ favoriteFoodControl.enabled }}
                 </span>
+                <br/>
                 <span [class.state-true]="favoriteFoodControl.touched">
                     touched: {{ favoriteFoodControl.touched }}
                 </span>
