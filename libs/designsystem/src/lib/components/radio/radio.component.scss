@@ -76,7 +76,8 @@ ion-radio {
     }
   }
 
-  :host-context(kirby-radio-group.error) {
+  :host-context(kirby-radio-group.error),
+  :host-context(kirby-radio-group.ng-touched.ng-invalid) {
     ion-radio,
     ion-radio:active {
       --color: #{get-color('danger')};
