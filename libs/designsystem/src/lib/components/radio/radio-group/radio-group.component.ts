@@ -9,12 +9,10 @@ import {
   Output,
   QueryList,
   TemplateRef,
-  ViewChild,
   ViewChildren,
 } from '@angular/core';
-import { Component, Input } from '@angular/core';
+import { Component, HostListener, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { IonRadioGroup } from '@ionic/angular';
 
 import { ListItemTemplateDirective } from '../../list/list.directive';
 import { RadioComponent } from '../radio.component';
@@ -100,17 +98,14 @@ export class RadioGroupComponent implements AfterContentInit, ControlValueAccess
   // #region private fields
   private _disabled = false;
   private _items: string[] | any[] = [];
-  private _onChangeCallback: Function;
-  private _onTouchedCallback: Function;
+  private _onChangeRegisteredCallback: (value: any) => void = () => {};
+  private _onTouched: Function;
   private _selectedIndex: number = -1;
   private _value?: string | any = null;
   @ViewChildren(RadioComponent)
   private radioButtons: QueryList<RadioComponent>;
   @ContentChildren(RadioComponent, { descendants: true })
   private projectedRadioButtons: QueryList<RadioComponent>;
-  private get boundToForm() {
-    return !!this._onChangeCallback;
-  }
 
   private get hasItemsFromContentProjection(): boolean {
     return (
@@ -136,20 +131,27 @@ export class RadioGroupComponent implements AfterContentInit, ControlValueAccess
     this.listenForProjectedRadiosChange();
   }
 
+  registerOnChange(fn: any): void {
+    this._onChangeRegisteredCallback = fn;
+  }
+
+  registerOnTouched(fn: any): void {
+    this._onTouched = fn;
+  }
+
   setDisabledState(isDisabled: boolean) {
     this.disabled = isDisabled;
   }
 
-  registerOnChange(fn: any): void {
-    this._onChangeCallback = fn;
+  setErrorState(hasError: boolean) {
+    this.hasError = hasError;
   }
 
-  registerOnTouched(fn: any): void {
-    this._onTouchedCallback = fn;
-  }
-
+  // TODO: Create clearRadioValues()
+  // TODO: Handle scenario where form is cleared. This should remove any selected state from radio group
   writeValue(value: any): void {
     this.value = value;
+    this.changeDetectionRef.markForCheck();
   }
 
   // #endregion public methods
@@ -170,37 +172,21 @@ export class RadioGroupComponent implements AfterContentInit, ControlValueAccess
   }
 
   _onChange(value: string | any) {
+    console.log('change', value);
     if (value === this._value) return;
     this.setSelectedItem(value);
     this.valueChange.emit(value);
+    this._onChangeRegisteredCallback(value);
+  }
 
-    if (this.boundToForm) {
-      this._onChangeCallback(value);
-    }
+  @HostListener('ionBlur')
+  _onRadioBlur() {
+    this._onTouched();
   }
 
   // #endregion "protected" methods used by template
 
   // #region private methods
-
-  private trackTouchedState() {
-    // const focusChanges = this.radioButtons.toArray().map((each) =>
-    //   each.focusChange.pipe(
-    //     filter((focused) => !!focused),
-    //     take(1)
-    //   )
-    // );
-    // race(...focusChanges)
-    //   .pipe(takeUntil(race(this._newRadioButtonsSlotted, this._destroy$)))
-    //   .subscribe(() => this._onTouchedCallback());
-  }
-
-  private stopTrackingTouchedState() {
-    // this._newRadioButtonsSlotted.next();
-    // this._newRadioButtonsSlotted.complete();
-    // this._newRadioButtonsSlotted = new Subject();
-  }
-
   private getIndexOfSelectedValue() {
     if (!this.value) return -1;
     return this.hasItemsFromContentProjection
