@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { ChartExampleLine3Component } from '~/app/examples/chart2-example/examples/chart-example-line-3.component';
 
 import { KirbyModule } from '@kirbydesign/designsystem';
 
@@ -24,6 +25,7 @@ const COMPONENT_DECLARATIONS = [
   ChartExampleDoughnut1Component,
   ChartExampleLine1Component,
   ChartExampleLine2Component,
+  ChartExampleLine3Component,
   ChartExampleTimeseries1Component,
 ];
 

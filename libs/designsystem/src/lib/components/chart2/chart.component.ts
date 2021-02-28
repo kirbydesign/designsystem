@@ -162,7 +162,6 @@ export class Chart2Component implements AfterViewInit, OnDestroy {
    */
   @Input()
   public set labels(value: string[]) {
-    console.log('labels', value);
     this.chartLabels = value;
   }
 
@@ -209,25 +208,14 @@ export class Chart2Component implements AfterViewInit, OnDestroy {
       }
     }
   }
-  /*
-  public get dataset(): ChartDataSets {
-    if () ()
-    return this.chartDatasets[0];
-  }
-*/
 
   /**
    * Provides data for graph as a Dataset type, ie a complex type
    */
   @Input()
   public set dataset(value: ChartDataSets) {
-    console.log('dataset', value);
-
+    // console.log('dataset', value);
     this.chartDatasets.push(value);
-  }
-
-  public get datasets(): ChartDataSets[] {
-    return this.chartDatasets;
   }
 
   /**
@@ -235,8 +223,7 @@ export class Chart2Component implements AfterViewInit, OnDestroy {
    */
   @Input()
   public set datasets(value: ChartDataSets[]) {
-    console.log('datasets', value);
-
+    //  console.log('datasets', value);
     this.chartDatasets = value;
   }
 
@@ -263,6 +250,7 @@ export class Chart2Component implements AfterViewInit, OnDestroy {
    */
   @Input()
   public set options(value: ChartConfiguration) {
+    console.log('options', value);
     this.overrideConfiguration = merge(this.overrideConfiguration, value);
   }
 
@@ -282,22 +270,22 @@ export class Chart2Component implements AfterViewInit, OnDestroy {
 
     let options: ChartConfiguration = this.createConfiguration();
     options = this.addData(options);
+    /*
+        // Find min and max values from the dataset
+        const minMax: {
+          min: number;
+          minIndex: number;
+          max: number;
+          maxIndex: number;
+        } = ChartCalculator.readMinMaxY(options.data.datasets);
 
-    // Find min and max values from the dataset
-    const minMax: {
-      min: number;
-      minIndex: number;
-      max: number;
-      maxIndex: number;
-    } = ChartCalculator.readMinMaxY(options.data.datasets);
-
-    this.min = minMax.min;
-    this.max = minMax.max;
-    this.minIndex = minMax.minIndex;
-    this.maxIndex = minMax.maxIndex;
-
-    const steps = ChartCalculator.getSteps(this.min, this.max);
-    console.log('steps', steps);
+        this.min = minMax.min;
+        this.max = minMax.max;
+        this.minIndex = minMax.minIndex;
+        this.maxIndex = minMax.maxIndex;
+    */
+    //  const steps = ChartCalculator.getSteps(this.min, this.max);
+    // console.log('steps', steps);
 
     if (this.chart !== null) {
       this.cleanUp();
@@ -340,7 +328,7 @@ export class Chart2Component implements AfterViewInit, OnDestroy {
   private createConfiguration(): ChartConfiguration {
     let options: ChartConfiguration = {};
     options = merge(this.defaultChartConfiguration);
-    options = merge(options, this.specificChartConfiguration);
+    // options = merge(options, this.specificChartConfiguration);
     options = merge(options, this.overrideConfiguration);
     options = merge(options, this.createStyledOptions());
     return options;
@@ -419,13 +407,6 @@ export class Chart2Component implements AfterViewInit, OnDestroy {
           backgroundColor: this.colorTooltip,
           titleFontColor: this.colorGraph,
           bodyFontColor: this.colorGraph,
-        },
-
-        plugins: {
-          datalabels: {
-            backgroundColor: this.colorGraph,
-            color: this.colorDatalabelsFont,
-          },
         },
       },
     };

@@ -7,7 +7,7 @@ export const CHART_CONFIGURATION = new InjectionToken<ChartConfiguration>('Defau
 
 export const DefaultChartOptions: ChartConfiguration = {
   options: {
-    maintainAspectRatio: false,
+    // maintainAspectRatio: false,
     animation: {
       duration: 0,
     },
@@ -71,7 +71,6 @@ export const DefaultChartOptions: ChartConfiguration = {
       intersect: false,
       animationDuration: 0,
     },
-
     tooltips: {
       mode: 'index',
       intersect: false,
