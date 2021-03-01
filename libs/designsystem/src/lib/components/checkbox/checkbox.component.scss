@@ -5,6 +5,13 @@ $checkbox-icon-size: size('m');
 $spacing-to-edge: map-get($checkbox-radio-spacing, 'to-edge');
 $spacing-to-label: map-get($checkbox-radio-spacing, 'to-label');
 
+@mixin wrapper-top-bottom-padding($target-height) {
+  $padding: calc((#{$target-height} - #{$checkbox-icon-size}) / 2);
+
+  padding-top: $padding;
+  padding-bottom: $padding;
+}
+
 :host {
   display: inline-block;
 
@@ -80,17 +87,17 @@ $spacing-to-label: map-get($checkbox-radio-spacing, 'to-label');
     .wrapper {
       position: relative;
       display: inline-flex;
-      align-items: center;
+      align-items: flex-start;
       vertical-align: top;
       padding-right: $spacing-to-label; // Ensure same padding on right side of label
-      min-height: map-get($checkbox-radio-sizes, 'md');
+      @include wrapper-top-bottom-padding(map-get($checkbox-radio-sizes, 'md'));
     }
 
     @each $size, $height in $checkbox-radio-sizes {
       :host-context(.checkbox-#{$size}),
       &.#{$size} {
         .wrapper {
-          min-height: $height;
+          @include wrapper-top-bottom-padding($height);
         }
       }
     }
