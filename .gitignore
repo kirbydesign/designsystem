@@ -1,6 +1,9 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
+dist/
+www/
+loader/
 /dist
 /tmp
 /out-tsc
@@ -38,6 +41,7 @@ yarn-error.log
 testem.log
 /typings
 *.bak
+.stencil/
 
 # System Files
 .DS_Store
