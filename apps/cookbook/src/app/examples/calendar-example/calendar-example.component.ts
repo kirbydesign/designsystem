@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+
 import { CalendarYearNavigatorConfig } from '@kirbydesign/designsystem';
 
 @Component({
