@@ -299,7 +299,9 @@ describe('ModalWrapperComponent', () => {
         spectator.detectChanges();
         await TestHelper.waitForResizeObserver();
 
-        const pageProgressAsWrapperChild = spectator.element.querySelector(':scope > kirby-page-progress');
+        const pageProgressAsWrapperChild = spectator.element.querySelector(
+          ':scope > kirby-page-progress'
+        );
         expect(pageProgressAsWrapperChild).not.toBeNull();
 
         embeddedComponent.showPageProgress = false;
