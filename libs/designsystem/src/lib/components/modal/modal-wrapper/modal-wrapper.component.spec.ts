@@ -250,12 +250,15 @@ describe('ModalWrapperComponent', () => {
 
       it('should move embedded page progress to wrapper component', () => {
         const ionContentElement = spectator.query('ion-content');
+        const ionToolbarElement = spectator.query('ion-toolbar');
         const embeddedComponentElement = ionContentElement.firstElementChild;
         const embeddedPageProgress = embeddedComponentElement.querySelector('kirby-page-progress');
-        const pageProgressAsWrapperChild = spectator.element.querySelector('kirby-page-progress');
+        const pageProgressAsIonToolbarChild = ionToolbarElement.querySelector(
+          ':scope > kirby-page-progress'
+        );
 
         expect(embeddedPageProgress).toBeNull();
-        expect(pageProgressAsWrapperChild).not.toBeNull();
+        expect(pageProgressAsIonToolbarChild).not.toBeNull();
       });
     });
 
