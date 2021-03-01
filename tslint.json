@@ -7,6 +7,9 @@
   ],
   "rules": {
     "prettier": true,
+    "deprecation": {
+      "severity": "warning"
+    },
 
     // Custom rules:
     // NOTE: Custom rule file names must consist of the rule’s name in camel case
