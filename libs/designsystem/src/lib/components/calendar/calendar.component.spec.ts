@@ -5,6 +5,7 @@ import { MockComponent } from 'ng-mocks';
 
 import { CalendarComponent, IconComponent } from '..';
 import { WindowRef } from '../../types/window-ref';
+
 import { CalendarYearNavigatorConfig } from './options/calendar-year-navigator-config';
 
 // NOTE: when specifying multiple input properties, set selectedDate
