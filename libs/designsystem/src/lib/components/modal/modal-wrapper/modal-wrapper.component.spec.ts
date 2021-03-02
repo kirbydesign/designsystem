@@ -314,8 +314,8 @@ describe('ModalWrapperComponent', () => {
         embeddedComponent.showPageProgress = false;
         spectator.detectChanges();
 
-        pageProgress = pageProgressAsIonToolbarChild.querySelector(':scope > kirby-page-progress');
-        expect(pageProgress).toBeNull();
+        pageProgressAsIonToolbarChild = ionToolbarElement.querySelector(':scope > kirby-page-progress');
+        expect(pageProgressAsIonToolbarChild).toBeNull();
       });
     });
   });
