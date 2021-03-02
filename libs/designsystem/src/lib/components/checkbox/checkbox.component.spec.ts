@@ -1,8 +1,10 @@
-import { Spectator, createHostFactory } from '@ngneat/spectator';
-import { IonCheckbox } from '@ionic/angular';
+import { IonCheckbox, IonicModule } from '@ionic/angular';
+import { createComponentFactory, createHostFactory, Spectator } from '@ngneat/spectator';
+
+import { DesignTokenHelper } from '../../helpers';
+import { TestHelper } from '../../testing/test-helper';
 
 import { CheckboxComponent } from './checkbox.component';
-import { DesignTokenHelper } from '../../helpers';
 
 const size = DesignTokenHelper.size;
 const getColor = DesignTokenHelper.getColor;
@@ -14,17 +16,18 @@ const checkboxSizeSm = fatFingerSize;
 const checkboxSizeMd = size('xxxl');
 
 describe('CheckboxComponent', () => {
+  const createComponent = createComponentFactory({
+    component: CheckboxComponent,
+    imports: [IonicModule.forRoot({ mode: 'ios', _testing: true })],
+  });
+
   let spectator: Spectator<CheckboxComponent>;
   let ionCheckbox: HTMLIonCheckboxElement;
 
-  const createHost = createHostFactory({
-    component: CheckboxComponent,
-    declarations: [IonCheckbox],
-  });
-
-  beforeEach(() => {
-    spectator = createHost(`<kirby-checkbox text="test"></kirby-checkbox>`);
+  beforeEach(async () => {
+    spectator = createComponent({ props: { text: 'test' } });
     ionCheckbox = spectator.query('ion-checkbox');
+    await TestHelper.whenReady(ionCheckbox);
   });
 
   it('should create', () => {
