@@ -40,6 +40,7 @@ The Kirby Cookbook, containing samples, status of components etc. can be accesse
   - [Testing new features](#testing-new-features)
 - [Polyfills](#polyfills)
 - [Chart Components](#chart-components)
+- [Auto-merge](#auto-merge)
 
 ## Installation
 
@@ -331,6 +332,11 @@ _**Please note:** If you don't want the additional http request for the polyfill
 ## Chart Components
 
 The Kirby chart components use Highcharts. Note that this is a licensed product.
+
+## Auto-merge
+
+Adding the `merge:ready` label to a pull-request will cause it to automatically be merged with `master` once it passes all checks (including approval of the pull-request).
+Once auto-merging begins it will automatically be labeled with the `automerge`-label.
 
 [angular]: https://angular.io
 [jasmine]: https://jasmine.github.io/
