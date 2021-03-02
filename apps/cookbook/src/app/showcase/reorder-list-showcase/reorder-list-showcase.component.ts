@@ -51,11 +51,6 @@ export class ReorderListShowcaseComponent {
     },
   ];
 
-  eventColumns: ShowcasePropertyColumns = {
-    Name: 'Name',
-    Description: 'Description',
-  };
-
   methods: ShowcaseProperty[] = [
     {
       name: 'complete()',

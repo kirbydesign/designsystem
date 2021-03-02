@@ -1,9 +1,5 @@
 import { Component } from '@angular/core';
-import {
-  defaultEventColumns,
-  ShowcaseEvent,
-  ShowcaseEventColumns,
-} from '~/app/shared/showcase-events/showcase-event';
+import { ShowcaseEvent } from '~/app/shared/showcase-events/showcase-event';
 import {
   defaultMethodColumns,
   ShowcaseProperty,
@@ -98,8 +94,6 @@ export class DropdownShowcaseComponent {
       signature: '(item: string | any) => void',
     },
   ];
-
-  eventColumns: ShowcaseEventColumns = defaultEventColumns;
 
   setSize(size: string) {
     this.size = size;

@@ -1,9 +1,5 @@
 import { Component } from '@angular/core';
-import {
-  defaultEventColumns,
-  ShowcaseEvent,
-  ShowcaseEventColumns,
-} from '~/app/shared/showcase-events/showcase-event';
+import { ShowcaseEvent } from '~/app/shared/showcase-events/showcase-event';
 import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
 
 declare var require: any;
@@ -128,6 +124,4 @@ export class CalendarShowcaseComponent {
       signature: 'EventEmitter<Date>',
     },
   ];
-
-  eventColumns: ShowcaseEventColumns = defaultEventColumns;
 }

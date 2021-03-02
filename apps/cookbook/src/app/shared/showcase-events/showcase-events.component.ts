@@ -19,7 +19,7 @@ import { ShowcaseEvent, ShowcaseEventColumns } from './showcase-event';
 })
 export class ShowcaseEventsComponent {
   @Input() events: ShowcaseEvent[];
-  @Input() columns: ShowcaseEventColumns = {
+  columns: ShowcaseEventColumns = {
     Name: 'Name',
     Description: 'Description',
     Type: 'Signature',

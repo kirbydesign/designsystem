@@ -1,9 +1,5 @@
 import { Component } from '@angular/core';
-import {
-  defaultEventColumns,
-  ShowcaseEvent,
-  ShowcaseEventColumns,
-} from '~/app/shared/showcase-events/showcase-event';
+import { ShowcaseEvent } from '~/app/shared/showcase-events/showcase-event';
 import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
 
 @Component({
@@ -56,9 +52,7 @@ Use the default attentionLevel 2 for checkbox lists.`,
     {
       name: 'checkedChange',
       description: 'Emitted when the checkbox checked has changed',
-      signature: '(checkedChange) => Promise<Boolean>',
+      signature: 'Promise<Boolean>',
     },
   ];
-
-  eventColumns: ShowcaseEventColumns = defaultEventColumns;
 }

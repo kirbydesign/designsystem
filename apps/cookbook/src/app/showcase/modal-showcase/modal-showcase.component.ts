@@ -1,9 +1,5 @@
 import { AfterViewInit, Component, ElementRef } from '@angular/core';
-import {
-  defaultEventColumns,
-  ShowcaseEvent,
-  ShowcaseEventColumns,
-} from '~/app/shared/showcase-events/showcase-event';
+import { ShowcaseEvent } from '~/app/shared/showcase-events/showcase-event';
 import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
 
 import { ModalController } from '@kirbydesign/designsystem';
@@ -103,6 +99,4 @@ export class ModalShowcaseComponent implements AfterViewInit {
       signature: 'Promise<void>',
     },
   ];
-
-  eventColumns: ShowcaseEventColumns = defaultEventColumns;
 }

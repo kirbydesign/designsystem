@@ -9,9 +9,3 @@ export interface ShowcaseEventColumns {
   Description?: string;
   Type?: string;
 }
-
-export const defaultEventColumns: ShowcaseEventColumns = Object.freeze({
-  Name: 'Name',
-  Description: 'Description',
-  Type: 'Signature',
-});
