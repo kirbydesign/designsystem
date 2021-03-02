@@ -56,7 +56,7 @@ Use the default attentionLevel 2 for checkbox lists.`,
     {
       name: 'checkedChange',
       description: 'Emitted when the checkbox checked has changed',
-      inputValues: ['(checkedChange) => Promise<Boolean>'],
+      signature: '(checkedChange) => Promise<Boolean>',
     },
   ];
 

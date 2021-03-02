@@ -95,7 +95,7 @@ export class DropdownShowcaseComponent {
     {
       name: 'change',
       description: 'Emitted when an item is selected (tap on mobile, click/keypress on web)',
-      inputValues: ['(item: string | any) => void'],
+      signature: '(item: string | any) => void',
     },
   ];
 

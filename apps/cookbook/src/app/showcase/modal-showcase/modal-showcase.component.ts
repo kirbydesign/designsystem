@@ -95,12 +95,12 @@ export class ModalShowcaseComponent implements AfterViewInit {
     {
       name: 'didPresent',
       description: 'Emitted when the modal is ready and the enter animation has finished',
-      inputValues: ['Promise<void>'],
+      signature: 'Promise<void>',
     },
     {
       name: 'willClose',
       description: 'Emitted when the user closes the modal or modal.close() method is called',
-      inputValues: ['Promise<void>'],
+      signature: 'Promise<void>',
     },
   ];
 

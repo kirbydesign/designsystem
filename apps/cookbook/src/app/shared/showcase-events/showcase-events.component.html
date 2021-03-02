@@ -3,24 +3,15 @@
     <th *ngIf="columns.Name">{{ columns.Name }}</th>
     <th *ngIf="columns.Description">{{ columns.Description }}</th>
     <th *ngIf="columns.Type">{{ columns.Type }}</th>
-    <th *ngIf="columns.Default">{{ columns.Default }}</th>
   </thead>
   <tbody>
-    <tr *ngFor="let prop of properties">
+    <tr *ngFor="let e of events">
       <td *ngIf="columns.Name">
-        <code>{{ prop.name }}</code>
+        <code>{{ e.name }}</code>
       </td>
-      <td *ngIf="columns.Description" class="description">{{ prop.description }}</td>
+      <td *ngIf="columns.Description" class="description">{{ e.description }}</td>
       <td *ngIf="columns.Type">
-        <ng-container *ngIf="!prop.preserveInputValuesWhitespaces">
-          <code>{{ prop.inputValues ? prop.inputValues.join(' | ') : '' }}</code>
-        </ng-container>
-        <pre
-          *ngIf="prop.preserveInputValuesWhitespaces"
-        ><code>{{ prop.inputValues ? prop.inputValues.join(' | ') : '' }}</code></pre>
-      </td>
-      <td *ngIf="columns.Default">
-        <code>{{ prop.defaultValue }}</code>
+        <code>{{ e.signature }}</code>
       </td>
     </tr>
   </tbody>

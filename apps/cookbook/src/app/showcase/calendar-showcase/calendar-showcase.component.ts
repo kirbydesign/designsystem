@@ -120,12 +120,12 @@ export class CalendarShowcaseComponent {
     {
       name: 'dateSelect',
       description: 'Emitted when a date is clicked.',
-      inputValues: ['EventEmitter<Date>'],
+      signature: 'EventEmitter<Date>',
     },
     {
       name: 'dateChange',
       description: 'Emitted when selectedDate changes value.',
-      inputValues: ['EventEmitter<Date>'],
+      signature: 'EventEmitter<Date>',
     },
   ];
 

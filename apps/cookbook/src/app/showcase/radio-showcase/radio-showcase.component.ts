@@ -72,7 +72,7 @@ export class RadioShowcaseComponent {
     {
       name: 'valueChange',
       description: 'Emitted when the selected value changes',
-      inputValues: ['(value: any) => void'],
+      signature: '(value: any) => void',
     },
   ];
 
