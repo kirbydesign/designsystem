@@ -12,8 +12,7 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { Chart, ChartConfiguration, ChartDataSets, ChartPoint } from 'chart.js';
-import 'chartjs-plugin-datalabels';
+import { Chart, ChartConfiguration, ChartData, ChartDataSets } from 'chart.js';
 import * as moment from 'moment';
 import merge from 'ts-deepmerge';
 
@@ -42,6 +41,9 @@ export class Chart2Component implements AfterViewInit, OnDestroy {
   public maxIndex: number = null;
   @Input() height = 300;
   @Input() description = '';
+  @Input() useDefaultOptions = true;
+  @Input() useDefaultStyle = true;
+
   // Private configurations of graph coloring used for default layout
   private colorFont: string;
   private colorGrid: string;
@@ -51,11 +53,11 @@ export class Chart2Component implements AfterViewInit, OnDestroy {
   private colorDatalabelsFont: string;
   private overrideConfiguration: ChartConfiguration = {};
   private defaultChartConfiguration: ChartConfiguration;
-  private specificChartConfiguration: ChartConfiguration = {};
-  private chartData: ChartDataType = null;
-  // private chartDataset: ChartDataSets = null;
+
+  private rootChartData: ChartData = null;
+  private chartDataType: ChartDataType = null;
   private chartDatasets: ChartDataSets[] = [];
-  private chartType: Chart.ChartType = null;
+  private chartType: Chart.ChartType = 'line';
   private chartBorderWidth: number;
   private chartLabel: string = null;
   private chartLabels: string[] = null;
@@ -71,7 +73,6 @@ export class Chart2Component implements AfterViewInit, OnDestroy {
     @Self() private elementRef: ElementRef<HTMLElement>
   ) {
     this.defaultChartConfiguration = merge(DefaultChartOptions);
-
     //TODO: look into this
     // First time the component is used - trigger setting of global values on chart component
     if (!Chart2Component.globalsInitiated) {
@@ -101,7 +102,6 @@ export class Chart2Component implements AfterViewInit, OnDestroy {
    */
   @Input()
   public set backgroundColor(value: string[]) {
-    console.log('backgroundColor', value);
     this.chartBackgroundColor = value;
   }
 
@@ -175,82 +175,55 @@ export class Chart2Component implements AfterViewInit, OnDestroy {
   @Input()
   public set type(value: Chart.ChartType) {
     this.chartType = value;
-    if (this.chartType) {
-      this.overrideConfiguration.type = this.chartType;
-      switch (this.chartType) {
-        case 'line':
-          this.specificChartConfiguration = merge(Chart.defaults.line);
-          break;
-        case 'bar':
-          this.specificChartConfiguration = merge(Chart.defaults.bar);
-          break;
-        case 'pie':
-          this.specificChartConfiguration = merge(Chart.defaults.pie);
-          break;
-        case 'doughnut':
-          this.specificChartConfiguration = merge(Chart.defaults.doughnut);
-          break;
-        case 'horizontalBar':
-          this.specificChartConfiguration = merge(Chart.defaults.horizontalBar);
-          break;
-        case 'polarArea':
-          this.specificChartConfiguration = merge(Chart.defaults.polarArea);
-          break;
-        case 'radar':
-          this.specificChartConfiguration = merge(Chart.defaults.radar);
-          break;
-        case 'bubble':
-          this.specificChartConfiguration = merge(Chart.defaults.bubble);
-          break;
-        case 'scatter':
-          this.specificChartConfiguration = merge(Chart.defaults.scatter);
-          break;
-      }
+  }
+
+  /**
+   * Provides data for graph as a ChartDataSets type
+   */
+  @Input()
+  public set dataset(value: ChartDataSets) {
+    this.chartDatasets = [];
+    if (value) {
+      this.chartDatasets.push(value);
+      this.renderChart();
     }
   }
 
   /**
-   * Provides data for graph as a Dataset type, ie a complex type
-   */
-  @Input()
-  public set dataset(value: ChartDataSets) {
-    // console.log('dataset', value);
-    this.chartDatasets.push(value);
-  }
-
-  /**
-   * Provides data for graph as a Dataset type, ie a complex type
+   * Provides data for graph as an array ChartDataSets[] type
    */
   @Input()
   public set datasets(value: ChartDataSets[]) {
-    //  console.log('datasets', value);
     this.chartDatasets = value;
-  }
-
-  public get data(): ChartDataType {
-    return this.chartData;
+    if (value) {
+      this.renderChart();
+    }
   }
 
   /**
-   * Provides data for graph as an array of ChartPoints or an array of numbers
+   * Provides data for graph as a ChartDataType
    */
   @Input()
   public set data(value: ChartDataType) {
-    this.chartData = value;
+    this.chartDataType = value;
   }
 
-  public get options(): ChartConfiguration {
-    return this.overrideConfiguration;
+  /**
+   * Provides data for graph as a Dataset type, ie a complex type
+   */
+  @Input()
+  public set chartData(value: ChartData) {
+    this.rootChartData = value;
   }
 
   /**
    * Sets Chart.js Options overrides for the graph.
    * If provided these settings will merge with the default setting.
+   * It can be used to hold options and data
    * See chartjs.org for config options.
    */
   @Input()
   public set options(value: ChartConfiguration) {
-    console.log('options', value);
     this.overrideConfiguration = merge(this.overrideConfiguration, value);
   }
 
@@ -262,35 +235,30 @@ export class Chart2Component implements AfterViewInit, OnDestroy {
     this.cleanUp();
   }
 
+  private cleanUp(): void {
+    if (this.chart !== null) {
+      this.chart.destroy();
+      this.chart = null;
+    }
+  }
+
+  /**
+   * handles the build of configuration, data and chart creation
+   */
   public renderChart(): void {
     this.initialize();
     if (this.renderingElement == null) {
       return;
     }
 
-    let options: ChartConfiguration = this.createConfiguration();
+    let options: ChartConfiguration = this.buildConfiguration();
     options = this.addData(options);
-    /*
-        // Find min and max values from the dataset
-        const minMax: {
-          min: number;
-          minIndex: number;
-          max: number;
-          maxIndex: number;
-        } = ChartCalculator.readMinMaxY(options.data.datasets);
 
-        this.min = minMax.min;
-        this.max = minMax.max;
-        this.minIndex = minMax.minIndex;
-        this.maxIndex = minMax.maxIndex;
-    */
-    //  const steps = ChartCalculator.getSteps(this.min, this.max);
-    // console.log('steps', steps);
+    console.log('resulting Options', options);
 
     if (this.chart !== null) {
       this.cleanUp();
     }
-    console.log('resulting Options', options);
     this.chart = new Chart(this.renderingElement.nativeElement, options);
   }
 
@@ -322,15 +290,60 @@ export class Chart2Component implements AfterViewInit, OnDestroy {
     this.colorFont = colors.colorFont;
   }
 
+  private createTypeSpecificConfiguration(): ChartConfiguration {
+    let specificChartConfiguration: ChartConfiguration = {};
+    const cType: Chart.ChartType =
+      this.chartType || (this.overrideConfiguration.type as Chart.ChartType);
+    if (cType) {
+      this.overrideConfiguration.type = cType;
+      this.chartType = cType;
+      switch (this.chartType) {
+        case 'line':
+          specificChartConfiguration = merge(Chart.defaults.line);
+          break;
+        case 'bar':
+          specificChartConfiguration = merge(Chart.defaults.bar);
+          break;
+        case 'pie':
+          specificChartConfiguration = merge(Chart.defaults.pie);
+          break;
+        case 'doughnut':
+          specificChartConfiguration = merge(Chart.defaults.doughnut);
+          break;
+        case 'horizontalBar':
+          specificChartConfiguration = merge(Chart.defaults.horizontalBar);
+          break;
+        case 'polarArea':
+          specificChartConfiguration = merge(Chart.defaults.polarArea);
+          break;
+        case 'radar':
+          specificChartConfiguration = merge(Chart.defaults.radar);
+          break;
+        case 'bubble':
+          specificChartConfiguration = merge(Chart.defaults.bubble);
+          break;
+        case 'scatter':
+          specificChartConfiguration = merge(Chart.defaults.scatter);
+          break;
+      }
+    }
+    return specificChartConfiguration;
+  }
+
   /**
    * Returns a merged Chart.js configuration
+   * merge order matters
    */
-  private createConfiguration(): ChartConfiguration {
+  private buildConfiguration(): ChartConfiguration {
     let options: ChartConfiguration = {};
-    options = merge(this.defaultChartConfiguration);
-    // options = merge(options, this.specificChartConfiguration);
+    if (this.useDefaultOptions) {
+      options = merge(this.defaultChartConfiguration);
+    }
+    options = merge(options, this.createTypeSpecificConfiguration());
     options = merge(options, this.overrideConfiguration);
-    options = merge(options, this.createStyledOptions());
+    if (this.useDefaultStyle) {
+      options = merge(options, this.createStyledOptions());
+    }
     return options;
   }
 
@@ -338,15 +351,21 @@ export class Chart2Component implements AfterViewInit, OnDestroy {
    * adds data to Chart.js configuration
    */
   private addData(options: ChartConfiguration): ChartConfiguration {
-    this.ensureDataset(options);
-    if (this.chartDatasets) {
-      this.chartDatasets.forEach((v) => this.initializeDataSet(v));
-      options.data.datasets = this.chartDatasets;
+    if (this.rootChartData) {
+      options.data = this.rootChartData;
+      return options;
     }
 
-    if (this.chartData) {
+    this.ensureDataset(options);
+    if (this.chartDatasets) {
+      this.chartDatasets.forEach((v) => {
+        this.initializeDataSet(v);
+        options.data.datasets.push(v);
+      });
+    }
+    if (this.chartDataType) {
       const dataSet: ChartDataSets = {
-        data: this.chartData,
+        data: this.chartDataType,
         label: this.chartLabel,
         backgroundColor: this.backgroundColor,
         borderColor: this.chartBorderColor,
@@ -358,7 +377,6 @@ export class Chart2Component implements AfterViewInit, OnDestroy {
     if (this.chartLabels) {
       options.data.labels = this.chartLabels;
     }
-    console.log('data-options', options);
     return options;
   }
 
@@ -375,7 +393,7 @@ export class Chart2Component implements AfterViewInit, OnDestroy {
   }
 
   /**
-   * Returns a Chart.js configuration with colors inserted
+   * Returns a Chart.js configuration with Kirby colors inserted
    */
   private createStyledOptions(): ChartConfiguration {
     const styledOptions: ChartConfiguration = {
@@ -383,7 +401,7 @@ export class Chart2Component implements AfterViewInit, OnDestroy {
         elements: {
           line: {
             borderColor: this.colorGraph,
-            backgroundColor: 'red', //this.colorGraph,
+            backgroundColor: this.colorGraph,
             borderWidth: 1,
           },
           point: {
@@ -411,12 +429,5 @@ export class Chart2Component implements AfterViewInit, OnDestroy {
       },
     };
     return styledOptions;
-  }
-
-  private cleanUp(): void {
-    if (this.chart !== null) {
-      this.chart.destroy();
-      this.chart = null;
-    }
   }
 }

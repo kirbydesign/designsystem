@@ -5,6 +5,7 @@ import { ChartExampleLine3Component } from '~/app/examples/chart2-example/exampl
 import { KirbyModule } from '@kirbydesign/designsystem';
 
 import { ChartExampleComponent } from './chart-example.component';
+import { ChartExampleAreaLine1Component } from './examples/chart-example-areaspline-1.component';
 import { ChartExampleBar1Component } from './examples/chart-example-bar-1.component';
 import { ChartExampleBar2Component } from './examples/chart-example-bar-2.component';
 import { ChartExampleBar3Component } from './examples/chart-example-bar-3.component';
@@ -14,6 +15,7 @@ import { ChartExampleLine1Component } from './examples/chart-example-line-1.comp
 import { ChartExampleLine2Component } from './examples/chart-example-line-2.component';
 import { ChartExamplePie1Component } from './examples/chart-example-pie-1.component';
 import { ChartExampleTimeseries1Component } from './examples/chart-example-timeseries-1.component';
+import { ChartExampleTimeseries2Component } from './examples/chart-example-timeseries-2.component';
 
 const COMPONENT_DECLARATIONS = [
   ChartExampleComponent,
@@ -26,7 +28,9 @@ const COMPONENT_DECLARATIONS = [
   ChartExampleLine1Component,
   ChartExampleLine2Component,
   ChartExampleLine3Component,
+  ChartExampleAreaLine1Component,
   ChartExampleTimeseries1Component,
+  ChartExampleTimeseries2Component,
 ];
 
 @NgModule({

@@ -7,8 +7,8 @@ const config = {
   <kirby-card-header title="Lines Datasets"></kirby-card-header>
   <kirby-chart-2 
     type="line"
-    [labels]="labels"
     [height]="height"
+    [labels]="Labels"
     [datasets]="datasets"   
     [options]="lineOptions"   
     >
@@ -90,6 +90,7 @@ export class ChartExampleLine3Component {
       fill: false,
       backgroundColor: 'lightblue',
       borderColor: 'lightblue',
+      borderDash: [5, 5],
       data: [28, 48, 40, 19, 86, 27, 90],
     },
   ];

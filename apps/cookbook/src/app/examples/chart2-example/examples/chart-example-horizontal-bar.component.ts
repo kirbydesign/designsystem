@@ -43,6 +43,9 @@ export class ChartExampleHorizontalBarComponent {
   );
 
   yearlyOverviewOptions: ChartConfiguration = {
+    options: {
+      maintainAspectRatio: false,
+    },
     data: {
       labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
       datasets: [

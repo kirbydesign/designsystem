@@ -1,25 +1,29 @@
-import { Component, Input, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { hex2rgb } from '@ngneat/spectator/lib/internals/rgb-to-hex';
 import { ChartConfiguration, ChartDataSets } from 'chart.js';
+
+import { Chart2Component } from '@kirbydesign/designsystem';
 
 const config = {
   selector: 'cookbook-chart-example-line-1',
   template: `<kirby-card>
-  <kirby-card-header title="Areaspline"></kirby-card-header>
+  <kirby-card-header title="Line"></kirby-card-header>
   <kirby-chart-2 
+    #chart
     type="line"
-    label="Areaspline"
+    label="Line 1"
     [labels]="labels"
     [height]="height"
-    [dataset]="dataset"   
-    [backgroundColor]="color"
+    [dataset]="dataset"  
+   
     >
   </kirby-chart-2>
   <kirby-card-footer>
       <!-- example period selector -->
       <div style="cursor: pointer">
-      <span (click)="data = [200, 100, 300, 100, 200, 300, 200]">Jan </span>
-      <span (click)="data = [100, 100, 100, 400, 200, 200, 200]">Feb </span>
-      <span (click)="data = [500, 400, 300, 200, 100, 200, 300]">Mar </span>
+      <button kirby-button (click)="changeData('January',this.dataJanuary)">January </button>
+      <button kirby-button (click)="changeData('February',this.dataFebruary)">February </button>
+      <button kirby-button (click)="changeData('Marts',this.dataMarts)">Marts </button>
     </div>
   </kirby-card-footer>
 </kirby-card>`,
@@ -37,8 +41,17 @@ export class ChartExampleLine1Component {
 
   height = 250;
 
-  color: string[] = ['red'];
-  @Input()
+  changeData(month: string, data: number[]): void {
+    console.log('changeData', month, data);
+    this.dataset = {
+      backgroundColor: this.dataset.backgroundColor,
+      label: month,
+      data: data,
+    };
+  }
+
+  datasetChange: EventEmitter<ChartDataSets> = new EventEmitter<Chart.ChartDataSets>();
+
   lineOptions: ChartConfiguration = {
     options: {
       elements: {
@@ -53,9 +66,10 @@ export class ChartExampleLine1Component {
       },
     },
   };
-  // https://www.chartjs.org/docs/latest/axes/cartesian/category.html#category-cartesian-axis
+
   dataset: ChartDataSets = {
     label: 'the label',
+    backgroundColor: ['rgba(255, 35, 35, 0.2)'],
     data: [
       1600.9,
       1710.5,
@@ -84,6 +98,89 @@ export class ChartExampleLine1Component {
     ],
   };
 
+  dataJanuary: number[] = [
+    1600.9,
+    1440.0,
+    1460.0,
+    1350.6,
+    1480.5,
+    1800.4,
+    1940.1,
+    1950.6,
+    1700.4,
+    1950.6,
+    1700.4,
+    1600.9,
+    1710.5,
+    1060.4,
+    1290.2,
+    1710.5,
+    1060.4,
+    1290.2,
+    1440.0,
+    1460.0,
+    1350.6,
+    1480.5,
+    1800.4,
+    1940.1,
+  ];
+  dataFebruary: number[] = [
+    1600.9,
+    1710.5,
+    1060.4,
+    1290.2,
+    1440.0,
+    1460.0,
+    1950.6,
+    1700.4,
+    1600.9,
+    1710.5,
+    1060.4,
+    1290.2,
+    1710.5,
+    1060.4,
+    1290.2,
+    1440.0,
+    1460.0,
+    1350.6,
+    1480.5,
+    1800.4,
+    1940.1,
+    1440.0,
+    1460.0,
+    1350.6,
+    1480.5,
+    1800.4,
+    1940.1,
+    1950.6,
+    1700.4,
+  ];
+  dataMarts: number[] = [
+    1710.5,
+    1060.4,
+    1290.2,
+    1600.9,
+    1950.6,
+    1700.4,
+    1600.9,
+    1710.5,
+    1060.4,
+    1290.2,
+    1440.0,
+    1460.0,
+    1350.6,
+    1480.5,
+    1800.4,
+    1940.1,
+    1440.0,
+    1460.0,
+    1350.6,
+    1480.5,
+    1800.4,
+    1940.1,
+    1950.6,
+    1700.4,
+  ];
   labels: string[] = [
     'January',
     'February',

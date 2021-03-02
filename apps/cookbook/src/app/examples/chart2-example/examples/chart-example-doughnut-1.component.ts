@@ -7,8 +7,7 @@ const config = {
   <kirby-chart-2 
     type="doughnut"
     [categories]="['Boomerangs 25%', 'Bubbles 41%', 'Jumping 33%', 'Christmas < 1%']"   
-    [data]="[25, 41, 33, 1]"
-    
+    [data]="[25, 41, 33, 1]"    
     [backgroundColor]="[
           'rgba(255, 99, 132, 0.2)',
           'rgba(54, 162, 235, 0.2)',
