@@ -1,11 +1,5 @@
-export interface ShowcaseMethod {
-  name: string;
-  description?: string;
-  signature?: string;
-}
+import { ShowcaseMember } from '../showcase-member/showcase-member';
 
-export interface ShowcaseMethodColumns {
-  Name?: string;
-  Description?: string;
-  Type?: string;
+export interface ShowcaseMethod extends ShowcaseMember {
+  signature?: string;
 }

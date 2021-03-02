@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
 
-import { ShowcaseMethod, ShowcaseMethodColumns } from './showcase-method';
+import { ShowcaseMemberColumns } from '../showcase-member/showcase-member';
+
+import { ShowcaseMethod } from './showcase-method';
 
 @Component({
   selector: 'cookbook-showcase-methods',
@@ -19,7 +21,7 @@ import { ShowcaseMethod, ShowcaseMethodColumns } from './showcase-method';
 })
 export class ShowcaseMethodsComponent {
   @Input() methods: ShowcaseMethod[];
-  columns: ShowcaseMethodColumns = {
+  columns: ShowcaseMemberColumns = {
     Name: 'Name',
     Description: 'Description',
     Type: 'Signature',
