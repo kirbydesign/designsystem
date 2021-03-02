@@ -4,30 +4,6 @@
 // Import common styles
 @import './libs/designsystem/src/lib/scss/global-styles';
 
-@font-face {
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('/assets/fonts/roboto-regular-webfont.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 300;
-  font-display: swap;
-  src: url('/assets/fonts/roboto-light-webfont.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url('/assets/fonts/roboto-bold-webfont.woff2') format('woff2');
-}
-
 body,
 html {
   margin: 0;
