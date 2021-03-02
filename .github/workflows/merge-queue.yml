@@ -1,0 +1,30 @@
+name: Merge Queue
+on:
+  push:
+    branches: [master]
+  pull_request:
+    types: [labeled, unlabeled]
+  pull_request_review:
+    branches: [master]
+jobs:
+  automerge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Find and label automerge candidate matching the 'merge:ready' label
+        uses: jakobe/automerge-labeler@master
+        id: automerge_labeler
+        with:
+          label-candidate: 'merge:ready'
+        env:
+          GITHUB_TOKEN: ${{ secrets.AUTOMERGE_GITHUB_TOKEN }}
+      - run: "echo 'github.event.pull_request.mergeable_state: ${{ github.event.pull_request.mergeable_state }}'"
+      - run: "echo 'PR ready for automerge: ${{ steps.automerge_labeler.outputs.pull_request }}'"
+      - name: Automerge
+        if: steps.automerge_labeler.outputs.pull_request != null
+        uses: "pascalgn/automerge-action@v0.8.0"
+        env:
+          GITHUB_TOKEN: "${{ secrets.AUTOMERGE_GITHUB_TOKEN }}"
+          MERGE_LABELS: automerge
+          UPDATE_LABELS: automerge
+          MERGE_RETRIES: 6
+         MERGE_RETRY_SLEEP: 10000 # sets the time to sleep between retries, in milliseconds 
