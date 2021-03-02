@@ -15,8 +15,10 @@ import { FormFieldInputNumericExampleComponent } from './examples/input/numeric'
 import { FormFieldTextareaCounterExampleComponent } from './examples/textarea/counter';
 import { FormFieldTextareaDefaultExampleComponent } from './examples/textarea/default';
 import { FormFieldTextareaLabelExampleComponent } from './examples/textarea/label';
+import { FormFieldExampleConfigurationComponent } from './form-field-example-configuration-component/form-field-example-configuration.component';
 
 const COMPONENT_DECLARATIONS = [
+  FormFieldExampleConfigurationComponent,
   FormFieldInputDefaultExampleComponent,
   FormFieldInputLabelExampleComponent,
   FormFieldInputLabelMessageExampleComponent,
