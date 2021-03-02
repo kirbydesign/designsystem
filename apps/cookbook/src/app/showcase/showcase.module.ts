@@ -9,6 +9,7 @@ import { IphoneModule } from '../iphone/iphone.module';
 import { CodeViewerComponent } from '../shared/code-viewer/code-viewer.component';
 import { ExampleViewerComponent } from '../shared/example-viewer/example-viewer.component';
 import { ShowcaseEventsComponent } from '../shared/showcase-events/showcase-events.component';
+import { ShowcaseMethodsComponent } from '../shared/showcase-methods/showcase-methods.component';
 import { ShowcasePropertiesComponent } from '../shared/showcase-properties/showcase-properties.component';
 
 import { DividerShowcaseComponent } from './divider-showcase/divider-showcase.component';
@@ -28,6 +29,7 @@ import { COMPONENT_DECLARATIONS, COMPONENT_EXPORTS, COMPONENT_IMPORTS } from './
     CodeViewerComponent,
     ExampleViewerComponent,
     ShowcaseEventsComponent,
+    ShowcaseMethodsComponent,
     ShowcasePropertiesComponent,
     DividerShowcaseComponent,
   ],

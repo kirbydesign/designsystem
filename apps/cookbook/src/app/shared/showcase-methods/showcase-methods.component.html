@@ -1,0 +1,18 @@
+<table class="cookbook-members-table">
+  <thead>
+    <th *ngIf="columns.Name">{{ columns.Name }}</th>
+    <th *ngIf="columns.Description">{{ columns.Description }}</th>
+    <th *ngIf="columns.Type">{{ columns.Type }}</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let method of methods">
+      <td *ngIf="columns.Name">
+        <code>{{ method.name }}</code>
+      </td>
+      <td *ngIf="columns.Description" class="description">{{ method.description }}</td>
+      <td *ngIf="columns.Type">
+        <code>{{ method.signature }}</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
