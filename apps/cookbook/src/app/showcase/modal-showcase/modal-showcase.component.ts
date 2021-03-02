@@ -1,9 +1,10 @@
 import { AfterViewInit, Component, ElementRef } from '@angular/core';
 import {
   defaultEventColumns,
-  ShowcaseProperty,
-  ShowcasePropertyColumns,
-} from '~/app/shared/showcase-properties/showcase-property';
+  ShowcaseEvent,
+  ShowcaseEventColumns,
+} from '~/app/shared/showcase-events/showcase-event';
+import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
 
 import { ModalController } from '@kirbydesign/designsystem';
 
@@ -90,7 +91,7 @@ export class ModalShowcaseComponent implements AfterViewInit {
     },
   ];
 
-  events: ShowcaseProperty[] = [
+  events: ShowcaseEvent[] = [
     {
       name: 'didPresent',
       description: 'Emitted when the modal is ready and the enter animation has finished',
@@ -103,5 +104,5 @@ export class ModalShowcaseComponent implements AfterViewInit {
     },
   ];
 
-  eventColumns: ShowcasePropertyColumns = defaultEventColumns;
+  eventColumns: ShowcaseEventColumns = defaultEventColumns;
 }

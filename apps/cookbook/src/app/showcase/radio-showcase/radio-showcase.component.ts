@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import {
   defaultEventColumns,
-  ShowcaseProperty,
-  ShowcasePropertyColumns,
-} from '~/app/shared/showcase-properties/showcase-property';
+  ShowcaseEvent,
+  ShowcaseEventColumns,
+} from '~/app/shared/showcase-events/showcase-event';
+import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
 
 @Component({
   selector: 'cookbook-radio-showcase',
@@ -67,7 +68,7 @@ export class RadioShowcaseComponent {
     },
   ];
 
-  groupEvents: ShowcaseProperty[] = [
+  groupEvents: ShowcaseEvent[] = [
     {
       name: 'valueChange',
       description: 'Emitted when the selected value changes',
@@ -75,5 +76,5 @@ export class RadioShowcaseComponent {
     },
   ];
 
-  eventColumns: ShowcasePropertyColumns = defaultEventColumns;
+  eventColumns: ShowcaseEventColumns = defaultEventColumns;
 }

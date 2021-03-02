@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import {
   defaultEventColumns,
+  ShowcaseEvent,
+  ShowcaseEventColumns,
+} from '~/app/shared/showcase-events/showcase-event';
+import {
   defaultMethodColumns,
   ShowcaseProperty,
   ShowcasePropertyColumns,
@@ -87,7 +91,7 @@ export class DropdownShowcaseComponent {
 
   methodColumns: ShowcasePropertyColumns = defaultMethodColumns;
 
-  events: ShowcaseProperty[] = [
+  events: ShowcaseEvent[] = [
     {
       name: 'change',
       description: 'Emitted when an item is selected (tap on mobile, click/keypress on web)',
@@ -95,7 +99,7 @@ export class DropdownShowcaseComponent {
     },
   ];
 
-  eventColumns: ShowcasePropertyColumns = defaultEventColumns;
+  eventColumns: ShowcaseEventColumns = defaultEventColumns;
 
   setSize(size: string) {
     this.size = size;

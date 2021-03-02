@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import {
   defaultEventColumns,
-  ShowcaseProperty,
-  ShowcasePropertyColumns,
-} from '~/app/shared/showcase-properties/showcase-property';
+  ShowcaseEvent,
+  ShowcaseEventColumns,
+} from '~/app/shared/showcase-events/showcase-event';
+import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
 
 @Component({
   selector: 'cookbook-checkbox-showcase',
@@ -51,7 +52,7 @@ Use the default attentionLevel 2 for checkbox lists.`,
     },
   ];
 
-  events: ShowcaseProperty[] = [
+  events: ShowcaseEvent[] = [
     {
       name: 'checkedChange',
       description: 'Emitted when the checkbox checked has changed',
@@ -59,5 +60,5 @@ Use the default attentionLevel 2 for checkbox lists.`,
     },
   ];
 
-  eventColumns: ShowcasePropertyColumns = defaultEventColumns;
+  eventColumns: ShowcaseEventColumns = defaultEventColumns;
 }

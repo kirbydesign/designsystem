@@ -1,4 +1,4 @@
-export interface ShowcaseProperty {
+export interface ShowcaseEvent {
   name: string;
   defaultValue?: string;
   description?: string;
@@ -6,14 +6,14 @@ export interface ShowcaseProperty {
   preserveInputValuesWhitespaces?: boolean;
 }
 
-export interface ShowcasePropertyColumns {
+export interface ShowcaseEventColumns {
   Name?: string;
   Description?: string;
   Type?: string;
   Default?: string;
 }
 
-export const defaultMethodColumns: ShowcasePropertyColumns = Object.freeze({
+export const defaultEventColumns: ShowcaseEventColumns = Object.freeze({
   Name: 'Name',
   Description: 'Description',
   Type: 'Signature',
