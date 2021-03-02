@@ -1,6 +1,7 @@
+import { calcProjectFileAndBasePath } from '@angular/compiler-cli';
 import { Component } from '@angular/core';
 import { ChartConfiguration, ChartData, ChartDataSets, ChartPoint } from 'chart.js';
-import moment, { utc } from 'moment';
+import moment, { Moment, utc } from 'moment';
 
 const config = {
   selector: 'cookbook-chart-example-timeseries-2',
@@ -311,31 +312,18 @@ export class ChartExampleTimeseries2Component {
   }
 
   getLabels(data: ChartPoint[], config: any): string[] {
-    var cfg = config || {};
-    let min = 0; // parseInt(data[0].t.valueOf().toString()); //Number.MAX_SAFE_INTEGER;
-    let max = 1; // min; // Number.MIN_SAFE_INTEGER;
-    //    data.forEach((cp) => {});
-
-    min = cfg.min || min;
-    max = cfg.max || max;
-    const count = cfg.count || 8;
-    const step = (max - min) / count;
-    const decimals = cfg.decimals || 8;
-    const dfactor = Math.pow(10, decimals) || 0;
-    const prefix = cfg.prefix || '';
     const values = [];
-    return values;
-
-    for (let i = min; i < max; i += step) {
-      values.push(prefix + Math.round(dfactor * i) / dfactor);
-    }
+    data.forEach((cp) => {
+      const m = cp.t as Moment;
+      values.push(m.toDate().toLocaleDateString());
+    });
     return values;
   }
 
   get chartData(): ChartData {
     const data: ChartPoint[] = this.convertRates();
     return {
-      //     labels: this.getLabels(data, {}),
+      labels: this.getLabels(data, {}),
       datasets: this.getDataSets(data),
     };
   }
@@ -364,6 +352,10 @@ export class ChartExampleTimeseries2Component {
       scales: {
         xAxes: [
           {
+            scaleLabel: {
+              display: true,
+              labelString: 'Date',
+            },
             type: 'time',
             distribution: 'series',
             offset: true,
@@ -378,9 +370,7 @@ export class ChartExampleTimeseries2Component {
               maxRotation: 0,
               sampleSize: 100,
             },
-
-            afterBuildTicks: function(scale, ticks: any[]) {
-              console.log('afterBuildTicks', scale, ticks);
+            afterBuildTicks: function(scale, ticks: any) {
               var majorUnit = scale._majorUnit;
               var firstTick = ticks[0];
               var i, ilen, val, tick, currMajor, lastMajor;
@@ -417,7 +407,7 @@ export class ChartExampleTimeseries2Component {
             },
             scaleLabel: {
               display: true,
-              labelString: 'Closing price ($)',
+              labelString: 'Price ($)',
             },
           },
         ],

@@ -42,7 +42,6 @@ export class ChartExampleLine1Component {
   height = 250;
 
   changeData(month: string, data: number[]): void {
-    console.log('changeData', month, data);
     this.dataset = {
       backgroundColor: this.dataset.backgroundColor,
       label: month,
