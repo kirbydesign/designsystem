@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
+import { Params } from '@angular/router';
 
 import { ModalController } from '@kirbydesign/designsystem';
 
 const config = {
   selector: 'cookbook-modal-example-outlet',
-  template: `<button kirby-button (click)="navigateToModalRoute('page1')">Open modal by route</button>
-<button kirby-button kirbyModalRouterLink="page1">Open modal by router link</button>
-<button kirby-button class="deeplink" (click)="navigateToModalRoute(['/examples', 'modal', 'page1'])">Deep link to modal route</button>
-<button kirby-button class="deeplink" [kirbyModalRouterLink]="['/examples', 'modal', 'page1']">Deep link to modal by router link</button>`,
+  template: `<button kirby-button (click)="navigateToModalRoute('page1', {awesomeQueryParam: 'awesome value'})">Open modal by route</button>
+<button kirby-button kirbyModalRouterLink="page1" [kirbyModalQueryParams]="{awesomeQueryParam: 'awesome value'}">Open modal by router link</button>
+<button kirby-button class="deeplink" (click)="navigateToModalRoute(['/examples', 'modal', 'page1'], {queryParams: {awesomeQueryParam: 'awesome value'}})">Deep link to modal route</button>
+<button kirby-button class="deeplink" [kirbyModalRouterLink]="['/examples', 'modal', 'page1']" [kirbyModalQueryParams]="{awesomeQueryParam: 'awesome value'}">Deep link to modal by router link</button>`,
   defaultCodeSnippet: `constructor(private modalController: ModalController) {}
 
 navigateToModalRoute(path: string | string[]) {
@@ -93,7 +94,7 @@ export class ModalExampleOutletComponent {
 
   constructor(private modalController: ModalController) {}
 
-  navigateToModalRoute(path: string | string[]) {
-    this.modalController.navigateToModal(path);
+  navigateToModalRoute(path: string | string[], queryParams: Params | null) {
+    this.modalController.navigateToModal(path, queryParams);
   }
 }

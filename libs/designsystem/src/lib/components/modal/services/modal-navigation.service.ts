@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Route, Router, Routes } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Params, Route, Router, Routes } from '@angular/router';
 import { EMPTY, Observable } from 'rxjs';
-import { filter, first, map, pairwise, startWith } from 'rxjs/operators';
+import { filter, first, map, pairwise, startWith, tap } from 'rxjs/operators';
 
 import { ModalRouteActivation } from './modal.interfaces';
 
@@ -171,7 +171,7 @@ export class ModalNavigationService {
     modalRouteMap: Map<string, string>
   ): Observable<ModalRouteActivation> {
     return navigationEnd$.pipe(
-      filter((navigationEnd) => modalRouteMap.has(navigationEnd.urlAfterRedirects)),
+      filter((navigationEnd) => modalRouteMap.has(navigationEnd.urlAfterRedirects.split('?')[0])),
       map((navigationEnd) => ({
         route: this.getCurrentActivatedRoute(),
         isNewModal: this.isNewModalWindow(navigationEnd),
@@ -212,17 +212,19 @@ export class ModalNavigationService {
     return { activated$: EMPTY, deactivated$: EMPTY };
   }
 
-  async navigateToModal(path: string | string[]): Promise<boolean> {
+  async navigateToModal(path: string | string[], queryParams?: Params | null): Promise<boolean> {
     const commands = Array.isArray(path) ? path : path.split('/');
     const childPath = commands.pop();
     const result = await this.router.navigate([...commands, { outlets: { modal: [childPath] } }], {
+      queryParams,
       relativeTo: this.getCurrentActivatedRoute(),
     });
     return result;
   }
 
-  async navigateWithinModal(relativePath: string): Promise<boolean> {
+  async navigateWithinModal(relativePath: string, queryParams?: Params | null): Promise<boolean> {
     return this.router.navigate([relativePath], {
+      queryParams,
       relativeTo: this.getCurrentActivatedRoute(),
     });
   }
