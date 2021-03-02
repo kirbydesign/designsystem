@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+
+import { InputSize } from '@kirbydesign/designsystem';
 
 const config = {
   selector: 'cookbook-form-field-input-numeric-example',
@@ -38,7 +40,7 @@ const config = {
 export class FormFieldInputNumericExampleComponent {
   template: string = config.template;
   numericFormGroup: FormGroup;
-
+  @Input() size: InputSize;
   constructor() {
     this.numericFormGroup = new FormGroup({
       numericDemo1: new FormControl(),

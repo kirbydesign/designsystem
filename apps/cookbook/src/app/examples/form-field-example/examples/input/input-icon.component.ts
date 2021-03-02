@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+
+import { InputSize } from '@kirbydesign/designsystem';
 
 const config = {
   selector: 'cookbook-form-field-input-icon-example',
@@ -16,7 +18,7 @@ const config = {
 })
 export class FormFieldInputIconExampleComponent {
   template: string = config.template;
-
+  @Input() size: InputSize;
   public onClick($event: any): void {
     console.log('onClick cookbook-form-field-input-icon-example', $event);
   }

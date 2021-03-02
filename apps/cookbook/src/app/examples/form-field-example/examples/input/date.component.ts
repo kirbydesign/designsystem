@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+
+import { InputSize } from '@kirbydesign/designsystem';
 
 const config = {
   selector: 'cookbook-form-field-input-date-example',
@@ -19,7 +21,7 @@ const config = {
 export class FormFieldInputDateExampleComponent {
   template: string = config.template;
   dateFormGroup: FormGroup;
-
+  @Input() size: InputSize;
   constructor() {
     this.dateFormGroup = new FormGroup({
       dateDemo: new FormControl(),

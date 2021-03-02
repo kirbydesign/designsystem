@@ -2,6 +2,8 @@ import { Component, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import moment from 'moment';
 
+import { InputSize } from '@kirbydesign/designsystem';
+
 const config = {
   selector: 'cookbook-form-field-date-input-icon-example',
   template: `
@@ -31,7 +33,7 @@ export class FormFieldDateInputIconExampleComponent implements OnInit {
 
   public dateFormGroup: FormGroup;
   @Input() showCalendar: boolean;
-
+  @Input() size: InputSize;
   public onClick($event: any): void {
     this.showCalendar = !this.showCalendar;
   }
