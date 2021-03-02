@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ShowcaseEvent } from '~/app/shared/showcase-events/showcase-event';
 import { ShowcaseMethod } from '~/app/shared/showcase-methods/showcase-method';
 import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
 
@@ -107,30 +108,22 @@ On native devices this method also ensures the form field is scrolled into the v
     },
   ];
 
-  sharedEvents: ShowcaseProperty[] = [
+  sharedEvents: ShowcaseEvent[] = [
     {
       name: 'blur',
-      defaultValue: undefined,
       description: 'Emitted when the input loses focus.',
-      inputValues: [],
     },
     {
       name: 'change',
-      defaultValue: undefined,
       description: 'Emitted when the input value has changed.',
-      inputValues: [],
     },
     {
       name: 'focus',
-      defaultValue: undefined,
       description: 'Emitted when the input has focus.',
-      inputValues: [],
     },
     {
       name: 'input',
-      defaultValue: undefined,
       description: 'Emitted when a keyboard input ocurred.',
-      inputValues: [],
     },
   ];
 
