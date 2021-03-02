@@ -335,8 +335,7 @@ The Kirby chart components use Highcharts. Note that this is a licensed product.
 
 ## Auto-merge
 
-Adding the `merge:ready` label to a pull-request will cause it to automatically be merged with `master` once it passes all checks (including approval of the pull-request).
-Once auto-merging begins it will automatically be labeled with the `automerge`-label.
+Adding the `merge:ready` label to a pull-request will cause it to automatically be merged with `master` once it passes all checks (including approval of the pull-request). Once auto-merging begins the pull-request will automatically be labeled with the `automerge`-label.
 
 [angular]: https://angular.io
 [jasmine]: https://jasmine.github.io/
