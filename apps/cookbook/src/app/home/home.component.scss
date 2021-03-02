@@ -1,11 +1,5 @@
 @import './libs/designsystem/src/lib/scss/utils';
 
-$page-header-bg: #1c1c1c;
-$page-header-color: #f4f1e8;
-$page-header-height: 7rem;
-$page-gutter: 1rem;
-$page-side-nav-width: 16.625rem;
-
 :host {
   background-color: var(--kirby-background-color);
   display: grid;
@@ -19,7 +13,7 @@ $page-side-nav-width: 16.625rem;
   min-height: 100vh;
 
   @include media('>=large') {
-    grid-template-columns: 20px 260px minmax(0, 1fr) 20px;
+    grid-template-columns: minmax(20px, 1fr) 260px minmax(0, 1020px) minmax(20px, 1fr);
     grid-template-rows: 90px minmax(0, 1fr) 140px;
     grid-template-areas:
       '. header header .'

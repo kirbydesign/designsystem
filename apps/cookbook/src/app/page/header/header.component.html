@@ -97,7 +97,9 @@
           class="header-nav__item-link"
           target="blank"
         >
-          <button kirby-button attentionLevel="4">{{ item.text }}</button>
+          <button kirby-button attentionLevel="4">
+            {{ item.text }}<kirby-icon name="link" size="sm"></kirby-icon>
+          </button>
         </a>
         <a
           *ngIf="item.routerLink"

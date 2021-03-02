@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
 
 interface IHeaderLink {
   text: string;
@@ -9,7 +8,7 @@ interface IHeaderLink {
 }
 
 export const navigationItems: IHeaderLink[] = [
-  { text: 'Components', routerLink: '/home/intro' },
+  { text: 'Introduction', routerLink: '/home/intro' },
   { text: 'Ressources', routerLink: '' },
   { text: 'Changelog', routerLink: '/home/changelog' },
   { text: 'Component Status', routerLink: '/home/component-status' },
@@ -26,14 +25,7 @@ export class HeaderComponent implements OnInit {
   @Input() isMenuOpen = false;
   @Output() menuToggle = new EventEmitter<boolean>();
 
-  constructor(private router: Router) {
-    this.router.events.subscribe((val) => {
-      if (val instanceof NavigationEnd) {
-        // we want the component item to appear active when a specific component route is active also
-        navigationItems[0].showAsActive = val.url.indexOf('showcase') > -1;
-      }
-    });
-  }
+  constructor() {}
 
   navigationItems = navigationItems;
 
