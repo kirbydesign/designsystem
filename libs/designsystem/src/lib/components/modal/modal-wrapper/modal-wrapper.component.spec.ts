@@ -254,7 +254,7 @@ describe('ModalWrapperComponent', () => {
         const embeddedComponentElement = ionContentElement.firstElementChild;
         const embeddedPageProgress = embeddedComponentElement.querySelector('kirby-page-progress');
         const pageProgressAsIonToolbarChild = ionToolbarElement.querySelector(
-          ':scope > kirby-page-progress'
+          'kirby-page-progress'
         );
 
         expect(embeddedPageProgress).toBeNull();
@@ -290,7 +290,7 @@ describe('ModalWrapperComponent', () => {
         const embeddedComponentElement = ionContentElement.firstElementChild;
         const embeddedPageProgress = embeddedComponentElement.querySelector('kirby-page-progress');
         const pageProgressAsIonToolbarChild = ionToolbarElement.querySelector(
-          ':scope > kirby-page-progress'
+          'kirby-page-progress'
         );
         expect(embeddedPageProgress).toBeNull();
         expect(pageProgressAsIonToolbarChild).not.toBeNull();
