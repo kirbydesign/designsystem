@@ -312,9 +312,7 @@ describe('ModalWrapperComponent', () => {
         embeddedComponent.showPageProgress = false;
         spectator.detectChanges();
 
-        pageProgressAsIonToolbarChild = ionToolbarElement.querySelector(
-          ':scope > kirby-page-progress'
-        );
+        pageProgressAsIonToolbarChild = ionToolbarElement.querySelector('kirby-page-progress');
         expect(pageProgressAsIonToolbarChild).toBeNull();
       });
     });
