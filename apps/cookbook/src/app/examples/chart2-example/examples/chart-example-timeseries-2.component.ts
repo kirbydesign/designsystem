@@ -333,7 +333,6 @@ export class ChartExampleTimeseries2Component {
     ds.push({
       label: 'TimeSeries ',
       backgroundColor: 'lightblue',
-      borderColor: 'lightgreen',
       data: data,
       pointRadius: 0,
       fill: false,
@@ -408,6 +407,13 @@ export class ChartExampleTimeseries2Component {
             scaleLabel: {
               display: true,
               labelString: 'Price ($)',
+            },
+            ticks: {
+              min: 0,
+              max: 1,
+
+              // forces step size to be 5 units
+              stepSize: 0.1,
             },
           },
         ],

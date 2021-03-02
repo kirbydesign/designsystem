@@ -35,14 +35,13 @@ export class ChartExampleTimeseries1Component {
       labels: ['day 1', 'day 2', 'day 3', 'day 4'],
       datasets: [
         {
-          label: 'TimeSeriesOptions Chart',
+          label: 'TimeSeries Chart',
           backgroundColor: 'lightblue',
-          borderColor: 'lightgreen',
           data: [
             { t: moment().add('1', 'd'), y: 1 },
             { t: moment().add('2', 'd'), y: 2 },
             { t: moment().add('3', 'd'), y: 3 },
-            { t: moment().add('4', 'd'), y: 4 },
+            { t: moment().add('4', 'd'), y: 2 },
           ],
           pointRadius: 0,
           fill: false,
@@ -70,7 +69,25 @@ export class ChartExampleTimeseries1Component {
               autoSkip: true,
               autoSkipPadding: 75,
               maxRotation: 0,
-              sampleSize: 4,
+              sampleSize: 100,
+            },
+            afterBuildTicks: function(scale, ticks: any) {
+              var majorUnit = scale._majorUnit;
+              var firstTick = ticks[0];
+              var i, ilen, val, tick, currMajor, lastMajor;
+
+              val = moment(ticks[0].value);
+              firstTick.major = true;
+              lastMajor = val.get(majorUnit);
+
+              for (i = 1, ilen = ticks.length; i < ilen; i++) {
+                tick = ticks[i];
+                val = moment(tick.value);
+                currMajor = val.get(majorUnit);
+                tick.major = currMajor !== lastMajor;
+                lastMajor = currMajor;
+              }
+              return ticks;
             },
           },
         ],
@@ -81,12 +98,11 @@ export class ChartExampleTimeseries1Component {
             },
             scaleLabel: {
               display: true,
-              labelString: 'Closing price ($)',
+              labelString: 'Gold prices ($)',
             },
           },
         ],
       },
-
       tooltips: {
         intersect: false,
         mode: 'index',

@@ -8,7 +8,7 @@ const config = {
     type="bar"
     label="Bar"
     [categories]="['mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec', 'jan', 'feb']"   
-    [data]="[0, 1400, 300, 500, 100, 1000, 1100, 450, 1350, 1200, 1250, 600]"
+    [data]="[1000, 1100, 450, 1350, 1200, 10, 1400, 300, 500, 100,  1250, 600]"
     [backgroundColor]="['rgba(255, 99, 132, 0.2)',
           'rgba(54, 162, 235, 0.2)',
           'rgba(255, 206, 86, 0.2)',
@@ -24,7 +24,8 @@ const config = {
           ]"
 
     [borderWidth]="1"
-    [borderColor]="red"      
+    [borderColor]="red"   
+    [height]="height"   
     >
   </kirby-chart-2>
  
@@ -40,5 +41,5 @@ const config = {
 export class ChartExampleBar3Component {
   template: string = config.template;
   codeSnippet: string = config.codeSnippet;
-  height = 150;
+  height = 450;
 }

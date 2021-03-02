@@ -8,7 +8,7 @@ const config = {
   <kirby-chart-2 
     type="line"
     [height]="height"
-    [labels]="Labels"
+    [labels]="labels"
     [datasets]="datasets"   
     [options]="lineOptions"   
     >
@@ -80,13 +80,13 @@ export class ChartExampleLine3Component {
   labels: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
   datasets: ChartDataSets[] = [
     {
-      label: 'My First dataset',
+      label: 'The First dataset',
       backgroundColor: 'red',
       borderColor: 'red',
       data: [65, 59, 80, 81, 56, 55, 40],
     },
     {
-      label: 'My Second dataset',
+      label: 'The Second dataset',
       fill: false,
       backgroundColor: 'lightblue',
       borderColor: 'lightblue',
