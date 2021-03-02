@@ -1,10 +1,7 @@
 import { Component } from '@angular/core';
 import { ShowcaseEvent } from '~/app/shared/showcase-events/showcase-event';
-import {
-  defaultMethodColumns,
-  ShowcaseProperty,
-  ShowcasePropertyColumns,
-} from '~/app/shared/showcase-properties/showcase-property';
+import { ShowcaseMethod } from '~/app/shared/showcase-methods/showcase-method';
+import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
 
 @Component({
   selector: 'cookbook-dropdown-showcase',
@@ -67,25 +64,23 @@ export class DropdownShowcaseComponent {
     },
   ];
 
-  methods: ShowcaseProperty[] = [
+  methods: ShowcaseMethod[] = [
     {
       name: 'toggle()',
       description: 'Toggles the open/closed state of the dropdown.',
-      inputValues: ['() => void'],
+      signature: '() => void',
     },
     {
       name: 'open()',
       description: 'Opens the dropdown.',
-      inputValues: ['() => void'],
+      signature: '() => void',
     },
     {
       name: 'close()',
       description: 'Closes the dropdown.',
-      inputValues: ['() => void'],
+      signature: '() => void',
     },
   ];
-
-  methodColumns: ShowcasePropertyColumns = defaultMethodColumns;
 
   events: ShowcaseEvent[] = [
     {

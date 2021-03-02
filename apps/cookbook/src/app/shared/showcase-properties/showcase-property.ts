@@ -12,9 +12,3 @@ export interface ShowcasePropertyColumns {
   Type?: string;
   Default?: string;
 }
-
-export const defaultMethodColumns: ShowcasePropertyColumns = Object.freeze({
-  Name: 'Name',
-  Description: 'Description',
-  Type: 'Signature',
-});

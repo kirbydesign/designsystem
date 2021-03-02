@@ -1,10 +1,6 @@
 import { Component } from '@angular/core';
-
-import {
-  defaultMethodColumns,
-  ShowcaseProperty,
-  ShowcasePropertyColumns,
-} from './../../shared/showcase-properties/showcase-property';
+import { ShowcaseMethod } from '~/app/shared/showcase-methods/showcase-method';
+import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
 
 declare var require: any;
 
@@ -51,14 +47,12 @@ export class ReorderListShowcaseComponent {
     },
   ];
 
-  methods: ShowcaseProperty[] = [
+  methods: ShowcaseMethod[] = [
     {
       name: 'complete()',
       description:
         'Completes the reorder operation. Must be called by the (itemReorder | subItemReorder) event. If a list of items is passed, the list will be reordered and returned in the proper order. If no parameters are passed or if true is passed in, the reorder will complete and the item will remain in the position it was dragged to. If an empty object is passed, the reorder will complete and the item will bounce back to its original position.',
-      inputValues: ['complete(listOrReorder?: any | any[] | undefined) => Promise<any>'],
+      signature: 'complete(listOrReorder?: any | any[] | undefined) => Promise<any>',
     },
   ];
-
-  methodColumns: ShowcasePropertyColumns = defaultMethodColumns;
 }
