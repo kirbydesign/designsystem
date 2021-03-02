@@ -10,7 +10,10 @@ describe('InfiniteScrollDirective', () => {
   let nativeElement: SpyObject<any>;
   let document: SpyObject<Document>;
 
-  const createDirective = (scrollPercentage: number): InfiniteScrollDirective => {
+  const createDirective = (
+    scrollPercentage: number,
+    runNgAfterViewInit = true
+  ): InfiniteScrollDirective => {
     const height = 800;
     const bottom = height * (1 - scrollPercentage);
     const viewHeight = 0;
@@ -33,7 +36,7 @@ describe('InfiniteScrollDirective', () => {
       mockNgZone
     );
     spyOn(directive.scrollEnd, 'emit');
-    directive.ngAfterViewInit();
+    if (runNgAfterViewInit) directive.ngAfterViewInit();
 
     return directive;
   };
@@ -67,6 +70,19 @@ describe('InfiniteScrollDirective', () => {
       tick(INFINITE_SCROLL_DEBOUNCE);
 
       expect(directive.scrollEnd.emit).toHaveBeenCalledTimes(1);
+    }));
+
+    it('should emit event if initalized as disabled and then enabled while more than 80% of the element has been scrolled', fakeAsync(() => {
+      const directive = createDirective(81, false);
+      directive.disabled = true;
+      directive.ngAfterViewInit();
+
+      directive.disabled = false;
+      directive.onScroll();
+      // we need to wait the debounce time.
+      tick(INFINITE_SCROLL_DEBOUNCE);
+
+      expect(directive.scrollEnd.emit).toHaveBeenCalled();
     }));
 
     it('should not emit event when less then 80% of the element has been scrolled', fakeAsync(() => {
