@@ -5,7 +5,8 @@
     "@angular/cdk": "8.2.3",
     "@ionic/angular": "5.5.2",
     "highcharts": "8.0.4",
-    "moment": "2.24.0"
+    "moment": "2.24.0",
+    "@fontsource/roboto": "4.2.1"
   },
   "peerDependencies": {
     "@angular/common": ">=8.2.7",
