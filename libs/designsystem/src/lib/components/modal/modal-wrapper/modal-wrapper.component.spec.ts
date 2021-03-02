@@ -306,15 +306,15 @@ describe('ModalWrapperComponent', () => {
         await TestHelper.waitForResizeObserver();
 
         const ionToolbarElement = spectator.query('ion-toolbar');
-        const pageProgressAsIonToolbarChild = ionToolbarElement.querySelector(
-          'kirby-page-progress'
-        );
+        let pageProgressAsIonToolbarChild = ionToolbarElement.querySelector('kirby-page-progress');
         expect(pageProgressAsIonToolbarChild).not.toBeNull();
 
         embeddedComponent.showPageProgress = false;
         spectator.detectChanges();
 
-        pageProgressAsIonToolbarChild = ionToolbarElement.querySelector(':scope > kirby-page-progress');
+        pageProgressAsIonToolbarChild = ionToolbarElement.querySelector(
+          ':scope > kirby-page-progress'
+        );
         expect(pageProgressAsIonToolbarChild).toBeNull();
       });
     });
