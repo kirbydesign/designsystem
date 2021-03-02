@@ -5,13 +5,15 @@
     <th *ngIf="columns.Type">{{ columns.Type }}</th>
   </thead>
   <tbody>
-    <tr *ngFor="let e of events">
+    <tr *ngFor="let event of events">
       <td *ngIf="columns.Name">
-        <code>{{ e.name }}</code>
+        <code>{{ event.name }}</code>
       </td>
-      <td *ngIf="columns.Description" class="description">{{ e.description }}</td>
+      <td *ngIf="columns.Description" class="description">{{ event.description }}</td>
       <td *ngIf="columns.Type">
-        <code>{{ e.signature }}</code>
+        <ng-container *ngIf="event.signature">
+          <code>{{ event.signature }}</code>
+        </ng-container>
       </td>
     </tr>
   </tbody>
