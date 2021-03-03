@@ -1,13 +1,13 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-interface IHeaderLink {
+interface HeaderLink {
   text: string;
   routerLink?: string;
   externalUrl?: string;
   showAsActive?: boolean;
 }
 
-export const navigationItems: IHeaderLink[] = [
+export const navigationItems: HeaderLink[] = [
   { text: 'Introduction', routerLink: '/home/intro' },
   { text: 'Ressources', routerLink: '' },
   { text: 'Changelog', routerLink: '/home/changelog' },
@@ -21,19 +21,15 @@ export const navigationItems: IHeaderLink[] = [
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   @Input() isMenuOpen = false;
   @Output() menuToggle = new EventEmitter<boolean>();
 
-  constructor() {}
-
   navigationItems = navigationItems;
 
-  get icon(): string {
+  get menuIcon(): string {
     return this.isMenuOpen ? 'close' : 'more';
   }
-
-  ngOnInit(): void {}
 
   onToggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;

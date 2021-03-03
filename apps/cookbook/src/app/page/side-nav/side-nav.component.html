@@ -1,28 +1,25 @@
-<section class="side-nav" [ngClass]="{ 'is-open': isMenuOpen }">
-  <nav class="page-links">
+<section [class.is-open]="isMenuOpen">
+  <nav>
     <ng-container *ngFor="let item of navigationLinks">
       <a
         *ngIf="item.routerLink"
         [routerLink]="item.routerLink"
-        [routerLinkActive]="'is-selected'"
+        routerLinkActive="is-selected"
         [routerLinkActiveOptions]="{ exact: false }"
-        class="side-nav__item"
         (click)="onToggleMenu()"
         >{{ item.text }}
       </a>
-      <a *ngIf="item.externalUrl" [href]="item.externalUrl" class="side-nav__item" target="blank"
-        >{{ item.text }}
-      </a>
+      <a *ngIf="item.externalUrl" [href]="item.externalUrl" target="blank">{{ item.text }}</a>
     </ng-container>
   </nav>
-  <div class="filter-container">
+  <div class="filter">
     <kirby-form-field>
       <input
         kirby-input
-        [size]="'md'"
+        size="md"
         placeholder="Filter components..."
         (input)="onFilterChange($event.target.value)"
-        (keydown)="onFilterKeyDown($event)"
+        (keydown.ArrowDown)="onFilterKeyDown($event)"
         [ngModel]="filter"
       />
     </kirby-form-field>
@@ -38,13 +35,15 @@
     </button>
   </div>
 
-  <kirby-card (keydown)="onLinksKeyDown($event)">
+  <kirby-card
+    (keydown.ArrowUp)="onLinksKeyDown($event)"
+    (keydown.ArrowDown)="onLinksKeyDown($event)"
+  >
     <a
       *ngFor="let item of filteredShowcaseRoutes"
       [routerLink]="item.path"
       [class]="{ 'is-selected': item.active, 'is-hidden': item.hidden }"
-      class="side-nav__item"
-      (click)="onComponentClick(item)"
+      (click)="onComponentLinkClick(item.path)"
       #componentLink
       >{{ item.name }}
     </a>

@@ -1,17 +1,19 @@
 @import './libs/designsystem/src/lib/scss/utils';
 
+$icon-size: size('s');
+
 .show-case {
   margin-bottom: 2rem;
 
   h1 {
     text-transform: uppercase;
-    font-size: 40px;
+    font-size: font-size('xxl');
     color: get-color('dark');
-    font-weight: 300;
+    font-weight: font-weight('light');
     position: relative;
-    padding-bottom: 20px;
+    padding-bottom: 5 * size('xxxs');
     border-bottom: solid 1px get-color('medium');
-    margin-bottom: 10px;
+    margin-bottom: size('xs');
   }
 }
 
@@ -28,8 +30,10 @@
 .cta-links {
   a {
     display: block;
+    margin-bottom: size('xxs');
     @include media('>=large') {
       display: inline-block;
+      margin-bottom: 0;
     }
   }
 }
@@ -39,13 +43,13 @@ h4 {
 }
 
 .icon {
-  width: 14px;
-  height: 14px;
-  margin-right: 4px;
-  margin-left: 20px;
+  width: $icon-size;
+  height: $icon-size;
+  margin-right: size('xxs');
+  margin-left: size('m');
   color: currentColor;
   fill: currentColor;
-  vertical-align: baseline;
+  vertical-align: bottom;
 }
 
 ::ng-deep .cookbook-properties {
@@ -65,8 +69,7 @@ h4 {
   td,
   th {
     border: 1px solid get-color('medium');
-    border-width: 1px 1px 1px 1px;
-    padding: 0.5rem 1rem;
+    padding: size('xs');
   }
 }
 

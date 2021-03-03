@@ -1,25 +1,33 @@
 @import './libs/designsystem/src/lib/scss/utils';
 
+$header-height-mobile: size('xxxl');
+$header-height-desktop: 2 * size('xxl');
+$footer-height: 3 * size('xxl');
+$sidebar-width: 5 * size('xxl');
+$content-max-width: 1020px;
+$mobile-gutter: size('s');
+$desktop-gutter: minmax(size('m'), 1fr);
+
 :host {
-  background-color: var(--kirby-background-color);
+  background-color: get-color('background-color');
   display: grid;
-  grid-template-columns: 15px minmax(0, 1fr) 15px;
-  grid-template-rows: 58px minmax(0, 1fr) 140px;
+  grid-template-columns: $mobile-gutter minmax(0, 1fr) $mobile-gutter;
+  grid-template-rows: $header-height-mobile minmax(0, 1fr) $footer-height;
   grid-template-areas:
     '. header .'
     '. main .'
     'footer footer footer';
-  gap: 20px;
+  gap: size('m');
   min-height: 100vh;
 
   @include media('>=large') {
-    grid-template-columns: minmax(20px, 1fr) 260px minmax(0, 1020px) minmax(20px, 1fr);
-    grid-template-rows: 90px minmax(0, 1fr) 140px;
+    grid-template-columns: $desktop-gutter $sidebar-width minmax(0, $content-max-width) $desktop-gutter;
+    grid-template-rows: $header-height-desktop minmax(0, 1fr) $footer-height;
     grid-template-areas:
       '. header header .'
       '. sidebar main .'
       'footer footer footer footer';
-    gap: 40px;
+    gap: size('xl');
   }
 }
 

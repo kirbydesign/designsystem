@@ -2,22 +2,20 @@
   <h1>{{ exampleComponentName }}</h1>
   <section class="show-case-actions">
     <div>
-      <a *ngIf="propertiesTable" href="#properties" (click)="onPropertiesClick($event)"
-        >Properties</a
-      >
+      <a *ngIf="propertiesTable" href="#properties" (click)="onPropertiesClick()">Properties</a>
     </div>
-    <div class="cta-links" *ngIf="areCTAlinkShown">
+    <div class="cta-links" *ngIf="showCallToActionLinks">
       <a [routerLink]="exampleComponentPopOutUrl">
         <svg class="icon">
           <use xlink:href="../../assets/icons/icon-sprite.svg#icon-enlarge2"></use>
         </svg>
-        Pop out
+        <span>Pop out</span>
       </a>
       <a href="{{ exampleComponentGitUrl }}">
         <svg class="icon">
           <use xlink:href="../../assets/icons/icon-sprite.svg#icon-github"></use>
         </svg>
-        Example on github
+        <span>Example on github</span>
       </a>
     </div>
   </section>

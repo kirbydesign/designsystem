@@ -1,5 +1,6 @@
 import {
   Component,
+  ElementRef,
   EventEmitter,
   Input,
   OnInit,
@@ -8,15 +9,17 @@ import {
   ViewChildren,
 } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
+
+import { kebabToTitleCase } from '@kirbydesign/designsystem';
 
 import { routes } from '../../showcase/showcase.routes';
 import { navigationItems } from '../header/header.component';
 
 const KEY_DOWN = 'ArrowDown';
-const KEY_UP = 'ArrowUp';
 const HIDDEN_CLASS = 'is-hidden';
 
-interface ISideNavLink {
+interface SideNavLink {
   path: string;
   name: string;
   active: boolean;
@@ -29,8 +32,8 @@ interface ISideNavLink {
   styleUrls: ['./side-nav.component.scss'],
 })
 export class SideNavComponent implements OnInit {
-  private allShowcaseRoutes: ISideNavLink[];
-  filteredShowcaseRoutes: ISideNavLink[];
+  private allShowcaseRoutes: SideNavLink[];
+  filteredShowcaseRoutes: SideNavLink[];
   filter: string = '';
 
   @Output() menuToggle = new EventEmitter<boolean>();
@@ -43,78 +46,75 @@ export class SideNavComponent implements OnInit {
   ngOnInit() {
     this.mapRoutes();
     this.filteredShowcaseRoutes = this.allShowcaseRoutes;
-    this.router.events.subscribe((val) => {
-      if (val instanceof NavigationEnd) {
-        if (val.url.indexOf('showcase') === -1) {
-          // reset component links
-          this.filterComponents();
+
+    this.router.events
+      .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
+      .subscribe((val) => {
+        if (val.urlAfterRedirects.indexOf('/showcase/') === -1) {
+          this.applyComponentFilter('');
         }
-      }
-    });
+      });
   }
 
   private mapRoutes() {
     const routesWithPath = routes[0].children.filter((r) => r.path);
-    routesWithPath.sort((a, b) => {
-      return a.path < b.path ? -1 : a.path > b.path ? 1 : 0;
-    });
+    routesWithPath.sort((a, b) => this.sortByPath(a.path, b.path));
     this.allShowcaseRoutes = routesWithPath.map((route) => {
       return {
         path: `showcase/${route.path}`,
-        name: this.convertKebabToTitleCase(route.path),
+        name: kebabToTitleCase(route.path),
         active: this.router.url.indexOf(route.path) > -1,
         hidden: false,
       };
     });
   }
 
-  @ViewChildren('componentLink') componentLinks: QueryList<any>;
+  private sortByPath(aPath: string, bPath: string): number {
+    return aPath < bPath ? -1 : aPath > bPath ? 1 : 0;
+  }
 
-  onFilterChange(event) {
-    this.filter = event;
-    this.filterComponents();
+  @ViewChildren('componentLink') componentLinks: QueryList<ElementRef<HTMLAnchorElement>>;
+
+  onFilterChange(value: string) {
+    this.applyComponentFilter(value);
   }
 
   onFilterKeyDown(event: KeyboardEvent) {
-    if (event.key === KEY_DOWN) {
-      event.preventDefault();
-      const links = this.componentLinks.toArray();
-      for (let i = 0; i < links.length; i++) {
-        const element = links[i].nativeElement;
-        if (!element.classList.contains(HIDDEN_CLASS)) {
-          element.focus();
-          break;
-        }
+    event.preventDefault();
+    const links = this.componentLinks.toArray();
+    for (let i = 0; i < links.length; i++) {
+      const element = links[i].nativeElement;
+      if (!element.classList.contains(HIDDEN_CLASS)) {
+        element.focus();
+        break;
       }
     }
   }
 
   onLinksKeyDown(event: KeyboardEvent) {
-    if (event.key === KEY_DOWN || event.key === KEY_UP) {
-      event.preventDefault();
-    } else {
-      return;
-    }
-
-    const visibleLinks = this.componentLinks.filter((link) => {
-      return !link.nativeElement.classList.contains(HIDDEN_CLASS);
+    event.preventDefault();
+    const listElements: HTMLAnchorElement[] = this.componentLinks.map((link) => {
+      return link.nativeElement;
+    });
+    const visibleLinks = listElements.filter((link) => {
+      return !link.classList.contains(HIDDEN_CLASS);
     });
     const currentlyFocused = visibleLinks.findIndex((link) => {
-      return link.nativeElement === document.activeElement;
+      return link === document.activeElement;
     });
     if (currentlyFocused === -1) {
       return;
     }
 
     if (event.key === KEY_DOWN) {
-      visibleLinks[Math.min(currentlyFocused + 1, visibleLinks.length - 1)].nativeElement.focus();
+      visibleLinks[Math.min(currentlyFocused + 1, visibleLinks.length - 1)].focus();
     } else {
-      visibleLinks[Math.max(currentlyFocused - 1, 0)].nativeElement.focus();
+      visibleLinks[Math.max(currentlyFocused - 1, 0)].focus();
     }
   }
 
-  onComponentClick(event) {
-    this.setRouteActive(event.path);
+  onComponentLinkClick(path: string) {
+    this.setRouteActive(path);
     this.onToggleMenu();
   }
 
@@ -123,16 +123,8 @@ export class SideNavComponent implements OnInit {
     this.menuToggle.emit(this.isMenuOpen);
   }
 
-  private convertKebabToTitleCase(kebab) {
-    const words = kebab.split('-');
-    const titleWords = words.map((word: string) => {
-      return word[0].toUpperCase() + word.slice(1);
-    });
-
-    return titleWords.join(' ');
-  }
-
-  private filterComponents(): void {
+  private applyComponentFilter(stringToMatch: string): void {
+    this.filter = stringToMatch;
     if (this.filter.length === 0) {
       this.filteredShowcaseRoutes = this.allShowcaseRoutes.map((link) => {
         return { ...link, hidden: false, active: this.router.url.indexOf(link.path) > -1 };

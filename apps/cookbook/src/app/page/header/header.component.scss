@@ -1,19 +1,23 @@
 @import './libs/designsystem/src/lib/scss/utils';
 
+$logo-size-mobile: size('xl');
+$logo-size-desktop: 2 * size('l');
+$text-delay: 500ms;
+$large-rect-delay: 900ms;
+$medium-rect-delay: 1200ms;
+$small-rect-delay: 1400ms;
+
 :host {
-  display: block;
+  display: flex;
   grid-area: header;
+  align-items: flex-end;
 }
 
 header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin: 0 auto;
-  padding-top: 10px;
-  @include media('>=large') {
-    padding-top: 20px;
-  }
+  align-items: flex-start;
+  width: 100%;
 }
 
 .menu-button {
@@ -22,11 +26,13 @@ header {
   }
 }
 
-.header-nav {
+nav {
   display: none;
+
   @include media('>=large') {
     display: block;
   }
+
   ul {
     display: flex;
     list-style: none;
@@ -39,13 +45,15 @@ header {
   }
 }
 
-.kirby-logo {
-  width: 40px;
-  height: 40px;
+.logo {
+  width: $logo-size-mobile;
+  height: $logo-size-mobile;
+
   @include media('>=large') {
-    width: 70px;
-    height: 70px;
+    width: $logo-size-desktop;
+    height: $logo-size-desktop;
   }
+
   svg {
     height: 100%;
     width: 100%;
@@ -53,23 +61,23 @@ header {
 }
 
 .logo {
-  &-text {
+  .text {
     opacity: 0;
-    animation: enter 450ms ease-in-out 500ms forwards;
+    animation: enter get-transition-duration('long') ease-in-out $text-delay forwards;
   }
-  &-large-rect {
+  .large-rect {
     opacity: 0;
-    animation: enter 450ms ease-in-out 900ms forwards;
+    animation: enter get-transition-duration('long') ease-in-out $large-rect-delay forwards;
   }
-  &-medium-rect {
+  .medium-rect {
     opacity: 0;
     transform-origin: center top;
-    animation: enter-pop 300ms ease-in-out 1200ms forwards;
+    animation: enter-pop get-transition-duration('short') ease-in-out $medium-rect-delay forwards;
   }
-  &-small-rect {
+  .small-rect {
     opacity: 0;
     transform-origin: center;
-    animation: enter-pop 300ms ease-in-out 1400ms forwards;
+    animation: enter-pop get-transition-duration('short') ease-in-out $small-rect-delay forwards;
   }
 }
 

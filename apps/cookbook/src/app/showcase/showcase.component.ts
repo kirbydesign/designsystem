@@ -16,7 +16,7 @@ export class ShowcaseComponent implements OnDestroy {
   private routerEventsSubscription: Subscription;
   private gitUrl =
     'https://github.com/kirbydesign/designsystem/tree/master/apps/cookbook/src/app/examples/';
-  areCTAlinkShown = true;
+  showCallToActionLinks = true;
 
   constructor(private router: Router) {
     this.onNavigationEnd();
@@ -26,9 +26,9 @@ export class ShowcaseComponent implements OnDestroy {
     this.routerEventsSubscription.unsubscribe();
   }
 
-  onPropertiesClick(event) {
-    event.preventDefault();
-    this.propertiesTable.scrollIntoView();
+  onPropertiesClick() {
+    this.propertiesTable.scrollIntoView({ behavior: 'smooth' });
+    return false;
   }
 
   private onNavigationEnd() {
@@ -42,7 +42,7 @@ export class ShowcaseComponent implements OnDestroy {
     this.exampleComponentPopOutUrl = ['/', 'examples', exampleComponentUrlSegment];
     this.exampleComponentGitUrl = this.gitUrl + exampleComponentUrlSegment + '-example';
     this.exampleComponentName = this.replaceHyphens(exampleComponentUrlSegment);
-    this.areCTAlinkShown = this.exampleComponentName !== 'colors';
+    this.showCallToActionLinks = this.exampleComponentName !== 'colors';
     window.setTimeout(() => {
       this.propertiesTable = document.getElementsByClassName('cookbook-properties')[0];
     }, 1); // this queues the query to ensure DOM has been rendered

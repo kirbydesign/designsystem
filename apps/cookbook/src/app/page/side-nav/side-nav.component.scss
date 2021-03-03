@@ -1,9 +1,9 @@
 @import './libs/designsystem/src/lib/scss/utils';
 
-$page-header-bg: #1c1c1c;
-$page-header-color: #f4f1e8;
-$page-header-height: 7rem;
-$page-gutter: 1rem;
+$list-margin: size('s');
+$link-padding: size('xxs') 20px;
+$link-border-radius: 3px;
+$menu-padding-mobile: size('m');
 
 :host {
   @include media('>=large') {
@@ -11,66 +11,73 @@ $page-gutter: 1rem;
   }
 }
 
-.page-links {
+nav {
   @include media('>=large') {
     display: none;
   }
 }
 
-.side-nav {
+section {
   display: none;
   position: absolute;
   min-height: 100vh;
   top: 0;
-  z-index: 900;
+  z-index: z('modal');
   background-color: get-color('white');
-  padding: 0 20px;
+  padding: 0 $menu-padding-mobile;
   box-shadow: get-elevation(4);
+
   @include media('>=large') {
     box-shadow: none;
     display: block;
     position: static;
     background-color: transparent;
     padding: 0;
-    min-height: none;
+    min-height: unset;
   }
+
   &.is-open {
     display: block;
   }
 
-  &__item {
+  a {
     text-decoration: none;
     color: get-text-color('semi-dark');
     display: block;
-    padding: 8px 20px;
-    margin: 0 2px;
-    border-radius: 3px;
+    padding: $link-padding;
+    margin: 0 size('xxxxs');
+    border-radius: $link-border-radius;
+
     &:hover,
     &:focus {
       color: get-text-color('black');
       background-color: get-color('light');
     }
+
     &.is-selected {
       color: get-text-color('black');
       font-weight: bold;
       background-color: get-color('semi-light');
     }
+
     &.is-hidden {
       opacity: 0;
       max-height: 0;
       padding: 0 0;
       pointer-events: none;
     }
+
     &:first-child {
-      margin-top: 15px;
+      margin-top: $list-margin;
     }
+
     &:last-child {
-      margin-bottom: 15px;
+      margin-bottom: $list-margin;
     }
   }
 }
 
-.filter-container {
+.filter {
   position: relative;
 }
 
