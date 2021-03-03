@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { ShowcaseEvent } from '~/app/shared/showcase-events/showcase-event';
 import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
 
 declare var require: any;
@@ -25,16 +25,16 @@ export class SlidesShowcaseComponent {
     },
     {
       name: 'slides',
-      description: 'Objectarray holding the data to be shown',
+      description: 'Object array holding the data to be shown',
       defaultValue: '',
       inputValues: ['DataArray'],
     },
   ];
-  events: ShowcaseProperty[] = [
+  events: ShowcaseEvent[] = [
     {
       name: 'selectedSlide',
       description: 'Emits active slide',
-      inputValues: ['func'],
+      signature: 'func',
     },
   ];
 }
