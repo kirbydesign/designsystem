@@ -19,6 +19,9 @@ export class ModalExampleConfigurationComponent {
   @Input() showDummyKeyboard: boolean;
   @Output() showDummyKeyboardChange = new EventEmitter<boolean>();
 
+  @Input() showPageProgress: boolean;
+  @Output() showPageProgressChange = new EventEmitter<boolean>();
+
   @Input() showFooter: boolean;
   @Output() showFooterChange = new EventEmitter<boolean>();
 
@@ -60,6 +63,11 @@ export class ModalExampleConfigurationComponent {
     if (this.showDummyKeyboard !== undefined) {
       this.showDummyKeyboard = show;
     }
+  }
+
+  toggleShowPageProgress(show: boolean) {
+    this.showPageProgress = show;
+    this.showPageProgressChange.emit(this.showPageProgress);
   }
 
   toggleShowFooter(show: boolean) {
