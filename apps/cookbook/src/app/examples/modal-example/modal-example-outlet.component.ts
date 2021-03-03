@@ -94,7 +94,7 @@ export class ModalExampleOutletComponent {
 
   constructor(private modalController: ModalController) {}
 
-  navigateToModalRoute(path: string | string[], queryParams: Params | null) {
+  navigateToModalRoute(path: string | string[], queryParams?: Params) {
     this.modalController.navigateToModal(path, queryParams);
   }
 }
