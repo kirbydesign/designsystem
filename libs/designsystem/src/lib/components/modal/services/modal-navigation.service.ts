@@ -212,7 +212,7 @@ export class ModalNavigationService {
     return { activated$: EMPTY, deactivated$: EMPTY };
   }
 
-  async navigateToModal(path: string | string[], queryParams?: Params | null): Promise<boolean> {
+  async navigateToModal(path: string | string[], queryParams?: Params): Promise<boolean> {
     const commands = Array.isArray(path) ? path : path.split('/');
     const childPath = commands.pop();
     const result = await this.router.navigate([...commands, { outlets: { modal: [childPath] } }], {
