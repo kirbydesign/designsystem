@@ -80,17 +80,11 @@ export class ModalController implements OnDestroy {
     await this.showAndRegisterOverlay(() => this.modalHelper.showModalWindow(config), onClose);
   }
 
-  public async navigateToModal(
-    path: string | string[],
-    queryParams?: Params
-  ): Promise<boolean> {
+  public async navigateToModal(path: string | string[], queryParams?: Params): Promise<boolean> {
     return this.modalNavigationService.navigateToModal(path, queryParams);
   }
 
-  public async navigateWithinModal(
-    relativePath: string,
-    queryParams?: Params
-  ): Promise<boolean> {
+  public async navigateWithinModal(relativePath: string, queryParams?: Params): Promise<boolean> {
     return this.modalNavigationService.navigateWithinModal(relativePath, queryParams);
   }
 
