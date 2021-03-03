@@ -7,17 +7,7 @@ import { ShowcaseProperty } from './showcase-property';
 @Component({
   selector: 'cookbook-showcase-properties',
   templateUrl: './showcase-properties.component.html',
-  styles: [
-    `
-      :host {
-        display: block;
-      }
-
-      .description {
-        white-space: pre-line;
-      }
-    `,
-  ],
+  styleUrls: ['./showcase-properties.component.scss'],
 })
 export class ShowcasePropertiesComponent {
   @Input() properties: ShowcaseProperty[];

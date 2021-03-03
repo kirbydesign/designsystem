@@ -1,7 +1,10 @@
 @import './libs/designsystem/src/lib/scss/utils';
 
-.page-example {
-  display: flex;
-  margin-top: size('xl');
+:host {
+  display: block;
   margin-bottom: size('xl');
+}
+
+.description {
+  white-space: pre-line;
 }
