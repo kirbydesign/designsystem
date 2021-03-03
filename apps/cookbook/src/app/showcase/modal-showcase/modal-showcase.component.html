@@ -93,9 +93,9 @@
   These kind of routes can be navigated to by using a <code>kirbyModalRouterLink</code>, and query
   parameters can be passed by using <code>[kirbyModalQueryParams]</code> <br /><br />
   <em
-    ><strong>*Please note:</strong> <code>kirbyModalQueryParams</code> input needs to be passed as
-    an object, otherwise input will be ignored. Therefore always wrap
-    <code>kirbyModalQueryParams</code> inside of square brackets</em
+    ><strong>*Please note:</strong> Always use Angular's "box" syntax for binding to the
+    <code>[kirbyModalQueryParams]</code> otherwise it will be treated as a string and not an object
+    literal</em
   >
   <cookbook-code-viewer
     [html]="outletExample.routerLinkForModalOutletCodeSnippet"
