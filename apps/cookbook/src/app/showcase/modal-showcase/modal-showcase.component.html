@@ -30,6 +30,10 @@
   </li>
   <li>Support for handling the <a href="#" (click)="scrollTo(closeEvent)">close event</a></li>
   <li>
+    Support for confirmation before close / dismiss
+    <a href="#" (click)="scrollTo(confirmClose)">Confirm close / dismiss</a>
+  </li>
+  <li>
     Support for <a href="#" (click)="scrollTo(returnData)">returning data</a> from the modal to the
     parent/caller component
   </li>
@@ -197,6 +201,13 @@
   just when the modal starts closing but before its actually done:
 </p>
 <cookbook-code-viewer [ts]="defaultExample.willCloseCodeSnippet"></cookbook-code-viewer>
+
+<h2 #confirmClose>Confirm close / dismiss <em>(optional)</em>:</h2>
+<p>
+  If you want to have confirmation on close / dismiss, you can listen on the
+  <em>willClose</em> event:
+  <cookbook-code-viewer [ts]="defaultExample.confirmCloseModalCodeSnippet"></cookbook-code-viewer>
+</p>
 
 <h2 #scrolling>Scrolling</h2>
 <p>
