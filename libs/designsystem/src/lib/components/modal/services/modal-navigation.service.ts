@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Params, Route, Router, Routes } from '@angular/router';
 import { EMPTY, Observable } from 'rxjs';
-import { filter, first, map, pairwise, startWith, tap } from 'rxjs/operators';
+import { filter, first, map, pairwise, startWith } from 'rxjs/operators';
 
 import { ModalRouteActivation } from './modal.interfaces';
 
