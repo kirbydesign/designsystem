@@ -89,7 +89,7 @@ export class ModalController implements OnDestroy {
 
   public async navigateWithinModal(
     relativePath: string,
-    queryParams?: Params | null
+    queryParams?: Params
   ): Promise<boolean> {
     return this.modalNavigationService.navigateWithinModal(relativePath, queryParams);
   }
