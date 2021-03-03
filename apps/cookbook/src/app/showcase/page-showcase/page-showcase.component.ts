@@ -6,6 +6,7 @@ import { PageFitHeadingExampleComponent } from '~/app/examples/page-example/fit-
 import { PageFixedFooterTabExampleComponent } from '~/app/examples/page-example/fixed-footer-tabs/tab/fixed-footer-tab-example.component';
 import { PageFixedTitleAndActionsExampleComponent } from '~/app/examples/page-example/fixed-title-and-actions/page-fixed-title-and-actions-example.component';
 import { PageSimpleExampleComponent } from '~/app/examples/page-example/simple/page-simple-example.component';
+import { ShowcaseEvent } from '~/app/shared/showcase-events/showcase-event';
 import { ShowcaseMemberColumns } from '~/app/shared/showcase-member/showcase-member';
 
 import { ShowcaseProperty } from './../../shared/showcase-properties/showcase-property';
@@ -65,16 +66,16 @@ export class PageShowcaseComponent {
       inputValues: ['true', 'false'],
     },
   ];
-  events: ShowcaseProperty[] = [
+  events: ShowcaseEvent[] = [
     {
       name: 'enter',
       description: 'Emitted when the page has animated into view',
-      inputValues: ['func'],
+      signature: 'func',
     },
     {
       name: 'leave',
       description: 'Emitted when leaving the page',
-      inputValues: ['func'],
+      signature: 'func',
     },
   ];
 
@@ -105,6 +106,7 @@ export class PageShowcaseComponent {
     Name: 'Name',
     Description: 'Description',
     Type: '(Optional) Configuration',
+    Default: 'Default',
   };
 
   directives: ShowcaseProperty[] = [
