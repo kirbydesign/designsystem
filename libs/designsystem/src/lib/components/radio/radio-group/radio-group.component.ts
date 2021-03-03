@@ -143,12 +143,6 @@ export class RadioGroupComponent implements AfterContentInit, ControlValueAccess
     this.disabled = isDisabled;
   }
 
-  setErrorState(hasError: boolean) {
-    this.hasError = hasError;
-  }
-
-  // TODO: Create clearRadioValues()
-  // TODO: Handle scenario where form is cleared. This should remove any selected state from radio group
   writeValue(value: any): void {
     this.value = value;
     this.changeDetectionRef.markForCheck();
