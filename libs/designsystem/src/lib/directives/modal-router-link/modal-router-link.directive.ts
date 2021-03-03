@@ -11,7 +11,7 @@ export class ModalRouterLinkDirective {
 
   @Input('kirbyModalRouterLink') path: string | string[];
   // tslint:disable-next-line:no-input-rename
-  @Input('kirbyModalQueryParams') queryParams: Params | null;
+  @Input('kirbyModalQueryParams') queryParams?: Params;
 
   @HostListener('click')
   onClick(): boolean {
