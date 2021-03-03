@@ -3,3 +3,9 @@ export interface ShowcaseEvent {
   description?: string;
   signature?: string;
 }
+
+export interface ShowcaseEventColumns {
+  Name: string;
+  Description?: string;
+  Type?: string;
+}

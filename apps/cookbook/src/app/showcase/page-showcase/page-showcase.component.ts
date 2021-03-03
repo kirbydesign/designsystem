@@ -7,9 +7,10 @@ import { PageFixedFooterTabExampleComponent } from '~/app/examples/page-example/
 import { PageFixedTitleAndActionsExampleComponent } from '~/app/examples/page-example/fixed-title-and-actions/page-fixed-title-and-actions-example.component';
 import { PageSimpleExampleComponent } from '~/app/examples/page-example/simple/page-simple-example.component';
 import { ShowcaseEvent } from '~/app/shared/showcase-events/showcase-event';
-import { ShowcaseMemberColumns } from '~/app/shared/showcase-member/showcase-member';
-
-import { ShowcaseProperty } from './../../shared/showcase-properties/showcase-property';
+import {
+  ShowcaseProperty,
+  ShowcasePropertyColumns,
+} from '~/app/shared/showcase-properties/showcase-property';
 
 @Component({
   selector: 'cookbook-page-showcase',
@@ -79,7 +80,7 @@ export class PageShowcaseComponent {
     },
   ];
 
-  layoutColumns: ShowcaseMemberColumns = {
+  layoutColumns: ShowcasePropertyColumns = {
     Name: 'Tag',
     Description: 'Description',
   };
@@ -102,7 +103,7 @@ export class PageShowcaseComponent {
     },
   ];
 
-  directiveColumns: ShowcaseMemberColumns = {
+  directiveColumns: ShowcasePropertyColumns = {
     Name: 'Name',
     Description: 'Description',
     Type: '(Optional) Configuration',
@@ -135,7 +136,7 @@ export class PageShowcaseComponent {
     },
   ];
 
-  cssColumns: ShowcaseMemberColumns = {
+  cssColumns: ShowcasePropertyColumns = {
     Name: 'Name',
     Description: 'Description',
     Type: 'Type',

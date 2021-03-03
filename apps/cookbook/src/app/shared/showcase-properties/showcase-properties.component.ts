@@ -1,8 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { ShowcaseMemberColumns } from '../showcase-member/showcase-member';
-
-import { ShowcaseProperty } from './showcase-property';
+import { ShowcaseProperty, ShowcasePropertyColumns } from './showcase-property';
 
 @Component({
   selector: 'cookbook-showcase-properties',
@@ -11,7 +9,7 @@ import { ShowcaseProperty } from './showcase-property';
 })
 export class ShowcasePropertiesComponent {
   @Input() properties: ShowcaseProperty[];
-  @Input() columns: ShowcaseMemberColumns = {
+  @Input() columns: ShowcasePropertyColumns = {
     Name: 'Attribute',
     Description: 'Description',
     Type: 'Type',

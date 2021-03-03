@@ -3,3 +3,9 @@ export interface ShowcaseMethod {
   description?: string;
   signature?: string;
 }
+
+export interface ShowcaseMethodColumns {
+  Name: string;
+  Description?: string;
+  Type?: string;
+}

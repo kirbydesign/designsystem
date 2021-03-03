@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { ShowcaseMemberColumns } from '~/app/shared/showcase-member/showcase-member';
-
-import { ShowcaseProperty } from '../../shared/showcase-properties/showcase-property';
+import {
+  ShowcaseProperty,
+  ShowcasePropertyColumns,
+} from '~/app/shared/showcase-properties/showcase-property';
 
 @Component({
   selector: 'cookbook-item-showcase',
@@ -9,7 +10,7 @@ import { ShowcaseProperty } from '../../shared/showcase-properties/showcase-prop
   styleUrls: ['./item-showcase.component.scss'],
 })
 export class ItemShowcaseComponent {
-  columns: ShowcaseMemberColumns = {
+  columns: ShowcasePropertyColumns = {
     Name: 'Name',
     Description: 'Description',
   };
