@@ -7,17 +7,7 @@ import { ShowcaseMethod } from './showcase-method';
 @Component({
   selector: 'cookbook-showcase-methods',
   templateUrl: './showcase-methods.component.html',
-  styles: [
-    `
-      :host {
-        display: block;
-      }
-
-      .description {
-        white-space: pre-line;
-      }
-    `,
-  ],
+  styleUrls: ['./showcase-methods.component.scss'],
 })
 export class ShowcaseMethodsComponent {
   @Input() methods: ShowcaseMethod[];

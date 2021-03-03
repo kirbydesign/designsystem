@@ -7,17 +7,7 @@ import { ShowcaseEvent } from './showcase-event';
 @Component({
   selector: 'cookbook-showcase-events',
   templateUrl: './showcase-events.component.html',
-  styles: [
-    `
-      :host {
-        display: block;
-      }
-
-      .description {
-        white-space: pre-line;
-      }
-    `,
-  ],
+  styleUrls: ['./showcase-events.component.scss'],
 })
 export class ShowcaseEventsComponent {
   @Input() events: ShowcaseEvent[];
