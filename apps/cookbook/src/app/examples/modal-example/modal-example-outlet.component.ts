@@ -7,7 +7,7 @@ const config = {
   selector: 'cookbook-modal-example-outlet',
   template: `<button kirby-button (click)="navigateToModalRoute('page1', {awesomeQueryParam: 'awesome value'})">Open modal by route</button>
 <button kirby-button kirbyModalRouterLink="page1" [kirbyModalQueryParams]="{awesomeQueryParam: 'awesome value'}">Open modal by router link</button>
-<button kirby-button class="deeplink" (click)="navigateToModalRoute(['/examples', 'modal', 'page1'], {queryParams: {awesomeQueryParam: 'awesome value'}})">Deep link to modal route</button>
+<button kirby-button class="deeplink" (click)="navigateToModalRoute(['/examples', 'modal', 'page1'], {awesomeQueryParam: 'awesome value'})">Deep link to modal route</button>
 <button kirby-button class="deeplink" [kirbyModalRouterLink]="['/examples', 'modal', 'page1']" [kirbyModalQueryParams]="{awesomeQueryParam: 'awesome value'}">Deep link to modal by router link</button>`,
   defaultCodeSnippet: `constructor(private modalController: ModalController) {}
 
