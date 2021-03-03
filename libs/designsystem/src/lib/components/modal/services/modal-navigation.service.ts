@@ -222,7 +222,7 @@ export class ModalNavigationService {
     return result;
   }
 
-  async navigateWithinModal(relativePath: string, queryParams?: Params | null): Promise<boolean> {
+  async navigateWithinModal(relativePath: string, queryParams?: Params): Promise<boolean> {
     return this.router.navigate([relativePath], {
       queryParams,
       relativeTo: this.getCurrentActivatedRoute(),
