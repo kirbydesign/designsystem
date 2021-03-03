@@ -1,6 +1,6 @@
-import { ShowcaseMember } from '../showcase-member/showcase-member';
-
-export interface ShowcaseProperty extends ShowcaseMember {
+export interface ShowcaseProperty {
+  name: string;
+  description?: string;
   defaultValue?: string;
   inputValues?: string[];
   preserveInputValuesWhitespaces?: boolean;

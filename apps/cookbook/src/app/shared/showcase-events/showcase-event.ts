@@ -1,5 +1,5 @@
-import { ShowcaseMember } from '../showcase-member/showcase-member';
-
-export interface ShowcaseEvent extends ShowcaseMember {
+export interface ShowcaseEvent {
+  name: string;
+  description?: string;
   signature?: string;
 }
