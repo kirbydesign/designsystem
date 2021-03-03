@@ -4,7 +4,7 @@ export interface ShowcaseMember {
 }
 
 export interface ShowcaseMemberColumns {
-  Name?: string;
+  Name: string;
   Description?: string;
   Type?: string;
   Default?: string;

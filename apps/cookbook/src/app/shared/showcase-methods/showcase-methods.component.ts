@@ -21,7 +21,7 @@ import { ShowcaseMethod } from './showcase-method';
 })
 export class ShowcaseMethodsComponent {
   @Input() methods: ShowcaseMethod[];
-  columns: ShowcaseMemberColumns = {
+  @Input() columns: ShowcaseMemberColumns = {
     Name: 'Name',
     Description: 'Description',
     Type: 'Signature',
