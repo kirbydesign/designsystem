@@ -90,18 +90,26 @@
   >
 </p>
 <p>
-  These kind of routes can be navigated to by using a <code>kirbyModalRouterLink</code>:
+  These kind of routes can be navigated to by using a <code>kirbyModalRouterLink</code>, and query
+  parameters can be passed by using <code>[kirbyModalQueryParams]</code> <br /><br />
+  <em
+    ><strong>*Please note:</strong> Always use Angular's "box" syntax for binding to the
+    <code>[kirbyModalQueryParams]</code> otherwise it will be treated as a string and not an object
+    literal</em
+  >
   <cookbook-code-viewer
     [html]="outletExample.routerLinkForModalOutletCodeSnippet"
   ></cookbook-code-viewer>
-  Or by injecting <code>ModalController</code> and calling <code>navigateToModal</code> method:
+  Or by injecting <code>ModalController</code> and calling <code>navigateToModal</code> method,
+  where query params can be passed as the second argument:
   <cookbook-code-viewer
     [ts]="outletExample.modalControllerForModalOutletCodeSnippet"
   ></cookbook-code-viewer>
 </p>
 <p>
   <strong>Within the child component</strong> presented in the modal a regular Angular
-  <code>[routerLink]</code> can be used with a relative path to the sibling modal route:
+  <code>[routerLink]</code> can be used with a relative path to the sibling modal route, and query
+  params can be passed as normal using <code>[queryParams]</code>:
   <cookbook-code-viewer
     [html]="outletExample.routerLinkWithinModalOutletCodeSnippet"
   ></cookbook-code-viewer>
@@ -110,7 +118,7 @@
   If you need to navigate from code <strong>within the child component</strong> you can either
   inject and navigate through the regular Angular <code>Router</code> or you can inject
   <code>ModalController</code> and call it's <code>navigateWithinModal</code> method for
-  convenience:
+  convenience, which also support passing query params:
   <cookbook-code-viewer
     [ts]="outletExample.modalControllerWithinModalOutletCodeSnippet"
   ></cookbook-code-viewer>
@@ -160,6 +168,13 @@
   with the title of your modal window:
 </p>
 <cookbook-code-viewer [html]="defaultExample.titleTemplate"></cookbook-code-viewer>
+<h3>Page Progress</h3>
+<p>
+  If you have a multi-step dialog you can display a progress status in the modal header.<br />
+  Inside the embedded component markup you can include a <code>kirby-page-progress</code> element
+  with the content of your progress tracker:
+</p>
+<cookbook-code-viewer [html]="defaultExample.pageProgressTemplate"></cookbook-code-viewer>
 
 <h3 #footer>Footer</h3>
 <p>
