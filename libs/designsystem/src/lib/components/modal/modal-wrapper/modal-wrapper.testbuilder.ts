@@ -7,8 +7,11 @@ import { MockComponents } from 'ng-mocks';
 import { WindowRef } from '../../../types';
 import { ButtonComponent } from '../../button/button.component';
 import { IconComponent } from '../../icon';
+import { PageProgressComponent } from '../../page/page.component';
+import { ProgressCircleComponent } from '../../progress-circle/progress-circle.component';
 import { ResizeObserverService } from '../../shared';
 import { ModalFooterComponent } from '../footer/modal-footer.component';
+
 import { ModalConfig } from './config/modal-config';
 import { ModalWrapperComponent } from './modal-wrapper.component';
 
@@ -25,6 +28,8 @@ export class ModalWrapperTestBuilder {
       StaticFooterEmbeddedComponent,
       DynamicFooterEmbeddedComponent,
       InputEmbeddedComponent,
+      StaticPageProgressEmbeddedComponent,
+      DynamicPageProgressEmbeddedComponent,
     ],
     providers: [
       {
@@ -36,6 +41,8 @@ export class ModalWrapperTestBuilder {
       MockComponents(
         IconComponent,
         ButtonComponent,
+        PageProgressComponent,
+        ProgressCircleComponent,
         ModalFooterComponent,
         IonHeader,
         IonToolbar,
@@ -68,6 +75,16 @@ export class ModalWrapperTestBuilder {
 
   withEmbeddedInputComponent() {
     this.config.component = InputEmbeddedComponent;
+    return this;
+  }
+
+  withStaticPageProgress() {
+    this.config.component = StaticPageProgressEmbeddedComponent;
+    return this;
+  }
+
+  withDynamicPageProgress() {
+    this.config.component = DynamicPageProgressEmbeddedComponent;
     return this;
   }
 
@@ -137,3 +154,28 @@ export class DynamicFooterEmbeddedComponent {
   `,
 })
 export class InputEmbeddedComponent {}
+
+@Component({
+  template: `
+    <kirby-page-progress>
+      <kirby-progress-circle themeColor="warning" value="50" size="sm" class="kirby-text-xsmall">
+        2/4
+      </kirby-progress-circle>
+    </kirby-page-progress>
+    <div>My Title</div>
+  `,
+})
+export class StaticPageProgressEmbeddedComponent {}
+@Component({
+  template: `
+    <kirby-page-progress *ngIf="showPageProgress">
+      <kirby-progress-circle themeColor="warning" value="50" size="sm" class="kirby-text-xsmall">
+        2/4
+      </kirby-progress-circle>
+    </kirby-page-progress>
+    <div>My title</div>
+  `,
+})
+export class DynamicPageProgressEmbeddedComponent {
+  showPageProgress = false;
+}
