@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
+import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
 
 import { ColorHelper } from '@kirbydesign/designsystem';
 
-import { ShowcaseProperty } from '../../shared/showcase-properties/showcase-property';
 @Component({
   styleUrls: ['./toggle-button-showcase.component.scss'],
   templateUrl: './toggle-button-showcase.component.html',

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { ShowcaseEvent } from '~/app/shared/showcase-events/showcase-event';
+import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
 
 import { ListLoadOnDemandExampleTemplate } from './../../examples/list-load-on-demand-example/list-load-on-demand-example.component';
-import { ShowcaseProperty } from './../../shared/showcase-properties/showcase-property';
 
 @Component({
   selector: 'cookbook-list-load-on-demand-showcase',
