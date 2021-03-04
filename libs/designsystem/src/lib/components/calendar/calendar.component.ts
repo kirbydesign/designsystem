@@ -99,7 +99,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   @Input() set minDate(value: Date) {
-    if (value && this.activeMonth.toDate() < value) {
+    if (value && this.activeMonth && this.activeMonth.isBefore(value)) {
       this.setActiveMonth(value);
     }
     this._minDate = this.normalizeDate(value);
@@ -110,7 +110,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   @Input() set maxDate(value: Date) {
-    if (value && this.activeMonth.toDate() > value) {
+    if (value && this.activeMonth && this.activeMonth.isAfter(value)) {
       this.setActiveMonth(value);
     }
     this._maxDate = this.normalizeDate(value);
