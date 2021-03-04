@@ -1,8 +1,8 @@
 import { Component, HostBinding, Input } from '@angular/core';
 
-import { NotificationAndInfoColor } from '../../../helpers';
+import { NotificationColor } from '../../../helpers';
 
-export type CardFlagType = NotificationAndInfoColor;
+export type CardFlagType = NotificationColor | 'info' | null;
 
 @Component({
   selector: 'kirby-card-header',

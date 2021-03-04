@@ -26,9 +26,23 @@ h4 {
 }
 
 // Flagged card headers
+
+$notification-and-info-colors: (
+  map-merge(
+    $notification-colors,
+    (
+      'info': get-color('semi-light'),
+    )
+  )
+);
+
 @each $color-name, $color-value in $notification-and-info-colors {
   :host(.#{$color-name}) {
-    --kirby-card-header-background-color: #{get-color($color-name)};
+    @if $color-name == 'info' {
+      $color-name: 'semi-light';
+    }
+
+    --kirby-card-header-background-color: #{$color-value};
     --kirby-card-header-color: #{get-color($color-name + '-contrast')};
 
     color: var(--kirby-card-header-color);

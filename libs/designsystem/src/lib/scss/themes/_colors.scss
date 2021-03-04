@@ -10,15 +10,6 @@ $notification-colors: (
   'danger': #ff595e,
 );
 
-$notification-and-info-colors: (
-  map-merge(
-    $notification-colors,
-    (
-      'info': #ebebeb,
-    )
-  )
-);
-
 $system-colors: (
   'background-color': #f6f6f6,
   'white': #ffffff,
@@ -40,7 +31,7 @@ $text-colors: (
 $focus-ring-color: rgb(77, 144, 254);
 
 @function getAllColors() {
-  @return map-merge(map-merge($brand-colors, $notification-and-info-colors), $system-colors);
+  @return map-merge(map-merge($brand-colors, $notification-colors), $system-colors);
 }
 
 $_color-palette: getAllColors();
