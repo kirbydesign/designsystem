@@ -1,3 +1,9 @@
+<kirby-page-progress *ngIf="showPageProgress">
+  <kirby-progress-circle themeColor="warning" value="50" size="sm" class="kirby-text-xsmall">
+    2/4
+  </kirby-progress-circle>
+</kirby-page-progress>
+
 <kirby-page-title>{{ title }}</kirby-page-title>
 
 <kirby-loading-overlay [isLoading]="isLoading">
@@ -27,6 +33,7 @@
     <cookbook-example-configuration-wrapper [snapToViewport]="true">
       <cookbook-modal-example-configuration
         [(showDummyKeyboard)]="showDummyKeyboard"
+        [(showPageProgress)]="showPageProgress"
         [(showFooter)]="showFooter"
         [(showDummyContent)]="showDummyContent"
         [disableScroll]="disableScroll"
@@ -54,6 +61,7 @@
       </button>
       <cookbook-example-configuration-wrapper>
         <cookbook-modal-example-configuration
+          [(showPageProgress)]="showNestedPageProgress"
           [(showFooter)]="showNestedFooter"
           [(showDummyContent)]="showNestedDummyContent"
           [(delayLoadDummyContent)]="delayLoadDummyContent"
