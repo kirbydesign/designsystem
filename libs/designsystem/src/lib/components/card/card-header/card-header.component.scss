@@ -27,22 +27,21 @@ h4 {
 
 // Flagged card headers
 
-$notification-and-info-colors: (
-  map-merge(
-    $notification-colors,
-    (
-      'info': get-color('semi-light'),
-    )
-  )
-);
+$notification-levels: ('info');
 
-@each $color-name, $color-value in $notification-and-info-colors {
-  :host(.#{$color-name}) {
-    @if $color-name == 'info' {
-      $color-name: 'semi-light';
-    }
+@each $color-name, $color-value in $notification-colors {
+  $notification-levels: append($notification-levels, $color-name);
+}
 
-    --kirby-card-header-background-color: #{$color-value};
+@each $level in $notification-levels {
+  $color-name: $level;
+
+  @if $level == 'info' {
+    $color-name: 'semi-light';
+  }
+
+  :host(.#{$level}) {
+    --kirby-card-header-background-color: #{get-color($color-name)};
     --kirby-card-header-color: #{get-color($color-name + '-contrast')};
 
     color: var(--kirby-card-header-color);
