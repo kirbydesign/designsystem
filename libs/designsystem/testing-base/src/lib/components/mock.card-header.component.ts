@@ -1,6 +1,6 @@
 import { Component, forwardRef, Input } from '@angular/core';
 
-import { CardFlagType, CardHeaderComponent } from '@kirbydesign/designsystem';
+import { CardFlagLevel, CardHeaderComponent } from '@kirbydesign/designsystem';
 
 // #region AUTO-GENERATED - PLEASE DON'T EDIT CONTENT WITHIN!
 @Component({
@@ -17,7 +17,7 @@ export class MockCardHeaderComponent {
   @Input() title: string;
   @Input() subtitle: string;
   @Input() isTitleBold: boolean;
-  @Input() flagged: CardFlagType;
+  @Input() flagged: CardFlagLevel;
 }
 
 // #endregion
