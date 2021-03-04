@@ -1,10 +1,10 @@
 @import './libs/designsystem/src/lib/scss/utils';
 
 $list-margin: size('s');
-$link-padding: 5px 20px;
+$link-padding: 5px size('s');
 $link-border-radius: 3px;
 $menu-padding-mobile: size('m');
-$divider-inset: size('m');
+$divider-inset: size('xxxxs');
 $divider-spacing: size('xxs');
 
 :host {
