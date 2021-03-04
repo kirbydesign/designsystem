@@ -2,7 +2,7 @@ import { Component, HostBinding, Input } from '@angular/core';
 
 import { NotificationColor } from '../../../helpers';
 
-export type CardFlagType = NotificationColor | 'info' | null;
+export type CardFlagLevel = NotificationColor | 'info' | null;
 
 @Component({
   selector: 'kirby-card-header',
@@ -15,5 +15,5 @@ export class CardHeaderComponent {
   @Input() isTitleBold: boolean;
   @HostBinding('class')
   @Input()
-  flagged: CardFlagType = null;
+  flagged: CardFlagLevel = null;
 }
