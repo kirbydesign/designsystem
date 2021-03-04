@@ -342,3 +342,7 @@ The Kirby chart components use Highcharts. Note that this is a licensed product.
 [kirby.cookbook.fonts]: https://cookbook.kirby.design/home/showcase/fonts
 [kirby.cookbook.colors]: https://cookbook.kirby.design/home/showcase/colors
 [kirby.cookbook.list]: https://cookbook.kirby.design/home/showcase/list
+
+
+<!-- Dummy comment for testing auto-merge -->
+
