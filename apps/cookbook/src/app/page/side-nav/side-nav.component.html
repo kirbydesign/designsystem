@@ -39,13 +39,16 @@
     (keydown.ArrowUp)="onLinksKeyDown($event)"
     (keydown.ArrowDown)="onLinksKeyDown($event)"
   >
-    <a
-      *ngFor="let item of filteredShowcaseRoutes"
-      [routerLink]="item.path"
-      [class]="{ 'is-selected': item.active, 'is-hidden': item.hidden }"
-      (click)="onComponentLinkClick(item.path)"
-      #componentLink
-      >{{ item.name }}
-    </a>
+    <ng-container *ngFor="let item of filteredShowcaseRoutes">
+      <a
+        *ngFor="let link of item"
+        [routerLink]="link.path"
+        [class]="{ 'is-selected': link.active }"
+        (click)="onComponentLinkClick(link.path)"
+        #componentLink
+        >{{ link.name }}
+      </a>
+      <hr />
+    </ng-container>
   </kirby-card>
 </section>

@@ -17,13 +17,11 @@ import { routes } from '../../showcase/showcase.routes';
 import { navigationItems } from '../header/header.component';
 
 const KEY_DOWN = 'ArrowDown';
-const HIDDEN_CLASS = 'is-hidden';
 
 interface SideNavLink {
   path: string;
   name: string;
   active: boolean;
-  hidden: boolean;
 }
 
 @Component({
@@ -33,7 +31,7 @@ interface SideNavLink {
 })
 export class SideNavComponent implements OnInit {
   private allShowcaseRoutes: SideNavLink[];
-  filteredShowcaseRoutes: SideNavLink[];
+  filteredShowcaseRoutes: SideNavLink[][];
   filter: string = '';
 
   @Output() menuToggle = new EventEmitter<boolean>();
@@ -45,12 +43,11 @@ export class SideNavComponent implements OnInit {
 
   ngOnInit() {
     this.mapRoutes();
-    this.filteredShowcaseRoutes = this.allShowcaseRoutes;
 
     this.router.events
       .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
       .subscribe((val) => {
-        if (val.urlAfterRedirects.indexOf('/showcase/') === -1) {
+        if (!val.urlAfterRedirects.includes('/showcase/')) {
           this.applyComponentFilter('');
         }
       });
@@ -59,14 +56,16 @@ export class SideNavComponent implements OnInit {
   private mapRoutes() {
     const routesWithPath = routes[0].children.filter((r) => r.path);
     routesWithPath.sort((a, b) => this.sortByPath(a.path, b.path));
+
     this.allShowcaseRoutes = routesWithPath.map((route) => {
       return {
         path: `showcase/${route.path}`,
         name: kebabToTitleCase(route.path),
-        active: this.router.url.indexOf(route.path) > -1,
-        hidden: false,
+        active: this.router.url.endsWith(route.path),
       };
     });
+
+    this.applyComponentFilter('');
   }
 
   private sortByPath(aPath: string, bPath: string): number {
@@ -82,12 +81,10 @@ export class SideNavComponent implements OnInit {
   onFilterKeyDown(event: KeyboardEvent) {
     event.preventDefault();
     const links = this.componentLinks.toArray();
+
     for (let i = 0; i < links.length; i++) {
-      const element = links[i].nativeElement;
-      if (!element.classList.contains(HIDDEN_CLASS)) {
-        element.focus();
-        break;
-      }
+      links[i].nativeElement.focus();
+      break;
     }
   }
 
@@ -96,20 +93,19 @@ export class SideNavComponent implements OnInit {
     const listElements: HTMLAnchorElement[] = this.componentLinks.map((link) => {
       return link.nativeElement;
     });
-    const visibleLinks = listElements.filter((link) => {
-      return !link.classList.contains(HIDDEN_CLASS);
-    });
-    const currentlyFocused = visibleLinks.findIndex((link) => {
+
+    const currentlyFocused = listElements.findIndex((link) => {
       return link === document.activeElement;
     });
+
     if (currentlyFocused === -1) {
       return;
     }
 
     if (event.key === KEY_DOWN) {
-      visibleLinks[Math.min(currentlyFocused + 1, visibleLinks.length - 1)].focus();
+      listElements[Math.min(currentlyFocused + 1, listElements.length - 1)].focus();
     } else {
-      visibleLinks[Math.max(currentlyFocused - 1, 0)].focus();
+      listElements[Math.max(currentlyFocused - 1, 0)].focus();
     }
   }
 
@@ -125,28 +121,39 @@ export class SideNavComponent implements OnInit {
 
   private applyComponentFilter(stringToMatch: string): void {
     this.filter = stringToMatch;
-    if (this.filter.length === 0) {
-      this.filteredShowcaseRoutes = this.allShowcaseRoutes.map((link) => {
-        return { ...link, hidden: false, active: this.router.url.indexOf(link.path) > -1 };
-      });
-      return;
-    }
-    const caseSensitive = this.filter[0].toUpperCase() === this.filter[0];
-    const casedFilter = caseSensitive ? this.filter : this.filter.toLowerCase();
+    let filteredLinks: SideNavLink[] = this.allShowcaseRoutes;
 
-    this.filteredShowcaseRoutes = this.allShowcaseRoutes.map((link) => {
-      const casedLinkName = caseSensitive ? link.name : link.name.toLowerCase();
-      return {
-        ...link,
-        hidden: casedLinkName.indexOf(casedFilter) === -1,
-        active: this.router.url.indexOf(link.path) > -1,
-      };
+    if (this.filter.length > 0) {
+      const caseSensitive = this.filter[0].toUpperCase() === this.filter[0];
+      const casedFilter = caseSensitive ? this.filter : this.filter.toLowerCase();
+
+      filteredLinks = filteredLinks.filter((link) => {
+        const casedLinkName = caseSensitive ? link.name : link.name.toLowerCase();
+        return casedLinkName.includes(casedFilter);
+      });
+    }
+
+    this.filteredShowcaseRoutes = this.distributeSideNavLinksAlphabetically(filteredLinks);
+  }
+
+  private distributeSideNavLinksAlphabetically(links: SideNavLink[]): SideNavLink[][] {
+    const distributed: { [key: string]: SideNavLink[] } = links.reduce((acc, link) => {
+      const firstLetter = link.name[0];
+      link.active = this.router.url.endsWith(link.path);
+      acc[firstLetter] = acc[firstLetter] === undefined ? [link] : [...acc[firstLetter], link];
+      return acc;
+    }, {});
+
+    return Object.keys(distributed).map((groupKey) => {
+      return distributed[groupKey];
     });
   }
 
   private setRouteActive(path) {
-    this.filteredShowcaseRoutes = this.filteredShowcaseRoutes.map((route) => {
-      return { ...route, active: route.path === path };
+    this.filteredShowcaseRoutes = this.filteredShowcaseRoutes.map((group) => {
+      return group.map((link) => {
+        return { ...link, active: link.path === path };
+      });
     });
   }
 }

@@ -1,9 +1,11 @@
 @import './libs/designsystem/src/lib/scss/utils';
 
 $list-margin: size('s');
-$link-padding: size('xxs') 20px;
+$link-padding: 5px 20px;
 $link-border-radius: 3px;
 $menu-padding-mobile: size('m');
+$divider-inset: size('m');
+$divider-spacing: size('xxs');
 
 :host {
   @include media('>=large') {
@@ -70,10 +72,6 @@ section {
     &:first-child {
       margin-top: $list-margin;
     }
-
-    &:last-child {
-      margin-bottom: $list-margin;
-    }
   }
 }
 
@@ -85,4 +83,17 @@ section {
   position: absolute;
   right: 0;
   top: 0;
+}
+
+hr {
+  margin: size('xxxs'), 0;
+  border: solid 1px get-color('light');
+  border-bottom: none;
+  margin-block-start: $divider-spacing;
+  margin-block-end: $divider-spacing;
+  margin-inline-start: $divider-inset;
+  margin-inline-end: $divider-inset;
+  &:last-child {
+    border-color: transparent;
+  }
 }
