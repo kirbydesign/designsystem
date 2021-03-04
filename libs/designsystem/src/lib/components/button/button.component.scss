@@ -163,8 +163,11 @@ $button-width: (
     --kirby-button-border-color: #{$focus-ring-color};
   }
 
-  &:hover,
-  &:focus {
+  @include hover() {
+    opacity: 0.8;
+  }
+
+  &:active {
     opacity: 0.8;
   }
 
