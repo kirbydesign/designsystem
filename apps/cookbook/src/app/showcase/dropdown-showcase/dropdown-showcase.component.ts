@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { ShowcaseEvent } from '~/app/shared/showcase-events/showcase-event';
-import { ShowcaseMethod } from '~/app/shared/showcase-methods/showcase-method';
-import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
+import { ShowcaseEvent } from '~/app/shared/showcase-events/showcase-events.component';
+import { ShowcaseMethod } from '~/app/shared/showcase-methods/showcase-methods.component';
+import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-properties.component';
 
 @Component({
   selector: 'cookbook-dropdown-showcase',

@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef } from '@angular/core';
-import { ShowcaseEvent } from '~/app/shared/showcase-events/showcase-event';
-import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
+import { ShowcaseEvent } from '~/app/shared/showcase-events/showcase-events.component';
+import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-properties.component';
 
 import { ModalController } from '@kirbydesign/designsystem';
 

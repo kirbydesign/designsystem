@@ -1,6 +1,19 @@
 import { Component, Input } from '@angular/core';
 
-import { ShowcaseProperty, ShowcasePropertyColumns } from './showcase-property';
+export interface ShowcaseProperty {
+  name: string;
+  description?: string;
+  defaultValue?: string;
+  inputValues?: string[];
+  preserveInputValuesWhitespaces?: boolean;
+}
+
+export interface ShowcasePropertyColumns {
+  Name: string;
+  Description?: string;
+  Type?: string;
+  Default?: string;
+}
 
 @Component({
   selector: 'cookbook-showcase-properties',

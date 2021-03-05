@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
+import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-properties.component';
 
 import { defaultIcons, Sizes } from '@kirbydesign/designsystem';
-
-import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
 
 @Component({
   selector: 'cookbook-icon-showcase',

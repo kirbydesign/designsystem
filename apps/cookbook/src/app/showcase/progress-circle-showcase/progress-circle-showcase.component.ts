@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-
-import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
+import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-properties.component';
 
 @Component({
   selector: 'cookbook-progress-circle-showcase',

@@ -6,11 +6,11 @@ import { PageFitHeadingExampleComponent } from '~/app/examples/page-example/fit-
 import { PageFixedFooterTabExampleComponent } from '~/app/examples/page-example/fixed-footer-tabs/tab/fixed-footer-tab-example.component';
 import { PageFixedTitleAndActionsExampleComponent } from '~/app/examples/page-example/fixed-title-and-actions/page-fixed-title-and-actions-example.component';
 import { PageSimpleExampleComponent } from '~/app/examples/page-example/simple/page-simple-example.component';
-import { ShowcaseEvent } from '~/app/shared/showcase-events/showcase-event';
+import { ShowcaseEvent } from '~/app/shared/showcase-events/showcase-events.component';
 import {
   ShowcaseProperty,
   ShowcasePropertyColumns,
-} from '~/app/shared/showcase-properties/showcase-property';
+} from '~/app/shared/showcase-properties/showcase-properties.component';
 
 @Component({
   selector: 'cookbook-page-showcase',

@@ -1,6 +1,16 @@
 import { Component, Input } from '@angular/core';
 
-import { ShowcaseEvent, ShowcaseEventColumns } from './showcase-event';
+export interface ShowcaseEvent {
+  name: string;
+  description?: string;
+  signature?: string;
+}
+
+export interface ShowcaseEventColumns {
+  Name: string;
+  Description?: string;
+  Type?: string;
+}
 
 @Component({
   selector: 'cookbook-showcase-events',

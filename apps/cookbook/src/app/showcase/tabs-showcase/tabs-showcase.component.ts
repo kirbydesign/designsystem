@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
+import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-properties.component';
 
 declare var require: any;
 
