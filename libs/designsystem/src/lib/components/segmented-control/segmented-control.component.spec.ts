@@ -1,4 +1,3 @@
-import { IonicModule } from '@ionic/angular';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponents, MockDirective } from 'ng-mocks';
 
@@ -40,7 +39,7 @@ describe('SegmentedControlComponent', () => {
       MockComponents(ChipComponent, BadgeComponent),
       MockDirective(ThemeColorDirective),
     ],
-    imports: [IonicModule.forRoot({ mode: 'ios' }), TestHelper.ionicModuleForTest],
+    imports: [TestHelper.ionicModuleForTest],
   });
 
   beforeEach(() => {

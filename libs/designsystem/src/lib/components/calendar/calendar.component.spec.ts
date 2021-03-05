@@ -6,6 +6,10 @@ import { MockComponent } from 'ng-mocks';
 import { CalendarComponent, IconComponent } from '..';
 import { TestHelper } from '../../testing/test-helper';
 import { WindowRef } from '../../types/window-ref';
+import { CardComponent } from '../card';
+import { DropdownComponent } from '../dropdown/dropdown.component';
+import { ItemComponent } from '../item';
+import { RadioComponent } from '../radio';
 
 import { CalendarYearNavigatorConfig } from './options/calendar-year-navigator-config';
 
@@ -18,7 +22,14 @@ describe('CalendarComponent', () => {
 
   const createHost = createHostFactory({
     component: CalendarComponent,
-    declarations: [CalendarComponent, MockComponent(IconComponent)],
+    declarations: [
+      CalendarComponent,
+      MockComponent(IconComponent),
+      DropdownComponent,
+      RadioComponent,
+      CardComponent,
+      ItemComponent,
+    ],
     providers: [
       {
         provide: LOCALE_ID,

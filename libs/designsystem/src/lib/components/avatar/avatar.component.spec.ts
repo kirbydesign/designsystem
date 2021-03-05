@@ -1,17 +1,16 @@
-import { IonicModule } from '@ionic/angular';
-import { SpectatorHost, createHostFactory } from '@ngneat/spectator';
+import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
-import { TestHelper } from '../../testing/test-helper';
-import { DesignTokenHelper, ThemeColorExtended } from '../../helpers/design-token-helper';
-
-import { IconComponent } from '../icon/icon.component';
-import { AvatarComponent } from './avatar.component';
-import { SizeDirective } from '../../directives/size/size.directive';
 import { ThemeColorDirective } from '../../directives';
+import { SizeDirective } from '../../directives/size/size.directive';
 import { ColorHelper } from '../../helpers';
-import { ProgressCircleComponent } from '../progress-circle/progress-circle.component';
-import { ProgressCircleRingComponent } from '../progress-circle/progress-circle-ring.component';
 import { styles } from '../../helpers/color-helper.styles';
+import { DesignTokenHelper, ThemeColorExtended } from '../../helpers/design-token-helper';
+import { TestHelper } from '../../testing/test-helper';
+import { IconComponent } from '../icon/icon.component';
+import { ProgressCircleRingComponent } from '../progress-circle/progress-circle-ring.component';
+import { ProgressCircleComponent } from '../progress-circle/progress-circle.component';
+
+import { AvatarComponent } from './avatar.component';
 
 const getColor = DesignTokenHelper.getColor;
 const size = DesignTokenHelper.size;
@@ -29,7 +28,7 @@ describe('AvatarComponent', () => {
       ProgressCircleComponent,
       ProgressCircleRingComponent,
     ],
-    imports: [IonicModule.forRoot({ mode: 'ios', _testing: true })],
+    imports: [TestHelper.ionicModuleForTest],
   });
 
   it('should create', () => {
