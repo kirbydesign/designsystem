@@ -406,7 +406,7 @@ export class ChartExampleTimeseries2Component {
             },
             scaleLabel: {
               display: true,
-              labelString: 'Price ($)',
+              labelString: 'Price (dkr)',
             },
             ticks: {
               min: 0,

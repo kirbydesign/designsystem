@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ChartConfiguration } from 'chart.js';
 
 const config = {
   selector: 'cookbook-chart-example-pie-1',
@@ -8,7 +9,7 @@ const config = {
     type="pie"
     [categories]="['Boomerangs 25%', 'Bubbles 41%', 'Jumping 33%', 'Christmas < 1%']"   
     [data]="[25, 41, 33, 1]"
-    
+   
     [backgroundColor]="[
           'rgba(255, 99, 132, 0.2)',
           'rgba(54, 162, 235, 0.2)',
@@ -17,7 +18,7 @@ const config = {
           ]"
 
     [borderWidth]="1"
-   
+   [options]="options"
     >
   </kirby-chart-2>
  
@@ -33,5 +34,16 @@ const config = {
 export class ChartExamplePie1Component {
   template: string = config.template;
   codeSnippet: string = config.codeSnippet;
-  height = 150;
+
+  options: ChartConfiguration = {
+    options: {
+      legend: {
+        display: true,
+      },
+      title: {
+        display: true,
+        text: 'A nice Pie',
+      },
+    },
+  };
 }

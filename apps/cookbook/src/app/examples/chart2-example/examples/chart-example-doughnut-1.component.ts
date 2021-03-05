@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ChartConfiguration } from 'chart.js';
 
 const config = {
   selector: 'cookbook-chart-example-doughnut-1',
@@ -14,7 +15,7 @@ const config = {
           'rgba(255, 206, 86, 0.2)',
           'rgba(75, 192, 192, 0.2)'
           ]"
- 
+    [options]="options"
     >
   </kirby-chart-2>
  
@@ -30,5 +31,17 @@ const config = {
 export class ChartExampleDoughnut1Component {
   template: string = config.template;
   codeSnippet: string = config.codeSnippet;
-  height = 150;
+
+  options: ChartConfiguration = {
+    options: {
+      legend: {
+        display: true,
+        position: 'right',
+      },
+      title: {
+        display: true,
+        text: 'A nice Doughnut',
+      },
+    },
+  };
 }
