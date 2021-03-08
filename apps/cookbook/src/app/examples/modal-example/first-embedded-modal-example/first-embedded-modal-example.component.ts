@@ -1,17 +1,15 @@
-import { Component, Inject, Input, OnInit, Optional, SkipSelf } from '@angular/core';
+import { Component, Inject, OnInit, Optional, SkipSelf } from '@angular/core';
 
 import {
-  AlertConfig,
   ActionSheetConfig,
+  AlertConfig,
+  COMPONENT_PROPS,
   Modal,
   ModalController,
-  COMPONENT_PROPS,
 } from '@kirbydesign/designsystem';
 import { ModalConfig } from '@kirbydesign/designsystem';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
 import { KirbyAnimation } from '@kirbydesign/designsystem';
-
-import { SecondEmbeddedModalExampleComponent } from '../second-embedded-modal-example/second-embedded-modal-example.component';
 
 @Component({
   selector: 'cookbook-first-embedded-modal-example',
@@ -30,8 +28,10 @@ export class FirstEmbeddedModalExampleComponent implements OnInit {
 
   showNestedOptions: boolean;
   showDummyKeyboard: boolean;
+  showPageProgress: boolean;
   showFooter: boolean;
   showDummyContent: boolean;
+  showNestedPageProgress: boolean = false;
   showNestedFooter: boolean = false;
   showNestedDummyContent: boolean = true;
   delayLoadDummyContent: boolean;
@@ -79,6 +79,7 @@ export class FirstEmbeddedModalExampleComponent implements OnInit {
         title,
         subtitle: 'Hello from second embedded example component!',
         showDummyKeyboard: this.showDummyKeyboard,
+        showPageProgress: this.showNestedPageProgress,
         showFooter: this.showNestedFooter,
         showDummyContent: this.showNestedDummyContent,
         delayLoadDummyContent: this.delayLoadDummyContent,
@@ -132,6 +133,10 @@ export class FirstEmbeddedModalExampleComponent implements OnInit {
 
   toggleDisableScroll(disabled: boolean) {
     this.modal.scrollDisabled = disabled;
+  }
+
+  togglePageProgress() {
+    this.showPageProgress = !this.showPageProgress;
   }
 
   toggleFooter() {
