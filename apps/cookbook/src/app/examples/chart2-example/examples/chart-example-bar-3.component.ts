@@ -9,19 +9,8 @@ const config = {
     label="Bar"
     [categories]="['mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec', 'jan', 'feb']"   
     [data]="[1000, 1100, 450, 1350, 1200, 10, 1400, 300, 500, 100,  1250, 600]"
-    [backgroundColor]="['rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 255, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)',
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 255, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)'
-          ]"
+          
+    [backgroundColor]="['#015132', '#B2D1BF', '#AABC08', '#1FA05A']"
 
     [borderWidth]="1"
     [borderColor]="red"   

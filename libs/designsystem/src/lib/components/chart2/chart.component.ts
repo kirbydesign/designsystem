@@ -36,10 +36,13 @@ export class Chart2Component implements AfterViewInit, OnDestroy {
 
   public chart: Chart = null;
   public min: number = null;
-  public minIndex: number = null;
   public max: number = null;
+
+  public minIndex: number = null;
   public maxIndex: number = null;
+
   @Input() height = 300;
+
   @Input() description = '';
   @Input() useDefaultOptions = true;
   @Input() useDefaultStyle = true;
