@@ -3,7 +3,6 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { ThemeColorDirective } from '../../directives';
 import { SizeDirective } from '../../directives/size/size.directive';
 import { ColorHelper } from '../../helpers';
-import { styles } from '../../helpers/color-helper.styles';
 import { DesignTokenHelper, ThemeColorExtended } from '../../helpers/design-token-helper';
 import { TestHelper } from '../../testing/test-helper';
 import { IconComponent } from '../icon/icon.component';
