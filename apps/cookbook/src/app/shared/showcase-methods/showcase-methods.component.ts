@@ -15,7 +15,7 @@ export interface ShowcaseMethodColumns {
 @Component({
   selector: 'cookbook-showcase-methods',
   templateUrl: './showcase-methods.component.html',
-  styleUrls: ['./showcase-methods.component.scss'],
+  styleUrls: ['../showcase-api-description/showcase-api-description.scss'],
 })
 export class ShowcaseMethodsComponent {
   @Input() methods: ShowcaseMethod[];

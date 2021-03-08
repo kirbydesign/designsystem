@@ -15,7 +15,7 @@ export interface ShowcaseEventColumns {
 @Component({
   selector: 'cookbook-showcase-events',
   templateUrl: './showcase-events.component.html',
-  styleUrls: ['./showcase-events.component.scss'],
+  styleUrls: ['../showcase-api-description/showcase-api-description.scss'],
 })
 export class ShowcaseEventsComponent {
   @Input() events: ShowcaseEvent[];
