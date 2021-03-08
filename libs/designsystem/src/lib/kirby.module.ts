@@ -1,14 +1,22 @@
 import { OverlayModule } from '@angular/cdk/overlay';
-import { CommonModule } from '@angular/common';
-import { Inject, InjectionToken, ModuleWithProviders, NgModule, Optional } from '@angular/core';
+import { CommonModule, DOCUMENT } from '@angular/common';
+import {
+  APP_INITIALIZER,
+  Inject,
+  InjectionToken,
+  ModuleWithProviders,
+  NgModule,
+  Optional,
+} from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
+import { appInitialize } from './app-initialize';
+import { BadgeComponent } from './components/';
 import { AccordionItemComponent } from './components/accordion/accordion-item.component';
 import { AccordionDirective } from './components/accordion/accordion.directive';
 import { AppModule } from './components/app/app.module';
 import { AvatarComponent } from './components/avatar/avatar.component';
-import { BadgeComponent } from './components/badge/badge.component';
 import { ButtonComponent } from './components/button/button.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { CardFooterComponent } from './components/card/card-footer/card-footer.component';
@@ -177,6 +185,12 @@ const providers = [
   LoadingOverlayService,
   ResizeObserverFactory,
   ResizeObserverService,
+  {
+    provide: APP_INITIALIZER,
+    useFactory: appInitialize,
+    deps: [DOCUMENT],
+    multi: true,
+  },
   {
     provide: WindowRef,
     useValue: window,

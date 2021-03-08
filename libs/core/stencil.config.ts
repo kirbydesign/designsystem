@@ -21,7 +21,7 @@ export const config: Config = {
       // ],
     },
     { type: 'docs-readme' },
-    { type: 'docs-json', file: './stuff.json' },
+    { type: 'docs-json', file: './component-docs.json' },
     // {
     //   type: 'www',
     //   serviceWorker: null, // disable service workers

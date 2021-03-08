@@ -1,0 +1,45 @@
+:host {
+  position: var(--kirby-badge-position, relative);
+  left: var(--kirby-badge-left, auto);
+  right: var(--kirby-badge-right, auto);
+  top: var(--kirby-badge-top, auto);
+  z-index: var(--kirby-badge-zindex, none);
+  font-size: font-size('xxs');
+  line-height: 1;
+
+  ion-badge {
+    --background: #{get-color('white')};
+    --color: #{get-color('white-contrast')};
+    --padding-top: 3px;
+    --padding-end: 5px;
+    --padding-bottom: 4px;
+    --padding-start: 5px;
+    box-sizing: border-box; //Fixes https://github.com/kirbydesign/designsystem/issues/537
+    border-radius: 8px;
+    min-width: 16px;
+    min-height: 16px;
+    font-size: inherit;
+    position: relative;
+    box-shadow: var(--kirby-badge-elevation, none);
+  }
+
+  ::slotted(kirby-icon) {
+    --kirby-icon-font-size: #{font-size('n')};
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
+
+@each $color-name, $color-value in $notification-colors {
+  $text-color: get-color($color-name + '-contrast');
+  @if ($color-name == 'danger') {
+    $text-color: get-text-color('white');
+  }
+  :host(.#{$color-name}) {
+    ion-badge {
+      --background: #{get-color($color-name)};
+      --color: #{var(--kirby-badge-color, #{$text-color})};
+    }
+  }
+}
