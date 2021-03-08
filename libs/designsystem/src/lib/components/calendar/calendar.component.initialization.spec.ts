@@ -1,12 +1,9 @@
 import { LOCALE_ID } from '@angular/core';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import moment from 'moment';
 import { MockComponent } from 'ng-mocks';
 
 import { CalendarComponent, IconComponent } from '..';
 import { WindowRef } from '../../types/window-ref';
-
-import { CalendarYearNavigatorConfig } from './options/calendar-year-navigator-config';
 
 describe('CalendarComponent', () => {
   let spectator: SpectatorHost<CalendarComponent>;
