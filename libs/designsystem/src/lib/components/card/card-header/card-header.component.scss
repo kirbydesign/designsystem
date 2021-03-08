@@ -1,18 +1,27 @@
 @import '../../../scss/utils';
 
 :host {
+  --kirby-card-header-background-color: var(--kirby-card-main-background-color);
+  --kirby-card-header-color: var(--kirby-card-main-color);
+  --kirby-card-header-padding: #{size('s')};
+
   display: block;
   border-top-left-radius: $border-radius;
   border-top-right-radius: $border-radius;
   text-align: center;
-  padding: size('s');
-  background-color: transparent;
+  padding: var(--kirby-card-header-padding);
+  color: var(--kirby-card-header-color);
+  background-color: var(--kirby-card-header-background-color);
 }
 
 h2 {
+  --kirby-card-header-line-height: #{line-height('l')};
+  --kirby-card-header-margin-bottom: #{size('xxs')};
+
   font-size: font-size('n');
   font-weight: font-weight('normal');
-  margin: 0 0 size('xxs');
+  margin: 0 0 var(--kirby-card-header-margin-bottom);
+  line-height: var(--kirby-card-header-line-height);
 
   &.bold {
     font-weight: font-weight('bold');
@@ -43,14 +52,11 @@ $notification-levels: ('info');
   :host(.#{$level}) {
     --kirby-card-header-background-color: #{get-color($color-name)};
     --kirby-card-header-color: #{get-color($color-name + '-contrast')};
-
-    color: var(--kirby-card-header-color);
-    background-color: var(--kirby-card-header-background-color);
-    padding: size('xxxxs') size('xxs');
+    --kirby-card-header-padding: #{size('xxxxs')} #{size('xxs')};
 
     h2 {
-      margin-bottom: 0;
-      line-height: line-height('n');
+      --kirby-card-header-line-height: #{line-height('n')};
+      --kirby-card-header-margin-bottom: 0;
     }
   }
 }
