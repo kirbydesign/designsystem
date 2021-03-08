@@ -186,14 +186,14 @@ const providers = [
   ResizeObserverFactory,
   ResizeObserverService,
   {
+    provide: WindowRef,
+    useValue: window,
+  },
+  {
     provide: APP_INITIALIZER,
     useFactory: appInitialize,
     deps: [DOCUMENT],
     multi: true,
-  },
-  {
-    provide: WindowRef,
-    useValue: window,
   },
 ];
 

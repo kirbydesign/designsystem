@@ -1,13 +1,14 @@
-import { MockComponents, MockDirective } from 'ng-mocks';
 import { IonicModule } from '@ionic/angular';
-import { SpectatorHost, createHostFactory } from '@ngneat/spectator';
+import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
+import { MockComponents, MockDirective } from 'ng-mocks';
 
-import { TestHelper } from '../../testing/test-helper';
+import { BadgeComponent } from '../';
 import { ThemeColorDirective } from '../../directives';
-import { BadgeComponent } from '../badge/badge.component';
+import { TestHelper } from '../../testing/test-helper';
 import { ChipComponent } from '../chip/chip.component';
-import { SegmentedControlComponent } from './segmented-control.component';
+
 import { SegmentItem } from './segment-item';
+import { SegmentedControlComponent } from './segmented-control.component';
 
 describe('SegmentedControlComponent', () => {
   let component: SegmentedControlComponent;
