@@ -1,9 +1,10 @@
-import { ToastController, IonicModule } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 
 import { DesignTokenHelper } from '../../../helpers/design-token-helper';
 import { TestHelper } from '../../../testing/test-helper';
 import { Overlay } from '../../modal/services/modal.interfaces';
+
 import { ToastHelper } from './toast.helper';
 
 const getColor = DesignTokenHelper.getColor;
@@ -14,7 +15,7 @@ describe('ToastHelper', () => {
 
   const createService = createServiceFactory({
     service: ToastHelper,
-    imports: [IonicModule.forRoot({ mode: 'ios', _testing: true })],
+    imports: [TestHelper.ionicModuleForTest],
     providers: [ToastController],
   });
 

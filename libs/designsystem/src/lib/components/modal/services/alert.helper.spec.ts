@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicModule, ModalController as IonicModalController } from '@ionic/angular';
+import { ModalController as IonicModalController } from '@ionic/angular';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 
 import { DesignTokenHelper } from '../../../helpers';
-
+import { TestHelper } from '../../../testing/test-helper';
 import { WindowRef } from '../../../types/window-ref';
+
 import { AlertHelper } from './alert.helper';
 import { Overlay } from './modal.interfaces';
 
@@ -22,7 +23,7 @@ describe('AlertHelper', () => {
 
   const createService = createServiceFactory({
     service: AlertHelper,
-    imports: [IonicModule.forRoot({ mode: 'ios', _testing: true })],
+    imports: [TestHelper.ionicModuleForTest],
     providers: [
       {
         provide: WindowRef,

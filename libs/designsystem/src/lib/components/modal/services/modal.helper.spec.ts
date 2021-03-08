@@ -1,20 +1,21 @@
-import { Component, Optional, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { IonicModule, ModalController as IonicModalController } from '@ionic/angular';
-import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
+import { Component, ElementRef, OnInit, Optional, ViewChild } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
+import { ModalController as IonicModalController } from '@ionic/angular';
+import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 import { MockComponent } from 'ng-mocks';
 
 import { DesignTokenHelper } from '../../../helpers/design-token-helper';
-import { WindowRef } from '../../../types/window-ref';
 import { ScreenSize, TestHelper } from '../../../testing/test-helper';
+import { WindowRef } from '../../../types/window-ref';
 import { IconComponent } from '../../icon';
 import { ModalFooterComponent } from '../footer/modal-footer.component';
+import { ModalCompactWrapperComponent } from '../modal-wrapper/compact/modal-compact-wrapper.component';
 import { ModalConfig, ModalFlavor, ModalSize } from '../modal-wrapper/config/modal-config';
 import { ModalWrapperComponent } from '../modal-wrapper/modal-wrapper.component';
-import { ModalCompactWrapperComponent } from '../modal-wrapper/compact/modal-compact-wrapper.component';
-import { ModalHelper } from './modal.helper';
-import { Overlay, Modal } from './modal.interfaces';
+
 import { ModalNavigationService } from './modal-navigation.service';
+import { ModalHelper } from './modal.helper';
+import { Modal, Overlay } from './modal.interfaces';
 
 @Component({
   template: `
@@ -74,7 +75,7 @@ describe('ModalHelper', () => {
 
   const createService = createServiceFactory({
     service: ModalHelper,
-    imports: [IonicModule.forRoot({ mode: 'ios', _testing: true }), RouterTestingModule],
+    imports: [TestHelper.ionicModuleForTest, RouterTestingModule],
     providers: [
       {
         provide: WindowRef,
