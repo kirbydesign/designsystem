@@ -1,11 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { ShowcaseEvent } from '~/app/shared/showcase-events/showcase-events.component';
+import {
+  ShowcaseProperty,
+  ShowcasePropertyColumns,
+} from '~/app/shared/showcase-properties/showcase-properties.component';
 
 @Component({
   selector: 'cookbook-toolbar-showcase',
   templateUrl: './toolbar-showcase.component.html',
   styleUrls: ['./toolbar-showcase.component.scss'],
 })
-export class ToolbarShowcaseComponent implements OnInit {
+export class ToolbarShowcaseComponent {
   exampleHtml: string = `
       <!-- title -->
       <kirby-toolbar title="TITLE"></kirby-toolbar>
@@ -17,7 +22,31 @@ export class ToolbarShowcaseComponent implements OnInit {
         <kirby-icon secondary size="md" name="more"></kirby-icon>
       </kirby-toolbar>
     `;
-  constructor() {}
 
-  ngOnInit() {}
+  propertyColumns: ShowcasePropertyColumns = {
+    Name: 'Name',
+    Description: 'Description',
+    Type: 'Input values',
+    Default: 'Default',
+  };
+
+  properties: ShowcaseProperty[] = [
+    {
+      name: 'title',
+      description: 'Sets the title in the toolbar',
+      inputValues: ['string'],
+    },
+    {
+      name: 'hideBackButton',
+      description: 'Specifies if the backbutton should be hidden',
+      inputValues: ['boolean'],
+      defaultValue: 'false',
+    },
+  ];
+
+  events: ShowcaseEvent[] = [
+    { name: 'back', description: 'Emits a click/tap event for the back navigation button' },
+    { name: 'primarySelect', description: 'Emits a click/tap event for the primary element' },
+    { name: 'secondarySelect', description: 'Emits a click/tap event for the secondary element' },
+  ];
 }
