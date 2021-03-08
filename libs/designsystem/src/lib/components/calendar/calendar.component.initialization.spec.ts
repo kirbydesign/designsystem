@@ -2,15 +2,29 @@ import { LOCALE_ID } from '@angular/core';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponent } from 'ng-mocks';
 
-import { CalendarComponent, IconComponent } from '..';
+import {
+  CalendarComponent,
+  CardComponent,
+  DropdownComponent,
+  IconComponent,
+  RadioComponent,
+} from '..';
 import { WindowRef } from '../../types/window-ref';
+import { ItemComponent } from '../item';
 
 describe('CalendarComponent', () => {
   let spectator: SpectatorHost<CalendarComponent>;
 
   const createHost = createHostFactory({
     component: CalendarComponent,
-    declarations: [CalendarComponent, MockComponent(IconComponent)],
+    declarations: [
+      CalendarComponent,
+      MockComponent(IconComponent),
+      DropdownComponent,
+      RadioComponent,
+      CardComponent,
+      ItemComponent,
+    ],
     providers: [
       {
         provide: LOCALE_ID,
