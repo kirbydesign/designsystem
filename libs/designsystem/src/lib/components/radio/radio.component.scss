@@ -5,6 +5,7 @@ $radio-icon-size: size('m');
 $radio-icon-mark-size: 60%;
 $spacing-to-edge: map-get($checkbox-radio-spacing, 'to-edge');
 $spacing-to-label: map-get($checkbox-radio-spacing, 'to-label');
+$default-checkbox-radio-size: map-get($checkbox-radio-sizes, 'md');
 
 @mixin wrapper-top-bottom-padding($target-height) {
   $padding: ($target-height - $radio-icon-size) / 2;
@@ -24,7 +25,7 @@ $spacing-to-label: map-get($checkbox-radio-spacing, 'to-label');
       align-items: flex-start;
       vertical-align: top;
       padding-right: $spacing-to-label; // Ensure same padding on right side of label
-      @include wrapper-top-bottom-padding(map-get($checkbox-radio-sizes, 'md'));
+      @include wrapper-top-bottom-padding($default-checkbox-radio-size);
     }
 
     @each $size, $height in $checkbox-radio-sizes {
