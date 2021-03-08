@@ -63,6 +63,9 @@ export class ButtonComponent implements AfterContentInit {
   @Input() expand: 'full' | 'block';
   @Input() text: string;
   @Input() isFloating: boolean = false;
+  @HostBinding('class')
+  @Input()
+  size: 'sm' | 'md' | 'lg' = 'md';
 
   @ContentChild(IconComponent) icon: IconComponent;
   @ContentChild(IconComponent, { read: ElementRef })
