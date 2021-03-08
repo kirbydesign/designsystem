@@ -36,19 +36,21 @@ h4 {
 
 // Flagged card headers
 
-$notification-levels: ('info');
+// key = level, value = color-name
+$notification-levels: (
+  'info': 'semi-light',
+);
 
 @each $color-name, $color-value in $notification-colors {
-  $notification-levels: append($notification-levels, $color-name);
+  $notification-levels: map-merge(
+    (
+      $color-name: $color-name,
+    ),
+    $notification-levels
+  );
 }
 
-@each $level in $notification-levels {
-  $color-name: $level;
-
-  @if $level == 'info' {
-    $color-name: 'semi-light';
-  }
-
+@each $level, $color-name in $notification-levels {
   :host(.#{$level}) {
     --kirby-card-header-background-color: #{get-color($color-name)};
     --kirby-card-header-color: #{get-color($color-name + '-contrast')};
