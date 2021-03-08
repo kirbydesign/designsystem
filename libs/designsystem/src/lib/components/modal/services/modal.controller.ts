@@ -1,5 +1,5 @@
 import { Inject, Injectable, OnDestroy, Optional } from '@angular/core';
-import { ActivatedRoute, Routes, ROUTES } from '@angular/router';
+import { ActivatedRoute, Params, Routes, ROUTES } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { filter, map, takeUntil } from 'rxjs/operators';
 
@@ -80,12 +80,12 @@ export class ModalController implements OnDestroy {
     await this.showAndRegisterOverlay(() => this.modalHelper.showModalWindow(config), onClose);
   }
 
-  public async navigateToModal(path: string | string[]): Promise<boolean> {
-    return this.modalNavigationService.navigateToModal(path);
+  public async navigateToModal(path: string | string[], queryParams?: Params): Promise<boolean> {
+    return this.modalNavigationService.navigateToModal(path, queryParams);
   }
 
-  public async navigateWithinModal(relativePath: string): Promise<boolean> {
-    return this.modalNavigationService.navigateWithinModal(relativePath);
+  public async navigateWithinModal(relativePath: string, queryParams?: Params): Promise<boolean> {
+    return this.modalNavigationService.navigateWithinModal(relativePath, queryParams);
   }
 
   private async showModalRoute(
