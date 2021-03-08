@@ -6,7 +6,7 @@ $spacing-to-edge: map-get($checkbox-radio-spacing, 'to-edge');
 $spacing-to-label: map-get($checkbox-radio-spacing, 'to-label');
 
 @mixin wrapper-top-bottom-padding($target-height) {
-  $padding: calc((#{$target-height} - #{$checkbox-icon-size}) / 2);
+  $padding: ($target-height - $checkbox-icon-size) / 2;
 
   padding-top: $padding;
   padding-bottom: $padding;
