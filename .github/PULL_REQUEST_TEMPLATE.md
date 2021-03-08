@@ -28,7 +28,7 @@ What kind of change does this PR introduce?
 
 <!-- Please link to a relevant issue that documents the current behaviour . -->
 
-Issue Number: # (reference issue number here)
+Issue Number: #[replace with issue number]
 
 ## What is the new behavior?
 
