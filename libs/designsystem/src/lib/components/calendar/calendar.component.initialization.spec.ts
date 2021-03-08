@@ -27,18 +27,56 @@ describe('CalendarComponent', () => {
     ],
   });
 
-  beforeEach(() => {
-    spectator = createHost('<kirby-calendar></kirby-calendar>', {
-      props: {
-        minDate: new Date(2017, 0, 1),
-        maxDate: new Date(2025, 11, 31),
-      },
-    });
-  });
+  type calendarProps = keyof CalendarComponent;
+  const testScenarios: { property: calendarProps; value: any }[] = [
+    { property: 'alwaysEnableToday', value: true },
+    { property: 'disableWeekends', value: true },
+    { property: 'disablePastDates', value: true },
+    { property: 'disableFutureDates', value: true },
+    {
+      property: 'disabledDates',
+      value: [new Date(2005, 6, 3), new Date(2007, 9, 29), new Date(2012, 0, 17)],
+    },
+    { property: 'minDate', value: new Date(2017, 0, 1) },
+    { property: 'maxDate', value: new Date(2025, 11, 31) },
+    { property: 'todayDate', value: new Date(2021, 3, 10) },
+    { property: 'timezone', value: 'UTC' },
+  ];
 
-  it('should create components with `minDate` and `maxDate` set', () => {
-    expect(spectator.component).toBeTruthy();
-    expect(spectator.component.minDate).toEqual(new Date(2017, 0, 1));
-    expect(spectator.component.maxDate).toEqual(new Date(2025, 11, 31));
+  testScenarios.forEach((scenario) => {
+    describe(`when configured with ${scenario.property}`, () => {
+      describe('through input properties', () => {
+        beforeEach(() => {
+          spectator = createHost(`<kirby-calendar></kirby-calendar>`, {
+            props: {
+              [scenario.property]: scenario.value,
+            },
+          });
+        });
+
+        it(`should create component with '${scenario.property}' set`, () => {
+          expect(spectator.component).toBeTruthy();
+          expect(spectator.component[scenario.property]).toEqual(scenario.value);
+        });
+      });
+
+      describe('through template property binding', () => {
+        beforeEach(() => {
+          spectator = createHost(
+            `<kirby-calendar [${scenario.property}]="${scenario.property}"></kirby-calendar>`,
+            {
+              hostProps: {
+                [scenario.property]: scenario.value,
+              },
+            }
+          );
+        });
+
+        it(`should create component with '${scenario.property}' set`, () => {
+          expect(spectator.component).toBeTruthy();
+          expect(spectator.component[scenario.property]).toEqual(scenario.value);
+        });
+      });
+    });
   });
 });
