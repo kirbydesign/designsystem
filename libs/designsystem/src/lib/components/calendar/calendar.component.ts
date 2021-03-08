@@ -166,6 +166,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    if (!this.activeMonth) return;
     if (
       changes.disableWeekends ||
       changes.disablePastDates ||
@@ -270,6 +271,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   refreshActiveMonth() {
+    if (!this.activeMonth) return;
     // IMPORTANT: Moment startOf|endOf functions mutates the date!
     // Clone the date before mutating:
     const monthStart = this.activeMonth.clone().startOf('month');
