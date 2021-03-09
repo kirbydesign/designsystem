@@ -18,7 +18,7 @@ export interface ShowcasePropertyColumns {
 @Component({
   selector: 'cookbook-showcase-properties',
   templateUrl: './showcase-properties.component.html',
-  styleUrls: ['../showcase-api-description/showcase-api-description.scss'],
+  styleUrls: ['../api-description/api-description.shared.scss'],
 })
 export class ShowcasePropertiesComponent {
   @Input() properties: ShowcaseProperty[];
