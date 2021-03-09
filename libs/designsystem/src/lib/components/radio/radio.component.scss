@@ -41,6 +41,11 @@ $default-checkbox-radio-size: map-get($checkbox-radio-sizes, 'md');
       margin-left: $spacing-to-edge;
       margin-right: $spacing-to-label;
     }
+
+    span {
+      line-height: line-height('n');
+      font-size: font-size('n');
+    }
   }
 
   &[disabled] {
