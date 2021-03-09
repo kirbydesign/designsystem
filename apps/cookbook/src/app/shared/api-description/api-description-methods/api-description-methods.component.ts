@@ -17,7 +17,7 @@ export interface ShowcaseMethodColumns {
   templateUrl: './api-description-methods.component.html',
   styleUrls: ['../api-description.shared.scss'],
 })
-export class ShowcaseMethodsComponent {
+export class ApiDescriptionMethodsComponent {
   @Input() methods: ShowcaseMethod[];
   @Input() columns: ShowcaseMethodColumns = {
     Name: 'Name',

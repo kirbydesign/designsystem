@@ -20,7 +20,7 @@ export interface ShowcasePropertyColumns {
   templateUrl: './api-description-properties.component.html',
   styleUrls: ['../api-description.shared.scss'],
 })
-export class ShowcasePropertiesComponent {
+export class ApiDescriptionPropertiesComponent {
   @Input() properties: ShowcaseProperty[];
   @Input() columns: ShowcasePropertyColumns = {
     Name: 'Attribute',

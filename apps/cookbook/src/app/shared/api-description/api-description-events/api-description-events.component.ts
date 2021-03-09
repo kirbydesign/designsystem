@@ -17,7 +17,7 @@ export interface ShowcaseEventColumns {
   templateUrl: './api-description-events.component.html',
   styleUrls: ['../api-description.shared.scss'],
 })
-export class ShowcaseEventsComponent {
+export class ApiDescriptionEventsComponent {
   @Input() events: ShowcaseEvent[];
   @Input() columns: ShowcaseEventColumns = {
     Name: 'Name',
