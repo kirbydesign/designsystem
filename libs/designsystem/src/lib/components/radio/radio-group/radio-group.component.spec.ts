@@ -854,7 +854,7 @@ describe('RadioGroupComponent', () => {
           });
         });
 
-        describe('and pre-selected item', () => {
+        fdescribe('and pre-selected item', () => {
           beforeEach(async () => {
             spectator = createHost(templateScenario.template, {
               hostProps: {
@@ -878,6 +878,7 @@ describe('RadioGroupComponent', () => {
             expect(radios).toHaveLength(textItems.length);
             expect(ionRadioElements).toHaveLength(textItems.length);
             await TestHelper.whenReady(ionRadioElements);
+            await TestHelper.whenTrue(() => radioChecked(1));
           });
 
           it('should render all items', () => {
