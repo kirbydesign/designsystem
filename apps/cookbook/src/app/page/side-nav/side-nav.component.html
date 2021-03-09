@@ -19,7 +19,7 @@
         size="md"
         placeholder="Filter components..."
         (input)="onFilterChange($event.target.value)"
-        (keydown.ArrowDown)="onFilterKeyDown($event)"
+        (keydown.ArrowDown)="onFilterArrowDown($event)"
         [ngModel]="filter"
       />
     </kirby-form-field>
@@ -36,8 +36,8 @@
   </div>
 
   <kirby-card
-    (keydown.ArrowUp)="onLinksKeyDown($event)"
-    (keydown.ArrowDown)="onLinksKeyDown($event)"
+    (keydown.ArrowUp)="onLinksArrowUpDown($event)"
+    (keydown.ArrowDown)="onLinksArrowUpDown($event)"
   >
     <ng-container *ngFor="let item of filteredShowcaseRoutes">
       <a

@@ -2,16 +2,16 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 interface HeaderLink {
   text: string;
-  routerLink?: string;
+  route?: string;
   externalUrl?: string;
   showAsActive?: boolean;
 }
 
 export const navigationItems: HeaderLink[] = [
-  { text: 'Introduction', routerLink: '/home/intro' },
-  { text: 'Ressources', routerLink: '' },
-  { text: 'Changelog', routerLink: '/home/changelog' },
-  { text: 'Component Status', routerLink: '/home/component-status' },
+  { text: 'Introduction', route: '/home/intro' },
+  { text: 'Ressources', route: '' },
+  { text: 'Changelog', route: '/home/changelog' },
+  { text: 'Component Status', route: '/home/component-status' },
   { text: 'Design', externalUrl: 'https://kirby.design/' },
   { text: 'GitHub', externalUrl: 'https://github.com/kirbydesign/designsystem' },
 ];

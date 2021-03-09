@@ -97,14 +97,14 @@
           </button>
         </a>
         <a
-          *ngIf="item.routerLink"
+          *ngIf="item.route"
           href="#"
-          [routerLink]="item.routerLink"
-          [routerLinkActiveOptions]="{ exact: false }"
+          [routerLink]="item.route"
           routerLinkActive
-          #linkTemplateVar="routerLinkActive"
+          [routerLinkActiveOptions]="{ exact: false }"
+          #routerLinkActive="routerLinkActive"
         >
-          <button kirby-button [attentionLevel]="linkTemplateVar.isActive ? '3' : '4'">
+          <button kirby-button [attentionLevel]="routerLinkActive.isActive ? '3' : '4'">
             {{ item.text }}
           </button>
         </a>
