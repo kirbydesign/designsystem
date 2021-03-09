@@ -824,19 +824,19 @@ describe('RadioGroupComponent', () => {
               expect(radioChecked(2)).toBeFalse();
             });
 
-            // it('should update the value of ion-radio-group when the bound field is updated', async () => {
-            //   spectator.setHostInput('selected', textItems[2]);
-            //   console.log(spectator.hostComponent);
-            //   console.log(spectator.component);
-            //   console.log(ionRadioGroup.value);
-            //   expect(spectator.component.value).toEqual(textItems[2]);
-            //   ionradio;
-            //   expect(ionRadioGroup.value).toEqual(textItems[2]);
-            // });
+            it('should update the value of ion-radio-group when the bound field is updated', async () => {
+              spectator.setHostInput('selected', textItems[2]);
+              await TestHelper.waitForTimeout();
+              spectator.detectChanges();
+              expect(spectator.component.value).toEqual(textItems[2]);
+              expect(ionRadioGroup.value).toEqual(textItems[2]);
+            });
 
             it('should update the selected radio when the bound field is updated', async () => {
               spectator.setHostInput('selected', textItems[2]);
               // Wait for radio checked attribute to be updated;
+              await TestHelper.waitForTimeout();
+              spectator.detectChanges();
               await TestHelper.whenTrue(() => radioChecked(2));
 
               expect(radioChecked(0)).toBeFalse();
