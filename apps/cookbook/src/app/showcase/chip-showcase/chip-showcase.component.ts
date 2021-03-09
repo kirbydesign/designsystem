@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
-import {
-  ApiDescriptionProperty,
-  ApiDescriptionPropertyColumns,
-} from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 @Component({
   selector: 'cookbook-chip-showcase',
@@ -10,11 +7,6 @@ import {
   styleUrls: ['./chip-showcase.component.scss'],
 })
 export class ChipShowcaseComponent {
-  columns: ApiDescriptionPropertyColumns = {
-    Name: 'Name',
-    Description: 'Description',
-    Type: 'Input values',
-  };
   properties: ApiDescriptionProperty[] = [
     {
       name: 'text',
