@@ -42,24 +42,37 @@ const config = {
                 Form field required
             </label>
             <p class="selection">
-                form.value: {{ form.value | json }}
-                <br/>
-                form.favoriteFood:
+                <b>
+                    value:
+                </b>
+                {{ form.value | json }}
                 <br/>
                 <span [class.state-true]="favoriteFoodControl.valid">
-                    valid: {{ favoriteFoodControl.valid }}
+                    <b>
+                        valid:
+                    </b>
+                    {{ favoriteFoodControl.valid }}
                 </span>
                 <br/>
                 <span [class.state-true]="favoriteFoodControl.errors">
-                    errors: {{ favoriteFoodControl.errors | json }}
+                    <b>
+                        errors:
+                    </b>
+                    {{ favoriteFoodControl.errors | json }}
                 </span>
                 <br/>
                 <span [class.state-true]="favoriteFoodControl.enabled">
-                    enabled: {{ favoriteFoodControl.enabled }}
+                    <b>
+                        enabled:
+                    </b>
+                    {{ favoriteFoodControl.enabled }}
                 </span>
                 <br/>
                 <span [class.state-true]="favoriteFoodControl.touched">
-                    touched: {{ favoriteFoodControl.touched }}
+                    <b>
+                        touched:
+                    </b>
+                    {{ favoriteFoodControl.touched }}
                 </span>
             </p>
         </fieldset>
