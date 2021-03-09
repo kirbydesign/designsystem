@@ -1,4 +1,4 @@
-import { forwardRef, Component, Input } from '@angular/core';
+import { Component, forwardRef, Input } from '@angular/core';
 
 import { ButtonComponent, NotificationColor } from '@kirbydesign/designsystem';
 
@@ -21,6 +21,7 @@ export class MockButtonComponent {
   @Input() expand: 'full' | 'block';
   @Input() text: string;
   @Input() isFloating: boolean;
+  @Input() size: 'sm' | 'md' | 'lg';
 }
 
 // #endregion

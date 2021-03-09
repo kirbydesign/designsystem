@@ -314,3 +314,87 @@ describe('ButtonComponent', () => {
     });
   });
 });
+
+describe('ButtonComponent', () => {
+  let spectator: SpectatorHost<ButtonComponent>;
+  let element: HTMLButtonElement;
+  const createHost = createHostFactory({
+    component: ButtonComponent,
+    declarations: [MockComponent(IconComponent)],
+  });
+
+  const testScenarios: { size: 'sm' | 'md' | 'lg'; expected: any }[] = [
+    { size: 'sm', expected: { fontSize: fontSize('xs'), height: size('l'), minWidth: '44px' } },
+    { size: 'md', expected: { fontSize: fontSize('s'), height: size('xl'), minWidth: '88px' } },
+    { size: 'lg', expected: { fontSize: fontSize('n'), height: size('xxl'), minWidth: '220px' } },
+  ];
+  testScenarios.forEach((scenario) => {
+    describe(`initialized with size = ${scenario.size}`, () => {
+      describe(`through one-time string initialization`, () => {
+        beforeEach(() => {
+          spectator = createHost(
+            `<button kirby-button size="${scenario.size}"><span>Text</span></button>`
+          );
+          element = spectator.element as HTMLButtonElement;
+        });
+        it('should render with correct font-size', () => {
+          expect(element).toHaveComputedStyle({ 'font-size': scenario.expected.fontSize });
+        });
+
+        it('should render with correct height', () => {
+          expect(element).toHaveComputedStyle({ height: scenario.expected.height });
+        });
+
+        it('should render with correct min-width', () => {
+          expect(element).toHaveComputedStyle({ 'min-width': scenario.expected.minWidth });
+        });
+      });
+    });
+
+    describe(`initialized with size = ${scenario.size}`, () => {
+      describe(`through an input property`, () => {
+        beforeEach(() => {
+          spectator = createHost(`<button kirby-button><span>Text</span></button>`, {
+            props: {
+              size: scenario.size,
+            },
+          });
+          element = spectator.element as HTMLButtonElement;
+        });
+        it('should render with correct font-size', () => {
+          expect(element).toHaveComputedStyle({ 'font-size': scenario.expected.fontSize });
+        });
+
+        it('should render with correct height', () => {
+          expect(element).toHaveComputedStyle({ height: scenario.expected.height });
+        });
+
+        it('should render with correct min-width', () => {
+          expect(element).toHaveComputedStyle({ 'min-width': scenario.expected.minWidth });
+        });
+      });
+    });
+
+    describe(`initialized with size = ${scenario.size}`, () => {
+      describe(`through template property binding`, () => {
+        beforeEach(() => {
+          spectator = createHost(
+            `<button kirby-button [size]="'${scenario.size}'"><span>Text</span></button>`
+          );
+          element = spectator.element as HTMLButtonElement;
+        });
+        it('should render with correct font-size', () => {
+          expect(element).toHaveComputedStyle({ 'font-size': scenario.expected.fontSize });
+        });
+
+        it('should render with correct height', () => {
+          expect(element).toHaveComputedStyle({ height: scenario.expected.height });
+        });
+
+        it('should render with correct min-width', () => {
+          expect(element).toHaveComputedStyle({ 'min-width': scenario.expected.minWidth });
+        });
+      });
+    });
+  });
+});

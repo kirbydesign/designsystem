@@ -1,10 +1,9 @@
 import { RouterTestingModule } from '@angular/router/testing';
 import { IonicModule, IonIcon } from '@ionic/angular';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { MockComponent, MockComponents, MockDirectives } from 'ng-mocks';
+import { MockComponent, MockComponents } from 'ng-mocks';
 
 import { FitHeadingDirective } from '../../directives/fit-heading/fit-heading.directive';
-import { SizeDirective } from '../../directives/size/size.directive';
 import { DesignTokenHelper } from '../../helpers/design-token-helper';
 import { TestHelper } from '../../testing/test-helper';
 import { WindowRef } from '../../types/window-ref';
@@ -245,11 +244,7 @@ describe('ButtonComponent in Kirby dropdown', () => {
   let spectator: SpectatorHost<DropdownComponent>;
   const createHost = createHostFactory({
     component: DropdownComponent,
-    declarations: [
-      ButtonComponent,
-      MockComponents(CardComponent, ItemComponent, IconComponent),
-      MockDirectives(SizeDirective),
-    ],
+    declarations: [ButtonComponent, MockComponents(CardComponent, ItemComponent, IconComponent)],
   });
 
   it('should render with space between text and icon', () => {
@@ -262,78 +257,12 @@ describe('ButtonComponent in Kirby dropdown', () => {
   });
 });
 
-describe('ButtonComponent with size directive', () => {
-  let spectator: SpectatorHost<ButtonComponent>;
-  let element: HTMLButtonElement;
-  const createHost = createHostFactory({
-    component: ButtonComponent,
-    declarations: [SizeDirective, MockComponent(IconComponent)],
-  });
-
-  describe('when configured with size = SM', () => {
-    beforeEach(() => {
-      spectator = createHost('<button kirby-button size="sm"><span>Text Left</span></button>');
-      element = spectator.element as HTMLButtonElement;
-    });
-
-    it('should render with correct font-size', () => {
-      expect(element).toHaveComputedStyle({ 'font-size': fontSize('xs') });
-    });
-
-    it('should render with correct height', () => {
-      expect(element).toHaveComputedStyle({ height: size('l') });
-    });
-
-    it('should render with correct min-width', () => {
-      expect(element).toHaveComputedStyle({ 'min-width': '44px' });
-    });
-  });
-
-  describe('when configured with size = MD', () => {
-    beforeEach(() => {
-      spectator = createHost('<button kirby-button size="md"><span>Text Left</span></button>');
-      element = spectator.element as HTMLButtonElement;
-    });
-
-    it('should render with correct font-size', () => {
-      expect(element).toHaveComputedStyle({ 'font-size': fontSize('s') });
-    });
-
-    it('should render with correct height', () => {
-      expect(element).toHaveComputedStyle({ height: size('xl') });
-    });
-
-    it('should render with correct min-width', () => {
-      expect(element).toHaveComputedStyle({ 'min-width': '88px' });
-    });
-  });
-
-  describe('when configured with size = LG', () => {
-    beforeEach(() => {
-      spectator = createHost('<button kirby-button size="lg">Test</button>');
-      element = spectator.element as HTMLButtonElement;
-    });
-
-    it('should render with correct font-size', () => {
-      expect(element).toHaveComputedStyle({ 'font-size': fontSize('n') });
-    });
-
-    it('should render with correct height', () => {
-      expect(element).toHaveComputedStyle({ height: size('xxl') });
-    });
-
-    it('should render with correct min-width', () => {
-      expect(element).toHaveComputedStyle({ 'min-width': '220px' });
-    });
-  });
-});
-
 describe('ButtonComponent configured with icon only', () => {
   let spectator: SpectatorHost<ButtonComponent>;
   let element: HTMLButtonElement;
   const createHost = createHostFactory({
     component: ButtonComponent,
-    declarations: [SizeDirective, MockComponent(IconComponent)],
+    declarations: [MockComponent(IconComponent)],
   });
 
   const attentionLevels = ['1', '2', '3', '4'];
@@ -357,7 +286,7 @@ describe('ButtonComponent configured with icon only', () => {
   describe('and configured with attentionlevel', () => {
     beforeEach(() => {
       spectator = createHost(
-        `<button kirby-button>
+        `<button kirby-button >
           <kirby-icon name="edit">
         </kirby-icon></button>`
       );
@@ -378,7 +307,7 @@ describe('ButtonComponent configured with icon only', () => {
     });
   });
 
-  describe('and size directive with size = SM', () => {
+  describe('and initialized with size = SM', () => {
     const iconButtonSizeSM = size('l');
     beforeEach(() => {
       spectator = createHost(
@@ -409,7 +338,7 @@ describe('ButtonComponent configured with icon only', () => {
     });
   });
 
-  describe('and size directive with size = MD', () => {
+  describe('and initialized with size = MD', () => {
     const iconButtonSizeMD = size('xl');
     beforeEach(() => {
       spectator = createHost(
@@ -440,7 +369,7 @@ describe('ButtonComponent configured with icon only', () => {
     });
   });
 
-  describe('and size directive with size = LG', () => {
+  describe('and initialized with size = LG', () => {
     const iconButtonSizeLG = size('xxl');
     beforeEach(() => {
       spectator = createHost(
@@ -478,7 +407,7 @@ describe('ButtonComponent configured with text and icon', () => {
   let element: HTMLButtonElement;
   const createHost = createHostFactory({
     component: ButtonComponent,
-    declarations: [SizeDirective, IconComponent, MockComponent(IonIcon)],
+    declarations: [IconComponent, MockComponent(IonIcon)],
   });
 
   it('should render with correct icon font-size', () => {
@@ -550,7 +479,7 @@ describe('ButtonComponent configured with text and icon', () => {
     });
   });
 
-  describe('and size directive with size = SM', () => {
+  describe('and initialized with size = SM', () => {
     beforeEach(() => {
       spectator = createHost(
         `<button kirby-button size="sm">
@@ -572,7 +501,7 @@ describe('ButtonComponent configured with text and icon', () => {
     });
   });
 
-  describe('and size directive with size = MD', () => {
+  describe('and initialized with size = MD', () => {
     beforeEach(() => {
       spectator = createHost(
         `<button kirby-button size="md">
@@ -594,7 +523,7 @@ describe('ButtonComponent configured with text and icon', () => {
     });
   });
 
-  describe('and size directive with size = LG', () => {
+  describe('and initialized with size = LG', () => {
     beforeEach(() => {
       spectator = createHost(
         `<button kirby-button size="lg">
