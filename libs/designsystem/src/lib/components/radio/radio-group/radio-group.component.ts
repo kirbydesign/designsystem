@@ -166,7 +166,6 @@ export class RadioGroupComponent implements AfterContentInit, ControlValueAccess
   }
 
   _onChange(value: string | any) {
-    console.log('change', value);
     if (value === this._value) return;
     this.setSelectedItem(value);
     this.valueChange.emit(value);
