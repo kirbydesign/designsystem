@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { ShowcaseEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
+import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
 import {
-  ShowcaseProperty,
-  ShowcasePropertyColumns,
+  ApiDescriptionProperty,
+  ApiDescriptionPropertyColumns,
 } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 @Component({
@@ -23,14 +23,14 @@ export class ToolbarShowcaseComponent {
       </kirby-toolbar>
     `;
 
-  propertyColumns: ShowcasePropertyColumns = {
+  propertyColumns: ApiDescriptionPropertyColumns = {
     Name: 'Name',
     Description: 'Description',
     Type: 'Input values',
     Default: 'Default',
   };
 
-  properties: ShowcaseProperty[] = [
+  properties: ApiDescriptionProperty[] = [
     {
       name: 'title',
       description: 'Sets the title in the toolbar',
@@ -44,7 +44,7 @@ export class ToolbarShowcaseComponent {
     },
   ];
 
-  events: ShowcaseEvent[] = [
+  events: ApiDescriptionEvent[] = [
     { name: 'back', description: 'Emits a click/tap event for the back navigation button' },
     { name: 'primarySelect', description: 'Emits a click/tap event for the primary element' },
     { name: 'secondarySelect', description: 'Emits a click/tap event for the secondary element' },

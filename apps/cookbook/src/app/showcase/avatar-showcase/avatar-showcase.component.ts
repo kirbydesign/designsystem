@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ShowcaseProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 import { Sizes } from '@kirbydesign/designsystem';
 
@@ -11,7 +11,7 @@ declare var require: any;
   styleUrls: ['./avatar-showcase.component.scss'],
 })
 export class AvatarShowcaseComponent implements OnInit {
-  properties: ShowcaseProperty[] = [
+  properties: ApiDescriptionProperty[] = [
     {
       name: 'imageSrc',
       description: 'Points to the src of the image location',

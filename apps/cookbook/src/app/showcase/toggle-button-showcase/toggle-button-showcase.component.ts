@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ShowcaseProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 import { ColorHelper } from '@kirbydesign/designsystem';
 
@@ -9,7 +9,7 @@ import { ColorHelper } from '@kirbydesign/designsystem';
 })
 export class ToggleButtonShowcaseComponent {
   notificationColors = ColorHelper.notificationColors.map((color) => color.name);
-  properties: ShowcaseProperty[] = [
+  properties: ApiDescriptionProperty[] = [
     {
       name: 'checked',
       description: 'If true, the toggle button is selected.',
@@ -23,7 +23,7 @@ export class ToggleButtonShowcaseComponent {
       inputValues: ['event'],
     },
   ];
-  buttonProperties: ShowcaseProperty[] = [
+  buttonProperties: ApiDescriptionProperty[] = [
     {
       name: 'themeColor',
       description: `Sets the background color to the provided notification color.

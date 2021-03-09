@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { ShowcaseEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
-import { ShowcaseProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
+import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 import { ListLoadOnDemandExampleTemplate } from './../../examples/list-load-on-demand-example/list-load-on-demand-example.component';
 
@@ -12,7 +12,7 @@ import { ListLoadOnDemandExampleTemplate } from './../../examples/list-load-on-d
 export class ListLoadOnDemandShowcaseComponent {
   exampleHtml: string = ListLoadOnDemandExampleTemplate;
 
-  properties: ShowcaseProperty[] = [
+  properties: ApiDescriptionProperty[] = [
     {
       name: 'isLoadOnDemandEnabled',
       description: 'Determines if the loadOnDemand event should be emitted.',
@@ -27,7 +27,7 @@ export class ListLoadOnDemandShowcaseComponent {
     },
   ];
 
-  events: ShowcaseEvent[] = [
+  events: ApiDescriptionEvent[] = [
     {
       name: 'loadOnDemand',
       description: `Emitted when the user has scrolled 80% of the list.`,

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ShowcaseProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 declare var require: any;
 
 @Component({
@@ -12,7 +12,7 @@ export class ButtonShowcaseComponent {
   themeColor = '';
   exampleHtml: string = require('!raw-loader!../../examples/button-example/button-example.component.html')
     .default;
-  properties: ShowcaseProperty[] = [
+  properties: ApiDescriptionProperty[] = [
     {
       name: 'expand',
       description:

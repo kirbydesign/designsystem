@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {
-  ShowcaseProperty,
-  ShowcasePropertyColumns,
+  ApiDescriptionProperty,
+  ApiDescriptionPropertyColumns,
 } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 @Component({
@@ -10,12 +10,12 @@ import {
   styleUrls: ['./stock-chart-showcase.component.scss'],
 })
 export class StockChartShowcaseComponent {
-  columns: ShowcasePropertyColumns = {
+  columns: ApiDescriptionPropertyColumns = {
     Name: 'Name',
     Description: 'Description',
     Type: 'Input values',
   };
-  properties: ShowcaseProperty[] = [
+  properties: ApiDescriptionProperty[] = [
     {
       name: 'description',
       description: 'Description of Highstock Chart for accessibility',

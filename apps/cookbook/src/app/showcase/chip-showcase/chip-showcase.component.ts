@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {
-  ShowcaseProperty,
-  ShowcasePropertyColumns,
+  ApiDescriptionProperty,
+  ApiDescriptionPropertyColumns,
 } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 @Component({
@@ -10,12 +10,12 @@ import {
   styleUrls: ['./chip-showcase.component.scss'],
 })
 export class ChipShowcaseComponent {
-  columns: ShowcasePropertyColumns = {
+  columns: ApiDescriptionPropertyColumns = {
     Name: 'Name',
     Description: 'Description',
     Type: 'Input values',
   };
-  properties: ShowcaseProperty[] = [
+  properties: ApiDescriptionProperty[] = [
     {
       name: 'text',
       description: 'The text displayed inside the chip',

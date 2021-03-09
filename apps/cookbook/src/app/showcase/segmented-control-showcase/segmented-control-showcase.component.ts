@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ShowcaseProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 @Component({
   selector: 'cookbook-segmented-control-showcase',
@@ -7,7 +7,7 @@ import { ShowcaseProperty } from '~/app/shared/api-description/api-description-p
   styleUrls: ['./segmented-control-showcase.component.scss'],
 })
 export class SegmentedControlShowcaseComponent {
-  properties: ShowcaseProperty[] = [
+  properties: ApiDescriptionProperty[] = [
     {
       name: 'mode',
       description: 'The mode of the segmented control.',

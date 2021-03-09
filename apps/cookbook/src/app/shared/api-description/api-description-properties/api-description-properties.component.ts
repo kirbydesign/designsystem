@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-export interface ShowcaseProperty {
+export interface ApiDescriptionProperty {
   name: string;
   description?: string;
   defaultValue?: string;
@@ -8,7 +8,7 @@ export interface ShowcaseProperty {
   preserveInputValuesWhitespaces?: boolean;
 }
 
-export interface ShowcasePropertyColumns {
+export interface ApiDescriptionPropertyColumns {
   Name: string;
   Description?: string;
   Type?: string;
@@ -21,8 +21,8 @@ export interface ShowcasePropertyColumns {
   styleUrls: ['../api-description.shared.scss'],
 })
 export class ApiDescriptionPropertiesComponent {
-  @Input() properties: ShowcaseProperty[];
-  @Input() columns: ShowcasePropertyColumns = {
+  @Input() properties: ApiDescriptionProperty[];
+  @Input() columns: ApiDescriptionPropertyColumns = {
     Name: 'Attribute',
     Description: 'Description',
     Type: 'Type',

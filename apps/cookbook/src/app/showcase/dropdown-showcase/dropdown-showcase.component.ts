@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { ShowcaseEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
-import { ShowcaseMethod } from '~/app/shared/api-description/api-description-methods/api-description-methods.component';
-import { ShowcaseProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
+import { ApiDescriptionMethod } from '~/app/shared/api-description/api-description-methods/api-description-methods.component';
+import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 @Component({
   selector: 'cookbook-dropdown-showcase',
@@ -10,7 +10,7 @@ import { ShowcaseProperty } from '~/app/shared/api-description/api-description-p
 })
 export class DropdownShowcaseComponent {
   size: string = 'md';
-  properties: ShowcaseProperty[] = [
+  properties: ApiDescriptionProperty[] = [
     {
       name: 'items',
       description: 'The items rendered within the dropdown.',
@@ -64,7 +64,7 @@ export class DropdownShowcaseComponent {
     },
   ];
 
-  methods: ShowcaseMethod[] = [
+  methods: ApiDescriptionMethod[] = [
     {
       name: 'toggle()',
       description: 'Toggles the open/closed state of the dropdown.',
@@ -82,7 +82,7 @@ export class DropdownShowcaseComponent {
     },
   ];
 
-  events: ShowcaseEvent[] = [
+  events: ApiDescriptionEvent[] = [
     {
       name: 'change',
       description: 'Emitted when an item is selected (tap on mobile, click/keypress on web)',

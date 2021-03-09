@@ -1,12 +1,12 @@
 import { Component, Input } from '@angular/core';
 
-export interface ShowcaseMethod {
+export interface ApiDescriptionMethod {
   name: string;
   description?: string;
   signature?: string;
 }
 
-export interface ShowcaseMethodColumns {
+export interface ApiDescriptionMethodColumns {
   Name: string;
   Description?: string;
   Type?: string;
@@ -18,8 +18,8 @@ export interface ShowcaseMethodColumns {
   styleUrls: ['../api-description.shared.scss'],
 })
 export class ApiDescriptionMethodsComponent {
-  @Input() methods: ShowcaseMethod[];
-  @Input() columns: ShowcaseMethodColumns = {
+  @Input() methods: ApiDescriptionMethod[];
+  @Input() columns: ApiDescriptionMethodColumns = {
     Name: 'Name',
     Description: 'Description',
     Type: 'Signature',

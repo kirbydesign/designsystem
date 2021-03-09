@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ShowcaseProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 declare var require: any;
 
@@ -11,7 +11,7 @@ declare var require: any;
 export class ActionSheetShowcaseComponent {
   exampleHtml: string = require('!raw-loader!../../examples/action-sheet-example/action-sheet-example.component.html')
     .default;
-  properties: ShowcaseProperty[] = [
+  properties: ApiDescriptionProperty[] = [
     {
       name: 'header',
       description: '(Optional) The header of the action sheet',

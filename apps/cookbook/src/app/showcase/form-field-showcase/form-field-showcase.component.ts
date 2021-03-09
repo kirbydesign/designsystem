@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { ShowcaseEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
-import { ShowcaseMethod } from '~/app/shared/api-description/api-description-methods/api-description-methods.component';
-import { ShowcaseProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
+import { ApiDescriptionMethod } from '~/app/shared/api-description/api-description-methods/api-description-methods.component';
+import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 import { InputSize } from '@kirbydesign/designsystem';
 
@@ -12,7 +12,7 @@ import { InputSize } from '@kirbydesign/designsystem';
 })
 export class FormFieldShowcaseComponent {
   size: InputSize;
-  formFieldProperties: ShowcaseProperty[] = [
+  formFieldProperties: ApiDescriptionProperty[] = [
     {
       name: 'label',
       defaultValue: undefined,
@@ -29,7 +29,7 @@ export class FormFieldShowcaseComponent {
     },
   ];
 
-  formFieldMethods: ShowcaseMethod[] = [
+  formFieldMethods: ApiDescriptionMethod[] = [
     {
       name: 'focus()',
       description: `Programmatically sets focus to the input (or textarea) within the form field.
@@ -38,7 +38,7 @@ On native devices this method also ensures the form field is scrolled into the v
     },
   ];
 
-  sharedProperties: ShowcaseProperty[] = [
+  sharedProperties: ApiDescriptionProperty[] = [
     {
       name: 'hasError',
       defaultValue: 'false',
@@ -92,7 +92,7 @@ On native devices this method also ensures the form field is scrolled into the v
     },
   ];
 
-  inputProperties: ShowcaseProperty[] = [
+  inputProperties: ApiDescriptionProperty[] = [
     {
       name: 'type',
       defaultValue: 'text',
@@ -108,7 +108,7 @@ On native devices this method also ensures the form field is scrolled into the v
     },
   ];
 
-  sharedEvents: ShowcaseEvent[] = [
+  sharedEvents: ApiDescriptionEvent[] = [
     {
       name: 'blur',
       description: 'Emitted when the input loses focus.',
@@ -127,7 +127,7 @@ On native devices this method also ensures the form field is scrolled into the v
     },
   ];
 
-  textareaProperties: ShowcaseProperty[] = [
+  textareaProperties: ApiDescriptionProperty[] = [
     {
       name: 'rows',
       defaultValue: undefined,
@@ -142,7 +142,7 @@ On native devices this method also ensures the form field is scrolled into the v
     },
   ];
 
-  counterProperties: ShowcaseProperty[] = [
+  counterProperties: ApiDescriptionProperty[] = [
     {
       name: 'listenTo',
       defaultValue: undefined,

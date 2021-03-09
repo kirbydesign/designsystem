@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef } from '@angular/core';
-import { ShowcaseEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
-import { ShowcaseProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
+import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 import { ModalController } from '@kirbydesign/designsystem';
 
@@ -27,7 +27,7 @@ export class ModalShowcaseComponent implements AfterViewInit {
     return false;
   }
 
-  configProperties: ShowcaseProperty[] = [
+  configProperties: ApiDescriptionProperty[] = [
     {
       name: 'flavor',
       description: `(Optional) The flavor of the modal.
@@ -69,7 +69,7 @@ export class ModalShowcaseComponent implements AfterViewInit {
     },
   ];
 
-  properties: ShowcaseProperty[] = [
+  properties: ApiDescriptionProperty[] = [
     {
       name: 'scrollDisabled',
       description: 'Disable scrolling of the modal',
@@ -78,7 +78,7 @@ export class ModalShowcaseComponent implements AfterViewInit {
     },
   ];
 
-  footerProperties: ShowcaseProperty[] = [
+  footerProperties: ApiDescriptionProperty[] = [
     {
       name: 'themeColor',
       description: "Theme color. 'light' will use the background-color variable",
@@ -87,7 +87,7 @@ export class ModalShowcaseComponent implements AfterViewInit {
     },
   ];
 
-  events: ShowcaseEvent[] = [
+  events: ApiDescriptionEvent[] = [
     {
       name: 'didPresent',
       description: 'Emitted when the modal is ready and the enter animation has finished',

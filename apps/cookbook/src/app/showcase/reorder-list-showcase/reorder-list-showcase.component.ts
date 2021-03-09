@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { ShowcaseMethod } from '~/app/shared/api-description/api-description-methods/api-description-methods.component';
-import { ShowcaseProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionMethod } from '~/app/shared/api-description/api-description-methods/api-description-methods.component';
+import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 declare var require: any;
 
@@ -13,7 +13,7 @@ export class ReorderListShowcaseComponent {
   exampleHtml: string = require('!raw-loader!../../examples/reorder-list-example/reorder-list-example.component.html')
     .default;
 
-  properties: ShowcaseProperty[] = [
+  properties: ApiDescriptionProperty[] = [
     {
       name: 'items',
       description: 'Array of items',
@@ -34,7 +34,7 @@ export class ReorderListShowcaseComponent {
     },
   ];
 
-  events: ShowcaseProperty[] = [
+  events: ApiDescriptionProperty[] = [
     {
       name: 'itemReorder',
       description:
@@ -47,7 +47,7 @@ export class ReorderListShowcaseComponent {
     },
   ];
 
-  methods: ShowcaseMethod[] = [
+  methods: ApiDescriptionMethod[] = [
     {
       name: 'complete()',
       description:

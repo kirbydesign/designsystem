@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ShowcaseProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 declare var require: any;
 
@@ -11,7 +11,7 @@ declare var require: any;
 export class SlideButtonShowcaseComponent {
   exampleHtml: string = require('!raw-loader!../../examples/slide-button-example/slide-button-example.component.html')
     .default;
-  properties: ShowcaseProperty[] = [
+  properties: ApiDescriptionProperty[] = [
     {
       name: 'expand',
       description:

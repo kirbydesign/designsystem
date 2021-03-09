@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ShowcaseProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 import { defaultIcons, Sizes } from '@kirbydesign/designsystem';
 
@@ -18,7 +18,7 @@ export class IconShowcaseComponent {
 <kirby-icon size="SIZE"></kirby-icon>`;
   sizes = Sizes;
 
-  properties: ShowcaseProperty[] = [
+  properties: ApiDescriptionProperty[] = [
     {
       name: 'name',
       description: 'Name of the icon that you want to show.',

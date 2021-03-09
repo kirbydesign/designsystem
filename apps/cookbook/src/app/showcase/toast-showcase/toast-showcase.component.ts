@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ShowcaseProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 declare var require: any;
 
@@ -10,7 +10,7 @@ declare var require: any;
 export class ToastShowcaseComponent {
   exampleHtml: string = require('!raw-loader!../../examples/toast-example/toast-example.component.html')
     .default;
-  properties: ShowcaseProperty[] = [
+  properties: ApiDescriptionProperty[] = [
     {
       name: 'message',
       description: 'Sets the message for the toast',

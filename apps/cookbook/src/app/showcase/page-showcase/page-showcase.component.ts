@@ -6,10 +6,10 @@ import { PageFitHeadingExampleComponent } from '~/app/examples/page-example/fit-
 import { PageFixedFooterTabExampleComponent } from '~/app/examples/page-example/fixed-footer-tabs/tab/fixed-footer-tab-example.component';
 import { PageFixedTitleAndActionsExampleComponent } from '~/app/examples/page-example/fixed-title-and-actions/page-fixed-title-and-actions-example.component';
 import { PageSimpleExampleComponent } from '~/app/examples/page-example/simple/page-simple-example.component';
-import { ShowcaseEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
+import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
 import {
-  ShowcaseProperty,
-  ShowcasePropertyColumns,
+  ApiDescriptionProperty,
+  ApiDescriptionPropertyColumns,
 } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 @Component({
@@ -29,7 +29,7 @@ export class PageShowcaseComponent {
   fixedActionsExampleHtml: string = PageFixedTitleAndActionsExampleComponent.fixedActionsTemplate;
   customTitleExampleHtml: string = PageCustomTitleExampleComponent.template;
   advancedExampleHtml: string = PageAdvancedExampleComponent.template;
-  properties: ShowcaseProperty[] = [
+  properties: ApiDescriptionProperty[] = [
     {
       name: 'title',
       description:
@@ -67,7 +67,7 @@ export class PageShowcaseComponent {
       inputValues: ['true', 'false'],
     },
   ];
-  events: ShowcaseEvent[] = [
+  events: ApiDescriptionEvent[] = [
     {
       name: 'enter',
       description: 'Emitted when the page has animated into view',
@@ -80,12 +80,12 @@ export class PageShowcaseComponent {
     },
   ];
 
-  layoutColumns: ShowcasePropertyColumns = {
+  layoutColumns: ApiDescriptionPropertyColumns = {
     Name: 'Tag',
     Description: 'Description',
   };
 
-  layouts: ShowcaseProperty[] = [
+  layouts: ApiDescriptionProperty[] = [
     {
       name: '<kirby-page>',
       description:
@@ -103,14 +103,14 @@ export class PageShowcaseComponent {
     },
   ];
 
-  directiveColumns: ShowcasePropertyColumns = {
+  directiveColumns: ApiDescriptionPropertyColumns = {
     Name: 'Name',
     Description: 'Description',
     Type: '(Optional) Configuration',
     Default: 'Default',
   };
 
-  directives: ShowcaseProperty[] = [
+  directives: ApiDescriptionProperty[] = [
     {
       name: '*kirbyPageTitle',
       description:
@@ -136,14 +136,14 @@ export class PageShowcaseComponent {
     },
   ];
 
-  cssColumns: ShowcasePropertyColumns = {
+  cssColumns: ApiDescriptionPropertyColumns = {
     Name: 'Name',
     Description: 'Description',
     Type: 'Type',
     Default: 'Default',
   };
 
-  cssProperties: ShowcaseProperty[] = [
+  cssProperties: ApiDescriptionProperty[] = [
     {
       name: '--kirby-page-title-margin-bottom',
       description: 'Spacing between page title and page content.',

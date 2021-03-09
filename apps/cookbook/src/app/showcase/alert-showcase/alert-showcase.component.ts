@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AlertExampleComponent } from '~/app/examples/alert-example/alert-example.component';
-import { ShowcaseProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 @Component({
   selector: 'cookbook-alert-showcase',
@@ -10,7 +10,7 @@ import { ShowcaseProperty } from '~/app/shared/api-description/api-description-p
 export class AlertShowcaseComponent {
   alertConfigWithIcon: string = AlertExampleComponent.alertConfigWithIcon;
   alertConfigWithDynamicValues: string = AlertExampleComponent.alertConfigWithDynamicValues;
-  properties: ShowcaseProperty[] = [
+  properties: ApiDescriptionProperty[] = [
     {
       name: 'title',
       description: 'The title of the alert',

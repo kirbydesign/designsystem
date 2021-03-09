@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { ShowcaseEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
-import { ShowcaseProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
+import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 @Component({
   selector: 'cookbook-checkbox-showcase',
@@ -8,7 +8,7 @@ import { ShowcaseProperty } from '~/app/shared/api-description/api-description-p
   styleUrls: ['./checkbox-showcase.component.scss'],
 })
 export class CheckboxShowcaseComponent {
-  properties: ShowcaseProperty[] = [
+  properties: ApiDescriptionProperty[] = [
     {
       name: 'attentionLevel',
       description: `Specifies a look.
@@ -48,7 +48,7 @@ Use the default attentionLevel 2 for checkbox lists.`,
     },
   ];
 
-  events: ShowcaseEvent[] = [
+  events: ApiDescriptionEvent[] = [
     {
       name: 'checkedChange',
       description: 'Emitted when the checkbox checked has changed',

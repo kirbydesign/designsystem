@@ -1,12 +1,12 @@
 import { Component, Input } from '@angular/core';
 
-export interface ShowcaseEvent {
+export interface ApiDescriptionEvent {
   name: string;
   description?: string;
   signature?: string;
 }
 
-export interface ShowcaseEventColumns {
+export interface ApiDescriptionEventColumns {
   Name: string;
   Description?: string;
   Type?: string;
@@ -18,8 +18,8 @@ export interface ShowcaseEventColumns {
   styleUrls: ['../api-description.shared.scss'],
 })
 export class ApiDescriptionEventsComponent {
-  @Input() events: ShowcaseEvent[];
-  @Input() columns: ShowcaseEventColumns = {
+  @Input() events: ApiDescriptionEvent[];
+  @Input() columns: ApiDescriptionEventColumns = {
     Name: 'Name',
     Description: 'Description',
     Type: 'Signature',

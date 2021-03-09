@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ShowcaseProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 declare var require: any;
 
@@ -10,7 +10,7 @@ declare var require: any;
 export class LoadingOverlayShowcaseComponent {
   exampleHtml: string = require('!raw-loader!../../examples/loading-overlay-example/loading-overlay-example.component.html')
     .default;
-  properties: ShowcaseProperty[] = [
+  properties: ApiDescriptionProperty[] = [
     {
       name: 'isLoading',
       description: 'Shows the loading spinner.',

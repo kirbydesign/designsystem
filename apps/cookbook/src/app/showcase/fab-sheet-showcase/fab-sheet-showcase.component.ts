@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ShowcaseProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 declare var require: any;
 
@@ -13,7 +13,7 @@ export class FabSheetShowcaseComponent {
 
   exampleHtml: string = require('!raw-loader!../../examples/fab-sheet-example/fab-sheet-example.component.html')
     .default;
-  properties: ShowcaseProperty[] = [
+  properties: ApiDescriptionProperty[] = [
     {
       name: 'disabled',
       description: '(Optional) Determines whether the button will be disabled or not.',

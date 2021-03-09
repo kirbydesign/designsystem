@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ShowcaseProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 declare var require: any;
 
@@ -12,7 +12,7 @@ export class EmptyStateShowcaseComponent {
   exampleHtml: string = require('!raw-loader!../../examples/empty-state-example/empty-state-example.component.html')
     .default;
 
-  properties: ShowcaseProperty[] = [
+  properties: ApiDescriptionProperty[] = [
     {
       name: 'iconName',
       description: 'Name of the icon (see icons).',

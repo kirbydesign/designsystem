@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { ShowcaseEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
-import { ShowcaseProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
+import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 @Component({
   selector: 'cookbook-radio-showcase',
@@ -8,7 +8,7 @@ import { ShowcaseProperty } from '~/app/shared/api-description/api-description-p
   styleUrls: ['./radio-showcase.component.scss'],
 })
 export class RadioShowcaseComponent {
-  radioProperties: ShowcaseProperty[] = [
+  radioProperties: ApiDescriptionProperty[] = [
     {
       name: 'value',
       description: 'The value represented by the radio button.',
@@ -28,7 +28,7 @@ export class RadioShowcaseComponent {
     },
   ];
 
-  radioGroupProperties: ShowcaseProperty[] = [
+  radioGroupProperties: ApiDescriptionProperty[] = [
     {
       name: 'items',
       description: 'The items rendered within the radio group.',
@@ -64,7 +64,7 @@ export class RadioShowcaseComponent {
     },
   ];
 
-  groupEvents: ShowcaseEvent[] = [
+  groupEvents: ApiDescriptionEvent[] = [
     {
       name: 'valueChange',
       description: 'Emitted when the selected value changes',
