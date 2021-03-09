@@ -317,7 +317,7 @@ describe('Directive: NumericInputDirective', () => {
           expect(inputElm.selectionStart).toBe(4);
         });
 
-        it('should add an integral digit 1 char beyound first group separator and increment cursor position', () => {
+        it('should add an integral digit 1 char beyond first group separator and increment cursor position', () => {
           inputElm.value = '123';
           inputElm.setSelectionRange(2, 2);
           spectatorDirective.detectChanges();
@@ -347,6 +347,48 @@ describe('Directive: NumericInputDirective', () => {
           spectatorDirective.detectChanges();
           expect((spectatorDirective.element as HTMLInputElement).value).toBe(`124${sep}567`);
           expect(inputElm.selectionStart).toBe(2);
+        });
+
+        it('should remove thousand separators when going from 123,456,789 to 123,489 digit number and maintain correct cursor position', () => {
+          const element = spectatorDirective.element as HTMLInputElement;
+          const cursorPos = 7;
+          const orgVal = `123456789`;
+          const formattedValue = `123${sep}456${sep}789`;
+          testFormControl.setValue(orgVal);
+          inputElm.setSelectionRange(cursorPos, cursorPos);
+          spectatorDirective.detectChanges();
+          expect(element.value).toBe(formattedValue);
+          expect(inputElm.selectionStart).toBe(cursorPos);
+          console.log(element.value);
+
+          testFormControl.setValue(`12345689`, {
+            emitModelToViewChange: false,
+            emitViewToModelChange: false,
+            onlySelf: true,
+          });
+          spectatorDirective.detectChanges();
+          expect(inputElm.selectionStart).toBe(cursorPos);
+          expect(element.value).toBe(`12${sep}345${sep}689`);
+
+          testFormControl.setValue(`1234589`, {
+            emitModelToViewChange: false,
+            emitViewToModelChange: false,
+            onlySelf: true,
+          });
+          spectatorDirective.detectChanges();
+          expect(inputElm.selectionStart).toBe(cursorPos);
+          expect(element.value).toBe(`1${sep}234${sep}589`);
+
+          testFormControl.setValue(`123489`, {
+            emitModelToViewChange: false,
+            emitViewToModelChange: false,
+            onlySelf: true,
+          });
+          spectatorDirective.detectChanges();
+          expect(element.value).toBe(`123${sep}489`);
+          expect(inputElm.selectionStart).toBe(cursorPos - 1);
+
+          //expect(inputElm.selectionStart).toBe(0);
         });
 
         it('should delete the first integral digit and maintain cursor position', () => {

@@ -137,13 +137,13 @@ export class NumericInputAnalyzer {
     if (this.invalid) {
       return;
     }
-    if (value.length > this.lastValue.length) {
-      const lastCount = this.countExistingGroupingSeparator(
-        this.lastValue.substring(0, this.lastCursorPosition)
-      );
-      const newCount = this.countExistingGroupingSeparator(value.substring(0, this.cursorPosition));
-      this.cursorPosition += newCount - lastCount;
-    }
+    const lastCount = this.countGroupingSeparators(
+      this.lastValue.substring(0, this.lastCursorPosition)
+    );
+    const newCount = this.countGroupingSeparators(value.substring(0, this.cursorPosition));
+    console.log('this.cursorPosition lastCount newCount', this.cursorPosition, lastCount, newCount);
+    this.cursorPosition += newCount - lastCount;
+    console.log('new this.cursorPosition', this.cursorPosition);
   }
 
   private replaceSeparator(value: string, separator: string, replaceValue: string): string {
@@ -260,7 +260,7 @@ export class NumericInputAnalyzer {
     return value.split(this.decimalSeparator).length - 1;
   }
 
-  private countExistingGroupingSeparator(value: string): number {
+  private countGroupingSeparators(value: string): number {
     return value.split(this.groupingSeparator).length - 1;
   }
 
