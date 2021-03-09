@@ -853,6 +853,150 @@ describe('RadioGroupComponent', () => {
             });
           });
         });
+
+        describe('and pre-selected item', () => {
+          beforeEach(async () => {
+            spectator = createHost(templateScenario.template, {
+              hostProps: {
+                items: textItems,
+                items$: of(null),
+                selected: textItems[1],
+              },
+            });
+
+            // Set items$ observable after creation, to ensure async rendering:
+            spectator.setHostInput('items$', of(textItems));
+            await TestHelper.waitForTimeout();
+            spectator.detectChanges();
+
+            ionRadioGroup = spectator.query(IonRadioGroup);
+            const ionRadioGroupElement = spectator.query('ion-radio-group');
+            await TestHelper.whenReady(ionRadioGroupElement);
+
+            radios = spectator.queryAll(RadioComponent);
+            ionRadioElements = spectator.queryAll('ion-radio');
+            expect(radios).toHaveLength(textItems.length);
+            expect(ionRadioElements).toHaveLength(textItems.length);
+            await TestHelper.whenReady(ionRadioElements);
+          });
+
+          it('should render all items', () => {
+            expect(radios).toHaveLength(3);
+            expect(ionRadioElements).toHaveLength(3);
+          });
+
+          describe('selection', () => {
+            beforeEach(async () => {
+              // Assert initial state:
+              expect(ionRadioGroup.value).toBe(textItems[1]);
+              // Assert initial state of radios:
+              expect(radioChecked(0)).toBeFalse();
+              expect(radioChecked(1)).toBeTrue();
+              expect(radioChecked(2)).toBeFalse();
+            });
+
+            it('should set the value of ion-radio-group to the corresponding selected data item', () => {
+              expect(ionRadioGroup.value).toBe(textItems[1]);
+            });
+
+            it('should have selected radio corresponding to the selected data item', () => {
+              expect(radioChecked(0)).toBeFalse();
+              expect(radioChecked(1)).toBeTrue();
+              expect(radioChecked(2)).toBeFalse();
+            });
+
+            it('should have selected index corresponding to the selected data item', () => {
+              expect(spectator.component.selectedIndex).toBe(defaultSelectedIndex);
+            });
+
+            it('should set the value to the corresponding data item when clicking a radio item', async () => {
+              spectator.click(ionRadioElements[2]);
+              // await TestHelper.waitForTimeout();
+              // spectator.detectChanges();
+              expect(spectator.component.value).toEqual(textItems[2]);
+            });
+
+            it('should update the bound field when clicking a radio item', () => {
+              spectator.click(ionRadioElements[1]);
+              expect(spectator.hostComponent.selected).toEqual(textItems[1]);
+            });
+
+            it('should update the value of ion-radio-group when the bound field is updated', async () => {
+              spectator.setHostInput('selected', textItems[2]);
+              await TestHelper.waitForTimeout();
+              spectator.detectChanges();
+              expect(ionRadioGroup.value).toEqual(textItems[2]);
+            });
+
+            it('should update the selected radio when the bound field is updated', async () => {
+              spectator.setHostInput('selected', textItems[2]);
+              // Wait for radio checked attribute to be updated;
+              await TestHelper.waitForTimeout();
+              spectator.detectChanges();
+              await TestHelper.whenTrue(() => radioChecked(2));
+
+              expect(radioChecked(0)).toBeFalse();
+              expect(radioChecked(1)).toBeFalse();
+              expect(radioChecked(2)).toBeTrue();
+            });
+
+            it('should not emit change event when the bound field is updated', async () => {
+              const onChangeSpy = spyOn(spectator.component.valueChange, 'emit');
+              spectator.setHostInput('selected', textItems[2]);
+              await TestHelper.waitForTimeout();
+              spectator.detectChanges();
+              expect(onChangeSpy).not.toHaveBeenCalled();
+            });
+          });
+
+          describe('enablement', () => {
+            it('should not disable the radio items by default', () => {
+              radios.forEach((each) => expect(each.disabled).toBeUndefined());
+            });
+
+            it('should disable the radio items when the kirby-radio-group is disabled', () => {
+              spectator.setInput('disabled', true);
+              radios.forEach((each) => expect(each.disabled).toBeTrue());
+            });
+
+            it('should re-enable the radio items when the kirby-radio-group is enabled', () => {
+              spectator.setInput('disabled', true);
+              radios.forEach((each) => expect(each.disabled).toBeTrue());
+
+              spectator.setInput('disabled', false);
+              radios.forEach((each) => expect(each.disabled).toBeUndefined());
+            });
+
+            it('should disable the radio items if items are set after the kirby-radio-group is disabled', async () => {
+              spectator.setHostInput('items', null);
+              spectator.setInput('disabled', true);
+              await TestHelper.waitForTimeout(); // Wait a tick
+              spectator.detectChanges();
+
+              spectator.setHostInput('items', textItems);
+              await TestHelper.waitForTimeout(); // Wait a tick
+              spectator.detectChanges();
+
+              radios = spectator.queryAll(RadioComponent);
+              radios.forEach((each) => expect(each.disabled).toBeTrue());
+            });
+          });
+
+          describe('error', () => {
+            it('should not have error state by default', () => {
+              expect(spectator.component.hasError).toBeFalse; // TODO: Couple hasError to form element? Means we have to inject ngControl into radioGroup tho.
+              expect(spectator.element.classList).not.toContain('error');
+            });
+
+            it('should apply class `error` when form is touched and invalid', () => {
+              // TODO: Make setFormInErrorState
+              spectator.setInput('hasError', true);
+              spectator.detectChanges();
+
+              expect(spectator.element.classList).toContain('error');
+            });
+          });
+        });
       });
     });
   });
