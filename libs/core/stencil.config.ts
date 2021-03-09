@@ -1,4 +1,4 @@
-import { angularOutputTarget, ValueAccessorConfig } from '@stencil/angular-output-target';
+import { angularOutputTarget } from '@stencil/angular-output-target';
 import { Config } from '@stencil/core';
 import { sass } from '@stencil/sass';
 
@@ -13,21 +13,8 @@ export const config: Config = {
     {
       type: 'dist',
       esmLoaderPath: '../loader',
-      // dir: '../../dist/libs/core/dist',
-      // copy: [
-      //   { src: '../dist', dest: '../../../../dist/libs/core/dist' },
-      //   { src: '../loader', dest: '../../../../dist/libs/core/loader' },
-      //   { src: '../package.json', dest: '../../../../dist/libs/core/package.json' },
-      // ],
     },
     { type: 'docs-readme' },
     { type: 'docs-json', file: './component-docs.json' },
-    // {
-    //   type: 'www',
-    //   serviceWorker: null, // disable service workers
-    // },
   ],
-  // testing: {
-  //   testPathIgnorePatterns: ['/node_modules/', '/libs/designsystem/.*', '/apps/.*'],
-  // },
 };
