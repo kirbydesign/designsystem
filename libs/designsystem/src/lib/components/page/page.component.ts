@@ -9,6 +9,7 @@ import {
   Directive,
   ElementRef,
   EventEmitter,
+  HostBinding,
   HostListener,
   Input,
   OnChanges,
@@ -31,6 +32,7 @@ import { filter, takeUntil } from 'rxjs/operators';
 import { KirbyAnimation } from '../../animation/kirby-animation';
 import { FitHeadingConfig } from '../../directives/fit-heading/fit-heading.directive';
 import { WindowRef } from '../../types/window-ref';
+import { ModalWrapperComponent } from '../modal/modal-wrapper/modal-wrapper.component';
 import { ModalNavigationService } from '../modal/services/modal-navigation.service';
 import { selectedTabClickEvent } from '../tabs/tab-button/tab-button.events';
 import { TabsComponent } from '../tabs/tabs.component';
@@ -77,6 +79,27 @@ export class PageContentDirective {
 
   get isFixed(): boolean {
     return this.config && this.config.fixed;
+  }
+}
+
+@Component({
+  selector: 'kirby-page-progress',
+  template: `
+    <ng-content></ng-content>
+  `,
+  styles: [':host {display: flex}'],
+})
+export class PageProgressComponent implements OnInit {
+  // TODO: Find alternative implementation, which aligns with future page configuration / consumption
+  // This implementation was chosen over expanding `moveChild` method in component wrapper with yet another scenario
+  @HostBinding('attr.slot') slot = 'start';
+
+  constructor(@Optional() @SkipSelf() private modalWrapper: ModalWrapperComponent) {}
+
+  ngOnInit(): void {
+    if (this.modalWrapper && this.modalWrapper.config.flavor === 'drawer') {
+      this.slot = 'end';
+    }
   }
 }
 
