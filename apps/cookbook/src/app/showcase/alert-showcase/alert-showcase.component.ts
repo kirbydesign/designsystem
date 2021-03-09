@@ -14,31 +14,31 @@ export class AlertShowcaseComponent {
     {
       name: 'title',
       description: 'The title of the alert',
-      inputValues: ['string | Observable<string>'],
+      type: ['string | Observable<string>'],
     },
     {
       name: 'message',
       description:
         "(Optional) The message shown under the title (or icon if specified). Use '\\n' for newline.",
-      inputValues: ['string | Observable<string>'],
+      type: ['string | Observable<string>'],
     },
     {
       name: 'icon',
       description: '(Optional) Icon to be shown below the title',
-      inputValues: ['{ name: string }', '{ name: string, themeColor: string }'],
+      type: ['{ name: string }', '{ name: string, themeColor: string }'],
     },
     {
       name: 'okBtn',
       description:
         '(Optional) Defines the text that will appear on the OK button and if it should be destructive',
       defaultValue: 'OK',
-      inputValues: ['string', '{ text: string, isDestructive: boolean }'],
+      type: ['string', '{ text: string, isDestructive: boolean }'],
     },
     {
       name: 'cancelBtn',
       description:
         '(Optional) The text that will appear on the cancel button. If not defined the cancel button will not be shown.',
-      inputValues: ['string'],
+      type: ['string'],
     },
   ];
 }

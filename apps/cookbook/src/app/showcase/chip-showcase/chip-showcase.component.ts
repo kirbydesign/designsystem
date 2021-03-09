@@ -11,12 +11,12 @@ export class ChipShowcaseComponent {
     {
       name: 'text',
       description: 'The text displayed inside the chip',
-      inputValues: ['string'],
+      type: ['string'],
     },
     {
       name: 'isSelected',
       description: 'Show chip as selected',
-      inputValues: ['boolean'],
+      type: ['boolean'],
     },
   ];
 

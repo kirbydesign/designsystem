@@ -11,34 +11,34 @@ export class ChartShowcaseComponent {
     {
       name: 'height',
       description: 'The height of the chart in px for web and dp for native',
-      inputValues: ['number'],
+      type: ['number'],
     },
     {
       name: 'type',
       description: 'The type of chart',
-      inputValues: ['donut', 'pie', 'areaspline'],
+      type: ['donut', 'pie', 'areaspline'],
     },
     {
       name: 'showDataLabels',
       description: 'Enable or disable labels around pie/donut charts',
-      inputValues: ['true', 'false'],
+      type: ['true', 'false'],
       defaultValue: 'true',
     },
     {
       name: 'description',
       description: 'Description of chart for accessibility',
-      inputValues: ['string - e.g. "Distribution of assets in custody account"'],
+      type: ['string - e.g. "Distribution of assets in custody account"'],
     },
     {
       name: 'data',
       description: 'Data input for chart',
-      inputValues: ['See examples above for exact format'],
+      type: ['See examples above for exact format'],
     },
     {
       name: 'options',
       description:
         'The Highcharts options to configure the chart with (will override existing options using a deep merge)',
-      inputValues: ['See [Highcharts options docs](https://api.highcharts.com/highcharts/)'],
+      type: ['See [Highcharts options docs](https://api.highcharts.com/highcharts/)'],
     },
   ];
 }

@@ -15,13 +15,13 @@ export class LoadingOverlayShowcaseComponent {
       name: 'isLoading',
       description: 'Shows the loading spinner.',
       defaultValue: 'false',
-      inputValues: ['true', 'false'],
+      type: ['true', 'false'],
     },
     {
       name: 'showBackdrop',
       description: 'Adds a dimmer on the background.',
       defaultValue: 'true',
-      inputValues: ['true', 'false'],
+      type: ['true', 'false'],
     },
   ];
 }

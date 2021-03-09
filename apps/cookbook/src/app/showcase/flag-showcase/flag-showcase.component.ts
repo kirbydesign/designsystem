@@ -12,13 +12,13 @@ export class FlagShowcaseComponent {
       name: 'themeColor',
       description: 'Sets which color the flag should use.',
       defaultValue: 'transparent',
-      inputValues: ['success', 'warning', 'danger', 'semi-light', 'transparent'],
+      type: ['success', 'warning', 'danger', 'semi-light', 'transparent'],
     },
     {
       name: 'size',
       description: 'Sets the size of the flag.',
       defaultValue: 'md',
-      inputValues: ['xs', 'sm', 'md'],
+      type: ['xs', 'sm', 'md'],
     },
   ];
 }

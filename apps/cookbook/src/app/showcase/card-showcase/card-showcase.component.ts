@@ -16,32 +16,32 @@ export class CardShowcaseComponent {
       name: 'title',
       description: 'Sets the larger title in kirby-card-header',
       defaultValue: 'null',
-      inputValues: ['string'],
+      type: ['string'],
     },
     {
       name: 'subtitle',
       description: 'Smaller title in kirby-card-header',
       defaultValue: 'null',
-      inputValues: ['string'],
+      type: ['string'],
     },
     {
       name: 'mode',
       description:
         '(Optional) Sets a custom elevation on the card. Default elevation = 2, flat = 0, highlighted = 4.',
       defaultValue: '',
-      inputValues: ['flat', 'highlighted'],
+      type: ['flat', 'highlighted'],
     },
     {
       name: 'hasPadding',
       description: '',
       defaultValue: 'true',
-      inputValues: ['boolean'],
+      type: ['boolean'],
     },
     {
       name: 'themeColor',
       description: 'Sets which color the card should use from the theme palette.',
       defaultValue: 'null',
-      inputValues: [
+      type: [
         'primary',
         'secondary',
         'tertiary',

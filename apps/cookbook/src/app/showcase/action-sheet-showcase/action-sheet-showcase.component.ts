@@ -16,25 +16,25 @@ export class ActionSheetShowcaseComponent {
       name: 'header',
       description: '(Optional) The header of the action sheet',
       defaultValue: '',
-      inputValues: ['string'],
+      type: ['string'],
     },
     {
       name: 'subheader',
       description: '(Optional) The subheader of the action sheet',
       defaultValue: '',
-      inputValues: ['string'],
+      type: ['string'],
     },
     {
       name: 'items',
       description: 'The options shown inside the action sheet',
       defaultValue: '',
-      inputValues: ['Array<ActionSheetItem>'],
+      type: ['Array<ActionSheetItem>'],
     },
     {
       name: 'cancelButtonText',
       description: '(Optional) The text for the cancel button.',
       defaultValue: 'Cancel',
-      inputValues: ['string'],
+      type: ['string'],
     },
   ];
 }

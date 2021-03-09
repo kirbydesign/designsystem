@@ -16,33 +16,33 @@ export class AvatarShowcaseComponent implements OnInit {
       name: 'imageSrc',
       description: 'Points to the src of the image location',
       defaultValue: 'null',
-      inputValues: ['string'],
+      type: ['string'],
     },
     {
       name: 'size',
       description: 'Sets the size of the avatar.',
       defaultValue: 'sm',
-      inputValues: Object.values(Sizes),
+      type: Object.values(Sizes),
     },
     {
       name: 'altText',
       description:
         'Must be filled out - its the alt text attribute that screenreaders use when "viewing" the image.',
       defaultValue: 'null',
-      inputValues: ['string'],
+      type: ['string'],
     },
     {
       name: 'overlay',
       description:
         'Adds a dimmed overlay on the avatar. Useful when using the avatar on a white background and the image also has a white background.',
       defaultValue: 'false',
-      inputValues: ['true', 'false'],
+      type: ['true', 'false'],
     },
     {
       name: 'shadow',
       description: 'Adds a box-shadow to the avatar.',
       defaultValue: 'false',
-      inputValues: ['true', 'false'],
+      type: ['true', 'false'],
     },
   ];
   constructor() {}

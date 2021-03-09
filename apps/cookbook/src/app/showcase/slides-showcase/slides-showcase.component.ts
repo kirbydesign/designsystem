@@ -21,13 +21,13 @@ export class SlidesShowcaseComponent {
       description:
         'Configuration object for ion-slides. View documentation at: [https://ionicframework.com/docs/v3/api/components/slides/Slides/#input-properties] for available props',
       defaultValue: '',
-      inputValues: ['object'],
+      type: ['object'],
     },
     {
       name: 'slides',
       description: 'Object array holding the data to be shown',
       defaultValue: '',
-      inputValues: ['DataArray'],
+      type: ['DataArray'],
     },
   ];
   events: ApiDescriptionEvent[] = [

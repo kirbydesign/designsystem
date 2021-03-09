@@ -17,26 +17,26 @@ export class EmptyStateShowcaseComponent {
       name: 'iconName',
       description: 'Name of the icon (see icons).',
       defaultValue: 'null',
-      inputValues: ['string'],
+      type: ['string'],
     },
     {
       name: 'title',
       description: 'The title.',
       defaultValue: 'null',
-      inputValues: ['string'],
+      type: ['string'],
     },
     {
       name: 'subtitle',
       description:
         "The text beneath the title. Use '\\n' for newline if the text comes from an expression and '&#10;' if the text is written directly in the template.",
       defaultValue: 'null',
-      inputValues: ['string'],
+      type: ['string'],
     },
     {
       name: 'themeColor',
       description: 'Sets which color the empty state should use from the theme palette.',
       defaultValue: 'null',
-      inputValues: [
+      type: [
         'primary',
         'secondary',
         'tertiary',

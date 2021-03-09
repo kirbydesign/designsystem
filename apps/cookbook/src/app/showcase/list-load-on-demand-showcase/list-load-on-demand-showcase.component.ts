@@ -16,13 +16,13 @@ export class ListLoadOnDemandShowcaseComponent {
     {
       name: 'isLoadOnDemandEnabled',
       description: 'Determines if the loadOnDemand event should be emitted.',
-      inputValues: ['boolean'],
+      type: ['boolean'],
       defaultValue: 'If there is a subscriber to the loadOnDemand event: true, otherwise false.',
     },
     {
       name: 'noMoreItemsText',
       description: 'Text to display when on demand loading of items is complete.',
-      inputValues: ['string'],
+      type: ['string'],
       defaultValue: 'undefined',
     },
   ];

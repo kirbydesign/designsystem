@@ -18,19 +18,19 @@ export class ReorderListShowcaseComponent {
       name: 'items',
       description: 'Array of items',
       defaultValue: '[ ]',
-      inputValues: ['Array<any>'],
+      type: ['Array<any>'],
     },
     {
       name: 'subItemsName',
       description: 'Name of the sub items array',
       defaultValue: '',
-      inputValues: ['string'],
+      type: ['string'],
     },
     {
       name: 'getItemTextDefault',
       description: 'Function to retrieve text for defaultTemplate',
       defaultValue: undefined,
-      inputValues: ['function(item: any)'],
+      type: ['function(item: any)'],
     },
   ];
 

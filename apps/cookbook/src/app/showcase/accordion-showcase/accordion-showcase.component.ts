@@ -12,13 +12,13 @@ export class AccordionShowcaseComponent {
       name: 'title',
       description: 'The title that you can click to show the content',
       defaultValue: 'null',
-      inputValues: ['string'],
+      type: ['string'],
     },
     {
       name: 'isExpanded',
       description: 'Should the content be initially shown',
       defaultValue: 'false',
-      inputValues: ['boolean'],
+      type: ['boolean'],
     },
   ];
 }

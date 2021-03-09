@@ -4,8 +4,8 @@ export interface ApiDescriptionProperty {
   name: string;
   description?: string;
   defaultValue?: string;
-  inputValues?: string[];
-  preserveInputValuesWhitespaces?: boolean;
+  type?: string[];
+  preserveTypeWhitespaces?: boolean;
 }
 
 export interface ApiDescriptionPropertyColumns {

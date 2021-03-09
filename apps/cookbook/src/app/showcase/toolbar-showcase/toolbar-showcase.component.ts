@@ -24,12 +24,12 @@ export class ToolbarShowcaseComponent {
     {
       name: 'title',
       description: 'Sets the title in the toolbar',
-      inputValues: ['string'],
+      type: ['string'],
     },
     {
       name: 'hideBackButton',
       description: 'Specifies if the backbutton should be hidden',
-      inputValues: ['boolean'],
+      type: ['boolean'],
       defaultValue: 'false',
     },
   ];

@@ -39,33 +39,33 @@ export class ModalShowcaseComponent implements AfterViewInit {
       Modals with a \`compact\` flavor simply render the specified component, similar to alerts.
       Please note: As there is no toolbar or close button, you should handle closing the modal yourself.`,
       defaultValue: 'modal',
-      inputValues: ['undefined', 'modal', 'drawer', 'compact'],
+      type: ['undefined', 'modal', 'drawer', 'compact'],
     },
     {
       name: 'size',
       description: `(Optional) The initial size of the modal before content is loaded.
         The \`full-height\` option will take up as much vertical space as possible and not resize with content or native keyboard.`,
       defaultValue: 'medium (modal) | small (drawer)',
-      inputValues: ['undefined', 'small', 'medium', 'large', 'full-height'],
+      type: ['undefined', 'small', 'medium', 'large', 'full-height'],
     },
     {
       name: 'component',
       description: 'The component which will be rendered inside the modal.',
       defaultValue: '',
-      inputValues: ['Component'],
+      type: ['Component'],
     },
     {
       name: 'componentProps',
       description: '(Optional) The data to pass to the modal component.',
       defaultValue: '',
-      inputValues: ['undefined | { [key: string]: any; }'],
+      type: ['undefined | { [key: string]: any; }'],
     },
     {
       name: 'drawerSupplementaryAction',
       description: `(Optional) Allows placing a supplementary button in the top right corner of drawers.
       Please note: Only available on modals with a \`drawer\` flavor.`,
       defaultValue: '',
-      inputValues: ['{iconName: string, action: Function}'],
+      type: ['{iconName: string, action: Function}'],
     },
   ];
 
@@ -73,7 +73,7 @@ export class ModalShowcaseComponent implements AfterViewInit {
     {
       name: 'scrollDisabled',
       description: 'Disable scrolling of the modal',
-      inputValues: ['true', 'false'],
+      type: ['true', 'false'],
       defaultValue: 'false',
     },
   ];
@@ -82,7 +82,7 @@ export class ModalShowcaseComponent implements AfterViewInit {
     {
       name: 'themeColor',
       description: "Theme color. 'light' will use the background-color variable",
-      inputValues: ['white', 'light'],
+      type: ['white', 'light'],
       defaultValue: 'white',
     },
   ];

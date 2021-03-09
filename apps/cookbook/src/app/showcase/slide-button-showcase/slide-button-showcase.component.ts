@@ -17,25 +17,25 @@ export class SlideButtonShowcaseComponent {
       description:
         'If the button needs to expand to full width of its parent container, then use expand.',
       defaultValue: 'null',
-      inputValues: ['block'],
+      type: ['block'],
     },
     {
       name: 'text',
       description: 'The text to show in the slide button',
       defaultValue: '',
-      inputValues: ['string'],
+      type: ['string'],
     },
     {
       name: 'slideDone',
       description: 'Event triggered on slide done',
       defaultValue: null,
-      inputValues: ['event'],
+      type: ['event'],
     },
     {
       name: 'slidePercentageChanged',
       description: 'Event triggered when the slide percentage changes containing the percentage',
       defaultValue: null,
-      inputValues: ['number'],
+      type: ['number'],
     },
   ];
 }

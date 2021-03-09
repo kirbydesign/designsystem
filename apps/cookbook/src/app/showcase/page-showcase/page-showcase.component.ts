@@ -34,37 +34,37 @@ export class PageShowcaseComponent {
       name: 'title',
       description:
         'The title of the page. Will stick in the toolbar - including action buttons, if any - when the page is scrolled below the title.',
-      inputValues: ['string'],
+      type: ['string'],
     },
     {
       name: 'toolbarTitle',
       description:
         'An alternative text for the title in the toolbar. If `toolbarTitle` is specified instead of `title`, the page title and actions will only be shown in the toolbar and not on the page itself.',
-      inputValues: ['string'],
+      type: ['string'],
     },
     {
       name: 'titleAlignment',
       description: 'Horizontal alignment of the page title within the content pane.',
       defaultValue: 'left',
-      inputValues: ['left', 'center', 'right'],
+      type: ['left', 'center', 'right'],
     },
     {
       name: 'defaultBackHref',
       description:
         'Back navigation only shows if any navigation has been done. To make it show even after page-reload provide the page with a `defaultBackHref` e.g. "/".',
-      inputValues: ['string'],
+      type: ['string'],
     },
     {
       name: 'hideBackButton',
       description: 'Hides the back button in the toolbar.',
       defaultValue: 'false',
-      inputValues: ['true', 'false'],
+      type: ['true', 'false'],
     },
     {
       name: 'tabBarBottomHidden',
       description: 'Hides the tab bar when placed in the bottom.',
       defaultValue: 'false',
-      inputValues: ['true', 'false'],
+      type: ['true', 'false'],
     },
   ];
   events: ApiDescriptionEvent[] = [
@@ -125,14 +125,14 @@ export class PageShowcaseComponent {
       name: '*kirbyPageActions',
       description:
         'The `*kirbyPageActions` directive can be applied to any host or container element which will then be shown at the top of the page. The default configuration `{sticky: true}` makes the host element stick in the toolbar when the page is scrolled below the title. To avoid this it can be configured with `{sticky: false}` instead. When configured with `{fixed: true}` the element will be fixed and only shown in the toolbar.',
-      inputValues: ['{sticky: boolean}', '{fixed: boolean}'],
+      type: ['{sticky: boolean}', '{fixed: boolean}'],
       defaultValue: '{sticky: true}',
     },
     {
       name: '*kirbyPageContent',
       description:
         'The `kirbyPageContent` directive can be applied to any host or container element which will then be rendered as the content of the page. When configured with `{fixed: true}` the element will be fixed when scrolling the page. An example use case for this could be a Floating Action Button.',
-      inputValues: ['{fixed: boolean}'],
+      type: ['{fixed: boolean}'],
     },
   ];
 
@@ -148,7 +148,7 @@ export class PageShowcaseComponent {
       name: '--kirby-page-title-margin-bottom',
       description: 'Spacing between page title and page content.',
       defaultValue: `size('xl')`,
-      inputValues: ['unit'],
+      type: ['unit'],
     },
   ];
 

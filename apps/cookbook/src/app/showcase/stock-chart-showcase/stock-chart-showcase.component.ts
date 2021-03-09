@@ -11,22 +11,22 @@ export class StockChartShowcaseComponent {
     {
       name: 'description',
       description: 'Description of Highstock Chart for accessibility',
-      inputValues: ['string - e.g. "Microsoft Stock (NASDAQ: MSFT) today"'],
+      type: ['string - e.g. "Microsoft Stock (NASDAQ: MSFT) today"'],
     },
     {
       name: 'options',
       description: 'Options input for Highstock Chart',
-      inputValues: ['Options'],
+      type: ['Options'],
     },
     {
       name: 'data',
       description: 'Data input for Highstock Chart',
-      inputValues: ['StockChartDataPoint[]'],
+      type: ['StockChartDataPoint[]'],
     },
     {
       name: 'height',
       description: 'The height of the Highstock Chart in px for web and dp for native',
-      inputValues: ['number'],
+      type: ['number'],
     },
   ];
 }

@@ -15,52 +15,52 @@ export class DropdownShowcaseComponent {
       name: 'items',
       description: 'The items rendered within the dropdown.',
       defaultValue: '[ ]',
-      inputValues: ['Array<string> | Array<any>'],
+      type: ['Array<string> | Array<any>'],
     },
     {
       name: 'itemTextProperty',
       description:
         'The property to use for the text representation of items when configured with `Array<any>`.',
       defaultValue: `'text'`,
-      inputValues: ['string'],
+      type: ['string'],
     },
     {
       name: 'value',
       description: 'The currently selected item (readonly).',
       defaultValue: 'undefined',
-      inputValues: ['string | any'],
+      type: ['string | any'],
     },
     {
       name: 'selectedIndex',
       description: 'The index of the selected item within the `items` array.',
       defaultValue: 'undefined',
-      inputValues: ['number'],
+      type: ['number'],
     },
     {
       name: 'disabled',
       description: 'Disables the dropdown so the the user cannot interact with it.',
       defaultValue: 'false',
-      inputValues: ['true', 'false'],
+      type: ['true', 'false'],
     },
     {
       name: 'placeholder',
       defaultValue: `'Please select:'`,
       description: 'Instructional text to show before the dropdown has a selected option.',
-      inputValues: ['string'],
+      type: ['string'],
     },
     {
       name: 'attentionLevel',
       description:
         'Sets the attention level for the button of the dropdown. Button color will be updated automatically depending on host color.',
       defaultValue: '3',
-      inputValues: ['1', '2', '3', '4'],
+      type: ['1', '2', '3', '4'],
     },
     {
       name: 'expand',
       description:
         'If the dropdown needs to expand to full width of its parent container, then use expand.',
       defaultValue: 'undefined',
-      inputValues: ['block'],
+      type: ['block'],
     },
   ];
 
