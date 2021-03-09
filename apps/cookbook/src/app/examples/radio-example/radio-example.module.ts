@@ -12,6 +12,7 @@ import { RadioInItemExampleComponent } from './examples/in-item';
 import { RadioReactiveFormsExampleComponent } from './examples/reactive-forms';
 import { RadioSizesExampleComponent } from './examples/sizes';
 import { RadioStatesExampleComponent } from './examples/states';
+import { RadioTemplateDrivenFormsExampleComponent } from './examples/template-driven-forms';
 import { RadioExampleComponent } from './radio-example.component';
 
 const COMPONENT_DECLARATIONS = [
@@ -24,6 +25,7 @@ const COMPONENT_DECLARATIONS = [
   RadioInItemExampleComponent,
   RadioExampleBindingComponent,
   RadioReactiveFormsExampleComponent,
+  RadioTemplateDrivenFormsExampleComponent,
 ];
 
 @NgModule({
