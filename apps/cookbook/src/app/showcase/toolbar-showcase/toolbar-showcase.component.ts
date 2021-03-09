@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
 import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
-import {
-  ApiDescriptionProperty,
-  ApiDescriptionPropertyColumns,
-} from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 @Component({
   selector: 'cookbook-toolbar-showcase',
@@ -22,13 +19,6 @@ export class ToolbarShowcaseComponent {
         <kirby-icon secondary size="md" name="more"></kirby-icon>
       </kirby-toolbar>
     `;
-
-  propertyColumns: ApiDescriptionPropertyColumns = {
-    Name: 'Name',
-    Description: 'Description',
-    Type: 'Input values',
-    Default: 'Default',
-  };
 
   properties: ApiDescriptionProperty[] = [
     {
