@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
-import {
-  ApiDescriptionProperty,
-  ApiDescriptionPropertyColumns,
-} from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
+import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 @Component({
   selector: 'cookbook-chart-showcase',
@@ -10,12 +7,6 @@ import {
   styleUrls: ['./chart-showcase.component.scss'],
 })
 export class ChartShowcaseComponent {
-  columns: ApiDescriptionPropertyColumns = {
-    Name: 'Name',
-    Description: 'Description',
-    Type: 'Input values',
-    Default: 'Default',
-  };
   properties: ApiDescriptionProperty[] = [
     {
       name: 'height',
