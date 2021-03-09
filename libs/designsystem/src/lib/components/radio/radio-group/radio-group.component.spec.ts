@@ -756,7 +756,7 @@ describe('RadioGroupComponent', () => {
     </kirby-radio-group>`,
         type: 'Template driven form',
       };
-      fdescribe('with template-driven form', () => {
+      describe('with template-driven form', () => {
         let spectator: SpectatorHost<
           RadioGroupComponent,
           {
@@ -847,6 +847,8 @@ describe('RadioGroupComponent', () => {
             it('should not emit change event when the bound field is updated', async () => {
               const onChangeSpy = spyOn(spectator.component.valueChange, 'emit');
               spectator.setHostInput('selected', textItems[2]);
+              await TestHelper.waitForTimeout();
+              spectator.detectChanges();
               expect(onChangeSpy).not.toHaveBeenCalled();
             });
           });
