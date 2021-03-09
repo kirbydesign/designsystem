@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {
   ShowcaseProperty,
   ShowcasePropertyColumns,
-} from '~/app/shared/showcase-properties/showcase-properties.component';
+} from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 @Component({
   selector: 'cookbook-chart-showcase',

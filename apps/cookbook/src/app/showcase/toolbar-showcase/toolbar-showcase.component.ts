@@ -3,7 +3,7 @@ import { ShowcaseEvent } from '~/app/shared/api-description/api-description-even
 import {
   ShowcaseProperty,
   ShowcasePropertyColumns,
-} from '~/app/shared/showcase-properties/showcase-properties.component';
+} from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 @Component({
   selector: 'cookbook-toolbar-showcase',

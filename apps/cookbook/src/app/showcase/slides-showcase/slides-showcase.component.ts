@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ShowcaseEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
-import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-properties.component';
+import { ShowcaseProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 declare var require: any;
 

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AlertExampleComponent } from '~/app/examples/alert-example/alert-example.component';
-import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-properties.component';
+import { ShowcaseProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 @Component({
   selector: 'cookbook-alert-showcase',
