@@ -1,3 +1,4 @@
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonRadioGroup } from '@ionic/angular';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { Observable, of } from 'rxjs';
@@ -12,7 +13,7 @@ describe('RadioGroupComponent', () => {
   const createHost = createHostFactory({
     component: RadioGroupComponent,
     declarations: [RadioComponent, ListItemTemplateDirective],
-    imports: [TestHelper.ionicModuleForTest],
+    imports: [TestHelper.ionicModuleForTest, FormsModule, ReactiveFormsModule],
   });
 
   describe('with plain binding', () => {
@@ -749,7 +750,6 @@ describe('RadioGroupComponent', () => {
     ];
 
     describe('when used in a form', () => {
-      const dataScenario = dataScenarios[0];
       const templateScenario = {
         template: `<kirby-radio-group [(ngModel)]="selected" required>
         <kirby-radio *ngFor="let item of items" [value]="item" slot="start"></kirby-radio>
@@ -760,9 +760,9 @@ describe('RadioGroupComponent', () => {
         let spectator: SpectatorHost<
           RadioGroupComponent,
           {
-            items: string[] | defaultDataType[];
-            items$: Observable<string[] | defaultDataType[]>;
-            selected: string | defaultDataType;
+            items: string[];
+            items$: Observable<string[]>;
+            selected: string;
           }
         >;
 
@@ -770,14 +770,14 @@ describe('RadioGroupComponent', () => {
           beforeEach(async () => {
             spectator = createHost(templateScenario.template, {
               hostProps: {
-                items: dataScenario.items,
+                items: textItems,
                 items$: of(null),
                 selected: null,
               },
             });
 
             // Set items$ observable after creation, to ensure async rendering:
-            spectator.setHostInput('items$', of(dataScenario.items));
+            spectator.setHostInput('items$', of(textItems));
 
             ionRadioGroup = spectator.query(IonRadioGroup);
             const ionRadioGroupElement = spectator.query('ion-radio-group');
@@ -810,315 +810,48 @@ describe('RadioGroupComponent', () => {
 
             it('should set the value to the corresponding data item when clicking a radio item', () => {
               spectator.click(ionRadioElements[0]);
-              expect(spectator.component.value).toEqual(dataScenario.items[0]);
+              expect(spectator.component.value).toEqual(textItems[0]);
             });
 
-            // it('should update the bound field when clicking a radio item', async () => {
-            //   spectator.click(ionRadioElements[0]);
-            //   expect(spectator.hostComponent.selected).toEqual(dataScenario.items[0]);
-            //   expect(spectator.component.value).toEqual(dataScenario.items[0]);
-            //   await TestHelper.whenTrue(() => radioChecked(0));
-            //   expect(radioChecked(0)).toBeTrue();
-            //   expect(radioChecked(1)).toBeFalse();
-            //   expect(radioChecked(2)).toBeFalse();
-            // });
+            it('should update the bound field when clicking a radio item', async () => {
+              spectator.click(ionRadioElements[0]);
+              expect(spectator.hostComponent.selected).toEqual(textItems[0]);
+              expect(spectator.component.value).toEqual(textItems[0]);
+              expect(spectator.component.selectedIndex).toEqual(0);
+              await TestHelper.whenTrue(() => radioChecked(0));
+              expect(radioChecked(0)).toBeTrue();
+              expect(radioChecked(1)).toBeFalse();
+              expect(radioChecked(2)).toBeFalse();
+            });
 
             // it('should update the value of ion-radio-group when the bound field is updated', async () => {
-            //   spectator.setHostInput('selected', dataScenario.items[2]);
-            //   await TestHelper.waitForTimeout(100);
-            //   expect(spectator.component.value).toEqual(dataScenario.items[2]);
-            //   expect(ionRadioGroup.value).toEqual(dataScenario.items[2]);
+            //   spectator.setHostInput('selected', textItems[2]);
+            //   console.log(spectator.hostComponent);
+            //   console.log(spectator.component);
+            //   console.log(ionRadioGroup.value);
+            //   expect(spectator.component.value).toEqual(textItems[2]);
+            //   ionradio;
+            //   expect(ionRadioGroup.value).toEqual(textItems[2]);
             // });
 
-            // it('should update the selected radio when the bound field is updated', async () => {
-            //   spectator.setHostInput('selected', dataScenario.items[2]);
-            //   // Wait for radio checked attribute to be updated;
-            //   await TestHelper.whenTrue(() => radioChecked(2));
+            it('should update the selected radio when the bound field is updated', async () => {
+              spectator.setHostInput('selected', textItems[2]);
+              // Wait for radio checked attribute to be updated;
+              await TestHelper.whenTrue(() => radioChecked(2));
 
-            //   expect(radioChecked(0)).toBeFalse();
-            //   expect(radioChecked(1)).toBeFalse();
-            //   expect(radioChecked(2)).toBeTrue();
-            // });
+              expect(radioChecked(0)).toBeFalse();
+              expect(radioChecked(1)).toBeFalse();
+              expect(radioChecked(2)).toBeTrue();
+            });
 
             it('should not emit change event when the bound field is updated', async () => {
               const onChangeSpy = spyOn(spectator.component.valueChange, 'emit');
-              spectator.setHostInput('selected', dataScenario.items[2]);
+              spectator.setHostInput('selected', textItems[2]);
               expect(onChangeSpy).not.toHaveBeenCalled();
             });
           });
         });
-
-        // describe('and pre-selected item', () => {
-        //   beforeEach(async () => {
-        //     spectator = createHost(templateScenario.template, {
-        //       hostProps: {
-        //         items: dataScenario.items,
-        //         items$: of(null),
-        //         selected: dataScenario.selected,
-        //       },
-        //     });
-
-        //     // Set items$ observable after creation, to ensure async rendering:
-        //     spectator.setHostInput('items$', of(dataScenario.items));
-
-        //     ionRadioGroup = spectator.query(IonRadioGroup);
-        //     const ionRadioGroupElement = spectator.query('ion-radio-group');
-        //     await TestHelper.whenReady(ionRadioGroupElement);
-
-        //     radios = spectator.queryAll(RadioComponent);
-        //     ionRadioElements = spectator.queryAll('ion-radio');
-        //     expect(radios).toHaveLength(dataScenario.items.length);
-        //     expect(ionRadioElements).toHaveLength(dataScenario.items.length);
-        //     await TestHelper.whenReady(ionRadioElements);
-        //   });
-
-        //   it('should render all items', () => {
-        //     expect(radios).toHaveLength(3);
-        //     expect(ionRadioElements).toHaveLength(3);
-        //   });
-
-        //   describe('selection', () => {
-        //     beforeEach(async () => {
-        //       // Assert initial state:
-        //       expect(ionRadioGroup.value).toBe(dataScenario.selected);
-        //       // Assert initial state of radios:
-        //       expect(radioChecked(0)).toBeFalse();
-        //       expect(radioChecked(1)).toBeTrue();
-        //       expect(radioChecked(2)).toBeFalse();
-        //     });
-
-        //     it('should set the value of ion-radio-group to the corresponding selected data item', () => {
-        //       expect(ionRadioGroup.value).toBe(dataScenario.selected);
-        //     });
-
-        //     it('should have selected radio corresponding to the selected data item', () => {
-        //       expect(radioChecked(0)).toBeFalse();
-        //       expect(radioChecked(1)).toBeTrue();
-        //       expect(radioChecked(2)).toBeFalse();
-        //     });
-
-        //     it('should have selected index corresponding to the selected data item', () => {
-        //       expect(spectator.component.selectedIndex).toBe(defaultSelectedIndex);
-        //     });
-
-        //     it('should set the value to the corresponding data item when clicking a radio item', () => {
-        //       spectator.click(ionRadioElements[0]);
-        //       expect(spectator.component.value).toEqual(dataScenario.items[0]);
-        //     });
-
-        //     it('should update the bound field when clicking a radio item', () => {
-        //       spectator.click(ionRadioElements[0]);
-        //       expect(spectator.hostComponent.selected).toEqual(dataScenario.items[0]);
-        //     });
-
-        //     it('should emit change event when clicking a radio item', () => {
-        //       const onChangeSpy = spyOn(spectator.component.valueChange, 'emit');
-        //       spectator.click(ionRadioElements[0]);
-        //       expect(onChangeSpy).toHaveBeenCalledTimes(1);
-        //       expect(onChangeSpy).toHaveBeenCalledWith(dataScenario.items[0]);
-        //     });
-
-        //     it('should update the value of ion-radio-group when the bound field is updated', async () => {
-        //       spectator.setHostInput('selected', dataScenario.items[2]);
-        //       expect(ionRadioGroup.value).toEqual(dataScenario.items[2]);
-        //     });
-
-        //     it('should update the selected radio when the bound field is updated', async () => {
-        //       spectator.setHostInput('selected', dataScenario.items[2]);
-        //       // Wait for radio checked attribute to be updated;
-        //       await TestHelper.whenTrue(() => radioChecked(2));
-
-        //       expect(radioChecked(0)).toBeFalse();
-        //       expect(radioChecked(1)).toBeFalse();
-        //       expect(radioChecked(2)).toBeTrue();
-        //     });
-
-        //     it('should not emit change event when the bound field is updated', async () => {
-        //       const onChangeSpy = spyOn(spectator.component.valueChange, 'emit');
-        //       spectator.setHostInput('selected', dataScenario.items[2]);
-        //       expect(onChangeSpy).not.toHaveBeenCalled();
-        //     });
-        //   });
-
-        //   describe('enablement', () => {
-        //     it('should not disable the radio items by default', () => {
-        //       radios.forEach((each) => expect(each.disabled).toBeUndefined());
-        //     });
-
-        //     it('should disable the radio items when the kirby-radio-group is disabled', () => {
-        //       spectator.setInput('disabled', true);
-        //       radios.forEach((each) => expect(each.disabled).toBeTrue());
-        //     });
-
-        //     it('should re-enable the radio items when the kirby-radio-group is enabled', () => {
-        //       spectator.setInput('disabled', true);
-        //       radios.forEach((each) => expect(each.disabled).toBeTrue());
-
-        //       spectator.setInput('disabled', false);
-        //       radios.forEach((each) => expect(each.disabled).toBeUndefined());
-        //     });
-
-        //     it('should disable the radio items if items are set after the kirby-radio-group is disabled', async () => {
-        //       spectator.setHostInput('items', null);
-        //       spectator.setInput('disabled', true);
-        //       await TestHelper.waitForTimeout(); // Wait a tick
-
-        //       spectator.setHostInput('items', dataScenario.items);
-        //       await TestHelper.waitForTimeout(); // Wait a tick
-
-        //       radios = spectator.queryAll(RadioComponent);
-        //       radios.forEach((each) => expect(each.disabled).toBeTrue());
-        //     });
-        //   });
-
-        //   describe('error', () => {
-        //     it('should not have error state by default', () => {
-        //       expect(spectator.component.hasError).toBeFalse;
-        //       expect(spectator.element.classList).not.toContain('error');
-        //     });
-
-        //     it('should apply class `error` when form is touched and invalid', () => {
-        //       spectator.setInput('hasError', true);
-        //       spectator.detectChanges();
-
-        //       expect(spectator.element.classList).toContain('error');
-        //     });
-        //   });
-
-        //   describe('when updating items', () => {
-        //     describe('by shifting items down', () => {
-        //       it('should have selected index corresponding to the selected data item', () => {
-        //         const newItems =
-        //           dataScenario.type === DataScenarioTypes.TEXT
-        //             ? ['New Guy'].concat(textItems)
-        //             : [{ text: 'New Guy', value: 10 }].concat(dataItems);
-
-        //         spectator.setHostInput('items', newItems);
-        //         spectator.setHostInput('items$', of(newItems));
-
-        //         expect(spectator.component.selectedIndex).toBe(defaultSelectedIndex + 1);
-        //       });
-        //     });
-
-        //     describe('by shifting items up', () => {
-        //       it('should have selected index corresponding to the selected data item', () => {
-        //         const newItems = dataScenario.items.slice(1);
-        //         spectator.setHostInput('items', newItems);
-        //         spectator.setHostInput('items$', of(newItems));
-
-        //         expect(spectator.component.selectedIndex).toBe(defaultSelectedIndex - 1);
-        //       });
-        //     });
-
-        //     describe('by removing items', () => {
-        //       it('should reset value and selected index', () => {
-        //         spectator.setHostInput('items', null);
-        //         spectator.setHostInput('items$', of(null));
-
-        //         expect(spectator.component.value).toBe(null);
-        //         expect(spectator.component.selectedIndex).toBe(-1);
-        //       });
-        //     });
-
-        //     if (dataScenario.type !== DataScenarioTypes.TEXT) {
-        //       describe('by replacing items with new instances', () => {
-        //         it('should reset value and selected index', () => {
-        //           const newItems = dataItems.map((item) => ({
-        //             ...item,
-        //             value: item.value + 10,
-        //           }));
-        //           spectator.setHostInput('items', newItems);
-        //           spectator.setHostInput('items$', of(newItems));
-
-        //           expect(spectator.component.value).toBe(null);
-        //           expect(spectator.component.selectedIndex).toBe(-1);
-        //         });
-        //       });
-        //     }
-        //   });
-        // });
       });
-
-      // describe('with reactive form', () => {
-      //   let spectator: SpectatorHost<RadioGroupComponent, { form: FormGroup; items: string[] }>;
-      //   let control: FormControl;
-
-      //   beforeEach(async () => {
-      //     control = new FormControl();
-      //     spectator = createHost(
-      //       `<form [formGroup]="form">
-      //       <kirby-radio-button-group formControlName="favoriteFood">
-      //         <kirby-item *ngFor="let item of items" selectable="true">
-      //           <kirby-radio-button [value]="item" slot="start"></kirby-radio-button>
-      //           <kirby-label>{{item}}</kirby-label>
-      //         </kirby-item>
-      //       </kirby-radio-button-group>
-      //     </form>`,
-      //       {
-      //         hostProps: {
-      //           form: new FormGroup({
-      //             favoriteFood: control,
-      //           }),
-      //           items: ['Larry', 'Curly', 'Moe'],
-      //         },
-      //       }
-      //     );
-
-      //     ionRadioGroup = spectator.query(IonRadioGroup);
-      //     const ionRadioGroupElement = spectator.query('ion-radio-group');
-      //     await TestHelper.whenReady(ionRadioGroupElement);
-      //     await TestHelper.waitForTimeout(); // Wait a tick for IonRadioGroup.value to be set
-      //     // Assert initial state:
-      //     expect(ionRadioGroup.value).toBeNull();
-
-      //     ionRadioElements = spectator.queryAll('ion-radio');
-      //     expect(ionRadioElements).toHaveLength(3);
-      //     await TestHelper.whenReady(ionRadioElements);
-      //   });
-
-      //   describe('selection', () => {
-      //     beforeEach(() => {
-      //       // Assert initial state:
-      //       expect(ionRadioGroup.value).toBeNull();
-      //       // Assert initial state of radios:
-      //       expect(radioChecked(0)).toBeFalse();
-      //       expect(radioChecked(1)).toBeFalse();
-      //       expect(radioChecked(2)).toBeFalse();
-      //     });
-
-      //     it('should update the form control value when clicking upon a kirby-radio-button', async () => {
-      //       const radioButtons = spectator.queryAll('kirby-radio-button');
-      //       spectator.click(radioButtons[0]);
-
-      //       expect(control.value).toBe('Larry');
-      //     });
-
-      //     it('should update the selected kirby-radio-button when the value of the form control is updated', async () => {
-      //       control.setValue('Moe');
-      //       await TestHelper.waitForTimeout(); // Wait a tick for IonRadioGroup.value to be set
-
-      //       expect(ionRadioElements[0].getAttribute('aria-checked')).toBe('false');
-      //       expect(ionRadioElements[1].getAttribute('aria-checked')).toBe('false');
-      //       expect(ionRadioElements[2].getAttribute('aria-checked')).toBe('true');
-      //     });
-      //   });
-
-      //   describe('enablement', () => {
-      //     it('should enable the kirby-radios when the form control is not enabled', () => {
-      //       control.enable();
-
-      //       const radioButtons = spectator.queryAll(RadioComponent);
-      //       radioButtons.forEach((each) => expect(each.disabled).toBe(false));
-      //     });
-
-      //     it('should disable the kirby-radios when the form control is disabled', () => {
-      //       control.disable();
-
-      //       const radioButtons = spectator.queryAll(RadioComponent);
-      //       radioButtons.forEach((each) => expect(each.disabled).toBe(true));
-      //     });
-      //   });
-      // });
     });
   });
 });
