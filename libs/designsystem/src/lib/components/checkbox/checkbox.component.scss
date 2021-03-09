@@ -109,8 +109,8 @@ $default-checkbox-radio-size: map-get($checkbox-radio-sizes, 'md');
     }
 
     span {
+      align-self: center;
       line-height: line-height('n');
-      font-size: font-size('n');
     }
   }
 }
