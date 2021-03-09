@@ -3,6 +3,7 @@
 # compiled output
 /libs/core/loader
 /libs/core/dist
+/libs/core/node_modules
 /dist
 /tmp
 /out-tsc
