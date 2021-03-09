@@ -854,7 +854,7 @@ describe('RadioGroupComponent', () => {
           });
         });
 
-        fdescribe('and pre-selected item', () => {
+        describe('and pre-selected item', () => {
           beforeEach(async () => {
             spectator = createHost(templateScenario.template, {
               hostProps: {
