@@ -13,7 +13,7 @@ export interface ShowcaseMethodColumns {
 }
 
 @Component({
-  selector: 'cookbook-showcase-methods',
+  selector: 'cookbook-api-description-methods',
   templateUrl: './api-description-methods.component.html',
   styleUrls: ['../api-description.shared.scss'],
 })
