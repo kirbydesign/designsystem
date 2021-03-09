@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ShowcaseMethod } from '~/app/shared/showcase-methods/showcase-methods.component';
+import { ShowcaseMethod } from '~/app/shared/api-description/api-description-methods/api-description-methods.component';
 import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-properties.component';
 
 declare var require: any;
