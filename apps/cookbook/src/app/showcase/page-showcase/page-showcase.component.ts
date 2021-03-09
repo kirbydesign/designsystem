@@ -6,7 +6,7 @@ import { PageFitHeadingExampleComponent } from '~/app/examples/page-example/fit-
 import { PageFixedFooterTabExampleComponent } from '~/app/examples/page-example/fixed-footer-tabs/tab/fixed-footer-tab-example.component';
 import { PageFixedTitleAndActionsExampleComponent } from '~/app/examples/page-example/fixed-title-and-actions/page-fixed-title-and-actions-example.component';
 import { PageSimpleExampleComponent } from '~/app/examples/page-example/simple/page-simple-example.component';
-import { ShowcaseEvent } from '~/app/shared/showcase-events/showcase-events.component';
+import { ShowcaseEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
 import {
   ShowcaseProperty,
   ShowcasePropertyColumns,

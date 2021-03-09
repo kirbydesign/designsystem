@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ShowcaseEvent } from '~/app/shared/showcase-events/showcase-events.component';
+import { ShowcaseEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
 import {
   ShowcaseProperty,
   ShowcasePropertyColumns,
