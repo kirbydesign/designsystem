@@ -332,10 +332,10 @@ export class ChartExampleTimeseries2Component {
     const ds: ChartDataSets[] = [];
     ds.push({
       label: 'TimeSeries ',
-      backgroundColor: 'lightblue',
+      // backgroundColor: 'lightblue',
       data: data,
       pointRadius: 0,
-      fill: false,
+      fill: true,
       lineTension: 0,
       borderWidth: 2,
     });
@@ -346,8 +346,9 @@ export class ChartExampleTimeseries2Component {
     type: 'line',
     options: {
       animation: {
-        duration: 0,
+        duration: 100,
       },
+      maintainAspectRatio: false,
       scales: {
         xAxes: [
           {
@@ -401,6 +402,7 @@ export class ChartExampleTimeseries2Component {
         ],
         yAxes: [
           {
+            display: false,
             gridLines: {
               drawBorder: false,
             },

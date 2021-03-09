@@ -1,4 +1,4 @@
-import { Component, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ChartConfiguration, ChartDataSets } from 'chart.js';
 
 const config = {
@@ -12,7 +12,15 @@ const config = {
     [height]="height"
     [dataset]="dataset"   
     >
-  </kirby-chart-2> 
+  </kirby-chart-2>  
+  <kirby-card-footer>
+      <!-- example period selector -->
+      <div style="cursor: pointer">
+      <button kirby-button (click)="changeData('January',this.dataJanuary)">January </button>
+      <button kirby-button (click)="changeData('February',this.dataFebruary)">February </button>
+      <button kirby-button (click)="changeData('Marts',this.dataMarts)">Marts </button>
+    </div>
+  </kirby-card-footer>
 </kirby-card>`,
 
   codeSnippet: ``,
@@ -28,8 +36,25 @@ export class ChartExampleAreaLine1Component {
 
   height = 250;
 
+  changeData(month: string, data: number[]): void {
+    this.dataset = {
+      backgroundColor: this.dataset.backgroundColor,
+      label: month,
+      data: data,
+      fill: 'start',
+    };
+  }
+
+  datasetChange: EventEmitter<ChartDataSets> = new EventEmitter<Chart.ChartDataSets>();
+
   lineOptions: ChartConfiguration = {
     options: {
+      animation: {
+        duration: 5000,
+        easing: 'easeInElastic',
+      },
+      maintainAspectRatio: false,
+      responsive: false,
       elements: {
         line: {
           fill: false,
@@ -40,10 +65,22 @@ export class ChartExampleAreaLine1Component {
           hoverBorderWidth: 1,
         },
       },
+      scales: {
+        xAxes: [
+          {
+            display: false,
+          },
+        ],
+        yAxes: [
+          {
+            display: false,
+          },
+        ],
+      },
     },
   };
   dataset: ChartDataSets = {
-    label: 'the label',
+    label: '',
     backgroundColor: 'lightgreen',
     fill: 'start',
     data: [
@@ -73,6 +110,90 @@ export class ChartExampleAreaLine1Component {
       1700.4,
     ],
   };
+
+  dataJanuary: number[] = [
+    1600.9,
+    1440.0,
+    1460.0,
+    1350.6,
+    1480.5,
+    1800.4,
+    1940.1,
+    1950.6,
+    1700.4,
+    1950.6,
+    1700.4,
+    1600.9,
+    1710.5,
+    1060.4,
+    1290.2,
+    1710.5,
+    1060.4,
+    1290.2,
+    1440.0,
+    1460.0,
+    1350.6,
+    1480.5,
+    1800.4,
+    1940.1,
+  ];
+  dataFebruary: number[] = [
+    1600.9,
+    1710.5,
+    1060.4,
+    1290.2,
+    1440.0,
+    1460.0,
+    1950.6,
+    1700.4,
+    1600.9,
+    1710.5,
+    1060.4,
+    1290.2,
+    1710.5,
+    1060.4,
+    1290.2,
+    1440.0,
+    1460.0,
+    1350.6,
+    1480.5,
+    1800.4,
+    1940.1,
+    1440.0,
+    1460.0,
+    1350.6,
+    1480.5,
+    1800.4,
+    1940.1,
+    1950.6,
+    1700.4,
+  ];
+  dataMarts: number[] = [
+    1710.5,
+    1060.4,
+    1290.2,
+    1600.9,
+    1950.6,
+    1700.4,
+    1600.9,
+    1710.5,
+    1060.4,
+    1290.2,
+    1440.0,
+    1460.0,
+    1350.6,
+    1480.5,
+    1800.4,
+    1940.1,
+    1440.0,
+    1460.0,
+    1350.6,
+    1480.5,
+    1800.4,
+    1940.1,
+    1950.6,
+    1700.4,
+  ];
 
   labels: string[] = [
     'January',

@@ -45,20 +45,23 @@ export class ChartExampleHorizontalBarComponent {
   private adjustedYearExpensesData = this.yearExpensesData.map((data) =>
     this.lowerLimit >= data ? this.lowerLimit : data
   );
-  private yearlyOverviewClick: SeriesClickCallbackFunction = (ev: SeriesClickEventObject) => {
+
+  private yearlyOverviewClick = (ev: any) => {
+    console.log(ev);
+
     this.modalController.showAlert({
       title: 'Clicked chart',
-      message: 'You clicked on year: ' + ev.point.category,
+      message: 'You clicked on year: ', // + ev.point.category,
       okBtnText: 'Ok',
     });
 
-    this.selectedYear = ev.point.category;
+    //    this.selectedYear = ev.point.category;
     /*
     this.yearlyOverviewOptions.plotOptions.series.animation = false;
     this.yearlyOverviewOptions.chart.events.load = colorPoints(this.selectedYear);
     this.yearlyOverviewOptions.chart.events.redraw = colorPoints(this.selectedYear);
     */
-    this.yearlyOverviewOptions = { ...this.yearlyOverviewOptions };
+    //    this.yearlyOverviewOptions = { ...this.yearlyOverviewOptions };
   };
 
   getColors(data: number[]): string[] {
@@ -83,32 +86,48 @@ export class ChartExampleHorizontalBarComponent {
       },
       maintainAspectRatio: false,
       responsive: true,
+      tooltips: {
+        mode: 'index',
+        intersect: false,
+        displayColors: true,
+      },
+
+      onClick: this.yearlyOverviewClick,
+
       scales: {
         xAxes: [
           {
-            type: 'horizontalBar',
+            //    type: 'horizontalBar',
             stacked: true,
-            offset: true,
+            //    offset: true,
           },
         ],
         yAxes: [
           {
-            type: 'horizontalBar',
+            type: 'category',
+            position: 'left',
+            display: true,
             stacked: true,
-            //            display: true,
+            scaleLabel: {
+              display: false,
+            },
+            ticks: {
+              reverse: true,
+            },
           },
         ],
       },
     },
     data: {
-      labels: this.categories,
+      yLabels: ['2018', '2019', '2020'], // this.categories,
       datasets: [
         {
-          label: 'InvisibleClickReceiver',
+          // label: '',
           data: this.adjustedYearExpensesData.map(
             (wholeYearData, idx) => this.maxValue - (wholeYearData + this.currentTimeData[idx])
           ),
           borderColor: 'rgb(255, 255, 255, 0)',
+          stack: '42',
         },
         {
           label: 'WholeYearExpenses',
@@ -116,10 +135,13 @@ export class ChartExampleHorizontalBarComponent {
           borderColor: 'rgb(255, 255, 255, 0)',
           borderWidth: 1,
           backgroundColor: this.getColors(this.years),
+          stack: '43',
+          // yAxisID: '42',
         },
         {
-          label: 'CurrentTimeExpenses',
+          //  label: '',
           data: this.currentTimeData,
+          stack: '44',
         },
       ],
     },

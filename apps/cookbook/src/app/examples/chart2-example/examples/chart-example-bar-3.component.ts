@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ChartConfiguration } from 'chart.js';
 
 const config = {
   selector: 'cookbook-chart-example-bar-3',
@@ -15,6 +16,8 @@ const config = {
     [borderWidth]="1"
     [borderColor]="red"   
     [height]="height"   
+    [options]="options"
+    
     >
   </kirby-chart-2>
  
@@ -31,4 +34,31 @@ export class ChartExampleBar3Component {
   template: string = config.template;
   codeSnippet: string = config.codeSnippet;
   height = 450;
+
+  options: ChartConfiguration = {
+    options: {
+      animation: {
+        duration: 1000,
+      },
+      maintainAspectRatio: false,
+      responsive: true,
+      tooltips: {
+        mode: 'index',
+        intersect: false,
+        displayColors: true,
+      },
+      scales: {
+        xAxes: [
+          {
+            type: 'category',
+          },
+        ],
+        yAxes: [
+          {
+            display: false,
+          },
+        ],
+      },
+    },
+  };
 }
