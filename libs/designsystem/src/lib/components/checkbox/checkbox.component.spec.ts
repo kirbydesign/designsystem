@@ -1,5 +1,5 @@
-import { IonCheckbox, IonicModule } from '@ionic/angular';
-import { createComponentFactory, createHostFactory, Spectator } from '@ngneat/spectator';
+import { IonicModule } from '@ionic/angular';
+import { createComponentFactory, Spectator } from '@ngneat/spectator';
 
 import { DesignTokenHelper } from '../../helpers';
 import { TestHelper } from '../../testing/test-helper';
@@ -23,11 +23,13 @@ describe('CheckboxComponent', () => {
 
   let spectator: Spectator<CheckboxComponent>;
   let ionCheckbox: HTMLIonCheckboxElement;
+  let label: HTMLSpanElement;
 
   beforeEach(async () => {
     spectator = createComponent({ props: { text: 'test' } });
     ionCheckbox = spectator.query('ion-checkbox');
     await TestHelper.whenReady(ionCheckbox);
+    label = spectator.query('span');
   });
 
   it('should create', () => {
@@ -61,6 +63,18 @@ describe('CheckboxComponent', () => {
         height: `>=${fatFingerSize}`,
         width: `>=${fatFingerSize}`,
       });
+    });
+
+    it('should center align the label', () => {
+      expect(label).toHaveComputedStyle({ 'align-self': 'center' });
+    });
+
+    it('should have have correct label font-size ', () => {
+      expect(label).toHaveComputedStyle({ 'font-size': '16px' });
+    });
+
+    it('should have have correct label line-height', () => {
+      expect(label).toHaveComputedStyle({ 'line-height': '24px' });
     });
 
     it('should not be checked', () => {
