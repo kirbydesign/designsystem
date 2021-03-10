@@ -130,11 +130,12 @@ export class SideNavComponent implements OnInit {
   }
 
   private distributeSideNavLinksAlphabetically(links: SideNavLink[]): SideNavLink[][] {
-    const distributed: { [key: string]: SideNavLink[] } = links.reduce((acc, link) => {
+    const distributed: { [key: string]: SideNavLink[] } = links.reduce((accumulator, link) => {
       const firstLetter = link.name[0];
       link.active = this.router.url.endsWith(link.path);
-      acc[firstLetter] = acc[firstLetter] === undefined ? [link] : [...acc[firstLetter], link];
-      return acc;
+      accumulator[firstLetter] =
+        accumulator[firstLetter] === undefined ? [link] : [...accumulator[firstLetter], link];
+      return accumulator;
     }, {});
 
     return Object.keys(distributed).map((groupKey) => distributed[groupKey]);

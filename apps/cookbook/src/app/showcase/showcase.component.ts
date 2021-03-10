@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -18,7 +18,7 @@ export class ShowcaseComponent implements OnDestroy {
     'https://github.com/kirbydesign/designsystem/tree/master/apps/cookbook/src/app/examples/';
   showCallToActionLinks = true;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private elementRef: ElementRef<HTMLElement>) {
     this.onNavigationEnd();
   }
 
@@ -34,7 +34,9 @@ export class ShowcaseComponent implements OnDestroy {
   private onNavigationEnd() {
     this.routerEventsSubscription = this.router.events
       .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
-      .subscribe((event) => this.setExampleComponentFromUrl(event.urlAfterRedirects));
+      .subscribe((event) =>
+        setTimeout(() => this.setExampleComponentFromUrl(event.urlAfterRedirects))
+      );
   }
 
   private setExampleComponentFromUrl(url: string) {
@@ -43,9 +45,9 @@ export class ShowcaseComponent implements OnDestroy {
     this.exampleComponentGitUrl = this.gitUrl + exampleComponentUrlSegment + '-example';
     this.exampleComponentName = this.replaceHyphens(exampleComponentUrlSegment);
     this.showCallToActionLinks = this.exampleComponentName !== 'colors';
-    window.setTimeout(() => {
-      this.propertiesTable = document.getElementsByClassName('cookbook-properties')[0];
-    }, 1); // this queues the query to ensure DOM has been rendered
+    this.propertiesTable = this.elementRef.nativeElement.getElementsByClassName(
+      'cookbook-properties'
+    )[0];
   }
 
   private getExampleComponentUrlSegment(url: string) {
