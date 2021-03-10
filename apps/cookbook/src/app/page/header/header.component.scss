@@ -3,9 +3,9 @@
 $logo-size-mobile: size('xl');
 $logo-size-desktop: 2 * size('l');
 $text-delay: 500ms;
-$large-rect-delay: 900ms;
-$medium-rect-delay: 1200ms;
-$small-rect-delay: 1400ms;
+$large-rect-delay: $text-delay + 400ms;
+$medium-rect-delay: $large-rect-delay + 300ms;
+$small-rect-delay: $medium-rect-delay + 200ms;
 
 :host {
   display: flex;
