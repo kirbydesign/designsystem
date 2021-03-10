@@ -1,9 +1,10 @@
-import { Component, ComponentInterface, Host, h, Prop } from '@stencil/core';
+import { Component, ComponentInterface, h, Host, Prop } from '@stencil/core';
 @Component({
   tag: 'kirby-badge',
   styleUrl: 'badge.scss',
   shadow: true,
 })
+// tslint:disable-next-line: component-class-suffix
 export class Badge implements ComponentInterface {
   @Prop() text: string;
 
