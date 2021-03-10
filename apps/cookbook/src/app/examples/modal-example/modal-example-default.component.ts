@@ -1,27 +1,41 @@
 import { Component } from '@angular/core';
 
 import { ModalConfig, ModalController } from '@kirbydesign/designsystem';
-
-import { FirstEmbeddedModalExampleComponent } from './first-embedded-modal-example/first-embedded-modal-example.component';
-import { ModalCompactExampleComponent } from './compact-example/modal-compact-example.component';
 import { WindowRef } from '@kirbydesign/designsystem/types/window-ref';
+
+import { ModalCompactExampleComponent } from './compact-example/modal-compact-example.component';
+import { FirstEmbeddedModalExampleComponent } from './first-embedded-modal-example/first-embedded-modal-example.component';
 
 const config = {
   selector: 'cookbook-modal-example-default',
   template: `<button kirby-button (click)="showModal()">Show modal</button>
-<button kirby-button (click)="showDrawer()">Show drawer</button>
-<button kirby-button (click)="showCompact()">Show compact</button>
-<cookbook-example-configuration-wrapper>
-  <cookbook-modal-example-configuration
-    [(showDummyKeyboard)]="showDummyKeyboard"
-    [(showFooter)]="showFooter"
-    [(showDummyContent)]="showDummyContent"
-    [(delayLoadDummyContent)]="delayLoadDummyContent"
-    [(loadAdditionalContent)]="loadAdditionalContent"
-    [(openFullHeight)]="openFullHeight"
-  ></cookbook-modal-example-configuration>
-</cookbook-example-configuration-wrapper>`,
+  <button kirby-button (click)="showDrawer()">Show drawer</button>
+  <button kirby-button (click)="showCompact()">Show compact</button>
+  <cookbook-example-configuration-wrapper>
+      <cookbook-modal-example-configuration [(showDummyKeyboard)]="showDummyKeyboard"
+      [(showPageProgress)]="showPageProgress"
+      [(showFooter)]="showFooter"
+      [(showDummyContent)]="showDummyContent"
+      [(delayLoadDummyContent)]="delayLoadDummyContent"
+      [(loadAdditionalContent)]="loadAdditionalContent"
+      [(openFullHeight)]="openFullHeight">
+      </cookbook-modal-example-configuration>
+  </cookbook-example-configuration-wrapper>
+    `,
   titleTemplate: `<kirby-page-title>My Modal Title</kirby-page-title>
+ 
+<p>Some content of the embedded component</p>
+...
+`,
+  pageProgressTemplate: `<kirby-page-progress>
+  <kirby-progress-circle themeColor="warning" value="50" size="sm" class="kirby-text-xsmall">
+  2/4
+  </kirby-progress-circle>
+</kirby-page-progress>
+
+<kirby-page-title>
+  My Modal Title
+</kirby-page-title>
  
 <p>Some content of the embedded component</p>
 ...
@@ -161,6 +175,7 @@ export class EmbeddedComponent() {
 export class ModalExampleDefaultComponent {
   template = config.template.split('<cookbook-example-configuration-wrapper>')[0]; // Remove config part of the template
   titleTemplate = config.titleTemplate;
+  pageProgressTemplate = config.pageProgressTemplate;
   footerTemplate = config.footerTemplate;
   defaultCodeSnippet = [
     config.showModalCodeSnippet,
@@ -179,6 +194,7 @@ export class ModalExampleDefaultComponent {
   closeModalCodeSnippet = config.closeModalCodeSnippet;
 
   showDummyKeyboard = !!this.window.sessionStorage.getItem('kirby-cookbook-show-dummy-keyboard');
+  showPageProgress = false;
   showFooter = false;
   showDummyContent = true;
   delayLoadDummyContent = true;
@@ -203,6 +219,7 @@ export class ModalExampleDefaultComponent {
         },
         showNestedOptions: true,
         showDummyKeyboard: this.showDummyKeyboard,
+        showPageProgress: this.showPageProgress,
         showFooter: this.showFooter,
         showDummyContent: this.showDummyContent,
         delayLoadDummyContent: this.delayLoadDummyContent,

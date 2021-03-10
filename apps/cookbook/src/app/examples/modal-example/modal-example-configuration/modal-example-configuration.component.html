@@ -6,6 +6,13 @@
 ></kirby-checkbox>
 
 <kirby-checkbox
+  *ngIf="showPageProgress !== undefined"
+  [checked]="showPageProgress"
+  (checkedChange)="toggleShowPageProgress($event)"
+  text="Show page progress"
+></kirby-checkbox>
+
+<kirby-checkbox
   *ngIf="showFooter !== undefined"
   [checked]="showFooter"
   (checkedChange)="toggleShowFooter($event)"
