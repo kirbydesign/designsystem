@@ -7,9 +7,14 @@ type Config = {
   maximumNumberOfDecimals: number;
 };
 
+export type RetValue = {
+  cursorPos: number;
+  value: string;
+};
+
 export class NumericInputAnalyzer {
-  public cursorPosition: number;
   public invalid: boolean;
+  private cursorPosition: number;
   private excludedPattern = /[^0-9.,]+/g;
   private groupingSeparator: string;
   private decimalSeparator: string;
@@ -43,7 +48,7 @@ export class NumericInputAnalyzer {
     lastCursorPosition: number,
     value: string,
     lastValue: string
-  ): string {
+  ): RetValue {
     this.cursorPosition = cursorPosition;
     this.lastCursorPosition = lastCursorPosition;
     this.lastValue = lastValue;
@@ -58,7 +63,7 @@ export class NumericInputAnalyzer {
       value = this.createOutput(value);
       this.adjustCursorPosition(value);
     }
-    return value;
+    return { value: value, cursorPos: this.cursorPosition };
   }
 
   private resetAndCapture(value: string): string {
@@ -141,9 +146,12 @@ export class NumericInputAnalyzer {
       this.lastValue.substring(0, this.lastCursorPosition)
     );
     const newCount = this.countGroupingSeparators(value.substring(0, this.cursorPosition));
-    console.log('this.cursorPosition lastCount newCount', this.cursorPosition, lastCount, newCount);
+    console.log('cPos', this.cursorPosition);
+    console.log('last cPos', this.lastCursorPosition);
+    console.log('lastCount', lastCount);
+    console.log('newCount', newCount);
     this.cursorPosition += newCount - lastCount;
-    console.log('new this.cursorPosition', this.cursorPosition);
+    console.log('new cPos', this.cursorPosition);
   }
 
   private replaceSeparator(value: string, separator: string, replaceValue: string): string {

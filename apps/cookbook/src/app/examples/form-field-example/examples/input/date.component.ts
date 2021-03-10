@@ -8,7 +8,7 @@ const config = {
   template: `
   <form [formGroup]="dateFormGroup">
     <kirby-form-field label="Date input" >
-      <input kirby-input kirby-date-input formControlName="dateDemo" />
+      <input kirby-input [size]="size" kirby-date-input formControlName="dateDemo" />
     </kirby-form-field>
   </form>
 `,

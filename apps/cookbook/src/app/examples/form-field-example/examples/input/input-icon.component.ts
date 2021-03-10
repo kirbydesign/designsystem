@@ -6,7 +6,7 @@ const config = {
   selector: 'cookbook-form-field-input-icon-example',
   template: `
 <kirby-form-field label="Input with Icon"  message="This is additional info that will be shown below the input">
-  <input type="text" kirby-input placeholder="Write something or Click Icon for Action "/>
+  <input type="text" kirby-input [size]="size" placeholder="Write something or Click Icon for Action "/>
   <kirby-input-icon icon="attach"  (click)="onClick($event)"></kirby-input-icon>
 </kirby-form-field>
 `,

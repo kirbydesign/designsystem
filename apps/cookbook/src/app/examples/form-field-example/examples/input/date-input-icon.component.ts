@@ -9,7 +9,7 @@ const config = {
   template: `
   <form [formGroup]="dateFormGroup">
 <kirby-form-field label="Date input with Calendar Icon">
-  <input kirby-date-input kirby-input placeholder="Write Date or Select from Calendar"  formControlName="dateDemo"/>
+  <input kirby-date-input kirby-input [size]="size" placeholder="Write Date or Select from Calendar"  formControlName="dateDemo"/>
   <kirby-input-icon icon="calendar"  (click)="onClick($event)"></kirby-input-icon>
 </kirby-form-field>
   </form>
@@ -24,6 +24,7 @@ const config = {
   </kirby-card>
 `,
 };
+
 @Component({
   selector: config.selector,
   template: config.template,
@@ -34,14 +35,8 @@ export class FormFieldDateInputIconExampleComponent implements OnInit {
   public dateFormGroup: FormGroup;
   @Input() showCalendar: boolean;
   @Input() size: InputSize;
-  public onClick($event: any): void {
-    this.showCalendar = !this.showCalendar;
-  }
 
-  public onDateChange($event: any): void {
-    this.dateFormGroup.patchValue({ dateDemo: '01/01/2021' });
-    this.showCalendar = false;
-  }
+  constructor(private formBuilder: FormBuilder) {}
 
   public get dateDemo(): any {
     return this.dateFormGroup.get('dateDemo').value;
@@ -51,7 +46,14 @@ export class FormFieldDateInputIconExampleComponent implements OnInit {
     return moment();
   }
 
-  constructor(private formBuilder: FormBuilder) {}
+  public onClick($event: any): void {
+    this.showCalendar = !this.showCalendar;
+  }
+
+  public onDateChange($event: any): void {
+    this.dateFormGroup.patchValue({ dateDemo: '01/01/2021' });
+    this.showCalendar = false;
+  }
 
   ngOnInit(): void {
     this.dateFormGroup = this.formBuilder.group({

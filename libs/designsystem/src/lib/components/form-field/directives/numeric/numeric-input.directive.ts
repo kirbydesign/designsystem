@@ -2,6 +2,7 @@ import { CurrencyPipe, DecimalPipe } from '@angular/common';
 import {
   Directive,
   ElementRef,
+  HostListener,
   Inject,
   Input,
   LOCALE_ID,
@@ -13,7 +14,7 @@ import { NgControl } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
 
-import { NumericInputAnalyzer } from './numeric-input.analyzer';
+import { NumericInputAnalyzer, RetValue } from './numeric-input.analyzer';
 
 /**
  * Directive for filtering input keys matching digits + decimal and grouping separator.
@@ -78,16 +79,19 @@ export class NumericInputDirective implements OnInit, OnDestroy {
     this.ngControl.valueChanges
       .pipe(
         takeUntil(this.destroy$),
-        map((value: string) => this.findCursorPosition(value)),
+        map((value: string) => {
+          this.cursorPosition = this.findCursorPosition();
+          return value;
+        }),
         map((value: string) =>
           this.analyzer.analyse(this.cursorPosition, this.lastCursorPosition, value, this.lastValue)
         )
       )
-      .subscribe((value: string) => {
-        this.cursorPosition = this.analyzer.cursorPosition;
+      .subscribe((returnVal: RetValue) => {
+        this.cursorPosition = returnVal.cursorPos;
         this.updateCursorPosition();
-        this.updateValue(value);
-        this.lastValue = value;
+        this.updateValue(returnVal.value);
+        this.lastValue = returnVal.value;
         this.lastCursorPosition = this.cursorPosition;
       });
   }
@@ -96,10 +100,21 @@ export class NumericInputDirective implements OnInit, OnDestroy {
     this.destroy$.next();
   }
 
-  private findCursorPosition(value: string): string {
-    this.cursorPosition = this.hostElement.nativeElement.selectionStart;
-    return value;
+  @HostListener('click', ['$event.target'])
+  inputClicked(): void {
+    this.lastCursorPosition = this.findCursorPosition();
+    console.log('clicked', this.lastCursorPosition);
   }
+  @HostListener('window:keydown', ['$event'])
+  inputKey(event: KeyboardEvent): void {
+    this.lastCursorPosition = this.findCursorPosition();
+    console.log('keydown', this.lastCursorPosition);
+  }
+
+  private findCursorPosition(): number {
+    return this.hostElement.nativeElement.selectionStart;
+  }
+
   private updateCursorPosition(): void {
     this.hostElement.nativeElement.selectionStart = this.cursorPosition;
   }
