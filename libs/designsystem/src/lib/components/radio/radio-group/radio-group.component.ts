@@ -98,7 +98,7 @@ export class RadioGroupComponent implements AfterContentInit, ControlValueAccess
   // #region private fields
   private _disabled = false;
   private _items: string[] | any[] = [];
-  private _onChangeRegisteredCallback: (value: any) => void = () => {};
+  private _onChangeCallback: (value: any) => void = () => {};
   private _onTouched: Function;
   private _selectedIndex: number = -1;
   private _value?: string | any = null;
@@ -132,7 +132,7 @@ export class RadioGroupComponent implements AfterContentInit, ControlValueAccess
   }
 
   registerOnChange(fn: any): void {
-    this._onChangeRegisteredCallback = fn;
+    this._onChangeCallback = fn;
   }
 
   registerOnTouched(fn: any): void {
@@ -169,7 +169,7 @@ export class RadioGroupComponent implements AfterContentInit, ControlValueAccess
     if (value === this._value) return;
     this.setSelectedItem(value);
     this.valueChange.emit(value);
-    this._onChangeRegisteredCallback(value);
+    this._onChangeCallback(value);
   }
 
   @HostListener('ionBlur')
