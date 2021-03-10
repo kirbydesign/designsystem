@@ -6,8 +6,8 @@
   border-top-right-radius: $border-radius;
   text-align: center;
   padding: var(--kirby-card-header-padding, size('s'));
-  color: var(--kirby-card-header-color, var(--kirby-card-main-color));
-  background-color: var(--kirby-card-header-background-color, var(--kirby-card-main-background-color));
+  color: var(--kirby-card-header-color, currentColor);
+  background-color: var(--kirby-card-header-background-color, transparent);
 }
 
 h2 {
