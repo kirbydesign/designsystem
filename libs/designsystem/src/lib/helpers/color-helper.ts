@@ -1,4 +1,5 @@
 import { styles } from './color-helper.styles';
+import { camelToKebabCase, kebabToCamelCase } from './string-helper';
 
 type KirbyColorGroup = { [key: string]: string };
 
@@ -27,20 +28,20 @@ export class ColorHelper {
     const SHADE = 'Shade';
     const CONTRAST = 'Contrast';
     const colorArray = Object.entries(colors).map(([name, value]) => ({
-      name: ColorHelper.camelToKebabCase(name),
+      name: camelToKebabCase(name),
       value,
       base: value,
       tint: {
         value: fullColorMap[name + TINT],
-        name: ColorHelper.camelToKebabCase(name + TINT),
+        name: camelToKebabCase(name + TINT),
       },
       shade: {
         value: fullColorMap[name + SHADE],
-        name: ColorHelper.camelToKebabCase(name + SHADE),
+        name: camelToKebabCase(name + SHADE),
       },
       contrast: {
         value: fullColorMap[name + CONTRAST],
-        name: ColorHelper.camelToKebabCase(name + CONTRAST),
+        name: camelToKebabCase(name + CONTRAST),
       },
     }));
     // Do not remove the `colorArray` const, since it'll break the ngpackagr build, for more info see:
@@ -119,38 +120,15 @@ export class ColorHelper {
   }
 
   private static getColor(name: string): string {
-    const camelCaseKey = ColorHelper.kebabToCamelCase(name);
+    const camelCaseKey = kebabToCamelCase(name);
     const found = styles.kirbyColors[camelCaseKey];
     return found || null;
   }
 
   private static getTextColor(name: string): string {
-    const camelCaseKey = ColorHelper.kebabToCamelCase(name);
+    const camelCaseKey = kebabToCamelCase(name);
     const found = styles.kirbyTextColors[camelCaseKey];
     return found || null;
-  }
-
-  private static kebabToCamelCase(key: string) {
-    // Do not remove the `keyInCamelCase` const, since it'll break the ngpackagr build, for more info see:
-    // https://github.com/ng-packagr/ng-packagr/issues/696
-    const keyInCamelCase = key
-      .split('-')
-      .map((part, index) => (index === 0 ? part : part[0].toUpperCase() + part.substr(1)))
-      .join('');
-    return keyInCamelCase;
-  }
-
-  private static camelToKebabCase(key: string) {
-    // Do not remove the `keyInKebabCase` const, since it'll break the ngpackagr build, for more info see:
-    // https://github.com/ng-packagr/ng-packagr/issues/696
-    const keyInKebabCase = key
-      .split('')
-      .map((char) => {
-        const isUppercase = char.toUpperCase() === char;
-        return isUppercase ? `-${char.toLowerCase()}` : char;
-      })
-      .join('');
-    return keyInKebabCase;
   }
 }
 
