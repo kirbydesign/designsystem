@@ -18,6 +18,7 @@ export class CalendarShowcaseComponent {
   setTodayDate = false;
   setDisabledDates = false;
   useTimezoneUTC = false;
+  showYearNavigator = false;
   minDate: Date;
   maxDate: Date;
   todayDate: Date;
@@ -100,6 +101,13 @@ export class CalendarShowcaseComponent {
         '(Optional) Specify timezone for aligning Date objects. Emitted Date objects will be constructed to point to midnight in the given timezone. Input Date objects may be in either of the two timezones but we highly recommend aligning them with midnight.',
       defaultValue: '"local"',
       inputValues: ['"local" | "UTC"'],
+    },
+    {
+      name: 'yearNavigatorOptions',
+      description:
+        '(Optional) Displays a dropdown to navigate between years and specifies the navigable year interval with either numbers or dates. Navigable years are set by getting the year difference between `from` and `to`, but prioritize `minDate` and `maxDate`: if `minDate` and `maxDate` are set, they override `from` and `to`.',
+      defaultValue: 'null',
+      inputValues: ['{ from: number | Date; to: number | Date }'],
     },
   ];
 

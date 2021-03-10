@@ -1,8 +1,19 @@
 @import '../../scss/utils';
 
+$button-width: (
+  sm: 44px,
+  md: 88px,
+  lg: 220px,
+) !default;
+
+@function button-width($key) {
+  @return map-get($button-width, $key);
+}
+
 @mixin button-sm {
   font-size: font-size('xs');
   height: size('l');
+  min-width: button-width('sm');
 
   &:not(.icon-only) {
     padding-left: size('s');
@@ -11,18 +22,20 @@
 
   &.icon-only {
     width: size('l');
+    min-width: unset;
   }
 
   &.icon-left,
   &.icon-right {
     --kirby-icon-font-size: #{size('s')};
+    min-width: button-width('md');
   }
 }
 
 @mixin button-lg {
   font-size: font-size('n');
   height: size('xxl');
-  min-width: 220px;
+  min-width: button-width('lg');
 
   &.icon-only {
     width: size('xxl');
@@ -86,10 +99,11 @@
   white-space: nowrap;
 
   // we default to 'md' size.
-  margin: size('xxxs');
-  padding: 0 size('m');
   font-size: font-size('s');
   height: size('xl');
+  min-width: button-width('md');
+  padding: 0 size('m');
+  margin: size('xxxs');
   line-height: line-height('s');
 
   // Outline is applied on button border instead,
@@ -112,6 +126,7 @@
   &.icon-only {
     width: size('xl');
     padding: 0;
+    min-width: unset;
   }
 
   &.sm {
@@ -148,8 +163,11 @@
     --kirby-button-border-color: #{$focus-ring-color};
   }
 
-  &:hover,
-  &:focus {
+  @include hover() {
+    opacity: 0.8;
+  }
+
+  &:active {
     opacity: 0.8;
   }
 
