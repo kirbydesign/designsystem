@@ -82,6 +82,7 @@ $default-checkbox-radio-size: map-get($checkbox-radio-sizes, 'md');
   &.has-label {
     display: block;
     line-height: line-height('n');
+    white-space: pre-line;
 
     .wrapper {
       position: relative;
