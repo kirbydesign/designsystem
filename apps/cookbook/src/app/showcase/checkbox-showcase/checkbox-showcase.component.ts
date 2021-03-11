@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-
 import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
 
 @Component({
