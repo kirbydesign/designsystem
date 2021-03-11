@@ -97,10 +97,6 @@ describe('RadioComponent', () => {
         });
       });
 
-      it('should center align the label', () => {
-        expect(label).toHaveComputedStyle({ 'align-self': 'center' });
-      });
-
       it('should have have correct label font-size ', () => {
         expect(label).toHaveComputedStyle({ 'font-size': '16px' });
       });
