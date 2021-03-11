@@ -1,7 +1,6 @@
-import { ThemeColor } from './theme-color.type';
 import { ColorHelper } from './color-helper';
-
 import { styles } from './design-token-helper.styles';
+import { ThemeColor } from './theme-color.type';
 
 export class DesignTokenHelper {
   public static readonly breakpoints = styles.breakpoints;
@@ -46,6 +45,10 @@ export class DesignTokenHelper {
 
   public static fontSize(key: string): string {
     return styles.fontSizes[key];
+  }
+
+  public static iconFontSize(key: string): string {
+    return styles.iconFontSizes[key];
   }
 
   public static fontWeight(key: string): string {

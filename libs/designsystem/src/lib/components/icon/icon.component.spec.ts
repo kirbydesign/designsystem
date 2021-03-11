@@ -1,16 +1,18 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MockComponent } from 'ng-mocks';
-import { IonIcon } from '@ionic/angular';
-import { By } from '@angular/platform-browser';
 import { Component } from '@angular/core';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { IonIcon } from '@ionic/angular';
 import { mockProvider, SpyObject } from '@ngneat/spectator';
+import { MockComponent } from 'ng-mocks';
 
 import { ThemeColorDirective } from '../../directives/theme-color/theme-color.directive';
 import { DesignTokenHelper } from '../../helpers/design-token-helper';
-import { IconComponent } from './icon.component';
+
 import { IconRegistryService } from './icon-registry.service';
+import { IconComponent } from './icon.component';
 
 const getColor = DesignTokenHelper.getColor;
+const iconFontSize = DesignTokenHelper.iconFontSize;
 
 describe('IconComponent', () => {
   beforeEach(async(() => {
@@ -175,6 +177,30 @@ describe('IconComponent', () => {
       const el = fixture.debugElement.query(By.directive(IconComponent));
       expect(el.nativeElement).toHaveComputedStyle({
         color: getColor('danger'),
+      });
+    });
+  });
+
+  describe('size', () => {
+    const sizes: string[] = ['xs', 'sm', 'md', 'lg'];
+
+    sizes.forEach((size) => {
+      it(`should render with correct font-size for size = ${size}`, () => {
+        const fixture = createTestComponent(`<kirby-icon size=${size}></kirby-icon>`);
+        fixture.detectChanges();
+        const el = fixture.debugElement.query(By.directive(IconComponent));
+        expect(el.nativeElement).toHaveComputedStyle({
+          'font-size': iconFontSize(`${size}`),
+        });
+      });
+    });
+
+    it('should default to size = sm', () => {
+      const fixture = createTestComponent('<kirby-icon></kirby-icon>');
+      fixture.detectChanges();
+      const el = fixture.debugElement.query(By.directive(IconComponent));
+      expect(el.nativeElement).toHaveComputedStyle({
+        'font-size': iconFontSize('sm'),
       });
     });
   });

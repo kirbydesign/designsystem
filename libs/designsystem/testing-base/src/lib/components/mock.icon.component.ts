@@ -1,4 +1,4 @@
-import { forwardRef, Component, Input } from '@angular/core';
+import { Component, forwardRef, Input } from '@angular/core';
 
 import { IconComponent } from '@kirbydesign/designsystem';
 
@@ -14,6 +14,7 @@ import { IconComponent } from '@kirbydesign/designsystem';
   ],
 })
 export class MockIconComponent {
+  @Input() size: 'xs' | 'sm' | 'md' | 'lg';
   @Input() name: string;
   @Input() customName: string;
 }
