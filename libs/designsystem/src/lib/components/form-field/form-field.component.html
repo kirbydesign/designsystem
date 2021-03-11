@@ -24,12 +24,11 @@
 </div>
 
 <ng-template #slottedInputTemplate>
+  <ng-content select="kirby-input-prefix"></ng-content>
   <ng-content select="input[kirby-input]"></ng-content>
   <ng-content select="textarea[kirby-textarea]"></ng-content>
-  <ng-content select="kirby-radio-group"></ng-content>
-  <ng-content select="kirby-input-prefix"></ng-content>
   <ng-content select="kirby-input-postfix"></ng-content>
-
+  <ng-content select="kirby-radio-group"></ng-content>
 </ng-template>
 
 <ng-template #labelTextTemplate>

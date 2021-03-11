@@ -1,0 +1,32 @@
+@import '../../../scss/utils';
+
+:host() {
+  height: size('xxxl');
+}
+
+:host(.md) {
+  height: size('xl');
+  font-size: smaller;
+}
+
+.input-append {
+  margin-left: -1px;
+}
+
+.input-prepend {
+  margin-right: -1px;
+}
+
+.prefix-postfix {
+  padding: 0.375rem 0.75rem;
+  margin: auto;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  height: 100%;
+  color: #495057;
+  white-space: nowrap;
+  display: flex;
+  flex: auto;
+  align-items: center;
+}

@@ -2,6 +2,7 @@
 <cookbook-form-field-example-configuration
   [(size)]="size"
 ></cookbook-form-field-example-configuration>
+
 <h3>Default</h3>
 <cookbook-example-viewer [html]="inputDefaultExample.template">
   <cookbook-form-field-input-example
@@ -37,6 +38,7 @@
 <h3>Prefix - Postfix</h3>
 <cookbook-example-viewer [html]="inputPrefixPostfixExample.template">
   <cookbook-form-field-input-prefix-postfix-example
+    [size]="size"
     #inputPrefixPostfixExample
   ></cookbook-form-field-input-prefix-postfix-example>
 </cookbook-example-viewer>
