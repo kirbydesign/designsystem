@@ -13,8 +13,10 @@ $default-checkbox-radio-size: map-get($checkbox-radio-sizes, 'md');
 
 :host {
   display: inline-block;
+
   &.has-label {
     display: block;
+    line-height: line-height('n');
 
     div.wrapper {
       position: relative;
@@ -40,11 +42,6 @@ $default-checkbox-radio-size: map-get($checkbox-radio-sizes, 'md');
       position: static;
       margin-left: $spacing-to-edge;
       margin-right: $spacing-to-label;
-    }
-
-    span {
-      align-self: center;
-      line-height: line-height('n');
     }
   }
 
