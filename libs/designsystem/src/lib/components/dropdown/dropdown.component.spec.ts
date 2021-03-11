@@ -37,7 +37,6 @@ describe('DropdownComponent', () => {
       declarations: [
         ItemComponent,
         MockComponents(ButtonComponent, CardComponent, IconComponent, IonItem),
-        MockDirectives(SizeDirective),
       ],
     });
 
@@ -874,19 +873,11 @@ describe('DropdownComponent', () => {
 
   describe('when configured with size', () => {
     let spectator: SpectatorHost<DropdownComponent>;
-    let buttonSizeDirective: SizeDirective;
 
     const createHost = createHostFactory({
       component: DropdownComponent,
-      declarations: [
-        MockComponents(ButtonComponent, CardComponent, ItemComponent, IconComponent),
-        MockDirectives(SizeDirective),
-      ],
+      declarations: [MockComponents(ButtonComponent, CardComponent, ItemComponent, IconComponent)],
     });
-
-    function getButtonSizeDirective() {
-      return spectator.query(ButtonComponent, { read: SizeDirective });
-    }
 
     describe('through template one-time string initialization', () => {
       function getSpectatorWithStringSize(size: string) {
@@ -898,15 +889,15 @@ describe('DropdownComponent', () => {
       it('should have small size on button', () => {
         const size = 'sm';
         spectator = getSpectatorWithStringSize(size);
-        buttonSizeDirective = getButtonSizeDirective();
-        expect(buttonSizeDirective.size).toBe(size);
+        const button: ButtonComponent = spectator.query(ButtonComponent);
+        expect(button.size).toBe(size);
       });
 
       it('should have medium size on button', () => {
         const size = 'md';
         spectator = getSpectatorWithStringSize(size);
-        buttonSizeDirective = getButtonSizeDirective();
-        expect(buttonSizeDirective.size).toBe(size);
+        const button: ButtonComponent = spectator.query(ButtonComponent);
+        expect(button.size).toBe(size);
       });
     });
 
@@ -920,15 +911,15 @@ describe('DropdownComponent', () => {
       it('should have small size on button', () => {
         const size = 'sm';
         spectator = getSpectatorWithStringSize(size);
-        buttonSizeDirective = getButtonSizeDirective();
-        expect(buttonSizeDirective.size).toBe(size);
+        const button: ButtonComponent = spectator.query(ButtonComponent);
+        expect(button.size).toBe(size);
       });
 
       it('should have medium size on button', () => {
         const size = 'md';
         spectator = getSpectatorWithStringSize(size);
-        buttonSizeDirective = getButtonSizeDirective();
-        expect(buttonSizeDirective.size).toBe(size);
+        const button: ButtonComponent = spectator.query(ButtonComponent);
+        expect(button.size).toBe(size);
       });
     });
 
@@ -942,15 +933,15 @@ describe('DropdownComponent', () => {
       it('should have small size on button', () => {
         const size = 'sm';
         spectator = getSpectatorWithSize(size);
-        buttonSizeDirective = getButtonSizeDirective();
-        expect(buttonSizeDirective.size).toBe(size);
+        const button: ButtonComponent = spectator.query(ButtonComponent);
+        expect(button.size).toBe(size);
       });
 
       it('should have medium size on button', () => {
         const size = 'md';
         spectator = getSpectatorWithSize(size);
-        buttonSizeDirective = getButtonSizeDirective();
-        expect(buttonSizeDirective.size).toBe(size);
+        const button: ButtonComponent = spectator.query(ButtonComponent);
+        expect(button.size).toBe(size);
       });
 
       describe('when changing size', () => {
@@ -958,8 +949,8 @@ describe('DropdownComponent', () => {
           const newSize = 'sm';
           spectator = getSpectatorWithSize('md');
           spectator.setInput('size', newSize);
-          buttonSizeDirective = getButtonSizeDirective();
-          expect(buttonSizeDirective.size).toEqual(newSize);
+          const button: ButtonComponent = spectator.query(ButtonComponent);
+          expect(button.size).toBe(newSize);
         });
       });
     });
@@ -971,10 +962,7 @@ describe('DropdownComponent', () => {
 
     const createHost = createHostFactory({
       component: DropdownComponent,
-      declarations: [
-        MockComponents(ButtonComponent, CardComponent, ItemComponent, IconComponent),
-        MockDirectives(SizeDirective),
-      ],
+      declarations: [MockComponents(ButtonComponent, CardComponent, ItemComponent, IconComponent)],
     });
 
     const defaultSelectedIndex = 2;
@@ -1082,10 +1070,7 @@ describe('DropdownComponent', () => {
 
     const createHost = createHostFactory({
       component: DropdownComponent,
-      declarations: [
-        MockComponents(ButtonComponent, CardComponent, ItemComponent, IconComponent),
-        MockDirectives(SizeDirective),
-      ],
+      declarations: [MockComponents(ButtonComponent, CardComponent, ItemComponent, IconComponent)],
       host: OnPushHostComponent,
     });
 
@@ -1131,7 +1116,6 @@ describe('DropdownComponent', () => {
         ItemComponent,
         ListItemTemplateDirective,
         MockComponents(ButtonComponent, CardComponent, IconComponent, IonItem),
-        MockDirectives(SizeDirective),
       ],
     });
 
