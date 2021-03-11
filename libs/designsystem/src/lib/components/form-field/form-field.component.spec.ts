@@ -28,6 +28,7 @@ describe('FormFieldComponent', () => {
       InputComponent,
       TextareaComponent,
       RadioGroupComponent,
+      RadioComponent,
       InputCounterComponent,
       ItemComponent,
       InputIconComponent,

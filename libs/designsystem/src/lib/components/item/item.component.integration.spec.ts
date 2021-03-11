@@ -1,19 +1,19 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { IonicModule } from '@ionic/angular';
 
-import { TestHelper } from '../../testing/test-helper';
-import { DesignTokenHelper } from '../../helpers';
-import { WindowRef } from '../../types/window-ref';
-import { ItemComponent } from './item.component';
 import {
-  ListComponent,
-  InfiniteScrollDirective,
-  ListItemTemplateDirective,
-  ListItemColorDirective,
-  SpinnerComponent,
-  IconComponent,
   CardComponent,
+  IconComponent,
+  InfiniteScrollDirective,
+  ListComponent,
+  ListItemColorDirective,
+  ListItemTemplateDirective,
+  SpinnerComponent,
 } from '..';
+import { DesignTokenHelper } from '../../helpers';
+import { TestHelper } from '../../testing/test-helper';
+import { WindowRef } from '../../types/window-ref';
+
+import { ItemComponent } from './item.component';
 
 const size = DesignTokenHelper.size;
 
@@ -24,7 +24,7 @@ describe('ItemComponent in Kirby List', () => {
   let spectator: SpectatorHost<ListComponent>;
   const createHost = createHostFactory({
     component: ListComponent,
-    imports: [IonicModule.forRoot({ mode: 'ios', _testing: true })],
+    imports: [TestHelper.ionicModuleForTest],
     providers: [
       {
         provide: WindowRef,
