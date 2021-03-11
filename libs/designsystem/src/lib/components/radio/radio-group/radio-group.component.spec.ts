@@ -929,7 +929,8 @@ describe('RadioGroupComponent', () => {
             expect(spectator.element.classList).not.toContain('ng-invalid');
           });
 
-          it('should apply class `error` when form is touched and invalid', async () => { // Mark form as touched somehow
+          it('should apply class `error` when form is touched and invalid', async () => {
+            // Mark form as touched somehow
             spectator.setHostInput('selected', null);
             await TestHelper.waitForTimeout();
             spectator.detectChanges();
