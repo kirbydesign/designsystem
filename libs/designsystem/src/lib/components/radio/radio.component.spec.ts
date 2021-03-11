@@ -1,4 +1,3 @@
-import { IonicModule } from '@ionic/angular';
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
 
 import { DesignTokenHelper } from '../../helpers';
@@ -14,7 +13,7 @@ const size = DesignTokenHelper.size;
 describe('RadioComponent', () => {
   const createComponent = createComponentFactory({
     component: RadioComponent,
-    imports: [IonicModule.forRoot({ mode: 'ios', _testing: true })],
+    imports: [TestHelper.ionicModuleForTest],
   });
 
   let spectator: Spectator<RadioComponent>;
