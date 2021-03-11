@@ -79,7 +79,7 @@
     "dist:core": "npm run build:core -- --docs",
     "start:core": "npm run build:core -- --dev --watch --serve",
     "test:core": "stencil test --config=./libs/core/stencil.config.ts --spec",
-    "test:watch": "stencil test --spec --e2e --watchAll"
+    "test:watch": "stencil test --config=./libs/core/stencil.config.ts --spec --e2e --watchAll"
   },
   "private": true,
   "dependencies": {
@@ -110,6 +110,7 @@
     "@angular-devkit/build-angular": "~0.901.0",
     "@angular/cli": "^9.1.0",
     "@angular/compiler-cli": "^9.1.0",
+    "@kirbydesign/core": "file:libs/core",
     "@ngneat/spectator": "^5.3.1",
     "@nrwl/cypress": "^9.1.2",
     "@nrwl/workspace": "^9.1.2",
@@ -144,7 +145,6 @@
     "karma-jasmine-html-reporter": "^1.5.2",
     "karma-junit-reporter": "^2.0.1",
     "karma-spec-reporter": "0.0.32",
-    "@kirbydesign/core": "file:libs/core",
     "lint-staged": "^9.4.2",
     "multimatch": "^4.0.0",
     "ng-mocks": "^9.0.0",
