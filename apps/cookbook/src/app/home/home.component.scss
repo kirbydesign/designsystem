@@ -1,38 +1,36 @@
 @import './libs/designsystem/src/lib/scss/utils';
 
-$page-header-bg: #1c1c1c;
-$page-header-color: #f4f1e8;
-$page-header-height: 7rem;
-$page-gutter: 1rem;
-$page-side-nav-width: 16.625rem;
+$header-height-mobile: size('xxxl');
+$header-height-desktop: 2 * size('xxl');
+$footer-height: 3 * size('xxl');
+$sidebar-width: 5 * size('xxl');
+$content-max-width: 1020px;
+$mobile-gutter: size('s');
+$desktop-gutter: minmax(size('m'), 1fr);
 
 :host {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-main {
-  display: flex;
-  flex-direction: row;
-  flex-grow: 1;
-  width: 100%;
-  max-width: var(--kirby-page-max-width);
-  margin: 0 auto;
-  @include media('>=large') {
-    padding-right: $page-gutter;
-  }
-}
-
-section {
-  flex-grow: 1;
   background-color: get-color('background-color');
-  margin: 2rem 0;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  padding: 1rem 1rem;
-  @include media('>=small') {
-    padding: 1rem 2rem;
+  display: grid;
+  grid-template-columns: $mobile-gutter minmax(0, 1fr) $mobile-gutter;
+  grid-template-rows: $header-height-mobile minmax(0, 1fr) $footer-height;
+  grid-template-areas:
+    '. header .'
+    '. main .'
+    'footer footer footer';
+  gap: size('m');
+  min-height: 100vh;
+
+  @include media('>=large') {
+    grid-template-columns: $desktop-gutter $sidebar-width minmax(0, $content-max-width) $desktop-gutter;
+    grid-template-rows: $header-height-desktop minmax(0, 1fr) $footer-height;
+    grid-template-areas:
+      '. header header .'
+      '. sidebar main .'
+      'footer footer footer footer';
+    gap: size('xl');
   }
-  overflow: hidden;
+}
+
+.main {
+  grid-area: main;
 }
