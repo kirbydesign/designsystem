@@ -15,6 +15,7 @@ import { InputPostfixComponent } from '@kirbydesign/designsystem';
 })
 export class MockInputPostfixComponent {
   @Input() cssClass: string;
+  @Input() size: InputSize;
 }
 
 // #endregion

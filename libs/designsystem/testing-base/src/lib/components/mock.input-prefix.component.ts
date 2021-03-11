@@ -15,6 +15,7 @@ import { InputPrefixComponent } from '@kirbydesign/designsystem';
 })
 export class MockInputPrefixComponent {
   @Input() cssClass: string;
+  @Input() size: InputSize;
 }
 
 // #endregion
