@@ -1,8 +1,8 @@
 import { Component, HostBinding, Input, OnChanges, SimpleChanges } from '@angular/core';
 
-import { kirbyIconSettings } from './kirby-icon-settings';
-import { Icon } from './icon-settings';
 import { IconRegistryService } from './icon-registry.service';
+import { Icon } from './icon-settings';
+import { kirbyIconSettings } from './kirby-icon-settings';
 
 @Component({
   selector: 'kirby-icon',
@@ -13,6 +13,9 @@ export class IconComponent implements OnChanges {
   @HostBinding('class.kirby-icon') true;
   defaultIcon: Icon = this.findIcon(kirbyIconSettings.icons, 'cog');
   private _icon = (this.icon = this.defaultIcon);
+  @HostBinding('class')
+  @Input()
+  size: 'xs' | 'sm' | 'md' | 'lg';
 
   @Input() name: string;
   @Input() customName: string;
