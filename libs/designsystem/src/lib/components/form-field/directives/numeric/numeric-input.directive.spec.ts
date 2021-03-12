@@ -388,7 +388,7 @@ describe('Directive: NumericInputDirective', () => {
           inputElm = spectatorDirective.element as HTMLInputElement;
         });
 
-        it('should add an integral digit beyound first group separator and increment cursor position', () => {
+        it('should add an integral digit beyond first group separator and increment cursor position', () => {
           inputElm.value = '123';
           inputElm.setSelectionRange(3, 3);
           spectatorDirective.detectChanges();
