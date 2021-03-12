@@ -1,11 +1,11 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
+import { WindowRef } from '../../../types/window-ref';
+import { ButtonComponent } from '../../button/button.component';
 
 import { AlertComponent } from './alert.component';
-import { ButtonComponent } from '../../button/button.component';
-import { SizeDirective } from '../../../directives/size/size.directive';
-import { WindowRef } from '../../../types/window-ref';
 
 describe('AlertComponent', () => {
   let component: AlertComponent;
@@ -13,7 +13,7 @@ describe('AlertComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [AlertComponent, ButtonComponent, SizeDirective],
+      declarations: [AlertComponent, ButtonComponent],
       providers: [
         {
           provide: WindowRef,

@@ -2,10 +2,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { fakeAsync, tick } from '@angular/core/testing';
 import { IonItem } from '@ionic/angular';
 import { createHostFactory, Spectator, SpectatorHost } from '@ngneat/spectator';
-import { MockComponents, MockDirectives } from 'ng-mocks';
+import { MockComponents } from 'ng-mocks';
 
 import { ButtonComponent, CardComponent, IconComponent, ItemComponent } from '..';
-import { SizeDirective } from '../../directives';
 import { DesignTokenHelper } from '../../helpers';
 import { TestHelper } from '../../testing/test-helper';
 import { ListItemTemplateDirective } from '../list';
