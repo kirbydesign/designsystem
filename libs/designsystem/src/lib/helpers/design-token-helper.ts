@@ -94,6 +94,10 @@ export class DesignTokenHelper {
   public static getElevation(z: 2 | 4 | 8): string {
     return styles.elevationsRgb[z];
   }
+
+  public static itemHeight(key: string): string {
+    return styles.itemHeights[key];
+  }
 }
 
 export type ThemeColorExtended =

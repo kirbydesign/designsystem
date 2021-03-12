@@ -1,4 +1,4 @@
-import { forwardRef, Component, Input } from '@angular/core';
+import { Component, forwardRef, Input } from '@angular/core';
 
 import { ItemComponent } from '@kirbydesign/designsystem';
 
@@ -18,6 +18,7 @@ export class MockItemComponent {
   @Input() selected: boolean;
   @Input() selectable: boolean;
   @Input() reorderable: boolean;
+  @Input() size: 'xs' | 'sm' | 'md';
 }
 
 // #endregion
