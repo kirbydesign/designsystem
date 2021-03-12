@@ -76,8 +76,11 @@ describe('ModalWrapperComponent', () => {
     });
 
     describe('padding', () => {
-      it('should have correct sizes', async () => {
+      it('should have correct sizes', () => {
         ionToolbarElement = spectator.query('ion-toolbar');
+
+        TestHelper.resetTestWindow();
+
         expect(ionToolbarElement).toHaveComputedStyle({
           '--padding-start': size('s'),
           '--padding-end': size('s'),
@@ -86,10 +89,15 @@ describe('ModalWrapperComponent', () => {
         });
       });
 
-      describe('when on mobile', () => {
-        it('should have `--padding-top` to be size large', async () => {
+      describe('on small screens', () => {
+        beforeEach(async () => {
           await TestHelper.resizeTestWindow(TestHelper.screensize.phone);
+          await TestHelper.waitForResizeObserver();
+        });
+
+        it('should have `--padding-top` to be size large', () => {
           ionToolbarElement = spectator.query('ion-toolbar');
+
           expect(ionToolbarElement).toHaveComputedStyle({
             '--padding-top': size('l'),
           });
