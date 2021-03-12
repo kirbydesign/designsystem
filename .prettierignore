@@ -4,4 +4,10 @@
 /libs/designsystem/src/lib/components/angular-component-lib/**.*
 /libs/angular/src/lib/components/proxies.ts
 /libs/angular/src/lib/components/angular-component-lib/**.*
+/libs/core/dist/**
+/libs/core/loader/**
+libs/core/component-docs.d.ts
+libs/core/component-docs.json
+libs/core/src/components.d.ts
+libs/designsystem/src/lib/components/angular-component-lib/utils.ts
 readme.md
