@@ -1,0 +1,31 @@
+@import './libs/designsystem/src/lib/scss/utils';
+
+table.api-description {
+  margin-bottom: size('xl');
+
+  border-spacing: 0;
+  border-collapse: collapse;
+  width: 100%;
+
+  thead {
+    background-color: get-color('light-tint');
+  }
+
+  th {
+    font-weight: font-weight('normal');
+    border: none;
+    text-align: left;
+    height: size('xl');
+    border-bottom: none;
+  }
+
+  td,
+  th {
+    border: 1px solid get-color('medium');
+    padding: 0.5rem 1rem;
+  }
+}
+
+.description {
+  white-space: pre-line;
+}

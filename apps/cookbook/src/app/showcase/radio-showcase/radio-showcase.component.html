@@ -155,14 +155,15 @@
 
 <h2>Properties</h2>
 <h3>Radio:</h3>
-<cookbook-showcase-properties [properties]="radioProperties"></cookbook-showcase-properties>
+<cookbook-api-description-properties
+  [properties]="radioProperties"
+></cookbook-api-description-properties>
 
 <h3>Radio Group:</h3>
-<cookbook-showcase-properties [properties]="radioGroupProperties"></cookbook-showcase-properties>
+<cookbook-api-description-properties
+  [properties]="radioGroupProperties"
+></cookbook-api-description-properties>
 
 <h2>Events</h2>
 <h3>Radio Group:</h3>
-<cookbook-showcase-properties
-  [properties]="groupEvents"
-  [columns]="eventColumns"
-></cookbook-showcase-properties>
+<cookbook-api-description-events [events]="groupEvents"></cookbook-api-description-events>
