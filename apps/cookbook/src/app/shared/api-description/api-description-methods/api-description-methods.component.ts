@@ -7,9 +7,9 @@ export interface ApiDescriptionMethod {
 }
 
 export interface ApiDescriptionMethodColumns {
-  Name: string;
-  Description?: string;
-  Type?: string;
+  name: string;
+  description?: string;
+  type?: string;
 }
 
 @Component({
@@ -20,8 +20,8 @@ export interface ApiDescriptionMethodColumns {
 export class ApiDescriptionMethodsComponent {
   @Input() methods: ApiDescriptionMethod[];
   @Input() columns: ApiDescriptionMethodColumns = {
-    Name: 'Name',
-    Description: 'Description',
-    Type: 'Signature',
+    name: 'Name',
+    description: 'Description',
+    type: 'Signature',
   };
 }

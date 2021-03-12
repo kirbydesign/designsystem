@@ -9,10 +9,10 @@ export interface ApiDescriptionProperty {
 }
 
 export interface ApiDescriptionPropertyColumns {
-  Name: string;
-  Description?: string;
-  Type?: string;
-  Default?: string;
+  name: string;
+  description?: string;
+  type?: string;
+  default?: string;
 }
 
 @Component({
@@ -23,9 +23,9 @@ export interface ApiDescriptionPropertyColumns {
 export class ApiDescriptionPropertiesComponent {
   @Input() properties: ApiDescriptionProperty[];
   @Input() columns: ApiDescriptionPropertyColumns = {
-    Name: 'Attribute',
-    Description: 'Description',
-    Type: 'Type',
-    Default: 'Default',
+    name: 'Attribute',
+    description: 'Description',
+    type: 'Type',
+    default: 'Default',
   };
 }

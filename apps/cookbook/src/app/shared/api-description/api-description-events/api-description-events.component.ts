@@ -7,9 +7,9 @@ export interface ApiDescriptionEvent {
 }
 
 export interface ApiDescriptionEventColumns {
-  Name: string;
-  Description?: string;
-  Type?: string;
+  name: string;
+  description?: string;
+  type?: string;
 }
 
 @Component({
@@ -20,8 +20,8 @@ export interface ApiDescriptionEventColumns {
 export class ApiDescriptionEventsComponent {
   @Input() events: ApiDescriptionEvent[];
   @Input() columns: ApiDescriptionEventColumns = {
-    Name: 'Name',
-    Description: 'Description',
-    Type: 'Signature',
+    name: 'Name',
+    description: 'Description',
+    type: 'Signature',
   };
 }

@@ -11,8 +11,8 @@ import {
 })
 export class ItemShowcaseComponent {
   columns: ApiDescriptionPropertyColumns = {
-    Name: 'Name',
-    Description: 'Description',
+    name: 'Name',
+    description: 'Description',
   };
 
   properties: ApiDescriptionProperty[] = [

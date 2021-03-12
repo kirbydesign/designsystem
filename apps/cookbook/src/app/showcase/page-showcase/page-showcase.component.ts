@@ -81,8 +81,8 @@ export class PageShowcaseComponent {
   ];
 
   layoutColumns: ApiDescriptionPropertyColumns = {
-    Name: 'Tag',
-    Description: 'Description',
+    name: 'Tag',
+    description: 'Description',
   };
 
   layouts: ApiDescriptionProperty[] = [
@@ -104,10 +104,10 @@ export class PageShowcaseComponent {
   ];
 
   directiveColumns: ApiDescriptionPropertyColumns = {
-    Name: 'Name',
-    Description: 'Description',
-    Type: '(Optional) Configuration',
-    Default: 'Default',
+    name: 'Name',
+    description: 'Description',
+    type: '(Optional) Configuration',
+    default: 'Default',
   };
 
   directives: ApiDescriptionProperty[] = [
@@ -137,10 +137,10 @@ export class PageShowcaseComponent {
   ];
 
   cssColumns: ApiDescriptionPropertyColumns = {
-    Name: 'Name',
-    Description: 'Description',
-    Type: 'Type',
-    Default: 'Default',
+    name: 'Name',
+    description: 'Description',
+    type: 'Type',
+    default: 'Default',
   };
 
   cssProperties: ApiDescriptionProperty[] = [
