@@ -61,13 +61,13 @@
 }
 
 ion-header ion-toolbar {
-  --padding-start: 16px;
-  --padding-end: 16px;
-  --padding-bottom: 16px;
-  --padding-top: 32px;
+  --padding-start: size('s');
+  --padding-end: size('s');
+  --padding-bottom: size('s');
+  --padding-top: size('m');
 
   @include media('>=medium') {
-    --padding-top: 24px;
+    --padding-top: size('l');
   }
 
   --border-width: 0;
