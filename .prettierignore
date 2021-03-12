@@ -1,4 +1,7 @@
 /src/kirby/scss/base/_include-media.scss
 /.github/
 /libs/designsystem/src/lib/components/proxies.ts
+/libs/designsystem/src/lib/components/angular-component-lib/**.*
 /libs/angular/src/lib/components/proxies.ts
+/libs/angular/src/lib/components/angular-component-lib/**.*
+readme.md
