@@ -1,28 +1,31 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 
-import { AlertComponent } from './alert.component';
-import { ButtonComponent } from '../../button/button.component';
 import { SizeDirective } from '../../../directives/size/size.directive';
 import { WindowRef } from '../../../types/window-ref';
+import { ButtonComponent } from '../../button/button.component';
+
+import { AlertComponent } from './alert.component';
 
 describe('AlertComponent', () => {
   let component: AlertComponent;
   let fixture: ComponentFixture<AlertComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [AlertComponent, ButtonComponent, SizeDirective],
-      providers: [
-        {
-          provide: WindowRef,
-          useValue: window,
-        },
-      ],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [AlertComponent, ButtonComponent, SizeDirective],
+        providers: [
+          {
+            provide: WindowRef,
+            useValue: window,
+          },
+        ],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AlertComponent);

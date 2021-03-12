@@ -1,7 +1,7 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MockComponent } from 'ng-mocks';
-import * as ionic from '@ionic/angular';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import * as ionic from '@ionic/angular';
+import { MockComponent } from 'ng-mocks';
 
 import { ToggleComponent } from './toggle.component';
 
@@ -9,11 +9,13 @@ describe('ToggleComponent', () => {
   let component: ToggleComponent;
   let fixture: ComponentFixture<ToggleComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ToggleComponent, MockComponent(ionic.IonToggle)],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [ToggleComponent, MockComponent(ionic.IonToggle)],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ToggleComponent);

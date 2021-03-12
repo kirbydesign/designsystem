@@ -1,29 +1,32 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MockComponent } from 'ng-mocks';
-import { IonIcon } from '@ionic/angular';
-import { By } from '@angular/platform-browser';
 import { Component } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { IonIcon } from '@ionic/angular';
 import { mockProvider, SpyObject } from '@ngneat/spectator';
+import { MockComponent } from 'ng-mocks';
 
 import { ThemeColorDirective } from '../../directives/theme-color/theme-color.directive';
 import { DesignTokenHelper } from '../../helpers/design-token-helper';
-import { IconComponent } from './icon.component';
+
 import { IconRegistryService } from './icon-registry.service';
+import { IconComponent } from './icon.component';
 
 const getColor = DesignTokenHelper.getColor;
 
 describe('IconComponent', () => {
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        IconComponent,
-        ThemeColorDirective,
-        TestWrapperComponent,
-        MockComponent(IonIcon),
-      ],
-      providers: [mockProvider(IconRegistryService)],
-    });
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [
+          IconComponent,
+          ThemeColorDirective,
+          TestWrapperComponent,
+          MockComponent(IonIcon),
+        ],
+        providers: [mockProvider(IconRegistryService)],
+      });
+    })
+  );
 
   it('should compile with custom hardcoded directives', () => {
     const fixture = createTestComponent('<kirby-icon themeColor="primary"></kirby-icon>');
