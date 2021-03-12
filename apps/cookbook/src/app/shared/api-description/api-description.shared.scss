@@ -1,6 +1,6 @@
 @import './libs/designsystem/src/lib/scss/utils';
 
-.api-description {
+table.api-description {
   margin-bottom: size('xl');
 
   border-spacing: 0;
@@ -22,7 +22,6 @@
   td,
   th {
     border: 1px solid get-color('medium');
-    border-width: 1px 1px 1px 1px;
     padding: 0.5rem 1rem;
   }
 }
