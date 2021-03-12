@@ -6,6 +6,7 @@
 /libs/core/node_modules
 /libs/core/component-docs.d.ts
 /libs/core/component-docs.json
+/libs/core/components.d.ts
 /dist
 /tmp
 /out-tsc
