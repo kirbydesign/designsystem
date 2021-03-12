@@ -1,6 +1,6 @@
 {
   "name": "designsystem",
-  "version": "1.4.24",
+  "version": "1.4.25",
   "description": "Kirby Design Components",
   "repository": {
     "type": "git",
@@ -90,7 +90,6 @@
     "@fontsource/roboto": "4.2.1",
     "@ionic/angular": "^5.5.2",
     "@nrwl/angular": "^9.1.2",
-    "@types/chart.js": "^2.9.30",
     "@types/prismjs": "1.9.0",
     "firebase": "6.2.4",
     "highcharts": "8.0.4",
