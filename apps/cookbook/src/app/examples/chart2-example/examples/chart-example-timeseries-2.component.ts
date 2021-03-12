@@ -1,5 +1,6 @@
 import { calcProjectFileAndBasePath } from '@angular/compiler-cli';
 import { Component } from '@angular/core';
+import { loggedIn } from '@angular/fire/auth-guard';
 import { ChartConfiguration, ChartData, ChartDataSets, ChartPoint } from 'chart.js';
 import moment, { Moment, utc } from 'moment';
 
@@ -8,7 +9,7 @@ const config = {
   template: `<kirby-card>
   <kirby-card-header title="Timeseries"></kirby-card-header>
   <kirby-chart-2
-    [height]="240"
+    [height]="275"
     type="line"
     [options]="timeseriesOptions"
     [chartData]="chartData"
@@ -413,7 +414,6 @@ export class ChartExampleTimeseries2Component {
             ticks: {
               min: 0,
               max: 1,
-
               // forces step size to be 5 units
               stepSize: 0.1,
             },

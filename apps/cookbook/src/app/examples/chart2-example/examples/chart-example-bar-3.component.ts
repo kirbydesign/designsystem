@@ -10,7 +10,7 @@ const config = {
     label="Bar"
     [categories]="['mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec', 'jan', 'feb']"   
     [data]="[1000, 1100, 450, 1350, 1200, 10, 1400, 300, 500, 100,  1250, 600]"
-          
+    [height]="height"      
     [backgroundColor]="['#015132', '#B2D1BF', '#AABC08', '#1FA05A']"
 
     [borderWidth]="1"
@@ -33,7 +33,7 @@ const config = {
 export class ChartExampleBar3Component {
   template: string = config.template;
   codeSnippet: string = config.codeSnippet;
-  height = 450;
+  height = 275;
 
   options: ChartConfiguration = {
     options: {

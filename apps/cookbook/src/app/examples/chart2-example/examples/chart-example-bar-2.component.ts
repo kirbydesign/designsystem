@@ -7,6 +7,7 @@ const config = {
   <kirby-chart-2 
     type="bar"
     label="Bar"
+    [height]="height"
     [backgroundColor]="red"
     [categories]="categories"   
     [data]="adjustedMonthlyExpenseData"
@@ -27,7 +28,7 @@ const config = {
 export class ChartExampleBar2Component {
   template: string = config.template;
   codeSnippet: string = config.codeSnippet;
-  height = 150;
+  height = 275;
   categories = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
 
   private monthlyExpenseData = [1250, 600, 0, 1400, 300, 500, 100, 1000, 1100, 450, 1350, 1200];

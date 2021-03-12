@@ -81,7 +81,7 @@ export class ChartExampleAreaLine1Component {
   };
   dataset: ChartDataSets = {
     label: '',
-    backgroundColor: 'lightgreen',
+    backgroundColor: 'lightblue',
     fill: 'start',
     data: [
       1600.9,

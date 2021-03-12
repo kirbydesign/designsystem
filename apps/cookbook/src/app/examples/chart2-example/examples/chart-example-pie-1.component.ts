@@ -12,6 +12,7 @@ const config = {
     [backgroundColor]="['#015132', '#B2D1BF', '#AABC08', '#1FA05A']"
     [borderWidth]="1"
     [options]="options"
+    [height]="275"
     >
   </kirby-chart-2>
  

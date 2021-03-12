@@ -26,10 +26,11 @@ export class ChartExampleLine3Component {
   template: string = config.template;
   codeSnippet: string = config.codeSnippet;
 
-  height = 450;
+  height = 250;
 
   lineOptions: ChartConfiguration = {
     options: {
+      maintainAspectRatio: false,
       elements: {
         line: {
           fill: false,

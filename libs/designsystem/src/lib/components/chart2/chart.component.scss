@@ -1,5 +1,5 @@
 :root {
-  --kirby-chart-height: 100%;
+  --kirby-chart-height: 300;
   --kirby-chart-width: 100%;
   --kirby-chart-padding: 20px;
   --kirby-chart-padding-top: 30px;
@@ -12,13 +12,17 @@
   display: block;
   border: var(--kirby-chart-border, lightgreen solid medium);
   border-radius: var(--kirby-chart-border-radius, 5px);
-  height: var(--kirby-chart-height);
-  width: var(--kirby-chart-width);
-  padding: var(--kirby-chart-padding, 10px);
-  padding-top: var(--kirby-chart-padding-top, 30px);
-  margin: var(--kirby-chart-margin, 5px);
+  height: var(--kirby-chart-height, 300px);
+  width: var(--kirby-chart-width, 100%);
+  // padding: var(--kirby-chart-padding, 10px);
+  // padding-top: var(--kirby-chart-padding-top, 30px);
+  // margin: var(--kirby-chart-margin, 5px);
 
   position: relative;
-  // background-color: lightgreen;
+  background-color: lightgreen;
   // background-color: var(--kirby-background-color);
+}
+
+.chart-container {
+  background-color: lightgrey;
 }

@@ -27,7 +27,7 @@ export class ChartExampleTimeseries1Component {
   template: string = config.template;
   codeSnippet: string = config.codeSnippet;
 
-  height = 450;
+  height = 275;
 
   timeseriesOptions: ChartConfiguration = {
     type: 'line',

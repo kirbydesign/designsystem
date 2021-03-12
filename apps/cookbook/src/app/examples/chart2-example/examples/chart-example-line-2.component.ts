@@ -28,7 +28,7 @@ export class ChartExampleLine2Component {
   template: string = config.template;
   codeSnippet: string = config.codeSnippet;
 
-  height = 450;
+  height = 250;
   color: string[] = ['red'];
 
   lineOptions: ChartConfiguration = {

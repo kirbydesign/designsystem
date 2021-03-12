@@ -7,8 +7,10 @@ import {
   Inject,
   Input,
   LOCALE_ID,
+  OnChanges,
   OnDestroy,
   Self,
+  SimpleChanges,
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
@@ -16,7 +18,6 @@ import { Chart, ChartConfiguration, ChartData, ChartDataSets } from 'chart.js';
 import * as moment from 'moment';
 import merge from 'ts-deepmerge';
 
-import { ChartCalculator, ChartTimeFormats } from './chart-calculator';
 import { ChartDataType, CHART_CONFIGURATION, DefaultChartOptions } from './chartOptions';
 import { KirbyIntegration } from './kirby-helpers';
 
@@ -28,25 +29,28 @@ import { KirbyIntegration } from './kirby-helpers';
   encapsulation: ViewEncapsulation.ShadowDom,
   providers: [KirbyIntegration, { provide: CHART_CONFIGURATION, useValue: CHART_CONFIGURATION }],
 })
-export class Chart2Component implements AfterViewInit, OnDestroy {
+export class Chart2Component implements AfterViewInit, OnDestroy, OnChanges {
   // Make sure global settings are only initiated to default on first instance creation
 
   private static globalsInitiated = false;
   @ViewChild('rendering', { static: false }) renderingElement: ElementRef = null;
-
+  /**
+   * Provides access to the Chartjs instance (if any)
+   * This allows for detailed control
+   */
   public chart: Chart = null;
   public min: number = null;
   public max: number = null;
 
-  public minIndex: number = null;
-  public maxIndex: number = null;
-
   @Input() height = 300;
+  @Input() heightUnit = 'px';
+  @Input() width = 100;
+  @Input() widthUnit = '%';
 
   @Input() description = '';
   @Input() useDefaultOptions = true;
   @Input() useDefaultStyle = true;
-
+  public mergedOptions: ChartConfiguration = {};
   // Private configurations of graph coloring used for default layout
   private colorFont: string;
   private colorGrid: string;
@@ -56,7 +60,6 @@ export class Chart2Component implements AfterViewInit, OnDestroy {
   private colorDatalabelsFont: string;
   private overrideConfiguration: ChartConfiguration = {};
   private defaultChartConfiguration: ChartConfiguration;
-
   private rootChartData: ChartData = null;
   private chartDataType: ChartDataType = null;
   private chartDatasets: ChartDataSets[] = [];
@@ -66,8 +69,6 @@ export class Chart2Component implements AfterViewInit, OnDestroy {
   private chartLabels: string[] = null;
   private chartBackgroundColor: string[] = null;
   private chartBorderColor: string[] = null;
-
-  //  private chartTimeFormats: ChartTimeFormats = null;
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
@@ -230,18 +231,32 @@ export class Chart2Component implements AfterViewInit, OnDestroy {
     this.overrideConfiguration = merge(this.overrideConfiguration, value);
   }
 
-  ngAfterViewInit(): void {
+  public ngAfterViewInit(): void {
     this.renderChart();
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this.cleanUp();
   }
 
-  private cleanUp(): void {
-    if (this.chart !== null) {
-      this.chart.destroy();
-      this.chart = null;
+  /**
+   * Update the Chart using supplied data:
+   * {
+   *  duration: 800,
+   *  easing: 'easeOutBounce'
+   * }
+   */
+  public update(changes: {}): void {
+    if (Boolean(this.chart)) {
+      this.chart.update(changes);
+    }
+  }
+
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (Boolean(this.chart)) {
+      this.chart.update();
+    } else {
+      this.renderChart();
     }
   }
 
@@ -256,13 +271,32 @@ export class Chart2Component implements AfterViewInit, OnDestroy {
 
     let options: ChartConfiguration = this.buildConfiguration();
     options = this.addData(options);
+    this.mergedOptions = options;
 
-    console.log('resulting Options', options);
+    this.setSizes();
 
     if (this.chart !== null) {
       this.cleanUp();
     }
     this.chart = new Chart(this.renderingElement.nativeElement, options);
+  }
+
+  private cleanUp(): void {
+    if (this.chart !== null) {
+      this.chart.destroy();
+      this.chart = null;
+    }
+  }
+
+  private setSizes() {
+    if (Boolean(this.height)) {
+      this.renderingElement.nativeElement.style.height = `${this.height}${this.heightUnit}`;
+      this.renderingElement.nativeElement.parentNode.style.height = `${this.height}${this.heightUnit}`;
+    }
+    if (Boolean(this.width)) {
+      this.renderingElement.nativeElement.style.width = `${this.width}${this.widthUnit}`;
+      this.renderingElement.nativeElement.parentNode.style.width = `${this.width}${this.widthUnit}`;
+    }
   }
 
   private initializeDataSet(chartDataSets: ChartDataSets): void {

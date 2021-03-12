@@ -11,6 +11,7 @@ const config = {
     [data]="[25, 41, 33, 1]"    
     [backgroundColor]="['#015132', '#B2D1BF', '#AABC08', '#1FA05A']"
     [options]="options"
+    height="275"
     >
   </kirby-chart-2>
  

@@ -31,7 +31,7 @@ const config = {
 export class ChartExampleHorizontalBarComponent {
   template: string = config.template;
   codeSnippet: string = config.codeSnippet;
-  height = 150;
+  height = 275;
 
   private yearExpensesData = [0, 8761, 7760];
   private currentTimeData = [0, 1000, 800];
@@ -119,10 +119,8 @@ export class ChartExampleHorizontalBarComponent {
       },
     },
     data: {
-      yLabels: ['2018', '2019', '2020'], // this.categories,
       datasets: [
         {
-          // label: '',
           data: this.adjustedYearExpensesData.map(
             (wholeYearData, idx) => this.maxValue - (wholeYearData + this.currentTimeData[idx])
           ),
