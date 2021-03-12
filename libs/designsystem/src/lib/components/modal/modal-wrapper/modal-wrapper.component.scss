@@ -61,6 +61,15 @@
 }
 
 ion-header ion-toolbar {
+  --padding-start: #{size('s')};
+  --padding-end: #{size('s')};
+  --padding-bottom: #{size('s')};
+  --padding-top: #{size('l')};
+
+  @include media('>=medium') {
+    --padding-top: #{size('m')};
+  }
+
   --border-width: 0;
   --background: transparent;
   --color: #{get-color('black')};
