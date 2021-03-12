@@ -4,6 +4,8 @@
 /libs/core/loader
 /libs/core/dist
 /libs/core/node_modules
+/libs/core/component-docs.d.ts
+/libs/core/component-docs.json
 /dist
 /tmp
 /out-tsc
