@@ -53,9 +53,15 @@ export class NumericInputAnalyzer {
     this.lastCursorPosition = lastCursorPosition;
     this.lastValue = lastValue;
     value = value || '';
-    value = this.resetAndCapture(value);
-
-    if (this.lastValue !== value && value !== '') {
+    this.resetAndCapture(value);
+    if (this.hasExitState(value)) {
+      if (value === '-' && !this.config.allowNegativeNumber) {
+        return { value: '', cursorPos: 0 };
+      }
+    } else {
+      if (this.hasInvalidCombination(value)) {
+        return { value: this.lastValue, cursorPos: this.lastCursorPosition };
+      }
       value = this.handleNegativeSign(value);
       value = this.validateValue(value);
       value = this.handleIntegralPart(value);
@@ -66,16 +72,29 @@ export class NumericInputAnalyzer {
     return { value: value, cursorPos: this.cursorPosition };
   }
 
-  private resetAndCapture(value: string): string {
+  private hasExitState(value: string): boolean {
+    return this.lastValue === value || value === '';
+  }
+
+  private hasInvalidCombination(value: string): boolean {
+    return (
+      (this.config.allowNegativeNumber && value.lastIndexOf('-') > 0) ||
+      (!this.config.allowNegativeNumber && value.indexOf('-') > -1)
+    );
+  }
+
+  private resetAndCapture(value: string) {
     this.invalid = false;
     this.hasNegativeSign = false;
     this.integralPart = '';
     this.decimalPart = '';
     this.currentValue = value;
-    return value;
   }
 
   private handleNegativeSign(value: string): string {
+    if (value === '' || value === '-') {
+      return value;
+    }
     if (this.config.allowNegativeNumber) {
       if (value.startsWith('-')) {
         this.hasNegativeSign = true;
@@ -86,6 +105,9 @@ export class NumericInputAnalyzer {
   }
 
   private validateValue(value: string): string {
+    if (value === '' || value === '-') {
+      return value;
+    }
     this.allowedCharsOnly = this.hasAllowedCharsOnly(value);
     if (!this.allowedCharsOnly) {
       this.invalid = true;
@@ -95,6 +117,9 @@ export class NumericInputAnalyzer {
   }
 
   private handleIntegralPart(value: string): string {
+    if (value === '' || value === '-') {
+      return value;
+    }
     this.integralPart = this.extractIntegralPart(value);
     this.integralPart = this.replaceSeparator(this.integralPart, this.groupingSeparator, '');
     if (this.integralPart.length > this.config.maxNumberOfIntegrals) {
@@ -104,13 +129,16 @@ export class NumericInputAnalyzer {
       this.integralPart = this.replaceSeparator(this.integralPart, this.groupingSeparator, '');
     }
     this.integralPart = this.addGroupingSeparators(this.integralPart);
-    if (this.integralPart.length === 0) {
+    if (this.integralPart === '') {
       this.integralPart = '0';
     }
     return value;
   }
 
   private handleDecimalPart(value: string): string {
+    if (value === '' || value === '-') {
+      return value;
+    }
     this.decimalPart = this.findDecimalPart(value);
     if (this.decimalPart === null) {
       return this.lastValue;
@@ -119,9 +147,12 @@ export class NumericInputAnalyzer {
   }
 
   private createOutput(value: string): string {
+    if (value === '' || value === '-') {
+      return value;
+    }
     value = this.integralPart + this.decimalPart;
     if (value === '') {
-      value = this.lastValue;
+      return '';
     }
     if (this.config.allowNegativeNumber && this.hasNegativeSign) {
       value = '-' + value;
@@ -142,16 +173,23 @@ export class NumericInputAnalyzer {
     if (this.invalid) {
       return;
     }
+    if (value === '') {
+      this.cursorPosition = 0;
+      return;
+    }
+    if (value === undefined) {
+      this.cursorPosition = 0;
+      return;
+    }
+
+    if (value === '-') {
+      return;
+    }
     const lastCount = this.countGroupingSeparators(
       this.lastValue.substring(0, this.lastCursorPosition)
     );
     const newCount = this.countGroupingSeparators(value.substring(0, this.cursorPosition));
-    console.log('cPos', this.cursorPosition);
-    console.log('last cPos', this.lastCursorPosition);
-    console.log('lastCount', lastCount);
-    console.log('newCount', newCount);
     this.cursorPosition += newCount - lastCount;
-    console.log('new cPos', this.cursorPosition);
   }
 
   private replaceSeparator(value: string, separator: string, replaceValue: string): string {

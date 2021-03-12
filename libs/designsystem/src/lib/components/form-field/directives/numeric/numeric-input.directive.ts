@@ -20,16 +20,14 @@ import { NumericInputAnalyzer, RetValue } from './numeric-input.analyzer';
  * Directive for filtering input keys matching digits + decimal and grouping separator.
  * Uses LOCALE_ID to read initial separator settings, this can be overriden by the directive user
  * Supports these features:
- * #1: Thousand (grouping) separator in integral part
- * #2: Decimal separator
- * #3: Allows for configurable number of decimals. Default is no limit. Can be set to 0 to disallow decimals
- * #4: Allows for using negative sign or blocking it
- *
+ * #1: locale based Thousand (Grouping) separator in integral part with thousandSeparatorEnabled property (default true= and maxNumberOfIntegrals (default 15)
+ * #2: locale based Decimal separator with support for a maximum number: maximumNumberOfDecimals (default -1 for no limit, 0 for no decimals, and a positive integer for n decimals
+ * #4: Allows for using negative sign or blocking it: use allowNegativeNumber (default true)
  *
  * Example:
  * ```
  * <input type="text" [value]="xyz" inputmode="decimal"  clearInput="true" kirby-numeric-input maximumNumberOfDecimals="2"
- * allowNegativeNumber="'false'" thousandSeparatorEnabled="'true'"  maxNumberOfIntegrals=10></input>
+ * allowNegativeNumber="false" thousandSeparatorEnabled="'true'"  maxNumberOfIntegrals=10></input>
  * ```
  * * ```
  * <input type="text" inputmode="decimal"  clearInput="true" kirby-numeric-input ></input>
@@ -103,12 +101,10 @@ export class NumericInputDirective implements OnInit, OnDestroy {
   @HostListener('click', ['$event.target'])
   inputClicked(): void {
     this.lastCursorPosition = this.findCursorPosition();
-    console.log('clicked', this.lastCursorPosition);
   }
   @HostListener('window:keydown', ['$event'])
   inputKey(event: KeyboardEvent): void {
     this.lastCursorPosition = this.findCursorPosition();
-    console.log('keydown', this.lastCursorPosition);
   }
 
   private findCursorPosition(): number {

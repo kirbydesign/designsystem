@@ -247,12 +247,11 @@ describe('Directive: NumericInputDirective', () => {
         });
       });
       describe('format negative', () => {
-        it('should add a "-" if isNegativeNumber, lenght is > 0 and value is not 0', () => {
-          const template = `<input kirby-numeric-input  [formControl]="testFormControl" />`;
+        it('should add a "-" if allowNegativeNumber, length is > 0 and value is not 0', () => {
+          const template = `<input kirby-numeric-input allowNegativeNumber="true"  [formControl]="testFormControl" />`;
           spectatorDirective = createHost(template, {
             hostProps: { testFormControl },
           });
-
           const inputElm = spectatorDirective.element as HTMLInputElement;
           inputElm.value = '1234';
           spectatorDirective.detectChanges();
@@ -264,32 +263,120 @@ describe('Directive: NumericInputDirective', () => {
             onlySelf: true,
           });
           spectatorDirective.detectChanges();
-
-          expect((spectatorDirective.element as HTMLInputElement).value).toBe(`-10${decSep}1234`);
+          expect(inputElm.value).toBe(`-10${decSep}1234`);
         });
-        it('should add a "-" if isNegativeNumber, lenght is > 0 and value is not 0', () => {
-          //  spectator.directive.isNegativeNumber = true;
 
-          const template = `<input kirby-numeric-input  [formControl]="testFormControl" />`;
+        it('should allow add a "-" if allowNegativeNumber, length is 0', () => {
+          const template = `<input kirby-numeric-input allowNegativeNumber="true" [formControl]="testFormControl" />`;
           spectatorDirective = createHost(template, {
             hostProps: { testFormControl },
           });
-
           const inputElm = spectatorDirective.element as HTMLInputElement;
-          inputElm.value = '1234';
+          inputElm.value = '';
           spectatorDirective.detectChanges();
           spectatorDirective.directive.ngOnInit();
-          inputElm.setSelectionRange(1, 1);
-          testFormControl.setValue(`-${decSep}1234`, {
+          testFormControl.setValue(`-`, {
             emitModelToViewChange: false,
             emitViewToModelChange: false,
             onlySelf: true,
           });
           spectatorDirective.detectChanges();
+          expect(inputElm.value).toBe(`-`);
+        });
 
-          expect((spectatorDirective.element as HTMLInputElement).value).toBe(`-0${decSep}1234`);
+        it('should NOT allow add a "-" if NOT allowNegativeNumber', () => {
+          const template = `<input kirby-numeric-input allowNegativeNumber="false" [formControl]="testFormControl" />`;
+          spectatorDirective = createHost(template, {
+            hostProps: { testFormControl },
+          });
+          const inputElm = spectatorDirective.element as HTMLInputElement;
+          inputElm.value = '';
+          spectatorDirective.detectChanges();
+          spectatorDirective.directive.ngOnInit();
+          inputElm.setSelectionRange(1, 1);
+          testFormControl.setValue(`-`, {
+            emitModelToViewChange: false,
+            emitViewToModelChange: false,
+            onlySelf: true,
+          });
+          spectatorDirective.detectChanges();
+          expect(inputElm.value).toBe('');
+        });
+
+        it('should NOT allow add of multiple "-" if allowNegativeNumber', () => {
+          const template = `<input kirby-numeric-input allowNegativeNumber="true" [formControl]="testFormControl" />`;
+          spectatorDirective = createHost(template, {
+            hostProps: { testFormControl },
+          });
+
+          const inputElm = spectatorDirective.element as HTMLInputElement;
+          inputElm.value = '-';
+          spectatorDirective.detectChanges();
+          spectatorDirective.directive.ngOnInit();
+          inputElm.setSelectionRange(0, 0);
+          testFormControl.setValue(`--`, {
+            emitModelToViewChange: false,
+            emitViewToModelChange: false,
+            onlySelf: true,
+          });
+          spectatorDirective.detectChanges();
+          expect(inputElm.value).toBe(``);
+
+          testFormControl.setValue(`-42`, {
+            emitModelToViewChange: false,
+            emitViewToModelChange: false,
+            onlySelf: true,
+          });
+          spectatorDirective.detectChanges();
+          expect(inputElm.value).toBe(`-42`);
+
+          testFormControl.setValue(`-42-`, {
+            emitModelToViewChange: false,
+            emitViewToModelChange: false,
+            onlySelf: true,
+          });
+          spectatorDirective.detectChanges();
+          expect(inputElm.value).toBe(`-42`);
+        });
+
+        it('should NOT allow add illegal char', () => {
+          const template = `<input kirby-numeric-input [formControl]="testFormControl" />`;
+          spectatorDirective = createHost(template, {
+            hostProps: { testFormControl },
+          });
+
+          const inputElm = spectatorDirective.element as HTMLInputElement;
+          inputElm.value = '42';
+          spectatorDirective.detectChanges();
+          spectatorDirective.directive.ngOnInit();
+          inputElm.setSelectionRange(0, 0);
+          testFormControl.setValue(`42`, {
+            emitModelToViewChange: false,
+            emitViewToModelChange: false,
+            onlySelf: true,
+          });
+          spectatorDirective.detectChanges();
+          expect(inputElm.value).toBe(`42`);
+
+          inputElm.setSelectionRange(0, 0);
+          testFormControl.setValue(`42a`, {
+            emitModelToViewChange: false,
+            emitViewToModelChange: false,
+            onlySelf: true,
+          });
+          spectatorDirective.detectChanges();
+          expect(inputElm.value).toBe(`42`);
+
+          testFormControl.setValue(`4-2`, {
+            emitModelToViewChange: false,
+            emitViewToModelChange: false,
+            onlySelf: true,
+          });
+          spectatorDirective.detectChanges();
+          expect(inputElm.value).toBe(`42`);
         });
       });
+
       describe('handle cursor position', () => {
         let template: string;
         let inputElm: HTMLInputElement;
