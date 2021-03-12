@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ChangeDetectionStrategy, HostBinding } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, Input, OnInit } from '@angular/core';
 
 import { BrandColor, NotificationColor } from '../../helpers/color-helper';
 
@@ -8,17 +8,25 @@ import { BrandColor, NotificationColor } from '../../helpers/color-helper';
   styleUrls: ['./avatar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AvatarComponent implements OnInit {
+export class AvatarComponent {
   @Input() imageSrc: string;
   @Input() altText: string;
   @Input() shadow: boolean;
   @Input() text: string;
   @Input() overlay: boolean;
-  @HostBinding('class')
+  @Input() size: 'xs' | 'sm' | 'md' | 'lg' = 'sm';
   @Input()
-  themeColor: NotificationColor | BrandColor | 'medium' | 'white' | 'dark' | 'light' | 'semi-light';
+  themeColor:
+    | NotificationColor
+    | BrandColor
+    | 'medium'
+    | 'white'
+    | 'dark'
+    | 'light'
+    | 'semi-light' = 'white';
 
-  constructor() {}
-
-  ngOnInit() {}
+  @HostBinding('class')
+  get _cssClass() {
+    return [this.themeColor, this.size];
+  }
 }
