@@ -76,10 +76,12 @@ describe('ModalWrapperComponent', () => {
     });
 
     describe('padding', () => {
-      it('should have correct sizes', () => {
-        ionToolbarElement = spectator.query('ion-toolbar');
-
+      beforeEach(() => {
         TestHelper.resetTestWindow();
+      });
+
+      it('should have correct sizes', async () => {
+        ionToolbarElement = spectator.query('ion-toolbar');
 
         expect(ionToolbarElement).toHaveComputedStyle({
           '--padding-start': size('s'),
