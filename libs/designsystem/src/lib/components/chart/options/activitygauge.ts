@@ -1,5 +1,5 @@
-import { Options } from 'highcharts';
 import { InjectionToken } from '@angular/core';
+import { Options } from 'highcharts';
 
 export const ACTIVITYGAUGE_OPTIONS = new InjectionToken<Options>('ActivityGaugeOptions');
 export const ActivityGaugeOptions: Options = {
