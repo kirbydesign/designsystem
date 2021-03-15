@@ -78,6 +78,7 @@ export class KirbyIntegration {
     const colorFont = readKirbyColorFromElement(element, KirbyColor.TEXT_SEMI_DARK);
     return { colorPoint, colorGraph, colorDatalabelsFont, colorTooltip, colorGrid, colorFont };
   }
+
   public getSettingsFromDocument(document: Document): any {
     const colorPoint = readKirbyColor(document, KirbyColor.PRIMARY);
     const colorGraph = readKirbyColor(document, KirbyColor.TERTIARY);
@@ -87,4 +88,12 @@ export class KirbyIntegration {
     const colorFont = readKirbyColor(document, KirbyColor.TEXT_SEMI_DARK);
     return { colorPoint, colorGraph, colorDatalabelsFont, colorTooltip, colorGrid, colorFont };
   }
+  public getColorFromDocument(document: Document, category: string): string {
+    const color = readKirbyColor(document, category);
+    return color;
+  }
+}
+
+export function getKirbyColor(category: KirbyColor): string {
+  return new KirbyIntegration().getColorFromDocument(window.document, category);
 }

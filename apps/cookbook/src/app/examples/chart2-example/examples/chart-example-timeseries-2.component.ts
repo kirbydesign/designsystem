@@ -4,15 +4,19 @@ import { loggedIn } from '@angular/fire/auth-guard';
 import { ChartConfiguration, ChartData, ChartDataSets, ChartPoint } from 'chart.js';
 import moment, { Moment, utc } from 'moment';
 
+import {
+  getKirbyColor,
+  KirbyColor,
+} from '@kirbydesign/designsystem/components/chart2/kirby-helpers';
+
 const config = {
   selector: 'cookbook-chart-example-timeseries-2',
   template: `<kirby-card>
   <kirby-card-header title="Timeseries"></kirby-card-header>
   <kirby-chart-2
-    [height]="275"
+    [height]="height"
     type="line"
     [options]="timeseriesOptions"
-    [chartData]="chartData"
   >
   </kirby-chart-2>
 </kirby-card>`,
@@ -23,7 +27,7 @@ const config = {
 })
 export class ChartExampleTimeseries2Component {
   template = config.template;
-
+  height: 275;
   breaks = [
     {
       from: 1198914890000,
@@ -316,7 +320,7 @@ export class ChartExampleTimeseries2Component {
     const values = [];
     data.forEach((cp) => {
       const m = cp.t as Moment;
-      values.push(m.toDate().toLocaleDateString());
+      values.push(m);
     });
     return values;
   }
@@ -332,31 +336,33 @@ export class ChartExampleTimeseries2Component {
   getDataSets(data: ChartPoint[]): ChartDataSets[] {
     const ds: ChartDataSets[] = [];
     ds.push({
-      label: 'TimeSeries ',
-      // backgroundColor: 'lightblue',
+      label: '',
       data: data,
       pointRadius: 0,
+      type: 'line',
       fill: true,
-      lineTension: 0,
+      lineTension: 0.4,
       borderWidth: 2,
+      hoverBackgroundColor: getKirbyColor(KirbyColor.PRIMARY),
+      hoverBorderColor: 'rgb(255, 255, 255, 0.5)',
+      hoverBorderWidth: 10,
+      hoverRadius: 10,
     });
     return ds;
   }
 
   timeseriesOptions: ChartConfiguration = {
     type: 'line',
+    data: this.chartData,
     options: {
-      animation: {
-        duration: 100,
-      },
       maintainAspectRatio: false,
+      responsive: true,
+      animation: {
+        duration: 1000,
+      },
       scales: {
         xAxes: [
           {
-            scaleLabel: {
-              display: true,
-              labelString: 'Date',
-            },
             type: 'time',
             distribution: 'series',
             offset: true,
@@ -377,17 +383,7 @@ export class ChartExampleTimeseries2Component {
               var i, ilen, val, tick, currMajor, lastMajor;
 
               val = moment(ticks[0].value);
-              if (
-                (majorUnit === 'minute' && val.second() === 0) ||
-                (majorUnit === 'hour' && val.minute() === 0) ||
-                (majorUnit === 'day' && val.hour() === 9) ||
-                (majorUnit === 'month' && val.date() <= 3 && val.isoWeekday() === 1) ||
-                (majorUnit === 'year' && val.month() === 0)
-              ) {
-                firstTick.major = true;
-              } else {
-                firstTick.major = false;
-              }
+              firstTick.major = true;
               lastMajor = val.get(majorUnit);
 
               for (i = 1, ilen = ticks.length; i < ilen; i++) {
@@ -403,19 +399,12 @@ export class ChartExampleTimeseries2Component {
         ],
         yAxes: [
           {
-            display: false,
             gridLines: {
               drawBorder: false,
             },
             scaleLabel: {
               display: true,
-              labelString: 'Price (dkr)',
-            },
-            ticks: {
-              min: 0,
-              max: 1,
-              // forces step size to be 5 units
-              stepSize: 0.1,
+              labelString: 'Gold prices ($)',
             },
           },
         ],
@@ -424,12 +413,22 @@ export class ChartExampleTimeseries2Component {
         intersect: false,
         mode: 'index',
         callbacks: {
+          title(item: Chart.ChartTooltipItem[], data: Chart.ChartData): string {
+            if (item.length > 0) {
+              console.log('item[0]', item[0]);
+              const m: Moment = item[0].xLabel as Moment;
+              return m.toDate().toLocaleDateString();
+              // return ( as moment).toLocaleDateString();
+            }
+            return '';
+          },
           label: function(tooltipItem, myData) {
             var label = myData.datasets[tooltipItem.datasetIndex].label || '';
             if (label) {
               label += ': ';
             }
             label += parseFloat(tooltipItem.value).toFixed(2);
+
             return label;
           },
         },

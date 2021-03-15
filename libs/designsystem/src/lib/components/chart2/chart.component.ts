@@ -51,6 +51,7 @@ export class Chart2Component implements AfterViewInit, OnDestroy, OnChanges {
   @Input() useDefaultOptions = true;
   @Input() useDefaultStyle = true;
   public mergedOptions: ChartConfiguration = {};
+
   // Private configurations of graph coloring used for default layout
   private colorFont: string;
   private colorGrid: string;
@@ -58,6 +59,7 @@ export class Chart2Component implements AfterViewInit, OnDestroy, OnChanges {
   private colorPoint: string;
   private colorTooltip: string;
   private colorDatalabelsFont: string;
+
   private overrideConfiguration: ChartConfiguration = {};
   private defaultChartConfiguration: ChartConfiguration;
   private rootChartData: ChartData = null;

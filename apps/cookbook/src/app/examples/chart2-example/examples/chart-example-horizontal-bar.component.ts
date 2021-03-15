@@ -67,7 +67,6 @@ export class ChartExampleHorizontalBarComponent {
   getColors(data: number[]): string[] {
     const colors: string[] = [];
     data.forEach((d) => {
-      console.log('selected year', d, this.selectedYear);
       if (d.toFixed(0) === this.selectedYear) {
         colors.push(getColor('primary').value);
       } else {
