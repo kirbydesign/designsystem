@@ -48,7 +48,13 @@ export class DesignTokenHelper {
   }
 
   public static iconFontSize(key: string): string {
-    return styles.iconFontSizes[key];
+    const iconSizeMapping = {
+      xs: 's',
+      sm: 'm',
+      md: 'l',
+      lg: 'xxxl',
+    };
+    return styles.sizes[iconSizeMapping[key]];
   }
 
   public static fontWeight(key: string): string {

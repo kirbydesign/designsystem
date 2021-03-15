@@ -181,26 +181,24 @@ describe('IconComponent', () => {
     });
   });
 
-  describe('size', () => {
-    const sizes: string[] = ['xs', 'sm', 'md', 'lg'];
-
-    sizes.forEach((size) => {
-      it(`should render with correct font-size for size = ${size}`, () => {
-        const fixture = createTestComponent(`<kirby-icon size=${size}></kirby-icon>`);
-        fixture.detectChanges();
-        const el = fixture.debugElement.query(By.directive(IconComponent));
-        expect(el.nativeElement).toHaveComputedStyle({
-          'font-size': iconFontSize(`${size}`),
-        });
-      });
+  it('should default to size = sm', () => {
+    const fixture = createTestComponent('<kirby-icon></kirby-icon>');
+    fixture.detectChanges();
+    const el = fixture.debugElement.query(By.directive(IconComponent));
+    expect(el.nativeElement).toHaveComputedStyle({
+      'font-size': iconFontSize('sm'),
     });
+  });
 
-    it('should default to size = sm', () => {
-      const fixture = createTestComponent('<kirby-icon></kirby-icon>');
+  const sizes: string[] = ['xs', 'sm', 'md', 'lg'];
+
+  sizes.forEach((size) => {
+    it(`should render with correct font-size for size = ${size}`, () => {
+      const fixture = createTestComponent(`<kirby-icon size=${size}></kirby-icon>`);
       fixture.detectChanges();
       const el = fixture.debugElement.query(By.directive(IconComponent));
       expect(el.nativeElement).toHaveComputedStyle({
-        'font-size': iconFontSize('sm'),
+        'font-size': iconFontSize(`${size}`),
       });
     });
   });
