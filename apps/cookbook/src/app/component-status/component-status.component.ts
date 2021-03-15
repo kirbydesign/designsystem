@@ -1,16 +1,15 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, BehaviorSubject, forkJoin, of, combineLatest, Subscription } from 'rxjs';
-import { map, first, catchError } from 'rxjs/operators';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-
+import { BehaviorSubject, combineLatest, forkJoin, Observable, of, Subscription } from 'rxjs';
+import { catchError, first, map } from 'rxjs/operators';
 import { environment } from '~/environments/environment';
 
 import {
   ComponentStatusItem,
+  ItemCodeStatus,
   ItemCodeStatusOrder,
   ItemUXStatus,
-  ItemCodeStatus,
 } from './component-status-items';
 
 export interface GhostComponent {
@@ -98,7 +97,7 @@ export class ComponentStatusComponent implements OnInit, OnDestroy {
   }
 
   private loadGithubComponentRequests() {
-    return new Promise((resolve) => {
+    return new Promise<void>((resolve) => {
       this.getStatusItemsFromGithubIssues()
         .pipe(first())
         .subscribe((githubItems) => {
@@ -109,7 +108,7 @@ export class ComponentStatusComponent implements OnInit, OnDestroy {
   }
 
   private loadGithubComponentEnhancementRequests() {
-    return new Promise((resolve) => {
+    return new Promise<void>((resolve) => {
       this.getEnhancementItemsFromGithubIssues()
         .pipe(first())
         .subscribe((enhancementItems) => {
@@ -359,7 +358,7 @@ export class ComponentStatusComponent implements OnInit, OnDestroy {
   }
 
   private setCurrentGithubStatus() {
-    return new Promise((resolve) => {
+    return new Promise<void>((resolve) => {
       this.getGithubProjectStatus()
         .pipe(first())
         .subscribe((issues) => {
