@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-
-import { defaultIcons, Sizes } from '@kirbydesign/designsystem';
-
 import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
+
+import { defaultIcons } from '@kirbydesign/designsystem';
+import { IconSizes } from '@kirbydesign/designsystem/components/icon/icon.component';
 
 @Component({
   selector: 'cookbook-icon-showcase',
@@ -17,7 +17,7 @@ export class IconShowcaseComponent {
 <kirby-icon customName="NAME"></kirby-icon>
 <!-- Size -->
 <kirby-icon size="SIZE"></kirby-icon>`;
-  sizes = Sizes;
+  sizes = IconSizes;
 
   properties: ShowcaseProperty[] = [
     {

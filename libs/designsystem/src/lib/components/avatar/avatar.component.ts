@@ -1,7 +1,13 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
 
 import { BrandColor, NotificationColor } from '../../helpers/color-helper';
 
+export enum AvatarSizes {
+  XS = 'xs',
+  SM = 'sm',
+  MD = 'md',
+  LG = 'lg',
+}
 @Component({
   selector: 'kirby-avatar',
   templateUrl: './avatar.component.html',
@@ -14,7 +20,7 @@ export class AvatarComponent {
   @Input() shadow: boolean;
   @Input() text: string;
   @Input() overlay: boolean;
-  @Input() size: 'xs' | 'sm' | 'md' | 'lg' = 'sm';
+  @Input() size: AvatarSizes = AvatarSizes.SM;
   @Input()
   themeColor:
     | NotificationColor

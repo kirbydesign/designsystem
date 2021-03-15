@@ -4,6 +4,12 @@ import { IconRegistryService } from './icon-registry.service';
 import { Icon } from './icon-settings';
 import { kirbyIconSettings } from './kirby-icon-settings';
 
+export enum IconSizes {
+  XS = 'xs',
+  SM = 'sm',
+  MD = 'md',
+  LG = 'lg',
+}
 @Component({
   selector: 'kirby-icon',
   templateUrl: './icon.component.html',
@@ -15,7 +21,7 @@ export class IconComponent implements OnChanges {
   private _icon = (this.icon = this.defaultIcon);
   @HostBinding('class')
   @Input()
-  size: 'xs' | 'sm' | 'md' | 'lg';
+  size: IconSizes;
 
   @Input() name: string;
   @Input() customName: string;
