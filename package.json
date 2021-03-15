@@ -105,7 +105,7 @@
     "@angular-devkit/build-angular": "~0.1102.4",
     "@angular/cli": "^11.2.4",
     "@angular/compiler-cli": "^11.2.5",
-    "@ngneat/spectator": "^5.3.1",
+    "@ngneat/spectator": "^5.13.4",
     "@nrwl/cypress": "^9.1.2",
     "@nrwl/workspace": "^9.1.2",
     "@types/jasmine": "~3.6.0",
