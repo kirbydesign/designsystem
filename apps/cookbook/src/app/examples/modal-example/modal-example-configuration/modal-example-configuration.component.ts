@@ -40,7 +40,7 @@ export class ModalExampleConfigurationComponent {
   @Input() openFullHeight: boolean;
   @Output() openFullHeightChange = new EventEmitter<boolean>();
 
-  @HostBinding('class.checkbox-xs') true; // Extra small checkboxes
+  @HostBinding('class.checkbox-xs') isCheckboxXs: boolean = true; // Extra small checkboxes
 
   constructor(private window: WindowRef, zone: NgZone) {}
 
