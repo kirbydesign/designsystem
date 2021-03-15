@@ -1,5 +1,5 @@
 import { RouterTestingModule } from '@angular/router/testing';
-import { IonicModule, IonIcon } from '@ionic/angular';
+import { IonIcon } from '@ionic/angular';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { MockComponent, MockComponents } from 'ng-mocks';
 
@@ -32,7 +32,7 @@ describe('ButtonComponent in Kirby Page', () => {
   let spectator: SpectatorHost<PageComponent>;
   const createHost = createHostFactory({
     component: PageComponent,
-    imports: [IonicModule.forRoot({ mode: 'ios', _testing: true }), RouterTestingModule],
+    imports: [TestHelper.ionicModuleForTest, RouterTestingModule],
     declarations: [
       ButtonComponent,
       PageContentComponent,
@@ -208,7 +208,7 @@ describe('ButtonComponent in kirby empty state', () => {
   let actionButtonInEmptyState: HTMLButtonElement;
   const createHost = createHostFactory({
     component: EmptyStateComponent,
-    imports: [IonicModule.forRoot({ mode: 'ios', _testing: true }), RouterTestingModule],
+    imports: [TestHelper.ionicModuleForTest, RouterTestingModule],
     declarations: [ButtonComponent, IconComponent],
   });
 

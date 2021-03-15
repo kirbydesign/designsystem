@@ -1,0 +1,18 @@
+<table class="api-description">
+  <thead>
+    <th *ngIf="columns.name">{{ columns.name }}</th>
+    <th *ngIf="columns.description">{{ columns.description }}</th>
+    <th *ngIf="columns.type">{{ columns.type }}</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let method of methods">
+      <td *ngIf="columns.name">
+        <code>{{ method.name }}</code>
+      </td>
+      <td *ngIf="columns.description" class="description">{{ method.description }}</td>
+      <td *ngIf="columns.type">
+        <code>{{ method.signature }}</code>
+      </td>
+    </tr>
+  </tbody>
+</table>

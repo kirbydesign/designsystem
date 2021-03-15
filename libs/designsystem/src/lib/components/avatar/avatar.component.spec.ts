@@ -1,9 +1,7 @@
-import { IonicModule } from '@ionic/angular';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
 import { ThemeColorDirective } from '../../directives';
 import { ColorHelper } from '../../helpers';
-import { styles } from '../../helpers/color-helper.styles';
 import { DesignTokenHelper, ThemeColorExtended } from '../../helpers/design-token-helper';
 import { TestHelper } from '../../testing/test-helper';
 import { IconComponent } from '../icon/icon.component';
@@ -27,7 +25,7 @@ describe('AvatarComponent', () => {
       ProgressCircleComponent,
       ProgressCircleRingComponent,
     ],
-    imports: [IonicModule.forRoot({ mode: 'ios', _testing: true })],
+    imports: [TestHelper.ionicModuleForTest],
   });
 
   it('should create', () => {

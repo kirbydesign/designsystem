@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
+import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 @Component({
   selector: 'cookbook-toolbar-showcase',
   templateUrl: './toolbar-showcase.component.html',
   styleUrls: ['./toolbar-showcase.component.scss'],
 })
-export class ToolbarShowcaseComponent implements OnInit {
+export class ToolbarShowcaseComponent {
   exampleHtml: string = `
       <!-- title -->
       <kirby-toolbar title="TITLE"></kirby-toolbar>
@@ -17,7 +19,24 @@ export class ToolbarShowcaseComponent implements OnInit {
         <kirby-icon secondary size="md" name="more"></kirby-icon>
       </kirby-toolbar>
     `;
-  constructor() {}
 
-  ngOnInit() {}
+  properties: ApiDescriptionProperty[] = [
+    {
+      name: 'title',
+      description: 'Sets the title in the toolbar',
+      type: ['string'],
+    },
+    {
+      name: 'hideBackButton',
+      description: 'Specifies if the backbutton should be hidden',
+      type: ['boolean'],
+      defaultValue: 'false',
+    },
+  ];
+
+  events: ApiDescriptionEvent[] = [
+    { name: 'back', description: 'Emits a click/tap event for the back navigation button' },
+    { name: 'primarySelect', description: 'Emits a click/tap event for the primary element' },
+    { name: 'secondarySelect', description: 'Emits a click/tap event for the secondary element' },
+  ];
 }
