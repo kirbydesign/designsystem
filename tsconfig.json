@@ -8,10 +8,13 @@
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "target": "es2015",
+    "allowUnreachableCode": false,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "target": "es2017",
     "typeRoots": ["node_modules/@types"],
-    "lib": ["es2017", "dom", "es6", "es2015.iterable"],
+    "lib": ["es2017", "dom"],
     "baseUrl": ".",
-    "resolveJsonModule": true,
+    "resolveJsonModule": true
   }
 }

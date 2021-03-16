@@ -1,9 +1,9 @@
-import { Compiler, Plugin } from 'webpack';
-import * as validateOptions from 'schema-utils';
 import * as chokidar from 'chokidar';
+import * as validateOptions from 'schema-utils';
+import { Compiler, Plugin } from 'webpack';
 
-import { SassToTsWebpackPluginOptions, SCHEMA } from './schema';
 import { SassToTypescriptEngine } from './sass-to-ts.engine';
+import { SassToTsWebpackPluginOptions, SCHEMA } from './schema';
 
 export class SassToTsWebpackPlugin implements Plugin {
   static readonly NAME = 'SassToTsWebpackPlugin';
@@ -32,7 +32,7 @@ export class SassToTsWebpackPlugin implements Plugin {
     );
     // We don't want to bloat the output on initial compilation,
     // so only log changes after first compilation:
-    compiler.hooks.done.tap(SassToTsWebpackPlugin.NAME, (stats) => {
+    compiler.hooks.done.tap(SassToTsWebpackPlugin.NAME, () => {
       this.shouldLog = true;
     });
     const watch = [...this.options.watchGlob, ...this.options.transform];
