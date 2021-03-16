@@ -49,6 +49,13 @@
     <cookbook-checkbox-sizes-example #checkboxSizesExample></cookbook-checkbox-sizes-example>
   </cookbook-example-viewer>
 
+  <h2>Multiline Label</h2>
+  <p>Line breaks can be made by using <code>&#92;n</code> or <code>&amp;&#35;10;</code>.</p>
+  <cookbook-example-viewer [html]="checkboxMultilineExample.template">
+    <cookbook-checkbox-multiline-example #checkboxMultilineExample>
+    </cookbook-checkbox-multiline-example>
+  </cookbook-example-viewer>
+
   <h2>Checked Change Event</h2>
   <cookbook-example-viewer
     [html]="checkboxEventsExample.template"
@@ -58,14 +65,10 @@
   </cookbook-example-viewer>
 
   <h2>Properties</h2>
-  <cookbook-showcase-properties [properties]="properties"></cookbook-showcase-properties>
+  <cookbook-api-description-properties
+    [properties]="properties"
+  ></cookbook-api-description-properties>
 
   <h2>Events</h2>
-  <cookbook-showcase-properties
-    [properties]="events"
-    [columns]="{
-      Name: 'Name',
-      Description: 'Description'
-    }"
-  ></cookbook-showcase-properties>
+  <cookbook-api-description-events [events]="events"></cookbook-api-description-events>
 </div>
