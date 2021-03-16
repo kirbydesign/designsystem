@@ -502,25 +502,12 @@ describe('Directive: NumericInputDirective', () => {
           spectatorDirective.directive.ngOnInit();
           expect(inputElm.value).toBe(`123456789`);
           expect(inputElm.selectionStart).toBe(4);
-          console.log(
-            'inputElm value and selectionStart',
-            inputElm.value,
-            inputElm.selectionStart,
-            inputElm.selectionEnd
-          );
-
           testFormControl.setValue(`123456789`, {
             emitModelToViewChange: false,
             emitViewToModelChange: false,
             onlySelf: true,
           });
           spectatorDirective.detectChanges();
-          console.log(
-            'inputElm value and selectionStart',
-            inputElm.value,
-            inputElm.selectionStart,
-            inputElm.selectionEnd
-          );
           expect(inputElm.value).toBe(`123${sep}456${sep}789`);
           expect(inputElm.selectionStart).toBe(5);
 
@@ -531,14 +518,7 @@ describe('Directive: NumericInputDirective', () => {
           });
           spectatorDirective.detectChanges();
           expect(inputElm.value).toBe(`12${sep}345${sep}789`);
-          console.log(
-            'inputElm value and selectionStart',
-            inputElm.value,
-            inputElm.selectionStart,
-            inputElm.selectionEnd
-          );
           expect(inputElm.selectionStart).toBe(5);
-
           testFormControl.setValue(`1234789`, {
             emitModelToViewChange: false,
             emitViewToModelChange: false,
@@ -548,13 +528,6 @@ describe('Directive: NumericInputDirective', () => {
           expect((spectatorDirective.element as HTMLInputElement).value).toBe(
             `1${sep}234${sep}789`
           );
-          console.log(
-            'inputElm value and selectionStart',
-            inputElm.value,
-            inputElm.selectionStart,
-            inputElm.selectionEnd
-          );
-
           expect(inputElm.selectionStart).toBe(5);
 
           testFormControl.setValue(`123789`, {
@@ -564,13 +537,6 @@ describe('Directive: NumericInputDirective', () => {
           });
           spectatorDirective.detectChanges();
           expect(inputElm.value).toBe(`123${sep}789`);
-          console.log(
-            'inputElm value and selectionStart',
-            inputElm.value,
-            inputElm.selectionStart,
-            inputElm.selectionEnd
-          );
-
           expect(inputElm.selectionStart).toBe(5);
         });
       });
@@ -594,7 +560,67 @@ describe('Directive: NumericInputDirective', () => {
           });
           spectatorDirective.detectChanges();
 
-          expect((spectatorDirective.element as HTMLInputElement).value).toBe(`0${decSep}1234`);
+          expect(inputElm.value).toBe(`0${decSep}1234`);
+        });
+      });
+
+      describe('when number is at maximum integral size and negative', () => {
+        it('should not add extra - when adding a digit to much', () => {
+          const template = `<input kirby-numeric-input  maxNumberOfIntegrals="15" [formControl]="testFormControl" />`;
+          spectatorDirective = createHost(template, {
+            hostProps: { testFormControl },
+          });
+
+          const inputElm = spectatorDirective.element as HTMLInputElement;
+          inputElm.value = '-123456789000000';
+          spectatorDirective.detectChanges();
+          spectatorDirective.directive.ngOnInit();
+          testFormControl.setValue(`-123${sep}456${sep}789${sep}000${sep}000`, {
+            emitModelToViewChange: false,
+            emitViewToModelChange: false,
+            onlySelf: true,
+          });
+          spectatorDirective.detectChanges();
+          expect(inputElm.value).toBe(`-123${sep}456${sep}789${sep}000${sep}000`);
+
+          inputElm.value = '-1234567890000009'; // adding 1 digit to much
+          testFormControl.setValue(`-123${sep}456${sep}789${sep}000${sep}0009`, {
+            emitModelToViewChange: false,
+            emitViewToModelChange: false,
+            onlySelf: true,
+          });
+          spectatorDirective.detectChanges();
+
+          expect(inputElm.value).toBe(`-123${sep}456${sep}789${sep}000${sep}000`);
+        });
+
+        it('should not add extra - when adding an invalid char to much', () => {
+          const template = `<input kirby-numeric-input  maxNumberOfIntegrals="15" [formControl]="testFormControl" />`;
+          spectatorDirective = createHost(template, {
+            hostProps: { testFormControl },
+          });
+
+          const inputElm = spectatorDirective.element as HTMLInputElement;
+          inputElm.value = '-123456789000000';
+          spectatorDirective.detectChanges();
+          spectatorDirective.directive.ngOnInit();
+          testFormControl.setValue(`-123${sep}456${sep}789${sep}000${sep}000`, {
+            emitModelToViewChange: false,
+            emitViewToModelChange: false,
+            onlySelf: true,
+          });
+          spectatorDirective.detectChanges();
+          expect(inputElm.value).toBe(`-123${sep}456${sep}789${sep}000${sep}000`);
+
+          inputElm.value = '-123456789000000 '; // adding a space to much
+          testFormControl.setValue(`-123${sep}456${sep}789${sep}000${sep}000 `, {
+            emitModelToViewChange: false,
+            emitViewToModelChange: false,
+            onlySelf: true,
+          });
+          spectatorDirective.detectChanges();
+
+          expect(inputElm.value).toBe(`-123${sep}456${sep}789${sep}000${sep}000`);
         });
       });
     });

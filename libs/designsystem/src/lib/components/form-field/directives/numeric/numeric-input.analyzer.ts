@@ -111,11 +111,19 @@ export class NumericInputAnalyzer {
     this.allowedCharsOnly = this.hasAllowedCharsOnly(value);
     if (!this.allowedCharsOnly) {
       this.invalid = true;
-      return this.lastValue;
+      return this.extractLastValue();
     }
     return value;
   }
-
+  private extractLastValue(): string {
+    if (this.lastValue.length > 0 && this.lastValue[0] === '-') {
+      this.hasNegativeSign = true;
+      return this.lastValue.substring(1);
+    } else {
+      this.hasNegativeSign = false;
+      return this.lastValue;
+    }
+  }
   private handleIntegralPart(value: string): string {
     if (value === '' || value === '-') {
       return value;
@@ -124,7 +132,7 @@ export class NumericInputAnalyzer {
     this.integralPart = this.replaceSeparator(this.integralPart, this.groupingSeparator, '');
     if (this.integralPart.length > this.config.maxNumberOfIntegrals) {
       this.invalid = true;
-      value = this.lastValue;
+      value = this.extractLastValue();
       this.integralPart = this.extractIntegralPart(value);
       this.integralPart = this.replaceSeparator(this.integralPart, this.groupingSeparator, '');
     }
