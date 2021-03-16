@@ -93,7 +93,3 @@ export class KirbyIntegration {
     return color;
   }
 }
-
-export function getKirbyColor(category: KirbyColor): string {
-  return new KirbyIntegration().getColorFromDocument(window.document, category);
-}

@@ -1,13 +1,9 @@
-import { calcProjectFileAndBasePath } from '@angular/compiler-cli';
 import { Component } from '@angular/core';
-import { loggedIn } from '@angular/fire/auth-guard';
 import { ChartConfiguration, ChartData, ChartDataSets, ChartPoint } from 'chart.js';
 import moment, { Moment, utc } from 'moment';
 
-import {
-  getKirbyColor,
-  KirbyColor,
-} from '@kirbydesign/designsystem/components/chart2/kirby-helpers';
+import { DesignTokenHelper } from '@kirbydesign/designsystem';
+const getColor = DesignTokenHelper.getColor;
 
 const config = {
   selector: 'cookbook-chart-example-timeseries-2',
@@ -343,7 +339,7 @@ export class ChartExampleTimeseries2Component {
       fill: true,
       lineTension: 0.4,
       borderWidth: 2,
-      hoverBackgroundColor: getKirbyColor(KirbyColor.PRIMARY),
+      hoverBackgroundColor: getColor('primary').value, // getKirbyColor(KirbyColor.PRIMARY),
       hoverBorderColor: 'rgb(255, 255, 255, 0.5)',
       hoverBorderWidth: 10,
       hoverRadius: 10,
@@ -363,6 +359,7 @@ export class ChartExampleTimeseries2Component {
       scales: {
         xAxes: [
           {
+            display: false,
             type: 'time',
             distribution: 'series',
             offset: true,
@@ -399,6 +396,7 @@ export class ChartExampleTimeseries2Component {
         ],
         yAxes: [
           {
+            display: false,
             gridLines: {
               drawBorder: false,
             },
@@ -415,10 +413,8 @@ export class ChartExampleTimeseries2Component {
         callbacks: {
           title(item: Chart.ChartTooltipItem[], data: Chart.ChartData): string {
             if (item.length > 0) {
-              console.log('item[0]', item[0]);
-              const m: Moment = item[0].xLabel as Moment;
+              const m: any = item[0].xLabel;
               return m.toDate().toLocaleDateString();
-              // return ( as moment).toLocaleDateString();
             }
             return '';
           },
@@ -428,7 +424,6 @@ export class ChartExampleTimeseries2Component {
               label += ': ';
             }
             label += parseFloat(tooltipItem.value).toFixed(2);
-
             return label;
           },
         },

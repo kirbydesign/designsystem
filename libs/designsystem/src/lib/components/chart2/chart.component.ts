@@ -9,6 +9,7 @@ import {
   LOCALE_ID,
   OnChanges,
   OnDestroy,
+  OnInit,
   Self,
   SimpleChanges,
   ViewChild,
@@ -29,7 +30,7 @@ import { KirbyIntegration } from './kirby-helpers';
   encapsulation: ViewEncapsulation.ShadowDom,
   providers: [KirbyIntegration, { provide: CHART_CONFIGURATION, useValue: CHART_CONFIGURATION }],
 })
-export class Chart2Component implements AfterViewInit, OnDestroy, OnChanges {
+export class Chart2Component implements OnInit, AfterViewInit, OnDestroy, OnChanges {
   // Make sure global settings are only initiated to default on first instance creation
 
   private static globalsInitiated = false;
@@ -153,14 +154,11 @@ export class Chart2Component implements AfterViewInit, OnDestroy, OnChanges {
 
   /**
    * Provides labels data
+   * Due to compatability with highchart the naming is highchart language
    */
   @Input()
   public set categories(value: string[]) {
     this.labels = value;
-  }
-
-  public get labels(): string[] {
-    return this.chartLabels;
   }
 
   /**
@@ -171,8 +169,8 @@ export class Chart2Component implements AfterViewInit, OnDestroy, OnChanges {
     this.chartLabels = value;
   }
 
-  public get type(): Chart.ChartType {
-    return this.chartType;
+  public get labels(): string[] {
+    return this.chartLabels;
   }
 
   /**
@@ -181,6 +179,10 @@ export class Chart2Component implements AfterViewInit, OnDestroy, OnChanges {
   @Input()
   public set type(value: Chart.ChartType) {
     this.chartType = value;
+  }
+
+  public get type(): Chart.ChartType {
+    return this.chartType;
   }
 
   /**
@@ -230,7 +232,11 @@ export class Chart2Component implements AfterViewInit, OnDestroy, OnChanges {
    */
   @Input()
   public set options(value: ChartConfiguration) {
-    this.overrideConfiguration = merge(this.overrideConfiguration, value);
+    this.overrideConfiguration = value; // merge(this.overrideConfiguration, value);
+  }
+
+  public ngOnInit(): void {
+    this.initialize();
   }
 
   public ngAfterViewInit(): void {
@@ -250,14 +256,12 @@ export class Chart2Component implements AfterViewInit, OnDestroy, OnChanges {
    */
   public update(changes: {}): void {
     if (Boolean(this.chart)) {
-      this.chart.update(changes);
+      this.renderChart();
     }
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (Boolean(this.chart)) {
-      this.chart.update();
-    } else {
       this.renderChart();
     }
   }
@@ -266,16 +270,19 @@ export class Chart2Component implements AfterViewInit, OnDestroy, OnChanges {
    * handles the build of configuration, data and chart creation
    */
   public renderChart(): void {
-    this.initialize();
-    if (this.renderingElement == null) {
+    if (this.renderingElement === null) {
+      console.log('this.renderingElement === null');
       return;
     }
+    console.log('renderChart');
 
     let options: ChartConfiguration = this.buildConfiguration();
-    options = this.addData(options);
+    options = this.addChartData(options);
     this.mergedOptions = options;
 
     this.setSizes();
+
+    console.log('options', this.mergedOptions);
 
     if (this.chart !== null) {
       this.cleanUp();
@@ -389,12 +396,11 @@ export class Chart2Component implements AfterViewInit, OnDestroy, OnChanges {
   /**
    * adds data to Chart.js configuration
    */
-  private addData(options: ChartConfiguration): ChartConfiguration {
+  private addChartData(options: ChartConfiguration): ChartConfiguration {
     if (this.rootChartData) {
       options.data = this.rootChartData;
       return options;
     }
-
     this.ensureDataset(options);
     if (this.chartDatasets) {
       this.chartDatasets.forEach((v) => {
@@ -444,7 +450,6 @@ export class Chart2Component implements AfterViewInit, OnDestroy, OnChanges {
             borderWidth: 1,
           },
           point: {
-            // hoverBackgroundColor: this.colorPoint,
             borderColor: this.colorGraph,
             backgroundColor: this.colorGraph,
             borderWidth: 1,

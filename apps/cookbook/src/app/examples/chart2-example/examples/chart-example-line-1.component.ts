@@ -1,8 +1,5 @@
-import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { hex2rgb } from '@ngneat/spectator/lib/internals/rgb-to-hex';
+import { Component, EventEmitter } from '@angular/core';
 import { ChartConfiguration, ChartDataSets } from 'chart.js';
-
-import { Chart2Component } from '@kirbydesign/designsystem';
 
 const config = {
   selector: 'cookbook-chart-example-line-1',
@@ -14,8 +11,7 @@ const config = {
     label="Line 1"
     [labels]="labels"
     [height]="height"
-    [dataset]="dataset"  
-   
+    [dataset]="dataset"     
     >
   </kirby-chart-2>
   <kirby-card-footer>
@@ -40,17 +36,7 @@ export class ChartExampleLine1Component {
   codeSnippet: string = config.codeSnippet;
 
   height = 250;
-
-  changeData(month: string, data: number[]): void {
-    this.dataset = {
-      backgroundColor: this.dataset.backgroundColor,
-      label: month,
-      data: data,
-    };
-  }
-
   datasetChange: EventEmitter<ChartDataSets> = new EventEmitter<Chart.ChartDataSets>();
-
   lineOptions: ChartConfiguration = {
     options: {
       elements: {
@@ -65,36 +51,36 @@ export class ChartExampleLine1Component {
       },
     },
   };
-
+  defaultData: number[] = [
+    1600.9,
+    1710.5,
+    1060.4,
+    1290.2,
+    1440.0,
+    1460.0,
+    1350.6,
+    1480.5,
+    1800.4,
+    1940.1,
+    1950.6,
+    1700.4,
+    1600.9,
+    1710.5,
+    1060.4,
+    1290.2,
+    1440.0,
+    1460.0,
+    1350.6,
+    1480.5,
+    1800.4,
+    1940.1,
+    1950.6,
+    1700.4,
+  ];
   dataset: ChartDataSets = {
     label: 'the label',
     backgroundColor: ['rgba(255, 35, 35, 0.2)'],
-    data: [
-      1600.9,
-      1710.5,
-      1060.4,
-      1290.2,
-      1440.0,
-      1460.0,
-      1350.6,
-      1480.5,
-      1800.4,
-      1940.1,
-      1950.6,
-      1700.4,
-      1600.9,
-      1710.5,
-      1060.4,
-      1290.2,
-      1440.0,
-      1460.0,
-      1350.6,
-      1480.5,
-      1800.4,
-      1940.1,
-      1950.6,
-      1700.4,
-    ],
+    data: this.defaultData,
   };
 
   dataJanuary: number[] = [
@@ -206,4 +192,12 @@ export class ChartExampleLine1Component {
     'May',
     'June',
   ];
+
+  changeData(month: string, data: number[]): void {
+    this.dataset = {
+      backgroundColor: this.dataset.backgroundColor,
+      label: month,
+      data: data,
+    };
+  }
 }
