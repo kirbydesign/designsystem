@@ -73,6 +73,16 @@ ion-header ion-toolbar {
   --border-width: 0;
   --background: transparent;
   --color: #{get-color('black')};
+
+  ion-title {
+    $spacingToTop: 30px;
+    height: unset;
+    padding-top: $spacingToTop + size('xxs');
+
+    @include media('>=medium') {
+      padding-top: $spacingToTop;
+    }
+  }
 }
 
 // Ensure iOS safe-area padding-top on default/modal flavor
