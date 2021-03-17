@@ -90,19 +90,8 @@ describe('ModalWrapperComponent', () => {
           '--padding-bottom': size('s'),
         });
       });
-
-      describe('ion-toolbar', () => {
-        beforeEach(async () => {});
-        it('should have `padding-top` to be size extra small', async () => {
-          ionToolbarElement = spectator.query('ion-toolbar');
-          expect(ionToolbarElement).toHaveComputedStyle({
-            'padding-top': size('xs'),
-          });
-        });
-      });
     });
   });
-
   describe('sizing', () => {
     beforeEach(() => {
       spectator = modalWrapperTestBuilder
