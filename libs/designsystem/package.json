@@ -7,7 +7,6 @@
     "@ionic/angular": "5.5.2",
     "highcharts": "8.0.4",
     "moment": "2.24.0",
-    "tslib": "^2.0.0"
   },
   "peerDependencies": {
     "@angular/common": ">=8.2.7",
