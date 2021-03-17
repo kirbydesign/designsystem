@@ -3,8 +3,6 @@ import { ApiDescriptionProperty } from '~/app/shared/api-description/api-descrip
 
 import { AvatarSizes } from '@kirbydesign/designsystem';
 
-declare var require: any;
-
 @Component({
   selector: 'cookbook-avatar-showcase',
   templateUrl: './avatar-showcase.component.html',
