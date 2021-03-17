@@ -86,22 +86,17 @@ describe('ModalWrapperComponent', () => {
         expect(ionToolbarElement).toHaveComputedStyle({
           '--padding-start': size('s'),
           '--padding-end': size('s'),
-          '--padding-top': size('m'),
+          '--padding-top': size('s'),
           '--padding-bottom': size('s'),
         });
       });
 
-      describe('on small screens', () => {
-        beforeEach(async () => {
-          await TestHelper.resizeTestWindow(TestHelper.screensize.phone);
-          await TestHelper.waitForResizeObserver();
-        });
-
-        it('should have `--padding-top` to be size large', () => {
+      describe('ion-toolbar', () => {
+        beforeEach(async () => {});
+        it('should have `padding-top` to be size extra small', async () => {
           ionToolbarElement = spectator.query('ion-toolbar');
-
           expect(ionToolbarElement).toHaveComputedStyle({
-            '--padding-top': size('l'),
+            'padding-top': size('xs'),
           });
         });
       });
