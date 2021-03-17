@@ -16,7 +16,6 @@ export class IconShowcaseComponent {
 <kirby-icon customName="NAME"></kirby-icon>
 <!-- Size -->
 <kirby-icon size="SIZE"></kirby-icon>`;
-  sizes = IconSizes;
 
   properties: ApiDescriptionProperty[] = [
     {
@@ -28,8 +27,8 @@ export class IconShowcaseComponent {
     {
       name: 'size',
       description: 'Determines the size of the icon.',
-      defaultValue: 'sm',
-      type: Object.values(this.sizes),
+      defaultValue: IconSizes.SM,
+      type: Object.values(IconSizes),
     },
     {
       name: 'themeColor',
