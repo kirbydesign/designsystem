@@ -3,6 +3,10 @@ First of all - thank you for your interest in contributing to Kirby! 🥳
 <!-- Early on show that we are here to help if necessary and to educate people in how to get help -->
 If you at any point have any questions please read: [I have a question related to Kirby](#i-have-a-question-related-to-kirby)
 
+- [Glossary](#glossary)
+  - [Tech Refinement](#tech-refinement)
+  - [UX review](#ux-review)
+  - [Self review](#self-review)
 - [The contribution model](#the-contribution-model)
   - [I have a feature request](#i-have-a-feature-request)
   - [I have an enhancement](#i-have-an-enhancement)
@@ -24,18 +28,38 @@ If you at any point have any questions please read: [I have a question related t
   - [Submit an inquiry request on github](#submit-an-inquiry-request-on-github)
   - [Ask in the kirby-guild slack channel](#ask-in-kirby-guild)
 
+<!-- What would be a good way of making this more of an 'aside' thing? -->
+## Glossary 
+Some of the terms used in the context of Kirby might be unfamiliar or have a different meaning in the context of this project. 
+Therefore to avoid misconceptions and misunderstandings this section explains these terms - please let us know, if there are any terms in the context of Kirby you think should be added to this list.
+### UX Refinement
+- Explain what UX refinement is 
+### Tech Refinement
+- Explain what tech refinement is
+### UX review 
+- Explain what an UX review is
+### Self review 
+- Explain what a self review is
 
 ## The contribution model
 <!-- This section has the purpose of explaining why we do it like we do, in order to have people 
 symphatize with the process -->
 - What are we trying to achieve with this contribution model
+  - Issues for trackability and history
+  - Why do we do Tech refinement
+  - Why we do UX refinement
+  - Why we do UX reviews
 - General description of the contribution model
 
 <!-- The following "I have/would" sections has the role of easily guiding the reader 
 on how to do their specific task, and explain them what the process is for that task -->
-### I have a feature request 
-- Submit issue using the feature request template
-  - please read "[the good: issue](#issue)"
+### I have a component request 
+<!--- Submit issue using the component request template--> 
+If you got an idea for a component that you think should be part of Kirby you should: 
+1. **Make sure you have read "[the good: issue](#issue)"** - following the guidelines in there eases the process and helps both you and team Kirby by avoiding common misunderstandings and gotchas we have experienced. 
+2. **Open a new issue using the "component request"-template** - make sure to read through- and fill out the template. 
+3. **Notify the #Kirby-guild slack channel to get it UX refined**
+4. **Notify the #Kirby-guild slack channel to get it tech refined**  
 - Contact kirby-guild to get it tech refined 
 - If you would like to implement it:
   - please read the following before continuing: 
