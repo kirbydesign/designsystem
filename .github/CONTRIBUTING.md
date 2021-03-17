@@ -3,10 +3,8 @@ First of all - thank you for your interest in contributing to Kirby! 🥳
 <!-- Early on show that we are here to help if necessary and to educate people in how to get help -->
 If you at any point have any questions please read: [I have a question related to Kirby](#i-have-a-question-related-to-kirby)
 
-- [Glossary](#glossary)
-  - [Tech Refinement](#tech-refinement)
-  - [UX review](#ux-review)
-  - [Self review](#self-review)
+**Beware:** We reserve the right to close issues and pull-requests that does not follow the steps outlined in [the contribution model](#the-contribution-model). This is not because we want to be mean or micro-manage the way things are done - but a project of this size requires some consistency in the way we cooperate in order to be manageable. 
+
 - [The contribution model](#the-contribution-model)
   - [I have a feature request](#i-have-a-feature-request)
   - [I have an enhancement](#i-have-an-enhancement)
@@ -21,52 +19,59 @@ If you at any point have any questions please read: [I have a question related t
   - [After you submit](#after-you-submit)
 - [The good:](#the-good:)
   - [Issue](#issue)
+  - [Commit](#commit)
   - [Self-review](#self-review)
   - [Pull-request](#pull-request)
   - [Test](#test)
 - [I have a question related to Kirby](#i-have-a-question-related-to-kirby)
   - [Submit an inquiry request on github](#submit-an-inquiry-request-on-github)
   - [Ask in the kirby-guild slack channel](#ask-in-kirby-guild)
-
-<!-- What would be a good way of making this more of an 'aside' thing? -->
-## Glossary 
-Some of the terms used in the context of Kirby might be unfamiliar or have a different meaning in the context of this project. 
-Therefore to avoid misconceptions and misunderstandings this section explains these terms - please let us know, if there are any terms in the context of Kirby you think should be added to this list.
-### UX Refinement
-- Explain what UX refinement is 
-### Tech Refinement
-- Explain what tech refinement is
-### UX review 
-- Explain what an UX review is
-### Self review 
-- Explain what a self review is
+- [Glossary](#glossary)
+  - [Tech Refinement](#tech-refinement)
+  - [UX review](#ux-review)
+  - [Self review](#self-review)
 
 ## The contribution model
 <!-- This section has the purpose of explaining why we do it like we do, in order to have people 
 symphatize with the process -->
 - What are we trying to achieve with this contribution model
+  - Cooperation! - UXers, tech people, and contributors should all be contributing to make the best possible design system
   - Issues for trackability and history
-  - Why do we do Tech refinement
-  - Why we do UX refinement
-  - Why we do UX reviews
+  - Why do we do Tech refinement?
+  - Why we do UX refinement?
+  - Why we do UX reviews?
+  - Why do a self-review?
 - General description of the contribution model
+
+### Before you get coding
+You should as a minimum skim through the "[the good](#the-good)"-section. This is because we are a lot of people working together on this project, all with varying prefrences both in terms of how we work and code. At the same time we strive for consistency in the Kirby codebase which might lead to some frustrations during code-reviews. In an effort to avoid this; we have attempted to specify our preferences on various subjects in that section. 
+
+In the end, it might just save you some time. 
 
 <!-- The following "I have/would" sections has the role of easily guiding the reader 
 on how to do their specific task, and explain them what the process is for that task -->
 ### I have a component request 
 <!--- Submit issue using the component request template--> 
-If you got an idea for a component that you think should be part of Kirby you should: 
-1. **Make sure you have read "[the good: issue](#issue)"** - following the guidelines in there eases the process and helps both you and team Kirby by avoiding common misunderstandings and gotchas we have experienced. 
-2. **Open a new issue using the "component request"-template** - make sure to read through- and fill out the template. 
-3. **Notify the #Kirby-guild slack channel to get it UX refined**
-4. **Notify the #Kirby-guild slack channel to get it tech refined**  
-- Contact kirby-guild to get it tech refined 
-- If you would like to implement it:
-  - please read the following before continuing: 
-    - "[Setup environment and tooling for contribution](#setup-environment-and-tooling-for-contribution)" to get properly setup 
-    - "[Creating pull-requests](#creating-pull-requests)" to get informed on how to most easily get your changes merged
-  - assign yourself to the issue to signal to others you are working on it
-  - if you at any point have questions while solving the issue please see: [I have a question related to Kirby](#i-have-a-question-related-to-kirby)
+If you got an idea for a component that you think should be part of Kirby you should follow these steps: 
+
+1. **Open a new issue using the "component request"-template** - for easier processing of your issue follow the guidelines on how to write "[the good: issue](#issue)". 
+2. **Get the issue kicked-off:** <!-- Should we avoid the "kick-off"-terminology and use something as boring as "preparation" instead? It's more direct to me.  -->
+  - **Request that the issue is [UX refined](#ux-refinement) in [#kirby-guild](#getting-access-to-the-kirby-guild-slack-channel)** - do not proceed until it has been UX refined.
+  - **Request that the issue is [tech refined](#tech-refinement) in [#kirby-guild](#getting-access-to-the-kirby-guild-slack-channel)** - do not proceed until it has been tech refined.
+  - **Move the issue to the "Ready to do"-column in the "Kirby kan-ban board"-project** - you should now be ready to begin coding the component!
+3. **Get coding:**
+  - **Read [Before you get coding](#before-you-get-coding)** - this will lead to an easier review process and could save you some time in the long run. 
+  - **Assign yourself to the issue** - this lets others know you are currently working on the issue.
+  - **Create a feature branch from the [master branch](https://github.com/kirbydesign/designsystem/tree/master)** 
+  - **Publish a WIP implementation to Github as a draft PR and ask [#kirby-guild](#getting-access-to-the-kirby-guild-slack-channel) for feedback** - this lets you know early on, if you are going in the right direction.
+  - **Make sure you have implemented [good unit tests](#tests)** - whether you prefer to add tests in a [TDD](#https://en.wikipedia.org/wiki/Test-driven_development) manner, after implementation or something third is up to you; we just require tests to avoid regression.
+  - **Update the [cookbook](https://cookbook.kirby.design) with examples and showcases** - this lets you show off your changes to the world! 
+4. **Get your changes reviewed:**
+  - **Start out by doing a [self-review](#self-review)** - this will help you catch some low hanging fruits before the reviewer does.
+  - **Request that the issue is [UX reviewed](#ux-review)** - the implementation should be correct in regards to the UX design and the [Kirby Styleguide on Zeplin](https://zpl.io/258pXGj) __SHOULD WE HAVE SOMETHING ABOUT HOW TO GET ACCESS TO THE ZEPPELIN STYLEGUIDE?__
+  - **Open a pull-request and ask #kirby-guild for a review** - stay responsive to comments and suggestions that might be submitted. 
+  - **Get your pull-request merged** - when the pull-request has been approved it will automatically be merged to master via [automerge](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/automatically-merging-a-pull-request).
+5. **Celebrate! 🎉** - your changes have been added to Kirby!
 
 ### I have an enhancement 
 - Submit issue using the enhancement request template
@@ -170,4 +175,19 @@ To do this create a [new issue](https://github.com/kirbydesign/designsystem/issu
 ### Ask in the kirby-guild slack channel
 You should ask a question in the @kirby-design/kirby-guild slack channel if: __Same question as above__. 
 
-If you do not have access you should: __who should be contacted for access?__
+### Getting access to the #Kirby-guild slack channel
+__instructions go here__
+
+<!-- What would be a good way of making this more of an 'aside' thing? -->
+## Glossary 
+Some of the terms used in the context of Kirby might be unfamiliar or have a different meaning in the context of this project. 
+Therefore to avoid misconceptions and misunderstandings this section explains these terms - please let us know, if there are any terms in the context of Kirby you think should be added to this list.
+### UX Refinement
+- Explain what UX refinement is 
+### Tech Refinement
+- Explain what tech refinement is
+### UX review 
+- Explain what an UX review is
+### Self review 
+- Explain what a self review is
+
