@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { InputSize } from '@kirbydesign/designsystem';
+import { InputSize, ModalController } from '@kirbydesign/designsystem';
 
 const config = {
   selector: 'cookbook-form-field-input-icon-example',
@@ -21,5 +21,12 @@ export class FormFieldInputIconExampleComponent {
   @Input() size: InputSize;
   public onClick($event: any): void {
     console.log('onClick cookbook-form-field-input-icon-example', $event);
+    this.modalController.showAlert({
+      title: 'Icon',
+      message: 'You clicked on the Icon: ',
+      okBtn: 'Ok',
+    });
   }
+
+  constructor(private modalController: ModalController) {}
 }
