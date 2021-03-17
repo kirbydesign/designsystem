@@ -1,7 +1,8 @@
-import { Component, ElementRef, AfterViewInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef } from '@angular/core';
+import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
+import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 import { ModalController } from '@kirbydesign/designsystem';
-import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
 
 @Component({
   selector: 'cookbook-modal-showcase',
@@ -26,7 +27,7 @@ export class ModalShowcaseComponent implements AfterViewInit {
     return false;
   }
 
-  configProperties: ShowcaseProperty[] = [
+  configProperties: ApiDescriptionProperty[] = [
     {
       name: 'flavor',
       description: `(Optional) The flavor of the modal.
@@ -38,70 +39,64 @@ export class ModalShowcaseComponent implements AfterViewInit {
       Modals with a \`compact\` flavor simply render the specified component, similar to alerts.
       Please note: As there is no toolbar or close button, you should handle closing the modal yourself.`,
       defaultValue: 'modal',
-      inputValues: ['undefined', 'modal', 'drawer', 'compact'],
+      type: ['undefined', 'modal', 'drawer', 'compact'],
     },
     {
       name: 'size',
       description: `(Optional) The initial size of the modal before content is loaded.
         The \`full-height\` option will take up as much vertical space as possible and not resize with content or native keyboard.`,
       defaultValue: 'medium (modal) | small (drawer)',
-      inputValues: ['undefined', 'small', 'medium', 'large', 'full-height'],
+      type: ['undefined', 'small', 'medium', 'large', 'full-height'],
     },
     {
       name: 'component',
       description: 'The component which will be rendered inside the modal.',
       defaultValue: '',
-      inputValues: ['Component'],
+      type: ['Component'],
     },
     {
       name: 'componentProps',
       description: '(Optional) The data to pass to the modal component.',
       defaultValue: '',
-      inputValues: ['undefined | { [key: string]: any; }'],
+      type: ['undefined | { [key: string]: any; }'],
     },
     {
       name: 'drawerSupplementaryAction',
       description: `(Optional) Allows placing a supplementary button in the top right corner of drawers.
       Please note: Only available on modals with a \`drawer\` flavor.`,
       defaultValue: '',
-      inputValues: ['{iconName: string, action: Function}'],
+      type: ['{iconName: string, action: Function}'],
     },
   ];
 
-  properties: ShowcaseProperty[] = [
+  properties: ApiDescriptionProperty[] = [
     {
       name: 'scrollDisabled',
       description: 'Disable scrolling of the modal',
-      inputValues: ['true', 'false'],
+      type: ['true', 'false'],
       defaultValue: 'false',
     },
   ];
 
-  footerProperties: ShowcaseProperty[] = [
+  footerProperties: ApiDescriptionProperty[] = [
     {
       name: 'themeColor',
       description: "Theme color. 'light' will use the background-color variable",
-      inputValues: ['white', 'light'],
+      type: ['white', 'light'],
       defaultValue: 'white',
     },
   ];
 
-  events: ShowcaseProperty[] = [
+  events: ApiDescriptionEvent[] = [
     {
       name: 'didPresent',
       description: 'Emitted when the modal is ready and the enter animation has finished',
-      inputValues: ['Promise<void>'],
+      signature: 'Promise<void>',
     },
     {
       name: 'willClose',
       description: 'Emitted when the user closes the modal or modal.close() method is called',
-      inputValues: ['Promise<void>'],
+      signature: 'Promise<void>',
     },
   ];
-
-  eventColumns = {
-    Name: 'Name',
-    Description: 'Description',
-    Type: 'Signature',
-  };
 }
