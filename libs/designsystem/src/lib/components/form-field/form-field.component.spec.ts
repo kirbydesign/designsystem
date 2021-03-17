@@ -519,7 +519,7 @@ describe('FormFieldComponent', () => {
           position: 'absolute',
         });
         expect(buttonElement).toHaveComputedStyle({
-          'margin-left': '-40px',
+          'margin-left': '-44px',
         });
         //input-icon
       });
