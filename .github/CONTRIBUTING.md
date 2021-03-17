@@ -112,6 +112,14 @@ the repo such that they can get coding -->
     <!-- I think the following point is important if Kirby is to be spread out amongst several teams -->
     - Don't assume people have knowledge outside of Kirby - contributors might come from many different projects 
 
+### Commit
+- Focus on one thing per commit 
+- Keep changes as small as possible 
+- Only commit related functinoality for each commit 
+- Commit often
+- Strive for each commit to compile/build and pass tests 
+- sidenote: when merging the CI pipeline combines each commit to a merge commit containing all commit messages
+
 ### Self-review 
 - Don't change files that is not related to your pull-request
   - for example don't reorder imports in files that is not directly related to the issue at hand
