@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
+import { ApiDescriptionEvent } from '~/app/shared/api-description/api-description-events/api-description-events.component';
+import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 import { ListLoadOnDemandExampleTemplate } from './../../examples/list-load-on-demand-example/list-load-on-demand-example.component';
-import { ShowcaseProperty } from './../../shared/showcase-properties/showcase-property';
 
 @Component({
   selector: 'cookbook-list-load-on-demand-showcase',
@@ -11,32 +12,26 @@ import { ShowcaseProperty } from './../../shared/showcase-properties/showcase-pr
 export class ListLoadOnDemandShowcaseComponent {
   exampleHtml: string = ListLoadOnDemandExampleTemplate;
 
-  properties: ShowcaseProperty[] = [
+  properties: ApiDescriptionProperty[] = [
     {
       name: 'isLoadOnDemandEnabled',
       description: 'Determines if the loadOnDemand event should be emitted.',
-      inputValues: ['boolean'],
+      type: ['boolean'],
       defaultValue: 'If there is a subscriber to the loadOnDemand event: true, otherwise false.',
     },
     {
       name: 'noMoreItemsText',
       description: 'Text to display when on demand loading of items is complete.',
-      inputValues: ['string'],
+      type: ['string'],
       defaultValue: 'undefined',
     },
   ];
 
-  events: ShowcaseProperty[] = [
+  events: ApiDescriptionEvent[] = [
     {
       name: 'loadOnDemand',
       description: `Emitted when the user has scrolled 80% of the list.`,
-      inputValues: [`KirbyListLoadMoreEvent { complete: (disableLoadMore?: boolean) => void; }`],
+      signature: `KirbyListLoadMoreEvent { complete: (disableLoadMore?: boolean) => void; }`,
     },
   ];
-
-  eventsColumns = {
-    Name: 'Name',
-    Description: 'Description',
-    Type: 'Signature',
-  };
 }

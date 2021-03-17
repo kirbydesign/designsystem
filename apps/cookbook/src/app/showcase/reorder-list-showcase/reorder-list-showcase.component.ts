@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-
-import { ShowcaseProperty } from './../../shared/showcase-properties/showcase-property';
+import { ApiDescriptionMethod } from '~/app/shared/api-description/api-description-methods/api-description-methods.component';
+import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 declare var require: any;
 
@@ -13,28 +13,28 @@ export class ReorderListShowcaseComponent {
   exampleHtml: string = require('!raw-loader!../../examples/reorder-list-example/reorder-list-example.component.html')
     .default;
 
-  properties: ShowcaseProperty[] = [
+  properties: ApiDescriptionProperty[] = [
     {
       name: 'items',
       description: 'Array of items',
       defaultValue: '[ ]',
-      inputValues: ['Array<any>'],
+      type: ['Array<any>'],
     },
     {
       name: 'subItemsName',
       description: 'Name of the sub items array',
       defaultValue: '',
-      inputValues: ['string'],
+      type: ['string'],
     },
     {
       name: 'getItemTextDefault',
       description: 'Function to retrieve text for defaultTemplate',
       defaultValue: undefined,
-      inputValues: ['function(item: any)'],
+      type: ['function(item: any)'],
     },
   ];
 
-  events: ShowcaseProperty[] = [
+  events: ApiDescriptionProperty[] = [
     {
       name: 'itemReorder',
       description:
@@ -47,23 +47,12 @@ export class ReorderListShowcaseComponent {
     },
   ];
 
-  eventColumns = {
-    Name: 'Name',
-    Description: 'Description',
-  };
-
-  methods: ShowcaseProperty[] = [
+  methods: ApiDescriptionMethod[] = [
     {
       name: 'complete()',
       description:
         'Completes the reorder operation. Must be called by the (itemReorder | subItemReorder) event. If a list of items is passed, the list will be reordered and returned in the proper order. If no parameters are passed or if true is passed in, the reorder will complete and the item will remain in the position it was dragged to. If an empty object is passed, the reorder will complete and the item will bounce back to its original position.',
-      inputValues: ['complete(listOrReorder?: any | any[] | undefined) => Promise<any>'],
+      signature: 'complete(listOrReorder?: any | any[] | undefined) => Promise<any>',
     },
   ];
-
-  methodColumns = {
-    Name: 'Name',
-    Description: 'Description',
-    Type: 'Signature',
-  };
 }

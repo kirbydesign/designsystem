@@ -46,7 +46,7 @@ export class ShowcaseComponent implements OnDestroy {
     this.exampleComponentName = this.replaceHyphens(exampleComponentUrlSegment);
     this.showCallToActionLinks = this.exampleComponentName !== 'colors';
     this.propertiesTable = this.elementRef.nativeElement.getElementsByClassName(
-      'cookbook-properties'
+      'api-description'
     )[0];
   }
 

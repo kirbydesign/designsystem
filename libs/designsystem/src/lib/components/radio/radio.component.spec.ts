@@ -20,6 +20,7 @@ describe('RadioComponent', () => {
   let ionRadioElement: HTMLIonRadioElement;
   let radioIcon: HTMLElement;
   let radioCheckmark: HTMLElement;
+  let label: HTMLSpanElement;
 
   beforeEach(async () => {
     spectator = createComponent({ props: { text: 'test' } });
@@ -28,6 +29,7 @@ describe('RadioComponent', () => {
     await TestHelper.whenReady(ionRadioElement);
     radioIcon = ionRadioElement.shadowRoot.querySelector('[part=container]');
     radioCheckmark = ionRadioElement.shadowRoot.querySelector('[part=mark]');
+    label = spectator.query('span');
   });
 
   it('should be created', () => {
@@ -93,6 +95,14 @@ describe('RadioComponent', () => {
           height: `>=${fatFingerSize}`,
           width: `>=${fatFingerSize}`,
         });
+      });
+
+      it('should have have correct label font-size ', () => {
+        expect(label).toHaveComputedStyle({ 'font-size': '16px' });
+      });
+
+      it('should have have correct label line-height', () => {
+        expect(label).toHaveComputedStyle({ 'line-height': '24px' });
       });
     });
 
