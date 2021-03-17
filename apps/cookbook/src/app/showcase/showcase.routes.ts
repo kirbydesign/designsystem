@@ -34,7 +34,6 @@ import { LoadingOverlayShowcaseComponent } from './loading-overlay-showcase/load
 import { ModalShowcaseComponent } from './modal-showcase/modal-showcase.component';
 import { PageShowcaseComponent } from './page-showcase/page-showcase.component';
 import { ProgressCircleShowcaseComponent } from './progress-circle-showcase/progress-circle-showcase.component';
-import { RangeShowcaseComponent } from './range-showcase/range-showcase.component';
 import { ReorderListShowcaseComponent } from './reorder-list-showcase/reorder-list-showcase.component';
 import { SegmentedControlShowcaseComponent } from './segmented-control-showcase/segmented-control-showcase.component';
 import { ShowcaseComponent } from './showcase.component';
@@ -237,10 +236,6 @@ export const routes: Routes = [
       {
         path: 'radio',
         component: RadioShowcaseComponent,
-      },
-      {
-        path: 'range',
-        component: RangeShowcaseComponent,
       },
     ],
   },
