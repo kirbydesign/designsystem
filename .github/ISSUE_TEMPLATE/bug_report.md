@@ -22,7 +22,7 @@ Steps to reproduce the behavior:
 - [e.g. 1.1.10]
 
 **Expected behavior**
-<!--A clear and concise description of what you expected to happen...>
+<!--A clear and concise description of what you expected to happen...-->
 
 **Screenshots**
 <!--If applicable, add screenshots to help explain your problem.-->
