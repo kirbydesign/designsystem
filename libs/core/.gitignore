@@ -1,0 +1,7 @@
+/loader
+/dist
+/www
+/node_modules
+/component-docs.d.ts
+/component-docs.json
+/src/components.d.ts

@@ -2,9 +2,7 @@
     General imports for components
     NOTICE: Must not contain anything that generates classes or else it will be generated for every component that imports this file.
 */
-// @import './base/functions';
-// @import './base/variables';
-// @import './base/include-media';
-// @import './themes/colors';
-
-@import '~@kirbydesign/core/src/scss/utils';
+@import './base/functions';
+@import './base/variables';
+@import './base/include-media';
+@import './themes/colors';
