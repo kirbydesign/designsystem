@@ -19,7 +19,7 @@ export class AvatarShowcaseComponent implements OnInit {
     {
       name: 'size',
       description: 'Sets the size of the avatar.',
-      defaultValue: 'sm',
+      defaultValue: AvatarSizes.SM,
       type: Object.values(AvatarSizes),
     },
     {
