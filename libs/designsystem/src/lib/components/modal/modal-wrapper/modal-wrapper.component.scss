@@ -76,10 +76,10 @@ ion-header ion-toolbar {
 :host-context(ion-modal.modal-card:not(.kirby-drawer)) {
   ion-header ion-toolbar:first-of-type {
     padding-top: var(--kirby-safe-area-top, 0px);
-  }
 
-  @include media('>=medium') {
-    padding-top: #{size('xs')};
+    @include media('>=medium') {
+      padding-top: #{size('xs')};
+    }
   }
 }
 
