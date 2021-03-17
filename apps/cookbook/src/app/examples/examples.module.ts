@@ -22,6 +22,7 @@ import { ModalRoutePage2ExampleComponent } from './modal-example/modal-route-exa
 import { SecondEmbeddedModalExampleComponent } from './modal-example/second-embedded-modal-example/second-embedded-modal-example.component';
 import { ProgressCircleExampleModule } from './progress-circle-example/progress-circle-example.module';
 import { RadioExampleModule } from './radio-example/radio-example.module';
+import { RangeExampleModule } from './range-example/range-example.module';
 import { SegmentedControlExampleModule } from './segmented-control-example/segmented-control-example.module';
 import { ToggleButtonExampleModule } from './toggle-button-example/toggle-button-example.module';
 
@@ -38,6 +39,7 @@ const IMPORTS = [
   ToggleButtonExampleModule,
   AccordionExampleModule,
   RadioExampleModule,
+  RangeExampleModule,
   CheckboxExampleModule,
 ];
 

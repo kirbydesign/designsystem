@@ -1,0 +1,35 @@
+<p>
+  Range is a control that allows the user to select between a range of values
+</p>
+
+<h2>Simple (Default) range with Reactive Form support</h2>
+<p>
+  <cookbook-example-viewer [html]="defaultExample.template">
+    <cookbook-range-default-example #defaultExample></cookbook-range-default-example>
+  </cookbook-example-viewer>
+</p>
+
+<h2>Range with pin and snap step</h2>
+<p>
+  <cookbook-example-viewer [html]="stepExample.template">
+    <cookbook-range-step-example #stepExample></cookbook-range-step-example>
+  </cookbook-example-viewer>
+</p>
+
+<h2>Range with value shown in external component</h2>
+<p>
+  <cookbook-example-viewer [html]="visibleValueExample.template">
+    <cookbook-range-visible-value-example
+      #visibleValueExample
+    ></cookbook-range-visible-value-example>
+  </cookbook-example-viewer>
+</p>
+
+<h2>Disabled Range using Reactive Forms</h2>
+<p>
+  <cookbook-example-viewer [html]="disabledFormExample.template">
+    <cookbook-range-disabled-form-example
+      #disabledFormExample
+    ></cookbook-range-disabled-form-example>
+  </cookbook-example-viewer>
+</p>

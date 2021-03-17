@@ -1,0 +1,120 @@
+@import '../../helpers/color-helper';
+@import '../../scss/utils';
+
+:root {
+  --range-height: 45px;
+  --range-container-width: 45px;
+  --range-container-background: #{get-color('white')};
+  --range-padding: size('xxs');
+
+  --range-label-color: get-text-color('semi-dark');
+  --range-label-background: transparent;
+
+  --range-label-font-size: font-size('n');
+  --range-label-width: auto;
+  --range-label-disabled-color: #{get-color('semi-light')};
+}
+
+$tickHeight: 8px;
+$tickWidth: 8px;
+
+.range-container {
+  padding-left: size('s');
+  padding-right: size('s');
+  padding-top: size('xxs');
+  padding-bottom: size('xxs');
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  background-color: var(--range-container-background);
+
+  ion-range {
+    --knob-background: #{get-color('white')};
+    --pin-color: get-color('black');
+    --pin-background: transparent;
+    --pin-font-size: font-size('xxxs');
+    --tick-color: #{get-color('semi-dark')};
+    --tick-active-color: #{get-color('dark')};
+    --bar-background: get-color('background-color');
+    --bar-color: #{get-color('semi-dark')};
+    --bar-active-color: #{get-color('black')};
+  }
+}
+
+.range-row {
+  flex: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  justify-items: stretch;
+}
+
+.min-label {
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.max-label {
+  margin-left: auto;
+  justify-content: flex-end;
+}
+
+.disabled {
+  --range-label-color: var(--range-label-disabled-color);
+}
+
+// Active
+.range-row label {
+  background-color: var(--range-label-background);
+  color: var(--range-label-color);
+  font-size: var(--range-label-font-size);
+  min-width: var(--range-label-width);
+  text-align: center;
+}
+
+// Active
+ion-range::part(knob) {
+  background-color: var(--knob-background);
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
+}
+
+// Active
+ion-range::part(pin) {
+  font-size: var(--pin-font-size);
+  color: var(--pin-color);
+  background-color: var(--pin-background);
+}
+
+// Active
+ion-range::part(tick) {
+  background-color: var(--tick-color);
+  border-radius: 50%;
+  width: $tickWidth;
+  height: $tickHeight;
+  margin-left: -1px * $tickWidth / 2px;
+  margin-top: -1px;
+  // margin-top: 1px + (-1 * $tickHeight / 2px);
+  z-index: 1;
+}
+
+// Active
+ion-range::part(tick-active) {
+  background-color: var(--tick-active-color);
+  border-radius: 50%;
+  width: $tickWidth;
+  height: $tickHeight;
+  margin-left: -1px * $tickWidth / 2px;
+  margin-top: -1px;
+  //  margin-top: 1px + (-1 * $tickHeight / 2px);
+  z-index: 1;
+}
+
+// Active
+ion-range::part(bar) {
+  background-color: var(--bar-color);
+}
+
+// Active
+ion-range::part(bar-active) {
+  background-color: var(--bar-active-color);
+}
