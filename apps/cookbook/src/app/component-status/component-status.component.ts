@@ -1,16 +1,15 @@
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, BehaviorSubject, forkJoin, of, combineLatest, Subscription } from 'rxjs';
-import { map, first, catchError } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
-
+import { BehaviorSubject, EMPTY, forkJoin, Observable, of, Subscription } from 'rxjs';
+import { catchError, concatMap, expand, first, map, toArray } from 'rxjs/operators';
 import { environment } from '~/environments/environment';
 
 import {
   ComponentStatusItem,
+  ItemCodeStatus,
   ItemCodeStatusOrder,
   ItemUXStatus,
-  ItemCodeStatus,
 } from './component-status-items';
 
 export interface GhostComponent {
@@ -136,7 +135,7 @@ export class ComponentStatusComponent implements OnInit, OnDestroy {
     const hasStatusItem = (issue) =>
       !!flattenedItems.find((item) => item.code.githubIssueNo === issue.number);
 
-    return this.getGithubComponentIssues().pipe(
+    return this.getGithubIssues('component').pipe(
       map((issues) => {
         return issues
           .filter((issue) => !hasStatusItem(issue))
@@ -147,7 +146,7 @@ export class ComponentStatusComponent implements OnInit, OnDestroy {
   }
 
   private getEnhancementItemsFromGithubIssues() {
-    return this.getGithubEnhancementIssues().pipe(
+    return this.getGithubIssues('enhancement').pipe(
       map((issues) => {
         return issues
           .filter((issue) => this.hasComponentTitleLabel(issue))
@@ -338,24 +337,14 @@ export class ComponentStatusComponent implements OnInit, OnDestroy {
     return [];
   }
 
-  private getGithubComponentIssues() {
-    const options = {
-      headers: new HttpHeaders({
-        Authorization: 'token ' + environment.oauth.githubToken1 + environment.oauth.githubToken2,
-      }),
-    };
-    const url = environment.githubApi + '/repos/kirbydesign/designsystem/issues?labels=component';
-    return this.http.get<any[]>(url, options);
-  }
+  private getGithubIssues(labels: string) {
+    const url = environment.githubApi + `/repos/kirbydesign/designsystem/issues?labels=${labels}`;
 
-  private getGithubEnhancementIssues() {
-    const options = {
-      headers: new HttpHeaders({
-        Authorization: 'token ' + environment.oauth.githubToken1 + environment.oauth.githubToken2,
-      }),
-    };
-    const url = environment.githubApi + '/repos/kirbydesign/designsystem/issues?labels=enhancement';
-    return this.http.get<any[]>(url, options);
+    return this.getPageOfIssues(url).pipe(
+      expand(({ next }) => (next ? this.getPageOfIssues(next) : EMPTY)),
+      concatMap(({ issues }) => issues),
+      toArray()
+    );
   }
 
   private setCurrentGithubStatus() {
@@ -431,6 +420,33 @@ export class ComponentStatusComponent implements OnInit, OnDestroy {
         return [...cards1, ...cards2, ...cards3];
       })
     );
+  }
+
+  getPageOfIssues(url: string) {
+    const options = {
+      headers: new HttpHeaders({
+        Authorization: 'token ' + environment.oauth.githubToken1 + environment.oauth.githubToken2,
+      }),
+      observe: 'response' as const,
+    };
+    return this.http.get<Observable<any>>(url, options).pipe(
+      map((res) => ({
+        issues: res.body,
+        next: this.next(res),
+      }))
+    );
+  }
+
+  private next(response: HttpResponse<Observable<any>>): string {
+    let url: string;
+    const link = response.headers.get('Link');
+    if (link) {
+      const next = link.match(/<([^>]+)>;\s*rel="next"/);
+      if (next) {
+        [, url] = next;
+      }
+    }
+    return url;
   }
 }
 
