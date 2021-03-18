@@ -163,9 +163,8 @@ describe('Min and Max Label ', () => {
 
   it('should verify the the disabled class is applied', () => {
     spectator = createHost(
-      `<kirby-range minLabel="min" maxLabel="max"><ion-range></ion-range></kirby-range>`
+      `<kirby-range minLabel="min" maxLabel="max" [disabled]="true"><ion-range></ion-range></kirby-range>`
     );
-    spectator.component.ionRange.disabled = true;
     spectator.detectChanges();
 
     const minLabelElement = spectator.query('.min-label');
