@@ -77,7 +77,7 @@ ion-header ion-toolbar {
     padding-top: var(--kirby-safe-area-top, 0px);
 
     @include media('>=medium') {
-      padding-top: #{size('xs')};
+      padding-top: calc(#{size('m')} - #{size('s')});
     }
   }
 }
