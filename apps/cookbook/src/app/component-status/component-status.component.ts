@@ -341,7 +341,7 @@ export class ComponentStatusComponent implements OnInit, OnDestroy {
     const url = environment.githubApi + `/repos/kirbydesign/designsystem/issues?labels=${labels}`;
 
     return this.getPageOfIssues(url).pipe(
-      expand(({ next }) => (next ? this.getPageOfIssues(next) : EMPTY)),
+      expand(({ nextPage }) => (nextPage ? this.getPageOfIssues(nextPage) : EMPTY)),
       concatMap(({ issues }) => issues),
       toArray()
     );
@@ -422,22 +422,22 @@ export class ComponentStatusComponent implements OnInit, OnDestroy {
     );
   }
 
-  getPageOfIssues(url: string) {
+  private getPageOfIssues(url: string): Observable<GithubIssuePage> {
     const options = {
       headers: new HttpHeaders({
         Authorization: 'token ' + environment.oauth.githubToken1 + environment.oauth.githubToken2,
       }),
       observe: 'response' as const,
     };
-    return this.http.get<Observable<any>>(url, options).pipe(
+    return this.http.get<GithubIssue[]>(url, options).pipe(
       map((res) => ({
         issues: res.body,
-        next: this.next(res),
+        nextPage: this.next(res),
       }))
     );
   }
 
-  private next(response: HttpResponse<Observable<any>>): string {
+  private next(response: HttpResponse<GithubIssue[]>): string {
     let url: string;
     const link = response.headers.get('Link');
     if (link) {
@@ -456,4 +456,10 @@ interface GithubCard {
 interface GithubIssue {
   number: number;
   status: ItemCodeStatus;
+  labels: Object[];
+}
+
+interface GithubIssuePage {
+  issues: GithubIssue[];
+  nextPage: string;
 }
