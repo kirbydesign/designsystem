@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-
-import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
 import { AlertExampleComponent } from '~/app/examples/alert-example/alert-example.component';
+import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 @Component({
   selector: 'cookbook-alert-showcase',
@@ -11,35 +10,35 @@ import { AlertExampleComponent } from '~/app/examples/alert-example/alert-exampl
 export class AlertShowcaseComponent {
   alertConfigWithIcon: string = AlertExampleComponent.alertConfigWithIcon;
   alertConfigWithDynamicValues: string = AlertExampleComponent.alertConfigWithDynamicValues;
-  properties: ShowcaseProperty[] = [
+  properties: ApiDescriptionProperty[] = [
     {
       name: 'title',
       description: 'The title of the alert',
-      inputValues: ['string | Observable<string>'],
+      type: ['string | Observable<string>'],
     },
     {
       name: 'message',
       description:
         "(Optional) The message shown under the title (or icon if specified). Use '\\n' for newline.",
-      inputValues: ['string | Observable<string>'],
+      type: ['string | Observable<string>'],
     },
     {
       name: 'icon',
       description: '(Optional) Icon to be shown below the title',
-      inputValues: ['{ name: string }', '{ name: string, themeColor: string }'],
+      type: ['{ name: string }', '{ name: string, themeColor: string }'],
     },
     {
       name: 'okBtn',
       description:
         '(Optional) Defines the text that will appear on the OK button and if it should be destructive',
       defaultValue: 'OK',
-      inputValues: ['string', '{ text: string, isDestructive: boolean }'],
+      type: ['string', '{ text: string, isDestructive: boolean }'],
     },
     {
       name: 'cancelBtn',
       description:
         '(Optional) The text that will appear on the cancel button. If not defined the cancel button will not be shown.',
-      inputValues: ['string'],
+      type: ['string'],
     },
   ];
 }

@@ -1,14 +1,15 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
 import { KirbyModule } from '@kirbydesign/designsystem';
 
-import { CheckboxDefaultExampleComponent } from './examples/default';
-import { CheckboxListExampleComponent } from './examples/list';
 import { CheckboxConfirmExampleComponent } from './examples/confirm';
-import { CheckboxStatesExampleComponent } from './examples/states';
-import { CheckboxSizesExampleComponent } from './examples/sizes';
+import { CheckboxDefaultExampleComponent } from './examples/default';
 import { CheckboxEventsExampleComponent } from './examples/events';
+import { CheckboxListExampleComponent } from './examples/list';
+import { CheckboxMultilineExampleComponent } from './examples/multiline';
+import { CheckboxSizesExampleComponent } from './examples/sizes';
+import { CheckboxStatesExampleComponent } from './examples/states';
 
 const COMPONENT_DECLARATIONS = [
   CheckboxDefaultExampleComponent,
@@ -17,6 +18,7 @@ const COMPONENT_DECLARATIONS = [
   CheckboxStatesExampleComponent,
   CheckboxSizesExampleComponent,
   CheckboxEventsExampleComponent,
+  CheckboxMultilineExampleComponent,
 ];
 
 @NgModule({

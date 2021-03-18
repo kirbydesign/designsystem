@@ -86,14 +86,10 @@
   </div>
 </cookbook-example-viewer>
 <h2>Properties:</h2>
-<cookbook-showcase-properties [properties]="properties"></cookbook-showcase-properties>
+<cookbook-api-description-properties
+  [properties]="properties"
+></cookbook-api-description-properties>
 <h2>Events:</h2>
-<cookbook-showcase-properties
-  [properties]="events"
-  [columns]="eventColumns"
-></cookbook-showcase-properties>
+<cookbook-api-description-events [events]="events"></cookbook-api-description-events>
 <h2>Methods:</h2>
-<cookbook-showcase-properties
-  [properties]="methods"
-  [columns]="methodColumns"
-></cookbook-showcase-properties>
+<cookbook-api-description-methods [methods]="methods"></cookbook-api-description-methods>

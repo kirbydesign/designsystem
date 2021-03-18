@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
-import { ShowcaseProperty } from '../../shared/showcase-properties/showcase-property';
 declare var require: any;
 
 @Component({
@@ -58,12 +58,12 @@ const routes: Routes = [
   ...
 `;
 
-  properties: ShowcaseProperty[] = [
+  properties: ApiDescriptionProperty[] = [
     {
       name: 'routerLink',
       description: `Should be a reference to the route path hosting the contents of the tab. Path needs to be a child of your "tabs" path otherwise use manually navigation by handling the \`click\` event.`,
       defaultValue: '',
-      inputValues: ['string'],
+      type: ['string'],
     },
   ];
 
