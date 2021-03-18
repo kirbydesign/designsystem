@@ -101,8 +101,8 @@
   },
   "devDependencies": {
     "@angular-builders/custom-webpack": "^8.4.1",
-    "@angular-devkit/build-angular": "~0.1102.4",
-    "@angular/cli": "^11.2.4",
+    "@angular-devkit/build-angular": "~0.1102.5",
+    "@angular/cli": "^11.2.5",
     "@angular/compiler-cli": "^11.2.5",
     "@ngneat/spectator": "^7.1.0",
     "@nrwl/cypress": "^9.1.2",
