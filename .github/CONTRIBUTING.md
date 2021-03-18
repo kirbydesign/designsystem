@@ -54,22 +54,22 @@ on how to do their specific task, and explain them what the process is for that 
 <!--- Submit issue using the component request template--> 
 If you got an idea for a component that you think should be part of Kirby you should follow these steps: 
 
-1. **Open a new issue using the "component request"-template** - for easier processing of your issue follow the guidelines on how to write "[the good: issue](#issue)". 
+1. **Open a new issue using the "component request"-template** - please follow the guidelines on how to write [the good issue](#issue). 
 2. **Get the issue kicked-off:** <!-- Should we avoid the "kick-off"-terminology and use something as boring as "preparation" instead? It's more direct to me.  -->
   - **Request that the issue is [UX refined](#ux-refinement) in [#kirby-guild](#getting-access-to-the-kirby-guild-slack-channel)** - do not proceed until it has been UX refined.
   - **Request that the issue is [tech refined](#tech-refinement) in [#kirby-guild](#getting-access-to-the-kirby-guild-slack-channel)** - do not proceed until it has been tech refined.
-  - **Move the issue to the "Ready to do"-column in the "Kirby kan-ban board"-project** - you should now be ready to begin coding the component!
+  - **Move the issue to the "Ready to do"-column in the "Kirby kan-ban board"-project** 
 3. **Get coding:**
-  - **Read [Before you get coding](#before-you-get-coding)** - this will lead to an easier review process and could save you some time in the long run. 
+  - **Read [Before you get coding](#before-you-get-coding)** - this will lead to an easier review process. 
   - **Assign yourself to the issue** - this lets others know you are currently working on the issue.
   - **Create a feature branch from the [master branch](https://github.com/kirbydesign/designsystem/tree/master)** 
   - **Publish a WIP implementation to Github as a draft PR and ask [#kirby-guild](#getting-access-to-the-kirby-guild-slack-channel) for feedback** - this lets you know early on, if you are going in the right direction.
-  - **Make sure you have implemented [good unit tests](#tests)** - whether you prefer to add tests in a [TDD](#https://en.wikipedia.org/wiki/Test-driven_development) manner, after implementation or something third is up to you; we just require tests to avoid regression.
-  - **Update the [cookbook](https://cookbook.kirby.design) with examples and showcases** - this lets you show off your changes to the world! 
+  - **Make sure you have implemented unit tests** - please follow the guidelines on how to write [the good test](#test).
+  - **Update the [cookbook](https://cookbook.kirby.design) with examples and showcases**
 4. **Get your changes reviewed:**
   - **Create a pull-request** - see [creating pull-requests](#creating-pull-requests) 
   - **Request that the pull-request is code-reviewed in #kirby-guild** - stay responsive to comments and suggestions that might be submitted.
-  - **Request that the pull-request is [UX reviewed](#ux-review)** - the implementation should be correct in regards to the UX design and the [Kirby Styleguide on Zeplin](https://zpl.io/258pXGj) __SHOULD WE HAVE SOMETHING ABOUT HOW TO GET ACCESS TO THE ZEPPELIN STYLEGUIDE?__
+  - **Request that the pull-request is [UX reviewed](#ux-review)**
   - **Get your pull-request merged** - when the pull-request has been approved it will automatically be merged to master via [automerge](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/automatically-merging-a-pull-request).
 5. **Celebrate! 🎉** - your changes have been added to Kirby!
 
