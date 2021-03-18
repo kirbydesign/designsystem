@@ -512,7 +512,7 @@ describe('FormFieldComponent', () => {
         expect(iconElement.attributes['class'].value).toBe('kirby-icon');
       });
 
-      it('should render with position absolute and margin left', () => {
+      it('should render with position absolute and negative margin left', () => {
         const buttonElement = spectator.queryHost('button[kirby-button]');
         expect(buttonElement).toBeTruthy();
         expect(buttonElement).toHaveComputedStyle({

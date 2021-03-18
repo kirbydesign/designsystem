@@ -9,7 +9,7 @@ $input-icon-size: size('l');
   width: $input-icon-size;
   height: $input-icon-size;
   margin-left: -$input-icon-size - map-get($sizes, 'xs');
-  margin-top: -$input-icon-size / 2; // - 5px
+  margin-top: -$input-icon-size / 2;
   display: flex;
   padding: 0;
 
@@ -17,7 +17,6 @@ $input-icon-size: size('l');
     flex: auto;
     align-items: center;
     border: none;
-    // background-color: transparent;
-    background-color: yellow;
+    background-color: transparent;
   }
 }
