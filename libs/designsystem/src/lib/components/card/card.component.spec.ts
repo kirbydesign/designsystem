@@ -1,7 +1,7 @@
-import { SpectatorHost, createHostFactory } from '@ngneat/spectator';
-import { IonicModule } from '@ionic/angular';
+import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
 import { TestHelper } from '../../testing/test-helper';
+
 import { CardComponent } from './card.component';
 
 describe('CardComponent', () => {
@@ -9,7 +9,7 @@ describe('CardComponent', () => {
 
   const createHost = createHostFactory({
     component: CardComponent,
-    imports: [IonicModule.forRoot({ _testing: true })],
+    imports: [TestHelper.ionicModuleForTest],
   });
 
   describe('by default', () => {

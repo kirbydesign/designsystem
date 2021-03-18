@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-
-import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
+import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 declare var require: any;
 @Component({
@@ -12,12 +11,12 @@ export class BadgeShowcaseComponent {
   exampleHtml: string = require('!raw-loader!../../examples/badge-example/badge-example.component.html')
     .default;
 
-  properties: ShowcaseProperty[] = [
+  properties: ApiDescriptionProperty[] = [
     {
       name: 'themeColor',
       description: 'Sets which color the badge should use from the theme palette.',
       defaultValue: 'white',
-      inputValues: ['white', 'success', 'warning', 'danger'],
+      type: ['white', 'success', 'warning', 'danger'],
     },
   ];
 }

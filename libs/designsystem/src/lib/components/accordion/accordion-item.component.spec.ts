@@ -1,7 +1,8 @@
-import { IonicModule } from '@ionic/angular';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
+import { TestHelper } from '../../testing/test-helper';
 import { IconComponent } from '../icon/icon.component';
+
 import { AccordionItemComponent } from './accordion-item.component';
 
 describe('AccordionItemComponent', () => {
@@ -10,7 +11,7 @@ describe('AccordionItemComponent', () => {
   const createHost = createHostFactory({
     component: AccordionItemComponent,
     declarations: [IconComponent],
-    imports: [IonicModule.forRoot({ mode: 'ios', _testing: true })],
+    imports: [TestHelper.ionicModuleForTest],
   });
 
   beforeEach(() => {
