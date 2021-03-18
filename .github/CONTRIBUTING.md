@@ -67,9 +67,9 @@ If you got an idea for a component that you think should be part of Kirby you sh
   - **Make sure you have implemented [good unit tests](#tests)** - whether you prefer to add tests in a [TDD](#https://en.wikipedia.org/wiki/Test-driven_development) manner, after implementation or something third is up to you; we just require tests to avoid regression.
   - **Update the [cookbook](https://cookbook.kirby.design) with examples and showcases** - this lets you show off your changes to the world! 
 4. **Get your changes reviewed:**
-  - **Start out by doing a [self-review](#self-review)** - this will help you catch some low hanging fruits before the reviewer does.
-  - **Request that the issue is [UX reviewed](#ux-review)** - the implementation should be correct in regards to the UX design and the [Kirby Styleguide on Zeplin](https://zpl.io/258pXGj) __SHOULD WE HAVE SOMETHING ABOUT HOW TO GET ACCESS TO THE ZEPPELIN STYLEGUIDE?__
-  - **Open a pull-request and ask #kirby-guild for a review** - stay responsive to comments and suggestions that might be submitted. 
+  - **Create a pull-request** - see [creating pull-requests](#creating-pull-requests) 
+  - **Request that the pull-request is code-reviewed in #kirby-guild** - stay responsive to comments and suggestions that might be submitted.
+  - **Request that the pull-request is [UX reviewed](#ux-review)** - the implementation should be correct in regards to the UX design and the [Kirby Styleguide on Zeplin](https://zpl.io/258pXGj) __SHOULD WE HAVE SOMETHING ABOUT HOW TO GET ACCESS TO THE ZEPPELIN STYLEGUIDE?__
   - **Get your pull-request merged** - when the pull-request has been approved it will automatically be merged to master via [automerge](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/automatically-merging-a-pull-request).
 5. **Celebrate! 🎉** - your changes have been added to Kirby!
 
