@@ -134,7 +134,7 @@
     "karma-spec-reporter": "0.0.32",
     "lint-staged": "^9.4.2",
     "multimatch": "^4.0.0",
-    "ng-mocks": "^10.5.4",
+    "ng-mocks": "^11.9.1",
     "ng-packagr": "^11.2.4",
     "node-sass": "^5.0.0",
     "post-npm-install": "^2.0.0",
