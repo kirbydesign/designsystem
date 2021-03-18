@@ -349,9 +349,7 @@ describe('ButtonComponent', () => {
           expect(element).toHaveComputedStyle({ 'min-width': scenario.expected.minWidth });
         });
       });
-    });
 
-    describe(`initialized with size = ${scenario.size}`, () => {
       describe(`through an input property`, () => {
         beforeEach(() => {
           spectator = createHost(`<button kirby-button><span>Text</span></button>`, {
@@ -373,9 +371,7 @@ describe('ButtonComponent', () => {
           expect(element).toHaveComputedStyle({ 'min-width': scenario.expected.minWidth });
         });
       });
-    });
 
-    describe(`initialized with size = ${scenario.size}`, () => {
       describe(`through template property binding`, () => {
         beforeEach(() => {
           spectator = createHost(
