@@ -1,4 +1,4 @@
-@import '../scss/base/variables';
+@import '~@kirbydesign/core/src/scss/base/variables';
 
 @function generate-rgb-elevations() {
   $elevation-list: ();

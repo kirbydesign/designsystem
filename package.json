@@ -49,7 +49,7 @@
     "dist:cookbook": "ng build cookbook --prod --aot --progress false",
     "predist:designsystem": "npm run extract-scss-variables",
     "dist:designsystem": "ng build designsystem",
-    "postinstall": "npm run ngcc && npm run build-polyfills && npm run transpile:tools && npm run extract-scss-variables && npm run build:core && npm link libs/core",
+    "postinstall": "npm run ngcc && npm run build-polyfills && npm run transpile:tools && npm run extract-scss-variables && npm run build:core",
     "coverage-report": "cat ./coverage/lcov.info | coveralls",
     "transpile:tools": "npm run transpile:tslint-rules && npm run transpile:sass-to-ts && npm run transpile:generate-mocks",
     "transpile:tslint-rules": "tsc -p tools/tslint-rules",
