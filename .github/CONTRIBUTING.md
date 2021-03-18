@@ -54,7 +54,7 @@ on how to do their specific task, and explain them what the process is for that 
 <!--- Submit issue using the component request template--> 
 If you got an idea for a component that you think should be part of Kirby you should follow these steps: 
 
-1. **Open a new issue using the "component request"-template** - please follow the guidelines on how to write [the good issue](#issue). 
+1. **Open a [new issue](https://github.com/kirbydesign/designsystem/issues/new/choose) using the "component request"-template** - please follow the guidelines on how to write [the good issue](#issue). 
 2. **Get the issue kicked-off:** <!-- Should we avoid the "kick-off"-terminology and use something as boring as "preparation" instead? It's more direct to me.  -->
   - **Request that the issue is [UX refined](#ux-refinement) in [#kirby-guild](#getting-access-to-the-kirby-guild-slack-channel)** - do not proceed until it has been UX refined.
   - **Request that the issue is [tech refined](#tech-refinement) in [#kirby-guild](#getting-access-to-the-kirby-guild-slack-channel)** - do not proceed until it has been tech refined.
@@ -74,7 +74,7 @@ If you got an idea for a component that you think should be part of Kirby you sh
 5. **Celebrate! 🎉** - your changes have been added to Kirby!
 
 ### I have an enhancement 
-- Submit issue using the enhancement request template
+- Submit [new issue](https://github.com/kirbydesign/designsystem/issues/new/choose) using the enhancement request template
   - please read "[the good: issue](#issue)"
 - Contact kirby-guild to get it tech refined 
 - If you would like to implement issue: 
@@ -85,7 +85,7 @@ If you got an idea for a component that you think should be part of Kirby you sh
   - if you at any point have questions while solving the issue please see: [I have a question related to Kirby](#i-have-a-question-related-to-kirby)
 
 ### I would like to report a bug 
-- Submit issue using the bug template  
+- Submit [new issue](https://github.com/kirbydesign/designsystem/issues/new/choose) using the bug template  
   - please read "[the good: issue](#issue)"
 - Contact kirby-guild to get it verified 
   - we verify because it might be a feature not a bug 🐛
@@ -124,8 +124,7 @@ the repo such that they can get coding -->
 - Post in Kirby-guild 
 - Code reviews are meant to align your code with existing code 
   - While your implementation might be perfectly valid, we are aiming for uniformity across the codebase. 
-- Don't commit and exit - make sure to stay responsive and come back to answer comments on your code review
-
+- Please don't fire & forget, i.e. commit & run - make sure to stay responsive and come back to answer comments on your code review :)
 ## The good:
 <!-- The following sections have the responsibility of explaining contributors our best pratices such that they can more easily have their changes implemented in kirby --> 
 <!-- Ideally we should be able to refer to these sections if people break the guidelines in their issue or pull-requests, to make sure we are all preaching the same guidelines -->
@@ -147,6 +146,7 @@ the repo such that they can get coding -->
 - Only commit related functinoality for each commit 
 - Commit often
 - Strive for each commit to compile/build and pass tests 
+- Use [gitmoji](https://gitmoji.dev) when possible - point to VSCode extension and CLI tool
 - sidenote: when merging the CI pipeline combines each commit to a merge commit containing all commit messages
 
 ### Self-review 
