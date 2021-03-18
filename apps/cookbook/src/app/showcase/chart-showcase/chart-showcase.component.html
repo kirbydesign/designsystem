@@ -52,6 +52,7 @@
     <cookbook-chart-example-bar #bar> </cookbook-chart-example-bar>
   </cookbook-example-viewer>
 
+
   <cookbook-example-viewer [html]="doughnut.template" [ts]="doughnut.codeSnippet">
     <cookbook-chart-example-doughnut-1 #doughnut> </cookbook-chart-example-doughnut-1>
   </cookbook-example-viewer>
@@ -68,4 +69,10 @@
   <cookbook-example-viewer [html]="activityGauge.template">
     <cookbook-chart-example-activity-gauge #activityGauge> </cookbook-chart-example-activity-gauge>
   </cookbook-example-viewer>
+
+  <h2>Properties:</h2>
+  <cookbook-api-description-properties
+    [properties]="properties"
+  ></cookbook-api-description-properties>
+
 </div>
