@@ -26,7 +26,6 @@ import { NumericInputDirective } from './components/form-field/directives/numeri
 import { FormFieldMessageComponent } from './components/form-field/form-field-message/form-field-message.component';
 import { FormFieldComponent } from './components/form-field/form-field.component';
 import { InputCounterComponent } from './components/form-field/input-counter/input-counter.component';
-import { InputIconComponent } from './components/form-field/input-icon/input-icon.component';
 import { InputComponent } from './components/form-field/input/input.component';
 import { TextareaComponent } from './components/form-field/textarea/textarea.component';
 import { BreakpointHelperService } from './components/grid/breakpoint-helper.service';
@@ -119,7 +118,6 @@ const exportedDeclarations = [
   SizeDirective,
   ThemeColorDirective,
   NumericInputDirective,
-  InputIconComponent,
   SlideButtonComponent,
   ToggleComponent,
   EmptyStateComponent,
