@@ -341,7 +341,7 @@ export class ComponentStatusComponent implements OnInit, OnDestroy {
     const url = environment.githubApi + `/repos/kirbydesign/designsystem/issues?labels=${labels}`;
 
     return this.getPageOfIssues(url).pipe(
-      expand(({ nextPage }) => (nextPage ? this.getPageOfIssues(nextPage) : EMPTY)),
+      expand(({ nextPageUrl }) => (nextPageUrl ? this.getPageOfIssues(nextPageUrl) : EMPTY)),
       concatMap(({ issues }) => issues),
       toArray()
     );
@@ -432,7 +432,7 @@ export class ComponentStatusComponent implements OnInit, OnDestroy {
     return this.http.get<GithubIssue[]>(url, options).pipe(
       map((res) => ({
         issues: res.body,
-        nextPage: this.getNextPageUrl(res),
+        nextPageUrl: this.getNextPageUrl(res),
       }))
     );
   }
@@ -461,5 +461,5 @@ interface GithubIssue {
 
 interface GithubIssuePage {
   issues: GithubIssue[];
-  nextPage: string;
+  nextPageUrl: string;
 }
