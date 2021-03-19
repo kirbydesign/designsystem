@@ -7,7 +7,7 @@ import { MockComponents } from 'ng-mocks';
 import { WindowRef } from '../../../types';
 import { ButtonComponent } from '../../button/button.component';
 import { IconComponent } from '../../icon';
-import { PageProgressComponent } from '../../page/page.component';
+import { PageProgressComponent, PageTitleComponent } from '../../page/page.component';
 import { ProgressCircleComponent } from '../../progress-circle/progress-circle.component';
 import { ResizeObserverService } from '../../shared';
 import { ModalFooterComponent } from '../footer/modal-footer.component';
@@ -43,6 +43,7 @@ export class ModalWrapperTestBuilder {
         ButtonComponent,
         PageProgressComponent,
         ProgressCircleComponent,
+        PageTitleComponent,
         ModalFooterComponent,
         IonHeader,
         IonToolbar,
@@ -162,7 +163,7 @@ export class InputEmbeddedComponent {}
         2/4
       </kirby-progress-circle>
     </kirby-page-progress>
-    <div>My Title</div>
+    <kirby-page-title>My Title</kirby-page-title>
   `,
 })
 export class StaticPageProgressEmbeddedComponent {}
