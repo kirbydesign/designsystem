@@ -432,12 +432,12 @@ export class ComponentStatusComponent implements OnInit, OnDestroy {
     return this.http.get<GithubIssue[]>(url, options).pipe(
       map((res) => ({
         issues: res.body,
-        nextPage: this.next(res),
+        nextPage: this.getNextPageUrl(res),
       }))
     );
   }
 
-  private next(response: HttpResponse<GithubIssue[]>): string {
+  private getNextPageUrl(response: HttpResponse<GithubIssue[]>): string {
     let url: string;
     const link = response.headers.get('Link');
     if (link) {
