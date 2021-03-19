@@ -441,9 +441,9 @@ export class ComponentStatusComponent implements OnInit, OnDestroy {
     let url: string;
     const link = response.headers.get('Link');
     if (link) {
-      const next = link.match(/<([^>]+)>;\s*rel="next"/);
-      if (next) {
-        [, url] = next;
+      const match = link.match(/<([^>]+)>;\s*rel="next"/); // Omitting the global flag /g to ensure structure of match (single match on rel="next")
+      if (match) {
+        [, url] = match; // If there's a match, the first item will be the complete match, second item the url capture group
       }
     }
     return url;
