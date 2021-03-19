@@ -21,6 +21,7 @@ import { MockFullscreenLoadingOverlayComponent } from './components/mock.fullscr
 import { MockGridComponent } from './components/mock.grid.component';
 import { MockIconComponent } from './components/mock.icon.component';
 import { MockInputCounterComponent } from './components/mock.input-counter.component';
+import { MockInputIconComponent } from './components/mock.input-icon.component';
 import { MockInputComponent } from './components/mock.input.component';
 import { MockItemComponent } from './components/mock.item.component';
 import { MockLabelComponent } from './components/mock.label.component';
@@ -77,6 +78,7 @@ export const MOCK_COMPONENTS = [
   MockFormFieldComponent,
   MockInputComponent,
   MockInputCounterComponent,
+  MockInputIconComponent,
   MockTextareaComponent,
   MockGridComponent,
   MockIconComponent,

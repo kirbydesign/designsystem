@@ -1,11 +1,15 @@
 <label *ngIf="_wrapContentInLabel">
   <ng-container *ngTemplateOutlet="labelTextTemplate"></ng-container>
-  <ng-container *ngTemplateOutlet="slottedInputTemplate"></ng-container>
+  <div class="row">
+    <ng-container *ngTemplateOutlet="slottedInputTemplate"></ng-container>
+  </div>
 </label>
 
 <ng-container *ngIf="!_wrapContentInLabel">
   <ng-container *ngTemplateOutlet="labelTemplate"></ng-container>
-  <ng-container *ngTemplateOutlet="slottedInputTemplate"></ng-container>
+  <div class="row">
+    <ng-container *ngTemplateOutlet="slottedInputTemplate"></ng-container>
+  </div>
 </ng-container>
 
 <div *ngIf="message || counter" class="texts">
@@ -24,6 +28,7 @@
   <ng-content select="input[kirby-input]"></ng-content>
   <ng-content select="textarea[kirby-textarea]"></ng-content>
   <ng-content select="kirby-radio-group"></ng-content>
+  <ng-content select="kirby-input-icon"></ng-content>
 </ng-template>
 
 <ng-template #labelTextTemplate>

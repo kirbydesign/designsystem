@@ -1,0 +1,22 @@
+@import '../../../scss/utils';
+
+$input-icon-size: size('l');
+
+.input-icon {
+  position: absolute;
+  border: 0;
+  cursor: pointer;
+  width: $input-icon-size;
+  height: $input-icon-size;
+  margin-left: -$input-icon-size - map-get($sizes, 'xs');
+  margin-top: -$input-icon-size / 2;
+  display: flex;
+  padding: 0;
+
+  &:first-child {
+    flex: auto;
+    align-items: center;
+    border: none;
+    background-color: transparent;
+  }
+}
