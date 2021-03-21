@@ -36,6 +36,9 @@ jobs:
     needs: changes
     outputs:
       do_build: ${{ github.event_name == 'pull_request' || needs.changes.outputs.is_new_release == 'true' || needs.changes.outputs.libs == 'false' }}
+    steps:
+      - name: Set build status
+        run: echo "Setting build status..."
 
   lint_and_unittest:
     name: Lint & unit test
