@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { ActionSheetItem, ActionSheetConfig } from '@kirbydesign/designsystem';
+import { ActionSheetConfig, ActionSheetItem } from '@kirbydesign/designsystem';
 import { ToastConfig, ToastController } from '@kirbydesign/designsystem';
 import { ModalController } from '@kirbydesign/designsystem';
 
@@ -48,12 +48,12 @@ const config = {
   <!-- Fixed Content -->
   <kirby-fab-sheet *kirbyPageContent="{fixed: true}" horizontalAlignment="right">
     <kirby-icon name="write-message"></kirby-icon>
-    <kirby-action-sheet
+    <kirby-action-sheet-popout
       header="Your action sheet header"
       subheader="Your action sheet subheader"
       [items]="items"
       (itemSelect)="onItemSelect($event)">
-    </kirby-action-sheet>
+    </kirby-action-sheet-popout>
   </kirby-fab-sheet>
 </kirby-page>`,
 };

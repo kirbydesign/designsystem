@@ -1,10 +1,10 @@
 <kirby-fab-sheet horizontalAlignment="right" [disabled]="disableFabSheet">
   <kirby-icon name="write-message"></kirby-icon>
-  <kirby-action-sheet
+  <kirby-action-sheet-popout
     header="Your action sheet header"
     subheader="Your action sheet subheader"
     [items]="items"
     (itemSelect)="onItemSelect($event)"
   >
-  </kirby-action-sheet>
+  </kirby-action-sheet-popout>
 </kirby-fab-sheet>

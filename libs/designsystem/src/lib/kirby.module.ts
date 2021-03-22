@@ -49,6 +49,7 @@ import { GroupByPipe } from './components/list/pipes/group-by.pipe';
 import { FullscreenLoadingOverlayComponent } from './components/loading-overlay/fullscreen-loading-overlay/fullscreen-loading-overlay.component';
 import { LoadingOverlayService } from './components/loading-overlay/fullscreen-loading-overlay/loading-overlay.service';
 import { LoadingOverlayComponent } from './components/loading-overlay/loading-overlay.component';
+import { ActionSheetPopoutComponent } from './components/modal/action-sheet-popout/action-sheet-popout.component';
 import { ActionSheetComponent } from './components/modal/action-sheet/action-sheet.component';
 import { AlertComponent } from './components/modal/alert/alert.component';
 import { ModalFooterComponent } from './components/modal/footer/modal-footer.component';
@@ -109,6 +110,7 @@ const exportedDeclarations = [
   CalendarComponent,
   CheckboxComponent,
   ActionSheetComponent,
+  ActionSheetPopoutComponent,
   ModalFooterComponent,
   ModalRouterLinkDirective,
   SegmentedControlComponent,
@@ -187,6 +189,7 @@ const entryComponents = [
   ModalWrapperComponent,
   ModalCompactWrapperComponent,
   ActionSheetComponent,
+  ActionSheetPopoutComponent,
   FullscreenLoadingOverlayComponent,
   AlertComponent,
 ];

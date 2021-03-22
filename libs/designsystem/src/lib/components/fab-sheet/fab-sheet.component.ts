@@ -1,21 +1,21 @@
+import { DOCUMENT } from '@angular/common';
 import {
-  Component,
-  ContentChild,
-  HostBinding,
-  Input,
   AfterContentInit,
   AfterViewInit,
-  ViewChild,
+  Component,
+  ContentChild,
   ElementRef,
-  Renderer2,
+  HostBinding,
   Inject,
+  Input,
+  Renderer2,
+  ViewChild,
 } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
 import { IonFab, IonFabButton, IonIcon } from '@ionic/angular';
 
-import { ActionSheetComponent } from '../modal/action-sheet/action-sheet.component';
-import { kirbyIconSettings } from '../icon/kirby-icon-settings';
 import { Icon } from '../icon/icon-settings';
+import { kirbyIconSettings } from '../icon/kirby-icon-settings';
+import { ActionSheetPopoutComponent } from '../modal/action-sheet-popout/action-sheet-popout.component';
 
 @Component({
   selector: 'kirby-fab-sheet',
@@ -38,7 +38,8 @@ export class FabSheetComponent implements AfterContentInit, AfterViewInit {
     return this._isBackdropVisible;
   }
 
-  @ContentChild(ActionSheetComponent, { static: false }) actionSheet: ActionSheetComponent;
+  @ContentChild(ActionSheetPopoutComponent, { static: false })
+  actionSheet: ActionSheetPopoutComponent;
 
   @ViewChild(IonFabButton, { static: true, read: ElementRef }) ionFabButton: ElementRef<
     HTMLElement
