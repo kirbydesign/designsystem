@@ -12,7 +12,6 @@ import { RadioGroupComponent } from '../radio/radio-group/radio-group.component'
 import { FormFieldMessageComponent } from './form-field-message/form-field-message.component';
 import { FormFieldComponent } from './form-field.component';
 import { InputCounterComponent } from './input-counter/input-counter.component';
-import { InputIconComponent } from './input-icon/input-icon.component';
 import { InputComponent } from './input/input.component';
 import { TextareaComponent } from './textarea/textarea.component';
 
@@ -31,7 +30,6 @@ describe('FormFieldComponent', () => {
       RadioComponent,
       InputCounterComponent,
       ItemComponent,
-      InputIconComponent,
       IconComponent,
       IonIcon,
       IonRadio,
