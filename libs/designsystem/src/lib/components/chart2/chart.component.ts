@@ -1,4 +1,3 @@
-import { DOCUMENT } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -33,7 +32,7 @@ import { KirbyIntegration } from './kirby-helpers';
 export class Chart2Component implements OnInit, AfterViewInit, OnDestroy, OnChanges {
   // Make sure global settings are only initiated to default on first instance creation
 
-  private static globalsInitiated = false;
+  // private static globalsInitiated = false;
   @ViewChild('rendering', { static: false }) renderingElement: ElementRef = null;
   /**
    * Provides access to the Chartjs instance (if any)
@@ -74,7 +73,6 @@ export class Chart2Component implements OnInit, AfterViewInit, OnDestroy, OnChan
   private chartBorderColor: string[] = null;
 
   constructor(
-    @Inject(DOCUMENT) private document: Document,
     @Inject(LOCALE_ID) private locale: string,
     private kirbyIntegration: KirbyIntegration,
     @Self() private elementRef: ElementRef<HTMLElement>
@@ -82,24 +80,25 @@ export class Chart2Component implements OnInit, AfterViewInit, OnDestroy, OnChan
     this.defaultChartConfiguration = merge(DefaultChartOptions);
     //TODO: look into this
     // First time the component is used - trigger setting of global values on chart component
-    if (!Chart2Component.globalsInitiated) {
+    /* if (!Chart2Component.globalsInitiated) {
       Chart2Component.fontFamily =
         '"Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, sans-serif';
       Chart2Component.globalsInitiated = true;
     }
+    */
   }
-
+  /*
   public static get fontFamily(): string {
     return Chart.defaults.global.defaultFontFamily;
   }
-
+*/
   /**
    * Overrides the default fontFamily on the Chart.js object (globally as this is a global setting on Chart.js)
    */
-  public static set fontFamily(value: string) {
+  /*  public static set fontFamily(value: string) {
     Chart.defaults.global.defaultFontFamily = value;
   }
-
+*/
   public get backgroundColor(): string[] {
     return this.chartBackgroundColor;
   }
@@ -152,6 +151,7 @@ export class Chart2Component implements OnInit, AfterViewInit, OnDestroy, OnChan
     return this.labels;
   }
 
+  /**
   /**
    * Provides labels data
    * Due to compatability with highchart the naming is highchart language
@@ -274,7 +274,6 @@ export class Chart2Component implements OnInit, AfterViewInit, OnDestroy, OnChan
       console.log('this.renderingElement === null');
       return;
     }
-    console.log('renderChart');
 
     let options: ChartConfiguration = this.buildConfiguration();
     options = this.addChartData(options);
@@ -326,8 +325,8 @@ export class Chart2Component implements OnInit, AfterViewInit, OnDestroy, OnChan
 
   private initialize(): void {
     moment.locale(this.locale);
-    // const colors = this.kirbyIntegration.getSettings(this.elementRef.nativeElement);
-    const colors = this.kirbyIntegration.getSettingsFromDocument(this.document);
+    const colors = this.kirbyIntegration.getSettings(this.elementRef.nativeElement);
+    // const colors = this.kirbyIntegration.getSettingsFromDocument(window.document);
     this.colorPoint = colors.colorPoint;
     this.colorGraph = colors.colorGraph;
     this.colorDatalabelsFont = colors.colorDatalabelsFont;
