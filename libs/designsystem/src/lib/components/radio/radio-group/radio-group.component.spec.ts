@@ -710,7 +710,7 @@ describe('RadioGroupComponent', () => {
     });
   });
 
-  fdescribe('implementing ControlValueAccessor interface', () => {
+  describe('implementing ControlValueAccessor interface', () => {
     const textItems = ['Bacon', 'Sausage', 'Onion'];
     const defaultSelectedIndex = 1;
 
@@ -723,7 +723,7 @@ describe('RadioGroupComponent', () => {
 
     beforeEach(() => {
       spectator = createHost(
-        `<kirby-radio-group [items]="items" [(ngModel)]="selected">
+        `<kirby-radio-group [items]="items">
         </kirby-radio-group>`,
         {
           hostProps: {
