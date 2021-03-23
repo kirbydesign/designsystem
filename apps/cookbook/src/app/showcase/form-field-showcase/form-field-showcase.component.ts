@@ -107,7 +107,14 @@ On native devices this method also ensures the form field is scrolled into the v
       type: ['string', 'number', 'email', 'telephone', 'date'],
     },
   ];
-
+  dateInputProperties: ApiDescriptionProperty[] = [
+    {
+      name: 'value',
+      defaultValue: undefined,
+      description: 'The value of the input. Uses Locale to set the format Pattern',
+      type: ['date'],
+    },
+  ];
   sharedEvents: ApiDescriptionEvent[] = [
     {
       name: 'blur',

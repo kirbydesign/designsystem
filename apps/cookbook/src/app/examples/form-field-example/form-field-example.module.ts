@@ -11,7 +11,6 @@ import { FormFieldInputDefaultExampleComponent } from './examples/input/default'
 import { FormFieldInputDisabledExampleComponent } from './examples/input/disabled';
 import { FormFieldInputErrorExampleComponent } from './examples/input/error';
 import { FormFieldFocusExampleComponent } from './examples/input/focus';
-import { FormFieldInputIconExampleComponent } from './examples/input/input-icon.component';
 import { FormFieldInputLabelExampleComponent } from './examples/input/label';
 import { FormFieldInputLabelMessageExampleComponent } from './examples/input/label-message';
 import { FormFieldInputNumericExampleComponent } from './examples/input/numeric.component';
@@ -35,7 +34,6 @@ const COMPONENT_DECLARATIONS = [
   FormFieldTextareaDefaultExampleComponent,
   FormFieldTextareaLabelExampleComponent,
   FormFieldTextareaCounterExampleComponent,
-  FormFieldInputIconExampleComponent,
 ];
 
 @NgModule({
