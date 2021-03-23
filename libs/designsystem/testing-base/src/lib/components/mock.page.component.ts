@@ -6,6 +6,7 @@ import {
   PageComponent,
   PageContentComponent,
   PageContentDirective,
+  PageProgressComponent,
   PageTitleComponent,
   PageTitleDirective,
   PageToolbarTitleDirective,
@@ -62,6 +63,18 @@ export class MockPageActionsDirective {
 export class MockPageContentDirective {
   @Input('kirbyPageContent') config: fixedConfig;
 }
+
+@Component({
+  selector: 'kirby-page-progress',
+  template: '<ng-content></ng-content>',
+  providers: [
+    {
+      provide: PageProgressComponent,
+      useExisting: forwardRef(() => MockPageProgressComponent),
+    },
+  ],
+})
+export class MockPageProgressComponent {}
 
 @Component({
   selector: 'kirby-page-title',

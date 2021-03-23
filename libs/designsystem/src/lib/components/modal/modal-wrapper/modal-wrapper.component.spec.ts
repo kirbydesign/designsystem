@@ -1,13 +1,16 @@
-import { tick, fakeAsync } from '@angular/core/testing';
+import { fakeAsync, tick } from '@angular/core/testing';
 import { IonContent } from '@ionic/angular';
 import { Spectator } from '@ngneat/spectator';
 
 import { KirbyAnimation } from '../../../animation/kirby-animation';
+import { DesignTokenHelper } from '../../../helpers';
 import { TestHelper } from '../../../testing/test-helper';
 import { IconComponent } from '../../icon/icon.component';
+
 import { ModalWrapperComponent } from './modal-wrapper.component';
 import {
   DynamicFooterEmbeddedComponent,
+  DynamicPageProgressEmbeddedComponent,
   ModalWrapperTestBuilder,
 } from './modal-wrapper.testbuilder';
 
@@ -53,6 +56,55 @@ describe('ModalWrapperComponent', () => {
       const rootElement: HTMLElement = spectator.element;
       const title = rootElement.querySelector('ion-title');
       expect(window.getComputedStyle(title).fontSize).toEqual('18px');
+    });
+  });
+
+  describe('header', () => {
+    const size = DesignTokenHelper.size;
+    let ionToolbarElement: Element;
+
+    beforeEach(() => {
+      spectator = modalWrapperTestBuilder
+        .title('Test title')
+        .flavor('modal')
+        .build();
+    });
+
+    afterEach(() => {
+      // Ensure any observers are destroyed:
+      spectator.fixture.destroy();
+    });
+
+    describe('padding', () => {
+      beforeEach(() => {
+        TestHelper.resetTestWindow();
+      });
+
+      it('should have correct sizes', async () => {
+        ionToolbarElement = spectator.query('ion-toolbar');
+
+        expect(ionToolbarElement).toHaveComputedStyle({
+          '--padding-start': size('s'),
+          '--padding-end': size('s'),
+          '--padding-top': size('m'),
+          '--padding-bottom': size('s'),
+        });
+      });
+
+      describe('on small screens', () => {
+        beforeEach(async () => {
+          await TestHelper.resizeTestWindow(TestHelper.screensize.phone);
+          await TestHelper.waitForResizeObserver();
+        });
+
+        it('should have `--padding-top` to be size large', () => {
+          ionToolbarElement = spectator.query('ion-toolbar');
+
+          expect(ionToolbarElement).toHaveComputedStyle({
+            '--padding-top': size('l'),
+          });
+        });
+      });
     });
   });
 
@@ -228,6 +280,91 @@ describe('ModalWrapperComponent', () => {
       const ionContent: IonContent = spectator.query(IonContent);
       spectator.component.scrollDisabled = true;
       expect(ionContent.scrollY).toBeFalse();
+    });
+  });
+
+  describe('with embedded page progress component', () => {
+    describe('with static page progress', () => {
+      beforeEach(() => {
+        spectator = modalWrapperTestBuilder
+          .flavor('modal')
+          .withStaticPageProgress()
+          .build();
+        spectator.detectComponentChanges();
+      });
+
+      afterEach(() => {
+        // Ensure any observers are destroyed:
+        spectator.fixture.destroy();
+      });
+
+      it('should move embedded page progress to wrapper component', () => {
+        const ionContentElement = spectator.query('ion-content');
+        const ionToolbarElement = spectator.query('ion-toolbar');
+        const embeddedComponentElement = ionContentElement.firstElementChild;
+        const embeddedPageProgress = embeddedComponentElement.querySelector('kirby-page-progress');
+        const pageProgressAsIonToolbarChild = ionToolbarElement.querySelector(
+          'kirby-page-progress'
+        );
+
+        expect(embeddedPageProgress).toBeNull();
+        expect(pageProgressAsIonToolbarChild).not.toBeNull();
+      });
+    });
+
+    describe('with dynamic page progress', () => {
+      beforeEach(() => {
+        spectator = modalWrapperTestBuilder
+          .flavor('modal')
+          .withDynamicPageProgress()
+          .build();
+        spectator.detectComponentChanges();
+      });
+
+      afterEach(() => {
+        // Ensure any observers are destroyed:
+        spectator.fixture.destroy();
+      });
+
+      it('should move embedded page progress to wrapper component when rendered', async () => {
+        const pageProgressContent = spectator.element.querySelector('kirby-page-progress');
+        expect(pageProgressContent).toBeNull();
+
+        const embeddedComponent = spectator.query(DynamicPageProgressEmbeddedComponent);
+        embeddedComponent.showPageProgress = true;
+        spectator.detectChanges();
+        await TestHelper.waitForResizeObserver();
+
+        const ionContentElement = spectator.query('ion-content');
+        const ionToolbarElement = spectator.query('ion-toolbar');
+        const embeddedComponentElement = ionContentElement.firstElementChild;
+        const embeddedPageProgress = embeddedComponentElement.querySelector('kirby-page-progress');
+        const pageProgressAsIonToolbarChild = ionToolbarElement.querySelector(
+          'kirby-page-progress'
+        );
+        expect(embeddedPageProgress).toBeNull();
+        expect(pageProgressAsIonToolbarChild).not.toBeNull();
+      });
+
+      it('should remove embedded page progress content from wrapper component when not rendered', async () => {
+        let pageProgress = spectator.element.querySelector('kirby-page-progress');
+        expect(pageProgress).toBeNull();
+
+        const embeddedComponent = spectator.query(DynamicPageProgressEmbeddedComponent);
+        embeddedComponent.showPageProgress = true;
+        spectator.detectChanges();
+        await TestHelper.waitForResizeObserver();
+
+        const ionToolbarElement = spectator.query('ion-toolbar');
+        let pageProgressAsIonToolbarChild = ionToolbarElement.querySelector('kirby-page-progress');
+        expect(pageProgressAsIonToolbarChild).not.toBeNull();
+
+        embeddedComponent.showPageProgress = false;
+        spectator.detectChanges();
+
+        pageProgressAsIonToolbarChild = ionToolbarElement.querySelector('kirby-page-progress');
+        expect(pageProgressAsIonToolbarChild).toBeNull();
+      });
     });
   });
 

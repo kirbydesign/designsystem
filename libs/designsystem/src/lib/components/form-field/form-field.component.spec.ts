@@ -4,6 +4,7 @@ import { DesignTokenHelper, PlatformService } from '../../helpers';
 import { TestHelper } from '../../testing/test-helper';
 import { WindowRef } from '../../types';
 import { ItemComponent } from '../item/item.component';
+import { RadioComponent } from '../radio';
 import { RadioGroupComponent } from '../radio/radio-group/radio-group.component';
 
 import { FormFieldMessageComponent } from './form-field-message/form-field-message.component';
@@ -24,6 +25,7 @@ describe('FormFieldComponent', () => {
       InputComponent,
       TextareaComponent,
       RadioGroupComponent,
+      RadioComponent,
       InputCounterComponent,
       ItemComponent,
     ],

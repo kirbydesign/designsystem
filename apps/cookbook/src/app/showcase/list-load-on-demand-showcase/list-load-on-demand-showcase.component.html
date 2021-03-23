@@ -1,4 +1,31 @@
 <div class="example">
-  <cookbook-list-load-on-demand-example></cookbook-list-load-on-demand-example>
-  <cookbook-code-viewer [html]="exampleHtml"></cookbook-code-viewer>
+  <p>
+    The kirby list will emit a <code>loadMore</code> event, when the user has scrolled 80% of the
+    list. It is the responsibility of the consumer to add more items to the bound
+    <code>items</code>.
+  </p>
+  <p>
+    The event emitted is of type <code>KirbyLoadMoreEvent</code> which exposes a
+    <code>complete()</code> callback function.
+  </p>
+  <p>
+    The <code>complete()</code> callback function should be called when the loading of the
+    additional items are done.
+  </p>
+  <p>
+    If <code>complete(disableLoadMore?: boolean)</code> is called with the
+    <code>disableLoadMore</code> argument set to <code>true</code>, no further events will be
+    emitted. If <code>noMoreItemsText</code> is configured it will be shown at the end of the list
+    at this point.
+  </p>
 </div>
+<div class="example-wrapper">
+  <cookbook-code-viewer [html]="exampleHtml"></cookbook-code-viewer>
+  <cookbook-iphone src="/examples/list-load-on-demand" showExternalLink="true"></cookbook-iphone>
+</div>
+<h2>Properties:</h2>
+<cookbook-api-description-properties
+  [properties]="properties"
+></cookbook-api-description-properties>
+<h2>Events:</h2>
+<cookbook-api-description-events [events]="events"></cookbook-api-description-events>

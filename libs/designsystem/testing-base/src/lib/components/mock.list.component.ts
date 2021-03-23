@@ -1,9 +1,9 @@
-import { forwardRef, Component, Input, Output, EventEmitter, TrackByFunction } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, Output, TrackByFunction } from '@angular/core';
 
 import {
   ListComponent,
-  ListSwipeAction,
   ListShape,
+  ListSwipeAction,
   LoadOnDemandEvent,
   ThemeColor,
 } from '@kirbydesign/designsystem';
@@ -29,6 +29,7 @@ export class MockListComponent {
   @Input() markSelectedRow: boolean;
   @Input() shape: ListShape;
   @Input() hasItemSpacing: boolean;
+  @Input() isLoadOnDemandEnabled: boolean;
   @Input() swipeActions: ListSwipeAction[];
   @Output() loadOnDemand = new EventEmitter<LoadOnDemandEvent>();
   @Output() itemSelect = new EventEmitter<any>();

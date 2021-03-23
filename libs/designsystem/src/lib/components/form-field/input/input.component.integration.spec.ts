@@ -1,9 +1,10 @@
-import { SpectatorHost, createHostFactory } from '@ngneat/spectator';
-import { IonicModule } from '@ionic/angular';
+import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 
-import { ItemComponent } from '../../item';
-import { InputComponent } from './input.component';
 import { DesignTokenHelper } from '../../../helpers/design-token-helper';
+import { TestHelper } from '../../../testing/test-helper';
+import { ItemComponent } from '../../item';
+
+import { InputComponent } from './input.component';
 
 const size = DesignTokenHelper.size;
 
@@ -14,7 +15,7 @@ describe('InputComponent in Item', () => {
   const createHost = createHostFactory({
     component: InputComponent,
     declarations: [ItemComponent],
-    imports: [IonicModule.forRoot({ mode: 'ios', _testing: true })],
+    imports: [TestHelper.ionicModuleForTest],
   });
 
   describe('by default', () => {

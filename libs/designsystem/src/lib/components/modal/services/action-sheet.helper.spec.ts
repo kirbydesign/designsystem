@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicModule, ModalController as IonicModalController } from '@ionic/angular';
+import { ModalController as IonicModalController } from '@ionic/angular';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
+
+import { TestHelper } from '../../../testing/test-helper';
 
 import { ActionSheetHelper } from './action-sheet.helper';
 import { Overlay } from './modal.interfaces';
@@ -19,7 +21,7 @@ describe('ActionSheetHelper', () => {
 
   const createService = createServiceFactory({
     service: ActionSheetHelper,
-    imports: [IonicModule.forRoot({ mode: 'ios', _testing: true })],
+    imports: [TestHelper.ionicModuleForTest],
   });
 
   beforeEach(() => {
