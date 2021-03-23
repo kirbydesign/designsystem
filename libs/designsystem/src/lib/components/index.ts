@@ -15,7 +15,7 @@ export { ChipComponent } from './chip/chip.component';
 
 export { DividerComponent } from './divider/divider.component';
 
-export { DropdownComponent, HorizontalDirection } from './dropdown/dropdown.component';
+export { DropdownComponent } from './dropdown/dropdown.component';
 
 export { EmptyStateComponent } from './empty-state/empty-state.component';
 
@@ -25,6 +25,7 @@ export { FabSheetComponent } from './fab-sheet/fab-sheet.component';
 export { GridComponent } from './grid/grid.component';
 export { GridCardConfiguration } from './grid/grid-card-configuration';
 
+export * from './action-sheet';
 export * from './icon';
 export * from './item';
 

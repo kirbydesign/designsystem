@@ -7,10 +7,11 @@ import { MockComponents, MockDirectives } from 'ng-mocks';
 import { ButtonComponent, CardComponent, IconComponent, ItemComponent } from '..';
 import { SizeDirective } from '../../directives';
 import { DesignTokenHelper } from '../../helpers';
+import { HorizontalDirection, OpenState } from '../../models';
 import { TestHelper } from '../../testing/test-helper';
 import { ListItemTemplateDirective } from '../list';
 
-import { DropdownComponent, HorizontalDirection, OpenState } from './dropdown.component';
+import { DropdownComponent } from './dropdown.component';
 
 @Component({
   template: '<ng-content></ng-content>',

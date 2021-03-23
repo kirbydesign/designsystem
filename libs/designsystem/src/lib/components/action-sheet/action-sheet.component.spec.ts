@@ -1,19 +1,20 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
-import { By } from '@angular/platform-browser';
-import { MockComponent } from 'ng-mocks';
-import * as ionic from '@ionic/angular';
 import { CUSTOM_ELEMENTS_SCHEMA, DebugElement } from '@angular/core';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
+import * as ionic from '@ionic/angular';
+import { MockComponent } from 'ng-mocks';
+
+import { ButtonComponent } from '../button/button.component';
+import { CardHeaderComponent } from '../card/card-header/card-header.component';
+import { CardComponent } from '../card/card.component';
+import { InfiniteScrollDirective } from '../list/directives/infinite-scroll.directive';
+import { ListItemColorDirective } from '../list/directives/list-item-color.directive';
+import { ListComponent } from '../list/list.component';
+import { GroupByPipe } from '../list/pipes/group-by.pipe';
+import { SpinnerComponent } from '../spinner/spinner.component';
 
 import { ActionSheetComponent } from './action-sheet.component';
-import { ListComponent } from '../../list/list.component';
-import { CardComponent } from '../../card/card.component';
-import { GroupByPipe } from '../../list/pipes/group-by.pipe';
-import { SpinnerComponent } from '../../spinner/spinner.component';
-import { InfiniteScrollDirective } from '../../list/directives/infinite-scroll.directive';
-import { CardHeaderComponent } from '../../card/card-header/card-header.component';
-import { ButtonComponent } from '../../button/button.component';
-import { ListItemColorDirective } from '../../list/directives/list-item-color.directive';
 
 describe('ActionSheetComponent', () => {
   let component: ActionSheetComponent;

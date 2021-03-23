@@ -1,6 +1,31 @@
 <div class="example">
-  <cookbook-action-sheet-example></cookbook-action-sheet-example>
-  <cookbook-code-viewer [html]="exampleHtml"></cookbook-code-viewer>
+  <h2>Default</h2>
+  <cookbook-example-viewer [html]="defaultButtonExample.template">
+    <div>
+      <cookbook-action-sheet-example-default
+        #defaultButtonExample
+      ></cookbook-action-sheet-example-default>
+    </div>
+  </cookbook-example-viewer>
+
+  <h2>Custom Button</h2>
+  <cookbook-example-viewer [html]="customButtonExample.template">
+    <div>
+      <cookbook-action-sheet-example-custom-button
+        #customButtonExample
+      ></cookbook-action-sheet-example-custom-button>
+    </div>
+  </cookbook-example-viewer>
+
+  <h2>Open Action Sheet Programtically</h2>
+
+  <cookbook-example-viewer [html]="programticalExample.template">
+    <div>
+      <cookbook-action-sheet-example-programatically
+        #programticalExample
+      ></cookbook-action-sheet-example-programatically>
+    </div>
+  </cookbook-example-viewer>
   <p>
     To show the action sheet, create an <code>ActionSheetConfig</code> and pass it to
     <code>modalController.showActionSheet</code>. Each item must to be of type
@@ -28,6 +53,7 @@ this.modalController.showActionSheet(config);</cookbook-code-viewer>
     topmost action sheet. We can pass an optional result parameter to it, which is then going to be
     available inside the callback
   </p>
+
   <h4>Action sheet properties:</h4>
   <cookbook-api-description-properties
     [properties]="properties"

@@ -21,25 +21,15 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
+import { HorizontalDirection, OpenState, VerticalDirection } from '../../models';
 import { CardComponent } from '../card/card.component';
 import { ItemComponent } from '../item/item.component';
 import { ListItemTemplateDirective } from '../list/list.directive';
 
-export enum OpenState {
-  closed,
-  opening,
-  open,
-}
-
-export enum HorizontalDirection {
-  right = 'right',
-  left = 'left',
-}
-
-enum VerticalDirection {
-  up,
-  down,
-}
+// export enum HorizontalDirection {
+//   right = 'right',
+//   left = 'left',
+// }
 
 @Component({
   selector: 'kirby-dropdown',

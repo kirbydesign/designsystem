@@ -1,0 +1,16 @@
+<div class="button-wrapper" (click)="onToggleSheet()">
+  <button *ngIf="!customButton" kirby-button attentionLevel="4">
+    <kirby-icon name="more"></kirby-icon>
+  </button>
+  <ng-content selector="button[kirby-button]"></ng-content>
+</div>
+<kirby-action-sheet-popout
+  (cancel)="(onCancel)"
+  (itemSelect)="onItemSelect($event)"
+  cancelButtonText="cancelButtonText"
+  hideCancel="hideCancel"
+  disabled="disabled"
+  header="header"
+  subheader="subheader"
+  [items]="items"
+></kirby-action-sheet-popout>

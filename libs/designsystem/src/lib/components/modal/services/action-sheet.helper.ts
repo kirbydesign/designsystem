@@ -2,9 +2,9 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 
-import { ActionSheetPopoutComponent } from '../action-sheet-popout/action-sheet-popout.component';
-import { ActionSheetConfig } from '../action-sheet/config/action-sheet-config';
-import { ActionSheetItem } from '../action-sheet/config/action-sheet-item';
+import { ActionSheetPopoutComponent } from '../../action-sheet/action-sheet-popout/action-sheet-popout.component';
+import { ActionSheetConfig } from '../../action-sheet/config/action-sheet-config';
+import { ActionSheetItem } from '../../action-sheet/config/action-sheet-item';
 
 import { Overlay } from './modal.interfaces';
 

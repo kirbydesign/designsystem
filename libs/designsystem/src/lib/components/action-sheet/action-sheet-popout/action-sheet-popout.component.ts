@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { ActionSheetItem } from '../action-sheet/config/action-sheet-item';
+import { ActionSheetItem } from '../config/action-sheet-item';
 
 @Component({
   selector: 'kirby-action-sheet-popout',

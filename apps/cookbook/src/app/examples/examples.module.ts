@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { IconRegistryService, KirbyModule } from '@kirbydesign/designsystem';
 
 import { AccordionExampleModule } from './accordion-example/accordion-example.module';
+import { ActionSheetExampleModule } from './action-sheet-example/action-sheet-example.module';
 import { AvatarExampleModule } from './avatar-example/avatar-example.module';
 import { CardExampleComponent } from './card-example/card-example.component';
 import { ChartExampleModule } from './chart-example/chart-example.module';
@@ -39,6 +40,7 @@ const IMPORTS = [
   AccordionExampleModule,
   RadioExampleModule,
   CheckboxExampleModule,
+  ActionSheetExampleModule,
 ];
 
 @NgModule({
