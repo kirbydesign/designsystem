@@ -185,6 +185,7 @@ describe('IconComponent', () => {
     const fixture = createTestComponent('<kirby-icon></kirby-icon>');
     fixture.detectChanges();
     const el = fixture.debugElement.query(By.directive(IconComponent));
+
     expect(el.nativeElement).toHaveComputedStyle({
       'font-size': iconFontSize('sm'),
     });
@@ -197,6 +198,7 @@ describe('IconComponent', () => {
       const fixture = createTestComponent(`<kirby-icon size=${size}></kirby-icon>`);
       fixture.detectChanges();
       const el = fixture.debugElement.query(By.directive(IconComponent));
+
       expect(el.nativeElement).toHaveComputedStyle({
         'font-size': iconFontSize(`${size}`),
       });

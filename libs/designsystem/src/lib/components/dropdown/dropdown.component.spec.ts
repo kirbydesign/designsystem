@@ -889,6 +889,7 @@ describe('DropdownComponent', () => {
         const size = 'sm';
         spectator = getSpectatorWithStringSize(size);
         const button: ButtonComponent = spectator.query(ButtonComponent);
+
         expect(button.size).toBe(size);
       });
 
@@ -896,6 +897,7 @@ describe('DropdownComponent', () => {
         const size = 'md';
         spectator = getSpectatorWithStringSize(size);
         const button: ButtonComponent = spectator.query(ButtonComponent);
+
         expect(button.size).toBe(size);
       });
     });
@@ -911,6 +913,7 @@ describe('DropdownComponent', () => {
         const size = 'sm';
         spectator = getSpectatorWithStringSize(size);
         const button: ButtonComponent = spectator.query(ButtonComponent);
+
         expect(button.size).toBe(size);
       });
 
@@ -918,6 +921,7 @@ describe('DropdownComponent', () => {
         const size = 'md';
         spectator = getSpectatorWithStringSize(size);
         const button: ButtonComponent = spectator.query(ButtonComponent);
+
         expect(button.size).toBe(size);
       });
     });
@@ -933,6 +937,7 @@ describe('DropdownComponent', () => {
         const size = 'sm';
         spectator = getSpectatorWithSize(size);
         const button: ButtonComponent = spectator.query(ButtonComponent);
+
         expect(button.size).toBe(size);
       });
 
@@ -940,6 +945,7 @@ describe('DropdownComponent', () => {
         const size = 'md';
         spectator = getSpectatorWithSize(size);
         const button: ButtonComponent = spectator.query(ButtonComponent);
+
         expect(button.size).toBe(size);
       });
 
@@ -949,6 +955,7 @@ describe('DropdownComponent', () => {
           spectator = getSpectatorWithSize('md');
           spectator.setInput('size', newSize);
           const button: ButtonComponent = spectator.query(ButtonComponent);
+
           expect(button.size).toBe(newSize);
         });
       });
