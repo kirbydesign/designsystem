@@ -141,6 +141,7 @@ export class RadioGroupComponent implements AfterContentInit, ControlValueAccess
 
   setDisabledState(isDisabled: boolean) {
     this.disabled = isDisabled;
+    this.changeDetectionRef.markForCheck();
   }
 
   writeValue(value: any): void {
