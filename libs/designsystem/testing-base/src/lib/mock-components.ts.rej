@@ -1,4 +1,9 @@
 diff a/libs/designsystem/testing-base/src/lib/mock-components.ts b/libs/designsystem/testing-base/src/lib/mock-components.ts	(rejected hunks)
-@@ -31,2 +31,0 @@ import { MockLoadingOverlayComponent } from './components/mock.loading-overlay.c
--import { MockActionSheetComponent } from './components/mock.action-sheet.component';
--import { MockActionSheetPopoutComponent } from './components/mock.action-sheet-popout.component';
+@@ -24,2 +23,0 @@ import { MockFullscreenLoadingOverlayComponent } from './components/mock.fullscr
+-import { MockInputCounterComponent } from './components/mock.input-counter.component';
+-import { MockInputComponent } from './components/mock.input.component';
+@@ -37,2 +36,0 @@ import {
+-  MockPageComponent,
+-  MockPageContentComponent,
+@@ -57 +56,0 @@ import { MockTabsComponent } from './components/mock.tabs.component';
+-import { MockToggleComponent } from './components/mock.toggle.component';

@@ -1,7 +1,5 @@
 import { MockAccordionItemComponent } from './components/mock.accordion-item.component';
 import { MockActionSheetPopoutComponent } from './components/mock.action-sheet-popout.component';
-import { MockActionSheetPopoutComponent } from './components/mock.action-sheet-popout.component';
-import { MockActionSheetComponent } from './components/mock.action-sheet.component';
 import { MockActionSheetComponent } from './components/mock.action-sheet.component';
 import { MockAppComponent } from './components/mock.app.component';
 import { MockAvatarComponent } from './components/mock.avatar.component';
@@ -24,6 +22,8 @@ import { MockFullscreenLoadingOverlayComponent } from './components/mock.fullscr
 import { MockGridComponent } from './components/mock.grid.component';
 import { MockIconComponent } from './components/mock.icon.component';
 import { MockInputCounterComponent } from './components/mock.input-counter.component';
+import { MockInputCounterComponent } from './components/mock.input-counter.component';
+import { MockInputComponent } from './components/mock.input.component';
 import { MockInputComponent } from './components/mock.input.component';
 import { MockItemComponent } from './components/mock.item.component';
 import { MockLabelComponent } from './components/mock.label.component';
@@ -37,6 +37,8 @@ import {
   MockPageActionsComponent,
   MockPageActionsDirective,
   MockPageComponent,
+  MockPageComponent,
+  MockPageContentComponent,
   MockPageContentComponent,
   MockPageContentDirective,
   MockPageProgressComponent,
@@ -56,6 +58,7 @@ import { MockTabButtonComponent } from './components/mock.tab-button.component';
 import { MockTabsComponent } from './components/mock.tabs.component';
 import { MockTextareaComponent } from './components/mock.textarea.component';
 import { MockToggleButtonComponent } from './components/mock.toggle-button.component';
+import { MockToggleComponent } from './components/mock.toggle.component';
 import { MockToggleComponent } from './components/mock.toggle.component';
 import { MockToolbarComponent } from './components/mock.toolbar.component';
 
