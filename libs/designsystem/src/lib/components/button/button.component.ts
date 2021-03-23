@@ -48,6 +48,11 @@ export class ButtonComponent implements AfterContentInit {
     return this._isIconRight;
   }
 
+  @HostBinding('class')
+  get _cssClass() {
+    return [this.themeColor, this.size];
+  }
+
   @Input() set attentionLevel(level: '1' | '2' | '3' | '4') {
     this.isAttentionLevel1 = level === '1';
     this.isAttentionLevel2 = level === '2';
@@ -57,7 +62,6 @@ export class ButtonComponent implements AfterContentInit {
   @Input() set isDestructive(state: boolean) {
     this.destructive = state;
   }
-  @HostBinding('class')
   @Input()
   themeColor: NotificationColor;
   @Input() expand: 'full' | 'block';
