@@ -11,7 +11,7 @@
       "@ionic/angular": "ionic"
     }
   },
-  "whitelistedNonPeerDependencies": [
+  "allowedNonPeerDependencies": [
     "@angular/cdk",
     "@ionic/angular",
     "highcharts",
