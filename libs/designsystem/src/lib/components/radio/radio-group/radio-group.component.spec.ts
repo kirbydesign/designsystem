@@ -995,7 +995,7 @@ describe('RadioGroupComponent', () => {
             expect(radioChecked(2)).toBeTrue();
           });
 
-          it('should not emit change event when the bound form group control is updated', async () => {
+          it('should not emit change event when the bound form control is updated', async () => {
             const onChangeSpy = spyOn(spectator.component.valueChange, 'emit');
             favoriteFoodControl.setValue(textItems[2]);
             await TestHelper.waitForTimeout();
@@ -1041,13 +1041,13 @@ describe('RadioGroupComponent', () => {
             expect(spectator.component.selectedIndex).toBe(defaultSelectedIndex);
           });
 
-          it('should update the bound form group control when clicking a radio item', () => {
+          it('should update the bound form control when clicking a radio item', () => {
             spectator.click(ionRadioElements[1]);
 
             expect(favoriteFoodControl.value).toEqual(textItems[1]);
           });
 
-          it('should update the value of ion-radio-group when the form group control is updated', async () => {
+          it('should update the value of ion-radio-group when the form control is updated', async () => {
             favoriteFoodControl.setValue(textItems[2]);
 
             await TestHelper.waitForTimeout();
@@ -1056,7 +1056,7 @@ describe('RadioGroupComponent', () => {
             expect(ionRadioGroup.value).toEqual(textItems[2]);
           });
 
-          it('should update the selected radio when the bound form group control is updated', async () => {
+          it('should update the selected radio when the bound form control is updated', async () => {
             favoriteFoodControl.setValue(textItems[2]);
 
             await TestHelper.waitForTimeout();
@@ -1068,7 +1068,7 @@ describe('RadioGroupComponent', () => {
             expect(radioChecked(2)).toBeTrue();
           });
 
-          it('should not emit change event when the bound form group control is updated', async () => {
+          it('should not emit change event when the bound form control is updated', async () => {
             const onChangeSpy = spyOn(spectator.component.valueChange, 'emit');
             favoriteFoodControl.setValue(textItems[2]);
 
@@ -1084,7 +1084,7 @@ describe('RadioGroupComponent', () => {
             radios.forEach((each) => expect(each.disabled).toBeUndefined());
           });
 
-          it('should disable the radio items when the form group control is disabled', async () => {
+          it('should disable the radio items when the bound form control is disabled', async () => {
             favoriteFoodControl.disable();
             await TestHelper.waitForTimeout();
             spectator.detectChanges();
@@ -1092,7 +1092,7 @@ describe('RadioGroupComponent', () => {
             radios.forEach((each) => expect(each.disabled).toBeTrue());
           });
 
-          xit('should re-enable the radio items when the form group control is enabled', async () => {
+          xit('should re-enable the radio items when the bound form control is enabled', async () => {
             favoriteFoodControl.disable();
 
             radios.forEach((each) => expect(each.disabled).toBeTrue());
@@ -1102,7 +1102,7 @@ describe('RadioGroupComponent', () => {
             radios.forEach((each) => expect(each.disabled).toBeUndefined());
           });
 
-          xit('should disable the radio items if items are set after the form group control is disabled', async () => {
+          xit('should disable the radio items if items are set after the bound form control is disabled', async () => {
             spectator.setHostInput('items', null);
             favoriteFoodControl.disable();
             await TestHelper.waitForTimeout();
@@ -1118,7 +1118,7 @@ describe('RadioGroupComponent', () => {
         });
       });
 
-      describe('error state when form group control is required', () => {
+      describe('error state when the bound form control is required', () => {
         beforeEach(async () => {
           favoriteFoodControl = new FormControl(
             textItems[defaultSelectedIndex],
@@ -1141,12 +1141,12 @@ describe('RadioGroupComponent', () => {
           );
         });
 
-        describe('when form control is not null', () => {
+        describe('when the bound form control is not null', () => {
           beforeEach(async () => {
             await setFormGroupControl(textItems[defaultSelectedIndex]);
           });
 
-          describe('and form control is touched', async () => {
+          describe('and the bound form control is touched', async () => {
             beforeEach(async () => {
               await touchRadioGroup();
             });
@@ -1157,7 +1157,7 @@ describe('RadioGroupComponent', () => {
             });
           });
 
-          describe('and form control is untouched', async () => {
+          describe('and the bound form control is untouched', async () => {
             beforeEach(async () => {
               favoriteFoodControl.markAsUntouched();
               await TestHelper.waitForTimeout();
@@ -1171,12 +1171,12 @@ describe('RadioGroupComponent', () => {
           });
         });
 
-        describe('When form control is null', () => {
+        describe('When the bound form control is null', () => {
           beforeEach(async () => {
             setFormGroupControl(null);
           });
 
-          describe('and form control is touched', () => {
+          describe('and the bound form control is touched', () => {
             beforeEach(async () => {
               await touchRadioGroup();
             });
@@ -1187,7 +1187,7 @@ describe('RadioGroupComponent', () => {
             });
           });
 
-          describe('and form control is untouched', () => {
+          describe('and the bound form control is untouched', () => {
             beforeEach(async () => {
               favoriteFoodControl.markAsUntouched();
               await TestHelper.waitForTimeout();
