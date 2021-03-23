@@ -39,8 +39,8 @@ const IMPORTS = [
   ToggleButtonExampleModule,
   AccordionExampleModule,
   RadioExampleModule,
-  RangeExampleModule,
   CheckboxExampleModule,
+  RangeExampleModule,
 ];
 
 @NgModule({

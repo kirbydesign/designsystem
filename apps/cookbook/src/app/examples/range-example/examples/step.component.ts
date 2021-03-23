@@ -13,6 +13,22 @@ const config = {
      </kirby-range>
     </form>
   `,
+  codeSnippet: `public rangeFormStep: FormGroup;
+  public get kirbyRangeName(): AbstractControl {
+    return this.rangeFormStep.get('kirbyRangeName');
+  }
+
+  @Output() value: RangeValue;
+
+  constructor(private formBuilder: FormBuilder) {}
+  ngOnInit(): void {
+    this.rangeFormStep = this.formBuilder.group({
+      kirbyRangeName: [{ value: '10', disabled: false }],
+    });
+  }
+  valueChanged(value: RangeValue): void {
+    this.value = value;
+  }`,
 };
 
 @Component({

@@ -12,6 +12,19 @@ const config = {
      </kirby-range>
     </form>
   `,
+  codeSnippet: `public rangeFormDisabled: FormGroup;
+  public get kirbyRangeName(): AbstractControl {
+    return this.rangeFormDisabled.get('kirbyRangeName');
+  }
+
+  @Output() value: RangeValue;
+
+  constructor(private formBuilder: FormBuilder) {}
+  ngOnInit(): void {
+    this.rangeFormDisabled = this.formBuilder.group({
+      kirbyRangeName: [{ value: '1', disabled: true }],
+    });
+  }`,
 };
 
 @Component({

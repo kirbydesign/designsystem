@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   Component,
   ElementRef,
   EventEmitter,
@@ -45,9 +44,8 @@ export class RangeComponent implements ControlValueAccessor {
   @Input() step: number;
   @Input() ticks: number;
   @Output() valueChange: EventEmitter<RangeValue> = new EventEmitter<RangeValue>();
-  @Input() startLabel: string;
-  @Input() endLabel: string;
-  @Input() disabled: boolean;
+
+  @Output() disabled: boolean;
   private currentValue: RangeValue;
 
   constructor() {}

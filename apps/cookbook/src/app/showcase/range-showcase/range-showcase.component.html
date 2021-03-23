@@ -1,35 +1,37 @@
-<p>
-  Range is a control that allows the user to select between a range of values
-</p>
+<div class="example">
+  <p>
+    Range is a control that allows the user to select between a range of values
+  </p>
 
-<h2>Simple (Default) range with Reactive Form support</h2>
-<p>
-  <cookbook-example-viewer [html]="defaultExample.template">
-    <cookbook-range-default-example #defaultExample></cookbook-range-default-example>
-  </cookbook-example-viewer>
-</p>
+  <h2>Simple (Default) range with Reactive Form support</h2>
+  <p>
+    <cookbook-example-viewer [html]="defaultExample.template" [ts]="defaultExample.codeSnippet">
+      <cookbook-range-default-example #defaultExample></cookbook-range-default-example>
+    </cookbook-example-viewer>
+  </p>
 
-<h2>Range with pin and snap step</h2>
-<p>
-  <cookbook-example-viewer [html]="stepExample.template">
-    <cookbook-range-step-example #stepExample></cookbook-range-step-example>
-  </cookbook-example-viewer>
-</p>
+  <h2>Range with pin and snap step and selected value emitted to external component</h2>
+  <p>
+    <cookbook-example-viewer [html]="stepExample.template" [ts]="stepExample.codeSnippet">
+      <cookbook-range-step-example #stepExample></cookbook-range-step-example>
+    </cookbook-example-viewer>
+  </p>
 
-<h2>Range with value shown in external component</h2>
-<p>
-  <cookbook-example-viewer [html]="visibleValueExample.template">
-    <cookbook-range-visible-value-example
-      #visibleValueExample
-    ></cookbook-range-visible-value-example>
-  </cookbook-example-viewer>
-</p>
-
-<h2>Disabled Range using Reactive Forms</h2>
-<p>
-  <cookbook-example-viewer [html]="disabledFormExample.template">
-    <cookbook-range-disabled-form-example
-      #disabledFormExample
-    ></cookbook-range-disabled-form-example>
-  </cookbook-example-viewer>
-</p>
+  <h2>Disabled Range using Reactive Forms</h2>
+  <p>
+    <cookbook-example-viewer
+      [html]="disabledFormExample.template"
+      [ts]="disabledFormExample.codeSnippet"
+    >
+      <cookbook-range-disabled-form-example
+        #disabledFormExample
+      ></cookbook-range-disabled-form-example>
+    </cookbook-example-viewer>
+  </p>
+  <h2>Properties:</h2>
+  <cookbook-api-description-properties
+    [properties]="rangeProperties"
+  ></cookbook-api-description-properties>
+  <h2>Events:</h2>
+  <cookbook-api-description-events [events]="rangeEvents"></cookbook-api-description-events>
+</div>

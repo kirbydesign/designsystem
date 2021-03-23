@@ -49,7 +49,6 @@ import { PageFixedFooterTabExampleComponent } from './page-example/fixed-footer-
 import { PageFixedTitleAndActionsExampleComponent } from './page-example/fixed-title-and-actions/page-fixed-title-and-actions-example.component';
 import { PageSimpleExampleComponent } from './page-example/simple/page-simple-example.component';
 import { ProgressCircleExampleComponent } from './progress-circle-example/progress-circle-example.component';
-import { RangeExampleComponent } from './range-example/range-example.component';
 import { ReorderListExampleComponent } from './reorder-list-example/reorder-list-example.component';
 import { SegmentedControlExampleComponent } from './segmented-control-example/segmented-control-example.component';
 import { SlideButtonExampleComponent } from './slide-button-example/slide-button-example.component';
@@ -141,7 +140,6 @@ export const COMPONENT_DECLARATIONS: any[] = [
   SlidesExampleComponent,
   CookbookExampleCardContentComponent,
   AccordionExampleComponent,
-  RangeExampleComponent,
 ];
 
 // Configure custom icons (used by example to show the usage of custom icons)
