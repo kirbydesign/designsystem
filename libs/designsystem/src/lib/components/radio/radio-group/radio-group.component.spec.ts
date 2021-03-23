@@ -1146,30 +1146,29 @@ describe('RadioGroupComponent', () => {
           });
         });
 
-        xdescribe('enablement', () => {
-          xit('should not disable the radio items by default', () => {
+        describe('enablement', () => {
+          it('should not disable the radio items by default', () => {
             radios.forEach((each) => expect(each.disabled).toBeUndefined());
           });
 
           it('should disable the radio items when the bound form group control is disabled', async () => {
             favoriteFoodControl.disable();
-            await TestHelper.waitForTimeout();
             spectator.detectChanges();
 
             radios.forEach((each) => expect(each.disabled).toBeTrue());
           });
 
-          xit('should re-enable the radio items when the bound form group control is enabled', async () => {
+          it('should re-enable the radio items when the bound form group control is enabled', async () => {
             favoriteFoodControl.disable();
-
+            spectator.detectChanges();
             radios.forEach((each) => expect(each.disabled).toBeTrue());
 
             favoriteFoodControl.enable();
-
+            spectator.detectChanges();
             radios.forEach((each) => expect(each.disabled).toBeUndefined());
           });
 
-          xit('should disable the radio items if items are set after the bound form group control is disabled', async () => {
+          it('should disable the radios if radios are set after the bound form group control is disabled', async () => {
             spectator.setHostInput('items', null);
             favoriteFoodControl.disable();
             await TestHelper.waitForTimeout();
@@ -1179,7 +1178,7 @@ describe('RadioGroupComponent', () => {
             await TestHelper.waitForTimeout();
             spectator.detectChanges();
 
-            // radios = spectator.queryAll(RadioComponent);
+            radios = spectator.queryAll(RadioComponent);
             radios.forEach((each) => expect(each.disabled).toBeTrue());
           });
         });
