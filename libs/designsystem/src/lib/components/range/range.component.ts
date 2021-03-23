@@ -28,7 +28,7 @@ export type RangeValue = number | { lower: number; upper: number };
   ],
   encapsulation: ViewEncapsulation.None,
 })
-export class RangeComponent implements AfterViewInit, ControlValueAccessor {
+export class RangeComponent implements ControlValueAccessor {
   @ViewChild('ionRange', { static: false }) ionRange: IonRange;
   @ViewChild(IonRange, { read: ElementRef }) ionRangeElementRef: ElementRef;
 
@@ -89,15 +89,4 @@ export class RangeComponent implements AfterViewInit, ControlValueAccessor {
   public registerOnChange(fn: any): void {
     this.propagateChange = fn;
   }
-
-  /*
-    @Input() get disabled(): boolean {
-      if (!this.ionRange) return false;
-      if (this.ionRange.disabled === undefined) {
-        return false;
-      }
-      return this.ionRange.disabled;
-    }*/
-
-  ngAfterViewInit(): void {}
 }

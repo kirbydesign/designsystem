@@ -1,4 +1,6 @@
+import { Container } from '@angular/compiler/src/i18n/i18n_ast';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule, IonRange } from '@ionic/angular';
 import {
   createComponentFactory,
@@ -22,7 +24,7 @@ const createComponent = createComponentFactory({
 const createHost = createHostFactory({
   component: RangeComponent,
   declarations: [RangeComponent, IonRange],
-  imports: [IonicModule.forRoot({ mode: 'ios', _testing: true })],
+  imports: [FormsModule, ReactiveFormsModule, IonicModule.forRoot({ mode: 'ios', _testing: true })],
   providers: [
     {
       provide: WindowRef,
@@ -37,7 +39,7 @@ describe('RangeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [RangeComponent, IonRange],
+      declarations: [RangeComponent],
     }).compileComponents();
   }));
 
@@ -54,57 +56,66 @@ describe('RangeComponent', () => {
 
 describe('RangeComponent default properties', () => {
   let spectator: Spectator<RangeComponent>;
+  let testFormControl: FormControl;
 
   beforeEach(() => {
+    testFormControl = new FormControl('');
     spectator = createHost(
       `
-        <kirby-range minLabel="Min" maxLabel="Max">
-        <ion-range value="30" 
-            ticks=true  step="1" 
-            pin="true" snaps="true" max="42" min="30" 
-       >
-        </ion-range>
-     </kirby-range>`
+        <kirby-range minLabel="Min" maxLabel="Max" 
+                    ticks=true  step="1" 
+            pin="true" snaps="true" max="42" min="30" [formControl]="testFormControl">
+     </kirby-range>`,
+      {
+        hostProps: { testFormControl },
+      }
     );
   });
 
   it('should not be disabled', () => {
+    spectator.component.disabled = false;
     expect(spectator.component.disabled).toBe(false);
   });
   it('should set disabled state', () => {
-    spectator.component.ionRange.disabled = true;
+    spectator.component.disabled = true;
     expect(spectator.component.disabled).toBe(true);
   });
+
   it('should set value', () => {
-    expect(spectator.component.ionRange.value).toBe(30);
+    testFormControl.setValue(30);
+    spectator.detectChanges();
+    expect(spectator.component.value).toBe(30);
+
     const expectedValue = 35;
-    spectator.component.ionRange.value = expectedValue;
-    expect(spectator.component.ionRange.value).toBe(expectedValue);
+    spectator.component.value = expectedValue;
+    expect(spectator.component.value).toBe(expectedValue);
   });
 });
 
 describe('RangeComponent design properties', () => {
   let spectator: Spectator<RangeComponent>;
+  let testFormControl: FormControl;
   beforeEach(() => {
+    testFormControl = new FormControl('');
     spectator = createHost(
       `
-        <kirby-range minLabel="Min" maxLabel="Max">
-        <ion-range
-            ticks=true  step="1"
-            pin=true snaps=true max="25" min="1" 
-       >
-        </ion-range>
-     </kirby-range>`
+        <kirby-range minLabel="Min" maxLabel="Max"  ticks=true  step="1"
+            pin=true snaps=true max="25" min="1" [formControl]="testFormControl">
+     </kirby-range>`,
+      {
+        hostProps: { testFormControl },
+      }
     );
   });
-  it('to be correct', () => {
-    //  expect(spectator.component.value).toBe('1');
-    expect(spectator.component.ionRange.max.toString()).toBe('25');
-    expect(spectator.component.ionRange.min.toString()).toBe('1');
-    expect(spectator.component.ionRange.ticks).toBeTruthy();
-    expect(spectator.component.ionRange.step.toString()).toBe('1');
-    expect(spectator.component.ionRange.pin).toBeTruthy();
-    expect(spectator.component.ionRange.snaps).toBeTruthy();
+  it('should have correct properties', () => {
+    testFormControl.setValue(30);
+    spectator.detectChanges();
+    expect(spectator.component.max.toString(10)).toBe('25');
+    expect(spectator.component.min.toString(10)).toBe('1');
+    expect(spectator.component.ticks).toBeTruthy();
+    expect(spectator.component.step.toString(10)).toBe('1');
+    expect(spectator.component.pin).toBeTruthy();
+    expect(spectator.component.snaps).toBeTruthy();
     expect(spectator.component.minLabel).toBe('Min');
     expect(spectator.component.maxLabel).toBe('Max');
   });
@@ -113,8 +124,12 @@ describe('RangeComponent design properties', () => {
 describe('Integration test of RangeComponent', () => {
   let spectator: SpectatorHost<RangeComponent>;
   let ionRangeElement: HTMLIonRangeElement;
+  let testFormControl: FormControl;
   beforeEach(() => {
-    spectator = createHost(`<kirby-range><ion-range></ion-range></kirby-range>`);
+    testFormControl = new FormControl('');
+    spectator = createHost(`<kirby-range></kirby-range>`, {
+      hostProps: { testFormControl },
+    });
     ionRangeElement = spectator.query('ion-range');
   });
 
@@ -126,9 +141,14 @@ describe('Integration test of RangeComponent', () => {
 
 describe('Min and Max Label ', () => {
   let spectator: SpectatorHost<RangeComponent>;
+  let testFormControl: FormControl;
 
   it('should not be present', () => {
-    spectator = createHost(`<kirby-range><ion-range></ion-range></kirby-range>`);
+    testFormControl = new FormControl('');
+
+    spectator = createHost(`<kirby-range></kirby-range>`, {
+      hostProps: { testFormControl },
+    });
     const minLabelElement = spectator.query('.min-label');
     const maxLabelElement = spectator.query('.max-label');
     expect(minLabelElement).toBeNull();
@@ -136,11 +156,19 @@ describe('Min and Max Label ', () => {
   });
 
   it('should render the min and max labels with correct text', () => {
+    testFormControl = new FormControl('');
     spectator = createHost(
-      `<kirby-range minLabel="min" maxLabel="max"><ion-range></ion-range></kirby-range>`
+      `<kirby-range minLabel="min" maxLabel="max" [formControl]="testFormControl"></kirby-range>`,
+      {
+        hostProps: { testFormControl },
+      }
     );
+
+    spectator.detectChanges();
+
     const minLabelElement = spectator.query('.min-label');
     const maxLabelElement = spectator.query('.max-label');
+
     expect(minLabelElement).not.toBeNull();
     expect(maxLabelElement).not.toBeNull();
     expect(minLabelElement.innerHTML).toBe('min');
@@ -148,8 +176,12 @@ describe('Min and Max Label ', () => {
   });
 
   it('should verify that the disabled class is NOT applied', () => {
+    testFormControl = new FormControl('');
     spectator = createHost(
-      `<kirby-range minLabel="min" maxLabel="max"><ion-range></ion-range></kirby-range>`
+      `<kirby-range minLabel="min" maxLabel="max" [formControl]="testFormControl"></kirby-range>`,
+      {
+        hostProps: { testFormControl },
+      }
     );
 
     const minLabelElement = spectator.query('.min-label');
@@ -161,9 +193,31 @@ describe('Min and Max Label ', () => {
     expect(maxLabelElement.classList.contains('disabled')).toBe(false);
   });
 
-  it('should verify the the disabled class is applied', () => {
+  it('should verify that the disabled class is NOT applied using formcontrol value', () => {
+    testFormControl = new FormControl({ value: '42', disabled: false });
     spectator = createHost(
-      `<kirby-range minLabel="min" maxLabel="max" [disabled]="true"><ion-range></ion-range></kirby-range>`
+      `<kirby-range minLabel="min" maxLabel="max" [formControl]="testFormControl"></kirby-range>`,
+      {
+        hostProps: { testFormControl },
+      }
+    );
+    const minLabelElement = spectator.query('.min-label');
+    const maxLabelElement = spectator.query('.max-label');
+    expect(minLabelElement).not.toBeNull();
+    expect(maxLabelElement).not.toBeNull();
+    console.log(minLabelElement);
+    expect(minLabelElement.classList.contains('disabled')).toBe(false);
+    expect(maxLabelElement.classList.contains('disabled')).toBe(false);
+  });
+
+  it('should verify the the disabled class is applied using formcontrol value', () => {
+    testFormControl = new FormControl({ value: '42', disabled: true });
+
+    spectator = createHost(
+      `<kirby-range minLabel="min" maxLabel="max" [formControl]="testFormControl"></kirby-range>`,
+      {
+        hostProps: { testFormControl },
+      }
     );
     spectator.detectChanges();
 
@@ -171,7 +225,6 @@ describe('Min and Max Label ', () => {
     const maxLabelElement = spectator.query('.max-label');
     expect(minLabelElement).not.toBeNull();
     expect(maxLabelElement).not.toBeNull();
-    console.log(minLabelElement);
     expect(minLabelElement.classList.contains('disabled')).toBe(true);
     expect(maxLabelElement.classList.contains('disabled')).toBe(true);
   });
@@ -179,9 +232,14 @@ describe('Min and Max Label ', () => {
 
 describe('Default Styling of RangeComponent', () => {
   let spectator: SpectatorHost<RangeComponent>;
+  let testFormControl: FormControl;
   beforeEach(() => {
+    testFormControl = new FormControl('');
     spectator = createHost(
-      `<kirby-range minLabel="min" maxLabel="max"><ion-range></ion-range></kirby-range>`
+      `<kirby-range minLabel="min" maxLabel="max" [formControl]="testFormControl"></kirby-range>`,
+      {
+        hostProps: { testFormControl },
+      }
     );
   });
 
@@ -200,9 +258,13 @@ describe('Default Styling of RangeComponent', () => {
 describe('Ion-Range', () => {
   let spectator: SpectatorHost<RangeComponent>;
   let ionRangeElement: HTMLIonRangeElement;
+  let testFormControl: FormControl;
 
   beforeEach(async () => {
-    spectator = createHost(`<kirby-range><ion-range></ion-range></kirby-range>`);
+    testFormControl = new FormControl('');
+    spectator = createHost(`<kirby-range [formControl]="testFormControl"></kirby-range>`, {
+      hostProps: { testFormControl },
+    });
     ionRangeElement = spectator.query('ion-range');
     // await TestHelper.whenReady(ionRangeElement);
     await TestHelper.whenTrue(() => ionRangeElement.shadowRoot !== null, 10000, 1);
