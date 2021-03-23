@@ -710,7 +710,74 @@ describe('RadioGroupComponent', () => {
     });
   });
 
-  fdescribe('when used in a form', () => {
+  fdescribe('implementing ControlValueAccessor interface', () => {
+    const textItems = ['Bacon', 'Sausage', 'Onion'];
+    const defaultSelectedIndex = 1;
+
+    let spectator: SpectatorHost<
+      RadioGroupComponent,
+      {
+        items: string[];
+      }
+    >;
+
+    beforeEach(() => {
+      spectator = createHost(
+        `<kirby-radio-group [items]="items" [(ngModel)]="selected">
+        </kirby-radio-group>`,
+        {
+          hostProps: {
+            items: textItems,
+          },
+        }
+      );
+    });
+
+    describe('when writeValue() function is invoked', () => {
+      it('should select the radio', () => {
+        const expectedItem = textItems[defaultSelectedIndex];
+        spectator.component.writeValue(expectedItem);
+        expect(spectator.component.value).toEqual(expectedItem);
+      });
+
+      it('should not emit change event', () => {
+        const onChangeSpy = spyOn(spectator.component.valueChange, 'emit');
+        spectator.component.writeValue(textItems[defaultSelectedIndex]);
+        expect(onChangeSpy).not.toHaveBeenCalled();
+      });
+    });
+
+    it('should invoke callback from registerOnChange() function on change', () => {
+      const expectedItem = textItems[defaultSelectedIndex];
+      const onChangeSpy = jasmine.createSpy('_onChangeCallback');
+      spectator.component.registerOnChange(onChangeSpy);
+      spectator.component._onChange(expectedItem);
+      expect(onChangeSpy).toHaveBeenCalledWith(expectedItem);
+    });
+
+    it('should invoke callback from registerOnTouched() function on blur', () => {
+      const onTouchedSpy = jasmine.createSpy('_onTouched');
+      spectator.component.registerOnTouched(onTouchedSpy);
+      spectator.component._onRadioBlur();
+      expect(onTouchedSpy).toHaveBeenCalled();
+    });
+
+    describe('when setDisabledState() function is invoked', () => {
+      it('should set disabled = false when invoked with false', () => {
+        spectator.component.disabled = true;
+        spectator.component.setDisabledState(false);
+        expect(spectator.component.disabled).toBeFalsy();
+      });
+
+      it('should set disabled = true when invoked with true', () => {
+        spectator.component.disabled = false;
+        spectator.component.setDisabledState(true);
+        expect(spectator.component.disabled).toBeTruthy();
+      });
+    });
+  });
+
+  describe('when used in a form', () => {
     let ionRadioGroup: IonRadioGroup;
     let ionRadioElements: HTMLIonRadioElement[];
     let radios: RadioComponent[];
