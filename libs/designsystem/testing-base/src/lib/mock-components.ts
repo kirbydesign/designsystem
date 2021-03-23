@@ -1,5 +1,7 @@
 import { MockAccordionItemComponent } from './components/mock.accordion-item.component';
 import { MockActionSheetPopoutComponent } from './components/mock.action-sheet-popout.component';
+import { MockActionSheetPopoutComponent } from './components/mock.action-sheet-popout.component';
+import { MockActionSheetComponent } from './components/mock.action-sheet.component';
 import { MockActionSheetComponent } from './components/mock.action-sheet.component';
 import { MockAppComponent } from './components/mock.app.component';
 import { MockAvatarComponent } from './components/mock.avatar.component';
@@ -59,6 +61,8 @@ import { MockToolbarComponent } from './components/mock.toolbar.component';
 
 export const MOCK_COMPONENTS = [
   MockAccordionItemComponent,
+  MockActionSheetPopoutComponent,
+  MockActionSheetComponent,
   MockAppComponent,
   MockAvatarComponent,
   MockBadgeComponent,
@@ -88,8 +92,6 @@ export const MOCK_COMPONENTS = [
   MockListComponent,
   MockFullscreenLoadingOverlayComponent,
   MockLoadingOverlayComponent,
-  MockActionSheetComponent,
-  MockActionSheetPopoutComponent,
   MockModalFooterComponent,
   MockPageFooterComponent,
   MockPageTitleDirective,

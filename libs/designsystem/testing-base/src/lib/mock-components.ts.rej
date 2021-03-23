@@ -1,0 +1,4 @@
+diff a/libs/designsystem/testing-base/src/lib/mock-components.ts b/libs/designsystem/testing-base/src/lib/mock-components.ts	(rejected hunks)
+@@ -31,2 +31,0 @@ import { MockLoadingOverlayComponent } from './components/mock.loading-overlay.c
+-import { MockActionSheetComponent } from './components/mock.action-sheet.component';
+-import { MockActionSheetPopoutComponent } from './components/mock.action-sheet-popout.component';
