@@ -12,7 +12,8 @@
           "builder": "@nrwl/angular:package",
           "options": {
             "tsConfig": "libs/designsystem/tsconfig.lib.json",
-            "project": "libs/designsystem/ng-package.json"
+            "project": "libs/designsystem/ng-package.json",
+            "buildableProjectDepsInPackageJsonType": "dependencies"
           }
         },
         "lint": {
@@ -32,7 +33,8 @@
             "tsConfig": "libs/designsystem/tsconfig.spec.json",
             "karmaConfig": "libs/designsystem/karma.conf.js",
             "styles": ["libs/designsystem/src/lib/testing/styles.scss"]
-          }
+          },
+          "outputs": ["coverage/libs/designsystem"]
         }
       },
       "schematics": {
@@ -162,7 +164,8 @@
             "styles": [],
             "scripts": [],
             "assets": []
-          }
+          },
+          "outputs": ["coverage/apps/cookbook"]
         }
       }
     },
