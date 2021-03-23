@@ -3,39 +3,42 @@ import { Component, OnInit } from '@angular/core';
 const config = {
   selector: 'cookbook-radio-template-driven-forms-example',
   template: `
-        <kirby-radio-group #group="ngModel" [(ngModel)]="selected" required>
-            <kirby-item kirby-item *ngFor="let item of items" selectable="true">
-                <kirby-radio [value]="item" slot="start"></kirby-radio>
-                <kirby-label>{{item.title}}</kirby-label>
-            </kirby-item>
-        </kirby-radio-group>
-        <fieldset>
-            <legend>
-                Configuration
-            </legend>
-            <button kirby-button
-                    size="sm"
-                    attentionLevel="2"
-                    [disabled]="selected === null"
-                    (click)="selected = null">
-                Clear
-            </button>
-            <p class="selection">
-                <b>
-                    Selected:
-                </b>
-                {{selected | json}}
-                <br/>
-              <span [class.state-true]="group.valid"><b>valid:</b> {{ group.valid }}</span>
-              <br/>
-              <span ><b>errors:</b> {{ group.errors | json }}</span>
-              <br/>
-              <span [class.state-true]="group.enabled"><b>enabled:</b> {{ group.enabled }}</span>
-              <br/>
-              <span [class.state-true]="group.touched"><b>touched:</b> {{ group.touched }}</span>
-
-            </p>
-        </fieldset>
+    <kirby-radio-group #group="ngModel" [(ngModel)]="selected" required>
+        <kirby-item kirby-item *ngFor="let item of items" selectable="true">
+            <kirby-radio [value]="item" slot="start"></kirby-radio>
+            <kirby-label>{{item.title}}</kirby-label>
+        </kirby-item>
+    </kirby-radio-group>
+    <fieldset>
+        <legend>
+            Configuration
+        </legend>
+        <button kirby-button
+                size="sm"
+                attentionLevel="2"
+                [disabled]="selected === null"
+                (click)="selected = null">
+            Clear
+        </button>
+        <p class="selection">
+            <b>Selected:</b>
+            {{selected | json}}
+            <br/>
+          <span [class.state-true]="group.valid">
+              <b>valid:</b>
+              {{ group.valid }}
+          </span>
+          <br/>
+          <span ><b>errors:</b> {{ group.errors | json }}</span>
+          <br/>
+          <span [class.state-true]="group.enabled">
+              <b>enabled:</b>
+              {{ group.enabled }}
+          </span>
+          <br/>
+          <span [class.state-true]="group.touched"><b>touched:</b> {{ group.touched }}</span>
+        </p>
+    </fieldset>
     `,
   styles: [
     `.selection {
@@ -71,13 +74,9 @@ selected = null;`,
     `,
   ],
 })
-export class RadioTemplateDrivenFormsExampleComponent implements OnInit {
+export class RadioTemplateDrivenFormsExampleComponent {
   template: string = config.template;
   codeSnippet: string = config.codeSnippet;
-
-  ngOnInit() {
-    this.selected = this.items[1];
-  }
 
   items = [
     { title: 'Bacon', value: 1 },
