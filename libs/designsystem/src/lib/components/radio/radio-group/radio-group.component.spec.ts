@@ -6,12 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { IonRadioGroup } from '@ionic/angular';
-import {
-  createHostFactory,
-  HostComponent,
-  SpectatorHost,
-  SpectatorHostFactory,
-} from '@ngneat/spectator';
+import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { Observable, of } from 'rxjs';
 
 import { TestHelper } from '../../../testing/test-helper';
