@@ -29,11 +29,23 @@ export class SlidesShowcaseComponent {
       defaultValue: '',
       type: ['DataArray'],
     },
+    {
+      name: 'slideIndex',
+      description: 'The index of any given slide',
+      defaultValue: '',
+      type: ['number'],
+    },
+    {
+      name: 'activeSlideIndex',
+      description: 'The index of the active slide',
+      defaultValue: '0',
+      type: ['number'],
+    },
   ];
   events: ApiDescriptionEvent[] = [
     {
       name: 'selectedSlide',
-      description: 'Emits active slide',
+      description: 'Emits active slide´s data and index',
       signature: 'func',
     },
   ];

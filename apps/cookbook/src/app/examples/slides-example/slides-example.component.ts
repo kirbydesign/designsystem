@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 
 import { SlidesComponent } from '@kirbydesign/designsystem';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'cookbook-slides-example',
@@ -54,11 +55,14 @@ export class SlidesExampleComponent {
     },
   ];
 
-  activeSlide = this.slides[0];
+  data$: Observable<any>;
+  selectedSlideIndex: number;
 
-  getDataFromActiveSlide(e: any) {
-    // Output onSlideDidChange
-    console.log('Output: ', e);
+  getDataFromActiveSlide(activeSlide: { selectedData: any; selectedSlideIndex: number }) {
+    this.data$ = of(activeSlide.selectedData);
+    this.selectedSlideIndex = activeSlide.selectedSlideIndex;
+
+    console.log('Output: ', activeSlide);
   }
 
   changeSlide() {
