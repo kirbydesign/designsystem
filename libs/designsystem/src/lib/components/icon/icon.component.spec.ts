@@ -9,7 +9,7 @@ import { ThemeColorDirective } from '../../directives/theme-color/theme-color.di
 import { DesignTokenHelper } from '../../helpers/design-token-helper';
 
 import { IconRegistryService } from './icon-registry.service';
-import { IconComponent } from './icon.component';
+import { IconComponent, IconSizes } from './icon.component';
 
 const getColor = DesignTokenHelper.getColor;
 const iconFontSize = DesignTokenHelper.iconFontSize;
@@ -191,7 +191,7 @@ describe('IconComponent', () => {
     });
   });
 
-  const sizes: string[] = ['xs', 'sm', 'md', 'lg'];
+  const sizes = Object.values(IconSizes);
 
   sizes.forEach((size) => {
     it(`should render with correct font-size for size = ${size}`, () => {
@@ -200,7 +200,7 @@ describe('IconComponent', () => {
       const el = fixture.debugElement.query(By.directive(IconComponent));
 
       expect(el.nativeElement).toHaveComputedStyle({
-        'font-size': iconFontSize(`${size}`),
+        'font-size': iconFontSize(size),
       });
     });
   });

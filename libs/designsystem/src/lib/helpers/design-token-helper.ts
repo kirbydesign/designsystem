@@ -47,7 +47,7 @@ export class DesignTokenHelper {
     return styles.fontSizes[key];
   }
 
-  public static iconFontSize(key: string): string {
+  public static iconFontSize(key: 'xs' | 'sm' | 'md' | 'lg'): string {
     const iconSizeMapping = {
       xs: 's',
       sm: 'm',
