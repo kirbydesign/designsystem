@@ -22,7 +22,7 @@
               "libs/designsystem/tsconfig.lib.json",
               "libs/designsystem/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/designsystem/**"]
+            "exclude": ["**/node_modules/**", "!libs/designsystem/**/*"]
           }
         },
         "test": {
@@ -149,7 +149,7 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": ["apps/cookbook/tsconfig.app.json", "apps/cookbook/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**", "!apps/cookbook/**"]
+            "exclude": ["**/node_modules/**", "!apps/cookbook/**/*"]
           }
         },
         "test": {
@@ -188,7 +188,7 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": ["apps/cookbook-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/cookbook-e2e/**"]
+            "exclude": ["**/node_modules/**", "!apps/cookbook-e2e/**/*"]
           }
         }
       }

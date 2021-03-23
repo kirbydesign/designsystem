@@ -4,5 +4,6 @@
     "paths": {
       "@kirbydesign/designsystem": ["libs/designsystem/src/lib/index.ts"]
     }
-  }
+  },
+  "include": ["../../**/*.ts"]
 }

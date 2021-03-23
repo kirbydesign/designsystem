@@ -1,7 +1,25 @@
 {
-  "extends": "../../tsconfig.json",
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "esModuleInterop": true
   },
-  "include": ["**/*.ts"]
+  "include": [],
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.lib.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
+    },
+    {
+      "path": "./testing-base/src/tsconfig.json"
+    },
+    {
+      "path": "./testing-jasmine/src/tsconfig.json"
+    },
+    {
+      "path": "./testing-jest/src/tsconfig.json"
+    }
+  ]
 }
