@@ -3,64 +3,71 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 const config = {
   selector: 'cookbook-radio-reactive-forms-example',
-  template: `
-    <form [formGroup]="form">
-        <kirby-radio-group formControlName="favoriteFood" [items]="items">
-        </kirby-radio-group>
-    </form>
-    <fieldset>
-        <legend>Configuration</legend>
-        <button kirby-button
-                size="sm"
-                attentionLevel="2"
-                [disabled]="favoriteFoodControl.value === null"
-                (click)="clearForm()">
-            Clear
-        </button>
-        <kirby-checkbox [checked]="canSelectFavorite"
-                        (checkedChange)="toggleEnabled($event)"
-                        text="Form field enabled">
-        </kirby-checkbox>
-        <br/>
-        <kirby-checkbox [checked]="favoriteRequired"
-                        (checkedChange)="toggleRequired($event)"
-                        text="Form field required">
-        </kirby-checkbox>
-        <p class="selection">
-            <b>value:</b>
-            {{ form.value | json }}
-            <br/>
-            <span [class.state-true]="favoriteFoodControl.valid">
-                <b>valid:</b>
-                {{ favoriteFoodControl.valid }}
-            </span>
-            <br/>
-            <span [class.state-true]="favoriteFoodControl.errors">
-                <b>errors:</b>
-                {{ favoriteFoodControl.errors | json }}
-            </span>
-            <br/>
-            <span [class.state-true]="favoriteFoodControl.enabled">
-                <b>enabled:</b>
-                {{ favoriteFoodControl.enabled }}
-            </span>
-            <br/>
-            <span [class.state-true]="favoriteFoodControl.touched">
-                <b>touched:</b>
-                {{ favoriteFoodControl.touched }}
-            </span>
-        </p>
-    </fieldset>
+  template: `<form [formGroup]="form">
+  <kirby-radio-group formControlName="favoriteFood" [items]="items"> </kirby-radio-group>
+</form>
+<cookbook-example-configuration-wrapper>
+  <button
+    kirby-button
+    size="sm"
+    attentionLevel="2"
+    [disabled]="favoriteFoodControl.value === null"
+    (click)="clearForm()"
+  >
+    Clear form
+  </button>
+
+  <kirby-checkbox
+    [checked]="canSelectFavorite"
+    (checkedChange)="toggleEnabled($event)"
+    text="Form field enabled"
+  >
+  </kirby-checkbox>
+
+  <kirby-checkbox
+    [checked]="favoriteRequired"
+    (checkedChange)="toggleRequired($event)"
+    text="Form field required"
+  >
+  </kirby-checkbox>
+
+  <p class="selection">
+    <b>value:</b>
+    {{ form.value | json }}
+    <br />
+    <span [class.state-true]="favoriteFoodControl.valid">
+      <b>valid:</b>
+      {{ favoriteFoodControl.valid }}
+    </span>
+    <br />
+    <span [class.state-true]="favoriteFoodControl.errors">
+      <b>errors:</b>
+      {{ favoriteFoodControl.errors | json }}
+    </span>
+    <br />
+    <span [class.state-true]="favoriteFoodControl.enabled">
+      <b>enabled:</b>
+      {{ favoriteFoodControl.enabled }}
+    </span>
+    <br />
+    <span [class.state-true]="favoriteFoodControl.touched">
+      <b>touched:</b>
+      {{ favoriteFoodControl.touched }}
+    </span>
+  </p>
+</cookbook-example-configuration-wrapper>
     `,
   codeSnippet: `form = new FormGroup({
   favoriteFood: new FormControl({ value: this.items[1], disabled: !this.canSelectFavorite }),
 });
+
 toggleEnabled(enabled: boolean) {
   const favoriteFoodControl = this.form.controls['favoriteFood'];
   enabled
     ? favoriteFoodControl.enable()
     : favoriteFoodControl.disable();
 }
+
 toggleRequired(required: boolean) {
   const favoriteFoodControl = this.form.controls['favoriteFood'];
   required
@@ -75,29 +82,29 @@ toggleRequired(required: boolean) {
   template: config.template,
   styles: [
     `
-      :host {
-        display: flex;
+      kirby-checkbox:not(:first-of-type) {
+        margin-top: 4px;
       }
 
-      kirby-form-field:not(:last-of-type) {
-        margin-right: 40px;
+      kirby-checkbox.indent {
+        margin-left: 32px;
+        margin-top: 4px;
+        font-size: 16px;
+      }
+
+      cookbook-example-configuration-wrapper {
+        margin-top: 40px;
       }
     `,
   ],
 })
 export class RadioReactiveFormsExampleComponent implements OnInit {
-  template: string = config.template;
+  template: string = config.template.split('<cookbook-example-configuration-wrapper>')[0];
   codeSnippet: string = config.codeSnippet;
 
   form: FormGroup;
   favoriteFoodControl: FormControl;
-  items = [
-    { title: 'Bacon', value: 1 },
-    { title: 'Salami', value: 2 },
-    { title: 'Tenderloin', value: 3 },
-    { title: 'Tongue', value: 4 },
-    { title: 'Drumstick', value: 5 },
-  ];
+  items = ['Bacon', 'Salami', 'Tenderloin', 'Tongue', 'Drumstick'];
 
   canSelectFavorite = true;
   favoriteRequired = true;
