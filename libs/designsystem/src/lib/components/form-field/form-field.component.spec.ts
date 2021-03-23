@@ -485,45 +485,6 @@ describe('FormFieldComponent', () => {
     });
   });
 
-  describe('When using kirby-input-icon', () => {
-    describe('by default', () => {
-      beforeEach(() => {
-        spectator = createHost(
-          `<kirby-form-field label="Input with Icon"  message="This is additional info that will be shown below the input">
-  <input type="text" kirby-input placeholder="Write something or Click Icon for Action "/>
-  <kirby-input-icon icon="attach"  (click)="onClick($event)"></kirby-input-icon>
-</kirby-form-field>`
-        );
-      });
-      it('should render kirby-input-icon', () => {
-        const iconInputElement = spectator.queryHost('kirby-input-icon');
-        expect(iconInputElement).toBeTruthy();
-        const buttonElement = spectator.queryHost('button[kirby-button]');
-        expect(buttonElement).toBeTruthy();
-        const iconElement = spectator.queryHost('kirby-icon');
-        expect(iconElement).toBeTruthy();
-        expect(iconInputElement.attributes['icon']).toBeTruthy();
-        expect(iconInputElement.attributes['icon'].value).toBe('attach');
-        expect(buttonElement.attributes['size'].value).toBe('sm');
-        expect(buttonElement.attributes['class'].value).toBe('input-icon');
-        expect(iconElement.attributes['ng-reflect-name'].value).toBe('attach');
-        expect(iconElement.attributes['class'].value).toBe('kirby-icon');
-      });
-
-      it('should render with position absolute and negative margin left', () => {
-        const buttonElement = spectator.queryHost('button[kirby-button]');
-        expect(buttonElement).toBeTruthy();
-        expect(buttonElement).toHaveComputedStyle({
-          position: 'absolute',
-        });
-        expect(buttonElement).toHaveComputedStyle({
-          'margin-left': '-44px',
-        });
-        //input-icon
-      });
-    });
-  });
-
   describe('focus', () => {
     let platformServiceSpy: jasmine.SpyObj<PlatformService>;
 
