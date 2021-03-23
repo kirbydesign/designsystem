@@ -4,78 +4,53 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 const config = {
   selector: 'cookbook-radio-reactive-forms-example',
   template: `
-        <form [formGroup]="form">
-            <kirby-radio-group formControlName="favoriteFood">
-                <kirby-item *ngFor="let item of items"
-                            selectable="true">
-                    <kirby-radio [value]="item"
-                                 slot="start">
-                    </kirby-radio>
-                    <kirby-label>
-                        {{item.title}}
-                    </kirby-label>
-                </kirby-item>
-            </kirby-radio-group>
-        </form>
-        <fieldset>
-            <legend>
-                Configuration
-            </legend>
-            <button kirby-button
-                    size="sm"
-                    attentionLevel="2"
-                    [disabled]="favoriteFoodControl.value === null"
-                    (click)="clearForm()">
-                Clear
-            </button>
-            <kirby-checkbox [checked]="canSelectFavorite"
-                            (checkedChange)="toggleEnabled($event)">
-            </kirby-checkbox>
-            <label (click)="toggleEnabled(!canSelectFavorite)">
-                Form field enabled
-            </label>
+    <form [formGroup]="form">
+        <kirby-radio-group formControlName="favoriteFood" [items]="items">
+        </kirby-radio-group>
+    </form>
+    <fieldset>
+        <legend>Configuration</legend>
+        <button kirby-button
+                size="sm"
+                attentionLevel="2"
+                [disabled]="favoriteFoodControl.value === null"
+                (click)="clearForm()">
+            Clear
+        </button>
+        <kirby-checkbox [checked]="canSelectFavorite"
+                        (checkedChange)="toggleEnabled($event)"
+                        text="Form field enabled">
+        </kirby-checkbox>
+        <br/>
+        <kirby-checkbox [checked]="favoriteRequired"
+                        (checkedChange)="toggleRequired($event)"
+                        text="Form field required">
+        </kirby-checkbox>
+        <p class="selection">
+            <b>value:</b>
+            {{ form.value | json }}
             <br/>
-            <kirby-checkbox [checked]="favoriteRequired"
-                            (checkedChange)="toggleRequired($event)">
-            </kirby-checkbox>
-            <label (click)="toggleRequired(!favoriteRequired)">
-                Form field required
-            </label>
-            <p class="selection">
-                <b>
-                    value:
-                </b>
-                {{ form.value | json }}
-                <br/>
-                <span [class.state-true]="favoriteFoodControl.valid">
-                    <b>
-                        valid:
-                    </b>
-                    {{ favoriteFoodControl.valid }}
-                </span>
-                <br/>
-                <span [class.state-true]="favoriteFoodControl.errors">
-                    <b>
-                        errors:
-                    </b>
-                    {{ favoriteFoodControl.errors | json }}
-                </span>
-                <br/>
-                <span [class.state-true]="favoriteFoodControl.enabled">
-                    <b>
-                        enabled:
-                    </b>
-                    {{ favoriteFoodControl.enabled }}
-                </span>
-                <br/>
-                <span [class.state-true]="favoriteFoodControl.touched">
-                    <b>
-                        touched:
-                    </b>
-                    {{ favoriteFoodControl.touched }}
-                </span>
-            </p>
-        </fieldset>
+            <span [class.state-true]="favoriteFoodControl.valid">
+                <b>valid:</b>
+                {{ favoriteFoodControl.valid }}
+            </span>
+            <br/>
+            <span [class.state-true]="favoriteFoodControl.errors">
+                <b>errors:</b>
+                {{ favoriteFoodControl.errors | json }}
+            </span>
+            <br/>
+            <span [class.state-true]="favoriteFoodControl.enabled">
+                <b>enabled:</b>
+                {{ favoriteFoodControl.enabled }}
+            </span>
+            <br/>
+            <span [class.state-true]="favoriteFoodControl.touched">
+                <b>touched:</b>
+                {{ favoriteFoodControl.touched }}
+            </span>
+        </p>
+    </fieldset>
     `,
   codeSnippet: `form = new FormGroup({
   favoriteFood: new FormControl({ value: this.items[1], disabled: !this.canSelectFavorite }),
@@ -150,7 +125,7 @@ export class RadioReactiveFormsExampleComponent implements OnInit {
 
   private buildForm() {
     this.favoriteFoodControl = new FormControl(
-      this.items[2],
+      null,
       this.favoriteRequired ? Validators.required : null
     );
     if (!this.canSelectFavorite) {
