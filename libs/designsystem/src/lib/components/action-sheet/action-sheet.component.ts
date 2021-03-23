@@ -49,6 +49,7 @@ export class ActionSheetComponent {
         items: this.items,
       };
       this.modalController.showActionSheet(config);
+      return;
     }
     this.state = this.state === OpenState.open ? OpenState.closed : OpenState.open;
   }

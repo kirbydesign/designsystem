@@ -16,7 +16,7 @@ import { SpinnerComponent } from '../../spinner/spinner.component';
 
 import { ActionSheetPopoutComponent } from './action-sheet-popout.component';
 
-describe('ActionSheetPopoutComponent', () => {
+fdescribe('ActionSheetPopoutComponent', () => {
   let component: ActionSheetPopoutComponent;
   let fixture: ComponentFixture<ActionSheetPopoutComponent>;
 

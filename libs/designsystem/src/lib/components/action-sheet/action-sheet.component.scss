@@ -1,48 +1,26 @@
 @import '../../scss/utils';
 
-$margin-horizontal: size('l');
-$margin-horizontal-narrow: size('s');
-$max-width: 375px;
-
 :host {
-  --kirby_internal_margin_horizontal_default: #{$margin-horizontal};
-  @include media('<small') {
-    --kirby_internal_margin_horizontal_default: #{$margin-horizontal-narrow};
-  }
-
-  --kirby_internal_margin_horizontal_total: calc(
-    2 * var(--kirby-action-sheet-margin-horizontal, var(--kirby_internal_margin_horizontal_default))
-  );
+  position: relative;
+  display: inline-block;
 }
 
-:host {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-end;
-  margin: 0 auto;
-  width: calc(100vw - var(--kirby_internal_margin_horizontal_total));
-  max-width: calc(#{$max-width} - var(--kirby_internal_margin_horizontal_total));
-}
-
-kirby-card {
-  align-self: stretch;
-  pointer-events: auto;
-  box-shadow: get-elevation(8);
-
-  button[kirby-button] {
-    margin: 0;
-    border-radius: 0;
-    &:not(:focus) {
-      border-top: 1px solid get-color('background-color');
+:host(.is-open) {
+  @include not-touch() {
+    kirby-action-sheet-popout {
+      display: block;
+    }
+    .button-wrapper button {
+      box-shadow: get-elevation(8);
     }
   }
 }
 
-.cancel-btn {
-  font-weight: font-weight('bold');
-  margin-top: size('s');
-  margin-bottom: size('m');
-  pointer-events: auto;
-  box-shadow: get-elevation(8);
+kirby-action-sheet-popout {
+  @include not-touch() {
+    position: absolute;
+    right: 0;
+    margin-top: size('xs');
+    display: none;
+  }
 }

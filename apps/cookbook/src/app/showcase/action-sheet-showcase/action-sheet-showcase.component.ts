@@ -6,6 +6,7 @@ declare var require: any;
 @Component({
   selector: 'cookbook-action-sheet-showcase',
   templateUrl: './action-sheet-showcase.component.html',
+  styleUrls: ['./action-sheet-showcase.component.scss'],
   preserveWhitespaces: true,
 })
 export class ActionSheetShowcaseComponent {
