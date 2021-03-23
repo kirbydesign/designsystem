@@ -13,7 +13,7 @@ import { FormFieldInputErrorExampleComponent } from './examples/input/error';
 import { FormFieldFocusExampleComponent } from './examples/input/focus';
 import { FormFieldInputLabelExampleComponent } from './examples/input/label';
 import { FormFieldInputLabelMessageExampleComponent } from './examples/input/label-message';
-import { FormFieldInputNumericExampleComponent } from './examples/input/numeric.component';
+import { FormFieldInputNumericExampleComponent } from './examples/input/numeric';
 import { FormFieldTextareaCounterExampleComponent } from './examples/textarea/counter';
 import { FormFieldTextareaDefaultExampleComponent } from './examples/textarea/default';
 import { FormFieldTextareaLabelExampleComponent } from './examples/textarea/label';
@@ -25,7 +25,6 @@ const COMPONENT_DECLARATIONS = [
   FormFieldInputLabelExampleComponent,
   FormFieldInputLabelMessageExampleComponent,
   FormFieldInputCounterExampleComponent,
-  FormFieldInputNumericExampleComponent,
   FormFieldInputDateExampleComponent,
   FormFieldInputDisabledExampleComponent,
   FormFieldInputErrorExampleComponent,
@@ -34,6 +33,7 @@ const COMPONENT_DECLARATIONS = [
   FormFieldTextareaDefaultExampleComponent,
   FormFieldTextareaLabelExampleComponent,
   FormFieldTextareaCounterExampleComponent,
+  FormFieldInputNumericExampleComponent,
 ];
 
 @NgModule({
