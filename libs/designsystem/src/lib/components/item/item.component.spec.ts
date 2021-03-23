@@ -49,9 +49,7 @@ describe('ItemComponent', () => {
         });
       });
     });
-  });
 
-  describe('when configured with size', () => {
     describe('and size = sm', () => {
       beforeEach(() => {
         spectator.component.size = 'sm';
@@ -64,9 +62,7 @@ describe('ItemComponent', () => {
         });
       });
     });
-  });
 
-  describe('when configured with size', () => {
     describe('and size = md', () => {
       beforeEach(() => {
         spectator.component.size = 'md';
