@@ -1,31 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { ApiDescriptionProperty } from '~/app/shared/api-description/api-description-properties/api-description-properties.component';
 
 import { Sizes } from '@kirbydesign/designsystem';
-import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-property';
 
 @Component({
   selector: 'cookbook-text-link-showcase',
   templateUrl: './text-link-showcase.component.html',
 })
 export class TextLinkShowcaseComponent {
-  properties: ShowcaseProperty[] = [
+  properties: ApiDescriptionProperty[] = [
     {
       name: 'link',
       description: 'The navigation link (internal or external)',
       defaultValue: 'null',
-      inputValues: ['string'],
+      type: ['string'],
     },
     {
       name: 'size',
       description: 'Sets the size of the link.',
       defaultValue: 'md',
-      inputValues: Object.values(Sizes).slice(0, 3),
+      type: Object.values(Sizes).slice(0, 3),
     },
     {
       name: 'text',
       description: 'The text shown within the link',
       defaultValue: 'null',
-      inputValues: ['string'],
+      type: ['string'],
     },
   ];
 }
