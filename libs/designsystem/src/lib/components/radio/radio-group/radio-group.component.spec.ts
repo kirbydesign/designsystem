@@ -1013,7 +1013,7 @@ describe('RadioGroupComponent', () => {
         });
 
         describe('selection', () => {
-          it('should update the value of ion-radio-group when the bound form group control is updated', async () => {
+          it('should update the value of ion-radio-group when the bound form control is set to a value', async () => {
             const newFavoriteFood = items[defaultSelectedIndex + 1];
             await setFormControlValue(newFavoriteFood);
 
