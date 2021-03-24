@@ -6,7 +6,6 @@ import { ShowcaseProperty } from '~/app/shared/showcase-properties/showcase-prop
 @Component({
   selector: 'cookbook-text-link-showcase',
   templateUrl: './text-link-showcase.component.html',
-  styleUrls: ['./text-link-showcase.component.scss'],
 })
 export class TextLinkShowcaseComponent {
   properties: ShowcaseProperty[] = [

@@ -11,7 +11,7 @@ const config = {
 @Component({
   selector: config.selector,
   template: config.template,
-  styleUrls: ['./text-link-examples.scss'],
+  styleUrls: ['./text-link-examples.shared.scss'],
 })
 export class TextLinkExampleExternalLinkComponent {
   template: string = config.template;

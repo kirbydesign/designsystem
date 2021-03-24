@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { KirbyModule } from '@kirbydesign/designsystem';
-import { TextLinkExampleExternalLinkComponent } from './examples/external-link.ts';
+import { TextLinkExampleExternalLinkComponent } from './examples/external-link';
 import { TextLinkExampleInternalLinkComponent } from './examples/internal-link';
 
 const COMPONENT_DECLARATIONS = [
