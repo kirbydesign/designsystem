@@ -1070,7 +1070,7 @@ describe('RadioGroupComponent', () => {
             expect(spectator.component.selectedIndex).toBe(defaultSelectedIndex);
           });
 
-          it('should update the bound form group control when clicking a radio item', () => {
+          it('should update the bound form control when clicking a different radio item', () => {
             spectator.click(ionRadioElements[defaultSelectedIndex]);
             expect(favoriteFoodControl.value).toEqual(items[defaultSelectedIndex]);
           });
