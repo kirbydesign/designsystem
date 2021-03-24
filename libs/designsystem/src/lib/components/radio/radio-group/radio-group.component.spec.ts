@@ -1075,7 +1075,7 @@ describe('RadioGroupComponent', () => {
             expect(favoriteFoodControl.value).toEqual(items[defaultSelectedIndex]);
           });
 
-          it('should update the value of ion-radio-group when the bound form group control is updated', async () => {
+          it('should update the value of ion-radio-group when the bound form control is updated', async () => {
             const newControlValue = items[defaultSelectedIndex + 1];
             await setFormControlValue(newControlValue);
             expect(ionRadioGroup.value).toEqual(newControlValue);
