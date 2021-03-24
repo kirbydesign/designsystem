@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 const config = {
   selector: 'cookbook-text-link-example-internal',
