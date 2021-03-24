@@ -923,7 +923,7 @@ describe('RadioGroupComponent', () => {
             await setSelectedOnHostComponent(items[defaultSelectedIndex]);
           });
 
-          describe('and ngModel is touched', async () => {
+          describe('and component has been touched', async () => {
             beforeEach(async () => {
               spectator.component._onRadioBlur();
               await TestHelper.waitForTimeout();
