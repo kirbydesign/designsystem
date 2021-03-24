@@ -1173,7 +1173,7 @@ describe('RadioGroupComponent', () => {
             });
           });
 
-          describe('and the bound form group control is untouched', async () => {
+          describe('and the component has not been touched', async () => {
             beforeEach(async () => {
               favoriteFoodControl.markAsUntouched();
               await TestHelper.waitForTimeout();
