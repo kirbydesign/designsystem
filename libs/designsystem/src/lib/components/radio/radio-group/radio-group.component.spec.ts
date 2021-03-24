@@ -1109,7 +1109,7 @@ describe('RadioGroupComponent', () => {
             radios.forEach((each) => expect(each.disabled).toBeTrue());
           });
 
-          it('should re-enable the radio items when the bound form group control is enabled', async () => {
+          it('should re-enable the radio items when the bound form control is enabled', async () => {
             favoriteFoodControl.disable();
             spectator.detectChanges();
             radios.forEach((each) => expect(each.disabled).toBeTrue());
