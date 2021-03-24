@@ -840,7 +840,7 @@ describe('RadioGroupComponent', () => {
 
           it('should not emit change event when the bound ngModel is updated', async () => {
             const onChangeSpy = spyOn(spectator.component.valueChange, 'emit');
-            await setSelectedOnHostComponent(items[2]);
+            await setSelectedOnHostComponent(items[0]);
             expect(onChangeSpy).not.toHaveBeenCalled();
           });
         });
