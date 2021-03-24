@@ -875,7 +875,7 @@ describe('RadioGroupComponent', () => {
         describe('selection', () => {
           let newSelectedIndex: number;
 
-          it('should update the bound ngModel when clicking a radio item', () => {
+          it('should update the bound ngModel when clicking a different radio item', () => {
             newSelectedIndex = defaultSelectedIndex + 1;
             spectator.click(ionRadioElements[newSelectedIndex]);
             expect(spectator.hostComponent.selected).toEqual(items[newSelectedIndex]);
