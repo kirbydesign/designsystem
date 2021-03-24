@@ -1093,7 +1093,7 @@ describe('RadioGroupComponent', () => {
 
           it('should not emit change event when the bound form control is updated', async () => {
             const onChangeSpy = spyOn(spectator.component.valueChange, 'emit');
-            await setFormControlValue(items[2]);
+            await setFormControlValue(items[defaultSelectedIndex + 1]);
             expect(onChangeSpy).not.toHaveBeenCalled();
           });
         });
