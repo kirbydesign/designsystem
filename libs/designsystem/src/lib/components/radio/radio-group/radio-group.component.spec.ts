@@ -949,8 +949,6 @@ describe('RadioGroupComponent', () => {
               spectator.component._onRadioBlur();
               await TestHelper.waitForTimeout();
               spectator.detectChanges();
-
-              expect(spectator.element.classList).toContain('ng-touched');
             });
 
             it('should be in error state', async () => {
