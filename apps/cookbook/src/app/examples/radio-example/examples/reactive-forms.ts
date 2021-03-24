@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { stringifyPretty } from '~/app/shared/code-viewer/code-viewer.component';
+
+const items = ['Bacon', 'Salami', 'Tenderloin', 'Tongue', 'Drumstick'];
 
 const config = {
   selector: 'cookbook-radio-reactive-forms-example',
@@ -57,19 +60,21 @@ const config = {
   </p>
 </cookbook-example-configuration-wrapper>
     `,
-  codeSnippet: `form = new FormGroup({
+  codeSnippet: `items = ${stringifyPretty(items)};
+
+  const form = new FormGroup({
   favoriteFood: new FormControl({ value: this.items[1], disabled: !this.canSelectFavorite }),
 });
 
+const favoriteFoodControl = this.form.controls.get('favoriteFood'); 
+
 toggleEnabled(enabled: boolean) {
-  const favoriteFoodControl = this.form.controls['favoriteFood'];
   enabled
     ? favoriteFoodControl.enable()
     : favoriteFoodControl.disable();
 }
 
 toggleRequired(required: boolean) {
-  const favoriteFoodControl = this.form.controls['favoriteFood'];
   required
     ? favoriteFoodControl.setValidators(Validators.required)
     : favoriteFoodControl.setValidators(null);
@@ -104,7 +109,7 @@ export class RadioReactiveFormsExampleComponent implements OnInit {
 
   form: FormGroup;
   favoriteFoodControl: FormControl;
-  items = ['Bacon', 'Salami', 'Tenderloin', 'Tongue', 'Drumstick'];
+  items = items;
 
   canSelectFavorite = true;
   favoriteRequired = true;

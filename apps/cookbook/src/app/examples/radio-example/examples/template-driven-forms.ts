@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { stringifyPretty } from '~/app/shared/code-viewer/code-viewer.component';
+
+const items = ['Bacon', 'Salami', 'Tenderloin', 'Tongue', 'Drumstick'];
 
 const config = {
   selector: 'cookbook-radio-template-driven-forms-example',
@@ -39,13 +42,7 @@ const config = {
       font-style: italic;
     }`,
   ],
-  codeSnippet: `items = [
-  'Bacon',
-  'Salami',
-  'Tenderloin',
-  'Tongue',
-  'Drumstick',
-];
+  codeSnippet: `items = ${stringifyPretty(items)};
 
 selected = null;`,
 };
@@ -59,6 +56,6 @@ export class RadioTemplateDrivenFormsExampleComponent {
   template: string = config.template.split('<cookbook-example-configuration-wrapper>')[0];
   codeSnippet: string = config.codeSnippet;
 
-  items = ['Bacon', 'Salami', 'Tenderloin', 'Tongue', 'Drumstick'];
+  items = items;
   selected = null;
 }
