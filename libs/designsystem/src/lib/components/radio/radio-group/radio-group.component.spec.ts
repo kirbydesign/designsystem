@@ -822,7 +822,7 @@ describe('RadioGroupComponent', () => {
           });
 
           it('should update the value of ion-radio-group when the bound ngModel is updated', async () => {
-            const newSelectedValue = items[defaultSelectedIndex + 1];
+            const newSelectedValue = items[0];
             await setSelectedOnHostComponent(newSelectedValue);
             expect(ionRadioGroup.value).toEqual(newSelectedValue);
           });
