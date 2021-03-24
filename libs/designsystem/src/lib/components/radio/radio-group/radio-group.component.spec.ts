@@ -946,7 +946,7 @@ describe('RadioGroupComponent', () => {
         });
 
         describe('when ngModel is null', () => {
-          describe('and ngModel is touched', () => {
+          describe('and component has been touched', () => {
             beforeEach(async () => {
               spectator.component._onRadioBlur();
               await TestHelper.waitForTimeout();
