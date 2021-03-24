@@ -1119,7 +1119,7 @@ describe('RadioGroupComponent', () => {
             radios.forEach((each) => expect(each.disabled).toBeUndefined());
           });
 
-          it('should disable the radios if radios are set after the bound form group control is disabled', async () => {
+          it('should disable the radios if radios are set after the bound form control is disabled', async () => {
             spectator.setHostInput('items', null);
             favoriteFoodControl.disable();
             await TestHelper.waitForTimeout();
