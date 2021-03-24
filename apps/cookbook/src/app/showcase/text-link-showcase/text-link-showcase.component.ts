@@ -10,7 +10,7 @@ import { Sizes } from '@kirbydesign/designsystem';
 export class TextLinkShowcaseComponent {
   properties: ApiDescriptionProperty[] = [
     {
-      name: 'link',
+      name: 'route',
       description: 'The navigation link (internal or external)',
       defaultValue: 'null',
       type: ['string'],
