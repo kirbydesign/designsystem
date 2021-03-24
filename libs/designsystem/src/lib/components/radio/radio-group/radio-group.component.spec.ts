@@ -1155,7 +1155,7 @@ describe('RadioGroupComponent', () => {
           );
         });
 
-        describe('when the bound form group control is not null', () => {
+        describe('when the value of the bound form control is not null', () => {
           beforeEach(async () => {
             await setFormControlValue(items[defaultSelectedIndex]);
           });
