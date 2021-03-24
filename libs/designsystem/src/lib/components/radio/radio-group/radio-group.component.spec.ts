@@ -1021,13 +1021,12 @@ describe('RadioGroupComponent', () => {
           });
 
           it('should update the selected radio when the bound form control is set to a value', async () => {
-            await setFormControlValue(items[2]);
+            const selectedIndex = 0;
+            await setFormControlValue(items[selectedIndex]);
             // Wait for radio checked attribute to be updated;
-            await TestHelper.whenTrue(() => radioChecked(2));
+            await TestHelper.whenTrue(() => radioChecked(selectedIndex));
 
-            expect(radioChecked(0)).toBeFalse();
-            expect(radioChecked(1)).toBeFalse();
-            expect(radioChecked(2)).toBeTrue();
+            expect(radioChecked(selectedIndex)).toBeTrue();
           });
 
           it('should not emit change event when the bound  form group control is updated', async () => {
