@@ -709,6 +709,10 @@ describe('RadioGroupComponent', () => {
     const items = ['Bacon', 'Sausage', 'Onion'];
     const defaultSelectedIndex = 1;
 
+    let ionRadioGroup: IonRadioGroup;
+    let ionRadioElements: HTMLIonRadioElement[];
+    let radios: RadioComponent[];
+
     let spectator: SpectatorHost<
       RadioGroupComponent,
       {
@@ -716,7 +720,7 @@ describe('RadioGroupComponent', () => {
       }
     >;
 
-    beforeEach(() => {
+    beforeEach(async () => {
       spectator = createHost(
         `<kirby-radio-group [items]="items">
         </kirby-radio-group>`,
@@ -726,6 +730,14 @@ describe('RadioGroupComponent', () => {
           },
         }
       );
+
+      ionRadioGroup = spectator.query(IonRadioGroup);
+      const ionRadioGroupElement = spectator.query('ion-radio-group');
+      await TestHelper.whenReady(ionRadioGroupElement);
+
+      radios = spectator.queryAll(RadioComponent);
+      ionRadioElements = spectator.queryAll('ion-radio');
+      await TestHelper.whenReady(ionRadioElements);
     });
 
     describe('when writeValue() function is invoked', () => {
@@ -753,7 +765,8 @@ describe('RadioGroupComponent', () => {
     it('should invoke callback from registerOnTouched() function on blur', () => {
       const onTouchedSpy = jasmine.createSpy('_onTouched');
       spectator.component.registerOnTouched(onTouchedSpy);
-      spectator.component._onRadioBlur();
+      ionRadioElements[0].focus();
+      ionRadioElements[0].blur();
       expect(onTouchedSpy).toHaveBeenCalled();
     });
 
@@ -916,6 +929,14 @@ describe('RadioGroupComponent', () => {
               },
             }
           );
+
+          ionRadioGroup = spectator.query(IonRadioGroup);
+          const ionRadioGroupElement = spectator.query('ion-radio-group');
+          await TestHelper.whenReady(ionRadioGroupElement);
+
+          radios = spectator.queryAll(RadioComponent);
+          ionRadioElements = spectator.queryAll('ion-radio');
+          await TestHelper.whenReady(ionRadioElements);
         });
 
         describe('when ngModel is not null', () => {
@@ -923,10 +944,10 @@ describe('RadioGroupComponent', () => {
             await setSelectedOnHostComponent(items[defaultSelectedIndex]);
           });
 
-          describe('and component has been touched', async () => {
-            beforeEach(async () => {
-              spectator.component._onRadioBlur();
-              await TestHelper.waitForTimeout();
+          describe('and component has been touched', () => {
+            beforeEach(() => {
+              ionRadioElements[0].focus();
+              ionRadioElements[0].blur();
               spectator.detectChanges();
             });
 
@@ -945,9 +966,9 @@ describe('RadioGroupComponent', () => {
 
         describe('when ngModel is null', () => {
           describe('and component has been touched', () => {
-            beforeEach(async () => {
-              spectator.component._onRadioBlur();
-              await TestHelper.waitForTimeout();
+            beforeEach(() => {
+              ionRadioElements[0].focus();
+              ionRadioElements[0].blur();
               spectator.detectChanges();
             });
 
@@ -1153,6 +1174,14 @@ describe('RadioGroupComponent', () => {
               },
             }
           );
+
+          ionRadioGroup = spectator.query(IonRadioGroup);
+          const ionRadioGroupElement = spectator.query('ion-radio-group');
+          await TestHelper.whenReady(ionRadioGroupElement);
+
+          radios = spectator.queryAll(RadioComponent);
+          ionRadioElements = spectator.queryAll('ion-radio');
+          await TestHelper.whenReady(ionRadioElements);
         });
 
         describe('when the value of the bound form control is not null', () => {
@@ -1160,10 +1189,10 @@ describe('RadioGroupComponent', () => {
             await setFormControlValue(items[defaultSelectedIndex]);
           });
 
-          describe('and the component has been touched', async () => {
-            beforeEach(async () => {
-              spectator.component._onRadioBlur();
-              await TestHelper.waitForTimeout();
+          describe('and the component has been touched', () => {
+            beforeEach(() => {
+              ionRadioElements[0].focus();
+              ionRadioElements[0].blur();
               spectator.detectChanges();
             });
 
@@ -1188,9 +1217,9 @@ describe('RadioGroupComponent', () => {
 
         describe('when the value of the bound form control is null', () => {
           describe('and the component has been touched', () => {
-            beforeEach(async () => {
-              spectator.component._onRadioBlur();
-              await TestHelper.waitForTimeout();
+            beforeEach(() => {
+              ionRadioElements[0].focus();
+              ionRadioElements[0].blur();
               spectator.detectChanges();
             });
 
